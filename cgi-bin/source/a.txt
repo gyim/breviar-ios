@@ -1,0 +1,169 @@
+Content-type: text/html
+
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+   <meta name="Author" content="Juraj Videky">
+   <link rel="stylesheet" type="text/css" href="/breviar.css">
+<title>Liturgia hodín</title>
+</head>
+
+<body>
+
+<center><h2>11. august 2003</h2></center>
+
+Dnes je 223. deň v roku, <a href="http://www.breviar.sk/msg/juldat.htm">juliánsky dátum</a> JD = 2452863.
+<br>
+<table>
+
+<tr valign=baseline>
+<td align=right><a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=11&amp;m=8&amp;r=2003">11. august 2003</a>:</td>
+<td align=left> </td>
+<td><span class="bold">Sv. Kláry, panny</span>, <span class="red">spomienka</span></td>
+<td><form action="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=11&amp;m=8&amp;r=2003&amp;p=mrch&amp;ds=1" method="post">
+<input type="submit" class="button" value="Ranné chvály">
+</form>
+</td>
+<td><form action="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=11&amp;m=8&amp;r=2003&amp;p=mpc&amp;ds=1" method="post">
+<input type="submit" class="button" value="Posv.čít.">
+</form>
+</td>
+<td><form action="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=11&amp;m=8&amp;r=2003&amp;p=mpred&amp;ds=1" method="post">
+<input type="submit" class="button" value="9h">
+</form>
+</td>
+<td><form action="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=11&amp;m=8&amp;r=2003&amp;p=mna&amp;ds=1" method="post">
+<input type="submit" class="button" value="12h">
+</form>
+</td>
+<td><form action="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=11&amp;m=8&amp;r=2003&amp;p=mpo&amp;ds=1" method="post">
+<input type="submit" class="button" value="15h">
+</form>
+</td>
+<td><form action="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=11&amp;m=8&amp;r=2003&amp;p=mv&amp;ds=1" method="post">
+<input type="submit" class="button" value="Vešpery">
+</form>
+</td>
+<td><form action="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdet&amp;d=11&amp;m=8&amp;r=2003&amp;p=*&amp;ds=1" method="post">
+<input type="submit" class="button" value="Detaily...">
+</form>
+</td>
+<td><div align=right></div></td>
+</tr>
+</table>
+
+<table align="center">
+<tr>
+<td align="right"><form action="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=10&amp;m=8&amp;r=2003" method="post">
+<input type="submit" class="button" value="&lt; Predchádzajuci deň">
+</form></td>
+<td><form action="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=12&amp;m=8&amp;r=2003" method="post">
+<input type="submit" class="button" value="Nasledujúci deň &gt;">
+</form></td>
+</tr>
+<tr>
+<td align="right"><form action="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=11&amp;m=8&amp;r=2002" method="post">
+<input type="submit" class="button" value="&lt;&lt; Predchádzajúci rok">
+</form></td>
+<td align="right"><form action="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=11&amp;m=8&amp;r=2004" method="post">
+<input type="submit" class="button" value="Nasledujúci rok &gt;&gt;">
+</form></td>
+</tr>
+</table>
+<span class="small">
+<span class="bold"><a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=*&amp;m=8&amp;r=2003">August</a>:</span> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=1&amp;m=8&amp;r=2003">1</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=2&amp;m=8&amp;r=2003">2</a> <span class="bold"><a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=3&amp;m=8&amp;r=2003">3</a></span> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=4&amp;m=8&amp;r=2003">4</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=5&amp;m=8&amp;r=2003">5</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=6&amp;m=8&amp;r=2003">6</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=7&amp;m=8&amp;r=2003">7</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=8&amp;m=8&amp;r=2003">8</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=9&amp;m=8&amp;r=2003">9</a> <span class="bold"><a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=10&amp;m=8&amp;r=2003">10</a></span> <span class="blue">11</span> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=12&amp;m=8&amp;r=2003">12</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=13&amp;m=8&amp;r=2003">13</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=14&amp;m=8&amp;r=2003">14</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=15&amp;m=8&amp;r=2003">15</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=16&amp;m=8&amp;r=2003">16</a> <span class="bold"><a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=17&amp;m=8&amp;r=2003">17</a></span> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=18&amp;m=8&amp;r=2003">18</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=19&amp;m=8&amp;r=2003">19</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=20&amp;m=8&amp;r=2003">20</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=21&amp;m=8&amp;r=2003">21</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=22&amp;m=8&amp;r=2003">22</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=23&amp;m=8&amp;r=2003">23</a> <span class="bold"><a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=24&amp;m=8&amp;r=2003">24</a></span> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=25&amp;m=8&amp;r=2003">25</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=26&amp;m=8&amp;r=2003">26</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=27&amp;m=8&amp;r=2003">27</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=28&amp;m=8&amp;r=2003">28</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=29&amp;m=8&amp;r=2003">29</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=30&amp;m=8&amp;r=2003">30</a> <span class="bold"><a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=31&amp;m=8&amp;r=2003">31</a></span> <br>
+<span class="bold"><a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=*&amp;m=*&amp;r=2003">2003</a>:</span> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=*&amp;m=1&amp;r=2003">Január</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=*&amp;m=2&amp;r=2003">Február</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=*&amp;m=3&amp;r=2003">Marec</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=*&amp;m=4&amp;r=2003">Apríl</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=*&amp;m=5&amp;r=2003">Máj</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=*&amp;m=6&amp;r=2003">Jún</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=*&amp;m=7&amp;r=2003">Júl</a> <span class="blue">August</span> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=*&amp;m=9&amp;r=2003">September</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=*&amp;m=10&amp;r=2003">Október</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=*&amp;m=11&amp;r=2003">November</a> <a href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&amp;d=*&amp;m=12&amp;r=2003">December</a> </span>
+
+<form action="http://www.breviar.sk/cgi-bin/uncgi.cgi/l.cgi" method="post">
+Ďalšie možnosti
+<table align="center">
+<tr>
+<td>
+<table>
+<tr><td>
+<input type="radio" class="radio" name="qt" value="pdt" checked></td><td>
+&nbsp;vyššie uvedený rozbor dňa pre &nbsp;&nbsp;
+<select name="d">
+<option>1<option>2<option>3<option>4<option>5<option>6<option>7<option>8<option>9<option>10<option selected>11<option>12<option>13<option>14<option>15<option>16<option>17<option>18<option>19<option>20<option>21<option>22<option>23<option>24<option>25<option>26<option>27<option>28<option>29<option>30<option>31
+</select>&nbsp;.
+<select name="m">
+<option>január<option>február<option>marec<option>apríl<option>máj<option>jún<option>júl<option selected>august<option>september<option>október<option>november<option>december
+</select>&nbsp;
+<input type="text" class="text" name="r" size=5 value="2003">
+</td></tr></table>
+</tr>
+
+<tr>
+<td>
+<table>
+<tr><td>
+<input type="radio" class="radio" name="qt" value="par"></td><td>
+&nbsp;prikázané sviatky a slávnosti Pána v roku 
+<input type="text" class="text" name="ar" size=5 value="2003">
+</td></tr></table>
+</tr>
+
+<tr>
+<td>
+<table>
+<tr><td>
+<input type="radio" class="radio" name="qt" value="pmr"></td><td>
+&nbsp;liturgický kalendár pre &nbsp;<select name="mr">
+<option>január<option>február<option>marec<option>apríl<option>máj<option>jún<option>júl<option selected>august<option>september<option>október<option>november<option>december
+</select>&nbsp;
+roku 
+<input type="text" class="text" name="rr" size=5 value="2003">
+</td></tr></table>
+</tr>
+
+<tr>
+<td>
+<table>
+<tr><td>
+<input type="radio" class="radio" name="qt" value="ptab"></td><td>
+&nbsp;tabuľka dátumov pohyblivých slávení od roku&nbsp;<input type="text" class="text" name="rfrom" size=5 value="1991">
+&nbsp;do roku&nbsp;
+<input type="text" class="text" name="rto" size=5 value="2015">
+</td></tr>
+<tr><td></td><td><input type="checkbox" class="checkbox" name="hl" value="1">
+&nbsp;zobraziť tabuľku vrátane hypertextových odkazov na jednotlivé dni
+</td></tr></table>
+</tr>
+
+<tr>
+<td>
+<table>
+<tr><td>
+<input type="radio" class="radio" name="qt" value="pcr"></td><td>
+<select name="p">
+<option>prvé vešpery
+<option selected>ranné chvály
+<option>modlitba predpoludním
+<option>modlitba napoludnie
+<option>modlitba popoludní
+<option>druhé vešpery
+</select>
+&nbsp;pre cezročné obdobie,&nbsp;&nbsp;
+<select name="dvt">
+<option>nedeľa<option selected>pondelok<option>utorok<option>streda<option>štvrtok<option>piatok<option>sobota
+</select>&nbsp;v
+<select name="t">
+<option>1<option>2<option selected>3<option>4
+</select>&nbsp;. týždni žaltára</td></tr></table>
+</tr>
+
+</table>
+
+<center>
+<input type="submit" class="button" value="Zobraz">&nbsp;&nbsp;&nbsp;
+<input type="reset" class="reset" value="Vyčisti"></center>
+</form>
+
+<hr>
+<center><p class="patka">Generovaná stránka
+(11. august 2003, 19:02:58). Build: 2003-08-11. <br>
+<a href="http://www.breviar.sk/" target="_top">http://www.breviar.sk/</a>
+&#169; 1999-2003 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
+</p>
+</center></body>
+</html>

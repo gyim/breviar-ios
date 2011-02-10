@@ -22,12 +22,12 @@
 /* OS_... - kvoli cestam (FILE_PATH...) */
 /* MODEL_... -- model kompilacie */
 
-//#define MODEL_ostry_linux
+#define MODEL_ostry_linux
 //#define MODEL_klasicky_DOS  // neodporucam pouzit
 //#define MODEL_DEBUG_linux
 //#define MODEL_DEBUG_DOS     // neodporucam pouzit
 //#define MODEL_ostry_Windows // nezabudni zmenit datum v mybuild.h !!!
-#define MODEL_DEBUG_Windows
+//#define MODEL_DEBUG_Windows
 
 /* --------------------------------------------------------------------- */
 /* prerobene 23/02/2000A.D. -- 24/02/2000A.D. */
