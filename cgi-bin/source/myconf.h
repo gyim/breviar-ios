@@ -28,3 +28,4 @@ extern char HTTP_ADDRESS[MAX_MAIL_STR];
 void readConfig(void);
 
 #endif /* __MYCONFIG_H */
+

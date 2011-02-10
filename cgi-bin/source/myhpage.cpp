@@ -129,3 +129,4 @@ void patka(void){
 }
 
 #endif /*__MYHPAGE_C_*/
+
