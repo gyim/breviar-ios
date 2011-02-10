@@ -19,6 +19,7 @@
 /*   07/09/2001A.D. | opravene: sv. Brigity (sviatok)          */
 /*   26/09/2001A.D. | opravene: sv. Terezie Benedikty (sviatok)*/
 /*   2003-06-30a.D. | zmeny pre spomienku neposkvrn.srdca PM   */
+/*   2003-08-11a.D. | -Wall upozornila na / * within comments  */
 /*                                                             */
 /* notes |                                                     */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
@@ -38,6 +39,7 @@ char _anchor_head[SMALL];
 /* povodne tu bolo aj include "sets.c", ale to je nizsie */
 #include "mylog.h"
 #include <string.h>
+#include "mystring.h" /* pridane 2003-08-11 kvoli _INIT_DM */
 
 #define VELKONOCNA_PRIPONA  "VE"
 #define POSTNA_PRIPONA      "PO"
@@ -490,7 +492,7 @@ char pismenko_modlitby(int modlitba){
 	switch(modlitba){
 		case MODL_INVITATORIUM    :  return 'i';
 		case MODL_RANNE_CHVALY    :  return 'r';
-		case MODL_POSVATNE_CITANIE:  return 'c';
+		case MODL_POSV_CITANIE:  return 'c';
 		case MODL_CEZ_DEN_9       :  return '9';
 		case MODL_CEZ_DEN_12      :  return '2';
 		case MODL_CEZ_DEN_3       :  return '3';
@@ -4118,6 +4120,8 @@ label_24_DEC:
 	/* nasledujuca cast berie do uvahy, kedy sa ma `robit' svaty */
 	/* je to cast prevzata z dnes.cpp::init_global_string(); */
 	_struct_dm _local_den;
+	_INIT_DM(_local_den); /* 2003-08-11 pridane */
+
 	int obyc = NIE;
 	/* najprv priradime do _local_den to, co tam ma byt */
 	if(poradie_svateho > 0){
@@ -9616,7 +9620,7 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer =  5; /* sviatky Pana uvedene vo vseobecnom kalendari */
-						/* povodne: 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
+						/* povodne: 7; sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 						/* lenze 9. NOV 1997 mal tento sviatok prednost pred 32. nedelou v ocr, takze smer == 5 */
 					strcpy(_global_svaty1.meno, "Výroèie posviacky Lateránskej baziliky");
 					_global_svaty1.spolcast =

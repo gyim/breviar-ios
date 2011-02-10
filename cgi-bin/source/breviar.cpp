@@ -31,19 +31,23 @@
 /*                  - <font size=-1></font> zmeneny na         */
 /*                    <span class="small"></span>              */
 /*   2003-07-15a.D. | rozne pokusy s modlitbou cez den         */
-/*                  - pridane HTML_BUTTON_LABEL_               */
+/*                  - pridane HTML_BUTTON_               */
 /*   2003-07-15a.D. | odstraneny #include "mybase.h"           */
 /*   2003-07-16a.D. | este jedna zmena & na HTML_AMPERSAND     */
 /*                  - zmena WWW_ na ADD_WWW_PREFIX_            */
 /*                  - zmena exportovania uvodnej stranky       */
 /*   2003-07-17a.D. | zmena helpu (vypis pri commandd-line     */
 /*   2003-08-06a.D. | dalsie pokusy s modlitbou cez den        */
+/*   2003-08-11a.D. | -Wall upozornila na vselico              */
+/*   2003-08-11a.D. | Segmentation fault odhaleny-vid POUCENIE */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
 /*   * ako kompilovat a linkovat?                              */
 /*     najdi zarazku KOMPILACIA -- niekde ku koncu             */
 /*   * unfinished parts: signed by !!!                         */
+/*   * debug in VC++: alt+f7, zalozka Debug, Program arguments */
+/*     napr. -qpbm -d1 -m1 -r2000 -f2 -g2 -p2001 -ba.txt       */
 /*                                                             */
 /***************************************************************/
                                        
@@ -201,7 +205,7 @@ int _global_pocet_svatych;
 /* globalne premenne, obsahujuce pom_MODL_OPT... */
 int _global_opt1 = NIE;
 int _global_opt2 = MODL_ZALMY_ZO_SV;
-int _global_opt3;
+int _global_opt3 = MODL_SPOL_CAST_NEURCENA;
 int _global_opt4 = ANO; /* pridana 05/04/2000A.D. */
 int _global_opt5 = MODL_CEZ_DEN_ZALMY_ZO_DNA; /* pridana 2003-08-07 */
 /* pridane 2003-07-08, append parameter */
@@ -430,7 +434,7 @@ void _main_prazdny_formular(void){
 }
 
 /*---------------------------------------------------------------------*/
-/* nasleduje pasaz, ktora bola povodne v lithod.[h|cpp]
+/* nasleduje pasaz, ktora bola povodne v lithod.[h|cpp]                */
 
 /*---------------------------------------------------------------------*/
 /* includeFile():
@@ -1250,7 +1254,7 @@ void showPrayer(int type){
 	Log("showPrayer(): end\n");
 }/* showPrayer(); */
 /*---------------------------------------------------------------------*/
-/* koniec pasaze, ktora bola povodne v lithod.[h|cpp]
+/* koniec pasaze, ktora bola povodne v lithod.[h|cpp]                  */
 
 /*---------------------------------------------------------------------*/
 void VYSVETLIVKY(void){ /* 13/03/2000A.D. */
@@ -1993,10 +1997,12 @@ int init_global_string(int typ, int poradie_svateho, int modlitba){
 	 * lebo nic take neexistuje 
 	 * skoda, ze som neaktualizoval aj komentare. teraz je ten odkaz nezrozumitelny.
 	 */
+
 	_struct_dm _local_den;
-	_init_dm(_local_den); /* 2003-08-07 pridana */
+	_INIT_DM(_local_den); /* 2003-08-07 pridana */
 
 	char pom[MAX_STR];
+	mystrcpy(pom, "", MAX_STR); /* 2003-08-11 pridana inicializacia */
 	mystrcpy(_global_string, "", MAX_GLOBAL_STR); /* inicializacia */
 	mystrcpy(_global_string2, "", MAX_GLOBAL_STR); /* inicializacia */
 
@@ -2009,73 +2015,73 @@ int init_global_string(int typ, int poradie_svateho, int modlitba){
 	/* -------------------------------------------------------------------- */
 	/* najprv priradime do _local_den to, co tam ma byt */
 
-		Log("poradie_svateho == %d\n", poradie_svateho);
-		/* sviatky (spomienky, ls) svatych */
-		switch(poradie_svateho){
-			case 4:
-				/* do _local_den priradim slavenie pm v sobotu v dalsom */
-				if(_global_den.denvt != DEN_SOBOTA){
-            	Export("Tento deò nie je sobota, preto nemôže ma `spomienku Panny Márie v sobotu'!\n");
-					Log("Tento den nie je sobota, preto nemoze mat spomienku P. Marie v sobotu!\n");
-					ALERT;
-					return FAILURE;
-				}
-				else{/* pridane 27/04/2000A.D. */
-					/* do _local_den priradim dane slavenie */
-					_local_den = _global_pm_sobota;
-					Log("priradujem _local_den = _global_pm_sobota;\n");
-				}
-				break; /* case 4: */
-			case 1:
-				/* do _local_den priradim dane slavenie */
-				_local_den = _global_svaty1;
-				Log("priradujem _local_den = _global_svaty1;\n");
-				break; /* case 1: */
-			case 2:
-				if(_global_pocet_svatych > 1){
-					/* do _local_den priradim dane slavenie */
-					_local_den = _global_svaty2;
-					Log("priradujem _local_den = _global_svaty2;\n");
-				}
-				else{
-					/* sice chce svateho c. 2, ale mam len jedneho */
-					Log("-- Error: _global_svaty2 not assigned\n");
-					sprintf(pom, "Error: _global_svaty2 not assigned");
-					strcat(_global_string, pom);
-					Export("%s\n", _global_string);
-					ALERT;
-					return FAILURE;
-				}
-				break; /* case 2: */
-			case 3:
-				if(_global_pocet_svatych > 2){
-					/* teraz do _local_den priradim dane slavenie */
-					_local_den = _global_svaty3;
-					Log("priradujem _local_den = _global_svaty3;\n");
-				}
-				else{
-					/* sice chce svateho c. 3, ale nemam troch */
-					Log("-- Error: _global_svaty3 not assigned\n");
-					sprintf(pom, "Error: _global_svaty3 not assigned");
-					strcat(_global_string, pom);
-					Export("%s\n", _global_string);
-					ALERT;
-					return FAILURE;
-				}
-				break; /* case 3: */
-			case 5:
-				Log("-- Error: poradie_svateho == 5\n");
-				Export("Error: poradie_svateho == 5\n");
+	Log("poradie_svateho == %d\n", poradie_svateho);
+	/* sviatky (spomienky, ls) svatych */
+	switch(poradie_svateho){
+		case 4:
+			/* do _local_den priradim slavenie pm v sobotu v dalsom */
+			if(_global_den.denvt != DEN_SOBOTA){
+            Export("Tento deò nie je sobota, preto nemôže ma `spomienku Panny Márie v sobotu'!\n");
+				Log("Tento den nie je sobota, preto nemoze mat spomienku P. Marie v sobotu!\n");
 				ALERT;
 				return FAILURE;
-				break;
-			case 0:
-				/* bezny den */
-				Log("/* bezny den */\n");
-				obyc = ANO;
-				_local_den = _global_den;
-				break; /* case 0: */
-		}/* switch(poradie_svateho) */
+			}
+			else{/* pridane 27/04/2000A.D. */
+				/* do _local_den priradim dane slavenie */
+				_local_den = _global_pm_sobota;
+				Log("priradujem _local_den = _global_pm_sobota;\n");
+			}
+			break; /* case 4: */
+		case 1:
+			/* do _local_den priradim dane slavenie */
+			_local_den = _global_svaty1;
+			Log("priradujem _local_den = _global_svaty1;\n");
+			break; /* case 1: */
+		case 2:
+			if(_global_pocet_svatych > 1){
+				/* do _local_den priradim dane slavenie */
+				_local_den = _global_svaty2;
+				Log("priradujem _local_den = _global_svaty2;\n");
+			}
+			else{
+				/* sice chce svateho c. 2, ale mam len jedneho */
+				Log("-- Error: _global_svaty2 not assigned\n");
+				sprintf(pom, "Error: _global_svaty2 not assigned");
+				strcat(_global_string, pom);
+				Export("%s\n", _global_string);
+				ALERT;
+				return FAILURE;
+			}
+			break; /* case 2: */
+		case 3:
+			if(_global_pocet_svatych > 2){
+				/* teraz do _local_den priradim dane slavenie */
+				_local_den = _global_svaty3;
+				Log("priradujem _local_den = _global_svaty3;\n");
+			}
+			else{
+				/* sice chce svateho c. 3, ale nemam troch */
+				Log("-- Error: _global_svaty3 not assigned\n");
+				sprintf(pom, "Error: _global_svaty3 not assigned");
+				strcat(_global_string, pom);
+				Export("%s\n", _global_string);
+				ALERT;
+				return FAILURE;
+			}
+			break; /* case 3: */
+		case 5:
+			Log("-- Error: poradie_svateho == 5\n");
+			Export("Error: poradie_svateho == 5\n");
+			ALERT;
+			return FAILURE;
+			break;
+		case 0:
+			/* bezny den */
+			Log("/* bezny den */\n");
+			obyc = ANO;
+			_local_den = _global_den;
+			break; /* case 0: */
+	}/* switch(poradie_svateho) */
 
 	Log("1:_local_den.meno == %s\n", _local_den.meno); /* 08/03/2000A.D. */
 
@@ -2140,6 +2146,7 @@ int init_global_string(int typ, int poradie_svateho, int modlitba){
 	}
 	else
 		Log("nie\n");
+
 
 	/* najprv nazov */
 	/* zmenene <b> na <span class="bold">, 2003-07-02 */
@@ -2347,7 +2354,7 @@ int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, int rok, int modlitba, int
 }/* _rozbor_dna_s_modlitbou() */
 
 /*---------------------------------------------------------------------*/
-/* _export_rozbor_dna_buttons(int, int)
+/* _export_rozbor_dna_BUTTONS(typ, int, int)
  *
  * typ - ako v _export_rozbor_dna()
  *
@@ -2358,9 +2365,12 @@ int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, int rok, int modlitba, int
  * s hodnotou 2 resp. 3
  *
  */
-void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
+void _export_rozbor_dna_BUTTONS(int typ, int poradie_svateho){
+
 	if(typ != EXPORT_DNA_VIAC_DNI){
 		char pom[MAX_STR];
+		mystrcpy(pom, "", MAX_STR); /* 2003-08-11 pridana inicializacia */
+
 		/* prerobene 13/04/2000A.D.: tlacitka niekedy linkuju iba subor, 
 		 * nie linku: podla _global_linky */
 		if(_global_linky == ANO){
@@ -2395,7 +2405,7 @@ void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
 		else{
 			Export("<form action=\"%s\">\n", pom);
 		}
-		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_LABEL_RANNE_CHVALY"\">\n");
+		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_RANNE_CHVALY"\">\n");
 		Export("</form>\n");
 
 /* 2003-08-06 dorobene posvatne citanie */
@@ -2410,13 +2420,16 @@ void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
 				STR_DEN, _global_den.den,
 				STR_MESIAC, _global_den.mesiac,
 				STR_ROK, _global_den.rok,
-				STR_MODLITBA, MODL_POSVATNE_CITANIE,
+				STR_MODLITBA, STR_MODL_POSV_CITANIE,
 				pom);
+				/* 2003-08-11 pozor, segfault bol spuosobeny tym, ze
+				 * ako %s sa vypisoval int! (chybal prefix STR_...)
+				 */
 		}
 		else{
 			Export("<form action=\"%s\">\n", pom);
 		}
-		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_LABEL_POSVATNE_CITANIE"\">\n");
+		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_POSV_CITANIE"\">\n");
 		Export("</form>\n");
 
 /* 2003-07-15 dorobene modlitby cez den */
@@ -2437,7 +2450,7 @@ void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
 		else{
 			Export("<form action=\"%s\">\n", pom);
 		}
-		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_LABEL_PREDPOLUDNIM"\">\n");
+		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_PREDPOLUDNIM"\">\n");
 		Export("</form>\n");
 
 		/* oddelenie */
@@ -2456,7 +2469,7 @@ void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
 		else{
 			Export("<form action=\"%s\">\n", pom);
 		}
-		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_LABEL_NAPOLUDNIE"\">\n");
+		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_NAPOLUDNIE"\">\n");
 		Export("</form>\n");
 
 		/* oddelenie */
@@ -2475,7 +2488,7 @@ void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
 		else{
 			Export("<form action=\"%s\">\n", pom);
 		}
-		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_LABEL_POPOLUDNI"\">\n");
+		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_POPOLUDNI"\">\n");
 		Export("</form>\n");
 
 /* 2003-07-15 pokracuje sa buttonom `Vespery' */
@@ -2501,7 +2514,7 @@ void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
 			else{
 				Export("<form action=\"%s\">\n", pom);
 			}
-			Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_LABEL_VESPERY"\">\n");
+			Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_VESPERY"\">\n");
 			Export("</form>\n");
 		}/* if(poradie_svateho != 4) */
 
@@ -2516,7 +2529,7 @@ void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
 				STR_ROK, _global_den.rok,
 				STR_MODLITBA, STR_MODL_DETAILY,
 				pom);
-			Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_LABEL_DETAILY"\">\n"); /* zmenene 2003-08-06 */
+			Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_DETAILY"\">\n"); /* zmenene 2003-08-06 */
 			Export("</form>\n");
 		}/* ak nie zobrazovat linky na internet, tlacidlo `Detaily...' je zbytocne */
 
@@ -2705,9 +2718,13 @@ void _export_rozbor_dna_buttons_dni(int typ){
  *
  */
 #define NEWLINE Export("</td>\n</tr>\n\n<tr valign=baseline>\n<td></td>\n<td></td>\n<td>")
-#define BUTTONS(a);	{init_global_string(typ, a);\
-	Export("%s", _global_string);\
-	_export_rozbor_dna_buttons(typ, a);}
+
+void BUTTONS(int typ, int a){
+	init_global_string(typ, a);
+	Export("%s", _global_string);
+	_export_rozbor_dna_BUTTONS(typ, a);
+}
+
 void _export_rozbor_dna(int typ){
 /* treba brat do uvahy:
  * 1. ked ma sviatok prioritu, tak ide on
@@ -2722,13 +2739,15 @@ void _export_rozbor_dna(int typ){
  *    (spomienka panny marie v sobotu)
  */
 	int i;
-#define MAX_PAT 25 /* bolo tu 5, ale kopiroval som tam HTML_SPAN_, ktore su dlhsie, 2003-07-02 */
-#define MAX_DESAT 10
-	char pom1[MAX_PAT] = "";
-	char ciarka = 0;
-	char dvojbodka = 0;
-	char pom2[MAX_PAT] = "";
-	char pom3[MAX_DESAT] = "";
+#define MAX_SMALL 30 
+	/* bolo tu MAX_PAT a MAX_DESAT, ale kopiroval som tam HTML_SPAN_, 
+	 * ktore su dlhsie, 2003-07-02;
+	 * unifikovane na MAX_SMALL, 2003-08-11 */
+	char pom1[MAX_SMALL] = "";
+	char ciarka = ' ';     /* 2003-08-11 bolo tu 0 */
+	char dvojbodka = ' ';  /* 2003-08-11 bolo tu 0 */
+	char pom2[MAX_SMALL] = "";
+	char pom3[MAX_SMALL] = "";
 
 	/* EXPORT_DNA_VIAC_DNI: predpoklada, ze sme v tabulke, <table> */
 	if(typ != EXPORT_DNA_VIAC_DNI){
@@ -2738,22 +2757,24 @@ void _export_rozbor_dna(int typ){
 	if(typ == EXPORT_DNA_VIAC_DNI){
 		i = LINK_DEN;
 		/* zmenene <b> na <span class="bold">, 2003-07-02 */
-		mystrcpy(pom1, "<"HTML_SPAN_BOLD">", MAX_PAT);
-		mystrcpy(pom2, "</span>", MAX_PAT);
-		mystrcpy(pom3, nazov_Dn[_global_den.denvt], MAX_DESAT);
-	}
+		mystrcpy(pom1, "<"HTML_SPAN_BOLD">", MAX_SMALL);
+		mystrcpy(pom2, "</span>", MAX_SMALL);
+		mystrcpy(pom3, nazov_Dn[_global_den.denvt], MAX_SMALL);
+	}/* typ == EXPORT_DNA_VIAC_DNI */
 	else{
 		i = LINK_DEN_MESIAC_ROK;
 /*		if(_global_den.denvt != DEN_NEDELA){
-			mystrcpy(pom3, nazov_dna[_global_den.denvt], MAX_DESAT);
+			mystrcpy(pom3, nazov_dna[_global_den.denvt], MAX_SMALL);
 		}*/
 		if((_global_den.denvt != DEN_NEDELA)/* &&
 			(!equals(_global_den.meno, ""))*/){
 			//ciarka = ',';
 		}
 		dvojbodka = ':';
-	}
+	}/* typ != EXPORT_DNA_VIAC_DNI */
+
 	vytvor_global_link(_global_den.den, _global_den.mesiac, _global_den.rok, i);
+
 	/* export */
 	Export("\n<tr valign=baseline>\n");
 
@@ -2785,10 +2806,10 @@ void _export_rozbor_dna(int typ){
 		 * uprednostni sa to, ktore ma v tabulke liturgickych dni vyssi stupen
 		 * [t.j. .smer]. */
 		if(_global_den.smer > _global_svaty1.smer){
-			BUTTONS(1);
+			BUTTONS(typ, 1);
 		}
 		else{
-			BUTTONS(0);
+			BUTTONS(typ, 0);
 		}
 	}/* if((_global_den.denvt == DEN_NEDELA) || (_global_den.prik == PRIKAZANY_SVIATOK) || (_global_den.smer < 5)) */
 	else if(_global_pocet_svatych > 0){
@@ -2796,30 +2817,30 @@ void _export_rozbor_dna(int typ){
 		if((_global_den.smer > _global_svaty1.smer) ||
 			(_global_den.smer == 9) && (_global_svaty1.smer == 12)){
 		/* svaty */
-			BUTTONS(1);
+			BUTTONS(typ, 1);
 			if(_global_pocet_svatych > 1){
 				NEWLINE;
-				BUTTONS(2);
+				BUTTONS(typ, 2);
 				if(_global_pocet_svatych > 2){
 					NEWLINE;
-					BUTTONS(3);
+					BUTTONS(typ, 3);
 				}
 			}
 			if((_global_svaty1.smer >= 12) &&
 				(typ != EXPORT_DNA_VIAC_DNI)){
 				/* ak je to iba lubovolna spomienka, tak vsedny den */
 				NEWLINE;
-				BUTTONS(0);
+				BUTTONS(typ, 0);
 			}
 		}/* svaty ma prednost */
 		else{
 		/* prednost ma den */
-			BUTTONS(0);
+			BUTTONS(typ, 0);
 		}
 	}/* if(_global_pocet_svatych > 0) */
 	else{
 		/* obycajne dni, nie sviatok */
-		BUTTONS(0);
+		BUTTONS(typ, 0);
 	}/* if(equals(_global_den.meno, "")) */
 
 	/* este spomienka panny marie v sobotu, cl. 15 */
@@ -2830,7 +2851,7 @@ void _export_rozbor_dna(int typ){
 			((_global_svaty1.smer >= 12) && (_global_pocet_svatych > 0))) &&
 		(typ != EXPORT_DNA_VIAC_DNI)){
 		NEWLINE;
-		BUTTONS(4);
+		BUTTONS(typ, 4);
 	}
 
 	Export("</td>\n<td><div align=right>");
@@ -2865,9 +2886,10 @@ void _export_rozbor_dna(int typ){
 #define BATCH_COMMAND(a)	{ \
 	/* napokon to vyprintujeme do batch suboru, 2003-07-07 */\
 	/* ak je nastaveny _global_opt_append, tak vsetko do 1 suboru, 2003-07-08 */\
+	/* 2003-08-11 -Wall upozornila na too many arguments for format */\
 	if(_global_opt_append == YES){\
-		fprintf(batch_file, "%s -x%d -pmrch\n", batch_command, a, a); /* ranne chvaly */\
-		fprintf(batch_file, "%s -x%d -pmv\n", batch_command, a, a); /* vespery */\
+		fprintf(batch_file, "%s -x%d -pmrch\n", batch_command, a); /* ranne chvaly */\
+		fprintf(batch_file, "%s -x%d -pmv\n", batch_command, a); /* vespery */\
 	}else{\
 		fprintf(batch_file, "%s%dr.htm -x%d -pmrch\n", batch_command, a, a); /* ranne chvaly */\
 		fprintf(batch_file, "%s%dv.htm -x%d -pmv\n", batch_command, a, a); /* vespery */\
@@ -3127,11 +3149,11 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
 	Export("<br>\n");
 	Export("<center>\n");
 	/* button Vyhladaj (GO!) */
-	Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_LABEL_DET_SHOW"\">");
+	Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_DET_SHOW"\">");
 
 	/* button Vycisti (CLEAR!) */
 	Export("&nbsp;&nbsp;&nbsp;\n");
-	Export("<"HTML_FORM_INPUT_RESET" value=\""HTML_BUTTON_LABEL_DET_DEFAULTS"\">");
+	Export("<"HTML_FORM_INPUT_RESET" value=\""HTML_BUTTON_DET_DEFAULTS"\">");
 
 	Export("</center>\n</form>\n");
 
@@ -3170,7 +3192,7 @@ void rozbor_dna_s_modlitbou(int den, int mesiac, int rok, int modlitba, int pora
 	/* lokalna premenna, do ktorej sa ukladaju info o analyzovanom dni
 	 * pouziva ju void nove_rozbor_dna() funkcia */
 	_struct_dm _local_den;
-	_init_dm(_local_den); /* 2003-08-07 pridana */
+	_INIT_DM(_local_den); /* 2003-08-07 pridana */
 
 	/* lokalne premenne obsahujuce data modlitbach -- 23/02/2000A.D.
 	 * prerobene, aby sa alokovali dynamicky */
@@ -3611,6 +3633,9 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 		p = MODL_INVITATORIUM;*/
 	else if(equals(modlitba, STR_MODL_RANNE_CHVALY))
 		p = MODL_RANNE_CHVALY;
+	/* 2003-08-11 pridana modlitba posvatneho citania */
+	else if(equals(modlitba, STR_MODL_POSV_CITANIE))
+		p = MODL_POSV_CITANIE;
 	/* 2003-07-15 pridane modlitby cez den */
 	else if(equals(modlitba, STR_MODL_PREDPOLUDNIM))
 		p = MODL_PREDPOLUDNIM;
@@ -3964,7 +3989,9 @@ void _main_dnes(void){
 	 * (jednoducho 'menim, lebo [...] ma prednost' sa urobi jedine v pripade
 	 *  generovania modlitby; v opacnom pripade nie)
 	 */
+
 	_rozbor_dna(datum, dnes.tm_year);
+
 	_export_rozbor_dna(EXPORT_DNA_DNES);
 
 	/* pokracujem vypisanim formulara */
@@ -4135,11 +4162,11 @@ void _main_dnes(void){
 	 */
 	Export("\n<center>\n");
 	/* button Vyhladaj (GO!) */
-	Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_LABEL_DNES_SHOW"\">");
+	Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_DNES_SHOW"\">");
 
 	/* button Vycisti (CLEAR!) */
 	Export("&nbsp;&nbsp;&nbsp;\n");
-	Export("<"HTML_FORM_INPUT_RESET" value=\""HTML_BUTTON_LABEL_DNES_DEFAULTS"\">");
+	Export("<"HTML_FORM_INPUT_RESET" value=\""HTML_BUTTON_DNES_DEFAULTS"\">");
 
 	Export("</center>\n</form>\n\n");
 
@@ -6003,6 +6030,26 @@ int parseQueryString(void){
  * ------------------------(end of file `urob')
  * 21/02/2000A.D.: vsetky inkludy, ktore su .h a .c[pp], som prerobil
  * tak, aby sa inkludovali .h, kde su premenne iba (extern) deklarovane
+ * 
+ * 2003-08-11: pouzil som pre g++ option -Wall, ktora pomohla odhalit niektore warningy
+ */
+
+/* POUCENIE
+ * z hladania Segmentation fault (segfault), 2003-08-11
+ *
+ * Dovod segfaultu
+ * - bol ako obycajne v blbosti: int sa vypisovalo pomocou Export("...%s...");
+ *
+ * Priciny neodhalenia
+ * - nespustal som linux-verziu pre Windows (parameter "-l1", ci vytvarat linky)
+ *
+ * Poucenie
+ * - aj pod Windows kompilovat/spustat s option presne ako bezi na linuxe
+ * - pozor na preklepy
+ *
+ * Zaver
+ * - hlavne, ze uz je to za nami :)) duurko, 2003-08-11
+ * - O.A.M.D.G.
  */
 
 /*---------------------------------------------------------------------*/
@@ -6025,7 +6072,7 @@ int main(int argc, char **argv){
 	 */
 	_global_opt1 = NIE;
 	_global_opt2 = MODL_ZALMY_ZO_SV;
-	_global_opt3;
+	_global_opt3 = MODL_SPOL_CAST_NEURCENA; /* 2003-08-11 -Wall upozornila `statement with no effect' */
 	_global_opt4 = ANO;
 	_global_opt_append = NIE;
 	strcpy(pom_QUERY_TYPE , "");

@@ -9,6 +9,9 @@
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-08-07a.D. | pridana void _init_dm co nastavi dummy   */
 /*                  - pouzite v _allocate_global_var           */
+/*   2003-08-11a.D. | void _init_dm zapoznamkovana             */
+/*                  - inicializovane stringy;zmena na mystrcpy */
+/*                  - (char) konverzie z int explicitne        */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -25,6 +28,7 @@
 #include "mystring.h"
 #include <ctype.h>
 
+
 /* globalne premenne prehodene do liturgia.h, 17/02/2000A.D. */
 /* ------------------------------------------------------------------- */
 int _allocate_global_var(void){
@@ -37,7 +41,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_den_ptr'\n", sizeof(_struct_dm));
-		_init_dm(_global_den); /* 2003-08-07 pridana */
+		_INIT_DM(_global_den); /* 2003-08-07 pridana, 2003-08-11 nahradena #definom */
 	}
 
 /* _global_result_ptr */
@@ -47,7 +51,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_result_ptr'\n", sizeof(_struct_dm));
-		_init_dm(_global_result); /* 2003-08-07 pridana */
+		_INIT_DM(_global_result); /* 2003-08-07 pridana, 2003-08-11 nahradena #definom */
 	}
 
 /* _global_pm_sobota_ptr */
@@ -57,7 +61,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_pm_sobota_ptr'\n", sizeof(_struct_dm));
-		_init_dm(_global_pm_sobota); /* 2003-08-07 pridana */
+		_INIT_DM(_global_pm_sobota); /* 2003-08-07 pridana, 2003-08-11 nahradena #definom */
 	}
 
 /* _global_svaty1_ptr */
@@ -67,7 +71,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_svaty1_ptr'\n", sizeof(_struct_dm));
-		_init_dm(_global_svaty1); /* 2003-08-07 pridana */
+		_INIT_DM(_global_svaty1); /* 2003-08-07 pridana, 2003-08-11 nahradena #definom */
 	}
 
 /* _global_svaty2_ptr */
@@ -77,7 +81,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_svaty2_ptr'\n", sizeof(_struct_dm));
-		_init_dm(_global_svaty2); /* 2003-08-07 pridana */
+		_INIT_DM(_global_svaty2); /* 2003-08-07 pridana, 2003-08-11 nahradena #definom */
 	}
 
 /* _global_svaty3_ptr */
@@ -87,7 +91,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_svaty3_ptr'\n", sizeof(_struct_dm));
-		_init_dm(_global_svaty3); /* 2003-08-07 pridana */
+		_INIT_DM(_global_svaty3); /* 2003-08-07 pridana, 2003-08-11 nahradena #definom */
 	}
 
 /* _global_modl_prve_vespery_ptr */
@@ -190,6 +194,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_link_ptr'\n", MAX_GLOBAL_LINK);
+		mystrcpy(_global_link_ptr, "", MAX_GLOBAL_LINK); /* pridane 2003-08-11 */
 	}
 
 /* _global_pom_str */
@@ -199,6 +204,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_pom_str'\n", MAX_STR);
+		mystrcpy(_global_pom_str, "", MAX_STR); /* pridane 2003-08-11 */
 	}
 
 /* _global_string */
@@ -208,6 +214,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_string'\n", MAX_GLOBAL_STR);
+		mystrcpy(_global_string, "", MAX_GLOBAL_STR); /* pridane 2003-08-11 */
 	}
 
 /* _global_string2 */
@@ -217,6 +224,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_string2'\n", MAX_GLOBAL_STR);
+		mystrcpy(_global_string2, "", MAX_GLOBAL_STR); /* pridane 2003-08-11 */
 	}
 
 	Log("...done.\n");
@@ -303,11 +311,11 @@ int equalsi(char *is1, char *is2){
 	mystrcpy(s2, is2, MAX_STR);
 	length = strlen(s1);
 	for(i = 0; i < length; i++){
-		s1[i] = tolower(s1[i]);
+		s1[i] = (char)tolower(s1[i]);
 	}
 	length = strlen(s2);
 	for(i = 0; i < length; i++){
-		s2[i] = tolower(s2[i]);
+		s2[i] = (char)tolower(s2[i]);
 	}
 	return equals(s1, s2);
 #endif
@@ -326,11 +334,11 @@ int equalsi(const char *is1, char *is2){
 	mystrcpy(s2, is2, MAX_STR);
 	length = strlen(s1);
 	for(i = 0; i < length; i++){
-		s1[i] = tolower(s1[i]);
+		s1[i] = (char)tolower(s1[i]);
 	}
 	length = strlen(s2);
 	for(i = 0; i < length; i++){
-		s2[i] = tolower(s2[i]);
+		s2[i] = (char)tolower(s2[i]);
 	}
 	return equals(s1, s2);
 #endif
@@ -349,11 +357,11 @@ int equalsi(const char *is1, const char *is2){
 	mystrcpy(s2, is2, MAX_STR);
 	length = strlen(s1);
 	for(i = 0; i < length; i++){
-		s1[i] = tolower(s1[i]);
+		s1[i] = (char)tolower(s1[i]);
 	}
 	length = strlen(s2);
 	for(i = 0; i < length; i++){
-		s2[i] = tolower(s2[i]);
+		s2[i] = (char)tolower(s2[i]);
 	}
 	return equals(s1, s2);
 #endif
@@ -372,11 +380,11 @@ int equalsi(char *is1, const char *is2){
 	mystrcpy(s2, is2, MAX_STR);
 	length = strlen(s1);
 	for(i = 0; i < length; i++){
-		s1[i] = tolower(s1[i]);
+		s1[i] = (char)tolower(s1[i]);
 	}
 	length = strlen(s2);
 	for(i = 0; i < length; i++){
-		s2[i] = tolower(s2[i]);
+		s2[i] = (char)tolower(s2[i]);
 	}
 	return equals(s1, s2);
 #endif
@@ -402,7 +410,7 @@ char *caps_BIG(const char *input){
 	mystrcpy(_global_pom_str, input, MAX_STR);
 	while(( c = _global_pom_str[i]) != '\0'){
 		if((c >= 'a') && (c <= 'z')){
-			c = c - 32;
+			c = (char)(c - 32);
 		}
 		else{
 			switch(c){
@@ -452,11 +460,13 @@ void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ){
 	/* 2003-07-09 zmeneny & na HTML_AMPERSAND kvoli HTML 4.01 */
 	char pom[MAX_STR];
 
+	mystrcpy(pom, "", MAX_STR); /* 2003-08-11 pridana inicializacia */
+
 	/* ak pozadujeme vytvorenie linku s inou farbou pre prestupny rok, 2003-07-02 */
 	if(typ == LINK_DEN_MESIAC_ROK_PRESTUP)
-		strcpy(_global_link, "<"HTML_LINK_RED" href=\"");
+		mystrcpy(_global_link, "<"HTML_LINK_RED" href=\"", MAX_GLOBAL_LINK); /* 2003-08-11 zmenene na mystrcpy(...,MAX_GLOBAL_LINK) */
 	else /* inak normalny a href, toto tu bolo predtym; 2003-07-02 */
-		strcpy(_global_link, "<"HTML_LINK_NORMAL" href=\"");
+		mystrcpy(_global_link, "<"HTML_LINK_NORMAL" href=\"", MAX_GLOBAL_LINK); /* 2003-08-11 zmenene na mystrcpy(...,MAX_GLOBAL_LINK) */
 
 	/* 13/04/2000A.D.: podla toho, co je v _global_linky, sa bud zobrazi
 	 * to co klasicky (linka), alebo
@@ -465,29 +475,29 @@ void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ){
 	if(_global_linky == ANO){
 		/* linka ano */
 
-	strcat(_global_link, script_name);
+		strcat(_global_link, script_name);
 
-	/* query_type */
-	sprintf(pom, "?%s=%s"HTML_AMPERSAND, STR_QUERY_TYPE, STR_PRM_DATUM);
-	strcat(_global_link, pom);
+		/* query_type */
+		sprintf(pom, "?%s=%s"HTML_AMPERSAND, STR_QUERY_TYPE, STR_PRM_DATUM);
+		strcat(_global_link, pom);
 
-	/* den */
-	if(den == VSETKY_DNI)
-		sprintf(pom, "%s=%s"HTML_AMPERSAND, STR_DEN, STR_VSETKY_DNI);
-	else
-		sprintf(pom, "%s=%d"HTML_AMPERSAND, STR_DEN, den);
-	strcat(_global_link, pom);
+		/* den */
+		if(den == VSETKY_DNI)
+			sprintf(pom, "%s=%s"HTML_AMPERSAND, STR_DEN, STR_VSETKY_DNI);
+		else
+			sprintf(pom, "%s=%d"HTML_AMPERSAND, STR_DEN, den);
+		strcat(_global_link, pom);
 
-	/* mesiac */
-	if(mesiac == VSETKY_MESIACE)
-		sprintf(pom, "%s=%s"HTML_AMPERSAND, STR_MESIAC, STR_VSETKY_MESIACE);
-	else
-		sprintf(pom, "%s=%d"HTML_AMPERSAND, STR_MESIAC, mesiac);
-	strcat(_global_link, pom);
+		/* mesiac */
+		if(mesiac == VSETKY_MESIACE)
+			sprintf(pom, "%s=%s"HTML_AMPERSAND, STR_MESIAC, STR_VSETKY_MESIACE);
+		else
+			sprintf(pom, "%s=%d"HTML_AMPERSAND, STR_MESIAC, mesiac);
+		strcat(_global_link, pom);
 
-	/* rok */
-	sprintf(pom, "%s=%d", STR_ROK, rok);
-	strcat(_global_link, pom);
+		/* rok */
+		sprintf(pom, "%s=%d", STR_ROK, rok);
+		strcat(_global_link, pom);
 
 	}/* linka ano */
 	else{ /* linka nie */
@@ -502,7 +512,7 @@ void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ){
 			strcat(_global_link, "d");
 		}
 		strcat(_global_link, ".htm");
-	}
+	}/* linka nie */
 
 	strcat(_global_link, "\">");
 
@@ -532,24 +542,18 @@ void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ){
 						sprintf(pom, " %d", rok);
 					}
 					strcat(pom, "</a>");
-				}
+				}/* mesiac != VSETKY_MESIACE */
 			}/* if(den == VSETKY_DNI) */
 			else{
 				switch(_case){
 					case CASE_case:
-						sprintf(pom, "%d. %s",
-							den,
-							nazov_mesiaca[mesiac - 1]);
+						sprintf(pom, "%d. %s", den, nazov_mesiaca[mesiac - 1]);
 						break;
 					case CASE_Case:
-						sprintf(pom, "%d. %s",
-							den,
-							nazov_Mesiaca[mesiac - 1]);
+						sprintf(pom, "%d. %s", den, nazov_Mesiaca[mesiac - 1]);
 						break;
 					case CASE_CASE:
-						sprintf(pom, "%d. %s",
-							den,
-							nazov_MESIACA[mesiac - 1]);
+						sprintf(pom, "%d. %s", den, nazov_MESIACA[mesiac - 1]);
 						break;
 				}/* switch(_case) */
 				if(typ == LINK_DEN_MESIAC_ROK){
@@ -558,7 +562,7 @@ void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ){
 					sprintf(pom, " %d", rok);
 				}
 				strcat(pom, "</a>");
-			}
+			}/* den != VSETKY_DNI */
 			break;
 		case LINK_DEN:
 				sprintf(pom, "%d</a>", den);
@@ -574,10 +578,12 @@ void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ){
 					case CASE_CASE:
 						sprintf(pom, "%s</a>", caps_BIG(_global_den.meno));
 						break;
-				}
+				}/* switch(_case) */
 			break;
-	}
+	}/* switch(typ) */
+
 	strcat(_global_link, pom);
+
 }/* _vytvor_global_link(); */
 
 /* vrati 1, ak je rok priestupny, inak vrati 0 */
@@ -725,7 +731,7 @@ int den_v_tyzdni(_struct_den_mesiac den_a_mesiac, int rok){
 char _nedelne_pismeno(int rok){
 	int vn;
 	vn = _velkonocna_nedela(rok);
-	return ((vn + 5) MOD 7); /* (char) pridane 01/03/2000A.D. */
+	return (char)((vn + 5) MOD 7); /* (char) pridane 01/03/2000A.D. */
 }
 
 char nedelne_pismeno(int rok){
@@ -738,7 +744,7 @@ char nedelne_pismeno(int rok){
 char _nedelne_pismeno(int por, int rok){
  /* (char) pridane 01/03/2000A.D. */
 	if((prestupny(rok)) && (por > poradie(29, MES_FEB + 1, rok)))
-		return (_nedelne_pismeno(rok) + 6) MOD 7;
+		return (char)((_nedelne_pismeno(rok) + 6) MOD 7);
 	else
 		return _nedelne_pismeno(rok);
 }
@@ -906,7 +912,7 @@ _struct_dm por_den_mesiac_dm(int poradie, int rok){
 	result.rok = rok;
 	result.denvr = poradie;
 	result.denvt = den_v_tyzdni(poradie, rok);
-	result.litrok  = ('A' + nedelny_cyklus(pom.den, pom.mesiac, rok));
+	result.litrok  = (char)('A' + nedelny_cyklus(pom.den, pom.mesiac, rok));
 		/* (char) pridane 01/03/2000A.D. */
 	/* dalsia cast pridana kvoli tomu, aby nic nebolo nedefinovane :-) 
 	 * 27/04/2000A.D.
@@ -919,7 +925,7 @@ _struct_dm por_den_mesiac_dm(int poradie, int rok){
 	result.prik = NEPRIKAZANY_SVIATOK;
 	result.spolcast =
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
-	strcpy(result.meno, "");
+	mystrcpy(result.meno, "", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	return result;
 }
 
@@ -956,7 +962,7 @@ void init_global_pm_sobota(void){
 	/* a teraz vlastne udaje */
 	_global_pm_sobota.smer = 12; /* lubovolna spomienka */
 	_global_pm_sobota.typslav = SLAV_LUB_SPOMIENKA; /* lubovolna spomienka */
-	strcpy(_global_pm_sobota.meno, "Spomienka Panny Márie v sobotu");
+	mystrcpy(_global_pm_sobota.meno, "Spomienka Panny Márie v sobotu", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	_global_pm_sobota.prik    = NEPRIKAZANY_SVIATOK; /* pridane 27/04/2000A.D. */
 	_global_pm_sobota.spolcast = /* pridane 27/04/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
@@ -974,7 +980,7 @@ void _dm_popolcova_streda(int rok, int _vn){
 	_global_result.tyzden  = 0; /* 4. tyzden zaltara */
 	_global_result.smer    = 2;
 	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 06/03/2000A.D. */
-	strcpy(_global_result.meno, "Popolcová streda");
+	mystrcpy(_global_result.meno, "Popolcová streda", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	_global_result.tyzzal  = 4; /* pridane 06/03/2000A.D. */
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
@@ -990,7 +996,7 @@ void _dm_nanebovstupenie(int rok, int _vn){
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D., aby tam nebolo 'hausnumero' */
 	_global_result.smer    = 2;
 	_global_result.prik    = PRIKAZANY_SVIATOK;
-	strcpy(_global_result.meno, "Nanebovstúpenie Pána");
+	mystrcpy(_global_result.meno, "Nanebovstúpenie Pána", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 }
@@ -1005,7 +1011,7 @@ void _dm_zoslanie_ducha(int rok, int _vn){
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D., aby tam nebolo 'hausnumero' */
 	_global_result.smer    = 2;
 	_global_result.prik    = PRIKAZANY_SVIATOK;
-	strcpy(_global_result.meno, "Zoslanie Ducha Svätého");
+	mystrcpy(_global_result.meno, "Zoslanie Ducha Svätého", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 }
@@ -1019,7 +1025,7 @@ void _dm_prva_adventna_nedela(int rok, int p2){
 	_global_result.tyzden  = 1; /* 1. adventna nedela */
 	_global_result.smer    = 2;
 	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 06/03/2000A.D. */
-	strcpy(_global_result.meno, "Prvá adventná nede¾a");
+	mystrcpy(_global_result.meno, "Prvá adventná nede¾a", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D. */
@@ -1042,7 +1048,7 @@ void _dm_svatej_rodiny(int rok){
 	_global_result.smer    = 5;
 	_global_result.tyzden  = 1; /* 1. tyzden vianocneho obdobia, oktava */
 	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 06/03/2000A.D. */
-	strcpy(_global_result.meno, "Svätej rodiny Ježiša, Márie a Jozefa");
+	mystrcpy(_global_result.meno, "Svätej rodiny Ježiša, Márie a Jozefa", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D. */
@@ -1059,7 +1065,7 @@ void _dm_krst_krista_pana(int rok){
 	_global_result.litobd  = OBD_CEZ_ROK;
 	_global_result.tyzden  = 1; /* 1. nedela "cez rok" */
 	_global_result.smer    = 5;
-	strcpy(_global_result.meno, "Krst Krista Pána");
+	mystrcpy(_global_result.meno, "Krst Krista Pána", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 27/04/2000A.D. */
@@ -1074,7 +1080,7 @@ void _dm_velkonocna_nedela(int rok, int _vn){
 	_global_result.litobd  = OBD_VELKONOCNE_TROJDNIE;
 	_global_result.tyzden  = 1; /* 1. velkonocna nedela */
 	_global_result.smer    = 1;
-	strcpy(_global_result.meno, "Ve¾konoèná nede¾a - Nede¾a Pánovho zmàtvychvstania");
+	mystrcpy(_global_result.meno, "Ve¾konoèná nede¾a - Nede¾a Pánovho zmàtvychvstania", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 27/04/2000A.D. */
@@ -1082,6 +1088,9 @@ void _dm_velkonocna_nedela(int rok, int _vn){
 }
 
 /* pridana 2003-08-07 */
+/* zapoznamkovana 2003-08-11 */
+#undef ZAPOZNAMKOVANE_2003_08_11
+#ifdef ZAPOZNAMKOVANE_2003_08_11
 void _init_dm(_struct_dm a){
 	a.den = 0;        /* cislo dna mesiaca (1--31) */
 	a.mesiac = 0;     /* cislo mesiaca (1--12) */
@@ -1102,7 +1111,7 @@ void _init_dm(_struct_dm a){
 					   * casti sa ma modlit */
 	mystrcpy(a.meno, "", MENO_SVIATKU); /* nazov prip. sviatku */
 }
-
+#endif
 
 /* ------------------------------------------------------------------- */
 /* analyzuj_rok()

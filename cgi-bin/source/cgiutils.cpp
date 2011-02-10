@@ -46,9 +46,9 @@ char x2c(char *x)
 register char c;
 
 /* note: (x & 0xdf) makes x upper case */
-c  = (x[0] >= 'A' ? ((x[0] & 0xdf) - 'A') + 10 : (x[0] - '0'));
+c  = (char)(x[0] >= 'A' ? ((x[0] & 0xdf) - 'A') + 10 : (x[0] - '0'));
 c *= 16;
-c += (x[1] >= 'A' ? ((x[1] & 0xdf) - 'A') + 10 : (x[1] - '0'));
+c += (char)(x[1] >= 'A' ? ((x[1] & 0xdf) - 'A') + 10 : (x[1] - '0'));
 return(c);
 }
 

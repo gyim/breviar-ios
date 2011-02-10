@@ -16,6 +16,8 @@
 /*   2003-07-15a.D. | odstraneny #include "mybase.h"           */
 /*   2003-08-06a.D. | rozne definicie pre posvatne citanie     */
 /*   2003-08-07a.D. | pridana void _init_dm co nastavi dummy   */
+/*   2003-08-11a.D. | -Wall upozornila na / * within comments  */
+/*   2003-08-11a.D. | void _init_dm zapoznamkovana             */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -121,7 +123,7 @@ typedef struct den_mesiac _struct_den_mesiac;
 /* modlitby */
 #define MODL_INVITATORIUM      0
 #define MODL_RANNE_CHVALY      1
-#define MODL_POSVATNE_CITANIE  2
+#define MODL_POSV_CITANIE      2
 #define MODL_CEZ_DEN_9         3
 #define MODL_CEZ_DEN_12        4
 #define MODL_CEZ_DEN_3         5
@@ -146,7 +148,7 @@ typedef struct den_mesiac _struct_den_mesiac;
 /* pre posvatne citanie pridane 2003-08-06 */
 #ifdef LONG_PARAM_NAMES
 	#define STR_MODL_RANNE_CHVALY "MODL_RANNE_CHVALY"
-	#define STR_MODL_POSVATNE_CITANIE "MODL_POSVATNE_CITANIE"
+	#define STR_MODL_POSV_CITANIE "MODL_POSV_CITANIE"
 	#define STR_MODL_VESPERY "MODL_VESPERY"
 	#define STR_MODL_PREDPOLUDNIM "MODL_PREDPOLUDNIM"
 	#define STR_MODL_NAPOLUDNIE "MODL_NAPOLUDNIE"
@@ -154,7 +156,7 @@ typedef struct den_mesiac _struct_den_mesiac;
 	#define STR_MODL_DETAILY "MODL_DETAILY"
 #else
 	#define STR_MODL_RANNE_CHVALY "mrch"
-	#define STR_MODL_POSVATNE_CITANIE "mpc"
+	#define STR_MODL_POSV_CITANIE "mpc"
 	#define STR_MODL_VESPERY "mv"
 	#define STR_MODL_PREDPOLUDNIM "mpred"
 	#define STR_MODL_NAPOLUDNIE "mna"
@@ -169,7 +171,7 @@ extern const char *nazov_Modlitby[];
 /* ... a file templates (suborove vzory) pre modlitby */
 #define TEMPLAT_INVITATORIUM     "invitat.htm"
 #define TEMPLAT_RANNE_CHVALY     "rchvaly.htm"
-#define TEMPLAT_POSVATNE_CITANIE "posvcit.htm"
+#define TEMPLAT_POSV_CITANIE     "posvcit.htm"
 #define TEMPLAT_CEZ_DEN_9        "predpol.htm"
 #define TEMPLAT_CEZ_DEN_12       "napol.htm"
 #define TEMPLAT_CEZ_DEN_3        "popol.htm"
@@ -318,7 +320,7 @@ extern const char *nazov_spolc_ANCHOR[MODL_SPOL_CAST_NEBRAT + 1];
 /* na sviatok vychovavatelov: nevieme (a je jedno), ci ide o muza alebo
  * zenu -- ked berieme z fajlu sc_vv.htm; 29/02/2000A.D.
 #define ANCHOR_SPOL_CAST_VYCHOVAVATEL "SCVV"
-#define FILE_SPOL_CAST_VYCHOVAVATEL "sc_vv.htm"
+#define FILE_SPOL_CAST_VYCHOVAVATEL "sc_vv.htm" */
 /* na sviatok tych, co konali skutky milosrdenstva: nevieme (a je jedno),
  * ci ide o muza alebo zenu -- ked berieme z fajlu sc_skm.htm; 29/02/2000A.D.
 #define ANCHOR_SPOL_CAST_SKUTKYMIL "SCSKM"
@@ -427,8 +429,7 @@ extern const char *nazov_obdobia_v[];
 extern const char *nazov_OBDOBIA_V[];
 /* gen[itiv] == 2. pad, koho/coho */
 extern const char *nazov_obdobia_gen[];
-/*
-extern const char *nazov_Obdobia[];
+/* extern const char *nazov_Obdobia[]; */
 /* nazov_obdobia: string pre nazov suboru .htm liturgickeho obdobia */
 extern const char *nazov_obd_htm[];
 /* nazov_obdobia: string pre nazov kotvy v .htm liturgickeho obdobia */
@@ -739,7 +740,30 @@ void _dm_velkonocna_nedela(int rok, int _vn);
 void analyzuj_rok(int year);
 
 /* pridana 2003-08-07 */
+/* zapoznamkovana 2003-08-11 */
+#undef ZAPOZNAMKOVANE_2003_08_11
+#ifdef ZAPOZNAMKOVANE_2003_08_11
 void _init_dm(_struct_dm a);
+#endif
+
+/* definovany 2003-08-11 na zaklade funkcie _init_dm() */
+#define _INIT_DM(a){\
+	a.den = 1;        /* cislo dna mesiaca (1--31) */\
+	a.mesiac = 1;     /* cislo mesiaca (1--12) */\
+	a.rok = 1900;        /* rok */\
+	a.denvt = 0;     /* cislo dna v tyzdni (0--6) DEN_... */ /* deò v roku */\
+	a.denvr = 1;      /* cislo dna v roku (1--365/366) */\
+	a.litrok = 'A';     /* liturgicky rok ('A'--'C') */\
+	a.tyzden = 1;     /* tyzden v danom liturgickom obdobi */\
+	a.tyzzal = 1;     /* tyzden v zaltari (vacsinou ((tyzden - 1) % 4) + 1) */\
+	a.litobd = OBD_VIANOCNE_I;    /* liturgicke obdobie, OBD_... */\
+	a.typslav = 1;    /* typ slavenia (1--5): SLAV_... */\
+	a.smer = 100;     /* poradove cislo z c.59 Vseobecnych smernic o liturgii hodin a kalendari */\
+	a.prik = PRIKAZANY_SVIATOK;      /* ci je to prikazany sviatok alebo nie: PRIKAZANY_SVIATOK resp. NEPRIKAZANY_SVIATOK */\
+	a.spolcast = MODL_SPOL_CAST_NEURCENA;  /* spolocna cast -- zakodovane data pre svatych o tom, z akej spolocnej casti sa ma modlit */\
+	mystrcpy(a.meno, "", MENO_SVIATKU); /* nazov prip. sviatku */\
+}
+
 
 #define Log_struktura_dm Log("  <dm>"); Log
 void Log(_struct_dm g);

@@ -15,7 +15,7 @@
 /*   2003-07-08a.D. | pridana konstanta MODL_OPT_APPEND        */
 /*   2003-07-09a.D. | pridane #define HTML_AMPERSAND "&amp;"   */
 /*   2003-07-15a.D. | zluceny s mybase.h, vycistene komentare  */
-/*                  - pridane HTML_BUTTON_LABEL_               */
+/*                  - pridane HTML_BUTTON_               */
 /*   2003-07-16a.D. | zmena WWW_ na ADD_WWW_PREFIX_            */
 /*                                                             */
 /*                                                             */
@@ -50,7 +50,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2003-08-07"
+#define BUILD_DATE "2003-08-11"
 
 /* 2003-07-15 odpoznamkovane */
 #define RUN_MODLITBA_CEZ_DEN
@@ -409,19 +409,19 @@ extern int query_type; /* premenna obsahujuca PRM_... */
 #define HTML_AMPERSAND "&amp;"
 
 /* pridane 2003-07-15 */
-#define HTML_BUTTON_LABEL_RANNE_CHVALY "Ranné chvály"
-#define HTML_BUTTON_LABEL_PREDPOLUDNIM "9h"
-#define HTML_BUTTON_LABEL_NAPOLUDNIE   "12h"
-#define HTML_BUTTON_LABEL_POPOLUDNI    "15h"
-#define HTML_BUTTON_LABEL_VESPERY      "Vešpery"
+#define HTML_BUTTON_RANNE_CHVALY "Ranné chvály"
+#define HTML_BUTTON_PREDPOLUDNIM "9h"
+#define HTML_BUTTON_NAPOLUDNIE   "12h"
+#define HTML_BUTTON_POPOLUDNI    "15h"
+#define HTML_BUTTON_VESPERY      "Vešpery"
 /* dalsie pridane 2003-08-06 */
-#define HTML_BUTTON_LABEL_POSVATNE_CITANIE "Posv.èít."
-#define HTML_BUTTON_LABEL_DETAILY      "Detaily..."
-#define HTML_BUTTON_LABEL_DET_SHOW     "Zobraz modlitbu"
-#define HTML_BUTTON_LABEL_DET_DEFAULTS "Pôvodné hodnoty"
+#define HTML_BUTTON_POSV_CITANIE "Posv.èít."
+#define HTML_BUTTON_DETAILY      "Detaily..."
+#define HTML_BUTTON_DET_SHOW     "Zobraz modlitbu"
+#define HTML_BUTTON_DET_DEFAULTS "Pôvodné hodnoty"
 /* pridanw 2003-08-07 */
-#define HTML_BUTTON_LABEL_DNES_SHOW     "Zobraz"
-#define HTML_BUTTON_LABEL_DNES_DEFAULTS "Vyèisti"
+#define HTML_BUTTON_DNES_SHOW     "Zobraz"
+#define HTML_BUTTON_DNES_DEFAULTS "Vyèisti"
 
 #endif /*__MYDEFS_H_*/
 
