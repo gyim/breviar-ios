@@ -11,6 +11,7 @@
 .parameter { font-weight: bold; font-style: normal; font-family: Courier, Monospaced; color: black; }
 .value { font-weight: bold; font-style: normal; font-family: Courier, Monospaced; color: brown; }
 .explain { font-size: 80%; color: #a05000; }
+.small { font-size: 80%; }
 
 /* 2003-07-09 */
 /* apply to all elements */ { font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 100%; }
