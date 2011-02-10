@@ -40,6 +40,7 @@
 /*   2003-08-06a.D. | dalsie pokusy s modlitbou cez den        */
 /*   2003-08-11a.D. | -Wall upozornila na vselico              */
 /*   2003-08-11a.D. | Segmentation fault odhaleny-vid POUCENIE */
+/*   2003-08-12a.D. | opt5 pridana (modlitba cez den)          */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -2995,7 +2996,9 @@ void _export_rozbor_dna_batch(int typ){
 /* showDetails():
  * vytvorena v Trencine, 29/01/2000A.D. */
 /* vyskusat Run -> Arguments...:
- * `-qpdt -r2000 -m1 -d20 -x1 -p* -1nie -2sviatku' */
+ * `-qpdt -r2000 -m1 -d20 -x1 -p* -1nie -2sviatku'
+ * 2003-08-13: vo VC++ je to Project->Settings zalozka Debug, Program arguments
+ */
 /*---------------------------------------------------------------------*/
 /*
  * ked stlaci button 'Detaily...' pri konretnej modlitbe,
@@ -3060,6 +3063,9 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
 	/* pole WWW_MODLITBA */
 	Export("<select name=\"%s\">\n", STR_MODLITBA);
 	Export("<option selected>%s\n", nazov_modlitby[MODL_RANNE_CHVALY]);
+	Export("<option>%s\n", nazov_modlitby[MODL_PREDPOLUDNIM]);
+	Export("<option>%s\n", nazov_modlitby[MODL_NAPOLUDNIE]);
+	Export("<option>%s\n", nazov_modlitby[MODL_POPOLUDNI]); /* cez den: pridane 2003-08-13 */
 	/* spomienka P. Marie v sobotu nema vespery */
 	if(poradie_svaty != 4)
 		Export("<option>%s\n", nazov_modlitby[MODL_VESPERY]);
@@ -3728,6 +3734,21 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 		_global_opt4 = NIE;
 	}/* inak ostane _global_opt4 default */
 	Log("opt4 == `%s' (%d)\n", pom_MODL_OPT4, _global_opt4);
+
+	/* option 5, pridana 2003-08-12 */
+	if(equals(pom_MODL_OPT5, STR_MODL_CEZ_DEN_ZALMY_ZO_DNA) || equals(pom_MODL_OPT5, "0")){
+		_global_opt5 = MODL_CEZ_DEN_ZALMY_ZO_DNA;
+	}
+	else if(equals(pom_MODL_OPT5, STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_1) || equals(pom_MODL_OPT5, "1")){
+		_global_opt5 = MODL_CEZ_DEN_DOPLNKOVE_ZALMY_1;
+	}
+	else if(equals(pom_MODL_OPT5, STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_2) || equals(pom_MODL_OPT5, "2")){
+		_global_opt5 = MODL_CEZ_DEN_DOPLNKOVE_ZALMY_2;
+	}
+	else if(equals(pom_MODL_OPT5, STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3) || equals(pom_MODL_OPT5, "3")){
+		_global_opt5 = MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3;
+	}/* inak ostane _global_opt5 default */
+	Log("opt5 == `%s' (%d)\n", pom_MODL_OPT5, _global_opt5);
 
 	/* option a (append), pridana 2003-07-08 - nastavi sa v getArgv(); */
 
@@ -5229,15 +5250,21 @@ int getArgv(int argc, char **argv){
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
 				case '4': /* MODL_OPT4 */
-					/* znamena osmy parameter */
+					/* znamena deviaty parameter */
 					if(optarg != NULL){
 						mystrcpy(pom_MODL_OPT4, optarg, SMALL);
+					}
+					Log("option %c with value `%s'\n", c, optarg); break;
+				case '5': /* MODL_OPT5 */
+					/* znamena desiaty parameter, pridane 2003-08-12 */
+					if(optarg != NULL){
+						mystrcpy(pom_MODL_OPT5, optarg, SMALL);
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
 
 				/* append pridany 2003-07-08, bude v _global_opt_append */
 				case 'a': /* MODL_OPT_APPEND */
-					/* znamena osmy parameter */
+					/* znamena ? parameter */
 					if(optarg != NULL){
 						mystrcpy(pom_MODL_OPT_APPEND, optarg, SMALL);
 					}
