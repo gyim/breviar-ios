@@ -12,6 +12,8 @@
 /*   2003-08-11a.D. | void _init_dm zapoznamkovana             */
 /*                  - inicializovane stringy;zmena na mystrcpy */
 /*                  - (char) konverzie z int explicitne        */
+/*   2003-08-13a.D. | pridane logy pre modlitbu cez den        */
+/*                  - pridana inicializacia do _allocate_      */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -101,6 +103,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_modl_prve_vespery_ptr'\n", sizeof(_type_1vespery));
+		_INIT_TMODLITBA1(_global_modl_prve_vespery); /* pridana 2003-08-13 */
 	}
 
 /* _global_modl_1kompletorium_ptr */
@@ -128,6 +131,17 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_modl_ranne_chvaly_ptr'\n", sizeof(_type_ranne_chvaly));
+		_INIT_TMODLITBA1(_global_modl_ranne_chvaly); /* pridana 2003-08-13 */
+	}
+/* pridane 2003-08-13 */
+/* _global_modl_posv_citanie_ptr */
+	if((_global_modl_posv_citanie_ptr = (_type_posv_citanie*) malloc(sizeof(_type_posv_citanie))) == NULL){
+		Log("  Not enough memory to allocate buffer for `_global_modl_posv_citanie_ptr'\n");
+		ret = FAILURE;
+	}
+	else{
+		Log("  %d bytes for `_global_modl_posv_citanie_ptr'\n", sizeof(_type_posv_citanie));
+		_INIT_TMODLITBA1(_global_modl_posv_citanie); /* pridana 2003-08-13 */
 	}
 
 #ifdef RUN_MODLITBA_CEZ_DEN
@@ -138,6 +152,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_modl_cez_den_9_ptr'\n", sizeof(_type_cez_den_9));
+		_INIT_TMODLITBA2(_global_modl_cez_den_9); /* pridana 2003-08-13 */
 	}
 
 /* _global_modl_cez_den_12_ptr */
@@ -147,6 +162,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_modl_cez_den_12_ptr'\n", sizeof(_type_cez_den_12));
+		_INIT_TMODLITBA2(_global_modl_cez_den_12); /* pridana 2003-08-13 */
 	}
 
 /* _global_modl_cez_den_3_ptr */
@@ -156,6 +172,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_modl_cez_den_3_ptr'\n", sizeof(_type_cez_den_3));
+		_INIT_TMODLITBA2(_global_modl_cez_den_3); /* pridana 2003-08-13 */
 	}
 
 #endif
@@ -167,6 +184,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_modl_vespery_ptr'\n", sizeof(_type_vespery));
+		_INIT_TMODLITBA1(_global_modl_vespery); /* pridana 2003-08-13 */
 	}
 
 /* _global_modl_kompletorium_ptr */
@@ -194,7 +212,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_link_ptr'\n", MAX_GLOBAL_LINK);
-		mystrcpy(_global_link_ptr, "", MAX_GLOBAL_LINK); /* pridane 2003-08-11 */
+		mystrcpy(_global_link_ptr, STR_UNDEF, MAX_GLOBAL_LINK); /* pridane 2003-08-11, zmenene 2003-08-13 */
 	}
 
 /* _global_pom_str */
@@ -204,7 +222,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_pom_str'\n", MAX_STR);
-		mystrcpy(_global_pom_str, "", MAX_STR); /* pridane 2003-08-11 */
+		mystrcpy(_global_pom_str, STR_UNDEF, MAX_STR); /* pridane 2003-08-11, zmenene 2003-08-13 */
 	}
 
 /* _global_string */
@@ -214,7 +232,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_string'\n", MAX_GLOBAL_STR);
-		mystrcpy(_global_string, "", MAX_GLOBAL_STR); /* pridane 2003-08-11 */
+		mystrcpy(_global_string, STR_UNDEF, MAX_GLOBAL_STR); /* pridane 2003-08-11, zmenene 2003-08-13 */
 	}
 
 /* _global_string2 */
@@ -224,7 +242,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_string2'\n", MAX_GLOBAL_STR);
-		mystrcpy(_global_string2, "", MAX_GLOBAL_STR); /* pridane 2003-08-11 */
+		mystrcpy(_global_string2, STR_EMPTY, MAX_GLOBAL_STR); /* pridane 2003-08-11 */
 	}
 
 	Log("...done.\n");
@@ -260,7 +278,6 @@ int _deallocate_global_var(void){
 	Log("...done.\n");
 	return SUCCESS;
 }
-
 
 /* ------------------------------------------------------------------- */
 /* string comparator -- pre vsetky kombinacie dvojic
@@ -460,7 +477,7 @@ void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ){
 	/* 2003-07-09 zmeneny & na HTML_AMPERSAND kvoli HTML 4.01 */
 	char pom[MAX_STR];
 
-	mystrcpy(pom, "", MAX_STR); /* 2003-08-11 pridana inicializacia */
+	mystrcpy(pom, STR_EMPTY, MAX_STR); /* 2003-08-11 pridana inicializacia */
 
 	/* ak pozadujeme vytvorenie linku s inou farbou pre prestupny rok, 2003-07-02 */
 	if(typ == LINK_DEN_MESIAC_ROK_PRESTUP)
@@ -925,7 +942,7 @@ _struct_dm por_den_mesiac_dm(int poradie, int rok){
 	result.prik = NEPRIKAZANY_SVIATOK;
 	result.spolcast =
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
-	mystrcpy(result.meno, "", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
+	mystrcpy(result.meno, STR_EMPTY, MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	return result;
 }
 
@@ -1109,7 +1126,7 @@ void _init_dm(_struct_dm a){
 	a.spolcast = -1;  /* spolocna cast -- pridane 09/02/2000A.D.,
 					   * zakodovane data pre svatych o tom, z akej spolocnej
 					   * casti sa ma modlit */
-	mystrcpy(a.meno, "", MENO_SVIATKU); /* nazov prip. sviatku */
+	mystrcpy(a.meno, STR_EMPTY, MENO_SVIATKU); /* nazov prip. sviatku */
 }
 #endif
 
@@ -1209,20 +1226,35 @@ void Log(_struct_dm g){
 }
 
 void Log(struct tmodlitba1 t){
-	Log_struktura_tm("struktura tmodlitba1:\n");
-	Log_struktura_tm("   popis     file `%s', anchor `%s'\n", t.popis.file, t.popis.anchor);
-	Log_struktura_tm("   hymnus    file `%s', anchor `%s'\n", t.hymnus.file, t.hymnus.anchor);
-	Log_struktura_tm("   antifona1 file `%s', anchor `%s'\n", t.antifona1.file, t.antifona1.anchor);
-	Log_struktura_tm("   zalm1     file `%s', anchor `%s'\n", t.zalm1.file, t.zalm1.anchor);
-	Log_struktura_tm("   antifona2 file `%s', anchor `%s'\n", t.antifona2.file, t.antifona2.anchor);
-	Log_struktura_tm("   zalm2     file `%s', anchor `%s'\n", t.zalm2.file, t.zalm2.anchor);
-	Log_struktura_tm("   antifona3 file `%s', anchor `%s'\n", t.antifona3.file, t.antifona3.anchor);
-	Log_struktura_tm("   zalm3     file `%s', anchor `%s'\n", t.zalm3.file, t.zalm3.anchor);
-	Log_struktura_tm("   kcitanie  file `%s', anchor `%s'\n", t.kcitanie.file, t.kcitanie.anchor);
-	Log_struktura_tm("   kresponz  file `%s', anchor `%s'\n", t.kresponz.file, t.kresponz.anchor);
-	Log_struktura_tm("   bened/mag file `%s', anchor `%s'\n", t.benediktus.file, t.benediktus.anchor); /* antifona na benediktus/magnifikat */
-	Log_struktura_tm("   prosby    file `%s', anchor `%s'\n", t.prosby.file, t.prosby.anchor);
-	Log_struktura_tm("   modlitba  file `%s', anchor `%s'\n", t.modlitba.file, t.modlitba.anchor);
+	Log_struktura_tm1("struktura tmodlitba1:\n");
+	Log_struktura_tm1("   popis     file `%s', anchor `%s'\n", t.popis.file, t.popis.anchor);
+	Log_struktura_tm1("   hymnus    file `%s', anchor `%s'\n", t.hymnus.file, t.hymnus.anchor);
+	Log_struktura_tm1("   antifona1 file `%s', anchor `%s'\n", t.antifona1.file, t.antifona1.anchor);
+	Log_struktura_tm1("   zalm1     file `%s', anchor `%s'\n", t.zalm1.file, t.zalm1.anchor);
+	Log_struktura_tm1("   antifona2 file `%s', anchor `%s'\n", t.antifona2.file, t.antifona2.anchor);
+	Log_struktura_tm1("   zalm2     file `%s', anchor `%s'\n", t.zalm2.file, t.zalm2.anchor);
+	Log_struktura_tm1("   antifona3 file `%s', anchor `%s'\n", t.antifona3.file, t.antifona3.anchor);
+	Log_struktura_tm1("   zalm3     file `%s', anchor `%s'\n", t.zalm3.file, t.zalm3.anchor);
+	Log_struktura_tm1("   kcitanie  file `%s', anchor `%s'\n", t.kcitanie.file, t.kcitanie.anchor);
+	Log_struktura_tm1("   kresponz  file `%s', anchor `%s'\n", t.kresponz.file, t.kresponz.anchor);
+	Log_struktura_tm1("   bened/mag file `%s', anchor `%s'\n", t.benediktus.file, t.benediktus.anchor); /* antifona na benediktus/magnifikat */
+	Log_struktura_tm1("   prosby    file `%s', anchor `%s'\n", t.prosby.file, t.prosby.anchor);
+	Log_struktura_tm1("   modlitba  file `%s', anchor `%s'\n", t.modlitba.file, t.modlitba.anchor);
+}
+
+void Log(struct tmodlitba2 t){
+	Log_struktura_tm2("struktura tmodlitba2:\n");
+	Log_struktura_tm2("   popis     file `%s', anchor `%s'\n", t.popis.file, t.popis.anchor);
+	Log_struktura_tm2("   hymnus    file `%s', anchor `%s'\n", t.hymnus.file, t.hymnus.anchor);
+	Log_struktura_tm2("   antifona1 file `%s', anchor `%s'\n", t.antifona1.file, t.antifona1.anchor);
+	Log_struktura_tm2("   zalm1     file `%s', anchor `%s'\n", t.zalm1.file, t.zalm1.anchor);
+	Log_struktura_tm2("   antifona2 file `%s', anchor `%s'\n", t.antifona2.file, t.antifona2.anchor);
+	Log_struktura_tm2("   zalm2     file `%s', anchor `%s'\n", t.zalm2.file, t.zalm2.anchor);
+	Log_struktura_tm2("   antifona3 file `%s', anchor `%s'\n", t.antifona3.file, t.antifona3.anchor);
+	Log_struktura_tm2("   zalm3     file `%s', anchor `%s'\n", t.zalm3.file, t.zalm3.anchor);
+	Log_struktura_tm2("   kcitanie  file `%s', anchor `%s'\n", t.kcitanie.file, t.kcitanie.anchor);
+	Log_struktura_tm2("   kresponz  file `%s', anchor `%s'\n", t.kresponz.file, t.kresponz.anchor);
+	Log_struktura_tm2("   modlitba  file `%s', anchor `%s'\n", t.modlitba.file, t.modlitba.anchor);
 }
 
 /*---------------------------------------------------------------------*/

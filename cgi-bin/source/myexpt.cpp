@@ -53,7 +53,7 @@ FILE *exportfile;
 
 int initExport(void){
 #if defined(EXPORT_TO_FILE)
-	/* zapisovanie vyslednej stranky do suboru; pozor na nazvy suborov "" a "+" */
+	/* zapisovanie vyslednej stranky do suboru; pozor na nazvy suborov "" (STR_EMPTY) a "+" */
 	if(FILE_EXPORT[strlen(FILE_EXPORT) - 1] == '+'){
 		/* append, nie novy fajl; 13/03/2000A.D. */
 		FILE_EXPORT[strlen(FILE_EXPORT) - 1] = '\0'; /* zrusime '+' na konci */
@@ -212,12 +212,12 @@ int ExpL2HTML(char *fmt)
 			case 'å': YYcharHTML(164, 229, 110, "ò", "\\vn ", 110); /*n makcen*/ break;
 			case 'Õ': YYcharHTML(165, 213, 78, "Ò", "\\vN ", 78); /*N makcen*/ break;
 			case 'Þ': YYcharHTML(166, 222, 85, "Ù", "\\oU ", 85); /*U kruzok !!!*/ break;
-			case 'â': YYcharHTML(167, 226, 79, "&Ocirc;", "", 79); /*O vokan !!!*/ break;
+			case 'â': YYcharHTML(167, 226, 79, "&Ocirc;", STR_EMPTY, 79); /*O vokan !!!*/ break;
 			case 'ç': YYcharHTML(168, 231, 115, "š", "\\vs ", 115); /*s makcen*/ break;
 			case 'ý': YYcharHTML(169, 253, 114, "ø", "\\vr ", 114); /*r makcen*/ break;
 			case 'ê': YYcharHTML(170, 234, 114, "à", "\\\'r ", 114); /*r dlzen*/ break;
 			case 'è': YYcharHTML(171, 232, 82, "À", "\\\'R ", 82); /*R dlzen*/ break;
-			case 'õ': YYcharHTML(173, 245, 0, "§", "", 0); /*paragraf !!!*/ break;
+			case 'õ': YYcharHTML(173, 245, 0, "§", STR_EMPTY, 0); /*paragraf !!!*/ break;
 			default: YYdefault();
 		}
 	}

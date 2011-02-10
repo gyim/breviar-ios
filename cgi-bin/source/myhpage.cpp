@@ -37,7 +37,7 @@ void hlavicka(char *title){
  * nasledujuci riadok nasledovany prazdnym riadkom
  */
 	/* 2003-07-01, pridane pripadne citanie zo suboru */
-	char fname[MAX_STR] = "";
+	char fname[MAX_STR] = STR_EMPTY;
 	int c = 0;
 	mystrcpy(fname, FILE_HEADER, MAX_STR);
 
@@ -81,7 +81,8 @@ void patka(void){
 	time_t t;
 	struct tm dnes;
 	int baserok = 1999;
-	char rok[5];
+#define ROK 5
+	char rok[ROK];
 
 	time(&t);
 
@@ -90,7 +91,7 @@ void patka(void){
 	/* upravenie time_check structure with the data */
 	dnes.tm_year = dnes.tm_year + 1900;
 	dnes.tm_yday = dnes.tm_yday + 1;
-	strcpy(rok, "");
+	mystrcpy(rok, STR_EMPTY, ROK);
 	if(dnes.tm_year > baserok){
 		sprintf(rok, "-%d", dnes.tm_year);
 	}

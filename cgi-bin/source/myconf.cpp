@@ -9,6 +9,7 @@
 /*   30/03/2000A.D. | created                                  */
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-07-08a.D. | MAIL_ADDRESS zmenena na videky@breviar.sk*/
+/*   2003-08-13a.D. | pridany #include "mystring.h"            */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -22,8 +23,8 @@ char MAIL_ADDRESS[MAX_MAIL_STR] = "videky@breviar.sk";
 void readConfig(void){
 	FILE *cfg_file;
 	char *ptr;
-	char http_address[MAX_STR] = "";
-	char mail_address[MAX_STR] = "";
+	char http_address[MAX_STR] = STR_EMPTY;
+	char mail_address[MAX_STR] = STR_EMPTY;
 
 	cfg_file = fopen(CONFIG_FILE, "rt");
 

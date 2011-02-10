@@ -34,7 +34,7 @@ extern int exptused;
 extern FILE *exportfile;
 
 int initExport(void); /* nechapem, preco to tu chybalo; 22/02/2000A.D. */
-int initExport(char *expt_filename); /* pridane, 13/03/2000A.D.; pozor na nazvy suborov "" a "+" */
+int initExport(char *expt_filename); /* pridane, 13/03/2000A.D.; pozor na nazvy suborov "" (STR_EMPTY) a "+" */
 int closeExport(void); /* pridane, urobi fclose(); 13/03/2000A.D. */
 /* navratove hodnoty su prerobene na int-y; vysledok SUCCESS resp. FAILURE */
 

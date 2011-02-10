@@ -18,6 +18,7 @@
 /*   2003-08-07a.D. | pridana void _init_dm co nastavi dummy   */
 /*   2003-08-11a.D. | -Wall upozornila na / * within comments  */
 /*   2003-08-11a.D. | void _init_dm zapoznamkovana             */
+/*   2003-08-13a.D. | pridane logy pre modlitbu cez den        */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -35,9 +36,12 @@
 
 #define MENO_SVIATKU 100
 
+/* nasledovne 2 definovane 2003-08-13 */
+#define MAX_STR_AF_FILE   12
+#define MAX_STR_AF_ANCHOR 23
 struct _anchor_and_file{
-	char file[12];
-	char anchor[23];
+	char file[MAX_STR_AF_FILE];
+	char anchor[MAX_STR_AF_ANCHOR];
 };
 typedef struct _anchor_and_file _struct_anchor_and_file;
 
@@ -482,7 +486,7 @@ extern const char char_nedelny_cyklus[3];
 #define	PRVA_ADVENTNA_NEDELA_b	331
 
 #define	OD_VELKEJ_NOCI_PO_POPOLCOVU_STR		-46
-#define  OD_VELKEJ_NOCI_PO_NANEBOSTUPENIE	39
+#define OD_VELKEJ_NOCI_PO_NANEBOSTUPENIE	39
 #define	OD_VELKEJ_NOCI_PO_ZOSLANIE_DUCHA	49
 
 /* sposob pisania slov */
@@ -596,7 +600,9 @@ extern _type_invitatorium *_global_modl_invitatorium_ptr;
 /*extern _type_invitatorium  _global_modl_invitatorium;*/
 #define _global_modl_invitatorium (*_global_modl_invitatorium_ptr)
 
-/* _type_posv_citanie  _global_modl_posv_citanie; */
+/* 2003-08-13 pridane posvatne citanie */
+extern _type_posv_citanie *_global_modl_posv_citanie_ptr;
+#define _global_modl_posv_citanie (*_global_modl_posv_citanie_ptr)
 
 extern _type_ranne_chvaly *_global_modl_ranne_chvaly_ptr;
 /*extern _type_ranne_chvaly  _global_modl_ranne_chvaly;*/
@@ -612,6 +618,11 @@ extern _type_cez_den_12     *_global_modl_cez_den_12_ptr;
 extern _type_cez_den_3     *_global_modl_cez_den_3_ptr;
 /*extern _type_cez_den_3     _global_modl_cez_den_3;*/
 #define _global_modl_cez_den_3 (*_global_modl_cez_den_3_ptr)
+
+/* pridane 2003-08-13 pre lahsie pouzitie */
+#define _global_modl_predpol  _global_modl_cez_den_9
+#define _global_modl_napol    _global_modl_cez_den_12
+#define _global_modl_popol    _global_modl_cez_den_3
 #endif
 
 extern _type_vespery      *_global_modl_vespery_ptr;
@@ -747,7 +758,7 @@ void _init_dm(_struct_dm a);
 #endif
 
 /* definovany 2003-08-11 na zaklade funkcie _init_dm() */
-#define _INIT_DM(a){\
+#define _INIT_DM(a) {\
 	a.den = 1;        /* cislo dna mesiaca (1--31) */\
 	a.mesiac = 1;     /* cislo mesiaca (1--12) */\
 	a.rok = 1900;        /* rok */\
@@ -761,16 +772,53 @@ void _init_dm(_struct_dm a);
 	a.smer = 100;     /* poradove cislo z c.59 Vseobecnych smernic o liturgii hodin a kalendari */\
 	a.prik = PRIKAZANY_SVIATOK;      /* ci je to prikazany sviatok alebo nie: PRIKAZANY_SVIATOK resp. NEPRIKAZANY_SVIATOK */\
 	a.spolcast = MODL_SPOL_CAST_NEURCENA;  /* spolocna cast -- zakodovane data pre svatych o tom, z akej spolocnej casti sa ma modlit */\
-	mystrcpy(a.meno, "", MENO_SVIATKU); /* nazov prip. sviatku */\
+	mystrcpy(a.meno, STR_UNDEF, MENO_SVIATKU); /* nazov prip. sviatku */\
 }
 
+/* inicializacne definy pridane 2003-08-13 */
+#define _INIT_ANCHOR_AND_FILE(a) {\
+	mystrcpy(a.file, STR_UNDEF, MAX_STR_AF_FILE); \
+	mystrcpy(a.anchor, STR_UNDEF, MAX_STR_AF_ANCHOR); \
+}
+
+#define _INIT_TMODLITBA1(a) {\
+	_INIT_ANCHOR_AND_FILE(a.popis); \
+	_INIT_ANCHOR_AND_FILE(a.hymnus); \
+	_INIT_ANCHOR_AND_FILE(a.antifona1); \
+	_INIT_ANCHOR_AND_FILE(a.zalm1); \
+	_INIT_ANCHOR_AND_FILE(a.antifona2); \
+	_INIT_ANCHOR_AND_FILE(a.zalm2); \
+	_INIT_ANCHOR_AND_FILE(a.antifona3); \
+	_INIT_ANCHOR_AND_FILE(a.zalm3); \
+	_INIT_ANCHOR_AND_FILE(a.kcitanie); \
+	_INIT_ANCHOR_AND_FILE(a.kresponz); \
+	_INIT_ANCHOR_AND_FILE(a.benediktus); \
+	_INIT_ANCHOR_AND_FILE(a.prosby); \
+	_INIT_ANCHOR_AND_FILE(a.modlitba); \
+};
+
+#define _INIT_TMODLITBA2(a) {\
+	_INIT_ANCHOR_AND_FILE(a.popis); \
+	_INIT_ANCHOR_AND_FILE(a.hymnus); \
+	_INIT_ANCHOR_AND_FILE(a.antifona1); \
+	_INIT_ANCHOR_AND_FILE(a.zalm1); \
+	_INIT_ANCHOR_AND_FILE(a.antifona2); \
+	_INIT_ANCHOR_AND_FILE(a.zalm2); \
+	_INIT_ANCHOR_AND_FILE(a.antifona3); \
+	_INIT_ANCHOR_AND_FILE(a.zalm3); \
+	_INIT_ANCHOR_AND_FILE(a.kcitanie); \
+	_INIT_ANCHOR_AND_FILE(a.kresponz); \
+	_INIT_ANCHOR_AND_FILE(a.modlitba); \
+};
 
 #define Log_struktura_dm Log("  <dm>"); Log
 void Log(_struct_dm g);
 #define Log_struktura_rok Log("  <rok>"); Log
 void Log(_struct_lrok r);
-#define Log_struktura_tm Log("  <tm>"); Log
+#define Log_struktura_tm1 Log("  <tm1>"); Log
 void Log(struct tmodlitba1);
+#define Log_struktura_tm2 Log("  <tm2>"); Log
+void Log(struct tmodlitba2);
 
 int _encode_spol_cast(int, int, int);
 int _encode_spol_cast(int, int);

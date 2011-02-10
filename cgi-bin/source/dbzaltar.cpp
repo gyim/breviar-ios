@@ -5379,9 +5379,9 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 		/* prik - nie je prikazany */
 		_global_svaty1.prik = _global_svaty2.prik = _global_svaty3.prik = NEPRIKAZANY_SVIATOK;
 		/* meno - neurcene */
-		strcpy(_global_svaty1.meno, "");
-		strcpy(_global_svaty2.meno, "");
-		strcpy(_global_svaty3.meno, "");
+		mystrcpy(_global_svaty1.meno, STR_EMPTY, MENO_SVIATKU); /* prerobene na mystrcpy, 2003-08-13 */
+		mystrcpy(_global_svaty2.meno, STR_EMPTY, MENO_SVIATKU);
+		mystrcpy(_global_svaty3.meno, STR_EMPTY, MENO_SVIATKU);
 		/* spolcast - neurcena */
 		_global_svaty1.spolcast = _global_svaty2.spolcast = _global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 		Log("nastavil som _global_svaty[1,2,3] na default (bud neurcene alebo z _global_den)\n");

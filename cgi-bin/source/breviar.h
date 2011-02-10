@@ -11,6 +11,7 @@
 /*   2003-07-01a.D. | void main je zakomentovane ak linux      */
 /*   2003-07-14a.D. | zmena void main -> int main (gcc v3.2.2 )*/
 /*   2003-08-07a.D. | pridane _global_opt5                     */
+/*   2003-08-13a.D. | pridane _type a _global_modl pre posv.cit*/
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -69,7 +70,9 @@ extern _type_invitatorium *_global_modl_invitatorium_ptr;
 /*_type_invitatorium  _global_modl_invitatorium;*/
 #define _global_modl_invitatorium (*_global_modl_invitatorium_ptr)
 
-/* extern _type_posv_citanie  _global_modl_posv_citanie; */
+/* 2003-08-13 pridane posvatne citanie */
+extern _type_posv_citanie *_global_modl_posv_citanie_ptr;
+#define _global_modl_posv_citanie (*_global_modl_posv_citanie_ptr)
 
 extern _type_ranne_chvaly *_global_modl_ranne_chvaly_ptr;
 /*_type_ranne_chvaly  _global_modl_ranne_chvaly;*/

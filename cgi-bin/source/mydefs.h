@@ -50,7 +50,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2003-08-11"
+#define BUILD_DATE "2003-08-13"
 
 /* 2003-07-15 odpoznamkovane */
 #define RUN_MODLITBA_CEZ_DEN
@@ -104,7 +104,7 @@ void updateUnCGIName(void);
  * 05/06/2000A.D.: FILE_PATH(a) prerobene (len pre Windows-mod sa nieco zmeni);
  *                 povodne bolo FILE_PATH(a) "include\\"##a,
  *                 ibaze vsade (jedine breviar.cpp) sa pouzivalo
- *                 FILE_PATH("");
+ *                 FILE_PATH(STR_EMPTY);
  * nove FILE_PATH(a): 
  *         pre ostatne mody:
  *                 #define FILE_PATH "../include/" (linux)

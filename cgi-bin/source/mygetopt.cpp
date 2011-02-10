@@ -17,6 +17,7 @@
 /*                    "header: deklaracie (premenne extern)",  */
 /*                    "c-fajl: definicie".                     */
 /*   06/09/2001A.D. | tento popis                              */
+/*   2003-08-13a.D. | pridany #include "mystring.h"            */
 /*                                                             */
 /***************************************************************/
 
@@ -51,6 +52,7 @@ USA.  */
 #include <stdio.h>
 #include <stdlib.h>
 #include "mygetopt.h"
+#include "mystring.h"
 
 //#ifndef _
 #define _(msgid)	(msgid)
@@ -589,7 +591,7 @@ int _getopt_internal(
 		fprintf (stderr, _("%s: unrecognized option `%c%s'\n"),
 			 argv[0], argv[optind][0], nextchar);
 	    }
-	  nextchar = (char *) "";
+	  nextchar = (char *) STR_EMPTY;
 	  optind++;
 	  optopt = 0;
 	  return '?';

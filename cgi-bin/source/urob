@@ -2,7 +2,7 @@ date
 chmod u=rwx *.*
 make
 cp uncgi uncgi.cgi
-g++ breviar.cpp dbzaltar.cpp liturgia.cpp mygetopt.cpp mylog.cpp myhpage.cpp myexpt.cpp cgiutils.cpp myconf.cpp mydefs.cpp mystring.cpp
+g++ -Wall breviar.cpp dbzaltar.cpp liturgia.cpp mygetopt.cpp mylog.cpp myhpage.cpp myexpt.cpp cgiutils.cpp myconf.cpp mydefs.cpp mystring.cpp
 mv a.out l.cgi
 chmod u=rw *.c
 chmod u=rw *.cpp
