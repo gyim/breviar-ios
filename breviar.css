@@ -70,3 +70,8 @@ ul.level0 { list-style-type: none; }
 ul.level1 { list-style-type: disc; }
 ul.level2 { list-style-type: circle; }
 ul.level3 { list-style-type: square; }
+
+h1 { font-size: 180%; }
+h2 { font-size: 150%; }
+h3 { font-size: 100%; }
+h4 { font-size: 100%; }
