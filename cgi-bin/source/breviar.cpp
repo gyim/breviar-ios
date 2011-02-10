@@ -4560,40 +4560,53 @@ void _main_batch_mode(
 				 */
 				if(r_from < r_to){
 					Log("batch mode: viacero rokov (%d-%d)...\n", r_from, r_to);
-
+					/* analyzujem prvy rok (r_from). potom pre jednotlive dni az do konca roka
+					 * robim: _rozbor_dna a _export_rozbor_dna_batch
+					 */
 					Log("rok %d...\n", r_from);
 					analyzuj_rok(r_from);
 					for(i = poradie(d_from, m_from + 1, r_from); i <= poradie(31, MES_DEC + 1, r_from); i++){
 						Log("%d. den v roku %d...\n", i, r_from);
-						// xxx
+						_rozbor_dna(por_den_mesiac(i, r_from), r_from);
+						_export_rozbor_dna_batch(EXPORT_DNA_JEDEN_DEN);
 					}
-
+					
+					/* teraz pre roky (r_from + 1) az (r_to - 1) robim to, co predtym,
+					 * cize analyzujem rok a pre vsetky dni - tentokrat pre cele roky, 
+					 * od 1.1. do 31.12. - robim _rozbor_dna a _export_rozbor_dna_batch
+					 */
 					for(int y = (r_from + 1); y < r_to; y++){
 						Log("rok %d...\n", y);
 						analyzuj_rok(y);
 						for(i = poradie(1, MES_JAN + 1, y); i <= poradie(31, MES_DEC + 1, y); i++){
 							Log("%d. den v roku %d...\n", i, y);
-							// xxx
+							_rozbor_dna(por_den_mesiac(i, y), y);
+							_export_rozbor_dna_batch(EXPORT_DNA_JEDEN_DEN);
 						}
-						// xxx
+						Log("...(rok %d) skoncil.\n", y);
 					}
 
+					/* napokon analyzujem posledny rok (r_to). pre jednotlive dni az do 
+					 * dna (d_to, m_to) robim: _rozbor_dna a _export_rozbor_dna_batch
+					 */
 					Log("rok %d...\n", r_to);
 					analyzuj_rok(r_to);
 					for(i = poradie(1, MES_JAN + 1, r_to); i <= poradie(d_to, m_to + 1, r_to); i++){
 						Log("%d. den v roku %d...\n", i, r_to);
-						// xxx
+						_rozbor_dna(por_den_mesiac(i, r_to), r_to);
+						_export_rozbor_dna_batch(EXPORT_DNA_JEDEN_DEN);
 					}
 				}/* r_from < r_to */
 				else{
 					Log("batch mode: vramci jedneho roka (%d)...\n", r_from);
-
+					/* analyzujem ten jeden rok. potom pre jednotlive dni robim:
+					 * _rozbor_dna a _export_rozbor_dna_batch
+					 */
 					analyzuj_rok(r_from);
 					for(i = poradie(d_from, m_from + 1, r_from); i <= poradie(d_to, m_to + 1, r_to); i++){
 						Log("%d. den v roku %d...\n", i, r_from);
 						_rozbor_dna(por_den_mesiac(i, r_from), r_from);
 						_export_rozbor_dna_batch(EXPORT_DNA_JEDEN_DEN);
-						// xxx
 					}
 				}/* r_from == r_to */
 
@@ -6089,6 +6102,7 @@ _main_SIMULACIA_QS:
 				/* pridany batch mode; 2003-07-04 */
 				case PRM_BATCH_MODE:
 					_main_LOG_to_Export("spustam _main_batch_mode();\n");
+					Export("<center><h2>Batch mode (dávkové použitie)</h2></center>\n");
 					/* vyuzivam parametre, ktore boli nastavene */
 					_main_batch_mode(
 						/* vyuzite parametre sa sice volaju haluzne, ale sluzia pre
@@ -6098,7 +6112,20 @@ _main_SIMULACIA_QS:
 						pom_DEN, pom_MESIAC, pom_ROK,
 						pom_ROK_FROM, pom_ROK_TO, pom_MODLITBA, 
 						pom_DALSI_SVATY, pom_LINKY);
+						/* naimplementovana 2003-07-07 */
 					_main_LOG_to_Export("spat po skonceni _main_batch_mode();\n");
+					Export("<p>Výsledný batch skript (dávkový súbor) sa nachádza v súbore <a href=\"%s\">%s</a>.<br>\n",
+						name_batch_file, name_batch_file);
+					Export("Po spustení tento skript vygeneruje modlitby pre dané obdobie \n");
+					Export("do súborov <span class=\"tt\">yyyy-mm-dd_xp.htm</span>, kde význam \n");
+					Export("jednotlivých èastí mena súboru je nasledovný:\n");
+					Export("<ul class=\"level1\">\n");
+					Export("<li><span class=\"parameter\">yyyy</span> | rok</li>\n");
+					Export("<li><span class=\"parameter\">mm</span> | mesiac (napr. <span class=\"value\">05</span> pre máj)</li>\n");
+					Export("<li><span class=\"parameter\">dd</span> | deò (napr. <span class=\"value\">07</span>)</li>\n");
+					Export("<li><span class=\"parameter\">x</span> | poradie svätého (<span class=\"value\">0</span> až <span class=\"value\">4</span>)</li>\n");
+					Export("<li><span class=\"parameter\">p</span> | modlitba (<span class=\"value\">r</span> = ranné chvály, <span class=\"value\">v</span> = vešpery)</li>\n");
+					Export("</ul>\n");
 					break;
 				default:
 					Export("Interná chyba programu.\n");
