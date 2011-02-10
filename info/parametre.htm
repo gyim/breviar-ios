@@ -72,6 +72,8 @@ a v takom prípade je moné voli ktorúko¾vek ¾ubovo¾nú spomienku, resp. <span cl
 <li><span class="parameter">l</span> (len pre command line) | Monos, èi zobrazova hypertextové linky (default: nie)</li>
 <li><span class="parameter">e</span> (len pre command line) | Názov súboru, do ktorého sa 
 má exportova (DOS default: <span class="tt">export.htm</span>, linux default: stdout)</li>
+<li><span class="parameter">a</span> (len pre command line) | Monos, èi v prípade existencie
+súboru pre export do tohto súboru pridáva (teda neprepísa ho - append; default: nie - èie prepísa)</li>
 
 </ul>
 
@@ -89,9 +91,11 @@ Naviac, command line verzia vypíše chybové hlásenie na stderr.
 Za oboma úèelmi sú uvedené nasledovné príkady pouitia command-line programu.
 
 <ul class="level1">
-<li><span class="tt">lh.exe -qpdt -d30 -m4 -r2002 -pmrch -ic:\breviar\ -emoja.htm</span><br>
+<li><span class="tt">lh.exe -qpdt -d30 -m4 -r2002 -pmrch -ic:\breviar\ -emoja.htm -a1</span><br>
 Program vygeneruje do súboru <span class="tt">moja.htm</span>
 modlitbu rannıch chvál na 30. apríla 2002. 
+Ak súbor <span class="tt">moja.htm</span> existuje, neprepíše sa, ale program pridá modlitbu
+na jeho koniec (append).
 Pritom <span class="tt">include</span> adresár sa nachádza v adresári <span class="tt">c:\breviar\</span>
 (meno programu je <span class="tt">lh.exe</span>). (Pouitie v DOSe/Windows.)
 </li>

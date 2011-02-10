@@ -12,6 +12,7 @@
 /*                    tento popis                              */
 /*   2003-07-02a.D. | pridane HTML konstanty (casti stringov)  */
 /*   2003-07-04a.D. | pridane konstanty pre batch mode         */
+/*   2003-07-08a.D. | pridana konstanta MODL_OPT_APPEND        */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -323,6 +324,14 @@ extern int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPT4 "MODL_OPT4"
 #else
 	#define STR_MODL_OPT4 "o4"
+#endif
+
+/* append pridany 2003-07-08, bude v _global_opt_append; nemal by byt pouzity na webe */
+#define MODL_OPT_APPEND 35
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPT_APPEND "MODL_OPT_APPEND"
+#else
+	#define STR_MODL_OPT_APPEND "a"
 #endif
 
 /* global */

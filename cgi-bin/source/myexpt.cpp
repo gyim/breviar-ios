@@ -12,6 +12,7 @@
 /*                    DEBUG, teraz EXPORT_TO_FILE,             */
 /*                    pridal som EXPORT_TO_STDOUT              */
 /*   06/09/2001A.D. | tento popis                              */
+/*   2003-07-08a.D. | pridany append pre export (podla switchu)*/
 /*                                                             */
 /***************************************************************/
 
@@ -59,6 +60,10 @@ int initExport(void){
 		exportfile = fopen(FILE_EXPORT, "a+t");
 	}
 	else{
+		/* 2003-07-08 ani som netusil, ze som to spravil kedysi aj na append...
+		 * ale teraz som korektne pridal switch `a'
+		 */
+//		if(xxx)
 		/* novy fajl */
 		exportfile = fopen(FILE_EXPORT, "wt");
 	}

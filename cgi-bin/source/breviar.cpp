@@ -23,6 +23,7 @@
 /*                    kvoli prestupnym rokom (_main_tabulka)   */
 /*                  - pridane HTML_ elementy (mydefs.h)        */
 /*   2003-07-07a.D. | pridany batch mode (davkove spracovanie) */
+/*   2003-07-08a.D. | pridany parameter (option) `a' (append)  */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -185,8 +186,10 @@ int _global_opt1 = NIE;
 int _global_opt2 = MODL_ZALMY_ZO_SV;
 int _global_opt3;
 int _global_opt4 = ANO; /* pridana 05/04/2000A.D. */
+/* pridane 2003-07-08, append parameter */
+int _global_opt_append = NIE;
 
-/* globalna premenna, co obsahuje string vypisany na obsazovku */
+/* globalna premenna, co obsahuje string vypisany na obrazovku */
 char *_global_string;
 /*char _global_string[MAX_STR];*/
 char *_global_string2;
@@ -235,6 +238,8 @@ char pom_MODL_OPT1  [SMALL] = "";
 char pom_MODL_OPT2  [SMALL] = "";
 char pom_MODL_OPT3  [SMALL] = "";
 char pom_MODL_OPT4  [SMALL] = "";
+/* append pridany 2003-07-08, bude v _global_opt_append */
+char pom_MODL_OPT_APPEND  [SMALL] = "";
 char pom_DALSI_SVATY[SMALL] = "";
 /* tieto dalsie 3 pridane kvoli PRM_TABULKA, 15/03/2000A.D. */
 char pom_ROK_FROM   [SMALL] = "";
@@ -264,9 +269,15 @@ urlvariable param[MAX_VARIABLES];
 #define EMPTY_STR empty_str
 char empty_str[6] = "ÿNULL";
 
-char file_export[SMALL] = ""; /* nazov suboru, do ktoreho sa mozno exportuje
-										 * v pripade pouzitia switchu `e' pri getArgv();
-										 * pridane 13/03/2000A.D. */
+char file_export[SMALL] = ""; 
+/* nazov suboru, do ktoreho sa mozno exportuje
+ * v pripade pouzitia switchu `e' pri getArgv();
+ * pridane 13/03/2000A.D.
+ *
+ * ak je na jeho konci '+', tak sa appenduje;
+ * vyuzite pre switch -a (append), pozri dolu
+ * pre case SCRIPT_PARAM_FROM_ARGV, pridane 2003-07-08
+ */
 
 /* nasledovna pasaz pridana 05/06/2000A.D., a to pre 
  * pridany parameter `i' (include directory) */
@@ -2716,9 +2727,15 @@ void _export_rozbor_dna(int typ){
  */
 #define BATCH_COMMAND(a)	{ \
 	/* napokon to vyprintujeme do batch suboru, 2003-07-07 */\
-	fprintf(batch_file, "%s%dr.htm -x%d -pmrch\n", batch_command, a, a); /* ranne chvaly */\
-	fprintf(batch_file, "%s%dv.htm -x%d -pmv\n", batch_command, a, a); /* vespery */\
-	}
+	/* ak je nastaveny _global_opt_append, tak vsetko do 1 suboru, 2003-07-08 */\
+	if(_global_opt_append == YES){\
+		fprintf(batch_file, "%s -x%d -pmrch\n", batch_command, a, a); /* ranne chvaly */\
+		fprintf(batch_file, "%s -x%d -pmv\n", batch_command, a, a); /* vespery */\
+	}else{\
+		fprintf(batch_file, "%s%dr.htm -x%d -pmrch\n", batch_command, a, a); /* ranne chvaly */\
+		fprintf(batch_file, "%s%dv.htm -x%d -pmv\n", batch_command, a, a); /* vespery */\
+	}\
+}
 void _export_rozbor_dna_batch(int typ){
 /* poznamky bez uvedenia datumu su prevzate z _export_rozbor_dna; 2003-07-07 */
 
@@ -2735,12 +2752,22 @@ void _export_rozbor_dna_batch(int typ){
  *    (spomienka panny marie v sobotu)
  */
 	char batch_command[MAX_STR] = "";
-	/* pripravime si command line string pre dany datum */
-	sprintf(batch_command, "%s -i%s -qpdt -d%d -m%d -r%d -e%.4d-%.2d-%.2d_", 
-		name_binary_executable, include_dir, 
-		_global_den.den, _global_den.mesiac, _global_den.rok,
-		_global_den.rok, _global_den.mesiac, _global_den.den);
-
+	/* ak vypisovat do jednotlivych suborov, 2003-07-08 */
+	if(_global_opt_append != YES){
+		/* pripravime si command line string pre dany datum */
+		sprintf(batch_command, "%s -i%s -qpdt -d%d -m%d -r%d -e%.4d-%.2d-%.2d_", 
+			name_binary_executable, include_dir, 
+			_global_den.den, _global_den.mesiac, _global_den.rok,
+			_global_den.rok, _global_den.mesiac, _global_den.den);
+	}
+	/* v opacnom pripade je furt ten isty fajl, 2003-07-08,
+	 * pridame tam aj "-a1" = append */
+	else{
+		sprintf(batch_command, "%s -i%s -qpdt -d%d -m%d -r%d -a1 -e%s.htm", 
+			name_binary_executable, include_dir, 
+			_global_den.den, _global_den.mesiac, _global_den.rok,
+			_global_string); /* _global_string sa nastavi v _main_batch_mode(); */
+	}
 	/* pozor, hoci je nedela, predsa na nu mohlo pripadnut slavenie s vyssou
 	 * prioritou */
 	if((_global_den.denvt == DEN_NEDELA) ||
@@ -3511,13 +3538,15 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 	Log("opt3 == `%s' (%d)\n", pom_MODL_OPT3, _global_opt3);
 
 	/* option 4 */
-	if(equals(pom_MODL_OPT4, STR_ANO) || equals(pom_MODL_OPT4, "4")){
+	if(equals(pom_MODL_OPT4, STR_ANO) || equals(pom_MODL_OPT4, "1")){ /* 2003-07-08 opravene z "4" na "1" */
 		_global_opt4 = ANO;
 	}
 	else if(equals(pom_MODL_OPT4, STR_NIE) || equals(pom_MODL_OPT4, "0")){
 		_global_opt4 = NIE;
 	}/* inak ostane _global_opt4 default */
 	Log("opt4 == `%s' (%d)\n", pom_MODL_OPT4, _global_opt4);
+
+	/* option a (append), pridana 2003-07-08 - nastavi sa v getArgv(); */
 
 	/* kontrola udajov */
 	int result = SUCCESS;
@@ -4441,13 +4470,15 @@ void _main_batch_mode(
 	Log("opt3 == `%s' (%d)\n", pom_MODL_OPT3, _global_opt3);
 
 	/* option 4 */
-	if(equals(pom_MODL_OPT4, STR_ANO) || equals(pom_MODL_OPT4, "4")){
+	if(equals(pom_MODL_OPT4, STR_ANO) || equals(pom_MODL_OPT4, "1")){ /* 2003-07-08 opravene z "4" na "1" */
 		_global_opt4 = ANO;
 	}
 	else if(equals(pom_MODL_OPT4, STR_NIE) || equals(pom_MODL_OPT4, "0")){
 		_global_opt4 = NIE;
 	}/* inak ostane _global_opt4 default */
 	Log("opt4 == `%s' (%d)\n", pom_MODL_OPT4, _global_opt4);
+
+	/* option a (append), pridana 2003-07-08 - nastavi sa v getArgv(); */
 
 	/* kontrola udajov */
 	int result = SUCCESS;
@@ -4553,6 +4584,18 @@ void _main_batch_mode(
 				 *    nie Exportom do `export.htm', ale printf(name_batch_file)!
 				 * 3. that's all
 				 */
+
+				/* 2003-07-08
+				 * _global_string vyuzijeme na to, aby sme si medzi jednotlivymi dnami
+				 * posielali nazov suboru v pripade, ze chce vsetky modlitby
+				 * do 1 suboru (pouzil "-a1" = append)
+				 */
+				if(_global_opt_append == YES){
+					mystrcpy(_global_string, "", MAX_GLOBAL_STR); /* inicializacia */
+					sprintf(_global_string, "%.4d-%.2d-%.2d_%.4d-%.2d-%.2d", 
+							r_from, m_from, d_from, r_to, m_to, d_to);
+				}
+				//xxx
 
 				/* 2003-07-07 
 				 * _struct_den_mesiac je typ, ktory vrati _rozbor_dna();
@@ -4829,9 +4872,11 @@ int getArgv(int argc, char **argv){
 	 * 2003-07-04: pridane nasledovne parametre:
 	 *            `n' (name of binary executable) -> name_binary_executable
 	 *            `b' (name of generated batch file, analogia exportu, `e') -> name_batch_file
+	 * 2003-07-08: pridany nasledovny parameter:
+	 *            `a' (append) aby pri exportovani do suboru (-e) appendoval, nie prepisal subor
 	 *            
 	 */
-	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::1::2::3::4::5::h::e::f::g::l::i::\?::b::n::", MAX_STR);
+	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::1::2::3::4::5::a::h::e::f::g::l::i::\?::b::n::", MAX_STR);
 	/* tie options, ktore maju za sebou : maju povinny argument;
 	 *	ak maju :: tak maju volitelny */
 
@@ -4987,6 +5032,22 @@ int getArgv(int argc, char **argv){
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
 
+				/* append pridany 2003-07-08, bude v _global_opt_append */
+				case 'a': /* MODL_OPT_APPEND */
+					/* znamena osmy parameter */
+					if(optarg != NULL){
+						mystrcpy(pom_MODL_OPT_APPEND, optarg, SMALL);
+					}
+					/* option a (append), pridana 2003-07-08 */
+					if(equals(pom_MODL_OPT_APPEND, STR_ANO) || equals(pom_MODL_OPT_APPEND, "1")){
+						_global_opt_append = ANO;
+					}
+					else if(equals(pom_MODL_OPT_APPEND, STR_NIE) || equals(pom_MODL_OPT4, "0")){
+						_global_opt_append = NIE;
+					}/* inak ostane _global_opt_APPEND default */
+					Log("opt_append == `%s' (%d)\n", pom_MODL_OPT_APPEND, _global_opt_append);
+					Log("option %c with value `%s'\n", c, optarg); break;
+
 				case 'q': /* QUERY_TYPE */
 					if(optarg != NULL){
 						mystrcpy(pom_QUERY_TYPE, optarg, MAX_POM_QUERY_TYPE);
@@ -5025,6 +5086,8 @@ int getArgv(int argc, char **argv){
 					printf("\tb  batch mode (davkove spracovanie), nazov vystupneho davkoveho suboru\n");
 					printf("\tn  nazov binarky (tohto suboru, napr. lh.exe) pre batch mode\n");
 					printf("\th, ?  tento help \n");
+					/* pridane 2003-07-08 */
+					printf("\ta  (append) pri exportovani do suboru (-e) neprepisuje subor\n");
 					/* pridane 2003-06-27; prave prva uvedena linka sposobuje problem (nefunguju detaily pre spomienku pm v sobotu) */
 					printf("examples |\n");
 					printf("\tlh.exe -i..\\..\\..\\ -qpsqs -s\"qt=pdt&d=12&m=7&r=2003\"\n");
@@ -5774,6 +5837,7 @@ void main(int argc, char **argv){
 	_global_opt2 = MODL_ZALMY_ZO_SV;
 	_global_opt3;
 	_global_opt4 = ANO;
+	_global_opt_append = NIE;
 	strcpy(pom_QUERY_TYPE , "");
 	strcpy(pom_DEN        , "");
 	strcpy(pom_MESIAC     , ""); 
@@ -5905,6 +5969,13 @@ void main(int argc, char **argv){
 					Log("continuing to export in FILE_EXPORT (`%s')...\n", FILE_EXPORT);
 				}
 				else{
+					/* pridane 2003-07-08 */
+					if(_global_opt_append == YES){
+						/* pridame na koniec nazvu suboru "+" aby to vedel initExport() */
+						strcat(file_export, "+");
+						Log("budem appendovat (_global_opt_append == YES)...\n");
+					}
+					/* a napokon puovodna pasaz pred 2003-07-08 */
 					if(initExport(file_export) == SUCCESS){
 						Log("initExport(`%s'): success\n", file_export);
 						hlavicka("Liturgia hodín");
@@ -6125,6 +6196,19 @@ _main_SIMULACIA_QS:
 					Export("<li><span class=\"parameter\">dd</span> | deò (napr. <span class=\"value\">07</span>)</li>\n");
 					Export("<li><span class=\"parameter\">x</span> | poradie svätého (<span class=\"value\">0</span> až <span class=\"value\">4</span>)</li>\n");
 					Export("<li><span class=\"parameter\">p</span> | modlitba (<span class=\"value\">r</span> = ranné chvály, <span class=\"value\">v</span> = vešpery)</li>\n");
+					Export("</ul>\n");
+					/* pridane 2003-07-08 */
+					Export("<p>V prípade, že je použitý parameter <span class=\"parameter\">a</span> (append), \n");
+					Export("bude vytvorený len jeden súbor s nasledovným menom:\n");
+					Export("<span class=\"tt\">yyyy-mm-dd_YYYY-MM-DD.htm</span>, kde význam \n");
+					Export("jednotlivých èastí mena súboru je nasledovný:\n");
+					Export("<ul class=\"level1\">\n");
+					Export("<li><span class=\"parameter\">yyyy</span> | rok poèiatoèného dátumu</li>\n");
+					Export("<li><span class=\"parameter\">mm</span> | mesiac poèiatoèného dátumu</li>\n");
+					Export("<li><span class=\"parameter\">dd</span> | deò poèiatoèného dátumu</li>\n");
+					Export("<li><span class=\"parameter\">YYYY</span> | rok koncového dátumu</li>\n");
+					Export("<li><span class=\"parameter\">MM</span> | mesiac koncového dátumu</li>\n");
+					Export("<li><span class=\"parameter\">DD</span> | deò koncového dátumu</li>\n");
 					Export("</ul>\n");
 					break;
 				default:
