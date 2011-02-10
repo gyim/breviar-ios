@@ -43,6 +43,7 @@ a { font-family: Verdana, Tahoma, Georgia, Sans Serif; color: #000000; text-deco
 a:hover { color: #fff1cc; background-color: #800000; text-decoration:none; }
 a:active { color: #fff1cc; text-decoration: underline; }
 a img { border: none }
+a.explain { color: #a05000; font-size: 100%; }
 
 table { color: #505000; }
 tr.paragraph { text-indent: 3em; line-height: 120%; }
@@ -71,6 +72,8 @@ ul.level0 { list-style-type: none; }
 ul.level1 { list-style-type: disc; }
 ul.level2 { list-style-type: circle; }
 ul.level3 { list-style-type: square; }
+
+li { font-size: 90%; }
 
 h1 { font-size: 180%; }
 h2 { font-size: 150%; }

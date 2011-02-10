@@ -1,12 +1,24 @@
-/* tento subor obsahuje opravene chyby s datumom opravy */
-----------zaciatok----------
+/* tento súbor obsahuje opravené chyby s dátumom opravy,
+ * èi u ide o zmeny v zdrojovıch textoch modlitieb (adresár include),
+ * alebo priamo v zdrojovıch textoch programu. 2003-07-16a.D.
+ */
+----------zaèiatok----------
+2003-07-15: oprava v texte 1. vešpier z nedele 3. tıdòa altára:
+-	include/_3ne.htm, BEGIN:_3NE1_PROSBY: "Jeiš Kristus" -> "Kristus"
+	zaslal Mário Bosı <medus@katarinka.sk> (ïakujem)
+-	mybase.cpp a mybase.h sú odstránené z projektu (nepouívané)
+-	všetky texty obsahujú referenciu na CSS súbor breviar.css
+	(pre web je potrebné, aby tam bolo "/breviar.css")
+-	uncgi.c - zmenená pouitá verzia (1.10),
+	odstránené problémy pri kompilovaní na Red Hat linuxe, gcc v3.2.2
+	(predtım kompilované na debian linuxe, gcc 2.95).
 2003-07-01: dalšie opravy v kóde:
--	lubovolná spomienka panny márie v sobotu: 
-	u je moné stlacit tlacidlo "Detaily" (predtım to zobrazovalo chybu)
+-	¾ubovo¾ná spomienka Panny Márie v sobotu: 
+	u je moné stlaèi tlaèidlo "Detaily..." (predtım to zobrazovalo chybu)
 2003-06-30: opravené nejaké chyby a dalšie zmeny:
 -	sv.Peter a sv.Pavol: bol problém s prvımi vešperami,
-	ked tento sviatok padol na nedelu (cie v r. 2003)
--	spomienka nepoškvrneného srdca panny márie (sobota po srdci jeišovom):
+	ked tento sviatok padol na nede¾u (èie v r. 2003)
+-	spomienka Nepoškvrneného srdca Panny Márie (sobota po Najsv. Srdci Jeišovom):
 	precedencia sv. Ireneja (2003-06-28) opravená.
 -	prerobená pätka stránok, zobrazuje build (BUILD_DATE)
 	a nezobrazuje typ kódovania.
@@ -25,7 +37,7 @@
 	rok 1 po Kr. Dátum 1.1.1 pred Kr. má JD 1721058 a dátum 1.1.1 po Kr. 
 	má JD 1721424. Údaje som èerpal z publikácie Encyklopédia Astronómie, 
 	Vydavate¾stvo Obzor, Bratislava 1987."
-	zaslal Stanislav Vrba <stanislavvrba@kiwwi.sk>, vdaka.
+	zaslal Stanislav Vrba <stanislavvrba@kiwwi.sk>, vïaka.
 2002-01-22: include/ozz.htm: "zotrel sizy" --> "zotrel slzy"
 -	zmeneny format datumu podla normy ISO 8601
 -	pridana liturgia na 9. augusta (sv. Edita Stein) podla casopisu Liturgia 37 (1/2000)
@@ -54,27 +66,9 @@
 2000-09-14: include/sc_ap.htm: pridane kotvy SCAP_vMAGNIFIKAT a SCAP_rBENEDIKTUS
 2000-07-26: dodatok/eotcenas.htm: "hallowed by thy name" --> "hallowed be thy name"
 2000-07-24: include/z122.htm: "Pokoj s tebou" --> spravne uvodzovky
--	vsetky adresy dane na videky@breviar.sk
--	generovana modlitba ma v hlavicke <style>...</style>,
+-	všetky e-mailové adresy nastavené na videky@breviar.sk
+-	generovaná modlitba má v hlavièke <style>...</style>,
 	zmena v source/myhpage.cpp::hlavicka()
--	zmena v lhwin: (pozor! nemenit subory .rc ani resource.h!)
-	- pridany subor lhwin/mybuild.h (aj do projektu)
-	- na zaciatok lhwin.rc treba dat include, potom cast lhwin.rc:
-		#include "mybuild.h" /* vlozene 24/07/2000A.D. kvoli DATUM_BUILDU */
-		...
-		    LTEXT           DATUM_BUILDU,IDC_STATIC,85,30,58,8
-		...
-		    EDITTEXT        IDC_EDIT_export,220,34,100,12,ES_AUTOHSCROLL
-		#ifndef DUURKO
-					 | WS_DISABLED
-		#endif
-					,WS_EX_ACCEPTFILES
-		...
-		IDD_lhwin_DIALOG DIALOGEX 0, 0, 342, 270
-		STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
-		#ifdef DUURKO
-			| WS_MINIMIZEBOX 
-		#endif
 2000-07-06: include/sc_pn.htm: "e panne doprial víazstvo,ä" --> bez "ä" (SCPN_rHYMNUS)
 -	include/_3stv.htm, _3STVv_PROSBY: bol vymeneny BEGIN a END
 -	pridany adresar download/, subory index.htm a verzia.txt a tiez disk[1,2].zip

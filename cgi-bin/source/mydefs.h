@@ -16,6 +16,7 @@
 /*   2003-07-09a.D. | pridane #define HTML_AMPERSAND "&amp;"   */
 /*   2003-07-15a.D. | zluceny s mybase.h, vycistene komentare  */
 /*                  - pridane HTML_BUTTON_LABEL_               */
+/*   2003-07-16a.D. | zmena WWW_ na ADD_WWW_PREFIX_            */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -213,8 +214,8 @@ extern int query_type; /* premenna obsahujuca PRM_... */
 
 /* nasleduju parametre z formularov pre vsetky typy dotazov,
  * kedysi bolo pre kazdy STR_... definovane WWW_STR_...,
- * teraz WWW_(STR_...) */
-#define WWW_(a) ("WWW_"##a)
+ * teraz ADD_WWW_PREFIX_(STR_...) */
+#define ADD_WWW_PREFIX_(a) ("WWW_"##a)
 
 /* nasleduju parametre z formularov pre dotaz PRM_DATUM */
 #define DEN 3 /* dotaz na konkretny datum */
