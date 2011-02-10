@@ -51,6 +51,7 @@
 /*                    dbzaltar.cpp::_SET_SPOLOCNE_VECI_NEDELA  */
 /*   2003-11-20a.D. | interpretParameter(): pre posv. citania  */
 /*                    pridane citanie1 a citanie2              */
+/*   2004-03-11a.D. | pre batch mod export parametrov          */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -62,9 +63,9 @@
 /*     napr. -qpbm -d1 -m1 -r2000 -f2 -g2 -p2001 -ba.txt       */
 /*                                                             */
 /***************************************************************/
-                                       
-#include <stdlib.h>                    
-#include <stdio.h>                     
+
+#include <stdlib.h>
+#include <stdio.h>
                                        
 #include "mystring.h" /* 31/03/2000A.D. */
 #include "myconf.h" /* 30/03/2000A.D. */
@@ -2954,19 +2955,24 @@ void _export_rozbor_dna(int typ){
  * behu spustia;
  * 2003-08-13 pre batch bude treba na miesto TUTOLA dodat modlitby cez den,
  * asi cez nejaku option (ci ranne chvaly a vespery, alebo vsetky modlitby 
+ *
+ * 2004-03-11 pre batch mod sa nevyexportovali niektore parametre,
+ * mailom upozornil Stanislav Èúzy <trobon@inMail.sk> 2004-03-06. Vdaka.
+ * pridane do BATCH_COMMAND
  */
 #define BATCH_COMMAND(a)	{ \
 	/* napokon to vyprintujeme do batch suboru, 2003-07-07 */\
 	/* ak je nastaveny _global_opt_append, tak vsetko do 1 suboru, 2003-07-08 */\
 	/* 2003-08-11 -Wall upozornila na too many arguments for format */\
+	/* 2004-03-11 pridane niektore dalsie parametre */\
 	if(_global_opt_append == YES){\
-		fprintf(batch_file, "%s -x%d -pmrch\n", batch_command, a); /* ranne chvaly */\
+		fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -x%d -pmrch\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* ranne chvaly */\
 		/* TUTOLA */\
-		fprintf(batch_file, "%s -x%d -pmv\n", batch_command, a); /* vespery */\
+		fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -x%d -pmv\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* vespery */\
 	}else{\
-		fprintf(batch_file, "%s%dr.htm -x%d -pmrch\n", batch_command, a, a); /* ranne chvaly */\
+		fprintf(batch_file, "%s%dr.htm -1%d -2%d -3%d -4%d -x%d -pmrch\n", batch_command, a, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* ranne chvaly */\
 		/* TUTOLA */\
-		fprintf(batch_file, "%s%dv.htm -x%d -pmv\n", batch_command, a, a); /* vespery */\
+		fprintf(batch_file, "%s%dv.htm -1%d -2%d -3%d -4%d -x%d -pmv\n", batch_command, a, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* vespery */\
 	}\
 }
 void _export_rozbor_dna_batch(int typ){
@@ -5387,7 +5393,7 @@ int getArgv(int argc, char **argv){
 					printf("\tProgram vytvara stranky (HTML vystup) pre Liturgiu hodin.\n");
 					/* build pridany 2003-07-04 */
 					printf("\tBuild: %s\n", BUILD_DATE);
-					printf("\t(c) 1999-2003 Juraj Videky <videky@breviar.sk>\n");
+					printf("\t(c) 1999-2004 Juraj Videky <videky@breviar.sk>\n");
 					printf("\n");
 					printf("\npouzitie:\n");
 					printf("\tlh [prepinac [hodnota]...]\n");
@@ -5403,7 +5409,11 @@ int getArgv(int argc, char **argv){
 					printf("\tp  %s (modlitba  napr. %s, %s, ...) \n", STR_MODLITBA, STR_MODL_RANNE_CHVALY, STR_MODL_VESPERY);
 					printf("\t\t (resp. rok do pre davkove spracovanie)\n"); /* pridane 2003-07-07 */
 					printf("\tx  %s (dalsi svaty, 1--3 resp. 4) \n", STR_DALSI_SVATY);
-					printf("\t1, 2, 3, 4  option 1, option 2, option 3, option 4 \n");
+					/* 2004-03-11, zlepseny popis */
+					printf("\t1  ci zobrazit nemenne casti modlitby (default 0) \n");
+					printf("\t2  ci brat zalmy zo dna (0) alebo z vlastnej casti (1) \n");
+					printf("\t3  ktoru spolocnu cast brat, ak je ich viac (0, 1, 2, 3) \n");
+					printf("\t4  ci zobrazit popis k modlitbe (strucny zivotopis, default 1) \n");
 					printf("\tf  rok from (resp. den do pre davkove spracovanie)\n");
 					printf("\tg  rok to (resp. mesiac do pre davkove spracovanie)\n");
 					printf("\tl  ci zobrazovat linky \n");
@@ -5416,6 +5426,7 @@ int getArgv(int argc, char **argv){
 					/* pridane 2003-07-08 */
 					printf("\ta  (append) pri exportovani do suboru (-e) neprepisuje subor\n");
 					/* pridane 2003-06-27; prave prva uvedena linka sposobuje problem (nefunguju detaily pre spomienku pm v sobotu) */
+					printf("\n\t   pri prepinacoch ano = 1, nie = 0\n");
 					printf("\npriklady pouzitia:\n");
 					printf("\tlh.exe -i..\\..\\..\\ -qpsqs -s\"qt=pdt&d=12&m=7&r=2003\"\n");
 					printf("\tlh -qpdt -d30 -m4 -r2002 -pmrch -ic:\\temp\\breviar\\ -emoja.htm\n");
