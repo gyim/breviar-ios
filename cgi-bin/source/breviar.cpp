@@ -46,6 +46,7 @@
 /*                  - odstranenie POKUS_24_02_2000             */
 /*                  - male zmeny v includeFile()               */
 /*                  - option5 dorobena aj do getForm()         */
+/*   2003-08-21a.D. | interpretParameter() pre posv. citania   */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -575,6 +576,7 @@ void includeFile(int type, char *paramname, char *fname, char *modlparam){
  *                 * OBD_VELKONOCNA_OKTAVA
  *                 * OBD_VELKONOCNE_TROJDNIE && (den == nedela)
  *                 * _ZOSLANIE_DUCHA_SV && MODL_VESPERY
+ * 2003-08-21a.D.: postupne pridavam case aj pre posvatne citania
  */
 #define je_post ((_global_den.litobd == OBD_POSTNE_I) || (_global_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && ((_global_den.denvt == DEN_PIATOK) || (_global_den.denvt == DEN_SOBOTA))))
 #define je_velka_noc ((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvt == DEN_NEDELA)))
@@ -764,6 +766,10 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_vespery.hymnus.file);
 				includeFile(type, paramname, path, _global_modl_vespery.hymnus.anchor);
 				break;
+			case MODL_POSV_CITANIE:
+				strcat(path, _global_modl_posv_citanie.hymnus.file);
+				includeFile(type, paramname, path, _global_modl_posv_citanie.hymnus.anchor);
+				break;
 			default:
 				/* tieto modlitby nemaju hymnus */
 				break;
@@ -799,6 +805,10 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_kompletorium.antifona1.file);
 				includeFile(type, paramname, path, _global_modl_kompletorium.antifona1.anchor);
 				break;
+			case MODL_POSV_CITANIE:
+				strcat(path, _global_modl_posv_citanie.antifona1.file);
+				includeFile(type, paramname, path, _global_modl_posv_citanie.antifona1.anchor);
+				break;
 			default:
 				/* tieto modlitby nemaju antifonu1 */
 				break;
@@ -826,6 +836,10 @@ void interpretParameter(int type, char *paramname){
 			case MODL_VESPERY:
 				strcat(path, _global_modl_vespery.antifona2.file);
 				includeFile(type, paramname, path, _global_modl_vespery.antifona2.anchor);
+				break;
+			case MODL_POSV_CITANIE:
+				strcat(path, _global_modl_posv_citanie.antifona2.file);
+				includeFile(type, paramname, path, _global_modl_posv_citanie.antifona2.anchor);
 				break;
 			default:
 				/* tieto modlitby nemaju antifonu2 */
@@ -855,6 +869,10 @@ void interpretParameter(int type, char *paramname){
 				includeFile(type, paramname, path, _global_modl_vespery.antifona3.anchor);
 				break;
 */
+			case MODL_POSV_CITANIE:
+				strcat(path, _global_modl_posv_citanie.antifona3.file);
+				includeFile(type, paramname, path, _global_modl_posv_citanie.antifona3.anchor);
+				break;
 			default:
 				/* tieto modlitby nemaju antifonu3 */
 				break;
@@ -890,6 +908,10 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_kompletorium.zalm1.file);
 				includeFile(type, paramname, path, _global_modl_kompletorium.zalm1.anchor);
 				break;
+			case MODL_POSV_CITANIE:
+				strcat(path, _global_modl_posv_citanie.zalm1.file);
+				includeFile(type, paramname, path, _global_modl_posv_citanie.zalm1.anchor);
+				break;
 			default:
 				/* tieto modlitby nemaju zalm1 */
 				break;
@@ -917,6 +939,10 @@ void interpretParameter(int type, char *paramname){
 			case MODL_VESPERY:
 				strcat(path, _global_modl_vespery.zalm2.file);
 				includeFile(type, paramname, path, _global_modl_vespery.zalm2.anchor);
+				break;
+			case MODL_POSV_CITANIE:
+				strcat(path, _global_modl_posv_citanie.zalm2.file);
+				includeFile(type, paramname, path, _global_modl_posv_citanie.zalm2.anchor);
 				break;
 			default:
 				/* tieto modlitby nemaju zalm2 */
@@ -946,6 +972,10 @@ void interpretParameter(int type, char *paramname){
 				includeFile(type, paramname, path, _global_modl_vespery.zalm3.anchor);
 				break;
 */
+			case MODL_POSV_CITANIE:
+				strcat(path, _global_modl_posv_citanie.zalm3.file);
+				includeFile(type, paramname, path, _global_modl_posv_citanie.zalm3.anchor);
+				break;
 			default:
 				/* tieto modlitby nemaju zalm3 */
 				break;

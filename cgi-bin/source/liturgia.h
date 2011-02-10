@@ -20,6 +20,7 @@
 /*   2003-08-11a.D. | void _init_dm zapoznamkovana             */
 /*   2003-08-13a.D. | pridane logy pre modlitbu cez den        */
 /*                  - pridane MODL_CEZ_DEN_VSETKY              */
+/*   2003-08-21a.D. | definicie pre posvatne citania           */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -46,14 +47,19 @@ struct _anchor_and_file{
 };
 typedef struct _anchor_and_file _struct_anchor_and_file;
 
+/* definicie pre ranne chvaly a vespery */
 #define rchvalospev  zalm2
 #define vchvalospev  zalm3
 #define magnifikat   benediktus
 
+/* definicie pre posvatne citania upravene 2003-08-21 */
+/* vers po psalmodii pred citaniami */
+#define	vers    	benediktus
+/* prve  citanie aj s responzoriom za nim */
 #define	citanie1	kcitanie
-#define	responz1	kresponz
-#define	citanie2	benediktus
-#define	responz2	prosby
+/* druhe citanie aj s responzoriom za nim */
+#define	citanie2	kresponz
+/* prosby ostavaju pre posvatne citania nedefinovane */
 
 struct tmodlitba1{
 	_struct_anchor_and_file popis     ; /* pridane 05/04/2000A.D. */
@@ -64,10 +70,10 @@ struct tmodlitba1{
 	_struct_anchor_and_file zalm2     ;
 	_struct_anchor_and_file antifona3 ;
 	_struct_anchor_and_file zalm3     ;
-	_struct_anchor_and_file kcitanie  ;
-	_struct_anchor_and_file kresponz  ;
-	_struct_anchor_and_file benediktus; /* antifona na benediktus/magnifikat */
-	_struct_anchor_and_file prosby    ;
+	_struct_anchor_and_file kcitanie  ; /* 1. citanie pre posvatne citanie */
+	_struct_anchor_and_file kresponz  ; /* 2. citanie pre posvatne citanie */
+	_struct_anchor_and_file benediktus; /* antifona na benediktus/magnifikat; vers po psalmodii pre posvatne citanie */
+	_struct_anchor_and_file prosby    ; /* pre posvatne citanie nedefinovane */
 	_struct_anchor_and_file modlitba  ;
 };
 typedef struct tmodlitba1 _type_ranne_chvaly;
@@ -216,11 +222,10 @@ extern const char *TEMPLAT[];
 #define PARAM_BENEDIKTUS   "BENEDIKTUS" /* antifona na benediktus */
 #define PARAM_PROSBY       "PROSBY"
 #define PARAM_MODLITBA     "MODLITBA"
-/* pridane 2003-08-06 */                                        
+/* pridane 2003-08-06, upravene 2003-08-21 */                                        
 #define PARAM_CITANIE1     "CITANIE1" /* vlastne KCITANIE */
-#define PARAM_RESPONZ1     "RESPONZ1" /* vlastne KRESPONZ */
-#define PARAM_CITANIE2     "CITANIE2" /* vlastne BENEDIKTUS */
-#define PARAM_RESPONZ2     "RESPONZ2" /* vlastne PROSBY */
+#define PARAM_CITANIE2     "CITANIE2" /* vlastne KRESPONZ */
+#define PARAM_VERS         "VERS"     /* vlastne BENEDIKTUS */
 /* dalsie parametre: specificke pre obdobie */
 /* Od nedele P novho zmrtvychvstania a§ do Druhej velkonocnej nedele vr tane,
  * ako aj na druh‚ veçpery sl vnosti Zoslania Ducha Sv„t‚ho */

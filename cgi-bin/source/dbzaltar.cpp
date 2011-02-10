@@ -24,6 +24,7 @@
 /*                  - zaltar() doplnena o modlitbu cez den     */
 /*                  - nastavovanie doplnkovej psalmodie        */
 /*                  - #define presunute do header-u dbzaltar.h */
+/*   2003-08-21a.D. | pokusy s posvatnymi citaniami (zalmy)    */
 /*                                                             */
 /* notes |                                                     */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
@@ -221,6 +222,10 @@ void _set_zalm1(int modlitba, const char *file, const char *anchor){
 			strcpy(_global_modl_prve_vespery.zalm1.file, file);
 			strcpy(_global_modl_prve_vespery.zalm1.anchor, anchor);
 			break;
+		case MODL_POSV_CITANIE:
+			strcpy(_global_modl_posv_citanie.zalm1.file, file);
+			strcpy(_global_modl_posv_citanie.zalm1.anchor, anchor);
+			break;
 	}/* switch(modlitba) */
 }
 
@@ -260,6 +265,10 @@ void _set_zalm2(int modlitba, const char *file, const char *anchor){
 			strcpy(_global_modl_prve_vespery.zalm2.file, file);
 			strcpy(_global_modl_prve_vespery.zalm2.anchor, anchor);
 			break;
+		case MODL_POSV_CITANIE:
+			strcpy(_global_modl_posv_citanie.zalm2.file, file);
+			strcpy(_global_modl_posv_citanie.zalm2.anchor, anchor);
+			break;
 	}/* switch(modlitba) */
 }
 
@@ -298,6 +307,10 @@ void _set_zalm3(int modlitba, const char *file, const char *anchor){
 		case MODL_PRVE_VESPERY:
 			strcpy(_global_modl_prve_vespery.zalm3.file, file);
 			strcpy(_global_modl_prve_vespery.zalm3.anchor, anchor);
+			break;
+		case MODL_POSV_CITANIE:
+			strcpy(_global_modl_posv_citanie.zalm3.file, file);
+			strcpy(_global_modl_posv_citanie.zalm3.anchor, anchor);
 			break;
 	}/* switch(modlitba) */
 }
@@ -759,6 +772,10 @@ void zaltar(int den, int tyzzal){
 				/* modlitba cez den */
 				/* druhe vespery */
 					_set_zalm2(MODL_VESPERY, "z114.htm", "ZALM114");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z1.htm", "ZALM1");
+					_set_zalm2(MODL_POSV_CITANIE, "z2.htm", "ZALM2");
+					_set_zalm3(MODL_POSV_CITANIE, "z3.htm", "ZALM3");
 					break;
 
 				case DEN_PONDELOK:
@@ -773,6 +790,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z11.htm", "ZALM11");
 					_set_zalm2(MODL_VESPERY, "z15.htm", "ZALM15");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z6.htm", "ZALM6");
+					_set_zalm2(MODL_POSV_CITANIE, "z9.htm", "ZALM9_I");
+					_set_zalm3(MODL_POSV_CITANIE, "z9.htm", "ZALM9_II");
 					break;
 
 				case DEN_UTOROK:
@@ -787,6 +808,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z20.htm", "ZALM20");
 					_set_zalm2(MODL_VESPERY, "z21.htm", "ZALM21");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z10.htm", "ZALM10_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z10.htm", "ZALM10_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z12.htm", "ZALM12");
 					break;
 
 				case DEN_STREDA:
@@ -801,6 +826,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z27.htm", "ZALM27_I");
 					_set_zalm2(MODL_VESPERY, "z27.htm", "ZALM27_II");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z18.htm", "ZALM18_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z18.htm", "ZALM18_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z18.htm", "ZALM18_III");
 					break;
 
 				case DEN_STVRTOK:
@@ -815,6 +844,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z30.htm", "ZALM30");
 					_set_zalm2(MODL_VESPERY, "z32.htm", "ZALM32");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z18.htm", "ZALM18_IV");
+					_set_zalm2(MODL_POSV_CITANIE, "z18.htm", "ZALM18_V");
+					_set_zalm3(MODL_POSV_CITANIE, "z18.htm", "ZALM18_VI");
 					break;
 
 				case DEN_PIATOK:
@@ -828,6 +861,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z41.htm", "ZALM41");
 					_set_zalm2(MODL_VESPERY, "z46.htm", "ZALM46");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z35.htm", "ZALM35_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z35.htm", "ZALM35_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z35.htm", "ZALM35_III");
 					break;
 
 				case DEN_SOBOTA:
@@ -837,6 +874,10 @@ void zaltar(int den, int tyzzal){
 					_set_zalm3(MODL_RANNE_CHVALY, "z117.htm", "ZALM117");
 				/* modlitba cez den */
 					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_HE");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z105.htm", "ZALM105_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z105.htm", "ZALM105_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z105.htm", "ZALM105_III");
 					break;
 
 				default: break;
@@ -852,6 +893,10 @@ void zaltar(int den, int tyzzal){
 				/* modlitba cez den */
 				/* druhe vespery */
 					_set_zalm2(MODL_VESPERY, "z115.htm", "ZALM115");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z104.htm", "ZALM104_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z104.htm", "ZALM104_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z104.htm", "ZALM104_III");
 					break;
 
 				case DEN_PONDELOK:
@@ -866,6 +911,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z45.htm", "ZALM45_I");
 					_set_zalm2(MODL_VESPERY, "z45.htm", "ZALM45_II");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z31.htm", "ZALM31_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z31.htm", "ZALM31_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z31.htm", "ZALM31_III");
 					break;
 
 				case DEN_UTOROK:
@@ -880,6 +929,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z49.htm", "ZALM49_I");
 					_set_zalm2(MODL_VESPERY, "z49.htm", "ZALM49_II");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z37.htm", "ZALM37_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z37.htm", "ZALM37_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z37.htm", "ZALM37_III");
 					break;
 
 				case DEN_STREDA:
@@ -894,6 +947,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z62.htm", "ZALM62");
 					_set_zalm2(MODL_VESPERY, "z67.htm", "ZALM67");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z39.htm", "ZALM39_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z39.htm", "ZALM39_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z52.htm", "ZALM52");
 					break;
 
 				case DEN_STVRTOK:
@@ -908,6 +965,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z72.htm", "ZALM72_I");
 					_set_zalm2(MODL_VESPERY, "z72.htm", "ZALM72_II");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z44.htm", "ZALM44_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z44.htm", "ZALM44_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z44.htm", "ZALM44_III");
 					break;
 
 				case DEN_PIATOK:
@@ -921,6 +982,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z116.htm", "ZALM116,1-9");
 					_set_zalm2(MODL_VESPERY, "z121.htm", "ZALM121");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z38.htm", "ZALM38_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z38.htm", "ZALM38_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z38.htm", "ZALM38_III");
 					break;
 
 				case DEN_SOBOTA:
@@ -932,6 +997,10 @@ void zaltar(int den, int tyzzal){
 					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_KAF");
 					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z61.htm", "ZALM61");
 					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z64.htm", "ZALM64");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z106.htm", "ZALM106_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z106.htm", "ZALM106_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z106.htm", "ZALM106_III");
 					break;
 
 				default: break;
@@ -949,6 +1018,10 @@ void zaltar(int den, int tyzzal){
 				/* modlitba cez den */
 				/* druhe vespery */
 					_set_zalm2(MODL_VESPERY, "z111.htm", "ZALM111");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z145.htm", "ZALM145pc_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z145.htm", "ZALM145pc_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z145.htm", "ZALM145pc_III");
 					break;
 
 				case DEN_PONDELOK:
@@ -963,6 +1036,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z123.htm", "ZALM123");
 					_set_zalm2(MODL_VESPERY, "z124.htm", "ZALM124");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z50.htm", "ZALM50_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z50.htm", "ZALM50_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z50.htm", "ZALM50_III");
 					break;
 
 				case DEN_UTOROK:
@@ -977,6 +1054,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z125.htm", "ZALM125");
 					_set_zalm2(MODL_VESPERY, "z131.htm", "ZALM131");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z68.htm", "ZALM68_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z68.htm", "ZALM68_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z68.htm", "ZALM68_III");
 					break;
 
 				case DEN_STREDA:
@@ -991,6 +1072,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z126.htm", "ZALM126");
 					_set_zalm2(MODL_VESPERY, "z127.htm", "ZALM127");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z89.htm", "ZALM89_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z89.htm", "ZALM89_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z89.htm", "ZALM89_III");
 					break;
 
 				case DEN_STVRTOK:
@@ -1005,6 +1090,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z132.htm", "ZALM132_I");
 					_set_zalm2(MODL_VESPERY, "z132.htm", "ZALM132_II");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z89.htm", "ZALM89_IV");
+					_set_zalm2(MODL_POSV_CITANIE, "z89.htm", "ZALM89_V");
+					_set_zalm3(MODL_POSV_CITANIE, "z90.htm", "ZALM90");
 					break;
 
 				case DEN_PIATOK:
@@ -1018,6 +1107,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z135.htm", "ZALM135_I");
 					_set_zalm2(MODL_VESPERY, "z135.htm", "ZALM135_II");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z69.htm", "ZALM69_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z69.htm", "ZALM69_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z69.htm", "ZALM69_III");
 					break;
 
 				case DEN_SOBOTA:
@@ -1027,6 +1120,10 @@ void zaltar(int den, int tyzzal){
 					_set_zalm3(MODL_RANNE_CHVALY, "z117.htm", "ZALM117");
 				/* modlitba cez den */
 					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_AIN");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z107.htm", "ZALM107_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z107.htm", "ZALM107_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z107.htm", "ZALM107_III");
 					break;
 
 				default: break;
@@ -1042,6 +1139,10 @@ void zaltar(int den, int tyzzal){
 				/* modlitba cez den */
 				/* druhe vespery */
 					_set_zalm2(MODL_VESPERY, "z112.htm", "ZALM112");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z24.htm", "ZALM24");
+					_set_zalm2(MODL_POSV_CITANIE, "z66.htm", "ZALM66_I");
+					_set_zalm3(MODL_POSV_CITANIE, "z66.htm", "ZALM66_II");
 					break;
 
 				case DEN_PONDELOK:
@@ -1056,6 +1157,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z136.htm", "ZALM136_I");
 					_set_zalm2(MODL_VESPERY, "z136.htm", "ZALM136_II");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z73.htm", "ZALM73_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z73.htm", "ZALM73_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z73.htm", "ZALM73_III");
 					break;
 
 				case DEN_UTOROK:
@@ -1070,6 +1175,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z137.htm", "ZALM137");
 					_set_zalm2(MODL_VESPERY, "z138.htm", "ZALM138");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z102.htm", "ZALM102_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z102.htm", "ZALM102_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z102.htm", "ZALM102_III");
 					break;
 
 				case DEN_STREDA:
@@ -1084,6 +1193,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z139.htm", "ZALM139_I");
 					_set_zalm2(MODL_VESPERY, "z139.htm", "ZALM139_II");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z103.htm", "ZALM103_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z103.htm", "ZALM103_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z103.htm", "ZALM103_III");
 					break;
 
 				case DEN_STVRTOK:
@@ -1098,6 +1211,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z144.htm", "ZALM144_I");
 					_set_zalm2(MODL_VESPERY, "z144.htm", "ZALM144_II");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z44.htm", "ZALM44_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z44.htm", "ZALM44_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z44.htm", "ZALM44_III");
 					break;
 
 				case DEN_PIATOK:
@@ -1111,6 +1228,10 @@ void zaltar(int den, int tyzzal){
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z145.htm", "ZALM145_I");
 					_set_zalm2(MODL_VESPERY, "z145.htm", "ZALM145_II");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z78.htm", "ZALM78_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z78.htm", "ZALM78_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z78.htm", "ZALM78_III");
 					break;
 
 				case DEN_SOBOTA:
@@ -1122,6 +1243,10 @@ void zaltar(int den, int tyzzal){
 					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_TAU");
 					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z45.htm", "ZALM45_I");
 					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z45.htm", "ZALM45_II");
+				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z78.htm", "ZALM78_IV");
+					_set_zalm2(MODL_POSV_CITANIE, "z78.htm", "ZALM78_V");
+					_set_zalm3(MODL_POSV_CITANIE, "z78.htm", "ZALM78_VI");
 					break;
 
 				default: break;
