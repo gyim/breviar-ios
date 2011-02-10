@@ -1,5 +1,5 @@
 #
-# @(#)Makefile	1.14 03/28/97
+# @(#)Makefile	1.16 07/18/01
 #
 # Makefile for "uncgi"
 #
@@ -7,21 +7,18 @@
 #
 # Set this to your favorite C compiler.
 #
-# CC=gcc -g
 CC=gcc -g
 
 #
 # Set this to the directory where your CGI scripts live.  Uncgi will look
 # there for backend scripts.
 #
-#SCRIPT_BIN=/home/fmph/videky/public_html/cgi-bin
 SCRIPT_BIN=/var/www/www.breviar.sk/cgi-bin
 
 #
 # Set this to the directory you'd like to install uncgi in, typically your
 # server's cgi-bin directory (if any)
 #
-#DESTDIR=/home/fmph/videky/public_html/cgi-bin
 DESTDIR=/var/www/www.breviar.sk/cgi-bin
 
 #
@@ -41,6 +38,20 @@ EXTENSION=.cgi
 #DEBUG=-DDEBUG
 
 #
+# Security-related options.
+#
+# -DEXECUTABLES_ONLY - Only execute scripts that have the execute flag
+#		       set in their file permissions (chmod +x).  If
+#		       this option isn't present, uncgi can run scripts
+#		       that start with "#!" even if they aren't marked
+#		       as executable in the filesystem.  Some sites find
+#		       this capability convenient as it allows scripts
+#		       to be maintained without command-line access
+#		       using FTP.
+#
+SECURITY=-DEXECUTABLES_ONLY
+
+#
 # If you don't want Un-CGI to spit out an error when there are no form
 # variables present to pass down to the backend program, uncomment this.
 #
@@ -53,7 +64,7 @@ NOQUERY=-DNO_QUERY_OK
 
 #############################################################################
 
-MYCFLAGS=-DSCRIPT_BIN='"$(SCRIPT_BIN)"' $(DEBUG) $(NOQUERY) $(SYSDEP)
+MYCFLAGS=-DSCRIPT_BIN='"$(SCRIPT_BIN)"' $(DEBUG) $(SECURITY) $(NOQUERY) $(SYSDEP)
 
 uncgi: uncgi.c
 	$(CC) $(CFLAGS) $(MYCFLAGS) -o $@ uncgi.c

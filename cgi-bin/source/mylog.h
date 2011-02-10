@@ -32,3 +32,4 @@ int __Log(char *fmt, ...);
 void Logint(int c);
 
 #endif /*__MYLOG_H_*/
+

@@ -17,3 +17,4 @@
 #define MAIL_ADDRESS "videky@breviar.sk"
 
 #endif /* _MYMAIL_H */
+

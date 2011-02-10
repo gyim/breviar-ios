@@ -13,6 +13,7 @@
 /*                  - tiez zapoznamkovane Kodovanie w-1250.    */
 /*   2003-07-01a.D. | citanie hlavicky zo suboru               */
 /*   2003-07-02a.D. | trosku zmenena patka                     */
+/*   2003-07-15a.D. | trosku zmenena hlavicka (ako _header.htm)*/
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -53,19 +54,14 @@ void hlavicka(char *title){
 		Log("  file `%s' not found\n", fname);
 		Log("so, another attempt: exporting hard coded header...\n");
 
+		/* 2003-07-15, zmenene na hlavicku pre css-ko; zrusene <style> */
 		Export("<html>\n<head>\n");
-		Export("<!-- Liturgia hodin, (c)1999, 2000 Juraj Videky -->\n");
 		Export("   <meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1250\">\n");
+		Export("   <meta name=\"Author\" content=\"Juraj Videky\">\n");
+		Export("   <link rel=\"stylesheet\" type=\"text/css\" href=\"/breviar.css\">\n");
 		Export("<title>%s</title>\n", title);
-		Export("</head>\n");
-		Export("<body text=\"#000000\" bgcolor=\"#FFFFF0\" link=\"#000000\" vlink=\"#000000\" alink=\"#000000\">\n");
-		/* pridane 24/07/2000A.D. */
-		Export("<style>\n");
-		Export("<!--\n");
-		Export("	A:link {color: Black;}\n");
-		Export("	A:hover {color: fuchsia;}\n");
-		Export("-->\n");
-		Export("</style>\n");
+		Export("</head>\n\n");
+		Export("<body>\n");
 		return;
 	}
 	while((c = fgetc(body)) != EOF){
@@ -129,3 +125,4 @@ void patka(void){
 }
 
 #endif /*__MYHPAGE_C_*/
+

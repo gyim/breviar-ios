@@ -8,6 +8,7 @@
 /*   29/10/1999A.D. | created                                  */
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-06-30a.D. | build (priliepa sa do hlavicky)          */
+/*   2003-07-15a.D. | RUN_MODLITBA_CEZ_DEN definovane          */
 /*                                                             */
 /***************************************************************/
 
@@ -16,9 +17,10 @@
 
 #include <stdio.h>
 
-#define BUILD_DATE "2003-07-08"
+#define BUILD_DATE "2003-07-15"
 
-//#define RUN_MODLITBA_CEZ_DEN
+/* 2003-07-15 odpoznamkovane */
+#define RUN_MODLITBA_CEZ_DEN
 /* 18/02/2000A.D.-- ci alokovat miesto pre a pouzivat
  * premenne pre modl_cez_den */
 
@@ -65,3 +67,4 @@ char* __code_char(char char_from, char char_to, char* str);
 #define decode_semicolon(str)	__code_char(CGI_SEMICOLON, 59, str)
 
 #endif /*__MYBASE_H_*/
+

@@ -9,6 +9,8 @@
 /*   30/03/2000A.D. | premenovane dnes --> breviar             */
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-07-01a.D. | void main je zakomentovane ak linux      */
+/*   2003-07-14a.D. | zmena void main -> int main (gcc v3.2.2 )*/
+/*                                                             */
 /*                                                             */
 /***************************************************************/
 
@@ -139,7 +141,11 @@ extern char *_global_string2;
 /* ------------------------------------------------------------------- */
 
 #ifndef OS_linux
-void main(int argc, char **argv);
+/* kedysi bolo void main;
+ * 2003-07-14, kvoli gcc version 3.2.2 20030222 (Red Hat Linux 3.2.2-5) christ-net.sk 
+ */
+int main(int argc, char **argv);
 #endif /* OS_linux */
 
 #endif /* __BREVIAR_H */
+

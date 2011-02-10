@@ -1,5 +1,5 @@
 /*
- * @(#)uncgi.c	1.33 11/24/97
+ * @(#)uncgi.c  1.36 07/18/01
  *
  * Unescape all the fields in a form and stick them in the environment
  * so they can be used without awful machinations.
@@ -7,8 +7,8 @@
  * Call with an ACTION such as:
  *	http://foo.bar.com/cgi-bin/uncgi/myscript/extra/path/stuff
  *
- * Uncgi will run "myscript" from the cgi-bin directory, and set PATH_INFO
- * to "/extra/path/stuff".
+ * Uncgi will run "myscript" from the SCRIPT_BIN directory (configured at
+ * compile time) and set PATH_INFO to "/extra/path/stuff".
  *
  * Environment variable names are "WWW_" plus the field name.
  *
@@ -25,8 +25,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-#define VERSION "1.9"
+#define VERSION "1.10"
 
 #ifdef __TURBOC__
 #include <process.h>
@@ -39,11 +40,8 @@
 #define NOPARAMS /**/
 #endif
 
-#ifndef __bsdi__
-/* odpoznamkovane: (duurko)
-extern char *sys_errlist[];
-*/
-#endif
+/* 2003-07-15, pridal duurko */
+#include <errno.h>
 extern int errno;
 
 #define PREFIX	"WWW_"
@@ -60,7 +58,7 @@ extern int errno;
 # define S_ISDIR(x) ((x & 0170000) == S_IFDIR)
 #endif
 
-char *id = "@(#)uncgi.c	1.33 11/24/97";
+char *id = "@(#)uncgi.c 1.36 07/18/01";
 
 /*
  * Convert two hex digits to a value.
@@ -121,8 +119,14 @@ static void
 http_head(NOPARAMS)
 {
 	puts("Content-type: text/html\n\n");
-	puts("<html><head><title>Chyba</title></head>");
-	puts("<body text=\"#000000\" bgcolor=\"#FFFFF0\" link=\"#000000\" vlink=\"#000000\" alink=\"#000000\">");
+
+	puts("<html>\n<head>\n");
+	puts("   <meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1250\">\n");
+	puts("   <meta name=\"Author\" content=\"Juraj Videky\">\n");
+	puts("   <link rel=\"stylesheet\" type=\"text/css\" href=\"/breviar.css\">\n");
+	puts("<title>Liturgia hodÌn - Chyba</title>\n");
+	puts("</head>\n");
+	puts("<body>");
 	puts("<center><h2>Chyba poËas vyhodnocovania</h2></center>");
 }
 
@@ -132,12 +136,12 @@ http_head(NOPARAMS)
 static void
 uncgi_tag(NOPARAMS)
 {
-	printf("<hr WIDTH=\"100%\">\n");
-	printf("<center><font size=-1>© 1999 Juraj VidÈky");
-	printf("(using <a href=\"http://www.");
-	printf("midwinter.com/~koreth/uncgi.html\">Un-CGI %s</a>)", VERSION);
-	printf("</font></center>\n");
-	puts("\n</body></html>");
+	printf("<hr>\n");
+	printf("<p class=\"patka\">© 1999-2003 <a href=\"mailto:videky@breviar.sk\">Juraj VidÈky</a>\n");
+	printf("<br>(using <a href=\"http://www.");
+	printf("midwinter.com/~koreth/uncgi.html\">Un-CGI %s</a>)\n", VERSION);
+	printf("</p>\n");
+	puts("\n</body>\n</html>");
 }
 
 /*
@@ -149,15 +153,37 @@ html_perror(str)
 {
 	http_head();
 
-	puts("<p>PoËas vyhodnocovania vaöej ûiadosti sa vyskytla nasleduj&uacute;ca chyba:");
+	puts("<p>PoËas vyhodnocovania vaöej ûiadosti sa vyskytla nasleduj˙ca chyba:");
 	puts("<blockquote>");
 	printf("%s: %s\n", str, sys_errlist[errno]);
 	puts("</blockquote>");
-	puts("<p>Pros&iacute;m sk&uacute;ste znova.");
+	puts("<p>ProsÌm sk˙ste znova.");
 	uncgi_tag();
 
 	exit(1);
 }
+
+#ifndef LIBRARY
+static void
+bad_path_error(char *msg)
+{
+        http_head();
+        printf("The path to the script was invalid: %s\n", msg);
+
+        exit(1);
+}
+
+
+static void
+no_suid_error()
+{
+        http_head();
+        printf("Execution of setuid scripts isn't permitted.\n");
+
+        exit(1);
+}
+#endif /* LIBRARY */
+
 
 /*
  * Stuff a URL-unescaped variable, with the prefix on its name, into the
@@ -379,7 +405,12 @@ runscript(shell, script)
 {
 	char    *argvec[4], **ppArg = argvec, *pz;
 
-	/*
+#ifdef EXECUTABLES_ONLY
+        if (access(script, X_OK))
+                html_perror("Script isn't executable");
+#endif
+
+        /*
 	 *  "shell" really points to the character following the "#!",
 	 *  not to the name of the shell program to run.  Skip any
 	 *  leading white space.
@@ -431,7 +462,7 @@ runscript(shell, script)
 			/*
 			 *  Trim off anything after the first white space char.
 			 */
-			while ((*pz != '\0') || (! isspace( *pz ))) {
+			while ((*pz != '\0') && (! isspace( *pz ))) {
 				pz++;
 			}
 
@@ -475,6 +506,12 @@ find_program(scriptdir, pathinfo)
 
 	while (pathinfo[proglen])
 	{
+		if (pathinfo[proglen] == '/' &&
+			! strncmp(pathinfo + proglen, "/../", 4))
+		{
+			bad_path_error(".. not allowed");
+		}
+
 		path[proglen + sdlen] = pathinfo[proglen];
 		proglen++;
 		if (pathinfo[proglen] == '/' || pathinfo[proglen] == '\0')
@@ -546,6 +583,7 @@ uncgi(NOPARAMS)
 	}
 #endif
 }
+
 
 #ifndef LIBRARY /* { */
 main(argc, argv)
@@ -661,13 +699,13 @@ main(argc, argv)
 		 * No PATH_INFO means no program to run.
 		 */
 		http_head();
-		puts("<p>Obsluznej rutinke neboli zadane parametre.");
-		puts("Nebolo povedane, aky sckript sa ma spustit po naplneni");
-		puts("systemovych premennych hodnotami z formulara.");
+		puts("<p>ObsluûnÈmu podprogramu neboli zadanÈ parametre.<br>");
+		puts("Nebolo povedanÈ, ak˝ skript sa m· spustiù po naplnenÌ");
+		puts("systÈmov˝ch premenn˝ch hodnotami z formul·ra.");
 		puts("<p>Whoever wrote this form doesn't know how to use");
 		puts("the 'uncgi' program, because they didn't tell it");
 		puts("what to run.");
-		puts("<h5>(Bummer.)</h5>");
+		puts("<h4>(Bummer.)</h4>");
 		uncgi_tag();
 
 		exit(0);
@@ -708,6 +746,7 @@ main(argc, argv)
 	 */
 	argvec[0] = program;
 	argvec[1] = NULL;
+
 	execv(program, argvec);
 
 #ifdef __MSDOS__ /* { */

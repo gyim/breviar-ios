@@ -12,6 +12,7 @@
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-07-02a.D. | pridana LINK_DEN_MESIAC_ROK_PRESTUP      */
 /*                    kvoli prestupnym rokom (iny _global_link)*/
+/*   2003-07-15a.D. | rozne definicie pre modlitbu cez den     */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -66,6 +67,8 @@ typedef struct tmodlitba1 _type_1vespery;
 /*typedef struct tmodlitba1 _type_posv_citanie; */
 
 struct tmodlitba2{
+	/* 2003-07-15, pridane _struct_anchor_and_file popis */
+	_struct_anchor_and_file popis     ; /* pridane 05/04/2000A.D. */
 	_struct_anchor_and_file hymnus    ;
 	_struct_anchor_and_file antifona1 ;
 	_struct_anchor_and_file zalm1     ;
@@ -80,6 +83,10 @@ struct tmodlitba2{
 typedef struct tmodlitba2 _type_cez_den_9;
 typedef struct tmodlitba2 _type_cez_den_12;
 typedef struct tmodlitba2 _type_cez_den_3;
+/* pre jednoduchsiu orientaciu pridane 2003-07-15 */
+typedef struct tmodlitba2 _type_cez_den_pred;
+typedef struct tmodlitba2 _type_cez_den_na;
+typedef struct tmodlitba2 _type_cez_den_po;
 
 struct tmodlitba3{
 	_struct_anchor_and_file hymnus    ;
@@ -126,15 +133,27 @@ typedef struct den_mesiac _struct_den_mesiac;
 #define MODL_DRUHE_KOMPLETORIUM 12
 /* formular s detailami ohladom generovania modlitby */
 #define MODL_DETAILY            13
+/* pre jednoduchsiu orientaciu pridane 2003-07-15 */
+#define MODL_CEZ_DEN_PRED      3
+#define MODL_CEZ_DEN_NA        4
+#define MODL_CEZ_DEN_PO        5
+
 
 /* ... a stringy pre ne */
+/* pre modlitbu cez den pridane 2003-07-15 */
 #ifdef LONG_PARAM_NAMES
 	#define STR_MODL_RANNE_CHVALY "MODL_RANNE_CHVALY"
 	#define STR_MODL_VESPERY "MODL_VESPERY"
+	#define STR_MODL_PREDPOLUDNIM "MODL_PREDPOLUDNIM"
+	#define STR_MODL_NAPOLUDNIE "MODL_NAPOLUDNIE"
+	#define STR_MODL_POPOLUDNI "MODL_POPOLUDNI"
 	#define STR_MODL_DETAILY "MODL_DETAILY"
 #else
 	#define STR_MODL_RANNE_CHVALY "mrch"
 	#define STR_MODL_VESPERY "mv"
+	#define STR_MODL_PREDPOLUDNIM "mpred"
+	#define STR_MODL_NAPOLUDNIE "mna"
+	#define STR_MODL_POPOLUDNI "mpo"
 	#define STR_MODL_DETAILY "*"
 #endif
 
@@ -146,9 +165,9 @@ extern const char *nazov_Modlitby[];
 #define TEMPLAT_INVITATORIUM     "invitat.htm"
 #define TEMPLAT_RANNE_CHVALY     "rchvaly.htm"
 #define TEMPLAT_POSVATNE_CITANIE "posvcit.htm"
-#define TEMPLAT_CEZ_DEN_9        "cezden1.htm"
-#define TEMPLAT_CEZ_DEN_12       "cezden2.htm"
-#define TEMPLAT_CEZ_DEN_3        "cezden3.htm"
+#define TEMPLAT_CEZ_DEN_9        "predpol.htm"
+#define TEMPLAT_CEZ_DEN_12       "napol.htm"
+#define TEMPLAT_CEZ_DEN_3        "popol.htm"
 #define TEMPLAT_VESPERY          "vespery.htm"
 #define TEMPLAT_KOMPLETORIUM     "komplet.htm"
 
@@ -337,22 +356,22 @@ typedef struct dm _struct_dm;
 #define DEN_UNKNOWN     7
 
 /* mesiace */
-#define MES_JAN   0
-#define MES_FEB   1
-#define MES_MAR   2
-#define MES_APR	3
-#define MES_MAY	4
-#define MES_JUN	5
-#define MES_JUL	6
-#define MES_AUG	7
-#define MES_SEP	8
-#define MES_OCT	9
-#define MES_NOV	10
-#define MES_DEC	11
+#define MES_JAN 0
+#define MES_FEB 1
+#define MES_MAR 2
+#define MES_APR 3
+#define MES_MAY 4
+#define MES_JUN 5
+#define MES_JUL 6
+#define MES_AUG 7
+#define MES_SEP 8
+#define MES_OCT 9
+#define MES_NOV 10
+#define MES_DEC 11
 /* neznamy mesiac */
-#define UNKNOWN_MESIAC 	12
+#define UNKNOWN_MESIAC 12
 /* vsetky mesiace */
-#define VSETKY_MESIACE  13
+#define VSETKY_MESIACE 13
 #define STR_VSETKY_MESIACE  "*"
 /* vsetky dni */
 #define VSETKY_DNI   32
@@ -710,3 +729,4 @@ int _encode_spol_cast(int);
 _struct_sc _decode_spol_cast(int);
 
 #endif /* __LITURGIA_H_ */
+

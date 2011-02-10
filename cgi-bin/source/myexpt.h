@@ -39,3 +39,4 @@ int closeExport(void); /* pridane, urobi fclose(); 13/03/2000A.D. */
 /* navratove hodnoty su prerobene na int-y; vysledok SUCCESS resp. FAILURE */
 
 #endif /*__MYEXPT_H_*/
+

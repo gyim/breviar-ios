@@ -24,3 +24,4 @@ char *mystrcpy(char *dest, char *src, int count);
 char *mystrcpy(char *dest, const char *src, int count);
 
 #endif /* __MYSTRING_H */
+
