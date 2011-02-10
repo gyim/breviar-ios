@@ -22,6 +22,7 @@
 /*   2003-07-02a.D. | pridana LINK_DEN_MESIAC_ROK_PRESTUP      */
 /*                    kvoli prestupnym rokom (_main_tabulka)   */
 /*                  - pridane HTML_ elementy (mydefs.h)        */
+/*   2003-07-07a.D. | pridany batch mode (davkove spracovanie) */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -280,6 +281,7 @@ char include_dir[MAX_STR] = "";
  * pridany parameter `b' (name of batch mode file) */
 char name_binary_executable[MAX_STR] = "";
 char name_batch_file[MAX_STR] = "";
+FILE *batch_file = NULL;
 
 /*---------------------------------------------------------------------*/
 /* popis: odstrani backslashe zo stringu (argv[1]) a vrati novy string
@@ -1939,6 +1941,11 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok){
 int init_global_string(int typ, int poradie_svateho, int modlitba){
 	/* lokalna premenna, do ktorej sa ukladaju info o analyzovanom dni
 	 * pouziva ju void nove_rozbor_dna() funkcia */
+	/* 2003-07-07: obavam sa, ze nove_rozbor_dna() je alebo
+	 * _rozbor_dna alebo _rozbor_dna_s_modlitbou...
+	 * lebo nic take neexistuje 
+	 * skoda, ze som neaktualizoval aj komentare. teraz je ten odkaz nezrozumitelny.
+	 */
 	_struct_dm _local_den;
 
 	char pom[MAX_STR];
@@ -2698,6 +2705,106 @@ void _export_rozbor_dna(int typ){
 		}
 	}
 }/* _export_rozbor_dna() */
+
+/*---------------------------------------------------------------------*/
+/* _export_rozbor_dna_batch()
+ *
+ * exportuje udaje, ktore nacitala _rozbor_dna()
+ * zalozene na _export_rozbor_dna(); 2003-07-07
+ * ale tento ich exportuje do batch suboru (pre dalsie davkove spracovanie)
+ *
+ */
+#define BATCH_COMMAND(a)	{ \
+	/* napokon to vyprintujeme do batch suboru, 2003-07-07 */\
+	fprintf(batch_file, "%s%dr.htm -x%d -pmrch\n", batch_command, a, a); /* ranne chvaly */\
+	fprintf(batch_file, "%s%dv.htm -x%d -pmv\n", batch_command, a, a); /* vespery */\
+	}
+void _export_rozbor_dna_batch(int typ){
+/* poznamky bez uvedenia datumu su prevzate z _export_rozbor_dna; 2003-07-07 */
+
+/* treba brat do uvahy:
+ * 1. ked ma sviatok prioritu, tak ide on
+ *    (ulozeny v _global_den, ak pocet_svatych == 0;
+ *       resp. v _global_svaty1, ak pocet_svatych > 0;)
+ * 2. ked su lubovolne spomienky, su ulozene v premennych
+ *    _global_svaty1 (_global_pocet_svatych == 1),
+ *    _global_svaty2 (_global_pocet_svatych == 2),
+ *    _global_svaty3 (_global_pocet_svatych == 3),
+ *    naviac treba napisat _global_den (ako vsedny den)
+ * 3. ak ide o sobotu v OBD_CEZ_ROK, treba ponuknut moznost _global_pm_sobota
+ *    (spomienka panny marie v sobotu)
+ */
+	char batch_command[MAX_STR] = "";
+	/* pripravime si command line string pre dany datum */
+	sprintf(batch_command, "%s -i%s -qpdt -d%d -m%d -r%d -e%.4d-%.2d-%.2d_", 
+		name_binary_executable, include_dir, 
+		_global_den.den, _global_den.mesiac, _global_den.rok,
+		_global_den.rok, _global_den.mesiac, _global_den.den);
+
+	/* pozor, hoci je nedela, predsa na nu mohlo pripadnut slavenie s vyssou
+	 * prioritou */
+	if((_global_den.denvt == DEN_NEDELA) ||
+		(_global_den.prik == PRIKAZANY_SVIATOK) ||
+		(_global_den.smer < 5)){
+		/* nedele a prikazane sviatky - cervenou, velkymi pismenami */
+		/* slavnosti - velkymi pismenami */
+
+		/* 23/02/2000A.D. -- teraz este testujeme, ci nema nahodou pred nedelou
+		 * (trebars v obdobi cez rok, smer == 6)
+		 * prednost napr. sviatok Pana (smer == 5); dalsia cast je skopirovana
+		 * podla casti v _rozbor_dna, v poznamke SVATY_VEDIE
+		 */
+		/* ... alebo c. 60: "ak na jeden den pripadnu viacere slavenia,
+		 * uprednostni sa to, ktore ma v tabulke liturgickych dni vyssi stupen
+		 * [t.j. .smer]. */
+		if(_global_den.smer > _global_svaty1.smer){
+			BATCH_COMMAND(1);
+		}
+		else{
+			BATCH_COMMAND(0);
+		}
+	}/* if((_global_den.denvt == DEN_NEDELA) || (_global_den.prik == PRIKAZANY_SVIATOK) || (_global_den.smer < 5)) */
+	else if(_global_pocet_svatych > 0){
+		/* sviatky (spomienky, ls) svatych */
+		if((_global_den.smer > _global_svaty1.smer) ||
+			(_global_den.smer == 9) && (_global_svaty1.smer == 12)){
+		/* svaty */
+			BATCH_COMMAND(1);
+			if(_global_pocet_svatych > 1){
+				BATCH_COMMAND(2);
+				if(_global_pocet_svatych > 2){
+					BATCH_COMMAND(3);
+				}
+			}
+			if((_global_svaty1.smer >= 12) &&
+				(typ != EXPORT_DNA_VIAC_DNI)){
+				/* ak je to iba lubovolna spomienka, tak vsedny den */
+				BATCH_COMMAND(0);
+			}
+		}/* svaty ma prednost */
+		else{
+		/* prednost ma den */
+			BATCH_COMMAND(0);
+		}
+	}/* if(_global_pocet_svatych > 0) */
+	else{
+		/* obycajne dni, nie sviatok */
+		BATCH_COMMAND(0);
+	}/* if(equals(_global_den.meno, "")) */
+
+	/* este spomienka panny marie v sobotu, cl. 15 */
+	if((_global_den.litobd == OBD_CEZ_ROK) &&
+		(_global_den.denvt == DEN_SOBOTA) &&
+		(
+			((_global_den.smer >= 12) && (_global_pocet_svatych == 0)) ||
+			((_global_svaty1.smer >= 12) && (_global_pocet_svatych > 0))) &&
+		(typ != EXPORT_DNA_VIAC_DNI)){
+		BATCH_COMMAND(4);
+	}
+
+}/* _export_rozbor_dna_batch() */
+
+/*---------------------------------------------------------------------*/
 
 /* showDetails():
  * vytvorena v Trencine, 29/01/2000A.D. */
@@ -4425,13 +4532,9 @@ void _main_batch_mode(
 		/* kontrola name_batch_file - ci sa do suboru da zapisovat */
 		/* na zapisovanie do batch_file nevyuzivame Export() */
 		if(strcmp(name_batch_file, "") != 0){
-			FILE *batch_file = fopen(name_batch_file, "wt");
+			batch_file = fopen(name_batch_file, "wt");
 			if(batch_file != NULL){
 				Log("File `%s' opened for writing...\n", name_batch_file);
-			}
-			else{
-				Export("NemÙûem pÌsaù do s˙boru `%s'.\n", name_batch_file);
-				Log("Cannot open file `%s' for writing.\n", name_batch_file);
 				LOG_ciara;
 				/* teraz zacina cela sranda :)) ... */
 
@@ -4451,10 +4554,56 @@ void _main_batch_mode(
 				 * 3. that's all
 				 */
 
-				// xxx
+				/* 2003-07-07 
+				 * _struct_den_mesiac je typ, ktory vrati _rozbor_dna();
+				 * 
+				 */
+				if(r_from < r_to){
+					Log("batch mode: viacero rokov (%d-%d)...\n", r_from, r_to);
+
+					Log("rok %d...\n", r_from);
+					analyzuj_rok(r_from);
+					for(i = poradie(d_from, m_from + 1, r_from); i <= poradie(31, MES_DEC + 1, r_from); i++){
+						Log("%d. den v roku %d...\n", i, r_from);
+						// xxx
+					}
+
+					for(int y = (r_from + 1); y < r_to; y++){
+						Log("rok %d...\n", y);
+						analyzuj_rok(y);
+						for(i = poradie(1, MES_JAN + 1, y); i <= poradie(31, MES_DEC + 1, y); i++){
+							Log("%d. den v roku %d...\n", i, y);
+							// xxx
+						}
+						// xxx
+					}
+
+					Log("rok %d...\n", r_to);
+					analyzuj_rok(r_to);
+					for(i = poradie(1, MES_JAN + 1, r_to); i <= poradie(d_to, m_to + 1, r_to); i++){
+						Log("%d. den v roku %d...\n", i, r_to);
+						// xxx
+					}
+				}/* r_from < r_to */
+				else{
+					Log("batch mode: vramci jedneho roka (%d)...\n", r_from);
+
+					analyzuj_rok(r_from);
+					for(i = poradie(d_from, m_from + 1, r_from); i <= poradie(d_to, m_to + 1, r_to); i++){
+						Log("%d. den v roku %d...\n", i, r_from);
+						_rozbor_dna(por_den_mesiac(i, r_from), r_from);
+						_export_rozbor_dna_batch(EXPORT_DNA_JEDEN_DEN);
+						// xxx
+					}
+				}/* r_from == r_to */
 
 				/* ...a sranda skoncila */
 				LOG_ciara;
+				fclose(batch_file);
+			}/* ok, batch_file != NULL */
+			else{
+				Export("NemÙûem pÌsaù do s˙boru `%s'.\n", name_batch_file);
+				Log("Cannot open file `%s' for writing.\n", name_batch_file);
 			}/* batch_file == NULL */
 		}/* name_batch_file != EMPTY_STR */
 		else{
@@ -4842,8 +4991,8 @@ int getArgv(int argc, char **argv){
 					printf("\t(c) Juraj Videky | videky@breviar.sk\n");
 					printf("usage | lh [switch [value]...]\n");
 					printf("switches |\n");
-					printf("\tq  query type (napr. %s, %s, %s, %s, %s, ...)\n",
-						STR_PRM_DNES, STR_PRM_DATUM, STR_PRM_DETAILY, STR_PRM_TABULKA, STR_PRM_SIMULACIA_QS);
+					printf("\tq  query type (napr. %s, %s, %s, %s, %s, %s...)\n",
+						STR_PRM_DNES, STR_PRM_DATUM, STR_PRM_DETAILY, STR_PRM_TABULKA, STR_PRM_SIMULACIA_QS, STR_PRM_BATCH_MODE);
 					printf("\ts  query string (tak ako je na webe)\n");
 					printf("\td  den  %s, %s (1--31, po--ne)\n", STR_DEN, STR_DEN_V_TYZDNI);
 					/* printf("\ts  SVIATOK \n"); */
@@ -4851,19 +5000,25 @@ int getArgv(int argc, char **argv){
 					printf("\tt  tyzden zaltara (1--4) \n");
 					printf("\tr  rok (napr. 2000)\n");
 					printf("\tp  %s (modlitba  napr. %s, %s, ...) \n", STR_MODLITBA, STR_MODL_RANNE_CHVALY, STR_MODL_VESPERY);
+					printf("\t\t (resp. rok do pre davkove spracovanie)\n"); /* pridane 2003-07-07 */
 					printf("\tx  %s (dalsi svaty, 1--3 resp. 4) \n", STR_DALSI_SVATY);
 					printf("\t1, 2, 3, 4  option 1, option 2, option 3, option 4 \n");
-					printf("\tf  rok from \n");
-					printf("\tg  rok to \n");
+					printf("\tf  rok from (resp. den do pre davkove spracovanie)\n");
+					printf("\tg  rok to (resp. mesiac do pre davkove spracovanie)\n");
 					printf("\tl  ci zobrazovat linky \n");
 					printf("\te  export filename (default: export.htm)\n");
 					printf("\ti  include folder\n");
+					/* pridane 2003-07-07 */
+					printf("\tb  batch mode (davkove spracovanie), nazov vystupneho davkoveho suboru\n");
+					printf("\tn  nazov binarky (tohto suboru, napr. lh.exe) pre batch mode\n");
 					printf("\th, ?  tento help \n");
 					/* pridane 2003-06-27; prave prva uvedena linka sposobuje problem (nefunguju detaily pre spomienku pm v sobotu) */
 					printf("examples |\n");
 					printf("\tlh.exe -i..\\..\\..\\ -qpsqs -s\"qt=pdt&d=12&m=7&r=2003\"\n");
 					printf("\tlh -qpdt -d30 -m4 -r2002 -pmrch -ic:\\temp\\breviar\\ -emoja.htm\n");
 					printf("\tlh.exe -i..\\..\\..\\ -d28 -m6 -r2003 -qpdt -pmrch -x1\n");
+					/* pridane 2003-07-07 */
+					printf("\tlh -qpbm -d1 -m1 -r2000 -f2 -g2 -p2000 -ba.bat -nlh.exe -ic:\\breviar\\\n");
 
 					Log("option %c (without value)\n", c, optarg); break;
 
