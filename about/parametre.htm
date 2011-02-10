@@ -19,7 +19,13 @@
 (èi u v linuxe alebo pod DOS/Windows), parametre sa v niektorıch prípadoch rôznia. Je to z toho dôvodu,
 e command-line verzia èasto pouíva jeden parameter v závislosti od ostatnıch na rôzne úèely, avšak
 pre webovské rozhranie je potrebné, aby kadı parameter mal osobitné meno (úvodnı formulár napr.
-potrebuje viacero údajov urèujúcich roky). Odlišnosti uvádzame.
+potrebuje viacero údajov urèujúcich roky). 
+Odlišnosti medzi parametrami pre URL requesty a command-line verziu programu uvádzame na príslušnıch miestach.
+<p>Okrem toho command-line verzia môe by spustená v tzv. <a href="batchmode.htm">batch móde
+(dávkové spracovanie)</a>, keï pre urèité dvoma dátumami ohranièené obdobie vytvorí dávkovı súbor (skript),
+ktorı po spustení generuje modlitby pre dané obdobie. Tento spôsob pouitia sa znaène líši od ostatnıch, preto
+ho popisujeme na <a href="batchmode.htm">osobitnom mieste</a>.
+
 
 <ul class="level1">
 
@@ -38,6 +44,7 @@ potrebuje viacero údajov urèujúcich roky). Odlišnosti uvádzame.
 	<li><span class="value">ptab</span> | Tabu¾ka dátumov pohyblivıch slávení</li>
 	<li><span class="value">pcr</span> | Cezroèné obdobie</li>
 	<li><span class="value">pmr</span> | Liturgickı kalendár</li>
+	<li><span class="value">pbm</span> | Tzv. <a href="batchmode.htm">batch mode (dávkové spracovanie)</a>.</li>
 	</ul>
 </li>
 
@@ -73,7 +80,27 @@ má exportova (DOS default: <span class="tt">export.htm</span>, linux default: s
 
 <p>Ak dostane program nesprávne parametre (zahàòa i prípady nesprávnych hodnôt parametrov 
 alebo ïalšie chıbajúce parametre závisiace od inıch parametrov), export obsahuje chybové hlásenie.
-Naviac, command line verzia vypíše chyboé hlásenie na stderr.
+Naviac, command line verzia vypíše chybové hlásenie na stderr.
+
+<a name="example"></a>
+<h4 class="blue">Príklady</h4>
+
+<p>Ako sa vraví, príklad môe všetky pochybnosti razom odstráni alebo naopak, podnieti ïalšie otázky.
+Za oboma úèelmi sú uvedené nasledovné príkady pouitia command-line programu.
+
+<ul class="level1">
+<li><span class="tt">lh.exe -qpdt -d30 -m4 -r2002 -pmrch -ic:\breviar\ -emoja.htm</span><br>
+Program vygeneruje do súboru <span class="tt">moja.htm</span>
+modlitbu rannıch chvál na 30. apríla 2002. 
+Pritom <span class="tt">include</span> adresár sa nachádza v adresári <span class="tt">c:\breviar\</span>
+(meno programu je <span class="tt">lh.exe</span>). (Pouitie v DOSe/Windows.)
+</li>
+<li><span class="tt">lh.exe -qpsqs -s"qt=pdt&d=12&m=7&r=2003"</span><br>
+Program vygeneruje do default súboru (<span class="tt">export.htm</span>)
+rozbor dòa 12. júla 2003. 
+Pritom parametre sú dané simuláciou query stringu.
+</li>
+</ul>
 
 <hr>
 <p class="patka">
