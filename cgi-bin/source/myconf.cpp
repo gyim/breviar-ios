@@ -8,6 +8,8 @@
 /* document history                                            */
 /*   30/03/2000A.D. | created                                  */
 /*   06/09/2001A.D. | tento popis                              */
+/*   2003-07-08a.D. | MAIL_ADDRESS zmenena na videky@breviar.sk*/
+/*                                                             */
 /*                                                             */
 /***************************************************************/
 
@@ -15,7 +17,7 @@
 #include "mystring.h"
 
 char HTTP_ADDRESS[MAX_HTTP_STR] = "http://www.breviar.sk/";
-char MAIL_ADDRESS[MAX_MAIL_STR] = "videky@pobox.sk";
+char MAIL_ADDRESS[MAX_MAIL_STR] = "videky@breviar.sk";
 
 void readConfig(void){
 	FILE *cfg_file;

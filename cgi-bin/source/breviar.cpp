@@ -1227,7 +1227,8 @@ void VYSVETLIVKY(void){ /* 13/03/2000A.D. */
 	strcat(fname, FILE_VYSVETLIVKY);
 	Export("<!--"); /* simulacia toho, ze replacujeme nejaky anchor */
 	includeFile(0, ANCHOR_VYSVETLIVKY, fname, ANCHOR_VYSVETLIVKY);
-	Export("--!>"); /* simulacia toho, ze replacujeme nejaky anchor */
+	/* bolo tu Export("--!>"); zmenene 2003-07-08 */
+	Export("-->"); /* simulacia toho, ze replacujeme nejaky anchor */
 }
 void VYSVETLIVKY_TABULKA(void){ /* 15/03/2000A.D. */
 	char fname[MAX_STR] = "";
@@ -1237,7 +1238,8 @@ void VYSVETLIVKY_TABULKA(void){ /* 15/03/2000A.D. */
 	strcat(fname, FILE_VYSVETLIVKY_TABULKA);
 	Export("<!--"); /* simulacia toho, ze replacujeme nejaky anchor */
 	includeFile(0, ANCHOR_VYSVETLIVKY_TABULKA, fname, ANCHOR_VYSVETLIVKY_TABULKA);
-	Export("--!>"); /* simulacia toho, ze replacujeme nejaky anchor */
+	/* bolo tu Export("--!>"); zmenene 2003-07-08 */
+	Export("-->"); /* simulacia toho, ze replacujeme nejaky anchor */
 }
 
 /*---------------------------------------------------------------------*/
@@ -2558,7 +2560,7 @@ void _export_rozbor_dna_buttons_dni(int typ){
 			}
 		}
 
-		Export("</span>\n");
+		Export("</font>\n");
 	}/* if(typ) */
 	/* inak buttony nedavam */
 }/* _export_rozbor_dna_buttons_dni */
