@@ -1,3 +1,5 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
    <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
@@ -18,7 +20,8 @@
 <h4 class="blue">Štruktúra pre jednotlivý deň</h4>
 
 <tt>struct dm{</tt>
-<ul><tt>&nbsp;int den;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* cislo
+<ul class="level0"><li>
+<tt>&nbsp;int den;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* cislo
 dna mesiaca (1--31) */</tt>
 <br><tt>&nbsp;int mesiac;&nbsp;&nbsp;&nbsp;&nbsp; /* cislo mesiaca (1--12)
 */</tt>
@@ -66,16 +69,17 @@ a1, ak druhe tak a2, ak tretie tak aj a3)</tt>
 <br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *</tt>
 <br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * _encode_..., _decode_spol_cast();</tt>
 <br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */</tt>
-<br><tt>&nbsp;char meno[MENO_SVIATKU]; /* nazov prip. sviatku */</tt></ul>
+<br><tt>&nbsp;char meno[MENO_SVIATKU]; /* nazov prip. sviatku */</tt>
+</li></ul>
 <tt>};</tt>
 <br><tt>typedef struct dm _struct_dm;</tt>
-<br><tt></tt>&nbsp;
 
 <a name="modlitba"></a>
 <h4 class="blue">Štruktúra pre časti modlitby</h4>
 
 <tt>struct tmodlitba1{</tt>
-<ul><tt>&nbsp;_struct_anchor_and_file popis&nbsp;&nbsp;&nbsp;&nbsp; ;</tt>
+<ul class="level0"><li>
+<tt>&nbsp;_struct_anchor_and_file popis&nbsp;&nbsp;&nbsp;&nbsp; ;</tt>
 <br><tt>&nbsp;_struct_anchor_and_file hymnus&nbsp;&nbsp;&nbsp; ;</tt>
 <br><tt>&nbsp;_struct_anchor_and_file antifona1 ;</tt>
 <br><tt>&nbsp;_struct_anchor_and_file zalm1&nbsp;&nbsp;&nbsp;&nbsp; ;</tt>
@@ -88,18 +92,19 @@ a1, ak druhe tak a2, ak tretie tak aj a3)</tt>
 <br><tt>&nbsp;_struct_anchor_and_file benediktus; /* antifona na benediktus/magnifikat
 */</tt>
 <br><tt>&nbsp;_struct_anchor_and_file prosby&nbsp;&nbsp;&nbsp; ;</tt>
-<br><tt>&nbsp;_struct_anchor_and_file modlitba&nbsp; ;</tt></ul>
+<br><tt>&nbsp;_struct_anchor_and_file modlitba&nbsp; ;</tt>
+</li></ul>
 <tt>};</tt>
 <br><tt>typedef struct tmodlitba1 _type_ranne_chvaly;</tt>
 <br><tt>typedef struct tmodlitba1 _type_vespery;</tt>
 <br><tt>typedef struct tmodlitba1 _type_1vespery;</tt>
-<br><tt></tt>&nbsp;
 
 <a name="rok"></a>
 <h4 class="blue">Štruktúra pre (kalendárny) rok</h4>
 
 <tt>struct lrok{</tt>
-<ul><tt>&nbsp;int prestupny;&nbsp;&nbsp;&nbsp;&nbsp; /* ci je rok prestupny
+<ul class="level0"><li>
+<tt>&nbsp;int prestupny;&nbsp;&nbsp;&nbsp;&nbsp; /* ci je rok prestupny
 (YES, NO) */</tt>
 <br><tt>&nbsp;char p1, p2;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* nedelne
 pismeno/pismena;</tt>
@@ -118,10 +123,10 @@ po nedeli zoslania</tt>
 teda po velkonocnom obdobi */</tt>
 <br><tt>&nbsp;int tyzden_ocr_pred_po; /* cislo tyzdna obdobia cez rok,
 v ktorom zacina post */</tt>
-<br><tt>&nbsp;struct dm _den[POCET_ALIASOV];</tt></ul>
+<br><tt>&nbsp;struct dm _den[POCET_ALIASOV];</tt>
+</li></ul>
 <tt>};</tt>
 <br><tt>typedef struct lrok _struct_lrok;</tt>
-<br><tt></tt>&nbsp;
 
 <hr>
 <p class="patka">

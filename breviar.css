@@ -10,14 +10,15 @@
 .tt { font-family: Courier, Monospaced; }
 .parameter { font-weight: bold; font-style: normal; font-family: Courier, Monospaced; color: black; }
 .value { font-weight: bold; font-style: normal; font-family: Courier, Monospaced; color: brown; }
-.explain { font-size: 90%; color: #a05000; }
+.explain { font-size: 80%; color: #a05000; }
 
+/* 2003-07-09 */
 /* apply to all elements */ { font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 100%; }
 body { 
 	background-color: #d0bba0; 
 	color: #000000; 
 	font-family: Verdana, Tahoma, Georgia, Sans Serif; 
-	font-size: 100%; 
+	font-size: 90%; 
 	scrollbar-face-color: #fff1cc;
 	scrollbar-shadow-color: #a05000;
 	scrollbar-highlight-color: #a05000;
@@ -42,19 +43,21 @@ a:hover { color: #fff1cc; background-color: #800000; text-decoration:none; }
 a:active { color: #fff1cc; text-decoration: underline; }
 a img { border: none }
 
-table { background-color: #d0bba0; color: #505000; }
-td { font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 12px; color: #000000}
+table { color: #505000; }
+tr.paragraph { text-indent: 3em; line-height: 120%; }
+td { font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 90%; color: #000000}
+
 hr {	height: 0.2mm;
 	size: 1px;
 	width: 33%; 
 	color: gray; }
 
-select { background: #fff1cc; font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 12px; color: #000000}
+select { background: #fff1cc; font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 90%; color: #000000}
 
-input { border: 1px; font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 12px; color: #000000; }
+input { border: 1px; font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 90%; color: #000000; }
 
-input.button { background: #800000; Verdana, Tahoma, Georgia, Sans Serif; font-size : 10px; font-weight: bold; color: #FFFFFF; border: 1px solid }
-input.reset { background: #400000; Verdana, Tahoma, Georgia, Sans Serif; font-size : 10px; font-weight: bold; color: #FFFFFF; border: 1px solid }
+input.button { background: #800000; Verdana, Tahoma, Georgia, Sans Serif; font-size : 80%; font-weight: bold; color: #FFFFFF; border: 1px solid }
+input.reset { background: #400000; Verdana, Tahoma, Georgia, Sans Serif; font-size : 80%; font-weight: bold; color: #FFFFFF; border: 1px solid }
 
 input.text { border-style: solid; background: #fff1cc; }
 input.radio { }
@@ -63,6 +66,7 @@ input.checkbox { }
 ol.level1 { list-style-type: decimal; }
 ol.level2 { list-style-type: lower-roman; }
 ol.level3 { list-style-type: decimal; }
+ul.level0 { list-style-type: none; }
 ul.level1 { list-style-type: disc; }
 ul.level2 { list-style-type: circle; }
 ul.level3 { list-style-type: square; }

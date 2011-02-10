@@ -24,6 +24,8 @@
 /*                  - pridane HTML_ elementy (mydefs.h)        */
 /*   2003-07-07a.D. | pridany batch mode (davkove spracovanie) */
 /*   2003-07-08a.D. | pridany parameter (option) `a' (append)  */
+/*   2003-07-09a.D. | drobne zmeny kvoli HTML 4.01 Valid       */
+/*                  - zmena & v linkach na HTML_AMPERSAND      */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -32,23 +34,23 @@
 /*   * unfinished parts: signed by !!!                         */
 /*                                                             */
 /***************************************************************/
-
+                                       
 /* RUN_MODLITBA_CEZ_DEN je definovana v mybase.h */
-
-#include <stdlib.h>
-#include <stdio.h>
-
+                                       
+#include <stdlib.h>                    
+#include <stdio.h>                     
+                                       
 #include "mybase.h" /* zakladne vecicky */
 #include "mystring.h" /* 31/03/2000A.D. */
 #include "myconf.h" /* 30/03/2000A.D. */
 #include "mysystem.h" /* hovori, ci som v systeme linux/DOS */
-#include "liturgia.h"
-#include "hodin.h"
+#include "liturgia.h"                  
+#include "hodin.h"                     
 #include "cgiutils.h" /* parsovanie query stringu */
 #include "mygetopt.h" /* parsovanie argv[], t.j. options z command line */
-
+                                       
 /* dbzaltar:: zaltar(); liturgicke_obdobie(); sviatky_svatych(); */
-#include "dbzaltar.h"
+#include "dbzaltar.h"                  
 /* povodne tu bolo aj 'dbsvaty.cpp', obsahujuce sviatky_svatych();
  * potom tu bolo "dbzaltar.cpp" a este aj include "sets.c"
  * 22/02/2000A.D.: dal som tam dbzaltar.h a sets.c priamo do dbzaltar.cpp
@@ -152,7 +154,9 @@ _type_kompletorium *_global_modl_kompletorium_ptr;
 int _global_modlitba;
 
 /* globalna premenna, do ktorej ukladaju funkcie vytvor_query_string_...
- * linku tvaru PATH_CGI(script_name) ++ "?param1=val&param2=val&..." */
+ * linku tvaru PATH_CGI(script_name) ++ "?param1=val&param2=val&..." 
+ * 2003-07-09 prerobeny & v linkach na HTML_AMPERSAND
+ */
 char *_global_link_ptr;
 /*char _global_link[MAX_STR];*/
 #define _global_link _global_link_ptr
@@ -2341,7 +2345,7 @@ void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
 		Export("</td>\n<td>");
 		if(_global_linky == ANO){
 			/* ranne chvaly -- button */
-			Export("<form action=\"%s?%s=%s&%s=%d&%s=%d&%s=%d&%s=%s%s\" method=\"post\">\n",
+			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
 				script_name,
 				STR_QUERY_TYPE, STR_PRM_DATUM,
 				STR_DEN, _global_den.den,
@@ -2362,7 +2366,7 @@ void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
 		if(poradie_svateho != 4){
 			/* spomienka panny marie v sobotu nema vespery */
 		if(_global_linky == ANO){
-			Export("<form action=\"%s?%s=%s&%s=%d&%s=%d&%s=%d&%s=%s%s\" method=\"post\">\n",
+			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
 				script_name,
 				STR_QUERY_TYPE, STR_PRM_DATUM,
 				STR_DEN, _global_den.den,
@@ -2380,7 +2384,7 @@ void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
 		/* toto sa tyka buttonu 'Detaily...' */
 		Export("</td>\n<td>");
 		if(_global_linky == ANO){
-			Export("<form action=\"%s?%s=%s&%s=%d&%s=%d&%s=%d&%s=%s%s\" method=\"post\">\n",
+			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
 				script_name,
 				STR_QUERY_TYPE, STR_PRM_DETAILY, /* povodne tu bolo PRM_DATUM */
 				STR_DEN, _global_den.den,
@@ -2432,7 +2436,7 @@ void _export_rozbor_dna_buttons_dni(int typ){
 			datum.mesiac = _global_den.mesiac;
 		}
 		/* predosly den -- button */
-		Export("<td align=right><form action=\"%s?%s=%s&%s=%d&%s=%d&%s=%d\" method=\"post\">\n",
+		Export("<td align=right><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d\" method=\"post\">\n",
 			script_name,
 			STR_QUERY_TYPE, STR_PRM_DATUM,
 			STR_DEN, datum.den,
@@ -2462,7 +2466,7 @@ void _export_rozbor_dna_buttons_dni(int typ){
 		}
 
 		/* nasledujuci den -- button */
-		Export("<td><form action=\"%s?%s=%s&%s=%d&%s=%d&%s=%d\" method=\"post\">\n",
+		Export("<td><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d\" method=\"post\">\n",
 			script_name,
 			STR_QUERY_TYPE, STR_PRM_DATUM,
 			STR_DEN, datum.den,
@@ -2483,7 +2487,7 @@ void _export_rozbor_dna_buttons_dni(int typ){
 				datum.den = 28;
 		}
 		/* predosly rok -- button */
-		Export("<td align=right><form action=\"%s?%s=%s&%s=%d&%s=%d&%s=%d\" method=\"post\">\n",
+		Export("<td align=right><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d\" method=\"post\">\n",
 			script_name,
 			STR_QUERY_TYPE, STR_PRM_DATUM,
 			STR_DEN, datum.den,
@@ -2504,7 +2508,7 @@ void _export_rozbor_dna_buttons_dni(int typ){
 				datum.den = 28;
 		}
 		/* nasledujuci rok -- button */
-		Export("<td><form action=\"%s?%s=%s&%s=%d&%s=%d&%s=%d\" method=\"post\">\n",
+		Export("<td><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d\" method=\"post\">\n",
 			script_name,
 			STR_QUERY_TYPE, STR_PRM_DATUM,
 			STR_DEN, datum.den,
@@ -2624,12 +2628,14 @@ void _export_rozbor_dna(int typ){
 	/* export */
 	Export("\n<tr valign=baseline>\n");
 
+	/* zmenene <div align> na priamo do <td>, 2003-07-09 kvoli HTML 4.01 */
+
 	/* prvy stlpec: cislo dna */
-	Export("<td><div align=right>%s%s%s%c</div></td>\n",
+	Export("<td align=right>%s%s%s%c</td>\n",
 		pom1, _global_link, pom2, dvojbodka);
 
 	/* druhy stlpec: nazov dna */
-	Export("<td><div align=left>%s%s%s%c</div></td>\n",
+	Export("<td align=left>%s%s%s%c</td>\n",
 		pom1, pom3, pom2, ciarka);
 	Export("<td>");
 
@@ -2855,7 +2861,7 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
 	Log("_global_den: \n");
 	Log(_global_den);
 
-	Export("<hr size=1>\n");
+	Export("<hr>\n");
 	Export("NasledovnÈ moûnosti ovplyvnia vzhæad i obsah vygenerovanej modlitby.\n");
 	Export("Vyberte tie, podæa ktor˝ch sa m· modlitba vygenerovaù.\n");
 	Export("<br>\n");
@@ -3602,7 +3608,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 			/* teraz linku na #explain -- vysvetlivky */
 			Export("<br><font size=-1><a href=\"#explain\">Vysvetlivky</a></font>\n");
 			/* napokon ciaru */
-			Export("</center>\n<hr size=1>\n");
+			Export("</center>\n<hr>\n");
 
 			/* teraz generujem jednotlive mesiace so vsetkymi dnami */
 			for(m = MES_JAN; m <= MES_DEC; m++){
@@ -3628,9 +3634,9 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 
 			if(_global_linky == ANO){/* pridane 13/04/2000A.D. */
 			/* pridane 25/02/2000A.D. -- buttony Predchadzajuci, Nasledujuci rok */
-			Export("<hr size=1>\n<br>\n<center><table>\n");
+			Export("<hr>\n<br>\n<center><table>\n");
 			/* predosly rok -- button */
-			Export("<td align=right><form action=\"%s?%s=%s&%s=%s&%s=%s&%s=%d\" method=\"post\">\n",
+			Export("<td align=right><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d\" method=\"post\">\n",
 				script_name,
 				STR_QUERY_TYPE, STR_PRM_DATUM,
 				STR_DEN, STR_VSETKY_DNI,
@@ -3640,7 +3646,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 			Export("</form></td>\n");
 
 			/* nasledujuci rok -- button */
-			Export("<td align=right><form action=\"%s?%s=%s&%s=%s&%s=%s&%s=%d\" method=\"post\">\n",
+			Export("<td align=right><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d\" method=\"post\">\n",
 				script_name,
 				STR_QUERY_TYPE, STR_PRM_DATUM,
 				STR_DEN, STR_VSETKY_DNI,
@@ -3679,7 +3685,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 
 				if(_global_linky == ANO){/* pridane 13/04/2000A.D. */
 				/* pridane 25/02/2000A.D. -- buttony Predchadzajuci, Nasledujuci mesiac */
-				Export("<hr size=1>\n<br>\n<center><table>\n");
+				Export("<hr>\n<br>\n<center><table>\n");
 				/* predosly mesiac -- button */
 				pm = m; pr = r;
 				if(m == 1){
@@ -3689,7 +3695,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				else{
 					pm = m - 1;
 				}
-				Export("<td align=right><form action=\"%s?%s=%s&%s=%s&%s=%d&%s=%d\" method=\"post\">\n",
+				Export("<td align=right><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d\" method=\"post\">\n",
 					script_name,
 					STR_QUERY_TYPE, STR_PRM_DATUM,
 					STR_DEN, STR_VSETKY_DNI,
@@ -3707,7 +3713,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				else{
 					pm = m + 1;
 				}
-				Export("<td align=right><form action=\"%s?%s=%s&%s=%s&%s=%d&%s=%d\" method=\"post\">\n",
+				Export("<td align=right><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d\" method=\"post\">\n",
 					script_name,
 					STR_QUERY_TYPE, STR_PRM_DATUM,
 					STR_DEN, STR_VSETKY_DNI,
@@ -3799,13 +3805,14 @@ void _main_dnes(void){
 	_export_rozbor_dna(EXPORT_DNA_DNES);
 
 	/* pokracujem vypisanim formulara */
-	Export("<hr size=1>\n");
-	Export("<form action=\"%s\" method=\"post\">\n",
+	Export("<hr>\n");
+	Export("\n<form action=\"%s\" method=\"post\">\n",
 		uncgi_name);
 
 	Export("Chcem zobraziù\n");
 
-	Export("<center><table>\n");
+	/* 2003-07-09, zmenene <center><table> na <table align="center"> */
+	Export("<table align=\"center\">\n");
 
 /* ------------------------------------------- */
 	Export("<tr>\n<td>\n");
@@ -3846,7 +3853,7 @@ void _main_dnes(void){
 		STR_ROK, dnes.tm_year);
 
 	Export("</td></tr></table>\n");
-	Export("</tr>\n</td>\n");
+	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
 
 /* ------------------------------------------- */
 	Export("<tr>\n<td>\n");
@@ -3883,7 +3890,7 @@ void _main_dnes(void){
 	Export("</select>\n");
 
 	Export("</td></tr></table>\n");
-	Export("</tr>\n</td>\n");
+	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
 
 #ifdef FORMULAR_PRE_PRM_SVIATOK
 /* ------------------------------------------- */
@@ -3895,7 +3902,7 @@ void _main_dnes(void){
 	Export("</td><td>\n");
 	/* !!! sviatky --- */
 	Export("</td></tr></table>\n");
-	Export("</tr>\n</td>\n");
+	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
 #endif
 
 /* ------------------------------------------- */
@@ -3910,7 +3917,7 @@ void _main_dnes(void){
 	Export("<"HTML_FORM_INPUT_TEXT" name=\"%s\" size=5 value=\"%d\">\n",
 		STR_ANALYZA_ROKU, dnes.tm_year);
 	Export("</td></tr></table>\n");
-	Export("</tr>\n</td>\n");
+	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
 
 /* ------------------------------------------- */
 	Export("<tr>\n<td>\n");
@@ -3934,7 +3941,7 @@ void _main_dnes(void){
 	Export("<"HTML_FORM_INPUT_TEXT" name=\"%s\" size=5 value=\"%d\">\n",
 		STR_ROK_ROKA, dnes.tm_year);
 	Export("</td></tr></table>\n");
-	Export("</tr>\n</td>\n");
+	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
 /* ------------------------------------------- */
 	Export("<tr>\n<td>\n");
 	Export("<table>\n<tr><td>\n");
@@ -3956,11 +3963,14 @@ void _main_dnes(void){
 		STR_TABULKA_LINKY, 1); /* ked bude zaskrtnuty, tak vrati hodnotu 1; 15/03/2000A.D. */
 	Export("&nbsp;zobraziù tabuæku vr·tane hypertextov˝ch odkazov na jednotlivÈ dni\n");
 	Export("</td></tr></table>\n");
-	Export("</tr>\n</td>\n");
+	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
 /* ------------------------------------------- */
 	Export("</table>\n");
 
-	Export("<br>\n");
+	/* predtym tu bolo <br>, ale kedze hore som dal <table align="center">, 
+	 * tak tu musi byt <center> kvoli buttonom; 2003-07-09
+	 */
+	Export("\n<center>\n");
 	/* button Vyhladaj (GO!) */
 	Export("<"HTML_FORM_INPUT_SUBMIT" value=\"Zobraz\">");
 
@@ -3968,7 +3978,7 @@ void _main_dnes(void){
 	Export("&nbsp;&nbsp;&nbsp;\n");
 	Export("<"HTML_FORM_INPUT_RESET" value=\"VyËisti\">");
 
-	Export("</center>\n</form>\n");
+	Export("</center>\n</form>\n\n");
 
 }/* _main_dnes(); */
 
@@ -4233,7 +4243,7 @@ void _main_analyza_roku(char *rok){
 	/* pridane 21/02/2000A.D. -- buttony Predchadzajuci, Nasledujuci rok */
 	ExportROK("<center><table>\n");
 	/* predosly rok -- button */
-	Export("<td align=right><form action=\"%s?%s=%s&%s=%d\" method=\"post\">\n",
+	Export("<td align=right><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d\" method=\"post\">\n",
 		script_name,
 		STR_QUERY_TYPE, STR_PRM_ANALYZA_ROKU,
 		STR_ANALYZA_ROKU, year - 1);
@@ -4241,7 +4251,7 @@ void _main_analyza_roku(char *rok){
 	Export("</form></td>\n");
 
 	/* nasledujuci rok -- button */
-	Export("<td align=right><form action=\"%s?%s=%s&%s=%d\" method=\"post\">\n",
+	Export("<td align=right><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d\" method=\"post\">\n",
 		script_name,
 		STR_QUERY_TYPE, STR_PRM_ANALYZA_ROKU,
 		STR_ANALYZA_ROKU, year + 1);
@@ -4681,7 +4691,7 @@ void write(void){
 	int i = 0;
 	while (environ[i]){
 //		if(strstr(environ[i], "WWW_") != NULL)
-			printf("<p>%d: %s<br><hr size=1>\n", i, environ[i]);
+			printf("<p>%d: %s<br><hr>\n", i, environ[i]);
 		i++;
 	}
 }

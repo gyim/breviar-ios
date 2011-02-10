@@ -3,7 +3,7 @@ body {
 	background-color: #000000; 
 	color: #fff1cc; 
 	font-family: Verdana, Tahoma, Georgia, Sans Serif; 
-	font-size: 100%; 
+	font-size: 90%; 
 	noscroll;
 	margin-left: 0px;
 	margin-top: 0px;
@@ -42,8 +42,3 @@ a:hover { color: #fff1cc; background-color: #800000; text-decoration:none; font-
 a:active { color: #fff1cc; text-decoration: none; }
 a img { border: none }
 
-table { background-color: #d0bba0; color: #a05000; }
-td { font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 12px; color: #a05000}
-hr {	height: 0.2mm;
-	width: 33%; 
-	color: gray; }

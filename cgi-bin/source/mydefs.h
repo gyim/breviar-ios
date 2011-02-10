@@ -13,6 +13,7 @@
 /*   2003-07-02a.D. | pridane HTML konstanty (casti stringov)  */
 /*   2003-07-04a.D. | pridane konstanty pre batch mode         */
 /*   2003-07-08a.D. | pridana konstanta MODL_OPT_APPEND        */
+/*   2003-07-09a.D. | pridane #define HTML_AMPERSAND "&amp;"   */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -362,5 +363,8 @@ extern int query_type; /* premenna obsahujuca PRM_... */
 #define HTML_SPAN_BLUE_BOLD "span class=\"bluebold\""
 
 #define HTML_P_PATKA "p class=\"patka\""
+
+/* pridane 2003-07-09, zmenene v cestach pre skript */
+#define HTML_AMPERSAND "&amp;"
 
 #endif /*__MYDEFS_H_*/

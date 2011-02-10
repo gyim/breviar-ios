@@ -1,3 +1,5 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
    <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
@@ -71,14 +73,16 @@ Pre generovanie informácie o jednotlivom dni (bez určenej modlitby) vyzerá
 postup programu nasledovne: spustí funkciu&nbsp;<a name="rozbor_dna"></a><tt>rozbor_dna()</tt>
 pre daný deň a výsledok zobrazí. Spomínaná funkcia <tt>rozbor_dna()</tt>
 je jednou z kľúčových funkčností aplikácie, preto sa jej budem venovať trošku podrobnejšie.
-<ul>
-<li>1. fáza: <b>Všeobecné liturgické dáta</b></li>
 
+<ul class="level1">
+
+<li>1. fáza: <b>Všeobecné liturgické dáta</b>
 <br>Táto fáza zaradí daný deň (podľa dátumu, presnejšie poradového čísla
 dňa v roku) do liturgického obdobia, teda podľa medzníkov <a href="#medznik">spomínaných
-vyššie</a> určí, o aké liturgické obdobie ide. Program pritom interne používa
-nasledovné konštanty:
-<ul><tt>/* liturgicke obdobia */</tt>
+vyššie</a> určí, o aké liturgické obdobie ide. Program pritom interne používa nasledovné konštanty:
+<ul class="level0">
+<li>
+<tt>/* liturgicke obdobia */</tt>
 <br><tt>//OBD_ADVENTNE</tt>
 <br><tt>#define OBD_ADVENTNE_I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 1 /* do 16. decembra */</tt>
@@ -107,15 +111,16 @@ a zmrtvychvstania Pana */</tt>
 <br><tt>#define OBD_VELKONOCNA_OKTAVA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0 /*
 velkonocna nedela -- 2. velk. ne */</tt>
 <br><tt>#define OBD_OKTAVA_NARODENIA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 11 /*
-narodenie Pana -- 1. jan. */</tt></ul>
+narodenie Pana -- 1. jan. */</tt>
+</li>
+</ul>
 V tejto časti sa určia všetky slávenia, ktoré sú v breviári v častiach
 <i>Vlastné časti liturgických období</i> a <i>Slávnosti v období „cez rok“</i>.
 Ďalej sa určia poradové týždne: týždeň daného obdobia, týždeň žaltára.určia
 aj prípadné slávenia, ktoré pripadnú na hraničné dni medzi obdobiami (medzníky).
-<br>&nbsp;
-<li>
-2. fáza: <b>Liturgické dáta pre sviatky svätých</b></li>
+</li>
 
+<li>2. fáza: <b>Liturgické dáta pre sviatky svätých</b>
 <br>Táto fáza pre daný deň (bez ohľadu na predošlé liturgické začlenenie)
 zistí počet sviatkov svätých (berieme totiž do úvahy, že v daný deň môže
 byť viac ľubovoľných spomienok) a pre každý z nich vytvorí dátovú štruktúru,
@@ -135,18 +140,23 @@ spomienky podla vseobecneho kalendara */</tt>
 <br><tt>&nbsp;&nbsp;&nbsp;&nbsp; strcpy(_global_svaty2.meno, "Sv. Fidéla
 zo Sigmaringenu, kňaza a mučeníka");</tt>
 <br><tt>&nbsp;&nbsp;&nbsp;&nbsp; _global_svaty2.spolcast =</tt>
-<ul><tt>&nbsp;&nbsp;&nbsp;&nbsp; _encode_spol_cast(MODL_SPOL_CAST_MUCENIK,
-MODL_SPOL_CAST_DUCH_PAST_KNAZ);</tt></ul>
+<ul class="level0">
+<li>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp; _encode_spol_cast(MODL_SPOL_CAST_MUCENIK,
+MODL_SPOL_CAST_DUCH_PAST_KNAZ);</tt>
+</li>
+</ul>
 Pripomíname, že v tejto fáze sa všetky slávenia, ktoré sú v breviári zaradené
 v časti <i>Vlastné časti na sviatky svätých</i>.
-<br>&nbsp;
-<li>
-3. fáza: <b>Porovnanie</b></li>
+</li>
 
-<br>Zo všetkých slávení, prichádzajúcich do úvahy sa uprednostní 
-to slávenie, ktoré má v 
+<li>3. fáza: <b>Porovnanie</b>
+<br>Zo všetkých slávení, prichádzajúcich do úvahy sa uprednostní to slávenie, ktoré má v 
 <a href="../docs/smer_lrk.htm#tabulka">tabuľke liturgických dní</a> vyšší stupeň. Ak ide o sobotu v období
-cez rok, berie sa do úvahy aj spomienka Panny Márie v sobotu.</ul>
+cez rok, berie sa do úvahy aj spomienka Panny Márie v sobotu.
+</li>
+
+</ul>
 
 <h4 class="blue">Vytvorenie modlitby</h4>
 

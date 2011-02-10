@@ -440,6 +440,7 @@ char *caps_BIG(const char *input){
  *
  */
 void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ){
+	/* 2003-07-09 zmeneny & na HTML_AMPERSAND kvoli HTML 4.01 */
 	char pom[MAX_STR];
 
 	/* ak pozadujeme vytvorenie linku s inou farbou pre prestupny rok, 2003-07-02 */
@@ -458,21 +459,21 @@ void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ){
 	strcat(_global_link, script_name);
 
 	/* query_type */
-	sprintf(pom, "?%s=%s&", STR_QUERY_TYPE, STR_PRM_DATUM);
+	sprintf(pom, "?%s=%s"HTML_AMPERSAND, STR_QUERY_TYPE, STR_PRM_DATUM);
 	strcat(_global_link, pom);
 
 	/* den */
 	if(den == VSETKY_DNI)
-		sprintf(pom, "%s=%s&", STR_DEN, STR_VSETKY_DNI);
+		sprintf(pom, "%s=%s"HTML_AMPERSAND, STR_DEN, STR_VSETKY_DNI);
 	else
-		sprintf(pom, "%s=%d&", STR_DEN, den);
+		sprintf(pom, "%s=%d"HTML_AMPERSAND, STR_DEN, den);
 	strcat(_global_link, pom);
 
 	/* mesiac */
 	if(mesiac == VSETKY_MESIACE)
-		sprintf(pom, "%s=%s&", STR_MESIAC, STR_VSETKY_MESIACE);
+		sprintf(pom, "%s=%s"HTML_AMPERSAND, STR_MESIAC, STR_VSETKY_MESIACE);
 	else
-		sprintf(pom, "%s=%d&", STR_MESIAC, mesiac);
+		sprintf(pom, "%s=%d"HTML_AMPERSAND, STR_MESIAC, mesiac);
 	strcat(_global_link, pom);
 
 	/* rok */
