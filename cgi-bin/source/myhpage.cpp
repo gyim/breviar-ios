@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* myhpage.cpp                                                 */
-/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2003 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje vypis hlavicky a patky HTML dokumentu*/
 /* document history                                            */
@@ -9,6 +9,9 @@
 /*   25/02/2000A.D. | zrusena funkcia linky()                  */
 /*   12/04/2000A.D. | pridana stranka HTTP_ADDRESS             */
 /*   06/09/2001A.D. | tento popis                              */
+/*   2003-06-30a.D. | pridane vypisovanie BUILD_DATE (mybase.h)*/
+/*                  - tiez zapoznamkovane Kodovanie w-1250.    */
+/*                                                             */
 /*                                                             */
 /***************************************************************/
 
@@ -83,7 +86,12 @@ void patka(void){
 		dnes.tm_hour,
 		dnes.tm_min,
 		dnes.tm_sec);
-	Export("Kódovanie Windows-1250 (Central European).\n");
+
+	/* nezabudni zmenit #define BUILD_DATE v mybase.h!!! (2003-06-30) */
+	Export("Build: %s. ", BUILD_DATE);
+
+	/* zapoznamkovane, 2003-06-30 */
+	/* Export("Kódovanie Windows-1250 (Central European).\n"); */
 	Export("</FONT>\n<br>\n");
 
 	/* pridana stranka HTTP_ADDRESS, 12/04/2000A.D. */

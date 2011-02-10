@@ -1,12 +1,13 @@
 /***************************************************************/
 /*                                                             */
 /* mybase.h                                                    */
-/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2003 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne vecicky                     */
 /* document history                                            */
 /*   29/10/1999A.D. | created                                  */
 /*   06/09/2001A.D. | tento popis                              */
+/*   2003-06-30a.D. | build (priliepa sa do hlavicky)          */
 /*                                                             */
 /***************************************************************/
 
@@ -14,6 +15,8 @@
 #define __MYBASE_H_
 
 #include <stdio.h>
+
+#define BUILD_DATE "2003-06-30"
 
 //#define RUN_MODLITBA_CEZ_DEN
 /* 18/02/2000A.D.-- ci alokovat miesto pre a pouzivat

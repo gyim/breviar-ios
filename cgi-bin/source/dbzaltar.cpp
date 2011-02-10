@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* dbzaltar.cpp                                                */
-/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2003 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | program tvoriaci stranky pre liturgiu hodin   */
 /* document history                                            */
@@ -18,6 +18,8 @@
 /*   06/09/2001A.D. | tento popis                              */
 /*   07/09/2001A.D. | opravene: sv. Brigity (sviatok)          */
 /*   26/09/2001A.D. | opravene: sv. Terezie Benedikty (sviatok)*/
+/*   2003-06-30a.D. | zmeny pre spomienku neposkvrn.srdca PM   */
+/*                                                             */
 /* notes |                                                     */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
 /*                                                             */
@@ -509,7 +511,7 @@ void anchor_name_zaltar(int den, int tyzzal, int modlitba, char *anchor){
 
 
 #define set_LOG_zaltar
-//Log("   set(): %s: `%s', <!--{...:%s}-->\n", nazov_modlitby[modlitba], _file, _anchor)
+//Log("   set(zaltar): %s: `%s', <!--{...:%s}-->\n", nazov_modlitby[modlitba], _file, _anchor)
 
 void set_hymnus(int den, int tyzzal, int modlitba){
 	/* prvy a treti, resp. druhy a stvrty tyzden maju rovnake */
@@ -629,7 +631,7 @@ void set_magnifikat(int den, int tyzzal, int modlitba){
 
 void set_popis(int modlitba, char *file, char *anchor){
 	_set_popis(modlitba, file, anchor);
-	Log("   set(): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby[modlitba], _file, _anchor);
+	Log("   set(popis): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby[modlitba], _file, _anchor);
 }
 
 void set_popis_dummy(void){
@@ -1429,7 +1431,8 @@ void _set_zalmy_vsetkych_svatych(int modlitba){
 	Log("_set_zalmy_vsetkych_svatych(%s) -- end\n", nazov_modlitby[modlitba]);
 }
 
-#define set_LOG_litobd Log("   set(): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby[modlitba], _file, _anchor)
+/* 2003-06-30 pre lahsie debugovanie obohateny vypis */
+#define set_LOG_litobd Log("   set(litobd): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby[modlitba], _file, _anchor)
 void liturgicke_obdobie(int litobd, int tyzden, int den, int tyzzal, int poradie_svateho){
 	int modlitba, t;
 
@@ -1465,9 +1468,12 @@ void liturgicke_obdobie(int litobd, int tyzden, int den, int tyzzal, int poradie
 	  * 28/03/2000A.D.
 	  * rovnako tak slavnost vsetkych svatych (1. novembra) - bez ohladu na to, ci ide o nedelu,
 	  * 29/03/2000A.D.
+	  *
+	  * 2003-06-30a.D.: rovnako tak pre slavnost sv. Petra a sv. Pavla (29. juna)
 	  */
 	if(
 		((_global_den.denvt == DEN_NEDELA) && (_global_den.den == 6) && (_global_den.mesiac - 1 == MES_AUG)) ||
+		((_global_den.denvt == DEN_NEDELA) && (_global_den.den == 29) && (_global_den.mesiac - 1 == MES_JUN)) ||
 		((_global_den.denvt == DEN_NEDELA) && (_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP)) ||
 		((_global_den.den == 1) && (_global_den.mesiac - 1 == MES_NOV))
 		){
@@ -4313,7 +4319,8 @@ int modlitba;
 
 /* najprv nejake define'y... */
 #define LOG_ciara_sv Log("  -------------------------\n");
-#define set_LOG_svsv Log("   set(): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby[modlitba], _file, _anchor)
+/* 2003-06-30 pre lahsie debugovanie obohateny vypis */
+#define set_LOG_svsv Log("   set(svsv): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby[modlitba], _file, _anchor)
 
 /* ked dostane strukturu sc, vrati
  * MODL_SPOL_CAST_DUCH_PAST_... resp.
@@ -5244,6 +5251,9 @@ void set_spolocna_cast(_struct_sc sc, int poradie_svaty){
 	set_popis(modlitba, _file, _anchor); /* pridane 05/04/2000A.D. */
 	modlitba = MODL_PRVE_VESPERY;
 	set_popis(modlitba, _file, _anchor); /* pridane 05/04/2000A.D. */
+	/* 2003-06-30: tento POPIS nie je dobre nastaveny pre spomienku
+	 * Nepoškvrneného Srdca prebl. Panny Márie,
+	 * preto je tam nastaveny este raz na dummy, vid ZNOVUNASTAVENIE_POPISU_NA_DUMMY */
 
 	/* tu bola pasaz, nastavujuca _global_opt3 na sc.a1 v pripade,
 	 * ze je neurcena;
@@ -10358,14 +10368,21 @@ label_8_DEC:
 	set_LOG_litobd;\
 }
 	if((_global_den.denvr == (_global_r._ZOSLANIE_DUCHA_SV.denvr + 20)) && 
-		(_global_svaty1.smer > 10)){
+		(_global_svaty1.smer >= 10)){
 		/* neposkvrneneho srdca panny marie; 10/03/2000A.D.;
-		 * berie sa len v takom pripade, ked to nekoliduje s inou povinnou spomienkou alebo slavenim,
-		 * co ma vyssiu prioritu (smer <= 10)
+		 * vtedy som aj napisal tuto vysvetlujucu poznamku:
+		       "berie sa len v takom pripade, ked to nekoliduje 
+		        s inou povinnou spomienkou alebo slavenim,
+		        co ma vyssiu prioritu (smer <= 10)"
+		 * kedze vsak som si uvedomil, ze bolo treba nastavit smer=10,
+		 * tu treba dat opravenu poznamku:
+		       "berie sa v takom pripade, ked nie je slavenie s vyssou prioritou,
+			    teda smer < 10"
+		 * 2003-06-30a.D.
 		 */
 		Log(" neposkvrneneho srdca panny marie: \n");
-		Log(" ...berie sa len v takom pripade, ked to nekoliduje s inou povinnou spomienkou\n");
-		Log(" ...alebo slavenim, co ma vyssiu prioritu (smer <= 10)\n");
+		Log(" ...berie sa len v takom pripade, ked to nekoliduje\n");
+		Log(" ...so slavenim, co ma vyssiu prioritu (smer < 10)\n");
 		/* 04/07/2000A.D.: vypisanie logu, uprava */
 		poradie_svaty = 1;
 		if(poradie_svaty == 1){
@@ -10373,6 +10390,10 @@ label_8_DEC:
 
 			if(query_type != PRM_DETAILY)
 			set_spolocna_cast(sc, poradie_svaty);
+			/* ZNOVUNASTAVENIE_POPISU_NA_DUMMY, 2003-06-30 */
+			Log("vo funkcii sviatky_svatych() spustam set_popis_dummy(); - kvoli spomienke neposkvrneneho srdca panny marie...\n");
+			set_popis_dummy();
+			Log("set_popis_dummy() skoncila.\n");
 
 			strcpy(_file, FILE_SRDCA_PM);
 			strcpy(_anchor, ANCHOR_SRDCA_PM);
@@ -10382,11 +10403,14 @@ label_8_DEC:
 			_srdca_pm_modlitba;
 		}
 		_global_svaty1.typslav = SLAV_SPOMIENKA;
-		_global_svaty1.smer = 11; /* miestne povinne spomienky podla vseobecneho kalendara */
-						/* zrejme pre Slovensko je tato lubovolna spomienka povinna; 
-						 * aby sa nebila s inou spomienkou, dal som tam smer == 11; 10/03/2000A.D.;
-						 * porov. pasaz venovanu srdcu pm vo funkcii dnes.cpp::_rozbor_dna()
-						 */
+		/* 2003-06-30: kedysi tu bolo 11: "miestne povinne spomienky podla vseobecneho kalendara"
+		 * zmenil som to na 10 */
+		_global_svaty1.smer = 10; 
+		/* vysvetlujuca poznamka z r. 2000: "zrejme pre Slovensko je tato lubovolna 
+		 * spomienka povinna; aby sa nebila s inou spomienkou, dal som tam 
+		 * smer == 11; 10/03/2000A.D.;" -- zmenene 2003-06-30
+		 * porov. pasaz venovanu srdcu pm vo funkcii breviar.cpp::_rozbor_dna()
+		 */
 		strcpy(_global_svaty1.meno, "Nepoškvrneného Srdca prebl. Panny Márie");
 		_global_svaty1.spolcast =
 			_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);

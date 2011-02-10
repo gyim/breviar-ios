@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* breviar.cpp                                                 */
-/* (c)1998-2001 | Juraj Videky | videky@breviar.sk             */
+/* (c)1998-2003 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | program tvoriaci stranky pre liturgiu hodin   */
 /* document history                                            */
@@ -11,6 +11,14 @@
 /*   25/02/2000A.D. | bratislava, modified                     */
 /*   30/03/2000A.D. | premenoval som dnes.cpp na breviar.cpp   */
 /*   06/09/2001A.D. | tento popis                              */
+/*   2003-06-27a.D. | zacinam znova :))                        */
+/*                  - nefunguju detaily pre spomienku pm v sob.*/
+/*                  - 2003-06-28: sv.Irenej; ma byt aj srdce pm*/
+/*   2003-06-30a.D. | Peto Santavy napisal mail o chybach      */
+/*                  - prve vespery petra-pavla su zle v r.2003 */
+/*                    (2003-06-28): zmena v liturgicke_obdobie */
+/*                                                             */
+/*                                                             */
 /* notes |                                                     */
 /*   * ako kompilovat a linkovat?                              */
 /*     najdi zarazku KOMPILACIA -- niekde ku koncu             */
@@ -1662,14 +1670,20 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 					else if(_global_den.denvr == SRDPM){
 						/* srdca prebl. panny marie == ZDS + 20 */
 						_rozbor_dna_LOG("/* srdca prebl. panny marie */\n");
-						_global_den.smer = 11; /* miestne povinne spomienky podla vseobecneho kalendara */
-						/* zrejme pre Slovensko je tato lubovolna spomienka povinna; 
-						 * aby sa nebila s inou spomienkou, dal som tam smer == 11; 10/03/2000A.D. */
+
+						/* 2003-06-30: povodne tu bolo 11: "miestne povinne spomienky podla vseobecneho kalendara",
+						 * zmenil som to na 10.
+						 * nasleduje nejaka starsia vysvetlujuca poznamka; 
+						 * "zrejme pre Slovensko je tato lubovolna spomienka povinna; 
+						 *  aby sa nebila s inou spomienkou, dal som tam smer == 11; 10/03/2000A.D." 
+						 */
+						_global_den.smer = 10;
 						_global_den.typslav = SLAV_SPOMIENKA;
 						mystrcpy(_global_den.meno, "Nepoškvrneného Srdca prebl. Panny Márie", MENO_SVIATKU);
 						_global_den.spolcast = /* pridane 04/07/2000A.D. */
 							_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 						_global_opt3 = MODL_SPOL_CAST_PANNA_MARIA;
+						/* 2003-06-30: porov. pasaz venovanu srdcu pm vo funkcii dbzaltar.cpp::sviatky_svatych(); -- 2 vstupy */
 					}
 					else{
 						_global_den.smer = 13; /* vsedne dni `cez rok' */
@@ -1761,10 +1775,15 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 	 */
 	Log("_global_den.smer == %d\n", _global_den.smer);
 	Log("_global_den.spolcast == %d\n", _global_den.spolcast);
-	//Log("spustam sviatky_svatych(%d, %d);...\n", _global_den.den, _global_den.mesiac);
+
+	/* 2003-06-30, odkomentovane kvoli lepsiemu debugovaniu */
+	Log("spustam sviatky_svatych(%d, %d);...\n", _global_den.den, _global_den.mesiac);
 
 	_global_pocet_svatych = sviatky_svatych(_global_den.den, _global_den.mesiac);
 	_rozbor_dna_LOG("_global_pocet_svatych = %d\n", _global_pocet_svatych);
+
+	/* 2003-06-30 */
+	//Log("_global_modl_prve_vespery:\n"); Log(_global_modl_prve_vespery);
 
 	/* pridane 28/03/2000A.D.: ak chce vacsie cislo (poradie svateho) ako je v _global_pocet_svatych
 	 * resp. ked nie je sobota a chce poradie svateho 4 (spomienka p. marie v sobotu)
@@ -1804,7 +1823,7 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 		}
 
 		/* c. 12 v c. 59 vseob. smernic: "lubovolne spomienky, ktore sa mozu
-		 * slavit aj v dnoch uvedenych pod c. 9 [...] tak ist v omsi a oficiu
+		 * slavit aj v dnoch uvedenych pod c. 9 [...] tak isto v omsi a oficiu
 		 * na sposob lubovolnych spomienok mozno slavit tie povinne spomienky,
 		 * ktore obcas pripadnu na vsedne dni v poste." ... */
 		if(((_global_den.smer == 9) &&
@@ -2832,6 +2851,8 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
  * POZOR! Narozdiel od rozbor dna, pred samotnym spustenim generovania
  * modlitby je vysledok (co sa presne bude modlit) v premennej _global_den;
  *
+ * 2003-06-30: chyba toho, ze pre 2003-06-28, vespery, neboli 1. vespery zo
+ * sviatku (slavnosti) sv. Petra a sv. Pavla, bude asi v porovnani!!!
  */
 void rozbor_dna_s_modlitbou(int den, int mesiac, int rok, int modlitba, int poradie_svaty){
 	int ret = SUCCESS;
@@ -2843,7 +2864,8 @@ void rozbor_dna_s_modlitbou(int den, int mesiac, int rok, int modlitba, int pora
 
 	/* lokalne premenne obsahujuce data modlitbach -- 23/02/2000A.D.
 	 * prerobene, aby sa alokovali dynamicky */
-#define POKUS_24_02_2000
+
+//#define POKUS_24_02_2000 -- zapoznamkovane 2003-06-30
 #ifdef POKUS_24_02_2000
 	_type_1vespery      _local_modl_prve_vespery;
 	_type_1kompletorium _local_modl_prve_kompletorium;
@@ -2951,6 +2973,9 @@ void rozbor_dna_s_modlitbou(int den, int mesiac, int rok, int modlitba, int pora
 #ifndef POKUS_24_02_2000
 		_local_modl_vespery = _global_modl_vespery;
 		_local_modl_kompletorium = _global_modl_kompletorium;
+	/* logy pridane 2003-06-30 */
+		Log("_local_modl_vespery obsahuje:\n"); Log(_local_modl_vespery);
+		// Log("_local_modl_prve_kompletorium obsahuje:\n"); Log(_local_modl_prve_kompletorium);
 #endif
 		mystrcpy(_local_string, _global_string, MAX_STR);
 	}/* kompletorium alebo vespery */
@@ -3018,11 +3043,16 @@ void rozbor_dna_s_modlitbou(int den, int mesiac, int rok, int modlitba, int pora
 		Log("dalsi den (%d.%d): _local_den.smer == %d, _local_den.denvt == %s, _local_den.litobd == %s (%d)\n",
 			_local_den.den, _local_den.mesiac,
 			_local_den.smer, nazov_dna[_local_den.denvt], nazov_obdobia[_local_den.litobd], _local_den.smer);
-		//Log(_local_den);
+		// 2003-06-30
+		Log(_local_den);
+		Log("_local_modl_prve_vespery obsahuje:\n"); Log(_local_modl_prve_vespery);
+		
 		Log("tento den (%d.%d): _global_den.smer == %d, _global_den.denvt == %s, _global_den.litobd == %s (%d)\n",
 			_global_den.den, _global_den.mesiac,
 			_global_den.smer, nazov_dna[_global_den.denvt], nazov_obdobia[_global_den.litobd], _global_den.smer);
-		//Log(_global_den);
+		// 2003-06-30
+		Log(_global_den);
+		Log("_global_modl_prve_vespery obsahuje:\n"); Log(_global_modl_prve_vespery);
 
 		/* if VYNIMKY: porov. nizsie. 14/03/2000A.D. */
 		if((_global_den.smer > _local_den.smer) ||
@@ -3253,7 +3283,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 	/* rozparsovanie parametrov den, mesiac, rok, svaty */
 	Log("/* rozparsovanie parametrov den, mesiac, rok, svaty */\n");
 	d = atoden(den); /* vrati VSETKY_DNI, resp. atoi(den) */
-   Log("den == `%s' (%d)\n", den, d);
+	Log("den == `%s' (%d)\n", den, d);
 	m = atomes(mesiac); /* bude to 0--11, resp. VSETKY_MESIACE resp. UNKNOWN_MESIAC */
 	Log("mes == `%s' (%d)\n", mesiac, m);
 	r = atoi(rok); /* vrati 0 v pripade chyby; alebo int */
@@ -3524,6 +3554,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 						d, nazov_mesiaca[m - 1], r);
 					sprintf(pom, "%d. %s %d", d, nazov_mesiaca[m - 1], r);
 					_export_heading1(pom);
+					/* 2003-06-30: podla toho, ci je alebo nie je urcena modlitba */
 					if(p == MODL_NEURCENA)
 						rozbor_dna(d, m, r);
 					else
@@ -4491,12 +4522,14 @@ int getArgv(int argc, char **argv){
 				case 'h':
 
 					/* opravene 07/09/2001A.D. - pridane niektore switche */
+					/* 2003-06-26 -- pridane -s (query string), -q psqs */
 					printf("lh | liturgia hodin | on-line breviar | http://www.breviar.sk \n");
 					printf("\t(c) juraj videky | videky@breviar.sk\n");
 					printf("usage | lh [switch [value]...]\n");
 					printf("switches |\n");
-					printf("\tq  query type (napr. %s, %s, %s, %s, ...)\n",
-						STR_PRM_DNES, STR_PRM_DATUM, STR_PRM_DETAILY, STR_PRM_TABULKA);
+					printf("\tq  query type (napr. %s, %s, %s, %s, %s, ...)\n",
+						STR_PRM_DNES, STR_PRM_DATUM, STR_PRM_DETAILY, STR_PRM_TABULKA, STR_PRM_SIMULACIA_QS);
+					printf("\ts  query string (tak ako je na webe)\n");
 					printf("\td  den  %s, %s (1--31, po--ne)\n", STR_DEN, STR_DEN_V_TYZDNI);
 					/* printf("\ts  SVIATOK \n"); */
 					printf("\tm  mesiac  %s (1--12, jan--dec)\n", STR_MESIAC);
@@ -4510,7 +4543,12 @@ int getArgv(int argc, char **argv){
 					printf("\tl  ci zobrazovat linky \n");
 					printf("\te  export filename (default: export.htm)\n");
 					printf("\ti  include folder\n");
-					printf("\th, ?  this help \n");
+					printf("\th, ?  tento help \n");
+					/* pridane 2003-06-27; prave prva uvedena linka sposobuje problem (nefunguju detaily pre spomienku pm v sobotu) */
+					printf("examples |\n");
+					printf("\tlh.exe -i..\\..\\..\\ -qpsqs -s\"qt=pdt&d=12&m=7&r=2003\"\n");
+					printf("\tlh -qpdt -d30 -m4 -r2002 -pmrch -ic:\\temp\\breviar\\ -emoja.htm\n");
+					printf("\tlh.exe -i..\\..\\..\\ -d28 -m6 -r2003 -qpdt -pmrch -x1\n");
 
 					Log("option %c (without value)\n", c, optarg); break;
 
@@ -5200,6 +5238,8 @@ int parseQueryString(void){
 }/* parseQueryString(); */
 
 /* KOMPILACIA -- idiotuv pruvodce kompilovanim tohoto gigantu */
+
+/* nezabudni zmenit #define BUILD_DATE v mybase.h!!! (2003-06-30) */
 
 /* 17/02/2000A.D.: Segmentation fault pod linuxom;
  * 18/02/2000A.D.:
