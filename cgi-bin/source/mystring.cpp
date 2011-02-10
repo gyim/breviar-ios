@@ -1,4 +1,14 @@
-/* 31/03/2000 A.D. Juraj Videky */
+/***************************************************************/
+/*                                                             */
+/* mystring.cpp                                                */
+/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
+/* description |                                               */
+/* document history                                            */
+/*   31/03/2000A.D. | created                                  */
+/*   06/09/2001A.D. | tento popis                              */
+/*                                                             */
+/***************************************************************/
 
 #include "mystring.h"
 

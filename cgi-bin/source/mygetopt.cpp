@@ -1,17 +1,24 @@
-/*
- * Casti upravil duurko (Juraj Videky), 1999
- * port na DOS (bc31)
- * 	vyhodene #ifdef _LIBC...
- *		vyhodene #if defined (__STDC__) && __STDC__...
- *		predefinovanie NONOPTION_P, aby akceptovala aj dosovsky styl
- * 21/01/99a.D.
- * zas navrateny styl
- * "header: deklaracie (premenne extern)",
- * "c-fajl: definicie". 21/02/2000A.D.
- *
- * (kedysi boli premenne co su v headri extern, inicializovane v headri)
- *
- */
+/***************************************************************/
+/*                                                             */
+/* mygetopt.cpp                                                */
+/* Copyright (C) 1989,90,91,92,93,94,96,97                     */
+/*                              Free Software Foundation, Inc. */
+/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/* description | obsahuje exportne rutinky na export           */
+/*               do suboru FILE_EXPORT alebo stdout            */
+/* document history                                            */
+/*   21/11/1999A.D. | port na DOS (bc31):                      */
+/*        vyhodene #ifdef _LIBC...                             */
+/*        vyhodene #if defined (__STDC__) && __STDC__...       */
+/*        predefinovanie NONOPTION_P, aby akceptovala DOS-styl */
+/*        zapoznamkovane //extern, pretoze sa nachadzaju       */
+/*                priamo v mygetopt.c resp. prilahlom programe */
+/*   21/02/2000A.D. | zas navrateny styl                       */
+/*                    "header: deklaracie (premenne extern)",  */
+/*                    "c-fajl: definicie".                     */
+/*   06/09/2001A.D. | tento popis                              */
+/*                                                             */
+/***************************************************************/
 
 //#define MAIN
 

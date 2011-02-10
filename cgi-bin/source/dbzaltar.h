@@ -1,5 +1,14 @@
-/* Juraj Videky */
-/* 22/02/2000A.D. */
+/***************************************************************/
+/*                                                             */
+/* dbzaltar.h                                                  */
+/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
+/* description |                                               */
+/* document history                                            */
+/*   22/02/2000A.D. | created                                  */
+/*   06/09/2001A.D. | tento popis                              */
+/*                                                             */
+/***************************************************************/
 
 #ifndef __DBZALTAR_H_
 #define __DBZALTAR_H_

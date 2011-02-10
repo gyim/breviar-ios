@@ -1,7 +1,17 @@
-/* obsahuje zakladne define'y */
-/* Juraj Videky, 12/11/99a.D. */
-/* modifikovane, 01/02/2000A.D. */
-/* 09/02/2000A.D. pridane PRM_DETAILY */
+/***************************************************************/
+/*                                                             */
+/* mydefs.h                                                    */
+/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
+/* description | obsahuje zakladne define'y                    */
+/* document history                                            */
+/*   12/11/1999A.D. | created                                  */
+/*   01/02/2000A.D. | modifikovane                             */
+/*   09/02/2000A.D. | pridane PRM_DETAILY                      */
+/*   06/09/2001A.D. | zmenene SCRIPT_PATH(a) UNCGI_PATH(a),    */
+/*                    tento popis                              */
+/*                                                             */
+/***************************************************************/
 
 #ifndef __MYDEFS_H_
 #define __MYDEFS_H_
@@ -37,10 +47,13 @@
 
 /* Nazvy programov, suborov, skriptov... */
 #define SCRIPT_NAME          "l.cgi" /* kedysi tu bolo dnes.cgi */
-#define SCRIPT_PATH(a)       "cgi-bin/"##a
-#define UNCGI_PATH(a)        SCRIPT_PATH("uncgi.cgi/")##a
+#define SCRIPT_PATH(a)       "cgi-bin/"a
+	/* zmenene 06/09/2001A.D.; povodne tu bolo "cgi-bin/"##a */
+#define UNCGI_PATH(a)        SCRIPT_PATH("uncgi.cgi/")a
+	/* zmenene 06/09/2001A.D.; povodne tu bolo SCRIPT_PATH("uncgi.cgi/")##a */
 #define UNCGI_SCRIPT_NAME    UNCGI_PATH(SCRIPT_NAME)
-#define PATH_CGI(a) "cgi-bin/"##a
+#define PATH_CGI(a) "cgi-bin/"a
+	/* zmenene 06/09/2001A.D.; povodne tu bolo "cgi-bin/"##a */
 
 /* pridane 30/03/2000A.D. */
 extern char script_name[MAX_STR]; // = HTTP_ADDRESS + SCRIPT_PATH(SCRIPT_NAME)

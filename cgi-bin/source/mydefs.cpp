@@ -1,4 +1,15 @@
-/* 30/03/2000A.D. Juraj Videky */
+/***************************************************************/
+/*                                                             */
+/* mydefs.cpp                                                  */
+/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
+/* description | obsahuje zakladne define'y                    */
+/* document history                                            */
+/*   30/03/2000A.D. | created                                  */
+/*   06/09/2001A.D. | tento popis                              */
+/*                                                             */
+/***************************************************************/
+
 #include "mydefs.h"
 #include <string.h>
 

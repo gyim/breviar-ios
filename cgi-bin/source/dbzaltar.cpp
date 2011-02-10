@@ -1,17 +1,30 @@
-/* Juraj Videky */
-/* modifikovany 09/02/2000A.D. -- urobene .cpp kvoli dvojakosti fcie
- * sviatky_svatych(); a inym veciam;
- * historicka poznamka: povodne islo o dva fajly, dbzaltar.c a dbsvaty.c
- * 29/03/2000A.D. -- ukoncene vsetky mesiace MES_JAN -- MES_DEC, aleluja... OAMDG
- */
+/***************************************************************/
+/*                                                             */
+/* dbzaltar.cpp                                                */
+/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
+/* description | program tvoriaci stranky pre liturgiu hodin   */
+/* document history                                            */
+/*   09/02/2000A.D. | urobene .cpp kvoli dvojakosti funkcie    */
+/*                    sviatky_svatych(); a inym veciam         */
+/*   23/02/2000A.D. | ponechal som tu "stare", zle pokusy,     */
+/*                    oznacene WRONG_23_02_2000                */
+/*   05/04/2000A.D. | uz su dokoncene vsetky sviatky svatych.  */
+/*                    odstranil som label_... pre slavnosti    */
+/*                    obdobia cez rok, lebo tam nevadi, ze     */
+/*                    slavnost padne na nedelu, lebo ma vyssiu */
+/*                    prioritu                                 */
+/*   29/03/2000A.D. | ukoncene vsetky mesiace MES_JAN - MES_DEC*/
+/*   06/09/2001A.D. | tento popis                              */
+/*   07/09/2001A.D. | opravene: sv. Brigity (sviatok)          */
+/*   26/09/2001A.D. | opravene: sv. Terezie Benedikty (sviatok)*/
+/* notes |                                                     */
+/*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
+/*                                                             */
+/***************************************************************/
 
 //#define DETAIL_LOG_SVATY /* 22/02/2000A.D. */
 //#define DETAIL_LOG_GLOBAL_DEN /* 22/02/2000A.D. */
-/* 23/02/2000A.D. -- ponechal som tu "stare", zle pokusy, WRONG_23_02_2000 */
-/* 05/04/2000A.D. -- uz su dokoncene vsetky sviatky svatych. odstranil som 
- * label_... pre slavnosti obdobia cez rok, lebo tam nevadi, ze slavnost padne 
- * na nedelu, lebo ma vyssiu prioritu
- */
 
 #include "dbzaltar.h" /* 22/02/2000A.D. -- rozdelene na .h a .cpp subor */
 
@@ -7804,8 +7817,16 @@ label_25_MAR:
 
 						break;
 					}
-					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+					_global_svaty1.typslav = SLAV_SVIATOK;
+					/* _global_svaty1.smer = 12; */
+					/* zmena, na ktoru ma mailom zo dna Monday, July 23, 2001 11:40 AM upozornil 
+					 * Marian Valábek,SDB <marian.valabek@donbosco.sk>:
+					 * "Prosím opravte Sv. Brigita je spolu so sv. Katarínou Sienskou a 
+					 *  sv. Teréziou Benediktou z Kríza spolupatrónkou Európy a teda je 
+					 *  to v Európe sviatok od 1999."
+					 * 07/09/2001A.D.
+					 */
+					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					strcpy(_global_svaty1.meno, "Sv. Brigity, reho¾níèky");
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
@@ -8171,6 +8192,36 @@ label_25_MAR:
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
 							MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					break;
+				case 9:
+					if(poradie_svaty == 1){
+						/* definovanie parametrov pre modlitbu */
+
+						if(query_type != PRM_DETAILY)
+							set_spolocna_cast(sc, poradie_svaty);
+
+						modlitba = MODL_RANNE_CHVALY;
+						_vlastna_cast_modlitba;
+
+						modlitba = MODL_VESPERY;
+						_vlastna_cast_modlitba;
+
+						break;
+					}
+					_global_svaty1.typslav = SLAV_SVIATOK;
+					/* _global_svaty1.smer = 12; */
+					/* zmena, na ktoru ma mailom zo dna Monday, July 23, 2001 11:40 AM upozornil 
+					 * Marian Valábek,SDB <marian.valabek@donbosco.sk>:
+					 * "Prosím opravte Sv. Brigita je spolu so sv. Katarínou Sienskou a 
+					 *  sv. Teréziou Benediktou z Kríza spolupatrónkou Európy a teda je 
+					 *  to v Európe sviatok od 1999."
+					 * 26/09/2001A.D.
+					 */
+					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+					strcpy(_global_svaty1.meno, "Sv. Terézie Benedikty, reho¾níèky a muèenice");
+					_global_svaty1.spolcast =
+						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK,
+							MODL_SPOL_CAST_MUCENICA);
 					break;
 				case 10:
 					if(poradie_svaty == 1){

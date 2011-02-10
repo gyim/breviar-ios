@@ -1,5 +1,14 @@
-/* obsahuje zakladne vecicky */
-/* Juraj Videky, 29/10/99a.D. */
+/***************************************************************/
+/*                                                             */
+/* mybase.h                                                    */
+/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
+/* description | obsahuje zakladne vecicky                     */
+/* document history                                            */
+/*   29/10/1999A.D. | created                                  */
+/*   06/09/2001A.D. | tento popis                              */
+/*                                                             */
+/***************************************************************/
 
 #ifndef __MYBASE_H_
 #define __MYBASE_H_

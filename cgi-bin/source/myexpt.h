@@ -1,6 +1,16 @@
-/* obsahuje exportne rutinky na export do suboru FILE_EXPORT alebo stdout */
-/* Juraj Videky, 14/11/99a.D. */
-/* zmenena definicia FILE_EXPORT, 10/02/2000A.D. */
+/***************************************************************/
+/*                                                             */
+/* myexpt.h                                                    */
+/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
+/* description | obsahuje exportne rutinky na export           */
+/*               do suboru FILE_EXPORT alebo stdout            */
+/* document history                                            */
+/*   14/11/1999A.D. | created                                  */
+/*   10/02/2000A.D. | zmenena definicia FILE_EXPORT            */
+/*   06/09/2001A.D. | tento popis                              */
+/*                                                             */
+/***************************************************************/
 
 #ifndef __MYEXPT_H_
 #define __MYEXPT_H_

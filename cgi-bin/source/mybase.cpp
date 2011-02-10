@@ -1,6 +1,15 @@
-/* obsahuje zakladne vecicky */
-/* Juraj Videky, 19/11/98a.D. */
-/* prerobene na cpp. 30/03/2000A.D. */
+/***************************************************************/
+/*                                                             */
+/* mybase.cpp                                                  */
+/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
+/* description | obsahuje zakladne vecicky                     */
+/* document history                                            */
+/*   19/11/1998A.D. | created                                  */
+/*   30/03/2000A.D. | prerobene na cpp                         */
+/*   06/09/2001A.D. | tento popis                              */
+/*                                                             */
+/***************************************************************/
 
 #ifndef __MYBASE_CPP_
 #define __MYBASE_CPP_

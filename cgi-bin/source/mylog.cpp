@@ -1,12 +1,27 @@
-/*  Pomocne vypisovanie (logovanie) na obrazovku a/alebo do suboru
- *  Juraj Videky, 07/12/97a.D.
- *  prerobeny 13/10/98a.D.
- *  male zmeny 27/10/98a.D.
- *  NoLog (emptyLog) pridany 01/12/99a.D.
- *  LOGGING ponechane (v takom pripade sa loguje),
- *  pridane LOG_TO_FILE / LOG_TO_STDOUT
- *     24/02/2000A.D.
- */
+/***************************************************************/
+/*                                                             */
+/* mylog.cpp                                                   */
+/* (c)1997-2001 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
+/* description | pomocne vypisovanie (logovanie) na obrazovku  */
+/*               a/alebo do suboru                             */
+/* document history                                            */
+/*   07/12/1997A.D. | created                                  */
+/*   13/10/1998A.D. | prerobeny                                */
+/*   27/10/1998A.D. | male zmeny                               */
+/*   01/12/1999A.D. | pridany NoLog (emptyLog)                 */
+/*                    LOGGING ponechane (v takom pripade sa    */
+/*                    loguje)                                  */
+/*   24/02/2000A.D. |  pridane LOG_TO_FILE / LOG_TO_STDOUT     */
+/*   06/09/2001A.D. | tento popis                              */
+/* notes |                                                     */
+/*   * ked je v materskom programe definovane LOG_TO_FILE, bude*/
+/*     sa logovat do suboru, ktory treba dat ako vstup fname   */
+/*     v initLog                                               */
+/*   * v opacnom pripade sa nebude logovat do suboru           */
+/*                                                             */
+/***************************************************************/
+
 #ifndef __MYLOG_C_
 #define __MYLOG_C_
 

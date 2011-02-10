@@ -1,7 +1,16 @@
-/* obsahuje vypis hlavicky a patky HTML dokumentu */
-/* Juraj Videky, 28/10/99a.D. */
-/* trolilinku menene, 25/02/2000A.D. (zrusena funkcia linky()) */
-/* pridana stranka HTTP_ADDRESS, 12/04/2000A.D. */
+/***************************************************************/
+/*                                                             */
+/* myhpage.cpp                                                 */
+/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
+/* description | obsahuje vypis hlavicky a patky HTML dokumentu*/
+/* document history                                            */
+/*   28/10/1999A.D. | created                                  */
+/*   25/02/2000A.D. | zrusena funkcia linky()                  */
+/*   12/04/2000A.D. | pridana stranka HTTP_ADDRESS             */
+/*   06/09/2001A.D. | tento popis                              */
+/*                                                             */
+/***************************************************************/
 
 #ifndef __MYHPAGE_C_
 #define __MYHPAGE_C_

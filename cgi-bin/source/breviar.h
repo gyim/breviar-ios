@@ -1,8 +1,16 @@
-/* subor obsahujuci deklaracie globalnych premennych a funkciu main()
- * z dnes.cpp -- tam su definovane
- *
- * 30/03/2000A.D. -- premenovane dnes --> breviar
- */
+/***************************************************************/
+/*                                                             */
+/* breviar.h                                                   */
+/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
+/* description | obsahuje deklaracie globalnych premennych     */
+/*               a funkciu main() z dnes.cpp kde su definovane */
+/* document history                                            */
+/*   30/03/2000A.D. | premenovane dnes --> breviar             */
+/*   06/09/2001A.D. | tento popis                              */
+/*                                                             */
+/***************************************************************/
+
 #ifndef __BREVIAR_H
 #define __BREVIAR_H
 #include "liturgia.h"

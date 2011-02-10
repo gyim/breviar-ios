@@ -1,5 +1,14 @@
-/* definovane stringove kontanty */
-/* 18/02/2000A.D. */
+/***************************************************************/
+/*                                                             */
+/* hodin.h                                                     */
+/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
+/* description | definovane stringove kontanty                 */
+/* document history                                            */
+/*   18/02/2000A.D. | created                                  */
+/*   06/09/2001A.D. | tento popis                              */
+/*                                                             */
+/***************************************************************/
 
 #include "liturgia.h"
 

@@ -1,5 +1,14 @@
-/* obsahuje zakladne vecicky pre liturgiu hodin */
-/* Juraj Videky, 18/10/99a.D. */
+/***************************************************************/
+/*                                                             */
+/* liturgia.cpp                                                */
+/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
+/* description | obsahuje zakladne vecicky pre liturgiu hodin  */
+/* document history                                            */
+/*   18/10/1999A.D. | created                                  */
+/*   06/09/2001A.D. | tento popis                              */
+/*                                                             */
+/***************************************************************/
 
 #ifndef __LITURGIA_C_
 #define __LITURGIA_C_

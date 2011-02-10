@@ -1,9 +1,20 @@
-/* obsahuje exportne rutinky na export do suboru FILE_EXPORT alebo printf */
-/* Juraj Vid‚ky, 14/11/99a.D. */
-/* zmenena definicia FILE_EXPORT, 10/02/2000A.D. */
-/* zmenil som if defined -- 24/02/2000A.D.
- * povodne tam bolo DEBUG, teraz EXPORT_TO_FILE, pridal som EXPORT_TO_STDOUT
- */
+/***************************************************************/
+/*                                                             */
+/* myexpt.cpp                                                  */
+/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
+/* description | obsahuje exportne rutinky na export           */
+/*               do suboru FILE_EXPORT alebo stdout            */
+/* document history                                            */
+/*   14/11/1999A.D. | created                                  */
+/*   10/02/2000A.D. | zmenena definicia FILE_EXPORT            */
+/*   24/02/2000A.D. | zmenil som if defined: povodne tam bolo  */
+/*                    DEBUG, teraz EXPORT_TO_FILE,             */
+/*                    pridal som EXPORT_TO_STDOUT              */
+/*   06/09/2001A.D. | tento popis                              */
+/*                                                             */
+/***************************************************************/
+
 #ifndef __MYEXPT_C_
 #define __MYEXPT_C_
 

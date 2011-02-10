@@ -1,17 +1,22 @@
-/*  Program, ktory tvori stranky pre liturgiu hodin
- *
- *  (c) 1998, 1999, 2000 Juraj Videky
- *
- */
-/* Trencin, 29.,30. januara 2000, jv */
-/* Bratislava 01/02/2000 A.D. */
-/* Bratislava 18/02/2000 A.D. */
-/* Bratislava 25/02/2000 A.D. */
-/* Bratislava 30/03/2000 A.D. -- premenoval som dnes.cpp na breviar.cpp */
-
-/* ako kompilovat a linkovat? najdi zarazku KOMPILACIA -- niekde ku koncu */
-
-/* unfinished parts: signed by !!! */
+/***************************************************************/
+/*                                                             */
+/* breviar.cpp                                                 */
+/* (c)1998-2001 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
+/* description | program tvoriaci stranky pre liturgiu hodin   */
+/* document history                                            */
+/*   30/01/2000A.D. | trencin, modified                        */
+/*   01/02/2000A.D. | bratislava, modified                     */
+/*   18/02/2000A.D. | bratislava, modified                     */
+/*   25/02/2000A.D. | bratislava, modified                     */
+/*   30/03/2000A.D. | premenoval som dnes.cpp na breviar.cpp   */
+/*   06/09/2001A.D. | tento popis                              */
+/* notes |                                                     */
+/*   * ako kompilovat a linkovat?                              */
+/*     najdi zarazku KOMPILACIA -- niekde ku koncu             */
+/*   * unfinished parts: signed by !!!                         */
+/*                                                             */
+/***************************************************************/
 
 /* RUN_MODLITBA_CEZ_DEN je definovana v mybase.h */
 
@@ -4330,7 +4335,7 @@ int getArgv(int argc, char **argv){
 	 *  `f' (rok from), `g' (rok to), `l' (hyperlinky) pre -qptab
 	 * 05/06/2000A.D.: pridany parameter `i' (include directory)
 	 */
-	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::1::2::3::4::5::h::e::f::g::l::i::", MAX_STR);
+	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::1::2::3::4::5::h::e::f::g::l::i::\?::", MAX_STR);
 	/* tie options, ktore maju za sebou : maju povinny argument;
 	 *	ak maju :: tak maju volitelny */
 
@@ -4482,28 +4487,30 @@ int getArgv(int argc, char **argv){
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
 
-				case '?': break; /* pridany 05/06/2000A.D. */
+				case '?': /* pridany 05/06/2000A.D., oprava 07/09/2001A.D. */
 				case 'h':
-					printf("\n");
-					printf("swicthes:\n");
-					printf("\n");
-					printf("\t-q: query type (napr. %s, %s, %s, %s, ...)\n",
+
+					/* opravene 07/09/2001A.D. - pridane niektore switche */
+					printf("lh | liturgia hodin | on-line breviar | http://www.breviar.sk \n");
+					printf("\t(c) juraj videky | videky@breviar.sk\n");
+					printf("usage | lh [switch [value]...]\n");
+					printf("switches |\n");
+					printf("\tq  query type (napr. %s, %s, %s, %s, ...)\n",
 						STR_PRM_DNES, STR_PRM_DATUM, STR_PRM_DETAILY, STR_PRM_TABULKA);
-					printf("\t-d: den: %s, %s (1--31, po--ne)\n", STR_DEN, STR_DEN_V_TYZDNI);
-					/* printf("\t-s: SVIATOK \n"); */
-					printf("\t-m: mesiac: %s (1--12, jan--dec)\n", STR_MESIAC);
-					printf("\t-t: tyzden zaltara (1--4) \n");
-					printf("\t-r: rok (napr. 2000)\n");
-					printf("\t-p: %s (modlitba: napr. %s, %s, ...) \n", STR_MODLITBA, STR_MODL_RANNE_CHVALY, STR_MODL_VESPERY);
-					printf("\t-x: %s (dalsi svaty, 1--3 resp. 4) \n", STR_DALSI_SVATY);
-					printf("\t-1: option 1 \n");
-					printf("\t-2: option 2 \n");
-					printf("\t-3: option 3 \n");
-					printf("\t-4: option 4 \n");
-					printf("\t-e: export filename\n");
-					printf("\t-f: rok from \n");
-					printf("\t-g: rok to \n");
-					printf("\t-l: ci zobrazovat linky \n");
+					printf("\td  den  %s, %s (1--31, po--ne)\n", STR_DEN, STR_DEN_V_TYZDNI);
+					/* printf("\ts  SVIATOK \n"); */
+					printf("\tm  mesiac  %s (1--12, jan--dec)\n", STR_MESIAC);
+					printf("\tt  tyzden zaltara (1--4) \n");
+					printf("\tr  rok (napr. 2000)\n");
+					printf("\tp  %s (modlitba  napr. %s, %s, ...) \n", STR_MODLITBA, STR_MODL_RANNE_CHVALY, STR_MODL_VESPERY);
+					printf("\tx  %s (dalsi svaty, 1--3 resp. 4) \n", STR_DALSI_SVATY);
+					printf("\t1, 2, 3, 4  option 1, option 2, option 3, option 4 \n");
+					printf("\tf  rok from \n");
+					printf("\tg  rok to \n");
+					printf("\tl  ci zobrazovat linky \n");
+					printf("\te  export filename (default: export.htm)\n");
+					printf("\ti  include folder\n");
+					printf("\th, ?  this help \n");
 
 					Log("option %c (without value)\n", c, optarg); break;
 

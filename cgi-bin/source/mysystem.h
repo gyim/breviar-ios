@@ -1,8 +1,20 @@
-/* obsahuje jediny #define, urcujuci, v akom pracujem systeme */
-/* ovplyvnuje tvorbu linkov, DEBUG #define, veci pre loggovanie a export */
-/* Juraj Vid‚ky, 02/11/99a.D. */
-/* prekopane 24/02/2000A.D */
-/* 30/03/2000A.D. -- pridane OS_Windows, MODEL_DEBUG_Windows, MODEL_ostry_Windows */
+/***************************************************************/
+/*                                                             */
+/* mysystem.h                                                  */
+/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
+/* description | obsahuje jediny #define, urcujuci, v akom     */
+/*               systeme program pracuje; ovplyvnuje tvorbu    */
+/*               linkov, DEBUG #define, veci pre loggovanie a  */
+/*               export                                        */
+/* document history                                            */
+/*   02/11/1999A.D. | created                                  */
+/*   24/02/2000A.D. | prekopane                                */
+/*   30/03/2000A.D. | pridane OS_Windows, MODEL_DEBUG_Windows, */
+/*                    MODEL_ostry_Windows                      */
+/*   06/09/2001A.D. | tento popis                              */
+/*                                                             */
+/***************************************************************/
 
 #ifndef __MYSYSTEM_H_
 #define __MYSYSTEM_H_

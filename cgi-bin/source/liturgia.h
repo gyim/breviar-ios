@@ -1,9 +1,17 @@
-/* obsahuje zakladne vecicky pre liturgiu hodin */
-/* Juraj Videky, 01/11/99a.D. */
-/* modifikovana 01/02/2000A.D. */
-/* trosku prekopane 18/02/2000A.D.:
- * stringove kontanty su tu iba deklarovane; definovane su v hodin.h
- */
+/***************************************************************/
+/*                                                             */
+/* liturgia.h                                                  */
+/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
+/* description | obsahuje zakladne vecicky pre liturgiu hodin  */
+/* document history                                            */
+/*   01/11/1999A.D. | created                                  */
+/*   01/02/2000A.D. | modified                                 */
+/*   18/02/2000A.D. | trosku prekopane | stringove kontanty su */
+/*                    tu iba deklarovane; definovane v hodin.h */
+/*   06/09/2001A.D. | tento popis                              */
+/*                                                             */
+/***************************************************************/
 
 #ifndef __LITURGIA_H_
 #define __LITURGIA_H_

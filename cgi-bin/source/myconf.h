@@ -1,6 +1,16 @@
-/* 30/03/2000A.D. Juraj Videky */
+/***************************************************************/
+/*                                                             */
+/* myconf.h                                                    */
+/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
+/* description | poskytuje rozhranie na konfiguraciu,          */
+/*               subor CONFIG_FILE                             */
+/* document history                                            */
+/*   30/03/2000A.D. | created                                  */
+/*   06/09/2001A.D. | tento popis                              */
+/*                                                             */
+/***************************************************************/
 
-/* poskytuje rozhranie na konfiguraciu, subor CONFIG_FILE */
 #ifndef __MYCONFIG_H
 #define __MYCONFIG_H
 
