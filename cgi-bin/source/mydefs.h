@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* mydefs.h                                                    */
-/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2003 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne define'y                    */
 /* document history                                            */
@@ -10,6 +10,8 @@
 /*   09/02/2000A.D. | pridane PRM_DETAILY                      */
 /*   06/09/2001A.D. | zmenene SCRIPT_PATH(a) UNCGI_PATH(a),    */
 /*                    tento popis                              */
+/*   2003-07-02a.D. | pridane HTML konstanty (casti stringov) */
+/*                                                             */
 /*                                                             */
 /***************************************************************/
 
@@ -78,17 +80,13 @@ void updateUnCGIName(void);
  *                 (nova premenna pre debug mod, switch `-i')
  *                 
  */
+/* tu kedysi bolo aj #define PATH(a) zvacsa a, ale nebolo to treba; vyhodene 2003-07-02 */
 #if defined(OS_linux)
-	/* mozno by stacilo  "/"##a */
-	#define PATH(a)              "http://www.rcc.sk/breviar/"##a
-//	#define PATH(a)              "http://pec.upc.uniba.sk/~videky/"##a
 	#define FILE_PATH            "../include/"
 #elif defined(OS_DOS)
-//	#define PATH(a)              a /* 30/03/2000A.D. */
 	#define FILE_PATH            "c:\\breviar\\include\\"
 //	#define FILE_PATH(a)         "c:\\breviar\\"##a /* 01/03/2000A.D. */
 #elif defined(OS_Windows)
-	#define PATH(a)              a /* 30/03/2000A.D. */
 	extern char FILE_PATH[MAX_STR]; /* inicializovane v breviar.cpp */
 	/* FILE_PATH zmenene 05/06/2000A.D. */
 #else
@@ -327,5 +325,24 @@ extern int query_type; /* premenna obsahujuca PRM_... */
 #endif
 
 #define ALERT	Export("<p>Ak probl&eacute;my pretrv&aacute;vaj&uacute;, kontaktujte pros&iacute;m <a href=\"mailto:%s\">autora str&aacute;nky</a>.</p>\n", MAIL_ADDRESS)
+
+/* HTML stringy - casti stringov sustredene na tomto mieste; pridane 2003-07-02 */
+#define HTML_FORM_INPUT_SUBMIT   "input type=\"submit\" class=\"button\""
+#define HTML_FORM_INPUT_RESET    "input type=\"reset\" class=\"reset\""
+#define HTML_FORM_INPUT_RADIO    "input type=\"radio\" class=\"radio\""
+#define HTML_FORM_INPUT_TEXT     "input type=\"text\" class=\"text\""
+#define HTML_FORM_INPUT_CHECKBOX "input type=\"checkbox\" class=\"checkbox\""
+
+#define HTML_LINK_RED    "a class=\"red\""
+#define HTML_LINK_NORMAL "a"
+
+#define HTML_SPAN_NORMAL    "span class=\"normal\""
+#define HTML_SPAN_BOLD      "span class=\"bold\""
+#define HTML_SPAN_RED       "span class=\"red\""
+#define HTML_SPAN_RED_BOLD  "span class=\"redbold\""
+#define HTML_SPAN_BLUE      "span class=\"blue\""
+#define HTML_SPAN_BLUE_BOLD "span class=\"bluebold\""
+
+#define HTML_P_PATKA "p class=\"patka\""
 
 #endif /*__MYDEFS_H_*/

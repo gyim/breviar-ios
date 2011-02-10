@@ -19,7 +19,7 @@
 #ifndef __MYSYSTEM_H_
 #define __MYSYSTEM_H_
 
-/* OS_... - kvoli cestam (PATH...) */
+/* OS_... - kvoli cestam (FILE_PATH...) */
 /* MODEL_... -- model kompilacie */
 
 //#define MODEL_ostry_linux

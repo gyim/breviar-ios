@@ -16,7 +16,7 @@
 
 #include <stdio.h>
 
-#define BUILD_DATE "2003-06-30"
+#define BUILD_DATE "2003-07-02"
 
 //#define RUN_MODLITBA_CEZ_DEN
 /* 18/02/2000A.D.-- ci alokovat miesto pre a pouzivat

@@ -1,19 +1,22 @@
 /***************************************************************/
 /*                                                             */
 /* breviar.h                                                   */
-/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2003 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje deklaracie globalnych premennych     */
 /*               a funkciu main() z dnes.cpp kde su definovane */
 /* document history                                            */
 /*   30/03/2000A.D. | premenovane dnes --> breviar             */
 /*   06/09/2001A.D. | tento popis                              */
+/*   2003-07-01a.D. | void main je zakomentovane ak linux      */
 /*                                                             */
 /***************************************************************/
 
 #ifndef __BREVIAR_H
 #define __BREVIAR_H
+
 #include "liturgia.h"
+#include "mysystem.h" /* kvuoli OS_linux, zapoznamkovanie void main, 2003-07-01 */
 
 /* ------------------------------------------------------------------- */
 /* globalne premenne -- deklarovane v liturgia.h, definovane tu */
@@ -135,6 +138,8 @@ extern char *_global_string2;
 /*char _global_string2[MAX_STR];*/ /* obsahuje I, II, III, IV, V alebo pismeno roka */
 /* ------------------------------------------------------------------- */
 
+#ifndef OS_linux
 void main(int argc, char **argv);
+#endif /* OS_linux */
 
 #endif /* __BREVIAR_H */

@@ -442,7 +442,12 @@ char *caps_BIG(const char *input){
 void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ){
 	char pom[MAX_STR];
 
-	strcpy(_global_link, "<a href=\"");
+	/* ak pozadujeme vytvorenie linku s inou farbou pre prestupny rok, 2003-07-02 */
+	if(typ == LINK_DEN_MESIAC_ROK_PRESTUP)
+		strcpy(_global_link, "<"HTML_LINK_RED" href=\"");
+	else /* inak normalny a href, toto tu bolo predtym; 2003-07-02 */
+		strcpy(_global_link, "<"HTML_LINK_NORMAL" href=\"");
+
 	/* 13/04/2000A.D.: podla toho, co je v _global_linky, sa bud zobrazi
 	 * to co klasicky (linka), alebo
 	 * linka na subor FILE_NAME_POKEC + "d"/"m"/"r" + ".htm"
@@ -493,6 +498,7 @@ void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ){
 
 	/* napisanie textu linky */
 	switch(typ){
+		case LINK_DEN_MESIAC_ROK_PRESTUP: /* pridane 2003-07-02 */
 		case LINK_DEN_MESIAC_ROK:
 		case LINK_DEN_MESIAC:
 			if(den == VSETKY_DNI){

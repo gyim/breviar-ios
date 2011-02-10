@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* liturgia.h                                                  */
-/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2003 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne vecicky pre liturgiu hodin  */
 /* document history                                            */
@@ -10,6 +10,9 @@
 /*   18/02/2000A.D. | trosku prekopane | stringove kontanty su */
 /*                    tu iba deklarovane; definovane v hodin.h */
 /*   06/09/2001A.D. | tento popis                              */
+/*   2003-07-02a.D. | pridana LINK_DEN_MESIAC_ROK_PRESTUP      */
+/*                    kvoli prestupnym rokom (iny _global_link)*/
+/*                                                             */
 /*                                                             */
 /***************************************************************/
 
@@ -504,6 +507,7 @@ typedef struct lrok _struct_lrok;
 #define LINK_DEN_MESIAC_ROK 1
 #define LINK_DEN_MESIAC 3
 #define LINK_DEN 2
+#define LINK_DEN_MESIAC_ROK_PRESTUP 4 /* pridana kvoli prestupnym rokom, 2003-07-02 */
 
 /* ------------------------------------------------------------------- */
 /* globalne premenne -- su definovane v dnes.cpp (18/02/2000A.D.) */

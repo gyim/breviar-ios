@@ -8,19 +8,21 @@
 # Set this to your favorite C compiler.
 #
 # CC=gcc -g
-CC=g++
+CC=gcc -g
 
 #
 # Set this to the directory where your CGI scripts live.  Uncgi will look
 # there for backend scripts.
 #
-SCRIPT_BIN=/home/fmph/videky/public_html/cgi-bin
+#SCRIPT_BIN=/home/fmph/videky/public_html/cgi-bin
+SCRIPT_BIN=/var/www/www.breviar.sk/cgi-bin
 
 #
 # Set this to the directory you'd like to install uncgi in, typically your
 # server's cgi-bin directory (if any)
 #
-DESTDIR=/home/fmph/videky/public_html/cgi-bin
+#DESTDIR=/home/fmph/videky/public_html/cgi-bin
+DESTDIR=/var/www/www.breviar.sk/cgi-bin
 
 #
 # Set this to the filename extension, if any, that your server requires
