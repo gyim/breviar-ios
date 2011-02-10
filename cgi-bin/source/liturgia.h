@@ -21,6 +21,7 @@
 /*   2003-08-13a.D. | pridane logy pre modlitbu cez den        */
 /*                  - pridane MODL_CEZ_DEN_VSETKY              */
 /*   2003-08-21a.D. | definicie pre posvatne citania           */
+/*   2003-11-20a.D. | definicie pre posvatne citania zmenene   */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -52,13 +53,16 @@ typedef struct _anchor_and_file _struct_anchor_and_file;
 #define vchvalospev  zalm3
 #define magnifikat   benediktus
 
-/* definicie pre posvatne citania upravene 2003-08-21 */
-/* vers po psalmodii pred citaniami */
-#define	vers    	benediktus
+/* definicie pre posvatne citania upravene 2003-08-21 a opatovne 2003-11-20 */
+
+/* vers po psalmodii pred citaniami - je kresponz */
+
 /* prve  citanie aj s responzoriom za nim */
 #define	citanie1	kcitanie
+
 /* druhe citanie aj s responzoriom za nim */
-#define	citanie2	kresponz
+#define	citanie2	benediktus
+
 /* prosby ostavaju pre posvatne citania nedefinovane */
 
 struct tmodlitba1{
@@ -71,8 +75,8 @@ struct tmodlitba1{
 	_struct_anchor_and_file antifona3 ;
 	_struct_anchor_and_file zalm3     ;
 	_struct_anchor_and_file kcitanie  ; /* 1. citanie pre posvatne citanie */
-	_struct_anchor_and_file kresponz  ; /* 2. citanie pre posvatne citanie */
-	_struct_anchor_and_file benediktus; /* antifona na benediktus/magnifikat; vers po psalmodii pre posvatne citanie */
+	_struct_anchor_and_file kresponz  ; 
+	_struct_anchor_and_file benediktus; /* antifona na benediktus/magnifikat; 2. citanie pre posvatne citanie */
 	_struct_anchor_and_file prosby    ; /* pre posvatne citanie nedefinovane */
 	_struct_anchor_and_file modlitba  ;
 };
@@ -224,8 +228,8 @@ extern const char *TEMPLAT[];
 #define PARAM_MODLITBA     "MODLITBA"
 /* pridane 2003-08-06, upravene 2003-08-21 */                                        
 #define PARAM_CITANIE1     "CITANIE1" /* vlastne KCITANIE */
-#define PARAM_CITANIE2     "CITANIE2" /* vlastne KRESPONZ */
-#define PARAM_VERS         "VERS"     /* vlastne BENEDIKTUS */
+#define PARAM_CITANIE2     "CITANIE2" /* vlastne BENEDIKTUS */
+
 /* dalsie parametre: specificke pre obdobie */
 /* Od nedele P novho zmrtvychvstania a§ do Druhej velkonocnej nedele vr tane,
  * ako aj na druh‚ veçpery sl vnosti Zoslania Ducha Sv„t‚ho */
@@ -436,10 +440,13 @@ extern const char *nazov_OBDOBIA_V[];
 /* gen[itiv] == 2. pad, koho/coho */
 extern const char *nazov_obdobia_gen[];
 /* extern const char *nazov_Obdobia[]; */
+
 /* nazov_obdobia: string pre nazov suboru .htm liturgickeho obdobia */
 extern const char *nazov_obd_htm[];
 /* nazov_obdobia: string pre nazov kotvy v .htm liturgickeho obdobia */
 extern const char *nazov_OBD[];
+/* nazov_obdobia pc: string pre nazov suboru .htm liturgickeho obdobia pre posvatne citania */
+extern const char *nazov_obd_htm_pc[];
 
 /* typy slavenia */
 #define SLAV_NEURCENE            0

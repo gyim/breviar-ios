@@ -47,6 +47,10 @@
 /*                  - male zmeny v includeFile()               */
 /*                  - option5 dorobena aj do getForm()         */
 /*   2003-08-21a.D. | interpretParameter() pre posv. citania   */
+/*   2003-10-07a.D. | chybali prosby pre 1. vespery nediel OCR */
+/*                    dbzaltar.cpp::_SET_SPOLOCNE_VECI_NEDELA  */
+/*   2003-11-20a.D. | interpretParameter(): pre posv. citania  */
+/*                    pridane citanie1 a citanie2              */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -577,6 +581,7 @@ void includeFile(int type, char *paramname, char *fname, char *modlparam){
  *                 * OBD_VELKONOCNE_TROJDNIE && (den == nedela)
  *                 * _ZOSLANIE_DUCHA_SV && MODL_VESPERY
  * 2003-08-21a.D.: postupne pridavam case aj pre posvatne citania
+ * 2003-11-20a.D.: pridane citanie1 a citanie2 pre posvatne citania
  */
 #define je_post ((_global_den.litobd == OBD_POSTNE_I) || (_global_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && ((_global_den.denvt == DEN_PIATOK) || (_global_den.denvt == DEN_SOBOTA))))
 #define je_velka_noc ((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvt == DEN_NEDELA)))
@@ -1043,6 +1048,24 @@ void interpretParameter(int type, char *paramname){
 				break;
 		}/* switch */
 	}/* PARAM_KRESPONZ */
+	else if(equals(paramname, PARAM_CITANIE1)){
+		/* pridane 2003-11-20 */
+		if(type == MODL_POSV_CITANIE){
+			strcat(path, _global_modl_posv_citanie.citanie1.file);
+			includeFile(type, paramname, path, _global_modl_posv_citanie.citanie1.anchor);
+		}
+		else /* ostatne modlitby 1. citanie nemaju */
+		;
+	}/* PARAM_CITANIE1 */
+	else if(equals(paramname, PARAM_CITANIE2)){
+		/* pridane 2003-11-20 */
+		if(type == MODL_POSV_CITANIE){
+			strcat(path, _global_modl_posv_citanie.citanie2.file);
+			includeFile(type, paramname, path, _global_modl_posv_citanie.citanie2.anchor);
+		}
+		else /* ostatne modlitby 2. citanie nemaju */
+		;
+	}/* PARAM_CITANIE2 */
 	else if(equals(paramname, PARAM_MAGNIFIKAT)){
 		/* ak _global_skip_in_prayer je ANO, tak preskoc Magnifikat */
 		if((type == MODL_VESPERY) && (_global_skip_in_prayer != ANO)){
@@ -1133,6 +1156,11 @@ void interpretParameter(int type, char *paramname){
 			case MODL_KOMPLETORIUM:
 				strcat(path, _global_modl_kompletorium.modlitba.file);
 				includeFile(type, paramname, path, _global_modl_kompletorium.modlitba.anchor);
+				break;
+			/* pridane 2003-11-20 */
+			case MODL_POSV_CITANIE:
+				strcat(path, _global_modl_posv_citanie.modlitba.file);
+				includeFile(type, paramname, path, _global_modl_posv_citanie.modlitba.anchor);
 				break;
 			default:
 				/* tieto modlitby nemaju antifonu1 */
@@ -1873,7 +1901,8 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 	_rozbor_dna_LOG("_global_pocet_svatych = %d\n", _global_pocet_svatych);
 
 	/* 2003-06-30 */
-	//Log("_global_modl_prve_vespery:\n"); Log(_global_modl_prve_vespery);
+	/* 2003-10-07; prve nedelne vespery nemali prosby, chyba bola v dbzaltar.cpp::_SET_SPOLOCNE_VECI_NEDELA */
+	Log("(1) _global_modl_prve_vespery:\n"); Log(_global_modl_prve_vespery);
 
 	/* pridane 28/03/2000A.D.: ak chce vacsie cislo (poradie svateho) ako je v _global_pocet_svatych
 	 * resp. ked nie je sobota a chce poradie svateho 4 (spomienka p. marie v sobotu)
@@ -3359,6 +3388,9 @@ void rozbor_dna_s_modlitbou(int den, int mesiac, int rok, int modlitba, int pora
 		_local_modl_kompletorium = _global_modl_kompletorium;
 		/* logy pridane 2003-06-30 */
 		Log("_local_modl_vespery obsahuje:\n"); Log(_local_modl_vespery);
+		/* pridane 2003-10-07 kvoli debugovaniu, co prve vespery nediel ocr nemali prosby
+			Log("_local_modl_prve_vespery obsahuje:\n"); Log(_local_modl_prve_vespery);
+		*/
 		// Log("_local_modl_prve_kompletorium obsahuje:\n"); Log(_local_modl_prve_kompletorium);
 		mystrcpy(_local_string, _global_string, MAX_STR);
 	}/* kompletorium alebo vespery */
@@ -3386,9 +3418,11 @@ void rozbor_dna_s_modlitbou(int den, int mesiac, int rok, int modlitba, int pora
 	Log("teraz mam vsetky data v _global_den, _global_modl_...\n"); /* pridane 2003-08-13 */
 /*
  * 2003-08-13: tu bolo kedysi toto:
+ * kontrola 2003-10-07; uz na tomto mieste chybali prosby pre 1. vespery;
+   chyba bola v dbzaltar.cpp::_SET_SPOLOCNE_VECI_NEDELA - opravene.
 	Log("_local_modl_prve_vespery:\n"); Log(_local_modl_prve_vespery);
 	Log("_local_modl_vespery:\n"); Log(_local_modl_vespery);
-	Log("_global_modl_prve_vespery:\n"); Log(_global_modl_prve_vespery);
+	Log("(2) _global_modl_prve_vespery:\n"); Log(_global_modl_prve_vespery);
 	Log("_global_modl_vespery:\n"); Log(_global_modl_vespery);
  */
 	/* ak ma nasledujuci den prioritu pred dnesnym dnom */
@@ -3435,7 +3469,7 @@ void rozbor_dna_s_modlitbou(int den, int mesiac, int rok, int modlitba, int pora
 			_global_den.smer, nazov_dna[_global_den.denvt], nazov_obdobia[_global_den.litobd], _global_den.smer);
 		// 2003-06-30
 		Log(_global_den);
-		Log("_global_modl_prve_vespery obsahuje:\n"); Log(_global_modl_prve_vespery);
+		Log("(3) _global_modl_prve_vespery obsahuje:\n"); Log(_global_modl_prve_vespery);
 
 		/* if VYNIMKY: porov. nizsie. 14/03/2000A.D. */
 		if((_global_den.smer > _local_den.smer) ||

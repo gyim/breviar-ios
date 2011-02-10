@@ -8,6 +8,7 @@
 /*   22/02/2000A.D. | created                                  */
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-08-13a.D. | #define presunute sem z dbzaltar.cpp     */
+/*   2003-11-20a.D. | pridane ANCHOR_CITANIE 1 a 2             */
 /*                                                             */
 /***************************************************************/
 
@@ -61,6 +62,9 @@ void liturgicke_obdobie(int litobd, int tyzden, int den, int tyzzal, int poradie
 #define ANCHOR_BENEDIKTUS   "BENEDIKTUS" /* antifona na benediktus */
 #define ANCHOR_PROSBY       "PROSBY"
 #define ANCHOR_MODLITBA     "MODLITBA"
+/* pridane 2003-11-20 */
+#define ANCHOR_CITANIE1     "CIT1"
+#define ANCHOR_CITANIE2     "CIT2"
 
 /* special identifiers */
 #define SPOM_PM_SOBOTA "SPMVS"

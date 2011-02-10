@@ -9,6 +9,7 @@
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-08-07a.D. | pridane nazov_doplnkpsalm[]              */
 /*   2003-08-13a.D. | zrusene nazov_doplnkpsalm[]              */
+/*   2003-11-20a.D. | pridane nazov_obd_htm_pc[]               */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -192,6 +193,13 @@ const char *nazov_OBD[] =
  "POST1", "VTYZ",
  "VTROJ", "VN1", "VN2",
  "OKTNAR"};
+/* nazov_obdobia pc: string pre nazov suboru .htm liturgickeho obdobia pre posvatne citania */
+const char *nazov_obd_htm_pc[] =
+{"vnokt_pc.htm", "adv1_pc.htm", "adv2_pc.htm",
+ "vian1_pc.htm", "vian2_pc.htm", "cezrok_pc.htm",
+ "post1_pc.htm", "vtyz_pc.htm",
+ "vtroj_pc.htm", "vn1_pc.htm", "vn2_pc.htm",
+ "vian1_pc.htm"};
 
 const char *nazov_slavenia[] =
 {"___",

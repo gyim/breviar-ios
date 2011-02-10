@@ -3,6 +3,15 @@
  * alebo priamo v zdrojových textoch programu. 2003-07-16a.D.
  */
 ----------zaèiatok----------
+2003-11-04: oprava v texte (vešpery pondelka 1. a 3. týždòa, include/_1po.htm):
+	"Uzdrav mi dušu, * Zhrešil som proti tebe." -->
+	"Uzdrav moju dušu, * Zhrešil som proti tebe."
+	zaslal Jozef Šoška <jozefsoska@hotmail.com> (ïakujem)
+2003-10-07: oprava v kóde; pre 1. vešpery nedie¾ obdobia cez rok
+	chýbali v texte modlitby prosby
+	zaslala <otrubova@datacentrum.sk> (ïakujem)
+-	medzièasom do kódu i do adresára include/ pribudli ïalšie žalmy,
+	vlastne kompletne pre modlitbu cez deò a posvätné èítania (zo žaltára)
 2003-07-15: oprava v texte 1. vešpier z nedele 3. týždòa žaltára:
 -	include/_3ne.htm, BEGIN:_3NE1_PROSBY: "Ježiš Kristus" -> "Kristus"
 	zaslal Mário Bosý <medus@katarinka.sk> (ïakujem)

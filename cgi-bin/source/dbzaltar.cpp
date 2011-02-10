@@ -25,6 +25,8 @@
 /*                  - nastavovanie doplnkovej psalmodie        */
 /*                  - #define presunute do header-u dbzaltar.h */
 /*   2003-08-21a.D. | pokusy s posvatnymi citaniami (zalmy)    */
+/*   2003-10-07a.D. | zmena v _SET_SPOLOCNE_VECI_NEDELA        */
+/*   2003-11-20a.D. | zmeny pre posvatne citanie (adv1)        */
 /*                                                             */
 /* notes |                                                     */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
@@ -77,6 +79,10 @@ void _set_hymnus(int modlitba, const char *file, const char *anchor){
 			strcpy(_global_modl_ranne_chvaly.hymnus.file, file);
 			strcpy(_global_modl_ranne_chvaly.hymnus.anchor, anchor);
 			break;
+		case MODL_POSV_CITANIE:
+			strcpy(_global_modl_posv_citanie.hymnus.file, file);
+			strcpy(_global_modl_posv_citanie.hymnus.anchor, anchor);
+			break;
 		case MODL_CEZ_DEN_9:
 			strcpy(_global_modl_cez_den_9.hymnus.file, file);
 			strcpy(_global_modl_cez_den_9.hymnus.anchor, anchor);
@@ -126,6 +132,11 @@ void _set_antifona1(int modlitba, const char *file, const char *anchor){
 			strcpy(_global_modl_prve_vespery.antifona1.file, file);
 			strcpy(_global_modl_prve_vespery.antifona1.anchor, anchor);
 			break;
+		/* pridane 2003-11-20 */
+		case MODL_POSV_CITANIE:
+			strcpy(_global_modl_posv_citanie.antifona1.file, file);
+			strcpy(_global_modl_posv_citanie.antifona1.anchor, anchor);
+			break;
 	}/* switch(modlitba) */
 }
 
@@ -155,6 +166,11 @@ void _set_antifona2(int modlitba, const char *file, const char *anchor){
 			strcpy(_global_modl_prve_vespery.antifona2.file, file);
 			strcpy(_global_modl_prve_vespery.antifona2.anchor, anchor);
 			break;
+		/* pridane 2003-11-20 */
+		case MODL_POSV_CITANIE:
+			strcpy(_global_modl_posv_citanie.antifona2.file, file);
+			strcpy(_global_modl_posv_citanie.antifona2.anchor, anchor);
+			break;
 	}/* switch(modlitba) */
 }
 
@@ -183,6 +199,11 @@ void _set_antifona3(int modlitba, const char *file, const char *anchor){
 		case MODL_PRVE_VESPERY:
 			strcpy(_global_modl_prve_vespery.antifona3.file, file);
 			strcpy(_global_modl_prve_vespery.antifona3.anchor, anchor);
+			break;
+		/* pridane 2003-11-20 */
+		case MODL_POSV_CITANIE:
+			strcpy(_global_modl_posv_citanie.antifona3.file, file);
+			strcpy(_global_modl_posv_citanie.antifona3.anchor, anchor);
 			break;
 	}/* switch(modlitba) */
 }
@@ -315,6 +336,10 @@ void _set_zalm3(int modlitba, const char *file, const char *anchor){
 	}/* switch(modlitba) */
 }
 
+/* pri posvatnom citani plati pre 1. citanie */
+#define _set_citanie1 _set_kcitanie
+/* pridane 2003-11-20 */
+
 void _set_kcitanie(int modlitba, const char *file, const char *anchor){
 	switch(modlitba){
 		case MODL_RANNE_CHVALY:
@@ -341,9 +366,15 @@ void _set_kcitanie(int modlitba, const char *file, const char *anchor){
 			strcpy(_global_modl_prve_vespery.kcitanie.file, file);
 			strcpy(_global_modl_prve_vespery.kcitanie.anchor, anchor);
 			break;
+		/* pridane 2003-11-20 */
+		case MODL_POSV_CITANIE:
+			strcpy(_global_modl_posv_citanie.kcitanie.file, file);
+			strcpy(_global_modl_posv_citanie.kcitanie.anchor, anchor);
+			break;
 	}/* switch(modlitba) */
 }
 
+/* pri posvatnom citani plati pre responz _pred_ citaniami */
 void _set_kresponz(int modlitba, const char *file, const char *anchor){
 	switch(modlitba){
 		case MODL_RANNE_CHVALY:
@@ -370,8 +401,17 @@ void _set_kresponz(int modlitba, const char *file, const char *anchor){
 			strcpy(_global_modl_prve_vespery.kresponz.file, file);
 			strcpy(_global_modl_prve_vespery.kresponz.anchor, anchor);
 			break;
+		/* pridane 2003-11-20 */
+		case MODL_POSV_CITANIE:
+			strcpy(_global_modl_posv_citanie.kresponz.file, file);
+			strcpy(_global_modl_posv_citanie.kresponz.anchor, anchor);
+			break;
 	}/* switch(modlitba) */
 }
+
+/* pri posvatnom citani plati magn/ben pre 2. citanie */
+#define _set_citanie2 _set_benediktus
+/* pridane 2003-11-20 */
 
 #define _set_magnifikat _set_benediktus
 void _set_benediktus(int modlitba, const char *file, const char *anchor){
@@ -387,6 +427,11 @@ void _set_benediktus(int modlitba, const char *file, const char *anchor){
 		case MODL_PRVE_VESPERY:
 			strcpy(_global_modl_prve_vespery.benediktus.file, file);
 			strcpy(_global_modl_prve_vespery.benediktus.anchor, anchor);
+			break;
+		/* pridane 2003-11-20 */
+		case MODL_POSV_CITANIE:
+			strcpy(_global_modl_posv_citanie.benediktus.file, file);
+			strcpy(_global_modl_posv_citanie.benediktus.anchor, anchor);
 			break;
 	}/* switch(modlitba) */
 }
@@ -413,6 +458,10 @@ void _set_modlitba(int modlitba, const char *file, const char *anchor){
 		case MODL_RANNE_CHVALY:
 			strcpy(_global_modl_ranne_chvaly.modlitba.file, file);
 			strcpy(_global_modl_ranne_chvaly.modlitba.anchor, anchor);
+			break;
+		case MODL_POSV_CITANIE:
+			strcpy(_global_modl_posv_citanie.modlitba.file, file);
+			strcpy(_global_modl_posv_citanie.modlitba.anchor, anchor);
 			break;
 		case MODL_CEZ_DEN_9:
 			strcpy(_global_modl_cez_den_9.modlitba.file, file);
@@ -441,6 +490,8 @@ void _set_modlitba(int modlitba, const char *file, const char *anchor){
 
 /* files - nazvy suborov pre zaltar styroch tyzdnov */
 char _file[SMALL]; /* nazov fajlu, napr. _1ne.htm */
+char _file_pc[SMALL]; /* nazov fajlu pre posvatne citania; pridane 2003-11-20 */
+
 /* tyzzal == 1 .. 4,
  * den == 0 (DEN_NEDELA) .. 6 (DEN_SOBOTA) */
 void file_name_zaltar(int den, int tyzzal){
@@ -448,6 +499,10 @@ void file_name_zaltar(int den, int tyzzal){
 }
 void file_name_litobd(int litobd){
 	sprintf(_file, "%s", nazov_obd_htm[litobd]);
+}
+/* pridane 2003-11-20 - iny subor pre posvatne citania */
+void file_name_litobd_pc(int litobd){
+	sprintf(_file_pc, "%s", nazov_obd_htm_pc[litobd]);
 }
 
 /* anchors - nazvy kotiev pre zaltar styroch tyzdnov */
@@ -649,6 +704,7 @@ void set_popis_dummy(void){
 		set_antifony(den, tyzzal, m); \
 		set_kcitanie(den, tyzzal, m); \
 		set_kresponz(den, tyzzal, m); \
+		set_prosby  (den, tyzzal, m); /* 2003-10-07: pridane */\
 		/* set_modlitba(den, tyzzal, m); -- vlastna */ \
 	} \
 }
@@ -1725,6 +1781,10 @@ void liturgicke_obdobie(int litobd, int tyzden, int den, int tyzzal, int poradie
 	file_name_litobd(litobd);
 	Log("  _file == %s\n", _file);
 
+	/* file pre posvatne citania; pridane 2003-11-20 */
+	file_name_litobd_pc(litobd);
+	Log("  _file_pc == %s\n", _file_pc);
+
 	char c;
 	/* char c sa pouziva vo vynimocnych pripadoch: napr. druha velkonocna nedela; 09/03/2000A.D. */
 
@@ -1767,6 +1827,46 @@ void liturgicke_obdobie(int litobd, int tyzden, int den, int tyzzal, int poradie
 				pismenko_modlitby(modlitba), /* 'v' */
 				ANCHOR_KRESPONZ);
 			_set_kresponz(modlitba, _file, _anchor);
+			set_LOG_litobd;
+
+		/* posvatne citanie, pridane 2003-11-19 */
+			
+			/* hymnus */
+			modlitba = MODL_POSV_CITANIE;
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_HYMNUS);
+			_set_hymnus(modlitba, _file_pc, _anchor);
+			set_LOG_litobd;
+
+			/* modlitba - rovnaka ako cez den */
+			sprintf(_anchor, "%s%d%s_%s",
+				nazov_OBD[litobd],
+				tyzden,
+				nazov_DN_asci[den],
+				ANCHOR_MODLITBA);
+			_set_modlitba(modlitba, _file, _anchor);
+			set_LOG_litobd;
+
+			/* 1. citanie */
+			sprintf(_anchor, "%s%d%s%c_%s",
+				nazov_OBD[litobd],
+				tyzden,
+				nazov_DN_asci[den],
+				pismenko_modlitby(modlitba),
+				ANCHOR_CITANIE1);
+			_set_citanie1(modlitba, _file_pc, _anchor);
+			set_LOG_litobd;
+
+			/* 2. citanie */
+			sprintf(_anchor, "%s%d%s%c_%s",
+				nazov_OBD[litobd],
+				tyzden,
+				nazov_DN_asci[den],
+				pismenko_modlitby(modlitba),
+				ANCHOR_CITANIE2);
+			_set_citanie2(modlitba, _file_pc, _anchor);
 			set_LOG_litobd;
 
 			if(tyzden == 3)
@@ -1859,6 +1959,48 @@ void liturgicke_obdobie(int litobd, int tyzden, int den, int tyzzal, int poradie
 					nazov_DN_asci[den],
 					ANCHOR_MODLITBA);
 				_set_modlitba(modlitba, _file, _anchor);
+				set_LOG_litobd;
+
+			/* posvatne citanie */
+			/* pridane 2003-11-20 */
+
+				modlitba = MODL_POSV_CITANIE;
+
+				/* hymnus - rovnaky pre vsetky nedele */
+
+				/* kratke responzorium  */
+				sprintf(_anchor, "%s%s%c_%s",
+					nazov_OBD[litobd],
+					nazov_DN_asci[den],
+					pismenko_modlitby(modlitba),
+					ANCHOR_KRESPONZ);
+				_set_kresponz(modlitba, _file_pc, _anchor);
+				set_LOG_litobd;
+
+				/* antifony */
+				sprintf(_anchor, "%s%d%s%c_%s",
+					nazov_OBD[litobd],
+					tyzden,
+					nazov_DN_asci[den],
+					pismenko_modlitby(modlitba),
+					ANCHOR_ANTIFONA1);
+				_set_antifona1(modlitba, _file_pc, _anchor);
+				set_LOG_litobd;
+				sprintf(_anchor, "%s%d%s%c_%s",
+					nazov_OBD[litobd],
+					tyzden,
+					nazov_DN_asci[den],
+					pismenko_modlitby(modlitba),
+					ANCHOR_ANTIFONA2);
+				_set_antifona2(modlitba, _file_pc, _anchor);
+				set_LOG_litobd;
+				sprintf(_anchor, "%s%d%s%c_%s",
+					nazov_OBD[litobd],
+					tyzden,
+					nazov_DN_asci[den],
+					pismenko_modlitby(modlitba),
+					ANCHOR_ANTIFONA3);
+				_set_antifona3(modlitba, _file_pc, _anchor);
 				set_LOG_litobd;
 
 			/* ranne chvaly */
@@ -2000,6 +2142,48 @@ void liturgicke_obdobie(int litobd, int tyzden, int den, int tyzzal, int poradie
 
 			}/* nedela */
 			else{
+
+			/* posvatne citanie */
+			/* pridane 2003-11-20 */
+
+				modlitba = MODL_POSV_CITANIE;
+
+				/* hymnus - rovnaky pre vsetky dni */
+
+				/* kratke responzorium  */
+				sprintf(_anchor, "%s%s%c_%s",
+					nazov_OBD[litobd],
+					nazov_DN_asci[den],
+					pismenko_modlitby(modlitba),
+					ANCHOR_KRESPONZ);
+				_set_kresponz(modlitba, _file_pc, _anchor);
+				set_LOG_litobd;
+
+				/* antifony */
+				sprintf(_anchor, "%s%d%s%c_%s",
+					nazov_OBD[litobd],
+					tyzden,
+					nazov_DN_asci[den],
+					pismenko_modlitby(modlitba),
+					ANCHOR_ANTIFONA1);
+				_set_antifona1(modlitba, _file_pc, _anchor);
+				set_LOG_litobd;
+				sprintf(_anchor, "%s%d%s%c_%s",
+					nazov_OBD[litobd],
+					tyzden,
+					nazov_DN_asci[den],
+					pismenko_modlitby(modlitba),
+					ANCHOR_ANTIFONA2);
+				_set_antifona2(modlitba, _file_pc, _anchor);
+				set_LOG_litobd;
+				sprintf(_anchor, "%s%d%s%c_%s",
+					nazov_OBD[litobd],
+					tyzden,
+					nazov_DN_asci[den],
+					pismenko_modlitby(modlitba),
+					ANCHOR_ANTIFONA3);
+				_set_antifona3(modlitba, _file_pc, _anchor);
+				set_LOG_litobd;
 
 			/* ranne chvaly */
 				/* hymnus - rovnaky pre vsetky dni */
@@ -2282,7 +2466,17 @@ void liturgicke_obdobie(int litobd, int tyzden, int den, int tyzzal, int poradie
 			_set_prosby(modlitba, _file, _anchor);
 			set_LOG_litobd;
 
-		/* nedela */
+		/* posvatne citanie, pridane 2003-11-19 */
+			/* hymnus */
+			modlitba = MODL_POSV_CITANIE;
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_HYMNUS);
+			_set_hymnus(modlitba, _file_pc, _anchor);
+			set_LOG_litobd;
+
+			/* nedela */
 			/* pozor! ak tretia adventna nedela padne na 17. decembra, beru sa
 			 * antifony na magnifikat, benediktus, prosby a hymny z tejto casti,
 			 * avsak ostatne sa berie akoby z OBD_ADVENTNE_I, teda
