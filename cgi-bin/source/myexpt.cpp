@@ -225,4 +225,3 @@ int ExpL2HTML(char *fmt)
 }
 
 #endif /*__MYEXPT_C_*/
-

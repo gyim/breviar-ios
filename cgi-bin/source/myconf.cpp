@@ -60,4 +60,3 @@ void readConfig(void){
 	}
 	return;
 }
-

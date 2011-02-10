@@ -40,4 +40,3 @@ void zaltar(int den, int tyzzal);
 void liturgicke_obdobie(int litobd, int tyzden, int den, int tyzzal, int poradie_svateho);
 
 #endif /* __DBZALTAR_H_ */
-

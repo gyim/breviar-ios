@@ -147,4 +147,3 @@ int NoLog(char *fmt, ...){
 
 
 #endif /*__MYLOG_C_*/
-

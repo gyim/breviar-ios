@@ -143,4 +143,3 @@ void main(int argc, char **argv);
 #endif /* OS_linux */
 
 #endif /* __BREVIAR_H */
-

@@ -25,4 +25,3 @@ void updateUnCGIName(void){
 	strcpy(uncgi_name, HTTP_ADDRESS);
 	strcat(uncgi_name, UNCGI_SCRIPT_NAME);
 }
-

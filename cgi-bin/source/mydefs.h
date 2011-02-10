@@ -368,4 +368,3 @@ extern int query_type; /* premenna obsahujuca PRM_... */
 #define HTML_AMPERSAND "&amp;"
 
 #endif /*__MYDEFS_H_*/
-

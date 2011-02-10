@@ -130,4 +130,3 @@ int getopt(
 	const char *optstring);
 
 #endif /* _GETOPT_H */
-

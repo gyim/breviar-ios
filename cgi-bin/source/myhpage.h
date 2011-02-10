@@ -23,4 +23,3 @@ void hlavicka(char *);
 void patka(void);
 
 #endif /*__MYHPAGE_H_*/
-

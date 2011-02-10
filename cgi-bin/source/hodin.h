@@ -255,4 +255,3 @@ const char *nazov_MES[] =
 const char *nazov_mes[] =
 {"jan", "feb", "mar", "apr", "maj", "jun", "jul",
  "aug", "sep", "okt", "nov", "dec", "___"};
-

@@ -65,4 +65,3 @@ char* __code_char(char char_from, char char_to, char* str);
 #define decode_semicolon(str)	__code_char(CGI_SEMICOLON, 59, str)
 
 #endif /*__MYBASE_H_*/
-

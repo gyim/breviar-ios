@@ -710,4 +710,3 @@ int _encode_spol_cast(int);
 _struct_sc _decode_spol_cast(int);
 
 #endif /* __LITURGIA_H_ */
-

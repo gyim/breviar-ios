@@ -10506,4 +10506,3 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty, int druhykrat){
 	Log("-- sviatky_svatych(%d, %d) -- spustene druhykrat, vysledok (pocet svatych) == %d\n", den, mesiac, ret);
 	return ret;
 }/* sviatky_svatych(); -- 4 vstupy; posledny == 2 */
-

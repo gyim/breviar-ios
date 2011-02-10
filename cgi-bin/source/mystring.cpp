@@ -40,4 +40,3 @@ char *mystrcpy(char *dest, const char *src, int count){
  * The behavior of strncpy is undefined if the source and destination strings overlap.
  * This function returns strDest. No return value is reserved to indicate an error.
  */
-

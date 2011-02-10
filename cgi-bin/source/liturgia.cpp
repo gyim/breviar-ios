@@ -1221,4 +1221,3 @@ _struct_sc _decode_spol_cast(int spolc){
 
 
 #endif /* __LITURGIA_C_ */
-
