@@ -1,89 +1,83 @@
-<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
 <html>
 <head>
    <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
    <meta name="Author" content="Juraj Videky">
-   <meta name="GENERATOR" content="Mozilla/4.5 [en] (WinNT; I) [Netscape]">
-   <title>Liturgia hodín</title>
-<script LANGUAGE="JavaScript"><!-- Hide from old browsers
-if (document.images)
-        {
-        normal1 = new Image(278,95);
-        normal1.src = "../img/about0.jpg"; 
-
-        over1 = new Image(278,95);
-        over1.src = "../img/about1.jpg"; 
-
-        } 
-
-function mOver(num) 
-        {
-        if (document.images) 
-            {
-            document.images['button'+ num].src = eval('over' + num).src;
-            }
-        }
-       
-   function mOut(num) 
-        {
-        if (document.images) 
-            {
-            document.images['button'+ num].src = eval('normal' + num).src;
-            }                   
-        }
-// Stop hiding from old browsers -->
-</script></head>
-<body text="#000000" bgcolor="#FFFFF0" link="#000000" vlink="#000000" alink="#000000">
-<style>
-<!--
-A:link {color: Black;}
-A:hover {color: red;}
--->
-</style>
+   <link rel="stylesheet" type="text/css" href="../breviar.css">
+   <title>program</title>
+</head>
+<body>
 
 <center>
-<a href="../about/index.htm" TARGET="Obsah" ONMOUSEOVER="mOver(1)" ONMOUSEOUT="mOut(1)"><img SRC="../img/about0.jpg" NAME="button1" ALT="Informacie" BORDER=0></a>
+<h2>Informácie | O programe</h2>
+&lt;&lt; <a href="text.htm">O textoch</a> | ^<a href="index.htm">Informácie</a> | <a href="copyright.htm">Autorské práva, šírenie</a> &gt;&gt;
 </center>
 
-<center>
-<h3>
-O programe</h3></center>
-Hypertextovo spracované texty sú ďalej programom spracované (skriptom).
-Stránky sú čiastočne generované automaticky. Autor ďakuje Miroslavovi Murgašovi
-za poskytnutie zdrojového kódu, ktorý bol použitý pri tvorbe spracujúceho
-programu. Taktiež boli použité rutinky <a href="http://www.midwinter.com/~koreth/uncgi.html">Un-CGI
-1.9</a> (autor <a href="mailto:koreth@midwinter.com">Steven Grimm</a>)
-a <a href="ftp://ftp.bearnet.com/pub/cgibook">cgiutils 1.1</a> z diela
-<a href="http://www.cgibook.com/">The
-CGI Book</a> (autor William E. Weinman, <a href="http://www.weinman.com/wew/">web</a>,
-<a href="mailto:wew@bearnet.com">mail</a>).
-<p>
-Existuje aj off-line verzia breviára, a to ako program pod OS Windows 95/98/NT/2000, 
-ktorý generuje stránky v podobe htm súborov na lokálnom disku počítača bez potreby 
-pripojenia k sieti Internet. Dá sa stiahnuť odtiaľto:
-<p>
-<center><font size=+2><b><a href="../download/index.htm">Download</a></b></font><sup>NOVÉ!</sup></center>
-<p>Bez obmedzení uvedených v ďalšom smie byť toto dielo ako celok, tak
-aj všetky jeho časti prezerané, kopírované, tlačené a rozširované, pokiaľ
-sú splnené nasledovné podmienky:
-<ol>
-<li>
-Toto dielo nesmie byť použité na ziskové (komerčné) účely.</li>
+<h4 class="blue">Ako to funguje</h4>
 
-<li>
-Pri každom použití diela (resp. textu) a/alebo jeho časti musí byť uvedený
-údaj o pôvode, teda referencia na stránku <a href="http://www.breviar.sk">www.breviar.sk</a>.</li>
+<p>Základom celého on-line breviára je program, ktorý vytvára v prvom rade 
+výsledné modlitby, okrem toho však aj iné stránky: úvodný formulár na výber možností,
+tabuľku pohyblivých slávení atď (ktorým sa venujeme <a href="program-ine.htm">osobitne</a>). 
+Najzaujímavejšou a nesporne najťažšou časťou je však samotné vytváranie modlitby.
+Program vykoná nasledovné kroky:
+<ol class="level1">
+<li><span class="blue">spracuje vstupné nastavenia</span>
+(dátum, prípadne <a href="program-options.htm">ďalšie preferencie používateľa</a>),
+ktoré boli programu zadané, a to:
+<ol class="level2">
+<li>vo forme internetového odkazu v prípade kliknutia na odkaz
+(napr. pri kliknutí na dátum aktuálneho dňa, ktorý sa zobrazí na úvodnej stránke, napr. "3. júla 2003",  ide o 
+odkaz <a class="tt" href="http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&d=3&m=7&r=2003">http://www.breviar.sk/cgi-bin/l.cgi?qt=pdt&d=3&m=7&r=2003</a>; 
+tzv. GET metóda získania a odovzdávania parametrov),</li>
+<li>z úvodného vstupného formulára (napr. po vybratí možnosti 
+"tabulka dátumov pohyblivých slávení od roku [<i>rok</i>] do roku [<i>rok</i>]"
+a stlačení tlačidla "Zobraz"; tzv. POST metóda získania a odovzdávania parametrov),</li>
+<li>kombinovaným spôsobom, ako je to po stlačení tlačidla "Detaily...", kde sa časť údajov posiela GET metódou
+a časť POST metódou.</li>
 </ol>
-Ostatné kopírovanie, zmeny a rožširovanie bez súhlasu autora sú porušením
-zákona o autorských právach.
-<p>Ak sa vyskytnú akékoľvek chyby (preklepy, logické chyby, chyby programu),
-kontaktujte prosím autora.
-<p>Zoznam známych (opravených) chýb je tu:
-<p>
-<center><font size=+2><b><a href="../opravy/index.htm">Opravy</a></b></font><sup>NOVÉ!</sup></center><p>
 
-<hr SIZE=1>
-<center><font size=-1>© 1999-2002 Juraj Vidéky</font></center>
+<li>na základe vybratého slávenia a nastavení 
+<span class="blue">vhodne pospája <a href="text.htm">texty</a></span>,
+čím vznikne text požadovanej modlitby.</li>
+
+</ol>
+
+<h4 class="blue">Čo je na to použité</h4>
+
+<p>Použité je nasledovné:
+
+<ol class="level1">
+<li>Nástroj <a href="http://www.midwinter.com/~koreth/uncgi.html" target="_top">Un-CGI 1.9</a>, 
+autor <a href="mailto:koreth@midwinter.com">Steven Grimm</a>, a to na parsovanie 
+vstupu z prehliadača do programu.</li>
+<li>Nástroj <a href="ftp://ftp.bearnet.com/pub/cgibook">cgiutils 1.1</a> z diela
+<a href="http://www.cgibook.com/">The CGI Book</a>,
+autor William E. Weinman, <a href="http://www.weinman.com/wew/" target="_top">web</a>,
+<a href="mailto:wew@bearnet.com">mail</a>.</li>
+<li>Časť kódu pre vkladanie textov do výstupu kedysi napísal kamarát Miro Murgaš, čím mu ďakujem
+za jeho láskavé poskytnutie.</li>
+<li>Ostatné časti kódu som vytvoril ja, a teda za ne aj nesiem zodpovednosť. 
+V prípade záujmu zdrojové texty zašlem.</li>
+</ol>
+
+<h4 class="blue">Off-line verzia</h4>
+
+<p>
+Existuje aj off-line verzia breviára, teda program pod OS Windows 95/98/NT/2000, 
+ktorý generuje stránky v podobe HTML súborov na lokálnom disku počítača bez potreby 
+pripojenia k internetu. Dá sa stiahnuť 
+<a href="../download/index.htm">z tejto Download časti</a>.
+
+<h4 class="blue">Chyby</h4>
+
+<p>Ak sa vyskytnú akékoľvek chyby (preklepy, logické chyby, chyby programu), kontaktujte prosím autora. 
+Neustále aktualizujem <span class="bold"><a href="../opravy/index.htm">zoznam známych a opravených chýb</a></span>, 
+a to preklepov v texte, ale i chýb samotného algoritmu.
+
+<hr>
+<p class="patka">
+Autor programovej časti © 1999-2003 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
+<br>Všetky práva vyhradené.
+</p>
 
 </body>
 </html>

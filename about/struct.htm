@@ -1,0 +1,132 @@
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+   <meta name="Author" content="Juraj Videky">
+   <link rel="stylesheet" type="text/css" href="../breviar.css">
+   <title>struct</title>
+</head>
+<body>
+
+<center>
+<h2>Informácie | O programe (Niektoré použité štruktúry)</h2>
+&lt;&lt; <a href="program-ine.htm">O programe (podrobnejšie)</a> | ^ <a href="program.htm">O programe</a> | ^^ <a href="index.htm">Informácie</a>
+</center>
+
+<p>Tu sú niektoré dátové štruktúry, ktoré program využíva (výpis z C++ hlavičkových súborov):
+
+<a name="den"></a>
+<h4 class="blue">Štruktúra pre jednotlivý deň</h4>
+
+<tt>struct dm{</tt>
+<ul><tt>&nbsp;int den;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* cislo
+dna mesiaca (1--31) */</tt>
+<br><tt>&nbsp;int mesiac;&nbsp;&nbsp;&nbsp;&nbsp; /* cislo mesiaca (1--12)
+*/</tt>
+<br><tt>&nbsp;int rok;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* rok
+*/</tt>
+<br><tt>&nbsp;int denvt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* cislo dna v tyzdni
+(0--6) DEN_... */ /* deň v roku */</tt>
+<br><tt>&nbsp;int denvr;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* cislo dna v roku
+(1--365/366) */</tt>
+<br><tt>&nbsp;/* toto boli "obcianske" zalezitosti */</tt>
+<br><tt>&nbsp;char litrok;&nbsp;&nbsp;&nbsp; /* liturgicky rok ('A'--'C')
+*/</tt>
+<br><tt>&nbsp;int tyzden;&nbsp;&nbsp;&nbsp;&nbsp; /* tyzden v danom liturgickom
+obdobi */</tt>
+<br><tt>&nbsp;int tyzzal;&nbsp;&nbsp;&nbsp;&nbsp; /* tyzden v zaltari (vacsinou
+((tyzden - 1) % 4) + 1) */</tt>
+<br><tt>&nbsp;int litobd;&nbsp;&nbsp;&nbsp;&nbsp; /* liturgicke obdobie,
+OBD_... */</tt>
+<br><tt>&nbsp;int typslav;&nbsp;&nbsp;&nbsp; /* typ slavenia (1--5): SLAV_...
+*/</tt>
+<br><tt>&nbsp;int smer;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* poradove
+cislo z c.59 Vseobecnych smernic</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * o liturgii hodin a
+kalendari */</tt>
+<br><tt>&nbsp;int prik;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* ci je to
+prikazany sviatok alebo nie:</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * PRIKAZANY_SVIATOK
+resp. NEPRIKAZANY_SVIATOK */</tt>
+<br><tt>&nbsp;int spolcast;&nbsp;&nbsp; /* spolocna cast,</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * zakodovane data pre
+svatych o tom, z akej spolocnej</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * casti sa ma modlit;</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * obsahuje max. 3 spolocne
+casti vo formate</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * spolcast == a1 + a2
+* MAX + a3 * MAX * MAX,</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * kde</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * - MAX je MAX_MODL_SPOL_CAST,</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * - a1, a2, a3 su konstanty
+MODL_SPOL_CAST_...</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;&nbsp; (v poradi
+a1, ak druhe tak a2, ak tretie tak aj a3)</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * _encode_..., _decode_spol_cast();</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */</tt>
+<br><tt>&nbsp;char meno[MENO_SVIATKU]; /* nazov prip. sviatku */</tt></ul>
+<tt>};</tt>
+<br><tt>typedef struct dm _struct_dm;</tt>
+<br><tt></tt>&nbsp;
+
+<a name="modlitba"></a>
+<h4 class="blue">Štruktúra pre časti modlitby</h4>
+
+<tt>struct tmodlitba1{</tt>
+<ul><tt>&nbsp;_struct_anchor_and_file popis&nbsp;&nbsp;&nbsp;&nbsp; ;</tt>
+<br><tt>&nbsp;_struct_anchor_and_file hymnus&nbsp;&nbsp;&nbsp; ;</tt>
+<br><tt>&nbsp;_struct_anchor_and_file antifona1 ;</tt>
+<br><tt>&nbsp;_struct_anchor_and_file zalm1&nbsp;&nbsp;&nbsp;&nbsp; ;</tt>
+<br><tt>&nbsp;_struct_anchor_and_file antifona2 ;</tt>
+<br><tt>&nbsp;_struct_anchor_and_file zalm2&nbsp;&nbsp;&nbsp;&nbsp; ;</tt>
+<br><tt>&nbsp;_struct_anchor_and_file antifona3 ;</tt>
+<br><tt>&nbsp;_struct_anchor_and_file zalm3&nbsp;&nbsp;&nbsp;&nbsp; ;</tt>
+<br><tt>&nbsp;_struct_anchor_and_file kcitanie&nbsp; ;</tt>
+<br><tt>&nbsp;_struct_anchor_and_file kresponz&nbsp; ;</tt>
+<br><tt>&nbsp;_struct_anchor_and_file benediktus; /* antifona na benediktus/magnifikat
+*/</tt>
+<br><tt>&nbsp;_struct_anchor_and_file prosby&nbsp;&nbsp;&nbsp; ;</tt>
+<br><tt>&nbsp;_struct_anchor_and_file modlitba&nbsp; ;</tt></ul>
+<tt>};</tt>
+<br><tt>typedef struct tmodlitba1 _type_ranne_chvaly;</tt>
+<br><tt>typedef struct tmodlitba1 _type_vespery;</tt>
+<br><tt>typedef struct tmodlitba1 _type_1vespery;</tt>
+<br><tt></tt>&nbsp;
+
+<a name="rok"></a>
+<h4 class="blue">Štruktúra pre (kalendárny) rok</h4>
+
+<tt>struct lrok{</tt>
+<ul><tt>&nbsp;int prestupny;&nbsp;&nbsp;&nbsp;&nbsp; /* ci je rok prestupny
+(YES, NO) */</tt>
+<br><tt>&nbsp;char p1, p2;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* nedelne
+pismeno/pismena;</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * ak ma rok iba
+jedno,</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * druhe p2 ==
+NIJAKE_NEDELNE_PISMENO */</tt>
+<br><tt>&nbsp;char litrok;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* pismeno
+liturgickeho roka,</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * ktory zacina
+prvou adventnou nedelou v roku */</tt>
+<br><tt>&nbsp;int tyzden_ocr_po_vn; /* cislo tyzdna obdobia "cez rok",</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * ktory nasleduje
+po nedeli zoslania</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * ducha svateho,
+teda po velkonocnom obdobi */</tt>
+<br><tt>&nbsp;int tyzden_ocr_pred_po; /* cislo tyzdna obdobia cez rok,
+v ktorom zacina post */</tt>
+<br><tt>&nbsp;struct dm _den[POCET_ALIASOV];</tt></ul>
+<tt>};</tt>
+<br><tt>typedef struct lrok _struct_lrok;</tt>
+<br><tt></tt>&nbsp;
+
+<hr>
+<p class="patka">
+© 1999-2003 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
+</p>
+
+</body>
+</html>

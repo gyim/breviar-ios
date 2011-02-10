@@ -5,6 +5,7 @@
 .bluebold { color: #0000ff; font-weight: bold; }
 .bold { font-weight: bold; }
 .normal { color: #000000; }
+.tt { font-family: Courier, Monospaced; }
 /* apply to all elements */ { font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 100%; }
 body { 
 	background-color: #d0bba0; 
@@ -52,3 +53,6 @@ input.reset { background: #400000; Verdana, Tahoma, Georgia, Sans Serif; font-si
 input.text { border-style: solid; background: #fff1cc; }
 input.radio { }
 input.checkbox { }
+
+ol.level1 { list-style-type: decimal; }
+ol.level2 { list-style-type: lower-roman; }

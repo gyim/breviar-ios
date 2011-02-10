@@ -1,0 +1,44 @@
+/* apply to all elements */ { font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 100%; }
+body { 
+	background-color: #000000; 
+	color: #fff1cc; 
+	font-family: Verdana, Tahoma, Georgia, Sans Serif; 
+	font-size: 100%; 
+	noscroll;
+}
+p { 
+	font-family: Verdana, Tahoma, Georgia, Sans Serif; 
+	color: #fff1cc; 
+	text-style: normal; 
+}
+p.duoraz { 
+	font-weight: bold; 
+}
+p.patka { 
+	font-size: 71%; 
+	text-align: center; 
+	text-indent: 0em;  
+	margin-top: -1mm; 
+	letter-spacing: 0mm 
+}
+
+p.item {
+	margin-top: 0mm; 
+	margin-botton: -3mm;
+}
+
+p.normal {
+	margin-top: 0mm; 
+	margin-botton: -1mm;
+}
+
+a { font-family: Verdana, Tahoma, Georgia, Sans Serif; color: #fff1cc; text-decoration: none; }
+a:hover { color: #fff1cc; background-color: #800000; text-decoration:none; }
+a:active { color: #fff1cc; text-decoration: none; }
+a img { border: none }
+
+table { background-color: #d0bba0; color: #a05000; }
+td { font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 12px; color: #a05000}
+hr {	height: 0.2mm;
+	width: 33%; 
+	color: gray; }
