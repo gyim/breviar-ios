@@ -50,7 +50,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2003-07-15"
+#define BUILD_DATE "2003-07-17"
 
 /* 2003-07-15 odpoznamkovane */
 #define RUN_MODLITBA_CEZ_DEN

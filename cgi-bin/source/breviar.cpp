@@ -36,6 +36,7 @@
 /*   2003-07-16a.D. | este jedna zmena & na HTML_AMPERSAND     */
 /*                  - zmena WWW_ na ADD_WWW_PREFIX_            */
 /*                  - zmena exportovania uvodnej stranky       */
+/*   2003-07-17a.D. | zmena helpu (vypis pri commandd-line     */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -5191,12 +5192,17 @@ int getArgv(int argc, char **argv){
 
 					/* opravene 07/09/2001A.D. - pridane niektore switche */
 					/* 2003-06-26 -- pridane -s (query string), -q psqs */
-					printf("lh | Liturgia hodin | on-line breviar | http://www.breviar.sk \n");
+					printf("\n");
+					printf("lh - command-line verzia on-line breviara (http://www.breviar.sk)\n");
+					/* pridane 2003-07-17 */
+					printf("\tProgram vytvara stranky (HTML vystup) pre Liturgiu hodin.\n");
 					/* build pridany 2003-07-04 */
 					printf("\tBuild: %s\n", BUILD_DATE);
-					printf("\t(c) Juraj Videky | videky@breviar.sk\n");
-					printf("usage | lh [switch [value]...]\n");
-					printf("switches |\n");
+					printf("\t(c) 1999-2003 Juraj Videky <videky@breviar.sk>\n");
+					printf("\n");
+					printf("\npouzitie:\n");
+					printf("\tlh [prepinac [hodnota]...]\n");
+					printf("\nprepinace:\n");
 					printf("\tq  query type (napr. %s, %s, %s, %s, %s, %s...)\n",
 						STR_PRM_DNES, STR_PRM_DATUM, STR_PRM_DETAILY, STR_PRM_TABULKA, STR_PRM_SIMULACIA_QS, STR_PRM_BATCH_MODE);
 					printf("\ts  query string (tak ako je na webe)\n");
@@ -5221,12 +5227,18 @@ int getArgv(int argc, char **argv){
 					/* pridane 2003-07-08 */
 					printf("\ta  (append) pri exportovani do suboru (-e) neprepisuje subor\n");
 					/* pridane 2003-06-27; prave prva uvedena linka sposobuje problem (nefunguju detaily pre spomienku pm v sobotu) */
-					printf("examples |\n");
+					printf("\npriklady pouzitia:\n");
 					printf("\tlh.exe -i..\\..\\..\\ -qpsqs -s\"qt=pdt&d=12&m=7&r=2003\"\n");
 					printf("\tlh -qpdt -d30 -m4 -r2002 -pmrch -ic:\\temp\\breviar\\ -emoja.htm\n");
 					printf("\tlh.exe -i..\\..\\..\\ -d28 -m6 -r2003 -qpdt -pmrch -x1\n");
 					/* pridane 2003-07-07 */
 					printf("\tlh -qpbm -d1 -m1 -r2000 -f2 -g2 -p2000 -ba.bat -nlh.exe -ic:\\breviar\\\n");
+					/* pridane 2003-07-17 */
+					printf("\nviac informacii:\n");
+					printf("\thttp://www.breviar.sk - hlavna stranka\n");
+					printf("\thttp://breviar.christ-net.sk - alternativna lokacia stranok (mirror)\n");
+					printf("\thttp://www.breviar.sk/info/parametre.htm - o parametroch\n");
+					printf("\thttp://www.breviar.sk/info/batchmode.htm - o davkovom mode (batch mode)\n");
 
 					Log("option %c (without value)\n", c, optarg); break;
 

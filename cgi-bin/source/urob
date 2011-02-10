@@ -1,3 +1,4 @@
+date
 chmod u=rwx *.*
 make
 cp uncgi uncgi.cgi
@@ -10,3 +11,5 @@ chmod oa+x *.cgi
 gzip -c -v l.cgi > l.cgi.gz
 gzip -c -v uncgi.cgi > uncgi.cgi.gz
 gzip -c -v uncgi > uncgi.gz
+date
+
