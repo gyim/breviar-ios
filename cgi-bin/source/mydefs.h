@@ -46,16 +46,12 @@
 /*   2003-06-30a.D. | build (priliepa sa do hlavicky)          */
 /*   2003-07-15a.D. | RUN_MODLITBA_CEZ_DEN definovane          */
 /*   2003-07-15a.D. | vlozeny do mydefs.h                      */
+/*   2003-08-13a.D. | odstranenie RUN_MODLITBA_CEZ_DEN         */
 /*                                                             */
 /***************************************************************/
 #include <stdio.h>
 
 #define BUILD_DATE "2003-08-13"
-
-/* 2003-07-15 odpoznamkovane */
-#define RUN_MODLITBA_CEZ_DEN
-/* 18/02/2000A.D.-- ci alokovat miesto pre a pouzivat
- * premenne pre modl_cez_den */
 
 #define BYTES 250
 #define SMALL 80

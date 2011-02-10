@@ -14,6 +14,8 @@
 /*                  - (char) konverzie z int explicitne        */
 /*   2003-08-13a.D. | pridane logy pre modlitbu cez den        */
 /*                  - pridana inicializacia do _allocate_      */
+/*                  - zmena "" na STR_EMPTY (mystring.h)       */
+/*                  - odstranenie RUN_MODLITBA_CEZ_DEN         */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -21,7 +23,7 @@
 #ifndef __LITURGIA_C_
 #define __LITURGIA_C_
 
-#include "liturgia.h" /* RUN_MODLITBA_CEZ_DEN je definovane v mydefs.h */
+#include "liturgia.h"
 
 #include "mylog.h" /* bolo tu .c */
 #include "myexpt.h"
@@ -144,7 +146,6 @@ int _allocate_global_var(void){
 		_INIT_TMODLITBA1(_global_modl_posv_citanie); /* pridana 2003-08-13 */
 	}
 
-#ifdef RUN_MODLITBA_CEZ_DEN
 /* _global_modl_cez_den_9_ptr */
 	if((_global_modl_cez_den_9_ptr = (_type_cez_den_9*) malloc(sizeof(_type_cez_den_9))) == NULL){
 		Log("  Not enough memory to allocate buffer for `_global_modl_cez_den_9_ptr'\n");
@@ -174,8 +175,6 @@ int _allocate_global_var(void){
 		Log("  %d bytes for `_global_modl_cez_den_3_ptr'\n", sizeof(_type_cez_den_3));
 		_INIT_TMODLITBA2(_global_modl_cez_den_3); /* pridana 2003-08-13 */
 	}
-
-#endif
 
 /* _global_modl_vespery_ptr */
 	if((_global_modl_vespery_ptr = (_type_vespery*) malloc(sizeof(_type_vespery))) == NULL){
@@ -261,11 +260,9 @@ int _deallocate_global_var(void){
 	Log("_global_modl_1kompletorium_ptr\n"); free(_global_modl_1kompletorium_ptr);
 	Log("_global_modl_invitatorium_ptr\n"); free(_global_modl_invitatorium_ptr);
 	Log("_global_modl_ranne_chvaly_ptr\n"); free(_global_modl_ranne_chvaly_ptr);
-#ifdef RUN_MODLITBA_CEZ_DEN
 	Log("_global_modl_cez_den_9_ptr\n"); free(_global_modl_cez_den_9_ptr);
 	Log("_global_modl_cez_den_12_ptr\n"); free(_global_modl_cez_den_12_ptr);
 	Log("_global_modl_cez_den_3_ptr\n"); free(_global_modl_cez_den_3_ptr);
-#endif
 	Log("_global_modl_vespery_ptr\n"); free(_global_modl_vespery_ptr);
 	Log("_global_modl_kompletorium_ptr\n"); free(_global_modl_kompletorium_ptr);
 	Log("_global_r_ptr\n"); free(_global_r_ptr);

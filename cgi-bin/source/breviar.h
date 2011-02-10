@@ -78,7 +78,6 @@ extern _type_ranne_chvaly *_global_modl_ranne_chvaly_ptr;
 /*_type_ranne_chvaly  _global_modl_ranne_chvaly;*/
 #define _global_modl_ranne_chvaly (*_global_modl_ranne_chvaly_ptr)
 
-#ifdef RUN_MODLITBA_CEZ_DEN
 extern _type_cez_den_9     *_global_modl_cez_den_9_ptr;
 /*_type_cez_den_9     _global_modl_cez_den_9;*/
 #define _global_modl_cez_den_9 (*_global_modl_cez_den_9_ptr)
@@ -88,7 +87,6 @@ extern _type_cez_den_12     *_global_modl_cez_den_12_ptr;
 extern _type_cez_den_3     *_global_modl_cez_den_3_ptr;
 /*_type_cez_den_3     _global_modl_cez_den_3;*/
 #define _global_modl_cez_den_3 (*_global_modl_cez_den_3_ptr)
-#endif
 
 extern _type_vespery      *_global_modl_vespery_ptr;
 /*_type_vespery       _global_modl_vespery;*/

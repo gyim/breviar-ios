@@ -42,20 +42,19 @@
 /*   2003-08-11a.D. | Segmentation fault odhaleny-vid POUCENIE */
 /*   2003-08-12a.D. | opt5 pridana (modlitba cez den)          */
 /*   2003-08-13a.D. | zmena "" na STR_EMPTY (mystring.h)       */
+/*                  - odstranenie RUN_MODLITBA_CEZ_DEN         */
+/*                  - odstranenie POKUS_24_02_2000             */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
 /*   * ako kompilovat a linkovat?                              */
 /*     najdi zarazku KOMPILACIA -- niekde ku koncu             */
+/*     pozri tiez POUCENIE                                     */
 /*   * unfinished parts: signed by !!!                         */
 /*   * debug in VC++: alt+f7, zalozka Debug, Program arguments */
 /*     napr. -qpbm -d1 -m1 -r2000 -f2 -g2 -p2001 -ba.txt       */
 /*                                                             */
 /***************************************************************/
-                                       
-/* 2003-07-15: RUN_MODLITBA_CEZ_DEN je definovana 
- * v byvalom mybase.h, teraz mydefs.h
- */
                                        
 #include <stdlib.h>                    
 #include <stdio.h>                     
@@ -151,7 +150,6 @@ _type_ranne_chvaly *_global_modl_ranne_chvaly_ptr;
 /*_type_ranne_chvaly  _global_modl_ranne_chvaly;*/
 #define _global_modl_ranne_chvaly (*_global_modl_ranne_chvaly_ptr)
 
-#ifdef RUN_MODLITBA_CEZ_DEN
 _type_cez_den_9     *_global_modl_cez_den_9_ptr;
 /*_type_cez_den_9     _global_modl_cez_den_9;*/
 #define _global_modl_cez_den_9 (*_global_modl_cez_den_9_ptr)
@@ -161,7 +159,6 @@ _type_cez_den_12     *_global_modl_cez_den_12_ptr;
 _type_cez_den_3     *_global_modl_cez_den_3_ptr;
 /*_type_cez_den_3     _global_modl_cez_den_3;*/
 #define _global_modl_cez_den_3 (*_global_modl_cez_den_3_ptr)
-#endif
 
 _type_vespery      *_global_modl_vespery_ptr;
 /*_type_vespery       _global_modl_vespery;*/
@@ -742,7 +739,6 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_ranne_chvaly.hymnus.file);
 				includeFile(type, paramname, path, _global_modl_ranne_chvaly.hymnus.anchor);
 				break;
-#ifdef RUN_MODLITBA_CEZ_DEN
 			case MODL_CEZ_DEN_9:
 				strcat(path, _global_modl_cez_den_9.hymnus.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_9.hymnus.anchor);
@@ -755,7 +751,6 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_cez_den_3.hymnus.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_3.hymnus.anchor);
 				break;
-#endif
 			case MODL_VESPERY:
 				strcat(path, _global_modl_vespery.hymnus.file);
 				includeFile(type, paramname, path, _global_modl_vespery.hymnus.anchor);
@@ -775,7 +770,6 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_ranne_chvaly.antifona1.file);
 				includeFile(type, paramname, path, _global_modl_ranne_chvaly.antifona1.anchor);
 				break;
-#ifdef RUN_MODLITBA_CEZ_DEN
 			case MODL_CEZ_DEN_9:
 				strcat(path, _global_modl_cez_den_9.antifona1.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_9.antifona1.anchor);
@@ -788,7 +782,6 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_cez_den_3.antifona1.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_3.antifona1.anchor);
 				break;
-#endif
 			case MODL_VESPERY:
 				strcat(path, _global_modl_vespery.antifona1.file);
 				includeFile(type, paramname, path, _global_modl_vespery.antifona1.anchor);
@@ -809,7 +802,6 @@ void interpretParameter(int type, char *paramname){
 				includeFile(type, paramname, path, _global_modl_ranne_chvaly.antifona2.anchor);
 				break;
 */
-#ifdef RUN_MODLITBA_CEZ_DEN
 			case MODL_CEZ_DEN_9:
 				strcat(path, _global_modl_cez_den_9.antifona2.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_9.antifona2.anchor);
@@ -822,7 +814,6 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_cez_den_3.antifona2.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_3.antifona2.anchor);
 				break;
-#endif
 			case MODL_VESPERY:
 				strcat(path, _global_modl_vespery.antifona2.file);
 				includeFile(type, paramname, path, _global_modl_vespery.antifona2.anchor);
@@ -838,7 +829,6 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_ranne_chvaly.antifona3.file);
 				includeFile(type, paramname, path, _global_modl_ranne_chvaly.antifona3.anchor);
 				break;
-#ifdef RUN_MODLITBA_CEZ_DEN
 			case MODL_CEZ_DEN_9:
 				strcat(path, _global_modl_cez_den_9.antifona3.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_9.antifona3.anchor);
@@ -851,7 +841,6 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_cez_den_3.antifona3.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_3.antifona3.anchor);
 				break;
-#endif
 /*			case MODL_VESPERY:
 				strcat(path, _global_modl_vespery.antifona3.file);
 				includeFile(type, paramname, path, _global_modl_vespery.antifona3.anchor);
@@ -872,7 +861,6 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_ranne_chvaly.zalm1.file);
 				includeFile(type, paramname, path, _global_modl_ranne_chvaly.zalm1.anchor);
 				break;
-#ifdef RUN_MODLITBA_CEZ_DEN
 			case MODL_CEZ_DEN_9:
 				strcat(path, _global_modl_cez_den_9.zalm1.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_9.zalm1.anchor);
@@ -885,7 +873,6 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_cez_den_3.zalm1.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_3.zalm1.anchor);
 				break;
-#endif
 			case MODL_VESPERY:
 				strcat(path, _global_modl_vespery.zalm1.file);
 				includeFile(type, paramname, path, _global_modl_vespery.zalm1.anchor);
@@ -906,7 +893,6 @@ void interpretParameter(int type, char *paramname){
 				includeFile(type, paramname, path, _global_modl_ranne_chvaly.zalm2.anchor);
 				break;
 */
-#ifdef RUN_MODLITBA_CEZ_DEN
 			case MODL_CEZ_DEN_9:
 				strcat(path, _global_modl_cez_den_9.zalm2.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_9.zalm2.anchor);
@@ -919,7 +905,6 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_cez_den_3.zalm2.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_3.zalm2.anchor);
 				break;
-#endif
 			case MODL_VESPERY:
 				strcat(path, _global_modl_vespery.zalm2.file);
 				includeFile(type, paramname, path, _global_modl_vespery.zalm2.anchor);
@@ -935,7 +920,6 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_ranne_chvaly.zalm3.file);
 				includeFile(type, paramname, path, _global_modl_ranne_chvaly.zalm3.anchor);
 				break;
-#ifdef RUN_MODLITBA_CEZ_DEN
 			case MODL_CEZ_DEN_9:
 				strcat(path, _global_modl_cez_den_9.zalm3.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_9.zalm3.anchor);
@@ -948,7 +932,6 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_cez_den_3.zalm3.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_3.zalm3.anchor);
 				break;
-#endif
 /*			case MODL_VESPERY:
 				strcat(path, _global_modl_vespery.zalm3.file);
 				includeFile(type, paramname, path, _global_modl_vespery.zalm3.anchor);
@@ -965,7 +948,6 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_ranne_chvaly.kcitanie.file);
 				includeFile(type, paramname, path, _global_modl_ranne_chvaly.kcitanie.anchor);
 				break;
-#ifdef RUN_MODLITBA_CEZ_DEN
 			case MODL_CEZ_DEN_9:
 				strcat(path, _global_modl_cez_den_9.kcitanie.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_9.kcitanie.anchor);
@@ -978,7 +960,6 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_cez_den_3.kcitanie.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_3.kcitanie.anchor);
 				break;
-#endif
 			case MODL_VESPERY:
 				strcat(path, _global_modl_vespery.kcitanie.file);
 				includeFile(type, paramname, path, _global_modl_vespery.kcitanie.anchor);
@@ -998,7 +979,6 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_ranne_chvaly.kresponz.file);
 				includeFile(type, paramname, path, _global_modl_ranne_chvaly.kresponz.anchor);
 				break;
-#ifdef RUN_MODLITBA_CEZ_DEN
 			case MODL_CEZ_DEN_9:
 				strcat(path, _global_modl_cez_den_9.kresponz.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_9.kresponz.anchor);
@@ -1011,7 +991,6 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_cez_den_3.kresponz.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_3.kresponz.anchor);
 				break;
-#endif
 			case MODL_VESPERY:
 				strcat(path, _global_modl_vespery.kresponz.file);
 				includeFile(type, paramname, path, _global_modl_vespery.kresponz.anchor);
@@ -1096,7 +1075,6 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_ranne_chvaly.modlitba.file);
 				includeFile(type, paramname, path, _global_modl_ranne_chvaly.modlitba.anchor);
 				break;
-#ifdef RUN_MODLITBA_CEZ_DEN
 			case MODL_CEZ_DEN_9:
 				strcat(path, _global_modl_cez_den_9.modlitba.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_9.modlitba.anchor);
@@ -1109,7 +1087,6 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_cez_den_3.modlitba.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_3.modlitba.anchor);
 				break;
-#endif
 			case MODL_VESPERY:
 				strcat(path, _global_modl_vespery.modlitba.file);
 				includeFile(type, paramname, path, _global_modl_vespery.modlitba.anchor);
@@ -3203,14 +3180,15 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
  * - spusti _rozbor_dna(datum, rok);
  * - porovna, ci (ked su modlitbou vespery) budu prve vespery z dalsieho dna
  *   alebo nie,
- * - napokon !!! spusti vytvorenie modlitby
- *
+ * - napokon spusti vytvorenie modlitby
  *
  * POZOR! Narozdiel od rozbor dna, pred samotnym spustenim generovania
  * modlitby je vysledok (co sa presne bude modlit) v premennej _global_den;
  *
  * 2003-06-30: chyba toho, ze pre 2003-06-28, vespery, neboli 1. vespery zo
- * sviatku (slavnosti) sv. Petra a sv. Pavla, bude asi v porovnani!!!
+ * sviatku (slavnosti) sv. Petra a sv. Pavla, bude asi v porovnani
+ *
+ * 2003-08-13: neviem preco boli hore tri vykricniky ("napokon spusti vytvorenie modlitby")
  */
 void rozbor_dna_s_modlitbou(int den, int mesiac, int rok, int modlitba, int poradie_svaty){
 	int ret = SUCCESS;
@@ -3224,11 +3202,11 @@ void rozbor_dna_s_modlitbou(int den, int mesiac, int rok, int modlitba, int pora
 	/* lokalne premenne obsahujuce data modlitbach -- 23/02/2000A.D.
 	 * prerobene, aby sa alokovali dynamicky */
 
-//#define POKUS_24_02_2000 -- zapoznamkovane 2003-06-30
-#ifdef POKUS_24_02_2000
+/*
+ * 2003-08-13: tu bolo kedysi toto (pre #ifdef POKUS_24_02_2000):
 	_type_1vespery      _local_modl_prve_vespery;
 	_type_1kompletorium _local_modl_prve_kompletorium;
-#else
+ */
 	_type_1vespery      *_local_modl_prve_vespery_ptr;
 #define _local_modl_prve_vespery (*_local_modl_prve_vespery_ptr)
 	_type_1kompletorium *_local_modl_1kompletorium_ptr;
@@ -3277,7 +3255,6 @@ void rozbor_dna_s_modlitbou(int den, int mesiac, int rok, int modlitba, int pora
 	}
 
 	Log("...done.\n");
-#endif /* pokus 24/02/2000A.D., mozno to nebude padat */
 
 	/* lokalna kopia roka; ak treba analyzovat dalsi rok */
 	int _local_rok = -1; /* inicializacia dorobena 01/03/2000A.D. */
@@ -3333,13 +3310,11 @@ void rozbor_dna_s_modlitbou(int den, int mesiac, int rok, int modlitba, int pora
 		/* 23/02/2000A.D. -- prirobil som aj bez _prve_ */
 		_local_modl_prve_vespery = _global_modl_prve_vespery;
 		_local_modl_prve_kompletorium = _global_modl_prve_kompletorium;
-#ifndef POKUS_24_02_2000
 		_local_modl_vespery = _global_modl_vespery;
 		_local_modl_kompletorium = _global_modl_kompletorium;
 		/* logy pridane 2003-06-30 */
 		Log("_local_modl_vespery obsahuje:\n"); Log(_local_modl_vespery);
 		// Log("_local_modl_prve_kompletorium obsahuje:\n"); Log(_local_modl_prve_kompletorium);
-#endif
 		mystrcpy(_local_string, _global_string, MAX_STR);
 	}/* kompletorium alebo vespery */
 
@@ -3364,15 +3339,13 @@ void rozbor_dna_s_modlitbou(int den, int mesiac, int rok, int modlitba, int pora
 	LOG_ciara;
 	/* teraz mam vsetky data v _global_den, _global_modl_... */
 	Log("teraz mam vsetky data v _global_den, _global_modl_...\n"); /* pridane 2003-08-13 */
-#ifndef POKUS_24_02_2000
-//#define DEBUG_23_02_2000
-#ifdef DEBUG_23_02_2000
+/*
+ * 2003-08-13: tu bolo kedysi toto:
 	Log("_local_modl_prve_vespery:\n"); Log(_local_modl_prve_vespery);
 	Log("_local_modl_vespery:\n"); Log(_local_modl_vespery);
 	Log("_global_modl_prve_vespery:\n"); Log(_global_modl_prve_vespery);
 	Log("_global_modl_vespery:\n"); Log(_global_modl_vespery);
-#endif
-#endif
+ */
 	/* ak ma nasledujuci den prioritu pred dnesnym dnom */
 	if((modlitba == MODL_VESPERY) || (modlitba == MODL_KOMPLETORIUM)){
 		Log("teraz uvidime, ci vespery/kompletorium nasledovneho dna nemaju nahodou prioritu...\n");
@@ -3505,12 +3478,12 @@ LABEL_ZMENA:
 				_global_modl_prve_vespery = _local_modl_prve_vespery;
 				_global_modl_prve_kompletorium = _local_modl_prve_kompletorium;
 				//??? -- divna pasaz!!!
-				/* !!! begin: docasny vypis - 16/02/2000A.D. */
+				/* begin: docasny vypis - 16/02/2000A.D. */
 				Log("prve vespery:\n");
 				Log(_global_modl_prve_vespery);
 				Log("vespery:\n");
 				Log(_global_modl_vespery);
-				/* !!! end: docasny vypis - 16/02/2000A.D. */
+				/* end: docasny vypis - 16/02/2000A.D. */
 
 				if(modlitba == MODL_VESPERY){
 					_global_modlitba = MODL_PRVE_VESPERY;
@@ -3545,7 +3518,7 @@ LABEL_NIE_INE_VESPERY: /* 08/03/2000A.D. */
 	Log("_global_string: %s\n", _global_string);
 	Log("%s\n", nazov_modlitby[modlitba]);
 	switch(modlitba){
-		/* dalsie case pridane 2003-08-13 *///xxx
+		/* dalsie case pridane 2003-08-13 */
 		case MODL_RANNE_CHVALY:
 			Log(_global_modl_ranne_chvaly);
 			break;
@@ -3573,24 +3546,22 @@ LABEL_NIE_INE_VESPERY: /* 08/03/2000A.D. */
 		Log("spustam showDetails(%d, %s, %d, %d) z funkcie rozbor_dna_s_modlitbou():\n",
 			den, nazov_mesiaca[mesiac - 1], rok, poradie_svaty);
 		showDetails(den, mesiac, rok, poradie_svaty);
-	}
-	else{
+	}/* _global_modlitba == MODL_DETAILY */
+	else{/* _global_modlitba != MODL_DETAILY */
 		Log("spustam showPrayer(%s)...\n",
 			nazov_Modlitby[_global_modlitba]);
 		/* predpokladam, ze aj _global_modlitba je prve/druhe vespery,
 		 * v _global_prve_vespery su spravne udaje (podobne kompletorium) */
 		showPrayer(modlitba);
-	}
+	}/* _global_modlitba != MODL_DETAILY, teda pre konkretnu modlitbu */
 
 LABEL_s_modlitbou_DEALLOCATE:
-#ifndef POKUS_24_02_2000
 	Log("Deallocating memory...\n");
 	Log("_local_modl_prve_vespery_ptr\n"); free(_local_modl_prve_vespery_ptr);
 	Log("_local_modl_1kompletorium_ptr\n"); free(_local_modl_1kompletorium_ptr);
 	Log("_local_modl_vespery_ptr\n"); free(_local_modl_vespery_ptr);
 	Log("_local_modl_kompletorium_ptr\n"); free(_local_modl_kompletorium_ptr);
 	Log("...done.\n");
-#endif
 	Log("-- rozbor_dna_s_modlitbou(int, int, int, int): ret == %d\n", ret);
 }/* rozbor_dna_s_modlitbou() */
 
@@ -3696,7 +3667,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 		p = MODL_VESPERY;
 /*	else if(equals(modlitba, STR_MODL_KOMPLETORIUM))
 		p = MODL_KOMPLETORIUM; */
-	else /* !!! zatial len predosle */
+	else
 		p = MODL_NEURCENA;
 	/* este treba skontrolovat, ci nazov modlitby nie je
 	 * string ...azov_modlitby[...] */
@@ -4286,7 +4257,7 @@ void _main_zaltar(char *den, char *tyzden, char *modlitba){
 	}/* nie je to nedela */
 
 	zaltar(d, t);
-	// unfinished !!! - este nejde uplne spravne
+	/* 2003-08-13: neviem preco tu bola poznamka "unfinished - este nejde uplne spravne" */
 
 	Log("spustam showPrayer(%s)...\n",
 		nazov_Modlitby[_global_modlitba]);
@@ -4808,7 +4779,7 @@ void _main_batch_mode(
 		Log("JD_from = %ld > JD_to = %ld\n", jd_from, jd_to);
 		ExportUDAJE("Zlé èasové obdobie (dátum `od' (%s.%s.%s) nasleduje po dátume `do' (%s.%s.%s)).<br>\n",
 			den_from, mesiac_from, rok_from, den_to, mesiac_to, rok_to);
-	}/* datum _to je casovo _pred_ datumom _from!!! */
+	}/* datum _to je casovo _pred_ datumom _from! */
 	else{
 		Log("julianske datumy: v poriadku\n");
 	}/* datumy su v spravnom vztahu */
@@ -6070,7 +6041,7 @@ int parseQueryString(void){
 
 /* KOMPILACIA -- idiotuv pruvodce kompilovanim tohoto gigantu */
 
-/* nezabudni zmenit #define BUILD_DATE v mydefs.h!!! (2003-07-15) */
+/* nezabudni zmenit #define BUILD_DATE v mydefs.h! (2003-07-15) */
 
 /* 17/02/2000A.D.: Segmentation fault pod linuxom;
  * 18/02/2000A.D.:
