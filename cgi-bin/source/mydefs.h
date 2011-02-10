@@ -50,7 +50,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2003-07-17"
+#define BUILD_DATE "2003-08-07"
 
 /* 2003-07-15 odpoznamkovane */
 #define RUN_MODLITBA_CEZ_DEN
@@ -77,7 +77,7 @@
 #define MAX_POM_QUERY_TYPE 300 /* pom_QUERY_TYPE */
 #define MAX_GLOBAL_LINK 300 /* maximalna dlzka retazca _global_link */
 #define MAX_ENV	100 /* maximalna dlzka environmentalnej premennej */
-#define MAX_VARIABLES 10 /* maximalny pocet syst. premennych WWW_... */
+#define MAX_VARIABLES 12 /* maximalny pocet syst. premennych WWW_..., zvyseny 2003-08-07 */
 /***************************************************************/
 /* EOF of former file mybase.h                                 */
 /***************************************************************/
@@ -367,6 +367,15 @@ extern int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPT_APPEND "a"
 #endif
 
+/* option 5 pridana 2003-08-07,
+ * urcuje, ci brat pre modlitbu cez den zalmy z doplnkovej psalmodie */
+#define MODL_OPT5 36
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPT5 "MODL_OPT5"
+#else
+	#define STR_MODL_OPT5 "o5"
+#endif
+
 /* global */
 #define QUERY_TYPE	20
 #ifdef LONG_PARAM_NAMES
@@ -405,6 +414,14 @@ extern int query_type; /* premenna obsahujuca PRM_... */
 #define HTML_BUTTON_LABEL_NAPOLUDNIE   "12h"
 #define HTML_BUTTON_LABEL_POPOLUDNI    "15h"
 #define HTML_BUTTON_LABEL_VESPERY      "Vešpery"
+/* dalsie pridane 2003-08-06 */
+#define HTML_BUTTON_LABEL_POSVATNE_CITANIE "Posv.èít."
+#define HTML_BUTTON_LABEL_DETAILY      "Detaily..."
+#define HTML_BUTTON_LABEL_DET_SHOW     "Zobraz modlitbu"
+#define HTML_BUTTON_LABEL_DET_DEFAULTS "Pôvodné hodnoty"
+/* pridanw 2003-08-07 */
+#define HTML_BUTTON_LABEL_DNES_SHOW     "Zobraz"
+#define HTML_BUTTON_LABEL_DNES_DEFAULTS "Vyèisti"
 
 #endif /*__MYDEFS_H_*/
 

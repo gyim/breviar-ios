@@ -7,6 +7,9 @@
 /* document history                                            */
 /*   18/10/1999A.D. | created                                  */
 /*   06/09/2001A.D. | tento popis                              */
+/*   2003-08-07a.D. | pridana void _init_dm co nastavi dummy   */
+/*                  - pouzite v _allocate_global_var           */
+/*                                                             */
 /*                                                             */
 /***************************************************************/
 
@@ -34,6 +37,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_den_ptr'\n", sizeof(_struct_dm));
+		_init_dm(_global_den); /* 2003-08-07 pridana */
 	}
 
 /* _global_result_ptr */
@@ -43,6 +47,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_result_ptr'\n", sizeof(_struct_dm));
+		_init_dm(_global_result); /* 2003-08-07 pridana */
 	}
 
 /* _global_pm_sobota_ptr */
@@ -52,6 +57,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_pm_sobota_ptr'\n", sizeof(_struct_dm));
+		_init_dm(_global_pm_sobota); /* 2003-08-07 pridana */
 	}
 
 /* _global_svaty1_ptr */
@@ -61,6 +67,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_svaty1_ptr'\n", sizeof(_struct_dm));
+		_init_dm(_global_svaty1); /* 2003-08-07 pridana */
 	}
 
 /* _global_svaty2_ptr */
@@ -70,6 +77,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_svaty2_ptr'\n", sizeof(_struct_dm));
+		_init_dm(_global_svaty2); /* 2003-08-07 pridana */
 	}
 
 /* _global_svaty3_ptr */
@@ -79,6 +87,7 @@ int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_svaty3_ptr'\n", sizeof(_struct_dm));
+		_init_dm(_global_svaty3); /* 2003-08-07 pridana */
 	}
 
 /* _global_modl_prve_vespery_ptr */
@@ -1071,6 +1080,29 @@ void _dm_velkonocna_nedela(int rok, int _vn){
 	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 27/04/2000A.D. */
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D. */
 }
+
+/* pridana 2003-08-07 */
+void _init_dm(_struct_dm a){
+	a.den = 0;        /* cislo dna mesiaca (1--31) */
+	a.mesiac = 0;     /* cislo mesiaca (1--12) */
+	a.rok = 0;        /* rok */
+	a.denvt = -1;     /* cislo dna v tyzdni (0--6) DEN_... */ /* deò v roku */
+	a.denvr = 0;      /* cislo dna v roku (1--365/366) */
+	a.litrok = 0;     /* liturgicky rok ('A'--'C') */
+	a.tyzden = 0;     /* tyzden v danom liturgickom obdobi */
+	a.tyzzal = 0;     /* tyzden v zaltari (vacsinou ((tyzden - 1) % 4) + 1) */
+	a.litobd = -1;    /* liturgicke obdobie, OBD_... */
+	a.typslav = 0;    /* typ slavenia (1--5): SLAV_... */
+	a.smer = 100;     /* poradove cislo z c.59 Vseobecnych smernic
+	                   * o liturgii hodin a kalendari */
+	a.prik = -1;      /* ci je to prikazany sviatok alebo nie:
+				       * PRIKAZANY_SVIATOK resp. NEPRIKAZANY_SVIATOK */
+	a.spolcast = -1;  /* spolocna cast -- pridane 09/02/2000A.D.,
+					   * zakodovane data pre svatych o tom, z akej spolocnej
+					   * casti sa ma modlit */
+	mystrcpy(a.meno, "", MENO_SVIATKU); /* nazov prip. sviatku */
+}
+
 
 /* ------------------------------------------------------------------- */
 /* analyzuj_rok()

@@ -2398,27 +2398,6 @@ void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
 		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_LABEL_RANNE_CHVALY"\">\n");
 		Export("</form>\n");
 
-/* 2003-08-06 dorobene posvatne citanie */
-
-		/* oddelenie */
-		Export("</td>\n<td>");
-		if(_global_linky == ANO){
-			/* modlitba posvatneho citania -- button */
-			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
-				script_name,
-				STR_QUERY_TYPE, STR_PRM_DATUM,
-				STR_DEN, _global_den.den,
-				STR_MESIAC, _global_den.mesiac,
-				STR_ROK, _global_den.rok,
-				STR_MODLITBA, MODL_POSVATNE_CITANIE,
-				pom);
-		}
-		else{
-			Export("<form action=\"%s\">\n", pom);
-		}
-		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_LABEL_POSVATNE_CITANIE"\">\n");
-		Export("</form>\n");
-
 /* 2003-07-15 dorobene modlitby cez den */
 
 		/* oddelenie */
@@ -2516,7 +2495,7 @@ void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
 				STR_ROK, _global_den.rok,
 				STR_MODLITBA, STR_MODL_DETAILY,
 				pom);
-			Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_LABEL_DETAILY"\">\n"); /* zmenene 2003-08-06 */
+			Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_LABEL_DETAILY"\">\n");
 			Export("</form>\n");
 		}/* ak nie zobrazovat linky na internet, tlacidlo `Detaily...' je zbytocne */
 
@@ -3068,12 +3047,7 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
 		Export("ktor˙ naz˝vame <i>popis</i>)");
 		Export("</li>\n");
 
-		/* tu je treba urobit porovnanie s nejakou premennou, ktora obsahuje
-		 * to, ze pre sviatok svateho je viac moznosti, odkial brat veci zo
-		 * `spolocnej casti na sviatky svatych'
-		 */
-
-		/* pole WWW_MODL_OPT2 */
+	/* pole WWW_MODL_OPT2 */
 		Export("<li>braù ûalmy zo \n");
 		Export("<select name=\"%s\">\n", STR_MODL_OPT2);
 		Export("<option selected>%s\n", STR_MODL_ZALMY_ZO_DNA);
@@ -3107,20 +3081,12 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
 		Export("ktorÈ sa nenach·dzaj˙ vo vlastnej Ëasti ûalt·ra, zo spoloËnej Ëasti sviatku, ");
 		Export("niekedy je moûnosù vybraù si z viacer˝ch spoloËn˝ch ËastÌ; naviac je moûnosù niekto sa modliù sa tieto Ëasti zo vöednÈho dÚa)");
 		Export("</li>\n");
-	}/* if(poradie svateho in 1, 2, 3) */
+	}
 
-	/* pridane 2003-08-06 */
-	Export("<li>ûalmy pre modlitbu cez deÚ braù z <i>doplnkovej psalmÛdie</i>?\n");
-	/* pole WWW_MODL_OPT5 */
-	Export("<select name=\"%s\">\n", STR_MODL_OPT5);
-	Export("<option selected>%s\n", STR_MODL_CEZ_DEN_ZALMY_ZO_DNA);
-	Export("<option>%s\n", STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_1);
-	Export("<option>%s\n", STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_2);
-	Export("<option>%s\n", STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3);
-	Export("</select>\n");
-	Export("<br>(doplnkov· psalmÛdia zah‡Úa 3 sÈrie tzv. gradu·lnych ûalmov ");
-	Export("(é 120-129), ktorÈ moûno braù namiesto ûalmov zo ûalt·ra)");
-	Export("</li>\n");
+	/* tu bude treba urobit porovnanie s nejakou premennou, ktora obsahuje
+	 * to, ze pre sviatok svateho je viac moznosti, odkial brat veci zo
+	 * `spolocnej casti na sviatky svatych'
+	 */
 
 	Export("</ul>\n");
 

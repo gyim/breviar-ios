@@ -14,6 +14,8 @@
 /*                    kvoli prestupnym rokom (iny _global_link)*/
 /*   2003-07-15a.D. | rozne definicie pre modlitbu cez den     */
 /*   2003-07-15a.D. | odstraneny #include "mybase.h"           */
+/*   2003-08-06a.D. | rozne definicie pre posvatne citanie     */
+/*   2003-08-07a.D. | pridana void _init_dm co nastavi dummy   */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -40,12 +42,12 @@ typedef struct _anchor_and_file _struct_anchor_and_file;
 #define rchvalospev  zalm2
 #define vchvalospev  zalm3
 #define magnifikat   benediktus
-/*
+
 #define	citanie1	kcitanie
 #define	responz1	kresponz
-#define	citanie2
+#define	citanie2	benediktus
 #define	responz2	prosby
-*/
+
 struct tmodlitba1{
 	_struct_anchor_and_file popis     ; /* pridane 05/04/2000A.D. */
 	_struct_anchor_and_file hymnus    ;
@@ -64,7 +66,7 @@ struct tmodlitba1{
 typedef struct tmodlitba1 _type_ranne_chvaly;
 typedef struct tmodlitba1 _type_vespery;
 typedef struct tmodlitba1 _type_1vespery;
-/*typedef struct tmodlitba1 _type_posv_citanie; */
+typedef struct tmodlitba1 _type_posv_citanie;
 
 struct tmodlitba2{
 	/* 2003-07-15, pridane _struct_anchor_and_file popis */
@@ -141,8 +143,10 @@ typedef struct den_mesiac _struct_den_mesiac;
 
 /* ... a stringy pre ne */
 /* pre modlitbu cez den pridane 2003-07-15 */
+/* pre posvatne citanie pridane 2003-08-06 */
 #ifdef LONG_PARAM_NAMES
 	#define STR_MODL_RANNE_CHVALY "MODL_RANNE_CHVALY"
+	#define STR_MODL_POSVATNE_CITANIE "MODL_POSVATNE_CITANIE"
 	#define STR_MODL_VESPERY "MODL_VESPERY"
 	#define STR_MODL_PREDPOLUDNIM "MODL_PREDPOLUDNIM"
 	#define STR_MODL_NAPOLUDNIE "MODL_NAPOLUDNIE"
@@ -150,6 +154,7 @@ typedef struct den_mesiac _struct_den_mesiac;
 	#define STR_MODL_DETAILY "MODL_DETAILY"
 #else
 	#define STR_MODL_RANNE_CHVALY "mrch"
+	#define STR_MODL_POSVATNE_CITANIE "mpc"
 	#define STR_MODL_VESPERY "mv"
 	#define STR_MODL_PREDPOLUDNIM "mpred"
 	#define STR_MODL_NAPOLUDNIE "mna"
@@ -202,6 +207,11 @@ extern const char *TEMPLAT[];
 #define PARAM_BENEDIKTUS   "BENEDIKTUS" /* antifona na benediktus */
 #define PARAM_PROSBY       "PROSBY"
 #define PARAM_MODLITBA     "MODLITBA"
+/* pridane 2003-08-06 */                                        
+#define PARAM_CITANIE1     "CITANIE1" /* vlastne KCITANIE */
+#define PARAM_RESPONZ1     "RESPONZ1" /* vlastne KRESPONZ */
+#define PARAM_CITANIE2     "CITANIE2" /* vlastne BENEDIKTUS */
+#define PARAM_RESPONZ2     "RESPONZ2" /* vlastne PROSBY */
 /* dalsie parametre: specificke pre obdobie */
 /* Od nedele P novho zmrtvychvstania a§ do Druhej velkonocnej nedele vr tane,
  * ako aj na druh‚ veçpery sl vnosti Zoslania Ducha Sv„t‚ho */
@@ -271,7 +281,19 @@ extern const char *TEMPLAT[];
  * ale predsa mensia ako MAX_MODL_SPOL_CAST */
 #define MODL_SPOL_CAST_NEBRAT            25 /* nechce zo spol. casti */
 
-/* a pre tieto konstanty aj retazce...
+/* option 5, 2003-08-06 */
+#define MODL_CEZ_DEN_ZALMY_ZO_DNA       0
+#define MODL_CEZ_DEN_DOPLNKOVE_ZALMY_1  1
+#define MODL_CEZ_DEN_DOPLNKOVE_ZALMY_2  2
+#define MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3  3
+#define STR_MODL_CEZ_DEN_ZALMY_ZO_DNA       "nie (teda žalmy zo dòa)"
+#define STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_1  "áno, z 1. série"
+#define STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_2  "áno, z 2. série"
+#define STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3  "áno, z 3. série"
+/* a pre tieto konstanty aj retazce */
+extern const char *nazov_doplnkpsalm[MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3 + 1];
+
+/* a pre tieto - vyssie uvedene - konstanty aj retazce...
  * -- malo by ich byt do MAX_MODL_SPOL_CAST */
 extern const char *nazov_spolc[MODL_SPOL_CAST_NEBRAT + 1];
 /* a pre tieto konstanty aj retazce -- nazvy suborov
@@ -715,6 +737,9 @@ void _dm_krst_krista_pana(int rok);
 void _dm_velkonocna_nedela(int rok, int _vn);
 
 void analyzuj_rok(int year);
+
+/* pridana 2003-08-07 */
+void _init_dm(_struct_dm a);
 
 #define Log_struktura_dm Log("  <dm>"); Log
 void Log(_struct_dm g);

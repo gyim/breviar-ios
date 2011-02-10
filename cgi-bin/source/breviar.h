@@ -10,6 +10,7 @@
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-07-01a.D. | void main je zakomentovane ak linux      */
 /*   2003-07-14a.D. | zmena void main -> int main (gcc v3.2.2 )*/
+/*   2003-08-07a.D. | pridane _global_opt5                     */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -132,6 +133,7 @@ extern int _global_opt1/* = NIE */;
 extern int _global_opt2/* = MODL_ZALMY_ZO_SV */;
 extern int _global_opt3;
 extern int _global_opt4;
+extern int _global_opt5; /* pridane 2003-08-07 */
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
 extern char *_global_string;

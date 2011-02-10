@@ -14,6 +14,8 @@
 /*                    loguje)                                  */
 /*   24/02/2000A.D. |  pridane LOG_TO_FILE / LOG_TO_STDOUT     */
 /*   06/09/2001A.D. | tento popis                              */
+/*   2003-08-07a.D. | closeLog-dorobene #ifdef (LOG_TO_STDOUT) */
+/*                                                             */
 /* notes |                                                     */
 /*   * ked je v materskom programe definovane LOG_TO_FILE, bude*/
 /*     sa logovat do suboru, ktory treba dat ako vstup fname   */
@@ -62,12 +64,19 @@ int initLog(char *fname){
 /* popis: zatvori logovaci subor
  * vracia: on success, returns 0
  *         on error, returns EOF; presne ako fclose()
+ * 2003-08-07: dorobene, ze ked LOG_TO_STDOUT, tak ina hlaska, nie error
  */
 int closeLog(void){
 	int ret;
 	if(used == 0){
+#if defined(LOG_TO_FILE)
 		if((ret = fclose(logfile)) == EOF)
 			fprintf(stderr, "Cannot close log file\n");
+#elif defined(LOG_TO_STDOUT)
+		fprintf(stderr, "Log finished, I do not close log file (stdout)\n");
+#else
+	#error Unsupported logging model (use _LOG_TO_STDOUT or _LOG_TO_FILE)
+#endif
 	}
 	else{
 		fprintf(stderr, "Log file not opened\n");

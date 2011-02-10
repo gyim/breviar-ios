@@ -1993,8 +1993,7 @@ int init_global_string(int typ, int poradie_svateho, int modlitba){
 	 * lebo nic take neexistuje 
 	 * skoda, ze som neaktualizoval aj komentare. teraz je ten odkaz nezrozumitelny.
 	 */
-	_struct_dm _local_den;
-	_init_dm(_local_den); /* 2003-08-07 pridana */
+	_struct_dm _local_den = {.den 0;};
 
 	char pom[MAX_STR];
 	mystrcpy(_global_string, "", MAX_GLOBAL_STR); /* inicializacia */
@@ -3038,6 +3037,10 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
 	/* pole WWW_MODLITBA */
 	Export("<select name=\"%s\">\n", STR_MODLITBA);
 	Export("<option selected>%s\n", nazov_modlitby[MODL_RANNE_CHVALY]);
+	Export("<option>%s\n", nazov_modlitby[MODL_POSVATNE_CITANIE]); /* pridane 2003-08-06 */
+	Export("<option>%s\n", nazov_modlitby[MODL_PREDPOLUDNIM]);
+	Export("<option>%s\n", nazov_modlitby[MODL_NAPOLUDNIE]);
+	Export("<option>%s\n", nazov_modlitby[MODL_POPOLUDNI]); /* cez den: pridane 2003-08-06 */
 	/* spomienka P. Marie v sobotu nema vespery */
 	if(poradie_svaty != 4)
 		Export("<option>%s\n", nazov_modlitby[MODL_VESPERY]);
@@ -3170,7 +3173,6 @@ void rozbor_dna_s_modlitbou(int den, int mesiac, int rok, int modlitba, int pora
 	/* lokalna premenna, do ktorej sa ukladaju info o analyzovanom dni
 	 * pouziva ju void nove_rozbor_dna() funkcia */
 	_struct_dm _local_den;
-	_init_dm(_local_den); /* 2003-08-07 pridana */
 
 	/* lokalne premenne obsahujuce data modlitbach -- 23/02/2000A.D.
 	 * prerobene, aby sa alokovali dynamicky */
@@ -3703,6 +3705,30 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 		_global_opt4 = NIE;
 	}/* inak ostane _global_opt4 default */
 	Log("opt4 == `%s' (%d)\n", pom_MODL_OPT4, _global_opt4);
+
+	/* option 5, pridana 2003-08-07 */
+	i = atoi(pom_MODL_OPT5);
+	/* predpokladam, ze tento parameter moze byt
+	 * zadany eventualne cislom (teda retazcom, kt. hodnota pri konverzii
+	 * na int je int, urcujuci opt5
+	 */
+	if((i > MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3) || (i <= 0)){
+		i = 0;
+		/* ide o znakovy retazec nekonvertovatelny na cislo */
+	}
+	Log("opt5: i == %d\n", i);
+	while(i <= MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3){
+		if(equals(pom_MODL_OPT5, nazov_doplnkpsalm[i])){
+			_global_opt5 = i;
+			break;
+		}
+		i++;
+	}
+	if(i > MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3){
+		_global_opt5 = MODL_CEZ_DEN_ZALMY_ZO_DNA;
+	}
+	Log("opt5 == `%s' (%d)\n", pom_MODL_OPT5, _global_opt5);
+
 
 	/* option a (append), pridana 2003-07-08 - nastavi sa v getArgv(); */
 
@@ -4654,6 +4680,30 @@ void _main_batch_mode(
 	}/* inak ostane _global_opt4 default */
 	Log("opt4 == `%s' (%d)\n", pom_MODL_OPT4, _global_opt4);
 
+	/* option 5, pridana 2003-08-07 */
+	i = atoi(pom_MODL_OPT5);
+	/* predpokladam, ze tento parameter moze byt
+	 * zadany eventualne cislom (teda retazcom, kt. hodnota pri konverzii
+	 * na int je int, urcujuci opt5
+	 */
+	if((i > MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3) || (i <= 0)){
+		i = 0;
+		/* ide o znakovy retazec nekonvertovatelny na cislo */
+	}
+	Log("opt5: i == %d\n", i);
+	while(i <= MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3){
+		if(equals(pom_MODL_OPT5, nazov_doplnkpsalm[i])){
+			_global_opt5 = i;
+			break;
+		}
+		i++;
+	}
+	if(i > MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3){
+		_global_opt5 = MODL_CEZ_DEN_ZALMY_ZO_DNA;
+	}
+	Log("opt5 == `%s' (%d)\n", pom_MODL_OPT5, _global_opt5);
+
+
 	/* option a (append), pridana 2003-07-08 - nastavi sa v getArgv(); */
 
 	/* kontrola udajov */
@@ -5050,6 +5100,8 @@ int getArgv(int argc, char **argv){
 	 *            `b' (name of generated batch file, analogia exportu, `e') -> name_batch_file
 	 * 2003-07-08: pridany nasledovny parameter:
 	 *            `a' (append) aby pri exportovani do suboru (-e) appendoval, nie prepisal subor
+	 * 2003-08-07: pridany nasledovny parameter:
+	 *            `5' (doplnkova psalmodia)
 	 *            
 	 */
 	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::1::2::3::4::5::a::h::e::f::g::l::i::\?::b::n::", MAX_STR);
@@ -5202,9 +5254,15 @@ int getArgv(int argc, char **argv){
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
 				case '4': /* MODL_OPT4 */
-					/* znamena osmy parameter */
+					/* znamena deviaty parameter */
 					if(optarg != NULL){
 						mystrcpy(pom_MODL_OPT4, optarg, SMALL);
+					}
+					Log("option %c with value `%s'\n", c, optarg); break;
+				case '5': /* MODL_OPT5 */
+					/* znamena desiaty parameter, pridany 2003-08-07 */
+					if(optarg != NULL){
+						mystrcpy(pom_MODL_OPT5, optarg, SMALL);
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
 
@@ -5470,6 +5528,15 @@ int getForm(void){
 		if(ptr != NULL){
 			if(strcmp(ptr, EMPTY_STR) != 0)
 				mystrcpy(pom_MODL_OPT4, ptr, SMALL);
+		}
+
+		/* premenna WWW_MODL_OPT5, pridane 2003-08-07 */
+		ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPT5));
+		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
+		 * lebo pom_... su inicializovane na "" */
+		if(ptr != NULL){
+			if(strcmp(ptr, EMPTY_STR) != 0)
+				mystrcpy(pom_MODL_OPT5, ptr, SMALL);
 		}
 
 	}
@@ -5740,6 +5807,7 @@ int parseQueryString(void){
 		 * 7: (opt2) - ci brat (pri sviatkoch svatych) zalmy zo dna / zo sviatku
 		 * 8: (opt3) - ktoru `spolocnu cast' (pri sviatkoch svatych) brat
 		 * 9: (opt4) - for future use
+		 * 10: (opt5) - ci brat doplnkovu psalmodiu pre modlitbu cez den (0:nie, 1-3:seria 1-3)
 		 * ---------------------------------------------
 		 */
 
@@ -5832,6 +5900,14 @@ int parseQueryString(void){
 			}
 			else{
 				/* nevadi, ze nebola zadana option4 k modlitbe */
+			}
+
+			/* premenna MODL_OPT5, pridana 2003-08-07 */
+			if(equals(param[10].name, STR_MODL_OPT5)){
+				mystrcpy(pom_MODL_OPT5, param[10].val, SMALL);
+			}
+			else{
+				/* nevadi, ze nebola zadana option5 k modlitbe */
 			}
 
 			break; /* case */
@@ -6037,6 +6113,7 @@ int main(int argc, char **argv){
 	strcpy(pom_MODL_OPT2  , "");
 	strcpy(pom_MODL_OPT3  , "");
 	strcpy(pom_MODL_OPT4  , "");
+	strcpy(pom_MODL_OPT5  , ""); /* pridane 2003-08-07 */
 	strcpy(pom_DALSI_SVATY, "");
 	strcpy(pom_ROK_FROM   , "");
 	strcpy(pom_ROK_TO     , "");
@@ -6239,6 +6316,7 @@ int main(int argc, char **argv){
 				_main_LOG_to_Export("param7 == %s (pom_MODL_OPT2)\n", pom_MODL_OPT2);
 				_main_LOG_to_Export("param8 == %s (pom_MODL_OPT3)\n", pom_MODL_OPT3);
 				_main_LOG_to_Export("param9 == %s (pom_MODL_OPT4)\n", pom_MODL_OPT4);
+				_main_LOG_to_Export("param10== %s (pom_MODL_OPT5)\n", pom_MODL_OPT5); /* pridane 2003-08-07 */
 				_main_LOG_to_Export("spat po skonceni getForm()\n");
 			}
 			_main_LOG_to_Export("---scanning for system variables WWW_...:finished.\n");
@@ -6284,6 +6362,7 @@ _main_SIMULACIA_QS:
 	_main_LOG_to_Export("param7 == %s (pom_MODL_OPT2)\n", pom_MODL_OPT2);
 	_main_LOG_to_Export("param8 == %s (pom_MODL_OPT3)\n", pom_MODL_OPT3);
 	_main_LOG_to_Export("param9 == %s (pom_MODL_OPT4)\n", pom_MODL_OPT4);
+	_main_LOG_to_Export("param10== %s (pom_MODL_OPT5)\n", pom_MODL_OPT5); /* pridane 2003-08-07 */
 
 	if(query_type == PRM_MESIAC_ROKA){
 		mystrcpy(pom_DEN, STR_VSETKY_DNI, SMALL);
