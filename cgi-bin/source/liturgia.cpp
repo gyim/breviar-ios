@@ -592,6 +592,7 @@ int pocet_dni_v_roku(int rok){
 
 /* vrati poradove cislo dna v roku,
  * 1.1. == 1, 2.1. == 2, ..., 31.12. == 365/366
+ * ocakava cislo mesiaca 1-12 (pozn. 2003-07-04)
  */
 int poradie(int den, int mesiac, int rok){
 	if(mesiac > 2)
@@ -630,6 +631,7 @@ long juliansky_datum(int por, int rok){
 	}
 }
 
+/* ocakava cislo mesiaca 1-12 (pozn. 2003-07-04) */
 long juliansky_datum(int den, int mesiac, int rok){
 	int por;
 	por = poradie(den, mesiac, rok);

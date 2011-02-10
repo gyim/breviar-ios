@@ -275,6 +275,12 @@ char file_export[SMALL] = ""; /* nazov suboru, do ktoreho sa mozno exportuje
 #endif
 char include_dir[MAX_STR] = "";
 
+/* nasledovna pasaz pridana 2003-07-04, a to pre batch mode;
+ * pridany parameter `n' (name of binary executable),
+ * pridany parameter `b' (name of batch mode file) */
+char name_binary_executable[MAX_STR] = "";
+char name_batch_file[MAX_STR] = "";
+
 /*---------------------------------------------------------------------*/
 /* popis: odstrani backslashe zo stringu (argv[1]) a vrati novy string
  * ale NEVRATI novy string
@@ -4233,6 +4239,232 @@ void _main_tabulka(char *rok_from, char *rok_to, char *tab_linky){
 }/* _main_tabulka() */
 
 /*---------------------------------------------------------------------*/
+/* _main_batch_mode(); 2003-07-04
+ *
+ * dostane vela char *; najprv ich skontroluje a potom
+ * ak je vsetko v poriadku, 
+ * do export fajlu generuje command-line prikazy pre
+ * vytvorenie modlitby na jednotlive dni dane obdobim
+ *
+ */
+void _main_batch_mode(
+	char *den_from, char *mesiac_from, char *rok_from, 
+	char *den_to, char *mesiac_to, char *rok_to, 
+	char *nieco, char *tab_linky){
+
+	int heading_written = 0; /* je tu kvoli ExportUDAJE definovane pred _main_rozbor_dna */
+	char pom[MAX_STR];
+	Log("-- _main_batch_mode(char * -- 7x): begin (%s, %s, %s, %s, %s, %s, %s, %s)\n",
+		den_from, mesiac_from, rok_from, den_to, mesiac_to, rok_to, nieco, tab_linky);
+	int d_from, m_from, r_from, d_to, m_to, r_to, x;
+	long jd_from, jd_to;
+
+	/* rozparsovanie parametrov den, mesiac, rok */
+	Log("--start(from)--\n");
+	/* from */
+	Log("/* rozparsovanie parametrov den, mesiac, rok */\n");
+	d_from = atoden(den_from); /* vrati VSETKY_DNI, resp. atoi(den_from) */
+	Log("den_from == `%s' (%d)\n", den_from, d_from);
+	m_from = atomes(mesiac_from); /* bude to 0--11, resp. VSETKY_MESIACE resp. UNKNOWN_MESIAC */
+	Log("mes == `%s' (%d)\n", mesiac_from, m_from);
+	r_from = atoi(rok_from); /* vrati 0 v pripade chyby; alebo int */
+	Log("rok == `%s' (%d)\n", rok_from, r_from);
+
+	Log("--end(to)--\n");
+	/* to */
+	Log("/* rozparsovanie parametrov den, mesiac, rok */\n");
+	d_to = atoden(den_to); /* vrati VSETKY_DNI, resp. atoi(den_to) */
+	Log("den_to == `%s' (%d)\n", den_to, d_to);
+	m_to = atomes(mesiac_to); /* bude to 0--11, resp. VSETKY_MESIACE resp. UNKNOWN_MESIAC */
+	Log("mes == `%s' (%d)\n", mesiac_to, m_to);
+	r_to = atoi(rok_to); /* vrati 0 v pripade chyby; alebo int */
+	Log("rok == `%s' (%d)\n", rok_to, r_to);
+
+	/* rozparsovanie parametrov opt1...opt4 
+	 * nebolo by to mozno ani treba, 2003-07-04, prevzate z _main_rozbor_dna();
+	 */
+	Log("/* rozparsovanie parametrov opt1...opt3 */\n");
+
+	/* option 1 */
+	if(equals(pom_MODL_OPT1, STR_ANO) || equals(pom_MODL_OPT1, "1")){
+		_global_opt1 = ANO;
+	}
+	else if(equals(pom_MODL_OPT1, STR_NIE) || equals(pom_MODL_OPT1, "0")){
+		_global_opt1 = NIE;
+	}/* inak ostane _global_opt1 default */
+	Log("opt1 == `%s' (%d)\n", pom_MODL_OPT1, _global_opt1);
+
+	/* option 2 */
+	if(equals(pom_MODL_OPT2, STR_MODL_ZALMY_ZO_DNA) || equals(pom_MODL_OPT1, "0")){
+		_global_opt2 = MODL_ZALMY_ZO_DNA;
+	}
+	else if(equals(pom_MODL_OPT2, STR_MODL_ZALMY_ZO_SV) || equals(pom_MODL_OPT1, "1")){
+		_global_opt2 = MODL_ZALMY_ZO_SV;
+	}/* inak ostane _global_opt2 default */
+	Log("opt2 == `%s' (%d)\n", pom_MODL_OPT2, _global_opt2);
+
+	/* option 3 */
+	int i = atoi(pom_MODL_OPT3);
+	/* povodne pre debuggovanie v DOSe, potom sa ukazalo, ze je to uzitocne
+	 * aj pod linuxom (v ostrej prevadzke); 18/02/2000A.D.
+	 * predpokladam, ze tento parameter moze byt
+	 * zadany eventualne cislom (teda retazcom, kt. hodnota pri konverzii
+	 * na int je int, urcujuci opt3
+	 */
+	if((i > MODL_SPOL_CAST_NEBRAT) || (i <= 0)){
+		i = 0;
+		/* ide o znakovy retazec nekonvertovatelny na cislo */
+	}
+	else{
+		mystrcpy(pom_MODL_OPT3, nazov_spolc[i], SMALL);
+		/* ak je zadane cislo spravne, tak i bude spravny int
+		 * a pom_MODL_OPT3 bude spravny char* */
+	}
+	Log("opt3: i == %d\n", i);
+	while(i <= MODL_SPOL_CAST_NEBRAT){
+		if(equals(pom_MODL_OPT3, nazov_spolc[i])){
+			_global_opt3 = i;
+			break;
+		}
+		i++;
+	}
+	if(i > MODL_SPOL_CAST_NEBRAT){
+		_global_opt3 = MODL_SPOL_CAST_NEURCENA;
+	}
+	Log("opt3 == `%s' (%d)\n", pom_MODL_OPT3, _global_opt3);
+
+	/* option 4 */
+	if(equals(pom_MODL_OPT4, STR_ANO) || equals(pom_MODL_OPT4, "4")){
+		_global_opt4 = ANO;
+	}
+	else if(equals(pom_MODL_OPT4, STR_NIE) || equals(pom_MODL_OPT4, "0")){
+		_global_opt4 = NIE;
+	}/* inak ostane _global_opt4 default */
+	Log("opt4 == `%s' (%d)\n", pom_MODL_OPT4, _global_opt4);
+
+	/* kontrola udajov */
+	int result = SUCCESS;
+
+	/* ExportUDAJE definovane pred _main_rozbor_dna */
+
+	/* from */
+
+	/* den */
+	if(equals(den_from, "")){
+		ExportUDAJE("ch˝ba ˙daj o poËiatoËnom dni.<br>\n");
+	}
+	else if(d_from == 0){
+		ExportUDAJE("deÚ = <"HTML_SPAN_BOLD">%s</span>.<br>\n", den_from);
+	}
+	/* mesiac */
+	if(equals(mesiac_from, "")){
+		ExportUDAJE("ch˝ba ˙daj o poËiatoËnom mesiaci.<br>\n");
+	}
+	else if(m_from == UNKNOWN_MESIAC){
+		ExportUDAJE("tak˝ mesiac nepozn·m (%s).<br>\n", mesiac_from);
+	}
+	/* rok */
+	if(equals(rok_from, "")){
+		ExportUDAJE("ch˝ba ˙daj o poËiatoËnom roku.<br>\n");
+	}
+	else if(r_from == 0){
+		ExportUDAJE("rok = <"HTML_SPAN_BOLD">%s</span>.<br>\n", rok_from);
+	}
+
+	/* to */
+
+	/* den */
+	if(equals(den_to, "")){
+		ExportUDAJE("ch˝ba ˙daj o koncovom dni.<br>\n");
+	}
+	else if(d_to == 0){
+		ExportUDAJE("deÚ = <"HTML_SPAN_BOLD">%s</span>.<br>\n", den_to);
+	}
+	/* mesiac */
+	if(equals(mesiac_to, "")){
+		ExportUDAJE("ch˝ba ˙daj o koncovom mesiaci.<br>\n");
+	}
+	else if(m_to == UNKNOWN_MESIAC){
+		ExportUDAJE("tak˝ mesiac nepozn·m (%s).<br>\n", mesiac_to);
+	}
+	/* rok */
+	if(equals(rok_to, "")){
+		ExportUDAJE("ch˝ba ˙daj o koncovom roku.<br>\n");
+	}
+	else if(r_to == 0){
+		ExportUDAJE("rok = <"HTML_SPAN_BOLD">%s</span>.<br>\n", rok_to);
+	}
+
+	/* juliansky datum dna _from musi byt <= ako dna _to */
+		/* mesiac (int) je 0-11! juliansky_datum() ocakava 1-12 */
+	jd_from = JD(d_from, m_from + 1, r_from);
+	jd_to = JD(d_to, m_to + 1, r_to);
+	if(jd_from > jd_to){
+		Log("JD_from = %ld > JD_to = %ld\n", jd_from, jd_to);
+		ExportUDAJE("ZlÈ ËasovÈ obdobie (d·tum `od' (%s.%s.%s) nasleduje po d·tume `do' (%s.%s.%s)).<br>\n",
+			den_from, mesiac_from, rok_from, den_to, mesiac_to, rok_to);
+	}/* datum _to je casovo _pred_ datumom _from!!! */
+	else{
+		Log("julianske datumy: v poriadku\n");
+	}/* datumy su v spravnom vztahu */
+
+	/* skontrolovat `name_binary_executable',
+	 * ktore mame v globalnej premennej,
+	 * nie je potrebne (jednoducho to napastujeme do exportu),
+	 * name_batch_mode skontrolujeme v dalsom
+	 */
+
+	/* udaje su skontrolovane */
+	if(result == FAILURE){
+		Log("/* teraz result == FAILURE */\n");
+		ALERT;
+		return;
+	}
+	else{
+		Log("/* teraz result == SUCCESS */\n");
+		/* kontrola name_batch_file - ci sa do suboru da zapisovat */
+		/* na zapisovanie do batch_file nevyuzivame Export() */
+		if(strcmp(name_batch_file, "") != 0){
+			FILE *batch_file = fopen(name_batch_file, "wt");
+			if(batch_file != NULL){
+				Log("File `%s' opened for writing...\n", name_batch_file);
+			}
+			else{
+				Export("NemÙûem pÌsaù do s˙boru `%s'.\n", name_batch_file);
+				Log("Cannot open file `%s' for writing.\n", name_batch_file);
+				LOG_ciara;
+				/* teraz zacina cela sranda :)) ... */
+
+				/* poznamky do buducnosti (2003-07-4):
+				 * 1. ak r_from < r_to:
+				 *    (i)   od poradie(d_from, m_from, r_from) do poradie(31, MES_DEC, r_from);
+				 *    (ii)  pre roky i = (r_from + 1) do (r_to - 1):
+				 *          od poradie(1, MES_JAN, i) do poradie(31, MES_DEC, i);
+				 *    (iii) pre posledny rok: od poradie(1, MES_JAN, r_to) do poradie(d_to, m_to, r_to);
+				 * 2. ak je to r_from == r_to, tak len
+				 *    pre poradie(d_from, m_from, r_from) do poradie(d_to, m_to, r_from==r_to)
+				 *
+				 * co sa tam vlastne bude robit?
+				 * 1. analyzuj_rok() daneho roku (r_from, i, r_to) -- ale len 1x!
+				 * 2. pre vsetky potrebne dni: rozbor_dna() -- ale printovat to 
+				 *    nie Exportom do `export.htm', ale printf(name_batch_file)!
+				 * 3. that's all
+				 */
+
+				// xxx
+
+				/* ...a sranda skoncila */
+				LOG_ciara;
+			}/* batch_file == NULL */
+		}/* name_batch_file != EMPTY_STR */
+		else{
+			Export("NezadanÈ meno batch s˙boru (pouûite parameter `%s').\n", STR_PRM_BATCH_MODE);
+			Log("Batch filename empty (use `%s' parameter).\n", STR_PRM_BATCH_MODE);
+		}
+	}/* result == SUCCESS */
+}/* _main_batch_mode() */
+
+/*---------------------------------------------------------------------*/
 /* debugovacia funkcia vypisujuca systemove premenne WWW_ a query
  * v linuxe treba definovat extern char **environ;
  */
@@ -4297,6 +4529,11 @@ int getQueryTypeFrom_QS(char *qs){
 		/* parameter STR_PRM_TABULKA */
 		Log("getQueryTypeFrom_QS() -- end, returning PRM_TABULKA\n");
 		return PRM_TABULKA;
+	}
+	else if(strstr(qs, STR_PRM_BATCH_MODE) != NULL){ /* pridane 2003-07-04, batch mode */
+		/* parameter STR_PRM_BATCH_MODE */
+		Log("getQueryTypeFrom_QS() -- end, returning PRM_BATCH_MODE\n");
+		return PRM_BATCH_MODE;
 	}
 	else{
 		Log("getQueryTypeFrom_QS() -- end, returning PRM_UNKNOWN\n");
@@ -4375,6 +4612,10 @@ int getQueryTypeFrom_WWW(void){
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_TABULKA\n");
 		return PRM_TABULKA;
 	}
+	/* nie je tu PRM_BATCH_MODE, 
+	 * pretoze batch mode nie je urceny pre web,
+	 * 2003-07-04
+	 */
 	else{
 		deallocate_ptr;
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_UNKNOWN\n");
@@ -4423,8 +4664,12 @@ int getArgv(int argc, char **argv){
 	 * 15/03/2000A.D.: pridal som parametre
 	 *  `f' (rok from), `g' (rok to), `l' (hyperlinky) pre -qptab
 	 * 05/06/2000A.D.: pridany parameter `i' (include directory)
+	 * 2003-07-04: pridane nasledovne parametre:
+	 *            `n' (name of binary executable) -> name_binary_executable
+	 *            `b' (name of generated batch file, analogia exportu, `e') -> name_batch_file
+	 *            
 	 */
-	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::1::2::3::4::5::h::e::f::g::l::i::\?::", MAX_STR);
+	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::1::2::3::4::5::h::e::f::g::l::i::\?::b::n::", MAX_STR);
 	/* tie options, ktore maju za sebou : maju povinny argument;
 	 *	ak maju :: tak maju volitelny */
 
@@ -4469,6 +4714,16 @@ int getArgv(int argc, char **argv){
 			if (c == -1) /* uz nie je option, vyskoc z while(1) */
 				break;
 			switch (c){ /* podla option urob nieco */
+				case 'b': /* pridane 2003-07-04, name_batch_file */
+					if(optarg != NULL){
+						mystrcpy(name_batch_file, optarg, SMALL);
+					}
+					Log("option %c with value `%s' -- batch file name `%s' used for batch mode\n", c, optarg, optarg); break;
+				case 'n': /* pridane 2003-07-04, name_binary_executable */
+					if(optarg != NULL){
+						mystrcpy(name_binary_executable, optarg, SMALL);
+					}
+					Log("option %c with value `%s' -- binary executable name `%s' used for batch mode\n", c, optarg, optarg); break;
 				case 'i': /* pridane 05/06/2000A.D., include_dir */
 					if(optarg != NULL){
 						mystrcpy(include_dir, optarg, SMALL);
@@ -4497,7 +4752,7 @@ int getArgv(int argc, char **argv){
 			/* zmenene: *
 			 * povodne tu boli pri kazdom parametri aj '1' -- '5';
 			 * teraz: vyhodene case '1' -- '5',
-			 * ktorezto '1' -- '3' su pre options, vid dalej */
+			 * ktorezto '1' -- '4' su pre options, vid dalej */
 				case 's': /* debuggovanie, query string */
 					if(optarg != NULL){
 						Log("--copying `%s' to query_string...", optarg);
@@ -4581,8 +4836,10 @@ int getArgv(int argc, char **argv){
 
 					/* opravene 07/09/2001A.D. - pridane niektore switche */
 					/* 2003-06-26 -- pridane -s (query string), -q psqs */
-					printf("lh | liturgia hodin | on-line breviar | http://www.breviar.sk \n");
-					printf("\t(c) juraj videky | videky@breviar.sk\n");
+					printf("lh | Liturgia hodin | on-line breviar | http://www.breviar.sk \n");
+					/* build pridany 2003-07-04 */
+					printf("\tBuild: %s\n", BUILD_DATE);
+					printf("\t(c) Juraj Videky | videky@breviar.sk\n");
 					printf("usage | lh [switch [value]...]\n");
 					printf("switches |\n");
 					printf("\tq  query type (napr. %s, %s, %s, %s, %s, ...)\n",
@@ -5585,6 +5842,8 @@ _main_SIMULACIA_QS:
 		case PRM_SVIATOK: _main_LOG_to_Export("PRM_SVIATOK\n"); break;
 		case PRM_MESIAC_ROKA: _main_LOG_to_Export("PRM_MESIAC_ROKA\n"); break;
 		case PRM_DNES: _main_LOG_to_Export("PRM_DNES\n"); break;
+		/* pridane 2003-07-04, batch mode */
+		case PRM_BATCH_MODE: _main_LOG_to_Export("PRM_BATCH_MODE\n"); break;
 	}
 
 	_main_LOG_to_Export("param1 == %s (pom_DEN/pom_SVIATOK/pom_DEN_V_TYZDNI), param1 == %s (pom_ROK_FROM)\n", pom_DEN, pom_ROK_FROM);
@@ -5667,10 +5926,24 @@ _main_SIMULACIA_QS:
 					_main_dnes();
 					_main_LOG_to_Export("spat po skonceni _main_dnes();\n");
 					break;
-				case PRM_TABULKA:					
+				case PRM_TABULKA:
 					_main_LOG_to_Export("spustam _main_tabulka();\n");
 					_main_tabulka(pom_ROK_FROM, pom_ROK_TO, pom_LINKY);
 					_main_LOG_to_Export("spat po skonceni _main_tabulka();\n");
+					break;
+				/* pridany batch mode; 2003-07-04 */
+				case PRM_BATCH_MODE:
+					_main_LOG_to_Export("spustam _main_batch_mode();\n");
+					/* vyuzivam parametre, ktore boli nastavene */
+					_main_batch_mode(
+						/* vyuzite parametre sa sice volaju haluzne, ale sluzia pre
+						 * den from (prve tri), den to (dalsie tri),
+						 * este jedno mam reserved 
+						 * 2003-07-04 */
+						pom_DEN, pom_MESIAC, pom_ROK,
+						pom_ROK_FROM, pom_ROK_TO, pom_MODLITBA, 
+						pom_DALSI_SVATY, pom_LINKY);
+					_main_LOG_to_Export("spat po skonceni _main_batch_mode();\n");
 					break;
 				default:
 					Export("Intern· chyba programu.\n");

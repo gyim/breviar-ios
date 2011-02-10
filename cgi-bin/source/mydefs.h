@@ -10,7 +10,8 @@
 /*   09/02/2000A.D. | pridane PRM_DETAILY                      */
 /*   06/09/2001A.D. | zmenene SCRIPT_PATH(a) UNCGI_PATH(a),    */
 /*                    tento popis                              */
-/*   2003-07-02a.D. | pridane HTML konstanty (casti stringov) */
+/*   2003-07-02a.D. | pridane HTML konstanty (casti stringov)  */
+/*   2003-07-04a.D. | pridane konstanty pre batch mode         */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -106,12 +107,12 @@ extern int query_type; /* premenna obsahujuca PRM_... */
 
 /* meno skriptu nasleduje zoznam parametrov, alebo sa precitaju z form */
 #define 	SCRIPT_PARAM_FROM_FORM     200 /* z formulara */
-#define 	SCRIPT_PARAM_FROM_QS		   201 /* z query string (sys variable) */
-#define 	SCRIPT_PARAM_FROM_ARGV		202 /* z argumentov */
+#define 	SCRIPT_PARAM_FROM_QS	   201 /* z query string (sys variable) */
+#define 	SCRIPT_PARAM_FROM_ARGV	   202 /* z argumentov */
 
 /* nasleduju typy dotazov */
 #define PRM_UNKNOWN		 10
-#define PRM_NONE		    11
+#define PRM_NONE		 11
 
 #define PRM_SIMULACIA_QS 12 /* 24/02/2000A.D. */
 #ifdef LONG_PARAM_NAMES
@@ -167,6 +168,14 @@ extern int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_PRM_MESIAC_ROKA "PRM_MESIAC_ROKA"
 #else
 	#define STR_PRM_MESIAC_ROKA "pmr"
+#endif
+
+/* pridana konstanta pre batch mode; 2003-07-04 */
+#define PRM_BATCH_MODE 21
+#ifdef LONG_PARAM_NAMES
+	#define STR_PRM_BATCH_MODE "PRM_BATCH_MODE"
+#else
+	#define STR_PRM_BATCH_MODE "pbm"
 #endif
 
 /* nasleduju parametre z formularov pre vsetky typy dotazov,

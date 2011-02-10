@@ -4,8 +4,13 @@
 .redbold { color: #ff0000; font-weight: bold; }
 .bluebold { color: #0000ff; font-weight: bold; }
 .bold { font-weight: bold; }
+.boldit { font-weight: bold; font-style: italic; }
+.it { font-style: italic; }
 .normal { color: #000000; }
 .tt { font-family: Courier, Monospaced; }
+.parameter { font-weight: bold; font-style: normal; font-family: Courier, Monospaced; color: black; }
+.value { font-weight: bold; font-style: normal; font-family: Courier, Monospaced; color: brown; }
+
 /* apply to all elements */ { font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 100%; }
 body { 
 	background-color: #d0bba0; 
@@ -20,7 +25,7 @@ body {
 	scrollbar-track-color: #d0bba0; 
 	scrollbar-arrow-color: #a05000;
 }
-p { font-family: Verdana, Tahoma, Georgia, Sans Serif; color: #000000; text-style: normal; }
+p { font-family: Verdana, Tahoma, Georgia, Sans Serif; color: #000000; font-style: normal; }
 
 p.duoraz { 
 	font-weight: bold; }
@@ -56,3 +61,7 @@ input.checkbox { }
 
 ol.level1 { list-style-type: decimal; }
 ol.level2 { list-style-type: lower-roman; }
+ol.level3 { list-style-type: decimal; }
+ul.level1 { list-style-type: disc; }
+ul.level2 { list-style-type: circle; }
+ul.level3 { list-style-type: square; }
