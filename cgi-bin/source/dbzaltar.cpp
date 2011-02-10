@@ -27,6 +27,7 @@
 /*   2003-08-21a.D. | pokusy s posvatnymi citaniami (zalmy)    */
 /*   2003-10-07a.D. | zmena v _SET_SPOLOCNE_VECI_NEDELA        */
 /*   2003-11-20a.D. | zmeny pre posvatne citanie (adv1)        */
+/*   2003-12-07a.D. | posvatne citanie (adv2)                  */
 /*                                                             */
 /* notes |                                                     */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
@@ -2466,7 +2467,7 @@ void liturgicke_obdobie(int litobd, int tyzden, int den, int tyzzal, int poradie
 			_set_prosby(modlitba, _file, _anchor);
 			set_LOG_litobd;
 
-		/* posvatne citanie, pridane 2003-11-19 */
+		/* posvatne citanie, pridane 2003-11-19, modifikovane 2003-12-07 */
 			/* hymnus */
 			modlitba = MODL_POSV_CITANIE;
 			sprintf(_anchor, "%s%c_%s",
@@ -2474,6 +2475,65 @@ void liturgicke_obdobie(int litobd, int tyzden, int den, int tyzzal, int poradie
 				pismenko_modlitby(modlitba),
 				ANCHOR_HYMNUS);
 			_set_hymnus(modlitba, _file_pc, _anchor);
+			set_LOG_litobd;
+
+			/* antifony */
+			sprintf(_anchor, "%s%d%c_%s",
+				nazov_OBD[litobd],
+				_global_den.den,
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA1);
+			_set_antifona1(modlitba, _file_pc, _anchor);
+			set_LOG_litobd;
+			sprintf(_anchor, "%s%d%c_%s",
+				nazov_OBD[litobd],
+				_global_den.den,
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA2);
+			_set_antifona2(modlitba, _file_pc, _anchor);
+			set_LOG_litobd;
+			sprintf(_anchor, "%s%d%c_%s",
+				nazov_OBD[litobd],
+				_global_den.den,
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA3);
+			_set_antifona3(modlitba, _file_pc, _anchor);
+			set_LOG_litobd;
+
+			/* dalsie zavisia od datumu (17. -- 24. december) */
+			/* 1. citanie */
+			sprintf(_anchor, "%s%d%c_%s",
+				nazov_OBD[litobd],
+				_global_den.den,
+				pismenko_modlitby(modlitba),
+				ANCHOR_CITANIE1);
+			_set_citanie1(modlitba, _file_pc, _anchor);
+			set_LOG_litobd;
+
+			/* 2. citanie */
+			sprintf(_anchor, "%s%d%c_%s",
+				nazov_OBD[litobd],
+				_global_den.den,
+				pismenko_modlitby(modlitba),
+				ANCHOR_CITANIE2);
+			_set_citanie2(modlitba, _file_pc, _anchor);
+			set_LOG_litobd;
+
+			/* kratke responzorium  */
+			sprintf(_anchor, "%s%d%c_%s",
+				nazov_OBD[litobd],
+				_global_den.den,
+				pismenko_modlitby(modlitba),
+				ANCHOR_KRESPONZ);
+			_set_kresponz(modlitba, _file_pc, _anchor);
+			set_LOG_litobd;
+
+			/* modlitba - rovnaka pre rano i vecer */
+			sprintf(_anchor, "%s%d_%s",
+				nazov_OBD[litobd],
+				_global_den.den,
+				ANCHOR_MODLITBA);
+			_set_modlitba(modlitba, _file, _anchor);
 			set_LOG_litobd;
 
 			/* nedela */

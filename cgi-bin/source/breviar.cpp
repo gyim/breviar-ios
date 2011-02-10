@@ -1043,6 +1043,11 @@ void interpretParameter(int type, char *paramname){
 				strcat(path, _global_modl_kompletorium.kresponz.file);
 				includeFile(type, paramname, path, _global_modl_kompletorium.kresponz.anchor);
 				break;
+			case MODL_POSV_CITANIE:
+				/* pridane 2003-11-21 */
+				strcat(path, _global_modl_posv_citanie.kresponz.file);
+				includeFile(type, paramname, path, _global_modl_posv_citanie.kresponz.anchor);
+				break;
 			default:
 				/* tieto modlitby nemaju kresponz */
 				break;
