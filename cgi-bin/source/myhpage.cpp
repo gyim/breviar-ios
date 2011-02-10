@@ -107,7 +107,7 @@ void patka(void){
 		dnes.tm_min,
 		dnes.tm_sec);
 
-	/* nezabudni zmenit #define BUILD_DATE v mybase.h!!! (2003-06-30) */
+	/* nezabudni zmenit #define BUILD_DATE v mydefs.h!!! (2003-07-15) */
 	Export("Build: %s. ", BUILD_DATE);
 
 	/* zapoznamkovane, 2003-06-30 */

@@ -13,6 +13,7 @@
 /*                    pridal som EXPORT_TO_STDOUT              */
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-07-08a.D. | pridany append pre export (podla switchu)*/
+/*   2003-07-15a.D. | odstraneny #include "mybase.h"           */
 /*                                                             */
 /***************************************************************/
 
@@ -25,7 +26,6 @@
 #include <string.h>
 #include "mydefs.h"
 #include "myexpt.h"
-#include "mybase.h"
 
 /* #define FILE_EXPORT -- v myexpt.h */
 /* povodne to bolo #define, avsak kvoli tomu, aby sa to dalo menit,

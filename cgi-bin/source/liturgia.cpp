@@ -13,7 +13,7 @@
 #ifndef __LITURGIA_C_
 #define __LITURGIA_C_
 
-#include "liturgia.h" /* RUN_MODLITBA_CEZ_DEN je definovane v mybase.h */
+#include "liturgia.h" /* RUN_MODLITBA_CEZ_DEN je definovane v mydefs.h */
 
 #include "mylog.h" /* bolo tu .c */
 #include "myexpt.h"

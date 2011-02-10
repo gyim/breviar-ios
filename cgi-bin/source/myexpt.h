@@ -9,6 +9,7 @@
 /*   14/11/1999A.D. | created                                  */
 /*   10/02/2000A.D. | zmenena definicia FILE_EXPORT            */
 /*   06/09/2001A.D. | tento popis                              */
+/*   2003-07-15a.D. | odstraneny #include "mybase.h"           */
 /*                                                             */
 /***************************************************************/
 
@@ -17,7 +18,6 @@
 
 #include <stdio.h>
 #include "mydefs.h"
-#include "mybase.h"
 
 #define DEFAULT_FILE_EXPORT "export.htm"
 

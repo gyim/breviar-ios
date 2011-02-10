@@ -14,6 +14,8 @@
 /*   2003-07-04a.D. | pridane konstanty pre batch mode         */
 /*   2003-07-08a.D. | pridana konstanta MODL_OPT_APPEND        */
 /*   2003-07-09a.D. | pridane #define HTML_AMPERSAND "&amp;"   */
+/*   2003-07-15a.D. | zluceny s mybase.h, vycistene komentare  */
+/*                  - pridane HTML_BUTTON_LABEL_               */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -21,11 +23,7 @@
 #ifndef __MYDEFS_H_
 #define __MYDEFS_H_
 
-/* ------------------------------------------------------------ */
-/* --- pracovna verzia (v DOSe),  normalny beh (v linuxe)   --- */
-/* ---                                                      --- */
-
-#include "mysystem.h"
+#include "mysystem.h" /* tam pozri exportovanie, logovanie, system */
 #include "myconf.h" /* kvoli MAIL_ADDRESS, HTTP_ADDRESS; pridane 30/03/2000A.D. */
 
 #if defined(OS_DOS)
@@ -35,20 +33,53 @@
 	#error Unsupported operating system (not defined in mysystem.h)
 #endif
 
-/* 24/02/2000A.D. */
-/* exportovanie do suboru: EXPORT_TO_FILE */
-/* logovanie do suboru: LOG_TO_FILE */
-/* logovanie do exportu: LOG_TO_EXPORT */
+/***************************************************************/
+/*                                                             */
+/* mybase.h                                                    */
+/* (c)1999-2003 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
+/* description | obsahuje zakladne vecicky                     */
+/* document history                                            */
+/*   29/10/1999A.D. | created                                  */
+/*   06/09/2001A.D. | tento popis                              */
+/*   2003-06-30a.D. | build (priliepa sa do hlavicky)          */
+/*   2003-07-15a.D. | RUN_MODLITBA_CEZ_DEN definovane          */
+/*   2003-07-15a.D. | vlozeny do mydefs.h                      */
+/*                                                             */
+/***************************************************************/
+#include <stdio.h>
 
-/* tieto vecicky su v mysystem.h */
+#define BUILD_DATE "2003-07-15"
 
-/* ---                                                      --- */
-/* --- koniec veci pre pracovnu verziu (pre DOS)            --- */
-/* ------------------------------------------------------------ */
+/* 2003-07-15 odpoznamkovane */
+#define RUN_MODLITBA_CEZ_DEN
+/* 18/02/2000A.D.-- ci alokovat miesto pre a pouzivat
+ * premenne pre modl_cez_den */
 
-/* Nahradzanie specialnych znakov v cmd-line pre skripty */
-#define CGI_SPACE_CHAR '_' /* kvoli medzeram v menach autorov */
-#define CGI_SEMICOLON '/' /* kvoli bodkociarkam v menach autorov */
+#define BYTES 250
+#define SMALL 80
+
+/* navratova hodnota funkcii */
+#define NO_RESULT 2
+#define FAILURE 1
+#define SUCCESS 0
+
+/* true -- false */
+#define TRUE  1
+#define FALSE 0
+#define ANO   1
+#define NIE   0
+
+#define MAX_STR	300 /* maximalna dlzka retazca */
+#define MAX_GLOBAL_STR 300 /* _global_string */ /* 31/03/2000A.D. */
+#define MAX_QUERY_STR 300 /* query_string */
+#define MAX_POM_QUERY_TYPE 300 /* pom_QUERY_TYPE */
+#define MAX_GLOBAL_LINK 300 /* maximalna dlzka retazca _global_link */
+#define MAX_ENV	100 /* maximalna dlzka environmentalnej premennej */
+#define MAX_VARIABLES 10 /* maximalny pocet syst. premennych WWW_... */
+/***************************************************************/
+/* EOF of former file mybase.h                                 */
+/***************************************************************/
 
 /* Nazvy programov, suborov, skriptov... */
 #define SCRIPT_NAME          "l.cgi" /* kedysi tu bolo dnes.cgi */
@@ -366,6 +397,13 @@ extern int query_type; /* premenna obsahujuca PRM_... */
 
 /* pridane 2003-07-09, zmenene v cestach pre skript */
 #define HTML_AMPERSAND "&amp;"
+
+/* pridane 2003-07-15 */
+#define HTML_BUTTON_LABEL_RANNE_CHVALY "Ranné chvály"
+#define HTML_BUTTON_LABEL_PREDPOLUDNIM "9h"
+#define HTML_BUTTON_LABEL_NAPOLUDNIE   "12h"
+#define HTML_BUTTON_LABEL_POPOLUDNI    "15h"
+#define HTML_BUTTON_LABEL_VESPERY      "Vešpery"
 
 #endif /*__MYDEFS_H_*/
 

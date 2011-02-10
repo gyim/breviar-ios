@@ -31,6 +31,8 @@
 /*                  - <font size=-1></font> zmeneny na         */
 /*                    <span class="small"></span>              */
 /*   2003-07-15a.D. | rozne pokusy s modlitbou cez den         */
+/*                  - pridane HTML_BUTTON_LABEL_               */
+/*   2003-07-15a.D. | odstraneny #include "mybase.h"           */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -40,12 +42,13 @@
 /*                                                             */
 /***************************************************************/
                                        
-/* RUN_MODLITBA_CEZ_DEN je definovana v mybase.h */
+/* 2003-07-15: RUN_MODLITBA_CEZ_DEN je definovana 
+ * v byvalom mybase.h, teraz mydefs.h
+ */
                                        
 #include <stdlib.h>                    
 #include <stdio.h>                     
                                        
-#include "mybase.h" /* zakladne vecicky */
 #include "mystring.h" /* 31/03/2000A.D. */
 #include "myconf.h" /* 30/03/2000A.D. */
 #include "mysystem.h" /* hovori, ci som v systeme linux/DOS */
@@ -2335,7 +2338,8 @@ int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, int rok, int modlitba, int
 void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
 	if(typ != EXPORT_DNA_VIAC_DNI){
 		char pom[MAX_STR];
-		/* prerobene 13/04/2000A.D.: tlacitka niekedy linkuju iba subor, nie linku: podla _global_linky */
+		/* prerobene 13/04/2000A.D.: tlacitka niekedy linkuju iba subor, 
+		 * nie linku: podla _global_linky */
 		if(_global_linky == ANO){
 			if(poradie_svateho > 0)
 				sprintf(pom, "&%s=%d", STR_DALSI_SVATY, poradie_svateho);
@@ -2348,7 +2352,10 @@ void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
 			else
 				mystrcpy(pom, FILE_NAME_CHYBA, MAX_STR);
 		}
-		//Export("<center>\n");
+
+		/* 2003-07-15 vycistene poznamky, dorobene modlitby cez den */
+
+		/* oddelenie */
 		Export("</td>\n<td>");
 		if(_global_linky == ANO){
 			/* ranne chvaly -- button */
@@ -2364,30 +2371,95 @@ void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
 		else{
 			Export("<form action=\"%s\">\n", pom);
 		}
-		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"Ranné chvály\">\n");
+		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_LABEL_RANNE_CHVALY"\">\n");
 		Export("</form>\n");
+
+/* 2003-07-15 dorobene modlitby cez den */
+
 		/* oddelenie */
 		Export("</td>\n<td>");
-		//Export("&nbsp;\n");
-		/* vespery -- button */
-		if(poradie_svateho != 4){
-			/* spomienka panny marie v sobotu nema vespery */
 		if(_global_linky == ANO){
+			/* modlitba cez den (predpoludnim) -- button */
 			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
 				script_name,
 				STR_QUERY_TYPE, STR_PRM_DATUM,
 				STR_DEN, _global_den.den,
 				STR_MESIAC, _global_den.mesiac,
 				STR_ROK, _global_den.rok,
-				STR_MODLITBA, STR_MODL_VESPERY,
+				STR_MODLITBA, STR_MODL_PREDPOLUDNIM,
 				pom);
 		}
 		else{
 			Export("<form action=\"%s\">\n", pom);
 		}
-		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"Vešpery\">\n");
+		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_LABEL_PREDPOLUDNIM"\">\n");
 		Export("</form>\n");
+
+		/* oddelenie */
+		Export("</td>\n<td>");
+		if(_global_linky == ANO){
+			/* modlitba cez den (napoludnie) -- button */
+			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
+				script_name,
+				STR_QUERY_TYPE, STR_PRM_DATUM,
+				STR_DEN, _global_den.den,
+				STR_MESIAC, _global_den.mesiac,
+				STR_ROK, _global_den.rok,
+				STR_MODLITBA, STR_MODL_NAPOLUDNIE,
+				pom);
+		}
+		else{
+			Export("<form action=\"%s\">\n", pom);
+		}
+		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_LABEL_NAPOLUDNIE"\">\n");
+		Export("</form>\n");
+
+		/* oddelenie */
+		Export("</td>\n<td>");
+		if(_global_linky == ANO){
+			/* modlitba cez den (popoludni) -- button */
+			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
+				script_name,
+				STR_QUERY_TYPE, STR_PRM_DATUM,
+				STR_DEN, _global_den.den,
+				STR_MESIAC, _global_den.mesiac,
+				STR_ROK, _global_den.rok,
+				STR_MODLITBA, STR_MODL_POPOLUDNI,
+				pom);
+		}
+		else{
+			Export("<form action=\"%s\">\n", pom);
+		}
+		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_LABEL_POPOLUDNI"\">\n");
+		Export("</form>\n");
+
+/* 2003-07-15 pokracuje sa buttonom `Vespery' */
+
+		/* oddelenie */
+		Export("</td>\n<td>");
+
+		if(poradie_svateho != 4){
+			/* spomienka panny marie v sobotu nema vespery,
+			 * spravne odsadene az 2003-07-15
+			 */
+			if(_global_linky == ANO){
+				/* vespery -- button */
+				Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
+					script_name,
+					STR_QUERY_TYPE, STR_PRM_DATUM,
+					STR_DEN, _global_den.den,
+					STR_MESIAC, _global_den.mesiac,
+					STR_ROK, _global_den.rok,
+					STR_MODLITBA, STR_MODL_VESPERY,
+					pom);
+			}
+			else{
+				Export("<form action=\"%s\">\n", pom);
+			}
+			Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_LABEL_VESPERY"\">\n");
+			Export("</form>\n");
 		}/* if(poradie_svateho != 4) */
+
 		/* toto sa tyka buttonu 'Detaily...' */
 		Export("</td>\n<td>");
 		if(_global_linky == ANO){
@@ -2402,7 +2474,7 @@ void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
 			Export("<"HTML_FORM_INPUT_SUBMIT" value=\"Detaily...\">\n");
 			Export("</form>\n");
 		}/* ak nie zobrazovat linky na internet, tlacidlo `Detaily...' je zbytocne */
-		//Export("</center>\n<p>\n");
+
 	}/* if(typ) */
 	/* inak buttony nedavam */
 }/* _export_rozbor_dna_buttons */
@@ -3478,6 +3550,13 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 		p = MODL_INVITATORIUM;*/
 	else if(equals(modlitba, STR_MODL_RANNE_CHVALY))
 		p = MODL_RANNE_CHVALY;
+	/* 2003-07-15 pridane modlitby cez den */
+	else if(equals(modlitba, STR_MODL_PREDPOLUDNIM))
+		p = MODL_PREDPOLUDNIM;
+	else if(equals(modlitba, STR_MODL_NAPOLUDNIE))
+		p = MODL_NAPOLUDNIE;
+	else if(equals(modlitba, STR_MODL_POPOLUDNI))
+		p = MODL_POPOLUDNI;
 	else if(equals(modlitba, STR_MODL_VESPERY))
 		p = MODL_VESPERY;
 /*	else if(equals(modlitba, STR_MODL_KOMPLETORIUM))
@@ -5810,7 +5889,7 @@ int parseQueryString(void){
 
 /* KOMPILACIA -- idiotuv pruvodce kompilovanim tohoto gigantu */
 
-/* nezabudni zmenit #define BUILD_DATE v mybase.h!!! (2003-06-30) */
+/* nezabudni zmenit #define BUILD_DATE v mydefs.h!!! (2003-07-15) */
 
 /* 17/02/2000A.D.: Segmentation fault pod linuxom;
  * 18/02/2000A.D.:

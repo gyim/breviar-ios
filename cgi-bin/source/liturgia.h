@@ -13,6 +13,7 @@
 /*   2003-07-02a.D. | pridana LINK_DEN_MESIAC_ROK_PRESTUP      */
 /*                    kvoli prestupnym rokom (iny _global_link)*/
 /*   2003-07-15a.D. | rozne definicie pre modlitbu cez den     */
+/*   2003-07-15a.D. | odstraneny #include "mybase.h"           */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -20,7 +21,6 @@
 #ifndef __LITURGIA_H_
 #define __LITURGIA_H_
 
-#include "mybase.h"
 #include "mysystem.h"
 #include "mydefs.h"
 #include "mylog.h"
@@ -134,9 +134,9 @@ typedef struct den_mesiac _struct_den_mesiac;
 /* formular s detailami ohladom generovania modlitby */
 #define MODL_DETAILY            13
 /* pre jednoduchsiu orientaciu pridane 2003-07-15 */
-#define MODL_CEZ_DEN_PRED      3
-#define MODL_CEZ_DEN_NA        4
-#define MODL_CEZ_DEN_PO        5
+#define MODL_PREDPOLUDNIM      3
+#define MODL_NAPOLUDNIE        4
+#define MODL_POPOLUDNI         5
 
 
 /* ... a stringy pre ne */

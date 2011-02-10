@@ -8,13 +8,14 @@
 /* document history                                            */
 /*   30/03/2000A.D. | created                                  */
 /*   06/09/2001A.D. | tento popis                              */
+/*   2003-07-15a.D. | #include "mybase.h" nahradeny "mydefs.h" */
 /*                                                             */
 /***************************************************************/
 
 #ifndef __MYCONFIG_H
 #define __MYCONFIG_H
 
-#include "mybase.h"
+#include "mydefs.h"
 
 #define MAX_HTTP_STR 80
 #define MAX_MAIL_STR 80
