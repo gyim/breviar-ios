@@ -45,6 +45,7 @@
 /*                  - odstranenie RUN_MODLITBA_CEZ_DEN         */
 /*                  - odstranenie POKUS_24_02_2000             */
 /*                  - male zmeny v includeFile()               */
+/*                  - option5 dorobena aj do getForm()         */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -210,6 +211,7 @@ int _global_opt2 = MODL_ZALMY_ZO_SV;
 int _global_opt3 = MODL_SPOL_CAST_NEURCENA;
 int _global_opt4 = ANO; /* pridana 05/04/2000A.D. */
 int _global_opt5 = MODL_CEZ_DEN_ZALMY_ZO_DNA; /* pridana 2003-08-07 */
+/* pokial ide o _global_opt5, kontroluje sa v zaltar(); poznamka pridana 2003-08-13 */
 /* pridane 2003-07-08, append parameter */
 int _global_opt_append = NIE;
 
@@ -1198,10 +1200,12 @@ void showPrayer(int type){
 	}
 	// 17/02/2000A.D.
 	*/
-	Log("showPrayer: opt3 == `%s' (%d -- %s)\n", pom_MODL_OPT3, _global_opt3, nazov_spolc[_global_opt3]);
+	Log("showPrayer: opt3 == `%s' (%d -- %s)\n", 
+		pom_MODL_OPT3, _global_opt3, nazov_spolc[_global_opt3]);
 	/* vypisanie dalsich options, 2003-08-13 */
 	Log("showPrayer: opt4 == `%s' (%d)\n", pom_MODL_OPT4, _global_opt4);
-	Log("showPrayer: opt5 == `%s' (%d -- %s)\n", pom_MODL_OPT5, _global_opt5, nazov_doplnkpsalm[_global_opt5]);
+	Log("showPrayer: opt5 == `%s' (%d -- %s)\n", pom_MODL_OPT5, _global_opt5, 
+		(_global_opt5 == MODL_CEZ_DEN_ZALMY_ZO_DNA)? STR_MODL_CEZ_DEN_ZALMY_ZO_DNA: STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
 
 	/* samotne vypisanie, o aku modlitbu ide */
 	Log("showPrayer(type %i, %s), _global_modlitba == %s\n",
@@ -3083,10 +3087,10 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
 	Export("<option>%s\n", STR_ANO);
 	Export("<option selected>%s\n", STR_NIE);
 	Export("</select>\n");
-	Export("<br>(kaûdÈ rannÈ chv·ly obsahuj˙ Benediktus, veöpery Magnifikat, ");
+	Export("<br><span class=\"explain\">KaûdÈ rannÈ chv·ly obsahuj˙ Benediktus, veöpery Magnifikat, ");
 	Export("obe modlitby OtËen·ö a zakonËenie modlitby, ");
 	Export("a napokon posv‰tnÈ ËÌtanie obsahuje hymnus Te Deum; ");
-	Export("tieto Ëasti modlitby naz˝vame <i>nemennÈ s˙Ëasti</i>)");
+	Export("tieto Ëasti modlitby naz˝vame <i>nemennÈ s˙Ëasti</i>.</span>");
 	Export("</li>\n");
 
 	if((poradie_svaty > 0) && (poradie_svaty < 4)){
@@ -3097,9 +3101,9 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
 		Export("<option>%s\n", STR_ANO);
 		Export("<option selected>%s\n", STR_NIE);
 		Export("</select>\n");
-		Export("<br>(rannÈ chv·ly a veöpery zv‰Ëöa obsahuj˙ pred n·zvom modlitby ");
+		Export("<br><span class=\"explain\">RannÈ chv·ly a veöpery zv‰Ëöa obsahuj˙ pred n·zvom modlitby ");
 		Export("ûivotopis sv‰tÈho, popis sviatku alebo podobn˙ struËn˙ charakteristiku, ");
-		Export("ktor˙ naz˝vame <i>popis</i>)");
+		Export("ktor˙ pre jednoduchosù naz˝vame <i>popis</i>.</span>");
 		Export("</li>\n");
 
 		/* tu je treba urobit porovnanie s nejakou premennou, ktora obsahuje
@@ -3108,14 +3112,15 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
 		 */
 
 		/* pole WWW_MODL_OPT2 */
-		Export("<li>braù ûalmy zo \n");
+		Export("<li>ûalmy braù zo \n");
 		Export("<select name=\"%s\">\n", STR_MODL_OPT2);
 		Export("<option selected>%s\n", STR_MODL_ZALMY_ZO_DNA);
 		Export("<option>%s\n", STR_MODL_ZALMY_ZO_SV);
 		Export("</select>\n");
-		Export("<br>(na sviatok sv‰tÈho sa podæa liturgick˝ch pravidiel ber˙ ûalmy ");
+		Export(" (okrem modlitby cez deÚ)\n"); /* pridane 2003-08-13 */
+		Export("<br><span class=\"explain\">Na sviatok sv‰tca/sv‰tice sa podæa liturgick˝ch pravidiel ber˙ ûalmy ");
 		Export("zo sviatku, öpeci·lne na rannÈ chv·ly öpeci·lne z nedele 1. t˝ûdÚa ûalt·ra; ");
-		Export("avöak niekto sa radöej modlÌ ûalmy zo vöednÈho dÚa)");
+		Export("avöak niekto sa radöej modlÌ ûalmy zo vöednÈho dÚa.</span>");
 		Export("</li>\n");
 
 		/* najprv si rozkodujeme, co je v _global_den.spolcast */
@@ -3137,23 +3142,22 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
 			Export("<option selected>%s\n", nazov_spolc[MODL_SPOL_CAST_NEBRAT]);
 		}
 		Export("</select>\n");
-		Export("<br>(na sviatok sv‰tÈho sa podæa liturgick˝ch pravidiel ber˙ Ëasti, ");
+		Export("<br><span class=\"explain\">Na sviatok sv‰tca/sv‰tice sa podæa liturgick˝ch pravidiel ber˙ Ëasti, ");
 		Export("ktorÈ sa nenach·dzaj˙ vo vlastnej Ëasti ûalt·ra, zo spoloËnej Ëasti sviatku, ");
-		Export("niekedy je moûnosù vybraù si z viacer˝ch spoloËn˝ch ËastÌ; naviac je moûnosù niekto sa modliù sa tieto Ëasti zo vöednÈho dÚa)");
+		Export("niekedy je moûnosù vybraù si z viacer˝ch spoloËn˝ch ËastÌ; naviac je moûnosù niekto sa modliù sa tieto Ëasti zo vöednÈho dÚa.</span>");
 		Export("</li>\n");
 	}/* if(poradie svateho in 1, 2, 3) */
 
 	/* pridane 2003-08-06 */
-	Export("<li>ûalmy pre modlitbu cez deÚ braù z <i>doplnkovej psalmÛdie</i>?\n");
+	Export("<li>ûalmy pre modlitbu cez deÚ braù z \n");
 	/* pole WWW_MODL_OPT5 */
 	Export("<select name=\"%s\">\n", STR_MODL_OPT5);
 	Export("<option selected>%s\n", STR_MODL_CEZ_DEN_ZALMY_ZO_DNA);
-	Export("<option>%s\n", STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_1);
-	Export("<option>%s\n", STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_2);
-	Export("<option>%s\n", STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3);
+	Export("<option>%s\n", STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
 	Export("</select>\n");
-	Export("<br>(doplnkov· psalmÛdia zah‡Úa 3 sÈrie tzv. gradu·lnych ûalmov ");
-	Export("(é 120-129), ktorÈ moûno braù namiesto ûalmov zo ûalt·ra)");
+	Export(" psalmÛdie\n");
+	Export("<br><span class=\"explain\">Doplnkov· psalmÛdia zah‡Úa 3 sÈrie tzv. gradu·lnych ûalmov ");
+	Export("(é 120-129), ktorÈ moûno braù namiesto ûalmov zo ûalt·ra.</span>");
 	Export("</li>\n");
 
 	Export("</ul>\n");
@@ -3761,18 +3765,12 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 	}/* inak ostane _global_opt4 default */
 	Log("opt4 == `%s' (%d)\n", pom_MODL_OPT4, _global_opt4);
 
-	/* option 5, pridana 2003-08-12 */
+	/* option 5, pridana 2003-08-12, upravena 2003-08-13 */
 	if(equals(pom_MODL_OPT5, STR_MODL_CEZ_DEN_ZALMY_ZO_DNA) || equals(pom_MODL_OPT5, "0")){
 		_global_opt5 = MODL_CEZ_DEN_ZALMY_ZO_DNA;
 	}
-	else if(equals(pom_MODL_OPT5, STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_1) || equals(pom_MODL_OPT5, "1")){
-		_global_opt5 = MODL_CEZ_DEN_DOPLNKOVE_ZALMY_1;
-	}
-	else if(equals(pom_MODL_OPT5, STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_2) || equals(pom_MODL_OPT5, "2")){
-		_global_opt5 = MODL_CEZ_DEN_DOPLNKOVE_ZALMY_2;
-	}
-	else if(equals(pom_MODL_OPT5, STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3) || equals(pom_MODL_OPT5, "3")){
-		_global_opt5 = MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3;
+	else if(equals(pom_MODL_OPT5, STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA) || equals(pom_MODL_OPT5, "1")){
+		_global_opt5 = MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA;
 	}/* inak ostane _global_opt5 default */
 	Log("opt5 == `%s' (%d)\n", pom_MODL_OPT5, _global_opt5);
 
@@ -5551,7 +5549,16 @@ int getForm(void){
 				mystrcpy(pom_MODL_OPT4, ptr, SMALL);
 		}
 
-	}
+		/* premenna WWW_MODL_OPT5, pridana 2003-08-13 */
+		ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPT5));
+		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
+		 * lebo pom_... su inicializovane na STR_EMPTY */
+		if(ptr != NULL){
+			if(strcmp(ptr, EMPTY_STR) != 0)
+				mystrcpy(pom_MODL_OPT5, ptr, SMALL);
+		}
+	}/* (query_type == PRM_DATUM) || (query_type == PRM_DETAILY) */
+
 	else if(query_type == PRM_CEZ_ROK){
 		/* cez rok: treba nacitat den v tyzdni a cislo tyzdna */
 
@@ -5594,7 +5601,8 @@ int getForm(void){
 		if(strcmp(ptr, EMPTY_STR) != 0)
 			mystrcpy(pom_MODLITBA, ptr, SMALL);
 
-	}
+	}/* query_type == PRM_CEZ_ROK */
+
 	else if(query_type == PRM_SVIATOK){
 		/* cez rok: treba nacitat nazov sviatku */
 
@@ -5611,7 +5619,8 @@ int getForm(void){
 		if(strcmp(ptr, EMPTY_STR) != 0)
 			mystrcpy(pom_SVIATOK, ptr, SMALL);
 
-	}
+	}/* query_type == PRM_SVIATOK */
+
 	else if(query_type == PRM_ANALYZA_ROKU){
 		/* cez rok: treba nacitat nazov sviatku */
 
@@ -5628,7 +5637,8 @@ int getForm(void){
 		if(strcmp(ptr, EMPTY_STR) != 0)
 			mystrcpy(pom_ANALYZA_ROKU, ptr, SMALL);
 
-	}
+	}/* query_type == PRM_ANALYZA_ROKU */
+
 	else if(query_type == PRM_MESIAC_ROKA){
 		/* treba nacitat mesiac a rok */
 		/* premenna WWW_MESIAC_ROKA */
@@ -5657,7 +5667,8 @@ int getForm(void){
 		if(strcmp(ptr, EMPTY_STR) != 0)
 			mystrcpy(pom_ROK, ptr, SMALL);
 
-	}
+	}/* query_type == PRM_MESIAC_ROKA */
+
 	else if(query_type == PRM_TABULKA){
 		/* PRM_TABULKA: treba nacitat from a to; ak chyba linka, tak automaticky == NIE */
 
@@ -5695,7 +5706,8 @@ int getForm(void){
 			if(strcmp(ptr, EMPTY_STR) != 0)
 				mystrcpy(pom_LINKY, ptr, SMALL);
 		}
-	}
+	}/* query_type == PRM_TABULKA */
+
 	else{
 		/* neznamy typ dotazu */
 		return FAILURE;

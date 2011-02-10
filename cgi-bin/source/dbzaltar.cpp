@@ -21,6 +21,9 @@
 /*   2003-06-30a.D. | zmeny pre spomienku neposkvrn.srdca PM   */
 /*   2003-08-11a.D. | -Wall upozornila na / * within comments  */
 /*   2003-08-13a.D. | odstranene DEBUG_MODLITBA_CEZ_DEN        */
+/*                  - zaltar() doplnena o modlitbu cez den     */
+/*                  - nastavovanie doplnkovej psalmodie        */
+/*                  - #define presunute do header-u dbzaltar.h */
 /*                                                             */
 /* notes |                                                     */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
@@ -41,65 +44,9 @@ char _anchor_head[SMALL];
 #include "mylog.h"
 #include <string.h>
 #include "mystring.h" /* pridane 2003-08-11 kvoli _INIT_DM */
+#include "breviar.h"  /* pridane 2003-08-13 kvoli _global_opt5 */
 
-#define VELKONOCNA_PRIPONA  "VE"
-#define POSTNA_PRIPONA      "PO"
-#define CEZROCNA_PRIPONA    "CR"
-
-/* anchor identifiers */
-#define ANCHOR_POPIS        "POPIS" /* pridane 05/04/2000A.D. */
-#define ANCHOR_HYMNUS       "HYMNUS"
-#define ANCHOR_ANTIFONA1    "ANT1"
-#define ANCHOR_ANTIFONA2    "ANT2"
-#define ANCHOR_ANTIFONA3    "ANT3"
-#define ANCHOR_ANTIFONA1V   "ANT1V"
-#define ANCHOR_ANTIFONA2V   "ANT2V"
-#define ANCHOR_ANTIFONA3V   "ANT3V"
-#define ANCHOR_KCITANIE     "CIT"
-#define ANCHOR_KRESPONZ     "RESP"
-#define ANCHOR_MAGNIFIKAT   "MAGNIFIKAT" /* antifona na magnifikat */
-#define ANCHOR_BENEDIKTUS   "BENEDIKTUS" /* antifona na benediktus */
-#define ANCHOR_PROSBY       "PROSBY"
-#define ANCHOR_MODLITBA     "MODLITBA"
-
-/* special identifiers */
-#define SPOM_PM_SOBOTA "SPMVS"
-/* special filename indentifiers */
-/* podobne ako v liturgia.h::char *nazov_obd_htm[] */
-#define FILE_SPOM_PM_SOBOTA "spmvs.htm"
-
-#define FILE_NANEBOVSTUPENIE "nan.htm" /* 10/03/2000A.D. -- kotvy v nom su podla OBD_VELKONOCNE_I */
-
-#define ANCHOR_ZOSLANIE_DUCHA_SV "ZDS"
-#define FILE_ZOSLANIE_DUCHA_SV "zds.htm" /* 10/03/2000A.D. -- kotvy v nom su podla OBD_VELKONOCNE_II, ANCHOR_ZOSLANIE_DUCHA_SV */
-
-#define ANCHOR_NAJSV_TROJICE "TROJ"
-#define FILE_NAJSV_TROJICE "troj.htm" /* 10/03/2000A.D. -- kotvy v nom su podla ANCHOR_NAJSV_TROJICE */
-
-#define ANCHOR_KRISTA_KRALA "KRKRALA"
-#define FILE_KRISTA_KRALA "krkrala.htm" /* 10/03/2000A.D. -- kotvy v nom su podla ANCHOR_KRISTA_KRALA */
-
-#define ANCHOR_TELA_A_KRVI "TK"
-#define FILE_TELA_A_KRVI "tk.htm" /* 10/03/2000A.D. -- kotvy v nom su podla ANCHOR_TELA_A_KRVI */
-
-#define ANCHOR_SRDCA "SRDCA"
-#define FILE_SRDCA "srdca.htm" /* 10/03/2000A.D. -- kotvy v nom su podla ANCHOR_SRDCA */
-
-#define ANCHOR_SRDCA_PM "SRDCAPM"
-#define FILE_SRDCA_PM "nspm.htm" /* 10/03/2000A.D. -- kotvy v nom su podla ANCHOR_SRDCA_PM */
-
-#define ANCHOR_PM_BOHOROD "PMB"
-#define FILE_PM_BOHOROD "pmb.htm" /* 14/03/2000A.D. -- kotvy v nom su podla ANCHOR_PM_BOHOROD */
-
-#define ANCHOR_2NE_PO_NAR "2NE" /* 14/03/2000A.D. */
-#define ANCHOR_ZJAVENIE_PANA "ZJV" /* 14/03/2000A.D. */
-
-#define ANCHOR_SV_RODINY "SVROD"
-#define FILE_SV_RODINY "svrod.htm" /* 14/03/2000A.D. -- kotvy v nom su podla ANCHOR_SV_RODINY */
-
-#define ANCHOR_KRST_PANA "KRST"
-#define FILE_KRST_PANA "krst.htm" /* 14/03/2000A.D. -- kotvy v nom su podla ANCHOR_KRST_PANA */
-
+/* #define (stringove konstanty) presunute do header-u dbzaltar.h, 2003-08-15 */
 /* globalne premenne prehodene do liturgia.h, 17/02/2000A.D. */
 /* ------------------------------------------------------------------- */
 
@@ -247,16 +194,21 @@ void _set_zalm1(int modlitba, const char *file, const char *anchor){
 			break;
 		/* modlitby cez den maju spolocnu psalmodiu, 
 		 * pokial si pouzivatel nevyziada doplnkovu psalmodiu (seria 1-3),
-		 * preto nastavujem spolocne pre vsetky modlitby
+		 * preto nastavujem aj spolocne pre vsetky modlitby
 		 * 2003-08-13
 		 */
 		case MODL_CEZ_DEN_VSETKY:
+		case MODL_PREDPOLUDNIM:
 			/* predpoludnim */
 			strcpy(_global_modl_cez_den_9.zalm1.file, file);
 			strcpy(_global_modl_cez_den_9.zalm1.anchor, anchor);
+			if(modlitba == MODL_PREDPOLUDNIM) break;
+		case MODL_NAPOLUDNIE:
 			/* napoludnie */
 			strcpy(_global_modl_cez_den_12.zalm1.file, file);
 			strcpy(_global_modl_cez_den_12.zalm1.anchor, anchor);
+			if(modlitba == MODL_NAPOLUDNIE) break;
+		case MODL_POPOLUDNI:
 			/* popoludni */
 			strcpy(_global_modl_cez_den_3.zalm1.file, file);
 			strcpy(_global_modl_cez_den_3.zalm1.anchor, anchor);
@@ -281,16 +233,21 @@ void _set_zalm2(int modlitba, const char *file, const char *anchor){
 			break;
 		/* modlitby cez den maju spolocnu psalmodiu, 
 		 * pokial si pouzivatel nevyziada doplnkovu psalmodiu (seria 1-3),
-		 * preto nastavujem spolocne pre vsetky modlitby
+		 * preto nastavujem aj spolocne pre vsetky modlitby
 		 * 2003-08-13
 		 */
 		case MODL_CEZ_DEN_VSETKY:
+		case MODL_PREDPOLUDNIM:
 			/* predpoludnim */
 			strcpy(_global_modl_cez_den_9.zalm2.file, file);
 			strcpy(_global_modl_cez_den_9.zalm2.anchor, anchor);
+			if(modlitba == MODL_PREDPOLUDNIM) break;
+		case MODL_NAPOLUDNIE:
 			/* napoludnie */
 			strcpy(_global_modl_cez_den_12.zalm2.file, file);
 			strcpy(_global_modl_cez_den_12.zalm2.anchor, anchor);
+			if(modlitba == MODL_NAPOLUDNIE) break;
+		case MODL_POPOLUDNI:
 			/* popoludni */
 			strcpy(_global_modl_cez_den_3.zalm2.file, file);
 			strcpy(_global_modl_cez_den_3.zalm2.anchor, anchor);
@@ -315,16 +272,21 @@ void _set_zalm3(int modlitba, const char *file, const char *anchor){
 			break;
 		/* modlitby cez den maju spolocnu psalmodiu, 
 		 * pokial si pouzivatel nevyziada doplnkovu psalmodiu (seria 1-3),
-		 * preto nastavujem spolocne pre vsetky modlitby
+		 * preto nastavujem aj spolocne pre vsetky modlitby
 		 * 2003-08-13
 		 */
 		case MODL_CEZ_DEN_VSETKY:
+		case MODL_PREDPOLUDNIM:
 			/* predpoludnim */
 			strcpy(_global_modl_cez_den_9.zalm3.file, file);
 			strcpy(_global_modl_cez_den_9.zalm3.anchor, anchor);
+			if(modlitba == MODL_PREDPOLUDNIM) break;
+		case MODL_NAPOLUDNIE:
 			/* napoludnie */
 			strcpy(_global_modl_cez_den_12.zalm3.file, file);
 			strcpy(_global_modl_cez_den_12.zalm3.anchor, anchor);
+			if(modlitba == MODL_NAPOLUDNIE) break;
+		case MODL_POPOLUDNI:
 			/* popoludni */
 			strcpy(_global_modl_cez_den_3.zalm3.file, file);
 			strcpy(_global_modl_cez_den_3.zalm3.anchor, anchor);
@@ -483,19 +445,19 @@ char _anchor[SMALL];
  * anchor == ANCHOR_... */
 char pismenko_modlitby(int modlitba){
 	switch(modlitba){
-		case MODL_INVITATORIUM    :  return 'i';
-		case MODL_RANNE_CHVALY    :  return 'r';
-		case MODL_POSV_CITANIE:  return 'c';
-		case MODL_CEZ_DEN_9       :  return '9';
-		case MODL_CEZ_DEN_12      :  return '2';
-		case MODL_CEZ_DEN_3       :  return '3';
-		case MODL_VESPERY         :  return 'v';
-		case MODL_KOMPLETORIUM    :  return 'k';
-		case MODL_NEURCENA        :  return '_';  /* toto by sa nemalo */
-		case MODL_PRVE_VESPERY    :  return '1';
-		case MODL_PRVE_KOMPLETORIUM: return 'p';
-		case MODL_DRUHE_VESPERY   :  return '2';  /* toto by sa nemalo */
-		case MODL_DRUHE_KOMPLETORIUM:return 'd';  /* toto by sa nemalo */
+		case MODL_INVITATORIUM       :  return 'i';
+		case MODL_RANNE_CHVALY       :  return 'r';
+		case MODL_POSV_CITANIE       :  return 'c';
+		case MODL_CEZ_DEN_9          :  return '9';
+		case MODL_CEZ_DEN_12         :  return '2';
+		case MODL_CEZ_DEN_3          :  return '3';
+		case MODL_VESPERY            :  return 'v';
+		case MODL_KOMPLETORIUM       :  return 'k';
+		case MODL_NEURCENA           :  return '_';  /* toto by sa nemalo */
+		case MODL_PRVE_VESPERY       :  return '1';
+		case MODL_PRVE_KOMPLETORIUM  : return 'p';
+		case MODL_DRUHE_VESPERY      :  return '2';  /* toto by sa nemalo */
+		case MODL_DRUHE_KOMPLETORIUM :return 'd';  /* toto by sa nemalo */
 	}/* switch(modlitba) */
 	return 0;
 }/* pismenko_modlitby(); */
@@ -509,13 +471,22 @@ void anchor_name_zaltar(int den, int tyzzal, int modlitba, char *anchor){
 //Log("   set(zaltar): %s: `%s', <!--{...:%s}-->\n", nazov_modlitby[modlitba], _file, _anchor)
 
 void set_hymnus(int den, int tyzzal, int modlitba){
-	/* prvy a treti, resp. druhy a stvrty tyzden maju rovnake */
-	if(tyzzal == 3)
-		tyzzal = 1;
-	else if(tyzzal == 4)
-		tyzzal = 2;
-	file_name_zaltar(den, tyzzal);
-	anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_HYMNUS);
+	/* pridana modlitba cez den, ma hymny rovnake pre cele obdobie cez rok, 2003-08-15 */
+	if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
+		file_name_litobd(OBD_CEZ_ROK);
+		sprintf(_anchor, "%c_%s_%d", 
+			pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (den + tyzzal) % 2);
+	}
+	else{ /* nie modlitba cez den */
+		/* prvy a treti, resp. druhy a stvrty tyzden maju rovnake */
+		if(tyzzal == 3)
+			tyzzal = 1;
+		else if(tyzzal == 4)
+			tyzzal = 2;
+		file_name_zaltar(den, tyzzal);
+		anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_HYMNUS);
+	}
+
 	_set_hymnus(modlitba, _file, _anchor);
 	set_LOG_zaltar;
 }
@@ -1160,27 +1131,20 @@ void zaltar(int den, int tyzzal){
 
 	/* nasledujuca pasaz pridana 2003-08-13 */
 	Log("idem pre modlitbu cez den skontrolovat, ci netreba brat doplnkovu psalmodiu...\n");
-	switch(_global_opt5){
-		case MODL_CEZ_DEN_DOPLNKOVE_ZALMY_1:
-		/* modlitba cez den */
-			_set_zalm1(MODL_CEZ_DEN_VSETKY, "z120.htm", "ZALM120");
-			_set_zalm2(MODL_CEZ_DEN_VSETKY, "z121.htm", "ZALM121");
-			_set_zalm3(MODL_CEZ_DEN_VSETKY, "z122.htm", "ZALM122");
-			break;
-		case MODL_CEZ_DEN_DOPLNKOVE_ZALMY_2:
-		/* modlitba cez den */
-			_set_zalm1(MODL_CEZ_DEN_VSETKY, "z123.htm", "ZALM123");
-			_set_zalm2(MODL_CEZ_DEN_VSETKY, "z124.htm", "ZALM124");
-			_set_zalm3(MODL_CEZ_DEN_VSETKY, "z125.htm", "ZALM125");
-			break;
-		case MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3:
-		/* modlitba cez den */
-			_set_zalm1(MODL_CEZ_DEN_VSETKY, "z126.htm", "ZALM126");
-			_set_zalm2(MODL_CEZ_DEN_VSETKY, "z127.htm", "ZALM127");
-			_set_zalm3(MODL_CEZ_DEN_VSETKY, "z128.htm", "ZALM128");
-			break;
-		default: break;
-	}
+	if(_global_opt5 == MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA){
+		/* modlitba predpoludnim, 1. seria doplnkovej psalmodie */
+			_set_zalm1(MODL_PREDPOLUDNIM, "z120.htm", "ZALM120");
+			_set_zalm2(MODL_PREDPOLUDNIM, "z121.htm", "ZALM121");
+			_set_zalm3(MODL_PREDPOLUDNIM, "z122.htm", "ZALM122");
+		/* modlitba napoludnie, 2. seria doplnkovej psalmodie */
+			_set_zalm1(MODL_NAPOLUDNIE, "z123.htm", "ZALM123");
+			_set_zalm2(MODL_NAPOLUDNIE, "z124.htm", "ZALM124");
+			_set_zalm3(MODL_NAPOLUDNIE, "z125.htm", "ZALM125");
+		/* modlitba popoludni, 3. seria doplnkovej psalmodie */
+			_set_zalm1(MODL_POPOLUDNI, "z126.htm", "ZALM126");
+			_set_zalm2(MODL_POPOLUDNI, "z127.htm", "ZALM127");
+			_set_zalm3(MODL_POPOLUDNI, "z128.htm", "ZALM128");
+	}/* _global_opt5 == MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA */
 
 	Log("-- zaltar(%d, %d) -- koniec\n", den, tyzzal);
 }/* zaltar(); */

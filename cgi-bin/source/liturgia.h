@@ -290,17 +290,11 @@ extern const char *TEMPLAT[];
  * ale predsa mensia ako MAX_MODL_SPOL_CAST */
 #define MODL_SPOL_CAST_NEBRAT            25 /* nechce zo spol. casti */
 
-/* option 5, 2003-08-06 */
-#define MODL_CEZ_DEN_ZALMY_ZO_DNA       0
-#define MODL_CEZ_DEN_DOPLNKOVE_ZALMY_1  1
-#define MODL_CEZ_DEN_DOPLNKOVE_ZALMY_2  2
-#define MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3  3
-#define STR_MODL_CEZ_DEN_ZALMY_ZO_DNA       "nie (teda žalmy zo dòa)"
-#define STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_1  "áno, z 1. série"
-#define STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_2  "áno, z 2. série"
-#define STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3  "áno, z 3. série"
-/* a pre tieto konstanty aj retazce */
-extern const char *nazov_doplnkpsalm[MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3 + 1];
+/* option 5, 2003-08-06, upravena 2003-08-13 */
+#define MODL_CEZ_DEN_ZALMY_ZO_DNA         0
+#define MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA  1
+#define STR_MODL_CEZ_DEN_ZALMY_ZO_DNA        "bežnej"
+#define STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA "doplnkovej"
 
 /* a pre tieto - vyssie uvedene - konstanty aj retazce...
  * -- malo by ich byt do MAX_MODL_SPOL_CAST */

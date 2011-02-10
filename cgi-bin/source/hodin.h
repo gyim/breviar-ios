@@ -8,6 +8,7 @@
 /*   18/02/2000A.D. | created                                  */
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-08-07a.D. | pridane nazov_doplnkpsalm[]              */
+/*   2003-08-13a.D. | zrusene nazov_doplnkpsalm[]              */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -43,14 +44,6 @@ const char *nazov_MODLITBY[] =
  "DRUHÉ VEŠPERY", "DRUHÉ KOMPLETÓRIUM",
  "DETAILY"};
 */
-
-/* 2003-08-07, pridane */
-const char *nazov_doplnkpsalm[MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3 + 1] = 
-{STR_MODL_CEZ_DEN_ZALMY_ZO_DNA,
- STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_1,
- STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_2,
- STR_MODL_CEZ_DEN_DOPLNKOVE_ZALMY_3
-};
 
 const char *nazov_spolc[MODL_SPOL_CAST_NEBRAT + 1] =
 {"neurèená",
