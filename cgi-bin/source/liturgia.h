@@ -19,6 +19,7 @@
 /*   2003-08-11a.D. | -Wall upozornila na / * within comments  */
 /*   2003-08-11a.D. | void _init_dm zapoznamkovana             */
 /*   2003-08-13a.D. | pridane logy pre modlitbu cez den        */
+/*                  - pridane MODL_CEZ_DEN_VSETKY              */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -123,17 +124,17 @@ struct den_mesiac{ /* takto povodne vyzerala struct dm */
 };
 typedef struct den_mesiac _struct_den_mesiac;
 
-#define POCET_MODLITIEB        8
+#define POCET_MODLITIEB         8
 /* modlitby */
-#define MODL_INVITATORIUM      0
-#define MODL_RANNE_CHVALY      1
-#define MODL_POSV_CITANIE      2
-#define MODL_CEZ_DEN_9         3
-#define MODL_CEZ_DEN_12        4
-#define MODL_CEZ_DEN_3         5
-#define MODL_VESPERY           6
-#define MODL_KOMPLETORIUM      7
-#define MODL_NEURCENA          8
+#define MODL_INVITATORIUM       0
+#define MODL_RANNE_CHVALY       1
+#define MODL_POSV_CITANIE       2
+#define MODL_CEZ_DEN_9          3
+#define MODL_CEZ_DEN_12         4
+#define MODL_CEZ_DEN_3          5
+#define MODL_VESPERY            6
+#define MODL_KOMPLETORIUM       7
+#define MODL_NEURCENA           8
 /* dalsie, iba docasne modlitby */
 #define MODL_PRVE_VESPERY       9
 #define MODL_PRVE_KOMPLETORIUM  10
@@ -142,9 +143,11 @@ typedef struct den_mesiac _struct_den_mesiac;
 /* formular s detailami ohladom generovania modlitby */
 #define MODL_DETAILY            13
 /* pre jednoduchsiu orientaciu pridane 2003-07-15 */
-#define MODL_PREDPOLUDNIM      3
-#define MODL_NAPOLUDNIE        4
-#define MODL_POPOLUDNI         5
+#define MODL_PREDPOLUDNIM       3
+#define MODL_NAPOLUDNIE         4
+#define MODL_POPOLUDNI          5
+/* pre modlitbu cez den kvoli zaltaru (psalmodii) rovnake, pridane 2003-08-13 */
+#define MODL_CEZ_DEN_VSETKY     20
 
 
 /* ... a stringy pre ne */

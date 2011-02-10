@@ -44,6 +44,7 @@
 /*   2003-08-13a.D. | zmena "" na STR_EMPTY (mystring.h)       */
 /*                  - odstranenie RUN_MODLITBA_CEZ_DEN         */
 /*                  - odstranenie POKUS_24_02_2000             */
+/*                  - male zmeny v includeFile()               */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -511,10 +512,16 @@ void includeFile(int type, char *paramname, char *fname, char *modlparam){
 #elif defined(OS_linux)
 						Export("END:%s", modlparam);
 #endif
+						/* pridane 2003-08-13 kvoli viacnasobnym inkludom */
+						Export("--><!--");
+						/* ak to aj je posledny inklude, potom v nadradenom subore,
+						 * do ktoreho "inkludujeme", sa vypise "-->"
+						 */
 						Log("  end of %s in `%s'\n", modlparam, fname);
 					}
-				}
+				}/* equalsi(rest, modlparam) */
 				else{
+					/* !equalsi(rest, modlparam) */
 					/* write = 0; -- aby mohli byt nestovane viacere :-) */
 					DetailLog("paramenter not matches: %s != %s\n", rest, modlparam);
 					if(((_global_den.litobd != OBD_VELKONOCNE_I) && (_global_den.litobd != OBD_VELKONOCNE_II)) &&
@@ -529,7 +536,7 @@ void includeFile(int type, char *paramname, char *fname, char *modlparam){
 							Log("  opat writing to export file, end of V.O. Aleluja.\n");
 						}
 					}/* aleluja vo velkonocnom obdobi */
-				}
+				}/* !equalsi(rest, modlparam) */
 				continue;
 		}
 		if(!isbuff){
@@ -1191,8 +1198,10 @@ void showPrayer(int type){
 	}
 	// 17/02/2000A.D.
 	*/
-	Log("showPrayer: opt3 == `%s' (%d -- %s)\n",
-		pom_MODL_OPT3, _global_opt3, nazov_spolc[_global_opt3]);
+	Log("showPrayer: opt3 == `%s' (%d -- %s)\n", pom_MODL_OPT3, _global_opt3, nazov_spolc[_global_opt3]);
+	/* vypisanie dalsich options, 2003-08-13 */
+	Log("showPrayer: opt4 == `%s' (%d)\n", pom_MODL_OPT4, _global_opt4);
+	Log("showPrayer: opt5 == `%s' (%d -- %s)\n", pom_MODL_OPT5, _global_opt5, nazov_doplnkpsalm[_global_opt5]);
 
 	/* samotne vypisanie, o aku modlitbu ide */
 	Log("showPrayer(type %i, %s), _global_modlitba == %s\n",
@@ -1400,8 +1409,10 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 	if(poradie_svaty == UNKNOWN_PORADIE_SVATEHO){
 		Log("spustam pre poradie_svaty == UNKNOWN_PORADIE_SVATEHO\n");
 	}
-	_rozbor_dna_LOG("vypisem, co je v analyze roku...\n");
-	/* Log(_global_r); //01/03/2000A.D. */
+	/* zapoznamkovane 2003-08-13
+		_rozbor_dna_LOG("vypisem, co je v analyze roku...\n");
+		Log(_global_r); // 01/03/2000A.D. 
+	 */
 
 	int NAR = poradie(25, 12, rok);       /* narodenie pana */
 /* slavnosti */
@@ -3505,7 +3516,8 @@ LABEL_ZMENA:
 			}
 		}/* _local_den ma dvoje vespery/kompletorium, teda musime brat PRVE */
 	}/* vespery alebo kompletorium, zistovanie priority */
-	/* predosla pasaz, kedy sa kontroluje priorita nasledujuceho dna, preskakujeme
+
+	 /* predosla pasaz, kedy sa kontroluje priorita nasledujuceho dna, preskakujeme
 	 * pre ostatne modlitby okrem vespier a kompletoria; poznamka pridana 2003-08-13 
 	 */
 
