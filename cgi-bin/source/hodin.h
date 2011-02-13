@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* hodin.h                                                     */
-/* (c)1999-2003 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2005 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | definovane stringove kontanty                 */
 /* document history                                            */
@@ -10,6 +10,7 @@
 /*   2003-08-07a.D. | pridane nazov_doplnkpsalm[]              */
 /*   2003-08-13a.D. | zrusene nazov_doplnkpsalm[]              */
 /*   2003-11-20a.D. | pridane nazov_obd_htm_pc[]               */
+/*   2005-07-27a.D. | pridané nazov_slavenia_lokal[]           */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -209,6 +210,14 @@ const char *nazov_Slavenia[] =
 {"___",
  "Slávnos", "Sviatok", "Spomienka", "¼ubovo¾ná spomienka",
  "Vlastné slávenie"};
+
+/* 2005-07-27: doplnené */
+const char *nazov_slavenia_lokal[] =
+{""
+,"len v roòavskej katedrále"
+,"hlavnı patrón Bratislavsko-Trnavskej arcidiecézy"
+,"v Bratislavsko-Trnavskej arcidiecéze a v Banskobystrickej, Košickej, Nitrianskej a Roòavskej diecéze"
+};
 
 const char *rimskymi_tyzden_zaltara[] =
 {"_", "I", "II", "III", "IV"};

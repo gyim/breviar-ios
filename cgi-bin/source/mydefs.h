@@ -20,6 +20,7 @@
 /*   2004-03-17a.D. | FILE_PATH sa nepouziva                   */
 /*   2004-08-14a.D. | zmena definicie ADD_WWW_PREFIX_          */
 /*   2005-03-28a.D. | zmena definicie UNCGI_PATH               */
+/*   2005-07-27a.D. | pridane HTML_SPAN_RED_SMALL              */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -53,7 +54,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2005-07-26"
+#define BUILD_DATE "2005-07-27"
 
 #define BYTES 250
 #define SMALL 80
@@ -393,6 +394,7 @@ extern int query_type; /* premenna obsahujuca PRM_... */
 #define HTML_SPAN_RED_BOLD  "span class=\"redbold\""
 #define HTML_SPAN_BLUE      "span class=\"blue\""
 #define HTML_SPAN_BLUE_BOLD "span class=\"bluebold\""
+#define HTML_SPAN_RED_SMALL "span class=\"redsmall\""
 
 #define HTML_P_PATKA "p class=\"patka\""
 

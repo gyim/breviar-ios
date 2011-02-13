@@ -60,6 +60,7 @@
 /*   2005-03-30a.D. | upravene getForm()                       */
 /*   2005-05-24a.D. | opravena copy-paste chyba pre pom_ROK_TO */
 /*   2005-07-22a.D. | pridaný popis aj pre posv.èítanie a mcd  */
+/*   2005-07-27a.D. | rozšírená štruktúra dm (lokalizácia sláv.)*/
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -2744,6 +2745,13 @@ int init_global_string(int typ, int poradie_svateho, int modlitba){
 		/* zmenene <font color> na <span>, 2003-07-02 */
 		sprintf(pom, ", <"HTML_SPAN_RED">%s</span>",
 			nazov_slavenia[_local_den.typslav]);
+		strcat(_global_string, pom);
+	}
+
+	/* teraz lokalizácia slavenia, 2005-07-27: pridané */
+	if(_local_den.typslav_lokal != LOKAL_SLAV_NEURCENE){
+		sprintf(pom, "\n<br> <"HTML_SPAN_RED_SMALL">%s</span>\n",
+			nazov_slavenia_lokal[_local_den.typslav_lokal]);
 		strcat(_global_string, pom);
 	}
 

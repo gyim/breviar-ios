@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* liturgia.cpp                                                */
-/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2005 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne vecicky pre liturgiu hodin  */
 /* document history                                            */
@@ -18,6 +18,7 @@
 /*                  - odstranenie RUN_MODLITBA_CEZ_DEN         */
 /*   2004-08-14a.D. | char zmeneny na unsigned (_nedelne_p...) */
 /*   2005-03-21a.D. | pridany typ vypisu linky LINK_ISO_8601   */
+/*   2005-07-27a.D. | nová premenná v štrukt.dm: typslav_lokal */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -982,6 +983,7 @@ void init_global_pm_sobota(void){
 	/* a teraz vlastne udaje */
 	_global_pm_sobota.smer = 12; /* lubovolna spomienka */
 	_global_pm_sobota.typslav = SLAV_LUB_SPOMIENKA; /* lubovolna spomienka */
+	_global_pm_sobota.typslav_lokal = LOKAL_SLAV_NEURCENE; /* nie je obmedzenie na lokalitu, pridané 2005-07-27 */
 	mystrcpy(_global_pm_sobota.meno, "Spomienka Panny Márie v sobotu", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	_global_pm_sobota.prik    = NEPRIKAZANY_SVIATOK; /* pridane 27/04/2000A.D. */
 	_global_pm_sobota.spolcast = /* pridane 27/04/2000A.D. */
@@ -1122,6 +1124,7 @@ void _init_dm(_struct_dm a){
 	a.tyzzal = 0;     /* tyzden v zaltari (vacsinou ((tyzden - 1) % 4) + 1) */
 	a.litobd = -1;    /* liturgicke obdobie, OBD_... */
 	a.typslav = 0;    /* typ slavenia (1--5): SLAV_... */
+	a.typslav_lokal = 0; /* LOKAL_SLAV_NEURCENE; nie je obmedzenie na lokalitu, pridané 2005-07-27 */
 	a.smer = 100;     /* poradove cislo z c.59 Vseobecnych smernic
 	                   * o liturgii hodin a kalendari */
 	a.prik = -1;      /* ci je to prikazany sviatok alebo nie:
@@ -1220,6 +1223,8 @@ void Log(_struct_dm g){
 	Log_struktura_dm("   tyzzal: %d\n", g.tyzzal);
 	Log_struktura_dm("   litobd: %s\n", nazov_obdobia_[g.litobd]); // nazov_obdobia_
 	Log_struktura_dm("   typslav:%s\n", nazov_slavenia[g.typslav]);
+	/* 2005-07-27: doplnené typslav_lokal */
+	Log_struktura_dm("   typslav_lokal: %s\n", nazov_slavenia_lokal[g.typslav_lokal]);	
 	Log_struktura_dm("   smer:   %d\n", g.smer);
 	Log_struktura_dm("   prik:   %d\n", g.prik);
 	Log_struktura_dm("   meno:   %s\n", g.meno);

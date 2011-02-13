@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* liturgia.h                                                  */
-/* (c)1999-2003 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2005 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne vecicky pre liturgiu hodin  */
 /* document history                                            */
@@ -25,6 +25,7 @@
 /*   2004-04-28a.D. | MAX_STR_AF_FILE zmenene na 16            */
 /*   2004-08-14a.D. | char zmeneny na unsigned (_nedelne_p...) */
 /*   2005-03-27a.D. | CHAR_MODL_* z funkcie pismenko_modlitby  */
+/*   2005-07-27a.D. | pridanÈ nazov_slavenia_lokal[]           */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -363,6 +364,10 @@ struct sc{
 };
 typedef struct sc _struct_sc;
 
+/* 2005-07-27: zaveden· nov· premenn· v ötrukt˙re: typslav_lokal
+ * urËen· niesù öpeci·lnu inform·ciu o tom, Ëi danÈ sl·venie je lok·lne.
+ * ötandardne 0 = bez öpeci·lnej lokaliz·cie.
+ */
 struct dm{
 	int den;        /* cislo dna mesiaca (1--31) */
 	int mesiac;     /* cislo mesiaca (1--12) */
@@ -375,6 +380,7 @@ struct dm{
 	int tyzzal;     /* tyzden v zaltari (vacsinou ((tyzden - 1) % 4) + 1) */
 	int litobd;     /* liturgicke obdobie, OBD_... */
 	int typslav;    /* typ slavenia (1--5): SLAV_... */
+	int typslav_lokal;    /* lok·lny typ slavenia : LOKAL_SLAV_... */
 	int smer;       /* poradove cislo z c.59 Vseobecnych smernic
 						  * o liturgii hodin a kalendari */
 	int prik;       /* ci je to prikazany sviatok alebo nie:
@@ -478,6 +484,14 @@ extern const char *nazov_obd_htm_pc[];
 /* nazov_slavenia: string pre nazov typu slavenia */
 extern const char *nazov_slavenia[];
 extern const char *nazov_Slavenia[];
+/* 2005-07-27: doplnenÈ */
+extern const char *nazov_slavenia_lokal[];
+
+/* 2005-07-27: doplnenÈ lok·lne typy sl·venia */
+#define LOKAL_SLAV_NEURCENE            0
+#define LOKAL_SLAV_ROZNAVA_KATEDRALA   1
+#define LOKAL_SLAV_TRNAVA_PATRON       2
+#define LOKAL_SLAV_TT_BB_KE_NR_RO      3
 
 /* prikazany / neprikazany sviatok */
 #define PRIKAZANY_SVIATOK 1
@@ -796,6 +810,7 @@ void _init_dm(_struct_dm a);
 	a.tyzzal = 1;     /* tyzden v zaltari (vacsinou ((tyzden - 1) % 4) + 1) */\
 	a.litobd = OBD_VIANOCNE_I;    /* liturgicke obdobie, OBD_... */\
 	a.typslav = 1;    /* typ slavenia (1--5): SLAV_... */\
+	a.typslav_lokal = 0; /* LOKAL_SLAV_NEURCENE; nie je obmedzenie na lokalitu, pridanÈ 2005-07-27 */\
 	a.smer = 100;     /* poradove cislo z c.59 Vseobecnych smernic o liturgii hodin a kalendari */\
 	a.prik = PRIKAZANY_SVIATOK;      /* ci je to prikazany sviatok alebo nie: PRIKAZANY_SVIATOK resp. NEPRIKAZANY_SVIATOK */\
 	a.spolcast = MODL_SPOL_CAST_NEURCENA;  /* spolocna cast -- zakodovane data pre svatych o tom, z akej spolocnej casti sa ma modlit */\
