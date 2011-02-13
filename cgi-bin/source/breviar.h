@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* breviar.h                                                   */
-/* (c)1999-2006 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2005 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje deklaracie globalnych premennych     */
 /*               a funkciu main() z dnes.cpp kde su definovane */
@@ -131,7 +131,7 @@ extern int _global_pocet_svatych;
 
 /* globalne premenne, obsahujuce pom_MODL_OPT... */
 extern int _global_opt1/* = NIE */;
-extern int _global_opt2/* = MODL_ZALMY_ZO_SV */;
+extern int _global_opt2/* = MODL_ZALMY_ZO_DNA; 2006-01-25: upravené, bolo tu MODL_ZALMY_ZO_SV */;
 extern int _global_opt3;
 extern int _global_opt4;
 extern int _global_opt5; /* pridane 2003-08-07 */

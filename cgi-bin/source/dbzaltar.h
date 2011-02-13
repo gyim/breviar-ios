@@ -9,6 +9,7 @@
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-08-13a.D. | #define presunute sem z dbzaltar.cpp     */
 /*   2003-11-20a.D. | pridane ANCHOR_CITANIE 1 a 2             */
+/*   2006-01-24a.D. | pridane zaltar_zvazok()                  */
 /*                                                             */
 /***************************************************************/
 
@@ -36,8 +37,15 @@ void set_popis_dummy(void); /* pridane 05/04/2000A.D. */
  * nastavi do _global_modl_... (podla _global_modlitba) udaje potrebne
  * k modlitbe
  *
+ *
+ * 2006-01-24: žalmy pre posvätné èítanie sú v II. zväzku žaltára (pôst, ve¾ká noc)
+ *             pre niektoré dni odlišné, preto sme vytvorili aj ïalší parameter,
+ *             ktorý sa používa len pri volaní za úèelom konkrétnej modlitby
+ *             (pre vo¾bu posv. èítania len pre deò a týždeò žaltára sa použije default)
+ *
  */
 void zaltar(int den, int tyzzal);
+void zaltar_zvazok(int den, int tyzzal, int obdobie);
 
 void liturgicke_obdobie(int litobd, int tyzden, int den, int tyzzal, int poradie_svateho);
 

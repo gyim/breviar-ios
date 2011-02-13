@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* hodin.h                                                     */
-/* (c)1999-2006 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2005 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | definovane stringove kontanty                 */
 /* document history                                            */
@@ -12,7 +12,6 @@
 /*   2003-11-20a.D. | pridane nazov_obd_htm_pc[]               */
 /*   2005-07-27a.D. | pridané nazov_slavenia_lokal[]           */
 /*   2005-08-05a.D. | pridané zvazok_OBD[]                     */
-/*   2005-11-24a.D. | "obdobie cez rok" -> "cezroèné obdobie"  */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -144,40 +143,40 @@ const char *nazov_spolc_ANCHOR[MODL_SPOL_CAST_NEBRAT + 1] =
 /* nazov_obdobia: string pre nazov liturgickeho obdobia */
 const char *nazov_obdobia[] =
 {"ve¾konoèná oktáva", "adventné obdobie", "adventné obdobie",
- "vianoèné obdobie", "vianoèné obdobie", /* "obdobie „cez rok“", */ "cezroèné obdobie",
+ "vianoèné obdobie", "vianoèné obdobie", "obdobie „cez rok“",
  "pôstne obdobie", "Ve¾ký týždeò",
  "ve¾konoèné trojdnie", "ve¾konoèné obdobie", "ve¾konoèné obdobie",
  "oktáva Narodenia Pána"};
 const char *nazov_obdobia_[] = // debuggovacie
 {"ve¾konoèná oktáva", "adventné obdobie I", "adventné obdobie II",
- "vianoèné obdobie I", "vianoèné obdobie II", /* "obdobie „cez rok“", */ "cezroèné obdobie",
+ "vianoèné obdobie I", "vianoèné obdobie II", "obdobie „cez rok“",
  "pôstne obdobie I", "Ve¾ký týždeò",
  "ve¾konoèné trojdnie", "ve¾konoèné obdobie I", "ve¾konoèné obdobie II",
  "oktáva Narodenia Pána"};
 /* lokal == 6. pad, v kom/com */
 const char *nazov_obdobia_v[] =
 {"vo ve¾konoènej oktáve", "v adventnom období", "v adventnom období",
- "vo vianoènom období", "vo vianoènom období", /* "v období „cez rok“", */ "v cezroènom období",
+ "vo vianoènom období", "vo vianoènom období", "v období „cez rok“",
  "v pôstnom období", "vo Ve¾kom týždni",
  "vo ve¾konoènom trojdní", "vo ve¾konoènom období", "vo ve¾konoènom období",
  "v oktáve Narodenia Pána"};
 const char *nazov_OBDOBIA_V[] =
 {"VO VE¼KONOÈNEJ OKTÁVE", "V ADVENTNOM OBDOBÍ", "V ADVENTNOM OBDOBÍ",
- "VO VIANOÈNOM OBDOBÍ", "VO VIANOÈNOM OBDOBÍ", /* "V OBDOBÍ „CEZ ROK“", */ "V CEZROÈNOM OBDOBÍ",
+ "VO VIANOÈNOM OBDOBÍ", "VO VIANOÈNOM OBDOBÍ", "V OBDOBÍ „CEZ ROK“",
  "V PÔSTNOM OBDOBÍ", "VO VE¼KOM TÝŽDNI",
  "VO VE¼KONOÈNOM TROJDNÍ", "VO VE¼KONOÈNOM OBDOBÍ", "VO VE¼KONOÈNOM OBDOBÍ",
  "V OKTÁVE NARODENIA PÁNA"};
 /* gen[itiv] == 2. pad, koho/coho */
 const char *nazov_obdobia_gen[] =
 {"ve¾konoènej oktávy", "adventného obdobia", "adventného obdobia",
- "vianoèného obdobia", "vianoèného obdobia", /* "obdobia „cez rok“", */ "cezroèného obdobia",
+ "vianoèného obdobia", "vianoèného obdobia", "obdobia „cez rok“",
  "pôstneho obdobia", "Ve¾kého týždòa",
  "ve¾konoèného trojdnia", "ve¾konoèného obdobia", "ve¾konoèného obdobia",
  "oktávy Narodenia Pána"};
 /*
 const char *nazov_Obdobia[] =
 {"Ve¾konoèná oktáva", "Adventné obdobie", "Adventné obdobie",
- "Vianoèné obdobie", "Vianoèné obdobie", "Obdobie „cez rok“", -- "Cezroèné obdobie",
+ "Vianoèné obdobie", "Vianoèné obdobie", "Obdobie „cez rok“",
  "Pôstne obdobie", "Ve¾ký týždeò",
  "Ve¾konoèné trojdnie", "Ve¾konoèné obdobie", "Ve¾konoèné obdobie",
  "Oktáva Narodenia Pána"};

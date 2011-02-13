@@ -1,7 +1,7 @@
 /***************************************************************************/
 /*                                                                         */
 /* breviar.cpp                                                             */
-/* (c)1998-2005 | Juraj Videky | videky@breviar.sk                         */
+/* (c)1998-2006 | Juraj Videky | videky@breviar.sk                         */
 /*                                                                         */
 /*                http://www.breviar.sk                                    */
 /*                                                                         */
@@ -69,6 +69,7 @@
 /*   2005-08-22a.D. | upraven· _export_rozbor_dna() - vöednÈ dni aj pre 11 */
 /*   2005-11-11a.D. | DoplnenÈ: Te Deum posv‰tn˝m ËÌtaniam                 */
 /*   2006-01-20a.D. | Oprava: Uû sa zobrazuj˙ aj spomienky v pÙste (æ.s.)  */
+/*   2006-01-25a.D. | zmena default pre _global_opt2 => LINK_ISO_8601      */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -245,7 +246,7 @@ int _global_pocet_svatych;
 
 /* globalne premenne, obsahujuce pom_MODL_OPT... */
 int _global_opt1 = NIE;
-int _global_opt2 = MODL_ZALMY_ZO_SV;
+int _global_opt2 = MODL_ZALMY_ZO_DNA; /* 2006-01-25: upravenÈ, bolo tu MODL_ZALMY_ZO_SV */
 int _global_opt3 = MODL_SPOL_CAST_NEURCENA;
 int _global_opt4 = ANO; /* pridana 05/04/2000A.D. */
 int _global_opt5 = MODL_CEZ_DEN_ZALMY_ZO_DNA; /* pridana 2003-08-07 */
@@ -3359,8 +3360,10 @@ void _export_rozbor_dna(int typ){
 	}
 	/* vytvorenie linku */
 	if(typ == EXPORT_DNA_VIAC_DNI){
-		/* 2005-03-22: Upravene. Da sa dat aj ISO-8601 datum. */
-		if(_global_opt2 == NIE)
+		/* 2005-03-22: Upravene. Da sa dat aj ISO-8601 datum. 
+		 * 2006-01-15: Vzhæadom k zmene default hodnoty zmenen· podmienka (pÙvodne: NIE).
+		 */
+		if(_global_opt2 == ANO)
 			i = LINK_ISO_8601;
 		else
 			i = LINK_DEN;
@@ -3370,8 +3373,10 @@ void _export_rozbor_dna(int typ){
 		mystrcpy(pom3, nazov_Dn[_global_den.denvt], MAX_SMALL);
 	}/* typ == EXPORT_DNA_VIAC_DNI */
 	else if(typ == EXPORT_DNA_VIAC_DNI_SIMPLE){
-		/* 2005-03-22: Upravene. Da sa dat aj ISO-8601 datum. */
-		if(_global_opt2 == NIE)
+		/* 2005-03-22: Upravene. Da sa dat aj ISO-8601 datum. 
+		 * 2006-01-15: Vzhæadom k zmene default hodnoty zmenen· podmienka (pÙvodne: NIE).
+		 */
+		if(_global_opt2 == ANO)
 			i = LINK_ISO_8601;
 		else
 			i = LINK_DEN;
@@ -3753,10 +3758,9 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
 		Export("<option selected>%s\n", STR_MODL_ZALMY_ZO_DNA);
 		Export("<option>%s\n", STR_MODL_ZALMY_ZO_SV);
 		Export("</select>\n");
-		Export(" (okrem modlitby cez deÚ)\n"); /* pridane 2003-08-13 */
-		Export("<br><span class=\"explain\">Na sviatok sv‰tca/sv‰tice sa podæa liturgick˝ch pravidiel ber˙ ûalmy ");
-		Export("zo sviatku, öpeci·lne na rannÈ chv·ly öpeci·lne z nedele 1. t˝ûdÚa ûalt·ra; ");
-		Export("avöak niekto sa radöej modlÌ ûalmy zo vöednÈho dÚa.</span>");
+		Export(" (okrem modlitby cez deÚ)\n"); /* pridane 2003-08-13; upraven˝ popis 2006-01-25 */
+		Export("<br><span class=\"explain\">V z·vislosti od typu sv‰tenia sa ber˙ alebo neber˙ na sviatok sv‰tca/sv‰tice ûalmy a chv·lospevy ");
+		Export("z vlastnej Ëasti (na rannÈ chv·ly z nedele 1. t˝ûdÚa ûalt·ra); je moûnÈ tieto ûalmy vyûiadaù.</span>");
 		Export("</li>\n");
 
 		/* najprv si rozkodujeme, co je v _global_den.spolcast */
@@ -6037,8 +6041,8 @@ int getArgv(int argc, char **argv){
 					printf("\t1  ci zobrazit nemenne casti modlitby (default 0) \n");
 					printf("\t   pri rozbore mesiaca: ci vypisovat vsetko do 1 riadka (default 0)\n"); /* upravene 2005-03-22 */
 					printf("\t2  ci brat zalmy zo dna (0) alebo z vlastnej casti (1) \n");
-					printf("\t   pri rozbore mesiaca: ci datum zobrazit jednoducho ako cislo (1) \n");
-					printf("\t   alebo v ISO-8601 standarde (napr. 2005-03-22) \n"); /* upravene 2005-03-22 */
+					printf("\t   pri rozbore mesiaca: ci datum zobrazit v ISO-8601 standarde \n");
+					printf("\t   (napr. 2005-03-22) (1) alebo jednoducho ako cislo (0, default) \n"); /* upravene 2005-03-22 a zasa 2006-01-25 */
 					printf("\t3  ktoru spolocnu cast brat, ak je ich viac (0, 1, 2, 3) \n");
 					printf("\t4  ci zobrazit popis k modlitbe (strucny zivotopis, default 1) \n");
 					printf("\tf  rok from (resp. den do pre davkove spracovanie)\n");
@@ -7014,7 +7018,7 @@ int main(int argc, char **argv){
 	 * 11/04/2000A.D.
 	 */
 	_global_opt1 = NIE;
-	_global_opt2 = MODL_ZALMY_ZO_SV;
+	_global_opt2 = MODL_ZALMY_ZO_DNA; /* 2006-01-25: upravenÈ, bolo tu MODL_ZALMY_ZO_SV */
 	_global_opt3 = MODL_SPOL_CAST_NEURCENA; /* 2003-08-11 -Wall upozornila `statement with no effect' */
 	_global_opt4 = ANO;
 	_global_opt_append = NIE;
