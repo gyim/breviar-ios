@@ -13,13 +13,13 @@
 .explain { font-size: 80%; color: #a05000; }
 .small { font-size: 80%; }
 
-/* 2003-07-09 */
+/* 2003-07-09; 2004-03-23 */
 /* apply to all elements */ { font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 100%; }
-body { 
+body, html { 
 	background-color: #d0bba0; 
 	color: #000000; 
 	font-family: Verdana, Tahoma, Georgia, Sans Serif; 
-	font-size: 90%; 
+	scrollbar-base-color: #fff1cc;
 	scrollbar-face-color: #fff1cc;
 	scrollbar-shadow-color: #a05000;
 	scrollbar-highlight-color: #a05000;
