@@ -66,6 +66,7 @@
 /*   2005-08-15a.D. | upravená _main_zaltar(): STR_MODL_                   */
 /*                  - dorobený žaltár aj pre posvätné èítania              */
 /*                  - interpretParameter: nové PARAM_HYMNUS_34_OCR_INY_... */
+/*   2005-08-22a.D. | upravená _export_rozbor_dna() - všedné dni aj pre 11 */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -2446,7 +2447,7 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 		if(((_global_den.smer == 9) &&
 			 (_global_svaty1.typslav == SLAV_LUB_SPOMIENKA)) ||
 
-			 /* ... alebo c. 60: "ak na jeden den pripadnu viacere slavenia,
+		/* ... alebo c. 60: "ak na jeden den pripadnu viacere slavenia,
 		 * uprednostni sa to, ktore ma v tabulke liturgickych dni vyssi stupen
 		 * [t.j. .smer]. */
 			(_global_den.smer > _global_svaty1.smer)){
@@ -3432,7 +3433,9 @@ void _export_rozbor_dna(int typ){
 					BUTTONS(typ, 3);
 				}
 			}
-			if((_global_svaty1.smer >= 12) &&
+			/* 2005-08-22: pôvodne sa tu porovnávalo s 12, ale aj pre 11 (lokálne slávenia) 
+			 * by mal systém ponúknu všedný deò - keï je to napr. v inej diecéze */
+			if((_global_svaty1.smer >= 11) &&
 				(typ != EXPORT_DNA_VIAC_DNI)){
 				/* ak je to iba lubovolna spomienka, tak vsedny den */
 				NEWLINE;
@@ -3453,8 +3456,10 @@ void _export_rozbor_dna(int typ){
 	if((_global_den.litobd == OBD_CEZ_ROK) &&
 		(_global_den.denvt == DEN_SOBOTA) &&
 		(
-			((_global_den.smer >= 12) && (_global_pocet_svatych == 0)) ||
-			((_global_svaty1.smer >= 12) && (_global_pocet_svatych > 0))) &&
+			/* 2005-08-22: pôvodne sa tu porovnávalo s 12, ale aj pre 11 (lokálne slávenia) 
+			 * by mal systém ponúknu (v sobotu) spomienku p. márie - keï je to napr. v inej diecéze */
+			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
+			((_global_svaty1.smer >= 11) && (_global_pocet_svatych > 0))) &&
 		(typ != EXPORT_DNA_VIAC_DNI)){
 		NEWLINE;
 		BUTTONS(typ, 4);

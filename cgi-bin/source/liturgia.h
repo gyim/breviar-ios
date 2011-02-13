@@ -499,6 +499,7 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_TRNAVA_PATRON       2
 #define LOKAL_SLAV_TT_BB_KE_NR_RO      3
 #define LOKAL_SLAV_NITRA_PATRON        4
+#define LOKAL_SLAV_KOSICE_POSVIACKA    5
 
 /* prikazany / neprikazany sviatok */
 #define PRIKAZANY_SVIATOK 1
