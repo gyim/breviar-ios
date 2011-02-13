@@ -1651,6 +1651,12 @@ void _set_zalmy_krista_krala(int modlitba){
 		_set_zalm2(MODL_PRVE_VESPERY, "z117.htm", "ZALM117");
 		_set_zalm3(MODL_PRVE_VESPERY, "zjv4_5.htm", "CHVAL_ZJV45");
 	}
+	/* 2005-08-12: doplnené žalmy na posvätné èítanie */
+	else if(modlitba == MODL_POSV_CITANIE){
+		_set_zalm1(MODL_POSV_CITANIE, "z2.htm", "ZALM2");
+		_set_zalm2(MODL_POSV_CITANIE, "z72.htm", "ZALM72_I");
+		_set_zalm3(MODL_POSV_CITANIE, "z72.htm", "ZALM72_II");
+	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
 	}
@@ -3972,6 +3978,16 @@ label_24_DEC:
 						_krkrala_modlitba;
 						_krkrala_ne_antifony;
 						modlitba = MODL_RANNE_CHVALY;
+						_set_zalmy_krista_krala(modlitba);
+						_krkrala_hymnus;
+						_krkrala_kcitanie;
+						_krkrala_kresponz;
+						_krkrala_benediktus;
+						_krkrala_prosby;
+						_krkrala_modlitba;
+						_krkrala_ne_antifony;
+						/* 2005-08-12: pridané posvätné èítanie */
+						modlitba = MODL_POSV_CITANIE;
 						_set_zalmy_krista_krala(modlitba);
 						_krkrala_hymnus;
 						_krkrala_kcitanie;
