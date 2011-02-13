@@ -34,12 +34,12 @@
 #undef MODEL_ostry_Windows
 #undef MODEL_DEBUG_Windows
 
-#define MODEL_ostry_linux
+//#define MODEL_ostry_linux
 //#define MODEL_DEBUG_linux
 //#define MODEL_ostry_SIMUL_linux_UNDER_Windows		// 2005-03-28 Vytvorene (simulacia ostreho linuxu)
 //#define MODEL_DEBUG_SIMUL_linux_UNDER_Windows		// 2005-03-22 Vytvorene (simulacia DEBUG linuxu)
 //#define MODEL_ostry_Windows // nezabudni zmenit datum v mybuild.h !!!
-//#define MODEL_DEBUG_Windows
+#define MODEL_DEBUG_Windows
 
 /* --------------------------------------------------------------------- */
 /* prerobene 23/02/2000A.D. -- 24/02/2000A.D. */
