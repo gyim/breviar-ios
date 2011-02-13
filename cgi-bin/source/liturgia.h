@@ -565,6 +565,7 @@ typedef struct lrok _struct_lrok;
 #define LINK_DEN_MESIAC 3
 #define LINK_DEN 2
 #define LINK_DEN_MESIAC_ROK_PRESTUP 4 /* pridana kvoli prestupnym rokom, 2003-07-02 */
+#define LINK_ISO_8601 5 /* pridana kvoli SIMPLE exportu, 2005-03-21 */
 
 /* ------------------------------------------------------------------- */
 /* globalne premenne -- su definovane v dnes.cpp (18/02/2000A.D.) */

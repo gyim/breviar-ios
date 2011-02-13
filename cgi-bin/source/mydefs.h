@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* mydefs.h                                                    */
-/* (c)1999-2004 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2005 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne define'y                    */
 /* document history                                            */
@@ -53,7 +53,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2004-09-03"
+#define BUILD_DATE "2005-03-21"
 
 #define BYTES 250
 #define SMALL 80

@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* mysystem.h                                                  */
-/* (c)1999-2004 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2005 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje jediny #define, urcujuci, v akom     */
 /*               systeme program pracuje; ovplyvnuje tvorbu    */
@@ -23,12 +23,12 @@
 /* OS_...    - uz ani nie su potrebne (kedysi pre cesty) */
 /* MODEL_... - model kompilacie */
 
-#define MODEL_ostry_linux
+//#define MODEL_ostry_linux
 //#define MODEL_klasicky_DOS  // neodporucam pouzit
 //#define MODEL_DEBUG_linux
 //#define MODEL_DEBUG_DOS     // neodporucam pouzit
 //#define MODEL_ostry_Windows // nezabudni zmenit datum v mybuild.h !!!
-//#define MODEL_DEBUG_Windows
+#define MODEL_DEBUG_Windows
 
 /* --------------------------------------------------------------------- */
 /* prerobene 23/02/2000A.D. -- 24/02/2000A.D. */

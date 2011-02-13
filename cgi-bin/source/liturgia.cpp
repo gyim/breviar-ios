@@ -17,6 +17,7 @@
 /*                  - zmena "" na STR_EMPTY (mystring.h)       */
 /*                  - odstranenie RUN_MODLITBA_CEZ_DEN         */
 /*   2004-08-14a.D. | char zmeneny na unsigned (_nedelne_p...) */
+/*   2005-03-21a.D. | pridany typ vypisu linky LINK_ISO_8601   */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -469,6 +470,7 @@ char *caps_BIG(const char *input){
  *         11. december 1999 (LINK_DEN_MESIAC_ROK)
  * alebo   11                (LINK_DEN)
  * alebo   'meno sviatku'    (default)
+ * alebo   1999-12-11        (LINK_ISO_8601) - pridane 2005-03-21
  *
  */
 void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ){
@@ -581,6 +583,9 @@ void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ){
 			break;
 		case LINK_DEN:
 				sprintf(pom, "%d</a>", den);
+			break;
+		case LINK_ISO_8601: /* 2005-31-21: Pridane */
+				sprintf(pom, "%04d-%02d-%02d</a>", rok, mesiac, den);
 			break;
 		default:
 				switch(_case){

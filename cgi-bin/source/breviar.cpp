@@ -54,6 +54,7 @@
 /*   2004-03-11a.D. | pre batch mod export parametrov          */
 /*   2004-03-16a.D. | pre batch mod export zoznamu ako HTML    */
 /*   2004-03-17a.D. | cesty sa citaju z konfigu (INCLUDE_DIR)  */
+/*   2005-03-21a.D. | novy typ exportu (1 den-1 riadok) pre LK */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -2035,7 +2036,8 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok){
 	Log("_rozbor_dna(): 2 parametre -- returning %d\n", ret);
 	return ret;
 }
-
+/* 2005-03-21: Pridany dalsi typ exportu */
+#define EXPORT_DNA_VIAC_DNI_SIMPLE 3
 #define EXPORT_DNA_JEDEN_DEN 1
 #define EXPORT_DNA_VIAC_DNI 2
 #define EXPORT_DNA_DNES 0
@@ -2232,7 +2234,8 @@ int init_global_string(int typ, int poradie_svateho, int modlitba){
 			strcat(_global_string, pom);
 		}
 		else if(obyc == ANO){
-			if(typ != EXPORT_DNA_VIAC_DNI){
+			/* 2005-03-21: Pridany dalsi typ exportu */
+			if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE)){
 #ifdef OLD_STYLE_obycajny_den /* 08/03/2000A.D. */
 				sprintf(pom, "%s, %s</span>, %d. týždeò žaltára",
 					nazov_Dna[_local_den.denvt],
@@ -2255,6 +2258,14 @@ int init_global_string(int typ, int poradie_svateho, int modlitba){
 						tyzden_zaltara(_local_den.tyzden));
 				}
 #endif
+				strcat(_global_string, pom);
+			}
+			else if (typ == EXPORT_DNA_VIAC_DNI_SIMPLE){
+				/* 2005-03-21: Pridane */
+				sprintf(pom, "%s, %s</span>, %d. týždeò",
+					nazov_Dna[_local_den.denvt],
+					nazov_obdobia[_local_den.litobd],
+					_local_den.tyzden);
 				strcat(_global_string, pom);
 			}
 			/* inak ostane string prazdny */
@@ -2433,8 +2444,8 @@ int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, int rok, int modlitba, int
  * premenovana na lowercase, 2003-08-13
  */
 void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
-
-	if(typ != EXPORT_DNA_VIAC_DNI){
+/* 2005-03-21: Pridany dalsi typ exportu */
+	if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE)){
 		char pom[MAX_STR];
 		mystrcpy(pom, STR_EMPTY, MAX_STR); /* 2003-08-11 pridana inicializacia */
 
@@ -2784,7 +2795,8 @@ void _export_rozbor_dna_buttons_dni(int typ){
  * exportuje udaje, ktore nacitala _rozbor_dna()
  *
  */
-#define NEWLINE Export("</td>\n</tr>\n\n<tr valign=baseline>\n<td></td>\n<td></td>\n<td>")
+/* 2005-03-21: Pridany dalsi typ exportu - EXPORT_DNA_VIAC_DNI_SIMPLE */
+#define NEWLINE if(typ != EXPORT_DNA_VIAC_DNI_SIMPLE) Export("</td>\n</tr>\n\n<tr valign=baseline>\n<td></td>\n<td></td>\n<td>"); else Export("; ")
 
 #define BUTTONS(typ, a);     {init_global_string(typ, a); \
         Export("%s", _global_string); \
@@ -2834,6 +2846,10 @@ void _export_rozbor_dna(int typ){
 		mystrcpy(pom2, "</span>", MAX_SMALL);
 		mystrcpy(pom3, nazov_Dn[_global_den.denvt], MAX_SMALL);
 	}/* typ == EXPORT_DNA_VIAC_DNI */
+	else if(typ == EXPORT_DNA_VIAC_DNI_SIMPLE){
+		i = LINK_ISO_8601;
+		mystrcpy(pom3, nazov_Dn[_global_den.denvt], MAX_SMALL);
+	}/* typ == EXPORT_DNA_VIAC_DNI_SIMPLE */
 	else{
 		i = LINK_DEN_MESIAC_ROK;
 /*		if(_global_den.denvt != DEN_NEDELA){
@@ -2853,13 +2869,22 @@ void _export_rozbor_dna(int typ){
 
 	/* zmenene <div align> na priamo do <td>, 2003-07-09 kvoli HTML 4.01 */
 
+	/* 2005-03-21: Pridane */
+	Log("\n===\npom1 == %s", pom1);
+	Log("\n_global_link == %s", _global_link);
+	Log("\npom2 == %s\n", pom2);
+
 	/* prvy stlpec: cislo dna */
 	Export("<td align=right>%s%s%s%c</td>\n",
 		pom1, _global_link, pom2, dvojbodka);
 
-	/* druhy stlpec: nazov dna */
-	Export("<td align=left>%s%s%s%c</td>\n",
-		pom1, pom3, pom2, ciarka);
+	/* druhy stlpec: nazov dna 
+	 * 2005-03-21: Vypisujeme, iba ak typ != EXPORT_DNA_VIAC_DNI_SIMPLE
+	 */
+	if(typ != EXPORT_DNA_VIAC_DNI_SIMPLE)
+		Export("<td align=left>%s%s%s%c</td>\n",
+			pom1, pom3, pom2, ciarka);
+
 	Export("<td>");
 
 	/* pozor, hoci je nedela, predsa na nu mohlo pripadnut slavenie s vyssou
@@ -3671,7 +3696,7 @@ LABEL_s_modlitbou_DEALLOCATE:
  *
  * dostane 3 inty,
  * spusti analyzuj_rok();
- * potom spusti _/rozbor_dna();
+ * potom spusti _export_rozbor_dna();
  *
  */
 void rozbor_dna(int den, int mesiac, int rok){
@@ -3709,7 +3734,15 @@ void rozbor_mesiaca(int mesiac, int rok){
 	Export("\n<br>\n<table>\n");
 	for(datum.den = 1; datum.den <= pocet_dni[mesiac - 1]; datum.den++){
 		_rozbor_dna(datum, rok);
-		_export_rozbor_dna(EXPORT_DNA_VIAC_DNI);
+		/* 2005-03-21: Pridany dalsi typ exportu */
+		if(_global_opt1 == NIE){
+			Log("-- EXPORT_DNA_VIAC_DNI --");
+			_export_rozbor_dna(EXPORT_DNA_VIAC_DNI);
+		}
+		else{ /* (_global_opt1 == ANO) */
+			Log("-- EXPORT_DNA_VIAC_DNI_SIMPLE --");
+			_export_rozbor_dna(EXPORT_DNA_VIAC_DNI_SIMPLE);
+		}
 	}
 	Export("\n</table>\n\n");
 	Log("-- rozbor_mesiaca(int, int): end\n");
@@ -3931,6 +3964,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				_global_link);
 			rozbor_mesiaca(m + 1, r);
 		*/
+			if(_global_opt1 xxx
 			/* nezobrazovalo sa korektne; pridane </a>, 2003-07-02 */
 			Export("\n\n<a name=\"mesiac%d\"></a>", m);
 			/* zmenene <b><font color> na <span class="redbold">, 2003-07-02 */
@@ -5772,6 +5806,19 @@ int getForm(void){
 	}/* query_type == PRM_ANALYZA_ROKU */
 
 	else if(query_type == PRM_MESIAC_ROKA){
+		/* 2005-03-21: novy typ exportu liturgickeho kalendara: 
+		 * ak je hodnota premennej "1" = 0 (default), tak klasicky pre web,
+		 * inak rozlicny sposob vystupu ("1" = 1 pre www.kbs.sk liturgicky kalendar */
+
+		/* premenna WWW_MODL_OPT1 */
+		ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPT1));
+		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
+		 * lebo pom_... su inicializovane na STR_EMPTY */
+		if(ptr != NULL){
+			if(strcmp(ptr, EMPTY_STR) != 0)
+				mystrcpy(pom_MODL_OPT1, ptr, SMALL);
+		}
+
 		/* treba nacitat mesiac a rok */
 		/* premenna WWW_MESIAC_ROKA */
 		ptr = getenv(ADD_WWW_PREFIX_(STR_MESIAC_ROKA));
