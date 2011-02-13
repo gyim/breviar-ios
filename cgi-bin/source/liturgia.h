@@ -26,6 +26,7 @@
 /*   2004-08-14a.D. | char zmeneny na unsigned (_nedelne_p...) */
 /*   2005-03-27a.D. | CHAR_MODL_* z funkcie pismenko_modlitby  */
 /*   2005-07-27a.D. | pridané nazov_slavenia_lokal[]           */
+/*   2005-08-05a.D. | pridané zvazok_OBD[]                     */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -472,6 +473,8 @@ extern const char *nazov_obd_htm[];
 extern const char *nazov_OBD[];
 /* nazov_obdobia pc: string pre nazov suboru .htm liturgickeho obdobia pre posvatne citania */
 extern const char *nazov_obd_htm_pc[];
+/* 2005-08-05: Pridané. zväzok breviára (LH) pre spoloèné èasti svätých v kotvách */
+extern const char *zvazok_OBD[];
 
 /* typy slavenia */
 #define SLAV_NEURCENE            0

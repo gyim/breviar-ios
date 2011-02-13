@@ -43,6 +43,11 @@
 /*                  - upravy v psalmodii pre posvatne citanie  */
 /*   2005-07-22a.D. | pokus o doplnenie udajov k posv.cit.svsv */
 /*   2005-07-27a.D. | posv. ËÌtania pre vlastnÈ Ëasti sv‰t˝ch  */
+/*   2005-08-05a.D. | 1. ËÌtanie je zv‰Ëöa odliönÈ pre spoloË. */
+/*                    Ëasti sviatkov sv‰t˝ch nasledovne:       */
+/*                    - I. zv.(advent, vianoce) a II. zv.(pÙst)*/
+/*                    - II. zv‰zok (veæk· noc)                 */
+/*                    - III. a IV. zv‰zok (obdobie cez rok)    */
 /*                                                             */
 /* notes |                                                     */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
@@ -5462,7 +5467,7 @@ void _spolocna_cast_prosby_viac(int kolko, char *_anchor_head, char *_anchor, ch
 	_set_prosby(modlitba, _file, _anchor);
 	set_LOG_svsv;
 }
-/* viac prosieb -- dorobene 29/03/2000A.D., oficium za zosnulych */
+/* viac responzÛriÌ -- dorobene 29/03/2000A.D., oficium za zosnulych */
 void _spolocna_cast_kresponz_viac(int kolko, char *_anchor_head, char *_anchor, char *_file){
 	sprintf(_anchor, "%s%c%s%d",
 		_anchor_head, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ,
@@ -5477,6 +5482,44 @@ void _spolocna_cast_ant3_viac(int kolko, char *_anchor_head, char *_anchor, char
 	_set_antifona3(modlitba, _file, _anchor);
 	set_LOG_svsv;
 }
+/* 2005-08-05: posv‰tnÈ ËÌtania, 1. ËÌtanie */
+void _spolocna_cast_1cit_viac(int kolko, char *_anchor_head, char *_anchor, char *_file){
+	sprintf(_anchor, "%s%c%s%d",
+		_anchor_head, pismenko_modlitby(modlitba), ANCHOR_CITANIE1,
+		(_global_den.den MOD kolko) + 1);
+	_set_citanie1(modlitba, _file, _anchor);
+	set_LOG_svsv;
+}
+/* 2005-08-05: posv‰tnÈ ËÌtania, 2. ËÌtanie */
+void _spolocna_cast_2cit_viac(int kolko, char *_anchor_head, char *_anchor, char *_file){
+	sprintf(_anchor, "%s%c%s%d",
+		_anchor_head, pismenko_modlitby(modlitba), ANCHOR_CITANIE2,
+		(_global_den.den MOD kolko) + 1);
+	_set_citanie2(modlitba, _file, _anchor);
+	set_LOG_svsv;
+}
+/* 2005-08-05: 1. ËÌtanie je zv‰Ëöa odliönÈ pre spoloËnÈ Ëasti sviatkov sv‰t˝ch nasledovne:
+ * - I. zv‰zok (advent, vianoce) a II. zv‰zok (pÙst),
+ * - II. zv‰zok (veæk· noc),
+ * - III. a IV. zv‰zok (obdobie cez rok).
+ */
+void _spolocna_cast_1cit_zvazok(int modlitba, char *_anchor_pom, char *_anchor_zvazok, char *_anchor, char *_file){
+	Log("_spolocna_cast_1cit_zvazok: \n");
+	Log("\tmodlitba == %s\n", nazov_modlitby[modlitba]);
+	Log("\tanchor_pom == %s\n", _anchor_pom);
+	Log("\tanchor_zvazok == %s\n", _anchor_zvazok);
+	Log("\tanchor == %s\n", _anchor);
+	Log("\tfile == %s\n", _file);
+	if(!equals(_anchor_pom, STR_EMPTY)){
+		sprintf(_anchor, "%s%s%s%c%s", _anchor, _anchor_pom, _anchor_zvazok, pismenko_modlitby(modlitba), ANCHOR_CITANIE1);
+	}
+	else {
+		sprintf(_anchor, "%s%s%c%s", _anchor, _anchor_zvazok, pismenko_modlitby(modlitba), ANCHOR_CITANIE1);
+	}
+	_set_citanie1(modlitba, _file, _anchor);
+	set_LOG_svsv;
+}
+
 void _set_spolocna_cast(int a, _struct_sc sc){
 	/* 2005-07-22: pokus o doplnenie udajov k posvatnym citaniam */
 
@@ -5484,6 +5527,8 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 	char _anchor[SMALL];
 	char _anchor_head[SMALL];
 	char _anchor_pom[SMALL];
+	/* 2005-08-05: pridan˝ ÔalöÌ pomocn˝ anchor, ktor˝ pojedn·va o zv‰zku brevi·ra kvÙli posv. ËÌtaniam */
+	char _anchor_zvazok[SMALL];
 	/* files - nazvy suborov pre zaltar styroch tyzdnov */
 	char _file[SMALL]; /* nazov fajlu, napr. _1ne.htm */
 	int b; /* pre ucitelov cirkvi, odkial sa maju brat ine casti */
@@ -5513,6 +5558,15 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		_spolocna_cast_full(modlitba);
 		_spolocna_cast_modlitba_prve_vesp;
 
+		/* 2005-08-05: pridan˝ ÔalöÌ pomocn˝ anchor, ktor˝ pojedn·va o zv‰zku brevi·ra kvÙli posv. ËÌtaniam */
+		sprintf(_anchor_pom, "%s", STR_EMPTY);
+		Log("  _anchor_pom == %s\n", _anchor_pom);
+		sprintf(_anchor_zvazok, "%s_", zvazok_OBD[_global_den.litobd]);
+		if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
+			strcat(_anchor_zvazok, VELKONOCNA_PRIPONA);
+		}
+		Log("  _anchor_zvazok == %s\n", _anchor_zvazok);
+
 		/* posvatne citanie */
 		modlitba = MODL_POSV_CITANIE;
 		if(_global_opt2 == MODL_ZALMY_ZO_SV){
@@ -5521,6 +5575,13 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		}
 		_spolocna_cast_full(modlitba);
 		/* 2005-07-22: ToDo: skontrolovaù, Ëi pre öpeci·lne obdobia nie s˙ öpeci·lne Ëasti z obdobia */
+
+		/* 2005-08-05: 1. ËÌtanie je zv‰Ëöa odliönÈ pre spoloËnÈ Ëasti sviatkov sv‰t˝ch nasledovne:
+		 * - I. zv‰zok (advent, vianoce) a II. zv‰zok (pÙst),
+		 * - II. zv‰zok (veæk· noc),
+		 * - III. a IV. zv‰zok (obdobie cez rok).
+		 */
+		_spolocna_cast_1cit_zvazok(modlitba, _anchor_pom, _anchor_zvazok, _anchor_head, _file);
 
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
@@ -5564,6 +5625,16 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		Log("  _anchor_head == %s\n", _anchor_head);
 		sprintf(_anchor_pom, "%s_", nazov_spolc_ANCHOR[a]);
 		Log("  _anchor_pom == %s\n", _anchor_pom);
+		/* 2005-08-05: pridan˝ ÔalöÌ pomocn˝ anchor, ktor˝ pojedn·va o zv‰zku brevi·ra kvÙli posv. ËÌtaniam */
+		sprintf(_anchor_zvazok, "%s_", zvazok_OBD[_global_den.litobd]);
+		if(
+			((a == MODL_SPOL_CAST_DUCH_PAST_BISKUP) || (a == MODL_SPOL_CAST_DUCH_PAST_PAPEZ))
+			&& ((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II))
+		){
+			strcat(_anchor_zvazok, VELKONOCNA_PRIPONA);
+		}
+		Log("  _anchor_zvazok == %s\n", _anchor_zvazok);
+
 		Log("/* spolocna cast na sviatky duchovnych pastierov */\n");
 		modlitba = MODL_PRVE_VESPERY;
 		if(_global_opt2 == MODL_ZALMY_ZO_SV){
@@ -5592,6 +5663,13 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		}
 		_spolocna_cast_full(modlitba);
 		/* 2005-07-22: ToDo: skontrolovaù, Ëi pre öpeci·lne obdobia nie s˙ öpeci·lne Ëasti z obdobia */
+
+		/* 2005-08-05: 1. ËÌtanie je zv‰Ëöa odliönÈ pre spoloËnÈ Ëasti sviatkov sv‰t˝ch nasledovne:
+		 * - I. zv‰zok (advent, vianoce) a II. zv‰zok (pÙst),
+		 * - II. zv‰zok (veæk· noc),
+		 * - III. a IV. zv‰zok (obdobie cez rok).
+		 */
+		_spolocna_cast_1cit_zvazok(modlitba, _anchor_pom, _anchor_zvazok, _anchor, _file);
 
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){

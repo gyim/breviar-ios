@@ -11,6 +11,7 @@
 /*   2003-08-13a.D. | zrusene nazov_doplnkpsalm[]              */
 /*   2003-11-20a.D. | pridane nazov_obd_htm_pc[]               */
 /*   2005-07-27a.D. | pridané nazov_slavenia_lokal[]           */
+/*   2005-08-05a.D. | pridané zvazok_OBD[]                     */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -201,6 +202,14 @@ const char *nazov_obd_htm_pc[] =
  "post1_pc.htm", "vtyz_pc.htm",
  "vtroj_pc.htm", "vn1_pc.htm", "vn2_pc.htm",
  "vian1_pc.htm"};
+
+/* 2005-08-05: Pridané. zväzok breviára (LH) pre spoloèné èasti svätých v kotvách */
+const char *zvazok_OBD[] =
+{"ZVII", "ZVI", "ZVI",
+ "ZVI", "ZVI", "OCR", /* OCR je ZVIII aj ZVIV */
+ "ZVII", "ZVII",
+ "ZVII", "ZVII", "ZVII",
+ "ZVI"};
 
 const char *nazov_slavenia[] =
 {"___",
