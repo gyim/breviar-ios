@@ -14,6 +14,7 @@
 /*                    MODEL_ostry_Windows                      */
 /*   06/09/2001A.D. | tento popis                              */
 /*   2004-03-17a.D. | poznamka k OS_...                        */
+/*   2005-03-22a.D. | zrusene DOS, vytvoreny novy model        */
 /*                                                             */
 /***************************************************************/
 
@@ -24,11 +25,10 @@
 /* MODEL_... - model kompilacie */
 
 //#define MODEL_ostry_linux
-//#define MODEL_klasicky_DOS  // neodporucam pouzit
 //#define MODEL_DEBUG_linux
-//#define MODEL_DEBUG_DOS     // neodporucam pouzit
+#define MODEL_DEBUG_SIMUL_linux_UNDER_Windows		// 2005-03-22 Vytvorene (simulacia linuxu)
 //#define MODEL_ostry_Windows // nezabudni zmenit datum v mybuild.h !!!
-#define MODEL_DEBUG_Windows
+//#define MODEL_DEBUG_Windows
 
 /* --------------------------------------------------------------------- */
 /* prerobene 23/02/2000A.D. -- 24/02/2000A.D. */
@@ -38,21 +38,9 @@
 	#define OS_linux
 	#undef LOGGING
 	#define EXPORT_TO_STDOUT
-/* debugovanie -- vsetko sa vypisuje na stdout */
+/* debugovanie linux -- vsetko sa vypisuje na stdout */
 #elif defined(MODEL_DEBUG_linux)
 	#define OS_linux
-	#define LOGGING
-	#define LOG_TO_STDOUT
-	#define EXPORT_TO_STDOUT
-/* klasicky DOS: */
-#elif defined(MODEL_klasicky_DOS)
-	#define OS_DOS
-	#define LOGGING
-	#define LOG_TO_FILE
-	#define EXPORT_TO_FILE
-/* debugovanie -- vsetko sa vypisuje na stdout */
-#elif defined(MODEL_DEBUG_DOS)
-	#define OS_DOS
 	#define LOGGING
 	#define LOG_TO_STDOUT
 	#define EXPORT_TO_STDOUT
@@ -61,14 +49,34 @@
 	#define OS_Windows
 	#undef LOGGING
 	#define EXPORT_TO_FILE
-/* debugovanie -- vsetko sa vypisuje na stdout */
+/* debugovanie Windows -- vsetko sa loguje do suboru */
 #elif defined(MODEL_DEBUG_Windows)
 	#define OS_Windows
 	#define LOGGING
 	#define LOG_TO_FILE
 	#define EXPORT_TO_FILE
+/* debugovanie linuxu vo Windows -- vsetko sa loguje do suboru */
+#elif defined(MODEL_DEBUG_SIMUL_linux_UNDER_Windows)
+	#define OS_linux
+	#define LOGGING
+	#define LOG_TO_FILE
+	#define EXPORT_TO_FILE
+/*
+// klasicky DOS
+#elif defined(MODEL_klasicky_DOS)
+	#define OS_DOS
+	#define LOGGING
+	#define LOG_TO_FILE
+	#define EXPORT_TO_FILE
+// debugovanie DOS -- vsetko sa vypisuje na stdout
+#elif defined(MODEL_DEBUG_DOS)
+	#define OS_DOS
+	#define LOGGING
+	#define LOG_TO_STDOUT
+	#define EXPORT_TO_STDOUT
+*/
 #else
-	#error Unsupported system model (try MODEL_ostry_linux, MODEL_klasicky_DOS, MODEL_ostry_Windows, MODEL_DEBUG_linux, MODEL_DEBUG_DOS, MODEL_DEBUG_Windows)
+	#error Unsupported system model (try MODEL_ostry_linux, MODEL_ostry_Windows, MODEL_DEBUG_linux, MODEL_DEBUG_Windows, MODEL_DEBUG_SIMUL_linux_UNDER_Windows)
 #endif
 
 #ifdef LOG_TO_EXPORT

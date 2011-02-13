@@ -3,6 +3,46 @@
  * alebo priamo v zdrojových textoch programu. 2003-07-16a.D.
  */
 ----------zaèiatok----------
+
+2005-03-22: oprava include/post2.htm
+	preklep "Vysloboï ma, Pane, a postav ma ved¾a seba, potom môže ktoko¾vek bojoval proti mne" --> "Vysloboï ma, Pane, a postav ma ved¾a seba, potom môže ktoko¾vek bojova proti mne"
+	upozornil Mário Bosý (ïakujem)
+2005-03-06: oprava include/z87.htm
+	preklep "Rahab a Babylon pripoèítam k tým, èo ho poznajú" --> "Rahab a Babylon pripoèítam k tým, èo ma poznajú"
+	upozornil Mário Bosý (ïakujem)
+2005-01-25: oprava include/sc_dp.htm
+	preklep "ktorému Pán zveri svoju èe¾aï" --> "ktorému Pán zverí svoju èe¾aï"
+	upozornil Mário Bosý (ïakujem)
+2005-01-21: oprava include/z73.htm
+	preklep "a celévnútro doráòané" --> "a celé vnútro doráòané"
+	upozornil už pred èasom Mário Bosý (ïakujem)
+2005-01-13: oprava include/z19.htm
+	preklep "služobníka zachrá&ograve; od pýchy" --> "služobníka zachráò od pýchy"
+	upozornil Mário Bosý (ïakujem)
+2005-01-07: oprava include/vian2.htm
+	preklep "nauè nás poznávaf v Cirkvi" --> "nauè nás poznáva v Cirkvi"
+	upozornil Mário Bosý (ïakujem)
+2004-12-25: oprava include/vian1.htm
+	preklep "a narodilo sa nám v èase, a radostne volajme." --> "a narodilo sa nám v èase, a radostne volajme:"
+	upozornil Mário Bosý (ïakujem)
+2004-12-07: oprava include/adv1_pc.htm
+	preklep "Dušu nám svetlom rozjasní" --> "Dušu nám svetlom rozjasni"
+	upozornil Mário Bosý (ïakujem)
+2004-10-27: oprava include/z55.htm:
+	chýbajúca medzera "Vykúpi ma v pokoji z mocitých, èo na mòa útoèia" --> "Vykúpi ma v pokoji z moci tých, èo na mòa útoèia"
+	upozornil Mário Bosý (ïakujem)
+2004-09-16: oprava include/_3stv.htm:
+	preklep "jedomyse¾ní" --> "jednomyse¾ní"
+	upozornila Ing. Daniela Baèová <bacova@nupke.sk> (ïakujem)
+2004-08-30: oprava include/jer31.htm:
+	zmena clenenia versa ("a hovorte")
+	upozornil Mário Bosý (ïakujem)
+2004-08-27: oprava include/nan.htm:
+	pridane kotvy pre roky A, C antifon na Benediktus/Magnifikat
+	upozornila otrubova@datacentrum.sk (ïakujem)
+2004-08-23: oprava preklepu (prosby, 2. nede¾né vešpery 1. nedele žaltára, include/_1ne.htm)
+	"prevnejšie" --> "pevnejšie"
+	upozornil Mário Bosý (vïaka!)
 2004-08-14: oprava preklepu (modlitba dòa, sv. Maximilián Kolbe, include/sv_aug.htm)
 	"kòaza s muèeníka Maximiliána" --> "kòaza a muèeníka Maximiliána"
 	upozornil Juro Lovas
