@@ -16,6 +16,7 @@
 /*   2004-03-17a.D. | poznamka k OS_...                        */
 /*   2005-03-22a.D. | zrusene DOS, vytvoreny novy model        */
 /*   2005-03-28a.D. | pridane na zaciatok #undef pre vsetky    */
+/*   2006-01-28a.D. | pridané define pre spôsob exportu        */
 /*                                                             */
 /***************************************************************/
 
@@ -43,11 +44,16 @@
 
 /* --------------------------------------------------------------------- */
 /* prerobene 23/02/2000A.D. -- 24/02/2000A.D. */
+/* 2006-01-28: pridané define pre spôsob výpisu kotiev a názvov súborov do HTML výsledku */
+#undef EXPORT_HTML_FILENAME_ANCHOR
+#undef EXPORT_HTML_FILENAME
+#undef EXPORT_HTML_ANCHOR
 
 /* ostry linux: */
 #if defined(MODEL_ostry_linux)
 	#define OS_linux
 	#undef LOGGING
+	#define EXPORT_HTML_FILENAME_ANCHOR
 	#define EXPORT_TO_STDOUT
 /* debugovanie linux -- vsetko sa vypisuje na stdout */
 #elif defined(MODEL_DEBUG_linux)
@@ -65,6 +71,7 @@
 	#define OS_Windows
 	#define LOGGING
 	#define LOG_TO_FILE
+	#define EXPORT_HTML_FILENAME_ANCHOR
 	#define EXPORT_TO_FILE
 /* simulacia ostreho linuxu pod Windows */
 #elif defined(MODEL_ostry_SIMUL_linux_UNDER_Windows)

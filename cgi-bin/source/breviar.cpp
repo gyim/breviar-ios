@@ -70,6 +70,7 @@
 /*   2005-11-11a.D. | Doplnené: Te Deum posvätným èítaniam                 */
 /*   2006-01-20a.D. | Oprava: Už sa zobrazujú aj spomienky v pôste (¾.s.)  */
 /*   2006-01-25a.D. | zmena default pre _global_opt2 => LINK_ISO_8601      */
+/*   2006-01-28a.D. | upravený spôsob výpisu v includeFile()               */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -908,6 +909,8 @@ void _main_prazdny_formular(void){
  *
  * podla parametra paramname (PARAM_...)
  * 
+ * 2006-01-28: upravený spôsob výpisu kvôli zjednodušenej diagnostike
+ * 
  */
 #define DetailLog emptyLog
 void includeFile(int type, char *paramname, char *fname, char *modlparam){
@@ -929,16 +932,24 @@ void includeFile(int type, char *paramname, char *fname, char *modlparam){
 	if(body == NULL){
 		/*printf("error `%s'\n", sys_errlist[errno]);*/
 		Log("  file `%s' not found\n", fname);
-#if defined(OS_DOS)
-		Export("file %s not found", fname);
-#elif defined(OS_Windows)
-		Export("file %s not found", fname);
-#elif defined(OS_linux)
+#if defined(EXPORT_HTML_FILENAME_ANCHOR)
+		Export("file `%s' not found (anchor `%s')", fname, modlparam);
+#elif defined(EXPORT_HTML_FILENAME)
+		Export("file `%s' not found", fname);
+#else
 		Export("file not found");
 #endif
 		Log("--includeFile(): end (because of no body)\n");
 		return;
 	}
+	/* 2006-01-28: pridané kvôli ¾ahšej diagnostike */
+#if defined(EXPORT_HTML_FILENAME_ANCHOR)
+	Export("(file `%s', anchor `%s')", fname, modlparam);
+#elif defined(EXPORT_HTML_FILENAME)
+	Export("(file `%s')", fname);
+#elif defined(EXPORT_HTML_ANCHOR)
+	Export("(anchor `%s')", modlparam);
+#endif
 	while((c = fgetc(body)) != EOF){
 		switch (c){
 			case CHAR_KEYWORD_BEGIN:
@@ -958,23 +969,19 @@ void includeFile(int type, char *paramname, char *fname, char *modlparam){
 					if(equals(strbuff, INCLUDE_BEGIN)){
 						write = 1;
 						vnutri_inkludovaneho = 1;
-#if defined(OS_DOS)
-						Export("begin of %s, anchor %s", fname, modlparam);
-#elif defined(OS_Windows)
-						Export("BEGIN:%s", modlparam);
-#elif defined(OS_linux)
+#if defined(EXPORT_HTML_FILENAME_ANCHOR)
+						Export("begin of `%s', anchor `%s'", fname, modlparam);
+#elif defined(EXPORT_HTML_ANCHOR)
 						Export("BEGIN:%s", modlparam);
 #endif
-						Log("  begin of %s in `%s'\n", modlparam, fname);
+						Log("  begin of `%s' in `%s'\n", modlparam, fname);
 					}
 					else if(equals(strbuff, INCLUDE_END)){
 						write = 0;
 						vnutri_inkludovaneho = 0;
-#if defined(OS_DOS)
-						Export("end of %s, anchor %s", fname, modlparam);
-#elif defined(OS_Windows)
-						Export("END:%s", modlparam);
-#elif defined(OS_linux)
+#if defined(EXPORT_HTML_FILENAME_ANCHOR)
+						Export("end of `%s', anchor `%s'", fname, modlparam);
+#elif defined(EXPORT_HTML_ANCHOR)
 						Export("END:%s", modlparam);
 #endif
 						/* pridane 2003-08-13 kvoli viacnasobnym inkludom */
@@ -982,7 +989,7 @@ void includeFile(int type, char *paramname, char *fname, char *modlparam){
 						/* ak to aj je posledny inklude, potom v nadradenom subore,
 						 * do ktoreho "inkludujeme", sa vypise "-->"
 						 */
-						Log("  end of %s in `%s'\n", modlparam, fname);
+						Log("  end of `%s' in `%s'\n", modlparam, fname);
 					}
 				}/* equalsi(rest, modlparam) */
 				else{
