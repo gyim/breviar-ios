@@ -6173,7 +6173,7 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 	}/* MODL_SPOL_CAST_PANNA/viacere */
 
 	/* spolocna cast na sviatky Panny Marie */
-	else if(a == MODL_SPOL_CAST_PANNA_MARIA){
+	else if(a == MODL_SPOL_CAST_PANNA_MARIA){ /* 2005-08-25: Upravené */
 
 		Log("/* spolocna cast na sviatky Panny Marie */\n");
 		modlitba = MODL_PRVE_VESPERY;
@@ -6196,6 +6196,15 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II))
 			_spolocna_cast_kresp_ve;
 
+		/* 2005-08-25: pridaný ïalší pomocný anchor, ktorý pojednáva o zväzku breviára kvôli posv. èítaniam */
+		sprintf(_anchor_pom, "%s", STR_EMPTY);
+		Log("  _anchor_pom == %s\n", _anchor_pom);
+		sprintf(_anchor_zvazok, "%s_", zvazok_OBD[_global_den.litobd]);
+		if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
+			strcat(_anchor_zvazok, VELKONOCNA_PRIPONA);
+		}
+		Log("  _anchor_zvazok == %s\n", _anchor_zvazok);
+
 		/* posvatne citanie */
 		modlitba = MODL_POSV_CITANIE;
 		if(_global_opt2 == MODL_ZALMY_ZO_SV){
@@ -6203,7 +6212,12 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 			_set_zalmy_sviatok_marie(modlitba);
 		}
 		_spolocna_cast_full(modlitba);
-		/* 2005-07-22: ToDo: skontrolova, èi pre špeciálne obdobia nie sú špeciálne èasti z obdobia */
+		/* 2005-08-25: 1. èítanie je zväèša odlišné pre spoloèné èasti sviatkov svätých nasledovne:
+		 * - I. zväzok (advent, vianoce) a II. zväzok (pôst),
+		 * - II. zväzok (ve¾ká noc),
+		 * - III. a IV. zväzok (obdobie cez rok).
+		 */
+		_spolocna_cast_1cit_zvazok(modlitba, _anchor_pom, _anchor_zvazok, _anchor_head, _file);
 
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
@@ -10414,6 +10428,9 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_full(modlitba);
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_full(modlitba);
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_sviatok_panien(modlitba);
@@ -11961,6 +11978,12 @@ label_8_DEC:
 	_set_modlitba(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
 }
+/* 2005-08-25: Pridané vlastné druhé èítanie na posvätné èítanie */
+#define _srdca_pm_2cit {\
+	sprintf(_anchor, "%s_%c%s", ANCHOR_SRDCA_PM, pismenko_modlitby(modlitba), ANCHOR_CITANIE2);\
+	_set_citanie2(modlitba, _file, _anchor);\
+	set_LOG_litobd;\
+}
 	if((_global_den.denvr == (_global_r._ZOSLANIE_DUCHA_SV.denvr + 20)) && 
 		(_global_svaty1.smer >= 10)){
 		/* neposkvrneneho srdca panny marie; 10/03/2000A.D.;
@@ -11994,6 +12017,10 @@ label_8_DEC:
 			Log("  ide o spomienku srdca panny marie...\n");
 			modlitba = MODL_RANNE_CHVALY;
 			_srdca_pm_benediktus;
+			_srdca_pm_modlitba;
+			/* 2005-08-25: Pridané */
+			modlitba = MODL_POSV_CITANIE;
+			_srdca_pm_2cit;
 			_srdca_pm_modlitba;
 		}
 		_global_svaty1.typslav = SLAV_SPOMIENKA;
