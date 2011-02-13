@@ -112,6 +112,11 @@ char *_global_buf;
 
 #define LOG_ciara Log("---------------------\n");
 
+#define FILE_LOG "dnes.log"
+
+#define _main_LOG_to_Export Log
+#define _main_LOG Log
+
 #ifndef OS_linux
 	#include "breviar.h" /* su tam deklarovane nasledovne globalne premenne a main() */
 #endif
@@ -622,6 +627,119 @@ static void scanquery(char *q){
 }
 
 /*---------------------------------------------------------------------*/
+/* popis: naplni premenne WWW_... hodnotami z QS, t.j. akoby to vratilo uncgi.c
+ * vracia: on success, returns SUCCESS
+ *         on error,   returns FAILURE
+ */
+int setForm(void){
+	char local_str[MAX_STR] = STR_EMPTY;
+	Log("setForm() -- begin\n");
+
+	/* 2005-03-29 (Bratislava): Pokus (pada tabulka) - vlozime aj */
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_QUERY_TYPE, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_QUERY_TYPE), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_QUERY_TYPE);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+
+	/* den */
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_DEN, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_DEN), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_DEN);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	/* mesiac */
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_MESIAC, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MESIAC), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_MESIAC);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	/* rok */
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_ROK, STR_EMPTY)){
+		/* 2005-03-29: Doplnene, lebo pri analyze roka pouzivame parameter "ar" namiesto "r" */
+		if(query_type == PRM_ANALYZA_ROKU)
+			mystrcpy(local_str, ADD_WWW_PREFIX_(STR_ANALYZA_ROKU), MAX_STR);
+		else
+			mystrcpy(local_str, ADD_WWW_PREFIX_(STR_ROK), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_ROK);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	/* modlitba */
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_MODLITBA, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODLITBA), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_MODLITBA);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	/* pom_DALSI_SVATY */
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_DALSI_SVATY, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_DALSI_SVATY), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_DALSI_SVATY);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	/* pom_MODL_OPT1..pom_MODL_OPT5 */
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_MODL_OPT1, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT1), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_MODL_OPT1);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_MODL_OPT2, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT2), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_MODL_OPT2);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_MODL_OPT3, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT3), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_MODL_OPT3);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_MODL_OPT4, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT4), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_MODL_OPT4);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_MODL_OPT5, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT5), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_MODL_OPT5);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	Log("setForm() -- end, returning SUCCESS\n");
+	return SUCCESS;
+}/* setForm(); */
+
+/*---------------------------------------------------------------------*/
 /* popis: zisti, odkial sa citaju argumenty (vstupy);
  * vracia:
  *
@@ -669,6 +787,9 @@ int getSrciptParamFrom(int argc){
 			if ((_global_buf != NULL) && (_global_buf[0] != '\0')){
 				scanquery(_global_buf);
 				Log("POST::Vysledok == %s\n", _global_buf);
+				_main_LOG_to_Export("spustam setForm();\n");
+				ret = setForm(); /* 2005-03-29: Pokus */
+				_main_LOG_to_Export("spat po skonceni setForm()\n");
 			}
 		}
 		else
@@ -5463,33 +5584,21 @@ int getQueryTypeFrom_QS(char *qs){
 }
 
 /*---------------------------------------------------------------------*/
-#define deallocate_ptr {Log("now deallocating memory for local variable ptr...\n"); free(ptr); Log("...done.\n");}
 int getQueryTypeFrom_WWW(void){
 	char *ptr;
 
 	Log("getQueryTypeFrom_WWW() -- begin\n");
-	Log("first of all, allocate memory for local variables...\n");
-	/* ptr */
-	if((ptr = (char*) malloc(MAX_STR)) == NULL){
-		Log("  Not enough memory to allocate buffer for `ptr'\n");
-		Log("getQueryTypeFrom_WWW() -- end, returning PRM_UNKNOWN because of memory insufficience\n");
-	}
-	else{
-		Log("  %d bytes for `ptr'\n", MAX_STR);
-	}
-	Log("...done.\n");
-
 	ptr = getenv(ADD_WWW_PREFIX_(STR_QUERY_TYPE)); /* zistim, ci je to z formulara */
 
 	if(ptr == NULL){
 		/* nie, dotaz nie je spusteny z formulara */
-		deallocate_ptr;
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_NONE\n");
 		return PRM_NONE; /* aj bez parametrov WWW_... */
 	}
+
+	/* Log("--- ptr == %s\n", ptr); /* 2005-03-29: Pridany vypis, napokon bol problem v tom, ze sa ptr alokovalo a pri free() to padalo (Internal Server Error) */
 	/* v tomto pripade existuje premenna WWW_QUERY_TYPE */
 	if(equals(ptr, STR_PRM_DATUM)){
-		deallocate_ptr;
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_DATUM\n");
 		return PRM_DATUM;
 	}
@@ -5499,37 +5608,30 @@ int getQueryTypeFrom_WWW(void){
 	 * ktora sa aplikovala aj na option 'PRM_DATUM'
 	 */
 	else if(equals(ptr, STR_PRM_DETAILY)){
-		deallocate_ptr;
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_DETAILY\n");
 		return PRM_DETAILY;
 	}
 	else if(equals(ptr, STR_PRM_CEZ_ROK)){
-		deallocate_ptr;
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_CEZ_ROK\n");
 		return PRM_CEZ_ROK;
 	}
 	else if(equals(ptr, STR_PRM_SVIATOK)){
-		deallocate_ptr;
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_SVIATOK\n");
 		return PRM_SVIATOK;
 	}
 	else if(equals(ptr, STR_PRM_ANALYZA_ROKU)){
-		deallocate_ptr;
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_ANALYZA_ROKU\n");
 		return PRM_ANALYZA_ROKU;
 	}
 	else if(equals(ptr, STR_PRM_DNES)){
-		deallocate_ptr;
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_DNES\n");
 		return PRM_DNES;
 	}
 	else if(equals(ptr, STR_PRM_MESIAC_ROKA)){
-		deallocate_ptr;
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_MESIAC_ROKA\n");
 		return PRM_MESIAC_ROKA;
 	}
 	else if(equals(ptr, STR_PRM_TABULKA)){ /* pridane 15/03/2000A.D. */
-		deallocate_ptr;
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_TABULKA\n");
 		return PRM_TABULKA;
 	}
@@ -5538,7 +5640,6 @@ int getQueryTypeFrom_WWW(void){
 	 * 2003-07-04
 	 */
 	else{
-		deallocate_ptr;
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_UNKNOWN\n");
 		return PRM_UNKNOWN; /* failure */
 	}
@@ -5894,105 +5995,6 @@ int getArgv(int argc, char **argv){
 
 	return SUCCESS;
 }/* getArgv(); */
-
-
-/*---------------------------------------------------------------------*/
-/* popis: naplni premenne WWW_... hodnotami z QS, t.j. akoby to vratilo uncgi.c
- * vracia: on success, returns SUCCESS
- *         on error,   returns FAILURE
- */
-int setForm(void){
-	char local_str[MAX_STR] = STR_EMPTY;
-	Log("setForm() -- begin\n");
-	/* den */
-	mystrcpy(local_str, STR_EMPTY, MAX_STR);
-	if(!equals(pom_DEN, STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_DEN), MAX_STR);
-		strcat(local_str, "=");
-		strcat(local_str, pom_DEN);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
-	}
-	/* mesiac */
-	mystrcpy(local_str, STR_EMPTY, MAX_STR);
-	if(!equals(pom_MESIAC, STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MESIAC), MAX_STR);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MESIAC);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
-	}
-	/* rok */
-	mystrcpy(local_str, STR_EMPTY, MAX_STR);
-	if(!equals(pom_ROK, STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_ROK), MAX_STR);
-		strcat(local_str, "=");
-		strcat(local_str, pom_ROK);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
-	}
-	/* modlitba */
-	mystrcpy(local_str, STR_EMPTY, MAX_STR);
-	if(!equals(pom_MODLITBA, STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODLITBA), MAX_STR);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODLITBA);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
-	}
-	/* pom_DALSI_SVATY */
-	mystrcpy(local_str, STR_EMPTY, MAX_STR);
-	if(!equals(pom_DALSI_SVATY, STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_DALSI_SVATY), MAX_STR);
-		strcat(local_str, "=");
-		strcat(local_str, pom_DALSI_SVATY);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
-	}
-	/* pom_MODL_OPT1..pom_MODL_OPT5 */
-	mystrcpy(local_str, STR_EMPTY, MAX_STR);
-	if(!equals(pom_MODL_OPT1, STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT1), MAX_STR);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPT1);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
-	}
-	mystrcpy(local_str, STR_EMPTY, MAX_STR);
-	if(!equals(pom_MODL_OPT2, STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT2), MAX_STR);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPT2);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
-	}
-	mystrcpy(local_str, STR_EMPTY, MAX_STR);
-	if(!equals(pom_MODL_OPT3, STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT3), MAX_STR);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPT3);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
-	}
-	mystrcpy(local_str, STR_EMPTY, MAX_STR);
-	if(!equals(pom_MODL_OPT4, STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT4), MAX_STR);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPT4);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
-	}
-	mystrcpy(local_str, STR_EMPTY, MAX_STR);
-	if(!equals(pom_MODL_OPT5, STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT5), MAX_STR);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPT5);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
-	}
-	Log("setForm() -- end, returning SUCCESS\n");
-	return SUCCESS;
-}/* setForm(); */
 
 /*---------------------------------------------------------------------*/
 /* popis: naplni premenne pom_... hodnotami z environmentu, t.j.
@@ -6808,11 +6810,6 @@ int parseQueryString(void){
 /* main();
  *    hlavny program
  */
-#define FILE_LOG "dnes.log"
-
-#define _main_LOG_to_Export Log
-#define _main_LOG Log
-
 #define _main_LOG_to_Export_PARAMS {\
 	_main_LOG_to_Export("\tparam1 == %s (pom_DEN/pom_SVIATOK/pom_DEN_V_TYZDNI), param1 == %s (pom_ROK_FROM)\n", pom_DEN, pom_ROK_FROM);\
 	_main_LOG_to_Export("\tparam2 == %s (pom_MESIAC/pom_TYZDEN), param2 == %s (pom_ROK_TO)\n", pom_MESIAC, pom_ROK_TO);\
@@ -6869,6 +6866,12 @@ int main(int argc, char **argv){
 
 	initLog(FILE_LOG);
 
+	/* 2005-03-29: Pridane kvoli debuggovaniu na obrazovku */
+// #ifdef OS_linux
+	_main_LOG("Content-type: text/html\n");
+	_main_LOG("\n");
+// #endif
+	
 	_main_LOG("-- log file programu pre Liturgiu hodin (c)1999-2005 Juraj Videky --\n");
 
 	/* config: dorobene 30/03/2000A.D. */
@@ -6945,6 +6948,7 @@ int main(int argc, char **argv){
 			 */
 			_main_LOG_to_Export("params == SCRIPT_PARAM_FROM_FORM\n");
 			/* neboli zadane ziadne parametre, teda citam z formularu */
+			
 			query_type = getQueryTypeFrom_WWW();
 			/* zistili sme, aky je typ dotazu */
 			if(query_type == PRM_NONE){
