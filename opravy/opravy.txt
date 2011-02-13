@@ -3,7 +3,15 @@
  * alebo priamo v zdrojovıch textoch programu. 2003-07-16a.D.
  */
 ----------zaèiatok----------
-
+2005-06-01: oprava dodatok/pc_vp.htm
+	preklep "Sila Krisovej krvi" --> "Sila Kristovej krvi"
+	upozornil Michal Makovnik (ïakujem)
+2005-05-26: oprava dodatok/lord_km.htm
+	preklep "illos tuos misericórded óculos" --> "illos tuos misericórdes óculos"
+	upozornil br. Ondrej (ïakujem)
+2005-05-17: oprava include/iz40.htm
+	preklep "na váhach vàšky odváil" --> "na váhach vrchy odváil"
+	upozornil Mário Bosı (ïakujem)
 2005-03-22: oprava include/post2.htm
 	preklep "Vysloboï ma, Pane, a postav ma ved¾a seba, potom môe ktoko¾vek bojoval proti mne" --> "Vysloboï ma, Pane, a postav ma ved¾a seba, potom môe ktoko¾vek bojova proti mne"
 	upozornil Mário Bosı (ïakujem)
