@@ -16,6 +16,7 @@
 /*                  - pridana inicializacia do _allocate_      */
 /*                  - zmena "" na STR_EMPTY (mystring.h)       */
 /*                  - odstranenie RUN_MODLITBA_CEZ_DEN         */
+/*   2004-08-14a.D. | char zmeneny na unsigned (_nedelne_p...) */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -742,7 +743,7 @@ int den_v_tyzdni(_struct_den_mesiac den_a_mesiac, int rok){
  * _nedelne_pismeno vrati ciselny udaj (0 -- 6), ktory je vstupom pre
  * konstantne pole char_nedelne_pismeno[]
  */
-char _nedelne_pismeno(int rok){
+unsigned char _nedelne_pismeno(int rok){
 	int vn;
 	vn = _velkonocna_nedela(rok);
 	return (char)((vn + 5) MOD 7); /* (char) pridane 01/03/2000A.D. */
@@ -755,7 +756,7 @@ char nedelne_pismeno(int rok){
 /* vrati nedelne pismeno v tej casti roka, kde je den.mesiac.
  * to pre prestupny rok znamena, ze pocnuc 1. marcom je druhe nedelne pismeno
  */
-char _nedelne_pismeno(int por, int rok){
+unsigned char _nedelne_pismeno(int por, int rok){
  /* (char) pridane 01/03/2000A.D. */
 	if((prestupny(rok)) && (por > poradie(29, MES_FEB + 1, rok)))
 		return (char)((_nedelne_pismeno(rok) + 6) MOD 7);
@@ -773,7 +774,7 @@ char nedelne_pismeno(int den, int mesiac, int rok){
 	return nedelne_pismeno(por, rok);
 }
 
-char _nedelne_pismeno(int den, int mesiac, int rok){
+unsigned char _nedelne_pismeno(int den, int mesiac, int rok){
 	int por;
 	por = poradie(den, mesiac, rok);
 	return _nedelne_pismeno(por, rok);
@@ -782,7 +783,7 @@ char _nedelne_pismeno(int den, int mesiac, int rok){
 /* vrati nedelne pismeno v spravnej casti roka, ale neberie do uvahy
  * typ modlitby, t.j. ked su (prve) vespery, vrati zly den!!! pozor!!!
  */
-char _nedelne_pismeno(_struct_den_mesiac den_a_mesiac, int rok){
+unsigned char _nedelne_pismeno(_struct_den_mesiac den_a_mesiac, int rok){
 	return
 	_nedelne_pismeno(poradie(den_a_mesiac.den, den_a_mesiac.mesiac, rok), rok);
 }

@@ -30,6 +30,10 @@
 /*   2003-12-07a.D. | posvatne citanie (adv2)                  */
 /*   2004-04-28a.D. | posvatne citanie (cez rok)               */
 /*                  - rozsafne strcpy zmenene na mystrcpy      */
+/*   2004-08-14a.D. | Sviatok Sv. Jany Františky de Chantal    */
+/*                    presunuty z 12. decembra na 12. augusta  */
+/*                  - Sviatok Bl. Zdenky Schelingovej,         */
+/*                    panny a muèenice, ako 2. moznost 30.jula */
 /*                                                             */
 /* notes |                                                     */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
@@ -8496,7 +8500,25 @@ label_25_MAR:
 						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA);
 					break;
 				case 30:
+				/* 2004-08-14, duurko
+				 * Sviatok Bl. Zdenky Schelingovej, panny a muèenice, ako 2. moznost.
+				 * Upozornil Jan Kusenda <exonkuda@savba.sk>.
+				 */
 					if(poradie_svaty == 1){
+						/* definovanie parametrov pre modlitbu */
+
+						if(query_type != PRM_DETAILY)
+							set_spolocna_cast(sc, poradie_svaty);
+
+						modlitba = MODL_RANNE_CHVALY;
+						_vlastna_cast_modlitba;
+
+						modlitba = MODL_VESPERY;
+						_vlastna_cast_modlitba;
+
+						break;
+					}
+					else if(poradie_svaty == 2){
 						/* definovanie parametrov pre modlitbu */
 
 						if(query_type != PRM_DETAILY)
@@ -8516,6 +8538,13 @@ label_25_MAR:
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP,
 							MODL_SPOL_CAST_UCITEL_CIRKVI);
+					pocet = 2;
+					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
+					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara - Slovensko */
+					mystrcpy(_global_svaty2.meno, "Bl. Zdenky Schelingovej, panny a muèenice", MENO_SVIATKU);
+					_global_svaty2.spolcast =
+						_encode_spol_cast(MODL_SPOL_CAST_MUCENICA,
+							MODL_SPOL_CAST_PANNA);
 					break;
 				case 31:
 					if(poradie_svaty == 1){
@@ -8827,6 +8856,31 @@ label_25_MAR:
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_PANNA,
 							MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
+					break;
+
+				/* 2004-08-14, duurko
+				 * Sviatok Sv. Jany Františky de Chantal presunuty z 12. decembra na 12. augusta.
+				 */
+				case 12:
+					if(poradie_svaty == 1){
+						/* definovanie parametrov pre modlitbu */
+
+						if(query_type != PRM_DETAILY)
+							set_spolocna_cast(sc, poradie_svaty);
+
+						modlitba = MODL_RANNE_CHVALY;
+						_vlastna_cast_modlitba;
+
+						modlitba = MODL_VESPERY;
+						_vlastna_cast_modlitba;
+
+						break;
+					}
+					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+					mystrcpy(_global_svaty1.meno, "Sv. Jany Františky de Chantal, reho¾níèky", MENO_SVIATKU);
+					_global_svaty1.spolcast =
+						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 					break;
 				case 13:
 					if(poradie_svaty == 1){
@@ -10673,27 +10727,11 @@ label_8_DEC:
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 					break;
-				case 12:
-					if(poradie_svaty == 1){
-						/* definovanie parametrov pre modlitbu */
 
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
+				/* 2004-08-14, duurko
+				 * Sviatok Sv. Jany Františky de Chantal presunuty z 12. decembra na 12. augusta.
+				 */
 
-						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_modlitba;
-
-						modlitba = MODL_VESPERY;
-						_vlastna_cast_modlitba;
-
-						break;
-					}
-					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Jany Františky de Chantal, reho¾níèky", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
-					break;
 				case 13:
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */

@@ -23,6 +23,7 @@
 /*   2003-08-21a.D. | definicie pre posvatne citania           */
 /*   2003-11-20a.D. | definicie pre posvatne citania zmenene   */
 /*   2004-04-28a.D. | MAX_STR_AF_FILE zmenene na 16            */
+/*   2004-08-14a.D. | char zmeneny na unsigned (_nedelne_p...) */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -725,13 +726,13 @@ int _velkonocna_nedela(int rok);
 int den_v_tyzdni(int por, int rok);
 int den_v_tyzdni(int den, int mesiac, int rok);
 int den_v_tyzdni(_struct_den_mesiac den_a_mesiac, int rok);
-char _nedelne_pismeno(int rok);
+unsigned char _nedelne_pismeno(int rok);
 char nedelne_pismeno(int rok);
-char _nedelne_pismeno(int por, int rok);
+unsigned char _nedelne_pismeno(int por, int rok);
 char nedelne_pismeno(int por, int rok);
 char nedelne_pismeno(int den, int mesiac, int rok);
-char _nedelne_pismeno(int den, int mesiac, int rok);
-char _nedelne_pismeno(_struct_den_mesiac den_a_mesiac, int rok);
+unsigned char _nedelne_pismeno(int den, int mesiac, int rok);
+unsigned char _nedelne_pismeno(_struct_den_mesiac den_a_mesiac, int rok);
 char nedelne_pismeno(_struct_den_mesiac den_a_mesiac, int rok);
 _struct_den_mesiac por_den_mesiac(int poradie, int rok);
 int _svatej_rodiny(int rok);

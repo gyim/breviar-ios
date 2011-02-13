@@ -18,6 +18,7 @@
 /*                  - pridane HTML_BUTTON_                     */
 /*   2003-07-16a.D. | zmena WWW_ na ADD_WWW_PREFIX_            */
 /*   2004-03-17a.D. | FILE_PATH sa nepouziva                   */
+/*   2004-08-14a.D. | zmena definicie ADD_WWW_PREFIX_          */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -52,7 +53,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2004-03-17"
+#define BUILD_DATE "2004-08-14"
 
 #define BYTES 250
 #define SMALL 80
@@ -188,8 +189,16 @@ extern int query_type; /* premenna obsahujuca PRM_... */
 
 /* nasleduju parametre z formularov pre vsetky typy dotazov,
  * kedysi bolo pre kazdy STR_... definovane WWW_STR_...,
- * teraz ADD_WWW_PREFIX_(STR_...) */
-#define ADD_WWW_PREFIX_(a) ("WWW_"##a)
+ * teraz ADD_WWW_PREFIX_(STR_...) 
+ * 
+ * 2004-08-14, duurko
+ * definicia ADD_WWW_PREFIX_(a) ("WWW_"##a) 
+ * ktora bola OK na g++ (gcc version 2.95.4 20011002)
+ * sposobovala problemy 
+ * na g++ (gcc version 3.3.3 20040412)
+ * preto zmenene na ADD_WWW_PREFIX_(a) ("WWW_"a)
+ */
+#define ADD_WWW_PREFIX_(a) ("WWW_"a)
 
 /* nasleduju parametre z formularov pre dotaz PRM_DATUM */
 #define DEN 3 /* dotaz na konkretny datum */

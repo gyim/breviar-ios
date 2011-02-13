@@ -3,6 +3,12 @@
  * alebo priamo v zdrojových textoch programu. 2003-07-16a.D.
  */
 ----------zaèiatok----------
+2004-08-14: oprava preklepu (modlitba dòa, sv. Maximilián Kolbe, include/sv_aug.htm)
+	"kòaza s muèeníka Maximiliána" --> "kòaza a muèeníka Maximiliána"
+	upozornil Juro Lovas
+2004-08-14: presunutie sviatku SV. JANY FRANTIŠKY DE CHANTAL, REHO¼NÍÈKY
+	z 12. decembra na 12. augusta; pridana lubovolna spomienka bl. Zdenky
+	Schelingovej, panny a mucenice, na 30. jula
 2004-01-16: oprava preklepu (ranné chvály, piatok 1. týždòa cez rok, include/_1pi.htm)
 	"nazahasila" --> "nezahasila"
 	zaslala Daniela <Bacova.Daniela@ks.vs.sk> (ïakujem)
