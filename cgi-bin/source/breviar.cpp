@@ -59,6 +59,7 @@
 /*   2005-03-28a.D. | nova funkcia setForm(), uprava pre uncgi */
 /*   2005-03-30a.D. | upravene getForm()                       */
 /*   2005-05-24a.D. | opravena copy-paste chyba pre pom_ROK_TO */
+/*   2005-07-22a.D. | pridaný popis aj pre posv.èítanie a mcd  */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -1173,6 +1174,23 @@ void interpretParameter(int type, char *paramname){
 				case MODL_VESPERY:
 					strcat(path, _global_modl_vespery.popis.file);
 					includeFile(type, paramname, path, _global_modl_vespery.popis.anchor);
+					break;
+				/* 2005-07-22: Pridaný popis aj pre posvätné èítanie a modlitbu cez deò */
+				case MODL_POSV_CITANIE:
+					strcat(path, _global_modl_posv_citanie.popis.file);
+					includeFile(type, paramname, path, _global_modl_posv_citanie.popis.anchor);
+					break;
+				case MODL_CEZ_DEN_9:
+					strcat(path, _global_modl_cez_den_9.popis.file);
+					includeFile(type, paramname, path, _global_modl_cez_den_9.popis.anchor);
+					break;
+				case MODL_CEZ_DEN_12:
+					strcat(path, _global_modl_cez_den_12.popis.file);
+					includeFile(type, paramname, path, _global_modl_cez_den_12.popis.anchor);
+					break;
+				case MODL_CEZ_DEN_3:
+					strcat(path, _global_modl_cez_den_3.popis.file);
+					includeFile(type, paramname, path, _global_modl_cez_den_3.popis.anchor);
 					break;
 				default:
 					/* tieto modlitby nemaju popis */
