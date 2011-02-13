@@ -58,6 +58,7 @@
 /*   2005-03-22a.D. | uprava funkcie parseQueryString()        */
 /*   2005-03-28a.D. | nova funkcia setForm(), uprava pre uncgi */
 /*   2005-03-30a.D. | upravene getForm()                       */
+/*   2005-05-24a.D. | opravena copy-paste chyba pre pom_ROK_TO */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -6370,7 +6371,8 @@ int getForm(void){
 
 		/* premenna WWW_ROK_TO */
 		/* ak je naplnena pom_ROK_TO, znamena to, ze uz bola naplnena, preto nemusi existovat */
-		if(equals(pom_ROK_FROM, STR_EMPTY)){
+		/* 2005-05-24 Opravena copy-paste chyba: bolo mylne if(equals(pom_ROK_FROM, STR_EMPTY)) */
+		if(equals(pom_ROK_TO, STR_EMPTY)){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_ROK_TO));
 			if(ptr == NULL){
 				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_ROK_TO));
