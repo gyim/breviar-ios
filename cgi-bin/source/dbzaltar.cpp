@@ -5750,7 +5750,6 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		 * - III. a IV. zv‰zok (obdobie cez rok).
 		 */
 		_spolocna_cast_1cit_zvazok(modlitba, _anchor_pom, _anchor_zvazok, STR_EMPTY /* 2005-08-08: _anchor netreba*/, _file);
-		Log("2005-08-08: anchor == %s\n", _anchor);
 		_spolocna_cast_2citanie;
 
 	}/* MODL_SPOL_CAST_UCITEL_CIRKVI */
@@ -5766,6 +5765,13 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 			sprintf(_anchor_pom, "%s_", ANCHOR_SPOL_CAST_PANNA_MUCENICA);
 		}
 		Log("  _anchor_pom == %s\n", _anchor_pom);
+		/* 2005-08-09: pridan˝ ÔalöÌ pomocn˝ anchor, ktor˝ pojedn·va o zv‰zku brevi·ra kvÙli posv. ËÌtaniam */
+		sprintf(_anchor_zvazok, "%s_", zvazok_OBD[_global_den.litobd]);
+		if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
+			strcat(_anchor_zvazok, VELKONOCNA_PRIPONA);
+		}
+		Log("  _anchor_zvazok == %s\n", _anchor_zvazok);
+
 		Log("/* spolocna cast na sviatky jedneho mucenika */\n");
 		modlitba = MODL_PRVE_VESPERY;
 		if(_global_opt2 == MODL_ZALMY_ZO_SV){
@@ -5796,7 +5802,12 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		}
 		_spolocna_cast_full(modlitba);
 		_spolocna_cast_hymnus_rozne(modlitba, _anchor_pom, _anchor, _file);
-		/* 2005-07-22: ToDo: skontrolovaù, Ëi pre öpeci·lne obdobia nie s˙ öpeci·lne Ëasti z obdobia */
+		/* 2005-08-05: 1. ËÌtanie je zv‰Ëöa odliönÈ pre spoloËnÈ Ëasti sviatkov sv‰t˝ch nasledovne:
+		 * - I. zv‰zok (advent, vianoce) a II. zv‰zok (pÙst),
+		 * - II. zv‰zok (veæk· noc),
+		 * - III. a IV. zv‰zok (obdobie cez rok).
+		 */
+		_spolocna_cast_1cit_zvazok(modlitba, _anchor_pom, _anchor_zvazok, STR_EMPTY /* 2005-08-08: _anchor netreba*/, _file);
 
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
@@ -5812,7 +5823,7 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		}/* v OBD_OKTAVA_NARODENIA -- vespery su zo dna */
 
 	}/* MODL_SPOL_CAST_MUCENIK/MUCENICA */
-
+// 2005-08-10: tu treba pokraËovaù
 	/* spolocna cast na sviatky viacerych mucenikov */
 	else if(a == MODL_SPOL_CAST_VIAC_MUCENIKOV){
 
