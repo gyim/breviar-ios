@@ -1,4 +1,4 @@
 cp l.cgi ../
-cp uncgi uncgi.cgi
-cp uncgi ../
-cp uncgi.cgi ../
+# cp uncgi uncgi.cgi
+# cp uncgi ../
+# cp uncgi.cgi ../
