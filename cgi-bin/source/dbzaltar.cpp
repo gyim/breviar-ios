@@ -1875,14 +1875,20 @@ void _set_zalmy_sviatok_muc(int modlitba, int su_viaceri){
 void _set_zalmy_sviatok_krstu(int modlitba){
 	Log("_set_zalmy_sviatok_krstu(%s) -- begin\n", nazov_modlitby[modlitba]);
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(MODL_VESPERY, "z110.htm", "ZALM110");
-		_set_zalm2(MODL_VESPERY, "z130.htm", "ZALM130");
-		_set_zalm3(MODL_VESPERY, "kol1.htm", "CHVAL_KOL1");
+		_set_zalm1(modlitba, "z110.htm", "ZALM110");
+		_set_zalm2(modlitba, "z130.htm", "ZALM130");
+		_set_zalm3(modlitba, "kol1.htm", "CHVAL_KOL1");
+	}
+	else if(modlitba == MODL_POSV_CITANIE){
+		/* 2006-01-20: pridané */
+		_set_zalm1(modlitba, "z29.htm", "ZALM29");
+		_set_zalm2(modlitba, "z66.htm", "ZALM66_I");
+		_set_zalm3(modlitba, "z66.htm", "ZALM66_II");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(MODL_PRVE_VESPERY, "z113.htm", "ZALM113");
-		_set_zalm2(MODL_PRVE_VESPERY, "z147.htm", "ZALM147,12-20");
-		_set_zalm3(MODL_PRVE_VESPERY, "flp2.htm", "CHVAL_FLP2");
+		_set_zalm1(modlitba, "z113.htm", "ZALM113");
+		_set_zalm2(modlitba, "z147.htm", "ZALM147,12-20");
+		_set_zalm3(modlitba, "flp2.htm", "CHVAL_FLP2");
 	}
 	Log("_set_zalmy_sviatok_krstu(%s) -- end\n", nazov_modlitby[modlitba]);
 }
@@ -1926,20 +1932,20 @@ void _set_zalmy_slavnost_Cyrila_a_Metoda(int modlitba){
 void _set_zalmy_sv_kriz(int modlitba){
 	Log("_set_zalmy_sv_kriz(%s) -- begin\n", nazov_modlitby[modlitba]);
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(MODL_VESPERY, "z110.htm", "ZALM110");
-		_set_zalm2(MODL_VESPERY, "z116.htm", "ZALM116,10-19");
-		_set_zalm3(MODL_VESPERY, "zjv4_5.htm", "CHVAL_ZJV45");
+		_set_zalm1(modlitba, "z110.htm", "ZALM110");
+		_set_zalm2(modlitba, "z116.htm", "ZALM116,10-19");
+		_set_zalm3(modlitba, "zjv4_5.htm", "CHVAL_ZJV45");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(MODL_PRVE_VESPERY, "z147.htm", "ZALM147_I");
-		_set_zalm2(MODL_PRVE_VESPERY, "z147.htm", "ZALM147_II");
-		_set_zalm3(MODL_PRVE_VESPERY, "flp2.htm", "CHVAL_FLP2");
+		_set_zalm1(modlitba, "z147.htm", "ZALM147_I");
+		_set_zalm2(modlitba, "z147.htm", "ZALM147_II");
+		_set_zalm3(modlitba, "flp2.htm", "CHVAL_FLP2");
 	}
 	else if(modlitba == MODL_POSV_CITANIE){
 		/* 2005-08-24: Pridané */
-		_set_zalm1(MODL_POSV_CITANIE, "z2.htm", "ZALM2");
-		_set_zalm2(MODL_POSV_CITANIE, "z8.htm", "ZALM8");
-		_set_zalm3(MODL_POSV_CITANIE, "z96.htm", "ZALM96");
+		_set_zalm1(modlitba, "z2.htm", "ZALM2");
+		_set_zalm2(modlitba, "z8.htm", "ZALM8");
+		_set_zalm3(modlitba, "z96.htm", "ZALM96");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
@@ -1949,15 +1955,15 @@ void _set_zalmy_sv_kriz(int modlitba){
 void _set_zalmy_archanjelov(int modlitba){
 	Log("_set_zalmy_archanjelov(%s) -- begin\n", nazov_modlitby[modlitba]);
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(MODL_VESPERY, "z8.htm", "ZALM8");
-		_set_zalm2(MODL_VESPERY, "z138.htm", "ZALM138");
-		_set_zalm3(MODL_VESPERY, "kol1.htm", "CHVAL_KOL1");
+		_set_zalm1(modlitba, "z8.htm", "ZALM8");
+		_set_zalm2(modlitba, "z138.htm", "ZALM138");
+		_set_zalm3(modlitba, "kol1.htm", "CHVAL_KOL1");
 	}
 	else if(modlitba == MODL_POSV_CITANIE){
 		/* 2005-10-13: Pridané */
-		_set_zalm1(MODL_POSV_CITANIE, "z97.htm", "ZALM97");
-		_set_zalm2(MODL_POSV_CITANIE, "z103.htm", "ZALM103_I_ANJ");
-		_set_zalm3(MODL_POSV_CITANIE, "z103.htm", "ZALM103_II_ANJ");
+		_set_zalm1(modlitba, "z97.htm", "ZALM97");
+		_set_zalm2(modlitba, "z103.htm", "ZALM103_I_ANJ");
+		_set_zalm3(modlitba, "z103.htm", "ZALM103_II_ANJ");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
@@ -1967,9 +1973,9 @@ void _set_zalmy_archanjelov(int modlitba){
 void _set_zalmy_anjelov_strazcov(int modlitba){
 	Log("_set_zalmy_anjelov_strazcov(%s) -- begin\n", nazov_modlitby[modlitba]);
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(MODL_VESPERY, "z34.htm", "ZALM34_I");
-		_set_zalm2(MODL_VESPERY, "z34.htm", "ZALM34_II");
-		_set_zalm3(MODL_VESPERY, "zjv11.htm", "CHVAL_ZJV11");
+		_set_zalm1(modlitba, "z34.htm", "ZALM34_I");
+		_set_zalm2(modlitba, "z34.htm", "ZALM34_II");
+		_set_zalm3(modlitba, "zjv11.htm", "CHVAL_ZJV11");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
@@ -1979,20 +1985,20 @@ void _set_zalmy_anjelov_strazcov(int modlitba){
 void _set_zalmy_vsetkych_svatych(int modlitba){
 	Log("_set_zalmy_vsetkych_svatych(%s) -- begin\n", nazov_modlitby[modlitba]);
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(MODL_VESPERY, "z110.htm", "ZALM110");
-		_set_zalm2(MODL_VESPERY, "z116.htm", "ZALM116,10-19");
-		_set_zalm3(MODL_VESPERY, "zjv4_5.htm", "CHVAL_ZJV45");
+		_set_zalm1(modlitba, "z110.htm", "ZALM110");
+		_set_zalm2(modlitba, "z116.htm", "ZALM116,10-19");
+		_set_zalm3(modlitba, "zjv4_5.htm", "CHVAL_ZJV45");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(MODL_PRVE_VESPERY, "z113.htm", "ZALM113");
-		_set_zalm2(MODL_PRVE_VESPERY, "z147.htm", "ZALM147,12-20");
-		_set_zalm3(MODL_PRVE_VESPERY, "zjv19.htm", "CHVAL_ZJV19");
+		_set_zalm1(modlitba, "z113.htm", "ZALM113");
+		_set_zalm2(modlitba, "z147.htm", "ZALM147,12-20");
+		_set_zalm3(modlitba, "zjv19.htm", "CHVAL_ZJV19");
 	}
 	else if(modlitba == MODL_POSV_CITANIE){
 		/* 2005-10-24: Pridané */
-		_set_zalm1(MODL_POSV_CITANIE, "z8.htm", "ZALM8");
-		_set_zalm2(MODL_POSV_CITANIE, "z15.htm", "ZALM15");
-		_set_zalm3(MODL_POSV_CITANIE, "z16.htm", "ZALM16");
+		_set_zalm1(modlitba, "z8.htm", "ZALM8");
+		_set_zalm2(modlitba, "z15.htm", "ZALM15");
+		_set_zalm3(modlitba, "z16.htm", "ZALM16");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
@@ -8220,7 +8226,6 @@ label_19_MAR:
 						_vlastna_cast_kresponz;
 						_vlastna_cast_1citanie;
 						_vlastna_cast_2citanie;
-						/* xxx - 2006-01-19 - bude treba ešte Aleluja vo ve¾konoènom období */
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
@@ -8313,7 +8318,6 @@ label_25_MAR:
 						_vlastna_cast_kresponz;
 						_vlastna_cast_1citanie;
 						_vlastna_cast_2citanie;
-						/* xxx - 2006-01-19 - bude treba ešte Aleluja vo ve¾konoènom období */
 						_set_zalmy_sviatok_obetovania(modlitba);
 
 						modlitba = MODL_VESPERY;
@@ -8357,6 +8361,10 @@ label_25_MAR:
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
@@ -8379,6 +8387,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
@@ -8404,6 +8416,10 @@ label_25_MAR:
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
@@ -8426,6 +8442,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
@@ -8451,6 +8471,10 @@ label_25_MAR:
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
@@ -8475,6 +8499,10 @@ label_25_MAR:
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
@@ -8497,6 +8525,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -8521,6 +8553,10 @@ label_25_MAR:
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
@@ -8544,6 +8580,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 
@@ -8557,6 +8597,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -8586,6 +8630,13 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_full(modlitba);
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_hymnus;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_kresponz;
+						_vlastna_cast_1citanie;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
 
@@ -8607,6 +8658,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 
@@ -8620,6 +8675,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -8650,6 +8709,10 @@ label_25_MAR:
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_magnifikat;
@@ -8676,6 +8739,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;

@@ -68,6 +68,7 @@
 /*                  - interpretParameter: nové PARAM_HYMNUS_34_OCR_INY_... */
 /*   2005-08-22a.D. | upravená _export_rozbor_dna() - všedné dni aj pre 11 */
 /*   2005-11-11a.D. | Doplnené: Te Deum posvätným èítaniam                 */
+/*   2006-01-20a.D. | Oprava: Už sa zobrazujú aj spomienky v pôste (¾.s.)  */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -2452,6 +2453,9 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 			(_global_svaty1.typslav == SLAV_SPOMIENKA)){
 			 Log("je postne obdobie, tak menim `spomienku' na `lubovolnu spomienku'\n");
 			 _global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+			 /* 2006-01-20: doplnené, lebo nezobrazovalo tieto ¾ubovo¾né spomienky */
+			 if(_global_svaty1.smer < 12)
+				 _global_svaty1.smer = 12;
 		}
 
 		/* c. 12 v c. 59 vseob. smernic: "lubovolne spomienky, ktore sa mozu
