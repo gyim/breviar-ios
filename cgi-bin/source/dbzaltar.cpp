@@ -1730,6 +1730,12 @@ void _set_zalmy_premenenie(int modlitba){
 		_set_zalm2(MODL_PRVE_VESPERY, "z117.htm", "ZALM117");
 		_set_zalm3(MODL_PRVE_VESPERY, "zjv19.htm", "CHVAL_ZJV19");
 	}
+	else if(modlitba == MODL_POSV_CITANIE){
+		/* 2005-08-02: pridané posvätné èítanie */
+		_set_zalm1(MODL_POSV_CITANIE, "z84.htm", "ZALM84");
+		_set_zalm2(MODL_POSV_CITANIE, "z97.htm", "ZALM97");
+		_set_zalm3(MODL_POSV_CITANIE, "z99.htm", "ZALM99");
+	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
 	}
@@ -1864,11 +1870,19 @@ void _set_zalmy_sviatok_krstu(int modlitba){
 	}
 	Log("_set_zalmy_sviatok_krstu(%s) -- end\n", nazov_modlitby[modlitba]);
 }
+/* 2005-08-04: Pridané posvätné èítania */
 void _set_zalmy_slavnost_Cyrila_a_Metoda(int modlitba){
 	Log("_set_zalmy_slavnost_Cyrila_a_Metoda(%s) -- begin\n", nazov_modlitby[modlitba]);
-	_set_zalm1(modlitba, "z117.htm", "ZALM117");
-	_set_zalm2(modlitba, "z146.htm", "ZALM146");
-	_set_zalm3(modlitba, "ef1.htm", "CHVAL_EF1");
+	if((modlitba == MODL_VESPERY) || (modlitba == MODL_PRVE_VESPERY)){
+		_set_zalm1(modlitba, "z117.htm", "ZALM117");
+		_set_zalm2(modlitba, "z146.htm", "ZALM146");
+		_set_zalm3(modlitba, "ef1.htm", "CHVAL_EF1");
+	}
+	else if(modlitba == MODL_POSV_CITANIE){
+		_set_zalm1(modlitba, "z19.htm", "ZALM19,2-7");
+		_set_zalm2(modlitba, "z33.htm", "ZALM33_I");
+		_set_zalm3(modlitba, "z33.htm", "ZALM33_II");
+	}
 	Log("_set_zalmy_slavnost_Cyrila_a_Metoda(%s) -- end\n", nazov_modlitby[modlitba]);
 }
 void _set_zalmy_sv_kriz(int modlitba){
@@ -5231,7 +5245,8 @@ int _spol_cast_je_panna(_struct_sc sc){
 #define _vlastna_cast_full(modl) {\
 	_vlastna_cast_hymnus;\
 	_vlastna_cast_antifony;\
-	_vlastna_cast_kcitanie;\
+	if(modl == MODL_POSV_CITANIE){_vlastna_cast_1citanie;}\
+	else {_vlastna_cast_kcitanie;}\
 	_vlastna_cast_kresponz;\
 	if(modl == MODL_RANNE_CHVALY){_vlastna_cast_benediktus;}\
 	else if((modl == MODL_VESPERY) || (modl == MODL_PRVE_VESPERY)){_vlastna_cast_magnifikat;}\
@@ -5241,7 +5256,8 @@ int _spol_cast_je_panna(_struct_sc sc){
 #define _vlastna_cast_full_okrem_prosieb(modl) {\
 	_vlastna_cast_hymnus;\
 	_vlastna_cast_antifony;\
-	_vlastna_cast_kcitanie;\
+	if(modl == MODL_POSV_CITANIE){_vlastna_cast_1citanie;}\
+	else {_vlastna_cast_kcitanie;}\
 	_vlastna_cast_kresponz;\
 	if(modl == MODL_RANNE_CHVALY){_vlastna_cast_benediktus;}\
 	else if((modl == MODL_VESPERY) || (modl == MODL_PRVE_VESPERY)){_vlastna_cast_magnifikat;}\
@@ -8575,9 +8591,13 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_full_okrem_prosieb(modlitba);
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_antifony_ako_na_ranne_chvaly;
-                  _vlastna_cast_kcitanie;
+						_vlastna_cast_kcitanie;
 						_vlastna_cast_kresponz;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
@@ -8599,6 +8619,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						/* nema vespery, lebo su 1. vespery zo sv. cyrila a metoda */
 
@@ -8636,6 +8660,14 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_full(modlitba);
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_full(modlitba);
+						_set_zalmy_slavnost_Cyrila_a_Metoda(modlitba);
+						/* hymnus ako na vešpery */
+						sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(MODL_VESPERY), ANCHOR_HYMNUS);
+						_set_hymnus(modlitba, _file, _anchor);
+						set_LOG_svsv;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_slavnost_Cyrila_a_Metoda(modlitba);
@@ -8655,6 +8687,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -8686,6 +8722,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 
@@ -8708,16 +8748,20 @@ label_25_MAR:
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
-                  _vlastna_cast_hymnus;
+						_vlastna_cast_hymnus;
 						_vlastna_cast_benediktus
-                  _vlastna_cast_prosby;
+						_vlastna_cast_prosby;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
-                  _vlastna_cast_hymnus;
+						_vlastna_cast_hymnus;
 						_vlastna_cast_kresponz;
 						_vlastna_cast_magnifikat;
-                  _vlastna_cast_prosby;
+						_vlastna_cast_prosby;
 						_vlastna_cast_modlitba;
 
 						break;
@@ -8737,6 +8781,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -8759,6 +8807,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 
@@ -8779,6 +8831,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -8803,6 +8859,10 @@ label_25_MAR:
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
@@ -8826,10 +8886,15 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_antifony;
-                  _vlastna_cast_kresponz;
+						_vlastna_cast_kresponz;
 						_vlastna_cast_benediktus;
 						_vlastna_cast_prosby;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+						_vlastna_cast_1citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_hymnus;
@@ -8841,6 +8906,7 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+					_global_svaty1.typslav_lokal = LOKAL_SLAV_NITRA_PATRON; /* 2005-08-04: pridané */
 					mystrcpy(_global_svaty1.meno, "Sv. Andreja-Svorada a Benedikta, pustovníkov", MENO_SVIATKU);
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VIACERI);
@@ -8854,6 +8920,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -8877,14 +8947,22 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_antifony;
-                  _vlastna_cast_kresponz;
+						_vlastna_cast_kresponz;
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+						/* hymnus ako na vešpery */
+						sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(MODL_VESPERY), ANCHOR_HYMNUS);
+						_set_hymnus(modlitba, _file, _anchor);
+						set_LOG_svsv;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_antifony;
-                  _vlastna_cast_kresponz;
+						_vlastna_cast_kresponz;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
 
@@ -8905,6 +8983,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -9256,6 +9338,10 @@ label_25_MAR:
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_premenenie(modlitba); /* preto, lebo nespustame zaltar(); 28/03/2000A.D. */
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_full(modlitba);
+						_set_zalmy_premenenie(modlitba);
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_premenenie(modlitba);
@@ -9276,6 +9362,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 
@@ -9289,6 +9379,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -9319,6 +9413,10 @@ label_25_MAR:
 						_vlastna_cast_hymnus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_modlitba;
@@ -9341,6 +9439,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -9372,6 +9474,15 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_full_okrem_prosieb(modlitba);
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_1citanie;
+						_vlastna_cast_2citanie;
+						/* hymnus ako na vešpery */
+						sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(MODL_VESPERY), ANCHOR_HYMNUS);
+						_set_hymnus(modlitba, _file, _anchor);
+						set_LOG_svsv;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full_okrem_prosieb(modlitba);
 
@@ -9392,6 +9503,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
