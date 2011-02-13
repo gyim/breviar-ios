@@ -49,6 +49,7 @@
 /*                    - II. zväzok (ve¾ká noc)                 */
 /*                    - III. a IV. zväzok (obdobie cez rok)    */
 /*   2005-08-08a.D. | dokonèené vlastné èasti augusta          */
+/*   2005-10-13a.D. | dokonè. vlastné èasti sept-okt (len kód) */
 /*                                                             */
 /* notes |                                                     */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
@@ -1926,6 +1927,12 @@ void _set_zalmy_archanjelov(int modlitba){
 		_set_zalm1(MODL_VESPERY, "z8.htm", "ZALM8");
 		_set_zalm2(MODL_VESPERY, "z138.htm", "ZALM138");
 		_set_zalm3(MODL_VESPERY, "kol1.htm", "CHVAL_KOL1");
+	}
+	else if(modlitba == MODL_POSV_CITANIE){
+		/* 2005-10-13: Pridané */
+		_set_zalm1(MODL_POSV_CITANIE, "z97.htm", "ZALM97");
+		_set_zalm2(MODL_POSV_CITANIE, "z103.htm", "ZALM103_I_ANJ");
+		_set_zalm3(MODL_POSV_CITANIE, "z103.htm", "ZALM103_II_ANJ");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
@@ -10258,7 +10265,7 @@ label_25_MAR:
 						/* 2005-08-22: Všetko je zo spoloènej èasti na výroèie posviacky chrámu */
 					}
 					_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
-					_global_svaty1.typslav_lokal = LOKAL_SLAV_KOSICE_POSVIACKA; /* 2005-08-22: pridané */
+					_global_svaty1.typslav_lokal = LOKAL_SLAV_KOSICE; /* 2005-08-22: pridané */
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					mystrcpy(_global_svaty1.meno, "Výroèie posviacky katedrálneho chrámu v Košiciach", MENO_SVIATKU);
 					_global_svaty1.spolcast =
@@ -10487,6 +10494,10 @@ label_25_MAR:
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
@@ -10510,6 +10521,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 
@@ -10532,6 +10547,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 
@@ -10553,6 +10572,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -10577,6 +10600,11 @@ label_25_MAR:
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_1citanie;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_magnifikat;
@@ -10590,6 +10618,33 @@ label_25_MAR:
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					break;
+				case 22: /* 2005-10-13: pridané */
+					if(poradie_svaty == 1){
+						/* definovanie parametrov pre modlitbu */
+
+						if(query_type != PRM_DETAILY)
+							set_spolocna_cast(sc, poradie_svaty);
+
+						modlitba = MODL_RANNE_CHVALY;
+						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
+						modlitba = MODL_VESPERY;
+						_vlastna_cast_modlitba;
+
+						break;
+					}
+					_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+					_global_svaty1.typslav_lokal = LOKAL_SLAV_NITRA;
+					_global_svaty1.typslav = SLAV_SPOMIENKA;
+					mystrcpy(_global_svaty1.meno, "Sv. Emeráma, biskupa a muèeníka", MENO_SVIATKU);
+					_global_svaty1.spolcast =
+						_encode_spol_cast(MODL_SPOL_CAST_MUCENIK,
+							MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					break;
 				case 23: /* 2004-09-23, pridane - pater Pio */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
@@ -10599,6 +10654,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -10611,6 +10670,21 @@ label_25_MAR:
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 					break;
+				case 24: /* 2005-10-13: pridané */
+					if(poradie_svaty == 1){
+						/* definovanie parametrov pre modlitbu */
+						if(query_type != PRM_DETAILY)
+							set_spolocna_cast(sc, poradie_svaty);
+						break;
+						/* 2005-08-22: Všetko je zo spoloènej èasti na výroèie posviacky chrámu */
+					}
+					_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+					_global_svaty1.typslav_lokal = LOKAL_SLAV_BYSTRICA;
+					_global_svaty1.typslav = SLAV_SPOMIENKA;
+					mystrcpy(_global_svaty1.meno, "Výroèie posviacky katedrálneho chrámu v Banskej Bystrici", MENO_SVIATKU);
+					_global_svaty1.spolcast =
+						_encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+					break;
 				case 26:
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
@@ -10620,6 +10694,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -10642,6 +10720,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
@@ -10666,6 +10748,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 
@@ -10679,6 +10765,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -10708,6 +10798,10 @@ label_25_MAR:
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_archanjelov(modlitba);
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_full(modlitba);
+						_set_zalmy_archanjelov(modlitba);
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_archanjelov(modlitba);
@@ -10730,6 +10824,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_hymnus;
@@ -10757,6 +10855,10 @@ label_25_MAR:
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
@@ -10780,6 +10882,11 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_anjelov_strazcov(modlitba);
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_hymnus;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
@@ -10805,6 +10912,10 @@ label_25_MAR:
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_magnifikat;
@@ -10828,6 +10939,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 
@@ -10850,6 +10965,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_full_okrem_prosieb(modlitba);
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full_okrem_prosieb(modlitba);
 
@@ -10871,6 +10990,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 
@@ -10884,6 +11007,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -10913,6 +11040,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 
@@ -10935,6 +11066,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_hymnus;
@@ -10959,6 +11094,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 
@@ -10972,6 +11111,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -11003,6 +11146,10 @@ label_25_MAR:
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
@@ -11026,6 +11173,13 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_full(modlitba);
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_hymnus;
+						_vlastna_cast_kresponz;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_1citanie;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
 
@@ -11047,6 +11201,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 
@@ -11060,6 +11218,10 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -11090,6 +11252,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 
@@ -11111,6 +11277,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 
@@ -11122,6 +11292,36 @@ label_25_MAR:
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					break;
+				case 25: /* 2005-10-13: pridané */
+					if(poradie_svaty == 1){
+						/* definovanie parametrov pre modlitbu */
+						if(query_type != PRM_DETAILY)
+							set_spolocna_cast(sc, poradie_svaty);
+						break;
+						/* 2005-08-22: Všetko je zo spoloènej èasti na výroèie posviacky chrámu */
+					}
+					_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+					_global_svaty1.typslav_lokal = LOKAL_SLAV_SPIS;
+					_global_svaty1.typslav = SLAV_SPOMIENKA;
+					mystrcpy(_global_svaty1.meno, "Výroèie posviacky katedrálneho chrámu v Spišskom Podhradí", MENO_SVIATKU);
+					_global_svaty1.spolcast =
+						_encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+					break;
+				case 27: /* 2005-10-13: pridané */
+					if(poradie_svaty == 1){
+						/* definovanie parametrov pre modlitbu */
+						if(query_type != PRM_DETAILY)
+							set_spolocna_cast(sc, poradie_svaty);
+						break;
+						/* 2005-08-22: Všetko je zo spoloènej èasti na výroèie posviacky chrámu */
+					}
+					_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+					_global_svaty1.typslav_lokal = LOKAL_SLAV_ROZNAVA;
+					_global_svaty1.typslav = SLAV_SPOMIENKA;
+					mystrcpy(_global_svaty1.meno, "Výroèie posviacky katedrálneho chrámu v Rožòave", MENO_SVIATKU);
+					_global_svaty1.spolcast =
+						_encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+					break;
 				case 28:
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
@@ -11132,6 +11332,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;

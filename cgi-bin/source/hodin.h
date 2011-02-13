@@ -228,6 +228,10 @@ const char *nazov_slavenia_lokal[] =
 ,"v Bratislavsko-Trnavskej arcidiecéze a v Banskobystrickej, Košickej, Nitrianskej a Rožòavskej diecéze"
 ,"v Nitrianskej diecéze sviatok hlavných patrónov"
 ,"len v Košickej diecéze"
+,"len v Nitrianskej diecéze"
+,"len v Banskobystrickej diecéze"
+,"len v Spišskej diecéze"
+,"len v Rožòavskej diecéze"
 };
 
 const char *rimskymi_tyzden_zaltara[] =
