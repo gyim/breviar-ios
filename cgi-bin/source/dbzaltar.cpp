@@ -52,6 +52,7 @@
 /*   2005-10-13a.D. | dokonË. vlastnÈ Ëasti sept-okt (len kÛd) */
 /*   2005-11-20a.D. | zaË. modlitba cez deÚ, adv1              */
 /*   2005-11-24a.D. | skorektnenÈ: su_zalmy_nedela1tyzden      */
+/*   2006-01-19a.D. | dokonËen˝ janu·r a febru·r, sv.muûov     */
 /*                                                             */
 /* notes |                                                     */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
@@ -1885,6 +1886,28 @@ void _set_zalmy_sviatok_krstu(int modlitba){
 	}
 	Log("_set_zalmy_sviatok_krstu(%s) -- end\n", nazov_modlitby[modlitba]);
 }
+
+/* 2006-01-19: pridanÈ, vytvorenÈ pre Obetovanie P·na */
+void _set_zalmy_sviatok_obetovania(int modlitba){
+	Log("_set_zalmy_sviatok_obetovania(%s) -- begin\n", nazov_modlitby[modlitba]);
+	if(modlitba == MODL_VESPERY){
+		_set_zalm1(modlitba, "z110.htm", "ZALM110");
+		_set_zalm2(modlitba, "z130.htm", "ZALM130");
+		_set_zalm3(modlitba, "kol1.htm", "CHVAL_KOL1");
+	}
+	else if(modlitba == MODL_POSV_CITANIE){
+		_set_zalm1(modlitba, "z2.htm", "ZALM2");
+		_set_zalm2(modlitba, "z19.htm", "ZALM19,2-7");
+		_set_zalm3(modlitba, "z45.htm", "ZALM45");
+	}
+	else if(modlitba == MODL_PRVE_VESPERY){
+		_set_zalm1(modlitba, "z113.htm", "ZALM113");
+		_set_zalm2(modlitba, "z147.htm", "ZALM147,12-20");
+		_set_zalm3(modlitba, "flp2.htm", "CHVAL_FLP2");
+	}
+	Log("_set_zalmy_sviatok_obetovania(%s) -- end\n", nazov_modlitby[modlitba]);
+}
+
 /* 2005-08-04: PridanÈ posv‰tnÈ ËÌtania */
 void _set_zalmy_slavnost_Cyrila_a_Metoda(int modlitba){
 	Log("_set_zalmy_slavnost_Cyrila_a_Metoda(%s) -- begin\n", nazov_modlitby[modlitba]);
@@ -6215,7 +6238,10 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 
 	/* spolocna cast na sviatky apostolov */
 	if(a == MODL_SPOL_CAST_APOSTOL){
+
 		Log("/* spolocna cast na sviatky apostolov */\n");
+
+		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
 		if(_global_opt2 == MODL_ZALMY_ZO_SV){
 			Log("  _set_zalmy_sviatok_apostolov(%s)...\n", nazov_modlitby[modlitba]);
@@ -6287,6 +6313,8 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		(a == MODL_SPOL_CAST_DUCH_PAST_PAPEZ) ||
 		(a == MODL_SPOL_CAST_DUCH_PAST_VIACERI)){
 
+		Log("/* spolocna cast na sviatky duchovnych pastierov */\n");
+
 		sprintf(_anchor_head, "%s_", ANCHOR_SPOL_CAST_DUCH_PAST);
 		Log("  _anchor_head == %s\n", _anchor_head);
 		sprintf(_anchor_pom, "%s_", nazov_spolc_ANCHOR[a]);
@@ -6301,7 +6329,7 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		}
 		Log("  _anchor_zvazok == %s\n", _anchor_zvazok);
 
-		Log("/* spolocna cast na sviatky duchovnych pastierov */\n");
+		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
 		if(_global_opt2 == MODL_ZALMY_ZO_SV){
 			Log("  _set_zalmy_sviatok_duch_past(%s)...\n", nazov_modlitby[modlitba]);
@@ -6360,7 +6388,9 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 	else if(a == MODL_SPOL_CAST_UCITEL_CIRKVI){
 		/* najprv nastavime podla spol. casti duchovnych pastierov resp.
 		 * panien... */
+
 		Log("/* spolocna cast na sviatky ucitelov cirkvi */\n");
+
 		b = _spol_cast_vyber_dp_pn(sc);
 		if(b != MODL_SPOL_CAST_NEURCENA){
 			Log("spustam _set_spolocna_cast(%s) druhy raz (vnorene) -- \n  kvoli castiam, ktore pre ucitelov cirkvi nie su\n", nazov_spolc[b]);
@@ -6415,6 +6445,8 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 	else if((a == MODL_SPOL_CAST_MUCENIK) ||
 		(a == MODL_SPOL_CAST_MUCENICA)){
 
+		Log("/* spolocna cast na sviatky jedneho mucenika */\n");
+
 		sprintf(_anchor_head, "%s_", ANCHOR_SPOL_CAST_JEDEN_MUCENIK);
 		Log("  _anchor_head == %s\n", _anchor_head);
 		sprintf(_anchor_pom, "%s_", nazov_spolc_ANCHOR[a]);
@@ -6429,7 +6461,7 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		}
 		Log("  _anchor_zvazok == %s\n", _anchor_zvazok);
 
-		Log("/* spolocna cast na sviatky jedneho mucenika */\n");
+		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
 		if(_global_opt2 == MODL_ZALMY_ZO_SV){
 			Log("  _set_zalmy_sviatok_muc(%s)...\n", nazov_modlitby[modlitba]);
@@ -6486,6 +6518,8 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 	/* spolocna cast na sviatky viacerych mucenikov */
 	else if(a == MODL_SPOL_CAST_VIAC_MUCENIKOV){
 
+		Log("/* spolocna cast na sviatky viacerych mucenikov */\n");
+
 		sprintf(_anchor_pom, "%s_", nazov_spolc_ANCHOR[a]);
 		Log("  _anchor_pom == %s\n", _anchor_pom);
 		/* 2005-08-16: pridan˝ ÔalöÌ pomocn˝ anchor, ktor˝ pojedn·va o zv‰zku brevi·ra kvÙli posv. ËÌtaniam */
@@ -6495,7 +6529,6 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		}
 		Log("  _anchor_zvazok == %s\n", _anchor_zvazok);
 
-		Log("/* spolocna cast na sviatky viacerych mucenikov */\n");
 		modlitba = MODL_PRVE_VESPERY;
 		if(_global_opt2 == MODL_ZALMY_ZO_SV){
 			Log("  _set_zalmy_sviatok_muc(%s, 2)...\n", nazov_modlitby[modlitba]);
@@ -6545,12 +6578,13 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		}/* v OBD_OKTAVA_NARODENIA -- vespery su zo dna */
 
 	}/* MODL_SPOL_CAST_VIAC_MUCENIKOV */
-// 2005-08-16: tu treba pokraËovaù
 
 	/* spolocna cast na sviatky svatych muzov/zien -- pre vychovavatelov */
 	else if((a == MODL_SPOL_CAST_SV_MUZ_VYCH) || (a == MODL_SPOL_CAST_SV_ZENA_VYCH)){
 		/* najprv nastavime podla spol. casti svatych muzov/zien... */
+
 		Log("/* spolocna cast na sviatky svatych muzov/zien -- pre vychovavatelov */\n");
+
 		b = MODL_SPOL_CAST_NEURCENA;
 		if(a == MODL_SPOL_CAST_SV_ZENA_VYCH)
 			b = MODL_SPOL_CAST_SV_ZENA;
@@ -6580,12 +6614,16 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		_spolocna_cast_magnifikat;
 		_spolocna_cast_modlitba;
 
+		/* posv‰tnÈ ËÌtanie 2006-01-19: modlitba = MODL_POSV_CITANIE; netreba niË samostatne, iba ak 2. ËÌtanie */
+
 	}/* MODL_SPOL_CAST_SV_MUZ/ZENA_VYCH */
 
 	/* spolocna cast na sviatky svatych muzov/zien -- pre tych, ktori konali skutky milosrdenstva */
 	else if((a == MODL_SPOL_CAST_SV_MUZ_SKUTKYMIL) || (a == MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL)){
 		/* najprv nastavime podla spol. casti svatych muzov/zien... */
+
 		Log("/* spolocna cast na sviatky svatych muzov/zien -- pre tych, co konali skutky milosrdenstva */\n");
+
 		b = MODL_SPOL_CAST_NEURCENA;
 		if(a == MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL)
 			b = MODL_SPOL_CAST_SV_ZENA;
@@ -6615,12 +6653,16 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		_spolocna_cast_magnifikat;
 		_spolocna_cast_modlitba;
 
+		/* posv‰tnÈ ËÌtanie 2006-01-19: modlitba = MODL_POSV_CITANIE; netreba niË samostatne, iba ak 2. ËÌtanie */
+
 	}/* MODL_SPOL_CAST_SV_MUZ/ZENA_SKUTKYMIL */
 
 	/* spolocna cast na sviatky svatych muzov/zien -- pre reholnikov */
 	else if((a == MODL_SPOL_CAST_SV_MUZ_REHOLNIK) || (a == MODL_SPOL_CAST_SV_ZENA_REHOLNIK)){
 		/* najprv nastavime podla spol. casti svatych muzov/zien... */
+
 		Log("/* spolocna cast na sviatky svatych muzov/zien -- pre reholnikov */\n");
+
 		b = MODL_SPOL_CAST_NEURCENA;
 		if(a == MODL_SPOL_CAST_SV_ZENA_REHOLNIK)
 			b = MODL_SPOL_CAST_SV_ZENA;
@@ -6659,14 +6701,17 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 	else if((a == MODL_SPOL_CAST_SV_MUZ) ||
 		(a == MODL_SPOL_CAST_SV_MUZ_VIACERI)){
 
+		Log("/* spolocna cast na sviatky svatych muzov */\n");
+
 		sprintf(_anchor_head, "%s_", nazov_spolc_ANCHOR[MODL_SPOL_CAST_SV_MUZ]);
 		Log("  _anchor_head == %s\n", _anchor_head);
 		sprintf(_anchor_pom, "%s_", nazov_spolc_ANCHOR[a]);
 		Log("  _anchor_pom == %s\n", _anchor_pom);
-		Log("/* spolocna cast na sviatky svatych muzov */\n");
+
+		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
 		if(_global_opt2 == MODL_ZALMY_ZO_SV){
-			Log("  _set_zalmy_sviatok_duch_past(%s)...\n", nazov_modlitby[modlitba]);
+			Log("  _set_zalmy_sviatok_duch_past(%s)... - pretoûe pre sv‰t˝ch muûov sa ber˙ tie istÈ ûalmy\n", nazov_modlitby[modlitba]);
 			_set_zalmy_sviatok_duch_past(modlitba);
 		}
 		_spolocna_cast_full(modlitba);
@@ -6690,8 +6735,21 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 			Log("  _set_zalmy_sviatok_duch_past(%s)...\n", nazov_modlitby[modlitba]);
 			_set_zalmy_sviatok_duch_past(modlitba);
 		}
+
+		/* 2005-08-05: pridan˝ ÔalöÌ pomocn˝ anchor, ktor˝ pojedn·va o zv‰zku brevi·ra kvÙli posv. ËÌtaniam */
+		sprintf(_anchor_zvazok, "%s_", zvazok_OBD[_global_den.litobd]);
+		if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
+			strcat(_anchor_zvazok, VELKONOCNA_PRIPONA);
+		}
+		Log("  _anchor_zvazok == %s\n", _anchor_zvazok);
+
 		_spolocna_cast_full(modlitba);
-		/* 2005-07-22: ToDo: skontrolovaù, Ëi pre öpeci·lne obdobia nie s˙ öpeci·lne Ëasti z obdobia */
+		/* 2005-08-05: 1. ËÌtanie je zv‰Ëöa odliönÈ pre spoloËnÈ Ëasti sviatkov sv‰t˝ch nasledovne:
+		 * - I. zv‰zok (advent, vianoce) a II. zv‰zok (pÙst),
+		 * - II. zv‰zok (veæk· noc),
+		 * - III. a IV. zv‰zok (obdobie cez rok).
+		 */
+		_spolocna_cast_1cit_zvazok(modlitba, STR_EMPTY /* 2005-08-16: _anchor_pom netreba */, _anchor_zvazok, _anchor_pom, _file);
 
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
@@ -6713,11 +6771,14 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 	else if((a == MODL_SPOL_CAST_SV_ZENA) ||
 		(a == MODL_SPOL_CAST_SV_ZENA_VIACERE)){
 
+		Log("/* spolocna cast na sviatky svatych zien */\n");
+
 		sprintf(_anchor_head, "%s_", nazov_spolc_ANCHOR[MODL_SPOL_CAST_SV_ZENA]);
 		Log("  _anchor_head == %s\n", _anchor_head);
 		sprintf(_anchor_pom, "%s_", nazov_spolc_ANCHOR[a]);
 		Log("  _anchor_pom == %s\n", _anchor_pom);
-		Log("/* spolocna cast na sviatky svatych zien */\n");
+
+		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
 		if(_global_opt2 == MODL_ZALMY_ZO_SV){
 			Log("  _set_zalmy_sviatok_panien(%s)...\n", nazov_modlitby[modlitba]);
@@ -6742,8 +6803,21 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 			Log("  _set_zalmy_sviatok_panien(%s)...\n", nazov_modlitby[modlitba]);
 			_set_zalmy_sviatok_panien(modlitba);
 		}
+
+		/* 2005-08-05: pridan˝ ÔalöÌ pomocn˝ anchor, ktor˝ pojedn·va o zv‰zku brevi·ra kvÙli posv. ËÌtaniam */
+		sprintf(_anchor_zvazok, "%s_", zvazok_OBD[_global_den.litobd]);
+		if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
+			strcat(_anchor_zvazok, VELKONOCNA_PRIPONA);
+		}
+		Log("  _anchor_zvazok == %s\n", _anchor_zvazok);
+
 		_spolocna_cast_full(modlitba);
-		/* 2005-07-22: ToDo: skontrolovaù, Ëi pre öpeci·lne obdobia nie s˙ öpeci·lne Ëasti z obdobia */
+		/* 2005-08-05: 1. ËÌtanie je zv‰Ëöa odliönÈ pre spoloËnÈ Ëasti sviatkov sv‰t˝ch nasledovne:
+		 * - I. zv‰zok (advent, vianoce) a II. zv‰zok (pÙst),
+		 * - II. zv‰zok (veæk· noc),
+		 * - III. a IV. zv‰zok (obdobie cez rok).
+		 */
+		_spolocna_cast_1cit_zvazok(modlitba, STR_EMPTY /* 2005-08-16: _anchor_pom netreba */, _anchor_zvazok, _anchor_pom, _file);
 
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
@@ -6763,6 +6837,8 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		(a == MODL_SPOL_CAST_PANNY_VIACERE)){
 
 		Log("/* spolocna cast na sviatky panien */\n");
+
+		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
 		if(_global_opt2 == MODL_ZALMY_ZO_SV){
 			Log("  _set_zalmy_sviatok_panien(%s)...\n", nazov_modlitby[modlitba]);
@@ -6811,6 +6887,8 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 	else if(a == MODL_SPOL_CAST_PANNA_MARIA){ /* 2005-08-25: UpravenÈ */
 
 		Log("/* spolocna cast na sviatky Panny Marie */\n");
+
+		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
 		if(_global_opt2 == MODL_ZALMY_ZO_SV){
 			Log("  _set_zalmy_sviatok_marie(%s)...\n", nazov_modlitby[modlitba]);
@@ -6870,6 +6948,8 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 
 	}/* MODL_SPOL_CAST_PANNA_MARIA */
 
+// 2006-01-19 // 2005-08-16: tu treba pokraËovaù
+
 	/* spolocna cast na oficium za zosnulych */
 	else if(a == MODL_SPOL_CAST_ZA_ZOSNULYCH){
 
@@ -6905,6 +6985,8 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 	else if(a == MODL_SPOL_CAST_POSVIACKA_CHRAMU){
 
 		Log("/* spolocna cast na sviatky posviacky chramu */\n");
+
+		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
 		if(_global_opt2 == MODL_ZALMY_ZO_SV){
 			Log("  _set_zalmy_posviacka_chramu(%s)...\n", nazov_modlitby[modlitba]);
@@ -6941,7 +7023,6 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		}/* v OBD_OKTAVA_NARODENIA -- vespery su zo dna */
 
 	}/* MODL_SPOL_CAST_POSVIACKA_CHRAMU */
-
 
 	Log("_set_spolocna_cast(%s) -- end\n", nazov_spolc[a]);
 }/* _set_spolocna_cast(); -- dva argumenty */
@@ -7586,6 +7667,10 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_1nedele_rch();
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_full(modlitba);
+						_set_zalmy_sviatok_obetovania(modlitba);
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_sviatok_krstu(modlitba);
@@ -7608,6 +7693,10 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 
@@ -7621,6 +7710,10 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -7651,6 +7744,10 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
@@ -7676,6 +7773,10 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
@@ -7700,6 +7801,10 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
@@ -7722,6 +7827,10 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
@@ -7746,6 +7855,10 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
@@ -7768,6 +7881,10 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
@@ -7792,6 +7909,10 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
@@ -7813,6 +7934,10 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
@@ -7841,6 +7966,14 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_hymnus;
+						_vlastna_cast_antifony;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_kresponz;
+						_vlastna_cast_1citanie;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_antifony;
@@ -7866,6 +7999,10 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
@@ -7896,6 +8033,10 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
@@ -7919,6 +8060,10 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
@@ -7941,6 +8086,10 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
@@ -7966,6 +8115,10 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
@@ -7989,6 +8142,10 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
@@ -8011,6 +8168,11 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
 						/* nema modlitba = MODL_VESPERY, lebo su prve vespery slavnosti sv. Jozefa */
 						break;
 					}
@@ -8051,6 +8213,15 @@ label_19_MAR:
 						}
 						_set_zalmy_1nedele_rch();
 
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_hymnus;
+						_vlastna_cast_antifony;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_kresponz;
+						_vlastna_cast_1citanie;
+						_vlastna_cast_2citanie;
+						/* xxx - 2006-01-19 - bude treba eöte Aleluja vo veækonoËnom obdobÌ */
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
 						if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
@@ -8088,6 +8259,10 @@ label_19_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_magnifikat;
@@ -8130,6 +8305,16 @@ label_25_MAR:
 							_vlastna_cast_kresponz_po;
 						}
 						_set_zalmy_1nedele_rch();
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_hymnus;
+						_vlastna_cast_antifony;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_kresponz;
+						_vlastna_cast_1citanie;
+						_vlastna_cast_2citanie;
+						/* xxx - 2006-01-19 - bude treba eöte Aleluja vo veækonoËnom obdobÌ */
+						_set_zalmy_sviatok_obetovania(modlitba);
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
