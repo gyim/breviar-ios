@@ -6012,7 +6012,7 @@ int getArgv(int argc, char **argv){
 					printf("\tProgram vytvara stranky (HTML vystup) pre Liturgiu hodin.\n");
 					/* build pridany 2003-07-04 */
 					printf("\tBuild: %s\n", BUILD_DATE);
-					printf("\t(c) 1999-2005 Juraj Vidéky <videky@breviar.sk>\n");
+					printf("\t(c) 1999-2006 Juraj Vidéky <videky@breviar.sk>\n");
 					printf("\n");
 					printf("\npouzitie:\n");
 					printf("\tlh [prepinac [hodnota]...]\n");
@@ -7048,7 +7048,7 @@ int main(int argc, char **argv){
 	_main_LOG("\n");
 // #endif
 	
-	_main_LOG("-- log file programu pre Liturgiu hodin (c)1999-2005 Juraj Videky --\n");
+	_main_LOG("-- log file programu pre Liturgiu hodin (c)1999-2006 Juraj Videky --\n");
 
 	/* config: dorobene 30/03/2000A.D. */
 	_main_LOG("first, reading configuration (file %s)...\n", CONFIG_FILE);

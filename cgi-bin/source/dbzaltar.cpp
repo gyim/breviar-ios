@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* dbzaltar.cpp                                                */
-/* (c)1999-2005 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2006 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | program tvoriaci stranky pre liturgiu hodin   */
 /* document history                                            */
@@ -8472,9 +8472,13 @@ label_25_MAR:
 
 						break;
 					}
+					/* 2006-01-11: pôvodne to bola spomienka, ale don Valábek ma upozornil, že sa jedná o sviatok; upravený názov
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
-					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Kataríny Sienskej, panny a uèite¾ky Cirkvi", MENO_SVIATKU);
+					_global_svaty1.smer = 10; - povinne spomienky podla vseobecneho kalendara 
+					*/
+					_global_svaty1.typslav = SLAV_SVIATOK;
+					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
+					mystrcpy(_global_svaty1.meno, "Sv. Kataríny Sienskej, panny a uèite¾ky Cirkvi, spolupatrónky Európy", MENO_SVIATKU);
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_PANNA);
 					break;
@@ -9898,9 +9902,11 @@ label_25_MAR:
 					 *  sv. Teréziou Benediktou z Kríza spolupatrónkou Európy a teda je 
 					 *  to v Európe sviatok od 1999."
 					 * 07/09/2001A.D.
+					 *
+					 * 2006-01-11: opravené: do názvu pridané ", spolupatrónky Európy"
 					 */
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Brigity, reho¾níèky", MENO_SVIATKU);
+					mystrcpy(_global_svaty1.meno, "Sv. Brigity, reho¾níèky, spolupatrónky Európy", MENO_SVIATKU);
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 					break;
@@ -10390,9 +10396,11 @@ label_25_MAR:
 					 *  sv. Teréziou Benediktou z Kríza spolupatrónkou Európy a teda je 
 					 *  to v Európe sviatok od 1999."
 					 * 26/09/2001A.D.
+					 *
+					 * 2006-01-11: opravené, do názvu pridané: ", spolupatrónky Európy"
 					 */
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Terézie Benedikty, reho¾níèky a muèenice", MENO_SVIATKU);
+					mystrcpy(_global_svaty1.meno, "Sv. Terézie Benedikty, reho¾níèky a muèenice, spolupatrónky Európy", MENO_SVIATKU);
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK,
 							MODL_SPOL_CAST_MUCENICA);

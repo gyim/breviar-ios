@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* mysystem.h                                                  */
-/* (c)1999-2005 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2006 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje jediny #define, urcujuci, v akom     */
 /*               systeme program pracuje; ovplyvnuje tvorbu    */
