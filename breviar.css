@@ -1,6 +1,7 @@
-/* apply to all elements, used for <span> (character style) and <div> (paragraph style), 2003-07-02 */
+/* apply to all elements, used for <span> (character style) and <div> (paragraph style), 2005-07-27 */
 .red { color: #ff0000; }
 .blue { color: #0000ff; }
+.redsmall { color: #ff0000; font-size: 66%; }
 .redbold { color: #ff0000; font-weight: bold; }
 .bluebold { color: #0000ff; font-weight: bold; }
 .bold { font-weight: bold; }
