@@ -2562,6 +2562,7 @@ Log(_global_modl_posv_citanie); /* 2005-03-26: Pridany vypis */
 				_set_modlitba(modlitba, _file, _anchor);
 				set_LOG_litobd;
 
+			/* modlitbu cez deÚ nie je potrebnÈ öpeci·lne rieöiù, pozn·mka 2005-12-17 */
 			}/* nedela */
 			else{
 
@@ -2581,8 +2582,8 @@ Log(_global_modl_posv_citanie); /* 2005-03-26: Pridany vypis */
 				_set_kresponz(modlitba, _file_pc, _anchor);
 				set_LOG_litobd;
 
-				/* antifony */
-				sprintf(_anchor, "%s%d%s%c_%s",
+				/* antifony - s˙ ako pre obdobie cez rok, z beûnÈho ûalt·ra; 2005-12-17 */
+/*				sprintf(_anchor, "%s%d%s%c_%s",
 					nazov_OBD[litobd],
 					tyzden,
 					nazov_DN_asci[den],
@@ -2606,7 +2607,7 @@ Log(_global_modl_posv_citanie); /* 2005-03-26: Pridany vypis */
 					ANCHOR_ANTIFONA3);
 				_set_antifona3(modlitba, _file_pc, _anchor);
 				set_LOG_litobd;
-
+*/
 			/* ranne chvaly */
 				/* hymnus - rovnaky pre vsetky dni */
 				/* kratke responzorium - rovnake pre vsetky vsedne dni */
@@ -2888,7 +2889,173 @@ Log(_global_modl_posv_citanie); /* 2005-03-26: Pridany vypis */
 			_set_prosby(modlitba, _file, _anchor);
 			set_LOG_litobd;
 
-		/* posvatne citanie, pridane 2003-11-19, modifikovane 2003-12-07 */
+		/* modlitba cez deÚ, pridanÈ 2005-12-17 trochu podæa ADV.I. */
+			/* hymnus */
+			modlitba = MODL_PREDPOLUDNIM;
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_HYMNUS);
+			_set_hymnus(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* antifÛny */
+				/* 1. antifÛna */
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA1);
+			_set_antifona1(modlitba, _file, _anchor);
+			set_LOG_litobd;
+				/* 2. antifÛna */
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA2);
+			_set_antifona2(modlitba, _file, _anchor);
+			set_LOG_litobd;
+				/* 3. antifÛna */
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA3);
+			_set_antifona3(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* Ôalöie z·visia od d·tumu (17. -- 24. december) */
+			/* kr·tke ËÌtanie */
+			sprintf(_anchor, "%s%d%c_%s",
+				nazov_OBD[litobd],
+				_global_den.den,
+				pismenko_modlitby(modlitba),
+				ANCHOR_KCITANIE);
+			_set_kcitanie(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* kr·tke responzÛrium - rovnakÈ pre vöetky adventnÈ t˝ûdne */
+			sprintf(_anchor, "%s%d%c_%s",
+				nazov_OBD[litobd],
+				_global_den.den,
+				pismenko_modlitby(modlitba),
+				ANCHOR_KRESPONZ);
+			_set_kresponz(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* modlitba ako na rannÈ chv·ly aj veöpery */
+			sprintf(_anchor, "%s%d_%s",
+				nazov_OBD[litobd],
+				_global_den.den,
+				ANCHOR_MODLITBA);
+			_set_modlitba(modlitba, _file, _anchor);
+			set_LOG_litobd;
+
+			/* hymnus */
+			modlitba = MODL_NAPOLUDNIE;
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_HYMNUS);
+			_set_hymnus(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* antifÛny */
+				/* 1. antifÛna */
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA1);
+			_set_antifona1(modlitba, _file, _anchor);
+			set_LOG_litobd;
+				/* 2. antifÛna */
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA2);
+			_set_antifona2(modlitba, _file, _anchor);
+			set_LOG_litobd;
+				/* 3. antifÛna */
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA3);
+			_set_antifona3(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* Ôalöie z·visia od d·tumu (17. -- 24. december) */
+			/* kr·tke ËÌtanie */
+			sprintf(_anchor, "%s%d%c_%s",
+				nazov_OBD[litobd],
+				_global_den.den,
+				pismenko_modlitby(modlitba),
+				ANCHOR_KCITANIE);
+			_set_kcitanie(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* kr·tke responzÛrium - rovnakÈ pre vöetky adventnÈ t˝ûdne */
+			sprintf(_anchor, "%s%d%c_%s",
+				nazov_OBD[litobd],
+				_global_den.den,
+				pismenko_modlitby(modlitba),
+				ANCHOR_KRESPONZ);
+			_set_kresponz(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* modlitba ako na rannÈ chv·ly aj veöpery */
+			sprintf(_anchor, "%s%d_%s",
+				nazov_OBD[litobd],
+				_global_den.den,
+				ANCHOR_MODLITBA);
+			_set_modlitba(modlitba, _file, _anchor);
+			set_LOG_litobd;
+
+			/* hymnus */
+			modlitba = MODL_POPOLUDNI;
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_HYMNUS);
+			_set_hymnus(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* antifÛny */
+				/* 1. antifÛna */
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA1);
+			_set_antifona1(modlitba, _file, _anchor);
+			set_LOG_litobd;
+				/* 2. antifÛna */
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA2);
+			_set_antifona2(modlitba, _file, _anchor);
+			set_LOG_litobd;
+				/* 3. antifÛna */
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA3);
+			_set_antifona3(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* Ôalöie z·visia od d·tumu (17. -- 24. december) */
+			/* kr·tke ËÌtanie */
+			sprintf(_anchor, "%s%d%c_%s",
+				nazov_OBD[litobd],
+				_global_den.den,
+				pismenko_modlitby(modlitba),
+				ANCHOR_KCITANIE);
+			_set_kcitanie(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* kr·tke responzÛrium - rovnakÈ pre vöetky adventnÈ t˝ûdne */
+			sprintf(_anchor, "%s%d%c_%s",
+				nazov_OBD[litobd],
+				_global_den.den,
+				pismenko_modlitby(modlitba),
+				ANCHOR_KRESPONZ);
+			_set_kresponz(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* modlitba ako na rannÈ chv·ly aj veöpery */
+			sprintf(_anchor, "%s%d_%s",
+				nazov_OBD[litobd],
+				_global_den.den,
+				ANCHOR_MODLITBA);
+			_set_modlitba(modlitba, _file, _anchor);
+			set_LOG_litobd;
+
+			/* posvatne citanie, pridane 2003-11-19, modifikovane 2003-12-07 */
 			/* hymnus */
 			modlitba = MODL_POSV_CITANIE;
 			sprintf(_anchor, "%s%c_%s",
@@ -3076,11 +3243,156 @@ Log(_global_modl_posv_citanie); /* 2005-03-26: Pridany vypis */
 					_set_modlitba(modlitba, _file, _anchor);
 					set_LOG_litobd;
 
+				/* modlitba cez deÚ, pridanÈ 2005-12-17 podæa 2005-11-20 (ADV.I.) okrem hymnov */
+					modlitba = MODL_PREDPOLUDNIM;
+					/* antifÛny */
+						/* 1. antifÛna */
+					sprintf(_anchor, "%s%c_%s",
+						nazov_OBD[litobd],
+						pismenko_modlitby(modlitba),
+						ANCHOR_ANTIFONA1);
+					_set_antifona1(modlitba, _file, _anchor);
+					set_LOG_litobd;
+						/* 2. antifÛna */
+					sprintf(_anchor, "%s%c_%s",
+						nazov_OBD[litobd],
+						pismenko_modlitby(modlitba),
+						ANCHOR_ANTIFONA2);
+					_set_antifona2(modlitba, _file, _anchor);
+					set_LOG_litobd;
+						/* 3. antifÛna */
+					sprintf(_anchor, "%s%c_%s",
+						nazov_OBD[litobd],
+						pismenko_modlitby(modlitba),
+						ANCHOR_ANTIFONA3);
+					_set_antifona3(modlitba, _file, _anchor);
+					set_LOG_litobd;
+					/* kr·tke ËÌtanie - rovnakÈ pre vöetky adventnÈ t˝ûdne */
+					sprintf(_anchor, "%s%s%c_%s",
+						nazov_OBD[litobd],
+						nazov_DN_asci[den],
+						pismenko_modlitby(modlitba),
+						ANCHOR_KCITANIE);
+					_set_kcitanie(modlitba, _file, _anchor);
+					set_LOG_litobd;
+					/* kr·tke responzÛrium - rovnakÈ pre vöetky adventnÈ t˝ûdne */
+					sprintf(_anchor, "%s%s%c_%s",
+						nazov_OBD[litobd],
+						nazov_DN_asci[den],
+						pismenko_modlitby(modlitba),
+						ANCHOR_KRESPONZ);
+					_set_kresponz(modlitba, _file, _anchor);
+					set_LOG_litobd;
+					/* modlitba ako na rannÈ chv·ly */
+					sprintf(_anchor, "%s%d%s_%s",
+						nazov_OBD[litobd],
+						tyzden,
+						nazov_DN_asci[den],
+						ANCHOR_MODLITBA);
+					_set_modlitba(modlitba, _file, _anchor);
+					set_LOG_litobd;
+
+					modlitba = MODL_NAPOLUDNIE;
+					/* antifÛny */
+						/* 1. antifÛna */
+					sprintf(_anchor, "%s%c_%s",
+						nazov_OBD[litobd],
+						pismenko_modlitby(modlitba),
+						ANCHOR_ANTIFONA1);
+					_set_antifona1(modlitba, _file, _anchor);
+					set_LOG_litobd;
+						/* 2. antifÛna */
+					sprintf(_anchor, "%s%c_%s",
+						nazov_OBD[litobd],
+						pismenko_modlitby(modlitba),
+						ANCHOR_ANTIFONA2);
+					_set_antifona2(modlitba, _file, _anchor);
+					set_LOG_litobd;
+						/* 3. antifÛna */
+					sprintf(_anchor, "%s%c_%s",
+						nazov_OBD[litobd],
+						pismenko_modlitby(modlitba),
+						ANCHOR_ANTIFONA3);
+					_set_antifona3(modlitba, _file, _anchor);
+					set_LOG_litobd;
+					/* kr·tke ËÌtanie - rovnakÈ pre vöetky adventnÈ t˝ûdne */
+					sprintf(_anchor, "%s%s%c_%s",
+						nazov_OBD[litobd],
+						nazov_DN_asci[den],
+						pismenko_modlitby(modlitba),
+						ANCHOR_KCITANIE);
+					_set_kcitanie(modlitba, _file, _anchor);
+					set_LOG_litobd;
+					/* kr·tke responzÛrium - rovnakÈ pre vöetky adventnÈ t˝ûdne */
+					sprintf(_anchor, "%s%s%c_%s",
+						nazov_OBD[litobd],
+						nazov_DN_asci[den],
+						pismenko_modlitby(modlitba),
+						ANCHOR_KRESPONZ);
+					_set_kresponz(modlitba, _file, _anchor);
+					set_LOG_litobd;
+					/* modlitba ako na rannÈ chv·ly */
+					sprintf(_anchor, "%s%d%s_%s",
+						nazov_OBD[litobd],
+						tyzden,
+						nazov_DN_asci[den],
+						ANCHOR_MODLITBA);
+					_set_modlitba(modlitba, _file, _anchor);
+					set_LOG_litobd;
+
+					modlitba = MODL_POPOLUDNI;
+					/* antifÛny */
+						/* 1. antifÛna */
+					sprintf(_anchor, "%s%c_%s",
+						nazov_OBD[litobd],
+						pismenko_modlitby(modlitba),
+						ANCHOR_ANTIFONA1);
+					_set_antifona1(modlitba, _file, _anchor);
+					set_LOG_litobd;
+						/* 2. antifÛna */
+					sprintf(_anchor, "%s%c_%s",
+						nazov_OBD[litobd],
+						pismenko_modlitby(modlitba),
+						ANCHOR_ANTIFONA2);
+					_set_antifona2(modlitba, _file, _anchor);
+					set_LOG_litobd;
+						/* 3. antifÛna */
+					sprintf(_anchor, "%s%c_%s",
+						nazov_OBD[litobd],
+						pismenko_modlitby(modlitba),
+						ANCHOR_ANTIFONA3);
+					_set_antifona3(modlitba, _file, _anchor);
+					set_LOG_litobd;
+					/* kr·tke ËÌtanie - rovnakÈ pre vöetky adventnÈ t˝ûdne */
+					sprintf(_anchor, "%s%s%c_%s",
+						nazov_OBD[litobd],
+						nazov_DN_asci[den],
+						pismenko_modlitby(modlitba),
+						ANCHOR_KCITANIE);
+					_set_kcitanie(modlitba, _file, _anchor);
+					set_LOG_litobd;
+					/* kr·tke responzÛrium - rovnakÈ pre vöetky adventnÈ t˝ûdne */
+					sprintf(_anchor, "%s%s%c_%s",
+						nazov_OBD[litobd],
+						nazov_DN_asci[den],
+						pismenko_modlitby(modlitba),
+						ANCHOR_KRESPONZ);
+					_set_kresponz(modlitba, _file, _anchor);
+					set_LOG_litobd;
+					/* modlitba ako na rannÈ chv·ly */
+					sprintf(_anchor, "%s%d%s_%s",
+						nazov_OBD[litobd],
+						tyzden,
+						nazov_DN_asci[den],
+						ANCHOR_MODLITBA);
+					_set_modlitba(modlitba, _file, _anchor);
+					set_LOG_litobd;
 				}/* tretia adventna nedela */
 				else{/* tyzden == 4, stvrta adventna nedela */
 
 					file_name_litobd(OBD_ADVENTNE_I);
-				/* prve vespery */
+
+					/* prve vespery */
 					/* kratke responzorium - rovnaka pre prve a druhe vespery a pre vsetky nedele */
 					sprintf(_anchor, "%s%s%c_%s",
 						nazov_OBD[OBD_ADVENTNE_I],
@@ -3282,6 +3594,97 @@ Log(_global_modl_posv_citanie); /* 2005-03-26: Pridany vypis */
 					_set_modlitba(modlitba, _file, _anchor);
 					set_LOG_litobd;
 
+				/* modlitba cez deÚ, pridanÈ 2005-12-17 trochu podæa 2005-11-20 (ADV.I.) okrem hymnov a antifÛn */
+
+					modlitba = MODL_PREDPOLUDNIM;
+					/* modlitba */
+					sprintf(_anchor, "%s%d%s_%s",
+						nazov_OBD[litobd],
+						tyzden,
+						nazov_DN_asci[den],
+						ANCHOR_MODLITBA);
+					_set_modlitba(modlitba, _file, _anchor);
+					set_LOG_litobd;
+
+					modlitba = MODL_NAPOLUDNIE;
+					/* modlitba */
+					sprintf(_anchor, "%s%d%s_%s",
+						nazov_OBD[litobd],
+						tyzden,
+						nazov_DN_asci[den],
+						ANCHOR_MODLITBA);
+					_set_modlitba(modlitba, _file, _anchor);
+					set_LOG_litobd;
+
+					modlitba = MODL_POPOLUDNI;
+					/* modlitba */
+					sprintf(_anchor, "%s%d%s_%s",
+						nazov_OBD[litobd],
+						tyzden,
+						nazov_DN_asci[den],
+						ANCHOR_MODLITBA);
+					_set_modlitba(modlitba, _file, _anchor);
+					set_LOG_litobd;
+
+					file_name_litobd(OBD_ADVENTNE_II);
+
+					modlitba = MODL_PREDPOLUDNIM;
+					/* Ôalöie z·visia od d·tumu (18. dec. pre nedele okrem 24. decembra) */
+					/* kr·tke ËÌtanie */
+					sprintf(_anchor, "%s%d%c_%s",
+						nazov_OBD[litobd],
+						(_global_den.den == 24) ? 24 : 18, // len pre nedeæu 24. dec. berie sa 24. dec, inak (pre ostatnÈ nedele) ako keby bolo 18. dec.
+						pismenko_modlitby(modlitba),
+						ANCHOR_KCITANIE);
+					_set_kcitanie(modlitba, _file, _anchor);
+					set_LOG_litobd;
+					/* kr·tke responzÛrium - rovnakÈ pre vöetky adventnÈ t˝ûdne */
+					sprintf(_anchor, "%s%d%c_%s",
+						nazov_OBD[litobd],
+						(_global_den.den == 24) ? 24 : 18, // len pre nedeæu 24. dec. berie sa 24. dec, inak (pre ostatnÈ nedele) ako keby bolo 18. dec.
+						pismenko_modlitby(modlitba),
+						ANCHOR_KRESPONZ);
+					_set_kresponz(modlitba, _file, _anchor);
+					set_LOG_litobd;
+
+					modlitba = MODL_NAPOLUDNIE;
+					/* Ôalöie z·visia od d·tumu (18. dec. pre nedele okrem 24. decembra) */
+					/* kr·tke ËÌtanie */
+					sprintf(_anchor, "%s%d%c_%s",
+						nazov_OBD[litobd],
+						(_global_den.den == 24) ? 24 : 18, // len pre nedeæu 24. dec. berie sa 24. dec, inak (pre ostatnÈ nedele) ako keby bolo 18. dec.
+						pismenko_modlitby(modlitba),
+						ANCHOR_KCITANIE);
+					_set_kcitanie(modlitba, _file, _anchor);
+					set_LOG_litobd;
+					/* kr·tke responzÛrium - rovnakÈ pre vöetky adventnÈ t˝ûdne */
+					sprintf(_anchor, "%s%d%c_%s",
+						nazov_OBD[litobd],
+						(_global_den.den == 24) ? 24 : 18, // len pre nedeæu 24. dec. berie sa 24. dec, inak (pre ostatnÈ nedele) ako keby bolo 18. dec.
+						pismenko_modlitby(modlitba),
+						ANCHOR_KRESPONZ);
+					_set_kresponz(modlitba, _file, _anchor);
+					set_LOG_litobd;
+
+					modlitba = MODL_POPOLUDNI;
+					/* Ôalöie z·visia od d·tumu (18. dec. pre nedele okrem 24. decembra) */
+					/* kr·tke ËÌtanie */
+					sprintf(_anchor, "%s%d%c_%s",
+						nazov_OBD[litobd],
+						(_global_den.den == 24) ? 24 : 18, // len pre nedeæu 24. dec. berie sa 24. dec, inak (pre ostatnÈ nedele) ako keby bolo 18. dec.
+						pismenko_modlitby(modlitba),
+						ANCHOR_KCITANIE);
+					_set_kcitanie(modlitba, _file, _anchor);
+					set_LOG_litobd;
+					/* kr·tke responzÛrium - rovnakÈ pre vöetky adventnÈ t˝ûdne */
+					sprintf(_anchor, "%s%d%c_%s",
+						nazov_OBD[litobd],
+						(_global_den.den == 24) ? 24 : 18, // len pre nedeæu 24. dec. berie sa 24. dec, inak (pre ostatnÈ nedele) ako keby bolo 18. dec.
+						pismenko_modlitby(modlitba),
+						ANCHOR_KRESPONZ);
+					_set_kresponz(modlitba, _file, _anchor);
+					set_LOG_litobd;
+
 				}/* stvrta adventna nedela */
 			}/* nedela */
 			else{
@@ -3325,10 +3728,10 @@ label_24_DEC:
 				}
 			}/* nie nedela -- upravenie pre 24. dec. */
 
-			/* Vo vÁednÇ dni od 17. do 23. decembra sa ber£:
-			 * invitat¢rium, hymny, ü°tania a responz¢ri†, verÁe, modlitba,
-			 * antif¢ny a prosby na rannÇ chv†ly a veÁpery, ako s£ na
-			 * strane 71n. Tieto üasti sa potom z tretieho tÏßdÂa vynech†vaj£.
+			/* Vo vöednÈ dni od 17. do 23. decembra sa ber˙:
+			 * invitatÛrium, hymny, ËÌtania a responzÛri·, veröe, modlitba,
+			 * antifÛny a prosby na rannÈ chv·ly a veöpery, ako s˙ na
+			 * strane 71n. Tieto Ëasti sa potom z tretieho t˝ûdÚa vynech·vaj˙.
 			 * ostatne veci sa beru z predosleho */
 
 			break;
