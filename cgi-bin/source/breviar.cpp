@@ -57,6 +57,7 @@
 /*   2005-03-21a.D. | novy typ exportu (1 den-1 riadok) pre LK */
 /*   2005-03-22a.D. | uprava funkcie parseQueryString()        */
 /*   2005-03-28a.D. | nova funkcia setForm(), uprava pre uncgi */
+/*   2005-03-30a.D. | upravene getForm()                       */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -279,7 +280,7 @@ char pom_QUERY_TYPE [MAX_POM_QUERY_TYPE] = STR_EMPTY; /* typ dotazu, retazec */
 char pom_DEN        [SMALL] = STR_EMPTY; /* sluzi aj ako pom_DEN_V_TYZDNI a pom_SVIATOK */
 #define pom_DEN_V_TYZDNI	pom_DEN
 #define pom_SVIATOK			pom_DEN
-char pom_MESIAC     [SMALL] = STR_EMPTY; /* sluzi aj ako pom_TYZDEN */
+char pom_MESIAC     [SMALL] = STR_EMPTY; /* sluzi aj ako pom_TYZDEN aj ako mesiac roka */
 #define pom_TYZDEN		pom_MESIAC
 char pom_ROK        [SMALL] = STR_EMPTY; /* sluzi aj ako pom_ANALYZA_ROKU */
 #define pom_ANALYZA_ROKU	pom_ROK
@@ -633,6 +634,8 @@ static void scanquery(char *q){
  */
 int setForm(void){
 	char local_str[MAX_STR] = STR_EMPTY;
+	int ret;
+
 	Log("setForm() -- begin\n");
 
 	/* 2005-03-29 (Bratislava): Pokus (pada tabulka) - vlozime aj */
@@ -641,8 +644,9 @@ int setForm(void){
 		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_QUERY_TYPE), MAX_STR);
 		strcat(local_str, "=");
 		strcat(local_str, pom_QUERY_TYPE);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
+		Log("--- setForm: putenv(%s); ... ", local_str);
+		ret = putenv(local_str);
+		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
 	}
 
 	/* den */
@@ -652,7 +656,8 @@ int setForm(void){
 		strcat(local_str, "=");
 		strcat(local_str, pom_DEN);
 		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
+		ret = putenv(local_str);
+		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
 	}
 	/* mesiac */
 	mystrcpy(local_str, STR_EMPTY, MAX_STR);
@@ -661,7 +666,8 @@ int setForm(void){
 		strcat(local_str, "=");
 		strcat(local_str, pom_MESIAC);
 		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
+		ret = putenv(local_str);
+		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
 	}
 	/* rok */
 	mystrcpy(local_str, STR_EMPTY, MAX_STR);
@@ -674,7 +680,8 @@ int setForm(void){
 		strcat(local_str, "=");
 		strcat(local_str, pom_ROK);
 		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
+		ret = putenv(local_str);
+		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
 	}
 	/* modlitba */
 	mystrcpy(local_str, STR_EMPTY, MAX_STR);
@@ -683,7 +690,8 @@ int setForm(void){
 		strcat(local_str, "=");
 		strcat(local_str, pom_MODLITBA);
 		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
+		ret = putenv(local_str);
+		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
 	}
 	/* pom_DALSI_SVATY */
 	mystrcpy(local_str, STR_EMPTY, MAX_STR);
@@ -692,7 +700,8 @@ int setForm(void){
 		strcat(local_str, "=");
 		strcat(local_str, pom_DALSI_SVATY);
 		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
+		ret = putenv(local_str);
+		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
 	}
 	/* pom_MODL_OPT1..pom_MODL_OPT5 */
 	mystrcpy(local_str, STR_EMPTY, MAX_STR);
@@ -701,7 +710,8 @@ int setForm(void){
 		strcat(local_str, "=");
 		strcat(local_str, pom_MODL_OPT1);
 		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
+		ret = putenv(local_str);
+		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
 	}
 	mystrcpy(local_str, STR_EMPTY, MAX_STR);
 	if(!equals(pom_MODL_OPT2, STR_EMPTY)){
@@ -709,7 +719,8 @@ int setForm(void){
 		strcat(local_str, "=");
 		strcat(local_str, pom_MODL_OPT2);
 		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
+		ret = putenv(local_str);
+		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
 	}
 	mystrcpy(local_str, STR_EMPTY, MAX_STR);
 	if(!equals(pom_MODL_OPT3, STR_EMPTY)){
@@ -717,7 +728,8 @@ int setForm(void){
 		strcat(local_str, "=");
 		strcat(local_str, pom_MODL_OPT3);
 		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
+		ret = putenv(local_str);
+		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
 	}
 	mystrcpy(local_str, STR_EMPTY, MAX_STR);
 	if(!equals(pom_MODL_OPT4, STR_EMPTY)){
@@ -725,7 +737,8 @@ int setForm(void){
 		strcat(local_str, "=");
 		strcat(local_str, pom_MODL_OPT4);
 		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
+		ret = putenv(local_str);
+		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
 	}
 	mystrcpy(local_str, STR_EMPTY, MAX_STR);
 	if(!equals(pom_MODL_OPT5, STR_EMPTY)){
@@ -733,7 +746,8 @@ int setForm(void){
 		strcat(local_str, "=");
 		strcat(local_str, pom_MODL_OPT5);
 		Log("--- setForm: putenv(%s); ...\n", local_str);
-		putenv(local_str);
+		ret = putenv(local_str);
+		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
 	}
 	Log("setForm() -- end, returning SUCCESS\n");
 	return SUCCESS;
@@ -763,6 +777,7 @@ int getSrciptParamFrom(int argc){
 	 *   mystrcpy(query_string, getenv("QUERY_STRING"));
 	 * 25/02/2000A.D.
 	 */
+	Log("--- getSrciptParamFrom(): begin\n");
 	qs = getenv("QUERY_STRING");
 	if(qs != NULL)
 		mystrcpy(query_string, qs, MAX_QUERY_STR);
@@ -796,6 +811,7 @@ int getSrciptParamFrom(int argc){
 			Log("Chyba.\n");
 	}
 
+	Log("--- getSrciptParamFrom(): end...\n");
 	/* systemova premenna QUERY_STRING existuje prave vtedy,
 	 * ked query_string nie je prazdny retazec */
 	if((query_string != NULL) && (strlen(query_string) > 0)){
@@ -5586,6 +5602,7 @@ int getQueryTypeFrom_QS(char *qs){
 /*---------------------------------------------------------------------*/
 int getQueryTypeFrom_WWW(void){
 	char *ptr;
+	int ret;
 
 	Log("getQueryTypeFrom_WWW() -- begin\n");
 	ptr = getenv(ADD_WWW_PREFIX_(STR_QUERY_TYPE)); /* zistim, ci je to z formulara */
@@ -5593,14 +5610,12 @@ int getQueryTypeFrom_WWW(void){
 	if(ptr == NULL){
 		/* nie, dotaz nie je spusteny z formulara */
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_NONE\n");
-		return PRM_NONE; /* aj bez parametrov WWW_... */
+		ret = PRM_NONE; /* aj bez parametrov WWW_... */
 	}
-
-	/* Log("--- ptr == %s\n", ptr); /* 2005-03-29: Pridany vypis, napokon bol problem v tom, ze sa ptr alokovalo a pri free() to padalo (Internal Server Error) */
 	/* v tomto pripade existuje premenna WWW_QUERY_TYPE */
-	if(equals(ptr, STR_PRM_DATUM)){
+	else if(equals(ptr, STR_PRM_DATUM)){
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_DATUM\n");
-		return PRM_DATUM;
+		ret = PRM_DATUM;
 	}
 	/* toto tu nemusi byt, lebo PRM_DETAILY sa pouziva len pre tlacidlo
 	 * 'Detaily...', aby sa dalo odlisit od uvodneho formulara -- kedysi sa
@@ -5609,31 +5624,31 @@ int getQueryTypeFrom_WWW(void){
 	 */
 	else if(equals(ptr, STR_PRM_DETAILY)){
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_DETAILY\n");
-		return PRM_DETAILY;
+		ret = PRM_DETAILY;
 	}
 	else if(equals(ptr, STR_PRM_CEZ_ROK)){
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_CEZ_ROK\n");
-		return PRM_CEZ_ROK;
+		ret = PRM_CEZ_ROK;
 	}
 	else if(equals(ptr, STR_PRM_SVIATOK)){
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_SVIATOK\n");
-		return PRM_SVIATOK;
+		ret = PRM_SVIATOK;
 	}
 	else if(equals(ptr, STR_PRM_ANALYZA_ROKU)){
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_ANALYZA_ROKU\n");
-		return PRM_ANALYZA_ROKU;
+		ret = PRM_ANALYZA_ROKU;
 	}
 	else if(equals(ptr, STR_PRM_DNES)){
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_DNES\n");
-		return PRM_DNES;
+		ret = PRM_DNES;
 	}
 	else if(equals(ptr, STR_PRM_MESIAC_ROKA)){
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_MESIAC_ROKA\n");
-		return PRM_MESIAC_ROKA;
+		ret = PRM_MESIAC_ROKA;
 	}
 	else if(equals(ptr, STR_PRM_TABULKA)){ /* pridane 15/03/2000A.D. */
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_TABULKA\n");
-		return PRM_TABULKA;
+		ret = PRM_TABULKA;
 	}
 	/* nie je tu PRM_BATCH_MODE, 
 	 * pretoze batch mode nie je urceny pre web,
@@ -5641,8 +5656,9 @@ int getQueryTypeFrom_WWW(void){
 	 */
 	else{
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_UNKNOWN\n");
-		return PRM_UNKNOWN; /* failure */
+		ret = PRM_UNKNOWN; /* failure */
 	}
+	return ret;
 }/* getQueryTypeFrom_WWW(); */
 
 /*---------------------------------------------------------------------*/
@@ -6001,6 +6017,14 @@ int getArgv(int argc, char **argv){
  *        premennymi WWW_ ktore vrati uncgi.c
  * vracia: on success, returns SUCCESS
  *         on error,   returns FAILURE
+ *
+ * 2005-03-30: Upravene. 
+ * Ak hodnoty su v pom_ premennych, nepotrebujem citat z WWW_ premennych.
+ * V opacnom pripade to na linux::apache vypisovalo pre tlacidla (Dalsi den >>)
+ * ze nie su vytvorene premenne WWW_d a podobne, hoci boli v query stringu.
+ * Mozno je to cele nejak dosachovane tym, ze som preniesol uncgi sem do kodu.
+ * Ale hlavne ze to chodi :))
+ *
  */
 int getForm(void){
 	char *ptr;
@@ -6014,43 +6038,55 @@ int getForm(void){
 		/* datum: treba nacitat den, mesiac a rok */
 
 		/* premenna WWW_DEN */
-		ptr = getenv(ADD_WWW_PREFIX_(STR_DEN));
-		if(ptr == NULL){
-			Export("Nebola vytvorená systémová premenná %s.\n",
-				ADD_WWW_PREFIX_(STR_DEN));
-			ALERT;
-			DEBUG_GET_FORM("%s neexistuje.\n",
-				ADD_WWW_PREFIX_(STR_DEN));
-			return FAILURE; /* failure */
+		/* ak je naplnena pom_DEN, znamena to, ze uz bola naplnena, preto nemusi existovat */
+		if(equals(pom_DEN, STR_EMPTY)){
+			ptr = getenv(ADD_WWW_PREFIX_(STR_DEN));
+			if(ptr == NULL){
+				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_DEN));
+				ALERT;
+				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_DEN));
+				return FAILURE; /* failure */
+			}
+			if(strcmp(ptr, EMPTY_STR) != 0)
+				mystrcpy(pom_DEN, ptr, SMALL);
 		}
-		if(strcmp(ptr, EMPTY_STR) != 0)
-			mystrcpy(pom_DEN, ptr, SMALL);
+		else{
+			Log("Premenná pom_DEN je už naplnená (%s). Neèítam z %s...\n", pom_DEN, ADD_WWW_PREFIX_(STR_DEN));
+		}
 
 		/* premenna WWW_MESIAC */
-		ptr = getenv(ADD_WWW_PREFIX_(STR_MESIAC));
-		if(ptr == NULL){
-			Export("Nebola vytvorená systémová premenná %s.\n",
-				ADD_WWW_PREFIX_(STR_MESIAC));
-			ALERT;
-			DEBUG_GET_FORM("%s neexistuje.\n",
-				ADD_WWW_PREFIX_(STR_MESIAC));
-			return FAILURE; /* failure */
+		/* ak je naplnena pom_MESIAC, znamena to, ze uz bola naplnena, preto nemusi existovat */
+		if(equals(pom_MESIAC, STR_EMPTY)){
+			ptr = getenv(ADD_WWW_PREFIX_(STR_MESIAC));
+			if(ptr == NULL){
+				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_MESIAC));
+				ALERT;
+				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_MESIAC));
+				return FAILURE; /* failure */
+			}
+			if(strcmp(ptr, EMPTY_STR) != 0)
+				mystrcpy(pom_MESIAC, ptr, SMALL);
 		}
-		if(strcmp(ptr, EMPTY_STR) != 0)
-			mystrcpy(pom_MESIAC, ptr, SMALL);
+		else{
+			Log("Premenná pom_MESIAC je už naplnená (%s). Neèítam z %s...\n", pom_MESIAC, ADD_WWW_PREFIX_(STR_MESIAC));
+		}
 
 		/* premenna WWW_ROK */
-		ptr = getenv(ADD_WWW_PREFIX_(STR_ROK));
-		if(ptr == NULL){
-			Export("Nebola vytvorená systémová premenná %s.\n",
-				ADD_WWW_PREFIX_(STR_ROK));
-			ALERT;
-			DEBUG_GET_FORM("%s neexistuje.\n",
-				ADD_WWW_PREFIX_(STR_ROK));
-			return FAILURE; /* failure */
+		/* ak je naplnena pom_ROK, znamena to, ze uz bola naplnena, preto nemusi existovat */
+		if(equals(pom_ROK, STR_EMPTY)){
+			ptr = getenv(ADD_WWW_PREFIX_(STR_ROK));
+			if(ptr == NULL){
+				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_ROK));
+				ALERT;
+				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_ROK));
+				return FAILURE; /* failure */
+			}
+			if(strcmp(ptr, EMPTY_STR) != 0)
+				mystrcpy(pom_ROK, ptr, SMALL);
 		}
-		if(strcmp(ptr, EMPTY_STR) != 0)
-			mystrcpy(pom_ROK, ptr, SMALL);
+		else{
+			Log("Premenná pom_ROK je už naplnená (%s). Neèítam z %s...\n", pom_ROK, ADD_WWW_PREFIX_(STR_ROK));
+		}
 
 		/* nasledujuce sa zistuju kvoli 'Detaily...', formular vytvorila
 		 * funckia showDetails();
@@ -6151,43 +6187,55 @@ int getForm(void){
 		/* cez rok: treba nacitat den v tyzdni a cislo tyzdna */
 
 		/* premenna WWW_DEN_V_TYZDNI */
-		ptr = getenv(ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
-		if(ptr == NULL){
-			Export("Nebola vytvorená systémová premenná %s.\n",
-				ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
-			ALERT;
-			DEBUG_GET_FORM("%s neexistuje.\n",
-				ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
-			return FAILURE; /* failure */
+		/* ak je naplnena pom_DEN_V_TYZDNI, znamena to, ze uz bola naplnena, preto nemusi existovat */
+		if(equals(pom_DEN_V_TYZDNI, STR_EMPTY)){
+			ptr = getenv(ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
+			if(ptr == NULL){
+				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
+				ALERT;
+				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
+				return FAILURE; /* failure */
+			}
+			if(strcmp(ptr, EMPTY_STR) != 0)
+				mystrcpy(pom_DEN_V_TYZDNI, ptr, SMALL);
 		}
-		if(strcmp(ptr, EMPTY_STR) != 0)
-			mystrcpy(pom_DEN_V_TYZDNI, ptr, SMALL);
+		else{
+			Log("Premenná pom_DEN_V_TYZDNI je už naplnená (%s). Neèítam z %s...\n", pom_DEN_V_TYZDNI, ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
+		}
 
 		/* premenna WWW_TYZDEN */
-		ptr = getenv(ADD_WWW_PREFIX_(STR_TYZDEN));
-		if(ptr == NULL){
-			Export("Nebola vytvorená systémová premenná %s.\n",
-				ADD_WWW_PREFIX_(STR_TYZDEN));
-			ALERT;
-			DEBUG_GET_FORM("%s neexistuje.\n",
-				ADD_WWW_PREFIX_(STR_TYZDEN));
-			return FAILURE; /* failure */
+		/* ak je naplnena pom_TYZDEN, znamena to, ze uz bola naplnena, preto nemusi existovat */
+		if(equals(pom_TYZDEN, STR_EMPTY)){
+			ptr = getenv(ADD_WWW_PREFIX_(STR_TYZDEN));
+			if(ptr == NULL){
+				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_TYZDEN));
+				ALERT;
+				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_TYZDEN));
+				return FAILURE; /* failure */
+			}
+			if(strcmp(ptr, EMPTY_STR) != 0)
+				mystrcpy(pom_TYZDEN, ptr, SMALL);
 		}
-		if(strcmp(ptr, EMPTY_STR) != 0)
-			mystrcpy(pom_TYZDEN, ptr, SMALL);
+		else{
+			Log("Premenná pom_TYZDEN je už naplnená (%s). Neèítam z %s...\n", pom_TYZDEN, ADD_WWW_PREFIX_(STR_TYZDEN));
+		}
 
 		/* premenna WWW_MODLITBA */
-		ptr = getenv(ADD_WWW_PREFIX_(STR_MODLITBA));
-		if(ptr == NULL){
-			Export("Nebola vytvorená systémová premenná %s.\n",
-				ADD_WWW_PREFIX_(STR_MODLITBA));
-			ALERT;
-			DEBUG_GET_FORM("%s neexistuje.\n",
-				ADD_WWW_PREFIX_(STR_MODLITBA));
-			return FAILURE; /* failure */
+		/* ak je naplnena pom_MODLITBA, znamena to, ze uz bola naplnena, preto nemusi existovat */
+		if(equals(pom_MODLITBA, STR_EMPTY)){
+			ptr = getenv(ADD_WWW_PREFIX_(STR_MODLITBA));
+			if(ptr == NULL){
+				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_MODLITBA));
+				ALERT;
+				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_MODLITBA));
+				return FAILURE; /* failure */
+			}
+			if(strcmp(ptr, EMPTY_STR) != 0)
+				mystrcpy(pom_MODLITBA, ptr, SMALL);
 		}
-		if(strcmp(ptr, EMPTY_STR) != 0)
-			mystrcpy(pom_MODLITBA, ptr, SMALL);
+		else{
+			Log("Premenná pom_MODLITBA je už naplnená (%s). Neèítam z %s...\n", pom_MODLITBA, ADD_WWW_PREFIX_(STR_MODLITBA));
+		}
 
 	}/* query_type == PRM_CEZ_ROK */
 
@@ -6195,17 +6243,21 @@ int getForm(void){
 		/* cez rok: treba nacitat nazov sviatku */
 
 		/* premenna WWW_NAZOV_SVIATOK */
-		ptr = getenv(ADD_WWW_PREFIX_(STR_NAZOV_SVIATOK));
-		if(ptr == NULL){
-			Export("Nebola vytvorená systémová premenná %s.\n",
-				ADD_WWW_PREFIX_(STR_NAZOV_SVIATOK));
-			ALERT;
-			DEBUG_GET_FORM("%s neexistuje.\n",
-				ADD_WWW_PREFIX_(STR_NAZOV_SVIATOK));
-			return FAILURE; /* failure */
+		/* ak je naplnena pom_SVIATOK, znamena to, ze uz bola naplnena, preto nemusi existovat */
+		if(equals(pom_SVIATOK, STR_EMPTY)){
+			ptr = getenv(ADD_WWW_PREFIX_(STR_NAZOV_SVIATOK));
+			if(ptr == NULL){
+				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_NAZOV_SVIATOK));
+				ALERT;
+				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_NAZOV_SVIATOK));
+				return FAILURE; /* failure */
+			}
+			if(strcmp(ptr, EMPTY_STR) != 0)
+				mystrcpy(pom_SVIATOK, ptr, SMALL);
 		}
-		if(strcmp(ptr, EMPTY_STR) != 0)
-			mystrcpy(pom_SVIATOK, ptr, SMALL);
+		else{
+			Log("Premenná pom_SVIATOK je už naplnená (%s). Neèítam z %s...\n", pom_SVIATOK, ADD_WWW_PREFIX_(STR_NAZOV_SVIATOK));
+		}
 
 	}/* query_type == PRM_SVIATOK */
 
@@ -6213,17 +6265,23 @@ int getForm(void){
 		/* cez rok: treba nacitat nazov sviatku */
 
 		/* premenna WWW_ANALYZA_ROKU */
-		ptr = getenv(ADD_WWW_PREFIX_(STR_ANALYZA_ROKU));
-		if(ptr == NULL){
-			Export("Nebola vytvorená systémová premenná %s.\n",
-				ADD_WWW_PREFIX_(STR_ANALYZA_ROKU));
-			ALERT;
-			DEBUG_GET_FORM("%s neexistuje.\n",
-				ADD_WWW_PREFIX_(STR_ANALYZA_ROKU));
-			return FAILURE; /* failure */
+		/* ak je naplnena pom_ANALYZA_ROKU, znamena to, ze uz bola naplnena, preto nemusi existovat */
+		if(equals(pom_ANALYZA_ROKU, STR_EMPTY)){
+			ptr = getenv(ADD_WWW_PREFIX_(STR_ANALYZA_ROKU));
+			if(ptr == NULL){
+				Export("Nebola vytvorená systémová premenná %s.\n",
+					ADD_WWW_PREFIX_(STR_ANALYZA_ROKU));
+				ALERT;
+				DEBUG_GET_FORM("%s neexistuje.\n",
+					ADD_WWW_PREFIX_(STR_ANALYZA_ROKU));
+				return FAILURE; /* failure */
+			}
+			if(strcmp(ptr, EMPTY_STR) != 0)
+				mystrcpy(pom_ANALYZA_ROKU, ptr, SMALL);
 		}
-		if(strcmp(ptr, EMPTY_STR) != 0)
-			mystrcpy(pom_ANALYZA_ROKU, ptr, SMALL);
+		else{
+			Log("Premenná pom_ANALYZA_ROKU je už naplnená (%s). Neèítam z %s...\n", pom_ANALYZA_ROKU, ADD_WWW_PREFIX_(STR_ANALYZA_ROKU));
+		}
 
 	}/* query_type == PRM_ANALYZA_ROKU */
 
@@ -6255,30 +6313,38 @@ int getForm(void){
 
 		/* treba nacitat mesiac a rok */
 		/* premenna WWW_MESIAC_ROKA */
-		ptr = getenv(ADD_WWW_PREFIX_(STR_MESIAC_ROKA));
-		if(ptr == NULL){
-			Export("Nebola vytvorená systémová premenná %s.\n",
-				ADD_WWW_PREFIX_(STR_MESIAC_ROKA));
-			ALERT;
-			DEBUG_GET_FORM("%s neexistuje.\n",
-				ADD_WWW_PREFIX_(STR_MESIAC_ROKA));
-			return FAILURE; /* failure */
+		/* ak je naplnena pom_MESIAC (vynimocne nie pom_MESIAC_ROKA), znamena to, ze uz bola naplnena, preto nemusi existovat */
+		if(equals(pom_MESIAC, STR_EMPTY)){
+			ptr = getenv(ADD_WWW_PREFIX_(STR_MESIAC_ROKA));
+			if(ptr == NULL){
+				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_MESIAC_ROKA));
+				ALERT;
+				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_MESIAC_ROKA));
+				return FAILURE; /* failure */
+			}
+			if(strcmp(ptr, EMPTY_STR) != 0)
+				mystrcpy(pom_MESIAC, ptr, SMALL);
 		}
-		if(strcmp(ptr, EMPTY_STR) != 0)
-			mystrcpy(pom_MESIAC, ptr, SMALL);
+		else{
+			Log("Premenná pom_MESIAC je už naplnená (%s). Neèítam z %s...\n", pom_MESIAC, ADD_WWW_PREFIX_(STR_MESIAC_ROKA));
+		}
 
 		/* premenna WWW_ROK */
-		ptr = getenv(ADD_WWW_PREFIX_(STR_ROK_ROKA));
-		if(ptr == NULL){
-			Export("Nebola vytvorená systémová premenná %s.\n",
-				ADD_WWW_PREFIX_(STR_ROK_ROKA));
-			ALERT;
-			DEBUG_GET_FORM("%s neexistuje.\n",
-				ADD_WWW_PREFIX_(STR_ROK_ROKA));
-			return FAILURE; /* failure */
+		/* ak je naplnena pom_ROK (vynimocne nie pom_ROK_ROKA), znamena to, ze uz bola naplnena, preto nemusi existovat */
+		if(equals(pom_ROK, STR_EMPTY)){
+			ptr = getenv(ADD_WWW_PREFIX_(STR_ROK_ROKA));
+			if(ptr == NULL){
+				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_ROK_ROKA));
+				ALERT;
+				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_ROK_ROKA));
+				return FAILURE; /* failure */
+			}
+			if(strcmp(ptr, EMPTY_STR) != 0)
+				mystrcpy(pom_ROK, ptr, SMALL);
 		}
-		if(strcmp(ptr, EMPTY_STR) != 0)
-			mystrcpy(pom_ROK, ptr, SMALL);
+		else{
+			Log("Premenná pom_ROK je už naplnená (%s). Neèítam z %s...\n", pom_ROK, ADD_WWW_PREFIX_(STR_ROK_ROKA));
+		}
 
 	}/* query_type == PRM_MESIAC_ROKA */
 
@@ -6286,30 +6352,38 @@ int getForm(void){
 		/* PRM_TABULKA: treba nacitat from a to; ak chyba linka, tak automaticky == NIE */
 
 		/* premenna WWW_ROK_FROM */
-		ptr = getenv(ADD_WWW_PREFIX_(STR_ROK_FROM));
-		if(ptr == NULL){
-			Export("Nebola vytvorená systémová premenná %s.\n",
-				ADD_WWW_PREFIX_(STR_ROK_FROM));
-			ALERT;
-			DEBUG_GET_FORM("%s neexistuje.\n",
-				ADD_WWW_PREFIX_(STR_ROK_FROM));
-			return FAILURE; /* failure */
+		/* ak je naplnena pom_ROK_FROM, znamena to, ze uz bola naplnena, preto nemusi existovat */
+		if(equals(pom_ROK_FROM, STR_EMPTY)){
+			ptr = getenv(ADD_WWW_PREFIX_(STR_ROK_FROM));
+			if(ptr == NULL){
+				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_ROK_FROM));
+				ALERT;
+				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_ROK_FROM));
+				return FAILURE; /* failure */
+			}
+			if(strcmp(ptr, EMPTY_STR) != 0)
+				mystrcpy(pom_ROK_FROM, ptr, SMALL);
 		}
-		if(strcmp(ptr, EMPTY_STR) != 0)
-			mystrcpy(pom_ROK_FROM, ptr, SMALL);
+		else{
+			Log("Premenná pom_ROK_FROM je už naplnená (%s). Neèítam z %s...\n", pom_ROK_FROM, ADD_WWW_PREFIX_(STR_ROK_FROM));
+		}
 
 		/* premenna WWW_ROK_TO */
-		ptr = getenv(ADD_WWW_PREFIX_(STR_ROK_TO));
-		if(ptr == NULL){
-			Export("Nebola vytvorená systémová premenná %s.\n",
-				ADD_WWW_PREFIX_(STR_ROK_TO));
-			ALERT;
-			DEBUG_GET_FORM("%s neexistuje.\n",
-				ADD_WWW_PREFIX_(STR_ROK_TO));
-			return FAILURE; /* failure */
+		/* ak je naplnena pom_ROK_TO, znamena to, ze uz bola naplnena, preto nemusi existovat */
+		if(equals(pom_ROK_FROM, STR_EMPTY)){
+			ptr = getenv(ADD_WWW_PREFIX_(STR_ROK_TO));
+			if(ptr == NULL){
+				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_ROK_TO));
+				ALERT;
+				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_ROK_TO));
+				return FAILURE; /* failure */
+			}
+			if(strcmp(ptr, EMPTY_STR) != 0)
+				mystrcpy(pom_ROK_TO, ptr, SMALL);
 		}
-		if(strcmp(ptr, EMPTY_STR) != 0)
-			mystrcpy(pom_ROK_TO, ptr, SMALL);
+		else{
+			Log("Premenná pom_ROK_TO je už naplnená (%s). Neèítam z %s...\n", pom_ROK_TO, ADD_WWW_PREFIX_(STR_ROK_TO));
+		}
 
 		/* premenna WWW_TABULKA_LINKY */
 		ptr = getenv(ADD_WWW_PREFIX_(STR_TABULKA_LINKY));
@@ -7021,11 +7095,6 @@ int main(int argc, char **argv){
 			 * bolo mozne menit (switch -e) nazov suboru, dalo sa to sem
 			 * 24/02/2000A.D. -- urobil som to presne tak, ako bolo kedysi
 			 */
-			/*
-			initExport();
-			hlavicka("Liturgia hodín");
-			*/
-
 			_main_LOG_to_Export("params == SCRIPT_PARAM_FROM_QS\n");
 			/* nasledujuca pasaz je tu preto, ze mozno bolo pouzite kombinovane
 			 * aj query string, aj formular (teda treba citat aj systemove
