@@ -255,8 +255,10 @@ static const char *_getopt_initialize(
      is the program name); the sequence of previously skipped
      non-option ARGV-elements is empty.  */
   /* tieto riadky pridane, aby nehlasil, ze param not used */
+/*
   if(argc);
   if(argv);
+*/
 
   first_nonopt = last_nonopt = optind;
 

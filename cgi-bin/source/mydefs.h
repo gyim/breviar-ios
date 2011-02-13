@@ -19,6 +19,7 @@
 /*   2003-07-16a.D. | zmena WWW_ na ADD_WWW_PREFIX_            */
 /*   2004-03-17a.D. | FILE_PATH sa nepouziva                   */
 /*   2004-08-14a.D. | zmena definicie ADD_WWW_PREFIX_          */
+/*   2005-03-28a.D. | zmena definicie UNCGI_PATH               */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -29,8 +30,7 @@
 #include "mysystem.h" /* tam pozri exportovanie, logovanie, system */
 #include "myconf.h" /* kvoli MAIL_ADDRESS, HTTP_ADDRESS; pridane 30/03/2000A.D. */
 
-#if defined(OS_DOS)
-#elif defined(OS_linux)
+#if defined(OS_linux)
 #elif defined(OS_Windows)
 #else
 	#error Unsupported operating system (not defined in mysystem.h)
@@ -53,7 +53,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2005-03-22"
+#define BUILD_DATE "2005-03-28"
 
 #define BYTES 250
 #define SMALL 80
@@ -84,8 +84,15 @@
 #define SCRIPT_NAME          "l.cgi" /* kedysi tu bolo dnes.cgi */
 #define SCRIPT_PATH(a)       "cgi-bin/"a
 	/* zmenene 06/09/2001A.D.; povodne tu bolo "cgi-bin/"##a */
+
+#if defined(USE_UNCGI)
 #define UNCGI_PATH(a)        SCRIPT_PATH("uncgi.cgi/")a
+#else
+#define UNCGI_PATH(a)        SCRIPT_PATH(a)
+#endif
 	/* zmenene 06/09/2001A.D.; povodne tu bolo SCRIPT_PATH("uncgi.cgi/")##a */
+	/* 2005-03-28: Zapoznamkovane (pokus) */
+
 #define UNCGI_SCRIPT_NAME    UNCGI_PATH(SCRIPT_NAME)
 #define PATH_CGI(a) "cgi-bin/"a
 	/* zmenene 06/09/2001A.D.; povodne tu bolo "cgi-bin/"##a */
@@ -198,6 +205,7 @@ extern int query_type; /* premenna obsahujuca PRM_... */
  * na g++ (gcc version 3.3.3 20040412)
  * preto zmenene na ADD_WWW_PREFIX_(a) ("WWW_"a)
  */
+#define WWW_PREFIX "WWW_"
 #define ADD_WWW_PREFIX_(a) ("WWW_"a)
 
 /* nasleduju parametre z formularov pre dotaz PRM_DATUM */

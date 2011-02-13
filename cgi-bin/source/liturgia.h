@@ -24,6 +24,7 @@
 /*   2003-11-20a.D. | definicie pre posvatne citania zmenene   */
 /*   2004-04-28a.D. | MAX_STR_AF_FILE zmenene na 16            */
 /*   2004-08-14a.D. | char zmeneny na unsigned (_nedelne_p...) */
+/*   2005-03-27a.D. | CHAR_MODL_* z funkcie pismenko_modlitby  */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -182,6 +183,22 @@ typedef struct den_mesiac _struct_den_mesiac;
 	#define STR_MODL_POPOLUDNI "mpo"
 	#define STR_MODL_DETAILY "*"
 #endif
+
+/* 2005-03-27: Vlozene do definicnej casti z funkcie dbzaltar.cpp::pismenko_modlitby() */
+#define CHAR_MODL_INVITATORIUM       'i'
+#define CHAR_MODL_RANNE_CHVALY       'r'
+#define CHAR_MODL_POSV_CITANIE       'c'
+#define CHAR_MODL_CEZ_DEN_9          '9'
+#define CHAR_MODL_CEZ_DEN_12         '2'
+#define CHAR_MODL_CEZ_DEN_3          '3'
+#define CHAR_MODL_CEZ_DEN_VSETKY     'd' /* 2005-03-27: Pridane */
+#define CHAR_MODL_VESPERY            'v'
+#define CHAR_MODL_KOMPLETORIUM       'k'
+#define CHAR_MODL_NEURCENA           '_' /* toto by sa nemalo */
+#define CHAR_MODL_PRVE_VESPERY       '1'
+#define CHAR_MODL_PRVE_KOMPLETORIUM  'p'
+#define CHAR_MODL_DRUHE_VESPERY      'w' /* toto by sa nemalo */
+#define CHAR_MODL_DRUHE_KOMPLETORIUM 'm' /* toto by sa nemalo */
 
 extern const char *nazov_modlitby[];
 extern const char *nazov_Modlitby[];

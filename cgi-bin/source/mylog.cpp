@@ -15,6 +15,7 @@
 /*   24/02/2000A.D. |  pridane LOG_TO_FILE / LOG_TO_STDOUT     */
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-08-07a.D. | closeLog-dorobene #ifdef (LOG_TO_STDOUT) */
+/*   2005-03-28a.D. | Log - dorobene #ifdef                    */
 /*                                                             */
 /* notes |                                                     */
 /*   * ked je v materskom programe definovane LOG_TO_FILE, bude*/
@@ -90,6 +91,11 @@ int __Log(char *fmt, ...)
 	va_list argptr;
 	int cnt;
 
+/* 2005-03-28: Ak logujeme na stdout (teda zrejme do HTML), vypiseme HTML <p> */
+//#if defined(LOG_TO_STDOUT)
+//	fprintf(logfile, "\n<p>Log: <br>\n");
+//#endif
+
 	va_start(argptr, fmt);
 	if(used == 0){
 		cnt = vfprintf(logfile, fmt, argptr);
@@ -99,6 +105,10 @@ int __Log(char *fmt, ...)
 	else
 		cnt = vprintf(fmt, argptr);
 	va_end(argptr);
+
+//#if defined(LOG_TO_STDOUT)
+//	fprintf(logfile, "\n</p>\n");
+//#endif
 
 	return(cnt);
 }

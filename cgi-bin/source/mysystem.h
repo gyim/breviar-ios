@@ -15,6 +15,7 @@
 /*   06/09/2001A.D. | tento popis                              */
 /*   2004-03-17a.D. | poznamka k OS_...                        */
 /*   2005-03-22a.D. | zrusene DOS, vytvoreny novy model        */
+/*   2005-03-28a.D. | pridane na zaciatok #undef pre vsetky    */
 /*                                                             */
 /***************************************************************/
 
@@ -24,9 +25,19 @@
 /* OS_...    - uz ani nie su potrebne (kedysi pre cesty) */
 /* MODEL_... - model kompilacie */
 
+#undef USE_UNCGI
+
+#undef MODEL_ostry_linux
+#undef MODEL_DEBUG_linux
+#undef MODEL_ostry_SIMUL_linux_UNDER_Windows
+#undef MODEL_DEBUG_SIMUL_linux_UNDER_Windows
+#undef MODEL_ostry_Windows
+#undef MODEL_DEBUG_Windows
+
 //#define MODEL_ostry_linux
 //#define MODEL_DEBUG_linux
-#define MODEL_DEBUG_SIMUL_linux_UNDER_Windows		// 2005-03-22 Vytvorene (simulacia linuxu)
+#define MODEL_ostry_SIMUL_linux_UNDER_Windows		// 2005-03-28 Vytvorene (simulacia ostreho linuxu)
+//#define MODEL_DEBUG_SIMUL_linux_UNDER_Windows		// 2005-03-22 Vytvorene (simulacia DEBUG linuxu)
 //#define MODEL_ostry_Windows // nezabudni zmenit datum v mybuild.h !!!
 //#define MODEL_DEBUG_Windows
 
@@ -55,6 +66,11 @@
 	#define LOGGING
 	#define LOG_TO_FILE
 	#define EXPORT_TO_FILE
+/* simulacia ostreho linuxu pod Windows */
+#elif defined(MODEL_ostry_SIMUL_linux_UNDER_Windows)
+	#define OS_linux
+	#undef LOGGING
+	#define EXPORT_TO_STDOUT
 /* debugovanie linuxu vo Windows -- vsetko sa loguje do suboru */
 #elif defined(MODEL_DEBUG_SIMUL_linux_UNDER_Windows)
 	#define OS_linux

@@ -37,6 +37,10 @@
 /*   2004-08-31a.D. | nastavenie modlitby pre posv.cit.o.c.r.  */
 /*   2004-09-03a.D. | zmena v modlitbe (na nedelnu kolektu)    */
 /*   2004-09-23a.D. | pridany sv. pater Pio                    */
+/*   2005-03-26a.D. | pridane posvatne citania (Trencin)       */
+/*   2005-03-27a.D. | CHAR_MODL_* z funkcie pismenko_modlitby  */
+/*                    do liturgia.h                            */
+/*                  - upravy v psalmodii pre posvatne citanie  */
 /*                                                             */
 /* notes |                                                     */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
@@ -58,6 +62,14 @@ char _anchor_head[SMALL];
 #include <string.h>
 #include "mystring.h" /* pridane 2003-08-11 kvoli _INIT_DM */
 #include "breviar.h"  /* pridane 2003-08-13 kvoli _global_opt5 */
+
+/* 2005-03-26: Presunute na zaciatok */
+/* 2003-06-30 pre lahsie debugovanie obohateny vypis */
+#define set_LOG_litobd Log("   set(litobd): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby[modlitba], _file, _anchor)
+/* 2004-04-28 pre lahsie debugovanie obohateny vypis pre pc */
+#define set_LOG_litobd_pc Log("   set(litobd): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby[modlitba], _file_pc, _anchor)
+/* 2004-04-28 pre lahsie debugovanie obohateny vypis pre pc-tyzden */
+#define set_LOG_litobd_pc_tyzden Log("   set(litobd): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby[modlitba], _file_pc_tyzden, _anchor)
 
 /* #define (stringove konstanty) presunute do header-u dbzaltar.h, 2003-08-15 */
 /* globalne premenne prehodene do liturgia.h, 17/02/2000A.D. */
@@ -527,28 +539,29 @@ char _anchor[SMALL];
  * modlitba == MODL_...,
  * anchor == ANCHOR_... */
 char pismenko_modlitby(int modlitba){
+	/* 2005-03-27: Upravene na konstanty, presunute do liturgia.h */
 	switch(modlitba){
-		case MODL_INVITATORIUM       :  return 'i';
-		case MODL_RANNE_CHVALY       :  return 'r';
-		case MODL_POSV_CITANIE       :  return 'c';
-		case MODL_CEZ_DEN_9          :  return '9';
-		case MODL_CEZ_DEN_12         :  return '2';
-		case MODL_CEZ_DEN_3          :  return '3';
-		case MODL_VESPERY            :  return 'v';
-		case MODL_KOMPLETORIUM       :  return 'k';
-		case MODL_NEURCENA           :  return '_';  /* toto by sa nemalo */
-		case MODL_PRVE_VESPERY       :  return '1';
-		case MODL_PRVE_KOMPLETORIUM  : return 'p';
-		case MODL_DRUHE_VESPERY      :  return '2';  /* toto by sa nemalo */
-		case MODL_DRUHE_KOMPLETORIUM :return 'd';  /* toto by sa nemalo */
+		case MODL_INVITATORIUM       : return CHAR_MODL_INVITATORIUM;
+		case MODL_RANNE_CHVALY       : return CHAR_MODL_RANNE_CHVALY;
+		case MODL_POSV_CITANIE       : return CHAR_MODL_POSV_CITANIE;
+		case MODL_CEZ_DEN_9          : return CHAR_MODL_CEZ_DEN_9;
+		case MODL_CEZ_DEN_12         : return CHAR_MODL_CEZ_DEN_12;
+		case MODL_CEZ_DEN_3          : return CHAR_MODL_CEZ_DEN_3;
+		case MODL_VESPERY            : return CHAR_MODL_VESPERY;
+		case MODL_KOMPLETORIUM       : return CHAR_MODL_KOMPLETORIUM;
+		case MODL_NEURCENA           : return CHAR_MODL_NEURCENA; /* toto by sa nemalo */
+		case MODL_PRVE_VESPERY       : return CHAR_MODL_PRVE_VESPERY;
+		case MODL_PRVE_KOMPLETORIUM  : return CHAR_MODL_PRVE_KOMPLETORIUM;
+		case MODL_DRUHE_VESPERY      : return CHAR_MODL_DRUHE_VESPERY; /* toto by sa nemalo */
+		case MODL_DRUHE_KOMPLETORIUM : return CHAR_MODL_DRUHE_KOMPLETORIUM; /* toto by sa nemalo */
 	}/* switch(modlitba) */
 	return 0;
 }/* pismenko_modlitby(); */
+
 void anchor_name_zaltar(int den, int tyzzal, int modlitba, char *anchor){
 	sprintf(_anchor, "_%d%s%c_%s",
 		tyzzal, nazov_DN_asci[den], pismenko_modlitby(modlitba), anchor);
 }
-
 
 #define set_LOG_zaltar
 //Log("   set(zaltar): %s: `%s', <!--{...:%s}-->\n", nazov_modlitby[modlitba], _file, _anchor)
@@ -559,6 +572,8 @@ void set_hymnus(int den, int tyzzal, int modlitba){
 		file_name_litobd(OBD_CEZ_ROK);
 		sprintf(_anchor, "%c_%s_%d", 
 			pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (den + tyzzal) % 2);
+		_set_hymnus(modlitba, _file, _anchor);
+		set_LOG_zaltar;
 	}
 	else{ /* nie modlitba cez den */
 		/* prvy a treti, resp. druhy a stvrty tyzden maju rovnake */
@@ -566,12 +581,21 @@ void set_hymnus(int den, int tyzzal, int modlitba){
 			tyzzal = 1;
 		else if(tyzzal == 4)
 			tyzzal = 2;
-		file_name_zaltar(den, tyzzal);
-		anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_HYMNUS);
+		/* 2005-03-26: Pridane odvetvenie pre posvatne citania */
+		if(modlitba == MODL_POSV_CITANIE){
+			file_name_litobd_pc(OBD_CEZ_ROK);
+			anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_HYMNUS);
+			_set_hymnus(modlitba, _file_pc, _anchor);
+			set_LOG_litobd_pc;
+		}
+		else{
+			file_name_zaltar(den, tyzzal);
+			anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_HYMNUS);
+			_set_hymnus(modlitba, _file, _anchor);
+			set_LOG_zaltar;
+		}
 	}
 
-	_set_hymnus(modlitba, _file, _anchor);
-	set_LOG_zaltar;
 }
 
 void set_antifony(int den, int tyzzal, int modlitba){
@@ -599,13 +623,36 @@ void set_antifony(int den, int tyzzal, int modlitba){
 		set_LOG_zaltar;
 	}
 	else{
-		file_name_zaltar(den, tyzzal);
-		anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_ANTIFONA1);
-		_set_antifona1(modlitba, _file, _anchor);
-		set_LOG_zaltar;
-		anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_ANTIFONA2);
-		_set_antifona2(modlitba, _file, _anchor);
-		set_LOG_zaltar;
+		/* 2005-03-26: Pridane odvetvenie pre posvatne citania */
+	/* 1. antifona */
+		if(modlitba == MODL_POSV_CITANIE){
+			file_name_litobd_pc(OBD_CEZ_ROK);
+			anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_ANTIFONA1);
+			_set_antifona1(modlitba, _file_pc, _anchor);
+			set_LOG_litobd_pc;
+		}
+		else{
+			file_name_zaltar(den, tyzzal);
+			anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_ANTIFONA1);
+			_set_antifona1(modlitba, _file, _anchor);
+			set_LOG_zaltar;
+		}
+
+	/* 2. antifona */
+		if(modlitba == MODL_POSV_CITANIE){
+			file_name_litobd_pc(OBD_CEZ_ROK);
+			anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_ANTIFONA2);
+			_set_antifona2(modlitba, _file_pc, _anchor);
+			set_LOG_litobd_pc;
+		}
+		else{
+			file_name_zaltar(den, tyzzal);
+			anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_ANTIFONA2);
+			_set_antifona2(modlitba, _file, _anchor);
+			set_LOG_zaltar;
+		}
+
+	/* 3. antifona */
 		/* antifona na vecerny hymnus je rovnaka pre prvy a treti,
 		 * resp. druhy a stvrty tyzden zaltara */
 		if((modlitba == MODL_VESPERY) || (modlitba == MODL_PRVE_VESPERY)){
@@ -614,10 +661,18 @@ void set_antifony(int den, int tyzzal, int modlitba){
 			else if(tyzzal == 4)
 				tyzzal = 2;
 		}
-		file_name_zaltar(den, tyzzal);
-		anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_ANTIFONA3);
-		_set_antifona3(modlitba, _file, _anchor);
-		set_LOG_zaltar;
+		if(modlitba == MODL_POSV_CITANIE){
+			file_name_litobd_pc(OBD_CEZ_ROK);
+			anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_ANTIFONA3);
+			_set_antifona3(modlitba, _file_pc, _anchor);
+			set_LOG_litobd_pc;
+		}
+		else{
+			file_name_zaltar(den, tyzzal);
+			anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_ANTIFONA3);
+			_set_antifona3(modlitba, _file, _anchor);
+			set_LOG_zaltar;
+		}
 	}
 }
 
@@ -629,15 +684,27 @@ void set_kcitanie(int den, int tyzzal, int modlitba){
 }
 
 void set_kresponz(int den, int tyzzal, int modlitba){
-	/* prvy a treti, resp. druhy a stvrty tyzden maju rovnake */
-	if(tyzzal == 3)
-		tyzzal = 1;
-	else if(tyzzal == 4)
-		tyzzal = 2;
-	file_name_zaltar(den, tyzzal);
-	anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_KRESPONZ);
-	_set_kresponz(modlitba, _file, _anchor);
-	set_LOG_zaltar;
+	/* 2005-03-26: Pridane odvetvenie pre posvatne citania */
+	if(modlitba == MODL_POSV_CITANIE){
+		file_name_litobd_pc(OBD_CEZ_ROK);
+		anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_KRESPONZ);
+		_set_kresponz(modlitba, _file_pc, _anchor);
+		set_LOG_litobd_pc;
+	}
+	else{
+		if((modlitba != MODL_PREDPOLUDNIM) && (modlitba != MODL_NAPOLUDNIE) && (modlitba != MODL_POPOLUDNI)){
+			/* 2005-03-27: pre modlitbu cez den to neplati:
+			 * prvy a treti, resp. druhy a stvrty tyzden maju rovnake */
+			if(tyzzal == 3)
+				tyzzal = 1;
+			else if(tyzzal == 4)
+				tyzzal = 2;
+		}
+		file_name_zaltar(den, tyzzal);
+		anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_KRESPONZ);
+		_set_kresponz(modlitba, _file, _anchor);
+		set_LOG_zaltar;
+	}
 }
 
 void set_prosby(int den, int tyzzal, int modlitba){
@@ -648,6 +715,14 @@ void set_prosby(int den, int tyzzal, int modlitba){
 }
 
 void set_modlitba(int den, int tyzzal, int modlitba){
+	if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
+		/* 2005-03-27: pre modlitbu cez den:
+		 * prvy a treti, resp. druhy a stvrty tyzden maju rovnake */
+		if(tyzzal == 3)
+			tyzzal = 1;
+		else if(tyzzal == 4)
+			tyzzal = 2;
+	}
 	file_name_zaltar(den, tyzzal);
 	anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_MODLITBA);
 	_set_modlitba(modlitba, _file, _anchor);
@@ -946,9 +1021,19 @@ void zaltar(int den, int tyzzal){
 				/* modlitba cez den */
 					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_HE");
 				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z131.htm", "ZALM131");
+					_set_zalm2(MODL_POSV_CITANIE, "z132.htm", "ZALM132_I");
+					_set_zalm3(MODL_POSV_CITANIE, "z132.htm", "ZALM132_II");
+					/*
 					_set_zalm1(MODL_POSV_CITANIE, "z105.htm", "ZALM105_I");
 					_set_zalm2(MODL_POSV_CITANIE, "z105.htm", "ZALM105_II");
 					_set_zalm3(MODL_POSV_CITANIE, "z105.htm", "ZALM105_III");
+					*/
+					/* 2005-03-27:
+					 * Neviem preco tu bolo "z105.htm", "ZALM105_I" az "ZALM105_III"
+					 * Mozno z nejakeho ineho obdobia zaltara.
+					 * Opravene pre OCR na Z131 a Z132 I-II.
+					 */
 					break;
 
 				default: break;
@@ -1069,9 +1154,19 @@ void zaltar(int den, int tyzzal){
 					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z61.htm", "ZALM61");
 					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z64.htm", "ZALM64");
 				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z136.htm", "ZALM136_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z136.htm", "ZALM136_II_PC");
+					_set_zalm3(MODL_POSV_CITANIE, "z136.htm", "ZALM136_III_PC"); /* inak je 136 cleneny pre pondelok 4. tyzdna, vespery */
+					/*
 					_set_zalm1(MODL_POSV_CITANIE, "z106.htm", "ZALM106_I");
 					_set_zalm2(MODL_POSV_CITANIE, "z106.htm", "ZALM106_II");
 					_set_zalm3(MODL_POSV_CITANIE, "z106.htm", "ZALM106_III");
+					*/
+					/* 2005-03-27:
+					 * Neviem preco tu bolo "z106.htm", "ZALM106_I" az "ZALM106_III"
+					 * Mozno z nejakeho ineho obdobia zaltara (podobne sobota v 1. tyzdni).
+					 * Opravene pre OCR na Z136 I-III.
+					 */
 					break;
 
 				default: break;
@@ -1227,7 +1322,7 @@ void zaltar(int den, int tyzzal){
 					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z120.htm", "ZALM120");
 				/* vespery */
 					_set_zalm1(MODL_VESPERY, "z136.htm", "ZALM136_I");
-					_set_zalm2(MODL_VESPERY, "z136.htm", "ZALM136_II");
+					_set_zalm2(MODL_VESPERY, "z136.htm", "ZALM136_II"); /* inak je 136 cleneny pre sobotu 2. tyzdna, posvatne citanie */
 				/* posvatne citanie */
 					_set_zalm1(MODL_POSV_CITANIE, "z73.htm", "ZALM73_I");
 					_set_zalm2(MODL_POSV_CITANIE, "z73.htm", "ZALM73_II");
@@ -1300,9 +1395,19 @@ void zaltar(int den, int tyzzal){
 					_set_zalm1(MODL_VESPERY, "z145.htm", "ZALM145_I");
 					_set_zalm2(MODL_VESPERY, "z145.htm", "ZALM145_II");
 				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z55.htm", "ZALM55_I_PC");
+					_set_zalm2(MODL_POSV_CITANIE, "z55.htm", "ZALM55_II_PC");
+					_set_zalm3(MODL_POSV_CITANIE, "z55.htm", "ZALM55_III_PC"); /* inak clenene pre modlitbu cez den, streda v 2. tyzdni */ 
+					/*
 					_set_zalm1(MODL_POSV_CITANIE, "z78.htm", "ZALM78_I");
 					_set_zalm2(MODL_POSV_CITANIE, "z78.htm", "ZALM78_II");
 					_set_zalm3(MODL_POSV_CITANIE, "z78.htm", "ZALM78_III");
+					*/
+					/* 2005-03-27:
+					 * Neviem preco tu bolo "z78.htm", "ZALM78_I" az "ZALM78_III"
+					 * Mozno z nejakeho ineho obdobia zaltara (podobne sobota v 1. a 2. tyzdni).
+					 * Opravene pre OCR na Z55 I-III.
+					 */
 					break;
 
 				case DEN_SOBOTA:
@@ -1315,9 +1420,19 @@ void zaltar(int den, int tyzzal){
 					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z45.htm", "ZALM45_I");
 					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z45.htm", "ZALM45_II");
 				/* posvatne citanie */
+					_set_zalm1(MODL_POSV_CITANIE, "z50.htm", "ZALM50_I");
+					_set_zalm2(MODL_POSV_CITANIE, "z50.htm", "ZALM50_II");
+					_set_zalm3(MODL_POSV_CITANIE, "z50.htm", "ZALM50_III");
+					/*
 					_set_zalm1(MODL_POSV_CITANIE, "z78.htm", "ZALM78_IV");
 					_set_zalm2(MODL_POSV_CITANIE, "z78.htm", "ZALM78_V");
 					_set_zalm3(MODL_POSV_CITANIE, "z78.htm", "ZALM78_VI");
+					*/
+					/* 2005-03-27:
+					 * Neviem preco tu bolo "z78.htm", "ZALM78_IV" az "ZALM78_VI"
+					 * Mozno z nejakeho ineho obdobia zaltara (podobne sobota v 1. a 2. tyzdni a piatok vo 4. tyzdni, posv. citanie).
+					 * Opravene pre OCR na Z55 I-III.
+					 */
 					break;
 
 				default: break;
@@ -1740,13 +1855,6 @@ void _set_zalmy_vsetkych_svatych(int modlitba){
 	Log("_set_zalmy_vsetkych_svatych(%s) -- end\n", nazov_modlitby[modlitba]);
 }
 
-/* 2003-06-30 pre lahsie debugovanie obohateny vypis */
-#define set_LOG_litobd Log("   set(litobd): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby[modlitba], _file, _anchor)
-/* 2004-04-28 pre lahsie debugovanie obohateny vypis pre pc */
-#define set_LOG_litobd_pc Log("   set(litobd): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby[modlitba], _file_pc, _anchor)
-/* 2004-04-28 pre lahsie debugovanie obohateny vypis pre pc-tyzden */
-#define set_LOG_litobd_pc_tyzden Log("   set(litobd): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby[modlitba], _file_pc_tyzden, _anchor)
-
 void liturgicke_obdobie(int litobd, int tyzden, int den, int tyzzal, int poradie_svateho){
 	int modlitba, t;
 
@@ -1800,6 +1908,8 @@ void liturgicke_obdobie(int litobd, int tyzden, int den, int tyzzal, int poradie
 
 	file_name_litobd(litobd);
 	Log("  _file == %s\n", _file);
+
+Log(_global_modl_posv_citanie); /* 2005-03-26: Pridany vypis */
 
 	/* file pre posvatne citania; pridane 2003-11-20 */
 	file_name_litobd_pc(litobd);
@@ -3675,6 +3785,7 @@ label_24_DEC:
 					break;
 				}
 				if(_global_den.denvt == DEN_NEDELA){
+					Log("--- nedela OCR, nastavujem modlitbu dna...\n");
 					/* ak je specialna, tak _file sa nastavi v dalsom, 10/03/2000A.D. */
 					file_name_litobd(OBD_CEZ_ROK);
 					/* benediktus */
@@ -3702,6 +3813,19 @@ label_24_DEC:
 					set_LOG_litobd;
 					modlitba = MODL_VESPERY;
 					_set_modlitba(MODL_VESPERY, _file, _anchor);
+					set_LOG_litobd;
+					/* modlitba pre posvatne citania a modlitbu cez den, 2005-03-27 */
+					modlitba = MODL_PREDPOLUDNIM;
+					_set_modlitba(MODL_PREDPOLUDNIM, _file, _anchor);
+					set_LOG_litobd;
+					modlitba = MODL_NAPOLUDNIE;
+					_set_modlitba(MODL_NAPOLUDNIE, _file, _anchor);
+					set_LOG_litobd;
+					modlitba = MODL_POPOLUDNI;
+					_set_modlitba(MODL_POPOLUDNI, _file, _anchor);
+					set_LOG_litobd;
+					modlitba = MODL_POSV_CITANIE;
+					_set_modlitba(MODL_POSV_CITANIE, _file, _anchor);
 					set_LOG_litobd;
 
 					/* 10/03/2000A.D. */
@@ -3806,6 +3930,8 @@ label_24_DEC:
 					}/* krst krista pana */
 				}/* nedela v obdobi cez rok */
 				else{
+					Log("--- obdobie cez rok, nie nedela...\n");
+					/* nie je nedela, ale len bezny den - feria - v obdobi cez rok */
 					if(_global_den.denvr == (_global_r._ZOSLANIE_DUCHA_SV.denvr + 11)){
 						/* najsv. kristovho tela a krvi; 10/03/2000A.D. */
 						mystrcpy(_file, FILE_TELA_A_KRVI, MAX_STR_AF_FILE);
@@ -3876,6 +4002,16 @@ label_24_DEC:
 						/* neposkvrneneho srdca prebl. panny marie; 04/07/2000A.D. */
 						Log("  (hoci tu nic nenastavujem) ide o spomienku neposkvrneneho srdca prebl. panny marie\n");
 					}
+					else {
+						/* 2005-03-27: posvatne citania doplnena modlitba - je z prislusnej nedele OCR */
+						Log("--- modlitba dna pre bezne dni OCR je z prislusnej nedele...\n");
+						modlitba = MODL_POSV_CITANIE;
+						/* modlitba */
+						sprintf(_anchor, "_%d%s_%s", tyzden, nazov_DN_asci[DEN_NEDELA], ANCHOR_MODLITBA); 
+						modlitba = MODL_POSV_CITANIE;
+						_set_modlitba(MODL_POSV_CITANIE, _file, _anchor);
+						set_LOG_litobd;
+					}
 				}/* nie nedela */
 			}
 
@@ -3888,12 +4024,15 @@ label_24_DEC:
 
 			/* hymnus */
 			modlitba = MODL_POSV_CITANIE;
-			sprintf(_anchor, "%s%c_%s",
-				nazov_DN_asci[den],
-				pismenko_modlitby(modlitba),
-				ANCHOR_HYMNUS);
-			_set_hymnus(modlitba, _file_pc, _anchor);
-			set_LOG_litobd_pc;
+
+			/* 2005-03-26: Zapoznamkovane, presunuta funkcionalita do set_hymnus();
+				sprintf(_anchor, "%s%c_%s",
+					nazov_DN_asci[den],
+					pismenko_modlitby(modlitba),
+					ANCHOR_HYMNUS);
+				_set_hymnus(modlitba, _file_pc, _anchor);
+				set_LOG_litobd_pc;
+			*/
 
 			/* 1. citanie */
 			sprintf(_anchor, "%s%d%s%c_%s",
@@ -3922,27 +4061,6 @@ label_24_DEC:
 			set_LOG_litobd_pc_tyzden;
 
 			/* Log(_global_modl_posv_citanie); */
-
-			/* modlitba, pridane 2004-08-31 
-				-- zapoznamkovane, lebo nahradene inym, 2004-09-03
-			sprintf(_anchor, "%s%d%c_%s",
-				nazov_OBD[litobd],
-				tyzden,
-				pismenko_modlitby(modlitba),
-				ANCHOR_MODLITBA);
-			_set_modlitba(modlitba, _file_pc_tyzden, _anchor);
-			set_LOG_litobd_pc_tyzden;
-			*/
-
-			/* modlitba, zmenene 2004-09-03 */
-			sprintf(_anchor, "_%d%s_%s", 
-				tyzden, 
-				nazov_DN_asci[DEN_NEDELA], 
-				ANCHOR_MODLITBA); 
-			_set_modlitba(modlitba, _file, _anchor);
-			set_LOG_litobd;
-
-Log(_global_modl_posv_citanie);
 
 			break;
 /* switch(litobd), case OBD_CEZ_ROK -- end ---------------------------------------------------- */

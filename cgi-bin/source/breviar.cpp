@@ -56,6 +56,7 @@
 /*   2004-03-17a.D. | cesty sa citaju z konfigu (INCLUDE_DIR)  */
 /*   2005-03-21a.D. | novy typ exportu (1 den-1 riadok) pre LK */
 /*   2005-03-22a.D. | uprava funkcie parseQueryString()        */
+/*   2005-03-28a.D. | nova funkcia setForm(), uprava pre uncgi */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -70,7 +71,9 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-                                       
+#include <ctype.h>
+#include <string.h>
+
 #include "mystring.h" /* 31/03/2000A.D. */
 #include "myconf.h" /* 30/03/2000A.D. */
 #include "mysystem.h" /* hovori, ci som v systeme linux/DOS */
@@ -78,7 +81,7 @@
 #include "hodin.h"                     
 #include "cgiutils.h" /* parsovanie query stringu */
 #include "mygetopt.h" /* parsovanie argv[], t.j. options z command line */
-                                       
+
 /* dbzaltar:: zaltar(); liturgicke_obdobie(); sviatky_svatych(); */
 #include "dbzaltar.h"                  
 /* povodne tu bolo aj 'dbsvaty.cpp', obsahujuce sviatky_svatych();
@@ -89,6 +92,12 @@
 #include "mylog.h" /* logovanie udalosti do suboru */
 #include "myexpt.h" /* export do suboru alebo na konzolu printf */
 #include "myhpage.h" /* hlavicka(); patka(); */
+
+/* 2005-03-28: Pridane, pokusy nahradit uncgi */
+char *_global_buf;
+
+#define ishex(x) (((x) >= '0' && (x) <= '9') || ((x) >= 'a' && (x) <= 'f') || \
+		  ((x) >= 'A' && (x) <= 'F'))
 
 #define MAX_BUFFER 30
 
@@ -355,6 +364,264 @@ int odstran_backslashe(char *input){
 }
 
 /*---------------------------------------------------------------------*/
+/*
+ * Read a POST query from standard input into a dynamic buffer.  Terminate
+ * it with a null character.
+ *
+ * Vzate 2005-03-28 z uncgi.c.
+ * Navratova hodnota SUCCESS/FAILURE,
+ * vysledok je v globalnej premennej _global_buf.
+ *
+ */
+int postread(void){
+	char *buf = NULL;
+	int	size = 0, sofar = 0, got;
+
+	Log("uncgi::postread() -- zaciatok\n");
+	buf = getenv("CONTENT_TYPE");
+	if (buf == NULL || strcmp(buf, "application/x-www-form-urlencoded")){
+		Log("uncgi::No content type was passed.\n");
+		return FAILURE;
+	}
+
+	buf = getenv("CONTENT_LENGTH");
+	if (buf == NULL){
+		Log("uncgi::The server did not tell uncgi how long the request was.\n");
+		return FAILURE;
+	}
+	
+	size = atoi(buf);
+	buf = (char *)malloc(size + 1);
+	if (buf == NULL){
+		Log("uncgi::Error: postread\n");
+		return FAILURE;
+	}
+	do
+	{
+		got = fread(buf + sofar, 1, size - sofar, stdin);
+		sofar += got;
+	} while (got && sofar < size);
+
+	buf[sofar] = '\0';
+
+	_global_buf = buf;
+	Log("uncgi::postread() -- koniec\n");
+	return SUCCESS;
+}
+
+/*---------------------------------------------------------------------*/
+/*
+ * Convert two hex digits to a value.
+ */
+static int htoi(/* unsigned */ char *s){
+	int	value;
+	char	c;
+
+	c = s[0];
+	if (isupper(c))
+		c = tolower(c);
+	value = (c >= '0' && c <= '9' ? c - '0' : c - 'a' + 10) * 16;
+
+	c = s[1];
+	if (isupper(c))
+		c = tolower(c);
+	value += c >= '0' && c <= '9' ? c - '0' : c - 'a' + 10;
+
+	return (value);
+}
+
+/*---------------------------------------------------------------------*/
+/*
+ * Get rid of all the URL escaping in a string.  Modify it in place, since
+ * the result will always be equal in length or smaller.
+ */
+static void url_unescape(/* unsigned */ char *str){
+	/* unsigned */ char *dest = str;
+
+	while (str[0])
+	{
+		if (str[0] == '+')
+			dest[0] = ' ';
+		else if (str[0] == '%' && ishex(str[1]) && ishex(str[2]))
+		{
+			dest[0] = (/* unsigned */ char) htoi(str + 1);
+			str += 2;
+		}
+		else
+			dest[0] = str[0];
+
+		str++;
+		dest++;
+	}
+
+	dest[0] = '\0';
+}
+
+/*---------------------------------------------------------------------*/
+/*
+ * Stuff a URL-unescaped variable, with the prefix on its name, into the
+ * environment.  Uses the "=" from the CGI arguments.  Putting an "=" in
+ * a field name is probably a bad idea.
+ *
+ * If the variable is already defined, append a '#' to it along with the
+ * new value.
+ *
+ * If the variable name begins with an underline, strip whitespace from the
+ * start and end and normalize end-of-line characters.
+ */
+static void stuffenv(char *var){
+	char *buf, *c, *s, *t, *oldval, *newval;
+	int	despace = 0, got_cr = 0;
+
+#ifdef DEBUG
+	printf("Before unescape: %s\n", var);
+#endif
+
+	url_unescape(var);
+
+	/*
+	 * Allocate enough memory for the variable name and its value.
+	 */
+	buf = (char *)malloc(strlen(var) + sizeof(WWW_PREFIX) + 2);
+	if (buf == NULL){
+		Log("  Not enough memory to allocate buffer for `buf'\n");
+		return;
+	}
+	strcpy(buf, WWW_PREFIX);
+	if (var[0] == '_')
+	{
+		strcpy(buf + sizeof(WWW_PREFIX) - 1, var + 1);
+		despace = 1;
+	}
+	else
+		strcpy(buf + sizeof(WWW_PREFIX) - 1, var);
+
+	/*
+	 * If, for some reason, there wasn't an = in the query string,
+	 * add one so the environment will be valid.
+	 *
+	 * Also, change periods to underscores so folks can get at "image"
+	 * input fields from the shell, which has trouble with periods
+	 * in variable names.
+	 */
+	for (c = buf; *c != '\0'; c++)
+	{
+		if (*c == '.')
+			*c = '_';
+		if (*c == '=')
+			break;
+	}
+	if (*c == '\0')
+		c[1] = '\0';
+	*c = '\0';
+
+	/*
+	 * Do whitespace stripping, if applicable.  Since this can only ever
+	 * shorten the value, it's safe to do in place.
+	 */
+	if (despace && c[1])
+	{
+#ifdef DEBUG
+		printf("  Stripping whitespace.\n");
+#endif
+		for (s = c + 1; *s && isspace(*s); s++)
+			;
+		t = c + 1;
+		while (*s)
+		{
+			if (*s == '\r')
+			{
+				got_cr = 1;
+				s++;
+				continue;
+			}
+			if (got_cr)
+			{
+				if (*s != '\n')
+					*t++ = '\n';
+				got_cr = 0;
+			}
+			*t++ = *s++;
+		}
+
+		/* Strip trailing whitespace if we copied anything. */
+		while (t > c && isspace(*--t))
+			;
+		t[1] = '\0';
+	}
+
+	/*
+	 * Check for the presence of the variable.
+	 */
+	if ((oldval = getenv(buf)))
+	{
+#ifdef DEBUG
+		printf("  Variable %s exists with value %s\n", buf, oldval);
+#endif
+		newval = (char *)malloc(strlen(oldval) + strlen(buf) + strlen(c+1) + 3);
+		if (newval == NULL){
+			Log("  Not enough memory to allocate buffer for `buf'\n");
+			return;
+		}
+		*c = '=';
+		sprintf(newval, "%s#%s", buf, oldval);
+		*c = '\0';
+
+		/*
+		 * Set up to free the entire old environment variable -- there
+		 * really ought to be a library function for this.  It's safe
+		 * to free it since the only place these variables come from
+		 * is a previous call to this function; we can never be
+		 * freeing a system-supplied environment variable.
+		 */
+		oldval -= strlen(buf) + 1; /* skip past VAR= */
+	}
+	else
+	{
+#ifdef DEBUG
+		printf("  Variable %s doesn't exist yet.\n", buf);
+#endif
+		*c = '=';
+		newval = buf;
+	}
+
+#ifdef DEBUG
+	printf("  putenv %s\n", newval);
+#endif
+	putenv(newval);
+	
+	if (oldval)
+	{
+		/*
+		 * Do the actual freeing of the old value after it's not
+		 * being referred to any more.
+		 */
+		free(oldval);
+		free(buf);
+	}
+}
+
+/*---------------------------------------------------------------------*/
+/*
+ * Scan a query string, stuffing variables into the environment.  This
+ * should ideally just use strtok(), but that's not available everywhere.
+ */
+static void scanquery(char *q){
+	char	*next = q;
+
+	do {
+		next = strchr(next, '&');
+		if (next)
+			*next = '\0';
+
+		stuffenv(q);
+		if (next)
+			*next++ = '&';
+		q = next;
+	} while (q != NULL);
+}
+
+/*---------------------------------------------------------------------*/
 /* popis: zisti, odkial sa citaju argumenty (vstupy);
  * vracia:
  *
@@ -366,6 +633,8 @@ int getSrciptParamFrom(int argc){
 
 	/* najprv zistime, ci existuje systemova premenna QUERY_STRING */
 	char *qs;
+	char *method;
+	int ret;
 	/* kedze na zaciatku main() alokujeme pre `query_string' miesto,
 	 * musime tu spravit nie
 	 *   query_string = getenv("QUERY_STRING");
@@ -386,6 +655,26 @@ int getSrciptParamFrom(int argc){
 		Log("query_string == %s\n", query_string);
 	else
 		Log("query_string is NULL\n");
+	
+	/* 2005-03-28: Pridane zistenie, odkial sa cita */
+	method = getenv("REQUEST_METHOD");
+	if(method != NULL)
+		Log("method == %s\n", method);
+	else
+		Log("method is NULL\n");
+	if (method != NULL && ! strcmp(method, "POST")){
+		ret = postread();
+		if(ret == SUCCESS){
+			Log("OK. Pokracujem skenovanim query...\n");
+			if ((_global_buf != NULL) && (_global_buf[0] != '\0')){
+				scanquery(_global_buf);
+				Log("POST::Vysledok == %s\n", _global_buf);
+			}
+		}
+		else
+			Log("Chyba.\n");
+	}
+
 	/* systemova premenna QUERY_STRING existuje prave vtedy,
 	 * ked query_string nie je prazdny retazec */
 	if((query_string != NULL) && (strlen(query_string) > 0)){
@@ -5518,7 +5807,8 @@ int getArgv(int argc, char **argv){
 					printf("\tm  mesiac  %s (1--12, jan--dec)\n", STR_MESIAC);
 					printf("\tt  tyzden zaltara (1--4) \n");
 					printf("\tr  rok (napr. 2000)\n");
-					printf("\tp  %s (modlitba  napr. %s, %s, ...) \n", STR_MODLITBA, STR_MODL_RANNE_CHVALY, STR_MODL_VESPERY);
+					printf("\tp  %s (modlitba: %s, %s, %s, %s, %s, %s, %s...) \n", 
+						STR_MODLITBA, STR_MODL_RANNE_CHVALY, STR_MODL_VESPERY, STR_MODL_POSV_CITANIE, STR_MODL_PREDPOLUDNIM, STR_MODL_NAPOLUDNIE, STR_MODL_POPOLUDNI, STR_MODL_DETAILY);
 					printf("\t\t (resp. rok do pre davkove spracovanie)\n"); /* pridane 2003-07-07 */
 					printf("\tx  %s (dalsi svaty, 1--3 resp. 4) \n", STR_DALSI_SVATY);
 					/* 2004-03-11, zlepseny popis */
@@ -5605,6 +5895,105 @@ int getArgv(int argc, char **argv){
 	return SUCCESS;
 }/* getArgv(); */
 
+
+/*---------------------------------------------------------------------*/
+/* popis: naplni premenne WWW_... hodnotami z QS, t.j. akoby to vratilo uncgi.c
+ * vracia: on success, returns SUCCESS
+ *         on error,   returns FAILURE
+ */
+int setForm(void){
+	char local_str[MAX_STR] = STR_EMPTY;
+	Log("setForm() -- begin\n");
+	/* den */
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_DEN, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_DEN), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_DEN);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	/* mesiac */
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_MESIAC, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MESIAC), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_MESIAC);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	/* rok */
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_ROK, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_ROK), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_ROK);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	/* modlitba */
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_MODLITBA, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODLITBA), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_MODLITBA);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	/* pom_DALSI_SVATY */
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_DALSI_SVATY, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_DALSI_SVATY), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_DALSI_SVATY);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	/* pom_MODL_OPT1..pom_MODL_OPT5 */
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_MODL_OPT1, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT1), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_MODL_OPT1);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_MODL_OPT2, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT2), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_MODL_OPT2);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_MODL_OPT3, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT3), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_MODL_OPT3);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_MODL_OPT4, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT4), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_MODL_OPT4);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_MODL_OPT5, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT5), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_MODL_OPT5);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		putenv(local_str);
+	}
+	Log("setForm() -- end, returning SUCCESS\n");
+	return SUCCESS;
+}/* setForm(); */
+
 /*---------------------------------------------------------------------*/
 /* popis: naplni premenne pom_... hodnotami z environmentu, t.j.
  *        premennymi WWW_ ktore vrati uncgi.c
@@ -5614,6 +6003,7 @@ int getArgv(int argc, char **argv){
 int getForm(void){
 	char *ptr;
 
+	Log("getForm() -- begin\n");
 	//DEBUG_GET_FORM("argc == %d\n", argc);
 
 	/* malo by byt argc == 1 */
@@ -5624,7 +6014,7 @@ int getForm(void){
 		/* premenna WWW_DEN */
 		ptr = getenv(ADD_WWW_PREFIX_(STR_DEN));
 		if(ptr == NULL){
-			Export("Nebola vytvorená; systémová premenná %s.\n",
+			Export("Nebola vytvorená systémová premenná %s.\n",
 				ADD_WWW_PREFIX_(STR_DEN));
 			ALERT;
 			DEBUG_GET_FORM("%s neexistuje.\n",
@@ -5929,10 +6319,17 @@ int getForm(void){
 		}
 	}/* query_type == PRM_TABULKA */
 
+	else if(query_type == PRM_DNES){
+		/* 2005-03-28: Pridane, aby nevracalo FAILURE. */
+		Log("getForm() -- nie je potrebne nic nacitavat :)) \n");
+	}
+
 	else{
+		Log("getForm() -- end, returning FAILURE\n");
 		/* neznamy typ dotazu */
 		return FAILURE;
 	}
+	Log("getForm() -- end, returning SUCCESS\n");
 	return SUCCESS;
 }/* getForm(); */
 
@@ -6417,17 +6814,17 @@ int parseQueryString(void){
 #define _main_LOG Log
 
 #define _main_LOG_to_Export_PARAMS {\
-	_main_LOG_to_Export("param1 == %s (pom_DEN/pom_SVIATOK/pom_DEN_V_TYZDNI), param1 == %s (pom_ROK_FROM)\n", pom_DEN, pom_ROK_FROM);\
-	_main_LOG_to_Export("param2 == %s (pom_MESIAC/pom_TYZDEN), param2 == %s (pom_ROK_TO)\n", pom_MESIAC, pom_ROK_TO);\
-	_main_LOG_to_Export("param3 == %s (pom_ROK/pom_ANALYZA_ROKU), param3 == %s (pom_LINKY)\n", pom_ROK, pom_LINKY);\
-	_main_LOG_to_Export("param4 == %s (pom_MODLITBA)\n", pom_MODLITBA);\
-	_main_LOG_to_Export("param5 == %s (pom_DALSI_SVATY)\n", pom_DALSI_SVATY);\
-	_main_LOG_to_Export("param6 == %s (pom_MODL_OPT1)\n", pom_MODL_OPT1);\
-	_main_LOG_to_Export("param7 == %s (pom_MODL_OPT2)\n", pom_MODL_OPT2);\
-	_main_LOG_to_Export("param8 == %s (pom_MODL_OPT3)\n", pom_MODL_OPT3);\
-	_main_LOG_to_Export("param9 == %s (pom_MODL_OPT4)\n", pom_MODL_OPT4);\
-	_main_LOG_to_Export("param10== %s (pom_MODL_OPT5)\n", pom_MODL_OPT5);\
-	_main_LOG_to_Export("param11== %s (pom_MODL_OPT_APPEND)\n", pom_MODL_OPT_APPEND);\
+	_main_LOG_to_Export("\tparam1 == %s (pom_DEN/pom_SVIATOK/pom_DEN_V_TYZDNI), param1 == %s (pom_ROK_FROM)\n", pom_DEN, pom_ROK_FROM);\
+	_main_LOG_to_Export("\tparam2 == %s (pom_MESIAC/pom_TYZDEN), param2 == %s (pom_ROK_TO)\n", pom_MESIAC, pom_ROK_TO);\
+	_main_LOG_to_Export("\tparam3 == %s (pom_ROK/pom_ANALYZA_ROKU), param3 == %s (pom_LINKY)\n", pom_ROK, pom_LINKY);\
+	_main_LOG_to_Export("\tparam4 == %s (pom_MODLITBA)\n", pom_MODLITBA);\
+	_main_LOG_to_Export("\tparam5 == %s (pom_DALSI_SVATY)\n", pom_DALSI_SVATY);\
+	_main_LOG_to_Export("\tparam6 == %s (pom_MODL_OPT1)\n", pom_MODL_OPT1);\
+	_main_LOG_to_Export("\tparam7 == %s (pom_MODL_OPT2)\n", pom_MODL_OPT2);\
+	_main_LOG_to_Export("\tparam8 == %s (pom_MODL_OPT3)\n", pom_MODL_OPT3);\
+	_main_LOG_to_Export("\tparam9 == %s (pom_MODL_OPT4)\n", pom_MODL_OPT4);\
+	_main_LOG_to_Export("\tparam10== %s (pom_MODL_OPT5)\n", pom_MODL_OPT5);\
+	_main_LOG_to_Export("\tparam11== %s (pom_MODL_OPT_APPEND)\n", pom_MODL_OPT_APPEND);\
 }
 
 /* kedysi bolo void main;
@@ -6464,8 +6861,6 @@ int main(int argc, char **argv){
 	_global_linky = 1; /* zobrazovat linky */
 #elif defined(OS_Windows)
 	_global_linky = 0; /* nezobrazovat linky */
-#elif defined(OS_DOS)
-	_global_linky = 1; /* zobrazovat linky */
 #else
 	#error Unsupported operating system (not defined in mysystem.h)
 #endif
@@ -6632,35 +7027,7 @@ int main(int argc, char **argv){
 			 * aj query string, aj formular (teda treba citat aj systemove
 			 * premenne WWW_...
 			 */
-			_main_LOG_to_Export("---scanning for system variables WWW_...: started...\n");
-			/* historicka poznamka:                          (01/02/2000A.D.)
-			 * kedysi tu tato pasaz (podla casti `case SCRIPT_PARAM_FROM_FORM')
-			 * nebola, avsak pretoze to neumoznovalo `mixovane' dotazy
-			 * (ked je nieco v QS a navyse, uncgi.c vlozi (aj QS aj) ostatne veci
-			 *  z formulara do systemovych premennych WWW_...),
-			 * zmenili sme to tak, ze sa tu precitaju WWW_... a potom parsuje qs
-			 */
-			query_type = getQueryTypeFrom_WWW();
-			/* zistili sme, aky je typ dotazu podla formulara */
-			if((query_type != PRM_NONE) && (query_type != PRM_UNKNOWN)){
-				/* znamena to teda, ze existuje systemova premenna,
-				 * oznacujuca typ dotazu ==> treba nacitat z formulara resp.
-				 * systemovych premennych WWW_...
-				 */
-				_main_LOG_to_Export("spustam getForm();\n");
-				ret = getForm();
-				_main_LOG_to_Export("params from system variables WWW_...:\n");
 
-				_main_LOG_to_Export_PARAMS; /* 2003-08-13, dane do #define */
-
-				_main_LOG_to_Export("spat po skonceni getForm()\n");
-			}
-			_main_LOG_to_Export("---scanning for system variables WWW_...:finished.\n");
-			/* a bez ohladu na to, ci sme nieco precitali z WWW_... pokracujeme
-			 * parsovanim query stringu;
-			 * pritom je mozne, ze niektore hodnoty nacitane z WWW_... (alebo
-			 * aj vsetky) prepiseme prave tymito, z qs - ale nevadi-NEVADI |_
-			 */
 _main_SIMULACIA_QS:
 			_main_LOG_to_Export("---getting query type from query string (query_string == %s):\n", query_string);
 			query_type = getQueryTypeFrom_QS(query_string);
@@ -6669,6 +7036,36 @@ _main_SIMULACIA_QS:
 			_main_LOG_to_Export("---parsing query string:\n");
 			ret = parseQueryString();
 			_main_LOG_to_Export("---parsing query string: finished.\n");
+
+			_main_LOG_to_Export("---scanning for system variables WWW_...: started...\n");
+			/* historicka poznamka:                          (01/02/2000A.D.)
+			 * kedysi tu tato pasaz (podla casti `case SCRIPT_PARAM_FROM_FORM')
+			 * nebola, avsak pretoze to neumoznovalo `mixovane' dotazy
+			 * (ked je nieco v QS a navyse, uncgi.c vlozi (aj QS aj) ostatne veci
+			 *  z formulara do systemovych premennych WWW_...),
+			 * zmenili sme to tak, ze sa tu precitaju WWW_... a potom parsuje qs
+			 */
+
+			/* 2005-03-28: Zmenene poradie. POST dotazy handlovane vyssie sposobom uncgi. */
+			_main_LOG_to_Export("spustam setForm();\n");
+			ret = setForm();
+			_main_LOG_to_Export("spat po skonceni setForm()\n");
+
+			// query_type = getQueryTypeFrom_WWW();
+			/* zistili sme, aky je typ dotazu podla formulara */
+			if((ret == SUCCESS) && (query_type != PRM_NONE) && (query_type != PRM_UNKNOWN)){
+				/* znamena to teda, ze existuje systemova premenna,
+				 * oznacujuca typ dotazu ==> treba nacitat z formulara resp.
+				 * systemovych premennych WWW_...
+				 */
+				_main_LOG_to_Export("spustam getForm();\n");
+				ret = getForm();
+				_main_LOG_to_Export("params from system variables WWW_...:\n");
+				_main_LOG_to_Export_PARAMS; /* 2003-08-13, dane do #define */
+				_main_LOG_to_Export("spat po skonceni getForm()\n");
+			}
+			_main_LOG_to_Export("---scanning for system variables WWW_...:finished.\n");
+
 			break;
 		}
 	}
