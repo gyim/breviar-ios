@@ -22,6 +22,7 @@
 /*                  - pridane MODL_CEZ_DEN_VSETKY              */
 /*   2003-08-21a.D. | definicie pre posvatne citania           */
 /*   2003-11-20a.D. | definicie pre posvatne citania zmenene   */
+/*   2004-04-28a.D. | MAX_STR_AF_FILE zmenene na 16            */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -39,8 +40,8 @@
 
 #define MENO_SVIATKU 100
 
-/* nasledovne 2 definovane 2003-08-13 */
-#define MAX_STR_AF_FILE   12
+/* nasledovne 2 definovane 2003-08-13; zmenene 2004-04-28 (12->16) */
+#define MAX_STR_AF_FILE   16
 #define MAX_STR_AF_ANCHOR 23
 struct _anchor_and_file{
 	char file[MAX_STR_AF_FILE];
