@@ -51,7 +51,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2004-03-11"
+#define BUILD_DATE "2004-03-16"
 
 #define BYTES 250
 #define SMALL 80
@@ -96,7 +96,7 @@ void updateUnCGIName(void);
 
 /*   v dalsom 'a' je string s nazvom .htm suboru
  * PATH(a): pre linky, teda cesta k fajlu pre browser
- * FILE_PATH(a): pre vnutorny proscessing, teda cesta k fajlu pre program;
+ * FILE_PATH(a): pre vnutorny processing, teda cesta k fajlu pre program;
  * 05/06/2000A.D.: FILE_PATH(a) prerobene (len pre Windows-mod sa nieco zmeni);
  *                 povodne bolo FILE_PATH(a) "include\\"##a,
  *                 ibaze vsade (jedine breviar.cpp) sa pouzivalo
@@ -112,17 +112,11 @@ void updateUnCGIName(void);
  *                 
  */
 /* tu kedysi bolo aj #define PATH(a) zvacsa a, ale nebolo to treba; vyhodene 2003-07-02 */
-#if defined(OS_linux)
-	#define FILE_PATH            "../include/"
-#elif defined(OS_DOS)
-	#define FILE_PATH            "c:\\breviar\\include\\"
-//	#define FILE_PATH(a)         "c:\\breviar\\"##a /* 01/03/2000A.D. */
-#elif defined(OS_Windows)
-	extern char FILE_PATH[MAX_STR]; /* inicializovane v breviar.cpp */
-	/* FILE_PATH zmenene 05/06/2000A.D. */
-#else
-	#error Unsupported operating system (not defined in mysystem.h)
-#endif
+
+/* 2004-03-17
+ * FILE_PATH nie je potrebne; citame to z myconf.cpp::readConfig() (config file)
+ */
+//extern char FILE_PATH[MAX_STR]; /* inicializovane v breviar.cpp; definovane v  */
 
 #define MESSAGE_FOLDER "msg/"
 #define FILE_PRESTUPNY_ROK		MESSAGE_FOLDER"prestupn.htm"

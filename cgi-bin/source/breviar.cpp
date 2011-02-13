@@ -52,6 +52,7 @@
 /*   2003-11-20a.D. | interpretParameter(): pre posv. citania  */
 /*                    pridane citanie1 a citanie2              */
 /*   2004-03-11a.D. | pre batch mod export parametrov          */
+/*   2004-03-16a.D. | pre batch mod export zoznamu ako HTML    */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -316,9 +317,9 @@ char file_export[SMALL] = STR_EMPTY;
 /* nasledovna pasaz pridana 05/06/2000A.D., a to pre 
  * pridany parameter `i' (include directory) */
 /* deklarovane pre OS_Windows v mydefs.h */
-#ifdef OS_Windows
-	char FILE_PATH[MAX_STR] = "include\\";
-#endif
+/* 2004-03-17 vyhodene #ifdef pre windows; pouziva sa to jednotne */
+//char FILE_PATH[MAX_STR] = "include\\";
+
 char include_dir[MAX_STR] = STR_EMPTY;
 
 /* nasledovna pasaz pridana 2003-07-04, a to pre batch mode;
@@ -327,6 +328,9 @@ char include_dir[MAX_STR] = STR_EMPTY;
 char name_binary_executable[MAX_STR] = STR_EMPTY;
 char name_batch_file[MAX_STR] = STR_EMPTY;
 FILE *batch_file = NULL;
+/* 2004-03-16 pridane pre batch mode, parameter `k', aby exportoval aj zoznam modlitieb do HTML */
+char name_batch_html_file[MAX_STR] = STR_EMPTY;
+FILE *batch_html_file = NULL;
 
 /*---------------------------------------------------------------------*/
 /* popis: odstrani backslashe zo stringu (argv[1]) a vrati novy string
@@ -590,7 +594,7 @@ void includeFile(int type, char *paramname, char *fname, char *modlparam){
 void interpretParameter(int type, char *paramname){
 	char path[MAX_STR] = STR_EMPTY;
 	mystrcpy(path, include_dir, MAX_STR);
-	strcat(path, FILE_PATH); /* prerobene 05/06/2000A.D. */
+	/* 2004-03-17 // strcat(path, FILE_PATH); /* prerobene 05/06/2000A.D. */
 
 	Log("interpretParameter(%s): Dumping by %s\n",
 		paramname, paramname);
@@ -1244,7 +1248,7 @@ void showPrayer(int type){
 	char templat[SMALL];
 	char path[MAX_STR] = STR_EMPTY;
 	mystrcpy(path, include_dir, MAX_STR);
-	strcat(path, FILE_PATH); /* prerobene 05/06/2000A.D. */
+	/* 2004-03-17 // strcat(path, FILE_PATH); /* prerobene 05/06/2000A.D. */
 
 	LOG_ciara;
 	Log("/* teraz nasleduje zobrazenie modlitby */\n");
@@ -1318,7 +1322,7 @@ void showPrayer(int type){
 void VYSVETLIVKY(void){ /* 13/03/2000A.D. */
 	char fname[MAX_STR] = STR_EMPTY;
 	mystrcpy(fname, include_dir, MAX_STR);
-	strcat(fname, FILE_PATH); /* prerobene 05/06/2000A.D. */
+	/* 2004-03-17 // strcat(fname, FILE_PATH); /* prerobene 05/06/2000A.D. */
 
 	strcat(fname, FILE_VYSVETLIVKY);
 	Export("<!--"); /* simulacia toho, ze replacujeme nejaky anchor */
@@ -1329,7 +1333,7 @@ void VYSVETLIVKY(void){ /* 13/03/2000A.D. */
 void VYSVETLIVKY_TABULKA(void){ /* 15/03/2000A.D. */
 	char fname[MAX_STR] = STR_EMPTY;
 	mystrcpy(fname, include_dir, MAX_STR);
-	strcat(fname, FILE_PATH); /* prerobene 05/06/2000A.D. */
+	/* 2004-03-17 // strcat(fname, FILE_PATH); /* prerobene 05/06/2000A.D. */
 
 	strcat(fname, FILE_VYSVETLIVKY_TABULKA);
 	Export("<!--"); /* simulacia toho, ze replacujeme nejaky anchor */
@@ -2965,15 +2969,20 @@ void _export_rozbor_dna(int typ){
 	/* ak je nastaveny _global_opt_append, tak vsetko do 1 suboru, 2003-07-08 */\
 	/* 2003-08-11 -Wall upozornila na too many arguments for format */\
 	/* 2004-03-11 pridane niektore dalsie parametre */\
+	/* 2004-03-16 pridany vypis do batch_html_file */\
+	fprintf(batch_html_file, "<li>%d. %s %d: \n", _global_den.den, nazov_mesiaca[_global_den.mesiac - 1], _global_den.rok);\
 	if(_global_opt_append == YES){\
 		fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -x%d -pmrch\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* ranne chvaly */\
 		/* TUTOLA */\
 		fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -x%d -pmv\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* vespery */\
 	}else{\
 		fprintf(batch_file, "%s%dr.htm -1%d -2%d -3%d -4%d -x%d -pmrch\n", batch_command, a, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* ranne chvaly */\
+		fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%dr.htm\">ranné chvály</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a);\
 		/* TUTOLA */\
 		fprintf(batch_file, "%s%dv.htm -1%d -2%d -3%d -4%d -x%d -pmv\n", batch_command, a, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* vespery */\
+		fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%dv.htm\">vešpery</a> \n", _global_den.rok, _global_den.mesiac, _global_den.den, a);\
 	}\
+	fprintf(batch_html_file, "</li>\n");\
 }
 void _export_rozbor_dna_batch(int typ){
 /* poznamky bez uvedenia datumu su prevzate z _export_rozbor_dna; 2003-07-07 */
@@ -4698,6 +4707,15 @@ void _main_tabulka(char *rok_from, char *rok_to, char *tab_linky){
 	Log("-- _main_tabulka(): koniec\n");
 }/* _main_tabulka() */
 
+void dumpFile(char *fname, FILE *expt){
+	int c;
+	FILE *input_file = fopen(fname, "rb");
+	if(input_file != NULL){
+		while((c = fgetc(input_file)) != EOF)
+			fputc(c, expt);
+	}
+}
+
 /*---------------------------------------------------------------------*/
 /* _main_batch_mode(); 2003-07-04
  *
@@ -4889,94 +4907,119 @@ void _main_batch_mode(
 			batch_file = fopen(name_batch_file, "wt");
 			if(batch_file != NULL){
 				Log("File `%s' opened for writing...\n", name_batch_file);
-				LOG_ciara;
 				/* teraz zacina cela sranda :)) ... */
 
-				/* poznamky do buducnosti (2003-07-4):
-				 * 1. ak r_from < r_to:
-				 *    (i)   od poradie(d_from, m_from, r_from) do poradie(31, MES_DEC, r_from);
-				 *    (ii)  pre roky i = (r_from + 1) do (r_to - 1):
-				 *          od poradie(1, MES_JAN, i) do poradie(31, MES_DEC, i);
-				 *    (iii) pre posledny rok: od poradie(1, MES_JAN, r_to) do poradie(d_to, m_to, r_to);
-				 * 2. ak je to r_from == r_to, tak len
-				 *    pre poradie(d_from, m_from, r_from) do poradie(d_to, m_to, r_from==r_to)
-				 *
-				 * co sa tam vlastne bude robit?
-				 * 1. analyzuj_rok() daneho roku (r_from, i, r_to) -- ale len 1x!
-				 * 2. pre vsetky potrebne dni: rozbor_dna() -- ale printovat to 
-				 *    nie Exportom do `export.htm', ale printf(name_batch_file)!
-				 * 3. that's all
-				 */
+				/* 2004-03-16: vystupny zoznam sa pripadne zapisuje aj ako HTML do suboru 
+				 * na zapisovanie do batch_html_file nevyuzivame Export() */
+				if(strcmp(name_batch_html_file, STR_EMPTY) == 0)
+					mystrcpy(name_batch_html_file, DEFAULT_HTML_EXPORT, MAX_STR);
+				batch_html_file = fopen(name_batch_html_file, "wt");
+				if(batch_html_file != NULL){
+					Log("File `%s' opened for writing...\n", name_batch_html_file);
+					hlavicka("Batch mód", batch_html_file);
+					fprintf(batch_html_file, "");
+					fprintf(batch_html_file, "<center><h2>Zoznam modlitieb</h2></center>\n");
+					fprintf(batch_html_file, "<ul>\n");
+	
+					LOG_ciara;
+					Log("batch mode: teraz zacinam po jednom dni prechadzat cele zadane obdobie...\n");
 
-				/* 2003-07-08
-				 * _global_string vyuzijeme na to, aby sme si medzi jednotlivymi dnami
-				 * posielali nazov suboru v pripade, ze chce vsetky modlitby
-				 * do 1 suboru (pouzil "-a1" = append)
-				 */
-				if(_global_opt_append == YES){
-					mystrcpy(_global_string, STR_EMPTY, MAX_GLOBAL_STR); /* inicializacia */
-					sprintf(_global_string, "%.4d-%.2d-%.2d_%.4d-%.2d-%.2d", 
-							r_from, m_from, d_from, r_to, m_to, d_to);
-				}
-
-				/* 2003-07-07 
-				 * _struct_den_mesiac je typ, ktory vrati _rozbor_dna();
-				 * 
-				 */
-				if(r_from < r_to){
-					Log("batch mode: viacero rokov (%d-%d)...\n", r_from, r_to);
-					/* analyzujem prvy rok (r_from). potom pre jednotlive dni az do konca roka
-					 * robim: _rozbor_dna a _export_rozbor_dna_batch
+					/* 2004-03-16: toto su uz minule poznamky o tom, ako to bude (teda je) spravene (2003-07-04)
+					 * 1. ak r_from < r_to:
+					 *    (i)   od poradie(d_from, m_from, r_from) do poradie(31, MES_DEC, r_from);
+					 *    (ii)  pre roky i = (r_from + 1) do (r_to - 1):
+					 *          od poradie(1, MES_JAN, i) do poradie(31, MES_DEC, i);
+					 *    (iii) pre posledny rok: od poradie(1, MES_JAN, r_to) do poradie(d_to, m_to, r_to);
+					 * 2. ak je to r_from == r_to, tak len
+					 *    pre poradie(d_from, m_from, r_from) do poradie(d_to, m_to, r_from==r_to)
+					 *
+					 * co sa tam vlastne bude robit?
+					 * 1. analyzuj_rok() daneho roku (r_from, i, r_to) -- ale len 1x!
+					 * 2. pre vsetky potrebne dni: rozbor_dna() -- ale printovat to 
+					 *    nie Exportom do `export.htm', ale printf(name_batch_file)!
+					 * 3. that's all
 					 */
-					Log("rok %d...\n", r_from);
-					analyzuj_rok(r_from);
-					for(i = poradie(d_from, m_from + 1, r_from); i <= poradie(31, MES_DEC + 1, r_from); i++){
-						Log("%d. den v roku %d...\n", i, r_from);
-						_rozbor_dna(por_den_mesiac(i, r_from), r_from);
-						_export_rozbor_dna_batch(EXPORT_DNA_JEDEN_DEN);
+
+					/* 2003-07-08
+					 * _global_string vyuzijeme na to, aby sme si medzi jednotlivymi dnami
+					 * posielali nazov suboru v pripade, ze chce vsetky modlitby
+					 * do 1 suboru (pouzil "-a1" = append)
+					 */
+					if(_global_opt_append == YES){
+						mystrcpy(_global_string, STR_EMPTY, MAX_GLOBAL_STR); /* inicializacia */
+						sprintf(_global_string, "%.4d-%.2d-%.2d_%.4d-%.2d-%.2d", 
+								r_from, m_from, d_from, r_to, m_to, d_to);
 					}
-					
-					/* teraz pre roky (r_from + 1) az (r_to - 1) robim to, co predtym,
-					 * cize analyzujem rok a pre vsetky dni - tentokrat pre cele roky, 
-					 * od 1.1. do 31.12. - robim _rozbor_dna a _export_rozbor_dna_batch
+
+					/* 2003-07-07 
+					 * _struct_den_mesiac je typ, ktory vrati _rozbor_dna();
+					 * 
 					 */
-					for(int y = (r_from + 1); y < r_to; y++){
-						Log("rok %d...\n", y);
-						analyzuj_rok(y);
-						for(i = poradie(1, MES_JAN + 1, y); i <= poradie(31, MES_DEC + 1, y); i++){
-							Log("%d. den v roku %d...\n", i, y);
-							_rozbor_dna(por_den_mesiac(i, y), y);
+					if(r_from < r_to){
+						Log("batch mode: viacero rokov (%d-%d)...\n", r_from, r_to);
+						/* analyzujem prvy rok (r_from). potom pre jednotlive dni az do konca roka
+						 * robim: _rozbor_dna a _export_rozbor_dna_batch
+						 */
+						Log("rok %d...\n", r_from);
+						analyzuj_rok(r_from);
+						for(i = poradie(d_from, m_from + 1, r_from); i <= poradie(31, MES_DEC + 1, r_from); i++){
+							Log("%d. den v roku %d...\n", i, r_from);
+							_rozbor_dna(por_den_mesiac(i, r_from), r_from);
 							_export_rozbor_dna_batch(EXPORT_DNA_JEDEN_DEN);
 						}
-						Log("...(rok %d) skoncil.\n", y);
-					}
+						
+						/* teraz pre roky (r_from + 1) az (r_to - 1) robim to, co predtym,
+						 * cize analyzujem rok a pre vsetky dni - tentokrat pre cele roky, 
+						 * od 1.1. do 31.12. - robim _rozbor_dna a _export_rozbor_dna_batch
+						 */
+						for(int y = (r_from + 1); y < r_to; y++){
+							Log("rok %d...\n", y);
+							analyzuj_rok(y);
+							for(i = poradie(1, MES_JAN + 1, y); i <= poradie(31, MES_DEC + 1, y); i++){
+								Log("%d. den v roku %d...\n", i, y);
+								_rozbor_dna(por_den_mesiac(i, y), y);
+								_export_rozbor_dna_batch(EXPORT_DNA_JEDEN_DEN);
+							}
+							Log("...(rok %d) skoncil.\n", y);
+						}
 
-					/* napokon analyzujem posledny rok (r_to). pre jednotlive dni az do 
-					 * dna (d_to, m_to) robim: _rozbor_dna a _export_rozbor_dna_batch
-					 */
-					Log("rok %d...\n", r_to);
-					analyzuj_rok(r_to);
-					for(i = poradie(1, MES_JAN + 1, r_to); i <= poradie(d_to, m_to + 1, r_to); i++){
-						Log("%d. den v roku %d...\n", i, r_to);
-						_rozbor_dna(por_den_mesiac(i, r_to), r_to);
-						_export_rozbor_dna_batch(EXPORT_DNA_JEDEN_DEN);
-					}
-				}/* r_from < r_to */
+						/* napokon analyzujem posledny rok (r_to). pre jednotlive dni az do 
+						 * dna (d_to, m_to) robim: _rozbor_dna a _export_rozbor_dna_batch
+						 */
+						Log("rok %d...\n", r_to);
+						analyzuj_rok(r_to);
+						for(i = poradie(1, MES_JAN + 1, r_to); i <= poradie(d_to, m_to + 1, r_to); i++){
+							Log("%d. den v roku %d...\n", i, r_to);
+							_rozbor_dna(por_den_mesiac(i, r_to), r_to);
+							_export_rozbor_dna_batch(EXPORT_DNA_JEDEN_DEN);
+						}
+					}/* r_from < r_to */
+					else{
+						Log("batch mode: vramci jedneho roka (%d)...\n", r_from);
+						/* analyzujem ten jeden rok. potom pre jednotlive dni robim:
+						 * _rozbor_dna a _export_rozbor_dna_batch
+						 */
+						analyzuj_rok(r_from);
+						for(i = poradie(d_from, m_from + 1, r_from); i <= poradie(d_to, m_to + 1, r_to); i++){
+							Log("%d. den v roku %d...\n", i, r_from);
+							_rozbor_dna(por_den_mesiac(i, r_from), r_from);
+							_export_rozbor_dna_batch(EXPORT_DNA_JEDEN_DEN);
+						}
+					}/* r_from == r_to */
+
+					fprintf(batch_html_file, "</ul>\n");
+					patka(batch_html_file);
+					fclose(batch_html_file);
+					Log("batch mode: ...cele zadane obdobie je prejdene.\n");
+					LOG_ciara;
+
+				}/* batch_html_file != NULL */
 				else{
-					Log("batch mode: vramci jedneho roka (%d)...\n", r_from);
-					/* analyzujem ten jeden rok. potom pre jednotlive dni robim:
-					 * _rozbor_dna a _export_rozbor_dna_batch
-					 */
-					analyzuj_rok(r_from);
-					for(i = poradie(d_from, m_from + 1, r_from); i <= poradie(d_to, m_to + 1, r_to); i++){
-						Log("%d. den v roku %d...\n", i, r_from);
-						_rozbor_dna(por_den_mesiac(i, r_from), r_from);
-						_export_rozbor_dna_batch(EXPORT_DNA_JEDEN_DEN);
-					}
-				}/* r_from == r_to */
+					Export("Nemôžem písa do súboru `%s'.\n", name_batch_html_file);
+					Log("Cannot open file `%s' for writing.\n", name_batch_html_file);
+				}/* batch_html_file == NULL) */
 
 				/* ...a sranda skoncila */
-				LOG_ciara;
 				fclose(batch_file);
 			}/* ok, batch_file != NULL */
 			else{
@@ -5196,9 +5239,11 @@ int getArgv(int argc, char **argv){
 	 *            `b' (name of generated batch file, analogia exportu, `e') -> name_batch_file
 	 * 2003-07-08: pridany nasledovny parameter:
 	 *            `a' (append) aby pri exportovani do suboru (-e) appendoval, nie prepisal subor
+	 * 2004-03-16: pridany nasledovny parameter:
+	 *            `k' (hyperteKst) aby pri exportovani v batch mode pisal do HTML suboru zoznam modlitieb
 	 *            
 	 */
-	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::1::2::3::4::5::a::h::e::f::g::l::i::\?::b::n::", MAX_STR);
+	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::1::2::3::4::5::a::h::e::f::g::l::i::\?::b::n::k::", MAX_STR);
 	/* tie options, ktore maju za sebou : maju povinny argument;
 	 *	ak maju :: tak maju volitelny */
 
@@ -5243,6 +5288,11 @@ int getArgv(int argc, char **argv){
 			if (c == -1) /* uz nie je option, vyskoc z while(1) */
 				break;
 			switch (c){ /* podla option urob nieco */
+				case 'k': /* pridane 2004-03-16, name_batch_html_file */
+					if(optarg != NULL){
+						mystrcpy(name_batch_html_file, optarg, SMALL);
+					}
+					Log("option %c with value `%s' -- batch file HTML name `%s' used for batch mode\n", c, optarg, optarg); break;
 				case 'b': /* pridane 2003-07-04, name_batch_file */
 					if(optarg != NULL){
 						mystrcpy(name_batch_file, optarg, SMALL);
@@ -5257,7 +5307,7 @@ int getArgv(int argc, char **argv){
 					if(optarg != NULL){
 						mystrcpy(include_dir, optarg, SMALL);
 					}
-					Log("option %c with value `%s' -- including files from `%s%s'\n", c, optarg, optarg, FILE_PATH); break;
+					Log("option %c with value `%s' -- including files from `%s'\n", c, optarg, optarg /* , FILE_PATH */); break;
 				case 'f': /* tabulka - rok from */
 					if(optarg != NULL){
 						mystrcpy(pom_ROK_FROM, optarg, SMALL);
@@ -5422,6 +5472,7 @@ int getArgv(int argc, char **argv){
 					/* pridane 2003-07-07 */
 					printf("\tb  batch mode (davkove spracovanie), nazov vystupneho davkoveho suboru\n");
 					printf("\tn  nazov binarky (tohto suboru, napr. lh.exe) pre batch mode\n");
+					printf("\tk  nazov (HTML) suboru pre vysledny zoznam modlitieb, batch mode\n");
 					printf("\th, ?  tento help \n");
 					/* pridane 2003-07-08 */
 					printf("\ta  (append) pri exportovani do suboru (-e) neprepisuje subor\n");
@@ -6270,6 +6321,10 @@ int main(int argc, char **argv){
 	readConfig();
 	_main_LOG("HTTP_ADDRESS == `%s'\n", HTTP_ADDRESS);
 	_main_LOG("MAIL_ADDRESS == `%s'\n", MAIL_ADDRESS);
+	/* 2004-03-17 pridane INCLUDE_DIR */
+	_main_LOG("INCLUDE_DIR == `%s'\n", INCLUDE_DIR);
+	/* 2004-03-17 bude treba na inom mieste upravit FILE_PATH - je to 2004-03-17_TUTOLA */
+
 	updateScriptName();
 	_main_LOG("script_name == %s\n", script_name);
 	updateUnCGIName();
@@ -6508,8 +6563,20 @@ _main_SIMULACIA_QS:
 #else
 	#error Unsupported operating system (not defined in mysystem.h)
 #endif
+			/* inak ostane default hodnoty nastavene na zaciatku pre kazdy operacny system zvlast */
+			
+			/* 2004-03-17 uprava ciest, INCLUDE_DIR, include_dir a FILE_PATH 
+			 * tzv. miesto 2004-03-17_TUTOLA
+			 */
+			_main_LOG_to_Export("2004-03-17: INCLUDE_DIR = `%s'\n2004-03-17: include_dir = `%s'\n", INCLUDE_DIR, include_dir);
+			if(strcmp(include_dir, STR_EMPTY) == 0){
+				_main_LOG_to_Export("2004-03-17: beriem INCLUDE_DIR...\n");
+				mystrcpy(include_dir, INCLUDE_DIR, MAX_STR);
+			}
+			else
+				_main_LOG_to_Export("2004-03-17: beriem include_dir...\n");
+			_main_LOG_to_Export("2004-03-17: include subory brane z `%s'\n", include_dir);
 
-			/* inak ostane defaul nastaveny na zaciatku pre kazdy operacny system zvlast */
 			_main_LOG_to_Export("/* teraz nasleduje vykonanie jadra programu podla parametrov */\n");
 			_main_LOG_to_Export("switch: podla query_type...\n");
 			switch(query_type){

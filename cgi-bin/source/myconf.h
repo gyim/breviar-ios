@@ -9,6 +9,7 @@
 /*   30/03/2000A.D. | created                                  */
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-07-15a.D. | #include "mybase.h" nahradeny "mydefs.h" */
+/*   2004-03-17a.D. | pridany INCLUDE_DIR                      */
 /*                                                             */
 /***************************************************************/
 
@@ -19,12 +20,14 @@
 
 #define MAX_HTTP_STR 80
 #define MAX_MAIL_STR 80
+#define MAX_INCD_STR 80
 
 #define CONFIG_FILE "breviar.cfg"
 #define STOPPING_CHAR '|'
 
 extern char MAIL_ADDRESS[MAX_HTTP_STR];
 extern char HTTP_ADDRESS[MAX_MAIL_STR];
+extern char INCLUDE_DIR [MAX_INCD_STR];
 
 void readConfig(void);
 

@@ -19,8 +19,8 @@
 #ifndef __MYSYSTEM_H_
 #define __MYSYSTEM_H_
 
-/* OS_... - kvoli cestam (FILE_PATH...) */
-/* MODEL_... -- model kompilacie */
+/* OS_...    -  */
+/* MODEL_... - model kompilacie */
 
 //#define MODEL_ostry_linux
 //#define MODEL_klasicky_DOS  // neodporucam pouzit

@@ -10,6 +10,7 @@
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-07-08a.D. | MAIL_ADDRESS zmenena na videky@breviar.sk*/
 /*   2003-08-13a.D. | pridany #include "mystring.h"            */
+/*   2004-03-17a.D. | pridany INCLUDE_DIR                      */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -19,12 +20,14 @@
 
 char HTTP_ADDRESS[MAX_HTTP_STR] = "http://www.breviar.sk/";
 char MAIL_ADDRESS[MAX_MAIL_STR] = "videky@breviar.sk";
+char INCLUDE_DIR [MAX_INCD_STR] = "../web/include/";
 
 void readConfig(void){
 	FILE *cfg_file;
 	char *ptr;
 	char http_address[MAX_STR] = STR_EMPTY;
 	char mail_address[MAX_STR] = STR_EMPTY;
+	char include_dir [MAX_STR] = STR_EMPTY;
 
 	cfg_file = fopen(CONFIG_FILE, "rt");
 
@@ -37,6 +40,7 @@ void readConfig(void){
  * The newline character, if read, is included in the string. 
  * -- avsak nam to nevadi. ze je tam aj <CR><LF>, lebo ho odfiltrujeme
  * 30/03/2000A.D.
+ * 2004-03-17 pridane INCLUDE_DIR
  */
 	if(cfg_file != NULL){
 		fgets(http_address, MAX_STR, cfg_file);
@@ -54,6 +58,16 @@ void readConfig(void){
 			ptr = strchr(MAIL_ADDRESS, STOPPING_CHAR);
 			if(ptr)/* The character %c is at position: %d\n", STOPPING_CHAR, ptr - MAIL_ADDRESS */
 				MAIL_ADDRESS[ptr - MAIL_ADDRESS] = '\0';
+			else/* The character was not found */
+				;
+		}
+		/* 2004-03-17 pridane INCLUDE_DIR */
+		fgets(include_dir, MAX_STR, cfg_file);
+		if((include_dir != NULL) && (strlen(include_dir) > 0)){
+			mystrcpy(INCLUDE_DIR, include_dir, MAX_INCD_STR);
+			ptr = strchr(INCLUDE_DIR, STOPPING_CHAR);
+			if(ptr)/* The character %c is at position: %d\n", STOPPING_CHAR, ptr - INCLUDE_DIR */
+				INCLUDE_DIR[ptr - INCLUDE_DIR] = '\0';
 			else/* The character was not found */
 				;
 		}

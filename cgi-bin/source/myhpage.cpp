@@ -14,6 +14,7 @@
 /*   2003-07-01a.D. | citanie hlavicky zo suboru               */
 /*   2003-07-02a.D. | trosku zmenena patka                     */
 /*   2003-07-15a.D. | trosku zmenena hlavicka (ako _header.htm)*/
+/*   2004-03-16a.D. | funkcie hlavicka a patka aj do suboru    */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -66,6 +67,44 @@ void hlavicka(char *title){
 	}
 	while((c = fgetc(body)) != EOF){
 		Export("%c", c); /* fputc(c, exportfile); */
+	}
+	fclose(body);
+}
+
+void hlavicka(char *title, FILE * expt){
+/* ak nedebugujem (do suboru), potom treba pre prehliadace exportovat
+ * nasledujuci riadok nasledovany prazdnym riadkom
+ */
+	/* 2003-07-01, pridane pripadne citanie zo suboru */
+	char fname[MAX_STR] = STR_EMPTY;
+	int c = 0;
+	mystrcpy(fname, FILE_HEADER, MAX_STR);
+
+#ifdef OS_linux
+	fprintf(expt, "Content-type: text/html\n");
+	fprintf(expt, "\n");
+#endif
+
+	FILE *body = fopen(fname, "r");
+
+	Log("exporting %s:\n", fname);
+	if(body == NULL){
+		/*printf("error `%s'\n", sys_errlist[errno]);*/
+		Log("  file `%s' not found\n", fname);
+		Log("so, another attempt: exporting hard coded header...\n");
+
+		/* 2003-07-15, zmenene na hlavicku pre css-ko; zrusene <style> */
+		fprintf(expt, "<html>\n<head>\n");
+		fprintf(expt, "   <meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1250\">\n");
+		fprintf(expt, "   <meta name=\"Author\" content=\"Juraj Videky\">\n");
+		fprintf(expt, "   <link rel=\"stylesheet\" type=\"text/css\" href=\"/breviar.css\">\n");
+		fprintf(expt, "<title>%s</title>\n", title);
+		fprintf(expt, "</head>\n\n");
+		fprintf(expt, "<body>\n");
+		return;
+	}
+	while((c = fgetc(body)) != EOF){
+		fprintf(expt, "%c", c); /* fputc(c, exportfile); */
 	}
 	fclose(body);
 }
@@ -123,6 +162,55 @@ void patka(void){
 	Export("</center>");
 
 	Export("</body>\n</html>\n");
+}
+
+/* exportuje patku HTML dokumentu (vysledok query) */
+void patka(FILE * expt){
+	time_t t;
+	struct tm dnes;
+	int baserok = 1999;
+#define ROK 5
+	char rok[ROK];
+
+	time(&t);
+
+	/* konvertuje date/time na strukturu */
+	dnes = *localtime(&t);
+	/* upravenie time_check structure with the data */
+	dnes.tm_year = dnes.tm_year + 1900;
+	dnes.tm_yday = dnes.tm_yday + 1;
+	mystrcpy(rok, STR_EMPTY, ROK);
+	if(dnes.tm_year > baserok){
+		sprintf(rok, "-%d", dnes.tm_year);
+	}
+
+	fprintf(expt, "<hr>\n"); /* bolo tu <hr size=1>, ale to je v css-ku; 2003-07-02 */
+	fprintf(expt, "<center>");
+	fprintf(expt, "<"HTML_P_PATKA">Generovaná stránka\n");
+	/* fprintf(expt, "(%s). ", ctime(&t) + 4); */
+	fprintf(expt, "(%d. %s %d, %02d:%02d:%02d). ",
+		dnes.tm_mday,
+		nm[dnes.tm_mon],
+		dnes.tm_year,
+		dnes.tm_hour,
+		dnes.tm_min,
+		dnes.tm_sec);
+
+	/* nezabudni zmenit #define BUILD_DATE v mydefs.h!!! (2003-07-15) */
+	fprintf(expt, "Build: %s. ", BUILD_DATE);
+
+	/* zapoznamkovane, 2003-06-30 */
+	/* fprintf(expt, "Kódovanie Windows-1250 (Central European).\n"); */
+	fprintf(expt, "<br>\n");
+
+	/* pridana stranka HTTP_ADDRESS, 12/04/2000A.D. */
+	fprintf(expt, "<"HTML_LINK_NORMAL" href=\"%s\" target=\"_top\">%s</a>\n", HTTP_ADDRESS, HTTP_ADDRESS);
+	fprintf(expt, "&#169; %d%s <"HTML_LINK_NORMAL" href=\"mailto:%s\">Juraj Vidéky</a>\n", baserok, rok, MAIL_ADDRESS);
+
+	fprintf(expt, "</p>\n"); /* pridane kvoli tomu, ze cele to bude <p class="patka">, 2003-07-02 */
+	fprintf(expt, "</center>");
+
+	fprintf(expt, "</body>\n</html>\n");
 }
 
 #endif /*__MYHPAGE_C_*/

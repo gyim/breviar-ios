@@ -10,6 +10,7 @@
 /*   10/02/2000A.D. | zmenena definicia FILE_EXPORT            */
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-07-15a.D. | odstraneny #include "mybase.h"           */
+/*   2004-03-15a.D. | pridany DEFAULT_HTML_EXPORT (batch mode) */
 /*                                                             */
 /***************************************************************/
 
@@ -20,6 +21,7 @@
 #include "mydefs.h"
 
 #define DEFAULT_FILE_EXPORT "export.htm"
+#define DEFAULT_HTML_EXPORT "export2.htm"
 
 int Export(char *fmt, ...);
 int ExpL2HTML(char *fmt);

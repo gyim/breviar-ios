@@ -8,6 +8,7 @@
 /*   19/11/1998A.D. | created                                  */
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-07-01a.D. | pridany subor pre hlavicku aj patku      */
+/*   2004-03-16a.D. | funkcie hlavicka a patka aj do suboru    */
 /*                                                             */
 /***************************************************************/
 
@@ -19,8 +20,10 @@
 
 /* exportuje hlavicku HTML dokumentu, kam pojde vysledok query */
 void hlavicka(char *);
+void hlavicka(char *, FILE *);
 /* exportuje patku HTML dokumentu (vysledok query) */
 void patka(void);
+void patka(FILE *);
 
 #endif /*__MYHPAGE_H_*/
 
