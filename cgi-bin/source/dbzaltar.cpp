@@ -34,6 +34,8 @@
 /*                    presunuty z 12. decembra na 12. augusta  */
 /*                  - Sviatok Bl. Zdenky Schelingovej,         */
 /*                    panny a muèenice, ako 2. moznost 30.jula */
+/*   2004-08-31a.D. | nastavenie modlitby pre posv.cit.o.c.r.  */
+/*   2004-09-03a.D. | zmena v modlitbe (na nedelnu kolektu)    */
 /*                                                             */
 /* notes |                                                     */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
@@ -3902,7 +3904,8 @@ label_24_DEC:
 			_set_citanie1(modlitba, _file_pc_tyzden, _anchor);
 			set_LOG_litobd_pc_tyzden;
 
-Log(_global_modl_posv_citanie);
+			/* Log(_global_modl_posv_citanie); */
+
 			/* 2. citanie */
 			sprintf(_anchor, "%s%d%s%c_%s",
 				nazov_OBD[litobd],
@@ -3910,10 +3913,33 @@ Log(_global_modl_posv_citanie);
 				nazov_DN_asci[den],
 				pismenko_modlitby(modlitba),
 				ANCHOR_CITANIE2);
-Log("aaaaaaaaaaa - %s\n", _file_pc_tyzden);
-Log("aaaaaaaaaaa - %s\n", _anchor);
+			/*
+				Log("docasne - %s\n", _file_pc_tyzden);
+				Log("docasne - %s\n", _anchor);
+			*/
 			_set_citanie2(modlitba, _file_pc_tyzden, _anchor);
 			set_LOG_litobd_pc_tyzden;
+
+			/* Log(_global_modl_posv_citanie); */
+
+			/* modlitba, pridane 2004-08-31 
+				-- zapoznamkovane, lebo nahradene inym, 2004-09-03
+			sprintf(_anchor, "%s%d%c_%s",
+				nazov_OBD[litobd],
+				tyzden,
+				pismenko_modlitby(modlitba),
+				ANCHOR_MODLITBA);
+			_set_modlitba(modlitba, _file_pc_tyzden, _anchor);
+			set_LOG_litobd_pc_tyzden;
+			*/
+
+			/* modlitba, zmenene 2004-09-03 */
+			sprintf(_anchor, "_%d%s_%s", 
+				tyzden, 
+				nazov_DN_asci[DEN_NEDELA], 
+				ANCHOR_MODLITBA); 
+			_set_modlitba(modlitba, _file, _anchor);
+			set_LOG_litobd;
 
 Log(_global_modl_posv_citanie);
 
