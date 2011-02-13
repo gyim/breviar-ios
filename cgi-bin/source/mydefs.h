@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* mydefs.h                                                    */
-/* (c)1999-2003 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2004 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne define'y                    */
 /* document history                                            */
@@ -15,8 +15,9 @@
 /*   2003-07-08a.D. | pridana konstanta MODL_OPT_APPEND        */
 /*   2003-07-09a.D. | pridane #define HTML_AMPERSAND "&amp;"   */
 /*   2003-07-15a.D. | zluceny s mybase.h, vycistene komentare  */
-/*                  - pridane HTML_BUTTON_               */
+/*                  - pridane HTML_BUTTON_                     */
 /*   2003-07-16a.D. | zmena WWW_ na ADD_WWW_PREFIX_            */
+/*   2004-03-17a.D. | FILE_PATH sa nepouziva                   */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -51,7 +52,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2004-03-16"
+#define BUILD_DATE "2004-03-17"
 
 #define BYTES 250
 #define SMALL 80
@@ -94,29 +95,12 @@ extern char uncgi_name[MAX_STR];  // = HTTP_ADDRESS + UNCGI_SCRIPT_NAME
 void updateScriptName(void);
 void updateUnCGIName(void);
 
-/*   v dalsom 'a' je string s nazvom .htm suboru
- * PATH(a): pre linky, teda cesta k fajlu pre browser
- * FILE_PATH(a): pre vnutorny processing, teda cesta k fajlu pre program;
- * 05/06/2000A.D.: FILE_PATH(a) prerobene (len pre Windows-mod sa nieco zmeni);
- *                 povodne bolo FILE_PATH(a) "include\\"##a,
- *                 ibaze vsade (jedine breviar.cpp) sa pouzivalo
- *                 FILE_PATH(STR_EMPTY);
- * nove FILE_PATH(a): 
- *         pre ostatne mody:
- *                 #define FILE_PATH "../include/" (linux)
- *                 #define FILE_PATH "c:\\breviar\\include\\" (DOS)
- *         zmena pre OS_Windows:
- *                 char FILE_PATH[MAX_STR] = "\\include";
- *                 tuto premennu treba strcat-ovat spolu s include_dir
- *                 (nova premenna pre debug mod, switch `-i')
- *                 
- */
 /* tu kedysi bolo aj #define PATH(a) zvacsa a, ale nebolo to treba; vyhodene 2003-07-02 */
 
 /* 2004-03-17
  * FILE_PATH nie je potrebne; citame to z myconf.cpp::readConfig() (config file)
+extern char FILE_PATH[MAX_STR]; // inicializovane v breviar.cpp
  */
-//extern char FILE_PATH[MAX_STR]; /* inicializovane v breviar.cpp; definovane v  */
 
 #define MESSAGE_FOLDER "msg/"
 #define FILE_PRESTUPNY_ROK		MESSAGE_FOLDER"prestupn.htm"

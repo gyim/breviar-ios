@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* breviar.cpp                                                 */
-/* (c)1998-2003 | Juraj Videky | videky@breviar.sk             */
+/* (c)1998-2004 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | program tvoriaci stranky pre liturgiu hodin   */
 /* document history                                            */
@@ -53,6 +53,7 @@
 /*                    pridane citanie1 a citanie2              */
 /*   2004-03-11a.D. | pre batch mod export parametrov          */
 /*   2004-03-16a.D. | pre batch mod export zoznamu ako HTML    */
+/*   2004-03-17a.D. | cesty sa citaju z konfigu (INCLUDE_DIR)  */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -594,7 +595,7 @@ void includeFile(int type, char *paramname, char *fname, char *modlparam){
 void interpretParameter(int type, char *paramname){
 	char path[MAX_STR] = STR_EMPTY;
 	mystrcpy(path, include_dir, MAX_STR);
-	/* 2004-03-17 // strcat(path, FILE_PATH); /* prerobene 05/06/2000A.D. */
+	/* 2004-03-17 // strcat(path, FILE_PATH); // prerobene 05/06/2000A.D. */
 
 	Log("interpretParameter(%s): Dumping by %s\n",
 		paramname, paramname);
@@ -1248,7 +1249,7 @@ void showPrayer(int type){
 	char templat[SMALL];
 	char path[MAX_STR] = STR_EMPTY;
 	mystrcpy(path, include_dir, MAX_STR);
-	/* 2004-03-17 // strcat(path, FILE_PATH); /* prerobene 05/06/2000A.D. */
+	/* 2004-03-17 // strcat(path, FILE_PATH); // prerobene 05/06/2000A.D. */
 
 	LOG_ciara;
 	Log("/* teraz nasleduje zobrazenie modlitby */\n");
@@ -1322,7 +1323,7 @@ void showPrayer(int type){
 void VYSVETLIVKY(void){ /* 13/03/2000A.D. */
 	char fname[MAX_STR] = STR_EMPTY;
 	mystrcpy(fname, include_dir, MAX_STR);
-	/* 2004-03-17 // strcat(fname, FILE_PATH); /* prerobene 05/06/2000A.D. */
+	/* 2004-03-17 // strcat(fname, FILE_PATH); // prerobene 05/06/2000A.D. */
 
 	strcat(fname, FILE_VYSVETLIVKY);
 	Export("<!--"); /* simulacia toho, ze replacujeme nejaky anchor */
@@ -1333,7 +1334,7 @@ void VYSVETLIVKY(void){ /* 13/03/2000A.D. */
 void VYSVETLIVKY_TABULKA(void){ /* 15/03/2000A.D. */
 	char fname[MAX_STR] = STR_EMPTY;
 	mystrcpy(fname, include_dir, MAX_STR);
-	/* 2004-03-17 // strcat(fname, FILE_PATH); /* prerobene 05/06/2000A.D. */
+	/* 2004-03-17 // strcat(fname, FILE_PATH); // prerobene 05/06/2000A.D. */
 
 	strcat(fname, FILE_VYSVETLIVKY_TABULKA);
 	Export("<!--"); /* simulacia toho, ze replacujeme nejaky anchor */
@@ -4917,7 +4918,7 @@ void _main_batch_mode(
 				if(batch_html_file != NULL){
 					Log("File `%s' opened for writing...\n", name_batch_html_file);
 					hlavicka("Batch mód", batch_html_file);
-					fprintf(batch_html_file, "");
+					fprintf(batch_html_file, "\n");
 					fprintf(batch_html_file, "<center><h2>Zoznam modlitieb</h2></center>\n");
 					fprintf(batch_html_file, "<ul>\n");
 	
@@ -5307,7 +5308,7 @@ int getArgv(int argc, char **argv){
 					if(optarg != NULL){
 						mystrcpy(include_dir, optarg, SMALL);
 					}
-					Log("option %c with value `%s' -- including files from `%s'\n", c, optarg, optarg /* , FILE_PATH */); break;
+					Log("option %c with value `%s' -- including files from `%s'\n", c, optarg, optarg /* 2004-03-17 zapoznamkovane FILE_PATH */); break;
 				case 'f': /* tabulka - rok from */
 					if(optarg != NULL){
 						mystrcpy(pom_ROK_FROM, optarg, SMALL);
@@ -6323,7 +6324,7 @@ int main(int argc, char **argv){
 	_main_LOG("MAIL_ADDRESS == `%s'\n", MAIL_ADDRESS);
 	/* 2004-03-17 pridane INCLUDE_DIR */
 	_main_LOG("INCLUDE_DIR == `%s'\n", INCLUDE_DIR);
-	/* 2004-03-17 bude treba na inom mieste upravit FILE_PATH - je to 2004-03-17_TUTOLA */
+	/* 2004-03-17 na inom mieste sa upravuje include_dir - je to 2004-03-17_TUTOLA */
 
 	updateScriptName();
 	_main_LOG("script_name == %s\n", script_name);
@@ -6565,7 +6566,7 @@ _main_SIMULACIA_QS:
 #endif
 			/* inak ostane default hodnoty nastavene na zaciatku pre kazdy operacny system zvlast */
 			
-			/* 2004-03-17 uprava ciest, INCLUDE_DIR, include_dir a FILE_PATH 
+			/* 2004-03-17 uprava ciest: INCLUDE_DIR a include_dir
 			 * tzv. miesto 2004-03-17_TUTOLA
 			 */
 			_main_LOG_to_Export("2004-03-17: INCLUDE_DIR = `%s'\n2004-03-17: include_dir = `%s'\n", INCLUDE_DIR, include_dir);
