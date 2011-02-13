@@ -71,6 +71,7 @@
 /*   2006-01-20a.D. | Oprava: Už sa zobrazujú aj spomienky v pôste (¾.s.)  */
 /*   2006-01-25a.D. | zmena default pre _global_opt2 => LINK_ISO_8601      */
 /*   2006-01-28a.D. | upravený spôsob výpisu v includeFile()               */
+/*   2006-01-31a.D. | batch mód exportuje aj mcd (mna) a posv. èítanie     */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -3532,6 +3533,9 @@ void _export_rozbor_dna(int typ){
  * 2004-03-11 pre batch mod sa nevyexportovali niektore parametre,
  * mailom upozornil Stanislav Èúzy <trobon@inMail.sk> 2004-03-06. Vdaka.
  * pridane do BATCH_COMMAND
+ *
+ * 2006-01-31: zmenené TUTOLA na 2006-01-31-TUTOLA, pridali sme modlitbu cez deò
+ * (len napoludnie) a posvätné èítanie
  */
 #define BATCH_COMMAND(a)	{ \
 	/* napokon to vyprintujeme do batch suboru, 2003-07-07 */\
@@ -3539,15 +3543,22 @@ void _export_rozbor_dna(int typ){
 	/* 2003-08-11 -Wall upozornila na too many arguments for format */\
 	/* 2004-03-11 pridane niektore dalsie parametre */\
 	/* 2004-03-16 pridany vypis do batch_html_file */\
+	/* 2006-01-31 pridaný zápis modlitby cez deò a posv. èítania */\
 	fprintf(batch_html_file, "<li>%d. %s %d: \n", _global_den.den, nazov_mesiaca[_global_den.mesiac - 1], _global_den.rok);\
 	if(_global_opt_append == YES){\
 		fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -x%d -pmrch\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* ranne chvaly */\
-		/* TUTOLA */\
+		fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -x%d -pmna\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* napoludnie */\
+		fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -x%d -pmpc\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* posvätné èítanie */\
+		/* 2006-01-31-TUTOLA */\
 		fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -x%d -pmv\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* vespery */\
 	}else{\
 		fprintf(batch_file, "%s%dr.htm -1%d -2%d -3%d -4%d -x%d -pmrch\n", batch_command, a, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* ranne chvaly */\
 		fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%dr.htm\">ranné chvály</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a);\
-		/* TUTOLA */\
+		fprintf(batch_file, "%s%dn.htm -1%d -2%d -3%d -4%d -x%d -pmna\n", batch_command, a, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* napoludnie */\
+		fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%dn.htm\">modlitba napoludnie</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a);\
+		fprintf(batch_file, "%s%dc.htm -1%d -2%d -3%d -4%d -x%d -pmpc\n", batch_command, a, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* posvätné èítanie */\
+		fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%dc.htm\">posvätné èítanie</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a);\
+		/* 2006-01-31-TUTOLA */\
 		fprintf(batch_file, "%s%dv.htm -1%d -2%d -3%d -4%d -x%d -pmv\n", batch_command, a, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* vespery */\
 		fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%dv.htm\">vešpery</a> \n", _global_den.rok, _global_den.mesiac, _global_den.den, a);\
 	}\
