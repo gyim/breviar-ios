@@ -5336,9 +5336,11 @@ int _spol_cast_je_panna(_struct_sc sc){
 
 /* ... a spolocnu cast full 
  * 2005-07-27: upravenÈ / nahradenÈ _vlastna_cast_kresponz reùazcom _spolocna_cast_kresponz
- * kvÙli posv‰tn˝m ËÌtaniam, viÔ niûöie */
+ * kvÙli posv‰tn˝m ËÌtaniam, viÔ niûöie 
+ * 2005-08-16: nahraden· "_vlastna_cast_hymnus" novou funkciou "_spolocna_cast_hymnus"
+ */
 #define _spolocna_cast_full(modl) {\
-	_vlastna_cast_hymnus;\
+	_spolocna_cast_hymnus;\
 	_spolocna_cast_antifony;\
 	if(modl == MODL_POSV_CITANIE){_spolocna_cast_1citanie;}\
 	else _vlastna_cast_kcitanie;\
@@ -5822,8 +5824,10 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		 * - I. zv‰zok (advent, vianoce) a II. zv‰zok (pÙst),
 		 * - II. zv‰zok (veæk· noc),
 		 * - III. a IV. zv‰zok (obdobie cez rok).
+		 *
+		 * 2005-08-16: Zmenen˝ _anchor_pom na _anchor_head.
 		 */
-		_spolocna_cast_1cit_zvazok(modlitba, _anchor_pom, _anchor_zvazok, STR_EMPTY /* 2005-08-08: _anchor netreba*/, _file);
+		_spolocna_cast_1cit_zvazok(modlitba, _anchor_head, _anchor_zvazok, STR_EMPTY /* 2005-08-08: _anchor netreba*/, _file);
 
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
@@ -5839,9 +5843,18 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		}/* v OBD_OKTAVA_NARODENIA -- vespery su zo dna */
 
 	}/* MODL_SPOL_CAST_MUCENIK/MUCENICA */
-// 2005-08-10: tu treba pokraËovaù
+
 	/* spolocna cast na sviatky viacerych mucenikov */
 	else if(a == MODL_SPOL_CAST_VIAC_MUCENIKOV){
+
+		sprintf(_anchor_pom, "%s_", nazov_spolc_ANCHOR[a]);
+		Log("  _anchor_pom == %s\n", _anchor_pom);
+		/* 2005-08-16: pridan˝ ÔalöÌ pomocn˝ anchor, ktor˝ pojedn·va o zv‰zku brevi·ra kvÙli posv. ËÌtaniam */
+		sprintf(_anchor_zvazok, "%s_", zvazok_OBD[_global_den.litobd]);
+		if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
+			strcat(_anchor_zvazok, VELKONOCNA_PRIPONA);
+		}
+		Log("  _anchor_zvazok == %s\n", _anchor_zvazok);
 
 		Log("/* spolocna cast na sviatky viacerych mucenikov */\n");
 		modlitba = MODL_PRVE_VESPERY;
@@ -5873,7 +5886,12 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 			_set_zalmy_sviatok_muc(modlitba, 2);
 		}
 		_spolocna_cast_full(modlitba);
-		/* 2005-07-22: ToDo: skontrolovaù, Ëi pre öpeci·lne obdobia nie s˙ öpeci·lne Ëasti z obdobia */
+		/* 2005-08-05: 1. ËÌtanie je zv‰Ëöa odliönÈ pre spoloËnÈ Ëasti sviatkov sv‰t˝ch nasledovne:
+		 * - I. zv‰zok (advent, vianoce) a II. zv‰zok (pÙst),
+		 * - II. zv‰zok (veæk· noc),
+		 * - III. a IV. zv‰zok (obdobie cez rok).
+		 */
+		_spolocna_cast_1cit_zvazok(modlitba, STR_EMPTY /* 2005-08-16: _anchor_pom netreba */, _anchor_zvazok, _anchor_pom, _file);
 
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
@@ -5888,6 +5906,7 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		}/* v OBD_OKTAVA_NARODENIA -- vespery su zo dna */
 
 	}/* MODL_SPOL_CAST_VIAC_MUCENIKOV */
+// 2005-08-16: tu treba pokraËovaù
 
 	/* spolocna cast na sviatky svatych muzov/zien -- pre vychovavatelov */
 	else if((a == MODL_SPOL_CAST_SV_MUZ_VYCH) || (a == MODL_SPOL_CAST_SV_ZENA_VYCH)){
