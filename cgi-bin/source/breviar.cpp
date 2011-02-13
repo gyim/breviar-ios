@@ -1045,8 +1045,11 @@ void includeFile(int type, char *paramname, char *fname, char *modlparam){
 #define je_aleluja_aleluja ((_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvt == DEN_NEDELA)) || (equals(_global_den.meno, _global_r._ZOSLANIE_DUCHA_SV.meno) && (_global_modlitba == MODL_VESPERY)))
 /* 2005-08-15: Pridaný ïalší #define: èi je 34. týždeò obdobia cez rok */
 #define je_34_ocr ((_global_den.litobd == OBD_CEZ_ROK) && (_global_den.tyzden == 34) && (_global_den.denvt != DEN_NEDELA))
-/* 2005-11-11: "V nede¾u a na slávnosti a sviatky po druhom èítaní a responzóriu nasleduje hymnus Te Deum" */
-#define je_tedeum ((_global_den.den == DEN_NEDELA) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK))
+/* 2005-11-11: "V nede¾u a na slávnosti a sviatky po druhom èítaní 
+ *	a responzóriu nasleduje hymnus Te Deum" 
+ *	2005-11-20: Opravené, lebo sme kontrolovali den, a nie denvt :)
+ */
+#define je_tedeum (type == MODL_POSV_CITANIE) && ((_global_den.denvt == DEN_NEDELA) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK))
 void interpretParameter(int type, char *paramname){
 	char path[MAX_STR] = STR_EMPTY;
 	mystrcpy(path, include_dir, MAX_STR);

@@ -50,6 +50,7 @@
 /*                    - III. a IV. zväzok (obdobie cez rok)    */
 /*   2005-08-08a.D. | dokonèené vlastné èasti augusta          */
 /*   2005-10-13a.D. | dokonè. vlastné èasti sept-okt (len kód) */
+/*   2005-11-20a.D. | zaè. modlitba cez deò, adv1              */
 /*                                                             */
 /* notes |                                                     */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
@@ -2081,6 +2082,172 @@ Log(_global_modl_posv_citanie); /* 2005-03-26: Pridany vypis */
 				pismenko_modlitby(modlitba), /* 'v' */
 				ANCHOR_KRESPONZ);
 			_set_kresponz(modlitba, _file, _anchor);
+			set_LOG_litobd;
+
+		/* modlitba cez deò, pridané 2005-11-20 */
+			/* hymnus */
+			modlitba = MODL_PREDPOLUDNIM;
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_HYMNUS);
+			_set_hymnus(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* antifóny */
+				/* 1. antifóna */
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA1);
+			_set_antifona1(modlitba, _file, _anchor);
+			set_LOG_litobd;
+				/* 2. antifóna */
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA2);
+			_set_antifona2(modlitba, _file, _anchor);
+			set_LOG_litobd;
+				/* 3. antifóna */
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA3);
+			_set_antifona3(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* krátke èítanie - rovnaké pre všetky adventné týždne */
+			sprintf(_anchor, "%s%s%c_%s",
+				nazov_OBD[litobd],
+				nazov_DN_asci[den],
+				pismenko_modlitby(modlitba),
+				ANCHOR_KCITANIE);
+			_set_kcitanie(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* krátke responzórium - rovnaké pre všetky adventné týždne */
+			sprintf(_anchor, "%s%s%c_%s",
+				nazov_OBD[litobd],
+				nazov_DN_asci[den],
+				pismenko_modlitby(modlitba),
+				ANCHOR_KRESPONZ);
+			_set_kresponz(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* modlitba ako na ranné chvály */
+			sprintf(_anchor, "%s%d%s_%s",
+				nazov_OBD[litobd],
+				tyzden,
+				nazov_DN_asci[den],
+				ANCHOR_MODLITBA);
+			_set_modlitba(modlitba, _file, _anchor);
+			set_LOG_litobd;
+
+			/* hymnus */
+			modlitba = MODL_NAPOLUDNIE;
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_HYMNUS);
+			_set_hymnus(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* antifóny */
+				/* 1. antifóna */
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA1);
+			_set_antifona1(modlitba, _file, _anchor);
+			set_LOG_litobd;
+				/* 2. antifóna */
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA2);
+			_set_antifona2(modlitba, _file, _anchor);
+			set_LOG_litobd;
+				/* 3. antifóna */
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA3);
+			_set_antifona3(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* krátke èítanie - rovnaké pre všetky adventné týždne */
+			sprintf(_anchor, "%s%s%c_%s",
+				nazov_OBD[litobd],
+				nazov_DN_asci[den],
+				pismenko_modlitby(modlitba),
+				ANCHOR_KCITANIE);
+			_set_kcitanie(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* krátke responzórium - rovnaké pre všetky adventné týždne */
+			sprintf(_anchor, "%s%s%c_%s",
+				nazov_OBD[litobd],
+				nazov_DN_asci[den],
+				pismenko_modlitby(modlitba),
+				ANCHOR_KRESPONZ);
+			_set_kresponz(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* modlitba ako na ranné chvály */
+			sprintf(_anchor, "%s%d%s_%s",
+				nazov_OBD[litobd],
+				tyzden,
+				nazov_DN_asci[den],
+				ANCHOR_MODLITBA);
+			_set_modlitba(modlitba, _file, _anchor);
+			set_LOG_litobd;
+
+			/* hymnus */
+			modlitba = MODL_POPOLUDNI;
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_HYMNUS);
+			_set_hymnus(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* antifóny */
+				/* 1. antifóna */
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA1);
+			_set_antifona1(modlitba, _file, _anchor);
+			set_LOG_litobd;
+				/* 2. antifóna */
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA2);
+			_set_antifona2(modlitba, _file, _anchor);
+			set_LOG_litobd;
+				/* 3. antifóna */
+			sprintf(_anchor, "%s%c_%s",
+				nazov_OBD[litobd],
+				pismenko_modlitby(modlitba),
+				ANCHOR_ANTIFONA3);
+			_set_antifona3(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* krátke èítanie - rovnaké pre všetky adventné týždne */
+			sprintf(_anchor, "%s%s%c_%s",
+				nazov_OBD[litobd],
+				nazov_DN_asci[den],
+				pismenko_modlitby(modlitba),
+				ANCHOR_KCITANIE);
+			_set_kcitanie(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* krátke responzórium - rovnaké pre všetky adventné týždne */
+			sprintf(_anchor, "%s%s%c_%s",
+				nazov_OBD[litobd],
+				nazov_DN_asci[den],
+				pismenko_modlitby(modlitba),
+				ANCHOR_KRESPONZ);
+			_set_kresponz(modlitba, _file, _anchor);
+			set_LOG_litobd;
+			/* modlitba ako na ranné chvály */
+			sprintf(_anchor, "%s%d%s_%s",
+				nazov_OBD[litobd],
+				tyzden,
+				nazov_DN_asci[den],
+				ANCHOR_MODLITBA);
+			_set_modlitba(modlitba, _file, _anchor);
 			set_LOG_litobd;
 
 		/* posvatne citanie, pridane 2003-11-19 */
@@ -11658,9 +11825,11 @@ label_25_MAR:
 						_vlastna_cast_full_okrem_prosieb(modlitba);
 
 						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_hymnus;
 						_vlastna_cast_modlitba;
 						_vlastna_cast_2citanie;
+						/* hymnus ako na vešpery */
+						sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(MODL_VESPERY), ANCHOR_HYMNUS);
+						_set_hymnus(modlitba, _file, _anchor);
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full_okrem_prosieb(modlitba);
@@ -11670,6 +11839,7 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Martina z Tours, biskupa", MENO_SVIATKU);
+					_global_svaty1.typslav_lokal = LOKAL_SLAV_SPIS_PATRON; /* 2005-10-28: pridané */
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					break;
@@ -11858,6 +12028,21 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, "Obetovanie prebl. Panny Márie", MENO_SVIATKU);
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+					break;
+				case 20: /* 2005-10-28: pridané */
+					if(poradie_svaty == 1){
+						/* definovanie parametrov pre modlitbu */
+						if(query_type != PRM_DETAILY)
+							set_spolocna_cast(sc, poradie_svaty);
+						break;
+						/* 2005-08-22: Všetko je zo spoloènej èasti na výroèie posviacky chrámu */
+					}
+					_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+					_global_svaty1.typslav_lokal = LOKAL_SLAV_NITRA;
+					_global_svaty1.typslav = SLAV_SPOMIENKA;
+					mystrcpy(_global_svaty1.meno, "Výroèie posviacky katedrálneho chrámu v Nitre", MENO_SVIATKU);
+					_global_svaty1.spolcast =
+						_encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 					break;
 				case 22:
 					if(poradie_svaty == 1){
