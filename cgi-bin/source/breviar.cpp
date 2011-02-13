@@ -1975,6 +1975,7 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 	_global_den.smer = 14; /* neurceny */
 	_global_den.typslav = SLAV_NEURCENE; /* neurcene */
 	_global_den.prik = NEPRIKAZANY_SVIATOK; /* nie je prikazany sviatok */
+	_global_den.typslav_lokal = LOKAL_SLAV_NEURCENE; /* pridané 2005-07-27 */
 	mystrcpy(_global_den.meno, STR_EMPTY, MENO_SVIATKU); /* neurcene */
 	_global_den.spolcast = /* pridane 01/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
@@ -2450,6 +2451,7 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 				_global_den.smer = _global_svaty1.smer;
 				_global_den.typslav = _global_svaty1.typslav;
 				_global_den.spolcast = _global_svaty1.spolcast; /* pridane 22/02/2000A.D. */
+				_global_den.typslav_lokal = _global_svaty1.typslav_lokal; /* pridané 2005-07-27 */
 				_global_den.prik = _global_svaty1.prik; /* pridane 23/02/2000A.D. */
 			}/* koniec menenia pre _global_modlitba != MODL_NEURCENA a svaty > 0 resp. slavnost */
 		}
@@ -2750,7 +2752,7 @@ int init_global_string(int typ, int poradie_svateho, int modlitba){
 
 	/* teraz lokalizácia slavenia, 2005-07-27: pridané */
 	if(_local_den.typslav_lokal != LOKAL_SLAV_NEURCENE){
-		sprintf(pom, "\n<br> <"HTML_SPAN_RED_SMALL">%s</span>\n",
+		sprintf(pom, "\n<br> <"HTML_SPAN_RED_SMALL">(%s)</span>\n",
 			nazov_slavenia_lokal[_local_den.typslav_lokal]);
 		strcat(_global_string, pom);
 	}

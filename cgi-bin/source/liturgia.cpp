@@ -998,6 +998,7 @@ void _dm_popolcova_streda(int rok, int _vn){
 	 * .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok */
 	_global_result = por_den_mesiac_dm(_vn + OD_VELKEJ_NOCI_PO_POPOLCOVU_STR, rok);
 	_global_result.typslav = SLAV_NEURCENE;
+	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE; /* nie je obmedzenie na lokalitu, pridané 2005-07-27 */
 	_global_result.litobd  = OBD_POSTNE_I;
 	_global_result.tyzden  = 0; /* 4. tyzden zaltara */
 	_global_result.smer    = 2;
@@ -1013,6 +1014,7 @@ void _dm_nanebovstupenie(int rok, int _vn){
 	 * .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok */
 	_global_result = por_den_mesiac_dm(_vn + OD_VELKEJ_NOCI_PO_NANEBOSTUPENIE, rok);
 	_global_result.typslav = SLAV_SLAVNOST;
+	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE; /* nie je obmedzenie na lokalitu, pridané 2005-07-27 */
 	_global_result.litobd  = OBD_VELKONOCNE_I; /* ma vlastne slavenie */
 	_global_result.tyzden  = 0; /* pridane kvoli kotvam vo fajli FILE_NANEBOVSTUPENIE, 10/03/2000A.D. */
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D., aby tam nebolo 'hausnumero' */
@@ -1028,6 +1030,7 @@ void _dm_zoslanie_ducha(int rok, int _vn){
 	 * .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok */
 	_global_result = por_den_mesiac_dm(_vn + OD_VELKEJ_NOCI_PO_ZOSLANIE_DUCHA, rok);
 	_global_result.typslav = SLAV_SLAVNOST;
+	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE; /* nie je obmedzenie na lokalitu, pridané 2005-07-27 */
 	_global_result.litobd  = OBD_VELKONOCNE_II; /* ma vlastne slavenie */
 	_global_result.tyzden  = 0; /* pridane kvoli kotvam vo fajli FILE_ZOSLANIE_DUCHA_SV, 10/03/2000A.D. */
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D., aby tam nebolo 'hausnumero' */
@@ -1043,6 +1046,7 @@ void _dm_prva_adventna_nedela(int rok, int p2){
 	 * .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok */
 	_global_result = por_den_mesiac_dm(PRVA_ADVENTNA_NEDELA_b + p2 + prestupny(rok), rok);
 	_global_result.typslav = SLAV_VLASTNE;
+	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE; /* nie je obmedzenie na lokalitu, pridané 2005-07-27 */
 	_global_result.litobd  = OBD_ADVENTNE_I;
 	_global_result.tyzden  = 1; /* 1. adventna nedela */
 	_global_result.smer    = 2;
@@ -1066,6 +1070,7 @@ void _dm_svatej_rodiny(int rok){
 	}
 	_global_result = por_den_mesiac_dm(_svrod, rok);
 	_global_result.typslav = SLAV_SVIATOK;
+	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE; /* nie je obmedzenie na lokalitu, pridané 2005-07-27 */
 	_global_result.litobd  = OBD_OKTAVA_NARODENIA;
 	_global_result.smer    = 5;
 	_global_result.tyzden  = 1; /* 1. tyzden vianocneho obdobia, oktava */
@@ -1084,6 +1089,7 @@ void _dm_krst_krista_pana(int rok){
 		_krst++;
 	_global_result = por_den_mesiac_dm(_krst, rok);
 	_global_result.typslav = SLAV_SVIATOK;
+	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE; /* nie je obmedzenie na lokalitu, pridané 2005-07-27 */
 	_global_result.litobd  = OBD_CEZ_ROK;
 	_global_result.tyzden  = 1; /* 1. nedela "cez rok" */
 	_global_result.smer    = 5;
@@ -1099,6 +1105,7 @@ void _dm_velkonocna_nedela(int rok, int _vn){
 	 * .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok */
 	_global_result = por_den_mesiac_dm(_vn, rok);
 	_global_result.typslav = SLAV_SLAVNOST;
+	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE; /* nie je obmedzenie na lokalitu, pridané 2005-07-27 */
 	_global_result.litobd  = OBD_VELKONOCNE_TROJDNIE;
 	_global_result.tyzden  = 1; /* 1. velkonocna nedela */
 	_global_result.smer    = 1;

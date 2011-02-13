@@ -6272,6 +6272,8 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 		_global_svaty1.tyzzal = _global_svaty2.tyzzal = _global_svaty3.tyzzal = _global_den.tyzzal;
 		/* typslav - neurcena */
 		_global_svaty1.typslav = _global_svaty2.typslav = _global_svaty3.typslav = SLAV_NEURCENE;
+		/* typ lokálneho slávenia - neurèené; pridané 2005-07-27 */
+		_global_svaty1.typslav_lokal = _global_svaty2.typslav_lokal = _global_svaty3.typslav_lokal = LOKAL_SLAV_NEURCENE;
 		/* prik - nie je prikazany */
 		_global_svaty1.prik = _global_svaty2.prik = _global_svaty3.prik = NEPRIKAZANY_SVIATOK;
 		/* meno - neurcene */
