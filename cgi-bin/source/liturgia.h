@@ -505,6 +505,7 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_SPIS                8
 #define LOKAL_SLAV_ROZNAVA             9
 #define LOKAL_SLAV_TRNAVA             10
+#define LOKAL_SLAV_DOM_SV_MARTINA     11
 
 /* prikazany / neprikazany sviatok */
 #define PRIKAZANY_SVIATOK 1

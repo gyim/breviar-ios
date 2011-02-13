@@ -233,6 +233,7 @@ const char *nazov_slavenia_lokal[] =
 ,"len v Spišskej diecéze"
 ,"len v Rožòavskej diecéze"
 ,"len v Trnavskej diecéze"
+,"len v Dóme sv. Martina v Bratislave"
 };
 
 const char *rimskymi_tyzden_zaltara[] =
