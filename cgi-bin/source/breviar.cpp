@@ -67,6 +67,7 @@
 /*                  - doroben˝ ûalt·r aj pre posv‰tnÈ ËÌtania              */
 /*                  - interpretParameter: novÈ PARAM_HYMNUS_34_OCR_INY_... */
 /*   2005-08-22a.D. | upraven· _export_rozbor_dna() - vöednÈ dni aj pre 11 */
+/*   2005-11-11a.D. | DoplnenÈ: Te Deum posv‰tn˝m ËÌtaniam                 */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -1044,6 +1045,8 @@ void includeFile(int type, char *paramname, char *fname, char *modlparam){
 #define je_aleluja_aleluja ((_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvt == DEN_NEDELA)) || (equals(_global_den.meno, _global_r._ZOSLANIE_DUCHA_SV.meno) && (_global_modlitba == MODL_VESPERY)))
 /* 2005-08-15: Pridan˝ ÔalöÌ #define: Ëi je 34. t˝ûdeÚ obdobia cez rok */
 #define je_34_ocr ((_global_den.litobd == OBD_CEZ_ROK) && (_global_den.tyzden == 34) && (_global_den.denvt != DEN_NEDELA))
+/* 2005-11-11: "V nedeæu a na sl·vnosti a sviatky po druhom ËÌtanÌ a responzÛriu nasleduje hymnus Te Deum" */
+#define je_tedeum ((_global_den.den == DEN_NEDELA) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK))
 void interpretParameter(int type, char *paramname){
 	char path[MAX_STR] = STR_EMPTY;
 	mystrcpy(path, include_dir, MAX_STR);
@@ -1155,25 +1158,25 @@ void interpretParameter(int type, char *paramname){
 	}
 	else if(equals(paramname, PARAM_CHVALOSPEV_BEGIN)){
 		if(_global_opt1 == NIE){
-			/* nezobrazovat Benediktus/Magnifikat */
+			/* nezobrazovat Benediktus/Magnifikat/Te Deum */
 			_global_skip_in_prayer = ANO;
-			Export("nezobrazit Benediktus/Magnifikat");
-			Log("  `Benediktus/Magnifikat' skipping...\n");
+			Export("nezobrazit Benediktus/Magnifikat/Te Deum");
+			Log("  `Benediktus/Magnifikat/Te Deum' skipping...\n");
 		}
 		else{
-			Export("zobrazit Benediktus/Magnifikat");
-			Log("  `Benediktus/Magnifikat': begin...\n");
+			Export("zobrazit Benediktus/Magnifikat/Te Deum");
+			Log("  `Benediktus/Magnifikat/Te Deum': begin...\n");
 		}
 	}
 	else if(equals(paramname, PARAM_CHVALOSPEV_END)){
 		if(_global_opt1 == NIE){
-			/* nezobrazovat Benediktus/Magnifikat */
+			/* nezobrazovat Benediktus/Magnifikat/Te Deum */
 			_global_skip_in_prayer = NIE;
-			Log("  `Benediktus/Magnifikat' skipped.\n");
+			Log("  `Benediktus/Magnifikat/Te Deum' skipped.\n");
 		}
 		else{
-			Export("zobrazit Benediktus/Magnifikat");
-			Log("  `Benediktus/Magnifikat' copied.\n");
+			Export("zobrazit Benediktus/Magnifikat/Te Deum");
+			Log("  `Benediktus/Magnifikat/Te Deum' copied.\n");
 		}
 	}
 	else if(equals(paramname, PARAM_ZAKONCENIE_BEGIN)){
@@ -1747,6 +1750,14 @@ void showPrayer(int type){
 	 * (prvy komponent)
 	 * 2005-03-22: Uz su premenne az po opt5...
 	 */
+
+	/* 2005-11-11: PridanÈ: ak je potrebnÈ vytlaËiù Te Deum, tak zmenÌme atrib˙t */
+	if(je_tedeum){
+		Log("JE tedeum...\n");
+		_global_opt1 = 1;
+	}
+	else
+		Log("NIE JE tedeum...\n");
 
 	Log("showPrayer: opt1 == `%s' (%d)\n", pom_MODL_OPT1, _global_opt1);
 	Log("showPrayer: opt2 == `%s' (%d)\n", pom_MODL_OPT2, _global_opt2);

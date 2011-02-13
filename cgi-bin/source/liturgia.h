@@ -27,6 +27,7 @@
 /*   2005-03-27a.D. | CHAR_MODL_* z funkcie pismenko_modlitby  */
 /*   2005-07-27a.D. | pridané nazov_slavenia_lokal[]           */
 /*   2005-08-05a.D. | pridané zvazok_OBD[]                     */
+/*   2005-11-11a.D. | Doplnené parametre pre Te Deum           */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -265,6 +266,11 @@ extern const char *TEMPLAT[];
 /* 2005-08-15: Doplnené parametre pre vo¾né, iné hymny v 34. týždni OCR */
 #define PARAM_HYMNUS_34_OCR_INY_BEGIN       "HYMNUS_34_OCR_INY_BEGIN"
 #define PARAM_HYMNUS_34_OCR_INY_END         "HYMNUS_34_OCR_INY_END"
+/* 2005-11-11: Doplnené parametre pre Te Deum 
+#define PARAM_HYMNUS_TEDEUM_BEGIN           "HYMNUS_TEDEUM_BEGIN"
+#define PARAM_HYMNUS_TEDEUM_END             "HYMNUS_TEDEUM_END"
+	- napokon sa nepoužíva zatia¾
+*/
 /* nasleduju casti, ktore sa mozu pri generovani modlitby vynechat
  * alebo doplnit podla lubovole */
 #define PARAM_OTCENAS_BEGIN                 "OTCENAS_BEGIN"
@@ -506,6 +512,7 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_ROZNAVA             9
 #define LOKAL_SLAV_TRNAVA             10
 #define LOKAL_SLAV_DOM_SV_MARTINA     11
+#define LOKAL_SLAV_SPIS_PATRON        12
 
 /* prikazany / neprikazany sviatok */
 #define PRIKAZANY_SVIATOK 1
