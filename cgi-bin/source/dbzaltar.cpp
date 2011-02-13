@@ -36,6 +36,7 @@
 /*                    panny a muèenice, ako 2. moznost 30.jula */
 /*   2004-08-31a.D. | nastavenie modlitby pre posv.cit.o.c.r.  */
 /*   2004-09-03a.D. | zmena v modlitbe (na nedelnu kolektu)    */
+/*   2004-09-23a.D. | pridany sv. pater Pio                    */
 /*                                                             */
 /* notes |                                                     */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
@@ -9580,6 +9581,27 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, "Sv. Matúša, apoštola a evanjelistu", MENO_SVIATKU);
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					break;
+				case 23: /* 2004-09-23, pridane - pater Pio */
+					if(poradie_svaty == 1){
+						/* definovanie parametrov pre modlitbu */
+
+						if(query_type != PRM_DETAILY)
+							set_spolocna_cast(sc, poradie_svaty);
+
+						modlitba = MODL_RANNE_CHVALY;
+						_vlastna_cast_modlitba;
+
+						modlitba = MODL_VESPERY;
+						_vlastna_cast_modlitba;
+
+						break;
+					}
+					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+					mystrcpy(_global_svaty1.meno, "Sv. Pia z Pietrelèiny, kòaza", MENO_SVIATKU);
+					_global_svaty1.spolcast =
+						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 					break;
 				case 26:
 					if(poradie_svaty == 1){
