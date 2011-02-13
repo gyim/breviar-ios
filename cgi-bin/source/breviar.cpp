@@ -1,77 +1,84 @@
-/***************************************************************/
-/*                                                             */
-/* breviar.cpp                                                 */
-/* (c)1998-2005 | Juraj Videky | videky@breviar.sk             */
-/*                                                             */
-/* description | program tvoriaci stranky pre liturgiu hodin   */
-/* document history                                            */
-/*   30/01/2000A.D. | trencin, modified                        */
-/*   01/02/2000A.D. | bratislava, modified                     */
-/*   18/02/2000A.D. | bratislava, modified                     */
-/*   25/02/2000A.D. | bratislava, modified                     */
-/*   30/03/2000A.D. | premenoval som dnes.cpp na breviar.cpp   */
-/*   06/09/2001A.D. | tento popis                              */
-/*   2003-06-27a.D. | zacinam znova :))                        */
-/*                  - nefunguju detaily pre spomienku pm v sob.*/
-/*                  - 2003-06-28: sv.Irenej; ma byt aj srdce pm*/
-/*   2003-06-30a.D. | Peto Santavy napisal mail o chybach      */
-/*                  - prve vespery petra-pavla su zle v r.2003 */
-/*                    (2003-06-28): zmena v liturgicke_obdobie */
-/*   2003-06-30a.D. | build (priliepa sa do hlavicky)          */
-/*                    (vypisovanie BUILD_DATE, mybase.h)       */
-/*   2003-07-01a.D. | opravene Detaily... pre Spom.PM v sobotu */
-/*   2003-07-02a.D. | pridana LINK_DEN_MESIAC_ROK_PRESTUP      */
-/*                    kvoli prestupnym rokom (_main_tabulka)   */
-/*                  - pridane HTML_ elementy (mydefs.h)        */
-/*   2003-07-07a.D. | pridany batch mode (davkove spracovanie) */
-/*   2003-07-08a.D. | pridany parameter (option) `a' (append)  */
-/*   2003-07-09a.D. | drobne zmeny kvoli HTML 4.01 Valid       */
-/*                  - zmena & v linkach na HTML_AMPERSAND      */
-/*   2003-07-14a.D. | zmena void main -> int main (gcc v3.2.2 )*/
-/*                  - <font size=-1></font> zmeneny na         */
-/*                    <span class="small"></span>              */
-/*   2003-07-15a.D. | rozne pokusy s modlitbou cez den         */
-/*                  - pridane HTML_BUTTON_               */
-/*   2003-07-15a.D. | odstraneny #include "mybase.h"           */
-/*   2003-07-16a.D. | este jedna zmena & na HTML_AMPERSAND     */
-/*                  - zmena WWW_ na ADD_WWW_PREFIX_            */
-/*                  - zmena exportovania uvodnej stranky       */
-/*   2003-07-17a.D. | zmena helpu (vypis pri commandd-line     */
-/*   2003-08-06a.D. | dalsie pokusy s modlitbou cez den        */
-/*   2003-08-11a.D. | -Wall upozornila na vselico              */
-/*   2003-08-11a.D. | Segmentation fault odhaleny-vid POUCENIE */
-/*   2003-08-12a.D. | opt5 pridana (modlitba cez den)          */
-/*   2003-08-13a.D. | zmena "" na STR_EMPTY (mystring.h)       */
-/*                  - odstranenie RUN_MODLITBA_CEZ_DEN         */
-/*                  - odstranenie POKUS_24_02_2000             */
-/*                  - male zmeny v includeFile()               */
-/*                  - option5 dorobena aj do getForm()         */
-/*   2003-08-21a.D. | interpretParameter() pre posv. citania   */
-/*   2003-10-07a.D. | chybali prosby pre 1. vespery nediel OCR */
-/*                    dbzaltar.cpp::_SET_SPOLOCNE_VECI_NEDELA  */
-/*   2003-11-20a.D. | interpretParameter(): pre posv. citania  */
-/*                    pridane citanie1 a citanie2              */
-/*   2004-03-11a.D. | pre batch mod export parametrov          */
-/*   2004-03-16a.D. | pre batch mod export zoznamu ako HTML    */
-/*   2004-03-17a.D. | cesty sa citaju z konfigu (INCLUDE_DIR)  */
-/*   2005-03-21a.D. | novy typ exportu (1 den-1 riadok) pre LK */
-/*   2005-03-22a.D. | uprava funkcie parseQueryString()        */
-/*   2005-03-28a.D. | nova funkcia setForm(), uprava pre uncgi */
-/*   2005-03-30a.D. | upravene getForm()                       */
-/*   2005-05-24a.D. | opravena copy-paste chyba pre pom_ROK_TO */
-/*   2005-07-22a.D. | pridaný popis aj pre posv.èítanie a mcd  */
-/*   2005-07-27a.D. | rozšírená štruktúra dm (lokalizácia sláv.)*/
-/*                                                             */
-/*                                                             */
-/* notes |                                                     */
-/*   * ako kompilovat a linkovat?                              */
-/*     najdi zarazku KOMPILACIA -- niekde ku koncu             */
-/*     pozri tiez POUCENIE                                     */
-/*   * unfinished parts: signed by !!!                         */
-/*   * debug in VC++: alt+f7, zalozka Debug, Program arguments */
-/*     napr. -qpbm -d1 -m1 -r2000 -f2 -g2 -p2001 -ba.txt       */
-/*                                                             */
-/***************************************************************/
+/***************************************************************************/
+/*                                                                         */
+/* breviar.cpp                                                             */
+/* (c)1998-2005 | Juraj Videky | videky@breviar.sk                         */
+/*                                                                         */
+/*                http://www.breviar.sk                                    */
+/*                                                                         */
+/* description | program tvoriaci stranky pre liturgiu hodin               */
+/* document history                                                        */
+/*   30/01/2000A.D. | trencin, modified                                    */
+/*   01/02/2000A.D. | bratislava, modified                                 */
+/*   18/02/2000A.D. | bratislava, modified                                 */
+/*   25/02/2000A.D. | bratislava, modified                                 */
+/*   30/03/2000A.D. | premenoval som dnes.cpp na breviar.cpp               */
+/*   06/09/2001A.D. | tento popis                                          */
+/*   2003-06-27a.D. | zacinam znova :))                                    */
+/*                  - nefunguju detaily pre spomienku pm v sob.            */
+/*                  - 2003-06-28: sv.Irenej; ma byt aj srdce pm            */
+/*   2003-06-30a.D. | Peto Santavy napisal mail o chybach                  */
+/*                  - prve vespery petra-pavla su zle v r.2003             */
+/*                    (2003-06-28): zmena v liturgicke_obdobie             */
+/*   2003-06-30a.D. | build (priliepa sa do hlavicky)                      */
+/*                    (vypisovanie BUILD_DATE, mybase.h)                   */
+/*   2003-07-01a.D. | opravene Detaily... pre Spom.PM v sobotu             */
+/*   2003-07-02a.D. | pridana LINK_DEN_MESIAC_ROK_PRESTUP                  */
+/*                    kvoli prestupnym rokom (_main_tabulka)               */
+/*                  - pridane HTML_ elementy (mydefs.h)                    */
+/*   2003-07-07a.D. | pridany batch mode (davkove spracovanie)             */
+/*   2003-07-08a.D. | pridany parameter (option) `a' (append)              */
+/*   2003-07-09a.D. | drobne zmeny kvoli HTML 4.01 Valid                   */
+/*                  - zmena & v linkach na HTML_AMPERSAND                  */
+/*   2003-07-14a.D. | zmena void main -> int main (gcc v3.2.2 )            */
+/*                  - <font size=-1></font> zmeneny na                     */
+/*                    <span class="small"></span>                          */
+/*   2003-07-15a.D. | rozne pokusy s modlitbou cez den                     */
+/*                  - pridane HTML_BUTTON_                                 */
+/*   2003-07-15a.D. | odstraneny #include "mybase.h"                       */
+/*   2003-07-16a.D. | este jedna zmena & na HTML_AMPERSAND                 */
+/*                  - zmena WWW_ na ADD_WWW_PREFIX_                        */
+/*                  - zmena exportovania uvodnej stranky                   */
+/*   2003-07-17a.D. | zmena helpu (vypis pri commandd-line                 */
+/*   2003-08-06a.D. | dalsie pokusy s modlitbou cez den                    */
+/*   2003-08-11a.D. | -Wall upozornila na vselico                          */
+/*   2003-08-11a.D. | Segmentation fault odhaleny-vid POUCENIE             */
+/*   2003-08-12a.D. | opt5 pridana (modlitba cez den)                      */
+/*   2003-08-13a.D. | zmena "" na STR_EMPTY (mystring.h)                   */
+/*                  - odstranenie RUN_MODLITBA_CEZ_DEN                     */
+/*                  - odstranenie POKUS_24_02_2000                         */
+/*                  - male zmeny v includeFile()                           */
+/*                  - option5 dorobena aj do getForm()                     */
+/*   2003-08-21a.D. | interpretParameter() pre posv. citania               */
+/*   2003-10-07a.D. | chybali prosby pre 1. vespery nediel OCR             */
+/*                    dbzaltar.cpp::_SET_SPOLOCNE_VECI_NEDELA              */
+/*   2003-11-20a.D. | interpretParameter(): pre posv. citania              */
+/*                    pridane citanie1 a citanie2                          */
+/*   2004-03-11a.D. | pre batch mod export parametrov                      */
+/*   2004-03-16a.D. | pre batch mod export zoznamu ako HTML                */
+/*   2004-03-17a.D. | cesty sa citaju z konfigu (INCLUDE_DIR)              */
+/*   2005-03-21a.D. | novy typ exportu (1 den-1 riadok) pre LK             */
+/*   2005-03-22a.D. | uprava funkcie parseQueryString()                    */
+/*   2005-03-28a.D. | nova funkcia setForm(), uprava pre uncgi             */
+/*   2005-03-30a.D. | upravene getForm()                                   */
+/*   2005-05-24a.D. | opravena copy-paste chyba pre pom_ROK_TO             */
+/*   2005-07-22a.D. | pridaný popis aj pre posv.èítanie a mcd              */
+/*   2005-07-27a.D. | rozšírená štruktúra dm (lokalizácia slávení)         */
+/*   2005-08-15a.D. | upravená _main_zaltar(): STR_MODL_                   */
+/*                  - dorobený žaltár aj pre posvätné èítania              */
+/*                  - interpretParameter: nové PARAM_HYMNUS_34_OCR_INY_... */
+/*                                                                         */
+/*                                                                         */
+/* poznámky |                                                              */
+/*   * ako kompilovat a linkovat?                                          */
+/*     najdi zarazku KOMPILACIA -- niekde ku koncu                         */
+/*     pozri tiez POUCENIE                                                 */
+/*   * unfinished parts: oznaèené !!! alebo xxx                            */
+/*   * debug in VC++: alt+f7, zalozka Debug, Program arguments             */
+/*     napr. -qpbm -d1 -m1 -r2000 -f2 -g2 -p2001 -ba.txt                   */
+/*     -i..\..\..\web\include\ -qpsqs -s"qt=pcr&dvt=pondelok&t=2&p=mpc"    */
+/*     lh -qpdt -d30 -m4 -r2002 -pmrch -ic:\temp\breviar\ -emoja.htm       */
+/*                                                                         */
+/***************************************************************************/
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -642,11 +649,21 @@ int setForm(void){
 	Log("setForm() -- begin\n");
 
 	/* 2005-03-29 (Bratislava): Pokus (pada tabulka) - vlozime aj */
+	/* 2005-08-15: S hrôzou som zistil, že pri simulácii z qs je pom_QUERY_TYPE = psqs 
+	 *             preto upravujem, aby bola hodnota parametra param[x].name == qt
+	 *             resp. berieme z query_type
+	 */
 	mystrcpy(local_str, STR_EMPTY, MAX_STR);
 	if(!equals(pom_QUERY_TYPE, STR_EMPTY)){
 		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_QUERY_TYPE), MAX_STR);
 		strcat(local_str, "=");
-		strcat(local_str, pom_QUERY_TYPE);
+		if(equals(pom_QUERY_TYPE, STR_PRM_SIMULACIA_QS)){
+			Log("\tpre simuláciu priraïujem hodnotu z query_type (%s)...\n", param[0].val);
+			/* 2005-08-15: Ak je simulácia, nastav hodnotu pod¾a query_type */
+			strcat(local_str, param[0].val);
+		}
+		else
+			strcat(local_str, pom_QUERY_TYPE);
 		Log("--- setForm: putenv(%s); ... ", local_str);
 		ret = putenv(local_str);
 		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
@@ -1019,10 +1036,13 @@ void includeFile(int type, char *paramname, char *fname, char *modlparam){
  *                 * _ZOSLANIE_DUCHA_SV && MODL_VESPERY
  * 2003-08-21a.D.: postupne pridavam case aj pre posvatne citania
  * 2003-11-20a.D.: pridane citanie1 a citanie2 pre posvatne citania
+ * 2005-08-15a.D.: Pridaný ïalší #define: èi je 34. týždeò obdobia cez rok
  */
 #define je_post ((_global_den.litobd == OBD_POSTNE_I) || (_global_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && ((_global_den.denvt == DEN_PIATOK) || (_global_den.denvt == DEN_SOBOTA))))
 #define je_velka_noc ((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvt == DEN_NEDELA)))
 #define je_aleluja_aleluja ((_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvt == DEN_NEDELA)) || (equals(_global_den.meno, _global_r._ZOSLANIE_DUCHA_SV.meno) && (_global_modlitba == MODL_VESPERY)))
+/* 2005-08-15: Pridaný ïalší #define: èi je 34. týždeò obdobia cez rok */
+#define je_34_ocr ((_global_den.litobd == OBD_CEZ_ROK) && (_global_den.tyzden == 34) && (_global_den.denvt != DEN_NEDELA))
 void interpretParameter(int type, char *paramname){
 	char path[MAX_STR] = STR_EMPTY;
 	mystrcpy(path, include_dir, MAX_STR);
@@ -1049,6 +1069,23 @@ void interpretParameter(int type, char *paramname){
 		if(!je_velka_noc){
 			Export("<!--nie je velkonocne obdobie");
 		}
+	}
+	/* 2005-08-15: Pridané parsovanie PARAM_HYMNUS_34_OCR_INY_BEGIN/END */
+	else if(equals(paramname, PARAM_HYMNUS_34_OCR_INY_BEGIN)){
+		if(je_34_ocr){
+			Log("JE 34.týždeò OCR... BEGIN\n");
+			Export("je 34. tyzden OCR-->");
+		}
+		else
+			Log("NIE JE 34.týždeò OCR... BEGIN\n");
+	}
+	else if(equals(paramname, PARAM_HYMNUS_34_OCR_INY_END)){
+		if(je_34_ocr){
+			Log("JE 34.týždeò OCR... END\n");
+			Export("<!--je 34. tyzden OCR");
+		}
+		else
+			Log("NIE JE 34.týždeò OCR... END\n");
 	}
 	else if(equals(paramname, PARAM_ALELUJA_ALELUJA_BEGIN)){
 		if(_global_skip_in_prayer == ANO){
@@ -4769,6 +4806,7 @@ void _main_dnes(void){
 	Export("<select name=\"%s\">\n", STR_MODLITBA);
 	Export("<option>%s\n", nazov_modlitby[MODL_PRVE_VESPERY]);
 	Export("<option selected>%s\n", nazov_modlitby[MODL_RANNE_CHVALY]);
+	Export("<option>%s\n", nazov_modlitby[MODL_POSV_CITANIE]); /* posvätné èítanie: pridané 2005-08-15 */
 	Export("<option>%s\n", nazov_modlitby[MODL_PREDPOLUDNIM]);
 	Export("<option>%s\n", nazov_modlitby[MODL_NAPOLUDNIE]);
 	Export("<option>%s\n", nazov_modlitby[MODL_POPOLUDNI]); /* cez den: pridane 2003-08-06 */
@@ -4844,6 +4882,21 @@ void _main_zaltar(char *den, char *tyzden, char *modlitba){
 			p = i;
 			continue; /* exit from loop */
 		}
+	}
+	if(p == MODL_NEURCENA){
+		/* 2005-08-15: Kvôli simulácii porovnávame aj s konštantami STR_MODL_... */
+		if(equals(modlitba, STR_MODL_RANNE_CHVALY))
+			p = MODL_RANNE_CHVALY;
+		else if(equals(modlitba, STR_MODL_POSV_CITANIE))
+			p = MODL_POSV_CITANIE;
+		else if(equals(modlitba, STR_MODL_VESPERY))
+			p = MODL_VESPERY;
+		else if(equals(modlitba, STR_MODL_PREDPOLUDNIM))
+			p = MODL_PREDPOLUDNIM;
+		else if(equals(modlitba, STR_MODL_NAPOLUDNIE))
+			p = MODL_NAPOLUDNIE;
+		else if(equals(modlitba, STR_MODL_POPOLUDNI))
+			p = MODL_POPOLUDNI;
 	}
 	if(p == MODL_NEURCENA){
 		Export("Nevhodné údaje: nie je urèená modlitba.\n");
@@ -7139,6 +7192,8 @@ _main_SIMULACIA_QS:
 			_main_LOG_to_Export("---parsing query string:\n");
 			ret = parseQueryString();
 			_main_LOG_to_Export("---parsing query string: finished.\n");
+
+			Log("2005-08-15, pomocný výpis: query_type == %d\n", query_type);
 
 			_main_LOG_to_Export("---scanning for system variables WWW_...: started...\n");
 			/* historicka poznamka:                          (01/02/2000A.D.)

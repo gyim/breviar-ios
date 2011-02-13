@@ -252,8 +252,8 @@ extern const char *TEMPLAT[];
 #define PARAM_CITANIE2     "CITANIE2" /* vlastne BENEDIKTUS */
 
 /* dalsie parametre: specificke pre obdobie */
-/* Od nedele P novho zmrtvychvstania a§ do Druhej velkonocnej nedele vr tane,
- * ako aj na druh‚ veçpery sl vnosti Zoslania Ducha Sv„t‚ho */
+/* Od nedele Pánovho zmàtvychvstania až do Druhej ve¾konoènej nedele vrátane,
+ * ako aj na druhé vešpery slávnosti Zoslania Ducha Svätého */
 #define PARAM_ALELUJA_ALELUJA_BEGIN         "ALELUJA_ALELUJA_BEGIN"
 #define PARAM_ALELUJA_ALELUJA_END           "ALELUJA_ALELUJA_END"
 #define PARAM_ALELUJA_NIE_V_POSTE           "ALELUJA_NIE_V_POSTE"
@@ -262,6 +262,9 @@ extern const char *TEMPLAT[];
 #define PARAM_ALELUJA_VO_VELKONOCNOM        "V_O_ALELUJA"
 #define PARAM_ALELUJA_VO_VELKONOCNOM_BEGIN  "V_O_ALELUJA_BEGIN"
 #define PARAM_ALELUJA_VO_VELKONOCNOM_END    "V_O_ALELUJA_END"
+/* 2005-08-15: Doplnené parametre pre vo¾né, iné hymny v 34. týždni OCR */
+#define PARAM_HYMNUS_34_OCR_INY_BEGIN       "HYMNUS_34_OCR_INY_BEGIN"
+#define PARAM_HYMNUS_34_OCR_INY_END         "HYMNUS_34_OCR_INY_END"
 /* nasleduju casti, ktore sa mozu pri generovani modlitby vynechat
  * alebo doplnit podla lubovole */
 #define PARAM_OTCENAS_BEGIN                 "OTCENAS_BEGIN"
