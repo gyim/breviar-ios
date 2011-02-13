@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* dbzaltar.cpp                                                */
-/* (c)1999-2003 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2005 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | program tvoriaci stranky pre liturgiu hodin   */
 /* document history                                            */
@@ -51,6 +51,7 @@
 /*   2005-08-08a.D. | dokonËenÈ vlastnÈ Ëasti augusta          */
 /*   2005-10-13a.D. | dokonË. vlastnÈ Ëasti sept-okt (len kÛd) */
 /*   2005-11-20a.D. | zaË. modlitba cez deÚ, adv1              */
+/*   2005-11-24a.D. | skorektnenÈ: su_zalmy_nedela1tyzden      */
 /*                                                             */
 /* notes |                                                     */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
@@ -5764,6 +5765,24 @@ void _spolocna_cast_kresponz_zvazok(int modlitba, char *_anchor_pom, char *_anch
 	Log("   set(svsv): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby[modlitba], _file, _anchor_lokal);
 }
 
+/* 2005-11-24: pridanÈ; podæa vöeobecn˝ch smernÌc, Ë. 134:
+
+"Na sl·vnosti a sviatky, vo VeækonoËnom trojdnÌ a v dÚoch VeækonoËnej a VianoËnej okt·vy 
+s˙ pre posv‰tnÈ ËÌtanie urËenÈ vlastnÈ ûalmy v s˙lade s tradÌciou; ich vhodnosù osvetæuje 
+zvyËajne antifÛna. Tak je to aj pri modlitbe cez deÚ na niektorÈ sl·vnosti P·na 
+a vo VeækonoËnej okt·ve. Na rannÈ chv·ly sa ber˙ ûalmy a chv·lospev z nedele prvÈho t˝ûdÚa 
+v ûalt·ri. 
+
+Na prvÈ veöpery sl·vnostÌ sa ber˙ ûalmy podæa starod·vneho zvyku zo sÈrie Laud·te. 
+
+DruhÈ veöpery sl·vnostÌ a veöpery sviatkov maj˙ ûalmy i chv·lospev vlastnÈ. 
+
+Na modlitbu cez deÚ sl·vnostÌ, okrem t˝ch, o ktor˝ch sa uû hovorilo, a ak nepripadn˙ na nedeæu, 
+ber˙ sa ûalmy z doplnkovÈho cyklu (gradu·lne).
+
+Na sviatky sa na modlitbu cez deÚ ber˙ ûalmy z prÌsluönÈho dÚa v t˝ûdni."
+ */
+#define su_zalmy_nedela1tyzden ((_global_den.denvt == DEN_NEDELA) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK))
 void _set_spolocna_cast(int a, _struct_sc sc){
 	/* 2005-07-22: pokus o doplnenie udajov k posvatnym citaniam */
 
@@ -5829,7 +5848,7 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
-		if(_global_opt2 == MODL_ZALMY_ZO_SV){
+		if(su_zalmy_nedela1tyzden && (_global_opt2 == MODL_ZALMY_ZO_SV)){
 			_set_zalmy_1nedele_rch();
 		}
 		_spolocna_cast_full(modlitba);
@@ -5891,7 +5910,7 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
-		if(_global_opt2 == MODL_ZALMY_ZO_SV){
+		if(su_zalmy_nedela1tyzden && (_global_opt2 == MODL_ZALMY_ZO_SV)){
 			_set_zalmy_1nedele_rch();
 		}
 		_spolocna_cast_full(modlitba);
@@ -6021,7 +6040,7 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
-		if(_global_opt2 == MODL_ZALMY_ZO_SV){
+		if(su_zalmy_nedela1tyzden && (_global_opt2 == MODL_ZALMY_ZO_SV)){
 			_set_zalmy_1nedele_rch();
 		}
 		_spolocna_cast_full(modlitba);
@@ -6086,7 +6105,7 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
-		if(_global_opt2 == MODL_ZALMY_ZO_SV){
+		if(su_zalmy_nedela1tyzden && (_global_opt2 == MODL_ZALMY_ZO_SV)){
 			_set_zalmy_1nedele_rch();
 		}
 		_spolocna_cast_full(modlitba);
@@ -6252,7 +6271,7 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
-		if(_global_opt2 == MODL_ZALMY_ZO_SV){
+		if(su_zalmy_nedela1tyzden && (_global_opt2 == MODL_ZALMY_ZO_SV)){
 			_set_zalmy_1nedele_rch();
 		}
 		_spolocna_cast_full(modlitba);
@@ -6306,7 +6325,7 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
-		if(_global_opt2 == MODL_ZALMY_ZO_SV){
+		if(su_zalmy_nedela1tyzden && (_global_opt2 == MODL_ZALMY_ZO_SV)){
 			_set_zalmy_1nedele_rch();
 		}
 		_spolocna_cast_full(modlitba);
@@ -6353,7 +6372,7 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
-		if(_global_opt2 == MODL_ZALMY_ZO_SV){
+		if(su_zalmy_nedela1tyzden && (_global_opt2 == MODL_ZALMY_ZO_SV)){
 			_set_zalmy_1nedele_rch();
 		}
 		_spolocna_cast_full(modlitba);
@@ -6401,7 +6420,7 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
-		if(_global_opt2 == MODL_ZALMY_ZO_SV){
+		if(su_zalmy_nedela1tyzden && (_global_opt2 == MODL_ZALMY_ZO_SV)){
 			_set_zalmy_1nedele_rch();
 		}
 		_spolocna_cast_full(modlitba);

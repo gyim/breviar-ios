@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* mylog.cpp                                                   */
-/* (c)1997-2001 | Juraj Videky | videky@breviar.sk             */
+/* (c)1997-2005 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | pomocne vypisovanie (logovanie) na obrazovku  */
 /*               a/alebo do suboru                             */
