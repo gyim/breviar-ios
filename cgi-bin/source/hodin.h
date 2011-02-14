@@ -22,6 +22,7 @@
 /*   2006-09-13a.D. | dokonèená lokalizácia mesiacov OKT+NOV   */
 /*   2006-12-04a.D. | oprava: kompletáØ                        */
 /*   2006-12-12a.D. | doplnenie latinèiny (la)                 */
+/*   2008-01-03a.D. | doplnené text_DRUHA_NEDELA_PO_NAR_PANA[] */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -932,6 +933,11 @@ const char *html_text_detaily_explain[] =
  "If any of described options are not applicable for a chosen prayer, they can be set anyhow.", 
  "",
  ""};
+
+const char *text_DRUHA_NEDELA_PO_NAR_PANA[] =
+{"2. nede¾a po Narodení Pána",
+ "2. nedìle po Narození Pánì",
+ "", "", ""};
 
 const char *text_JAN_01[] =
 {"Panny Márie Bohorodièky",

@@ -98,6 +98,7 @@
 /*   2007-11-28a.D. | odliönÈ spr·vanie pre CZ hymny 34.t˝ûdÚa OCR         */
 /*   2007-12-04a.D. | opraven· podmienka pre zobrazovanie Sl·va Otcu,      */
 /*                    pretoûe nefungovala pre inÈ modlitby ako r.chv·ly    */
+/*   2008-01-03a.D. | viacjazyËnosù pre text_DRUHA_NEDELA_PO_NAR_PANA[]    */
 /*                                                                         */
 /*                                                                         */
 /*                                                                         */
@@ -2635,7 +2636,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 				_global_den.smer = 6; /* nedele vianocneho obdobia a obdobia "cez rok" */
 				_global_den.litobd = OBD_VIANOCNE_I;
-				mystrcpy(_global_den.meno, "2. nedeæa po NarodenÌ P·na", MENO_SVIATKU);
+				mystrcpy(_global_den.meno, text_DRUHA_NEDELA_PO_NAR_PANA[_global_jazyk], MENO_SVIATKU); /* 2008-01-03: oprava - viacjazyËnosù */
 			}
 			else if(_global_den.denvr < KRST){
 				/* vianocne obdobie */

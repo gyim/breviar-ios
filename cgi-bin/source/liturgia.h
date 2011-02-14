@@ -41,6 +41,7 @@
 /*   2007-06-28a.D. | doplnené: PARAM_TEDEUM_BEGIN aj _END     */
 /*   2007-10-02a.D. | doplnené: PARAM_SKRY_ANTIFONU_BEGIN/END  */
 /*                  - tiež PARAM_ANTIFONA1x a PARAM_ANTIFONA3x */
+/*   2008-01-03a.D. | doplnené text_DRUHA_NEDELA_PO_NAR_PANA[] */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -1169,6 +1170,7 @@ extern const char *text_ZELENY_STVRTOK[];
 extern const char *text_VELKY_PIATOK[];
 extern const char *text_BIELA_SOBOTA[];
 extern const char *text_KVETNA_NEDELA[];
+extern const char *text_DRUHA_NEDELA_PO_NAR_PANA[];
 
 extern const char *text_DEC_08[];
 extern const char *text_AUG_15[];
