@@ -107,6 +107,8 @@
 /*                    "ten istý mesiac o rok" do _main_rozbor_dna()        */
 /*   2008-03-30a.D. | èiastoène doriešené kompletórium s 2 rovnakými ant.  */
 /*                    pre ve¾konoèné obdobie (úprava vn1.htm, komplet.htm) */
+/*   2008-04-03a.D. | kompletórium vo ve¾konoènom období,                  */
+/*                    èi pri druhej antifóne zobrazi dvojku alebo nie     */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -1407,13 +1409,13 @@ void interpretParameter(short int type, char *paramname){
 			/* nezobrazova druhý žalm/antifónu pre kompletórium, ktoré má len 1 žalm+antifónu */
 			_global_skip_in_prayer = ANO;
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("nezobrazova druhý žalm/antifónu pre kompletórium, ktoré má len 1 žalm+antifónu");
+			Export("(beg)nezobrazova druhý žalm/ant. pre komplet., ktoré má len 1 ž.+ant.");
 #endif
 			Log("  `2. žalm+antifóna v kompletóriu' skipping...\n");
 		}
 		else{
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("zobrazova druhý žalm/antifónu pre kompletórium, ktoré má aj 2. žalm+antifónu");
+			Export("(beg)zobrazova druhý žalm/ant. pre komplet., ktoré má aj 2.ž.+ant.");
 #endif
 			Log("  `2. žalm+antifóna v kompletóriu': begin...\n");
 		}
@@ -1426,7 +1428,7 @@ void interpretParameter(short int type, char *paramname){
 		}
 		else{
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("zobrazova druhý žalm/antifónu pre kompletórium, ktoré má 2. žalm+antifónu");
+			Export("(end)zobrazova druhý žalm/ant. pre komplet., ktoré má aj 2.ž.+ant.");
 #endif
 			Log("  `2. žalm+antifóna v kompletóriu' copied.\n");
 		}
@@ -1758,7 +1760,8 @@ void interpretParameter(short int type, char *paramname){
 				includeFile(type, paramname, path, _global_modl_posv_citanie.antifona2.anchor);
 				break;
 			case MODL_KOMPLETORIUM:
-				if(_global_modl_kompletorium.pocet_zalmov == 2){
+				/* 2008-04-03: pridaná podmienka, aby sa preskakovalo v modlitbe kompletória pre ve¾konoèné obdobie - vnorená kotva */
+				if((_global_modl_kompletorium.pocet_zalmov == 2) && (_global_skip_in_prayer != ANO)){
 					strcat(path, _global_modl_kompletorium.antifona2.file);
 					includeFile(type, paramname, path, _global_modl_kompletorium.antifona2.anchor);
 				}
@@ -1825,6 +1828,30 @@ void interpretParameter(short int type, char *paramname){
 				break;
 		}/* switch */
 	}/* PARAM_ANTIFONA3x */
+	else if(equals(paramname, PARAM_ANTIFONA1k)){
+		/* 2008-04-03: pridané kvôli kompletóriu vo ve¾konoènom období, èi pri druhej antifóne zobrazi dvojku alebo nie */
+		if((type == MODL_KOMPLETORIUM) && (_global_ant_mcd_rovnake == NIE) && (_global_modl_kompletorium.pocet_zalmov == 2)){
+			Export("-->1<!--");
+		}
+		else{
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("nie je 1. antifona v kompletku");
+#endif
+			Log("nie je 1. antifona v kompletku");
+		}
+	}/* ANTIFONA1_KOMPLET */
+	else if(equals(paramname, PARAM_ANTIFONA2k)){
+		/* 2008-04-03: pridané kvôli kompletóriu vo ve¾konoènom období, èi pri druhej antifóne zobrazi dvojku alebo nie */
+		if((type == MODL_KOMPLETORIUM) && (_global_ant_mcd_rovnake == NIE) && (_global_modl_kompletorium.pocet_zalmov == 2)){
+			Export("-->2<!--");
+		}
+		else{
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("nie je 2. antifona v kompletku");
+#endif
+			Log("nie je 2. antifona v kompletku");
+		}
+	}/* ANTIFONA2_KOMPLET */
 	else if(equals(paramname, PARAM_ZALM1)){
 		switch(type){
 /* hoci nie je zapoznámkované, nepoužíva sa: 2006-10-11: invitatórium nemá žalm / resp. má fixný žalm 95 a alternatívy */
@@ -2151,7 +2178,7 @@ void interpretTemplate(short int type, char *tempfile){
 	while((c = fgetc(ftemplate)) != EOF){
 		switch (c){
 			case CHAR_KEYWORD_BEGIN:
-				isbuff= 1;
+				isbuff = 1;
 				buff_index = 0;
 				continue;
 			case CHAR_KEYWORD_END:
@@ -2165,7 +2192,9 @@ void interpretTemplate(short int type, char *tempfile){
 				Export("%c", c); /* fputc(c, exportfile); */
 			}
 		}
-		else strbuff[buff_index++] = (char)c;
+		else{
+			strbuff[buff_index++] = (char)c;
+		}
 	}
 	fclose(ftemplate);
 	Log("interpretTemplate(): end.\n");

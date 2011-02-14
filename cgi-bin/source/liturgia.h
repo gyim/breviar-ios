@@ -295,6 +295,9 @@ extern const char *TEMPLAT[];
 /* 2007-10-02: pridané kvôli rovnakım antifónam pre modlitbu cez deò */
 #define PARAM_ANTIFONA1x   "ANTIFONA1_DRUHA"
 #define PARAM_ANTIFONA3x   "ANTIFONA3_PRVA"
+/* 2008-04-03: pridané kvôli kompletóriu vo ve¾konoènom období, èi pri druhej antifóne zobrazi dvojku alebo nie */
+#define PARAM_ANTIFONA1k   "ANTIFONA1_KOMPLET"
+#define PARAM_ANTIFONA2k   "ANTIFONA2_KOMPLET"
 
 /* dalsie parametre: specificke pre obdobie */
 /* Od nedele Pánovho zmàtvychvstania a do Druhej ve¾konoènej nedele vrátane,

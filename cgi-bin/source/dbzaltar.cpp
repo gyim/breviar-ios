@@ -5983,6 +5983,7 @@ label_24_DEC:
 			modlitba = MODL_KOMPLETORIUM;
 			_set_kompletorium_nedela(2); 
 			set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
+			set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd);
 			if(den != DEN_PIATOK){
 				set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
 			}
