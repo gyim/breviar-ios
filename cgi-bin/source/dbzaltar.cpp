@@ -853,7 +853,7 @@ void set_hymnus(short int den, short int tyzzal, short int modlitba){
 	if((modlitba == MODL_KOMPLETORIUM) || (modlitba == MODL_PRVE_KOMPLETORIUM)){
 		file_name_zapamataj();
 		file_name_kompletorium(OBD_CEZ_ROK);
-		if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
+		if((_global_jazyk == JAZYK_CZ) /* || (_global_jazyk == JAZYK_CZ_OP) */){ /* 2008-12-16: pre dominikánov ako pre slovenský */
 			sprintf(_anchor, "%c_%s_%s", 
 				pismenko_modlitby(modlitba), ANCHOR_HYMNUS, nazov_DN_asci[den]);
 		}
