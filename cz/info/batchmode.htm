@@ -2,10 +2,10 @@
    "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-   <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
-   <meta name="Author" content="Juraj Videky">
-   <link rel="stylesheet" type="text/css" href="../breviar.css">
-   <title>ulohy</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+	<meta name="Author" content="Juraj Videky">
+	<link rel="stylesheet" type="text/css" href="../breviar.css">
+	<title>ulohy</title>
 </head>
 <body>
 <center>
@@ -18,7 +18,7 @@
 	(více viz o <a href="parametre.htm">parametrech tohoto použití</a>), nebo v tzv. <span class="bold">batch módu (dávkové zpracování)</span>, 
 	pokud pro určité, dvěma daty ohraničené období <a name="datumy"></a>(<span class="it">počáteční datum</span>, <span class="it">konečné datum</span>) vytvoří dávkový soubor (skript), obsahující volání (volby???) programu s nastavenými parametry. Skript po spuštění generuje modlitby pro dané období (buď pro každou modlitbu do samostatného souboru, nebo všechny modlitby do jednoho souboru). Tento způsob použití se značně liší od ostatních, proto ho popisujeme na tomto místě zvlášť. 
 <ul class="level1">
-<li><span class="parameter">q</span> | Typ <a href="ulohy.htm">úlohy</a>, kterou má program vykonat  (query type)
+<li><span class="parameter">q</span> | Typ <a href="ulohy.htm">úlohy</a>, kterou má program vykonat (query type)
 	<ul class="level2">
 	<li><span class="value">pbm</span> | batch mode (dávkové zpracování)</li>
 	<li>ostatní hodnoty: viz <a href="parametre.htm">parametry použití programu (všeobecně)</a>
@@ -52,13 +52,13 @@ Tento název bude použitý ve výsledném skriptu.</li>
 <li><span class="parameter">yyyy</span> | rok</li>
 <li><span class="parameter">mm</span> | měsíc (např. <span class="value">05</span> pro květen)</li>
 <li><span class="parameter">dd</span> | den (např. <span class="value">07</span>)
-<br>Datum je uvedeno v souladu s normou  ISO 8601.
+<br>Datum je uvedeno v souladu s normou ISO 8601.
 </li>
 <li><span class="parameter">x</span> | pořadí světce (<span class="value">0</span> až <span class="value">4</span>). <span class="value">0</span> většinou znamená všední den, nebo slavnost s nejvyšší prioritou. 
 	<span class="value">4</span> znamená nezávaznou sobotní památku Panny Marie, <span class="value">1</span> až <span class="value">3</span> znamenají většinou svátky svatých.</li>
 <li><span class="parameter">p</span> | modlitba (<span class="value">r</span> = ranní chvály, <span class="value">v</span> = nešpory - použité je "v" z latinského "vesperae")</li>
 </ul>
-<p>V případě, že je použitý parametr  <span class="parameter">a</span> (append), bude vytvořený jen jeden soubor s následujícím názvem:
+<p>V případě, že je použitý parametr <span class="parameter">a</span> (append), bude vytvořený jen jeden soubor s následujícím názvem:
 <span class="tt">yyyy-mm-dd_YYYY-MM-DD.htm</span>, kde význam jednotlivých částí názvu souboru je následovný:
 <ul class="level1">
 <li><span class="parameter">yyyy</span> | rok <a href="#datumy">počátečního</a> data</li>

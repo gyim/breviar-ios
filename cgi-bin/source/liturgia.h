@@ -311,8 +311,8 @@ extern const char *TEMPLAT[];
 #define PARAM_ALELUJA_NIE_V_POSTE           "ALELUJA_NIE_V_POSTE"
 #define PARAM_ALELUJA_NIE_V_POSTE_BEGIN     "ALELUJA_NIE_V_POSTE_BEGIN"
 #define PARAM_ALELUJA_NIE_V_POSTE_END       "ALELUJA_NIE_V_POSTE_END"
-/* 2008-05-08: zapoznámkované: #define PARAM_ALELUJA_VO_VELKONOCNOM "V_O_ALELUJA" */
-#define PARAM_ALELUJA_VO_VELKONOCNOM_BEGIN  "V_O_ALELUJA_BEGIN"
+#define PARAM_ALELUJA_VO_VELKONOCNOM        "V_O_ALELUJA" /* používa sa v inkludovaných súboroch, napr. v rámci antifón */
+#define PARAM_ALELUJA_VO_VELKONOCNOM_BEGIN  "V_O_ALELUJA_BEGIN" /* používajú sa v templátach */
 #define PARAM_ALELUJA_VO_VELKONOCNOM_END    "V_O_ALELUJA_END"
 /* 2005-08-15: Doplnené parametre pre vo¾né, iné hymny v 34. týždni OCR */
 #define PARAM_HYMNUS_34_OCR_INY_BEGIN       "HYMNUS_34_OCR_INY_BEGIN"

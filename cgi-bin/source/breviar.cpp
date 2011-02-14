@@ -1124,23 +1124,23 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 					/* !equalsi(rest, modlparam) */
 					/* write = 0; -- aby mohli byt nestovane viacere :-) */
 					DetailLog("paramenter not matches: %s != %s\n", rest, modlparam);
-					/* 2008-05-08: kotva "V_O_ALELUJA", teda #define PARAM_ALELUJA_VO_VELKONOCNOM sa nepoužíva
-					 * zapoznámkované
 					if(((_global_den.litobd != OBD_VELKONOCNE_I) && (_global_den.litobd != OBD_VELKONOCNE_II)) &&
 						(equals(rest, PARAM_ALELUJA_VO_VELKONOCNOM))){
 						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
 							write = 0;
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("(stop)nie je v.o.");
+#endif
 							Log("  rusim writing to export file, kvoli V.O. Aleluja...\n");
 						}
 						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
 #if defined(EXPORT_HTML_SPECIALS)
-							Export("nie je velkonocne obdobie");
+							Export("nie je v.o.(start)");
 #endif
 							write = 1;
 							Log("  opat writing to export file, end of V.O. Aleluja.\n");
 						}
 					}
-					*/
 					/* aleluja vo velkonocnom obdobi */
 				}/* !equalsi(rest, modlparam) */
 				continue;
