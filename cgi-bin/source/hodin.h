@@ -104,7 +104,7 @@ const char *nazov_spolc_jazyk[POCET_SPOL_CASTI + 1][POCET_JAZYKOV + 1] =
  {"Panny Márie", "Panny Marie", "", "", "", "Panny Marie"}, 
  {"svätých mužov - pre reho¾níkov", "svatých mužù - o øeholnících", "", "", "", "O øeholnících"}, 
  {"svätých mužov", "svatých mužù", "", "", "","O svatých mužích"}, 
- {"panien", "pannen", "", "", "","O pannách"}, 
+ {"panien", "panen", "", "", "","O pannách"}, 
  {"svätých žien - pre reho¾nice", "svatých žen - o øeholnicích", "", "", "", "O svatých ženách - o øeholnicích"}, 
  {"svätých žien", "svatých žen", "", "", "", "O svatých ženách"}, 
  {"duchovných pastierov - pre viacerých", "duchvních pastýøù - o více pastýøích", "", "", "", "O duchovních pastýøích"}, 
