@@ -5843,33 +5843,37 @@ label_24_DEC:
 /* switch(litobd), case OBD_VELKONOCNE_II -- begin -------------------------------------------- */
 		case OBD_VELKONOCNE_II:/* po nanebovstupeni pana */
 			/* 10/03/2000A.D. */
+/* 2006-02-11: doplnené posvätné èítanie */
 #define _velk2_hymnus {\
 	sprintf(_anchor, "%s_%c%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS);\
-	_set_hymnus(modlitba, _file, _anchor);\
-	set_LOG_litobd;\
+	if(modlitba == MODL_POSV_CITANIE){\
+		_set_hymnus(modlitba, _file_pc, _anchor);\
+		set_LOG_litobd_pc;\
+	}\
+	else{\
+		_set_hymnus(modlitba, _file, _anchor);\
+		set_LOG_litobd;\
+	}\
 }
-/* citania ako v OBD_VELKONOCNE_I; 7. tyzden ma na vespery vlastne citanie */
+
+/* citania ako v OBD_VELKONOCNE_I; 7. tyzden ma na vespery vlastne citanie 
+ * 2006-02-11: oprava
+ */
 #define _velk2_kcitanie {\
-	if((den == DEN_NEDELA) || (modlitba == MODL_RANNE_CHVALY) || (tyzden == 6)){\
+	Log("\n\n _velk2_kcitanie \n\n");\
+	if(((den == DEN_NEDELA) || (modlitba == MODL_RANNE_CHVALY) || (tyzden == 6))\
+		/* 2006-02-11: modlitba cez deò */\
+		|| (modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){\
 		sprintf(_anchor, "%s_%c%s%s", nazov_OBD[OBD_VELKONOCNE_I], pismenko_modlitby(modlitba), nazov_DN_asci[den], ANCHOR_KCITANIE);\
 		_set_kcitanie(modlitba, nazov_obd_htm[OBD_VELKONOCNE_I], _anchor);\
 	}\
-	else{\
+	else /* if((modlitba == MODL_VESPERY) && (tyzden == 7)) alebo posv. èítanie mimo nedele */{\
 		sprintf(_anchor, "%s_%c%s%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), nazov_DN_asci[den], ANCHOR_KCITANIE);\
 		_set_kcitanie(modlitba, _file, _anchor);\
 	}\
 	set_LOG_litobd;\
 }
-#define _velk2_kresponz {\
-	if(den == DEN_NEDELA){\
-		sprintf(_anchor, "%s_%c%s%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_KRESPONZ, nazov_DN_asci[den]);\
-	}\
-	else{\
-		sprintf(_anchor, "%s_%c%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_KRESPONZ);\
-	}\
-	_set_kresponz(modlitba, _file, _anchor);\
-	set_LOG_litobd;\
-}
+
 #define _velk2_prosby {\
 	sprintf(_anchor, "%s_%c%s%d%s", nazov_OBD[OBD_VELKONOCNE_I], pismenko_modlitby(modlitba), ANCHOR_PROSBY, t, nazov_DN_asci[den]);\
 	_set_prosby(modlitba, _file, _anchor);\
@@ -5942,12 +5946,22 @@ label_24_DEC:
 	_set_magnifikat(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
 }
+/* 2006-02-11: opravené: prvé vešpery majú inú modlitbu ako ostatné hodinky;
+ * inú modlitbu má aj modlitba cez deò */
 #define _zds_modlitba {\
-	sprintf(_anchor, "%s_%s", ANCHOR_ZOSLANIE_DUCHA_SV, ANCHOR_MODLITBA);\
+	c = pismenko_modlitby(modlitba);\
+	if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){\
+		c = pismenko_modlitby(MODL_NAPOLUDNIE);\
+	}\
+	if((modlitba == MODL_PRVE_VESPERY) || (modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI))\
+		sprintf(_anchor, "%s_%c%s", ANCHOR_ZOSLANIE_DUCHA_SV, c, ANCHOR_MODLITBA);\
+	else\
+		sprintf(_anchor, "%s_%s", ANCHOR_ZOSLANIE_DUCHA_SV, ANCHOR_MODLITBA);\
 	_set_modlitba(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
 }
-#define _zds_ne_antifony {\
+
+#define _zds_antifony {\
 	sprintf(_anchor, "%s_%c%s", ANCHOR_ZOSLANIE_DUCHA_SV, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1);\
 	_set_antifona1(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
@@ -5959,6 +5973,18 @@ label_24_DEC:
 	set_LOG_litobd;\
 }
 
+/* 2006-02-11: doplnené posvätné èítanie */
+#define _zds_citanie1 {\
+	sprintf(_anchor, "%s_%c%s", ANCHOR_ZOSLANIE_DUCHA_SV, pismenko_modlitby(modlitba), ANCHOR_CITANIE1);\
+	_set_citanie1(modlitba, _file_pc, _anchor);\
+	set_LOG_litobd_pc;\
+}
+#define _zds_citanie2 {\
+	sprintf(_anchor, "%s_%c%s", ANCHOR_ZOSLANIE_DUCHA_SV, pismenko_modlitby(modlitba), ANCHOR_CITANIE2);\
+	_set_citanie2(modlitba, _file_pc, _anchor);\
+	set_LOG_litobd_pc;\
+}
+
 		/* 2006-01-24: tu v skutoènosti zaèína VE¼KONOÈNÉ OBDOBIE II. */
 
 			t = tyzden MOD 2;
@@ -5967,7 +5993,7 @@ label_24_DEC:
 			modlitba = MODL_RANNE_CHVALY;
 			_velk2_hymnus;
 			_velk2_kcitanie;
-			_velk2_kresponz;
+			_velk1_kresponz;
 			_velk2_benediktus;
 			_velk2_prosby;
 			_velk2_modlitba;
@@ -5976,7 +6002,7 @@ label_24_DEC:
 			modlitba = MODL_VESPERY;
 			_velk2_hymnus;
 			_velk2_kcitanie;
-			_velk2_kresponz;
+			_velk1_kresponz;
 			_velk2_magnifikat;
 			_velk2_prosby;
 			_velk2_modlitba;
@@ -5993,25 +6019,26 @@ label_24_DEC:
 			_velk1_hymnus;
 			_velk1_mcd_antifony;
 			_velk1_kresponz;
-			_velk1_kcitanie;
+			_velk2_kcitanie;
 			_velk2_modlitba;
 			modlitba = MODL_NAPOLUDNIE;
 			_velk1_hymnus;
 			_velk1_mcd_antifony;
 			_velk1_kresponz;
-			_velk1_kcitanie;
+			_velk2_kcitanie;
 			_velk2_modlitba;
 			modlitba = MODL_POPOLUDNI;
 			_velk1_hymnus;
 			_velk1_mcd_antifony;
 			_velk1_kresponz;
-			_velk1_kcitanie;
+			_velk2_kcitanie;
 			_velk2_modlitba;
 
 			if(den == DEN_NEDELA){
 				if(_global_den.denvr == _global_r._ZOSLANIE_DUCHA_SV.denvr){
 					/* zoslanie ducha sv.; 10/03/2000A.D. */
 					mystrcpy(_file, FILE_ZOSLANIE_DUCHA_SV, MAX_STR_AF_FILE);
+					mystrcpy(_file_pc, FILE_ZOSLANIE_DUCHA_SV, MAX_STR_AF_FILE);
 					mystrcpy(_anchor, ANCHOR_ZOSLANIE_DUCHA_SV, MAX_STR_AF_ANCHOR);
 					Log("  ide o zoslanie Ducha Sv.: _file = `%s', _anchor = %s...\n", _file, _anchor);
 					modlitba = MODL_PRVE_VESPERY;
@@ -6022,7 +6049,7 @@ label_24_DEC:
 					_zds_magnifikat;
 					_zds_prosby;
 					_zds_modlitba;
-					_zds_ne_antifony;
+					_zds_antifony;
 					modlitba = MODL_RANNE_CHVALY;
 					_set_zalmy_zoslanie_ducha_sv(modlitba);
 					_zds_hymnus;
@@ -6031,7 +6058,7 @@ label_24_DEC:
 					_zds_benediktus;
 					_zds_prosby;
 					_zds_modlitba;
-					_zds_ne_antifony;
+					_zds_antifony;
 					modlitba = MODL_VESPERY;
 					_set_zalmy_zoslanie_ducha_sv(modlitba);
 					_zds_hymnus;
@@ -6040,23 +6067,48 @@ label_24_DEC:
 					_zds_magnifikat;
 					_zds_prosby;
 					_zds_modlitba;
-					_zds_ne_antifony;
+					_zds_antifony;
 
-					/* 2006-01-27: pridané posv. èítania a modlitba cez deò */
+					/* 2006-01-27: pridané posv. èítania a modlitba cez deò, len žalmy
+					 * 2006-02-11: dokonèené posvätné èítania a modlitba cez deò
+					 */
 					modlitba = MODL_POSV_CITANIE;
 					_set_zalmy_zoslanie_ducha_sv(modlitba);
+					_zds_antifony;
+					_zds_hymnus;
+					_zds_citanie1;
+					_zds_citanie2;
+					_zds_kresponz;
+					_zds_modlitba;
+
 					modlitba = MODL_PREDPOLUDNIM;
 					_set_zalmy_zoslanie_ducha_sv(modlitba);
+					_zds_antifony;
+					_zds_hymnus;
+					_zds_kresponz;
+					_zds_kcitanie;
+					_zds_modlitba;
 					modlitba = MODL_NAPOLUDNIE;
 					_set_zalmy_zoslanie_ducha_sv(modlitba);
+					_zds_antifony;
+					_zds_hymnus;
+					_zds_kresponz;
+					_zds_kcitanie;
+					_zds_modlitba;
 					modlitba = MODL_POPOLUDNI;
 					_set_zalmy_zoslanie_ducha_sv(modlitba);
+					_zds_antifony;
+					_zds_hymnus;
+					_zds_kresponz;
+					_zds_kcitanie;
+					_zds_modlitba;
+
 				}
 				else{
 					modlitba = MODL_PRVE_VESPERY;
 					_velk2_hymnus;
 					_velk2_kcitanie;
-					_velk2_kresponz;
+					_velk1_kresponz;
 					_velk2_magnifikat;
 					_velk2_prosby;
 					_velk2_modlitba;
