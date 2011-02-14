@@ -11,38 +11,30 @@
 .tt { font-family: Courier, Monospaced; }
 .parameter { font-weight: bold; font-style: normal; font-family: Courier, Monospaced; color: black; }
 .value { font-weight: bold; font-style: normal; font-family: Courier, Monospaced; color: brown; }
-.explain { font-size: 80%; color: #330000; }
-.small { font-size: 80%; }
+.explain { font-size: 90%; color: #330000; }
+.small { font-size: 90%; }
 
-/* 2003-07-09; 2004-03-23 */
-/* apply to all elements */ { font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 100%; }
+/* 2003-07-09; 2004-03-23; 2008-02-27 */
+/* apply to all elements */ { font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; font-size: 100%; }
 body, html { 
 	background-color: #FFFFCC; 
 	color: #000000; 
-	font-family: Verdana, Tahoma, Georgia, Sans Serif; 
-	scrollbar-base-color: white;
-	scrollbar-face-color: white;
-	scrollbar-shadow-color: #330000;
-	scrollbar-highlight-color: #330000;
-	scrollbar-3dlight-color: white;
-	scrollbar-darkshadow-color: #330000;
-	scrollbar-track-color: #FFFFCC; 
-	scrollbar-arrow-color: #330000;
+	font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; 
 }
-p { font-family: Verdana, Tahoma, Georgia, Sans Serif; color: #000000; font-style: normal; }
+p { font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; color: #000000; font-style: normal; }
 
 
 .duoraz { 
 	font-weight: bold; }
 
 p.patka { 
-	font-size: 71%; 
+	font-size: 80%; 
 	text-align: center; 
 	text-indent: 0em;  
 	margin-top: -1mm; 
 	letter-spacing: 0mm }
 
-a { font-family: Verdana, Tahoma, Georgia, Sans Serif; color: #000000; text-decoration: underline; }
+a { font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; color: #000000; text-decoration: underline; }
 a:hover { color: white; background-color: #663300; text-decoration:none; }
 a:active { color: gray; text-decoration: underline; }
 a img { border: none }
@@ -51,21 +43,28 @@ a.nounderline { text-decoration:none; }
 
 table { color: #505000; }
 tr.paragraph { text-indent: 3em; line-height: 120%; }
-td { font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 90%; color: #000000}
+td { font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; font-size: 95%; color: #000000}
 
 hr {	height: 0.2mm;
 	size: 1px;
 	width: 33%; 
 	color: gray; }
 
-select { background: white; font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 90%; color: #000000}
+select { background: white; font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; font-size : 95%; color: #000000}
 
-input { border: 1px; font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 90%; color: #000000; }
+input { border: 1px; font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; font-size : 95%; color: #000000; }
 
-input.button { background: #ffffFF; Verdana, Tahoma, Georgia, Sans Serif; font-size : 80%; font-weight: normal; color: #000000; border: 1px solid }
-input.reset { background: #ffffFF; Verdana, Tahoma, Georgia, Sans Serif; font-size : 80%; font-weight: normal; color: #000000; border: 1px solid }
+input.button, input.reset { 
+	margin-left: 0px!important;
+	background: url(/pozadie.tlac.gif); 
+	font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; 
+	font-size : 90%; 
+	text-decoration:none; 
+	color: #000000; 
+	border: solid 1px #226500; }
 
 input.text { border-style: solid; background: white; }
+
 input.radio { }
 input.checkbox { }
 
@@ -77,7 +76,7 @@ ul.level1 { list-style-type: disc; }
 ul.level2 { list-style-type: circle; }
 ul.level3 { list-style-type: square; }
 
-li { font-size: 90%; }
+li { font-size: 95%; }
 
 h1 { font-size: 180%; }
 h2 { font-size: 150%; }

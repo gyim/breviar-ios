@@ -103,6 +103,8 @@
 /*                  - a tiež text_V_OKTAVE_NARODENIA[]                     */
 /*                  - opravené prebytoèné </span> v _global_string         */
 /*                  - dni po nar.pána pre m.cez deò dokonèia 4.týždeò žalt.*/
+/*   2008-02-27a.D. | doplnené tlaèidlá "ten istý mesiac pred rokom",      */
+/*                    "ten istý mesiac o rok" do _main_rozbor_dna()        */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -2463,8 +2465,8 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 		Log(_global_r); // 01/03/2000A.D. 
 	 */
 
-	short int NAR = poradie(25, 12, rok);       /* narodenie pana */
-/* slavnosti */
+	short int NAR = poradie(25, 12, rok); /* narodenie pana */
+	/* slavnosti */
 	short int PMB = poradie(1, 1, rok); /* panny marie bohorodicky */
 	short int ZJV = poradie(6, 1, rok); /* zjavenie pana */
 	short int DEC16 = poradie(16, 12, rok); /* 16. december, prelom v adventnom obdobi */
@@ -5372,7 +5374,7 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 		Log("spustam analyzu roka (rok %d)...\n", _local_rok);
 		analyzuj_rok(_local_rok); /* vysledok da do _global_r */
 		LOG_ciara;
-		Log("spustam analyzu nasledujuceho dna (%d. %s %d)...\n",
+		Log("spustam analyzu nasledujuceho dna (%d. %s %d)...\n", 
 			datum.den, nazov_mesiaca(datum.mesiac - 1), _local_rok);
 		ret = _rozbor_dna_s_modlitbou(datum, _local_rok, modlitba, UNKNOWN_PORADIE_SVATEHO);
 		if(ret == FAILURE){
@@ -5380,12 +5382,11 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 			Log("-- rozbor_dna_s_modlitbou(int, int, int, int): uncomplete end\n");
 			goto LABEL_s_modlitbou_DEALLOCATE;
 		}/* ret == FAILURE */
-		Log("analyza nasledujuceho dna (%d. %s %d) skoncila.\n",
-			datum.den, nazov_mesiaca(datum.mesiac - 1), rok);
+		Log("analyza nasledujuceho dna (%d. %s %d) skoncila.\n", datum.den, nazov_mesiaca(datum.mesiac - 1), rok);
 		LOG_ciara;
-		/* teraz mam vsetky data v _global_den, _global_modl_... */
-
+		
 		_local_den = _global_den;
+
 		/* neviem, ci tam ma byt _global_modl_[prve_]vespery ... */
 		/* 23/02/2000A.D. -- prirobil som aj bez _prve_ */
 		_local_modl_prve_vespery = _global_modl_prve_vespery;
@@ -5409,16 +5410,14 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 		Log("spustam analyzu roka (rok %d)...\n", rok);
 		analyzuj_rok(rok); /* vysledok da do _global_r */
 	}
-	Log("spustam analyzu tohto dna (%d. %s %d)...\n",
-		datum.den, nazov_mesiaca(datum.mesiac - 1), rok);
+	Log("spustam analyzu tohto dna (%d. %s %d)...\n", datum.den, nazov_mesiaca(datum.mesiac - 1), rok);
 	ret = _rozbor_dna_s_modlitbou(datum, rok, modlitba, poradie_svaty);
 	if(ret == FAILURE){
 		Log("_rozbor_dna_s_modlitbou() returned FAILURE, so...\n");
 		Log("-- rozbor_dna_s_modlitbou(int, int, int, int): uncomplete end\n");
 		goto LABEL_s_modlitbou_DEALLOCATE;
 	}/* ret == FAILURE */
-	Log("analyza tohto dna (%d. %s %d) skoncila.\n",
-		datum.den, nazov_mesiaca(datum.mesiac - 1), rok);
+	Log("analyza tohto dna (%d. %s %d) skoncila.\n", datum.den, nazov_mesiaca(datum.mesiac - 1), rok);
 	LOG_ciara;
 	/* teraz mam vsetky data v _global_den, _global_modl_... */
 	Log("teraz mam vsetky data v _global_den, _global_modl_...\n"); /* pridane 2003-08-13 */
@@ -6170,6 +6169,10 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				/* pridane 13/04/2000A.D. */
 				/* pridane 25/02/2000A.D. -- buttony Predchadzajuci, Nasledujuci mesiac */
 				Export("\n<table align=\"center\">\n"); /* 2003-07-16 zrusena <hr> */
+				/* 2008-02-27: nasledujú tlaèidlá; doplnený "ten istý mesiac pred rokom", "ten istý mesiac o rok" */
+
+				Export("<tr>\n");
+
 				/* predosly mesiac -- button */
 				pm = m; pr = r;
 				if(m == 1){
@@ -6179,7 +6182,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				else{
 					pm = m - 1;
 				}
-				Export("<td align=right><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n",
+				Export("<td align=\"right\"><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n",
 					script_name,
 					STR_QUERY_TYPE, STR_PRM_DATUM,
 					STR_DEN, STR_VSETKY_DNI,
@@ -6199,7 +6202,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				else{
 					pm = m + 1;
 				}
-				Export("<td align=right><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n",
+				Export("<td align=\"left\"><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n",
 					script_name,
 					STR_QUERY_TYPE, STR_PRM_DATUM,
 					STR_DEN, STR_VSETKY_DNI,
@@ -6209,6 +6212,38 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				/* 2007-03-19: >> zmenené na HTML_RIGHT_ARROW */
 				Export("<"HTML_FORM_INPUT_SUBMIT" value=\"%s %d "HTML_RIGHT_ARROW"\">\n", nazov_Mesiaca(pm - 1), pr);
 				Export("</form></td>\n");
+
+				Export("</tr>\n");
+				Export("<tr>\n");
+
+				/* ten istý mesiac pred rokom -- button */
+				pm = m; 
+				pr = r - 1;
+				Export("<td align=\"right\"><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n",
+					script_name,
+					STR_QUERY_TYPE, STR_PRM_DATUM,
+					STR_DEN, STR_VSETKY_DNI,
+					STR_MESIAC, pm,
+					STR_ROK, pr,
+					pom2);
+				Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_LEFT_ARROW" %s %d\">\n", nazov_Mesiaca(pm - 1), pr);
+				Export("</form></td>\n");
+
+				/* ten istý mesiac o rok -- button */
+				pm = m; 
+				pr = r + 1;
+				Export("<td align=\"left\"><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n",
+					script_name,
+					STR_QUERY_TYPE, STR_PRM_DATUM,
+					STR_DEN, STR_VSETKY_DNI,
+					STR_MESIAC, pm,
+					STR_ROK, pr,
+					pom2);
+				Export("<"HTML_FORM_INPUT_SUBMIT" value=\"%s %d "HTML_RIGHT_ARROW"\">\n", nazov_Mesiaca(pm - 1), pr);
+				Export("</form></td>\n");
+
+				Export("</tr>\n");
+
 				/* koniec buttonov */
 				Export("</table>\n");
 			}/* _global_linky == ANO */

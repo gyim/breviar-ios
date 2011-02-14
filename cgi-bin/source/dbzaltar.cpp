@@ -85,6 +85,7 @@
 /*                    treba uchova a potom obnovi pôvodné _file       */
 /*   2008-01-23a.D. | opravené zvazok_breviara[] a zaltar_zvazok()      */
 /*   2008-02-22a.D. | doplnené modlitby cez deò (svätci) pre III.zväzok */
+/*   2008-02-27a.D. | oprava liturgicke_obdobie() pre nanebovzatie PM   */
 /*                                                                      */
 /*                                                                      */
 /* notes |                                                              */
@@ -3176,15 +3177,18 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 	  * 2007-07-17: vyzerá to tak, e asi je potrebné zbehnú aj v tıchto prípadoch nastavenia 
 	  *		kvôli modlitbe cez deò tak, ako to bolo len pre sviatok povıšenia sv. kría
 	  *
+	  * 2008-02-27: doplnenı aj prípad, keï na nede¾u padne slávnos nanebovzatia PM (15. augusta)
+	  *
 	  */
 	Log("najprv treba skontrolova, èi nejde o nede¾u, na ktorú pripadol sviatok premenenia pána a podobné... (ak áno, nenastavuj niè)\n");
 	if(
 		((_global_den.denvt == DEN_NEDELA) && (_global_den.den == 6) && (_global_den.mesiac - 1 == MES_AUG)) ||
+		((_global_den.denvt == DEN_NEDELA) && (_global_den.den == 15) && (_global_den.mesiac - 1 == MES_AUG)) ||
 		((_global_den.denvt == DEN_NEDELA) && (_global_den.den == 29) && (_global_den.mesiac - 1 == MES_JUN)) ||
 		((_global_den.denvt == DEN_NEDELA) && (_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) ) ||
 		((_global_den.den == 1) && (_global_den.mesiac - 1 == MES_NOV))
 		){
-			Log("premenenie pána || petra a pavla || povıšenie sv. kría || všetkıch svätıch...\n");
+			Log("premenenie pána || petra a pavla || povıšenie sv. kría || všetkıch svätıch || nanebovzatia PM...\n");
 			if((_global_modlitba != MODL_PREDPOLUDNIM) && (_global_modlitba != MODL_NAPOLUDNIE) && (_global_modlitba != MODL_POPOLUDNI)){
 				Log("keïe sa nejedná o modlitbu cez deò, preskakujeme nastavenia (všetky boli nastavené z vlastnej èasti)...\n");
 				return;
