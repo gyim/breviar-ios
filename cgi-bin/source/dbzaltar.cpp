@@ -3177,7 +3177,12 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 
 			/* invitatórium */
 			modlitba = MODL_INVITATORIUM;
-			_obd_invitat;
+			if(_global_jazyk == JAZYK_CZ){
+				_obd_invitat_viac(2); /* 2007-12-04: pôvodne tu bolo "_obd_invitat;", ale èeský breviár má na výber 2 */
+			}
+			else{
+				_obd_invitat;
+			}
 		
 			/* ranne chvaly */
 			modlitba = MODL_RANNE_CHVALY;

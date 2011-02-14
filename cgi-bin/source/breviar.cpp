@@ -96,6 +96,8 @@
 /*                    (krátke responzórium, prosby pre r.chvály/vešpery)   */
 /*   2007-11-27a.D. | oprava v interpretParameter(), hymnus 34.týždòa OCR  */
 /*   2007-11-28a.D. | odlišné správanie pre CZ hymny 34.týždòa OCR         */
+/*   2007-12-04a.D. | opravená podmienka pre zobrazovanie Sláva Otcu,      */
+/*                    pretože nefungovala pre iné modlitby ako r.chvály    */
 /*                                                                         */
 /*                                                                         */
 /*                                                                         */
@@ -1424,8 +1426,15 @@ void interpretParameter(short int type, char *paramname){
 	/* 2007-03-23: pridané Sláva Otcu */
 	else if(equals(paramname, PARAM_SLAVAOTCU_BEGIN)){
 		_global_pocet_slava_otcu = _global_pocet_slava_otcu + 1;
-		/* 2007-05-18: zosilnená podmienka, aby Sláva Otcu nebolo pre špeciálne prípady */
-		if(_global_opt1 == ANO && (_global_pocet_slava_otcu != 2 || !equals(_global_modl_ranne_chvaly.zalm2.anchor, "DAN3,57-88.56"))){
+		/* 2007-05-18: zosilnená podmienka, aby Sláva Otcu nebolo pre špeciálne prípady 
+		 * 2007-12-04: opravená podmienka, pretože nefungovala pre modlitby odlišné od ranných chvál
+		 */
+		if(_global_opt1 == ANO && (
+			_global_modlitba != MODL_RANNE_CHVALY
+			|| (_global_modlitba == MODL_RANNE_CHVALY
+				&& !(_global_pocet_slava_otcu == 2 && equals(_global_modl_ranne_chvaly.zalm2.anchor, "DAN3,57-88.56"))
+			)
+		)){
 			/* zobrazit Slava Otcu */
 #if defined(EXPORT_HTML_SPECIALS)
 			Export("zobrazit Slava Otcu(%d)", _global_pocet_slava_otcu);
@@ -1443,9 +1452,15 @@ void interpretParameter(short int type, char *paramname){
 		}
 	}
 	else if(equals(paramname, PARAM_SLAVAOTCU_END)){
-		/* 2007-05-18: zosilnená podmienka, aby Sláva Otcu nebolo pre špeciálne prípady */
-		if(_global_opt1 == ANO && (_global_pocet_slava_otcu != 2 || !equals(_global_modl_ranne_chvaly.zalm2.anchor, "DAN3,57-88.56"))){
-			/* zobrazit Slava Otcu */
+		/* 2007-05-18: zosilnená podmienka, aby Sláva Otcu nebolo pre špeciálne prípady 
+		 * 2007-12-04: opravená podmienka, pretože nefungovala pre modlitby odlišné od ranných chvál
+		 */
+		if(_global_opt1 == ANO && (
+			_global_modlitba != MODL_RANNE_CHVALY
+			|| (_global_modlitba == MODL_RANNE_CHVALY
+				&& !(_global_pocet_slava_otcu == 2 && equals(_global_modl_ranne_chvaly.zalm2.anchor, "DAN3,57-88.56"))
+			)
+		)){
 			Export("<!--");
 #if defined(EXPORT_HTML_SPECIALS)
 			Export("zobrazit Slava Otcu(%d)", _global_pocet_slava_otcu);
