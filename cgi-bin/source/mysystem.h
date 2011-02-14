@@ -18,6 +18,7 @@
 /*   2005-03-28a.D. | pridane na zaciatok #undef pre vsetky    */
 /*   2006-01-28a.D. | pridané define pre spôsob exportu        */
 /*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám          */
+/*   2007-05-25a.D. | pridané MODEL_ostry_Windows_RUBY         */
 /*                                                             */
 /***************************************************************/
 
@@ -127,7 +128,11 @@
 /* 2006-07-17: Pridané */
 #define		PATH_SEPARATOR_linux	'/'
 #define		PATH_SEPARATOR_Windows	'\\'
-#ifdef	OS_linux
+
+/* 2007-05-29: upravené; pre Ruby on Windows tiež separátor ako pod linuxom */
+#if defined(OS_linux)
+	#define		PATH_SEPARATOR	PATH_SEPARATOR_linux
+#elif defined(OS_Windows_Ruby)
 	#define		PATH_SEPARATOR	PATH_SEPARATOR_linux
 #else
 	#define		PATH_SEPARATOR	PATH_SEPARATOR_Windows

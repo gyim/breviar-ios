@@ -24,7 +24,7 @@
 #define __BREVIAR_H
 
 #include "liturgia.h"
-#include "mysystem.h" /* kvuoli OS_linux, zapoznamkovanie void main, 2003-07-01 */
+#include "mysystem.h" /* kvuoli OS_linux/OS_Windows_Ruby, zapoznámkovanie void main, 2003-07-01; upravené 2007-05-29 */
 
 /* ------------------------------------------------------------------- */
 /* globalne premenne -- deklarovane v liturgia.h, definovane tu */

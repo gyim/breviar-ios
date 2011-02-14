@@ -38,6 +38,12 @@ void readConfig(void){
 	char *mail_address = NULL;
 	char *include_dir = NULL;
 
+/*    cfg_opt_t arg_opts[] = {
+        CFG_SIMPLE_INT("pevne_sucasti_modl", &opt1),
+        CFG_SIMPLE_INT("zalmy_zo_dna", &opt2),
+        CFG_END()
+    };
+*/
 	cfg_opt_t opts[] = {
 		CFG_SIMPLE_STR("http_adresa", &http_address),
 		CFG_SIMPLE_STR("http_zobraz_adresa", &http_display_address),
@@ -54,7 +60,7 @@ void readConfig(void){
 	 * premenne necha prazdne.
 	 */
 	cfg_parse(cfg, CONFIG_FILE);
-	
+
 	/* MEL: No a teraz sa tie stringy napchaju do globalnych poli */
 	if (http_address){
 		strncpy(HTTP_ADDRESS, http_address, MAX_HTTP_STR);
