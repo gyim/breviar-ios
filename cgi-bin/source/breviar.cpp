@@ -105,6 +105,8 @@
 /*                  - dni po nar.pána pre m.cez deò dokonèia 4.týždeò žalt.*/
 /*   2008-02-27a.D. | doplnené tlaèidlá "ten istý mesiac pred rokom",      */
 /*                    "ten istý mesiac o rok" do _main_rozbor_dna()        */
+/*   2008-03-30a.D. | èiastoène doriešené kompletórium s 2 rovnakými ant.  */
+/*                    pre ve¾konoèné obdobie (úprava vn1.htm, komplet.htm) */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -1714,6 +1716,13 @@ void interpretParameter(short int type, char *paramname){
 					includeFile(type, PARAM_ANTIFONA1, path, _global_modl_cez_den_3.antifona1.anchor);
 				}
 				break;
+			/* 2008-03-30: pridané */
+			case MODL_KOMPLETORIUM:
+				if((_global_ant_mcd_rovnake == NIE) /* (_global_modl_kompletorium.pocet_zalmov == 2) */){
+					strcat(path, _global_modl_kompletorium.antifona1.file);
+					includeFile(type, PARAM_ANTIFONA1, path, _global_modl_kompletorium.antifona1.anchor);
+				}
+				break;
 			default:
 				/* tieto modlitby nemajú antifonu1x (má to len mcd) */
 				break;
@@ -2259,7 +2268,9 @@ void showPrayer(short int type){
 	mystrcpy(templat, TEMPLAT[type], SMALL);
 	strcat(path, templat);
 	
-	/* 2007-10-02: doplnené nezobrazovanie rovnakej antifóny v modlitbe cez deò; keïže je daný jediný typ modlitby, nie je potrebné pole pre jednotlivé modlitby */
+	/* 2007-10-02: doplnené nezobrazovanie rovnakej antifóny v modlitbe cez deò; keïže je daný jediný typ modlitby, nie je potrebné pole pre jednotlivé modlitby 
+	 * 2008-03-30: doplnené pre kompletórium vo ve¾konoènej oktáve a celom ve¾konoènom období
+	 */
 	if (
 			/* chví¾u existovalo ako #define su_antifony_mcd_rovnake(type) */
 			(
@@ -2276,6 +2287,12 @@ void showPrayer(short int type){
 				(type == MODL_CEZ_DEN_3)
 				&& (equals(_global_modl_cez_den_3.antifona1.file, _global_modl_cez_den_3.antifona2.file)  && equals(_global_modl_cez_den_3.antifona1.file, _global_modl_cez_den_3.antifona3.file))
 				&& (equals(_global_modl_cez_den_3.antifona1.anchor, _global_modl_cez_den_3.antifona2.anchor)  && equals(_global_modl_cez_den_3.antifona1.anchor, _global_modl_cez_den_3.antifona3.anchor))
+			)
+			||
+			(
+				(type == MODL_KOMPLETORIUM) && (_global_modl_kompletorium.pocet_zalmov == 2)
+				&& (equals(_global_modl_kompletorium.antifona1.file, _global_modl_kompletorium.antifona2.file))
+				&& (equals(_global_modl_kompletorium.antifona1.anchor, _global_modl_kompletorium.antifona2.anchor))
 			)
 		)	
 		_global_ant_mcd_rovnake = ANO;

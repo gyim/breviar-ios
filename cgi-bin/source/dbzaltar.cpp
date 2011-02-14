@@ -88,6 +88,7 @@
 /*   2008-02-27a.D. | oprava liturgicke_obdobie() pre nanebovzatie PM   */
 /*   2008-03-12a.D. | ökaredÈ nadr·tovanÈ rieöenie (prekladanie 2008),  */
 /*                    bude potrebnÈ naimplementovaù krajöie             */
+/*   2008-03-30a.D. | upravenÈ antifÛny pre mcd, _vtroj_antifony()      */
 /*                                                                      */
 /*                                                                      */
 /* notes |                                                              */
@@ -1245,16 +1246,19 @@ void set_hymnus_kompletorium_obd(short int den, short int tyzzal, short int modl
 
 /* 2007-12-06: odliönÈ pre veækonoËnÈ obdobie:
  * Vo VeækonoËnom obdobÌ: PsalmÛdia m· jedin˙ antifÛnu: Aleluja, aleluja, aleluja.
+ * 2008-03-30: reöpektovan· rovnak· antifÛna pre veækonoËnÈ obdobie
  */
 void set_antifony_kompletorium_obd(short int den, short int tyzzal, short int modlitba, short int litobd){
 	/* rovnakÈ responzÛrium pre vöetky Ëasti veækonoËnÈho obdobia */
 	file_name_zapamataj();
 	file_name_kompletorium((litobd == OBD_VELKONOCNA_OKTAVA || litobd == OBD_VELKONOCNE_II)? OBD_VELKONOCNE_I : litobd);
-	sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1);
+	sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], pismenko_modlitby(modlitba), 
+		((litobd == OBD_VELKONOCNA_OKTAVA) || (litobd == OBD_VELKONOCNE_II) || (litobd == OBD_VELKONOCNE_I)) ? ANCHOR_ANTIFONY : ANCHOR_ANTIFONA1);
 	_set_antifona1(modlitba, _file, _anchor);
 	set_LOG_zaltar;
 	if((_global_modl_kompletorium.pocet_zalmov == 2) || (_global_modl_prve_kompletorium.pocet_zalmov == 2)){
-		sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], pismenko_modlitby(modlitba), ANCHOR_ANTIFONA2);
+		sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], pismenko_modlitby(modlitba),
+			((litobd == OBD_VELKONOCNA_OKTAVA) || (litobd == OBD_VELKONOCNE_II) || (litobd == OBD_VELKONOCNE_I)) ? ANCHOR_ANTIFONY : ANCHOR_ANTIFONA2);
 		_set_antifona2(modlitba, _file, _anchor);
 		set_LOG_zaltar;
 	}
@@ -5928,12 +5932,14 @@ label_24_DEC:
 	_set_modlitba(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
 }
-/* 2006-01-26: doplnenÈ posv‰tnÈ ËÌtanie */
+/* 2006-01-26: doplnenÈ posv‰tnÈ ËÌtanie
+ * 2008-03-30: upravenÈ antifÛny pre modlitbu cez deÚ - s˙ rovnakÈ, pouûit˝ anchor ANCHOR_ANTIFONY
+ */
 #define _vtroj_antifony {\
 	c = pismenko_modlitby(modlitba);\
 	if(modlitba == MODL_PRVE_VESPERY)\
 		c = pismenko_modlitby(MODL_VESPERY);\
-	sprintf(_anchor, "%s_%s%c%s", nazov_OBD[OBD_VELKONOCNE_TROJDNIE], nazov_DN_asci[den], c, ANCHOR_ANTIFONA1);\
+	sprintf(_anchor, "%s_%s%c%s", nazov_OBD[OBD_VELKONOCNE_TROJDNIE], nazov_DN_asci[den], c, ((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI))? ANCHOR_ANTIFONY : ANCHOR_ANTIFONA1);\
 	if(modlitba == MODL_POSV_CITANIE){\
 		_set_antifona1(modlitba, _file_pc, _anchor);\
 		set_LOG_litobd_pc;\
@@ -5942,7 +5948,7 @@ label_24_DEC:
 		_set_antifona1(modlitba, _file, _anchor);\
 		set_LOG_litobd;\
 	}\
-	sprintf(_anchor, "%s_%s%c%s", nazov_OBD[OBD_VELKONOCNE_TROJDNIE], nazov_DN_asci[den], c, ANCHOR_ANTIFONA2);\
+	sprintf(_anchor, "%s_%s%c%s", nazov_OBD[OBD_VELKONOCNE_TROJDNIE], nazov_DN_asci[den], c, ((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI))? ANCHOR_ANTIFONY : ANCHOR_ANTIFONA2);\
 	if(modlitba == MODL_POSV_CITANIE){\
 		_set_antifona2(modlitba, _file_pc, _anchor);\
 		set_LOG_litobd_pc;\
@@ -5951,7 +5957,7 @@ label_24_DEC:
 		_set_antifona2(modlitba, _file, _anchor);\
 		set_LOG_litobd;\
 	}\
-	sprintf(_anchor, "%s_%s%c%s", nazov_OBD[OBD_VELKONOCNE_TROJDNIE], nazov_DN_asci[den], c, ANCHOR_ANTIFONA3);\
+	sprintf(_anchor, "%s_%s%c%s", nazov_OBD[OBD_VELKONOCNE_TROJDNIE], nazov_DN_asci[den], c, ((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI))? ANCHOR_ANTIFONY : ANCHOR_ANTIFONA3);\
 	if(modlitba == MODL_POSV_CITANIE){\
 		_set_antifona3(modlitba, _file_pc, _anchor);\
 		set_LOG_litobd_pc;\
