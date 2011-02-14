@@ -89,6 +89,10 @@
 /*                  - premenovaný _main_formular()                         */
 /*   2007-08-16a.D. | oprava Segmentation fault _main_dnes() - chyba init. */
 /*   2007-09-13a.D. | BUTTON_SKRATKY_DALSIE_20070913 - skratky             */
+/*   2007-10-02a.D. | dokonèenie zoh¾adnenia smerníc pre sviatky svätých   */
+/*                    (rozlíšenie slávností+sviatkov/ostatných slávení),   */
+/*                  - rovnaké antifóny mcd zobrazuje len prvú a poslednú   */
+/*                                                                         */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -284,6 +288,7 @@ short int _global_opt_tedeum = NIE; /* pridaná 2007-05-18 */
 short int _global_pocet_slava_otcu = 0; /* pridaná 2007-05-18 */
 short int _global_opt6 = NIE; /* 2006-06-01: pridané */
 short int _global_opt7 = NIE; /* 2006-06-01: pridané */
+short int _global_ant_mcd_rovnake = NIE; /* 2007-10-02: pridané pre modlitbu cez deò */
 
 /* globalna premenna, co obsahuje string vypisany na obrazovku */
 char *_global_string;
@@ -1166,6 +1171,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
  * 2007-04-10: Doplnené: Te Deum je vo ve¾konoènej oktáve; nie je poèas pôstu (ani len pre nedele)
  */
 #define je_tedeum (type == MODL_POSV_CITANIE) && (((_global_den.denvt == DEN_NEDELA) && (_global_den.litobd != OBD_POSTNE_I) && (_global_den.litobd != OBD_POSTNE_II_VELKY_TYZDEN)) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA))
+
 void interpretParameter(short int type, char *paramname){
 	char path[MAX_STR] = STR_EMPTY;
 	mystrcpy(path, include_dir, MAX_STR);
@@ -1399,6 +1405,33 @@ void interpretParameter(short int type, char *paramname){
 		}
 	}
 
+	/* 2007-10-02: pridané nezobrazovanie "Ant. 2" a pod. keï sú rovnaké antifóny na mcd */
+	else if(equals(paramname, PARAM_SKRY_ANTIFONU_BEGIN)){
+		if(_global_ant_mcd_rovnake == NIE){
+			/* zobrazit nazvy antifon */
+			Export("zobrazit ant.-->");
+			Log("  `Ant.': begin...\n");
+		}
+		else{
+			/* nezobrazovat nazvy antifon */
+			_global_skip_in_prayer = ANO;
+			Export("nezobrazit ant.");
+			Log("  `Ant.' skipping...\n");
+		}
+	}
+	else if(equals(paramname, PARAM_SKRY_ANTIFONU_END)){
+		if(_global_ant_mcd_rovnake == NIE){
+			/* zobrazit nazvy antifon */
+			Export("<!--zobrazit ant.");
+			Log("  `Ant.': copied.\n");
+		}
+		else{
+			/* nezobrazovat nazvy antifon */
+			_global_skip_in_prayer = NIE;
+			Log("  `Ant.' skipped.\n");
+		}
+	}
+
 	/* pokracuju dalsie klasicke `tagy' v modlitbach (teda templatoch) */
 	else if(equals(paramname, PARAM_POPIS)){
 		/* pridane 05/04/2000A.D. */
@@ -1523,20 +1556,51 @@ void interpretParameter(short int type, char *paramname){
 				break;
 		}/* switch */
 	}/* PARAM_ANTIFONA1 */
+	else if(equals(paramname, PARAM_ANTIFONA1x)){
+		switch(type){
+			case MODL_CEZ_DEN_9:
+				if(_global_ant_mcd_rovnake == NIE){
+					strcat(path, _global_modl_cez_den_9.antifona1.file);
+					includeFile(type, PARAM_ANTIFONA1, path, _global_modl_cez_den_9.antifona1.anchor);
+				}
+				break;
+			case MODL_CEZ_DEN_12:
+				if(_global_ant_mcd_rovnake == NIE){
+					strcat(path, _global_modl_cez_den_12.antifona1.file);
+					includeFile(type, PARAM_ANTIFONA1, path, _global_modl_cez_den_12.antifona1.anchor);
+				}
+				break;
+			case MODL_CEZ_DEN_3:
+				if(_global_ant_mcd_rovnake == NIE){
+					strcat(path, _global_modl_cez_den_3.antifona1.file);
+					includeFile(type, PARAM_ANTIFONA1, path, _global_modl_cez_den_3.antifona1.anchor);
+				}
+				break;
+			default:
+				/* tieto modlitby nemajú antifonu1x (má to len mcd) */
+				break;
+		}/* switch */
+	}/* PARAM_ANTIFONA1x */
 	else if(equals(paramname, PARAM_ANTIFONA2)){
 		switch(type){
 			// ranné chvály nie
 			case MODL_CEZ_DEN_9:
-				strcat(path, _global_modl_cez_den_9.antifona2.file);
-				includeFile(type, paramname, path, _global_modl_cez_den_9.antifona2.anchor);
+				if(_global_ant_mcd_rovnake == NIE){
+					strcat(path, _global_modl_cez_den_9.antifona2.file);
+					includeFile(type, paramname, path, _global_modl_cez_den_9.antifona2.anchor);
+				}
 				break;
 			case MODL_CEZ_DEN_12:
-				strcat(path, _global_modl_cez_den_12.antifona2.file);
-				includeFile(type, paramname, path, _global_modl_cez_den_12.antifona2.anchor);
+				if(_global_ant_mcd_rovnake == NIE){
+					strcat(path, _global_modl_cez_den_12.antifona2.file);
+					includeFile(type, paramname, path, _global_modl_cez_den_12.antifona2.anchor);
+				}
 				break;
 			case MODL_CEZ_DEN_3:
-				strcat(path, _global_modl_cez_den_3.antifona2.file);
-				includeFile(type, paramname, path, _global_modl_cez_den_3.antifona2.anchor);
+				if(_global_ant_mcd_rovnake == NIE){
+					strcat(path, _global_modl_cez_den_3.antifona2.file);
+					includeFile(type, paramname, path, _global_modl_cez_den_3.antifona2.anchor);
+				}
 				break;
 			case MODL_VESPERY:
 				strcat(path, _global_modl_vespery.antifona2.file);
@@ -1589,6 +1653,31 @@ void interpretParameter(short int type, char *paramname){
 				break;
 		}/* switch */
 	}/* PARAM_ANTIFONA3 */
+	else if(equals(paramname, PARAM_ANTIFONA3x)){
+		switch(type){
+			case MODL_CEZ_DEN_9:
+				if(_global_ant_mcd_rovnake == NIE){
+					strcat(path, _global_modl_cez_den_9.antifona3.file);
+					includeFile(type, PARAM_ANTIFONA3, path, _global_modl_cez_den_9.antifona3.anchor);
+				}
+				break;
+			case MODL_CEZ_DEN_12:
+				if(_global_ant_mcd_rovnake == NIE){
+					strcat(path, _global_modl_cez_den_12.antifona3.file);
+					includeFile(type, PARAM_ANTIFONA3, path, _global_modl_cez_den_12.antifona3.anchor);
+				}
+				break;
+			case MODL_CEZ_DEN_3:
+				if(_global_ant_mcd_rovnake == NIE){
+					strcat(path, _global_modl_cez_den_3.antifona3.file);
+					includeFile(type, PARAM_ANTIFONA3, path, _global_modl_cez_den_3.antifona3.anchor);
+				}
+				break;
+			default:
+				/* tieto modlitby nemajú antifonu3x (má to len mcd) */
+				break;
+		}/* switch */
+	}/* PARAM_ANTIFONA3x */
 	else if(equals(paramname, PARAM_ZALM1)){
 		switch(type){
 /* hoci nie je zapoznámkované, nepoužíva sa: 2006-10-11: invitatórium nemá žalm / resp. má fixný žalm 95 a alternatívy */
@@ -2031,6 +2120,32 @@ void showPrayer(short int type){
 	}/* _global_modlitba != type */
 	mystrcpy(templat, TEMPLAT[type], SMALL);
 	strcat(path, templat);
+	
+	/* 2007-10-02: doplnené nezobrazovanie rovnakej antifóny v modlitbe cez deò; keïže je daný jediný typ modlitby, nie je potrebné pole pre jednotlivé modlitby */
+	if (
+			/* chví¾u existovalo ako #define su_antifony_mcd_rovnake(type) */
+			(
+				(type == MODL_CEZ_DEN_9)
+				&& (equals(_global_modl_cez_den_9.antifona1.file, _global_modl_cez_den_9.antifona2.file)  && equals(_global_modl_cez_den_9.antifona1.file, _global_modl_cez_den_9.antifona3.file))
+				&& (equals(_global_modl_cez_den_9.antifona1.anchor, _global_modl_cez_den_9.antifona2.anchor)  && equals(_global_modl_cez_den_9.antifona1.anchor, _global_modl_cez_den_9.antifona3.anchor))
+			) ||
+			(
+				(type == MODL_CEZ_DEN_12)
+				&& (equals(_global_modl_cez_den_12.antifona1.file, _global_modl_cez_den_12.antifona2.file)  && equals(_global_modl_cez_den_12.antifona1.file, _global_modl_cez_den_12.antifona3.file))
+				&& (equals(_global_modl_cez_den_12.antifona1.anchor, _global_modl_cez_den_12.antifona2.anchor)  && equals(_global_modl_cez_den_12.antifona1.anchor, _global_modl_cez_den_12.antifona3.anchor))
+			) ||
+			(
+				(type == MODL_CEZ_DEN_3)
+				&& (equals(_global_modl_cez_den_3.antifona1.file, _global_modl_cez_den_3.antifona2.file)  && equals(_global_modl_cez_den_3.antifona1.file, _global_modl_cez_den_3.antifona3.file))
+				&& (equals(_global_modl_cez_den_3.antifona1.anchor, _global_modl_cez_den_3.antifona2.anchor)  && equals(_global_modl_cez_den_3.antifona1.anchor, _global_modl_cez_den_3.antifona3.anchor))
+			)
+		)	
+		_global_ant_mcd_rovnake = ANO;
+	else
+		_global_ant_mcd_rovnake = NIE;
+
+	Log("showPrayer: _global_ant_mcd_rovnake == %d\n", _global_ant_mcd_rovnake);
+
 	interpretTemplate(type, path);
 	Log("showPrayer(): end\n");
 }/* showPrayer(); */

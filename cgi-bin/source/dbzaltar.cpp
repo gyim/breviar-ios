@@ -5604,15 +5604,17 @@ label_24_DEC:
 	_set_citanie2(modlitba, _file_pc, _anchor);\
 	set_LOG_litobd_pc;\
 }
+
 /* 2006-01-25: vytvorené pre modlitbu cez deò */
+/* 2007-10-02: upravené antifóny pre modlitbu cez deò - sú rovnaké, použitý anchor ANCHOR_ANTIFONY */
 #define _post2_mcd_antifony {\
-	sprintf(_anchor, "%s_%c%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1);\
+	sprintf(_anchor, "%s_%c%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_ANTIFONY);\
 	_set_antifona1(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
-	sprintf(_anchor, "%s_%c%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_ANTIFONA2);\
+	sprintf(_anchor, "%s_%c%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_ANTIFONY);\
 	_set_antifona2(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
-	sprintf(_anchor, "%s_%c%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_ANTIFONA3);\
+	sprintf(_anchor, "%s_%c%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_ANTIFONY);\
 	_set_antifona3(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
 }
@@ -6322,14 +6324,15 @@ label_24_DEC:
 	set_LOG_litobd;\
 }
 
+/* 2007-10-02: upravené antifóny pre modlitbu cez deò - sú rovnaké, použitý anchor ANCHOR_ANTIFONY */
 #define _zds_antifony {\
-	sprintf(_anchor, "%s_%c%s", ANCHOR_ZOSLANIE_DUCHA_SV, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1);\
+	sprintf(_anchor, "%s_%c%s", ANCHOR_ZOSLANIE_DUCHA_SV, pismenko_modlitby(modlitba), ((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI))? ANCHOR_ANTIFONY : ANCHOR_ANTIFONA1);\
 	_set_antifona1(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
-	sprintf(_anchor, "%s_%c%s", ANCHOR_ZOSLANIE_DUCHA_SV, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA2);\
+	sprintf(_anchor, "%s_%c%s", ANCHOR_ZOSLANIE_DUCHA_SV, pismenko_modlitby(modlitba), ((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI))? ANCHOR_ANTIFONY : ANCHOR_ANTIFONA2);\
 	_set_antifona2(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
-	sprintf(_anchor, "%s_%c%s", ANCHOR_ZOSLANIE_DUCHA_SV, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA3);\
+	sprintf(_anchor, "%s_%c%s", ANCHOR_ZOSLANIE_DUCHA_SV, pismenko_modlitby(modlitba), ((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI))? ANCHOR_ANTIFONY : ANCHOR_ANTIFONA3);\
 	_set_antifona3(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
 }

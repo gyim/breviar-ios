@@ -39,6 +39,8 @@
 /*   2006-12-12a.D. | doplnenie latinËiny (la)                 */
 /*   2007-06-01a.D. | niektorÈ definy presunutÈ do mydefs.h    */
 /*   2007-06-28a.D. | doplnenÈ: PARAM_TEDEUM_BEGIN aj _END     */
+/*   2007-10-02a.D. | doplnenÈ: PARAM_SKRY_ANTIFONU_BEGIN/END  */ 
+/*                  - tieû PARAM_ANTIFONA1x a PARAM_ANTIFONA3x */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -281,6 +283,9 @@ extern const char *TEMPLAT[];
 /* pridane 2003-08-06, upravene 2003-08-21 */                                        
 #define PARAM_CITANIE1     "CITANIE1" /* vlastne KCITANIE */
 #define PARAM_CITANIE2     "CITANIE2" /* vlastne BENEDIKTUS */
+/* 2007-10-02: pridanÈ kvÙli rovnak˝m antifÛnam pre modlitbu cez deÚ */
+#define PARAM_ANTIFONA1x   "ANTIFONA1_DRUHA"
+#define PARAM_ANTIFONA3x   "ANTIFONA3_PRVA"
 
 /* dalsie parametre: specificke pre obdobie */
 /* Od nedele P·novho zm‡tvychvstania aû do Druhej veækonoËnej nedele vr·tane,
@@ -315,8 +320,11 @@ extern const char *TEMPLAT[];
 #define PARAM_SLAVAOTCU_BEGIN               "SLAVAOTCU_BEGIN"
 #define PARAM_SLAVAOTCU_END                 "SLAVAOTCU_END"
 /* 2007-06-28: doplnenÈ Te Deum; nemÙûe sa riadiù rovnak˝mi pravidlami ako chv·lospevy */
-#define PARAM_TEDEUM_BEGIN              "TEDEUM_BEGIN"
-#define PARAM_TEDEUM_END                "TEDEUM_END"
+#define PARAM_TEDEUM_BEGIN                  "TEDEUM_BEGIN"
+#define PARAM_TEDEUM_END                    "TEDEUM_END"
+/* 2007-10-02: doplnenÈ skrytie rovnak˝ch antifÛn pre mcd */
+#define PARAM_SKRY_ANTIFONU_BEGIN           "SKRY_ANTIFONU_BEGIN"
+#define PARAM_SKRY_ANTIFONU_END             "SKRY_ANTIFONU_END"
 
 /* stringy parametrov vstupu pre MODL_OPT..., ktore generovanie modlitby
  * ovplyvnuju */
