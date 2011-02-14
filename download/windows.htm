@@ -11,7 +11,7 @@
 
 <body>
 
-<!-- 2007-07-11-komplet-web | ruby186-25.exe -->
+<!-- 2007-09-11-komplet-web | ruby186-25.exe -->
 
 <center>
 <h2>Download | Windows</h2>
@@ -23,11 +23,11 @@
 	a to bez potreby pripojenia k internetu.
 
 <p>Pracuje na inom princípe ako klasické okienkové aplikácie. Princíp spoèíva v tom, e na Vašom lokálnom poèítaèi beí lokálny webserver. Ten kliknutia na stránky
-	(na tlaèidlá alebo odkazy) &quot;prekladá&quot; aplikácii, ktorá následne vytvorí vıstup, pošle ho spä prehliadaèu, ktorı vıstup zobrazí presne tak isto ako na internete.
+	(na tlaèidlá alebo odkazy) „prekladá“ aplikácii, ktorá následne vytvorí vıstup, pošle ho spä prehliadaèu, ktorı vıstup zobrazí presne tak isto ako na internete.
 
 <p>Súbory na stiahnutie: 
 <ul>
-	<li>„balíèek programu a textov“ (<a href="2007-07-11-komplet-web.zip">zip</a>, <a href="2007-07-11-komplet-web.rar">rar</a>)</li>
+	<li>„balíèek programu a textov“ (<a href="2007-09-11-komplet-web.zip">zip</a>, <a href="2007-09-11-komplet-web.rar">rar</a>)</li>
 	<li><a href="ruby186-25.exe">webserver</a> (Ruby z <a target="_blank" href="http://rubyforge.org/">http://rubyforge.org/</a>)</li>
 </ul>
 </p>
@@ -35,12 +35,13 @@
 <h4 class="blue">Postup inštalácie</h4>
 
 <ol class="level1">
-<li>Stiahnite si oba súbory („balíèek programu a textov“ [<a href="2007-07-11-komplet-web.zip">zip</a> alebo <a href="2007-07-11-komplet-web.rar">rar</a>] a <a href="ruby186-25.exe">webserver</a>) na disk (&quot;Save as&quot;). Najskôr budeme inštalova webserver, následne samotnı program.</li>
+<li>Stiahnite si oba súbory („balíèek programu a textov“ [<a href="2007-09-11-komplet-web.zip">zip</a> alebo <a href="2007-09-11-komplet-web.rar">rar</a>] a <a href="ruby186-25.exe">webserver</a>) na disk („Save as“). Najskôr budeme inštalova webserver, následne samotnı program.</li>
 <li><span class="it">Inštalácia webservera</span>: Spustite súbor <span class="tt">ruby186-25.exe</span>. Riaïte sa inštalaènımi inštrukciami (sú v anglickom jazyku; v podstate staèí odklikáva tlaèidlo <span class="blue">Next</span> príp. <span class="blue">I Agree</span>
 	a <span class="blue">Finish</span>). Do jedného adresára (napr. <span class="tt">c:\ruby</span>) je nainštalovanı interpréter programovacieho jazyka Ruby. Ten následne spúša lokálny
 	webserver.</li>
-<li><span class="it">Inštalácia aplikácie</span>: Rozba¾te (napr. pomocou programov WinZip, WinArj, WinRAR, PowerArchiver) „balíèek programu a textov“ (<span class="tt">2007-07-11-komplet-web.zip</span> resp. <span class="tt">2007-07-11-komplet-web.rar</span>) do nejakého adresára na vašom disku
-	(pre ïalšie úvahy predpokladáme, e je to <span class="tt">c:\breviar</span>).</li>
+<li><span class="it">Inštalácia aplikácie</span>: Rozba¾te (napr. pomocou programov WinZip, WinArj, WinRAR, PowerArchiver) „balíèek programu a textov“ (<span class="tt">2007-09-11-komplet-web.zip</span> resp. <span class="tt">2007-09-11-komplet-web.rar</span>) do nejakého adresára na vašom disku
+	(pre ïalšie úvahy predpokladáme, e je to <span class="tt">c:\breviar</span>).
+<br><b>Upozornenie:</b> Názov adresára NESMIE obsahova diakritiku!</li>
 <li>Tım je inštalácia ukonèená.</li>
 </ol>
 
@@ -63,11 +64,22 @@
 		jednotlivé akcie, ktoré lokálny webserver vykonáva (volania aplikácie).</li>
 </ol>
 
-<h4 class="blue"><a name="config"></a>Konfigurácia webservera</h4>
+<a name="config"></a>
+<h4 class="blue">Konfigurácia (nastavenie) webservera</h4>
 
 <ol>
+	<li>Súbor: <span class="tt">server.rb</span>
 	<li>V podstate jedinım zaujímavım riadkom je ten, v ktorom nastavujete port pre váš webserver: <span class="blue">Port => 2000</span>. Ak chcete zmeni hodnotu, upravte súbor server.rb v akomko¾vcek
 		textovom editore a ulote. Váš lokálny webserver bude ma potom adresu <span class="tt">http://localhost:port/</span>, kde <span class="tt">port</span> je èíslo portu, uvedené v konfiguraènom súbore.
+	</li>
+</ol>
+
+<h4 class="blue">Konfigurácia (nastavenie) ciest</h4>
+
+<ol>
+	<li>Súbor: <span class="tt">spusti.server.bat</span>
+	<li>Tento súbor obsahuje jedinı riadok: <span class="blue">"C:\Program Files\ruby\bin\ruby.exe" server.rb</span>. 
+		Ak ste nainštalovali ruby do iného adresára, je potrebné to v tomto skripte zmeni. Teda napríklad: <span class="blue">"C:\ruby\bin\ruby.exe" server.rb</span>.
 	</li>
 </ol>
 
