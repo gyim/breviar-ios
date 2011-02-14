@@ -93,6 +93,7 @@
 /*                  - oprava ûalmov a chv·l. pre 1. veöp. 2.veæk.nedele */
 /*   2008-05-14a.D. | opravenÈ modlitby cez deÚ pre 3. a 14. m·ja       */
 /*   2008-05-16a.D. | pre prvÈ veöpery narodenia p·na in˝ hymnus (cz)   */
+/*   2008-06-09a.D. | sv. Norbert - iba æubovoæn· spomienka             */
 /*                                                                      */
 /*                                                                      */
 /* notes |                                                              */
@@ -10992,6 +10993,9 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
@@ -10999,12 +11003,16 @@ label_25_MAR:
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
 
 							break;
 						}
-						_global_svaty1.typslav = SLAV_SPOMIENKA;
-						_global_svaty1.smer = 10; /* povinne spomienky podla (vseobecneho) kalendara */
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA; /* 2008-06-10: opravenÈ */
+						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 						mystrcpy(_global_svaty1.meno, text_MAJ_08[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
@@ -11137,7 +11145,9 @@ label_25_MAR:
 							_vlastna_cast_modlitba;
 							_vlastna_cast_hymnus;
 							_vlastna_cast_kresponz;
-							_vlastna_cast_1citanie;
+							if(_global_jazyk == JAZYK_SK){
+								_vlastna_cast_1citanie; /* 2008-06-10: Ëesk· verzia m· 1. ËÌtanie zo spoloËnej Ëasti */
+							}
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
@@ -11560,15 +11570,20 @@ label_25_MAR:
 
 						break;
 					}
+					/* 
+					 * od 29.8.1991 pam·tka podæa ËeskÈho brevi·ra z r. 1995, ale novöie kalend·re uv·dzaj˙ nez·vazn˙ pam·tku
+					 * 2008-06-09: podæa Adama S˝koru by mala byù aj pre Slovensko len æubovoæn· spomienka; zmenenÈ
 					if(_global_jazyk == JAZYK_CZ){
+					 */
 						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-						/* od 29.8.1991 pam·tka podæa ËeskÈho brevi·ra z r. 1995, ale novöie kalend·re uv·dzaj˙ nez·vazn˙ pam·tku */
+						_global_svaty1.smer = 12; // lubovolne spomienky podla vseobecneho kalendara
+					/*
 					}
 					else{
 						_global_svaty1.typslav = SLAV_SPOMIENKA;
 						_global_svaty1.smer = 10;
 					}
+					*/
 					mystrcpy(_global_svaty1.meno, text_JUN_06[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */

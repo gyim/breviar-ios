@@ -23,6 +23,7 @@
 /*   2007-06-19a.D. | odstránený "config.h" pre confuse        */
 /*   2007-06-28a.D. | oprava jednotlivých modelov, popisy      */
 /*   2007-11-20a.D. | doplnené EXPORT_HTML_SPECIALS            */
+/*   2008-05-19a.D. | EXPORT_HTML_FILENAME_ANCHOR aj pre linux */
 /*                                                             */
 /***************************************************************/
 
@@ -98,6 +99,7 @@
 #if defined(MODEL_linux)
 	#define OS_linux
 	#undef LOGGING
+	#define EXPORT_HTML_FILENAME_ANCHOR
 	#define EXPORT_TO_STDOUT
 /* ostré Windows/RUBY: */
 #elif defined(MODEL_Windows_RUBY)
