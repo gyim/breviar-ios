@@ -74,6 +74,8 @@
 /*   2007-08-31a.D. | oprava 30.AUG na sviatok                 */
 /*   2007-10-02a.D. | dokonèenie zoh¾adnenia smerníc pre sviat-*/
 /*                    ky svätıch (rozlíšenie sláv+sviat/ostat.)*/
+/*   2007-10-23a.D. | dokonèenie zoh¾adnenia smerníc pre       */
+/*                    sviatky svätıch (kresp, prosby pre rch/v)*/
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -119,11 +121,11 @@ char _anchor_head[SMALL];
 
 #define su_zalmy_vlastne ((_global_den.denvt == DEN_NEDELA) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK))
 #define su_zalmy_prve_vespery_vlastne ((_global_den.denvt == DEN_NEDELA) || (_global_den.typslav == SLAV_SLAVNOST))
-#define je_citanie_vlastne ((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK)) // rovnaké kritérium pre krátke èítanie (rch, v) a 1. èítanie (posv. èítania); mono poui aj na 2. èítanie posv. èít.
+#define su_kcit_kresp_1cit_prosby_vlastne ((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK)) // rovnaké kritérium pre krátke èítanie (rch, v) a 1. èítanie (posv. èítania); mono poui aj na 2. èítanie posv. èít.; 2007-10-23: poui aj pre krátke responzórium (rch, v) a prosby (rch, v)
 #define su_antifony_vlastne(m) ((_global_den.typslav == SLAV_SLAVNOST) || ((_global_den.typslav == SLAV_SVIATOK) && ((m == MODL_RANNE_CHVALY) || (m == MODL_POSV_CITANIE) || (m == MODL_VESPERY))))
 
 /* 2007-09-28: upravené priraïovanie spoloènej èasti; berie sa iba v prípade slávností resp. sviatkov,
- * pre spomienky a ¾ubovo¾né spomienky by malo osta to, èo je zo dòa
+ * pre spomienky a ¾ubovo¾né spomienky by malo osta to, èo je zo dòa (2007-10-02, 2007-10-22)
  * porov. všeobecné smernice, body 
  * o posvätnom èítaní:
  *		62. Nasleduje psalmódia skladajúca sa z troch almov (alebo z ich èastí, ak príslušné almy sú dlhšie). Vo Ve¾konoènom trojdní, v dòoch Ve¾konoènej oktávy a vo Vianoènej oktáve, ako aj na slávnosti a sviatky sú almy vlastné s vlastnımi antifónami.
@@ -148,10 +150,55 @@ char _anchor_head[SMALL];
  *		157. Zostavené sú teda štyri tıdenné série krátkych èítaní v Období „cez rok“, ktoré sú vloené do altára, take sa èítanie poèas štyroch tıdòov denne mení. Okrem toho sú tıdenné série pre Adventné, Vianoèné, Pôstne a Ve¾konoèné obdobie.
  *		     Osobitné vlastné èítania sú na slávnosti a sviatky a pre niektoré spomienky.
  *		     Pre kompletórium je séria èítaní na jeden tıdeò.
+ * na krátke èítanie nadväzuje krátke responzórium; treba sa k nemu zrejme správa rovnako ako ku krátkemu èítaniu
+ * o prosbách (è. 179-193): -- doplnené 2007-10-23
+ *		182. Vırazom „prosby“ sa oznaèujú jednak príhovory vo vešperách a jednak vzıvania na zasvätenie dòa Bohu pri rannıch chválach.
+ *		183. Pre väèšiu pestros, ale najmä preto, aby sa lepšie vyjadrili mnohoraké potreby Cirkvi aj ¾udí pod¾a rozliènıch stavov, skupín, osôb, okolností a èias, uvádzajú sa rozlièné formuly prosieb na jednotlivé dni altárového cyklu v Období „cez rok“, na ostatné posvätné obdobia liturgického roka a na niektoré sviatoèné príleitosti.
+ *			 
  * o závereènej modlitbe:
  *		199. Na ranné chvály a vešpery sa táto modlitba berie z própria v nedele, v adventné, vianoèné, pôstne a ve¾konoèné všedné dni, ïalej na slávnosti, sviatky a spomienky. Vo všedné dni v Období „cez rok“ sa táto modlitba berie zo altára, aby vyjadrila vlastnú povahu tıchto posvätnıch hodín.
  *		200. V modlitbe cez deò (predpoludním, napoludnie a popoludní) sa táto modlitba berie z própria v nedele, v adventné, vianoèné, pôstne a ve¾konoèné všedné dni, ïalej na slávnosti a sviatky. V ostatné dni sa pouívajú modlitby, ktoré vystihujú povahu kadej z tıchto posvätnıch hodín a sú uvedené v altári.
  * a napokon celá èas v závere smerníc, body 218-240
+ *			 
+ * slávenie slávností, sviatkov a spomienok resp. ¾ubovo¾nıch spomienok
+ * --- slávnosti ---
+ *		225. Slávnosti majú prvé vešpery veèer predchádzajúceho dòa.
+ *		226. Pri prvıch i druhıch vešperách je vlastnı hymnus, antifóny, krátke èítanie s responzóriom a závereèná modlitba; ak nie sú vlastné, berú sa zo spoloènej èasti. 
+ *			 Obidva almy v prvıch vešperách sa berú zvyèajne zo série almov Laudáte (t. j. almy 113, 117, 135, 146, 147, 1-11, 147, 12-20), pod¾a starodávnej tradície; chválospev z Nového zákona je vyznaèenı na príslušnom mieste. Pri druhıch vešperách sú almy a chválospev vlastné. Prosby sú vlastné alebo zo spoloènej èasti.
+ *		227. V rannıch chválach je vlastnı hymnus, antifóna, krátke èítanie s responzóriom a závereèná modlitba. Ak nie sú vlastné, berú sa zo spoloènej èasti. almy však treba vzia z nedele prvého tıdòa zo altára. Prosby sú vlastné alebo zo spoloènej èasti.
+ *		228. V posvätnom èítaní je všetko vlastné: hymnus, antimóny a almy, èítania i responzóriá. Prvé èítanie je biblické, druhé hagiografické. Ak ide o svätého, ktorı má iba lokálnu úctu a nemá v própriu osobitné èasti, všetko sa berie zo spoloènej èasti.
+ *			 Na konci posvätného èítania je hymnus Teba, Boe, chválime a vlastná modlitba.
+ *		229. V modlitbe cez deò, èie predpoludním, napoludnie a popoludní (tercia, sexta a nóna), sa berie, ak nie je uvedené inak, hymnus dòa. almy sú z doplnkového cyklu s vlastnou antifónou; v nede¾u sa však berú almy z nedele prvého tıdòa zo altára; krátke èítanie a závereèná modlitba sú vlastné.
+ *			 Na niektoré slávnosti Pána sa uvádzajú osobitné almy.
+ *		230. V kompletóriu je všetko z nedele, a to po prvıch i druhıch vešperách. 
+ * --- sviatky ---
+ *		231. Sviatky nemajú prvé vešpery, ak nejde o sviatky Pána, ktoré pripadnú na nede¾u. V posvätnom èítaní, v rannıch chválach a vo vešperách je všetko ako na slávnosti.
+ *		232. V modlitbe cez deò, èie predpoludním, napoludnie a popoludní (tercia, sexta a nóna), sa berie hymnus dòa; almy s antifónami sa berú z férie, ak si osobitnı dôvod alebo tradícia nevyaduje v modlitbe cez deò vlastnú antifónu, èo sa uvedie na príslušnom mieste. Krátke èítanie a závereèná modlitba sú vlastné.
+ *		233. Kompletórium sa recituje ako v obyèajné dni. 
+ * --- spomienky a ¾ubovo¾né spomienky ---
+ *		234.    Medzi spomienkami záväznımi a ¾ubovo¾nımi, ak sa slávia, nie je nijakı rozdiel, pokia¾ ide o usporiadanie ofícia; netıka sa to ¾ubovo¾nıch spomienok, ktoré sa prípadne vyskytnú v privilegovanıch obdobiach. 
+ *	--- a) Spomienky pripadajúce na obyèajné dni ---
+ *		235. V posvätnom èítaní, v rannıch chválach a vo vešperách: 
+ *				* almy s antifónami sa berú z beného všedného dòa, ak nie sú antifóny a almy vlastné, uvedené na príslušnıch miestach; 
+ *				* antifóna na invitatórium, hymnus, krátke èítanie, antifóny na Benediktus a Magnifikat a prosby, ak sú vlastné, musia sa recitova o príslušnom svätcovi, ináè sa berú buï zo spoloènej èasti, alebo z beného všedného dòa; 
+ *				* závereèná modlitba je vdy o svätcovi; 
+ *				* v posvätnom èítaní je biblické èítanie s responzóriom z Písma, pripadajúce na benı deò. Druhé èítanie je hagiografické s vlastnım responzóriom alebo zo spoloènej èasti. Ak nie je vlastné èítanie, berie sa z textu Otcov z príslušného dòa. 
+ *		Vynecháva sa hymnus Teba, Boe, chválime.
+ *		236. V modlitbe cez deò, èie predpoludním, napoludnie a popoludní, a v kompletóriu sa neberie niè z ofícia o svätom, všetko je zo všedného dòa.
+ *	--- b) Spomienky pripadajúce na privilegované dni ---
+ *		237. V nedele, na slávnosti a na sviatky, ïalej na Popolcovú stredu, vo Ve¾kom tıdni a vo Ve¾konoènej oktáve sa vynechávajú všetky spomienky, ak by pripadli na tieto dni.
+ *		238. Vo všednıch dòoch od 17. do 24. decembra, vo Vianoènej oktáve a vo všednıch dòoch v Pôstnom období sa neslávi nijaká záväzná spomienka, a to ani v partikulárnych kalendároch. Tie spomienky, ktoré azda na Pôstne obdobie pripadajú, sa v tom roku povaujú za ¾ubovo¾né spomienky.
+ *		239. Ak by niekto chcel v tıch obdobiach oslávi svätého, ktorého spomienka pripadá na ten deò: 
+ *				* v posvätnom èítaní po èítaní z Otcov a po responzóriu z vlastnej èasti liturgického obdobia pripojí vlastné hagiografické èítanie s responzóriom a uzavrie modlitbou o svätom; 
+ *				* okrem toho môe v rannıch chválach a vo vešperách po závereènej modlitbe — jej konklúzia sa vynechá — pripoji antifónu (vlastnú alebo zo spoloènej èasti) a modlitbu o svätom. 
+ *	--- c) Sobotná spomienka o Panne Márii ---
+ *		240. V soboty v Období „cez rok“, keï sú dovolené ¾ubovo¾né spomienky, môe sa tım istım spôsobom slávi ¾ubovo¾ná spomienka o Panne Márii s vlastnım èítaním. 
+ * 
+ * teda treba upravi, aby krátke responzórium (rch, v) bolo vdy rovnako pridávané ako krátke èítanie,
+ * napokon aby prosby boli na slávnosti a sviatky vlastné resp. zo spoloènej èasti a na (¾ub.) spomienky primárne zo dòa
+ * 
+ * jediná vec nie je doriešená: ak smernice umoòujú vzia pre (¾ubovo¾né) spomienky èasti buï zo spoloènej èasti, alebo zo dòa - my všetko berieme zo dòa
+ * 2007-10-23a.D.
  */
 
 /* ------------------------------------------------------------------- */
@@ -7085,7 +7132,7 @@ short int _spol_cast_je_panna(_struct_sc sc){
 	if(su_antifony_vlastne(modl)){\
 		_spolocna_cast_antifony;\
 	}\
-	if(je_citanie_vlastne){\
+	if(su_kcit_kresp_1cit_prosby_vlastne){\
 		if(modl == MODL_POSV_CITANIE){\
 			_spolocna_cast_1citanie;\
 		}\
@@ -7093,7 +7140,10 @@ short int _spol_cast_je_panna(_struct_sc sc){
 			_vlastna_cast_kcitanie;\
 		}\
 	}\
-	_spolocna_cast_kresponz;\
+	if(su_kcit_kresp_1cit_prosby_vlastne){\
+		_spolocna_cast_kresponz;\
+		_vlastna_cast_prosby;\
+	}\
 	if(modl == MODL_RANNE_CHVALY){\
 		_vlastna_cast_benediktus;\
 	}\
@@ -7101,11 +7151,10 @@ short int _spol_cast_je_panna(_struct_sc sc){
 		_vlastna_cast_magnifikat;\
 	}\
 	else if(modl == MODL_POSV_CITANIE){\
-		if(je_citanie_vlastne){\
+		if(su_kcit_kresp_1cit_prosby_vlastne){\
 			_spolocna_cast_2citanie;\
 		}\
 	}\
-	_vlastna_cast_prosby;\
 	_vlastna_cast_modlitba;\
 }
 
@@ -7188,9 +7237,11 @@ void _spolocna_cast_magnifikat_rozne(short int modlitba, char *_anchor_pom, char
 }
 
 void _spolocna_cast_kresponz_rozne(short int modlitba, char *_anchor_pom, char *_anchor, char *_file){
-	sprintf(_anchor, "%s%c%s", _anchor_pom, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ);
-	_set_kresponz(modlitba, _file, _anchor);
-	set_LOG_svsv;
+	if(su_kcit_kresp_1cit_prosby_vlastne){
+		sprintf(_anchor, "%s%c%s", _anchor_pom, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ);
+		_set_kresponz(modlitba, _file, _anchor);
+		set_LOG_svsv;
+	}
 }
 /* 2005-08-27: kvôli 2. èítaniu pre duchovnıch pastierov; pouívame aj pre odlišné èítanie pre sväté eny - èo ili v manelstve; 2006-08-08 */
 void _spolocna_cast_2cit_rozne(short int modlitba, char *_anchor_pom, char *_anchor, char *_file){
@@ -7201,14 +7252,14 @@ void _spolocna_cast_2cit_rozne(short int modlitba, char *_anchor_pom, char *_anc
 
 /* specialne veci pre sviatky jedneho mucenika */
 #define _spolocna_cast_kcit_kresp_chval_ve {\
-	if(je_citanie_vlastne){\
+	if(su_kcit_kresp_1cit_prosby_vlastne){\
 		sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_KCITANIE, VELKONOCNA_PRIPONA);\
 		_set_kcitanie(modlitba, _file, _anchor);\
 		set_LOG_svsv;\
+		sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ, VELKONOCNA_PRIPONA);\
+		_set_kresponz(modlitba, _file, _anchor);\
+		set_LOG_svsv;\
 	}\
-	sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ, VELKONOCNA_PRIPONA);\
-	_set_kresponz(modlitba, _file, _anchor);\
-	set_LOG_svsv;\
 	if(modlitba == MODL_RANNE_CHVALY){\
 		sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_BENEDIKTUS, VELKONOCNA_PRIPONA);\
 		_set_benediktus(modlitba, _file, _anchor);\
@@ -7237,9 +7288,11 @@ void _spolocna_cast_2cit_rozne(short int modlitba, char *_anchor_pom, char *_anc
 
 /* specialne veci pre sviatky panien */
 #define _spolocna_cast_kresp_ve {\
-	sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ, VELKONOCNA_PRIPONA);\
-	_set_kresponz(modlitba, _file, _anchor);\
-	set_LOG_svsv;\
+	if(su_kcit_kresp_1cit_prosby_vlastne){\
+		sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ, VELKONOCNA_PRIPONA);\
+		_set_kresponz(modlitba, _file, _anchor);\
+		set_LOG_svsv;\
+	}\
 }
 
 /* ked je viac napevov, `kolko' uvadza, z kolkych je na vyber;
@@ -7264,19 +7317,23 @@ void _spolocna_cast_benediktus_viac(short int kolko, char *_anchor_head, char *_
 }
 /* viac prosieb -- dorobene 01/03/2000A.D., spol.casti panny marie */
 void _spolocna_cast_prosby_viac(short int kolko, char *_anchor_head, char *_anchor, char *_file){
-	sprintf(_anchor, "%s%c%s%d",
-		_anchor_head, pismenko_modlitby(modlitba), ANCHOR_PROSBY,
-		(_global_den.den MOD kolko) + 1);
-	_set_prosby(modlitba, _file, _anchor);
-	set_LOG_svsv;
+	if(su_kcit_kresp_1cit_prosby_vlastne){
+		sprintf(_anchor, "%s%c%s%d",
+			_anchor_head, pismenko_modlitby(modlitba), ANCHOR_PROSBY,
+			(_global_den.den MOD kolko) + 1);
+		_set_prosby(modlitba, _file, _anchor);
+		set_LOG_svsv;
+	}
 }
 /* viac responzórií -- dorobene 29/03/2000A.D., oficium za zosnulych */
 void _spolocna_cast_kresponz_viac(short int kolko, char *_anchor_head, char *_anchor, char *_file){
-	sprintf(_anchor, "%s%c%s%d",
-		_anchor_head, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ,
-		(_global_den.den MOD kolko) + 1);
-	_set_kresponz(modlitba, _file, _anchor);
-	set_LOG_svsv;
+	if(su_kcit_kresp_1cit_prosby_vlastne){
+		sprintf(_anchor, "%s%c%s%d",
+			_anchor_head, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ,
+			(_global_den.den MOD kolko) + 1);
+		_set_kresponz(modlitba, _file, _anchor);
+		set_LOG_svsv;
+	}
 }
 void _spolocna_cast_ant3_viac(short int kolko, char *_anchor_head, char *_anchor, char *_file){
 	sprintf(_anchor, "%s%c%s%d",
@@ -7289,7 +7346,7 @@ void _spolocna_cast_ant3_viac(short int kolko, char *_anchor_head, char *_anchor
 // 2007-09-28: zapoznámkované, lebo sa nepouíva
 void _spolocna_cast_1cit_viac(short int kolko, char *_anchor_head, char *_anchor, char *_file){
 	// 2007-09-28: pridané
-	if(je_citanie_vlastne){
+	if(su_kcit_kresp_1cit_prosby_vlastne){
 		sprintf(_anchor, "%s%c%s%d",
 			_anchor_head, pismenko_modlitby(modlitba), ANCHOR_CITANIE1,
 			(_global_den.den MOD kolko) + 1);
@@ -7323,7 +7380,7 @@ void _spolocna_cast_1cit_zvazok(short int modlitba, char *_anchor_pom, char *_an
 	Log("\tanchor == %s\n", _anchor);
 	Log("\tfile == %s\n", _file);
 	/* 2007-09-28: pridané */
-	if(je_citanie_vlastne){
+	if(su_kcit_kresp_1cit_prosby_vlastne){
 		if(!equals(_anchor_pom, STR_EMPTY)){
 			sprintf(_anchor_lokal, "%s%s%s%c%s", _anchor, _anchor_pom, _anchor_zvazok, pismenko_modlitby(modlitba), ANCHOR_CITANIE1);
 		}
@@ -7356,18 +7413,25 @@ void _spolocna_cast_kresponz_zvazok(short int modlitba, char *_anchor_pom, char 
 	Log("\tanchor_zvazok == %s\n", _anchor_zvazok);
 	Log("\tanchor == %s\n", _anchor);
 	Log("\tfile == %s\n", _file);
-	if(!equals(_anchor_pom, STR_EMPTY)){
-		sprintf(_anchor_lokal, "%s%s%s%c%s", _anchor, _anchor_pom, _anchor_zvazok, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ);
-	}
-	else {
-		sprintf(_anchor_lokal, "%s%s%c%s", _anchor, _anchor_zvazok, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ);
-	}
-	_set_kresponz(modlitba, _file, _anchor_lokal);
+	/* 2007-10-23 / 2007-09-28: pridané */
+	if(su_kcit_kresp_1cit_prosby_vlastne){
+		if(!equals(_anchor_pom, STR_EMPTY)){
+			sprintf(_anchor_lokal, "%s%s%s%c%s", _anchor, _anchor_pom, _anchor_zvazok, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ);
+		}
+		else {
+			sprintf(_anchor_lokal, "%s%s%c%s", _anchor, _anchor_zvazok, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ);
+		}
+		_set_kresponz(modlitba, _file, _anchor_lokal);
 
-	/* 2007-09-27: kvôli debugovaniu pod Ruby zrušené komentáre vo vıpisoch*/
-	/* set_LOG_svsv; */
-	// Log("   set(svsv): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby(modlitba), _file, _anchor_lokal);
-	Log("   set(svsv): %s: `%s', kotva `%s'\n", nazov_modlitby(modlitba), _file, _anchor_lokal);
+		/* 2007-09-27: kvôli debugovaniu pod Ruby zrušené komentáre vo vıpisoch*/
+		/* set_LOG_svsv; */
+		// Log("   set(svsv): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby(modlitba), _file, _anchor_lokal);
+		Log("   set(svsv): %s: `%s', kotva `%s'\n", nazov_modlitby(modlitba), _file, _anchor_lokal);
+	}
+	else{
+		Log("pod¾a smerníc nie je vlastné èítanie, nenastavujem.\n");
+	}
+	Log("_spolocna_cast_kresponz_zvazok: koniec.\n");
 }
 
 /* 2005-11-24: pridané; pod¾a všeobecnıch smerníc, è. 134:
@@ -7593,10 +7657,10 @@ void _set_spolocna_cast(short int a, _struct_sc sc){
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
 		_spolocna_cast_hymnus;
-		if(je_citanie_vlastne){
+		if(su_kcit_kresp_1cit_prosby_vlastne){
 			_spolocna_cast_kcitanie;
+			_spolocna_cast_kresponz;
 		}
-		_spolocna_cast_kresponz;
 		_spolocna_cast_benediktus;
 		if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II))
 			_vlastna_cast_kresponz_ve; /* pridane 18/06/2000A.D. */
@@ -7604,10 +7668,10 @@ void _set_spolocna_cast(short int a, _struct_sc sc){
 		/* vespery */
 		modlitba = MODL_VESPERY;
 		_spolocna_cast_hymnus;
-		if(je_citanie_vlastne){
+		if(su_kcit_kresp_1cit_prosby_vlastne){
 			_spolocna_cast_kcitanie;
+			_spolocna_cast_kresponz;
 		}
-		_spolocna_cast_kresponz;
 		_spolocna_cast_magnifikat;
 		if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II))
 			_vlastna_cast_kresponz_ve; /* pridane 18/06/2000A.D. */
@@ -7631,7 +7695,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc){
 		 * - III. a IV. zväzok (obdobie cez rok).
 		 */
 		_spolocna_cast_1cit_zvazok(modlitba, _anchor_pom, _anchor_zvazok, STR_EMPTY /* 2005-08-08: _anchor netreba*/, _file);
-		if(je_citanie_vlastne){
+		if(su_kcit_kresp_1cit_prosby_vlastne){
 			_spolocna_cast_2citanie;
 		}
 

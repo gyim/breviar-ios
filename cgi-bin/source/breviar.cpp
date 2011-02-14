@@ -92,6 +92,8 @@
 /*   2007-10-02a.D. | dokonèenie zoh¾adnenia smerníc pre sviatky svätých   */
 /*                    (rozlíšenie slávností+sviatkov/ostatných slávení),   */
 /*                  - rovnaké antifóny mcd zobrazuje len prvú a poslednú   */
+/*   2007-10-23a.D. | dokonèenie zoh¾adnenia smerníc pre sviatky svätých   */
+/*                    (krátke responzórium, prosby pre r.chvály/vešpery)   */
 /*                                                                         */
 /*                                                                         */
 /*                                                                         */

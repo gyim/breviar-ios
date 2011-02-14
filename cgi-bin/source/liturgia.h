@@ -39,7 +39,7 @@
 /*   2006-12-12a.D. | doplnenie latinèiny (la)                 */
 /*   2007-06-01a.D. | niektoré definy presunuté do mydefs.h    */
 /*   2007-06-28a.D. | doplnené: PARAM_TEDEUM_BEGIN aj _END     */
-/*   2007-10-02a.D. | doplnené: PARAM_SKRY_ANTIFONU_BEGIN/END  */ 
+/*   2007-10-02a.D. | doplnené: PARAM_SKRY_ANTIFONU_BEGIN/END  */
 /*                  - tiež PARAM_ANTIFONA1x a PARAM_ANTIFONA3x */
 /*                                                             */
 /*                                                             */
