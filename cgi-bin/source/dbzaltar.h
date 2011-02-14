@@ -11,6 +11,7 @@
 /*   2003-11-20a.D. | pridane ANCHOR_CITANIE 1 a 2             */
 /*   2006-01-24a.D. | pridane zaltar_zvazok()                  */
 /*   2006-08-18a.D. | zmena int na short int (staèí 32tis.)    */
+/*   2007-10-02a.D. | doplnený anchor ANCHOR_ANTIFONY          */
 /*                                                             */
 /***************************************************************/
 
@@ -64,6 +65,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 #define ANCHOR_ANTIFONA1    "ANT1"
 #define ANCHOR_ANTIFONA2    "ANT2"
 #define ANCHOR_ANTIFONA3    "ANT3"
+#define ANCHOR_ANTIFONY     "ANTx" /* pridané 2007-10-02 pre rovnaké antifóny 1., 2. a 3. - modlitba cez deò */
 #define ANCHOR_ANTIFONA1V   "ANT1V"
 #define ANCHOR_ANTIFONA2V   "ANT2V"
 #define ANCHOR_ANTIFONA3V   "ANT3V"

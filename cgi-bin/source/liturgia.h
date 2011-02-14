@@ -215,7 +215,7 @@ typedef struct den_mesiac _struct_den_mesiac;
 #define CHAR_MODL_CEZ_DEN_9          '9'
 #define CHAR_MODL_CEZ_DEN_12         '2'
 #define CHAR_MODL_CEZ_DEN_3          '3'
-#define CHAR_MODL_CEZ_DEN_VSETKY     'd' /* 2005-03-27: Pridane */
+// #define CHAR_MODL_CEZ_DEN_VSETKY     'd' /* 2005-03-27: Pridane */
 #define CHAR_MODL_VESPERY            'v'
 #define CHAR_MODL_KOMPLETORIUM       'k'
 #define CHAR_MODL_NEURCENA           '_' /* toto by sa nemalo */
