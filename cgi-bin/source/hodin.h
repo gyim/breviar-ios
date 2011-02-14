@@ -74,6 +74,7 @@ const char *nazov_MODLITBY[] =
  "DETAILY"};
 */
 
+/*
 const char *nazov_spolc[MODL_SPOL_CAST_NEBRAT + 1] =
 {"neurèená",
  "duchovnıch pastierov - pre kòazov",
@@ -102,13 +103,46 @@ const char *nazov_spolc[MODL_SPOL_CAST_NEBRAT + 1] =
  "zosnulıch",
  "nebra"
 };
+*/
+const char *nazov_spolc_jazyk[POCET_SPOL_CASTI + 1][POCET_JAZYKOV + 1] =
+{{"neurèená", "neurèena", "not decided", ""}, 
+ {"duchovnıch pastierov - pre kòazov", "duchovních pastıøù - o knìích", "", ""}, 
+ {"duchovnıch pastierov - pre biskupov", "duchovnıch pastierov - o biskupech", "", ""}, 
+ {"duchovnıch pastierov - pre pápeov", "duchovnıch pastierov - o papei", "", ""}, 
+ {"uèite¾ov Cirkvi", "uèitelù Církve", "", ""}, 
+ {"apoštolov", "apoštolù", "", ""}, 
+ {"jedného muèeníka", "jednoho muèedníka", "", ""}, 
+ {"viacerıch muèeníkov", "více mùèedníkù", "", ""}, 
+ {"Panny Márie", "Panny Marie", "", ""}, 
+ {"svätıch muov - pre reho¾níkov", "svatıch muù - o øeholnících", "", ""}, 
+ {"svätıch muov", "svatıch muù", "", ""}, 
+ {"panien", "pannen", "", ""}, 
+ {"svätıch ien - pre reho¾nice", "svatıch en - o øeholnicích", "", ""}, 
+ {"svätıch ien", "svatıch en", "", ""}, 
+ {"duchovnıch pastierov - pre viacerıch", "duchvních pastıøù - o více pastıøích", "", ""}, 
+ {"jednej muèenice", "jedné muèednice", "", ""}, 
+ {"svätıch ien - pre vychovávate¾ov", "svatıch en - o vychovatelce", "", ""}, 
+ {"svätıch muov - pre vychovávate¾ov", "svatıch muù - o vychovatelıch", "", ""}, 
+ {"svätıch ien - pre tıch, èo konali skutky milosrdenstva", "svatıch en - o enì, která vynikala milosrdnımi skutky", "", ""}, 
+ {"svätıch muov - pre tıch, èo konali skutky milosrdenstva", "svatıch muù - o mui, kterı vynikal milosrdnımi skuty", "", ""}, 
+ {"svätıch ien - pre viaceré", "svatıch en - o více enách", "", ""}, 
+ {"svätıch muov - pre viacerıch", "svatıch muù - o více muích", "", ""}, 
+ {"viacerıch panien", "více pannen", "", ""}, 
+ {"posviacky chrámu", "posvìcení kostela", "", ""}, 
+ {"zosnulıch", "zemøelıch", "", ""}, 
+ {"nebra", "nevzít", "do not use", ""}
+};
+
+#ifndef		nazov_spolc
+#define		nazov_spolc(a)	nazov_spolc_jazyk[a][_global_jazyk]
+#endif
 
 /* sc_rh == spolocna cast pre reholnikov / reholnice;
  * sc_skm == spolocna cast pre tych, co konali skutky milosrdenstva ;
  * sc_vv == spolocna cast pre vychovavatelov;
  * zosnuli == oficium za zosnulych;
  */
-const char *nazov_spolc_htm[MODL_SPOL_CAST_NEBRAT + 1] =
+const char *nazov_spolc_htm[POCET_SPOL_CASTI + 1] =
 {"000",
  "sc_dp.htm",
  "sc_dp.htm",
@@ -137,7 +171,7 @@ const char *nazov_spolc_htm[MODL_SPOL_CAST_NEBRAT + 1] =
  "000"
 };
 
-const char *nazov_spolc_ANCHOR[MODL_SPOL_CAST_NEBRAT + 1] =
+const char *nazov_spolc_ANCHOR[POCET_SPOL_CASTI + 1] =
 {"000",
  "SCDPKN",
  "SCDPBS",
@@ -310,9 +344,9 @@ const char *nazov_slavenia_jazyk[POCET_SLAVENI + 1][POCET_JAZYKOV + 1] =
 {{"___", "___", "___", ""}, 
  {"slávnos", "slavnost", "", ""}, 
  {"sviatok", "svátek", "", ""}, 
- {"spomienka", "vzpomínka", "", ""}, 
- {"¾ubovo¾ná spomienka", "libovolná vzpomínka", "", ""}, 
- {"vlastné slávenie", "vlastní slávení", "", ""}, 
+ {"spomienka", "památka", "", ""}, 
+ {"¾ubovo¾ná spomienka", "nezávazná památka", "", ""}, 
+ {"vlastné slávenie", "z vlastních textù", "", ""}, 
 };
 
 #define		nazov_slavenia(a)	nazov_slavenia_jazyk[a][_global_jazyk]
@@ -644,6 +678,7 @@ const char *html_text_mesiac[] = {"mesiac", "mìsíc", "month", ""};
 const char *html_text_rok[] = {"rok", "rok", "year", ""};
 const char *html_text_Rok[] = {"Rok", "Rok", "Year", ""};
 const char *html_text_Rok_x[] = {"Rok %d", "Rok %d", "Year %d", ""};
+const char *html_text_modlitba[] = {"modlitba", "modlitba", "prayer", ""};
 const char *html_text_modlitby_pre_den[] = {"modlitby pre deò", "modlitby pro den", "prayers for date", ""};
 const char *html_text_alebo_pre[] = {"alebo pre", "anebo pro", "or for", ""};
 const char *html_text_dnesok[] = {"dnešok", "dnešní den", "today", ""};
@@ -664,5 +699,49 @@ const char *html_text_je[] = {"je", "je", "is", ""};
 const char *html_text_nie_je[] = {"nie je", "není", "is not", ""};
 const char *html_text_prestupny[] = {"prestupnı", "pøestupnı", "...", ""};
 const char *html_text_datumy_pohyblivych_slaveni[] = {"Dátumy pohyblivıch slávení", "Dáta promìnlivıch slávení", "Dates for movable celebrations", ""};
+
+const char *str_modl_cez_den_zalmy_zo_dna[POCET_JAZYKOV + 1] = 
+	{"benej", "bìné", "ordinary", ""};
+#define		STR_MODL_CEZ_DEN_ZALMY_ZO_DNA 	str_modl_cez_den_zalmy_zo_dna[_global_jazyk]
+
+const char *str_modl_cez_den_doplnkova_psalmodia[POCET_JAZYKOV + 1] = 
+	{"doplnkovej", "doplòkové", "supplementary", ""};
+#define		STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA 	str_modl_cez_den_doplnkova_psalmodia[_global_jazyk]
+
+const char *str_modl_zalmy_zo_dna[POCET_JAZYKOV + 1] = 
+	{"dòa", "dne", "day", ""};
+#define		STR_MODL_ZALMY_ZO_DNA 	str_modl_zalmy_zo_dna[_global_jazyk]
+
+const char *str_modl_zalmy_zo_sv[POCET_JAZYKOV + 1] = 
+	{"sviatku", "svátku", "celebration", ""};
+#define		STR_MODL_ZALMY_ZO_SV 	str_modl_zalmy_zo_sv[_global_jazyk]
+
+const char *str_ano[POCET_JAZYKOV + 1] = 
+	{"áno", "ano", "yes", ""};
+#define		STR_ANO		str_ano[_global_jazyk]
+
+const char *str_nie[POCET_JAZYKOV + 1] = 
+	{"nie", "ne", "no", ""};
+#define		STR_NIE		str_nie[_global_jazyk]
+
+const char *html_text_detaily_uvod[POCET_JAZYKOV + 1] = 
+{"Nasledovné monosti ovplyvnia vzh¾ad i obsah vygenerovanej modlitby.\nVyberte tie, pod¾a ktorıch sa má modlitba vygenerova.", 
+ "Následující monosti mají vplyv na vzhled i obsah vygenerované modlitby.\nVyberte si, podle kterıch má bıt modlitba vygenerována.", 
+ "The following options apply to the resulting generated text of the prayer.\nChoose options which fit your needs to the resulting prayer text.", 
+ ""};
+
+const char *html_text_nemenne_sucasti[] = {"zobrazi <i>nemenné súèasti</i> modlitby?", "zobrazit <i>nemìnné souèásti</i> modlitby?", "display <i>non-changeable parts</i> prayer?", ""};
+const char *html_text_nemenne_sucasti_explain[] = 
+{"Kadé ranné chvály obsahujú Benediktus, vešpery Magnifikat, obe modlitby obsahujú Otèenáš a zakonèenie modlitby, a napokon posvätné èítanie obsahuje niekedy hymnus Te Deum; tieto èasti modlitby nazıvame <i>nemenné súèasti</i>.", 
+ "Kadé ranní chvály obsahujú Zachariášovo kantikum, nešpory Mariin Magnifikat, obì modlitbu Pánì a zakonèení modlitby, a napokon modlitba se ètením nìkdy obsahuje hymnus Te Deum; tyto èásti modliteb nazıváme <i>nemìnné souèásti</i>.", 
+ "Each morning prayer contains Benedictus, vesperae contains Magnificat, both contain the Lord's Prayer and a conclusion of the prayer; finally, the holy reading sometimes contains the Te Deum hymnus; all these parts we call <i>un-changeable parts</i>.", 
+ ""};
+
+const char *html_text_popis_svaty[] = {"zobrazi <i>popis</i> k modlitbe svätého?", "zobrazit <i>popis</i> pøi modlitbì ke cti svìtce?", "display <i>description</i> for prayer for the saints?", ""};
+const char *html_text_popis_svaty_explain[] = 
+{"Modlitby zväèša obsahujú pred názvom modlitby ivotopis svätého, popis sviatku alebo podobnú struènú charakteristiku, ktorú pre jednoduchos nazıvame <i>popis</i>.", 
+ "Modlitby ke cti svatıch obsahují struènı ivotopis svatého, pøi svátku je to struènı popis svátku a podobnì. Tyto charakteristiky pro struènost nazıváme <i>popis</i>.", 
+ "xxx", 
+ ""};
 
 #endif /* __HODIN_H */

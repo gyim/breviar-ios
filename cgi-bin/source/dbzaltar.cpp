@@ -6502,11 +6502,11 @@ int modlitba;
  */
 #define otazka_sedi_to {\
 	if((a == MODL_SPOL_CAST_DUCH_PAST_KNAZ) || (a == MODL_SPOL_CAST_DUCH_PAST_BISKUP) || (a == MODL_SPOL_CAST_DUCH_PAST_PAPEZ) || (a == MODL_SPOL_CAST_PANNA)){\
-		Log("matches (duchovny pastier || panna). returning %s (%d)\n", nazov_spolc[a], a);\
+		Log("matches (duchovny pastier || panna). returning %s (%d)\n", nazov_spolc(a), a);\
 		return a;\
 	}\
 	else if((a == MODL_SPOL_CAST_SV_MUZ_REHOLNIK) || (a == MODL_SPOL_CAST_SV_MUZ)){\
-		Log("matches (reholnik || muz). returning %s (%d)\n", nazov_spolc[MODL_SPOL_CAST_SV_MUZ], MODL_SPOL_CAST_SV_MUZ);\
+		Log("matches (reholnik || muz). returning %s (%d)\n", nazov_spolc(MODL_SPOL_CAST_SV_MUZ), MODL_SPOL_CAST_SV_MUZ);\
 		return MODL_SPOL_CAST_SV_MUZ;\
 	}\
 }	
@@ -6514,15 +6514,15 @@ int _spol_cast_vyber_dp_pn(_struct_sc sc){
 	Log("_spol_cast_vyber_dp_pn() -- skusam, co sedi...\n");
 	int a;
 	a = sc.a1;
-	Log("  sc.a1 == %s (%d)\n", nazov_spolc[sc.a1], sc.a1);
+	Log("  sc.a1 == %s (%d)\n", nazov_spolc(a), a);
 	otazka_sedi_to;
 	a = sc.a2;
-	Log("  sc.a2 == %s (%d)\n", nazov_spolc[sc.a2], sc.a2);
+	Log("  sc.a2 == %s (%d)\n", nazov_spolc(sc.a2), sc.a2);
 	otazka_sedi_to;
 	a = sc.a3;
-	Log("  sc.a3 == %s (%d)\n", nazov_spolc[sc.a3], sc.a3);
+	Log("  sc.a3 == %s (%d)\n", nazov_spolc(sc.a3), sc.a3);
 	otazka_sedi_to;
-	Log("not matches. returning %s (%d)\n", nazov_spolc[MODL_SPOL_CAST_SV_MUZ], MODL_SPOL_CAST_SV_MUZ);
+	Log("not matches. returning %s (%d)\n", nazov_spolc(MODL_SPOL_CAST_SV_MUZ), MODL_SPOL_CAST_SV_MUZ);
 	return MODL_SPOL_CAST_SV_MUZ;
 }/* _spol_cast_vyber_dp_pn(); */
 
@@ -6531,13 +6531,13 @@ int _spol_cast_je_panna(_struct_sc sc){
 	Log("_spol_cast_je_panna() -- skusam, ci v sc je panna...\n");
 	int a;
 	a = sc.a1;
-	Log("  sc.a1 == %s (%d)\n", nazov_spolc[sc.a1], sc.a1);
+	Log("  sc.a1 == %s (%d)\n", nazov_spolc(sc.a1), sc.a1);
 	otazka_sedi_to2;
 	a = sc.a2;
-	Log("  sc.a2 == %s (%d)\n", nazov_spolc[sc.a2], sc.a2);
+	Log("  sc.a2 == %s (%d)\n", nazov_spolc(sc.a2), sc.a2);
 	otazka_sedi_to2;
 	a = sc.a3;
-	Log("  sc.a3 == %s (%d)\n", nazov_spolc[sc.a3], sc.a3);
+	Log("  sc.a3 == %s (%d)\n", nazov_spolc(sc.a3), sc.a3);
 	otazka_sedi_to2;
 	Log("  returning NIE\n");
 	return NIE;
@@ -7005,7 +7005,7 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 	char _file[SMALL]; /* nazov fajlu, napr. _1ne.htm */
 	int b; /* pre ucitelov cirkvi, odkial sa maju brat ine casti */
 
-	Log("_set_spolocna_cast(%s) -- begin\n", nazov_spolc[a]);
+	Log("_set_spolocna_cast(%s) -- begin\n", nazov_spolc(a));
 
 	if(a != MODL_SPOL_CAST_NEBRAT){
 		Log("/* nastavenie nazvu suboru, kotvy apod. (_set_spolocna_cast) */\n");
@@ -7183,7 +7183,7 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 
 		b = _spol_cast_vyber_dp_pn(sc);
 		if(b != MODL_SPOL_CAST_NEURCENA){
-			Log("spustam _set_spolocna_cast(%s) druhy raz (vnorene) -- \n  kvoli castiam, ktore pre ucitelov cirkvi nie su\n", nazov_spolc[b]);
+			Log("spustam _set_spolocna_cast(%s) druhy raz (vnorene) -- \n  kvoli castiam, ktore pre ucitelov cirkvi nie su\n", nazov_spolc(b));
 			_set_spolocna_cast(b, sc);
 			Log("po vnorenom spusteni _set_spolocna_cast() -- navrat.\n");
 			Log("pokracujem v nastaveni veci pre spol. cast MODL_SPOL_CAST_UCITEL_CIRKVI...\n");
@@ -7382,7 +7382,7 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 			b = MODL_SPOL_CAST_SV_MUZ;
 
 		if(b != MODL_SPOL_CAST_NEURCENA){
-			Log("spustam _set_spolocna_cast(%s) druhy raz (vnorene) -- \n   kvoli castiam, ktore pre vychovavatelov nie su\n", nazov_spolc[b]);
+			Log("spustam _set_spolocna_cast(%s) druhy raz (vnorene) -- \n   kvoli castiam, ktore pre vychovavatelov nie su\n", nazov_spolc(b));
 			_set_spolocna_cast(b, sc);
 			Log("po vnorenom spusteni _set_spolocna_cast() -- navrat.\n");
 			Log("pokracujem v nastaveni veci pre spol. cast MODL_SPOL_CAST_..._VYCH...\n");
@@ -7421,7 +7421,7 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 			b = MODL_SPOL_CAST_SV_MUZ;
 
 		if(b != MODL_SPOL_CAST_NEURCENA){
-			Log("spustam _set_spolocna_cast(%s) druhy raz (vnorene) -- \n   kvoli castiam, ktore pre tych, co konali skutky milosrdenstva nie su\n", nazov_spolc[b]);
+			Log("spustam _set_spolocna_cast(%s) druhy raz (vnorene) -- \n   kvoli castiam, ktore pre tych, co konali skutky milosrdenstva nie su\n", nazov_spolc(b));
 			_set_spolocna_cast(b, sc);
 			Log("po vnorenom spusteni _set_spolocna_cast() -- navrat.\n");
 			Log("pokracujem v nastaveni veci pre spol. cast MODL_SPOL_CAST_..._SKUTKYMIL...\n");
@@ -7460,7 +7460,7 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 			b = MODL_SPOL_CAST_SV_MUZ;
 
 		if(b != MODL_SPOL_CAST_NEURCENA){
-			Log("spustam _set_spolocna_cast(%s) druhy raz (vnorene) -- \n   kvoli castiam, ktore pre reholnikov nie su\n", nazov_spolc[b]);
+			Log("spustam _set_spolocna_cast(%s) druhy raz (vnorene) -- \n   kvoli castiam, ktore pre reholnikov nie su\n", nazov_spolc(b));
 			_set_spolocna_cast(b, sc);
 			Log("po vnorenom spusteni _set_spolocna_cast() -- navrat.\n");
 			Log("pokracujem v nastaveni veci pre spol. cast MODL_SPOL_CAST_..._REHOLNIK...\n");
@@ -7837,16 +7837,16 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 
 	}/* MODL_SPOL_CAST_POSVIACKA_CHRAMU */
 
-	Log("_set_spolocna_cast(%s) -- end\n", nazov_spolc[a]);
+	Log("_set_spolocna_cast(%s) -- end\n", nazov_spolc(a));
 }/* _set_spolocna_cast(); -- dva argumenty */
 
 #define _set_spolocna_cast(a) _set_spolocna_cast(a, sc)
 
 
 #define set_LOG_sc Log("          sc == {%s (%d), %s (%d), %s (%d)}\n",	\
-	nazov_spolc[sc.a1], sc.a1, \
-	nazov_spolc[sc.a2], sc.a2, \
-	nazov_spolc[sc.a3], sc.a3); Log
+	nazov_spolc(sc.a1), sc.a1, \
+	nazov_spolc(sc.a2), sc.a2, \
+	nazov_spolc(sc.a3), sc.a3); Log
 
 void set_spolocna_cast(_struct_sc sc, int poradie_svaty){
 	/* poradie_svaty je vstupom iba kvoli tomu, ze ak je 0,
@@ -7859,9 +7859,9 @@ void set_spolocna_cast(_struct_sc sc, int poradie_svaty){
 	 * !!!
 	 */
 	Log("set_spolocna_cast({%s, %s, %s}) -- begin\n",
-		nazov_spolc[sc.a1], nazov_spolc[sc.a2], nazov_spolc[sc.a3]);
+		nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3));
 	Log("          _global_opt3 == %s (%d)\n",
-		nazov_spolc[_global_opt3], _global_opt3);
+		nazov_spolc(_global_opt3), _global_opt3);
 
 	Log("  teraz nastavujem POPIS (pre daneho svateho)...\n");
 	mystrcpy(_anchor, _anchor_head, MAX_STR_AF_ANCHOR);
@@ -7954,13 +7954,13 @@ void set_spolocna_cast(_struct_sc sc, int poradie_svaty){
 	else{
 		/* sem by to nemalo prist */
 		if(poradie_svaty != 0){
-			Log("-- Error: sc (a1) nie je urcene; _global_opt3 == %s\n", nazov_spolc[_global_opt3]);
+			Log("-- Error: sc (a1) nie je urcene; _global_opt3 == %s\n", nazov_spolc(_global_opt3));
 			Export("%s\n", "Error: a1 (member of sc) assigned incorectly");
 			ALERT;
 			return;
 		}
 	}
-	Log("set_spolocna_cast(_global_opt3 == %s) -- end\n", nazov_spolc[_global_opt3]);
+	Log("set_spolocna_cast(_global_opt3 == %s) -- end\n", nazov_spolc(_global_opt3));
 }/* set_spolocna_cast(); */
 
 /* ... a teraz samotna funkcia sviatky_svatych(): */
@@ -8053,7 +8053,7 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 
 	/* 2006-02-06: pridaný debug výpis */
 	Log("\tDeklarujem štruktúru sc == ({%s, %s, %s}) -- begin\n",
-		nazov_spolc[sc.a1], nazov_spolc[sc.a2], nazov_spolc[sc.a3]);
+		nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3));
 
 	Log("Teraz nasleduje ve¾ký switch() pod¾a mesiacov a dní...\n");
 
@@ -10560,7 +10560,7 @@ label_25_MAR:
 						/* definovanie parametrov pre modlitbu */
 
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
-						Log("Peter a Pavol: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc[sc.a1], nazov_spolc[sc.a2], nazov_spolc[sc.a3], poradie_svaty);
+						Log("Peter a Pavol: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
 						if(/*(poradie_svaty == 1) && */ // 23/02/2000A.D.
 						  (query_type != PRM_DETAILY))
@@ -10749,7 +10749,7 @@ label_25_MAR:
 						/* definovanie parametrov pre modlitbu */
 
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
-						Log("Cyril a Metod: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc[sc.a1], nazov_spolc[sc.a2], nazov_spolc[sc.a3], poradie_svaty);
+						Log("Cyril a Metod: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
 						if(/*(poradie_svaty == 1) && */ // 23/02/2000A.D. -- prevzate z Petra a Pavla, 23/03/2000A.D.
 						  (query_type != PRM_DETAILY))
@@ -11490,7 +11490,7 @@ label_25_MAR:
 						/* definovanie parametrov pre modlitbu */
 
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
-						Log("Premenenie Pana: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc[sc.a1], nazov_spolc[sc.a2], nazov_spolc[sc.a3], poradie_svaty);
+						Log("Premenenie Pana: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
 						if(/*(poradie_svaty == 1) && */ // 23/02/2000A.D. -- prevzate z Petra a Pavla, 28/03/2000A.D.
 						  (query_type != PRM_DETAILY))
@@ -11795,7 +11795,7 @@ label_25_MAR:
 						/* definovanie parametrov pre modlitbu */
 
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
-						Log("Premenenie Pana: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc[sc.a1], nazov_spolc[sc.a2], nazov_spolc[sc.a3], poradie_svaty);
+						Log("Premenenie Pana: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
 						if(/*(poradie_svaty == 1) && */ // 23/02/2000A.D. -- prevzate z Petra a Pavla, 28/03/2000A.D.
 						  (query_type != PRM_DETAILY))
@@ -12405,7 +12405,7 @@ label_25_MAR:
 						/* definovanie parametrov pre modlitbu */
 
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
-						Log("Povysenie sv. Kriza: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc[sc.a1], nazov_spolc[sc.a2], nazov_spolc[sc.a3], poradie_svaty);
+						Log("Povysenie sv. Kriza: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
 						if(/*(poradie_svaty == 1) && */ // 23/02/2000A.D. -- prevzate z Petra a Pavla, 28/03/2000A.D.
 						  (query_type != PRM_DETAILY))
@@ -12465,7 +12465,7 @@ label_25_MAR:
 						/* definovanie parametrov pre modlitbu */
 
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
-						Log("Sedembolestnej Panny Marie, patronky Slovenska: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc[sc.a1], nazov_spolc[sc.a2], nazov_spolc[sc.a3], poradie_svaty);
+						Log("Sedembolestnej Panny Marie, patronky Slovenska: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
 						if(/*(poradie_svaty == 1) && */ // 23/02/2000A.D.; zobrate z 8.dec; 28/03/2000A.D.
 						  (query_type != PRM_DETAILY))
@@ -13455,7 +13455,7 @@ label_25_MAR:
 						/* definovanie parametrov pre modlitbu */
 
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
-						Log("Premenenie Pana: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc[sc.a1], nazov_spolc[sc.a2], nazov_spolc[sc.a3], poradie_svaty);
+						Log("Premenenie Pana: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
 						if(/*(poradie_svaty == 1) && */ // 23/02/2000A.D. -- prevzate z Petra a Pavla, 29/03/2000A.D.
 						  (query_type != PRM_DETAILY))
@@ -14175,7 +14175,7 @@ label_8_DEC:
 						/* definovanie parametrov pre modlitbu */
 
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
-						Log("Neposkvrnene pocatie Panny Marie: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc[sc.a1], nazov_spolc[sc.a2], nazov_spolc[sc.a3], poradie_svaty);
+						Log("Neposkvrnene pocatie Panny Marie: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
 						if(/*(poradie_svaty == 1) && */ // 23/02/2000A.D.
 						  (query_type != PRM_DETAILY))
@@ -14659,7 +14659,7 @@ label_8_DEC:
 		/* 2006-02-06: obohatený debug výpis */
 		Log("slávenie je urèené, poèet == %d\n", pocet);
 		Log("\tštruktúra sc == ({%s, %s, %s}) -- begin\n",
-			nazov_spolc[sc.a1], nazov_spolc[sc.a2], nazov_spolc[sc.a3]);
+			nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3));
 
 		_global_svaty1.den = den;
 		_global_svaty1.mesiac = mesiac;

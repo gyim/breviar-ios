@@ -291,14 +291,30 @@ extern const char *TEMPLAT[];
 /* stringy parametrov vstupu pre MODL_OPT..., ktore generovanie modlitby
  * ovplyvnuju */
 /* option 1 */
-#define STR_ANO "áno"
-#define STR_NIE "nie"
+//#define STR_ANO "áno"
+extern const char *str_ano[POCET_JAZYKOV + 1];
+#ifndef		STR_ANO
+#define		STR_ANO		str_ano[_global_jazyk]
+#endif
+//#define STR_NIE "nie"
+extern const char *str_nie[POCET_JAZYKOV + 1];
+#ifndef		STR_NIE
+#define		STR_NIE		str_nie[_global_jazyk]
+#endif
 
 /* option 2 */
 #define MODL_ZALMY_ZO_DNA 0
 #define MODL_ZALMY_ZO_SV  1
-#define STR_MODL_ZALMY_ZO_DNA "dòa"
-#define STR_MODL_ZALMY_ZO_SV  "sviatku"
+//#define STR_MODL_ZALMY_ZO_DNA "dòa"
+extern const char *str_modl_zalmy_zo_dna[POCET_JAZYKOV + 1];
+#ifndef		STR_MODL_ZALMY_ZO_DNA
+#define		STR_MODL_ZALMY_ZO_DNA 	str_modl_zalmy_zo_dna[_global_jazyk]
+#endif
+//#define STR_MODL_ZALMY_ZO_SV  "sviatku"
+extern const char *str_modl_zalmy_zo_sv[POCET_JAZYKOV + 1];
+#ifndef		STR_MODL_ZALMY_ZO_SV
+#define		STR_MODL_ZALMY_ZO_SV 	str_modl_zalmy_zo_sv[_global_jazyk]
+#endif
 
 /* option 3 -- tieto nasledujuce definicie definuju to, co je sucastou
  * _struct_dm::spolcast */
@@ -336,16 +352,31 @@ extern const char *TEMPLAT[];
  * v dnes.cpp::showPrayer();
  * ale predsa mensia ako MAX_MODL_SPOL_CAST */
 #define MODL_SPOL_CAST_NEBRAT            25 /* nechce zo spol. casti */
+#define POCET_SPOL_CASTI				25
 
 /* option 5, 2003-08-06, upravena 2003-08-13 */
 #define MODL_CEZ_DEN_ZALMY_ZO_DNA         0
 #define MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA  1
-#define STR_MODL_CEZ_DEN_ZALMY_ZO_DNA        "bežnej"
-#define STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA "doplnkovej"
+
+//#define STR_MODL_CEZ_DEN_ZALMY_ZO_DNA        "bežnej"
+extern const char *str_modl_cez_den_zalmy_zo_dna[POCET_JAZYKOV + 1];
+#ifndef		STR_MODL_CEZ_DEN_ZALMY_ZO_DNA
+#define		STR_MODL_CEZ_DEN_ZALMY_ZO_DNA	str_modl_cez_den_zalmy_zo_dna[_global_jazyk]
+#endif
+//#define STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA "doplnkovej"
+extern const char *str_modl_cez_den_doplnkova_psalmodia[POCET_JAZYKOV + 1];
+#ifndef		STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA
+#define		STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA	str_modl_cez_den_doplnkova_psalmodia[_global_jazyk]
+#endif
 
 /* a pre tieto - vyssie uvedene - konstanty aj retazce...
  * -- malo by ich byt do MAX_MODL_SPOL_CAST */
-extern const char *nazov_spolc[MODL_SPOL_CAST_NEBRAT + 1];
+//extern const char *nazov_spolc[MODL_SPOL_CAST_NEBRAT + 1];
+extern const char *nazov_spolc_jazyk[POCET_SPOL_CASTI + 1][POCET_JAZYKOV + 1];
+#ifndef		nazov_spolc
+#define		nazov_spolc(a)	nazov_spolc_jazyk[a][_global_jazyk]
+#endif
+
 /* a pre tieto konstanty aj retazce -- nazvy suborov
  * -- malo by ich byt do MAX_MODL_SPOL_CAST */
 /* sc_rh == spolocna cast pre reholnikov / reholnice;

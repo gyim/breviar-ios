@@ -1250,7 +1250,7 @@ void Log(_struct_dm g){
 	_struct_sc sc = _decode_spol_cast(g.spolcast);
 	/* 2006-02-06: upravené, pridané aj èíselné hodnoty */
 	Log_struktura_dm("   spolcast: (%d) %s, (%d) %s, (%d) %s\n",
-		sc.a1, nazov_spolc[sc.a1], sc.a2, nazov_spolc[sc.a2], sc.a3, nazov_spolc[sc.a3]);
+		sc.a1, nazov_spolc(sc.a1), sc.a2, nazov_spolc(sc.a2), sc.a3, nazov_spolc(sc.a3));
 }
 
 void Log(struct tmodlitba1 t){

@@ -1837,7 +1837,7 @@ void showPrayer(int type){
 	*/
 	/* 2006-02-06: upraven˝ v˝pis: ak je mimo rozsah, reùazcov· konötanta  */
 	Log("showPrayer: opt3 == `%s' (%d -- %s)\n", 
-		pom_MODL_OPT3, _global_opt3, _global_opt3 <= MODL_SPOL_CAST_NEBRAT ? nazov_spolc[_global_opt3] : EMPTY_STR);
+		pom_MODL_OPT3, _global_opt3, _global_opt3 <= MODL_SPOL_CAST_NEBRAT ? nazov_spolc(_global_opt3) : EMPTY_STR);
 	/* vypisanie dalsich options, 2003-08-13 */
 	Log("showPrayer: opt4 == `%s' (%d)\n", pom_MODL_OPT4, _global_opt4);
 	Log("showPrayer: opt5 == `%s' (%d -- %s)\n", pom_MODL_OPT5, _global_opt5, 
@@ -2599,7 +2599,7 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 				 */
 				Log("\tPremenn· _global_opt3 pred ˙pravou == %d (%s)...\n", 
 					_global_opt3, 
-					_global_opt3 <= MODL_SPOL_CAST_NEBRAT ? nazov_spolc[_global_opt3] : EMPTY_STR);
+					_global_opt3 <= MODL_SPOL_CAST_NEBRAT ? nazov_spolc(_global_opt3) : EMPTY_STR);
 				if(_global_opt3 != MODL_SPOL_CAST_NEBRAT){
 					switch(poradie_svaty){
 						case 1:
@@ -2616,7 +2616,7 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 							break;
 					}/* switch */
 					Log("\tNastavil som do premennej sc == (%d) %s, (%d) %s, (%d) %s\n",
-						sc.a1, nazov_spolc[sc.a1], sc.a2, nazov_spolc[sc.a2], sc.a3, nazov_spolc[sc.a3]);
+						sc.a1, nazov_spolc(sc.a1), sc.a2, nazov_spolc(sc.a2), sc.a3, nazov_spolc(sc.a3));
 					if(sc.a1 != MODL_SPOL_CAST_NEURCENA){
 						if(sc.a2 != MODL_SPOL_CAST_NEURCENA){
 							if(sc.a3 != MODL_SPOL_CAST_NEURCENA){
@@ -2650,7 +2650,7 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 					 */
 					Log("\tNastavil som _global_opt3 == %d (%s)...\n", 
 						_global_opt3, 
-						_global_opt3 <= MODL_SPOL_CAST_NEBRAT ? nazov_spolc[_global_opt3] : EMPTY_STR);
+						_global_opt3 <= MODL_SPOL_CAST_NEBRAT ? nazov_spolc(_global_opt3) : EMPTY_STR);
 				} /* if(_global_opt3 != MODL_SPOL_CAST_NEBRAT) */
 				else{
 					Log("\tKeÔûe pouûÌvateæ nechcel braù spoloËn˙ Ëasù, neupravujem.\n");
@@ -3906,8 +3906,9 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
 	}
 
 	Export("<hr>\n");
-	Export("<p>NasledovnÈ moûnosti ovplyvnia vzhæad i obsah vygenerovanej modlitby.\n");
-	Export("Vyberte tie, podæa ktor˝ch sa m· modlitba vygenerovaù.</p>\n");
+	Export("<p>");
+	Export((char *)html_text_detaily_uvod[_global_jazyk]);
+	Export("</p>\n");
 	Export("<form action=\"%s?%s=%s&%s=%d&%s=%d&%s=%d&%s=%d%s\" method=\"post\">\n",
 		uncgi_name,
 		STR_QUERY_TYPE, STR_PRM_DATUM, /* chvilu tu bolo PRM_DETAILY */
@@ -3949,7 +3950,9 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
 	 */
 	Export("<ul>\n");
 
-	Export("<li>modlitba \n");
+	Export("<li>");
+	Export((char *)html_text_modlitba[_global_jazyk]);
+	Export(" \n");
 	/* pole WWW_MODLITBA */
 	Export("<select name=\"%s\">\n", STR_MODLITBA);
 	Export("<option selected>%s\n", nazov_modlitby(MODL_RANNE_CHVALY));
@@ -3963,29 +3966,32 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
 	Export("</select>\n");
 	Export("</li>\n");
 
-	Export("<li>zobraziù <i>nemennÈ s˙Ëasti</i> modlitby?\n");
+	Export("<li>");
+	Export((char *)html_text_nemenne_sucasti[_global_jazyk]);
+	Export(" \n");
 	/* pole WWW_MODL_OPT1 */
 	Export("<select name=\"%s\">\n", STR_MODL_OPT1);
 	Export("<option>%s\n", STR_ANO);
 	Export("<option selected>%s\n", STR_NIE);
 	Export("</select>\n");
-	Export("<br><span class=\"explain\">KaûdÈ rannÈ chv·ly obsahuj˙ Benediktus, veöpery Magnifikat, ");
-	Export("obe modlitby OtËen·ö a zakonËenie modlitby, ");
-	Export("a napokon posv‰tnÈ ËÌtanie obsahuje hymnus Te Deum; ");
-	Export("tieto Ëasti modlitby naz˝vame <i>nemennÈ s˙Ëasti</i>.</span>");
+	Export("<br><span class=\"explain\">");
+	Export((char *)html_text_nemenne_sucasti_explain[_global_jazyk]);
+	Export("</span>");
 	Export("</li>\n");
 
 	if((poradie_svaty > 0) && (poradie_svaty < 4)){
 
-		Export("<li>zobraziù <i>popis</i> k modlitbe sv‰tÈho?\n");
+		Export("<li>");
+		Export((char *)html_text_popis_svaty[_global_jazyk]);
+		Export(" \n");
 		/* pole WWW_MODL_OPT4 */
 		Export("<select name=\"%s\">\n", STR_MODL_OPT4);
 		Export("<option>%s\n", STR_ANO);
 		Export("<option selected>%s\n", STR_NIE);
 		Export("</select>\n");
-		Export("<br><span class=\"explain\">RannÈ chv·ly a veöpery zv‰Ëöa obsahuj˙ pred n·zvom modlitby ");
-		Export("ûivotopis sv‰tÈho, popis sviatku alebo podobn˙ struËn˙ charakteristiku, ");
-		Export("ktor˙ pre jednoduchosù naz˝vame <i>popis</i>.</span>");
+		Export("<br><span class=\"explain\">");
+		Export((char *)html_text_popis_svaty_explain[_global_jazyk]);
+		Export("</span>");
 		Export("</li>\n");
 
 		/* tu je treba urobit porovnanie s nejakou premennou, ktora obsahuje
@@ -4010,17 +4016,17 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
 		Export("<li>Ëasti modlitby zo spoloËnej Ëasti \n");
 		Export("<select name=\"%s\">\n", STR_MODL_OPT3);
 		if((sc.a1 != MODL_SPOL_CAST_NEURCENA) && (sc.a1 != MODL_SPOL_CAST_NEBRAT)){
-			Export("<option selected>%s\n", nazov_spolc[sc.a1]);
+			Export("<option selected>%s\n", nazov_spolc(sc.a1));
 			if(sc.a2 != MODL_SPOL_CAST_NEURCENA){
-				Export("<option>%s\n", nazov_spolc[sc.a2]);
+				Export("<option>%s\n", nazov_spolc(sc.a2));
 				if(sc.a3 != MODL_SPOL_CAST_NEURCENA){
-					Export("<option>%s\n", nazov_spolc[sc.a3]);
+					Export("<option>%s\n", nazov_spolc(sc.a3));
 				}
 			}
-			Export("<option>%s\n", nazov_spolc[MODL_SPOL_CAST_NEBRAT]);
+			Export("<option>%s\n", nazov_spolc(MODL_SPOL_CAST_NEBRAT));
 		}
 		else{
-			Export("<option selected>%s\n", nazov_spolc[MODL_SPOL_CAST_NEBRAT]);
+			Export("<option selected>%s\n", nazov_spolc(MODL_SPOL_CAST_NEBRAT));
 		}
 		Export("</select>\n");
 		Export("<br><span class=\"explain\">Na sviatok sv‰tca/sv‰tice sa podæa liturgick˝ch pravidiel ber˙ Ëasti, ");
@@ -4875,13 +4881,13 @@ int atojazyk(char *jazyk){
 		/* ide o znakovy retazec nekonvertovatelny na cislo */ \
 	} \
 	else{ \
-		mystrcpy(pom_MODL_OPT3, nazov_spolc[i], SMALL); \
+		mystrcpy(pom_MODL_OPT3, nazov_spolc(i), SMALL); \
 		/* ak je zadane cislo spravne, tak i bude spravny int \
 		 * a pom_MODL_OPT3 bude spravny char* */ \
 	} \
 	Log("opt3: i == %d\n", i); \
 	while(i <= MODL_SPOL_CAST_NEBRAT){ \
-		if(equals(pom_MODL_OPT3, nazov_spolc[i])){ \
+		if(equals(pom_MODL_OPT3, nazov_spolc(i))){ \
 			_global_opt3 = i; \
 			break; \
 		} \
@@ -5818,13 +5824,13 @@ void _main_batch_mode(
 		/* ide o znakovy retazec nekonvertovatelny na cislo */
 	}
 	else{
-		mystrcpy(pom_MODL_OPT3, nazov_spolc[i], SMALL);
+		mystrcpy(pom_MODL_OPT3, nazov_spolc(i), SMALL);
 		/* ak je zadane cislo spravne, tak i bude spravny int
 		 * a pom_MODL_OPT3 bude spravny char* */
 	}
 	Log("opt3: i == %d\n", i);
 	while(i <= MODL_SPOL_CAST_NEBRAT){
-		if(equals(pom_MODL_OPT3, nazov_spolc[i])){
+		if(equals(pom_MODL_OPT3, nazov_spolc(i))){
 			_global_opt3 = i;
 			break;
 		}
