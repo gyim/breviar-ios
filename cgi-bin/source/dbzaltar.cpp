@@ -5160,11 +5160,12 @@ label_24_DEC:
 						modlitba = MODL_POSV_CITANIE;
 						_set_zalmy_krista_krala(modlitba);
 						_vlastne_slavenie_hymnus(_anchor_vlastne_slavenie);
-						/* sú nastavené ako 34. nede¾a cezroèného obdobia vyššie
-						_vlastne_slavenie_citanie1(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_citanie2(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
+						/* 2008-11-29: bolo tu síce uvedené "sú nastavené ako 34. nede¾a cezroèného obdobia vyššie", ale nastavovali sa 
+						 * z cezroèného obdobia; Vlado Kiš ma upozornil, e krátke responzórium má by zo slávnosti Krista Krá¾a
+							_vlastne_slavenie_citanie1(_anchor_vlastne_slavenie);
+							_vlastne_slavenie_citanie2(_anchor_vlastne_slavenie);
 						*/
+						_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
 						_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
 						_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
 

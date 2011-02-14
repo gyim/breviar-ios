@@ -115,6 +115,7 @@
 /*   2008-08-08a.D. | pridaný parameter (option) `c' (css - vzh¾ad)        */
 /*   2008-08-15a.D. | doposlovenèená _main_analyza_roku()                  */
 /*   2008-08-15a.D. | prvý pokus "dominikánskej èeštiny"                   */
+/*   2008-11-29a.D. | pridané rôzne možnosti batch exportu                 */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -311,6 +312,8 @@ short int _global_pocet_slava_otcu = 0; /* pridaná 2007-05-18 */
 short int _global_opt6 = NIE; /* 2006-06-01: pridané */
 short int _global_opt7 = NIE; /* 2006-06-01: pridané */
 short int _global_ant_mcd_rovnake = NIE; /* 2007-10-02: pridané pre modlitbu cez deò */
+/* 2008-11-29, pridané */
+short int _global_opt_export_date_format = EXPORT_DATE_SIMPLE;
 
 /* globalna premenna, co obsahuje string vypisany na obrazovku */
 char *_global_string;
@@ -397,6 +400,9 @@ char pom_JAZYK		[SMALL] = STR_EMPTY;
 
 /* 2008-08-08: Pridané kvôli rôznym css */
 char pom_CSS		[SMALL] = STR_EMPTY;
+
+/* 2008-11-29: pridané rôzne možnosti batch exportu */
+char pom_MODL_OPT_DATE_FORMAT [SMALL] = STR_EMPTY;
 
 char bad_param_str[MAX_STR] = STR_EMPTY; /* inicializacia pridana 2003-08-13 */
 
@@ -5051,7 +5057,12 @@ void execute_batch_command(short int a, char batch_command[MAX_STR]){
 			}/* endif _global_opt_append == YES */
 			else{
 				fprintf(batch_file, "%s%d%c.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s\n", batch_command, a, char_modlitby[i], _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk]); /* modlitba `i' */
-				fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%d%c.htm\">%s</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a, char_modlitby[i], nazov_modlitby(i));
+				// fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%d%c.htm\">%s</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a, char_modlitby[i], nazov_modlitby(i));
+				/* 2008-11-29: rozlièný export */
+				if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
+					fprintf(batch_html_file, "\t<a href=\""FILENAME_EXPORT_DATE_SIMPLE"_%d%c.htm\">%s</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a, char_modlitby[i], nazov_modlitby(i));
+				else /* EXPORT_DATE_FULL */
+					fprintf(batch_html_file, "\t<a href=\""FILENAME_EXPORT_DATE_FULL"_%d%c.htm\">%s</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a, char_modlitby[i], nazov_modlitby(i));
 			}
 		}
 	}
@@ -5077,10 +5088,19 @@ void _export_rozbor_dna_batch(short int typ){
 	/* ak vypisovat do jednotlivych suborov, 2003-07-08 */
 	if(_global_opt_append != YES){
 		/* pripravime si command line string pre dany datum */
-		sprintf(batch_command, "%s -i%s -qpdt -d%d -m%d -r%d -e%.4d-%.2d-%.2d_", 
-			name_binary_executable, include_dir, 
-			_global_den.den, _global_den.mesiac, _global_den.rok,
-			_global_den.rok, _global_den.mesiac, _global_den.den);
+		/* 2008-11-29: rozlièný export */
+		if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
+			sprintf(batch_command, "%s -i%s -qpdt -d%d -m%d -r%d -u%d -e"FILENAME_EXPORT_DATE_SIMPLE"_", 
+				name_binary_executable, include_dir, 
+				_global_den.den, _global_den.mesiac, _global_den.rok,
+				_global_opt_export_date_format,
+				_global_den.rok, _global_den.mesiac, _global_den.den);
+		else /* EXPORT_DATE_FULL */
+			sprintf(batch_command, "%s -i%s -qpdt -d%d -m%d -r%d -u%d -e"FILENAME_EXPORT_DATE_FULL"_", 
+				name_binary_executable, include_dir, 
+				_global_den.den, _global_den.mesiac, _global_den.rok,
+				_global_opt_export_date_format,
+				_global_den.rok, _global_den.mesiac, _global_den.den);
 	}
 	/* v opacnom pripade je furt ten isty fajl, 2003-07-08,
 	 * pridame tam aj "-a1" = append */
@@ -7243,8 +7263,11 @@ void _main_batch_mode(
 					 */
 					if(_global_opt_append == YES){
 						mystrcpy(_global_string, STR_EMPTY, MAX_GLOBAL_STR); /* inicializacia */
-						sprintf(_global_string, "%.4d-%.2d-%.2d_%.4d-%.2d-%.2d", 
-								r_from, m_from, d_from, r_to, m_to, d_to);
+						/* 2008-11-29: rozlièný export */
+						if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
+							sprintf(_global_string, FILENAME_EXPORT_DATE_SIMPLE"_"FILENAME_EXPORT_DATE_SIMPLE, r_from, m_from, d_from, r_to, m_to, d_to);
+						else /* EXPORT_DATE_FULL */
+							sprintf(_global_string, FILENAME_EXPORT_DATE_FULL"_"FILENAME_EXPORT_DATE_FULL, r_from, m_from, d_from, r_to, m_to, d_to);
 					}
 
 					/* 2003-07-07 
@@ -7532,9 +7555,11 @@ short int getArgv(int argc, char **argv){
 	 *            `j' (Jazyk) jazyková mutácia, zatia¾ sk, cz
 	 * 2008-08-08: pridaný nasledovný parameter:
 	 *            `c' (css) použité css
+	 * 2008-11-29: pridaný nasledovný parameter:
+	 *            `u' (dátUm) spôsob zapisovania dátumu pre súbory v batch móde
 	 *            
 	 */
-	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::1::2::3::4::5::a::h::e::f::g::l::i::\?::b::n::k::j::c::", MAX_STR);
+	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::1::2::3::4::5::6::7::a::h::e::f::g::l::i::\?::b::n::k::j::c::u::", MAX_STR);
 	/* tie options, ktore maju za sebou : maju povinny argument;
 	 *	ak maju :: tak maju volitelny */
 
@@ -7727,6 +7752,20 @@ short int getArgv(int argc, char **argv){
 						_global_opt_append = NIE;
 					}/* inak ostane _global_opt_APPEND default */
 					Log("opt_append == `%s' (%d)\n", pom_MODL_OPT_APPEND, _global_opt_append);
+					Log("option %c with value `%s'\n", c, optarg); break;
+
+				/* 2008-11-29: pridaný parameter `u' (dátUm) spôsob zapisovania dátumu pre súbory v batch móde */
+				case 'u': /* MODL_OPT_APPEND */
+					if(optarg != NULL){
+						mystrcpy(pom_MODL_OPT_DATE_FORMAT, optarg, SMALL);
+					}
+					if(equals(pom_MODL_OPT_DATE_FORMAT, STR_FULL) || equals(pom_MODL_OPT_DATE_FORMAT, "1")){
+						_global_opt_export_date_format = EXPORT_DATE_FULL;
+					}
+					else if(equals(pom_MODL_OPT_DATE_FORMAT, STR_SIMPLE) || equals(pom_MODL_OPT_DATE_FORMAT, "0")){
+						_global_opt_export_date_format = EXPORT_DATE_SIMPLE;
+					}/* inak ostane _global_opt_export_date_format default */
+					Log("opt_append == `%s' (%d)\n", pom_MODL_OPT_DATE_FORMAT, _global_opt_export_date_format);
 					Log("option %c with value `%s'\n", c, optarg); break;
 
 				case 'q': /* QUERY_TYPE */

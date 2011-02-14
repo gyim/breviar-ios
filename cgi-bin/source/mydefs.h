@@ -23,6 +23,7 @@
 /*   2005-07-27a.D. | pridane HTML_SPAN_RED_SMALL              */
 /*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám          */
 /*   2006-08-18a.D. | zmena int na short int (staèí 32tis.)    */
+/*   2008-11-29a.D. | pridané rôzne možnosti batch exportu     */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -59,7 +60,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2008-10-31"
+#define BUILD_DATE "2008-11-29"
 
 #define BYTES 250
 #define SMALL 80
@@ -410,6 +411,14 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_CSS "c"
 #endif
 
+/* 2008-11-29: Pridané: spôsob zapisovania dátumu pre súbory v batch móde */
+#define MODL_OPT_DATE_FORMAT 41
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPT_DATE_FORMAT "MODL_OPT_DATE_FORMAT"
+#else
+	#define STR_MODL_OPT_DATE_FORMAT "u"
+#endif
+
 
 /* global */
 #define QUERY_TYPE	20
@@ -482,6 +491,16 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 /* option 5, 2003-08-06, upravena 2003-08-13 */
 #define MODL_CEZ_DEN_ZALMY_ZO_DNA         0
 #define MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA  1
+
+/* 2008-11-29: pridané rôzne možnosti batch exportu */
+#define	EXPORT_DATE_SIMPLE 0
+#define	EXPORT_DATE_FULL   1
+
+#define STR_SIMPLE "simple"
+#define STR_FULL   "full"
+
+#define FILENAME_EXPORT_DATE_SIMPLE "%.2d%.2d%.2d"
+#define FILENAME_EXPORT_DATE_FULL   "%.4d-%.2d-%.2d"
 
 #endif /*__MYDEFS_H_*/
 
