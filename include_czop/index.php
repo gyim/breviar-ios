@@ -7,11 +7,11 @@ header("Last-Modified:".gmdate("D, d M Y H:i:s")." GMT");
 	<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
 	<meta name="Author" content="Juraj Videky">
 	<link rel="stylesheet" type="text/css" href="../breviar.css">
-	<title>Zoznam súborov v adresári</title>
+	<title>Seznam souborů v adresáři</title>
 </head>
 <body>
 
-<h2>Seznam souborů v adresáři <tt>include</tt></h2>
+<h2>Seznam souborů v adresáři <tt>include_czop</tt></h2>
 
 <?
 /**
@@ -64,7 +64,7 @@ echo "\n</table>";
 
 <br>
 <hr>
-<center><font size=-1>© 1999-2007 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a></font></center>
+<center><font size=-1>© 1999-2008 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a></font></center>
 
 </body>
 </html>
