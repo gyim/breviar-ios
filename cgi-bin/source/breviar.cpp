@@ -4614,6 +4614,124 @@ void _main_formular(int den, int mesiac, int rok, int denvt){
 
 }
 
+/* 2006-02-10: nov˝ define; pouûÌva premennÈ int i, p */
+#define _parsuj_parameter_MODLITBA {\
+	/* rozparsovanie parametra modlitba */\
+	Log("/* rozparsovanie parametra modlitba */\n");\
+	if(equals(modlitba, STR_EMPTY))\
+		p = MODL_NEURCENA;\
+	else if(equals(modlitba, STR_MODL_DETAILY))\
+		p = MODL_DETAILY;\
+/*	else if(equals(modlitba, STR_MODL_INVITATORIUM))\
+		p = MODL_INVITATORIUM;*/\
+	else if(equals(modlitba, STR_MODL_RANNE_CHVALY))\
+		p = MODL_RANNE_CHVALY;\
+	/* 2003-08-11 pridana modlitba posvatneho citania */\
+	else if(equals(modlitba, STR_MODL_POSV_CITANIE))\
+		p = MODL_POSV_CITANIE;\
+	/* 2003-07-15 pridane modlitby cez den */\
+	else if(equals(modlitba, STR_MODL_PREDPOLUDNIM))\
+		p = MODL_PREDPOLUDNIM;\
+	else if(equals(modlitba, STR_MODL_NAPOLUDNIE))\
+		p = MODL_NAPOLUDNIE;\
+	else if(equals(modlitba, STR_MODL_POPOLUDNI))\
+		p = MODL_POPOLUDNI;\
+	else if(equals(modlitba, STR_MODL_VESPERY))\
+		p = MODL_VESPERY;\
+/*	else if(equals(modlitba, STR_MODL_KOMPLETORIUM))\
+		p = MODL_KOMPLETORIUM; */\
+	else\
+		p = MODL_NEURCENA;\
+	/* este treba skontrolovat, ci nazov modlitby nie je\
+	 * string ...azov_modlitby[...] */\
+	if(p == MODL_NEURCENA){\
+		/* postupne porovnavame s troma konstantami,\
+		 * nazov_[modlitby|Modlitby|MODLITBY],\
+		 * a to pre konstanty MODL_INVITATORIUM -- MODL_DETAILY (vratane)\
+		 */\
+		for(i = MODL_INVITATORIUM; i <= MODL_DETAILY; i++){\
+			if(equals(modlitba, nazov_modlitby[i]) || \
+				equals(modlitba, nazov_Modlitby[i]) /*|| \
+				equals(modlitba, nazov_MODLITBY[i])*/){\
+				/* ak je zhoda, potom prirad do p a ukonci `for' */\
+				p = i;\
+				break;\
+			}\
+		}\
+	}\
+}
+
+/* 2006-02-10: nov˝ define; pouûÌva premenn˙ int i */
+#define _rozparsuj_parametre_OPT {\
+	Log("/* rozparsovanie parametrov opt1...opt5 */\n"); \
+ \
+	/* option 1 */ \
+	if(equals(pom_MODL_OPT1, STR_ANO) || equals(pom_MODL_OPT1, "1")){ \
+		_global_opt1 = ANO; \
+	} \
+	else if(equals(pom_MODL_OPT1, STR_NIE) || equals(pom_MODL_OPT1, "0")){ \
+		_global_opt1 = NIE; \
+	}/* inak ostane _global_opt1 default */ \
+	Log("opt1 == `%s' (%d)\n", pom_MODL_OPT1, _global_opt1); \
+ \
+	/* option 2 */ \
+	if(equals(pom_MODL_OPT2, STR_MODL_ZALMY_ZO_DNA) || equals(pom_MODL_OPT2, "0")){ \
+		_global_opt2 = MODL_ZALMY_ZO_DNA; \
+	} \
+	else if(equals(pom_MODL_OPT2, STR_MODL_ZALMY_ZO_SV) || equals(pom_MODL_OPT2, "1")){ \
+		_global_opt2 = MODL_ZALMY_ZO_SV; \
+	}/* inak ostane _global_opt2 default - upravena copy-paste chyba; 2005-03-22 */ \
+	Log("opt2 == `%s' (%d)\n", pom_MODL_OPT2, _global_opt2); \
+ \
+	/* option 3 */ \
+	i = atoi(pom_MODL_OPT3); \
+	/* povodne pre debuggovanie v DOSe, potom sa ukazalo, ze je to uzitocne \
+	 * aj pod linuxom (v ostrej prevadzke); 18/02/2000A.D. \
+	 * predpokladam, ze tento parameter moze byt \
+	 * zadany eventualne cislom (teda retazcom, kt. hodnota pri konverzii \
+	 * na int je int, urcujuci opt3 \
+	 */ \
+	if((i > MODL_SPOL_CAST_NEBRAT) || (i <= 0)){ \
+		i = 0; \
+		/* ide o znakovy retazec nekonvertovatelny na cislo */ \
+	} \
+	else{ \
+		mystrcpy(pom_MODL_OPT3, nazov_spolc[i], SMALL); \
+		/* ak je zadane cislo spravne, tak i bude spravny int \
+		 * a pom_MODL_OPT3 bude spravny char* */ \
+	} \
+	Log("opt3: i == %d\n", i); \
+	while(i <= MODL_SPOL_CAST_NEBRAT){ \
+		if(equals(pom_MODL_OPT3, nazov_spolc[i])){ \
+			_global_opt3 = i; \
+			break; \
+		} \
+		i++; \
+	} \
+	if(i > MODL_SPOL_CAST_NEBRAT){ \
+		_global_opt3 = MODL_SPOL_CAST_NEURCENA; \
+	} \
+	Log("opt3 == `%s' (%d)\n", pom_MODL_OPT3, _global_opt3); \
+ \
+	/* option 4 */ \
+	if(equals(pom_MODL_OPT4, STR_ANO) || equals(pom_MODL_OPT4, "1")){ /* 2003-07-08 opravene z "4" na "1" */ \
+		_global_opt4 = ANO; \
+	} \
+	else if(equals(pom_MODL_OPT4, STR_NIE) || equals(pom_MODL_OPT4, "0")){ \
+		_global_opt4 = NIE; \
+	}/* inak ostane _global_opt4 default */ \
+	Log("opt4 == `%s' (%d)\n", pom_MODL_OPT4, _global_opt4); \
+ \
+	/* option 5, pridana 2003-08-12, upravena 2003-08-13 */ \
+	if(equals(pom_MODL_OPT5, STR_MODL_CEZ_DEN_ZALMY_ZO_DNA) || equals(pom_MODL_OPT5, "0")){ \
+		_global_opt5 = MODL_CEZ_DEN_ZALMY_ZO_DNA; \
+	} \
+	else if(equals(pom_MODL_OPT5, STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA) || equals(pom_MODL_OPT5, "1")){ \
+		_global_opt5 = MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA; \
+	}/* inak ostane _global_opt5 default */ \
+	Log("opt5 == `%s' (%d)\n", pom_MODL_OPT5, _global_opt5); \
+}
+
 /*---------------------------------------------------------------------*/
 /* _main_rozbor_dna(char *, char *, char *, char *, char *)
  *
@@ -4627,9 +4745,9 @@ void _main_formular(int den, int mesiac, int rok, int denvt){
 void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *poradie_svaty){
 	int heading_written = 0;
 	char pom[MAX_STR];
-	Log("-- rozbor_dna(char *, char *, char *, char *, char *): begin (%s, %s, %s, %s, %s)\n",
+	Log("-- _main_rozbor_dna(char *, char *, char *, char *, char *): begin (%s, %s, %s, %s, %s)\n",
 		den, mesiac, rok, modlitba, poradie_svaty);
-	int d, m, r, p, s;
+	int d, m, r, p, s, i;
 	int pm, pr; /* pomocny mesiac, pomocny rok */
 
 	/* rozparsovanie parametrov den, mesiac, rok, svaty */
@@ -4644,119 +4762,13 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 	Log("sv == `%s' (%d)\n", poradie_svaty, s);
 
 	/* rozparsovanie parametra modlitba */
-	Log("/* rozparsovanie parametra modlitba */\n");
-	if(equals(modlitba, STR_EMPTY))
-		p = MODL_NEURCENA;
-	else if(equals(modlitba, STR_MODL_DETAILY))
-		p = MODL_DETAILY;
-/*	else if(equals(modlitba, STR_MODL_INVITATORIUM))
-		p = MODL_INVITATORIUM;*/
-	else if(equals(modlitba, STR_MODL_RANNE_CHVALY))
-		p = MODL_RANNE_CHVALY;
-	/* 2003-08-11 pridana modlitba posvatneho citania */
-	else if(equals(modlitba, STR_MODL_POSV_CITANIE))
-		p = MODL_POSV_CITANIE;
-	/* 2003-07-15 pridane modlitby cez den */
-	else if(equals(modlitba, STR_MODL_PREDPOLUDNIM))
-		p = MODL_PREDPOLUDNIM;
-	else if(equals(modlitba, STR_MODL_NAPOLUDNIE))
-		p = MODL_NAPOLUDNIE;
-	else if(equals(modlitba, STR_MODL_POPOLUDNI))
-		p = MODL_POPOLUDNI;
-	else if(equals(modlitba, STR_MODL_VESPERY))
-		p = MODL_VESPERY;
-/*	else if(equals(modlitba, STR_MODL_KOMPLETORIUM))
-		p = MODL_KOMPLETORIUM; */
-	else
-		p = MODL_NEURCENA;
-	/* este treba skontrolovat, ci nazov modlitby nie je
-	 * string ...azov_modlitby[...] */
-	if(p == MODL_NEURCENA){
-		/* postupne porovnavame s troma konstantami,
-		 * nazov_[modlitby|Modlitby|MODLITBY],
-		 * a to pre konstanty MODL_INVITATORIUM -- MODL_DETAILY (vratane)
-		 */
-		for(int i = MODL_INVITATORIUM; i <= MODL_DETAILY; i++){
-			if(equals(modlitba, nazov_modlitby[i]) ||
-				equals(modlitba, nazov_Modlitby[i]) /*||
-				equals(modlitba, nazov_MODLITBY[i])*/){
-				/* ak je zhoda, potom prirad do p a ukonci `for' */
-				p = i;
-				break;
-			}
-		}
-	}
+	_parsuj_parameter_MODLITBA;
+
 	_global_modlitba = p;
 	Log("modl == %s (%d, %s) -- priradene do _global_modlitba\n", modlitba, p, nazov_modlitby[p]);
 
-	/* rozparsovanie parametrov opt1...opt5 - uz ich je viac, 2005-03-22 */
-	Log("/* rozparsovanie parametrov opt1...opt5 */\n");
-
-	/* option 1 */
-	if(equals(pom_MODL_OPT1, STR_ANO) || equals(pom_MODL_OPT1, "1")){
-		_global_opt1 = ANO;
-	}
-	else if(equals(pom_MODL_OPT1, STR_NIE) || equals(pom_MODL_OPT1, "0")){
-		_global_opt1 = NIE;
-	}/* inak ostane _global_opt1 default */
-	Log("opt1 == `%s' (%d)\n", pom_MODL_OPT1, _global_opt1);
-
-	/* option 2 */
-	if(equals(pom_MODL_OPT2, STR_MODL_ZALMY_ZO_DNA) || equals(pom_MODL_OPT2, "0")){
-		_global_opt2 = MODL_ZALMY_ZO_DNA;
-	}
-	else if(equals(pom_MODL_OPT2, STR_MODL_ZALMY_ZO_SV) || equals(pom_MODL_OPT2, "1")){
-		_global_opt2 = MODL_ZALMY_ZO_SV;
-	}/* inak ostane _global_opt2 default - upravena copy-paste chyba; 2005-03-22 */
-	Log("opt2 == `%s' (%d)\n", pom_MODL_OPT2, _global_opt2);
-
-	/* option 3 */
-	int i = atoi(pom_MODL_OPT3);
-	/* povodne pre debuggovanie v DOSe, potom sa ukazalo, ze je to uzitocne
-	 * aj pod linuxom (v ostrej prevadzke); 18/02/2000A.D.
-	 * predpokladam, ze tento parameter moze byt
-	 * zadany eventualne cislom (teda retazcom, kt. hodnota pri konverzii
-	 * na int je int, urcujuci opt3
-	 */
-	if((i > MODL_SPOL_CAST_NEBRAT) || (i <= 0)){
-		i = 0;
-		/* ide o znakovy retazec nekonvertovatelny na cislo */
-	}
-	else{
-		mystrcpy(pom_MODL_OPT3, nazov_spolc[i], SMALL);
-		/* ak je zadane cislo spravne, tak i bude spravny int
-		 * a pom_MODL_OPT3 bude spravny char* */
-	}
-	Log("opt3: i == %d\n", i);
-	while(i <= MODL_SPOL_CAST_NEBRAT){
-		if(equals(pom_MODL_OPT3, nazov_spolc[i])){
-			_global_opt3 = i;
-			break;
-		}
-		i++;
-	}
-	if(i > MODL_SPOL_CAST_NEBRAT){
-		_global_opt3 = MODL_SPOL_CAST_NEURCENA;
-	}
-	Log("opt3 == `%s' (%d)\n", pom_MODL_OPT3, _global_opt3);
-
-	/* option 4 */
-	if(equals(pom_MODL_OPT4, STR_ANO) || equals(pom_MODL_OPT4, "1")){ /* 2003-07-08 opravene z "4" na "1" */
-		_global_opt4 = ANO;
-	}
-	else if(equals(pom_MODL_OPT4, STR_NIE) || equals(pom_MODL_OPT4, "0")){
-		_global_opt4 = NIE;
-	}/* inak ostane _global_opt4 default */
-	Log("opt4 == `%s' (%d)\n", pom_MODL_OPT4, _global_opt4);
-
-	/* option 5, pridana 2003-08-12, upravena 2003-08-13 */
-	if(equals(pom_MODL_OPT5, STR_MODL_CEZ_DEN_ZALMY_ZO_DNA) || equals(pom_MODL_OPT5, "0")){
-		_global_opt5 = MODL_CEZ_DEN_ZALMY_ZO_DNA;
-	}
-	else if(equals(pom_MODL_OPT5, STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA) || equals(pom_MODL_OPT5, "1")){
-		_global_opt5 = MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA;
-	}/* inak ostane _global_opt5 default */
-	Log("opt5 == `%s' (%d)\n", pom_MODL_OPT5, _global_opt5);
+	/* rozparsovanie parametrov opt1...opt5, 2005-03-22; presunutÈ do define 2006-02-10 */
+	_rozparsuj_parametre_OPT;
 
 	/* option a (append), pridana 2003-07-08 - nastavi sa v getArgv(); */
 
@@ -4985,12 +4997,17 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
  *
  * historicka poznamka: kedysi sa volala dnes(); potom prazdny_formular();
  *
+ * 2006-02-10: pridan· moûnosù priamo generovaù modlitbu,
+ *             preto s˙ vstupom aj dve premennÈ podobne ako je to v _main_rozbor_dna
+ *
  */
-void _main_dnes(void){
+void _main_dnes(char *modlitba, char *poradie_svaty){
 	time_t timer;
 	struct tm dnes;
 	long jd_dnes;
 	char pom[MAX_STR];
+
+	Log("-- _main_dnes(char *, char *): begin (%s, %s)\n", modlitba, poradie_svaty);
 
 	/* zisti denny cas */
 	timer = time(NULL);
@@ -5005,17 +5022,6 @@ void _main_dnes(void){
 	/* juliansky datum */
 	jd_dnes = JD(dnes.tm_mday, dnes.tm_mon, dnes.tm_year);
 
-	/* vypis */
-	Log("/* teraz vypisujem heading 1, datum %d. %s %d */\n",
-		dnes.tm_mday, nazov_mesiaca[dnes.tm_mon - 1], dnes.tm_year);
-	sprintf(pom, "%d. %s %d",
-		dnes.tm_mday, nazov_mesiaca[dnes.tm_mon - 1], dnes.tm_year);
-	_export_heading_center(pom);
-	Export("Dnes je %d. deÚ v roku, <a href=\"%s%s\">juli·nsky d·tum</a> JD = %ld.\n<br>\n",
-		dnes.tm_yday,
-		(_global_linky == ANO)? HTTP_ADDRESS: MESSAGE_FOLDER,
-		FILE_JULIANSKY_DATUM,
-		jd_dnes);
 	/* dnes.tm_wday == 0--6 (0==sunday, nedela) */
 
 	/* dalej rozoberiem den a vypisem vysledok */
@@ -5024,19 +5030,45 @@ void _main_dnes(void){
 	datum.mesiac = dnes.tm_mon;
 	analyzuj_rok(dnes.tm_year); /* vysledok da do _global_r */
 
-	_global_modlitba = MODL_NEURCENA;
-	/* pridane 21/02/2000A.D. -- totiz, ked to tu nebolo, tak priradil
-	 * niekde neskor do `_global_den' premennu `_global_svaty1' atd.
-	 * (jednoducho 'menim, lebo [...] ma prednost' sa urobi jedine v pripade
-	 *  generovania modlitby; v opacnom pripade nie)
-	 */
+	int s, p, i;
 
-	_rozbor_dna(datum, dnes.tm_year);
+	s = atoi(poradie_svaty); /* ak je viac svatych, ktory z nich (1--3) */
+	Log("sv == `%s' (%d)\n", poradie_svaty, s);
 
-	_export_rozbor_dna(EXPORT_DNA_DNES);
+	/* rozparsovanie parametra modlitba */
+	_parsuj_parameter_MODLITBA;
 
-	/* 2006-02-02: cel˝ zvyön˝ formul·r presunut˝ do samostatnej funkcie */
-	_main_formular(datum.den, datum.mesiac, dnes.tm_year, dnes.tm_wday);
+	_global_modlitba = p;
+	Log("modl == %s (%d, %s) -- priradene do _global_modlitba\n", modlitba, p, nazov_modlitby[p]);
+
+	/* rozparsovanie parametrov opt1...opt5; v define 2006-02-10 podæa _main_rozbor_dna */
+	_rozparsuj_parametre_OPT;
+
+	/* vypis */
+	Log("/* teraz vypisujem heading 1, datum %d. %s %d */\n",
+		dnes.tm_mday, nazov_mesiaca[dnes.tm_mon - 1], dnes.tm_year);
+	sprintf(pom, "%d. %s %d",
+		dnes.tm_mday, nazov_mesiaca[dnes.tm_mon - 1], dnes.tm_year);
+	_export_heading_center(pom);
+
+	/* 2006-02-10: v˝pis juli·nskeho d·tumu, len ak nie je urËen· modlitba */
+	if(_global_modlitba == MODL_NEURCENA){
+		Export("Dnes je %d. deÚ v roku, <a href=\"%s%s\">juli·nsky d·tum</a> JD = %ld.\n<br>\n",
+			dnes.tm_yday,
+			(_global_linky == ANO)? HTTP_ADDRESS: MESSAGE_FOLDER,
+			FILE_JULIANSKY_DATUM,
+			jd_dnes);
+		_rozbor_dna(datum, dnes.tm_year);
+		_export_rozbor_dna(EXPORT_DNA_DNES);
+		/* 2006-02-02: cel˝ zvyön˝ formul·r presunut˝ do samostatnej funkcie */
+		_main_formular(datum.den, datum.mesiac, dnes.tm_year, dnes.tm_wday);
+	}
+	else{
+		/* ak je urËen· modlitba, postupujeme rovnako ako v _main_rozbor_dna */
+		rozbor_dna_s_modlitbou(datum.den, datum.mesiac, dnes.tm_year, p, s);
+	}
+
+	Log("-- _main_dnes(char *, char *): end\n");
 
 }/* _main_dnes(); */
 
@@ -6785,7 +6817,105 @@ int parseQueryString(void){
 		return FAILURE;
 	}
 
+	Log("\tswitch(query_type)...\n");
 	switch(query_type){
+		case PRM_DNES:{
+			/* 2006-02-10: doplnenÈ kvÙli tomu, aby aj pre PRM_DNES mohla byù modlitba resp. sv‰tec */
+			Log("\tcase PRM_DNES...\n");
+			/* nasleduj˙ca poas·û prevzat· a upraven· podæa PRM_DATUM */
+
+			/* param[1] - kontrolujeme MODLITBA, potom DALSI_SVATY, MODL_OPT1, MODL_OPT2 */
+			if(equals(param[1].name, STR_MODLITBA)){
+				mystrcpy(pom_MODLITBA, param[1].val, SMALL);
+			}
+			else{
+				if(equals(param[1].name, STR_DALSI_SVATY)){
+					mystrcpy(pom_DALSI_SVATY, param[1].val, SMALL);
+				}
+				else{
+					if(equals(param[1].name, STR_MODL_OPT1)){
+						mystrcpy(pom_MODL_OPT1, param[1].val, SMALL);
+					}
+					else{
+						if(equals(param[1].name, STR_MODL_OPT2)){
+							mystrcpy(pom_MODL_OPT2, param[1].val, SMALL);
+						}
+					}
+				}
+			} /* param[1] */
+
+			/* param[2] - kontrolujeme DALSI_SVATY, potom MODLITBA, MODL_OPT1, MODL_OPT2 */
+			if(equals(param[2].name, STR_DALSI_SVATY)){
+				mystrcpy(pom_DALSI_SVATY, param[2].val, SMALL);
+			}
+			else{
+				if(equals(param[2].name, STR_MODLITBA)){
+					mystrcpy(pom_MODLITBA, param[2].val, SMALL);
+				}
+				else{
+					if(equals(param[2].name, STR_MODL_OPT1)){
+						mystrcpy(pom_MODL_OPT1, param[2].val, SMALL);
+					}
+					else{
+						if(equals(param[2].name, STR_MODL_OPT2)){
+							mystrcpy(pom_MODL_OPT2, param[2].val, SMALL);
+						}
+					}
+				}
+			} /* param[2] */
+
+			/* param[3] - kontrolujeme MODL_OPT1, potom MODL_OPT2, MODL_OPT3, MODL_OPT4 */
+			if(equals(param[3].name, STR_MODL_OPT1)){
+				mystrcpy(pom_MODL_OPT1, param[3].val, SMALL);
+			}
+			else{
+				if(equals(param[3].name, STR_MODL_OPT2)){
+					mystrcpy(pom_MODL_OPT2, param[3].val, SMALL);
+				}
+				else{
+					if(equals(param[3].name, STR_MODL_OPT3)){
+						mystrcpy(pom_MODL_OPT3, param[3].val, SMALL);
+					}
+					else{
+						if(equals(param[3].name, STR_MODL_OPT4)){
+							mystrcpy(pom_MODL_OPT4, param[3].val, SMALL);
+						}
+					}
+				}
+			} /* param[3] */
+
+			/* param[4] - kontrolujeme MODL_OPT2, potom MODL_OPT3, MODL_OPT4 */
+			if(equals(param[4].name, STR_MODL_OPT2)){
+				mystrcpy(pom_MODL_OPT2, param[4].val, SMALL);
+			}
+			else{
+				if(equals(param[4].name, STR_MODL_OPT3)){
+					mystrcpy(pom_MODL_OPT3, param[4].val, SMALL);
+				}
+				else{
+					if(equals(param[4].name, STR_MODL_OPT4)){
+						mystrcpy(pom_MODL_OPT4, param[4].val, SMALL);
+					}
+				}
+			} /* param[4] */
+
+			/* param[5] - kontrolujeme MODL_OPT3, potom MODL_OPT4 */
+			if(equals(param[5].name, STR_MODL_OPT3)){
+				mystrcpy(pom_MODL_OPT3, param[5].val, SMALL);
+			}
+			else{
+				if(equals(param[5].name, STR_MODL_OPT4)){
+					mystrcpy(pom_MODL_OPT4, param[5].val, SMALL);
+				}
+			} /* param[5] */
+
+			/* param[6] - kontrolujeme MODL_OPT4 */
+			if(equals(param[6].name, STR_MODL_OPT4)){
+				mystrcpy(pom_MODL_OPT4, param[6].val, SMALL);
+			} /* param[6] */
+
+			break; /* case */
+		}
 		case PRM_DETAILY:
 			/* presne to iste co PRM_DATUM s jedinkym rozdielom: co sa tyka
 			 * formularov, prvy (uvodny) formular pre PRM_DATUM vycisti
@@ -6815,6 +6945,10 @@ int parseQueryString(void){
 		 * 8: (opt3) - ktoru `spolocnu cast' (pri sviatkoch svatych) brat
 		 * 9: (opt4) - for future use
 		 * ---------------------------------------------
+		 * 2006-02-10: pridanÈ moûnosti vymenenÈho poradia a nezadania niektor˝ch options
+		 * ----------------------------------------------
+		 * na z·klade dodania case-u pre PRM_DNES
+		 * 
 		 */
 
 			/* premenna DEN - param[1] */
@@ -6850,30 +6984,19 @@ int parseQueryString(void){
 				return FAILURE; /* failure */
 			}
 
-			/* premenna MODLITBA resp. DALSI_SVATY resp. MODL_OPT1/OPT2
-			 * - presnejsie, param[4]
-			 */
+			/* param[4] - kontrolujeme MODLITBA, potom DALSI_SVATY, MODL_OPT1, MODL_OPT2 */
 			if(equals(param[4].name, STR_MODLITBA)){
 				mystrcpy(pom_MODLITBA, param[4].val, SMALL);
 			}
 			else{
-			/* nevadi, ze nebola zadana modlitba, skusime, ci param[4]
-			 * nahodou nie je DALSI_SVATY
-			 */
 				if(equals(param[4].name, STR_DALSI_SVATY)){
 					mystrcpy(pom_DALSI_SVATY, param[4].val, SMALL);
 				}
 				else{
-				/* nevadi, ze nebola zadana modlitba ani dalsi svaty, 
-				 * skusime, ci param[4] nahodou nie je MODL_OPT1
-				 */
 					if(equals(param[4].name, STR_MODL_OPT1)){
 						mystrcpy(pom_MODL_OPT1, param[4].val, SMALL);
 					}
 					else{
-					/* nevadi, ze nebola zadana modlitba ani dalsi svaty ani option1,
-					 * skusime, ci param[4] nahodou nie je MODL_OPT2
-					 */
 						if(equals(param[4].name, STR_MODL_OPT2)){
 							mystrcpy(pom_MODL_OPT2, param[4].val, SMALL);
 						}
@@ -6881,30 +7004,19 @@ int parseQueryString(void){
 				}
 			} /* param[4] */
 
-			/* premenna DALSI_SVATY (resp. MODLITBA alebo MODL_OPT1/OPT2)
-			 * - presnejsie, param[5]
-			 */
+			/* param[5] - kontrolujeme DALSI_SVATY, potom MODLITBA, MODL_OPT1, MODL_OPT2 */
 			if(equals(param[5].name, STR_DALSI_SVATY)){
 				mystrcpy(pom_DALSI_SVATY, param[5].val, SMALL);
 			}
 			else{
-			/* nevadi, ze nebol zadany dalsi svaty, skusime, ci param[5]
-			 * nie je nahodou MODLITBA
-			 */
 				if(equals(param[5].name, STR_MODLITBA)){
 					mystrcpy(pom_MODLITBA, param[5].val, SMALL);
 				}
 				else{
-				/* nevadi, ze nebola zadana modlitba ani dalsi svaty, 
-				 * skusime, ci param[5] nahodou nie je MODL_OPT1
-				 */
 					if(equals(param[5].name, STR_MODL_OPT1)){
 						mystrcpy(pom_MODL_OPT1, param[5].val, SMALL);
 					}
 					else{
-					/* nevadi, ze nebola zadana modlitba ani dalsi svaty, 
-					 * skusime, ci param[5] nahodou nie je MODL_OPT2
-					 */
 						if(equals(param[5].name, STR_MODL_OPT2)){
 							mystrcpy(pom_MODL_OPT2, param[5].val, SMALL);
 						}
@@ -6912,58 +7024,54 @@ int parseQueryString(void){
 				}
 			} /* param[5] */
 
-			/* premenna MODL_OPT1 
-			 * - presnejsie, param[6]
-			 */
+			/* param[6] - kontrolujeme MODL_OPT1, potom MODL_OPT2, MODL_OPT3, MODL_OPT4 */
 			if(equals(param[6].name, STR_MODL_OPT1)){
 				mystrcpy(pom_MODL_OPT1, param[6].val, SMALL);
 			}
 			else{
-				/* nevadi, ze nebola zadana option1 k modlitbe, skusime option2 */
 				if(equals(param[6].name, STR_MODL_OPT2)){
 					mystrcpy(pom_MODL_OPT2, param[6].val, SMALL);
 				}
 				else{
-					/* nevadi, ze nebola zadana option1/option2 k modlitbe, 
-					 * skusime option3 */
 					if(equals(param[6].name, STR_MODL_OPT3)){
 						mystrcpy(pom_MODL_OPT3, param[6].val, SMALL);
 					}
 					else{
-						/* nevadi, ze nebola zadana option1/option2/option3 k modlitbe, 
-						 * skusime option4 */
 						if(equals(param[6].name, STR_MODL_OPT4)){
 							mystrcpy(pom_MODL_OPT4, param[6].val, SMALL);
 						}
 					}
 				}
-			}
-			/* premenna MODL_OPT2
-			 * - presnejsie, param[7]
-			 */
+			} /* param[6] */
+
+			/* param[7] - kontrolujeme MODL_OPT2, potom MODL_OPT3, MODL_OPT4 */
 			if(equals(param[7].name, STR_MODL_OPT2)){
 				mystrcpy(pom_MODL_OPT2, param[7].val, SMALL);
 			}
 			else{
-				/* nevadi, ze nebola zadana option2 k modlitbe */
-			}
+				if(equals(param[7].name, STR_MODL_OPT3)){
+					mystrcpy(pom_MODL_OPT3, param[7].val, SMALL);
+				}
+				else{
+					if(equals(param[7].name, STR_MODL_OPT4)){
+						mystrcpy(pom_MODL_OPT4, param[7].val, SMALL);
+					}
+				}
+			} /* param[7] */
 
-			/* premenna MODL_OPT3
-			 * - presnejsie, param[8]
-			 */
+			/* param[8] - kontrolujeme MODL_OPT3, potom MODL_OPT4 */
 			if(equals(param[8].name, STR_MODL_OPT3)){
 				mystrcpy(pom_MODL_OPT3, param[8].val, SMALL);
 			}
 			else{
-				/* nevadi, ze nebola zadana option3 k modlitbe */
-			}
+				if(equals(param[8].name, STR_MODL_OPT4)){
+					mystrcpy(pom_MODL_OPT4, param[8].val, SMALL);
+				}
+			} /* param[8] */
 
-			/* premenna MODL_OPT4 */
+			/* param[9] - kontrolujeme MODL_OPT4 */
 			if(equals(param[9].name, STR_MODL_OPT4)){
 				mystrcpy(pom_MODL_OPT4, param[9].val, SMALL);
-			}
-			else{
-				/* nevadi, ze nebola zadana option4 k modlitbe */
 			}
 
 			break; /* case */
@@ -7424,18 +7532,18 @@ _main_SIMULACIA_QS:
 
 	_main_LOG_to_Export("query_type == ");
 	switch(query_type){
-		case PRM_UNKNOWN: _main_LOG_to_Export("PRM_UNKNOWN\n"); break;
-		case PRM_TABULKA: _main_LOG_to_Export("PRM_TABULKA\n"); break;
-		case PRM_NONE: _main_LOG_to_Export("PRM_NONE\n"); break;
-		case PRM_DATUM: _main_LOG_to_Export("PRM_DATUM\n"); break;
-		case PRM_DETAILY: _main_LOG_to_Export("PRM_DETAILY\n"); break;
-		case PRM_CEZ_ROK: _main_LOG_to_Export("PRM_CEZ_ROK\n"); break;
-		case PRM_ANALYZA_ROKU: _main_LOG_to_Export("PRM_ANALYZA_ROKU\n"); break;
-		case PRM_SVIATOK: _main_LOG_to_Export("PRM_SVIATOK\n"); break;
-		case PRM_MESIAC_ROKA: _main_LOG_to_Export("PRM_MESIAC_ROKA\n"); break;
-		case PRM_DNES: _main_LOG_to_Export("PRM_DNES\n"); break;
+		case PRM_UNKNOWN:		_main_LOG_to_Export("PRM_UNKNOWN\n"); break;
+		case PRM_TABULKA:		_main_LOG_to_Export("PRM_TABULKA\n"); break;
+		case PRM_NONE:			_main_LOG_to_Export("PRM_NONE\n"); break;
+		case PRM_DATUM:			_main_LOG_to_Export("PRM_DATUM\n"); break;
+		case PRM_DETAILY:		_main_LOG_to_Export("PRM_DETAILY\n"); break;
+		case PRM_CEZ_ROK:		_main_LOG_to_Export("PRM_CEZ_ROK\n"); break;
+		case PRM_ANALYZA_ROKU:	_main_LOG_to_Export("PRM_ANALYZA_ROKU\n"); break;
+		case PRM_SVIATOK:		_main_LOG_to_Export("PRM_SVIATOK\n"); break;
+		case PRM_MESIAC_ROKA:	_main_LOG_to_Export("PRM_MESIAC_ROKA\n"); break;
+		case PRM_DNES:			_main_LOG_to_Export("PRM_DNES\n"); break;
 		/* pridane 2003-07-04, batch mode */
-		case PRM_BATCH_MODE: _main_LOG_to_Export("PRM_BATCH_MODE\n"); break;
+		case PRM_BATCH_MODE:	_main_LOG_to_Export("PRM_BATCH_MODE\n"); break;
 	}
 
 	_main_LOG_to_Export_PARAMS; /* 2003-08-13, dane do #define */
@@ -7522,8 +7630,8 @@ _main_SIMULACIA_QS:
 					_main_LOG_to_Export("spat po skonceni analyza_roku(%s);\n", pom_ANALYZA_ROKU);
 					break;
 				case PRM_DNES:
-					_main_LOG_to_Export("spustam _main_dnes();\n");
-					_main_dnes();
+					_main_LOG_to_Export("spustam _main_dnes(%s, %s);\n", pom_MODLITBA, pom_DALSI_SVATY);
+					_main_dnes(pom_MODLITBA, pom_DALSI_SVATY);
 					_main_LOG_to_Export("spat po skonceni _main_dnes();\n");
 					break;
 				case PRM_TABULKA:
