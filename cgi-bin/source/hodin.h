@@ -448,6 +448,7 @@ const char *nazov_slavenia_lokal[] =
 ,"jen v posvìcených kostelích"
 ,"v plzeòské diecézi"
 ,"ve Slezsku svátek"
+,"v èeskobudìjovické diecézi památka"
 };
 
 const char *nazov_farby_jazyk[POCET_FARIEB + 1][POCET_JAZYKOV + 1] =

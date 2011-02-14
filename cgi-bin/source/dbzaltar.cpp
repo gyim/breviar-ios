@@ -11790,9 +11790,10 @@ label_25_MAR:
 
 							break;
 						}
-						_global_svaty1.typslav = SLAV_SPOMIENKA;
-						_global_svaty1.smer = 10;
-						/* pôvodne to bolo že len v èb spomienka */
+						/* 2008-06-19: zmenené, povinná spomienka len v èb-diecéze */
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_CESKE_BUDEJOVICE_PAMATKA;
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
 						mystrcpy(_global_svaty1.meno, text_JUN_19_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
