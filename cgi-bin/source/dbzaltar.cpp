@@ -1,90 +1,90 @@
-/***************************************************************/
-/*                                                             */
-/* dbzaltar.cpp                                                */
-/* (c)1999-2007 | Juraj Videky | videky@breviar.sk             */
-/*                                                             */
-/* description | program tvoriaci stranky pre liturgiu hodin   */
-/* document history                                            */
-/*   09/02/2000A.D. | urobene .cpp kvoli dvojakosti funkcie    */
-/*                    sviatky_svatych(); a inym veciam         */
-/*   23/02/2000A.D. | ponechal som tu "stare", zle pokusy,     */
-/*                    oznacene WRONG_23_02_2000                */
-/*   05/04/2000A.D. | uz su dokoncene vsetky sviatky svatych.  */
-/*                    odstranil som label_... pre slavnosti    */
-/*                    obdobia cez rok, lebo tam nevadi, ze     */
-/*                    slavnost padne na nedelu, lebo ma vyssiu */
-/*                    prioritu                                 */
-/*   29/03/2000A.D. | ukoncene vsetky mesiace MES_JAN - MES_DEC*/
-/*   06/09/2001A.D. | tento popis                              */
-/*   07/09/2001A.D. | opravene: sv. Brigity (sviatok)          */
-/*   26/09/2001A.D. | opravene: sv. Terezie Benedikty (sviatok)*/
-/*   2003-06-30a.D. | zmeny pre spomienku neposkvrn.srdca PM   */
-/*   2003-08-11a.D. | -Wall upozornila na / * within comments  */
-/*   2003-08-13a.D. | odstranene DEBUG_MODLITBA_CEZ_DEN        */
-/*                  - zaltar() doplnena o modlitbu cez den     */
-/*                  - nastavovanie doplnkovej psalmodie        */
-/*                  - #define presunute do header-u dbzaltar.h */
-/*   2003-08-21a.D. | pokusy s posvatnymi citaniami (zalmy)    */
-/*   2003-10-07a.D. | zmena v _SET_SPOLOCNE_VECI_NEDELA        */
-/*   2003-11-20a.D. | zmeny pre posvatne citanie (adv1)        */
-/*   2003-12-07a.D. | posvatne citanie (adv2)                  */
-/*   2004-04-28a.D. | posvatne citanie (cez rok)               */
-/*                  - rozsafne strcpy zmenene na mystrcpy      */
-/*   2004-08-14a.D. | Sviatok Sv. Jany Frantiöky de Chantal    */
-/*                    presunuty z 12. decembra na 12. augusta  */
-/*                  - Sviatok Bl. Zdenky Schelingovej,         */
-/*                    panny a muËenice, ako 2. moznost 30.jula */
-/*   2004-08-31a.D. | nastavenie modlitby pre posv.cit.o.c.r.  */
-/*   2004-09-03a.D. | zmena v modlitbe (na nedelnu kolektu)    */
-/*   2004-09-23a.D. | pridany sv. pater Pio                    */
-/*   2005-03-26a.D. | pridane posvatne citania (Trencin)       */
-/*   2005-03-27a.D. | CHAR_MODL_* z funkcie pismenko_modlitby  */
-/*                    do liturgia.h                            */
-/*                  - upravy v psalmodii pre posvatne citanie  */
-/*   2005-07-22a.D. | pokus o doplnenie udajov k posv.cit.svsv */
-/*   2005-07-27a.D. | posv. ËÌtania pre vlastnÈ Ëasti sv‰t˝ch  */
-/*   2005-08-05a.D. | 1. ËÌtanie je zv‰Ëöa odliönÈ pre spoloË. */
-/*                    Ëasti sviatkov sv‰t˝ch nasledovne:       */
-/*                    - I. zv.(advent, vianoce) a II. zv.(pÙst)*/
-/*                    - II. zv‰zok (veæk· noc)                 */
-/*                    - III. a IV. zv‰zok (obdobie cez rok)    */
-/*   2005-08-08a.D. | dokonËenÈ vlastnÈ Ëasti augusta          */
-/*   2005-10-13a.D. | dokonË. vlastnÈ Ëasti sept-okt (len kÛd) */
-/*   2005-11-20a.D. | zaË. modlitba cez deÚ, adv1              */
-/*   2005-11-24a.D. | skorektnenÈ: su_zalmy_nedela1tyzden      */
-/*   2006-01-19a.D. | dokonËen˝ janu·r a febru·r, sv.muûov     */
-/*   2006-01-19a.D. | nedokonËenÈ: "2006-01-19_LABEL"          */
-/*   2006-01-24a.D. | pridanÈ zaltar_zvazok()                  */
-/*   2006-01-25a.D. | dokonËenÈ pÙstne obdobie (mcd+posv.ËÌt.) */
-/*   2006-01-25a.D. | su_zalmy_nedela1tyzden > ZALMY1NE_FIX    */
-/*   2006-02-02a.D. | pridanÈ posv. ËÌtania pre æs PM v sobotu */
-/*   2006-02-04a.D. | su_zalmy_vlastne > ZALMY_ZO_SVIATKU   */
-/*   2006-02-05a.D. | dokonËenÈ vianoËnÈ obdobie I (ËÌt.+mcd)  */
-/*   2006-02-07a.D. | ZALTAR_... pre funkciu zaltar_zvazok();  */
-/*                  - doplnenÈ modl.cez deÚ - sviatky sv‰t˝ch  */
-/*   2006-08-07a.D. | pridanÈ sv. muûov/ûien, Ëo ûili v manû.  */
-/*   2006-08-08a.D. | skutky mil., rehoænÌkov, vychov·vateæov  */
-/*   2006-08-18a.D. | zmena int na short int (staËÌ 32tis.)    */
-/*   2006-08-19a.D. | pridanie liturgickej farby               */
-/*   2006-09-07a.D. | dokonËen· lokaliz·cia mesiacov JAN-AUG   */
-/*   2006-09-12a.D. | dokonËen· lokaliz·cia mesiaca SEP+opravy */
-/*   2006-09-13a.D. | dokonËen· lokaliz·cia mesiacov OKT+NOV   */
-/*   2006-12-04a.D. | oprava hymnu pre Ëesk˝ komplet·¯         */
-/*   2007-07-17a.D. | oprava hymnu mcd pre niektorÈ sl·vnosti  */
-/*   2007-08-31a.D. | oprava 30.AUG na sviatok                 */
-/*   2007-10-02a.D. | dokonËenie zohæadnenia smernÌc pre sviat-*/
-/*                    ky sv‰t˝ch (rozlÌöenie sl·v+sviat/ostat.)*/
-/*   2007-10-23a.D. | dokonËenie zohæadnenia smernÌc pre       */
-/*                    sviatky sv‰t˝ch (kresp, prosby pre rch/v)*/
-/*   2007-11-14a.D. | zjednoduöenie define-ov pre sviatky P·na */
-/*                    zadefinovanÈ "_vlastne_slavenie_"        */
-/*                  - dokonËenie invitatÛria pre lit. obdobia  */
-/*                                                             */
-/*                                                             */
-/* notes |                                                     */
-/*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
-/*                                                             */
-/***************************************************************/
+/************************************************************************/
+/*                                                                      */
+/* dbzaltar.cpp                                                         */
+/* (c)1999-2007 | Juraj Videky | videky@breviar.sk                      */
+/*                                                                      */
+/* description | program tvoriaci stranky pre liturgiu hodin            */
+/* document history                                                     */
+/*   09/02/2000A.D. | urobene .cpp kvoli dvojakosti funkcie             */
+/*                    sviatky_svatych(); a inym veciam                  */
+/*   23/02/2000A.D. | ponechal som tu "stare", zle pokusy,              */
+/*                    oznacene WRONG_23_02_2000                         */
+/*   05/04/2000A.D. | uz su dokoncene vsetky sviatky svatych.           */
+/*                    odstranil som label_... pre slavnosti             */
+/*                    obdobia cez rok, lebo tam nevadi, ze              */
+/*                    slavnost padne na nedelu, lebo ma vyssiu prioritu */
+/*   29/03/2000A.D. | ukoncene vsetky mesiace MES_JAN - MES_DEC         */
+/*   06/09/2001A.D. | tento popis                                       */
+/*   07/09/2001A.D. | opravene: sv. Brigity (sviatok)                   */
+/*   26/09/2001A.D. | opravene: sv. Terezie Benedikty (sviatok)         */
+/*   2003-06-30a.D. | zmeny pre spomienku neposkvrn.srdca PM            */
+/*   2003-08-11a.D. | -Wall upozornila na / * within comments           */
+/*   2003-08-13a.D. | odstranene DEBUG_MODLITBA_CEZ_DEN                 */
+/*                  - zaltar() doplnena o modlitbu cez den              */
+/*                  - nastavovanie doplnkovej psalmodie                 */
+/*                  - #define presunute do header-u dbzaltar.h          */
+/*   2003-08-21a.D. | pokusy s posvatnymi citaniami (zalmy)             */
+/*   2003-10-07a.D. | zmena v _SET_SPOLOCNE_VECI_NEDELA                 */
+/*   2003-11-20a.D. | zmeny pre posvatne citanie (adv1)                 */
+/*   2003-12-07a.D. | posvatne citanie (adv2)                           */
+/*   2004-04-28a.D. | posvatne citanie (cez rok)                        */
+/*                  - rozsafne strcpy zmenene na mystrcpy               */
+/*   2004-08-14a.D. | Sviatok Sv. Jany Frantiöky de Chantal             */
+/*                    presunuty z 12. decembra na 12. augusta           */
+/*                  - Sviatok Bl. Zdenky Schelingovej,                  */
+/*                    panny a muËenice, ako 2. moznost 30.jula          */
+/*   2004-08-31a.D. | nastavenie modlitby pre posv.cit.o.c.r.           */
+/*   2004-09-03a.D. | zmena v modlitbe (na nedelnu kolektu)             */
+/*   2004-09-23a.D. | pridany sv. pater Pio                             */
+/*   2005-03-26a.D. | pridane posvatne citania (Trencin)                */
+/*   2005-03-27a.D. | CHAR_MODL_* z funkcie pismenko_modlitby           */
+/*                    do liturgia.h                                     */
+/*                  - upravy v psalmodii pre posvatne citanie           */
+/*   2005-07-22a.D. | pokus o doplnenie udajov k posv.cit.svsv          */
+/*   2005-07-27a.D. | posv. ËÌtania pre vlastnÈ Ëasti sv‰t˝ch           */
+/*   2005-08-05a.D. | 1. ËÌtanie je zv‰Ëöa odliönÈ pre spoloË.          */
+/*                    Ëasti sviatkov sv‰t˝ch nasledovne:                */
+/*                    - I. zv.(advent, vianoce) a II. zv.(pÙst)         */
+/*                    - II. zv‰zok (veæk· noc)                          */
+/*                    - III. a IV. zv‰zok (obdobie cez rok)             */
+/*   2005-08-08a.D. | dokonËenÈ vlastnÈ Ëasti augusta                   */
+/*   2005-10-13a.D. | dokonË. vlastnÈ Ëasti sept-okt (len kÛd)          */
+/*   2005-11-20a.D. | zaË. modlitba cez deÚ, adv1                       */
+/*   2005-11-24a.D. | skorektnenÈ: su_zalmy_nedela1tyzden               */
+/*   2006-01-19a.D. | dokonËen˝ janu·r a febru·r, sv.muûov              */
+/*   2006-01-19a.D. | nedokonËenÈ: "2006-01-19_LABEL"                   */
+/*   2006-01-24a.D. | pridanÈ zaltar_zvazok()                           */
+/*   2006-01-25a.D. | dokonËenÈ pÙstne obdobie (mcd+posv.ËÌt.)          */
+/*   2006-01-25a.D. | su_zalmy_nedela1tyzden > ZALMY1NE_FIX             */
+/*   2006-02-02a.D. | pridanÈ posv. ËÌtania pre æs PM v sobotu          */
+/*   2006-02-04a.D. | su_zalmy_vlastne > ZALMY_ZO_SVIATKU               */          
+/*   2006-02-05a.D. | dokonËenÈ vianoËnÈ obdobie I (ËÌt.+mcd)           */
+/*   2006-02-07a.D. | ZALTAR_... pre funkciu zaltar_zvazok();           */
+/*                  - doplnenÈ modl.cez deÚ - sviatky sv‰t˝ch           */
+/*   2006-08-07a.D. | pridanÈ sv. muûov/ûien, Ëo ûili v manû.           */
+/*   2006-08-08a.D. | skutky mil., rehoænÌkov, vychov·vateæov           */
+/*   2006-08-18a.D. | zmena int na short int (staËÌ 32tis.)             */
+/*   2006-08-19a.D. | pridanie liturgickej farby                        */
+/*   2006-09-07a.D. | dokonËen· lokaliz·cia mesiacov JAN-AUG            */
+/*   2006-09-12a.D. | dokonËen· lokaliz·cia mesiaca SEP+opravy          */
+/*   2006-09-13a.D. | dokonËen· lokaliz·cia mesiacov OKT+NOV            */
+/*   2006-12-04a.D. | oprava hymnu pre Ëesk˝ komplet·¯                  */
+/*   2007-07-17a.D. | oprava hymnu mcd pre niektorÈ sl·vnosti           */
+/*   2007-08-31a.D. | oprava 30.AUG na sviatok                          */
+/*   2007-10-02a.D. | dokonËenie zohæadnenia smernÌc pre sviatky sv‰t˝ch*/
+/*                    (rozlÌöenie sl·v+sviat/ostat.)                    */
+/*   2007-10-23a.D. | dokonËenie zohæadnenia smernÌc pre                */
+/*                    sviatky sv‰t˝ch (kresp, prosby pre rch/v)         */
+/*   2007-11-14a.D. | zjednoduöenie define-ov pre sviatky P·na          */
+/*                    zadefinovanÈ "_vlastne_slavenie_"                 */
+/*                  - dokonËenie invitatÛria pre liturgickÈ obdobia     */
+/*   2007-11-20a.D. | dokonËenie invitatÛria pre spoloËnÈ Ëasti sv‰t˝ch */
+/*                                                                      */
+/*                                                                      */
+/* notes |                                                              */
+/*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                 */
+/*                                                                      */
+/************************************************************************/
 
 //#define DETAIL_LOG_SVATY /* 22/02/2000A.D. */
 //#define DETAIL_LOG_GLOBAL_DEN /* 22/02/2000A.D. */
@@ -7000,6 +7000,13 @@ short int _spol_cast_je_panna(_struct_sc sc){
 /* 2007-11-14: pridanÈ pre invitatÛrium */
 #define	_spolocna_cast_antifona_inv		_vlastna_cast_antifona_inv
 
+/* 2007-11-19: pridanÈ pre invitatÛrium, ak je antifÛn viacero, napr. pre PM, ofÌcium na posviacku chr·mu a pod. */
+#define _spolocna_cast_antifona_inv_viac(kolko) {\
+	sprintf(_anchor, "%s%c%s%d", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1, (_global_den.den MOD kolko) + 1);\
+	if(modlitba == MODL_POSV_CITANIE){_set_antifona1(modlitba, _file_pc, _anchor);}\
+	else{_set_antifona1(modlitba, _file, _anchor);}\
+	set_LOG_svsv;}
+
 /* ... 2005-07-26: in· je tieû spoloËn· Ëasù pre 1. resp. 2. ËÌtanie ... */
 
 /* 1. ËÌtanie */
@@ -7372,6 +7379,10 @@ void _set_spolocna_cast(short int a, _struct_sc sc){
 
 		Log("/* spolocna cast na sviatky apostolov */\n");
 
+		/* invitatÛrium; 2007-11-20 */
+		modlitba = MODL_INVITATORIUM;
+		_spolocna_cast_antifona_inv;
+
 		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
 		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV)){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX */
@@ -7467,6 +7478,10 @@ void _set_spolocna_cast(short int a, _struct_sc sc){
 		}
 		Log("  _anchor_zvazok == %s\n", _anchor_zvazok);
 
+		/* invitatÛrium; 2007-11-20 */
+		modlitba = MODL_INVITATORIUM;
+		_spolocna_cast_antifona_inv;
+
 		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
 		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV)){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX */
@@ -7538,6 +7553,10 @@ void _set_spolocna_cast(short int a, _struct_sc sc){
 		}
 		/* ...a teraz vlastnu cast ucitelov cirkvi */
 
+		/* invitatÛrium; 2007-11-20 */
+		modlitba = MODL_INVITATORIUM;
+		_spolocna_cast_antifona_inv;
+
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
 		_spolocna_cast_hymnus;
@@ -7604,6 +7623,10 @@ void _set_spolocna_cast(short int a, _struct_sc sc){
 			strcat(_anchor_zvazok, VELKONOCNA_PRIPONA);
 		}
 		Log("  _anchor_zvazok == %s\n", _anchor_zvazok);
+
+		/* invitatÛrium; 2007-11-20 */
+		modlitba = MODL_INVITATORIUM;
+		_spolocna_cast_antifona_inv;
 
 		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
@@ -7673,6 +7696,11 @@ void _set_spolocna_cast(short int a, _struct_sc sc){
 		}
 		Log("  _anchor_zvazok == %s\n", _anchor_zvazok);
 
+		/* invitatÛrium; 2007-11-20 */
+		modlitba = MODL_INVITATORIUM;
+		_spolocna_cast_antifona_inv;
+
+		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
 		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV)){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX */
 			Log("  _set_zalmy_sviatok_muc(%s, 2)...\n", nazov_modlitby(modlitba));
@@ -7900,6 +7928,10 @@ void _set_spolocna_cast(short int a, _struct_sc sc){
 		}
 		/* ...a teraz vlastnu cast reholnikov */
 
+		/* invitatÛrium; 2007-11-20 */
+		modlitba = MODL_INVITATORIUM;
+		_spolocna_cast_antifona_inv_viac(2);
+
 		/* prve vespery */
 		modlitba = MODL_PRVE_VESPERY;
 		_spolocna_cast_hymnus;
@@ -7952,6 +7984,10 @@ void _set_spolocna_cast(short int a, _struct_sc sc){
 		Log("  _anchor_head == %s\n", _anchor_head);
 		sprintf(_anchor_pom, "%s_", nazov_spolc_ANCHOR[a]);
 		Log("  _anchor_pom == %s\n", _anchor_pom);
+
+		/* invitatÛrium; 2007-11-20 */
+		modlitba = MODL_INVITATORIUM;
+		_spolocna_cast_antifona_inv_viac(2);
 
 		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
@@ -8024,6 +8060,10 @@ void _set_spolocna_cast(short int a, _struct_sc sc){
 		sprintf(_anchor_pom, "%s_", nazov_spolc_ANCHOR[a]);
 		Log("  _anchor_pom == %s\n", _anchor_pom);
 
+		/* invitatÛrium; 2007-11-20 */
+		modlitba = MODL_INVITATORIUM;
+		_spolocna_cast_antifona_inv_viac(2);
+
 		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
 		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV)){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX */
@@ -8085,6 +8125,10 @@ void _set_spolocna_cast(short int a, _struct_sc sc){
 
 		Log("/* spolocna cast na sviatky panien */\n");
 
+		/* invitatÛrium; 2007-11-20 */
+		modlitba = MODL_INVITATORIUM;
+		_spolocna_cast_antifona_inv_viac(2);
+
 		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
 		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV)){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX */
@@ -8134,6 +8178,10 @@ void _set_spolocna_cast(short int a, _struct_sc sc){
 	else if(a == MODL_SPOL_CAST_PANNA_MARIA){ /* 2005-08-25: UpravenÈ */
 
 		Log("/* spolocna cast na sviatky Panny Marie */\n");
+
+		/* invitatÛrium; 2007-11-19 */
+		modlitba = MODL_INVITATORIUM;
+		_spolocna_cast_antifona_inv_viac(2);
 
 		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
@@ -8259,6 +8307,10 @@ void _set_spolocna_cast(short int a, _struct_sc sc){
 	else if(a == MODL_SPOL_CAST_POSVIACKA_CHRAMU){
 
 		Log("/* spolocna cast na sviatky posviacky chramu */\n");
+
+		/* invitatÛrium; 2007-11-19 */
+		modlitba = MODL_INVITATORIUM;
+		_spolocna_cast_antifona_inv_viac(2);
 
 		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
