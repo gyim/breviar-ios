@@ -73,6 +73,7 @@
 /*   2006-01-28a.D. | upraven˝ spÙsob v˝pisu v includeFile()               */
 /*   2006-01-31a.D. | batch mÛd exportuje aj mcd (mna) a posv. ËÌtanie     */
 /*   2006-02-02a.D. | vytvoren· fcia _main_formular(),zobraz.pre kaûd˝ deÚ */
+/*   2006-02-06a.D. | ˙prava v _rozbor_dna() kvÙli nastaveniu _global_opt3 */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -1781,8 +1782,9 @@ void showPrayer(int type){
 	}
 	// 17/02/2000A.D.
 	*/
+	/* 2006-02-06: upraven˝ v˝pis: ak je mimo rozsah, reùazcov· konötanta  */
 	Log("showPrayer: opt3 == `%s' (%d -- %s)\n", 
-		pom_MODL_OPT3, _global_opt3, nazov_spolc[_global_opt3]);
+		pom_MODL_OPT3, _global_opt3, _global_opt3 <= MODL_SPOL_CAST_NEBRAT ? nazov_spolc[_global_opt3] : EMPTY_STR);
 	/* vypisanie dalsich options, 2003-08-13 */
 	Log("showPrayer: opt4 == `%s' (%d)\n", pom_MODL_OPT4, _global_opt4);
 	Log("showPrayer: opt5 == `%s' (%d -- %s)\n", pom_MODL_OPT5, _global_opt5, 
@@ -2004,6 +2006,12 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 	int PMB = poradie(1, 1, rok); /* panny marie bohorodicky */
 	int ZJV = poradie(6, 1, rok); /* zjavenie pana */
 	int DEC16 = poradie(16, 12, rok); /* 16. december, prelom v adventnom obdobi */
+
+	/* 2006-02-06: pomocn· premenn· kvÙli eventu·lnemu prednastaveniu _global_opt3 */
+	_struct_sc sc;
+	sc.a1 = MODL_SPOL_CAST_NEURCENA;
+	sc.a2 = MODL_SPOL_CAST_NEURCENA;
+	sc.a3 = MODL_SPOL_CAST_NEURCENA;
 
 	/* urcenie "obcianskych" zalezitosti dna:
 	 *
@@ -2511,7 +2519,12 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 				){ /* 15/03/2000A.D. -- modifikovane */
 				/* tato pasaz je cela divna... */
 				/* menim, lebo svaty ma prednost */
-				Log("menim, lebo `%s' ma prednost...\n", _global_svaty1.meno);
+				/* 2006-02-06: pre viacero æubovoæn˝ch spomienok treba byù obozretnejöÌ */
+				Log("\tporadie_svaty == %d\n", poradie_svaty);
+				Log("menim, lebo `%s' ma prednost...\n", 
+					poradie_svaty == 1 ? _global_svaty1.meno :
+					(poradie_svaty == 2 ? _global_svaty2.meno : 
+					(poradie_svaty == 3 ? _global_svaty3.meno : "spomienka PM v sobotu")));
 
 				mystrcpy(_global_den.meno, _global_svaty1.meno, MENO_SVIATKU);
 				_global_den.smer = _global_svaty1.smer;
@@ -2519,6 +2532,69 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 				_global_den.spolcast = _global_svaty1.spolcast; /* pridane 22/02/2000A.D. */
 				_global_den.typslav_lokal = _global_svaty1.typslav_lokal; /* pridanÈ 2005-07-27 */
 				_global_den.prik = _global_svaty1.prik; /* pridane 23/02/2000A.D. */
+				// Log(_global_den); /* kvÙli p·traniu pridanÈ 2006-02-06 */
+				/* pridanÈ 2006-02-06; upravujeme premenn˙ _global_opt3 ak nebola nastaven· MODL_SPOL_CAST_NEBRAT
+				 * treba nastaviù podæa toho, ktor˝ sv‰t˝ je (mÙûe byù 1--3) 
+				 * a z·roveÚ braù do ˙vahy eventu·lne prednastavenie od pouûÌvateæa
+				 */
+				Log("\tPremenn· _global_opt3 pred ˙pravou == %d (%s)...\n", 
+					_global_opt3, 
+					_global_opt3 <= MODL_SPOL_CAST_NEBRAT ? nazov_spolc[_global_opt3] : EMPTY_STR);
+				if(_global_opt3 != MODL_SPOL_CAST_NEBRAT){
+					switch(poradie_svaty){
+						case 1:
+							sc = _decode_spol_cast(_global_svaty1.spolcast);
+							break;
+						case 2:
+							sc = _decode_spol_cast(_global_svaty2.spolcast);
+							break;
+						case 3:
+							sc = _decode_spol_cast(_global_svaty3.spolcast);
+							break;
+						case 4:
+							sc.a1 = MODL_SPOL_CAST_PANNA_MARIA; /* 2006-02-06: spomienka PM v sobotu */
+							break;
+					}/* switch */
+					Log("\tNastavil som do premennej sc == (%d) %s, (%d) %s, (%d) %s\n",
+						sc.a1, nazov_spolc[sc.a1], sc.a2, nazov_spolc[sc.a2], sc.a3, nazov_spolc[sc.a3]);
+					if(sc.a1 != MODL_SPOL_CAST_NEURCENA){
+						if(sc.a2 != MODL_SPOL_CAST_NEURCENA){
+							if(sc.a3 != MODL_SPOL_CAST_NEURCENA){
+								if((_global_opt3 != sc.a1)
+								&& (_global_opt3 != sc.a2)
+								&& (_global_opt3 != sc.a3)){
+									_global_opt3 = sc.a1; /* iba ak nie je ani podæa jednej z nenullov˝vh, zmenÌm */
+								}
+							}
+							else{
+								if((_global_opt3 != sc.a1)
+								&& (_global_opt3 != sc.a2)){
+									_global_opt3 = sc.a1; /* iba ak nie je ani podæa jednej z nenullov˝vh, zmenÌm */
+								}
+							}
+						}
+						else{
+							if(_global_opt3 != sc.a1){
+								_global_opt3 = sc.a1; /* iba ak nie je ani podæa jednej z nenullov˝vh, zmenÌm */
+							}
+						}
+					}
+					else{
+						Log("\tHmmm, pre sv‰tca nie je nastaven· spoloËn· Ëasù, nech·vam _global_opt3 tak ako je...\n");
+					}
+					/* pÙvodne - nespr·vne - som sem dnes, 2006-02-06, dal:
+					 * _global_opt3 = 
+					 *	poradie_svaty == 1 ? (_decode_spol_cast(_global_svaty1.spolcast)).a1 :
+					 *	(poradie_svaty == 2 ? (_decode_spol_cast(_global_svaty2.spolcast)).a1 : 
+					 *	(poradie_svaty == 3 ? (_decode_spol_cast(_global_svaty3.spolcast)).a1 : MODL_SPOL_CAST_PANNA_MARIA));
+					 */
+					Log("\tNastavil som _global_opt3 == %d (%s)...\n", 
+						_global_opt3, 
+						_global_opt3 <= MODL_SPOL_CAST_NEBRAT ? nazov_spolc[_global_opt3] : EMPTY_STR);
+				} /* if(_global_opt3 != MODL_SPOL_CAST_NEBRAT) */
+				else{
+					Log("\tKeÔûe pouûÌvateæ nechcel braù spoloËn˙ Ëasù, neupravujem.\n");
+				}
 			}/* koniec menenia pre _global_modlitba != MODL_NEURCENA a svaty > 0 resp. slavnost */
 		}
 		else{
@@ -3541,6 +3617,10 @@ void _export_rozbor_dna(int typ){
  *
  * 2006-01-31: zmenenÈ TUTOLA na 2006-01-31-TUTOLA, pridali sme modlitbu cez deÚ
  * (len napoludnie) a posv‰tnÈ ËÌtanie
+ * 
+ * 2006-02-06: upravenÈ: negenerovaù veöpery pre æubovoæn˙ spomienku PM (a != 4)
+ *
+ *
  */
 #define BATCH_COMMAND(a)	{ \
 	/* napokon to vyprintujeme do batch suboru, 2003-07-07 */\
@@ -3555,7 +3635,9 @@ void _export_rozbor_dna(int typ){
 		fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -x%d -pmna\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* napoludnie */\
 		fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -x%d -pmpc\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* posv‰tnÈ ËÌtanie */\
 		/* 2006-01-31-TUTOLA */\
-		fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -x%d -pmv\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* vespery */\
+		if(a != 4){\
+			fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -x%d -pmv\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* vespery */\
+		}\
 	}else{\
 		fprintf(batch_file, "%s%dr.htm -1%d -2%d -3%d -4%d -x%d -pmrch\n", batch_command, a, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* ranne chvaly */\
 		fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%dr.htm\">rannÈ chv·ly</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a);\
@@ -3564,8 +3646,10 @@ void _export_rozbor_dna(int typ){
 		fprintf(batch_file, "%s%dc.htm -1%d -2%d -3%d -4%d -x%d -pmpc\n", batch_command, a, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* posv‰tnÈ ËÌtanie */\
 		fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%dc.htm\">posv‰tnÈ ËÌtanie</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a);\
 		/* 2006-01-31-TUTOLA */\
-		fprintf(batch_file, "%s%dv.htm -1%d -2%d -3%d -4%d -x%d -pmv\n", batch_command, a, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* vespery */\
-		fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%dv.htm\">veöpery</a> \n", _global_den.rok, _global_den.mesiac, _global_den.den, a);\
+		if(a != 4){\
+			fprintf(batch_file, "%s%dv.htm -1%d -2%d -3%d -4%d -x%d -pmv\n", batch_command, a, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* vespery */\
+			fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%dv.htm\">veöpery</a> \n", _global_den.rok, _global_den.mesiac, _global_den.den, a);\
+		}\
 	}\
 	fprintf(batch_html_file, "</li>\n");\
 }
@@ -5634,6 +5718,8 @@ void _main_batch_mode(
 						analyzuj_rok(r_from);
 						for(i = poradie(d_from, m_from + 1, r_from); i <= poradie(31, MES_DEC + 1, r_from); i++){
 							Log("%d. den v roku %d...\n", i, r_from);
+							/* 2006-02-06: doplnenie nastavenia premenn˝ch kvÙli tomu, ûe v batch mÛde pouûÌvame viackr·t */
+							_global_opt3 = MODL_SPOL_CAST_NEURCENA;
 							_rozbor_dna(por_den_mesiac(i, r_from), r_from);
 							_export_rozbor_dna_batch(EXPORT_DNA_JEDEN_DEN);
 						}
@@ -5647,6 +5733,8 @@ void _main_batch_mode(
 							analyzuj_rok(y);
 							for(i = poradie(1, MES_JAN + 1, y); i <= poradie(31, MES_DEC + 1, y); i++){
 								Log("%d. den v roku %d...\n", i, y);
+								/* 2006-02-06: doplnenie nastavenia premenn˝ch kvÙli tomu, ûe v batch mÛde pouûÌvame viackr·t */
+								_global_opt3 = MODL_SPOL_CAST_NEURCENA;
 								_rozbor_dna(por_den_mesiac(i, y), y);
 								_export_rozbor_dna_batch(EXPORT_DNA_JEDEN_DEN);
 							}
@@ -5660,6 +5748,8 @@ void _main_batch_mode(
 						analyzuj_rok(r_to);
 						for(i = poradie(1, MES_JAN + 1, r_to); i <= poradie(d_to, m_to + 1, r_to); i++){
 							Log("%d. den v roku %d...\n", i, r_to);
+							/* 2006-02-06: doplnenie nastavenia premenn˝ch kvÙli tomu, ûe v batch mÛde pouûÌvame viackr·t */
+							_global_opt3 = MODL_SPOL_CAST_NEURCENA;
 							_rozbor_dna(por_den_mesiac(i, r_to), r_to);
 							_export_rozbor_dna_batch(EXPORT_DNA_JEDEN_DEN);
 						}
@@ -5672,6 +5762,8 @@ void _main_batch_mode(
 						analyzuj_rok(r_from);
 						for(i = poradie(d_from, m_from + 1, r_from); i <= poradie(d_to, m_to + 1, r_to); i++){
 							Log("%d. den v roku %d...\n", i, r_from);
+							/* 2006-02-06: doplnenie nastavenia premenn˝ch kvÙli tomu, ûe v batch mÛde pouûÌvame viackr·t */
+							_global_opt3 = MODL_SPOL_CAST_NEURCENA;
 							_rozbor_dna(por_den_mesiac(i, r_from), r_from);
 							_export_rozbor_dna_batch(EXPORT_DNA_JEDEN_DEN);
 						}

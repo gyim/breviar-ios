@@ -7606,6 +7606,12 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 	 */
 	_struct_sc sc = _decode_spol_cast(_global_den.spolcast);
 
+	/* 2006-02-06: pridanı debug vıpis */
+	Log("\tDeklarujem štruktúru sc == ({%s, %s, %s}) -- begin\n",
+		nazov_spolc[sc.a1], nazov_spolc[sc.a2], nazov_spolc[sc.a3]);
+
+	Log("Teraz nasleduje ve¾kı switch() pod¾a mesiacov a dní...\n");
+
 	/* a teraz velky switch()... 'Velky inkvizitor'... ;-) */
 	switch(mesiac - 1){
 		case MES_JAN:
@@ -13988,7 +13994,10 @@ label_8_DEC:
 		pocet = 0;
 	}
 	else{
-		Log("slavenie je urcene, pocet == %d\n", pocet);
+		/* 2006-02-06: obohatenı debug vıpis */
+		Log("slávenie je urèené, poèet == %d\n", pocet);
+		Log("\tštruktúra sc == ({%s, %s, %s}) -- begin\n",
+			nazov_spolc[sc.a1], nazov_spolc[sc.a2], nazov_spolc[sc.a3]);
 
 		_global_svaty1.den = den;
 		_global_svaty1.mesiac = mesiac;
@@ -14062,12 +14071,16 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty, int druhykrat){
 	 */
 	_struct_sc sc = _decode_spol_cast(_global_den.spolcast);
 
-	Log("a hned nastavujem _global_opt3 (ak je neurcene) na sc.a1):\n");
+	/* 2006-02-06: doplnenı debug vıpis */
+	Log("a hned nastavujem _global_opt3 (ak je neurèené: je teraz %d) na sc.a1):\n", _global_opt3);
 	/* ak opt3 je MODL_SPOL_CAST_NEURCENA, tak ju urcime podla
 	 * 1. spolocnej casti */
 	if(_global_opt3 == MODL_SPOL_CAST_NEURCENA){
 		_global_opt3 = sc.a1;
-		Log("          setting _global_opt3 to sc.a1\n");
+		Log("\tsetting _global_opt3 to sc.a1 == %d\n", sc.a1);
+	}
+	else {
+		Log("\tnie je potrebné modifikova, lebo u je nastavená (hoci sc.a1 == %d)\n", sc.a1);
 	}
 	ret = sviatky_svatych(den, mesiac, poradie_svaty);
 	Log("-- sviatky_svatych(%d, %d) -- spustene druhykrat, vysledok (pocet svatych) == %d\n", den, mesiac, ret);
