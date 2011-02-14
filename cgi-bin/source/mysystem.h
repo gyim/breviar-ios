@@ -109,9 +109,17 @@
 	#define Log __Log
 #endif
 
-
 #ifdef OS_DOS
 	#define DEFINED_strcmpi /* v DOSe */
+#endif
+
+/* 2006-07-17: Pridané */
+#define		PATH_SEPARATOR_linux	'/'
+#define		PATH_SEPARATOR_Windows	'\\'
+#ifdef	OS_linux
+	#define		PATH_SEPARATOR	PATH_SEPARATOR_linux
+#else
+	#define		PATH_SEPARATOR	PATH_SEPARATOR_Windows
 #endif
 
 #endif /* __MYSYSTEM_H_ */

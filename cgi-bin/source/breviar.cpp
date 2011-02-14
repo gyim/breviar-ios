@@ -7397,6 +7397,7 @@ int main(int argc, char **argv){
 #endif
 
 	int ret; /* navratova hodnota */
+	int	len; /* dÂûka; pridanÈ 2006-07-17 */
 
 	initLog(FILE_LOG);
 
@@ -7636,7 +7637,7 @@ _main_SIMULACIA_QS:
 			if(_allocate_global_var() == FAILURE)
 				goto _main_end;
 			/* inicializacia pridana do _allocate_global_var 2003-08-13 */
-
+/* ------------------------------------------------------------------------- */
 			LOG_ciara;
 
 			/* 2006-07-12: pridanÈ parsovanie jazyka kvÙli jazykov˝m mut·ci·m */
@@ -7647,6 +7648,7 @@ _main_SIMULACIA_QS:
 				_main_LOG_to_Export("\t(vzhæadom k neurËenÈmu jazyku pouûÌvam default)\n");
 			}
 			_main_LOG_to_Export("...jazyk (%s) = %i, teda %s (%s)\n", pom_JAZYK, _global_jazyk, nazov_jazyka[_global_jazyk], skratka_jazyka[_global_jazyk]);
+/* ------------------------------------------------------------------------- */
 			LOG_ciara;
 
 			/* pridane 27/04/2000A.D.
@@ -7669,22 +7671,50 @@ _main_SIMULACIA_QS:
 	#error Unsupported operating system (not defined in mysystem.h)
 #endif
 			/* inak ostane default hodnoty nastavene na zaciatku pre kazdy operacny system zvlast */
-			
+
+			_main_LOG_to_Export("˙prava include adres·ra...\n");
+			/* 2006-07-17: dokonËenie ˙pravy include adres·ra podæa jazyka */
+
 			/* 2004-03-17 uprava ciest: INCLUDE_DIR a include_dir
 			 * tzv. miesto 2004-03-17_TUTOLA
 			 */
-			_main_LOG_to_Export("INCLUDE_DIR = `%s'\n2004-03-17: include_dir = `%s'\n", INCLUDE_DIR, include_dir);
+			_main_LOG_to_Export("\tINCLUDE_DIR = `%s'\n\tinclude_dir = `%s'\n", INCLUDE_DIR, include_dir);
 			if(strcmp(include_dir, STR_EMPTY) == 0){
-				_main_LOG_to_Export("beriem INCLUDE_DIR...\n");
+				_main_LOG_to_Export("\tberiem INCLUDE_DIR...\n");
 				mystrcpy(include_dir, INCLUDE_DIR, MAX_STR);
 			}
 			else
-				_main_LOG_to_Export("beriem include_dir...\n");
-			_main_LOG_to_Export("include subory brane z `%s'\n", include_dir);
+				_main_LOG_to_Export("\tberiem include_dir...\n");
+
+			/* 2006-07-17: prv· kontrola, Ëi include_dir konËÌ na backslash resp. slash */
+			len = strlen(include_dir) - 1;
+			_main_LOG_to_Export("prv· kontrola include adres·ra (Ëi konËÌ oddeæovaËom `%c' [dÂûka %d])...\n", PATH_SEPARATOR, len);
+			if(include_dir[len] != (int)PATH_SEPARATOR){
+				include_dir[len + 1] = PATH_SEPARATOR;
+				_main_LOG_to_Export("\tupravenÈ (pridanÈ na koniec reùazca): %s\n", include_dir);
+			}
+			else{
+				_main_LOG_to_Export("\tok.\n");
+			}
 
 			/* 2006-07-13: pridanÈ doplnenie jazyka kvÙli jazykov˝m mut·ci·m */
 			_main_LOG_to_Export("upravujem include adres·r podæa jazyka (%d - %s)...\n", _global_jazyk, nazov_jazyka[_global_jazyk]);
+			/* 2006-07-17: dokonËenie ˙pravy include adres·ra podæa jazyka */
+			strcat(include_dir, postfix_jazyka[_global_jazyk]);
 
+			/* 2006-07-17: druh· kontrola, Ëi include_dir konËÌ na backslash resp. slash */
+			len = strlen(include_dir) - 1;
+			_main_LOG_to_Export("druh· kontrola include adres·ra (Ëi konËÌ oddeæovaËom `%c' [dÂûka %d])...\n", PATH_SEPARATOR, len);
+			if(include_dir[len] != (int)PATH_SEPARATOR){
+				include_dir[len + 1] = PATH_SEPARATOR;
+				_main_LOG_to_Export("\tupravenÈ (pridanÈ na koniec reùazca): %s\n", include_dir);
+			}
+			else{
+				_main_LOG_to_Export("\tok.\n");
+			}
+
+			_main_LOG_to_Export("include s˙bory bud˙ z adres·ra `%s'\n", include_dir);
+/* ------------------------------------------------------------------------- */
 			LOG_ciara;
 
 			_main_LOG_to_Export("/* teraz nasleduje vykonanie jadra programu podla parametrov */\n");
