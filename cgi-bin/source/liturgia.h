@@ -44,6 +44,7 @@
 /*   2008-01-03a.D. | doplnenÈ text_DRUHA_NEDELA_PO_NAR_PANA[] */
 /*   2008-01-05a.D. | doplnenÈ text_PO_POPOLCOVEJ_STREDE[]     */
 /*                  - a tieû text_V_OKTAVE_NARODENIA[]         */
+/*   2008-01-23a.D. | opravenÈ pole konöt·nt zvazok_breviara[] */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -567,9 +568,9 @@ typedef struct dm _struct_dm;
 
 #define	POCET_OBDOBI	11
 
-/* zv‰zok brevi·ra - zv‰zok, v ktorom sa nach·dza danÈ liturgickÈ obdobie; doplnenÈ 2007-12-20 */
+/* zv‰zok brevi·ra - zv‰zok, v ktorom sa nach·dza danÈ liturgickÈ obdobie; doplnenÈ 2007-12-20; opravenÈ 2008-01-23 */
 const short int zvazok_breviara[POCET_OBDOBI + 1] = 
-{1, 1, 1, 1, 3, 2, 2, 2, 2, 2, 2, 1}; // nepotrebujeme rozlÌöiù 3. a 4. zv‰zok, ktorÈ obidva obsahuj˙ OBD_CEZ_ROK
+{2, 1, 1, 1, 1, 3, 2, 2, 2, 2, 2, 1}; // nepotrebujeme rozlÌöiù 3. a 4. zv‰zok, ktorÈ obidva obsahuj˙ OBD_CEZ_ROK
 
 /* nazov_obdobia: string pre nazov liturgickeho obdobia */
 //extern const char *nazov_obdobia[];

@@ -83,6 +83,7 @@
 /*   2007-12-04a.D. | ant.na magn.+modl.posv.ËÌt. pre 3. adv.nedeæu-opr.*/
 /*   2008-01-18a.D. | oprava: pri volanÌ file_name_kompletorium()       */
 /*                    treba uchovaù a potom obnoviù pÙvodnÈ _file       */
+/*   2008-01-23a.D. | opravenÈ zvazok_breviara[] a zaltar_zvazok()      */
 /*                                                                      */
 /*                                                                      */
 /* notes |                                                              */
@@ -1437,6 +1438,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 			zvazok = 0;
 		}
 	*/
+	Log("liturgickÈ obdobie: `%s'...\n", nazov_obdobia_[obdobie]);
 	Log("toto liturgickÈ obdobie sa nach·dza v zv‰zku %d brevi·ra (cezroËnÈ obdobie evidujeme ako jeden, 3. zv‰zok)...\n", zvazok);
 	/* 2006-10-17: DoplnenÈ kvÙli rÙznemu poËtu ûalmov pre kompletÛrium; upravenÈ 2006-10-18 */
 	if(den == DEN_STREDA){

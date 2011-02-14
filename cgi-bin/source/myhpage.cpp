@@ -7,7 +7,7 @@
 /* document history                                            */
 /*   28/10/1999A.D. | created                                  */
 /*   25/02/2000A.D. | zrusena funkcia linky()                  */
-/*   12/04/2000A.D. | pridana stranka cfg_HTTP_ADDRESS_default             */
+/*   12/04/2000A.D. | pridana stranka cfg_HTTP_ADDRESS_default */
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-06-30a.D. | pridane vypisovanie BUILD_DATE (mybase.h)*/
 /*                  - tiez zapoznamkovane Kodovanie w-1250.    */
@@ -16,6 +16,7 @@
 /*   2003-07-15a.D. | trosku zmenena hlavicka (ako _header.htm)*/
 /*   2004-03-16a.D. | funkcie hlavicka a patka aj do suboru    */
 /*   2006-07-31a.D. | prvé kroky k jazykovým mutáciám          */
+/*   2008-01-23a.D. | upravené funkcie patka()                 */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -130,7 +131,13 @@ const char *nm_cz[] =
 {"leden", "únor", "bøezen", "duben", "kvìten", "èerven", "èervenec",
  "srpen", "záøí", "øíjen", "listopad", "prosinec", "neznámý"};
 
-const char *gpage[] = {"Generovaná stránka", "Stránky jsou generovány", "Generated page", "Generated"};
+/* 2008-01-23: upravené */
+//const char *gpage[] = {"Generovaná stránka", "Stránky jsou generovány", "Generated page", "Generated"};
+const char *gpage[] = {"Generované: ", "Generováno: ", "Generated: ", "Generated: "};
+// Generované + dátum: "%d. %s %d, %02d:%02d:%02d" -- pôvodne to bolo v zátvorkách
+const char *datum_template[] = {"%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d"};
+// Build: "Build: %s. "
+const char *build_template[] = {"<!--Verzia: %s.-->", "<--Verze: %s.-->", "<--Build: %s.-->", "<--Build: %s.-->"};
 
 /* exportuje patku HTML dokumentu (vysledok query) */
 void patka(void){
@@ -156,16 +163,18 @@ void patka(void){
 	Export("<center>");
 	Export("<"HTML_P_PATKA">%s\n", gpage[_global_jazyk]);
 	/* Export("(%s). ", ctime(&t) + 4); */
-	Export("(%d. %s %d, %02d:%02d:%02d). ",
+	Export((char *)datum_template[_global_jazyk],
 		dnes.tm_mday,
 		(_global_jazyk == JAZYK_CZ) ? nm_cz[dnes.tm_mon] : nm[dnes.tm_mon],
 		dnes.tm_year,
 		dnes.tm_hour,
-		dnes.tm_min,
-		dnes.tm_sec);
+		dnes.tm_min
+		// , dnes.tm_sec
+		);
+	Export(". ");
 
 	/* nezabudni zmenit #define BUILD_DATE v mydefs.h!!! (2003-07-15) */
-	Export("Build: %s. ", BUILD_DATE);
+	Export((char *)build_template[_global_jazyk], BUILD_DATE);
 
 	/* zapoznamkovane, 2003-06-30 */
 	/* Export("Kódovanie Windows-1250 (Central European).\n"); */
@@ -203,18 +212,20 @@ void patka(FILE * expt){
 
 	fprintf(expt, "<hr>\n"); /* bolo tu <hr size=1>, ale to je v css-ku; 2003-07-02 */
 	fprintf(expt, "<center>");
-	fprintf(expt, "<"HTML_P_PATKA">Generovaná stránka\n");
+	fprintf(expt, "<"HTML_P_PATKA">%s\n", gpage[_global_jazyk]);
 	/* fprintf(expt, "(%s). ", ctime(&t) + 4); */
-	fprintf(expt, "(%d. %s %d, %02d:%02d:%02d). ",
+	fprintf(expt, (char *)datum_template[_global_jazyk],
 		dnes.tm_mday,
 		nm[dnes.tm_mon],
 		dnes.tm_year,
 		dnes.tm_hour,
-		dnes.tm_min,
-		dnes.tm_sec);
+		dnes.tm_min
+		// , dnes.tm_sec
+		);
+	fprintf(expt, ". ");
 
 	/* nezabudni zmenit #define BUILD_DATE v mydefs.h!!! (2003-07-15) */
-	fprintf(expt, "Build: %s. ", BUILD_DATE);
+	fprintf(expt, (char *)build_template[_global_jazyk], BUILD_DATE);
 
 	/* zapoznamkovane, 2003-06-30 */
 	/* fprintf(expt, "Kódovanie Windows-1250 (Central European).\n"); */
