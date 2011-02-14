@@ -80,6 +80,7 @@
 /*                  - dokonËenie invitatÛria pre liturgickÈ obdobia     */
 /*   2007-11-20a.D. | dokonËenie invitatÛria pre spoloËnÈ Ëasti sv‰t˝ch */
 /*   2007-12-03a.D. | antifÛna na magnifikat pre 4. adventn˙ nedeæu-opr.*/
+/*   2007-12-04a.D. | ant.na magn.+modl.posv.ËÌt. pre 3. adv.nedeæu-opr.*/
 /*                                                                      */
 /*                                                                      */
 /* notes |                                                              */
@@ -3172,6 +3173,8 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 		case OBD_ADVENTNE_I :/* do 16. decembra */
 			Log("OBD_ADVENTNE_I\n");
 
+			/* spoloËnÈ Ëasti bez ohæadu na to, Ëi je alebo nie je nedeæa */
+
 			/* invitatÛrium */
 			modlitba = MODL_INVITATORIUM;
 			_obd_invitat;
@@ -3230,11 +3233,15 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 			else
 				t = tyzden;
 
-			if(den == DEN_NEDELA){
-
+			if(den == DEN_NEDELA){ /* nedeæa: 1.-3. adventn· nedeæa */
 				/* prve vespery */
-				/* !!! sem treba zadratovat, ze 16. decembra, 1. vespery,
-				 * uz maju mnohe veci z OBD_ADVENTNE_II */
+				/* 2007-12-04: bola tu dlho t·to pozn·mka: "!!! sem treba zadratovat, ze 16. decembra, 1. vespery,
+				 *                                              uz maju mnohe veci z OBD_ADVENTNE_II"
+				 * to je vöak zabezpeËenÈ t˝m, ûe pre vöepery 16. decembra (ak je to sobota, ako napr. v roku 2006)
+				 * sa jednak vezme vöedn˝ deÚ (sobota), jednak nasleduj˙ci deÚ, teda 17. decembra, a prvÈ veöpery 
+				 * s˙ uû z adventnÈho obdobia II., v‰Ëöina vecÌ z 3. adventnej nedele je podæa OBD_ADVENTNE_II, 
+				 * niektorÈ z OBD_ADVENTNE_I - pr·ve to bolo potrebnÈ opraviù, dokonËenÈ 2007-12-04.
+				 */
 				/* hymnus - rovnaky pre prve a druhe vespery */
 				modlitba = MODL_PRVE_VESPERY;
 				sprintf(_anchor, "%s%c_%s",
@@ -3252,9 +3259,9 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				_set_kresponz(modlitba, _file, _anchor);
 				_set_kresponz(MODL_VESPERY, _file, _anchor);
 				set_LOG_litobd;
-				/* antifony */
+
 				modlitba = MODL_PRVE_VESPERY;
-				_adv1_antifony;
+				_adv1_antifony; /* antifony */
 				_adv1_kcitanie; /* kratke citanie - rovnake pre vsetky tyzdne */
 				/* magnifikat */
 				sprintf(_anchor, "%s%d%s%c_%s%c",
@@ -3310,7 +3317,6 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				_adv1_modlitba; /* modlitba */
 
 				/* druhe vespery */
-				/* antifony */
 				modlitba = MODL_VESPERY;
 				_adv1_antifony; /* antifony */
 				_adv1_kcitanie; /* kratke citanie - rovnake pre vsetky tyzdne */
@@ -3326,11 +3332,9 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				set_LOG_litobd;
 				_adv1_prosby; /* prosby - rovnake pre prvu a tretiu, resp. druhu a stvrtu adventnu nedelu */
 				_adv1_modlitba; /* modlitba */
-
-			/* modlitbu cez deÚ nie je potrebnÈ öpeci·lne rieöiù, pozn·mka 2005-12-17 */
-			}/* nedela */
-			else{
-
+				/* modlitbu cez deÚ nie je potrebnÈ öpeci·lne rieöiù, pozn·mka 2005-12-17 */
+			}/* nedeæa: 1.-3. adventn· nedeæa */
+			else{ /* nie nedeæa, teda obyËajn˝ deÚ adventnÈho obdobia I. */
 				/* posvatne citanie */
 				/* pridane 2003-11-20 */
 				modlitba = MODL_POSV_CITANIE;
@@ -3394,7 +3398,6 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				set_LOG_litobd;
 				_adv1_prosby; /* prosby - rovnake pre prvu a tretiu, resp. druhu a stvrtu adventnu nedelu */
 				_adv1_modlitba; /* modlitba - rovnaka pre ranne chvaly aj vespery */
-
 			}/* nie nedela */
 			break;
 /* switch(litobd), case OBD_ADVENTNE_I -- end ------------------------------------------------- */
@@ -3616,49 +3619,39 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 
 			_adv2_modlitba; /* modlitba - rovnaka pre rano i vecer */
 
-			/* nedela */
+			/* nedeæa: 3. adventn· nedeæa (len 17. decembra, ako napr. v roku 2006), inak 4. adventn· nedeæa */
+
 			/* pozor! ak tretia adventna nedela padne na 17. decembra, beru sa
 			 * antifony na magnifikat, benediktus, prosby a hymny z tejto casti,
 			 * avsak ostatne sa berie akoby z OBD_ADVENTNE_I, teda
 			 * _file == nazov_obd_htm[OBD_ADVENTNE_I]
-			 * _anchor == napr. ADV13NEr_ANT1 */
+			 * _anchor == napr. ADV13NEr_ANT1 
+			 * 2007-12-04: doplnenÈ: antifÛna na magnifikat pre prvÈ veöpery 16. decembra (napr. rok 2006)
+			 * sa vezme z 3. adventnej nedele
+			 */
 			if(den == DEN_NEDELA){
-
 				/* prvÈ veöpery - presunutÈ len pre nedeæu, 2007-12-03 */
 				modlitba = MODL_PRVE_VESPERY;
-				/* hymnus - rovnaky ako vespery pre kazdy den */
+				/* hymnus */
 				sprintf(_anchor, "%s%c_%s",
 					nazov_OBD[litobd],
 					pismenko_modlitby(MODL_VESPERY),
 					ANCHOR_HYMNUS);
 				_set_hymnus(modlitba, _file, _anchor);
 				set_LOG_litobd;
-				/* dalsie zavisia od datumu (17. -- 24. december) */
-				/* magnifikat - 2007-12-03: upraven· tak, aby pre 18.-24. decembra pre prvÈ veöpery bola vûdy z predoölÈho dÚa */
-				sprintf(_anchor, "%s%d%c_%s",
-					nazov_OBD[litobd],
-					(_global_den.den > 17)? _global_den.den - 1: _global_den.den,
-					pismenko_modlitby(MODL_VESPERY),
-					ANCHOR_MAGNIFIKAT);
-				_set_benediktus(modlitba, _file, _anchor);
-				set_LOG_litobd;
-				/* prosby */
-				sprintf(_anchor, "%s%d%c_%s",
-					nazov_OBD[litobd],
-					_global_den.den,
-					pismenko_modlitby(MODL_VESPERY),
-					ANCHOR_PROSBY);
-				_set_prosby(modlitba, _file, _anchor);
-				set_LOG_litobd;
+				/* antifÛna na magnifikat a prosby z·visia od toho, Ëi je 3. alebo 4. adventn· nedeæa, preto presunutÈ niûöie */
 
-				if(tyzden == 3){/* jedine 17. decembra */
-
+				if((tyzden == 3) && (_global_den.den == 17)){/* jedine 17. decembra, preto doplnenÈ aj o d·tum; 2007-12-04 */
 					litobd = OBD_ADVENTNE_I;
 					file_name_litobd(litobd);
 				
-					/* prve vespery */
+					/* prvÈ veöpery */
 					modlitba = MODL_PRVE_VESPERY;
-					/* kratke responzorium - rovnaka pre prve a druhe vespery a pre vsetky nedele */
+					/* hymnus pre obdobie OBD_ADVENTNE_II, teda tak, ako bol nastaven˝ vyööie */
+					_adv1_antifony; /* antifÛny - z tretej adventnej nedele, OBD_ADVENTNE_I; 2007-12-04 */
+					_adv1_kcitanie; /* pozor, pouûÌvame z adv. obdobia I. - 2006-01-27 */
+					_adv1_modlitba; /* modlitba */
+					/* kr·tke responzÛrium - z tretej adventnej nedele, OBD_ADVENTNE_I; 2007-12-04 */
 					sprintf(_anchor, "%s%s%c_%s",
 						nazov_OBD[litobd],
 						nazov_DN_asci[den], /* 'NE' */
@@ -3667,12 +3660,29 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 					_set_kresponz(modlitba, _file, _anchor);
 					_set_kresponz(MODL_VESPERY, _file, _anchor);
 					set_LOG_litobd;
-					modlitba = MODL_PRVE_VESPERY;
-					_adv1_antifony; /* antifony */
-					/* kratke citanie - rovnake pre vsetky adventne nedele */
-					_adv1_kcitanie; /* pozor, pouûÌvame z adv. obdobia I. - 2006-01-27 */
+					/* magnifikat */
+					sprintf(_anchor, "%s%d%s%c_%s%c",
+						nazov_OBD[litobd],
+						tyzden,
+						nazov_DN_asci[den],
+						pismenko_modlitby(modlitba),
+						ANCHOR_MAGNIFIKAT,
+						_global_den.litrok);
+					_set_magnifikat(modlitba, _file, _anchor);
+					set_LOG_litobd;
+					/* 2007-12-04: kvÙli prosb·m je potrebnÈ nastaviù parameter t */
+					if(tyzden == 3)
+						t = 1;
+					else if(tyzden == 4) /* nema efekt, lebo to uz je OBD_ADVENTNE_II */
+						t = 2;
+					else
+						t = tyzden;
+					_adv1_prosby; /* prosby - rovnake pre prvu a tretiu, resp. druhu a stvrtu adventnu nedelu */
+
+					/* posv‰tnÈ ËÌtanie - modlitba m· byù z 3. adventnej nedele, doplnenÈ 2007-12-04 */
+					modlitba = MODL_POSV_CITANIE;
 					_adv1_modlitba; /* modlitba */
-				
+
 					/* ranne chvaly */
 					/* kratke responzorium - rovnake pre vsetky nedele */
 					modlitba = MODL_RANNE_CHVALY;
@@ -3690,6 +3700,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 					/* kratke citanie - rovnake pre vsetky adventne nedele */
 					_adv1_kcitanie; /* pozor, pouûÌvame z adv. obdobia I. - 2006-01-27 */
 					_adv1_modlitba; /* modlitba */
+					/* antifÛna na magnifikat pre druhÈ veöpery nastaven· vyööie, podæa d·tumu, ako pre beûn˝ deÚ */
 
 					/* modlitba cez deÚ, pridanÈ 2005-12-17 podæa 2005-11-20 (ADV.I.) okrem hymnov */
 					modlitba = MODL_PREDPOLUDNIM;
@@ -3713,9 +3724,33 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				}/* tretia adventna nedela */
 				else{/* tyzden == 4, stvrta adventna nedela */
 
+					/* prvÈ veöpery */
+					modlitba = MODL_PRVE_VESPERY;
+					/* magnifikat - 2007-12-03: upraven· tak, aby pre 18.-24. decembra pre prvÈ veöpery bola vûdy 
+					 * z predoölÈho dÚa; v˝nimka je 17. decembra, kedy sa pouûije na prvÈ veöpery antifÛna 
+					 * z 3. adventnej nedele, Ëo je zabezpeËenÈ vyööie
+					 */
+
+					/* tieto zavisia od datumu (17. -- 24. december) */
+					/* antifÛna na magnifikat */
+					sprintf(_anchor, "%s%d%c_%s",
+						nazov_OBD[litobd],
+						_global_den.den - 1,
+						pismenko_modlitby(MODL_VESPERY),
+						ANCHOR_MAGNIFIKAT);
+					_set_benediktus(modlitba, _file, _anchor);
+					set_LOG_litobd;
+					/* prosby */
+					sprintf(_anchor, "%s%d%c_%s",
+						nazov_OBD[litobd],
+						_global_den.den,
+						pismenko_modlitby(MODL_VESPERY),
+						ANCHOR_PROSBY);
+					_set_prosby(modlitba, _file, _anchor);
+					set_LOG_litobd;
+
 					file_name_litobd(OBD_ADVENTNE_I);
 
-					/* prve vespery */
 					/* kratke responzorium - rovnaka pre prve a druhe vespery a pre vsetky nedele */
 					sprintf(_anchor, "%s%s%c_%s",
 						nazov_OBD[OBD_ADVENTNE_I],
@@ -3725,6 +3760,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 					_set_kresponz(modlitba, nazov_obd_htm[OBD_ADVENTNE_I], _anchor);
 					_set_kresponz(MODL_VESPERY, _file, _anchor);
 					set_LOG_litobd;
+
 					modlitba = MODL_PRVE_VESPERY;
 					_adv1_antifony; /* antifony */
 					_adv2_kcitanie_adv1; /* kratke citanie - rovnake pre vsetky adventne nedele */
