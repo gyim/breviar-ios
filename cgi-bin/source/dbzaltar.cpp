@@ -106,7 +106,21 @@
 /*                    okt·vu - _set_kompletorium_slavnost_oktava()      */
 /*                  - modlitba cez deÚ pre 26.-28.12. je z okt·vy nar.  */
 /*   2009-01-06a.D. | vytvorenÈ zaltar_kompletorium()                   */
-/*                                                                      */
+/*   2009-01-07a.D. | zistenie pre sl·venie spomienok a æubovoæn˝ch spomienok, ak pouûÌvateæ poûaduje (explicitne) vziaù Ëasti 
+ * 		zo spoloËnej Ëasti a nie z liturgickÈho obdobia (ak to ide): 
+ * 		najprv v sviatky_svatych() sa podæa poradie_svaty nastavÌ/zavol· set_spolocna_cast(sc, poradie_svaty);
+ * 		ale aû potom sa vol· _global_svaty1.typslav = SLAV_SPOMIENKA;
+ * 		a neskÙr _global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+ * 		lenûe hore/predt˝m v set_spolocna_cast() sa kontroluje su_antifony_vlastne() na _global_den.typslav
+ * 		kde sa vöak t·to nastavuje?!
+ * 		uvaûujem o zmene poradia? totiû rozhodnutie by malo byù podæa _global_svaty1.typslav eöte pred volanÌm set_spolocna_cast()
+ * 		nakoæko tam sa vol· o.i. _set_antifona1(), kde sa robÌ explicitne mystrcpy(_global_modl_...)
+ * 		[volanÈ z: _spolocna_cast_antifony <- _spolocna_cast_full <- podæa su_antifony_vlastne()]
+ *		zatiaæ neviem, ako sa s t˝m vysporiadaù, aby keÔ pouûÌvateæ chce, aby sa dala aj pre sl·venie sviatku vziaù cel· spoloËn· Ëasù
+ * 		moûno tak, ûe predsuniem nastavenie _global_svaty1.typslav = SLAV_SPOMIENKA; a potom v set_spolocna_cast(sc, poradie_svaty);
+ *		sa bude podæa poradie_svaty porovn·vaù s _global_svaty[1|2|3].typslav... 
+ *		a eöte k tomu by mohlo byù v su_antifony_vlastne() porovnanie aj na glob·lnu premenn˙, Ëi pouûÌvateæ explicitne ûiadal spoloËn˙ Ëasù...
+ */
 /*                                                                      */
 /* notes |                                                              */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                 */
@@ -7592,12 +7606,19 @@ short int _spol_cast_je_panna(_struct_sc sc){
  * 2005-07-27: upravenÈ / nahradenÈ _vlastna_cast_kresponz reùazcom _spolocna_cast_kresponz
  * kvÙli posv‰tn˝m ËÌtaniam, viÔ niûöie 
  * 2005-08-16: nahraden· "_vlastna_cast_hymnus" novou funkciou "_spolocna_cast_hymnus"
+ *
+ * 2009-01-07: dorobenÈ debug v˝pisy
+ *
  */
 #define _spolocna_cast_full(modl) {\
+	Log("_spolocna_cast_full(%s)\n", nazov_modlitby(modl));\
 	_spolocna_cast_hymnus;\
 	if(su_antifony_vlastne(modl)){\
+		Log("_spolocna_cast_antifony(%s)\n", nazov_modlitby(modl));\
 		_spolocna_cast_antifony;\
 	}\
+	else\
+		Log("_spolocna_cast_antifony(%s) - NEBER⁄ SA!!!\n", nazov_modlitby(modl));\
 	if(su_kcit_kresp_1cit_prosby_vlastne){\
 		if(modl == MODL_POSV_CITANIE){\
 			_spolocna_cast_1citanie;\
@@ -17205,7 +17226,7 @@ label_8_DEC:
 	else{
 		/* 2006-02-06: obohaten˝ debug v˝pis */
 		Log("sl·venie je urËenÈ, poËet == %d\n", pocet);
-		Log("\tötrukt˙ra sc == ({%s, %s, %s}) -- begin\n",
+		Log("\tötrukt˙ra sc == ({%s, %s, %s})\n",
 			nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3));
 
 		_global_svaty1.den = den;
