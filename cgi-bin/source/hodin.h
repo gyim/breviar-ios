@@ -156,7 +156,7 @@ const char *nazov_spolc_jazyk[POCET_SPOL_CASTI + 1][POCET_JAZYKOV + 1] =
  {"uèite¾ov Cirkvi", "uèitelù církve", "", "", ""}, 
  {"apoštolov", "apoštolù", "", "", ""}, 
  {"jedného muèeníka", "jednoho muèedníka", "", "", ""}, 
- {"viacerých muèeníkov", "více mùèedníkù", "", "", ""}, 
+ {"viacerých muèeníkov", "více muèedníkù", "", "", ""}, 
  {"Panny Márie", "Panny Marie", "", "", ""}, 
  {"svätých mužov - pre reho¾níkov", "svatých mužù - o øeholnících", "", "", ""}, 
  {"svätých mužov", "svatých mužù", "", "", ""}, 
@@ -1545,7 +1545,7 @@ const char *text_JUL_07[] =
  "", "", ""};
 const char *text_JUL_09[] =
 {"Sv. Augustína Zhao Rong, kòaza, a spoloèníkov, muèeníkov",
- "Sv. Augustina Žao Ronga, knìze a jeho druhù, mùèedníkù",
+ "Sv. Augustina Žao Ronga, knìze a jeho druhù, muèedníkù",
  "", "", ""};
 const char *text_JUL_11[] =
 {"Sv. Benedikta, opáta, patróna Európy",
