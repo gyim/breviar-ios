@@ -7538,7 +7538,7 @@ short int getArgv(int argc, char **argv){
 					printf("\ti  include folder\n");
 					/* pridane 2003-07-07 */
 					printf("\tb  batch mode (davkove spracovanie), nazov vystupneho davkoveho suboru\n");
-					printf("\tn  nazov binarky (tohto suboru, napr. lh.exe) pre batch mode\n");
+					printf("\tn  nazov binarky (tohto suboru, napr. breviar.exe) pre batch mode\n");
 					printf("\tk  nazov (HTML) suboru pre vysledny zoznam modlitieb, batch mode\n");
 					printf("\th, ?  tento help \n");
 					/* pridane 2003-07-08 */
@@ -7549,11 +7549,11 @@ short int getArgv(int argc, char **argv){
 					/* pridane 2003-06-27; prave prva uvedena linka sposobuje problem (nefunguju detaily pre spomienku pm v sobotu) */
 					printf("\n\t   pri prepinacoch ano = 1, nie = 0\n");
 					printf("\npriklady pouzitia:\n");
-					printf("\tlh.exe -i..\\..\\..\\ -qpsqs -s\"qt=pdt&d=12&m=7&r=2003\"\n");
+					printf("\tbreviar.exe -i..\\..\\..\\ -qpsqs -s\"qt=pdt&d=12&m=7&r=2003\"\n");
 					printf("\tlh -qpdt -d30 -m4 -r2002 -pmrch -ic:\\temp\\breviar\\ -emoja.htm\n");
-					printf("\tlh.exe -i..\\..\\..\\ -d28 -m6 -r2003 -qpdt -pmrch -x1\n");
+					printf("\tbreviar.exe -i..\\..\\..\\ -d28 -m6 -r2003 -qpdt -pmrch -x1\n");
 					/* pridane 2003-07-07 */
-					printf("\tlh -qpbm -d1 -m1 -r2000 -f2 -g2 -p2000 -ba.bat -nlh.exe -ic:\\breviar\\\n");
+					printf("\tlh -qpbm -d1 -m1 -r2000 -f2 -g2 -p2000 -ba.bat -nbreviar.exe -ic:\\breviar\\\n");
 					/* pridane 2003-07-17 */
 					printf("\nviac informacii:\n");
 					printf("\thttp://www.breviar.sk - hlavna stranka\n");
