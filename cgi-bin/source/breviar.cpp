@@ -2992,7 +2992,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	if((_local_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN) && (typ != EXPORT_DNA_VIAC_DNI)){
 		if(!((_local_den.denvt == DEN_NEDELA) || ((_local_den.denvt == DEN_STVRTOK)) && (modlitba == MODL_VESPERY))){ /* 08/03/2000A.D. */
 			mystrcpy(_local_den.meno, nazov_dna(_local_den.denvt), MENO_SVIATKU);
-			strcat(_local_den.meno, " vo Veækom t˝ûdni");
+			strcat(_local_den.meno, " vo Veækom t˝ûdni"); /* 2007-04-05: bude potrebnÈ upraviù pre viacero jazykov */
 		}
 	}
 
