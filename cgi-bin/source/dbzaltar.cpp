@@ -97,13 +97,17 @@ char _anchor_head[SMALL];
 #include "mystring.h" /* pridane 2003-08-11 kvoli _INIT_DM */
 #include "breviar.h"  /* pridane 2003-08-13 kvoli _global_opt5 */
 
+/* 2007-09-27: kvÙli debugovaniu pod Ruby zruöenÈ koment·re vo v˝pisoch*/
 /* 2005-03-26: Presunute na zaciatok */
 /* 2003-06-30 pre lahsie debugovanie obohateny vypis */
-#define set_LOG_litobd Log("   set(litobd): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby(modlitba), _file, _anchor)
+//#define set_LOG_litobd Log("   set(litobd): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby(modlitba), _file, _anchor)
+#define set_LOG_litobd Log("   set(litobd): %s: s˙bor `%s', kotva `%s'\n", nazov_modlitby(modlitba), _file, _anchor)
 /* 2004-04-28 pre lahsie debugovanie obohateny vypis pre pc */
-#define set_LOG_litobd_pc Log("   set(litobd): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby(modlitba), _file_pc, _anchor)
+//#define set_LOG_litobd_pc Log("   set(litobd): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby(modlitba), _file_pc, _anchor)
+#define set_LOG_litobd_pc Log("   set(litobd): %s: s˙bor `%s', kotva `%s'\n", nazov_modlitby(modlitba), _file_pc, _anchor)
 /* 2004-04-28 pre lahsie debugovanie obohateny vypis pre pc-tyzden */
-#define set_LOG_litobd_pc_tyzden Log("   set(litobd): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby(modlitba), _file_pc_tyzden, _anchor)
+//#define set_LOG_litobd_pc_tyzden Log("   set(litobd): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby(modlitba), _file_pc_tyzden, _anchor)
+#define set_LOG_litobd_pc_tyzden Log("   set(litobd): %s: s˙bor `%s', kotva `%s'\n", nazov_modlitby(modlitba), _file_pc_tyzden, _anchor)
 
 /* #define (stringove konstanty) presunute do header-u dbzaltar.h, 2003-08-15 */
 /* globalne premenne prehodene do liturgia.h, 17/02/2000A.D. */
@@ -711,7 +715,9 @@ void anchor_name_zaltar(short int den, short int tyzzal, short int modlitba, cha
 		tyzzal, nazov_DN_asci[den], pismenko_modlitby(modlitba), anchor);
 }
 
-#define set_LOG_zaltar	Log("   set(zaltar): %s: `%s', <!--{...:%s}-->\n", nazov_modlitby(modlitba), _file, _anchor)
+/* 2007-09-27: kvÙli debugovaniu pod Ruby zruöenÈ koment·re vo v˝pisoch*/
+//#define set_LOG_zaltar	Log("   set(zaltar): %s: `%s', <!--{...:%s}-->\n", nazov_modlitby(modlitba), _file, _anchor)
+#define set_LOG_zaltar	Log("   set(zaltar): %s: s˙bor `%s', kotva `%s'\n", nazov_modlitby(modlitba), _file, _anchor)
 
 void set_hymnus(short int den, short int tyzzal, short int modlitba){
 	/* pridanÈ Ëasti pre kompletÛrium, 2006-10-13 */
@@ -1047,7 +1053,9 @@ void set_magnifikat(short int den, short int tyzzal, short int modlitba){
 
 void set_popis(short int modlitba, char *file, char *anchor){
 	_set_popis(modlitba, file, anchor);
-	Log("   set(popis): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby(modlitba), _file, _anchor);
+	/* 2007-09-27: kvÙli debugovaniu pod Ruby zruöenÈ koment·re vo v˝pisoch*/
+	//	Log("   set(popis): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby(modlitba), _file, _anchor);
+	Log("   set(popis): %s: s˙bor `%s', kotva `%s'\n", nazov_modlitby(modlitba), _file, _anchor);
 }
 
 void set_popis_dummy(void){
@@ -2785,6 +2793,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 	  *		kvÙli modlitbe cez deÚ tak, ako to bolo len pre sviatok pov˝öenia sv. krÌûa
 	  *
 	  */
+	Log("najprv treba skontrolovaù, Ëi nejde o nedeæu, na ktor˙ pripadol sviatok premenenia p·na a podobnÈ... (ak ·no, nenastavuj niË)\n");
 	if(
 		((_global_den.denvt == DEN_NEDELA) && (_global_den.den == 6) && (_global_den.mesiac - 1 == MES_AUG)) ||
 		((_global_den.denvt == DEN_NEDELA) && (_global_den.den == 29) && (_global_den.mesiac - 1 == MES_JUN)) ||
@@ -2802,12 +2811,15 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				return;
 			}
 	}
+	else{
+		Log("NEjedn· sa o: premenenie p·na || petra a pavla || pov˝öenie sv. krÌûa || vöetk˝ch sv‰t˝ch...\n");
+	}
 
-	Log("/* najprv spustime zaltar_zvazok(); */\n");
-	/* 2006-01-24: pÙvodne sa p˙öùala fnkcia s 2 parametrami; 
-		pridan˝ ÔalöÌ parameter pre zv‰zok brevi·ra */
+	Log("teraz spustÌme zaltar_zvazok(); - pÙvodne sa p˙öùala s dvoma parametrami, pridan˝ parameter pre zv‰zok brevi·ra (vol·me s hodnotou ZALTAR_VSETKO)\n");
+	/* 2006-01-24: pÙvodne sa p˙öùala fnkcia s 2 parametrami; pridan˝ ÔalöÌ parameter pre zv‰zok brevi·ra */
 	zaltar_zvazok(den, tyzzal, _global_den.litobd, ZALTAR_VSETKO);
 
+	Log("n·sledne odliön˝ s˙bor pre posv‰tnÈ ËÌtania...\n");
 	file_name_litobd(litobd);
 	Log("  _file == %s\n", _file);
 
@@ -2819,7 +2831,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 
 	/* 2004-04-28, pridane _file_pc_tyzden */
 	mystrcpy(_file_pc_tyzden, STR_EMPTY, SMALL);
-	Log("  _file_pc_tyzden bude nastavene na prislusnom mieste (teraz == %s).\n", _file_pc_tyzden);
+	Log("  _file_pc_tyzden bude nastavene na prislusnom mieste (teraz == `%s').\n", _file_pc_tyzden);
 
 	char c;
 	/* char c sa pouziva vo vynimocnych pripadoch: napr. druha velkonocna nedela; 09/03/2000A.D. */
@@ -2905,10 +2917,12 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 	}\
 }
 
-		/* velky switch(litobd), podla ktoreho sa priradia zakladne udaje */
+	/* velky switch(litobd), podla ktoreho sa priradia zakladne udaje */
+	Log("teraz nasleduje veæk˝ switch podæa liturgick˝ch obdobÌ...\n");
 	switch(litobd){
 /* switch(litobd), case OBD_ADVENTNE_I -- begin ----------------------------------------------- */
 		case OBD_ADVENTNE_I :/* do 16. decembra */
+			Log("OBD_ADVENTNE_I\n");
 
 		/* ranne chvaly */
 			/* hymnus */
@@ -3223,6 +3237,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 
 /* switch(litobd), case OBD_ADVENTNE_II -- begin ---------------------------------------------- */
 		case OBD_ADVENTNE_II:/* po 16. decembri */
+			Log("OBD_ADVENTNE_II\n");
 
 			file_name_litobd(OBD_ADVENTNE_II);
 
@@ -3897,9 +3912,11 @@ label_24_DEC:
 
 /* switch(litobd), case OBD_OKTAVA_NARODENIA -- begin ----------------------------------------- */
 		case OBD_OKTAVA_NARODENIA :/* narodenie Pana -- 1. jan. */
+			Log("OBD_OKTAVA_NARODENIA - pokraËujeme ako vianoËnÈ obdobie I...\n");
 			/* a pokracujeme ako vianocne obdobie I; 14/03/2000A.D. */
 /* switch(litobd), case OBD_VIANOCNE_I -- begin ----------------------------------------------- */
 		case OBD_VIANOCNE_I :/* do slavnosti zjavenia pana */
+			Log("OBD_VIANOCNE_I\n");
 
 		/* 2006-01-24: tu zaËÌna VIANO»N… OBDOBIE I. */
 
@@ -4175,6 +4192,7 @@ label_24_DEC:
 
 /* switch(litobd), case OBD_VIANOCNE_II -- begin ---------------------------------------------- */
 		case OBD_VIANOCNE_II: {/* po slavnosti zjavenia pana */
+			Log("OBD_VIANOCNE_II\n");
 /* vianocne obdobie II */
 /* 2006-02-07: doplnenÈ posv‰tnÈ ËÌtania a mcd */
 #define _vian2_hymnus {\
@@ -4431,6 +4449,7 @@ label_24_DEC:
 
 /* switch(litobd), case OBD_CEZ_ROK -- begin -------------------------------------------------- */
 		case OBD_CEZ_ROK:{
+			Log("OBD_CEZ_ROK\n");
 
 /* najsv. trojice */
 #define _troj_hymnus {\
@@ -5195,7 +5214,8 @@ label_24_DEC:
 
 /* switch(litobd), case OBD_POSTNE_I -- begin ------------------------------------------------- */
 		case OBD_POSTNE_I:/* do soboty v piatom tyzdni */
-		/* 06/03/2000A.D. */
+			Log("OBD_POSTNE_I\n");
+			/* 06/03/2000A.D. */
 /* 2006-01-24: upravenÈ pre posv‰tnÈ ËÌtanie
  * 2006-01-25: pre modlitbu cez deÚ aj pre nedeæu hymnus ako pre vöedn˝ deÚ.
  */
@@ -5393,6 +5413,7 @@ label_24_DEC:
 
 /* switch(litobd), case OBD_POSTNE_II -- begin ------------------------------------------------ */
 		case OBD_POSTNE_II_VELKY_TYZDEN:/* velky tyzden */
+			Log("OBD_POSTNE_II_VELKY_TYZDEN\n");
 			/* 08/03/2000A.D. */
 /* 2006-01-25: upravenÈ pre posv‰tnÈ ËÌtanie
  * 2006-01-25: pre modlitbu cez deÚ (okrem nedele) je hymnus ako pre pÙstne obdobie I.
@@ -5627,6 +5648,7 @@ label_24_DEC:
 
 /* switch(litobd), case OBD_VELKONOCNE_TROJDNIE -- begin -------------------------------------- */
 		case OBD_VELKONOCNE_TROJDNIE:/* umucenia a zmrtvychvstania Pana */
+			Log("OBD_VELKONOCNE_TROJDNIE\n");
 			/* 08/03/2000A.D. */
 /* 2006-01-26: doplnenÈ posv‰tnÈ ËÌtanie */
 #define _vtroj_hymnus {\
@@ -5825,6 +5847,7 @@ label_24_DEC:
 
 /* switch(litobd), case OBD_VELKONOCNE_I -- begin --------------------------------------------- */
 		case OBD_VELKONOCNE_I:/* do nanebovstupenia pana */
+			Log("OBD_VELKONOCNE_I\n");
 			/* 09/03/2000A.D. */
 /* zabezpecime nahodnost pri hymne vo feriu, kedy sa "podla lubovole" mozre brat nie nedelny hymnus */
 /* ((_global_den.den MOD 3) == 0) */
@@ -6121,6 +6144,7 @@ label_24_DEC:
 
 /* switch(litobd), case OBD_VELKONOCNE_II -- begin -------------------------------------------- */
 		case OBD_VELKONOCNE_II:/* po nanebovstupeni pana */
+			Log("OBD_VELKONOCNE_II\n");
 			/* 10/03/2000A.D. */
 /* 2006-02-11: doplnenÈ posv‰tnÈ ËÌtanie */
 #define _velk2_hymnus {\
@@ -6408,6 +6432,7 @@ label_24_DEC:
 
 /* switch(litobd), case OBD_VELKONOCNA_OKTAVA -- begin ---------------------------------------- */
 		case OBD_VELKONOCNA_OKTAVA:/* velkonocna nedela -- 2. velk. ne */
+			Log("OBD_VELKONOCNA_OKTAVA\n");
 			/* velkonocna oktava: 09/03/2000A.D.
 			 *    - hymnus, antifony 1 -- 3, zalmy a chvalospev su z velkonocnej nedele;
 			 *    - responzorium, 'Toto je den...' ako na velkonocnu nedelu;
@@ -6541,10 +6566,11 @@ label_24_DEC:
 /* switch(litobd), case OBD_VELKONOCNA_OKTAVA -- end ------------------------------------------ */
 
 	}/* switch(litobd) */
+	Log("koniec veækÈho switchu podæa liturgick˝ch obdobÌ.\n");
 	/* koniec velkeho switchu, podla ktoreho sa priradia zakladne udaje */
 
-#ifdef DETAIL_LOG_GLOBAL_DEN
 	Log("_global_den (nastavene v dbzaltar.cpp::liturgicke_obdobie() po velkom switchi, pred druhym spustanim sviatky_svatych()):\n");
+#ifdef DETAIL_LOG_GLOBAL_DEN
 	Log(_global_den);
 #endif
 	/* -------------------------------------------------------------------- */
@@ -6755,8 +6781,11 @@ short int modlitba;
 
 /* najprv nejake define'y... */
 #define LOG_ciara_sv Log("  -------------------------\n");
+
+/* 2007-09-27: kvÙli debugovaniu pod Ruby zruöenÈ koment·re vo v˝pisoch*/
 /* 2003-06-30 pre lahsie debugovanie obohateny vypis */
-#define set_LOG_svsv Log("   set(svsv): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby(modlitba), _file, _anchor)
+//#define set_LOG_svsv Log("   set(svsv): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby(modlitba), _file, _anchor)
+#define set_LOG_svsv Log("   set(svsv): %s: s˙bor `%s', kotva `%s'\n", nazov_modlitby(modlitba), _file, _anchor)
 
 /* ked dostane strukturu sc, vrati
  * MODL_SPOL_CAST_DUCH_PAST_... resp.
@@ -7209,8 +7238,11 @@ void _spolocna_cast_1cit_zvazok(short int modlitba, char *_anchor_pom, char *_an
 		sprintf(_anchor_lokal, "%s%s%c%s", _anchor, _anchor_zvazok, pismenko_modlitby(modlitba), ANCHOR_CITANIE1);
 	}
 	_set_citanie1(modlitba, _file, _anchor_lokal);
+
+	/* 2007-09-27: kvÙli debugovaniu pod Ruby zruöenÈ koment·re vo v˝pisoch*/
 	/* set_LOG_svsv; */
-	Log("   set(svsv): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby(modlitba), _file, _anchor_lokal);
+	// Log("   set(svsv): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby(modlitba), _file, _anchor_lokal);
+	Log("   set(svsv): %s: `%s', kotva `%s'\n", nazov_modlitby(modlitba), _file, _anchor_lokal);
 }
 
 /* 2005-08-27: kr·tke responzÛrium na posv‰tnÈ ËÌtanie pre vlastnÈ Ëasti je 
@@ -7233,8 +7265,11 @@ void _spolocna_cast_kresponz_zvazok(short int modlitba, char *_anchor_pom, char 
 		sprintf(_anchor_lokal, "%s%s%c%s", _anchor, _anchor_zvazok, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ);
 	}
 	_set_kresponz(modlitba, _file, _anchor_lokal);
+
+	/* 2007-09-27: kvÙli debugovaniu pod Ruby zruöenÈ koment·re vo v˝pisoch*/
 	/* set_LOG_svsv; */
-	Log("   set(svsv): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby(modlitba), _file, _anchor_lokal);
+	// Log("   set(svsv): %s: `%s', <!--{BEGIN:%s}-->\n", nazov_modlitby(modlitba), _file, _anchor_lokal);
+	Log("   set(svsv): %s: `%s', kotva `%s'\n", nazov_modlitby(modlitba), _file, _anchor_lokal);
 }
 
 /* 2005-11-24: pridanÈ; podæa vöeobecn˝ch smernÌc, Ë. 134:
@@ -15934,7 +15969,7 @@ label_8_DEC:
 
 		_global_svaty1.den = den;
 		_global_svaty1.mesiac = mesiac;
-		Log("  %d. %d: %s (%d) [%d]\n", _global_svaty1.den,	_global_svaty1.mesiac, _global_svaty1.meno,	_global_svaty1.typslav, _global_svaty1.smer);
+		Log("  %d. %d: %s (typslav = %d) [smer = %d]\n", _global_svaty1.den,	_global_svaty1.mesiac, _global_svaty1.meno,	_global_svaty1.typslav, _global_svaty1.smer);
 #ifdef DETAIL_LOG_SVATY
 		Log(_global_svaty1);
 #endif
@@ -15942,7 +15977,7 @@ label_8_DEC:
 		if(pocet > 1){
 			_global_svaty2.den = den;
 			_global_svaty2.mesiac = mesiac;
-			Log("  %d. %d: %s (%d) [%d]\n", _global_svaty2.den,	_global_svaty2.mesiac, _global_svaty2.meno, _global_svaty2.typslav, _global_svaty2.smer);
+			Log("  %d. %d: %s (typslav = %d) [smer = %d]\n", _global_svaty2.den,	_global_svaty2.mesiac, _global_svaty2.meno, _global_svaty2.typslav, _global_svaty2.smer);
 #ifdef DETAIL_LOG_SVATY
 			Log(_global_svaty2);
 #endif
@@ -15950,7 +15985,7 @@ label_8_DEC:
 			if(pocet > 2){
 				_global_svaty3.den = den;
 				_global_svaty3.mesiac = mesiac;
-				Log("  %d. %d: %s (%d) [%d]\n", _global_svaty3.den,	_global_svaty3.mesiac, _global_svaty3.meno,	_global_svaty3.typslav, _global_svaty3.smer);
+				Log("  %d. %d: %s (typslav = %d) [smer = %d]\n", _global_svaty3.den,	_global_svaty3.mesiac, _global_svaty3.meno,	_global_svaty3.typslav, _global_svaty3.smer);
 #ifdef DETAIL_LOG_SVATY
 				Log(_global_svaty3);
 #endif

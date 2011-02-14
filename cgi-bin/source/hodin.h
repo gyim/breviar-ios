@@ -266,7 +266,7 @@ const char *nazov_obdobia_jazyk[POCET_OBDOBI + 1][POCET_JAZYKOV + 1] =
 
 const char *nazov_obdobia_[] = // debuggovacie - preto netreba preklada; 2006-08-03
 {"ve¾konoèná oktáva", "adventné obdobie I", "adventné obdobie II",
- "vianoèné obdobie I", "vianoèné obdobie II", "obdobie „cez rok“",
+ "vianoèné obdobie I", "vianoèné obdobie II", "cezroèné obdobie", // obdobie „cez rok“
  "pôstne obdobie I", "Ve¾kı tıdeò",
  "ve¾konoèné trojdnie", "ve¾konoèné obdobie I", "ve¾konoèné obdobie II",
  "oktáva Narodenia Pána"};

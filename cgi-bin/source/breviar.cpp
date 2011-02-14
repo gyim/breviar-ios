@@ -2692,6 +2692,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 	Log("_rozbor_dna(): _global_den:\n");
 	Log(_global_den); /* pridane 01/03/2000A.D. */
 
+	Log("_rozbor_dna(): Nasleduje porovnanie so sviatkami sv‰t˝ch (mÙûe ich byù viacero):\n");
 	/* nasleduje porovnanie so sviatkami svatych;
 	 * berieme do uvahy, ze moze byt viac lubovolnych spomienok
 	 */
@@ -2706,12 +2707,12 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 
 	/* 2003-06-30 */
 	/* 2003-10-07; prve nedelne vespery nemali prosby, chyba bola v dbzaltar.cpp::_SET_SPOLOCNE_VECI_NEDELA */
-	Log("(1) _global_modl_prve_vespery:\n"); Log(_global_modl_prve_vespery);
+	Log("(1) _global_modl_prve_vespery:\n");
+	Log(_global_modl_prve_vespery);
 
 	/* pridane 28/03/2000A.D.: ak chce vacsie cislo (poradie svateho) ako je v _global_pocet_svatych
 	 * resp. ked nie je sobota a chce poradie svateho 4 (spomienka p. marie v sobotu)
 	 */
-
 	if((_global_pocet_svatych == 0) && (_global_pocet_svatych < poradie_svaty) && (poradie_svaty != 4)){
 		Export("V tento deÚ nie je sviatok ûiadneho sv‰tÈho, preto nemÙûete poûadovaù sv‰tÈho Ë. %d.",
 			poradie_svaty);
@@ -2734,11 +2735,11 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 		return FAILURE;
 	}
 
+	/* ak predoölÈ kontroly s˙ OK, ideme porovn·vaù "dÙleûitosù" sviatku urËenÈho v sviatky_svatych() s "beûn˝m" dÚom urËen˝m vyööie */
 	if(_global_pocet_svatych > 0){
 		Log("sviatky_svatych() == %d\n", _global_pocet_svatych);
 
-		/* treba pamatat na to, ze v poste sa vsetky spomienky
-		 * stavaju lubovolnymi (c. 14 vseob. smernic) */
+		/* treba pamatat na to, ze v poste sa vsetky spomienky stavaju lubovolnymi (c. 14 vseob. smernic) */
 		if((_global_den.litobd == OBD_POSTNE_I) &&
 			(_global_svaty1.typslav == SLAV_SPOMIENKA)){
 			 Log("je postne obdobie, tak menim `spomienku' na `lubovolnu spomienku'\n");
@@ -2774,8 +2775,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				_global_den.smer, _global_svaty1.smer, _global_svaty1.prik);
 
 			/* cele to tu bolo asi kvoli tomu, ze niektore veci sa pri generovani modlitby
-			 * citali z _global_den explicitne;
-			 * zda sa, ze to ide aj bez toho;
+			 * citali z _global_den explicitne; zda sa, ze to ide aj bez toho;
 			 * napr. v BUTTONS (teda v tom export...) sa cita z _global_svaty...
 			 * 08/03/2000A.D.
 			 * akvsak ked som to cele zrusil, tak prestali fungovat prve vespery slavnosti, ktore
@@ -2799,8 +2799,8 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					(poradie_svaty == 2 ? _global_svaty2.meno : 
 					(poradie_svaty == 3 ? _global_svaty3.meno : "spomienka PM v sobotu")));
 
-				mystrcpy(_global_den.meno, _global_svaty1.meno, MENO_SVIATKU);
-				_global_den.smer = _global_svaty1.smer;
+				mystrcpy(_global_den.meno, _global_svaty1.meno, MENO_SVIATKU); /* priradenie n·zvu dÚa */
+				_global_den.smer = _global_svaty1.smer; /* dÙleûitosù sviatku podæa smernÌc */
 				_global_den.typslav = _global_svaty1.typslav;
 				_global_den.typslav_lokal = _global_svaty1.typslav_lokal; /* pridanÈ 2005-07-27 */
 				_global_den.spolcast = _global_svaty1.spolcast; /* pridane 22/02/2000A.D. */
@@ -3332,9 +3332,7 @@ short int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, short int rok, short
 		return FAILURE;
 	}
 
-
-	/* teraz nasleduje nieco, co nahradza export
-	 * -- avsak data uklada do stringu _global_string */
+	/* teraz nasleduje nieco, co nahradza export - avsak data uklada do stringu _global_string */
 	Log("spustam init_global_string(EXPORT_DNA_JEDEN_DEN, svaty == %d, modlitba == %s)...\n",
 		poradie_svateho, nazov_modlitby(modlitba));
 	ret = init_global_string(EXPORT_DNA_JEDEN_DEN, poradie_svateho, modlitba);
@@ -4609,6 +4607,7 @@ void _export_rozbor_dna(short int typ){
  * 
  * 2006-02-06: upravenÈ: negenerovaù veöpery pre æubovoæn˙ spomienku PM (a != 4)
  *
+ * 2007-09-25: iba pozn·mka - moûno by bolo dobrÈ tie stringy vytv·raù dynamicky pre jednotlivÈ modlitby (ktorÈ by sa dali parametrizovaù)
  *
  */
 #define BATCH_COMMAND(a)	{ \
@@ -4973,8 +4972,7 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
  * - ulozi vysledok do lokalnej premennej _local_den, _local_svaty...
  * - spusti analyzuj_rok(rok);
  * - spusti _rozbor_dna(datum, rok);
- * - porovna, ci (ked su modlitbou vespery) budu prve vespery z dalsieho dna
- *   alebo nie,
+ * - porovna, ci (ked su modlitbou vespery) budu prve vespery z dalsieho dna alebo nie,
  * - napokon spusti vytvorenie modlitby
  *
  * POZOR! Narozdiel od rozbor dna, pred samotnym spustenim generovania
