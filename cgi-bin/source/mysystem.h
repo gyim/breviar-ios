@@ -11,16 +11,17 @@
 /*   02/11/1999A.D. | created                                  */
 /*   24/02/2000A.D. | prekopane                                */
 /*   30/03/2000A.D. | pridane OS_Windows, MODEL_DEBUG_Windows, */
-/*                    MODEL_ostry_Windows                      */
+/*                    MODEL_Windows                      */
 /*   06/09/2001A.D. | tento popis                              */
 /*   2004-03-17a.D. | poznamka k OS_...                        */
 /*   2005-03-22a.D. | zrusene DOS, vytvoreny novy model        */
 /*   2005-03-28a.D. | pridane na zaciatok #undef pre vsetky    */
 /*   2006-01-28a.D. | pridanÈ define pre spÙsob exportu        */
 /*   2006-07-11a.D. | prvÈ kroky k jazykov˝m mut·ci·m          */
-/*   2007-05-25a.D. | pridanÈ MODEL_ostry_Windows_RUBY         */
+/*   2007-05-25a.D. | pridanÈ MODEL_Windows_RUBY         */
 /*   2007-06-01a.D. | vËlenen˝ "config.h" pre confuse          */
 /*   2007-06-19a.D. | odstr·nen˝ "config.h" pre confuse        */
+/*   2007-06-28a.D. | oprava jednotliv˝ch modelov, popisy      */
 /*                                                             */
 /***************************************************************/
 
@@ -34,23 +35,70 @@
 
 #undef USE_UNCGI
 
-#undef MODEL_ostry_linux
-#undef MODEL_ostry_Windows_RUBY
-#undef MODEL_DEBUG_Windows_RUBY
-#undef MODEL_DEBUG_linux
-#undef MODEL_ostry_SIMUL_linux_UNDER_Windows
-#undef MODEL_DEBUG_SIMUL_linux_UNDER_Windows
-#undef MODEL_ostry_Windows
-#undef MODEL_DEBUG_Windows
+#undef MODEL_linux
+#undef MODEL_linux_commandline
+#undef MODEL_Windows_RUBY
+#undef MODEL_Windows_commandline
 
-//#define MODEL_ostry_linux
-#define MODEL_ostry_Windows_RUBY // 2007-05-24: pridanÈ; pouûÌvame pre Windows/ruby
-//#define MODEL_DEBUG_Windows_RUBY // 2007-06-01: pridanÈ; pouûÌvame pre Windows/ruby a vypisovanie vöetko na stdout
-//#define MODEL_DEBUG_Windows
-//#define MODEL_ostry_Windows // nezabudni zmenit datum v mybuild.h !!!
+#undef MODEL_DEBUG_linux
+#undef MODEL_DEBUG_linux_commandline
+#undef MODEL_DEBUG_Windows_RUBY
+#undef MODEL_DEBUG_Windows_commandline
+
+/*
+ * Pozn·mka: Pri buildovanÌ nezabudni zmeniù datum v mydefs.h (BUILD_DATE).
+ *
+ * Popis jednotliv˝ch modelov (JUV, 2007-06-28):
+ *
+ * MODEL_linux - takto to vyzer· na internete (www.breviar.sk): 
+ *		- ûiadne logovanie, export do stdout, systÈm linux
+ *		- debug verzia (s v˝pismi na stdout do HTML s˙boru ako pozn·mky): MODEL_DEBUG_linux
+ *
+ * MODEL_linux_commandline - off-line command-line verzia pre linux: 
+ *		- ûiadne logovanie, export do s˙boru, systÈm linux 
+ *		  (pouûitie pre off-line ruËnÈ generovanie HTML str·nok, 
+ *		  napr. aj pre batch mÛd - d·vkovÈ generovanie veæa str·nok na s˙vislÈ obdobie)
+ *		- debug verzia (s v˝pismi do samostatnÈho s˙boru): MODEL_DEBUG_linux_commandline
+ *
+ * MODEL_Windows_RUBY - off-line verzia pre Windows s pouûitÌm Ruby webservera: 
+ *		- ûiadne logovanie, export do stdout, systÈm Windows
+ *		// 2007-05-24: pridanÈ; pouûÌvame pre Windows/ruby
+ *		- debug verzia (s v˝pismi na stdout do HTML s˙boru ako pozn·mky): MODEL_DEBUG_Windows_RUBY
+ *
+ * MODEL_Windows_commandline - off-line command-line verzia pre Windows: 
+ *		- ûiadne logovanie, export do s˙boru, systÈm Windows 
+ *		  (pouûitie pre off-line ruËnÈ generovanie HTML str·nok, 
+ *		  napr. aj pre batch mÛd - d·vkovÈ generovanie veæa str·nok na s˙vislÈ obdobie)
+ *		- debug verzia (s v˝pismi do samostatnÈho s˙boru): MODEL_DEBUG_Windows_commandline
+ *
+ * 
+ * MODEL_SIMUL_linux_UNDER_Windows - pouûitÈ v minulosti na debuggovanie
+ * MODEL_DEBUG_SIMUL_linux_UNDER_Windows - pouûitÈ v minulosti na debuggovanie
+ *
+ */
+
+/* Modely pre ostrÈ pouûitie */
+
+//#define MODEL_linux
+//#define MODEL_linux_commandline
+#define MODEL_Windows_RUBY
+//#define MODEL_Windows_commandline
+
+/* Modely pre debugovanie */
+
 //#define MODEL_DEBUG_linux
-//#define MODEL_ostry_SIMUL_linux_UNDER_Windows		// 2005-03-28 Vytvorene (simulacia ostreho linuxu)
-//#define MODEL_DEBUG_SIMUL_linux_UNDER_Windows		// 2005-03-22 Vytvorene (simulacia DEBUG linuxu)
+//#define MODEL_DEBUG_linux_commandline
+//#define MODEL_DEBUG_Windows_RUBY
+//#define MODEL_DEBUG_Windows_commandline
+
+/* 
+ * NepouûÌvanÈ (JUV, 2007-06-28):
+ * 
+ * #define MODEL_SIMUL_linux_UNDER_Windows		// 2005-03-28 Vytvorene (simulacia ostreho linuxu)
+ * #define MODEL_DEBUG_SIMUL_linux_UNDER_Windows		// 2005-03-22 Vytvorene (simulacia DEBUG linuxu)
+ * #define MODEL_klasicky_DOS
+ * #define MODEL_DEBUG_DOS
+ */
 
 /* --------------------------------------------------------------------- */
 /* prerobene 23/02/2000A.D. -- 24/02/2000A.D. */
@@ -60,13 +108,13 @@
 #undef EXPORT_HTML_ANCHOR
 
 /* ostry linux: */
-#if defined(MODEL_ostry_linux)
+#if defined(MODEL_linux)
 	#define OS_linux
 	#undef LOGGING
 	#define EXPORT_HTML_FILENAME_ANCHOR
 	#define EXPORT_TO_STDOUT
 /* ostrÈ Windows/RUBY: */
-#elif defined(MODEL_ostry_Windows_RUBY)
+#elif defined(MODEL_Windows_RUBY)
 	#define OS_Windows_Ruby
 	#undef LOGGING
 	#define EXPORT_HTML_FILENAME_ANCHOR
@@ -85,30 +133,43 @@
 	#define LOG_TO_STDOUT
 	#define EXPORT_TO_STDOUT
 	#define DEBUG
-/* ostry Windows: */
-#elif defined(MODEL_ostry_Windows)
+/* ostry Windows (command-line verzia): */
+#elif defined(MODEL_Windows_commandline)
 	#define OS_Windows
 	#undef LOGGING
 	#define EXPORT_TO_FILE
-/* debugovanie Windows -- vsetko sa loguje do suboru */
-#elif defined(MODEL_DEBUG_Windows)
+/* debugovanie Windows/command-line -- vsetko sa loguje do suboru */
+#elif defined(MODEL_DEBUG_Windows_commandline)
 	#define OS_Windows
 	#define LOGGING
 	#define LOG_TO_FILE
 	#define EXPORT_HTML_FILENAME_ANCHOR
 	#define EXPORT_TO_FILE
-/* simulacia ostreho linuxu pod Windows */
-#elif defined(MODEL_ostry_SIMUL_linux_UNDER_Windows)
+/* ostry linux (command-line verzia): */
+#elif defined(MODEL_linux_commandline)
+	#define OS_linux
+	#undef LOGGING
+	#define EXPORT_TO_FILE
+/* debugovanie linux/command-line -- vsetko sa loguje do suboru */
+#elif defined(MODEL_DEBUG_Windows_commandline)
+	#define OS_linux
+	#define LOGGING
+	#define LOG_TO_FILE
+	#define EXPORT_HTML_FILENAME_ANCHOR
+	#define EXPORT_TO_FILE
+
+/* NepouûÌvanÈ:
+// simulacia ostreho linuxu pod Windows 
+#elif defined(MODEL_SIMUL_linux_UNDER_Windows)
 	#define OS_linux
 	#undef LOGGING
 	#define EXPORT_TO_STDOUT
-/* debugovanie linuxu vo Windows -- vsetko sa loguje do suboru */
+// debugovanie linuxu vo Windows -- vsetko sa loguje do suboru
 #elif defined(MODEL_DEBUG_SIMUL_linux_UNDER_Windows)
 	#define OS_linux
 	#define LOGGING
 	#define LOG_TO_FILE
 	#define EXPORT_TO_FILE
-/*
 // klasicky DOS
 #elif defined(MODEL_klasicky_DOS)
 	#define OS_DOS
@@ -122,8 +183,9 @@
 	#define LOG_TO_STDOUT
 	#define EXPORT_TO_STDOUT
 */
+
 #else
-	#error Unsupported system model (try MODEL_ostry_linux, MODEL_ostry_Windows, MODEL_DEBUG_linux, MODEL_DEBUG_Windows, MODEL_DEBUG_SIMUL_linux_UNDER_Windows)
+	#error Unsupported system model (see mysystem.h) - Nepodporovan˝ systÈmov˝ model (pozri s˙bor mysystem.h)
 #endif
 
 #ifdef LOG_TO_EXPORT

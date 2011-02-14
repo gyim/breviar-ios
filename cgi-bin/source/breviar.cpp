@@ -148,7 +148,7 @@ char *_global_buf2; /* 2006-08-01: vytvorené; túto premennú tiež alokujeme */
 
 #define LOG_ciara Log("---------------------\n");
 
-#define FILE_LOG "dnes.log"
+#define FILE_LOG "breviar.log" // zmenené na breviar.log; ve¾mi dlho bolo dnes.log :) 2007-06-28
 
 #define _main_LOG_to_Export Log
 #define _main_LOG Log
@@ -1272,26 +1272,50 @@ void interpretParameter(short int type, char *paramname){
 		}
 	}
 	else if(equals(paramname, PARAM_CHVALOSPEV_BEGIN)){
-		if(_global_opt1 == NIE && _global_opt_tedeum == NIE){ /* 2007-05-18 pridaná podmienka na tedeum */
-			/* nezobrazovat Benediktus/Magnifikat/Te Deum */
+		if(_global_opt1 == NIE){
+			/* nezobrazovat Benediktus/Magnifikat */
 			_global_skip_in_prayer = ANO;
-			Export("nezobrazit Benediktus/Magnifikat/Te Deum");
-			Log("  `Benediktus/Magnifikat/Te Deum' skipping...\n");
+			Export("nezobrazit Benediktus/Magnifikat");
+			Log("  `Benediktus/Magnifikat' skipping...\n");
 		}
 		else{
-			Export("zobrazit Benediktus/Magnifikat/Te Deum");
-			Log("  `Benediktus/Magnifikat/Te Deum': begin...\n");
+			Export("zobrazit Benediktus/Magnifikat");
+			Log("  `Benediktus/Magnifikat': begin...\n");
 		}
 	}
 	else if(equals(paramname, PARAM_CHVALOSPEV_END)){
 		if(_global_opt1 == NIE){
-			/* nezobrazovat Benediktus/Magnifikat/Te Deum */
+			/* nezobrazovat Benediktus/Magnifikat */
 			_global_skip_in_prayer = NIE;
-			Log("  `Benediktus/Magnifikat/Te Deum' skipped.\n");
+			Log("  `Benediktus/Magnifikat' skipped.\n");
 		}
 		else{
-			Export("zobrazit Benediktus/Magnifikat/Te Deum");
-			Log("  `Benediktus/Magnifikat/Te Deum' copied.\n");
+			Export("zobrazit Benediktus/Magnifikat");
+			Log("  `Benediktus/Magnifikat' copied.\n");
+		}
+	}
+	/* 2007-06-28: podmienka na Te Deum osamostatnená */
+	else if(equals(paramname, PARAM_TEDEUM_BEGIN)){
+		if(_global_opt_tedeum == NIE){ /* 2007-05-18 pridaná podmienka na tedeum */
+			/* nezobrazovat Te Deum */
+			_global_skip_in_prayer = ANO;
+			Export("nezobrazit Te Deum");
+			Log("  `Te Deum' skipping...\n");
+		}
+		else{
+			Export("zobrazit Te Deum");
+			Log("  `Te Deum': begin...\n");
+		}
+	}
+	else if(equals(paramname, PARAM_TEDEUM_END)){
+		if(_global_opt_tedeum == NIE){
+			/* nezobrazovat Te Deum */
+			_global_skip_in_prayer = NIE;
+			Log("  `Te Deum' skipped.\n");
+		}
+		else{
+			Export("zobrazit Te Deum");
+			Log("  `Te Deum' copied.\n");
 		}
 	}
 	else if(equals(paramname, PARAM_ZAKONCENIE_BEGIN)){
@@ -8377,7 +8401,7 @@ int main(int argc, char **argv){
 	_main_LOG("\n");
 // #endif
 	
-	_main_LOG("-- log file programu pre Liturgiu hodin (c)1999-2006 Juraj Videky --\n");
+	_main_LOG("-- log file programu pre Liturgiu hodín (c)1999-2007 Juraj Vidéky --\n");
 
 	/* config: dorobene 30/03/2000A.D. */
 	_main_LOG("first, reading configuration (file %s)...\n", CONFIG_FILE);

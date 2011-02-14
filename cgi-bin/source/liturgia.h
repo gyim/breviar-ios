@@ -38,6 +38,7 @@
 /*   2006-10-13a.D. | jazykovo z·vislÈ je aj nazov_Modlitby    */
 /*   2006-12-12a.D. | doplnenie latinËiny (la)                 */
 /*   2007-06-01a.D. | niektorÈ definy presunutÈ do mydefs.h    */
+/*   2007-06-28a.D. | doplnenÈ: PARAM_TEDEUM_BEGIN aj _END     */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -313,6 +314,9 @@ extern const char *TEMPLAT[];
 /* 2007-03-23: doplnenÈ Sl·va Otcu */
 #define PARAM_SLAVAOTCU_BEGIN               "SLAVAOTCU_BEGIN"
 #define PARAM_SLAVAOTCU_END                 "SLAVAOTCU_END"
+/* 2007-06-28: doplnenÈ Te Deum; nemÙûe sa riadiù rovnak˝mi pravidlami ako chv·lospevy */
+#define PARAM_TEDEUM_BEGIN              "TEDEUM_BEGIN"
+#define PARAM_TEDEUM_END                "TEDEUM_END"
 
 /* stringy parametrov vstupu pre MODL_OPT..., ktore generovanie modlitby
  * ovplyvnuju */
