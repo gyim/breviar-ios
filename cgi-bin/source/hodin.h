@@ -408,23 +408,26 @@ const char *nazov_Slavenia[] =
  "Vlastné slávenie"};
 */
 
-/* 2005-07-27: doplnené */
+/* 2005-07-27: doplnené
+ * 2007-08-31: upravené TT -> BA-TT
+ * 2008-06-23: upravené vzh¾adom k novému usporiadaniu diecéz (intuitívne)
+ */
 const char *nazov_slavenia_lokal[] =
 {""
 ,"len v roòavskej katedrále"
-,"hlavnı patrón Bratislavsko-Trnavskej arcidiecézy"
-,"v Bratislavsko-Trnavskej arcidiecéze a v Banskobystrickej, Košickej, Nitrianskej a Roòavskej diecéze"
+,"hlavnı patrón Trnavskej arcidiecézy" /* "hlavnı patrón Bratislavsko-Trnavskej arcidiecézy" */
+,"v Bratislavskej a Trnavskej arcidiecéze a v Banskobystrickej, Košickej, Nitrianskej a Roòavskej diecéze" /* "v Bratislavsko-Trnavskej arcidiecéze a v Banskobystrickej, Košickej, Nitrianskej a Roòavskej diecéze" */
 ,"v Nitrianskej diecéze sviatok hlavnıch patrónov"
 ,"len v Košickej diecéze"
 ,"len v Nitrianskej diecéze"
 ,"len v Banskobystrickej diecéze"
 ,"len v Spišskej diecéze"
 ,"len v Roòavskej diecéze"
-,"len v Bratislavsko-trnavskej arcidiecéze" /* LOKAL_SLAV_TRNAVA - pôvodne bolo "len v Trnavskej diecéze", upravené 2007-08-31*/
+,"len v Trnavskej arcidiecéze" /* "len v Bratislavsko-trnavskej arcidiecéze" */ /* LOKAL_SLAV_TRNAVA - pôvodne bolo "len v Trnavskej diecéze", upravené 2007-08-31*/
 ,"len v Dóme sv. Martina v Bratislave"
 ,"v Spišskej diecéze sviatok hlavného patróna"
 ,"v Banskobystrickej diecéze sviatok hlavného patróna"
-,"v Bratislavsko-Trnavskej arcidiecéze a v Banskobystrickej, Nitrianskej a Roòavskej diecéze"
+,"v Bratislavskej a Trnavskej arcidiecéze a v Banskobystrickej, Nitrianskej a Roòavskej diecéze" /* "v Bratislavsko-Trnavskej arcidiecéze a v Banskobystrickej, Nitrianskej a Roòavskej diecéze" */
 ,"v Košickej diecéze sviatok hlavného patróna"
 ,"na Slovensku 5. júla, slávnos; v Európe sviatok"
 ,"v Roòavskej diecéze sviatok hlavného patróna"
@@ -449,6 +452,7 @@ const char *nazov_slavenia_lokal[] =
 ,"v plzeòské diecézi"
 ,"ve Slezsku svátek"
 ,"v èeskobudìjovické diecézi památka"
+,"v Bratislavskej arcidiecéze a v Spišskej diecéze sviatok hlavného patróna" /* doplnené 2008-06-24 */
 };
 
 const char *nazov_farby_jazyk[POCET_FARIEB + 1][POCET_JAZYKOV + 1] =

@@ -45,6 +45,7 @@
 /*   2008-01-05a.D. | doplnenÈ text_PO_POPOLCOVEJ_STREDE[]     */
 /*                  - a tieû text_V_OKTAVE_NARODENIA[]         */
 /*   2008-01-23a.D. | opravenÈ pole konöt·nt zvazok_breviara[] */
+/*   2008-06-24a.D. | doplnenÈ LOKAL_SLAV_SPIS_BA_PATRON       */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -639,7 +640,7 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_BYSTRICA            7
 #define LOKAL_SLAV_SPIS                8
 #define LOKAL_SLAV_ROZNAVA             9
-#define LOKAL_SLAV_BA_TT              10 /* pÙvodne bolo LOKAL_SLAV_TRNAVA, upravenÈ 2007-08-31*/
+#define LOKAL_SLAV_TRNAVA             10 /* pÙvodne bolo LOKAL_SLAV_TRNAVA, upravenÈ 2007-08-31 na LOKAL_SLAV_BA_TT; nasp‰ù na LOKAL_SLAV_TRNAVA 2008-06-23 */
 #define LOKAL_SLAV_DOM_SV_MARTINA     11
 #define LOKAL_SLAV_SPIS_PATRON        12
 #define LOKAL_SLAV_BYSTRICA_PATRON    13
@@ -668,6 +669,7 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_PLZEN 					36
 #define LOKAL_SLAV_SLEZSKO_SVATEK			37
 #define LOKAL_SLAV_CESKE_BUDEJOVICE_PAMATKA	38
+#define LOKAL_SLAV_SPIS_BA_PATRON			39 /* pre 11. novembra, patrÛna BA-arcidiecÈzy; 2008-06-24; nahr·dza LOKAL_SLAV_SPIS_PATRON */
 
 /* prikazany / neprikazany sviatok */
 #define PRIKAZANY_SVIATOK 1

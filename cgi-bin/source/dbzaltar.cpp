@@ -94,6 +94,7 @@
 /*   2008-05-14a.D. | opravenÈ modlitby cez deÚ pre 3. a 14. m·ja       */
 /*   2008-05-16a.D. | pre prvÈ veöpery narodenia p·na in˝ hymnus (cz)   */
 /*   2008-06-09a.D. | sv. Norbert - iba æubovoæn· spomienka             */
+/*   2008-06-24a.D. | doplnenÈ LOKAL_SLAV_SPIS_BA_PATRON                */
 /*                                                                      */
 /*                                                                      */
 /* notes |                                                              */
@@ -13780,7 +13781,7 @@ label_25_MAR:
 							/* 2005-08-22: Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
 						}
 						_global_svaty1.smer = 11; /* hoci by malo byù 8 - mieste sviatky, dali sme 11, aby tam bol aj vöedn˝ deÚ - pre ostatnÈ diecÈzy */
-						_global_svaty1.typslav_lokal = LOKAL_SLAV_BA_TT; /* pÙvodne bolo LOKAL_SLAV_TRNAVA, upravenÈ 2007-08-31*/
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_TRNAVA;
 						_global_svaty1.typslav = SLAV_SVIATOK; /* pÙvodne bolo SLAV_SPOMIENKA, upravenÈ 2007-08-31*/
 						mystrcpy(_global_svaty1.meno, text_AUG_30[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
@@ -15441,7 +15442,7 @@ label_25_MAR:
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, text_NOV_11[_global_jazyk], MENO_SVIATKU);
 					if(_global_jazyk == JAZYK_SK){
-						_global_svaty1.typslav_lokal = LOKAL_SLAV_SPIS_PATRON; /* 2005-10-28: pridanÈ */
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_SPIS_BA_PATRON; /* 2005-10-28: pridanÈ; 2008-06-24: zmenenÈ z pÙvodnÈho LOKAL_SLAV_SPIS_PATRON */
 					}
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
