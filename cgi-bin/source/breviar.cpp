@@ -1225,7 +1225,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
  * 2007-04-10: Doplnené: Te Deum je vo ve¾konoènej oktáve; nie je poèas pôstu (ani len pre nedele)
  * 2009-01-06: Doplnené: Te Deum je aj v oktáve narodenia Pána (vianoèná oktáva)
  */
-#define je_tedeum (type == MODL_POSV_CITANIE) && (((_global_den.denvt == DEN_NEDELA) && (_global_den.litobd != OBD_POSTNE_I) && (_global_den.litobd != OBD_POSTNE_II_VELKY_TYZDEN)) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || (_global_den.litobd == OBD_OKTAVA_NARODENIA))
+#define je_tedeum (type == MODL_POSV_CITANIE) && (((_global_den.denvt == DEN_NEDELA) && (_global_den.litobd != OBD_POSTNE_I) && (_global_den.litobd != OBD_POSTNE_II_VELKY_TYZDEN)) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || (_global_den.litobd == OBD_OKTAVA_NARODENIA) || ((_global_den.den == 9) && (_global_den.mesiac == MES_NOV - 1)))
 
 /* 2007-11-20: doplnené @ifdef EXPORT_HTML_SPECIALS */
 void interpretParameter(short int type, char *paramname){

@@ -8922,6 +8922,20 @@ void _set_spolocna_cast(short int a, _struct_sc sc){
 		 */
 		_spolocna_cast_1cit_zvazok(modlitba, _anchor_pom, _anchor_zvazok, _anchor_head, _file);
 
+		/* modlitba cez deò, pridané 2009-01-07; almy a antifóny sa berú ako vo všednı deò */
+		modlitba = MODL_PREDPOLUDNIM;
+		_spolocna_cast_kcitanie;
+		_spolocna_cast_kresponz;
+		_spolocna_cast_modlitba;
+		modlitba = MODL_NAPOLUDNIE;
+		_spolocna_cast_kcitanie;
+		_spolocna_cast_kresponz;
+		_spolocna_cast_modlitba;
+		modlitba = MODL_POPOLUDNI;
+		_spolocna_cast_kcitanie;
+		_spolocna_cast_kresponz;
+		_spolocna_cast_modlitba;
+
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
 			modlitba = MODL_VESPERY;
@@ -14777,7 +14791,7 @@ label_25_MAR:
 						/* definovanie parametrov pre modlitbu */
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
-						/* 2005-08-22: Všetko je zo spoloenej easti na vıroeie posviacky chrámu */
+						/* 2005-08-22: Všetko je zo spoloènej èasti na vıroèie posviacky chrámu */
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
@@ -15990,11 +16004,17 @@ label_25_MAR:
 						/* definovanie parametrov pre modlitbu */
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
+							/* Všetko je zo spoloènej èasti na vıroèie posviacky chrámu */
 
 						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
+						// _vlastna_cast_modlitba; zo spoloènej èasti
 						_vlastna_cast_2citanie;
 
+						/* 2009-01-07: pod¾a breviára (III., str. 1631) má by okrem antifón a almov (tie sú zo dòa)
+						 * ostatné zo spoloènej èasti [doplnené do spoloènej èasti: _set_spolocna_cast()];
+						 * doplnené, aby modlitba aj pre modlitbu cez deò bola zo spoloènej èasti
+						 * mimochodom, je predpísané Te Deum
+						 */
 						break;
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
