@@ -50,7 +50,7 @@ const char *nazov_modlitby[] =
 
 const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] = 
 {{"invitatÛrium", "invitato¯", "Invitatory", "invitatorium", "" }
-, {"rannÈ chv·ly", "rannÌ chv·ly", "Laudes", "laudes matutin&#230;", "" }
+, {"rannÈ chv·ly", "rannÌ chv·ly", "Laudes", "laudes matutinae", "" }
 , {"posv‰tnÈ ËÌtanie", "modlitba se ËtenÌm", "Office of Readings", "officium lectionis", "" }
 , {"modlitba predpoludnÌm", "modlitba dopoledne", "Terce", "tertia", "" }
 , {"modlitba napoludnie", "modlitba v poledne", "Sext", "sexta", "" }
@@ -69,7 +69,7 @@ const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 
 const char *nazov_Modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] = 
 {{"InvitatÛrium", "Invitato¯", "Invitatory", "Invitatorium", "" }
-, {"RannÈ chv·ly", "RannÌ chv·ly", "Laudes", "Laudes matutin&#230;", "" }
+, {"RannÈ chv·ly", "RannÌ chv·ly", "Laudes", "Laudes matutinae", "" }
 , {"Posv‰tnÈ ËÌtanie", "Modlitba se ËtenÌm", "Office of Readings", "Officium lectionis", "" }
 , {"Modlitba predpoludnÌm", "Modlitba dopoledne", "Terce", "Tertia", "" }
 , {"Modlitba napoludnie", "Modlitba v poledne", "Sext", "Sexta", "" }
@@ -287,7 +287,7 @@ const char *nazov_obdobia_v_jazyk[POCET_OBDOBI + 1][POCET_JAZYKOV + 1] =
  {"v adventnom obdobÌ", "v dobÏ adventnÌ", "", "", ""},
  {"vo vianoËnom obdobÌ", "v dobÏ v·noËnÌ", "", "", ""},
  {"vo vianoËnom obdobÌ", "v dobÏ v·noËnÌ", "", "", ""},
- {"v cezroËnom obdobÌ", "v mezidobÌ", "", "", ""}, // obdobie Ñcez rokì
+ {"v cezroËnom obdobÌ", "v mezidobÌ", "", "per annum", ""}, // obdobie Ñcez rokì
  {"v pÙstnom obdobÌ", "v dobÏ postnÌ", "", "", ""},
  {"vo Veækom t˝ûdni", "ve SvatÈm t˝dnu", "", "", ""},
  {"vo veækonoËnom trojdnÌ", "ve velikonoËnÌm triduu", "", "", ""},
@@ -378,10 +378,10 @@ const char *nazov_slavenia[] =
 */
 const char *nazov_slavenia_jazyk[POCET_SLAVENI + 1][POCET_JAZYKOV + 1] =
 {{"___", "___", "___", "", ""}, 
- {"sl·vnosù", "slavnost", "", "", ""}, 
- {"sviatok", "sv·tek", "", "", ""}, 
- {"spomienka", "pam·tka", "", "", ""}, 
- {"æubovoæn· spomienka", "nez·vazn· pam·tka", "", "", ""}, 
+ {"sl·vnosù", "slavnost", "celebration", "sollemnis", ""}, 
+ {"sviatok", "sv·tek", "", "festum", ""}, 
+ {"spomienka", "pam·tka", "", "memoria", ""}, 
+ {"æubovoæn· spomienka", "nez·vazn· pam·tka", "", "memoria ad libitum", ""}, 
  {"vlastnÈ sl·venie", "z vlastnÌch text˘", "", "", ""}, 
 };
 
@@ -438,11 +438,11 @@ const char *nazov_slavenia_lokal[] =
 
 const char *nazov_farby_jazyk[POCET_FARIEB + 1][POCET_JAZYKOV + 1] =
 {{"___", "___", "___", "___", ""}, 
- {"Ëerven·", "Ëerven·", "red", "", ""}, 
+ {"Ëerven·", "Ëerven·", "red", "rosa", ""}, 
  {"biela", "bÌl·", "white", "alba", ""}, 
- {"zelen·", "zelen·", "green", "", ""}, 
- {"fialov·", "fialov·", "purple", "", ""}, 
- {"ruûov·", "r˘ûov·", "rose", "", ""}, 
+ {"zelen·", "zelen·", "green", "___", ""}, 
+ {"fialov·", "fialov·", "purple", "___", ""}, 
+ {"ruûov·", "r˘ûov·", "rose", "___", ""}, 
 };
 
 #define		nazov_farby(a)	nazov_farby_jazyk[a][_global_jazyk]
@@ -549,11 +549,11 @@ const char *nazov_Dn[] =
 */
 const char *nazov_Dn_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1] = 
 { {"Ne" , "Ne", "Sun", "Do", ""}
-, {"Po" , "Po", "Mon", "F1", ""}
-, {"Ut" , "⁄t", "Tue", "F2", ""}
-, {"St" , "St", "Wed", "F3", ""}
-, {"ät" , "»t", "Thu", "F4", ""}
-, {"Pi" , "P·", "Fri", "F5", ""}
+, {"Po" , "Po", "Mon", "F2", ""}
+, {"Ut" , "⁄t", "Tue", "F3", ""}
+, {"St" , "St", "Wed", "F4", ""}
+, {"ät" , "»t", "Thu", "F5", ""}
+, {"Pi" , "P·", "Fri", "F6", ""}
 , {"So" , "So", "Sat", "S·", ""}
 , {"??" , "??", "???", "", ""}
 };
@@ -589,7 +589,7 @@ const char *nazov_mesiaca_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1] =
 , {"oktÛber" , "¯Ìjen", "October", "oct", ""}
 , {"november" , "listopad", "November", "nov", ""}
 , {"december" , "prosinec", "December", "dec", ""}
-, {"nezn·my" , "nezn·m˝", "unknown", "", ""}
+, {"nezn·my" , "nezn·m˝", "unknown", "___", ""}
 };
 
 #define		nazov_mesiaca(a)	nazov_mesiaca_jazyk[a][_global_jazyk]
@@ -601,19 +601,19 @@ const char *nazov_mesiaca_asci[] =
 */
 
 const char *nazov_mesiaca_asci_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1] = 
-{ {"januar", "leden", "January", "", ""}
-, {"februar" , "unor", "February", "", ""}
-, {"marec" , "brezen", "March", "", ""}
-, {"april" , "duben", "April", "", ""}
-, {"maj" , "kveten", "May", "", ""}
-, {"jun" , "cerven", "June", "", ""}
-, {"jul" , "cervenec", "July", "", ""}
-, {"august" , "srpen", "August", "", ""}
-, {"september" , "zari", "September", "", ""}
-, {"oktober" , "rijen", "October", "", ""}
-, {"november" , "listopad", "November", "", ""}
-, {"december" , "prosinec", "December", "", ""}
-, {"neznamy" , "neznamy", "unknown", "", ""}
+{ {"januar", "leden", "January", "Ianuarius", ""}
+, {"februar" , "unor", "February", "Februarius", ""}
+, {"marec" , "brezen", "March", "Martius", ""}
+, {"april" , "duben", "April", "Aprilis", ""}
+, {"maj" , "kveten", "May", "Maius", ""}
+, {"jun" , "cerven", "June", "Iunius", ""}
+, {"jul" , "cervenec", "July", "Iulius", ""}
+, {"august" , "srpen", "August", "Augustus", ""}
+, {"september" , "zari", "September", "September", ""}
+, {"oktober" , "rijen", "October", "October", ""}
+, {"november" , "listopad", "November", "November", ""}
+, {"december" , "prosinec", "December", "December", ""}
+, {"neznamy" , "neznamy", "unknown", "___", ""}
 };
 
 #define		nazov_mesiaca_asci(a)	nazov_mesiaca_asci_jazyk[a][_global_jazyk]
@@ -679,7 +679,7 @@ const char *nazov_mesiaca_gen_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1] =
 , {"oktÛbra" , "¯Ìjna", "October", "octÛbris", ""}
 , {"novembra" , "listopadu", "November", "novÈmbris", ""}
 , {"decembra" , "prosince", "December", "decÈmbris", ""}
-, {"nezn·meho" , "nezn·mÈho", "unknown", "", ""}
+, {"nezn·meho" , "nezn·mÈho", "unknown", "___", ""}
 };
 
 #define		nazov_mesiaca_gen(a)	nazov_mesiaca_gen_jazyk[a][_global_jazyk]
@@ -698,7 +698,7 @@ const char *nazov_Mesiaca_gen_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1] =
 , {"OktÛbra" , "ÿÌjna", "October", "OctÛbris", ""}
 , {"Novembra" , "Listopadu", "November", "NovÈmbris", ""}
 , {"Decembra" , "Prosince", "December", "DecÈmbris", ""}
-, {"Nezn·meho" , "Nezn·mÈho", "Unknown", "", ""}
+, {"Nezn·meho" , "Nezn·mÈho", "Unknown", "___", ""}
 };
 
 #define		nazov_Mesiaca_gen(a)	nazov_Mesiaca_gen_jazyk[a][_global_jazyk]
@@ -776,17 +776,17 @@ const char *html_button_det_show[] = {"Zobraz modlitbu", "Ukaû modlitbu", "Show 
 #define HTML_BUTTON_DET_SHOW	html_button_det_show[_global_jazyk]
 #endif
 
-const char *html_button_det_defaults[] = {"PÙvodnÈ hodnoty", "P˘vodnÌ hodnoty", "Defaults", "", ""};
+const char *html_button_det_defaults[] = {"PÙvodnÈ hodnoty", "P˘vodnÌ hodnoty", "Defaults", "___", ""};
 #ifndef HTML_BUTTON_DET_DEFAULTS
 #define HTML_BUTTON_DET_DEFAULTS	html_button_det_defaults[_global_jazyk]
 #endif
 
-const char *html_button_dnes_show[] = {"Zobraz", "Ukaû", "Show", "", ""};
+const char *html_button_dnes_show[] = {"Zobraz", "Ukaû", "Show", "___", ""};
 #ifndef HTML_BUTTON_DNES_SHOW
 #define HTML_BUTTON_DNES_SHOW	html_button_dnes_show[_global_jazyk]
 #endif
 
-const char *html_button_dnes_defaults[] = {"VyËisti", "VyËisti", "Clear", "", ""};
+const char *html_button_dnes_defaults[] = {"VyËisti", "VyËisti", "Clear", "???", ""};
 #ifndef HTML_BUTTON_DNES_DEFAULTS
 #define HTML_BUTTON_DNES_DEFAULTS	html_button_dnes_defaults[_global_jazyk]
 #endif
@@ -795,7 +795,7 @@ const char *html_button_predchadzajuci_[] = {"Predch·dzaj˙ci", "P¯edchozÌ", "Pre
 const char *html_button_nasledujuci_[] = {"Nasleduj˙ci", "N·sledujÌcÌ", "Next", "SuccessÌvo", ""};
 const char *html_button_dnes[] = {"Dnes", "Dnes", "Today", "HÛdie", ""};
 const char *html_text_den[] = {"deÚ", "den", "day", "die", ""};
-const char *html_text_mesiac[] = {"mesiac", "mÏsÌc", "month", "", ""};
+const char *html_text_mesiac[] = {"mesiac", "mÏsÌc", "month", "(mesiac)", ""};
 const char *html_text_rok[] = {"rok", "rok", "year", "anno", ""};
 const char *html_text_Rok[] = {"Rok", "Rok", "Year", "Anno", ""};
 const char *html_text_Rok_x[] = {"Rok %d", "Rok %d", "Year %d", "Anno %d", ""};
@@ -804,7 +804,7 @@ const char *html_text_zoznam_mesiacov[] = {"zoznam mesiacov", "seznam mÏsÌc˘", "
 
 const char *html_text_modlitba[] = {"modlitba", "modlitba", "prayer", "ora", ""};
 const char *html_text_modlitby_pre_den[] = {"modlitby pre deÚ", "modlitby pro den", "prayers for date", "", ""};
-const char *html_text_alebo_pre[] = {"alebo pre", "anebo pro", "or for", "", ""};
+const char *html_text_alebo_pre[] = {"alebo pre", "anebo pro", "or for", "vel per", ""};
 const char *html_text_dnesok[] = {"dneöok", "dneönÌ den", "today", "hÛdie", ""};
 
 const char *html_text_Vysvetlivky[] = {"Vysvetlivky", "VysvÏtlivky", "Legenda", "Legenda", ""};
@@ -824,10 +824,10 @@ const char *html_text_dnes_je_atd[] =
 {"Dnes je %d. deÚ v roku%s, <a href=\"%s%s\">juli·nsky d·tum</a> JD = %ld%s.\n<br>\n",
  "Dnes je %d. den v roku%s, <a href=\"%s%s\">juli·nskÈ datum</a> JD = %ld%s.\n<br>\n",
  "Today is %d. day in the year%s, <a href=\"%s%s\">Julian date</a> JD = %ld%s.\n<br>\n",
- "",
+ "Hodie est %d. die anno %s, <a href=\"%s%s\">Iulianus datum</a> JD = %ld%s.\n<br>\n",
  ""};
 
-const char *html_text_zakladne_info[] = {"Z·kladnÈ inform·cie", "Z·kladnÌ informace", "Basic info", "", ""};
+const char *html_text_zakladne_info[] = {"Z·kladnÈ inform·cie", "Z·kladnÌ informace", "Basic info", "__info__", ""};
 const char *html_text_je[] = {"je", "je", "is", "est", ""};
 const char *html_text_nie_je[] = {"nie je", "nenÌ", "is not", "non est", ""};
 const char *html_text_prestupny[] = {"prestupn˝", "p¯estupn˝", "...", "...", ""};
@@ -844,11 +844,11 @@ const char *html_text_Od_prvej_adv_atd[] = {
 };
 
 const char *str_modl_cez_den_zalmy_zo_dna[POCET_JAZYKOV + 1] = 
-	{"beûnej psalmÛdie", "bÏûnÈ psalmodie", "ordinary psalmody", "", ""};
+	{"beûnej psalmÛdie", "bÏûnÈ psalmodie", "ordinary psalmody", "___", ""};
 #define		STR_MODL_CEZ_DEN_ZALMY_ZO_DNA 	str_modl_cez_den_zalmy_zo_dna[_global_jazyk]
 
 const char *str_modl_cez_den_doplnkova_psalmodia[POCET_JAZYKOV + 1] = 
-	{"doplnkovej psalmÛdie", "doplÚkovÈ psalmodie", "supplementary psalmody", "", ""};
+	{"doplnkovej psalmÛdie", "doplÚkovÈ psalmodie", "supplementary psalmody", "psalmodia complementaris", ""};
 #define		STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA 	str_modl_cez_den_doplnkova_psalmodia[_global_jazyk]
 
 const char *str_modl_zalmy_zo_dna[POCET_JAZYKOV + 1] = 
@@ -856,7 +856,7 @@ const char *str_modl_zalmy_zo_dna[POCET_JAZYKOV + 1] =
 #define		STR_MODL_ZALMY_ZO_DNA 	str_modl_zalmy_zo_dna[_global_jazyk]
 
 const char *str_modl_zalmy_zo_sv[POCET_JAZYKOV + 1] = 
-	{"sviatku", "sv·tku", "celebration", "", ""};
+	{"sviatku", "sv·tku", "celebration", "___", ""};
 #define		STR_MODL_ZALMY_ZO_SV 	str_modl_zalmy_zo_sv[_global_jazyk]
 
 const char *str_ano[POCET_JAZYKOV + 1] = 
@@ -1310,7 +1310,7 @@ const char *text_NEDELA_SV_RODINY[] =
 const char *text_SPOMIENKA_PM_V_SOBOTU[] =
 {"Spomienka Panny M·rie v sobotu",
  "SobotnÌ pam·tka Panny Marie",
- "", "", ""};
+ "()", "Memoria S. Mariae in sabbato", ""};
 
 const char *text_JUN_01[] =
 {"Sv. JustÌna, muËenÌka",
