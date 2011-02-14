@@ -95,6 +95,7 @@
 /*   2008-05-16a.D. | pre prvé vešpery narodenia pána inı hymnus (cz)   */
 /*   2008-06-09a.D. | sv. Norbert - iba ¾ubovo¾ná spomienka             */
 /*   2008-06-24a.D. | doplnené LOKAL_SLAV_SPIS_BA_PATRON                */
+/*   2008-07-03a.D. | snáï opravené kompletórium pre slávnosti (ocr)    */
 /*                                                                      */
 /*                                                                      */
 /* notes |                                                              */
@@ -3235,13 +3236,17 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 	  *
 	  * 2008-02-27: doplnenı aj prípad, keï na nede¾u padne slávnos nanebovzatia PM (15. augusta)
 	  *
+	  * 2008-07-03: nemusí to nutne by nede¾a; vtedy si to všetko slávnosti musia nastavi 
+	  *		samotné - bolo tu "(_global_den.denvt == DEN_NEDELA) && " - odstránené
+	  *		ponechané jedine pre modlitbu cez deò, ktorá v slávnosti padne mimo nedele
+	  *
 	  */
-	Log("najprv treba skontrolova, èi nejde o nede¾u, na ktorú pripadol sviatok premenenia pána a podobné... (ak áno, nenastavuj niè)\n");
+	Log("najprv treba skontrolova, èi nejde o deò [pôvodne nede¾u], na ktorú pripadol sviatok premenenia pána a podobné... (ak áno, nenastavuj niè)\n");
 	if(
-		((_global_den.denvt == DEN_NEDELA) && (_global_den.den == 6) && (_global_den.mesiac - 1 == MES_AUG)) ||
-		((_global_den.denvt == DEN_NEDELA) && (_global_den.den == 15) && (_global_den.mesiac - 1 == MES_AUG)) ||
-		((_global_den.denvt == DEN_NEDELA) && (_global_den.den == 29) && (_global_den.mesiac - 1 == MES_JUN)) ||
-		((_global_den.denvt == DEN_NEDELA) && (_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) ) ||
+		((_global_den.den == 6) && (_global_den.mesiac - 1 == MES_AUG)) ||
+		((_global_den.den == 15) && (_global_den.mesiac - 1 == MES_AUG)) ||
+		((_global_den.den == 29) && (_global_den.mesiac - 1 == MES_JUN)) ||
+		((_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) ) ||
 		((_global_den.den == 1) && (_global_den.mesiac - 1 == MES_NOV))
 		){
 			Log("premenenie pána || petra a pavla || povıšenie sv. kría || všetkıch svätıch || nanebovzatia PM...\n");
@@ -3249,11 +3254,16 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				Log("keïe sa nejedná o modlitbu cez deò, preskakujeme nastavenia (všetky boli nastavené z vlastnej èasti)...\n");
 				return;
 			}
-			else{
-				Log("keïe sa jedná o modlitbu cez deò, nastavujeme len hymnus pre MCD a preskakujeme ostatné nastavenia (všetky ostatné boli nastavené z vlastnej èasti)...\n");
-				zaltar_zvazok(den, tyzzal, _global_den.litobd, ZALTAR_IBA_ZALMY_HYMNUS_MCD);
-				return;
-			}
+			else 
+				if(_global_den.denvt == DEN_NEDELA){
+					Log("keïe sa jedná o modlitbu cez deò, nastavujeme len almy z nedele pre MCD a preskakujeme ostatné nastavenia (všetky ostatné boli nastavené z vlastnej èasti)...\n");
+					zaltar_zvazok(den, tyzzal, _global_den.litobd, ZALTAR_IBA_ZALMY_HYMNUS_MCD);
+					return;
+				}
+				else{
+					Log("keïe sa jedná o modlitbu cez deò MIMO nedele, nastavujeme všetky èasti ak nasleduje - zo dòa...\n");
+					/* iaden return :) */
+				}
 	}
 	else{
 		Log("NEjedná sa o: premenenie pána || petra a pavla || povıšenie sv. kría || všetkıch svätıch...\n");
