@@ -864,7 +864,7 @@ void set_hymnus(short int den, short int tyzzal, short int modlitba){
 			file_name_litobd(OBD_CEZ_ROK);
 		if(_global_jazyk == JAZYK_CZ){
 			sprintf(_anchor, "%c_%s_%d_%s", 
-				pismenko_modlitby(modlitba), ANCHOR_HYMNUS, ((tyzzal % 2) + 1), nazov_DN_asci[den]);
+				pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (2 - (tyzzal % 2)), nazov_DN_asci[den]);
 		}
 		else{
 			sprintf(_anchor, "%c_%s_%d", 
