@@ -410,15 +410,16 @@ const char *nazov_farby_jazyk[POCET_FARIEB + 1][POCET_JAZYKOV + 1] =
  {"biela", "bílá", "white", ""}, 
  {"zelená", "zelená", "green", ""}, 
  {"fialová", "fialová", "purple", ""}, 
+ {"ružová", "rùžová", "rose", ""}, 
 };
 
 #define		nazov_farby(a)	nazov_farby_jazyk[a][_global_jazyk]
 
-const char *html_farba_pozadie[] =
-{"black", "red", "white", "green", "purple"};
+const char *html_farba_pozadie[POCET_FARIEB + 1] =
+{"black", "red", "white", "green", "purple", "#FF6699" /*"fuchsia" */};
 
-const char *html_farba_popredie[] =
-{"white", "white", "black", "white", "white"};
+const char *html_farba_popredie[POCET_FARIEB + 1] =
+{"white", "white", "black", "white", "white", "blue"};
 
 const char *rimskymi_tyzden_zaltara[] =
 {"_", "I", "II", "III", "IV"};

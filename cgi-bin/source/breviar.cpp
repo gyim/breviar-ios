@@ -77,6 +77,8 @@
 /*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám                      */
 /*   2006-08-18a.D. | pokus: zmena mnohých int na short int (staèí 32tis.) */
 /*   2006-08-19a.D. | zavedený nedefinovaný define ZOBRAZ_JULIANSKY_DATUM  */
+/*   2006-08-19a.D. | doplnené liturgické farby                            */
+/*   2006-08-22a.D. | doplnená ružová liturgická farba                     */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -2033,6 +2035,10 @@ short int atomes(char *mesiac){
 #define TELAKRVI (ZDS + 11) /* stvrtok po trojici: kristovho tela a krvi */
 #define SRDCA (ZDS + 19) /* piatok po druhej nedeli po ZDS: najsv. srdca jezisovho */
 #define SRDPM (ZDS + 20) /* sobota po druhej nedeli po ZDS: neposkvrneneho srdca prebl. p. marie */
+/* 2006-08-22: kvôli ružovej farbe rúcha potrebujeme define aj pre 
+ * 3. adventnú nede¾u a 4. pôstnu nede¾u */
+#define AN3		(PAN + 14) /* tretia adventná nede¾a - dva týždne po prvej AN */
+#define PN4		(VN - 21)  /* štvrtá pôstna nede¾a - tri týždne pred VN */
 
 /*---------------------------------------------------------------------*/
 /* _rozbor_dna()
@@ -2153,6 +2159,9 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 						/* nedela v postnom obdobi */
 						_rozbor_dna_LOG("/* nedela v postnom obdobi */\n");
 						_global_den.smer = 2; /* nedele adventne, postne a velkonocne */
+						/* 2006-08-22: pre 4. pôstnu nede¾u je ružová farbe rúcha */
+						if(_global_den.denvr == PN4)
+							_global_den.farba = LIT_FARBA_RUZOVA; /* 2006-08-22: pridané */
 					}
 					else{
 						/* vsedny den v poste */
@@ -2473,6 +2482,9 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 							_rozbor_dna_LOG("/* vsedny den od 17. do 24. decembra vratane */\n");
 						}
 					}
+					/* 2006-08-22: pre 3. adventnú nede¾u je ružová farbe rúcha */
+					if(_global_den.denvr == AN3)
+						_global_den.farba = LIT_FARBA_RUZOVA; /* 2006-08-22: pridané */
 				}/* if(_global_den.denvr < NAR) */
 				else if(_global_den.denvr >= NAR){
 					/* vianocne obdobie */

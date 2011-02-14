@@ -623,8 +623,9 @@ extern const char *nazov_slavenia_lokal[];
 #define LIT_FARBA_BIELA				2
 #define LIT_FARBA_ZELENA			3
 #define LIT_FARBA_FIALOVA			4
+#define LIT_FARBA_RUZOVA			5
 
-#define POCET_FARIEB				4
+#define POCET_FARIEB				5
 
 /* nazov_farby: string pre názov liturgickej farby */
 extern const char *nazov_farby_jazyk[POCET_FARIEB + 1][POCET_JAZYKOV + 1];
