@@ -47,6 +47,7 @@
 /*   2008-01-23a.D. | opravené pole konštánt zvazok_breviara[] */
 /*   2008-06-24a.D. | doplnené LOKAL_SLAV_SPIS_BA_PATRON       */
 /*   2008-08-15a.D. | pridanı ïalší "jazyk" (cz-op)            */
+/*   2009-01-29a.D. | pridanı ïalší jazyk - maïarèina (hu)     */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -65,12 +66,15 @@
 
 #define MENO_SVIATKU 100
 
-/* 2006-07-31: kvôli jazykovım mutáciám; zmenené 2008-08-15 na 5 */
-#define	POCET_JAZYKOV	5
+/* 2006-07-31: kvôli jazykovım mutáciám; zmenené 2008-08-15 na 5 
+ * 2009-01-29: zmenené na 6 (maïarèina)
+ */
+#define	POCET_JAZYKOV	6
 
 /* 2006-07-11: Pridané kvôli jazykovım mutáciám 
  * 2006-12-12: Pridaná latinèina, kódy sú pod¾a ISO 639-1 (a na èeštinu)
  * 2008-08-15: Pridaná "dominikánska èeština"; presunuté sem bezprostredne za definíciu POCET_JAZYKOV
+ * 2009-01-29: pridaná maïarèina
  */
 #define JAZYK_SK	0
 #define JAZYK_CZ	1
@@ -78,6 +82,7 @@
 #define JAZYK_LA    3
 #define JAZYK_UNDEF 4
 #define JAZYK_CZ_OP 5
+#define JAZYK_HU    6
 
 /* 2008-08-15: Pridané POCET_CSS, aby mohol by "dolník" (CSS_UNDEF) hodnota 0 */
 #define POCET_CSS	4

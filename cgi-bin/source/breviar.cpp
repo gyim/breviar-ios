@@ -121,6 +121,7 @@
 /*   2009-01-05a.D. | ˙prava _export_rozbor_dna() pre vöednÈ dni (poradie) */
 /*   2009-01-06a.D. | Te Deum je pre posv.ËÌt. aj v okt·ve narodenia P·na  */
 /*   2009-01-28a.D. | ˙prava includeFile()                                 */
+/*   2009-01-29a.D. | pridan˝ ÔalöÌ jazyk - maÔarËina (hu) [prvÈ kroky]    */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -2882,6 +2883,11 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 						else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 							sprintf(_global_den.meno, text_DEN_VO_VELKONOCNEJ_OKTAVE[_global_jazyk],
 								nazov_Dna(_global_den.denvt));
+						}
+						else{ /* default */
+							sprintf(_global_den.meno, text_DEN_VO_VELKONOCNEJ_OKTAVE[_global_jazyk],
+								koncovka_dna(_global_den.denvt),
+								nazov_dna(_global_den.denvt));
 						}
 					}
 				}
@@ -6182,7 +6188,7 @@ short int atocss(char *css){
  \
 	/* 2007-06-01: nasledovn· pas·û kontroluje, Ëi niektorÈ z options nie s˙ GLOBAL_OPTION_NULL */\
 	/* a z·roveÚ prÌpadne nastavÌ na default podæa jazyka */\
-	if(_global_jazyk == JAZYK_SK){\
+	if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU)){\
 		if(_global_opt1 == GLOBAL_OPTION_NULL){\
 			_global_opt1 = cfg_option1_default;\
 			Log("SK: KeÔûe bolo _global_opt1 == GLOBAL_OPTION_NULL, nastavujem na `'...\n", cfg_option1_default);\
@@ -9681,7 +9687,7 @@ _main_SIMULACIA_QS:
 				_main_LOG_to_Export("include adres·ra konËÌ reùazcom `%s' - nie je potrebnÈ prid·vaù\n", postfix_jazyka[_global_jazyk]);
 			}
 			else{
-				_main_LOG_to_Export("include adres·ra konËÌ reùazcom `%s' - je potrebnÈ prid·vaù: ", postfix_jazyka[_global_jazyk]);
+				_main_LOG_to_Export("include adres·ra NEkonËÌ reùazcom `%s' - je potrebnÈ prid·vaù (aktu·lne include_dir == %s; lenght == %d; len == %d): ", postfix_jazyka[_global_jazyk], include_dir, strlen(include_dir), len);
 				/* 2006-07-13: pridanÈ doplnenie jazyka kvÙli jazykov˝m mut·ci·m */
 				_main_LOG_to_Export("upravujem include adres·r podæa jazyka (%d - %s)...\n", _global_jazyk, nazov_jazyka[_global_jazyk]);
 

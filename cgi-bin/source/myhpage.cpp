@@ -126,13 +126,13 @@ void hlavicka(char *title, FILE * expt){
 
 /* 2008-01-23: upravené */
 //const char *gpage[] = {"Generovaná stránka", "Stránky jsou generovány", "Generated page", "Generated"};
-const char *gpage[POCET_JAZYKOV + 1] = {"Generované: ", "Generováno: ", "Generated: ", "Generated: ", "Generated: ", "Generováno: "};
+const char *gpage[POCET_JAZYKOV + 1] = {"Generované: ", "Generováno: ", "Generated: ", "Generated: ", "Generated: ", "Generováno: ", "Generálva: "};
 // Generované + dátum: "%d. %s %d, %02d:%02d:%02d" -- pôvodne to bolo v zátvorkách
-const char *datum_cas_template[POCET_JAZYKOV + 1] = {"%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d"};
+const char *datum_cas_template[POCET_JAZYKOV + 1] = {"%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d"};
 // Build: "Build: %s. "
-const char *build_template[POCET_JAZYKOV + 1] = {"<!--Verzia: %s.-->", "<!--Verze: %s.-->", "<!--Build: %s.-->", "<!--Build: %s.-->", "<!--Build: %s.-->", "<!--Verze: %s.-->"};
+const char *build_template[POCET_JAZYKOV + 1] = {"<!--Verzia: %s.-->", "<!--Verze: %s.-->", "<!--Build: %s.-->", "<!--Build: %s.-->", "<!--Build: %s.-->", "<!--Verze: %s.-->", "<!--Build: %s.-->"};
 // Generované + dátum (bez èasu - pre batch mód, aby sa ¾ahko porovnávali vygenerované modlitby): "%d. %s %d"
-const char *datum_template[POCET_JAZYKOV + 1] = {"%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d"};
+const char *datum_template[POCET_JAZYKOV + 1] = {"%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d"};
 
 /* exportuje patku HTML dokumentu (vysledok query) */
 void patka(void){
