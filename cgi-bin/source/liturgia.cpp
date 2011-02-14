@@ -35,7 +35,6 @@
 #include "mystring.h"
 #include <ctype.h>
 
-
 /* globalne premenne prehodene do liturgia.h, 17/02/2000A.D. */
 /* ------------------------------------------------------------------- */
 int _allocate_global_var(void){
@@ -477,8 +476,10 @@ char *caps_BIG(const char *input){
 void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ){
 	/* 2003-07-09 zmeneny & na HTML_AMPERSAND kvoli HTML 4.01 */
 	char pom[MAX_STR];
-
 	mystrcpy(pom, STR_EMPTY, MAX_STR); /* 2003-08-11 pridana inicializacia */
+
+	char pom2[MAX_STR]; /* 2006-07-31: pridané */
+	mystrcpy(pom2, STR_EMPTY, MAX_STR); /* 2006-07-31: pridané */
 
 	/* ak pozadujeme vytvorenie linku s inou farbou pre prestupny rok, 2003-07-02 */
 	if(typ == LINK_DEN_MESIAC_ROK_PRESTUP)
@@ -531,6 +532,13 @@ void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ){
 		}
 		strcat(_global_link, ".htm");
 	}/* linka nie */
+
+	/* 2006-07-31: pridané odovzdanie parametra pre jazyk */
+	if(_global_jazyk != JAZYK_SK){
+		sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_JAZYK, skratka_jazyka[_global_jazyk]);
+		strcat(_global_link, pom2);
+		Log("\tPrilepil som aj jazyk: `%s' (2006-07-31)\n", pom2);
+	}
 
 	strcat(_global_link, "\">");
 

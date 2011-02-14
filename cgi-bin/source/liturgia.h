@@ -765,6 +765,13 @@ extern int _global_linky;
 
 /* 2006-07-11: Pridané kvôli jazykovým mutáciám (breviar.cpp) */
 extern int _global_language;
+#ifndef _global_jazyk
+#define	_global_jazyk	_global_language
+#endif
+
+extern const char *nazov_jazyka[];
+extern const char *skratka_jazyka[];
+extern const char *postfix_jazyka[];
 
 /* ------------------------------------------------------------------- */
 

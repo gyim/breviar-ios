@@ -17,6 +17,9 @@
 /*                                                             */
 /***************************************************************/
 
+#ifndef __HODIN_H
+#define __HODIN_H
+
 #include "liturgia.h"
 
 const char *TEMPLAT[] =
@@ -316,3 +319,4 @@ const char *postfix_jazyka[] =
 /* Pozn·mka: Postfix nesmie obsahovaù na zaËiatku oddeæovaË (slash resp. backslash);
  * musÌ sa jednaù o podadres·r pod include */
 
+#endif /* __HODIN_H */

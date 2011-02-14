@@ -146,6 +146,9 @@ extern char *_global_string2;
 
 /* 2006-07-11: Pridané kvôli jazykovým mutáciám (breviar.cpp) */
 extern int _global_language;
+#ifndef _global_jazyk
+#define	_global_jazyk	_global_language
+#endif
 
 #ifndef OS_linux
 /* kedysi bolo void main;

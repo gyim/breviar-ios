@@ -89,6 +89,9 @@
 /*                                                                         */
 /***************************************************************************/
 
+#ifndef __BREVIAR_C_
+#define __BREVIAR_C_
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
@@ -270,8 +273,9 @@ int _global_linky;
 
 /* 2006-07-11: Pridané kvôli jazykovým mutáciám */
 int _global_language;
+#ifndef _global_jazyk
 #define	_global_jazyk	_global_language
-
+#endif
 
 /* ------------------------------------------------------------------- */
 
@@ -3079,7 +3083,10 @@ void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
 	if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE)){
 		Log("--- _export_rozbor_dna_buttons(): idem tlacit buttony...\n");
 		char pom[MAX_STR];
+		char pom2[MAX_STR]; /* 2006-07-31: pridané */
+
 		mystrcpy(pom, STR_EMPTY, MAX_STR); /* 2003-08-11 pridana inicializacia */
+		mystrcpy(pom2, STR_EMPTY, MAX_STR); /* 2006-07-31: pridané */
 
 		/* prerobene 13/04/2000A.D.: tlacitka niekedy linkuju iba subor, 
 		 * nie linku: podla _global_linky */
@@ -3095,6 +3102,13 @@ void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
 				sprintf(pom, "%s%d.htm", FILE_NAME_POKEC, poradie_svateho);
 			else
 				mystrcpy(pom, FILE_NAME_CHYBA, MAX_STR);
+		}
+
+		/* 2006-07-31: pridané odovzdanie parametra pre jazyk */
+		if(_global_jazyk != JAZYK_SK){
+			sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_JAZYK, skratka_jazyka[_global_jazyk]);
+			strcat(pom, pom2);
+			Log("\tPrilepil som aj jazyk: `%s' (2006-07-31)\n", pom2);
 		}
 
 		/* 2003-07-15 vycistene poznamky, dorobene modlitby cez den */
@@ -3264,6 +3278,15 @@ void _export_rozbor_dna_buttons_dni(int typ){
 		_struct_den_mesiac datum;
 		int _local_rok, i;
 
+		char pom2[MAX_STR]; /* 2006-07-31: pridané */
+		mystrcpy(pom2, STR_EMPTY, MAX_STR); /* 2006-07-31: pridané */
+
+		/* 2006-07-31: pridané odovzdanie parametra pre jazyk */
+		if(_global_jazyk != JAZYK_SK){
+			sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_JAZYK, skratka_jazyka[_global_jazyk]);
+			Log("\tPrilepil som aj jazyk: `%s' (2006-07-31)\n", pom2);
+		}
+
 		Export("\n<table align=\"center\">\n<tr>\n");
 
 		/* predchadzajuci / nasledujuci den */
@@ -3285,12 +3308,13 @@ void _export_rozbor_dna_buttons_dni(int typ){
 			datum.mesiac = _global_den.mesiac;
 		}
 		/* predosly den -- button */
-		Export("<td align=\"right\"><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d\" method=\"post\">\n",
+		Export("<td align=\"right\"><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n",
 			script_name,
 			STR_QUERY_TYPE, STR_PRM_DATUM,
 			STR_DEN, datum.den,
 			STR_MESIAC, datum.mesiac,
-			STR_ROK, _local_rok);
+			STR_ROK, _local_rok, 
+			pom2);
 		/* 2003-07-16; < zmenene na &lt; */
 		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"&lt; Predchádzajuci deò\">\n");
 		Export("</form></td>\n");
@@ -3316,12 +3340,13 @@ void _export_rozbor_dna_buttons_dni(int typ){
 		}
 
 		/* nasledujuci den -- button */
-		Export("<td><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d\" method=\"post\">\n",
+		Export("<td><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n",
 			script_name,
 			STR_QUERY_TYPE, STR_PRM_DATUM,
 			STR_DEN, datum.den,
 			STR_MESIAC, datum.mesiac,
-			STR_ROK, _local_rok);
+			STR_ROK, _local_rok,
+			pom2);
 		/* 2003-07-16; > zmenene na &gt; */
 		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"Nasledujúci deò &gt;\">\n");
 		Export("</form></td>\n");
@@ -3338,12 +3363,13 @@ void _export_rozbor_dna_buttons_dni(int typ){
 				datum.den = 28;
 		}
 		/* predosly rok -- button */
-		Export("<td align=\"right\"><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d\" method=\"post\">\n",
+		Export("<td align=\"right\"><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n",
 			script_name,
 			STR_QUERY_TYPE, STR_PRM_DATUM,
 			STR_DEN, datum.den,
 			STR_MESIAC, datum.mesiac,
-			STR_ROK, _local_rok);
+			STR_ROK, _local_rok,
+			pom2);
 		/* 2003-07-16; << zmenene na &lt;&lt; */
 		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"&lt;&lt; Predchádzajúci rok\">\n");
 		Export("</form></td>\n");
@@ -3360,12 +3386,13 @@ void _export_rozbor_dna_buttons_dni(int typ){
 				datum.den = 28;
 		}
 		/* nasledujuci rok -- button */
-		Export("<td align=\"right\"><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d\" method=\"post\">\n",
+		Export("<td align=\"right\"><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n",
 			script_name,
 			STR_QUERY_TYPE, STR_PRM_DATUM,
 			STR_DEN, datum.den,
 			STR_MESIAC, datum.mesiac,
-			STR_ROK, _local_rok);
+			STR_ROK, _local_rok,
+			pom2);
 		/* 2003-07-16; >> zmenene na &gt;&gt; */
 		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"Nasledujúci rok &gt;&gt;\">\n");
 		Export("</form></td>\n");
@@ -6888,6 +6915,7 @@ int parseQueryString(void){
 			mystrcpy(pom_JAZYK, param[i].val, SMALL);
 			Log("jazyk zistený.\n");
 		}
+		i++;
 	}
 
 	Log("\tswitch(query_type)...\n");
@@ -7699,8 +7727,13 @@ _main_SIMULACIA_QS:
 
 			/* 2006-07-13: pridané doplnenie jazyka kvôli jazykovým mutáciám */
 			_main_LOG_to_Export("upravujem include adresár pod¾a jazyka (%d - %s)...\n", _global_jazyk, nazov_jazyka[_global_jazyk]);
+
 			/* 2006-07-17: dokonèenie úpravy include adresára pod¾a jazyka */
-			strcat(include_dir, postfix_jazyka[_global_jazyk]);
+			if(strlen(postfix_jazyka[_global_jazyk]) > 0){
+				/* 2006-07-31: pôvodne sme uvažovali, že include_dir bude napr. include/cz, incluce/en; teraz bude radšej include_cz, include_en t.j. nahraï backslash resp. slash znakom underscore */
+				include_dir[len] = UNDERSCORE;
+				strcat(include_dir, postfix_jazyka[_global_jazyk]);
+			}
 
 			/* 2006-07-17: druhá kontrola, èi include_dir konèí na backslash resp. slash */
 			len = strlen(include_dir) - 1;
@@ -7844,3 +7877,4 @@ _main_end:
 	return 0; /* 2003-07-14, kvoli gcc version 3.2.2 20030222 (Red Hat Linux 3.2.2-5) christ-net.sk */
 }
 
+#endif /* __BREVIAR_C_ */

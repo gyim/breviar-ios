@@ -36,8 +36,8 @@
 #undef MODEL_ostry_Windows
 #undef MODEL_DEBUG_Windows
 
-//#define MODEL_ostry_linux
-#define MODEL_DEBUG_Windows
+#define MODEL_ostry_linux
+//#define MODEL_DEBUG_Windows
 //#define MODEL_DEBUG_linux
 //#define MODEL_ostry_SIMUL_linux_UNDER_Windows		// 2005-03-28 Vytvorene (simulacia ostreho linuxu)
 //#define MODEL_DEBUG_SIMUL_linux_UNDER_Windows		// 2005-03-22 Vytvorene (simulacia DEBUG linuxu)
@@ -121,6 +121,9 @@
 #else
 	#define		PATH_SEPARATOR	PATH_SEPARATOR_Windows
 #endif
+
+/* 2006-07-31: Pridané */
+#define		UNDERSCORE	'_'
 
 #endif /* __MYSYSTEM_H_ */
 

@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* myhpage.cpp                                                 */
-/* (c)1999-2005 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2006 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje vypis hlavicky a patky HTML dokumentu*/
 /* document history                                            */
@@ -15,6 +15,7 @@
 /*   2003-07-02a.D. | trosku zmenena patka                     */
 /*   2003-07-15a.D. | trosku zmenena hlavicka (ako _header.htm)*/
 /*   2004-03-16a.D. | funkcie hlavicka a patka aj do suboru    */
+/*   2006-07-31a.D. | prvé kroky k jazykovým mutáciám                      */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -31,6 +32,8 @@
 #include "myexpt.h"
 #include "mystring.h" /* kvoli mystrcpy, 2003-07-01 */
 #include "mylog.h"
+#include "breviar.h" /* 2006-07-31 kvôli jazyku */
+#include "liturgia.h" /* 2006-07-31 kvôli jazyku */
 
 /* exportuje hlavicku HTML dokumentu, kam pojde vysledok query */
 void hlavicka(char *title){
@@ -58,7 +61,7 @@ void hlavicka(char *title){
 		/* 2003-07-15, zmenene na hlavicku pre css-ko; zrusene <style> */
 		Export("<html>\n<head>\n");
 		Export("   <meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1250\">\n");
-		Export("   <meta name=\"Author\" content=\"Juraj Videky\">\n");
+		Export("   <meta name=\"Author\" content=\"Juraj Vidéky\">\n");
 		Export("   <link rel=\"stylesheet\" type=\"text/css\" href=\"/breviar.css\">\n");
 		Export("<title>%s</title>\n", title);
 		Export("</head>\n\n");
@@ -96,7 +99,7 @@ void hlavicka(char *title, FILE * expt){
 		/* 2003-07-15, zmenene na hlavicku pre css-ko; zrusene <style> */
 		fprintf(expt, "<html>\n<head>\n");
 		fprintf(expt, "   <meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1250\">\n");
-		fprintf(expt, "   <meta name=\"Author\" content=\"Juraj Videky\">\n");
+		fprintf(expt, "   <meta name=\"Author\" content=\"Juraj Vidéky\">\n");
 		fprintf(expt, "   <link rel=\"stylesheet\" type=\"text/css\" href=\"/breviar.css\">\n");
 		fprintf(expt, "<title>%s</title>\n", title);
 		fprintf(expt, "</head>\n\n");
@@ -114,6 +117,12 @@ void hlavicka(char *title, FILE * expt){
 const char *nm[] =
 {"január", "február", "marec", "apríl", "máj", "jún", "júl",
  "august", "september", "október", "november", "december", "neznámy"};
+
+const char *nm_cz[] =
+{"leden", "únor", "bøezen", "duben", "kvìten", "èerven", "èervenec",
+ "srpen", "záøí", "øíjen", "listopad", "prosinec", "neznámý"};
+
+const char *gpage[] = {"Generovaná stránka", "Stránky jsou generovány", "Generated page", "Generated"};
 
 /* exportuje patku HTML dokumentu (vysledok query) */
 void patka(void){
@@ -137,11 +146,11 @@ void patka(void){
 
 	Export("<hr>\n"); /* bolo tu <hr size=1>, ale to je v css-ku; 2003-07-02 */
 	Export("<center>");
-	Export("<"HTML_P_PATKA">Generovaná stránka\n");
+	Export("<"HTML_P_PATKA">%s\n", gpage[_global_jazyk]);
 	/* Export("(%s). ", ctime(&t) + 4); */
 	Export("(%d. %s %d, %02d:%02d:%02d). ",
 		dnes.tm_mday,
-		nm[dnes.tm_mon],
+		(_global_jazyk == JAZYK_CZ) ? nm_cz[dnes.tm_mon] : nm[dnes.tm_mon],
 		dnes.tm_year,
 		dnes.tm_hour,
 		dnes.tm_min,
