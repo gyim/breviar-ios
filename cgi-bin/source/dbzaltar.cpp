@@ -63,6 +63,7 @@
 /*   2006-02-07a.D. | ZALTAR_... pre funkciu zaltar_zvazok();  */
 /*                  - doplnenÈ modl.cez deÚ - sviatky sv‰t˝ch  */
 /*   2006-08-07a.D. | pridanÈ sv. muûov/ûien, Ëo ûili v manû.  */
+/*   2006-08-08a.D. | skutky mil., rehoænÌkov, vychov·vateæov  */
 /*                                                             */
 /* notes |                                                     */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
@@ -6817,7 +6818,7 @@ void _spolocna_cast_kresponz_rozne(int modlitba, char *_anchor_pom, char *_ancho
 	_set_kresponz(modlitba, _file, _anchor);
 	set_LOG_svsv;
 }
-/* 2005-08-27: kvÙli 2. ËÌtaniu pre duchovn˝ch pastierov */
+/* 2005-08-27: kvÙli 2. ËÌtaniu pre duchovn˝ch pastierov; pouûÌvame aj pre odliönÈ ËÌtanie pre sv‰tÈ ûeny - Ëo ûili v manûelstve; 2006-08-08 */
 void _spolocna_cast_2cit_rozne(int modlitba, char *_anchor_pom, char *_anchor, char *_file){
 	sprintf(_anchor, "%s%c%s", _anchor_pom, pismenko_modlitby(modlitba), ANCHOR_CITANIE2);
 	_set_citanie2(modlitba, _file, _anchor);
@@ -7410,6 +7411,9 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		 */
 		_spolocna_cast_1cit_zvazok(modlitba, STR_EMPTY, _anchor_zvazok, _anchor_pom, _file);
 		/* 2006-08-07: bude treba otestovaù, pretoûe zatiaæ to nem· asi ûiadny sv‰tec nastavenÈ */
+		if(a == MODL_SPOL_CAST_SV_ZENA_MANZ){ /* 2006-08-08: odliönÈ druhÈ ËÌtanie */
+			_spolocna_cast_2cit_rozne(modlitba, _anchor_pom, _anchor, _file);
+		}
 
 	}/* MODL_SPOL_CAST_SV_MUZ/ZENA_MANZ */
 
@@ -7448,7 +7452,20 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		_spolocna_cast_magnifikat;
 		_spolocna_cast_modlitba;
 
-		/* posv‰tnÈ ËÌtanie 2006-01-19: modlitba = MODL_POSV_CITANIE; netreba niË samostatne, iba ak 2. ËÌtanie */
+		/* posv‰tnÈ ËÌtanie */
+		modlitba = MODL_POSV_CITANIE;
+
+		sprintf(_anchor_pom, "%s_", nazov_spolc_ANCHOR[a]);
+		Log("  _anchor_pom == %s\n", _anchor_pom);
+
+		/* 2005-08-05: 1. ËÌtanie je zv‰Ëöa odliönÈ pre spoloËnÈ Ëasti sviatkov sv‰t˝ch nasledovne:
+		 * - I. zv‰zok (advent, vianoce) a II. zv‰zok (pÙst),
+		 * - II. zv‰zok (veæk· noc),
+		 * - III. a IV. zv‰zok (obdobie cez rok).
+		 */
+		/* 2006-08-08: tÌ Ëo konali skutky milosrdenstva nemaj˙ samostatnÈ 1. ËÌtanie */
+		_spolocna_cast_2cit_rozne(modlitba, _anchor_pom, _anchor, _file);
+		/* 2006-08-08: tÌ Ëo konali skutky milosrdenstva maj˙ rovnakÈ 2. ËÌtanie */
 
 	}/* MODL_SPOL_CAST_SV_MUZ/ZENA_VYCH */
 
@@ -7487,7 +7504,27 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		_spolocna_cast_magnifikat;
 		_spolocna_cast_modlitba;
 
-		/* posv‰tnÈ ËÌtanie 2006-01-19: modlitba = MODL_POSV_CITANIE; netreba niË samostatne, iba ak 2. ËÌtanie */
+		/* posv‰tnÈ ËÌtanie */
+		modlitba = MODL_POSV_CITANIE;
+
+		sprintf(_anchor_pom, "%s_", nazov_spolc_ANCHOR[a]);
+		Log("  _anchor_pom == %s\n", _anchor_pom);
+		/* 2005-08-08: pridan˝ ÔalöÌ pomocn˝ anchor, ktor˝ pojedn·va o zv‰zku brevi·ra kvÙli posv. ËÌtaniam */
+		sprintf(_anchor_zvazok, "%s_", zvazok_OBD[_global_den.litobd]);
+		if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
+			strcat(_anchor_zvazok, VELKONOCNA_PRIPONA);
+		}
+		Log("  _anchor_zvazok == %s\n", _anchor_zvazok);
+
+		/* 2005-08-05: 1. ËÌtanie je zv‰Ëöa odliönÈ pre spoloËnÈ Ëasti sviatkov sv‰t˝ch nasledovne:
+		 * - I. zv‰zok (advent, vianoce) a II. zv‰zok (pÙst),
+		 * - II. zv‰zok (veæk· noc),
+		 * - III. a IV. zv‰zok (obdobie cez rok).
+		 */
+		_spolocna_cast_1cit_zvazok(modlitba, STR_EMPTY, _anchor_zvazok, _anchor_pom, _file);
+		/* 2006-08-08: tÌ Ëo konali skutky milosrdenstva maj˙ v I. a II. zv‰zku rovnakÈ 1. ËÌtanie; v III. a IV. inÈ rovnakÈ 1. ËÌtanie */
+		_spolocna_cast_2cit_rozne(modlitba, _anchor_pom, _anchor, _file);
+		/* 2006-08-08: tÌ Ëo konali skutky milosrdenstva maj˙ rovnakÈ 2. ËÌtanie */
 
 	}/* MODL_SPOL_CAST_SV_MUZ/ZENA_SKUTKYMIL */
 
@@ -7528,6 +7565,28 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		_spolocna_cast_hymnus;
 		_spolocna_cast_magnifikat_viac(2, _anchor_head, _anchor, _file);
 		_spolocna_cast_modlitba;
+
+		/* posv‰tnÈ ËÌtanie */
+		modlitba = MODL_POSV_CITANIE;
+
+		sprintf(_anchor_pom, "%s_", nazov_spolc_ANCHOR[a]);
+		Log("  _anchor_pom == %s\n", _anchor_pom);
+		/* 2005-08-08: pridan˝ ÔalöÌ pomocn˝ anchor, ktor˝ pojedn·va o zv‰zku brevi·ra kvÙli posv. ËÌtaniam */
+		sprintf(_anchor_zvazok, "%s_", zvazok_OBD[_global_den.litobd]);
+		if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
+			strcat(_anchor_zvazok, VELKONOCNA_PRIPONA);
+		}
+		Log("  _anchor_zvazok == %s\n", _anchor_zvazok);
+
+		/* 2005-08-05: 1. ËÌtanie je zv‰Ëöa odliönÈ pre spoloËnÈ Ëasti sviatkov sv‰t˝ch nasledovne:
+		 * - I. zv‰zok (advent, vianoce) a II. zv‰zok (pÙst),
+		 * - II. zv‰zok (veæk· noc),
+		 * - III. a IV. zv‰zok (obdobie cez rok).
+		 */
+		_spolocna_cast_1cit_zvazok(modlitba, STR_EMPTY, _anchor_zvazok, _anchor_pom, _file);
+		/* 2006-08-08: rehoænÌci maj˙ v I. a II. zv‰zku rovnakÈ 1. ËÌtanie; v III. a IV. inÈ rovnakÈ 1. ËÌtanie */
+		_spolocna_cast_2cit_rozne(modlitba, _anchor_pom, _anchor, _file);
+		/* 2006-08-08: rehoænÌci maj˙ rovnakÈ 2. ËÌtanie */
 
 	}/* MODL_SPOL_CAST_SV_MUZ/ZENA_REHOLNIK */
 
@@ -8684,7 +8743,9 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Hieronyma Emilianiho", MENO_SVIATKU);
 					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VYCH);
+						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VYCH,
+							MODL_SPOL_CAST_DUCH_PAST_KNAZ,
+							MODL_SPOL_CAST_SV_MUZ_SKUTKYMIL /* 2006-08-08: pridanÈ podæa mailu don Val·bka z 19. augusta 2005 */);
 					break;
 				case 10:
 					if(poradie_svaty == 1){
@@ -9620,7 +9681,7 @@ label_25_MAR:
 
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+						// _vlastna_cast_2citanie; // 2006-08-08: nem· 2. ËÌtanie vlastnÈ
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -10780,7 +10841,8 @@ label_25_MAR:
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Alûbety Portugalskej", MENO_SVIATKU);
 					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL);
+						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL,
+							MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-08: doplnenÈ */);
 					break;
 				case 5:
 					_global_svaty1.spolcast =
@@ -10994,7 +11056,8 @@ label_25_MAR:
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Kamila de Lellis, kÚaza", MENO_SVIATKU);
 					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_SKUTKYMIL);
+						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_SKUTKYMIL,
+							MODL_SPOL_CAST_DUCH_PAST_KNAZ /* 2006-08-08: doplnenÈ */);
 					break;
 				case 15:
 					if(poradie_svaty == 1){
@@ -11343,7 +11406,7 @@ label_25_MAR:
 
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+						// _vlastna_cast_2citanie; // 2006-08-08: nem· 2. ËÌtanie vlastnÈ
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -11453,7 +11516,7 @@ label_25_MAR:
 
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+						// _vlastna_cast_2citanie; // 2006-08-08: nem· 2. ËÌtanie vlastnÈ
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -11778,7 +11841,8 @@ label_25_MAR:
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Jany Frantiöky de Chantal, rehoænÌËky", MENO_SVIATKU);
 					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
+						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK,
+							MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-08: doplnenÈ */);
 					break;
 				case 13:
 					if(poradie_svaty == 1){
@@ -12373,7 +12437,7 @@ label_25_MAR:
 
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+						// _vlastna_cast_2citanie; // 2006-08-08: nie je...
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -13862,7 +13926,8 @@ label_25_MAR:
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Alûbety Uhorskej, rehoænÌËky", MENO_SVIATKU);
 					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-07: doplnenÈ */,
+						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK,
+							MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-08: doplnenÈ */,
 							MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL);
 					break;
 				case 18:
