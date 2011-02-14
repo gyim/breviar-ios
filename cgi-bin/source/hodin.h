@@ -791,6 +791,17 @@ const char *html_button_dnes_defaults[] = {"Vyèisti", "Vyèisti", "Clear", "???",
 #define HTML_BUTTON_DNES_DEFAULTS	html_button_dnes_defaults[_global_jazyk]
 #endif
 
+/* doplnené, 2007-09-13 */
+const char *html_button_ranne_chvaly_benediktus[] = {"Ranné chvály + Benediktus", "Ranní chvály + Zach. kantikum", "Morning prayer with Benedictus", "Laudes + Benedictus", ""};
+#ifndef HTML_BUTTON_RANNE_CHVALY_BENEDIKTUS
+#define HTML_BUTTON_RANNE_CHVALY_BENEDIKTUS	html_button_ranne_chvaly_benediktus[_global_jazyk]
+#endif
+
+const char *html_button_vespery_magnifikat[] = {"Vešpery + Magnifikat", "Nešpory + Mariino kant.", "Vesperae + Magnificat", "Vesperae + Magnificat", ""};
+#ifndef HTML_BUTTON_VESPERY_MAGNIFIKAT
+#define HTML_BUTTON_VESPERY_MAGNIFIKAT	html_button_vespery_magnifikat[_global_jazyk]
+#endif
+
 const char *html_button_predchadzajuci_[] = {"Predchádzajúci", "Pøedchozí", "Previous", "Praecedénte", ""};
 const char *html_button_nasledujuci_[] = {"Nasledujúci", "Následující", "Next", "Successívo", ""};
 const char *html_button_dnes[] = {"Dnes", "Dnes", "Today", "Hódie", ""};

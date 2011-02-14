@@ -88,6 +88,7 @@
 /*   2007-08-15a.D. | _export_rozbor_dna_kalendar(typ);                    */
 /*                  - premenovan˝ _main_formular()                         */
 /*   2007-08-16a.D. | oprava Segmentation fault _main_dnes() - chyba init. */
+/*   2007-09-13a.D. | BUTTON_SKRATKY_DALSIE_20070913 - skratky             */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -3420,14 +3421,120 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 		Export("</td>\n<td>&nbsp;");
 		Export("</td>\n<td>");
 		Export("%s", _global_string_farba);
-		Export("</td>\n<td>&nbsp;");
+		Export("</td>\n<td valign=\"middle\">&nbsp;");
 
 		/* 2003-07-15 vycistene poznamky, dorobene modlitby cez den */
+
+/* 2007-09-13: doplnenÈ moûnosti zobrazenia modlitby s benediktus/magnifikat */
+#undef BUTTON_SKRATKY_DALSIE_20070913_BUTTONS // Ëi sa maj˙ Ôalöie 2 voæby zobraziù ako buttony - default NIE
+#define VALIGN "bottom" // valign pre prv˝ riadok. ak s˙ v prvom riadku öpeci·lne voæby; ak je to naopak, potom "top"
+#define VALIGN_DRUHY "top" // valign pre druh˝ riadok.
+#define BUTTON_SKRATKY_DALSIE_20070913
+#ifdef BUTTON_SKRATKY_DALSIE_20070913
+		if(_global_opt1 != ANO){
+			// ak je to na zaËiatku, teda v tom riadku, kde ˙plne pÙvodne boli Inv., RannÈ chv·ly atÔ., netreba vloûiù niË
+			/* ak je to na konci, treba teraz vloûiù zalomenie po vöetk˝ch buttonoch
+			Export("\n</tr>\n<tr valign=\"top\">\n<td colspan=\"6\">&nbsp;</td>\n");
+			*/
+
+			// rannÈ chv·ly s benediktus
+			Export("<td align=\"right\" valign=\"%s\" colspan=\"3\">\n", VALIGN);
+
+			/* ranne chvaly -- button */
+#ifdef BUTTON_SKRATKY_DALSIE_20070913_BUTTONS
+			Export("<form action=\"");
+#else
+			Export("<a href=\"");
+#endif
+			if(_global_linky == ANO){
+				Export("%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d%s\"",
+					script_name,
+					STR_QUERY_TYPE, STR_PRM_DATUM,
+					STR_DEN, _global_den.den,
+					STR_MESIAC, _global_den.mesiac,
+					STR_ROK, _global_den.rok,
+					STR_MODLITBA, STR_MODL_RANNE_CHVALY,
+					STR_MODL_OPT1, ANO,
+					pom);
+			}
+			else{
+				Export("%s", pom);
+			}
+#ifdef BUTTON_SKRATKY_DALSIE_20070913_BUTTONS
+			Export(" method=\"post\">\n");
+			Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
+#else
+			Export(">\n");
+#endif
+			Export((char *)HTML_BUTTON_RANNE_CHVALY_BENEDIKTUS);
+#ifdef BUTTON_SKRATKY_DALSIE_20070913_BUTTONS
+			Export("\">\n");
+			Export("</form>\n");
+#else
+			Export("</a>\n");
+#endif
+			Export("</td>\n");
+
+			// oddelenie
+			Export("<td valign=\"%s\" colspan=\"3\">\n", VALIGN);
+			Export("&nbsp;\n");
+			Export("</td>\n");
+
+			// veöpery s magnifikat
+			Export("<td valign=\"%s\" colspan=\"3\">\n", VALIGN);
+
+			if(poradie_svateho != 4){
+				/* spomienka panny marie v sobotu nema vespery,
+				 * spravne odsadene az 2003-07-15
+				 */
+#ifdef BUTTON_SKRATKY_DALSIE_20070913_BUTTONS
+				Export("<form action=\"");
+#else
+				Export("<a href=\"");
+#endif
+				/* vespery -- button */
+				if(_global_linky == ANO){
+					Export("%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d%s\"",
+						script_name,
+						STR_QUERY_TYPE, STR_PRM_DATUM,
+						STR_DEN, _global_den.den,
+						STR_MESIAC, _global_den.mesiac,
+						STR_ROK, _global_den.rok,
+						STR_MODLITBA, STR_MODL_VESPERY,
+						STR_MODL_OPT1, ANO,
+						pom);
+				}
+				else{
+					Export("%s", pom);
+				}
+#ifdef BUTTON_SKRATKY_DALSIE_20070913_BUTTONS
+				Export(" method=\"post\">\n");
+				Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
+#else
+				Export(">\n");
+#endif
+				Export((char *)HTML_BUTTON_VESPERY_MAGNIFIKAT);
+#ifdef BUTTON_SKRATKY_DALSIE_20070913_BUTTONS
+				Export("\">\n");
+				Export("</form>\n");
+#else
+				Export("</a>\n");
+#endif
+			}
+			else{
+				Export("&nbsp;");
+			}
+			Export("</td>\n");
+
+			// ak je to na zaËiatku, treba teraz vloûiù zalomenie po öpeci·lnom riadku pred buttonmi
+			Export("\n</tr>\n<tr valign=\"%s\">\n<td colspan=\"6\">&nbsp;</td>\n", VALIGN_DRUHY);
+		} /* if(_global_opt1 != ANO) */
+#endif // BUTTON_SKRATKY_DALSIE_20070913
 
 /* 2006-10-11: dorobenÈ tlaËidlo pre invitatÛrium */
 
 		/* oddelenie */
-		Export("</td>\n<td>");
+		Export("</td>\n<td valign=\"middle\">");
 		if(_global_linky == ANO){
 			/* modlitba posvatneho citania -- button */
 			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
@@ -3453,7 +3560,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 /* 2003-08-06 dorobene posvatne citanie */
 
 		/* oddelenie */
-		Export("</td>\n<td>");
+		Export("</td>\n<td valign=\"middle\">");
 		if(_global_linky == ANO){
 			/* modlitba posvatneho citania -- button */
 			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
@@ -3479,7 +3586,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 /* 2007-03-19: Na z·klade pripomienky Vlada Kiöa posv‰tnÈ ËÌtanie predsunutÈ pred rannÈ chv·ly */
 
 		/* oddelenie */
-		Export("</td>\n<td>");
+		Export("</td>\n<td valign=\"middle\">");
 		if(_global_linky == ANO){
 			/* ranne chvaly -- button */
 			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
@@ -3502,7 +3609,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 /* 2003-07-15 dorobene modlitby cez den */
 
 		/* oddelenie */
-		Export("</td>\n<td>");
+		Export("</td>\n<td valign=\"middle\">");
 		if(_global_linky == ANO){
 			/* modlitba cez den (predpoludnim) -- button */
 			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
@@ -3523,7 +3630,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 		Export("</form>\n");
 
 		/* oddelenie */
-		Export("</td>\n<td>");
+		Export("</td>\n<td valign=\"middle\">");
 		if(_global_linky == ANO){
 			/* modlitba cez den (napoludnie) -- button */
 			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
@@ -3544,7 +3651,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 		Export("</form>\n");
 
 		/* oddelenie */
-		Export("</td>\n<td>");
+		Export("</td>\n<td valign=\"middle\">");
 		if(_global_linky == ANO){
 			/* modlitba cez den (popoludni) -- button */
 			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
@@ -3567,7 +3674,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 /* 2003-07-15 pokracuje sa buttonom `Vespery' */
 
 		/* oddelenie */
-		Export("</td>\n<td>");
+		Export("</td>\n<td valign=\"middle\">");
 
 		if(poradie_svateho != 4){
 			/* spomienka panny marie v sobotu nema vespery,
@@ -3595,7 +3702,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 			/* 2006-10-11: dorobenÈ tlaËidlo pre invitatÛrium */
 
 			/* oddelenie */
-			Export("</td>\n<td>");
+			Export("</td>\n<td valign=\"middle\">");
 			if(_global_linky == ANO){
 				/* modlitba posvatneho citania -- button */
 				Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
@@ -3626,7 +3733,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 		}
 
 		/* toto sa tyka buttonu 'Detaily...' */
-		Export("</td>\n<td>");
+		Export("</td>\n<td valign=\"middle\">");
 		if(_global_linky == ANO){
 			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
 				script_name,
@@ -4356,7 +4463,7 @@ void _export_rozbor_dna(short int typ){
 		/* 2006-08-19: okrem premennej _global_string t·to funkcia eöte naplnÌ aj _global_string2 a _global_string_farba */
 
 	/* export vytvorenÈho linku */
-	Export("\n<tr valign=\"baseline\">\n");
+	Export("\n<tr valign=\"middle\">\n");
 
 	/* zmenene <div align> na priamo do <td>, 2003-07-09 kvoli HTML 4.01 */
 
@@ -4373,11 +4480,11 @@ void _export_rozbor_dna(short int typ){
 	 * 2005-03-21: Vypisujeme, iba ak typ != EXPORT_DNA_VIAC_DNI_SIMPLE
 	 */
 	if(typ != EXPORT_DNA_VIAC_DNI_SIMPLE)
-		Export("<td align=left>%s%s%s%c</td>\n",
+		Export("<td align=\"left\">%s%s%s%c</td>\n",
 			pom1, pom3, pom2, ciarka);
 
 	/* ÔalöÌ stÂpec: buttons (tlaËidl·), podæa typu v˝pisu */
-	Export("<td>");
+	Export("<td valign=\"middle\">");
 
 	/* pozor, hoci je nedela, predsa na nu mohlo pripadnut slavenie s vyssou
 	 * prioritou */
@@ -4454,7 +4561,7 @@ void _export_rozbor_dna(short int typ){
 		// Export("<td>&nbsp;</td>\n<td>%s</td>\n", _global_string_farba);
 
 		/* ÔalöÌ stÂpec: rÌmske ËÌslo podæa t˝ûdÚa ûalt·ra, pre nedele aj liturgick˝ rok A, B resp. C */
-		Export("</td>\n<td><div align=right>"); /* 2006-08-19: podæa mÚa zbytoËne sa to vypisovalo aj pri obyËajnom exporte 1 dÚa */
+		Export("</td>\n<td valign=\"middle\"><div align=\"right\">"); /* 2006-08-19: podæa mÚa zbytoËne sa to vypisovalo aj pri obyËajnom exporte 1 dÚa */
 		/* vypisanie rimskeho cisla (citanie) */
 		Export("%s", _global_string2);
 		Export("</div>");
