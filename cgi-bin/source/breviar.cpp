@@ -4674,7 +4674,7 @@ LABEL_NIE_INE_VESPERY: /* 08/03/2000A.D. */
 	Log("/* datum bol vypisany uz predtym, preto teraz (pri prvych vesperach) \n");
 	Log(" * moze byt iny - o jeden den vacsi */\n");
 	Log("_global_string: %s\n", _global_string);
-	Log("%s\n", nazov_modlitby(modlitba));
+	Log("modlitba = `%s' (%d)\n", nazov_modlitby(modlitba), modlitba);
 	switch(modlitba){
 		/* dalsie case pridane 2003-08-13 */
 		case MODL_RANNE_CHVALY:
@@ -5101,7 +5101,9 @@ short int atojazyk(char *jazyk){
 		 * nazov_[modlitby|Modlitby|MODLITBY],\
 		 * a to pre konstanty MODL_INVITATORIUM -- MODL_DETAILY (vratane)\
 		 */\
+		Log("/* druh˝ pokus urËenia modlitby podæa jazykovo z·visl˝ch reùazcov pre modlitba == `%s' */\n", modlitba);\
 		for(i = MODL_INVITATORIUM; i <= MODL_DETAILY; i++){\
+			Log("/* step: %d `%s'...\n */", i, nazov_modlitby(i));\
 			if(equals(modlitba, nazov_modlitby(i)) || \
 				equals(modlitba, nazov_Modlitby(i)) /*|| \
 				equals(modlitba, nazov_MODLITBY[i])*/){\
@@ -8297,6 +8299,7 @@ _main_SIMULACIA_QS:
 				_main_LOG_to_Export("params from system variables WWW_...:\n");
 				_main_LOG_to_Export_PARAMS; /* 2003-08-13, dane do #define */
 				_main_LOG_to_Export("spat po skonceni getForm()\n");
+				_main_LOG_to_Export("2006-12-14: pom_MODLITBA == `%s'\n", pom_MODLITBA);
 			}
 			_main_LOG_to_Export("---scanning for system variables WWW_...:finished.\n");
 

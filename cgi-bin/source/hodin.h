@@ -49,18 +49,18 @@ const char *nazov_modlitby[] =
 const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] = 
 {{"invitatórium", "invitatoø", "Invitatory", "invitatorium", "" }
 , {"ranné chvály", "ranní chvály", "Laudes", "laudes matutin&#230;", "" }
-, {"posvätné èítanie", "posvátné ètení", "Holy Reading", "officium lectionis", "" }
-, {"modlitba predpoludním", "modlitba dopoledne", "", "tertia", "" }
-, {"modlitba napoludnie", "modlitba v poledne", "", "sexta", "" }
-, {"modlitba popoludní", "modlitba odpoledne", "", "nona", "" }
+, {"posvätné èítanie", "modlitba se ètením", "Office of Readings", "officium lectionis", "" }
+, {"modlitba predpoludním", "modlitba dopoledne", "Terce", "tertia", "" }
+, {"modlitba napoludnie", "modlitba v poledne", "Sext", "sexta", "" }
+, {"modlitba popoludní", "modlitba odpoledne", "None", "nona", "" }
 , {"vešpery", "nešpory", "Vesperae", "vesper&#230;", "" }
-, {"kompletórium", "kompletáø", "Completary", "", "" }
-, {"neurèená", "neurèena", "not-defined", "", ""}
-, {"prvé vešpery", "první nešpory", "", "I vesper&#230;", "" }
-, {"prvé kompletórium", "první kompletáø", "", "", "" }
-, {"druhé vešpery", "druhé nešpory", "", "II vesper&#230;", "" }
-, {"druhé kompletórium", "druhý kompletáø", "", "", "" }
-, {"detaily", "detaily", "Details", "", "" }
+, {"kompletórium", "kompletáø", "Completary", "completorio", "" }
+, {"neurèená", "neurèena", "not-defined", "no data", ""}
+, {"prvé vešpery", "první nešpory", "1st Vesperae", "I vesper&#230;", "" }
+, {"prvé kompletórium", "první kompletáø", "1°st Completary", "I completorio", "" }
+, {"druhé vešpery", "druhé nešpory", "2nd Vesperae", "II vesper&#230;", "" }
+, {"druhé kompletórium", "druhý kompletáø", "2nd Completary", "II completorio", "" }
+, {"detaily", "detaily", "Details", "details", "" }
 };
 
 #define		nazov_modlitby(a)	nazov_modlitby_jazyk[a][_global_jazyk]
@@ -68,18 +68,18 @@ const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 const char *nazov_Modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] = 
 {{"Invitatórium", "Invitatoo", "Invitatory", "Invitatorium", "" }
 , {"Ranné chvály", "Ranní chvály", "Laudes", "Laudes matutin&#230;", "" }
-, {"Posvätné eítanie", "Posvátné etení", "Holy Reading", "Officium lectionis", "" }
-, {"Modlitba predpoludním", "Modlitba dopoledne", "", "Tertia", "" }
-, {"Modlitba napoludnie", "Modlitba v poledne", "", "Sexta", "" }
-, {"Modlitba popoludní", "Modlitba odpoledne", "", "Nona", "" }
-, {"Vešpery", "Nešpory", "Vesperae", "Nona", "" }
-, {"Kompletórium", "Kompletáo", "Completary", "", "" }
-, {"Neureená", "Neureena", "not-defined", "", "" }
-, {"Prvé vešpery", "První nešpory", "", "I Vesper&#230;", "" }
-, {"Prvé kompletórium", "První kompletáø", "", "", "" }
-, {"Druhé vešpery", "Druhé nešpory", "", "II Vesper&#230;", "" }
-, {"Druhé kompletórium", "Druhý kompletáø", "", "", "" }
-, {"Detaily", "Detaily", "Details", "", "" }
+, {"Posvätné èítanie", "Modlitba se ètením", "Office of Readings", "Officium lectionis", "" }
+, {"Modlitba predpoludním", "Modlitba dopoledne", "Terce", "Tertia", "" }
+, {"Modlitba napoludnie", "Modlitba v poledne", "Sext", "Sexta", "" }
+, {"Modlitba popoludní", "Modlitba odpoledne", "None", "Nona", "" }
+, {"Vešpery", "Nešpory", "Vesperae", "Vesper&#230;", "" }
+, {"Kompletórium", "Kompletáø", "Completary", "Completorio", "" }
+, {"Neureená", "Neureena", "not-defined", "No data", "" }
+, {"Prvé vešpery", "První nešpory", "1st Vesperae", "I Vesper&#230;", "" }
+, {"Prvé kompletórium", "První kompletáø", "1st Completary", "I Completorio", "" }
+, {"Druhé vešpery", "Druhé nešpory", "2nd Vesperae", "II Vesper&#230;", "" }
+, {"Druhé kompletórium", "Druhý kompletáø", "2nd Completary", "II Completorio", "" }
+, {"Detaily", "Detaily", "Details", "Details", "" }
 };
 
 #define		nazov_Modlitby(a)	nazov_Modlitby_jazyk[a][_global_jazyk]
@@ -575,18 +575,18 @@ const char *nazov_mesiaca[] =
 */
 
 const char *nazov_mesiaca_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1] = 
-{ {"január", "leden", "January", "", ""}
-, {"február" , "únor", "February", "", ""}
-, {"marec" , "bøezen", "March", "", ""}
-, {"apríl" , "duben", "April", "", ""}
-, {"máj" , "kvìten", "May", "", ""}
-, {"jún" , "èerven", "June", "", ""}
-, {"júl" , "èervenec", "July", "", ""}
-, {"august" , "srpen", "August", "", ""}
-, {"september" , "záøí", "September", "", ""}
-, {"október" , "øíjen", "October", "", ""}
-, {"november" , "listopad", "November", "", ""}
-, {"december" , "prosinec", "December", "", ""}
+{ {"január", "leden", "January", "jan", ""}
+, {"február" , "únor", "February", "feb", ""}
+, {"marec" , "bøezen", "March", "mar", ""}
+, {"apríl" , "duben", "April", "apr", ""}
+, {"máj" , "kvìten", "May", "mai", ""}
+, {"jún" , "èerven", "June", "iun", ""}
+, {"júl" , "èervenec", "July", "iul", ""}
+, {"august" , "srpen", "August", "aug", ""}
+, {"september" , "záøí", "September", "sep", ""}
+, {"október" , "øíjen", "October", "oct", ""}
+, {"november" , "listopad", "November", "nov", ""}
+, {"december" , "prosinec", "December", "dec", ""}
 , {"neznámy" , "neznámý", "unknown", "", ""}
 };
 
