@@ -3937,7 +3937,8 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 
 /* 2003-08-06 dorobene posvatne citanie */
 		/* 2008-08-15: Posvätné èítanie iba pre èeštinu a slovenèinu */
-		if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ)){
+		/* 2008-09-11: Posvätné èítanie pridané aj pre "dominikánsku" èeštinu */
+		if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 			/* oddelenie */
 			Export("</td>\n<td valign=\"middle\">");
 			if(_global_linky == ANO){
@@ -6963,39 +6964,20 @@ void _main_tabulka(char *rok_from, char *rok_to, char *tab_linky){
 
 	Export("<center><table border CELLSPACING=1>\n");
 	Export("<tr>\n");
-	switch(_global_jazyk){
-		case JAZYK_CZ:
-		case JAZYK_CZ_OP: /* 2008-08-15: doplnené */
-			Export("<td align=center>Léto<br>Pánì</td>\n");
-			Export("<td align=center>Nedìlní<br>písmeno</td>\n");
-			Export("<td align=center>Nedìlní<br>cyklus</td>\n");
-			Export("<td align=center>Køest Krista<br>Pánì</td>\n");
-			Export("<td align=center><a href=\"#explain\">OCR<br>pøed<br>postem</a></td>\n"); /* fajl VYSVETLIVKY_TABULKA(); */
-			Export("<td align=center>Popeleèní<br>støeda</td>\n");
-			Export("<td align=center>Veliko-<br>noce</td>\n");
-			Export("<td align=center>Nanebe-<br>vstoupení<br>Pánì</td>\n");
-			Export("<td align=center>Seslání<br>Ducha<br>Svatého</td>\n");
-			Export("<td align=center><a href=\"#explain\">OCR<br>po<br>VN</a></td>\n"); /* fajl VYSVETLIVKY_TABULKA(); */
-			Export("<td align=center>První<br>adventní<br>nedìle</td>\n");
-			Export("<td align=center>Nedìle Svaté<br>rodiny</td></tr>\n");
-			break;
-		case JAZYK_EN:
-			/* todo - xxx */
-		default:
-			Export("<td align=center>Rok<br>Pána</td>\n");
-			Export("<td align=center>Nede¾ná<br>litera</td>\n");
-			Export("<td align=center>Nede¾ný<br>cyklus</td>\n");
-			Export("<td align=center>Krst Krista<br>Pána</td>\n");
-			Export("<td align=center><a href=\"#explain\">OCR<br>pred<br>PO</a></td>\n"); /* fajl VYSVETLIVKY_TABULKA(); */
-			Export("<td align=center>Popolcová<br>streda</td>\n");
-			Export("<td align=center>Ve¾ká<br>noc</td>\n");
-			Export("<td align=center>Nanebo-<br>vstúpenie<br>Pána</td>\n");
-			Export("<td align=center>Zoslanie<br>Ducha<br>Svätého</td>\n");
-			Export("<td align=center><a href=\"#explain\">OCR<br>po<br>VN</a></td>\n"); /* fajl VYSVETLIVKY_TABULKA(); */
-			Export("<td align=center>Prvá<br>adventná<br>nede¾a</td>\n");
-			Export("<td align=center>Nede¾a Svätej<br>rodiny</td></tr>\n");
-			break;
-	} /* switch(_global_jazyk) */
+	/* 2008-08-15: doplnené; 2008-09-11: prepracované na jazykové mutácie */
+	Export((char *)html_text_pohyblive1[_global_jazyk]);
+	Export((char *)html_text_pohyblive2[_global_jazyk]);
+	Export((char *)html_text_pohyblive3[_global_jazyk]);
+	Export((char *)html_text_pohyblive4[_global_jazyk]);
+	Export((char *)html_text_pohyblive5[_global_jazyk]); /* fajl VYSVETLIVKY_TABULKA(); */
+	Export((char *)html_text_pohyblive6[_global_jazyk]);
+	Export((char *)html_text_pohyblive7[_global_jazyk]);
+	Export((char *)html_text_pohyblive8[_global_jazyk]);
+	Export((char *)html_text_pohyblive9[_global_jazyk]);
+	Export((char *)html_text_pohyblive10[_global_jazyk]); /* fajl VYSVETLIVKY_TABULKA(); */
+	Export((char *)html_text_pohyblive11[_global_jazyk]);
+	Export((char *)html_text_pohyblive12[_global_jazyk]);
+
 	for(year = rfrom; year <= rto; year++){
 		LOG("vchadzam do analyzuj_rok()...\n");
 		analyzuj_rok(year); /* vysledok da do _global_r */

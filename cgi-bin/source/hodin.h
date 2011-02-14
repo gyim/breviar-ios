@@ -710,6 +710,114 @@ const char *html_text_den_v_roku[] = {"deò v roku", "den v roce", "day of the ye
 const char *html_text_zacina[] = {"zaèína", "zaèíná", "starts", "", "", "zaèíná"};
 const char *html_text_liturgicky_rok[] = {"liturgický rok", "liturgický rok", "liturgical year", "", "", "liturgický rok"};
 
+const char *html_text_pohyblive1[] = {
+	"<td align=center>Rok<br>Pána</td>\n",
+	"<td align=center>Léto<br>Pánì</td>\n", 
+	"<td align=center>Anno<br>Domini</td>\n",
+	"<td align=center>Anno<br>Domini</td>\n",
+	"",
+	"<td align=center>Léto<br>Pánì</td>\n"
+};
+
+const char *html_text_pohyblive2[] = {
+	"<td align=center>Nede¾ná<br>litera</td>\n",
+	"<td align=center>Nedìlní<br>písmeno</td>\n", 
+	"<td align=center>Sunday<br>Letter</td>\n",
+	"<td align=center>Let.<br>Dom.</td>\n",
+	"",
+	"<td align=center>Nedìlní<br>písmeno</td>\n"
+};
+
+const char *html_text_pohyblive3[] = {
+	"<td align=center>Nede¾ný<br>cyklus</td>\n",
+	"<td align=center>Nedìlní<br>cyklus</td>\n", 
+	"<td align=center>Sunday<br>cycle</td>\n",
+	"<td align=center>Cycl.<br>Dom.</td>\n",
+	"",
+	"<td align=center>Nedìlní<br>cyklus</td>\n"
+};
+
+const char *html_text_pohyblive4[] = {
+	"<td align=center>Krst Krista<br>Pána</td>\n",
+	"<td align=center>Køest Krista<br>Pánì</td>\n", 
+	"<td align=center>Bapt. of<br>the Lord</td>\n",
+	"<td align=center>Bapt.<br>Domini</td>\n",
+	"",
+	"<td align=center>Køest Krista<br>Pánì</td>\n"
+};
+
+const char *html_text_pohyblive5[] = {
+	"<td align=center><a href=\"#explain\">OCR<br>pred<br>PO</a></td>\n",
+	"<td align=center><a href=\"#explain\">OCR<br>pøed<br>postem</a></td>\n", 
+	"<td align=center>...</td>\n",
+	"<td align=center>...</td>\n",
+	"",
+	"<td align=center><a href=\"#explain\">OCR<br>pøed<br>postem</a></td>\n"
+};
+
+const char *html_text_pohyblive6[] = {
+	"<td align=center>Popolcová<br>streda</td>\n",
+	"<td align=center>Popeleèní<br>støeda</td>\n", 
+	"<td align=center>...</td>\n",
+	"<td align=center>...</td>\n",
+	"",
+	"<td align=center>Popeleèní<br>støeda</td>\n"
+};
+
+const char *html_text_pohyblive7[] = {
+	"<td align=center>Ve¾ká<br>noc</td>\n",
+	"<td align=center>Veliko-<br>noce</td>\n", 
+	"<td align=center>Easter</td>\n",
+	"<td align=center>...</td>\n",
+	"",
+	"<td align=center>Veliko-<br>noce</td>\n"
+};
+
+const char *html_text_pohyblive8[] = {
+	"<td align=center>Nanebo-<br>vstúpenie<br>Pána</td>\n",
+	"<td align=center>Nanebe-<br>vstoupení<br>Pánì</td>\n", 
+	"<td align=center>...</td>\n",
+	"<td align=center>...</td>\n",
+	"",
+	"<td align=center>Nanebe-<br>vstoupení<br>Pánì</td>\n"
+};
+
+const char *html_text_pohyblive9[] = {
+	"<td align=center>Zoslanie<br>Ducha<br>Svätého</td>\n",
+	"<td align=center>Seslání<br>Ducha<br>Svatého</td>\n", 
+	"<td align=center>...</td>\n",
+	"<td align=center>...</td>\n",
+	"",
+	"<td align=center>Seslání<br>Ducha<br>Svatého</td>\n"
+};
+
+const char *html_text_pohyblive10[] = {
+	"<td align=center><a href=\"#explain\">OCR<br>po<br>VN</a></td>\n",
+	"<td align=center><a href=\"#explain\">OCR<br>po<br>VN</a></td>\n", 
+	"<td align=center>...</td>\n",
+	"<td align=center>...</td>\n",
+	"",
+	"<td align=center><a href=\"#explain\">OCR<br>po<br>VN</a></td>\n"
+};
+
+const char *html_text_pohyblive11[] = {
+	"<td align=center>Prvá<br>adventná<br>nede¾a</td>\n",
+	"<td align=center>První<br>adventní<br>nedìle</td>\n", 
+	"<td align=center>...</td>\n",
+	"<td align=center>...</td>\n",
+	"",
+	"<td align=center>První<br>adventní<br>nedìle</td>\n"
+};
+
+const char *html_text_pohyblive12[] = {
+	"<td align=center>Nede¾a Svätej<br>rodiny</td></tr>\n",
+	"<td align=center>Nedìle Svaté<br>rodiny</td></tr>\n", 
+	"<td align=center>...</td>\n",
+	"<td align=center>...</td>\n",
+	"",
+	"<td align=center>Nedìle Svaté<br>rodiny</td></tr>\n"
+};
+
 const char *html_text_Nedelne_pismeno[] = {"Nede¾né písmeno", "Nedìlní písmeno", "Sunday letter", "", "", "Nedìlní písmeno"};
 const char *html_text_Nedelne_pismena[] = {"Nede¾né písmená", "Nedìlní písmena", "Sunday letters", "", "", "Nedìlní písmena"};
 const char *html_text_Od_prvej_adv_atd[] = {
