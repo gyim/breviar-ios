@@ -62,6 +62,7 @@
 	#define LOGGING
 	#define LOG_TO_STDOUT
 	#define EXPORT_TO_STDOUT
+	#define DEBUG
 /* ostry Windows: */
 #elif defined(MODEL_ostry_Windows)
 	#define OS_Windows

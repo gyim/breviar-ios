@@ -142,6 +142,9 @@ extern char *_global_string;
 /*char _global_string[MAX_STR];*/
 extern char *_global_string2;
 /*char _global_string2[MAX_STR];*/ /* obsahuje I, II, III, IV, V alebo pismeno roka */
+
+extern char *_global_buf; /* 2006-08-01: túto premennú tiež alokujeme */
+extern char *_global_buf2; /* 2006-08-01: túto premennú tiež alokujeme */
 /* ------------------------------------------------------------------- */
 
 /* 2006-07-11: Pridané kvôli jazykovým mutáciám (breviar.cpp) */

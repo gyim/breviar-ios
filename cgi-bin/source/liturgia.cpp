@@ -40,6 +40,7 @@
 int _allocate_global_var(void){
 	int ret = SUCCESS;
 	Log("Allocating memory...\n");
+
 /* _global_den_ptr */
 	if((_global_den_ptr = (_struct_dm*) malloc(sizeof(_struct_dm))) == NULL){
 		Log("  Not enough memory to allocate buffer for `_global_den_ptr'\n");
@@ -252,6 +253,7 @@ int _allocate_global_var(void){
 
 int _deallocate_global_var(void){
 	Log("Deallocating memory...\n");
+
 	Log("_global_den_ptr\n"); free(_global_den_ptr);
 	Log("_global_result_ptr\n"); free(_global_result_ptr);
 	Log("_global_pm_sobota_ptr\n"); free(_global_pm_sobota_ptr);
@@ -412,7 +414,7 @@ int cislo_mesiaca(char *mesiac){
 	int ret = 0;
 	int i;
 	for(i = 0; i < 12; i++){
-		if(equals(nazov_mesiaca[i], mesiac))
+		if(equals(nazov_mesiaca(i), mesiac))
 			ret = i + 1;
 	}
 	return ret;
@@ -553,13 +555,13 @@ void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ){
 				else{
 					switch(_case){
 						case CASE_case:
-							sprintf(pom, "%s", nazov_mesiaca[mesiac - 1]);
+							sprintf(pom, "%s", nazov_mesiaca(mesiac - 1));
 							break;
 						case CASE_Case:
-							sprintf(pom, "%s", nazov_Mesiaca[mesiac - 1]);
+							sprintf(pom, "%s", nazov_Mesiaca(mesiac - 1));
 							break;
 						case CASE_CASE:
-							sprintf(pom, "%s", nazov_MESIACA[mesiac - 1]);
+							sprintf(pom, "%s", nazov_MESIACA(mesiac - 1));
 							break;
 					}/* switch(_case) */
 					if(typ == LINK_DEN_MESIAC_ROK){
@@ -573,13 +575,13 @@ void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ){
 			else{
 				switch(_case){
 					case CASE_case:
-						sprintf(pom, "%d. %s", den, nazov_mesiaca[mesiac - 1]);
+						sprintf(pom, "%d. %s", den, nazov_mesiaca(mesiac - 1));
 						break;
 					case CASE_Case:
-						sprintf(pom, "%d. %s", den, nazov_Mesiaca[mesiac - 1]);
+						sprintf(pom, "%d. %s", den, nazov_Mesiaca(mesiac - 1));
 						break;
 					case CASE_CASE:
-						sprintf(pom, "%d. %s", den, nazov_MESIACA[mesiac - 1]);
+						sprintf(pom, "%d. %s", den, nazov_MESIACA(mesiac - 1));
 						break;
 				}/* switch(_case) */
 				if(typ == LINK_DEN_MESIAC_ROK){
@@ -1230,9 +1232,9 @@ void Log(_struct_lrok r){ /* 01/03/2000A.D. */
 void Log(_struct_dm g){
 	Log_struktura_dm("struktura dm:\n");
 	Log_struktura_dm("   den:    %d\n", g.den);
-	Log_struktura_dm("   mesiac: %s\n", nazov_mesiaca[g.mesiac - 1]);
+	Log_struktura_dm("   mesiac: %s\n", nazov_mesiaca(g.mesiac - 1));
 	Log_struktura_dm("   rok:    %d\n", g.rok);
-	Log_struktura_dm("   denvt:  %s\n", nazov_dna[g.denvt]);
+	Log_struktura_dm("   denvt:  %s\n", nazov_dna(g.denvt));
 	Log_struktura_dm("   denvr:  %d\n", g.denvr);
 	/* toto boli "obcianske" zalezitosti */
 	Log_struktura_dm("   litrok: %c\n", g.litrok);

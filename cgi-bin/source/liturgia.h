@@ -30,6 +30,7 @@
 /*   2005-11-11a.D. | Doplnené parametre pre Te Deum           */
 /*   2006-02-07a.D. | ZALTAR_... pre funkciu zaltar_zvazok();  */
 /*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám          */
+/*   2006-08-01a.D. | zmenené definície konštánt (jaz.mutácie) */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -424,6 +425,7 @@ typedef struct dm _struct_dm;
 #define DEN_SOBOTA      6
 /* neznamy den */
 #define DEN_UNKNOWN     7
+#define POCET_DNI		7
 
 /* mesiace */
 #define MES_JAN 0
@@ -439,9 +441,10 @@ typedef struct dm _struct_dm;
 #define MES_NOV 10
 #define MES_DEC 11
 /* neznamy mesiac */
-#define UNKNOWN_MESIAC 12
+#define UNKNOWN_MESIAC	12
+#define POCET_MESIACOV	12
 /* vsetky mesiace */
-#define VSETKY_MESIACE 13
+#define VSETKY_MESIACE	13
 #define STR_VSETKY_MESIACE  "*"
 /* vsetky dni */
 #define VSETKY_DNI   32
@@ -571,22 +574,53 @@ extern const char char_nedelny_cyklus[3];
 #define CASE_Case 1 /* Prve Pismeno Velke */
 #define CASE_CASE 2 /* VSETKO VELKE */
 
+#define	POCET_JAZYKOV	3
+
 /* nazov_dna: string pre nazov dna; suhlasi s struct tm.tm_wday;
  * Weekday (0--6; Sunday/nedela = 0) */
-extern const char *nazov_dna[];
-extern const char *nazov_dna_asci[];
-extern const char *nazov_Dna[];
-extern const char *nazov_DNA[];
-extern const char *nazov_Dn[];
+
+//extern const char *nazov_dna[];
+extern const char *nazov_dna_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1];
+#define		nazov_dna(a)	nazov_dna_jazyk[a][_global_jazyk]
+
+//extern const char *nazov_dna_asci[];
+extern const char *nazov_dna_asci_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1];
+#define		nazov_dna_asci(a)	nazov_dna_asci_jazyk[a][_global_jazyk]
+
+//extern const char *nazov_Dna[];
+extern const char *nazov_Dna_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1];
+#define		nazov_Dna(a)	nazov_Dna_jazyk[a][_global_jazyk]
+
+//extern const char *nazov_DNA[];
+extern const char *nazov_DNA_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1];
+#define		nazov_DNA(a)	nazov_DNA_jazyk[a][_global_jazyk]
+
+//extern const char *nazov_Dn[];
+extern const char *nazov_Dn_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1];
+#define		nazov_Dn(a)	nazov_Dn_jazyk[a][_global_jazyk]
+
 extern const char *nazov_DN_asci[];
 extern const char *nazov_dn_asci[];
 
 /* nazov_mesiaca: string pre nazov dna; suhlasi s struct tm.tm_mon;
  * Month (0--11) */
-extern const char *nazov_mesiaca[];
-extern const char *nazov_mesiaca_asci[];
-extern const char *nazov_Mesiaca[];
-extern const char *nazov_MESIACA[];
+
+//extern const char *nazov_mesiaca[];
+extern const char *nazov_mesiaca_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1];
+#define		nazov_mesiaca(a)	nazov_mesiaca_jazyk[a][_global_jazyk]
+
+//extern const char *nazov_mesiaca_asci[];
+extern const char *nazov_mesiaca_asci_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1];
+#define		nazov_mesiaca_asci(a)	nazov_mesiaca_asci_jazyk[a][_global_jazyk]
+
+//extern const char *nazov_Mesiaca[];
+extern const char *nazov_Mesiaca_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1];
+#define		nazov_Mesiaca(a)	nazov_Mesiaca_jazyk[a][_global_jazyk]
+
+//extern const char *nazov_MESIACA[];
+extern const char *nazov_MESIACA_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1];
+#define		nazov_MESIACA(a)	nazov_MESIACA_jazyk[a][_global_jazyk]
+
 extern const char *nazov_MES[];
 extern const char *nazov_mes[];
 
@@ -759,6 +793,9 @@ extern char *_global_string;
 /*extern char _global_string[MAX_STR];*/
 extern char *_global_string2;
 /*extern char _global_string2[MAX_STR];*/ /* obsahuje I, II, III, IV, V alebo pismeno roka */
+
+extern char *_global_buf; /* 2006-08-01: túto premennú tiež alokujeme */
+extern char *_global_buf2; /* 2006-08-01: túto premennú tiež alokujeme */
 
 /* pridane 13/04/2000A.D.; definovane v breviar.cpp */
 extern int _global_linky;

@@ -5704,7 +5704,7 @@ label_24_DEC:
 				mystrcpy(_file, FILE_NANEBOVSTUPENIE, MAX_STR_AF_FILE);
 				mystrcpy(_file_pc, FILE_NANEBOVSTUPENIE, MAX_STR_AF_FILE); /* 2006-02-09: doplnené */
 				den = DEN_NEDELA;
-				Log("  ide o nanebovstupenie Pana: _file = `%s', den = %s...\n", _file, nazov_dna[den]);
+				Log("  ide o nanebovstupenie Pana: _file = `%s', den = %s...\n", _file, nazov_dna(den));
 				modlitba = MODL_PRVE_VESPERY;
 				_set_zalmy_nanebovstupenie(modlitba);
 				modlitba = MODL_RANNE_CHVALY;

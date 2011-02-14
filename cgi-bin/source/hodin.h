@@ -13,6 +13,7 @@
 /*   2005-07-27a.D. | pridanÈ nazov_slavenia_lokal[]           */
 /*   2005-08-05a.D. | pridanÈ zvazok_OBD[]                     */
 /*   2006-07-11a.D. | prvÈ kroky k jazykov˝m mut·ci·m          */
+/*   2006-08-01a.D. | zmenenÈ definÌcie konöt·nt (jaz.mut·cie) */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -266,42 +267,204 @@ const char char_nedelny_cyklus[3] =
 
 /* nazov_dna: string pre nazov dna; suhlasi s struct tm.tm_wday;
  * Weekday (0--6; Sunday/nedela = 0) */
+
+/*
 const char *nazov_dna[] =
 {"nedeæa", "pondelok", "utorok", "streda",
  "ötvrtok", "piatok", "sobota", "nezn·my"};
+*/
+const char *nazov_dna_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1] = 
+{{"nedeæa", "nedÏle", "Sunday", ""}
+, {"pondelok" , "pondÏlÌ", "Monday", ""}
+, {"utorok" , "˙ter˝", "Tuesday", ""}
+, {"streda" , "st¯eda", "Wednesday", ""}
+, {"ötvrtok" , "Ëtvrtek", "Thursday", ""}
+, {"piatok" , "p·tek", "Friday", ""}
+, {"sobota" , "sobota", "Saturday", ""}
+, {"nezn·my" , "nezn·m˝", "unknown", ""}
+};
+
+#define		nazov_dna(a)	nazov_dna_jazyk[a][_global_jazyk]
+
+/*
 const char *nazov_dna_asci[] =
 {"nedela", "pondelok", "utorok", "streda",
  "stvrtok", "piatok", "sobota", "neznamy"};
+*/
+const char *nazov_dna_asci_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1] = 
+{{"nedela", "nedele", "Sunday", ""}
+, {"pondelok" , "pondeli", "Monday", ""}
+, {"utorok" , "utery", "Tuesday", ""}
+, {"streda" , "streda", "Wednesday", ""}
+, {"stvrtok" , "ctvrtek", "Thursday", ""}
+, {"piatok" , "patek", "Friday", ""}
+, {"sobota" , "sobota", "Saturday", ""}
+, {"neznamy" , "neznamy", "unknown", ""}
+};
+
+#define		nazov_dna_asci(a)	nazov_dna_asci_jazyk[a][_global_jazyk]
+
+/*
 const char *nazov_Dna[] =
 {"Nedeæa", "Pondelok", "Utorok", "Streda",
  "ätvrtok", "Piatok", "Sobota", "Nezn·my"};
+*/
+const char *nazov_Dna_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1] = 
+{{"Nedeæa", "NedÏle", "Sunday", ""}
+, {"Pondelok" , "PondÏlÌ", "Monday", ""}
+, {"Utorok" , "⁄ter˝", "Tuesday", ""}
+, {"Streda" , "St¯eda", "Wednesday", ""}
+, {"ätvrtok" , "»tvrtek", "Thursday", ""}
+, {"Piatok" , "P·tek", "Friday", ""}
+, {"Sobota" , "Sobota", "Saturday", ""}
+, {"Nezn·my" , "Nezn·m˝", "unknown", ""}
+};
+
+#define		nazov_Dna(a)	nazov_Dna_jazyk[a][_global_jazyk]
+
+/*
 const char *nazov_DNA[] =
 {"NEDEºA", "PONDELOK", "UTOROK", "STREDA",
  "äTVRTOK", "PIATOK", "SOBOTA", "NEZN¡MY"};
+*/
+const char *nazov_DNA_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1] = 
+{{"NEDEºA", "NEDÃLE", "SUNDAY", ""}
+, {"PONDELOK" , "PONDÃLÕ", "MONDAY", ""}
+, {"UTOROK" , "⁄TER›", "TUESDAY", ""}
+, {"STREDA" , "STÿEDA", "WEDNESDAY", ""}
+, {"äTVRTOK" , "»TVRTEK", "THURSDAY", ""}
+, {"PIATOK" , "P¡TEK", "FRIDAY", ""}
+, {"SOBOTA" , "SOBOTA", "SATURDAY", ""}
+, {"NEZN¡MY" , "NEZN¡M›", "UNKNOWN", ""}
+};
+
+#define		nazov_DNA(a)	nazov_DNA_jazyk[a][_global_jazyk]
+
+/*
 const char *nazov_Dn[] =
 {"Ne", "Po", "Ut", "St", "ät", "Pi", "So", "??"};
+*/
+const char *nazov_Dn_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1] = 
+{ {"Ne" , "Ne", "Sun", ""}
+, {"Po" , "Po", "Mon", ""}
+, {"Ut" , "⁄t", "Tue", ""}
+, {"St" , "St", "Wed", ""}
+, {"ät" , "»t", "Thu", ""}
+, {"Pi" , "P·", "Fri", ""}
+, {"So" , "So", "Sat", ""}
+, {"??" , "??", "???", ""}
+};
+
+#define		nazov_Dn(a)	nazov_Dn_jazyk[a][_global_jazyk]
+
+/* 2006-08-01: pouûÌva sa pre HTML kotvy, ktorÈ nez·visia od jazykovej mut·cie */
 const char *nazov_DN_asci[] =
 {"NE", "PO", "UT", "STR", "STV", "PI", "SO", "??"};
+
 const char *nazov_dn_asci[] =
 {"ne", "po", "ut", "str", "stv", "pi", "so", "??"};
 
 /* nazov_mesiaca: string pre nazov dna; suhlasi s struct tm.tm_mon;
  * Month (0--11) */
+
+/*
 const char *nazov_mesiaca[] =
 {"janu·r", "febru·r", "marec", "aprÌl", "m·j", "j˙n", "j˙l",
  "august", "september", "oktÛber", "november", "december", "nezn·my"};
+*/
+
+const char *nazov_mesiaca_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1] = 
+{{"janu·r", "leden", "January", ""}
+, {"febru·r" , "˙nor", "February", ""}
+, {"marec" , "b¯ezen", "March", ""}
+, {"aprÌl" , "duben", "April", ""}
+, {"m·j" , "kvÏten", "May", ""}
+, {"j˙n" , "Ëerven", "June", ""}
+, {"j˙l" , "Ëervenec", "July", ""}
+, {"august" , "srpen", "August", ""}
+, {"september" , "z·¯Ì", "September", ""}
+, {"oktÛber" , "¯Ìjen", "October", ""}
+, {"november" , "listopad", "November", ""}
+, {"december" , "prosinec", "December", ""}
+, {"nezn·my" , "nezn·m˝", "unknown", ""}
+};
+
+#define		nazov_mesiaca(a)	nazov_mesiaca_jazyk[a][_global_jazyk]
+
+/*
 const char *nazov_mesiaca_asci[] =
 {"januar", "februar", "marec", "april", "maj", "jun", "jul",
  "august", "september", "oktober", "november", "december", "neznamy"};
+*/
+
+const char *nazov_mesiaca_asci_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1] = 
+{{"januar", "leden", "January", ""}
+, {"februar" , "unor", "February", ""}
+, {"marec" , "brezen", "March", ""}
+, {"april" , "duben", "April", ""}
+, {"maj" , "kveten", "May", ""}
+, {"jun" , "cerven", "June", ""}
+, {"jul" , "cervenec", "July", ""}
+, {"august" , "srpen", "August", ""}
+, {"september" , "zari", "September", ""}
+, {"oktober" , "rijen", "October", ""}
+, {"november" , "listopad", "November", ""}
+, {"december" , "prosinec", "December", ""}
+, {"neznamy" , "neznamy", "unknown", ""}
+};
+
+#define		nazov_mesiaca_asci(a)	nazov_mesiaca_asci_jazyk[a][_global_jazyk]
+
+/*
 const char *nazov_Mesiaca[] =
 {"Janu·r", "Febru·r", "Marec", "AprÌl", "M·j", "J˙n", "J˙l",
  "August", "September", "OktÛber", "November", "December", "Nezn·my"};
+*/
+const char *nazov_Mesiaca_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1] = 
+{ {"Janu·r", "Leden", "January", ""}
+, {"Febru·r" , "⁄nor", "February", ""}
+, {"Marec" , "B¯ezen", "March", ""}
+, {"AprÌl" , "Duben", "April", ""}
+, {"M·j" , "KvÏten", "May", ""}
+, {"J˙n" , "»erven", "June", ""}
+, {"J˙l" , "»ervenec", "July", ""}
+, {"August" , "Srpen", "August", ""}
+, {"September" , "Z·¯Ì", "September", ""}
+, {"OktÛber" , "ÿÌjen", "October", ""}
+, {"November" , "Listopad", "November", ""}
+, {"December" , "Prosinec", "December", ""}
+, {"Nezn·my" , "Nezn·m˝", "unknown", ""}
+};
+
+#define		nazov_Mesiaca(a)	nazov_Mesiaca_jazyk[a][_global_jazyk]
+
+/*
 const char *nazov_MESIACA[] =
 {"JANU¡R", "FEBRU¡R", "MAREC", "APRÕL", "M¡J", "J⁄N", "J⁄L",
  "AUGUST", "SEPTEMBER", "OKT”BER", "NOVEMBER", "DECEMBER", "NEZN¡MY"};
+*/
+const char *nazov_MESIACA_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1] = 
+{ {"JANU¡R", "LEDEN", "JANUARY", ""}
+, {"FEBRU¡R" , "⁄NOR", "FEBRUARY", ""}
+, {"MAREC" , "BÿEZEN", "MARCH", ""}
+, {"APRÕL" , "DUBEN", "APRIL", ""}
+, {"M¡J" , "KVÃTEN", "MAY", ""}
+, {"J⁄N" , "»ERVEN", "JUNE", ""}
+, {"J⁄L" , "»ERVENEC", "JULY", ""}
+, {"AUGUST" , "SRPEN", "AUGUST", ""}
+, {"SEPTEMBER" , "Z¡ÿÕ", "SEPTEMBER", ""}
+, {"OKT”BER" , "ÿÕJEN", "OCTOBER", ""}
+, {"NOVEMBER" , "LISTOPAD", "NOVEMBER", ""}
+, {"DECEMBER" , "PROSINEC", "DECEMBER", ""}
+, {"NEZN¡MY" , "NEZN¡M›", "UNKNOWN", ""}
+};
+
+#define		nazov_MESIACA(a)	nazov_MESIACA_jazyk[a][_global_jazyk]
+
 const char *nazov_MES[] =
 {"JAN", "FEB", "MAR", "APR", "MAJ", "JUN", "JUL",
  "AUG", "SEP", "OKT", "NOV", "DEC", "___"};
+
 const char *nazov_mes[] =
 {"jan", "feb", "mar", "apr", "maj", "jun", "jul",
  "aug", "sep", "okt", "nov", "dec", "___"};
@@ -318,5 +481,67 @@ const char *postfix_jazyka[] =
 {"", "cz", "en", ""};
 /* Pozn·mka: Postfix nesmie obsahovaù na zaËiatku oddeæovaË (slash resp. backslash);
  * musÌ sa jednaù o podadres·r pod include */
+
+/* definÌcie HTML prvkov upravenÈ a presunutÈ z mydefs.h, 2006-08-01 */
+const char *html_button_ranne_chvaly[] = {"RannÈ chv·ly", "RannÌ chv·ly", "Laudes", ""};
+#ifndef HTML_BUTTON_RANNE_CHVALY
+#define HTML_BUTTON_RANNE_CHVALY	html_button_ranne_chvaly[_global_jazyk]
+#endif
+
+const char *html_button_predpoludnim[] = {"9h", "9h", "9h", ""};
+#ifndef HTML_BUTTON_PREDPOLUDNIM
+#define HTML_BUTTON_PREDPOLUDNIM	html_button_predpoludnim[_global_jazyk]
+#endif
+
+const char *html_button_napoludnie[] = {"12h", "12h", "12h", ""};
+#ifndef HTML_BUTTON_NAPOLUDNIE
+#define HTML_BUTTON_NAPOLUDNIE	html_button_napoludnie[_global_jazyk]
+#endif
+
+const char *html_button_popoludni[] = {"15h", "15h", "15h", ""};
+#ifndef HTML_BUTTON_POPOLUDNI
+#define HTML_BUTTON_POPOLUDNI	html_button_popoludni[_global_jazyk]
+#endif
+
+const char *html_button_vespery[] = {"Veöpery", "Neöpory", "Vesperae", ""};
+#ifndef HTML_BUTTON_VESPERY
+#define HTML_BUTTON_VESPERY	html_button_vespery[_global_jazyk]
+#endif
+
+const char *html_button_posv_citanie[] = {"Posv.ËÌt.", "»tenÌ", "Reading", ""};
+#ifndef HTML_BUTTON_POSV_CITANIE
+#define HTML_BUTTON_POSV_CITANIE	html_button_posv_citanie[_global_jazyk]
+#endif
+
+const char *html_button_detaily[] = {"Detaily...", "PodrobnÏji...", "Details...", ""};
+#ifndef HTML_BUTTON_DETAILY
+#define HTML_BUTTON_DETAILY	html_button_detaily[_global_jazyk]
+#endif
+
+const char *html_button_det_show[] = {"Zobraz modlitbu", "Ukaû modlitbu", "Show prayer", ""};
+#ifndef HTML_BUTTON_DET_SHOW
+#define HTML_BUTTON_DET_SHOW	html_button_det_show[_global_jazyk]
+#endif
+
+const char *html_button_det_defaults[] = {"PÙvodnÈ hodnoty", "P˘vodnÌ hodnoty", "Defaults", ""};
+#ifndef HTML_BUTTON_DET_DEFAULTS
+#define HTML_BUTTON_DET_DEFAULTS	html_button_det_defaults[_global_jazyk]
+#endif
+
+const char *html_button_dnes_show[] = {"Zobraz", "Ukaû", "Show", ""};
+#ifndef HTML_BUTTON_DNES_SHOW
+#define HTML_BUTTON_DNES_SHOW	html_button_dnes_show[_global_jazyk]
+#endif
+
+const char *html_button_dnes_defaults[] = {"VyËisti", "VyËisti", "Clear", ""};
+#ifndef HTML_BUTTON_DNES_DEFAULTS
+#define HTML_BUTTON_DNES_DEFAULTS	html_button_dnes_defaults[_global_jazyk]
+#endif
+
+const char *html_button_predchadzajuci_[] = {"Predch·dzaj˙ci", "P¯edchozÌ", "Previous", ""};
+const char *html_button_nasledujuci_[] = {"Nasleduj˙ci", "N·sledujÌcÌ", "Next", ""};
+const char *html_button_den[] = {"deÚ", "den", "day", ""};
+const char *html_button_mesiac[] = {"mesiac", "mÏsÌc", "month", ""};
+const char *html_button_rok[] = {"rok", "rok", "year", ""};
 
 #endif /* __HODIN_H */

@@ -55,7 +55,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2006-07-31"
+#define BUILD_DATE "2006-08-01"
 
 #define BYTES 250
 #define SMALL 80
@@ -76,8 +76,9 @@
 #define MAX_QUERY_STR 300 /* query_string */
 #define MAX_POM_QUERY_TYPE 300 /* pom_QUERY_TYPE */
 #define MAX_GLOBAL_LINK 300 /* maximalna dlzka retazca _global_link */
-#define MAX_ENV	100 /* maximalna dlzka environmentalnej premennej */
-#define MAX_VARIABLES 12 /* maximalny pocet syst. premennych WWW_..., zvyseny 2003-08-07 */
+//#define MAX_ENV	100 /* maximalna dlzka environmentalnej premennej */ /* 2006-08-01: nepoužíva sa */
+#define MAX_VARIABLES 20 /* maximalny pocet syst. premennych WWW_..., zvyseny 2003-08-07 a opätovne 2006-08-01 */
+#define MAX_GLOBAL_BUFFER 500 /* _global_buf, pridané 2005-08-01 */
 /***************************************************************/
 /* EOF of former file mybase.h                                 */
 /***************************************************************/
@@ -129,8 +130,8 @@ extern int query_type; /* premenna obsahujuca PRM_... */
 #define 	SCRIPT_PARAM_FROM_ARGV	   202 /* z argumentov */
 
 /* nasleduju typy dotazov */
-#define PRM_UNKNOWN		 10
-#define PRM_NONE		 11
+#define PRM_UNKNOWN		 100
+#define PRM_NONE		 110
 
 #define PRM_SIMULACIA_QS 12 /* 24/02/2000A.D. */
 #ifdef LONG_PARAM_NAMES
@@ -410,20 +411,23 @@ extern int query_type; /* premenna obsahujuca PRM_... */
 /* pridane 2003-07-09, zmenene v cestach pre skript */
 #define HTML_AMPERSAND "&amp;"
 
-/* pridane 2003-07-15 */
-#define HTML_BUTTON_RANNE_CHVALY "Ranné chvály"
-#define HTML_BUTTON_PREDPOLUDNIM "9h"
-#define HTML_BUTTON_NAPOLUDNIE   "12h"
-#define HTML_BUTTON_POPOLUDNI    "15h"
-#define HTML_BUTTON_VESPERY      "Vešpery"
-/* dalsie pridane 2003-08-06 */
-#define HTML_BUTTON_POSV_CITANIE "Posv.èít."
-#define HTML_BUTTON_DETAILY      "Detaily..."
-#define HTML_BUTTON_DET_SHOW     "Zobraz modlitbu"
-#define HTML_BUTTON_DET_DEFAULTS "Pôvodné hodnoty"
-/* pridanw 2003-08-07 */
-#define HTML_BUTTON_DNES_SHOW     "Zobraz"
-#define HTML_BUTTON_DNES_DEFAULTS "Vyèisti"
+/* definície HTML prvkov upravené a presunuté do hodin.h, 2006-08-01;
+ * tu ponechané len z historických dôvodov zakomentované
+ * -- pridane 2003-07-15 
+ * #define HTML_BUTTON_RANNE_CHVALY "Ranné chvály"
+ * #define HTML_BUTTON_PREDPOLUDNIM "9h"
+ * #define HTML_BUTTON_NAPOLUDNIE   "12h"
+ * #define HTML_BUTTON_POPOLUDNI    "15h"
+ * #define HTML_BUTTON_VESPERY      "Vešpery"
+ * -- dalsie pridane 2003-08-06 
+ * #define HTML_BUTTON_POSV_CITANIE "Posv.èít."
+ * #define HTML_BUTTON_DETAILY      "Detaily..."
+ * #define HTML_BUTTON_DET_SHOW     "Zobraz modlitbu"
+ * #define HTML_BUTTON_DET_DEFAULTS "Pôvodné hodnoty"
+ * -- pridané 2003-08-07 
+ * #define HTML_BUTTON_DNES_SHOW     "Zobraz"
+ * #define HTML_BUTTON_DNES_DEFAULTS "Vyèisti"
+ */
 
 #endif /*__MYDEFS_H_*/
 
