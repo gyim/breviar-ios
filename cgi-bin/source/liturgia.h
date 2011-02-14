@@ -617,6 +617,10 @@ extern const char *nazov_obdobia_v_jazyk[POCET_OBDOBI + 1][POCET_JAZYKOV + 1];
 extern const char *nazov_OBDOBIA_V_jazyk[POCET_OBDOBI + 1][POCET_JAZYKOV + 1];
 #define		nazov_OBDOBIA_V(a)	nazov_OBDOBIA_V_jazyk[a][_global_jazyk]
 
+/* 2008-12-20: doplnenÈ */
+extern const char *nazov_OBDOBIA_AKA_jazyk[POCET_OBDOBI + 1][POCET_JAZYKOV + 1];
+#define		nazov_OBDOBIA_AKA(a)	nazov_OBDOBIA_AKA_jazyk[a][_global_jazyk]
+
 /* gen[itiv] == 2. pad, koho/coho */
 /* extern const char *nazov_obdobia_gen[]; */
 /* extern const char *nazov_Obdobia[]; */
@@ -811,6 +815,15 @@ extern const char *nazov_Mesiaca_gen_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1
 
 extern const char *nazov_MES[];
 extern const char *nazov_mes[];
+
+#define		POCET_TYZDNOV 34
+
+/* 2008-12-20: pridan˝ reùazec pre poradovÈ ËÌslo */
+extern const char *poradie_Slovom_jazyk[POCET_TYZDNOV + 1][POCET_JAZYKOV + 1];
+#define		poradie_Slovom(a)	poradie_Slovom_jazyk[a][_global_jazyk]
+
+extern const char *poradie_SLOVOM_jazyk[POCET_TYZDNOV + 1][POCET_JAZYKOV + 1];
+#define		poradie_SLOVOM(a)	poradie_SLOVOM_jazyk[a][_global_jazyk]
 
 #define POCET_ALIASOV          7
 /* sucast struktury lrok, indexy */

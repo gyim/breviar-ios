@@ -116,6 +116,8 @@
 /*   2008-08-15a.D. | doposlovenËen· _main_analyza_roku()                  */
 /*   2008-08-15a.D. | prv˝ pokus "dominik·nskej Ëeötiny"                   */
 /*   2008-11-29a.D. | pridanÈ rÙzne moûnosti batch exportu                 */
+/*   2008-12-20a.D. | ˙prava init_global_string() pre nedele niekt. obdobÌ */
+/*                  - _export_rozbor_dna_buttons(): komplet.+nunk dimittis */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -3465,11 +3467,21 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		if(_local_den.denvt == DEN_NEDELA){
 			Log("nedeæa, ktor· nem· vlastn˝ n·zov... (_global_string == %s)\n", _global_string);
 			/* nedela bez vlastneho nazvu */
-			sprintf(pom, "%d. %s %s",
-					_local_den.tyzden,
-					nazov_DNA(_local_den.denvt),
-					nazov_OBDOBIA_V(_local_den.litobd));
-
+			/* 2008-12-20: ˙prava n·zvov nedieæ v öt˝le "3. NEDEºA V ADVENTNOM OBDOBÕ" -> "Tretia adventn· nedeæa" */
+			if(_global_jazyk == JAZYK_SK &&
+				(
+					(_local_den.litobd == OBD_ADVENTNE_I) || (_local_den.litobd == OBD_ADVENTNE_II)
+					|| (_local_den.litobd == OBD_POSTNE_I)
+					|| (_local_den.litobd == OBD_VELKONOCNE_I) || (_local_den.litobd == OBD_VELKONOCNE_II)
+				)
+				/* zatiaæ iba pre slovenËinu - advent, pÙst, veækonoËnÈ obdobie */
+			){
+				sprintf(pom, "%s %s %s", poradie_SLOVOM(_local_den.tyzden - 1), nazov_OBDOBIA_AKA(_local_den.litobd), nazov_DNA(_local_den.denvt));
+			}
+			else{
+				/* _local_den.litobd == OBD_CEZ_ROK; pre cezroËnÈ ost·va poradovÈ ËÌslo */
+				sprintf(pom, "%d. %s %s", _local_den.tyzden, nazov_DNA(_local_den.denvt), nazov_OBDOBIA_V(_local_den.litobd));
+			}
 			if(farba == COLOR_RED){
 				/* zmenene <font color> na <span>, 2003-07-02 */
 				strcat(pom, "</span>");
@@ -3485,8 +3497,8 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 					strcat(pom, "</span>");
 			}
 			strcat(_global_string, pom);
-		}
-		else{
+		}/* nedeæa */
+		else{ /* nie nedeæa */
 			Log("deÚ in˝ ako nedeæa, ktor˝ nem· vlastn˝ n·zov... (_global_string == %s)\n", _global_string);
 			/* doplnenÈ z·tvorky, kvÙli span-ovaËk·m na konci */
 			if(obyc == ANO){
@@ -3519,6 +3531,11 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 							(char *)text_V_OKTAVE_NARODENIA[_global_jazyk],
 							tyzden_zaltara(_local_den.tyzden));
 						strcat(pom, html_text_tyzden_zaltara[_global_jazyk]);
+					}
+					/* skontrolujeme eöte 17.-23. decembra (obdobie OBD_ADVENTNE_II) */
+					else if((_local_den.litobd == OBD_ADVENTNE_II) && (typ != EXPORT_DNA_VIAC_DNI)){
+						sprintf(pom, "%d. %s, %s</span>, %d%s", _local_den.den, nazov_mesiaca_gen(_local_den.mesiac - 1),
+							nazov_obdobia(_local_den.litobd), _local_den.tyzden, html_text_tyzden[_global_jazyk]);
 					}
 					else{
 						/* <font size=-1></font> zmeneny na <span class="small"></span>, 2003-07-14 */
@@ -3813,6 +3830,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 #undef BUTTON_SKRATKY_DALSIE_20070913_BUTTONS // Ëi sa maj˙ Ôalöie 2 voæby zobraziù ako buttony - default NIE
 #define VALIGN "bottom" // valign pre prv˝ riadok. ak s˙ v prvom riadku öpeci·lne voæby; ak je to naopak, potom "top"
 #define VALIGN_DRUHY "top" // valign pre druh˝ riadok.
+#define ALIGN_RIGHT /* 2008-12-20: "right" */ "center"
 #define BUTTON_SKRATKY_DALSIE_20070913
 #ifdef BUTTON_SKRATKY_DALSIE_20070913
 		if(_global_opt1 != ANO){
@@ -3822,7 +3840,10 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 			*/
 
 			// rannÈ chv·ly s benediktus
-			Export("<td align=\"right\" valign=\"%s\" colspan=\"3\">\n", VALIGN);
+			/* 2008-12-20: zaberieme cel˙ bunku (t.j. colspan=9) bez delenia kvÙli kompletÛriu 
+			Export("<td align=\"%s\" valign=\"%s\" colspan=\"3\">\n", ALIGN_RIGHT, VALIGN);
+			*/
+			Export("<td align=\"%s\" valign=\"%s\" colspan=\"9\">\n", ALIGN_RIGHT, VALIGN);
 
 			/* ranne chvaly -- button */
 #ifdef BUTTON_SKRATKY_DALSIE_20070913_BUTTONS
@@ -3856,17 +3877,18 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 			Export("</form>\n");
 #else
 			Export("</a>\n");
+			Export("&nbsp; | &nbsp;"); /* 2008-12-20: doplnenÈ */
 #endif
-			Export("</td>\n");
+//			Export("</td>\n");
 
+			/* 2008-12-20: zaberieme cel˙ bunku (t.j. colspan=9) bez delenia kvÙli kompletÛriu 
 			// oddelenie
 			Export("<td valign=\"%s\" colspan=\"3\">\n", VALIGN);
 			Export("&nbsp;\n");
 			Export("</td>\n");
-
-			// veöpery s magnifikat
 			Export("<td valign=\"%s\" colspan=\"3\">\n", VALIGN);
-
+			*/
+			// veöpery s magnifikat
 			if(poradie_svateho != 4){
 				/* spomienka panny marie v sobotu nema vespery,
 				 * spravne odsadene az 2003-07-15
@@ -3903,12 +3925,50 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 				Export("</form>\n");
 #else
 				Export("</a>\n");
+				Export("&nbsp; | &nbsp;"); /* 2008-12-20: doplnenÈ */
+#endif
+
+				/* kompletÛrium */
+#ifdef BUTTON_SKRATKY_DALSIE_20070913_BUTTONS
+				Export("<form action=\"");
+#else
+				Export("<a href=\"");
+#endif
+				/* kompletÛrium -- button */
+				if(_global_linky == ANO){
+					Export("%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d%s\"",
+						script_name,
+						STR_QUERY_TYPE, STR_PRM_DATUM,
+						STR_DEN, _global_den.den,
+						STR_MESIAC, _global_den.mesiac,
+						STR_ROK, _global_den.rok,
+						STR_MODLITBA, STR_MODL_KOMPLETORIUM,
+						STR_MODL_OPT1, ANO,
+						pom);
+				}
+				else{
+					Export("%s", pom);
+				}
+#ifdef BUTTON_SKRATKY_DALSIE_20070913_BUTTONS
+				Export(" method=\"post\">\n");
+				Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
+#else
+				Export(">\n");
+#endif
+				Export((char *)HTML_BUTTON_KOMPLETORIUM_NUNKDIM);
+#ifdef BUTTON_SKRATKY_DALSIE_20070913_BUTTONS
+				Export("\">\n");
+				Export("</form>\n");
+#else
+				Export("</a>\n");
 #endif
 			}
 			else{
 				Export("&nbsp;");
 			}
+			/* 2008-12-20: zaberieme cel˙ bunku (t.j. colspan=9) bez delenia kvÙli kompletÛriu 
 			Export("</td>\n");
+			*/
 
 			// ak je to na zaËiatku, treba teraz vloûiù zalomenie po öpeci·lnom riadku pred buttonmi
 			Export("\n</tr>\n<tr valign=\"%s\">\n<td colspan=\"6\">&nbsp;</td>\n", VALIGN_DRUHY);

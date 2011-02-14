@@ -249,6 +249,23 @@ const char *nazov_OBDOBIA_V_jazyk[POCET_OBDOBI + 1][POCET_JAZYKOV + 1] =
 
 #define		nazov_OBDOBIA_V(a)	nazov_OBDOBIA_V_jazyk[a][_global_jazyk]
 
+/* 2008-12-20: doplnenÈ - pouûÌva sa v init_global_string() pre nedele niektor˝ch obdobÌ [zatiaæ iba v slovenËine] */
+const char *nazov_OBDOBIA_AKA_jazyk[POCET_OBDOBI + 1][POCET_JAZYKOV + 1] =
+{{"VO VEºKONO»NEJ OKT¡VE", "VE VELIKONO»NÕM OKT¡VU", "", "", "", "V OKT¡VU VELIKONO»NÕM"}, // nepouûÌva sa
+ {"ADVENTN¡", "ADVENTNÕ", "", "", "", "ADVENTNÕ"},
+ {"ADVENTN¡", "ADVENTNÕ", "", "", "", "ADVENTNÕ"},
+ {"VIANO»N¡", "V¡NO»NÕ", "", "", "", "V¡NO»NÕ"},
+ {"VIANO»N¡", "V¡NO»NÕ", "", "", "", "V¡NO»NÕ"},
+ {"CEZRO»N¡", "V MEZIDOBÕ", "", "", "", "BÃHEM ROKU"}, // nepouûÌva sa
+ {"P‘STNA", "POSTNÕ", "", "", "", "POSTNÕ"},
+ {"VO VEºKOM T›éDNI", "VE SVAT…M T›DNU", "", "", "", "VE SVAT…M T›DNU"}, // nepouûÌva sa
+ {"VO VEºKONO»NOM TROJDNÕ", "VE VELIKONO»NÕM TRIDUU", "", "", "", "VE VELIKONO»NÕM TRIDUU"}, // nepouûÌva sa
+ {"VEºKONO»N¡", "VELIKONO»NÕ", "", "", "", "VELIKONO»NÕ"},
+ {"VEºKONO»N¡", "VELIKONO»NÕ", "", "", "", "VELIKONO»NÕ"},
+ {"V OKT¡VE NARODENIA P¡NA", "V OKT¡VU NAROZENÕ P¡NÃ", "", "", "", "V OKT¡VU NAROZENÕ P¡NÃ"} // nepouûÌva sa
+};
+#define		nazov_OBDOBIA_AKA(a)	nazov_OBDOBIA_AKA_jazyk[a][_global_jazyk]
+
 /* nazov_obdobia: string pre nazov suboru .htm liturgickeho obdobia */
 const char *nazov_obd_htm[] =
 {"vnokt.htm", "adv1.htm", "adv2.htm",
@@ -565,6 +582,81 @@ const char *nazov_mes[] =
 {"jan", "feb", "mar", "apr", "maj", "jun", "jul",
  "aug", "sep", "okt", "nov", "dec", "___"};
 
+/* 2008-12-20: pridan˝ reùazec pre poradovÈ ËÌslo - pouûÌva sa v init_global_string() pre nedele niektor˝ch obdobÌ [zatiaæ iba v slovenËine] */
+const char *poradie_Slovom_jazyk[POCET_TYZDNOV + 1][POCET_JAZYKOV + 1] = 
+{ {"Prv·", "PrvnÌ", "", "", "", "PrvnÌ"}
+, {"Druh·" , "Druh·", "", "", "", "Druh·"}
+, {"Tretia" , "T¯etÌ", "", "", "", "T¯etÌ"}
+, {"ätvrt·" , "»trvt·", "", "", "", "»trvt·"}
+, {"Piata" , "P·t·", "", "", "", "P·t·"}
+, {"äiesta" , "äest·", "", "", "", "äest·"}
+, {"Siedma" , "Sedm·", "", "", "", "Sedm·"}
+, {"‘sma" , "Osm·", "", "", "", "Osm·"}
+, {"Deviata" , "Dev·t·", "", "", "", "Dev·t·"}
+, {"Desiata" , "Des·t·", "", "", "", "Des·t·"}
+, {"11. ", "11", "11", "11", "11", "11"}
+, {"12. ", "12", "12", "12", "12", "12"}
+, {"13. ", "13", "13", "13", "13", "13"}
+, {"14. ", "14", "14", "14", "14", "14"}
+, {"15. ", "15", "15", "15", "15", "15"}
+, {"16. ", "16", "16", "16", "16", "16"}
+, {"17. ", "17", "17", "17", "17", "17"}
+, {"18. ", "18", "18", "18", "18", "18"}
+, {"19. ", "19", "19", "19", "19", "19"}
+, {"20. ", "20", "20", "20", "20", "20"}
+, {"21. ", "21", "21", "21", "21", "21"}
+, {"22. ", "22", "22", "22", "22", "22"}
+, {"23. ", "23", "23", "23", "23", "23"}
+, {"24. ", "24", "24", "24", "24", "24"}
+, {"25. ", "25", "25", "25", "25", "25"}
+, {"26. ", "26", "26", "26", "26", "26"}
+, {"27. ", "27", "27", "27", "27", "27"}
+, {"28. ", "28", "28", "28", "28", "28"}
+, {"29. ", "29", "29", "29", "29", "29"}
+, {"30. ", "30", "30", "30", "30", "30"}
+, {"31. ", "31", "31", "31", "31", "31"}
+, {"32. ", "32", "32", "32", "32", "32"}
+, {"33. ", "33", "33", "33", "33", "33"}
+, {"34. ", "34", "34", "34", "34", "34"}
+};
+
+const char *poradie_SLOVOM_jazyk[POCET_TYZDNOV + 1][POCET_JAZYKOV + 1] = 
+{ {"PRV¡", "PRVNÕ", "", "", "", "PRVNÕ"}
+, {"DRUH¡" , "DRUH¡", "", "", "", "DRUH¡"}
+, {"TRETIA" , "TÿETÕ", "", "", "", "TÿETÕ"}
+, {"äTVRT¡" , "»TRVT¡", "", "", "", "»TRVT¡"}
+, {"PIATA" , "P¡T¡", "", "", "", "P¡T¡"}
+, {"äIESTA" , "äEST¡", "", "", "", "äEST¡"}
+, {"SIEDMA" , "SEDM¡", "", "", "", "SEDM¡"}
+, {"OSMA" , "OSM¡", "", "", "", "OSM¡"}
+, {"DEVIATA" , "DEV¡T¡", "", "", "", "DEV¡T¡"}
+, {"DESIATA" , "DES¡T¡", "", "", "", "DES¡T¡"}
+, {"11. ", "11", "11", "11", "11", "11"}
+, {"12. ", "12", "12", "12", "12", "12"}
+, {"13. ", "13", "13", "13", "13", "13"}
+, {"14. ", "14", "14", "14", "14", "14"}
+, {"15. ", "15", "15", "15", "15", "15"}
+, {"16. ", "16", "16", "16", "16", "16"}
+, {"17. ", "17", "17", "17", "17", "17"}
+, {"18. ", "18", "18", "18", "18", "18"}
+, {"19. ", "19", "19", "19", "19", "19"}
+, {"20. ", "20", "20", "20", "20", "20"}
+, {"21. ", "21", "21", "21", "21", "21"}
+, {"22. ", "22", "22", "22", "22", "22"}
+, {"23. ", "23", "23", "23", "23", "23"}
+, {"24. ", "24", "24", "24", "24", "24"}
+, {"25. ", "25", "25", "25", "25", "25"}
+, {"26. ", "26", "26", "26", "26", "26"}
+, {"27. ", "27", "27", "27", "27", "27"}
+, {"28. ", "28", "28", "28", "28", "28"}
+, {"29. ", "29", "29", "29", "29", "29"}
+, {"30. ", "30", "30", "30", "30", "30"}
+, {"31. ", "31", "31", "31", "31", "31"}
+, {"32. ", "32", "32", "32", "32", "32"}
+, {"33. ", "33", "33", "33", "33", "33"}
+, {"34. ", "34", "34", "34", "34", "34"}
+};
+
 /* 2006-07-11: PridanÈ kvÙli jazykov˝m mut·ci·m */
 const char *nazov_jazyka[POCET_JAZYKOV + 1] =
 {"slovenËina", "Ëeötina", "English", "lingua latina", "(neurËen˝)", "Ëeötina (dominik·ni)"};
@@ -661,6 +753,12 @@ const char *html_button_ranne_chvaly_benediktus[] = {"RannÈ chv·ly + Benediktus"
 const char *html_button_vespery_magnifikat[] = {"Veöpery + Magnifikat", "Neöpory + Mariino kant.", "Vesperae + Magnificat", "Vesperae + Magnificat", "", "VeËernÌ chv·ly + kant. Panny Marie"};
 #ifndef HTML_BUTTON_VESPERY_MAGNIFIKAT
 #define HTML_BUTTON_VESPERY_MAGNIFIKAT	html_button_vespery_magnifikat[_global_jazyk]
+#endif
+
+/* doplnenÈ, 2008-12-20; nepouûÌva sa pre ostatnÈ jazyky */
+const char *html_button_kompletorium_nunkdim[] = {"KompletÛrium + Nunk dimittis", "xxx", "xxx", "xxx", "", "xxx"};
+#ifndef HTML_BUTTON_KOMPLETORIUM_NUNKDIM
+#define HTML_BUTTON_KOMPLETORIUM_NUNKDIM	html_button_kompletorium_nunkdim[_global_jazyk]
 #endif
 
 const char *html_button_predchadzajuci_[] = {"Predch·dzaj˙ci", "P¯edchozÌ", "Previous", "PraecedÈnte", "", "P¯edchozÌ"};
