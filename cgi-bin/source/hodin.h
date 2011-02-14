@@ -409,6 +409,7 @@ const char *nazov_slavenia_lokal[] =
 ,"v královéhradecké diecézi"
 ,"jen v posvìcených kostelích"
 ,"v plzeòské diecézi"
+,"ve Slezsku svátek"
 };
 
 const char *nazov_farby_jazyk[POCET_FARIEB + 1][POCET_JAZYKOV + 1] =
@@ -1839,7 +1840,7 @@ const char *text_DEC_01[] =
  "", ""};
 const char *text_DEC_02[] =
 {"(na Slovensku nie je)",
- "Výroèí posvìcení katedrály",
+ "Výroèí posvìcení katedrály sv. Bartolomìje",
  "", ""};
 const char *text_DEC_03[] =
 {"Sv. Františka Xaverského, kòaza",
