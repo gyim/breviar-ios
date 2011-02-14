@@ -1446,7 +1446,7 @@ const char *text_AUG_08[] =
  "", ""};
 const char *text_AUG_09[] =
 {"Sv. Terézie Benedikty, reho¾níèky a muèenice, spolupatrónky Európy",
- "Sv. Terezy Benedikty, øeholnice a muèednice, patronky Evropy",
+ "Sv. Terezie Benedikty, panny a muèednice, patronky Evropy",
  "", ""};
 const char *text_AUG_10[] =
 {"Sv. Vavrinca, diakona a muèeníka",
