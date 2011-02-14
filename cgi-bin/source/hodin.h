@@ -242,6 +242,7 @@ const char *nazov_slavenia_lokal[] =
 ,"v Rožòavskej diecéze sviatok hlavného patróna"
 ,"len v konsekrovaných kostoloch"
 ,"Druhá ve¾konoèná nede¾a"
+,"koniec Oktávy narodenia Pána"
 };
 
 const char *rimskymi_tyzden_zaltara[] =

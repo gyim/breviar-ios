@@ -2137,7 +2137,9 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 				_global_den.typslav = SLAV_SLAVNOST;
 				_global_den.litobd = OBD_OKTAVA_NARODENIA;
 				_global_den.prik = PRIKAZANY_SVIATOK;
-				mystrcpy(_global_den.meno, "Panny M·rie BohorodiËky (koniec Okt·vy narodenia P·na)", MENO_SVIATKU);
+				mystrcpy(_global_den.meno, "Panny M·rie BohorodiËky", MENO_SVIATKU);
+				/* 2006-02-16: podreùazec (koniec Okt·vy narodenia P·na) podobne ako (2. veækonoËn· nedeæa) rieöen˝ pomocou "typslav_lokal" */
+				_global_den.typslav_lokal = LOKAL_SLAV_KONIEC_OKTAVY_NAR;
 			}
 			else if(_global_den.denvr == ZJV){
 				/* slavnost zjavenia pana */

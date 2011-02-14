@@ -3373,12 +3373,14 @@ label_24_DEC:
 	_set_magnifikat(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
 }
-/* 2006-02-05: doplnené posvätné èítanie - modlitba ako na ranné chvály */
+/* 2006-02-05: doplnené posvätné èítanie - modlitba ako na ranné chvály 
+ * 2006-02-16: doplnená modlitba cez deò - modlitba ako na ranné chvály 
+ */
 #define _bohorod_modlitba {\
 	c = pismenko_modlitby(modlitba);\
 	if(modlitba == MODL_PRVE_VESPERY)\
 		c = pismenko_modlitby(MODL_VESPERY);\
-	if(modlitba == MODL_POSV_CITANIE)\
+	if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI) || (modlitba == MODL_POSV_CITANIE))\
 		c = pismenko_modlitby(MODL_RANNE_CHVALY);\
 	sprintf(_anchor, "%s_%c%s", ANCHOR_PM_BOHOROD, c, ANCHOR_MODLITBA);\
 	_set_modlitba(modlitba, _file, _anchor);\
@@ -3767,6 +3769,17 @@ label_24_DEC:
 				_bohorod_kresponz;
 				_bohorod_citanie1;
 				_bohorod_citanie2;
+				_bohorod_modlitba;
+
+				/* 2006-02-16: doplnené modlitby cez deò */
+				modlitba = MODL_PREDPOLUDNIM;
+				_bohorod_kcitanie;
+				_bohorod_modlitba;
+				modlitba = MODL_NAPOLUDNIE;
+				_bohorod_kcitanie;
+				_bohorod_modlitba;
+				modlitba = MODL_POPOLUDNI;
+				_bohorod_kcitanie;
 				_bohorod_modlitba;
 			}
 			else if((_global_den.denvt == DEN_NEDELA) && (_global_den.mesiac - 1 == MES_JAN)){ /* druha nedela po narodeni pana */
