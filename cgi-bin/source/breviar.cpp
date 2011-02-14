@@ -1733,16 +1733,6 @@ void interpretParameter(short int type, char *paramname){
 		else /* ostatne modlitby nemaju ranny chvalospev */
 		;
 	}/* PARAM_RCHVALOSPEV */
-	else if(equals(paramname, PARAM_NUNCDIMITTIS)){
-		/* ak _global_skip_in_prayer je ANO, tak preskoc Nunc Dimittis */
-		if(((type == MODL_KOMPLETORIUM) || (type == MODL_PRVE_KOMPLETORIUM) || (type == MODL_DRUHE_KOMPLETORIUM))
-		&& (_global_skip_in_prayer != ANO)){
-			strcat(path, _global_modl_kompletorium.nuncdimittis.file);
-			includeFile(type, paramname, path, _global_modl_kompletorium.nuncdimittis.anchor);
-		}
-		else /* ostatne modlitby benediktus nemaju */
-		;
-	}/* PARAM_BENEDIKTUS */
 	else if(equals(paramname, PARAM_PROSBY)){
 		switch(type){
 			case MODL_RANNE_CHVALY:
@@ -1780,12 +1770,10 @@ void interpretParameter(short int type, char *paramname){
 				strcat(path, _global_modl_vespery.modlitba.file);
 				includeFile(type, paramname, path, _global_modl_vespery.modlitba.anchor);
 				break;
-/* zapoznámkované 2006-10-11: kompletórium nemá modlitbu
 			case MODL_KOMPLETORIUM:
 				strcat(path, _global_modl_kompletorium.modlitba.file);
 				includeFile(type, paramname, path, _global_modl_kompletorium.modlitba.anchor);
 				break;
-*/
 			/* pridane 2003-11-20 */
 			case MODL_POSV_CITANIE:
 				strcat(path, _global_modl_posv_citanie.modlitba.file);

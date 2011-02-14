@@ -1321,7 +1321,7 @@ void Log(struct tmodlitba3 t){
 	Log_struktura_tm3("   zalm2        file `%s', anchor `%s'\n", t.zalm2.file, t.zalm2.anchor);
 	Log_struktura_tm3("   kcitanie     file `%s', anchor `%s'\n", t.kcitanie.file, t.kcitanie.anchor);
 	Log_struktura_tm3("   kresponz     file `%s', anchor `%s'\n", t.kresponz.file, t.kresponz.anchor);
-	Log_struktura_tm3("   nuncdimittis file `%s', anchor `%s'\n", t.kresponz.file, t.nuncdimittis.anchor);
+	Log_struktura_tm3("   modlitba     file `%s', anchor `%s'\n", t.modlitba.file, t.modlitba.anchor);
 }
 
 /* 2006-10-13 doplnené */

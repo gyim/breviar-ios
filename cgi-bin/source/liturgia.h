@@ -134,7 +134,7 @@ struct tmodlitba3{
 	_struct_anchor_and_file zalm2     ;
 	_struct_anchor_and_file kcitanie  ;
 	_struct_anchor_and_file kresponz  ;
-	_struct_anchor_and_file nuncdimittis   ; /* antifóna na nunc dimittis opravená 2006-10-11 */
+	_struct_anchor_and_file modlitba  ; /* pridané 2006-10-24 */
 };
 typedef struct tmodlitba3 _type_kompletorium;
 typedef struct tmodlitba3 _type_1kompletorium;
@@ -240,6 +240,9 @@ extern const char *nazov_Modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1];
 #define TEMPLAT_VESPERY          "vespery.htm"
 #define TEMPLAT_KOMPLETORIUM     "komplet.htm"
 
+/* pridané 2006-10-24 pre kompletórium */
+#define nazov_obd_KOMPLETORIUM   "cezrok_k.htm"
+
 extern const char *TEMPLAT[];
 
 /* znaky, ktore znacia (pre interpretovanie templatu) zaciatok a koniec
@@ -274,8 +277,6 @@ extern const char *TEMPLAT[];
 /* pridane 2003-08-06, upravene 2003-08-21 */                                        
 #define PARAM_CITANIE1     "CITANIE1" /* vlastne KCITANIE */
 #define PARAM_CITANIE2     "CITANIE2" /* vlastne BENEDIKTUS */
-/* pridané 2006-10-11 */
-#define PARAM_NUNCDIMITTIS "NUNCDIMITTIS" /* antifóna pre Nunc dimittis pre kompletórium */
 
 /* dalsie parametre: specificke pre obdobie */
 /* Od nedele Pánovho zmàtvychvstania až do Druhej ve¾konoènej nedele vrátane,
@@ -1070,7 +1071,7 @@ void _init_dm(_struct_dm a);
 	_INIT_ANCHOR_AND_FILE(a.zalm2); \
 	_INIT_ANCHOR_AND_FILE(a.kcitanie); \
 	_INIT_ANCHOR_AND_FILE(a.kresponz); \
-	_INIT_ANCHOR_AND_FILE(a.nuncdimittis); \
+	_INIT_ANCHOR_AND_FILE(a.modlitba); \
 };
 
 /* 2006-10-11 doplnené */
