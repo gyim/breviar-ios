@@ -2717,7 +2717,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				_global_den.prik = PRIKAZANY_SVIATOK;
 				mystrcpy(_global_den.meno, text_JAN_01[_global_jazyk], MENO_SVIATKU);
 				/* 2006-02-16: podreùazec (koniec Okt·vy narodenia P·na) podobne ako (2. veækonoËn· nedeæa) rieöen˝ pomocou "typslav_lokal" */
-				if(_global_jazyk == JAZYK_CZ){
+				if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 					_global_den.typslav_lokal = LOKAL_SLAV_KONIEC_OKTAVY_NAR_CZ;
 				}
 				else {
@@ -2850,7 +2850,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 								koncovka_dna(_global_den.denvt),
 								nazov_dna(_global_den.denvt));
 						}
-						else if(_global_jazyk == JAZYK_CZ){
+						else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 							sprintf(_global_den.meno, text_DEN_VO_VELKONOCNEJ_OKTAVE[_global_jazyk],
 								nazov_Dna(_global_den.denvt));
 						}
