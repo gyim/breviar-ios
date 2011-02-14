@@ -1271,7 +1271,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 				_set_zalm2(MODL_RANNE_CHVALY, "dan3_52.htm", "DAN3,52-57");
 				_set_zalm3(MODL_RANNE_CHVALY, "z150.htm", "ZALM150");
 				/* modlitba cez den */
-				_set_zalmy_1nedele_mcd(); // 2007-01-11 nahradené volaním funkcie
+				_set_zalmy_2nedele_mcd(); // 2007-01-11 nahradené volaním funkcie; 2007-03-29 opravené
 				/*
 				_set_zalm1(MODL_CEZ_DEN_VSETKY, "z23.htm", "ZALM23");
 				_set_zalm2(MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_I");
