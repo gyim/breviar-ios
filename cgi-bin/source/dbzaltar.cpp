@@ -90,6 +90,7 @@
 /*                    bude potrebnÈ naimplementovaù krajöie             */
 /*   2008-03-30a.D. | upravenÈ antifÛny pre mcd, _vtroj_antifony()      */
 /*   2008-04-04a.D. | opravenÈ kompletÛrium pre veæk.trojdnie+zel.ötvrt.*/
+/*                  - oprava ûalmov a chv·l. pre 1. veöp. 2.veæk.nedele */
 /*                                                                      */
 /*                                                                      */
 /* notes |                                                              */
@@ -2277,12 +2278,22 @@ void _set_zalmy_1nedele_v(void){/* vespery */
 	Log("_set_zalmy_1nedele_v() -- end\n");
 }
 
-void _set_zalmy_1nedele_1v(void){/* prve vespery */
-	Log("_set_zalmy_1nedele_v() -- begin\n");
+/*
+void _set_zalmy_1nedele_1v(void){ // prve vespery -- nepouûÌva sa; 2008-04-04
+	Log("_set_zalmy_1nedele_1v() -- begin\n");
 	_set_zalm1(MODL_PRVE_VESPERY, "z141.htm", "ZALM141");
 	_set_zalm2(MODL_PRVE_VESPERY, "z142.htm", "ZALM142");
 	_set_zalm3(MODL_PRVE_VESPERY, "flp2.htm", "CHVAL_FLP2");
-	Log("_set_zalmy_1nedele_v() -- end\n");
+	Log("_set_zalmy_1nedele_1v() -- end\n");
+}
+*/
+
+void _set_zalmy_1nedele_v_pre_1v(void){/* ûalmy a chv·lospev z veöpier pre prvÈ veöpery -- kvÙli druhej veækonoËnej nedeli; 2008-04-04 */
+	Log("_set_zalmy_1nedele_v_pre_1v() -- begin\n");
+	_set_zalm1(MODL_PRVE_VESPERY, "z110.htm", "ZALM110");
+	_set_zalm2(MODL_PRVE_VESPERY, "z114.htm", "ZALM114");
+	_set_zalm3(MODL_PRVE_VESPERY, "zjv19.htm", "CHVAL_ZJV19");
+	Log("_set_zalmy_1nedele_v_pre_1v() -- end\n");
 }
 
 /* 2007-01-11: presunutÈ funkcie vyööie 
@@ -2456,8 +2467,12 @@ void _set_zalmy_velkonocna_nedela(short int modlitba){
 	if(modlitba == MODL_VESPERY){
 		_set_zalmy_1nedele_v();
 	}
+	/* 2008-04-04: upravenÈ, aj na prvÈ veöpery druhej veækonoËnej nedele 
+	 *             s˙ ûalmy z (druh˝ch) veöpier veækonoËnej nedele; (prv·) veækonoËn· nedeæa nem· prvÈ veöpery
+	 *             (biela sobota m· svoje veöpery); pÙvodne tu bolo: _set_zalmy_1nedele_1v();
+	 */
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalmy_1nedele_1v();
+		_set_zalmy_1nedele_v_pre_1v();
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
