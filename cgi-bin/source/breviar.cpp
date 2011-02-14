@@ -55,7 +55,7 @@
 /*                    pridane citanie1 a citanie2                          */
 /*   2004-03-11a.D. | pre batch mod export parametrov                      */
 /*   2004-03-16a.D. | pre batch mod export zoznamu ako HTML                */
-/*   2004-03-17a.D. | cesty sa citaju z konfigu (cfg_INCLUDE_DIR_default)              */
+/*   2004-03-17a.D. | cesty sa citaju z konfigu (cfg_INCLUDE_DIR_default)  */
 /*   2005-03-21a.D. | novy typ exportu (1 den-1 riadok) pre LK             */
 /*   2005-03-22a.D. | uprava funkcie parseQueryString()                    */
 /*   2005-03-28a.D. | nova funkcia setForm(), uprava pre uncgi             */
@@ -94,6 +94,7 @@
 /*                  - rovnaké antifóny mcd zobrazuje len prvú a poslednú   */
 /*   2007-10-23a.D. | dokonèenie zoh¾adnenia smerníc pre sviatky svätıch   */
 /*                    (krátke responzórium, prosby pre r.chvály/vešpery)   */
+/*   2007-11-27a.D. | oprava v interpretParameter(), hymnus 34.tıdòa OCR  */
 /*                                                                         */
 /*                                                                         */
 /*                                                                         */
@@ -1216,29 +1217,6 @@ void interpretParameter(short int type, char *paramname){
 #endif
 		}
 	}
-	/* 2005-08-15: Pridané parsovanie PARAM_HYMNUS_34_OCR_INY_BEGIN/END */
-	else if(equals(paramname, PARAM_HYMNUS_34_OCR_INY_BEGIN)){
-		if(je_34_ocr){
-			Log("JE 34.tıdeò OCR... BEGIN\n");
-#if defined(EXPORT_HTML_SPECIALS)
-			Export("je 34. tyzden OCR");
-#endif
-			Export("-->");
-		}
-		else
-			Log("NIE JE 34.tıdeò OCR... BEGIN\n");
-	}
-	else if(equals(paramname, PARAM_HYMNUS_34_OCR_INY_END)){
-		if(je_34_ocr){
-			Log("JE 34.tıdeò OCR... END\n");
-			Export("<!--");
-#if defined(EXPORT_HTML_SPECIALS)
-			Export("je 34. tyzden OCR");
-#endif
-		}
-		else
-			Log("NIE JE 34.tıdeò OCR... END\n");
-	}
 	else if(equals(paramname, PARAM_ALELUJA_ALELUJA_BEGIN)){
 		if(_global_skip_in_prayer == ANO){
 			/* ak zakoncenie preskakujem, tak musim sa tvarit, ze nic */
@@ -1477,6 +1455,43 @@ void interpretParameter(short int type, char *paramname){
 			/* nezobrazovat Slava Otcu */
 			_global_skip_in_prayer = NIE;
 			Log("  `Slava Otcu' (%d) skipped.\n", _global_pocet_slava_otcu);
+		}
+	}
+
+	/* 2005-08-15: Pridané parsovanie PARAM_HYMNUS_34_OCR_INY_BEGIN/END
+	 * 2007-11-27: upravené (lebo to tam zahàòalo ten hymnus)
+	 */
+	else if(equals(paramname, PARAM_HYMNUS_34_OCR_INY_BEGIN)){
+		if(je_34_ocr){
+			/* zobrazi alternatívny hymnus 34. tıdòa OCR */
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("zobrazi alternatívny hymnus 34. tıdòa OCR");
+#endif
+			Export("-->");
+			Log("JE 34.tıdeò OCR... BEGIN\n");
+		}
+		else{
+			/* nezobrazi alternatívny hymnus 34. tıdòa OCR */
+			_global_skip_in_prayer = ANO;
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("nezobrazi alternatívny hymnus 34. tıdòa OCR");
+#endif
+			Log("NIE JE 34.tıdeò OCR... BEGIN\n");
+		}
+	}
+	else if(equals(paramname, PARAM_HYMNUS_34_OCR_INY_END)){
+		if(je_34_ocr){
+			/* zobrazi alternatívny hymnus 34. tıdòa OCR */
+			Export("<!--");
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("je 34. tyzden OCR");
+#endif
+			Log("JE 34.tıdeò OCR... END\n");
+		}
+		else{
+			/* nezobrazi alternatívny hymnus 34. tıdòa OCR */
+			_global_skip_in_prayer = NIE;
+			Log("NIE JE 34.tıdeò OCR... END\n");
 		}
 	}
 
