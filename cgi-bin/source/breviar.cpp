@@ -1,7 +1,7 @@
 /***************************************************************************/
 /*                                                                         */
 /* breviar.cpp                                                             */
-/* (c)1998-2007 | Juraj Videky | videky@breviar.sk                         */
+/* (c)1998-2008 | Juraj Videky | videky@breviar.sk                         */
 /*                                                                         */
 /*                http://www.breviar.sk                                    */
 /*                                                                         */
@@ -4430,9 +4430,11 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	/* 2003-07-16; zrusene: Export("<hr>\n"); */
 	Export("\n<form action=\"%s?%s\" method=\"post\">\n", uncgi_name, pom2); /* 2006-08-01: pridan˝ jazyk */
 
-	Export("\n<div align=\"left\">\n");
-	Export((char *)html_text_dalsie_moznosti[_global_jazyk]); /* 2006-08-02: jazykovÈ mut·cie; \n presunut˝ pred <table>; staröia pozn·mka: 2003-07-16; kedysi tu bolo "Chcem zobraziù" */
-	Export("\n</div>\n");
+	/* 2008-01-22: podæa Vladovho n·vrhu presunut˝ nadpis nad tabuæku
+	 *	Export("\n<div align=\"left\">\n");
+	 *	Export((char *)html_text_dalsie_moznosti[_global_jazyk]);
+	 *	Export("\n</div>\n");
+	 */
 
 	/* 2003-07-09, zmenene <center><table> na <table align="center"> */
 	Export("\n<table align=\"center\">\n");
@@ -4578,7 +4580,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	/* formular pre PRM_CEZ_ROK */
 	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
 		STR_QUERY_TYPE, STR_PRM_CEZ_ROK);
-	Export("</td><td>\n");
+	Export("</td><td align=\"left\">\n");
 
 	/* 2003-07-16; povodne toto pole bolo na konci */
 	/* pole WWW_MODLITBA */
@@ -4597,7 +4599,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	Export("&nbsp;");
 	Export((char *)html_text_pre_cezrocne_obd[_global_jazyk]); /* 2006-08-02 */
-	Export(",&nbsp;&nbsp;\n");
+	// Export(",&nbsp;&nbsp;\n"); 2008-01-22
+	Export(",<br>\n");
 
 	/* pole WWW_DEN_V_TYZDNI */
 	Export("<select name=\"%s\">\n", STR_DEN_V_TYZDNI);
@@ -4719,19 +4722,22 @@ void _export_rozbor_dna(short int typ){
 		mystrcpy(pom3, nazov_Dn(_global_den.denvt), MAX_SMALL);
 	}/* typ == EXPORT_DNA_VIAC_DNI_SIMPLE */
 	else{
-		i = LINK_DEN_MESIAC_ROK;
-/*		if(_global_den.denvt != DEN_NEDELA){
-			mystrcpy(pom3, nazov_dna(_global_den.denvt), MAX_SMALL);
-		}*/
-		if((_global_den.denvt != DEN_NEDELA)/* &&
-			(!equals(_global_den.meno, STR_EMPTY))*/){
-			//ciarka = ',';
-		}
-		dvojbodka = ':';
+		i = LINK_DEN_MESIAC_NIE; /* 2008-01-22: zmenenÈ, pÙvodne tu bolo LINK_DEN_MESIAC_ROK */
+		/* najprv toto, -- if(_global_den.denvt != DEN_NEDELA) mystrcpy(pom3, nazov_dna(_global_den.denvt), MAX_SMALL);
+		 * potom toto: -- if((_global_den.denvt != DEN_NEDELA) 
+		 *	-- zapoznamkovane && (!equals(_global_den.meno, STR_EMPTY))
+		 *	) ciarka = ',';
+		 */
+		dvojbodka = ' '; /* 2008-01-22: zmenenÈ, pÙvodne tu bolo dvojbodka = ':'; */
 	}/* typ != EXPORT_DNA_VIAC_DNI */
 
-	vytvor_global_link(_global_den.den, _global_den.mesiac, _global_den.rok, i);
+	if(i == LINK_DEN_MESIAC_NIE){
+		mystrcpy(_global_link, "", MAX_STR);
+	}
+	else{
+		vytvor_global_link(_global_den.den, _global_den.mesiac, _global_den.rok, i);
 		/* 2006-08-19: okrem premennej _global_string t·to funkcia eöte naplnÌ aj _global_string2 a _global_string_farba */
+	}
 
 	/* export vytvorenÈho linku */
 	Export("\n<tr valign=\"middle\">\n");
@@ -4849,6 +4855,12 @@ void _export_rozbor_dna(short int typ){
 		if(_global_linky == ANO){ /* pridane 13/04/2000A.D. */
 			/* 2007-08-15: vloûenÈ vypÌsanie kalend·ra a hlavnÈho formul·ra */
 			_export_rozbor_dna_buttons_dni(typ);
+
+			/* 2008-01-22: podæa Vladovho n·vrhu presunut˝ nadpis sem */
+			Export("<center><b>\n");
+			Export((char *)html_text_dalsie_moznosti[_global_jazyk]); /* 2006-08-02: jazykovÈ mut·cie; \n presunut˝ pred <table>; staröia pozn·mka: 2003-07-16; kedysi tu bolo "Chcem zobraziù" */
+			Export("</b></center>\n");
+
 			Export("\n<!--veæk· tabuæka s kalend·rom a hlavn˝m formul·rom-->\n<table align=\"center\">\n<tr>\n<td align=\"center\" valign=\"top\">\n");
 			_export_rozbor_dna_kalendar(typ); /* 2007-08-15 */
 			Export("\n</td>\n<td>&nbsp;&nbsp;&nbsp;</td>\n<!--nasleduje formul·r-->\n<td align=\"center\" valign=\"top\">\n");
@@ -8958,7 +8970,7 @@ int main(int argc, char **argv){
 	_main_LOG("\n");
 // #endif
 	
-	_main_LOG("-- log file programu pre Liturgiu hodÌn (c)1999-2007 Juraj VidÈky --\n");
+	_main_LOG("-- log file programu pre Liturgiu hodÌn (c)1999-2008 Juraj VidÈky --\n");
 
 	/* config: dorobene 30/03/2000A.D. */
 	_main_LOG("first, reading configuration (file %s)...\n", CONFIG_FILE);

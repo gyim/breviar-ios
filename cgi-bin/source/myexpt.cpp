@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* myexpt.cpp                                                  */
-/* (c)1999-2006 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2008 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje exportne rutinky na export           */
 /*               do suboru FILE_EXPORT alebo stdout            */

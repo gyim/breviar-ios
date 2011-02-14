@@ -1,7 +1,7 @@
 /******************************************************************/
 /*                                                                */
 /* myconf.cpp                                                     */
-/* (c)1999-2007 | Juraj Videky | videky@breviar.sk                */
+/* (c)1999-2008 | Juraj Videky | videky@breviar.sk                */
 /*                                                                */
 /*                                                                */
 /* description | poskytuje rozhranie na konfiguraciu,             */

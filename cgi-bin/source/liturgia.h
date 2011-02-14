@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* liturgia.h                                                  */
-/* (c)1999-2007 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2008 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne vecicky pre liturgiu hodin  */
 /* document history                                            */
@@ -817,6 +817,7 @@ struct lrok{
 };
 typedef struct lrok _struct_lrok;
 
+#define LINK_DEN_MESIAC_NIE 0 /* 2008-01-22: pridané, Vlado Kiš upozornil, že je to zbytoèné */
 #define LINK_DEN_MESIAC_ROK 1
 #define LINK_DEN_MESIAC 3
 #define LINK_DEN 2
