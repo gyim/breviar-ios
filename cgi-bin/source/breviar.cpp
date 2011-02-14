@@ -5672,11 +5672,11 @@ void _main_analyza_roku(char *rok){
 
 	/* 15. augusta */
 	vytvor_global_link(15, 8, year, LINK_DEN_MESIAC);
-	Export("<tr valign=baseline>\n<td>%s</td><td>Nanebovzatie Panny Márie</td></tr>\n", _global_link);
+	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n", _global_link, text_AUG_15[_global_jazyk]);
 
 	/* 1. novembra */
 	vytvor_global_link(1, 11, year, LINK_DEN_MESIAC);
-	Export("<tr valign=baseline>\n<td>%s</td><td>Všetkých svätých</td></tr>\n", _global_link);
+	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n", _global_link, text_NOV_01[_global_jazyk]);
 
 	/* 8. decembra */
 	vytvor_global_link(8, 12, year, LINK_DEN_MESIAC);

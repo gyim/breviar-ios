@@ -604,6 +604,8 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_PLZEN_PATRON				31
 #define LOKAL_SLAV_OSTRAVA_OPAVA_SVIATOK	32
 #define LOKAL_SLAV_LITOMERICE				33
+#define LOKAL_SLAV_HRADEC_KRALOVE			34
+#define LOKAL_SLAV_KONSEKR_KOSTOLY_CZ		35
 
 /* prikazany / neprikazany sviatok */
 #define PRIKAZANY_SVIATOK 1
@@ -1073,6 +1075,8 @@ extern const char *text_BIELA_SOBOTA[];
 extern const char *text_KVETNA_NEDELA[];
 
 extern const char *text_DEC_08[];
+extern const char *text_AUG_15[];
+extern const char *text_NOV_01[];
 
 #endif /* __LITURGIA_H_ */
 

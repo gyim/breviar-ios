@@ -19,6 +19,7 @@
 /*   2006-08-19a.D. | pridanie liturgickej farby               */
 /*   2006-09-07a.D. | dokonèená lokalizácia mesiacov JAN-AUG   */
 /*   2006-09-12a.D. | dokonèená lokalizácia mesiaca SEP+opravy */
+/*   2006-09-13a.D. | dokonèená lokalizácia mesiacov OKT+NOV   */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -405,6 +406,8 @@ const char *nazov_slavenia_lokal[] =
 ,"v plzeòské diecézi svátek hlavního patrona"
 ,"v ostravsko-opavské diecézi svátek"
 ,"v litomìøické diecézi"
+,"v královéhradecké diecézi"
+,"jen v posvìcených kostelích"
 };
 
 const char *nazov_farby_jazyk[POCET_FARIEB + 1][POCET_JAZYKOV + 1] =
@@ -1635,6 +1638,196 @@ const char *text_SEP_29[] =
 const char *text_SEP_30[] =
 {"Sv. Hieronyma, kòaza a uèite¾a Cirkvi",
  "Sv. Jeronýma, knìze a uèitele církve",
+ "", ""};
+
+const char *text_OKT_01[] =
+{"Sv. Terézie z Lisieux, panny a uèite¾ky Cirkvi",
+ "Sv. Terezie od Dítìte Ježíše, panny",
+ "", ""};
+const char *text_OKT_02[] =
+{"Svätých anjelov strážcov",
+ "Svatých andìlù strážných",
+ "", ""};
+const char *text_OKT_04[] =
+{"Sv. Františka Assiského",
+ "Sv. Františka z Assisi",
+ "", ""};
+const char *text_OKT_06[] =
+{"Sv. Bruna, kòaza",
+ "Sv. Bruna, knìze",
+ "", ""};
+const char *text_OKT_07[] =
+{"Ružencovej prebl. Panny Márie",
+ "Panny Marie Rùžencové",
+ "", ""};
+const char *text_OKT_09_1[] =
+{"Sv. Dionýzia, biskupa, a spoloèníkov, muèeníka",
+ "Sv. Dionýsia, biskupa, a druhù, muèedníkù",
+ "", ""};
+const char *text_OKT_09_2[] =
+{"Sv. Jána Leonardiho, kòaza",
+ "Sv. Jana Leonardiho, knìze",
+ "", ""};
+const char *text_OKT_12[] =
+{"(na Slovensku nie je)",
+ "Sv. Radima, biskupa",
+ "", ""};
+const char *text_OKT_14[] =
+{"Sv. Kalixta I., pápeža a muèeníka",
+ "Sv. Kalista I., papeže a muèedníka",
+ "", ""};
+const char *text_OKT_15[] =
+{"Sv. Terézie z Avily, panny a uèite¾ky Cirkvi",
+ "Sv. Terezie od Ježíše, panny a uèitelky církve",
+ "", ""};
+const char *text_OKT_16_2[] =
+{"Sv. Hedvigy, reho¾níèky",
+ "Sv. Hedviky, øeholnice, hlavní patronky Slezska",
+ "", ""};
+const char *text_OKT_16_1[] =
+{"Sv. Margity Márie Alacoque, panny",
+ "Sv. Markéty Marie Alacoque, panny",
+ "", ""};
+const char *text_OKT_17[] =
+{"Sv. Ignáca Antiochijského, biskupa a muèeníka",
+ "Sv. Ignáce Antiochijského, biskupa a muèedníka",
+ "", ""};
+const char *text_OKT_18[] =
+{"Sv. Lukáša, evanjelistu",
+ "Sv. Lukáše, evangelisty",
+ "", ""};
+const char *text_OKT_19_1[] =
+{"Sv. Jána de Brébeuf a sv. Izáka Jogues, kòazov, a ich spoloèníkov, muèeníkov",
+ "Sv. Jana de Brébeuf a Izáka Joguese, knìží, a druhù, muèedníkù",
+ "", ""};
+const char *text_OKT_19_2[] =
+{"Sv. Pavla z Kríža, kòaza",
+ "Sv. Pavla od Køíže, knìze",
+ "", ""};
+const char *text_OKT_23[] =
+{"Sv. Jána Kapistránskeho, kòaza",
+ "Sv. Jana Kapistránského, knìze",
+ "", ""};
+const char *text_OKT_24[] =
+{"Sv. Antona Márie Clareta, biskupa",
+ "Sv. Antonína Marie Klareta, biskupa",
+ "", ""};
+const char *text_OKT_25[] =
+{"Výroèie posviacky katedrálneho chrámu v Spišskom Podhradí",
+ "(v Èechách, na Moravì a na Slezsku není)",
+ "", ""};
+const char *text_OKT_26[] =
+{"Výroèie posviacky chrámov, ktorých deò posviacky je neznámy",
+ "Výroèí posvìcení chrámu, jejichž den dedikace není známý",
+ "", ""};
+const char *text_OKT_27[] =
+{"Výroèie posviacky katedrálneho chrámu v Rožòave",
+ "(v Èechách, na Moravì a na Slezsku není)",
+ "", ""};
+const char *text_OKT_28[] =
+{"Sv. Šimona a Júdu, apoštolov",
+ "Sv. Šimona a Judy, apoštolù",
+ "", ""};
+const char *text_OKT_30[] =
+{"(na Slovensku nie je)",
+ "Výroèí posvìcení katedrály Svatého Ducha",
+ "", ""};
+const char *text_OKT_31[] =
+{"(na Slovensku nie je)",
+ "Sv. Wolfganga, biskupa",
+ "", ""};
+
+const char *text_NOV_01[] =
+{"Všetkých svätých",
+ "Všech svatých",
+ "", ""};
+const char *text_NOV_02[] =
+{"Všetkých verných zosnulých",
+ "Vzpomínka na všechny vìrné zemøelé",
+ "", ""};
+const char *text_NOV_03[] =
+{"Sv. Martina de Porres, reho¾níka",
+ "Sv. Martina de Porres, øeholníka",
+ "", ""};
+const char *text_NOV_04[] =
+{"Sv. Karola Borromea, biskupa",
+ "Sv. Karla Boromejského, biskupa",
+ "", ""};
+const char *text_NOV_05[] =
+{"Sv. Imricha",
+ "(v Èechách, na Moravì a na Slezsku není)",
+ "", ""};
+const char *text_NOV_09[] =
+{"Výroèie posviacky Lateránskej baziliky",
+ "Posvìcení lateránské baziliky",
+ "", ""};
+const char *text_NOV_10[] =
+{"Sv. Leva Ve¾kého, pápeža a uèite¾a Cirkvi",
+ "Sv. Lva Velikého, papeže a uèitele církve",
+ "", ""};
+const char *text_NOV_11[] =
+{"Sv. Martina z Tours, biskupa",
+ "Sv. Martina, biskupa",
+ "", ""};
+const char *text_NOV_12[] =
+{"Sv. Jozafáta, biskupa a muèeníka",
+ "Sv. Josafata, biskupa a muèedníka",
+ "", ""};
+const char *text_NOV_13[] =
+{"(na Slovensku nie je)",
+ "Sv. Anežky Èeské, panny",
+ "", ""};
+const char *text_NOV_15[] =
+{"Sv. Alberta Ve¾kého, biskupa a uèite¾a Cirkvi",
+ "Sv. Alberta Velikého, biskupa a uèitele církve",
+ "", ""};
+const char *text_NOV_16_1[] =
+{"Sv. Margity Škótskej",
+ "Sv. Markéty Skotské",
+ "", ""};
+const char *text_NOV_16_2[] =
+{"Sv. Gertrúdy, panny",
+ "Sv. Gertrudy, panny",
+ "", ""};
+const char *text_NOV_17[] =
+{"Sv. Alžbety Uhorskej, reho¾níèky",
+ "Sv. Alžbìty Uherské, øeholnice",
+ "", ""};
+const char *text_NOV_18[] =
+{"Výroèie posviacky bazilík sv. Petra a sv. Pavla, apoštolov",
+ "Posvìcení øímských bazilik svatých apoštolù Petra a Pavla",
+ "", ""};
+const char *text_NOV_20[] =
+{"Výroèie posviacky katedrálneho chrámu v Nitre",
+ "(v Èechách, na Moravì a na Slezsku není)",
+ "", ""};
+const char *text_NOV_21[] =
+{"Obetovanie prebl. Panny Márie",
+ "Zasvìcení Panny Marie v Jeruzalémì",
+ "", ""};
+const char *text_NOV_22[] =
+{"Sv. Cecílie, panny a muèenice",
+ "Sv. Cecilie, panny a muèednice",
+ "", ""};
+const char *text_NOV_23_1[] =
+{"Sv. Klementa I. pápeža a muèeníka",
+ "Sv. Klementa I., papeže a muèedníka",
+ "", ""};
+const char *text_NOV_23_2[] =
+{"Sv. Kolumbána, opáta",
+ "Sv. Kolumbána, opata",
+ "", ""};
+const char *text_NOV_24[] =
+{"Sv. Ondreja Dung-Laca a spoloèníkov, muèeníkov",
+ "Sv. Ondøeje Dung-Laca, knìze, a druhù, muèedníkù",
+ "", ""};
+const char *text_NOV_25[] =
+{"Sv. Kataríny Alexandrijskej, panny a muèenice",
+ "(v Èechách, na Moravì a na Slezsku není)",
+ "", ""};
+const char *text_NOV_30[] =
+{"Sv. Ondreja, apoštola",
+ "Sv. Ondøeje, apoštola",
  "", ""};
 
 const char *text_ZELENY_STVRTOK[] =

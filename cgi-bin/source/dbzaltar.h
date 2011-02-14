@@ -326,6 +326,55 @@ extern const char *text_SEP_28_2[];
 extern const char *text_SEP_29[];
 extern const char *text_SEP_30[];
 
+extern const char *text_OKT_01[];
+extern const char *text_OKT_02[];
+extern const char *text_OKT_04[];
+extern const char *text_OKT_06[];
+extern const char *text_OKT_07[];
+extern const char *text_OKT_09_1[];
+extern const char *text_OKT_09_2[];
+extern const char *text_OKT_12[];
+extern const char *text_OKT_14[];
+extern const char *text_OKT_15[];
+extern const char *text_OKT_16_1[];
+extern const char *text_OKT_16_2[];
+extern const char *text_OKT_17[];
+extern const char *text_OKT_18[];
+extern const char *text_OKT_19_1[];
+extern const char *text_OKT_19_2[];
+extern const char *text_OKT_23[];
+extern const char *text_OKT_24[];
+extern const char *text_OKT_25[];
+extern const char *text_OKT_26[];
+extern const char *text_OKT_27[];
+extern const char *text_OKT_28[];
+extern const char *text_OKT_30[];
+extern const char *text_OKT_31[];
+
+extern const char *text_NOV_01[];
+extern const char *text_NOV_02[];
+extern const char *text_NOV_03[];
+extern const char *text_NOV_04[];
+extern const char *text_NOV_05[];
+extern const char *text_NOV_09[];
+extern const char *text_NOV_10[];
+extern const char *text_NOV_11[];
+extern const char *text_NOV_12[];
+extern const char *text_NOV_13[];
+extern const char *text_NOV_15[];
+extern const char *text_NOV_16_1[];
+extern const char *text_NOV_16_2[];
+extern const char *text_NOV_17[];
+extern const char *text_NOV_18[];
+extern const char *text_NOV_20[];
+extern const char *text_NOV_21[];
+extern const char *text_NOV_22[];
+extern const char *text_NOV_23_1[];
+extern const char *text_NOV_23_2[];
+extern const char *text_NOV_24[];
+extern const char *text_NOV_25[];
+extern const char *text_NOV_30[];
+
 extern const char *text_DEC_08[];
 
 #endif /* __DBZALTAR_H_ */
