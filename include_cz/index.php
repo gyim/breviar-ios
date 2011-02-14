@@ -64,7 +64,13 @@ echo "\n</table>";
 
 <br>
 <hr>
-<center><font size=-1>© 1999-2007 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a></font></center>
+<center><font size=-1>Last modified: 
+<? 
+// doplnil JUV/2008-10-23
+echo date ("Y-m-d H:i:s", filemtime($_SERVER['SCRIPT_FILENAME']));
+?>
+
+<br>© 1999-2008 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a></font></center>
 
 </body>
 </html>

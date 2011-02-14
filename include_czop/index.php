@@ -25,8 +25,11 @@ header("Last-Modified:".gmdate("D, d M Y H:i:s")." GMT");
  * Source: http://www.totallyphp.co.uk/scripts/directory_lister.htm
  */
 
+// doplnil JUV/2008-10-23
+// clearstatcache();
+
 // Define the full path to your folder from root
-$path = "/data/www/www.breviar.sk/include/";
+$path = "/data/www/www.breviar.sk/include_czop/";
 
 // Open the folder
 $dir_handle = @opendir($path) or die("Nemohu otevøít adresáø $path");
@@ -40,7 +43,7 @@ while ($file = readdir($dir_handle))
 if ($file != "." && $file != ".." && $file != "index.php")
 {
 	$content_array[$i][0] = $file;
-	$content_array[$i][1] = date ("Y-m-d H:i:s", filemtime($path."/".$file));
+	$content_array[$i][1] = date ("Y-m-d H:i:s", filectime($path."/".$file)); // JUV/2008-10-23, zmena filemtime -> filectime
 	$i++;
 }
 //close the directory handle
@@ -53,7 +56,7 @@ array_multisort($sortAux, SORT_DESC, $content_array);
 
 //print
 echo "\n<table>";
-echo "\n<tr><th>Súbor</th><th>Poslední zmìna</th></tr>";
+echo "\n<tr><th>Soubor</th><th>Poslední zmìna</th></tr>";
 foreach($content_array as $res)
 	echo "\n<tr><td><a href=\"".$res[0]."\">$res[0]</a></td><td>".$res[1]."</td></tr>";
 	// $res[0].">".$res[1];
@@ -64,7 +67,13 @@ echo "\n</table>";
 
 <br>
 <hr>
-<center><font size=-1>© 1999-2008 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a></font></center>
+<center><font size=-1>Last modified: 
+<? 
+// doplnil JUV/2008-10-23
+echo date ("Y-m-d H:i:s", filemtime($_SERVER['SCRIPT_FILENAME']));
+?>
+
+<br>© 1999-2008 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a></font></center>
 
 </body>
 </html>
