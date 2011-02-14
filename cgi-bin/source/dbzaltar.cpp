@@ -10221,6 +10221,13 @@ label_19_MAR:
 						}
 						_set_zalmy_sviatok_duch_past(modlitba);
 
+						/* 2008-12-09: doplnené kompletórium */
+						modlitba = MODL_PRVE_KOMPLETORIUM;
+						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+
+						modlitba = MODL_KOMPLETORIUM;
+						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+
 						if(poradie_svaty != 0) break;
 					}
 					_global_svaty1.typslav = SLAV_SLAVNOST;
@@ -10328,6 +10335,13 @@ label_25_MAR:
 							_vlastna_cast_kresponz_po;
 						}
 						_set_zalmy_sviatok_krstu(modlitba);
+
+						/* 2008-12-09: doplnené kompletórium */
+						modlitba = MODL_PRVE_KOMPLETORIUM;
+						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+
+						modlitba = MODL_KOMPLETORIUM;
+						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
 
 						if(poradie_svaty != 0) break;
 					}
@@ -12030,6 +12044,13 @@ label_25_MAR:
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_sviatok_duch_past(modlitba);
 
+						/* 2008-12-09: doplnené kompletórium */
+						modlitba = MODL_PRVE_KOMPLETORIUM;
+						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+
+						modlitba = MODL_KOMPLETORIUM;
+						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+
 						if(poradie_svaty != 0) break;
 					}
 					_global_svaty1.typslav = SLAV_SLAVNOST;
@@ -13658,6 +13679,13 @@ label_25_MAR:
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_sviatok_panien(modlitba);
 
+						/* 2008-12-09: doplnené kompletórium */
+						modlitba = MODL_PRVE_KOMPLETORIUM;
+						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+
+						modlitba = MODL_KOMPLETORIUM;
+						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+
 						if(poradie_svaty != 0) break;
 					}
 					_global_svaty1.typslav = SLAV_SLAVNOST;
@@ -14318,6 +14346,13 @@ label_25_MAR:
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_sv_kriz(modlitba);
 
+						/* 2008-12-09: doplnené kompletórium */
+						modlitba = MODL_PRVE_KOMPLETORIUM;
+						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+
+						modlitba = MODL_KOMPLETORIUM;
+						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+
 						if(poradie_svaty != 0) break;
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
@@ -14372,6 +14407,13 @@ label_25_MAR:
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_sviatok_panien(modlitba);
+
+						/* 2008-12-09: doplnené kompletórium */
+						modlitba = MODL_PRVE_KOMPLETORIUM;
+						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+
+						modlitba = MODL_KOMPLETORIUM;
+						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
 
 						if(poradie_svaty != 0) break;
 					}
@@ -15628,6 +15670,13 @@ label_25_MAR:
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_vsetkych_svatych(modlitba);
 
+						/* 2008-12-09: doplnené kompletórium */
+						modlitba = MODL_PRVE_KOMPLETORIUM;
+						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+
+						modlitba = MODL_KOMPLETORIUM;
+						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+
 						if(poradie_svaty != 0) break;
 					}
 					_global_svaty1.typslav = SLAV_SLAVNOST;
@@ -16434,6 +16483,13 @@ label_8_DEC:
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_sviatok_panien(modlitba);
+
+						/* 2008-12-09: doplnené kompletórium */
+						modlitba = MODL_PRVE_KOMPLETORIUM;
+						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+
+						modlitba = MODL_KOMPLETORIUM;
+						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
 
 						if(poradie_svaty != 0) break;
 					}
