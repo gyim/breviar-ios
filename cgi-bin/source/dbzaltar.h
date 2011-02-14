@@ -12,6 +12,7 @@
 /*   2006-01-24a.D. | pridane zaltar_zvazok()                  */
 /*   2006-08-18a.D. | zmena int na short int (staèí 32tis.)    */
 /*   2007-10-02a.D. | doplnený anchor ANCHOR_ANTIFONY          */
+/*   2007-11-14a.D. | doplnený anchor ANCHOR_NANEBOVSTUPENIE   */
 /*                                                             */
 /***************************************************************/
 
@@ -85,6 +86,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 /* podobne ako v liturgia.h::char *nazov_obd_htm[] */
 #define FILE_SPOM_PM_SOBOTA "spmvs.htm" /* 2006-02-02: nachádzajú sa tam aj posv. èítania */
 
+#define ANCHOR_NANEBOVSTUPENIE "NAN" /* 2007-11-14: doplenné kvôli invitatóriu */
 #define FILE_NANEBOVSTUPENIE "nan.htm" /* 10/03/2000A.D. -- kotvy v nom su podla OBD_VELKONOCNE_I */
 
 #define ANCHOR_ZOSLANIE_DUCHA_SV "ZDS"
