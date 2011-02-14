@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* mylog.cpp                                                   */
-/* (c)1997-2001 | Juraj Videky | videky@breviar.sk             */
+/* (c)1997-2005 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | pomocne vypisovanie (logovanie) na obrazovku  */
 /*               a/alebo do suboru                             */
@@ -33,22 +33,22 @@
 #include "mydefs.h" /* tu su deklarovane vecicky ako sa ma __Log-ovat */
 #include "mylog.h"
 
-int both;
+short int both;
 
 void bothLogs(void){ both = (0 == 0); }
 void fileLog(void){ both = (0 != 0); }
-int isbothLogs(void){ return both; }
+short int isbothLogs(void){ return both; }
 
 #ifdef LOGGING
 
 FILE *logfile;
-int used;
+short int used;
 
 /* popis: otvori logovaci subor; globalna premenna logfile obsahuje handle
  * vracia: on success, returns 0
  *         on error, returns 1
  */
-int initLog(char *fname){
+short int initLog(char *fname){
 	fileLog();
 #if defined(LOG_TO_FILE)
 	logfile = fopen(fname, "wt");
@@ -67,8 +67,8 @@ int initLog(char *fname){
  *         on error, returns EOF; presne ako fclose()
  * 2003-08-07: dorobene, ze ked LOG_TO_STDOUT, tak ina hlaska, nie error
  */
-int closeLog(void){
-	int ret;
+short int closeLog(void){
+	short int ret;
 	if(used == 0){
 #if defined(LOG_TO_FILE)
 		if((ret = fclose(logfile)) == EOF)
@@ -86,10 +86,10 @@ int closeLog(void){
 	return ret;
 }
 
-int __Log(char *fmt, ...)
+short int __Log(char *fmt, ...)
 {
 	va_list argptr;
-	int cnt;
+	short int cnt;
 
 /* 2005-03-28: Ak logujeme na stdout (teda zrejme do HTML), vypiseme HTML <p> */
 //#if defined(LOG_TO_STDOUT)
@@ -116,8 +116,8 @@ int __Log(char *fmt, ...)
 /* popis: zapise do logfile ciferne (po cifrach) int c
  * priklad: pre c==234 napise znaky '2', '3', '4'
  */
-void Logint(int c){
-	int d = 10000;
+void Logint(short int c){
+	short int d = 10000;
 	if(used == 0){ // iba ak je pouzivany logfile
 		if(c < 0){
 			fputc('-', logfile);
@@ -149,18 +149,18 @@ void Logint(int c){
 
 #else /* nie LOGGING */
 
-int initLog(char *fname){return 0;}
+short int initLog(char *fname){return 0;}
 /* void bothLogs(void){} */
 /* void fileLog(void){} */
-int closeLog(void){return 0;}
-int __Log(char *fmt, ...){return 0;}
-void Logint(int c){};
+short int closeLog(void){return 0;}
+short int __Log(char *fmt, ...){return 0;}
+void Logint(short int c){};
 
 #endif /* LOGGING */
 
 /* ------------------------------------------------------------------- */
 /* empty log - nerobi nic, ale ma vstup (...) */
-int NoLog(char *fmt, ...){
+short int NoLog(char *fmt, ...){
 	return(fmt == 0); /* aby nehlasilo param `fmt' not used */
 }
 

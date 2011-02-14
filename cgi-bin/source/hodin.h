@@ -399,10 +399,10 @@ const char *nazov_slavenia_lokal[] =
 const char *rimskymi_tyzden_zaltara[] =
 {"_", "I", "II", "III", "IV"};
 
-const int prvy_den[12] =
+const short int prvy_den[12] =
 	{1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335};
 
-int pocet_dni[12] =
+short int pocet_dni[12] =
 	{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 const char char_nedelne_pismeno[7] =

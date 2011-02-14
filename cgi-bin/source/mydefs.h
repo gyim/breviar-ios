@@ -22,6 +22,7 @@
 /*   2005-03-28a.D. | zmena definicie UNCGI_PATH               */
 /*   2005-07-27a.D. | pridane HTML_SPAN_RED_SMALL              */
 /*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám          */
+/*   2006-08-18a.D. | zmena int na short int (staèí 32tis.)    */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -55,7 +56,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2006-08-17"
+#define BUILD_DATE "2006-08-18"
 
 #define BYTES 250
 #define SMALL 80
@@ -121,7 +122,7 @@ extern char FILE_PATH[MAX_STR]; // inicializovane v breviar.cpp
 #define FILE_NAME_POKEC         MESSAGE_FOLDER"xxx"
 #define FILE_NAME_CHYBA         MESSAGE_FOLDER"chyba.htm"
 
-extern int query_type; /* premenna obsahujuca PRM_... */
+extern short int query_type; /* premenna obsahujuca PRM_... */
 /* deklarovana tu; definovana v dnes.cpp (18/02/2000A.D.) */
 
 /* meno skriptu nasleduje zoznam parametrov, alebo sa precitaju z form */

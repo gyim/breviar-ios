@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* myexpt.cpp                                                  */
-/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2006 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje exportne rutinky na export           */
 /*               do suboru FILE_EXPORT alebo stdout            */
@@ -40,7 +40,7 @@ char FILE_EXPORT[50] = DEFAULT_FILE_EXPORT;
 
 /* navratove hodnoty su prerobene na int-y; vysledok SUCCESS resp. FAILURE */
 
-int isbothExports = NIE;
+short int isbothExports = NIE;
 /* inicialna hodnota true;
  * ci pri debuggovacom zapisovani do fajlu pisat aj na obrazovku */
 
@@ -48,10 +48,10 @@ void bothExports(void){
 	isbothExports = ANO;
 }
 
-int exptused;
+short int exptused;
 FILE *exportfile;
 
-int initExport(void){
+short int initExport(void){
 #if defined(EXPORT_TO_FILE)
 	/* zapisovanie vyslednej stranky do suboru; pozor na nazvy suborov "" (STR_EMPTY) a "+" */
 	if(FILE_EXPORT[strlen(FILE_EXPORT) - 1] == '+'){
@@ -63,7 +63,6 @@ int initExport(void){
 		/* 2003-07-08 ani som netusil, ze som to spravil kedysi aj na append...
 		 * ale teraz som korektne pridal switch `a'
 		 */
-//		if(xxx)
 		/* novy fajl */
 		exportfile = fopen(FILE_EXPORT, "wt");
 	}
@@ -79,7 +78,7 @@ int initExport(void){
 	return exptused;
 }
 
-int initExport(char *expt_filename){ /* pridane, 13/03/2000A.D. */
+short int initExport(char *expt_filename){ /* pridane, 13/03/2000A.D. */
 	if(exptused == SUCCESS){
 		closeExport();
 	}
@@ -87,8 +86,8 @@ int initExport(char *expt_filename){ /* pridane, 13/03/2000A.D. */
 	return initExport();
 }
 
-int closeExport(void){ /* pridane, urobi fclose(); 13/03/2000A.D. */
-	int ret = EOF; /* error closing file */
+short int closeExport(void){ /* pridane, urobi fclose(); 13/03/2000A.D. */
+	short int ret = EOF; /* error closing file */
 	if(exptused == SUCCESS){
 		ret = fclose(exportfile);
 	}
@@ -96,7 +95,7 @@ int closeExport(void){ /* pridane, urobi fclose(); 13/03/2000A.D. */
 }
 
 void dumpFile(char *fname){
-	int c;
+	short int c;
 	FILE *input_file = fopen(fname, "rb");
 	if(input_file != NULL){
 		while((c = fgetc(input_file)) != EOF)
@@ -104,35 +103,15 @@ void dumpFile(char *fname){
 	}
 }
 
-/* kedysi tu bolo nasledovne:
- *
- * pouziva sa pri normalnom fungovani, vsetko sa posiela na konzolu
- *
- * nasledujuca definicia nahradza kratku:
- * #define Export	printf
-int Export(char *fmt, ...){
-	va_list argptr;
-	int cnt;
-
-	va_start(argptr, fmt);
-	cnt = vprintf(fmt, argptr); // obycajne poslanie na konzolu
-	va_end(argptr);
-	return(cnt);
-}
- *
- * avsak ked priradime do exportfile = stdout, tak potom staci
- * nasledovna definicia:
- */
-
 /* vsetko sa posiela do suboru (handle == exportfile),
  * ak premenna exptused je 0,
  *    naviac ak isbothExports, tak sa posiela vystup aj na konzolu (stdout),
  * ak premenna exptused je 1,  tak sa posiela vystup iba na konzolu (stdout)
  */
 
-int Export(char *fmt, ...){
+short int Export(char *fmt, ...){
 	va_list argptr;
-	int cnt;
+	short int cnt;
 
 	va_start(argptr, fmt);
 	if(exptused == SUCCESS){
@@ -164,10 +143,10 @@ int Export(char *fmt, ...){
 		printf("%c", ASCII); \
 	} }
 
-int ExpL2HTML(char *fmt)
+short int ExpL2HTML(char *fmt)
 {
-	int i;
-	int ilen;
+	short int i;
+	short int ilen;
 	char c;
 	ilen = strlen(fmt);
 	for(i = 0; i < ilen; i++){

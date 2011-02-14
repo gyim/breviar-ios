@@ -10,6 +10,7 @@
 /*   2003-08-13a.D. | #define presunute sem z dbzaltar.cpp     */
 /*   2003-11-20a.D. | pridane ANCHOR_CITANIE 1 a 2             */
 /*   2006-01-24a.D. | pridane zaltar_zvazok()                  */
+/*   2006-08-18a.D. | zmena int na short int (staèí 32tis.)    */
 /*                                                             */
 /***************************************************************/
 
@@ -23,9 +24,9 @@
 #include <string.h>
 
 /* aby sa dala pouzivat v zaltar(); */
-int sviatky_svatych(int, int);
-int sviatky_svatych(int, int, int);
-int sviatky_svatych(int, int, int, int); /* spustam druhykrat */
+short int sviatky_svatych(short int, short int);
+short int sviatky_svatych(short int, short int, short int);
+short int sviatky_svatych(short int, short int, short int, short int); /* spustam druhykrat */
 
 void set_popis_dummy(void); /* pridane 05/04/2000A.D. */
 
@@ -44,10 +45,10 @@ void set_popis_dummy(void); /* pridane 05/04/2000A.D. */
  *             (pre vo¾bu posv. èítania len pre deò a týždeò žaltára sa použije default)
  *
  */
-void zaltar(int den, int tyzzal);
-void zaltar_zvazok(int den, int tyzzal, int obdobie);
+void zaltar(short int den, short int tyzzal);
+void zaltar_zvazok(short int den, short int tyzzal, short int obdobie);
 
-void liturgicke_obdobie(int litobd, int tyzden, int den, int tyzzal, int poradie_svateho);
+void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short int tyzzal, short int poradie_svateho);
 
 /* nasledujuce boli v dbzaltar.cpp, presunute 2003-08-13 */
 

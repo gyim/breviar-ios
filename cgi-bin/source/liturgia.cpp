@@ -37,8 +37,8 @@
 
 /* globalne premenne prehodene do liturgia.h, 17/02/2000A.D. */
 /* ------------------------------------------------------------------- */
-int _allocate_global_var(void){
-	int ret = SUCCESS;
+short int _allocate_global_var(void){
+	short int ret = SUCCESS;
 	Log("Allocating memory...\n");
 
 /* _global_den_ptr */
@@ -251,7 +251,7 @@ int _allocate_global_var(void){
 	return ret;
 }
 
-int _deallocate_global_var(void){
+short int _deallocate_global_var(void){
 	Log("Deallocating memory...\n");
 
 	Log("_global_den_ptr\n"); free(_global_den_ptr);
@@ -284,28 +284,28 @@ int _deallocate_global_var(void){
 /* string comparator -- pre vsetky kombinacie dvojic
  * [const] char, [const] char
  */
-int equals(char *s1, char *s2){
+short int equals(char *s1, char *s2){
 	if(strcmp(s1, s2) == 0)
 		return 1;
 	else
 		return 0;
 }
 
-int equals(const char *s1, char *s2){
+short int equals(const char *s1, char *s2){
 	if(strcmp(s1, s2) == 0)
 		return 1;
 	else
 		return 0;
 }
 
-int equals(const char *s1, const char *s2){
+short int equals(const char *s1, const char *s2){
 	if(strcmp(s1, s2) == 0)
 		return 1;
 	else
 		return 0;
 }
 
-int equals(char *s1, const char *s2){
+short int equals(char *s1, const char *s2){
 	if(strcmp(s1, s2) == 0)
 		return 1;
 	else
@@ -316,14 +316,14 @@ int equals(char *s1, const char *s2){
  * dvojic [const] char, [const] char
  */
 
-int equalsi(char *is1, char *is2){
+short int equalsi(char *is1, char *is2){
 #if defined(DEFINED_strcmpi)
 	if(strcmpi(is1, is2) == 0)
 		return 1;
 	else
 		return 0;
 #else
-	int i, length;
+	short int i, length;
 	char s1[MAX_STR], s2[MAX_STR];
 	mystrcpy(s1, is1, MAX_STR);
 	mystrcpy(s2, is2, MAX_STR);
@@ -339,14 +339,14 @@ int equalsi(char *is1, char *is2){
 #endif
 }
 
-int equalsi(const char *is1, char *is2){
+short int equalsi(const char *is1, char *is2){
 #if defined(DEFINED_strcmpi)
 	if(strcmpi(is1, is2) == 0)
 		return 1;
 	else
 		return 0;
 #else
-	int i, length;
+	short int i, length;
 	char s1[MAX_STR], s2[MAX_STR];
 	mystrcpy(s1, is1, MAX_STR);
 	mystrcpy(s2, is2, MAX_STR);
@@ -362,14 +362,14 @@ int equalsi(const char *is1, char *is2){
 #endif
 }
 
-int equalsi(const char *is1, const char *is2){
+short int equalsi(const char *is1, const char *is2){
 #if defined(DEFINED_strcmpi)
 	if(strcmpi(is1, is2) == 0)
 		return 1;
 	else
 		return 0;
 #else
-	int i, length;
+	short int i, length;
 	char s1[MAX_STR], s2[MAX_STR];
 	mystrcpy(s1, is1, MAX_STR);
 	mystrcpy(s2, is2, MAX_STR);
@@ -385,14 +385,14 @@ int equalsi(const char *is1, const char *is2){
 #endif
 }
 
-int equalsi(char *is1, const char *is2){
+short int equalsi(char *is1, const char *is2){
 #if defined(DEFINED_strcmpi)
 	if(strcmpi(is1, is2) == 0)
 		return 1;
 	else
 		return 0;
 #else
-	int i, length;
+	short int i, length;
 	char s1[MAX_STR], s2[MAX_STR];
 	mystrcpy(s1, is1, MAX_STR);
 	mystrcpy(s2, is2, MAX_STR);
@@ -410,9 +410,9 @@ int equalsi(char *is1, const char *is2){
 
 /* ------------------------------------------------------------------- */
 /* vezme retazec a porovna s nazvami mesiaca; ak najde, vrati, inak 0 */
-int cislo_mesiaca(char *mesiac){
-	int ret = 0;
-	int i;
+short int cislo_mesiaca(char *mesiac){
+	short int ret = 0;
+	short int i;
 	for(i = 0; i < 12; i++){
 		if(equals(nazov_mesiaca(i), mesiac))
 			ret = i + 1;
@@ -423,7 +423,7 @@ int cislo_mesiaca(char *mesiac){
 /* ------------------------------------------------------------------- */
 /* urobi velke pismena */
 char *caps_BIG(const char *input){
-	int i = 0;
+	short int i = 0;
 	char c;
 	mystrcpy(_global_pom_str, input, MAX_STR);
 	while(( c = _global_pom_str[i]) != '\0'){
@@ -475,7 +475,7 @@ char *caps_BIG(const char *input){
  * alebo   1999-12-11        (LINK_ISO_8601) - pridane 2005-03-21
  *
  */
-void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ){
+void _vytvor_global_link(short int den, short int mesiac, short int rok, short int _case, short int typ){
 	/* 2003-07-09 zmeneny & na HTML_AMPERSAND kvoli HTML 4.01 */
 	char pom[MAX_STR];
 	mystrcpy(pom, STR_EMPTY, MAX_STR); /* 2003-08-11 pridana inicializacia */
@@ -618,7 +618,7 @@ void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ){
 }/* _vytvor_global_link(); */
 
 /* vrati 1, ak je rok priestupny, inak vrati 0 */
-int prestupny(int rok){
+short int prestupny(short int rok){
 	if((rok MOD 4) == 0){
 		if((rok MOD 100) == 0){
 			return ((rok MOD 400) == 0);
@@ -630,7 +630,7 @@ int prestupny(int rok){
 		return 0;
 }
 
-int pocet_dni_v_roku(int rok){
+short int pocet_dni_v_roku(short int rok){
 	if(prestupny(rok))
 		return POCET_DNI_V_ROKU + 1;
 	else
@@ -641,14 +641,14 @@ int pocet_dni_v_roku(int rok){
  * 1.1. == 1, 2.1. == 2, ..., 31.12. == 365/366
  * ocakava cislo mesiaca 1-12 (pozn. 2003-07-04)
  */
-int poradie(int den, int mesiac, int rok){
+short int poradie(short int den, short int mesiac, short int rok){
 	if(mesiac > 2)
 		return prvy_den[mesiac - 1] + den - 1 + prestupny(rok);
 	else
 		return prvy_den[mesiac - 1] + den - 1;
 }
 
-int poradie(_struct_den_mesiac den_a_mesiac, int rok){
+short int poradie(_struct_den_mesiac den_a_mesiac, short int rok){
 	return poradie(den_a_mesiac.den, den_a_mesiac.mesiac, rok);
 }
 
@@ -663,8 +663,8 @@ int poradie(_struct_den_mesiac den_a_mesiac, int rok){
  * 1. januar 1920     == 2422325 JD
  * 1. januar 1968     == 2439857 JD
  */
-long juliansky_datum(int por, int rok){
-	int r;
+long juliansky_datum(short int por, short int rok){
+	short int r;
 	long jd = 0;
 	if(rok >= ROK_1968){
 		for(r = ROK_1968; r < rok; r++)
@@ -679,8 +679,8 @@ long juliansky_datum(int por, int rok){
 }
 
 /* ocakava cislo mesiaca 1-12 (pozn. 2003-07-04) */
-long juliansky_datum(int den, int mesiac, int rok){
-	int por;
+long juliansky_datum(short int den, short int mesiac, short int rok){
+	short int por;
 	por = poradie(den, mesiac, rok);
 	return juliansky_datum(por, rok);
 }
@@ -689,8 +689,8 @@ long juliansky_datum(int den, int mesiac, int rok){
 /* nasledujuce funkcie zistuju datum velkonocnej nedele */
 
 /* urcenie datumu VN podla Gaussovho pravidla */
-_struct_den_mesiac velkonocna_nedela(int R){
-	int x, y, k, q, p, a, b, c, d, e;
+_struct_den_mesiac velkonocna_nedela(short int R){
+	short int x, y, k, q, p, a, b, c, d, e;
 	_struct_den_mesiac result;
 
 /* 1. urcenie konstant */
@@ -720,8 +720,8 @@ _struct_den_mesiac velkonocna_nedela(int R){
 }
 
 /* vrati poradie velkonocnej nedele; 1.1. == 1, 31.12. == 365/366 */
-int _velkonocna_nedela(int rok){
-//	int vnd, vnm;
+short int _velkonocna_nedela(short int rok){
+//	short int vnd, vnm;
 	_struct_den_mesiac result;
 
 	result = velkonocna_nedela(rok);
@@ -734,19 +734,19 @@ int _velkonocna_nedela(int rok){
 /* vrati cislo dna v tyzdni zodpovedajuce datumu,
  * 0 == DEN_NEDELA, 1 == DEN_PONDELOK atd.
  */
-int den_v_tyzdni(int por, int rok){
-	int vn;
+short int den_v_tyzdni(short int por, short int rok){
+	short int vn;
 	vn  = _velkonocna_nedela(rok);
 	return ((por MOD 7) + 7 - (vn MOD 7)) MOD 7;
 }
 
-int den_v_tyzdni(int den, int mesiac, int rok){
-	int por;
+short int den_v_tyzdni(short int den, short int mesiac, short int rok){
+	short int por;
 	por = poradie(den, mesiac, rok);
 	return den_v_tyzdni(por, rok);
 }
 
-int den_v_tyzdni(_struct_den_mesiac den_a_mesiac, int rok){
+short int den_v_tyzdni(_struct_den_mesiac den_a_mesiac, short int rok){
 	return den_v_tyzdni(den_a_mesiac.den, den_a_mesiac.mesiac, rok);
 }
 
@@ -759,20 +759,20 @@ int den_v_tyzdni(_struct_den_mesiac den_a_mesiac, int rok){
  * _nedelne_pismeno vrati ciselny udaj (0 -- 6), ktory je vstupom pre
  * konstantne pole char_nedelne_pismeno[]
  */
-unsigned char _nedelne_pismeno(int rok){
-	int vn;
+unsigned char _nedelne_pismeno(short int rok){
+	short int vn;
 	vn = _velkonocna_nedela(rok);
 	return (char)((vn + 5) MOD 7); /* (char) pridane 01/03/2000A.D. */
 }
 
-char nedelne_pismeno(int rok){
+char nedelne_pismeno(short int rok){
 	return char_nedelne_pismeno[_nedelne_pismeno(rok)];
 }
 
 /* vrati nedelne pismeno v tej casti roka, kde je den.mesiac.
  * to pre prestupny rok znamena, ze pocnuc 1. marcom je druhe nedelne pismeno
  */
-unsigned char _nedelne_pismeno(int por, int rok){
+unsigned char _nedelne_pismeno(short int por, short int rok){
  /* (char) pridane 01/03/2000A.D. */
 	if((prestupny(rok)) && (por > poradie(29, MES_FEB + 1, rok)))
 		return (char)((_nedelne_pismeno(rok) + 6) MOD 7);
@@ -780,18 +780,18 @@ unsigned char _nedelne_pismeno(int por, int rok){
 		return _nedelne_pismeno(rok);
 }
 
-char nedelne_pismeno(int por, int rok){
+char nedelne_pismeno(short int por, short int rok){
 	return char_nedelne_pismeno[_nedelne_pismeno(por, rok)];
 }
 
-char nedelne_pismeno(int den, int mesiac, int rok){
-	int por;
+char nedelne_pismeno(short int den, short int mesiac, short int rok){
+	short int por;
 	por = poradie(den, mesiac, rok);
 	return nedelne_pismeno(por, rok);
 }
 
-unsigned char _nedelne_pismeno(int den, int mesiac, int rok){
-	int por;
+unsigned char _nedelne_pismeno(short int den, short int mesiac, short int rok){
+	short int por;
 	por = poradie(den, mesiac, rok);
 	return _nedelne_pismeno(por, rok);
 }
@@ -799,12 +799,12 @@ unsigned char _nedelne_pismeno(int den, int mesiac, int rok){
 /* vrati nedelne pismeno v spravnej casti roka, ale neberie do uvahy
  * typ modlitby, t.j. ked su (prve) vespery, vrati zly den!!! pozor!!!
  */
-unsigned char _nedelne_pismeno(_struct_den_mesiac den_a_mesiac, int rok){
+unsigned char _nedelne_pismeno(_struct_den_mesiac den_a_mesiac, short int rok){
 	return
 	_nedelne_pismeno(poradie(den_a_mesiac.den, den_a_mesiac.mesiac, rok), rok);
 }
 
-char nedelne_pismeno(_struct_den_mesiac den_a_mesiac, int rok){
+char nedelne_pismeno(_struct_den_mesiac den_a_mesiac, short int rok){
 	return char_nedelne_pismeno[_nedelne_pismeno(den_a_mesiac, rok)];
 }
 
@@ -813,8 +813,8 @@ char nedelne_pismeno(_struct_den_mesiac den_a_mesiac, int rok){
 /* z poradoveho cisla dna v roku urobi datum,
  * 1 == 1.1., 2 == 2.1., 32 == 1.2., ... 365 == 31.12./30.12.
  */
-_struct_den_mesiac por_den_mesiac(int poradie, int rok){
-	int d, m;
+_struct_den_mesiac por_den_mesiac(short int poradie, short int rok){
+	short int d, m;
 	_struct_den_mesiac result;
 
 	if(prestupny(rok))
@@ -833,14 +833,14 @@ _struct_den_mesiac por_den_mesiac(int poradie, int rok){
 }
 
 /* ------------------------------------------------------------------- */
-/* nasledujuce int _...() funkcie vracaju poradove cislo dna v roku */
+/* nasledujuce short int _...() funkcie vracaju poradove cislo dna v roku */
 
 /* vrati poradove cislo dna, kt. zodpoveda sviatku sv. rodiny */
 /* je to nedela v oktave pana alebo (ak padne narodenie pana na nedelu)
  * 30. decembra bez prvych vespier
  */
-int _svatej_rodiny(int rok){
-	int i;
+short int _svatej_rodiny(short int rok){
+	short int i;
 	if(den_v_tyzdni(25, 12, rok) == DEN_NEDELA)
 		return(poradie(30, 12, rok));
 	else{
@@ -853,25 +853,25 @@ int _svatej_rodiny(int rok){
 
 /* vrati poradove cislo dna, kt. zodpoveda sviatku krstu krista pana */
 /* je to nedela po zjaveni pana */
-int _krst_krista_pana(int rok){
-	int i = poradie(6, 1, rok) + 1;
+short int _krst_krista_pana(short int rok){
+	short int i = poradie(6, 1, rok) + 1;
 	while(den_v_tyzdni(i, rok) != DEN_NEDELA)
 		i++;
 	return i;
 }
 
 /* popolcova streda je 46.-ty den pred velkou nocou, treba VN - 46 */
-int _popolcova_streda(int rok){
+short int _popolcova_streda(short int rok){
 	return (_velkonocna_nedela(rok) + OD_VELKEJ_NOCI_PO_POPOLCOVU_STR);
 }
 
 /* nanebovstupenie pana je 40.-ty den po velkej noci, treba VN + 39 */
-int _nanebovstupenie(int rok){
+short int _nanebovstupenie(short int rok){
 	return (_velkonocna_nedela(rok) + OD_VELKEJ_NOCI_PO_NANEBOSTUPENIE);
 }
 
 /* zoslanie ducha sv. je 50.-ty den po velkej noci, treba VN + 49 */
-int _zoslanie_ducha(int rok){
+short int _zoslanie_ducha(short int rok){
 	return (_velkonocna_nedela(rok) + OD_VELKEJ_NOCI_PO_ZOSLANIE_DUCHA);
 }
 
@@ -879,7 +879,7 @@ int _zoslanie_ducha(int rok){
  * 		prvej adventnej nedeli;
  * prva_adventna_nedela() vracia strukturu (datum) prvej adv. nedele
  */
-int _prva_adventna_nedela(int rok){
+short int _prva_adventna_nedela(short int rok){
 	char p;
 	_struct_den_mesiac datum;
 
@@ -894,7 +894,7 @@ int _prva_adventna_nedela(int rok){
 /* ------------------------------------------------------------------- */
 /* nasledujuce _struct_den_mesiac ...() funkcie vracaju <den, mesiac> */
 
-_struct_den_mesiac prva_adventna_nedela(int rok){
+_struct_den_mesiac prva_adventna_nedela(short int rok){
 	return (por_den_mesiac(_prva_adventna_nedela(rok), rok));
 }
 
@@ -906,9 +906,9 @@ _struct_den_mesiac prva_adventna_nedela(int rok){
  * ktory uz moze byt inym liturgickym rokom. to nie je osetrene ani
  * vo funkcii nedelny_cyklus(_struct_den_mesiac, int);
  */
-int nedelny_cyklus(int por, int rok){
+short int nedelny_cyklus(short int por, short int rok){
 	_struct_den_mesiac pan;
-	int porpan;
+	short int porpan;
 	pan = prva_adventna_nedela(rok);
 	porpan = poradie(pan.den, pan.mesiac, rok);
 	if(por < porpan)
@@ -917,13 +917,13 @@ int nedelny_cyklus(int por, int rok){
 		return (rok MOD 3);
 }
 
-int nedelny_cyklus(int den, int mesiac, int rok){
-	int por;
+short int nedelny_cyklus(short int den, short int mesiac, short int rok){
+	short int por;
 	por = poradie(den, mesiac, rok);
 	return nedelny_cyklus(por, rok);
 }
 
-int nedelny_cyklus(_struct_den_mesiac den_a_mesiac, int rok){
+short int nedelny_cyklus(_struct_den_mesiac den_a_mesiac, short int rok){
 	return
 	nedelny_cyklus(poradie(den_a_mesiac.den, den_a_mesiac.mesiac, rok), rok);
 }
@@ -933,7 +933,7 @@ int nedelny_cyklus(_struct_den_mesiac den_a_mesiac, int rok){
  * zapise tiez do _struct_dm tieto polozky:
  *    .den, .mesiac, .rok, .denvr, .denvt, .link, .litrok
  */
-_struct_dm por_den_mesiac_dm(int poradie, int rok){
+_struct_dm por_den_mesiac_dm(short int poradie, short int rok){
 	_struct_den_mesiac pom;
 	_struct_dm result;
 
@@ -965,15 +965,15 @@ _struct_dm por_den_mesiac_dm(int poradie, int rok){
 /* vrati cislo tyzdna v obdobi cez rok, ktory nasleduje po nedeli zoslania
  * ducha sv. - teda po konci velkonocneho obdobia
  */
-int tyzden_cez_rok_po_vn(int rok){
-	int zds, pan;
+short int tyzden_cez_rok_po_vn(short int rok){
+	short int zds, pan;
 
 	pan = _prva_adventna_nedela(rok);
 	zds = _zoslanie_ducha(rok);
 	return (POCET_NEDIEL_CEZ_ROK - ((pan - zds) DIV 7));
 }
 
-int cislo_nedele_cez_rok_po_vn(int rok){
+short int cislo_nedele_cez_rok_po_vn(short int rok){
 	return (tyzden_cez_rok_po_vn(rok) + 1);
 }
 
@@ -1002,7 +1002,7 @@ void init_global_pm_sobota(void){
 
 /* ------------------------------------------------------------------- */
 /* nasledujuce void _dm_...() funkcie strukturu dm zapisu do _global_result */
-void _dm_popolcova_streda(int rok, int _vn){
+void _dm_popolcova_streda(short int rok, short int _vn){
 
 	/* v tomto kroku sa zapisu:
 	 * .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok */
@@ -1020,7 +1020,7 @@ void _dm_popolcova_streda(int rok, int _vn){
 }
 
 /* 2006-02-09: chýbalo tu nastavenie denvt */
-void _dm_nanebovstupenie(int rok, int _vn){
+void _dm_nanebovstupenie(short int rok, short int _vn){
 	/* v tomto kroku sa zapisu:
 	 * .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok */
 	_global_result = por_den_mesiac_dm(_vn + OD_VELKEJ_NOCI_PO_NANEBOSTUPENIE, rok);
@@ -1037,7 +1037,7 @@ void _dm_nanebovstupenie(int rok, int _vn){
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 }
 
-void _dm_zoslanie_ducha(int rok, int _vn){
+void _dm_zoslanie_ducha(short int rok, short int _vn){
 	/* v tomto kroku sa zapisu:
 	 * .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok */
 	_global_result = por_den_mesiac_dm(_vn + OD_VELKEJ_NOCI_PO_ZOSLANIE_DUCHA, rok);
@@ -1053,7 +1053,7 @@ void _dm_zoslanie_ducha(int rok, int _vn){
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 }
 
-void _dm_prva_adventna_nedela(int rok, int p2){
+void _dm_prva_adventna_nedela(short int rok, short int p2){
 	/* v tomto kroku sa zapisu:
 	 * .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok */
 	_global_result = por_den_mesiac_dm(PRVA_ADVENTNA_NEDELA_b + p2 + prestupny(rok), rok);
@@ -1069,10 +1069,10 @@ void _dm_prva_adventna_nedela(int rok, int p2){
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D. */
 }
 
-void _dm_svatej_rodiny(int rok){
+void _dm_svatej_rodiny(short int rok){
 	/* v tomto kroku sa zapisu:
 	 * .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok */
-	int _svrod;
+	short int _svrod;
 	if(den_v_tyzdni(25, 12, rok) == DEN_NEDELA)
 		_svrod = poradie(30, 12, rok);
 	else{
@@ -1093,10 +1093,10 @@ void _dm_svatej_rodiny(int rok){
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D. */
 }
 
-void _dm_krst_krista_pana(int rok){
+void _dm_krst_krista_pana(short int rok){
 	/* v tomto kroku sa zapisu:
 	 * .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok */
-	int _krst = poradie(6, 1, rok) + 1;
+	short int _krst = poradie(6, 1, rok) + 1;
 	while(den_v_tyzdni(_krst, rok) != DEN_NEDELA)
 		_krst++;
 	_global_result = por_den_mesiac_dm(_krst, rok);
@@ -1112,7 +1112,7 @@ void _dm_krst_krista_pana(int rok){
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D. */
 }
 
-void _dm_velkonocna_nedela(int rok, int _vn){
+void _dm_velkonocna_nedela(short int rok, short int _vn){
 	/* v tomto kroku sa zapisu:
 	 * .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok */
 	_global_result = por_den_mesiac_dm(_vn, rok);
@@ -1159,15 +1159,15 @@ void _init_dm(_struct_dm a){
 /* ------------------------------------------------------------------- */
 /* analyzuj_rok()
  *
- * vstup:  int year
+ * vstup:  short int year
  * vystup: do globalnej premennej struct lrok _global_r da jednotlive vyznacne dni
  *         a ostatne data (prestupny, p1, p2, litrok, tyzden_ocr_po_vn, _den[]
  */
 /* logovanie: 01/03/2000A.D. */
-void analyzuj_rok(int year){
-	int _vn; /* poradie velkonocnej nedele */
+void analyzuj_rok(short int year){
+	short int _vn; /* poradie velkonocnej nedele */
 	_struct_den_mesiac vn; /* datum velkonocnej nedele */
-	int p1, p2; /* nedelne pismena */
+	short int p1, p2; /* nedelne pismena */
 
 	Log("analyzuj_rok(%d) -- begin\n", year);
 	vn = velkonocna_nedela(year);
@@ -1303,13 +1303,13 @@ void Log(struct tmodlitba2 t){
  * _encode_..., _decode_spol_cast(); robia tuto konverziu
  *
  */
-int _encode_spol_cast(int a1, int a2, int a3){
+int _encode_spol_cast(short int a1, short int a2, short int a3){
 	return(a1 + a2 * MAX_MODL_SPOL_CAST + a3 * MAX_MODL_SPOL_CAST * MAX_MODL_SPOL_CAST);
 }
-int _encode_spol_cast(int a1, int a2){
+int _encode_spol_cast(short int a1, short int a2){
 	return _encode_spol_cast(a1, a2, MODL_SPOL_CAST_NEURCENA);
 }
-int _encode_spol_cast(int a1){
+int _encode_spol_cast(short int a1){
 	return _encode_spol_cast(a1, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 }
 _struct_sc _decode_spol_cast(int spolc){

@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* mystring.cpp                                                */
-/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2006 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description |                                               */
 /* document history                                            */
@@ -17,14 +17,14 @@
  * 2. kopiruje nanajvys count - 1 znakov z src do dest (pomocou strncpy)
  * 3. v kazdom pripade prida na koniec v dest '\0' (terminating null)
  */
-char *mystrcpy(char *dest, char *src, int count){
+char *mystrcpy(char *dest, char *src, short int count){
 	char *ret;
 	/* sizeof(dest) nefunguje pre char *dest */
 	ret = strncpy(dest, src, count - 1);
 	dest[count - 1] = '\0';
 	return ret;
 }
-char *mystrcpy(char *dest, const char *src, int count){
+char *mystrcpy(char *dest, const char *src, short int count){
 	char *ret;
 	/* sizeof(dest) nefunguje pre char *dest */
 	ret = strncpy(dest, src, count - 1);

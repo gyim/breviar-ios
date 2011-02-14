@@ -75,6 +75,7 @@
 /*   2006-02-02a.D. | vytvoren· fcia _main_formular(),zobraz.pre kaûd˝ deÚ */
 /*   2006-02-06a.D. | ˙prava v _rozbor_dna() kvÙli nastaveniu _global_opt3 */
 /*   2006-07-11a.D. | prvÈ kroky k jazykov˝m mut·ci·m                      */
+/*   2006-08-18a.D. | pokus: zmena mnoh˝ch int na short int (staËÌ 32tis.) */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -148,7 +149,7 @@ char *_global_buf2; /* 2006-08-01: vytvorenÈ; t˙to premenn˙ tieû alokujeme */
 /* globalne premenne -- deklarovane v liturgia.h, definovane tu */
 /* 18/02/2000A.D. */
 
-int query_type; /* premenna obsahujuca PRM_..., deklarovana v mydefs.h */
+short int query_type; /* premenna obsahujuca PRM_..., deklarovana v mydefs.h */
 
 /* globalna premenna, do ktorej sa ukladaju info o analyzovanom dni
  * pouziva ju void nove_rozbor_dna() funkcia */
@@ -219,7 +220,7 @@ _type_kompletorium *_global_modl_kompletorium_ptr;
 #define _global_modl_kompletorium (*_global_modl_kompletorium_ptr)
 
 /* globalna premenna, ktora obsahuje MODL_... */
-int _global_modlitba;
+short int _global_modlitba;
 
 /* globalna premenna, do ktorej ukladaju funkcie vytvor_query_string_...
  * linku tvaru PATH_CGI(script_name) ++ "?param1=val&param2=val&..." 
@@ -251,17 +252,17 @@ _struct_lrok *_global_r_ptr;
  * -- v podstate neuklada do nej, ale v _rozbor_dna() sa do nej priradi
  * vysledok (navratova hodnota) z sviatky_svatych()
  */
-int _global_pocet_svatych;
+short int _global_pocet_svatych;
 
 /* globalne premenne, obsahujuce pom_MODL_OPT... */
-int _global_opt1 = NIE;
-int _global_opt2 = MODL_ZALMY_ZO_DNA; /* 2006-01-25: upravenÈ, bolo tu MODL_ZALMY_ZO_SV */
-int _global_opt3 = MODL_SPOL_CAST_NEURCENA;
-int _global_opt4 = ANO; /* pridana 05/04/2000A.D. */
-int _global_opt5 = MODL_CEZ_DEN_ZALMY_ZO_DNA; /* pridana 2003-08-07 */
+short int _global_opt1 = NIE;
+short int _global_opt2 = MODL_ZALMY_ZO_DNA; /* 2006-01-25: upravenÈ, bolo tu MODL_ZALMY_ZO_SV */
+short int _global_opt3 = MODL_SPOL_CAST_NEURCENA;
+short int _global_opt4 = ANO; /* pridana 05/04/2000A.D. */
+short int _global_opt5 = MODL_CEZ_DEN_ZALMY_ZO_DNA; /* pridana 2003-08-07 */
 /* pokial ide o _global_opt5, kontroluje sa v zaltar(); poznamka pridana 2003-08-13 */
 /* pridane 2003-07-08, append parameter */
-int _global_opt_append = NIE;
+short int _global_opt_append = NIE;
 
 /* globalna premenna, co obsahuje string vypisany na obrazovku */
 char *_global_string;
@@ -270,10 +271,10 @@ char *_global_string2;
 /*char _global_string2[MAX_STR];*/ /* obsahuje I, II, III, IV, V alebo pismeno roka */
 
 /* pridane 13/04/2000A.D.; deklarovane v liturgia.h */
-int _global_linky;
+short int _global_linky;
 
 /* 2006-07-11: PridanÈ kvÙli jazykov˝m mut·ci·m */
-int _global_language;
+short int _global_language;
 #ifndef _global_jazyk
 #define	_global_jazyk	_global_language
 #endif
@@ -294,12 +295,12 @@ int _global_language;
  * pri preskakovani Magnifikat / Benediktus
  * (ak je _global_opt1 == ANO)
  */
-int _global_skip_in_prayer;
+short int _global_skip_in_prayer;
 
 /* globalna premenna, ktora hovori, ci generujeme modlitbu */
 //int _global_gen_modlitba; == (_global_modlitba == MODL_NEURCENA)
 
-int params; /* odkial su brane parametre; hodnoty
+short int params; /* odkial su brane parametre; hodnoty
  * SCRIPT_PARAM_FROM_FORM
  * SCRIPT_PARAM_FROM_ARGV
  * SCRIPT_PARAM_FROM_QS
@@ -386,11 +387,11 @@ FILE *batch_html_file = NULL;
 /*---------------------------------------------------------------------*/
 /* popis: odstrani backslashe zo stringu (argv[1]) a vrati novy string
  * ale NEVRATI novy string
+ * 2006-08-18: hm, zaujÌmav˝ popis; naviac, funkcia sa nepouûÌva... preto zapozn·mkovanÈ.
  *
- */
-int odstran_backslashe(char *input){
-	int i, j = 0;
-	int ilen;
+short int odstran_backslashe(char *input){
+	short int i, j = 0;
+	short int ilen;
 	ilen = strlen(input);
 	for(i = 0; i < ilen; i++){
 		if(input[i] != '\\'){
@@ -401,6 +402,7 @@ int odstran_backslashe(char *input){
 	input[j] = '\0';
 	return 0;
 }
+*/
 
 /*---------------------------------------------------------------------*/
 /*
@@ -412,9 +414,9 @@ int odstran_backslashe(char *input){
  * vysledok je v globalnej premennej _global_buf.
  *
  */
-int postread(void){
+short int postread(void){
 	char *buf = NULL;
-	int	size = 0, sofar = 0, got;
+	short int	size = 0, sofar = 0, got;
 
 	Log("uncgi::postread() -- zaciatok\n");
 	buf = getenv("CONTENT_TYPE");
@@ -452,8 +454,8 @@ int postread(void){
 /*
  * Convert two hex digits to a value.
  */
-static int htoi(/* unsigned */ char *s){
-	int	value;
+static short int htoi(/* unsigned */ char *s){
+	short int	value;
 	char	c;
 
 	c = s[0];
@@ -510,7 +512,7 @@ static void url_unescape(/* unsigned */ char *str){
  */
 static void stuffenv(char *var){
 	char *buf, *c, *s, *t, *oldval, *newval;
-	int	despace = 0, got_cr = 0;
+	short int	despace = 0, got_cr = 0;
 
 #ifdef DEBUG
 	printf("Before unescape: %s\n", var);
@@ -680,9 +682,9 @@ static void scanquery(char *q){
  * vracia: on success, returns SUCCESS
  *         on error,   returns FAILURE
  */
-int setForm(void){
+short int setForm(void){
 	char local_str[MAX_STR] = STR_EMPTY;
-	int ret;
+	short int ret;
 
 	Log("setForm() -- begin\n");
 
@@ -831,12 +833,12 @@ int setForm(void){
  * 	SCRIPT_PARAM_FROM_ARGV (z argumentov dialogoveho riadka)
  * 	SCRIPT_PARAM_FROM_QS   (zo systemovej premennej QUERY_STRING)
  */
-int getSrciptParamFrom(int argc){
+short int getSrciptParamFrom(int argc){
 
 	/* najprv zistime, ci existuje systemova premenna QUERY_STRING */
 	char *qs;
 	char *method;
-	int ret;
+	short int ret;
 	/* kedze na zaciatku main() alokujeme pre `query_string' miesto,
 	 * musime tu spravit nie
 	 *   query_string = getenv("QUERY_STRING");
@@ -925,7 +927,7 @@ int getSrciptParamFrom(int argc){
  * 2003-06-17; jednotne exportovanie. <h2> pre Liturgiu hodin, <h3> pre detailnejsi vypis
  */
 void _export_heading(/* int size, */const char *string){
-	int size = 2;
+	short int size = 2;
 	/* 2003-07-16; pridany default vypis */
 	Export("\n<center><h%d>Kontrola ˙dajov</h%d></center>\n\n", size, size);
 	/* 2003-07-16; pre prehladnost pridany este jeden \n */
@@ -934,7 +936,7 @@ void _export_heading(/* int size, */const char *string){
 }
 /* 2003-07-16; podobna funkcnost ako puovodne _export_heading */
 void _export_heading_center(const char *string){
-	int size = 2;
+	short int size = 2;
 	/* 2003-07-16; pridany default vypis */
 	Export("\n<center><h%d>%s</h%d></center>\n\n", size, string, size);
 }
@@ -968,8 +970,8 @@ void _main_prazdny_formular(void){
  * 
  */
 #define DetailLog emptyLog
-void includeFile(int type, char *paramname, char *fname, char *modlparam){
-	int c, buff_index = 0; /* 01/03/2000A.D. - inicializacia buff_index */
+void includeFile(short int type, char *paramname, char *fname, char *modlparam){
+	short int c, buff_index = 0; /* 01/03/2000A.D. - inicializacia buff_index */
 	char strbuff[MAX_BUFFER];
 	char rest[MAX_BUFFER];
 	char isbuff = 0;
@@ -1114,7 +1116,7 @@ void includeFile(int type, char *paramname, char *fname, char *modlparam){
  *	2005-11-20: OpravenÈ, lebo sme kontrolovali den, a nie denvt :)
  */
 #define je_tedeum (type == MODL_POSV_CITANIE) && ((_global_den.denvt == DEN_NEDELA) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK))
-void interpretParameter(int type, char *paramname){
+void interpretParameter(short int type, char *paramname){
 	char path[MAX_STR] = STR_EMPTY;
 	mystrcpy(path, include_dir, MAX_STR);
 	/* 2004-03-17 // strcat(path, FILE_PATH); // prerobene 05/06/2000A.D. */
@@ -1751,8 +1753,8 @@ void interpretParameter(int type, char *paramname){
  * exportfile je definovane v myexpt.[h|c]
  *
  */
-void interpretTemplate(int type, char *tempfile){
-	int c, buff_index = 0; /* 01/03/2000A.D. - inicializacia */
+void interpretTemplate(short int type, char *tempfile){
+	short int c, buff_index = 0; /* 01/03/2000A.D. - inicializacia */
 	char strbuff[MAX_BUFFER];
 	char isbuff = 0;
 
@@ -1801,7 +1803,7 @@ void interpretTemplate(int type, char *tempfile){
  * su spravne data
  *
  */
-void showPrayer(int type){
+void showPrayer(short int type){
 	char templat[SMALL];
 	char path[MAX_STR] = STR_EMPTY;
 	mystrcpy(path, include_dir, MAX_STR);
@@ -1919,7 +1921,7 @@ void VYSVETLIVKY_TABULKA(void){ /* 15/03/2000A.D. */
  *         on error,   returns FAILURE
  */
 #define ExportKONTROLA _export_heading("Kontrola dÚa"); Export
-int kontrola(int den, int mesiac, int rok){
+short int kontrola(short int den, short int mesiac, short int rok){
 	if((mesiac < 1) || (mesiac > 12)){
 		ExportKONTROLA("Tak˝to mesiac nepozn·m (%d).\n", mesiac);
 		//ALERT;
@@ -1951,8 +1953,8 @@ int kontrola(int den, int mesiac, int rok){
 /* popis: vrati cislo dna (0--6), ak sa den == pondelok...
  *			 inak vrati UNKNOWN_DEN
  */
-int atodenvt(char *den){
-	int i = 0;
+short int atodenvt(char *den){
+	short int i = 0;
 	do{
 		if(equals(den, nazov_dna(i)) || equals(den, nazov_dna_asci(i))){
 			return i;
@@ -1966,8 +1968,8 @@ int atodenvt(char *den){
  *        alebo (ako den == STR_VSETKY_DNI) vrati VSETKY_DNI;
  *        v pripade inych udajov vrati 0
  */
-int atoden(char *den){
-	int d;
+short int atoden(char *den){
+	short int d;
 	if(equals(den, STR_VSETKY_DNI))
 		return VSETKY_DNI;
 	else{
@@ -1980,12 +1982,12 @@ int atoden(char *den){
  *        alebo vrati VSETKY_MESIACE,  ak den == STR_VSETKY_MESIACE;
  *			 inak vrati UNKNOWN_MESIAC
  */
-int atomes(char *mesiac){
+short int atomes(char *mesiac){
 	/* sprintf(pom_MESIAC, "%d", cislo_mesiaca(pom_MESIAC)); */
 	if(equals(mesiac, STR_VSETKY_MESIACE))
 		return VSETKY_MESIACE;
 	/* mesiac moze byt string "1" -- "12" alebo nazov_mesiaca(0 -- 11) */
-	int i = atoi(mesiac) - 1;
+	short int i = atoi(mesiac) - 1;
 	if((i >= MES_JAN) && (i <= MES_DEC))
 		return i;
 	i = 0;
@@ -2044,7 +2046,7 @@ int atomes(char *mesiac){
  * 28/03/2000A.D.: navratova hodnota je SUCCESS alebo FAILURE
  */
 #define _rozbor_dna_LOG Log("_rozbor_dna(): "); Log
-int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
+short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie_svaty){
 	Log("_rozbor_dna(): 3 parametre -- begin\n");
 	Log("-- _rozbor_dna(_struct_den_mesiac, int, int): begin ({%d, %d} %d, %d)\n",
 		datum.den, datum.mesiac, rok, poradie_svaty);
@@ -2057,11 +2059,11 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 		Log(_global_r); // 01/03/2000A.D. 
 	 */
 
-	int NAR = poradie(25, 12, rok);       /* narodenie pana */
+	short int NAR = poradie(25, 12, rok);       /* narodenie pana */
 /* slavnosti */
-	int PMB = poradie(1, 1, rok); /* panny marie bohorodicky */
-	int ZJV = poradie(6, 1, rok); /* zjavenie pana */
-	int DEC16 = poradie(16, 12, rok); /* 16. december, prelom v adventnom obdobi */
+	short int PMB = poradie(1, 1, rok); /* panny marie bohorodicky */
+	short int ZJV = poradie(6, 1, rok); /* zjavenie pana */
+	short int DEC16 = poradie(16, 12, rok); /* 16. december, prelom v adventnom obdobi */
 
 	/* 2006-02-06: pomocn· premenn· kvÙli eventu·lnemu prednastaveniu _global_opt3 */
 	_struct_sc sc;
@@ -2696,8 +2698,8 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 	return SUCCESS;
 }/* _rozbor_dna() */
 
-int _rozbor_dna(_struct_den_mesiac datum, int rok){
-	int ret;
+short int _rozbor_dna(_struct_den_mesiac datum, short int rok){
+	short int ret;
 	Log("_rozbor_dna(): 2 parametre -- begin\n");
 	ret = _rozbor_dna(datum, rok, 0);
 	Log("_rozbor_dna(): 2 parametre -- returning %d\n", ret);
@@ -2724,7 +2726,7 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok){
 #define CASE_MALE   4
 #define COLOR_RED   3
 #define COLOR_BLACK 2
-int init_global_string(int typ, int poradie_svateho, int modlitba){
+short int init_global_string(short int typ, short int poradie_svateho, short int modlitba){
 	/* lokalna premenna, do ktorej sa ukladaju info o analyzovanom dni
 	 * pouziva ju void nove_rozbor_dna() funkcia */
 	/* 2003-07-07: obavam sa, ze nove_rozbor_dna() je alebo
@@ -2741,9 +2743,9 @@ int init_global_string(int typ, int poradie_svateho, int modlitba){
 	mystrcpy(_global_string, STR_EMPTY, MAX_GLOBAL_STR); /* inicializacia */
 	mystrcpy(_global_string2, STR_EMPTY, MAX_GLOBAL_STR); /* inicializacia */
 
-	int farba = COLOR_BLACK;
-	int velkost = CASE_MALE;
-	int obyc = NIE;
+	short int farba = COLOR_BLACK;
+	short int velkost = CASE_MALE;
+	short int obyc = NIE;
 
 	Log("-- init_global_string(EXPORT_DNA_%d, %d, %s) -- zaciatok\n",
 		typ, poradie_svateho, nazov_modlitby(modlitba));
@@ -3014,7 +3016,7 @@ int init_global_string(int typ, int poradie_svateho, int modlitba){
 	return SUCCESS;
 }/* init_global_string(); -- 3 vstupy  */
 
-int init_global_string(int typ, int poradie_svateho){
+short int init_global_string(short int typ, short int poradie_svateho){
 	return init_global_string(typ, poradie_svateho, MODL_NEURCENA);
 }/* init_global_string(); -- 2 vstupy  */
 
@@ -3030,8 +3032,8 @@ int init_global_string(int typ, int poradie_svateho){
  *
  * 28/03/2000A.D.: prirobena navratova hodnota SUCCESS/FAILURE
  */
-int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, int rok, int modlitba, int poradie_svateho){
-	int ret;
+short int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, short int rok, short int modlitba, short int poradie_svateho){
+	short int ret;
 	Log("-- _rozbor_dna_s_modlitbou(_struct_den_mesiac, int, int, int): begin ({%d, %d}, %d, %s, %d)\n",
 		datum.den, datum.mesiac, rok, nazov_Modlitby[modlitba], poradie_svateho);
 
@@ -3128,7 +3130,7 @@ int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, int rok, int modlitba, int
  *
  * premenovana na lowercase, 2003-08-13
  */
-void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
+void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 /* 2005-03-21: Pridany dalsi typ exportu */
 	Log("--- _export_rozbor_dna_buttons(typ == %d) -- begin\n", typ); /* 2005-03-22: Pridane */
 	if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE)){
@@ -3336,12 +3338,12 @@ void _export_rozbor_dna_buttons(int typ, int poradie_svateho){
  * a to button predosleho a nasledujuceho dna
  *
  */
-void _export_rozbor_dna_buttons_dni(int typ){
+void _export_rozbor_dna_buttons_dni(short int typ){
 	Log("--- _export_rozbor_dna_buttons_dni(typ == %d) -- begin\n", typ); /* 2005-03-22: Pridane */
 	if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE)){
 		Log("--- _export_rozbor_dna_buttons_dni(): idem tlacit buttony...\n");
 		_struct_den_mesiac datum;
-		int _local_rok, i;
+		short int _local_rok, i;
 
 		char pom2[MAX_STR]; /* 2006-07-31: pridanÈ */
 		mystrcpy(pom2, STR_EMPTY, MAX_STR); /* 2006-07-31: pridanÈ */
@@ -3548,13 +3550,13 @@ void _export_rozbor_dna_buttons_dni(int typ){
 /* 
  * 2003-08-13 ked som sa snazil zistit priciny segfaultu, 
  * nachvilku som #define nahradil procedurou:
-void BUTTONS(int typ, int a){
+void BUTTONS(short int typ, short int a){
 	init_global_string(typ, a);
 	Export("%s", _global_string);
 	_export_rozbor_dna_buttons(typ, a);
 }
 */
-void _export_rozbor_dna(int typ){
+void _export_rozbor_dna(short int typ){
 /* treba brat do uvahy:
  * 1. ked ma sviatok prioritu, tak ide on
  *    (ulozeny v _global_den, ak pocet_svatych == 0;
@@ -3567,7 +3569,7 @@ void _export_rozbor_dna(int typ){
  * 3. ak ide o sobotu v OBD_CEZ_ROK, treba ponuknut moznost _global_pm_sobota
  *    (spomienka panny marie v sobotu)
  */
-	int i;
+	short int i;
 #define MAX_SMALL 30 
 	/* bolo tu MAX_PAT a MAX_DESAT, ale kopiroval som tam HTML_SPAN_, 
 	 * ktore su dlhsie, 2003-07-02;
@@ -3788,7 +3790,7 @@ void _export_rozbor_dna(int typ){
 	}\
 	fprintf(batch_html_file, "</li>\n");\
 }
-void _export_rozbor_dna_batch(int typ){
+void _export_rozbor_dna_batch(short int typ){
 /* poznamky bez uvedenia datumu su prevzate z _export_rozbor_dna; 2003-07-07 */
 
 /* treba brat do uvahy:
@@ -3904,7 +3906,7 @@ void _export_rozbor_dna_batch(int typ){
  * vela z jadra je prevzateho z funkcie _main_dnes()
  *
  */
-void showDetails(int den, int mesiac, int rok, int poradie_svaty){
+void showDetails(short int den, short int mesiac, short int rok, short int poradie_svaty){
 
 	Log("spustam showDetails(%d, %s, %d, %d)...\n", den,
 		nazov_mesiaca(mesiac - 1), rok, poradie_svaty);
@@ -4119,8 +4121,8 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
  *
  * 2003-08-13: neviem preco boli hore tri vykricniky ("napokon spusti vytvorenie modlitby")
  */
-void rozbor_dna_s_modlitbou(int den, int mesiac, int rok, int modlitba, int poradie_svaty){
-	int ret = SUCCESS;
+void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, short int modlitba, short int poradie_svaty){
+	short int ret = SUCCESS;
 
 	/* lokalne premenne, v ktorych sa pamata to, co vrati _rozbor_dna() */
 	/* lokalna premenna, do ktorej sa ukladaju info o analyzovanom dni
@@ -4186,7 +4188,7 @@ void rozbor_dna_s_modlitbou(int den, int mesiac, int rok, int modlitba, int pora
 	Log("...done.\n");
 
 	/* lokalna kopia roka; ak treba analyzovat dalsi rok */
-	int _local_rok = -1; /* inicializacia dorobena 01/03/2000A.D. */
+	short int _local_rok = -1; /* inicializacia dorobena 01/03/2000A.D. */
 
 	/* lokalna premenna, co obsahuje string vypisany na obsazovku */
 	char _local_string[MAX_STR];
@@ -4508,8 +4510,8 @@ LABEL_s_modlitbou_DEALLOCATE:
  * potom spusti _export_rozbor_dna();
  *
  */
-void rozbor_dna(int den, int mesiac, int rok){
-	int ret;
+void rozbor_dna(short int den, short int mesiac, short int rok){
+	short int ret;
 	Log("-- rozbor_dna(int, int, int): begin (%d.%d %d)\n", den, mesiac, rok);
 	_struct_den_mesiac datum;
 	datum.den = den;
@@ -4535,7 +4537,7 @@ void rozbor_dna(int den, int mesiac, int rok){
  * potom pre vsetky dni spusti _rozbor_dna();
  *
  */
-void rozbor_mesiaca(int mesiac, int rok){
+void rozbor_mesiaca(short int mesiac, short int rok){
 	Log("-- _main_rozbor_mesiaca(int, int): begin (%d %d)\n", mesiac, rok);
 	_struct_den_mesiac datum;
 	datum.mesiac = mesiac;
@@ -4572,12 +4574,12 @@ void rozbor_mesiaca(int mesiac, int rok){
  * atÔ. a to kvÙli tomu, aby sa to eventu·lne dalo pouûiù aj pre in˝ deÚ ako "dnes".
  *
  */
-void _main_formular(int den, int mesiac, int rok, int denvt){
+void _main_formular(short int den, short int mesiac, short int rok, short int denvt){
 
 	/* 2006-02-02: premennÈ z _main_dnes musÌme naplniù podæa vstupn˝ch hodnÙt */
 
 	struct tm dnes;
-	int month, day;
+	short int month, day;
 
 	dnes.tm_mday = den;
 	dnes.tm_mon  = mesiac;
@@ -4811,8 +4813,8 @@ void _main_formular(int den, int mesiac, int rok, int denvt){
  * popis: vr·ti ËÌslo jazyka 
  *			 inak vrati UNKNOWN_DEN
  */
-int atojazyk(char *jazyk){
-	int i = 0;
+short int atojazyk(char *jazyk){
+	short int i = 0;
 	do{
 		if(equalsi(jazyk, skratka_jazyka[i]) || equalsi(jazyk, nazov_jazyka[i])){
 			return i;
@@ -4951,12 +4953,12 @@ int atojazyk(char *jazyk){
  */
 #define ExportUDAJE	result = FAILURE; if(!heading_written){_export_heading("Rozbor dÚa"); heading_written = 1;} Log("error: Nevhodne udaje\n"); Export("NevhodnÈ ˙daje: "); Export
 void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *poradie_svaty){
-	int heading_written = 0;
+	short int heading_written = 0;
 	char pom[MAX_STR];
 	Log("-- _main_rozbor_dna(char *, char *, char *, char *, char *): begin (%s, %s, %s, %s, %s)\n",
 		den, mesiac, rok, modlitba, poradie_svaty);
-	int d, m, r, p, s, i;
-	int pm, pr; /* pomocny mesiac, pomocny rok */
+	short int d, m, r, p, s, i;
+	short int pm, pr; /* pomocny mesiac, pomocny rok */
 
 	char pom2[MAX_STR]; /* 2006-08-01: pridanÈ kvÙli transferu ˙dajov o jazyku */
 	mystrcpy(pom, STR_EMPTY, MAX_STR); /* 2006-08-01: pridan· inicializ·cia */
@@ -4991,7 +4993,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 	/* option a (append), pridana 2003-07-08 - nastavi sa v getArgv(); */
 
 	/* kontrola udajov */
-	int result = SUCCESS;
+	short int result = SUCCESS;
 	/* den */
 	if(equals(den, STR_EMPTY)){
 		ExportUDAJE("ch˝ba ˙daj o dni.<br>\n");
@@ -5260,7 +5262,7 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 	datum.mesiac = dnes.tm_mon;
 	analyzuj_rok(dnes.tm_year); /* vysledok da do _global_r */
 
-	int s, p, i;
+	short int s, p, i;
 
 	s = atoi(poradie_svaty); /* ak je viac svatych, ktory z nich (1--3) */
 	Log("sv == `%s' (%d)\n", poradie_svaty, s);
@@ -5305,7 +5307,7 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 /*---------------------------------------------------------------------*/
 /* _main_zaltar() */
 void _main_zaltar(char *den, char *tyzden, char *modlitba){
-	int d, t, p, i;
+	short int d, t, p, i;
 	d = atodenvt(den);
 	t = atoi(tyzden);
 	if((d < 0) || (d > 6) || (t < 1) || (t > 4)){
@@ -5399,8 +5401,8 @@ void _main_sviatok(char *sviatok){
  */
 void _main_analyza_roku(char *rok){
 	_struct_den_mesiac datum;
-	int i;
-	int year;
+	short int i;
+	short int year;
 	char pom[MAX_STR];
 
 	char pom2[MAX_STR]; /* 2006-08-01: pridanÈ kvÙli transferu ˙dajov o jazyku */
@@ -5631,8 +5633,8 @@ void _main_analyza_roku(char *rok){
  */
 void _main_tabulka(char *rok_from, char *rok_to, char *tab_linky){
 	_struct_den_mesiac datum;
-	int i;
-	int rfrom, rto, year, linky;
+	short int i;
+	short int rfrom, rto, year, linky;
 
 	Log("-- _main_tabulka(): zaciatok\n");
 
@@ -5763,7 +5765,7 @@ void _main_tabulka(char *rok_from, char *rok_to, char *tab_linky){
 }/* _main_tabulka() */
 
 void dumpFile(char *fname, FILE *expt){
-	int c;
+	short int c;
 	FILE *input_file = fopen(fname, "rb");
 	if(input_file != NULL){
 		while((c = fgetc(input_file)) != EOF)
@@ -5785,10 +5787,10 @@ void _main_batch_mode(
 	char *den_to, char *mesiac_to, char *rok_to, 
 	char *nieco, char *tab_linky){
 
-	int heading_written = 0; /* je tu kvoli ExportUDAJE definovane pred _main_rozbor_dna */
+	short int heading_written = 0; /* je tu kvoli ExportUDAJE definovane pred _main_rozbor_dna */
 	Log("-- _main_batch_mode(char * -- 7x): begin (%s, %s, %s, %s, %s, %s, %s, %s)\n",
 		den_from, mesiac_from, rok_from, den_to, mesiac_to, rok_to, nieco, tab_linky);
-	int d_from, m_from, r_from, d_to, m_to, r_to;
+	short int d_from, m_from, r_from, d_to, m_to, r_to;
 	long jd_from, jd_to;
 
 	/* rozparsovanie parametrov den, mesiac, rok */
@@ -5836,7 +5838,7 @@ void _main_batch_mode(
 	Log("opt2 == `%s' (%d)\n", pom_MODL_OPT2, _global_opt2);
 
 	/* option 3 */
-	int i = atoi(pom_MODL_OPT3);
+	short int i = atoi(pom_MODL_OPT3);
 	/* povodne pre debuggovanie v DOSe, potom sa ukazalo, ze je to uzitocne
 	 * aj pod linuxom (v ostrej prevadzke); 18/02/2000A.D.
 	 * predpokladam, ze tento parameter moze byt
@@ -5877,7 +5879,7 @@ void _main_batch_mode(
 	/* option a (append), pridana 2003-07-08 - nastavi sa v getArgv(); */
 
 	/* kontrola udajov */
-	int result = SUCCESS;
+	short int result = SUCCESS;
 
 	/* ExportUDAJE definovane pred _main_rozbor_dna */
 
@@ -6029,7 +6031,7 @@ void _main_batch_mode(
 						 * cize analyzujem rok a pre vsetky dni - tentokrat pre cele roky, 
 						 * od 1.1. do 31.12. - robim _rozbor_dna a _export_rozbor_dna_batch
 						 */
-						for(int y = (r_from + 1); y < r_to; y++){
+						for(short int y = (r_from + 1); y < r_to; y++){
 							Log("rok %d...\n", y);
 							analyzuj_rok(y);
 							for(i = poradie(1, MES_JAN + 1, y); i <= poradie(31, MES_DEC + 1, y); i++){
@@ -6104,7 +6106,7 @@ void _main_batch_mode(
 
 extern char **environ;
 void write(void){
-	int i = 0;
+	short int i = 0;
 	while (environ[i]){
 //		if(strstr(environ[i], "WWW_") != NULL)
 			printf("<p>%d: %s<br><hr>\n", i, environ[i]);
@@ -6120,7 +6122,7 @@ void write(void){
  *
  *         return values #define'd in mydefs.h
  */
-int getQueryTypeFrom_QS(char *qs){
+short int getQueryTypeFrom_QS(char *qs){
 	Log("getQueryTypeFrom_QS() -- begin\n");
 	Log("  qs == %s\n", qs);
 	if(strstr(qs, STR_PRM_DATUM) != NULL){
@@ -6175,9 +6177,9 @@ int getQueryTypeFrom_QS(char *qs){
 }
 
 /*---------------------------------------------------------------------*/
-int getQueryTypeFrom_WWW(void){
+short int getQueryTypeFrom_WWW(void){
 	char *ptr;
-	int ret;
+	short int ret;
 
 	Log("getQueryTypeFrom_WWW() -- begin\n");
 	ptr = getenv(ADD_WWW_PREFIX_(STR_QUERY_TYPE)); /* zistim, ci je to z formulara */
@@ -6246,17 +6248,17 @@ int getQueryTypeFrom_WWW(void){
  *         on error,   returns FAILURE
  * popritom: nastavi do query_type to, co by malo byt po switchi -q
  */
-int getArgv(int argc, char **argv){
-	int c;
+short int getArgv(int argc, char **argv){
+	short int c;
 	
 	optind = 0; /* pokial tu toto nebolo, 
 				 * tak getopt sa neinicializovala pri dalsich volaniach
 				 * 10/04/2000A.D.
 				 */
 
-	/* int digit_optind = 0; */
+	/* short int digit_optind = 0; */
 	char *option_string;
-	/* int this_option_optind; */
+	/* short int this_option_optind; */
 
 	Log("allocating memory for option_string...\n");
 	/* allocate memory for string */
@@ -6611,7 +6613,7 @@ int getArgv(int argc, char **argv){
  * Ale hlavne ze to chodi :))
  *
  */
-int getForm(void){
+short int getForm(void){
 	char *ptr;
 
 	Log("getForm() -- begin\n");
@@ -7017,7 +7019,7 @@ int getForm(void){
  *        v query stringu.
  *
  */
-int parseQueryString(void){
+short int parseQueryString(void){
 /* totiz spustenie skriptu
  *
  * /cgi-bin/script_name?QUERY_TYPE=PRM_DATUM&DEN=7&MESIAC=5&ROK=1976
@@ -7031,7 +7033,7 @@ int parseQueryString(void){
  *     WWW_QUERY_TYPE=PRM_DATUM, WWW_DATUM, WWW_MESIAC, WWW_ROK)
  */
 
-	int i, pocet, ok;
+	short int i, pocet, ok;
 
 	Log("parseQueryString() -- begin\n");
 	if(query_string != NULL)
@@ -7807,8 +7809,8 @@ int main(int argc, char **argv){
 	#error Unsupported operating system (not defined in mysystem.h)
 #endif
 
-	int ret; /* navratova hodnota */
-	int	len; /* dÂûka; pridanÈ 2006-07-17 */
+	short int ret; /* navratova hodnota */
+	short int len; /* dÂûka; pridanÈ 2006-07-17 */
 
 	initLog(FILE_LOG);
 
@@ -8122,7 +8124,7 @@ _main_SIMULACIA_QS:
 			/* 2006-07-17: prv· kontrola, Ëi include_dir konËÌ na backslash resp. slash */
 			len = strlen(include_dir) - 1;
 			_main_LOG_to_Export("prv· kontrola include adres·ra (Ëi konËÌ oddeæovaËom `%c' [dÂûka %d])...\n", PATH_SEPARATOR, len);
-			if(include_dir[len] != (int)PATH_SEPARATOR){
+			if(include_dir[len] != (short int)PATH_SEPARATOR){
 				include_dir[len + 1] = PATH_SEPARATOR;
 				_main_LOG_to_Export("\tupravenÈ (pridanÈ na koniec reùazca): %s\n", include_dir);
 			}
@@ -8143,7 +8145,7 @@ _main_SIMULACIA_QS:
 			/* 2006-07-17: druh· kontrola, Ëi include_dir konËÌ na backslash resp. slash */
 			len = strlen(include_dir) - 1;
 			_main_LOG_to_Export("druh· kontrola include adres·ra (Ëi konËÌ oddeæovaËom `%c' [dÂûka %d])...\n", PATH_SEPARATOR, len);
-			if(include_dir[len] != (int)PATH_SEPARATOR){
+			if(include_dir[len] != (short int)PATH_SEPARATOR){
 				include_dir[len + 1] = PATH_SEPARATOR;
 				_main_LOG_to_Export("\tupravenÈ (pridanÈ na koniec reùazca): %s\n", include_dir);
 			}

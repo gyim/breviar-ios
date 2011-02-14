@@ -13,6 +13,7 @@
 /*   2003-08-07a.D. | pridane _global_opt5                     */
 /*   2003-08-13a.D. | pridane _type a _global_modl pre posv.cit*/
 /*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám          */
+/*   2006-08-18a.D. | zmena int na short int (staèí 32tis.)    */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -27,7 +28,7 @@
 /* globalne premenne -- deklarovane v liturgia.h, definovane tu */
 /* 18/02/2000A.D. */
 
-extern int query_type; /* premenna obsahujuca PRM_..., deklarovana v mydefs.h */
+extern short int query_type; /* premenna obsahujuca PRM_..., deklarovana v mydefs.h */
 
 /* globalna premenna, do ktorej sa ukladaju info o analyzovanom dni
  * pouziva ju void nove_rozbor_dna() funkcia */
@@ -98,7 +99,7 @@ extern _type_kompletorium *_global_modl_kompletorium_ptr;
 #define _global_modl_kompletorium (*_global_modl_kompletorium_ptr)
 
 /* globalna premenna, ktora obsahuje MODL_... */
-extern int _global_modlitba;
+extern short int _global_modlitba;
 
 /* globalna premenna, do ktorej ukladaju funkcie vytvor_query_string_...
  * linku tvaru PATH_CGI(SCRIPT_NAME) ++ "?param1=val&param2=val&..." */
@@ -128,14 +129,14 @@ extern _struct_lrok *_global_r_ptr;
  * -- v podstate neuklada do nej, ale v _rozbor_dna() sa do nej priradi
  * vysledok (navratova hodnota) z sviatky_svatych()
  */
-extern int _global_pocet_svatych;
+extern short int _global_pocet_svatych;
 
 /* globalne premenne, obsahujuce pom_MODL_OPT... */
-extern int _global_opt1/* = NIE */;
-extern int _global_opt2/* = MODL_ZALMY_ZO_DNA; 2006-01-25: upravené, bolo tu MODL_ZALMY_ZO_SV */;
-extern int _global_opt3;
-extern int _global_opt4;
-extern int _global_opt5; /* pridane 2003-08-07 */
+extern short int _global_opt1/* = NIE */;
+extern short int _global_opt2/* = MODL_ZALMY_ZO_DNA; 2006-01-25: upravené, bolo tu MODL_ZALMY_ZO_SV */;
+extern short int _global_opt3;
+extern short int _global_opt4;
+extern short int _global_opt5; /* pridane 2003-08-07 */
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
 extern char *_global_string;
@@ -148,7 +149,7 @@ extern char *_global_buf2; /* 2006-08-01: túto premennú tiež alokujeme */
 /* ------------------------------------------------------------------- */
 
 /* 2006-07-11: Pridané kvôli jazykovým mutáciám (breviar.cpp) */
-extern int _global_language;
+extern short int _global_language;
 #ifndef _global_jazyk
 #define	_global_jazyk	_global_language
 #endif

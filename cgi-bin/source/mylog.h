@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* mylog.h                                                     */
-/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2006 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | logovanie                                     */
 /* document history                                            */
@@ -20,15 +20,15 @@
 
 #define EmptyLog NoLog
 #define emptyLog NoLog
-int NoLog(char *fmt, ...); /* empty log - nerobi nic, ale ma vstup (...) */
+short int NoLog(char *fmt, ...); /* empty log - nerobi nic, ale ma vstup (...) */
 
-int initLog(char *fname);
+short int initLog(char *fname);
 void bothLogs(void); /* prepne na oboje logovanie */
 void fileLog(void); /* prepne na logovanie do fajlu */
-int isbothLogs(void); /* vrati 1, ak su oba logy, inak vrati 0 */
-int closeLog(void);
+short int isbothLogs(void); /* vrati 1, ak su oba logy, inak vrati 0 */
+short int closeLog(void);
 /* Log() premenovana na __Log() -- 24/02/2000A.D. */
-int __Log(char *fmt, ...);
+short int __Log(char *fmt, ...);
 void Logint(int c);
 
 #endif /*__MYLOG_H_*/

@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* mystring.h                                                  */
-/* (c)1999-2005 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2006 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description |                                               */
 /* document history                                            */
@@ -24,8 +24,8 @@
  * 2. kopiruje nanajvys count - 1 znakov z src do dest (pomocou strncpy)
  * 3. v kazdom pripade prida na koniec v dest '\0' (terminating null)
  */
-char *mystrcpy(char *dest, char *src, int count);
-char *mystrcpy(char *dest, const char *src, int count);
+char *mystrcpy(char *dest, char *src, short int count);
+char *mystrcpy(char *dest, const char *src, short int count);
 
 #endif /* __MYSTRING_H */
 

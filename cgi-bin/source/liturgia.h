@@ -32,6 +32,7 @@
 /*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám          */
 /*   2006-08-01a.D. | zmenené definície konštánt (jaz.mutácie) */
 /*   2006-08-07a.D. | pridané sv. mužov/žien, èo žili v manž.  */
+/*   2006-08-18a.D. | zmena int na short int (staèí 32tis.)    */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -142,8 +143,8 @@ typedef struct tmodlitba4 _type_invitatorium;
 
 
 struct den_mesiac{ /* takto povodne vyzerala struct dm */
-	int den;        /* cislo dna mesiaca (1--31) */
-	int mesiac;     /* cislo mesiaca (1--12) */
+	short int den;        /* cislo dna mesiaca (1--31) */
+	short int mesiac;     /* cislo mesiaca (1--12) */
 };
 typedef struct den_mesiac _struct_den_mesiac;
 
@@ -410,9 +411,9 @@ extern const char *nazov_spolc_ANCHOR[MODL_SPOL_CAST_NEBRAT + 1];
 */ // je to v poli... v hodin.h
 
 struct sc{
-	int a1;
-	int a2;
-	int a3;
+	short int a1;
+	short int a2;
+	short int a3;
 };
 typedef struct sc _struct_sc;
 
@@ -421,23 +422,23 @@ typedef struct sc _struct_sc;
  * štandardne 0 = bez špeciálnej lokalizácie.
  */
 struct dm{
-	int den;        /* cislo dna mesiaca (1--31) */
-	int mesiac;     /* cislo mesiaca (1--12) */
-	int rok;        /* rok */
-	int denvt;      /* cislo dna v tyzdni (0--6) DEN_... */
-	int denvr;      /* cislo dna v roku (1--365/366) */ /* deò v roku */
+	short int den;        /* cislo dna mesiaca (1--31) */
+	short int mesiac;     /* cislo mesiaca (1--12) */
+	short int rok;        /* rok */
+	short int denvt;      /* cislo dna v tyzdni (0--6) DEN_... */
+	short int denvr;      /* cislo dna v roku (1--365/366) */ /* deò v roku */
 	/* toto boli "obcianske" zalezitosti */
 	char litrok;    /* liturgicky rok ('A'--'C') */
-	int tyzden;     /* tyzden v danom liturgickom obdobi */
-	int tyzzal;     /* tyzden v zaltari (vacsinou ((tyzden - 1) % 4) + 1) */
-	int litobd;     /* liturgicke obdobie, OBD_... */
-	int typslav;    /* typ slavenia (1--5): SLAV_... */
-	int typslav_lokal;    /* lokálny typ slavenia : LOKAL_SLAV_... */
-	int smer;       /* poradove cislo z c.59 Vseobecnych smernic
+	short int tyzden;     /* tyzden v danom liturgickom obdobi */
+	short int tyzzal;     /* tyzden v zaltari (vacsinou ((tyzden - 1) % 4) + 1) */
+	short int litobd;     /* liturgicke obdobie, OBD_... */
+	short int typslav;    /* typ slavenia (1--5): SLAV_... */
+	short int typslav_lokal;    /* lokálny typ slavenia : LOKAL_SLAV_... */
+	short int smer;       /* poradove cislo z c.59 Vseobecnych smernic
 						  * o liturgii hodin a kalendari */
-	int prik;       /* ci je to prikazany sviatok alebo nie:
+	short int prik;		 /* ci je to prikazany sviatok alebo nie:
 						  * PRIKAZANY_SVIATOK resp. NEPRIKAZANY_SVIATOK */
-	int spolcast;   /* spolocna cast -- pridane 09/02/2000A.D.,
+	int spolcast;		 /* spolocna cast -- pridane 09/02/2000A.D.,
 						  * zakodovane data pre svatych o tom, z akej spolocnej
 						  * casti sa ma modlit;
 						  * obsahuje max. 3 spolocne casti vo formate
@@ -593,7 +594,7 @@ extern const char *nazov_slavenia_lokal[];
 #define PRIKAZANY_SVIATOK 1
 #define NEPRIKAZANY_SVIATOK 0
 
-/* div, mod: delenie pre int */
+/* div, mod: delenie pre short int */
 #define DIV	/
 #define MOD	%
 
@@ -609,9 +610,9 @@ extern const char *nazov_slavenia_lokal[];
 #define  tyzden_zaltara(t)  ((((t) + 3) % 4) + 1)
 extern const char *rimskymi_tyzden_zaltara[];
 
-extern const int prvy_den[12];
+extern const short int prvy_den[12];
 
-extern int pocet_dni[12];
+extern short int pocet_dni[12];
 
 extern const char char_nedelne_pismeno[7];
 
@@ -709,15 +710,15 @@ extern const char *nazov_mes[];
 
 #define NIJAKE_NEDELNE_PISMENO 'x'
 struct lrok{
-	int prestupny;     /* ci je rok prestupny (YES, NO) */
+	short int prestupny;     /* ci je rok prestupny (YES, NO) */
 	char p1, p2;       /* nedelne pismeno/pismena;
 							  * ak ma rok iba jedno,
 							  * druhe p2 == NIJAKE_NEDELNE_PISMENO */
 	char litrok;       /* pismeno liturgickeho roka,
 							  * ktory zacina prvou adventnou nedelou v roku */
-	int tyzden_ocr_po_vn; /* cislo tyzdna obdobia "cez rok", ktory nasleduje po nedeli zoslania
+	short int tyzden_ocr_po_vn; /* cislo tyzdna obdobia "cez rok", ktory nasleduje po nedeli zoslania
 							  * ducha svateho, teda po velkonocnom obdobi */
-	int tyzden_ocr_pred_po; /* cislo tyzdna obdobia cez rok, v ktorom zacina post; 15/03/2000A.D. */
+	short int tyzden_ocr_pred_po; /* cislo tyzdna obdobia cez rok, v ktorom zacina post; 15/03/2000A.D. */
 	struct dm _den[POCET_ALIASOV];
 };
 typedef struct lrok _struct_lrok;
@@ -811,7 +812,7 @@ extern _type_kompletorium *_global_modl_kompletorium_ptr;
 #define _global_modl_kompletorium (*_global_modl_kompletorium_ptr)
 
 /* globalna premenna, ktora obsahuje MODL_... */
-extern int _global_modlitba;
+extern short int _global_modlitba;
 
 /* globalna premenna, do ktorej ukladaju funkcie vytvor_query_string_...
  * linku tvaru PATH_CGI(SCRIPT_NAME) ++ "?param1=val&param2=val&..." */
@@ -841,13 +842,13 @@ extern _struct_lrok *_global_r_ptr;
  * -- v podstate neuklada do nej, ale v _rozbor_dna() sa do nej priradi
  * vysledok (navratova hodnota) z sviatky_svatych()
  */
-extern int _global_pocet_svatych;
+extern short int _global_pocet_svatych;
 
 /* globalne premenne, obsahujuce pom_MODL_OPT... */
-extern int _global_opt1/* = NIE*/;
-extern int _global_opt2/* = MODL_ZALMY_ZO_DNA*/;
-extern int _global_opt3;
-extern int _global_opt4;
+extern short int _global_opt1/* = NIE*/;
+extern short int _global_opt2/* = MODL_ZALMY_ZO_DNA*/;
+extern short int _global_opt3;
+extern short int _global_opt4;
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
 extern char *_global_string;
@@ -859,10 +860,10 @@ extern char *_global_buf; /* 2006-08-01: túto premennú tiež alokujeme */
 extern char *_global_buf2; /* 2006-08-01: túto premennú tiež alokujeme */
 
 /* pridane 13/04/2000A.D.; definovane v breviar.cpp */
-extern int _global_linky;
+extern short int _global_linky;
 
 /* 2006-07-11: Pridané kvôli jazykovým mutáciám (breviar.cpp) */
-extern int _global_language;
+extern short int _global_language;
 #ifndef _global_jazyk
 #define	_global_jazyk	_global_language
 #endif
@@ -876,70 +877,70 @@ extern const char *postfix_jazyka[];
 /* ------------------------------------------------------------------- */
 /* tu nasleduju funkcie(), ibaze by som inkludoval "liturgia.cpp" */
 
-int _allocate_global_var(void);
-int _deallocate_global_var(void);
+short int _allocate_global_var(void);
+short int _deallocate_global_var(void);
 
-int equals(char *, char *);
-int equals(const char *, const char *);
-int equals(const char *, char *);
-int equals(char *, const char *);
-int equalsi(char *, char *);
-int equalsi(const char *, const char *);
-int equalsi(const char *, char *);
-int equalsi(char *, const char *);
+short int equals(char *, char *);
+short int equals(const char *, const char *);
+short int equals(const char *, char *);
+short int equals(char *, const char *);
+short int equalsi(char *, char *);
+short int equalsi(const char *, const char *);
+short int equalsi(const char *, char *);
+short int equalsi(char *, const char *);
 
-int cislo_mesiaca(char *mesiac);
+short int cislo_mesiaca(char *mesiac);
 char *caps_BIG(const char *input);
 
 /* podla toho, ako sa funkcia vola, urcim case */
 #define vytvor_global_link(den, mesiac, rok, typ)	_vytvor_global_link(den, mesiac, rok, CASE_case, typ)
 #define Vytvor_global_link(den, mesiac, rok, typ)	_vytvor_global_link(den, mesiac, rok, CASE_Case, typ)
 #define VYTVOR_global_link(den, mesiac, rok, typ)	_vytvor_global_link(den, mesiac, rok, CASE_CASE, typ)
-void _vytvor_global_link(int den, int mesiac, int rok, int _case, int typ);
+void _vytvor_global_link(short int den, short int mesiac, short int rok, short int _case, short int typ);
 
-int prestupny(int);
-int pocet_dni_v_roku(int);
-int poradie(int den, int mesiac, int rok);
-int poradie(_struct_den_mesiac den_a_mesiac, int rok);
-long juliansky_datum(int por, int rok);
-long juliansky_datum(int den, int mesiac, int rok);
-_struct_den_mesiac velkonocna_nedela(int R);
-int _velkonocna_nedela(int rok);
-int den_v_tyzdni(int por, int rok);
-int den_v_tyzdni(int den, int mesiac, int rok);
-int den_v_tyzdni(_struct_den_mesiac den_a_mesiac, int rok);
-unsigned char _nedelne_pismeno(int rok);
-char nedelne_pismeno(int rok);
-unsigned char _nedelne_pismeno(int por, int rok);
-char nedelne_pismeno(int por, int rok);
-char nedelne_pismeno(int den, int mesiac, int rok);
-unsigned char _nedelne_pismeno(int den, int mesiac, int rok);
-unsigned char _nedelne_pismeno(_struct_den_mesiac den_a_mesiac, int rok);
-char nedelne_pismeno(_struct_den_mesiac den_a_mesiac, int rok);
-_struct_den_mesiac por_den_mesiac(int poradie, int rok);
-int _svatej_rodiny(int rok);
-int _krst_krista_pana(int rok);
-int _popolcova_streda(int rok);
-int _nanebovstupenie(int rok);
-int _zoslanie_ducha(int rok);
-int _prva_adventna_nedela(int rok);
-_struct_den_mesiac prva_adventna_nedela(int rok);
-int nedelny_cyklus(int por, int rok);
-int nedelny_cyklus(int den, int mesiac, int rok);
-int nedelny_cyklus(_struct_den_mesiac den_a_mesiac, int rok);
-_struct_dm por_den_mesiac_dm(int poradie, int rok);
-int tyzden_cez_rok_po_vn(int rok);
-int cislo_nedele_cez_rok_po_vn(int rok);
+short int prestupny(short int);
+short int pocet_dni_v_roku(short int);
+short int poradie(short int den, short int mesiac, short int rok);
+short int poradie(_struct_den_mesiac den_a_mesiac, short int rok);
+long juliansky_datum(short int por, short int rok);
+long juliansky_datum(short int den, short int mesiac, short int rok);
+_struct_den_mesiac velkonocna_nedela(short int R);
+short int _velkonocna_nedela(short int rok);
+short int den_v_tyzdni(short int por, short int rok);
+short int den_v_tyzdni(short int den, short int mesiac, short int rok);
+short int den_v_tyzdni(_struct_den_mesiac den_a_mesiac, short int rok);
+unsigned char _nedelne_pismeno(short int rok);
+char nedelne_pismeno(short int rok);
+unsigned char _nedelne_pismeno(short int por, short int rok);
+char nedelne_pismeno(short int por, short int rok);
+char nedelne_pismeno(short int den, short int mesiac, short int rok);
+unsigned char _nedelne_pismeno(short int den, short int mesiac, short int rok);
+unsigned char _nedelne_pismeno(_struct_den_mesiac den_a_mesiac, short int rok);
+char nedelne_pismeno(_struct_den_mesiac den_a_mesiac, short int rok);
+_struct_den_mesiac por_den_mesiac(short int poradie, short int rok);
+short int _svatej_rodiny(short int rok);
+short int _krst_krista_pana(short int rok);
+short int _popolcova_streda(short int rok);
+short int _nanebovstupenie(short int rok);
+short int _zoslanie_ducha(short int rok);
+short int _prva_adventna_nedela(short int rok);
+_struct_den_mesiac prva_adventna_nedela(short int rok);
+short int nedelny_cyklus(short int por, short int rok);
+short int nedelny_cyklus(short int den, short int mesiac, short int rok);
+short int nedelny_cyklus(_struct_den_mesiac den_a_mesiac, short int rok);
+_struct_dm por_den_mesiac_dm(short int poradie, short int rok);
+short int tyzden_cez_rok_po_vn(short int rok);
+short int cislo_nedele_cez_rok_po_vn(short int rok);
 void init_global_pm_sobota(void);
-void _dm_popolcova_streda(int rok, int _vn);
-void _dm_nanebovstupenie(int rok, int _vn);
-void _dm_zoslanie_ducha(int rok, int _vn);
-void _dm_prva_adventna_nedela(int rok, int p2);
-void _dm_svatej_rodiny(int rok);
-void _dm_krst_krista_pana(int rok);
-void _dm_velkonocna_nedela(int rok, int _vn);
+void _dm_popolcova_streda(short int rok, short int _vn);
+void _dm_nanebovstupenie(short int rok, short int _vn);
+void _dm_zoslanie_ducha(short int rok, short int _vn);
+void _dm_prva_adventna_nedela(short int rok, short int p2);
+void _dm_svatej_rodiny(short int rok);
+void _dm_krst_krista_pana(short int rok);
+void _dm_velkonocna_nedela(short int rok, short int _vn);
 
-void analyzuj_rok(int year);
+void analyzuj_rok(short int year);
 
 /* pridana 2003-08-07 */
 /* zapoznamkovana 2003-08-11 */
@@ -1012,9 +1013,9 @@ void Log(struct tmodlitba1);
 #define Log_struktura_tm2 Log("  <tm2>"); Log
 void Log(struct tmodlitba2);
 
-int _encode_spol_cast(int, int, int);
-int _encode_spol_cast(int, int);
-int _encode_spol_cast(int);
+int _encode_spol_cast(short int, short int, short int);
+int _encode_spol_cast(short int, short int);
+int _encode_spol_cast(short int);
 _struct_sc _decode_spol_cast(int);
 
 extern const char *text_JAN_KRST[];
