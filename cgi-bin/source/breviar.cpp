@@ -80,6 +80,7 @@
 /*   2006-08-19a.D. | doplnené liturgické farby                            */
 /*   2006-08-22a.D. | doplnená ružová liturgická farba                     */
 /*   2006-09-06a.D. | upratanie vo funkcii init_global_string (týž.ž.preNE)*/
+/*   2007-01-02a.D. | prvý zásah do kódu v r. 2007: DEBUG_2006_12_07       */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -4051,13 +4052,17 @@ void _export_rozbor_dna_batch(short int typ){
 		 * [t.j. .smer]. */
 
 		/* 2006-12-07: slávnosti svätých (k fixným dátumom: napr. 8.12., 29.ž., 5.ý., 15.8.), ktoré nepripadnú na nede¾u, neboli správne zobrazované */
-		Export("<p>haha</p>\n");
+#undef DEBUG_2006_12_07
 		if(_global_den.smer > _global_svaty1.smer){
+#ifdef DEBUG_2006_12_07
 			Export("<p>pre %d sa použil 1...</p>\n", _global_den.den);
+#endif
 			BATCH_COMMAND(1);
 		}
 		else{
+#ifdef DEBUG_2006_12_07
 			Export("<p>pre %d sa použil 0...</p>\n", _global_den.den);
+#endif
 			BATCH_COMMAND(0);
 		}
 	}/* if((_global_den.denvt == DEN_NEDELA) || (_global_den.prik == PRIKAZANY_SVIATOK) || (_global_den.smer < 5)) */
