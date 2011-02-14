@@ -375,7 +375,24 @@ extern const char *text_NOV_24[];
 extern const char *text_NOV_25[];
 extern const char *text_NOV_30[];
 
+extern const char *text_DEC_01[];
+extern const char *text_DEC_02[];
+extern const char *text_DEC_03[];
+extern const char *text_DEC_04[];
+extern const char *text_DEC_06[];
+extern const char *text_DEC_07[];
 extern const char *text_DEC_08[];
+extern const char *text_DEC_11[];
+extern const char *text_DEC_13[];
+extern const char *text_DEC_14[];
+extern const char *text_DEC_21[];
+extern const char *text_DEC_22[];
+extern const char *text_DEC_23[];
+extern const char *text_DEC_26[];
+extern const char *text_DEC_27[];
+extern const char *text_DEC_28[];
+extern const char *text_DEC_29[];
+extern const char *text_DEC_31[];
 
 #endif /* __DBZALTAR_H_ */
 

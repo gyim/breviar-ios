@@ -400,7 +400,7 @@ const char *nazov_slavenia_lokal[] =
 ,"na Moravì památka"
 ,"Druhá nedìle velikonoèní - Božího milosrdenství"
 ,"v pražské katedrále slavnost"
-,"v èeskobudìjovické diecézi památka"
+,"v èeskobudìjovické diecézi"
 ,"v olomoucké arcidiecézi svátek"
 ,"v Èechách svátek"
 ,"v plzeòské diecézi svátek hlavního patrona"
@@ -408,6 +408,7 @@ const char *nazov_slavenia_lokal[] =
 ,"v litomìøické diecézi"
 ,"v královéhradecké diecézi"
 ,"jen v posvìcených kostelích"
+,"v plzeòské diecézi"
 };
 
 const char *nazov_farby_jazyk[POCET_FARIEB + 1][POCET_JAZYKOV + 1] =
@@ -1218,11 +1219,6 @@ const char *text_SPOMIENKA_PM_V_SOBOTU[] =
  "Sobotní památka Panny Marie",
  "", ""};
 
-const char *text_DEC_08[] =
-{"Nepoškvrnené poèatie Panny Márie",
- "Panny Marie, poèaté bez poskvrny prvotního høíchu",
- "", ""};
-
 const char *text_JUN_01[] =
 {"Sv. Justína, muèeníka",
  "Sv. Justina, muèedníka",
@@ -1534,7 +1530,6 @@ const char *text_AUG_30[] =
  "(v Èechách, na Moravì a na Slezsku není)",
  "", ""};
 
-
 const char *text_SEP_03[] =
 {"Sv. Gregora Ve¾kého, pápeža a uèite¾a Cirkvi",
  "Sv. Øehoøe Velikého, papeže a uèitele církve",
@@ -1828,6 +1823,79 @@ const char *text_NOV_25[] =
 const char *text_NOV_30[] =
 {"Sv. Ondreja, apoštola",
  "Sv. Ondøeje, apoštola",
+ "", ""};
+
+const char *text_DEC_01[] =
+{"(na Slovensku nie je)",
+ "Sv. Edmunda Kampiána, knìze a muèedníka",
+ "", ""};
+const char *text_DEC_02[] =
+{"(na Slovensku nie je)",
+ "Výroèí posvìcení katedrály",
+ "", ""};
+const char *text_DEC_03[] =
+{"Sv. Františka Xaverského, kòaza",
+ "Sv. Františka Xaverského, knìze",
+ "", ""};
+const char *text_DEC_04[] =
+{"Sv. Jána Damascénskeho, kòaza a uèite¾a Cirkvi",
+ "Sv. Jana Damašského, knìze a uèitele církve",
+ "", ""};
+const char *text_DEC_06[] =
+{"Sv. Mikuláša, biskupa",
+ "Sv. Mikuláše, biskupa",
+ "", ""};
+const char *text_DEC_07[] =
+{"Sv. Ambróza, biskupa a uèite¾a Cirkvi",
+ "Sv. Ambrože, biskupa a uèitele církve",
+ "", ""};
+const char *text_DEC_08[] =
+{"Nepoškvrnené poèatie Panny Márie",
+ "Panny Marie, poèaté bez poskvrny prvotního høíchu",
+ "", ""};
+const char *text_DEC_11[] =
+{"Sv. Damaza I., pápeža",
+ "Sv. Damasa I., papeže",
+ "", ""};
+const char *text_DEC_13[] =
+{"Sv. Lucie, panny a muèenice",
+ "Sv. Lucie, panny a muèednice",
+ "", ""};
+const char *text_DEC_14[] =
+{"Sv. Jána z Kríža, kòaza a uèite¾a Cirkvi",
+ "Sv. Jana od Køíže, knìze a uèitele církve",
+ "", ""};
+const char *text_DEC_21[] =
+{"Sv. Petra Kanízia, kòaza a uèite¾a Cirkvi",
+ "Sv. Petra Kanisia, knìze a uèitele církve",
+ "", ""};
+const char *text_DEC_22[] =
+{"(na Slovensku nie je)",
+ "Výroèí posvìcení katedrály Sv. Mikuláše",
+ "", ""};
+const char *text_DEC_23[] =
+{"Sv. Jána Kentského, kòaza",
+ "Sv. Jana Kentského, knìze",
+ "", ""};
+const char *text_DEC_26[] =
+{"Sv. Štefana, prvého muèeníka",
+ "Sv. Štìpána, prvomuèedníka",
+ "", ""};
+const char *text_DEC_27[] =
+{"Sv. Jána, apoštola a evanjelistu",
+ "Sv. Jana, apoštola a evangelisty",
+ "", ""};
+const char *text_DEC_28[] =
+{"Svätých Neviniatok, muèeníkov",
+ "Svatých Mláïátek, muèedníkù",
+ "", ""};
+const char *text_DEC_29[] =
+{"Sv. Tomáša Becketa, biskupa a muèeníka",
+ "Sv. Tomáše Becketa, biskupa a muèedníka",
+ "", ""};
+const char *text_DEC_31[] =
+{"Sv. Silvestra I., pápeža",
+ "Sv. Silvestra I., papeže",
  "", ""};
 
 const char *text_ZELENY_STVRTOK[] =
