@@ -1130,8 +1130,8 @@ void interpretParameter(short int type, char *paramname){
 	mystrcpy(path, include_dir, MAX_STR);
 	/* 2004-03-17 // strcat(path, FILE_PATH); // prerobene 05/06/2000A.D. */
 
-	Log("interpretParameter(%s): Dumping by %s\n",
-		paramname, paramname);
+	Log("interpretParameter(%s): Dumping by %s\n", paramname, paramname);
+
 	if(equals(paramname, PARAM_ALELUJA_NIE_V_POSTE_BEGIN)){
 		if(!je_post){
 			Export("nie je postne obdobie-->");
@@ -1280,6 +1280,7 @@ void interpretParameter(short int type, char *paramname){
 			Log("  `zakoncenie' copied.\n");
 		}
 	}
+
 	/* 2006-10-17: Pridané */
 	else if(equals(paramname, PARAM_KOMPLETORIUM_DVA_ZALMY_BEGIN)){
 		if(_global_pocet_zalmov_kompletorium == 1){
@@ -1431,11 +1432,7 @@ void interpretParameter(short int type, char *paramname){
 	}/* PARAM_ANTIFONA1 */
 	else if(equals(paramname, PARAM_ANTIFONA2)){
 		switch(type){
-/*			case MODL_RANNE_CHVALY:
-				strcat(path, _global_modl_ranne_chvaly.antifona2.file);
-				includeFile(type, paramname, path, _global_modl_ranne_chvaly.antifona2.anchor);
-				break;
-*/
+			// ranné chvály nie
 			case MODL_CEZ_DEN_9:
 				strcat(path, _global_modl_cez_den_9.antifona2.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_9.antifona2.anchor);
@@ -1457,13 +1454,13 @@ void interpretParameter(short int type, char *paramname){
 				includeFile(type, paramname, path, _global_modl_posv_citanie.antifona2.anchor);
 				break;
 			case MODL_KOMPLETORIUM:
-				if(_global_pocet_zalmov_kompletorium == 2){
+				if(_global_modl_kompletorium.pocet_zalmov == 2){
 					strcat(path, _global_modl_kompletorium.antifona2.file);
 					includeFile(type, paramname, path, _global_modl_kompletorium.antifona2.anchor);
 				}
 				break;
 			default:
-				/* tieto modlitby nemaju antifonu2 */
+				// tieto modlitby nemaju antifonu2
 				break;
 		}/* switch */
 	}/* PARAM_ANTIFONA2 */
@@ -1541,11 +1538,7 @@ void interpretParameter(short int type, char *paramname){
 	}/* PARAM_ZALM1 */
 	else if(equals(paramname, PARAM_ZALM2)){
 		switch(type){
-/*			case MODL_RANNE_CHVALY:
-				strcat(path, _global_modl_ranne_chvaly.zalm2.file);
-				includeFile(type, paramname, path, _global_modl_ranne_chvaly.zalm2.anchor);
-				break;
-*/
+			// ranné chvály nie
 			case MODL_CEZ_DEN_9:
 				strcat(path, _global_modl_cez_den_9.zalm2.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_9.zalm2.anchor);
@@ -1567,13 +1560,13 @@ void interpretParameter(short int type, char *paramname){
 				includeFile(type, paramname, path, _global_modl_posv_citanie.zalm2.anchor);
 				break;
 			case MODL_KOMPLETORIUM:
-				if(_global_pocet_zalmov_kompletorium == 2){
+				if(_global_modl_kompletorium.pocet_zalmov == 2){
 					strcat(path, _global_modl_kompletorium.zalm2.file);
 					includeFile(type, paramname, path, _global_modl_kompletorium.zalm2.anchor);
 				}
 				break;
 			default:
-				/* tieto modlitby nemaju zalm2 */
+				// tieto modlitby nemaju zalm2
 				break;
 		}/* switch */
 	}/* PARAM_ZALM2 */
@@ -1595,17 +1588,13 @@ void interpretParameter(short int type, char *paramname){
 				strcat(path, _global_modl_cez_den_3.zalm3.file);
 				includeFile(type, paramname, path, _global_modl_cez_den_3.zalm3.anchor);
 				break;
-/*			case MODL_VESPERY:
-				strcat(path, _global_modl_vespery.zalm3.file);
-				includeFile(type, paramname, path, _global_modl_vespery.zalm3.anchor);
-				break;
-*/
+			// vešpery nie
 			case MODL_POSV_CITANIE:
 				strcat(path, _global_modl_posv_citanie.zalm3.file);
 				includeFile(type, paramname, path, _global_modl_posv_citanie.zalm3.anchor);
 				break;
 			default:
-				/* tieto modlitby nemaju zalm3 */
+				// tieto modlitby nemaju zalm3
 				break;
 		}/* switch */
 	}/* PARAM_ZALM3 */
@@ -1807,7 +1796,7 @@ void interpretParameter(short int type, char *paramname){
 				break;
 		}/* switch */
 	}/* PARAM_MODLITBA */
-
+	Log("interpretParameter(%s): Dumped by %s - OK.\n", paramname, paramname);
 }/* interpretParameter() */
 
 /*---------------------------------------------------------------------*/
@@ -1880,9 +1869,10 @@ void showPrayer(short int type){
 	mystrcpy(path, include_dir, MAX_STR);
 	/* 2004-03-17 // strcat(path, FILE_PATH); // prerobene 05/06/2000A.D. */
 
-	LOG_ciara;
 	Log("/* teraz nasleduje zobrazenie modlitby */\n");
 	Log("showPrayer(): begin\n");
+
+	Log("2006-10-18: _global_pocet_zalmov_kompletorium == %d\n", _global_pocet_zalmov_kompletorium);
 
 	/* rozparsovanie parametrov opt1...opt5 -- takmer kompletne
 	 * v _main_rozbor_dna, avsak chyba este nastavenie tretieho parametra
@@ -4484,7 +4474,7 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 		/* pridane 2003-10-07 kvoli debugovaniu, co prve vespery nediel ocr nemali prosby
 			Log("_local_modl_prve_vespery obsahuje:\n"); Log(_local_modl_prve_vespery);
 		*/
-		// Log("_local_modl_prve_kompletorium obsahuje:\n"); Log(_local_modl_prve_kompletorium);
+		Log("_local_modl_prve_kompletorium obsahuje:\n"); Log(_local_modl_prve_kompletorium);
 		mystrcpy(_local_string, _global_string, MAX_STR);
 	}/* kompletorium alebo vespery */
 
@@ -4719,19 +4709,29 @@ LABEL_NIE_INE_VESPERY: /* 08/03/2000A.D. */
 	}
 /*	Log("_global_den:\n");	Log(_global_den); */
 
+	/* 2006-10-18: pridané */
+	if((modlitba == MODL_KOMPLETORIUM) || (modlitba == MODL_PRVE_KOMPLETORIUM) || (modlitba == MODL_DRUHE_KOMPLETORIUM))
+		_global_pocet_zalmov_kompletorium = _global_modl_kompletorium.pocet_zalmov;
+	else
+		_global_pocet_zalmov_kompletorium = 1;
+
 	_export_heading_center(_global_string);
 
 	if(_global_modlitba == MODL_DETAILY){
-		Log("spustam showDetails(%d, %s, %d, %d) z funkcie rozbor_dna_s_modlitbou():\n",
-			den, nazov_mesiaca(mesiac - 1), rok, poradie_svaty);
+		Log("spustam showDetails(%d, %s, %d, %d) z funkcie rozbor_dna_s_modlitbou():\n", den, nazov_mesiaca(mesiac - 1), rok, poradie_svaty);
+		LOG_ciara;
 		showDetails(den, mesiac, rok, poradie_svaty);
+		LOG_ciara;
+		Log("...po návrate zo showDetails(%d, %s, %d, %d) vo funkcii rozbor_dna_s_modlitbou().\n", den, nazov_mesiaca(mesiac - 1), rok, poradie_svaty);
 	}/* _global_modlitba == MODL_DETAILY */
 	else{/* _global_modlitba != MODL_DETAILY */
-		Log("spustam showPrayer(%s)...\n",
-			nazov_Modlitby(_global_modlitba));
+		Log("spustam showPrayer(%s) z funkcie rozbor_dna_s_modlitbou()...\n", nazov_Modlitby(_global_modlitba));
 		/* predpokladam, ze aj _global_modlitba je prve/druhe vespery,
 		 * v _global_prve_vespery su spravne udaje (podobne kompletorium) */
+		LOG_ciara;
 		showPrayer(modlitba);
+		LOG_ciara;
+		Log("...po návrate zo showPrayer(%s) vo funkcii rozbor_dna_s_modlitbou().\n", nazov_Modlitby(_global_modlitba));
 	}/* _global_modlitba != MODL_DETAILY, teda pre konkretnu modlitbu */
 
 LABEL_s_modlitbou_DEALLOCATE:

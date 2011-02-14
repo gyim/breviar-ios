@@ -1312,6 +1312,7 @@ void Log(struct tmodlitba2 t){
 /* 2006-10-11 doplnené */
 void Log(struct tmodlitba3 t){
 	Log_struktura_tm3("struktura tmodlitba3:\n");
+	Log_struktura_tm3("   pocet_zalmov = %d\n", t.pocet_zalmov);
 	Log_struktura_tm3("   popis        file `%s', anchor `%s'\n", t.popis.file, t.popis.anchor);
 	Log_struktura_tm3("   hymnus       file `%s', anchor `%s'\n", t.hymnus.file, t.hymnus.anchor);
 	Log_struktura_tm3("   antifona1    file `%s', anchor `%s'\n", t.antifona1.file, t.antifona1.anchor);

@@ -999,6 +999,8 @@ void set_popis_dummy(void){
 	/* 2006-10-13: PridanÈ popisy pre invitatÛrium a kompletÛrium */
 	set_popis(MODL_INVITATORIUM, _file, _anchor);
 	set_popis(MODL_KOMPLETORIUM, _file, _anchor);
+	/* 2006-10-18: Pridan˝ popis pre prvÈ kompletÛrium */
+	set_popis(MODL_PRVE_KOMPLETORIUM, _file, _anchor);
 }
 
 void _set_zalm_cez_den_doplnkova_psalmodia(void){
@@ -1092,12 +1094,16 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 		zvazok = 0;
 	}
 
-	/* 2006-10-17: DoplnenÈ kvÙli rÙznemu poËtu ûalmov pre kompletÛrium */
-	if(den == DEN_STREDA){ /* toto by bolo potrebnÈ naplniù aj pre prvÈ kompletÛrium */
-		_global_pocet_zalmov_kompletorium = 2;
+	/* 2006-10-17: DoplnenÈ kvÙli rÙznemu poËtu ûalmov pre kompletÛrium; upravenÈ 2006-10-18 */
+	if(den == DEN_STREDA){
+		_global_modl_kompletorium.pocet_zalmov = 2;
+	}
+	else if(den == DEN_NEDELA){
+		_global_modl_prve_kompletorium.pocet_zalmov = 2;
+		_global_modl_kompletorium.pocet_zalmov = 1;
 	}
 	else{
-		_global_pocet_zalmov_kompletorium = 1;
+		_global_modl_kompletorium.pocet_zalmov = 1;
 	}
 
 	/* pridanÈ Ëasti pre kompletÛrium, 2006-10-13 */

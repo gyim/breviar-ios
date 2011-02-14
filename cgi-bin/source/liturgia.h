@@ -125,6 +125,7 @@ typedef struct tmodlitba2 _type_cez_den_na;
 typedef struct tmodlitba2 _type_cez_den_po;
 
 struct tmodlitba3{
+	short int pocet_zalmov            ; /* pridané 2006-10-18; niekedy sú až 2 žalmy */
 	_struct_anchor_and_file popis     ; /* pridané 2006-10-11; zrušené antifona2, zalm2 a modlitba */
 	_struct_anchor_and_file hymnus    ;
 	_struct_anchor_and_file antifona1 ;
@@ -1060,6 +1061,7 @@ void _init_dm(_struct_dm a);
 
 /* 2006-10-11 doplnené */
 #define _INIT_TMODLITBA3(a) {\
+	a.pocet_zalmov = 1;\
 	_INIT_ANCHOR_AND_FILE(a.popis); \
 	_INIT_ANCHOR_AND_FILE(a.hymnus); \
 	_INIT_ANCHOR_AND_FILE(a.antifona1); \
