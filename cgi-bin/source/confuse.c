@@ -26,7 +26,6 @@ teda nepouûÌvaù bool typy
 */
 #include "mysystem.h"
 #include "vstudio.h"
-#include "config.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -37,9 +36,9 @@ teda nepouûÌvaù bool typy
 # include <pwd.h>
 #endif
 #include <sys/types.h>
-#ifdef OS_Windows_Ruby
+#if defined(OS_Windows_Ruby)
 	#include "unistd.h"
-#elif OS_Windows
+#elif defined(OS_Windows)
 	#include "unistd.h"
 #else
 	#include <unistd.h>

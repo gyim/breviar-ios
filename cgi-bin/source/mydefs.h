@@ -33,7 +33,7 @@
 #define __MYDEFS_H_
 
 #include "mysystem.h" /* tam pozri exportovanie, logovanie, system */
-#include "myconf.h" /* kvoli MAIL_ADDRESS, HTTP_ADDRESS; pridane 30/03/2000A.D. */
+#include "myconf.h" /* kvoli cfg_MAIL_ADDRESS_default, cfg_HTTP_ADDRESS_default; pridane 30/03/2000A.D. */
 
 #if defined(OS_linux)
 #elif defined(OS_Windows)
@@ -59,10 +59,13 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2007-05-25"
+#define BUILD_DATE "2007-06-01"
 
 #define BYTES 250
 #define SMALL 80
+
+/* neurèená hodnota pre global option */
+#define GLOBAL_OPTION_NULL -1
 
 /* navratova hodnota funkcii */
 #define NO_RESULT 2
@@ -107,8 +110,8 @@
 	/* zmenene 06/09/2001A.D.; povodne tu bolo "cgi-bin/"##a */
 
 /* pridane 30/03/2000A.D. */
-extern char script_name[MAX_STR]; // = HTTP_ADDRESS + SCRIPT_PATH(SCRIPT_NAME)
-extern char uncgi_name[MAX_STR];  // = HTTP_ADDRESS + UNCGI_SCRIPT_NAME
+extern char script_name[MAX_STR]; // = cfg_HTTP_ADDRESS_default + SCRIPT_PATH(SCRIPT_NAME)
+extern char uncgi_name[MAX_STR];  // = cfg_HTTP_ADDRESS_default + UNCGI_SCRIPT_NAME
 void updateScriptName(void);
 void updateUnCGIName(void);
 
@@ -384,6 +387,22 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_JAZYK "j"
 #endif
 
+/* MODL_OPT6 resp. MODL_OPT7 pridané 2007-06-01, pretože sa používali (pre rozbor mesiaca) opt1 resp. opt2; default sa "bil" */
+#define MODL_OPT6 38
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPT6 "MODL_OPT6"
+#else
+	#define STR_MODL_OPT6 "o6"
+#endif
+
+#define MODL_OPT7 39
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPT7 "MODL_OPT7"
+#else
+	#define STR_MODL_OPT7 "o7"
+#endif
+
+
 /* global */
 #define QUERY_TYPE	20
 #ifdef LONG_PARAM_NAMES
@@ -392,7 +411,7 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_QUERY_TYPE	"qt"
 #endif
 
-#define ALERT	Export("<p>Ak probl&eacute;my pretrv&aacute;vaj&uacute;, kontaktujte pros&iacute;m <a href=\"mailto:%s\">autora str&aacute;nky</a>.</p>\n", MAIL_ADDRESS)
+#define ALERT	Export("<p>Ak probl&eacute;my pretrv&aacute;vaj&uacute;, kontaktujte pros&iacute;m <a href=\"mailto:%s\">autora str&aacute;nky</a>.</p>\n", cfg_MAIL_ADDRESS_default)
 
 /* HTML stringy - casti stringov sustredene na tomto mieste; pridane 2003-07-02 */
 #define HTML_FORM_INPUT_SUBMIT   "input type=\"submit\" class=\"button\""
@@ -445,6 +464,16 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 
 /* 2007-03-19: výpis "Dnes je..." sa zobrazí len pri tomto nastavení, ak je 1 */
 #define HTML_ZOBRAZIT_DNES_JE	0
+
+/* 2007-06-01: niektoré definy presunuté z liturgia.h */
+
+/* option 2 */
+#define MODL_ZALMY_ZO_DNA 0
+#define MODL_ZALMY_ZO_SV  1
+
+/* option 5, 2003-08-06, upravena 2003-08-13 */
+#define MODL_CEZ_DEN_ZALMY_ZO_DNA         0
+#define MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA  1
 
 #endif /*__MYDEFS_H_*/
 

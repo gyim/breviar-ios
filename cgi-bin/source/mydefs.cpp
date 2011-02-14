@@ -17,16 +17,16 @@
 #include <string.h>
 #include "mystring.h" /* pridane 2003-08-13 */
 
-char script_name[MAX_STR] = STR_EMPTY; // = HTTP_ADDRESS + SCRIPT_PATH(SCRIPT_NAME)
-char uncgi_name[MAX_STR] = STR_EMPTY;  // = HTTP_ADDRESS + UNCGI_SCRIPT_NAME
+char script_name[MAX_STR] = STR_EMPTY; // = cfg_HTTP_ADDRESS_default + SCRIPT_PATH(SCRIPT_NAME)
+char uncgi_name[MAX_STR] = STR_EMPTY;  // = cfg_HTTP_ADDRESS_default + UNCGI_SCRIPT_NAME
 
 void updateScriptName(void){
-	strcpy(script_name, HTTP_ADDRESS);
+	strcpy(script_name, cfg_HTTP_ADDRESS_default);
 	strcat(script_name, SCRIPT_PATH(SCRIPT_NAME));
 }
 
 void updateUnCGIName(void){
-	strcpy(uncgi_name, HTTP_ADDRESS);
+	strcpy(uncgi_name, cfg_HTTP_ADDRESS_default);
 	strcat(uncgi_name, UNCGI_SCRIPT_NAME);
 }
 

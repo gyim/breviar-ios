@@ -139,6 +139,8 @@ extern short int _global_opt2/* = MODL_ZALMY_ZO_DNA; 2006-01-25: upravené, bolo 
 extern short int _global_opt3;
 extern short int _global_opt4;
 extern short int _global_opt5; /* pridane 2003-08-07 */
+extern short int _global_opt6; /* pridané 2007-06-01 */
+extern short int _global_opt7; /* pridané 2007-06-01 */
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
 extern char *_global_string;

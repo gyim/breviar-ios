@@ -483,9 +483,12 @@ char *yytext;
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-// JUV #ifdef HAVE_CONFIG_H
+/* JUV - upravené, 2007-06-01
+#ifdef HAVE_CONFIG_H
 # include "config.h"
-// JUV #endif
+#endif
+*/
+#include "mysystem.h"
 
 #include <assert.h>
 

@@ -7,7 +7,7 @@
 /* document history                                            */
 /*   28/10/1999A.D. | created                                  */
 /*   25/02/2000A.D. | zrusena funkcia linky()                  */
-/*   12/04/2000A.D. | pridana stranka HTTP_ADDRESS             */
+/*   12/04/2000A.D. | pridana stranka cfg_HTTP_ADDRESS_default             */
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-06-30a.D. | pridane vypisovanie BUILD_DATE (mybase.h)*/
 /*                  - tiez zapoznamkovane Kodovanie w-1250.    */
@@ -28,7 +28,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h> /* kvoli time_t a time(); */
-#include "myconf.h" /* kvoli MAIL_ADDRESS a HTTP_ADDRESS; pridane 30/03/2000A.D. */
+#include "myconf.h" /* kvoli cfg_MAIL_ADDRESS_default a cfg_HTTP_ADDRESS_default; pridane 30/03/2000A.D. */
 #include "myhpage.h"
 #include "mydefs.h" /* kvoli #ifdef DEBUG; a tiez HTML_ - pridane 2003-07-02 */
 #include "myexpt.h"
@@ -171,9 +171,9 @@ void patka(void){
 	/* Export("Kódovanie Windows-1250 (Central European).\n"); */
 	Export("<br>\n");
 
-	/* pridana stranka HTTP_ADDRESS, 12/04/2000A.D. */
-	Export("<"HTML_LINK_NORMAL" href=\"%s\" target=\"_top\">%s</a>\n", HTTP_ADDRESS, HTTP_DISPLAY_ADDRESS);
-	Export("&#169; %d%s <"HTML_LINK_NORMAL" href=\"mailto:%s\">Juraj Vidéky</a>\n", baserok, rok, MAIL_ADDRESS);
+	/* pridana stranka cfg_HTTP_ADDRESS_default, 12/04/2000A.D. */
+	Export("<"HTML_LINK_NORMAL" href=\"%s\" target=\"_top\">%s</a>\n", cfg_HTTP_ADDRESS_default, cfg_HTTP_DISPLAY_ADDRESS_default);
+	Export("&#169; %d%s <"HTML_LINK_NORMAL" href=\"mailto:%s\">Juraj Vidéky</a>\n", baserok, rok, cfg_MAIL_ADDRESS_default);
 
 	Export("</p>\n"); /* pridane kvoli tomu, ze cele to bude <p class="patka">, 2003-07-02 */
 	Export("</center>");
@@ -220,9 +220,9 @@ void patka(FILE * expt){
 	/* fprintf(expt, "Kódovanie Windows-1250 (Central European).\n"); */
 	fprintf(expt, "<br>\n");
 
-	/* pridana stranka HTTP_ADDRESS, 12/04/2000A.D. */
-	fprintf(expt, "<"HTML_LINK_NORMAL" href=\"%s\" target=\"_top\">%s</a>\n", HTTP_ADDRESS, HTTP_DISPLAY_ADDRESS);
-	fprintf(expt, "&#169; %d%s <"HTML_LINK_NORMAL" href=\"mailto:%s\">Juraj Vidéky</a>\n", baserok, rok, MAIL_ADDRESS);
+	/* pridana stranka cfg_HTTP_ADDRESS_default, 12/04/2000A.D. */
+	fprintf(expt, "<"HTML_LINK_NORMAL" href=\"%s\" target=\"_top\">%s</a>\n", cfg_HTTP_ADDRESS_default, cfg_HTTP_DISPLAY_ADDRESS_default);
+	fprintf(expt, "&#169; %d%s <"HTML_LINK_NORMAL" href=\"mailto:%s\">Juraj Vidéky</a>\n", baserok, rok, cfg_MAIL_ADDRESS_default);
 
 	fprintf(expt, "</p>\n"); /* pridane kvoli tomu, ze cele to bude <p class="patka">, 2003-07-02 */
 	fprintf(expt, "</center>");

@@ -37,6 +37,7 @@
 /*   2006-10-11a.D. | pre invitatórium a kompletórium          */
 /*   2006-10-13a.D. | jazykovo závislé je aj nazov_Modlitby    */
 /*   2006-12-12a.D. | doplnenie latinèiny (la)                 */
+/*   2007-06-01a.D. | niektoré definy presunuté do mydefs.h    */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -327,9 +328,11 @@ extern const char *str_nie[POCET_JAZYKOV + 1];
 #define		STR_NIE		str_nie[_global_jazyk]
 #endif
 
-/* option 2 */
+/* option 2 - presunuté do mydefs.h 
 #define MODL_ZALMY_ZO_DNA 0
 #define MODL_ZALMY_ZO_SV  1
+*/
+
 //#define STR_MODL_ZALMY_ZO_DNA "dòa"
 extern const char *str_modl_zalmy_zo_dna[POCET_JAZYKOV + 1];
 #ifndef		STR_MODL_ZALMY_ZO_DNA
@@ -381,9 +384,10 @@ extern const char *str_modl_zalmy_zo_sv[POCET_JAZYKOV + 1];
 #define MODL_SPOL_CAST_NEBRAT            27 /* nechce zo spol. casti */
 #define POCET_SPOL_CASTI	MAX_MODL_SPOL_CAST - 1
 
-/* option 5, 2003-08-06, upravena 2003-08-13 */
+/* option 5, 2003-08-06, upravena 2003-08-13; 2007-06-01: presunuté do mydefs.h
 #define MODL_CEZ_DEN_ZALMY_ZO_DNA         0
 #define MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA  1
+*/
 
 //#define STR_MODL_CEZ_DEN_ZALMY_ZO_DNA        "bežnej"
 extern const char *str_modl_cez_den_zalmy_zo_dna[POCET_JAZYKOV + 1];
@@ -917,6 +921,9 @@ extern short int _global_opt1/* = NIE*/;
 extern short int _global_opt2/* = MODL_ZALMY_ZO_DNA*/;
 extern short int _global_opt3;
 extern short int _global_opt4;
+extern short int _global_opt5; /* pridane 2003-08-07 */
+extern short int _global_opt6; /* pridané 2007-06-01 */
+extern short int _global_opt7; /* pridané 2007-06-01 */
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
 extern char *_global_string;

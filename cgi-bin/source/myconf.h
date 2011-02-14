@@ -21,18 +21,32 @@
 #include "mydefs.h"
 
 #define MAX_HTTP_STR 80
-#define MAX_MAIL_STR 80
-#define MAX_INCD_STR 80
+#define MAX_MAIL_STR 40
+#define MAX_INCD_STR 40
 
 #define CONFIG_FILE "breviar.cfg"
-#define STOPPING_CHAR '|'
 
-extern char MAIL_ADDRESS[MAX_HTTP_STR];
-extern char HTTP_ADDRESS[MAX_MAIL_STR];
-extern char HTTP_DISPLAY_ADDRESS[MAX_HTTP_STR];
-extern char INCLUDE_DIR [MAX_INCD_STR];
+extern char cfg_HTTP_ADDRESS_default[MAX_HTTP_STR];
+extern char cfg_HTTP_DISPLAY_ADDRESS_default[MAX_HTTP_STR];
+extern char cfg_MAIL_ADDRESS_default[MAX_MAIL_STR];
+extern char cfg_INCLUDE_DIR_default [MAX_INCD_STR];
+/* hodnoty options pre default jazyk, teda pre JAZYK_SK */
+extern short int cfg_option1_default;
+extern short int cfg_option2_default;
+extern short int cfg_option4_default;
+extern short int cfg_option5_default;
+extern short int cfg_option6_default;
+extern short int cfg_option7_default;
+/* hodnoty options pre JAZYK_CZ */
+extern short int cfg_option1_cz;
+extern short int cfg_option2_cz;
+extern short int cfg_option4_cz;
+extern short int cfg_option5_cz;
+extern short int cfg_option6_cz;
+extern short int cfg_option7_cz;
 
 void readConfig(void);
+void printConfig(void);
 
 #endif /* __MYCONFIG_H */
 
