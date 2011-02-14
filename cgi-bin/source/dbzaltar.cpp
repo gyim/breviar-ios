@@ -1082,6 +1082,26 @@ void _set_zalm_cez_den_doplnkova_psalmodia(void){
 		_set_zalm3(MODL_POPOLUDNI, "z128.htm", "ZALM128");
 }
 
+/* 2006-01-24: pridanÈ ûalmy nedele 1. t˝ûdÚa kvÙli modlitbe cez deÚ */
+void _set_zalmy_1nedele_mcd(void){/* modlitba cez deÚ; rovnakÈ ûalmy s˙ pre nedeæu 3. t˝ûdÚa; 2007-01-11 */
+	Log("_set_zalmy_1nedele_mcd() -- begin\n");
+	/* modlitba cez den */
+	_set_zalm1(MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_I");
+	_set_zalm2(MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_II");
+	_set_zalm3(MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_III");
+	Log("_set_zalmy_1nedele_mcd() -- end\n");
+}
+
+/* 2007-01-11: pridanÈ ûalmy nedele 2. t˝ûdÚa kvÙli modlitbe cez deÚ */
+void _set_zalmy_2nedele_mcd(void){/* modlitba cez deÚ; rovnakÈ ûalmy s˙ pre nedeæu 4. t˝ûdÚa; 2007-01-11 */
+	Log("_set_zalmy_2nedele_mcd() -- begin\n");
+	/* modlitba cez den */
+	_set_zalm1(MODL_CEZ_DEN_VSETKY, "z23.htm", "ZALM23");
+	_set_zalm2(MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_I");
+	_set_zalm3(MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_II");
+	Log("_set_zalmy_2nedele_mcd() -- end\n");
+}
+
 /* zaltar();
  *
  * vstup: den == 0 (DEN_NEDELA) .. 6 (DEN_SOBOTA)
@@ -1237,18 +1257,24 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 			if((tyzzal == 1) || (tyzzal == 3)){
 				_set_zalm2(MODL_RANNE_CHVALY, "dan3_57.htm", "DAN3,57-88.56");
 				/* modlitba cez den */
+				_set_zalmy_1nedele_mcd(); // 2007-01-11 nahradenÈ volanÌm funkcie
+				/*
 				_set_zalm1(MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_I");
 				_set_zalm2(MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_II");
 				_set_zalm3(MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_III");
+				*/
 			}
 			else{ /* if((tyzzal == 2) || (tyzzal == 4)) */
 				_set_zalm1(MODL_RANNE_CHVALY, "z118.htm", "ZALM118");
 				_set_zalm2(MODL_RANNE_CHVALY, "dan3_52.htm", "DAN3,52-57");
 				_set_zalm3(MODL_RANNE_CHVALY, "z150.htm", "ZALM150");
 				/* modlitba cez den */
+				_set_zalmy_1nedele_mcd(); // 2007-01-11 nahradenÈ volanÌm funkcie
+				/*
 				_set_zalm1(MODL_CEZ_DEN_VSETKY, "z23.htm", "ZALM23");
 				_set_zalm2(MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_I");
 				_set_zalm3(MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_II");
+				*/
 			}
 			/* vecerne nedelne hymny su rovnake v kazdom tyzdni */
 			_set_zalm3(MODL_PRVE_VESPERY, "flp2.htm", "CHVAL_FLP2");
@@ -1987,15 +2013,10 @@ void _set_zalmy_1nedele_1v(void){/* prve vespery */
 	Log("_set_zalmy_1nedele_v() -- end\n");
 }
 
-/* 2006-01-24: pridanÈ ûalmy nedele 1. t˝ûdÚa kvÙli modlitbe cez deÚ */
-void _set_zalmy_1nedele_mcd(void){/* prve vespery */
-	Log("_set_zalmy_1nedele_mcd() -- begin\n");
-	/* modlitba cez den */
-	_set_zalm1(MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_I");
-	_set_zalm2(MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_II");
-	_set_zalm3(MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_III");
-	Log("_set_zalmy_1nedele_mcd() -- end\n");
-}
+/* 2007-01-11: presunutÈ funkcie vyööie 
+	- void _set_zalmy_1nedele_mcd(void)
+	- void _set_zalmy_2nedele_mcd(void)
+ */
 
 /* 2006-01-26: pridanÈ ûalmy nedele 1. t˝ûdÚa kvÙli posv. ËÌtaniam (napr. druh· nedeæa vo veæk. okt·ve) */
 void _set_zalmy_1nedele_pc(void){/* prve vespery */
@@ -2569,10 +2590,16 @@ void _set_zalmy_sviatok_muc(short int modlitba, short int su_viaceri){
 
 void _set_zalmy_sviatok_krstu(short int modlitba){
 	Log("_set_zalmy_sviatok_krstu(%s) -- begin\n", nazov_modlitby(modlitba));
+	/* 2007-01-11, prvÈ veöpery a veöpery s˙ rovnakÈ ako na sviatok Zjavenia P·na */
 	if(modlitba == MODL_VESPERY){
 		_set_zalm1(modlitba, "z110.htm", "ZALM110");
-		_set_zalm2(modlitba, "z130.htm", "ZALM130");
-		_set_zalm3(modlitba, "kol1.htm", "CHVAL_KOL1");
+		_set_zalm2(modlitba, "z112.htm", "ZALM112");
+		_set_zalm3(modlitba, "zjv15.htm", "CHVAL_ZJV15");
+	}
+	else if(modlitba == MODL_PRVE_VESPERY){
+		_set_zalm1(modlitba, "z135.htm", "ZALM135_I");
+		_set_zalm2(modlitba, "z135.htm", "ZALM135_II");
+		_set_zalm3(modlitba, "1tim3.htm", "CHVAL_1TIM3");
 	}
 	else if(modlitba == MODL_POSV_CITANIE){
 		/* 2006-01-20: pridanÈ */
@@ -2580,14 +2607,17 @@ void _set_zalmy_sviatok_krstu(short int modlitba){
 		_set_zalm2(modlitba, "z66.htm", "ZALM66_I");
 		_set_zalm3(modlitba, "z66.htm", "ZALM66_II");
 	}
-	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(modlitba, "z113.htm", "ZALM113");
-		_set_zalm2(modlitba, "z147.htm", "ZALM147,12-20");
-		_set_zalm3(modlitba, "flp2.htm", "CHVAL_FLP2");
-	}
 	/* 2006-01-24: doplnenÈ ûalmy pre modlitbu cez deÚ - overiù, Ëi s˙ naozaj z nedele 1. t˝ûdÚa */
+	/* 2007-01-11: pre mcd ûalmy z nedele 2. t˝ûdÚa (7.1.) alebo z nedele 3. t˝ûdÚa podæa roka */
 	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
-		_set_zalmy_1nedele_mcd();
+		if(_global_den.denvr == 7){
+			// ak je to 7.1.
+			_set_zalmy_2nedele_mcd();
+		}
+		else{
+			// inak: z nedele 3. t˝ûdÚa - rovnakÈ ako z nedele 1. t˝ûdÚa
+			_set_zalmy_1nedele_mcd();
+		}
 	}
 	Log("_set_zalmy_sviatok_krstu(%s) -- end\n", nazov_modlitby(modlitba));
 }

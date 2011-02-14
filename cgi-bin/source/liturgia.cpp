@@ -1129,7 +1129,7 @@ void _dm_krst_krista_pana(short int rok){
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 27/04/2000A.D. */
-	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D. */
+	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D.; 2007-01-11: neplatí pre urèenie žalmov modlitby cez deò */
 	_global_result.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 }
 
