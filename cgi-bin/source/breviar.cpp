@@ -3999,21 +3999,26 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
 		 * `spolocnej casti na sviatky svatych'
 		 */
 
+		Export("<li>");
+		Export((char *)html_text_zalmy_brat_zo[_global_jazyk]);
+		Export(" \n");
 		/* pole WWW_MODL_OPT2 */
-		Export("<li>ûalmy braù zo \n");
 		Export("<select name=\"%s\">\n", STR_MODL_OPT2);
 		Export("<option selected>%s\n", STR_MODL_ZALMY_ZO_DNA);
 		Export("<option>%s\n", STR_MODL_ZALMY_ZO_SV);
 		Export("</select>\n");
-		Export(" (okrem modlitby cez deÚ)\n"); /* pridane 2003-08-13; upraven˝ popis 2006-01-25 */
-		Export("<br><span class=\"explain\">V z·vislosti od typu sv‰tenia sa ber˙ alebo neber˙ na sviatok sv‰tca/sv‰tice ûalmy a chv·lospevy ");
-		Export("z vlastnej Ëasti (na rannÈ chv·ly z nedele 1. t˝ûdÚa ûalt·ra); je moûnÈ tieto ûalmy vyûiadaù.</span>");
+		Export((char *)html_text_zalmy_brat_zo_okrem_mcd[_global_jazyk]); /* pridane 2003-08-13; upraven˝ popis 2006-01-25 */
+		Export("<br><span class=\"explain\">");
+		Export((char *)html_text_zalmy_brat_zo_explain[_global_jazyk]);
+		Export("</span>");
 		Export("</li>\n");
 
 		/* najprv si rozkodujeme, co je v _global_den.spolcast */
 		_struct_sc sc = _decode_spol_cast(_global_den.spolcast);
 		/* pole WWW_MODL_OPT3 */
-		Export("<li>Ëasti modlitby zo spoloËnej Ëasti \n");
+		Export("<li>");
+		Export((char *)html_text_spol_casti_vziat_zo[_global_jazyk]);
+		Export(" \n");
 		Export("<select name=\"%s\">\n", STR_MODL_OPT3);
 		if((sc.a1 != MODL_SPOL_CAST_NEURCENA) && (sc.a1 != MODL_SPOL_CAST_NEBRAT)){
 			Export("<option selected>%s\n", nazov_spolc(sc.a1));
@@ -4029,29 +4034,32 @@ void showDetails(int den, int mesiac, int rok, int poradie_svaty){
 			Export("<option selected>%s\n", nazov_spolc(MODL_SPOL_CAST_NEBRAT));
 		}
 		Export("</select>\n");
-		Export("<br><span class=\"explain\">Na sviatok sv‰tca/sv‰tice sa podæa liturgick˝ch pravidiel ber˙ Ëasti, ");
-		Export("ktorÈ sa nenach·dzaj˙ vo vlastnej Ëasti ûalt·ra, zo spoloËnej Ëasti sviatku, ");
-		Export("niekedy je moûnosù vybraù si z viacer˝ch spoloËn˝ch ËastÌ; naviac je moûnosù niekto sa modliù sa tieto Ëasti zo vöednÈho dÚa.</span>");
+		Export("<br><span class=\"explain\">");
+		Export((char *)html_text_spol_casti_vziat_zo_explain[_global_jazyk]);
+		Export("</span>");
 		Export("</li>\n");
 	}/* if(poradie svateho in 1, 2, 3) */
 
 	/* pridane 2003-08-06 */
-	Export("<li>ûalmy pre modlitbu cez deÚ braù z \n");
+	Export("<li>");
+	Export((char *)html_text_zalmy_pre_mcd[_global_jazyk]);
+	Export(" \n");
 	/* pole WWW_MODL_OPT5 */
 	Export("<select name=\"%s\">\n", STR_MODL_OPT5);
 	Export("<option selected>%s\n", STR_MODL_CEZ_DEN_ZALMY_ZO_DNA);
 	Export("<option>%s\n", STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
 	Export("</select>\n");
-	Export(" psalmÛdie\n");
-	Export("<br><span class=\"explain\">Doplnkov· psalmÛdia zah‡Úa 3 sÈrie tzv. gradu·lnych ûalmov ");
-	Export("(é 120-129), ktorÈ moûno braù namiesto ûalmov zo ûalt·ra.</span>");
+	Export("<br><span class=\"explain\">");
+	Export((char *)html_text_zalmy_pre_mcd_explain[_global_jazyk]);
+	Export("</span>");
 	Export("</li>\n");
 
 	Export("</ul>\n");
 
 	/* 2003-08-13 pridane vysvetlenie */
-	Export("<p>Pokiaæ s˙ niektorÈ parametre pre vybran˙ modlitbu nepouûiteænÈ,\n");
-	Export("neber˙ sa do ˙vahy (mÙûu by teda nastavenÈ æubovoæne).</p>\n");
+	Export("<p>\n");
+	Export((char *)html_text_detaily_explain[_global_jazyk]);
+	Export("</p>\n");
 
 	Export("<center>\n");
 	/* button Vyhladaj (GO!) */
@@ -5441,22 +5449,23 @@ void _main_analyza_roku(char *rok){
 	Export((char *)html_text_prestupny[_global_jazyk]); /* 2006-08-02 */
 	Export("</a>.\n");
 
+	ExportROK("<a href=\"%s%s\">", pom, FILE_NEDELNE_PISMENO);
 	if(_global_r.prestupny == YES){
 		/* zmenene <b> na <span class="bold">, 2003-07-02 */
-		ExportROK("<a href=\"%s%s\">NedeænÈ pÌsmen·</a>: <"HTML_SPAN_BOLD">%c %c</span>\n",
-			pom, FILE_NEDELNE_PISMENO, _global_r.p1, _global_r.p2);
+		Export((char *)html_text_Nedelne_pismena[_global_jazyk]); /* 2006-08-07 */
+		Export("</a>: <"HTML_SPAN_BOLD">%c %c</span>\n", _global_r.p1, _global_r.p2);
 	}
 	else{
 		/* zmenene <b> na <span class="bold">, 2003-07-02 */
-		ExportROK("<a href=\"%s%s\">NedeænÈ pÌsmeno</a>: <"HTML_SPAN_BOLD">%c</span>\n",
-			pom, FILE_NEDELNE_PISMENO, _global_r.p1);
+		Export((char *)html_text_Nedelne_pismeno[_global_jazyk]); /* 2006-08-07 */
+		Export("</a>: <"HTML_SPAN_BOLD">%c</span>\n", _global_r.p1);
 	}
 
 	datum = prva_adventna_nedela(year - 1);
 	vytvor_global_link(datum.den, datum.mesiac, year - 1, LINK_DEN_MESIAC);
 	/* vytvor_global_link nastavi _global_link */
 		/* zmenene <b> na <span class="bold">, 2003-07-02 */
-	ExportROK("Od prvej adventnej nedele v roku %d (%s) pokraËuje <a href=\"%s%s\">liturgick˝ rok</a> <"HTML_SPAN_BOLD">%c</span>.\n",
+	ExportROK((char *)html_text_Od_prvej_adv_atd[_global_jazyk], /* 2006-08-07 */
 		year - 1,
 		_global_link,
 		pom,

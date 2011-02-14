@@ -14,6 +14,7 @@
 /*   2005-08-05a.D. | pridané zvazok_OBD[]                     */
 /*   2006-07-11a.D. | prvé kroky k jazykovım mutáciám          */
 /*   2006-08-01a.D. | zmenené definície konštánt (jaz.mutácie) */
+/*   2006-08-07a.D. | pridané sv. muov/ien, èo ili v man.  */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -107,8 +108,8 @@ const char *nazov_spolc[MODL_SPOL_CAST_NEBRAT + 1] =
 const char *nazov_spolc_jazyk[POCET_SPOL_CASTI + 1][POCET_JAZYKOV + 1] =
 {{"neurèená", "neurèena", "not decided", ""}, 
  {"duchovnıch pastierov - pre kòazov", "duchovních pastıøù - o knìích", "", ""}, 
- {"duchovnıch pastierov - pre biskupov", "duchovnıch pastierov - o biskupech", "", ""}, 
- {"duchovnıch pastierov - pre pápeov", "duchovnıch pastierov - o papei", "", ""}, 
+ {"duchovnıch pastierov - pre biskupov", "duchovních pastıøù - o biskupech", "", ""}, 
+ {"duchovnıch pastierov - pre pápeov", "duchovních pastıøù - o papei", "", ""}, 
  {"uèite¾ov Cirkvi", "uèitelù Církve", "", ""}, 
  {"apoštolov", "apoštolù", "", ""}, 
  {"jedného muèeníka", "jednoho muèedníka", "", ""}, 
@@ -121,15 +122,17 @@ const char *nazov_spolc_jazyk[POCET_SPOL_CASTI + 1][POCET_JAZYKOV + 1] =
  {"svätıch ien", "svatıch en", "", ""}, 
  {"duchovnıch pastierov - pre viacerıch", "duchvních pastıøù - o více pastıøích", "", ""}, 
  {"jednej muèenice", "jedné muèednice", "", ""}, 
- {"svätıch ien - pre vychovávate¾ov", "svatıch en - o vychovatelce", "", ""}, 
+ {"svätıch ien - pre vychovávate¾ky", "svatıch en - o vychovatelce", "", ""}, 
  {"svätıch muov - pre vychovávate¾ov", "svatıch muù - o vychovatelıch", "", ""}, 
- {"svätıch ien - pre tıch, èo konali skutky milosrdenstva", "svatıch en - o enì, která vynikala milosrdnımi skutky", "", ""}, 
- {"svätıch muov - pre tıch, èo konali skutky milosrdenstva", "svatıch muù - o mui, kterı vynikal milosrdnımi skuty", "", ""}, 
+ {"svätıch ien - pre tie, èo konali skutky milosrdenstva", "svatıch en - o enì, která vynikala milosrdnımi skutky", "", ""}, 
+ {"svätıch muov - pre tıch, èo konali skutky milosrdenstva", "svatıch muù - o mui, kterı vynikal milosrdnımi skutky", "", ""}, 
  {"svätıch ien - pre viaceré", "svatıch en - o více enách", "", ""}, 
  {"svätıch muov - pre viacerıch", "svatıch muù - o více muích", "", ""}, 
  {"viacerıch panien", "více pannen", "", ""}, 
  {"posviacky chrámu", "posvìcení kostela", "", ""}, 
  {"zosnulıch", "zemøelıch", "", ""}, 
+ {"svätıch ien - pre tie, èo ili v manelstve", "svatıch en - o enì, která ila v manelství", "", ""}, 
+ {"svätıch muov - pre tıch, èo ili v manelstve", "svatıch muù - o mui, kterı il v manelství", "", ""}, 
  {"nebra", "nevzít", "do not use", ""}
 };
 
@@ -168,6 +171,8 @@ const char *nazov_spolc_htm[POCET_SPOL_CASTI + 1] =
  "sc_pn.htm",
  "vpchr.htm",
  "ozz.htm",
+ "sc_sz.htm",
+ "sc_sm.htm",
  "000"
 };
 
@@ -197,6 +202,8 @@ const char *nazov_spolc_ANCHOR[POCET_SPOL_CASTI + 1] =
  "SCPNV",
  "VPCHR",
  "OZZ",
+ "SCSZM",
+ "SCSMM",
  "000"
 };
 
@@ -699,13 +706,21 @@ const char *html_text_je[] = {"je", "je", "is", ""};
 const char *html_text_nie_je[] = {"nie je", "není", "is not", ""};
 const char *html_text_prestupny[] = {"prestupnı", "pøestupnı", "...", ""};
 const char *html_text_datumy_pohyblivych_slaveni[] = {"Dátumy pohyblivıch slávení", "Dáta promìnlivıch slávení", "Dates for movable celebrations", ""};
+const char *html_text_Nedelne_pismeno[] = {"Nede¾né písmeno", "Nedelní písmeno", "Sunday letter", ""};
+const char *html_text_Nedelne_pismena[] = {"Nede¾né písmená", "Nedelní písmena", "Sunday letters", ""};
+const char *html_text_Od_prvej_adv_atd[] = {
+	"Od prvej adventnej nedele v roku %d (%s) pokraèuje <a href=\"%s%s\">liturgickı rok</a> <"HTML_SPAN_BOLD">%c</span>.\n",
+	"Od prní nedìle adventní v roku %d (%s) pokraèuje <a href=\"%s%s\">liturgickı rok</a> <"HTML_SPAN_BOLD">%c</span>.\n",
+	"From the 1st Advent Sunday in the year %d (%s) continues <a href=\"%s%s\">liturgical year</a> <"HTML_SPAN_BOLD">%c</span>.\n",
+	"Od prvej adventnej nedele v roku %d (%s) pokraèuje <a href=\"%s%s\">liturgickı rok</a> <"HTML_SPAN_BOLD">%c</span>.\n"
+};
 
 const char *str_modl_cez_den_zalmy_zo_dna[POCET_JAZYKOV + 1] = 
-	{"benej", "bìné", "ordinary", ""};
+	{"benej psalmódie", "bìné psalmodie", "ordinary psalmody", ""};
 #define		STR_MODL_CEZ_DEN_ZALMY_ZO_DNA 	str_modl_cez_den_zalmy_zo_dna[_global_jazyk]
 
 const char *str_modl_cez_den_doplnkova_psalmodia[POCET_JAZYKOV + 1] = 
-	{"doplnkovej", "doplòkové", "supplementary", ""};
+	{"doplnkovej psalmódie", "doplòkové psalmodie", "supplementary psalmody", ""};
 #define		STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA 	str_modl_cez_den_doplnkova_psalmodia[_global_jazyk]
 
 const char *str_modl_zalmy_zo_dna[POCET_JAZYKOV + 1] = 
@@ -725,15 +740,15 @@ const char *str_nie[POCET_JAZYKOV + 1] =
 #define		STR_NIE		str_nie[_global_jazyk]
 
 const char *html_text_detaily_uvod[POCET_JAZYKOV + 1] = 
-{"Nasledovné monosti ovplyvnia vzh¾ad i obsah vygenerovanej modlitby.\nVyberte tie, pod¾a ktorıch sa má modlitba vygenerova.", 
- "Následující monosti mají vplyv na vzhled i obsah vygenerované modlitby.\nVyberte si, podle kterıch má bıt modlitba vygenerována.", 
+{"Nasledovné monosti ovplyvnia vzh¾ad i obsah vygenerovanej modlitby.\nVyberte tie monosti, pod¾a ktorıch sa má modlitba vygenerova.", 
+ "Následující monosti mají vliv na vzhled i obsah vygenerované modlitby.\nVyberte si monosti, podle kterıch má bıt modlitba vygenerována.", 
  "The following options apply to the resulting generated text of the prayer.\nChoose options which fit your needs to the resulting prayer text.", 
  ""};
 
 const char *html_text_nemenne_sucasti[] = {"zobrazi <i>nemenné súèasti</i> modlitby?", "zobrazit <i>nemìnné souèásti</i> modlitby?", "display <i>non-changeable parts</i> prayer?", ""};
 const char *html_text_nemenne_sucasti_explain[] = 
 {"Kadé ranné chvály obsahujú Benediktus, vešpery Magnifikat, obe modlitby obsahujú Otèenáš a zakonèenie modlitby, a napokon posvätné èítanie obsahuje niekedy hymnus Te Deum; tieto èasti modlitby nazıvame <i>nemenné súèasti</i>.", 
- "Kadé ranní chvály obsahujú Zachariášovo kantikum, nešpory Mariin Magnifikat, obì modlitbu Pánì a zakonèení modlitby, a napokon modlitba se ètením nìkdy obsahuje hymnus Te Deum; tyto èásti modliteb nazıváme <i>nemìnné souèásti</i>.", 
+ "Kadé ranní chvály obsahují Zachariášovo kantikum, nešpory Mariin Magnifikat, obì modlitbu Pánì a zakonèení modlitby, a koneènì modlitba se ètením nìkdy obsahuje hymnus Te Deum; tyto èásti modliteb nazıváme <i>nemìnné souèásti</i>.", 
  "Each morning prayer contains Benedictus, vesperae contains Magnificat, both contain the Lord's Prayer and a conclusion of the prayer; finally, the holy reading sometimes contains the Te Deum hymnus; all these parts we call <i>un-changeable parts</i>.", 
  ""};
 
@@ -742,6 +757,34 @@ const char *html_text_popis_svaty_explain[] =
 {"Modlitby zväèša obsahujú pred názvom modlitby ivotopis svätého, popis sviatku alebo podobnú struènú charakteristiku, ktorú pre jednoduchos nazıvame <i>popis</i>.", 
  "Modlitby ke cti svatıch obsahují struènı ivotopis svatého, pøi svátku je to struènı popis svátku a podobnì. Tyto charakteristiky pro struènost nazıváme <i>popis</i>.", 
  "xxx", 
+ ""};
+
+const char *html_text_zalmy_brat_zo[] = {"almy bra zo ", "almy brát ze ", "take psalmody from ", ""};
+const char *html_text_zalmy_brat_zo_okrem_mcd[] = {" (okrem modlitby cez deò)\n", " (kromì modlitby pøes den)\n", " (excluding the prayers during the day)\n", ""};
+const char *html_text_zalmy_brat_zo_explain[] = 
+{"V závislosti od typu svätenia sa berú alebo neberú na sviatok svätca/svätice almy a chválospevy z vlastnej èasti (na ranné chvály z nedele 1. tıdòa altára); je moné tieto almy vyiada.", 
+ "V závislosti na typu slavení svátku svìtce/svìtice se berou nebo neberou almy a kantika z vlastní èásti (na ranní chvály z nedìle 1. tıdne altáøe); je mono tyto almy vyádat.", 
+ "xxx", 
+ ""};
+
+const char *html_text_spol_casti_vziat_zo[] = {"èasti modlitby zo spoloènej èasti ", "èásti modlitby ze spoleèné èásti ", "parts of prayer from the common part ", ""};
+const char *html_text_spol_casti_vziat_zo_explain[] = 
+{"Na sviatok svätca/svätice sa pod¾a liturgickıch pravidiel berú èasti, ktoré sa nenachádzajú vo vlastnej èasti altára, zo spoloènej èasti sviatku, niekedy je monos vybra si z viacerıch spoloènıch èastí; naviac je monos modli sa tieto èasti zo všedného dòa.", 
+ "Na svátek ke cti svìtce/svìtice se podle liturgickıch pravidel berou èásti, které se nenachází ve vlastních textech, ze spoleènıch textù, nìkdy je moné vybrat si z více spoleènıch textù; navíc je monost modlit se tyto èásti ze všedního dne.", 
+ "xxx", 
+ ""};
+
+const char *html_text_zalmy_pre_mcd[] = {"almy pre modlitbu cez deò bra z ", "almy pro modlitbu pøes den brát ze ", "take psalmody for the prayer during the day from ", ""};
+const char *html_text_zalmy_pre_mcd_explain[] = 
+{"Doplnková psalmódia zahàòa 3 série tzv. graduálnych almov ( 120-129), ktoré mono bra namiesto almov zo altára.", 
+ "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120-129), které je mono brát místo almù ze altáøe.", 
+ "xxx", 
+ ""};
+
+const char *html_text_detaily_explain[] = 
+{"Pokia¾ sú niektoré parametre pre vybranú modlitbu nepouite¾né, neberú sa do úvahy (môu by teda nastavené ¾ubovo¾ne).", 
+ "Kdy jsou nìkteré vıše uvedené volby nepouitelné pro nìjakou modlitbu, neberou se v úvahu (mohou bıt nastaveny dle libovùle).", 
+ "If any of described options are not applicable for a chosen prayer, they can be set anyhow.", 
  ""};
 
 #endif /* __HODIN_H */

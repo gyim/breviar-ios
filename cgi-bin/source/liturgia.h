@@ -31,6 +31,7 @@
 /*   2006-02-07a.D. | ZALTAR_... pre funkciu zaltar_zvazok();  */
 /*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám          */
 /*   2006-08-01a.D. | zmenené definície konštánt (jaz.mutácie) */
+/*   2006-08-07a.D. | pridané sv. mužov/žien, èo žili v manž.  */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -318,7 +319,7 @@ extern const char *str_modl_zalmy_zo_sv[POCET_JAZYKOV + 1];
 
 /* option 3 -- tieto nasledujuce definicie definuju to, co je sucastou
  * _struct_dm::spolcast */
-#define MAX_MODL_SPOL_CAST  26
+#define MAX_MODL_SPOL_CAST  28
 /* najviac MAX_MODL_SPOL_CAST "spolocnych casti", t.j. identifikatorov MODL_SPOL_CAST_...;
  * musi byt o jedno vacsia ako poslena, t.j. MODL_SPOL_CAST_NEBRAT */
 
@@ -351,8 +352,10 @@ extern const char *str_modl_zalmy_zo_sv[POCET_JAZYKOV + 1];
 /* MODL_SPOL_CAST_NEBRAT musi byt posledna, napr. kvoli "while"
  * v dnes.cpp::showPrayer();
  * ale predsa mensia ako MAX_MODL_SPOL_CAST */
-#define MODL_SPOL_CAST_NEBRAT            25 /* nechce zo spol. casti */
-#define POCET_SPOL_CASTI				25
+#define MODL_SPOL_CAST_SV_ZENA_MANZ      25 /* pridané 2006-08-07 pre tých, èo žili v manželstve */
+#define MODL_SPOL_CAST_SV_MUZ_MANZ       26 /* pridané 2006-08-07 pre tých, èo žili v manželstve */
+#define MODL_SPOL_CAST_NEBRAT            27 /* nechce zo spol. casti */
+#define POCET_SPOL_CASTI	MAX_MODL_SPOL_CAST - 1
 
 /* option 5, 2003-08-06, upravena 2003-08-13 */
 #define MODL_CEZ_DEN_ZALMY_ZO_DNA         0
