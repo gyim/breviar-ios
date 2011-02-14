@@ -706,11 +706,15 @@ const char *html_text_nie_je[] = {"nie je", "není", "is not", "non est", "", "ne
 const char *html_text_prestupny[] = {"prestupný", "pøestupný", "...", "...", "", "pøestupný"};
 const char *html_text_datumy_pohyblivych_slaveni[] = {"Dátumy pohyblivých slávení", "Dáta promìnlivých slávení", "Dates for movable celebrations", "", "", "Data promìnlivých slavení"};
 
-const char *html_text_Nedelne_pismeno[] = {"Nede¾né písmeno", "Nedelní písmeno", "Sunday letter", "", "", "Nedìlní písmeno"};
-const char *html_text_Nedelne_pismena[] = {"Nede¾né písmená", "Nedelní písmena", "Sunday letters", "", "", "Nedìlní písmena"};
+const char *html_text_den_v_roku[] = {"deò v roku", "den v roce", "day of the year", "", "", "den v roce"};
+const char *html_text_zacina[] = {"zaèína", "zaèíná", "starts", "", "", "zaèíná"};
+const char *html_text_liturgicky_rok[] = {"liturgický rok", "liturgický rok", "liturgical year", "", "", "liturgický rok"};
+
+const char *html_text_Nedelne_pismeno[] = {"Nede¾né písmeno", "Nedìlní písmeno", "Sunday letter", "", "", "Nedìlní písmeno"};
+const char *html_text_Nedelne_pismena[] = {"Nede¾né písmená", "Nedìlní písmena", "Sunday letters", "", "", "Nedìlní písmena"};
 const char *html_text_Od_prvej_adv_atd[] = {
 	"Od prvej adventnej nedele v roku %d (%s) pokraèuje <a href=\"%s%s\">liturgický rok</a> <"HTML_SPAN_BOLD">%c</span>.\n",
-	"Od prní nedìle adventní v roku %d (%s) pokraèuje <a href=\"%s%s\">liturgický rok</a> <"HTML_SPAN_BOLD">%c</span>.\n",
+	"Od první nedìle adventní v roku %d (%s) pokraèuje <a href=\"%s%s\">liturgický rok</a> <"HTML_SPAN_BOLD">%c</span>.\n",
 	"From the 1st Advent Sunday in the year %d (%s) continues <a href=\"%s%s\">liturgical year</a> <"HTML_SPAN_BOLD">%c</span>.\n",
 	"Od prvej adventnej nedele v roku %d (%s) pokraèuje <a href=\"%s%s\">liturgický rok</a> <"HTML_SPAN_BOLD">%c</span>.\n",
 	"",

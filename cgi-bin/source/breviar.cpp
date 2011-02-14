@@ -6787,26 +6787,28 @@ void _main_analyza_roku(char *rok){
 	for(i = 0; i < POCET_ALIASOV; i++){
 		vytvor_global_link(_global_r._den[i].den, _global_r._den[i].mesiac, _global_r._den[i].rok,
 			LINK_DEN_MESIAC);
+		/* 2008-09-09: spoloèná èas výpisu presunutá vyššie */
+		if(i == VELKONOCNA_NEDELA)
+			mystrcpy(_global_r._den[i].meno, text_VELKONOCNA_NEDELA[_global_jazyk], MENO_SVIATKU);
+		/* zmenene <b> na <span class="bold">, 2003-07-02 */
+		Export("<tr valign=baseline><td>%s</td><td>%s</td><td>(%s, %d. ",
+			_global_r._den[i].meno,
+			_global_link,
+			nazov_dna(_global_r._den[i].denvt),
+			_global_r._den[i].denvr);
+		Export((char *)html_text_den_v_roku[_global_jazyk]); /* 2008-09-09 */
+		Export(")");
 		if(i == PRVA_ADVENTNA_NEDELA){
-			/* zmenene <b> na <span class="bold">, 2003-07-02 */
-			Export("<tr valign=baseline><td>%s</td><td>%s</td><td>(%s, %d. deò v roku), zaèína <a href=\"%s%s\">liturgický rok</a> <"HTML_SPAN_BOLD">%c</span>.</td></tr>\n",
-				_global_r._den[i].meno,
-				_global_link,
-				nazov_dna(_global_r._den[i].denvt),
-				_global_r._den[i].denvr,
+			Export(", ");
+			Export((char *)html_text_zacina[_global_jazyk]); /* 2008-09-09 */
+			Export(" <a href=\"%s%s\">",
 				pom,
-				FILE_LITURGICKY_ROK,
+				FILE_LITURGICKY_ROK);
+			Export((char *)html_text_liturgicky_rok[_global_jazyk]); /* 2008-09-09 */
+			Export("</a> <"HTML_SPAN_BOLD">%c</span>.",
 				_global_r._den[i].litrok);
 		}
-		else{
-			if(i == VELKONOCNA_NEDELA)
-				mystrcpy(_global_r._den[i].meno, text_VELKONOCNA_NEDELA[_global_jazyk], MENO_SVIATKU);
-			Export("<tr valign=baseline><td>%s</td><td>%s</td><td>(%s, %d. deò v roku)</td></tr>\n",
-				_global_r._den[i].meno,
-				_global_link,
-				nazov_dna(_global_r._den[i].denvt),
-				_global_r._den[i].denvr);
-		}
+		Export("\n</td></tr>\n");
 	}
 	Export("</table>\n");
 

@@ -13029,7 +13029,8 @@ label_25_MAR:
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_hymnus;
+						if(_global_jazyk == JAZYK_SK) // v slovenskom breviári má vlastný hymnus, v èeskom nie; 2008-09-09
+							_vlastna_cast_hymnus;
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
@@ -13038,7 +13039,8 @@ label_25_MAR:
 						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
-						_vlastna_cast_hymnus;
+						if(_global_jazyk == JAZYK_SK) // v slovenskom breviári má vlastný hymnus, v èeskom nie; 2008-09-09
+							_vlastna_cast_hymnus;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
 
@@ -13292,7 +13294,8 @@ label_25_MAR:
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_hymnus;
+						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ_OP)) // v slovenskom breviári má vlastný hymnus, v èeskom nie; 2008-09-09
+							_vlastna_cast_hymnus;
 						_vlastna_cast_modlitba;
 
 						modlitba = MODL_POSV_CITANIE;
@@ -13300,7 +13303,8 @@ label_25_MAR:
 						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
-						_vlastna_cast_hymnus;
+						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ_OP)) // v slovenskom breviári má vlastný hymnus, v èeskom nie; 2008-09-09
+							_vlastna_cast_hymnus;
 						_vlastna_cast_modlitba;
 
 						break;
@@ -13597,7 +13601,8 @@ label_25_MAR:
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_hymnus;
+						if(_global_jazyk == JAZYK_SK) // v slovenskom breviári má vlastný hymnus, v èeskom nie; 2008-09-09
+							_vlastna_cast_hymnus;
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
@@ -13606,7 +13611,8 @@ label_25_MAR:
 						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
-						_vlastna_cast_hymnus;
+						if(_global_jazyk == JAZYK_SK) // v slovenskom breviári má vlastný hymnus, v èeskom nie; 2008-09-09
+							_vlastna_cast_hymnus;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
 
@@ -13841,7 +13847,8 @@ label_25_MAR:
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_hymnus;
+						if(_global_jazyk == JAZYK_SK) // v slovenskom breviári má vlastný hymnus, v èeskom nie; 2008-09-09
+							_vlastna_cast_hymnus;
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
@@ -13850,7 +13857,8 @@ label_25_MAR:
 						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
-						_vlastna_cast_hymnus;
+						if(_global_jazyk == JAZYK_SK) // v slovenskom breviári má vlastný hymnus, v èeskom nie; 2008-09-09
+							_vlastna_cast_hymnus;
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
 
