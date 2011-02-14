@@ -7845,7 +7845,7 @@ short int getArgv(int argc, char **argv){
 					printf("\tProgram vytvara stranky (HTML vystup) pre Liturgiu hodin.\n");
 					/* build pridany 2003-07-04 */
 					printf("\tBuild: %s\n", BUILD_DATE);
-					printf("\t(c) 1999-2006 Juraj Vidéky <videky@breviar.sk>\n");
+					printf("\t(c) 1999-2008 Juraj Vidéky <videky@breviar.sk>\n");
 					printf("\n");
 					printf("\npouzitie:\n");
 					printf("\tlh [prepinac [hodnota]...]\n");

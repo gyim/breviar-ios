@@ -19,6 +19,7 @@
 /*   2008-01-23a.D. | upravené funkcie patka()                 */
 /*   2008-08-08a.D. | upravené funkcie hlavicka() kvôli css    */
 /*   2008-09-26a.D. | pridané použitie nazov_mesiaca()         */
+/*   2008-12-22a.D. | upravené exportovanie pätky (èas)        */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -127,9 +128,11 @@ void hlavicka(char *title, FILE * expt){
 //const char *gpage[] = {"Generovaná stránka", "Stránky jsou generovány", "Generated page", "Generated"};
 const char *gpage[POCET_JAZYKOV + 1] = {"Generované: ", "Generováno: ", "Generated: ", "Generated: ", "Generated: ", "Generováno: "};
 // Generované + dátum: "%d. %s %d, %02d:%02d:%02d" -- pôvodne to bolo v zátvorkách
-const char *datum_template[POCET_JAZYKOV + 1] = {"%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d"};
+const char *datum_cas_template[POCET_JAZYKOV + 1] = {"%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d"};
 // Build: "Build: %s. "
 const char *build_template[POCET_JAZYKOV + 1] = {"<!--Verzia: %s.-->", "<!--Verze: %s.-->", "<!--Build: %s.-->", "<!--Build: %s.-->", "<!--Build: %s.-->", "<!--Verze: %s.-->"};
+// Generované + dátum (bez èasu - pre batch mód, aby sa ¾ahko porovnávali vygenerované modlitby): "%d. %s %d"
+const char *datum_template[POCET_JAZYKOV + 1] = {"%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d"};
 
 /* exportuje patku HTML dokumentu (vysledok query) */
 void patka(void){
@@ -155,7 +158,15 @@ void patka(void){
 	Export("<center>");
 	Export("<"HTML_P_PATKA">%s\n", gpage[_global_jazyk]);
 	/* Export("(%s). ", ctime(&t) + 4); */
+	/* 2008-12-22: odvetvené - pre commandline export (do súboru) sa netlaèí èasová zložka, kedy bolo HTML generované */
+#if defined(EXPORT_TO_FILE)
 	Export((char *)datum_template[_global_jazyk],
+		dnes.tm_mday,
+		nazov_mesiaca(dnes.tm_mon)/* (_global_jazyk == JAZYK_CZ) ? nm_cz[dnes.tm_mon] : nm[dnes.tm_mon] */,
+		dnes.tm_year
+		);
+#else
+	Export((char *)datum_cas_template[_global_jazyk],
 		dnes.tm_mday,
 		nazov_mesiaca(dnes.tm_mon)/* (_global_jazyk == JAZYK_CZ) ? nm_cz[dnes.tm_mon] : nm[dnes.tm_mon] */,
 		dnes.tm_year,
@@ -163,6 +174,7 @@ void patka(void){
 		dnes.tm_min
 		// , dnes.tm_sec
 		);
+#endif
 	Export(". ");
 
 	/* nezabudni zmenit #define BUILD_DATE v mydefs.h!!! (2003-07-15) */
@@ -206,7 +218,15 @@ void patka(FILE * expt){
 	fprintf(expt, "<center>");
 	fprintf(expt, "<"HTML_P_PATKA">%s\n", gpage[_global_jazyk]);
 	/* fprintf(expt, "(%s). ", ctime(&t) + 4); */
+	/* 2008-12-22: odvetvené - pre commandline export (do súboru) sa netlaèí èasová zložka, kedy bolo HTML generované */
+#if defined(EXPORT_TO_FILE)
 	fprintf(expt, (char *)datum_template[_global_jazyk],
+		dnes.tm_mday,
+		nazov_mesiaca(dnes.tm_mon) /* nm[dnes.tm_mon] */,
+		dnes.tm_year
+		);
+#else
+	fprintf(expt, (char *)datum_cas_template[_global_jazyk],
 		dnes.tm_mday,
 		nazov_mesiaca(dnes.tm_mon) /* nm[dnes.tm_mon] */,
 		dnes.tm_year,
@@ -214,6 +234,7 @@ void patka(FILE * expt){
 		dnes.tm_min
 		// , dnes.tm_sec
 		);
+#endif
 	fprintf(expt, ". ");
 
 	/* nezabudni zmenit #define BUILD_DATE v mydefs.h!!! (2003-07-15) */
