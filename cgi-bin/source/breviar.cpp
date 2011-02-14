@@ -1,7 +1,7 @@
 /***************************************************************************/
 /*                                                                         */
 /* breviar.cpp                                                             */
-/* (c)1998-2006 | Juraj Videky | videky@breviar.sk                         */
+/* (c)1998-2007 | Juraj Videky | videky@breviar.sk                         */
 /*                                                                         */
 /*                http://www.breviar.sk                                    */
 /*                                                                         */
@@ -83,6 +83,7 @@
 /*   2007-01-02a.D. | prvý zásah do kódu v r. 2007: DEBUG_2006_12_07       */
 /*   2007-01-08a.D. | opravené priradenie týždòa žaltára pre VIAN po 1.1.  */
 /*   2007-04-10a.D. | Te Deum je vo ve¾konoènej oktáve; nie je poèas pôstu */
+/*   2007-05-18a.D. | nezobrazova Sláva Otcu pre Dan 3, 57-87. 56         */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -274,6 +275,8 @@ short int _global_opt5 = MODL_CEZ_DEN_ZALMY_ZO_DNA; /* pridana 2003-08-07 */
 /* pokial ide o _global_opt5, kontroluje sa v zaltar(); poznamka pridana 2003-08-13 */
 /* pridane 2003-07-08, append parameter */
 short int _global_opt_append = NIE;
+short int _global_opt_tedeum = NIE; /* pridaná 2007-05-18 */
+short int _global_pocet_slava_otcu = 0; /* pridaná 2007-05-18 */
 
 /* globalna premenna, co obsahuje string vypisany na obrazovku */
 char *_global_string;
@@ -1243,7 +1246,7 @@ void interpretParameter(short int type, char *paramname){
 		}
 	}
 	else if(equals(paramname, PARAM_CHVALOSPEV_BEGIN)){
-		if(_global_opt1 == NIE){
+		if(_global_opt1 == NIE && _global_opt_tedeum == NIE){ /* 2007-05-18 pridaná podmienka na tedeum */
 			/* nezobrazovat Benediktus/Magnifikat/Te Deum */
 			_global_skip_in_prayer = ANO;
 			Export("nezobrazit Benediktus/Magnifikat/Te Deum");
@@ -1314,28 +1317,31 @@ void interpretParameter(short int type, char *paramname){
 	}
 	/* 2007-03-23: pridané Sláva Otcu */
 	else if(equals(paramname, PARAM_SLAVAOTCU_BEGIN)){
-		if(_global_opt1 == ANO){
+		_global_pocet_slava_otcu = _global_pocet_slava_otcu + 1;
+		/* 2007-05-18: zosilnená podmienka, aby Sláva Otcu nebolo pre špeciálne prípady */
+		if(_global_opt1 == ANO && (_global_pocet_slava_otcu != 2 || !equals(_global_modl_ranne_chvaly.zalm2.anchor, "DAN3,57-88.56"))){
 			/* zobrazit Slava Otcu */
-			Export("zobrazit Slava Otcu-->");
+			Export("zobrazit Slava Otcu(%d)-->", _global_pocet_slava_otcu);
 			Log("  `Slava Otcu': begin...\n");
 		}
 		else{
 			/* nezobrazovat Slava Otcu */
 			_global_skip_in_prayer = ANO;
-			Export("nezobrazit Slava Otcu");
+			Export("nezobrazit Slava Otcu (%d)", _global_pocet_slava_otcu);
 			Log("  `Slava Otcu' skipping...\n");
 		}
 	}
 	else if(equals(paramname, PARAM_SLAVAOTCU_END)){
-		if(_global_opt1 == ANO){
+		/* 2007-05-18: zosilnená podmienka, aby Sláva Otcu nebolo pre špeciálne prípady */
+		if(_global_opt1 == ANO && (_global_pocet_slava_otcu != 2 || !equals(_global_modl_ranne_chvaly.zalm2.anchor, "DAN3,57-88.56"))){
 			/* zobrazit Slava Otcu */
-			Export("<!--zobrazit Slava Otcu");
+			Export("<!--zobrazit Slava Otcu(%d)", _global_pocet_slava_otcu);
 			Log("  `Slava Otcu': copied.\n");
 		}
 		else{
 			/* nezobrazovat Slava Otcu */
 			_global_skip_in_prayer = NIE;
-			Log("  `Slava Otcu' skipped.\n");
+			Log("  `Slava Otcu' (%d) skipped.\n", _global_pocet_slava_otcu);
 		}
 	}
 
@@ -1839,6 +1845,7 @@ void interpretTemplate(short int type, char *tempfile){
 	char strbuff[MAX_BUFFER];
 	char isbuff = 0;
 
+	_global_pocet_slava_otcu = 0; /* pre každý súbor templátu individuálne poèítame sláva otcu; 2007-05-18 */
 	FILE *ftemplate = fopen(tempfile,"rb");
 
 	Log("interpretTemplate(%s): Interpreting template %s\n",
@@ -1905,14 +1912,17 @@ void showPrayer(short int type){
 	/* 2005-11-11: Pridané: ak je potrebné vytlaèi Te Deum, tak zmeníme atribút */
 	if(je_tedeum){
 		Log("JE tedeum...\n");
-		_global_opt1 = 1;
+		_global_opt_tedeum = ANO; /* opravené 2007-05-18 */
 	}
-	else
+	else{
 		Log("NIE JE tedeum...\n");
+		_global_opt_tedeum = NIE; /* opravené 2007-05-18 */
+	}
 
 	Log("showPrayer: jazyk == `%s' (%d)\n", pom_JAZYK, _global_jazyk); /* 2006-07-11: Pridané kvôli jazykovým mutáciám */
 	Log("showPrayer: opt1 == `%s' (%d)\n", pom_MODL_OPT1, _global_opt1);
 	Log("showPrayer: opt2 == `%s' (%d)\n", pom_MODL_OPT2, _global_opt2);
+	Log("showPrayer: opt tedeum == %d\n", _global_opt_tedeum);
 	/* toto uz by tu bolo dost neskoro; je to v dbsvaty.cpp::set_spolocna_cast()
 	if(_global_opt3 == MODL_SPOL_CAST_NEURCENA){
 		_global_opt3 = (_decode_spol_cast(_global_den.spolcast)).a1;
