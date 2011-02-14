@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* hodin.h                                                     */
-/* (c)1999-2005 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2006 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | definovane stringove kontanty                 */
 /* document history                                            */
@@ -12,6 +12,7 @@
 /*   2003-11-20a.D. | pridane nazov_obd_htm_pc[]               */
 /*   2005-07-27a.D. | pridané nazov_slavenia_lokal[]           */
 /*   2005-08-05a.D. | pridané zvazok_OBD[]                     */
+/*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám          */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -302,3 +303,9 @@ const char *nazov_mes[] =
 {"jan", "feb", "mar", "apr", "maj", "jun", "jul",
  "aug", "sep", "okt", "nov", "dec", "___"};
 
+/* 2006-07-11: Pridané kvôli jazykovým mutáciám */
+const char *nazov_jazyka[] =
+{"slovenèina", "èeština", "English", "(neurèený)"};
+
+const char *skratka_jazyka[] =
+{"sk", "cz", "en", "??"};

@@ -29,6 +29,7 @@
 /*   2005-08-05a.D. | pridané zvazok_OBD[]                     */
 /*   2005-11-11a.D. | Doplnené parametre pre Te Deum           */
 /*   2006-02-07a.D. | ZALTAR_... pre funkciu zaltar_zvazok();  */
+/*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám          */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -632,6 +633,12 @@ typedef struct lrok _struct_lrok;
 #define LINK_DEN_MESIAC_ROK_PRESTUP 4 /* pridana kvoli prestupnym rokom, 2003-07-02 */
 #define LINK_ISO_8601 5 /* pridana kvoli SIMPLE exportu, 2005-03-21 */
 
+/* 2006-07-11: Pridané kvôli jazykovým mutáciám */
+#define JAZYK_SK	0
+#define JAZYK_CZ	1
+#define JAZYK_EN	2
+#define JAZYK_UNDEF 3
+
 /* ------------------------------------------------------------------- */
 /* globalne premenne -- su definovane v dnes.cpp (18/02/2000A.D.) */
 
@@ -755,6 +762,10 @@ extern char *_global_string2;
 
 /* pridane 13/04/2000A.D.; definovane v breviar.cpp */
 extern int _global_linky;
+
+/* 2006-07-11: Pridané kvôli jazykovým mutáciám (breviar.cpp) */
+extern int _global_language;
+
 /* ------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------- */

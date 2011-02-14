@@ -74,6 +74,7 @@
 /*   2006-01-31a.D. | batch mód exportuje aj mcd (mna) a posv. èítanie     */
 /*   2006-02-02a.D. | vytvorená fcia _main_formular(),zobraz.pre každý deò */
 /*   2006-02-06a.D. | úprava v _rozbor_dna() kvôli nastaveniu _global_opt3 */
+/*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám                      */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -266,6 +267,12 @@ char *_global_string2;
 
 /* pridane 13/04/2000A.D.; deklarovane v liturgia.h */
 int _global_linky;
+
+/* 2006-07-11: Pridané kvôli jazykovým mutáciám */
+int _global_language;
+#define	_global_jazyk	_global_language
+
+
 /* ------------------------------------------------------------------- */
 
 
@@ -320,7 +327,10 @@ char pom_ROK_TO     [SMALL] = STR_EMPTY;
  * alebo iba "akoze"-odkazy, ako mi poradil Miro M. a aj Matko Bk
  * 13/04/2000A.D. 
  */
-char pom_LINKY[SMALL] = STR_EMPTY;
+char pom_LINKY		[SMALL] = STR_EMPTY;
+
+/* 2006-07-11: Pridané kvôli jazykovým mutáciám */
+char pom_JAZYK		[SMALL] = STR_EMPTY;
 
 char bad_param_str[MAX_STR] = STR_EMPTY; /* inicializacia pridana 2003-08-13 */
 
@@ -777,6 +787,18 @@ int setForm(void){
 		ret = putenv(local_str);
 		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
 	}
+
+	/* 2006-07-11: Pridané kvôli jazykovým mutáciám */
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_JAZYK, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_JAZYK), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_JAZYK);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		ret = putenv(local_str);
+		Log("--- setForm: putenv returned %d.\n", ret);
+	}
+
 	Log("setForm() -- end, returning SUCCESS\n");
 	return SUCCESS;
 }/* setForm(); */
@@ -1774,6 +1796,7 @@ void showPrayer(int type){
 	else
 		Log("NIE JE tedeum...\n");
 
+	Log("showPrayer: jazyk == `%s' (%d)\n", pom_JAZYK, _global_jazyk); /* 2006-07-11: Pridané kvôli jazykovým mutáciám */
 	Log("showPrayer: opt1 == `%s' (%d)\n", pom_MODL_OPT1, _global_opt1);
 	Log("showPrayer: opt2 == `%s' (%d)\n", pom_MODL_OPT2, _global_opt2);
 	/* toto uz by tu bolo dost neskoro; je to v dbsvaty.cpp::set_spolocna_cast()
@@ -4616,6 +4639,21 @@ void _main_formular(int den, int mesiac, int rok, int denvt){
 
 }
 
+/* 2006-07-12: vytvorené kvôli jazykovým mutáciám
+ * popis: vráti èíslo jazyka 
+ *			 inak vrati UNKNOWN_DEN
+ */
+int atojazyk(char *jazyk){
+	int i = 0;
+	do{
+		if(equalsi(jazyk, skratka_jazyka[i]) || equalsi(jazyk, nazov_jazyka[i])){
+			return i;
+		}
+		i++;
+	}while(i < JAZYK_UNDEF);
+	return JAZYK_UNDEF;
+}
+
 /* 2006-02-10: nový define; používa premenné int i, p */
 #define _parsuj_parameter_MODLITBA {\
 	/* rozparsovanie parametra modlitba */\
@@ -6019,9 +6057,11 @@ int getArgv(int argc, char **argv){
 	 *            `a' (append) aby pri exportovani do suboru (-e) appendoval, nie prepisal subor
 	 * 2004-03-16: pridany nasledovny parameter:
 	 *            `k' (hyperteKst) aby pri exportovani v batch mode pisal do HTML suboru zoznam modlitieb
+	 * 2006-07-12: pridaný nasledovný parameter:
+	 *            `j' (Jazyk) jazyková mutácia, zatia¾ sk, cz
 	 *            
 	 */
-	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::1::2::3::4::5::a::h::e::f::g::l::i::\?::b::n::k::", MAX_STR);
+	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::1::2::3::4::5::a::h::e::f::g::l::i::\?::b::n::k::j::", MAX_STR);
 	/* tie options, ktore maju za sebou : maju povinny argument;
 	 *	ak maju :: tak maju volitelny */
 
@@ -6066,6 +6106,11 @@ int getArgv(int argc, char **argv){
 			if (c == -1) /* uz nie je option, vyskoc z while(1) */
 				break;
 			switch (c){ /* podla option urob nieco */
+				case 'j': /* 2006-07-11: Pridané kvôli jazykovým mutáciám */
+					if(optarg != NULL){
+						mystrcpy(pom_JAZYK, optarg, SMALL);
+					}
+					Log("option %c with value `%s' -- `%s' used for language mutation\n", c, optarg, optarg); break;
 				case 'k': /* pridane 2004-03-16, name_batch_html_file */
 					if(optarg != NULL){
 						mystrcpy(name_batch_html_file, optarg, SMALL);
@@ -6156,7 +6201,7 @@ int getArgv(int argc, char **argv){
 					}
 					Log("option %c with value `%s' -- poradie svateho\n", c, optarg); break;
 
-				/* nasledovne 3 case'y sa tykaju MODL_OPT... */
+				/* nasledovne case'y sa tykaju MODL_OPT... */
 				case '1': /* MODL_OPT1 */
 					/* znamena siesty parameter */
 					if(optarg != NULL){
@@ -6258,6 +6303,9 @@ int getArgv(int argc, char **argv){
 					printf("\th, ?  tento help \n");
 					/* pridane 2003-07-08 */
 					printf("\ta  (append) pri exportovani do suboru (-e) neprepisuje subor\n");
+					/* pridané 2006-07-12 */
+					printf("\tj  jazyk (jazykova mutacia), zatial: sk, cz\n");
+
 					/* pridane 2003-06-27; prave prva uvedena linka sposobuje problem (nefunguju detaily pre spomienku pm v sobotu) */
 					printf("\n\t   pri prepinacoch ano = 1, nie = 0\n");
 					printf("\npriklady pouzitia:\n");
@@ -6343,6 +6391,15 @@ int getForm(void){
 	//DEBUG_GET_FORM("argc == %d\n", argc);
 
 	/* malo by byt argc == 1 */
+
+	/* premenná WWW_JAZYK pridaná 2006-07-11 kvôli jazykovým mutáciám */
+	ptr = getenv(ADD_WWW_PREFIX_(STR_JAZYK));
+	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
+	 * lebo pom_... su inicializovane na STR_EMPTY */
+	if(ptr != NULL){
+		if(strcmp(ptr, EMPTY_STR) != 0)
+			mystrcpy(pom_JAZYK, ptr, SMALL);
+	}
 
 	if((query_type == PRM_DATUM) || (query_type == PRM_DETAILY)){
 		/* datum: treba nacitat den, mesiac a rok */
@@ -6747,7 +6804,7 @@ int parseQueryString(void){
  *     WWW_QUERY_TYPE=PRM_DATUM, WWW_DATUM, WWW_MESIAC, WWW_ROK)
  */
 
-	int i;
+	int i, pocet;
 
 	Log("parseQueryString() -- begin\n");
 	if(query_string != NULL)
@@ -6766,6 +6823,7 @@ int parseQueryString(void){
 		Log("--- param[%d].name == %s, .val == %s\n", i, param[i].name, param[i].val);
 		i++;
 	}
+	pocet = i; /* od 0 po i - 1 */
 
 	/* param[0] by mal obsahovat typ akcie */
 	if(equals(param[0].name, STR_QUERY_TYPE)){
@@ -6817,6 +6875,19 @@ int parseQueryString(void){
 		Export("Chybný parameter: %s\n", param[0].name);
 		ALERT;
 		return FAILURE;
+	}
+
+
+	/* 2006-07-12: pridané kvôli jazykovým mutáciám */
+	i = 1; /* netreba od 0, pretože param[0] by mal obsahova typ akcie, porov. vyššie */
+	Log("pokúšam sa zisti jazyk...\n");
+	while((equalsi(pom_JAZYK, STR_EMPTY)) && (i < pocet)){
+		Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
+		if(equals(param[i].name, STR_JAZYK)){
+			/* ide o parameter STR_JAZYK */
+			mystrcpy(pom_JAZYK, param[i].val, SMALL);
+			Log("jazyk zistený.\n");
+		}
 	}
 
 	Log("\tswitch(query_type)...\n");
@@ -7283,6 +7354,7 @@ int parseQueryString(void){
 	_main_LOG_to_Export("\tparam9 == %s (pom_MODL_OPT4)\n", pom_MODL_OPT4);\
 	_main_LOG_to_Export("\tparam10== %s (pom_MODL_OPT5)\n", pom_MODL_OPT5);\
 	_main_LOG_to_Export("\tparam11== %s (pom_MODL_OPT_APPEND)\n", pom_MODL_OPT_APPEND);\
+	_main_LOG_to_Export("\tparam12== %s (pom_JAZYK)\n", pom_JAZYK);\
 }
 
 /* kedysi bolo void main;
@@ -7311,7 +7383,8 @@ int main(int argc, char **argv){
 	strcpy(pom_DALSI_SVATY, STR_EMPTY);
 	strcpy(pom_ROK_FROM   , STR_EMPTY);
 	strcpy(pom_ROK_TO     , STR_EMPTY);
-	strcpy(pom_LINKY, STR_EMPTY);
+	strcpy(pom_LINKY      , STR_EMPTY);
+	strcpy(pom_JAZYK      , STR_EMPTY); /* 2006-07-11: Pridané kvôli jazykovým mutáciám */
 	/* koniec inicializacie globalnych premennych; teraz samotna main()
 	 * 11/04/2000A.D.
 	 */
@@ -7565,7 +7638,17 @@ _main_SIMULACIA_QS:
 			/* inicializacia pridana do _allocate_global_var 2003-08-13 */
 
 			LOG_ciara;
-		
+
+			/* 2006-07-12: pridané parsovanie jazyka kvôli jazykovým mutáciám */
+			_main_LOG_to_Export("zisujem jazyk...\n");
+			_global_jazyk = atojazyk(pom_JAZYK);
+			if(_global_jazyk == JAZYK_UNDEF){
+				_global_jazyk = JAZYK_SK;
+				_main_LOG_to_Export("\t(vzh¾adom k neurèenému jazyku používam default)\n");
+			}
+			_main_LOG_to_Export("...jazyk (%s) = %i, teda %s (%s)\n", pom_JAZYK, _global_jazyk, nazov_jazyka[_global_jazyk], skratka_jazyka[_global_jazyk]);
+			LOG_ciara;
+
 			/* pridane 27/04/2000A.D.
 			 * 2005-03-22: Upraveny vystup aj pre OS_linux rovnako ako pre ostatne
 			 */

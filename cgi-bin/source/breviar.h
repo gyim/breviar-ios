@@ -12,6 +12,7 @@
 /*   2003-07-14a.D. | zmena void main -> int main (gcc v3.2.2 )*/
 /*   2003-08-07a.D. | pridane _global_opt5                     */
 /*   2003-08-13a.D. | pridane _type a _global_modl pre posv.cit*/
+/*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám          */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -142,6 +143,9 @@ extern char *_global_string;
 extern char *_global_string2;
 /*char _global_string2[MAX_STR];*/ /* obsahuje I, II, III, IV, V alebo pismeno roka */
 /* ------------------------------------------------------------------- */
+
+/* 2006-07-11: Pridané kvôli jazykovým mutáciám (breviar.cpp) */
+extern int _global_language;
 
 #ifndef OS_linux
 /* kedysi bolo void main;

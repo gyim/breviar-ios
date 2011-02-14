@@ -17,6 +17,7 @@
 /*   2005-03-22a.D. | zrusene DOS, vytvoreny novy model        */
 /*   2005-03-28a.D. | pridane na zaciatok #undef pre vsetky    */
 /*   2006-01-28a.D. | pridané define pre spôsob exportu        */
+/*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám          */
 /*                                                             */
 /***************************************************************/
 
@@ -36,11 +37,11 @@
 #undef MODEL_DEBUG_Windows
 
 //#define MODEL_ostry_linux
-//#define MODEL_DEBUG_Windows
+#define MODEL_DEBUG_Windows
 //#define MODEL_DEBUG_linux
 //#define MODEL_ostry_SIMUL_linux_UNDER_Windows		// 2005-03-28 Vytvorene (simulacia ostreho linuxu)
 //#define MODEL_DEBUG_SIMUL_linux_UNDER_Windows		// 2005-03-22 Vytvorene (simulacia DEBUG linuxu)
-#define MODEL_ostry_Windows // nezabudni zmenit datum v mybuild.h !!!
+//#define MODEL_ostry_Windows // nezabudni zmenit datum v mybuild.h !!!
 
 /* --------------------------------------------------------------------- */
 /* prerobene 23/02/2000A.D. -- 24/02/2000A.D. */

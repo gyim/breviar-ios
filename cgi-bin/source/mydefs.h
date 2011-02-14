@@ -21,6 +21,7 @@
 /*   2004-08-14a.D. | zmena definicie ADD_WWW_PREFIX_          */
 /*   2005-03-28a.D. | zmena definicie UNCGI_PATH               */
 /*   2005-07-27a.D. | pridane HTML_SPAN_RED_SMALL              */
+/*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám          */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -366,6 +367,14 @@ extern int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPT5 "MODL_OPT5"
 #else
 	#define STR_MODL_OPT5 "o5"
+#endif
+
+/* 2006-07-11: Pridané kvôli jazykovým mutáciám */
+#define JAZYK 37
+#ifdef LONG_PARAM_NAMES
+	#define STR_JAZYK "JAZYK"
+#else
+	#define STR_JAZYK "j"
 #endif
 
 /* global */
