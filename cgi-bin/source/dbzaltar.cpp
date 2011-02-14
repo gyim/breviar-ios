@@ -6421,6 +6421,7 @@ label_24_DEC:
 				if(den == DEN_NEDELA){
 					/* 2007-12-06: pridané kompletórium po prvých vešperách */
 					modlitba = MODL_PRVE_KOMPLETORIUM;
+					set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd); /* 2008-04-21: doplnené */
 					set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
 					set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd);
 					/* prvé vešpery */
@@ -6604,6 +6605,7 @@ label_24_DEC:
 
 					/* 2007-12-06: pridané kompletórium po prvých vešperách */
 					modlitba = MODL_PRVE_KOMPLETORIUM;
+					set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd); /* 2008-04-21: doplnené */
 					set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
 					set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd);
 
@@ -6687,6 +6689,7 @@ label_24_DEC:
 				else{
 					/* 2007-12-06: pridané kompletórium po prvých vešperách */
 					modlitba = MODL_PRVE_KOMPLETORIUM;
+					set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd); /* 2008-04-21: doplnené */
 					set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
 					set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd);
 					/* prvé vešpery */
