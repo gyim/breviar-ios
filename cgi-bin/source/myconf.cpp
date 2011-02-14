@@ -19,9 +19,9 @@
 
 #include "vstudio.h"
 
-#include "myconf.h"
+// #include "myconf.h"
 #include "mystring.h"
-#include "confuse.h"
+// #include "confuse.h"
 
 char HTTP_ADDRESS[MAX_HTTP_STR] = "http://www.breviar.sk/";
 char MAIL_ADDRESS[MAX_MAIL_STR] = "videky@breviar.sk";
@@ -35,6 +35,7 @@ void readConfig(void){
 	char *mail_address = NULL;
 	char *include_dir = NULL;
 
+/*
 	cfg_opt_t opts[] = {
 		CFG_SIMPLE_STR("http_adresa", &http_address),
 		CFG_SIMPLE_STR("mail_adresa", &mail_address),
@@ -44,12 +45,12 @@ void readConfig(void){
 
 	cfg_t *cfg;
 
-	cfg = cfg_init(opts, 0);
+	cfg = cfg_init(opts, 0); */
 	/* Tu by mozno bolo dobre dotat, ze ked to najde chybu v parsovanom subore
 	 * napr. neznamu volbu, tak to VYPISE EROR na STDOUT a skonci, teda ostatne
 	 * premenne necha prazdne.
 	 */
-	cfg_parse(cfg, CONFIG_FILE);
+/*	cfg_parse(cfg, CONFIG_FILE);
 	
 	// No a teraz sa tie stringy napchaju do globalnych poli
 	if (http_address){
@@ -61,7 +62,7 @@ void readConfig(void){
 	if (include_dir){
 		strncpy(INCLUDE_DIR, include_dir, MAX_INCD_STR);
 	}
-
+*/
 	return;
 }
 

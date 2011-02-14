@@ -20,6 +20,8 @@
 
 #include "mydefs.h"
 
+#include "confuse.h"
+
 #define MAX_HTTP_STR 80
 #define MAX_MAIL_STR 80
 #define MAX_INCD_STR 80
