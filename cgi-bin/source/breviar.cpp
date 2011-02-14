@@ -3854,7 +3854,7 @@ void _export_rozbor_dna(short int typ){
 		/* 2006-08-19: okrem premennej _global_string táto funkcia ešte naplní aj _global_string2 a _global_string_farba */
 
 	/* export vytvoreného linku */
-	Export("\n<tr valign=baseline>\n");
+	Export("\n<tr valign=\"baseline\">\n");
 
 	/* zmenene <div align> na priamo do <td>, 2003-07-09 kvoli HTML 4.01 */
 
@@ -3864,7 +3864,7 @@ void _export_rozbor_dna(short int typ){
 	Log("\npom2 == %s\n", pom2);
 
 	/* prvy stlpec: cislo dna */
-	Export("<td align=right>%s%s%s%c</td>\n",
+	Export("<td align=\"right\">%s%s%s%c</td>\n",
 		pom1, _global_link, pom2, dvojbodka);
 
 	/* druhy stlpec: nazov dna 
@@ -5477,7 +5477,17 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 			if(!kontrola(d, m, r)){
 				Log("/* teraz vypisujem heading 1, datum %d. %s %d */\n",
 					d, nazov_mesiaca(m - 1), r);
-				sprintf(pom, "%d. %s %d", d, nazov_mesiaca(m - 1), r);
+				/* 2007-03-20: spôsob výpisu dátumu pod¾a jazyka */
+				if(_global_jazyk == JAZYK_LA){
+					sprintf(pom, "%d. %s %d", d, nazov_Mesiaca_gen(m - 1), r);
+				}
+				else if(_global_jazyk == JAZYK_EN){
+					sprintf(pom, "%s %d, %d", nazov_Mesiaca(m - 1), d, r);
+				}
+				else{
+					/* doterajšie správanie pre slovenèinu a èeštinu */
+					sprintf(pom, "%d. %s %d", d, nazov_mesiaca(m - 1), r);
+				}
 				_export_heading_center(pom);
 				/* 2003-06-30: podla toho, ci je alebo nie je urcena modlitba */
 				if(p == MODL_NEURCENA){
@@ -5555,8 +5565,17 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 	/* vypis */
 	Log("/* teraz vypisujem heading 1, datum %d. %s %d */\n",
 		dnes.tm_mday, nazov_mesiaca(dnes.tm_mon - 1), dnes.tm_year);
-	sprintf(pom, "%d. %s %d",
-		dnes.tm_mday, nazov_mesiaca(dnes.tm_mon - 1), dnes.tm_year);
+	/* 2007-03-20: spôsob výpisu dátumu pod¾a jazyka */
+	if(_global_jazyk == JAZYK_LA){
+		sprintf(pom, "%d. %s %d", dnes.tm_mday, nazov_Mesiaca_gen(dnes.tm_mon - 1), dnes.tm_year);
+	}
+	else if(_global_jazyk == JAZYK_EN){
+		sprintf(pom, "%s %d, %d", nazov_Mesiaca(dnes.tm_mon - 1), dnes.tm_mday, dnes.tm_year);
+	}
+	else{
+		/* doterajšie správanie pre slovenèinu a èeštinu */
+		sprintf(pom, "%d. %s %d", dnes.tm_mday, nazov_mesiaca(dnes.tm_mon - 1), dnes.tm_year);
+	}
 	_export_heading_center(pom);
 
 	/* 2006-02-10: výpis juliánskeho dátumu, len ak nie je urèená modlitba 
