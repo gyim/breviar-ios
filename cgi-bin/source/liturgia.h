@@ -36,6 +36,7 @@
 /*   2006-08-19a.D. | pridanie liturgickej farby               */
 /*   2006-10-11a.D. | pre invitatórium a kompletórium          */
 /*   2006-10-13a.D. | jazykovo závislé je aj nazov_Modlitby    */
+/*   2006-12-12a.D. | doplnenie latinèiny (la)                 */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -54,7 +55,7 @@
 #define MENO_SVIATKU 100
 
 /* 2006-07-31: kvôli jazykovým mutáciám */
-#define	POCET_JAZYKOV	3
+#define	POCET_JAZYKOV	4
 
 /* nasledovne 2 definovane 2003-08-13; zmenene 2004-04-28 (12->16) */
 #define MAX_STR_AF_FILE   16
@@ -782,11 +783,14 @@ typedef struct lrok _struct_lrok;
 #define LINK_DEN_MESIAC_ROK_PRESTUP 4 /* pridana kvoli prestupnym rokom, 2003-07-02 */
 #define LINK_ISO_8601 5 /* pridana kvoli SIMPLE exportu, 2005-03-21 */
 
-/* 2006-07-11: Pridané kvôli jazykovým mutáciám */
+/* 2006-07-11: Pridané kvôli jazykovým mutáciám 
+ * 2006-12-12: Pridaná latinèina, kódy sú pod¾a ISO 639-1 (až na èeštinu)
+ */
 #define JAZYK_SK	0
 #define JAZYK_CZ	1
 #define JAZYK_EN	2
-#define JAZYK_UNDEF 3
+#define JAZYK_LA    3
+#define JAZYK_UNDEF 4
 
 /* ------------------------------------------------------------------- */
 /* globalne premenne -- su definovane v dnes.cpp (18/02/2000A.D.) */
