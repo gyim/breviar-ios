@@ -119,10 +119,13 @@ char _anchor_head[SMALL];
 /* globalne premenne prehodene do liturgia.h, 17/02/2000A.D. */
 /* ------------------------------------------------------------------- */
 
-#define su_zalmy_vlastne ((_global_den.denvt == DEN_NEDELA) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK))
-#define su_zalmy_prve_vespery_vlastne ((_global_den.denvt == DEN_NEDELA) || (_global_den.typslav == SLAV_SLAVNOST))
-#define su_kcit_kresp_1cit_prosby_vlastne ((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK)) // rovnakÈ kritÈrium pre kr·tke ËÌtanie (rch, v) a 1. ËÌtanie (posv. ËÌtania); moûno pouûiù aj na 2. ËÌtanie posv. ËÌt.; 2007-10-23: pouûiù aj pre kr·tke responzÛrium (rch, v) a prosby (rch, v)
-#define su_antifony_vlastne(m) ((_global_den.typslav == SLAV_SLAVNOST) || ((_global_den.typslav == SLAV_SVIATOK) && ((m == MODL_RANNE_CHVALY) || (m == MODL_POSV_CITANIE) || (m == MODL_VESPERY))))
+/*
+ * 2007-11-07, doplnenÈ: öpeci·lne spr·vanie pre 2. november: VäETK›CH VERN›CH ZOSNUL›CH, spomienka
+ */
+#define su_zalmy_vlastne ((_global_den.denvt == DEN_NEDELA) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.den == 2 && _global_den.mesiac == MES_NOV))
+#define su_zalmy_prve_vespery_vlastne ((_global_den.denvt == DEN_NEDELA) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.den == 2 && _global_den.mesiac == MES_NOV))
+#define su_kcit_kresp_1cit_prosby_vlastne ((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.den == 2 && _global_den.mesiac == MES_NOV)) // rovnakÈ kritÈrium pre kr·tke ËÌtanie (rch, v) a 1. ËÌtanie (posv. ËÌtania); moûno pouûiù aj na 2. ËÌtanie posv. ËÌt.; 2007-10-23: pouûiù aj pre kr·tke responzÛrium (rch, v) a prosby (rch, v)
+#define su_antifony_vlastne(m) ((_global_den.typslav == SLAV_SLAVNOST) || ((_global_den.typslav == SLAV_SVIATOK) && ((m == MODL_RANNE_CHVALY) || (m == MODL_POSV_CITANIE) || (m == MODL_VESPERY))) || (_global_den.den == 2 && _global_den.mesiac == MES_NOV))
 
 /* 2007-09-28: upravenÈ priraÔovanie spoloËnej Ëasti; berie sa iba v prÌpade sl·vnostÌ resp. sviatkov,
  * pre spomienky a æubovoænÈ spomienky by malo ostaù to, Ëo je zo dÚa (2007-10-02, 2007-10-22)
