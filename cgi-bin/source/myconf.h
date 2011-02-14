@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* myconf.h                                                    */
-/* (c)1999-2006 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2007 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | poskytuje rozhranie na konfiguraciu,          */
 /*               subor CONFIG_FILE                             */
@@ -20,9 +20,11 @@
 
 #include "mydefs.h"
 
-#define MAX_HTTP_STR 80
-#define MAX_MAIL_STR 40
-#define MAX_INCD_STR 40
+#define MAX_HTTP_STR	80
+#define MAX_MAIL_STR	50
+#define MAX_INCD_STR	50
+#define MAX_OPTION_LENGTH	40
+#define MAX_VALUE_LENGTH	80
 
 #define CONFIG_FILE "breviar.cfg"
 

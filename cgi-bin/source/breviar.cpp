@@ -1872,7 +1872,7 @@ void interpretTemplate(short int type, char *tempfile){
 	char isbuff = 0;
 
 	_global_pocet_slava_otcu = 0; /* pre každý súbor templátu individuálne poèítame sláva otcu; 2007-05-18 */
-	FILE *ftemplate = fopen(tempfile,"rb");
+	FILE *ftemplate = fopen(tempfile, "rb");
 
 	Log("interpretTemplate(%s): Interpreting template %s\n",
 		tempfile, tempfile);
