@@ -5176,7 +5176,7 @@ short int atojazyk(char *jazyk){
 
 /* 2006-02-10: nový define; používa premennú int i */
 #define _rozparsuj_parametre_OPT {\
-	Log("/* rozparsovanie parametrov opt1...opt5 */\n"); \
+	Log("/* rozparsovanie parametrov opt1...opt5 */ (#define _rozparsuj_parametre_OPT)\n"); \
  \
 	/* option 1 */ \
 	if(equals(pom_MODL_OPT1, STR_ANO) || equals(pom_MODL_OPT1, "1")){ \
@@ -6482,6 +6482,9 @@ void write(void){
 short int getQueryTypeFrom_QS(char *qs){
 	Log("getQueryTypeFrom_QS() -- begin\n");
 	Log("  qs == %s\n", qs);
+
+	// Log("pom_MODL_OPT1 == `%s'\n", pom_MODL_OPT1); // 2007-04-11 pomocný výpis
+
 	if(strstr(qs, STR_PRM_DATUM) != NULL){
 		/* parameter STR_PRM_DATUM */
 		Log("getQueryTypeFrom_QS() -- end, returning PRM_DATUM\n");
@@ -8526,7 +8529,7 @@ _main_SIMULACIA_QS:
 				 * tam nieco dostane...
 				 */
 				case PRM_DATUM:
-					_main_LOG_to_Export("spustam _main_rozbor_dna(%s, %s, %s, %s, %s);\n",
+					_main_LOG_to_Export("spustam _main_rozbor_dna(pom_DEN = %s, pom_MESIAC = %s, pom_ROK = %s, pom_MODLITBA = %s, pom_DALSI_SVATY = %s);\n",
 						pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA, pom_DALSI_SVATY);
 					_main_rozbor_dna(pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA, pom_DALSI_SVATY);
 					_main_LOG_to_Export("spat po skonceni _main_rozbor_dna(%s, %s, %s, %s, %s);\n",

@@ -771,7 +771,7 @@ const char *html_button_detaily[] = {"Detaily...", "Podrobnìji...", "Details..."
 #define HTML_BUTTON_DETAILY	html_button_detaily[_global_jazyk]
 #endif
 
-const char *html_button_det_show[] = {"Zobraz modlitbu", "Uka modlitbu", "Show prayer", "", ""};
+const char *html_button_det_show[] = {"Zobraz modlitbu", "Uka modlitbu", "Show prayer", "xxx", ""};
 #ifndef HTML_BUTTON_DET_SHOW
 #define HTML_BUTTON_DET_SHOW	html_button_det_show[_global_jazyk]
 #endif
@@ -817,9 +817,9 @@ const char *html_text_tabulka_pohyblive_od[] = {"tabu¾ka dátumov pohyblivıch slá
 const char *html_text_do_roku[] = {"do roku", "po rok", "till year", "", ""};
 const char *html_text_zobrazit_linky[] = {"zobrazi tabu¾ku vrátane hypertextovıch odkazov na jednotlivé dni", "zobrazit tabulku s hypertextovımi odkazy pro jednotlivé dny", "display the table including hypertext links to each date", "", ""};
 const char *html_text_pre_cezrocne_obd[] = {"pre cezroèné obdobie", "pro mezidobí", "for ...", "", ""};
-const char *html_text_tyzden_zaltara[] = {". tıdeò altára", ". tıden altáøe", "week of Psaltary", "", ""};
-const char *html_text_tyzden[] = {". tıdeò", ". tıden", "week", "", ""};
-const char *html_text_v_tyzdni_zaltara[] = {". tıdni altára", ". tıdnu altáøe", "week of Psaltary", "", ""};
+const char *html_text_tyzden_zaltara[] = {". tıdeò altára", ". tıden altáøe", "week of Psaltary", "hebdomada", ""};
+const char *html_text_tyzden[] = {". tıdeò", ". tıden", "week", "hebdomada", ""};
+const char *html_text_v_tyzdni_zaltara[] = {". tıdni altára", ". tıdnu altáøe", "week of Psaltary", "hebdomada", ""};
 const char *html_text_dnes_je_atd[] = 
 {"Dnes je %d. deò v roku%s, <a href=\"%s%s\">juliánsky dátum</a> JD = %ld%s.\n<br>\n",
  "Dnes je %d. den v roku%s, <a href=\"%s%s\">juliánské datum</a> JD = %ld%s.\n<br>\n",
@@ -852,7 +852,7 @@ const char *str_modl_cez_den_doplnkova_psalmodia[POCET_JAZYKOV + 1] =
 #define		STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA 	str_modl_cez_den_doplnkova_psalmodia[_global_jazyk]
 
 const char *str_modl_zalmy_zo_dna[POCET_JAZYKOV + 1] = 
-	{"dòa", "dne", "day", "", ""};
+	{"dòa", "dne", "day", "die", ""};
 #define		STR_MODL_ZALMY_ZO_DNA 	str_modl_zalmy_zo_dna[_global_jazyk]
 
 const char *str_modl_zalmy_zo_sv[POCET_JAZYKOV + 1] = 
@@ -860,11 +860,11 @@ const char *str_modl_zalmy_zo_sv[POCET_JAZYKOV + 1] =
 #define		STR_MODL_ZALMY_ZO_SV 	str_modl_zalmy_zo_sv[_global_jazyk]
 
 const char *str_ano[POCET_JAZYKOV + 1] = 
-	{"áno", "ano", "yes", "", ""};
+	{"áno", "ano", "yes", "___", "___"};
 #define		STR_ANO		str_ano[_global_jazyk]
 
 const char *str_nie[POCET_JAZYKOV + 1] = 
-	{"nie", "ne", "no", "non", ""};
+	{"nie", "ne", "no", "non", "___"};
 #define		STR_NIE		str_nie[_global_jazyk]
 
 const char *html_text_detaily_uvod[POCET_JAZYKOV + 1] = 
