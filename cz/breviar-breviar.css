@@ -43,7 +43,7 @@ p.normal {
 }
 
 a { font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; color: #FFFFFF; text-decoration: none; }
-a:hover { color: #FFFFFF; background-color: #000000; text-decoration:none; font-weight: normal; }
+a:hover { color: #FFFFFF; background-color: #000000; text-decoration:none; }
 a:active { color: #FFFFFF; text-decoration: none; }
 a img { border: none }
 

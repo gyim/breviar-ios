@@ -97,6 +97,7 @@
 /*   2008-06-24a.D. | doplnené LOKAL_SLAV_SPIS_BA_PATRON                */
 /*   2008-07-03a.D. | snáï opravené kompletórium pre slávnosti (ocr)    */
 /*   2008-07-18a.D. | pridaný sviatok (text_JUL_24)                     */
+/*   2008-10-15a.D. | _vlastna_cast_full_okrem_prosieb_a_hymnu() pre CZ */
 /*                                                                      */
 /*                                                                      */
 /* notes |                                                              */
@@ -7346,6 +7347,17 @@ short int _spol_cast_je_panna(_struct_sc sc){
 	else if(modl == MODL_POSV_CITANIE){_vlastna_cast_2citanie;}\
 	_vlastna_cast_modlitba;\
 }
+/* 2008-10-15: doplnené pre èeský breviáø */
+#define _vlastna_cast_full_okrem_prosieb_a_hymnu(modl) {\
+	_vlastna_cast_antifony;\
+	if(modl == MODL_POSV_CITANIE){_vlastna_cast_1citanie;}\
+	else {_vlastna_cast_kcitanie;}\
+	_vlastna_cast_kresponz;\
+	if(modl == MODL_RANNE_CHVALY){_vlastna_cast_benediktus;}\
+	else if((modl == MODL_VESPERY) || (modl == MODL_PRVE_VESPERY)){_vlastna_cast_magnifikat;}\
+	else if(modl == MODL_POSV_CITANIE){_vlastna_cast_2citanie;}\
+	_vlastna_cast_modlitba;\
+}
 /* full -- vsetko (hymnus, antifony, kcitanie, kresponz,
  * benediktus/magnifikat, prosby, modlitba -- ina ako na rchv a vesp */
 #define _vlastna_cast_antifony_ako_na_ranne_chvaly {\
@@ -9239,7 +9251,12 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_full_okrem_prosieb(modlitba);
+						if(_global_jazyk == JAZYK_SK){ /* 2008-10-15: odvetvené len pre Slovensko */
+							_vlastna_cast_full_okrem_prosieb(modlitba);
+						}
+						else{
+							_vlastna_cast_full_okrem_prosieb_a_hymnu(modlitba);
+						}
 
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_hymnus;
@@ -9247,7 +9264,12 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
-						_vlastna_cast_full_okrem_prosieb(modlitba);
+						if(_global_jazyk == JAZYK_SK){ /* 2008-10-15: odvetvené len pre Slovensko */
+							_vlastna_cast_full_okrem_prosieb(modlitba);
+						}
+						else{
+							_vlastna_cast_full_okrem_prosieb_a_hymnu(modlitba);
+						}
 
 						break;
 					}
@@ -12230,6 +12252,9 @@ label_25_MAR:
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
 						_vlastna_cast_2citanie;
+						if(_global_jazyk == JAZYK_CZ){ /* 2008-10-15: odvetvené len pre Èesko */
+							_vlastna_cast_hymnus;
+						}
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_antifony_ako_na_ranne_chvaly;
@@ -14758,7 +14783,9 @@ label_25_MAR:
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_hymnus;
+						if(_global_jazyk == JAZYK_SK){ /* 2008-10-12: odvetvené len pre Slovensko */
+							_vlastna_cast_hymnus;
+						}
 						_vlastna_cast_modlitba;
 
 						modlitba = MODL_POSV_CITANIE;
@@ -14766,7 +14793,9 @@ label_25_MAR:
 						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
-						_vlastna_cast_hymnus;
+						if(_global_jazyk == JAZYK_SK){ /* 2008-10-12: odvetvené len pre Slovensko */
+							_vlastna_cast_hymnus;
+						}
 						_vlastna_cast_modlitba;
 
 						break;
@@ -14904,14 +14933,24 @@ label_25_MAR:
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_full_okrem_prosieb(modlitba);
+						if(_global_jazyk == JAZYK_SK){ /* 2008-10-15: odvetvené len pre Slovensko */
+							_vlastna_cast_full_okrem_prosieb(modlitba);
+						}
+						else{
+							_vlastna_cast_full_okrem_prosieb_a_hymnu(modlitba);
+						}
 
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
 						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
-						_vlastna_cast_full_okrem_prosieb(modlitba);
+						if(_global_jazyk == JAZYK_SK){ /* 2008-10-15: odvetvené len pre Slovensko */
+							_vlastna_cast_full_okrem_prosieb(modlitba);
+						}
+						else{
+							_vlastna_cast_full_okrem_prosieb_a_hymnu(modlitba);
+						}
 
 						break;
 					}
