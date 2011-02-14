@@ -14095,31 +14095,32 @@ label_25_MAR:
 					}
 					break;
 				case 12:
-					if(_global_jazyk == JAZYK_SK){ /* 2006-09-12: odvetvené len pre Slovensko */
-						if(poradie_svaty == 1){
-							/* definovanie parametrov pre modlitbu */
+					/* 2006-09-12: bolo odvetvené len pre Slovensko;
+					 * 2008-09-23: pre Èesko je taktiež ¾ubovo¾nou spomienkou
+					 */
+					if(poradie_svaty == 1){
+						/* definovanie parametrov pre modlitbu */
 
-							if(query_type != PRM_DETAILY)
-								set_spolocna_cast(sc, poradie_svaty);
+						if(query_type != PRM_DETAILY)
+							set_spolocna_cast(sc, poradie_svaty);
 
-							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_modlitba;
+						modlitba = MODL_RANNE_CHVALY;
+						_vlastna_cast_modlitba;
 
-							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_modlitba;
-							_vlastna_cast_2citanie;
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
 
-							modlitba = MODL_VESPERY;
-							_vlastna_cast_modlitba;
+						modlitba = MODL_VESPERY;
+						_vlastna_cast_modlitba;
 
-							break;
-						}
-						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-						mystrcpy(_global_svaty1.meno, text_SEP_12[_global_jazyk], MENO_SVIATKU);
-						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
-						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						break;
 					}
+					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+					mystrcpy(_global_svaty1.meno, text_SEP_12[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					break;
 				case 13:
 					if(poradie_svaty == 1){
@@ -14515,8 +14516,14 @@ label_25_MAR:
 
 						break;
 					}
-					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+					if(_global_jazyk == JAZYK_SK){ /* 2008-09-23: upravené */
+						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+					}
+					else{
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+					}
 					mystrcpy(_global_svaty1.meno, text_SEP_23[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */

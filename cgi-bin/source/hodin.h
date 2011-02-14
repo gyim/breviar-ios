@@ -1976,8 +1976,9 @@ const char *text_SEP_10[] =
  "Bl. Karla Spinoly, knìze a muèedníka"};
 const char *text_SEP_12[] =
 {"Mena prebl. Panny Márie",
- "(v Èechách, na Moravì a na Slezsku není)",
- "", "", "", "(pro dominikány není)"};
+ "Jména Panny Marie",
+ "", "", "", 
+ "Jména Panny Marie"};
 const char *text_SEP_13[] =
 {"Sv. Jána Zlatoústeho, biskupa a uèite¾a Cirkvi",
  "Sv. Jana Zlatoústého, biskupa a uèitele církve",
