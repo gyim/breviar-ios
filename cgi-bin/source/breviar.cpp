@@ -122,6 +122,7 @@
 /*   2009-01-06a.D. | Te Deum je pre posv.èít. aj v oktáve narodenia Pána  */
 /*   2009-01-28a.D. | úprava includeFile()                                 */
 /*   2009-01-29a.D. | pridaný ïalší jazyk - maïarèina (hu) [prvé kroky]    */
+/*   2009-02-17a.D. | posv. èítanie (button) pre všetky jazykové mutácie   */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -4038,7 +4039,9 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 /* 2003-08-06 dorobene posvatne citanie */
 		/* 2008-08-15: Posvätné èítanie iba pre èeštinu a slovenèinu */
 		/* 2008-09-11: Posvätné èítanie pridané aj pre "dominikánsku" èeštinu */
-		if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
+		/* 2009-02-17: Posvätné èítanie pre všetky jazykové mutácie */
+/*		if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){ 
+*/
 			/* oddelenie */
 			Export("</td>\n<td valign=\"middle\">");
 			if(_global_linky == ANO){
@@ -4054,10 +4057,11 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 					/* 2003-08-11 pozor, segfault bol spuosobeny tym, ze
 					 * ako %s sa vypisoval int! (chybal prefix STR_...)
 					 */
-			}
+/*			}
 			else{
 				Export("<form action=\"%s\">\n", pom);
 			}
+*/
 			Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
 			Export((char *)HTML_BUTTON_POSV_CITANIE);
 			Export("\">\n");

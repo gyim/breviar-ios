@@ -1611,7 +1611,7 @@ void zaltar_kompletorium(short int den, short int obdobie, short int specialne){
 			set_zalm(1, MODL_KOMPLETORIUM, "z143.htm", "ZALM143");
 			break;
 		case DEN_STREDA:
-			set_zalm(1, MODL_KOMPLETORIUM, "z31.htm", "ZALM31_1_6");
+			set_zalm(1, MODL_KOMPLETORIUM, "z31.htm", "ZALM31,1-6"); /* 2009-02-17: Zmenené; pôvodne bolo "ZALM31_1_6" */
 			set_zalm(2, MODL_KOMPLETORIUM, "z130.htm", "ZALM130");
 			break;
 		case DEN_STVRTOK:
