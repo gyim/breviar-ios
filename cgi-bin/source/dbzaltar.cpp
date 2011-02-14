@@ -2115,9 +2115,9 @@ void _set_zalmy_zjv(int modlitba){
 		_set_zalm3(modlitba, "z97.htm", "ZALM97");
 	}
 	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
-		_set_zalm1(MODL_CEZ_DEN_VSETKY, "z47.htm", "ZALM47");
-		_set_zalm2(MODL_CEZ_DEN_VSETKY, "z86.htm", "ZALM86,1-10");
-		_set_zalm3(MODL_CEZ_DEN_VSETKY, "z98.htm", "ZALM98");
+		_set_zalm1(modlitba, "z47.htm", "ZALM47");
+		_set_zalm2(modlitba, "z86.htm", "ZALM86,1-10");
+		_set_zalm3(modlitba, "z98.htm", "ZALM98");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
@@ -3548,7 +3548,7 @@ label_24_DEC:
 	set_LOG_litobd_pc;\
 }
 /* 2006-02-05: vytvorené pre modlitbu cez deò pod¾a _post1_mcd_antifony; porov. _adv_antifony_mcd */
-#define _vian_mcd_antifony {\
+#define _vian1_mcd_antifony {\
 	sprintf(_anchor, "%s_%c%s", nazov_OBD[OBD_VIANOCNE_I], pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1);\
 	_set_antifona1(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
@@ -3581,7 +3581,7 @@ label_24_DEC:
 				_vian1_prosby;
 				_vian1_modlitba;
 
-				/* posvätné èítanie; 2006-02-04; ešte nie úplne dokonèené */
+				/* posvätné èítanie; 2006-02-04 */
 				modlitba = MODL_POSV_CITANIE;
 				_vian1_hymnus;
 				_set_zalmy_vian_oktava(_global_den.den, modlitba);
@@ -3597,21 +3597,21 @@ label_24_DEC:
 				/* modlitba cez deò, pridané 2006-02-05 */
 				modlitba = MODL_PREDPOLUDNIM;
 				_vian1_hymnus; /* hymnus */
-				_vian_mcd_antifony; /* antifóny */
+				_vian1_mcd_antifony; /* antifóny */
 				_vian1_kcitanie; /* krátke èítanie */
 				_vian1_kresponz; /* krátke responzórium */
 				_vian1_modlitba; /* modlitba ako na ranné chvály */
 
 				modlitba = MODL_NAPOLUDNIE;
 				_vian1_hymnus; /* hymnus */
-				_vian_mcd_antifony; /* antifóny */
+				_vian1_mcd_antifony; /* antifóny */
 				_vian1_kcitanie; /* krátke èítanie */
 				_vian1_kresponz; /* krátke responzórium */
 				_vian1_modlitba; /* modlitba ako na ranné chvály */
 
 				modlitba = MODL_POPOLUDNI;
 				_vian1_hymnus; /* hymnus */
-				_vian_mcd_antifony; /* antifóny */
+				_vian1_mcd_antifony; /* antifóny */
 				_vian1_kcitanie; /* krátke èítanie */
 				_vian1_kresponz; /* krátke responzórium */
 				_vian1_modlitba; /* modlitba ako na ranné chvály */
@@ -3830,10 +3830,17 @@ label_24_DEC:
 /* switch(litobd), case OBD_VIANOCNE_II -- begin ---------------------------------------------- */
 		case OBD_VIANOCNE_II: {/* po slavnosti zjavenia pana */
 /* vianocne obdobie II */
+/* 2006-02-07: doplnené posvätné èítania a mcd */
 #define _vian2_hymnus {\
 	sprintf(_anchor, "%s_%c%s", nazov_OBD[OBD_VIANOCNE_II], pismenko_modlitby(modlitba), ANCHOR_HYMNUS);\
-	_set_hymnus(modlitba, _file, _anchor);\
-	set_LOG_litobd;\
+	if(modlitba == MODL_POSV_CITANIE){\
+		_set_hymnus(modlitba, _file_pc, _anchor);\
+		set_LOG_litobd_pc;\
+	}\
+	else{\
+		_set_hymnus(modlitba, _file, _anchor);\
+		set_LOG_litobd;\
+	}\
 }
 #define _zjv_kcitanie {\
 	sprintf(_anchor, "%s_%c%s%d", nazov_OBD[OBD_VIANOCNE_II], pismenko_modlitby(modlitba), ANCHOR_KCITANIE, _global_den.den);\
@@ -3845,8 +3852,14 @@ label_24_DEC:
 	if(modlitba == MODL_PRVE_VESPERY)\
 		c = pismenko_modlitby(MODL_VESPERY);\
 	sprintf(_anchor, "%s_%c%s", nazov_OBD[OBD_VIANOCNE_II], c, ANCHOR_KRESPONZ);\
-	_set_kresponz(modlitba, _file, _anchor);\
-	set_LOG_litobd;\
+	if(modlitba == MODL_POSV_CITANIE){\
+		_set_kresponz(modlitba, _file_pc, _anchor);\
+		set_LOG_litobd_pc;\
+	}\
+	else{\
+		_set_kresponz(modlitba, _file, _anchor);\
+		set_LOG_litobd;\
+	}\
 }
 #define _vian2_prosby {\
 	c = pismenko_modlitby(modlitba);\
@@ -3871,34 +3884,107 @@ label_24_DEC:
 	_set_modlitba(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
 }
+/* 2006-02-07: pridané posvätné èítanie */
 #define _zjv_antifony {\
 	sprintf(_anchor, "%s_%s%c%s", nazov_OBD[OBD_VIANOCNE_II], ANCHOR_ZJAVENIE_PANA, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1);\
+	if(modlitba == MODL_POSV_CITANIE){\
+		_set_antifona1(modlitba, _file_pc, _anchor);\
+		set_LOG_litobd_pc;\
+	}\
+	else{\
+		_set_antifona1(modlitba, _file, _anchor);\
+		set_LOG_litobd;\
+	}\
+	sprintf(_anchor, "%s_%s%c%s", nazov_OBD[OBD_VIANOCNE_II], ANCHOR_ZJAVENIE_PANA, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA2);\
+	if(modlitba == MODL_POSV_CITANIE){\
+		_set_antifona2(modlitba, _file_pc, _anchor);\
+		set_LOG_litobd_pc;\
+	}\
+	else{\
+		_set_antifona2(modlitba, _file, _anchor);\
+		set_LOG_litobd;\
+	}\
+	sprintf(_anchor, "%s_%s%c%s", nazov_OBD[OBD_VIANOCNE_II], ANCHOR_ZJAVENIE_PANA, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA3);\
+	if(modlitba == MODL_POSV_CITANIE){\
+		_set_antifona3(modlitba, _file_pc, _anchor);\
+		set_LOG_litobd_pc;\
+	}\
+	else{\
+		_set_antifona3(modlitba, _file, _anchor);\
+		set_LOG_litobd;\
+	}\
+}
+/* 2006-02-07: doplnené posvätné èítanie */
+#define _vian2_citanie1 {\
+	sprintf(_anchor, "%s_%c%s_%d", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_CITANIE1, _global_den.den);\
+	_set_citanie1(modlitba, _file_pc, _anchor);\
+	set_LOG_litobd_pc;\
+}
+#define _vian2_citanie2 {\
+	sprintf(_anchor, "%s_%c%s_%d", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_CITANIE2, _global_den.den);\
+	_set_citanie2(modlitba, _file_pc, _anchor);\
+	set_LOG_litobd_pc;\
+}
+/* 2006-02-07: vytvorené pre modlitbu cez deò pod¾a _vian1_mcd_antifony (to pod¾a _post1_mcd_antifony; porov. _adv_antifony_mcd) */
+#define _vian2_mcd_antifony {\
+	sprintf(_anchor, "%s_%c%s", nazov_OBD[OBD_VIANOCNE_II], pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1);\
 	_set_antifona1(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
-	sprintf(_anchor, "%s_%s%c%s", nazov_OBD[OBD_VIANOCNE_II], ANCHOR_ZJAVENIE_PANA, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA2);\
+	sprintf(_anchor, "%s_%c%s", nazov_OBD[OBD_VIANOCNE_II], pismenko_modlitby(modlitba), ANCHOR_ANTIFONA2);\
 	_set_antifona2(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
-	sprintf(_anchor, "%s_%s%c%s", nazov_OBD[OBD_VIANOCNE_II], ANCHOR_ZJAVENIE_PANA, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA3);\
+	sprintf(_anchor, "%s_%c%s", nazov_OBD[OBD_VIANOCNE_II], pismenko_modlitby(modlitba), ANCHOR_ANTIFONA3);\
 	_set_antifona3(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
 }
 									 
 		/* 2006-01-24: tu v skutoènosti zaèína VIANOÈNÉ OBDOBIE II. */
 
-		/* ranne chvaly */
+			/* ranne chvaly */
 			modlitba = MODL_RANNE_CHVALY;
 			_vian2_hymnus;
 			_vian2_kresponz;
 			_vian2_benediktus;
 			_vian2_prosby;
 			_vian2_modlitba;
-		/* vespery */
+
+			/* vespery */
 			modlitba = MODL_VESPERY;
 			_vian2_hymnus;
 			_vian2_kresponz;
 			_vian2_magnifikat;
 			_vian2_prosby;
 			_vian2_modlitba;
+
+			/* posvätné èítanie; 2006-02-07 */
+			modlitba = MODL_POSV_CITANIE;
+			_vian2_hymnus;
+			_vian2_kresponz;
+			_vian2_citanie1;
+			_vian2_citanie2;
+			_vian2_modlitba;
+
+			/* modlitba cez deò, pridané 2006-02-05 */
+			modlitba = MODL_PREDPOLUDNIM;
+			_vian2_hymnus; /* hymnus */
+			_vian2_mcd_antifony; /* antifóny */
+			/* krátke èítanie nastavené neskôr pod¾a vian1 */
+			_vian2_kresponz; /* krátke responzórium */
+			_vian2_modlitba; /* modlitba ako na ranné chvály */
+
+			modlitba = MODL_NAPOLUDNIE;
+			_vian2_hymnus; /* hymnus */
+			_vian2_mcd_antifony; /* antifóny */
+			/* krátke èítanie nastavené neskôr pod¾a vian1 */
+			_vian2_kresponz; /* krátke responzórium */
+			_vian2_modlitba; /* modlitba ako na ranné chvály */
+
+			modlitba = MODL_POPOLUDNI;
+			_vian2_hymnus; /* hymnus */
+			_vian2_mcd_antifony; /* antifóny */
+			/* krátke èítanie nastavené neskôr pod¾a vian1 */
+			_vian2_kresponz; /* krátke responzórium */
+			_vian2_modlitba; /* modlitba ako na ranné chvály */
 
 			if((_global_den.den == 6) && (_global_den.mesiac == 1)){ /* zjavenie pana */
 			/* prve vespery */
@@ -3921,13 +4007,37 @@ label_24_DEC:
 				_set_zalmy_zjv(modlitba);
 				_zjv_kcitanie;
 				_zjv_antifony;
+				/* posvätné èítanie; 2006-02-07 */
+				modlitba = MODL_POSV_CITANIE;
+				_set_zalmy_zjv(modlitba);
+				_zjv_antifony;
+				/* modlitby cez deò, pridané 2006-02-05 */
+				modlitba = MODL_PREDPOLUDNIM;
+				_set_zalmy_zjv(modlitba);
+				_zjv_kcitanie;
+				modlitba = MODL_NAPOLUDNIE;
+				_set_zalmy_zjv(modlitba);
+				_zjv_kcitanie;
+				modlitba = MODL_POPOLUDNI;
+				_set_zalmy_zjv(modlitba);
+				_zjv_kcitanie;
+
 			}/* zjavenie pana */
 			else{
-				/* vsedny den vianocneho obdobia II -- citania podla vian.obd.I */
+				/* vsedny den vianocneho obdobia II -- citania podla vian.obd.I 
+				 * 2006-02-07: presne takto isto sa správajú aj krátke èítania pre modlitbu cez deò
+				 *             (ako pre krátk èítanie na ranné chvály)
+				 */
 				mystrcpy(_file, nazov_obd_htm[OBD_VIANOCNE_I], MAX_STR_AF_FILE);
 				if(_global_den.den == 8){
 					modlitba = MODL_RANNE_CHVALY;
 					_global_den.den = 31;
+					_vian1_kcitanie;
+					modlitba = MODL_PREDPOLUDNIM;
+					_vian1_kcitanie;
+					modlitba = MODL_NAPOLUDNIE;
+					_vian1_kcitanie;
+					modlitba = MODL_POPOLUDNI;
 					_vian1_kcitanie;
 					modlitba = MODL_VESPERY;
 					_global_den.den = 28;
@@ -3938,12 +4048,24 @@ label_24_DEC:
 						_global_den.den = 30;
 						modlitba = MODL_RANNE_CHVALY;
 						_vian1_kcitanie;
+						modlitba = MODL_PREDPOLUDNIM;
+						_vian1_kcitanie;
+						modlitba = MODL_NAPOLUDNIE;
+						_vian1_kcitanie;
+						modlitba = MODL_POPOLUDNI;
+						_vian1_kcitanie;
 						modlitba = MODL_VESPERY;
 						_vian1_kcitanie;
 					}
 					else{/* den == 9, 10, 11, 12 */
 						_global_den.den = _global_den.den - 7; /* den == 2, 3, 4, 5 */
 						modlitba = MODL_RANNE_CHVALY;
+						_vian1_kcitanie;
+						modlitba = MODL_PREDPOLUDNIM;
+						_vian1_kcitanie;
+						modlitba = MODL_NAPOLUDNIE;
+						_vian1_kcitanie;
+						modlitba = MODL_POPOLUDNI;
 						_vian1_kcitanie;
 						modlitba = MODL_VESPERY;
 						_vian1_kcitanie;					
