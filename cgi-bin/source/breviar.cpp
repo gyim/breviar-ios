@@ -5134,7 +5134,10 @@ void _export_rozbor_dna_batch(short int typ){
 					execute_batch_command(3, batch_command);
 				}
 			}
-			if((_global_svaty1.smer >= 12) &&
+			/* 2008-10-31: upravené pod¾a _export_rozbor_dna() */
+			/* 2005-08-22: pôvodne sa tu porovnávalo s 12, ale aj pre 11 (lokálne slávenia) 
+			 * by mal systém ponúknu všedný deò - keï je to napr. v inej diecéze */
+			if((_global_svaty1.smer >= 11) &&
 				(typ != EXPORT_DNA_VIAC_DNI)){
 				/* ak je to iba lubovolna spomienka, tak vsedny den */
 				execute_batch_command(0, batch_command);
