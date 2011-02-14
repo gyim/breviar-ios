@@ -382,8 +382,8 @@ struct dm{
 	int den;        /* cislo dna mesiaca (1--31) */
 	int mesiac;     /* cislo mesiaca (1--12) */
 	int rok;        /* rok */
-	int denvt;      /* cislo dna v tyzdni (0--6) DEN_... */ /* deò v roku */
-	int denvr;      /* cislo dna v roku (1--365/366) */
+	int denvt;      /* cislo dna v tyzdni (0--6) DEN_... */
+	int denvr;      /* cislo dna v roku (1--365/366) */ /* deò v roku */
 	/* toto boli "obcianske" zalezitosti */
 	char litrok;    /* liturgicky rok ('A'--'C') */
 	int tyzden;     /* tyzden v danom liturgickom obdobi */

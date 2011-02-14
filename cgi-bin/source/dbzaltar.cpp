@@ -636,12 +636,33 @@ void set_hymnus(int den, int tyzzal, int modlitba){
 
 }
 
+#define _set_antifony_velk_pc(den, tyzzal, modlitba) {\
+		/* 1. antifona */\
+		file_name_litobd_pc(OBD_CEZ_ROK);\
+		anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_ANTIFONA1V);\
+		_set_antifona1(modlitba, _file_pc, _anchor);\
+		set_LOG_litobd_pc;\
+		/* 2. antifona */\
+		file_name_litobd_pc(OBD_CEZ_ROK);\
+		anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_ANTIFONA2V);\
+		_set_antifona2(modlitba, _file_pc, _anchor);\
+		set_LOG_litobd_pc;\
+		/* 3. antifona */\
+		file_name_litobd_pc(OBD_CEZ_ROK);\
+		anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_ANTIFONA3V);\
+		_set_antifona3(modlitba, _file_pc, _anchor);\
+		set_LOG_litobd_pc;\
+}
+
 void set_antifony(int den, int tyzzal, int zvazok, int modlitba){
 	/* 2006-01-24: pÙvodn· podmienka zosilnen·, keÔûe pre obyËajnÈ dni veækonoËnÈho 
 	 * obdobia (2.-7. t˝ûdeÚ) moûno braù antifÛny pre posv‰tnÈ ËÌtania z cezroËnÈho obdobia
 	 * 
 	 * 2006-01-24: taktieû pridan˝ ÔalöÌ parameter; pre niektorÈ dni v II. zv‰zku s˙ 
 	 * inÈ ûalmy aj antifÛny
+	 * 
+	 * 2006-02-09: podmienka zmenen·: 
+	 * aj pre nedeænÈ posv. ËÌtanie s˙ antifÛny v file_name_litobd_pc(OBD_CEZ_ROK);
 	 * 
 	 */
 	int povodny_tyzzal;
@@ -650,7 +671,7 @@ void set_antifony(int den, int tyzzal, int zvazok, int modlitba){
 			((_global_den.litobd == OBD_VELKONOCNE_I) ||
 			(_global_den.litobd == OBD_VELKONOCNE_II))
 		&& 
-			((modlitba != MODL_POSV_CITANIE) || (den == DEN_NEDELA))
+			(modlitba != MODL_POSV_CITANIE)
 	){
 		/* velkonocne obdobie */
 		file_name_zaltar(den, tyzzal);
@@ -673,9 +694,23 @@ void set_antifony(int den, int tyzzal, int zvazok, int modlitba){
 		_set_antifona3(modlitba, _file, _anchor);
 		set_LOG_zaltar;
 	}
+	/* 2006-02-09: Pre posv. ËÌtania nedieæ veækonoËnÈho obdobia samostatne nastavÌme,
+	 *             hoci sme si vedomÌ, ûe pre 5., 6. a 7. veækonoËn˙ nedeæu to bude potrebnÈ zmeniù
+	 */
+	else if(
+			((_global_den.litobd == OBD_VELKONOCNE_I) ||
+			(_global_den.litobd == OBD_VELKONOCNE_II))
+		&& 
+			(modlitba = MODL_POSV_CITANIE)
+		&& 
+			(_global_den.den = DEN_NEDELA)
+	){
+		_set_antifony_velk_pc(den, tyzzal, modlitba);
+	}
 	else{
 		/* 2005-03-26: Pridane odvetvenie pre posvatne citania */
-	/* 1. antifona */
+
+		/* 1. antifona */
 		if(modlitba == MODL_POSV_CITANIE){
 			file_name_litobd_pc(OBD_CEZ_ROK);
 			anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_ANTIFONA1);
@@ -689,7 +724,7 @@ void set_antifony(int den, int tyzzal, int zvazok, int modlitba){
 			set_LOG_zaltar;
 		}
 
-	/* 2. antifona */
+		/* 2. antifona */
 		if(modlitba == MODL_POSV_CITANIE){
 			file_name_litobd_pc(OBD_CEZ_ROK);
 			anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_ANTIFONA2);
@@ -5516,11 +5551,11 @@ label_24_DEC:
 /* ((_global_den.den MOD 3) == 0) */
 /* 2006-01-27: pridan· modlitba posv‰tnÈ ËÌtanie 
  * 2006-02-08: pre modlitbu cez deÚ nem· nedeæa odliön˝ hymnus, preto "podæa æubovÙle" nie pre modlitbu cez deÚ
+ * 2006-02-09: skorektnenÈ: rovnocenn˝ test: nie je MCD a (nedeæa alebo MOD 3); MOD aj vzhæadom k modlitbe
  */
 #define _velk1_hymnus {\
-	if((den == DEN_NEDELA) || (\
-		((_global_den.den MOD 3) == 0)\
-		&& (modlitba != MODL_PREDPOLUDNIM) && (modlitba != MODL_NAPOLUDNIE) && (modlitba != MODL_POPOLUDNI))\
+	if(((den == DEN_NEDELA) || (((_global_den.den + modlitba) MOD 3) == 0))\
+		&& ((modlitba != MODL_PREDPOLUDNIM) && (modlitba != MODL_NAPOLUDNIE) && (modlitba != MODL_POPOLUDNI))\
 	){\
 		sprintf(_anchor, "%s_%c%s%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS, nazov_DN_asci[DEN_NEDELA]);\
 	}\
@@ -5536,6 +5571,7 @@ label_24_DEC:
 		set_LOG_litobd;\
 	}\
 }
+
 #define _velk1_kcitanie {\
 	sprintf(_anchor, "%s_%c%s%s", nazov_OBD[OBD_VELKONOCNE_I], pismenko_modlitby(modlitba), nazov_DN_asci[den], ANCHOR_KCITANIE);\
 	_set_kcitanie(modlitba, _file, _anchor);\
@@ -5649,7 +5685,11 @@ label_24_DEC:
 
 			if(_global_den.denvr == _global_r._NANEBOVSTUPENIE_PANA.denvr){
 				/* nanebovstupenie sice ma rovnake kotvy, ale v inom fajli; 10/03/2000A.D. */
+				/* 2006-02-09: odËlenenÈ samostatne, lebo sa tu ökaredo natvrdo pre rannÈ chv·ly 
+				 *             a veöpety nastavuje den = DEN_NEDELA 
+				 */
 				mystrcpy(_file, FILE_NANEBOVSTUPENIE, MAX_STR_AF_FILE);
+				mystrcpy(_file_pc, FILE_NANEBOVSTUPENIE, MAX_STR_AF_FILE); /* 2006-02-09: doplnenÈ */
 				den = DEN_NEDELA;
 				Log("  ide o nanebovstupenie Pana: _file = `%s', den = %s...\n", _file, nazov_dna[den]);
 				modlitba = MODL_PRVE_VESPERY;
@@ -5658,6 +5698,25 @@ label_24_DEC:
 				_set_zalmy_nanebovstupenie(modlitba);
 				modlitba = MODL_VESPERY;
 				_set_zalmy_nanebovstupenie(modlitba);
+
+				/* ranne chvaly */
+				modlitba = MODL_RANNE_CHVALY;
+				_velk1_hymnus;
+				_velk1_kcitanie;
+				_velk1_kresponz;
+				_velk1_benediktus;
+				_velk1_prosby;
+				_velk1_modlitba;
+
+				/* vespery */
+				modlitba = MODL_VESPERY;
+				_velk1_hymnus;
+				_velk1_kcitanie;
+				_velk1_kresponz;
+				_velk1_magnifikat;
+				_velk1_prosby;
+				_velk1_modlitba;
+
 				/* 2006-01-27: pridanÈ posv. ËÌtania a modlitba cez deÚ */
 				modlitba = MODL_POSV_CITANIE;
 				_set_zalmy_nanebovstupenie(modlitba);
@@ -5667,53 +5726,7 @@ label_24_DEC:
 				_set_zalmy_nanebovstupenie(modlitba);
 				modlitba = MODL_POPOLUDNI;
 				_set_zalmy_nanebovstupenie(modlitba);
-			}
 
-		/* ranne chvaly */
-			modlitba = MODL_RANNE_CHVALY;
-			_velk1_hymnus;
-			_velk1_kcitanie;
-			_velk1_kresponz;
-			_velk1_benediktus;
-			_velk1_prosby;
-			_velk1_modlitba;
-		/* vespery */
-			modlitba = MODL_VESPERY;
-			_velk1_hymnus;
-			_velk1_kcitanie;
-			_velk1_kresponz;
-			_velk1_magnifikat;
-			_velk1_prosby;
-			_velk1_modlitba;
-
-		/* 2006-01-27: modlitba cez deÚ a posv‰tnÈ ËÌtania */
-			modlitba = MODL_POSV_CITANIE;
-			_velk1_hymnus;
-			_velk1_citanie1;
-			_velk1_citanie2;
-			_velk1_kresponz;
-			_velk1_modlitba;
-
-			modlitba = MODL_PREDPOLUDNIM;
-			_velk1_hymnus;
-			_velk1_mcd_antifony;
-			_velk1_kresponz;
-			_velk1_kcitanie;
-			_velk1_modlitba;
-			modlitba = MODL_NAPOLUDNIE;
-			_velk1_hymnus;
-			_velk1_mcd_antifony;
-			_velk1_kresponz;
-			_velk1_kcitanie;
-			_velk1_modlitba;
-			modlitba = MODL_POPOLUDNI;
-			_velk1_hymnus;
-			_velk1_mcd_antifony;
-			_velk1_kresponz;
-			_velk1_kcitanie;
-			_velk1_modlitba;
-
-			if(den == DEN_NEDELA){
 				modlitba = MODL_PRVE_VESPERY;
 				_velk1_hymnus;
 				_velk1_kcitanie;
@@ -5726,7 +5739,104 @@ label_24_DEC:
 				_velk1_ne_antifony;
 				modlitba = MODL_VESPERY;
 				_velk1_ne_antifony;
-			}/* nedela */
+
+				/* 2006-02-09: nasp‰ù pre posv. ËÌtanie a modlitbu cez deÚ */
+				den = DEN_STVRTOK;
+				modlitba = MODL_POSV_CITANIE;
+				_velk1_hymnus;
+				_velk1_ne_antifony;
+				_velk1_citanie1;
+				_velk1_citanie2;
+				_velk1_kresponz;
+				_velk1_modlitba;
+
+				modlitba = MODL_PREDPOLUDNIM;
+				_velk1_hymnus;
+				_velk1_mcd_antifony;
+				_velk1_kresponz;
+				_velk1_kcitanie;
+				_velk1_modlitba;
+				modlitba = MODL_NAPOLUDNIE;
+				_velk1_hymnus;
+				_velk1_mcd_antifony;
+				_velk1_kresponz;
+				_velk1_kcitanie;
+				_velk1_modlitba;
+				modlitba = MODL_POPOLUDNI;
+				_velk1_hymnus;
+				_velk1_mcd_antifony;
+				_velk1_kresponz;
+				_velk1_kcitanie;
+				_velk1_modlitba;
+
+			}/* je nanebovst˙penie */
+			else{
+				
+				/* ranne chvaly */
+				modlitba = MODL_RANNE_CHVALY;
+				_velk1_hymnus;
+				_velk1_kcitanie;
+				_velk1_kresponz;
+				_velk1_benediktus;
+				_velk1_prosby;
+				_velk1_modlitba;
+
+				/* vespery */
+				modlitba = MODL_VESPERY;
+				_velk1_hymnus;
+				_velk1_kcitanie;
+				_velk1_kresponz;
+				_velk1_magnifikat;
+				_velk1_prosby;
+				_velk1_modlitba;
+
+				/* 2006-01-27: modlitba cez deÚ a posv‰tnÈ ËÌtania */
+				modlitba = MODL_POSV_CITANIE;
+				_velk1_hymnus;
+				_velk1_citanie1;
+				_velk1_citanie2;
+				_velk1_kresponz;
+				_velk1_modlitba;
+
+				modlitba = MODL_PREDPOLUDNIM;
+				_velk1_hymnus;
+				_velk1_mcd_antifony;
+				_velk1_kresponz;
+				_velk1_kcitanie;
+				_velk1_modlitba;
+				modlitba = MODL_NAPOLUDNIE;
+				_velk1_hymnus;
+				_velk1_mcd_antifony;
+				_velk1_kresponz;
+				_velk1_kcitanie;
+				_velk1_modlitba;
+				modlitba = MODL_POPOLUDNI;
+				_velk1_hymnus;
+				_velk1_mcd_antifony;
+				_velk1_kresponz;
+				_velk1_kcitanie;
+				_velk1_modlitba;
+
+				if(den == DEN_NEDELA){
+					modlitba = MODL_PRVE_VESPERY;
+					_velk1_hymnus;
+					_velk1_kcitanie;
+					_velk1_kresponz;
+					_velk1_magnifikat;
+					_velk1_prosby;
+					_velk1_modlitba;
+					_velk1_ne_antifony;
+					modlitba = MODL_RANNE_CHVALY;
+					_velk1_ne_antifony;
+					modlitba = MODL_VESPERY;
+					_velk1_ne_antifony;
+					/* 2006-02-09: doplnenÈ */
+					modlitba = MODL_POSV_CITANIE;
+					_set_antifony_velk_pc(den, tyzden, modlitba);
+					/* toto sa musÌ urobiù nakoniec, lebo sa tam menÌ s˙bor _file_pc */
+
+				}/* nedela */
+			}/* nie je nanebovst˙penie */
 			break;
 /* switch(litobd), case OBD_VELKONOCNE_I -- end ----------------------------------------------- */
 
@@ -5861,13 +5971,41 @@ label_24_DEC:
 			_velk2_benediktus;
 			_velk2_prosby;
 			_velk2_modlitba;
-		/* vespery */
+
+			/* vespery */
 			modlitba = MODL_VESPERY;
 			_velk2_hymnus;
 			_velk2_kcitanie;
 			_velk2_kresponz;
 			_velk2_magnifikat;
 			_velk2_prosby;
+			_velk2_modlitba;
+
+			/* 2006-02-09: modlitba cez deÚ a posv‰tnÈ ËÌtania */
+			modlitba = MODL_POSV_CITANIE;
+			_velk2_hymnus;
+			_velk1_citanie1;
+			_velk1_citanie2;
+			_velk1_kresponz;
+			_velk2_modlitba;
+
+			modlitba = MODL_PREDPOLUDNIM;
+			_velk1_hymnus;
+			_velk1_mcd_antifony;
+			_velk1_kresponz;
+			_velk1_kcitanie;
+			_velk2_modlitba;
+			modlitba = MODL_NAPOLUDNIE;
+			_velk1_hymnus;
+			_velk1_mcd_antifony;
+			_velk1_kresponz;
+			_velk1_kcitanie;
+			_velk2_modlitba;
+			modlitba = MODL_POPOLUDNI;
+			_velk1_hymnus;
+			_velk1_mcd_antifony;
+			_velk1_kresponz;
+			_velk1_kcitanie;
 			_velk2_modlitba;
 
 			if(den == DEN_NEDELA){
@@ -5927,6 +6065,11 @@ label_24_DEC:
 					_velk2_ne_antifony;
 					modlitba = MODL_VESPERY;
 					_velk2_ne_antifony;
+					/* 2006-02-09: doplnenÈ */
+					modlitba = MODL_POSV_CITANIE;
+					_set_antifony_velk_pc(den, tyzden, modlitba);
+					/* toto sa musÌ urobiù nakoniec, lebo sa tam menÌ s˙bor _file_pc */
+
 				}/* nie je zoslanie ds */
 			}/* nedela */
 			break;
