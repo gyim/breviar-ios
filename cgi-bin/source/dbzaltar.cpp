@@ -3240,12 +3240,15 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 	  *		samotnÈ - bolo tu "(_global_den.denvt == DEN_NEDELA) && " - odstr·nenÈ
 	  *		ponechanÈ jedine pre modlitbu cez deÚ, ktor· v sl·vnosti padne mimo nedele
 	  *
+	  * 2008-07-11: doplnen· aj sl·vnosù sv. cyrila a metoda (moûno by bolo lepöie, ak by to bolo podæa stupÚa (sviatok p·na resp. sl·vnosù sv‰tca) v cezroËnom obdobÌ)
+	  *
 	  */
 	Log("najprv treba skontrolovaù, Ëi nejde o deÚ [pÙvodne nedeæu], na ktor˙ pripadol sviatok premenenia p·na a podobnÈ... (ak ·no, nenastavuj niË)\n");
 	if(
 		((_global_den.den == 6) && (_global_den.mesiac - 1 == MES_AUG)) ||
 		((_global_den.den == 15) && (_global_den.mesiac - 1 == MES_AUG)) ||
 		((_global_den.den == 29) && (_global_den.mesiac - 1 == MES_JUN)) ||
+		((_global_den.den == 5) && (_global_den.mesiac - 1 == MES_JUL)) ||
 		((_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) ) ||
 		((_global_den.den == 1) && (_global_den.mesiac - 1 == MES_NOV))
 		){
@@ -12309,6 +12312,15 @@ label_25_MAR:
 						  (query_type != PRM_DETAILY))
 							set_spolocna_cast(sc, poradie_svaty);
 
+						/* 2008-07-11: doplnenÈ kompletÛrium */
+						modlitba = MODL_PRVE_KOMPLETORIUM;
+						if(den != DEN_NEDELA){
+							_set_kompletorium_slavnost(modlitba, _global_svaty1.litobd);
+						}
+						else{
+							_set_kompletorium_nedela(modlitba);
+						}
+
 						modlitba = MODL_PRVE_VESPERY;
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_slavnost_Cyrila_a_Metoda(modlitba);
@@ -12342,6 +12354,15 @@ label_25_MAR:
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_slavnost_Cyrila_a_Metoda(modlitba);
+
+						/* 2008-07-11: doplnenÈ kompletÛrium */
+						modlitba = MODL_KOMPLETORIUM;
+						if(den != DEN_NEDELA){
+							_set_kompletorium_slavnost(modlitba, _global_svaty1.litobd);
+						}
+						else{
+							_set_kompletorium_nedela(modlitba);
+						}
 
 						if(poradie_svaty != 0) break;
 					}
@@ -12452,7 +12473,9 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_benediktus
-						_vlastna_cast_prosby;
+						if(_global_jazyk == JAZYK_SK){
+							_vlastna_cast_prosby;
+						}/* 2008-07-11: ËeskÈ m· zo spoloËnej Ëasti: o sv. muûÌch nebo o ¯eholnÌcÌch */
 						_vlastna_cast_modlitba;
 
 						modlitba = MODL_POSV_CITANIE;
@@ -12464,7 +12487,9 @@ label_25_MAR:
 						_vlastna_cast_hymnus;
 						_vlastna_cast_kresponz;
 						_vlastna_cast_magnifikat;
-						_vlastna_cast_prosby;
+						if(_global_jazyk == JAZYK_SK){
+							_vlastna_cast_prosby;
+						}/* 2008-07-11: ËeskÈ m· zo spoloËnej Ëasti: o sv. muûÌch nebo o ¯eholnÌcÌch */
 						_vlastna_cast_modlitba;
 
 						break;
