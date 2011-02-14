@@ -65,7 +65,7 @@ const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 , {"kompletórium", "kompletáø", "Completary", "completorio", "", "Kompletáø" }
 , {"neurèená", "neurèena", "not-defined", "no data", "", "neurèena"}
 , {"prvé vešpery", "první nešpory", "1st Vesperae", "I vesper&#230;", "", "První veèerní chvály" }
-, {"kompletórium po prvých vešperách", "kompletáø po prvních nešporech", "1st Completary", "I completorio", "", "Kompletáø po prvních veèerních chválách" } /* 2007-12-05: zmenené, kedysi bolo: "prvé kompletórium" */
+, {"kompletórium po prvých vešperách", "kompletáø po prvních nešporách", "1st Completary", "I completorio", "", "Kompletáø po prvních veèerních chválách" } /* 2007-12-05: zmenené, kedysi bolo: "prvé kompletórium" */
 , {"druhé vešpery", "druhé nešpory", "2nd Vesperae", "II vesper&#230;", "", "Druhé veèerní chvály" }
 , {"kompletórium po druhých vešperách", "kompletáø po druhých nešporech", "2nd Completary", "II completorio", "", "Kompletáø po druhých veèerních chválách" } /* 2007-12-05: zmenené, kedysi bolo: "druhé kompletórium" */
 , {"detaily", "detaily", "Details", "details", "", "detaily" }
@@ -84,7 +84,7 @@ const char *nazov_Modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 , {"Kompletórium", "Kompletáø", "Completary", "Completorio", "", "Kompletáø" }
 , {"Neureená", "Neureena", "not-defined", "No data", "", "Neurèená" }
 , {"Prvé vešpery", "První nešpory", "1st Vesperae", "I Vesper&#230;", "", "První veèerní chvály" }
-, {"Kompletórium po prvých vešperách", "Kompletáø po prvních nešporech", "1st Completary", "I Completorio", "", "Kompletáø po prvních veèerních chválách" }
+, {"Kompletórium po prvých vešperách", "Kompletáø po prvních nešporách", "1st Completary", "I Completorio", "", "Kompletáø po prvních veèerních chválách" }
 , {"Druhé vešpery", "Druhé nešpory", "2nd Vesperae", "II Vesper&#230;", "", "Druhé veèerní chvály" }
 , {"Kompletórium po druhých vešperách", "Kompletáø po druhých nešporech", "2nd Completary", "II Completorio", "", "Kompletáø po druhých veèerních chválách" }
 , {"Detaily", "Detaily", "Details", "Details", "", "Detaily" }

@@ -120,6 +120,7 @@
 /*                  - _export_rozbor_dna_buttons(): komplet.+nunk dimittis */
 /*   2009-01-05a.D. | úprava _export_rozbor_dna() pre všedné dni (poradie) */
 /*   2009-01-06a.D. | Te Deum je pre posv.èít. aj v oktáve narodenia Pána  */
+/*   2009-01-28a.D. | úprava includeFile()                                 */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -453,6 +454,16 @@ FILE *batch_file = NULL;
 /* 2004-03-16 pridane pre batch mode, parameter `k', aby exportoval aj zoznam modlitieb do HTML */
 char name_batch_html_file[MAX_STR] = STR_EMPTY;
 FILE *batch_html_file = NULL;
+
+/*
+ * 2009-01-28: jednotlivé define týkajúce sa riadenia modlitby presunuté sem na zaèiatok súboru, 
+ *             nako¾ko ich používa nielen interpretParameter() alebo showPrayer(), ale aj includeFile()
+ */
+#define je_post ((_global_den.litobd == OBD_POSTNE_I) || (_global_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && ((_global_den.denvt == DEN_PIATOK) || (_global_den.denvt == DEN_SOBOTA))))
+#define je_velka_noc ((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvt == DEN_NEDELA)) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA))
+#define je_aleluja_aleluja ((_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvt == DEN_NEDELA)) || (equals(_global_den.meno, _global_r._ZOSLANIE_DUCHA_SV.meno) && (_global_modlitba == MODL_VESPERY)))
+#define je_34_ocr ((_global_den.litobd == OBD_CEZ_ROK) && (_global_den.tyzden == 34) && (_global_den.denvt != DEN_NEDELA))
+#define je_tedeum (type == MODL_POSV_CITANIE) && (((_global_den.denvt == DEN_NEDELA) && (_global_den.litobd != OBD_POSTNE_I) && (_global_den.litobd != OBD_POSTNE_II_VELKY_TYZDEN)) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || (_global_den.litobd == OBD_OKTAVA_NARODENIA) || ((_global_den.den == 9) && (_global_den.mesiac == MES_NOV - 1)))
 
 /*---------------------------------------------------------------------*/
 /* popis: odstrani backslashe zo stringu (argv[1]) a vrati novy string
@@ -1170,8 +1181,24 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 							write = 1;
 							Log("  opat writing to export file, end of V.O. Aleluja.\n");
 						}
-					}
-					/* aleluja vo velkonocnom obdobi */
+					}/* aleluja vo velkonocnom obdobi */
+					/* 2009-01-28, doplnené: aleluja mimo pôstneho obdobia - doteraz fungovala len pre templáty - interpretParameter() */
+					if((je_post) && (equals(rest, PARAM_ALELUJA_NIE_V_POSTE))){
+						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
+							write = 0;
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("(stop)je post");
+#endif
+							Log("  rusim writing to export file, kvoli Aleluja...\n");
+						}
+						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("nie je post(start)");
+#endif
+							write = 1;
+							Log("  opat writing to export file, end of Aleluja.\n");
+						}
+					}/* aleluja mimo pôstneho obdobia */
 				}/* !equalsi(rest, modlparam) */
 				continue;
 		}
@@ -1212,20 +1239,16 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
  * 2003-08-21a.D.: postupne pridavam case aj pre posvatne citania
  * 2003-11-20a.D.: pridane citanie1 a citanie2 pre posvatne citania
  * 2005-08-15a.D.: Pridaný ïalší #define: èi je 34. týždeò obdobia cez rok
- */
-#define je_post ((_global_den.litobd == OBD_POSTNE_I) || (_global_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && ((_global_den.denvt == DEN_PIATOK) || (_global_den.denvt == DEN_SOBOTA))))
-#define je_velka_noc ((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvt == DEN_NEDELA)) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA))
-#define je_aleluja_aleluja ((_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvt == DEN_NEDELA)) || (equals(_global_den.meno, _global_r._ZOSLANIE_DUCHA_SV.meno) && (_global_modlitba == MODL_VESPERY)))
-/* 2005-08-15: Pridaný ïalší #define: èi je 34. týždeò obdobia cez rok */
-#define je_34_ocr ((_global_den.litobd == OBD_CEZ_ROK) && (_global_den.tyzden == 34) && (_global_den.denvt != DEN_NEDELA))
-/* 2005-11-11: "V nede¾u a na slávnosti a sviatky po druhom èítaní 
+ *
+ * 2005-08-15: Pridaný ïalší #define: èi je 34. týždeò obdobia cez rok
+ * 2005-11-11: "V nede¾u a na slávnosti a sviatky po druhom èítaní 
  *		a responzóriu nasleduje hymnus Te Deum" 
  * 2005-11-20: Opravené, lebo sme kontrolovali den, a nie denvt :)
  * 2006-10-11: Doplnené (resp. revidované) invitatórium a kompletórium
  * 2007-04-10: Doplnené: Te Deum je vo ve¾konoènej oktáve; nie je poèas pôstu (ani len pre nedele)
  * 2009-01-06: Doplnené: Te Deum je aj v oktáve narodenia Pána (vianoèná oktáva)
+ * 2009-01-28: jednotlivé define presunuté na zaèiatok súboru, nako¾ko ich používa nielen interpretParameter(), ale aj includeFile()
  */
-#define je_tedeum (type == MODL_POSV_CITANIE) && (((_global_den.denvt == DEN_NEDELA) && (_global_den.litobd != OBD_POSTNE_I) && (_global_den.litobd != OBD_POSTNE_II_VELKY_TYZDEN)) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || (_global_den.litobd == OBD_OKTAVA_NARODENIA) || ((_global_den.den == 9) && (_global_den.mesiac == MES_NOV - 1)))
 
 /* 2007-11-20: doplnené @ifdef EXPORT_HTML_SPECIALS */
 void interpretParameter(short int type, char *paramname){

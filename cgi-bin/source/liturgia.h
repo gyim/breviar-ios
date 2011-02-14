@@ -330,7 +330,7 @@ extern const char *TEMPLAT[];
  * ako aj na druhé vešpery slávnosti Zoslania Ducha Svätého */
 #define PARAM_ALELUJA_ALELUJA_BEGIN         "ALELUJA_ALELUJA_BEGIN"
 #define PARAM_ALELUJA_ALELUJA_END           "ALELUJA_ALELUJA_END"
-#define PARAM_ALELUJA_NIE_V_POSTE           "ALELUJA_NIE_V_POSTE"
+#define PARAM_ALELUJA_NIE_V_POSTE           "ALELUJA_NIE_V_POSTE" /* používa sa v inkludovaných súboroch, napr. v rámci antifón */
 #define PARAM_ALELUJA_NIE_V_POSTE_BEGIN     "ALELUJA_NIE_V_POSTE_BEGIN"
 #define PARAM_ALELUJA_NIE_V_POSTE_END       "ALELUJA_NIE_V_POSTE_END"
 #define PARAM_ALELUJA_VO_VELKONOCNOM        "V_O_ALELUJA" /* používa sa v inkludovaných súboroch, napr. v rámci antifón */
