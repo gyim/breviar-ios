@@ -110,7 +110,7 @@ const char *nazov_spolc_jazyk[POCET_SPOL_CASTI + 1][POCET_JAZYKOV + 1] =
  {"duchovných pastierov - pre kòazov", "duchovních pastýøù - o knìžích", "", ""}, 
  {"duchovných pastierov - pre biskupov", "duchovních pastýøù - o biskupech", "", ""}, 
  {"duchovných pastierov - pre pápežov", "duchovních pastýøù - o papeži", "", ""}, 
- {"uèite¾ov Cirkvi", "uèitelù Církve", "", ""}, 
+ {"uèite¾ov Cirkvi", "uèitelù církve", "", ""}, 
  {"apoštolov", "apoštolù", "", ""}, 
  {"jedného muèeníka", "jednoho muèedníka", "", ""}, 
  {"viacerých muèeníkov", "více mùèedníkù", "", ""}, 
@@ -389,6 +389,7 @@ const char *nazov_slavenia_lokal[] =
 ,"Druhá ve¾konoèná nede¾a"
 ,"koniec Oktávy narodenia Pána"
 ,"konec Oktávu Narození Pánì"
+,"hlavního patrona pražské arcidiecéze"
 };
 
 const char *rimskymi_tyzden_zaltara[] =
@@ -794,19 +795,23 @@ const char *text_JAN_01[] =
  "", ""};
 const char *text_JAN_02[] =
 {"Sv. Bazila Ve¾kého a Gregora Nazianského, biskupov a uèite¾ov Cirkvi",
- "Sv. Basila Velikého a Øehoøe Naziánského, biskupù a uèitelù Církve",
+ "Sv. Basila Velikého a Øehoøe Naziánského, biskupù a uèitelù církve",
  "", ""};
 const char *text_JAN_06[] =
 {"Zjavenie Pána",
  "Zjevení Pánì",
  "", ""};
+const char *text_JAN_07[] =
+{"Sv. Rajmunda z Peòafortu, kòaza",
+ "Sv. Rajmunda z Penafortu, knìze",
+ "", ""};
 const char *text_JAN_KRST[] =
 {"Krst Krista Pána",
- "Køest Pánì",
+ "Køtu Pánì",
  "", ""};
 const char *text_JAN_13[] =
 {"Sv. Hilára, biskupa a uèite¾a Cirkvi",
- "Sv. Hilaria, biskupa a uèitele Církve",
+ "Sv. Hilaria, biskupa a uèitele církve",
  "", ""};
 const char *text_JAN_17[] =
 {"Sv. Antona, opáta",
@@ -838,7 +843,7 @@ const char *text_JAN_23[] =
  "", ""};
 const char *text_JAN_24[] =
 {"Sv. Františka Saleského, biskupa a uèite¾a Cirkvi",
- "Sv. Františka Saleského, biskupa a uèitele Církve",
+ "Sv. Františka Saleského, biskupa a uèitele církve",
  "", ""};
 const char *text_JAN_25[] =
 {"Obrátenie svätého Pavla, apoštola",
@@ -854,7 +859,7 @@ const char *text_JAN_27[] =
  "", ""};
 const char *text_JAN_28[] =
 {"Sv. Tomáška Akvinského, kòaza a uèite¾a Cirkvi",
- "Sv. Tomáše Akvinského, knìze a uèitele Církve",
+ "Sv. Tomáše Akvinského, knìze a uèitele církve",
  "", ""};
 const char *text_JAN_31[] =
 {"Sv. Jána Boska, kòaza",
@@ -899,11 +904,11 @@ const char *text_FEB_17[] =
  "", ""};
 const char *text_FEB_21[] =
 {"Sv. Petra Damianiho, biskupa a uèite¾a Cirkvi",
- "Sv. Petra Damianiho, biskupa a uèitele Církve",
+ "Sv. Petra Damianiho, biskupa a uèitele církve",
  "", ""};
 const char *text_FEB_22[] =
 {"Katedra sv. Petra, apoštola",
- "Stolce svatého Petra",
+ "Stolce svatého Petra, apoštola",
  "", ""};
 const char *text_FEB_23[] =
 {"Sv. Polykarpa, biskupa a muèeníka",
@@ -913,6 +918,112 @@ const char *text_FEB_23[] =
 const char *text_POPOLCOVA_STREDA[] =
 {"Popolcová streda",
  "Popeleèní søeda",
+ "", ""};
+
+const char *text_MAR_04[] =
+{"Sv. Kazimíra",
+ "Sv. Kazimíra",
+ "", ""};
+const char *text_MAR_07[] =
+{"Sv. Perpetuy a Felicity, muèeníc",
+ "Sv. Perpetuy a Felicity, muèednic",
+ "", ""};
+const char *text_MAR_08[] =
+{"Sv. Jána z Boha, reho¾níka",
+ "Sv. Jana z Boha, øeholníka",
+ "", ""};
+const char *text_MAR_09[] =
+{"Sv. Františky Rímskej, reho¾níèky",
+ "Sv. Františky Øímské, øeholnice",
+ "", ""};
+const char *text_MAR_10[] =
+{"(na Slovensku nie je)",
+ "Sv. Jana Ogilvie, knìze a muèedníka",
+ "", ""};
+const char *text_MAR_17[] =
+{"Sv. Patrika, biskupa",
+ "Sv. Patrika, biskupa",
+ "", ""};
+const char *text_MAR_18[] =
+{"Sv. Cyrila Jeruzalemského, biskupa a uèite¾a Cirkvi",
+ "Sv. Cyrila Jeruzalémského, biskupa a uèitele církve",
+ "", ""};
+const char *text_MAR_19[] =
+{"Sv. Jozefa, ženícha Panny Márie",
+ "Sv. Josefa, Snoubence Panny Marie",
+ "", ""};
+const char *text_MAR_23[] =
+{"Sv. Turibia de Mongrovejo, biskupa",
+ "Sv. Turibia z Mongroveja, biskupa",
+ "", ""};
+const char *text_MAR_25[] =
+{"Zvestovanie Pána",
+ "Zvìstování Pánì",
+ "", ""};
+
+const char *text_APR_02[] =
+{"Sv. Františka z Pauly, pustovníka",
+ "Sv. Františka z Pauly, poustevníka",
+ "", ""};
+const char *text_APR_04[] =
+{"Sv. Izidora, biskupa a uèite¾a Cirkvi",
+ "Sv. Izidora, biskupa a uèitele církve",
+ "", ""};
+const char *text_APR_05[] =
+{"Sv. Vincenta Ferrera, kòaza",
+ "Sv. Vincence Ferrerského, knìze",
+ "", ""};
+const char *text_APR_07[] =
+{"Sv. Jána Krstite¾a de la Salle, kòaza",
+ "Sv. Jana Køtitele de la Salle, knìze",
+ "", ""};
+const char *text_APR_11[] =
+{"Sv. Stanislava, biskupa a muèeníka",
+ "Sv. Stanislava, biskupa a muèedníka",
+ "", ""};
+const char *text_APR_13[] =
+{"Sv. Martina I., pápeža a muèeníka",
+ "Sv. Martina I., papeže a muèedníka",
+ "", ""};
+const char *text_APR_21[] =
+{"Sv. Anzelma, biskupa a uèite¾a Cirkvi",
+ "Sv. Anselma, biskupa a uèitele církve",
+ "", ""};
+const char *text_APR_23[] =
+{"Sv. Vojtecha, biskupa a muèeníka",
+ "Sv. Vojtìcha, biskupa a muèedníka",
+ "", ""};
+const char *text_APR_24_1[] =
+{"Sv. Juraja, muèeníka",
+ "Sv. Jiøí, muèedníka",
+ "", ""};
+const char *text_APR_24_2[] =
+{"Sv. Fidéla zo Sigmaringenu, kòaza a muèeníka",
+ "Sv. Fidela ze Sigmaringy, knìze a muèedníka",
+ "", ""};
+const char *text_APR_25[] =
+{"Sv. Marka, evanjelistu",
+ "Sv. Marka, evangelisty",
+ "", ""};
+const char *text_APR_28_1[] =
+{"Sv. Petra Chanela, kòaza a muèeníka",
+ "Sv. Petra Chanela, knìze a muèedníka",
+ "", ""};
+const char *text_APR_28_2[] =
+{"Sv. ¼udovíta Márie Grignion de Montfort, kòaza",
+ "Sv. Ludvíka Marie Grignona z Montfortu, knìze",
+ "", ""};
+const char *text_APR_29[] =
+{"Sv. Kataríny Sienskej, panny a uèite¾ky Cirkvi, spolupatrónky Európy",
+ "Sv. Kateøiny Sienské, panny a uèitelky církve, spolupatronky Evropy",
+ "", ""};
+const char *text_APR_30_1[] =
+{"Sv. Pia V., pápeža",
+ "Sv. Pia V., papeže",
+ "", ""};
+const char *text_APR_30_2[] =
+{"(na Slovensku nie je)",
+ "Sv. Zikmunda, muèedníka",
  "", ""};
 
 

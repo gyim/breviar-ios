@@ -583,6 +583,7 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_DRUHA_VELK_NEDELA  19
 #define LOKAL_SLAV_KONIEC_OKTAVY_NAR  20
 #define LOKAL_SLAV_KONIEC_OKTAVY_NAR_CZ		21
+#define LOKAL_SLAV_PRAHA_PATRON		22
 
 /* prikazany / neprikazany sviatok */
 #define PRIKAZANY_SVIATOK 1

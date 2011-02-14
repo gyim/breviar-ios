@@ -115,6 +115,7 @@ void liturgicke_obdobie(int litobd, int tyzden, int den, int tyzzal, int poradie
 extern const char *text_JAN_01[];
 extern const char *text_JAN_02[];
 extern const char *text_JAN_06[];
+extern const char *text_JAN_07[];
 extern const char *text_JAN_KRST[];
 extern const char *text_JAN_13[];
 extern const char *text_JAN_17[];
@@ -143,6 +144,34 @@ extern const char *text_FEB_17[];
 extern const char *text_FEB_21[];
 extern const char *text_FEB_22[];
 extern const char *text_FEB_23[];
+
+extern const char *text_MAR_04[];
+extern const char *text_MAR_07[];
+extern const char *text_MAR_08[];
+extern const char *text_MAR_09[];
+extern const char *text_MAR_10[];
+extern const char *text_MAR_17[];
+extern const char *text_MAR_18[];
+extern const char *text_MAR_19[];
+extern const char *text_MAR_23[];
+extern const char *text_MAR_25[];
+
+extern const char *text_APR_02[];
+extern const char *text_APR_04[];
+extern const char *text_APR_05[];
+extern const char *text_APR_07[];
+extern const char *text_APR_11[];
+extern const char *text_APR_13[];
+extern const char *text_APR_21[];
+extern const char *text_APR_23[];
+extern const char *text_APR_24_1[];
+extern const char *text_APR_24_2[];
+extern const char *text_APR_25[];
+extern const char *text_APR_28_1[];
+extern const char *text_APR_28_2[];
+extern const char *text_APR_29[];
+extern const char *text_APR_30_1[];
+extern const char *text_APR_30_2[];
 
 #endif /* __DBZALTAR_H_ */
 
