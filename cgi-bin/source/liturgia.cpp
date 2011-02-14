@@ -118,6 +118,7 @@ short int _allocate_global_var(void){
 	}
 	else{
 		Log("  %d bytes for `_global_modl_1kompletorium_ptr'\n", sizeof(_type_1kompletorium));
+		_INIT_TMODLITBA3(_global_modl_prve_kompletorium); /* pridané 2003-10-17 */
 	}
 
 /* _global_modl_invitatorium_ptr */
@@ -1315,6 +1316,8 @@ void Log(struct tmodlitba3 t){
 	Log_struktura_tm3("   hymnus       file `%s', anchor `%s'\n", t.hymnus.file, t.hymnus.anchor);
 	Log_struktura_tm3("   antifona1    file `%s', anchor `%s'\n", t.antifona1.file, t.antifona1.anchor);
 	Log_struktura_tm3("   zalm1        file `%s', anchor `%s'\n", t.zalm1.file, t.zalm1.anchor);
+	Log_struktura_tm3("   antifona2    file `%s', anchor `%s'\n", t.antifona2.file, t.antifona2.anchor);
+	Log_struktura_tm3("   zalm2        file `%s', anchor `%s'\n", t.zalm2.file, t.zalm2.anchor);
 	Log_struktura_tm3("   kcitanie     file `%s', anchor `%s'\n", t.kcitanie.file, t.kcitanie.anchor);
 	Log_struktura_tm3("   kresponz     file `%s', anchor `%s'\n", t.kresponz.file, t.kresponz.anchor);
 	Log_struktura_tm3("   nuncdimittis file `%s', anchor `%s'\n", t.kresponz.file, t.nuncdimittis.anchor);

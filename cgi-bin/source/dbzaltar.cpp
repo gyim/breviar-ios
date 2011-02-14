@@ -113,6 +113,10 @@ void _set_popis(short int modlitba, const char *file, const char *anchor){ /* pr
 			mystrcpy(_global_modl_invitatorium.popis.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_invitatorium.popis.anchor, anchor, MAX_STR_AF_ANCHOR);
 			break;
+		case MODL_PRVE_KOMPLETORIUM:
+			mystrcpy(_global_modl_prve_kompletorium.popis.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_prve_kompletorium.popis.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
 		case MODL_KOMPLETORIUM:
 			mystrcpy(_global_modl_kompletorium.popis.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_kompletorium.popis.anchor, anchor, MAX_STR_AF_ANCHOR);
@@ -152,6 +156,10 @@ void _set_popis(short int modlitba, const char *file, const char *anchor){ /* pr
 void _set_hymnus(short int modlitba, const char *file, const char *anchor){
 	switch(modlitba){
 		/* 2006-10-13: Pridan˝ hymnus aj pre kompletÛrium */
+		case MODL_PRVE_KOMPLETORIUM:
+			mystrcpy(_global_modl_prve_kompletorium.hymnus.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_prve_kompletorium.hymnus.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
 		case MODL_KOMPLETORIUM:
 			mystrcpy(_global_modl_kompletorium.hymnus.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_kompletorium.hymnus.anchor, anchor, MAX_STR_AF_ANCHOR);
@@ -194,6 +202,10 @@ void _set_antifona1(short int modlitba, const char *file, const char *anchor){
 			mystrcpy(_global_modl_invitatorium.antifona1.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_invitatorium.antifona1.anchor, anchor, MAX_STR_AF_ANCHOR);
 			break;
+		case MODL_PRVE_KOMPLETORIUM:
+			mystrcpy(_global_modl_prve_kompletorium.antifona1.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_prve_kompletorium.antifona1.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
 		case MODL_KOMPLETORIUM:
 			mystrcpy(_global_modl_kompletorium.antifona1.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_kompletorium.antifona1.anchor, anchor, MAX_STR_AF_ANCHOR);
@@ -232,6 +244,15 @@ void _set_antifona1(short int modlitba, const char *file, const char *anchor){
 
 void _set_antifona2(short int modlitba, const char *file, const char *anchor){
 	switch(modlitba){
+		/* 2006-10-17: Pridan· antifÛna aj pre kompletÛrium (niektorÈ pouûÌvaj˙ 2) */
+		case MODL_PRVE_KOMPLETORIUM:
+			mystrcpy(_global_modl_prve_kompletorium.antifona2.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_prve_kompletorium.antifona2.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
+		case MODL_KOMPLETORIUM:
+			mystrcpy(_global_modl_kompletorium.antifona2.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_kompletorium.antifona2.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
 		case MODL_RANNE_CHVALY:
 			mystrcpy(_global_modl_ranne_chvaly.antifona2.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_ranne_chvaly.antifona2.anchor, anchor, MAX_STR_AF_ANCHOR);
@@ -305,6 +326,10 @@ void _set_zalm1(short int modlitba, const char *file, const char *anchor){
 			mystrcpy(_global_modl_invitatorium.zalm1.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_invitatorium.zalm1.anchor, anchor, MAX_STR_AF_ANCHOR);
 			break;
+		case MODL_PRVE_KOMPLETORIUM:
+			mystrcpy(_global_modl_prve_kompletorium.zalm1.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_prve_kompletorium.zalm1.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
 		case MODL_KOMPLETORIUM:
 			mystrcpy(_global_modl_kompletorium.zalm1.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_kompletorium.zalm1.anchor, anchor, MAX_STR_AF_ANCHOR);
@@ -352,6 +377,15 @@ void _set_zalm1(short int modlitba, const char *file, const char *anchor){
 #define _set_rchvalospev _set_zalm2
 void _set_zalm2(short int modlitba, const char *file, const char *anchor){
 	switch(modlitba){
+		/* 2006-10-17: Pridan˝ ûalm aj pre kompletÛrium (niektorÈ pouûÌvaj˙ 2) */
+		case MODL_PRVE_KOMPLETORIUM:
+			mystrcpy(_global_modl_prve_kompletorium.zalm2.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_prve_kompletorium.zalm2.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
+		case MODL_KOMPLETORIUM:
+			mystrcpy(_global_modl_kompletorium.zalm2.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_kompletorium.zalm2.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
 		case MODL_RANNE_CHVALY:
 			mystrcpy(_global_modl_ranne_chvaly.zalm2.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_ranne_chvaly.zalm2.anchor, anchor, MAX_STR_AF_ANCHOR);
@@ -442,6 +476,10 @@ void _set_zalm3(short int modlitba, const char *file, const char *anchor){
 void _set_kcitanie(short int modlitba, const char *file, const char *anchor){
 	switch(modlitba){
 		/* 2006-10-13: PridanÈ kr·tke ËÌtanie aj pre kompletÛrium */
+		case MODL_PRVE_KOMPLETORIUM:
+			mystrcpy(_global_modl_prve_kompletorium.kcitanie.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_prve_kompletorium.kcitanie.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
 		case MODL_KOMPLETORIUM:
 			mystrcpy(_global_modl_kompletorium.kcitanie.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_kompletorium.kcitanie.anchor, anchor, MAX_STR_AF_ANCHOR);
@@ -482,6 +520,10 @@ void _set_kcitanie(short int modlitba, const char *file, const char *anchor){
 void _set_kresponz(short int modlitba, const char *file, const char *anchor){
 	switch(modlitba){
 		/* 2006-10-13: Pridan˝ kr·tky responz aj pre kompletÛrium */
+		case MODL_PRVE_KOMPLETORIUM:
+			mystrcpy(_global_modl_prve_kompletorium.kresponz.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_prve_kompletorium.kresponz.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
 		case MODL_KOMPLETORIUM:
 			mystrcpy(_global_modl_kompletorium.kresponz.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_kompletorium.kresponz.anchor, anchor, MAX_STR_AF_ANCHOR);
@@ -548,6 +590,10 @@ void _set_benediktus(short int modlitba, const char *file, const char *anchor){
 /* 2006-10-13: Nunc dimittis - pouûi t˙to funckiu */
 void _set_nuncdimittis(short int modlitba, const char *file, const char *anchor){
 	switch(modlitba){
+		case MODL_PRVE_KOMPLETORIUM:
+			mystrcpy(_global_modl_prve_kompletorium.nuncdimittis.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_prve_kompletorium.nuncdimittis.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
 		case MODL_KOMPLETORIUM:
 			mystrcpy(_global_modl_kompletorium.nuncdimittis.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_kompletorium.nuncdimittis.anchor, anchor, MAX_STR_AF_ANCHOR);
@@ -1046,6 +1092,14 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 		zvazok = 0;
 	}
 
+	/* 2006-10-17: DoplnenÈ kvÙli rÙznemu poËtu ûalmov pre kompletÛrium */
+	if(den == DEN_STREDA){ /* toto by bolo potrebnÈ naplniù aj pre prvÈ kompletÛrium */
+		_global_pocet_zalmov_kompletorium = 2;
+	}
+	else{
+		_global_pocet_zalmov_kompletorium = 1;
+	}
+
 	/* pridanÈ Ëasti pre kompletÛrium, 2006-10-13 */
 	set_hymnus(den, tyzzal, MODL_KOMPLETORIUM);
 	set_hymnus(den, tyzzal, MODL_PRVE_KOMPLETORIUM);
@@ -1090,6 +1144,10 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 	/* cast rovnaka pre kazdy tyzden zaltara */
 	switch(den){
 		case DEN_NEDELA:
+			/* 2006-10-17: pridanÈ kompletÛrium */
+			_set_zalm1(MODL_PRVE_KOMPLETORIUM, "z4.htm", "ZALM4");
+			_set_zalm2(MODL_PRVE_KOMPLETORIUM, "z134.htm", "ZALM134");
+			_set_zalm1(MODL_KOMPLETORIUM, "z91.htm", "ZALM91");
 			/* druhe vespery maju vzdy prvy zalm 110, 1-5.7 */
 			_set_zalm1(MODL_VESPERY, "z110.htm", "ZALM110");
 			/* nedelny ranny hymnus je rovnaky v prvom a tretom,
@@ -1113,7 +1171,8 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 			/* vecerne nedelne hymny su rovnake v kazdom tyzdni */
 			_set_zalm3(MODL_PRVE_VESPERY, "flp2.htm", "CHVAL_FLP2");
 			if((_global_den.litobd != OBD_POSTNE_I) &&
-				(_global_den.litobd != OBD_POSTNE_II_VELKY_TYZDEN)){				_set_zalm3(MODL_VESPERY, "zjv19.htm", "CHVAL_ZJV19");
+				(_global_den.litobd != OBD_POSTNE_II_VELKY_TYZDEN)){
+					_set_zalm3(MODL_VESPERY, "zjv19.htm", "CHVAL_ZJV19");
 			}
 			else{
 				_set_zalm3(MODL_VESPERY, "1pt2.htm", "CHVAL_1PT2");
@@ -1122,20 +1181,31 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 		/* vecerny hymnus vsedneho dna je rovnaky v kazdom tyzdni */
 		case DEN_PONDELOK:
 			_set_zalm3(MODL_VESPERY, "ef1.htm", "CHVAL_EF1");
+			/* 2006-10-17: pridanÈ kompletÛrium */
+			_set_zalm1(MODL_KOMPLETORIUM, "z86.htm", "ZALM86");
 			break;
 		case DEN_UTOROK:
 			_set_zalm3(MODL_VESPERY, "zjv4_5.htm", "CHVAL_ZJV45");
+			/* 2006-10-17: pridanÈ kompletÛrium */
+			_set_zalm1(MODL_KOMPLETORIUM, "z143.htm", "ZALM143");
 			break;
 		case DEN_STREDA:
 			_set_zalm3(MODL_VESPERY, "kol1.htm", "CHVAL_KOL1");
+			/* 2006-10-17: pridanÈ kompletÛrium */
+			_set_zalm1(MODL_KOMPLETORIUM, "z31.htm", "ZALM31_1_6");
+			_set_zalm2(MODL_KOMPLETORIUM, "z130.htm", "ZALM130");
 			break;
 		case DEN_STVRTOK:
 			_set_zalm3(MODL_VESPERY, "zjv11.htm", "CHVAL_ZJV11");
+			/* 2006-10-17: pridanÈ kompletÛrium */
+			_set_zalm1(MODL_KOMPLETORIUM, "z16.htm", "ZALM16");
 			break;
 		case DEN_PIATOK:
 			/* kazdy piatok, ranne chvaly je zalm 51 */
 			_set_zalm1(MODL_RANNE_CHVALY, "z51.htm", "ZALM51");
 			_set_zalm3(MODL_VESPERY, "zjv15.htm", "CHVAL_ZJV15");
+			/* 2006-10-17: pridanÈ kompletÛrium */
+			_set_zalm1(MODL_KOMPLETORIUM, "z88.htm", "ZALM88");
 			break;
 		case DEN_SOBOTA:
 			/* sobota v 1. a 3. tyzdni je zalm 34 */

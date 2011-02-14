@@ -153,6 +153,9 @@ extern short int _global_language;
 #define	_global_jazyk	_global_language
 #endif
 
+/* 2006-10-17: Pridané kvôli kompletóriu: niekedy obsahuje až dva žalmy */
+extern short int _global_pocet_zalmov_kompletorium;
+
 #ifndef OS_linux
 /* kedysi bolo void main;
  * 2003-07-14, kvoli gcc version 3.2.2 20030222 (Red Hat Linux 3.2.2-5) christ-net.sk 

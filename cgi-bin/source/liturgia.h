@@ -129,6 +129,8 @@ struct tmodlitba3{
 	_struct_anchor_and_file hymnus    ;
 	_struct_anchor_and_file antifona1 ;
 	_struct_anchor_and_file zalm1     ;
+	_struct_anchor_and_file antifona2 ; /* pridané 2006-10-17; niekedy sú až 2 žalmy */
+	_struct_anchor_and_file zalm2     ;
 	_struct_anchor_and_file kcitanie  ;
 	_struct_anchor_and_file kresponz  ;
 	_struct_anchor_and_file nuncdimittis   ; /* antifóna na nunc dimittis opravená 2006-10-11 */
@@ -301,6 +303,8 @@ extern const char *TEMPLAT[];
 #define PARAM_CHVALOSPEV_END                "CHVALOSPEV_END"
 #define PARAM_ZAKONCENIE_BEGIN              "ZAKONCENIE_BEGIN"
 #define PARAM_ZAKONCENIE_END                "ZAKONCENIE_END"
+#define PARAM_KOMPLETORIUM_DVA_ZALMY_BEGIN	"KOMPLETORIUM_DVA_ZALMY_BEGIN"
+#define PARAM_KOMPLETORIUM_DVA_ZALMY_END	"KOMPLETORIUM_DVA_ZALMY_END"
 
 /* stringy parametrov vstupu pre MODL_OPT..., ktore generovanie modlitby
  * ovplyvnuju */
@@ -914,6 +918,9 @@ extern short int _global_language;
 #define	_global_jazyk	_global_language
 #endif
 
+/* 2006-10-17: Pridané kvôli kompletóriu: niekedy obsahuje až dva žalmy */
+extern short int _global_pocet_zalmov_kompletorium;
+
 extern const char *nazov_jazyka[];
 extern const char *skratka_jazyka[];
 extern const char *postfix_jazyka[];
@@ -1057,6 +1064,8 @@ void _init_dm(_struct_dm a);
 	_INIT_ANCHOR_AND_FILE(a.hymnus); \
 	_INIT_ANCHOR_AND_FILE(a.antifona1); \
 	_INIT_ANCHOR_AND_FILE(a.zalm1); \
+	_INIT_ANCHOR_AND_FILE(a.antifona2); \
+	_INIT_ANCHOR_AND_FILE(a.zalm2); \
 	_INIT_ANCHOR_AND_FILE(a.kcitanie); \
 	_INIT_ANCHOR_AND_FILE(a.kresponz); \
 	_INIT_ANCHOR_AND_FILE(a.nuncdimittis); \

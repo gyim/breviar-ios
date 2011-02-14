@@ -284,6 +284,9 @@ short int _global_language;
 #define	_global_jazyk	_global_language
 #endif
 
+/* 2006-10-17: PridanÈ kvÙli kompletÛriu: niekedy obsahuje aû dva ûalmy */
+short int _global_pocet_zalmov_kompletorium;
+
 /* ------------------------------------------------------------------- */
 
 
@@ -1277,6 +1280,31 @@ void interpretParameter(short int type, char *paramname){
 			Log("  `zakoncenie' copied.\n");
 		}
 	}
+	/* 2006-10-17: PridanÈ */
+	else if(equals(paramname, PARAM_KOMPLETORIUM_DVA_ZALMY_BEGIN)){
+		if(_global_pocet_zalmov_kompletorium == 1){
+			/* nezobrazovaù druh˝ ûalm/antifÛnu pre kompletÛrium, ktorÈ m· len 1 ûalm+antifÛnu */
+			_global_skip_in_prayer = ANO;
+			Export("nezobrazovaù druh˝ ûalm/antifÛnu pre kompletÛrium, ktorÈ m· len 1 ûalm+antifÛnu");
+			Log("  `2. ûalm+antifÛna v kompletÛriu' skipping...\n");
+		}
+		else{
+			Export("zobrazovaù druh˝ ûalm/antifÛnu pre kompletÛrium, ktorÈ m· aj 2. ûalm+antifÛnu");
+			Log("  `2. ûalm+antifÛna v kompletÛriu': begin...\n");
+		}
+	}
+	else if(equals(paramname, PARAM_KOMPLETORIUM_DVA_ZALMY_END)){
+		if(_global_pocet_zalmov_kompletorium == 1){
+			/* nezobrazovaù druh˝ ûalm/antifÛnu pre kompletÛrium, ktorÈ m· len 1 ûalm+antifÛnu */
+			_global_skip_in_prayer = NIE;
+			Log("  `2. ûalm+antifÛna v kompletÛriu' skipped.\n");
+		}
+		else{
+			Export("zobrazovaù druh˝ ûalm/antifÛnu pre kompletÛrium, ktorÈ m· 2. ûalm+antifÛnu");
+			Log("  `2. ûalm+antifÛna v kompletÛriu' copied.\n");
+		}
+	}
+
 	/* pokracuju dalsie klasicke `tagy' v modlitbach (teda templatoch) */
 	else if(equals(paramname, PARAM_POPIS)){
 		/* pridane 05/04/2000A.D. */
@@ -1428,6 +1456,12 @@ void interpretParameter(short int type, char *paramname){
 				strcat(path, _global_modl_posv_citanie.antifona2.file);
 				includeFile(type, paramname, path, _global_modl_posv_citanie.antifona2.anchor);
 				break;
+			case MODL_KOMPLETORIUM:
+				if(_global_pocet_zalmov_kompletorium == 2){
+					strcat(path, _global_modl_kompletorium.antifona2.file);
+					includeFile(type, paramname, path, _global_modl_kompletorium.antifona2.anchor);
+				}
+				break;
 			default:
 				/* tieto modlitby nemaju antifonu2 */
 				break;
@@ -1531,6 +1565,12 @@ void interpretParameter(short int type, char *paramname){
 			case MODL_POSV_CITANIE:
 				strcat(path, _global_modl_posv_citanie.zalm2.file);
 				includeFile(type, paramname, path, _global_modl_posv_citanie.zalm2.anchor);
+				break;
+			case MODL_KOMPLETORIUM:
+				if(_global_pocet_zalmov_kompletorium == 2){
+					strcat(path, _global_modl_kompletorium.zalm2.file);
+					includeFile(type, paramname, path, _global_modl_kompletorium.zalm2.anchor);
+				}
 				break;
 			default:
 				/* tieto modlitby nemaju zalm2 */
@@ -4359,6 +4399,7 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 	}
 	else{
 		Log("  %d bytes for `_local_modl_1kompletorium_ptr'\n", sizeof(_type_1kompletorium));
+		_INIT_TMODLITBA3(_local_modl_prve_kompletorium); /* pridanÈ 2006-10-17 */
 	}
 /* _local_modl_vespery_ptr */
 	if((_local_modl_vespery_ptr = (_type_vespery*) malloc(sizeof(_type_vespery))) == NULL){
@@ -4377,6 +4418,7 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 	}
 	else{
 		Log("  %d bytes for `_local_modl_kompletorium_ptr'\n", sizeof(_type_kompletorium));
+		_INIT_TMODLITBA3(_local_modl_kompletorium); /* pridanÈ 2006-10-17 */
 	}
 
 	Log("...done.\n");
