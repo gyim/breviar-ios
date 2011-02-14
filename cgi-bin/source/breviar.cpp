@@ -82,6 +82,7 @@
 /*   2006-09-06a.D. | upratanie vo funkcii init_global_string (týž.ž.preNE)*/
 /*   2007-01-02a.D. | prvý zásah do kódu v r. 2007: DEBUG_2006_12_07       */
 /*   2007-01-08a.D. | opravené priradenie týždòa žaltára pre VIAN po 1.1.  */
+/*   2007-04-10a.D. | Te Deum je vo ve¾konoènej oktáve; nie je poèas pôstu */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -1129,8 +1130,9 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
  *		a responzóriu nasleduje hymnus Te Deum" 
  * 2005-11-20: Opravené, lebo sme kontrolovali den, a nie denvt :)
  * 2006-10-11: Doplnené (resp. revidované) invitatórium a kompletórium
+ * 2007-04-10: Doplnené: Te Deum je vo ve¾konoènej oktáve; nie je poèas pôstu (ani len pre nedele)
  */
-#define je_tedeum (type == MODL_POSV_CITANIE) && ((_global_den.denvt == DEN_NEDELA) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK))
+#define je_tedeum (type == MODL_POSV_CITANIE) && (((_global_den.denvt == DEN_NEDELA) && (_global_den.litobd != OBD_POSTNE_I) && (_global_den.litobd != OBD_POSTNE_II_VELKY_TYZDEN)) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA))
 void interpretParameter(short int type, char *paramname){
 	char path[MAX_STR] = STR_EMPTY;
 	mystrcpy(path, include_dir, MAX_STR);
