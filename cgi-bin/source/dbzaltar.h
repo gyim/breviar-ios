@@ -74,6 +74,8 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 /* pridane 2003-11-20 */
 #define ANCHOR_CITANIE1     "CIT1"
 #define ANCHOR_CITANIE2     "CIT2"
+/* pridané 2006-10-11 */
+#define ANCHOR_NUNCDIMITTIS "NUNCDIMITTIS"
 
 /* special identifiers */
 #define SPOM_PM_SOBOTA "SPMVS"

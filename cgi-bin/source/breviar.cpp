@@ -1117,8 +1117,9 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 /* 2005-08-15: Pridaný ïalší #define: èi je 34. týždeò obdobia cez rok */
 #define je_34_ocr ((_global_den.litobd == OBD_CEZ_ROK) && (_global_den.tyzden == 34) && (_global_den.denvt != DEN_NEDELA))
 /* 2005-11-11: "V nede¾u a na slávnosti a sviatky po druhom èítaní 
- *	a responzóriu nasleduje hymnus Te Deum" 
- *	2005-11-20: Opravené, lebo sme kontrolovali den, a nie denvt :)
+ *		a responzóriu nasleduje hymnus Te Deum" 
+ * 2005-11-20: Opravené, lebo sme kontrolovali den, a nie denvt :)
+ * 2006-10-11: Doplnené (resp. revidované) invitatórium a kompletórium
  */
 #define je_tedeum (type == MODL_POSV_CITANIE) && ((_global_den.denvt == DEN_NEDELA) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK))
 void interpretParameter(short int type, char *paramname){
@@ -1283,6 +1284,10 @@ void interpretParameter(short int type, char *paramname){
 		if(_global_opt4 == ANO){
 			Log("including POPIS\n");
 			switch(type){
+				case MODL_INVITATORIUM: /* 2006-10-11: pridané */
+					strcat(path, _global_modl_invitatorium.popis.file);
+					includeFile(type, paramname, path, _global_modl_invitatorium.popis.anchor);
+					break;
 				case MODL_RANNE_CHVALY:
 					strcat(path, _global_modl_ranne_chvaly.popis.file);
 					includeFile(type, paramname, path, _global_modl_ranne_chvaly.popis.anchor);
@@ -1307,6 +1312,10 @@ void interpretParameter(short int type, char *paramname){
 				case MODL_CEZ_DEN_3:
 					strcat(path, _global_modl_cez_den_3.popis.file);
 					includeFile(type, paramname, path, _global_modl_cez_den_3.popis.anchor);
+					break;
+				case MODL_KOMPLETORIUM: /* 2006-10-11: pridané */
+					strcat(path, _global_modl_kompletorium.popis.file);
+					includeFile(type, paramname, path, _global_modl_kompletorium.popis.anchor);
 					break;
 				default:
 					/* tieto modlitby nemaju popis */
@@ -1344,6 +1353,10 @@ void interpretParameter(short int type, char *paramname){
 				strcat(path, _global_modl_posv_citanie.hymnus.file);
 				includeFile(type, paramname, path, _global_modl_posv_citanie.hymnus.anchor);
 				break;
+			case MODL_KOMPLETORIUM: /* 2006-10-11: pridané */
+				strcat(path, _global_modl_kompletorium.hymnus.file);
+				includeFile(type, paramname, path, _global_modl_kompletorium.hymnus.anchor);
+				break;
 			default:
 				/* tieto modlitby nemaju hymnus */
 				break;
@@ -1352,8 +1365,8 @@ void interpretParameter(short int type, char *paramname){
 	else if(equals(paramname, PARAM_ANTIFONA1)){
 		switch(type){
 			case MODL_INVITATORIUM:
-				strcat(path, _global_modl_invitatorium.antifona.file);
-				includeFile(type, paramname, path, _global_modl_invitatorium.antifona.anchor);
+				strcat(path, _global_modl_invitatorium.antifona1.file);
+				includeFile(type, paramname, path, _global_modl_invitatorium.antifona1.anchor);
 				break;
 			case MODL_RANNE_CHVALY:
 				strcat(path, _global_modl_ranne_chvaly.antifona1.file);
@@ -1454,9 +1467,10 @@ void interpretParameter(short int type, char *paramname){
 	}/* PARAM_ANTIFONA3 */
 	else if(equals(paramname, PARAM_ZALM1)){
 		switch(type){
+/* hoci nie je zapoznámkované, nepoužíva sa: 2006-10-11: invitatórium nemá žalm / resp. má fixný žalm 95 a alternatívy */
 			case MODL_INVITATORIUM:
-				strcat(path, _global_modl_invitatorium.zalm.file);
-				includeFile(type, paramname, path, _global_modl_invitatorium.zalm.anchor);
+				strcat(path, _global_modl_invitatorium.zalm1.file);
+				includeFile(type, paramname, path, _global_modl_invitatorium.zalm1.anchor);
 				break;
 			case MODL_RANNE_CHVALY:
 				strcat(path, _global_modl_ranne_chvaly.zalm1.file);
@@ -1690,6 +1704,16 @@ void interpretParameter(short int type, char *paramname){
 		else /* ostatne modlitby nemaju ranny chvalospev */
 		;
 	}/* PARAM_RCHVALOSPEV */
+	else if(equals(paramname, PARAM_NUNCDIMITTIS)){
+		/* ak _global_skip_in_prayer je ANO, tak preskoc Nunc Dimittis */
+		if(((type == MODL_KOMPLETORIUM) || (type == MODL_PRVE_KOMPLETORIUM) || (type == MODL_DRUHE_KOMPLETORIUM))
+		&& (_global_skip_in_prayer != ANO)){
+			strcat(path, _global_modl_kompletorium.nuncdimittis.file);
+			includeFile(type, paramname, path, _global_modl_kompletorium.nuncdimittis.anchor);
+		}
+		else /* ostatne modlitby benediktus nemaju */
+		;
+	}/* PARAM_BENEDIKTUS */
 	else if(equals(paramname, PARAM_PROSBY)){
 		switch(type){
 			case MODL_RANNE_CHVALY:
@@ -1727,10 +1751,12 @@ void interpretParameter(short int type, char *paramname){
 				strcat(path, _global_modl_vespery.modlitba.file);
 				includeFile(type, paramname, path, _global_modl_vespery.modlitba.anchor);
 				break;
+/* zapoznámkované 2006-10-11: kompletórium nemá modlitbu
 			case MODL_KOMPLETORIUM:
 				strcat(path, _global_modl_kompletorium.modlitba.file);
 				includeFile(type, paramname, path, _global_modl_kompletorium.modlitba.anchor);
 				break;
+*/
 			/* pridane 2003-11-20 */
 			case MODL_POSV_CITANIE:
 				strcat(path, _global_modl_posv_citanie.modlitba.file);
@@ -3262,6 +3288,32 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 
 		/* 2003-07-15 vycistene poznamky, dorobene modlitby cez den */
 
+/* 2006-10-11: dorobené tlaèidlo pre invitatórium */
+
+		/* oddelenie */
+		Export("</td>\n<td>");
+		if(_global_linky == ANO){
+			/* modlitba posvatneho citania -- button */
+			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
+				script_name,
+				STR_QUERY_TYPE, STR_PRM_DATUM,
+				STR_DEN, _global_den.den,
+				STR_MESIAC, _global_den.mesiac,
+				STR_ROK, _global_den.rok,
+				STR_MODLITBA, STR_MODL_INVITATORIUM,
+				pom);
+				/* 2003-08-11 pozor, segfault bol spuosobeny tym, ze
+				 * ako %s sa vypisoval int! (chybal prefix STR_...)
+				 */
+		}
+		else{
+			Export("<form action=\"%s\">\n", pom);
+		}
+		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
+		Export((char *)HTML_BUTTON_INVITATORIUM);
+		Export("\">\n");
+		Export("</form>\n");
+
 		/* oddelenie */
 		Export("</td>\n<td>");
 		if(_global_linky == ANO){
@@ -3401,7 +3453,39 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 			Export((char *)HTML_BUTTON_VESPERY);
 			Export("\">\n");
 			Export("</form>\n");
+
+			/* 2006-10-11: dorobené tlaèidlo pre invitatórium */
+
+			/* oddelenie */
+			Export("</td>\n<td>");
+			if(_global_linky == ANO){
+				/* modlitba posvatneho citania -- button */
+				Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
+					script_name,
+					STR_QUERY_TYPE, STR_PRM_DATUM,
+					STR_DEN, _global_den.den,
+					STR_MESIAC, _global_den.mesiac,
+					STR_ROK, _global_den.rok,
+					STR_MODLITBA, STR_MODL_KOMPLETORIUM,
+					pom);
+					/* 2003-08-11 pozor, segfault bol spuosobeny tym, ze
+					 * ako %s sa vypisoval int! (chybal prefix STR_...)
+					 */
+			}
+			else{
+				Export("<form action=\"%s\">\n", pom);
+			}
+			Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
+			Export((char *)HTML_BUTTON_KOMPLETORIUM);
+			Export("\">\n");
+			Export("</form>\n");
+
 		}/* if(poradie_svateho != 4) */
+		else{
+			/* 2006-10-11: treba ešte jedno odsadenie, aby Detaily... boli pod sebou, ak sa jedná napr. o sobotu */
+			/* oddelenie */
+			Export("</td>\n<td>");
+		}
 
 		/* toto sa tyka buttonu 'Detaily...' */
 		Export("</td>\n<td>");
@@ -4931,7 +5015,9 @@ short int atojazyk(char *jazyk){
 	return JAZYK_UNDEF;
 }
 
-/* 2006-02-10: nový define; používa premenné int i, p */
+/* 2006-02-10: nový define; používa premenné int i, p 
+ * 2006-10-11: odpoznámkované invitatórium a kompletórium
+ */
 #define _parsuj_parameter_MODLITBA {\
 	/* rozparsovanie parametra modlitba */\
 	Log("/* rozparsovanie parametra modlitba */\n");\
@@ -4939,8 +5025,8 @@ short int atojazyk(char *jazyk){
 		p = MODL_NEURCENA;\
 	else if(equals(modlitba, STR_MODL_DETAILY))\
 		p = MODL_DETAILY;\
-/*	else if(equals(modlitba, STR_MODL_INVITATORIUM))\
-		p = MODL_INVITATORIUM;*/\
+	else if(equals(modlitba, STR_MODL_INVITATORIUM))\
+		p = MODL_INVITATORIUM;\
 	else if(equals(modlitba, STR_MODL_RANNE_CHVALY))\
 		p = MODL_RANNE_CHVALY;\
 	/* 2003-08-11 pridana modlitba posvatneho citania */\
@@ -4955,8 +5041,8 @@ short int atojazyk(char *jazyk){
 		p = MODL_POPOLUDNI;\
 	else if(equals(modlitba, STR_MODL_VESPERY))\
 		p = MODL_VESPERY;\
-/*	else if(equals(modlitba, STR_MODL_KOMPLETORIUM))\
-		p = MODL_KOMPLETORIUM; */\
+	else if(equals(modlitba, STR_MODL_KOMPLETORIUM))\
+		p = MODL_KOMPLETORIUM;\
 	else\
 		p = MODL_NEURCENA;\
 	/* este treba skontrolovat, ci nazov modlitby nie je\
@@ -5453,7 +5539,9 @@ void _main_zaltar(char *den, char *tyzden, char *modlitba){
 		}
 	}
 	if(p == MODL_NEURCENA){
-		/* 2005-08-15: Kvôli simulácii porovnávame aj s konštantami STR_MODL_... */
+		/* 2005-08-15: Kvôli simulácii porovnávame aj s konštantami STR_MODL_... 
+		 * 2006-10-11: pridané invitatórium a kompletórium
+		 */
 		if(equals(modlitba, STR_MODL_RANNE_CHVALY))
 			p = MODL_RANNE_CHVALY;
 		else if(equals(modlitba, STR_MODL_POSV_CITANIE))
@@ -5465,6 +5553,10 @@ void _main_zaltar(char *den, char *tyzden, char *modlitba){
 		else if(equals(modlitba, STR_MODL_NAPOLUDNIE))
 			p = MODL_NAPOLUDNIE;
 		else if(equals(modlitba, STR_MODL_POPOLUDNI))
+			p = MODL_POPOLUDNI;
+		else if(equals(modlitba, STR_MODL_INVITATORIUM))
+			p = MODL_KOMPLETORIUM;
+		else if(equals(modlitba, STR_MODL_KOMPLETORIUM))
 			p = MODL_POPOLUDNI;
 	}
 	if(p == MODL_NEURCENA){
@@ -6626,8 +6718,8 @@ short int getArgv(int argc, char **argv){
 					printf("\tm  mesiac  %s (1--12, jan--dec)\n", STR_MESIAC);
 					printf("\tt  tyzden zaltara (1--4) \n");
 					printf("\tr  rok (napr. 2000)\n");
-					printf("\tp  %s (modlitba: %s, %s, %s, %s, %s, %s, %s...) \n", 
-						STR_MODLITBA, STR_MODL_RANNE_CHVALY, STR_MODL_VESPERY, STR_MODL_POSV_CITANIE, STR_MODL_PREDPOLUDNIM, STR_MODL_NAPOLUDNIE, STR_MODL_POPOLUDNI, STR_MODL_DETAILY);
+					printf("\tp  %s (modlitba: %s, %s, %s, %s, %s, %s, %s, %s, %s...) \n", 
+						STR_MODLITBA, STR_MODL_RANNE_CHVALY, STR_MODL_VESPERY, STR_MODL_POSV_CITANIE, STR_MODL_PREDPOLUDNIM, STR_MODL_NAPOLUDNIE, STR_MODL_POPOLUDNI, STR_MODL_DETAILY, STR_MODL_INVITATORIUM, STR_MODL_KOMPLETORIUM);
 					printf("\t\t (resp. rok do pre davkove spracovanie)\n"); /* pridane 2003-07-07 */
 					printf("\tx  %s (dalsi svaty, 1--3 resp. 4) \n", STR_DALSI_SVATY);
 					/* 2004-03-11, zlepseny popis */

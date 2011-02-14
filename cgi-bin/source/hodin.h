@@ -661,6 +661,17 @@ const char *postfix_jazyka[] =
 /* Pozn·mka: Postfix nesmie obsahovaù na zaËiatku oddeæovaË (slash resp. backslash);
  * musÌ sa jednaù o podadres·r pod include */
 
+/* 2006-10-11: definovanie reùazcov aj pre invitatÛrium a kompletÛrium */
+const char *html_button_invitatorium[] = {"Inv.", "Inv.", "Inv.", ""};
+#ifndef HTML_BUTTON_INVITATORIUM
+#define HTML_BUTTON_INVITATORIUM	html_button_invitatorium[_global_jazyk]
+#endif
+
+const char *html_button_kompletorium[] = {"Kompl.", "Kompl.", "Compl.", ""};
+#ifndef HTML_BUTTON_KOMPLETORIUM
+#define HTML_BUTTON_KOMPLETORIUM	html_button_kompletorium[_global_jazyk]
+#endif
+
 /* definÌcie HTML prvkov upravenÈ a presunutÈ z mydefs.h, 2006-08-01 */
 const char *html_button_ranne_chvaly[] = {"RannÈ chv·ly", "RannÌ chv·ly", "Laudes", ""};
 #ifndef HTML_BUTTON_RANNE_CHVALY

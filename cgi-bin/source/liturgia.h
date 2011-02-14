@@ -34,6 +34,7 @@
 /*   2006-08-07a.D. | pridané sv. mužov/žien, èo žili v manž.  */
 /*   2006-08-18a.D. | zmena int na short int (staèí 32tis.)    */
 /*   2006-08-19a.D. | pridanie liturgickej farby               */
+/*   2006-10-11a.D. | pre invitatórium a kompletórium params.  */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -91,7 +92,7 @@ struct tmodlitba1{
 	_struct_anchor_and_file zalm3     ;
 	_struct_anchor_and_file kcitanie  ; /* 1. citanie pre posvatne citanie */
 	_struct_anchor_and_file kresponz  ; 
-	_struct_anchor_and_file benediktus; /* antifona na benediktus/magnifikat; 2. citanie pre posvatne citanie */
+	_struct_anchor_and_file benediktus; /* antifona na benediktus/magnifikat/nunc dimittis; 2. citanie pre posvatne citanie */
 	_struct_anchor_and_file prosby    ; /* pre posvatne citanie nedefinovane */
 	_struct_anchor_and_file modlitba  ;
 };
@@ -123,22 +124,21 @@ typedef struct tmodlitba2 _type_cez_den_na;
 typedef struct tmodlitba2 _type_cez_den_po;
 
 struct tmodlitba3{
+	_struct_anchor_and_file popis     ; /* pridané 2006-10-11; zrušené antifona2, zalm2 a modlitba */
 	_struct_anchor_and_file hymnus    ;
 	_struct_anchor_and_file antifona1 ;
 	_struct_anchor_and_file zalm1     ;
-	_struct_anchor_and_file antifona2 ;
-	_struct_anchor_and_file zalm2     ;
 	_struct_anchor_and_file kcitanie  ;
 	_struct_anchor_and_file kresponz  ;
-	_struct_anchor_and_file nunkdim   ; /* antifona na nunk dimittus */
-	_struct_anchor_and_file modlitba  ;
+	_struct_anchor_and_file nuncdimittis   ; /* antifóna na nunc dimittis opravená 2006-10-11 */
 };
 typedef struct tmodlitba3 _type_kompletorium;
 typedef struct tmodlitba3 _type_1kompletorium;
 
 struct tmodlitba4{
-	_struct_anchor_and_file antifona ;
-	_struct_anchor_and_file zalm     ;
+	_struct_anchor_and_file popis     ; /* pridané 2006-10-11 */
+	_struct_anchor_and_file antifona1;
+	_struct_anchor_and_file zalm1    ;
 };
 typedef struct tmodlitba4 _type_invitatorium;
 
@@ -177,22 +177,27 @@ typedef struct den_mesiac _struct_den_mesiac;
 /* ... a stringy pre ne */
 /* pre modlitbu cez den pridane 2003-07-15 */
 /* pre posvatne citanie pridane 2003-08-06 */
+/* pre invitatórium a kompletórium pridané 2006-10-11 */
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_RANNE_CHVALY "MODL_RANNE_CHVALY"
-	#define STR_MODL_POSV_CITANIE "MODL_POSV_CITANIE"
-	#define STR_MODL_VESPERY "MODL_VESPERY"
-	#define STR_MODL_PREDPOLUDNIM "MODL_PREDPOLUDNIM"
-	#define STR_MODL_NAPOLUDNIE "MODL_NAPOLUDNIE"
-	#define STR_MODL_POPOLUDNI "MODL_POPOLUDNI"
-	#define STR_MODL_DETAILY "MODL_DETAILY"
+	#define		STR_MODL_INVITATORIUM	"MODL_INVITATORIUM"
+	#define		STR_MODL_RANNE_CHVALY	"MODL_RANNE_CHVALY"
+	#define		STR_MODL_POSV_CITANIE	"MODL_POSV_CITANIE"
+	#define		STR_MODL_VESPERY		"MODL_VESPERY"
+	#define		STR_MODL_PREDPOLUDNIM	"MODL_PREDPOLUDNIM"
+	#define		STR_MODL_NAPOLUDNIE		"MODL_NAPOLUDNIE"
+	#define		STR_MODL_POPOLUDNI		"MODL_POPOLUDNI"
+	#define		STR_MODL_DETAILY		"MODL_DETAILY"
+	#define		STR_MODL_KOMPLETORIUM	"MODL_KOMPLETORIUM"
 #else
-	#define STR_MODL_RANNE_CHVALY "mrch"
-	#define STR_MODL_POSV_CITANIE "mpc"
-	#define STR_MODL_VESPERY "mv"
-	#define STR_MODL_PREDPOLUDNIM "mpred"
-	#define STR_MODL_NAPOLUDNIE "mna"
-	#define STR_MODL_POPOLUDNI "mpo"
-	#define STR_MODL_DETAILY "*"
+	#define		STR_MODL_INVITATORIUM	"mi"
+	#define		STR_MODL_RANNE_CHVALY	"mrch"
+	#define		STR_MODL_POSV_CITANIE	"mpc"
+	#define		STR_MODL_VESPERY		"mv"
+	#define		STR_MODL_PREDPOLUDNIM	"mpred"
+	#define		STR_MODL_NAPOLUDNIE		"mna"
+	#define		STR_MODL_POPOLUDNI		"mpo"
+	#define		STR_MODL_DETAILY		"*"
+	#define		STR_MODL_KOMPLETORIUM	"mk"
 #endif
 
 /* 2005-03-27: Vlozene do definicnej casti z funkcie dbzaltar.cpp::pismenko_modlitby() */
@@ -262,6 +267,8 @@ extern const char *TEMPLAT[];
 /* pridane 2003-08-06, upravene 2003-08-21 */                                        
 #define PARAM_CITANIE1     "CITANIE1" /* vlastne KCITANIE */
 #define PARAM_CITANIE2     "CITANIE2" /* vlastne BENEDIKTUS */
+/* pridané 2006-10-11 */
+#define PARAM_NUNCDIMITTIS "NUNCDIMITTIS" /* antifóna pre Nunc dimittis pre kompletórium */
 
 /* dalsie parametre: specificke pre obdobie */
 /* Od nedele Pánovho zmàtvychvstania až do Druhej ve¾konoènej nedele vrátane,
@@ -1038,6 +1045,24 @@ void _init_dm(_struct_dm a);
 	_INIT_ANCHOR_AND_FILE(a.kcitanie); \
 	_INIT_ANCHOR_AND_FILE(a.kresponz); \
 	_INIT_ANCHOR_AND_FILE(a.modlitba); \
+};
+
+/* 2006-10-11 doplnené */
+#define _INIT_TMODLITBA3(a) {\
+	_INIT_ANCHOR_AND_FILE(a.popis); \
+	_INIT_ANCHOR_AND_FILE(a.hymnus); \
+	_INIT_ANCHOR_AND_FILE(a.antifona1); \
+	_INIT_ANCHOR_AND_FILE(a.zalm1); \
+	_INIT_ANCHOR_AND_FILE(a.kcitanie); \
+	_INIT_ANCHOR_AND_FILE(a.kresponz); \
+	_INIT_ANCHOR_AND_FILE(a.nuncdimittis); \
+};
+
+/* 2006-10-11 doplnené */
+#define _INIT_TMODLITBA4(a) {\
+	_INIT_ANCHOR_AND_FILE(a.popis); \
+	_INIT_ANCHOR_AND_FILE(a.antifona1); \
+	_INIT_ANCHOR_AND_FILE(a.zalm1); \
 };
 
 #define Log_struktura_dm Log("  <dm>"); Log
