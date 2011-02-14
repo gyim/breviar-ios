@@ -284,7 +284,7 @@ const char *nazov_slavenia_jazyk[POCET_SLAVENI + 1][POCET_JAZYKOV + 1] =
  {"slávnos", "slavnost", "celebration", "sollemnitas", "","Slavnost"}, 
  {"sviatok", "svátek", "", "festum", "","Svátek"}, 
  {"spomienka", "památka", "", "memoria", "","Památka"}, 
- {"¾ubovo¾ná spomienka", "nezávazná památka", "", "memoria ad libitum", "","Nezávazná památka"}, 
+ {"¾ubovo¾ná spomienka", "nezávazná památka", "", "memoria ad libitum", "","nezávazná památka"}, 
  {"vlastné slávenie", "z vlastních textù", "", "", "", "z vlastních textù"}, 
 };
 

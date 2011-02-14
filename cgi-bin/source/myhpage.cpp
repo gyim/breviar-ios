@@ -18,6 +18,7 @@
 /*   2006-07-31a.D. | prvé kroky k jazykovým mutáciám          */
 /*   2008-01-23a.D. | upravené funkcie patka()                 */
 /*   2008-08-08a.D. | upravené funkcie hlavicka() kvôli css    */
+/*   2008-09-26a.D. | pridané použitie nazov_mesiaca()         */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -122,16 +123,6 @@ void hlavicka(char *title, FILE * expt){
 	return;
 }/* hlavicka() */
 
-/* nazov_mesiaca: string pre nazov dna; suhlasi s struct tm.tm_mon;
- * Month (0--11) */
-const char *nm[] =
-{"január", "február", "marec", "apríl", "máj", "jún", "júl",
- "august", "september", "október", "november", "december", "neznámy"};
-
-const char *nm_cz[] =
-{"leden", "únor", "bøezen", "duben", "kvìten", "èerven", "èervenec",
- "srpen", "záøí", "øíjen", "listopad", "prosinec", "neznámý"};
-
 /* 2008-01-23: upravené */
 //const char *gpage[] = {"Generovaná stránka", "Stránky jsou generovány", "Generated page", "Generated"};
 const char *gpage[POCET_JAZYKOV + 1] = {"Generované: ", "Generováno: ", "Generated: ", "Generated: ", "Generated: ", "Generováno: "};
@@ -166,7 +157,7 @@ void patka(void){
 	/* Export("(%s). ", ctime(&t) + 4); */
 	Export((char *)datum_template[_global_jazyk],
 		dnes.tm_mday,
-		(_global_jazyk == JAZYK_CZ) ? nm_cz[dnes.tm_mon] : nm[dnes.tm_mon],
+		nazov_mesiaca(dnes.tm_mon)/* (_global_jazyk == JAZYK_CZ) ? nm_cz[dnes.tm_mon] : nm[dnes.tm_mon] */,
 		dnes.tm_year,
 		dnes.tm_hour,
 		dnes.tm_min
@@ -217,7 +208,7 @@ void patka(FILE * expt){
 	/* fprintf(expt, "(%s). ", ctime(&t) + 4); */
 	fprintf(expt, (char *)datum_template[_global_jazyk],
 		dnes.tm_mday,
-		nm[dnes.tm_mon],
+		nazov_mesiaca(dnes.tm_mon) /* nm[dnes.tm_mon] */,
 		dnes.tm_year,
 		dnes.tm_hour,
 		dnes.tm_min
@@ -243,4 +234,3 @@ void patka(FILE * expt){
 }
 
 #endif /*__MYHPAGE_C_*/
-

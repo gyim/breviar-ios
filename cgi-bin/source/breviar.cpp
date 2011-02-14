@@ -142,8 +142,8 @@
 #include "mystring.h" /* 31/03/2000A.D. */
 #include "myconf.h" /* 30/03/2000A.D. */
 #include "mysystem.h" /* hovori, ci som v systeme linux/DOS */
+#include "hodin.h"
 #include "liturgia.h"                  
-#include "hodin.h"                     
 #include "cgiutils.h" /* parsovanie query stringu */
 #include "mygetopt.h" /* parsovanie argv[], t.j. options z command line */
 
