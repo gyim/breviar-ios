@@ -5060,7 +5060,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR]){
 				// fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%d%c.htm\">%s</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a, char_modlitby[i], nazov_modlitby(i));
 				/* 2008-11-29: rozlièný export */
 				if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
-					fprintf(batch_html_file, "\t<a href=\""FILENAME_EXPORT_DATE_SIMPLE"_%d%c.htm\">%s</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a, char_modlitby[i], nazov_modlitby(i));
+					fprintf(batch_html_file, "\t<a href=\""FILENAME_EXPORT_DATE_SIMPLE"_%d%c.htm\">%s</a>, \n", _global_den.rok % 100, _global_den.mesiac, _global_den.den, a, char_modlitby[i], nazov_modlitby(i));
 				else /* EXPORT_DATE_FULL */
 					fprintf(batch_html_file, "\t<a href=\""FILENAME_EXPORT_DATE_FULL"_%d%c.htm\">%s</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a, char_modlitby[i], nazov_modlitby(i));
 			}
@@ -5094,7 +5094,7 @@ void _export_rozbor_dna_batch(short int typ){
 				name_binary_executable, include_dir, 
 				_global_den.den, _global_den.mesiac, _global_den.rok,
 				_global_opt_export_date_format,
-				_global_den.rok, _global_den.mesiac, _global_den.den);
+				_global_den.rok % 100, _global_den.mesiac, _global_den.den);
 		else /* EXPORT_DATE_FULL */
 			sprintf(batch_command, "%s -i%s -qpdt -d%d -m%d -r%d -u%d -e"FILENAME_EXPORT_DATE_FULL"_", 
 				name_binary_executable, include_dir, 
@@ -7265,7 +7265,7 @@ void _main_batch_mode(
 						mystrcpy(_global_string, STR_EMPTY, MAX_GLOBAL_STR); /* inicializacia */
 						/* 2008-11-29: rozlièný export */
 						if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
-							sprintf(_global_string, FILENAME_EXPORT_DATE_SIMPLE"_"FILENAME_EXPORT_DATE_SIMPLE, r_from, m_from, d_from, r_to, m_to, d_to);
+							sprintf(_global_string, FILENAME_EXPORT_DATE_SIMPLE"_"FILENAME_EXPORT_DATE_SIMPLE, r_from % 100, m_from, d_from, r_to % 100, m_to, d_to);
 						else /* EXPORT_DATE_FULL */
 							sprintf(_global_string, FILENAME_EXPORT_DATE_FULL"_"FILENAME_EXPORT_DATE_FULL, r_from, m_from, d_from, r_to, m_to, d_to);
 					}
@@ -7824,6 +7824,9 @@ short int getArgv(int argc, char **argv){
 					printf("\ta  (append) pri exportovani do suboru (-e) neprepisuje subor\n");
 					/* pridané 2006-07-12 */
 					printf("\tj  jazyk (jazykova mutacia), zatial: sk, cz\n");
+					/* pridané 2008-11-29 */
+					printf("\tc  css filename (pouzite CSS)\n");
+					printf("\tu  batch mode dates in file name format (0 = simple, 1 = full)\n");
 
 					/* pridane 2003-06-27; prave prva uvedena linka sposobuje problem (nefunguju detaily pre spomienku pm v sobotu) */
 					printf("\n\t   pri prepinacoch ano = 1, nie = 0\n");
