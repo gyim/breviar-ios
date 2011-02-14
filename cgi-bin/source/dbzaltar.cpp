@@ -104,6 +104,8 @@
 /*   2008-12-20a.D. | Ôalöie ˙pravy pre hymnus kompletÛria: set_hymnus()*/
 /*   2009-01-05a.D. | opravenÈ kompletÛrium pre vianoËn˙ a veækonoËn˙   */
 /*                    okt·vu - _set_kompletorium_slavnost_oktava()      */
+/*                  - modlitba cez deÚ pre 26.-28.12. je z okt·vy nar.  */
+/*   2009-01-06a.D. | vytvorenÈ zaltar_kompletorium()                   */
 /*                                                                      */
 /*                                                                      */
 /* notes |                                                              */
@@ -597,6 +599,22 @@ void _set_zalm3(short int modlitba, const char *file, const char *anchor){
 			break;
 	}/* switch(modlitba) */
 }
+
+/* 2009-01-06: doplnen· funkcia, ktor· obaæuje _set_zalm1 aû 3, aby sa dali vypisovaù debug v˝pisy */
+void set_zalm(short int ktory, short int modlitba, const char *file, const char *anchor){
+	switch(ktory){
+		case 1:
+			_set_zalm1(modlitba, file, anchor);
+			break;
+		case 2:
+			_set_zalm2(modlitba, file, anchor);
+			break;
+		case 3:
+			_set_zalm3(modlitba, file, anchor);
+			break;
+	}/* switch(ktory) */
+	Log("_set_zalm%d: %s: s˙bor `%s', kotva `%s' [volanie set_zalm()]\n", ktory, nazov_modlitby(modlitba), file, anchor);
+}/* set_zalm() */
 
 /* pri posvatnom citani plati pre 1. citanie */
 #define _set_citanie1 _set_kcitanie
@@ -1347,26 +1365,26 @@ void set_kresponz_kompletorium_obd(short int den, short int tyzzal, short int mo
 
 void _set_zalm_cez_den_doplnkova_psalmodia(void){
 	/* modlitba predpoludnim, 1. seria doplnkovej psalmodie */
-		_set_zalm1(MODL_PREDPOLUDNIM, "z120.htm", "ZALM120");
-		_set_zalm2(MODL_PREDPOLUDNIM, "z121.htm", "ZALM121");
-		_set_zalm3(MODL_PREDPOLUDNIM, "z122.htm", "ZALM122");
+		set_zalm(1, MODL_PREDPOLUDNIM, "z120.htm", "ZALM120");
+		set_zalm(2, MODL_PREDPOLUDNIM, "z121.htm", "ZALM121");
+		set_zalm(3, MODL_PREDPOLUDNIM, "z122.htm", "ZALM122");
 	/* modlitba napoludnie, 2. seria doplnkovej psalmodie */
-		_set_zalm1(MODL_NAPOLUDNIE, "z123.htm", "ZALM123");
-		_set_zalm2(MODL_NAPOLUDNIE, "z124.htm", "ZALM124");
-		_set_zalm3(MODL_NAPOLUDNIE, "z125.htm", "ZALM125");
+		set_zalm(1, MODL_NAPOLUDNIE, "z123.htm", "ZALM123");
+		set_zalm(2, MODL_NAPOLUDNIE, "z124.htm", "ZALM124");
+		set_zalm(3, MODL_NAPOLUDNIE, "z125.htm", "ZALM125");
 	/* modlitba popoludni, 3. seria doplnkovej psalmodie */
-		_set_zalm1(MODL_POPOLUDNI, "z126.htm", "ZALM126");
-		_set_zalm2(MODL_POPOLUDNI, "z127.htm", "ZALM127");
-		_set_zalm3(MODL_POPOLUDNI, "z128.htm", "ZALM128");
+		set_zalm(1, MODL_POPOLUDNI, "z126.htm", "ZALM126");
+		set_zalm(2, MODL_POPOLUDNI, "z127.htm", "ZALM127");
+		set_zalm(3, MODL_POPOLUDNI, "z128.htm", "ZALM128");
 }
 
 /* 2006-01-24: pridanÈ ûalmy nedele 1. t˝ûdÚa kvÙli modlitbe cez deÚ */
 void _set_zalmy_1nedele_mcd(void){/* modlitba cez deÚ; rovnakÈ ûalmy s˙ pre nedeæu 3. t˝ûdÚa; 2007-01-11 */
 	Log("_set_zalmy_1nedele_mcd() -- begin\n");
 	/* modlitba cez den */
-	_set_zalm1(MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_I");
-	_set_zalm2(MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_II");
-	_set_zalm3(MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_III");
+	set_zalm(1, MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_I");
+	set_zalm(2, MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_II");
+	set_zalm(3, MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_III");
 	Log("_set_zalmy_1nedele_mcd() -- end\n");
 }
 
@@ -1374,9 +1392,9 @@ void _set_zalmy_1nedele_mcd(void){/* modlitba cez deÚ; rovnakÈ ûalmy s˙ pre nede
 void _set_zalmy_2nedele_mcd(void){/* modlitba cez deÚ; rovnakÈ ûalmy s˙ pre nedeæu 4. t˝ûdÚa; 2007-01-11 */
 	Log("_set_zalmy_2nedele_mcd() -- begin\n");
 	/* modlitba cez den */
-	_set_zalm1(MODL_CEZ_DEN_VSETKY, "z23.htm", "ZALM23");
-	_set_zalm2(MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_I");
-	_set_zalm3(MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_II");
+	set_zalm(1, MODL_CEZ_DEN_VSETKY, "z23.htm", "ZALM23");
+	set_zalm(2, MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_I");
+	set_zalm(3, MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_II");
 	Log("_set_zalmy_2nedele_mcd() -- end\n");
 }
 
@@ -1387,15 +1405,15 @@ void _set_kompletorium_nedela_spolocne(short int modlitba){
 	Log("_set_kompletorium_nedela_spolocne(%d - %s) -- begin\n", modlitba, nazov_modlitby(modlitba));
 	if(modlitba == MODL_PRVE_KOMPLETORIUM){ /* ktore == 1 */
 		_global_modl_prve_kompletorium.pocet_zalmov = 2; /* 2008-05-08: opravenÈ */
-		_set_zalm1(modlitba, "z4.htm", "ZALM4");
-		_set_zalm2(modlitba, "z134.htm", "ZALM134");
+		set_zalm(1, modlitba, "z4.htm", "ZALM4");
+		set_zalm(2, modlitba, "z134.htm", "ZALM134");
 		// _global_modl_kompletorium.pocet_zalmov = 2;
-		// _set_zalm1(MODL_KOMPLETORIUM, "z4.htm", "ZALM4");
-		// _set_zalm2(MODL_KOMPLETORIUM, "z134.htm", "ZALM134");
+		// set_zalm(1, MODL_KOMPLETORIUM, "z4.htm", "ZALM4");
+		// set_zalm(2, MODL_KOMPLETORIUM, "z134.htm", "ZALM134");
 	}
 	else{ /* modlitba == MODL_KOMPLETORIUM t.j. ktore == 2 */
 		_global_modl_kompletorium.pocet_zalmov = 1;
-		_set_zalm1(modlitba, "z91.htm", "ZALM91");
+		set_zalm(1, modlitba, "z91.htm", "ZALM91");
 	}
 	set_hymnus(DEN_NEDELA /* den */, _global_den.tyzzal, modlitba);
 	set_antifony(DEN_NEDELA, _global_den.tyzzal, 2 /* zvazok - pre kompletÛrium sa nepouûÌva, len kvÙli posv. ËÌtaniu */, modlitba);
@@ -1461,8 +1479,8 @@ void _set_kompletorium_slavnost_oktava(short int modlitba, short int litobd, sho
 	else{ /* ktore = 1 */
 		/* nastavujeme ako pre nedeænÈ kompletÛrium po prv˝ch veöper·ch, porov. _set_kompletorium_nedela_spolocne() */
 		_global_modl_kompletorium.pocet_zalmov = 2;
-		_set_zalm1(modlitba, "z4.htm", "ZALM4");
-		_set_zalm2(modlitba, "z134.htm", "ZALM134");
+		set_zalm(1, modlitba, "z4.htm", "ZALM4");
+		set_zalm(2, modlitba, "z134.htm", "ZALM134");
 		set_hymnus(DEN_NEDELA /* den */, _global_den.tyzzal, modlitba);
 		set_antifony(DEN_NEDELA, _global_den.tyzzal, 9 /* zvazok - pre kompletÛrium sa nepouûÌvalo, vyuûitÈ na öpeci·lne nastavenie */, modlitba);
 		set_modlitba(DEN_UNKNOWN, _global_den.tyzzal, modlitba); /* je to jeden konkrÈtny deÚ mimo nedele */
@@ -1487,6 +1505,9 @@ void _set_kompletorium_slavnost_oktava(short int modlitba, short int litobd, sho
  *             pre niektorÈ dni odliönÈ, preto sme vytvorili aj ÔalöÌ parameter,
  *             ktor˝ sa pouûÌva len pri volanÌ za ˙Ëelom konkrÈtnej modlitby
  *             (pre voæbu posv. ËÌtania len pre deÚ a t˝ûdeÚ ûalt·ra sa pouûije default)
+ *
+ * 2009-01-06: odvetvenÈ nastavenie vecÌ pre kompletÛrium kvÙli moûnosti samostatne ich nastaviù (napr. kvÙli sviatku Premenenia P·na) 
+ *           - logovanie nastavenia ûalmov
  *
  */
 #define _SET_SPOLOCNE_VECI_NEDELA(m) {\
@@ -1528,12 +1549,78 @@ void _set_kompletorium_slavnost_oktava(short int modlitba, short int litobd, sho
 		set_modlitba(den, tyzzal, m); \
 	} \
 }
+
+/* 2009-01-06: vytvorenÈ vyÚatÌm ËastÌ pre kompletÛrium z zaltar_zvazok(); premennÈ tyzzal ani zvazok nepotrebujeme */
+void zaltar_kompletorium(short int den, short int obdobie, short int specialne){
+	Log("-- zaltar_kompletorium(%d, %d, %d) -- zaËiatok\n", den, obdobie, specialne);
+	Log("nastavujem poËet ûalmov pre kompletÛrium v z·vislosti od dÚa v t˝ûdni (%d - %s)...\n", den, nazov_dna(den));
+	/* 2006-10-17: DoplnenÈ kvÙli rÙznemu poËtu ûalmov pre kompletÛrium; upravenÈ 2006-10-18 */
+	if(den == DEN_STREDA){
+		_global_modl_kompletorium.pocet_zalmov = 2;
+	}
+	else if(den == DEN_NEDELA){
+		_global_modl_prve_kompletorium.pocet_zalmov = 2;
+		_global_modl_kompletorium.pocet_zalmov = 1;
+	}
+	else{
+		_global_modl_kompletorium.pocet_zalmov = 1;
+	}
+	if(specialne == ZALTAR_VSETKO){
+		Log("ZALTAR_VSETKO -- takûe nastavujem vöetko zo ûalt·ra...\n");
+		/* pridanÈ Ëasti pre kompletÛrium, 2006-10-13 */
+		set_hymnus(den, 1 /* tyzzal */, MODL_KOMPLETORIUM);
+		set_hymnus(den, 1 /* tyzzal */, MODL_PRVE_KOMPLETORIUM);
+		/* pridanÈ Ôalöie Ëasti pre kompletÛrium, 2006-10-13 */
+		set_antifony(den, 1 /* tyzzal */, 1 /* zvazok */, MODL_KOMPLETORIUM);
+		set_antifony(den, 1 /* tyzzal */, 1 /* zvazok */, MODL_PRVE_KOMPLETORIUM);
+		set_kcitanie(den, 1 /* tyzzal */, MODL_KOMPLETORIUM);
+		set_kcitanie(den, 1 /* tyzzal */, MODL_PRVE_KOMPLETORIUM);
+		set_kresponz(den, 1 /* tyzzal */, MODL_KOMPLETORIUM);
+		set_kresponz(den, 1 /* tyzzal */, MODL_PRVE_KOMPLETORIUM);
+		set_modlitba(den, 1 /* tyzzal */, MODL_KOMPLETORIUM);
+		set_modlitba(den, 1 /* tyzzal */, MODL_PRVE_KOMPLETORIUM);
+	}
+	else{
+		Log("nebolo ZALTAR_VSETKO ani ZALTAR_IBA_ZALMY_HYMNUS_MCD -- takûe nastavujem len ûalmy...\n");
+	}
+	/* 2006-10-17: pridanÈ kompletÛrium - pÙvodn· pozn·mka z zaltar_zvazok() */
+	switch(den){
+		case DEN_NEDELA:
+			set_zalm(1, MODL_PRVE_KOMPLETORIUM, "z4.htm", "ZALM4");
+			set_zalm(2, MODL_PRVE_KOMPLETORIUM, "z134.htm", "ZALM134");
+			set_zalm(1, MODL_KOMPLETORIUM, "z91.htm", "ZALM91");
+			break;
+		case DEN_PONDELOK:
+			set_zalm(1, MODL_KOMPLETORIUM, "z86.htm", "ZALM86");
+			break;
+		case DEN_UTOROK:
+			set_zalm(1, MODL_KOMPLETORIUM, "z143.htm", "ZALM143");
+			break;
+		case DEN_STREDA:
+			set_zalm(1, MODL_KOMPLETORIUM, "z31.htm", "ZALM31_1_6");
+			set_zalm(2, MODL_KOMPLETORIUM, "z130.htm", "ZALM130");
+			break;
+		case DEN_STVRTOK:
+			set_zalm(1, MODL_KOMPLETORIUM, "z16.htm", "ZALM16");
+			break;
+		case DEN_PIATOK:
+			set_zalm(1, MODL_KOMPLETORIUM, "z88.htm", "ZALM88");
+			break;
+		case DEN_SOBOTA:
+			break;
+	}/* switch(den) */
+	Log("-- zaltar_kompletorium(%d, %d, %d) -- koniec\n", den, obdobie, specialne);
+}/* zaltar_kompletorium() */
+
 void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int specialne){
 	/* 2006-01-24: pÙvodn· funkcia mala 2 parametre 
 	 *             pridan˝ parameter obdobie
 	 * 2006-02-07: dodefinovanÈ rÙzne spr·vanie funkcie zaltar_zvazok();
 	 *             podæa pridanÈho parametra ZALTAR_VSETKO alebo ZALTAR_IBA_ZALMY
 	 * 2007-12-20: dodefinovanÈ "je_odlisny_zaltar" - doteraz bolo "zvazok != 2" resp. "zvazok == 2"
+	 *
+	 * 2009-01-06: vytvoren· nov· funkcia na debug: set_zalm();
+	 *             odËlenenÈ veci pre kompletÛrium, aby sa dali samostatne volaù - zaltar_kompletorium()
 	 */
 	Log("-- zaltar_zvazok(%d, %d, %d, %d) -- zaciatok\n", den, tyzzal, obdobie, specialne);
 	short int zvazok = zvazok_breviara[obdobie];
@@ -1554,36 +1641,15 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 	*/
 	Log("liturgickÈ obdobie: `%s'...\n", nazov_obdobia_[obdobie]);
 	Log("toto liturgickÈ obdobie sa nach·dza v zv‰zku %d brevi·ra (cezroËnÈ obdobie evidujeme ako jeden, 3. zv‰zok)...\n", zvazok);
-	/* 2006-10-17: DoplnenÈ kvÙli rÙznemu poËtu ûalmov pre kompletÛrium; upravenÈ 2006-10-18 */
-	if(den == DEN_STREDA){
-		_global_modl_kompletorium.pocet_zalmov = 2;
-	}
-	else if(den == DEN_NEDELA){
-		_global_modl_prve_kompletorium.pocet_zalmov = 2;
-		_global_modl_kompletorium.pocet_zalmov = 1;
-	}
-	else{
-		_global_modl_kompletorium.pocet_zalmov = 1;
-	}
+
+	Log("nastavujem veci pre kompletÛrium...\n");
+	zaltar_kompletorium(den, obdobie, specialne);
 
 	if(specialne == ZALTAR_VSETKO){
 		Log("ZALTAR_VSETKO -- takûe nastavujem vöetko zo ûalt·ra...\n");
-		/* cast vseobecna pre vsetky 4 tyzdne zaltara
-		 * upravena 2003-08-13. veci dane do dvoch makier
-		 */
+		/* cast vseobecna pre vsetky 4 tyzdne zaltara upravena 2003-08-13. veci dane do dvoch makier */
 
-		/* pridanÈ Ëasti pre kompletÛrium, 2006-10-13 */
-		set_hymnus(den, tyzzal, MODL_KOMPLETORIUM);
-		set_hymnus(den, tyzzal, MODL_PRVE_KOMPLETORIUM);
-		/* pridanÈ Ôalöie Ëasti pre kompletÛrium, 2006-10-13 */
-		set_antifony(den, tyzzal, zvazok, MODL_KOMPLETORIUM);
-		set_antifony(den, tyzzal, zvazok, MODL_PRVE_KOMPLETORIUM);
-		set_kcitanie(den, tyzzal, MODL_KOMPLETORIUM);
-		set_kcitanie(den, tyzzal, MODL_PRVE_KOMPLETORIUM);
-		set_kresponz(den, tyzzal, MODL_KOMPLETORIUM);
-		set_kresponz(den, tyzzal, MODL_PRVE_KOMPLETORIUM);
-		set_modlitba(den, tyzzal, MODL_KOMPLETORIUM);
-		set_modlitba(den, tyzzal, MODL_PRVE_KOMPLETORIUM);
+		/* 2009-01-06: Ëasti pre kompletÛrium (pridanÈ 2006-10-13) presunutÈ do zaltar_kompletorium() */
 
 		/* pridan· antifÛna pre invitatÛrium, 2006-10-24; cel· pas·û presunut· len pre ZALTAR_VSETKO */
 		set_antifony(den, tyzzal, zvazok, MODL_INVITATORIUM);
@@ -1621,82 +1687,68 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 
 	Log("Ôalej nastavujem ûalmy (öpecialitky spoloËnÈ pre niektorÈ t˝ûdne ûalt·ra)...\n");
 	/* cast rovnaka pre kazdy tyzden zaltara */
+	/* 2009-01-06: Ëasti pre kompletÛrium vyÚatÈ do zaltar_kompletorium() */
 	switch(den){
 		case DEN_NEDELA:
-			/* 2006-10-17: pridanÈ kompletÛrium */
-			_set_zalm1(MODL_PRVE_KOMPLETORIUM, "z4.htm", "ZALM4");
-			_set_zalm2(MODL_PRVE_KOMPLETORIUM, "z134.htm", "ZALM134");
-			_set_zalm1(MODL_KOMPLETORIUM, "z91.htm", "ZALM91");
 			/* druhe vespery maju vzdy prvy zalm 110, 1-5.7 */
-			_set_zalm1(MODL_VESPERY, "z110.htm", "ZALM110");
+			set_zalm(1, MODL_VESPERY, "z110.htm", "ZALM110");
 			/* nedelny ranny hymnus je rovnaky v prvom a tretom,
 			 * resp. druhom a stvrtom tyzdni */
 			if((tyzzal == 1) || (tyzzal == 3)){
-				_set_zalm2(MODL_RANNE_CHVALY, "dan3_57.htm", "DAN3,57-88.56");
+				set_zalm(2, MODL_RANNE_CHVALY, "dan3_57.htm", "DAN3,57-88.56");
 				/* modlitba cez den */
 				_set_zalmy_1nedele_mcd(); // 2007-01-11 nahradenÈ volanÌm funkcie
 				/*
-				_set_zalm1(MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_I");
-				_set_zalm2(MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_II");
-				_set_zalm3(MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_III");
+				set_zalm(1, MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_I");
+				set_zalm(2, MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_II");
+				set_zalm(3, MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_III");
 				*/
 			}
 			else{ /* if((tyzzal == 2) || (tyzzal == 4)) */
-				_set_zalm1(MODL_RANNE_CHVALY, "z118.htm", "ZALM118");
-				_set_zalm2(MODL_RANNE_CHVALY, "dan3_52.htm", "DAN3,52-57");
-				_set_zalm3(MODL_RANNE_CHVALY, "z150.htm", "ZALM150");
+				set_zalm(1, MODL_RANNE_CHVALY, "z118.htm", "ZALM118");
+				set_zalm(2, MODL_RANNE_CHVALY, "dan3_52.htm", "DAN3,52-57");
+				set_zalm(3, MODL_RANNE_CHVALY, "z150.htm", "ZALM150");
 				/* modlitba cez den */
 				_set_zalmy_2nedele_mcd(); // 2007-01-11 nahradenÈ volanÌm funkcie; 2007-03-29 opravenÈ
 				/*
-				_set_zalm1(MODL_CEZ_DEN_VSETKY, "z23.htm", "ZALM23");
-				_set_zalm2(MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_I");
-				_set_zalm3(MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_II");
+				set_zalm(1, MODL_CEZ_DEN_VSETKY, "z23.htm", "ZALM23");
+				set_zalm(2, MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_I");
+				set_zalm(3, MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_II");
 				*/
 			}
 			/* vecerne nedelne hymny su rovnake v kazdom tyzdni */
-			_set_zalm3(MODL_PRVE_VESPERY, "flp2.htm", "CHVAL_FLP2");
+			set_zalm(3, MODL_PRVE_VESPERY, "flp2.htm", "CHVAL_FLP2");
 			if((_global_den.litobd != OBD_POSTNE_I) &&
 				(_global_den.litobd != OBD_POSTNE_II_VELKY_TYZDEN)){
-					_set_zalm3(MODL_VESPERY, "zjv19.htm", "CHVAL_ZJV19");
+					set_zalm(3, MODL_VESPERY, "zjv19.htm", "CHVAL_ZJV19");
 			}
 			else{
-				_set_zalm3(MODL_VESPERY, "1pt2.htm", "CHVAL_1PT2");
+				set_zalm(3, MODL_VESPERY, "1pt2.htm", "CHVAL_1PT2");
 			}
 			break;
 		/* vecerny hymnus vsedneho dna je rovnaky v kazdom tyzdni */
 		case DEN_PONDELOK:
-			_set_zalm3(MODL_VESPERY, "ef1.htm", "CHVAL_EF1");
-			/* 2006-10-17: pridanÈ kompletÛrium */
-			_set_zalm1(MODL_KOMPLETORIUM, "z86.htm", "ZALM86");
+			set_zalm(3, MODL_VESPERY, "ef1.htm", "CHVAL_EF1");
 			break;
 		case DEN_UTOROK:
-			_set_zalm3(MODL_VESPERY, "zjv4_5.htm", "CHVAL_ZJV45");
-			/* 2006-10-17: pridanÈ kompletÛrium */
-			_set_zalm1(MODL_KOMPLETORIUM, "z143.htm", "ZALM143");
+			set_zalm(3, MODL_VESPERY, "zjv4_5.htm", "CHVAL_ZJV45");
 			break;
 		case DEN_STREDA:
-			_set_zalm3(MODL_VESPERY, "kol1.htm", "CHVAL_KOL1");
-			/* 2006-10-17: pridanÈ kompletÛrium */
-			_set_zalm1(MODL_KOMPLETORIUM, "z31.htm", "ZALM31_1_6");
-			_set_zalm2(MODL_KOMPLETORIUM, "z130.htm", "ZALM130");
+			set_zalm(3, MODL_VESPERY, "kol1.htm", "CHVAL_KOL1");
 			break;
 		case DEN_STVRTOK:
-			_set_zalm3(MODL_VESPERY, "zjv11.htm", "CHVAL_ZJV11");
-			/* 2006-10-17: pridanÈ kompletÛrium */
-			_set_zalm1(MODL_KOMPLETORIUM, "z16.htm", "ZALM16");
+			set_zalm(3, MODL_VESPERY, "zjv11.htm", "CHVAL_ZJV11");
 			break;
 		case DEN_PIATOK:
 			/* kazdy piatok, ranne chvaly je zalm 51 */
-			_set_zalm1(MODL_RANNE_CHVALY, "z51.htm", "ZALM51");
-			_set_zalm3(MODL_VESPERY, "zjv15.htm", "CHVAL_ZJV15");
-			/* 2006-10-17: pridanÈ kompletÛrium */
-			_set_zalm1(MODL_KOMPLETORIUM, "z88.htm", "ZALM88");
+			set_zalm(1, MODL_RANNE_CHVALY, "z51.htm", "ZALM51");
+			set_zalm(3, MODL_VESPERY, "zjv15.htm", "CHVAL_ZJV15");
 			break;
 		case DEN_SOBOTA:
 			/* sobota v 1. a 3. tyzdni je zalm 34 */
 			if((tyzzal == 1) || (tyzzal == 3)){
-				_set_zalm2(MODL_CEZ_DEN_VSETKY, "z34.htm", "ZALM34_I");
-				_set_zalm3(MODL_CEZ_DEN_VSETKY, "z34.htm", "ZALM34_II");
+				set_zalm(2, MODL_CEZ_DEN_VSETKY, "z34.htm", "ZALM34_I");
+				set_zalm(3, MODL_CEZ_DEN_VSETKY, "z34.htm", "ZALM34_II");
 			}
 			break;
 	}/* switch(den) */
@@ -1708,126 +1760,126 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 			switch(den){
 				case DEN_NEDELA:
 				/* prve vespery */
-					_set_zalm1(MODL_PRVE_VESPERY, "z141.htm", "ZALM141");
-					_set_zalm2(MODL_PRVE_VESPERY, "z142.htm", "ZALM142");
+					set_zalm(1, MODL_PRVE_VESPERY, "z141.htm", "ZALM141");
+					set_zalm(2, MODL_PRVE_VESPERY, "z142.htm", "ZALM142");
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z63.htm", "ZALM63");
-					_set_zalm3(MODL_RANNE_CHVALY, "z149.htm", "ZALM149");
+					set_zalm(1, MODL_RANNE_CHVALY, "z63.htm", "ZALM63");
+					set_zalm(3, MODL_RANNE_CHVALY, "z149.htm", "ZALM149");
 				/* modlitba cez den */
 				/* druhe vespery */
-					_set_zalm2(MODL_VESPERY, "z114.htm", "ZALM114");
+					set_zalm(2, MODL_VESPERY, "z114.htm", "ZALM114");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z1.htm", "ZALM1");
-					_set_zalm2(MODL_POSV_CITANIE, "z2.htm", "ZALM2");
-					_set_zalm3(MODL_POSV_CITANIE, "z3.htm", "ZALM3");
+					set_zalm(1, MODL_POSV_CITANIE, "z1.htm", "ZALM1");
+					set_zalm(2, MODL_POSV_CITANIE, "z2.htm", "ZALM2");
+					set_zalm(3, MODL_POSV_CITANIE, "z3.htm", "ZALM3");
 					break;
 
 				case DEN_PONDELOK:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z5.htm", "ZALM5");
-					_set_zalm2(MODL_RANNE_CHVALY, "1krn29.htm", "CHVAL_1KRN29");
-					_set_zalm3(MODL_RANNE_CHVALY, "z29.htm", "ZALM29");
+					set_zalm(1, MODL_RANNE_CHVALY, "z5.htm", "ZALM5");
+					set_zalm(2, MODL_RANNE_CHVALY, "1krn29.htm", "CHVAL_1KRN29");
+					set_zalm(3, MODL_RANNE_CHVALY, "z29.htm", "ZALM29");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z19.htm", "ZALM19,8-15");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z7.htm", "ZALM7_I");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z7.htm", "ZALM7_II");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z19.htm", "ZALM19,8-15");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z7.htm", "ZALM7_I");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z7.htm", "ZALM7_II");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z11.htm", "ZALM11");
-					_set_zalm2(MODL_VESPERY, "z15.htm", "ZALM15");
+					set_zalm(1, MODL_VESPERY, "z11.htm", "ZALM11");
+					set_zalm(2, MODL_VESPERY, "z15.htm", "ZALM15");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z6.htm", "ZALM6");
-					_set_zalm2(MODL_POSV_CITANIE, "z9.htm", "ZALM9_I");
-					_set_zalm3(MODL_POSV_CITANIE, "z9.htm", "ZALM9_II");
+					set_zalm(1, MODL_POSV_CITANIE, "z6.htm", "ZALM6");
+					set_zalm(2, MODL_POSV_CITANIE, "z9.htm", "ZALM9_I");
+					set_zalm(3, MODL_POSV_CITANIE, "z9.htm", "ZALM9_II");
 					break;
 
 				case DEN_UTOROK:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z24.htm", "ZALM24");
-					_set_zalm2(MODL_RANNE_CHVALY, "tob13.htm", "CHVAL_TOB13,2-8");
-					_set_zalm3(MODL_RANNE_CHVALY, "z33.htm", "ZALM33");
+					set_zalm(1, MODL_RANNE_CHVALY, "z24.htm", "ZALM24");
+					set_zalm(2, MODL_RANNE_CHVALY, "tob13.htm", "CHVAL_TOB13,2-8");
+					set_zalm(3, MODL_RANNE_CHVALY, "z33.htm", "ZALM33");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_ALEF");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z13.htm", "ZALM13");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z14.htm", "ZALM14");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_ALEF");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z13.htm", "ZALM13");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z14.htm", "ZALM14");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z20.htm", "ZALM20");
-					_set_zalm2(MODL_VESPERY, "z21.htm", "ZALM21");
+					set_zalm(1, MODL_VESPERY, "z20.htm", "ZALM20");
+					set_zalm(2, MODL_VESPERY, "z21.htm", "ZALM21");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z10.htm", "ZALM10_I");
-					_set_zalm2(MODL_POSV_CITANIE, "z10.htm", "ZALM10_II");
-					_set_zalm3(MODL_POSV_CITANIE, "z12.htm", "ZALM12");
+					set_zalm(1, MODL_POSV_CITANIE, "z10.htm", "ZALM10_I");
+					set_zalm(2, MODL_POSV_CITANIE, "z10.htm", "ZALM10_II");
+					set_zalm(3, MODL_POSV_CITANIE, "z12.htm", "ZALM12");
 					break;
 
 				case DEN_STREDA:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z36.htm", "ZALM36");
-					_set_zalm2(MODL_RANNE_CHVALY, "jdt16.htm", "CHVAL_JDT16");
-					_set_zalm3(MODL_RANNE_CHVALY, "z47.htm", "ZALM47");
+					set_zalm(1, MODL_RANNE_CHVALY, "z36.htm", "ZALM36");
+					set_zalm(2, MODL_RANNE_CHVALY, "jdt16.htm", "CHVAL_JDT16");
+					set_zalm(3, MODL_RANNE_CHVALY, "z47.htm", "ZALM47");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_BET");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z17.htm", "ZALM17_I");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z17.htm", "ZALM17_II");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_BET");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z17.htm", "ZALM17_I");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z17.htm", "ZALM17_II");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z27.htm", "ZALM27_I");
-					_set_zalm2(MODL_VESPERY, "z27.htm", "ZALM27_II");
+					set_zalm(1, MODL_VESPERY, "z27.htm", "ZALM27_I");
+					set_zalm(2, MODL_VESPERY, "z27.htm", "ZALM27_II");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z18.htm", "ZALM18_I");
-					_set_zalm2(MODL_POSV_CITANIE, "z18.htm", "ZALM18_II");
-					_set_zalm3(MODL_POSV_CITANIE, "z18.htm", "ZALM18_III");
+					set_zalm(1, MODL_POSV_CITANIE, "z18.htm", "ZALM18_I");
+					set_zalm(2, MODL_POSV_CITANIE, "z18.htm", "ZALM18_II");
+					set_zalm(3, MODL_POSV_CITANIE, "z18.htm", "ZALM18_III");
 					break;
 
 				case DEN_STVRTOK:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z57.htm", "ZALM57");
-					_set_zalm2(MODL_RANNE_CHVALY, "jer31.htm", "CHVAL_JER31");
-					_set_zalm3(MODL_RANNE_CHVALY, "z48.htm", "ZALM48");
+					set_zalm(1, MODL_RANNE_CHVALY, "z57.htm", "ZALM57");
+					set_zalm(2, MODL_RANNE_CHVALY, "jer31.htm", "CHVAL_JER31");
+					set_zalm(3, MODL_RANNE_CHVALY, "z48.htm", "ZALM48");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_GIMEL");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z25.htm", "ZALM25_I");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z25.htm", "ZALM25_II");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_GIMEL");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z25.htm", "ZALM25_I");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z25.htm", "ZALM25_II");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z30.htm", "ZALM30");
-					_set_zalm2(MODL_VESPERY, "z32.htm", "ZALM32");
+					set_zalm(1, MODL_VESPERY, "z30.htm", "ZALM30");
+					set_zalm(2, MODL_VESPERY, "z32.htm", "ZALM32");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z18.htm", "ZALM18_IV");
-					_set_zalm2(MODL_POSV_CITANIE, "z18.htm", "ZALM18_V");
-					_set_zalm3(MODL_POSV_CITANIE, "z18.htm", "ZALM18_VI");
+					set_zalm(1, MODL_POSV_CITANIE, "z18.htm", "ZALM18_IV");
+					set_zalm(2, MODL_POSV_CITANIE, "z18.htm", "ZALM18_V");
+					set_zalm(3, MODL_POSV_CITANIE, "z18.htm", "ZALM18_VI");
 					break;
 
 				case DEN_PIATOK:
 				/* ranne chvaly */
-					_set_zalm2(MODL_RANNE_CHVALY, "iz45.htm", "CHVAL_IZ45");
-					_set_zalm3(MODL_RANNE_CHVALY, "z100.htm", "ZALM100");
+					set_zalm(2, MODL_RANNE_CHVALY, "iz45.htm", "CHVAL_IZ45");
+					set_zalm(3, MODL_RANNE_CHVALY, "z100.htm", "ZALM100");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_DALET");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z26.htm", "ZALM26");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z28.htm", "ZALM28,1-3.6-9");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_DALET");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z26.htm", "ZALM26");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z28.htm", "ZALM28,1-3.6-9");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z41.htm", "ZALM41");
-					_set_zalm2(MODL_VESPERY, "z46.htm", "ZALM46");
+					set_zalm(1, MODL_VESPERY, "z41.htm", "ZALM41");
+					set_zalm(2, MODL_VESPERY, "z46.htm", "ZALM46");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z35.htm", "ZALM35_I");
-					_set_zalm2(MODL_POSV_CITANIE, "z35.htm", "ZALM35_II");
-					_set_zalm3(MODL_POSV_CITANIE, "z35.htm", "ZALM35_III");
+					set_zalm(1, MODL_POSV_CITANIE, "z35.htm", "ZALM35_I");
+					set_zalm(2, MODL_POSV_CITANIE, "z35.htm", "ZALM35_II");
+					set_zalm(3, MODL_POSV_CITANIE, "z35.htm", "ZALM35_III");
 					break;
 
 				case DEN_SOBOTA:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z119.htm", "ZALM119_KOF");
-					_set_zalm2(MODL_RANNE_CHVALY, "ex15.htm", "CHVAL_EX15");
-					_set_zalm3(MODL_RANNE_CHVALY, "z117.htm", "ZALM117");
+					set_zalm(1, MODL_RANNE_CHVALY, "z119.htm", "ZALM119_KOF");
+					set_zalm(2, MODL_RANNE_CHVALY, "ex15.htm", "CHVAL_EX15");
+					set_zalm(3, MODL_RANNE_CHVALY, "z117.htm", "ZALM117");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_HE");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_HE");
 				/* posvatne citanie */
 					if(je_odlisny_zaltar){
-						_set_zalm1(MODL_POSV_CITANIE, "z105.htm", "ZALM105_I");
-						_set_zalm2(MODL_POSV_CITANIE, "z105.htm", "ZALM105_II");
-						_set_zalm3(MODL_POSV_CITANIE, "z105.htm", "ZALM105_III");
+						set_zalm(1, MODL_POSV_CITANIE, "z105.htm", "ZALM105_I");
+						set_zalm(2, MODL_POSV_CITANIE, "z105.htm", "ZALM105_II");
+						set_zalm(3, MODL_POSV_CITANIE, "z105.htm", "ZALM105_III");
 					}
 					else {
-						_set_zalm1(MODL_POSV_CITANIE, "z131.htm", "ZALM131");
-						_set_zalm2(MODL_POSV_CITANIE, "z132.htm", "ZALM132_I");
-						_set_zalm3(MODL_POSV_CITANIE, "z132.htm", "ZALM132_II");
+						set_zalm(1, MODL_POSV_CITANIE, "z131.htm", "ZALM131");
+						set_zalm(2, MODL_POSV_CITANIE, "z132.htm", "ZALM132_I");
+						set_zalm(3, MODL_POSV_CITANIE, "z132.htm", "ZALM132_II");
 					}
 					/* 2005-03-27:
 					 * Neviem preco tu bolo "z105.htm", "ZALM105_I" az "ZALM105_III"
@@ -1847,126 +1899,126 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 			switch(den){
 				case DEN_NEDELA:
 				/* prve vespery */
-					_set_zalm1(MODL_PRVE_VESPERY, "z119.htm", "ZALM119_NUN");
-					_set_zalm2(MODL_PRVE_VESPERY, "z16.htm", "ZALM16");
+					set_zalm(1, MODL_PRVE_VESPERY, "z119.htm", "ZALM119_NUN");
+					set_zalm(2, MODL_PRVE_VESPERY, "z16.htm", "ZALM16");
 				/* ranne chvaly */
 				/* modlitba cez den */
 				/* druhe vespery */
-					_set_zalm2(MODL_VESPERY, "z115.htm", "ZALM115");
+					set_zalm(2, MODL_VESPERY, "z115.htm", "ZALM115");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z104.htm", "ZALM104_I");
-					_set_zalm2(MODL_POSV_CITANIE, "z104.htm", "ZALM104_II");
-					_set_zalm3(MODL_POSV_CITANIE, "z104.htm", "ZALM104_III");
+					set_zalm(1, MODL_POSV_CITANIE, "z104.htm", "ZALM104_I");
+					set_zalm(2, MODL_POSV_CITANIE, "z104.htm", "ZALM104_II");
+					set_zalm(3, MODL_POSV_CITANIE, "z104.htm", "ZALM104_III");
 					break;
 
 				case DEN_PONDELOK:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z42.htm", "ZALM42");
-					_set_zalm2(MODL_RANNE_CHVALY, "sir36.htm", "CHVAL_SIR36");
-					_set_zalm3(MODL_RANNE_CHVALY, "z19.htm", "ZALM19,2-7");
+					set_zalm(1, MODL_RANNE_CHVALY, "z42.htm", "ZALM42");
+					set_zalm(2, MODL_RANNE_CHVALY, "sir36.htm", "CHVAL_SIR36");
+					set_zalm(3, MODL_RANNE_CHVALY, "z19.htm", "ZALM19,2-7");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_VAU");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z40.htm", "ZALM40_I");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z40.htm", "ZALM40_II");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_VAU");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z40.htm", "ZALM40_I");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z40.htm", "ZALM40_II");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z45.htm", "ZALM45_I");
-					_set_zalm2(MODL_VESPERY, "z45.htm", "ZALM45_II");
+					set_zalm(1, MODL_VESPERY, "z45.htm", "ZALM45_I");
+					set_zalm(2, MODL_VESPERY, "z45.htm", "ZALM45_II");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z31.htm", "ZALM31_I");
-					_set_zalm2(MODL_POSV_CITANIE, "z31.htm", "ZALM31_II");
-					_set_zalm3(MODL_POSV_CITANIE, "z31.htm", "ZALM31_III");
+					set_zalm(1, MODL_POSV_CITANIE, "z31.htm", "ZALM31_I");
+					set_zalm(2, MODL_POSV_CITANIE, "z31.htm", "ZALM31_II");
+					set_zalm(3, MODL_POSV_CITANIE, "z31.htm", "ZALM31_III");
 					break;
 
 				case DEN_UTOROK:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z43.htm", "ZALM43");
-					_set_zalm2(MODL_RANNE_CHVALY, "iz38.htm", "CHVAL_IZ38");
-					_set_zalm3(MODL_RANNE_CHVALY, "z65.htm", "ZALM65");
+					set_zalm(1, MODL_RANNE_CHVALY, "z43.htm", "ZALM43");
+					set_zalm(2, MODL_RANNE_CHVALY, "iz38.htm", "CHVAL_IZ38");
+					set_zalm(3, MODL_RANNE_CHVALY, "z65.htm", "ZALM65");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_ZAJIN");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z53.htm", "ZALM53");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z54.htm", "ZALM54");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_ZAJIN");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z53.htm", "ZALM53");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z54.htm", "ZALM54");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z49.htm", "ZALM49_I");
-					_set_zalm2(MODL_VESPERY, "z49.htm", "ZALM49_II");
+					set_zalm(1, MODL_VESPERY, "z49.htm", "ZALM49_I");
+					set_zalm(2, MODL_VESPERY, "z49.htm", "ZALM49_II");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z37.htm", "ZALM37_I");
-					_set_zalm2(MODL_POSV_CITANIE, "z37.htm", "ZALM37_II");
-					_set_zalm3(MODL_POSV_CITANIE, "z37.htm", "ZALM37_III");
+					set_zalm(1, MODL_POSV_CITANIE, "z37.htm", "ZALM37_I");
+					set_zalm(2, MODL_POSV_CITANIE, "z37.htm", "ZALM37_II");
+					set_zalm(3, MODL_POSV_CITANIE, "z37.htm", "ZALM37_III");
 					break;
 
 				case DEN_STREDA:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z77.htm", "ZALM77");
-					_set_zalm2(MODL_RANNE_CHVALY, "1sam2.htm", "CHVAL_1SAM2");
-					_set_zalm3(MODL_RANNE_CHVALY, "z97.htm", "ZALM97");
+					set_zalm(1, MODL_RANNE_CHVALY, "z77.htm", "ZALM77");
+					set_zalm(2, MODL_RANNE_CHVALY, "1sam2.htm", "CHVAL_1SAM2");
+					set_zalm(3, MODL_RANNE_CHVALY, "z97.htm", "ZALM97");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_CHET");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z55.htm", "ZALM55_I");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z55.htm", "ZALM55_II");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_CHET");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z55.htm", "ZALM55_I");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z55.htm", "ZALM55_II");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z62.htm", "ZALM62");
-					_set_zalm2(MODL_VESPERY, "z67.htm", "ZALM67");
+					set_zalm(1, MODL_VESPERY, "z62.htm", "ZALM62");
+					set_zalm(2, MODL_VESPERY, "z67.htm", "ZALM67");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z39.htm", "ZALM39_I");
-					_set_zalm2(MODL_POSV_CITANIE, "z39.htm", "ZALM39_II");
-					_set_zalm3(MODL_POSV_CITANIE, "z52.htm", "ZALM52");
+					set_zalm(1, MODL_POSV_CITANIE, "z39.htm", "ZALM39_I");
+					set_zalm(2, MODL_POSV_CITANIE, "z39.htm", "ZALM39_II");
+					set_zalm(3, MODL_POSV_CITANIE, "z52.htm", "ZALM52");
 					break;
 
 				case DEN_STVRTOK:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z80.htm", "ZALM80");
-					_set_zalm2(MODL_RANNE_CHVALY, "iz12.htm", "CHVAL_IZ12");
-					_set_zalm3(MODL_RANNE_CHVALY, "z81.htm", "ZALM81");
+					set_zalm(1, MODL_RANNE_CHVALY, "z80.htm", "ZALM80");
+					set_zalm(2, MODL_RANNE_CHVALY, "iz12.htm", "CHVAL_IZ12");
+					set_zalm(3, MODL_RANNE_CHVALY, "z81.htm", "ZALM81");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_TET");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z56.htm", "ZALM56");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z57.htm", "ZALM57");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_TET");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z56.htm", "ZALM56");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z57.htm", "ZALM57");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z72.htm", "ZALM72_I");
-					_set_zalm2(MODL_VESPERY, "z72.htm", "ZALM72_II");
+					set_zalm(1, MODL_VESPERY, "z72.htm", "ZALM72_I");
+					set_zalm(2, MODL_VESPERY, "z72.htm", "ZALM72_II");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z44.htm", "ZALM44_I");
-					_set_zalm2(MODL_POSV_CITANIE, "z44.htm", "ZALM44_II");
-					_set_zalm3(MODL_POSV_CITANIE, "z44.htm", "ZALM44_III");
+					set_zalm(1, MODL_POSV_CITANIE, "z44.htm", "ZALM44_I");
+					set_zalm(2, MODL_POSV_CITANIE, "z44.htm", "ZALM44_II");
+					set_zalm(3, MODL_POSV_CITANIE, "z44.htm", "ZALM44_III");
 					break;
 
 				case DEN_PIATOK:
 				/* ranne chvaly */
-					_set_zalm2(MODL_RANNE_CHVALY, "hab3.htm", "CHVAL_HAB3");
-					_set_zalm3(MODL_RANNE_CHVALY, "z147.htm", "ZALM147,12-20");
+					set_zalm(2, MODL_RANNE_CHVALY, "hab3.htm", "CHVAL_HAB3");
+					set_zalm(3, MODL_RANNE_CHVALY, "z147.htm", "ZALM147,12-20");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_JOD");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z59.htm", "ZALM59");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z60.htm", "ZALM60");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_JOD");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z59.htm", "ZALM59");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z60.htm", "ZALM60");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z116.htm", "ZALM116,1-9");
-					_set_zalm2(MODL_VESPERY, "z121.htm", "ZALM121");
+					set_zalm(1, MODL_VESPERY, "z116.htm", "ZALM116,1-9");
+					set_zalm(2, MODL_VESPERY, "z121.htm", "ZALM121");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z38.htm", "ZALM38_I");
-					_set_zalm2(MODL_POSV_CITANIE, "z38.htm", "ZALM38_II");
-					_set_zalm3(MODL_POSV_CITANIE, "z38.htm", "ZALM38_III");
+					set_zalm(1, MODL_POSV_CITANIE, "z38.htm", "ZALM38_I");
+					set_zalm(2, MODL_POSV_CITANIE, "z38.htm", "ZALM38_II");
+					set_zalm(3, MODL_POSV_CITANIE, "z38.htm", "ZALM38_III");
 					break;
 
 				case DEN_SOBOTA:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z92.htm", "ZALM92");
-					_set_zalm2(MODL_RANNE_CHVALY, "dt32.htm", "CHVAL_DT32");
-					_set_zalm3(MODL_RANNE_CHVALY, "z8.htm", "ZALM8");
+					set_zalm(1, MODL_RANNE_CHVALY, "z92.htm", "ZALM92");
+					set_zalm(2, MODL_RANNE_CHVALY, "dt32.htm", "CHVAL_DT32");
+					set_zalm(3, MODL_RANNE_CHVALY, "z8.htm", "ZALM8");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_KAF");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z61.htm", "ZALM61");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z64.htm", "ZALM64");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_KAF");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z61.htm", "ZALM61");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z64.htm", "ZALM64");
 				/* posvatne citanie */
 					if(je_odlisny_zaltar){
-						_set_zalm1(MODL_POSV_CITANIE, "z106.htm", "ZALM106_I");
-						_set_zalm2(MODL_POSV_CITANIE, "z106.htm", "ZALM106_II");
-						_set_zalm3(MODL_POSV_CITANIE, "z106.htm", "ZALM106_III");
+						set_zalm(1, MODL_POSV_CITANIE, "z106.htm", "ZALM106_I");
+						set_zalm(2, MODL_POSV_CITANIE, "z106.htm", "ZALM106_II");
+						set_zalm(3, MODL_POSV_CITANIE, "z106.htm", "ZALM106_III");
 					}
 					else {
-						_set_zalm1(MODL_POSV_CITANIE, "z136.htm", "ZALM136_I");
-						_set_zalm2(MODL_POSV_CITANIE, "z136.htm", "ZALM136_II_PC");
-						_set_zalm3(MODL_POSV_CITANIE, "z136.htm", "ZALM136_III_PC"); /* inak je 136 cleneny pre pondelok 4. tyzdna, vespery */
+						set_zalm(1, MODL_POSV_CITANIE, "z136.htm", "ZALM136_I");
+						set_zalm(2, MODL_POSV_CITANIE, "z136.htm", "ZALM136_II_PC");
+						set_zalm(3, MODL_POSV_CITANIE, "z136.htm", "ZALM136_III_PC"); /* inak je 136 cleneny pre pondelok 4. tyzdna, vespery */
 					}
 					/* 2005-03-27:
 					 * Neviem preco tu bolo "z106.htm", "ZALM106_I" az "ZALM106_III"
@@ -1986,120 +2038,120 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 			switch(den){
 				case DEN_NEDELA:
 				/* prve vespery */
-					_set_zalm1(MODL_PRVE_VESPERY, "z113.htm", "ZALM113");
-					_set_zalm2(MODL_PRVE_VESPERY, "z116.htm", "ZALM116,10-19");
+					set_zalm(1, MODL_PRVE_VESPERY, "z113.htm", "ZALM113");
+					set_zalm(2, MODL_PRVE_VESPERY, "z116.htm", "ZALM116,10-19");
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z93.htm", "ZALM93");
-					_set_zalm3(MODL_RANNE_CHVALY, "z148.htm", "ZALM148");
+					set_zalm(1, MODL_RANNE_CHVALY, "z93.htm", "ZALM93");
+					set_zalm(3, MODL_RANNE_CHVALY, "z148.htm", "ZALM148");
 				/* modlitba cez den */
 				/* druhe vespery */
-					_set_zalm2(MODL_VESPERY, "z111.htm", "ZALM111");
+					set_zalm(2, MODL_VESPERY, "z111.htm", "ZALM111");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z145.htm", "ZALM145pc_I");
-					_set_zalm2(MODL_POSV_CITANIE, "z145.htm", "ZALM145pc_II");
-					_set_zalm3(MODL_POSV_CITANIE, "z145.htm", "ZALM145pc_III");
+					set_zalm(1, MODL_POSV_CITANIE, "z145.htm", "ZALM145pc_I");
+					set_zalm(2, MODL_POSV_CITANIE, "z145.htm", "ZALM145pc_II");
+					set_zalm(3, MODL_POSV_CITANIE, "z145.htm", "ZALM145pc_III");
 					break;
 
 				case DEN_PONDELOK:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z84.htm", "ZALM84");
-					_set_zalm2(MODL_RANNE_CHVALY, "iz2.htm", "CHVAL_IZ2");
-					_set_zalm3(MODL_RANNE_CHVALY, "z96.htm", "ZALM96");
+					set_zalm(1, MODL_RANNE_CHVALY, "z84.htm", "ZALM84");
+					set_zalm(2, MODL_RANNE_CHVALY, "iz2.htm", "CHVAL_IZ2");
+					set_zalm(3, MODL_RANNE_CHVALY, "z96.htm", "ZALM96");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_LAMED");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z71.htm", "ZALM71_I");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z71.htm", "ZALM71_II");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_LAMED");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z71.htm", "ZALM71_I");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z71.htm", "ZALM71_II");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z123.htm", "ZALM123");
-					_set_zalm2(MODL_VESPERY, "z124.htm", "ZALM124");
+					set_zalm(1, MODL_VESPERY, "z123.htm", "ZALM123");
+					set_zalm(2, MODL_VESPERY, "z124.htm", "ZALM124");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z50.htm", "ZALM50_I");
-					_set_zalm2(MODL_POSV_CITANIE, "z50.htm", "ZALM50_II");
-					_set_zalm3(MODL_POSV_CITANIE, "z50.htm", "ZALM50_III");
+					set_zalm(1, MODL_POSV_CITANIE, "z50.htm", "ZALM50_I");
+					set_zalm(2, MODL_POSV_CITANIE, "z50.htm", "ZALM50_II");
+					set_zalm(3, MODL_POSV_CITANIE, "z50.htm", "ZALM50_III");
 					break;
 
 				case DEN_UTOROK:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z85.htm", "ZALM85");
-					_set_zalm2(MODL_RANNE_CHVALY, "iz26.htm", "CHVAL_IZ26");
-					_set_zalm3(MODL_RANNE_CHVALY, "z67.htm", "ZALM67");
+					set_zalm(1, MODL_RANNE_CHVALY, "z85.htm", "ZALM85");
+					set_zalm(2, MODL_RANNE_CHVALY, "iz26.htm", "CHVAL_IZ26");
+					set_zalm(3, MODL_RANNE_CHVALY, "z67.htm", "ZALM67");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_MEM");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z74.htm", "ZALM74_I");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z74.htm", "ZALM74_II");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_MEM");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z74.htm", "ZALM74_I");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z74.htm", "ZALM74_II");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z125.htm", "ZALM125");
-					_set_zalm2(MODL_VESPERY, "z131.htm", "ZALM131");
+					set_zalm(1, MODL_VESPERY, "z125.htm", "ZALM125");
+					set_zalm(2, MODL_VESPERY, "z131.htm", "ZALM131");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z68.htm", "ZALM68_I");
-					_set_zalm2(MODL_POSV_CITANIE, "z68.htm", "ZALM68_II");
-					_set_zalm3(MODL_POSV_CITANIE, "z68.htm", "ZALM68_III");
+					set_zalm(1, MODL_POSV_CITANIE, "z68.htm", "ZALM68_I");
+					set_zalm(2, MODL_POSV_CITANIE, "z68.htm", "ZALM68_II");
+					set_zalm(3, MODL_POSV_CITANIE, "z68.htm", "ZALM68_III");
 					break;
 
 				case DEN_STREDA:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z86.htm", "ZALM86");
-					_set_zalm2(MODL_RANNE_CHVALY, "iz33.htm", "CHVAL_IZ33");
-					_set_zalm3(MODL_RANNE_CHVALY, "z98.htm", "ZALM98");
+					set_zalm(1, MODL_RANNE_CHVALY, "z86.htm", "ZALM86");
+					set_zalm(2, MODL_RANNE_CHVALY, "iz33.htm", "CHVAL_IZ33");
+					set_zalm(3, MODL_RANNE_CHVALY, "z98.htm", "ZALM98");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_NUN");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z70.htm", "ZALM70");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z75.htm", "ZALM75");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_NUN");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z70.htm", "ZALM70");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z75.htm", "ZALM75");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z126.htm", "ZALM126");
-					_set_zalm2(MODL_VESPERY, "z127.htm", "ZALM127");
+					set_zalm(1, MODL_VESPERY, "z126.htm", "ZALM126");
+					set_zalm(2, MODL_VESPERY, "z127.htm", "ZALM127");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z89.htm", "ZALM89_I");
-					_set_zalm2(MODL_POSV_CITANIE, "z89.htm", "ZALM89_II");
-					_set_zalm3(MODL_POSV_CITANIE, "z89.htm", "ZALM89_III");
+					set_zalm(1, MODL_POSV_CITANIE, "z89.htm", "ZALM89_I");
+					set_zalm(2, MODL_POSV_CITANIE, "z89.htm", "ZALM89_II");
+					set_zalm(3, MODL_POSV_CITANIE, "z89.htm", "ZALM89_III");
 					break;
 
 				case DEN_STVRTOK:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z87.htm", "ZALM87");
-					_set_zalm2(MODL_RANNE_CHVALY, "iz40.htm", "CHVAL_IZ40");
-					_set_zalm3(MODL_RANNE_CHVALY, "z99.htm", "ZALM99");
+					set_zalm(1, MODL_RANNE_CHVALY, "z87.htm", "ZALM87");
+					set_zalm(2, MODL_RANNE_CHVALY, "iz40.htm", "CHVAL_IZ40");
+					set_zalm(3, MODL_RANNE_CHVALY, "z99.htm", "ZALM99");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_SAMECH");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z79.htm", "ZALM79");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z80.htm", "ZALM80");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_SAMECH");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z79.htm", "ZALM79");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z80.htm", "ZALM80");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z132.htm", "ZALM132_I");
-					_set_zalm2(MODL_VESPERY, "z132.htm", "ZALM132_II");
+					set_zalm(1, MODL_VESPERY, "z132.htm", "ZALM132_I");
+					set_zalm(2, MODL_VESPERY, "z132.htm", "ZALM132_II");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z89.htm", "ZALM89_IV");
-					_set_zalm2(MODL_POSV_CITANIE, "z89.htm", "ZALM89_V");
-					_set_zalm3(MODL_POSV_CITANIE, "z90.htm", "ZALM90");
+					set_zalm(1, MODL_POSV_CITANIE, "z89.htm", "ZALM89_IV");
+					set_zalm(2, MODL_POSV_CITANIE, "z89.htm", "ZALM89_V");
+					set_zalm(3, MODL_POSV_CITANIE, "z90.htm", "ZALM90");
 					break;
 
 				case DEN_PIATOK:
 				/* ranne chvaly */
-					_set_zalm2(MODL_RANNE_CHVALY, "jer14.htm", "CHVAL_JER14");
-					_set_zalm3(MODL_RANNE_CHVALY, "z100.htm", "ZALM100");
+					set_zalm(2, MODL_RANNE_CHVALY, "jer14.htm", "CHVAL_JER14");
+					set_zalm(3, MODL_RANNE_CHVALY, "z100.htm", "ZALM100");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z22.htm", "ZALM22_I");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z22.htm", "ZALM22_II");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z22.htm", "ZALM22_III");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z22.htm", "ZALM22_I");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z22.htm", "ZALM22_II");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z22.htm", "ZALM22_III");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z135.htm", "ZALM135_I");
-					_set_zalm2(MODL_VESPERY, "z135.htm", "ZALM135_II");
+					set_zalm(1, MODL_VESPERY, "z135.htm", "ZALM135_I");
+					set_zalm(2, MODL_VESPERY, "z135.htm", "ZALM135_II");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z69.htm", "ZALM69_I");
-					_set_zalm2(MODL_POSV_CITANIE, "z69.htm", "ZALM69_II");
-					_set_zalm3(MODL_POSV_CITANIE, "z69.htm", "ZALM69_III");
+					set_zalm(1, MODL_POSV_CITANIE, "z69.htm", "ZALM69_I");
+					set_zalm(2, MODL_POSV_CITANIE, "z69.htm", "ZALM69_II");
+					set_zalm(3, MODL_POSV_CITANIE, "z69.htm", "ZALM69_III");
 					break;
 
 				case DEN_SOBOTA:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z119.htm", "ZALM119_KOF");
-					_set_zalm2(MODL_RANNE_CHVALY, "mud9.htm", "CHVAL_MUD9");
-					_set_zalm3(MODL_RANNE_CHVALY, "z117.htm", "ZALM117");
+					set_zalm(1, MODL_RANNE_CHVALY, "z119.htm", "ZALM119_KOF");
+					set_zalm(2, MODL_RANNE_CHVALY, "mud9.htm", "CHVAL_MUD9");
+					set_zalm(3, MODL_RANNE_CHVALY, "z117.htm", "ZALM117");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_AIN");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_AIN");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z107.htm", "ZALM107_I");
-					_set_zalm2(MODL_POSV_CITANIE, "z107.htm", "ZALM107_II");
-					_set_zalm3(MODL_POSV_CITANIE, "z107.htm", "ZALM107_III");
+					set_zalm(1, MODL_POSV_CITANIE, "z107.htm", "ZALM107_I");
+					set_zalm(2, MODL_POSV_CITANIE, "z107.htm", "ZALM107_II");
+					set_zalm(3, MODL_POSV_CITANIE, "z107.htm", "ZALM107_III");
 					break;
 
 				default: break;
@@ -2109,111 +2161,111 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 			switch(den){
 				case DEN_NEDELA:
 				/* prve vespery */
-					_set_zalm1(MODL_PRVE_VESPERY, "z122.htm", "ZALM122");
-					_set_zalm2(MODL_PRVE_VESPERY, "z130.htm", "ZALM130");
+					set_zalm(1, MODL_PRVE_VESPERY, "z122.htm", "ZALM122");
+					set_zalm(2, MODL_PRVE_VESPERY, "z130.htm", "ZALM130");
 				/* ranne chvaly */
 				/* modlitba cez den */
 				/* druhe vespery */
-					_set_zalm2(MODL_VESPERY, "z112.htm", "ZALM112");
+					set_zalm(2, MODL_VESPERY, "z112.htm", "ZALM112");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z24.htm", "ZALM24");
-					_set_zalm2(MODL_POSV_CITANIE, "z66.htm", "ZALM66_I");
-					_set_zalm3(MODL_POSV_CITANIE, "z66.htm", "ZALM66_II");
+					set_zalm(1, MODL_POSV_CITANIE, "z24.htm", "ZALM24");
+					set_zalm(2, MODL_POSV_CITANIE, "z66.htm", "ZALM66_I");
+					set_zalm(3, MODL_POSV_CITANIE, "z66.htm", "ZALM66_II");
 					break;
 
 				case DEN_PONDELOK:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z90.htm", "ZALM90");
-					_set_zalm2(MODL_RANNE_CHVALY, "iz42.htm", "CHVAL_IZ42");
-					_set_zalm3(MODL_RANNE_CHVALY, "z135.htm", "ZALM135,1-12");
+					set_zalm(1, MODL_RANNE_CHVALY, "z90.htm", "ZALM90");
+					set_zalm(2, MODL_RANNE_CHVALY, "iz42.htm", "CHVAL_IZ42");
+					set_zalm(3, MODL_RANNE_CHVALY, "z135.htm", "ZALM135,1-12");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_PE");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z82.htm", "ZALM82");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z120.htm", "ZALM120");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_PE");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z82.htm", "ZALM82");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z120.htm", "ZALM120");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z136.htm", "ZALM136_I");
-					_set_zalm2(MODL_VESPERY, "z136.htm", "ZALM136_II"); /* inak je 136 cleneny pre sobotu 2. tyzdna, posvatne citanie */
+					set_zalm(1, MODL_VESPERY, "z136.htm", "ZALM136_I");
+					set_zalm(2, MODL_VESPERY, "z136.htm", "ZALM136_II"); /* inak je 136 cleneny pre sobotu 2. tyzdna, posvatne citanie */
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z73.htm", "ZALM73_I");
-					_set_zalm2(MODL_POSV_CITANIE, "z73.htm", "ZALM73_II");
-					_set_zalm3(MODL_POSV_CITANIE, "z73.htm", "ZALM73_III");
+					set_zalm(1, MODL_POSV_CITANIE, "z73.htm", "ZALM73_I");
+					set_zalm(2, MODL_POSV_CITANIE, "z73.htm", "ZALM73_II");
+					set_zalm(3, MODL_POSV_CITANIE, "z73.htm", "ZALM73_III");
 					break;
 
 				case DEN_UTOROK:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z101.htm", "ZALM101");
-					_set_zalm2(MODL_RANNE_CHVALY, "dan3_26.htm", "CHVAL_DAN3,26");
-					_set_zalm3(MODL_RANNE_CHVALY, "z144.htm", "ZALM144,1-10");
+					set_zalm(1, MODL_RANNE_CHVALY, "z101.htm", "ZALM101");
+					set_zalm(2, MODL_RANNE_CHVALY, "dan3_26.htm", "CHVAL_DAN3,26");
+					set_zalm(3, MODL_RANNE_CHVALY, "z144.htm", "ZALM144,1-10");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_SADE");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z88.htm", "ZALM88_I");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z88.htm", "ZALM88_II");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_SADE");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z88.htm", "ZALM88_I");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z88.htm", "ZALM88_II");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z137.htm", "ZALM137");
-					_set_zalm2(MODL_VESPERY, "z138.htm", "ZALM138");
+					set_zalm(1, MODL_VESPERY, "z137.htm", "ZALM137");
+					set_zalm(2, MODL_VESPERY, "z138.htm", "ZALM138");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z102.htm", "ZALM102_I");
-					_set_zalm2(MODL_POSV_CITANIE, "z102.htm", "ZALM102_II");
-					_set_zalm3(MODL_POSV_CITANIE, "z102.htm", "ZALM102_III");
+					set_zalm(1, MODL_POSV_CITANIE, "z102.htm", "ZALM102_I");
+					set_zalm(2, MODL_POSV_CITANIE, "z102.htm", "ZALM102_II");
+					set_zalm(3, MODL_POSV_CITANIE, "z102.htm", "ZALM102_III");
 					break;
 
 				case DEN_STREDA:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z108.htm", "ZALM108");
-					_set_zalm2(MODL_RANNE_CHVALY, "iz61.htm", "CHVAL_IZ61");
-					_set_zalm3(MODL_RANNE_CHVALY, "z146.htm", "ZALM146");
+					set_zalm(1, MODL_RANNE_CHVALY, "z108.htm", "ZALM108");
+					set_zalm(2, MODL_RANNE_CHVALY, "iz61.htm", "CHVAL_IZ61");
+					set_zalm(3, MODL_RANNE_CHVALY, "z146.htm", "ZALM146");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_KOF");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z94.htm", "ZALM94_I");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z94.htm", "ZALM94_II");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_KOF");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z94.htm", "ZALM94_I");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z94.htm", "ZALM94_II");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z139.htm", "ZALM139_I");
-					_set_zalm2(MODL_VESPERY, "z139.htm", "ZALM139_II");
+					set_zalm(1, MODL_VESPERY, "z139.htm", "ZALM139_I");
+					set_zalm(2, MODL_VESPERY, "z139.htm", "ZALM139_II");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z103.htm", "ZALM103_I");
-					_set_zalm2(MODL_POSV_CITANIE, "z103.htm", "ZALM103_II");
-					_set_zalm3(MODL_POSV_CITANIE, "z103.htm", "ZALM103_III");
+					set_zalm(1, MODL_POSV_CITANIE, "z103.htm", "ZALM103_I");
+					set_zalm(2, MODL_POSV_CITANIE, "z103.htm", "ZALM103_II");
+					set_zalm(3, MODL_POSV_CITANIE, "z103.htm", "ZALM103_III");
 					break;
 
 				case DEN_STVRTOK:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z143.htm", "ZALM143");
-					_set_zalm2(MODL_RANNE_CHVALY, "iz66.htm", "CHVAL_IZ66");
-					_set_zalm3(MODL_RANNE_CHVALY, "z147.htm", "ZALM147,1-11");
+					set_zalm(1, MODL_RANNE_CHVALY, "z143.htm", "ZALM143");
+					set_zalm(2, MODL_RANNE_CHVALY, "iz66.htm", "CHVAL_IZ66");
+					set_zalm(3, MODL_RANNE_CHVALY, "z147.htm", "ZALM147,1-11");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_RES");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z128.htm", "ZALM128");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z129.htm", "ZALM129");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_RES");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z128.htm", "ZALM128");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z129.htm", "ZALM129");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z144.htm", "ZALM144_I");
-					_set_zalm2(MODL_VESPERY, "z144.htm", "ZALM144_II");
+					set_zalm(1, MODL_VESPERY, "z144.htm", "ZALM144_I");
+					set_zalm(2, MODL_VESPERY, "z144.htm", "ZALM144_II");
 				/* posvatne citanie */
-					_set_zalm1(MODL_POSV_CITANIE, "z44.htm", "ZALM44_I");
-					_set_zalm2(MODL_POSV_CITANIE, "z44.htm", "ZALM44_II");
-					_set_zalm3(MODL_POSV_CITANIE, "z44.htm", "ZALM44_III");
+					set_zalm(1, MODL_POSV_CITANIE, "z44.htm", "ZALM44_I");
+					set_zalm(2, MODL_POSV_CITANIE, "z44.htm", "ZALM44_II");
+					set_zalm(3, MODL_POSV_CITANIE, "z44.htm", "ZALM44_III");
 					break;
 
 				case DEN_PIATOK:
 				/* ranne chvaly */
-					_set_zalm2(MODL_RANNE_CHVALY, "tob13.htm", "CHVAL_TOB13,8-11");
-					_set_zalm3(MODL_RANNE_CHVALY, "z147.htm", "ZALM147,12-20");
+					set_zalm(2, MODL_RANNE_CHVALY, "tob13.htm", "CHVAL_TOB13,8-11");
+					set_zalm(3, MODL_RANNE_CHVALY, "z147.htm", "ZALM147,12-20");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_SIN");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z133.htm", "ZALM133");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z140.htm", "ZALM140");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_SIN");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z133.htm", "ZALM133");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z140.htm", "ZALM140");
 				/* vespery */
-					_set_zalm1(MODL_VESPERY, "z145.htm", "ZALM145_I");
-					_set_zalm2(MODL_VESPERY, "z145.htm", "ZALM145_II");
+					set_zalm(1, MODL_VESPERY, "z145.htm", "ZALM145_I");
+					set_zalm(2, MODL_VESPERY, "z145.htm", "ZALM145_II");
 				/* posvatne citanie */
 					if(je_odlisny_zaltar){
-						_set_zalm1(MODL_POSV_CITANIE, "z78.htm", "ZALM78_I");
-						_set_zalm2(MODL_POSV_CITANIE, "z78.htm", "ZALM78_II");
-						_set_zalm3(MODL_POSV_CITANIE, "z78.htm", "ZALM78_III");
+						set_zalm(1, MODL_POSV_CITANIE, "z78.htm", "ZALM78_I");
+						set_zalm(2, MODL_POSV_CITANIE, "z78.htm", "ZALM78_II");
+						set_zalm(3, MODL_POSV_CITANIE, "z78.htm", "ZALM78_III");
 					}
 					else {
-						_set_zalm1(MODL_POSV_CITANIE, "z55.htm", "ZALM55_I_PC");
-						_set_zalm2(MODL_POSV_CITANIE, "z55.htm", "ZALM55_II_PC");
-						_set_zalm3(MODL_POSV_CITANIE, "z55.htm", "ZALM55_III_PC"); /* inak clenene pre modlitbu cez den, streda v 2. tyzdni */ 
+						set_zalm(1, MODL_POSV_CITANIE, "z55.htm", "ZALM55_I_PC");
+						set_zalm(2, MODL_POSV_CITANIE, "z55.htm", "ZALM55_II_PC");
+						set_zalm(3, MODL_POSV_CITANIE, "z55.htm", "ZALM55_III_PC"); /* inak clenene pre modlitbu cez den, streda v 2. tyzdni */ 
 					}
 					/* 2005-03-27:
 					 * Neviem preco tu bolo "z78.htm", "ZALM78_I" az "ZALM78_III"
@@ -2228,23 +2280,23 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 
 				case DEN_SOBOTA:
 				/* ranne chvaly */
-					_set_zalm1(MODL_RANNE_CHVALY, "z92.htm", "ZALM92");
-					_set_zalm2(MODL_RANNE_CHVALY, "ez36.htm", "CHVAL_EZ36");
-					_set_zalm3(MODL_RANNE_CHVALY, "z8.htm", "ZALM8");
+					set_zalm(1, MODL_RANNE_CHVALY, "z92.htm", "ZALM92");
+					set_zalm(2, MODL_RANNE_CHVALY, "ez36.htm", "CHVAL_EZ36");
+					set_zalm(3, MODL_RANNE_CHVALY, "z8.htm", "ZALM8");
 				/* modlitba cez den */
-					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_TAU");
-					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z45.htm", "ZALM45_I");
-					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z45.htm", "ZALM45_II");
+					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_TAU");
+					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z45.htm", "ZALM45_I");
+					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z45.htm", "ZALM45_II");
 				/* posvatne citanie */
 					if(je_odlisny_zaltar){
-						_set_zalm1(MODL_POSV_CITANIE, "z78.htm", "ZALM78_IV");
-						_set_zalm2(MODL_POSV_CITANIE, "z78.htm", "ZALM78_V");
-						_set_zalm3(MODL_POSV_CITANIE, "z78.htm", "ZALM78_VI");
+						set_zalm(1, MODL_POSV_CITANIE, "z78.htm", "ZALM78_IV");
+						set_zalm(2, MODL_POSV_CITANIE, "z78.htm", "ZALM78_V");
+						set_zalm(3, MODL_POSV_CITANIE, "z78.htm", "ZALM78_VI");
 					}
 					else {
-						_set_zalm1(MODL_POSV_CITANIE, "z50.htm", "ZALM50_I");
-						_set_zalm2(MODL_POSV_CITANIE, "z50.htm", "ZALM50_II");
-						_set_zalm3(MODL_POSV_CITANIE, "z50.htm", "ZALM50_III");
+						set_zalm(1, MODL_POSV_CITANIE, "z50.htm", "ZALM50_I");
+						set_zalm(2, MODL_POSV_CITANIE, "z50.htm", "ZALM50_II");
+						set_zalm(3, MODL_POSV_CITANIE, "z50.htm", "ZALM50_III");
 					}
 					/* 2005-03-27:
 					 * Neviem preco tu bolo "z78.htm", "ZALM78_IV" az "ZALM78_VI"
@@ -2287,9 +2339,9 @@ void zaltar(short int den, short int tyzzal){
 void _set_zalmy_velky_piatok(short int modlitba){
 	Log("_set_zalmy_velky_piatok(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z116.htm", "ZALM116,10-19");
-		_set_zalm2(modlitba, "z143.htm", "ZALM143");
-		_set_zalm3(modlitba, "flp2.htm", "CHVAL_FLP2");
+		set_zalm(1, modlitba, "z116.htm", "ZALM116,10-19");
+		set_zalm(2, modlitba, "z143.htm", "ZALM143");
+		set_zalm(3, modlitba, "flp2.htm", "CHVAL_FLP2");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		/* zalmy z piatka 2. tyzdna zaltara */
@@ -2297,15 +2349,15 @@ void _set_zalmy_velky_piatok(short int modlitba){
 	}
 	/* 2006-01-26: doplnenÈ ûalmy pre posv. ËÌtanie */
 	else if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z2.htm", "ZALM2");
-		_set_zalm2(modlitba, "z22.htm", "ZALM22_CELY");
-		_set_zalm3(modlitba, "z38.htm", "ZALM38_CELY");
+		set_zalm(1, modlitba, "z2.htm", "ZALM2");
+		set_zalm(2, modlitba, "z22.htm", "ZALM22_CELY");
+		set_zalm(3, modlitba, "z38.htm", "ZALM38_CELY");
 	}
 	/* 2006-01-26: doplnenÈ ûalmy pre modlitbu cez deÚ */
 	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
-		_set_zalm1(modlitba, "z40.htm", "ZALM40");
-		_set_zalm2(modlitba, "z54.htm", "ZALM54");
-		_set_zalm3(modlitba, "z88.htm", "ZALM88");
+		set_zalm(1, modlitba, "z40.htm", "ZALM40");
+		set_zalm(2, modlitba, "z54.htm", "ZALM54");
+		set_zalm(3, modlitba, "z88.htm", "ZALM88");
 	}
 	Log("_set_zalmy_velky_piatok(%s) -- end\n", nazov_modlitby(modlitba));
 }
@@ -2313,26 +2365,26 @@ void _set_zalmy_velky_piatok(short int modlitba){
 void _set_zalmy_biela_sobota(short int modlitba){
 	Log("_set_zalmy_biela_sobota(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z116.htm", "ZALM116,10-19");
-		_set_zalm2(modlitba, "z143.htm", "ZALM143");
-		_set_zalm3(modlitba, "flp2.htm", "CHVAL_FLP2");
+		set_zalm(1, modlitba, "z116.htm", "ZALM116,10-19");
+		set_zalm(2, modlitba, "z143.htm", "ZALM143");
+		set_zalm(3, modlitba, "flp2.htm", "CHVAL_FLP2");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
-		_set_zalm1(modlitba, "z64.htm", "ZALM64");
-		_set_zalm2(modlitba, "iz38.htm", "CHVAL_IZ38");
-		_set_zalm3(modlitba, "z150.htm", "ZALM150");
+		set_zalm(1, modlitba, "z64.htm", "ZALM64");
+		set_zalm(2, modlitba, "iz38.htm", "CHVAL_IZ38");
+		set_zalm(3, modlitba, "z150.htm", "ZALM150");
 	}
 	/* 2006-01-26: doplnenÈ ûalmy pre posv. ËÌtanie */
 	else if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z4.htm", "ZALM4");
-		_set_zalm2(modlitba, "z16.htm", "ZALM16");
-		_set_zalm3(modlitba, "z24.htm", "ZALM24");
+		set_zalm(1, modlitba, "z4.htm", "ZALM4");
+		set_zalm(2, modlitba, "z16.htm", "ZALM16");
+		set_zalm(3, modlitba, "z24.htm", "ZALM24");
 	}
 	/* 2006-01-26: doplnenÈ ûalmy pre modlitbu cez deÚ */
 	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
-		_set_zalm1(modlitba, "z27.htm", "ZALM27");
-		_set_zalm2(modlitba, "z30.htm", "ZALM30");
-		_set_zalm3(modlitba, "z76.htm", "ZALM76");
+		set_zalm(1, modlitba, "z27.htm", "ZALM27");
+		set_zalm(2, modlitba, "z30.htm", "ZALM30");
+		set_zalm(3, modlitba, "z76.htm", "ZALM76");
 	}
 	Log("_set_zalmy_biela_sobota(%s) -- end\n", nazov_modlitby(modlitba));
 }
@@ -2340,63 +2392,63 @@ void _set_zalmy_biela_sobota(short int modlitba){
 void _set_zalmy_za_zosnulych(short int modlitba){
 	Log("_set_zalmy_za_zosnulych(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z121.htm", "ZALM121");
-		_set_zalm2(modlitba, "z130.htm", "ZALM130");
-		_set_zalm3(modlitba, "flp2.htm", "CHVAL_FLP2");
+		set_zalm(1, modlitba, "z121.htm", "ZALM121");
+		set_zalm(2, modlitba, "z130.htm", "ZALM130");
+		set_zalm(3, modlitba, "flp2.htm", "CHVAL_FLP2");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
-		_set_zalm1(modlitba, "z51.htm", "ZALM51");
-		_set_zalm2(modlitba, "iz38.htm", "CHVAL_IZ38");
+		set_zalm(1, modlitba, "z51.htm", "ZALM51");
+		set_zalm(2, modlitba, "iz38.htm", "CHVAL_IZ38");
 		if(_global_den.tyzden MOD 2 == 0)
-			_set_zalm3(modlitba, "z146.htm", "ZALM146");
+			set_zalm(3, modlitba, "z146.htm", "ZALM146");
 		else
-			_set_zalm3(modlitba, "z150.htm", "ZALM150");
+			set_zalm(3, modlitba, "z150.htm", "ZALM150");
 	}
 	/* 2006-02-04: doplnenÈ ûalmy pre posv. ËÌtanie a pre modlitbu cez deÚ */
 	else if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z40.htm", "ZALM40_I");
-		_set_zalm2(modlitba, "z40.htm", "ZALM40_II");
-		_set_zalm3(modlitba, "z42.htm", "ZALM42");
+		set_zalm(1, modlitba, "z40.htm", "ZALM40_I");
+		set_zalm(2, modlitba, "z40.htm", "ZALM40_II");
+		set_zalm(3, modlitba, "z42.htm", "ZALM42");
 	}
 	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
-		_set_zalm1(modlitba, "z70.htm", "ZALM70");
-		_set_zalm2(modlitba, "z85.htm", "ZALM85");
-		_set_zalm3(modlitba, "z86.htm", "ZALM86");
+		set_zalm(1, modlitba, "z70.htm", "ZALM70");
+		set_zalm(2, modlitba, "z85.htm", "ZALM85");
+		set_zalm(3, modlitba, "z86.htm", "ZALM86");
 	}
 	Log("_set_zalmy_za_zosnulych(%s) -- end\n", nazov_modlitby(modlitba));
 }
 
 void _set_zalmy_1nedele_rch(void){/* ranne chvaly */
 	Log("_set_zalmy_1nedele_rch() -- begin\n");
-	_set_zalm1(MODL_RANNE_CHVALY, "z63.htm", "ZALM63");
-	_set_zalm2(MODL_RANNE_CHVALY, "dan3_57.htm", "DAN3,57-88.56");
-	_set_zalm3(MODL_RANNE_CHVALY, "z149.htm", "ZALM149");
+	set_zalm(1, MODL_RANNE_CHVALY, "z63.htm", "ZALM63");
+	set_zalm(2, MODL_RANNE_CHVALY, "dan3_57.htm", "DAN3,57-88.56");
+	set_zalm(3, MODL_RANNE_CHVALY, "z149.htm", "ZALM149");
 	Log("_set_zalmy_1nedele_rch() -- end\n");
 }
 
 void _set_zalmy_1nedele_v(void){/* vespery */
 	Log("_set_zalmy_1nedele_v() -- begin\n");
-	_set_zalm1(MODL_VESPERY, "z110.htm", "ZALM110");
-	_set_zalm2(MODL_VESPERY, "z114.htm", "ZALM114");
-	_set_zalm3(MODL_VESPERY, "zjv19.htm", "CHVAL_ZJV19");
+	set_zalm(1, MODL_VESPERY, "z110.htm", "ZALM110");
+	set_zalm(2, MODL_VESPERY, "z114.htm", "ZALM114");
+	set_zalm(3, MODL_VESPERY, "zjv19.htm", "CHVAL_ZJV19");
 	Log("_set_zalmy_1nedele_v() -- end\n");
 }
 
 /*
 void _set_zalmy_1nedele_1v(void){ // prve vespery -- nepouûÌva sa; 2008-04-04
 	Log("_set_zalmy_1nedele_1v() -- begin\n");
-	_set_zalm1(MODL_PRVE_VESPERY, "z141.htm", "ZALM141");
-	_set_zalm2(MODL_PRVE_VESPERY, "z142.htm", "ZALM142");
-	_set_zalm3(MODL_PRVE_VESPERY, "flp2.htm", "CHVAL_FLP2");
+	set_zalm(1, MODL_PRVE_VESPERY, "z141.htm", "ZALM141");
+	set_zalm(2, MODL_PRVE_VESPERY, "z142.htm", "ZALM142");
+	set_zalm(3, MODL_PRVE_VESPERY, "flp2.htm", "CHVAL_FLP2");
 	Log("_set_zalmy_1nedele_1v() -- end\n");
 }
 */
 
 void _set_zalmy_1nedele_v_pre_1v(void){/* ûalmy a chv·lospev z veöpier pre prvÈ veöpery -- kvÙli druhej veækonoËnej nedeli; 2008-04-04 */
 	Log("_set_zalmy_1nedele_v_pre_1v() -- begin\n");
-	_set_zalm1(MODL_PRVE_VESPERY, "z110.htm", "ZALM110");
-	_set_zalm2(MODL_PRVE_VESPERY, "z114.htm", "ZALM114");
-	_set_zalm3(MODL_PRVE_VESPERY, "zjv19.htm", "CHVAL_ZJV19");
+	set_zalm(1, MODL_PRVE_VESPERY, "z110.htm", "ZALM110");
+	set_zalm(2, MODL_PRVE_VESPERY, "z114.htm", "ZALM114");
+	set_zalm(3, MODL_PRVE_VESPERY, "zjv19.htm", "CHVAL_ZJV19");
 	Log("_set_zalmy_1nedele_v_pre_1v() -- end\n");
 }
 
@@ -2409,9 +2461,9 @@ void _set_zalmy_1nedele_v_pre_1v(void){/* ûalmy a chv·lospev z veöpier pre prvÈ 
 void _set_zalmy_1nedele_pc(void){/* prve vespery */
 	Log("_set_zalmy_1nedele_pc() -- begin\n");
 	/* modlitba cez den */
-	_set_zalm1(MODL_POSV_CITANIE, "z1.htm", "ZALM1");
-	_set_zalm2(MODL_POSV_CITANIE, "z2.htm", "ZALM2");
-	_set_zalm3(MODL_POSV_CITANIE, "z3.htm", "ZALM3");
+	set_zalm(1, MODL_POSV_CITANIE, "z1.htm", "ZALM1");
+	set_zalm(2, MODL_POSV_CITANIE, "z2.htm", "ZALM2");
+	set_zalm(3, MODL_POSV_CITANIE, "z3.htm", "ZALM3");
 	Log("_set_zalmy_1nedele_pc() -- end\n");
 }
 
@@ -2423,34 +2475,34 @@ void _set_zalmy_velk_oktava(short int den, short int modlitba){
 		switch(den){
 			case DEN_NEDELA: /* 2006-01-26: v podstate len pre druh˙ nedeæu vo veækonoËnej okt·ve */
 			case DEN_PONDELOK:
-				_set_zalm1(modlitba, "z1.htm", "ZALM1");
-				_set_zalm2(modlitba, "z2.htm", "ZALM2");
-				_set_zalm3(modlitba, "z3.htm", "ZALM3");
+				set_zalm(1, modlitba, "z1.htm", "ZALM1");
+				set_zalm(2, modlitba, "z2.htm", "ZALM2");
+				set_zalm(3, modlitba, "z3.htm", "ZALM3");
 				break;
 			case DEN_UTOROK:
-				_set_zalm1(modlitba, "z24.htm", "ZALM24");
-				_set_zalm2(modlitba, "z66.htm", "ZALM66_I");
-				_set_zalm3(modlitba, "z66.htm", "ZALM66_II");
+				set_zalm(1, modlitba, "z24.htm", "ZALM24");
+				set_zalm(2, modlitba, "z66.htm", "ZALM66_I");
+				set_zalm(3, modlitba, "z66.htm", "ZALM66_II");
 				break;
 			case DEN_STREDA:
-				_set_zalm1(modlitba, "z104.htm", "ZALM104_I");
-				_set_zalm2(modlitba, "z104.htm", "ZALM104_II");
-				_set_zalm3(modlitba, "z104.htm", "ZALM104_III");
+				set_zalm(1, modlitba, "z104.htm", "ZALM104_I");
+				set_zalm(2, modlitba, "z104.htm", "ZALM104_II");
+				set_zalm(3, modlitba, "z104.htm", "ZALM104_III");
 				break;
 			case DEN_STVRTOK:
-				_set_zalm1(modlitba, "z118.htm", "ZALM118_I");
-				_set_zalm2(modlitba, "z118.htm", "ZALM118_II");
-				_set_zalm3(modlitba, "z118.htm", "ZALM118_III");
+				set_zalm(1, modlitba, "z118.htm", "ZALM118_I");
+				set_zalm(2, modlitba, "z118.htm", "ZALM118_II");
+				set_zalm(3, modlitba, "z118.htm", "ZALM118_III");
 				break;
 			case DEN_PIATOK:
-				_set_zalm1(modlitba, "z136.htm", "ZALM136_I");
-				_set_zalm2(modlitba, "z136.htm", "ZALM136_II_PC");
-				_set_zalm3(modlitba, "z136.htm", "ZALM136_III_PC");
+				set_zalm(1, modlitba, "z136.htm", "ZALM136_I");
+				set_zalm(2, modlitba, "z136.htm", "ZALM136_II_PC");
+				set_zalm(3, modlitba, "z136.htm", "ZALM136_III_PC");
 				break;
 			case DEN_SOBOTA:
-				_set_zalm1(modlitba, "z145.htm", "ZALM145pc_I");
-				_set_zalm2(modlitba, "z145.htm", "ZALM145pc_II");
-				_set_zalm3(modlitba, "z145.htm", "ZALM145pc_III");
+				set_zalm(1, modlitba, "z145.htm", "ZALM145pc_I");
+				set_zalm(2, modlitba, "z145.htm", "ZALM145pc_II");
+				set_zalm(3, modlitba, "z145.htm", "ZALM145pc_III");
 				break;
 		}/* switch(den) */
 	}
@@ -2458,39 +2510,39 @@ void _set_zalmy_velk_oktava(short int den, short int modlitba){
 		/* modlitba cez deÚ */
 		switch(den){
 			case DEN_NEDELA:
-				_set_zalm1(MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_I");
-				_set_zalm2(MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_II");
-				_set_zalm3(MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_III");
+				set_zalm(1, MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_I");
+				set_zalm(2, MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_II");
+				set_zalm(3, MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_III");
 				break;
 			case DEN_PONDELOK:
-				_set_zalm1(MODL_CEZ_DEN_VSETKY, "z8.htm", "ZALM8");
-				_set_zalm2(MODL_CEZ_DEN_VSETKY, "z19.htm", "ZALM19_I");
-				_set_zalm3(MODL_CEZ_DEN_VSETKY, "z19.htm", "ZALM19_II");
+				set_zalm(1, MODL_CEZ_DEN_VSETKY, "z8.htm", "ZALM8");
+				set_zalm(2, MODL_CEZ_DEN_VSETKY, "z19.htm", "ZALM19_I");
+				set_zalm(3, MODL_CEZ_DEN_VSETKY, "z19.htm", "ZALM19_II");
 				break;
 			case DEN_UTOROK:
-				_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_ALEF");
-				_set_zalm2(MODL_CEZ_DEN_VSETKY, "z16.htm", "ZALM16");
-				_set_zalm3(MODL_CEZ_DEN_VSETKY, "z23.htm", "ZALM23");
+				set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_ALEF");
+				set_zalm(2, MODL_CEZ_DEN_VSETKY, "z16.htm", "ZALM16");
+				set_zalm(3, MODL_CEZ_DEN_VSETKY, "z23.htm", "ZALM23");
 				break;
 			case DEN_STREDA:
-				_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_BET");
-				_set_zalm2(MODL_CEZ_DEN_VSETKY, "z28.htm", "ZALM28,1-3.6-9");
-				_set_zalm3(MODL_CEZ_DEN_VSETKY, "z116.htm", "ZALM116,10-19");
+				set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_BET");
+				set_zalm(2, MODL_CEZ_DEN_VSETKY, "z28.htm", "ZALM28,1-3.6-9");
+				set_zalm(3, MODL_CEZ_DEN_VSETKY, "z116.htm", "ZALM116,10-19");
 				break;
 			case DEN_STVRTOK:
-				_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_GIMEL");
-				_set_zalm2(MODL_CEZ_DEN_VSETKY, "z30.htm", "ZALM30_I");
-				_set_zalm3(MODL_CEZ_DEN_VSETKY, "z30.htm", "ZALM30_II");
+				set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_GIMEL");
+				set_zalm(2, MODL_CEZ_DEN_VSETKY, "z30.htm", "ZALM30_I");
+				set_zalm(3, MODL_CEZ_DEN_VSETKY, "z30.htm", "ZALM30_II");
 				break;
 			case DEN_PIATOK:
-				_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_DALET");
-				_set_zalm2(MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_I");
-				_set_zalm3(MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_II");
+				set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_DALET");
+				set_zalm(2, MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_I");
+				set_zalm(3, MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_II");
 				break;
 			case DEN_SOBOTA:
-				_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_HE");
-				_set_zalm2(MODL_CEZ_DEN_VSETKY, "z96.htm", "ZALM96_I");
-				_set_zalm3(MODL_CEZ_DEN_VSETKY, "z96.htm", "ZALM96_II");
+				set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_HE");
+				set_zalm(2, MODL_CEZ_DEN_VSETKY, "z96.htm", "ZALM96_I");
+				set_zalm(3, MODL_CEZ_DEN_VSETKY, "z96.htm", "ZALM96_II");
 				break;
 		}/* switch(den) */
 	}
@@ -2504,29 +2556,29 @@ void _set_zalmy_vian_oktava(short int den, short int modlitba){
 		/* posv‰tnÈ ËÌtanie */
 		switch(den){
 			case 25:
-				_set_zalm1(modlitba, "z2.htm", "ZALM2");
-				_set_zalm2(modlitba, "z19.htm", "ZALM19,2-7");
-				_set_zalm3(modlitba, "z45.htm", "ZALM45");
+				set_zalm(1, modlitba, "z2.htm", "ZALM2");
+				set_zalm(2, modlitba, "z19.htm", "ZALM19,2-7");
+				set_zalm(3, modlitba, "z45.htm", "ZALM45");
 				break;
 			case 29:
-				_set_zalm1(modlitba, "z46.htm", "ZALM46");
-				_set_zalm2(modlitba, "z72.htm", "ZALM72_I");
-				_set_zalm3(modlitba, "z72.htm", "ZALM72_II");
+				set_zalm(1, modlitba, "z46.htm", "ZALM46");
+				set_zalm(2, modlitba, "z72.htm", "ZALM72_I");
+				set_zalm(3, modlitba, "z72.htm", "ZALM72_II");
 				break;
 			case 30:
-				_set_zalm1(modlitba, "z85.htm", "ZALM85");
-				_set_zalm2(modlitba, "z89.htm", "ZALM89_I_30DEC");
-				_set_zalm3(modlitba, "z89.htm", "ZALM89_II_30DEC");
+				set_zalm(1, modlitba, "z85.htm", "ZALM85");
+				set_zalm(2, modlitba, "z89.htm", "ZALM89_I_30DEC");
+				set_zalm(3, modlitba, "z89.htm", "ZALM89_II_30DEC");
 				break;
 			case 31:
-				_set_zalm1(modlitba, "z96.htm", "ZALM96");
-				_set_zalm2(modlitba, "z97.htm", "ZALM97");
-				_set_zalm3(modlitba, "z98.htm", "ZALM98");
+				set_zalm(1, modlitba, "z96.htm", "ZALM96");
+				set_zalm(2, modlitba, "z97.htm", "ZALM97");
+				set_zalm(3, modlitba, "z98.htm", "ZALM98");
 				break;
 			case 1:
-				_set_zalm1(modlitba, "z24.htm", "ZALM24");
-				_set_zalm2(modlitba, "z87.htm", "ZALM87");
-				_set_zalm3(modlitba, "z99.htm", "ZALM99");
+				set_zalm(1, modlitba, "z24.htm", "ZALM24");
+				set_zalm(2, modlitba, "z87.htm", "ZALM87");
+				set_zalm(3, modlitba, "z99.htm", "ZALM99");
 				break;
 		}/* switch(den) */
 	}
@@ -2536,29 +2588,29 @@ void _set_zalmy_vian_oktava(short int den, short int modlitba){
 void _set_zalmy_posviacka_chramu(short int modlitba){
 	Log("_set_zalmy_posviacka_chramu(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z46.htm", "ZALM46");
-		_set_zalm2(modlitba, "z122.htm", "ZALM122");
+		set_zalm(1, modlitba, "z46.htm", "ZALM46");
+		set_zalm(2, modlitba, "z122.htm", "ZALM122");
 		if((_global_den.litobd == OBD_POSTNE_I) || (_global_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN))
-			_set_zalm3(modlitba, "zjv15.htm", "CHVAL_ZJV15");
+			set_zalm(3, modlitba, "zjv15.htm", "CHVAL_ZJV15");
 		else
-			_set_zalm3(modlitba, "zjv19.htm", "CHVAL_ZJV19");
+			set_zalm(3, modlitba, "zjv19.htm", "CHVAL_ZJV19");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(modlitba, "z147.htm", "ZALM147,1-11");
-		_set_zalm2(modlitba, "z147.htm", "ZALM147,12-20");
+		set_zalm(1, modlitba, "z147.htm", "ZALM147,1-11");
+		set_zalm(2, modlitba, "z147.htm", "ZALM147,12-20");
 		if((_global_den.litobd == OBD_POSTNE_I) || (_global_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN))
-			_set_zalm3(modlitba, "kol1.htm", "CHVAL_KOL1");
+			set_zalm(3, modlitba, "kol1.htm", "CHVAL_KOL1");
 		else
-			_set_zalm3(modlitba, "zjv19.htm", "CHVAL_ZJV19");
+			set_zalm(3, modlitba, "zjv19.htm", "CHVAL_ZJV19");
 	}
 	/* 2006-02-04: doplnenÈ ûalmy pre posv. ËÌtanie a pre modlitbu cez deÚ */
 	else if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z24.htm", "ZALM24");
-		_set_zalm2(modlitba, "z84.htm", "ZALM84");
-		_set_zalm3(modlitba, "z87.htm", "ZALM87");
+		set_zalm(1, modlitba, "z24.htm", "ZALM24");
+		set_zalm(2, modlitba, "z84.htm", "ZALM84");
+		set_zalm(3, modlitba, "z87.htm", "ZALM87");
 	}
 	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
 		_set_zalm_cez_den_doplnkova_psalmodia();
@@ -2595,28 +2647,28 @@ void _set_zalmy_velkonocna_nedela(short int modlitba){
 void _set_zalmy_nanebovstupenie(short int modlitba){
 	Log("_set_zalmy_nanebovstupenie(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z110.htm", "ZALM110");
-		_set_zalm2(modlitba, "z47.htm", "ZALM47");
-		_set_zalm3(modlitba, "zjv11.htm", "CHVAL_ZJV11");
+		set_zalm(1, modlitba, "z110.htm", "ZALM110");
+		set_zalm(2, modlitba, "z47.htm", "ZALM47");
+		set_zalm(3, modlitba, "zjv11.htm", "CHVAL_ZJV11");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(modlitba, "z113.htm", "ZALM113");
-		_set_zalm2(modlitba, "z117.htm", "ZALM117");
-		_set_zalm3(modlitba, "zjv11.htm", "CHVAL_ZJV11");
+		set_zalm(1, modlitba, "z113.htm", "ZALM113");
+		set_zalm(2, modlitba, "z117.htm", "ZALM117");
+		set_zalm(3, modlitba, "zjv11.htm", "CHVAL_ZJV11");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
 	}
 	/* 2006-01-27: pridanÈ posv‰tnÈ ËÌtanie a modlitba cez deÚ */
 	else if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z68.htm", "ZALM68_I");
-		_set_zalm2(modlitba, "z68.htm", "ZALM68_II");
-		_set_zalm3(modlitba, "z68.htm", "ZALM68_III");
+		set_zalm(1, modlitba, "z68.htm", "ZALM68_I");
+		set_zalm(2, modlitba, "z68.htm", "ZALM68_II");
+		set_zalm(3, modlitba, "z68.htm", "ZALM68_III");
 	}
 	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
-		_set_zalm1(modlitba, "z8.htm", "ZALM8");
-		_set_zalm2(modlitba, "z19.htm", "ZALM19_I");
-		_set_zalm3(modlitba, "z19.htm", "ZALM19_II");
+		set_zalm(1, modlitba, "z8.htm", "ZALM8");
+		set_zalm(2, modlitba, "z19.htm", "ZALM19_I");
+		set_zalm(3, modlitba, "z19.htm", "ZALM19_II");
 	}
 	Log("_set_zalmy_nanebovstupenie(%s) -- end\n", nazov_modlitby(modlitba));
 }
@@ -2625,23 +2677,23 @@ void _set_zalmy_nanebovstupenie(short int modlitba){
 void _set_zalmy_zoslanie_ducha_sv(short int modlitba){
 	Log("_set_zalmy_zoslanie_ducha_sv(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z110.htm", "ZALM110");
-		_set_zalm2(modlitba, "z114.htm", "ZALM114");
-		_set_zalm3(modlitba, "zjv19.htm", "CHVAL_ZJV19");
+		set_zalm(1, modlitba, "z110.htm", "ZALM110");
+		set_zalm(2, modlitba, "z114.htm", "ZALM114");
+		set_zalm(3, modlitba, "zjv19.htm", "CHVAL_ZJV19");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(modlitba, "z113.htm", "ZALM113");
-		_set_zalm2(modlitba, "z147.htm", "ZALM147,1-11");
-		_set_zalm3(modlitba, "zjv15.htm", "CHVAL_ZJV15");
+		set_zalm(1, modlitba, "z113.htm", "ZALM113");
+		set_zalm(2, modlitba, "z147.htm", "ZALM147,1-11");
+		set_zalm(3, modlitba, "zjv15.htm", "CHVAL_ZJV15");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
 	}
 	/* 2006-01-27: pridanÈ posv‰tnÈ ËÌtanie a modlitba cez deÚ */
 	else if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z104.htm", "ZALM104_I");
-		_set_zalm2(modlitba, "z104.htm", "ZALM104_II");
-		_set_zalm3(modlitba, "z104.htm", "ZALM104_III");
+		set_zalm(1, modlitba, "z104.htm", "ZALM104_I");
+		set_zalm(2, modlitba, "z104.htm", "ZALM104_II");
+		set_zalm(3, modlitba, "z104.htm", "ZALM104_III");
 	}
 	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
 		_set_zalmy_1nedele_mcd();
@@ -2653,19 +2705,19 @@ void _set_zalmy_zoslanie_ducha_sv(short int modlitba){
 void _set_zalmy_najsv_trojice(short int modlitba){
 	Log("_set_zalmy_najsv_trojice(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z110.htm", "ZALM110");
-		_set_zalm2(modlitba, "z114.htm", "ZALM114");
-		_set_zalm3(modlitba, "zjv19.htm", "CHVAL_ZJV19");
+		set_zalm(1, modlitba, "z110.htm", "ZALM110");
+		set_zalm(2, modlitba, "z114.htm", "ZALM114");
+		set_zalm(3, modlitba, "zjv19.htm", "CHVAL_ZJV19");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(modlitba, "z113.htm", "ZALM113");
-		_set_zalm2(modlitba, "z147.htm", "ZALM147,12-20");
-		_set_zalm3(modlitba, "ef1.htm", "CHVAL_EF1");
+		set_zalm(1, modlitba, "z113.htm", "ZALM113");
+		set_zalm(2, modlitba, "z147.htm", "ZALM147,12-20");
+		set_zalm(3, modlitba, "ef1.htm", "CHVAL_EF1");
 	}
 	else if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z8.htm", "ZALM8");
-		_set_zalm2(modlitba, "z33.htm", "ZALM33_I");
-		_set_zalm3(modlitba, "z33.htm", "ZALM33_II");
+		set_zalm(1, modlitba, "z8.htm", "ZALM8");
+		set_zalm(2, modlitba, "z33.htm", "ZALM33_I");
+		set_zalm(3, modlitba, "z33.htm", "ZALM33_II");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
@@ -2681,20 +2733,20 @@ void _set_zalmy_najsv_trojice(short int modlitba){
 void _set_zalmy_krista_krala(short int modlitba){
 	Log("_set_zalmy_krista_krala(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z110.htm", "ZALM110");
-		_set_zalm2(modlitba, "z145.htm", "ZALM145,1-13");
-		_set_zalm3(modlitba, "zjv19.htm", "CHVAL_ZJV19");
+		set_zalm(1, modlitba, "z110.htm", "ZALM110");
+		set_zalm(2, modlitba, "z145.htm", "ZALM145,1-13");
+		set_zalm(3, modlitba, "zjv19.htm", "CHVAL_ZJV19");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(modlitba, "z113.htm", "ZALM113");
-		_set_zalm2(modlitba, "z117.htm", "ZALM117");
-		_set_zalm3(modlitba, "zjv4_5.htm", "CHVAL_ZJV45");
+		set_zalm(1, modlitba, "z113.htm", "ZALM113");
+		set_zalm(2, modlitba, "z117.htm", "ZALM117");
+		set_zalm(3, modlitba, "zjv4_5.htm", "CHVAL_ZJV45");
 	}
 	/* 2005-08-12: doplnenÈ ûalmy na posv‰tnÈ ËÌtanie */
 	else if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z2.htm", "ZALM2");
-		_set_zalm2(modlitba, "z72.htm", "ZALM72_I");
-		_set_zalm3(modlitba, "z72.htm", "ZALM72_II");
+		set_zalm(1, modlitba, "z2.htm", "ZALM2");
+		set_zalm(2, modlitba, "z72.htm", "ZALM72_I");
+		set_zalm(3, modlitba, "z72.htm", "ZALM72_II");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
@@ -2710,20 +2762,20 @@ void _set_zalmy_krista_krala(short int modlitba){
 void _set_zalmy_telakrvi(short int modlitba){
 	Log("_set_zalmy_telakrvi(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z110.htm", "ZALM110");
-		_set_zalm2(modlitba, "z116.htm", "ZALM116,10-19");
-		_set_zalm3(modlitba, "zjv19.htm", "CHVAL_ZJV19");
+		set_zalm(1, modlitba, "z110.htm", "ZALM110");
+		set_zalm(2, modlitba, "z116.htm", "ZALM116,10-19");
+		set_zalm(3, modlitba, "zjv19.htm", "CHVAL_ZJV19");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(modlitba, "z111.htm", "ZALM111");
-		_set_zalm2(modlitba, "z147.htm", "ZALM147,12-20");
-		_set_zalm3(modlitba, "zjv11.htm", "CHVAL_ZJV11");
+		set_zalm(1, modlitba, "z111.htm", "ZALM111");
+		set_zalm(2, modlitba, "z147.htm", "ZALM147,12-20");
+		set_zalm(3, modlitba, "zjv11.htm", "CHVAL_ZJV11");
 	}
 	/* 2006-01-24: doplnenÈ ûalmy na posv‰tnÈ ËÌtanie */
 	else if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z23.htm", "ZALM23");
-		_set_zalm2(modlitba, "z42.htm", "ZALM42");
-		_set_zalm3(modlitba, "z81.htm", "ZALM81");
+		set_zalm(1, modlitba, "z23.htm", "ZALM23");
+		set_zalm(2, modlitba, "z42.htm", "ZALM42");
+		set_zalm(3, modlitba, "z81.htm", "ZALM81");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
@@ -2739,20 +2791,20 @@ void _set_zalmy_telakrvi(short int modlitba){
 void _set_zalmy_srdca(short int modlitba){
 	Log("_set_zalmy_srdca(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z110.htm", "ZALM110");
-		_set_zalm2(modlitba, "z111.htm", "ZALM111");
-		_set_zalm3(modlitba, "flp2.htm", "CHVAL_FLP2");
+		set_zalm(1, modlitba, "z110.htm", "ZALM110");
+		set_zalm(2, modlitba, "z111.htm", "ZALM111");
+		set_zalm(3, modlitba, "flp2.htm", "CHVAL_FLP2");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(modlitba, "z113.htm", "ZALM113");
-		_set_zalm2(modlitba, "z146.htm", "ZALM146");
-		_set_zalm3(modlitba, "zjv4_5.htm", "CHVAL_ZJV45");
+		set_zalm(1, modlitba, "z113.htm", "ZALM113");
+		set_zalm(2, modlitba, "z146.htm", "ZALM146");
+		set_zalm(3, modlitba, "zjv4_5.htm", "CHVAL_ZJV45");
 	}
 	/* 2006-01-24: doplnenÈ ûalmy na posv‰tnÈ ËÌtanie */
 	else if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z36.htm", "ZALM36");
-		_set_zalm2(modlitba, "z61.htm", "ZALM61");
-		_set_zalm3(modlitba, "z98.htm", "ZALM98");
+		set_zalm(1, modlitba, "z36.htm", "ZALM36");
+		set_zalm(2, modlitba, "z61.htm", "ZALM61");
+		set_zalm(3, modlitba, "z98.htm", "ZALM98");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
@@ -2767,27 +2819,27 @@ void _set_zalmy_srdca(short int modlitba){
 void _set_zalmy_narodenie(short int modlitba){
 	Log("_set_zalmy_narodenie(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z110.htm", "ZALM110");
-		_set_zalm2(modlitba, "z130.htm", "ZALM130");
-		_set_zalm3(modlitba, "kol1.htm", "CHVAL_KOL1");
+		set_zalm(1, modlitba, "z110.htm", "ZALM110");
+		set_zalm(2, modlitba, "z130.htm", "ZALM130");
+		set_zalm(3, modlitba, "kol1.htm", "CHVAL_KOL1");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(modlitba, "z113.htm", "ZALM113");
-		_set_zalm2(modlitba, "z147.htm", "ZALM147,12-20");
-		_set_zalm3(modlitba, "flp2.htm", "CHVAL_FLP2");
+		set_zalm(1, modlitba, "z113.htm", "ZALM113");
+		set_zalm(2, modlitba, "z147.htm", "ZALM147,12-20");
+		set_zalm(3, modlitba, "flp2.htm", "CHVAL_FLP2");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
 	}
 	else if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z2.htm", "ZALM2");
-		_set_zalm2(modlitba, "z19.htm", "ZALM19,2-7");
-		_set_zalm3(modlitba, "z45.htm", "ZALM45");
+		set_zalm(1, modlitba, "z2.htm", "ZALM2");
+		set_zalm(2, modlitba, "z19.htm", "ZALM19,2-7");
+		set_zalm(3, modlitba, "z45.htm", "ZALM45");
 	}
 	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
-		_set_zalm1(modlitba, "z19.htm", "ZALM19,8-15");
-		_set_zalm2(modlitba, "z47.htm", "ZALM47");
-		_set_zalm3(modlitba, "z48.htm", "ZALM48");
+		set_zalm(1, modlitba, "z19.htm", "ZALM19,8-15");
+		set_zalm(2, modlitba, "z47.htm", "ZALM47");
+		set_zalm(3, modlitba, "z48.htm", "ZALM48");
 	}
 	Log("_set_zalmy_narodenie(%s) -- end\n", nazov_modlitby(modlitba));
 }
@@ -2796,25 +2848,25 @@ void _set_zalmy_narodenie(short int modlitba){
 void _set_zalmy_zjv(short int modlitba){
 	Log("_set_zalmy_zjv(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z110.htm", "ZALM110");
-		_set_zalm2(modlitba, "z112.htm", "ZALM112");
-		_set_zalm3(modlitba, "zjv15.htm", "CHVAL_ZJV15");
+		set_zalm(1, modlitba, "z110.htm", "ZALM110");
+		set_zalm(2, modlitba, "z112.htm", "ZALM112");
+		set_zalm(3, modlitba, "zjv15.htm", "CHVAL_ZJV15");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(modlitba, "z135.htm", "ZALM135_I");
-		_set_zalm2(modlitba, "z135.htm", "ZALM135_II");
-		_set_zalm3(modlitba, "1tim3.htm", "CHVAL_1TIM3");
+		set_zalm(1, modlitba, "z135.htm", "ZALM135_I");
+		set_zalm(2, modlitba, "z135.htm", "ZALM135_II");
+		set_zalm(3, modlitba, "1tim3.htm", "CHVAL_1TIM3");
 	}
 /* 2006-02-04: pridanÈ ûalmy na posv‰tnÈ ËÌtania a modlitbu cez deÚ */
 	else if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z72.htm", "ZALM72");
-		_set_zalm2(modlitba, "z96.htm", "ZALM96");
-		_set_zalm3(modlitba, "z97.htm", "ZALM97");
+		set_zalm(1, modlitba, "z72.htm", "ZALM72");
+		set_zalm(2, modlitba, "z96.htm", "ZALM96");
+		set_zalm(3, modlitba, "z97.htm", "ZALM97");
 	}
 	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
-		_set_zalm1(modlitba, "z47.htm", "ZALM47");
-		_set_zalm2(modlitba, "z86.htm", "ZALM86,1-10");
-		_set_zalm3(modlitba, "z98.htm", "ZALM98");
+		set_zalm(1, modlitba, "z47.htm", "ZALM47");
+		set_zalm(2, modlitba, "z86.htm", "ZALM86,1-10");
+		set_zalm(3, modlitba, "z98.htm", "ZALM98");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
@@ -2825,20 +2877,20 @@ void _set_zalmy_zjv(short int modlitba){
 void _set_zalmy_premenenie(short int modlitba){
 	Log("_set_zalmy_premenenie(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z110.htm", "ZALM110");
-		_set_zalm2(modlitba, "z121.htm", "ZALM121");
-		_set_zalm3(modlitba, "1tim3.htm", "CHVAL_1TIM3");
+		set_zalm(1, modlitba, "z110.htm", "ZALM110");
+		set_zalm(2, modlitba, "z121.htm", "ZALM121");
+		set_zalm(3, modlitba, "1tim3.htm", "CHVAL_1TIM3");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(modlitba, "z113.htm", "ZALM113");
-		_set_zalm2(modlitba, "z117.htm", "ZALM117");
-		_set_zalm3(modlitba, "zjv19.htm", "CHVAL_ZJV19");
+		set_zalm(1, modlitba, "z113.htm", "ZALM113");
+		set_zalm(2, modlitba, "z117.htm", "ZALM117");
+		set_zalm(3, modlitba, "zjv19.htm", "CHVAL_ZJV19");
 	}
 	else if(modlitba == MODL_POSV_CITANIE){
 		/* 2005-08-02: pridanÈ posv‰tnÈ ËÌtanie */
-		_set_zalm1(modlitba, "z84.htm", "ZALM84");
-		_set_zalm2(modlitba, "z97.htm", "ZALM97");
-		_set_zalm3(modlitba, "z99.htm", "ZALM99");
+		set_zalm(1, modlitba, "z84.htm", "ZALM84");
+		set_zalm(2, modlitba, "z97.htm", "ZALM97");
+		set_zalm(3, modlitba, "z99.htm", "ZALM99");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
@@ -2851,19 +2903,19 @@ void _set_zalmy_premenenie(short int modlitba){
 void _set_zalmy_sviatok_apostolov(short int modlitba){
 	Log("_set_zalmy_sviatok_apostolov(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z116.htm", "ZALM116,10-19");
-		_set_zalm2(modlitba, "z126.htm", "ZALM126");
-		_set_zalm3(modlitba, "ef1.htm", "CHVAL_EF1");
+		set_zalm(1, modlitba, "z116.htm", "ZALM116,10-19");
+		set_zalm(2, modlitba, "z126.htm", "ZALM126");
+		set_zalm(3, modlitba, "ef1.htm", "CHVAL_EF1");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(modlitba, "z117.htm", "ZALM117");
-		_set_zalm2(modlitba, "z147.htm", "ZALM147,12-20");
-		_set_zalm3(modlitba, "ef1.htm", "CHVAL_EF1");
+		set_zalm(1, modlitba, "z117.htm", "ZALM117");
+		set_zalm(2, modlitba, "z147.htm", "ZALM147,12-20");
+		set_zalm(3, modlitba, "ef1.htm", "CHVAL_EF1");
 	}
 	else if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z19.htm", "ZALM19,2-7");
-		_set_zalm2(modlitba, "z64.htm", "ZALM64");
-		_set_zalm3(modlitba, "z97.htm", "ZALM97");
+		set_zalm(1, modlitba, "z19.htm", "ZALM19,2-7");
+		set_zalm(2, modlitba, "z64.htm", "ZALM64");
+		set_zalm(3, modlitba, "z97.htm", "ZALM97");
 	}
 	/* 2008-06-30: doplnenÈ */
 	else if(modlitba == MODL_RANNE_CHVALY){
@@ -2875,19 +2927,19 @@ void _set_zalmy_sviatok_apostolov(short int modlitba){
 void _set_zalmy_sviatok_duch_past(short int modlitba){
 	Log("_set_zalmy_sviatok_duch_past(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z15.htm", "ZALM15");
-		_set_zalm2(modlitba, "z112.htm", "ZALM112");
-		_set_zalm3(modlitba, "zjv15.htm", "CHVAL_ZJV15");
+		set_zalm(1, modlitba, "z15.htm", "ZALM15");
+		set_zalm(2, modlitba, "z112.htm", "ZALM112");
+		set_zalm(3, modlitba, "zjv15.htm", "CHVAL_ZJV15");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(modlitba, "z113.htm", "ZALM113");
-		_set_zalm2(modlitba, "z146.htm", "ZALM146");
-		_set_zalm3(modlitba, "ef1.htm", "CHVAL_EF1");
+		set_zalm(1, modlitba, "z113.htm", "ZALM113");
+		set_zalm(2, modlitba, "z146.htm", "ZALM146");
+		set_zalm(3, modlitba, "ef1.htm", "CHVAL_EF1");
 	}
 	else if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z21.htm", "ZALM21");
-		_set_zalm2(modlitba, "z92.htm", "ZALM92_I");
-		_set_zalm3(modlitba, "z92.htm", "ZALM92_II");
+		set_zalm(1, modlitba, "z21.htm", "ZALM21");
+		set_zalm(2, modlitba, "z92.htm", "ZALM92_I");
+		set_zalm(3, modlitba, "z92.htm", "ZALM92_II");
 	}
 	Log("_set_zalmy_sviatok_duch_past(%s) -- end\n", nazov_modlitby(modlitba));
 }
@@ -2895,19 +2947,19 @@ void _set_zalmy_sviatok_duch_past(short int modlitba){
 void _set_zalmy_sviatok_panien(short int modlitba){
 	Log("_set_zalmy_sviatok_panien(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z122.htm", "ZALM122");
-		_set_zalm2(modlitba, "z127.htm", "ZALM127");
-		_set_zalm3(modlitba, "ef1.htm", "CHVAL_EF1");
+		set_zalm(1, modlitba, "z122.htm", "ZALM122");
+		set_zalm(2, modlitba, "z127.htm", "ZALM127");
+		set_zalm(3, modlitba, "ef1.htm", "CHVAL_EF1");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(modlitba, "z113.htm", "ZALM113");
-		_set_zalm2(modlitba, "z147.htm", "ZALM147,12-20");
-		_set_zalm3(modlitba, "ef1.htm", "CHVAL_EF1");
+		set_zalm(1, modlitba, "z113.htm", "ZALM113");
+		set_zalm(2, modlitba, "z147.htm", "ZALM147,12-20");
+		set_zalm(3, modlitba, "ef1.htm", "CHVAL_EF1");
 	}
 	else if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z19.htm", "ZALM19,2-7");
-		_set_zalm2(modlitba, "z45.htm", "ZALM45_I");
-		_set_zalm3(modlitba, "z45.htm", "ZALM45_II");
+		set_zalm(1, modlitba, "z19.htm", "ZALM19,2-7");
+		set_zalm(2, modlitba, "z45.htm", "ZALM45_I");
+		set_zalm(3, modlitba, "z45.htm", "ZALM45_II");
 	}
 	Log("_set_zalmy_sviatok_panien(%s) -- end\n", nazov_modlitby(modlitba));
 }
@@ -2921,9 +2973,9 @@ void _set_zalmy_sviatok_marie(short int modlitba){
 		_set_zalmy_sviatok_panien(modlitba);
 	}
 	else if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z24.htm", "ZALM24");
-		_set_zalm2(modlitba, "z46.htm", "ZALM46");
-		_set_zalm3(modlitba, "z87.htm", "ZALM87");
+		set_zalm(1, modlitba, "z24.htm", "ZALM24");
+		set_zalm(2, modlitba, "z46.htm", "ZALM46");
+		set_zalm(3, modlitba, "z87.htm", "ZALM87");
 	}
 	Log("_set_zalmy_sviatok_marie(%s) -- end\n", nazov_modlitby(modlitba));
 }
@@ -2935,9 +2987,9 @@ void _set_zalmy_sviatok_jana_ap(short int modlitba){
 	Log("_set_zalmy_sviatok_jana_ap(%s) -- begin\n", nazov_modlitby(modlitba));
 	/* 2006-02-04: nem· ani prvÈ veöpery ani "norm·lne" veöpery */
 	if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z19.htm", "ZALM19,2-7");
-		_set_zalm2(modlitba, "z64.htm", "ZALM64");
-		_set_zalm3(modlitba, "z99.htm", "ZALM99");
+		set_zalm(1, modlitba, "z19.htm", "ZALM19,2-7");
+		set_zalm(2, modlitba, "z64.htm", "ZALM64");
+		set_zalm(3, modlitba, "z99.htm", "ZALM99");
 	}
 	Log("_set_zalmy_sviatok_jana_ap(%s) -- end\n", nazov_modlitby(modlitba));
 }
@@ -2945,26 +2997,26 @@ void _set_zalmy_sviatok_jana_ap(short int modlitba){
 void _set_zalmy_sviatok_muc(short int modlitba){
 	Log("_set_zalmy_sviatok_muc(%s) (pre jednÈho muËenÌka resp. spoloËnÈ) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z116.htm", "ZALM116,1-9");
-		_set_zalm2(modlitba, "z116.htm", "ZALM116,10-19");
-		_set_zalm3(modlitba, "zjv4_5.htm", "CHVAL_ZJV45");
+		set_zalm(1, modlitba, "z116.htm", "ZALM116,1-9");
+		set_zalm(2, modlitba, "z116.htm", "ZALM116,10-19");
+		set_zalm(3, modlitba, "zjv4_5.htm", "CHVAL_ZJV45");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
 		/* 2003-08-13, nebolo v z118.htm anchor ZALM118_I resp. II;
 		 * je tam ine rozdelenie ako pre ucely modlitby cez den
 		 * (napr. nedela 1. tyzdna zaltara), preto som to prerobil
 		 */
-		_set_zalm1(modlitba, "z118.htm", "ZALM118_muc_I");
-		_set_zalm2(modlitba, "z118.htm", "ZALM118_muc_II");
-		_set_zalm3(modlitba, "1pt2.htm", "CHVAL_1PT2");
+		set_zalm(1, modlitba, "z118.htm", "ZALM118_muc_I");
+		set_zalm(2, modlitba, "z118.htm", "ZALM118_muc_II");
+		set_zalm(3, modlitba, "1pt2.htm", "CHVAL_1PT2");
 	}
 	else if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z2.htm", "ZALM2");
+		set_zalm(1, modlitba, "z2.htm", "ZALM2");
 		/* viacero muË.:  ZALM33_I, ZALM33_2 - rieöenÌ osobitne
 		 * jeden muËenÌk: ZALM11, ZALM17
 		 */
-		_set_zalm2(modlitba, "z11.htm", "ZALM11");
-		_set_zalm3(modlitba, "z17.htm", "ZALM17");
+		set_zalm(2, modlitba, "z11.htm", "ZALM11");
+		set_zalm(3, modlitba, "z17.htm", "ZALM17");
 	}
 	Log("_set_zalmy_sviatok_muc(%s) (pre jednÈho muËenÌka resp. spoloËnÈ) -- end\n", nazov_modlitby(modlitba));
 }
@@ -2977,8 +3029,8 @@ void _set_zalmy_sviatok_muc(short int modlitba, short int su_viaceri){
 		/* viacero muË.:  ZALM33_I, ZALM33_2
 		 * jeden muËenÌk: ZALM11, ZALM17 - rieöen˝ vyööie
 		 */
-		_set_zalm2(modlitba, "z33.htm", "ZALM33_I");
-		_set_zalm3(modlitba, "z33.htm", "ZALM33_II");
+		set_zalm(2, modlitba, "z33.htm", "ZALM33_I");
+		set_zalm(3, modlitba, "z33.htm", "ZALM33_II");
 	}
 	Log("_set_zalmy_sviatok_muc(%s) (pre viacer˝ch muËenÌkov) -- end\n", nazov_modlitby(modlitba));
 }
@@ -2987,20 +3039,20 @@ void _set_zalmy_sviatok_krstu(short int modlitba){
 	Log("_set_zalmy_sviatok_krstu(%s) -- begin\n", nazov_modlitby(modlitba));
 	/* 2007-01-11, prvÈ veöpery a veöpery s˙ rovnakÈ ako na sviatok Zjavenia P·na */
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z110.htm", "ZALM110");
-		_set_zalm2(modlitba, "z112.htm", "ZALM112");
-		_set_zalm3(modlitba, "zjv15.htm", "CHVAL_ZJV15");
+		set_zalm(1, modlitba, "z110.htm", "ZALM110");
+		set_zalm(2, modlitba, "z112.htm", "ZALM112");
+		set_zalm(3, modlitba, "zjv15.htm", "CHVAL_ZJV15");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(modlitba, "z135.htm", "ZALM135_I");
-		_set_zalm2(modlitba, "z135.htm", "ZALM135_II");
-		_set_zalm3(modlitba, "1tim3.htm", "CHVAL_1TIM3");
+		set_zalm(1, modlitba, "z135.htm", "ZALM135_I");
+		set_zalm(2, modlitba, "z135.htm", "ZALM135_II");
+		set_zalm(3, modlitba, "1tim3.htm", "CHVAL_1TIM3");
 	}
 	else if(modlitba == MODL_POSV_CITANIE){
 		/* 2006-01-20: pridanÈ */
-		_set_zalm1(modlitba, "z29.htm", "ZALM29");
-		_set_zalm2(modlitba, "z66.htm", "ZALM66_I");
-		_set_zalm3(modlitba, "z66.htm", "ZALM66_II");
+		set_zalm(1, modlitba, "z29.htm", "ZALM29");
+		set_zalm(2, modlitba, "z66.htm", "ZALM66_I");
+		set_zalm(3, modlitba, "z66.htm", "ZALM66_II");
 	}
 	/* 2006-01-24: doplnenÈ ûalmy pre modlitbu cez deÚ - overiù, Ëi s˙ naozaj z nedele 1. t˝ûdÚa */
 	/* 2007-01-11: pre mcd ûalmy z nedele 2. t˝ûdÚa (7.1.) alebo z nedele 3. t˝ûdÚa podæa roka */
@@ -3021,19 +3073,19 @@ void _set_zalmy_sviatok_krstu(short int modlitba){
 void _set_zalmy_sviatok_obetovania(short int modlitba){
 	Log("_set_zalmy_sviatok_obetovania(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z110.htm", "ZALM110");
-		_set_zalm2(modlitba, "z130.htm", "ZALM130");
-		_set_zalm3(modlitba, "kol1.htm", "CHVAL_KOL1");
+		set_zalm(1, modlitba, "z110.htm", "ZALM110");
+		set_zalm(2, modlitba, "z130.htm", "ZALM130");
+		set_zalm(3, modlitba, "kol1.htm", "CHVAL_KOL1");
 	}
 	else if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z2.htm", "ZALM2");
-		_set_zalm2(modlitba, "z19.htm", "ZALM19,2-7");
-		_set_zalm3(modlitba, "z45.htm", "ZALM45");
+		set_zalm(1, modlitba, "z2.htm", "ZALM2");
+		set_zalm(2, modlitba, "z19.htm", "ZALM19,2-7");
+		set_zalm(3, modlitba, "z45.htm", "ZALM45");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(modlitba, "z113.htm", "ZALM113");
-		_set_zalm2(modlitba, "z147.htm", "ZALM147,12-20");
-		_set_zalm3(modlitba, "flp2.htm", "CHVAL_FLP2");
+		set_zalm(1, modlitba, "z113.htm", "ZALM113");
+		set_zalm(2, modlitba, "z147.htm", "ZALM147,12-20");
+		set_zalm(3, modlitba, "flp2.htm", "CHVAL_FLP2");
 	}
 	Log("_set_zalmy_sviatok_obetovania(%s) -- end\n", nazov_modlitby(modlitba));
 }
@@ -3042,34 +3094,34 @@ void _set_zalmy_sviatok_obetovania(short int modlitba){
 void _set_zalmy_slavnost_Cyrila_a_Metoda(short int modlitba){
 	Log("_set_zalmy_slavnost_Cyrila_a_Metoda(%s) -- begin\n", nazov_modlitby(modlitba));
 	if((modlitba == MODL_VESPERY) || (modlitba == MODL_PRVE_VESPERY)){
-		_set_zalm1(modlitba, "z117.htm", "ZALM117");
-		_set_zalm2(modlitba, "z146.htm", "ZALM146");
-		_set_zalm3(modlitba, "ef1.htm", "CHVAL_EF1");
+		set_zalm(1, modlitba, "z117.htm", "ZALM117");
+		set_zalm(2, modlitba, "z146.htm", "ZALM146");
+		set_zalm(3, modlitba, "ef1.htm", "CHVAL_EF1");
 	}
 	else if(modlitba == MODL_POSV_CITANIE){
-		_set_zalm1(modlitba, "z19.htm", "ZALM19,2-7");
-		_set_zalm2(modlitba, "z33.htm", "ZALM33_I");
-		_set_zalm3(modlitba, "z33.htm", "ZALM33_II");
+		set_zalm(1, modlitba, "z19.htm", "ZALM19,2-7");
+		set_zalm(2, modlitba, "z33.htm", "ZALM33_I");
+		set_zalm(3, modlitba, "z33.htm", "ZALM33_II");
 	}
 	Log("_set_zalmy_slavnost_Cyrila_a_Metoda(%s) -- end\n", nazov_modlitby(modlitba));
 }
 void _set_zalmy_sv_kriz(short int modlitba){
 	Log("_set_zalmy_sv_kriz(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z110.htm", "ZALM110");
-		_set_zalm2(modlitba, "z116.htm", "ZALM116,10-19");
-		_set_zalm3(modlitba, "zjv4_5.htm", "CHVAL_ZJV45");
+		set_zalm(1, modlitba, "z110.htm", "ZALM110");
+		set_zalm(2, modlitba, "z116.htm", "ZALM116,10-19");
+		set_zalm(3, modlitba, "zjv4_5.htm", "CHVAL_ZJV45");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(modlitba, "z147.htm", "ZALM147_I");
-		_set_zalm2(modlitba, "z147.htm", "ZALM147_II");
-		_set_zalm3(modlitba, "flp2.htm", "CHVAL_FLP2");
+		set_zalm(1, modlitba, "z147.htm", "ZALM147_I");
+		set_zalm(2, modlitba, "z147.htm", "ZALM147_II");
+		set_zalm(3, modlitba, "flp2.htm", "CHVAL_FLP2");
 	}
 	else if(modlitba == MODL_POSV_CITANIE){
 		/* 2005-08-24: PridanÈ */
-		_set_zalm1(modlitba, "z2.htm", "ZALM2");
-		_set_zalm2(modlitba, "z8.htm", "ZALM8");
-		_set_zalm3(modlitba, "z96.htm", "ZALM96");
+		set_zalm(1, modlitba, "z2.htm", "ZALM2");
+		set_zalm(2, modlitba, "z8.htm", "ZALM8");
+		set_zalm(3, modlitba, "z96.htm", "ZALM96");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
@@ -3080,15 +3132,15 @@ void _set_zalmy_sv_kriz(short int modlitba){
 void _set_zalmy_archanjelov(short int modlitba){
 	Log("_set_zalmy_archanjelov(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z8.htm", "ZALM8");
-		_set_zalm2(modlitba, "z138.htm", "ZALM138");
-		_set_zalm3(modlitba, "kol1.htm", "CHVAL_KOL1");
+		set_zalm(1, modlitba, "z8.htm", "ZALM8");
+		set_zalm(2, modlitba, "z138.htm", "ZALM138");
+		set_zalm(3, modlitba, "kol1.htm", "CHVAL_KOL1");
 	}
 	else if(modlitba == MODL_POSV_CITANIE){
 		/* 2005-10-13: PridanÈ */
-		_set_zalm1(modlitba, "z97.htm", "ZALM97");
-		_set_zalm2(modlitba, "z103.htm", "ZALM103_I_ANJ");
-		_set_zalm3(modlitba, "z103.htm", "ZALM103_II_ANJ");
+		set_zalm(1, modlitba, "z97.htm", "ZALM97");
+		set_zalm(2, modlitba, "z103.htm", "ZALM103_I_ANJ");
+		set_zalm(3, modlitba, "z103.htm", "ZALM103_II_ANJ");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
@@ -3099,9 +3151,9 @@ void _set_zalmy_archanjelov(short int modlitba){
 void _set_zalmy_anjelov_strazcov(short int modlitba){
 	Log("_set_zalmy_anjelov_strazcov(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z34.htm", "ZALM34_I");
-		_set_zalm2(modlitba, "z34.htm", "ZALM34_II");
-		_set_zalm3(modlitba, "zjv11.htm", "CHVAL_ZJV11");
+		set_zalm(1, modlitba, "z34.htm", "ZALM34_I");
+		set_zalm(2, modlitba, "z34.htm", "ZALM34_II");
+		set_zalm(3, modlitba, "zjv11.htm", "CHVAL_ZJV11");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
@@ -3111,20 +3163,20 @@ void _set_zalmy_anjelov_strazcov(short int modlitba){
 void _set_zalmy_vsetkych_svatych(short int modlitba){
 	Log("_set_zalmy_vsetkych_svatych(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
-		_set_zalm1(modlitba, "z110.htm", "ZALM110");
-		_set_zalm2(modlitba, "z116.htm", "ZALM116,10-19");
-		_set_zalm3(modlitba, "zjv4_5.htm", "CHVAL_ZJV45");
+		set_zalm(1, modlitba, "z110.htm", "ZALM110");
+		set_zalm(2, modlitba, "z116.htm", "ZALM116,10-19");
+		set_zalm(3, modlitba, "zjv4_5.htm", "CHVAL_ZJV45");
 	}
 	else if(modlitba == MODL_PRVE_VESPERY){
-		_set_zalm1(modlitba, "z113.htm", "ZALM113");
-		_set_zalm2(modlitba, "z147.htm", "ZALM147,12-20");
-		_set_zalm3(modlitba, "zjv19.htm", "CHVAL_ZJV19");
+		set_zalm(1, modlitba, "z113.htm", "ZALM113");
+		set_zalm(2, modlitba, "z147.htm", "ZALM147,12-20");
+		set_zalm(3, modlitba, "zjv19.htm", "CHVAL_ZJV19");
 	}
 	else if(modlitba == MODL_POSV_CITANIE){
 		/* 2005-10-24: PridanÈ */
-		_set_zalm1(modlitba, "z8.htm", "ZALM8");
-		_set_zalm2(modlitba, "z15.htm", "ZALM15");
-		_set_zalm3(modlitba, "z16.htm", "ZALM16");
+		set_zalm(1, modlitba, "z8.htm", "ZALM8");
+		set_zalm(2, modlitba, "z15.htm", "ZALM15");
+		set_zalm(3, modlitba, "z16.htm", "ZALM16");
 	}
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
@@ -3317,6 +3369,8 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 	  *
 	  * 2008-10-09: doplnen· pre Ëesk˝ brevi·¯ sl·vnosù sv. v·clava
 	  *
+	  * 2009-01-06: doplnen· pozn·mka k Premeneniu P·na
+	  *
 	  */
 	Log("najprv treba skontrolovaù, Ëi nejde o deÚ [pÙvodne nedeæu], na ktor˙ pripadol sviatok premenenia p·na a podobnÈ... (ak ·no, nenastavuj niË)\n");
 	if(
@@ -3330,22 +3384,23 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 		){
 			Log("premenenie p·na || petra a pavla || pov˝öenie sv. krÌûa || vöetk˝ch sv‰t˝ch || nanebovzatia PM...\n");
 			if((_global_modlitba != MODL_PREDPOLUDNIM) && (_global_modlitba != MODL_NAPOLUDNIE) && (_global_modlitba != MODL_POPOLUDNI)){
-				Log("keÔûe sa nejedn· o modlitbu cez deÚ, preskakujeme nastavenia (vöetky boli nastavenÈ z vlastnej Ëasti)...\n");
+				Log("keÔûe nejde o modlitbu cez deÚ, preskakujeme nastavenia (vöetky boli nastavenÈ z vlastnej Ëasti)...\n");
+				/* 2009-01-06: pre Premenenie P·na ch˝balo nastavenie kompletÛria vo vlastnej Ëasti, preto sa d·valo chybne; doplnenÈ na prÌsluönom mieste */
 				return;
 			}
 			else 
 				if(_global_den.denvt == DEN_NEDELA){
-					Log("keÔûe sa jedn· o modlitbu cez deÚ, nastavujeme len ûalmy z nedele pre MCD a preskakujeme ostatnÈ nastavenia (vöetky ostatnÈ boli nastavenÈ z vlastnej Ëasti)...\n");
+					Log("keÔûe ide o modlitbu cez deÚ, nastavujeme len ûalmy z nedele pre MCD a preskakujeme ostatnÈ nastavenia (vöetky ostatnÈ boli nastavenÈ z vlastnej Ëasti)...\n");
 					zaltar_zvazok(den, tyzzal, _global_den.litobd, ZALTAR_IBA_ZALMY_HYMNUS_MCD);
 					return;
 				}
 				else{
-					Log("keÔûe sa jedn· o modlitbu cez deÚ MIMO nedele, nastavujeme vöetky Ëasti ak nasleduje - zo dÚa...\n");
+					Log("keÔûe ide o modlitbu cez deÚ MIMO nedele, nastavujeme vöetky Ëasti ak nasleduje - zo dÚa...\n");
 					/* ûiaden return :) */
 				}
 	}
 	else{
-		Log("NEjedn· sa o: premenenie p·na || petra a pavla || pov˝öenie sv. krÌûa || vöetk˝ch sv‰t˝ch...\n");
+		Log("NEjde o: premenenie p·na || petra a pavla || pov˝öenie sv. krÌûa || vöetk˝ch sv‰t˝ch...\n");
 	}
 
 	Log("teraz spustÌme zaltar_zvazok(); - pÙvodne sa p˙öùala s dvoma parametrami, pridan˝ parameter pre zv‰zok brevi·ra (vol·me s hodnotou ZALTAR_VSETKO)\n");
@@ -4186,10 +4241,13 @@ label_24_DEC:
 /* switch(litobd), case OBD_ADVENTNE_II -- end ------------------------------------------------ */
 
 /* panny marie bohorodicky */
-#define _bohorod_hymnus(vlastny_anchor) {\
-	c = pismenko_modlitby(modlitba);\
+/* 2009-01-06: pre hymnus tu bolo:
 	if(modlitba == MODL_PRVE_VESPERY)\
 		c = pismenko_modlitby(MODL_VESPERY);\
+ * avöak pre Ëesk˝ brevi·¯ je hymnus na 1. neöpory odliön˝ od toho na 2. neöpory, preto som to odstr·nil
+ */
+#define _bohorod_hymnus(vlastny_anchor) {\
+	c = pismenko_modlitby(modlitba);\
 	sprintf(_anchor, "%s_%c%s", vlastny_anchor, c, ANCHOR_HYMNUS);\
 	if(modlitba == MODL_POSV_CITANIE){\
 		_set_hymnus(modlitba, _file_pc, _anchor);\
@@ -4478,6 +4536,7 @@ label_24_DEC:
 
 			if((_global_den.den == 26) || (_global_den.den == 27) || (_global_den.den == 28)){
 				/* maju vlastnu cast zo sv. jana apostola, sv. stefana a sv. neviniatok */
+				/* 2009-01-06: modlitba cez deÚ je z okt·vy narodenia P·na, preto bola vyÚat· z "else" vetvy aû za tento "if" */
 			}
 			else{
 				/* invitatÛrium; 2007-11-13 */
@@ -4506,29 +4565,31 @@ label_24_DEC:
 				_vian1_citanie2;
 				_vian1_modlitba;
 
-				/* modlitba cez deÚ, pridanÈ 2006-02-05 */
-				modlitba = MODL_PREDPOLUDNIM;
-				_vian1_hymnus; /* hymnus */
-				_vian1_mcd_antifony; /* antifÛny */
-				_vian1_kcitanie; /* kr·tke ËÌtanie */
-				_vian1_kresponz; /* kr·tke responzÛrium */
-				_vian1_modlitba; /* modlitba ako na rannÈ chv·ly */
-
-				modlitba = MODL_NAPOLUDNIE;
-				_vian1_hymnus; /* hymnus */
-				_vian1_mcd_antifony; /* antifÛny */
-				_vian1_kcitanie; /* kr·tke ËÌtanie */
-				_vian1_kresponz; /* kr·tke responzÛrium */
-				_vian1_modlitba; /* modlitba ako na rannÈ chv·ly */
-
-				modlitba = MODL_POPOLUDNI;
-				_vian1_hymnus; /* hymnus */
-				_vian1_mcd_antifony; /* antifÛny */
-				_vian1_kcitanie; /* kr·tke ËÌtanie */
-				_vian1_kresponz; /* kr·tke responzÛrium */
-				_vian1_modlitba; /* modlitba ako na rannÈ chv·ly */
-
+				/* 2009-01-06: modlitba cez deÚ je z okt·vy narodenia P·na, preto bola vyÚat· z "else" vetvy aû za tento "if" */
 			}
+
+			/* modlitba cez deÚ, pridanÈ 2006-02-05 */
+			/* 2009-01-06: presunutÈ sem z "else" vetvy */
+			modlitba = MODL_PREDPOLUDNIM;
+			_vian1_hymnus; /* hymnus */
+			_vian1_mcd_antifony; /* antifÛny */
+			_vian1_kcitanie; /* kr·tke ËÌtanie */
+			_vian1_kresponz; /* kr·tke responzÛrium */
+			_vian1_modlitba; /* modlitba ako na rannÈ chv·ly */
+
+			modlitba = MODL_NAPOLUDNIE;
+			_vian1_hymnus; /* hymnus */
+			_vian1_mcd_antifony; /* antifÛny */
+			_vian1_kcitanie; /* kr·tke ËÌtanie */
+			_vian1_kresponz; /* kr·tke responzÛrium */
+			_vian1_modlitba; /* modlitba ako na rannÈ chv·ly */
+
+			modlitba = MODL_POPOLUDNI;
+			_vian1_hymnus; /* hymnus */
+			_vian1_mcd_antifony; /* antifÛny */
+			_vian1_kcitanie; /* kr·tke ËÌtanie */
+			_vian1_kresponz; /* kr·tke responzÛrium */
+			_vian1_modlitba; /* modlitba ako na rannÈ chv·ly */
 
 			/* vespery */
 			modlitba = MODL_VESPERY;
@@ -13490,6 +13551,9 @@ label_25_MAR:
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_premenenie(modlitba);
+
+						modlitba = MODL_KOMPLETORIUM; /* 2009-01-06: keÔûe v liturgicke_obdobie() bolo odvetvenÈ, niË sa pre kompletÛrium nenastavovalo - doplnenÈ */
+						zaltar_kompletorium(_global_den.denvt, _global_den.litobd /* OBD_CEZ_ROK */, ZALTAR_VSETKO /* specialne */);
 
 						if(poradie_svaty != 0) break;
 					}

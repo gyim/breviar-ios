@@ -119,6 +119,7 @@
 /*   2008-12-20a.D. | úprava init_global_string() pre nedele niekt. období */
 /*                  - _export_rozbor_dna_buttons(): komplet.+nunk dimittis */
 /*   2009-01-05a.D. | úprava _export_rozbor_dna() pre všedné dni (poradie) */
+/*   2009-01-06a.D. | Te Deum je pre posv.èít. aj v oktáve narodenia Pána  */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -1222,8 +1223,9 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
  * 2005-11-20: Opravené, lebo sme kontrolovali den, a nie denvt :)
  * 2006-10-11: Doplnené (resp. revidované) invitatórium a kompletórium
  * 2007-04-10: Doplnené: Te Deum je vo ve¾konoènej oktáve; nie je poèas pôstu (ani len pre nedele)
+ * 2009-01-06: Doplnené: Te Deum je aj v oktáve narodenia Pána (vianoèná oktáva)
  */
-#define je_tedeum (type == MODL_POSV_CITANIE) && (((_global_den.denvt == DEN_NEDELA) && (_global_den.litobd != OBD_POSTNE_I) && (_global_den.litobd != OBD_POSTNE_II_VELKY_TYZDEN)) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA))
+#define je_tedeum (type == MODL_POSV_CITANIE) && (((_global_den.denvt == DEN_NEDELA) && (_global_den.litobd != OBD_POSTNE_I) && (_global_den.litobd != OBD_POSTNE_II_VELKY_TYZDEN)) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || (_global_den.litobd == OBD_OKTAVA_NARODENIA))
 
 /* 2007-11-20: doplnené @ifdef EXPORT_HTML_SPECIALS */
 void interpretParameter(short int type, char *paramname){
