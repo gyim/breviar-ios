@@ -79,6 +79,7 @@
 /*                    zadefinované "_vlastne_slavenie_"                 */
 /*                  - dokonèenie invitatória pre liturgické obdobia     */
 /*   2007-11-20a.D. | dokonèenie invitatória pre spoloèné èasti svätých */
+/*   2007-12-03a.D. | antifóna na magnifikat pre 4. adventnú nede¾u-opr.*/
 /*                                                                      */
 /*                                                                      */
 /* notes |                                                              */
@@ -3555,34 +3556,6 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 			_adv2_prosby; /* prosby */
 			_adv2_modlitba; /* modlitba - rovnaka pre rano i vecer */
 
-			/* prve vespery */
-			/* antifony */
-			modlitba = MODL_PRVE_VESPERY;
-			/* hymnus - rovnaky ako vespery pre kazdy den */
-			sprintf(_anchor, "%s%c_%s",
-				nazov_OBD[litobd],
-				pismenko_modlitby(MODL_VESPERY),
-				ANCHOR_HYMNUS);
-			_set_hymnus(modlitba, _file, _anchor);
-			set_LOG_litobd;
-			/* dalsie zavisia od datumu (17. -- 24. december) */
-			/* magnifikat */
-			sprintf(_anchor, "%s%d%c_%s",
-				nazov_OBD[litobd],
-				_global_den.den,
-				pismenko_modlitby(MODL_VESPERY),
-				ANCHOR_MAGNIFIKAT);
-			_set_benediktus(modlitba, _file, _anchor);
-			set_LOG_litobd;
-			/* prosby */
-			sprintf(_anchor, "%s%d%c_%s",
-				nazov_OBD[litobd],
-				_global_den.den,
-				pismenko_modlitby(MODL_VESPERY),
-				ANCHOR_PROSBY);
-			_set_prosby(modlitba, _file, _anchor);
-			set_LOG_litobd;
-
 			/* modlitba cez deò, pridané 2005-12-17 trochu pod¾a ADV.I. */
 			modlitba = MODL_PREDPOLUDNIM;
 			_adv_hymnus; /* hymnus */
@@ -3650,6 +3623,34 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 			 * _file == nazov_obd_htm[OBD_ADVENTNE_I]
 			 * _anchor == napr. ADV13NEr_ANT1 */
 			if(den == DEN_NEDELA){
+
+				/* prvé vešpery - presunuté len pre nede¾u, 2007-12-03 */
+				modlitba = MODL_PRVE_VESPERY;
+				/* hymnus - rovnaky ako vespery pre kazdy den */
+				sprintf(_anchor, "%s%c_%s",
+					nazov_OBD[litobd],
+					pismenko_modlitby(MODL_VESPERY),
+					ANCHOR_HYMNUS);
+				_set_hymnus(modlitba, _file, _anchor);
+				set_LOG_litobd;
+				/* dalsie zavisia od datumu (17. -- 24. december) */
+				/* magnifikat - 2007-12-03: upravená tak, aby pre 18.-24. decembra pre prvé vešpery bola vždy z predošlého dòa */
+				sprintf(_anchor, "%s%d%c_%s",
+					nazov_OBD[litobd],
+					(_global_den.den > 17)? _global_den.den - 1: _global_den.den,
+					pismenko_modlitby(MODL_VESPERY),
+					ANCHOR_MAGNIFIKAT);
+				_set_benediktus(modlitba, _file, _anchor);
+				set_LOG_litobd;
+				/* prosby */
+				sprintf(_anchor, "%s%d%c_%s",
+					nazov_OBD[litobd],
+					_global_den.den,
+					pismenko_modlitby(MODL_VESPERY),
+					ANCHOR_PROSBY);
+				_set_prosby(modlitba, _file, _anchor);
+				set_LOG_litobd;
+
 				if(tyzden == 3){/* jedine 17. decembra */
 
 					litobd = OBD_ADVENTNE_I;
@@ -3670,8 +3671,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 					_adv1_antifony; /* antifony */
 					/* kratke citanie - rovnake pre vsetky adventne nedele */
 					_adv1_kcitanie; /* pozor, používame z adv. obdobia I. - 2006-01-27 */
-					/* modlitba */
-					_adv1_modlitba;
+					_adv1_modlitba; /* modlitba */
 				
 					/* ranne chvaly */
 					/* kratke responzorium - rovnake pre vsetky nedele */
@@ -3682,17 +3682,14 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 					_adv1_antifony; /* antifony */
 					/* kratke citanie - rovnake pre vsetky adventne nedele */
 					_adv1_kcitanie; /* pozor, používame z adv. obdobia I. - 2006-01-27 */
-					/* modlitba */
-					_adv1_modlitba;
+					_adv1_modlitba; /* modlitba */
 				
 					/* druhe vespery */
-					/* antifony */
 					modlitba = MODL_VESPERY;
-					_adv1_antifony;
+					_adv1_antifony; /* antifóny */
 					/* kratke citanie - rovnake pre vsetky adventne nedele */
 					_adv1_kcitanie; /* pozor, používame z adv. obdobia I. - 2006-01-27 */
-					/* modlitba */
-					_adv1_modlitba;
+					_adv1_modlitba; /* modlitba */
 
 					/* modlitba cez deò, pridané 2005-12-17 pod¾a 2005-11-20 (ADV.I.) okrem hymnov */
 					modlitba = MODL_PREDPOLUDNIM;
