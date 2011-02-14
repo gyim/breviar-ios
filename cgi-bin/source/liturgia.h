@@ -563,6 +563,11 @@ typedef struct dm _struct_dm;
 #define OBD_OKTAVA_NARODENIA      11 /* narodenie Pana -- 1. jan. */
 
 #define	POCET_OBDOBI	11
+
+/* zv‰zok brevi·ra - zv‰zok, v ktorom sa nach·dza danÈ liturgickÈ obdobie; doplnenÈ 2007-12-20 */
+const short int zvazok_breviara[POCET_OBDOBI + 1] = 
+{1, 1, 1, 1, 3, 2, 2, 2, 2, 2, 2, 1}; // nepotrebujeme rozlÌöiù 3. a 4. zv‰zok, ktorÈ obidva obsahuj˙ OBD_CEZ_ROK
+
 /* nazov_obdobia: string pre nazov liturgickeho obdobia */
 //extern const char *nazov_obdobia[];
 extern const char *nazov_obdobia_jazyk[POCET_OBDOBI + 1][POCET_JAZYKOV + 1];

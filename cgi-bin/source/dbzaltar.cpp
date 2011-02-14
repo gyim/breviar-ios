@@ -888,6 +888,12 @@ void set_hymnus(short int den, short int tyzzal, short int modlitba){
 		set_LOG_litobd_pc;\
 }
 
+/* 2007-12-20: doplnen· podmienka pre niektorÈ öpeciality v ûalt·ri: doteraz bolo "zvazok != 2" resp. "zvazok == 2"
+ * pouûÌva sa v set_antifony() a eöte v zaltar_zvazok()
+ * doplnenÈ po upozornenÌ ötudenta teolÛgie Standu <brozkas@post.cz>, preposlal p. Franta
+ */
+#define je_odlisny_zaltar ((zvazok == 1) || (zvazok == 2))
+
 void set_antifony(short int den, short int tyzzal, short int zvazok, short int modlitba){
 	/* 2006-01-24: pÙvodn· podmienka zosilnen·, keÔûe pre obyËajnÈ dni veækonoËnÈho 
 	 * obdobia (2.-7. t˝ûdeÚ) moûno braù antifÛny pre posv‰tnÈ ËÌtania z cezroËnÈho obdobia
@@ -899,7 +905,6 @@ void set_antifony(short int den, short int tyzzal, short int zvazok, short int m
 	 * aj pre nedeænÈ posv. ËÌtanie s˙ antifÛny v file_name_litobd_pc(OBD_CEZ_ROK);
 	 * 
 	 */
-
 	short int povodny_tyzzal;
 	povodny_tyzzal = tyzzal; /* 2006-01-24: uloûÌme pÙvodn˙ hodnotu */
 
@@ -1025,7 +1030,7 @@ void set_antifony(short int den, short int tyzzal, short int zvazok, short int m
 		}
 	}
 	/* 2006-01-24: napokon upravÌme niektorÈ antifÛny pre II. zv‰zok, posv‰tnÈ ËÌtanie */
-	if((zvazok == 2) && (modlitba == MODL_POSV_CITANIE)){
+	if((je_odlisny_zaltar) && (modlitba == MODL_POSV_CITANIE)){
 		/* jedn· sa o nasledovnÈ:
 		 * 1. t˝ûdeÚ: sobota
 		 * 2. t˝ûdeÚ: sobota
@@ -1391,22 +1396,26 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 	 *             pridan˝ parameter obdobie
 	 * 2006-02-07: dodefinovanÈ rÙzne spr·vanie funkcie zaltar_zvazok();
 	 *             podæa pridanÈho parametra ZALTAR_VSETKO alebo ZALTAR_IBA_ZALMY
+	 * 2007-12-20: dodefinovanÈ "je_odlisny_zaltar" - doteraz bolo "zvazok != 2" resp. "zvazok == 2"
 	 */
 	Log("-- zaltar_zvazok(%d, %d, %d, %d) -- zaciatok\n", den, tyzzal, obdobie, specialne);
-	short int zvazok;
-	if((obdobie == OBD_VELKONOCNA_OKTAVA) 
-	|| (obdobie == OBD_VELKONOCNE_TROJDNIE) 
-	|| (obdobie == OBD_VELKONOCNE_I) 
-	|| (obdobie == OBD_VELKONOCNE_II) 
-	|| (obdobie == OBD_POSTNE_I) 
-	|| (obdobie == OBD_POSTNE_II_VELKY_TYZDEN) 
-	){
-		zvazok = 2;
-	}
-	else{
-		zvazok = 0;
-	}
-
+	short int zvazok = zvazok_breviara[obdobie];
+	/* 2007-12-20: definovanÈ pole, ktorÈ urËuje, v ktorom zv‰zku brevi·ra sa danÈ obdobie nach·dza;
+	 * kedysi tu bolo toto:
+		if((obdobie == OBD_VELKONOCNA_OKTAVA) 
+		|| (obdobie == OBD_VELKONOCNE_TROJDNIE) 
+		|| (obdobie == OBD_VELKONOCNE_I) 
+		|| (obdobie == OBD_VELKONOCNE_II) 
+		|| (obdobie == OBD_POSTNE_I) 
+		|| (obdobie == OBD_POSTNE_II_VELKY_TYZDEN) 
+		){
+			zvazok = 2;
+		}
+		else{
+			zvazok = 0;
+		}
+	*/
+	Log("toto liturgickÈ obdobie sa nach·dza v zv‰zku %d brevi·ra (cezroËnÈ obdobie evidujeme ako jeden, 3. zv‰zok)...\n", zvazok);
 	/* 2006-10-17: DoplnenÈ kvÙli rÙznemu poËtu ûalmov pre kompletÛrium; upravenÈ 2006-10-18 */
 	if(den == DEN_STREDA){
 		_global_modl_kompletorium.pocet_zalmov = 2;
@@ -1672,15 +1681,15 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 				/* modlitba cez den */
 					_set_zalm1(MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_HE");
 				/* posvatne citanie */
-					if(zvazok != 2){
-						_set_zalm1(MODL_POSV_CITANIE, "z131.htm", "ZALM131");
-						_set_zalm2(MODL_POSV_CITANIE, "z132.htm", "ZALM132_I");
-						_set_zalm3(MODL_POSV_CITANIE, "z132.htm", "ZALM132_II");
-					}
-					else {
+					if(je_odlisny_zaltar){
 						_set_zalm1(MODL_POSV_CITANIE, "z105.htm", "ZALM105_I");
 						_set_zalm2(MODL_POSV_CITANIE, "z105.htm", "ZALM105_II");
 						_set_zalm3(MODL_POSV_CITANIE, "z105.htm", "ZALM105_III");
+					}
+					else {
+						_set_zalm1(MODL_POSV_CITANIE, "z131.htm", "ZALM131");
+						_set_zalm2(MODL_POSV_CITANIE, "z132.htm", "ZALM132_I");
+						_set_zalm3(MODL_POSV_CITANIE, "z132.htm", "ZALM132_II");
 					}
 					/* 2005-03-27:
 					 * Neviem preco tu bolo "z105.htm", "ZALM105_I" az "ZALM105_III"
@@ -1811,15 +1820,15 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z61.htm", "ZALM61");
 					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z64.htm", "ZALM64");
 				/* posvatne citanie */
-					if(zvazok != 2){
-						_set_zalm1(MODL_POSV_CITANIE, "z136.htm", "ZALM136_I");
-						_set_zalm2(MODL_POSV_CITANIE, "z136.htm", "ZALM136_II_PC");
-						_set_zalm3(MODL_POSV_CITANIE, "z136.htm", "ZALM136_III_PC"); /* inak je 136 cleneny pre pondelok 4. tyzdna, vespery */
-					}
-					else {
+					if(je_odlisny_zaltar){
 						_set_zalm1(MODL_POSV_CITANIE, "z106.htm", "ZALM106_I");
 						_set_zalm2(MODL_POSV_CITANIE, "z106.htm", "ZALM106_II");
 						_set_zalm3(MODL_POSV_CITANIE, "z106.htm", "ZALM106_III");
+					}
+					else {
+						_set_zalm1(MODL_POSV_CITANIE, "z136.htm", "ZALM136_I");
+						_set_zalm2(MODL_POSV_CITANIE, "z136.htm", "ZALM136_II_PC");
+						_set_zalm3(MODL_POSV_CITANIE, "z136.htm", "ZALM136_III_PC"); /* inak je 136 cleneny pre pondelok 4. tyzdna, vespery */
 					}
 					/* 2005-03-27:
 					 * Neviem preco tu bolo "z106.htm", "ZALM106_I" az "ZALM106_III"
@@ -2058,15 +2067,15 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					_set_zalm1(MODL_VESPERY, "z145.htm", "ZALM145_I");
 					_set_zalm2(MODL_VESPERY, "z145.htm", "ZALM145_II");
 				/* posvatne citanie */
-					if(zvazok != 2){
-						_set_zalm1(MODL_POSV_CITANIE, "z55.htm", "ZALM55_I_PC");
-						_set_zalm2(MODL_POSV_CITANIE, "z55.htm", "ZALM55_II_PC");
-						_set_zalm3(MODL_POSV_CITANIE, "z55.htm", "ZALM55_III_PC"); /* inak clenene pre modlitbu cez den, streda v 2. tyzdni */ 
-					}
-					else {
+					if(je_odlisny_zaltar){
 						_set_zalm1(MODL_POSV_CITANIE, "z78.htm", "ZALM78_I");
 						_set_zalm2(MODL_POSV_CITANIE, "z78.htm", "ZALM78_II");
 						_set_zalm3(MODL_POSV_CITANIE, "z78.htm", "ZALM78_III");
+					}
+					else {
+						_set_zalm1(MODL_POSV_CITANIE, "z55.htm", "ZALM55_I_PC");
+						_set_zalm2(MODL_POSV_CITANIE, "z55.htm", "ZALM55_II_PC");
+						_set_zalm3(MODL_POSV_CITANIE, "z55.htm", "ZALM55_III_PC"); /* inak clenene pre modlitbu cez den, streda v 2. tyzdni */ 
 					}
 					/* 2005-03-27:
 					 * Neviem preco tu bolo "z78.htm", "ZALM78_I" az "ZALM78_III"
@@ -2089,15 +2098,15 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					_set_zalm2(MODL_CEZ_DEN_VSETKY, "z45.htm", "ZALM45_I");
 					_set_zalm3(MODL_CEZ_DEN_VSETKY, "z45.htm", "ZALM45_II");
 				/* posvatne citanie */
-					if(zvazok != 2){
-						_set_zalm1(MODL_POSV_CITANIE, "z50.htm", "ZALM50_I");
-						_set_zalm2(MODL_POSV_CITANIE, "z50.htm", "ZALM50_II");
-						_set_zalm3(MODL_POSV_CITANIE, "z50.htm", "ZALM50_III");
-					}
-					else {
+					if(je_odlisny_zaltar){
 						_set_zalm1(MODL_POSV_CITANIE, "z78.htm", "ZALM78_IV");
 						_set_zalm2(MODL_POSV_CITANIE, "z78.htm", "ZALM78_V");
 						_set_zalm3(MODL_POSV_CITANIE, "z78.htm", "ZALM78_VI");
+					}
+					else {
+						_set_zalm1(MODL_POSV_CITANIE, "z50.htm", "ZALM50_I");
+						_set_zalm2(MODL_POSV_CITANIE, "z50.htm", "ZALM50_II");
+						_set_zalm3(MODL_POSV_CITANIE, "z50.htm", "ZALM50_III");
 					}
 					/* 2005-03-27:
 					 * Neviem preco tu bolo "z78.htm", "ZALM78_IV" az "ZALM78_VI"
