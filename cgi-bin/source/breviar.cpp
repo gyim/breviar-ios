@@ -1286,7 +1286,6 @@ void interpretParameter(short int type, char *paramname){
 			Log("  `zakoncenie' copied.\n");
 		}
 	}
-
 	/* 2006-10-17: Pridané */
 	else if(equals(paramname, PARAM_KOMPLETORIUM_DVA_ZALMY_BEGIN)){
 		if(_global_pocet_zalmov_kompletorium == 1){
@@ -1309,6 +1308,32 @@ void interpretParameter(short int type, char *paramname){
 		else{
 			Export("zobrazova druhý žalm/antifónu pre kompletórium, ktoré má 2. žalm+antifónu");
 			Log("  `2. žalm+antifóna v kompletóriu' copied.\n");
+		}
+	}
+	/* 2007-03-23: pridané Sláva Otcu */
+	else if(equals(paramname, PARAM_SLAVAOTCU_BEGIN)){
+		if(_global_opt1 == ANO){
+			/* zobrazit Slava Otcu */
+			Export("zobrazit Slava Otcu-->");
+			Log("  `Slava Otcu': begin...\n");
+		}
+		else{
+			/* nezobrazovat Slava Otcu */
+			_global_skip_in_prayer = ANO;
+			Export("nezobrazit Slava Otcu");
+			Log("  `Slava Otcu' skipping...\n");
+		}
+	}
+	else if(equals(paramname, PARAM_SLAVAOTCU_END)){
+		if(_global_opt1 == ANO){
+			/* zobrazit Slava Otcu */
+			Export("<!--zobrazit Slava Otcu");
+			Log("  `Slava Otcu': copied.\n");
+		}
+		else{
+			/* nezobrazovat Slava Otcu */
+			_global_skip_in_prayer = NIE;
+			Log("  `Slava Otcu' skipped.\n");
 		}
 	}
 

@@ -309,6 +309,9 @@ extern const char *TEMPLAT[];
 #define PARAM_ZAKONCENIE_END                "ZAKONCENIE_END"
 #define PARAM_KOMPLETORIUM_DVA_ZALMY_BEGIN	"KOMPLETORIUM_DVA_ZALMY_BEGIN"
 #define PARAM_KOMPLETORIUM_DVA_ZALMY_END	"KOMPLETORIUM_DVA_ZALMY_END"
+/* 2007-03-23: doplnené Sláva Otcu */
+#define PARAM_SLAVAOTCU_BEGIN               "SLAVAOTCU_BEGIN"
+#define PARAM_SLAVAOTCU_END                 "SLAVAOTCU_END"
 
 /* stringy parametrov vstupu pre MODL_OPT..., ktore generovanie modlitby
  * ovplyvnuju */
