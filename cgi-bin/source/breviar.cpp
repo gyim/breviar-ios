@@ -76,6 +76,7 @@
 /*   2006-02-06a.D. | úprava v _rozbor_dna() kvôli nastaveniu _global_opt3 */
 /*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám                      */
 /*   2006-08-18a.D. | pokus: zmena mnohých int na short int (staèí 32tis.) */
+/*   2006-08-19a.D. | zavedený nedefinovaný define ZOBRAZ_JULIANSKY_DATUM  */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -269,6 +270,7 @@ char *_global_string;
 /*char _global_string[MAX_STR];*/
 char *_global_string2;
 /*char _global_string2[MAX_STR];*/ /* obsahuje I, II, III, IV, V alebo pismeno roka */
+char *_global_string_farba; /* 2006-08-19: doplnené */
 
 /* pridane 13/04/2000A.D.; deklarovane v liturgia.h */
 short int _global_linky;
@@ -515,13 +517,13 @@ static void stuffenv(char *var){
 	short int	despace = 0, got_cr = 0;
 
 #ifdef DEBUG
-	printf("Before unescape: %s\n", var);
+	Log("Before unescape: %s\n", var);
 #endif
 
 	url_unescape(var);
 
 #ifdef DEBUG
-	printf("After unescape: %s\n", var);
+	Log("After unescape: %s\n", var);
 #endif
 
 	/* 2006-08-01: pridané */
@@ -529,7 +531,7 @@ static void stuffenv(char *var){
 		strcat(_global_buf2, "&");
 	strcat(_global_buf2, var);
 #ifdef DEBUG
-	printf("Naba¾ujem _global_buf2 == %s\n", _global_buf2);
+	Log("Naba¾ujem _global_buf2 == %s\n", _global_buf2);
 #endif
 
 	/*
@@ -575,7 +577,7 @@ static void stuffenv(char *var){
 	if (despace && c[1])
 	{
 #ifdef DEBUG
-		printf("  Stripping whitespace.\n");
+		Log("  Stripping whitespace.\n");
 #endif
 		for (s = c + 1; *s && isspace(*s); s++)
 			;
@@ -609,7 +611,7 @@ static void stuffenv(char *var){
 	if ((oldval = getenv(buf)))
 	{
 #ifdef DEBUG
-		printf("  Variable %s exists with value %s\n", buf, oldval);
+		Log("  Variable %s exists with value %s\n", buf, oldval);
 #endif
 		newval = (char *)malloc(strlen(oldval) + strlen(buf) + strlen(c+1) + 3);
 		if (newval == NULL){
@@ -632,14 +634,14 @@ static void stuffenv(char *var){
 	else
 	{
 #ifdef DEBUG
-		printf("  Variable %s doesn't exist yet.\n", buf);
+		Log("  Variable %s doesn't exist yet.\n", buf);
 #endif
 		*c = '=';
 		newval = buf;
 	}
 
 #ifdef DEBUG
-	printf("  putenv %s\n", newval);
+	Log("  putenv %s\n", newval);
 #endif
 	putenv(newval);
 	
@@ -2118,6 +2120,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 		_rozbor_dna_LOG("/* pred velkou nocou */\n");
 		if(_global_den.denvr >= POS){
 			/* postne obdobie */
+			_global_den.farba = LIT_FARBA_FIALOVA; /* 2006-08-19: pridané */
 			_rozbor_dna_LOG("/* postne obdobie */\n");
 			_global_den.litobd = OBD_POSTNE_I; /* do soboty v 5. post.tyzdni */
 			_global_den.smer = 9; /* vsedne dni v poste */
@@ -2160,6 +2163,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				else if(_global_den.denvr == KVET){
 					/* kvetna nedela */
 					_rozbor_dna_LOG("/* kvetna nedela */\n");
+					_global_den.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
 					_global_den.litobd = OBD_POSTNE_II_VELKY_TYZDEN;
 					_global_den.smer = 2; /* nedele adventne, postne a velkonocne */
 					mystrcpy(_global_den.meno, "Kvetná nede¾a", MENO_SVIATKU);
@@ -2178,10 +2182,14 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					_global_den.smer = 1;
 					/* velkonocne trojdnie umucenia a zmrtvychvstania */
 					_rozbor_dna_LOG("/* velkonocne trojdnie umucenia a zmrtvychvstania */\n");
-					if(_global_den.denvr == VP)
+					if(_global_den.denvr == VP){
 						mystrcpy(_global_den.meno, "Ve¾ký piatok", MENO_SVIATKU);
-					else if(_global_den.denvr == BS)
+						_global_den.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					}
+					else if(_global_den.denvr == BS){
 						mystrcpy(_global_den.meno, "Biela (ve¾ká) sobota", MENO_SVIATKU);
+						/* 2006-08-19: farba ostáva nastavená ako pre celý pôst - fialová */
+					}
 				}
 			}/* if(_global_den.denvr <= BS) */
 		}/* if(_global_den.denvr >= POS) */
@@ -2191,6 +2199,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 			if(_global_den.denvr == PMB){
 				/* slavnost panny marie bohorodicky */
 				_rozbor_dna_LOG("/* slavnost panny marie bohorodicky */\n");
+				_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 				_global_den.smer = 3;
 				_global_den.typslav = SLAV_SLAVNOST;
 				_global_den.litobd = OBD_OKTAVA_NARODENIA;
@@ -2208,6 +2217,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 			else if(_global_den.denvr == ZJV){
 				/* slavnost zjavenia pana */
 				_rozbor_dna_LOG("/* slavnost zjavenia pana */\n");
+				_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 				_global_den.smer = 2; /* zjavenie pana */
 				_global_den.typslav = SLAV_SLAVNOST;
 				_global_den.litobd = OBD_VIANOCNE_II; /* ma vlastne slavenie; zmenil som na vianocne obd. II 14/03/2000A.D. */
@@ -2220,6 +2230,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				 * v krajinach, kde sa slavnost zjavenia pana slavi 6. januara
 				 */
 				_rozbor_dna_LOG("/* druha nedela po narodeni pana medzi 2. a 5. januarom; v krajinach, kde sa slavnost zjavenia pana slavi 6. januara */\n");
+				_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 				_global_den.smer = 6; /* nedele vianocneho obdobia a obdobia "cez rok" */
 				_global_den.litobd = OBD_VIANOCNE_I;
 				mystrcpy(_global_den.meno, "2. nede¾a po Narodení Pána", MENO_SVIATKU);
@@ -2227,6 +2238,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 			else if(_global_den.denvr < KRST){
 				/* vianocne obdobie */
 				_rozbor_dna_LOG("/* vianocne obdobie */\n");
+				_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 				_global_den.tyzden = 2;
 				/* vsedne dni vianocneho obdobia od 2. januara
 				 * do soboty po zjaveni pana */
@@ -2244,6 +2256,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 			else if(_global_den.denvr > KRST){
 				/* obdobie cez rok po vianociach do popolcovej stredy */
 				_rozbor_dna_LOG("/* obdobie cez rok po vianociach do popolcovej stredy */\n");
+				_global_den.farba = LIT_FARBA_ZELENA; /* 2006-08-19: pridané */
 				_global_den.litobd = OBD_CEZ_ROK;
 				/* urcenie tyzdna v obdobi "cez rok" */
 				_global_den.tyzden = ((_global_den.denvr - KRST) DIV 7) + 1;
@@ -2271,6 +2284,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 		if(_global_den.denvr <= ZDS){
 			/* velkonocne obdobie (po zoslanie d.s.) */
 			_rozbor_dna_LOG("/* velkonocne obdobie (po zoslanie d.s.) */\n");
+			_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 			_global_den.tyzden = ((_global_den.denvr - VN) DIV 7) + 1;
 
 			if(_global_den.denvr == ZDS){
@@ -2350,6 +2364,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 			if(_global_den.denvr < PAN){
 				/* obdobie cez rok po velkej noci do prvej adventnej nedele */
 				_rozbor_dna_LOG("/* obdobie cez rok po velkej noci do prvej adventnej nedele */\n");
+				_global_den.farba = LIT_FARBA_ZELENA; /* 2006-08-19: pridané */
 				_global_den.litobd = OBD_CEZ_ROK;
 				/* urcim tyzden v obdobi "cez rok" */
 				_global_den.tyzden = POCET_NEDIEL_CEZ_ROK -
@@ -2424,6 +2439,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				if(_global_den.denvr < NAR){
 					/* adventne obdobie */
 					_rozbor_dna_LOG("/* adventne obdobie */\n");
+					_global_den.farba = LIT_FARBA_FIALOVA; /* 2006-08-19: pridané */
 					_global_den.tyzden = ((_global_den.denvr - PAN) DIV 7) + 1;
 					if(_global_den.denvr <= DEC16){
 						/* do 16. decembra */
@@ -2455,6 +2471,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				else if(_global_den.denvr >= NAR){
 					/* vianocne obdobie */
 					_rozbor_dna_LOG("/* vianocne obdobie */\n");
+					_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					_global_den.litobd = OBD_OKTAVA_NARODENIA; /* pretoze do 31.12. */
 					_global_den.tyzden = 1;
 					if(_global_den.denvr == NAR){
@@ -2741,13 +2758,15 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	char pom[MAX_STR];
 	mystrcpy(pom, STR_EMPTY, MAX_STR); /* 2003-08-11 pridana inicializacia */
 	mystrcpy(_global_string, STR_EMPTY, MAX_GLOBAL_STR); /* inicializacia */
-	mystrcpy(_global_string2, STR_EMPTY, MAX_GLOBAL_STR); /* inicializacia */
+	mystrcpy(_global_string2, STR_EMPTY, MAX_GLOBAL_STR2); /* inicializácia, upravená dåžka */
+	mystrcpy(_global_string_farba, STR_EMPTY, MAX_GLOBAL_STR_FARBA); /* 2006-08-19: pridané - inicializácia */
 
 	short int farba = COLOR_BLACK;
 	short int velkost = CASE_MALE;
 	short int obyc = NIE;
+	short int liturgicka_farba = LIT_FARBA_NEURCENA; /* 2006-08-19: pridané */
 
-	Log("-- init_global_string(EXPORT_DNA_%d, %d, %s) -- zaciatok\n",
+	Log("-- init_global_string(EXPORT_DNA_%d, %d, %s) -- zaèiatok (inicializuje tri _global_string* premenné)\n",
 		typ, poradie_svateho, nazov_modlitby(modlitba));
 	/* -------------------------------------------------------------------- */
 	/* najprv priradime do _local_den to, co tam ma byt */
@@ -2989,7 +3008,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 
 	Log("  -- _global_string == %s\n", _global_string);
 
-	/* napokon inicializujem _global_string2 */
+	/* inicializujem _global_string2 */
 	if(((_global_r._POPOLCOVA_STREDA.den == _local_den.den) &&
 		 (_global_r._POPOLCOVA_STREDA.mesiac == _local_den.mesiac)) ||
 		/* popolcova streda */
@@ -2999,7 +3018,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		(_local_den.smer > 8)){
 		/* nie slavnosti ani sviatky ani nedele */
 		mystrcpy(_global_string2,
-			rimskymi_tyzden_zaltara[tyzden_zaltara(_global_den.tyzden)], MAX_GLOBAL_STR);
+			rimskymi_tyzden_zaltara[tyzden_zaltara(_global_den.tyzden)], MAX_GLOBAL_STR2);
 	}
 	else if(_local_den.denvt == DEN_NEDELA){
 		/* 13/03/2000A.D. -- pridane, aby aj nedele mali tyzden zaltara */
@@ -3008,8 +3027,30 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			rimskymi_tyzden_zaltara[tyzden_zaltara(_global_den.tyzden)]);
 	}
 	else{
-		mystrcpy(_global_string2, "V", MAX_GLOBAL_STR);
+		mystrcpy(_global_string2, "V", MAX_GLOBAL_STR2);
 	}
+
+	Log("  -- _global_string2 == %s\n", _global_string2);
+
+	/* napokon inicializujem _global_string_farba */
+
+	/* 2006-08-19: pridaná liturgická farba */
+	liturgicka_farba = _local_den.farba;
+
+#undef LIT_FARBA_TEXT
+#ifdef LIT_FARBA_TEXT
+	sprintf(_global_string_farba, 
+		"\n<"HTML_SPAN_SMALL">(%s)</span>\n", 
+		(char *)nazov_farby(liturgicka_farba));
+#else
+	sprintf(_global_string_farba,
+		"\n<table bgcolor=\"%s\"><tr><td><font color=\"%s\" size=\""HTML_FONT_SIZE_FARBA"\">%s</font></td></tr></table>\n", 
+		(char *)html_farba_pozadie[liturgicka_farba], 
+		(char *)html_farba_popredie[liturgicka_farba], 
+		(char *)nazov_farby(liturgicka_farba));
+#endif
+
+	Log("  -- _global_string_farba == %s\n", _global_string_farba);
 
 	Log("-- init_global_string(EXPORT_DNA_%d, %d, %s) -- returning SUCCESS\n",
 		typ, poradie_svateho, nazov_modlitby(modlitba));
@@ -3163,6 +3204,12 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 			strcat(pom, pom2);
 			Log("\tPrilepil som aj jazyk: `%s' (2006-07-31)\n", pom2);
 		}
+
+		/* 2006-08-19: pridaná liturgická farba - pre buttons je treba v každom riadku */
+		Export("</td>\n<td>&nbsp;");
+		Export("</td>\n<td>");
+		Export("%s", _global_string_farba);
+		Export("</td>\n<td>&nbsp;");
 
 		/* 2003-07-15 vycistene poznamky, dorobene modlitby cez den */
 
@@ -3326,6 +3373,10 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 
 	}/* if(typ) */
 	/* inak buttony nedavam */
+	else if(typ == EXPORT_DNA_VIAC_DNI){
+		/* 2006-08-19: pridaná liturgická farba - pre buttons je treba v každom riadku */
+		Export("<td>&nbsp;</td>\n<td>%s</td>\n", _global_string_farba);
+	}
 	Log("--- _export_rozbor_dna_buttons(typ == %d) -- end\n", typ); /* 2005-03-22: Pridane */
 }/* _export_rozbor_dna_buttons */
 
@@ -3621,8 +3672,9 @@ void _export_rozbor_dna(short int typ){
 	}/* typ != EXPORT_DNA_VIAC_DNI */
 
 	vytvor_global_link(_global_den.den, _global_den.mesiac, _global_den.rok, i);
+		/* 2006-08-19: okrem premennej _global_string táto funkcia ešte naplní aj _global_string2 a _global_string_farba */
 
-	/* export */
+	/* export vytvoreného linku */
 	Export("\n<tr valign=baseline>\n");
 
 	/* zmenene <div align> na priamo do <td>, 2003-07-09 kvoli HTML 4.01 */
@@ -3643,6 +3695,7 @@ void _export_rozbor_dna(short int typ){
 		Export("<td align=left>%s%s%s%c</td>\n",
 			pom1, pom3, pom2, ciarka);
 
+	/* ïalší ståpec: buttons (tlaèidlá), pod¾a typu výpisu */
 	Export("<td>");
 
 	/* pozor, hoci je nedela, predsa na nu mohlo pripadnut slavenie s vyssou
@@ -3714,12 +3767,17 @@ void _export_rozbor_dna(short int typ){
 		BUTTONS(typ, 4);
 	}
 
-	Export("</td>\n<td><div align=right>");
-	/* vypisanie rimskeho cisla (citanie) */
-	if(typ == EXPORT_DNA_VIAC_DNI)
-		Export("%s", _global_string2);
-	Export("</div>");
+	if(typ == EXPORT_DNA_VIAC_DNI){
 
+		/* ïalší ståpec: liturgická farba, pridané 2006-08-19 -- presunuté do buttons, pretože treba pre každé slávenie samostatne */
+		// Export("<td>&nbsp;</td>\n<td>%s</td>\n", _global_string_farba);
+
+		/* ïalší ståpec: rímske èíslo pod¾a týždòa žaltára, pre nedele aj liturgický rok A, B resp. C */
+		Export("</td>\n<td><div align=right>"); /* 2006-08-19: pod¾a mòa zbytoène sa to vypisovalo aj pri obyèajnom exporte 1 dòa */
+		/* vypisanie rimskeho cisla (citanie) */
+		Export("%s", _global_string2);
+		Export("</div>");
+	}
 
 	Export("</td>\n</tr>\n");
 	/* EXPORT_DNA_VIAC_DNI: predpoklada, ze sme v tabulke, <table> */
@@ -5287,9 +5345,21 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 	if(_global_modlitba == MODL_NEURCENA){
 		Export((char *)html_text_dnes_je_atd[_global_jazyk],
 			dnes.tm_yday,
+#undef ZOBRAZ_JULIANSKY_DATUM
+#ifdef ZOBRAZ_JULIANSKY_DATUM
+			(char *)STR_EMPTY,
+#else
+			(char *)HTML_COMMENT_BEGIN,
+#endif
 			(_global_linky == ANO)? HTTP_ADDRESS: MESSAGE_FOLDER,
 			FILE_JULIANSKY_DATUM,
-			jd_dnes);
+			jd_dnes,
+#ifdef ZOBRAZ_JULIANSKY_DATUM
+			(char *)STR_EMPTY
+#else
+			(char *)HTML_COMMENT_END
+#endif
+			);
 		_rozbor_dna(datum, dnes.tm_year);
 		_export_rozbor_dna(EXPORT_DNA_DNES);
 		/* 2006-02-02: celý zvyšný formulár presunutý do samostatnej funkcie */
@@ -6109,7 +6179,7 @@ void write(void){
 	short int i = 0;
 	while (environ[i]){
 //		if(strstr(environ[i], "WWW_") != NULL)
-			printf("<p>%d: %s<br><hr>\n", i, environ[i]);
+			Log("<p>%d: %s<br><hr>\n", i, environ[i]);
 		i++;
 	}
 }

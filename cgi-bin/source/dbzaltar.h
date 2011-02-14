@@ -139,6 +139,7 @@ extern const char *text_FEB_03_2[];
 extern const char *text_FEB_05[];
 extern const char *text_FEB_06[];
 extern const char *text_FEB_08[];
+extern const char *text_FEB_08_2[];
 extern const char *text_FEB_10[];
 extern const char *text_FEB_11[];
 extern const char *text_FEB_17[];

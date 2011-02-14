@@ -15,6 +15,8 @@
 /*   2006-07-11a.D. | prvé kroky k jazykovım mutáciám          */
 /*   2006-08-01a.D. | zmenené definície konštánt (jaz.mutácie) */
 /*   2006-08-07a.D. | pridané sv. muov/ien, èo ili v man.  */
+/*   2006-08-18a.D. | zmena int na short int (staèí 32tis.)    */
+/*   2006-08-19a.D. | pridanie liturgickej farby               */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -386,15 +388,31 @@ const char *nazov_slavenia_lokal[] =
 ,"na Slovensku 5. júla, slávnos; v Európe sviatok"
 ,"v Roòavskej diecéze sviatok hlavného patróna"
 ,"len v konsekrovanıch kostoloch"
-,"Druhá ve¾konoèná nede¾a"
+,"Druhá ve¾konoèná nede¾a - Boieho milosrdenstva"
 ,"koniec Oktávy narodenia Pána"
 ,"konec Oktávu Narození Pánì"
 ,"hlavního patrona praské arcidiecéze"
 ,"v praské arcidiecézi"
 ,"v brnìnské diecézi"
 ,"na Moravì: památka"
-,"Druhá nedìle velikonoèní"
+,"Druhá nedìle velikonoèní - Boího milosrdenství"
 };
+
+const char *nazov_farby_jazyk[POCET_FARIEB + 1][POCET_JAZYKOV + 1] =
+{{"___", "___", "___", ""}, 
+ {"èervená", "èervená", "red", ""}, 
+ {"biela", "bílá", "white", ""}, 
+ {"zelená", "zelená", "green", ""}, 
+ {"fialová", "fialová", "purple", ""}, 
+};
+
+#define		nazov_farby(a)	nazov_farby_jazyk[a][_global_jazyk]
+
+const char *html_farba_pozadie[] =
+{"black", "red", "white", "green", "purple"};
+
+const char *html_farba_popredie[] =
+{"white", "white", "black", "white", "white"};
 
 const char *rimskymi_tyzden_zaltara[] =
 {"_", "I", "II", "III", "IV"};
@@ -706,7 +724,11 @@ const char *html_text_pre_cezrocne_obd[] = {"pre cezroèné obdobie", "pro mezidob
 const char *html_text_tyzden_zaltara[] = {". tıdeò altára", ". tıden altáøe", "week of Psaltary", ""};
 const char *html_text_tyzden[] = {". tıdeò", ". tıden", "week", ""};
 const char *html_text_v_tyzdni_zaltara[] = {". tıdni altára", ". tıdnu altáøe", "week of Psaltary", ""};
-const char *html_text_dnes_je_atd[] = {"Dnes je %d. deò v roku, <a href=\"%s%s\">juliánsky dátum</a> JD = %ld.\n<br>\n", "Dnes je %d. den v roku, <a href=\"%s%s\">juliánské datum</a> JD = %ld.\n<br>\n", "Today is %d. day in the year, <a href=\"%s%s\">Julian date</a> JD = %ld.\n<br>\n", ""};
+const char *html_text_dnes_je_atd[] = 
+{"Dnes je %d. deò v roku%s, <a href=\"%s%s\">juliánsky dátum</a> JD = %ld%s.\n<br>\n",
+ "Dnes je %d. den v roku%s, <a href=\"%s%s\">juliánské datum</a> JD = %ld%s.\n<br>\n",
+ "Today is %d. day in the year%s, <a href=\"%s%s\">Julian date</a> JD = %ld%s.\n<br>\n",
+ ""};
 const char *html_text_zakladne_info[] = {"Základné informácie", "Základní informace", "Basic info", ""};
 const char *html_text_je[] = {"je", "je", "is", ""};
 const char *html_text_nie_je[] = {"nie je", "není", "is not", ""};
@@ -893,6 +915,10 @@ const char *text_FEB_06[] =
 const char *text_FEB_08[] =
 {"Sv. Hieronyma Emilianiho",
  "Sv. Jeronıma Emilianiho",
+ "", ""};
+const char *text_FEB_08_2[] =
+{"Sv. Jozefíny Bakhita, panny",
+ "Sv. Josefíny Bakhity, panny",
  "", ""};
 const char *text_FEB_10[] =
 {"Sv. Školastiky, panny",

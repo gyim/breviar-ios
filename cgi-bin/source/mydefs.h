@@ -56,7 +56,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2006-08-18"
+#define BUILD_DATE "2006-08-19"
 
 #define BYTES 250
 #define SMALL 80
@@ -72,14 +72,16 @@
 #define ANO   1
 #define NIE   0
 
-#define MAX_STR	300 /* maximalna dlzka retazca */
-#define MAX_GLOBAL_STR 300 /* _global_string */ /* 31/03/2000A.D. */
-#define MAX_QUERY_STR 300 /* query_string */
-#define MAX_POM_QUERY_TYPE 300 /* pom_QUERY_TYPE */
-#define MAX_GLOBAL_LINK 300 /* maximalna dlzka retazca _global_link */
+#define MAX_STR				300 /* maximalna dlzka retazca */
+#define MAX_GLOBAL_STR		300 /* _global_string */ /* 31/03/2000A.D. */
+#define MAX_GLOBAL_STR2		20 /* _global_string2, pridané 2006-08-19 */
+#define MAX_GLOBAL_STR_FARBA 150 /* _global_string_farba, pridané 2006-08-19 */
+#define MAX_QUERY_STR		300 /* query_string */
+#define MAX_POM_QUERY_TYPE	300 /* pom_QUERY_TYPE */
+#define MAX_GLOBAL_LINK		300 /* maximalna dlzka retazca _global_link */
 //#define MAX_ENV	100 /* maximalna dlzka environmentalnej premennej */ /* 2006-08-01: nepoužíva sa */
-#define MAX_VARIABLES 20 /* maximalny pocet syst. premennych WWW_..., zvyseny 2003-08-07 a opätovne 2006-08-01 */
-#define MAX_GLOBAL_BUFFER 500 /* _global_buf, pridané 2005-08-01 */
+#define MAX_VARIABLES		20 /* maximalny pocet syst. premennych WWW_..., zvyseny 2003-08-07 a opätovne 2006-08-01 */
+#define MAX_GLOBAL_BUFFER	500 /* _global_buf, pridané 2005-08-01 */
 /***************************************************************/
 /* EOF of former file mybase.h                                 */
 /***************************************************************/
@@ -406,11 +408,16 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #define HTML_SPAN_BLUE      "span class=\"blue\""
 #define HTML_SPAN_BLUE_BOLD "span class=\"bluebold\""
 #define HTML_SPAN_RED_SMALL "span class=\"redsmall\""
+#define HTML_SPAN_SMALL     "span class=\"small\""
 
 #define HTML_P_PATKA "p class=\"patka\""
 
 /* pridane 2003-07-09, zmenene v cestach pre skript */
 #define HTML_AMPERSAND "&amp;"
+/* 2006-08-19: pridané */
+#define HTML_COMMENT_BEGIN		"<!--"
+#define HTML_COMMENT_END		"-->"
+#define HTML_FONT_SIZE_FARBA	"2"
 
 /* definície HTML prvkov upravené a presunuté do hodin.h, 2006-08-01;
  * tu ponechané len z historických dôvodov zakomentované

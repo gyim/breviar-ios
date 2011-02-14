@@ -33,6 +33,7 @@
 /*   2006-08-01a.D. | zmenenÈ definÌcie konöt·nt (jaz.mut·cie) */
 /*   2006-08-07a.D. | pridanÈ sv. muûov/ûien, Ëo ûili v manû.  */
 /*   2006-08-18a.D. | zmena int na short int (staËÌ 32tis.)    */
+/*   2006-08-19a.D. | pridanie liturgickej farby               */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -420,6 +421,10 @@ typedef struct sc _struct_sc;
 /* 2005-07-27: zaveden· nov· premenn· v ötrukt˙re: typslav_lokal
  * urËen· niesù öpeci·lnu inform·ciu o tom, Ëi danÈ sl·venie je lok·lne.
  * ötandardne 0 = bez öpeci·lnej lokaliz·cie.
+ *
+ * 2006-08-19: pridan· premenn· pre liturgick˙ farbu
+ *
+ *
  */
 struct dm{
 	short int den;        /* cislo dna mesiaca (1--31) */
@@ -453,6 +458,7 @@ struct dm{
 						  * _encode_..., _decode_spol_cast();
 						  */
 	char meno[MENO_SVIATKU]; /* nazov prip. sviatku */
+	short int farba;     /* liturgick· farba pre sl·venie */
 };
 typedef struct dm _struct_dm;
 
@@ -602,6 +608,22 @@ extern const char *nazov_slavenia_lokal[];
 #define	ZALTAR_VSETKO                0
 #define ZALTAR_IBA_ZALMY             1
 #define ZALTAR_IBA_ZALMY_HYMNUS_MCD  2
+
+/* 2006-08-19: pridanÈ liturgickÈ farby */
+#define LIT_FARBA_NEURCENA			0
+#define LIT_FARBA_CERVENA			1
+#define LIT_FARBA_BIELA				2
+#define LIT_FARBA_ZELENA			3
+#define LIT_FARBA_FIALOVA			4
+
+#define POCET_FARIEB				4
+
+/* nazov_farby: string pre n·zov liturgickej farby */
+extern const char *nazov_farby_jazyk[POCET_FARIEB + 1][POCET_JAZYKOV + 1];
+#define		nazov_farby(a)	nazov_farby_jazyk[a][_global_jazyk]
+
+extern const char *html_farba_pozadie[];
+extern const char *html_farba_popredie[];
 
 /* juliansky datum, funkcia juliansky_datum, dane synonymum JD */
 #define	JD	juliansky_datum
@@ -852,9 +874,8 @@ extern short int _global_opt4;
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
 extern char *_global_string;
-/*extern char _global_string[MAX_STR];*/
-extern char *_global_string2;
-/*extern char _global_string2[MAX_STR];*/ /* obsahuje I, II, III, IV, V alebo pismeno roka */
+extern char *_global_string2; /* obsahuje I, II, III, IV, V alebo pismeno roka */
+extern char *_global_string_farba; /* 2006-08-19: doplnenÈ */
 
 extern char *_global_buf; /* 2006-08-01: t˙to premenn˙ tieû alokujeme */
 extern char *_global_buf2; /* 2006-08-01: t˙to premenn˙ tieû alokujeme */
@@ -966,6 +987,7 @@ void _init_dm(_struct_dm a);
 	a.prik = PRIKAZANY_SVIATOK;      /* ci je to prikazany sviatok alebo nie: PRIKAZANY_SVIATOK resp. NEPRIKAZANY_SVIATOK */\
 	a.spolcast = MODL_SPOL_CAST_NEURCENA;  /* spolocna cast -- zakodovane data pre svatych o tom, z akej spolocnej casti sa ma modlit */\
 	mystrcpy(a.meno, STR_UNDEF, MENO_SVIATKU); /* nazov prip. sviatku */\
+	a.farba = LIT_FARBA_NEURCENA; /* 2006-08-19: pridanÈ */\
 }
 
 /* inicializacne definy pridane 2003-08-13 */

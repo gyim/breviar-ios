@@ -140,9 +140,8 @@ extern short int _global_opt5; /* pridane 2003-08-07 */
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
 extern char *_global_string;
-/*char _global_string[MAX_STR];*/
-extern char *_global_string2;
-/*char _global_string2[MAX_STR];*/ /* obsahuje I, II, III, IV, V alebo pismeno roka */
+extern char *_global_string2; /* obsahuje I, II, III, IV, V alebo pismeno roka */
+extern char *_global_string_farba; /* 2006-08-19: doplnené */
 
 extern char *_global_buf; /* 2006-08-01: túto premennú tiež alokujeme */
 extern char *_global_buf2; /* 2006-08-01: túto premennú tiež alokujeme */

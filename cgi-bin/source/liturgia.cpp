@@ -238,13 +238,23 @@ short int _allocate_global_var(void){
 	}
 
 /* _global_string2 */
-	if((_global_string2 = (char*) malloc(MAX_GLOBAL_STR)) == NULL){
+	if((_global_string2 = (char*) malloc(MAX_GLOBAL_STR2)) == NULL){
 		Log("  Not enough memory to allocate buffer for `_global_string2'\n");
 		ret = FAILURE;
 	}
 	else{
-		Log("  %d bytes for `_global_string2'\n", MAX_GLOBAL_STR);
-		mystrcpy(_global_string2, STR_EMPTY, MAX_GLOBAL_STR); /* pridane 2003-08-11 */
+		Log("  %d bytes for `_global_string2'\n", MAX_GLOBAL_STR2);
+		mystrcpy(_global_string2, STR_EMPTY, MAX_GLOBAL_STR2); /* pridane 2003-08-11 */
+	}
+
+/* _global_string_farba */
+	if((_global_string_farba = (char*) malloc(MAX_GLOBAL_STR_FARBA)) == NULL){
+		Log("  Not enough memory to allocate buffer for `_global_string_farba'\n");
+		ret = FAILURE;
+	}
+	else{
+		Log("  %d bytes for `_global_string_farba'\n", MAX_GLOBAL_STR_FARBA);
+		mystrcpy(_global_string_farba, STR_EMPTY, MAX_GLOBAL_STR_FARBA); /* pridané 2006-08-19 */
 	}
 
 	Log("...done.\n");
@@ -275,6 +285,7 @@ short int _deallocate_global_var(void){
 	Log("_global_pom_str\n"); free(_global_pom_str);
 	Log("_global_string\n"); free(_global_string);
 	Log("_global_string2\n"); free(_global_string2);
+	Log("_global_string_farba\n"); free(_global_string_farba); /* pridané 2006-08-19 */
 
 	Log("...done.\n");
 	return SUCCESS;
@@ -998,6 +1009,7 @@ void init_global_pm_sobota(void){
 	_global_pm_sobota.prik    = NEPRIKAZANY_SVIATOK; /* pridane 27/04/2000A.D. */
 	_global_pm_sobota.spolcast = /* pridane 27/04/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
+	_global_pm_sobota.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 }
 
 /* ------------------------------------------------------------------- */
@@ -1017,6 +1029,7 @@ void _dm_popolcova_streda(short int rok, short int _vn){
 	_global_result.tyzzal  = 4; /* pridane 06/03/2000A.D. */
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
+	_global_result.farba = LIT_FARBA_FIALOVA; /* 2006-08-19: pridané */
 }
 
 /* 2006-02-09: chýbalo tu nastavenie denvt */
@@ -1035,6 +1048,7 @@ void _dm_nanebovstupenie(short int rok, short int _vn){
 	mystrcpy(_global_result.meno, text_NANEBOVSTUPENIE_PANA[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
+	_global_result.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 }
 
 void _dm_zoslanie_ducha(short int rok, short int _vn){
@@ -1051,6 +1065,7 @@ void _dm_zoslanie_ducha(short int rok, short int _vn){
 	mystrcpy(_global_result.meno, text_ZOSLANIE_DUCHA_SVATEHO[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
+	_global_result.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
 }
 
 void _dm_prva_adventna_nedela(short int rok, short int p2){
@@ -1067,6 +1082,7 @@ void _dm_prva_adventna_nedela(short int rok, short int p2){
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D. */
+	_global_result.farba = LIT_FARBA_FIALOVA; /* 2006-08-19: pridané */
 }
 
 void _dm_svatej_rodiny(short int rok){
@@ -1091,6 +1107,7 @@ void _dm_svatej_rodiny(short int rok){
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D. */
+	_global_result.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 }
 
 void _dm_krst_krista_pana(short int rok){
@@ -1110,6 +1127,7 @@ void _dm_krst_krista_pana(short int rok){
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 27/04/2000A.D. */
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D. */
+	_global_result.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 }
 
 void _dm_velkonocna_nedela(short int rok, short int _vn){
@@ -1127,6 +1145,7 @@ void _dm_velkonocna_nedela(short int rok, short int _vn){
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 27/04/2000A.D. */
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D. */
+	_global_result.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 }
 
 /* pridana 2003-08-07 */
@@ -1153,6 +1172,7 @@ void _init_dm(_struct_dm a){
 					   * zakodovane data pre svatych o tom, z akej spolocnej
 					   * casti sa ma modlit */
 	mystrcpy(a.meno, STR_EMPTY, MENO_SVIATKU); /* nazov prip. sviatku */
+	a.farba = LIT_FARBA_NEURCENA; /* 2006-08-19: pridané */
 }
 #endif
 
