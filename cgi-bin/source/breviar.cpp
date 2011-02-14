@@ -109,6 +109,8 @@
 /*                    pre veækonoËnÈ obdobie (˙prava vn1.htm, komplet.htm) */
 /*   2008-04-03a.D. | kompletÛrium vo veækonoËnom obdobÌ,                  */
 /*                    Ëi pri druhej antifÛne zobraziù dvojku alebo nie     */
+/*   2008-04-10a.D. | zmeny pre ˙pravy include_dir                         */
+/*                  - dopracovanie batch mÛdu (vöetky modlitby, aj pre cz) */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -4943,38 +4945,33 @@ void _export_rozbor_dna(short int typ){
  *
  * 2007-09-25: iba pozn·mka - moûno by bolo dobrÈ tie stringy vytv·raù dynamicky pre jednotlivÈ modlitby (ktorÈ by sa dali parametrizovaù)
  *
+ * 2008-04-09: makro upravenÈ na funkciu, BATCH_COMMAND() -> execute_batch_command()
  */
-#define BATCH_COMMAND(a)	{ \
-	/* napokon to vyprintujeme do batch suboru, 2003-07-07 */\
-	/* ak je nastaveny _global_opt_append, tak vsetko do 1 suboru, 2003-07-08 */\
-	/* 2003-08-11 -Wall upozornila na too many arguments for format */\
-	/* 2004-03-11 pridane niektore dalsie parametre */\
-	/* 2004-03-16 pridany vypis do batch_html_file */\
-	/* 2006-01-31 pridan˝ z·pis modlitby cez deÚ a posv. ËÌtania */\
-	fprintf(batch_html_file, "<li>%d. %s %d: \n", _global_den.den, nazov_mesiaca(_global_den.mesiac - 1), _global_den.rok);\
-	if(_global_opt_append == YES){\
-		fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -x%d -pmrch\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* ranne chvaly */\
-		fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -x%d -pmna\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* napoludnie */\
-		fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -x%d -pmpc\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* posv‰tnÈ ËÌtanie */\
-		/* 2006-01-31-TUTOLA */\
-		if(a != 4){\
-			fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -x%d -pmv\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* vespery */\
-		}\
-	}else{\
-		fprintf(batch_file, "%s%dr.htm -1%d -2%d -3%d -4%d -x%d -pmrch\n", batch_command, a, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* ranne chvaly */\
-		fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%dr.htm\">rannÈ chv·ly</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a);\
-		fprintf(batch_file, "%s%dn.htm -1%d -2%d -3%d -4%d -x%d -pmna\n", batch_command, a, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* napoludnie */\
-		fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%dn.htm\">modlitba napoludnie</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a);\
-		fprintf(batch_file, "%s%dc.htm -1%d -2%d -3%d -4%d -x%d -pmpc\n", batch_command, a, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* posv‰tnÈ ËÌtanie */\
-		fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%dc.htm\">posv‰tnÈ ËÌtanie</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a);\
-		/* 2006-01-31-TUTOLA */\
-		if(a != 4){\
-			fprintf(batch_file, "%s%dv.htm -1%d -2%d -3%d -4%d -x%d -pmv\n", batch_command, a, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a); /* vespery */\
-			fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%dv.htm\">veöpery</a> \n", _global_den.rok, _global_den.mesiac, _global_den.den, a);\
-		}\
-	}\
-	fprintf(batch_html_file, "</li>\n");\
-}
+void execute_batch_command(short int a, char batch_command[MAX_STR]){
+	short int i;
+	/* napokon to vyprintujeme do batch suboru, 2003-07-07 */
+	/* ak je nastaveny _global_opt_append, tak vsetko do 1 suboru, 2003-07-08 */
+	/* 2003-08-11 -Wall upozornila na too many arguments for format */
+	/* 2004-03-11 pridane niektore dalsie parametre */
+	/* 2004-03-16 pridany vypis do batch_html_file */
+	/* 2006-01-31 pridan˝ z·pis modlitby cez deÚ a posv. ËÌtania */
+	/* 2008-04-09 pridan˝ z·pis modlitby cez deÚ (predpoludnÌm a popoludnÌ), invitatÛrium a kompletÛrium; doplnen˝ jazyk */
+	fprintf(batch_html_file, "<li>%d. %s %d: \n", _global_den.den, nazov_mesiaca(_global_den.mesiac - 1), _global_den.rok);
+	for(i = MODL_INVITATORIUM; i < MODL_NEURCENA; i++){
+		Log("/* generujem: %d `%s'...\n */", i, nazov_modlitby(i));
+		if((a != 4) || (a == 4 && (i != MODL_VESPERY && i != MODL_KOMPLETORIUM))){ /* 2006-01-31-TUTOLA; 2008-04-09 presunutÈ */
+			if(_global_opt_append == YES){
+				fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -x%d -p%s -j%s\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk]); /* modlitba `i' */
+			}/* endif _global_opt_append == YES */
+			else{
+				fprintf(batch_file, "%s%d%c.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s\n", batch_command, a, char_modlitby[i], _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk]); /* modlitba `i' */
+				fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%d%c.htm\">%s</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a, char_modlitby[i], nazov_modlitby(i));
+			}
+		}
+	}
+	fprintf(batch_html_file, "</li>\n");
+}/* execute_batch_command() */
+
 void _export_rozbor_dna_batch(short int typ){
 /* poznamky bez uvedenia datumu su prevzate z _export_rozbor_dna; 2003-07-07 */
 
@@ -5030,13 +5027,13 @@ void _export_rozbor_dna_batch(short int typ){
 #ifdef DEBUG_2006_12_07
 			Export("<p>pre %d sa pouûil 1...</p>\n", _global_den.den);
 #endif
-			BATCH_COMMAND(1);
+			execute_batch_command(1, batch_command);
 		}
 		else{
 #ifdef DEBUG_2006_12_07
 			Export("<p>pre %d sa pouûil 0...</p>\n", _global_den.den);
 #endif
-			BATCH_COMMAND(0);
+			execute_batch_command(0, batch_command);
 		}
 	}/* if((_global_den.denvt == DEN_NEDELA) || (_global_den.prik == PRIKAZANY_SVIATOK) || (_global_den.smer < 5)) */
 	else if(_global_pocet_svatych > 0){
@@ -5044,27 +5041,27 @@ void _export_rozbor_dna_batch(short int typ){
 		if((_global_den.smer > _global_svaty1.smer) ||
 			(_global_den.smer == 9) && (_global_svaty1.smer == 12)){
 		/* svaty */
-			BATCH_COMMAND(1);
+			execute_batch_command(1, batch_command);
 			if(_global_pocet_svatych > 1){
-				BATCH_COMMAND(2);
+				execute_batch_command(2, batch_command);
 				if(_global_pocet_svatych > 2){
-					BATCH_COMMAND(3);
+					execute_batch_command(3, batch_command);
 				}
 			}
 			if((_global_svaty1.smer >= 12) &&
 				(typ != EXPORT_DNA_VIAC_DNI)){
 				/* ak je to iba lubovolna spomienka, tak vsedny den */
-				BATCH_COMMAND(0);
+				execute_batch_command(0, batch_command);
 			}
 		}/* svaty ma prednost */
 		else{
 		/* prednost ma den */
-			BATCH_COMMAND(0);
+			execute_batch_command(0, batch_command);
 		}
 	}/* if(_global_pocet_svatych > 0) */
 	else{
 		/* obycajne dni, nie sviatok */
-		BATCH_COMMAND(0);
+		execute_batch_command(0, batch_command);
 	}/* if(equals(_global_den.meno, STR_EMPTY)) */
 
 	/* este spomienka panny marie v sobotu, cl. 15 */
@@ -5078,7 +5075,7 @@ void _export_rozbor_dna_batch(short int typ){
 			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
 			((_global_svaty1.smer >= 11) && (_global_pocet_svatych > 0))) &&
 		(typ != EXPORT_DNA_VIAC_DNI)){
-		BATCH_COMMAND(4);
+		execute_batch_command(4, batch_command);
 	}
 
 }/* _export_rozbor_dna_batch() */
@@ -9360,20 +9357,44 @@ _main_SIMULACIA_QS:
 			_main_LOG_to_Export("prv· kontrola include adres·ra (Ëi konËÌ oddeæovaËom `%c' [dÂûka %d])...\n", PATH_SEPARATOR, len);
 			if(include_dir[len] != (short int)PATH_SEPARATOR){
 				include_dir[len + 1] = PATH_SEPARATOR;
+				len++; /* 2008-04-10: doplnenÈ */
 				_main_LOG_to_Export("\tupravenÈ (pridanÈ na koniec reùazca): %s\n", include_dir);
 			}
 			else{
 				_main_LOG_to_Export("\tok.\n");
 			}
 
-			/* 2006-07-13: pridanÈ doplnenie jazyka kvÙli jazykov˝m mut·ci·m */
-			_main_LOG_to_Export("upravujem include adres·r podæa jazyka (%d - %s)...\n", _global_jazyk, nazov_jazyka[_global_jazyk]);
+			_main_LOG_to_Export("kontrola, Ëi include adres·ra konËÌ reùazcom `%s'...\n", postfix_jazyka[_global_jazyk]);
+			/* 2008-04-09: treba najskÙr skontrolovaù, Ëi include dir uû n·hodou neobsahuje aj prilepen˝ postfix jazyka 
+			 *             include_dir[len] alebo include_dir[len + 1] obsahuje PATH_SEPARATOR
+			 *             teda znaky jeden a dva pred by mali obsahovaù postfix_jazyka[_global_jazyk][0] a [1]
+			 */
+			if(
+				(
+					(include_dir[len] == (short int)PATH_SEPARATOR) &&
+					(include_dir[len - 1] == (short int)postfix_jazyka[_global_jazyk][1]) &&
+					(include_dir[len - 2] == (short int)postfix_jazyka[_global_jazyk][0])
+				) ||
+				(
+					(include_dir[len + 1] == (short int)PATH_SEPARATOR) &&
+					(include_dir[len] == (short int)postfix_jazyka[_global_jazyk][1]) &&
+					(include_dir[len - 1] == (short int)postfix_jazyka[_global_jazyk][0])
+				)
+			){
+				_main_LOG_to_Export("include adres·ra konËÌ reùazcom `%s' - nie je potrebnÈ prid·vaù\n", postfix_jazyka[_global_jazyk]);
+			}
+			else{
+				_main_LOG_to_Export("include adres·ra konËÌ reùazcom `%s' - je potrebnÈ prid·vaù: ", postfix_jazyka[_global_jazyk]);
+				/* 2006-07-13: pridanÈ doplnenie jazyka kvÙli jazykov˝m mut·ci·m */
+				_main_LOG_to_Export("upravujem include adres·r podæa jazyka (%d - %s)...\n", _global_jazyk, nazov_jazyka[_global_jazyk]);
 
-			/* 2006-07-17: dokonËenie ˙pravy include adres·ra podæa jazyka */
-			if(strlen(postfix_jazyka[_global_jazyk]) > 0){
-				/* 2006-07-31: pÙvodne sme uvaûovali, ûe include_dir bude napr. include/cz, incluce/en; teraz bude radöej include_cz, include_en t.j. nahraÔ backslash resp. slash znakom underscore */
-				include_dir[len] = UNDERSCORE;
-				strcat(include_dir, postfix_jazyka[_global_jazyk]);
+				/* 2006-07-17: dokonËenie ˙pravy include adres·ra podæa jazyka */
+				if(strlen(postfix_jazyka[_global_jazyk]) > 0){
+					/* 2006-07-31: pÙvodne sme uvaûovali, ûe include_dir bude napr. include/cz, incluce/en; teraz bude radöej include_cz, include_en t.j. nahraÔ backslash resp. slash znakom underscore */
+					include_dir[len] = UNDERSCORE;
+					strcat(include_dir, postfix_jazyka[_global_jazyk]);
+					_main_LOG_to_Export("\tupravenÈ (pridanÈ na koniec reùazca): %s\n", include_dir); /* 2008-04-10: doplnenÈ */
+				}
 			}
 
 			/* 2006-07-17: druh· kontrola, Ëi include_dir konËÌ na backslash resp. slash */
