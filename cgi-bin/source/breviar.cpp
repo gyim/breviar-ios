@@ -96,6 +96,8 @@
 /*                                                                         */
 /***************************************************************************/
 
+#include "vstudio.h"
+
 #ifndef __BREVIAR_C_
 #define __BREVIAR_C_
 
@@ -148,9 +150,10 @@ char *_global_buf2; /* 2006-08-01: vytvorené; túto premennú tiež alokujeme */
 #define _main_LOG_to_Export Log
 #define _main_LOG Log
 
-#ifndef OS_linux
-	#include "breviar.h" /* su tam deklarovane nasledovne globalne premenne a main() */
-#endif
+// #ifndef OS_linux
+#include "breviar.h" /* su tam deklarovane nasledovne globalne premenne a main() */
+// #endif
+
 /* ------------------------------------------------------------------- */
 /* globalne premenne -- deklarovane v liturgia.h, definovane tu */
 /* 18/02/2000A.D. */
@@ -3351,27 +3354,6 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 		Export("\">\n");
 		Export("</form>\n");
 
-		/* oddelenie */
-		Export("</td>\n<td>");
-		if(_global_linky == ANO){
-			/* ranne chvaly -- button */
-			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
-				script_name,
-				STR_QUERY_TYPE, STR_PRM_DATUM,
-				STR_DEN, _global_den.den,
-				STR_MESIAC, _global_den.mesiac,
-				STR_ROK, _global_den.rok,
-				STR_MODLITBA, STR_MODL_RANNE_CHVALY,
-				pom);
-		}
-		else{
-			Export("<form action=\"%s\">\n", pom);
-		}
-		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
-		Export((char *)HTML_BUTTON_RANNE_CHVALY);
-		Export("\">\n");
-		Export("</form>\n");
-
 /* 2003-08-06 dorobene posvatne citanie */
 
 		/* oddelenie */
@@ -3395,6 +3377,29 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 		}
 		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
 		Export((char *)HTML_BUTTON_POSV_CITANIE);
+		Export("\">\n");
+		Export("</form>\n");
+
+/* 2007-03-19: Na základe pripomienky Vlada Kiša posvätné èítanie predsunuté pred ranné chvály */
+
+		/* oddelenie */
+		Export("</td>\n<td>");
+		if(_global_linky == ANO){
+			/* ranne chvaly -- button */
+			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
+				script_name,
+				STR_QUERY_TYPE, STR_PRM_DATUM,
+				STR_DEN, _global_den.den,
+				STR_MESIAC, _global_den.mesiac,
+				STR_ROK, _global_den.rok,
+				STR_MODLITBA, STR_MODL_RANNE_CHVALY,
+				pom);
+		}
+		else{
+			Export("<form action=\"%s\">\n", pom);
+		}
+		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
+		Export((char *)HTML_BUTTON_RANNE_CHVALY);
 		Export("\">\n");
 		Export("</form>\n");
 
@@ -3575,9 +3580,32 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 			Log("\tPrilepil som aj jazyk: `%s' (2006-07-31)\n", pom2);
 		}
 
+		/* tabu¾ka pre buttony Predchádzajúci/Nasledujúci deò/rok a Dnes */
 		Export("\n<table align=\"center\">\n<tr>\n");
 
-		/* predchadzajuci / nasledujuci den */
+		/* vypocitanie toho isteho dna v predoslom roku */
+		datum.den = _global_den.den;
+		datum.mesiac = _global_den.mesiac;
+		_local_rok = _global_den.rok - 1;
+		if((_global_den.den == 29) && (_global_den.mesiac == 2)){
+			if(!prestupny(_local_rok))
+				datum.den = 28;
+		}
+		/* predosly rok -- button */
+		Export("<td align=\"right\"><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n",
+			script_name,
+			STR_QUERY_TYPE, STR_PRM_DATUM,
+			STR_DEN, datum.den,
+			STR_MESIAC, datum.mesiac,
+			STR_ROK, _local_rok,
+			pom2);
+		/* 2003-07-16; << zmenene na &lt;&lt; 2007-03-19: zmenené na HTML_LEFT_ARROW */
+		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_LEFT_ARROW" ");
+		Export((char *)html_button_predchadzajuci_[_global_jazyk]);
+		Export(" ");
+		Export((char *)html_text_rok[_global_jazyk]);
+		Export(" \">\n");
+		Export("</form></td>\n");
 
 		/* vypocitanie predosleho dna */
 		_local_rok = _global_den.rok;
@@ -3603,16 +3631,27 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 			STR_MESIAC, datum.mesiac,
 			STR_ROK, _local_rok, 
 			pom2);
-		/* 2003-07-16; < zmenene na &lt; */
-		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"&lt; ");
+		/* 2003-07-16; < zmenene na &lt; 2007-03-19: zmenené na HTML_LEFT_ARROW */
+		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_LEFT_ARROW" ");
 		Export((char *)html_button_predchadzajuci_[_global_jazyk]);
 		Export(" ");
 		Export((char *)html_text_den[_global_jazyk]);
 		Export(" \">\n");
 		Export("</form></td>\n");
 
-		/* oddelenie */
-		//Export("&nbsp;");
+		/* 2007-03-19: Dorobené tlaèidlo pre dnešok */
+#define	BUTTON_DNES
+#ifdef BUTTON_DNES
+		Export("<td align=\"center\"><form action=\"%s?%s=%s"HTML_AMPERSAND"%s\" method=\"post\">\n",
+			script_name,
+			STR_QUERY_TYPE, 
+			STR_PRM_DNES, 
+			pom2);
+		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
+		Export((char *)html_button_dnes[_global_jazyk]);
+		Export("\">\n");
+		Export("</form></td>\n");
+#endif
 
 		/* vypocitanie nasledujuceho dna */
 		_local_rok = _global_den.rok;
@@ -3639,43 +3678,13 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 			STR_MESIAC, datum.mesiac,
 			STR_ROK, _local_rok,
 			pom2);
-		/* 2003-07-16; > zmenene na &gt; */
+		/* 2003-07-16; > zmenene na &gt; 2007-03-19: zmenené na HTML_RIGHT_ARROW */
 		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
 		Export((char *)html_button_nasledujuci_[_global_jazyk]);
 		Export(" ");
 		Export((char *)html_text_den[_global_jazyk]);
-		Export(" &gt;\">\n");
+		Export(" "HTML_RIGHT_ARROW"\">\n");
 		Export("</form></td>\n");
-
-		Export("</tr>\n<tr>\n");
-		/* ten isty den pred rokom / o rok */
-
-		/* vypocitanie toho isteho dna v predoslom roku */
-		datum.den = _global_den.den;
-		datum.mesiac = _global_den.mesiac;
-		_local_rok = _global_den.rok - 1;
-		if((_global_den.den == 29) && (_global_den.mesiac == 2)){
-			if(!prestupny(_local_rok))
-				datum.den = 28;
-		}
-		/* predosly rok -- button */
-		Export("<td align=\"right\"><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n",
-			script_name,
-			STR_QUERY_TYPE, STR_PRM_DATUM,
-			STR_DEN, datum.den,
-			STR_MESIAC, datum.mesiac,
-			STR_ROK, _local_rok,
-			pom2);
-		/* 2003-07-16; << zmenene na &lt;&lt; */
-		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"&lt;&lt; ");
-		Export((char *)html_button_predchadzajuci_[_global_jazyk]);
-		Export(" ");
-		Export((char *)html_text_rok[_global_jazyk]);
-		Export(" \">\n");
-		Export("</form></td>\n");
-
-		/* oddelenie */
-		//Export("&nbsp;");
 
 		/* vypocitanie toho isteho dna v nasledujucom roku */
 		datum.den = _global_den.den;
@@ -3693,12 +3702,12 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 			STR_MESIAC, datum.mesiac,
 			STR_ROK, _local_rok,
 			pom2);
-		/* 2003-07-16; >> zmenene na &gt;&gt; */
+		/* 2003-07-16; >> zmenene na &gt;&gt; 2007-03-19: zmenené na HTML_RIGHT_ARROW */
 		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
 		Export((char *)html_button_nasledujuci_[_global_jazyk]);
 		Export(" ");
 		Export((char *)html_text_rok[_global_jazyk]);
-		Export("  &gt;&gt;\">\n");
+		Export(" "HTML_RIGHT_ARROW"\">\n");
 		Export("</form></td>\n");
 
 		Export("</tr>\n");
@@ -5358,8 +5367,8 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 			STR_MESIAC, STR_VSETKY_MESIACE,
 			STR_ROK, r - 1,
 			pom2);
-		/* 2003-07-16; << zmenene na &lt;&lt; */
-		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"&lt;&lt;%d (", r - 1);
+		/* 2003-07-16; << zmenene na &lt;&lt; 2007-03-19: zmenené na HTML_LEFT_ARROW */
+		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_LEFT_ARROW" %d (", r - 1);
 		Export((char *)html_button_predchadzajuci_[_global_jazyk]);
 		Export(" ");
 		Export((char *)html_text_rok[_global_jazyk]);
@@ -5374,12 +5383,12 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 			STR_MESIAC, STR_VSETKY_MESIACE,
 			STR_ROK, r + 1,
 			pom2);
-		/* 2003-07-16; >> zmenene na &gt;&gt; */
+		/* 2003-07-16; >> zmenene na &gt;&gt; 2007-03-19: zmenené na HTML_RIGHT_ARROW */
 		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"(");
 		Export((char *)html_button_nasledujuci_[_global_jazyk]);
 		Export(" ");
 		Export((char *)html_text_rok[_global_jazyk]);
-		Export(" ) %d&gt;&gt;\">\n", r + 1);
+		Export(" ) %d "HTML_RIGHT_ARROW"\">\n", r + 1);
 		Export("</form></td>\n");
 		/* koniec buttonov */
 		Export("</table></center>\n");
@@ -5437,7 +5446,8 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 					STR_MESIAC, pm,
 					STR_ROK, pr,
 					pom2);
-				Export("<"HTML_FORM_INPUT_SUBMIT" value=\"<<%s %d\">\n", nazov_Mesiaca(pm - 1), pr);
+				/* 2007-03-19: << zmenené na HTML_LEFT_ARROW */
+				Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_LEFT_ARROW" %s %d\">\n", nazov_Mesiaca(pm - 1), pr);
 				Export("</form></td>\n");
 
 				/* nasledujuci mesiac -- button */
@@ -5456,7 +5466,8 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 					STR_MESIAC, pm,
 					STR_ROK, pr,
 					pom2);
-				Export("<"HTML_FORM_INPUT_SUBMIT" value=\"%s %d>>\">\n", nazov_Mesiaca(pm - 1), pr);
+				/* 2007-03-19: >> zmenené na HTML_RIGHT_ARROW */
+				Export("<"HTML_FORM_INPUT_SUBMIT" value=\"%s %d "HTML_RIGHT_ARROW"\">\n", nazov_Mesiaca(pm - 1), pr);
 				Export("</form></td>\n");
 				/* koniec buttonov */
 				Export("</table>\n");
@@ -5548,25 +5559,29 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 		dnes.tm_mday, nazov_mesiaca(dnes.tm_mon - 1), dnes.tm_year);
 	_export_heading_center(pom);
 
-	/* 2006-02-10: výpis juliánskeho dátumu, len ak nie je urèená modlitba */
+	/* 2006-02-10: výpis juliánskeho dátumu, len ak nie je urèená modlitba 
+	 * 2007-03-19: výpis "Dnes je..." sa zobrazí len pri nastavení HTML_ZOBRAZIT_DNES_JE == 1
+	 */
 	if(_global_modlitba == MODL_NEURCENA){
-		Export((char *)html_text_dnes_je_atd[_global_jazyk],
-			dnes.tm_yday,
+		if(HTML_ZOBRAZIT_DNES_JE == ANO){
+			Export((char *)html_text_dnes_je_atd[_global_jazyk],
+				dnes.tm_yday,
 #undef ZOBRAZ_JULIANSKY_DATUM
 #ifdef ZOBRAZ_JULIANSKY_DATUM
-			(char *)STR_EMPTY,
+				(char *)STR_EMPTY,
 #else
-			(char *)HTML_COMMENT_BEGIN,
+				(char *)HTML_COMMENT_BEGIN,
 #endif
-			(_global_linky == ANO)? HTTP_ADDRESS: MESSAGE_FOLDER,
-			FILE_JULIANSKY_DATUM,
-			jd_dnes,
+				(_global_linky == ANO)? HTTP_ADDRESS: MESSAGE_FOLDER,
+				FILE_JULIANSKY_DATUM,
+				jd_dnes,
 #ifdef ZOBRAZ_JULIANSKY_DATUM
-			(char *)STR_EMPTY
+				(char *)STR_EMPTY
 #else
-			(char *)HTML_COMMENT_END
+				(char *)HTML_COMMENT_END
 #endif
-			);
+				);
+		}
 		_rozbor_dna(datum, dnes.tm_year);
 		_export_rozbor_dna(EXPORT_DNA_DNES);
 		/* 2006-02-02: celý zvyšný formulár presunutý do samostatnej funkcie */
@@ -5884,8 +5899,12 @@ void _main_analyza_roku(char *rok){
 			STR_QUERY_TYPE, STR_PRM_ANALYZA_ROKU,
 			STR_ANALYZA_ROKU, year - 1,
 			pom2);
-		/* 2003-07-16; << zmenene na &lt;&lt; */
-		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"&lt;&lt;%d (Predchádzajúci rok)\">\n", year - 1);
+		/* 2003-07-16; << zmenene na &lt;&lt; 2007-03-19: zmenené na HTML_LEFT_ARROW */
+		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_LEFT_ARROW" %d (", year - 1);
+		Export((char *)html_button_predchadzajuci_[_global_jazyk]);
+		Export(" ");
+		Export((char *)html_text_den[_global_jazyk]);
+		Export(")\">\n");
 		Export("</form></td>\n");
 
 		/* nasledujuci rok -- button */
@@ -5894,8 +5913,12 @@ void _main_analyza_roku(char *rok){
 			STR_QUERY_TYPE, STR_PRM_ANALYZA_ROKU,
 			STR_ANALYZA_ROKU, year + 1,
 			pom2);
-		/* 2003-07-16; >> zmenene na &gt;&gt; */
-		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"(Nasledujúci rok) %d&gt;&gt;\">\n", year + 1);
+		/* 2003-07-16; >> zmenene na &gt;&gt; 2007-03-19: zmenené na HTML_RIGHT_ARROW */
+		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"(");
+		Export((char *)html_button_nasledujuci_[_global_jazyk]);
+		Export(" ");
+		Export((char *)html_text_rok[_global_jazyk]);
+		Export(") %d "HTML_RIGHT_ARROW"\">\n", year + 1);
 		Export("</form></td>\n");
 		Export("</form></td>\n");
 		/* koniec buttonov */

@@ -3,6 +3,8 @@
  * (c) 1995-1996 William E. Weinman
  *
  */
+#include "vstudio.h"
+
 #define MAX_NAME_CGI_UTILS 128
 #define MAX_VAL_CGI_UTILS 128
 struct urlvariable_struct {

@@ -49,6 +49,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
 USA.  */
 
+#include "vstudio.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "mygetopt.h"
@@ -604,7 +606,7 @@ int _getopt_internal(
 
   {
     char c = *nextchar++;
-    char *temp = my_index (optstring, c);
+    char *temp = (char *) my_index (optstring, c);
 
     /* Increment `optind' when we start to process its last character.  */
     if (*nextchar == '\0')

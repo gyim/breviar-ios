@@ -23,6 +23,8 @@
 /*                                                             */
 /***************************************************************/
 
+#include "vstudio.h"
+
 #ifndef __LITURGIA_C_
 #define __LITURGIA_C_
 

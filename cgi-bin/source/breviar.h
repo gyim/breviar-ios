@@ -18,6 +18,8 @@
 /*                                                             */
 /***************************************************************/
 
+#include "vstudio.h"
+
 #ifndef __BREVIAR_H
 #define __BREVIAR_H
 
@@ -162,6 +164,11 @@ extern short int _global_pocet_zalmov_kompletorium;
  */
 int main(int argc, char **argv);
 #endif /* OS_linux */
+
+#if (_MSC_VER >= 1400)       // VC8+ 2007-02-12 kvôli vc++ 2005 express edition
+	#pragma warning(disable : 4996)    // disable all deprecation warnings
+	#define putenv _putenv
+#endif   // VC8+
 
 #endif /* __BREVIAR_H */
 

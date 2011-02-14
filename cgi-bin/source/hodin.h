@@ -26,6 +26,8 @@
 /*                                                             */
 /***************************************************************/
 
+#include "vstudio.h"
+
 #ifndef __HODIN_H
 #define __HODIN_H
 
@@ -721,7 +723,7 @@ const char *html_button_vespery[] = {"Vešpery", "Nešpory", "Vesperae", "", ""};
 #define HTML_BUTTON_VESPERY	html_button_vespery[_global_jazyk]
 #endif
 
-const char *html_button_posv_citanie[] = {"Posv.èít.", "Ètení", "Reading", "", ""};
+const char *html_button_posv_citanie[] = {"Posv. èít.", "Ètení", "Reading", "", ""};
 #ifndef HTML_BUTTON_POSV_CITANIE
 #define HTML_BUTTON_POSV_CITANIE	html_button_posv_citanie[_global_jazyk]
 #endif
@@ -753,6 +755,7 @@ const char *html_button_dnes_defaults[] = {"Vyèisti", "Vyèisti", "Clear", "", ""
 
 const char *html_button_predchadzajuci_[] = {"Predchádzajúci", "Pøedchozí", "Previous", "", ""};
 const char *html_button_nasledujuci_[] = {"Nasledujúci", "Následující", "Next", "", ""};
+const char *html_button_dnes[] = {"Dnes", "Dnes", "Today", "", ""};
 const char *html_text_den[] = {"deò", "den", "day", "", ""};
 const char *html_text_mesiac[] = {"mesiac", "mìsíc", "month", "", ""};
 const char *html_text_rok[] = {"rok", "rok", "year", "", ""};
@@ -772,7 +775,7 @@ const char *html_text_dalsie_moznosti[] = {"Vyberte si ïalšie monosti ", "Další
 const char *html_text_prik_sviatky_atd[] = {"prikázané sviatky a slávnosti Pána v roku ", "pøikázané svátky a slávnosti Pánì v roku ", "obligatory celebrations in year ", "", ""};
 const char *html_text_lit_kalendar[] = {"liturgickı kalendár pre", "liturgickı kalendáø pro", "liturgical calendar for", "", ""};
 const char *html_text_roku[] = {"roku", "roku", "of year", "", ""};
-const char *html_text_tabulka_pohyblive_od[] = {"tabu¾ka dátumov pohyblivıch slávení od roku", "tabulka s datumy promìnnıch slavností od roku", "table with dates of movable celebrations from year", "", ""};
+const char *html_text_tabulka_pohyblive_od[] = {"tabu¾ka dátumov pohyblivıch slávení od roku", "tabulka s daty promìnnıch slavností od roku", "table with dates of movable celebrations from year", "", ""};
 const char *html_text_do_roku[] = {"do roku", "po rok", "till year", "", ""};
 const char *html_text_zobrazit_linky[] = {"zobrazi tabu¾ku vrátane hypertextovıch odkazov na jednotlivé dni", "zobrazit tabulku s hypertextovımi odkazy pro jednotlivé dny", "display the table including hypertext links to each date", "", ""};
 const char *html_text_pre_cezrocne_obd[] = {"pre cezroèné obdobie", "pro mezidobí", "for ...", "", ""};
@@ -1013,7 +1016,7 @@ const char *text_FEB_23[] =
 
 const char *text_POPOLCOVA_STREDA[] =
 {"Popolcová streda",
- "Popeleèní søeda",
+ "Popeleèní støeda",
  "", "", ""};
 
 const char *text_MAR_04[] =

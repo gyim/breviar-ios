@@ -11,6 +11,8 @@
 /*                                                             */
 /***************************************************************/
 
+#include "vstudio.h"
+
 #include "mydefs.h"
 #include <string.h>
 #include "mystring.h" /* pridane 2003-08-13 */

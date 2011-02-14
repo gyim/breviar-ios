@@ -27,6 +27,8 @@
 /*                                                             */
 /***************************************************************/
 
+#include "vstudio.h"
+
 #ifndef __MYDEFS_H_
 #define __MYDEFS_H_
 
@@ -56,7 +58,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2007-01-11"
+#define BUILD_DATE "2007-03-19"
 
 #define BYTES 250
 #define SMALL 80
@@ -418,6 +420,9 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #define HTML_COMMENT_BEGIN		"<!--"
 #define HTML_COMMENT_END		"-->"
 #define HTML_FONT_SIZE_FARBA	"2"
+/* 2007-03-19: pridané namiesto gt a lt html znakov */
+#define HTML_LEFT_ARROW			"&laquo;"
+#define HTML_RIGHT_ARROW		"&raquo;"
 
 /* definície HTML prvkov upravené a presunuté do hodin.h, 2006-08-01;
  * tu ponechané len z historických dôvodov zakomentované
@@ -436,6 +441,9 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
  * #define HTML_BUTTON_DNES_SHOW     "Zobraz"
  * #define HTML_BUTTON_DNES_DEFAULTS "Vyèisti"
  */
+
+/* 2007-03-19: výpis "Dnes je..." sa zobrazí len pri tomto nastavení, ak je 1 */
+#define HTML_ZOBRAZIT_DNES_JE	0
 
 #endif /*__MYDEFS_H_*/
 

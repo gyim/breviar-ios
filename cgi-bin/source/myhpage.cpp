@@ -15,10 +15,12 @@
 /*   2003-07-02a.D. | trosku zmenena patka                     */
 /*   2003-07-15a.D. | trosku zmenena hlavicka (ako _header.htm)*/
 /*   2004-03-16a.D. | funkcie hlavicka a patka aj do suboru    */
-/*   2006-07-31a.D. | prvé kroky k jazykovým mutáciám                      */
+/*   2006-07-31a.D. | prvé kroky k jazykovým mutáciám          */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
+
+#include "vstudio.h"
 
 #ifndef __MYHPAGE_C_
 #define __MYHPAGE_C_

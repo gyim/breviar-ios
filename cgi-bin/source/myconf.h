@@ -13,6 +13,8 @@
 /*                                                             */
 /***************************************************************/
 
+#include "vstudio.h"
+
 #ifndef __MYCONFIG_H
 #define __MYCONFIG_H
 

@@ -80,6 +80,8 @@
 //#define DETAIL_LOG_SVATY /* 22/02/2000A.D. */
 //#define DETAIL_LOG_GLOBAL_DEN /* 22/02/2000A.D. */
 
+#include "vstudio.h"
+
 #include "dbzaltar.h" /* 22/02/2000A.D. -- rozdelene na .h a .cpp subor */
 
 char _anchor_head[SMALL];

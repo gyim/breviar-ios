@@ -16,6 +16,8 @@
 /*                                                             */
 /***************************************************************/
 
+#include "vstudio.h"
+
 #include "myconf.h"
 #include "mystring.h"
 

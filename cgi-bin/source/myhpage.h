@@ -12,6 +12,8 @@
 /*                                                             */
 /***************************************************************/
 
+#include "vstudio.h"
+
 #ifndef __MYHPAGE_H_
 #define __MYHPAGE_H_
 

@@ -10,6 +10,8 @@
 /*                                                             */
 /***************************************************************/
 
+#include "vstudio.h"
+
 #include "mystring.h"
 
 /* funkcia mystrcpy()

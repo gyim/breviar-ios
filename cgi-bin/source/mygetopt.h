@@ -17,6 +17,8 @@
 /*                                                             */
 /***************************************************************/
 
+#include "vstudio.h"
+
 #include <stdio.h>
 
 /* Declarations for getopt.

@@ -41,6 +41,7 @@
 /*                                                             */
 /***************************************************************/
 
+#include "vstudio.h"
 #ifndef __LITURGIA_H_
 #define __LITURGIA_H_
 

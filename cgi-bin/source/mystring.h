@@ -11,6 +11,8 @@
 /*                                                             */
 /***************************************************************/
 
+#include "vstudio.h"
+
 #include <string.h>
 
 #ifndef __MYSTRING_H

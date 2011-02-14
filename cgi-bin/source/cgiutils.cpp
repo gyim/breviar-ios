@@ -1,3 +1,5 @@
+#include "vstudio.h"
+
 #ifndef __CGIUTILS_C_
 #define __CGIUTILS_C_
 

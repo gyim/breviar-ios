@@ -14,6 +14,8 @@
 /*                                                             */
 /***************************************************************/
 
+#include "vstudio.h"
+
 #ifndef __DBZALTAR_H_
 #define __DBZALTAR_H_
 
