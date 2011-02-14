@@ -17,6 +17,7 @@
 /*   2006-08-07a.D. | pridané sv. muov/ien, èo ili v man.  */
 /*   2006-08-18a.D. | zmena int na short int (staèí 32tis.)    */
 /*   2006-08-19a.D. | pridanie liturgickej farby               */
+/*   2006-09-07a.D. | dokonèená lokalizácia mesiacov JAN-AUG   */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -1406,6 +1407,128 @@ const char *text_JUL_31[] =
 {"Sv. Ignáca z Loyoly, kòaza",
  "Sv. Ignáce z Loyoly, knìze",
  "", ""};
+
+const char *text_AUG_01[] =
+{"Sv. Alfonza Márie de’ Ligouri, biskupa a uèite¾a Cirkvi",
+ "Sv. Alfonsa z Liguori, biskupa a uèitele církve",
+ "", ""};
+const char *text_AUG_02_1[] =
+{"Sv. Euzébia Vercellského, biskupa",
+ "Sv. Eusebia z Vercelli, biskupa",
+ "", ""};
+const char *text_AUG_02_2[] =
+{"Sv. Petra Juliána Eymard, kòaza",
+ "Sv. Petra Juliána Eymarda, knìze",
+ "", ""};
+const char *text_AUG_04[] =
+{"Sv. Jána Márie Vianneya, kòaza",
+ "Sv. Jana Marie Vianneye, knìze",
+ "", ""};
+const char *text_AUG_05[] =
+{"Vıroèie posviacky hlavnej mariánskej baziliky v Ríme",
+ "Posvìcení øímské baziliky Panny Marie",
+ "", ""};
+const char *text_AUG_06[] =
+{"Premenenie Pána",
+ "Promìnìní Pánì",
+ "", ""};
+const char *text_AUG_07_1[] =
+{"Sv. Sixta II., pápea, a jeho spoloèníkov, muèeníkov",
+ "Sv. Sixta II., papee, a druhù, muèedníkù",
+ "", ""};
+const char *text_AUG_07_2[] =
+{"Sv. Kajetána, kòaza",
+ "Sv. Kajetána, knìze",
+ "", ""};
+const char *text_AUG_08[] =
+{"Sv. Dominika, kòaza",
+ "Sv. Dominika, knìze",
+ "", ""};
+const char *text_AUG_09[] =
+{"Sv. Terézie Benedikty, reho¾níèky a muèenice, spolupatrónky Európy",
+ "Sv. Terezy Benedikty, øeholnice a muèednice, patronky Evropy",
+ "", ""};
+const char *text_AUG_10[] =
+{"Sv. Vavrinca, diakona a muèeníka",
+ "Sv. Vavøince, muèedníka",
+ "", ""};
+const char *text_AUG_11[] =
+{"Sv. Kláry, panny",
+ "Sv. Kláry, panny",
+ "", ""};
+const char *text_AUG_12[] =
+{"Sv. Jany Františky de Chantal, reho¾níèky",
+ "Sv. Jany Františky de Chantal, øeholnice",
+ "", ""};
+const char *text_AUG_13[] =
+{"Sv. Ponciána, pápea, a sv. Hypolita, kòaza, muèeníkov",
+ "Sv. Ponciána, papee, a Hippolyta, knìze, muèedníkù",
+ "", ""};
+const char *text_AUG_14[] =
+{"Sv. Maximiliána Kolbeho, kòaza a muèeníka",
+ "Sv. Maxmiliána Marie Kolbeho, knìze a muèedníka",
+ "", ""};
+const char *text_AUG_15[] =
+{"Nanebovzatie prebl. Panny Márie",
+ "Nanebevzetí Panny Marie",
+ "", ""};
+const char *text_AUG_16[] =
+{"Sv. Štefana Uhorského",
+ "Sv. Štìpána Uherského",
+ "", ""};
+const char *text_AUG_19[] =
+{"Sv. Jána Eudes, kòaza",
+ "Sv. Jana Eudese, knìze",
+ "", ""};
+const char *text_AUG_20[] =
+{"Sv. Bernarda, opáta a uèite¾a Cirkvi",
+ "Sv. Bernarda, opata a uèitele církve",
+ "", ""};
+const char *text_AUG_21[] =
+{"Sv. Pia X., pápea",
+ "Sv. Pia X., papee",
+ "", ""};
+const char *text_AUG_22[] =
+{"Prebl. Panny Márie Krá¾ovnej",
+ "Panny Marie Královny",
+ "", ""};
+const char *text_AUG_23[] =
+{"Sv. Rueny Limskej, panny",
+ "Sv. Rùeny z Limy, panny",
+ "", ""};
+const char *text_AUG_24[] =
+{"Sv. Bartolomeja, apoštola",
+ "Sv. Bartolomìje, apoštola",
+ "", ""};
+const char *text_AUG_25_1[] =
+{"Sv. Jozefa de Calasanz, kòaza",
+ "Sv. Josefa Kalasanského, knìze",
+ "", ""};
+const char *text_AUG_25_2[] =
+{"Sv. ¼udovíta",
+ "Sv. Ludvíka",
+ "", ""};
+const char *text_AUG_25_3[] =
+{"(na Slovensku nie je)",
+ "Sv. Benedikta, Jana, Matouše, Izáka a Kristina, muèedníkù",
+ "", ""};
+const char *text_AUG_27[] =
+{"Sv. Moniky",
+ "Sv. Moniky",
+ "", ""};
+const char *text_AUG_28[] =
+{"Sv. Augustína, biskupa a uèite¾a Cirkvi",
+ "Sv. Augustina, biskupa a uèitele církve",
+ "", ""};
+const char *text_AUG_29[] =
+{"Muèenícka smr sv. Jána Krstite¾a",
+ "Umuèení svatého Jana Køtitele",
+ "", ""};
+const char *text_AUG_30[] =
+{"Vıroèie posviacky katedrálneho chrámu v Trnave",
+ "(v Èechách, na Moravì a na Slezsku není)",
+ "", ""};
+
 
 const char *text_ZELENY_STVRTOK[] =
 {"Zelenı (ve¾kı) štvrtok - Pamiatka Pánovej veèere",
