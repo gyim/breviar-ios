@@ -34,7 +34,8 @@
 /*   2006-08-07a.D. | pridané sv. mužov/žien, èo žili v manž.  */
 /*   2006-08-18a.D. | zmena int na short int (staèí 32tis.)    */
 /*   2006-08-19a.D. | pridanie liturgickej farby               */
-/*   2006-10-11a.D. | pre invitatórium a kompletórium params.  */
+/*   2006-10-11a.D. | pre invitatórium a kompletórium          */
+/*   2006-10-13a.D. | jazykovo závislé je aj nazov_Modlitby    */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -220,7 +221,10 @@ typedef struct den_mesiac _struct_den_mesiac;
 extern const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1];
 #define		nazov_modlitby(a)	nazov_modlitby_jazyk[a][_global_jazyk]
 
-extern const char *nazov_Modlitby[];
+//extern const char *nazov_Modlitby[];
+extern const char *nazov_Modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1];
+#define		nazov_Modlitby(a)	nazov_Modlitby_jazyk[a][_global_jazyk]
+
 /* extern const char *nazov_MODLITBY[]; */
 
 /* ... a file templates (suborove vzory) pre modlitby */
@@ -1073,6 +1077,10 @@ void Log(_struct_lrok r);
 void Log(struct tmodlitba1);
 #define Log_struktura_tm2 Log("  <tm2>"); Log
 void Log(struct tmodlitba2);
+#define Log_struktura_tm3 Log("  <tm3>"); Log
+void Log(struct tmodlitba3);
+#define Log_struktura_tm4 Log("  <tm4>"); Log
+void Log(struct tmodlitba4);
 
 int _encode_spol_cast(short int, short int, short int);
 int _encode_spol_cast(short int, short int);

@@ -63,6 +63,26 @@ const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 
 #define		nazov_modlitby(a)	nazov_modlitby_jazyk[a][_global_jazyk]
 
+const char *nazov_Modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] = 
+{{"Invitatórium", "Invitatoo", "Invitatory", "" }
+, {"Ranné chvály", "Ranní chvály", "Laudes", "" }
+, {"Posvätné eítanie", "Posvátné etení", "Holy Reading", "" }
+, {"Modlitba predpoludním", "Modlitba dopoledne", "", "" }
+, {"Modlitba napoludnie", "Modlitba v poledne", "", "" }
+, {"Modlitba popoludní", "Modlitba odpoledne", "", "" }
+, {"Vešpery", "Nešpory", "Vesperae", "" }
+, {"Kompletórium", "Kompletáo", "Completary", "" }
+, {"Neureená", "Neureena", "not-defined", ""}
+, {"Prvé vešpery", "První nešpory", "", "" }
+, {"Prvé kompletórium", "První kompletáo", "", "" }
+, {"Druhé vešpery", "Druhé nešpory", "", "" }
+, {"Druhé kompletórium", "Druhý kompletáo", "", "" }
+, {"Detaily", "Detaily", "Details", "" }
+};
+
+#define		nazov_Modlitby(a)	nazov_Modlitby_jazyk[a][_global_jazyk]
+
+/*
 const char *nazov_Modlitby[] =
 {"Invitatórium", "Ranné chvály", "Posvätné èítanie",
  "Modlitba predpoludním", "Modlitba napoludnie", "Modlitba popoludní",
@@ -70,7 +90,7 @@ const char *nazov_Modlitby[] =
  "Prvé vešpery", "Prvé kompletórium",
  "Druhé vešpery", "Druhé kompletórium",
  "Detaily"};
-/*
+
 const char *nazov_MODLITBY[] =
 {"INVITATÓRIUM", "RANNÉ CHVÁLY", "POSVATNÉ ÈÍTANIE",
  "MODLITBA PREDPOLUDNÍM", "MODLITBA NAPOLUDNIE", "MODLITBA POPOLUDNÍ",

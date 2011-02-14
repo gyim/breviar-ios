@@ -1878,7 +1878,7 @@ void showPrayer(short int type){
 
 	/* samotne vypisanie, o aku modlitbu ide */
 	Log("showPrayer(type %i, %s), _global_modlitba == %s\n",
-		type, nazov_Modlitby[type], nazov_Modlitby[_global_modlitba]);
+		type, nazov_Modlitby(type), nazov_Modlitby(_global_modlitba));
 
 	if((type > MODL_KOMPLETORIUM) || (type < MODL_INVITATORIUM)){
 		Export("Neznámy typ modlitby.\n");
@@ -3151,7 +3151,7 @@ short int init_global_string(short int typ, short int poradie_svateho){
 short int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, short int rok, short int modlitba, short int poradie_svateho){
 	short int ret;
 	Log("-- _rozbor_dna_s_modlitbou(_struct_den_mesiac, int, int, int): begin ({%d, %d}, %d, %s, %d)\n",
-		datum.den, datum.mesiac, rok, nazov_Modlitby[modlitba], poradie_svateho);
+		datum.den, datum.mesiac, rok, nazov_Modlitby(modlitba), poradie_svateho);
 
 	Log("vo funkcii _rozbor_dna_s_modlitbou() spustam set_popis_dummy();\n");
 	set_popis_dummy();
@@ -4163,14 +4163,17 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 	Export(" \n");
 	/* pole WWW_MODLITBA */
 	Export("<select name=\"%s\">\n", STR_MODLITBA);
+	Export("<option>%s\n", nazov_modlitby(MODL_INVITATORIUM)); /* invitatórium a kompletórium pridané 2006-10-13 */
 	Export("<option selected>%s\n", nazov_modlitby(MODL_RANNE_CHVALY));
 	Export("<option>%s\n", nazov_modlitby(MODL_POSV_CITANIE)); /* posv.citanie pridane 2003-08-13 */
 	Export("<option>%s\n", nazov_modlitby(MODL_PREDPOLUDNIM));
 	Export("<option>%s\n", nazov_modlitby(MODL_NAPOLUDNIE));
 	Export("<option>%s\n", nazov_modlitby(MODL_POPOLUDNI)); /* cez den: pridane 2003-08-13 */
-	/* spomienka P. Marie v sobotu nema vespery */
-	if(poradie_svaty != 4)
+	/* spomienka P. Marie v sobotu nema vespery ani kompletórium */
+	if(poradie_svaty != 4){
 		Export("<option>%s\n", nazov_modlitby(MODL_VESPERY));
+		Export("<option>%s\n", nazov_modlitby(MODL_KOMPLETORIUM)); /* invitatórium a kompletórium pridané 2006-10-13 */
+	}
 	Export("</select>\n");
 	Export("</li>\n");
 
@@ -4562,7 +4565,7 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 			if((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV) && (_global_modlitba == MODL_DRUHE_VESPERY))
 				Log("Spomienka vsetkych vernych zosnulych -- nevypisem, ze su druhe vespery...\n");
 			else{
-				sprintf(pom, " (%s)", nazov_Modlitby[_global_modlitba]);
+				sprintf(pom, " (%s)", nazov_Modlitby(_global_modlitba));
 				strcat(_global_string, pom);
 			}
 		}/* _global_den ma dvoje vespery/kompletorium, teda musime brat DRUHE */
@@ -4597,7 +4600,7 @@ LABEL_ZMENA:
 				)
 			){
 				Log("priradujem %s z dalsieho dna\n",
-					nazov_Modlitby[modlitba]);
+					nazov_Modlitby(modlitba));
 				_global_den = _local_den;
 				_global_modl_vespery = _local_modl_prve_vespery;
 				_global_modl_kompletorium = _local_modl_prve_kompletorium;
@@ -4627,7 +4630,7 @@ LABEL_ZMENA:
 					_global_modl_kompletorium = _global_modl_prve_kompletorium;
 				}
 				mystrcpy(_global_string, _local_string, MAX_STR);
-				sprintf(pom, " (%s)", nazov_Modlitby[_global_modlitba]);
+				sprintf(pom, " (%s)", nazov_Modlitby(_global_modlitba));
 				strcat(_global_string, pom);
 			}
 		}/* _local_den ma dvoje vespery/kompletorium, teda musime brat PRVE */
@@ -4665,6 +4668,12 @@ LABEL_NIE_INE_VESPERY: /* 08/03/2000A.D. */
 		case MODL_VESPERY:
 			Log(_global_modl_vespery);
 			break;
+		case MODL_INVITATORIUM: /* invitatórium a kompletórium pridané 2006-10-13 */
+			Log(_global_modl_invitatorium);
+			break;
+		case MODL_KOMPLETORIUM: /* invitatórium a kompletórium pridané 2006-10-13 */
+			Log(_global_modl_kompletorium);
+			break;
 	}
 /*	Log("_global_den:\n");	Log(_global_den); */
 
@@ -4677,7 +4686,7 @@ LABEL_NIE_INE_VESPERY: /* 08/03/2000A.D. */
 	}/* _global_modlitba == MODL_DETAILY */
 	else{/* _global_modlitba != MODL_DETAILY */
 		Log("spustam showPrayer(%s)...\n",
-			nazov_Modlitby[_global_modlitba]);
+			nazov_Modlitby(_global_modlitba));
 		/* predpokladam, ze aj _global_modlitba je prve/druhe vespery,
 		 * v _global_prve_vespery su spravne udaje (podobne kompletorium) */
 		showPrayer(modlitba);
@@ -4944,12 +4953,15 @@ void _main_formular(short int den, short int mesiac, short int rok, short int de
 	/* pole WWW_MODLITBA */
 	Export("<select name=\"%s\">\n", STR_MODLITBA);
 	Export("<option>%s\n", nazov_modlitby(MODL_PRVE_VESPERY));
+	Export("<option>%s\n", nazov_modlitby(MODL_PRVE_KOMPLETORIUM)); /* invitatórium a kompletórium pridané 2006-10-13 */
+	Export("<option>%s\n", nazov_modlitby(MODL_INVITATORIUM)); /* invitatórium a kompletórium pridané 2006-10-13 */
 	Export("<option selected>%s\n", nazov_modlitby(MODL_RANNE_CHVALY));
 	Export("<option>%s\n", nazov_modlitby(MODL_POSV_CITANIE)); /* posvätné èítanie: pridané 2005-08-15 */
 	Export("<option>%s\n", nazov_modlitby(MODL_PREDPOLUDNIM));
 	Export("<option>%s\n", nazov_modlitby(MODL_NAPOLUDNIE));
 	Export("<option>%s\n", nazov_modlitby(MODL_POPOLUDNI)); /* cez den: pridane 2003-08-06 */
 	Export("<option>%s\n", nazov_modlitby(MODL_DRUHE_VESPERY));
+	Export("<option>%s\n", nazov_modlitby(MODL_DRUHE_KOMPLETORIUM)); /* invitatórium a kompletórium pridané 2006-10-13 */
 	Export("</select>\n");
 
 	Export("&nbsp;");
@@ -5054,7 +5066,7 @@ short int atojazyk(char *jazyk){
 		 */\
 		for(i = MODL_INVITATORIUM; i <= MODL_DETAILY; i++){\
 			if(equals(modlitba, nazov_modlitby(i)) || \
-				equals(modlitba, nazov_Modlitby[i]) /*|| \
+				equals(modlitba, nazov_Modlitby(i)) /*|| \
 				equals(modlitba, nazov_MODLITBY[i])*/){\
 				/* ak je zhoda, potom prirad do p a ukonci `for' */\
 				p = i;\
@@ -5583,7 +5595,7 @@ void _main_zaltar(char *den, char *tyzden, char *modlitba){
 	/* 2003-08-13: neviem preco tu bola poznamka "unfinished - este nejde uplne spravne" */
 
 	Log("spustam showPrayer(%s)...\n",
-		nazov_Modlitby[_global_modlitba]);
+		nazov_Modlitby(_global_modlitba));
 
 	/* predpokladam, ze aj _global_modlitba je prve/druhe vespery,
 	 * v _global_prve_vespery su spravne udaje (podobne kompletorium) */

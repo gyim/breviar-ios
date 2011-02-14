@@ -1310,14 +1310,22 @@ void Log(struct tmodlitba2 t){
 
 /* 2006-10-11 doplnené */
 void Log(struct tmodlitba3 t){
-	Log_struktura_tm2("struktura tmodlitba3:\n");
-	Log_struktura_tm2("   popis        file `%s', anchor `%s'\n", t.popis.file, t.popis.anchor);
-	Log_struktura_tm2("   hymnus       file `%s', anchor `%s'\n", t.hymnus.file, t.hymnus.anchor);
-	Log_struktura_tm2("   antifona1    file `%s', anchor `%s'\n", t.antifona1.file, t.antifona1.anchor);
-	Log_struktura_tm2("   zalm1        file `%s', anchor `%s'\n", t.zalm1.file, t.zalm1.anchor);
-	Log_struktura_tm2("   kcitanie     file `%s', anchor `%s'\n", t.kcitanie.file, t.kcitanie.anchor);
-	Log_struktura_tm2("   kresponz     file `%s', anchor `%s'\n", t.kresponz.file, t.kresponz.anchor);
-	Log_struktura_tm2("   nuncdimittis file `%s', anchor `%s'\n", t.kresponz.file, t.nuncdimittis.anchor);
+	Log_struktura_tm3("struktura tmodlitba3:\n");
+	Log_struktura_tm3("   popis        file `%s', anchor `%s'\n", t.popis.file, t.popis.anchor);
+	Log_struktura_tm3("   hymnus       file `%s', anchor `%s'\n", t.hymnus.file, t.hymnus.anchor);
+	Log_struktura_tm3("   antifona1    file `%s', anchor `%s'\n", t.antifona1.file, t.antifona1.anchor);
+	Log_struktura_tm3("   zalm1        file `%s', anchor `%s'\n", t.zalm1.file, t.zalm1.anchor);
+	Log_struktura_tm3("   kcitanie     file `%s', anchor `%s'\n", t.kcitanie.file, t.kcitanie.anchor);
+	Log_struktura_tm3("   kresponz     file `%s', anchor `%s'\n", t.kresponz.file, t.kresponz.anchor);
+	Log_struktura_tm3("   nuncdimittis file `%s', anchor `%s'\n", t.kresponz.file, t.nuncdimittis.anchor);
+}
+
+/* 2006-10-13 doplnené */
+void Log(struct tmodlitba4 t){
+	Log_struktura_tm4("struktura tmodlitba3:\n");
+	Log_struktura_tm4("   popis        file `%s', anchor `%s'\n", t.popis.file, t.popis.anchor);
+	Log_struktura_tm4("   antifona1    file `%s', anchor `%s'\n", t.antifona1.file, t.antifona1.anchor);
+	Log_struktura_tm4("   zalm1        file `%s', anchor `%s'\n", t.zalm1.file, t.zalm1.anchor);
 }
 
 /*---------------------------------------------------------------------*/

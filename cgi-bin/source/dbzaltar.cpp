@@ -108,6 +108,15 @@ char _anchor_head[SMALL];
 
 void _set_popis(short int modlitba, const char *file, const char *anchor){ /* pridana 05/04/2000A.D. */
 	switch(modlitba){
+		/* 2006-10-13: Pridaný popis aj pre invitatórium a kompletórium */
+		case MODL_INVITATORIUM:
+			mystrcpy(_global_modl_invitatorium.popis.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_invitatorium.popis.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
+		case MODL_KOMPLETORIUM:
+			mystrcpy(_global_modl_kompletorium.popis.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_kompletorium.popis.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
 		case MODL_RANNE_CHVALY:
 			mystrcpy(_global_modl_ranne_chvaly.popis.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_ranne_chvaly.popis.anchor, anchor, MAX_STR_AF_ANCHOR);
@@ -142,6 +151,11 @@ void _set_popis(short int modlitba, const char *file, const char *anchor){ /* pr
 
 void _set_hymnus(short int modlitba, const char *file, const char *anchor){
 	switch(modlitba){
+		/* 2006-10-13: Pridaný hymnus aj pre kompletórium */
+		case MODL_KOMPLETORIUM:
+			mystrcpy(_global_modl_kompletorium.hymnus.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_kompletorium.hymnus.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
 		case MODL_RANNE_CHVALY:
 			mystrcpy(_global_modl_ranne_chvaly.hymnus.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_ranne_chvaly.hymnus.anchor, anchor, MAX_STR_AF_ANCHOR);
@@ -175,6 +189,15 @@ void _set_hymnus(short int modlitba, const char *file, const char *anchor){
 
 void _set_antifona1(short int modlitba, const char *file, const char *anchor){
 	switch(modlitba){
+		/* 2006-10-13: Pridaná antifóna aj pre invitatórium a kompletórium */
+		case MODL_INVITATORIUM:
+			mystrcpy(_global_modl_invitatorium.antifona1.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_invitatorium.antifona1.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
+		case MODL_KOMPLETORIUM:
+			mystrcpy(_global_modl_kompletorium.antifona1.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_kompletorium.antifona1.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
 		case MODL_RANNE_CHVALY:
 			mystrcpy(_global_modl_ranne_chvaly.antifona1.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_ranne_chvaly.antifona1.anchor, anchor, MAX_STR_AF_ANCHOR);
@@ -277,6 +300,15 @@ void _set_antifona3(short int modlitba, const char *file, const char *anchor){
 
 void _set_zalm1(short int modlitba, const char *file, const char *anchor){
 	switch(modlitba){
+		/* 2006-10-13: Pridaný žalm aj pre invitatórium a kompletórium */
+		case MODL_INVITATORIUM:
+			mystrcpy(_global_modl_invitatorium.zalm1.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_invitatorium.zalm1.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
+		case MODL_KOMPLETORIUM:
+			mystrcpy(_global_modl_kompletorium.zalm1.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_kompletorium.zalm1.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
 		case MODL_RANNE_CHVALY:
 			mystrcpy(_global_modl_ranne_chvaly.zalm1.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_ranne_chvaly.zalm1.anchor, anchor, MAX_STR_AF_ANCHOR);
@@ -409,6 +441,11 @@ void _set_zalm3(short int modlitba, const char *file, const char *anchor){
 
 void _set_kcitanie(short int modlitba, const char *file, const char *anchor){
 	switch(modlitba){
+		/* 2006-10-13: Pridané krátke èítanie aj pre kompletórium */
+		case MODL_KOMPLETORIUM:
+			mystrcpy(_global_modl_kompletorium.kcitanie.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_kompletorium.kcitanie.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
 		case MODL_RANNE_CHVALY:
 			mystrcpy(_global_modl_ranne_chvaly.kcitanie.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_ranne_chvaly.kcitanie.anchor, anchor, MAX_STR_AF_ANCHOR);
@@ -444,6 +481,11 @@ void _set_kcitanie(short int modlitba, const char *file, const char *anchor){
 /* pri posvatnom citani plati pre responz _pred_ citaniami */
 void _set_kresponz(short int modlitba, const char *file, const char *anchor){
 	switch(modlitba){
+		/* 2006-10-13: Pridaný krátky responz aj pre kompletórium */
+		case MODL_KOMPLETORIUM:
+			mystrcpy(_global_modl_kompletorium.kresponz.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_kompletorium.kresponz.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
 		case MODL_RANNE_CHVALY:
 			mystrcpy(_global_modl_ranne_chvaly.kresponz.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_ranne_chvaly.kresponz.anchor, anchor, MAX_STR_AF_ANCHOR);
@@ -499,6 +541,16 @@ void _set_benediktus(short int modlitba, const char *file, const char *anchor){
 		case MODL_POSV_CITANIE:
 			mystrcpy(_global_modl_posv_citanie.benediktus.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_posv_citanie.benediktus.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
+	}/* switch(modlitba) */
+}
+
+/* 2006-10-13: Nunc dimittis - použi túto funckiu */
+void _set_nuncdimittis(short int modlitba, const char *file, const char *anchor){
+	switch(modlitba){
+		case MODL_KOMPLETORIUM:
+			mystrcpy(_global_modl_kompletorium.nuncdimittis.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_kompletorium.nuncdimittis.anchor, anchor, MAX_STR_AF_ANCHOR);
 			break;
 	}/* switch(modlitba) */
 }
@@ -608,12 +660,19 @@ void anchor_name_zaltar(short int den, short int tyzzal, short int modlitba, cha
 		tyzzal, nazov_DN_asci[den], pismenko_modlitby(modlitba), anchor);
 }
 
-#define set_LOG_zaltar
-//Log("   set(zaltar): %s: `%s', <!--{...:%s}-->\n", nazov_modlitby(modlitba), _file, _anchor)
+#define set_LOG_zaltar	Log("   set(zaltar): %s: `%s', <!--{...:%s}-->\n", nazov_modlitby(modlitba), _file, _anchor)
 
 void set_hymnus(short int den, short int tyzzal, short int modlitba){
+	/* pridané èasti pre kompletórium, 2006-10-13 */
+	if((modlitba == MODL_KOMPLETORIUM) || (modlitba == MODL_PRVE_KOMPLETORIUM)){
+		file_name_litobd(OBD_CEZ_ROK);
+		sprintf(_anchor, "%c_%s_%d", 
+			pismenko_modlitby(MODL_KOMPLETORIUM), ANCHOR_HYMNUS, (den + tyzzal) % 2);
+		_set_hymnus(modlitba, _file, _anchor);
+		set_LOG_zaltar;
+	}
 	/* pridana modlitba cez den, ma hymny rovnake pre cele obdobie cez rok, 2003-08-15 */
-	if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
+	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
 		file_name_litobd(OBD_CEZ_ROK);
 		sprintf(_anchor, "%c_%s_%d", 
 			pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (den + tyzzal) % 2);
@@ -891,6 +950,9 @@ void set_popis_dummy(void){
 	set_popis(MODL_PREDPOLUDNIM, _file, _anchor);
 	set_popis(MODL_NAPOLUDNIE, _file, _anchor);
 	set_popis(MODL_POPOLUDNI, _file, _anchor);
+	/* 2006-10-13: Pridané popisy pre invitatórium a kompletórium */
+	set_popis(MODL_INVITATORIUM, _file, _anchor);
+	set_popis(MODL_KOMPLETORIUM, _file, _anchor);
 }
 
 void _set_zalm_cez_den_doplnkova_psalmodia(void){
@@ -983,6 +1045,10 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 	else{
 		zvazok = 0;
 	}
+
+	/* pridané èasti pre kompletórium, 2006-10-13 */
+	set_hymnus(den, tyzzal, MODL_KOMPLETORIUM);
+	set_hymnus(den, tyzzal, MODL_PRVE_KOMPLETORIUM);
 
 	if(specialne == ZALTAR_VSETKO){
 		Log("ZALTAR_VSETKO -- takže nastavujem všetko zo žaltára...\n");
@@ -2552,7 +2618,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 	file_name_litobd(litobd);
 	Log("  _file == %s\n", _file);
 
-Log(_global_modl_posv_citanie); /* 2005-03-26: Pridany vypis */
+	/* Log(_global_modl_posv_citanie); 2005-03-26: Pridany vypis */
 
 	/* file pre posvatne citania; pridane 2003-11-20 */
 	file_name_litobd_pc(litobd);
@@ -13852,8 +13918,8 @@ label_25_MAR:
 
 							break;
 						}
-						_global_svaty1.typslav = SLAV_SPOMIENKA;
-						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA /* SLAV_SPOMIENKA opravené 2006-10-12 */;
+						_global_svaty1.smer = 12; /* 12 = lubovolne spomienky podla vseobecneho kalendara */ /* 10 = povinne spomienky podla vseobecneho kalendara */
 						mystrcpy(_global_svaty1.meno, text_OKT_12[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
