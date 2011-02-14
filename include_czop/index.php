@@ -30,9 +30,9 @@ header("Last-Modified:".gmdate("D, d M Y H:i:s")." GMT");
 // clearstatcache();
 
 // Define the full path to your folder from root
-//$path = "/data/www/www.breviar.sk/public_html/include_czop/";
+$path = "/data/www/www.breviar.sk/public_html/include_czop/";
 // zmena JUV/2009-02-16
-$path = "~/public_html/include_czop/";
+// $path = "~/public_html/include_czop/";
 
 // Open the folder
 $dir_handle = @opendir($path) or die("Nemohu otevøít adresáø $path");
