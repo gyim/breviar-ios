@@ -25,8 +25,9 @@ header("Last-Modified:".gmdate("D, d M Y H:i:s")." GMT");
  * Source: http://www.totallyphp.co.uk/scripts/directory_lister.htm
  */
 
+// zmena JUV/2009-02-02
 // Define the full path to your folder from root
-$path = "/data/www/www.breviar.sk/include_cz/";
+$path = "/data/www/www.breviar.sk/public_html/include_cz/";
 
 // Open the folder
 $dir_handle = @opendir($path) or die("Nedokážu otevøít adresáø $path");
@@ -70,7 +71,7 @@ echo "\n</table>";
 echo date ("Y-m-d H:i:s", filemtime($_SERVER['SCRIPT_FILENAME']));
 ?>
 
-<br>© 1999-2008 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a></font></center>
+<br>© 1999-2009 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a></font></center>
 
 </body>
 </html>
