@@ -9207,6 +9207,11 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full_okrem_prosieb(modlitba);
 
+						if(_global_jazyk == JAZYK_CZ){
+							/* 2008-02-13: doplnené mcd pre èeskú verziu */
+							_vlastna_cast_mcd_ant_kcitresp_modl;
+						}
+
 						break;
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;

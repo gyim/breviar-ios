@@ -137,7 +137,7 @@ const char *gpage[] = {"Generované: ", "Generováno: ", "Generated: ", "Generated
 // Generované + dátum: "%d. %s %d, %02d:%02d:%02d" -- pôvodne to bolo v zátvorkách
 const char *datum_template[] = {"%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d"};
 // Build: "Build: %s. "
-const char *build_template[] = {"<!--Verzia: %s.-->", "<--Verze: %s.-->", "<--Build: %s.-->", "<--Build: %s.-->"};
+const char *build_template[] = {"<!--Verzia: %s.-->", "<!--Verze: %s.-->", "<!--Build: %s.-->", "<!--Build: %s.-->"};
 
 /* exportuje patku HTML dokumentu (vysledok query) */
 void patka(void){

@@ -824,7 +824,7 @@ const char *html_text_dnesok[] = {"dnešok", "dnešní den", "today", "hódie", ""};
 const char *html_text_Vysvetlivky[] = {"Vysvetlivky", "Vysvìtlivky", "Legenda", "Legenda", ""};
 
 const char *html_text_dalsie_moznosti[] = {"Vyberte si ïalšie možnosti ", "Další možnosti výbìru ", "Choose from above (buttons) or from the following options: ", "", ""};
-const char *html_text_prik_sviatky_atd[] = {"prikázané sviatky a slávnosti Pána v roku ", "pøikázané svátky a slávnosti Pánì v roku ", "obligatory celebrations in year ", "", ""};
+const char *html_text_prik_sviatky_atd[] = {"prikázané sviatky a slávnosti Pána v roku ", "zasvìcené svátky a slavnosti Pánì v roce ", "obligatory celebrations in year ", "", ""};
 const char *html_text_lit_kalendar[] = {"liturgický kalendár pre", "liturgický kalendáø pro", "liturgical calendar for", "", ""};
 const char *html_text_roku[] = {"roku", "roku", "of year", "", ""};
 const char *html_text_tabulka_pohyblive_od[] = {"tabu¾ka dátumov pohyblivých slávení od roku", "tabulka s daty promìnných slavností od roku", "table with dates of movable celebrations from year", "", ""};
@@ -1027,7 +1027,7 @@ const char *text_JAN_27[] =
  "", 
  "S. Angelae Merici, virg.", ""};
 const char *text_JAN_28[] =
-{"Sv. Tomáška Akvinského, kòaza a uèite¾a Cirkvi",
+{"Sv. Tomáša Akvinského, kòaza a uèite¾a Cirkvi",
  "Sv. Tomáše Akvinského, knìze a uèitele církve",
  "", 
  "S. Thomae de Aquino, presb. et Eccl. doct.", ""};
