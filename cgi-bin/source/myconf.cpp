@@ -12,6 +12,7 @@
 /*   2003-08-13a.D. | pridany #include "mystring.h"            */
 /*   2004-03-17a.D. | pridany INCLUDE_DIR                      */
 /*   2006-07-13a.D. | prvé kroky k jazykovým mutáciám          */
+/*   2007-05-24a.D. | Marek Eliáš: použitie libconfuse         */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -20,62 +21,47 @@
 
 #include "myconf.h"
 #include "mystring.h"
+#include "confuse.h"
 
 char HTTP_ADDRESS[MAX_HTTP_STR] = "http://www.breviar.sk/";
 char MAIL_ADDRESS[MAX_MAIL_STR] = "videky@breviar.sk";
 char INCLUDE_DIR [MAX_INCD_STR] = "../web/include/";
 
 void readConfig(void){
-	FILE *cfg_file;
-	char *ptr;
-	char http_address[MAX_STR] = STR_EMPTY;
-	char mail_address[MAX_STR] = STR_EMPTY;
-	char include_dir [MAX_STR] = STR_EMPTY;
+	/* Toto som zmenil z pola na pointre, lebo libconfuse priradzuje do
+	 * pointrov
+	 */
+	char *http_address = NULL; 
+	char *mail_address = NULL;
+	char *include_dir = NULL;
 
-	cfg_file = fopen(CONFIG_FILE, "rt");
+	cfg_opt_t opts[] = {
+		CFG_SIMPLE_STR("http_adresa", &http_address),
+		CFG_SIMPLE_STR("mail_adresa", &mail_address),
+		CFG_SIMPLE_STR("include", &include_dir),
+		CFG_END()
+	};
 
-/* The fgets function reads a string from the input stream argument 
- * and stores it in string. fgets reads characters from the current 
- * stream position to and including the first newline character, to 
- * the end of the stream, or until the number of characters read is 
- * equal to n - 1, whichever comes first. The result stored in 
- * string is appended with a null character. 
- * The newline character, if read, is included in the string. 
- * -- avsak nam to nevadi. ze je tam aj <CR><LF>, lebo ho odfiltrujeme
- * 30/03/2000A.D.
- * 2004-03-17 pridane INCLUDE_DIR
- */
-	if(cfg_file != NULL){
-		fgets(http_address, MAX_STR, cfg_file);
-		if((http_address != NULL) && (strlen(http_address) > 0)){
-			mystrcpy(HTTP_ADDRESS, http_address, MAX_HTTP_STR);
-			ptr = strchr(HTTP_ADDRESS, STOPPING_CHAR);
-			if(ptr)/* The character %c is at position: %d\n", STOPPING_CHAR, ptr - HTTP_ADDRESS */
-				HTTP_ADDRESS[ptr - HTTP_ADDRESS] = '\0';
-			else/* The character was not found */
-				;
-		}
-		fgets(mail_address, MAX_STR, cfg_file);
-		if((mail_address != NULL) && (strlen(mail_address) > 0)){
-			mystrcpy(MAIL_ADDRESS, mail_address, MAX_MAIL_STR);
-			ptr = strchr(MAIL_ADDRESS, STOPPING_CHAR);
-			if(ptr)/* The character %c is at position: %d\n", STOPPING_CHAR, ptr - MAIL_ADDRESS */
-				MAIL_ADDRESS[ptr - MAIL_ADDRESS] = '\0';
-			else/* The character was not found */
-				;
-		}
-		/* 2004-03-17 pridane INCLUDE_DIR */
-		fgets(include_dir, MAX_STR, cfg_file);
-		if((include_dir != NULL) && (strlen(include_dir) > 0)){
-			mystrcpy(INCLUDE_DIR, include_dir, MAX_INCD_STR);
-			ptr = strchr(INCLUDE_DIR, STOPPING_CHAR);
-			if(ptr)/* The character %c is at position: %d\n", STOPPING_CHAR, ptr - INCLUDE_DIR */
-				INCLUDE_DIR[ptr - INCLUDE_DIR] = '\0';
-			else/* The character was not found */
-				;
-		}
-		fclose(cfg_file); /* pridane 11/04/2000A.D. */
+	cfg_t *cfg;
+
+	cfg = cfg_init(opts, 0);
+	/* Tu by mozno bolo dobre dotat, ze ked to najde chybu v parsovanom subore
+	 * napr. neznamu volbu, tak to VYPISE EROR na STDOUT a skonci, teda ostatne
+	 * premenne necha prazdne.
+	 */
+	cfg_parse(cfg, CONFIG_FILE);
+	
+	// No a teraz sa tie stringy napchaju do globalnych poli
+	if (http_address){
+		strncpy(HTTP_ADDRESS, http_address, MAX_HTTP_STR);
 	}
+	if (mail_address){
+		strncpy(MAIL_ADDRESS, mail_address, MAX_MAIL_STR);
+	}
+	if (include_dir){
+		strncpy(INCLUDE_DIR, include_dir, MAX_INCD_STR);
+	}
+
 	return;
 }
 
