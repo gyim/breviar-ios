@@ -224,7 +224,8 @@ _type_kompletorium *_global_modl_kompletorium_ptr;
 #define _global_modl_kompletorium (*_global_modl_kompletorium_ptr)
 
 /* globalna premenna, ktora obsahuje MODL_... */
-short int _global_modlitba;
+short int _global_modlitba = MODL_NEURCENA;
+/* 2006-12-08: chýbala inicializácia */
 
 /* globalna premenna, do ktorej ukladaju funkcie vytvor_query_string_...
  * linku tvaru PATH_CGI(script_name) ++ "?param1=val&param2=val&..." 
@@ -2668,12 +2669,13 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 			 * takze som to napokon dal sem a pridal podmienku "iba ak ide o slavnost"
 			 * 15/03/2000A.D.
 			 */
+			Log("2006-12-08: modlitba == %d (%s)...\n", _global_modlitba, nazov_modlitby(_global_modlitba));
 			if((_global_modlitba != MODL_NEURCENA) && 
 				(
 					(poradie_svaty != 0) || /* 08/03/2000A.D. -- pridane */
 					((poradie_svaty == 0) &&(_global_svaty1.smer < 5)) /* slavnosti */
 				)
-				){ /* 15/03/2000A.D. -- modifikovane */
+				){ /* 15/03/2000A.D. -- modifikovane; POKUS 2006-12-08: vyòatá podmienka (_global_modlitba != MODL_NEURCENA) &&  nepomohla, len pokazila */
 				/* tato pasaz je cela divna... */
 				/* menim, lebo svaty ma prednost */
 				/* 2006-02-06: pre viacero ¾ubovo¾ných spomienok treba by obozretnejší */
@@ -4047,10 +4049,15 @@ void _export_rozbor_dna_batch(short int typ){
 		/* ... alebo c. 60: "ak na jeden den pripadnu viacere slavenia,
 		 * uprednostni sa to, ktore ma v tabulke liturgickych dni vyssi stupen
 		 * [t.j. .smer]. */
+
+		/* 2006-12-07: slávnosti svätých (k fixným dátumom: napr. 8.12., 29.ž., 5.ý., 15.8.), ktoré nepripadnú na nede¾u, neboli správne zobrazované */
+		Export("<p>haha</p>\n");
 		if(_global_den.smer > _global_svaty1.smer){
+			Export("<p>pre %d sa použil 1...</p>\n", _global_den.den);
 			BATCH_COMMAND(1);
 		}
 		else{
+			Export("<p>pre %d sa použil 0...</p>\n", _global_den.den);
 			BATCH_COMMAND(0);
 		}
 	}/* if((_global_den.denvt == DEN_NEDELA) || (_global_den.prik == PRIKAZANY_SVIATOK) || (_global_den.smer < 5)) */
@@ -6130,6 +6137,10 @@ void _main_batch_mode(
 
 	/* option a (append), pridana 2003-07-08 - nastavi sa v getArgv(); */
 
+	/* 2006-12-08: neviem preèo je tu _global_modlitba = 0, asi nebola pre batch mode inicializovaná */
+	Log("Ruším nastavenie pre parameter _global_modlitba (doteraz == %d/%s)...\n", _global_modlitba, nazov_modlitby(_global_modlitba));
+	_global_modlitba = MODL_NEURCENA;
+
 	/* kontrola udajov */
 	short int result = SUCCESS;
 
@@ -6612,12 +6623,12 @@ short int getArgv(int argc, char **argv){
 						mystrcpy(include_dir, optarg, SMALL);
 					}
 					Log("option %c with value `%s' -- including files from `%s'\n", c, optarg, optarg /* 2004-03-17 zapoznamkovane FILE_PATH */); break;
-				case 'f': /* tabulka - rok from */
+				case 'f': /* tabulka - rok from; pre batch mode je to DEN DO */
 					if(optarg != NULL){
 						mystrcpy(pom_ROK_FROM, optarg, SMALL);
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
-				case 'g': /* tabulka - rok to */
+				case 'g': /* tabulka - rok to; pre batch mode je to MESIAC DO */
 					if(optarg != NULL){
 						mystrcpy(pom_ROK_TO, optarg, SMALL);
 					}
@@ -8008,10 +8019,10 @@ short int parseQueryString(void){
  *    hlavny program
  */
 #define _main_LOG_to_Export_PARAMS {\
-	_main_LOG_to_Export("\tparam1 == %s (pom_DEN/pom_SVIATOK/pom_DEN_V_TYZDNI), param1 == %s (pom_ROK_FROM)\n", pom_DEN, pom_ROK_FROM);\
-	_main_LOG_to_Export("\tparam2 == %s (pom_MESIAC/pom_TYZDEN), param2 == %s (pom_ROK_TO)\n", pom_MESIAC, pom_ROK_TO);\
+	_main_LOG_to_Export("\tparam1 == %s (pom_DEN/pom_SVIATOK/pom_DEN_V_TYZDNI), param1 == %s (pom_ROK_FROM resp. DEN DO pre batch mode)\n", pom_DEN, pom_ROK_FROM);\
+	_main_LOG_to_Export("\tparam2 == %s (pom_MESIAC/pom_TYZDEN), param2 == %s (pom_ROK_TO resp. MESIAC DO pre batch mode)\n", pom_MESIAC, pom_ROK_TO);\
 	_main_LOG_to_Export("\tparam3 == %s (pom_ROK/pom_ANALYZA_ROKU), param3 == %s (pom_LINKY)\n", pom_ROK, pom_LINKY);\
-	_main_LOG_to_Export("\tparam4 == %s (pom_MODLITBA)\n", pom_MODLITBA);\
+	_main_LOG_to_Export("\tparam4 == %s (pom_MODLITBA resp. ROK DO pre batch mode)\n", pom_MODLITBA);\
 	_main_LOG_to_Export("\tparam5 == %s (pom_DALSI_SVATY)\n", pom_DALSI_SVATY);\
 	_main_LOG_to_Export("\tparam6 == %s (pom_MODL_OPT1)\n", pom_MODL_OPT1);\
 	_main_LOG_to_Export("\tparam7 == %s (pom_MODL_OPT2)\n", pom_MODL_OPT2);\
