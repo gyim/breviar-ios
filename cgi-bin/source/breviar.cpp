@@ -2166,7 +2166,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					_global_den.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
 					_global_den.litobd = OBD_POSTNE_II_VELKY_TYZDEN;
 					_global_den.smer = 2; /* nedele adventne, postne a velkonocne */
-					mystrcpy(_global_den.meno, "Kvetná nede¾a", MENO_SVIATKU);
+					mystrcpy(_global_den.meno, text_KVETNA_NEDELA[_global_jazyk], MENO_SVIATKU);
 				}
 				else if(_global_den.denvr <= ZS){
 					/* po kvetnej nedeli, vo velkom tyzdni */
@@ -2174,8 +2174,9 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					_global_den.litobd = OBD_POSTNE_II_VELKY_TYZDEN;
 					_global_den.smer = 2; /* nedele adventne, postne a velkonocne */
 					/* vsedne dni velkeho tyzdna od pondelka do stvrtka vratane */
-					if(_global_den.denvr == ZS)
-						mystrcpy(_global_den.meno, "Zelený (ve¾ký) štvrtok - Pamiatka Pánovej veèere", MENO_SVIATKU);
+					if(_global_den.denvr == ZS){
+						mystrcpy(_global_den.meno, text_ZELENY_STVRTOK[_global_jazyk], MENO_SVIATKU);
+					}
 				}
 				else{
 					_global_den.litobd = OBD_VELKONOCNE_TROJDNIE;
@@ -2183,11 +2184,11 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					/* velkonocne trojdnie umucenia a zmrtvychvstania */
 					_rozbor_dna_LOG("/* velkonocne trojdnie umucenia a zmrtvychvstania */\n");
 					if(_global_den.denvr == VP){
-						mystrcpy(_global_den.meno, "Ve¾ký piatok", MENO_SVIATKU);
+						mystrcpy(_global_den.meno, text_VELKY_PIATOK[_global_jazyk], MENO_SVIATKU);
 						_global_den.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
 					}
 					else if(_global_den.denvr == BS){
-						mystrcpy(_global_den.meno, "Biela (ve¾ká) sobota", MENO_SVIATKU);
+						mystrcpy(_global_den.meno, text_BIELA_SOBOTA[_global_jazyk], MENO_SVIATKU);
 						/* 2006-08-19: farba ostáva nastavená ako pre celý pôst - fialová */
 					}
 				}
@@ -2375,6 +2376,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					_rozbor_dna_LOG("/* nedela v ocr */\n");
 					if(_global_den.denvr == TROJICA){
 						/* najsv. trojice == ZDS + 7 */
+						_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 						_rozbor_dna_LOG("/* najsv. trojice */\n");
 						_global_den.smer = 3; /* slavnosti pana */
 						_global_den.typslav = SLAV_SLAVNOST;
@@ -2382,6 +2384,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					}
 					else if(_global_den.tyzden == KRISTA_KRALA){
 						/* krista krala */
+						_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 						_rozbor_dna_LOG("/* krista krala */\n");
 						_global_den.smer = 3; /* slavnosti pana */
 						_global_den.typslav = SLAV_SLAVNOST;
@@ -2396,6 +2399,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					_rozbor_dna_LOG("/* den v i.-tom tyzdni obdobia cez rok */\n");
 					if(_global_den.denvr == TELAKRVI){
 						/* najsv. krist. tela a krvi == ZDS + 11 */
+						_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 						_rozbor_dna_LOG("/* najsv. krist. tela a krvi */\n");
 						_global_den.smer = 3; /* slavnosti pana */
 						_global_den.typslav = SLAV_SLAVNOST;
@@ -2404,6 +2408,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					}
 					else if(_global_den.denvr == SRDCA){
 						/* srdca jezisovho == ZDS + 19 */
+						_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 						_rozbor_dna_LOG("/* srdca jezisovho */\n");
 						_global_den.smer = 3; /* slavnosti pana */
 						_global_den.typslav = SLAV_SLAVNOST;
@@ -2411,6 +2416,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					}
 					else if(_global_den.denvr == SRDPM){
 						/* srdca prebl. panny marie == ZDS + 20 */
+						_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 						_rozbor_dna_LOG("/* srdca prebl. panny marie */\n");
 
 						/* 2003-06-30: povodne tu bolo 11: "miestne povinne spomienky podla vseobecneho kalendara",
@@ -2422,8 +2428,8 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 						_global_den.smer = 10;
 						_global_den.typslav = SLAV_SPOMIENKA;
 						mystrcpy(_global_den.meno, text_NEPOSKVRNENEHO_SRDCA_PM[_global_jazyk], MENO_SVIATKU);
-						_global_den.spolcast = /* pridane 04/07/2000A.D. */
-							_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+							/* pridane 04/07/2000A.D. */
+						_global_den.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 						_global_opt3 = MODL_SPOL_CAST_PANNA_MARIA;
 						/* 2003-06-30: porov. pasaz venovanu srdcu pm vo funkcii dbzaltar.cpp::sviatky_svatych(); -- 2 vstupy */
 					}
@@ -5599,44 +5605,43 @@ void _main_analyza_roku(char *rok){
 
 	/* 1. januara */
 	vytvor_global_link(1, 1, year, LINK_DEN_MESIAC);
-	Export("<tr valign=baseline>\n<td>%s</td><td>%s", _global_link, text_JAN_01[_global_jazyk]);
-	Export("</td></tr>\n");
+	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n", _global_link, text_JAN_01[_global_jazyk]);
+
 	/* 6. januara */
 	vytvor_global_link(6, 1, year, LINK_DEN_MESIAC);
-	Export("<tr valign=baseline>\n<td>%s</td><td>%s", _global_link, text_JAN_06[_global_jazyk]);
-	Export("</td></tr>\n");
+	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n", _global_link, text_JAN_06[_global_jazyk]);
+
 	/* nanebovstupenie pana, pridane 2003-07-01 */
 	vytvor_global_link(_global_r._NANEBOVSTUPENIE_PANA.den, _global_r._NANEBOVSTUPENIE_PANA.mesiac, year, LINK_DEN_MESIAC);
-	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n",
-		_global_link, (char *)text_NANEBOVSTUPENIE_PANA[_global_jazyk]);
+	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n", _global_link, text_NANEBOVSTUPENIE_PANA[_global_jazyk]);
+
 	/* najsv. kristovho tela a krvi, pridane 2003-07-01 */
 	/* kedze nie je v strukture _global_r, treba ho spocitat podla zoslania ducha sv.
 	 * ide vlastne o datum (cislo v roku) pre ZDS + 11, ako je definovany TELAKRVI,
 	 * vyuzijeme parameter datum na zistenie dna a mesiaca */
 	datum = por_den_mesiac(TELAKRVI, year);
 	vytvor_global_link(datum.den, datum.mesiac, year, LINK_DEN_MESIAC);
-	Export("<tr valign=baseline>\n<td>%s</td><td>Najsv. Kristovho tela a krvi</td></tr>\n",
-		_global_link);
+	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n", _global_link, text_NAJSV_KRISTOVHO_TELA_A_KRVI[_global_jazyk]);
+
 	/* 29. juna */
 	vytvor_global_link(29, 6, year, LINK_DEN_MESIAC);
-	Export("<tr valign=baseline>\n<td>%s</td><td>Sv. Petra a Pavla, apoštolov</td></tr>\n",
-		_global_link);
+	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n", _global_link, text_JUN_29[_global_jazyk]);
+
 	/* 15. augusta */
 	vytvor_global_link(15, 8, year, LINK_DEN_MESIAC);
-	Export("<tr valign=baseline>\n<td>%s</td><td>Nanebovzatie Panny Márie</td></tr>\n",
-		_global_link);
+	Export("<tr valign=baseline>\n<td>%s</td><td>Nanebovzatie Panny Márie</td></tr>\n", _global_link);
+
 	/* 1. novembra */
 	vytvor_global_link(1, 11, year, LINK_DEN_MESIAC);
-	Export("<tr valign=baseline>\n<td>%s</td><td>Všetkých svätých</td></tr>\n",
-		_global_link);
+	Export("<tr valign=baseline>\n<td>%s</td><td>Všetkých svätých</td></tr>\n", _global_link);
+
 	/* 8. decembra */
 	vytvor_global_link(8, 12, year, LINK_DEN_MESIAC);
-	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n",
-		_global_link, text_DEC_08[_global_jazyk]);
+	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n", _global_link, text_DEC_08[_global_jazyk]);
+
 	/* 25. decembra */
 	vytvor_global_link(25, 12, year, LINK_DEN_MESIAC);
-	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n",
-		_global_link, text_NARODENIE_PANA[_global_jazyk]);
+	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n", _global_link, text_NARODENIE_PANA[_global_jazyk]);
 
 	Export("</table>\n");
 

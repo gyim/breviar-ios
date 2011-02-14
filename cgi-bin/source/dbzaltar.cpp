@@ -10172,9 +10172,8 @@ label_25_MAR:
 						_global_svaty1.typslav_lokal = LOKAL_SLAV_ROZNAVA_PATRON; /* 2006-02-03: pridanÈ */
 					}
 					mystrcpy(_global_svaty1.meno, text_MAJ_16[_global_jazyk], MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENIK,
-							MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 18:
 					if(poradie_svaty == 1){
@@ -10198,9 +10197,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, text_MAJ_18[_global_jazyk], MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENIK,
-							MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 20:
 					if(_global_jazyk == JAZYK_SK){
@@ -10225,9 +10223,8 @@ label_25_MAR:
 						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 						mystrcpy(_global_svaty1.meno, text_MAJ_20_2[_global_jazyk], MENO_SVIATKU);
-						_global_svaty1.spolcast =
-							_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-								MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					}
 					else if(_global_jazyk == JAZYK_CZ){
 						if(poradie_svaty == 1){
@@ -10270,15 +10267,14 @@ label_25_MAR:
 						_global_svaty1.typslav_lokal = LOKAL_SLAV_MORAVA_SPOMIENKA;
 						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 						mystrcpy(_global_svaty1.meno, text_MAJ_20_1[_global_jazyk], MENO_SVIATKU);
-						_global_svaty1.spolcast =
-							_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 						pocet = 2;
 						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 						_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 						mystrcpy(_global_svaty2.meno, text_MAJ_20_2[_global_jazyk], MENO_SVIATKU);
-						_global_svaty2.spolcast =
-							_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-								MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+						_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					}
 					break;
 				case 21: /* 2006-08-16: pridanÈ */
@@ -10294,8 +10290,8 @@ label_25_MAR:
 						_global_svaty1.typslav_lokal = LOKAL_SLAV_BRNO;
 						_global_svaty1.typslav = SLAV_SVIATOK;
 						mystrcpy(_global_svaty1.meno, text_MAJ_21[_global_jazyk], MENO_SVIATKU);
-						_global_svaty1.spolcast =
-							_encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					}
 					break;
 				case 25:
@@ -10356,21 +10352,19 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, text_MAJ_25_1[_global_jazyk], MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_UCITEL_CIRKVI,
-							MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_UCITEL_CIRKVI, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					pocet = 3;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, text_MAJ_25_2[_global_jazyk], MENO_SVIATKU);
-					_global_svaty2.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
+					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
+					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					_global_svaty3.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty3.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty3.meno, text_MAJ_25_3[_global_jazyk], MENO_SVIATKU);
-					_global_svaty3.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_PANNA,
-							MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
+					_global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
+					_global_svaty3.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 26:
 					if(poradie_svaty == 1){
@@ -10394,9 +10388,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, text_MAJ_26[_global_jazyk], MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-							MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 27:
 					if(poradie_svaty == 1){
@@ -10420,8 +10413,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, text_MAJ_27[_global_jazyk], MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 31:
 					/* na Slovensku sa sl·vi 2. j˙la */
@@ -10449,8 +10442,8 @@ label_25_MAR:
 						_global_svaty1.typslav = SLAV_SVIATOK;
 						_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 						mystrcpy(_global_svaty1.meno, text_MAJ_31[_global_jazyk], MENO_SVIATKU);
-						_global_svaty1.spolcast =
-							_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					}
 					break;
 			}; break; /* case MES_MAY */
@@ -10479,9 +10472,9 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. JustÌna, muËenÌka", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
+					mystrcpy(_global_svaty1.meno, text_JUN_01[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 2:
 					if(poradie_svaty == 1){
@@ -10504,9 +10497,9 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. MarcelÌna a Petra, muËenÌkov", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					mystrcpy(_global_svaty1.meno, text_JUN_02[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 3:
 					if(poradie_svaty == 1){
@@ -10529,9 +10522,9 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Karola Lwangu a spoloËnÌkov, muËenÌkov", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					mystrcpy(_global_svaty1.meno, text_JUN_03[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 5:
 					if(poradie_svaty == 1){
@@ -10554,10 +10547,9 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Bonif·ca, biskupa a muËenÌka", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENIK,
-							MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					mystrcpy(_global_svaty1.meno, text_JUN_05[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 6:
 					if(poradie_svaty == 1){
@@ -10580,9 +10572,9 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Norberta, biskupa", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					mystrcpy(_global_svaty1.meno, text_JUN_06[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 9:
 					if(poradie_svaty == 1){
@@ -10605,9 +10597,9 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. EfrÈma, diakona a uËiteæa Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_UCITEL_CIRKVI);
+					mystrcpy(_global_svaty1.meno, text_JUN_09[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 11:
 					if(poradie_svaty == 1){
@@ -10644,9 +10636,9 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Barnab·öa, apoötola", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					mystrcpy(_global_svaty1.meno, text_JUN_11[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 13:
 					if(poradie_svaty == 1){
@@ -10669,38 +10661,66 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Antona Padu·nskeho, kÚaza a uËiteæa Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-							MODL_SPOL_CAST_UCITEL_CIRKVI,
-							MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					mystrcpy(_global_svaty1.meno, text_JUN_13[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_UCITEL_CIRKVI, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+					break;
+				case 15:
+					if(_global_jazyk == JAZYK_CZ){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_PRAHA_KATEDRALA;
+						mystrcpy(_global_svaty1.meno, text_JUN_15[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
+						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
+					}
 					break;
 				case 16:
-					/* 2005-07-27: pridanÈ, je to spomienka len v roûÚavskej katedr·le */
-					if(poradie_svaty == 1){
-						/* definovanie parametrov pre modlitbu */
+					if(_global_jazyk == JAZYK_SK){
+						/* 2005-07-27: pridanÈ, je to spomienka len v roûÚavskej katedr·le */
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
 
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
 
-						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
 
-						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
 
-						modlitba = MODL_VESPERY;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
 
-						break;
+							break;
+						}
+						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_ROZNAVA_KATEDRALA; /* 2005-07-27: pridanÈ */
+						mystrcpy(_global_svaty1.meno, text_JUN_16[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
+						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					}
-					_global_svaty1.typslav = SLAV_SPOMIENKA;
-					_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
-					_global_svaty1.typslav_lokal = LOKAL_SLAV_ROZNAVA_KATEDRALA; /* 2005-07-27: pridanÈ */
-					mystrcpy(_global_svaty1.meno, "Sv. Neita, muËenÌka", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
 					break;
 				case 19:
 					if(poradie_svaty == 1){
@@ -10723,9 +10743,37 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Romualda, op·ta", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					mystrcpy(_global_svaty1.meno, text_JUN_19[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+
+					if(_global_jazyk == JAZYK_CZ){
+						if(poradie_svaty == 2){
+							/* definovanie parametrov pre modlitbu */
+
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						pocet = 2;
+						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+						_global_svaty2.typslav_lokal = LOKAL_SLAV_CESKOBUD_SPOMIENKA;
+						mystrcpy(_global_svaty2.meno, text_JUN_19_1[_global_jazyk], MENO_SVIATKU);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+						_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+					}
 					break;
 				case 21:
 					if(poradie_svaty == 1){
@@ -10748,9 +10796,9 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Alojza Gonz·gu, rehoænÌka", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					mystrcpy(_global_svaty1.meno, text_JUN_21[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 22:
 					if(poradie_svaty == 1){
@@ -10791,15 +10839,15 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. J·na Fishera, biskupa, a sv. Tom·öa MÛrusa, muËenÌkov", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					mystrcpy(_global_svaty1.meno, text_JUN_22_1[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty2.meno, "Sv. PavlÌna z Noly, biskupa", MENO_SVIATKU);
-					_global_svaty2.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					mystrcpy(_global_svaty2.meno, text_JUN_22_2[_global_jazyk], MENO_SVIATKU);
+					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 24:
 					//if(poradie_svaty == 1){
@@ -10860,10 +10908,12 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SLAVNOST;
 					_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
-					_global_svaty1.typslav_lokal = LOKAL_SLAV_TRNAVA_PATRON; /* 2005-07-27: pridanÈ */
-					mystrcpy(_global_svaty1.meno, "Narodenie sv. J·na Krstiteæa", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
+					if(_global_jazyk == JAZYK_SK){
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_TRNAVA_PATRON; /* 2005-07-27: pridanÈ */
+					}
+					mystrcpy(_global_svaty1.meno, text_JUN_24[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 25:
 					/* hoci slavnost narodenia sv. Jana Krstitela padla na nedelu, 
@@ -10899,39 +10949,42 @@ label_25_MAR:
 
 						break;
 					}
-					else if(poradie_svaty == 2){
-						/* definovanie parametrov pre modlitbu */
-
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
-
-						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_modlitba;
-
-						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
-
-						modlitba = MODL_VESPERY;
-						_vlastna_cast_modlitba;
-
-						break;
-					}
 
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Cyrila AlexandrijskÈho, biskupa a uËiteæa Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP,
-							MODL_SPOL_CAST_UCITEL_CIRKVI);
-					pocet = 2;
-					/* v trnavskej, banskobystrickej, roznavskej a nitrianskej dieceze */
-					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
-					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					_global_svaty2.typslav_lokal = LOKAL_SLAV_TT_BB_NR_RO; /* 2005-07-27: pridanÈ; 2006-02-03: opravenÈ, KE nie */
-					mystrcpy(_global_svaty2.meno, "Sv. Ladislava", MENO_SVIATKU);
-					_global_svaty2.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
+					mystrcpy(_global_svaty1.meno, text_JUN_27[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+
+					if(_global_jazyk == JAZYK_SK){
+						if(poradie_svaty == 2){
+							/* definovanie parametrov pre modlitbu */
+
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+
+						pocet = 2;
+						/* v trnavskej, banskobystrickej, roznavskej a nitrianskej dieceze */
+						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+						_global_svaty2.typslav_lokal = LOKAL_SLAV_TT_BB_NR_RO; /* 2005-07-27: pridanÈ; 2006-02-03: opravenÈ, KE nie */
+						mystrcpy(_global_svaty2.meno, text_JUN_27_1[_global_jazyk], MENO_SVIATKU);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
+						_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+					}
 					break;
 				case 28:
 					if(poradie_svaty == 1){
@@ -10953,14 +11006,12 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Ireneja, biskupa a muËenÌka", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENIK,
-							MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					mystrcpy(_global_svaty1.meno, text_JUN_28[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 29:
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					if((poradie_svaty == 0) || (poradie_svaty == 1)){
 						/* preto 0, ze aj ked nie je svaty urceny, ide o slavnost,
 						 * ktora ma takmer najvacsiu prioritu, a preto ma aj prve
@@ -11027,12 +11078,13 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SLAVNOST;
 					_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 					_global_svaty1.prik = PRIKAZANY_SVIATOK;
-					mystrcpy(_global_svaty1.meno, "Sv. Petra a Pavla, apoötolov", MENO_SVIATKU);
+					mystrcpy(_global_svaty1.meno, text_JUN_29[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 30:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Prv˝ch sv‰t˝ch muËenÌkov Cirkvi v RÌme", MENO_SVIATKU);
+					mystrcpy(_global_svaty1.meno, text_JUN_30[_global_jazyk], MENO_SVIATKU);
 					/* hoci slavnost sv. Petra a Pavla padla na nedelu, 
 					 * slavi sa v nedelu, lebo ide o nedelu v obdobi cez rok, 
 					 * ktora ma nizsiu prioritu,
@@ -11061,8 +11113,26 @@ label_25_MAR:
 
 						break;
 					}
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
+
+					if(_global_jazyk == JAZYK_CZ){
+						if(poradie_svaty == 2){
+							/* definovanie parametrov pre modlitbu */
+
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+							break;
+							/* 2005-08-22: Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
+						}
+						pocet = 2;
+						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty2.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+						_global_svaty2.typslav_lokal = LOKAL_SLAV_OLOMOUC_SVIATOK;
+						mystrcpy(_global_svaty2.meno, text_JUN_30_1[_global_jazyk], MENO_SVIATKU);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
+						_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+					}
 					break;
 			}; break; /* case MES_JUN */
 		case MES_JUL:
@@ -11093,8 +11163,8 @@ label_25_MAR:
 						_global_svaty1.typslav = SLAV_SVIATOK;
 						_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 						mystrcpy(_global_svaty1.meno, text_MAJ_31[_global_jazyk], MENO_SVIATKU);
-						_global_svaty1.spolcast =
-							_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					}
 					break;
 				case 3:
@@ -11122,9 +11192,9 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
-					mystrcpy(_global_svaty1.meno, "Sv. Tom·öa, apoötola", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					mystrcpy(_global_svaty1.meno, text_JUL_03[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 4:
 					if(poradie_svaty == 1){
@@ -11146,14 +11216,40 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Alûbety Portugalskej", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL,
-							MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-08: doplnenÈ */);
+					mystrcpy(_global_svaty1.meno, text_JUL_04[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL, MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-08: doplnenÈ */);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+
+					if(_global_jazyk == JAZYK_CZ){
+						if(poradie_svaty == 2){
+							/* definovanie parametrov pre modlitbu */
+
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						pocet = 2;
+						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+						_global_svaty2.typslav_lokal = LOKAL_SLAV_CECHY_SPOMIENKA;
+						mystrcpy(_global_svaty2.meno, text_JUL_04_1[_global_jazyk], MENO_SVIATKU);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+						_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+					}
 					break;
 				case 5:
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					if((poradie_svaty == 0) || (poradie_svaty == 1)){
 						/* preto 0, ze aj ked nie je svaty urceny, ide o slavnost,
 						 * ktora ma takmer najvacsiu prioritu, a preto ma aj prve
@@ -11218,7 +11314,8 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SLAVNOST;
 					_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
-					mystrcpy(_global_svaty1.meno, "Sv. Cyrila a Metoda, slovansk˝ch vierozvestov, apoötolov", MENO_SVIATKU);
+					mystrcpy(_global_svaty1.meno, text_JUL_05[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 6:
 					if(poradie_svaty == 1){
@@ -11241,48 +11338,46 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. M·rie Goretti, panny a muËenice", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENICA,
-							MODL_SPOL_CAST_PANNA);
-					/* hoci slavnost sv. Cyrila a Metoda padla na nedelu, 
-					 * slavi sa v nedelu, lebo ide o nedelu v obdobi cez rok, 
-					 * ktora ma nizsiu prioritu,
-					 * preto to, co tu bolo 
-					 * "if(_global_den.denvt == DEN_PONDELOK) goto label_5_JUL;"
-					 * nema opodstatnenie; porov. 1998
-					 * 21/03/2000A.D.
-					 */
+					mystrcpy(_global_svaty1.meno, text_JUL_06[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENICA, MODL_SPOL_CAST_PANNA);
+						/* hoci slavnost sv. Cyrila a Metoda padla na nedelu, 
+						 * slavi sa v nedelu, lebo ide o nedelu v obdobi cez rok, 
+						 * ktora ma nizsiu prioritu,
+						 * preto to, co tu bolo 
+						 * "if(_global_den.denvt == DEN_PONDELOK) goto label_5_JUL;"
+						 * nema opodstatnenie; porov. 1998; 21/03/2000A.D.
+						 */
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 7:
-					if(poradie_svaty == 1){
-						/* definovanie parametrov pre modlitbu */
+					if(_global_jazyk == JAZYK_SK){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
 
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
 
-						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
 
-						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
 
-						modlitba = MODL_VESPERY;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
 
-						break;
+							break;
+						}
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty1.meno, text_JUL_07[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_VYCH, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					}
-					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Antona M·rie Zaccariu, kÚaza", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-							MODL_SPOL_CAST_SV_MUZ_VYCH,
-							MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					break;
 				case 11:
-					/* spomienka, v Europe sviatok */
+					/* kedysi bola iba spomienka, v EurÛpe sviatok; uû upravenÈ aj v CZ aj SK */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
 
@@ -11311,9 +11406,9 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
-					mystrcpy(_global_svaty1.meno, "Sv. Benedikta, op·ta, patrÛna EurÛpy", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					mystrcpy(_global_svaty1.meno, text_JUL_11[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 13:
 					if(poradie_svaty == 1){
@@ -11336,9 +11431,9 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Henricha", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
+					mystrcpy(_global_svaty1.meno, text_JUL_13[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 14:
 					if(poradie_svaty == 1){
@@ -11361,10 +11456,37 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Kamila de Lellis, kÚaza", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_SKUTKYMIL,
-							MODL_SPOL_CAST_DUCH_PAST_KNAZ /* 2006-08-08: doplnenÈ */);
+					mystrcpy(_global_svaty1.meno, text_JUL_14[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_SKUTKYMIL, MODL_SPOL_CAST_DUCH_PAST_KNAZ /* 2006-08-08: doplnenÈ */);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+
+					if(_global_jazyk == JAZYK_CZ){
+						if(poradie_svaty == 2){
+							/* definovanie parametrov pre modlitbu */
+
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						pocet = 2;
+						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+						_global_svaty2.typslav_lokal = LOKAL_SLAV_PLZEN_PATRON;
+						mystrcpy(_global_svaty2.meno, text_JUL_14_1[_global_jazyk], MENO_SVIATKU);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
+						_global_svaty2.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
+					}
 					break;
 				case 15:
 					if(poradie_svaty == 1){
@@ -11387,10 +11509,9 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Bonavent˙ru, biskupa a uËiteæa Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP,
-							MODL_SPOL_CAST_UCITEL_CIRKVI);
+					mystrcpy(_global_svaty1.meno, text_JUL_15[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 16:
 					if(poradie_svaty == 1){
@@ -11415,45 +11536,90 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Prebl. Panny M·rie Karmelskej", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+					mystrcpy(_global_svaty1.meno, text_JUL_16[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+
+					if(_global_jazyk == JAZYK_CZ){
+						if(poradie_svaty == 2){
+							/* definovanie parametrov pre modlitbu */
+
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+							break;
+							/* 2005-08-22: Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
+						}
+						pocet = 2;
+						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+						_global_svaty2.typslav_lokal = LOKAL_SLAV_OSTRAVA_OPAVA_SVIATOK;
+						mystrcpy(_global_svaty2.meno, text_JUL_16_1[_global_jazyk], MENO_SVIATKU);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
+						_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+					}
 					break;
 				case 17:
-					/* v Nitrianskej dieceze sviatok - hlavni patroni */
-					if(poradie_svaty == 1){
-						/* definovanie parametrov pre modlitbu */
+					if(_global_jazyk == JAZYK_SK){
+						/* v Nitrianskej dieceze sviatok - hlavni patroni */
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
 
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
 
-						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_hymnus;
-						_vlastna_cast_antifony;
-						_vlastna_cast_kresponz;
-						_vlastna_cast_benediktus;
-						_vlastna_cast_prosby;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_antifony;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_prosby;
+							_vlastna_cast_modlitba;
 
-						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
-						_vlastna_cast_1citanie;
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+							_vlastna_cast_1citanie;
 
-						modlitba = MODL_VESPERY;
-						_vlastna_cast_hymnus;
-						_vlastna_cast_antifony;
-						_vlastna_cast_magnifikat;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_antifony;
+							_vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
 
-						break;
+							break;
+						}
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_NITRA_PATRON; /* 2005-08-04: pridanÈ */
+						mystrcpy(_global_svaty1.meno, text_JUL_17_1[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VIACERI);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					}
-					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					_global_svaty1.typslav_lokal = LOKAL_SLAV_NITRA_PATRON; /* 2005-08-04: pridanÈ */
-					mystrcpy(_global_svaty1.meno, "Sv. Andreja-Svorada a Benedikta, pustovnÌkov", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VIACERI);
+					else if(_global_jazyk == JAZYK_CZ){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty1.meno, text_JUL_17_2[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_VIACERI);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+					}
 					break;
 				case 21:
 					if(poradie_svaty == 1){
@@ -11476,10 +11642,9 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Vavrinca z Brindisi, kÚaza a uËiteæa Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-							MODL_SPOL_CAST_UCITEL_CIRKVI);
+					mystrcpy(_global_svaty1.meno, text_JUL_21[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 22:
 					if(poradie_svaty == 1){
@@ -11514,9 +11679,9 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. M·rie MagdalÈny", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA);
+					mystrcpy(_global_svaty1.meno, text_JUL_22[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 23:
 					if(poradie_svaty == 1){
@@ -11549,9 +11714,9 @@ label_25_MAR:
 					 * 2006-01-11: opravenÈ: do n·zvu pridanÈ ", spolupatrÛnky EurÛpy"
 					 */
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Brigity, rehoænÌËky, spolupatrÛnky EurÛpy", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
+					mystrcpy(_global_svaty1.meno, text_JUL_23[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 25:
 					if(poradie_svaty == 1){
@@ -11580,9 +11745,9 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
-					mystrcpy(_global_svaty1.meno, "Sv. Jakuba, apoötola", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					mystrcpy(_global_svaty1.meno, text_JUL_25[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 26:
 					if(poradie_svaty == 1){
@@ -11617,9 +11782,10 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Joachima a Anny, rodiËov Panny M·rie", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_MANZ); /* 2006-08-07: upravenÈ lebo ûili v manûelstve :) */
+					mystrcpy(_global_svaty1.meno, text_JUL_26[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_MANZ, MODL_SPOL_CAST_SV_ZENA_MANZ); 
+						/* 2006-08-07: upravenÈ lebo ûili v manûelstve :) pridan· moûnosù aj pre sv. ûeny - 2006-08-19 */
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 27:
 					if(poradie_svaty == 1){
@@ -11640,11 +11806,18 @@ label_25_MAR:
 
 						break;
 					}
-					_global_svaty1.typslav = SLAV_SPOMIENKA;
-					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Gorazda a spoloËnÌkov", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VIACERI);
+					if(_global_jazyk == JAZYK_SK){
+						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+					}
+					else{
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_MORAVA_SPOMIENKA;
+					}
+					mystrcpy(_global_svaty1.meno, text_JUL_27[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VIACERI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 29:
 					if(poradie_svaty == 1){
@@ -11675,9 +11848,9 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Marty", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA);
+					mystrcpy(_global_svaty1.meno, text_JUL_29[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 30:
 				/* 2004-08-14, duurko
@@ -11702,37 +11875,38 @@ label_25_MAR:
 
 						break;
 					}
-					else if(poradie_svaty == 2){
-						/* definovanie parametrov pre modlitbu */
-
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
-
-						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_modlitba;
-
-						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
-						// _vlastna_cast_2citanie; // 2006-08-08: nem· 2. ËÌtanie vlastnÈ
-
-						modlitba = MODL_VESPERY;
-						_vlastna_cast_modlitba;
-
-						break;
-					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Petra ChryzolÛga, biskupa a uËiteæa Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP,
-							MODL_SPOL_CAST_UCITEL_CIRKVI);
-					pocet = 2;
-					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
-					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara - Slovensko */
-					mystrcpy(_global_svaty2.meno, "Bl. Zdenky Schelingovej, panny a muËenice", MENO_SVIATKU);
-					_global_svaty2.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENICA,
-							MODL_SPOL_CAST_PANNA);
+					mystrcpy(_global_svaty1.meno, text_JUL_30[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+
+					if(_global_jazyk == JAZYK_SK){
+						if(poradie_svaty == 2){
+							/* definovanie parametrov pre modlitbu */
+
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							// _vlastna_cast_2citanie; // 2006-08-08: nem· 2. ËÌtanie vlastnÈ
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						pocet = 2;
+						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara - Slovensko */
+						mystrcpy(_global_svaty2.meno, text_JUL_30_1[_global_jazyk], MENO_SVIATKU);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENICA, MODL_SPOL_CAST_PANNA);
+						_global_svaty2.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
+					}
 					break;
 				case 31:
 					if(poradie_svaty == 1){
@@ -11759,10 +11933,9 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. Ign·ca z Loyoly, kÚaza", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-							MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					mystrcpy(_global_svaty1.meno, text_JUL_31[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 			}; break; /* case MES_JUL */
 		case MES_AUG:
@@ -11789,9 +11962,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Alfonza M·rie deí Ligouri, biskupa a uËiteæa Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP,
-							MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 2:
 					if(poradie_svaty == 1){
@@ -11833,15 +12005,14 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. EuzÈbia VercellskÈho, biskupa", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, "Sv. Petra Juli·na Eymard, kÚaza", MENO_SVIATKU);
-					_global_svaty2.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-							MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 4:
 					if(poradie_svaty == 1){
@@ -11865,8 +12036,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. J·na M·rie Vianneya, kÚaza", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 5:
 					if(poradie_svaty == 1){
@@ -11892,8 +12063,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "V˝roËie posviacky hlavnej mari·nskej baziliky v RÌme", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 6:
 					_global_svaty1.spolcast =
@@ -11950,6 +12121,7 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 5; /* sviatky Pana uvedene vo vseobecnom kalendari */
 					mystrcpy(_global_svaty1.meno, "Premenenie P·na", MENO_SVIATKU);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 7:
 					if(poradie_svaty == 1){
@@ -11991,15 +12163,14 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Sixta II., p·peûa, a jeho spoloËnÌkov, muËenÌkov", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, "Sv. Kajet·na, kÚaza", MENO_SVIATKU);
-					_global_svaty2.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-							MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 8:
 					if(poradie_svaty == 1){
@@ -12025,9 +12196,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Dominika, kÚaza", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-							MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 9:
 					if(poradie_svaty == 1){
@@ -12061,9 +12231,8 @@ label_25_MAR:
 					 */
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. TerÈzie Benedikty, rehoænÌËky a muËenice, spolupatrÛnky EurÛpy", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK,
-							MODL_SPOL_CAST_MUCENICA);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK, MODL_SPOL_CAST_MUCENICA);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 10:
 					if(poradie_svaty == 1){
@@ -12092,8 +12261,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 					mystrcpy(_global_svaty1.meno, "Sv. Vavrinca, diakona a muËenÌka", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 11:
 					if(poradie_svaty == 1){
@@ -12117,9 +12286,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Kl·ry, panny", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_PANNA,
-							MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 
 				/* 2004-08-14, duurko
@@ -12147,9 +12315,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Jany Frantiöky de Chantal, rehoænÌËky", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK,
-							MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-08: doplnenÈ */);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK, MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-08: doplnenÈ */);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 13:
 					if(poradie_svaty == 1){
@@ -12173,9 +12340,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Ponci·na, p·peûa, a sv. Hypolita, kÚaza, muËenÌkov", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV,
-							MODL_SPOL_CAST_DUCH_PAST_VIACERI);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_VIACERI);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 14:
 					if(poradie_svaty == 1){
@@ -12197,9 +12363,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Maximili·na Kolbeho, kÚaza a muËenÌka", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-							MODL_SPOL_CAST_MUCENIK);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_MUCENIK);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 15:
 					_global_svaty1.spolcast =
@@ -12270,6 +12435,7 @@ label_25_MAR:
 					_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 					_global_svaty1.prik = PRIKAZANY_SVIATOK;
 					mystrcpy(_global_svaty1.meno, "Nanebovzatie prebl. Panny M·rie", MENO_SVIATKU);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 16:
 					if(poradie_svaty == 1){
@@ -12293,8 +12459,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. ätefana UhorskÈho", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_MANZ); /* 2006-08-07: upravenÈ lebo ûil v manûelstve :) */
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_MANZ); /* 2006-08-07: upravenÈ lebo ûil v manûelstve :) */
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 19:
 					if(poradie_svaty == 1){
@@ -12318,9 +12484,7 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. J·na Eudes, kÚaza", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-							MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 20:
@@ -12349,9 +12513,7 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Bernarda, op·ta a uËiteæa Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_UCITEL_CIRKVI,
-							MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_UCITEL_CIRKVI, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 21:
@@ -12376,8 +12538,7 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Pia X., p·peûa", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 22:
@@ -12407,8 +12568,7 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Prebl. Panny M·rie Kr·æovnej", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 23:
@@ -12433,9 +12593,7 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Ruûeny Limskej, panny", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_PANNA,
-							MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 24:
@@ -12461,8 +12619,7 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 					mystrcpy(_global_svaty1.meno, "Sv. Bartolomeja, apoötola", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 25:
@@ -12505,15 +12662,14 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Jozefa de Calasanz, kÚaza", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VYCH,
-							MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VYCH, MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, "Sv. ºudovÌta", MENO_SVIATKU);
-					_global_svaty2.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_MANZ); /* 2006-08-07: upravenÈ lebo ûil v manûelstve :) */
+					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_MANZ); /* 2006-08-07: upravenÈ lebo ûil v manûelstve :) */
+					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 27:
 					if(poradie_svaty == 1){
@@ -12539,8 +12695,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Moniky", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_MANZ); /* 2006-08-19: upravenÈ, lebo ûila v manûelstve */
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 28:
 					if(poradie_svaty == 1){
@@ -12568,9 +12724,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. AugustÌna, biskupa a uËiteæa Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP,
-							MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 29:
 					if(poradie_svaty == 1){
@@ -12598,8 +12753,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "MuËenÌcka smrù sv. J·na Krstiteæa", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 30: /* 2005-10-17: pridanÈ */
 					if(poradie_svaty == 1){
@@ -12613,8 +12768,8 @@ label_25_MAR:
 					_global_svaty1.typslav_lokal = LOKAL_SLAV_TRNAVA;
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					mystrcpy(_global_svaty1.meno, "V˝roËie posviacky katedr·lneho chr·mu v Trnave", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				default:
 					break;
@@ -12647,9 +12802,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Gregora VeækÈho, p·peûa a uËiteæa Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ,
-							MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ, MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 6:
 					if(poradie_svaty == 1){
@@ -12663,8 +12817,8 @@ label_25_MAR:
 					_global_svaty1.typslav_lokal = LOKAL_SLAV_KOSICE; /* 2005-08-22: pridanÈ */
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					mystrcpy(_global_svaty1.meno, "V˝roËie posviacky katedr·lneho chr·mu v Koöiciach", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 7:
 					if(poradie_svaty == 1){
@@ -12688,8 +12842,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Marka Kriûina, Melichara GrodzieckÈho a ätefana Pongr·cza, kÚazov a muËenÌkov", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 8:
 					if(poradie_svaty == 1){
@@ -12735,8 +12889,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 					mystrcpy(_global_svaty1.meno, "Narodenie prebl. Panny M·rie", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 9:
 					if(poradie_svaty == 1){
@@ -12760,9 +12914,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Petra Clavera, kÚaza", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-							MODL_SPOL_CAST_SV_MUZ_SKUTKYMIL);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_SKUTKYMIL);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 12:
 					if(poradie_svaty == 1){
@@ -12786,8 +12939,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Mena prebl. Panny M·rie", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 13:
 					if(poradie_svaty == 1){
@@ -12813,9 +12966,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. J·na Zlato˙steho, biskupa a uËiteæa Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP,
-							MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 14:
 					_global_svaty1.spolcast =
@@ -12874,6 +13026,7 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 5; /* sviatky Pana uvedene vo vseobecnom kalendari */
 					mystrcpy(_global_svaty1.meno, "Pov˝öenie sv‰tÈho krÌûa", MENO_SVIATKU);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 15:
 					_global_svaty1.spolcast =
@@ -12938,6 +13091,7 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SLAVNOST;
 					_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 					mystrcpy(_global_svaty1.meno, "Sedembolestnej Panny M·rie, patrÛnky Slovenska", MENO_SVIATKU);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 16:
 					if(poradie_svaty == 1){
@@ -12963,9 +13117,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. KornÈlia, p·peûa, a sv. Cypri·na, biskupa, muËenÌkov", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV,
-							MODL_SPOL_CAST_DUCH_PAST_VIACERI);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_VIACERI);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 17:
 					if(poradie_svaty == 1){
@@ -12989,9 +13142,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. RÛberta BellarmÌna, biskupa a uËiteæa Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP,
-							MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 19:
 					if(poradie_svaty == 1){
@@ -13015,9 +13167,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Janu·ra, biskupa a muËenÌka", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENIK,
-							MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 20:
 					if(poradie_svaty == 1){
@@ -13041,8 +13192,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Andreja Kim Taegona, kÚaza, a sv. Pavla Chong Hasanga a spoloËnÌkov, muËenÌkov", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 21:
 					if(poradie_svaty == 1){
@@ -13071,8 +13222,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 					mystrcpy(_global_svaty1.meno, "Sv. Mat˙öa, apoötola a evanjelistu", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 22: /* 2005-10-13: pridanÈ */
 					if(poradie_svaty == 1){
@@ -13097,9 +13248,8 @@ label_25_MAR:
 					_global_svaty1.typslav_lokal = LOKAL_SLAV_NITRA;
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					mystrcpy(_global_svaty1.meno, "Sv. Emer·ma, biskupa a muËenÌka", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENIK,
-							MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 23: /* 2004-09-23, pridane - pater Pio */
 					if(poradie_svaty == 1){
@@ -13123,8 +13273,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Pia z PietrelËiny, kÚaza", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 24: /* 2005-10-13: pridanÈ */
 					if(poradie_svaty == 1){
@@ -13138,8 +13288,8 @@ label_25_MAR:
 					_global_svaty1.typslav_lokal = LOKAL_SLAV_BYSTRICA;
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					mystrcpy(_global_svaty1.meno, "V˝roËie posviacky katedr·lneho chr·mu v Banskej Bystrici", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 26:
 					if(poradie_svaty == 1){
@@ -13163,8 +13313,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Kozmu a Dami·na, muËenÌkov", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 27:
 					if(poradie_svaty == 1){
@@ -13190,9 +13340,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Vincenta de Paul, kÚaza", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-							MODL_SPOL_CAST_SV_MUZ_SKUTKYMIL);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_SKUTKYMIL);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 28:
 					if(poradie_svaty == 1){
@@ -13234,14 +13383,15 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. V·clava, muËenÌka", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
+
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, "Sv. Vavrinca Ruiza a spoloËnÌkov, muËenÌkov", MENO_SVIATKU);
-					_global_svaty2.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty2.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 29:
 					if(poradie_svaty == 1){
@@ -13284,8 +13434,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 					mystrcpy(_global_svaty1.meno, "Sv. Michala, Gabriela a Rafaela, archanjelov", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 30:
 					if(poradie_svaty == 1){
@@ -13311,8 +13461,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Hieronyma, kÚaza a uËiteæa Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 			}; break; /* case MES_SEP */
 		case MES_OCT:
@@ -13341,9 +13491,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. TerÈzie z Lisieux, panny a uËiteæky Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_PANNA,
-							MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 2:
 					if(poradie_svaty == 1){
@@ -13384,8 +13533,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv‰t˝ch anjelov str·ûcov", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 4:
 					if(poradie_svaty == 1){
@@ -13413,8 +13562,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Frantiöka AssiskÈho", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 6:
 					if(poradie_svaty == 1){
@@ -13438,9 +13587,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Bruna, kÚaza", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-							MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 7:
 					if(poradie_svaty == 1){
@@ -13464,8 +13612,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Ruûencovej prebl. Panny M·rie", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 9:
 					if(poradie_svaty == 1){
@@ -13507,15 +13655,15 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Dion˝zia, biskupa, a spoloËnÌkov, muËenÌka", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
+
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, "Sv. J·na Leonardiho, kÚaza", MENO_SVIATKU);
-					_global_svaty2.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-							MODL_SPOL_CAST_SV_MUZ_SKUTKYMIL);
+					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_SKUTKYMIL);
+					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 14:
 					if(poradie_svaty == 1){
@@ -13539,9 +13687,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Kalixta I., p·peûa a muËenÌka", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENIK,
-							MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 15:
 					if(poradie_svaty == 1){
@@ -13567,9 +13714,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. TerÈzie z Avily, panny a uËiteæky Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_PANNA,
-							MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 16:
 					if(poradie_svaty == 1){
@@ -13611,17 +13757,15 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Margity M·rie Alacoque, panny", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_PANNA,
-							MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, "Sv. Hedvigy, rehoænÌËky", MENO_SVIATKU);
-					_global_svaty2.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL,
-							MODL_SPOL_CAST_SV_ZENA_REHOLNIK,
-							MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-07: doplnenÈ */);
+					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL, MODL_SPOL_CAST_SV_ZENA_REHOLNIK, MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-07: doplnenÈ */);
+					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 17:
 					if(poradie_svaty == 1){
@@ -13647,9 +13791,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Ign·ca AntiochijskÈho, biskupa a muËenÌka", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENIK,
-							MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 18:
 					if(poradie_svaty == 1){
@@ -13690,8 +13833,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 					mystrcpy(_global_svaty1.meno, "Sv. Luk·öa, evanjelistu", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 19:
 					if(poradie_svaty == 1){
@@ -13733,16 +13876,15 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. J·na de BrÈbeuf a sv. Iz·ka Jogues, kÚazov, a ich spoloËnÌkov, muËenÌkov", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV,
-							MODL_SPOL_CAST_DUCH_PAST_VIACERI);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_VIACERI);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
+
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, "Sv. Pavla z KrÌûa, kÚaza", MENO_SVIATKU);
-					_global_svaty2.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-							MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 23:
 					if(poradie_svaty == 1){
@@ -13766,8 +13908,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. J·na Kapistr·nskeho, kÚaza", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 24:
 					if(poradie_svaty == 1){
@@ -13791,53 +13933,74 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Antona M·rie Clareta, biskupa", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 25: /* 2005-10-13: pridanÈ */
-					if(poradie_svaty == 1){
-						/* definovanie parametrov pre modlitbu */
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
-						break;
-						/* 2005-08-22: Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
+					if(_global_jazyk == JAZYK_SK){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+							break;
+							/* 2005-08-22: Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
+						}
+						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_SPIS;
+						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						mystrcpy(_global_svaty1.meno, "V˝roËie posviacky katedr·lneho chr·mu v Spiöskom PodhradÌ", MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					}
-					_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
-					_global_svaty1.typslav_lokal = LOKAL_SLAV_SPIS;
-					_global_svaty1.typslav = SLAV_SPOMIENKA;
-					mystrcpy(_global_svaty1.meno, "V˝roËie posviacky katedr·lneho chr·mu v Spiöskom PodhradÌ", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+					else if(_global_jazyk == JAZYK_CZ){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+							break;
+							/* Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
+						}
+						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_KONSEKR_KOSTOLY;
+						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						mystrcpy(_global_svaty1.meno, "V˝roËie posviacky chr·mov, ktor˝ch deÚ posviacky je nezn·my", MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+					}
 					break;
 				case 26: /* 2006-02-03: pridanÈ */
-					if(poradie_svaty == 1){
-						/* definovanie parametrov pre modlitbu */
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
-						break;
-						/* Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
+					if(_global_jazyk == JAZYK_SK){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+							break;
+							/* Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
+						}
+						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_KONSEKR_KOSTOLY;
+						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						mystrcpy(_global_svaty1.meno, "V˝roËie posviacky chr·mov, ktor˝ch deÚ posviacky je nezn·my", MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					}
-					_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
-					_global_svaty1.typslav_lokal = LOKAL_SLAV_KONSEKR_KOSTOLY;
-					_global_svaty1.typslav = SLAV_SPOMIENKA;
-					mystrcpy(_global_svaty1.meno, "V˝roËie posviacky chr·mov, ktor˝ch deÚ posviacky je nezn·my", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 					break;
 				case 27: /* 2005-10-13: pridanÈ */
-					if(poradie_svaty == 1){
-						/* definovanie parametrov pre modlitbu */
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
-						break;
-						/* 2005-08-22: Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
+					if(_global_jazyk == JAZYK_SK){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+							break;
+							/* 2005-08-22: Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
+						}
+						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_ROZNAVA;
+						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						mystrcpy(_global_svaty1.meno, "V˝roËie posviacky katedr·lneho chr·mu v RoûÚave", MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					}
-					_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
-					_global_svaty1.typslav_lokal = LOKAL_SLAV_ROZNAVA;
-					_global_svaty1.typslav = SLAV_SPOMIENKA;
-					mystrcpy(_global_svaty1.meno, "V˝roËie posviacky katedr·lneho chr·mu v RoûÚave", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 					break;
 				case 28:
 					if(poradie_svaty == 1){
@@ -13862,15 +14025,14 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 					mystrcpy(_global_svaty1.meno, "Sv. äimona a J˙du, apoötolov", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 			}; break; /* case MES_OCT */
 		case MES_NOV:
 			switch(den){
 				case 1:
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
 					if((poradie_svaty == 0) || (poradie_svaty == 1)){
 						/* preto 0, ze aj ked nie je svaty urceny, ide o sviatok Pana,
 						 * ktora ma velku prioritu, a preto ma aj - ak je nedela - prve
@@ -13932,6 +14094,7 @@ label_25_MAR:
 					_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 					_global_svaty1.prik = PRIKAZANY_SVIATOK;
 					mystrcpy(_global_svaty1.meno, "Vöetk˝ch sv‰t˝ch", MENO_SVIATKU);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 2:
 					if(poradie_svaty == 1){
@@ -13955,8 +14118,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 3; /* vsetkych vernych zosnulych */
 					mystrcpy(_global_svaty1.meno, "Vöetk˝ch vern˝ch zosnul˝ch", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_ZA_ZOSNULYCH);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_ZA_ZOSNULYCH);
+					_global_svaty1.farba = LIT_FARBA_FIALOVA; /* 2006-08-19: pridanÈ */
 					break;
 				case 3:
 					if(poradie_svaty == 1){
@@ -13982,8 +14145,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Martina de Porres, rehoænÌka", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 4:
 					if(poradie_svaty == 1){
@@ -14007,34 +14170,36 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Karola Borromea, biskupa", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 5:
-					if(poradie_svaty == 1){
-						/* definovanie parametrov pre modlitbu */
+					if(_global_jazyk == JAZYK_SK){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
 
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
 
-						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
 
-						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
 
-						modlitba = MODL_VESPERY;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
 
-						break;
+							break;
+						}
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_TT_BB_KE_NR_RO; /* 2006-02-03: pridanÈ */
+						mystrcpy(_global_svaty1.meno, "Sv. Imricha", MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					}
-					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					_global_svaty1.typslav_lokal = LOKAL_SLAV_TT_BB_KE_NR_RO; /* 2006-02-03: pridanÈ */
-					mystrcpy(_global_svaty1.meno, "Sv. Imricha", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
 					break;
 				case 9:
 					if(poradie_svaty == 1){
@@ -14053,8 +14218,8 @@ label_25_MAR:
 						/* povodne: 7; sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 						/* lenze 9. NOV 1997 mal tento sviatok prednost pred 32. nedelou v ocr, takze smer == 5 */
 					mystrcpy(_global_svaty1.meno, "V˝roËie posviacky Later·nskej baziliky", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 10:
 					if(poradie_svaty == 1){
@@ -14080,9 +14245,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Leva VeækÈho, p·peûa a uËiteæa Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ,
-							MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ, MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 11:
 					if(poradie_svaty == 1){
@@ -14109,9 +14273,11 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Martina z Tours, biskupa", MENO_SVIATKU);
-					_global_svaty1.typslav_lokal = LOKAL_SLAV_SPIS_PATRON; /* 2005-10-28: pridanÈ */
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					if(_global_jazyk == JAZYK_SK){
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_SPIS_PATRON; /* 2005-10-28: pridanÈ */
+					}
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 12:
 					if(poradie_svaty == 1){
@@ -14135,9 +14301,35 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Jozaf·ta, biskupa a muËenÌka", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENIK,
-							MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
+					break;
+				case 13:
+					if(_global_jazyk == JAZYK_CZ){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty1.meno, "Sv. Aneûky »eskÈ, panny", MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+					}
 					break;
 				case 15:
 					if(poradie_svaty == 1){
@@ -14161,9 +14353,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Alberta VeækÈho, biskupa a uËiteæa Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP,
-							MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 16:
 					if(poradie_svaty == 1){
@@ -14205,16 +14396,15 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Margity äkÛtskej", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-07: doplnenÈ */,
-							MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-07: doplnenÈ */, MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, "Sv. Gertr˙dy, panny", MENO_SVIATKU);
-					_global_svaty2.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_PANNA,
-							MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
+					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
+					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 17:
 					if(poradie_svaty == 1){
@@ -14238,10 +14428,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Alûbety Uhorskej, rehoænÌËky", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK,
-							MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-08: doplnenÈ */,
-							MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK, MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-08: doplnenÈ */, MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 18:
 					if(poradie_svaty == 1){
@@ -14269,8 +14457,23 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "V˝roËie posviacky bazilÌk sv. Petra a sv. Pavla, apoötolov", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+					break;
+				case 20: /* 2005-10-28: pridanÈ */
+					if(poradie_svaty == 1){
+						/* definovanie parametrov pre modlitbu */
+						if(query_type != PRM_DETAILY)
+							set_spolocna_cast(sc, poradie_svaty);
+						break;
+						/* 2005-08-22: Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
+					}
+					_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+					_global_svaty1.typslav_lokal = LOKAL_SLAV_NITRA;
+					_global_svaty1.typslav = SLAV_SPOMIENKA;
+					mystrcpy(_global_svaty1.meno, "V˝roËie posviacky katedr·lneho chr·mu v Nitre", MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 21:
 					if(poradie_svaty == 1){
@@ -14299,23 +14502,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Obetovanie prebl. Panny M·rie", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
-					break;
-				case 20: /* 2005-10-28: pridanÈ */
-					if(poradie_svaty == 1){
-						/* definovanie parametrov pre modlitbu */
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
-						break;
-						/* 2005-08-22: Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
-					}
-					_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
-					_global_svaty1.typslav_lokal = LOKAL_SLAV_NITRA;
-					_global_svaty1.typslav = SLAV_SPOMIENKA;
-					mystrcpy(_global_svaty1.meno, "V˝roËie posviacky katedr·lneho chr·mu v Nitre", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 22:
 					if(poradie_svaty == 1){
@@ -14341,9 +14529,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. CecÌlie, panny a muËenice", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENICA,
-							MODL_SPOL_CAST_PANNA);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENICA, MODL_SPOL_CAST_PANNA);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 23:
 					if(poradie_svaty == 1){
@@ -14385,16 +14572,15 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Klementa I. p·peûa a muËenÌka", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENIK,
-							MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
+
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, "Sv. Kolumb·na, op·ta", MENO_SVIATKU);
-					_global_svaty2.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-							MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 24:
 					if(poradie_svaty == 1){
@@ -14418,8 +14604,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Ondreja Dung-Laca a spoloËnÌkov, muËenÌkov", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 25:
 					if(poradie_svaty == 1){
@@ -14442,10 +14628,9 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, "Sv. KatarÌny Alexandrijskej, panny", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENIK,
-							MODL_SPOL_CAST_PANNA);
+					mystrcpy(_global_svaty1.meno, "Sv. KatarÌny Alexandrijskej, panny a muËenice", MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_MUCENIK);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 30:
 					if(poradie_svaty == 1){
@@ -14476,9 +14661,11 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 					mystrcpy(_global_svaty1.meno, "Sv. Ondreja, apoötola", MENO_SVIATKU);
-					_global_svaty1.typslav_lokal = LOKAL_SLAV_KOSICE_PATRON; /* 2006-02-03: pridanÈ */
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					if(_global_jazyk == JAZYK_SK){
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_KOSICE_PATRON; /* 2006-02-03: pridanÈ */
+					}
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 			}; break; /* case MES_NOV */
 		case MES_DEC:;
@@ -14506,8 +14693,8 @@ label_25_MAR:
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Frantiöka XaverskÈho, kÚaza", MENO_SVIATKU);
 					_global_svaty1.typslav_lokal = LOKAL_SLAV_BYSTRICA_PATRON; /* 2006-02-03: pridanÈ */
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 4:
 					if(poradie_svaty == 1){
@@ -14531,9 +14718,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. J·na DamascÈnskeho, kÚaza a uËiteæa Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-							MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 6:
 					if(poradie_svaty == 1){
@@ -14557,8 +14743,8 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Mikul·öa, biskupa", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 7:
 					if(poradie_svaty == 1){
@@ -14584,14 +14770,12 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. AmbrÛza, biskupa a uËiteæa Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP,
-							MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 8:
 label_8_DEC:
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 					if((poradie_svaty == 0) || (poradie_svaty == 1)){
 						/* preto 0, ze aj ked nie je svaty urceny, ide o slavnost,
 						 * ktora ma takmer najvacsiu prioritu, a preto ma aj prve
@@ -14656,6 +14840,7 @@ label_8_DEC:
 					_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 					_global_svaty1.prik = PRIKAZANY_SVIATOK;
 					mystrcpy(_global_svaty1.meno, text_DEC_08[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 9:
 					if(_global_den.denvt == DEN_PONDELOK){
@@ -14689,8 +14874,8 @@ label_8_DEC:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Damaza I., p·peûa", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 
 				/* 2004-08-14, duurko
@@ -14721,9 +14906,8 @@ label_8_DEC:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Lucie, panny a muËenice", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENICA,
-							MODL_SPOL_CAST_PANNA);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENICA, MODL_SPOL_CAST_PANNA);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 14:
 					if(poradie_svaty == 1){
@@ -14747,9 +14931,8 @@ label_8_DEC:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. J·na z KrÌûa, kÚaza a uËiteæa Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-							MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 21:
 					if(poradie_svaty == 1){
@@ -14775,9 +14958,8 @@ label_8_DEC:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Petra KanÌzia, kÚaza a uËiteæa Cirkvi", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ,
-							MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 23:
 					if(poradie_svaty == 1){
@@ -14803,8 +14985,8 @@ label_8_DEC:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. J·na KentskÈho, kÚaza", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 26:
 					if(poradie_svaty == 1){
@@ -14852,8 +15034,8 @@ label_8_DEC:
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 					mystrcpy(_global_svaty1.meno, "Sv. ätefana, prvÈho muËenÌka", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 27:
 					if(poradie_svaty == 1){
@@ -14901,8 +15083,8 @@ label_8_DEC:
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 					mystrcpy(_global_svaty1.meno, "Sv. J·na, apoötola a evanjelistu", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 28:
 					if(poradie_svaty == 1){
@@ -14950,8 +15132,8 @@ label_8_DEC:
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 					mystrcpy(_global_svaty1.meno, "Sv‰t˝ch Neviniatok, muËenÌkov", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 29:
 					if(poradie_svaty == 1){
@@ -14977,9 +15159,8 @@ label_8_DEC:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Tom·öa Becketa, biskupa a muËenÌka", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP,
-							MODL_SPOL_CAST_MUCENIK);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_MUCENIK);
+					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					break;
 				case 31:
 					if(poradie_svaty == 1){
@@ -15002,8 +15183,8 @@ label_8_DEC:
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Silvestra I., p·peûa", MENO_SVIATKU);
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 			}; break; /* case MES_DEC */
 	}/* switch(mesiac - 1) */

@@ -480,11 +480,13 @@ typedef struct dm _struct_dm;
 #define MES_MAR 2
 #define MES_APR 3
 #define MES_MAY 4
+#define MES_MAJ 4
 #define MES_JUN 5
 #define MES_JUL 6
 #define MES_AUG 7
 #define MES_SEP 8
 #define MES_OCT 9
+#define MES_OKT 9
 #define MES_NOV 10
 #define MES_DEC 11
 /* neznamy mesiac */
@@ -595,6 +597,12 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_BRNO						24
 #define LOKAL_SLAV_MORAVA_SPOMIENKA			25
 #define LOKAL_SLAV_DRUHA_VELK_NEDELA_CZ		26
+#define LOKAL_SLAV_PRAHA_KATEDRALA			27
+#define LOKAL_SLAV_CESKOBUD_SPOMIENKA		28
+#define LOKAL_SLAV_OLOMOUC_SVIATOK			29
+#define LOKAL_SLAV_CECHY_SPOMIENKA			30
+#define LOKAL_SLAV_PLZEN_PATRON				31
+#define LOKAL_SLAV_OSTRAVA_OPAVA_SVIATOK	32
 
 /* prikazany / neprikazany sviatok */
 #define PRIKAZANY_SVIATOK 1
@@ -1057,6 +1065,10 @@ extern const char *text_ZOSLANIE_DUCHA_SVATEHO[];
 extern const char *text_PRVA_ADVENTNA_NEDELA[];
 extern const char *text_NEDELA_SV_RODINY[];
 extern const char *text_SPOMIENKA_PM_V_SOBOTU[];
+extern const char *text_ZELENY_STVRTOK[];
+extern const char *text_VELKY_PIATOK[];
+extern const char *text_BIELA_SOBOTA[];
+extern const char *text_KVETNA_NEDELA[];
 
 extern const char *text_DEC_08[];
 
