@@ -2927,6 +2927,19 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 	char c;
 	/* char c sa pouziva vo vynimocnych pripadoch: napr. druha velkonocna nedela; 09/03/2000A.D. */
 
+/* 2007-11-13: invitatórium */
+	/* použite¾né pre adventné obdobie, vianoèné... */
+#define _obd_invitat {\
+	sprintf(_anchor, "%s%c_%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), /* 'i' */ ANCHOR_ANTIFONA1);\
+	_set_antifona1(modlitba, _file, _anchor);\
+	set_LOG_litobd;\
+}
+#define _adv_invitat_24DEC {\
+	sprintf(_anchor, "%s%c_24_%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), /* 'i' */ ANCHOR_ANTIFONA1);\
+	_set_antifona1(modlitba, _file, _anchor);\
+	set_LOG_litobd;\
+}
+
 /* 2006-01-27: preklopené spoloèné kusy kódu pre adventné obdobia do define-ov */
 #define _adv_hymnus {\
 	sprintf(_anchor, "%s%c_%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS);\
@@ -3018,6 +3031,9 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 		case OBD_ADVENTNE_I :/* do 16. decembra */
 			Log("OBD_ADVENTNE_I\n");
 
+		/* invitatórium */
+			modlitba = MODL_INVITATORIUM;
+			_obd_invitat;
 		/* ranne chvaly */
 			/* hymnus */
 			modlitba = MODL_RANNE_CHVALY;
@@ -3335,6 +3351,12 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 
 			file_name_litobd(OBD_ADVENTNE_II);
 
+		/* invitatórium */
+			modlitba = MODL_INVITATORIUM;
+			if(_global_den.den != 24)
+				{_obd_invitat;}
+			else
+				{_adv_invitat_24DEC;}
 		/* ranne chvaly */
 			modlitba = MODL_RANNE_CHVALY;
 			/* hymnus - rovnaky pre kazdy den */
@@ -3775,6 +3797,12 @@ label_24_DEC:
 	_set_antifona3(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
 }
+/* 2007-11-13: doplnené invitatórium */
+#define _bohorod_invitat {\
+	sprintf(_anchor, "%s_%c%s", ANCHOR_PM_BOHOROD, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1);\
+	_set_antifona1(modlitba, _file, _anchor);\
+	set_LOG_litobd;\
+}
 
 /* sviatok svatej rodiny; 2006-02-05: doplnené posv. èítania a modlitba cez deò */
 #define _sv_rodiny_hymnus {\
@@ -3847,6 +3875,12 @@ label_24_DEC:
 	set_LOG_litobd;\
 	sprintf(_anchor, "%s_%c%s", ANCHOR_SV_RODINY, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA3);\
 	_set_antifona3(modlitba, _file, _anchor);\
+	set_LOG_litobd;\
+}
+/* 2007-11-13: doplnené invitatórium */
+#define _sv_rodiny_invitat {\
+	sprintf(_anchor, "%s_%c%s", ANCHOR_SV_RODINY, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1);\
+	_set_antifona1(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
 }
 
@@ -4020,6 +4054,10 @@ label_24_DEC:
 				/* maju vlastnu cast zo sv. jana apostola, sv. stefana a sv. neviniatok */
 			}
 			else{
+				/* invitatórium; 2007-11-13 */
+				modlitba = MODL_INVITATORIUM;
+				_obd_invitat;
+
 				/* ranne chvaly */
 				modlitba = MODL_RANNE_CHVALY;
 				_vian1_hymnus;
@@ -4113,6 +4151,11 @@ label_24_DEC:
 				mystrcpy(_file_pc, FILE_PM_BOHOROD, MAX_STR_AF_FILE); /* 2006-02-05: doplnené */
 				mystrcpy(_anchor, ANCHOR_PM_BOHOROD, MAX_STR_AF_ANCHOR);
 				Log("  ide o slavnost panny marie bohorodicky: _file = `%s', _anchor = %s...\n", _file, _anchor);
+
+				/* invitatórium; 2007-11-13 */
+				modlitba = MODL_INVITATORIUM;
+				_bohorod_invitat;
+
 				modlitba = MODL_PRVE_VESPERY;
 				_set_zalmy_sviatok_panien(modlitba);
 				_bohorod_hymnus;
@@ -4206,6 +4249,11 @@ label_24_DEC:
 				mystrcpy(_file_pc, FILE_SV_RODINY, MAX_STR_AF_FILE); /* 2006-02-05: doplnené */
 				mystrcpy(_anchor, ANCHOR_SV_RODINY, MAX_STR_AF_ANCHOR);
 				Log("  ide o sviatok svatej rodiny: _file = `%s', _anchor = %s...\n", _file, _anchor);
+
+				/* invitatórium; 2007-11-13 */
+				modlitba = MODL_INVITATORIUM;
+				_sv_rodiny_invitat;
+
 				modlitba = MODL_PRVE_VESPERY;
 				_set_zalmy_sviatok_panien(modlitba);
 				_sv_rodiny_hymnus;
@@ -4407,6 +4455,10 @@ label_24_DEC:
 }
 									 
 		/* 2006-01-24: tu v skutoènosti zaèína VIANOÈNÉ OBDOBIE II. */
+
+			/* invitatórium; 2007-11-13 */
+			modlitba = MODL_INVITATORIUM;
+			_obd_invitat;
 
 			/* ranne chvaly */
 			modlitba = MODL_RANNE_CHVALY;
@@ -6974,6 +7026,12 @@ short int _spol_cast_je_panna(_struct_sc sc){
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA3);\
 	if(modlitba == MODL_POSV_CITANIE){_set_antifona3(modlitba, _file_pc, _anchor);}\
 	else{_set_antifona3(modlitba, _file, _anchor);}\
+	set_LOG_svsv;}
+/* 2007-11-13: doplnené pre vlastnú antifónu pre invitatórium */
+#define _vlastna_cast_antifona_inv {\
+	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1);\
+	if(modlitba == MODL_POSV_CITANIE){_set_antifona1(modlitba, _file_pc, _anchor);}\
+	else{_set_antifona1(modlitba, _file, _anchor);}\
 	set_LOG_svsv;}
 
 /* 2007-10-02: 1., 2. a 3. antifóna na mcd resp. posv. èítanie sú rovnaké - dáme jedno písmenko, aby sme ich nezobrazovali */
@@ -15710,6 +15768,10 @@ label_8_DEC:
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
+						/* 2007-11-13: doplnené invitatórium */
+						modlitba = MODL_INVITATORIUM;
+						_vlastna_cast_antifona_inv;
+
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_antifony;
@@ -15759,6 +15821,10 @@ label_8_DEC:
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
+						/* 2007-11-13: doplnené invitatórium */
+						modlitba = MODL_INVITATORIUM;
+						_vlastna_cast_antifona_inv;
+
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_antifony;
@@ -15807,6 +15873,10 @@ label_8_DEC:
 
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
+
+						/* 2007-11-13: doplnené invitatórium */
+						modlitba = MODL_INVITATORIUM;
+						_vlastna_cast_antifona_inv;
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_hymnus;
