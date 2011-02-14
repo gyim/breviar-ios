@@ -856,11 +856,20 @@ void set_hymnus(short int den, short int tyzzal, short int modlitba){
 		set_LOG_zaltar;
 		file_name_obnov();
 	}
-	/* pridana modlitba cez den, ma hymny rovnake pre cele obdobie cez rok, 2003-08-15 */
 	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
-		file_name_litobd(OBD_CEZ_ROK);
-		sprintf(_anchor, "%c_%s_%d", 
-			pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (den + tyzzal) % 2);
+		/* 2003-08-15: pridana modlitba cez den, ma hymny rovnake pre cele obdobie cez rok 
+		 * 2008-04-08: pre mcd v Ëeskom brevi·ri je pre cezroËnÈ obdobie moûnÈ braù buÔ hymnus zo ûalt·ra,
+		 *             alebo pre 1./3. (1) resp. 2./4. (2) t˝ûdeÚ ûalt·ra z "vlastnej Ëasti" pre 
+		 */
+			file_name_litobd(OBD_CEZ_ROK);
+		if(_global_jazyk == JAZYK_CZ){
+			sprintf(_anchor, "%c_%s_%d_%s", 
+				pismenko_modlitby(modlitba), ANCHOR_HYMNUS, ((tyzzal % 2) + 1), nazov_DN_asci[den]);
+		}
+		else{
+			sprintf(_anchor, "%c_%s_%d", 
+				pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (den + tyzzal) % 2);
+		}
 		_set_hymnus(modlitba, _file, _anchor);
 		set_LOG_zaltar;
 	}
