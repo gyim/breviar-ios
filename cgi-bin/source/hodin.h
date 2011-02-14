@@ -1545,7 +1545,7 @@ const char *text_JUL_07[] =
  "", "", ""};
 const char *text_JUL_09[] =
 {"Sv. Augustína Zhao Rong, kòaza, a spoloèníkov, muèeníkov",
- "(v Èechách, na Moravì a na Slezsku není)",
+ "Sv. Augustina Žao Ronga, knìze a jeho druhù, mùèedníkù",
  "", "", ""};
 const char *text_JUL_11[] =
 {"Sv. Benedikta, opáta, patróna Európy",
