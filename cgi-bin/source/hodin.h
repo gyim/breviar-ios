@@ -309,3 +309,6 @@ const char *nazov_jazyka[] =
 
 const char *skratka_jazyka[] =
 {"sk", "cz", "en", "??"};
+
+/* 2006-07-13: Pridané kvôli jazykovým mutáciám - postfix pre include adresár */
+xxx

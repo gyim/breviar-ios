@@ -7673,14 +7673,19 @@ _main_SIMULACIA_QS:
 			/* 2004-03-17 uprava ciest: INCLUDE_DIR a include_dir
 			 * tzv. miesto 2004-03-17_TUTOLA
 			 */
-			_main_LOG_to_Export("2004-03-17: INCLUDE_DIR = `%s'\n2004-03-17: include_dir = `%s'\n", INCLUDE_DIR, include_dir);
+			_main_LOG_to_Export("INCLUDE_DIR = `%s'\n2004-03-17: include_dir = `%s'\n", INCLUDE_DIR, include_dir);
 			if(strcmp(include_dir, STR_EMPTY) == 0){
-				_main_LOG_to_Export("2004-03-17: beriem INCLUDE_DIR...\n");
+				_main_LOG_to_Export("beriem INCLUDE_DIR...\n");
 				mystrcpy(include_dir, INCLUDE_DIR, MAX_STR);
 			}
 			else
-				_main_LOG_to_Export("2004-03-17: beriem include_dir...\n");
-			_main_LOG_to_Export("2004-03-17: include subory brane z `%s'\n", include_dir);
+				_main_LOG_to_Export("beriem include_dir...\n");
+			_main_LOG_to_Export("include subory brane z `%s'\n", include_dir);
+
+			/* 2006-07-13: pridané doplnenie jazyka kvôli jazykovým mutáciám */
+			_main_LOG_to_Export("upravujem include adresár pod¾a jazyka (%d - %s)...\n", _global_jazyk, nazov_jazyka[_global_jazyk]);
+
+			LOG_ciara;
 
 			_main_LOG_to_Export("/* teraz nasleduje vykonanie jadra programu podla parametrov */\n");
 			_main_LOG_to_Export("switch: podla query_type...\n");

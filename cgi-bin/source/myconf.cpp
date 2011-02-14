@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* myconf.cpp                                                  */
-/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2006 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | poskytuje rozhranie na konfiguraciu,          */
 /*               subor CONFIG_FILE                             */
@@ -11,6 +11,7 @@
 /*   2003-07-08a.D. | MAIL_ADDRESS zmenena na videky@breviar.sk*/
 /*   2003-08-13a.D. | pridany #include "mystring.h"            */
 /*   2004-03-17a.D. | pridany INCLUDE_DIR                      */
+/*   2006-07-13a.D. | prvé kroky k jazykovým mutáciám          */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
