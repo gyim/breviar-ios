@@ -17,18 +17,17 @@
 
 <p>V princípe rozlišujeme kompiláciu pre nasledovné dva úèely:
 <ol class="level1">
-	<li>binárka, ktorá bude generova vıstup do súborov (HTML), teda <span class="blue">samostatná aplikácia</span> (napr. pre linux);</li>
-	<li>binárka, ktorá bude generova vıstup na štandardnı vıstup (stdout) za úèelom pouitia 
-		ako <span class="blue">cgi skript pre webserver</span> (napr. apache).</li>
+	<li>binárka, ktorá bude generova vıstup do súborov (HTML), teda <span class="blue">samostatná aplikácia</span> (pre Windows alebo linux);</li>
+	<li>binárka, ktorá bude generova vıstup na štandardnı vıstup (stdout) za úèelom pouitia ako <span class="blue">cgi skript pre webserver</span> (napr. Apache pre Windows/Ruby alebo pre linux).</li>
 </ol>
 
 <p>Obidva spôsoby sa riadia pomocou <span class="tt">#define</span> v súbore <span class="tt">mysystem.h</span>:
 <ol class="level1">
-	<li><span class="blue">samostatná aplikácia</span>: <span class="tt">#define MODEL_ostry_Windows</span>;</li>
-	<li><span class="blue">cgi skript pre webserver</span>: <span class="tt">#define MODEL_ostry_linux</span>.</li>
+	<li><span class="blue">samostatná command-line aplikácia</span>: <span class="tt">MODEL_linux_commandline</span> alebo <span class="tt">MODEL_Windows_commandline</span>;</li>
+	<li><span class="blue">cgi skript pre webserver</span>: <span class="tt">MODEL_linux</span> alebo <span class="tt">MODEL_Windows</span>.</li>
 </ol>
 
-<p>Samozrejme, ostatné je potrebné zapoznámkova. Pre úèely testovania a debugovania k¾udne pouite aj ïalšie monosti.
+<p>Samozrejme, ostatné je potrebné zapoznámkova. Pre úèely testovania a debugovania k¾udne pouite aj ïalšie monosti (sú popísané aj priamo v súbore <span class="tt">mysystem.h</span>).
 
 <h4 class="blue">Postup kompilácie</h4>
 
@@ -59,6 +58,7 @@ a prípadne jej nastavte práva na execute.
 Naviac, prvé riadky MUSIA by také, ktoré obsahujú Content-type, aby webserver vedel, èo má
 zobrazi (èi ide o HTML súbor, alebo ide o filelisting, alebo ide o bitmapu, obrázok, pakovanı súbor a pod.).
 
+<p>Aplikácia (presnejšie, command-line samostatná binárka) okrem generovania jednotlivıch stránok dokáe generova modlitby pre viacero dní naraz pouitím tzv. <a href="../info/batchmode.htm">batch móde (dávkové spracovanie)</a>
 <hr>
 <p class="patka">© 1999-2007 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a></p>
 

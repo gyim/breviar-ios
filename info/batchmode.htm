@@ -46,7 +46,7 @@ ho popisujeme na tomto mieste osobitne.
 
 <li><span class="parameter">b</span> | Názov vısledného skriptu (napr. <span class="tt">rob.bat</span>). <a href="#output">Vısledky jeho spustenia</a> sú popísané nišie.</li>
 <li><span class="parameter">n</span> | Názov pouitého command-line príkazu online breviára 
-(napr. <span class="tt">lh.exe</span> pre DOS).
+(napr. <span class="tt">breviar.exe</span> pre DOS).
 Tento názov bude pouitı vo vıslednom skripte.</li>
 
 <li><span class="parameter">1</span> | Monos, èi zobrazi nemenné súèasti modlitby (default: nie)</li>
@@ -112,30 +112,30 @@ Naviac, command line verzia vypíše chybové hlásenie na stderr.
 Za oboma úèelmi sú uvedené nasledovné príkady pouitia batch módu.
 
 <ul class="level1">
-<li><span class="tt">lh.exe -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.bat -nlh.exe -ic:\breviar\</span><br>
+<li><span class="tt">breviar.exe -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.bat -nbreviar.exe -ic:\breviar\</span><br>
 <span class="explain">Program vygeneruje skript <span class="tt">rob.bat</span>, ktorı vytvorí 
 modlitby od 7. mája 2000 do 3. apríla 2001. 
 Pritom <span class="tt">include</span> adresár sa nachádza v adresári <span class="tt">c:\breviar\</span>
-a meno programu je <span class="tt">lh.exe</span>. (Pouitie v DOSe/Windows.)
+a meno programu je <span class="tt">breviar.exe</span>. (Pouitie v DOSe/Windows.)
 </span>
 </li>
 
-<li><span class="tt">lh.exe -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.bat -nlh.exe -ic:\breviar\ -a1</span><br>
+<li><span class="tt">breviar.exe -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.bat -nbreviar.exe -ic:\breviar\ -a1</span><br>
 <span class="explain">Program vygeneruje skript <span class="tt">rob.bat</span>, ktorı vytvorí 
 modlitby od 7. mája 2000 do 3. apríla 2001. 
 Po spustení skriptu budú všetky modlitby vytvorené do jednoho súboru s menom
 <span class="tt">2000-05-07_2001-04-03.htm</span>.
 Pritom <span class="tt">include</span> adresár sa nachádza v adresári <span class="tt">c:\breviar\</span>
-a meno programu je <span class="tt">lh.exe</span>. (Pouitie v DOSe/Windows.)
+a meno programu je <span class="tt">breviar.exe</span>. (Pouitie v DOSe/Windows.)
 </span>
 </li>
 
-<li><span class="tt">lh -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.sh -nlh -i~/breviar/</span><br>
+<li><span class="tt">breviar -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.sh -nbreviar -i~/breviar/</span><br>
 <span class="explain">
 Program vygeneruje skript <span class="tt">rob.sh</span> (mono bude potrebnı <span class="tt">chmod</span>
  na nastavenie práv), ktorı vytvorí modlitby od 7. mája 2000 do 3. apríla 2001. 
 Pritom <span class="tt">include</span> adresár sa nachádza v adresári <span class="tt">~/breviar/</span>
-a meno programu je <span class="tt">lh</span>. (Pouitie v UNIXe.)
+a meno programu je <span class="tt">breviar</span>. (Pouitie v UNIXe.)
 </span>
 </li>
 </ul>
