@@ -45,6 +45,7 @@ a:hover { color: #fff1cc; background-color: #800000; text-decoration:none; }
 a:active { color: #fff1cc; text-decoration: underline; }
 a img { border: none }
 a.explain { color: #a05000; font-size: 100%; }
+a.nounderline { text-decoration:none; }
 
 table { color: #505000; }
 tr.paragraph { text-indent: 3em; line-height: 120%; }
