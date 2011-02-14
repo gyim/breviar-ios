@@ -1257,7 +1257,8 @@ void set_hymnus_kompletorium_obd(short int den, short int tyzzal, short int modl
 	if(pom_litobd == OBD_VELKONOCNE_I){
 		dva_hymny = 0;
 	}
-	if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
+	/* 2008-12-11: pre dominikánsky rovnako ako pre slovenský, teda jeden hymnus VN */
+	if(_global_jazyk == JAZYK_CZ) /* || (_global_jazyk == JAZYK_CZ_OP)) */ {
 		sprintf(_anchor, "%c_%s_%s", 
 			pismenko_modlitby(modlitba), ANCHOR_HYMNUS, nazov_DN_asci[den]);
 	}
