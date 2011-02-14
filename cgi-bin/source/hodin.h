@@ -1001,7 +1001,13 @@ const char *text_JAN_02[] =
  "", 
  "Ss. Basilii Magni et Gregorii Nazianzeni, ep. et Eccl. doct.", "",
  "Sv. Basila Velikého a Øehoøe Naziánského, biskupù a uèitelù Církve"};
-const char *text_JAN_06[] =
+const char *text_JAN_03[] =
+{"(nie je)",
+ "(není)",
+ "", 
+ "", "",
+ "Nejsvìtìjšího Jména Ježíš "};
+const char * text_JAN_06[] =
 {"Zjavenie Pána",
  "Zjevení Pánì",
  "", 
@@ -1399,6 +1405,12 @@ const char *text_MAJ_12_3[] =
  "", 
  "(non est in Latina)", "",
  "Výroèí posvìcení katedrály sv. Víta"};
+const char *text_MAJ_13[] =
+{"Panny Márie Fatimskej",
+ "Panny Marie Fatimské",
+ "", 
+ "", "",
+ "Panny Marie Fatimské"};
 const char *text_MAJ_14[] =
 {"Sv. Mateja, apoštola",
  "Sv. Matìje, apoštola",
@@ -1434,6 +1446,12 @@ const char *text_MAJ_21[] =
  "", 
  "(non est in Latina)", "",
  "Výroèí posvìcení katedrály sv. Petra a Pavla"};
+const char *text_MAJ_22[] =
+{"(na Slovensku nie je)",
+ "Sv. Rity z Cascie, øeholnice",
+ "", 
+ "(non est in Latina)", "",
+ "Sv. Rity z Cascie, øeholnice"};
 const char *text_MAJ_25_1[] =
 {"Sv. Bédu Ctihodného, kòaza a uèite¾a Cirkvi",
  "Sv. Bedy Ctihodného, knìze a uèitele církve",
@@ -1740,6 +1758,11 @@ const char *text_JUL_17_2[] =
  "Bl. Èeslava a sv. Hyacinta, knìží",
  "", "", "",
  "Bl. Èeslava a sv. Hyacinta, knìží"};
+const char *text_JUL_20[] =
+{"(na Slovensku nie je)",
+ "Sv. Apolináøe, biskupa a muèedníka",
+ "", "", "",
+ "Sv. Apolináøe, biskupa a muèedníka"};
 const char *text_JUL_21[] =
 {"Sv. Vavrinca z Brindisi, kòaza a uèite¾a Cirkvi",
  "Sv. Vavøince z Brindisi, knìze a uèitele církve",
@@ -2180,6 +2203,11 @@ const char *text_OKT_28[] =
  "Sv. Šimona a Judy, apoštolù",
  "", "", "",
  "Sv. Šimona a Judy, apoštolù"};
+const char *text_OKT_29[] =
+{"(na Slovensku nie je)",
+ "Bl. Marie Restituty Kafkové, panny a muèednice",
+ "", "", "",
+ "Bl. Marie Restituty Kafkové, panny a muèednice"};
 const char *text_OKT_30[] =
 {"(na Slovensku nie je)",
  "Výroèí posvìcení katedrály Svatého Ducha",
@@ -2295,8 +2323,9 @@ const char *text_NOV_24[] =
  "Sv. Ondøeje Dung-Laca, knìze, a druhù, muèedníkù"};
 const char *text_NOV_25[] =
 {"Sv. Kataríny Alexandrijskej, panny a muèenice",
- "(v Èechách, na Moravì a na Slezsku není)",
- "", "", "", "(pro dominikány není)"};
+ "Sv. Kateøiny Alexandrijské, panny a muèednice",
+ "", "", "", 
+ "Sv. Kateøiny Alexandrijské, panny a muèednice"};
 const char *text_NOV_30[] =
 {"Sv. Ondreja, apoštola",
  "Sv. Ondøeje, apoštola",
@@ -2338,11 +2367,21 @@ const char *text_DEC_08[] =
  "Panny Marie, poèaté bez poskvrny prvotního høíchu",
  "", "", "",
  "Panny Marie, poèaté bez poskvrny prvotního høíchu"};
+const char *text_DEC_09[] =
+{"(nie je)",
+ "(není)",
+ "", "", "",
+ "Sv. Jana Didaka Cuauhtlatoazina"};
 const char *text_DEC_11[] =
 {"Sv. Damaza I., pápeža",
  "Sv. Damasa I., papeže",
  "", "", "",
  "Sv. Damasa I., papeže"};
+const char *text_DEC_12[] =
+{"(nie je)",
+ "Panny Marie Guadalupské",
+ "", "", "",
+ "Panny Marie Guadalupské"};
 const char *text_DEC_13[] =
 {"Sv. Lucie, panny a muèenice",
  "Sv. Lucie, panny a muèednice",
