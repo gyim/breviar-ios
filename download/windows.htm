@@ -6,9 +6,12 @@
 	<link rel="stylesheet" type="text/css" href="../breviar.css">
 	<title>download - windows</title>
 </head>
+<!-- replace ´ -- ‘ -- not this ' or this ’ -->
+<!-- replace " -- „this“ -- not this ” or this " -->
+
 <body>
 
-<!-- 2006-03-30-komplet-web.zip -->
+<!-- 2006-06-28-komplet-web.zip -->
 
 <center>
 <h2>Download | Windows</h2>
@@ -22,16 +25,21 @@ ktorá generuje stránky v podobe HTML priamo zobrazite¾nıch vo vašom prehliadaèi 
 (na tlaèidlá alebo odkazy) &quot;prekladá&quot; aplikácii, ktorá následne vytvorí vıstup, pošle ho spä prehliadaèu, ktorı vıstup zobrazí presne tak isto ako na
 internete.&nbsp;
 
-<p>Súbory na stiahnutie: <a href="2006-03-30-komplet-web.zip">program</a> | <a href="ruby182-15.exe">webserver</a></p>
+<p>Súbory na stiahnutie: 
+<ul>
+	<li>„balíèek programu a textov“ (<a href="2006-06-28-komplet-web.zip">zip</a>, <a href="2006-06-28-komplet-web.rar">rar</a>)</li>
+	<li><a href="ruby182-15.exe">webserver</a></li>
+</ul>
+</p>
 
 <h4 class="blue">Postup inštalácie</h4>
 
 <ol class="level1">
-<li>Stiahnite si oba súbory <a href="2006-03-30-komplet-web.zip">program</a>, <a href="ruby182-15.exe">webserver</a> na disk (&quot;Save as&quot;). Najskôr budeme inštalova webserver, následne samotnı program.</li>
+<li>Stiahnite si oba súbory („balíèek programu a textov“ [<a href="2006-06-28-komplet-web.zip">zip</a> alebo <a href="2006-06-28-komplet-web.rar">rar</a>] a <a href="ruby182-15.exe">webserver</a>) na disk (&quot;Save as&quot;). Najskôr budeme inštalova webserver, následne samotnı program.</li>
 <li><span class="it">Inštalácia webservera</span>: Spustite súbor <span class="tt">ruby182-15.exe</span>. Riaïte sa inštalaènımi inštrukciami (sú v anglickom jazyku; v podstate staèí odklikáva tlaèidlo <span class="blue">Next</span> príp. <span class="blue">I Agree</span>
 	a <span class="blue">Finish</span>). Do jedného adresára (napr. <span class="tt">c:\ruby</span>) je nainštalovanı interpréter programovacieho jazyka Ruby. Ten následne spúša lokálny
 	webserver.</li>
-<li><span class="it">Inštalácia aplikácie</span>: Rozba¾te (napr. pomocou programov WinZip, WinArj, WinRAR, PowerArchiver) súbor <span class="tt">2006-03-30-komplet-web.zip</span> do nejakého adresára na vašom disku
+<li><span class="it">Inštalácia aplikácie</span>: Rozba¾te (napr. pomocou programov WinZip, WinArj, WinRAR, PowerArchiver) „balíèek programu a textov“ (<span class="tt">2006-06-28-komplet-web.zip</span> resp. <span class="tt">2006-06-28-komplet-web.rar</span>) do nejakého adresára na vašom disku
 	(pre ïalšie úvahy predpokladáme, e je to <span class="tt">c:\breviar</span>).</li>
 <li>Tım je inštalácia ukonèená.</li>
 </ol>
@@ -40,7 +48,7 @@ internete.&nbsp;
 
 <ol>
 	<li>Pred kadım pouitím aplikácie je potrebné&nbsp;spusti webserver, a to spustením skriptu <span class="tt">spusti.server.bat</span> (nachádza sa v&nbsp;kmeòovom adresári
-		aplikácie, teda v našom príklade <span class="tt"><a href="file:///c:/breviar">c:\breviar</a></span>). Malo by sa otvori okno príkazového riadka, v ktorom by mali by
+		aplikácie, teda v našom príklade <span class="tt">c:\breviar</span>). Malo by sa otvori okno príkazového riadka, v ktorom by mali by
 		pribline nasledovné riadky:
 		<blockquote>
 			<p class="explain">c:\breviar>ruby.exe server.rb<br>

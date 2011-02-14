@@ -9,13 +9,15 @@
 </head>
 
 <frameset border="0" frameborder="0" bordercolor="white" rows="24,*,24">
-  <frame src="lista.htm" name="Lista" noresize scrolling="no" target="Obsah">
-  <frame src="main.htm" name="Obsah" noresize scrolling="yes">
-  <frame src="patka.htm" name="Patka" noresize scrolling="no" target="Obsah">
-  <noframes>
-  <body>
-  <p>Vas prehliadac nepodporuje ramce.</p>
-  </body>
-  </noframes>
+	<frame src="lista.htm" name="Lista" noresize scrolling="no" target="Obsah">
+	<!-- <frame src="main.htm" name="Obsah" noresize scrolling="yes"> -->
+	<frame src="cgi-bin/l.cgi?qt=pdnes" name="Obsah" noresize scrolling="yes">
+	<frame src="patka.htm" name="Patka" noresize scrolling="no" target="Obsah">
+<noframes>
+
+<body>
+<p>Vas prehliadac nepodporuje ramce.</p>
+</body>
+</noframes>
 </frameset>
 </html>
