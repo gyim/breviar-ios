@@ -86,6 +86,8 @@
 /*   2008-01-23a.D. | opravenÈ zvazok_breviara[] a zaltar_zvazok()      */
 /*   2008-02-22a.D. | doplnenÈ modlitby cez deÚ (sv‰tci) pre III.zv‰zok */
 /*   2008-02-27a.D. | oprava liturgicke_obdobie() pre nanebovzatie PM   */
+/*   2008-03-12a.D. | ökaredÈ nadr·tovanÈ rieöenie (prekladanie 2008),  */
+/*                    bude potrebnÈ naimplementovaù krajöie             */
 /*                                                                      */
 /*                                                                      */
 /* notes |                                                              */
@@ -9927,6 +9929,16 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					}
 					break;
+				case 15:
+					/* 2008-03-12: ökaredÈ nadr·tovanÈ rieöenie, bude potrebnÈ naimplementovaù krajöie */
+					if((_global_den.denvt == DEN_SOBOTA) && (_global_den.rok == 2008)){
+						/* t.j. sl·vnosù sv. Jozefa sa preklad· pred veæk˝ t˝ûdeÚ */
+						sprintf(_anchor_head, "%02d%s_", 19, nazov_MES[mesiac - 1]);
+						Log("  _anchor_head == %s\n", _anchor_head);
+						Log("(rok 2008) jumping to label_19_MAR...\n");
+						goto label_19_MAR;
+					}
+					break;
 				case 17:
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
@@ -10163,6 +10175,16 @@ label_25_MAR:
 						sprintf(_anchor_head, "%02d%s_", den - 1, nazov_MES[mesiac - 1]);
 						Log("  _anchor_head == %s\n", _anchor_head);
 						Log("jumping to label_25_MAR...\n");
+						goto label_25_MAR;
+					}
+					break;
+				case 31:
+					/* 2008-03-12: ökaredÈ nadr·tovanÈ rieöenie, bude potrebnÈ naimplementovaù krajöie */
+					if((_global_den.denvt == DEN_PONDELOK) && (_global_den.rok == 2008)){
+						/* t.j. Zvestovanie P·na sa preklad· za veækonoËn˙ okt·vu */
+						sprintf(_anchor_head, "%02d%s_", 25, nazov_MES[mesiac - 1]);
+						Log("  _anchor_head == %s\n", _anchor_head);
+						Log("(rok 2008) jumping to label_25_MAR...\n");
 						goto label_25_MAR;
 					}
 					break;
