@@ -56,7 +56,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2006-12-08"
+#define BUILD_DATE "2007-01-08"
 
 #define BYTES 250
 #define SMALL 80

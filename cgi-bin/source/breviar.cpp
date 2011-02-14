@@ -81,6 +81,7 @@
 /*   2006-08-22a.D. | doplnená ružová liturgická farba                     */
 /*   2006-09-06a.D. | upratanie vo funkcii init_global_string (týž.ž.preNE)*/
 /*   2007-01-02a.D. | prvý zásah do kódu v r. 2007: DEBUG_2006_12_07       */
+/*   2007-01-08a.D. | opravené priradenie týždòa žaltára pre VIAN po 1.1.  */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -2296,7 +2297,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				/* vianocne obdobie */
 				_rozbor_dna_LOG("/* vianocne obdobie */\n");
 				_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
-				_global_den.tyzden = 2;
+				/* _global_den.tyzden = 2; -- 2007-01-08: pripomienkoval don Valábek; 2. týždeò je to až po 2. nedeli po narodení Pána */
 				/* vsedne dni vianocneho obdobia od 2. januara
 				 * do soboty po zjaveni pana */
 				_global_den.smer = 13;
@@ -2308,6 +2309,21 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				else{
 					_global_den.litobd = OBD_VIANOCNE_II;
 					_rozbor_dna_LOG("/* po zjaveni Pana (vratane) */\n");
+				}
+				/* 2007-01-08, upravené priradenie týždòa žaltára;
+				 * keïže KRST je poradové èíslo dòa v roku, ale je to vždy január, je to vlastne aj dátum */
+				if(KRST == 7 || KRST == 8){
+					/* ak Krst Krista Pána pripadne na 7.1. alebo 8.1., 
+					 * všedné dni od 2. do 5. januára majú ma 1. týždeò žaltára (v týchto prípadoch 2. nede¾a po narodení Pána nie je) */
+					_global_den.tyzden = 1;
+				}
+				else{
+					/* keï Krst Krista Pána pripadne na 9.-13.1., závisí týždeò žaltára od toho, èi deò je pred 
+					 * alebo po 2. nedeli po narodení Pána (jej dátum je vlastne KRST - 7) */
+					if(KRST - 7 > _global_den.denvr)
+						_global_den.tyzden = 1;
+					else
+						_global_den.tyzden = 2;
 				}
 			}
 			else if(_global_den.denvr > KRST){
