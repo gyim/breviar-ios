@@ -92,6 +92,7 @@
 /*   2008-04-04a.D. | opravené kompletórium pre ve¾k.trojdnie+zel.štvrt.*/
 /*                  - oprava žalmov a chvál. pre 1. vešp. 2.ve¾k.nedele */
 /*   2008-05-14a.D. | opravené modlitby cez deò pre 3. a 14. mája       */
+/*   2008-05-16a.D. | pre prvé vešpery narodenia pána iný hymnus (cz)   */
 /*                                                                      */
 /*                                                                      */
 /* notes |                                                              */
@@ -4210,9 +4211,10 @@ label_24_DEC:
 /* vianocne obdobie I */
 
 /* 2006-02-04: doplnené posvätné èítania a mcd */
+/* 2008-05-16: upravené, aby pre èeský breviár a prvé vešpery narodenia pána bol iný hymnus */
 #define _vian1_hymnus {\
 	c = pismenko_modlitby(modlitba);\
-	if(modlitba == MODL_PRVE_VESPERY)\
+	if((modlitba == MODL_PRVE_VESPERY) && (_global_den.den != 25))\
 		c = pismenko_modlitby(MODL_VESPERY);\
 	sprintf(_anchor, "%s_%c%s", nazov_OBD[OBD_VIANOCNE_I], c, ANCHOR_HYMNUS);\
 	if(modlitba == MODL_POSV_CITANIE){\
@@ -4236,9 +4238,10 @@ label_24_DEC:
 }
 
 /* 2006-02-04: doplnené posvätné èítania a mcd */
+/* 2008-05-16: upravené, aby pre èeský breviár a prvé vešpery narodenia pána bol iný zpìv po krátkém ètení */
 #define _vian1_kresponz {\
 	c = pismenko_modlitby(modlitba);\
-	if(modlitba == MODL_PRVE_VESPERY)\
+	if((modlitba == MODL_PRVE_VESPERY) && (_global_den.den != 25))\
 		c = pismenko_modlitby(MODL_VESPERY);\
 	if((den == DEN_NEDELA) && (_global_den.den != 25 /* narodenie Pana */)\
 		&& (modlitba != MODL_POSV_CITANIE)){\
