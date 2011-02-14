@@ -184,6 +184,11 @@ typedef struct den_mesiac _struct_den_mesiac;
 /* pre modlitbu cez den kvoli zaltaru (psalmodii) rovnake, pridane 2003-08-13 */
 #define MODL_CEZ_DEN_VSETKY     20
 
+/* 2007-12-05: doplnené kvôli modlitbe kompletória, funkcia _set_kompletorium_nedela() */
+#define MODL_KOMPLETORIUM_NEDELNA	0
+#define MODL_KOMPLETORIUM_SLAVNOSTI	1
+#define MODL_KOMPLETORIUM_TROJDNIE	2
+
 /* ... a stringy pre ne */
 /* pre modlitbu cez den pridane 2003-07-15 */
 /* pre posvatne citanie pridane 2003-08-06 */

@@ -815,6 +815,22 @@ void anchor_name_zaltar(short int den, short int tyzzal, short int modlitba, cha
 //#define set_LOG_zaltar	Log("   set(zaltar): %s: `%s', <!--{...:%s}-->\n", nazov_modlitby(modlitba), _file, _anchor)
 #define set_LOG_zaltar	Log("   set(zaltar): %s: súbor `%s', kotva `%s'\n", nazov_modlitby(modlitba), _file, _anchor)
 
+/* 2007-12-05: pridaná funkcia kvôli kompletóriu v pôstnom období */
+void set_hymnus_kompletorium(short int den, short int tyzzal){
+	static short int modlitba = MODL_KOMPLETORIUM;
+	file_name_kompletorium();
+	if(_global_jazyk == JAZYK_CZ){
+		sprintf(_anchor, "%c_%s_%s", 
+			pismenko_modlitby(modlitba), ANCHOR_HYMNUS, nazov_DN_asci[den]);
+	}
+	else{
+		sprintf(_anchor, "%c_%s_%d", 
+			pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (tyzzal + 1) % 2);
+	}
+	_set_hymnus(modlitba, _file, _anchor);
+	set_LOG_zaltar;
+}
+
 void set_hymnus(short int den, short int tyzzal, short int modlitba){
 	/* pridané èasti pre kompletórium, 2006-10-13 */
 	/* hymnus pre kompletórium je v èeskej verzii pre každý deò iný, 2006-12-04 */
@@ -859,7 +875,6 @@ void set_hymnus(short int den, short int tyzzal, short int modlitba){
 			set_LOG_zaltar;
 		}
 	}
-
 }
 
 #define _set_antifony_velk_pc(den, tyzzal, modlitba) {\
@@ -1210,6 +1225,31 @@ void _set_zalmy_2nedele_mcd(void){/* modlitba cez deò; rovnaké žalmy sú pre nede
 	Log("_set_zalmy_2nedele_mcd() -- end\n");
 }
 
+/* 2007-12-05: doplnené pre špeciálne príležitosti (zelený štvrtok, slávnosti) */
+void _set_kompletorium_nedela(short int ktore, short int modlitba_specialna){
+	/* popis parametrov:
+	 *	- "ktore" -		urèuje, èi sa jedná o kompletórium po prvých vešperách (1) alebo po druhých vešperách (2) 
+	 *	- "modlitba_specialna" -	urèuje, èi sa jedná o špeciálnu modlitbu (pre ve¾konoènú èi vianoènú oktávu, 
+	 *								ve¾konoèné trojdnie, resp. slávnosti) alebo nie (0 = nede¾ná modlitba)
+	 */
+	Log("_set_kompletorium_nedela(%d - %s) -- begin\n", ktore, nazov_modlitby((ktore == 1)? MODL_PRVE_KOMPLETORIUM : MODL_DRUHE_KOMPLETORIUM));
+	if(ktore == 1){
+		_global_modl_kompletorium.pocet_zalmov = 2;
+		_set_zalm1(MODL_KOMPLETORIUM, "z4.htm", "ZALM4");
+		_set_zalm2(MODL_KOMPLETORIUM, "z134.htm", "ZALM134");
+	}
+	else{ /* ktore == 2 */
+		_global_modl_kompletorium.pocet_zalmov = 1;
+		_set_zalm1(MODL_KOMPLETORIUM, "z91.htm", "ZALM91");
+	}
+	set_hymnus(DEN_NEDELA /* den */, _global_den.tyzzal, MODL_KOMPLETORIUM);
+	set_antifony(DEN_NEDELA, _global_den.tyzzal, 2 /* zvazok - pre kompletórium sa nepoužíva, len kvôli posv. èítaniu */, MODL_KOMPLETORIUM);
+	set_kcitanie(DEN_NEDELA, _global_den.tyzzal, MODL_KOMPLETORIUM);
+	set_kresponz(DEN_NEDELA, _global_den.tyzzal, MODL_KOMPLETORIUM);
+	set_modlitba(DEN_NEDELA, _global_den.tyzzal, MODL_KOMPLETORIUM);
+	Log("_set_kompletorium_nedela(%d) -- end\n", ktore);
+}
+
 /* zaltar();
  *
  * vstup: den == 0 (DEN_NEDELA) .. 6 (DEN_SOBOTA)
@@ -1316,6 +1356,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 		set_kresponz(den, tyzzal, MODL_PRVE_KOMPLETORIUM);
 		set_modlitba(den, tyzzal, MODL_KOMPLETORIUM);
 		set_modlitba(den, tyzzal, MODL_PRVE_KOMPLETORIUM);
+
 		/* pridaná antifóna pre invitatórium, 2006-10-24; celá pasáž presunutá len pre ZALTAR_VSETKO */
 		set_antifony(den, tyzzal, zvazok, MODL_INVITATORIUM);
 
@@ -5376,6 +5417,9 @@ label_24_DEC:
 
 			t = tyzden MOD 2;
 
+			/* 2007-12-05: kompletórium v pôstnom období */
+			set_hymnus_kompletorium(den, tyzzal);
+
 			/* invitatórium; 2007-11-14 */
 			modlitba = MODL_INVITATORIUM;
 			_obd_invitat_viac(2);
@@ -5614,6 +5658,9 @@ label_24_DEC:
 
 		/* 2006-01-24: tu v skutoènosti zaèína POSTNE OBDOBIE II. */
 
+			/* 2007-12-05: kompletórium v pôstnom období */
+			set_hymnus_kompletorium(den, tyzzal);
+
 			/* invitatórium; 2007-11-14 */
 			modlitba = MODL_INVITATORIUM;
 			_obd_invitat;
@@ -5687,6 +5734,8 @@ label_24_DEC:
 				/* 2006-01-27: pridaný popis k vešperám zeleného štvrtka */
 				modlitba = MODL_VESPERY;
 				_vtroj_popis;
+				/* 2007-12-05: kompletórium je z nedele po druhých vešperách */
+				_set_kompletorium_nedela(2); 
 			}/* nie nedela ale zelený štvrtok */
 			break;
 /* switch(litobd), case OBD_POSTNE_II -- end -------------------------------------------------- */

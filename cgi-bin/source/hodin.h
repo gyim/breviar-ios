@@ -59,9 +59,9 @@ const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 , {"kompletórium", "kompletáø", "Completary", "completorio", "" }
 , {"neurèená", "neurèena", "not-defined", "no data", ""}
 , {"prvé vešpery", "první nešpory", "1st Vesperae", "I vesper&#230;", "" }
-, {"prvé kompletórium", "první kompletáø", "1st Completary", "I completorio", "" }
+, {"kompletórium po prvých vešperách", "kompletáø po prvních nešporech", "1st Completary", "I completorio", "" } /* 2007-12-05: zmenené, kedysi bolo: "prvé kompletórium" */
 , {"druhé vešpery", "druhé nešpory", "2nd Vesperae", "II vesper&#230;", "" }
-, {"druhé kompletórium", "druhý kompletáø", "2nd Completary", "II completorio", "" }
+, {"kompletórium po druhých vešperách", "kompletáø po druhých nešporech", "2nd Completary", "II completorio", "" } /* 2007-12-05: zmenené, kedysi bolo: "druhé kompletórium" */
 , {"detaily", "detaily", "Details", "details", "" }
 };
 
@@ -78,9 +78,9 @@ const char *nazov_Modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 , {"Kompletórium", "Kompletáø", "Completary", "Completorio", "" }
 , {"Neureená", "Neureena", "not-defined", "No data", "" }
 , {"Prvé vešpery", "První nešpory", "1st Vesperae", "I Vesper&#230;", "" }
-, {"Prvé kompletórium", "První kompletáø", "1st Completary", "I Completorio", "" }
+, {"Kompletórium po prvých vešperách", "Kompletáø po prvních nešporech", "1st Completary", "I Completorio", "" }
 , {"Druhé vešpery", "Druhé nešpory", "2nd Vesperae", "II Vesper&#230;", "" }
-, {"Druhé kompletórium", "Druhý kompletáø", "2nd Completary", "II Completorio", "" }
+, {"Kompletórium po druhých vešperách", "Kompletáø po druhých nešporech", "2nd Completary", "II Completorio", "" }
 , {"Detaily", "Detaily", "Details", "Details", "" }
 };
 
