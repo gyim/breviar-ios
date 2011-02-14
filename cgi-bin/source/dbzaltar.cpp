@@ -6596,16 +6596,20 @@ int _spol_cast_je_panna(_struct_sc sc){
 	set_LOG_svsv;}
 
 /* 2005-07-26: posv‰tnÈ ËÌtanie potrebuje 1. a 2. ËÌtanie */
+
 /* 1. ËÌtanie */
 #define _vlastna_cast_1citanie {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_CITANIE1);\
 	_set_citanie1(modlitba, _file_pc, _anchor);\
-	set_LOG_svsv;}
+	set_LOG_svsv;\
+}
+
 /* 2. ËÌtanie */
 #define _vlastna_cast_2citanie {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_CITANIE2);\
 	_set_citanie2(modlitba, _file_pc, _anchor);\
-	set_LOG_svsv;}
+	set_LOG_svsv;\
+}
 
 /* full -- vsetko (hymnus, antifony, kcitanie, kresponz,
  * benediktus/magnifikat, prosby, modlitba */
@@ -6619,7 +6623,9 @@ int _spol_cast_je_panna(_struct_sc sc){
 	else if((modl == MODL_VESPERY) || (modl == MODL_PRVE_VESPERY)){_vlastna_cast_magnifikat;}\
 	else if(modl == MODL_POSV_CITANIE){_vlastna_cast_2citanie;}\
 	_vlastna_cast_prosby;\
-	_vlastna_cast_modlitba;}
+	_vlastna_cast_modlitba;\
+}
+
 #define _vlastna_cast_full_okrem_prosieb(modl) {\
 	_vlastna_cast_hymnus;\
 	_vlastna_cast_antifony;\
@@ -6629,7 +6635,8 @@ int _spol_cast_je_panna(_struct_sc sc){
 	if(modl == MODL_RANNE_CHVALY){_vlastna_cast_benediktus;}\
 	else if((modl == MODL_VESPERY) || (modl == MODL_PRVE_VESPERY)){_vlastna_cast_magnifikat;}\
 	else if(modl == MODL_POSV_CITANIE){_vlastna_cast_2citanie;}\
-	_vlastna_cast_modlitba;}
+	_vlastna_cast_modlitba;\
+}
 /* full -- vsetko (hymnus, antifony, kcitanie, kresponz,
  * benediktus/magnifikat, prosby, modlitba -- ina ako na rchv a vesp */
 #define _vlastna_cast_antifony_ako_na_ranne_chvaly {\
@@ -6641,7 +6648,8 @@ int _spol_cast_je_panna(_struct_sc sc){
 	set_LOG_svsv;\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(MODL_RANNE_CHVALY), ANCHOR_ANTIFONA3);\
 	_set_antifona3(modlitba, _file, _anchor);\
-	set_LOG_svsv;}
+	set_LOG_svsv;\
+}
 
 /* rovnako tak pre spolocnu cast... */
 /* #define _spolocna_cast_hymnus             _vlastna_cast_hymnus */
@@ -6664,20 +6672,25 @@ int _spol_cast_je_panna(_struct_sc sc){
 		set_LOG_svsv;\
 		sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA3);\
 		_set_antifona3(modlitba, _file, _anchor);\
-		set_LOG_svsv;}\
-	}
+		set_LOG_svsv;\
+	}\
+}
 
 /* ... 2005-07-26: in· je tieû spoloËn· Ëasù pre 1. resp. 2. ËÌtanie ... */
+
 /* 1. ËÌtanie */
 #define _spolocna_cast_1citanie {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_CITANIE1);\
 	_set_citanie1(modlitba, _file, _anchor);\
-	set_LOG_svsv;}
+	set_LOG_svsv;\
+}
+
 /* 2. ËÌtanie */
 #define _spolocna_cast_2citanie {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_CITANIE2);\
 	_set_citanie2(modlitba, _file, _anchor);\
-	set_LOG_svsv;}
+	set_LOG_svsv;\
+}
 
 /* ... a spolocnu cast full 
  * 2005-07-27: upravenÈ / nahradenÈ _vlastna_cast_kresponz reùazcom _spolocna_cast_kresponz
@@ -6687,21 +6700,34 @@ int _spol_cast_je_panna(_struct_sc sc){
 #define _spolocna_cast_full(modl) {\
 	_spolocna_cast_hymnus;\
 	_spolocna_cast_antifony;\
-	if(modl == MODL_POSV_CITANIE){_spolocna_cast_1citanie;}\
-	else _vlastna_cast_kcitanie;\
+	if(modl == MODL_POSV_CITANIE){\
+		_spolocna_cast_1citanie;\
+	}\
+	else {\
+		_vlastna_cast_kcitanie;\
+	}\
 	_spolocna_cast_kresponz;\
-	if(modl == MODL_RANNE_CHVALY){_vlastna_cast_benediktus;}\
-	else if((modl == MODL_VESPERY) || (modl == MODL_PRVE_VESPERY)){_vlastna_cast_magnifikat;}\
-	else if(modl == MODL_POSV_CITANIE){_spolocna_cast_2citanie;}\
+	if(modl == MODL_RANNE_CHVALY){\
+		_vlastna_cast_benediktus;\
+	}\
+	else if((modl == MODL_VESPERY) || (modl == MODL_PRVE_VESPERY)){\
+		_vlastna_cast_magnifikat;\
+	}\
+	else if(modl == MODL_POSV_CITANIE){\
+		_spolocna_cast_2citanie;\
+	}\
 	_vlastna_cast_prosby;\
-	_vlastna_cast_modlitba;}
+	_vlastna_cast_modlitba;\
+}
+
 /* 2005-07-27: kedysi bolo nasledovnÈ: #define _spolocna_cast_kresponz           _vlastna_cast_kresponz
  * ale potrebujeme, aby spoloËn· Ëasù mala zo spoloËnej Ëasti. preto nasledovn· definÌcia:
  * kratke responzorium */
 #define _spolocna_cast_kresponz {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ);\
 	_set_kresponz(modlitba, _file, _anchor);\
-	set_LOG_svsv;}
+	set_LOG_svsv;\
+}
 
 /* 2005-08-08: potrebujeme individualny hymnus pre spolocnu cast - berie sa z ineho 
  * suboru ako vlastna cast
@@ -6709,39 +6735,47 @@ int _spol_cast_je_panna(_struct_sc sc){
 #define _spolocna_cast_hymnus {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_HYMNUS);\
 	_set_hymnus(modlitba, _file, _anchor);\
-	set_LOG_svsv;}
+	set_LOG_svsv;\
+}
 
 #define _vlastna_cast_hymnus_po {\
 	sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_HYMNUS, POSTNA_PRIPONA);\
 	_set_hymnus(modlitba, _file, _anchor);\
-	set_LOG_svsv;}
+	set_LOG_svsv;\
+}
 #define _vlastna_cast_hymnus_ve {\
 	sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_HYMNUS, VELKONOCNA_PRIPONA);\
 	_set_hymnus(modlitba, _file, _anchor);\
-	set_LOG_svsv;}
+	set_LOG_svsv;\
+}
 #define _spolocna_cast_benediktus_ve _vlastna_cast_benediktus_ve
 #define _vlastna_cast_benediktus_ve {\
 	sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_BENEDIKTUS, VELKONOCNA_PRIPONA);\
 	_set_benediktus(modlitba, _file, _anchor);\
-	set_LOG_svsv;}
+	set_LOG_svsv;\
+}
 #define _spolocna_cast_magnifikat_ve _vlastna_cast_magnifikat_ve
 #define _vlastna_cast_magnifikat_ve {\
 	sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_MAGNIFIKAT, VELKONOCNA_PRIPONA);\
 	_set_magnifikat(modlitba, _file, _anchor);\
-	set_LOG_svsv;}
+	set_LOG_svsv;\
+}
 #define _spolocna_cast_kresponz_ve _vlastna_cast_kresponz_ve
 #define _vlastna_cast_kresponz_ve {\
 	sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ, VELKONOCNA_PRIPONA);\
 	_set_kresponz(modlitba, _file, _anchor);\
-	set_LOG_svsv;}
+	set_LOG_svsv;\
+}
 #define _vlastna_cast_kresponz_po {\
 	sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ, POSTNA_PRIPONA);\
 	_set_kresponz(modlitba, _file, _anchor);\
-	set_LOG_svsv;}
+	set_LOG_svsv;\
+}
 #define _vlastna_cast_kresponz_cr {\
 	sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ, CEZROCNA_PRIPONA);\
 	_set_kresponz(modlitba, _file, _anchor);\
-	set_LOG_svsv;}
+	set_LOG_svsv;\
+}
 
 /* specialne veci pre sviatky duchovnych pastierov, jedneho mucenika... */
 /* funguje to aj pre svatych muzov (jeden resp. viaceri -- podla toho, co je
@@ -6793,7 +6827,8 @@ void _spolocna_cast_2cit_rozne(int modlitba, char *_anchor_pom, char *_anchor, c
 		sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_MAGNIFIKAT, VELKONOCNA_PRIPONA);\
 		_set_magnifikat(modlitba, _file, _anchor);\
 		set_LOG_svsv;\
-	}}
+	}\
+}
 
 #define _spolocna_cast_ant1_3_po {\
 	sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1, POSTNA_PRIPONA);\
@@ -6801,20 +6836,20 @@ void _spolocna_cast_2cit_rozne(int modlitba, char *_anchor_pom, char *_anchor, c
 	sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA3, POSTNA_PRIPONA);\
 	_set_antifona3(modlitba, _file, _anchor);\
 	set_LOG_svsv;\
-	}
+}
 /* specialne veci pre sviatky viacerych mucenikov */
 #define _spolocna_cast_ant2_po {\
 	sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA2, POSTNA_PRIPONA);\
 	_set_antifona2(modlitba, _file, _anchor);\
 	set_LOG_svsv;\
-	}
+}
 
 /* specialne veci pre sviatky panien */
 #define _spolocna_cast_kresp_ve {\
 	sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ, VELKONOCNA_PRIPONA);\
 	_set_kresponz(modlitba, _file, _anchor);\
 	set_LOG_svsv;\
-	}
+}
 
 /* ked je viac napevov, `kolko' uvadza, z kolkych je na vyber;
  * zvacsa sa vyberie napr. podla (_global_den.den MOD kolko) + 1
@@ -7749,6 +7784,29 @@ void _set_spolocna_cast(int a, _struct_sc sc){
 		_spolocna_cast_full(modlitba);
 		if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II))
 			_spolocna_cast_kresponz_ve;
+
+		/* 2005-08-25: pridan˝ ÔalöÌ pomocn˝ anchor, ktor˝ pojedn·va o zv‰zku brevi·ra kvÙli posv. ËÌtaniam */
+		sprintf(_anchor_pom, "%s", STR_EMPTY);
+		Log("  _anchor_pom == %s\n", _anchor_pom);
+		sprintf(_anchor_zvazok, "%s_", zvazok_OBD[_global_den.litobd]);
+		if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
+			strcat(_anchor_zvazok, VELKONOCNA_PRIPONA);
+		}
+		Log("  _anchor_zvazok == %s\n", _anchor_zvazok);
+
+		/* posv‰tnÈ ËÌtanie; 2006-02-11 */
+		modlitba = MODL_POSV_CITANIE;
+		if(su_zalmy_zo_sviatku || (_global_opt2 == MODL_ZALMY_ZO_SV)){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX */
+			Log("  _set_zalmy_posviacka_chramu(%s)...\n", nazov_modlitby[modlitba]);
+			_set_zalmy_posviacka_chramu(modlitba);
+		}
+		_spolocna_cast_full(modlitba);
+		/* 2005-08-25: 1. ËÌtanie je zv‰Ëöa odliönÈ pre spoloËnÈ Ëasti sviatkov sv‰t˝ch nasledovne:
+		 * - I. zv‰zok (advent, vianoce) a II. zv‰zok (pÙst),
+		 * - II. zv‰zok (veæk· noc),
+		 * - III. a IV. zv‰zok (obdobie cez rok).
+		 */
+		_spolocna_cast_1cit_zvazok(modlitba, _anchor_pom, _anchor_zvazok, _anchor_head, _file);
 
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
