@@ -448,7 +448,7 @@ const char *nazov_farby_jazyk[POCET_FARIEB + 1][POCET_JAZYKOV + 1] =
 #define		nazov_farby(a)	nazov_farby_jazyk[a][_global_jazyk]
 
 const char *html_farba_pozadie[POCET_FARIEB + 1] =
-{"black", "red", "white", "green", "purple", "#FF6699" /*"fuchsia" */};
+{"black", "red", "white", "green", "purple", "#FF6699" /* "fuchsia" */};
 
 const char *html_farba_popredie[POCET_FARIEB + 1] =
 {"white", "white", "black", "white", "white", "blue"};

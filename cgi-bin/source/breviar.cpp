@@ -3254,8 +3254,9 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		(char *)nazov_farby(liturgicka_farba));
 #else
 	sprintf(_global_string_farba,
-		"\n<table bgcolor=\"%s\"><tr><td><font color=\"%s\" size=\""HTML_FONT_SIZE_FARBA"\">%s</font></td></tr></table>\n", 
+		"\n<table bgcolor=\"%s\" style=\"border: 1px solid %s\"><tr><td><font color=\"%s\" size=\""HTML_FONT_SIZE_FARBA"\">%s</font></td></tr></table>\n", 
 		(char *)html_farba_pozadie[liturgicka_farba], 
+		(char *)html_farba_popredie[liturgicka_farba], 
 		(char *)html_farba_popredie[liturgicka_farba], 
 		(char *)nazov_farby(liturgicka_farba));
 #endif
