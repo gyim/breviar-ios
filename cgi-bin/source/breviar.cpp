@@ -8196,6 +8196,7 @@ int main(int argc, char **argv){
 	_main_LOG("first, reading configuration (file %s)...\n", CONFIG_FILE);
 	readConfig();
 	_main_LOG("HTTP_ADDRESS == `%s'\n", HTTP_ADDRESS);
+	_main_LOG("HTTP_DISPLAY_ADDRESS == `%s'\n", HTTP_DISPLAY_ADDRESS); /* 2007-05-24, JUV: pridané */
 	_main_LOG("MAIL_ADDRESS == `%s'\n", MAIL_ADDRESS);
 	/* 2004-03-17 pridane INCLUDE_DIR */
 	_main_LOG("INCLUDE_DIR == `%s'\n", INCLUDE_DIR);

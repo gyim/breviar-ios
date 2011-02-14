@@ -65,7 +65,7 @@ extern "C" {
 # endif /* Not BUILDING_DLL */
 
 #else /* ! _WIN32 */
-# define /* DLLIMPORT */
+# define dllimport
 
 #endif /* _WIN32 */
 

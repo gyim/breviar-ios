@@ -20,8 +20,6 @@
 
 #include "mydefs.h"
 
-#include "confuse.h"
-
 #define MAX_HTTP_STR 80
 #define MAX_MAIL_STR 80
 #define MAX_INCD_STR 80
@@ -31,6 +29,7 @@
 
 extern char MAIL_ADDRESS[MAX_HTTP_STR];
 extern char HTTP_ADDRESS[MAX_MAIL_STR];
+extern char HTTP_DISPLAY_ADDRESS[MAX_HTTP_STR];
 extern char INCLUDE_DIR [MAX_INCD_STR];
 
 void readConfig(void);

@@ -166,7 +166,7 @@ void patka(void){
 	Export("<br>\n");
 
 	/* pridana stranka HTTP_ADDRESS, 12/04/2000A.D. */
-	Export("<"HTML_LINK_NORMAL" href=\"%s\" target=\"_top\">%s</a>\n", HTTP_ADDRESS, HTTP_ADDRESS);
+	Export("<"HTML_LINK_NORMAL" href=\"%s\" target=\"_top\">%s</a>\n", HTTP_ADDRESS, HTTP_DISPLAY_ADDRESS);
 	Export("&#169; %d%s <"HTML_LINK_NORMAL" href=\"mailto:%s\">Juraj Vidéky</a>\n", baserok, rok, MAIL_ADDRESS);
 
 	Export("</p>\n"); /* pridane kvoli tomu, ze cele to bude <p class="patka">, 2003-07-02 */
@@ -215,7 +215,7 @@ void patka(FILE * expt){
 	fprintf(expt, "<br>\n");
 
 	/* pridana stranka HTTP_ADDRESS, 12/04/2000A.D. */
-	fprintf(expt, "<"HTML_LINK_NORMAL" href=\"%s\" target=\"_top\">%s</a>\n", HTTP_ADDRESS, HTTP_ADDRESS);
+	fprintf(expt, "<"HTML_LINK_NORMAL" href=\"%s\" target=\"_top\">%s</a>\n", HTTP_ADDRESS, HTTP_DISPLAY_ADDRESS);
 	fprintf(expt, "&#169; %d%s <"HTML_LINK_NORMAL" href=\"mailto:%s\">Juraj Vidéky</a>\n", baserok, rok, MAIL_ADDRESS);
 
 	fprintf(expt, "</p>\n"); /* pridane kvoli tomu, ze cele to bude <p class="patka">, 2003-07-02 */

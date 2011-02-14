@@ -2,7 +2,7 @@ date
 chmod u=rwx *.*
 # make -- 2005-03-30, netreba uncgi :-)
 # cp uncgi uncgi.cgi
-g++ -Wall lexer.c confuse.c breviar.cpp dbzaltar.cpp liturgia.cpp mygetopt.cpp mylog.cpp myhpage.cpp myexpt.cpp cgiutils.cpp myconf.cpp mydefs.cpp mystring.cpp
+g++ -Wall breviar.cpp dbzaltar.cpp liturgia.cpp mygetopt.cpp mylog.cpp myhpage.cpp myexpt.cpp cgiutils.cpp myconf.cpp mydefs.cpp mystring.cpp confuse.c lexer.c
 mv a.out l.cgi
 chmod u=rw *.c
 chmod u=rw *.cpp
