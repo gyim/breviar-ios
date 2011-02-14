@@ -1543,6 +1543,10 @@ const char *text_JUL_07[] =
 {"Sv. Antona Márie Zaccariu, kòaza",
  "(v Èechách, na Moravì a na Slezsku není)",
  "", "", ""};
+const char *text_JUL_09[] =
+{"Sv. Augustína Zhao Rong, kòaza, a spoloèníkov, muèeníkov",
+ "(v Èechách, na Moravì a na Slezsku není)",
+ "", "", ""};
 const char *text_JUL_11[] =
 {"Sv. Benedikta, opáta, patróna Európy",
  "Sv. Benedikta, opata, patrona Evropy",

@@ -2791,6 +2791,10 @@ void _set_zalmy_sviatok_apostolov(short int modlitba){
 		_set_zalm2(modlitba, "z64.htm", "ZALM64");
 		_set_zalm3(modlitba, "z97.htm", "ZALM97");
 	}
+	/* 2008-06-30: doplnenÈ */
+	else if(modlitba == MODL_RANNE_CHVALY){
+		_set_zalmy_1nedele_rch();
+	}
 	Log("_set_zalmy_sviatok_apostolov(%s) -- end\n", nazov_modlitby(modlitba));
 }
 
@@ -12048,6 +12052,15 @@ label_25_MAR:
 						_vlastna_cast_modlitba_prve_vesp;
 						_set_zalmy_sviatok_apostolov(modlitba);
 
+						/* 2008-06-30: doplnenÈ kompletÛrium */
+						modlitba = MODL_PRVE_KOMPLETORIUM;
+						if(den != DEN_NEDELA){
+							_set_kompletorium_slavnost(modlitba, _global_svaty1.litobd);
+						}
+						else{
+							_set_kompletorium_nedela(modlitba);
+						}
+
 						/* 2007-11-14: doplnenÈ invitatÛrium */
 						modlitba = MODL_INVITATORIUM;
 						_vlastna_cast_antifona_inv;
@@ -12059,9 +12072,11 @@ label_25_MAR:
 						_vlastna_cast_kresponz;
 						_vlastna_cast_1citanie;
 						_vlastna_cast_2citanie;
+						_set_zalmy_sviatok_apostolov(modlitba); /* 2008-06-30: doplnenÈ */
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_full(modlitba);
+						_set_zalmy_sviatok_apostolov(modlitba); /* 2008-06-30: doplnenÈ */
 
 						/* 2006-01-24: doplnenÈ modlitby cez deÚ */
 						_vlastna_cast_mcd_ant_kcitresp_modl;
@@ -12077,6 +12092,15 @@ label_25_MAR:
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_sviatok_apostolov(modlitba);
+
+						/* 2008-06-30: doplnenÈ kompletÛrium */
+						modlitba = MODL_KOMPLETORIUM;
+						if(den != DEN_NEDELA){
+							_set_kompletorium_slavnost(modlitba, _global_svaty1.litobd);
+						}
+						else{
+							_set_kompletorium_nedela(modlitba);
+						}
 
 						if(poradie_svaty != 0) break;
 					}
@@ -12373,6 +12397,34 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_JUL_07[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_VYCH, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+					}
+					break;
+				case 9:
+					/* 2008-07-01: doplnenÈ (upozornil Michal Paz˙rik <m.pazurik@gmail.com>) */
+					if(_global_jazyk == JAZYK_SK){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							/* _vlastna_cast_2citanie; */
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty1.meno, text_JUL_09[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+						_global_svaty1.farba = LIT_FARBA_CERVENA;
 					}
 					break;
 				case 11:
@@ -13088,6 +13140,18 @@ label_25_MAR:
 						modlitba = MODL_INVITATORIUM;
 						_vlastna_cast_antifona_inv;
 
+						/* 2006-01-24: doplnenÈ modlitby cez deÚ */
+						_vlastna_cast_mcd_ant_kcitresp_modl;
+
+						/* 2008-06-30: prevzatÈ podæa 15. augusta */
+						/* 2006-02-04: ak je modlitba cez deÚ na sl·vnosù, tak by sa mali pouûiù ûalmy z doplnkovej psalmÛdie */
+						if(_global_den.denvt != DEN_NEDELA) {
+							_set_zalm_cez_den_doplnkova_psalmodia();
+						}
+						else {
+							_set_zalmy_1nedele_mcd();
+						}
+
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_premenenie(modlitba); /* preto, lebo nespustame zaltar(); 28/03/2000A.D. */
@@ -13100,9 +13164,6 @@ label_25_MAR:
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_premenenie(modlitba);
 
-						/* 2006-01-24: doplnenÈ modlitby cez deÚ */
-						_vlastna_cast_mcd_ant_kcitresp_modl;
-						
 						if(poradie_svaty != 0) break;
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;

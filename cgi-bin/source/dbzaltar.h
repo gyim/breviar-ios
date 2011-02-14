@@ -255,6 +255,7 @@ extern const char *text_JUL_04_1[];
 extern const char *text_JUL_05[];
 extern const char *text_JUL_06[];
 extern const char *text_JUL_07[];
+extern const char *text_JUL_09[];
 extern const char *text_JUL_11[];
 extern const char *text_JUL_13[];
 extern const char *text_JUL_14[];
