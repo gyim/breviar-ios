@@ -801,6 +801,8 @@ typedef struct lrok _struct_lrok;
 #define LINK_DEN 2
 #define LINK_DEN_MESIAC_ROK_PRESTUP 4 /* pridana kvoli prestupnym rokom, 2003-07-02 */
 #define LINK_ISO_8601 5 /* pridana kvoli SIMPLE exportu, 2005-03-21 */
+#define LINK_DEN_MESIAC_PREDOSLY 6 /* 2007-08-15 pridané kvôli novému kalendáru */
+#define LINK_DEN_MESIAC_NASLEDOVNY 7 /* 2007-08-15 pridané kvôli novému kalendáru */
 
 /* 2006-07-11: Pridané kvôli jazykovým mutáciám 
  * 2006-12-12: Pridaná latinèina, kódy sú pod¾a ISO 639-1 (až na èeštinu)

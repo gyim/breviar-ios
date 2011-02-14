@@ -563,23 +563,31 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 	/* napisanie textu linky */
 	switch(typ){
 		case LINK_DEN_MESIAC_ROK_PRESTUP: /* pridane 2003-07-02 */
+		case LINK_DEN_MESIAC_PREDOSLY: /* pridané 2007-08-15 */
+		case LINK_DEN_MESIAC_NASLEDOVNY: /* pridané 2007-08-15 */
 		case LINK_DEN_MESIAC_ROK:
 		case LINK_DEN_MESIAC:
 			if(den == VSETKY_DNI){
 				if(mesiac == VSETKY_MESIACE)
 					sprintf(pom, "%d</a>", rok);
 				else{
-					switch(_case){
-						case CASE_case:
-							sprintf(pom, "%s", nazov_mesiaca(mesiac - 1));
-							break;
-						case CASE_Case:
-							sprintf(pom, "%s", nazov_Mesiaca(mesiac - 1));
-							break;
-						case CASE_CASE:
-							sprintf(pom, "%s", nazov_MESIACA(mesiac - 1));
-							break;
-					}/* switch(_case) */
+					if(typ == LINK_DEN_MESIAC_PREDOSLY)
+						sprintf(pom, ""HTML_LEFT_ARROW"");
+					else if(typ == LINK_DEN_MESIAC_NASLEDOVNY)
+						sprintf(pom, ""HTML_RIGHT_ARROW"");
+					else{
+						switch(_case){
+							case CASE_case:
+								sprintf(pom, "%s", nazov_mesiaca(mesiac - 1));
+								break;
+							case CASE_Case:
+								sprintf(pom, "%s", nazov_Mesiaca(mesiac - 1));
+								break;
+							case CASE_CASE:
+								sprintf(pom, "%s", nazov_MESIACA(mesiac - 1));
+								break;
+						}/* switch(_case) */
+					}
 					if(typ == LINK_DEN_MESIAC_ROK){
 						/* pridame aj rok */
 						strcat(_global_link, pom);
@@ -589,40 +597,46 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 				}/* mesiac != VSETKY_MESIACE */
 			}/* if(den == VSETKY_DNI) */
 			else{
-				/* 2007-03-20: spôsob výpisu dátumu pod¾a jazyka */
-				if(_global_jazyk == JAZYK_LA){
-					sprintf(pom, "%d. %s", den, nazov_Mesiaca_gen(mesiac - 1));
-					if(typ == LINK_DEN_MESIAC_ROK){
-						/* pridame aj rok */
-						strcat(_global_link, pom);
-						sprintf(pom, " %d", rok);
-					}
-				}
-				else if(_global_jazyk == JAZYK_EN){
-					sprintf(pom, "%s %d", nazov_Mesiaca(mesiac - 1), den);
-					if(typ == LINK_DEN_MESIAC_ROK){
-						/* pridame aj rok */
-						strcat(_global_link, pom);
-						sprintf(pom, ", %d", rok);
-					}
-				}
+				if(typ == LINK_DEN_MESIAC_PREDOSLY)
+					sprintf(pom, ""HTML_LEFT_ARROW"");
+				else if(typ == LINK_DEN_MESIAC_NASLEDOVNY)
+					sprintf(pom, ""HTML_RIGHT_ARROW"");
 				else{
-					/* doterajšie správanie pre slovenèinu a èeštinu */
-					switch(_case){
-						case CASE_case:
-							sprintf(pom, "%d. %s", den, nazov_mesiaca(mesiac - 1));
-							break;
-						case CASE_Case:
-							sprintf(pom, "%d. %s", den, nazov_Mesiaca(mesiac - 1));
-							break;
-						case CASE_CASE:
-							sprintf(pom, "%d. %s", den, nazov_MESIACA(mesiac - 1));
-							break;
-					}/* switch(_case) */
-					if(typ == LINK_DEN_MESIAC_ROK){
-						/* pridame aj rok */
-						strcat(_global_link, pom);
-						sprintf(pom, " %d", rok);
+					/* 2007-03-20: spôsob výpisu dátumu pod¾a jazyka */
+					if(_global_jazyk == JAZYK_LA){
+						sprintf(pom, "%d. %s", den, nazov_Mesiaca_gen(mesiac - 1));
+						if(typ == LINK_DEN_MESIAC_ROK){
+							/* pridame aj rok */
+							strcat(_global_link, pom);
+							sprintf(pom, " %d", rok);
+						}
+					}
+					else if(_global_jazyk == JAZYK_EN){
+						sprintf(pom, "%s %d", nazov_Mesiaca(mesiac - 1), den);
+						if(typ == LINK_DEN_MESIAC_ROK){
+							/* pridame aj rok */
+							strcat(_global_link, pom);
+							sprintf(pom, ", %d", rok);
+						}
+					}
+					else{
+						/* doterajšie správanie pre slovenèinu a èeštinu */
+						switch(_case){
+							case CASE_case:
+								sprintf(pom, "%d. %s", den, nazov_mesiaca(mesiac - 1));
+								break;
+							case CASE_Case:
+								sprintf(pom, "%d. %s", den, nazov_Mesiaca(mesiac - 1));
+								break;
+							case CASE_CASE:
+								sprintf(pom, "%d. %s", den, nazov_MESIACA(mesiac - 1));
+								break;
+						}/* switch(_case) */
+						if(typ == LINK_DEN_MESIAC_ROK){
+							/* pridame aj rok */
+							strcat(_global_link, pom);
+							sprintf(pom, " %d", rok);
+						}
 					}
 				}
 				strcat(pom, "</a>");
