@@ -10562,24 +10562,39 @@ label_25_MAR:
 					break;
 				case 23:
 					/* 2007-04-23: vo všeobecnom kalendári sú 23. apríla sv. Juraj a sv. Vojtech */
-					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ)){
+					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
 
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
+							/* 2008-12-10: doplnené pre JAZYK_CZ_OP - vlastný hymnus a niektoré èasti pre rch a v */
 							modlitba = MODL_RANNE_CHVALY;
 							_vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
+							if(_global_jazyk == JAZYK_CZ_OP){
+								_vlastna_cast_hymnus;
+								_vlastna_cast_antifony;
+								_vlastna_cast_kcitanie;
+								_vlastna_cast_kresponz;
+							}
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_modlitba;
 							_vlastna_cast_2citanie;
+							if(_global_jazyk == JAZYK_CZ_OP){
+								_vlastna_cast_hymnus;
+							}
 
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
+							if(_global_jazyk == JAZYK_CZ_OP){
+								_vlastna_cast_hymnus;
+								_vlastna_cast_kcitanie;
+								_vlastna_cast_kresponz;
+							}
 
 							break;
 						}
@@ -10596,7 +10611,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
 					}
-					else{
+					else{ /* _global_jazyk nie je slovenèina ani èeština */
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
 
@@ -10652,7 +10667,7 @@ label_25_MAR:
 					break;
 				case 24:
 					/* 2007-04-23: vo všeobecnom kalendári sú 23. apríla sv. Juraj a sv. Vojtech */
-					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ)){
+					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
 
@@ -11231,7 +11246,7 @@ label_25_MAR:
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
 					break;
 				case 16:
-					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ)){
+					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
 
@@ -15028,7 +15043,9 @@ label_25_MAR:
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_hymnus;
+						if(_global_jazyk != JAZYK_CZ_OP){ /* 2008-12-10: pre CZOP nie je vlastný hymnus */
+							_vlastna_cast_hymnus;
+						}
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
@@ -15037,7 +15054,9 @@ label_25_MAR:
 						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
-						_vlastna_cast_hymnus;
+						if(_global_jazyk != JAZYK_CZ_OP){ /* 2008-12-10: pre CZOP nie je vlastný hymnus */
+							_vlastna_cast_hymnus;
+						}
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
 
@@ -15223,7 +15242,9 @@ label_25_MAR:
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_hymnus;
+						if(_global_jazyk != JAZYK_CZ_OP){ /* 2008-12-10: pre CZOP nie je vlastný hymnus */
+							_vlastna_cast_hymnus;
+						}
 						_vlastna_cast_modlitba;
 
 						modlitba = MODL_POSV_CITANIE;
@@ -15231,7 +15252,9 @@ label_25_MAR:
 						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
-						_vlastna_cast_hymnus;
+						if(_global_jazyk != JAZYK_CZ_OP){ /* 2008-12-10: pre CZOP nie je vlastný hymnus */
+							_vlastna_cast_hymnus;
+						}
 						_vlastna_cast_modlitba;
 
 						break;
@@ -15268,6 +15291,9 @@ label_25_MAR:
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
+						if(_global_jazyk == JAZYK_CZ_OP){ /* 2008-12-10: vlastný hymnus */
+							_vlastna_cast_hymnus;
+						}
 						_vlastna_cast_modlitba;
 
 						modlitba = MODL_POSV_CITANIE;
@@ -15275,6 +15301,9 @@ label_25_MAR:
 						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
+						if(_global_jazyk == JAZYK_CZ_OP){ /* 2008-12-10: vlastný hymnus */
+							_vlastna_cast_hymnus;
+						}
 						_vlastna_cast_modlitba;
 
 						break;
