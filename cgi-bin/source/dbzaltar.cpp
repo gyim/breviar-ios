@@ -11132,9 +11132,9 @@ label_25_MAR:
 							/* 2005-08-22: Všetko je zo spoloènej èasti na výroèie posviacky chrámu */
 						}
 						pocet = 2;
-						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty2.typslav = SLAV_SVIATOK;
 						_global_svaty2.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
-						_global_svaty2.typslav_lokal = LOKAL_SLAV_OLOMOUC_SVIATOK;
+						_global_svaty2.typslav_lokal = LOKAL_SLAV_OLOMOUC;
 						mystrcpy(_global_svaty2.meno, text_JUN_30_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
 						_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
@@ -11556,9 +11556,9 @@ label_25_MAR:
 							/* 2005-08-22: Všetko je zo spoloènej èasti na výroèie posviacky chrámu */
 						}
 						pocet = 2;
-						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
-						_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-						_global_svaty2.typslav_lokal = LOKAL_SLAV_OSTRAVA_OPAVA_SVIATOK;
+						_global_svaty2.typslav = SLAV_SVIATOK;
+						_global_svaty2.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+						_global_svaty2.typslav_lokal = LOKAL_SLAV_OSTRAVA_OPAVA;
 						mystrcpy(_global_svaty2.meno, text_JUL_16_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
 						_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
@@ -13165,7 +13165,7 @@ label_25_MAR:
 						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					}
 					mystrcpy(_global_svaty1.meno, text_SEP_15[_global_jazyk], MENO_SVIATKU);
-					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-09-18: opravené */
 					break;
 				case 16:
 					if(_global_jazyk == JAZYK_SK){ /* 2006-09-12: odvetvené len pre Slovensko */
@@ -14260,10 +14260,39 @@ label_25_MAR:
 						}
 						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
 						_global_svaty1.typslav_lokal = LOKAL_SLAV_HRADEC_KRALOVE;
-						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						_global_svaty1.typslav = SLAV_SVIATOK;
 						mystrcpy(_global_svaty1.meno, text_OKT_30[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					}
+					break;
+				case 31: /* 2006-09-19: pridané */
+					if(_global_jazyk == JAZYK_CZ){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty1.meno, text_OKT_31[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+						_global_svaty1.farba = LIT_FARBA_BIELA;
 					}
 					break;
 			}; break; /* case MES_OCT */
@@ -14977,7 +15006,9 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, text_DEC_03[_global_jazyk], MENO_SVIATKU);
-					_global_svaty1.typslav_lokal = LOKAL_SLAV_BYSTRICA_PATRON; /* 2006-02-03: pridané */
+					if(_global_jazyk == JAZYK_SK){ /* 2006-09-19: odvetvené len pre Slovensko */
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_BYSTRICA_PATRON; /* 2006-02-03: pridané */
+					}
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					break;

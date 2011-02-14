@@ -401,10 +401,10 @@ const char *nazov_slavenia_lokal[] =
 ,"Druhá nedìle velikonoèní - Božího milosrdenství"
 ,"v pražské katedrále slavnost"
 ,"v èeskobudìjovické diecézi"
-,"v olomoucké arcidiecézi svátek"
+,"v olomoucké arcidiecézi"
 ,"v Èechách svátek"
 ,"v plzeòské diecézi svátek hlavního patrona"
-,"v ostravsko-opavské diecézi svátek"
+,"v ostravsko-opavské diecézi"
 ,"v litomìøické diecézi"
 ,"v královéhradecké diecézi"
 ,"jen v posvìcených kostelích"
@@ -723,10 +723,16 @@ const char *html_text_mesiac[] = {"mesiac", "mìsíc", "month", ""};
 const char *html_text_rok[] = {"rok", "rok", "year", ""};
 const char *html_text_Rok[] = {"Rok", "Rok", "Year", ""};
 const char *html_text_Rok_x[] = {"Rok %d", "Rok %d", "Year %d", ""};
+
+const char *html_text_zoznam_mesiacov[] = {"zoznam mesiacov", "seznam mìsícù", "list of months", ""};
+
 const char *html_text_modlitba[] = {"modlitba", "modlitba", "prayer", ""};
 const char *html_text_modlitby_pre_den[] = {"modlitby pre deò", "modlitby pro den", "prayers for date", ""};
 const char *html_text_alebo_pre[] = {"alebo pre", "anebo pro", "or for", ""};
 const char *html_text_dnesok[] = {"dnešok", "dnešní den", "today", ""};
+
+const char *html_text_Vysvetlivky[] = {"Vysvetlivky", "Vysvìtlivky", "Legenda", ""};
+
 const char *html_text_dalsie_moznosti[] = {"Vyberte si ïalšie možnosti ", "Další možnosti výbìru ", "Choose from above (buttons) or from the following options: ", ""};
 const char *html_text_prik_sviatky_atd[] = {"prikázané sviatky a slávnosti Pána v roku ", "pøikázané svátky a slávnosti Pánì v roku ", "obligatory celebrations in year ", ""};
 const char *html_text_lit_kalendar[] = {"liturgický kalendár pre", "liturgický kalendáø pro", "liturgical calendar for", ""};
@@ -743,11 +749,13 @@ const char *html_text_dnes_je_atd[] =
  "Dnes je %d. den v roku%s, <a href=\"%s%s\">juliánské datum</a> JD = %ld%s.\n<br>\n",
  "Today is %d. day in the year%s, <a href=\"%s%s\">Julian date</a> JD = %ld%s.\n<br>\n",
  ""};
+
 const char *html_text_zakladne_info[] = {"Základné informácie", "Základní informace", "Basic info", ""};
 const char *html_text_je[] = {"je", "je", "is", ""};
 const char *html_text_nie_je[] = {"nie je", "není", "is not", ""};
 const char *html_text_prestupny[] = {"prestupný", "pøestupný", "...", ""};
 const char *html_text_datumy_pohyblivych_slaveni[] = {"Dátumy pohyblivých slávení", "Dáta promìnlivých slávení", "Dates for movable celebrations", ""};
+
 const char *html_text_Nedelne_pismeno[] = {"Nede¾né písmeno", "Nedelní písmeno", "Sunday letter", ""};
 const char *html_text_Nedelne_pismena[] = {"Nede¾né písmená", "Nedelní písmena", "Sunday letters", ""};
 const char *html_text_Od_prvej_adv_atd[] = {
@@ -1358,7 +1366,7 @@ const char *text_JUL_16[] =
  "", ""};
 const char *text_JUL_16_1[] =
 {"(na Slovensku nie je)",
- "Výroèí posvìcení katedrály",
+ "Výroèí posvìcení katedrály Božského Spasitele",
  "", ""};
 const char *text_JUL_17_1[] =
 {"Sv. Andreja-Svorada a Benedikta, pustovníkov",

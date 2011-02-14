@@ -5156,7 +5156,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 			/* <font size=-1></font> zmeneny na <span class="small"></span>, 2003-07-14 
 			 * a napokon uplne odstraneny...
 			 */
-			Export("<br><span class=\"small\"><a href=\"#explain\">Vysvetlivky</a></span>\n");
+			Export("<br><span class=\"small\"><a href=\"#explain\">%s</a></span>\n", html_text_Vysvetlivky[_global_jazyk]);
 			/* napokon ciaru */
 			Export("</center>\n<hr>\n");
 		}
@@ -5179,7 +5179,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				/* zmenene <b><font color> na <span class="redbold">, 2003-07-02 */
 				Export("\n<p><center><"HTML_SPAN_RED_BOLD">%s</span>",
 					nazov_MESIACA(m));
-				Export(" (<a href=\"#rok\">zoznam mesiacov</a>)</center>\n");
+				Export(" (<a href=\"#rok\">%s</a>)</center>\n", html_text_zoznam_mesiacov[_global_jazyk]);
 			}
 			rozbor_mesiaca(m + 1, r);
 		}/* for */
