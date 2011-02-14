@@ -70,6 +70,7 @@
 /*   2006-09-12a.D. | dokonèená lokalizácia mesiaca SEP+opravy */
 /*   2006-09-13a.D. | dokonèená lokalizácia mesiacov OKT+NOV   */
 /*   2006-12-04a.D. | oprava hymnu pre èeskı kompletáø         */
+/*   2007-07-17a.D. | oprava hymnu mcd pre niektoré slávnosti  */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -2778,20 +2779,27 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 	  * 2003-06-30a.D.: rovnako tak pre slavnost sv. Petra a sv. Pavla (29. juna)
 	  *
 	  * 2006-02-07: pravdupovediac, všetko sa nenastavilo (modlitba cez deò, almy) - musím to fixnú
+	  * 
+	  * 2007-07-17: vyzerá to tak, e asi je potrebné zbehnú aj v tıchto prípadoch nastavenia 
+	  *		kvôli modlitbe cez deò tak, ako to bolo len pre sviatok povıšenia sv. kría
+	  *
 	  */
 	if(
 		((_global_den.denvt == DEN_NEDELA) && (_global_den.den == 6) && (_global_den.mesiac - 1 == MES_AUG)) ||
 		((_global_den.denvt == DEN_NEDELA) && (_global_den.den == 29) && (_global_den.mesiac - 1 == MES_JUN)) ||
-		((_global_den.denvt == DEN_NEDELA) && (_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) && (_global_modlitba != MODL_PREDPOLUDNIM) && (_global_modlitba != MODL_NAPOLUDNIE) && (_global_modlitba != MODL_POPOLUDNI)) ||
+		((_global_den.denvt == DEN_NEDELA) && (_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) ) ||
 		((_global_den.den == 1) && (_global_den.mesiac - 1 == MES_NOV))
 		){
-		Log("premenenie pána || povıšenie sv. kría || všetkıch svätıch, so return...\n");
-		return;
-	}
-	if((_global_den.denvt == DEN_NEDELA) && (_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP)){
-		Log("povıšenie sv. kría, modlitba cez deò...\n");
-		zaltar_zvazok(den, tyzzal, _global_den.litobd, ZALTAR_IBA_ZALMY_HYMNUS_MCD);
-		return;
+			Log("premenenie pána || petra a pavla || povıšenie sv. kría || všetkıch svätıch...\n");
+			if((_global_modlitba != MODL_PREDPOLUDNIM) && (_global_modlitba != MODL_NAPOLUDNIE) && (_global_modlitba != MODL_POPOLUDNI)){
+				Log("keïe sa nejedná o modlitbu cez deò, preskakujeme nastavenia (všetky boli nastavené z vlastnej èasti)...\n");
+				return;
+			}
+			else{
+				Log("keïe sa jedná o modlitbu cez deò, nastavujeme len hymnus pre MCD a preskakujeme ostatné nastavenia (všetky ostatné boli nastavené z vlastnej èasti)...\n");
+				zaltar_zvazok(den, tyzzal, _global_den.litobd, ZALTAR_IBA_ZALMY_HYMNUS_MCD);
+				return;
+			}
 	}
 
 	Log("/* najprv spustime zaltar_zvazok(); */\n");
