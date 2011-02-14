@@ -37,6 +37,7 @@
 
 #if defined(OS_linux)
 #elif defined(OS_Windows)
+#elif defined(OS_Windows_Ruby)
 #else
 	#error Unsupported operating system (not defined in mysystem.h)
 #endif
@@ -58,7 +59,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2007-05-18"
+#define BUILD_DATE "2007-05-25"
 
 #define BYTES 250
 #define SMALL 80

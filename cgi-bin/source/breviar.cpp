@@ -8173,6 +8173,8 @@ int main(int argc, char **argv){
 	 */
 #if defined(OS_linux)
 	_global_linky = 1; /* zobrazovat linky */
+#elif defined(OS_Windows_Ruby)
+	_global_linky = 1; /* zobrazovat linky */
 #elif defined(OS_Windows)
 	_global_linky = 0; /* nezobrazovat linky */
 #else
@@ -8465,6 +8467,9 @@ _main_SIMULACIA_QS:
 #if defined(OS_linux)
 			_global_linky = 1; /* zobrazovat linky */
 			_main_LOG_to_Export("/* linux: teraz som nastavil _global_linky == %d */\n", _global_linky);
+#elif defined(OS_Windows_Ruby)
+			_global_linky = 1; /* zobrazovat linky */
+			_main_LOG_to_Export("/* Windows/Ruby: teraz som nastavil _global_linky == %d */\n", _global_linky);
 #elif defined(OS_Windows)
 			if(pom_LINKY != NULL) /* pridane 13/04/2000A.D. */
 				_global_linky = atoi(pom_LINKY);

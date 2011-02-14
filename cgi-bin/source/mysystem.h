@@ -32,13 +32,15 @@
 #undef USE_UNCGI
 
 #undef MODEL_ostry_linux
+#undef MODEL_ostry_Windows_RUBY
 #undef MODEL_DEBUG_linux
 #undef MODEL_ostry_SIMUL_linux_UNDER_Windows
 #undef MODEL_DEBUG_SIMUL_linux_UNDER_Windows
 #undef MODEL_ostry_Windows
 #undef MODEL_DEBUG_Windows
 
-#define MODEL_ostry_linux
+//#define MODEL_ostry_linux
+#define MODEL_ostry_Windows_RUBY // 2007-05-24: pridané; používame pre Windows/ruby
 //#define MODEL_DEBUG_Windows
 //#define MODEL_DEBUG_linux
 //#define MODEL_ostry_SIMUL_linux_UNDER_Windows		// 2005-03-28 Vytvorene (simulacia ostreho linuxu)
@@ -55,6 +57,12 @@
 /* ostry linux: */
 #if defined(MODEL_ostry_linux)
 	#define OS_linux
+	#undef LOGGING
+	#define EXPORT_HTML_FILENAME_ANCHOR
+	#define EXPORT_TO_STDOUT
+/* ostré Windows/RUBY: */
+#elif defined(MODEL_ostry_Windows_RUBY)
+	#define OS_Windows_Ruby
 	#undef LOGGING
 	#define EXPORT_HTML_FILENAME_ANCHOR
 	#define EXPORT_TO_STDOUT

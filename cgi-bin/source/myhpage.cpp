@@ -47,7 +47,10 @@ void hlavicka(char *title){
 	int c = 0;
 	mystrcpy(fname, FILE_HEADER, MAX_STR);
 
-#ifdef OS_linux
+#if defined(OS_linux)
+	Export("Content-type: text/html\n");
+	Export("\n");
+#elif defined(OS_Windows_Ruby)
 	Export("Content-type: text/html\n");
 	Export("\n");
 #endif
@@ -85,7 +88,10 @@ void hlavicka(char *title, FILE * expt){
 	int c = 0;
 	mystrcpy(fname, FILE_HEADER, MAX_STR);
 
-#ifdef OS_linux
+#if defined(OS_linux)
+	fprintf(expt, "Content-type: text/html\n");
+	fprintf(expt, "\n");
+#elif defined(OS_Windows_Ruby)
 	fprintf(expt, "Content-type: text/html\n");
 	fprintf(expt, "\n");
 #endif

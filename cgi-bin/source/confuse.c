@@ -19,8 +19,13 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
+/*
+2007-05-25, JUV
+zapozn·mkovanÈ: CFGT_BOOL
+teda nepouûÌvaù bool typy
+*/
+#include "mysystem.h"
 #include "vstudio.h"
-
 #include "config.h"
 
 #include <string.h>
@@ -32,7 +37,13 @@
 # include <pwd.h>
 #endif
 #include <sys/types.h>
-#include "unistd.h"
+#ifdef OS_Windows_Ruby
+	#include "unistd.h"
+#elif OS_Windows
+	#include "unistd.h"
+#else
+	#include <unistd.h>
+#endif
 #include <ctype.h>
 
 #include "confuse.h"
@@ -1334,11 +1345,13 @@ static void cfg_addlist_internal(cfg_opt_t *opt,
                 cfg_opt_setnfloat(opt, va_arg(ap, double),
                                   opt->nvalues);
                 break;
-            case CFGT_BOOL:
+/* JUV, 2007-05-25: zapozn·mkovanÈ, lebo pod linuxom spÙsobovalo problÈmy */
+/*			case CFGT_BOOL:
                 cfg_opt_setnbool(opt, va_arg(ap, cfg_bool_t),
                                  opt->nvalues);
                 break;
-            case CFGT_STR:
+*/
+			case CFGT_STR:
                 cfg_opt_setnstr(opt, va_arg(ap, char*), opt->nvalues);
                 break;
             case CFGT_FUNC:

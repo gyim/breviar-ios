@@ -30,7 +30,7 @@
 #define HAVE_STDLIB_H 1
 
 /* Define to 1 if you have the `strcasecmp' function. */
-/*#define HAVE_STRCASECMP 1*/
+/* #define HAVE_STRCASECMP 1 */
 
 /* Define to 1 if you have the `strdup' function. */
 #define HAVE_STRDUP 1
@@ -85,7 +85,7 @@
 /*#undef const*/
 
 /* Define to 1 if you have the strndup function */
-/*#undef HAVE_STRNDUP */
+/* #define HAVE_STRNDUP 1 */
 
 /* Define if you have _fileno instead of fileno */
 #define HAVE__FILENO 1
