@@ -8,27 +8,22 @@
    <title>ulohy</title>
 </head>
 <body>
-
 <center>
 <h2>O programu | Parametry (batch mode)</h2>
 ^ <a href="ulohy.htm">Úkoly</a> | ^ <a href="parametre.htm">Parametry (obecnì)</a> | ^^ <a href="program.htm">O programu</a>
 </center>
  
 <h4 class="blue">Parametry programu (batch mode)</h4>
-
 <p>Command-line verze programu (neboli verze spustitelná z pøíkazového øádku) mùe bıt spuštìná standardním zpùsobem 
 	(více viz o <a href="parametre.htm">parametrech tohoto pouití</a>), nebo v tzv. <span class="bold">batch módu (dávkové zpracování)</span>, 
 	pokud pro urèité, dvìma daty ohranièené období <a name="datumy"></a>(<span class="it">poèáteèní datum</span>, <span class="it">koneèné datum</span>) vytvoøí dávkovı soubor (skript), obsahující volání (volby???) programu s nastavenımi parametry. Skript po spuštìní generuje modlitby pro dané období (buï pro kadou modlitbu do samostatného souboru, nebo všechny modlitby do jednoho souboru). Tento zpùsob pouití se znaènì liší od ostatních, proto ho popisujeme na tomto místì zvláš. 
-
 <ul class="level1">
-
 <li><span class="parameter">q</span> | Typ <a href="ulohy.htm">úlohy</a>, kterou má program vykonat  (query type)
 	<ul class="level2">
 	<li><span class="value">pbm</span> | batch mode (dávkové zpracování)</li>
 	<li>ostatní hodnoty: viz <a href="parametre.htm">parametry pouití programu (všeobecnì)</a>
 	</ul>
 </li>
-
 <li><span class="parameter">d</span> | Den <a href="#datumy">poèáteèního</a> data (hodnoty: <span class="value">1</span>-<span class="value">31</span>)</li>
 <li><span class="parameter">m</span> | Mìsíc <a href="#datumy">poèáteèního</a> data (hodnoty: <span class="value">1</span>-<span class="value">12</span>)</li>
 <li><span class="parameter">r</span> | Rok <a href="#datumy">poèáteèního</a> data (napø. <span class="value">2000</span>)</li>
@@ -36,11 +31,9 @@
 <li><span class="parameter">g</span> | Mìsíc <a href="#datumy">koneèného</a> data (hodnoty: <span class="value">1</span>-<span class="value">12</span>)</li>
 <li><span class="parameter">p</span> | Rok <a href="#datumy">koneèného</a> data (napø. <span class="value">2000</span>).
 <br>Mìlo by pøitom platit: poèáteèní datum &lt;= koneèné datum.</li>
-
 <li><span class="parameter">b</span> | Název vısledného skriptu (napø. <span class="tt">delej.bat</span>). <a href="#output">Vısledky jeho spuštìní</a> jsou popsané níe.</li>
 <li><span class="parameter">n</span> | Název pouitého command-line pøíkazu online breviáøe (napø. <span class="tt">breviar.exe</span> pro DOS).
 Tento název bude pouitı ve vısledném skriptu.</li>
-
 <li><span class="parameter">1</span> | Monost zobrazit nemìnné souèásti modlitby (default: ne)</li>
 <li><span class="parameter">2</span> | Monost brát almy ze dne, nebo z vlastní/spoleèné èásti slavení</li>
 <li><span class="parameter">3</span> | Je-li monost vıbìru z více spoleènıch èástí, tento parametr urèuje, kterou spoleènou èást brát.</li>
@@ -48,17 +41,12 @@ Tento název bude pouitı ve vısledném skriptu.</li>
 <li><span class="parameter">5</span> | Monost brát almy k modlitbì bìhem dne z bìného, nebo doplòkového altáøe (default: ne)</li>
 <li><span class="parameter">e</span> | Název souboru, do kterého se má exportovat (DOS default: <span class="tt">export.htm</span>, linux default: stdout). 
 	Tento soubor bude v pøípadì chyb obsahovat chybná hlášení. V pøípadì úspìchu bude obsahovat jen hlavièku HTML dokumentu, protoe vısledkem bude skript, jeho jméno specifikoval parametr <span class="parameter">b</span>.</li>
-
 <li><span class="parameter">a</span> | Monost všechny modlitby dát do 1 souboru (default: ne)</li>
-
 </ul>
-
 <p>Pro parametry urèující monosti mají hodnoty následovnı vıznam: 
 <span class="value">1</span> - ano, <span class="value">0</span> - ne.
-
 <a name="output"></a>
 <h4 class="blue">Vısledky po spuštìní vytvoøeného skriptu</h4>
-
 <p>Vytvoøenı skript po spuštìní vygeneruje modlitb pro dané období do souborù <span class="tt">yyyy-mm-dd_xp.htm</span>, kde vıznam jednotlivıch èástí názvu souboru je následovnı:
 <ul class="level1">
 <li><span class="parameter">yyyy</span> | rok</li>
@@ -70,7 +58,6 @@ Tento název bude pouitı ve vısledném skriptu.</li>
 	<span class="value">4</span> znamená nezávaznou sobotní památku Panny Marie, <span class="value">1</span> a <span class="value">3</span> znamenají vìtšinou svátky svatıch.</li>
 <li><span class="parameter">p</span> | modlitba (<span class="value">r</span> = ranní chvály, <span class="value">v</span> = nešpory - pouité je "v" z latinského "vesperae")</li>
 </ul>
-
 <p>V pøípadì, e je pouitı parametr  <span class="parameter">a</span> (append), bude vytvoøenı jen jeden soubor s následujícím názvem:
 <span class="tt">yyyy-mm-dd_YYYY-MM-DD.htm</span>, kde vıznam jednotlivıch èástí názvu souboru je následovnı:
 <ul class="level1">
@@ -83,14 +70,10 @@ Tento název bude pouitı ve vısledném skriptu.</li>
 <br>Data jsou uvedena v souladu s normou ISO 8601.
 </li>
 </ul>
-
 <p>Pokud program dostane nesprávné paramety (tzn. i pøípady nesprávnıch hodnot parametrù, nebo další chybìjící parametry závislé na jinıch parametrech), export obsahuje chybné hlášení. Navíc command line verze vypíše chybné hlášení na stderr.
-
 <a name="example"></a>
 <h4 class="blue">Pøíklady</h4>
-
 <p>Jak známo, pøíklad mùe všechny pochybnosti rázem odstranit, nebo naopak podnítit další otázky. Z obou dùvodù jsou uvedeny následující pøíklady pouití batch modu.
-
 <ul class="level1">
 <li><span class="tt">breviar.exe -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -bdelej.bat -nbreviar.exe -ic:\breviar\</span><br>
 <span class="explain">Program vygeneruje skript <span class="tt">delej.bat</span>, kterı vytvoøí modlitby od 7. kvìtna 2000 do 3. dubna 2001. 
@@ -98,7 +81,6 @@ Pøitom <span class="tt">include</span> adresáø se nachází v adresáøi <span class
 a název programu je <span class="tt">breviar.exe</span>. (Pouití v DOSu/Windows.)
 </span>
 </li>
-
 <li><span class="tt">breviar.exe -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -bdelej.bat -nbreviar.exe -ic:\breviar\ -a1</span><br>
 <span class="explain">Program vygeneruje skript <span class="tt">delej.bat</span>, kterı vytvoøí modlitby od 7. kvìtna 2000 do 3. dubna 2001. 
 Po spuštìní skriptu budou všechny modlitby vytvoøené do jednoho souboru s názvem <span class="tt">2000-05-07_2001-04-03.htm</span>.
@@ -106,7 +88,6 @@ Pøitom <span class="tt">include</span> adresár sa nachádza v adresári <span clas
 a meno programu je <span class="tt">breviar.exe</span>. (Pouitie v DOSe/Windows.)
 </span>
 </li>
-
 <li><span class="tt">breviar -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.sh -nbreviar -i~/breviar/</span><br>
 <span class="explain">
 Program vygeneruje skript <span class="tt">rob.sh</span> (mono bude potrebnı <span class="tt">chmod</span>
@@ -116,15 +97,12 @@ a název programu je <span class="tt">breviar</span>. (Pouití v UNIXu.)
 </span>
 </li>
 </ul>
-
 Pokud se vyskytnou nìjaké nesrovnalosti, nebo nefunkènosti, prosím 
 <a href="mailto:videky@breviar.sk">pište</a>, protoe batch mode je zatím jen takovı experiment. Dìkuji.
-
 <p><hr>
 <p class="patka">
 Autor programové èásti © 1999-2008 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
 <br>Všechna práva vyhrazená.
 </p>
-
 </body>
 </html>

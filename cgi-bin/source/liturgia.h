@@ -226,7 +226,6 @@ typedef struct den_mesiac _struct_den_mesiac;
 #define CHAR_MODL_CEZ_DEN_9          '9'
 #define CHAR_MODL_CEZ_DEN_12         '2'
 #define CHAR_MODL_CEZ_DEN_3          '3'
-// #define CHAR_MODL_CEZ_DEN_VSETKY     'd' /* 2005-03-27: Pridane */
 #define CHAR_MODL_VESPERY            'v'
 #define CHAR_MODL_KOMPLETORIUM       'k'
 #define CHAR_MODL_NEURCENA           '_' /* toto by sa nemalo */
@@ -234,6 +233,11 @@ typedef struct den_mesiac _struct_den_mesiac;
 #define CHAR_MODL_PRVE_KOMPLETORIUM  'p'
 #define CHAR_MODL_DRUHE_VESPERY      'w' /* toto by sa nemalo */
 #define CHAR_MODL_DRUHE_KOMPLETORIUM 'm' /* toto by sa nemalo */
+// #define CHAR_MODL_CEZ_DEN_VSETKY     'd' /* 2005-03-27: Pridane */
+
+/* 2008-04-09: doplnené pre batch generovanie modlitieb */
+extern const char char_modlitby[];
+extern const char *str_modlitby[];
 
 //extern const char *nazov_modlitby[];
 extern const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1];
@@ -307,7 +311,7 @@ extern const char *TEMPLAT[];
 #define PARAM_ALELUJA_NIE_V_POSTE           "ALELUJA_NIE_V_POSTE"
 #define PARAM_ALELUJA_NIE_V_POSTE_BEGIN     "ALELUJA_NIE_V_POSTE_BEGIN"
 #define PARAM_ALELUJA_NIE_V_POSTE_END       "ALELUJA_NIE_V_POSTE_END"
-#define PARAM_ALELUJA_VO_VELKONOCNOM        "V_O_ALELUJA"
+/* 2008-05-08: zapoznámkované: #define PARAM_ALELUJA_VO_VELKONOCNOM "V_O_ALELUJA" */
 #define PARAM_ALELUJA_VO_VELKONOCNOM_BEGIN  "V_O_ALELUJA_BEGIN"
 #define PARAM_ALELUJA_VO_VELKONOCNOM_END    "V_O_ALELUJA_END"
 /* 2005-08-15: Doplnené parametre pre vo¾né, iné hymny v 34. týždni OCR */

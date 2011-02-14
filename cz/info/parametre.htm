@@ -8,14 +8,12 @@
    <title>ulohy</title>
 </head>
 <body>
-
 <center>
 <h2>O programe | Parametre</h2>
 &lt;&lt; <a href="ulohy.htm">Úlohy</a> | ^ <a href="program.htm">O programe</a> | ^^ <a href="index.htm">Informácie</a> | <a href="struct.htm">Niektoré pouité štruktúry</a> &gt;&gt;
 </center>
  
 <h4 class="blue">Parametre programu</h4>
-
 <p>Keïe program má pouitie aj ako CGI skript (teda internetová aplikácia, ktorá z prehliadaèa získa
 údaje vo forme GET, POST alebo zmiešaného URL requestu), ale aj ako program spustite¾nı z príkazového riadka
 (èi u v linuxe alebo pod DOS/Windows), parametre sa v niektorıch prípadoch rôznia. Je to z toho dôvodu,
@@ -28,9 +26,7 @@ Odlišnosti medzi parametrami pre URL requesty a command-line verziu programu uvá
 ktorı po spustení generuje modlitby pre dané obdobie. Tento spôsob pouitia sa znaène líši od ostatnıch, preto
 ho popisujeme na <a href="batchmode.htm">osobitnom mieste</a>.
 
-
 <ul class="level1">
-
 <li><span class="parameter">q</span> | Typ <a href="ulohy.htm">úlohy</a>, ktorú má program vykona (query type)
 	<ul class="level2">
 	<li><span class="value">pdnes</span> | Úvodné okno</li>
@@ -49,7 +45,6 @@ ho popisujeme na <a href="batchmode.htm">osobitnom mieste</a>.
 	<li><span class="value">pbm</span> | Tzv. <a href="batchmode.htm">batch mode (dávkové spracovanie)</a>.</li>
 	</ul>
 </li>
-
 <li><span class="parameter">d</span> | Deò dátumu (pre <span class="parameter">pdt</span>, <span class="parameter">pdnes</span>, hodnoty: <span class="value">1</span>-<span class="value">31</span>, <span class="value">*</span> znamená "všetky dni")</li>
 <li><span class="parameter">dvt</span> (pre command line: <span class="parameter">d</span>) | Deò v tıdni (pre <span class="parameter">pcr</span>, hodnoty: <span class="value">1</span>-<span class="value">31</span> resp. <span class="value">pondelok</span>-<span class="value">nede¾a</span>)</li>
 <li><span class="parameter">m</span> | Mesiac dátumu (pre <span class="parameter">pdt</span>, <span class="parameter">pdnes</span>, hodnoty: <span class="value">1</span>-<span class="value">12</span>, resp. <span class="value">január</span>-<span class="value">december</span>, <span class="value">*</span> znamená "všetky mesiace")</li>
@@ -90,22 +85,16 @@ a v takom prípade je moné voli ktorúko¾vek ¾ubovo¾nú spomienku, resp. <span cl
 má exportova (DOS default: <span class="tt">export.htm</span>, linux default: stdout)</li>
 <li><span class="parameter">a</span> (len pre command line) | Monos, èi v prípade existencie
 súboru pre export do tohto súboru pridáva (teda neprepísa ho - append; default: nie - èie prepísa)</li>
-
 </ul>
-
 <p>Pre parametre urèujúce monosti majú nasledovné hodnoty: 
 <span class="value">1</span> - áno, <span class="value">0</span> - nie.
-
 <p>Ak dostane program nesprávne parametre (zahàòa i prípady nesprávnych hodnôt parametrov 
 alebo ïalšie chıbajúce parametre závisiace od inıch parametrov), export obsahuje chybové hlásenie.
 Naviac, command line verzia vypíše chybové hlásenie na stderr.
-
 <a name="example"></a>
 <h4 class="blue">Príklady</h4>
-
 <p>Ako sa vraví, príklad môe všetky pochybnosti razom odstráni alebo naopak, podnieti ïalšie otázky.
 Za oboma úèelmi sú uvedené nasledovné príkady pouitia command-line programu.
-
 <ul class="level1">
 <li><span class="tt">breviar.exe -qpdt -d30 -m4 -r2002 -pmrch -ic:\breviar\ -emoja.htm -a1</span><br>
 <span class="explain">Program vygeneruje do súboru <span class="tt">moja.htm</span>
@@ -116,7 +105,6 @@ Pritom <span class="tt">include</span> adresár sa nachádza v adresári <span clas
 (meno programu je <span class="tt">breviar.exe</span>). (Pouitie v DOSe/Windows.)
 </span>
 </li>
-
 <li><span class="tt">breviar.exe -qpsqs -s"qt=pdt&amp;d=12&amp;m=7&amp;r=2003"</span><br>
 <span class="explain">Program vygeneruje do default súboru (<span class="tt">export.htm</span>)
 rozbor dòa 12. júla 2003. 
@@ -124,12 +112,10 @@ Pritom parametre sú dané simuláciou query stringu.
 </span>
 </li>
 </ul>
-
 <hr>
 <p class="patka">
 Autor programovej èasti © 1999-2008 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
 <br>Všetky práva vyhradené.
 </p>
-
 </body>
 </html>

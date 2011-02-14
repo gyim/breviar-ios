@@ -8,14 +8,12 @@
    <title>ulohy</title>
 </head>
 <body>
-
 <center>
 <h2>O programe | Parametre (batch mode)</h2>
 ^ <a href="ulohy.htm">Úlohy</a> | ^ <a href="parametre.htm">Parametre (všeobecne)</a> | ^^ <a href="program.htm">O programe</a>
 </center>
  
 <h4 class="blue">Parametre programu (batch mode)</h4>
-
 <p>Command-line verzia programu (teda verzia spustite¾ná z príkazového riadka) môe by spustená štandardnım 
 spôsobom (pozri viac o <a href="parametre.htm">parametroch tohto pouitia</a>), alebo v tzv. 
 <span class="bold">batch móde (dávkové spracovanie)</span>, keï pre urèité dvoma dátumami ohranièené obdobie 
@@ -26,16 +24,13 @@ do samostatného súboru, alebo všetky modlitby do jedného súboru).
 Tento spôsob pouitia sa znaène líši od ostatnıch, preto
 ho popisujeme na tomto mieste osobitne.
 
-
 <ul class="level1">
-
 <li><span class="parameter">q</span> | Typ <a href="ulohy.htm">úlohy</a>, ktorú má program vykona (query type)
 	<ul class="level2">
 	<li><span class="value">pbm</span> | batch mode (dávkové spracovanie)</li>
 	<li>ostatné hodnoty: viï <a href="parametre.htm">parametre pouitia programu (všeobecne)</a>
 	</ul>
 </li>
-
 <li><span class="parameter">d</span> | Deò <a href="#datumy">poèiatoèného</a> dátumu (hodnoty: <span class="value">1</span>-<span class="value">31</span>)</li>
 <li><span class="parameter">m</span> | Mesiac <a href="#datumy">poèiatoèného</a> dátumu (hodnoty: <span class="value">1</span>-<span class="value">12</span>)</li>
 <li><span class="parameter">r</span> | Rok <a href="#datumy">poèiatoèného</a> dátumu (napr. <span class="value">2000</span>)</li>
@@ -43,12 +38,10 @@ ho popisujeme na tomto mieste osobitne.
 <li><span class="parameter">g</span> | Mesiac <a href="#datumy">koncového</a> dátumu (hodnoty: <span class="value">1</span>-<span class="value">12</span>)</li>
 <li><span class="parameter">p</span> | Rok <a href="#datumy">koncového</a> dátumu (napr. <span class="value">2000</span>).
 <br>Malo by pritom plati: poèiatoènı dátum &lt;= koncovı dátum.</li>
-
 <li><span class="parameter">b</span> | Názov vısledného skriptu (napr. <span class="tt">rob.bat</span>). <a href="#output">Vısledky jeho spustenia</a> sú popísané nišie.</li>
 <li><span class="parameter">n</span> | Názov pouitého command-line príkazu online breviára 
 (napr. <span class="tt">breviar.exe</span> pre DOS).
 Tento názov bude pouitı vo vıslednom skripte.</li>
-
 <li><span class="parameter">1</span> | Monos, èi zobrazi nemenné súèasti modlitby (default: nie)</li>
 <li><span class="parameter">2</span> | Monos, èi bra almy zo dòa alebo z vlastnej/spoloènej èasti slávenia</li>
 <li><span class="parameter">3</span> | Ak je monos vıberu viacerıch spoloènıch èastí, tento parameter urèuje, ktorú spoloènú èas bra</li>
@@ -59,17 +52,12 @@ Tento názov bude pouitı vo vıslednom skripte.</li>
 má exportova (DOS default: <span class="tt">export.htm</span>, linux default: stdout). Tento súbor bude v prípade
 chıb obsahova chybové hlásenia. V prípade úspechu bude obsahova iba hlavièku HTML dokumentu, pretoe vısledkom
 bude skript, ktorého meno špecifikoval parameter <span class="parameter">b</span>.</li>
-
 <li><span class="parameter">a</span> | Monos, èi všetky modlitby da do 1 súboru (default: nie)</li>
-
 </ul>
-
 <p>Pre parametre urèujúce monosti majú nasledovné hodnoty: 
 <span class="value">1</span> - áno, <span class="value">0</span> - nie.
-
 <a name="output"></a>
 <h4 class="blue">Vısledky po spustení vytvoreného skriptu</h4>
-
 <p>Vytvorenı skript po spustení vygeneruje modlitby pre dané obdobie 
 do súborov <span class="tt">yyyy-mm-dd_xp.htm</span>, kde vıznam 
 jednotlivıch èastí mena súboru je nasledovnı:
@@ -85,7 +73,6 @@ s najvyššou prioritou. <span class="value">4</span> znamená ¾ubovo¾nú spomienku 
 <span class="value">1</span> a <span class="value">3</span> znamenajú zväèša sviatky svätıch.</li>
 <li><span class="parameter">p</span> | modlitba (<span class="value">r</span> = ranné chvály, <span class="value">v</span> = vešpery)</li>
 </ul>
-
 <p>V prípade, e je pouitı parameter <span class="parameter">a</span> (append), 
 bude vytvorenı len jeden súbor s nasledovnım menom:
 <span class="tt">yyyy-mm-dd_YYYY-MM-DD.htm</span>, kde vıznam 
@@ -100,17 +87,13 @@ jednotlivıch èastí mena súboru je nasledovnı:
 <br>Dátumy sú uvedené v súlade s normou ISO 8601.
 </li>
 </ul>
-
 <p>Ak dostane program nesprávne parametre (zahàòa i prípady nesprávnych hodnôt parametrov 
 alebo ïalšie chıbajúce parametre závisiace od inıch parametrov), export obsahuje chybové hlásenie.
 Naviac, command line verzia vypíše chybové hlásenie na stderr.
-
 <a name="example"></a>
 <h4 class="blue">Príklady</h4>
-
 <p>Ako sa vraví, príklad môe všetky pochybnosti razom odstráni alebo naopak, podnieti ïalšie otázky.
 Za oboma úèelmi sú uvedené nasledovné príkady pouitia batch módu.
-
 <ul class="level1">
 <li><span class="tt">breviar.exe -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.bat -nbreviar.exe -ic:\breviar\</span><br>
 <span class="explain">Program vygeneruje skript <span class="tt">rob.bat</span>, ktorı vytvorí 
@@ -119,7 +102,6 @@ Pritom <span class="tt">include</span> adresár sa nachádza v adresári <span clas
 a meno programu je <span class="tt">breviar.exe</span>. (Pouitie v DOSe/Windows.)
 </span>
 </li>
-
 <li><span class="tt">breviar.exe -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.bat -nbreviar.exe -ic:\breviar\ -a1</span><br>
 <span class="explain">Program vygeneruje skript <span class="tt">rob.bat</span>, ktorı vytvorí 
 modlitby od 7. mája 2000 do 3. apríla 2001. 
@@ -129,7 +111,6 @@ Pritom <span class="tt">include</span> adresár sa nachádza v adresári <span clas
 a meno programu je <span class="tt">breviar.exe</span>. (Pouitie v DOSe/Windows.)
 </span>
 </li>
-
 <li><span class="tt">breviar -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.sh -nbreviar -i~/breviar/</span><br>
 <span class="explain">
 Program vygeneruje skript <span class="tt">rob.sh</span> (mono bude potrebnı <span class="tt">chmod</span>
@@ -139,16 +120,13 @@ a meno programu je <span class="tt">breviar</span>. (Pouitie v UNIXe.)
 </span>
 </li>
 </ul>
-
 Ak sa vyskytnú nejaké nezrovnalosti alebo nefunkènosti, prosím 
 <a href="mailto:videky@breviar.sk">píšte</a>, pretoe batch mód je zatia¾
 iba takı experiment. Ïakujem.
-
 <p><hr>
 <p class="patka">
 Autor programovej èasti © 1999-2008 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
 <br>Všetky práva vyhradené.
 </p>
-
 </body>
 </html>

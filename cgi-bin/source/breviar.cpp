@@ -1124,6 +1124,8 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 					/* !equalsi(rest, modlparam) */
 					/* write = 0; -- aby mohli byt nestovane viacere :-) */
 					DetailLog("paramenter not matches: %s != %s\n", rest, modlparam);
+					/* 2008-05-08: kotva "V_O_ALELUJA", teda #define PARAM_ALELUJA_VO_VELKONOCNOM sa nepoužíva
+					 * zapoznámkované
 					if(((_global_den.litobd != OBD_VELKONOCNE_I) && (_global_den.litobd != OBD_VELKONOCNE_II)) &&
 						(equals(rest, PARAM_ALELUJA_VO_VELKONOCNOM))){
 						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
@@ -1137,7 +1139,9 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 							write = 1;
 							Log("  opat writing to export file, end of V.O. Aleluja.\n");
 						}
-					}/* aleluja vo velkonocnom obdobi */
+					}
+					*/
+					/* aleluja vo velkonocnom obdobi */
 				}/* !equalsi(rest, modlparam) */
 				continue;
 		}
@@ -1180,7 +1184,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
  * 2005-08-15a.D.: Pridaný ïalší #define: èi je 34. týždeò obdobia cez rok
  */
 #define je_post ((_global_den.litobd == OBD_POSTNE_I) || (_global_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && ((_global_den.denvt == DEN_PIATOK) || (_global_den.denvt == DEN_SOBOTA))))
-#define je_velka_noc ((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvt == DEN_NEDELA)))
+#define je_velka_noc ((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvt == DEN_NEDELA)) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA))
 #define je_aleluja_aleluja ((_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvt == DEN_NEDELA)) || (equals(_global_den.meno, _global_r._ZOSLANIE_DUCHA_SV.meno) && (_global_modlitba == MODL_VESPERY)))
 /* 2005-08-15: Pridaný ïalší #define: èi je 34. týždeò obdobia cez rok */
 #define je_34_ocr ((_global_den.litobd == OBD_CEZ_ROK) && (_global_den.tyzden == 34) && (_global_den.denvt != DEN_NEDELA))
@@ -1203,33 +1207,58 @@ void interpretParameter(short int type, char *paramname){
 	if(equals(paramname, PARAM_ALELUJA_NIE_V_POSTE_BEGIN)){
 		if(!je_post){
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("nie je postne obdobie");
+			Export("nie je post");
 #endif
 			Export("-->");
+		}
+		else{
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("je post(");
+#endif
+			Log("(beg)je postne obdobie\n");
 		}
 	}
 	else if(equals(paramname, PARAM_ALELUJA_NIE_V_POSTE_END)){
 		if(!je_post){
 			Export("<!--");
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("nie je postne obdobie");
+			Export("nie je post");
 #endif
 		}
-	}
-	else if(equals(paramname, PARAM_ALELUJA_VO_VELKONOCNOM_BEGIN)){
-		if(!je_velka_noc){
+		else{
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("nie je velkonocne obdobie");
+			Export(")je post");
+#endif
+			Log("(end)je postne obdobie\n");
+		}
+	}
+	/* 2008-05-08: opravené, aby sa správne používalo - ant. na nunk dimittis pre kompletórium */
+	else if(equals(paramname, PARAM_ALELUJA_VO_VELKONOCNOM_BEGIN)){
+		if(je_velka_noc){
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("je velkonocne obdobie");
 #endif
 			Export("-->");
 		}
+		else{
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("nie je v.o.(");
+#endif
+			Log("(beg)nie je velkonocne obdobie\n");
+		}
 	}
 	else if(equals(paramname, PARAM_ALELUJA_VO_VELKONOCNOM_END)){
-		if(!je_velka_noc){
+		if(je_velka_noc){
 			Export("<!--");
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("nie je velkonocne obdobie");
+			Export("je velkonocne obdobie");
 #endif
+		}
+		else{
+#if defined(EXPORT_HTML_SPECIALS)
+			Export(")nie je v.o.");
+#endif
+			Log("(end)nie je velkonocne obdobie\n");
 		}
 	}
 	else if(equals(paramname, PARAM_ALELUJA_ALELUJA_BEGIN)){
@@ -1317,31 +1346,31 @@ void interpretParameter(short int type, char *paramname){
 	}
 	else if(equals(paramname, PARAM_CHVALOSPEV_BEGIN)){
 		if(_global_opt1 == NIE){
-			/* nezobrazovat Benediktus/Magnifikat */
+			/* nezobrazovat chvalospev */
 			_global_skip_in_prayer = ANO;
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("nezobrazit Benediktus/Magnifikat");
+			Export("nezobrazit chvalospev");
 #endif
-			Log("  `Benediktus/Magnifikat' skipping...\n");
+			Log("  `chvalospev' skipping...\n");
 		}
 		else{
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("zobrazit Benediktus/Magnifikat");
+			Export("zobrazit chvalospev");
 #endif
-			Log("  `Benediktus/Magnifikat': begin...\n");
+			Log("  `chvalospev': begin...\n");
 		}
 	}
 	else if(equals(paramname, PARAM_CHVALOSPEV_END)){
 		if(_global_opt1 == NIE){
-			/* nezobrazovat Benediktus/Magnifikat */
+			/* nezobrazovat chvalospev */
 			_global_skip_in_prayer = NIE;
-			Log("  `Benediktus/Magnifikat' skipped.\n");
+			Log("  `chvalospev' skipped.\n");
 		}
 		else{
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("zobrazit Benediktus/Magnifikat");
+			Export("zobrazit chvalospev");
 #endif
-			Log("  `Benediktus/Magnifikat' copied.\n");
+			Log("  `chvalospev' copied.\n");
 		}
 	}
 	/* 2007-06-28: podmienka na Te Deum osamostatnená */
@@ -5428,7 +5457,7 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 		}/* ret == FAILURE */
 		Log("analyza nasledujuceho dna (%d. %s %d) skoncila.\n", datum.den, nazov_mesiaca(datum.mesiac - 1), rok);
 		LOG_ciara;
-		
+
 		_local_den = _global_den;
 
 		/* neviem, ci tam ma byt _global_modl_[prve_]vespery ... */
@@ -5438,11 +5467,15 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 		_local_modl_vespery = _global_modl_vespery;
 		_local_modl_kompletorium = _global_modl_kompletorium;
 		/* logy pridane 2003-06-30 */
-		Log("_local_modl_vespery obsahuje:\n"); Log(_local_modl_vespery);
-		/* pridane 2003-10-07 kvoli debugovaniu, co prve vespery nediel ocr nemali prosby
+		/* Log("_local_modl_vespery obsahuje:\n"); Log(_local_modl_vespery);
+		// pridane 2003-10-07 kvoli debugovaniu, co prve vespery nediel ocr nemali prosby
 			Log("_local_modl_prve_vespery obsahuje:\n"); Log(_local_modl_prve_vespery);
 		*/
-		Log("_local_modl_prve_kompletorium obsahuje:\n"); Log(_local_modl_prve_kompletorium);
+
+		Log("_global_modl_kompletorium obsahuje:\n"); Log(_global_modl_kompletorium);
+		Log("_global_modl_prve_kompletorium obsahuje:\n"); Log(_global_modl_prve_kompletorium);
+		// Log("_local_modl_prve_kompletorium obsahuje:\n"); Log(_local_modl_prve_kompletorium);
+
 		mystrcpy(_local_string, _global_string, MAX_STR);
 	}/* kompletorium alebo vespery */
 
@@ -5511,14 +5544,14 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 			_local_den.smer, nazov_dna(_local_den.denvt), nazov_obdobia(_local_den.litobd), _local_den.smer);
 		// 2003-06-30
 		Log(_local_den);
-		Log("_local_modl_prve_vespery obsahuje:\n"); Log(_local_modl_prve_vespery);
+		// Log("_local_modl_prve_vespery obsahuje:\n"); Log(_local_modl_prve_vespery);
 		
 		Log("tento den (%d.%d): _global_den.smer == %d, _global_den.denvt == %s, _global_den.litobd == %s (%d)\n",
 			_global_den.den, _global_den.mesiac,
 			_global_den.smer, nazov_dna(_global_den.denvt), nazov_obdobia(_global_den.litobd), _global_den.smer);
 		// 2003-06-30
 		Log(_global_den);
-		Log("(3) _global_modl_prve_vespery obsahuje:\n"); Log(_global_modl_prve_vespery);
+		// Log("(3) _global_modl_prve_vespery obsahuje:\n"); Log(_global_modl_prve_vespery);
 
 		/* if VYNIMKY: porov. nizsie. 14/03/2000A.D. */
 		if((_global_den.smer > _local_den.smer) ||
@@ -5606,13 +5639,14 @@ LABEL_ZMENA:
 				_global_modl_prve_vespery = _local_modl_prve_vespery;
 				_global_modl_prve_kompletorium = _local_modl_prve_kompletorium;
 				//??? -- divna pasaz!!!
-				/* begin: docasny vypis - 16/02/2000A.D. */
+				/*
+				// begin: docasny vypis - 16/02/2000A.D.
 				Log("prve vespery:\n");
 				Log(_global_modl_prve_vespery);
 				Log("vespery:\n");
 				Log(_global_modl_vespery);
-				/* end: docasny vypis - 16/02/2000A.D. */
-
+				// end: docasny vypis - 16/02/2000A.D.
+				*/
 				if(modlitba == MODL_VESPERY){
 					_global_modlitba = MODL_PRVE_VESPERY;
 					Log("-- MODL_PRVE_VESPERY\n");
@@ -8460,7 +8494,7 @@ short int parseQueryString(void){
 		 * 3: rok          / (linky) -- tieto tri `alternativne' parametre pre typ dotazu case PRM_TABULKA:, vid nizsie
 		 * 4: (modlitba)
 		 * 5: (dalsi svaty) - poradie svateho
-		 * 6: (opt1) - pri modlitbe: ci zobrazit Benediktus/Magnifikat, Otcenas, zakoncenie
+		 * 6: (opt1) - pri modlitbe: ci zobrazit Benediktus/Magnifikat (chvalospev: aj Nunk dimittis), Otcenas, zakoncenie
 		 *             pri liturgickom kalendari: ci generovat standardny alebo skrateny tvar
 		 * 7: (opt2) - pri modlitbe: ci brat (pri sviatkoch svatych) zalmy zo dna / zo sviatku
 		 *             pri liturgickom kalendari: ci datum zobrazit len ako cislo (default) alebo ISO-8601 (napr. 2005-03-22)
