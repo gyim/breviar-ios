@@ -89,6 +89,7 @@
 /*   2008-03-12a.D. | škaredé nadrátované riešenie (prekladanie 2008),  */
 /*                    bude potrebné naimplementova krajšie             */
 /*   2008-03-30a.D. | upravené antifóny pre mcd, _vtroj_antifony()      */
+/*   2008-04-04a.D. | opravené kompletórium pre ve¾k.trojdnie+zel.štvrt.*/
 /*                                                                      */
 /*                                                                      */
 /* notes |                                                              */
@@ -5786,7 +5787,16 @@ label_24_DEC:
 
 			/* 2007-12-05: kompletórium v pôstnom období */
 			modlitba = MODL_KOMPLETORIUM;
-			set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
+			/* 2008-04-04: opravené, aby zelenı štvrtok mal správnu modlitbu a krátky responz */
+			if(den == DEN_STVRTOK){
+				_vtroj_popis;
+				_set_kompletorium_slavnost(2, litobd);
+				set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
+				set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
+			}
+			else{
+				set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
+			}
 
 			/* invitatórium; 2007-11-14 */
 			modlitba = MODL_INVITATORIUM;
@@ -5861,8 +5871,7 @@ label_24_DEC:
 				/* 2006-01-27: pridanı popis k vešperám zeleného štvrtka */
 				modlitba = MODL_VESPERY;
 				_vtroj_popis;
-				/* 2007-12-05: kompletórium je z nedele po druhıch vešperách */
-				_set_kompletorium_nedela(2); 
+				/* 2007-12-05: kompletórium je z nedele po druhıch vešperách; ale ako na slávnosti; 2008-04-04 presunuté vyššie */
 			}/* nie nedela ale zelenı štvrtok */
 			break;
 /* switch(litobd), case OBD_POSTNE_II -- end -------------------------------------------------- */
@@ -5981,7 +5990,13 @@ label_24_DEC:
 
 			/* 2007-12-06: kompletórium vo ve¾konoènom trojdní: a na krátky responz je z nedele po druhıch vešperách */
 			modlitba = MODL_KOMPLETORIUM;
-			_set_kompletorium_nedela(2); 
+			/* 2008-04-04: opravené, aby ve¾kı piatok mal správnu modlitbu */
+			if(den == DEN_PIATOK){
+				_set_kompletorium_slavnost(2, litobd);
+			}
+			else{
+				_set_kompletorium_nedela(2);
+			}
 			set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
 			set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd);
 			if(den != DEN_PIATOK){

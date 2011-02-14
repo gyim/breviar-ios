@@ -3362,7 +3362,8 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	
 	/* skontrolujeme este pondelok -- stvrtok velkeho tyzdna */
 	if((_local_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN) && (typ != EXPORT_DNA_VIAC_DNI)){
-		if(!((_local_den.denvt == DEN_NEDELA) || ((_local_den.denvt == DEN_STVRTOK)) && (modlitba == MODL_VESPERY))){ /* 08/03/2000A.D. */
+		/* 2008-04-04: aj kompletórium pre zelený štvrtok má svoj vlastný názov, tak isto ako doteraz vešpery */
+		if(!((_local_den.denvt == DEN_NEDELA) || ((_local_den.denvt == DEN_STVRTOK) && ((modlitba == MODL_VESPERY) || (modlitba == MODL_KOMPLETORIUM))))){
 			mystrcpy(_local_den.meno, nazov_dna(_local_den.denvt), MENO_SVIATKU);
 			/* 2007-04-05: upravené pre viacero jazykov */
 			strcat(_local_den.meno, " ");
