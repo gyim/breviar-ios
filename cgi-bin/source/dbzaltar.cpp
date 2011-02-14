@@ -91,6 +91,7 @@
 /*   2008-03-30a.D. | upravené antifóny pre mcd, _vtroj_antifony()      */
 /*   2008-04-04a.D. | opravené kompletórium pre ve¾k.trojdnie+zel.štvrt.*/
 /*                  - oprava žalmov a chvál. pre 1. vešp. 2.ve¾k.nedele */
+/*   2008-05-14a.D. | opravené modlitby cez deò pre 3. a 14. mája       */
 /*                                                                      */
 /*                                                                      */
 /* notes |                                                              */
@@ -11081,6 +11082,7 @@ label_25_MAR:
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
+						_vlastna_cast_hymnus; /* 2008-05-14: doplnené - pre èeskú verziu vlastný, pre slovenskú rovnaký ako na posv. èítanie */
 						_vlastna_cast_modlitba;
 						_vlastna_cast_benediktus;
 
@@ -11093,6 +11095,19 @@ label_25_MAR:
 						_vlastna_cast_modlitba;
 						_vlastna_cast_magnifikat;
 
+						/* 2008-05-14: doplnené pod¾a 3. mája */
+						modlitba = MODL_PREDPOLUDNIM;
+						_vlastna_cast_kcitanie; /* zo spoloènej èasti apoštolov */
+						_vlastna_cast_kresponz;
+						_vlastna_cast_modlitba;
+						modlitba = MODL_PREDPOLUDNIM;
+						_vlastna_cast_kcitanie; /* zo spoloènej èasti apoštolov */
+						_vlastna_cast_kresponz;
+						_vlastna_cast_modlitba;
+						modlitba = MODL_POPOLUDNI;
+						_vlastna_cast_kcitanie; /* zo spoloènej èasti apoštolov */
+						_vlastna_cast_kresponz;
+						_vlastna_cast_modlitba;
 						break;
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
