@@ -7566,7 +7566,7 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
-					mystrcpy(_global_svaty1.meno, "Obr·tenie sv. Pavla, apoötola", MENO_SVIATKU);
+					mystrcpy(_global_svaty1.meno, "Obr·tenie sv‰tÈho Pavla, apoötola", MENO_SVIATKU);
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					break;
@@ -7943,8 +7943,9 @@ int sviatky_svatych(int den, int mesiac, int poradie_svaty){
 						break;
 					}
 					/* na Slovensku 5. jula, slavnost, v Europe sviatok */
-					_global_svaty1.typslav = SLAV_SPOMIENKA; /* !!! SLAV_LUB_SPOMIENKA ??? */
+					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+					_global_svaty1.typslav_lokal = LOKAL_SLAV_14_FEB_CYRIL_METOD; /* 2006-02-03: pridanÈ */
 					mystrcpy(_global_svaty1.meno, "Sv. Cyrila, mnÌcha, a sv. Metoda, biskupa", MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_VIACERI);
 					break;
@@ -9004,6 +9005,7 @@ label_25_MAR:
 					/* v roznavskej dieceze sviatok (hlavny patron) */
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+					_global_svaty1.typslav_lokal = LOKAL_SLAV_ROZNAVA_PATRON; /* 2006-02-03: pridanÈ */
 					mystrcpy(_global_svaty1.meno, "Sv. J·na NepomuckÈho, kÚaza a muËenÌka", MENO_SVIATKU);
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_MUCENIK,
@@ -9639,7 +9641,7 @@ label_25_MAR:
 					/* v trnavskej, banskobystrickej, roznavskej a nitrianskej dieceze */
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					_global_svaty2.typslav_lokal = LOKAL_SLAV_TT_BB_KE_NR_RO; /* 2005-07-27: pridanÈ */
+					_global_svaty2.typslav_lokal = LOKAL_SLAV_TT_BB_NR_RO; /* 2005-07-27: pridanÈ; 2006-02-03: opravenÈ, KE nie */
 					mystrcpy(_global_svaty2.meno, "Sv. Ladislava", MENO_SVIATKU);
 					_global_svaty2.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
@@ -9776,7 +9778,7 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
-					mystrcpy(_global_svaty1.meno, "N·vöteva prebl. Panny M·rie", MENO_SVIATKU);
+					mystrcpy(_global_svaty1.meno, "NavötÌvenie prebl. Panny M·rie", MENO_SVIATKU);
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 					break;
@@ -9968,7 +9970,7 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
-					mystrcpy(_global_svaty1.meno, "Sv. Benedikta, op·ta", MENO_SVIATKU);
+					mystrcpy(_global_svaty1.meno, "Sv. Benedikta, op·ta, patrÛna EurÛpy", MENO_SVIATKU);
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					break;
@@ -12326,6 +12328,21 @@ label_25_MAR:
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 					break;
+				case 26: /* 2006-02-03: pridanÈ */
+					if(poradie_svaty == 1){
+						/* definovanie parametrov pre modlitbu */
+						if(query_type != PRM_DETAILY)
+							set_spolocna_cast(sc, poradie_svaty);
+						break;
+						/* Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
+					}
+					_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+					_global_svaty1.typslav_lokal = LOKAL_SLAV_KONSEKR_KOSTOLY;
+					_global_svaty1.typslav = SLAV_SPOMIENKA;
+					mystrcpy(_global_svaty1.meno, "V˝roËie posviacky chr·mov, ktor˝ch deÚ posviacky je nezn·my", MENO_SVIATKU);
+					_global_svaty1.spolcast =
+						_encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+					break;
 				case 27: /* 2005-10-13: pridanÈ */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
@@ -12508,6 +12525,7 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+					_global_svaty1.typslav_lokal = LOKAL_SLAV_TT_BB_KE_NR_RO; /* 2006-02-03: pridanÈ */
 					mystrcpy(_global_svaty1.meno, "Sv. Imricha", MENO_SVIATKU);
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
@@ -12949,6 +12967,7 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 					mystrcpy(_global_svaty1.meno, "Sv. Ondreja, apoötola", MENO_SVIATKU);
+					_global_svaty1.typslav_lokal = LOKAL_SLAV_KOSICE_PATRON; /* 2006-02-03: pridanÈ */
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					break;
@@ -12977,6 +12996,7 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, "Sv. Frantiöka XaverskÈho, kÚaza", MENO_SVIATKU);
+					_global_svaty1.typslav_lokal = LOKAL_SLAV_BYSTRICA_PATRON; /* 2006-02-03: pridanÈ */
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 					break;
@@ -13089,6 +13109,8 @@ label_8_DEC:
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_full(modlitba);
 						/* 2005-10-24: moûno bude potrebnÈ nastaviù ûalmy? */
+						_set_zalmy_sviatok_marie(modlitba);
+						/* 2006-02-03: celkom dobr· intuÌcia :) ûalmy nastavenÈ */
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);

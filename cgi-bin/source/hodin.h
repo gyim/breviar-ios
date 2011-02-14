@@ -235,6 +235,12 @@ const char *nazov_slavenia_lokal[] =
 ,"len v Trnavskej diecéze"
 ,"len v Dóme sv. Martina v Bratislave"
 ,"v Spišskej diecéze sviatok hlavného patróna"
+,"v Banskobystrickej diecéze sviatok hlavného patróna"
+,"v Bratislavsko-Trnavskej arcidiecéze a v Banskobystrickej, Nitrianskej a Roòavskej diecéze"
+,"v Košickej diecéze sviatok hlavného patróna"
+,"na Slovensku 5. júla, slávnos; v Európe sviatok"
+,"v Roòavskej diecéze sviatok hlavného patróna"
+,"len v konsekrovanıch kostoloch"
 };
 
 const char *rimskymi_tyzden_zaltara[] =

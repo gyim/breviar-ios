@@ -513,6 +513,12 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_TRNAVA             10
 #define LOKAL_SLAV_DOM_SV_MARTINA     11
 #define LOKAL_SLAV_SPIS_PATRON        12
+#define LOKAL_SLAV_BYSTRICA_PATRON    13
+#define LOKAL_SLAV_TT_BB_NR_RO        14
+#define LOKAL_SLAV_KOSICE_PATRON      15
+#define LOKAL_SLAV_14_FEB_CYRIL_METOD 16
+#define LOKAL_SLAV_ROZNAVA_PATRON     17
+#define LOKAL_SLAV_KONSEKR_KOSTOLY    18
 
 /* prikazany / neprikazany sviatok */
 #define PRIKAZANY_SVIATOK 1
