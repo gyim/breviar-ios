@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* liturgia.h                                                  */
-/* (c)1999-2005 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2006 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne vecicky pre liturgiu hodin  */
 /* document history                                            */
@@ -28,6 +28,7 @@
 /*   2005-07-27a.D. | pridané nazov_slavenia_lokal[]           */
 /*   2005-08-05a.D. | pridané zvazok_OBD[]                     */
 /*   2005-11-11a.D. | Doplnené parametre pre Te Deum           */
+/*   2006-02-07a.D. | ZALTAR_... pre funkciu zaltar_zvazok();  */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -164,7 +165,6 @@ typedef struct den_mesiac _struct_den_mesiac;
 #define MODL_POPOLUDNI          5
 /* pre modlitbu cez den kvoli zaltaru (psalmodii) rovnake, pridane 2003-08-13 */
 #define MODL_CEZ_DEN_VSETKY     20
-
 
 /* ... a stringy pre ne */
 /* pre modlitbu cez den pridane 2003-07-15 */
@@ -527,6 +527,11 @@ extern const char *nazov_slavenia_lokal[];
 /* div, mod: delenie pre int */
 #define DIV	/
 #define MOD	%
+
+/* 2006-02-07: dodefinované rôzne správanie funkcie zaltar_zvazok(); */
+#define	ZALTAR_VSETKO                0
+#define ZALTAR_IBA_ZALMY             1
+#define ZALTAR_IBA_ZALMY_HYMNUS_MCD  2
 
 /* juliansky datum, funkcia juliansky_datum, dane synonymum JD */
 #define	JD	juliansky_datum
