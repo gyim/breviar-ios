@@ -388,6 +388,7 @@ const char *nazov_slavenia_lokal[] =
 ,"len v konsekrovanıch kostoloch"
 ,"Druhá ve¾konoèná nede¾a"
 ,"koniec Oktávy narodenia Pána"
+,"konec Oktávu Narození Pánì"
 };
 
 const char *rimskymi_tyzden_zaltara[] =
@@ -786,5 +787,133 @@ const char *html_text_detaily_explain[] =
  "Kdy jsou nìkteré vıše uvedené volby nepouitelné pro nìjakou modlitbu, neberou se v úvahu (mohou bıt nastaveny dle libovùle).", 
  "If any of described options are not applicable for a chosen prayer, they can be set anyhow.", 
  ""};
+
+const char *text_JAN_01[] =
+{"Panny Márie Bohorodièky",
+ "Matky Boí, Panny Marie",
+ "", ""};
+const char *text_JAN_02[] =
+{"Sv. Bazila Ve¾kého a Gregora Nazianského, biskupov a uèite¾ov Cirkvi",
+ "Sv. Basila Velikého a Øehoøe Naziánského, biskupù a uèitelù Církve",
+ "", ""};
+const char *text_JAN_06[] =
+{"Zjavenie Pána",
+ "Zjevení Pánì",
+ "", ""};
+const char *text_JAN_KRST[] =
+{"Krst Krista Pána",
+ "Køest Pánì",
+ "", ""};
+const char *text_JAN_13[] =
+{"Sv. Hilára, biskupa a uèite¾a Cirkvi",
+ "Sv. Hilaria, biskupa a uèitele Církve",
+ "", ""};
+const char *text_JAN_17[] =
+{"Sv. Antona, opáta",
+ "Sv. Antonína, opata",
+ "", ""};
+const char *text_JAN_18[] =
+{"(na Slovensku nie je)",
+ "Panny Marie, Matky jednoty køesanù",
+ "", ""};
+const char *text_JAN_20_1[] =
+{"Sv. Fabiána, pápea a muèeníka",
+ "Sv. Fabiána, papee a muèedníka",
+ "", ""};
+const char *text_JAN_20_2[] =
+{"Sv. Šebastiána, muèeníka",
+ "Sv. Šebestiána, muèedníka",
+ "", ""};
+const char *text_JAN_21[] =
+{"Sv. Agnesy, panny a muèenice",
+ "Sv. Aneky, panny a muèednice",
+ "", ""};
+const char *text_JAN_22[] =
+{"Sv. Vincenta, diakona a muèeníka",
+ "Sv. Vincence, jáhna a muèedníka",
+ "", ""};
+const char *text_JAN_23[] =
+{"Sv. Jána Almuníka, biskupa",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "", ""};
+const char *text_JAN_24[] =
+{"Sv. Františka Saleského, biskupa a uèite¾a Cirkvi",
+ "Sv. Františka Saleského, biskupa a uèitele Církve",
+ "", ""};
+const char *text_JAN_25[] =
+{"Obrátenie svätého Pavla, apoštola",
+ "Obrácení svatého Pavla, apoštola",
+ "", ""};
+const char *text_JAN_26[] =
+{"Sv. Timoteja a Títa, biskupov",
+ "Sv. Timoteje a Tita, biskupù",
+ "", ""};
+const char *text_JAN_27[] =
+{"Sv. Angely Merici, panny",
+ "Sv. Andìly Mericiové, panny",
+ "", ""};
+const char *text_JAN_28[] =
+{"Sv. Tomáška Akvinského, kòaza a uèite¾a Cirkvi",
+ "Sv. Tomáše Akvinského, knìze a uèitele Církve",
+ "", ""};
+const char *text_JAN_31[] =
+{"Sv. Jána Boska, kòaza",
+ "Sv. Jana Boska, knìze",
+ "", ""};
+
+const char *text_FEB_02[] =
+{"Obetovanie Pána",
+ "Uvedení Pánì do chrámu",
+ "", ""};
+const char *text_FEB_03_1[] =
+{"Sv. Blaeja, biskupa a muèeníka",
+ "Sv. Blaeje, biskupa a muèedníka",
+ "", ""};
+const char *text_FEB_03_2[] =
+{"Sv. Oskára, biskupa",
+ "Sv. Ansgara, biskupa",
+ "", ""};
+const char *text_FEB_05[] =
+{"Sv. Agaty, panny a muèenice",
+ "Sv. Agáty, panny a muèednice",
+ "", ""};
+const char *text_FEB_06[] =
+{"Sv. Pavla Mikiho a spoloèníkov, muèeníkov",
+ "Sv. Pavla Mikiho a druhù, muèedníkù",
+ "", ""};
+const char *text_FEB_08[] =
+{"Sv. Hieronyma Emilianiho",
+ "Sv. Jeronıma Emilianiho",
+ "", ""};
+const char *text_FEB_10[] =
+{"Sv. Školastiky, panny",
+ "Sv. Scholastiky, panny",
+ "", ""};
+const char *text_FEB_11[] =
+{"Prebl. Panny Márie Lurdskej",
+ "Panny Marie Lurdské",
+ "", ""};
+const char *text_FEB_17[] =
+{"Siedmich svätıch zakladate¾ov rehole Sluobníkov Panny Márie",
+ "Sv. Alexia a druhù, øeholníkù",
+ "", ""};
+const char *text_FEB_21[] =
+{"Sv. Petra Damianiho, biskupa a uèite¾a Cirkvi",
+ "Sv. Petra Damianiho, biskupa a uèitele Církve",
+ "", ""};
+const char *text_FEB_22[] =
+{"Katedra sv. Petra, apoštola",
+ "Stolce svatého Petra",
+ "", ""};
+const char *text_FEB_23[] =
+{"Sv. Polykarpa, biskupa a muèeníka",
+ "Sv. Polykarpa, biskupa a muèedníka",
+ "", ""};
+
+const char *text_POPOLCOVA_STREDA[] =
+{"Popolcová streda",
+ "Popeleèní søeda",
+ "", ""};
+
 
 #endif /* __HODIN_H */

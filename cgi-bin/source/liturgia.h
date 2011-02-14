@@ -582,6 +582,7 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_KONSEKR_KOSTOLY    18
 #define LOKAL_SLAV_DRUHA_VELK_NEDELA  19
 #define LOKAL_SLAV_KONIEC_OKTAVY_NAR  20
+#define LOKAL_SLAV_KONIEC_OKTAVY_NAR_CZ		21
 
 /* prikazany / neprikazany sviatok */
 #define PRIKAZANY_SVIATOK 1
@@ -1010,6 +1011,9 @@ int _encode_spol_cast(int, int, int);
 int _encode_spol_cast(int, int);
 int _encode_spol_cast(int);
 _struct_sc _decode_spol_cast(int);
+
+extern const char *text_JAN_KRST[];
+extern const char *text_POPOLCOVA_STREDA[];
 
 #endif /* __LITURGIA_H_ */
 

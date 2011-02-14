@@ -1013,7 +1013,7 @@ void _dm_popolcova_streda(int rok, int _vn){
 	_global_result.tyzden  = 0; /* 4. tyzden zaltara */
 	_global_result.smer    = 2;
 	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 06/03/2000A.D. */
-	mystrcpy(_global_result.meno, "Popolcová streda", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
+	mystrcpy(_global_result.meno, text_POPOLCOVA_STREDA[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	_global_result.tyzzal  = 4; /* pridane 06/03/2000A.D. */
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
@@ -1105,7 +1105,7 @@ void _dm_krst_krista_pana(int rok){
 	_global_result.litobd  = OBD_CEZ_ROK;
 	_global_result.tyzden  = 1; /* 1. nedela "cez rok" */
 	_global_result.smer    = 5;
-	mystrcpy(_global_result.meno, "Krst Krista Pána", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
+	mystrcpy(_global_result.meno, text_JAN_KRST[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 27/04/2000A.D. */
@@ -1318,8 +1318,6 @@ _struct_sc _decode_spol_cast(int spolc){
 	ret.a1 = (spolc MOD (MAX_MODL_SPOL_CAST * MAX_MODL_SPOL_CAST)) MOD MAX_MODL_SPOL_CAST;
 	return ret;
 }
-
-
 
 #endif /* __LITURGIA_C_ */
 

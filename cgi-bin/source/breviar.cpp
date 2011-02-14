@@ -2193,9 +2193,15 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 				_global_den.typslav = SLAV_SLAVNOST;
 				_global_den.litobd = OBD_OKTAVA_NARODENIA;
 				_global_den.prik = PRIKAZANY_SVIATOK;
-				mystrcpy(_global_den.meno, "Panny Márie Bohorodièky", MENO_SVIATKU);
+				mystrcpy(_global_den.meno, text_JAN_01[_global_jazyk], MENO_SVIATKU);
 				/* 2006-02-16: podreazec (koniec Oktávy narodenia Pána) podobne ako (2. ve¾konoèná nede¾a) riešený pomocou "typslav_lokal" */
-				_global_den.typslav_lokal = LOKAL_SLAV_KONIEC_OKTAVY_NAR;
+				if(_global_jazyk == JAZYK_CZ){
+					_global_den.typslav_lokal = LOKAL_SLAV_KONIEC_OKTAVY_NAR_CZ;
+				}
+				else {
+					_global_den.typslav_lokal = LOKAL_SLAV_KONIEC_OKTAVY_NAR;
+				}
+				/* 2006-08-14: upravené; bude potrebné pre iné jazyky dorobi konštanty */
 			}
 			else if(_global_den.denvr == ZJV){
 				/* slavnost zjavenia pana */
@@ -2204,7 +2210,7 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 				_global_den.typslav = SLAV_SLAVNOST;
 				_global_den.litobd = OBD_VIANOCNE_II; /* ma vlastne slavenie; zmenil som na vianocne obd. II 14/03/2000A.D. */
 				_global_den.prik = PRIKAZANY_SVIATOK;
-				mystrcpy(_global_den.meno, "Zjavenie Pána", MENO_SVIATKU);
+				mystrcpy(_global_den.meno, text_JAN_06[_global_jazyk], MENO_SVIATKU);
 			}
 			else if((_global_den.denvt == DEN_NEDELA) &&
 					  (_global_den.denvr >= 2) && (_global_den.denvr <= 5)){
@@ -5512,12 +5518,12 @@ void _main_analyza_roku(char *rok){
 
 	/* 1. januara */
 	vytvor_global_link(1, 1, year, LINK_DEN_MESIAC);
-	Export("<tr valign=baseline>\n<td>%s</td><td>Panny Márie Bohorodièky</td></tr>\n",
-		_global_link);
+	Export("<tr valign=baseline>\n<td>%s</td><td>%s", _global_link, text_JAN_01[_global_jazyk]);
+	Export("</td></tr>\n");
 	/* 6. januara */
 	vytvor_global_link(6, 1, year, LINK_DEN_MESIAC);
-	Export("<tr valign=baseline>\n<td>%s</td><td>Zjavenie Pána</td></tr>\n",
-		_global_link);
+	Export("<tr valign=baseline>\n<td>%s</td><td>%s", _global_link, text_JAN_06[_global_jazyk]);
+	Export("</td></tr>\n");
 	/* nanebovstupenie pana, pridane 2003-07-01 */
 	vytvor_global_link(_global_r._NANEBOVSTUPENIE_PANA.den, _global_r._NANEBOVSTUPENIE_PANA.mesiac, year, LINK_DEN_MESIAC);
 	Export("<tr valign=baseline>\n<td>%s</td><td>Nanebovstúpenie Pána</td></tr>\n",

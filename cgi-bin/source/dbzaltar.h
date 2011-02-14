@@ -112,5 +112,37 @@ void liturgicke_obdobie(int litobd, int tyzden, int den, int tyzzal, int poradie
 #define ANCHOR_KRST_PANA "KRST"
 #define FILE_KRST_PANA "krst.htm" /* 14/03/2000A.D. -- kotvy v nom su podla ANCHOR_KRST_PANA */
 
+extern const char *text_JAN_01[];
+extern const char *text_JAN_02[];
+extern const char *text_JAN_06[];
+extern const char *text_JAN_KRST[];
+extern const char *text_JAN_13[];
+extern const char *text_JAN_17[];
+extern const char *text_JAN_18[];
+extern const char *text_JAN_20_1[];
+extern const char *text_JAN_20_2[];
+extern const char *text_JAN_21[];
+extern const char *text_JAN_22[];
+extern const char *text_JAN_23[];
+extern const char *text_JAN_24[];
+extern const char *text_JAN_25[];
+extern const char *text_JAN_26[];
+extern const char *text_JAN_27[];
+extern const char *text_JAN_28[];
+extern const char *text_JAN_31[];
+
+extern const char *text_FEB_02[];
+extern const char *text_FEB_03_1[];
+extern const char *text_FEB_03_2[];
+extern const char *text_FEB_05[];
+extern const char *text_FEB_06[];
+extern const char *text_FEB_08[];
+extern const char *text_FEB_10[];
+extern const char *text_FEB_11[];
+extern const char *text_FEB_17[];
+extern const char *text_FEB_21[];
+extern const char *text_FEB_22[];
+extern const char *text_FEB_23[];
+
 #endif /* __DBZALTAR_H_ */
 
