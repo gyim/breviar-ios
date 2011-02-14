@@ -558,6 +558,13 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 		Log("\tPrilepil som aj jazyk: `%s' (2006-07-31)\n", pom2);
 	}
 
+	/* 2008-08-08: pridané odovzdanie parametra pre css */
+	if(_global_css != CSS_breviar_sk){
+		sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_CSS, skratka_css[_global_css]);
+		strcat(_global_link, pom2);
+		Log("\tPrilepil som aj css: `%s' (2008-08-08)\n", pom2);
+	}
+
 	strcat(_global_link, "\">");
 
 	/* napisanie textu linky */

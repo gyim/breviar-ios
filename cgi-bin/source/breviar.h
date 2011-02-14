@@ -157,6 +157,8 @@ extern short int _global_language;
 #define	_global_jazyk	_global_language
 #endif
 
+extern short int _global_css; /* 2008-08-08: Pridané kvôli rôznym css */
+
 /* 2006-10-17: Pridané kvôli kompletóriu: niekedy obsahuje až dva žalmy */
 extern short int _global_pocet_zalmov_kompletorium;
 

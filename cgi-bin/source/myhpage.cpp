@@ -17,6 +17,7 @@
 /*   2004-03-16a.D. | funkcie hlavicka a patka aj do suboru    */
 /*   2006-07-31a.D. | prvé kroky k jazykovým mutáciám          */
 /*   2008-01-23a.D. | upravené funkcie patka()                 */
+/*   2008-08-08a.D. | upravené funkcie hlavicka() kvôli css    */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -35,19 +36,20 @@
 #include "myexpt.h"
 #include "mystring.h" /* kvoli mystrcpy, 2003-07-01 */
 #include "mylog.h"
-#include "breviar.h" /* 2006-07-31 kvôli jazyku */
+#include "breviar.h" /* 2006-07-31 kvôli jazyku a css (2008-08-08) */
 #include "liturgia.h" /* 2006-07-31 kvôli jazyku */
 
 /* exportuje hlavicku HTML dokumentu, kam pojde vysledok query */
 void hlavicka(char *title){
-/* ak nedebugujem (do suboru), potom treba pre prehliadace exportovat
- * nasledujuci riadok nasledovany prazdnym riadkom
- */
-	/* 2003-07-01, pridane pripadne citanie zo suboru */
-	char fname[MAX_STR] = STR_EMPTY;
-	int c = 0;
-	mystrcpy(fname, FILE_HEADER, MAX_STR);
-
+	/* 
+	 * 2003-07-01, pridane pripadne citanie zo suboru
+	 * 2008-08-08: èítanie zo súboru odstránené
+	 */
+	const char *nazov_css_suboru;
+	if(_global_css == CSS_UNDEF)
+		nazov_css_suboru = nazov_css[CSS_breviar_sk];
+	else
+		nazov_css_suboru = nazov_css[_global_css];
 #if defined(OS_linux)
 	Export("Content-type: text/html\n");
 	Export("\n");
@@ -55,40 +57,40 @@ void hlavicka(char *title){
 	Export("Content-type: text/html\n");
 	Export("\n");
 #endif
-
-	FILE *body = fopen(fname, "r");
-
-	Log("exporting %s:\n", fname);
-	if(body == NULL){
-		/*printf("error `%s'\n", sys_errlist[errno]);*/
-		Log("  file `%s' not found\n", fname);
-		Log("so, another attempt: exporting hard coded header...\n");
-
-		/* 2003-07-15, zmenene na hlavicku pre css-ko; zrusene <style> */
-		Export("<html>\n<head>\n");
-		Export("   <meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1250\">\n");
-		Export("   <meta name=\"Author\" content=\"Juraj Vidéky\">\n");
-		Export("   <link rel=\"stylesheet\" type=\"text/css\" href=\"/breviar.css\">\n");
-		Export("<title>%s</title>\n", title);
-		Export("</head>\n\n");
-		Export("<body>\n");
-		return;
-	}
-	while((c = fgetc(body)) != EOF){
-		Export("%c", c); /* fputc(c, exportfile); */
-	}
-	fclose(body);
-}
+	Log("creating header...\n");
+	/* 2003-07-15, zmenene na hlavicku pre css-ko; zrusene <style> */
+	/* 2008-08-08: pridané dynamicky css-ko */
+	Export("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\n");
+	Export("\t\"http://www.w3.org/TR/html4/loose.dtd\">\n");
+	Export("<html>\n<head>\n");
+	Export("\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1250\">\n");
+	Export("\t<meta name=\"Author\" content=\"Juraj Vidéky\">\n");
+	Export("\t<link rel=\"stylesheet\" type=\"text/css\" href=\"");
+#ifdef	EXPORT_CMDLINE_CSS
+	// pre command-line použitie (aj pre batch mód): "./breviar.css" resp. ".\breviar.css"
+	Export(".");
+	Export(STR_PATH_SEPARATOR);
+#else
+	// pre web-použitie (aj pre ruby): "/breviar.css"
+	Export("/");
+#endif
+	Export("%s\">\n", nazov_css_suboru); // názov css súboru
+	Export("<title>%s</title>\n", title);
+	Export("</head>\n\n");
+	Export("<body>\n");
+	return;
+}/* hlavicka() */
 
 void hlavicka(char *title, FILE * expt){
-/* ak nedebugujem (do suboru), potom treba pre prehliadace exportovat
- * nasledujuci riadok nasledovany prazdnym riadkom
- */
-	/* 2003-07-01, pridane pripadne citanie zo suboru */
-	char fname[MAX_STR] = STR_EMPTY;
-	int c = 0;
-	mystrcpy(fname, FILE_HEADER, MAX_STR);
-
+	/* 
+	 * 2003-07-01, pridane pripadne citanie zo suboru
+	 * 2008-08-08: èítanie zo súboru odstránené
+	 */
+	const char *nazov_css_suboru;
+	if(_global_css == CSS_UNDEF)
+		nazov_css_suboru = nazov_css[CSS_breviar_sk];
+	else
+		nazov_css_suboru = nazov_css[_global_css];
 #if defined(OS_linux)
 	fprintf(expt, "Content-type: text/html\n");
 	fprintf(expt, "\n");
@@ -96,30 +98,29 @@ void hlavicka(char *title, FILE * expt){
 	fprintf(expt, "Content-type: text/html\n");
 	fprintf(expt, "\n");
 #endif
-
-	FILE *body = fopen(fname, "r");
-
-	Log("exporting %s:\n", fname);
-	if(body == NULL){
-		/*printf("error `%s'\n", sys_errlist[errno]);*/
-		Log("  file `%s' not found\n", fname);
-		Log("so, another attempt: exporting hard coded header...\n");
-
-		/* 2003-07-15, zmenene na hlavicku pre css-ko; zrusene <style> */
-		fprintf(expt, "<html>\n<head>\n");
-		fprintf(expt, "   <meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1250\">\n");
-		fprintf(expt, "   <meta name=\"Author\" content=\"Juraj Vidéky\">\n");
-		fprintf(expt, "   <link rel=\"stylesheet\" type=\"text/css\" href=\"/breviar.css\">\n");
-		fprintf(expt, "<title>%s</title>\n", title);
-		fprintf(expt, "</head>\n\n");
-		fprintf(expt, "<body>\n");
-		return;
-	}
-	while((c = fgetc(body)) != EOF){
-		fprintf(expt, "%c", c); /* fputc(c, exportfile); */
-	}
-	fclose(body);
-}
+	Log("creating header...\n");
+	/* 2003-07-15, zmenene na hlavicku pre css-ko; zrusene <style> */
+	/* 2008-08-08: pridané dynamicky css-ko */
+	fprintf(expt, "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"");
+	fprintf(expt, "\t\"http://www.w3.org/TR/html4/loose.dtd\">");
+	fprintf(expt, "<html>\n<head>\n");
+	fprintf(expt, "\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1250\">\n");
+	fprintf(expt, "\t<meta name=\"Author\" content=\"Juraj Vidéky\">\n");
+	fprintf(expt, "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"");
+#ifdef	EXPORT_CMDLINE_CSS
+	// pre command-line použitie (aj pre batch mód): "./breviar.css" resp. ".\breviar.css"
+	fprintf(expt, ".");
+	fprintf(expt, STR_PATH_SEPARATOR);
+#else
+	// pre web-použitie (aj pre ruby): "/breviar.css"
+	fprintf(expt, "/");
+#endif
+	fprintf(expt, "%s\">\n", nazov_css_suboru); // názov css súboru
+	fprintf(expt, "<title>%s</title>\n", title);
+	fprintf(expt, "</head>\n\n");
+	fprintf(expt, "<body>\n");
+	return;
+}/* hlavicka() */
 
 /* nazov_mesiaca: string pre nazov dna; suhlasi s struct tm.tm_mon;
  * Month (0--11) */

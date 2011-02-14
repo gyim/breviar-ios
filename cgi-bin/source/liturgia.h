@@ -846,6 +846,12 @@ typedef struct lrok _struct_lrok;
 #define JAZYK_LA    3
 #define JAZYK_UNDEF 4
 
+/* 2006-08-08: Pridané kvôli rôznym css-kám */
+#define CSS_breviar_sk	0
+#define CSS_ebreviar_cz	1
+#define CSS_kbd_sk		2
+#define CSS_UNDEF		3
+
 /* ------------------------------------------------------------------- */
 /* globalne premenne -- su definovane v dnes.cpp (18/02/2000A.D.) */
 
@@ -981,12 +987,17 @@ extern short int _global_language;
 #define	_global_jazyk	_global_language
 #endif
 
+extern short int _global_css; /* 2008-08-08: Pridané kvôli rôznym css */
+
 /* 2006-10-17: Pridané kvôli kompletóriu: niekedy obsahuje až dva žalmy */
 extern short int _global_pocet_zalmov_kompletorium;
 
 extern const char *nazov_jazyka[];
 extern const char *skratka_jazyka[];
 extern const char *postfix_jazyka[];
+
+extern const char *skratka_css[];
+extern const char *nazov_css[];
 
 /* ------------------------------------------------------------------- */
 

@@ -25,6 +25,7 @@
 /*   2008-01-03a.D. | doplnené text_DRUHA_NEDELA_PO_NAR_PANA[] */
 /*   2008-01-05a.D. | doplnené text_PO_POPOLCOVEJ_STREDE[]     */
 /*                  - a tie text_V_OKTAVE_NARODENIA[]         */
+/*   2008-07-18a.D. | pridanı sviatok (text_JUL_24)            */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -742,6 +743,13 @@ const char *postfix_jazyka[] =
 {"", "cz", "en", "la", ""};
 /* Poznámka: Postfix nesmie obsahova na zaèiatku odde¾ovaè (slash resp. backslash);
  * musí sa jedna o podadresár pod include */
+
+/* 2006-08-08: Pridané kvôli rôznym css */
+const char *nazov_css[] =
+{"breviar.css", "ebreviar_cz.css", "breviar_kbd.css", "(css neurèené)"};
+
+const char *skratka_css[] =
+{"def", "cz", "kbd", ""};
 
 /* 2006-10-11: definovanie reazcov aj pre invitatórium a kompletórium */
 const char *html_button_invitatorium[] = {"Inv.", "Inv.", "Inv.", "Inv.", ""};
@@ -1594,6 +1602,10 @@ const char *text_JUL_22[] =
 const char *text_JUL_23[] =
 {"Sv. Brigity, reho¾níèky, spolupatrónky Európy",
  "Sv. Brigity, øeholnice patronky Evropy",
+ "", "", ""};
+const char *text_JUL_24[] =
+{"Sv. Charbela Makhlufa, kòaza",
+ "Sv. Šarbela Makhlúfa, knìze",
  "", "", ""};
 const char *text_JUL_25[] =
 {"Sv. Jakuba, apoštola",

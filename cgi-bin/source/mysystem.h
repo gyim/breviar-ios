@@ -24,6 +24,7 @@
 /*   2007-06-28a.D. | oprava jednotliv˝ch modelov, popisy      */
 /*   2007-11-20a.D. | doplnenÈ EXPORT_HTML_SPECIALS            */
 /*   2008-05-19a.D. | EXPORT_HTML_FILENAME_ANCHOR aj pre linux */
+/*   2008-08-08a.D. | doplnenÈ EXPORT_CMDLINE_CSS              */
 /*                                                             */
 /***************************************************************/
 
@@ -94,6 +95,7 @@
 #undef EXPORT_HTML_FILENAME
 #undef EXPORT_HTML_ANCHOR
 #undef EXPORT_HTML_SPECIALS /* 2007-11-20: vytvorenÈ, kvÙli v˝pisom do v˝slednÈho HTML vo funkcii interpretParameter(), napr. "nie je velkonocne obdobie" */
+#undef EXPORT_CMDLINE_CSS /* 2008-08-08: doplnenÈ kvÙli tomu, Ëi exportovaù v hlaviËke /breviar.css alebo ./breviar.css */
 
 /* ostry linux: */
 #if defined(MODEL_linux)
@@ -131,6 +133,7 @@
 	#define OS_Windows
 	#undef LOGGING
 	#define EXPORT_TO_FILE
+	#define EXPORT_CMDLINE_CSS
 /* debugovanie Windows/command-line -- vsetko sa loguje do suboru */
 #elif defined(MODEL_DEBUG_Windows_commandline)
 	#define OS_Windows
@@ -139,11 +142,13 @@
 	#define EXPORT_HTML_FILENAME_ANCHOR
 	#define EXPORT_HTML_SPECIALS
 	#define EXPORT_TO_FILE
+	#define EXPORT_CMDLINE_CSS
 /* ostry linux (command-line verzia): */
 #elif defined(MODEL_linux_commandline)
 	#define OS_linux
 	#undef LOGGING
 	#define EXPORT_TO_FILE
+	#define EXPORT_CMDLINE_CSS
 /* debugovanie linux/command-line -- vsetko sa loguje do suboru */
 #elif defined(MODEL_DEBUG_Windows_commandline)
 	#define OS_linux
@@ -152,6 +157,7 @@
 	#define EXPORT_HTML_FILENAME_ANCHOR
 	#define EXPORT_HTML_SPECIALS
 	#define EXPORT_TO_FILE
+	#define EXPORT_CMDLINE_CSS
 
 #else
 	#error Unsupported system model (see mysystem.h) - Nepodporovan˝ systÈmov˝ model (pozri s˙bor mysystem.h)
@@ -170,14 +176,20 @@
 /* 2006-07-17: PridanÈ */
 #define		PATH_SEPARATOR_linux	'/'
 #define		PATH_SEPARATOR_Windows	'\\'
+/* 2008-08-08: PridanÈ */
+#define		STR_PATH_SEPARATOR_linux	"/"
+#define		STR_PATH_SEPARATOR_Windows	"\\"
 
 /* 2007-05-29: upravenÈ; pre Ruby on Windows tieû separ·tor ako pod linuxom */
 #if defined(OS_linux)
 	#define		PATH_SEPARATOR	PATH_SEPARATOR_linux
+	#define		STR_PATH_SEPARATOR	STR_PATH_SEPARATOR_linux
 #elif defined(OS_Windows_Ruby)
 	#define		PATH_SEPARATOR	PATH_SEPARATOR_linux
+	#define		STR_PATH_SEPARATOR	STR_PATH_SEPARATOR_linux
 #else
 	#define		PATH_SEPARATOR	PATH_SEPARATOR_Windows
+	#define		STR_PATH_SEPARATOR	STR_PATH_SEPARATOR_Windows
 #endif
 
 /* 2006-07-31: PridanÈ */

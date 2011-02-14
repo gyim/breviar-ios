@@ -111,6 +111,8 @@
 /*                    Ëi pri druhej antifÛne zobraziù dvojku alebo nie     */
 /*   2008-04-10a.D. | zmeny pre ˙pravy include_dir                         */
 /*                  - dopracovanie batch mÛdu (vöetky modlitby, aj pre cz) */
+/*   2008-07-18a.D. | pridan˝ sviatok (text_JUL_24)                        */
+/*   2008-08-08a.D. | pridan˝ parameter (option) `c' (css - vzhæad)        */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -324,6 +326,8 @@ short int _global_language;
 #define	_global_jazyk	_global_language
 #endif
 
+short int _global_css; /* 2008-08-08: PridanÈ kvÙli rÙznym css */
+
 /* 2006-10-17: PridanÈ kvÙli kompletÛriu: niekedy obsahuje aû dva ûalmy */
 short int _global_pocet_zalmov_kompletorium;
 
@@ -388,6 +392,9 @@ char pom_LINKY		[SMALL] = STR_EMPTY;
 
 /* 2006-07-11: PridanÈ kvÙli jazykov˝m mut·ci·m */
 char pom_JAZYK		[SMALL] = STR_EMPTY;
+
+/* 2008-08-08: PridanÈ kvÙli rÙznym css */
+char pom_CSS		[SMALL] = STR_EMPTY;
 
 char bad_param_str[MAX_STR] = STR_EMPTY; /* inicializacia pridana 2003-08-13 */
 
@@ -887,6 +894,17 @@ short int setForm(void){
 		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_JAZYK), MAX_STR);
 		strcat(local_str, "=");
 		strcat(local_str, pom_JAZYK);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		ret = putenv(local_str);
+		Log("--- setForm: putenv returned %d.\n", ret);
+	}
+
+	/* 2008-08-08: PridanÈ kvÙli rÙznym css */
+	mystrcpy(local_str, STR_EMPTY, MAX_STR);
+	if(!equals(pom_CSS, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_CSS), MAX_STR);
+		strcat(local_str, "=");
+		strcat(local_str, pom_CSS);
 		Log("--- setForm: putenv(%s); ...\n", local_str);
 		ret = putenv(local_str);
 		Log("--- setForm: putenv returned %d.\n", ret);
@@ -3768,6 +3786,13 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 			Log("\tPrilepil som aj jazyk: `%s' (2006-07-31)\n", pom2);
 		}
 
+		/* 2008-08-08: pridanÈ odovzdanie parametra pre css */
+		if(_global_css != CSS_breviar_sk){
+			sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_CSS, skratka_css[_global_css]);
+			strcat(pom, pom2);
+			Log("\tPrilepil som aj css: `%s' (2008-08-08)\n", pom2);
+		}
+
 		/* 2006-08-19: pridan· liturgick· farba - pre buttons je treba v kaûdom riadku */
 		Export("</td>\n<td>&nbsp;");
 		Export("</td>\n<td>");
@@ -4127,11 +4152,20 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 
 		char pom2[MAX_STR]; /* 2006-07-31: pridanÈ */
 		mystrcpy(pom2, STR_EMPTY, MAX_STR); /* 2006-07-31: pridanÈ */
+		char pom3[MAX_STR]; /* 2008-08-08: pridanÈ */
+		mystrcpy(pom3, STR_EMPTY, MAX_STR);
 
 		/* 2006-07-31: pridanÈ odovzdanie parametra pre jazyk */
 		if(_global_jazyk != JAZYK_SK){
 			sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_JAZYK, skratka_jazyka[_global_jazyk]);
 			Log("\tPrilepil som aj jazyk: `%s' (2006-07-31)\n", pom2);
+		}
+
+		/* 2008-08-08: pridanÈ odovzdanie parametra pre css */
+		if(_global_css != CSS_breviar_sk){
+			sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_CSS, skratka_css[_global_css]);
+			strcat(pom2, pom3);
+			Log("\tPrilepil som aj css: `%s' (2008-08-08)\n", pom2);
 		}
 
 		/* tabuæka pre buttony Predch·dzaj˙ci/Nasleduj˙ci deÚ/rok a Dnes */
@@ -4293,11 +4327,20 @@ void _export_rozbor_dna_kalendar(short int typ){
 
 		char pom2[MAX_STR]; /* 2006-07-31: pridanÈ */
 		mystrcpy(pom2, STR_EMPTY, MAX_STR); /* 2006-07-31: pridanÈ */
+		char pom3[MAX_STR]; /* 2008-08-08: pridanÈ */
+		mystrcpy(pom3, STR_EMPTY, MAX_STR);
 
 		/* 2006-07-31: pridanÈ odovzdanie parametra pre jazyk */
 		if(_global_jazyk != JAZYK_SK){
 			sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_JAZYK, skratka_jazyka[_global_jazyk]);
 			Log("\tPrilepil som aj jazyk: `%s' (2006-07-31)\n", pom2);
+		}
+
+		/* 2008-08-08: pridanÈ odovzdanie parametra pre css */
+		if(_global_css != CSS_breviar_sk){
+			sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_CSS, skratka_css[_global_css]);
+			strcat(pom2, pom3);
+			Log("\tPrilepil som aj css: `%s' (2008-08-08)\n", pom2);
 		}
 
 		/* 2007-08-15: pokus o krajöie zobrazenie formou kalend·ra */
@@ -4497,11 +4540,20 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	char pom2[MAX_STR]; /* 2006-08-01: pridanÈ */
 	mystrcpy(pom2, STR_EMPTY, MAX_STR); /* 2006-07-31: pridanÈ */
+	char pom3[MAX_STR]; /* 2008-08-08: pridanÈ */
+	mystrcpy(pom3, STR_EMPTY, MAX_STR);
 
 	/* 2006-08-01: pridanÈ odovzdanie parametra pre jazyk */
 	if(_global_jazyk != JAZYK_SK){
 		sprintf(pom2, "%s=%s", STR_JAZYK, skratka_jazyka[_global_jazyk]);
 		Log("\tPrilepil som aj jazyk: `%s' (2006-07-31)\n", pom2);
+	}
+
+	/* 2008-08-08: pridanÈ odovzdanie parametra pre css */
+	if(_global_css != CSS_breviar_sk){
+		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_CSS, skratka_css[_global_css]);
+		strcat(pom2, pom3);
+		Log("\tPrilepil som aj css: `%s' (2008-08-08)\n", pom3);
 	}
 
 	/* 2006-02-02: prevzat· Ëasù z _main_dnes */
@@ -4985,6 +5037,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR]){
 	/* 2004-03-16 pridany vypis do batch_html_file */
 	/* 2006-01-31 pridan˝ z·pis modlitby cez deÚ a posv. ËÌtania */
 	/* 2008-04-09 pridan˝ z·pis modlitby cez deÚ (predpoludnÌm a popoludnÌ), invitatÛrium a kompletÛrium; doplnen˝ jazyk */
+	/* 2008-08-08: TODO: ost·va prilepiù info o css */
 	fprintf(batch_html_file, "<li>%d. %s %d: \n", _global_den.den, nazov_mesiaca(_global_den.mesiac - 1), _global_den.rok);
 	for(i = MODL_INVITATORIUM; i < MODL_NEURCENA; i++){
 		Log("/* generujem: %d `%s'...\n */", i, nazov_modlitby(i));
@@ -5135,11 +5188,20 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 
 	char pom2[MAX_STR]; /* 2006-08-01: pridanÈ */
 	mystrcpy(pom2, STR_EMPTY, MAX_STR); /* 2006-07-31: pridanÈ */
+	char pom3[MAX_STR]; /* 2008-08-08: pridanÈ */
+	mystrcpy(pom3, STR_EMPTY, MAX_STR);
 
 	/* 2006-08-01: pridanÈ odovzdanie parametra pre jazyk */
 	if(_global_jazyk != JAZYK_SK){
 		sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_JAZYK, skratka_jazyka[_global_jazyk]);
 		Log("\tPrilepil som aj jazyk: `%s' (2006-07-31)\n", pom2);
+	}
+
+	/* 2008-08-08: pridanÈ odovzdanie parametra pre css */
+	if(_global_css != CSS_breviar_sk){
+		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_CSS, skratka_css[_global_css]);
+		strcat(pom2, pom3);
+		Log("\tPrilepil som aj css: `%s' (2008-08-08)\n", pom3);
 	}
 
 	Export("<hr>\n");
@@ -5803,7 +5865,7 @@ void rozbor_mesiaca(short int mesiac, short int rok){
 
 /* 2006-07-12: vytvorenÈ kvÙli jazykov˝m mut·ci·m
  * popis: vr·ti ËÌslo jazyka 
- *			 inak vrati UNKNOWN_DEN
+ *			 inak vrati JAZYK_UNDEF
  */
 short int atojazyk(char *jazyk){
 	short int i = 0;
@@ -5814,6 +5876,21 @@ short int atojazyk(char *jazyk){
 		i++;
 	}while(i < JAZYK_UNDEF);
 	return JAZYK_UNDEF;
+}
+
+/* 2008-08-08: vytvorenÈ kvÙli rÙznym css-k·m
+ * popis: vr·ti ËÌslo css-ka
+ *			 inak vrati CSS_UNDEF
+ */
+short int atocss(char *css){
+	short int i = 0;
+	do{
+		if(equalsi(css, skratka_css[i]) || equalsi(css, nazov_css[i])){
+			return i;
+		}
+		i++;
+	}while(i < CSS_UNDEF);
+	return CSS_UNDEF;
 }
 
 /* 2006-02-10: nov˝ define; pouûÌva premennÈ int i, p 
@@ -6052,11 +6129,20 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 	char pom2[MAX_STR]; /* 2006-08-01: pridanÈ kvÙli transferu ˙dajov o jazyku */
 	mystrcpy(pom, STR_EMPTY, MAX_STR); /* 2006-08-01: pridan· inicializ·cia */
 	mystrcpy(pom2, STR_EMPTY, MAX_STR); /* 2006-08-01: pridanÈ */
+	char pom3[MAX_STR]; /* 2008-08-08: pridanÈ kvÙli css */
+	mystrcpy(pom3, STR_EMPTY, MAX_STR);
 
 	/* 2006-08-01: pridanÈ odovzdanie parametra pre jazyk */
 	if(_global_jazyk != JAZYK_SK){
 		sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_JAZYK, skratka_jazyka[_global_jazyk]);
 		Log("\tBudem prilepovaù aj jazyk: `%s' (2006-07-31)\n", pom2);
+	}
+
+	/* 2006-08-01: pridanÈ odovzdanie parametra pre css */
+	if(_global_css != CSS_breviar_sk){
+		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_JAZYK, skratka_jazyka[_global_jazyk]);
+		strcat(pom2, pom3);
+		Log("\tBudem prilepovaù aj css: `%s' (2008-08-08)\n", pom3);
 	}
 
 	/* rozparsovanie parametrov den, mesiac, rok, svaty */
@@ -6598,11 +6684,20 @@ void _main_analyza_roku(char *rok){
 	char pom2[MAX_STR]; /* 2006-08-01: pridanÈ kvÙli transferu ˙dajov o jazyku */
 	mystrcpy(pom, STR_EMPTY, MAX_STR); /* 2006-08-01: pridan· inicializ·cia */
 	mystrcpy(pom2, STR_EMPTY, MAX_STR); /* 2006-08-01: pridanÈ */
+	char pom3[MAX_STR]; /* 2008-08-08: pridanÈ kvÙli css */
+	mystrcpy(pom3, STR_EMPTY, MAX_STR);
 
 	/* 2006-08-01: pridanÈ odovzdanie parametra pre jazyk */
 	if(_global_jazyk != JAZYK_SK){
 		sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_JAZYK, skratka_jazyka[_global_jazyk]);
 		Log("\tBudem prilepovaù aj jazyk: `%s' (2006-07-31)\n", pom2);
+	}
+
+	/* 2006-08-01: pridanÈ odovzdanie parametra pre css */
+	if(_global_css != CSS_breviar_sk){
+		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_JAZYK, skratka_jazyka[_global_jazyk]);
+		strcat(pom2, pom3);
+		Log("\tBudem prilepovaù aj css: `%s' (2008-08-08)\n", pom3);
 	}
 
 #define LOG  Log("analyza_roku(): "); Log
@@ -7324,7 +7419,7 @@ short int getQueryTypeFrom_QS(char *qs){
 		Log("getQueryTypeFrom_QS() -- end, returning PRM_UNKNOWN\n");
 		return PRM_UNKNOWN; /* argumenty neobsahuju STR_PRM_... */
 	}
-}
+}/* getQueryTypeFrom_QS() */
 
 /*---------------------------------------------------------------------*/
 short int getQueryTypeFrom_WWW(void){
@@ -7438,9 +7533,11 @@ short int getArgv(int argc, char **argv){
 	 *            `k' (hyperteKst) aby pri exportovani v batch mode pisal do HTML suboru zoznam modlitieb
 	 * 2006-07-12: pridan˝ nasledovn˝ parameter:
 	 *            `j' (Jazyk) jazykov· mut·cia, zatiaæ sk, cz
+	 * 2008-08-08: pridan˝ nasledovn˝ parameter:
+	 *            `c' (css) pouûitÈ css
 	 *            
 	 */
-	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::1::2::3::4::5::a::h::e::f::g::l::i::\?::b::n::k::j::", MAX_STR);
+	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::1::2::3::4::5::a::h::e::f::g::l::i::\?::b::n::k::j::c::", MAX_STR);
 	/* tie options, ktore maju za sebou : maju povinny argument;
 	 *	ak maju :: tak maju volitelny */
 
@@ -7456,16 +7553,6 @@ short int getArgv(int argc, char **argv){
 		 * aby sme mohli exportovat, pretoze pred pouzitim getArgv nie je
 		 * otvoreny fajl FILE_EXPORT
 		 */
-
-		/* initExport(); bola kedysi na zaciatku, avsak kvoli tomu, aby
-		 * bolo mozne menit (switch -e) nazov suboru, dalo sa to sem
-		 * 24/02/2000A.D. -- urobil som to presne tak, ako bolo kedysi
-		 */
-/* begin -- 24/02/2000A.D. -- zapoznamkovane */
-/*		initExport();
-		hlavicka("Liturgia hodÌn");
- */
-/* end -- 24/02/2000A.D. -- zapoznamkovane */
 
 		Export("ObsluûnÈmu programu neboli zadanÈ ûiadne argumenty.\n");
 		Export("<p>getArgv();\n");
@@ -7485,6 +7572,12 @@ short int getArgv(int argc, char **argv){
 			if (c == -1) /* uz nie je option, vyskoc z while(1) */
 				break;
 			switch (c){ /* podla option urob nieco */
+				case 'c': /* parameter pridan˝ 2008-08-08, ovplyvÚuje pouûitÈ css-ko; bude v _global_css */
+					if(optarg != NULL){
+						mystrcpy(pom_CSS, optarg, SMALL);
+					}
+					Log("option %c with value `%s' -- `%s' used for css\n", c, optarg, optarg); break;
+
 				case 'j': /* 2006-07-11: PridanÈ kvÙli jazykov˝m mut·ci·m */
 					if(optarg != NULL){
 						mystrcpy(pom_JAZYK, optarg, SMALL);
@@ -7626,7 +7719,6 @@ short int getArgv(int argc, char **argv){
 
 				/* append pridany 2003-07-08, bude v _global_opt_append */
 				case 'a': /* MODL_OPT_APPEND */
-					/* znamena ? parameter */
 					if(optarg != NULL){
 						mystrcpy(pom_MODL_OPT_APPEND, optarg, SMALL);
 					}
@@ -7634,7 +7726,7 @@ short int getArgv(int argc, char **argv){
 					if(equals(pom_MODL_OPT_APPEND, STR_ANO) || equals(pom_MODL_OPT_APPEND, "1")){
 						_global_opt_append = ANO;
 					}
-					else if(equals(pom_MODL_OPT_APPEND, STR_NIE) || equals(pom_MODL_OPT4, "0")){
+					else if(equals(pom_MODL_OPT_APPEND, STR_NIE) || equals(pom_MODL_OPT_APPEND, "0")){
 						_global_opt_append = NIE;
 					}/* inak ostane _global_opt_APPEND default */
 					Log("opt_append == `%s' (%d)\n", pom_MODL_OPT_APPEND, _global_opt_append);
@@ -7790,6 +7882,15 @@ short int getForm(void){
 	if(ptr != NULL){
 		if(strcmp(ptr, EMPTY_STR) != 0)
 			mystrcpy(pom_JAZYK, ptr, SMALL);
+	}
+
+	/* premenn· WWW_CSS pridan· 2008-08-08 kvÙli rÙznym css */
+	ptr = getenv(ADD_WWW_PREFIX_(STR_CSS));
+	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
+	 * lebo pom_... su inicializovane na STR_EMPTY */
+	if(ptr != NULL){
+		if(strcmp(ptr, EMPTY_STR) != 0)
+			mystrcpy(pom_CSS, ptr, SMALL);
 	}
 
 	if((query_type == PRM_DATUM) || (query_type == PRM_DETAILY)){
@@ -8254,6 +8355,19 @@ short int parseQueryString(void){
 		i++;
 	}
 
+	/* 2008-08-08: pridanÈ kvÙli rÙznym css */
+	i = 0; /* param[0] by mal sÌce obsahovaù typ akcie, ale radöej kontrolujeme od 0 */
+	Log("pok˙öam sa zistiù css...\n");
+	while((equalsi(pom_CSS, STR_EMPTY)) && (i < pocet)){
+		Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
+		if(equals(param[i].name, STR_CSS)){
+			/* ide o parameter STR_CSS */
+			mystrcpy(pom_CSS, param[i].val, SMALL);
+			Log("css zistenÈ.\n");
+		}
+		i++;
+	}
+
 	/* 2006-08-01: pÙvodne sme predpokladali, ûe param[0] by mal obsahovaù typ akcie; 
 	 * odteraz ho hæad·me v celom zozname parametrov */
 	ok = NIE;
@@ -8307,7 +8421,7 @@ short int parseQueryString(void){
 		if(query_type != PRM_UNKNOWN)
 			ok = ANO;
 		i++;
-	}
+	}/* while */
 
 	if(ok != ANO){
 		/* ani jeden z parametrov neobsahuje query type alebo obsahuje nezn·my qt */
@@ -9023,6 +9137,7 @@ short int parseQueryString(void){
 	_main_LOG_to_Export("\tparam12== %s (pom_JAZYK)\n", pom_JAZYK);\
 	_main_LOG_to_Export("\tparam  == %s (pom_MODL_OPT6)\n", pom_MODL_OPT6);\
 	_main_LOG_to_Export("\tparam  == %s (pom_MODL_OPT7)\n", pom_MODL_OPT7);\
+	_main_LOG_to_Export("\tparam  == %s (pom_CSS)\n", pom_CSS);\
 }
 
 /* kedysi bolo void main;
@@ -9059,6 +9174,7 @@ int main(int argc, char **argv){
 	strcpy(pom_ROK_TO     , STR_EMPTY);
 	strcpy(pom_LINKY      , STR_EMPTY);
 	strcpy(pom_JAZYK      , STR_EMPTY); /* 2006-07-11: PridanÈ kvÙli jazykov˝m mut·ci·m */
+	strcpy(pom_CSS        , STR_EMPTY); /* 2008-08-08: PridanÈ kvÙli rÙznym css */
 	/* koniec inicializacie globalnych premennych; teraz samotna main()
 	 * 11/04/2000A.D.
 	 */
@@ -9097,10 +9213,8 @@ int main(int argc, char **argv){
 	updateUnCGIName();
 	_main_LOG("uncgi_name == %s\n", uncgi_name);
 
-	/* o initExport() pozri poznamky na prislusnych zapoznamkovanych miestach
-	 * 24/02/2000A.D. */
 	initExport();
-	hlavicka("Liturgia hodÌn");
+//	hlavicka("Liturgia hodÌn");
 
 	/* nasledovalo tu vypisanie headingu 1,
 	 * avsak to je teraz v kazdej funkcii _main_...
@@ -9169,14 +9283,6 @@ int main(int argc, char **argv){
 	/* v tomto switch() naplnime premennu query_type
 	 * a naviac (ak su) premenne pom_... */
 		case SCRIPT_PARAM_FROM_FORM:{
-			/* initExport(); bola kedysi na zaciatku, avsak kvoli tomu, aby
-			 * bolo mozne menit (switch -e) nazov suboru, dalo sa to sem
-			 * 24/02/2000A.D. -- urobil som to presne tak, ako bolo kedysi
-			 */
-			/*
-			initExport();
-			hlavicka("Liturgia hodÌn");
-			 */
 			_main_LOG_to_Export("params == SCRIPT_PARAM_FROM_FORM\n");
 			/* neboli zadane ziadne parametre, teda citam z formularu */
 			
@@ -9334,7 +9440,7 @@ _main_SIMULACIA_QS:
 			if(_allocate_global_var() == FAILURE)
 				goto _main_end;
 			/* inicializacia pridana do _allocate_global_var 2003-08-13 */
-/* ------------------------------------------------------------------------- */
+
 			LOG_ciara;
 
 			/* 2006-07-12: pridanÈ parsovanie jazyka kvÙli jazykov˝m mut·ci·m */
@@ -9345,7 +9451,16 @@ _main_SIMULACIA_QS:
 				_main_LOG_to_Export("\t(vzhæadom k neurËenÈmu jazyku pouûÌvam default)\n");
 			}
 			_main_LOG_to_Export("...jazyk (%s) = %i, teda %s (%s)\n", pom_JAZYK, _global_jazyk, nazov_jazyka[_global_jazyk], skratka_jazyka[_global_jazyk]);
-/* ------------------------------------------------------------------------- */
+
+			/* 2008-08-08: PridanÈ naËÌtanie css kvÙli rÙznym css */
+			_main_LOG_to_Export("zisùujem css...\n");
+			_global_css = atocss(pom_CSS);
+			if(_global_css == CSS_UNDEF){
+				_global_css = CSS_breviar_sk;
+				_main_LOG_to_Export("\t(vzhæadom k neurËenÈmu css pouûÌvam default)\n");
+			}
+			_main_LOG_to_Export("...css (%s) = %i, teda %s (%s)\n", pom_CSS, _global_css, nazov_css[_global_css], skratka_css[_global_css]);
+
 			LOG_ciara;
 
 			/* pridane 27/04/2000A.D.
@@ -9443,8 +9558,10 @@ _main_SIMULACIA_QS:
 			}
 
 			_main_LOG_to_Export("include s˙bory bud˙ z adres·ra `%s'\n", include_dir);
-/* ------------------------------------------------------------------------- */
+
 			LOG_ciara;
+
+			hlavicka("Liturgia hodÌn");
 
 			_main_LOG_to_Export("/* teraz nasleduje vykonanie jadra programu podla parametrov */\n");
 			_main_LOG_to_Export("switch: podla query_type...\n");
