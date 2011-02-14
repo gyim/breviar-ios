@@ -1029,7 +1029,7 @@ void _dm_nanebovstupenie(int rok, int _vn){
 	_global_result.litobd  = OBD_VELKONOCNE_I; /* ma vlastne slavenie */
 	_global_result.tyzden  = 0; /* pridane kvoli kotvam vo fajli FILE_NANEBOVSTUPENIE, 10/03/2000A.D. */
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D., aby tam nebolo 'hausnumero' */
-/*	_global_result.denvt   = DEN_STVRTOK; /* 2006-02-09: pridané, na Slovensku sa slávi vo štvrtok */
+/*	_global_result.denvt   = DEN_STVRTOK; pôvodná poznámka: 2006-02-09: pridané, na Slovensku sa slávi vo štvrtok */
 	_global_result.smer    = 2;
 	_global_result.prik    = PRIKAZANY_SVIATOK;
 	mystrcpy(_global_result.meno, "Nanebovstúpenie Pána", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
@@ -1241,7 +1241,7 @@ void Log(_struct_dm g){
 	Log_struktura_dm("   tyzden: %d\n", g.tyzden);
 	Log_struktura_dm("   tyzzal: %d\n", g.tyzzal);
 	Log_struktura_dm("   litobd: %s\n", nazov_obdobia_[g.litobd]); // nazov_obdobia_
-	Log_struktura_dm("   typslav:%s\n", nazov_slavenia[g.typslav]);
+	Log_struktura_dm("   typslav:%s\n", nazov_slavenia(g.typslav));
 	/* 2005-07-27: doplnené typslav_lokal */
 	Log_struktura_dm("   typslav_lokal: %s\n", nazov_slavenia_lokal[g.typslav_lokal]);	
 	Log_struktura_dm("   smer:   %d\n", g.smer);

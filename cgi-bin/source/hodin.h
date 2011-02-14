@@ -28,6 +28,7 @@ const char *TEMPLAT[] =
  TEMPLAT_CEZ_DEN_9, TEMPLAT_CEZ_DEN_12, TEMPLAT_CEZ_DEN_3,
  TEMPLAT_VESPERY, TEMPLAT_KOMPLETORIUM};
 
+/*
 const char *nazov_modlitby[] =
 {"invitatórium", "ranné chvály", "posvätné èítanie",
  "modlitba predpoludním", "modlitba napoludnie", "modlitba popoludní",
@@ -35,6 +36,26 @@ const char *nazov_modlitby[] =
  "prvé vešpery", "prvé kompletórium",
  "druhé vešpery", "druhé kompletórium",
  "detaily"};
+*/
+
+const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] = 
+{{"invitatórium", "invitatoø", "Invitatory", "" }
+, {"ranné chvály", "ranní chvály", "Laudes", "" }
+, {"posvätné èítanie", "posvátné ètení", "Holy Reading", "" }
+, {"modlitba predpoludním", "modlitba dopoledne", "", "" }
+, {"modlitba napoludnie", "modlitba v poledne", "", "" }
+, {"modlitba popoludní", "modlitba odpoledne", "", "" }
+, {"vešpery", "nešpory", "Vesperae", "" }
+, {"kompletórium", "kompletáø", "Completary", "" }
+, {"neurèená", "neurèena", "not-defined", ""}
+, {"prvé vešpery", "první nešpory", "", "" }
+, {"prvé kompletórium", "první kompletáø", "", "" }
+, {"druhé vešpery", "druhé nešpory", "", "" }
+, {"druhé kompletórium", "druhı kompletáø", "", "" }
+, {"detaily", "detaily", "Details", "" }
+};
+
+#define		nazov_modlitby(a)	nazov_modlitby_jazyk[a][_global_jazyk]
 
 const char *nazov_Modlitby[] =
 {"Invitatórium", "Ranné chvály", "Posvätné èítanie",
@@ -146,39 +167,102 @@ const char *nazov_spolc_ANCHOR[MODL_SPOL_CAST_NEBRAT + 1] =
 };
 
 /* nazov_obdobia: string pre nazov liturgickeho obdobia */
+
+/*
 const char *nazov_obdobia[] =
 {"ve¾konoèná oktáva", "adventné obdobie", "adventné obdobie",
  "vianoèné obdobie", "vianoèné obdobie", "obdobie „cez rok“",
  "pôstne obdobie", "Ve¾kı tıdeò",
  "ve¾konoèné trojdnie", "ve¾konoèné obdobie", "ve¾konoèné obdobie",
  "oktáva Narodenia Pána"};
-const char *nazov_obdobia_[] = // debuggovacie
+*/
+
+const char *nazov_obdobia_jazyk[POCET_OBDOBI + 1][POCET_JAZYKOV + 1] =
+{{"ve¾konoèná oktáva", "velikonoèní oktáv", "", ""},
+ {"adventné obdobie", "doba adventní", "", ""},
+ {"adventné obdobie", "doba adventní", "", ""},
+ {"vianoèné obdobie", "doba vánoèní", "", ""},
+ {"vianoèné obdobie", "doba vánoèní", "", ""},
+ {"cezroèné obdobie", "mezidobí", "", ""}, // obdobie „cez rok“
+ {"pôstne obdobie", "doba postní", "", ""},
+ {"Ve¾kı tıdeò", "Svatı tıden", "", ""},
+ {"ve¾konoèné trojdnie", "Velikonoèní triduum", "", ""},
+ {"ve¾konoèné obdobie", "doba velikonoèní", "", ""},
+ {"ve¾konoèné obdobie", "doba velikonoèní", "", ""},
+ {"oktáva Narodenia Pána", "oktáv Narození Pánì", "", ""}
+};
+
+#define		nazov_obdobia(a)	nazov_obdobia_jazyk[a][_global_jazyk]
+
+const char *nazov_obdobia_[] = // debuggovacie - preto netreba preklada; 2006-08-03
 {"ve¾konoèná oktáva", "adventné obdobie I", "adventné obdobie II",
  "vianoèné obdobie I", "vianoèné obdobie II", "obdobie „cez rok“",
  "pôstne obdobie I", "Ve¾kı tıdeò",
  "ve¾konoèné trojdnie", "ve¾konoèné obdobie I", "ve¾konoèné obdobie II",
  "oktáva Narodenia Pána"};
+
 /* lokal == 6. pad, v kom/com */
+
+/*
 const char *nazov_obdobia_v[] =
 {"vo ve¾konoènej oktáve", "v adventnom období", "v adventnom období",
  "vo vianoènom období", "vo vianoènom období", "v období „cez rok“",
  "v pôstnom období", "vo Ve¾kom tıdni",
  "vo ve¾konoènom trojdní", "vo ve¾konoènom období", "vo ve¾konoènom období",
  "v oktáve Narodenia Pána"};
+*/
+const char *nazov_obdobia_v_jazyk[POCET_OBDOBI + 1][POCET_JAZYKOV + 1] =
+{{"vo ve¾konoènej oktáve", "ve velikonoèním oktávu", "", ""},
+ {"v adventnom období", "v dobì adventní", "", ""},
+ {"v adventnom období", "v dobì adventní", "", ""},
+ {"vo vianoènom období", "v dobì vánoèní", "", ""},
+ {"vo vianoènom období", "v dobì vánoèní", "", ""},
+ {"v cezroènom období", "v mezidobí", "", ""}, // obdobie „cez rok“
+ {"v pôstnom období", "v dobì postní", "", ""},
+ {"vo Ve¾kom tıdni", "ve Svatém tıdnu", "", ""},
+ {"vo ve¾konoènom trojdní", "ve velikonoèním triduu", "", ""},
+ {"vo ve¾konoènom období", "v dobì velikonoèní", "", ""},
+ {"vo ve¾konoènom období", "v dobì velikonoèní", "", ""},
+ {"v oktáve Narodenia Pána", "v oktávu Narození Pánì", "", ""}
+};
+
+#define		nazov_obdobia_v(a)	nazov_obdobia_v_jazyk[a][_global_jazyk]
+
+/*
 const char *nazov_OBDOBIA_V[] =
 {"VO VE¼KONOÈNEJ OKTÁVE", "V ADVENTNOM OBDOBÍ", "V ADVENTNOM OBDOBÍ",
  "VO VIANOÈNOM OBDOBÍ", "VO VIANOÈNOM OBDOBÍ", "V OBDOBÍ „CEZ ROK“",
  "V PÔSTNOM OBDOBÍ", "VO VE¼KOM TİDNI",
  "VO VE¼KONOÈNOM TROJDNÍ", "VO VE¼KONOÈNOM OBDOBÍ", "VO VE¼KONOÈNOM OBDOBÍ",
  "V OKTÁVE NARODENIA PÁNA"};
+*/
+const char *nazov_OBDOBIA_V_jazyk[POCET_OBDOBI + 1][POCET_JAZYKOV + 1] =
+{{"VO VE¼KONOÈNEJ OKTÁVE", "VE VELIKONOÈNÍM OKTÁVU", "", ""},
+ {"V ADVENTNOM OBDOBÍ", "V DOBÌ ADVENTNÍ", "", ""},
+ {"V ADVENTNOM OBDOBÍ", "V DOBÌ ADVENTNÍ", "", ""},
+ {"VO VIANOÈNOM OBDOBÍ", "V DOBÌ VÁNOÈNÍ", "", ""},
+ {"VO VIANOÈNOM OBDOBÍ", "V DOBÌ VÁNOÈNÍ", "", ""},
+ {"V CEZROÈNOM OBDOBÍ", "V MEZIDOBÍ", "", ""}, // OBDOBIE „CEZ ROK“
+ {"V PÔSTNOM OBDOBÍ", "V DOBÌ POSTNÍ", "", ""},
+ {"VO VE¼KOM TİDNI", "VE SVATÉM TİDNU", "", ""},
+ {"VO VE¼KONOÈNOM TROJDNÍ", "VE VELIKONOÈNÍM TRIDUU", "", ""},
+ {"VO VE¼KONOÈNOM OBDOBÍ", "V DOBÌ VELIKONOÈNÍ", "", ""},
+ {"VO VE¼KONOÈNOM OBDOBÍ", "V DOBÌ VELIKONOÈNÍ", "", ""},
+ {"V OKTÁVE NARODENIA PÁNA", "V OKTÁVU NAROZENÍ PÁNÌ", "", ""}
+};
+
+#define		nazov_OBDOBIA_V(a)	nazov_OBDOBIA_V_jazyk[a][_global_jazyk]
+
 /* gen[itiv] == 2. pad, koho/coho */
+
+/* 2006-08-02: netreba preklada, pretoe sa nepouíva 
 const char *nazov_obdobia_gen[] =
 {"ve¾konoènej oktávy", "adventného obdobia", "adventného obdobia",
  "vianoèného obdobia", "vianoèného obdobia", "obdobia „cez rok“",
  "pôstneho obdobia", "Ve¾kého tıdòa",
  "ve¾konoèného trojdnia", "ve¾konoèného obdobia", "ve¾konoèného obdobia",
  "oktávy Narodenia Pána"};
-/*
+
 const char *nazov_Obdobia[] =
 {"Ve¾konoèná oktáva", "Adventné obdobie", "Adventné obdobie",
  "Vianoèné obdobie", "Vianoèné obdobie", "Obdobie „cez rok“",
@@ -216,14 +300,29 @@ const char *zvazok_OBD[] =
  "ZVII", "ZVII", "ZVII",
  "ZVI"};
 
+/*
 const char *nazov_slavenia[] =
 {"___",
  "slávnos", "sviatok", "spomienka", "¾ubovo¾ná spomienka",
  "vlastné slávenie"};
+*/
+const char *nazov_slavenia_jazyk[POCET_SLAVENI + 1][POCET_JAZYKOV + 1] =
+{{"___", "___", "___", ""}, 
+ {"slávnos", "slavnost", "", ""}, 
+ {"sviatok", "svátek", "", ""}, 
+ {"spomienka", "vzpomínka", "", ""}, 
+ {"¾ubovo¾ná spomienka", "libovolná vzpomínka", "", ""}, 
+ {"vlastné slávenie", "vlastní slávení", "", ""}, 
+};
+
+#define		nazov_slavenia(a)	nazov_slavenia_jazyk[a][_global_jazyk]
+
+/* 2006-08-02: netreba preklada, pretoe sa nepouíva 
 const char *nazov_Slavenia[] =
 {"___",
  "Slávnos", "Sviatok", "Spomienka", "¼ubovo¾ná spomienka",
  "Vlastné slávenie"};
+*/
 
 /* 2005-07-27: doplnené */
 const char *nazov_slavenia_lokal[] =
@@ -540,8 +639,30 @@ const char *html_button_dnes_defaults[] = {"Vyèisti", "Vyèisti", "Clear", ""};
 
 const char *html_button_predchadzajuci_[] = {"Predchádzajúci", "Pøedchozí", "Previous", ""};
 const char *html_button_nasledujuci_[] = {"Nasledujúci", "Následující", "Next", ""};
-const char *html_button_den[] = {"deò", "den", "day", ""};
-const char *html_button_mesiac[] = {"mesiac", "mìsíc", "month", ""};
-const char *html_button_rok[] = {"rok", "rok", "year", ""};
+const char *html_text_den[] = {"deò", "den", "day", ""};
+const char *html_text_mesiac[] = {"mesiac", "mìsíc", "month", ""};
+const char *html_text_rok[] = {"rok", "rok", "year", ""};
+const char *html_text_Rok[] = {"Rok", "Rok", "Year", ""};
+const char *html_text_Rok_x[] = {"Rok %d", "Rok %d", "Year %d", ""};
+const char *html_text_modlitby_pre_den[] = {"modlitby pre deò", "modlitby pro den", "prayers for date", ""};
+const char *html_text_alebo_pre[] = {"alebo pre", "anebo pro", "or for", ""};
+const char *html_text_dnesok[] = {"dnešok", "dnešní den", "today", ""};
+const char *html_text_dalsie_moznosti[] = {"Vyberte si ïalšie monosti ", "Další monosti vıbìru ", "Choose from above (buttons) or from the following options: ", ""};
+const char *html_text_prik_sviatky_atd[] = {"prikázané sviatky a slávnosti Pána v roku ", "pøikázané svátky a slávnosti Pánì v roku ", "obligatory celebrations in year ", ""};
+const char *html_text_lit_kalendar[] = {"liturgickı kalendár pre", "liturgickı kalendáø pro", "liturgical calendar for", ""};
+const char *html_text_roku[] = {"roku", "roku", "of year", ""};
+const char *html_text_tabulka_pohyblive_od[] = {"tabu¾ka dátumov pohyblivıch slávení od roku", "tabulka s datumy promìnnıch slavností od roku", "table with dates of movable celebrations from year", ""};
+const char *html_text_do_roku[] = {"do roku", "po rok", "till year", ""};
+const char *html_text_zobrazit_linky[] = {"zobrazi tabu¾ku vrátane hypertextovıch odkazov na jednotlivé dni", "zobrazit tabulku s hypertextovımi odkazy pro jednotlivé dny", "display the table including hypertext links to each date", ""};
+const char *html_text_pre_cezrocne_obd[] = {"pre cezroèné obdobie", "pro mezidobí", "for ...", ""};
+const char *html_text_tyzden_zaltara[] = {". tıdeò altára", ". tıden altáøe", "week of Psaltary", ""};
+const char *html_text_tyzden[] = {". tıdeò", ". tıden", "week", ""};
+const char *html_text_v_tyzdni_zaltara[] = {". tıdni altára", ". tıdnu altáøe", "week of Psaltary", ""};
+const char *html_text_dnes_je_atd[] = {"Dnes je %d. deò v roku, <a href=\"%s%s\">juliánsky dátum</a> JD = %ld.\n<br>\n", "Dnes je %d. den v roku, <a href=\"%s%s\">juliánské datum</a> JD = %ld.\n<br>\n", "Today is %d. day in the year, <a href=\"%s%s\">Julian date</a> JD = %ld.\n<br>\n", ""};
+const char *html_text_zakladne_info[] = {"Základné informácie", "Základní informace", "Basic info", ""};
+const char *html_text_je[] = {"je", "je", "is", ""};
+const char *html_text_nie_je[] = {"nie je", "není", "is not", ""};
+const char *html_text_prestupny[] = {"prestupnı", "pøestupnı", "...", ""};
+const char *html_text_datumy_pohyblivych_slaveni[] = {"Dátumy pohyblivıch slávení", "Dáta promìnlivıch slávení", "Dates for movable celebrations", ""};
 
 #endif /* __HODIN_H */

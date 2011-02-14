@@ -48,6 +48,9 @@
 
 #define MENO_SVIATKU 100
 
+/* 2006-07-31: kvôli jazykovým mutáciám */
+#define	POCET_JAZYKOV	3
+
 /* nasledovne 2 definovane 2003-08-13; zmenene 2004-04-28 (12->16) */
 #define MAX_STR_AF_FILE   16
 #define MAX_STR_AF_ANCHOR 23
@@ -143,7 +146,7 @@ struct den_mesiac{ /* takto povodne vyzerala struct dm */
 };
 typedef struct den_mesiac _struct_den_mesiac;
 
-#define POCET_MODLITIEB         8
+#define POCET_MODLITIEB         13 /* 2006-08-02: nepoužívalo sa; upravené na 13 (z pôvodných 8) */
 /* modlitby */
 #define MODL_INVITATORIUM       0
 #define MODL_RANNE_CHVALY       1
@@ -205,7 +208,10 @@ typedef struct den_mesiac _struct_den_mesiac;
 #define CHAR_MODL_DRUHE_VESPERY      'w' /* toto by sa nemalo */
 #define CHAR_MODL_DRUHE_KOMPLETORIUM 'm' /* toto by sa nemalo */
 
-extern const char *nazov_modlitby[];
+//extern const char *nazov_modlitby[];
+extern const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1];
+#define		nazov_modlitby(a)	nazov_modlitby_jazyk[a][_global_jazyk]
+
 extern const char *nazov_Modlitby[];
 /* extern const char *nazov_MODLITBY[]; */
 
@@ -470,14 +476,25 @@ typedef struct dm _struct_dm;
 #define OBD_VELKONOCNA_OKTAVA      0 /* velkonocna nedela -- 2. velk. ne */
 #define OBD_OKTAVA_NARODENIA      11 /* narodenie Pana -- 1. jan. */
 
+#define	POCET_OBDOBI	11
 /* nazov_obdobia: string pre nazov liturgickeho obdobia */
-extern const char *nazov_obdobia[];
+//extern const char *nazov_obdobia[];
+extern const char *nazov_obdobia_jazyk[POCET_OBDOBI + 1][POCET_JAZYKOV + 1];
+#define		nazov_obdobia(a)	nazov_obdobia_jazyk[a][_global_jazyk]
+
 extern const char *nazov_obdobia_[];
+
 /* lokal == 6. pad, v kom/com */
-extern const char *nazov_obdobia_v[];
-extern const char *nazov_OBDOBIA_V[];
+//extern const char *nazov_obdobia_v[];
+extern const char *nazov_obdobia_v_jazyk[POCET_OBDOBI + 1][POCET_JAZYKOV + 1];
+#define		nazov_obdobia_v(a)	nazov_obdobia_v_jazyk[a][_global_jazyk]
+
+//extern const char *nazov_OBDOBIA_V[];
+extern const char *nazov_OBDOBIA_V_jazyk[POCET_OBDOBI + 1][POCET_JAZYKOV + 1];
+#define		nazov_OBDOBIA_V(a)	nazov_OBDOBIA_V_jazyk[a][_global_jazyk]
+
 /* gen[itiv] == 2. pad, koho/coho */
-extern const char *nazov_obdobia_gen[];
+/* extern const char *nazov_obdobia_gen[]; */
 /* extern const char *nazov_Obdobia[]; */
 
 /* nazov_obdobia: string pre nazov suboru .htm liturgickeho obdobia */
@@ -497,9 +514,15 @@ extern const char *zvazok_OBD[];
 #define SLAV_LUB_SPOMIENKA       4
 #define SLAV_VLASTNE             5
 
+#define	POCET_SLAVENI		5
+
 /* nazov_slavenia: string pre nazov typu slavenia */
-extern const char *nazov_slavenia[];
-extern const char *nazov_Slavenia[];
+//extern const char *nazov_slavenia[];
+extern const char *nazov_slavenia_jazyk[POCET_SLAVENI + 1][POCET_JAZYKOV + 1];
+#define		nazov_slavenia(a)	nazov_slavenia_jazyk[a][_global_jazyk]
+
+/* extern const char *nazov_Slavenia[]; */
+
 /* 2005-07-27: doplnené */
 extern const char *nazov_slavenia_lokal[];
 
@@ -573,8 +596,6 @@ extern const char char_nedelny_cyklus[3];
 #define CASE_case 0 /* vsetky male */
 #define CASE_Case 1 /* Prve Pismeno Velke */
 #define CASE_CASE 2 /* VSETKO VELKE */
-
-#define	POCET_JAZYKOV	3
 
 /* nazov_dna: string pre nazov dna; suhlasi s struct tm.tm_wday;
  * Weekday (0--6; Sunday/nedela = 0) */
