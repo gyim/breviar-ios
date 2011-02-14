@@ -95,6 +95,7 @@
 /*   2007-10-23a.D. | dokonèenie zoh¾adnenia smerníc pre sviatky svätých   */
 /*                    (krátke responzórium, prosby pre r.chvály/vešpery)   */
 /*   2007-11-27a.D. | oprava v interpretParameter(), hymnus 34.týždòa OCR  */
+/*   2007-11-28a.D. | odlišné správanie pre CZ hymny 34.týždòa OCR         */
 /*                                                                         */
 /*                                                                         */
 /*                                                                         */
@@ -1583,8 +1584,17 @@ void interpretParameter(short int type, char *paramname){
 	else if(equals(paramname, PARAM_HYMNUS)){
 		switch(type){
 			case MODL_RANNE_CHVALY:
-				strcat(path, _global_modl_ranne_chvaly.hymnus.file);
-				includeFile(type, paramname, path, _global_modl_ranne_chvaly.hymnus.anchor);
+				/* 2007-11-28: upravené pre èeský breviár */
+				if((_global_jazyk == JAZYK_CZ) && (je_34_ocr)){
+					Log("pro ranní chvály 34. týdne v mezidobí se bere jiný hymnus");
+#if defined(EXPORT_HTML_SPECIALS)
+					Export("jiný hymnus pro 34. týden mezidobí");
+#endif
+				}
+				else{
+					strcat(path, _global_modl_ranne_chvaly.hymnus.file);
+					includeFile(type, paramname, path, _global_modl_ranne_chvaly.hymnus.anchor);
+				}
 				break;
 			case MODL_CEZ_DEN_9:
 				strcat(path, _global_modl_cez_den_9.hymnus.file);
@@ -1599,8 +1609,17 @@ void interpretParameter(short int type, char *paramname){
 				includeFile(type, paramname, path, _global_modl_cez_den_3.hymnus.anchor);
 				break;
 			case MODL_VESPERY:
-				strcat(path, _global_modl_vespery.hymnus.file);
-				includeFile(type, paramname, path, _global_modl_vespery.hymnus.anchor);
+				/* 2007-11-28: upravené pre èeský breviár */
+				if((_global_jazyk == JAZYK_CZ) && (je_34_ocr)){
+					Log("pro nešpory 34. týdne v mezidobí se bere jiný hymnus");
+#if defined(EXPORT_HTML_SPECIALS)
+					Export("jiný hymnus pro 34. týden mezidobí");
+#endif
+				}
+				else{
+					strcat(path, _global_modl_vespery.hymnus.file);
+					includeFile(type, paramname, path, _global_modl_vespery.hymnus.anchor);
+				}
 				break;
 			case MODL_POSV_CITANIE:
 				strcat(path, _global_modl_posv_citanie.hymnus.file);
