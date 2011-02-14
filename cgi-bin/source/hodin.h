@@ -23,6 +23,8 @@
 /*   2006-12-04a.D. | oprava: kompletáØ                        */
 /*   2006-12-12a.D. | doplnenie latinèiny (la)                 */
 /*   2008-01-03a.D. | doplnené text_DRUHA_NEDELA_PO_NAR_PANA[] */
+/*   2008-01-05a.D. | doplnené text_PO_POPOLCOVEJ_STREDE[]     */
+/*                  - a tiež text_V_OKTAVE_NARODENIA[]         */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -2106,6 +2108,16 @@ const char *text_BIELA_SOBOTA[] =
 const char *text_KVETNA_NEDELA[] =
 {"Kvetná nede¾a",
  "Kvìtná nedìle",
+ "", "", ""};
+
+const char *text_PO_POPOLCOVEJ_STREDE[] =
+{"po Popolcovej strede",
+ "po Popeleèní støedì",
+ "", "", ""};
+
+const char *text_V_OKTAVE_NARODENIA[] =
+{"v oktáve Narodenia Pána",
+ "v oktávu Narození Pánì",
  "", "", ""};
 
 #endif /* __HODIN_H */

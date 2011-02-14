@@ -99,7 +99,10 @@
 /*   2007-12-04a.D. | opraven· podmienka pre zobrazovanie Sl·va Otcu,      */
 /*                    pretoûe nefungovala pre inÈ modlitby ako r.chv·ly    */
 /*   2008-01-03a.D. | viacjazyËnosù pre text_DRUHA_NEDELA_PO_NAR_PANA[]    */
-/*                                                                         */
+/*   2008-01-05a.D. | viacjazyËnosù pre text_PO_POPOLCOVEJ_STREDE[]        */
+/*                  - a tieû text_V_OKTAVE_NARODENIA[]                     */
+/*                  - opravenÈ prebytoËnÈ </span> v _global_string         */
+/*                  - dni po nar.p·na pre m.cez deÚ dokonËia 4.t˝ûdeÚ ûalt.*/
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -2899,7 +2902,11 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					_rozbor_dna_LOG("/* vianocne obdobie */\n");
 					_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					_global_den.litobd = OBD_OKTAVA_NARODENIA; /* pretoze do 31.12. */
-					_global_den.tyzden = 1;
+					/* 2008-01-05: podæa smernÌc, Ë. 133, nie je 1. t˝ûdeÚ ûalt·ra; 
+					 * pokraËuje sa v t˝ûdÚoch od 1. adventnej nedele
+					 * upozornil Vlado Kiö
+					 * kedysi tu bolo: _global_den.tyzden = 1; */
+					_global_den.tyzden = ((_global_den.denvr - PAN) DIV 7) + 1;
 					if(_global_den.denvr == NAR){
 						/* narodenie pana */
 						_rozbor_dna_LOG("/* narodenie pana */\n");
@@ -3348,7 +3355,9 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	Log("5:_local_den.meno == %s\n", _local_den.meno); /* 08/03/2000A.D. */
 
 	if(equals(_local_den.meno, STR_EMPTY)){
+		Log("sl·venie nem· vlastn˝ n·zov...\n");
 		if(_local_den.denvt == DEN_NEDELA){
+			Log("nedeæa, ktor· nem· vlastn˝ n·zov... (_global_string == %s)\n", _global_string);
 			/* nedela bez vlastneho nazvu */
 			sprintf(pom, "%d. %s %s",
 					_local_den.tyzden,
@@ -3372,6 +3381,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			strcat(_global_string, pom);
 		}
 		else{
+			Log("deÚ in˝ ako nedeæa, ktor˝ nem· vlastn˝ n·zov... (_global_string == %s)\n", _global_string);
 			/* doplnenÈ z·tvorky, kvÙli span-ovaËk·m na konci */
 			if(obyc == ANO){
 			/* 2005-03-21: Pridany dalsi typ exportu */
@@ -3383,14 +3393,26 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 						tyzden_zaltara(_local_den.tyzden));
 					strcat(pom, html_text_tyzden_zaltara[_global_jazyk]);
 #else
+					/* dni po popolcovej strede na zaËiatku pÙstneho obdobia - "nult˝" t˝ûdeÚ */
 					if((_local_den.tyzden == 0) && (_local_den.litobd == OBD_POSTNE_I)){
 						/* <font size=-1></font> zmeneny na <span class="small"></span>, 2003-07-14 */
-						sprintf(pom, "%s po Popolcovej strede, %s</span><br><span class=\"small\"> %d",
+						/* 2008-01-05: doplnen· viacjazyËnosù pre text "po Popolcovej strede" */
+						sprintf(pom, "%s %s, %s</span><br><span class=\"small\"> %d",
 							nazov_Dna(_local_den.denvt),
+							(char *)text_PO_POPOLCOVEJ_STREDE[_global_jazyk],
 							nazov_obdobia(_local_den.litobd),
 							tyzden_zaltara(_local_den.tyzden));
 						strcat(pom, html_text_tyzden_zaltara[_global_jazyk]);
-						strcat(pom, "</span>");
+					}
+					/* dni po narodenÌ p·na pred nedeæou v okt·ve narodenia p·na (ak je) maj˙ ûalt·r zo 4. t˝ûdÚa
+					 * 2008-01-05: doplnennÈ, zmenen˝ popis
+					 */
+					else if(_local_den.litobd == OBD_OKTAVA_NARODENIA){
+						sprintf(pom, "%s %s</span><br><span class=\"small\"> %d",
+							nazov_Dna(_local_den.denvt),
+							(char *)text_V_OKTAVE_NARODENIA[_global_jazyk],
+							tyzden_zaltara(_local_den.tyzden));
+						strcat(pom, html_text_tyzden_zaltara[_global_jazyk]);
 					}
 					else{
 						/* <font size=-1></font> zmeneny na <span class="small"></span>, 2003-07-14 */
@@ -3402,11 +3424,11 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 						strcat(_global_string, pom); /* 2006-08-03: prilepujeme nadvakr·t */
 						sprintf(pom, "<br><"HTML_SPAN_SMALL"> %d", tyzden_zaltara(_local_den.tyzden));
 						strcat(pom, html_text_tyzden_zaltara[_global_jazyk]);
-						strcat(pom, "</span>");
 					}
+					// 2008-01-05: zapozn·mkovanÈ, pretoûe bolo navyöe: strcat(pom, "</span>");
 #endif
 					strcat(_global_string, pom);
-				}
+				}/* nie export na viac dnÌ */
 				else 
 					if (typ == EXPORT_DNA_VIAC_DNI_SIMPLE){
 						/* 2005-03-21: Pridane */
@@ -3428,9 +3450,10 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			else{
 				Log("-- Error: _local_den.meno == \"\", avsak obyc != ANO\n");
 			}
-		}
+		}/* nie je to nedeæa, teda iba obyËajn˝ deÚ, ktor˝ nem· vlastn˝ n·zov */
 	}/* if(equals(_local_den.meno, STR_EMPTY)) */
 	else{
+		Log("prid·vam vlastn˝ n·zov...\n");
 		/* vlastny nazov */
 		if(_local_den.denvt == DEN_NEDELA){
 			/* nedela co ma vlastny nazov */
@@ -3455,6 +3478,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		/* zmenene <font color> na <span>, 2003-07-02 */
 		sprintf(pom, ", <"HTML_SPAN_RED">%s</span>",
 			nazov_slavenia(_local_den.typslav));
+		Log("prid·vam typ sl·venia: %s\n", pom);
 		strcat(_global_string, pom);
 	}
 
@@ -3462,6 +3486,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	if(_local_den.typslav_lokal != LOKAL_SLAV_NEURCENE){
 		sprintf(pom, "\n<br> <"HTML_SPAN_RED_SMALL">(%s)</span>\n",
 			nazov_slavenia_lokal[_local_den.typslav_lokal]);
+		Log("prid·vam lokaliz·ciu sl·venia: %s\n", pom);
 		strcat(_global_string, pom);
 	}
 
