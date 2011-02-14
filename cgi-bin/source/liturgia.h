@@ -1032,22 +1032,25 @@ void analyzuj_rok(short int year);
 void _init_dm(_struct_dm a);
 #endif
 
-/* definovany 2003-08-11 na zaklade funkcie _init_dm() */
+/* definovany 2003-08-11 na zaklade funkcie _init_dm() 
+ * upravené 2007-08-16, pretože sa používa aj v _main_dnes()
+ */
 #define _INIT_DM(a) {\
 	a.den = 1;        /* cislo dna mesiaca (1--31) */\
 	a.mesiac = 1;     /* cislo mesiaca (1--12) */\
 	a.rok = 1900;        /* rok */\
 	a.denvt = 0;     /* cislo dna v tyzdni (0--6) DEN_... */ /* deò v roku */\
 	a.denvr = 1;      /* cislo dna v roku (1--365/366) */\
+	/* toto boli "obcianske" zalezitosti */\
 	a.litrok = 'A';     /* liturgicky rok ('A'--'C') */\
 	a.tyzden = 1;     /* tyzden v danom liturgickom obdobi */\
 	a.tyzzal = 1;     /* tyzden v zaltari (vacsinou ((tyzden - 1) % 4) + 1) */\
-	a.litobd = OBD_VIANOCNE_I;    /* liturgicke obdobie, OBD_... */\
-	a.typslav = 1;    /* typ slavenia (1--5): SLAV_... */\
-	a.typslav_lokal = 0; /* LOKAL_SLAV_NEURCENE; nie je obmedzenie na lokalitu, pridané 2005-07-27 */\
-	a.smer = 100;     /* poradove cislo z c.59 Vseobecnych smernic o liturgii hodin a kalendari */\
-	a.prik = PRIKAZANY_SVIATOK;      /* ci je to prikazany sviatok alebo nie: PRIKAZANY_SVIATOK resp. NEPRIKAZANY_SVIATOK */\
-	a.spolcast = MODL_SPOL_CAST_NEURCENA;  /* spolocna cast -- zakodovane data pre svatych o tom, z akej spolocnej casti sa ma modlit */\
+	a.litobd = OBD_CEZ_ROK;    /* liturgicke obdobie, OBD_... */\
+	a.typslav = SLAV_NEURCENE;    /* typ slavenia (1--5): SLAV_... */\
+	a.typslav_lokal = LOKAL_SLAV_NEURCENE; /* LOKAL_SLAV_NEURCENE; nie je obmedzenie na lokalitu, pridané 2005-07-27 */\
+	a.smer = 99;     /* poradove cislo z c.59 Vseobecnych smernic o liturgii hodin a kalendari */\
+	a.prik = NEPRIKAZANY_SVIATOK;      /* ci je to prikazany sviatok alebo nie: PRIKAZANY_SVIATOK resp. NEPRIKAZANY_SVIATOK */\
+	a.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA); /* MODL_SPOL_CAST_NEURCENA; spolocna cast -- zakodovane data pre svatych o tom, z akej spolocnej casti sa ma modlit */\
 	mystrcpy(a.meno, STR_UNDEF, MENO_SVIATKU); /* nazov prip. sviatku */\
 	a.farba = LIT_FARBA_NEURCENA; /* 2006-08-19: pridané */\
 }

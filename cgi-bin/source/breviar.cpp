@@ -87,6 +87,7 @@
 /*   2007-06-01a.D. | pridanÈ OPT6 a OPT7 (pre zobrazenie mesiaca/roka)    */
 /*   2007-08-15a.D. | _export_rozbor_dna_kalendar(typ);                    */
 /*                  - premenovan˝ _main_formular()                         */
+/*   2007-08-16a.D. | oprava Segmentation fault _main_dnes() - chyba init. */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -2256,7 +2257,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 	_global_den.typslav = SLAV_NEURCENE; /* neurcene */
 	_global_den.prik = NEPRIKAZANY_SVIATOK; /* nie je prikazany sviatok */
 	_global_den.typslav_lokal = LOKAL_SLAV_NEURCENE; /* pridanÈ 2005-07-27 */
-	mystrcpy(_global_den.meno, STR_EMPTY, MENO_SVIATKU); /* neurcene */
+	mystrcpy(_global_den.meno, STR_EMPTY, MENO_SVIATKU); /* neurcene; pokus o zmenu 2007-08-16 */
 	_global_den.spolcast = /* pridane 01/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 
@@ -2800,8 +2801,8 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				mystrcpy(_global_den.meno, _global_svaty1.meno, MENO_SVIATKU);
 				_global_den.smer = _global_svaty1.smer;
 				_global_den.typslav = _global_svaty1.typslav;
-				_global_den.spolcast = _global_svaty1.spolcast; /* pridane 22/02/2000A.D. */
 				_global_den.typslav_lokal = _global_svaty1.typslav_lokal; /* pridanÈ 2005-07-27 */
+				_global_den.spolcast = _global_svaty1.spolcast; /* pridane 22/02/2000A.D. */
 				_global_den.prik = _global_svaty1.prik; /* pridane 23/02/2000A.D. */
 				// Log(_global_den); /* kvÙli p·traniu pridanÈ 2006-02-06 */
 				/* pridanÈ 2006-02-06; upravujeme premenn˙ _global_opt3 ak nebola nastaven· MODL_SPOL_CAST_NEBRAT
@@ -3841,6 +3842,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 		}
 
 		/* 2007-08-15: pokus o krajöie zobrazenie formou kalend·ra */
+#undef ZOZNAM_DNI_MESIACOV_OLD
 #ifdef ZOZNAM_DNI_MESIACOV_OLD
 		/* zoznam cisel dni */
 		/* <font size=-1></font> zmeneny na <span class="small"></span>, 2003-07-14 */
@@ -3946,7 +3948,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 		/* prv˝ riadok tabuæky "hlaviËka" so skratkami dnÌ v t˝ûdni */
 		Export("<tr><!--(hlaviËka)-->\n");
 		for(k = DEN_NEDELA; k <= DEN_SOBOTA; k++){
-			Export("<td align=\"right\">%s</td>", nazov_Dn(k));
+			Export("<td align=\"right\">%s</td>", (char *)nazov_Dn(k));
 		}
 		Export("</tr>\n");
 
@@ -3958,7 +3960,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 			j += 7;
 		if(j > 0){
 			for(k = 0; k < j; k++){
-				Export("<td>&nbsp;<!--_(%s)_--></td>", nazov_Dn(k));
+				Export("<td>&nbsp;<!--_(%s)_--></td>", (char *)nazov_Dn(k));
 			}
 		}
 
@@ -3993,7 +3995,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 			j += 7;
 		if(j < 6){
 			for(k = j + 1; k < 7; k++){
-				Export("<td>&nbsp;<!--_(%s)_--></td>", nazov_Dn(k));
+				Export("<td>&nbsp;<!--_(%s)_--></td>", (char *)nazov_Dn(k));
 			}
 		}
 
@@ -5954,11 +5956,17 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 		}
 		_rozbor_dna(datum, dnes.tm_year);
 
-		/* 2007-08-15: doplnenÈ nastavenie _global_den, aspoÚ niektor˝ch hodnÙt */
-		_global_den.den = datum.den;
-		_global_den.mesiac = datum.mesiac;
-		_global_den.rok = dnes.tm_year;
-		_global_den.denvt = dnes.tm_year;
+		/* 2007-08-16: inicializ·cia _global_den sa realizuje v _rozbor_dna(); jej ËiastoËnÈ inicializovanie - porov. niûöie - spÙsobovalo problÈmy. 
+		 *  // 2007-08-16: pokus, ktor˝ niË nerieöil: doplnen· inicializ·cia ostatn˝ch hodnÙt - Segmentation fault pri volanÌ init_global_string() - podæa _rozbor_dna()
+		 * 	// _INIT_DM(_global_den);
+		 * 	// 2007-08-15: doplnenÈ nastavenie _global_den, aspoÚ niektor˝ch hodnÙt
+		 * 	_global_den.den = datum.den;
+		 * 	_global_den.mesiac = datum.mesiac;
+		 * 	_global_den.rok = dnes.tm_year;
+		 * 	// _global_den.denvt = dnes.tm_year; // tu bola z·kladn· prÌËina Segmentation fault :) to je tak, keÔ niekto zmieöa jabÂËka s hruökami :)
+		 *	// malo by byù: 
+		 *	_global_den.denvt = den_v_tyzdni(datum.den, datum.mesiac, dnes.tm_year);
+		 */
 
 		_export_rozbor_dna(EXPORT_DNA_DNES);
 
