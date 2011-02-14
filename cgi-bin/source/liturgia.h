@@ -583,7 +583,11 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_DRUHA_VELK_NEDELA  19
 #define LOKAL_SLAV_KONIEC_OKTAVY_NAR  20
 #define LOKAL_SLAV_KONIEC_OKTAVY_NAR_CZ		21
-#define LOKAL_SLAV_PRAHA_PATRON		22
+#define LOKAL_SLAV_PRAHA_PATRON				22
+#define LOKAL_SLAV_PRAHA					23
+#define LOKAL_SLAV_BRNO						24
+#define LOKAL_SLAV_MORAVA_SPOMIENKA			25
+#define LOKAL_SLAV_DRUHA_VELK_NEDELA_CZ		26
 
 /* prikazany / neprikazany sviatok */
 #define PRIKAZANY_SVIATOK 1
@@ -1015,6 +1019,23 @@ _struct_sc _decode_spol_cast(int);
 
 extern const char *text_JAN_KRST[];
 extern const char *text_POPOLCOVA_STREDA[];
+extern const char *text_NANEBOVSTUPENIE_PANA[];
+extern const char *text_VELKONOCNA_NEDELA[];
+extern const char *text_NEDELA_PANOVHO_ZMRTVYCHVSTANIA[];
+extern const char *text_NEDELA_VO_VELKONOCNEJ_OKTAVE[];
+extern const char *text_DEN_VO_VELKONOCNEJ_OKTAVE[];
+extern const char *text_NAJSVATEJSEJ_TROJICE[];
+extern const char *text_KRISTA_KRALA[];
+extern const char *text_NAJSV_KRISTOVHO_TELA_A_KRVI[];
+extern const char *text_NAJSV_SRDCA_JEZISOVHO[];
+extern const char *text_NEPOSKVRNENEHO_SRDCA_PM[];
+extern const char *text_NARODENIE_PANA[];
+extern const char *text_ZOSLANIE_DUCHA_SVATEHO[];
+extern const char *text_PRVA_ADVENTNA_NEDELA[];
+extern const char *text_NEDELA_SV_RODINY[];
+extern const char *text_SPOMIENKA_PM_V_SOBOTU[];
+
+extern const char *text_DEC_08[];
 
 #endif /* __LITURGIA_H_ */
 

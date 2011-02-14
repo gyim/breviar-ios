@@ -156,6 +156,8 @@ extern const char *text_MAR_19[];
 extern const char *text_MAR_23[];
 extern const char *text_MAR_25[];
 
+extern const char *text_POPOLCOVA_STREDA[];
+
 extern const char *text_APR_02[];
 extern const char *text_APR_04[];
 extern const char *text_APR_05[];
@@ -172,6 +174,46 @@ extern const char *text_APR_28_2[];
 extern const char *text_APR_29[];
 extern const char *text_APR_30_1[];
 extern const char *text_APR_30_2[];
+
+extern const char *text_MAJ_01[];
+extern const char *text_MAJ_02[];
+extern const char *text_MAJ_03[];
+extern const char *text_MAJ_06[];
+extern const char *text_MAJ_08[];
+extern const char *text_MAJ_12_1[];
+extern const char *text_MAJ_12_2[];
+extern const char *text_MAJ_12_3[];
+extern const char *text_MAJ_14[];
+extern const char *text_MAJ_16[];
+extern const char *text_MAJ_18[];
+extern const char *text_MAJ_20_1[];
+extern const char *text_MAJ_20_2[];
+extern const char *text_MAJ_21[];
+extern const char *text_MAJ_25_1[];
+extern const char *text_MAJ_25_2[];
+extern const char *text_MAJ_25_3[];
+extern const char *text_MAJ_26[];
+extern const char *text_MAJ_27[];
+extern const char *text_MAJ_30[];
+extern const char *text_MAJ_31[];
+
+extern const char *text_NANEBOVSTUPENIE_PANA[];
+extern const char *text_VELKONOCNA_NEDELA[];
+extern const char *text_NEDELA_PANOVHO_ZMRTVYCHVSTANIA[];
+extern const char *text_NEDELA_VO_VELKONOCNEJ_OKTAVE[];
+extern const char *text_DEN_VO_VELKONOCNEJ_OKTAVE[];
+extern const char *text_NAJSVATEJSEJ_TROJICE[];
+extern const char *text_KRISTA_KRALA[];
+extern const char *text_NAJSV_KRISTOVHO_TELA_A_KRVI[];
+extern const char *text_NAJSV_SRDCA_JEZISOVHO[];
+extern const char *text_NEPOSKVRNENEHO_SRDCA_PM[];
+extern const char *text_NARODENIE_PANA[];
+extern const char *text_ZOSLANIE_DUCHA_SVATEHO[];
+extern const char *text_PRVA_ADVENTNA_NEDELA[];
+extern const char *text_NEDELA_SV_RODINY[];
+extern const char *text_SPOMIENKA_PM_V_SOBOTU[];
+
+extern const char *text_DEC_08[];
 
 #endif /* __DBZALTAR_H_ */
 

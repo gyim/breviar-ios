@@ -390,6 +390,10 @@ const char *nazov_slavenia_lokal[] =
 ,"koniec Oktávy narodenia Pána"
 ,"konec Oktávu Narození Pánì"
 ,"hlavního patrona pražské arcidiecéze"
+,"v pražské arcidiecézi"
+,"v brnìnské diecézi"
+,"na Moravì: památka"
+,"Druhá nedìle velikonoèní"
 };
 
 const char *rimskymi_tyzden_zaltara[] =
@@ -1026,5 +1030,158 @@ const char *text_APR_30_2[] =
  "Sv. Zikmunda, muèedníka",
  "", ""};
 
+const char *text_MAJ_01[] =
+{"Sv. Jozefa, robotníka",
+ "Sv. Josefa, Dìlníka",
+ "", ""};
+const char *text_MAJ_02[] =
+{"Sv. Atanáza, biskupa a uèite¾a Cirkvi",
+ "Sv. Atanáše, biskupa a uèitele církve",
+ "", ""};
+const char *text_MAJ_03[] =
+{"Sv. Filipa a Jakuba, apoštolov",
+ "Sv. Filipa a Jakuba, apoštolù",
+ "", ""};
+const char *text_MAJ_06[] =
+{"(na Slovensku nie je)",
+ "Sv. Jana Sarkandra, knìze a muèedníka",
+ "", ""};
+const char *text_MAJ_08[] =
+{"(na Slovensku nie je)",
+ "Panny Marie, Prostøednice všech milostí",
+ "", ""};
+const char *text_MAJ_12_1[] =
+{"Sv. Nerea a Achila, muèeníkov",
+ "Sv. Nerea a Achillea, muèedníkù",
+ "", ""};
+const char *text_MAJ_12_2[] =
+{"Sv. Pankráca, muèeníka",
+ "Sv. Pankráce, muèedníka",
+ "", ""};
+const char *text_MAJ_12_3[] =
+{"(na Slovensku nie je)",
+ "Výroèí posvìcení katedrály sv. Víta",
+ "", ""};
+const char *text_MAJ_14[] =
+{"Sv. Mateja, apoštola",
+ "Sv. Matìje, apoštola",
+ "", ""};
+const char *text_MAJ_16[] =
+{"Sv. Jána Nepomuckého, kòaza a muèeníka",
+ "Sv. Jana Nepomuckého, knìze a muèedníka, hlavního patrona Èech",
+ "", ""};
+const char *text_MAJ_18[] =
+{"Sv. Jána I., pápeža a muèeníka",
+ "Sv. Jana I., papeže a muèedníka",
+ "", ""};
+const char *text_MAJ_20_1[] =
+{"(na Slovensku nie je)",
+ "Sv. Klementa Marie Hofbauera, knìze",
+ "", ""};
+const char *text_MAJ_20_2[] =
+{"Sv. Bernardína Sienského, kòaza",
+ "Sv. Bernardina Sienského, knìze",
+ "", ""};
+const char *text_MAJ_21[] =
+{"(na Slovensku nie je)",
+ "Výroèí posvìcení katedrály sv. Petra a Pavla",
+ "", ""};
+const char *text_MAJ_25_1[] =
+{"Sv. Bédu Ctihodného, kòaza a uèite¾a Cirkvi",
+ "Sv. Bedy Ctihodného, knìze a uèitele církve",
+ "", ""};
+const char *text_MAJ_25_2[] =
+{"Sv. Gregora VII., pápeža",
+ "Sv. Øehoøe VII., papeže",
+ "", ""};
+const char *text_MAJ_25_3[] =
+{"Sv. Márie Magdalény de’ Pazzi, panny",
+ "Sv. Marie Magdalény de’ Pazzi, panny",
+ "", ""};
+const char *text_MAJ_26[] =
+{"Sv. Filipa Neriho, kòaza",
+ "Sv. Filipa Neriho, knìze",
+ "", ""};
+const char *text_MAJ_27[] =
+{"Sv. Augustína z Canterbury, biskupa",
+ "Sv. Augustina z Canterbury, biskupa",
+ "", ""};
+const char *text_MAJ_30[] =
+{"(na Slovensku nie je)",
+ "Sv. Zdislavy",
+ "", ""};
+const char *text_MAJ_31[] =
+{"Navštívenie prebl. Panny Márie", /* na Slovensku sa slávi 2. júla */
+ "Navštívení Panny Marie",
+ "", ""};
+
+const char *text_NANEBOVSTUPENIE_PANA[] =
+{"Nanebovstúpenie Pána",
+ "Nanebevstoupení Pánì",
+ "", ""};
+const char *text_VELKONOCNA_NEDELA[] =
+{"Ve¾konoèná nede¾a",
+ "Nedìle Zmrtvýchvstání Pánì",
+ "", ""};
+const char *text_NEDELA_PANOVHO_ZMRTVYCHVSTANIA[] =
+{" - Nede¾a Pánovho zmàtvychvstania",
+ "", /* "Nedìle velikonoèní" */
+ "", ""};
+const char *text_NEDELA_VO_VELKONOCNEJ_OKTAVE[] =
+{"Nede¾a vo Ve¾konoènej oktáve",
+ "Nedìle v oktávu velikonoèním",
+ "", ""};
+const char *text_DEN_VO_VELKONOCNEJ_OKTAVE[] =
+{"Ve¾konoèn%c %s",
+ "%s velikonoèní",
+ "", ""};
+
+const char *text_NAJSVATEJSEJ_TROJICE[] =
+{"Najsvätejšej Trojice",
+ "Nejsvìtìjší Trojice",
+ "", ""};
+const char *text_KRISTA_KRALA[] =
+{"Krista Krá¾a",
+ "Ježíše Krista Krále",
+ "", ""};
+const char *text_NAJSV_KRISTOVHO_TELA_A_KRVI[] =
+{"Najsvätejšieho Kristovho tela a krvi",
+ "Tìla a krve Pánì",
+ "", ""};
+const char *text_NAJSV_SRDCA_JEZISOVHO[] =
+{"Najsvätejšieho Srdca Ježišovho",
+ "Nejsvìtìjšího Srdce Ježíšova",
+ "", ""};
+const char *text_NEPOSKVRNENEHO_SRDCA_PM[] =
+{"Nepoškvrneného Srdca prebl. Panny Márie",
+ "Neposkvrnìného Srdce Panny Marie",
+ "", ""};
+const char *text_NARODENIE_PANA[] =
+{"Narodenie Pána",
+ "Narození Pánì",
+ "", ""};
+
+const char *text_ZOSLANIE_DUCHA_SVATEHO[] =
+{"Zoslanie Ducha Svätého",
+ "Seslání Ducha svatého",
+ "", ""};
+
+const char *text_PRVA_ADVENTNA_NEDELA[] =
+{"Prvá adventná nede¾a",
+ "První nedìle adventní",
+ "", ""};
+const char *text_NEDELA_SV_RODINY[] =
+{"Svätej rodiny Ježiša, Márie a Jozefa",
+ "Sv. Rodiny Ježíše, Marie a Josefa",
+ "", ""};
+const char *text_SPOMIENKA_PM_V_SOBOTU[] =
+{"Spomienka Panny Márie v sobotu",
+ "Sobotní památka Panny Marie",
+ "", ""};
+
+const char *text_DEC_08[] =
+{"Nepoškvrnené poèatie Panny Márie",
+ "Panny Marie, poèaté bez poskvrny prvotního høíchu",
+ "", ""};
 
 #endif /* __HODIN_H */

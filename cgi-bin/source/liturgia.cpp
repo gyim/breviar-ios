@@ -994,7 +994,7 @@ void init_global_pm_sobota(void){
 	_global_pm_sobota.smer = 12; /* lubovolna spomienka */
 	_global_pm_sobota.typslav = SLAV_LUB_SPOMIENKA; /* lubovolna spomienka */
 	_global_pm_sobota.typslav_lokal = LOKAL_SLAV_NEURCENE; /* nie je obmedzenie na lokalitu, pridané 2005-07-27 */
-	mystrcpy(_global_pm_sobota.meno, "Spomienka Panny Márie v sobotu", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
+	mystrcpy(_global_pm_sobota.meno, text_SPOMIENKA_PM_V_SOBOTU[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	_global_pm_sobota.prik    = NEPRIKAZANY_SVIATOK; /* pridane 27/04/2000A.D. */
 	_global_pm_sobota.spolcast = /* pridane 27/04/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
@@ -1032,7 +1032,7 @@ void _dm_nanebovstupenie(int rok, int _vn){
 /*	_global_result.denvt   = DEN_STVRTOK; pôvodná poznámka: 2006-02-09: pridané, na Slovensku sa slávi vo štvrtok */
 	_global_result.smer    = 2;
 	_global_result.prik    = PRIKAZANY_SVIATOK;
-	mystrcpy(_global_result.meno, "Nanebovstúpenie Pána", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
+	mystrcpy(_global_result.meno, text_NANEBOVSTUPENIE_PANA[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 }
@@ -1048,7 +1048,7 @@ void _dm_zoslanie_ducha(int rok, int _vn){
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D., aby tam nebolo 'hausnumero' */
 	_global_result.smer    = 2;
 	_global_result.prik    = PRIKAZANY_SVIATOK;
-	mystrcpy(_global_result.meno, "Zoslanie Ducha Svätého", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
+	mystrcpy(_global_result.meno, text_ZOSLANIE_DUCHA_SVATEHO[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 }
@@ -1063,7 +1063,7 @@ void _dm_prva_adventna_nedela(int rok, int p2){
 	_global_result.tyzden  = 1; /* 1. adventna nedela */
 	_global_result.smer    = 2;
 	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 06/03/2000A.D. */
-	mystrcpy(_global_result.meno, "Prvá adventná nede¾a", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
+	mystrcpy(_global_result.meno, text_PRVA_ADVENTNA_NEDELA[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D. */
@@ -1087,7 +1087,7 @@ void _dm_svatej_rodiny(int rok){
 	_global_result.smer    = 5;
 	_global_result.tyzden  = 1; /* 1. tyzden vianocneho obdobia, oktava */
 	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 06/03/2000A.D. */
-	mystrcpy(_global_result.meno, "Svätej rodiny Ježiša, Márie a Jozefa", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
+	mystrcpy(_global_result.meno, text_NEDELA_SV_RODINY[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D. */
@@ -1121,7 +1121,8 @@ void _dm_velkonocna_nedela(int rok, int _vn){
 	_global_result.litobd  = OBD_VELKONOCNE_TROJDNIE;
 	_global_result.tyzden  = 1; /* 1. velkonocna nedela */
 	_global_result.smer    = 1;
-	mystrcpy(_global_result.meno, "Ve¾konoèná nede¾a - Nede¾a Pánovho zmàtvychvstania", MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
+	mystrcpy(_global_result.meno, text_VELKONOCNA_NEDELA[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
+	strcat(_global_result.meno, text_NEDELA_PANOVHO_ZMRTVYCHVSTANIA[_global_jazyk]); /* 2006-08-16 */
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 27/04/2000A.D. */

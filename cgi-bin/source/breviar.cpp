@@ -2293,16 +2293,25 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 					if(_global_den.denvr == VN2){
 						/* 2. velkonocna nedela */
 						_rozbor_dna_LOG("/* 2. velkonocna nedela */\n");
-						mystrcpy(_global_den.meno, "Nedeæa vo VeækonoËnej okt·ve", MENO_SVIATKU);
+						mystrcpy(_global_den.meno, text_NEDELA_VO_VELKONOCNEJ_OKTAVE[_global_jazyk], MENO_SVIATKU);
 						/* 2006-02-08: podreùazec (2. veækonoËn· nedeæa) rieöen˝ pomocou "typslav_lokal" */
-						_global_den.typslav_lokal = LOKAL_SLAV_DRUHA_VELK_NEDELA;
+						if(_global_jazyk == JAZYK_SK)
+							_global_den.typslav_lokal = LOKAL_SLAV_DRUHA_VELK_NEDELA;
+						else if(_global_jazyk == JAZYK_CZ)
+							_global_den.typslav_lokal = LOKAL_SLAV_DRUHA_VELK_NEDELA_CZ;
 					}
 					else{
-						/* velkonocna oktava - vsedny den */
-						_rozbor_dna_LOG("/* velkonocna oktava - vsedny den */\n");
-						sprintf(_global_den.meno, "VeækonoËn%c %s",
-							koncovka_dna(_global_den.denvt),
-							nazov_dna(_global_den.denvt));
+						/* veækonoËn· okt·va - 'vöedn˝ deÚ' vo veækonoËnej okt·ve */
+						_rozbor_dna_LOG("/* veækonoËn· okt·va - 'vöedn˝ deÚ' vo veækonoËnej okt·ve */\n");
+						if(_global_jazyk == JAZYK_SK){
+							sprintf(_global_den.meno, text_DEN_VO_VELKONOCNEJ_OKTAVE[_global_jazyk],
+								koncovka_dna(_global_den.denvt),
+								nazov_dna(_global_den.denvt));
+						}
+						else if(_global_jazyk == JAZYK_CZ){
+							sprintf(_global_den.meno, text_DEN_VO_VELKONOCNEJ_OKTAVE[_global_jazyk],
+								nazov_Dna(_global_den.denvt));
+						}
 					}
 				}
 			}/* if(_global_den.denvr <= VN2) */
@@ -2352,14 +2361,14 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 						_rozbor_dna_LOG("/* najsv. trojice */\n");
 						_global_den.smer = 3; /* slavnosti pana */
 						_global_den.typslav = SLAV_SLAVNOST;
-						mystrcpy(_global_den.meno, "Najsv‰tejöej Trojice", MENO_SVIATKU);
+						mystrcpy(_global_den.meno, text_NAJSVATEJSEJ_TROJICE[_global_jazyk], MENO_SVIATKU);
 					}
 					else if(_global_den.tyzden == KRISTA_KRALA){
 						/* krista krala */
 						_rozbor_dna_LOG("/* krista krala */\n");
 						_global_den.smer = 3; /* slavnosti pana */
 						_global_den.typslav = SLAV_SLAVNOST;
-						mystrcpy(_global_den.meno, "Krista Kr·æa", MENO_SVIATKU);
+						mystrcpy(_global_den.meno, text_KRISTA_KRALA[_global_jazyk], MENO_SVIATKU);
 					}
 					else{
 						_global_den.smer = 6; /* nedele vianocneho obdobia a obdobia "cez rok" */
@@ -2374,14 +2383,14 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 						_global_den.smer = 3; /* slavnosti pana */
 						_global_den.typslav = SLAV_SLAVNOST;
 						_global_den.prik = PRIKAZANY_SVIATOK;
-						mystrcpy(_global_den.meno, "Najsv‰tejöieho Kristovho tela a krvi", MENO_SVIATKU);
+						mystrcpy(_global_den.meno, text_NAJSV_KRISTOVHO_TELA_A_KRVI[_global_jazyk], MENO_SVIATKU);
 					}
 					else if(_global_den.denvr == SRDCA){
 						/* srdca jezisovho == ZDS + 19 */
 						_rozbor_dna_LOG("/* srdca jezisovho */\n");
 						_global_den.smer = 3; /* slavnosti pana */
 						_global_den.typslav = SLAV_SLAVNOST;
-						mystrcpy(_global_den.meno, "Najsv‰tejöieho Srdca Jeûiöovho", MENO_SVIATKU);
+						mystrcpy(_global_den.meno, text_NAJSV_SRDCA_JEZISOVHO[_global_jazyk], MENO_SVIATKU);
 					}
 					else if(_global_den.denvr == SRDPM){
 						/* srdca prebl. panny marie == ZDS + 20 */
@@ -2395,7 +2404,7 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 						 */
 						_global_den.smer = 10;
 						_global_den.typslav = SLAV_SPOMIENKA;
-						mystrcpy(_global_den.meno, "NepoökvrnenÈho Srdca prebl. Panny M·rie", MENO_SVIATKU);
+						mystrcpy(_global_den.meno, text_NEPOSKVRNENEHO_SRDCA_PM[_global_jazyk], MENO_SVIATKU);
 						_global_den.spolcast = /* pridane 04/07/2000A.D. */
 							_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 						_global_opt3 = MODL_SPOL_CAST_PANNA_MARIA;
@@ -2452,7 +2461,7 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 						_global_den.typslav = SLAV_SLAVNOST;
 						_global_den.smer = 2; /* narodenie pana */
 						_global_den.prik = PRIKAZANY_SVIATOK;
-						mystrcpy(_global_den.meno, "Narodenie P·na", MENO_SVIATKU);
+						mystrcpy(_global_den.meno, text_NARODENIE_PANA[_global_jazyk], MENO_SVIATKU);
 					}
 					else if(_global_den.denvr == ROD){
 						/* nedela sv. rodiny */
@@ -5495,7 +5504,7 @@ void _main_analyza_roku(char *rok){
 		}
 		else{
 			if(i == VELKONOCNA_NEDELA)
-				mystrcpy(_global_r._den[i].meno, "VeækonoËn· nedeæa", MENO_SVIATKU);
+				mystrcpy(_global_r._den[i].meno, text_VELKONOCNA_NEDELA[_global_jazyk], MENO_SVIATKU);
 			Export("<tr valign=baseline><td>%s</td><td>%s</td><td>(%s, %d. deÚ v roku)</td></tr>\n",
 				_global_r._den[i].meno,
 				_global_link,
@@ -5526,8 +5535,8 @@ void _main_analyza_roku(char *rok){
 	Export("</td></tr>\n");
 	/* nanebovstupenie pana, pridane 2003-07-01 */
 	vytvor_global_link(_global_r._NANEBOVSTUPENIE_PANA.den, _global_r._NANEBOVSTUPENIE_PANA.mesiac, year, LINK_DEN_MESIAC);
-	Export("<tr valign=baseline>\n<td>%s</td><td>Nanebovst˙penie P·na</td></tr>\n",
-		_global_link);
+	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n",
+		_global_link, (char *)text_NANEBOVSTUPENIE_PANA[_global_jazyk]);
 	/* najsv. kristovho tela a krvi, pridane 2003-07-01 */
 	/* kedze nie je v strukture _global_r, treba ho spocitat podla zoslania ducha sv.
 	 * ide vlastne o datum (cislo v roku) pre ZDS + 11, ako je definovany TELAKRVI,
@@ -5550,12 +5559,12 @@ void _main_analyza_roku(char *rok){
 		_global_link);
 	/* 8. decembra */
 	vytvor_global_link(8, 12, year, LINK_DEN_MESIAC);
-	Export("<tr valign=baseline>\n<td>%s</td><td>NepoökvrnenÈ poËatie Panny M·rie</td></tr>\n",
-		_global_link);
+	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n",
+		_global_link, text_DEC_08[_global_jazyk]);
 	/* 25. decembra */
 	vytvor_global_link(25, 12, year, LINK_DEN_MESIAC);
-	Export("<tr valign=baseline>\n<td>%s</td><td>Narodenie P·na</td></tr>\n",
-		_global_link);
+	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n",
+		_global_link, text_NARODENIE_PANA[_global_jazyk]);
 
 	Export("</table>\n");
 
