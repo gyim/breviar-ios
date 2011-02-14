@@ -1115,7 +1115,9 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 							Log("  rusim writing to export file, kvoli V.O. Aleluja...\n");
 						}
 						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
+#if defined(EXPORT_HTML_SPECIALS)
 							Export("nie je velkonocne obdobie");
+#endif
 							write = 1;
 							Log("  opat writing to export file, end of V.O. Aleluja.\n");
 						}
@@ -1174,6 +1176,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
  */
 #define je_tedeum (type == MODL_POSV_CITANIE) && (((_global_den.denvt == DEN_NEDELA) && (_global_den.litobd != OBD_POSTNE_I) && (_global_den.litobd != OBD_POSTNE_II_VELKY_TYZDEN)) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA))
 
+/* 2007-11-20: doplnené @ifdef EXPORT_HTML_SPECIALS */
 void interpretParameter(short int type, char *paramname){
 	char path[MAX_STR] = STR_EMPTY;
 	mystrcpy(path, include_dir, MAX_STR);
@@ -1183,29 +1186,44 @@ void interpretParameter(short int type, char *paramname){
 
 	if(equals(paramname, PARAM_ALELUJA_NIE_V_POSTE_BEGIN)){
 		if(!je_post){
-			Export("nie je postne obdobie-->");
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("nie je postne obdobie");
+#endif
+			Export("-->");
 		}
 	}
 	else if(equals(paramname, PARAM_ALELUJA_NIE_V_POSTE_END)){
 		if(!je_post){
-			Export("<!--nie je postne obdobie");
+			Export("<!--");
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("nie je postne obdobie");
+#endif
 		}
 	}
 	else if(equals(paramname, PARAM_ALELUJA_VO_VELKONOCNOM_BEGIN)){
 		if(!je_velka_noc){
-			Export("nie je velkonocne obdobie-->");
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("nie je velkonocne obdobie");
+#endif
+			Export("-->");
 		}
 	}
 	else if(equals(paramname, PARAM_ALELUJA_VO_VELKONOCNOM_END)){
 		if(!je_velka_noc){
-			Export("<!--nie je velkonocne obdobie");
+			Export("<!--");
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("nie je velkonocne obdobie");
+#endif
 		}
 	}
 	/* 2005-08-15: Pridané parsovanie PARAM_HYMNUS_34_OCR_INY_BEGIN/END */
 	else if(equals(paramname, PARAM_HYMNUS_34_OCR_INY_BEGIN)){
 		if(je_34_ocr){
 			Log("JE 34.týždeò OCR... BEGIN\n");
-			Export("je 34. tyzden OCR-->");
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("je 34. tyzden OCR");
+#endif
+			Export("-->");
 		}
 		else
 			Log("NIE JE 34.týždeò OCR... BEGIN\n");
@@ -1213,7 +1231,10 @@ void interpretParameter(short int type, char *paramname){
 	else if(equals(paramname, PARAM_HYMNUS_34_OCR_INY_END)){
 		if(je_34_ocr){
 			Log("JE 34.týždeò OCR... END\n");
-			Export("<!--je 34. tyzden OCR");
+			Export("<!--");
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("je 34. tyzden OCR");
+#endif
 		}
 		else
 			Log("NIE JE 34.týždeò OCR... END\n");
@@ -1221,14 +1242,19 @@ void interpretParameter(short int type, char *paramname){
 	else if(equals(paramname, PARAM_ALELUJA_ALELUJA_BEGIN)){
 		if(_global_skip_in_prayer == ANO){
 			/* ak zakoncenie preskakujem, tak musim sa tvarit, ze nic */
+#if defined(EXPORT_HTML_SPECIALS)
 			Export("{AAB:skip}");
+#endif
 			Log("  ALELUJA_ALELUJA_BEGIN: skipping -- because skipping ZAKONCENIE\n");
 		}
 		else{
 			/* Od nedele P novho zmrtvychvstania a§ do Druhej velkonocnej nedele
 			 * vr tane, ako aj na druh‚ veçpery sl vnosti Zoslania Ducha Sv„t‚ho */
 			if(je_aleluja_aleluja){
-				Export("velkonocna oktava-->");
+#if defined(EXPORT_HTML_SPECIALS)
+				Export("velkonocna oktava");
+#endif
+				Export("-->");
 				Log("  ALELUJA_ALELUJA_BEGIN: copying\n");
 			}
 			else{
@@ -1240,14 +1266,19 @@ void interpretParameter(short int type, char *paramname){
 		if(_global_skip_in_prayer == ANO){
 			/* ak zakoncenie preskakujem, tak musim sa tvarit, ze nic */
 			/* preto otvorim poznamku, ktora sa zacala */
+#if defined(EXPORT_HTML_SPECIALS)
 			Export("{AAE:skip}");
+#endif
 			Log("  ALELUJA_ALELUJA_END: skipping -- because skipping ZAKONCENIE\n");
 		}
 		else{
 			/* Od nedele Panovho zmrtvychvstania az do Druhej velkonocnej nedele
 			 * vratane, ako aj na druhe vespery slavnosti Zoslania Ducha Svateho */
 			if(je_aleluja_aleluja){
-				Export("<!--velkonocna oktava");
+				Export("<!--");
+#if defined(EXPORT_HTML_SPECIALS)
+				Export("velkonocna oktava");
+#endif
 				Log("  ALELUJA_ALELUJA_END: copying\n");
 			}
 			else{
@@ -1261,20 +1292,28 @@ void interpretParameter(short int type, char *paramname){
 	else if(equals(paramname, PARAM_OTCENAS_BEGIN)){
 		if(_global_opt1 == ANO){
 			/* zobrazit Otcenas */
-			Export("zobrazit Otcenas-->");
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("zobrazit Otcenas");
+#endif
+			Export("-->");
 			Log("  `Otcenas': begin...\n");
 		}
 		else{
 			/* nezobrazovat Otcenas */
 			_global_skip_in_prayer = ANO;
+#if defined(EXPORT_HTML_SPECIALS)
 			Export("nezobrazit Otcenas");
+#endif
 			Log("  `Otcenas' skipping...\n");
 		}
 	}
 	else if(equals(paramname, PARAM_OTCENAS_END)){
 		if(_global_opt1 == ANO){
 			/* zobrazit Otcenas */
-			Export("<!--zobrazit Otcenas");
+			Export("<!--");
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("zobrazit Otcenas");
+#endif
 			Log("  `Otcenas': copied.\n");
 		}
 		else{
@@ -1287,11 +1326,15 @@ void interpretParameter(short int type, char *paramname){
 		if(_global_opt1 == NIE){
 			/* nezobrazovat Benediktus/Magnifikat */
 			_global_skip_in_prayer = ANO;
+#if defined(EXPORT_HTML_SPECIALS)
 			Export("nezobrazit Benediktus/Magnifikat");
+#endif
 			Log("  `Benediktus/Magnifikat' skipping...\n");
 		}
 		else{
+#if defined(EXPORT_HTML_SPECIALS)
 			Export("zobrazit Benediktus/Magnifikat");
+#endif
 			Log("  `Benediktus/Magnifikat': begin...\n");
 		}
 	}
@@ -1302,7 +1345,9 @@ void interpretParameter(short int type, char *paramname){
 			Log("  `Benediktus/Magnifikat' skipped.\n");
 		}
 		else{
+#if defined(EXPORT_HTML_SPECIALS)
 			Export("zobrazit Benediktus/Magnifikat");
+#endif
 			Log("  `Benediktus/Magnifikat' copied.\n");
 		}
 	}
@@ -1311,11 +1356,15 @@ void interpretParameter(short int type, char *paramname){
 		if(_global_opt_tedeum == NIE){ /* 2007-05-18 pridaná podmienka na tedeum */
 			/* nezobrazovat Te Deum */
 			_global_skip_in_prayer = ANO;
+#if defined(EXPORT_HTML_SPECIALS)
 			Export("nezobrazit Te Deum");
+#endif
 			Log("  `Te Deum' skipping...\n");
 		}
 		else{
+#if defined(EXPORT_HTML_SPECIALS)
 			Export("zobrazit Te Deum");
+#endif
 			Log("  `Te Deum': begin...\n");
 		}
 	}
@@ -1326,7 +1375,9 @@ void interpretParameter(short int type, char *paramname){
 			Log("  `Te Deum' skipped.\n");
 		}
 		else{
+#if defined(EXPORT_HTML_SPECIALS)
 			Export("zobrazit Te Deum");
+#endif
 			Log("  `Te Deum' copied.\n");
 		}
 	}
@@ -1334,11 +1385,16 @@ void interpretParameter(short int type, char *paramname){
 		if(_global_opt1 == NIE){
 			/* nezobrazit zakoncenie */
 			_global_skip_in_prayer = ANO;
+#if defined(EXPORT_HTML_SPECIALS)
 			Export("nezobrazit zakoncenie");
+#endif
 			Log("  `zakoncenie' skipping...\n");
 		}
 		else{
-			Export("zobrazit zakoncenie-->");
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("zobrazit zakoncenie");
+#endif
+			Export("-->");
 			Log("  `zakoncenie': begin...\n");
 		}
 	}
@@ -1349,7 +1405,10 @@ void interpretParameter(short int type, char *paramname){
 			Log("  `zakoncenie' skipped.\n");
 		}
 		else{
-			Export("<!--zobrazit zakoncenie");
+			Export("<!--");
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("zobrazit zakoncenie");
+#endif
 			Log("  `zakoncenie' copied.\n");
 		}
 	}
@@ -1358,11 +1417,15 @@ void interpretParameter(short int type, char *paramname){
 		if(_global_pocet_zalmov_kompletorium == 1){
 			/* nezobrazova druhý žalm/antifónu pre kompletórium, ktoré má len 1 žalm+antifónu */
 			_global_skip_in_prayer = ANO;
+#if defined(EXPORT_HTML_SPECIALS)
 			Export("nezobrazova druhý žalm/antifónu pre kompletórium, ktoré má len 1 žalm+antifónu");
+#endif
 			Log("  `2. žalm+antifóna v kompletóriu' skipping...\n");
 		}
 		else{
+#if defined(EXPORT_HTML_SPECIALS)
 			Export("zobrazova druhý žalm/antifónu pre kompletórium, ktoré má aj 2. žalm+antifónu");
+#endif
 			Log("  `2. žalm+antifóna v kompletóriu': begin...\n");
 		}
 	}
@@ -1373,7 +1436,9 @@ void interpretParameter(short int type, char *paramname){
 			Log("  `2. žalm+antifóna v kompletóriu' skipped.\n");
 		}
 		else{
+#if defined(EXPORT_HTML_SPECIALS)
 			Export("zobrazova druhý žalm/antifónu pre kompletórium, ktoré má 2. žalm+antifónu");
+#endif
 			Log("  `2. žalm+antifóna v kompletóriu' copied.\n");
 		}
 	}
@@ -1383,13 +1448,18 @@ void interpretParameter(short int type, char *paramname){
 		/* 2007-05-18: zosilnená podmienka, aby Sláva Otcu nebolo pre špeciálne prípady */
 		if(_global_opt1 == ANO && (_global_pocet_slava_otcu != 2 || !equals(_global_modl_ranne_chvaly.zalm2.anchor, "DAN3,57-88.56"))){
 			/* zobrazit Slava Otcu */
-			Export("zobrazit Slava Otcu(%d)-->", _global_pocet_slava_otcu);
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("zobrazit Slava Otcu(%d)", _global_pocet_slava_otcu);
+#endif
+			Export("-->");
 			Log("  `Slava Otcu': begin...\n");
 		}
 		else{
 			/* nezobrazovat Slava Otcu */
 			_global_skip_in_prayer = ANO;
+#if defined(EXPORT_HTML_SPECIALS)
 			Export("nezobrazit Slava Otcu (%d)", _global_pocet_slava_otcu);
+#endif
 			Log("  `Slava Otcu' skipping...\n");
 		}
 	}
@@ -1397,7 +1467,10 @@ void interpretParameter(short int type, char *paramname){
 		/* 2007-05-18: zosilnená podmienka, aby Sláva Otcu nebolo pre špeciálne prípady */
 		if(_global_opt1 == ANO && (_global_pocet_slava_otcu != 2 || !equals(_global_modl_ranne_chvaly.zalm2.anchor, "DAN3,57-88.56"))){
 			/* zobrazit Slava Otcu */
-			Export("<!--zobrazit Slava Otcu(%d)", _global_pocet_slava_otcu);
+			Export("<!--");
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("zobrazit Slava Otcu(%d)", _global_pocet_slava_otcu);
+#endif
 			Log("  `Slava Otcu': copied.\n");
 		}
 		else{
@@ -1411,20 +1484,28 @@ void interpretParameter(short int type, char *paramname){
 	else if(equals(paramname, PARAM_SKRY_ANTIFONU_BEGIN)){
 		if(_global_ant_mcd_rovnake == NIE){
 			/* zobrazit nazvy antifon */
-			Export("zobrazit ant.-->");
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("zobrazit ant.");
+#endif
+			Export("-->");
 			Log("  `Ant.': begin...\n");
 		}
 		else{
 			/* nezobrazovat nazvy antifon */
 			_global_skip_in_prayer = ANO;
+#if defined(EXPORT_HTML_SPECIALS)
 			Export("nezobrazit ant.");
+#endif
 			Log("  `Ant.' skipping...\n");
 		}
 	}
 	else if(equals(paramname, PARAM_SKRY_ANTIFONU_END)){
 		if(_global_ant_mcd_rovnake == NIE){
 			/* zobrazit nazvy antifon */
-			Export("<!--zobrazit ant.");
+			Export("<!--");
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("zobrazit ant.");
+#endif
 			Log("  `Ant.': copied.\n");
 		}
 		else{

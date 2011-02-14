@@ -11,17 +11,18 @@
 /*   02/11/1999A.D. | created                                  */
 /*   24/02/2000A.D. | prekopane                                */
 /*   30/03/2000A.D. | pridane OS_Windows, MODEL_DEBUG_Windows, */
-/*                    MODEL_Windows                      */
+/*                    MODEL_Windows                            */
 /*   06/09/2001A.D. | tento popis                              */
 /*   2004-03-17a.D. | poznamka k OS_...                        */
 /*   2005-03-22a.D. | zrusene DOS, vytvoreny novy model        */
 /*   2005-03-28a.D. | pridane na zaciatok #undef pre vsetky    */
 /*   2006-01-28a.D. | pridané define pre spôsob exportu        */
 /*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám          */
-/*   2007-05-25a.D. | pridané MODEL_Windows_RUBY         */
+/*   2007-05-25a.D. | pridané MODEL_Windows_RUBY               */
 /*   2007-06-01a.D. | vèlenený "config.h" pre confuse          */
 /*   2007-06-19a.D. | odstránený "config.h" pre confuse        */
 /*   2007-06-28a.D. | oprava jednotlivých modelov, popisy      */
+/*   2007-11-20a.D. | doplnené EXPORT_HTML_SPECIALS            */
 /*                                                             */
 /***************************************************************/
 
@@ -71,10 +72,6 @@
  *		  napr. aj pre batch mód - dávkové generovanie ve¾a stránok na súvislé obdobie)
  *		- debug verzia (s výpismi do samostatného súboru): MODEL_DEBUG_Windows_commandline
  *
- * 
- * MODEL_SIMUL_linux_UNDER_Windows - použité v minulosti na debuggovanie
- * MODEL_DEBUG_SIMUL_linux_UNDER_Windows - použité v minulosti na debuggovanie
- *
  */
 
 /* Modely pre ostré použitie */
@@ -91,39 +88,33 @@
 //#define MODEL_DEBUG_Windows_RUBY
 //#define MODEL_DEBUG_Windows_commandline
 
-/* 
- * Nepoužívané (JUV, 2007-06-28):
- * 
- * #define MODEL_SIMUL_linux_UNDER_Windows		// 2005-03-28 Vytvorene (simulacia ostreho linuxu)
- * #define MODEL_DEBUG_SIMUL_linux_UNDER_Windows		// 2005-03-22 Vytvorene (simulacia DEBUG linuxu)
- * #define MODEL_klasicky_DOS
- * #define MODEL_DEBUG_DOS
- */
-
 /* --------------------------------------------------------------------- */
 /* prerobene 23/02/2000A.D. -- 24/02/2000A.D. */
 /* 2006-01-28: pridané define pre spôsob výpisu kotiev a názvov súborov do HTML výsledku */
 #undef EXPORT_HTML_FILENAME_ANCHOR
 #undef EXPORT_HTML_FILENAME
 #undef EXPORT_HTML_ANCHOR
+#undef EXPORT_HTML_SPECIALS /* 2007-11-20: vytvorené, kvôli výpisom do výsledného HTML vo funkcii interpretParameter(), napr. "nie je velkonocne obdobie" */
 
 /* ostry linux: */
 #if defined(MODEL_linux)
 	#define OS_linux
 	#undef LOGGING
-	#define EXPORT_HTML_FILENAME_ANCHOR
 	#define EXPORT_TO_STDOUT
 /* ostré Windows/RUBY: */
 #elif defined(MODEL_Windows_RUBY)
 	#define OS_Windows_Ruby
 	#undef LOGGING
 	#define EXPORT_HTML_FILENAME_ANCHOR
+	#define EXPORT_HTML_SPECIALS
 	#define EXPORT_TO_STDOUT
 /* debugovanie Windows/RUBY -- vsetko sa vypisuje na stdout */
 #elif defined(MODEL_DEBUG_Windows_RUBY)
 	#define OS_Windows_Ruby
 	#define LOGGING
 	#define LOG_TO_STDOUT
+	#define EXPORT_HTML_FILENAME_ANCHOR
+	#define EXPORT_HTML_SPECIALS
 	#define EXPORT_TO_STDOUT
 	#define DEBUG
 /* debugovanie linux -- vsetko sa vypisuje na stdout */
@@ -131,6 +122,8 @@
 	#define OS_linux
 	#define LOGGING
 	#define LOG_TO_STDOUT
+	#define EXPORT_HTML_FILENAME_ANCHOR
+	#define EXPORT_HTML_SPECIALS
 	#define EXPORT_TO_STDOUT
 	#define DEBUG
 /* ostry Windows (command-line verzia): */
@@ -144,6 +137,7 @@
 	#define LOGGING
 	#define LOG_TO_FILE
 	#define EXPORT_HTML_FILENAME_ANCHOR
+	#define EXPORT_HTML_SPECIALS
 	#define EXPORT_TO_FILE
 /* ostry linux (command-line verzia): */
 #elif defined(MODEL_linux_commandline)
@@ -156,33 +150,8 @@
 	#define LOGGING
 	#define LOG_TO_FILE
 	#define EXPORT_HTML_FILENAME_ANCHOR
+	#define EXPORT_HTML_SPECIALS
 	#define EXPORT_TO_FILE
-
-/* Nepoužívané:
-// simulacia ostreho linuxu pod Windows 
-#elif defined(MODEL_SIMUL_linux_UNDER_Windows)
-	#define OS_linux
-	#undef LOGGING
-	#define EXPORT_TO_STDOUT
-// debugovanie linuxu vo Windows -- vsetko sa loguje do suboru
-#elif defined(MODEL_DEBUG_SIMUL_linux_UNDER_Windows)
-	#define OS_linux
-	#define LOGGING
-	#define LOG_TO_FILE
-	#define EXPORT_TO_FILE
-// klasicky DOS
-#elif defined(MODEL_klasicky_DOS)
-	#define OS_DOS
-	#define LOGGING
-	#define LOG_TO_FILE
-	#define EXPORT_TO_FILE
-// debugovanie DOS -- vsetko sa vypisuje na stdout
-#elif defined(MODEL_DEBUG_DOS)
-	#define OS_DOS
-	#define LOGGING
-	#define LOG_TO_STDOUT
-	#define EXPORT_TO_STDOUT
-*/
 
 #else
 	#error Unsupported system model (see mysystem.h) - Nepodporovaný systémový model (pozri súbor mysystem.h)
