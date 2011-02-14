@@ -84,6 +84,7 @@
 /*   2008-01-18a.D. | oprava: pri volanÌ file_name_kompletorium()       */
 /*                    treba uchovaù a potom obnoviù pÙvodnÈ _file       */
 /*   2008-01-23a.D. | opravenÈ zvazok_breviara[] a zaltar_zvazok()      */
+/*   2008-02-22a.D. | doplnenÈ modlitby cez deÚ (sv‰tci) pre III.zv‰zok */
 /*                                                                      */
 /*                                                                      */
 /* notes |                                                              */
@@ -8803,6 +8804,25 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty){
 	_vlastna_cast_modlitba;\
 }
 
+/* 2008-02-22: vytvoren˝ nov˝ define, aby nebolo toæko copy-paste miest v kÛde */
+#define _vlastna_cast_mcd_hymnus_kcitresp_modl {\
+	modlitba = MODL_PREDPOLUDNIM;\
+	_vlastna_cast_hymnus;\
+	_vlastna_cast_kcitanie;\
+	_vlastna_cast_kresponz;\
+	_vlastna_cast_modlitba;\
+	modlitba = MODL_NAPOLUDNIE;\
+	_vlastna_cast_hymnus;\
+	_vlastna_cast_kcitanie;\
+	_vlastna_cast_kresponz;\
+	_vlastna_cast_modlitba;\
+	modlitba = MODL_POPOLUDNI;\
+	_vlastna_cast_hymnus;\
+	_vlastna_cast_kcitanie;\
+	_vlastna_cast_kresponz;\
+	_vlastna_cast_modlitba;\
+}
+
 /* ... a teraz samotna funkcia sviatky_svatych(): */
 short int sviatky_svatych(short int den, short int mesiac, short int poradie_svaty){
 	/* toto priradujeme preto, aby sme nemuseli pri kazdom svatom
@@ -9207,10 +9227,8 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full_okrem_prosieb(modlitba);
 
-						if(_global_jazyk == JAZYK_CZ){
-							/* 2008-02-13: doplnenÈ mcd pre Ëesk˙ verziu */
-							_vlastna_cast_mcd_ant_kcitresp_modl;
-						}
+						/* 2008-02-13: doplnenÈ mcd pre Ëesk˙ verziu; 2008-02-22 aj pre slovensk˙ */
+						_vlastna_cast_mcd_ant_kcitresp_modl;
 
 						break;
 					}
@@ -9366,6 +9384,14 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_1nedele_rch();
+
+						/* modlitba cez deÚ, pridanÈ 2008-02-22 */
+						if(_global_jazyk == JAZYK_CZ){
+							_vlastna_cast_mcd_hymnus_kcitresp_modl;
+						}
+						else{
+							_vlastna_cast_mcd_kcitresp_modl;
+						}
 
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_full(modlitba);
@@ -9707,7 +9733,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 
 						/* 2006-02-07: doplnenÈ mcd; */
 						_vlastna_cast_mcd_kcitresp_modl;
-						
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_antifony;
@@ -11443,6 +11469,9 @@ label_25_MAR:
 						_vlastna_cast_modlitba;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_2citanie;
+
+						/* 2008-02-22: doplnenÈ mcd; */
+						_vlastna_cast_mcd_kcitresp_modl;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_hymnus;
