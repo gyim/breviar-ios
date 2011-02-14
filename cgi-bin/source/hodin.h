@@ -20,6 +20,7 @@
 /*   2006-09-07a.D. | dokonèená lokalizácia mesiacov JAN-AUG   */
 /*   2006-09-12a.D. | dokonèená lokalizácia mesiaca SEP+opravy */
 /*   2006-09-13a.D. | dokonèená lokalizácia mesiacov OKT+NOV   */
+/*   2006-12-04a.D. | oprava: kompletáØ                        */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -74,9 +75,9 @@ const char *nazov_Modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 , {"Kompletórium", "Kompletáo", "Completary", "" }
 , {"Neureená", "Neureena", "not-defined", ""}
 , {"Prvé vešpery", "První nešpory", "", "" }
-, {"Prvé kompletórium", "První kompletáo", "", "" }
+, {"Prvé kompletórium", "První kompletáø", "", "" }
 , {"Druhé vešpery", "Druhé nešpory", "", "" }
-, {"Druhé kompletórium", "Druhý kompletáo", "", "" }
+, {"Druhé kompletórium", "Druhý kompletáø", "", "" }
 , {"Detaily", "Detaily", "Details", "" }
 };
 

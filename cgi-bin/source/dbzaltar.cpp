@@ -69,6 +69,8 @@
 /*   2006-09-07a.D. | dokonèená lokalizácia mesiacov JAN-AUG   */
 /*   2006-09-12a.D. | dokonèená lokalizácia mesiaca SEP+opravy */
 /*   2006-09-13a.D. | dokonèená lokalizácia mesiacov OKT+NOV   */
+/*   2006-12-04a.D. | oprava hymnu pre èeský kompletáø         */
+/*                                                             */
 /*                                                             */
 /* notes |                                                     */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
@@ -709,10 +711,17 @@ void anchor_name_zaltar(short int den, short int tyzzal, short int modlitba, cha
 
 void set_hymnus(short int den, short int tyzzal, short int modlitba){
 	/* pridané èasti pre kompletórium, 2006-10-13 */
+	/* hymnus pre kompletórium je v èeskej verzii pre každý deò iný, 2006-12-04 */
 	if((modlitba == MODL_KOMPLETORIUM) || (modlitba == MODL_PRVE_KOMPLETORIUM)){
 		file_name_kompletorium();
-		sprintf(_anchor, "%c_%s_%d", 
-			pismenko_modlitby(MODL_KOMPLETORIUM), ANCHOR_HYMNUS, (den + tyzzal) % 2);
+		if(_global_jazyk == JAZYK_CZ){
+			sprintf(_anchor, "%c_%s_%s", 
+				pismenko_modlitby(modlitba), ANCHOR_HYMNUS, nazov_DN_asci[den]);
+		}
+		else{
+			sprintf(_anchor, "%c_%s_%d", 
+				pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (den + tyzzal) % 2);
+		}
 		_set_hymnus(modlitba, _file, _anchor);
 		set_LOG_zaltar;
 	}
