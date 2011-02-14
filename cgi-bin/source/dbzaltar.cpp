@@ -57,6 +57,7 @@
 /*   2006-01-24a.D. | pridané zaltar_zvazok()                  */
 /*   2006-01-25a.D. | dokonèené pôstne obdobie (mcd+posv.èít.) */
 /*   2006-01-25a.D. | su_zalmy_nedela1tyzden > ZALMY1NE_FIX    */
+/*   2006-02-02a.D. | pridané posv. èítania pre ¾s PM v sobotu */
 /*                                                             */
 /* notes |                                                     */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c        */
@@ -4379,7 +4380,9 @@ label_24_DEC:
 					}
 				}/* nie nedela */
 				/* 2006-01-24: chvála Bohu, dokonèené cezroèné obdobie 
-					vrátane posv. èítania a modlity cez deò :) */
+				 *             vrátane posv. èítania a modlity cez deò :) 
+				 * 2006-02-02: dokonèené pre cezroèné obdobie aj ¾s PM v sobotu :)
+				 */
 			}
 
 			break;
@@ -5661,6 +5664,10 @@ label_24_DEC:
 	   spomienka neposkvrneneho srdca panny marie;
 	   ak je, tak uprednostnime tuto.
 	   pridane 04/07/2000A.D. */
+	/* 2006-02-02: pridané posv. èítania a upravené; 
+	 * keïže smer == 11 používame pre lokálne povinné spomienky, 
+	 * upravili sme kontrolu z 12 na 11
+	 */
 	if(_global_den.denvr == (_global_r._ZOSLANIE_DUCHA_SV.denvr + 20)){
 		/* pri spusteni liturgicke_obdobie(); spomienka neposkvrneneho srdca panny marie */
 		Log("/* pri spusteni liturgicke_obdobie(); spomienka neposkvrneneho srdca panny marie */\n");
@@ -5672,69 +5679,66 @@ label_24_DEC:
 		(_global_den.denvt == DEN_SOBOTA) &&
 		((_global_den.denvr != (_global_r._ZOSLANIE_DUCHA_SV.denvr + 20))) && /* pridane 04/07/2000A.D. */
 		(
-			((_global_den.smer >= 12) && (_global_pocet_svatych == 0)) ||
-			((_global_svaty1.smer >= 12) && (_global_pocet_svatych > 0))) &&
+			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
+			((_global_svaty1.smer >= 11) && (_global_pocet_svatych > 0))) &&
 		(poradie_svateho == 4)){
 		/* teraz do _global_den priradim dane slavenie */
 		_local_den = _global_pm_sobota;
 		mystrcpy(_file, FILE_SPOM_PM_SOBOTA, MAX_STR_AF_FILE);
+
+		/* ranné chvály */
+
 		modlitba = MODL_RANNE_CHVALY;
 		/* hymnus */
 		/* su tri hymny, preto ich dame podla tyzzal MOD 3 (0, 1, 2) */
-		sprintf(_anchor, "%s%c_%s%d",
-			SPOM_PM_SOBOTA,
-			pismenko_modlitby(modlitba),
-			ANCHOR_HYMNUS,
-			tyzzal MOD 3);
+		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_HYMNUS, tyzzal MOD 3);
 		_set_hymnus(modlitba, _file, _anchor);
 		set_LOG_litobd;
 		/* kratke citanie */
 		/* su tri, preto ich dame podla tyzzal MOD 3 (0, 1, 2) */
-		sprintf(_anchor, "%s%c_%s%d",
-			SPOM_PM_SOBOTA,
-			pismenko_modlitby(modlitba),
-			ANCHOR_KCITANIE,
-			tyzzal MOD 3);
+		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_KCITANIE, tyzzal MOD 3);
 		_set_kcitanie(modlitba, _file, _anchor);
 		set_LOG_litobd;
 		/* kratke responzorium  */
 		/* su tri, preto ich dame podla tyzzal MOD 3 (0, 1, 2) */
-		sprintf(_anchor, "%s%c_%s%d",
-			SPOM_PM_SOBOTA,
-			pismenko_modlitby(modlitba),
-			ANCHOR_KRESPONZ,
-			tyzzal MOD 3);
+		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ, tyzzal MOD 3);
 		_set_kresponz(modlitba, _file, _anchor);
 		set_LOG_litobd;
 		/* benediktus */
 		/* je ich 6, takze tyzzal MOD 6 + 1 (1 -- 6) */
 		/* preto "+ 1", aby sme dodrzali povodne cislovanie */
-		sprintf(_anchor, "%s%c_%s%d",
-			SPOM_PM_SOBOTA,
-			pismenko_modlitby(modlitba),
-			ANCHOR_BENEDIKTUS,
-			tyzzal MOD 6);
+		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_BENEDIKTUS, tyzzal MOD 6);
 		_set_benediktus(modlitba, _file, _anchor);
 		set_LOG_litobd;
 		/* prosby */
 		/* su 2, takze tyzzal MOD 2 (0, 1) */
-		sprintf(_anchor, "%s%c_%s%d",
-			SPOM_PM_SOBOTA,
-			pismenko_modlitby(modlitba),
-			ANCHOR_PROSBY,
-			tyzzal MOD 2);
+		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_PROSBY, tyzzal MOD 2);
 		_set_prosby(modlitba, _file, _anchor);
 		set_LOG_litobd;
 		/* modlitba */
 		/* je ich 6, takze tyzzal MOD 6 + 1 (1 -- 6) */
 		/* preto "+ 1", aby sme dodrzali povodne cislovanie */
-		sprintf(_anchor, "%s%c_%s%d",
-			SPOM_PM_SOBOTA,
-			pismenko_modlitby(modlitba),
-			ANCHOR_MODLITBA,
-			tyzzal MOD 6);
+		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_MODLITBA, tyzzal MOD 6);
 		_set_modlitba(modlitba, _file, _anchor);
 		set_LOG_litobd;
+
+		/* 2006-02-02: pridané posvätné èítanie */
+
+		modlitba = MODL_POSV_CITANIE;
+		/* hymnus */
+		/* su tri hymny, preto ich dame podla tyzzal MOD 3 (0, 1, 2) */
+		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_HYMNUS, tyzzal MOD 3);
+		_set_hymnus(modlitba, _file, _anchor);
+		set_LOG_litobd;
+
+		/* antifóny, žalmy, verš a prvé èítanie s responzóriom sa berie z príslušnej soboty */
+
+		/* druhé èítanie */
+		/* sú štyri hymny, preto ich dáme pod¾a tyzzal MOD 4 (0, 1, 2, 3) */
+		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_CITANIE2, tyzzal MOD 4);
+		_set_citanie2(modlitba, _file, _anchor);
+		set_LOG_litobd;
+
 	}
 
 	_global_den = _local_den;
@@ -8750,6 +8754,8 @@ label_25_MAR:
 						_vlastna_cast_modlitba;
 
 						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_hymnus;
+						_vlastna_cast_kresponz;
 						_vlastna_cast_modlitba;
 						_vlastna_cast_2citanie;
 
@@ -9947,6 +9953,7 @@ label_25_MAR:
 						_vlastna_cast_modlitba;
 
 						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_hymnus; /* 2006-02-02: doplnené; hymnus ako na vešpery */
 						_vlastna_cast_modlitba;
 						_vlastna_cast_2citanie;
 

@@ -72,6 +72,7 @@
 /*   2006-01-25a.D. | zmena default pre _global_opt2 => LINK_ISO_8601      */
 /*   2006-01-28a.D. | upraven˝ spÙsob v˝pisu v includeFile()               */
 /*   2006-01-31a.D. | batch mÛd exportuje aj mcd (mna) a posv. ËÌtanie     */
+/*   2006-02-02a.D. | vytvoren· fcia _main_formular(),zobraz.pre kaûd˝ deÚ */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -1987,7 +1988,7 @@ int atomes(char *mesiac){
 #define _rozbor_dna_LOG Log("_rozbor_dna(): "); Log
 int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 	Log("_rozbor_dna(): 3 parametre -- begin\n");
-	Log("-- _rozbor_dna(_struct_den_mesiac, int, int): begin ({%d, %d} %d %d)\n",
+	Log("-- _rozbor_dna(_struct_den_mesiac, int, int): begin ({%d, %d} %d, %d)\n",
 		datum.den, datum.mesiac, rok, poradie_svaty);
 
 	if(poradie_svaty == UNKNOWN_PORADIE_SVATEHO){
@@ -2535,7 +2536,7 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 	Log("init_global_pm_sobota(): _global_pm_sobota:\n");
 	Log(_global_pm_sobota); /* pridane 27/04/2000A.D. */
 
-	Log("-- _rozbor_dna(_struct_den_mesiac, int, int): end ({%d, %d}, %d %d)\n",
+	Log("-- _rozbor_dna(_struct_den_mesiac, int, int): end ({%d, %d}, %d, %d)\n",
 		datum.den, datum.mesiac, rok, poradie_svaty);
 	/* export -- je inde
 	 * _export_rozbor_dna() a v _rozbor_dna_s_modlitbou();
@@ -2689,11 +2690,15 @@ int init_global_string(int typ, int poradie_svateho, int modlitba){
 	Log("2:_local_den.meno == %s\n", _local_den.meno); /* 08/03/2000A.D. */
 
 	/* este spomienka panny marie v sobotu, cl. 15 */
+	/* 2006-02-02: pridanÈ posv. ËÌtania a upravenÈ; 
+	 * keÔûe smer == 11 pouûÌvame pre lok·lne povinnÈ spomienky, 
+	 * upravili sme kontrolu z 12 na 11
+	 */
 	if((_global_den.litobd == OBD_CEZ_ROK) &&
 		(_global_den.denvt == DEN_SOBOTA) &&
 		(
-			((_global_den.smer >= 12) && (_global_pocet_svatych == 0)) ||
-			((_global_svaty1.smer >= 12) && (_global_pocet_svatych > 0))) &&
+			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
+			((_global_svaty1.smer >= 11) && (_global_pocet_svatych > 0))) &&
 		(poradie_svateho == 4)){
 		/* teraz do _global_den priradim dane slavenie */
 		_local_den = _global_pm_sobota;
@@ -3648,11 +3653,15 @@ void _export_rozbor_dna_batch(int typ){
 	}/* if(equals(_global_den.meno, STR_EMPTY)) */
 
 	/* este spomienka panny marie v sobotu, cl. 15 */
+	/* 2006-02-02: pridanÈ posv. ËÌtania a upravenÈ; 
+	 * keÔûe smer == 11 pouûÌvame pre lok·lne povinnÈ spomienky, 
+	 * upravili sme kontrolu z 12 na 11
+	 */
 	if((_global_den.litobd == OBD_CEZ_ROK) &&
 		(_global_den.denvt == DEN_SOBOTA) &&
 		(
-			((_global_den.smer >= 12) && (_global_pocet_svatych == 0)) ||
-			((_global_svaty1.smer >= 12) && (_global_pocet_svatych > 0))) &&
+			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
+			((_global_svaty1.smer >= 11) && (_global_pocet_svatych > 0))) &&
 		(typ != EXPORT_DNA_VIAC_DNI)){
 		BATCH_COMMAND(4);
 	}
@@ -4302,6 +4311,224 @@ void rozbor_mesiaca(int mesiac, int rok){
 }
 
 /*---------------------------------------------------------------------*/
+/*
+ * _main_formular();
+ *
+ * 2006-02-02 (doma pri chrÌpke)
+ *
+ * vypluje cel˝ formul·r, doln˙ Ëasù, ktor· pÙvodne bola v _main_dnes(),
+ * ktor˝ obsahuje:
+ * - okienka pre deÚ, mesiac, rok; 
+ * - okienko pre (anal˝zu) rok;
+ * - okienko pre sviatok,
+ * - okienko pre liturgick˝ kalend·r,
+ * atÔ. a to kvÙli tomu, aby sa to eventu·lne dalo pouûiù aj pre in˝ deÚ ako "dnes".
+ *
+ */
+void _main_formular(int den, int mesiac, int rok, int denvt){
+
+	/* 2006-02-02: premennÈ z _main_dnes musÌme naplniù podæa vstupn˝ch hodnÙt */
+
+	struct tm dnes;
+	int month, day;
+
+	dnes.tm_mday = den;
+	dnes.tm_mon  = mesiac;
+	dnes.tm_year = rok;
+	dnes.tm_wday = denvt;
+
+	/* 2006-02-02: prevzat· Ëasù z _main_dnes */
+
+	/* pokracujem vypisanim formulara */
+	/* 2003-07-16; zrusene: Export("<hr>\n"); */
+	Export("\n<form action=\"%s\" method=\"post\">\n", uncgi_name);
+
+	Export("œalöie moûnosti\n"); /* 2003-07-16; kedysi tu bolo "Chcem zobraziù" */
+
+	/* 2003-07-09, zmenene <center><table> na <table align="center"> */
+	Export("<table align=\"center\">\n");
+
+/* ------------------------------------------- */
+	Export("<tr>\n<td>\n");
+	Export("<table>\n<tr><td>\n");
+	/* formular pre PRM_DATUM */
+	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\" checked>",
+		STR_QUERY_TYPE, STR_PRM_DATUM);
+	Export("</td><td>\n");
+
+	Export("&nbsp;modlitby pre deÚ &nbsp;\n"); /* 2006-02-02: upravenÈ, pridan˝ "dnes" */
+	/* pÙvodne tu bolo: Export("&nbsp;vyööie uveden˝ rozbor dÚa pre &nbsp;&nbsp;\n"); /* 2003-07-16; kedysi tu bolo "d·tum" */
+
+	/* pole WWW_DEN */
+	Export("<select name=\"%s\">\n", STR_DEN);
+	for(day = 1; day < 32; day++)
+		if(day == dnes.tm_mday)
+			Export("<option selected>%d", day);
+		else
+			Export("<option>%d", day);
+	Export("\n</select>&nbsp;.\n");
+
+	/* pole WWW_MESIAC */
+	Export("<select name=\"%s\">\n", STR_MESIAC);
+	for(month = 1; month < 13; month++)
+		if(month == dnes.tm_mon)
+			Export("<option selected>%s", nazov_mesiaca[month - 1]);
+		else
+			Export("<option>%s", nazov_mesiaca[month - 1]);
+	Export("\n</select>&nbsp;\n");
+
+	/* pole WWW_ROK */
+	Export("<"HTML_FORM_INPUT_TEXT" name=\"%s\" size=5 value=\"%d\">\n",
+		STR_ROK, dnes.tm_year);
+	
+	/* 2006-02-02: upravenÈ, pridan˝ "dnes" */
+	Export("&nbsp; alebo pre ");
+	Export("<a href=\"%s?%s=%s\">\n",
+		script_name,
+		STR_QUERY_TYPE, STR_PRM_DNES);
+	Export("dneöok");
+	Export("</a></td>\n");
+
+	Export("</td></tr></table>\n");
+	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
+
+#ifdef FORMULAR_PRE_PRM_SVIATOK
+/* ------------------------------------------- */
+	Export("<tr>\n<td>\n");
+	Export("<table>\n<tr><td>\n");
+	/* formular pre PRM_SVIATOK */
+	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">\n",
+		STR_QUERY_TYPE, STR_PRM_SVIATOK);
+	Export("</td><td>\n");
+	/* !!! sviatky --- */
+	Export("</td></tr></table>\n");
+	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
+#endif
+
+/* ------------------------------------------- */
+	Export("<tr>\n<td>\n");
+	Export("<table>\n<tr><td>\n");
+	/* formular pre PRM_ANALYZA_ROKU */
+	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
+		STR_QUERY_TYPE, STR_PRM_ANALYZA_ROKU);
+	Export("</td><td>\n");
+	Export("&nbsp;prik·zanÈ sviatky a sl·vnosti P·na v roku \n");
+	/* pole WWW_ANALYZA_ROKU */
+	Export("<"HTML_FORM_INPUT_TEXT" name=\"%s\" size=5 value=\"%d\">\n",
+		STR_ANALYZA_ROKU, dnes.tm_year);
+	Export("</td></tr></table>\n");
+	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
+
+/* ------------------------------------------- */
+	Export("<tr>\n<td>\n");
+	Export("<table>\n<tr><td>\n");
+	/* formular pre PRM_MESIAC_ROKA */
+	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
+		STR_QUERY_TYPE, STR_PRM_MESIAC_ROKA);
+	Export("</td><td>\n");
+	Export("&nbsp;liturgick˝ kalend·r pre &nbsp;"); /* 2003-07-16; povodne tu bolo "mesiac" */
+	/* pole WWW_MESIAC_ROKA */
+	Export("<select name=\"%s\">\n", STR_MESIAC_ROKA);
+	for(month = 1; month < 13; month++)
+		if(month == dnes.tm_mon)
+			Export("<option selected>%s", nazov_mesiaca[month - 1]);
+		else
+			Export("<option>%s", nazov_mesiaca[month - 1]);
+	Export("\n</select>&nbsp;\n");
+
+	Export("roku \n"); /* 2003-07-16; povodne tu bolo "v roku" */
+	/* pole WWW_ROK_ROKA */
+	Export("<"HTML_FORM_INPUT_TEXT" name=\"%s\" size=5 value=\"%d\">\n",
+		STR_ROK_ROKA, dnes.tm_year);
+	Export("</td></tr></table>\n");
+	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
+
+/* ------------------------------------------- */
+	Export("<tr>\n<td>\n");
+	Export("<table>\n<tr><td>\n");
+	/* formular pre PRM_TABULKA, 15/03/2000A.D. */
+	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
+		STR_QUERY_TYPE, STR_PRM_TABULKA);
+	Export("</td><td>\n");
+	Export("&nbsp;tabuæka d·tumov pohybliv˝ch sl·venÌ od roku&nbsp;");
+	/* pole WWW_ROK_FROM */
+	Export("<"HTML_FORM_INPUT_TEXT" name=\"%s\" size=5 value=\"%d\">\n",
+		STR_ROK_FROM, dnes.tm_year - 12);
+	Export("&nbsp;do roku&nbsp;\n");
+	/* pole WWW_ROK_TO */
+	Export("<"HTML_FORM_INPUT_TEXT" name=\"%s\" size=5 value=\"%d\">\n",
+		STR_ROK_TO, dnes.tm_year + 12);
+	Export("</td></tr>\n<tr><td></td><td>");
+	/* pole WWW_TABULKA_LINKY */
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\">\n",
+		STR_TABULKA_LINKY, 1); /* ked bude zaskrtnuty, tak vrati hodnotu 1; 15/03/2000A.D. */
+	Export("&nbsp;zobraziù tabuæku vr·tane hypertextov˝ch odkazov na jednotlivÈ dni\n");
+	Export("</td></tr></table>\n");
+	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
+
+/* ------------------------------------------- */
+	Export("<tr>\n<td>\n");
+	Export("<table>\n<tr><td>\n");
+	/* 2003-07-16; tento formular bol povodne na 2. mieste */
+	/* formular pre PRM_CEZ_ROK */
+	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
+		STR_QUERY_TYPE, STR_PRM_CEZ_ROK);
+	Export("</td><td>\n");
+
+	/* 2003-07-16; povodne toto pole bolo na konci */
+	/* pole WWW_MODLITBA */
+	Export("<select name=\"%s\">\n", STR_MODLITBA);
+	Export("<option>%s\n", nazov_modlitby[MODL_PRVE_VESPERY]);
+	Export("<option selected>%s\n", nazov_modlitby[MODL_RANNE_CHVALY]);
+	Export("<option>%s\n", nazov_modlitby[MODL_POSV_CITANIE]); /* posv‰tnÈ ËÌtanie: pridanÈ 2005-08-15 */
+	Export("<option>%s\n", nazov_modlitby[MODL_PREDPOLUDNIM]);
+	Export("<option>%s\n", nazov_modlitby[MODL_NAPOLUDNIE]);
+	Export("<option>%s\n", nazov_modlitby[MODL_POPOLUDNI]); /* cez den: pridane 2003-08-06 */
+	Export("<option>%s\n", nazov_modlitby[MODL_DRUHE_VESPERY]);
+	Export("</select>\n");
+
+	Export("&nbsp;pre cezroËnÈ obdobie,&nbsp;&nbsp;\n");
+
+	/* pole WWW_DEN_V_TYZDNI */
+	Export("<select name=\"%s\">\n", STR_DEN_V_TYZDNI);
+	for(day = 0; day < 7; day++)
+		if(day == dnes.tm_wday)
+			Export("<option selected>%s", nazov_dna[day]);
+		else
+			Export("<option>%s", nazov_dna[day]);
+	Export("\n</select>&nbsp;v\n");
+
+	/* pole WWW_TYZDEN */
+	Export("<select name=\"%s\">\n", STR_TYZDEN);
+	for(day = 1; day < 5; day++)
+		if(day == _global_den.tyzzal)
+			Export("<option selected>%d", day);
+		else
+			Export("<option>%d", day);
+	Export("\n</select>&nbsp;. t˝ûdni ûalt·ra");
+
+	Export("</td></tr></table>\n");
+	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
+
+/* ------------------------------------------- */
+	Export("</table>\n");
+
+	/* predtym tu bolo <br>, ale kedze hore som dal <table align="center">, 
+	 * tak tu musi byt <center> kvoli buttonom; 2003-07-09
+	 */
+	Export("\n<center>\n");
+	/* button Vyhladaj (GO!) */
+	Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_DNES_SHOW"\">");
+
+	/* button Vycisti (CLEAR!) */
+	Export("&nbsp;&nbsp;&nbsp;\n");
+	Export("<"HTML_FORM_INPUT_RESET" value=\""HTML_BUTTON_DNES_DEFAULTS"\">");
+
+	Export("</center>\n</form>\n\n");
+
+}
+
+/*---------------------------------------------------------------------*/
 /* _main_rozbor_dna(char *, char *, char *, char *, char *)
  *
  * dostane 3 stringy (datum) + mozno 2 striny (modlitba, dalsi_svaty),
@@ -4647,10 +4874,13 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				sprintf(pom, "%d. %s %d", d, nazov_mesiaca[m - 1], r);
 				_export_heading_center(pom);
 				/* 2003-06-30: podla toho, ci je alebo nie je urcena modlitba */
-				if(p == MODL_NEURCENA)
+				if(p == MODL_NEURCENA){
 					rozbor_dna(d, m, r);
-				else
+					_main_formular(d, m, r, den_v_tyzdni(d, m, r));
+				}
+				else{
 					rozbor_dna_s_modlitbou(d, m, r, p, s);
+				}
 			}
 		}/* d != VSETKY_DNI */
 	}/* m != VSETKY_MESIACE */
@@ -4673,7 +4903,6 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 void _main_dnes(void){
 	time_t timer;
 	struct tm dnes;
-	int month, day;
 	long jd_dnes;
 	char pom[MAX_STR];
 
@@ -4720,182 +4949,8 @@ void _main_dnes(void){
 
 	_export_rozbor_dna(EXPORT_DNA_DNES);
 
-	/* pokracujem vypisanim formulara */
-	/* 2003-07-16; zrusene: Export("<hr>\n"); */
-	Export("\n<form action=\"%s\" method=\"post\">\n", uncgi_name);
-
-	Export("œalöie moûnosti\n"); /* 2003-07-16; kedysi tu bolo "Chcem zobraziù" */
-
-	/* 2003-07-09, zmenene <center><table> na <table align="center"> */
-	Export("<table align=\"center\">\n");
-
-/* ------------------------------------------- */
-	Export("<tr>\n<td>\n");
-	Export("<table>\n<tr><td>\n");
-	/* formular pre PRM_DATUM */
-	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\" checked>",
-		STR_QUERY_TYPE, STR_PRM_DATUM);
-	Export("</td><td>\n");
-	Export("&nbsp;vyööie uveden˝ rozbor dÚa pre &nbsp;&nbsp;\n"); /* 2003-07-16; kedysi tu bolo "d·tum" */
-
-	/* pole WWW_DEN */
-	Export("<select name=\"%s\">\n", STR_DEN);
-	for(day = 1; day < 32; day++)
-		if(day == dnes.tm_mday)
-			Export("<option selected>%d", day);
-		else
-			Export("<option>%d", day);
-	Export("\n</select>&nbsp;.\n");
-
-	/* pole WWW_MESIAC */
-	Export("<select name=\"%s\">\n", STR_MESIAC);
-	for(month = 1; month < 13; month++)
-		if(month == dnes.tm_mon)
-			Export("<option selected>%s", nazov_mesiaca[month - 1]);
-		else
-			Export("<option>%s", nazov_mesiaca[month - 1]);
-	Export("\n</select>&nbsp;\n");
-
-	/* pole WWW_ROK */
-	Export("<"HTML_FORM_INPUT_TEXT" name=\"%s\" size=5 value=\"%d\">\n",
-		STR_ROK, dnes.tm_year);
-
-	Export("</td></tr></table>\n");
-	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
-
-#ifdef FORMULAR_PRE_PRM_SVIATOK
-/* ------------------------------------------- */
-	Export("<tr>\n<td>\n");
-	Export("<table>\n<tr><td>\n");
-	/* formular pre PRM_SVIATOK */
-	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">\n",
-		STR_QUERY_TYPE, STR_PRM_SVIATOK);
-	Export("</td><td>\n");
-	/* !!! sviatky --- */
-	Export("</td></tr></table>\n");
-	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
-#endif
-
-/* ------------------------------------------- */
-	Export("<tr>\n<td>\n");
-	Export("<table>\n<tr><td>\n");
-	/* formular pre PRM_ANALYZA_ROKU */
-	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
-		STR_QUERY_TYPE, STR_PRM_ANALYZA_ROKU);
-	Export("</td><td>\n");
-	Export("&nbsp;prik·zanÈ sviatky a sl·vnosti P·na v roku \n");
-	/* pole WWW_ANALYZA_ROKU */
-	Export("<"HTML_FORM_INPUT_TEXT" name=\"%s\" size=5 value=\"%d\">\n",
-		STR_ANALYZA_ROKU, dnes.tm_year);
-	Export("</td></tr></table>\n");
-	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
-
-/* ------------------------------------------- */
-	Export("<tr>\n<td>\n");
-	Export("<table>\n<tr><td>\n");
-	/* formular pre PRM_MESIAC_ROKA */
-	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
-		STR_QUERY_TYPE, STR_PRM_MESIAC_ROKA);
-	Export("</td><td>\n");
-	Export("&nbsp;liturgick˝ kalend·r pre &nbsp;"); /* 2003-07-16; povodne tu bolo "mesiac" */
-	/* pole WWW_MESIAC_ROKA */
-	Export("<select name=\"%s\">\n", STR_MESIAC_ROKA);
-	for(month = 1; month < 13; month++)
-		if(month == dnes.tm_mon)
-			Export("<option selected>%s", nazov_mesiaca[month - 1]);
-		else
-			Export("<option>%s", nazov_mesiaca[month - 1]);
-	Export("\n</select>&nbsp;\n");
-
-	Export("roku \n"); /* 2003-07-16; povodne tu bolo "v roku" */
-	/* pole WWW_ROK_ROKA */
-	Export("<"HTML_FORM_INPUT_TEXT" name=\"%s\" size=5 value=\"%d\">\n",
-		STR_ROK_ROKA, dnes.tm_year);
-	Export("</td></tr></table>\n");
-	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
-
-/* ------------------------------------------- */
-	Export("<tr>\n<td>\n");
-	Export("<table>\n<tr><td>\n");
-	/* formular pre PRM_TABULKA, 15/03/2000A.D. */
-	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
-		STR_QUERY_TYPE, STR_PRM_TABULKA);
-	Export("</td><td>\n");
-	Export("&nbsp;tabuæka d·tumov pohybliv˝ch sl·venÌ od roku&nbsp;");
-	/* pole WWW_ROK_FROM */
-	Export("<"HTML_FORM_INPUT_TEXT" name=\"%s\" size=5 value=\"%d\">\n",
-		STR_ROK_FROM, dnes.tm_year - 12);
-	Export("&nbsp;do roku&nbsp;\n");
-	/* pole WWW_ROK_TO */
-	Export("<"HTML_FORM_INPUT_TEXT" name=\"%s\" size=5 value=\"%d\">\n",
-		STR_ROK_TO, dnes.tm_year + 12);
-	Export("</td></tr>\n<tr><td></td><td>");
-	/* pole WWW_TABULKA_LINKY */
-	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\">\n",
-		STR_TABULKA_LINKY, 1); /* ked bude zaskrtnuty, tak vrati hodnotu 1; 15/03/2000A.D. */
-	Export("&nbsp;zobraziù tabuæku vr·tane hypertextov˝ch odkazov na jednotlivÈ dni\n");
-	Export("</td></tr></table>\n");
-	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
-
-/* ------------------------------------------- */
-	Export("<tr>\n<td>\n");
-	Export("<table>\n<tr><td>\n");
-	/* 2003-07-16; tento formular bol povodne na 2. mieste */
-	/* formular pre PRM_CEZ_ROK */
-	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
-		STR_QUERY_TYPE, STR_PRM_CEZ_ROK);
-	Export("</td><td>\n");
-
-	/* 2003-07-16; povodne toto pole bolo na konci */
-	/* pole WWW_MODLITBA */
-	Export("<select name=\"%s\">\n", STR_MODLITBA);
-	Export("<option>%s\n", nazov_modlitby[MODL_PRVE_VESPERY]);
-	Export("<option selected>%s\n", nazov_modlitby[MODL_RANNE_CHVALY]);
-	Export("<option>%s\n", nazov_modlitby[MODL_POSV_CITANIE]); /* posv‰tnÈ ËÌtanie: pridanÈ 2005-08-15 */
-	Export("<option>%s\n", nazov_modlitby[MODL_PREDPOLUDNIM]);
-	Export("<option>%s\n", nazov_modlitby[MODL_NAPOLUDNIE]);
-	Export("<option>%s\n", nazov_modlitby[MODL_POPOLUDNI]); /* cez den: pridane 2003-08-06 */
-	Export("<option>%s\n", nazov_modlitby[MODL_DRUHE_VESPERY]);
-	Export("</select>\n");
-
-	Export("&nbsp;pre cezroËnÈ obdobie,&nbsp;&nbsp;\n");
-
-	/* pole WWW_DEN_V_TYZDNI */
-	Export("<select name=\"%s\">\n", STR_DEN_V_TYZDNI);
-	for(day = 0; day < 7; day++)
-		if(day == dnes.tm_wday)
-			Export("<option selected>%s", nazov_dna[day]);
-		else
-			Export("<option>%s", nazov_dna[day]);
-	Export("\n</select>&nbsp;v\n");
-
-	/* pole WWW_TYZDEN */
-	Export("<select name=\"%s\">\n", STR_TYZDEN);
-	for(day = 1; day < 5; day++)
-		if(day == _global_den.tyzzal)
-			Export("<option selected>%d", day);
-		else
-			Export("<option>%d", day);
-	Export("\n</select>&nbsp;. t˝ûdni ûalt·ra");
-
-	Export("</td></tr></table>\n");
-	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
-
-/* ------------------------------------------- */
-	Export("</table>\n");
-
-	/* predtym tu bolo <br>, ale kedze hore som dal <table align="center">, 
-	 * tak tu musi byt <center> kvoli buttonom; 2003-07-09
-	 */
-	Export("\n<center>\n");
-	/* button Vyhladaj (GO!) */
-	Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_BUTTON_DNES_SHOW"\">");
-
-	/* button Vycisti (CLEAR!) */
-	Export("&nbsp;&nbsp;&nbsp;\n");
-	Export("<"HTML_FORM_INPUT_RESET" value=\""HTML_BUTTON_DNES_DEFAULTS"\">");
-
-	Export("</center>\n</form>\n\n");
+	/* 2006-02-02: cel˝ zvyön˝ formul·r presunut˝ do samostatnej funkcie */
+	_main_formular(datum.den, datum.mesiac, dnes.tm_year, dnes.tm_wday);
 
 }/* _main_dnes(); */
 

@@ -78,7 +78,7 @@ void liturgicke_obdobie(int litobd, int tyzden, int den, int tyzzal, int poradie
 #define SPOM_PM_SOBOTA "SPMVS"
 /* special filename indentifiers */
 /* podobne ako v liturgia.h::char *nazov_obd_htm[] */
-#define FILE_SPOM_PM_SOBOTA "spmvs.htm"
+#define FILE_SPOM_PM_SOBOTA "spmvs.htm" /* 2006-02-02: nachádzajú sa tam aj posv. èítania */
 
 #define FILE_NANEBOVSTUPENIE "nan.htm" /* 10/03/2000A.D. -- kotvy v nom su podla OBD_VELKONOCNE_I */
 

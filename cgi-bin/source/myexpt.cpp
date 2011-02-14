@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* myexpt.cpp                                                  */
-/* (c)1999-2006 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2001 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje exportne rutinky na export           */
 /*               do suboru FILE_EXPORT alebo stdout            */
@@ -63,6 +63,7 @@ int initExport(void){
 		/* 2003-07-08 ani som netusil, ze som to spravil kedysi aj na append...
 		 * ale teraz som korektne pridal switch `a'
 		 */
+//		if(xxx)
 		/* novy fajl */
 		exportfile = fopen(FILE_EXPORT, "wt");
 	}
@@ -102,6 +103,26 @@ void dumpFile(char *fname){
 			fputc(c, exportfile);
 	}
 }
+
+/* kedysi tu bolo nasledovne:
+ *
+ * pouziva sa pri normalnom fungovani, vsetko sa posiela na konzolu
+ *
+ * nasledujuca definicia nahradza kratku:
+ * #define Export	printf
+int Export(char *fmt, ...){
+	va_list argptr;
+	int cnt;
+
+	va_start(argptr, fmt);
+	cnt = vprintf(fmt, argptr); // obycajne poslanie na konzolu
+	va_end(argptr);
+	return(cnt);
+}
+ *
+ * avsak ked priradime do exportfile = stdout, tak potom staci
+ * nasledovna definicia:
+ */
 
 /* vsetko sa posiela do suboru (handle == exportfile),
  * ak premenna exptused je 0,
