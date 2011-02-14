@@ -1,0 +1,36 @@
+/* apply to all elements */ { font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 100%; }
+body { 
+	background-color: #663300; 
+	color: #FFFFFF; 
+	font-family: Verdana, Tahoma, Georgia, Sans Serif; 
+	font-size: 90%; 
+	noscroll;
+	font-weight: normal;
+}
+
+p { 
+	font-family: Verdana, Tahoma, Georgia, Sans Serif; 
+	color: #FFFFFF; 
+	text-style: normal; 
+}
+
+.duoraz { 
+	font-weight: bold; 
+}
+
+p.patka { 
+	font-size: 71%; 
+	text-align: left; 
+}
+
+a { font-family: Verdana, Tahoma, Georgia, Sans Serif; color: #FFFFFF; text-decoration: none; }
+a:hover { color: #FFFFFF; background-color: #000000; text-decoration:none; }
+a:active { color: #FFFFFF; text-decoration: none; }
+a img { border: none }
+
+hr {	height: 0.2mm;
+	size: 1px;
+	width: 75%; 
+	text-align: left; 
+	color: gray; }
+

@@ -113,6 +113,8 @@
 /*                  - dopracovanie batch módu (všetky modlitby, aj pre cz) */
 /*   2008-07-18a.D. | pridaný sviatok (text_JUL_24)                        */
 /*   2008-08-08a.D. | pridaný parameter (option) `c' (css - vzh¾ad)        */
+/*   2008-08-15a.D. | doposlovenèená _main_analyza_roku()                  */
+/*   2008-08-15a.D. | prvý pokus "dominikánskej èeštiny"                   */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -3934,32 +3936,33 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 		Export("</form>\n");
 
 /* 2003-08-06 dorobene posvatne citanie */
-
-		/* oddelenie */
-		Export("</td>\n<td valign=\"middle\">");
-		if(_global_linky == ANO){
-			/* modlitba posvatneho citania -- button */
-			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
-				script_name,
-				STR_QUERY_TYPE, STR_PRM_DATUM,
-				STR_DEN, _global_den.den,
-				STR_MESIAC, _global_den.mesiac,
-				STR_ROK, _global_den.rok,
-				STR_MODLITBA, STR_MODL_POSV_CITANIE,
-				pom);
-				/* 2003-08-11 pozor, segfault bol spuosobeny tym, ze
-				 * ako %s sa vypisoval int! (chybal prefix STR_...)
-				 */
+		/* 2008-08-15: Posvätné èítanie iba pre èeštinu a slovenèinu */
+		if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ)){
+			/* oddelenie */
+			Export("</td>\n<td valign=\"middle\">");
+			if(_global_linky == ANO){
+				/* modlitba posvatneho citania -- button */
+				Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
+					script_name,
+					STR_QUERY_TYPE, STR_PRM_DATUM,
+					STR_DEN, _global_den.den,
+					STR_MESIAC, _global_den.mesiac,
+					STR_ROK, _global_den.rok,
+					STR_MODLITBA, STR_MODL_POSV_CITANIE,
+					pom);
+					/* 2003-08-11 pozor, segfault bol spuosobeny tym, ze
+					 * ako %s sa vypisoval int! (chybal prefix STR_...)
+					 */
+			}
+			else{
+				Export("<form action=\"%s\">\n", pom);
+			}
+			Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
+			Export((char *)HTML_BUTTON_POSV_CITANIE);
+			Export("\">\n");
+			Export("</form>\n");
+			/* 2007-03-19: Na základe pripomienky Vlada Kiša posvätné èítanie predsunuté pred ranné chvály */
 		}
-		else{
-			Export("<form action=\"%s\">\n", pom);
-		}
-		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
-		Export((char *)HTML_BUTTON_POSV_CITANIE);
-		Export("\">\n");
-		Export("</form>\n");
-
-/* 2007-03-19: Na základe pripomienky Vlada Kiša posvätné èítanie predsunuté pred ranné chvály */
 
 		/* oddelenie */
 		Export("</td>\n<td valign=\"middle\">");
@@ -4230,7 +4233,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 		/* 2007-03-19: Dorobené tlaèidlo pre dnešok */
 #define	BUTTON_DNES
 #ifdef BUTTON_DNES
-		Export("<td align=\"center\"><form action=\"%s?%s=%s"HTML_AMPERSAND"%s\" method=\"post\">\n",
+		Export("<td align=\"center\"><form action=\"%s?%s=%s%s\" method=\"post\">\n", /* 2008-08-15: odstránený HTML_AMPERSAND - bol tu dvakrát (je aj v pom2) */
 			script_name,
 			STR_QUERY_TYPE, 
 			STR_PRM_DNES, 
@@ -5874,7 +5877,7 @@ short int atojazyk(char *jazyk){
 			return i;
 		}
 		i++;
-	}while(i < JAZYK_UNDEF);
+	}while(i <= POCET_JAZYKOV);
 	return JAZYK_UNDEF;
 }
 
@@ -5889,7 +5892,7 @@ short int atocss(char *css){
 			return i;
 		}
 		i++;
-	}while(i < CSS_UNDEF);
+	}while(i <= POCET_CSS);
 	return CSS_UNDEF;
 }
 
@@ -6072,7 +6075,7 @@ short int atocss(char *css){
 			Log("SK: Keïže bolo _global_opt7 == GLOBAL_OPTION_NULL, nastavujem na `'...\n", cfg_option7_default);\
 		}\
 	}\
-	else if(_global_jazyk == JAZYK_CZ){\
+	else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){\
 		if(_global_opt1 == GLOBAL_OPTION_NULL){\
 			_global_opt1 = cfg_option1_cz;\
 			Log("CZ: Keïže bolo _global_opt1 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option1_cz);\
@@ -6117,6 +6120,12 @@ short int atocss(char *css){
  * vykona _main_rozbor_dna(int, int, int) resp. _main_rozbor_mesiaca(int)
  * resp. cely rok, 12krat rozbor_mesiaca(int)
  */
+void _main_rozbor_dna_TMP_2008_08_15(char *den, char *mesiac, char *rok, char *modlitba, char *poradie_svaty){
+	Log("-- _main_rozbor_dna(char *, char *, char *, char *, char *): begin (%s, %s, %s, %s, %s)\n",
+		den, mesiac, rok, modlitba, poradie_svaty);
+	Export("aaaaa");
+}
+
 #define ExportUDAJE	result = FAILURE; if(!heading_written){_export_heading("Rozbor dòa"); heading_written = 1;} Log("error: Nevhodne udaje\n"); Export("Nevhodné údaje: "); Export
 void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *poradie_svaty){
 	short int heading_written = 0;
@@ -6140,7 +6149,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 
 	/* 2006-08-01: pridané odovzdanie parametra pre css */
 	if(_global_css != CSS_breviar_sk){
-		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_JAZYK, skratka_jazyka[_global_jazyk]);
+		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_CSS, skratka_css[_global_css]);
 		strcat(pom2, pom3);
 		Log("\tBudem prilepova aj css: `%s' (2008-08-08)\n", pom3);
 	}
@@ -6695,7 +6704,7 @@ void _main_analyza_roku(char *rok){
 
 	/* 2006-08-01: pridané odovzdanie parametra pre css */
 	if(_global_css != CSS_breviar_sk){
-		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_JAZYK, skratka_jazyka[_global_jazyk]);
+		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_CSS, skratka_css[_global_css]);
 		strcat(pom2, pom3);
 		Log("\tBudem prilepova aj css: `%s' (2008-08-08)\n", pom3);
 	}
@@ -6801,13 +6810,13 @@ void _main_analyza_roku(char *rok){
 	}
 	Export("</table>\n");
 
-	ExportROK("Po Ve¾kej noci nasleduje %d. %s v období „cez rok“.\n",
+	ExportROK((char *)html_text_Po_Velkej_noci_atd[_global_jazyk], /* 2008-08-15 */
 		_global_r.tyzden_ocr_po_vn + 1,
 		nazov_dna(DEN_NEDELA));
 
 	vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, year, LINK_DEN_MESIAC_ROK);
 	/* zmenene <font color> na <span>, 2003-07-02 */
-	ExportROK("<p><"HTML_SPAN_RED">Prikázané sviatky v roku %s:</span>\n",
+	ExportROK((char *)html_text_Prikazane_sviatky_v_roku[_global_jazyk], /* 2008-08-15 */
 		_global_link);
 	Export("<br>\n");
 	Export("\n<table>\n");
@@ -6857,7 +6866,7 @@ void _main_analyza_roku(char *rok){
 	/* teraz nasleduju jednotlive mesiace roku s linkami na ne */
 	vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, year, LINK_DEN_MESIAC_ROK);
 	/* zmenene <font color> na <span>, 2003-07-02 */
-	ExportROK("<"HTML_SPAN_RED">Jednotlivé mesiace roku %s:</span>\n",
+	ExportROK((char *)html_text_Jednotlive_mesiace_roku[_global_jazyk], /* 2008-08-15 */
 		_global_link);
 #ifdef RICH_JEDNOTLIVE_MESIACE
 	Export("<ul>\n");
@@ -6954,6 +6963,7 @@ void _main_tabulka(char *rok_from, char *rok_to, char *tab_linky){
 	Export("<tr>\n");
 	switch(_global_jazyk){
 		case JAZYK_CZ:
+		case JAZYK_CZ_OP: /* 2008-08-15: doplnené */
 			Export("<td align=center>Léto<br>Pánì</td>\n");
 			Export("<td align=center>Nedìlní<br>písmeno</td>\n");
 			Export("<td align=center>Nedìlní<br>cyklus</td>\n");

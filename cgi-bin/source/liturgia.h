@@ -46,6 +46,7 @@
 /*                  - a tiež text_V_OKTAVE_NARODENIA[]         */
 /*   2008-01-23a.D. | opravené pole konštánt zvazok_breviara[] */
 /*   2008-06-24a.D. | doplnené LOKAL_SLAV_SPIS_BA_PATRON       */
+/*   2008-08-15a.D. | pridaný ïalší "jazyk" (cz-op)            */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -64,8 +65,28 @@
 
 #define MENO_SVIATKU 100
 
-/* 2006-07-31: kvôli jazykovým mutáciám */
-#define	POCET_JAZYKOV	4
+/* 2006-07-31: kvôli jazykovým mutáciám; zmenené 2008-08-15 na 5 */
+#define	POCET_JAZYKOV	5
+
+/* 2006-07-11: Pridané kvôli jazykovým mutáciám 
+ * 2006-12-12: Pridaná latinèina, kódy sú pod¾a ISO 639-1 (až na èeštinu)
+ * 2008-08-15: Pridaná "dominikánska èeština"; presunuté sem bezprostredne za definíciu POCET_JAZYKOV
+ */
+#define JAZYK_SK	0
+#define JAZYK_CZ	1
+#define JAZYK_EN	2
+#define JAZYK_LA    3
+#define JAZYK_UNDEF 4
+#define JAZYK_CZ_OP 5
+
+/* 2008-08-15: Pridané POCET_CSS, aby mohol by "dolník" (CSS_UNDEF) hodnota 0 */
+#define POCET_CSS	4
+/* 2006-08-08: Pridané kvôli rôznym css-kám */
+#define CSS_UNDEF			0
+#define CSS_breviar_sk		1
+#define CSS_kbd_sk			2
+#define CSS_ebreviar_cz		3
+#define CSS_breviar_cz_op	4
 
 /* nasledovne 2 definovane 2003-08-13; zmenene 2004-04-28 (12->16) */
 #define MAX_STR_AF_FILE   16
@@ -836,21 +857,6 @@ typedef struct lrok _struct_lrok;
 #define LINK_ISO_8601 5 /* pridana kvoli SIMPLE exportu, 2005-03-21 */
 #define LINK_DEN_MESIAC_PREDOSLY 6 /* 2007-08-15 pridané kvôli novému kalendáru */
 #define LINK_DEN_MESIAC_NASLEDOVNY 7 /* 2007-08-15 pridané kvôli novému kalendáru */
-
-/* 2006-07-11: Pridané kvôli jazykovým mutáciám 
- * 2006-12-12: Pridaná latinèina, kódy sú pod¾a ISO 639-1 (až na èeštinu)
- */
-#define JAZYK_SK	0
-#define JAZYK_CZ	1
-#define JAZYK_EN	2
-#define JAZYK_LA    3
-#define JAZYK_UNDEF 4
-
-/* 2006-08-08: Pridané kvôli rôznym css-kám */
-#define CSS_breviar_sk	0
-#define CSS_ebreviar_cz	1
-#define CSS_kbd_sk		2
-#define CSS_UNDEF		3
 
 /* ------------------------------------------------------------------- */
 /* globalne premenne -- su definovane v dnes.cpp (18/02/2000A.D.) */

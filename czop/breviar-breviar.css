@@ -1,0 +1,54 @@
+/* apply to all elements */ { font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 100%; }
+.odkaz { color: #ffff33; font-style: italic; }
+.it { font-style: italic; }
+
+body { 
+	background-color: #663300; 
+	color: #FFFFFF; 
+	font-family: Verdana, Tahoma, Georgia, Sans Serif; 
+	font-size: 90%; 
+	noscroll;
+	scrollbar-face-color: #FFFFFF;
+	scrollbar-shadow-color: #330000;
+	scrollbar-highlight-color: #330000;
+	scrollbar-3dlight-color: #FFFFFF;
+	scrollbar-darkshadow-color: #330000;
+	scrollbar-track-color: #d0bba0; 
+	scrollbar-arrow-color: #330000;
+}
+p { 
+	font-family: Verdana, Tahoma, Georgia, Sans Serif; 
+	color: #FFFFFF; 
+	text-style: normal; 
+}
+p.duoraz { 
+	font-weight: bold; 
+}
+p.patka { 
+	font-size: 71%; 
+	text-align: center; 
+	text-indent: 0em;  
+	margin-top: -1mm; 
+	letter-spacing: 0mm 
+}
+
+p.item {
+	margin-top: 0mm; 
+	margin-botton: -3mm;
+}
+
+p.normal {
+	margin-top: 0mm; 
+	margin-botton: -1mm;
+}
+
+a { font-family: Verdana, Tahoma, Georgia, Sans Serif; color: #FFFFFF; text-decoration: none; }
+a:hover { color: #FFFFFF; background-color: #000000; text-decoration:none; font-weight: normal; }
+a:active { color: #FFFFFF; text-decoration: none; }
+a img { border: none }
+
+table { background-color: #663300; color: #ffff33; }
+td { font-family: Verdana, Tahoma, Georgia, Sans Serif; color: #ffff33; }
+hr {	height: 0.2mm;
+	width: 33%; 
+	color: gray; }
