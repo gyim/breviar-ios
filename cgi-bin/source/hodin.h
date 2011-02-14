@@ -241,6 +241,7 @@ const char *nazov_slavenia_lokal[] =
 ,"na Slovensku 5. júla, slávnos; v Európe sviatok"
 ,"v Roòavskej diecéze sviatok hlavného patróna"
 ,"len v konsekrovanıch kostoloch"
+,"Druhá ve¾konoèná nede¾a"
 };
 
 const char *rimskymi_tyzden_zaltara[] =

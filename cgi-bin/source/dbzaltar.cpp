@@ -5111,9 +5111,11 @@ label_24_DEC:
 	}\
 	set_LOG_litobd;\
 }
-/* 2006-01-25: doplnené posvätné èítanie */
+/* 2006-01-25: doplnené posvätné èítanie 
+ * 2006-02-08: modlitba cez deò aj posv. èítanie majú responzórium rovnaké, èi je alebo nie je nede¾a
+ */
 #define _post2_kresponz {\
-	if(((den == DEN_STVRTOK) && (modlitba == MODL_VESPERY)) || (den == DEN_NEDELA)){\
+	if(((den == DEN_STVRTOK) && (modlitba == MODL_VESPERY)) || ((den == DEN_NEDELA) && (modlitba != MODL_PREDPOLUDNIM) && (modlitba != MODL_NAPOLUDNIE) && (modlitba != MODL_POPOLUDNI) && (modlitba != MODL_POSV_CITANIE))){\
 		sprintf(_anchor, "%s_%c%s%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_KRESPONZ, nazov_DN_asci[den]);\
 	}\
 	else{\
@@ -5512,9 +5514,14 @@ label_24_DEC:
 			/* 09/03/2000A.D. */
 /* zabezpecime nahodnost pri hymne vo feriu, kedy sa "podla lubovole" mozre brat nie nedelny hymnus */
 /* ((_global_den.den MOD 3) == 0) */
-/* 2006-01-27: pridaná modlitba posvätné èítanie */
+/* 2006-01-27: pridaná modlitba posvätné èítanie 
+ * 2006-02-08: pre modlitbu cez deò nemá nede¾a odlišný hymnus, preto "pod¾a ¾ubovôle" nie pre modlitbu cez deò
+ */
 #define _velk1_hymnus {\
-	if((den == DEN_NEDELA) || ((_global_den.den MOD 3) == 0)){\
+	if((den == DEN_NEDELA) || (\
+		((_global_den.den MOD 3) == 0)\
+		&& (modlitba != MODL_PREDPOLUDNIM) && (modlitba != MODL_NAPOLUDNIE) && (modlitba != MODL_POPOLUDNI))\
+	){\
 		sprintf(_anchor, "%s_%c%s%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS, nazov_DN_asci[DEN_NEDELA]);\
 	}\
 	else{\
@@ -12667,17 +12674,14 @@ label_25_MAR:
 
 						/* 2006-02-07: doplnené mcd; */
 						modlitba = MODL_PREDPOLUDNIM;
-						_vlastna_cast_antifony;
 						_vlastna_cast_kcitanie;
 						_vlastna_cast_kresponz;
 						_vlastna_cast_modlitba;
 						modlitba = MODL_NAPOLUDNIE;
-						_vlastna_cast_antifony;
 						_vlastna_cast_kcitanie;
 						_vlastna_cast_kresponz;
 						_vlastna_cast_modlitba;
 						modlitba = MODL_POPOLUDNI;
-						_vlastna_cast_antifony;
 						_vlastna_cast_kcitanie;
 						_vlastna_cast_kresponz;
 						_vlastna_cast_modlitba;
@@ -12976,17 +12980,14 @@ label_25_MAR:
 
 						/* 2006-02-07: doplnené mcd; */
 						modlitba = MODL_PREDPOLUDNIM;
-						_vlastna_cast_antifony;
 						_vlastna_cast_kcitanie;
 						_vlastna_cast_kresponz;
 						_vlastna_cast_modlitba;
 						modlitba = MODL_NAPOLUDNIE;
-						_vlastna_cast_antifony;
 						_vlastna_cast_kcitanie;
 						_vlastna_cast_kresponz;
 						_vlastna_cast_modlitba;
 						modlitba = MODL_POPOLUDNI;
-						_vlastna_cast_antifony;
 						_vlastna_cast_kcitanie;
 						_vlastna_cast_kresponz;
 						_vlastna_cast_modlitba;

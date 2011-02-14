@@ -2229,7 +2229,9 @@ int _rozbor_dna(_struct_den_mesiac datum, int rok, int poradie_svaty){
 					if(_global_den.denvr == VN2){
 						/* 2. velkonocna nedela */
 						_rozbor_dna_LOG("/* 2. velkonocna nedela */\n");
-						mystrcpy(_global_den.meno, "Nedeæa vo VeækonoËnej okt·ve (2. veækonoËn· nedeæa)", MENO_SVIATKU);
+						mystrcpy(_global_den.meno, "Nedeæa vo VeækonoËnej okt·ve", MENO_SVIATKU);
+						/* 2006-02-08: podreùazec (2. veækonoËn· nedeæa) rieöen˝ pomocou "typslav_lokal" */
+						_global_den.typslav_lokal = LOKAL_SLAV_DRUHA_VELK_NEDELA;
 					}
 					else{
 						/* velkonocna oktava - vsedny den */
