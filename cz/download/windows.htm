@@ -17,7 +17,7 @@
 ^ <a href="index.htm">Download</a> | <a href="cmdline.htm">command-line (Windows/DOS)</a> &gt;&gt;
 </center>
 
-<p align="center">Ospravedlnìní: Soubory ke stažení pro èeskou verzi ještì nejsou dostupné. Navíc, mnohé zde uvedené stránky ještì nejsou funkèní, nìkteré nejsou pøeloženy ze slovenštiny do èeštiny (napište nám, jestli mùžete a chcete pomoct).</p>
+<p align="center">Ospravedlnìní: Mnohé zde uvedené stránky ještì nejsou funkèní, nìkteré nejsou pøeloženy ze slovenštiny do èeštiny (napište nám, jestli mùžete a chcete pomoct).</p>
 
 <p>Tyto stránky poskytují ke stažení aplikaci pod OS Windows 95/98/NT/2000/XP/Vista, 
 která generuje stránky v podobì HTML pøímo zobrazitelných ve vašem prohlížeèi (Internet Explorer, Netscape, Mozilla, Firefox a pod.), 
@@ -29,16 +29,16 @@ a ten výstup zobrazí pøesne tak, jako to poznáte z Internetu.&nbsp;
 
 <p>Soubory ke stažení: 
 <ul>
-	<li>„balíèek programu a textù“ (<a href="2007-07-11-komplet-web.zip">zip</a>, <a href="2007-07-11-komplet-web.rar">rar</a>)</li>
-	<li><a href="ruby186-25.exe">webserver</a> (Ruby z <a target="_blank" href="http://rubyforge.org/">http://rubyforge.org/</a>)</li>
+	<li>„balíèek programu a textù“ (<a href="/download/2007-07-11-komplet-web.zip">zip</a>, <a href="/download/2007-07-11-komplet-web.rar">rar</a>)</li>
+	<li><a href="/download/ruby186-25.exe">webserver</a> (Ruby z <a target="_blank" href="http://rubyforge.org/">http://rubyforge.org/</a>)</li>
 </ul>
 </p>
 
 <h4 class="blue">Postup instalace</h4>
 
 <ol class="level1">
-<li>Stáhnìte si oba soubory („balíèek programu a textù“ [<a href="2007-07-11-komplet-web.zip">zip</a> nebo <a href="2007-07-11-komplet-web.rar">rar</a>] a <a href="ruby186-25.exe">webserver</a>) na disk (&quot;Save as&quot;). Nejprve budeme instalovat webserver, pak samotný program.</li>
-<li><span class="it">Instalaca webservera</span>: Spuštìte soubor <span class="tt">ruby186-25.exe</span>. Následujte instalaèní instrukce (jsou v anglickém jazyce; v podstatì staèí odklepávat tlaèítko <span class="blue">Next</span> popøípadì <span class="blue">I Agree</span>
+<li>Stáhnìte si oba soubory („balíèek programu a textù“ [<a href="/download/2007-07-11-komplet-web.zip">zip</a> nebo <a href="/download/2007-07-11-komplet-web.rar">rar</a>] a <a href="ruby186-25.exe">webserver</a>) na disk (&quot;Save as&quot;). Nejprve budeme instalovat webserver, pak samotný program.</li>
+<li><span class="it">Instalace webserveru</span>: Spuštìte soubor <span class="tt">ruby186-25.exe</span>. Následujte instalaèní instrukce (jsou v anglickém jazyce; v podstatì staèí odklepávat tlaèítko <span class="blue">Next</span> popøípadì <span class="blue">I Agree</span>
 	a <span class="blue">Finish</span>). Do jednoho adresáøe (napø. <span class="tt">c:\ruby</span>) je nainstalován interpreter programovacího jazyka Ruby. Ten následnì spouští lokální webserver.</li>
 <li><span class="it">Instalace aplikace</span>: 
 	Rozbalte (napø. pomocí programù WinZip, WinArj, WinRAR, PowerArchiver) „balíèek programu a textù“ (<span class="tt">2007-07-11-komplet-web.zip</span> resp. <span class="tt">2007-07-11-komplet-web.rar</span>) do nìjakého adresáøe na vašem disku
@@ -58,16 +58,16 @@ a ten výstup zobrazí pøesne tak, jako to poznáte z Internetu.&nbsp;
 			[2007-07-11 16:53:05] INFO  WEBrick::HTTPServer#start: pid=1976 port=2000</blockquote>
 		O konfiguraci pozri <a href="#config">níže</a>.
 	</li>
-	<li>Otevøete svùj oblíbený internetový prohlížeè a do øádku pro internetové adresy napište nasledovnou adresu: <a href="http://localhost:2000/">http://localhost:2000/</a>
-		(to je adresa vášho lokálního webservera).</li>
+	<li>Otevøete svùj oblíbený internetový prohlížeè a do øádku pro internetové adresy napište nasledovnou adresu: <a href="http://localhost:2000/cz/">http://localhost:2000/cz/</a>
+		(to je adresa vášho lokálního webserveru). <i>Poznámka:</i> Jestli neuvedete v adrese také <span class="tt">/cz/</span></li>, bduete mít k dispozici slovenskou verzii online breviáøe.
 	<li>Mìlo by se vám zobrazit úvodní okno Liturgie hodin. V prohlížeèi generujete modlitbu stejnì, jako když ste pøipojení k Internetu. Okno pøíkazového øádku by mìlo zachytávat jednotlivé akce, které lokální webserver vykonává (jednotlivé volání aplikacie nebo zobrazení statických HTML stránek).</li>
 </ol>
 
-<h4 class="blue"><a name="config"></a>Konfigurace webservera</h4>
+<h4 class="blue"><a name="config"></a>Konfigurace webserveru</h4>
 
 <ol>
 	<li>V podstatì jediným zajímavým øádkem konfiguraèního skriptu je ten, v kterém nastavujete port pro váš webserver: <span class="blue">Port => 2000</span>. Když chcete zmìnit hodnotu, upravte soubor server.rb v jakémkoliv
-		textovom editoru a uložte. Váš lokální webserver bude mít pak adresu <span class="tt">http://localhost:port/</span>, kde <span class="tt">port</span> je èíslo portu, uvedené v konfiguraèním souboru.
+		textovom editoru a uložte. Váš lokální webserver bude mít pak adresu <span class="tt">http://localhost:port/cz/</span>, kde <span class="tt">port</span> je èíslo portu, uvedené v konfiguraèním souboru.
 	</li>
 </ol>
 
