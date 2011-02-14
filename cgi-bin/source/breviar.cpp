@@ -118,6 +118,7 @@
 /*   2008-11-29a.D. | pridanÈ rÙzne moûnosti batch exportu                 */
 /*   2008-12-20a.D. | ˙prava init_global_string() pre nedele niekt. obdobÌ */
 /*                  - _export_rozbor_dna_buttons(): komplet.+nunk dimittis */
+/*   2009-01-05a.D. | ˙prava _export_rozbor_dna() pre vöednÈ dni (poradie) */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -2747,6 +2748,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				_global_den.smer = 6; /* nedele vianocneho obdobia a obdobia "cez rok" */
 				_global_den.litobd = OBD_VIANOCNE_I;
 				mystrcpy(_global_den.meno, text_DRUHA_NEDELA_PO_NAR_PANA[_global_jazyk], MENO_SVIATKU); /* 2008-01-03: oprava - viacjazyËnosù */
+				_global_den.tyzden = 2; /* 2009-01-05: doplnenÈ, keÔûe v Ëasti niûöie sme (spr·vne) zapozn·mkovali natvrdo nastavenie t˝ûdÚa na 2 */
 			}
 			else if(_global_den.denvr < KRST){
 				/* vianocne obdobie */
@@ -3041,6 +3043,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 	if(_global_den.tyzzal == 0){
 		/* neurcili sme tyzden v zaltari, urobime tak teraz */
 		_rozbor_dna_LOG("/* neurcili sme tyzden v zaltari, urobime tak teraz */\n");
+		_rozbor_dna_LOG("/* _global_den.tyzden == %d */\n", _global_den.tyzden);
 		_global_den.tyzzal = ((_global_den.tyzden + 3) MOD 4) + 1;
 			/* povodne tu bolo: (_global_den.tyzden - 1) MOD 4; 06/03/2000A.D. */
 		_rozbor_dna_LOG("tyzzal == %d\n", _global_den.tyzzal);
@@ -4965,8 +4968,7 @@ void _export_rozbor_dna(short int typ){
 	/* ÔalöÌ stÂpec: buttons (tlaËidl·), podæa typu v˝pisu */
 	Export("<td valign=\"middle\">");
 
-	/* pozor, hoci je nedela, predsa na nu mohlo pripadnut slavenie s vyssou
-	 * prioritou */
+	/* pozor, hoci je nedela, predsa na nu mohlo pripadnut slavenie s vyssou prioritou */
 	if((_global_den.denvt == DEN_NEDELA) ||
 		(_global_den.prik == PRIKAZANY_SVIATOK) ||
 		(_global_den.smer < 5)){
@@ -4992,23 +4994,45 @@ void _export_rozbor_dna(short int typ){
 		/* sviatky (spomienky, ls) svatych */
 		if((_global_den.smer > _global_svaty1.smer) ||
 			(_global_den.smer == 9) && (_global_svaty1.smer == 12)){
-		/* svaty */
-			BUTTONS(typ, 1);
-			if(_global_pocet_svatych > 1){
-				NEWLINE;
-				BUTTONS(typ, 2);
-				if(_global_pocet_svatych > 2){
+				/* 2009-01-05: Vlado K. ma upozornil, ûe ak je smer sv‰t˝ == 12, ale deÚ je 9 (bod 59. smernÌc o LH a kalend·ri, Ë. 12),
+				 * bolo by lepöie pon˙knuù najprv deÚ a aû potom ostatnÈ sl·venia */
+			if(_global_den.smer > _global_svaty1.smer){
+				/* sviatok, spomienka alebo æubovoæn· spomienka sv‰tÈho/sv‰t˝ch, ide prv ako vöedn˝ deÚ */
+				BUTTONS(typ, 1);
+				if(_global_pocet_svatych > 1){
 					NEWLINE;
-					BUTTONS(typ, 3);
+					BUTTONS(typ, 2);
+					if(_global_pocet_svatych > 2){
+						NEWLINE;
+						BUTTONS(typ, 3);
+					}
+				}
+				/* 2005-08-22: pÙvodne sa tu porovn·valo s 12, ale aj pre 11 (lok·lne sl·venia) 
+				 * by mal systÈm pon˙knuù vöedn˝ deÚ - keÔ je to napr. v inej diecÈze */
+				if((_global_svaty1.smer >= 11) &&
+					(typ != EXPORT_DNA_VIAC_DNI)){
+					/* ak je to iba lubovolna spomienka, tak vsedny den */
+					NEWLINE;
+					BUTTONS(typ, 0);
 				}
 			}
-			/* 2005-08-22: pÙvodne sa tu porovn·valo s 12, ale aj pre 11 (lok·lne sl·venia) 
-			 * by mal systÈm pon˙knuù vöedn˝ deÚ - keÔ je to napr. v inej diecÈze */
-			if((_global_svaty1.smer >= 11) &&
-				(typ != EXPORT_DNA_VIAC_DNI)){
-				/* ak je to iba lubovolna spomienka, tak vsedny den */
-				NEWLINE;
-				BUTTONS(typ, 0);
+			else{
+				/* æubovoæn· spomienka sv‰tÈho/sv‰t˝ch, priËom vöedn˝ deÚ m· vyööiu prioritu sl·venia */
+				if((_global_svaty1.smer >= 11) &&
+					(typ != EXPORT_DNA_VIAC_DNI)){
+					/* ak je to iba lubovolna spomienka, tak vsedny den */
+					BUTTONS(typ, 0);
+					NEWLINE;
+				}
+				BUTTONS(typ, 1);
+				if(_global_pocet_svatych > 1){
+					NEWLINE;
+					BUTTONS(typ, 2);
+					if(_global_pocet_svatych > 2){
+						NEWLINE;
+						BUTTONS(typ, 3);
+					}
+				}
 			}
 		}/* svaty ma prednost */
 		else{
