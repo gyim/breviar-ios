@@ -1187,15 +1187,29 @@ void set_popis_dummy(void){
 
 /* 2007-12-05: pridaná funkcia kvôli kompletóriu napr. v pôstnom období */
 void set_hymnus_kompletorium_obd(short int den, short int tyzzal, short int modlitba, short int litobd){
-	/* hymnusy sú rovnaké v pôstnom období ako pre cezroèné obdobie */
-	file_name_kompletorium((litobd == OBD_POSTNE_I)? OBD_CEZ_ROK : litobd);
+	/* hymnusy sú rovnaké v pôstnom období ako pre cezroèné obdobie;
+	 * hymnus pre ve¾konoèné obdobie je jediný, odlišný
+	 */
+	short int pom_litobd = litobd;
+	if((litobd == OBD_VELKONOCNE_II) || (litobd == OBD_VELKONOCNA_OKTAVA) || (litobd == OBD_VELKONOCNE_TROJDNIE)){
+		pom_litobd = OBD_VELKONOCNE_I;
+	}
+	else if(litobd == OBD_POSTNE_I){
+		pom_litobd = OBD_CEZ_ROK;
+	}
+	file_name_kompletorium(pom_litobd);
+
+	short int dva_hymny = 1; /* urèuje, èi v danom období sú dva hymny (1) alebo nie (0); ak je len jediný, má index 0 */
+	if(pom_litobd == OBD_VELKONOCNE_I){
+		dva_hymny = 0;
+	}
 	if(_global_jazyk == JAZYK_CZ){
 		sprintf(_anchor, "%c_%s_%s", 
 			pismenko_modlitby(modlitba), ANCHOR_HYMNUS, nazov_DN_asci[den]);
 	}
 	else{
 		sprintf(_anchor, "%c_%s_%d", 
-			pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (tyzzal + 1) % 2);
+			pismenko_modlitby(modlitba), ANCHOR_HYMNUS, ((tyzzal + 1) % 2) * dva_hymny);
 	}
 	_set_hymnus(modlitba, _file, _anchor);
 	set_LOG_zaltar;
@@ -5923,6 +5937,9 @@ label_24_DEC:
 			modlitba = MODL_KOMPLETORIUM;
 			_set_kompletorium_nedela(2); 
 			set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
+			if(den != DEN_PIATOK){
+				set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
+			}
 
 			/* invitatórium; 2007-11-14 */
 			modlitba = MODL_INVITATORIUM;
@@ -6167,6 +6184,7 @@ label_24_DEC:
 
 			/* 2007-12-06: kompletórium vo ve¾konoènom období */
 			modlitba = MODL_KOMPLETORIUM;
+			set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
 			set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
 			set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd);
 
@@ -6442,6 +6460,7 @@ label_24_DEC:
 
 			/* 2007-12-06: kompletórium vo ve¾konoènom období */
 			modlitba = MODL_KOMPLETORIUM;
+			set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
 			set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
 			set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd);
 
@@ -6641,6 +6660,7 @@ label_24_DEC:
 			/* 2007-12-06: kompletórium vo ve¾konoènej oktáve je z nedele po prvých resp. druhých vešperách */
 			modlitba = MODL_KOMPLETORIUM;
 			_set_kompletorium_nedela(den MOD 2);
+			set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
 			set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
 			set_antifony_kompletorium_obd(DEN_NEDELA, tyzzal, modlitba, litobd); /* keïže sa berie nede¾né kompletórium */
 
@@ -6669,6 +6689,7 @@ label_24_DEC:
 			if(den == DEN_NEDELA){ /* v skutoènosti platí aj: (_global_den.denvr == VN2) */
 				/* 2007-12-06: pridané kompletórium po prvých vešperách */
 				modlitba = MODL_PRVE_KOMPLETORIUM;
+				set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
 				set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
 				set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd);
 				/* prvé vešpery */
