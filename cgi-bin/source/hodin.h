@@ -18,6 +18,7 @@
 /*   2006-08-18a.D. | zmena int na short int (staèí 32tis.)    */
 /*   2006-08-19a.D. | pridanie liturgickej farby               */
 /*   2006-09-07a.D. | dokonèená lokalizácia mesiacov JAN-AUG   */
+/*   2006-09-12a.D. | dokonèená lokalizácia mesiaca SEP+opravy */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -403,6 +404,7 @@ const char *nazov_slavenia_lokal[] =
 ,"v Èechách svátek"
 ,"v plzeòské diecézi svátek hlavního patrona"
 ,"v ostravsko-opavské diecézi svátek"
+,"v litomìøické diecézi"
 };
 
 const char *nazov_farby_jazyk[POCET_FARIEB + 1][POCET_JAZYKOV + 1] =
@@ -1304,7 +1306,7 @@ const char *text_JUN_30[] =
  "", ""};
 const char *text_JUN_30_1[] =
 {"(na Slovensku nie je)",
- "Výroèí posvìcení katedrály",
+ "Výroèí posvìcení katedrály sv. Václava",
  "", ""};
 
 const char *text_JUL_03[] =
@@ -1529,6 +1531,111 @@ const char *text_AUG_30[] =
  "(v Èechách, na Moravì a na Slezsku není)",
  "", ""};
 
+
+const char *text_SEP_03[] =
+{"Sv. Gregora Ve¾kého, pápeža a uèite¾a Cirkvi",
+ "Sv. Øehoøe Velikého, papeže a uèitele církve",
+ "", ""};
+const char *text_SEP_06[] =
+{"Výroèie posviacky katedrálneho chrámu v Košiciach",
+ "(v Èechách, na Moravì a na Slezsku není)",
+ "", ""};
+const char *text_SEP_07[] =
+{"Sv. Marka Križina, Melichara Grodzieckého a Štefana Pongrácza, kòazov a muèeníkov",
+ "Sv. Melichara Grodeckého, knìze a muèedníka",
+ "", ""};
+const char *text_SEP_08[] =
+{"Narodenie prebl. Panny Márie",
+ "Narození Panny Marie",
+ "", ""};
+const char *text_SEP_09[] =
+{"Sv. Petra Clavera, kòaza",
+ "Sv. Petra Klavera, knìze",
+ "", ""};
+const char *text_SEP_10[] =
+{"(na Slovensku nie je)",
+ "Bl. Karla Spinoly, knìze a muèedníka",
+ "", ""};
+const char *text_SEP_12[] =
+{"Mena prebl. Panny Márie",
+ "(v Èechách, na Moravì a na Slezsku není)",
+ "", ""};
+const char *text_SEP_13[] =
+{"Sv. Jána Zlatoústeho, biskupa a uèite¾a Cirkvi",
+ "Sv. Jana Zlatoústého, biskupa a uèitele církve",
+ "", ""};
+const char *text_SEP_14[] =
+{"Povýšenie svätého kríža",
+ "Povýšení svatého køíže",
+ "", ""};
+const char *text_SEP_15[] =
+{"Sedembolestnej Panny Márie, patrónky Slovenska",
+ "Panny Marie Bolestné",
+ "", ""};
+const char *text_SEP_16_CZ[] =
+{"(na Slovensku nie je)",
+ "Sv. Ludmily, muèednice",
+ "", ""};
+const char *text_SEP_16[] =
+{"Sv. Kornélia, pápeža, a sv. Cypriána, biskupa, muèeníkov",
+ "Sv. Kornélia, papeže, a Cypriána, biskupa, muèedníkù",
+ "", ""};
+const char *text_SEP_17[] =
+{"Sv. Róberta Bellarmína, biskupa a uèite¾a Cirkvi",
+ "Sv. Roberta Bellarmina, biskupa a uèitele církve",
+ "", ""};
+const char *text_SEP_19[] =
+{"Sv. Januára, biskupa a muèeníka",
+ "Sv. Januária, biskupa a muèedníka",
+ "", ""};
+const char *text_SEP_20[] =
+{"Sv. Andreja Kim Taegona, kòaza, a sv. Pavla Chong Hasanga a spoloèníkov, muèeníkov",
+ "Sv. Ondøeje Kim Taegona, knìze, Pavla Chong Hasanga a druhù, muèedníkù",
+ "", ""};
+const char *text_SEP_20_2[] =
+{"(na Slovensku nie je)",
+ "Výroèí posvìcení katedrály sv. Štìpána",
+ "", ""};
+const char *text_SEP_21[] =
+{"Sv. Matúša, apoštola a evanjelistu",
+ "Sv. Matouše, apoštola a evangelisty",
+ "", ""};
+const char *text_SEP_22[] =
+{"Sv. Emeráma, biskupa a muèeníka",
+ "(v Èechách, na Moravì a na Slezsku není)",
+ "", ""};
+const char *text_SEP_23[] =
+{"Sv. Pia z Pietrelèiny, kòaza",
+ "Sv. Pia z Pietrelciny, knìze",
+ "", ""};
+const char *text_SEP_24[] =
+{"Výroèie posviacky katedrálneho chrámu v Banskej Bystrici",
+ "(v Èechách, na Moravì a na Slezsku není)",
+ "", ""};
+const char *text_SEP_26[] =
+{"Sv. Kozmu a Damiána, muèeníkov",
+ "Sv. Kosmy a Damiána, muèedníkù",
+ "", ""};
+const char *text_SEP_27[] =
+{"Sv. Vincenta de Paul, kòaza",
+ "Sv. Vincence z Paula, knìze",
+ "", ""};
+const char *text_SEP_28[] =
+{"Sv. Václava, muèeníka",
+ "Sv. Václava, muèedníka, hlavního patrona èeského národa",
+ "", ""};
+const char *text_SEP_28_2[] =
+{"Sv. Vavrinca Ruiza a spoloèníkov, muèeníkov",
+ "(v Èechách, na Moravì a na Slezsku není)",
+ "", ""};
+const char *text_SEP_29[] =
+{"Sv. Michala, Gabriela a Rafaela, archanjelov",
+ "Sv. Michaela, Gabriela a Rafaela, archandìlù",
+ "", ""};
+const char *text_SEP_30[] =
+{"Sv. Hieronyma, kòaza a uèite¾a Cirkvi",
+ "Sv. Jeronýma, knìze a uèitele církve",
+ "", ""};
 
 const char *text_ZELENY_STVRTOK[] =
 {"Zelený (ve¾ký) štvrtok - Pamiatka Pánovej veèere",

@@ -299,6 +299,33 @@ extern const char *text_AUG_28[];
 extern const char *text_AUG_29[];
 extern const char *text_AUG_30[];
 
+extern const char *text_SEP_03[];
+extern const char *text_SEP_06[];
+extern const char *text_SEP_07[];
+extern const char *text_SEP_08[];
+extern const char *text_SEP_09[];
+extern const char *text_SEP_10[];
+extern const char *text_SEP_12[];
+extern const char *text_SEP_13[];
+extern const char *text_SEP_14[];
+extern const char *text_SEP_15[];
+extern const char *text_SEP_16_CZ[];
+extern const char *text_SEP_16[];
+extern const char *text_SEP_17[];
+extern const char *text_SEP_19[];
+extern const char *text_SEP_20[];
+extern const char *text_SEP_20_2[];
+extern const char *text_SEP_21[];
+extern const char *text_SEP_22[];
+extern const char *text_SEP_23[];
+extern const char *text_SEP_24[];
+extern const char *text_SEP_26[];
+extern const char *text_SEP_27[];
+extern const char *text_SEP_28[];
+extern const char *text_SEP_28_2[];
+extern const char *text_SEP_29[];
+extern const char *text_SEP_30[];
+
 extern const char *text_DEC_08[];
 
 #endif /* __DBZALTAR_H_ */

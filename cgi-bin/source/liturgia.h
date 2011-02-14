@@ -603,6 +603,7 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_CECHY_SPOMIENKA			30
 #define LOKAL_SLAV_PLZEN_PATRON				31
 #define LOKAL_SLAV_OSTRAVA_OPAVA_SVIATOK	32
+#define LOKAL_SLAV_LITOMERICE				33
 
 /* prikazany / neprikazany sviatok */
 #define PRIKAZANY_SVIATOK 1
