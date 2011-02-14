@@ -79,6 +79,7 @@
 /*   2006-08-19a.D. | zavedený nedefinovaný define ZOBRAZ_JULIANSKY_DATUM  */
 /*   2006-08-19a.D. | doplnené liturgické farby                            */
 /*   2006-08-22a.D. | doplnená ružová liturgická farba                     */
+/*   2006-09-06a.D. | upratanie vo funkcii init_global_string (týž.ž.preNE)*/
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -2915,6 +2916,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	}
 	else
 		Log("nie\n");
+
 	Log("_local_den.denvt == DEN_NEDELA || _local_den.prik == PRIKAZANY_SVIATOK -- ");
 	if((_local_den.denvt == DEN_NEDELA) ||
 		(_local_den.prik == PRIKAZANY_SVIATOK)){
@@ -2925,15 +2927,16 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	else
 		Log("nie\n");
 
-
 	/* najprv nazov */
 	/* zmenene <b> na <span class="bold">, 2003-07-02 */
 	mystrcpy(_global_string, "<"HTML_SPAN_BOLD">", MAX_GLOBAL_STR);
+
 	if(farba == COLOR_RED){
 		/* zmenene <font color> na <span>, 2003-07-02 */
 		strcat(_global_string, "<"HTML_SPAN_RED">");
 	}
 	Log("5:_local_den.meno == %s\n", _local_den.meno); /* 08/03/2000A.D. */
+
 	if(equals(_local_den.meno, STR_EMPTY)){
 		if(_local_den.denvt == DEN_NEDELA){
 			/* nedela bez vlastneho nazvu */
@@ -2941,56 +2944,82 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 					_local_den.tyzden,
 					nazov_DNA(_local_den.denvt),
 					nazov_OBDOBIA_V(_local_den.litobd));
+
+			if(farba == COLOR_RED){
+				/* zmenene <font color> na <span>, 2003-07-02 */
+				strcat(pom, "</span>");
+			}
+			
+			strcat(pom, "</span>"); /* kvôli HTML_SPAN_BOLD, 2003-09-06 */
+
+			/* 2006-09-06: pridané prilepenie "týždòa žaltára" aj pre nedele */
+			if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE)){
+					strcat(_global_string, pom); /* 2006-08-03: prilepujeme nadvakrát */
+					sprintf(pom, "<br><"HTML_SPAN_SMALL"> %d", tyzden_zaltara(_local_den.tyzden));
+					strcat(pom, html_text_tyzden_zaltara[_global_jazyk]);
+					strcat(pom, "</span>");
+			}
 			strcat(_global_string, pom);
 		}
-		else if(obyc == ANO){
+		else{
+			/* doplnené zátvorky, kvôli span-ovaèkám na konci */
+			if(obyc == ANO){
 			/* 2005-03-21: Pridany dalsi typ exportu */
-			if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE)){
+				if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE)){
 #ifdef OLD_STYLE_obycajny_den /* 08/03/2000A.D. */
-				sprintf(pom, "%s, %s</span>, %d",
-					nazov_Dna(_local_den.denvt),
-					nazov_obdobia(_local_den.litobd),
-					tyzden_zaltara(_local_den.tyzden));
-				strcat(pom, html_text_tyzden_zaltara[_global_jazyk]);
-#else
-				if((_local_den.tyzden == 0) && (_local_den.litobd == OBD_POSTNE_I)){
-					/* <font size=-1></font> zmeneny na <span class="small"></span>, 2003-07-14 */
-					sprintf(pom, "%s po Popolcovej strede, %s</span><br><span class=\"small\"> %d",
+					sprintf(pom, "%s, %s</span>, %d",
 						nazov_Dna(_local_den.denvt),
 						nazov_obdobia(_local_den.litobd),
 						tyzden_zaltara(_local_den.tyzden));
 					strcat(pom, html_text_tyzden_zaltara[_global_jazyk]);
-					strcat(pom, "</span>");
-				}
-				else{
-					/* <font size=-1></font> zmeneny na <span class="small"></span>, 2003-07-14 */
-					sprintf(pom, "%s, %s</span>, %d",
-						nazov_Dna(_local_den.denvt),
-						nazov_obdobia(_local_den.litobd),
-						_local_den.tyzden);
-					strcat(pom, html_text_tyzden[_global_jazyk]);
-					strcat(_global_string, pom); /* 2006-08-03: prilepujeme nadvakrát */
-					sprintf(pom, "<br><span class=\"small\"> %d", tyzden_zaltara(_local_den.tyzden));
-					strcat(pom, html_text_tyzden_zaltara[_global_jazyk]);
-					strcat(pom, "</span>");
-				}
+#else
+					if((_local_den.tyzden == 0) && (_local_den.litobd == OBD_POSTNE_I)){
+						/* <font size=-1></font> zmeneny na <span class="small"></span>, 2003-07-14 */
+						sprintf(pom, "%s po Popolcovej strede, %s</span><br><span class=\"small\"> %d",
+							nazov_Dna(_local_den.denvt),
+							nazov_obdobia(_local_den.litobd),
+							tyzden_zaltara(_local_den.tyzden));
+						strcat(pom, html_text_tyzden_zaltara[_global_jazyk]);
+						strcat(pom, "</span>");
+					}
+					else{
+						/* <font size=-1></font> zmeneny na <span class="small"></span>, 2003-07-14 */
+						sprintf(pom, "%s, %s</span>, %d",
+							nazov_Dna(_local_den.denvt),
+							nazov_obdobia(_local_den.litobd),
+							_local_den.tyzden);
+						strcat(pom, html_text_tyzden[_global_jazyk]);
+						strcat(_global_string, pom); /* 2006-08-03: prilepujeme nadvakrát */
+						sprintf(pom, "<br><"HTML_SPAN_SMALL"> %d", tyzden_zaltara(_local_den.tyzden));
+						strcat(pom, html_text_tyzden_zaltara[_global_jazyk]);
+						strcat(pom, "</span>");
+					}
 #endif
-				strcat(_global_string, pom);
+					strcat(_global_string, pom);
+				}
+				else 
+					if (typ == EXPORT_DNA_VIAC_DNI_SIMPLE){
+						/* 2005-03-21: Pridane */
+						sprintf(pom, "%s, %s</span>, %d%s",
+							nazov_Dna(_local_den.denvt),
+							nazov_obdobia(_local_den.litobd),
+							_local_den.tyzden,
+							html_text_tyzden[_global_jazyk]);
+						strcat(_global_string, pom);
+					}
+				/* inak ostane string prazdny */
+
+				if(farba == COLOR_RED){
+					/* zmenene <font color> na <span>, 2003-07-02 */
+					strcat(_global_string, "</span>");
+				}
+				strcat(_global_string, "</span>"); /* zmenene <b> na <span class="bold">, 2003-07-02 */
 			}
-			else if (typ == EXPORT_DNA_VIAC_DNI_SIMPLE){
-				/* 2005-03-21: Pridane */
-				sprintf(pom, "%s, %s</span>, %d. týždeò",
-					nazov_Dna(_local_den.denvt),
-					nazov_obdobia(_local_den.litobd),
-					_local_den.tyzden);
-				strcat(_global_string, pom);
+			else{
+				Log("-- Error: _local_den.meno == \"\", avsak obyc != ANO\n");
 			}
-			/* inak ostane string prazdny */
 		}
-		else{
-			Log("-- Error: _local_den.meno == \"\", avsak obyc != ANO\n");
-		}
-	}
+	}/* if(equals(_local_den.meno, STR_EMPTY)) */
 	else{
 		/* vlastny nazov */
 		if(_local_den.denvt == DEN_NEDELA){
@@ -3001,13 +3030,15 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			strcat(_global_string, caps_BIG(_local_den.meno));
 		else
 			strcat(_global_string, _local_den.meno);
+
+		if(farba == COLOR_RED){
+			/* zmenene <font color> na <span>, 2003-07-02 */
+			strcat(_global_string, "</span>");
+		}
+		strcat(_global_string, "</span>"); /* zmenene <b> na <span class="bold">, 2003-07-02 */
 	}/* _local_den.meno != STR_EMPTY */
 
-	if(farba == COLOR_RED){
-		/* zmenene <font color> na <span>, 2003-07-02 */
-		strcat(_global_string, "</span>");
-	}
-	strcat(_global_string, "</span>"); /* zmenene <b> na <span class="bold">, 2003-07-02 */
+	/* 2006-09-06: z tohto miesta presunutá kontrola na èervenú farbu vyššie - if(farba == COLOR_RED) */
 
 	/* teraz typ slavenia */
 	if(_local_den.typslav != SLAV_NEURCENE){
