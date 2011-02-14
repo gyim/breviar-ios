@@ -100,6 +100,7 @@
 /*   2008-10-15a.D. | _vlastna_cast_full_okrem_prosieb_a_hymnu() pre CZ */
 /*                  - odvetvené liturgický kalendár aj pre JAZYK_CZ_OP  */
 /*   2008-12-04a.D. | pridané niektoré slávenia pre CZ_OP               */
+/*   2008-12-17a.D. | úpravy pre hymnus kompletória - fcia set_hymnus() */
 /*                                                                      */
 /*                                                                      */
 /* notes |                                                              */
@@ -850,6 +851,8 @@ void anchor_name_zaltar(short int den, short int tyzzal, short int modlitba, cha
 void set_hymnus(short int den, short int tyzzal, short int modlitba){
 	/* pridané èasti pre kompletórium, 2006-10-13 */
 	/* hymnus pre kompletórium je v èeskej verzii pre každý deò iný, 2006-12-04 */
+	/* toto však neplatí pre èeský dominikánský breviáø, 2008-12-16 */
+	/* pre advent II. je predpísaný hymnus, 2008-12-17 */
 	if((modlitba == MODL_KOMPLETORIUM) || (modlitba == MODL_PRVE_KOMPLETORIUM)){
 		file_name_zapamataj();
 		file_name_kompletorium(OBD_CEZ_ROK);
@@ -858,8 +861,12 @@ void set_hymnus(short int den, short int tyzzal, short int modlitba){
 				pismenko_modlitby(modlitba), ANCHOR_HYMNUS, nazov_DN_asci[den]);
 		}
 		else{
-			sprintf(_anchor, "%c_%s_%d", 
-				pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (den + tyzzal) % 2);
+			if(_global_den.litobd == OBD_ADVENTNE_II){ /* 2008-12-17: predpísaný hymnus "Kriste, ty svetlo a náš deò" */
+				sprintf(_anchor, "%c_%s_%d", pismenko_modlitby(modlitba), ANCHOR_HYMNUS, 1);
+			}
+			else{
+				sprintf(_anchor, "%c_%s_%d", pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (den + tyzzal) % 2);
+			}
 		}
 		_set_hymnus(modlitba, _file, _anchor);
 		set_LOG_zaltar;
