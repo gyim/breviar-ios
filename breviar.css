@@ -17,7 +17,7 @@
 /* 2003-07-09; 2004-03-23 */
 /* apply to all elements */ { font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 100%; }
 body, html { 
-	background-color: #FFFFFF; 
+	background-color: #FFFFCC; 
 	color: #000000; 
 	font-family: Verdana, Tahoma, Georgia, Sans Serif; 
 	scrollbar-base-color: white;
@@ -26,7 +26,7 @@ body, html {
 	scrollbar-highlight-color: #330000;
 	scrollbar-3dlight-color: white;
 	scrollbar-darkshadow-color: #330000;
-	scrollbar-track-color: #FFFFFF; 
+	scrollbar-track-color: #FFFFCC; 
 	scrollbar-arrow-color: #330000;
 }
 p { font-family: Verdana, Tahoma, Georgia, Sans Serif; color: #000000; font-style: normal; }
@@ -62,7 +62,7 @@ select { background: white; font-family: Verdana, Tahoma, Georgia, Sans Serif; f
 
 input { border: 1px; font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 90%; color: #000000; }
 
-input.button { background: #ffffcc; Verdana, Tahoma, Georgia, Sans Serif; font-size : 80%; font-weight: normal; color: #000000; border: 1px solid }
+input.button { background: #ffffFF; Verdana, Tahoma, Georgia, Sans Serif; font-size : 80%; font-weight: normal; color: #000000; border: 1px solid }
 input.reset { background: #ffffFF; Verdana, Tahoma, Georgia, Sans Serif; font-size : 80%; font-weight: normal; color: #000000; border: 1px solid }
 
 input.text { border-style: solid; background: white; }

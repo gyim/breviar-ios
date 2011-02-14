@@ -406,7 +406,7 @@ const char *nazov_slavenia_lokal[] =
 ,"len v Banskobystrickej diecéze"
 ,"len v Spišskej diecéze"
 ,"len v Rožòavskej diecéze"
-,"len v Trnavskej diecéze"
+,"len v Bratislavsko-trnavskej arcidiecéze" /* LOKAL_SLAV_TRNAVA - pôvodne bolo "len v Trnavskej diecéze", upravené 2007-08-31*/
 ,"len v Dóme sv. Martina v Bratislave"
 ,"v Spišskej diecéze sviatok hlavného patróna"
 ,"v Banskobystrickej diecéze sviatok hlavného patróna"

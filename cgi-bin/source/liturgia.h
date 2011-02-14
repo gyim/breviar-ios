@@ -610,7 +610,7 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_BYSTRICA            7
 #define LOKAL_SLAV_SPIS                8
 #define LOKAL_SLAV_ROZNAVA             9
-#define LOKAL_SLAV_TRNAVA             10
+#define LOKAL_SLAV_BA_TT              10 /* pôvodne bolo LOKAL_SLAV_TRNAVA, upravené 2007-08-31*/
 #define LOKAL_SLAV_DOM_SV_MARTINA     11
 #define LOKAL_SLAV_SPIS_PATRON        12
 #define LOKAL_SLAV_BYSTRICA_PATRON    13

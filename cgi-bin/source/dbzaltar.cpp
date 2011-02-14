@@ -71,6 +71,7 @@
 /*   2006-09-13a.D. | dokonËen· lokaliz·cia mesiacov OKT+NOV   */
 /*   2006-12-04a.D. | oprava hymnu pre Ëesk˝ komplet·¯         */
 /*   2007-07-17a.D. | oprava hymnu mcd pre niektorÈ sl·vnosti  */
+/*   2007-08-31a.D. | oprava 30.AUG na sviatok                 */
 /*                                                             */
 /*                                                             */
 /* notes |                                                     */
@@ -13148,9 +13149,9 @@ label_25_MAR:
 							break;
 							/* 2005-08-22: Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
 						}
-						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
-						_global_svaty1.typslav_lokal = LOKAL_SLAV_TRNAVA;
-						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						_global_svaty1.smer = 11; /* hoci by malo byù 8 - mieste sviatky, dali sme 11, aby tam bol aj vöedn˝ deÚ - pre ostatnÈ diecÈzy */
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_BA_TT; /* pÙvodne bolo LOKAL_SLAV_TRNAVA, upravenÈ 2007-08-31*/
+						_global_svaty1.typslav = SLAV_SVIATOK; /* pÙvodne bolo SLAV_SPOMIENKA, upravenÈ 2007-08-31*/
 						mystrcpy(_global_svaty1.meno, text_AUG_30[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
