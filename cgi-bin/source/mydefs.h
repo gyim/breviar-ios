@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* mydefs.h                                                    */
-/* (c)1999-2008 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2009 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne define'y                    */
 /* document history                                            */
@@ -46,7 +46,7 @@
 /***************************************************************/
 /*                                                             */
 /* mybase.h                                                    */
-/* (c)1999-2008 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2009 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne vecicky                     */
 /* document history                                            */
@@ -60,7 +60,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2008-12-22"
+#define BUILD_DATE "2009-01-05"
 
 #define BYTES 250
 #define SMALL 80

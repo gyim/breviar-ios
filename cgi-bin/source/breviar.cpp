@@ -1,7 +1,7 @@
 /***************************************************************************/
 /*                                                                         */
 /* breviar.cpp                                                             */
-/* (c)1998-2008 | Juraj Videky | videky@breviar.sk                         */
+/* (c)1998-2009 | Juraj Videky | videky@breviar.sk                         */
 /*                                                                         */
 /*                http://www.breviar.sk                                    */
 /*                                                                         */
@@ -7845,7 +7845,7 @@ short int getArgv(int argc, char **argv){
 					printf("\tProgram vytvara stranky (HTML vystup) pre Liturgiu hodin.\n");
 					/* build pridany 2003-07-04 */
 					printf("\tBuild: %s\n", BUILD_DATE);
-					printf("\t(c) 1999-2008 Juraj Vidéky <videky@breviar.sk>\n");
+					printf("\t(c) 1999-2009 Juraj Vidéky <videky@breviar.sk>\n");
 					printf("\n");
 					printf("\npouzitie:\n");
 					printf("\tlh [prepinac [hodnota]...]\n");
@@ -9298,7 +9298,7 @@ int main(int argc, char **argv){
 	_main_LOG("\n");
 // #endif
 	
-	_main_LOG("-- log file programu pre Liturgiu hodín (c)1999-2008 Juraj Vidéky --\n");
+	_main_LOG("-- log file programu pre Liturgiu hodín (c)1999-2009 Juraj Vidéky --\n");
 
 	/* config: dorobene 30/03/2000A.D. */
 	_main_LOG("first, reading configuration (file %s)...\n", CONFIG_FILE);

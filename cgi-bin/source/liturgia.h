@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* liturgia.h                                                  */
-/* (c)1999-2008 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2009 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne vecicky pre liturgiu hodin  */
 /* document history                                            */

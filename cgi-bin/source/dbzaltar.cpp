@@ -1,7 +1,7 @@
 /************************************************************************/
 /*                                                                      */
 /* dbzaltar.cpp                                                         */
-/* (c)1999-2008 | Juraj Videky | videky@breviar.sk                      */
+/* (c)1999-2009 | Juraj Videky | videky@breviar.sk                      */
 /*                                                                      */
 /* description | program tvoriaci stranky pre liturgiu hodin            */
 /* document history                                                     */
@@ -102,6 +102,8 @@
 /*   2008-12-04a.D. | pridanÈ niektorÈ sl·venia pre CZ_OP               */
 /*   2008-12-17a.D. | ˙pravy pre hymnus kompletÛria - fcia set_hymnus() */
 /*   2008-12-20a.D. | Ôalöie ˙pravy pre hymnus kompletÛria: set_hymnus()*/
+/*   2009-01-05a.D. | opravenÈ kompletÛrium pre vianoËn˙ a veækonoËn˙   */
+/*                    okt·vu - _set_kompletorium_slavnost_oktava()      */
 /*                                                                      */
 /*                                                                      */
 /* notes |                                                              */
@@ -960,6 +962,10 @@ void set_antifony(short int den, short int tyzzal, short int zvazok, short int m
 	 * 2006-02-09: podmienka zmenen·: 
 	 * aj pre nedeænÈ posv. ËÌtanie s˙ antifÛny v file_name_litobd_pc(OBD_CEZ_ROK);
 	 * 
+	 * 2009-01-05: keÔûe pre kompletÛrium je potrebnÈ niekedy nastaviù pre modlitbu "kompletÛrium" antifÛny
+	 * z modlitby "prvÈ kompletÛrium" - pozri _set_kompletorium_slavnost_oktava() - pouûÌvame na to parameter "zvazok"
+	 * ak zvazok == 9, znamen· to öpeci·lny prÌpad, ûe modlitba == MODL_KOMPLETORIUM, ale do stringu treba daù pismenko_modlitby(MODL_PRVE_KOMPLETORIUM)
+	 * 
 	 */
 	short int povodny_tyzzal;
 	povodny_tyzzal = tyzzal; /* 2006-01-24: uloûÌme pÙvodn˙ hodnotu */
@@ -968,14 +974,14 @@ void set_antifony(short int den, short int tyzzal, short int zvazok, short int m
 	if((modlitba == MODL_KOMPLETORIUM) || (modlitba == MODL_PRVE_KOMPLETORIUM)){
 		file_name_zapamataj();
 		file_name_kompletorium(OBD_CEZ_ROK);
-		sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1);
+		sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], (zvazok == 9)? pismenko_modlitby(MODL_PRVE_KOMPLETORIUM) : pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1);
 		_set_antifona1(modlitba, _file, _anchor);
 		set_LOG_zaltar;
 		if( 
 			((modlitba == MODL_KOMPLETORIUM) && (_global_modl_kompletorium.pocet_zalmov == 2))
 		||	((modlitba == MODL_PRVE_KOMPLETORIUM) && (_global_modl_prve_kompletorium.pocet_zalmov == 2))
 		){
-			sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], pismenko_modlitby(modlitba), ANCHOR_ANTIFONA2);
+			sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], (zvazok == 9)? pismenko_modlitby(MODL_PRVE_KOMPLETORIUM) : pismenko_modlitby(modlitba), ANCHOR_ANTIFONA2);
 			_set_antifona2(modlitba, _file, _anchor);
 			set_LOG_zaltar;
 		}
@@ -1434,6 +1440,38 @@ void _set_kompletorium_slavnost(short int modlitba, short int litobd){
 	}
 	Log("_set_kompletorium_slavnost(%d) -- end\n", modlitba);
 }/* _set_kompletorium_slavnost() */
+
+/* 2009-01-05: vo veækonoËnej a vianoËnej okt·ve sa pre beûnÈ dni berie 1. alebo 2. nedeænÈ kompletÛrium; 
+ * doteraz vöak nebola moûnosù braù "prvÈ kompletÛrium", preto som dorobil t˙to funkciu
+ */
+void _set_kompletorium_slavnost_oktava(short int modlitba, short int litobd, short int ktore){
+	/* popis parametrov:
+	 *	- "ktore" -		urËuje, Ëi sa jedn· o kompletÛrium po prv˝ch veöper·ch sl·vnosti (1) alebo po druh˝ch veöper·ch (2) 
+	 *  2008-05-08: prerobenÈ, aby vstupom bol parameter "modlitba" (nie ako doteraz, "short int ktore (1, 2)"
+	 */
+	Log("_set_kompletorium_slavnost_oktava(%d - %s), %d -- begin\n", modlitba, nazov_modlitby(modlitba), ktore);
+	if(_global_den.denvt == DEN_NEDELA){
+		/* 2008-12-20: ak sl·vnosù padne na nedeæu, berie sa nedeænÈ kompletÛrium */
+		Log("=> ak sl·vnosù padne na nedeæu, berie sa nedeænÈ kompletÛrium\n");
+		_set_kompletorium_nedela(modlitba);
+	}
+	else if(ktore == 2){ /* norm·lne nedeænÈ kompletÛrium po 2. veöper·ch */
+		_set_kompletorium_slavnost(modlitba, litobd);
+	}
+	else{ /* ktore = 1 */
+		/* nastavujeme ako pre nedeænÈ kompletÛrium po prv˝ch veöper·ch, porov. _set_kompletorium_nedela_spolocne() */
+		_global_modl_kompletorium.pocet_zalmov = 2;
+		_set_zalm1(modlitba, "z4.htm", "ZALM4");
+		_set_zalm2(modlitba, "z134.htm", "ZALM134");
+		set_hymnus(DEN_NEDELA /* den */, _global_den.tyzzal, modlitba);
+		set_antifony(DEN_NEDELA, _global_den.tyzzal, 9 /* zvazok - pre kompletÛrium sa nepouûÌvalo, vyuûitÈ na öpeci·lne nastavenie */, modlitba);
+		set_modlitba(DEN_UNKNOWN, _global_den.tyzzal, modlitba); /* je to jeden konkrÈtny deÚ mimo nedele */
+		/* nasleduj˙Ëe z·visia od liturgickÈho obdobia, preto nastavÌme in˙ kotvu (pevne z nedele) */
+		set_kcitanie(DEN_NEDELA, _global_den.tyzzal, modlitba);
+		set_kresponz(DEN_NEDELA, _global_den.tyzzal, modlitba);
+	}
+	Log("_set_kompletorium_slavnost_oktava(%d) -- end\n", modlitba);
+}/* _set_kompletorium_slavnost_oktava() */
 
 /* zaltar();
  *
@@ -4301,7 +4339,7 @@ label_24_DEC:
 	if((modlitba == MODL_PRVE_VESPERY) && (_global_den.den != 25))\
 		c = pismenko_modlitby(MODL_VESPERY);\
 	if((den == DEN_NEDELA) && (_global_den.den != 25 /* narodenie Pana */)\
-		&& (modlitba != MODL_POSV_CITANIE)){\
+		&& (modlitba != MODL_POSV_CITANIE) && (modlitba != MODL_VESPERY) && (modlitba != MODL_PRVE_VESPERY)){ /* 2009-01-05: pre prvÈ aj druhÈ veöpery 2. nedele po narodenÌ P·na kresp. rovnako ako mimo nedele */\
 		sprintf(_anchor, "%s_%c%s%s", nazov_OBD[OBD_VIANOCNE_I], c, ANCHOR_KRESPONZ, nazov_DN_asci[den]);\
 	}\
 	else if(modlitba != MODL_POSV_CITANIE){\
@@ -4425,13 +4463,18 @@ label_24_DEC:
 
 /* switch(litobd), case OBD_OKTAVA_NARODENIA -- begin ----------------------------------------- */
 		case OBD_OKTAVA_NARODENIA :/* narodenie Pana -- 1. jan. */
+			Log("OBD_OKTAVA_NARODENIA - nastavujem kompletÛrium z nedele po 1. resp. 2. veöper·ch...\n"); /* 2009-01-05 */
+			/* 2009-01-05: tu v skutoËnosti zaËÌna VIANO»N¡ OKT¡VA */
+			/* 2009-01-05: kompletÛrium vo vianoËnej okt·ve - podobne ako vo veækonoËnej okt·ve - je z nedele po prv˝ch resp. druh˝ch veöper·ch */
+			modlitba = MODL_KOMPLETORIUM;
+			_set_kompletorium_slavnost_oktava(modlitba, litobd, /* ktore */ (_global_den.den % 2) + 1);
 			Log("OBD_OKTAVA_NARODENIA - pokraËujeme ako vianoËnÈ obdobie I...\n");
 			/* a pokracujeme ako vianocne obdobie I; 14/03/2000A.D. */
 /* switch(litobd), case OBD_VIANOCNE_I -- begin ----------------------------------------------- */
 		case OBD_VIANOCNE_I :/* do slavnosti zjavenia pana */
 			Log("OBD_VIANOCNE_I\n");
 
-		/* 2006-01-24: tu zaËÌna VIANO»N… OBDOBIE I. */
+			/* 2006-01-24: tu v skutoËnosti zaËÌna VIANO»N… OBDOBIE I. */
 
 			if((_global_den.den == 26) || (_global_den.den == 27) || (_global_den.den == 28)){
 				/* maju vlastnu cast zo sv. jana apostola, sv. stefana a sv. neviniatok */
@@ -4604,13 +4647,13 @@ label_24_DEC:
 				modlitba = MODL_POPOLUDNI;
 				_bohorod_kcitanie(_anchor_vlastne_slavenie);
 				_bohorod_modlitba;
-			}
-			else if((_global_den.denvt == DEN_NEDELA) && (_global_den.mesiac - 1 == MES_JAN)){ /* druha nedela po narodeni pana */
+			}/* Panny Marie Bohorodicky */
+			else if((_global_den.denvt == DEN_NEDELA) && (_global_den.mesiac - 1 == MES_JAN)){ /* druha nedela po narodeni pana - 2. NEDEºA PO NARODENÕ P¡NA */
 				/* prve vespery */
 				modlitba = MODL_PRVE_VESPERY;
 				_vian1_hymnus;
-				_vian1_2ne_kcitanie;
 				_vian1_kresponz;
+				_vian1_2ne_kcitanie;
 				_vian1_2ne_magnifikat;
 				_vian1_2ne_prosby;
 				_vian1_2ne_modlitba;
@@ -4643,7 +4686,7 @@ label_24_DEC:
 				_vian1_2ne_kcitanie;
 				_vian1_kresponz;
 				_vian1_2ne_modlitba;
-			}
+			}/* druha nedela po narodeni pana - 2. NEDEºA PO NARODENÕ P¡NA */
 			else if(_global_den.denvr == _global_r._SVATEJ_RODINY.denvr){
 				/* sviatok svatej rodiny; 14/03/2000A.D. */
 				mystrcpy(_file, FILE_SV_RODINY, MAX_STR_AF_FILE);
@@ -4733,7 +4776,7 @@ label_24_DEC:
 					_set_zalmy_1nedele_mcd();
 				}
 
-			}
+			}/* _global_den.denvr == _global_r._SVATEJ_RODINY.denvr */
 			break;
 /* switch(litobd), case OBD_OKTAVA_NARODENIA -- end ------------------------------------------- */
 /* switch(litobd), case OBD_VIANOCNE_I -- end ------------------------------------------------- */
@@ -6876,9 +6919,16 @@ label_24_DEC:
 
 			/* 2007-12-06: kompletÛrium vo veækonoËnej okt·ve je z nedele po prv˝ch resp. druh˝ch veöper·ch 
 			 * 2008-05-08: d·vame natvrdo kompletÛrium po druh˝ch nedeæn˝ch veöper·ch; bolo by to komplikovanÈ po dneön˝ch zmen·ch...
+			 * 2009-01-05: moûnosù pouûiù prvÈ alebo druhÈ nedeænÈ kompletÛrium
 			 */
 			modlitba = MODL_KOMPLETORIUM;
+			_set_kompletorium_slavnost_oktava(modlitba, litobd, /* ktore = 1 alebo 2 */ (_global_den.den % 2) + 1);
+			/*
+			 * pÙvodn· implement·cia, ktor· umoûÚovala len kompletÛrium po 2. nedeæn˝ch veöper·ch:
+			modlitba = MODL_KOMPLETORIUM;
 			_set_kompletorium_nedela(modlitba);
+			 * ponechanÈ vöak nastavenie nasledovn˝ch ËastÌ:
+			 */
 			set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
 			set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
 			set_antifony_kompletorium_obd(DEN_NEDELA, tyzzal, modlitba, litobd); /* keÔûe sa berie nedeænÈ kompletÛrium; beztak je to pre kaûd˝ deÚ Aleluja, Aleluja, Aleluja */
