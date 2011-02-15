@@ -13757,14 +13757,14 @@ label_25_MAR:
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_benediktus;
-						_vlastna_cast_modlitba;
+						// _vlastna_cast_benediktus;
+						// _vlastna_cast_modlitba;
 						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+						// _vlastna_cast_2citanie;
+						// _vlastna_cast_modlitba;
 						modlitba = MODL_VESPERY;
-						_vlastna_cast_magnifikat;
-						_vlastna_cast_modlitba;
+						// _vlastna_cast_magnifikat;
+						// _vlastna_cast_modlitba;
 						break;
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -13882,15 +13882,15 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						// _vlastna_cast_benediktus;
-						_vlastna_cast_modlitba;
+						// _vlastna_cast_modlitba;
 
 						modlitba = MODL_POSV_CITANIE;
 						// _vlastna_cast_2citanie;
-						_vlastna_cast_modlitba;
+						// _vlastna_cast_modlitba;
 
 						modlitba = MODL_VESPERY;
 						// _vlastna_cast_magnifikat;
-						_vlastna_cast_modlitba;
+						// _vlastna_cast_modlitba;
 
 						break;
 					}
