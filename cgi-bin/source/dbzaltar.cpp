@@ -131,6 +131,9 @@
 /*   2009-04-16a.D. | opravené kompletórium pre ve¾konoènú oktávu                               */
 /*   2009-05-15a.D. | oprava v set_hymnus(): priradenie namiesto porovnania spôsobovalo chyby   */
 /*   2009-05-22a.D. | úprava text_PRO_OP[] - dominikánske slávenia neprebíjajú všeob. kalendár  */
+/*   2009-07-06a.D. | opravy pre èeské breviáre (najmä dominikánsky kalendár)                   */
+/*   2009-07-09a.D. | opravy pre èeské breviáre (najmä dominikánsky kalendár)                   */
+/*   2009-07-10a.D. | oprava pre èeské breviáre - 12. a 15. septembra                           */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -11023,21 +11026,35 @@ label_25_MAR:
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
+							/* 2009-07-10: doplnené invitatórium a niektoré èasti z vlastnej èasti */
+							modlitba = MODL_INVITATORIUM;
+							_vlastna_cast_antifona_inv;
+
 							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_modlitba;
+							_vlastna_cast_hymnus;
 							_vlastna_cast_2citanie;
+							_vlastna_cast_modlitba;
 
 							modlitba = MODL_VESPERY;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
 
 							break;
 						}
 						_global_svaty1.typslav = SLAV_SPOMIENKA;
 						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-						mystrcpy(_global_svaty1.meno, text_APR_20[_global_jazyk], MENO_SVIATKU);
+						mystrcpy(_global_svaty1.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
+						strcat(_global_svaty1.meno, text_APR_20[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 					}
@@ -11332,7 +11349,14 @@ label_25_MAR:
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty2.meno, text_APR_28_2[_global_jazyk], MENO_SVIATKU);
+					if(_global_jazyk == JAZYK_CZ_OP){
+						/* 2009-07-10: odvetvené pre dominikánov */
+						mystrcpy(_global_svaty2.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
+						strcat(_global_svaty2.meno, text_APR_28_2[_global_jazyk]);
+					}
+					else{
+						mystrcpy(_global_svaty2.meno, text_APR_28_2[_global_jazyk], MENO_SVIATKU);
+					}
 					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					break;
@@ -11367,7 +11391,14 @@ label_25_MAR:
 					*/
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
-					mystrcpy(_global_svaty1.meno, text_APR_29[_global_jazyk], MENO_SVIATKU);
+					if(_global_jazyk == JAZYK_CZ_OP){
+						/* 2009-07-10: odvetvené pre dominikánov */
+						mystrcpy(_global_svaty1.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
+						strcat(_global_svaty1.meno, text_APR_29[_global_jazyk]);
+					}
+					else{
+						mystrcpy(_global_svaty1.meno, text_APR_29[_global_jazyk], MENO_SVIATKU);
+					}
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					break;
@@ -11401,7 +11432,14 @@ label_25_MAR:
 							_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 							_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 						}
-						mystrcpy(_global_svaty1.meno, text_APR_30_1[_global_jazyk], MENO_SVIATKU);
+						if(_global_jazyk == JAZYK_CZ_OP){
+							/* 2009-07-10: odvetvené pre dominikánov */
+							mystrcpy(_global_svaty1.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
+							strcat(_global_svaty1.meno, text_APR_30_1[_global_jazyk]);
+						}
+						else{
+							mystrcpy(_global_svaty1.meno, text_APR_30_1[_global_jazyk], MENO_SVIATKU);
+						}
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					}
@@ -11682,7 +11720,9 @@ label_25_MAR:
 						}
 						_global_svaty1.typslav = SLAV_SPOMIENKA;
 						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-						mystrcpy(_global_svaty1.meno, text_MAJ_10[_global_jazyk], MENO_SVIATKU);
+						/* 2009-07-10: odvetvené pre dominikánov */
+						mystrcpy(_global_svaty1.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
+						strcat(_global_svaty1.meno, text_MAJ_10[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 					}
@@ -12250,12 +12290,15 @@ label_25_MAR:
 						if(_global_jazyk == JAZYK_CZ_OP){
 							_global_svaty1.typslav = SLAV_SVIATOK;
 							_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
+							/* 2009-07-10: odvetvené pre dominikánov */
+							mystrcpy(_global_svaty1.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
+							strcat(_global_svaty1.meno, text_MAJ_30[_global_jazyk]);
 						}
 						else{ /* (_global_jazyk == JAZYK_CZ) */
 							_global_svaty1.typslav = SLAV_SPOMIENKA;
 							_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+							mystrcpy(_global_svaty1.meno, text_MAJ_30[_global_jazyk], MENO_SVIATKU);
 						}
-						mystrcpy(_global_svaty1.meno, text_MAJ_30[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 					}
@@ -14830,12 +14873,15 @@ label_25_MAR:
 						/* 2009-03-24: odvetvené pre dominikánov */
 						_global_svaty1.typslav = SLAV_SPOMIENKA;
 						_global_svaty1.smer = 11; /* povinne spomienky podla vseobecneho kalendara - zmenené na ¾ubovo¾nú */
+						/* 2009-07-10: odvetvené pre dominikánov */
+						mystrcpy(_global_svaty1.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
+						strcat(_global_svaty1.meno, text_AUG_23[_global_jazyk]);
 					}
 					else{
 						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty1.meno, text_AUG_23[_global_jazyk], MENO_SVIATKU);
 					}
-					mystrcpy(_global_svaty1.meno, text_AUG_23[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					break;
@@ -14999,12 +15045,15 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_CZ_OP){
 						_global_svaty1.typslav = SLAV_SVIATOK;
 						_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
+						/* 2009-07-10: odvetvené pre dominikánov */
+						mystrcpy(_global_svaty1.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
+						strcat(_global_svaty1.meno, text_AUG_28[_global_jazyk]);
 					}
 					else{
 						_global_svaty1.typslav = SLAV_SPOMIENKA;
 						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty1.meno, text_AUG_28[_global_jazyk], MENO_SVIATKU);
 					}
-					mystrcpy(_global_svaty1.meno, text_AUG_28[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					break;
@@ -15249,16 +15298,17 @@ label_25_MAR:
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
-						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_modlitba;
+						if(_global_jazyk == JAZYK_SK){ /* 2009-07-10: pre èeské breviáre všetko zo spoloènej èasti */
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
 
-						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
 
-						modlitba = MODL_VESPERY;
-						_vlastna_cast_modlitba;
-
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+						}
 						break;
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -15369,10 +15419,19 @@ label_25_MAR:
 						  (query_type != PRM_DETAILY))
 							set_spolocna_cast(sc, poradie_svaty);
 
-						modlitba = MODL_PRVE_VESPERY;
-						_vlastna_cast_full(modlitba);
-						_set_zalmy_sviatok_panien(modlitba);
+						/* 2009-07-10: nastavenie pre èeský breviár - je to len spomienka */
+						if(_global_jazyk == JAZYK_SK){
+							modlitba = MODL_PRVE_VESPERY;
+							_vlastna_cast_full(modlitba);
+							_set_zalmy_sviatok_panien(modlitba);
 
+							/* 2008-12-09: doplnené kompletórium */
+							modlitba = MODL_PRVE_KOMPLETORIUM;
+							_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+
+							modlitba = MODL_KOMPLETORIUM;
+							_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+						}
 						/* 2007-11-14: doplnené invitatórium */
 						modlitba = MODL_INVITATORIUM;
 						_vlastna_cast_antifona_inv;
@@ -15382,7 +15441,15 @@ label_25_MAR:
 						_set_zalmy_1nedele_rch(); /* 2008-08-15: doplnené */
 
 						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_full(modlitba);
+						/* 2009-07-10: nastavenie pre èeský breviár - je to len spomienka */
+						if(_global_jazyk == JAZYK_SK){
+							_vlastna_cast_full(modlitba);
+						}
+						else{
+							_vlastna_cast_modlitba;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_2citanie;
+						}
 
 						/* 2006-02-07: doplnené mcd; */
 						_vlastna_cast_mcd_ant_kcitresp_modl;
@@ -15399,16 +15466,10 @@ label_25_MAR:
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_sviatok_panien(modlitba);
 
-						/* 2008-12-09: doplnené kompletórium */
-						modlitba = MODL_PRVE_KOMPLETORIUM;
-						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
-
-						modlitba = MODL_KOMPLETORIUM;
-						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
-
 						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
-					if(_global_jazyk == JAZYK_SK){ /* 2006-09-12: odvetvené pre Slovensko */
+					if(_global_jazyk == JAZYK_SK){
+						/* 2006-09-12: odvetvené pre Slovensko */
 						_global_svaty1.typslav = SLAV_SLAVNOST;
 						_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 					}
@@ -16105,12 +16166,15 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_CZ_OP){
 						_global_svaty1.typslav = SLAV_SVIATOK;
 						_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
+						/* 2009-07-10: odvetvené pre dominikánov */
+						mystrcpy(_global_svaty1.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
+						strcat(_global_svaty1.meno, text_OKT_04[_global_jazyk]);
 					}
 					else{
 						_global_svaty1.typslav = SLAV_SPOMIENKA;
 						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty1.meno, text_OKT_04[_global_jazyk], MENO_SVIATKU);
 					}
-					mystrcpy(_global_svaty1.meno, text_OKT_04[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					break;
@@ -16200,12 +16264,15 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_CZ_OP){
 						_global_svaty1.typslav = SLAV_SLAVNOST;
 						_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
+						/* 2009-07-10: odvetvené pre dominikánov */
+						mystrcpy(_global_svaty1.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
+						strcat(_global_svaty1.meno, text_OKT_07[_global_jazyk]);
 					}
 					else{
 						_global_svaty1.typslav = SLAV_SPOMIENKA;
 						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty1.meno, text_OKT_07[_global_jazyk], MENO_SVIATKU);
 					}
-					mystrcpy(_global_svaty1.meno, text_OKT_07[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					break;
