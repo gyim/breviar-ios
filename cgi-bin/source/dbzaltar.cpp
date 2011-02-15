@@ -11099,8 +11099,9 @@ label_25_MAR:
 							_global_svaty1.typslav_lokal = LOKAL_SLAV_PRAHA_PATRON; /* 2006-08-15: pridané */
 						}
 						else{
-							_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-							_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+							/* 2009-04-23: oprava: už nie je ¾ubovo¾ná spomienka, ale povinná spomienka */
+							_global_svaty1.typslav = SLAV_SPOMIENKA;
+							_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 						}
 						mystrcpy(_global_svaty1.meno, text_APR_23[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
