@@ -137,6 +137,7 @@
 /*   2009-07-27a.D. | oprava viacerých drobných chybièiek pre sk aj cz breviáre                 */
 /*   2009-07-30a.D. | oprava viacerých drobných chybièiek; doplnenie svätcov (zo všeob.kalend.) */
 /*   2009-08-11a.D. | drobné opravy pre èeský kalendár (zo všeobecného kalendára)               */
+/*   2009-08-25a.D. | drobné opravy pre èeský kalendár (sv. Vojtech, sv. Prokop)                */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -11048,10 +11049,11 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							/* 2008-12-10: doplnené pre JAZYK_CZ_OP - vlastný hymnus a niektoré èasti pre rch a v */
+							/* 2009-08-25: opravené a doplnené aj pre JAZYK_CZ */
 							modlitba = MODL_RANNE_CHVALY;
 							_vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
-							if(_global_jazyk == JAZYK_CZ_OP){
+							if((_global_jazyk == JAZYK_CZ_OP) || ((_global_jazyk == JAZYK_CZ))){
 								_vlastna_cast_hymnus;
 								_vlastna_cast_antifony;
 								_vlastna_cast_kcitanie;
@@ -11061,19 +11063,18 @@ label_25_MAR:
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_modlitba;
 							_vlastna_cast_2citanie;
-							if(_global_jazyk == JAZYK_CZ_OP){
+							if((_global_jazyk == JAZYK_CZ_OP) || ((_global_jazyk == JAZYK_CZ))){
 								_vlastna_cast_hymnus;
 							}
 
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
-							if(_global_jazyk == JAZYK_CZ_OP){
+							if((_global_jazyk == JAZYK_CZ_OP) || ((_global_jazyk == JAZYK_CZ))){
 								_vlastna_cast_hymnus;
 								_vlastna_cast_kcitanie;
 								_vlastna_cast_kresponz;
 							}
-
 							break;
 						}
 						if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
@@ -13249,7 +13250,7 @@ label_25_MAR:
 					break;
 				case 4: /* MES_JUL */
 					if(_global_jazyk == JAZYK_SK){
-						/* 2009-07-09: odvetvené len pre SK */
+						/* 2009-07-09: odvetvené len pre SK; 2009-08-25: je aj pre cz+czop, ale až ako 2. v poradí */
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
 							if(query_type != PRM_DETAILY)
@@ -13263,7 +13264,6 @@ label_25_MAR:
 							_vlastna_cast_2citanie;
 
 							/* nema vespery, lebo su 1. vespery zo sv. cyrila a metoda */
-
 							break;
 						}
 						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -13273,7 +13273,27 @@ label_25_MAR:
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					}
 					else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
+						/* 2009-08-25: opravené a doplnené */
 						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_full(modlitba);
+
+							modlitba = MODL_POSV_CITANIE;
+							if(_global_jazyk == JAZYK_CZ_OP)
+								_vlastna_cast_hymnus; // 2009-08-25: pre dominikánov je aj vlastný hymnus
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_full(modlitba);
+
+							break;
+						}
+						else if(poradie_svaty == 2){
 							/* definovanie parametrov pre modlitbu */
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
@@ -13285,9 +13305,6 @@ label_25_MAR:
 							_vlastna_cast_modlitba;
 							_vlastna_cast_2citanie;
 
-							modlitba = MODL_VESPERY;
-							_vlastna_cast_modlitba;
-
 							break;
 						}
 						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -13296,6 +13313,12 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_JUL_04_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						pocet = 2;
+						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty2.meno, text_JUL_04[_global_jazyk], MENO_SVIATKU);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL, MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-08: doplnené */);
+						_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					}
 					break;
 				case 5: /* MES_JUL */
