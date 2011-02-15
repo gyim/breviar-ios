@@ -2541,6 +2541,15 @@ const char *text_JUL_09[] =
  "Sv. Augustina Žao Ronga, knìze a jeho druhù, muèedníkù",
  "(nincs Magyarországon)",
  };
+const char *text_JUL_09_2[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a na Slezsku není)",
+ "",
+ "",
+ "",
+ "Sv. Jana Kolínského, knìze, a druhù, muèedníkù",
+ "(nincs Magyarországon)",
+ };
 const char *text_JUL_11[] = 
 {"Sv. Benedikta, opáta, patróna Európy",
  "Sv. Benedikta, opata, patrona Evropy",

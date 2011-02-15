@@ -13374,6 +13374,40 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUL_09[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 					_global_svaty1.farba = LIT_FARBA_CERVENA;
+					if(_global_jazyk == JAZYK_CZ_OP){
+						pocet = 2;
+						if(poradie_svaty == 2){
+							/* definovanie parametrov pre modlitbu */
+
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty2.typslav = SLAV_SPOMIENKA;
+						_global_svaty2.smer = 12; /* povinne spomienky podla vseobecneho kalendara - nastavené ako ¾ubovo¾ná*/
+						mystrcpy(_global_svaty2.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
+						strcat(_global_svaty2.meno, text_JUL_09_2[_global_jazyk]);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+						_global_svaty2.farba = LIT_FARBA_CERVENA;
+					}/* czop only */
 					break;
 				case 11: /* MES_JUL */
 					/* kedysi bola iba spomienka, v Európe sviatok; už upravené aj v CZ aj SK */
@@ -14499,8 +14533,7 @@ label_25_MAR:
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
 					break;
 				case 15: /* MES_AUG */
-					_global_svaty1.spolcast =
-						_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
 					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 						/* preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o sviatok Pana,
@@ -14536,6 +14569,7 @@ label_25_MAR:
 						_vlastna_cast_hymnus;
 						_vlastna_cast_antifony;
 						_vlastna_cast_kresponz;
+						_set_zalmy_sviatok_marie(modlitba); // 2009-05-18: doplnené
 
 						/* 2006-02-07: doplnené mcd */
 						_vlastna_cast_mcd_ant_kcitresp_modl;
