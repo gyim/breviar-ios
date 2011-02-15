@@ -33,6 +33,7 @@
 /*   2009-04-08a.D. | zakonèenie modlitby (pre modlitbu cezdeò */
 /*                    a komplet. sa pouíva kratšie zakonèenie)*/
 /*   2009-05-15a.D. | pridané text_PRO_OP[]                    */
+/*   2009-08-26a.D. | pridané html_button_nazov_modlitby()     */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -393,13 +394,14 @@ const char *nazov_farby_jazyk[POCET_FARIEB + 1][POCET_JAZYKOV + 1] =
 
 #define		nazov_farby(a)	nazov_farby_jazyk[a][_global_jazyk]
 
+/* 2009-08-26: zmena na štandardné HTML elementy, aby sa dalo pouíva ako inline CSS style */
 /* codes for colors - HTML specific */
 const char *html_farba_pozadie[POCET_FARIEB + 1] =
-{"black", "red", "white", "green", "purple", "#FF6699" /* "fuchsia" */};
+{"#000000" /* "black" */, "#ff0000" /* "red" */, "#ffffff" /* "white" */, "#008000" /* "green" */, "#800080" /* "purple" */, "#FF6699" /* "fuchsia" */};
 
 /* codes for colors - HTML specific */
 const char *html_farba_popredie[POCET_FARIEB + 1] =
-{"white", "white", "black", "white", "white", "blue"};
+{"#ffffff" /* "white" */, "#ffffff" /* "white" */, "#000000" /* "black" */, "#ffffff" /* "white" */, "#ffffff" /* "white" */, "#0000ff" /* "blue" */};
 
 /* codes for number of the week from psaltery (psalterium per quattuor hebdomadas distributum) */
 const char *rimskymi_tyzden_zaltara[] =
@@ -770,6 +772,28 @@ const char *html_button_posv_citanie[] = {"Posv. èít.", "Ètení", "Reading", "Off
 #ifndef HTML_BUTTON_POSV_CITANIE
 #define HTML_BUTTON_POSV_CITANIE	html_button_posv_citanie[_global_jazyk]
 #endif
+
+const char *html_button_nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] = 
+{ {"Inv.", "Inv.", "Inv.", "Inv.", "", "Inv.", "Inv."}
+, {"Ranné chvály", "Ranní chvály", "Morning prayer", "Laudes", "", "Ranní chvály", "Reggeli dicséret"}
+, {"Posv. èít.", "Ètení", "Reading", "Off. lect.", "", "Ètení", "Olvasmányos imaóra"}
+, {"9h", "9h", "9h", "Tertia", "", "Tercie", "Tertia"}
+, {"12h", "12h", "12h", "Sexta", "", "Sexta", "Sexta"}
+, {"15h", "15h", "15h", "Nona", "", "Nona", "Nona"}
+, {"Vešpery", "Nešpory", "Vesperae", "Vésperae", "", "Veèerní chvály", "Esti dicséret"}
+, {"Kompl.", "Kompl.", "Compl.", "Compl.", "", "Kompl.", "Kompl."}
+// táto sa pre HTML buttony nepouíva
+	, {"neurèená", "neurèena", "not-defined", "no data", "", "neurèena", "nem azonosított"}
+, {"prvé vešpery", "první nešpory", "1st Vesperae", "I vesper&#230;", "", "První veèerní chvály", "I. esti dicséret" }
+, {"Kompl.", "Kompl.", "Compl.", "Compl.", "", "Kompl.", "Kompl."}
+// táto sa pre HTML buttony nepouíva
+	, {"druhé vešpery", "druhé nešpory", "2nd Vesperae", "II vesper&#230;", "", "Druhé veèerní chvály", "II. esti dicséret" }
+// táto sa pre HTML buttony nepouíva
+	, {"kompletórium po druhıch vešperách", "kompletáø po druhıch nešporech", "2nd Completary", "II completorio", "", "Kompletáø po druhıch veèerních chválách", "II. esti dicséret után" }
+, {"Detaily...", "Podrobnìji...", "Details...", "Optiónes...", "", "Podrobnìji...", "Részletek..."}
+};
+
+#define		html_button_nazov_modlitby(a)	html_button_nazov_modlitby_jazyk[a][_global_jazyk]
 
 /* special button: Details... */
 const char *html_button_detaily[] = {"Detaily...", "Podrobnìji...", "Details...", "Optiónes...", "", "Podrobnìji...", "Részletek..."};

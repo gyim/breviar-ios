@@ -3,6 +3,43 @@
 /* mysystem.h                                                  */
 /* (c)1999-2009 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
+/* !!! popis niûöie -- for description see below !!!           */
+/*                                                             */
+/***************************************************************/
+#include "vstudio.h"
+
+#ifndef __MYSYSTEM_H_
+#define __MYSYSTEM_H_
+
+#undef USE_UNCGI
+
+#undef MODEL_linux
+#undef MODEL_linux_commandline
+#undef MODEL_Windows_RUBY
+#undef MODEL_Windows_commandline
+
+#undef MODEL_DEBUG_linux
+#undef MODEL_DEBUG_linux_commandline
+#undef MODEL_DEBUG_Windows_RUBY
+#undef MODEL_DEBUG_Windows_commandline
+
+/* Modely pre ostrÈ pouûitie -- for release */
+//#define MODEL_linux
+//#define MODEL_linux_commandline
+#define MODEL_Windows_RUBY
+//#define MODEL_Windows_commandline
+
+/* Modely pre debugovanie -- for debug */
+//#define MODEL_DEBUG_linux
+//#define MODEL_DEBUG_linux_commandline
+//#define MODEL_DEBUG_Windows_RUBY
+//#define MODEL_DEBUG_Windows_commandline
+
+/***************************************************************/
+/*                                                             */
+/* mysystem.h                                                  */
+/* (c)1999-2009 | Juraj Videky | videky@breviar.sk             */
+/*                                                             */
 /* description | obsahuje jediny #define, urcujuci, v akom     */
 /*               systeme program pracuje; ovplyvnuje tvorbu    */
 /*               linkov, DEBUG #define, veci pre loggovanie a  */
@@ -25,28 +62,9 @@
 /*   2007-11-20a.D. | doplnenÈ EXPORT_HTML_SPECIALS            */
 /*   2008-05-19a.D. | EXPORT_HTML_FILENAME_ANCHOR aj pre linux */
 /*   2008-08-08a.D. | doplnenÈ EXPORT_CMDLINE_CSS              */
+/*   2009-08-26a.D. | pred popis predsunutÈ samotnÈ nastavenie */
 /*                                                             */
 /***************************************************************/
-
-#include "vstudio.h"
-
-#ifndef __MYSYSTEM_H_
-#define __MYSYSTEM_H_
-
-/* OS_...    - uz ani nie su potrebne (kedysi pre cesty) */
-/* MODEL_... - model kompilacie */
-
-#undef USE_UNCGI
-
-#undef MODEL_linux
-#undef MODEL_linux_commandline
-#undef MODEL_Windows_RUBY
-#undef MODEL_Windows_commandline
-
-#undef MODEL_DEBUG_linux
-#undef MODEL_DEBUG_linux_commandline
-#undef MODEL_DEBUG_Windows_RUBY
-#undef MODEL_DEBUG_Windows_commandline
 
 /*
  * Pozn·mka: Pri buildovanÌ nezabudni zmeniù datum v mydefs.h (BUILD_DATE).
@@ -76,17 +94,8 @@
  *
  */
 
-/* Modely pre ostrÈ pouûitie */
-//#define MODEL_linux
-//#define MODEL_linux_commandline
-#define MODEL_Windows_RUBY
-//#define MODEL_Windows_commandline
-
-/* Modely pre debugovanie */
-//#define MODEL_DEBUG_linux
-//#define MODEL_DEBUG_linux_commandline
-//#define MODEL_DEBUG_Windows_RUBY
-//#define MODEL_DEBUG_Windows_commandline
+/* OS_...    - uz ani nie su potrebne (kedysi pre cesty) */
+/* MODEL_... - model kompilacie */
 
 /* --------------------------------------------------------------------- */
 /* prerobene 23/02/2000A.D. -- 24/02/2000A.D. */
@@ -198,4 +207,3 @@
 #define		UNDERSCORE	'_'
 
 #endif /* __MYSYSTEM_H_ */
-
