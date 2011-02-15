@@ -29,6 +29,7 @@
 /*   2008-08-15a.D. | pridanı ïalší "jazyk" (cz-op)            */
 /*   2009-01-29a.D. | pridanı ïalší jazyk - maïarèina (hu)     */
 /*   2009-02-01a.D. | hungarian translation added by László    */
+/*   2009-03-24a.D. | úpravy liturgického kalendára pre czop   */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -320,7 +321,7 @@ const char *zvazok_OBD[] =
 /* the name of celebration */
 const char *nazov_slavenia_jazyk[POCET_SLAVENI + 1][POCET_JAZYKOV + 1] =
 {{"___", "___", "___", "", ""}, 
- {"slávnos", "slavnost", "celebration", "sollemnitas", "","Slavnost", "fõünnep"},
+ {"slávnos", "slavnost", "celebration", "sollemnitas", "","SLAVNOST", "fõünnep"},
  {"sviatok", "svátek", "", "festum", "","Svátek", "ünnep"},
  {"spomienka", "památka", "", "memoria", "","Památka", "emléknap"},
  {"¾ubovo¾ná spomienka", "nezávazná památka", "", "memoria ad libitum", "","nezávazná památka", "tetszés szerinti emléknap"},
@@ -1230,7 +1231,7 @@ const char *text_JAN_07[] =
  "",
  "S. Raimundi de Penyafort, presb.",
  "",
- "Sv. Rajmunda z Penafortu, knìze",
+ "Sv. Rajmunda z Peòafortu, knìze",
  "Penyaforti Szent Rajmund áldozópap",
  };
 const char *text_JAN_KRST[] = 
@@ -1251,6 +1252,15 @@ const char *text_JAN_13[] =
  "Sv. Hilaria, biskupa a uèitele Církve",
  "Szent Hiláriusz (Vidor) püspök és egyháztanító",
  };
+const char *text_JAN_15[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Sv. Františka Fernándeze de Capillas, knìze, Petra Sanse, biskupa, a druhù, èínskıch muèedníkù",
+ "hu_",
+ };
 const char *text_JAN_17[] = 
 {"Sv. Antona, opáta",
  "Sv. Antonína, opata",
@@ -1268,6 +1278,15 @@ const char *text_JAN_18[] =
  "",
  "Panny Marie, Matky jednoty køesanù",
  "(nincs Magyarországon)",
+ };
+const char *text_JAN_19[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Sv. Markéty Uherské, panny, mnišky",
+ "hu_",
  };
 const char *text_JAN_20_1[] = 
 {"Sv. Fabiána, pápea a muèeníka",
@@ -1395,6 +1414,15 @@ const char *text_FEB_03_2[] =
  "Sv. Ansgara, biskupa",
  "Szent Anszgár (Oszkár) püspök",
  };
+const char *text_FEB_04[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Sv. Kateøiny z Ricci, panny, øeholnice",
+ "hu_",
+ };
 const char *text_FEB_05[] = 
 {"Sv. Agaty, panny a muèenice",
  "Sv. Agáty, panny a muèednice",
@@ -1449,6 +1477,24 @@ const char *text_FEB_11[] =
  "Panny Marie Lurdské",
  "A Lourdes-i Boldogságos Szûz Mária",
  };
+const char *text_FEB_12[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Bl. Reginalda z Orléansu, knìze",
+ "hu_",
+ };
+const char *text_FEB_13[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Bl. Jordána Saského, knìze",
+ "hu_",
+ };
 const char *text_FEB_14[] = 
 {"(na Slovensku sa slávi 5. júla)",
  "(slaví se 5. èervna)",
@@ -1466,6 +1512,15 @@ const char *text_FEB_17[] =
  "",
  "Sv. Alexia a druhù, øeholníkù",
  "A szervita rend hét szent alapítója",
+ };
+const char *text_FEB_18[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Bl. Jana z Fiesole neboli fra Angelica, knìze",
+ "hu_",
  };
 const char *text_FEB_21[] = 
 {"Sv. Petra Damianiho, biskupa a uèite¾a Cirkvi",
@@ -1647,6 +1702,15 @@ const char *text_APR_13[] =
  "Sv. Martina I., papee a muèedníka",
  "Szent I. Márton pápa és vértanú",
  };
+const char *text_APR_20[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Sv. Aneky z Montepulciana, panny, mnišky",
+ "hu_",
+ };
 const char *text_APR_21[] = 
 {"Sv. Anzelma, biskupa a uèite¾a Cirkvi",
  "Sv. Anselma, biskupa a uèitele církve",
@@ -1707,7 +1771,7 @@ const char *text_APR_28_2[] =
  "",
  "S. Ludovici M. Grignion de Montfort, presb.",
  "",
- "Sv. Ludvíka Marie Grignona z Montfortu, knìze",
+ "Sv. Ludvíka Marie Grignona z Montfortu, knìze, terciáøe",
  "(nincs Magyarországon)",
  };
 const char *text_APR_29[] = 
@@ -1716,7 +1780,7 @@ const char *text_APR_29[] =
  "",
  "S. Catharinae Senensis, virg. et Eccl. doct.",
  "",
- "Sv. Kateøiny Sienské, panny a uèitelky Církve, spolupatronky Evropy",
+ "Sv. Kateøiny Sienské, panny a uèitelky Církve, spolupatronky Evropy, terciáøky",
  "Sienai Szent Katalin szûz és egyháztanító",
  };
 const char *text_APR_30_1[] = 
@@ -1782,6 +1846,15 @@ const char *text_MAJ_08[] =
  "Panny Marie, Prostøednice všech milostí",
  "(nincs Magyarországon)",
  };
+const char *text_MAJ_10[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Sv. Antonína Pierozziho neboli Florentského, biskupa",
+ "hu_",
+ };
 const char *text_MAJ_12_1[] = 
 {"Sv. Nerea a Achila, muèeníkov",
  "Sv. Nerea a Achillea, muèedníkù",
@@ -1826,6 +1899,15 @@ const char *text_MAJ_14[] =
  "",
  "Sv. Matìje, apoštola",
  "(nincs Magyarországon)",
+ };
+const char *text_MAJ_15[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Panny Marie, ochránkynì Øádu kazatelù",
+ "hu_",
  };
 const char *text_MAJ_16[] = 
 {"Sv. Jána Nepomuckého, kòaza a muèeníka",
@@ -1872,6 +1954,15 @@ const char *text_MAJ_21[] =
  "Vıroèí posvìcení katedrály sv. Petra a Pavla",
  "(nincs Magyarországon)",
  };
+const char *text_MAJ_21_2[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Bl. Hyacinta Marie Cormiera, knìze",
+ "hu_",
+ };
 const char *text_MAJ_22[] = 
 {"(na Slovensku nie je)",
  "Sv. Rity z Cascie, øeholnice",
@@ -1880,6 +1971,15 @@ const char *text_MAJ_22[] =
  "",
  "Sv. Rity z Cascie, øeholnice",
  "Szent Rita özvegy",
+ };
+const char *text_MAJ_24[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Pøenesení ostatkù sv. Otce Dominika",
+ "hu_",
  };
 const char *text_MAJ_25_1[] = 
 {"Sv. Bédu Ctihodného, kòaza a uèite¾a Cirkvi",
@@ -1932,7 +2032,7 @@ const char *text_MAJ_30[] =
  "",
  "(non est in Latina)",
  "",
- "Sv. Zdislavy",
+ "Sv. Zdislavy z Lemberka, matky rodiny, terciáøky, spolupatronky provincie",
  "(nincs Magyarországon)",
  };
 const char *text_MAJ_31[] = 
@@ -2106,6 +2206,15 @@ const char *text_JUN_03[] =
  "Sv. Karla Lwangy a druhù, muèedníkù",
  "Lwanga Szent Károly és társai, vértanúk",
  };
+const char *text_JUN_04[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Sv. Petra Veronského, knìze a muèedníka",
+ "hu_",
+ };
 const char *text_JUN_05[] = 
 {"Sv. Bonifáca, biskupa a muèeníka",
  "Sv. Bonifáce, biskupa a muèedníka",
@@ -2124,6 +2233,15 @@ const char *text_JUN_06[] =
  "Sv. Norberta, biskupa",
  "Szent Norbert püspök",
  };
+const char *text_JUN_08[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Bl. Diany Andalo a Cecílie, panen, mnišek",
+ "hu_",
+ };
 const char *text_JUN_09[] = 
 {"Sv. Efréma, diakona a uèite¾a Cirkvi",
  "Sv. Efréma Syrského, jáhna a uèitele církve",
@@ -2132,6 +2250,15 @@ const char *text_JUN_09[] =
  "",
  "Sv. Efréma Syrského, jáhna a uèitele Církve",
  "Szent Efrém diakónus és egyháztanító",
+ };
+const char *text_JUN_10[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Bl. Jana Dominiciho, biskupa",
+ "hu_",
  };
 const char *text_JUN_11[] = 
 {"Sv. Barnabáša, apoštola",
@@ -2421,6 +2548,15 @@ const char *text_JUL_17_2[] =
  "Bl. Èeslava a sv. Hyacinta, knìí",
  "(nincs Magyarországon)",
  };
+const char *text_JUL_17_3[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Bl. Èeslava z Polska, knìze",
+ "hu_",
+ };
 const char *text_JUL_20[] = 
 {"(na Slovensku nie je)",
  "Sv. Apolináøe, biskupa a muèedníka",
@@ -2556,6 +2692,15 @@ const char *text_AUG_02_2[] =
  "Sv. Petra Juliána Eymarda, knìze",
  "(nincs Magyarországon)",
  };
+const char *text_AUG_02_3[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Bl. Jany, matky sv. Otce Dominika",
+ "hu_",
+ };
 const char *text_AUG_04[] = 
 {"Sv. Jána Márie Vianneya, kòaza",
  "Sv. Jana Marie Vianneye, knìze",
@@ -2601,13 +2746,22 @@ const char *text_AUG_07_2[] =
  "Sv. Kajetána, knìze",
  "Szent Kajetán áldozópap",
  };
+const char *text_AUG_07_3[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Bl. Jany, matky sv. Otce Dominika",
+ "hu_",
+ };
 const char *text_AUG_08[] = 
 {"Sv. Dominika, kòaza",
  "Sv. Dominika, knìze",
  "",
  "",
  "",
- "Sv. Dominika, knìze",
+ "Sv. Otce Dominika, knìze",
  "Szent Domonkos áldozópap",
  };
 const char *text_AUG_09[] = 
@@ -2682,6 +2836,24 @@ const char *text_AUG_16[] =
  "Sv. Štìpána Uherského",
  "(nincs Magyarországon)",
  };
+const char *text_AUG_17[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Sv. Hyacinta z Polska, knìze",
+ "hu_",
+ };
+const char *text_AUG_18[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Bl. Mannesa neboli Mamesa, knìze, bratra sv. Otce Dominika",
+ "hu_",
+ };
 const char *text_AUG_19[] = 
 {"Sv. Jána Eudes, kòaza",
  "Sv. Jana Eudese, knìze",
@@ -2724,7 +2896,7 @@ const char *text_AUG_23[] =
  "",
  "",
  "",
- "Sv. Rùeny z Limy, panny",
+ "Sv. Rùeny Floresové neboli z Limy, panny, terciáøky",
  "Limai Szent Róza szûz",
  };
 const char *text_AUG_24[] = 
@@ -2916,6 +3088,15 @@ const char *text_SEP_17[] =
  "Sv. Roberta Bellarmina, biskupa a uèitele Církve",
  "Bellarmin Szent Róbert püspök és egyháztanító",
  };
+const char *text_SEP_18[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Sv. Jana Maciase, øeholníka",
+ "hu_",
+ };
 const char *text_SEP_19[] = 
 {"Sv. Januára, biskupa a muèeníka",
  "Sv. Januária, biskupa a muèedníka",
@@ -2988,6 +3169,15 @@ const char *text_SEP_26[] =
  "Sv. Kosmy a Damiána, muèedníkù",
  "Szent Kozma és Damján vértanúk",
  };
+const char *text_SEP_26_2[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Sv. Dominika Ibanìze z Erquicia, Jakuba Kyušei Tomonagy, knìí, Vavøince Ruize, otce rodiny, a druhù, japonskıch muèedníkù",
+ "hu_",
+ };
 const char *text_SEP_27[] = 
 {"Sv. Vincenta de Paul, kòaza",
  "Sv. Vincence z Paula, knìze",
@@ -3003,7 +3193,7 @@ const char *text_SEP_28[] =
  "",
  "",
  "",
- "Sv. Václava, muèedníka, hlavního patrona èeského národa",
+ "Sv. Václava, muèedníka, hlavního patrona èeského národa, hlavního patrona provincie",
  "Szent Vencel vértanú",
  };
 const char *text_SEP_28_2[] = 
@@ -3012,7 +3202,7 @@ const char *text_SEP_28_2[] =
  "",
  "",
  "",
- "(pro dominikány není)",
+ "(pro dominikány není - 26.9.)",
  "(nincs Magyarországon)",
  };
 const char *text_SEP_29[] = 
@@ -3057,8 +3247,17 @@ const char *text_OKT_04[] =
  "",
  "",
  "",
- "Sv. Františka z Assisi",
+ "Sv. Otce Františka z Assisi",
  "Assisi Szent Ferenc",
+ };
+const char *text_OKT_05[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Bl. Rajmunda delle Vigne neboli z Kapuy, knìze",
+ "hu_",
  };
 const char *text_OKT_06[] = 
 {"Sv. Bruna, kòaza",
@@ -3095,6 +3294,15 @@ const char *text_OKT_09_2[] =
  "",
  "Sv. Jana Leonardiho, knìze",
  "Leonardi Szent János áldozópap",
+ };
+const char *text_OKT_09_3[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Sv. Ludvíka Bertrána, knìze",
+ "hu_",
  };
 const char *text_OKT_12[] = 
 {"(na Slovensku nie je)",
@@ -3176,6 +3384,15 @@ const char *text_OKT_19_2[] =
  "",
  "Sv. Pavla od Køíe, knìze",
  "Keresztes Szent Pál áldozópap",
+ };
+const char *text_OKT_22[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Vıroèí posvìcení klášterního kostela",
+ "hu_",
  };
 const char *text_OKT_23[] = 
 {"Sv. Jána Kapistránskeho, kòaza",
@@ -3302,6 +3519,24 @@ const char *text_NOV_05[] =
  "",
  "(pro dominikány není)",
  "Szent Imre herceg",
+ };
+const char *text_NOV_06[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Sv. Alfonse Navarrety, knìze a druhù, japonskıch muèedníkù",
+ "hu_",
+ };
+const char *text_NOV_07[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Všech svatıch Øádu kazatelù",
+ "hu_",
  };
 const char *text_NOV_09[] = 
 {"Vıroèie posviacky Lateránskej baziliky",
@@ -3444,7 +3679,7 @@ const char *text_NOV_24[] =
  "",
  "",
  "",
- "Sv. Ondøeje Dung-Laca, knìze, a druhù, muèedníkù",
+ "Sv. Ignáce Delgada, biskupa, Vincence Liema, knìze, Dominika An-Khama, otce rodiny, a druhù, vietnamskıch muèedníkù",
  "Dung-Lac Szent András áldozópap és társai vértanúk",
  };
 const char *text_NOV_25[] = 
@@ -3525,7 +3760,7 @@ const char *text_DEC_08[] =
  "",
  "",
  "",
- "Panny Marie, poèaté bez poskvrny prvotního høíchu",
+ "Neposkvrnìného poèetí Panny Marie",
  "A Boldogságos Szûz Mária szeplõtelen fogantatása",
  };
 const char *text_DEC_09[] = 
