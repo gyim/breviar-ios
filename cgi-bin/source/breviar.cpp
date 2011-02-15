@@ -7798,7 +7798,7 @@ void _main_analyza_roku(char *rok){
 		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_LEFT_ARROW" %d (", year - 1);
 		Export((char *)html_button_predchadzajuci_[_global_jazyk]);
 		Export(" ");
-		Export((char *)html_text_den[_global_jazyk]);
+		Export((char *)html_text_rok[_global_jazyk]);
 		Export(")\">\n");
 		Export("</form></td>\n");
 
