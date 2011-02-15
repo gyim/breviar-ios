@@ -16952,18 +16952,27 @@ label_25_MAR:
 							/* 2009-11-10: odvetvené pre èeský breviáø */
 							_vlastna_cast_hymnus;
 						}
-						_vlastna_cast_modlitba;
+						if(_global_jazyk != JAZYK_CZ_OP){
+							/* 2009-11-20: odvetvené pre èeský dominikánský breviáø (všetko sa tam berie zo spol. èasti) */
+							_vlastna_cast_modlitba;
+						}
 
 						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
 						_vlastna_cast_2citanie;
+						if(_global_jazyk != JAZYK_CZ_OP){
+							/* 2009-11-20: odvetvené pre èeský dominikánský breviáø (všetko sa tam berie zo spol. èasti) */
+							_vlastna_cast_modlitba;
+						}
 
 						modlitba = MODL_VESPERY;
 						if(_global_jazyk == JAZYK_CZ){
 							/* 2009-11-10: odvetvené pre èeský breviáø */
 							_vlastna_cast_hymnus;
 						}
-						_vlastna_cast_modlitba;
+						if(_global_jazyk != JAZYK_CZ_OP){
+							/* 2009-11-20: odvetvené pre èeský dominikánský breviáø (všetko sa tam berie zo spol. èasti) */
+							_vlastna_cast_modlitba;
+						}
 
 						break;
 					}
