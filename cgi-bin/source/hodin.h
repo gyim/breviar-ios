@@ -2065,7 +2065,7 @@ const char *text_MAJ_15[] =
  "",
  "la_",
  "",
- "Panny Marie, ochránkynì øádu bratøí kazatelù",
+ "Panny Marie, ochránkynì Øádu bratøí kazatelù",
  "hu_",
  };
 const char *text_MAJ_16[] = 
@@ -3721,7 +3721,7 @@ const char *text_NOV_07[] =
  "",
  "la_",
  "",
- "Všech svatıch øádu bratøí kazatelù",
+ "Všech svatıch Øádu bratøí kazatelù",
  "hu_",
  };
 const char *text_NOV_08[] = 
@@ -3730,7 +3730,7 @@ const char *text_NOV_08[] =
  "",
  "la_",
  "",
- "Všech zemøelıch bratøí a sester øádu bratøí kazatelù",
+ "Všech zemøelıch bratøí a sester Øádu bratøí kazatelù",
  "hu_",
  };
 const char *text_NOV_09[] = 

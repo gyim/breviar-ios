@@ -8009,8 +8009,10 @@ void _spolocna_cast_benediktus_viac(short int kolko, char *_anchor_head, char *_
 	set_LOG_svsv;
 }
 /* viac prosieb -- dorobene 01/03/2000A.D., spol.casti panny marie */
-void _spolocna_cast_prosby_viac(short int kolko, char *_anchor_head, char *_anchor, char *_file){
-	if(su_kcit_kresp_prosby_vlastne){
+void _spolocna_cast_prosby_viac(short int kolko, char *_anchor_head, char *_anchor, char *_file, short int brat_kresp_prosby){
+	Log("_spolocna_cast_prosby_viac...\n");
+	if(su_kcit_kresp_prosby_vlastne || brat_kresp_prosby == ANO){
+	// 2010-07-19: pôvodne bolo len: if(su_kcit_kresp_prosby_vlastne)...
 		sprintf(_anchor, "%s%c%s%d", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_PROSBY, (_global_den.den MOD kolko) + 1);
 		_set_prosby(modlitba, _file, _anchor);
 		set_LOG_svsv;
@@ -9022,7 +9024,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 			_set_zalmy_sviatok_marie(modlitba);
 		}
 		_spolocna_cast_full(modlitba);
-		_spolocna_cast_prosby_viac(2, _anchor_head, _anchor, _file);
+		_spolocna_cast_prosby_viac(2, _anchor_head, _anchor, _file, brat_kresp_prosby);
 		if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II))
 			_spolocna_cast_kresp_ve;
 
@@ -9032,7 +9034,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 			_set_zalmy_1nedele_rch();
 		}
 		_spolocna_cast_full(modlitba);
-		_spolocna_cast_prosby_viac(2, _anchor_head, _anchor, _file);
+		_spolocna_cast_prosby_viac(2, _anchor_head, _anchor, _file, brat_kresp_prosby);
 		if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II))
 			_spolocna_cast_kresp_ve;
 
@@ -9070,7 +9072,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 				_set_zalmy_sviatok_marie(modlitba);
 			}
 			_spolocna_cast_full(modlitba);
-			_spolocna_cast_prosby_viac(2, _anchor_head, _anchor, _file);
+			_spolocna_cast_prosby_viac(2, _anchor_head, _anchor, _file, brat_kresp_prosby);
 			if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II))
 				_spolocna_cast_kresp_ve;
 		}/* v OBD_OKTAVA_NARODENIA -- vespery su zo dna */
@@ -14524,7 +14526,7 @@ label_25_MAR:
 
 							break;
 						}
-						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.typslav = SLAV_SPOMIENKA;
 						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 						_global_svaty1.typslav_lokal = LOKAL_SLAV_NITRA_PATRON; /* 2005-08-04: pridané */
 						mystrcpy(_global_svaty1.meno, text_JUL_17_1[_global_jazyk], MENO_SVIATKU);
@@ -14611,7 +14613,10 @@ label_25_MAR:
 						// _vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 						modlitba = MODL_POSV_CITANIE;
-						// _vlastna_cast_2citanie;
+						if(_global_jazyk == JAZYK_CZ_OP || _global_jazyk == JAZYK_CZ){
+							/* 2010-07-19: pre èeský mi dodali ètení */
+							_vlastna_cast_2citanie;
+						}
 						_vlastna_cast_modlitba;
 						modlitba = MODL_VESPERY;
 						// _vlastna_cast_magnifikat;
