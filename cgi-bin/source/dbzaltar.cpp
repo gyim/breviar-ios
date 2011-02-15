@@ -2997,7 +2997,8 @@ void _set_zalmy_sviatok_duch_past(short int modlitba){
 }
 
 void _set_zalmy_sviatok_panien(short int modlitba){
-	Log("_set_zalmy_sviatok_panien(%s) -- begin\n", nazov_modlitby(modlitba));
+	/* pouíva sa aj pre sviatky svätıch ien */
+	Log("_set_zalmy_sviatok_panien(%s) -- begin [pouíva sa aj pre sviatky svätıch ien]\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
 		set_zalm(1, modlitba, "z122.htm", "ZALM122");
 		set_zalm(2, modlitba, "z127.htm", "ZALM127");
@@ -3013,7 +3014,7 @@ void _set_zalmy_sviatok_panien(short int modlitba){
 		set_zalm(2, modlitba, "z45.htm", "ZALM45_I");
 		set_zalm(3, modlitba, "z45.htm", "ZALM45_II");
 	}
-	Log("_set_zalmy_sviatok_panien(%s) -- end\n", nazov_modlitby(modlitba));
+	Log("_set_zalmy_sviatok_panien(%s) -- end [pouíva sa aj pre sviatky svätıch ien]\n", nazov_modlitby(modlitba));
 }
 
 /* 2005-07-22: Sviatky Panny Márie majú pre ranné chvály a vešpery rovnaké almy ako 
@@ -13868,7 +13869,10 @@ label_25_MAR:
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_antifony;
+						/* 2009-07-29: doplnené almy z nedele 1. tıdòa */
+						_set_zalmy_1nedele_rch();
 						_vlastna_cast_kresponz;
+						_vlastna_cast_kcitanie; // 2009-07-29: má by rovnaké ako zo spoloènej èasti svätıch ien
 						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
@@ -13883,7 +13887,10 @@ label_25_MAR:
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_antifony;
+						/* 2009-07-29: doplnené almy zo spoloènej èasti sv. ien */
+						_set_zalmy_sviatok_panien(modlitba);
 						_vlastna_cast_kresponz;
+						_vlastna_cast_kcitanie; // 2009-07-29: má by rovnaké ako zo spoloènej èasti svätıch ien
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
 
