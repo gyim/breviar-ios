@@ -1100,9 +1100,10 @@ void analyzuj_rok(short int year);
 void _init_dm(_struct_dm a);
 #endif
 
-#define UNKNOWN_PORADIE_SVATEHO -1 
+#define UNKNOWN_PORADIE_SVATEHO 0
 /* 28/03/2000A.D.: naschval < 0, aby nebol problem s porovnanim s _global_pocet_svatych v _rozbor_dna() 
  * 2009-03-19: presunuté z breviar.cpp
+ * 2009-03-27: po zúfalých pokusoch dnes - napokon som zistil, že už je úplne jedno, akú hodnotu bude táto konštanta ma, preto som ju dal opä na 0
  */
 
 /* definovany 2003-08-11 na zaklade funkcie _init_dm() 

@@ -3383,7 +3383,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 	  * 2008-07-11: doplnená aj slávnos sv. cyrila a metoda (mono by bolo lepšie, ak by to bolo pod¾a stupòa (sviatok pána resp. slávnos svätca) v cezroènom období)
 	  * 2008-10-09: doplnená pre èeskı breviáø slávnos sv. václava
 	  * 2009-01-06: doplnená poznámka k Premeneniu Pána
-	  * 2009-03-27: doplnenı aj sviatok - vıroèie posviacky lateránskej baziliky, ak padne na nede¾u (nišie)
+	  *
 	  */
 	Log("najprv treba skontrolova, èi nejde o deò [pôvodne nede¾u], na ktorú pripadol sviatok premenenia pána a podobné... (ak áno, nenastavuj niè)\n");
 	if(
@@ -3416,15 +3416,9 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 		Log("NEjde o: premenenie pána || petra a pavla || povıšenie sv. kría || všetkıch svätıch || nanebovzatia PM...\n");
 	}
 
-	/* 2009-03-27: doplnenı aj sviatok - vıroèie posviacky lateránskej baziliky, ak padne na nede¾u */
-	if((_global_den.den == 9) && (_global_den.mesiac - 1 == MES_NOV) && (_global_den.denvt == DEN_NEDELA)){
-		Log("vıroèie posviacky lateránskej baziliky, ak padne na nede¾u - netreba altár... (budú aj prvé vešpery)\n");
-	}
-	else{
-		Log("teraz spustíme zaltar_zvazok(); - pôvodne sa púšala s dvoma parametrami, pridanı parameter pre zväzok breviára (voláme s hodnotou ZALTAR_VSETKO)\n");
-		/* 2006-01-24: pôvodne sa púšala fnkcia s 2 parametrami; pridanı ïalší parameter pre zväzok breviára */
-		zaltar_zvazok(den, tyzzal, _global_den.litobd, ZALTAR_VSETKO);
-	}
+	Log("teraz spustíme zaltar_zvazok(); - pôvodne sa púšala s dvoma parametrami, pridanı parameter pre zväzok breviára (voláme s hodnotou ZALTAR_VSETKO)\n");
+	/* 2006-01-24: pôvodne sa púšala fnkcia s 2 parametrami; pridanı ïalší parameter pre zväzok breviára */
+	zaltar_zvazok(den, tyzzal, _global_den.litobd, ZALTAR_VSETKO);
 
 	Log("následne odlišnı súbor pre posvätné èítania...\n");
 	file_name_litobd(litobd);
@@ -16895,9 +16889,7 @@ label_25_MAR:
 					}
 					break;
 				case 9: /* MES_NOV */
-					// if(poradie_svaty == 1){
-					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
-					if(((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) && (_global_den.denvt == DEN_NEDELA)) || (poradie_svaty == 1)){
+					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);

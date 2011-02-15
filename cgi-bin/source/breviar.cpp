@@ -3186,7 +3186,6 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				(
 					(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) || /* 08/03/2000A.D. -- pridané; 2009-03-27: zmenená konštanta 0 na UNKNOWN_PORADIE_SVATEHO */
 					((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) && (_global_svaty1.smer < 5)) /* slavnosti */
-					|| ((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) && (_global_svaty1.smer == 5)  && (_global_den.denvt == DEN_NEDELA)) /* 2009-03-27: významné sviatky, ktoré padli na nede¾u */
 				)
 				){ /* 15/03/2000A.D. -- modifikovane; POKUS 2006-12-08: vyòatá podmienka (_global_modlitba != MODL_NEURCENA) &&  nepomohla, len pokazila */
 				/* tato pasaz je cela divna... */
@@ -3205,10 +3204,6 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				_global_den.typslav_lokal = _global_svaty1.typslav_lokal; /* pridané 2005-07-27 */
 				_global_den.spolcast = _global_svaty1.spolcast; /* pridane 22/02/2000A.D. */
 				_global_den.prik = _global_svaty1.prik; /* pridane 23/02/2000A.D. */
-				/* 2009-03-27: doplnené */
-				if(poradie_svaty == UNKNOWN_PORADIE_SVATEHO)
-					poradie_svaty = 1;
-
 				// Log(_global_den); /* kvôli pátraniu pridané 2006-02-06 */
 				/* pridané 2006-02-06; upravujeme premennú _global_opt3 ak nebola nastavená MODL_SPOL_CAST_NEBRAT
 				 * treba nastavi pod¾a toho, ktorý svätý je (môže by 1--3) 
@@ -3415,8 +3410,8 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			ALERT;
 			return FAILURE;
 			break;
-		case 0:
 		case UNKNOWN_PORADIE_SVATEHO: /* 2009-03-19: doplnené */
+		default:
 			/* bezny den */
 			Log("/* bezny den */\n");
 			obyc = ANO;
