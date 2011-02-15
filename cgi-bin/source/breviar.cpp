@@ -5288,7 +5288,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 /* 2005-03-21: Pridany dalsi typ exportu - EXPORT_DNA_VIAC_DNI_SIMPLE */
 #define NEWLINE if(typ == EXPORT_DNA_VIAC_DNI_SIMPLE) Export("; "); \
 	else if(som_v_tabulke == NIE){\
-		if(typ == EXPORT_DNA_VIAC_DNI) Export("\n<br>\n&nbsp;&nbsp;&nbsp;alebo:\n"); \
+		if(typ == EXPORT_DNA_VIAC_DNI) Export("\n<br>\n&nbsp;&nbsp;&nbsp;%s\n", html_text_alebo[_global_jazyk]); \
 		else Export("\n<p>\n"); }\
 	else Export("</td>\n</tr>\n\n<tr valign=baseline>\n<td></td>\n<td></td>\n<td>")
 

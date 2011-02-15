@@ -895,6 +895,8 @@ const char *html_text_dnes_je_atd[] =
  "Dnes je %d. den v roku%s, <a href=\"%s%s\">juliánské datum</a> JD = %ld%s.\n<br>\n",
  "Ma %s %d. napja van, <a href=\"%s%s\">Julián naptár</a> JD = %ld%s.\n<br>\n"};
 
+const char *html_text_alebo[] = {"alebo:", "nebo:", "or:", "", "", "nebo:", ""};
+
 const char *html_text_zakladne_info[] = {"Základné informácie", "Základní informace", "Basic info", "__info__", "", "Základní informace", "Alap információ"};
 const char *html_text_je[] = {"je", "je", "is", "est", "", "je", "van"};
 const char *html_text_nie_je[] = {"nie je", "není", "is not", "non est", "", "není", "nincs"};
