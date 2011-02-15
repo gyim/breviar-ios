@@ -1263,7 +1263,7 @@ const char *text_ZAKONCENIE_LEBO_ON_kratke[] =
  "hu_",
  };
 const char *text_ZAKONCENIE_LEBO_TY_dlhe[] = 
-{"Lebo ty iješ a kra¾uješ s Bohom Otcom v jednote s Duchom Svätım po všetky veky vekov.",
+{"Lebo ty si Boh a iješ a kra¾uješ s Bohom Otcom v jednote s Duchom Svätım po všetky veky vekov.",
  "Nebo ty iješ a kraluješ s Bohem Otcem v jednotì Ducha svatého po všechny vìky vìkù.",
  "",
  "",
