@@ -374,6 +374,10 @@ extern const char *TEMPLAT[];
 /* 2007-10-02: doplnené skrytie rovnakých antifón pre mcd */
 #define PARAM_SKRY_ANTIFONU_BEGIN           "SKRY_ANTIFONU_BEGIN"
 #define PARAM_SKRY_ANTIFONU_END             "SKRY_ANTIFONU_END"
+/* 2009-04-08, doplnené: zakonèenie modlitby trojaké, krátke resp. dlhé */
+#define PARAM_ZAKONCENIE_SKRZE              "ZAKONCENIE_SKRZE"
+#define PARAM_ZAKONCENIE_LEBO_TY            "ZAKONCENIE_LEBO_TY"
+#define PARAM_ZAKONCENIE_LEBO_ON            "ZAKONCENIE_LEBO_ON"
 
 /* stringy parametrov vstupu pre MODL_OPT..., ktore generovanie modlitby
  * ovplyvnuju */
@@ -1238,6 +1242,13 @@ extern const char *text_V_OKTAVE_NARODENIA[];
 extern const char *text_DEC_08[];
 extern const char *text_AUG_15[];
 extern const char *text_NOV_01[];
+
+extern const char *text_ZAKONCENIE_SKRZE_dlhe[];
+extern const char *text_ZAKONCENIE_SKRZE_kratke[];
+extern const char *text_ZAKONCENIE_LEBO_ON_dlhe[];
+extern const char *text_ZAKONCENIE_LEBO_ON_kratke[];
+extern const char *text_ZAKONCENIE_LEBO_TY_dlhe[];
+extern const char *text_ZAKONCENIE_LEBO_TY_kratke[];
 
 #endif /* __LITURGIA_H_ */
 

@@ -124,6 +124,9 @@
 /*   2009-01-29a.D. | pridaný ïalší jazyk - maïarèina (hu) [prvé kroky]    */
 /*   2009-02-17a.D. | posv. èítanie (button) pre všetky jazykové mutácie   */
 /*   2009-04-02a.D. | 8.11.2008 na vešpery treba bra pre sviatok 9.11.    */
+/*   2009-04-08a.D. | zakonèenie modlitby dynamicky (pre modlitbu cez deò a*/
+/*                    kompletórium sa používa kratšie zakonèenie)          */
+/*                    ešte ostáva dorieši niektoré prípady (v slovenèine) */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -1199,6 +1202,86 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 							Log("  opat writing to export file, end of Aleluja.\n");
 						}
 					}/* aleluja mimo pôstneho obdobia */
+
+					/* 2009-04-08, doplnené: zakonèenie modlitby (pre modlitbu cez deò a kompletórium sa používa kratšie zakonèenie) */
+
+					// ToDo: ešte ostáva dorieši niektoré prípady (v slovenèine)
+
+					/* zakonèenie modlitby - Skrze... */
+					if(equals(rest, PARAM_ZAKONCENIE_SKRZE)){
+						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
+							write = 0;
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("(start)Skrze...");
+#endif
+							Export("-->");
+							if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
+								Export((char *)text_ZAKONCENIE_SKRZE_kratke[_global_jazyk]);
+							}
+							else{
+								Export((char *)text_ZAKONCENIE_SKRZE_dlhe[_global_jazyk]);
+							}
+							Log("skrze-zaèiatok...\n");
+						}
+						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
+							Export("<!--");
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("Skrze...(stop)");
+#endif
+							write = 1;
+							Log("skrze-koniec.\n");
+						}
+					}/* zakonèenie modlitby - Skrze... */
+					/* zakonèenie modlitby - Lebo ty... */
+					if(equals(rest, PARAM_ZAKONCENIE_LEBO_TY)){
+						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
+							write = 0;
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("(start)Lebo ty...");
+#endif
+							Export("-->");
+							if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
+								Export((char *)text_ZAKONCENIE_LEBO_TY_kratke[_global_jazyk]);
+							}
+							else{
+								Export((char *)text_ZAKONCENIE_LEBO_TY_dlhe[_global_jazyk]);
+							}
+							Log("lebo-ty-zaèiatok...\n");
+						}
+						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
+							Export("<!--");
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("Lebo ty...(stop)");
+#endif
+							write = 1;
+							Log("lebo-ty-koniec.\n");
+						}
+					}/* zakonèenie modlitby - Lebo ty... */
+					/* zakonèenie modlitby - Lebo on... */
+					if(equals(rest, PARAM_ZAKONCENIE_LEBO_ON)){
+						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
+							write = 0;
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("(start)Lebo on...");
+#endif
+							Export("-->");
+							if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
+								Export((char *)text_ZAKONCENIE_LEBO_ON_kratke[_global_jazyk]);
+							}
+							else{
+								Export((char *)text_ZAKONCENIE_LEBO_ON_dlhe[_global_jazyk]);
+							}
+							Log("lebo-on-zaèiatok...\n");
+						}
+						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
+							Export("<!--");
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("Lebo on...(stop)");
+#endif
+							write = 1;
+							Log("lebo-on-koniec.\n");
+						}
+					}/* zakonèenie modlitby - Lebo on... */
 				}/* !equalsi(rest, modlparam) */
 				continue;
 		}

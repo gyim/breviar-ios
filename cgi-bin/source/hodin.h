@@ -30,6 +30,8 @@
 /*   2009-01-29a.D. | pridanı ïalší jazyk - maïarèina (hu)     */
 /*   2009-02-01a.D. | hungarian translation added by László    */
 /*   2009-03-24a.D. | úpravy liturgického kalendára pre czop   */
+/*   2009-04-08a.D. | zakonèenie modlitby (pre modlitbu cezdeò */
+/*                    a komplet. sa pouíva kratšie zakonèenie)*/
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -1181,6 +1183,64 @@ const char *html_text_detaily_explain[] =
  "Kdy jsou nìkteré vıše uvedené volby nepouitelné pro nìjakou modlitbu, neberou se v úvahu (mohou bıt nastaveny dle libovùle).",
  "hu_"
 };
+
+/* 2009-04-08, doplnené: zakonèenie modlitby trojaké, krátke resp. dlhé */
+const char *text_ZAKONCENIE_SKRZE_dlhe[] = 
+{"Skrze nášho Pána Jeiša Krista, tvojho Syna, ktorı je Boh a s tebou ije a kra¾uje v jednote s Duchom Svätım po všetky veky vekov.",
+ "Skrze tvého Syna Jeíše Krista, našeho Pána, nebo on s tebou v jednotì Ducha svatého ije a kraluje po všechny vìky vìkù.",
+ "",
+ "",
+ "",
+ "Skrze tvého Syna Jeíše Krista, našeho Pána, nebo on s tebou v jednotì Ducha svatého ije a kraluje po všechny vìky vìkù.",
+ "hu_",
+ };
+const char *text_ZAKONCENIE_SKRZE_kratke[] = 
+{"Skrze Krista, nášho Pána.",
+ "Skrze Krista, našeho Pána.",
+ "",
+ "",
+ "",
+ "Skrze Krista, našeho Pána.",
+ "hu_",
+ };
+const char *text_ZAKONCENIE_LEBO_ON_dlhe[] = 
+{"Lebo on je Boh a s tebou ije a kra¾uje v jednote s Duchom Svätım po všetky veky vekov.",
+ "Nebo on s tebou v jednotì Ducha svatého ije a kraluje po všechny vìky vìkù.",
+ "",
+ "",
+ "",
+ "Nebo on s tebou v jednotì Ducha svatého ije a kraluje po všechny vìky vìkù.",
+ "hu_",
+ };
+const char *text_ZAKONCENIE_LEBO_ON_kratke[] = 
+{"Lebo on ije a kra¾uje na veky vekov.",
+ "Nebo on s tebou ije a kraluje na vìky vìkù.",
+ "",
+ "",
+ "",
+ "Nebo on s tebou ije a kraluje na vìky vìkù.",
+ "hu_",
+ };
+const char *text_ZAKONCENIE_LEBO_TY_dlhe[] = 
+{"Lebo ty iješ a kra¾uješ s Bohom Otcom v jednote s Duchom Svätım po všetky veky vekov.",
+ "Nebo ty iješ a kraluješ s Bohem Otcem v jednotì Ducha svatého po všechny vìky vìkù.",
+ "",
+ "",
+ "",
+ "Nebo ty iješ a kraluješ s Bohem Otcem v jednotì Ducha svatého po všechny vìky vìkù.",
+ "hu_",
+ };
+const char *text_ZAKONCENIE_LEBO_TY_kratke[] = 
+{"Lebo ty iješ a kra¾uješ na veky vekov.",
+ "Nebo ty iješ a kraluješ na vìky vìkù.",
+ "",
+ "",
+ "",
+ "Nebo ty iješ a kraluješ na vìky vìkù.",
+ "hu_",
+ };
+
+/* nasledujú názvy liturgickıch dní -- follow the names of special liturgical celebrations */
 
 const char *text_DRUHA_NEDELA_PO_NAR_PANA[] = 
 {"2. nede¾a po Narodení Pána",
