@@ -165,6 +165,10 @@ extern short int _global_pocet_zalmov_kompletorium;
 /* 2009-08-03, pridané */
 extern short int _global_opt_batch_monthly;
 
+/* 2009-08-05, pridané */
+extern short int _global_hlavicka_Export;
+// extern char name_batch_html_file[MAX_STR];
+
 #ifndef OS_linux
 /* kedysi bolo void main;
  * 2003-07-14, kvoli gcc version 3.2.2 20030222 (Red Hat Linux 3.2.2-5) christ-net.sk 

@@ -824,7 +824,9 @@ const char *html_button_kompletorium_nunkdim[] = {"Kompletórium + Nunk dimittis"
 /* html <title> element for generated pages */
 /* doplnené, 2009-05-21 */
 const char *html_title[] = {"Liturgia hodín", "Liturgie hodin", "Liturgy of Hours", "la_", "", "Liturgie hodin", "hu_"};
-const char *html_title_batch_mode[] = {"Batch mód", "Dávkový režim", "Batch mode", "la_", "", "Dávkový režim", "hu_"};
+/* 2009-08-04: upravené pre batch mód */
+// const char *html_title_batch_mode[] = {"Batch mód", "Dávkový režim", "Batch mode", "la_", "", "Dávkový režim", "hu_"};
+const char *html_title_batch_mode[] = {"Liturgia hodín - statické texty", "Liturgie hodin - statické texty", "Liturgy of Hours - static texts", "la_", "", "Liturgie hodin - statické texty", "hu_"};
 
 /* navigation buttons/texts: previous, next, today */
 const char *html_button_predchadzajuci_[] = {"Predchádzajúci", "Pøedchozí", "Previous", "Praecedénte", "", "Pøedchozí", "Elõzõ"};
@@ -1192,8 +1194,10 @@ const char *html_text_detaily_explain[] =
 
 /* 2009-08-04, doplnené: pre batch mód */
 const char *html_text_batch_Zoznam1[POCET_JAZYKOV + 1] = {"Zoznam modlitieb", "Seznam modliteb", "List of prayers", "", "", "Seznam modliteb", "hu_"};
-const char *html_text_batch_Zoznam1m[POCET_JAZYKOV + 1] = {"Zoznam mesiacov", "Seznam mìsícù", "List of months", "", "", "Seznam mìsícù", "hu_"};
+const char *html_text_batch_Zoznam1m[POCET_JAZYKOV + 1] = {"Zoznam modlitieb po mesiacoch", "Seznam modliteb dle mìsícù", "List of prayers by months", "", "", "Seznam modliteb dle mìsícù", "hu_"};
+const char *html_text_batch_obdobie1m[POCET_JAZYKOV + 1] = {"(obdobie od %d. %s %d do %d. %s %d)", "(pro období od %d. %s %d do %d. %s %d)", "(%d. %s %d -- %d. %s %d)", "(%d. %s %d -- %d. %s %d)", "(%d. %s %d -- %d. %s %d)", "(pro období od %d. %s %d do %d. %s %d)", "hu_(%d. %s %d -- %d. %s %d)"};
 const char *html_text_batch_Zoznam2[POCET_JAZYKOV + 1] = {/* Zoznam modlitieb pre */"%s %d", "%s %d", "%s %d", "%s %d", "%s %d", "%s %d", "%s %d"};
+const char *html_text_batch_Back[POCET_JAZYKOV + 1] = {"^ hore", "^ nahoru", "^ up", "", "", "^ nahoru", "^ hu_"};
 
 /* 2009-04-08, doplnené: zakonèenie modlitby trojaké, krátke resp. dlhé */
 const char *text_ZAKONCENIE_SKRZE_dlhe[] = 

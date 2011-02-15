@@ -1254,5 +1254,7 @@ extern const char *text_ZAKONCENIE_LEBO_TY_kratke[];
 
 extern const char *text_PRO_OP[];
 
+extern const char *html_text_batch_Back[];
+
 #endif /* __LITURGIA_H_ */
 

@@ -20,6 +20,7 @@
 /*   2008-08-08a.D. | upravené funkcie hlavicka() kvôli css    */
 /*   2008-09-26a.D. | pridané použitie nazov_mesiaca()         */
 /*   2008-12-22a.D. | upravené exportovanie pätky (èas)        */
+/*   2009-08-05a.D. | upravené exportovanie hlavièky           */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -43,6 +44,10 @@
 
 /* exportuje hlavicku HTML dokumentu, kam pojde vysledok query */
 void hlavicka(char *title, short int level){
+	/* 2009-08-04: viackrát sa pri exporte modlitby do HTML exportovala hlavièka; pridaná kontrola */
+	if(_global_hlavicka_Export > 0)
+		return;
+	_global_hlavicka_Export++;
 	/* 
 	 * 2003-07-01, pridane pripadne citanie zo suboru
 	 * 2008-08-08: èítanie zo súboru odstránené
@@ -94,6 +99,12 @@ void hlavicka(char *title, short int level){
 	Export("<title>%s</title>\n", title);
 	Export("</head>\n\n");
 	Export("<body>\n");
+	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
+		// ^ hore
+		Export("<p><a href=\".%s%s\">", STR_PATH_SEPARATOR_HTML, DEFAULT_MONTH_EXPORT); // v tom istom adresári
+		Export((char *)html_text_batch_Back[_global_jazyk]);
+		Export("</a></p>");
+	}
 	return;
 }/* hlavicka() */
 
@@ -149,6 +160,12 @@ void hlavicka(char *title, FILE * expt, short int level){
 	fprintf(expt, "<title>%s</title>\n", title);
 	fprintf(expt, "</head>\n\n");
 	fprintf(expt, "<body>\n");
+	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
+		// ^ hore
+		fprintf(expt, "<p><a href=\".%s%s\">", STR_PATH_SEPARATOR_HTML, DEFAULT_MONTH_EXPORT); // v tom istom adresári
+		fprintf(expt, (char *)html_text_batch_Back[_global_jazyk]);
+		fprintf(expt, "</a></p>");
+	}
 	return;
 }/* hlavicka() */
 
