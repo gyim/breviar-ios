@@ -4488,7 +4488,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 				pom2);
 		}/* if(_global_opt_batch_monthly == NIE) */
 		else{
-			sprintf(pom, STR_EMPTY);
+			mystrcpy(pom, STR_EMPTY, MAX_STR);
 			// 2009-08-12: moûno v bud˙cnosti by sa mohol daù odkaz na adres·r s rok+mesiacom predoölÈho roka
 		}
 		if(_global_opt_batch_monthly == NIE){
@@ -4650,7 +4650,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 				pom2);
 		}/* if(_global_opt_batch_monthly == NIE) */
 		else{
-			sprintf(pom, STR_EMPTY);
+			mystrcpy(pom, STR_EMPTY, MAX_STR);
 			// 2009-08-12: moûno v bud˙cnosti by sa mohol daù odkaz na adres·r s rok+mesiacom nasledovnÈho roka
 		}
 		if(_global_opt_batch_monthly == NIE){
@@ -7018,7 +7018,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 						pom2);
 				}/* if(_global_opt_batch_monthly == NIE) */
 				else{
-					sprintf(pom, STR_EMPTY);
+					mystrcpy(pom, STR_EMPTY, MAX_STR);
 					// 2009-08-12: moûno v bud˙cnosti by sa mohol daù odkaz na adres·r s mesiacom predoölÈho roka
 				}
 				if(_global_opt_batch_monthly == NIE){
@@ -7040,7 +7040,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 						pom2);
 				}/* if(_global_opt_batch_monthly == NIE) */
 				else{
-					sprintf(pom, STR_EMPTY);
+					mystrcpy(pom, STR_EMPTY, MAX_STR);
 					// 2009-08-12: moûno v bud˙cnosti by sa mohol daù odkaz na adres·r s mesiacom nasledovnÈho roka
 				}
 				if(_global_opt_batch_monthly == NIE){
@@ -8865,7 +8865,8 @@ short int getArgv(int argc, char **argv){
 					printf("\tc  css filename (pouzite CSS)\n");
 					printf("\tu  batch mode dates in file name format (0 = simple, 1 = full)\n");
 					/* pridanÈ 2009-08-02 mesaËn˝ typ exportu pre batch mÛd */
-					printf("\tM  pre batch mode: jednotlive mesiace su v samostatnych suboroch\n\t   M0 = v mesiaci dni pod sebou, modlitby pre kazdy den v riadku\n\t   M1 = v mesiaci podla modlitieb su dni len ako cislice\n");
+					printf("\tM  pre batch mode: jednotlive mesiace su v samostatnych suboroch\n\t   M0 = v mesiaci dni pod sebou, modlitby pre kazdy den v riadku\n\t   M1 = v mesiaci podla modlitieb su dni len ako cislice\n\t   M2 = generovanie offline verzie webu (pre danÈ obdobie)\n");
+					printf("\tI  pre batch mode: subor, kam ma odkazovat link '^ hore'\n");
 					/* pridane 2003-06-27; prave prva uvedena linka sposobuje problem (nefunguju detaily pre spomienku pm v sobotu) */
 					printf("\n\t   pri prepinacoch ano = 1, nie = 0\n");
 					printf("\npriklady pouzitia:\n");

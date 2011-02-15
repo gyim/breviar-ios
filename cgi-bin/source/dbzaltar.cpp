@@ -12320,13 +12320,18 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_hymnus; // v èeskom breviári má vlastný hymnus; 2009-08-13
+							_vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_hymnus; // v èeskom breviári má vlastný hymnus; 2009-08-13
 							_vlastna_cast_modlitba;
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
+							_vlastna_cast_hymnus; // v èeskom breviári má vlastný hymnus; 2009-08-13
+							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
 
 							break;
@@ -14452,19 +14457,33 @@ label_25_MAR:
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_full_okrem_prosieb(modlitba);
+						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ_OP)){ // v slovenskom breviári má vlastný hymnus, v èeskom nie; 2008-09-09
+							_vlastna_cast_full_okrem_prosieb(modlitba);
+						}
+						else{
+							_vlastna_cast_full_okrem_prosieb_a_hymnu(modlitba);
+						}
 
 						modlitba = MODL_POSV_CITANIE;
+						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ_OP)) // v slovenskom breviári má vlastný hymnus, v èeskom nie; 2008-09-09
+							_vlastna_cast_hymnus;
 						_vlastna_cast_modlitba;
 						_vlastna_cast_1citanie;
 						_vlastna_cast_2citanie;
-						/* hymnus ako na vešpery */
-						sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(MODL_VESPERY), ANCHOR_HYMNUS);
-						_set_hymnus(modlitba, _file, _anchor);
-						set_LOG_svsv;
+						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ_OP)){ // v slovenskom breviári má vlastný hymnus, v èeskom nie; 2008-09-09
+							/* hymnus ako na vešpery */
+							sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(MODL_VESPERY), ANCHOR_HYMNUS);
+							_set_hymnus(modlitba, _file, _anchor);
+							set_LOG_svsv;
+						}
 
 						modlitba = MODL_VESPERY;
-						_vlastna_cast_full_okrem_prosieb(modlitba);
+						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ_OP)){ // v slovenskom breviári má vlastný hymnus, v èeskom nie; 2008-09-09
+							_vlastna_cast_full_okrem_prosieb(modlitba);
+						}
+						else{
+							_vlastna_cast_full_okrem_prosieb_a_hymnu(modlitba);
+						}
 
 						break;
 					}
