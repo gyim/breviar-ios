@@ -24,7 +24,7 @@
 #include "mydefs.h"
 
 #define DEFAULT_FILE_EXPORT "export.htm"
-#define DEFAULT_HTML_EXPORT "export2.htm"
+#define DEFAULT_HTML_EXPORT "zoznam.htm" // "export2.htm"
 #define DEFAULT_MONTH_EXPORT "index.htm"
 
 short int Export(char *fmt, ...);

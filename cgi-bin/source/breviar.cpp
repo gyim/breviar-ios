@@ -132,6 +132,11 @@
 /*   2009-08-02a.D. | prepÌnaË _global_opt_batch_monthly pre batch mÛd,    */
 /*                    aby sa exportovali mesiace do samostatn˝ch adres·rov */
 /*   2009-08-04a.D. | dokonËen˝ druh˝ spÙsob v˝stupu pre mesaËn˝ batch mÛd */
+/*   2009-08-05a.D. | veæk· ˙prava funkcie _main_batch_mode()              */
+/*   2009-08-05a.D. | prerobenie ËÌtania jazyka (skopÌrovanÈ v main() eöte */
+/*                    na jedno vyööie miesto); uû by sa <title> malo       */
+/*                    vypisovaù pri generovanÌ ne-SK modlitieb spr·vne     */
+/*                  - pri ukladanÌ Visual Studio solution odteraz Release  */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -139,7 +144,7 @@
 /*     najdi zarazku KOMPILACIA -- niekde ku koncu                         */
 /*     pozri tiez POUCENIE                                                 */
 /*   * unfinished parts: oznaËenÈ !!! alebo xxx                            */
-/*   * debug in VC++: alt+f7, zalozka Debug, Program arguments             */
+/*   * debug in VC++/VStuido: alt+f7, zalozka Debug, Program arguments     */
 /*     napr. -qpbm -d1 -m1 -r2000 -f2 -g2 -p2001 -ba.txt                   */
 /*     -i..\..\..\web\include\ -qpsqs -s"qt=pcr&dvt=pondelok&t=2&p=mpc"    */
 /*     lh -qpdt -d30 -m4 -r2002 -pmrch -ic:\temp\breviar\ -emoja.htm       */
@@ -5314,6 +5319,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 	if(_global_opt_batch_monthly == ANO && index_pre_mesiac_otvoreny == ANO){
 		/* najskÙr do zoznamu mesiacov vyprintujeme odkaz na index.htm danÈho mesiaca (ak bolo prvÈho resp. zaËiatok exportu)... */
 		if((_global_den.den == 1 && (export_monthly_druh == 1 && modlitba == MODL_INVITATORIUM || export_monthly_druh != 1)) || export_month_zaciatok == ANO){
+			// sem sa uû name_batch_month_file dostane s upraven˝m oddeæovaËom STR_PATH_SEPARATOR_HTML; upravenÈ v _main_batch_mode()
 			fprintf(batch_html_file, "<li><a href=\"%s\">%s %d</a></li>\n", name_batch_month_file, nazov_mesiaca(_global_den.mesiac - 1), _global_den.rok);
 			export_month_zaciatok = NIE;
 		}
@@ -7416,10 +7422,10 @@ void dumpFile(char *fname, FILE *expt){
 /*---------------------------------------------------------------------*/
 /* _main_batch_mode(); 2003-07-04
  *
- * dostane vela char *; najprv ich skontroluje a potom
- * ak je vsetko v poriadku, 
- * do export fajlu generuje command-line prikazy pre
- * vytvorenie modlitby na jednotlive dni dane obdobim
+ * dostane vela char *; najprv ich skontroluje a potom ak je vsetko v poriadku, 
+ * do export fajlu generuje command-line prikazy pre vytvorenie modlitby na jednotlive dni dane obdobim
+ *
+ * 2009-08-05: veæk· ˙prava tejto funkcie, nov˝ batch mÛd po mesiacoch
  *
  */
 void _main_batch_mode(
@@ -7666,6 +7672,13 @@ void _main_batch_mode(
 								batch_month_file = fopen(name_batch_month_file, "wt");
 								if(batch_month_file != NULL){
 									Log("batch mode: File `%s' opened for writing...\n", name_batch_month_file);
+									// mÙûeme upraviù n·zov tak, ako ho budeme printovaù do dokumentov -- aby obsahoval STR_PATH_SEPARATOR_HTML namiesto STR_PATH_SEPARATOR
+									// pre pouûitie vo funkcii execute_batch_command()
+									mystrcpy(name_batch_month_file, dir_name, MAX_STR);
+									strcat(name_batch_month_file, STR_PATH_SEPARATOR_HTML);
+									strcat(name_batch_month_file, DEFAULT_MONTH_EXPORT);
+									Log("batch mode: n·zov s˙boru upraven˝ na '%s' (s˙bor je uû otvoren˝)...\n", name_batch_month_file);
+									// volanie funkcie halvicka()
 									hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_month_file, 1);
 									fprintf(batch_month_file, "\n");
 									// zaËiatok hlaviËky
@@ -9899,6 +9912,8 @@ int main(int argc, char **argv){
 	 * main() viackrat bez zrusenia programu,
 	 * je potrebne inicializovat globalne premenne pri kazdom pusteni jej behu
 	 * 11/04/2000A.D.
+	 *
+	 * 2009-08-05: prerobenie ËÌtania jazyka (skopÌrovanÈ eöte na jedno vyööie miesto); uû by sa <title> malo vypisovaù pri generovanÌ inojazyËn˝ch modlitieb spr·vne
 	 */
 	_global_opt1 = NIE;
 	_global_opt2 = MODL_ZALMY_ZO_DNA; /* 2006-01-25: upravenÈ, bolo tu MODL_ZALMY_ZO_SV */
@@ -10064,6 +10079,17 @@ int main(int argc, char **argv){
 			/* query_type sa nastavi priamo vovnutri */
 			ret = getArgv(argc, argv);
 			if(ret == SUCCESS){ /* 13/03/2000A.D. -- aby mohlo exportovat do file_export */
+				/* 2006-07-12: pridanÈ parsovanie jazyka kvÙli jazykov˝m mut·ci·m 
+				 * 2009-08-05: predsunutÈ aj sem vyööie
+				 */
+				_main_LOG_to_Export("zisùujem jazyk (pom_JAZYK == %s)...\n", pom_JAZYK);
+				_global_jazyk = atojazyk(pom_JAZYK);
+				if(_global_jazyk == JAZYK_UNDEF){
+					_global_jazyk = JAZYK_SK;
+					_main_LOG_to_Export("\t(vzhæadom k neurËenÈmu jazyku pouûÌvam default)\n");
+				}
+				_main_LOG_to_Export("...jazyk (%s) = %i, teda %s (%s)\n", pom_JAZYK, _global_jazyk, nazov_jazyka[_global_jazyk], skratka_jazyka[_global_jazyk]);
+
 				Log("file_export == `%s'...\n", file_export);
 				if(equals(file_export, STR_EMPTY) || equals(file_export, "+")){
 					/* "+" -- error, chce pridavat do nicoho */
@@ -10079,12 +10105,14 @@ int main(int argc, char **argv){
 					/* a napokon puovodna pasaz pred 2003-07-08 */
 					if(initExport(file_export) == SUCCESS){
 						Log("initExport(`%s'): success\n", file_export);
+						_main_LOG_to_Export("_global_jazyk == %s\n", nazov_jazyka[_global_jazyk]);
 						hlavicka((char *)html_title[_global_jazyk]);
 					}
 					else{
 						Log("initExport(`%s'): failure, \n", file_export);
 						Log("continuing to export into DEFAULT_FILE_EXPORT (`%s')\n", DEFAULT_FILE_EXPORT);
 						initExport(DEFAULT_FILE_EXPORT);
+						_main_LOG_to_Export("_global_jazyk == %s\n", nazov_jazyka[_global_jazyk]);
 						hlavicka((char *)html_title[_global_jazyk]);
 					}
 				}
@@ -10198,7 +10226,9 @@ _main_SIMULACIA_QS:
 
 			LOG_ciara;
 
-			/* 2006-07-12: pridanÈ parsovanie jazyka kvÙli jazykov˝m mut·ci·m */
+			/* 2006-07-12: pridanÈ parsovanie jazyka kvÙli jazykov˝m mut·ci·m 
+			 * 2009-08-05: predsunutÈ vyööie (aj tu sme to pre istotu ponechali)
+			 */
 			_main_LOG_to_Export("zisùujem jazyk...\n");
 			_global_jazyk = atojazyk(pom_JAZYK);
 			if(_global_jazyk == JAZYK_UNDEF){
@@ -10268,11 +10298,36 @@ _main_SIMULACIA_QS:
 				_main_LOG_to_Export("\tok.\n");
 			}
 
-			_main_LOG_to_Export("kontrola, Ëi include adres·ra konËÌ reùazcom `%s'...\n", postfix_jazyka[_global_jazyk]);
+			_main_LOG_to_Export("kontrola, Ëi include adres·r konËÌ reùazcom `%s'...\n", postfix_jazyka[_global_jazyk]);
 			/* 2008-04-09: treba najskÙr skontrolovaù, Ëi include dir uû n·hodou neobsahuje aj prilepen˝ postfix jazyka 
 			 *             include_dir[len] alebo include_dir[len + 1] obsahuje PATH_SEPARATOR
 			 *             teda znaky jeden a dva pred by mali obsahovaù postfix_jazyka[_global_jazyk][0] a [1]
+			 *
+			 * 2009-08-05: oprava kontroly, nemoûno kontrolovaù fixne 2 znaky, pretoûe postfix_jazyka mÙûe byù dlhöÌ (napr. pre "czop")
 			 */
+			char *include_dir_pom;
+			short int len_postfix_jazyka = strlen(postfix_jazyka[_global_jazyk]);
+			short int kontrola_prilepenia_postfix_jazyka = NIE;
+			include_dir_pom = strstr(include_dir, postfix_jazyka[_global_jazyk]);
+			if(include_dir_pom != NULL){
+				_main_LOG_to_Export("len_postfix_jazyka = %d; include_dir_pom = %s\n", len_postfix_jazyka, include_dir_pom);
+				if(include_dir[len] == (short int)PATH_SEPARATOR){
+					_main_LOG_to_Export("include_dir[len] == (short int)PATH_SEPARATOR\n");
+					if(strlen(include_dir_pom) == len_postfix_jazyka + 1)
+						kontrola_prilepenia_postfix_jazyka = ANO;
+				}
+				else if(include_dir[len + 1] == (short int)PATH_SEPARATOR){
+					_main_LOG_to_Export("include_dir[len + 1] == (short int)PATH_SEPARATOR\n");
+					if(strlen(include_dir_pom) == len_postfix_jazyka)
+						kontrola_prilepenia_postfix_jazyka = ANO;
+				}
+				else
+					_main_LOG_to_Export("include_dir[len/len + 1] != (short int)PATH_SEPARATOR\n");
+			}/* if(include_dir_pom != NULL) */
+			else{
+				_main_LOG_to_Export("include_dir_pom == NULL (teda include_dir[] neobsahuje postfix_jazyka (%s))\n", postfix_jazyka[_global_jazyk]);
+			}
+/*
 			if(
 				(
 					(include_dir[len] == (short int)PATH_SEPARATOR) &&
@@ -10284,8 +10339,11 @@ _main_SIMULACIA_QS:
 					(include_dir[len] == (short int)postfix_jazyka[_global_jazyk][1]) &&
 					(include_dir[len - 1] == (short int)postfix_jazyka[_global_jazyk][0])
 				)
-			){
-				_main_LOG_to_Export("include adres·ra konËÌ reùazcom `%s' - nie je potrebnÈ prid·vaù\n", postfix_jazyka[_global_jazyk]);
+			)
+*/
+			if(kontrola_prilepenia_postfix_jazyka == ANO)
+			{
+				_main_LOG_to_Export("include adres·r konËÌ reùazcom `%s' - nie je potrebnÈ prid·vaù\n", postfix_jazyka[_global_jazyk]);
 			}
 			else{
 				_main_LOG_to_Export("include adres·ra NEkonËÌ reùazcom `%s' - je potrebnÈ prid·vaù (aktu·lne include_dir == %s; lenght == %d; len == %d): ", postfix_jazyka[_global_jazyk], include_dir, strlen(include_dir), len);
@@ -10316,6 +10374,7 @@ _main_SIMULACIA_QS:
 
 			LOG_ciara;
 
+			_main_LOG_to_Export("_global_jazyk == %s\n", nazov_jazyka[_global_jazyk]);
 			hlavicka((char *)html_title[_global_jazyk]);
 
 			_main_LOG_to_Export("/* teraz nasleduje vykonanie jadra programu podla parametrov */\n");

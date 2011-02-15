@@ -7,6 +7,7 @@
 /* document history                                            */
 /*   31/03/2000A.D. | created                                  */
 /*   06/09/2001A.D. | tento popis                              */
+/*   2009-08-05a.D. | pridan· funkcia substring()              */
 /*                                                             */
 /***************************************************************/
 
@@ -43,3 +44,7 @@ char *mystrcpy(char *dest, const char *src, short int count){
  * This function returns strDest. No return value is reserved to indicate an error.
  */
 
+int substring(char *str1, char *str2){
+	// vr·ti true, ak str2 je substring v reùazci str1
+	return (strstr(str1, str2) != NULL);
+}
