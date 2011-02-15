@@ -17252,11 +17252,18 @@ label_25_MAR:
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
 							if(query_type != PRM_DETAILY)
-								set_spolocna_cast(sc, poradie_svaty);
+								set_spolocna_cast(sc, poradie_svaty, ANO, ANO, ANO, ANO, ANO); /* 2009-12-08: berú sa všetky veci zo spol. èasti; je to spomienka */
 
 							modlitba = MODL_RANNE_CHVALY;
 							_set_zalmy_1nedele_rch();
-							_vlastna_cast_full(modlitba);
+							// 2009-12-08: pre dominikánov prosby zo spol. èasti, pre èeský breviár: z vlastnej èasti
+							if(_global_jazyk == JAZYK_CZ){
+								_vlastna_cast_full(modlitba);
+							}
+							else{
+								// _global_jazyk == JAZYK_CZ_OP
+								_vlastna_cast_full_okrem_prosieb(modlitba);
+							}
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_modlitba;
@@ -17265,7 +17272,14 @@ label_25_MAR:
 
 							modlitba = MODL_VESPERY;
 							_set_zalmy_sviatok_panien(modlitba);
-							_vlastna_cast_full(modlitba);
+							// 2009-12-08: pre dominikánov prosby zo spol. èasti, pre èeský breviár: z vlastnej èasti
+							if(_global_jazyk == JAZYK_CZ){
+								_vlastna_cast_full(modlitba);
+							}
+							else{
+								// _global_jazyk == JAZYK_CZ_OP
+								_vlastna_cast_full_okrem_prosieb(modlitba);
+							}
 
 							/* modlitba cez deò, pridané 2009-08-04 */
 							/* 2009-11-17: odstavené; totiž kedysi bol "sviatok", teraz "spomienka"; upozornil Mgr. Martin Kubeš, notáø */
@@ -17772,7 +17786,9 @@ label_25_MAR:
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_hymnus;
+						if(_global_jazyk != JAZYK_CZ){ // 2009-12-08: pre cz nie je vlastný hymnus
+							_vlastna_cast_hymnus;
+						}
 						_vlastna_cast_modlitba;
 
 						modlitba = MODL_POSV_CITANIE;
@@ -17780,7 +17796,9 @@ label_25_MAR:
 						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
-						_vlastna_cast_hymnus;
+						if(_global_jazyk != JAZYK_CZ){
+							_vlastna_cast_hymnus;
+						}
 						_vlastna_cast_modlitba;
 
 						break;
