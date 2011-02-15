@@ -13,6 +13,7 @@
 .value { font-weight: bold; font-style: normal; font-family: Courier, Monospaced; color: brown; }
 .explain { font-size: 90%; color: #330000; }
 .small { font-size: 90%; }
+.verysmall { font-size: 60%; }
 
 /* 2003-07-09; 2004-03-23; 2008-02-27 */
 /* apply to all elements */ { font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; font-size: 100%; }

@@ -145,6 +145,7 @@
 /*   2010-05-14a.D. | pre modlitbu cez deÚ doplnenÈ (zatiaæ pre sviatky apoötolov) nastavenie   */
 /*                    zo spoloËnej Ëasti v set_spolocna_cast()                                  */
 /*   2010-05-17a.D. | pridanÈ niektorÈ maÔarskÈ sl·venia, zaËÌnam spracov·vaù JAZYK_HU          */
+/*   2010-06-07a.D. | opravenÈ generovanie niektor˝ch ËastÌ zo spol. ËastÌ pre spomienky        */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -192,8 +193,11 @@ char _anchor_head[SMALL];
  */
 #define su_zalmy_vlastne ((_global_den.denvt == DEN_NEDELA) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || ((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)))
 #define su_zalmy_prve_vespery_vlastne ((_global_den.denvt == DEN_NEDELA) || (_global_den.typslav == SLAV_SLAVNOST) || ((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)))
-#define su_kcit_kresp_1cit_prosby_vlastne ((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || ((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV))) // rovnakÈ kritÈrium pre kr·tke ËÌtanie (rch, v) a 1. ËÌtanie (posv. ËÌtania); moûno pouûiù aj na 2. ËÌtanie posv. ËÌt.; 2007-10-23: pouûiù aj pre kr·tke responzÛrium (rch, v) a prosby (rch, v)
-#define su_antifony_vlastne(m) ((_global_den.typslav == SLAV_SLAVNOST) || ((_global_den.typslav == SLAV_SVIATOK) && ((m == MODL_RANNE_CHVALY) || (m == MODL_POSV_CITANIE) || (m == MODL_VESPERY))) || ((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)))
+// 2010-06-07: aj pre spomienky moûno braù zo spoloËnej Ëasti tieto Ëasti; vöeob. smernice Ë. 235 b)
+#define su_kcit_kresp_prosby_vlastne ((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.typslav == SLAV_SPOMIENKA) || ((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV))) // rovnakÈ kritÈrium pre kr·tke ËÌtanie (rch, v) a 1. ËÌtanie (posv. ËÌtania); moûno pouûiù aj na 2. ËÌtanie posv. ËÌt.; 2007-10-23: pouûiù aj pre kr·tke responzÛrium (rch, v) a prosby (rch, v)
+#define je_1cit_vlastne ((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || ((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV))) // rovnakÈ kritÈrium pre kr·tke ËÌtanie (rch, v) a 1. ËÌtanie (posv. ËÌtania); moûno pouûiù aj na 2. ËÌtanie posv. ËÌt.; 2007-10-23: pouûiù aj pre kr·tke responzÛrium (rch, v) a prosby (rch, v)
+// 2010-06-07: upravenÈ: su_antifony_vlastne aj vtedy, ak je to spomienka a explicitne si vyberie ûalmy+antifÛny zo spoloËnej Ëasti
+#define su_antifony_vlastne(m) ((_global_den.typslav == SLAV_SLAVNOST) || ((_global_den.typslav == SLAV_SVIATOK) && ((m == MODL_RANNE_CHVALY) || (m == MODL_POSV_CITANIE) || (m == MODL_VESPERY))) || ((_global_den.typslav == SLAV_SPOMIENKA) && (_global_opt2 == ANO) && ((m == MODL_RANNE_CHVALY) || (m == MODL_POSV_CITANIE) || (m == MODL_VESPERY))) || ((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)))
 
 /* 2007-09-28: upravenÈ priraÔovanie spoloËnej Ëasti; berie sa iba v prÌpade sl·vnostÌ resp. sviatkov,
  * pre spomienky a æubovoænÈ spomienky by malo ostaù to, Ëo je zo dÚa (2007-10-02, 2007-10-22)
@@ -7796,15 +7800,13 @@ short int _spol_cast_je_panna(_struct_sc sc){
 	}\
 	else\
 		Log("_spolocna_cast_antifony(%s) - NEBER⁄ SA!!!\n", nazov_modlitby(modl));\
-	if(su_kcit_kresp_1cit_prosby_vlastne || brat_1citanie == ANO){\
-		if(modl == MODL_POSV_CITANIE){\
-			_spolocna_cast_1citanie;\
-		}\
-		else {\
-			_vlastna_cast_kcitanie;\
-		}\
+	if(((su_kcit_kresp_prosby_vlastne) || (brat_1citanie == ANO)) && (modl != MODL_POSV_CITANIE)){\
+		_vlastna_cast_kcitanie;\
 	}\
-	if(su_kcit_kresp_1cit_prosby_vlastne || brat_kresp_prosby == ANO){\
+	if(((je_1cit_vlastne) || (brat_1citanie == ANO)) && (modl == MODL_POSV_CITANIE)){\
+		_spolocna_cast_1citanie;\
+	}\
+	if(su_kcit_kresp_prosby_vlastne || brat_kresp_prosby == ANO){\
 		_spolocna_cast_kresponz;\
 		_vlastna_cast_prosby;\
 	}\
@@ -7815,7 +7817,7 @@ short int _spol_cast_je_panna(_struct_sc sc){
 		_vlastna_cast_magnifikat;\
 	}\
 	else if(modl == MODL_POSV_CITANIE){\
-		if(su_kcit_kresp_1cit_prosby_vlastne || brat_2citanie == ANO){\
+		if(su_kcit_kresp_prosby_vlastne || brat_2citanie == ANO){\
 			_spolocna_cast_2citanie;\
 		}\
 	}\
@@ -7901,7 +7903,7 @@ void _spolocna_cast_magnifikat_rozne(short int modlitba, char *_anchor_pom, char
 }
 
 void _spolocna_cast_kresponz_rozne(short int modlitba, char *_anchor_pom, char *_anchor, char *_file){
-	if(su_kcit_kresp_1cit_prosby_vlastne){
+	if(su_kcit_kresp_prosby_vlastne){
 		sprintf(_anchor, "%s%c%s", _anchor_pom, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ);
 		_set_kresponz(modlitba, _file, _anchor);
 		set_LOG_svsv;
@@ -7916,7 +7918,7 @@ void _spolocna_cast_2cit_rozne(short int modlitba, char *_anchor_pom, char *_anc
 
 /* specialne veci pre sviatky jedneho mucenika */
 #define _spolocna_cast_kcit_kresp_chval_ve {\
-	if(su_kcit_kresp_1cit_prosby_vlastne){\
+	if(su_kcit_kresp_prosby_vlastne){\
 		sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_KCITANIE, VELKONOCNA_PRIPONA);\
 		_set_kcitanie(modlitba, _file, _anchor);\
 		set_LOG_svsv;\
@@ -7952,7 +7954,7 @@ void _spolocna_cast_2cit_rozne(short int modlitba, char *_anchor_pom, char *_anc
 
 /* specialne veci pre sviatky panien */
 #define _spolocna_cast_kresp_ve {\
-	if(su_kcit_kresp_1cit_prosby_vlastne){\
+	if(su_kcit_kresp_prosby_vlastne){\
 		sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ, VELKONOCNA_PRIPONA);\
 		_set_kresponz(modlitba, _file, _anchor);\
 		set_LOG_svsv;\
@@ -7977,7 +7979,7 @@ void _spolocna_cast_benediktus_viac(short int kolko, char *_anchor_head, char *_
 }
 /* viac prosieb -- dorobene 01/03/2000A.D., spol.casti panny marie */
 void _spolocna_cast_prosby_viac(short int kolko, char *_anchor_head, char *_anchor, char *_file){
-	if(su_kcit_kresp_1cit_prosby_vlastne){
+	if(su_kcit_kresp_prosby_vlastne){
 		sprintf(_anchor, "%s%c%s%d", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_PROSBY, (_global_den.den MOD kolko) + 1);
 		_set_prosby(modlitba, _file, _anchor);
 		set_LOG_svsv;
@@ -7985,7 +7987,7 @@ void _spolocna_cast_prosby_viac(short int kolko, char *_anchor_head, char *_anch
 }
 /* viac responzÛriÌ -- dorobene 29/03/2000A.D., oficium za zosnulych */
 void _spolocna_cast_kresponz_viac(short int kolko, char *_anchor_head, char *_anchor, char *_file){
-	if(su_kcit_kresp_1cit_prosby_vlastne){
+	if(su_kcit_kresp_prosby_vlastne){
 		sprintf(_anchor, "%s%c%s%d", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ, (_global_den.den MOD kolko) + 1);
 		_set_kresponz(modlitba, _file, _anchor);
 		set_LOG_svsv;
@@ -8033,8 +8035,8 @@ void _spolocna_cast_1cit_zvazok(short int modlitba, char *_anchor_pom, char *_an
 	Log("\tanchor_zvazok == %s\n", _anchor_zvazok);
 	Log("\tanchor == %s\n", _anchor);
 	Log("\tfile == %s\n", _file);
-	/* 2007-09-28: pridanÈ */
-	if(su_kcit_kresp_1cit_prosby_vlastne || brat_1citanie == ANO){ /* 2009-09-18: doplnenÈ "force" */
+	/* 2007-09-28: pridanÈ; 2010-06-07: upravenÈ */
+	if(je_1cit_vlastne || brat_1citanie == ANO){ /* 2009-09-18: doplnenÈ "force" */
 		if(!equals(_anchor_pom, STR_EMPTY)){
 			sprintf(_anchor_lokal, "%s%s%s%c%s", _anchor, _anchor_pom, _anchor_zvazok, pismenko_modlitby(modlitba), ANCHOR_CITANIE1);
 		}
@@ -8068,7 +8070,7 @@ void _spolocna_cast_kresponz_zvazok(short int modlitba, char *_anchor_pom, char 
 	Log("\tanchor == %s\n", _anchor);
 	Log("\tfile == %s\n", _file);
 	/* 2007-10-23 / 2007-09-28: pridanÈ */
-	if(su_kcit_kresp_1cit_prosby_vlastne){
+	if(su_kcit_kresp_prosby_vlastne){
 		if(!equals(_anchor_pom, STR_EMPTY)){
 			sprintf(_anchor_lokal, "%s%s%s%c%s", _anchor, _anchor_pom, _anchor_zvazok, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ);
 		}
@@ -8359,7 +8361,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
 		_spolocna_cast_hymnus;
-		if(su_kcit_kresp_1cit_prosby_vlastne){
+		if(su_kcit_kresp_prosby_vlastne){
 			_spolocna_cast_kcitanie;
 			_spolocna_cast_kresponz;
 		}
@@ -8370,7 +8372,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		/* vespery */
 		modlitba = MODL_VESPERY;
 		_spolocna_cast_hymnus;
-		if(su_kcit_kresp_1cit_prosby_vlastne){
+		if(su_kcit_kresp_prosby_vlastne){
 			_spolocna_cast_kcitanie;
 			_spolocna_cast_kresponz;
 		}
@@ -8397,7 +8399,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		 * - III. a IV. zv‰zok (obdobie cez rok).
 		 */
 		_spolocna_cast_1cit_zvazok(modlitba, _anchor_pom, _anchor_zvazok, STR_EMPTY /* 2005-08-08: _anchor netreba*/, _file, brat_1citanie);
-		if(su_kcit_kresp_1cit_prosby_vlastne){
+		if(su_kcit_kresp_prosby_vlastne){
 			_spolocna_cast_2citanie;
 		}
 
@@ -12907,8 +12909,6 @@ label_25_MAR:
 					_global_svaty3.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					break;
 				case 26: /* MES_MAY */
-					_global_svaty1.typslav = SLAV_SPOMIENKA;
-					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
 						if(query_type != PRM_DETAILY)
@@ -12926,6 +12926,8 @@ label_25_MAR:
 
 						break;
 					}
+					_global_svaty1.typslav = SLAV_SPOMIENKA;
+					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, text_MAJ_26[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */

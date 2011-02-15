@@ -92,6 +92,11 @@
  *		  napr. aj pre batch mÛd - d·vkovÈ generovanie veæa str·nok na s˙vislÈ obdobie)
  *		- debug verzia (s v˝pismi do samostatnÈho s˙boru): MODEL_DEBUG_Windows_commandline
  *
+ * 2 z·kladnÈ druhy spr·vania aplik·cie (JUV, 2010-06-07):
+ *
+ * BEHAVIOUR_WEB -- spr·vanie ako na webe: export prÌp. logovanie ide na STDOUT (t. j. ako output pre web browser)
+ * BEHAVIOUR_CMDLINE -- spr·vanie pre command-line verziu: export prÌp. logovanie ide do s˙boru/s˙borov (t. j. ako output pre batch mÛd)
+ *
  */
 
 /* OS_...    - uz ani nie su potrebne (kedysi pre cesty) */
@@ -106,14 +111,19 @@
 #undef EXPORT_HTML_SPECIALS /* 2007-11-20: vytvorenÈ, kvÙli v˝pisom do v˝slednÈho HTML vo funkcii interpretParameter(), napr. "nie je velkonocne obdobie" */
 #undef EXPORT_CMDLINE_CSS /* 2008-08-08: doplnenÈ kvÙli tomu, Ëi exportovaù v hlaviËke /breviar.css alebo ./breviar.css */
 
+#undef BEHAVIOUR_WEB /* 2010-06-07: spr·vanie ako na webe: export prÌp. logovanie ide na STDOUT (t. j. ako output pre web browser) */
+#undef BEHAVIOUR_CMDLINE /* 2010-06-07: spr·vanie pre command-line verziu: export prÌp. logovanie ide do s˙boru/s˙borov (t. j. ako output pre batch mÛd) */
+
 /* ostry linux: */
 #if defined(MODEL_linux)
+	#define BEHAVIOUR_WEB
 	#define OS_linux
 	#undef LOGGING
 	#define EXPORT_HTML_FILENAME_ANCHOR
 	#define EXPORT_TO_STDOUT
 /* ostrÈ Windows/RUBY: */
 #elif defined(MODEL_Windows_RUBY)
+	#define BEHAVIOUR_WEB
 	#define OS_Windows_Ruby
 	#undef LOGGING
 	#define EXPORT_HTML_FILENAME_ANCHOR
@@ -121,6 +131,7 @@
 	#define EXPORT_TO_STDOUT
 /* debugovanie Windows/RUBY -- vsetko sa vypisuje na stdout */
 #elif defined(MODEL_DEBUG_Windows_RUBY)
+	#define BEHAVIOUR_WEB
 	#define OS_Windows_Ruby
 	#define LOGGING
 	#define LOG_TO_STDOUT
@@ -130,6 +141,7 @@
 	#define DEBUG
 /* debugovanie linux -- vsetko sa vypisuje na stdout */
 #elif defined(MODEL_DEBUG_linux)
+	#define BEHAVIOUR_WEB
 	#define OS_linux
 	#define LOGGING
 	#define LOG_TO_STDOUT
@@ -139,12 +151,14 @@
 	#define DEBUG
 /* ostry Windows (command-line verzia): */
 #elif defined(MODEL_Windows_commandline)
+	#define BEHAVIOUR_CMDLINE
 	#define OS_Windows
 	#undef LOGGING
 	#define EXPORT_TO_FILE
 	#define EXPORT_CMDLINE_CSS
 /* debugovanie Windows/command-line -- vsetko sa loguje do suboru */
 #elif defined(MODEL_DEBUG_Windows_commandline)
+	#define BEHAVIOUR_CMDLINE
 	#define OS_Windows
 	#define LOGGING
 	#define LOG_TO_FILE
@@ -154,12 +168,14 @@
 	#define EXPORT_CMDLINE_CSS
 /* ostry linux (command-line verzia): */
 #elif defined(MODEL_linux_commandline)
+	#define BEHAVIOUR_CMDLINE
 	#define OS_linux
 	#undef LOGGING
 	#define EXPORT_TO_FILE
 	#define EXPORT_CMDLINE_CSS
 /* debugovanie linux/command-line -- vsetko sa loguje do suboru */
 #elif defined(MODEL_DEBUG_Windows_commandline)
+	#define BEHAVIOUR_CMDLINE
 	#define OS_linux
 	#define LOGGING
 	#define LOG_TO_FILE
@@ -170,6 +186,26 @@
 
 #else
 	#error Unsupported system model (see mysystem.h) - Nepodporovan˝ systÈmov˝ model (pozri s˙bor mysystem.h)
+#endif
+
+// 2010-06-07: doplnenÈ podæa direktÌvy Visual Studia (vlastne tak trocha prepisuje vyööie uvedenÈ)
+#ifdef _DEBUG
+	#define DEBUG
+	#define LOGGING
+	#ifdef BEHAVIOUR_WEB
+		#define LOG_TO_STDOUT
+		#define EXPORT_TO_STDOUT
+	#elif defined (BEHAVIOUR_CMDLINE)
+		#define LOG_TO_FILE
+		#define EXPORT_TO_FILE
+	#endif
+	#define EXPORT_HTML_FILENAME_ANCHOR
+	#define EXPORT_HTML_SPECIALS
+#else
+	#undef DEBUG
+	#undef LOGGING
+	#undef LOG_TO_STDOUT
+	#undef LOG_TO_FILE
 #endif
 
 #ifdef LOG_TO_EXPORT

@@ -395,6 +395,8 @@ extern const char *TEMPLAT[];
 #define PARAM_ZAKONCENIE_SKRZE_MALE         "ZAKONCENIE_SKRZE_MALE"
 #define PARAM_ZAKONCENIE_LEBO_TY_MALE       "ZAKONCENIE_LEBO_TY_MALE"
 #define PARAM_ZAKONCENIE_LEBO_ON_MALE       "ZAKONCENIE_LEBO_ON_MALE"
+/* 2010-06-07, doplnené: ešte jedno zakonèenie modlitby pre slovenèinu, krátke resp. dlhé (POST1_MODLITBA5NE) */
+#define PARAM_ZAKONCENIE_ON_JE              "ZAKONCENIE_ON_JE"
 /* 2010-05-21: doplnené zobrazenie antifóny a modlitby pre spomienku svätca v pôstnom období */
 #define PARAM_POST_SPOMIENKA_BEGIN           "POST_SPOMIENKA_BEGIN"
 #define PARAM_POST_SPOMIENKA_END             "POST_SPOMIENKA_END"
@@ -1274,6 +1276,8 @@ extern const char *text_ZAKONCENIE_LEBO_ON_dlhe[];
 extern const char *text_ZAKONCENIE_LEBO_ON_kratke[];
 extern const char *text_ZAKONCENIE_LEBO_TY_dlhe[];
 extern const char *text_ZAKONCENIE_LEBO_TY_kratke[];
+extern const char *text_ZAKONCENIE_ON_JE_dlhe; // len SK
+extern const char *text_ZAKONCENIE_ON_JE_kratke; // len SK
 
 extern const char *text_PRO_OP[];
 

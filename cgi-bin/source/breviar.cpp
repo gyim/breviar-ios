@@ -150,6 +150,7 @@
 /*   2010-05-14a.D. | presunuté niektoré definy do breviar.h               */
 /*   2010-05-24a.D. | upravený maïarský formát dátumu                      */
 /*   2010-06-04a.D. | zapracované zobrazovanie ant. po Sláva Otcu v inv.   */
+/*   2010-06-07a.D. | kvôli 5. pôstnej nedeli-SK doplnené ZAKONCENIE_ON_JE */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -165,6 +166,7 @@
 /*     napr. -qpbm -d1 -m1 -r2000 -f2 -g2 -p2001 -ba.txt                   */
 /*     -i..\..\..\web\include\ -qpsqs -s"qt=pcr&dvt=pondelok&t=2&p=mpc"    */
 /*     lh -qpdt -d30 -m4 -r2002 -pmrch -ic:\temp\breviar\ -emoja.htm       */
+/*     -iD:\personal\breviar\www.breviar.sk\include\ -qpsqs -s"qt=pdt&d=26&m=5&r=2010&p=mrch&ds=1" */
 /*                                                                         */
 /*                                                                         */
 /***************************************************************************/
@@ -1351,6 +1353,32 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 							Log("lebo-on-koniec.\n");
 						}
 					}/* zakonèenie modlitby - Lebo on... */
+					/* zakonèenie modlitby - On je... (len SK); doplnené 2010-06-07 */
+					if(equals(rest, PARAM_ZAKONCENIE_ON_JE) && _global_jazyk == JAZYK_SK){
+						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
+							write = 0;
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("(start)On je...");
+#endif
+							Export("-->");
+							if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
+								mystrcpy(zakoncenie, text_ZAKONCENIE_ON_JE_kratke, MAX_STR);
+							}
+							else{
+								mystrcpy(zakoncenie, text_ZAKONCENIE_ON_JE_dlhe, MAX_STR);
+							}
+							Export(zakoncenie);
+							Log("on-je-zaèiatok...\n");
+						}
+						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
+							Export("<!--");
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("On je...(stop)");
+#endif
+							write = 1;
+							Log("on-je-koniec.\n");
+						}
+					}/* zakonèenie modlitby - On je... (len SK) */
 				}/* !equalsi(rest, modlparam) */
 				continue;
 		}

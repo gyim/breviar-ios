@@ -1304,6 +1304,9 @@ const char *text_ZAKONCENIE_LEBO_TY_kratke[] =
  "Nebo ty iješ a kraluješ na vìky vìkù.",
  "Aki élsz és uralkodói mindörökkön-örökké.",
  };
+// 2010-06-07: pridané len pre SK (POST1_MODLITBA5NE)
+const char *text_ZAKONCENIE_ON_JE_dlhe = "On je Boh a s tebou ije a kra¾uje v jednote s Duchom Svätım po všetky veky vekov.";
+const char *text_ZAKONCENIE_ON_JE_kratke = "On ije a kra¾uje na veky vekov.";
 
 /* 2009-05-15, doplnené: pre dominikánov */
 const char *text_PRO_OP[] = 
