@@ -12386,7 +12386,7 @@ label_25_MAR:
 						_vlastna_cast_modlitba;
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+						// _vlastna_cast_2citanie;
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 						break;
