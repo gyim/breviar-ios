@@ -338,6 +338,7 @@ const char *nazov_slavenia_jazyk[POCET_SLAVENI + 1][POCET_JAZYKOV + 1] =
 /* 2005-07-27: doplnené
  * 2007-08-31: upravené TT -> BA-TT
  * 2008-06-23: upravené vzh¾adom k novému usporiadaniu diecéz (intuitívne)
+ * 2010-03-16: doplnené BA
  */
 const char *nazov_slavenia_lokal[] =
 {""
@@ -380,6 +381,7 @@ const char *nazov_slavenia_lokal[] =
 ,"ve Slezsku svátek"
 ,"v èeskobudìjovické diecézi památka"
 ,"v Bratislavskej arcidiecéze a v Spišskej diecéze sviatok hlavného patróna" /* doplnené 2008-06-24 */
+,"v Bratislavskej arcidiecéze" /* doplnené 2010-03-16 */
 };
 
 /* names of liturgical colors */
@@ -1707,6 +1709,15 @@ const char *text_MAR_08[] =
  "",
  "Sv. Jana z Boha, øeholníka",
  "Istenes Szent János szerzetes",
+ };
+const char *text_MAR_08_2[] = 
+{"Výroèie posviacky katedrálneho chrámu v Bratislave",
+ "(v Èechách, na Moravì a na Slezsku není)",
+ "",
+ "",
+ "",
+ "(pro dominikány není)",
+ "(nincs Magyarországon)",
  };
 const char *text_MAR_09[] = 
 {"Sv. Františky Rímskej, reho¾níèky",

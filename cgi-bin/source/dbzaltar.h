@@ -165,6 +165,7 @@ extern const char *text_FEB_23[];
 extern const char *text_MAR_04[];
 extern const char *text_MAR_07[];
 extern const char *text_MAR_08[];
+extern const char *text_MAR_08_2[];
 extern const char *text_MAR_09[];
 extern const char *text_MAR_10[];
 extern const char *text_MAR_17[];

@@ -51,6 +51,7 @@
 /*   2009-04-08a.D. | zakonËenie modlitby trojakÈ (kr·tke/dlhÈ)*/
 /*   2009-05-15a.D. | pridanÈ text_PRO_OP[]                    */
 /*   2009-12-14a.D. | zakonËenie modlitby s mal˝m pÌsmenkom na zaËiatku */
+/*   2010-03-16a.D. | doplnenÈ LOKAL_SLAV_BRATISLAVA           */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -679,27 +680,27 @@ extern const char *nazov_slavenia_jazyk[POCET_SLAVENI + 1][POCET_JAZYKOV + 1];
 extern const char *nazov_slavenia_lokal[];
 
 /* 2005-07-27: doplnenÈ lok·lne typy sl·venia */
-#define LOKAL_SLAV_NEURCENE            0
-#define LOKAL_SLAV_ROZNAVA_KATEDRALA   1
-#define LOKAL_SLAV_TRNAVA_PATRON       2
-#define LOKAL_SLAV_TT_BB_KE_NR_RO      3
-#define LOKAL_SLAV_NITRA_PATRON        4
-#define LOKAL_SLAV_KOSICE              5
-#define LOKAL_SLAV_NITRA               6
-#define LOKAL_SLAV_BYSTRICA            7
-#define LOKAL_SLAV_SPIS                8
-#define LOKAL_SLAV_ROZNAVA             9
-#define LOKAL_SLAV_TRNAVA             10 /* pÙvodne bolo LOKAL_SLAV_TRNAVA, upravenÈ 2007-08-31 na LOKAL_SLAV_BA_TT; nasp‰ù na LOKAL_SLAV_TRNAVA 2008-06-23 */
-#define LOKAL_SLAV_DOM_SV_MARTINA     11
-#define LOKAL_SLAV_SPIS_PATRON        12
-#define LOKAL_SLAV_BYSTRICA_PATRON    13
-#define LOKAL_SLAV_TT_BB_NR_RO        14
-#define LOKAL_SLAV_KOSICE_PATRON      15
-#define LOKAL_SLAV_14_FEB_CYRIL_METOD 16
-#define LOKAL_SLAV_ROZNAVA_PATRON     17
-#define LOKAL_SLAV_KONSEKR_KOSTOLY    18
-#define LOKAL_SLAV_DRUHA_VELK_NEDELA  19
-#define LOKAL_SLAV_KONIEC_OKTAVY_NAR  20
+#define LOKAL_SLAV_NEURCENE					0
+#define LOKAL_SLAV_ROZNAVA_KATEDRALA		1
+#define LOKAL_SLAV_TRNAVA_PATRON			2
+#define LOKAL_SLAV_TT_BB_KE_NR_RO			3
+#define LOKAL_SLAV_NITRA_PATRON				4
+#define LOKAL_SLAV_KOSICE					5
+#define LOKAL_SLAV_NITRA					6
+#define LOKAL_SLAV_BYSTRICA					7
+#define LOKAL_SLAV_SPIS						8
+#define LOKAL_SLAV_ROZNAVA					9
+#define LOKAL_SLAV_TRNAVA					10 /* pÙvodne bolo LOKAL_SLAV_TRNAVA, upravenÈ 2007-08-31 na LOKAL_SLAV_BA_TT; nasp‰ù na LOKAL_SLAV_TRNAVA 2008-06-23 */
+#define LOKAL_SLAV_DOM_SV_MARTINA			11
+#define LOKAL_SLAV_SPIS_PATRON				12
+#define LOKAL_SLAV_BYSTRICA_PATRON			13
+#define LOKAL_SLAV_TT_BB_NR_RO				14
+#define LOKAL_SLAV_KOSICE_PATRON			15
+#define LOKAL_SLAV_14_FEB_CYRIL_METOD		16
+#define LOKAL_SLAV_ROZNAVA_PATRON			17
+#define LOKAL_SLAV_KONSEKR_KOSTOLY			18
+#define LOKAL_SLAV_DRUHA_VELK_NEDELA		19
+#define LOKAL_SLAV_KONIEC_OKTAVY_NAR		20
 #define LOKAL_SLAV_KONIEC_OKTAVY_NAR_CZ		21
 #define LOKAL_SLAV_PRAHA_PATRON				22
 #define LOKAL_SLAV_PRAHA					23
@@ -719,6 +720,7 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_SLEZSKO_SVATEK			37
 #define LOKAL_SLAV_CESKE_BUDEJOVICE_PAMATKA	38
 #define LOKAL_SLAV_SPIS_BA_PATRON			39 /* pre 11. novembra, patrÛna BA-arcidiecÈzy; 2008-06-24; nahr·dza LOKAL_SLAV_SPIS_PATRON */
+#define LOKAL_SLAV_BRATISLAVA				40 /* doplnenÈ 2010-03-16 */
 
 /* prikazany / neprikazany sviatok */
 #define PRIKAZANY_SVIATOK 1
