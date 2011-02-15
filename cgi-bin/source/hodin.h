@@ -1190,6 +1190,11 @@ const char *html_text_detaily_explain[] =
  "hu_"
 };
 
+/* 2009-08-04, doplnené: pre batch mód */
+const char *html_text_batch_Zoznam1[POCET_JAZYKOV + 1] = {"Zoznam modlitieb", "Seznam modliteb", "List of prayers", "", "", "Seznam modliteb", "hu_"};
+const char *html_text_batch_Zoznam1m[POCET_JAZYKOV + 1] = {"Zoznam mesiacov", "Seznam mìsícù", "List of months", "", "", "Seznam mìsícù", "hu_"};
+const char *html_text_batch_Zoznam2[POCET_JAZYKOV + 1] = {/* Zoznam modlitieb pre */"%s %d", "%s %d", "%s %d", "%s %d", "%s %d", "%s %d", "%s %d"};
+
 /* 2009-04-08, doplnené: zakonèenie modlitby trojaké, krátke resp. dlhé */
 const char *text_ZAKONCENIE_SKRZE_dlhe[] = 
 {"Skrze nášho Pána Ježiša Krista, tvojho Syna, ktorý je Boh a s tebou žije a kra¾uje v jednote s Duchom Svätým po všetky veky vekov.",

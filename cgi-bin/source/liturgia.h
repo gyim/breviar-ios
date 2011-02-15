@@ -194,7 +194,7 @@ typedef struct tmodlitba4 _type_invitatorium;
 
 struct den_mesiac{ /* takto povodne vyzerala struct dm */
 	short int den;        /* cislo dna mesiaca (1--31) */
-	short int mesiac;     /* cislo mesiaca (1--12) */
+	short int mesiac;     /* cislo mesiaca (1--12) - ináè ako je potrebné pre väèšinu polí, kde je mesiac 0--11 */
 };
 typedef struct den_mesiac _struct_den_mesiac;
 

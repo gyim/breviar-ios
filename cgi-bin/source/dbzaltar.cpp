@@ -17144,13 +17144,32 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_modlitba;
+							_set_zalmy_1nedele_rch();
+							_vlastna_cast_full(modlitba);
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_modlitba;
+							_vlastna_cast_1citanie;
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
+							_set_zalmy_sviatok_panien(modlitba);
+							_vlastna_cast_full(modlitba);
+
+							/* modlitba cez deò, pridané 2009-08-04 */
+							modlitba = MODL_PREDPOLUDNIM;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_NAPOLUDNIE;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POPOLUDNI;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
 							_vlastna_cast_modlitba;
 
 							break;
