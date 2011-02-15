@@ -2313,7 +2313,7 @@ const char *text_NEDELA_SV_RODINY[] =
  "",
  "",
  "Sv. Rodiny Ježíše, Marie a Josefa",
- "hu_name",
+ "A Szent család: Jézus, Mária és József",
  };
 const char *text_SPOMIENKA_PM_V_SOBOTU[] = 
 {"Spomienka Panny Márie v sobotu",
