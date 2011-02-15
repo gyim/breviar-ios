@@ -1582,6 +1582,15 @@ const char *text_FEB_06[] =
  "Sv. Pavla Mikiho a druhù, muèedníkù",
  "Miki Szent Pál és társai vértanúk",
  };
+const char *text_FEB_07[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Výroèní památka zemøelých otcù a matek",
+ "hu_",
+ };
 const char *text_FEB_08[] = 
 {"Sv. Hieronyma Emilianiho",
  "Sv. Jeronýma Emilianiho",
@@ -2607,6 +2616,15 @@ const char *text_JUL_06[] =
  "",
  "Sv. Marie Gorettiové, panny a muèednice",
  "Goretti Szent Mária szûz és vértanú",
+ };
+const char *text_JUL_06_2[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a na Slezsku není)",
+ "",
+ "",
+ "",
+ "Blaholaveného Pier Giorgio Frassatiho, laika OP",
+ "nincs Magyarországon)",
  };
 const char *text_JUL_07[] = 
 {"Sv. Antona Márie Zaccariu, kòaza",
