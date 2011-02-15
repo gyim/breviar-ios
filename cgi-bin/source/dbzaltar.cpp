@@ -11529,6 +11529,22 @@ label_25_MAR:
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
 
+						/* 2010-05-06: doplnené */
+						modlitba = MODL_PREDPOLUDNIM;
+						_vlastna_cast_kcitanie;
+						_vlastna_cast_kresponz;
+						_vlastna_cast_modlitba;
+
+						modlitba = MODL_NAPOLUDNIE;
+						_vlastna_cast_kcitanie;
+						_vlastna_cast_kresponz;
+						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POPOLUDNI;
+						_vlastna_cast_kcitanie;
+						_vlastna_cast_kresponz;
+						_vlastna_cast_modlitba;
+
 						break;
 					}
 					/* 2006-01-11: pôvodne to bola spomienka, ale don Valábek ma upozornil, že ide o sviatok; upravený názov
