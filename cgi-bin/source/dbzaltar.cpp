@@ -9634,7 +9634,9 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						}
 
 						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_hymnus;
+						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ_OP)){ /* 2009-07-28: odvetvené len pre Slovensko a dominikánsky brviáø */
+							_vlastna_cast_hymnus;
+						}
 						_vlastna_cast_modlitba;
 						_vlastna_cast_2citanie;
 
