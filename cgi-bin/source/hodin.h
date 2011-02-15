@@ -3399,7 +3399,7 @@ const char *text_OKT_04[] =
  "",
  "",
  "",
- "Sv. Otce Františka z Assisi",
+ "Sv. Františka z Assisi, jáhna",
  "Assisi Szent Ferenc",
  };
 const char *text_OKT_05[] = 

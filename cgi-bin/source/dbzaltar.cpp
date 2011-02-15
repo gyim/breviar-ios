@@ -9502,6 +9502,44 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_JAN_07[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					if(_global_jazyk == JAZYK_CZ_OP){
+						/* 2009-07-10: odvetvené pre dominikánov;
+						 * 2010-03-15: pre dominikánov samostatne
+						 */
+						if(poradie_svaty == 2){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_2citanie;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						pocet = 2;
+						_global_svaty2.typslav = SLAV_SPOMIENKA;
+						_global_svaty2.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty2.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
+						strcat(_global_svaty2.meno, text_JAN_07[_global_jazyk]);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+						_global_svaty2.farba = LIT_FARBA_BIELA;
+					}/* czop only */
 					break;
 				case 13: /* MES_JAN */
 					if(poradie_svaty == 1){
@@ -9548,8 +9586,9 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							break;
 						}
 						_global_svaty1.typslav = SLAV_SPOMIENKA;
-						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-						mystrcpy(_global_svaty1.meno, text_JAN_15[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty1.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
+						strcat(_global_svaty1.meno, text_JAN_15[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 						_global_svaty1.farba = LIT_FARBA_CERVENA;
 					}
@@ -9629,8 +9668,9 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							break;
 						}
 						_global_svaty1.typslav = SLAV_SPOMIENKA;
-						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-						mystrcpy(_global_svaty1.meno, text_JAN_19[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty1.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
+						strcat(_global_svaty1.meno, text_JAN_19[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 					}
@@ -9895,15 +9935,8 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 
 						break;
 					}
-					/* 2009-03-24: doplnené odvetvenie pre dominikánov */
-					if(_global_jazyk == JAZYK_CZ_OP){
-						_global_svaty1.typslav = SLAV_SVIATOK;
-						_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
-					}
-					else{
-						_global_svaty1.typslav = SLAV_SPOMIENKA;
-						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					}
+					_global_svaty1.typslav = SLAV_SPOMIENKA;
+					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, text_JAN_28[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_UCITEL_CIRKVI, MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						/* ...KNAZ nie je vo vlastnej casti, avsak aby sme vedeli,
@@ -9911,6 +9944,52 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						 * cirkvi, kde sa odvolava na duchovnych pastierov; 23/02/2000A.D.
 						 */
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					if(_global_jazyk == JAZYK_CZ_OP){
+						/* 2009-03-24: odvetvené pre dominikánov;
+						 * 2010-03-26: pre dominikánov samostatne
+						 */
+						if(poradie_svaty == 2){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_INVITATORIUM;
+							_vlastna_cast_antifona_inv;
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_full(modlitba);
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_full(modlitba);
+
+							modlitba = MODL_PREDPOLUDNIM;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_NAPOLUDNIE;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POPOLUDNI;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_full(modlitba);
+
+							break;
+						}
+						pocet = 2;
+						_global_svaty2.typslav = SLAV_SVIATOK;
+						_global_svaty2.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
+						mystrcpy(_global_svaty2.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
+						strcat(_global_svaty2.meno, text_JAN_28[_global_jazyk]);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_UCITEL_CIRKVI, MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+						_global_svaty2.farba = LIT_FARBA_BIELA;
+					}/* czop only */
 					break;
 				case 31: /* MES_JAN */
 					if(poradie_svaty == 1){
@@ -12523,7 +12602,7 @@ label_25_MAR:
 						strcat(_global_svaty2.meno, text_MAJ_30[_global_jazyk]);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
-					}
+					}/* czop only */
 					break;
 				case 31: /* MES_MAY */
 					/* na Slovensku sa slávi 2. júla */
