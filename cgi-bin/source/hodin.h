@@ -2033,6 +2033,15 @@ const char *text_MAJ_21[] =
  "Výroèí posvìcení katedrály sv. Petra a Pavla",
  "(nincs Magyarországon)",
  };
+const char *text_MAJ_21_1[] = 
+{"Sv. Krištofa Magallanesa, kòaza a spoloèníkov, muèeníkov",
+ "Sv. Krištofa Magallanesa, knìze a druhù, muèedníkù",
+ "",
+ "",
+ "",
+ "Sv. Krištofa Magallanesa, knìze a druhù, muèedníkù",
+ "hu_",
+ };
 const char *text_MAJ_21_2[] = 
 {"(na Slovensku nie je)",
  "(v Èechách, na Moravì a ve Slezsku není)",
@@ -2043,7 +2052,7 @@ const char *text_MAJ_21_2[] =
  "hu_",
  };
 const char *text_MAJ_22[] = 
-{"(na Slovensku nie je)",
+{"Sv. Rity z Kassie, reho¾níèky",
  "Sv. Rity z Cascie, øeholnice",
  "",
  "(non est in Latina)",

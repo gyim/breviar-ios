@@ -135,6 +135,7 @@
 /*   2009-07-09a.D. | opravy pre èeské breviáre (najmä dominikánsky kalendár)                   */
 /*   2009-07-10a.D. | oprava pre èeské breviáre - 12. a 15. septembra                           */
 /*   2009-07-27a.D. | oprava viacerých drobných chybièiek pre sk aj cz breviáre                 */
+/*   2009-07-30a.D. | oprava viacerých drobných chybièiek; doplnenie svätcov (zo všeob.kalend.) */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -9351,7 +9352,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 2: /* MES_JAN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -9379,7 +9379,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					/* 2008-12-04: pridané pre czop; 2009-03-24: zmenené aj pre ostatné, pretože je to vo všeobecnom kalendári */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -9440,7 +9439,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 13: /* MES_JAN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -9467,7 +9465,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -9493,7 +9490,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 17: /* MES_JAN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -9519,7 +9515,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -9547,7 +9542,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -9573,7 +9567,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 20: /* MES_JAN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -9591,7 +9584,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					}
 					else if(poradie_svaty == 2){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -9622,7 +9614,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 21: /* MES_JAN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -9660,7 +9651,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 22: /* MES_JAN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -9687,7 +9677,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						/* 2005-10-24: pridané, je to spomienka len v Dóme sv. Martina, BA */
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -9714,7 +9703,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 24: /* MES_JAN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -9739,7 +9727,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 25: /* MES_JAN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -9770,7 +9757,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 26: /* MES_JAN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -9797,7 +9783,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 27: /* MES_JAN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -9822,7 +9807,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 28: /* MES_JAN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -9860,7 +9844,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 31: /* MES_JAN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -9905,7 +9888,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
 					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 						/* definovanie parametrov pre modlitbu */
-
 						if((poradie_svaty == 1) &&
 						  (query_type != PRM_DETAILY))
 							set_spolocna_cast(sc, poradie_svaty);
@@ -9949,7 +9931,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 3: /* MES_FEB */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -9967,7 +9948,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					}
 					else if(poradie_svaty == 2){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10000,7 +9980,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -10026,7 +10005,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 5: /* MES_FEB */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10054,7 +10032,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 6: /* MES_FEB */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10082,7 +10059,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 8: /* MES_FEB */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10103,7 +10079,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					else if(poradie_svaty == 2){
 						/* 2006-08-19: pridané */
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10134,7 +10109,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 10: /* MES_FEB */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10161,7 +10135,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 11: /* MES_FEB */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10190,7 +10163,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -10218,7 +10190,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -10245,7 +10216,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					if(_global_jazyk == JAZYK_SK){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -10275,7 +10245,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 17: /* MES_FEB */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10304,7 +10273,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -10330,7 +10298,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 21: /* MES_FEB */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10357,7 +10324,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 22: /* MES_FEB */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10401,7 +10367,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 23: /* MES_FEB */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10433,7 +10398,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 4: /* MES_MAR */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10467,7 +10431,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 7: /* MES_MAR */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10494,7 +10457,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 8: /* MES_MAR */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10521,7 +10483,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 9: /* MES_MAR */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10549,7 +10510,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -10587,7 +10547,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 17: /* MES_MAR */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10614,7 +10573,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 18: /* MES_MAR */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10641,7 +10599,6 @@ label_19_MAR:
 					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
 					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 						/* definovanie parametrov pre modlitbu */
-
 						if((poradie_svaty == 1) &&
 						  (query_type != PRM_DETAILY))
 							set_spolocna_cast(sc, poradie_svaty);
@@ -10727,7 +10684,6 @@ label_19_MAR:
 				case 23: /* MES_MAR */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10757,7 +10713,6 @@ label_25_MAR:
 					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
 					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 						/* definovanie parametrov pre modlitbu */
-
 						if((poradie_svaty == 1) &&
 						  (query_type != PRM_DETAILY))
 							set_spolocna_cast(sc, poradie_svaty);
@@ -10860,7 +10815,6 @@ label_25_MAR:
 				case 2: /* MES_APR */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10887,7 +10841,6 @@ label_25_MAR:
 				case 4: /* MES_APR */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10918,7 +10871,6 @@ label_25_MAR:
 					// if(_global_jazyk != JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -10946,7 +10898,6 @@ label_25_MAR:
 				case 7: /* MES_APR */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -10973,7 +10924,6 @@ label_25_MAR:
 				case 11: /* MES_APR */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -11000,7 +10950,6 @@ label_25_MAR:
 				case 13: /* MES_APR */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -11029,7 +10978,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -11069,7 +11017,6 @@ label_25_MAR:
 				case 21: /* MES_APR */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -11096,7 +11043,6 @@ label_25_MAR:
 					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -11146,7 +11092,6 @@ label_25_MAR:
 					else{ /* _global_jazyk nie je slovenèina ani èeština */
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -11166,7 +11111,6 @@ label_25_MAR:
 						}
 						else if(poradie_svaty == 2){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -11202,7 +11146,6 @@ label_25_MAR:
 					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -11220,7 +11163,6 @@ label_25_MAR:
 						}
 						else if(poradie_svaty == 2){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -11251,7 +11193,6 @@ label_25_MAR:
 					else{
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -11279,7 +11220,6 @@ label_25_MAR:
 				case 25: /* MES_APR */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -11314,7 +11254,6 @@ label_25_MAR:
 				case 28: /* MES_APR */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -11332,7 +11271,6 @@ label_25_MAR:
 					}
 					else if(poradie_svaty == 2){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -11370,7 +11308,6 @@ label_25_MAR:
 				case 29: /* MES_APR */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -11414,7 +11351,6 @@ label_25_MAR:
 					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_LA) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -11454,7 +11390,6 @@ label_25_MAR:
 						/* okrem Pia V. majú aj sv. Žigmunda */
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -11472,7 +11407,6 @@ label_25_MAR:
 						}
 						else if(poradie_svaty == 2){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -11507,7 +11441,6 @@ label_25_MAR:
 				case 1: /* MES_MAY */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -11598,7 +11531,6 @@ label_25_MAR:
 				case 2: /* MES_MAY */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -11623,7 +11555,6 @@ label_25_MAR:
 				case 3: /* MES_MAY */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -11668,7 +11599,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -11698,7 +11628,6 @@ label_25_MAR:
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -11725,7 +11654,6 @@ label_25_MAR:
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -11760,7 +11688,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -11788,7 +11715,6 @@ label_25_MAR:
 				case 12: /* MES_MAY */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -11806,7 +11732,6 @@ label_25_MAR:
 					}
 					else if(poradie_svaty == 2){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -11880,7 +11805,6 @@ label_25_MAR:
 				case 14: /* MES_MAY */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -11927,7 +11851,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -11955,7 +11878,6 @@ label_25_MAR:
 					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -12000,7 +11922,6 @@ label_25_MAR:
 				case 18: /* MES_MAY */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -12026,7 +11947,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_SK){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -12051,7 +11971,6 @@ label_25_MAR:
 					else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -12127,7 +12046,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 2){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -12151,37 +12069,107 @@ label_25_MAR:
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
 					}
-					break;
-				case 22: /* MES_MAY */
-					/* 2008-12-04: pridané pre czop */
+					/* 2009-07-30: pridané - Sv. Krištofa Magallanesa, kòaza a spoloèníkov, muèeníkov */
 					if(_global_jazyk == JAZYK_CZ_OP){
-						if(poradie_svaty == 1){
+						if(poradie_svaty == 3){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
+
 							modlitba = MODL_RANNE_CHVALY;
 							_vlastna_cast_modlitba;
+
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_modlitba;
-							_vlastna_cast_2citanie;
+
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_modlitba;
+
 							break;
 						}
-						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-						mystrcpy(_global_svaty1.meno, text_MAJ_22[_global_jazyk], MENO_SVIATKU);
-						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
-						_global_svaty1.farba = LIT_FARBA_BIELA;
+						pocet = 3;
+						_global_svaty3.typslav = SLAV_SPOMIENKA;
+						_global_svaty3.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty3.meno, text_MAJ_21_1[_global_jazyk], MENO_SVIATKU);
+						_global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_VIACERI);
+						_global_svaty3.farba = LIT_FARBA_CERVENA;
 					}
+					else if(_global_jazyk == JAZYK_CZ){
+						if(poradie_svaty == 2){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						pocet = 3;
+						_global_svaty2.typslav = SLAV_SPOMIENKA;
+						_global_svaty2.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty2.meno, text_MAJ_21_1[_global_jazyk], MENO_SVIATKU);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_VIACERI);
+						_global_svaty2.farba = LIT_FARBA_CERVENA;
+					}
+					else{ /* SK, HU etc. */
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty1.meno, text_MAJ_21_1[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_VIACERI);
+						_global_svaty1.farba = LIT_FARBA_CERVENA;
+					}
+					break;
+				case 22: /* MES_MAY */
+					/* 2008-12-04: pridané pre czop; 
+					 * 2009-07-30: už je aj vo všeobecnom kalendári 
+					 */
+					if(poradie_svaty == 1){
+						/* definovanie parametrov pre modlitbu */
+						if(query_type != PRM_DETAILY)
+							set_spolocna_cast(sc, poradie_svaty);
+						modlitba = MODL_RANNE_CHVALY;
+						_vlastna_cast_modlitba;
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+						modlitba = MODL_VESPERY;
+						_vlastna_cast_modlitba;
+						break;
+					}
+					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+					mystrcpy(_global_svaty1.meno, text_MAJ_22[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
+					_global_svaty1.farba = LIT_FARBA_BIELA;
 					break;
 				case 24: /* MES_MAY */
 					/* 2009-03-24: doplnené pre dominikánov */
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -12208,7 +12196,6 @@ label_25_MAR:
 				case 25: /* MES_MAY */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -12226,7 +12213,6 @@ label_25_MAR:
 					}
 					else if(poradie_svaty == 2){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -12244,7 +12230,6 @@ label_25_MAR:
 					}
 					else if(poradie_svaty == 3){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -12280,7 +12265,6 @@ label_25_MAR:
 				case 26: /* MES_MAY */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -12305,7 +12289,6 @@ label_25_MAR:
 				case 27: /* MES_MAY */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -12332,7 +12315,6 @@ label_25_MAR:
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -12369,7 +12351,6 @@ label_25_MAR:
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -12404,7 +12385,6 @@ label_25_MAR:
 				case 1: /* MES_JUN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -12431,7 +12411,6 @@ label_25_MAR:
 				case 2: /* MES_JUN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -12456,7 +12435,6 @@ label_25_MAR:
 				case 3: /* MES_JUN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -12483,7 +12461,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -12510,7 +12487,6 @@ label_25_MAR:
 				case 5: /* MES_JUN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -12535,7 +12511,6 @@ label_25_MAR:
 				case 6: /* MES_JUN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -12574,7 +12549,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -12601,7 +12575,6 @@ label_25_MAR:
 				case 9: /* MES_JUN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -12628,7 +12601,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -12701,7 +12673,6 @@ label_25_MAR:
 				case 13: /* MES_JUN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -12727,7 +12698,6 @@ label_25_MAR:
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -12756,7 +12726,6 @@ label_25_MAR:
 						/* 2005-07-27: pridané, je to spomienka len v rožòavskej katedrále */
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -12784,7 +12753,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_SK){ /* 2006-09-12: odvetvené */
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -12809,7 +12777,6 @@ label_25_MAR:
 					else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -12838,7 +12805,6 @@ label_25_MAR:
 				case 21: /* MES_JUN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -12863,7 +12829,6 @@ label_25_MAR:
 				case 22: /* MES_JUN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -12881,7 +12846,6 @@ label_25_MAR:
 					}
 					else if(poradie_svaty == 2){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -12914,7 +12878,6 @@ label_25_MAR:
 					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
 					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 						/* definovanie parametrov pre modlitbu */
-
 						if((poradie_svaty == 1) &&
 						  (query_type != PRM_DETAILY))
 							set_spolocna_cast(sc, poradie_svaty);
@@ -12992,7 +12955,6 @@ label_25_MAR:
 				case 27: /* MES_JUN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -13018,7 +12980,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_SK){
 						if(poradie_svaty == 2){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -13048,7 +13009,6 @@ label_25_MAR:
 				case 28: /* MES_JUN */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -13080,7 +13040,6 @@ label_25_MAR:
 						 * v predoslom dni, co je neciste riesenie
 						 */
 						/* definovanie parametrov pre modlitbu */
-
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
 						Log("Peter a Pavol: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
@@ -13165,7 +13124,6 @@ label_25_MAR:
 					 */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -13189,7 +13147,6 @@ label_25_MAR:
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 2){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 							break;
@@ -13212,7 +13169,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_SK){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -13244,7 +13200,6 @@ label_25_MAR:
 				case 3: /* MES_JUL */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -13280,7 +13235,6 @@ label_25_MAR:
 						/* 2009-07-09: odvetvené len pre SK */
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -13304,7 +13258,6 @@ label_25_MAR:
 					else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -13339,7 +13292,6 @@ label_25_MAR:
 						 * v predoslom dni, co je neciste riesenie
 						 */
 						/* definovanie parametrov pre modlitbu */
-
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
 						Log("Cyril a Metod: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
@@ -13422,7 +13374,6 @@ label_25_MAR:
 				case 6: /* MES_JUL */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -13455,7 +13406,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_SK){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -13484,7 +13434,6 @@ label_25_MAR:
 					 */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -13509,7 +13458,6 @@ label_25_MAR:
 						pocet = 2;
 						if(poradie_svaty == 2){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -13550,7 +13498,6 @@ label_25_MAR:
 					/* kedysi bola iba spomienka, v Európe sviatok; už upravené aj v CZ aj SK */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -13591,7 +13538,6 @@ label_25_MAR:
 				case 13: /* MES_JUL */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -13616,7 +13562,6 @@ label_25_MAR:
 				case 14: /* MES_JUL */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -13641,7 +13586,6 @@ label_25_MAR:
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 2){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -13669,7 +13613,6 @@ label_25_MAR:
 				case 15: /* MES_JUL */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -13694,7 +13637,6 @@ label_25_MAR:
 				case 16: /* MES_JUL */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -13721,7 +13663,6 @@ label_25_MAR:
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 2){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 							break;
@@ -13741,7 +13682,6 @@ label_25_MAR:
 						/* v Nitrianskej dieceze sviatok - hlavni patroni */
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -13776,7 +13716,6 @@ label_25_MAR:
 					else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -13837,7 +13776,6 @@ label_25_MAR:
 				case 21: /* MES_JUL */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -13862,7 +13800,6 @@ label_25_MAR:
 				case 22: /* MES_JUL */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -13905,7 +13842,6 @@ label_25_MAR:
 				case 23: /* MES_JUL */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -13943,7 +13879,6 @@ label_25_MAR:
 					 */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -13970,7 +13905,6 @@ label_25_MAR:
 				case 25: /* MES_JUL */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -13990,6 +13924,14 @@ label_25_MAR:
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
 
+						/* 2009-07-30: doplnené krátke èítanie zo spol. èasti */
+						modlitba = MODL_PREDPOLUDNIM;
+						_vlastna_cast_kcitanie;
+						modlitba = MODL_NAPOLUDNIE;
+						_vlastna_cast_kcitanie;
+						modlitba = MODL_POPOLUDNI;
+						_vlastna_cast_kcitanie;
+
 						break;
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
@@ -14001,7 +13943,6 @@ label_25_MAR:
 				case 26: /* MES_JUL */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14039,7 +13980,6 @@ label_25_MAR:
 				case 27: /* MES_JUL */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14065,7 +14005,6 @@ label_25_MAR:
 				case 29: /* MES_JUL */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14102,7 +14041,6 @@ label_25_MAR:
 				 */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14127,7 +14065,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_SK){
 						if(poradie_svaty == 2){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -14154,7 +14091,6 @@ label_25_MAR:
 				case 31: /* MES_JUL */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14188,7 +14124,6 @@ label_25_MAR:
 				case 1: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14213,7 +14148,6 @@ label_25_MAR:
 				case 2: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14231,7 +14165,6 @@ label_25_MAR:
 					}
 					else if(poradie_svaty == 2){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14290,7 +14223,6 @@ label_25_MAR:
 				case 4: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14315,7 +14247,6 @@ label_25_MAR:
 				case 5: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14349,7 +14280,6 @@ label_25_MAR:
 						 * vespery 
 						 */
 						/* definovanie parametrov pre modlitbu */
-
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
 						Log("Premenenie Pana: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
@@ -14402,7 +14332,6 @@ label_25_MAR:
 				case 7: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14420,7 +14349,6 @@ label_25_MAR:
 					}
 					else if(poradie_svaty == 2){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14451,7 +14379,6 @@ label_25_MAR:
 				case 8: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14486,7 +14413,6 @@ label_25_MAR:
 				case 9: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14521,7 +14447,6 @@ label_25_MAR:
 				case 10: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14551,7 +14476,6 @@ label_25_MAR:
 				case 11: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14580,7 +14504,6 @@ label_25_MAR:
 				case 12: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14605,7 +14528,6 @@ label_25_MAR:
 				case 13: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14630,7 +14552,6 @@ label_25_MAR:
 				case 14: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14659,7 +14580,6 @@ label_25_MAR:
 						 * vespery 
 						 */
 						/* definovanie parametrov pre modlitbu */
-
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
 						Log("Premenenie Pana: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
@@ -14722,7 +14642,6 @@ label_25_MAR:
 				case 16: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14749,7 +14668,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -14778,7 +14696,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -14805,7 +14722,6 @@ label_25_MAR:
 				case 19: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14830,7 +14746,6 @@ label_25_MAR:
 				case 20: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14861,7 +14776,6 @@ label_25_MAR:
 				case 21: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14886,7 +14800,6 @@ label_25_MAR:
 				case 22: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14920,7 +14833,6 @@ label_25_MAR:
 				case 23: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14955,7 +14867,6 @@ label_25_MAR:
 				case 24: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14981,7 +14892,6 @@ label_25_MAR:
 				case 25: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -14999,7 +14909,6 @@ label_25_MAR:
 					}
 					else if(poradie_svaty == 2){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -15018,7 +14927,6 @@ label_25_MAR:
 					/* 2006-09-11: pridané */
 					else if((_global_jazyk == JAZYK_CZ) && (poradie_svaty == 3)){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -15059,7 +14967,6 @@ label_25_MAR:
 				case 27: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -15086,7 +14993,6 @@ label_25_MAR:
 				case 28: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -15127,7 +15033,6 @@ label_25_MAR:
 				case 29: /* MES_AUG */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -15186,7 +15091,6 @@ label_25_MAR:
 				case 3: /* MES_SEP */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -15234,7 +15138,6 @@ label_25_MAR:
 				case 7: /* MES_SEP */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -15267,7 +15170,6 @@ label_25_MAR:
 				case 8: /* MES_SEP */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -15304,7 +15206,6 @@ label_25_MAR:
 				case 9: /* MES_SEP */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -15332,7 +15233,6 @@ label_25_MAR:
 						 * 2008-11-29: pridané czop - dominikánský breviáø */
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -15361,7 +15261,6 @@ label_25_MAR:
 					 */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -15387,7 +15286,6 @@ label_25_MAR:
 				case 13: /* MES_SEP */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -15421,7 +15319,6 @@ label_25_MAR:
 						 * vespery 
 						 */
 						/* definovanie parametrov pre modlitbu */
-
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
 						Log("Povysenie sv. Kriza: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
@@ -15478,7 +15375,6 @@ label_25_MAR:
 						 * v predoslom dni, co je neciste riesenie
 						 */
 						/* definovanie parametrov pre modlitbu */
-
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
 						Log("Sedembolestnej Panny Marie, patronky Slovenska: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
@@ -15553,7 +15449,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_SK){ /* 2006-09-12: odvetvené len pre Slovensko */
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -15582,7 +15477,6 @@ label_25_MAR:
 						 * 2008-11-29: pridané czop - dominikánský breviáø */
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -15617,7 +15511,6 @@ label_25_MAR:
 				case 17: /* MES_SEP */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -15645,7 +15538,6 @@ label_25_MAR:
 						 * 2008-11-29: pridané czop - dominikánský breviáø */
 						if(poradie_svaty == 2){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -15678,7 +15570,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -15705,7 +15596,6 @@ label_25_MAR:
 				case 19: /* MES_SEP */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -15730,7 +15620,6 @@ label_25_MAR:
 				case 20: /* MES_SEP */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -15774,7 +15663,6 @@ label_25_MAR:
 				case 21: /* MES_SEP */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -15806,7 +15694,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_SK){ /* 2006-09-12: odvetvené len pre Slovensko */
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -15834,7 +15721,6 @@ label_25_MAR:
 					/* 2004-09-23, pridane - pater Pio */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -15882,7 +15768,6 @@ label_25_MAR:
 					 */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -15907,7 +15792,6 @@ label_25_MAR:
 						pocet = 2;
 						if(poradie_svaty == 2){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -15934,7 +15818,6 @@ label_25_MAR:
 				case 27: /* MES_SEP */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -15970,7 +15853,6 @@ label_25_MAR:
 							 * v predoslom dni, co je neciste riesenie
 							 */
 							/* definovanie parametrov pre modlitbu */
-
 							sc = _decode_spol_cast(_global_svaty1.spolcast);
 							Log("Svatý Václav: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
@@ -16055,7 +15937,6 @@ label_25_MAR:
 
 						if(poradie_svaty == 2){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -16082,7 +15963,6 @@ label_25_MAR:
 				case 29: /* MES_SEP */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16116,7 +15996,6 @@ label_25_MAR:
 				case 30: /* MES_SEP */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16150,7 +16029,6 @@ label_25_MAR:
 				case 1: /* MES_OCT */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16177,7 +16055,6 @@ label_25_MAR:
 				case 2: /* MES_OCT */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16212,7 +16089,6 @@ label_25_MAR:
 				case 4: /* MES_OCT */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16257,7 +16133,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -16284,7 +16159,6 @@ label_25_MAR:
 				case 6: /* MES_OCT */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16309,7 +16183,6 @@ label_25_MAR:
 				case 7: /* MES_OCT */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16356,7 +16229,6 @@ label_25_MAR:
 					 */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16374,7 +16246,6 @@ label_25_MAR:
 					}
 					else if(poradie_svaty == 2){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16406,7 +16277,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 3){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -16437,7 +16307,6 @@ label_25_MAR:
 						 * 2008-11-29: pridané czop - dominikánský breviáø */
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -16465,7 +16334,6 @@ label_25_MAR:
 				case 14: /* MES_OCT */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16490,7 +16358,6 @@ label_25_MAR:
 				case 15: /* MES_OCT */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16521,7 +16388,6 @@ label_25_MAR:
 				case 16: /* MES_OCT */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16539,7 +16405,6 @@ label_25_MAR:
 					}
 					else if(poradie_svaty == 2){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16582,7 +16447,6 @@ label_25_MAR:
 				case 17: /* MES_OCT */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16609,7 +16473,6 @@ label_25_MAR:
 				case 18: /* MES_OCT */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16644,7 +16507,6 @@ label_25_MAR:
 				case 19: /* MES_OCT */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16662,7 +16524,6 @@ label_25_MAR:
 					}
 					else if(poradie_svaty == 2){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16712,7 +16573,6 @@ label_25_MAR:
 				case 23: /* MES_OCT */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16737,7 +16597,6 @@ label_25_MAR:
 				case 24: /* MES_OCT */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16831,7 +16690,6 @@ label_25_MAR:
 				case 28: /* MES_OCT */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -16902,7 +16760,6 @@ label_25_MAR:
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -16938,7 +16795,6 @@ label_25_MAR:
 						 * vespery 
 						 */
 						/* definovanie parametrov pre modlitbu */
-
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
 						Log("Premenenie Pana: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
@@ -16995,7 +16851,6 @@ label_25_MAR:
 				case 2: /* MES_NOV */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17020,7 +16875,6 @@ label_25_MAR:
 				case 3: /* MES_NOV */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17054,7 +16908,6 @@ label_25_MAR:
 				case 4: /* MES_NOV */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17080,7 +16933,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_SK){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -17109,7 +16961,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -17138,7 +16989,6 @@ label_25_MAR:
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -17191,7 +17041,6 @@ label_25_MAR:
 				case 10: /* MES_NOV */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17218,7 +17067,6 @@ label_25_MAR:
 				case 11: /* MES_NOV */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17227,6 +17075,7 @@ label_25_MAR:
 						_vlastna_cast_antifona_inv;
 
 						modlitba = MODL_RANNE_CHVALY;
+						_set_zalmy_1nedele_rch(); /* 2009-07-30: doplnené pod¾a breviára (ako napísal Vlado Kiš ešte ) */
 						if(_global_jazyk == JAZYK_SK){ /* 2008-11-29: odvetvené len pre Slovensko */
 							_vlastna_cast_full_okrem_prosieb(modlitba);
 						}
@@ -17244,6 +17093,7 @@ label_25_MAR:
 						}
 
 						modlitba = MODL_VESPERY;
+						_set_zalmy_sviatok_duch_past(modlitba); /* 2009-07-30: doplnené pod¾a breviára (ako napísal Vlado Kiš ešte ) */
 						if(_global_jazyk == JAZYK_SK){ /* 2008-11-29: odvetvené len pre Slovensko */
 							_vlastna_cast_full_okrem_prosieb(modlitba);
 						}
@@ -17265,7 +17115,6 @@ label_25_MAR:
 				case 12: /* MES_NOV */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17291,7 +17140,6 @@ label_25_MAR:
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
-
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
@@ -17317,7 +17165,6 @@ label_25_MAR:
 				case 15: /* MES_NOV */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17349,7 +17196,6 @@ label_25_MAR:
 				case 16: /* MES_NOV */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17367,7 +17213,6 @@ label_25_MAR:
 					}
 					else if(poradie_svaty == 2){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17399,7 +17244,6 @@ label_25_MAR:
 				case 17: /* MES_NOV */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17424,7 +17268,6 @@ label_25_MAR:
 				case 18: /* MES_NOV */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17471,7 +17314,6 @@ label_25_MAR:
 				case 21: /* MES_NOV */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17507,7 +17349,6 @@ label_25_MAR:
 				case 22: /* MES_NOV */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17534,7 +17375,6 @@ label_25_MAR:
 				case 23: /* MES_NOV */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17552,7 +17392,6 @@ label_25_MAR:
 					}
 					else if(poradie_svaty == 2){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17584,7 +17423,6 @@ label_25_MAR:
 				case 24: /* MES_NOV */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17610,7 +17448,6 @@ label_25_MAR:
 					/* 2006-09-13: odvetvené pre Slovensko; 2008-12-04: aj pre CZ a CZ_OP */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17635,7 +17472,6 @@ label_25_MAR:
 				case 30: /* MES_NOV */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17718,7 +17554,6 @@ label_25_MAR:
 				case 3: /* MES_DEC */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17746,7 +17581,6 @@ label_25_MAR:
 				case 4: /* MES_DEC */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17771,7 +17605,6 @@ label_25_MAR:
 				case 6: /* MES_DEC */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17796,7 +17629,6 @@ label_25_MAR:
 				case 7: /* MES_DEC */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17831,7 +17663,6 @@ label_8_DEC:
 						 * v predoslom dni, co je neciste riesenie
 						 */
 						/* definovanie parametrov pre modlitbu */
-
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
 						Log("Neposkvrnene pocatie Panny Marie: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
@@ -17922,7 +17753,6 @@ label_8_DEC:
 				case 11: /* MES_DEC */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17975,7 +17805,6 @@ label_8_DEC:
 				case 13: /* MES_DEC */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -18002,7 +17831,6 @@ label_8_DEC:
 				case 14: /* MES_DEC */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -18027,7 +17855,6 @@ label_8_DEC:
 				case 21: /* MES_DEC */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -18072,7 +17899,6 @@ label_8_DEC:
 				case 23: /* MES_DEC */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -18099,7 +17925,6 @@ label_8_DEC:
 				case 26: /* MES_DEC */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -18152,7 +17977,6 @@ label_8_DEC:
 				case 27: /* MES_DEC */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -18205,7 +18029,6 @@ label_8_DEC:
 				case 28: /* MES_DEC */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -18258,7 +18081,6 @@ label_8_DEC:
 				case 29: /* MES_DEC */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -18285,7 +18107,6 @@ label_8_DEC:
 				case 31: /* MES_DEC */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
-
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
