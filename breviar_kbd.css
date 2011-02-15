@@ -54,6 +54,7 @@ select { background: white; font-family: Tahoma, Verdana, Sans Serif; font-size 
 input { border: 1px; font-family: Tahoma, Verdana, Sans Serif; font-size : 95%; color: #000000; }
 
 input.button, input.reset { 
+	cursor: pointer;
 	margin-left: 0px!important;
 	background: #FFFFCC; 
 	font-family: Tahoma, Verdana, Sans Serif; 

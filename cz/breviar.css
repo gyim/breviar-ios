@@ -55,8 +55,9 @@ select { background: white; font-family: Cambria, Verdana, Tahoma, Georgia, Sans
 input { border: 1px; font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; font-size : 95%; color: #000000; }
 
 input.button, input.reset { 
+	cursor: pointer;
 	margin-left: 0px!important;
-	background: url(/pozadie.tlac.gif); 
+	background: white; 
 	font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; 
 	font-size : 90%; 
 	text-decoration:none; 
