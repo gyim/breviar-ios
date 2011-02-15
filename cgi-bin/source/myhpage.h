@@ -14,6 +14,7 @@
 /*********************************************************************/
 
 #include "vstudio.h"
+#include "myexpt.h"
 
 #ifndef __MYHPAGE_H_
 #define __MYHPAGE_H_

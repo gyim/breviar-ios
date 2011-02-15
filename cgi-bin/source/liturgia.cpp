@@ -29,6 +29,7 @@
 #define __LITURGIA_C_
 
 #include "liturgia.h"
+#include "breviar.h"
 
 #include "mylog.h" /* bolo tu .c */
 #include "myexpt.h"
@@ -499,70 +500,93 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 	char pom2[MAX_STR]; /* 2006-07-31: pridané */
 	mystrcpy(pom2, STR_EMPTY, MAX_STR); /* 2006-07-31: pridané */
 
+	char str_subor[SMALL] = STR_EMPTY; /* 2009-08-12: pridané */
+
 	/* ak pozadujeme vytvorenie linku s inou farbou pre prestupny rok, 2003-07-02 */
 	if(typ == LINK_DEN_MESIAC_ROK_PRESTUP)
 		mystrcpy(_global_link, "<"HTML_LINK_RED" href=\"", MAX_GLOBAL_LINK); /* 2003-08-11 zmenene na mystrcpy(...,MAX_GLOBAL_LINK) */
 	else /* inak normalny a href, toto tu bolo predtym; 2003-07-02 */
 		mystrcpy(_global_link, "<"HTML_LINK_NORMAL" href=\"", MAX_GLOBAL_LINK); /* 2003-08-11 zmenene na mystrcpy(...,MAX_GLOBAL_LINK) */
 
-	/* 13/04/2000A.D.: podla toho, co je v _global_linky, sa bud zobrazi
-	 * to co klasicky (linka), alebo
-	 * linka na subor FILE_NAME_POKEC + "d"/"m"/"r" + ".htm"
-	 */
-	if(_global_linky == ANO){
-		/* linka ano */
+	if(_global_opt_batch_monthly == NIE){ 
+		/* 13/04/2000A.D.: podla toho, co je v _global_linky, sa bud zobrazi
+		 * to co klasicky (linka), alebo
+		 * linka na subor FILE_NAME_POKEC + "d"/"m"/"r" + ".htm"
+		 */
+		if(_global_linky == ANO){
+			/* linka ano */
 
-		strcat(_global_link, script_name);
+			strcat(_global_link, script_name);
 
-		/* query_type */
-		sprintf(pom, "?%s=%s"HTML_AMPERSAND, STR_QUERY_TYPE, STR_PRM_DATUM);
-		strcat(_global_link, pom);
+			/* query_type */
+			sprintf(pom, "?%s=%s"HTML_AMPERSAND, STR_QUERY_TYPE, STR_PRM_DATUM);
+			strcat(_global_link, pom);
 
-		/* den */
-		if(den == VSETKY_DNI)
-			sprintf(pom, "%s=%s"HTML_AMPERSAND, STR_DEN, STR_VSETKY_DNI);
-		else
-			sprintf(pom, "%s=%d"HTML_AMPERSAND, STR_DEN, den);
-		strcat(_global_link, pom);
+			/* den */
+			if(den == VSETKY_DNI)
+				sprintf(pom, "%s=%s"HTML_AMPERSAND, STR_DEN, STR_VSETKY_DNI);
+			else
+				sprintf(pom, "%s=%d"HTML_AMPERSAND, STR_DEN, den);
+			strcat(_global_link, pom);
 
-		/* mesiac */
-		if(mesiac == VSETKY_MESIACE)
-			sprintf(pom, "%s=%s"HTML_AMPERSAND, STR_MESIAC, STR_VSETKY_MESIACE);
-		else
-			sprintf(pom, "%s=%d"HTML_AMPERSAND, STR_MESIAC, mesiac);
-		strcat(_global_link, pom);
+			/* mesiac */
+			if(mesiac == VSETKY_MESIACE)
+				sprintf(pom, "%s=%s"HTML_AMPERSAND, STR_MESIAC, STR_VSETKY_MESIACE);
+			else
+				sprintf(pom, "%s=%d"HTML_AMPERSAND, STR_MESIAC, mesiac);
+			strcat(_global_link, pom);
 
-		/* rok */
-		sprintf(pom, "%s=%d", STR_ROK, rok);
-		strcat(_global_link, pom);
+			/* rok */
+			sprintf(pom, "%s=%d", STR_ROK, rok);
+			strcat(_global_link, pom);
 
-	}/* linka ano */
-	else{ /* linka nie */
-		strcat(_global_link, FILE_NAME_POKEC);
-		if(mesiac == VSETKY_MESIACE){
-			strcat(_global_link, "r");
+		}/* linka ano */
+		else{ /* linka nie */
+			strcat(_global_link, FILE_NAME_POKEC);
+			if(mesiac == VSETKY_MESIACE){
+				strcat(_global_link, "r");
+			}
+			else if(den == VSETKY_DNI){
+				strcat(_global_link, "m");
+			}
+			else{
+				strcat(_global_link, "d");
+			}
+			strcat(_global_link, ".htm");
+		}/* linka nie */
+
+		/* 2006-07-31: pridané odovzdanie parametra pre jazyk */
+		if(_global_jazyk != JAZYK_SK){
+			sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_JAZYK, skratka_jazyka[_global_jazyk]);
+			strcat(_global_link, pom2);
+			Log("\tPrilepil som aj jazyk: `%s' (2006-07-31)\n", pom2);
 		}
-		else if(den == VSETKY_DNI){
-			strcat(_global_link, "m");
+
+		/* 2008-08-08: pridané odovzdanie parametra pre css */
+		if(_global_css != CSS_breviar_sk){
+			sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_CSS, skratka_css[_global_css]);
+			strcat(_global_link, pom2);
+			Log("\tPrilepil som aj css: `%s' (2008-08-08)\n", pom2);
+		}
+	}/* if(_global_opt_batch_monthly == NIE) */
+	else{
+		// reazec pre deò a pre názov súboru
+		if(den != VSETKY_DNI){
+			if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
+				sprintf(str_subor, FILENAME_EXPORT_DATE_SIMPLE, rok % 100, mesiac, den);
+			else /* EXPORT_DATE_FULL */
+				sprintf(str_subor, FILENAME_EXPORT_DATE_FULL, rok, mesiac, den);
 		}
 		else{
-			strcat(_global_link, "d");
+			/* den == VSETKY_DNI */
+			if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
+				sprintf(str_subor, FILENAME_EXPORT_MONTH_SIMPLE, rok % 100, mesiac);
+			else /* EXPORT_DATE_FULL */
+				sprintf(str_subor, FILENAME_EXPORT_MONTH_FULL, rok, mesiac);
 		}
-		strcat(_global_link, ".htm");
-	}/* linka nie */
-
-	/* 2006-07-31: pridané odovzdanie parametra pre jazyk */
-	if(_global_jazyk != JAZYK_SK){
-		sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_JAZYK, skratka_jazyka[_global_jazyk]);
-		strcat(_global_link, pom2);
-		Log("\tPrilepil som aj jazyk: `%s' (2006-07-31)\n", pom2);
-	}
-
-	/* 2008-08-08: pridané odovzdanie parametra pre css */
-	if(_global_css != CSS_breviar_sk){
-		sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_CSS, skratka_css[_global_css]);
-		strcat(_global_link, pom2);
-		Log("\tPrilepil som aj css: `%s' (2008-08-08)\n", pom2);
+		sprintf(pom, "%s.htm", str_subor);
+		Log("\treazec pom == %s\n", pom);
+		strcat(_global_link, pom);
 	}
 
 	strcat(_global_link, "\">");

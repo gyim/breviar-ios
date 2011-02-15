@@ -11,7 +11,7 @@
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-07-15a.D. | odstraneny #include "mybase.h"           */
 /*   2004-03-15a.D. | pridany DEFAULT_HTML_EXPORT (batch mode) */
-/*   2009-08-03a.D. | pridany DEFAULT_MONTH_EXPORT (batch mód) */
+/*   2009-08-03a.D. | pridaný DEFAULT_MONTH_EXPORT (batch mód) */
 /*                                                             */
 /***************************************************************/
 
@@ -25,7 +25,7 @@
 
 #define DEFAULT_FILE_EXPORT "export.htm"
 #define DEFAULT_HTML_EXPORT "zoznam.htm" // "export2.htm"
-#define DEFAULT_MONTH_EXPORT "index.htm"
+#define DEFAULT_MONTH_EXPORT "index.htm" // "^ hore"
 
 short int Export(char *fmt, ...);
 short int ExpL2HTML(char *fmt);

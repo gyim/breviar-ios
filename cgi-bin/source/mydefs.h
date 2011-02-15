@@ -24,6 +24,7 @@
 /*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám          */
 /*   2006-08-18a.D. | zmena int na short int (staèí 32tis.)    */
 /*   2008-11-29a.D. | pridané rôzne možnosti batch exportu     */
+/*   2009-08-12a.D. | pridané ïalšie možnosti batch exportu    */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -60,7 +61,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2009-08-11"
+#define BUILD_DATE "2009-08-12"
 
 #define BYTES 250
 #define SMALL 80
@@ -452,7 +453,7 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #define HTML_P_PATKA "p class=\"patka\""
 
 /* pridane 2003-07-09, zmenene v cestach pre skript */
-#define HTML_AMPERSAND "&amp;"
+#define HTML_AMPERSAND          "&amp;"
 /* 2006-08-19: pridané */
 #define HTML_COMMENT_BEGIN		"<!--"
 #define HTML_COMMENT_END		"-->"
@@ -460,6 +461,8 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 /* 2007-03-19: pridané namiesto gt a lt html znakov */
 #define HTML_LEFT_ARROW			"&laquo;"
 #define HTML_RIGHT_ARROW		"&raquo;"
+/* 2009-08-12: pridané */
+#define HTML_LINK_CALL1         "%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s"
 
 /* definície HTML prvkov upravené a presunuté do hodin.h, 2006-08-01;
  * tu ponechané len z historických dôvodov zakomentované
@@ -499,10 +502,15 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #define STR_SIMPLE "simple"
 #define STR_FULL   "full"
 
+// názov súboru (jeho zaèiatok) pre dátum
 #define FILENAME_EXPORT_DATE_SIMPLE "%.2d%.2d%.2d"
 #define FILENAME_EXPORT_DATE_FULL   "%.4d-%.2d-%.2d"
+// názov adresára pre mesiac
 #define DIRNAME_EXPORT_MONTH_SIMPLE "%.2d%.2d-%s"
 #define DIRNAME_EXPORT_MONTH_FULL   "%.4d-%.2d-%s"
+// názov súboru (jeho zaèiatok) pre mesiac
+#define FILENAME_EXPORT_MONTH_SIMPLE "%.2d%.2d"
+#define FILENAME_EXPORT_MONTH_FULL   "%.4d-%.2d"
 
 #endif /*__MYDEFS_H_*/
 

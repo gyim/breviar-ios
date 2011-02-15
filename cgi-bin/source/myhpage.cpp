@@ -101,7 +101,7 @@ void hlavicka(char *title, short int level){
 	Export("<body>\n");
 	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
 		// ^ hore
-		Export("<p><a href=\".%s%s\">", STR_PATH_SEPARATOR_HTML, DEFAULT_MONTH_EXPORT); // v tom istom adresári
+		Export("<p><a href=\".%s%s\">", STR_PATH_SEPARATOR_HTML, _global_export_navig_hore); // v tom istom adresári
 		Export((char *)html_text_batch_Back[_global_jazyk]);
 		Export("</a></p>");
 	}
@@ -162,7 +162,7 @@ void hlavicka(char *title, FILE * expt, short int level){
 	fprintf(expt, "<body>\n");
 	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
 		// ^ hore
-		fprintf(expt, "<p><a href=\".%s%s\">", STR_PATH_SEPARATOR_HTML, DEFAULT_MONTH_EXPORT); // v tom istom adresári
+		fprintf(expt, "<p><a href=\".%s%s\">", STR_PATH_SEPARATOR_HTML, _global_export_navig_hore); // v tom istom adresári
 		fprintf(expt, (char *)html_text_batch_Back[_global_jazyk]);
 		fprintf(expt, "</a></p>");
 	}
