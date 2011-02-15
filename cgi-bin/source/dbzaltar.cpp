@@ -13221,6 +13221,17 @@ label_25_MAR:
 							_vlastna_cast_hymnus;
 						}
 
+						/* 2009-08-17: doplnené krátke èítanie zo spol. èasti; modlitba ako na ranné chvály */
+						modlitba = MODL_PREDPOLUDNIM;
+						_vlastna_cast_kcitanie;
+						_vlastna_cast_modlitba;
+						modlitba = MODL_NAPOLUDNIE;
+						_vlastna_cast_kcitanie;
+						_vlastna_cast_modlitba;
+						modlitba = MODL_POPOLUDNI;
+						_vlastna_cast_kcitanie;
+						_vlastna_cast_modlitba;
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_antifony_ako_na_ranne_chvaly;
 						_vlastna_cast_kcitanie;
