@@ -15458,7 +15458,7 @@ label_25_MAR:
 
 						if(/*(poradie_svaty == 1) && */ // 23/02/2000A.D.; zobrate z 8.dec; 28/03/2000A.D.
 						  (query_type != PRM_DETAILY))
-							set_spolocna_cast(sc, poradie_svaty);
+							set_spolocna_cast(sc, poradie_svaty, ANO, ANO, ANO, ANO, ANO); /* 2009-12-15: berú sa všetky veci zo spol. èasti; kvôli prosbám zo spol. èasti */
 
 						/* 2009-07-10: nastavenie pre èeský breviár - je to len spomienka */
 						if(_global_jazyk == JAZYK_SK){
@@ -15478,7 +15478,12 @@ label_25_MAR:
 						_vlastna_cast_antifona_inv;
 
 						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_full(modlitba);
+						if(_global_jazyk == JAZYK_CZ_OP){
+							_vlastna_cast_full_okrem_prosieb(modlitba);
+						}
+						else{
+							_vlastna_cast_full(modlitba);
+						}
 						_set_zalmy_1nedele_rch(); /* 2008-08-15: doplnené */
 
 						modlitba = MODL_POSV_CITANIE;
@@ -15507,7 +15512,12 @@ label_25_MAR:
 						}
 
 						modlitba = MODL_VESPERY;
-						_vlastna_cast_full(modlitba);
+						if(_global_jazyk == JAZYK_CZ_OP){
+							_vlastna_cast_full_okrem_prosieb(modlitba);
+						}
+						else{
+							_vlastna_cast_full(modlitba);
+						}
 						_set_zalmy_sviatok_panien(modlitba);
 
 						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
@@ -15959,7 +15969,7 @@ label_25_MAR:
 								_set_kompletorium_nedela(modlitba);
 							}
 							modlitba = MODL_PRVE_VESPERY;
-							_vlastna_cast_full(modlitba);
+							_vlastna_cast_full_okrem_antifon(modlitba);
 							_set_zalmy_sviatok_muc(modlitba);
 
 							modlitba = MODL_INVITATORIUM;
