@@ -6292,7 +6292,8 @@ label_24_DEC:
 			}
 			set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
 			set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd);
-			if(den != DEN_PIATOK){
+			if((den != DEN_PIATOK) && (den != DEN_SOBOTA)){
+				/* 2009-04-17: pre veæk˝ piatok aj bielu sobotu je hymnus ako vo veækom t˝ûdni, teda "Kriste, ty svetlo a n·ö deÚ" [doplnenÈ: biela sobota] */
 				set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
 			}
 
@@ -6380,10 +6381,6 @@ label_24_DEC:
 				_set_zalmy_biela_sobota(modlitba);
 			}/* nie nedela, ale biela sobota */
 			else if(den == DEN_PIATOK){
-				modlitba = MODL_VESPERY;
-				_set_zalmy_velky_piatok(modlitba);
-				/* 2006-01-27: pridan˝ popis k veöper·m veækÈho piatka */
-				_vtroj_popis;
 				modlitba = MODL_POSV_CITANIE;
 				_set_zalmy_velky_piatok(modlitba);
 				modlitba = MODL_PREDPOLUDNIM;
@@ -6392,6 +6389,14 @@ label_24_DEC:
 				_set_zalmy_velky_piatok(modlitba);
 				modlitba = MODL_POPOLUDNI;
 				_set_zalmy_velky_piatok(modlitba);
+
+				modlitba = MODL_VESPERY;
+				_set_zalmy_velky_piatok(modlitba);
+				/* 2006-01-27: pridan˝ popis k veöper·m veækÈho piatka */
+				_vtroj_popis;
+				/* 2009-04-17: pridanÈ - do bud˙cnosti; ak by mali jednotlivÈ modlitby svoju farbu, tak vigÌlia m· maù bielu; beûn· biela sobota: fialov·
+				_global_den.farba = LIT_FARBA_BIELA;
+				*/
 			}/* nie nedela, ani sobota, ale veæk˝ piatok */
 			break;
 /* switch(litobd), case OBD_VELKONOCNE_TROJDNIE -- end ---------------------------------------- */

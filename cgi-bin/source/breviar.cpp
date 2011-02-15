@@ -2810,7 +2810,10 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					}
 					else if(_global_den.denvr == BS){
 						mystrcpy(_global_den.meno, text_BIELA_SOBOTA[_global_jazyk], MENO_SVIATKU);
-						/* 2006-08-19: farba ostáva nastavená ako pre celý pôst - fialová */
+						/* 2006-08-19: farba ostáva nastavená ako pre celý pôst - fialová
+						 * 2009-04-17: pridaná poznámka: biela sobota má fialovú farbu; len pre vigíliu je biela
+						 */
+						// _global_den.farba = LIT_FARBA_BIELA;
 					}
 				}
 			}/* if(_global_den.denvr <= BS) */
@@ -2918,7 +2921,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 	}/* if(_global_den.denvr < VN) */
 	else if(_global_den.denvr >= VN){
 		/* po velkej noci */
-		_rozbor_dna_LOG("/* po velkej noci */\n");
+		_rozbor_dna_LOG("/* po ve¾kej noci vrátane ve¾konoènej nedele (t.j. _global_den.denvr >= VN) */\n");
 		if(_global_den.denvr <= ZDS){
 			/* velkonocne obdobie (po zoslanie d.s.) */
 			_rozbor_dna_LOG("/* velkonocne obdobie (po zoslanie d.s.) */\n");
