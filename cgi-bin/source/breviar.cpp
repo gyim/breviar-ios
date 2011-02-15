@@ -147,6 +147,7 @@
 /*                    parametra _global_modlitba predsunutÈ pred hlavicka()*/
 /*   2010-02-19a.D. | oprava funkcie velkonocna_nedela (öpec. prÌpady pre  */
 /*                    Gaussovo pravidlo; ËiastoËne upozornil Peter Chren)  */
+/*   2010-05-14a.D. | presunutÈ niektorÈ definy do breviar.h               */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -512,16 +513,10 @@ char system_command[MAX_STR] = STR_EMPTY;
 /* 2009-08-03: Ëi sa podarilo vytvoriù index.htm [_global_export_navig_hore/DEFAULT_MONTH_EXPORT] vn˙tri adres·ra jednotlivÈho mesiaca pre 'M' -- mesaËn˝ export v batch mÛde */
 short int index_pre_mesiac_otvoreny = NIE;
 
-/*
- * 2009-01-28: jednotlivÈ define t˝kaj˙ce sa riadenia modlitby presunutÈ sem na zaËiatok s˙boru, 
- *             nakoæko ich pouûÌva nielen interpretParameter() alebo showPrayer(), ale aj includeFile()
- * 2009-08-11: opraven· podmienka pre je_tedeum (odstr·nenÈ nepotrebnÈ 9.11.)
+/* 2010-05-14: definy presunutÈ do breviar.h:
+ * je_post | je_velka_noc | je_aleluja_aleluja | je_34_ocr | je_tedeum
+ * vöetky testuj˙ premenn˙ "_global_den" a je_tedeum aj "type"
  */
-#define je_post ((_global_den.litobd == OBD_POSTNE_I) || (_global_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && ((_global_den.denvt == DEN_PIATOK) || (_global_den.denvt == DEN_SOBOTA))))
-#define je_velka_noc ((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvt == DEN_NEDELA)) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA))
-#define je_aleluja_aleluja ((_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvt == DEN_NEDELA)) || (equals(_global_den.meno, _global_r._ZOSLANIE_DUCHA_SV.meno) && (_global_modlitba == MODL_VESPERY)))
-#define je_34_ocr ((_global_den.litobd == OBD_CEZ_ROK) && (_global_den.tyzden == 34) && (_global_den.denvt != DEN_NEDELA))
-#define je_tedeum (type == MODL_POSV_CITANIE) && (((_global_den.denvt == DEN_NEDELA) && (_global_den.litobd != OBD_POSTNE_I) && (_global_den.litobd != OBD_POSTNE_II_VELKY_TYZDEN)) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || (_global_den.litobd == OBD_OKTAVA_NARODENIA))
 
 /*---------------------------------------------------------------------*/
 /* popis: odstrani backslashe zo stringu (argv[1]) a vrati novy string

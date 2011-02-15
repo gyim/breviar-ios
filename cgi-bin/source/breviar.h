@@ -14,6 +14,7 @@
 /*   2003-08-13a.D. | pridane _type a _global_modl pre posv.cit*/
 /*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám          */
 /*   2006-08-18a.D. | zmena int na short int (staèí 32tis.)    */
+/*   2010-05-14a.D. | presunuté niektoré definy z breviar.cpp  */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -172,6 +173,18 @@ extern short int _global_hlavicka_Export;
 /* 2009-08-12, pridané */
 extern char _global_export_navig_hore[SMALL];
 extern short int _global_opt_export_date_format;
+
+/*
+ * 2009-01-28: jednotlivé define týkajúce sa riadenia modlitby presunuté sem na zaèiatok súboru, 
+ *             nako¾ko ich používa nielen interpretParameter() alebo showPrayer(), ale aj includeFile()
+ * 2009-08-11: opravená podmienka pre je_tedeum (odstránené nepotrebné 9.11.)
+ * 2010-05-14: definy presunuté z breviar.cpp
+ */
+#define je_post ((_global_den.litobd == OBD_POSTNE_I) || (_global_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && ((_global_den.denvt == DEN_PIATOK) || (_global_den.denvt == DEN_SOBOTA))))
+#define je_velka_noc ((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvt == DEN_NEDELA)) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA))
+#define je_aleluja_aleluja ((_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvt == DEN_NEDELA)) || (equals(_global_den.meno, _global_r._ZOSLANIE_DUCHA_SV.meno) && (_global_modlitba == MODL_VESPERY)))
+#define je_34_ocr ((_global_den.litobd == OBD_CEZ_ROK) && (_global_den.tyzden == 34) && (_global_den.denvt != DEN_NEDELA))
+#define je_tedeum (type == MODL_POSV_CITANIE) && (((_global_den.denvt == DEN_NEDELA) && (_global_den.litobd != OBD_POSTNE_I) && (_global_den.litobd != OBD_POSTNE_II_VELKY_TYZDEN)) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || (_global_den.litobd == OBD_OKTAVA_NARODENIA))
 
 #ifndef OS_linux
 /* kedysi bolo void main;
