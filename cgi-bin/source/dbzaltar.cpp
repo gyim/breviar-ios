@@ -136,6 +136,7 @@
 /*   2009-07-10a.D. | oprava pre èeské breviáre - 12. a 15. septembra                           */
 /*   2009-07-27a.D. | oprava viacerých drobných chybièiek pre sk aj cz breviáre                 */
 /*   2009-07-30a.D. | oprava viacerých drobných chybièiek; doplnenie svätcov (zo všeob.kalend.) */
+/*   2009-08-11a.D. | drobné opravy pre èeský kalendár (zo všeobecného kalendára)               */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -12111,7 +12112,7 @@ label_25_MAR:
 
 							break;
 						}
-						pocet = 3;
+						pocet = 2;
 						_global_svaty2.typslav = SLAV_SPOMIENKA;
 						_global_svaty2.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 						mystrcpy(_global_svaty2.meno, text_MAJ_21_1[_global_jazyk], MENO_SVIATKU);
@@ -15264,17 +15265,16 @@ label_25_MAR:
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
-						if(_global_jazyk == JAZYK_SK){ /* 2009-07-10: pre èeské breviáre všetko zo spoloènej èasti */
-							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_modlitba;
+						modlitba = MODL_RANNE_CHVALY;
+						_vlastna_cast_modlitba;
 
-							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_modlitba;
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						if(_global_jazyk == JAZYK_SK) /* 2009-07-10: pre èeské breviáre všetko zo spoloènej èasti; 2009-08-11: modlitba je z vlastnej èasti */
 							_vlastna_cast_2citanie;
 
-							modlitba = MODL_VESPERY;
-							_vlastna_cast_modlitba;
-						}
+						modlitba = MODL_VESPERY;
+						_vlastna_cast_modlitba;
 						break;
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -16713,8 +16713,8 @@ label_25_MAR:
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
 					break;
 				case 29: /* MES_OCT */
-					/* 2008-12-04: pridané pre czop */
-					if(_global_jazyk == JAZYK_CZ_OP){
+					/* 2008-12-04: pridané pre czop; 2009-08-11: pridané aj pre CZ */
+					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
 							if(query_type != PRM_DETAILY)
@@ -16730,8 +16730,7 @@ label_25_MAR:
 						}
 						_global_svaty1.typslav = SLAV_SPOMIENKA;
 						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
-						mystrcpy(_global_svaty1.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
-						strcat(_global_svaty1.meno, text_OKT_29[_global_jazyk]);
+						mystrcpy(_global_svaty1.meno, text_OKT_29[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENICA, MODL_SPOL_CAST_PANNA);
 						_global_svaty1.typslav_lokal = LOKAL_SLAV_BRNO;
 						_global_svaty1.farba = LIT_FARBA_CERVENA;

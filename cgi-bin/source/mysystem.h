@@ -79,14 +79,14 @@
 /* Modely pre ostré použitie */
 //#define MODEL_linux
 //#define MODEL_linux_commandline
-#define MODEL_Windows_RUBY
+//#define MODEL_Windows_RUBY
 //#define MODEL_Windows_commandline
 
 /* Modely pre debugovanie */
 //#define MODEL_DEBUG_linux
 //#define MODEL_DEBUG_linux_commandline
 //#define MODEL_DEBUG_Windows_RUBY
-//#define MODEL_DEBUG_Windows_commandline
+#define MODEL_DEBUG_Windows_commandline
 
 /* --------------------------------------------------------------------- */
 /* prerobene 23/02/2000A.D. -- 24/02/2000A.D. */

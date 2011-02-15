@@ -2044,11 +2044,11 @@ const char *text_MAJ_21[] =
  };
 const char *text_MAJ_21_1[] = 
 {"Sv. Krištofa Magallanesa, kòaza a spoloèníkov, muèeníkov",
- "Sv. Krištofa Magallanesa, knìze a druhù, muèedníkù",
+ "Sv. Kryštofa Magallanese, knìze a druhù, muèedníkù",
  "",
  "",
  "",
- "Sv. Krištofa Magallanesa, knìze a druhù, muèedníkù",
+ "Sv. Kryštofa Magallanese, knìze a druhù, muèedníkù",
  "hu_",
  };
 const char *text_MAJ_21_2[] = 
