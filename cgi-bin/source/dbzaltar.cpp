@@ -127,6 +127,7 @@
 /*   2009-03-23a.D. | opravené almy pre zvestovanie pána; majú by pod¾a narodenia pána        */
 /*   2009-03-24a.D. | úpravy liturgického kalendára pre czop - pre dominikánov                  */
 /*   2009-04-01a.D. | doplnené _set_zalmy_najsv_mena_jezisovho()                                */
+/*   2009-04-07a.D. | oprava hymnu pre kompletórium pre èeskı breviáø                           */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -1316,6 +1317,10 @@ void set_hymnus_kompletorium_obd(short int den, short int tyzzal, short int modl
 		pom_litobd = OBD_VELKONOCNE_I;
 	}
 	else if(litobd == OBD_POSTNE_I){
+		pom_litobd = OBD_CEZ_ROK;
+	}
+	else if((litobd == OBD_POSTNE_II_VELKY_TYZDEN) && (den != DEN_STVRTOK) && (_global_jazyk == JAZYK_CZ)){
+		/* 2009-04-07: pre èeskı breviáø sa nepouívajú vo ve¾kom tıdni iné hymny; pre zelenı štrvtok je samostatnı hymnus */
 		pom_litobd = OBD_CEZ_ROK;
 	}
 	file_name_kompletorium(pom_litobd);
