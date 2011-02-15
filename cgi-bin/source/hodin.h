@@ -335,6 +335,17 @@ const char *nazov_slavenia_jazyk[POCET_SLAVENI + 1][POCET_JAZYKOV + 1] =
 
 #define		nazov_slavenia(a)	nazov_slavenia_jazyk[a][_global_jazyk]
 
+/* 2010-08-03: pridaný kalendár */
+const char *nazov_kalendara[] =
+{"neurèený"
+,"všeobecný"
+,"všeobecný SK"
+,"všeobecný CZ"
+,"CZOP"
+,"SK CSSR"
+,"všeobecný HU"
+};
+
 /* special "local" or "partial" characteristics of various celebrations - each in one language; no need to translate; special strings will be added */
 /* 2005-07-27: doplnené
  * 2007-08-31: upravené TT -> BA-TT
@@ -2932,15 +2943,6 @@ const char *text_AUG_07_2[] =
  "Sv. Kajetána, knìze",
  "Szent Kajetán áldozópap",
  };
-const char *text_AUG_07_3[] = 
-{"(na Slovensku nie je)",
- "(v Èechách, na Moravì a ve Slezsku není)",
- "",
- "la_",
- "",
- "Bl. Jany, matky sv. Otce Dominika",
- "hu_",
- };
 const char *text_AUG_08[] = 
 {"Sv. Dominika, kòaza",
  "Sv. Dominika, knìze",
@@ -3517,15 +3519,6 @@ const char *text_OKT_15[] =
  "Sv. Terezie od Ježíše, panny a uèitelky Církve",
  "A Jézusról nevezett (Avilai) Szent Teréz szûz és egyháztanító",
  };
-const char *text_OKT_16_2[] = 
-{"Sv. Hedvigy, reho¾níèky",
- "Sv. Hedviky, øeholnice, hlavní patronky Slezska",
- "",
- "",
- "",
- "Sv. Hedviky, øeholnice, hlavní patronky Slezska",
- "Szent Hedvig szerzetesnõ",
- };
 const char *text_OKT_16_1[] = 
 {"Sv. Margity Márie Alacoque, panny",
  "Sv. Markéty Marie Alacoque, panny",
@@ -3534,6 +3527,15 @@ const char *text_OKT_16_1[] =
  "",
  "Sv. Markéty Marie Alacoque, panny",
  "Alacoque Szent Margit Mária szûz",
+ };
+const char *text_OKT_16_2[] = 
+{"Sv. Hedvigy, reho¾níèky",
+ "Sv. Hedviky, øeholnice, hlavní patronky Slezska",
+ "",
+ "",
+ "",
+ "Sv. Hedviky, øeholnice, hlavní patronky Slezska",
+ "Szent Hedvig szerzetesnõ",
  };
 const char *text_OKT_17[] = 
 {"Sv. Ignáca Antiochijského, biskupa a muèeníka",

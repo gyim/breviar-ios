@@ -54,6 +54,10 @@
 /*   2010-03-16a.D. | doplnené LOKAL_SLAV_BRATISLAVA           */
 /*   2010-05-17a.D. | pridané niektoré maïarské slávenia       */
 /*   2010-05-21a.D. | doplnené: PARAM_POST_SPOMIENKA_BEGIN/END */
+/*   2010-08-03a.D. | do štruktúry "dm" pridaná premenná pre   */
+/*                    špecifikáciu, o aký kalendár ide:        */
+/*                    všeobecný danej cirkevnej provincie      */
+/*                    alebo nejaký reho¾ný a pod.              */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -537,6 +541,7 @@ typedef struct sc _struct_sc;
  *
  * 2006-08-19: pridaná premenná pre liturgickú farbu
  *
+ * 2010-08-03: pridaná premenná pre špecifikáciu, o aký kalendár ide (kalendar): všeobecný danej cirkevnej provincie alebo nejaký reho¾ný a pod.
  *
  */
 struct dm{
@@ -572,6 +577,7 @@ struct dm{
 						  */
 	char meno[MENO_SVIATKU]; /* nazov prip. sviatku */
 	short int farba;     /* liturgická farba pre slávenie */
+	short int kalendar;  /* špecifikácia, o aký kalendár ide: všeobecný danej cirkevnej provincie alebo nejaký reho¾ný a pod. */
 };
 typedef struct dm _struct_dm;
 
@@ -734,6 +740,17 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_SPIS_BA_PATRON			39 /* pre 11. novembra, patróna BA-arcidiecézy; 2008-06-24; nahrádza LOKAL_SLAV_SPIS_PATRON */
 #define LOKAL_SLAV_BRATISLAVA				40 /* doplnené 2010-03-16 */
 #define LOKAL_SLAV_KONIEC_OKTAVY_NAR_HU		41 /* doplnené 2010-05-17 */
+
+/* 2010-08-03: pridaný kalendár */
+#define KALENDAR_NEURCENY                   0
+#define KALENDAR_VSEOBECNY                  1
+#define KALENDAR_VSEOBECNY_SK               2
+#define KALENDAR_VSEOBECNY_CZ               3
+#define KALENDAR_CZ_OP                      4
+#define KALENDAR_SK_CSSR                    5
+#define KALENDAR_VSEOBECNY_HU               6
+
+#define KALENDAR_POCET                      7
 
 /* prikazany / neprikazany sviatok */
 #define PRIKAZANY_SVIATOK 1
@@ -1161,6 +1178,7 @@ void _init_dm(_struct_dm a);
 	a.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA); /* MODL_SPOL_CAST_NEURCENA; spolocna cast -- zakodovane data pre svatych o tom, z akej spolocnej casti sa ma modlit */\
 	mystrcpy(a.meno, STR_UNDEF, MENO_SVIATKU); /* nazov prip. sviatku */\
 	a.farba = LIT_FARBA_NEURCENA; /* 2006-08-19: pridané */\
+	a.kalendar = KALENDAR_NEURCENY; /* 2010-08-03: pridané */\
 }
 
 /* inicializacne definy pridane 2003-08-13 */

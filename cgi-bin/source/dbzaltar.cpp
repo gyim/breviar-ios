@@ -153,6 +153,8 @@
 /*   2010-07-08a.D. | zavedené ïalšie _vlastna_cast_full_okrem_...(); opravy CZOP               */
 /*   2010-07-12a.D. | upravené _set_spolocna_cast(): spoloèná èas na ofícium za zosnulých      */
 /*                    vždy berie vlastné žalmy                                                  */
+/*   2010-08-03a.D. | upravené zaltar_kompletorium() a set_hymnus() kvôli dominikánom CZOP      */
+/*                  - nastavené _global_svaty[1,2,3].kalendar v sviatky_svatych()               */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -946,10 +948,14 @@ void anchor_name_zaltar(short int den, short int tyzzal, short int modlitba, cha
 /* nasledovné funkcie používané pre žaltár (cezroèné obdobie); 2007-12-06 */
 
 void set_hymnus(short int den, short int tyzzal, short int modlitba){
-	/* pridané èasti pre kompletórium, 2006-10-13 */
-	/* hymnus pre kompletórium je v èeskej verzii pre každý deò iný, 2006-12-04 */
-	/* toto však neplatí pre èeský dominikánský breviáø, 2008-12-16 */
-	/* pre advent II. je predpísaný hymnus, 2008-12-17 */
+	Log("set_hymnus(): zaèiatok\n");
+	/* 2006-10-13: pridané èasti pre kompletórium */
+	/* 2006-12-04: hymnus pre kompletórium je v èeskej verzii pre každý deò iný */
+	/* 2008-12-16: toto však neplatí pre èeský dominikánský breviáø */
+	/* 2008-12-17: pre advent II. je predpísaný hymnus */
+	/* 2010-08-03: pre dominikánský breviáø nastavené, aby sa hymnus pre kompletórium i MCD striedal po týždòoch: 
+	 *             "V naší provincii se vžil zvyk pro obojí - pro kompletáø i pro modlitbu bìhem dne, že se používá hymnus "A" pro liché a hymnus "B" pro sudé týdny."
+	 */
 	if((modlitba == MODL_KOMPLETORIUM) || (modlitba == MODL_PRVE_KOMPLETORIUM)){
 		file_name_zapamataj();
 		file_name_kompletorium(OBD_CEZ_ROK);
@@ -975,8 +981,11 @@ void set_hymnus(short int den, short int tyzzal, short int modlitba){
 			){ /* 2008-12-20: predpísaný v 1., 3. a 5. týždni "Na sklonku dòa", pre 2. a 4. týždeò hymnus "Kriste, ty svetlo" */
 				sprintf(_anchor, "%c_%s_%d", pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (tyzzal + 1) % 2);
 			}
-			else{
+			else if(_global_jazyk != JAZYK_CZ_OP){
 				sprintf(_anchor, "%c_%s_%d", pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (den + tyzzal) % 2);
+			}
+			else /* if(_global_jazyk == JAZYK_CZ_OP) */{
+				sprintf(_anchor, "%c_%s_%d", pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (tyzzal) % 2);
 			}
 		}
 		_set_hymnus(modlitba, _file, _anchor);
@@ -993,9 +1002,13 @@ void set_hymnus(short int den, short int tyzzal, short int modlitba){
 			sprintf(_anchor, "%c_%s_%d_%s", 
 				pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (2 - (tyzzal % 2)), nazov_DN_asci[den]);
 		}
-		else{
+		else if(_global_jazyk != JAZYK_CZ_OP){
 			sprintf(_anchor, "%c_%s_%d", 
 				pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (den + tyzzal) % 2);
+		}
+		else /* if(_global_jazyk == JAZYK_CZ_OP) */{
+			sprintf(_anchor, "%c_%s_%d", 
+				pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (tyzzal) % 2);
 		}
 		_set_hymnus(modlitba, _file, _anchor);
 		set_LOG_zaltar;
@@ -1020,6 +1033,7 @@ void set_hymnus(short int den, short int tyzzal, short int modlitba){
 			set_LOG_zaltar;
 		}
 	}
+	Log("set_hymnus(): koniec\n");
 }
 
 #define _set_antifony_velk_pc(den, tyzzal, modlitba) {\
@@ -1649,7 +1663,8 @@ void _set_kompletorium_slavnost_oktava(short int modlitba, short int litobd, sho
 }
 
 /* 2009-01-06: vytvorené vyòatím èastí pre kompletórium z zaltar_zvazok(); premenné tyzzal ani zvazok nepotrebujeme */
-void zaltar_kompletorium(short int den, short int obdobie, short int specialne){
+/* 2010-08-03: potrebujeme premennú tyzzal */
+void zaltar_kompletorium(short int den, short int obdobie, short int specialne, short int tyzzal){
 	Log("-- zaltar_kompletorium(%d, %d, %d) -- zaèiatok\n", den, obdobie, specialne);
 	Log("nastavujem poèet žalmov pre kompletórium v závislosti od dòa v týždni (%d - %s)...\n", den, nazov_dna(den));
 	/* 2006-10-17: Doplnené kvôli rôznemu poètu žalmov pre kompletórium; upravené 2006-10-18 */
@@ -1665,10 +1680,11 @@ void zaltar_kompletorium(short int den, short int obdobie, short int specialne){
 	}
 	if(specialne == ZALTAR_VSETKO){
 		Log("ZALTAR_VSETKO -- takže nastavujem všetko zo žaltára...\n");
-		/* pridané èasti pre kompletórium, 2006-10-13 */
-		set_hymnus(den, 1 /* tyzzal */, MODL_KOMPLETORIUM);
-		set_hymnus(den, 1 /* tyzzal */, MODL_PRVE_KOMPLETORIUM);
-		/* pridané ïalšie èasti pre kompletórium, 2006-10-13 */
+		/* 2006-10-13: pridané èasti pre kompletórium */
+		/* 2010-08-03: pridaná premenná tyzzal */
+		set_hymnus(den, tyzzal, MODL_KOMPLETORIUM);
+		set_hymnus(den, tyzzal, MODL_PRVE_KOMPLETORIUM);
+		/* 2006-10-13: pridané ïalšie èasti pre kompletórium */
 		set_antifony(den, 1 /* tyzzal */, 1 /* zvazok */, MODL_KOMPLETORIUM);
 		set_antifony(den, 1 /* tyzzal */, 1 /* zvazok */, MODL_PRVE_KOMPLETORIUM);
 		set_kcitanie(den, 1 /* tyzzal */, MODL_KOMPLETORIUM);
@@ -1741,7 +1757,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 	Log("toto liturgické obdobie sa nachádza v zväzku %d breviára (cezroèné obdobie evidujeme ako jeden, 3. zväzok)...\n", zvazok);
 
 	Log("nastavujem veci pre kompletórium...\n");
-	zaltar_kompletorium(den, obdobie, specialne);
+	zaltar_kompletorium(den, obdobie, specialne, tyzzal);
 
 	if(specialne == ZALTAR_VSETKO){
 		Log("ZALTAR_VSETKO -- takže nastavujem všetko zo žaltára...\n");
@@ -9507,6 +9523,9 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 		_global_svaty1.spolcast = _global_svaty2.spolcast = _global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 		Log("nastavil som _global_svaty[1,2,3] na default (bud neurcene alebo z _global_den)\n");
 		_global_svaty1.farba = _global_svaty2.farba = _global_svaty3.farba = LIT_FARBA_NEURCENA; /* 2006-08-19: pridané */
+		_global_svaty1.kalendar = KALENDAR_NEURCENY; /* 2010-08-03: pridané */
+		_global_svaty2.kalendar = KALENDAR_NEURCENY; /* 2010-08-03: pridané */
+		_global_svaty3.kalendar = KALENDAR_NEURCENY; /* 2010-08-03: pridané */
 	}
 	else{
 		/* povodne tu bola pasaz, ktora podla poradie_svaty nastavila
@@ -9583,6 +9602,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_JAN_02[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_VIACERI, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 3: /* MES_JAN */
 					/* 2008-12-04: pridané pre czop; 2009-03-24: zmenené aj pre ostatné, pretože je to vo všeobecnom kalendári */
@@ -9615,6 +9635,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_JAN_03[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEBRAT); // ??
 					_global_svaty1.farba = LIT_FARBA_BIELA;
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 7: /* MES_JAN */
 					if(poradie_svaty == 1){
@@ -9639,6 +9660,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_JAN_07[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					if(_global_jazyk == JAZYK_CZ_OP){
 						/* 2009-07-10: odvetvené pre dominikánov;
 						 * 2010-03-15: pre dominikánov samostatne
@@ -9668,6 +9690,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						strcat(_global_svaty2.meno, text_JAN_07[_global_jazyk]);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty2.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}/* czop only */
 					break;
 				case 13: /* MES_JAN */
@@ -9693,6 +9716,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_JAN_13[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 15: /* MES_JAN */
 					/* 2009-03-24: doplnené pre dominikánov */
@@ -9723,6 +9747,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						strcat(_global_svaty1.meno, text_JAN_15[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 						_global_svaty1.farba = LIT_FARBA_CERVENA;
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}
 					else if(_global_jazyk == JAZYK_HU){
 						if(poradie_svaty == 1){
@@ -9747,6 +9772,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						mystrcpy(_global_svaty1.meno, text_JAN_15[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEURCENA);
 						_global_svaty1.farba = LIT_FARBA_NEURCENA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU; /* 2010-08-03: pridané */
 					}
 					break;
 				case 17: /* MES_JAN */
@@ -9772,6 +9798,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_JAN_17[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 18: /* MES_JAN */
 					/* 2010-01-25: Opravené. */
@@ -9801,6 +9828,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						mystrcpy(_global_svaty1.meno, text_JAN_18[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					else if(_global_jazyk == JAZYK_HU){
 						if(poradie_svaty == 1){
@@ -9825,6 +9853,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						mystrcpy(_global_svaty1.meno, text_JAN_19[_global_jazyk], MENO_SVIATKU); // v maïarsku 18. januára
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU; /* 2010-08-03: pridané */
 					}
 					break;
 				case 19: /* MES_JAN */
@@ -9853,6 +9882,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						strcat(_global_svaty1.meno, text_JAN_19[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}
 					break;
 				case 20: /* MES_JAN */
@@ -9895,12 +9925,14 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_JAN_20_1[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, text_JAN_20_2[_global_jazyk], MENO_SVIATKU);
 					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
 					_global_svaty2.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty2.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 21: /* MES_JAN */
 					if(poradie_svaty == 1){
@@ -9938,6 +9970,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_JAN_21[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENICA, MODL_SPOL_CAST_PANNA);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 22: /* MES_JAN */
 					if(poradie_svaty == 1){
@@ -9962,6 +9995,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_JAN_22[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 23: /* MES_JAN */
 					if(_global_jazyk == JAZYK_SK){
@@ -9989,6 +10023,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						mystrcpy(_global_svaty1.meno, text_JAN_23[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
 					}
 					break;
 				case 24: /* MES_JAN */
@@ -10014,6 +10049,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_JAN_24[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 25: /* MES_JAN */
 					if(poradie_svaty == 1){
@@ -10044,6 +10080,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_JAN_25[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 26: /* MES_JAN */
 					if(poradie_svaty == 1){
@@ -10070,6 +10107,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_JAN_26[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_VIACERI /* MODL_SPOL_CAST_DUCH_PAST_BISKUP */); // 2009-07-27: opravené
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 27: /* MES_JAN */
 					if(poradie_svaty == 1){
@@ -10094,6 +10132,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_JAN_27[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_VYCH);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 28: /* MES_JAN */
 					if(poradie_svaty == 1){
@@ -10124,6 +10163,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						 * cirkvi, kde sa odvolava na duchovnych pastierov; 23/02/2000A.D.
 						 */
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					if(_global_jazyk == JAZYK_CZ_OP){
 						/* 2009-03-24: odvetvené pre dominikánov;
 						 * 2010-03-26: pre dominikánov samostatne
@@ -10160,6 +10200,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						strcat(_global_svaty2.meno, text_JAN_28[_global_jazyk]);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_UCITEL_CIRKVI, MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty2.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}/* czop only */
 					break;
 				case 31: /* MES_JAN */
@@ -10185,25 +10226,12 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_JAN_31[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_VYCH);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				default: break;
 			}; break; /* case MES_JAN */
 		case MES_FEB:
 			switch(den){
-				case 1: /* MES_FEB */
-					break;
-#ifdef WRONG_23_02_2000
-					if(!((_global_den.denvt == DEN_SOBOTA) && (_global_modlitba == MODL_VESPERY)))
-						break;
-					else{
-						den++;
-						sprintf(_anchor_head, "%02d%s_", den, nazov_MES[mesiac - 1]);
-						Log("  _anchor_head == %s\n", _anchor_head);
-					}
-#endif
-					/* v opacnom pripade sa ide na case 2:
-					 * treba vsak upravit kotvu _anchor
-					 */
 				case 2: /* MES_FEB */
 					// if(poradie_svaty == 1){
 					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
@@ -10248,6 +10276,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_FEB_02[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 3: /* MES_FEB */
 					if(poradie_svaty == 1){
@@ -10289,12 +10318,14 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_FEB_03_1[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, text_FEB_03_2[_global_jazyk], MENO_SVIATKU);
 					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty2.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 4: /* MES_FEB */
 					/* 2009-03-24: doplnené pre dominikánov 
@@ -10328,6 +10359,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						strcat(_global_svaty1.meno, text_FEB_04[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}
 					break;
 				case 5: /* MES_FEB */
@@ -10350,12 +10382,12 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 
 						break;
 					}
-
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, text_FEB_05[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENICA, MODL_SPOL_CAST_PANNA);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 6: /* MES_FEB */
 					if(poradie_svaty == 1){
@@ -10391,6 +10423,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_FEB_06[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 7: /* MES_FEB */
 					if(_global_jazyk == JAZYK_CZ_OP){
@@ -10416,6 +10449,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						strcat(_global_svaty1.meno, text_FEB_07[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_ZA_ZOSNULYCH);
 						_global_svaty1.farba = LIT_FARBA_FIALOVA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}/* czop only */
 					break;
 				case 8: /* MES_FEB */
@@ -10486,12 +10520,14 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					/* 2006-08-08: spoloèná èas pridaná pod¾a mailu don Valábka z 19. augusta 2005 */
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VYCH, MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_SKUTKYMIL);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, text_FEB_08_2[_global_jazyk], MENO_SVIATKU);
 					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA);
 					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty2.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 10: /* MES_FEB */
 					if(poradie_svaty == 1){
@@ -10529,6 +10565,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_FEB_10[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 11: /* MES_FEB */
 					if(poradie_svaty == 1){
@@ -10566,6 +10603,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_FEB_11[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 12: /* MES_FEB */
 					/* 2009-03-24: doplnené pre dominikánov */
@@ -10612,6 +10650,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						strcat(_global_svaty1.meno, text_FEB_12[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}
 					break;
 				case 13: /* MES_FEB */
@@ -10659,6 +10698,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						strcat(_global_svaty1.meno, text_FEB_13[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					break;
 				case 14: /* MES_FEB */
@@ -10700,6 +10740,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						mystrcpy(_global_svaty1.meno, text_FEB_14[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_VIACERI);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					break;
 				case 17: /* MES_FEB */
@@ -10738,6 +10779,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_FEB_17[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 18: /* MES_FEB */
 					/* 2009-03-24: doplnené pre dominikánov */
@@ -10784,6 +10826,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						strcat(_global_svaty1.meno, text_FEB_18[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}
 					break;
 				case 21: /* MES_FEB */
@@ -10822,6 +10865,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_FEB_21[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 22: /* MES_FEB */
 					if(poradie_svaty == 1){
@@ -10852,6 +10896,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_FEB_22[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 23: /* MES_FEB */
 					if(poradie_svaty == 1){
@@ -10889,6 +10934,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_FEB_23[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				default:
 					break;
@@ -10938,6 +10984,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_MAR_04[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 7: /* MES_MAR */
 					if(poradie_svaty == 1){
@@ -10975,6 +11022,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_MAR_07[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 8: /* MES_MAR */
 					if(poradie_svaty == 1){
@@ -11012,6 +11060,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_MAR_08[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK, MODL_SPOL_CAST_SV_MUZ_SKUTKYMIL);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					if(_global_jazyk == JAZYK_SK){ /* 2010-03-16: pridané len pre Slovensko */
 						if(poradie_svaty == 2){
 							/* definovanie parametrov pre modlitbu */
@@ -11027,6 +11076,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						mystrcpy(_global_svaty2.meno, text_MAR_08_2[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty2.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
 					}
 					break;
 				case 9: /* MES_MAR */
@@ -11065,6 +11115,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_MAR_09[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 10: /* MES_MAR */
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
@@ -11103,6 +11154,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						mystrcpy(_global_svaty1.meno, text_MAR_10[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 15: /* MES_MAR */
@@ -11151,6 +11203,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_MAR_17[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 18: /* MES_MAR */
 					if(poradie_svaty == 1){
@@ -11182,6 +11235,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					mystrcpy(_global_svaty1.meno, text_MAR_18[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 19: /* MES_MAR */
 label_19_MAR:
@@ -11256,6 +11310,7 @@ label_19_MAR:
 					mystrcpy(_global_svaty1.meno, text_MAR_19[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 20: /* MES_MAR */
 					if(_global_den.denvt == DEN_PONDELOK){
@@ -11302,6 +11357,7 @@ label_19_MAR:
 					mystrcpy(_global_svaty1.meno, text_MAR_23[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 25: /* MES_MAR */
 label_25_MAR:
@@ -11379,6 +11435,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_MAR_25[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 26: /* MES_MAR */
 					if(_global_den.denvt == DEN_PONDELOK){
@@ -11438,6 +11495,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_APR_02[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 4: /* MES_APR */
 					if(poradie_svaty == 1){
@@ -11475,12 +11533,12 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_APR_04[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 5: /* MES_APR */
 					/* 2009-03-25: pre Slovensko, Èesko atï. pod¾a všeobecného kalendára sv. Vincenta Ferrera, pre dominikánov presunuté na 5.5.... 
 					 * 2009-05-15: aj pre dominikánov platí všeobecný kalendár
 					 */
-					// if(_global_jazyk != JAZYK_CZ_OP){
 					if(poradie_svaty == 1){
 						/* na spomienku v pôste */
 						if(je_post){
@@ -11516,7 +11574,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_APR_05[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
-					// }
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 7: /* MES_APR */
 					if(poradie_svaty == 1){
@@ -11554,6 +11612,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_APR_07[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_VYCH);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 11: /* MES_APR */
 					if(poradie_svaty == 1){
@@ -11591,6 +11650,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_APR_11[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 13: /* MES_APR */
 					if(poradie_svaty == 1){
@@ -11628,6 +11688,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_APR_13[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 20: /* MES_APR */
 					/* 2009-03-24: doplnené pre dominikánov */
@@ -11660,6 +11721,7 @@ label_25_MAR:
 						strcat(_global_svaty1.meno, text_APR_20[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}
 					break;
 				case 21: /* MES_APR */
@@ -11685,6 +11747,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_APR_21[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 23: /* MES_APR */
 					/* 2007-04-23: vo všeobecnom kalendári sú 23. apríla sv. Juraj a sv. Vojtech */
@@ -11740,6 +11803,12 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_APR_23[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
+							_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
+						}
+						else /* if(_global_jazyk == JAZYK_SK)... */ {
+							_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
+						}
 					}
 					else{ /* _global_jazyk nie je slovenèina ani èeština */
 						if(poradie_svaty == 1){
@@ -11785,12 +11854,14 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_APR_24_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
 						_global_svaty1.farba = LIT_FARBA_CERVENA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 						pocet = 2;
 						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 						_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 						mystrcpy(_global_svaty2.meno, text_APR_23[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty2.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						_global_svaty2.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					break;
 				case 24: /* MES_APR */
@@ -11835,12 +11906,19 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_APR_24_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
 						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
+							_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
+						}
+						else /* if(_global_jazyk == JAZYK_SK)... */ {
+							_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
+						}
 						pocet = 2;
 						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 						_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 						mystrcpy(_global_svaty2.meno, text_APR_24_2[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty2.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						_global_svaty2.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					else{
 						if(poradie_svaty == 1){
@@ -11867,6 +11945,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_APR_24_2[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_CERVENA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					break;
 				case 25: /* MES_APR -- 25APR */
@@ -11898,6 +11977,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_APR_25[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 28: /* MES_APR */
 					if(poradie_svaty == 1){
@@ -11939,12 +12019,14 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_APR_28_1[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, text_APR_28_2[(_global_jazyk == JAZYK_CZ_OP)? JAZYK_CZ: _global_jazyk], MENO_SVIATKU);
 					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty2.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					if(_global_jazyk == JAZYK_CZ_OP){
 						/* 2009-07-10: odvetvené pre dominikánov;
 						 * 2010-03-16: pre dominikánov samostatne
@@ -11973,6 +12055,7 @@ label_25_MAR:
 						strcat(_global_svaty3.meno, text_APR_28_2[_global_jazyk]);
 						_global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty3.farba = LIT_FARBA_BIELA;
+						_global_svaty3.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}/* czop only */
 					break;
 				case 29: /* MES_APR */
@@ -12011,6 +12094,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_APR_29[(_global_jazyk == JAZYK_CZ_OP)? JAZYK_CZ: _global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					if(_global_jazyk == JAZYK_CZ_OP){
 						/* 2009-07-10: odvetvené pre dominikánov;
 						 * 2010-03-15: pre dominikánov samostatne
@@ -12043,6 +12127,7 @@ label_25_MAR:
 						strcat(_global_svaty2.meno, text_APR_29[_global_jazyk]);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty2.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}/* czop only */
 					break;
 				case 30: /* MES_APR */
@@ -12070,6 +12155,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_APR_30_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						/* okrem Pia V. majú aj sv. Žigmunda */
@@ -12112,12 +12198,14 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_APR_30_2[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
 						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 						pocet = 2;
 						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 						_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 						mystrcpy(_global_svaty2.meno, text_APR_30_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 						_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					if(_global_jazyk == JAZYK_CZ_OP){
 						/* 2009-03-24: doplnené odvetvenie pre dominikánov;
@@ -12153,6 +12241,7 @@ label_25_MAR:
 						strcat(_global_svaty3.meno, text_APR_30_1[_global_jazyk]);
 						_global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 						_global_svaty3.farba = LIT_FARBA_BIELA;
+						_global_svaty3.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}/* czop only */
 					break;
 			}; break; /* case MES_APR */
@@ -12264,6 +12353,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_MAJ_01[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 2: /* MES_MAY */
 					if(poradie_svaty == 1){
@@ -12288,6 +12378,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_MAJ_02[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 3: /* MES_MAY -- 03MAJ */
 					if(poradie_svaty == 1){
@@ -12334,6 +12425,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_MAJ_03[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 5: /* MES_MAY -- 05MAJ */
 					/* 2009-03-25: pre dominikánov presunuté z 5.4. zo všeobecného kalendára sv. Vincenta Ferrera... */
@@ -12365,6 +12457,7 @@ label_25_MAR:
 						strcat(_global_svaty1.meno, text_APR_05[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					break;
 				case 6: /* MES_MAY */
@@ -12391,6 +12484,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_MAJ_06[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 8: /* MES_MAY */
@@ -12420,6 +12514,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_MAJ_08[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 10: /* MES_MAY */
@@ -12453,6 +12548,7 @@ label_25_MAR:
 						strcat(_global_svaty1.meno, text_MAJ_10[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}
 					break;
 				case 12: /* MES_MAY */
@@ -12502,6 +12598,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_MAJ_12_1[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					if(_global_jazyk == JAZYK_CZ)
 						pocet = 3;
 					else
@@ -12511,6 +12608,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty2.meno, text_MAJ_12_2[_global_jazyk], MENO_SVIATKU);
 					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
 					_global_svaty2.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty2.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						_global_svaty3.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
 						_global_svaty3.typslav_lokal = LOKAL_SLAV_PRAHA;
@@ -12518,6 +12616,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty3.meno, text_MAJ_12_3[_global_jazyk], MENO_SVIATKU);
 						_global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty3.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty3.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 13:  /* MES_MAY */
@@ -12544,6 +12643,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_MAJ_13[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 					_global_svaty1.farba = LIT_FARBA_BIELA;
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 14: /* MES_MAY -- 14MAJ */
 					if(poradie_svaty == 1){
@@ -12582,6 +12682,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_MAJ_14[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 15: /* MES_MAY */
 					/* 2009-03-24: doplnené pre dominikánov */
@@ -12613,6 +12714,7 @@ label_25_MAR:
 						strcat(_global_svaty1.meno, text_MAJ_15[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}
 					break;
 				case 16: /* MES_MAY */
@@ -12658,6 +12760,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_MAJ_16[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					break;
 				case 18: /* MES_MAY */
@@ -12683,6 +12786,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_MAJ_18[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 20: /* MES_MAY */
 					if(_global_jazyk == JAZYK_SK){
@@ -12708,6 +12812,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_MAJ_20_2[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
@@ -12756,12 +12861,14 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_MAJ_20_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 						pocet = 2;
 						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 						_global_svaty2.smer = 12;
 						mystrcpy(_global_svaty2.meno, text_MAJ_20_2[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					break;
 				case 21: /* MES_MAY */
@@ -12780,6 +12887,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_MAJ_21[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					/* 2009-03-24: odvetvené pre dominikánov;
 					 * 2009-05-16: upravené, aby mali všeobecný kalendár
@@ -12809,6 +12917,7 @@ label_25_MAR:
 						strcat(_global_svaty2.meno, text_MAJ_21_2[_global_jazyk]);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty2.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}
 					/* 2009-07-30: pridané - Sv. Krištofa Magallanesa, kòaza a spoloèníkov, muèeníkov */
 					if(_global_jazyk == JAZYK_CZ_OP){
@@ -12834,6 +12943,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty3.meno, text_MAJ_21_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_VIACERI);
 						_global_svaty3.farba = LIT_FARBA_CERVENA;
+						_global_svaty3.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}
 					else if(_global_jazyk == JAZYK_CZ){
 						if(poradie_svaty == 2){
@@ -12858,6 +12968,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty2.meno, text_MAJ_21_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_VIACERI);
 						_global_svaty2.farba = LIT_FARBA_CERVENA;
+						_global_svaty2.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					else{ /* SK, HU etc. */
 						if(poradie_svaty == 1){
@@ -12881,6 +12992,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_MAJ_21_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_VIACERI);
 						_global_svaty1.farba = LIT_FARBA_CERVENA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					break;
 				case 22: /* MES_MAY */
@@ -12905,6 +13017,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_MAJ_22[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA;
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 24: /* MES_MAY */
 					/* 2009-03-24: doplnené pre dominikánov 
@@ -12938,6 +13051,7 @@ label_25_MAR:
 						strcat(_global_svaty1.meno, text_MAJ_24[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}
 					break;
 				case 25: /* MES_MAY -- 25MAJ */
@@ -12997,17 +13111,21 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_MAJ_25_1[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_UCITEL_CIRKVI, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					pocet = 3;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, text_MAJ_25_2[_global_jazyk], MENO_SVIATKU);
 					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty2.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
+
 					_global_svaty3.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty3.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty3.meno, text_MAJ_25_3[_global_jazyk], MENO_SVIATKU);
 					_global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 					_global_svaty3.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty3.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 26: /* MES_MAY */
 					if(poradie_svaty == 1){
@@ -13032,6 +13150,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_MAJ_26[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 27: /* MES_MAY */
 					if(poradie_svaty == 1){
@@ -13056,6 +13175,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_MAJ_27[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 30: /* MES_MAY */
 					/* 2009-03-24: doplnené pre dominikánov aj èeský breviáø */
@@ -13087,6 +13207,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_MAJ_30[(_global_jazyk == JAZYK_CZ_OP)? JAZYK_CZ: _global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					if(_global_jazyk == JAZYK_CZ_OP){
 						/* 2009-07-10: odvetvené pre dominikánov;
@@ -13117,6 +13238,7 @@ label_25_MAR:
 						strcat(_global_svaty2.meno, text_MAJ_30[_global_jazyk]);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty2.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}/* czop only */
 					break;
 				case 31: /* MES_MAY */
@@ -13150,6 +13272,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_MAJ_31[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					break;
 			}; break; /* case MES_MAY */
@@ -13180,6 +13303,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUN_01[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 2: /* MES_JUN */
 					if(poradie_svaty == 1){
@@ -13204,6 +13328,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUN_02[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 3: /* MES_JUN */
 					if(poradie_svaty == 1){
@@ -13228,6 +13353,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUN_03[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 4: /* MES_JUN */
 					/* 2009-03-24: doplnené pre dominikánov */
@@ -13259,6 +13385,7 @@ label_25_MAR:
 						strcat(_global_svaty1.meno, text_JUN_04[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_CERVENA;
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}
 					break;
 				case 5: /* MES_JUN */
@@ -13284,6 +13411,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUN_05[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 6: /* MES_JUN */
 					if(poradie_svaty == 1){
@@ -13320,6 +13448,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUN_06[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 8: /* MES_JUN */
 					/* 2009-03-24: doplnené pre dominikánov */
@@ -13349,6 +13478,7 @@ label_25_MAR:
 						strcat(_global_svaty1.meno, text_JUN_08[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNY_VIACERE);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}
 					break;
 				case 9: /* MES_JUN */
@@ -13374,6 +13504,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUN_09[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 10: /* MES_JUN */
 					/* 2009-03-24: doplnené pre dominikánov */
@@ -13403,6 +13534,7 @@ label_25_MAR:
 						strcat(_global_svaty1.meno, text_JUN_10[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}
 					break;
 				case 11: /* MES_JUN */
@@ -13440,6 +13572,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUN_11[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 13: /* MES_JUN */
 					if(poradie_svaty == 1){
@@ -13464,6 +13597,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUN_13[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_UCITEL_CIRKVI, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 15: /* MES_JUN */
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
@@ -13490,6 +13624,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_JUN_15[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
 						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 16: /* MES_JUN */
@@ -13518,6 +13653,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_JUN_16[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
 						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
 					}
 					break;
 				case 19: /* MES_JUN */
@@ -13544,6 +13680,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_JUN_19[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
@@ -13571,6 +13708,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_JUN_19_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 21: /* MES_JUN */
@@ -13596,6 +13734,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUN_21[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 22: /* MES_JUN */
 					if(poradie_svaty == 1){
@@ -13637,12 +13776,14 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUN_22_1[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, text_JUN_22_2[_global_jazyk], MENO_SVIATKU);
 					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty2.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 24: /* MES_JUN */
 					// if(poradie_svaty == 1){
@@ -13702,6 +13843,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUN_24[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 25: /* MES_JUN -- 25JUN */
 					/* hoci slavnost narodenia sv. Jana Krstitela padla na nedelu, 
@@ -13736,12 +13878,12 @@ label_25_MAR:
 
 						break;
 					}
-
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, text_JUN_27[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 
 					if(_global_jazyk == JAZYK_SK){
 						if(poradie_svaty == 2){
@@ -13770,6 +13912,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty2.meno, text_JUN_27_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
 						_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty2.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
 					}
 					break;
 				case 28: /* MES_JUN */
@@ -13794,6 +13937,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUN_28[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 29: /* MES_JUN */
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
@@ -13870,6 +14014,7 @@ label_25_MAR:
 					_global_svaty1.prik = PRIKAZANY_SVIATOK;
 					mystrcpy(_global_svaty1.meno, text_JUN_29[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 30: /* MES_JUN */
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -13904,6 +14049,7 @@ label_25_MAR:
 					}
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 2){
@@ -13920,6 +14066,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty2.meno, text_JUN_30_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU /* MODL_SPOL_CAST_SV_MUZ */);
 						_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 			}; break; /* case MES_JUN */
@@ -13956,6 +14103,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_MAJ_31[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
 					}
 					break;
 				case 3: /* MES_JUL -- 03JUL */
@@ -13997,6 +14145,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUL_03[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 4: /* MES_JUL */
 					if(_global_jazyk == JAZYK_SK){
@@ -14021,6 +14170,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_JUL_04[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL, MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-08: doplnené */);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						/* 2009-08-25: opravené a doplnené */
@@ -14063,115 +14213,125 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_JUL_04_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 						pocet = 2;
 						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 						_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 						mystrcpy(_global_svaty2.meno, text_JUL_04[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL, MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-08: doplnené */);
 						_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty2.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					break;
 				case 5: /* MES_JUL */
-					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
-					_global_opt3 = _decode_spol_cast(_global_svaty1.spolcast).a1; /* 2010-07-06: doplnené */
-					_global_svaty1.typslav = SLAV_SLAVNOST;
-					_global_den.typslav = SLAV_SLAVNOST; /* 2010-07-06: doplnené kvôli správnemu fungovaniu set_spolocna_cast(), t. j. tamojších kontrol, èi napr. sú žalmy vlastné */
-					_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
-					mystrcpy(_global_svaty1.meno, text_JUL_05[_global_jazyk], MENO_SVIATKU);
-					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
-					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
-						/* preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o slavnost,
-						 * ktora ma takmer najvacsiu prioritu, a preto ma aj prve
-						 * vespery - a vtedy by to normalne nefungovalo;
-						 * nastavenie veci pre modlitbu by sa muselo diat
-						 * v predoslom dni, co je neciste riesenie
-						 *
-						 * 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
-						 */
-						/* definovanie parametrov pre modlitbu */
-						sc = _decode_spol_cast(_global_svaty1.spolcast);
-						Log("Cyril a Metod: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
-
-						if(/*(poradie_svaty == 1) && */ // 23/02/2000A.D. -- prevzate z Petra a Pavla, 23/03/2000A.D.
-						  (query_type != PRM_DETAILY))
-							set_spolocna_cast(sc, poradie_svaty);
-
-						/* 2008-07-11: doplnené kompletórium */
-						modlitba = MODL_PRVE_KOMPLETORIUM;
-						if(den != DEN_NEDELA){
-							_set_kompletorium_slavnost(modlitba, _global_svaty1.litobd);
+					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+						_global_opt3 = _decode_spol_cast(_global_svaty1.spolcast).a1; /* 2010-07-06: doplnené */
+						_global_svaty1.typslav = SLAV_SLAVNOST;
+						_global_den.typslav = SLAV_SLAVNOST; /* 2010-07-06: doplnené kvôli správnemu fungovaniu set_spolocna_cast(), t. j. tamojších kontrol, èi napr. sú žalmy vlastné */
+						_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
+						mystrcpy(_global_svaty1.meno, text_JUL_05[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
+							_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 						}
-						else{
-							_set_kompletorium_nedela(modlitba);
+						else /* if(_global_jazyk == JAZYK_SK)... */ {
+							_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
 						}
+						if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
+							/* preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o slavnost,
+							 * ktora ma takmer najvacsiu prioritu, a preto ma aj prve
+							 * vespery - a vtedy by to normalne nefungovalo;
+							 * nastavenie veci pre modlitbu by sa muselo diat
+							 * v predoslom dni, co je neciste riesenie
+							 *
+							 * 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
+							 */
+							/* definovanie parametrov pre modlitbu */
+							sc = _decode_spol_cast(_global_svaty1.spolcast);
+							Log("Cyril a Metod: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
-						modlitba = MODL_PRVE_VESPERY;
-						_vlastna_cast_full(modlitba);
-						/* 2009-07-06, upravené: slovenský breviár má iné žalmy */
-						if(_global_jazyk == JAZYK_SK)
-							_set_zalmy_slavnost_Cyrila_a_Metoda(modlitba);
-						else
-							_set_zalmy_sviatok_duch_past(modlitba);
+							if(/*(poradie_svaty == 1) && */ // 23/02/2000A.D. -- prevzate z Petra a Pavla, 23/03/2000A.D.
+							  (query_type != PRM_DETAILY))
+								set_spolocna_cast(sc, poradie_svaty);
 
-						/* 2007-11-14: doplnené invitatórium */
-						modlitba = MODL_INVITATORIUM;
-						_vlastna_cast_antifona_inv;
+							/* 2008-07-11: doplnené kompletórium */
+							modlitba = MODL_PRVE_KOMPLETORIUM;
+							if(den != DEN_NEDELA){
+								_set_kompletorium_slavnost(modlitba, _global_svaty1.litobd);
+							}
+							else{
+								_set_kompletorium_nedela(modlitba);
+							}
 
-						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_full(modlitba);
-						_set_zalmy_1nedele_rch(); /* 2008-08-15: doplnené */
-
-						modlitba = MODL_POSV_CITANIE;
-						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ)){
+							modlitba = MODL_PRVE_VESPERY;
 							_vlastna_cast_full(modlitba);
-						}
-						else{
-							/* 2010-07-06: pre czop sú antifóny a krátky responz pred 1. èítaním zo spoloènej èasti */
-							_vlastna_cast_1citanie;
-							_vlastna_cast_2citanie;
-							_vlastna_cast_modlitba;
-						}
-						/* 2009-07-06, upravené: slovenský breviár má iné žalmy */
-						if(_global_jazyk == JAZYK_SK)
-							_set_zalmy_slavnost_Cyrila_a_Metoda(modlitba);
-						else
-							_set_zalmy_sviatok_duch_past(modlitba);
-						/* hymnus ako na vešpery
-						 * 2010-07-06: pre CZ a CZOP hymnus ako na 1. vešpery
-						 */
-						sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby((_global_jazyk == JAZYK_SK)? MODL_VESPERY: MODL_PRVE_VESPERY), ANCHOR_HYMNUS);
-						_set_hymnus(modlitba, _file, _anchor);
-						set_LOG_svsv;
+							/* 2009-07-06, upravené: slovenský breviár má iné žalmy */
+							if(_global_jazyk == JAZYK_SK)
+								_set_zalmy_slavnost_Cyrila_a_Metoda(modlitba);
+							else
+								_set_zalmy_sviatok_duch_past(modlitba);
 
-						/* 2006-01-24: doplnené modlitby cez deò */
-						_vlastna_cast_mcd_ant_kcitresp_modl;
+							/* 2007-11-14: doplnené invitatórium */
+							modlitba = MODL_INVITATORIUM;
+							_vlastna_cast_antifona_inv;
 
-						/* 2006-02-04: ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
-						if(_global_den.denvt != DEN_NEDELA) {
-							_set_zalm_cez_den_doplnkova_psalmodia();
-						}
-						else {
-							_set_zalmy_1nedele_mcd();
-						}
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_full(modlitba);
+							_set_zalmy_1nedele_rch(); /* 2008-08-15: doplnené */
 
-						modlitba = MODL_VESPERY;
-						_vlastna_cast_full(modlitba);
-						/* 2009-07-06, upravené: slovenský breviár má iné žalmy */
-						if(_global_jazyk == JAZYK_SK)
-							_set_zalmy_slavnost_Cyrila_a_Metoda(modlitba);
-						else
-							_set_zalmy_sviatok_duch_past(modlitba);
+							modlitba = MODL_POSV_CITANIE;
+							if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ)){
+								_vlastna_cast_full(modlitba);
+							}
+							else{
+								/* 2010-07-06: pre czop sú antifóny a krátky responz pred 1. èítaním zo spoloènej èasti */
+								_vlastna_cast_1citanie;
+								_vlastna_cast_2citanie;
+								_vlastna_cast_modlitba;
+							}
+							/* 2009-07-06, upravené: slovenský breviár má iné žalmy */
+							if(_global_jazyk == JAZYK_SK)
+								_set_zalmy_slavnost_Cyrila_a_Metoda(modlitba);
+							else
+								_set_zalmy_sviatok_duch_past(modlitba);
+							/* hymnus ako na vešpery
+							 * 2010-07-06: pre CZ a CZOP hymnus ako na 1. vešpery
+							 */
+							sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby((_global_jazyk == JAZYK_SK)? MODL_VESPERY: MODL_PRVE_VESPERY), ANCHOR_HYMNUS);
+							_set_hymnus(modlitba, _file, _anchor);
+							set_LOG_svsv;
 
-						/* 2008-07-11: doplnené kompletórium */
-						modlitba = MODL_KOMPLETORIUM;
-						if(den != DEN_NEDELA){
-							_set_kompletorium_slavnost(modlitba, _global_svaty1.litobd);
-						}
-						else{
-							_set_kompletorium_nedela(modlitba);
-						}
+							/* 2006-01-24: doplnené modlitby cez deò */
+							_vlastna_cast_mcd_ant_kcitresp_modl;
 
-						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
+							/* 2006-02-04: ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
+							if(_global_den.denvt != DEN_NEDELA) {
+								_set_zalm_cez_den_doplnkova_psalmodia();
+							}
+							else {
+								_set_zalmy_1nedele_mcd();
+							}
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_full(modlitba);
+							/* 2009-07-06, upravené: slovenský breviár má iné žalmy */
+							if(_global_jazyk == JAZYK_SK)
+								_set_zalmy_slavnost_Cyrila_a_Metoda(modlitba);
+							else
+								_set_zalmy_sviatok_duch_past(modlitba);
+
+							/* 2008-07-11: doplnené kompletórium */
+							modlitba = MODL_KOMPLETORIUM;
+							if(den != DEN_NEDELA){
+								_set_kompletorium_slavnost(modlitba, _global_svaty1.litobd);
+							}
+							else{
+								_set_kompletorium_nedela(modlitba);
+							}
+
+							if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
+						}
 					}
 					break;
 				case 6: /* MES_JUL */
@@ -14204,6 +14364,7 @@ label_25_MAR:
 						 * nema opodstatnenie; porov. 1998; 21/03/2000A.D.
 						 */
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					if(_global_jazyk == JAZYK_CZ_OP){
 						/* 2010-07-06: odvetvené pre dominikánov; pre dominikánov samostatne */
 						if(poradie_svaty == 2){
@@ -14232,6 +14393,7 @@ label_25_MAR:
 						strcat(_global_svaty2.meno, text_JUL_06_2[_global_jazyk]);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}/* czop only */
 					break;
 				case 7: /* MES_JUL */
@@ -14258,6 +14420,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_JUL_07[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_VYCH, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
 					}
 					break;
 				case 9: /* MES_JUL */
@@ -14286,6 +14449,8 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUL_09[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 					_global_svaty1.farba = LIT_FARBA_CERVENA;
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
+
 					if(_global_jazyk == JAZYK_CZ_OP){
 						pocet = 2;
 						if(poradie_svaty == 2){
@@ -14316,6 +14481,7 @@ label_25_MAR:
 						strcat(_global_svaty2.meno, text_JUL_09_2[_global_jazyk]);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 						_global_svaty2.farba = LIT_FARBA_CERVENA;
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}/* czop only */
 					break;
 				case 11: /* MES_JUL */
@@ -14358,6 +14524,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUL_11[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 13: /* MES_JUL */
 					if(poradie_svaty == 1){
@@ -14382,6 +14549,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUL_13[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 14: /* MES_JUL */
 					if(poradie_svaty == 1){
@@ -14406,6 +14574,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUL_14[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_SKUTKYMIL, MODL_SPOL_CAST_DUCH_PAST_KNAZ /* 2006-08-08: doplnené */);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 2){
@@ -14432,6 +14601,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty2.meno, text_JUL_14_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
 						_global_svaty2.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 15: /* MES_JUL */
@@ -14457,6 +14627,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUL_15[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 16: /* MES_JUL */
 					if(poradie_svaty == 1){
@@ -14484,6 +14655,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUL_16[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 2){
@@ -14500,6 +14672,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty2.meno, text_JUL_16_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 17: /* MES_JUL */
@@ -14532,6 +14705,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_JUL_17_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VIACERI);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
 					}
 					else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
@@ -14567,6 +14741,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_JUL_17_2[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_VIACERI);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 						/* 2009-03-24: odvetvené pre dominikánov 
 						 * 2010-07-06: pre dominikánov samostatne
 						 */
@@ -14598,6 +14773,7 @@ label_25_MAR:
 							strcat(_global_svaty2.meno, text_JUL_17_3[_global_jazyk]);
 							_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 							_global_svaty2.farba = LIT_FARBA_BIELA;
+							_global_svaty2.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 						}/* czop only */
 					}
 					break;
@@ -14628,6 +14804,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUL_20[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_CERVENA;
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 21: /* MES_JUL */
 					if(poradie_svaty == 1){
@@ -14652,6 +14829,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUL_21[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 22: /* MES_JUL */
 					if(poradie_svaty == 1){
@@ -14694,6 +14872,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUL_22[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 23: /* MES_JUL */
 					if(poradie_svaty == 1){
@@ -14728,6 +14907,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUL_23[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 24: /* MES_JUL */
 					/* 2008-07-18: pridané
@@ -14757,6 +14937,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUL_24[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA;
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 25: /* MES_JUL -- 25JUL */
 					if(poradie_svaty == 1){
@@ -14794,6 +14975,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUL_25[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 26: /* MES_JUL */
 					if(poradie_svaty == 1){
@@ -14823,42 +15005,47 @@ label_25_MAR:
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_MANZ, MODL_SPOL_CAST_SV_ZENA_MANZ); 
 						/* 2006-08-07: upravené lebo žili v manželstve :) pridaná možnos aj pre sv. ženy - 2006-08-19 */
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 27: /* MES_JUL */
-					if(poradie_svaty == 1){
-						/* definovanie parametrov pre modlitbu */
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
+					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
 
-						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_modlitba;
-						if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))
-							_vlastna_cast_benediktus;
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+							if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))
+								_vlastna_cast_benediktus;
 
-						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
 
-						modlitba = MODL_VESPERY;
-						_vlastna_cast_modlitba;
-						if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))
-							_vlastna_cast_magnifikat;
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+							if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))
+								_vlastna_cast_magnifikat;
 
-						break;
+							break;
+						}
+						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+						/* kedysi pre CZ: _global_svaty1.typslav_lokal = LOKAL_SLAV_MORAVA_SPOMIENKA; */
+						mystrcpy(_global_svaty1.meno, text_JUL_27[_global_jazyk], MENO_SVIATKU);
+						if(_global_jazyk == JAZYK_SK){
+							/* 2010-07-27: slovenský breviár má: zo spol. èasti svätých mužov */
+							_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VIACERI);
+							_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
+						}
+						else{
+							/* 2010-07-27: èeský breviáø má: spol. texty o duchovních pastýøech */
+							_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_VIACERI);
+							_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
+						}
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					}
-					_global_svaty1.typslav = SLAV_SPOMIENKA;
-					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					/* kedysi pre CZ: _global_svaty1.typslav_lokal = LOKAL_SLAV_MORAVA_SPOMIENKA; */
-					mystrcpy(_global_svaty1.meno, text_JUL_27[_global_jazyk], MENO_SVIATKU);
-					if(_global_jazyk == JAZYK_SK){
-						/* 2010-07-27: slovenský breviár má: zo spol. èasti svätých mužov */
-						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VIACERI);
-					}
-					else{
-						/* 2010-07-27: èeský breviáø má: spol. texty o duchovních pastýøech */
-						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_VIACERI);
-					}
-					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					break;
 				case 29: /* MES_JUL */
 					if(poradie_svaty == 1){
@@ -14891,6 +15078,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUL_29[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 30: /* MES_JUL */
 				/* 2004-08-14, duurko
@@ -14919,6 +15107,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUL_30[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 
 					if(_global_jazyk == JAZYK_SK){
 						if(poradie_svaty == 2){
@@ -14944,6 +15133,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty2.meno, text_JUL_30_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENICA, MODL_SPOL_CAST_PANNA);
 						_global_svaty2.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						_global_svaty2.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
 					}
 					break;
 				case 31: /* MES_JUL */
@@ -14975,6 +15165,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_JUL_31[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 			}; break; /* case MES_JUL */
 		case MES_AUG:
@@ -15002,6 +15193,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_01[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 2: /* MES_AUG */
 					if(poradie_svaty == 1){
@@ -15063,12 +15255,14 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_02_1[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, text_AUG_02_2[_global_jazyk], MENO_SVIATKU);
 					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty2.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					if(_global_jazyk == JAZYK_CZ_OP){
 						/* 2009-03-24: doplnené pre dominikánov */
 						pocet = 3;
@@ -15078,7 +15272,8 @@ label_25_MAR:
 						strcat(_global_svaty3.meno, text_AUG_02_3[_global_jazyk]);
 						_global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA);
 						_global_svaty3.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
-					}
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
+					}/* czop only */
 					break;
 				case 4: /* MES_AUG */
 					if(poradie_svaty == 1){
@@ -15103,6 +15298,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_04[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 5: /* MES_AUG */
 					if(poradie_svaty == 1){
@@ -15129,6 +15325,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_05[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 6: /* MES_AUG */
 					_global_svaty1.spolcast =
@@ -15180,7 +15377,7 @@ label_25_MAR:
 						_set_zalmy_premenenie(modlitba);
 
 						modlitba = MODL_KOMPLETORIUM; /* 2009-01-06: keïže v liturgicke_obdobie() bolo odvetvené, niè sa pre kompletórium nenastavovalo - doplnené */
-						zaltar_kompletorium(_global_den.denvt, _global_den.litobd /* OBD_CEZ_ROK */, ZALTAR_VSETKO /* specialne */);
+						zaltar_kompletorium(_global_den.denvt, _global_den.litobd /* OBD_CEZ_ROK */, ZALTAR_VSETKO /* specialne */, _global_den.tyzzal);
 
 						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
@@ -15188,6 +15385,7 @@ label_25_MAR:
 					_global_svaty1.smer = 5; /* sviatky Pana uvedene vo vseobecnom kalendari */
 					mystrcpy(_global_svaty1.meno, text_AUG_06[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 7: /* MES_AUG */
 					if(poradie_svaty == 1){
@@ -15224,17 +15422,39 @@ label_25_MAR:
 
 						break;
 					}
+					else if((_global_jazyk == JAZYK_CZ_OP) && (poradie_svaty == 3)){
+						/* 2010-08-03: doplnené pre dominikánov */
+
+						if(query_type != PRM_DETAILY)
+							set_spolocna_cast(sc, poradie_svaty);
+
+						modlitba = MODL_RANNE_CHVALY;
+						_vlastna_cast_benediktus;
+						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+
+						modlitba = MODL_VESPERY;
+						_vlastna_cast_magnifikat;
+						_vlastna_cast_modlitba;
+
+						break;
+					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, text_AUG_07_1[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, text_AUG_07_2[_global_jazyk], MENO_SVIATKU);
 					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty2.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 8: /* MES_AUG */
 					if(poradie_svaty == 1){
@@ -15263,12 +15483,21 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_08[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ /*, MODL_SPOL_CAST_SV_MUZ_REHOLNIK */);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
+
 					if(_global_jazyk == JAZYK_CZ_OP){
 						/* 2010-03-22: pre dominikánov samostatne */
 						if(poradie_svaty == 2){
 							/* definovanie parametrov pre modlitbu */
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
+
+							/* 2010-08-03: doplnené prvé vešpery a kompletórium po nich */
+							modlitba = MODL_PRVE_VESPERY;
+							_vlastna_cast_full(modlitba);
+
+							modlitba = MODL_PRVE_KOMPLETORIUM;
+							_set_kompletorium_slavnost(modlitba, _global_den.litobd);
 
 							modlitba = MODL_INVITATORIUM;
 							_vlastna_cast_antifona_inv;
@@ -15299,11 +15528,12 @@ label_25_MAR:
 						}
 						pocet = 2;
 						_global_svaty2.typslav = SLAV_SLAVNOST;
-						_global_svaty2.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
+						_global_svaty2.smer = 4; /* miestne slavnosti */
 						mystrcpy(_global_svaty2.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
 						strcat(_global_svaty2.meno, text_AUG_08[_global_jazyk]);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty2.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}/* czop only */
 					break;
 				case 9: /* MES_AUG */
@@ -15339,6 +15569,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_09[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK, MODL_SPOL_CAST_MUCENICA);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 10: /* MES_AUG */
 					if(poradie_svaty == 1){
@@ -15382,6 +15613,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_10[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 11: /* MES_AUG */
 					if(poradie_svaty == 1){
@@ -15406,12 +15638,13 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_11[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 
-				/* 2004-08-14, duurko
-				 * Sviatok Sv. Jany Františky de Chantal presunuty z 12. decembra na 12. augusta.
-				 */
 				case 12: /* MES_AUG */
+					/* 2004-08-14, duurko
+					 * Sviatok Sv. Jany Františky de Chantal presunuty z 12. decembra na 12. augusta.
+					 */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
 						if(query_type != PRM_DETAILY)
@@ -15434,6 +15667,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_12[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK, MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-08: doplnené */);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 13: /* MES_AUG */
 					if(poradie_svaty == 1){
@@ -15458,6 +15692,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_13[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_VIACERI);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 14: /* MES_AUG */
 					if(poradie_svaty == 1){
@@ -15480,6 +15715,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_14[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_MUCENIK);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 15: /* MES_AUG */
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
@@ -15543,6 +15779,7 @@ label_25_MAR:
 					_global_svaty1.prik = PRIKAZANY_SVIATOK;
 					mystrcpy(_global_svaty1.meno, text_AUG_15[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 16: /* MES_AUG */
 					if(poradie_svaty == 1){
@@ -15567,6 +15804,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_16[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_MANZ); /* 2006-08-07: upravené lebo žil v manželstve :) */
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 17: /* MES_AUG */
 					/* 2009-03-24: doplnené pre dominikánov */
@@ -15594,7 +15832,8 @@ label_25_MAR:
 						strcat(_global_svaty1.meno, text_AUG_17[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
-					}
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
+					}/* czop only */
 					break;
 				case 18: /* MES_AUG */
 					/* 2009-03-24: doplnené pre dominikánov */
@@ -15624,7 +15863,8 @@ label_25_MAR:
 						strcat(_global_svaty1.meno, text_AUG_18[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
-					}
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
+					}/* czop only */
 					break;
 				case 19: /* MES_AUG */
 					if(poradie_svaty == 1){
@@ -15649,6 +15889,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_19[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 20: /* MES_AUG */
 					if(poradie_svaty == 1){
@@ -15679,6 +15920,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_20[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_UCITEL_CIRKVI, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 21: /* MES_AUG */
 					if(poradie_svaty == 1){
@@ -15703,6 +15945,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_21[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 22: /* MES_AUG */
 					if(poradie_svaty == 1){
@@ -15736,6 +15979,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_22[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 23: /* MES_AUG */
 					if(poradie_svaty == 1){
@@ -15760,6 +16004,8 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_23[(_global_jazyk == JAZYK_CZ_OP)? JAZYK_CZ: _global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
+
 					if(_global_jazyk == JAZYK_CZ_OP){
 						/* 2009-03-24: odvetvené pre dominikánov
 						 * 2010-07-06: pre dominikánov samostatne
@@ -15796,6 +16042,7 @@ label_25_MAR:
 						strcat(_global_svaty2.meno, text_AUG_23[_global_jazyk]);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty2.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}/* czop only */
 					break;
 				case 24: /* MES_AUG -- 24AUG */
@@ -15828,6 +16075,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_24[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 25: /* MES_AUG */
 					if(poradie_svaty == 1){
@@ -15887,7 +16135,8 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_25_1[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VYCH, MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
-					if(_global_jazyk == JAZYK_CZ)
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
+					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)) /* 2010-08-03: pridané aj CZOP */
 						pocet = 3;
 					else
 						pocet = 2;
@@ -15896,12 +16145,15 @@ label_25_MAR:
 					mystrcpy(_global_svaty2.meno, text_AUG_25_2[_global_jazyk], MENO_SVIATKU);
 					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_MANZ); /* 2006-08-07: upravené lebo žil v manželstve :) */
 					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty2.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
+
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
-					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+						_global_svaty3.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 						_global_svaty3.typslav = SLAV_LUB_SPOMIENKA;
 						mystrcpy(_global_svaty3.meno, text_AUG_25_3[_global_jazyk], MENO_SVIATKU);
 						_global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 						_global_svaty3.farba = LIT_FARBA_CERVENA;
+						_global_svaty3.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 27: /* MES_AUG */
@@ -15929,6 +16181,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_27[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_MANZ); /* 2006-08-19: upravené, lebo žila v manželstve */
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 28: /* MES_AUG */
 					if(poradie_svaty == 1){
@@ -15959,6 +16212,8 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_28[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
+
 					if(_global_jazyk == JAZYK_CZ_OP){
 						/* 2009-03-24: odvetvené pre dominikánov;
 						 * 2010-03-25: pre dominikánov samostatne
@@ -15991,6 +16246,7 @@ label_25_MAR:
 						strcat(_global_svaty2.meno, text_AUG_28[_global_jazyk]);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty2.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}/* czop only */
 					break;
 				case 29: /* MES_AUG */
@@ -16027,6 +16283,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_AUG_29[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 30: /* MES_AUG */
 					/* 2005-10-17: pridané */
@@ -16044,6 +16301,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_AUG_30[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
 					}
 					break;
 				default:
@@ -16080,6 +16338,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_SEP_03[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 6: /* MES_SEP */
 					if(_global_jazyk == JAZYK_SK){ /* 2006-09-12: odvetvené len pre Slovensko */
@@ -16096,39 +16355,44 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_SEP_06[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
 					}
 					break;
 				case 7: /* MES_SEP */
-					if(poradie_svaty == 1){
-						/* definovanie parametrov pre modlitbu */
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
+					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
 
-						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
 
-						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
 
-						modlitba = MODL_VESPERY;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
 
-						break;
+							break;
+						}
+						if(_global_jazyk == JAZYK_SK){ /* 2006-09-12: odvetvené pre Slovensko */
+							_global_svaty1.typslav = SLAV_SPOMIENKA;
+							_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+							_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
+						}
+						else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
+							/* 2006-09-12: odvetvené pre Èesko 
+							 * 2008-11-29: pridané pre czop - dominiáni */
+							_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+							_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+							_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
+						}
+						mystrcpy(_global_svaty1.meno, text_SEP_07[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
 					}
-					if(_global_jazyk == JAZYK_SK){ /* 2006-09-12: odvetvené pre Slovensko */
-						_global_svaty1.typslav = SLAV_SPOMIENKA;
-						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					}
-					else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
-						/* 2006-09-12: odvetvené pre Èesko 
-						 * 2008-11-29: pridané pre czop - dominiáni */
-						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					}
-					mystrcpy(_global_svaty1.meno, text_SEP_07[_global_jazyk], MENO_SVIATKU);
-					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
-					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
 					break;
 				case 8: /* MES_SEP */
 					if(poradie_svaty == 1){
@@ -16165,6 +16429,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_SEP_08[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 9: /* MES_SEP */
 					if(poradie_svaty == 1){
@@ -16189,6 +16454,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_SEP_09[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_SKUTKYMIL);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 10: /* MES_SEP */
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
@@ -16216,6 +16482,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_SEP_10[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_CERVENA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 12: /* MES_SEP */
@@ -16244,6 +16511,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_SEP_12[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 13: /* MES_SEP */
 					if(poradie_svaty == 1){
@@ -16270,6 +16538,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_SEP_13[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 14: /* MES_SEP */
 					_global_svaty1.spolcast =
@@ -16326,6 +16595,7 @@ label_25_MAR:
 					_global_svaty1.smer = 5; /* sviatky Pana uvedene vo vseobecnom kalendari */
 					mystrcpy(_global_svaty1.meno, text_SEP_14[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 15: /* MES_SEP */
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
@@ -16419,6 +16689,7 @@ label_25_MAR:
 					}
 					mystrcpy(_global_svaty1.meno, text_SEP_15[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-09-18: opravené */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 16: /* MES_SEP */
 					if(_global_jazyk == JAZYK_SK){ /* 2006-09-12: odvetvené len pre Slovensko */
@@ -16446,6 +16717,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_SEP_16[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_VIACERI);
 						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						/* 2008-09-12: odvetvené len pre Èesko
@@ -16481,6 +16753,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_SEP_16_CZ[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENICA);
 						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 17: /* MES_SEP */
@@ -16507,6 +16780,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_SEP_17[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						/* 2008-10-15: odvetvené len pre Èesko
@@ -16531,6 +16805,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_SEP_16[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_VIACERI);
 						_global_svaty1.farba = LIT_FARBA_CERVENA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 
 						pocet = 2;
 						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
@@ -16538,6 +16813,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty2.meno, text_SEP_17[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty2.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					break;
 				case 18: /* MES_SEP */
@@ -16570,7 +16846,8 @@ label_25_MAR:
 						strcat(_global_svaty1.meno, text_SEP_18[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
-					}
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
+					}/* czop only */
 					break;
 				case 19: /* MES_SEP */
 					if(poradie_svaty == 1){
@@ -16595,6 +16872,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_SEP_19[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 20: /* MES_SEP */
 					if(poradie_svaty == 1){
@@ -16626,6 +16904,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_SEP_20[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){ 
 						/* 2006-09-12: pridané
@@ -16637,6 +16916,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty2.meno, text_SEP_20_2[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 21: /* MES_SEP -- 21SEP */
@@ -16675,6 +16955,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_SEP_21[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 22: /* MES_SEP */
 					/* 2005-10-13: pridané */
@@ -16702,6 +16983,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_SEP_22[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
 					}
 					break;
 				case 23: /* MES_SEP */
@@ -16730,6 +17012,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_SEP_23[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 24: /* MES_SEP */
 					/* 2005-10-13: pridané */
@@ -16747,6 +17030,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_SEP_24[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
 					}
 					break;
 				case 26: /* MES_SEP */
@@ -16775,6 +17059,8 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_SEP_26[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
+
 					if(_global_jazyk == JAZYK_CZ_OP){
 						pocet = 2;
 						if(poradie_svaty == 2){
@@ -16801,6 +17087,7 @@ label_25_MAR:
 						strcat(_global_svaty2.meno, text_SEP_26_2[_global_jazyk]);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 						_global_svaty2.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						_global_svaty2.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}/* czop only */
 					break;
 				case 27: /* MES_SEP */
@@ -16828,6 +17115,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_SEP_27[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_SKUTKYMIL);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 28: /* MES_SEP */
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){ /* 2008-10-09: odvetvené len pre Èesko; prevzaté pod¾a cyrila a metoda */
@@ -16838,6 +17126,7 @@ label_25_MAR:
 						_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 						mystrcpy(_global_svaty1.meno, text_SEP_28[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 
 						if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 							/* preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o slavnost,
@@ -16924,6 +17213,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_SEP_28[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
 						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 						/* na Slovensku sv. Václav len ¾ubovo¾ná spomienka */
 						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
@@ -16951,6 +17241,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty2.meno, text_SEP_28_2[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 						_global_svaty2.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						_global_svaty2.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					break;
 				case 29: /* MES_SEP */
@@ -16985,6 +17276,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_SEP_29[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 30: /* MES_SEP */
 					if(poradie_svaty == 1){
@@ -17015,6 +17307,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_SEP_30[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 			}; break; /* case MES_SEP */
 		case MES_OCT:
@@ -17044,6 +17337,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_OKT_01[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 2: /* MES_OCT */
 					if(poradie_svaty == 1){
@@ -17078,6 +17372,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_OKT_02[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 4: /* MES_OCT */
 					if(poradie_svaty == 1){
@@ -17110,6 +17405,8 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_OKT_04[(_global_jazyk == JAZYK_CZ_OP)? JAZYK_CZ: _global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
+
 					if(_global_jazyk == JAZYK_CZ_OP){
 						/* 2009-03-24: odvetvené pre dominikánov;
 						 * 2010-03-25: pre dominikánov samostatne
@@ -17142,6 +17439,7 @@ label_25_MAR:
 						strcat(_global_svaty2.meno, text_OKT_04[_global_jazyk]);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty2.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}/* czop only */
 					break;
 				case 5: /* MES_OCT */
@@ -17172,6 +17470,7 @@ label_25_MAR:
 						strcat(_global_svaty1.meno, text_OKT_05[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					break;
 				case 6: /* MES_OCT */
@@ -17197,6 +17496,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_OKT_06[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 7: /* MES_OCT */
 					if(poradie_svaty == 1){
@@ -17231,6 +17531,8 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_OKT_07[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
+
 					if(_global_jazyk == JAZYK_CZ_OP){
 						/* 2009-07-10: odvetvené pre dominikánov
 						 * 2010-03-22: pre dominikánov samostatne 
@@ -17266,6 +17568,7 @@ label_25_MAR:
 						strcat(_global_svaty2.meno, text_OKT_07[_global_jazyk]);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty2.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}/* czop only */
 					break;
 				case 9: /* MES_OCT */
@@ -17311,6 +17614,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_OKT_09_1[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
@@ -17318,6 +17622,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty2.meno, text_OKT_09_2[_global_jazyk], MENO_SVIATKU);
 					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_SKUTKYMIL);
 					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty2.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 3){
@@ -17348,7 +17653,8 @@ label_25_MAR:
 						strcat(_global_svaty3.meno, text_OKT_09_3[_global_jazyk]);
 						_global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty3.farba = LIT_FARBA_BIELA;
-					}
+						_global_svaty3.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
+					}/* czop only */
 					break;
 				case 12: /* MES_OCT */
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
@@ -17378,6 +17684,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_OKT_12[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 14: /* MES_OCT */
@@ -17403,6 +17710,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_OKT_14[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 15: /* MES_OCT */
 					if(poradie_svaty == 1){
@@ -17433,6 +17741,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_OKT_15[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 16: /* MES_OCT */
 					if(poradie_svaty == 1){
@@ -17480,6 +17789,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_OKT_16_1[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
@@ -17492,6 +17802,7 @@ label_25_MAR:
 					}
 					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL, MODL_SPOL_CAST_SV_ZENA_REHOLNIK, MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-07: doplnené */);
 					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 17: /* MES_OCT */
 					if(poradie_svaty == 1){
@@ -17518,6 +17829,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_OKT_17[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 18: /* MES_OCT */
 					if(poradie_svaty == 1){
@@ -17548,6 +17860,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_OKT_18[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 19: /* MES_OCT */
 					if(poradie_svaty == 1){
@@ -17589,13 +17902,14 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_OKT_19_1[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_VIACERI);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
-
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, text_OKT_19_2[_global_jazyk], MENO_SVIATKU);
 					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 22: /* MES_OCT */
 					/* 2009-03-24: doplnené pre dominikánov */
@@ -17613,7 +17927,8 @@ label_25_MAR:
 						strcat(_global_svaty1.meno, text_OKT_22[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
-					}
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
+					}/* czop only */
 					break;
 				case 23: /* MES_OCT */
 					if(poradie_svaty == 1){
@@ -17638,6 +17953,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_OKT_23[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 24: /* MES_OCT */
 					if(poradie_svaty == 1){
@@ -17662,6 +17978,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_OKT_24[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 25: /* MES_OCT */
 					/* 2005-10-13: pridané */
@@ -17679,6 +17996,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_OKT_25[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
 					}
 					else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
@@ -17694,6 +18012,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_OKT_26[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 26: /* MES_OCT */
@@ -17712,6 +18031,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_OKT_26[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
 					break;
 				case 27: /* MES_OCT */
@@ -17730,6 +18050,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_OKT_27[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
 					}
 					break;
 				case 28: /* MES_OCT -- 28OKT */
@@ -17762,6 +18083,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_OKT_28[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 29: /* MES_OCT */
 					/* 2008-12-04: pridané pre czop; 2009-08-11: pridané aj pre CZ */
@@ -17789,6 +18111,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENICA, MODL_SPOL_CAST_PANNA);
 						_global_svaty1.typslav_lokal = LOKAL_SLAV_BRNO;
 						_global_svaty1.farba = LIT_FARBA_CERVENA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 30: /* MES_OCT */
@@ -17807,6 +18130,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_OKT_30[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 31: /* MES_OCT */
@@ -17836,6 +18160,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_OKT_31[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 			}; break; /* case MES_OCT */
@@ -17901,6 +18226,7 @@ label_25_MAR:
 					_global_svaty1.prik = PRIKAZANY_SVIATOK;
 					mystrcpy(_global_svaty1.meno, text_NOV_01[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 2: /* MES_NOV */
 					if(poradie_svaty == 1){
@@ -17951,6 +18277,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_NOV_02[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_ZA_ZOSNULYCH);
 					_global_svaty1.farba = LIT_FARBA_FIALOVA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 3: /* MES_NOV */
 					if(poradie_svaty == 1){
@@ -17977,6 +18304,8 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_NOV_03[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
+
 					if(_global_jazyk == JAZYK_CZ_OP){
 						/* 2009-03-24: odvetvené pre dominikánov;
 						 * 2010-03-16: pre dominikánov samostatne
@@ -18009,6 +18338,7 @@ label_25_MAR:
 						strcat(_global_svaty2.meno, text_NOV_03[_global_jazyk]);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty2.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}/* czop only */
 					break;
 				case 4: /* MES_NOV */
@@ -18034,6 +18364,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_NOV_04[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 5: /* MES_NOV */
 					if(_global_jazyk == JAZYK_SK){
@@ -18060,6 +18391,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_NOV_05[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
 					}
 					break;
 				case 6: /* MES_NOV */
@@ -18090,7 +18422,8 @@ label_25_MAR:
 						strcat(_global_svaty1.meno, text_NOV_06[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 						_global_svaty1.farba = LIT_FARBA_CERVENA;
-					}
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
+					}/* czop only */
 					break;
 				case 7: /* MES_NOV */
 					/* 2009-03-24: doplnené pre dominikánov */
@@ -18132,7 +18465,8 @@ label_25_MAR:
 						strcat(_global_svaty1.meno, text_NOV_07[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
-					}
+						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
+					}/* czop only */
 					break;
 				case 8: /* MES_NOV */
 					if(_global_jazyk == JAZYK_CZ_OP){
@@ -18186,6 +18520,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_NOV_09[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 10: /* MES_NOV */
 					if(poradie_svaty == 1){
@@ -18212,6 +18547,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_NOV_10[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 11: /* MES_NOV */
 					if(poradie_svaty == 1){
@@ -18260,6 +18596,7 @@ label_25_MAR:
 					}
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 12: /* MES_NOV */
 					if(poradie_svaty == 1){
@@ -18284,6 +18621,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_NOV_12[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 13: /* MES_NOV */
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
@@ -18331,6 +18669,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_NOV_13[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 15: /* MES_NOV */
@@ -18356,6 +18695,8 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_NOV_15[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
+
 					if(_global_jazyk == JAZYK_CZ_OP){
 						/* 2009-03-24: odvetvené pre dominikánov;
 						 * 2010-03-25: pre dominikánov samostatne
@@ -18388,6 +18729,7 @@ label_25_MAR:
 						strcat(_global_svaty2.meno, text_NOV_15[_global_jazyk]);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty2.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}/* czop only */
 					break;
 				case 16: /* MES_NOV */
@@ -18430,13 +18772,14 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_NOV_16_1[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-07: doplnené */, MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
-
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, text_NOV_16_2[_global_jazyk], MENO_SVIATKU);
 					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty2.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 17: /* MES_NOV */
 					if(poradie_svaty == 1){
@@ -18465,6 +18808,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_NOV_17[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK, MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-08: doplnené */, MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 18: /* MES_NOV */
 					if(poradie_svaty == 1){
@@ -18493,6 +18837,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_NOV_18[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 20: /* MES_NOV */
 					/* 2005-10-28: pridané */
@@ -18510,6 +18855,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_NOV_20[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
 					}
 					break;
 				case 21: /* MES_NOV */
@@ -18546,6 +18892,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_NOV_21[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 22: /* MES_NOV */
 					if(poradie_svaty == 1){
@@ -18572,6 +18919,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_NOV_22[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENICA, MODL_SPOL_CAST_PANNA);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 23: /* MES_NOV */
 					if(poradie_svaty == 1){
@@ -18613,13 +18961,14 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_NOV_23_1[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
-
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					pocet = 2;
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty2.meno, text_NOV_23_2[_global_jazyk], MENO_SVIATKU);
 					_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty2.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 24: /* MES_NOV */
 					if(poradie_svaty == 1){
@@ -18644,6 +18993,8 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_NOV_24[(_global_jazyk == JAZYK_CZ_OP)? JAZYK_CZ: _global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
+
 					if(_global_jazyk == JAZYK_CZ_OP){
 						/* 2009-07-10: odvetvené pre dominikánov;
 						 * 2010-03-15: pre dominikánov samostatne
@@ -18675,6 +19026,7 @@ label_25_MAR:
 						strcat(_global_svaty2.meno, text_NOV_24[_global_jazyk]);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 						_global_svaty2.farba = LIT_FARBA_CERVENA;
+						_global_svaty2.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}/* czop only */
 					break;
 				case 25: /* MES_NOV */
@@ -18701,6 +19053,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_NOV_25[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_MUCENIK);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 30: /* MES_NOV -- 30NOV */
 					if(poradie_svaty == 1){
@@ -18741,6 +19094,7 @@ label_25_MAR:
 					}
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 			}; break; /* case MES_NOV */
 		case MES_DEC:
@@ -18770,6 +19124,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_DEC_01[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 2: /* MES_DEC */
@@ -18788,6 +19143,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_DEC_02[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 3: /* MES_DEC */
@@ -18816,6 +19172,7 @@ label_25_MAR:
 					}
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 4: /* MES_DEC */
 					if(poradie_svaty == 1){
@@ -18840,6 +19197,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_DEC_04[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 6: /* MES_DEC */
 					if(poradie_svaty == 1){
@@ -18864,6 +19222,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_DEC_06[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 7: /* MES_DEC */
 					if(poradie_svaty == 1){
@@ -18894,6 +19253,7 @@ label_25_MAR:
 					mystrcpy(_global_svaty1.meno, text_DEC_07[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 8: /* MES_DEC */
 label_8_DEC:
@@ -18960,6 +19320,7 @@ label_8_DEC:
 					_global_svaty1.prik = PRIKAZANY_SVIATOK;
 					mystrcpy(_global_svaty1.meno, text_DEC_08[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 9: /* MES_DEC */
 					if(_global_den.denvt == DEN_PONDELOK){
@@ -18993,6 +19354,7 @@ label_8_DEC:
 					mystrcpy(_global_svaty1.meno, text_DEC_09[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA;
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 11: /* MES_DEC */
 					if(poradie_svaty == 1){
@@ -19017,6 +19379,7 @@ label_8_DEC:
 					mystrcpy(_global_svaty1.meno, text_DEC_11[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 
 				/* 2004-08-14, duurko
@@ -19047,6 +19410,7 @@ label_8_DEC:
 					mystrcpy(_global_svaty1.meno, text_DEC_12[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 					_global_svaty1.farba = LIT_FARBA_BIELA;
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 13: /* MES_DEC */
 					if(poradie_svaty == 1){
@@ -19073,6 +19437,7 @@ label_8_DEC:
 					mystrcpy(_global_svaty1.meno, text_DEC_13[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENICA, MODL_SPOL_CAST_PANNA);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 14: /* MES_DEC */
 					if(poradie_svaty == 1){
@@ -19097,6 +19462,7 @@ label_8_DEC:
 					mystrcpy(_global_svaty1.meno, text_DEC_14[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 21: /* MES_DEC */
 					if(poradie_svaty == 1){
@@ -19123,6 +19489,7 @@ label_8_DEC:
 					mystrcpy(_global_svaty1.meno, text_DEC_21[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 22: /* MES_DEC */
 					/* 2006-09-14: pridané */
@@ -19140,6 +19507,7 @@ label_8_DEC:
 						mystrcpy(_global_svaty1.meno, text_DEC_22[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					break;
 				case 23: /* MES_DEC */
@@ -19167,6 +19535,7 @@ label_8_DEC:
 					mystrcpy(_global_svaty1.meno, text_DEC_23[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 26: /* MES_DEC */
 					if(poradie_svaty == 1){
@@ -19195,6 +19564,7 @@ label_8_DEC:
 					mystrcpy(_global_svaty1.meno, text_DEC_26[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 27: /* MES_DEC */
 					if(poradie_svaty == 1){
@@ -19233,6 +19603,7 @@ label_8_DEC:
 					mystrcpy(_global_svaty1.meno, text_DEC_27[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 28: /* MES_DEC */
 					if(poradie_svaty == 1){
@@ -19261,6 +19632,7 @@ label_8_DEC:
 					mystrcpy(_global_svaty1.meno, text_DEC_28[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 29: /* MES_DEC */
 					if(poradie_svaty == 1){
@@ -19287,6 +19659,7 @@ label_8_DEC:
 					mystrcpy(_global_svaty1.meno, text_DEC_29[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_MUCENIK);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 31: /* MES_DEC */
 					if(poradie_svaty == 1){
@@ -19310,6 +19683,7 @@ label_8_DEC:
 					mystrcpy(_global_svaty1.meno, text_DEC_31[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 			}; break; /* case MES_DEC */
 	}/* switch(mesiac - 1) */

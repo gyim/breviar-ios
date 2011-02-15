@@ -1131,6 +1131,7 @@ void init_global_pm_sobota(void){
 	_global_pm_sobota.spolcast = /* pridane 27/04/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_pm_sobota.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+	_global_pm_sobota.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 }
 
 /* ------------------------------------------------------------------- */
@@ -1151,6 +1152,7 @@ void _dm_popolcova_streda(short int rok, short int _vn){
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.farba = LIT_FARBA_FIALOVA; /* 2006-08-19: pridané */
+	_global_result.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 }
 
 /* 2006-02-09: chýbalo tu nastavenie denvt */
@@ -1170,6 +1172,7 @@ void _dm_nanebovstupenie(short int rok, short int _vn){
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+	_global_result.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 }
 
 void _dm_zoslanie_ducha(short int rok, short int _vn){
@@ -1187,6 +1190,7 @@ void _dm_zoslanie_ducha(short int rok, short int _vn){
 	_global_result.spolcast= /* pridane 06/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+	_global_result.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 }
 
 void _dm_prva_adventna_nedela(short int rok, short int p2){
@@ -1204,6 +1208,7 @@ void _dm_prva_adventna_nedela(short int rok, short int p2){
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D. */
 	_global_result.farba = LIT_FARBA_FIALOVA; /* 2006-08-19: pridané */
+	_global_result.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 }
 
 void _dm_svatej_rodiny(short int rok){
@@ -1229,6 +1234,7 @@ void _dm_svatej_rodiny(short int rok){
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D. */
 	_global_result.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+	_global_result.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 }
 
 void _dm_krst_krista_pana(short int rok){
@@ -1249,6 +1255,7 @@ void _dm_krst_krista_pana(short int rok){
 	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 27/04/2000A.D. */
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D.; 2007-01-11: neplatí pre urèenie žalmov modlitby cez deò */
 	_global_result.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+	_global_result.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 }
 
 void _dm_velkonocna_nedela(short int rok, short int _vn){
@@ -1267,6 +1274,7 @@ void _dm_velkonocna_nedela(short int rok, short int _vn){
 	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 27/04/2000A.D. */
 	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D. */
 	_global_result.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+	_global_result.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 }
 
 /* pridana 2003-08-07 */
@@ -1294,6 +1302,7 @@ void _init_dm(_struct_dm a){
 					   * casti sa ma modlit */
 	mystrcpy(a.meno, STR_EMPTY, MENO_SVIATKU); /* nazov prip. sviatku */
 	a.farba = LIT_FARBA_NEURCENA; /* 2006-08-19: pridané */
+	a.kalendar = KALENDAR_NEURCENY; /* 2010-08-03: pridané */
 }
 #endif
 

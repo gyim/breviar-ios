@@ -151,6 +151,10 @@
 /*   2010-05-24a.D. | upraven˝ maÔarsk˝ form·t d·tumu                      */
 /*   2010-06-04a.D. | zapracovanÈ zobrazovanie ant. po Sl·va Otcu v inv.   */
 /*   2010-06-07a.D. | kvÙli 5. pÙstnej nedeli-SK doplnenÈ ZAKONCENIE_ON_JE */
+/*   2010-07-28a.D. | zaËiatok pokusov pre dominik·nov 8.8. ak padne na NE */
+/*   2010-08-03a.D. | do ötrukt˙ry "dm" pridan· premenn· pre öpecifik·ciu, */
+/*                    o ak˝ kalend·r ide: vöeobecn˝ danej cirk. provincie  */
+/*                    alebo nejak˝ rehoæn˝ a pod.                          */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -2883,12 +2887,14 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 	/* urcenie vseobecnych "liturgickych" zalezitosti dna:
 	 *
 	 * litrok,
-	 * tyzzal  = 0;
-	 * tyzden  = 0; // neurceny; 01/03/2000A.D.
-	 * smer    = 14;
-	 * meno    = STR_EMPTY;
-	 * prik    = NEPRIKAZANY_SVIATOK;
-	 * typslav = SLAV_NEURCENE;
+	 * tyzzal	= 0;
+	 * tyzden	= 0; // neurceny; 01/03/2000A.D.
+	 * smer		= 14;
+	 * meno		= STR_EMPTY;
+	 * prik		= NEPRIKAZANY_SVIATOK;
+	 * typslav	= SLAV_NEURCENE;
+	 * farba	= LIT_FARBA_NEURCENA;
+	 * kalendar = KALENDAR_NEURCENY;
 	 */
 	if(_global_den.denvr < PAN){
 		_global_den.litrok = _global_r._POPOLCOVA_STREDA.litrok;
@@ -2907,6 +2913,8 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 	mystrcpy(_global_den.meno, STR_EMPTY, MENO_SVIATKU); /* neurcene; pokus o zmenu 2007-08-16 */
 	_global_den.spolcast = /* pridane 01/03/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
+	_global_den.farba = LIT_FARBA_NEURCENA; /* 2010-08-03/2006-08-19: pridanÈ */
+	_global_den.kalendar = KALENDAR_NEURCENY; /* 2010-08-03: pridanÈ */
 
 	/* urcenie ostatnych specifickych "liturgickych" zalezitosti:
 	 *
@@ -2918,6 +2926,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 		if(_global_den.denvr >= POS){
 			/* postne obdobie */
 			_global_den.farba = LIT_FARBA_FIALOVA; /* 2006-08-19: pridanÈ */
+			_global_den.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
 			_rozbor_dna_LOG("/* postne obdobie */\n");
 			_global_den.litobd = OBD_POSTNE_I; /* do soboty v 5. post.tyzdni */
 			_global_den.smer = 9; /* vsedne dni v poste */
@@ -3004,6 +3013,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				/* slavnost panny marie bohorodicky */
 				_rozbor_dna_LOG("/* slavnost panny marie bohorodicky */\n");
 				_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+				_global_den.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
 				_global_den.smer = 3;
 				_global_den.typslav = SLAV_SLAVNOST;
 				_global_den.litobd = OBD_OKTAVA_NARODENIA;
@@ -3025,6 +3035,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				/* slavnost zjavenia pana */
 				_rozbor_dna_LOG("/* slavnost zjavenia pana */\n");
 				_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+				_global_den.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
 				_global_den.smer = 2; /* zjavenie pana */
 				_global_den.typslav = SLAV_SLAVNOST;
 				_global_den.litobd = OBD_VIANOCNE_II; /* ma vlastne slavenie; zmenil som na vianocne obd. II 14/03/2000A.D. */
@@ -3038,6 +3049,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				 */
 				_rozbor_dna_LOG("/* druha nedela po narodeni pana medzi 2. a 5. januarom; v krajinach, kde sa slavnost zjavenia pana slavi 6. januara */\n");
 				_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+				_global_den.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
 				_global_den.smer = 6; /* nedele vianocneho obdobia a obdobia "cez rok" */
 				_global_den.litobd = OBD_VIANOCNE_I;
 				mystrcpy(_global_den.meno, text_DRUHA_NEDELA_PO_NAR_PANA[_global_jazyk], MENO_SVIATKU); /* 2008-01-03: oprava - viacjazyËnosù */
@@ -3047,6 +3059,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				/* vianocne obdobie */
 				_rozbor_dna_LOG("/* vianocne obdobie */\n");
 				_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+				_global_den.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
 				/* _global_den.tyzden = 2; -- 2007-01-08: pripomienkoval don Val·bek; 2. t˝ûdeÚ je to aû po 2. nedeli po narodenÌ P·na */
 				/* vsedne dni vianocneho obdobia od 2. januara
 				 * do soboty po zjaveni pana */
@@ -3080,6 +3093,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				/* obdobie cez rok po vianociach do popolcovej stredy */
 				_rozbor_dna_LOG("/* obdobie cez rok po vianociach do popolcovej stredy */\n");
 				_global_den.farba = LIT_FARBA_ZELENA; /* 2006-08-19: pridanÈ */
+				_global_den.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
 				_global_den.litobd = OBD_CEZ_ROK;
 				/* urcenie tyzdna v obdobi "cez rok" */
 				_global_den.tyzden = ((_global_den.denvr - KRST) DIV 7) + 1;
@@ -3108,6 +3122,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 			/* velkonocne obdobie (po zoslanie d.s.) */
 			_rozbor_dna_LOG("/* velkonocne obdobie (po zoslanie d.s.) */\n");
 			_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+			_global_den.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
 			_global_den.tyzden = ((_global_den.denvr - VN) DIV 7) + 1;
 
 			if(_global_den.denvr == ZDS){
@@ -3193,6 +3208,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				/* obdobie cez rok po velkej noci do prvej adventnej nedele */
 				_rozbor_dna_LOG("/* obdobie cez rok po velkej noci do prvej adventnej nedele */\n");
 				_global_den.farba = LIT_FARBA_ZELENA; /* 2006-08-19: pridanÈ */
+				_global_den.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
 				_global_den.litobd = OBD_CEZ_ROK;
 				/* urcim tyzden v obdobi "cez rok" */
 				_global_den.tyzden = POCET_NEDIEL_CEZ_ROK -
@@ -3273,6 +3289,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					/* adventne obdobie */
 					_rozbor_dna_LOG("/* adventne obdobie */\n");
 					_global_den.farba = LIT_FARBA_FIALOVA; /* 2006-08-19: pridanÈ */
+					_global_den.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
 					_global_den.tyzden = ((_global_den.denvr - PAN) DIV 7) + 1;
 					if(_global_den.denvr <= DEC16){
 						/* do 16. decembra */
@@ -3308,6 +3325,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					/* vianocne obdobie */
 					_rozbor_dna_LOG("/* vianocne obdobie */\n");
 					_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+					_global_den.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
 					_global_den.litobd = OBD_OKTAVA_NARODENIA; /* pretoze do 31.12. */
 					/* 2008-01-05: podæa smernÌc, Ë. 133, nie je 1. t˝ûdeÚ ûalt·ra; 
 					 * pokraËuje sa v t˝ûdÚoch od 1. adventnej nedele
@@ -3426,7 +3444,8 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 		/* ... alebo c. 60: "ak na jeden den pripadnu viacere slavenia,
 		 * uprednostni sa to, ktore ma v tabulke liturgickych dni vyssi stupen
 		 * [t.j. .smer]. */
-			(_global_den.smer > _global_svaty1.smer)){
+		/* 2010-07-28: doplnenÈ alternatÌvne porovnanie aj s _global_svaty2.smer (kvÙli dominik·nskej sl·vnosti 8.8.) */
+			(_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
 
 			/* ked bola nasledovna pasaz zapoznamkovana,
 			 * tak vsetko (bez modlitby) slo v poriadku; neslo generovanie
@@ -3918,6 +3937,18 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		sprintf(pom, "\n<br> <"HTML_SPAN_RED_SMALL">(%s)</span>\n",
 			nazov_slavenia_lokal[_local_den.typslav_lokal]);
 		Log("prid·vam lokaliz·ciu sl·venia: %s\n", pom);
+		strcat(_global_string, pom);
+	}
+
+	/* 2010-08-03: pridan˝ ako pozn·mka typ kalend·ra */
+	if((_local_den.kalendar >= KALENDAR_NEURCENY) && (_local_den.kalendar < KALENDAR_POCET)){
+		sprintf(pom, "<!-- kalend·r: %s -->",
+			nazov_kalendara[_local_den.kalendar]);
+		Log("prid·vam ako pozn·mku typ kalend·ra: %s\n", pom);
+		strcat(_global_string, pom);
+	}
+	else{
+		sprintf(pom, "<!-- kalend·r nie je urËen˝ spr·vne -->");
 		strcat(_global_string, pom);
 	}
 
@@ -5582,8 +5613,17 @@ void _export_rozbor_dna(short int typ){
 		/* ... alebo c. 60: "ak na jeden den pripadnu viacere slavenia,
 		 * uprednostni sa to, ktore ma v tabulke liturgickych dni vyssi stupen
 		 * [t.j. .smer]. */
-		if(_global_den.smer > _global_svaty1.smer){
-			BUTTONS(typ, 1);
+		/* 2010-07-28: doplnenÈ alternatÌvne porovnanie aj s _global_svaty2.smer (kvÙli dominik·nskej sl·vnosti 8.8.) */
+		if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
+			if(_global_den.smer > _global_svaty1.smer){
+				BUTTONS(typ, 1);
+			}
+			else if(_global_den.smer > _global_svaty2.smer){
+				BUTTONS(typ, 2);
+			}
+			else if(_global_den.smer > _global_svaty3.smer){
+				BUTTONS(typ, 3);
+			}
 		}
 		else{
 			BUTTONS(typ, 0);
@@ -5896,11 +5936,19 @@ void _export_rozbor_dna_batch(short int typ, short int modlitba = MODL_NEURCENA,
 
 		/* 2006-12-07: sl·vnosti sv‰t˝ch (k fixn˝m d·tumom: napr. 8.12., 29.û., 5.˝., 15.8.), ktorÈ nepripadn˙ na nedeæu, neboli spr·vne zobrazovanÈ */
 #undef DEBUG_2006_12_07
-		if(_global_den.smer > _global_svaty1.smer){
+		/* 2010-07-28: doplnenÈ alternatÌvne porovnanie aj s _global_svaty2.smer (kvÙli dominik·nskej sl·vnosti 8.8.) */
+		if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
+			short int aaa;
+			if(_global_den.smer > _global_svaty1.smer)
+				aaa = 1;
+			else if(_global_den.smer > _global_svaty2.smer)
+				aaa = 2;
+			else if(_global_den.smer > _global_svaty3.smer)
+				aaa = 3;
 #ifdef DEBUG_2006_12_07
-			Export("<p>pre %d sa pouûil 1...</p>\n", _global_den.den);
+			Export("<p>pre %d sa pouûil %d...</p>\n", _global_den.den, aaa);
 #endif
-			execute_batch_command(1, batch_command, modlitba, d_from_m_from_r_from);
+			execute_batch_command(aaa, batch_command, modlitba, d_from_m_from_r_from);
 		}
 		else{
 #ifdef DEBUG_2006_12_07
@@ -5911,7 +5959,8 @@ void _export_rozbor_dna_batch(short int typ, short int modlitba = MODL_NEURCENA,
 	}/* if((_global_den.denvt == DEN_NEDELA) || (_global_den.prik == PRIKAZANY_SVIATOK) || (_global_den.smer < 5)) */
 	else if(_global_pocet_svatych > 0){
 		/* sviatky (spomienky, ls) svatych */
-		if((_global_den.smer > _global_svaty1.smer) ||
+		/* 2010-07-28: doplnenÈ alternatÌvne porovnanie aj s _global_svaty2.smer (kvÙli dominik·nskej sl·vnosti 8.8.) */
+		if(((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)) ||
 			(_global_den.smer == 9) && (_global_svaty1.smer == 12)){
 		/* svaty */
 			execute_batch_command(1, batch_command, modlitba, d_from_m_from_r_from);

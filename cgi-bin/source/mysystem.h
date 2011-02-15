@@ -201,11 +201,13 @@
 	#endif
 	#define EXPORT_HTML_FILENAME_ANCHOR
 	#define EXPORT_HTML_SPECIALS
+/*
 #else
 	#undef DEBUG
 	#undef LOGGING
 	#undef LOG_TO_STDOUT
 	#undef LOG_TO_FILE
+*/
 #endif
 
 #ifdef LOG_TO_EXPORT
