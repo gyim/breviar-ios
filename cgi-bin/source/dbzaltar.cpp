@@ -128,6 +128,7 @@
 /*   2009-03-24a.D. | úpravy liturgického kalendára pre czop - pre dominikánov                  */
 /*   2009-04-01a.D. | doplnené _set_zalmy_najsv_mena_jezisovho()                                */
 /*   2009-04-07a.D. | oprava hymnu pre kompletórium pre èeský breviáø                           */
+/*   2009-04-16a.D. | opravené kompletórium pre ve¾konoènú oktávu                               */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -1374,9 +1375,16 @@ void set_antifony_kompletorium_obd(short int den, short int tyzzal, short int mo
 void set_kresponz_kompletorium_obd(short int den, short int tyzzal, short int modlitba, short int litobd){
 	/* rovnaké responzórium pre všetky èasti ve¾konoèného obdobia */
 	file_name_zapamataj();
-	file_name_kompletorium((litobd == OBD_VELKONOCNA_OKTAVA || litobd == OBD_VELKONOCNE_II)? OBD_VELKONOCNE_I : litobd);
-	if(litobd == OBD_VELKONOCNE_TROJDNIE){
-		sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], pismenko_modlitby(modlitba), ANCHOR_KRESPONZ);
+	/* 2009-04-16: opravené, vo ve¾konoènej oktáve je také isté k resp. ako vo ve¾konoènú nede¾u; zmena v nastavení filename */
+	if(litobd == OBD_VELKONOCNA_OKTAVA){
+		file_name_kompletorium(OBD_VELKONOCNE_TROJDNIE);
+	}
+	else{
+		file_name_kompletorium((litobd == OBD_VELKONOCNE_II)? OBD_VELKONOCNE_I : litobd);
+	}
+	/* 2009-04-16: opravené, vo ve¾konoènej oktáve je také isté k resp. ako vo ve¾konoènú nede¾u; zmena v nastavení anchor */
+	if((litobd == OBD_VELKONOCNA_OKTAVA) || (litobd == OBD_VELKONOCNE_TROJDNIE)){
+		sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[(litobd == OBD_VELKONOCNA_OKTAVA)? DEN_NEDELA : den], pismenko_modlitby(modlitba), ANCHOR_KRESPONZ);
 	}
 	else{
 		sprintf(_anchor, "_%c_%s", pismenko_modlitby(modlitba), ANCHOR_KRESPONZ);
@@ -1491,6 +1499,7 @@ void _set_kompletorium_slavnost_oktava(short int modlitba, short int litobd, sho
 	/* popis parametrov:
 	 *	- "ktore" -		urèuje, èi sa jedná o kompletórium po prvých vešperách slávnosti (1) alebo po druhých vešperách (2) 
 	 *  2008-05-08: prerobené, aby vstupom bol parameter "modlitba" (nie ako doteraz, "short int ktore (1, 2)"
+	 *  2009-04-16: opravená modlitba pre ve¾konoènú oktávu
 	 */
 	Log("_set_kompletorium_slavnost_oktava(%d - %s), %d -- begin\n", modlitba, nazov_modlitby(modlitba), ktore);
 	if(_global_den.denvt == DEN_NEDELA){
@@ -1500,6 +1509,10 @@ void _set_kompletorium_slavnost_oktava(short int modlitba, short int litobd, sho
 	}
 	else if(ktore == 2){ /* normálne nede¾né kompletórium po 2. vešperách */
 		_set_kompletorium_slavnost(modlitba, litobd);
+		/* 2009-04-16: opravená modlitba pre ve¾konoènú oktávu */
+		if(litobd == OBD_VELKONOCNA_OKTAVA){
+			set_modlitba(DEN_NEDELA, _global_den.tyzzal, modlitba); /* vo ve¾konoènej oktáve sa berie modlitba z nedele */
+		}
 	}
 	else{ /* ktore = 1 */
 		/* nastavujeme ako pre nede¾né kompletórium po prvých vešperách, porov. _set_kompletorium_nedela_spolocne() */
@@ -1508,7 +1521,13 @@ void _set_kompletorium_slavnost_oktava(short int modlitba, short int litobd, sho
 		set_zalm(2, modlitba, "z134.htm", "ZALM134");
 		set_hymnus(DEN_NEDELA /* den */, _global_den.tyzzal, modlitba);
 		set_antifony(DEN_NEDELA, _global_den.tyzzal, 9 /* zvazok - pre kompletórium sa nepoužívalo, využité na špeciálne nastavenie */, modlitba);
-		set_modlitba(DEN_UNKNOWN, _global_den.tyzzal, modlitba); /* je to jeden konkrétny deò mimo nedele */
+		/* 2009-04-16: opravená modlitba pre ve¾konoènú oktávu */
+		if(litobd == OBD_VELKONOCNA_OKTAVA){
+			set_modlitba(DEN_NEDELA, _global_den.tyzzal, modlitba); /* vo ve¾konoènej oktáve sa berie modlitba z nedele */
+		}
+		else{
+			set_modlitba(DEN_UNKNOWN, _global_den.tyzzal, modlitba); /* je to jeden konkrétny deò mimo nedele */
+		}
 		/* nasledujúèe závisia od liturgického obdobia, preto nastavíme inú kotvu (pevne z nedele) */
 		set_kcitanie(DEN_NEDELA, _global_den.tyzzal, modlitba);
 		set_kresponz(DEN_NEDELA, _global_den.tyzzal, modlitba);
