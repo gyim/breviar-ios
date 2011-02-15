@@ -7330,7 +7330,7 @@ label_24_DEC:
 		((_global_den.denvr != (_global_r._ZOSLANIE_DUCHA_SV.denvr + 20))) && /* pridane 04/07/2000A.D. */
 		(
 			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
-			((_global_svaty1.smer >= 11) && (_global_pocet_svatych > 0))) &&
+			(((_global_svaty1.smer >= 12) || (_global_svaty1.smer == 4) || (_global_svaty1.smer == 8) || (_global_svaty1.smer == 11)) && (_global_pocet_svatych > 0))) &&
 		(poradie_svateho == 4)){
 		/* teraz do _global_den priradim dane slavenie */
 		_local_den = _global_pm_sobota;
@@ -15206,9 +15206,9 @@ label_25_MAR:
 							break;
 							/* 2005-08-22: Všetko je zo spoloènej èasti na výroèie posviacky chrámu */
 						}
-						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+						_global_svaty1.smer = 8; /* mieste sviatky */
+						_global_svaty1.typslav = SLAV_SVIATOK;
 						_global_svaty1.typslav_lokal = LOKAL_SLAV_KOSICE; /* 2005-08-22: pridané */
-						_global_svaty1.typslav = SLAV_SPOMIENKA;
 						mystrcpy(_global_svaty1.meno, text_SEP_06[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
@@ -15840,9 +15840,9 @@ label_25_MAR:
 							break;
 							/* 2005-08-22: Všetko je zo spoloènej èasti na výroèie posviacky chrámu */
 						}
-						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+						_global_svaty1.smer = 8; /* mieste sviatky */
+						_global_svaty1.typslav = SLAV_SVIATOK;
 						_global_svaty1.typslav_lokal = LOKAL_SLAV_BYSTRICA;
-						_global_svaty1.typslav = SLAV_SPOMIENKA;
 						mystrcpy(_global_svaty1.meno, text_SEP_24[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
@@ -16719,9 +16719,9 @@ label_25_MAR:
 							break;
 							/* 2005-08-22: Všetko je zo spoloènej èasti na výroèie posviacky chrámu */
 						}
-						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+						_global_svaty1.smer = 8; /* mieste sviatky */
+						_global_svaty1.typslav = SLAV_SVIATOK;
 						_global_svaty1.typslav_lokal = LOKAL_SLAV_SPIS;
-						_global_svaty1.typslav = SLAV_SPOMIENKA;
 						mystrcpy(_global_svaty1.meno, text_OKT_25[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
@@ -16734,9 +16734,9 @@ label_25_MAR:
 							break;
 							/* Všetko je zo spoloènej èasti na výroèie posviacky chrámu */
 						}
-						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+						_global_svaty1.smer = 4; /* mieste slavnosti */
+						_global_svaty1.typslav = SLAV_SLAVNOST;
 						_global_svaty1.typslav_lokal = LOKAL_SLAV_KONSEKR_KOSTOLY_CZ;
-						_global_svaty1.typslav = SLAV_SPOMIENKA;
 						mystrcpy(_global_svaty1.meno, text_OKT_26[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
@@ -16752,9 +16752,9 @@ label_25_MAR:
 							break;
 							/* Všetko je zo spoloènej èasti na výroèie posviacky chrámu */
 						}
-						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
-						_global_svaty1.typslav_lokal = LOKAL_SLAV_KONSEKR_KOSTOLY;
+						_global_svaty1.smer = 4; /* mieste slavnosti */
 						_global_svaty1.typslav = SLAV_SLAVNOST;
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_KONSEKR_KOSTOLY;
 						mystrcpy(_global_svaty1.meno, text_OKT_26[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
@@ -16770,9 +16770,9 @@ label_25_MAR:
 							break;
 							/* 2005-08-22: Všetko je zo spoloènej èasti na výroèie posviacky chrámu */
 						}
-						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+						_global_svaty1.smer = 8; /* mieste sviatky */
+						_global_svaty1.typslav = SLAV_SVIATOK;
 						_global_svaty1.typslav_lokal = LOKAL_SLAV_ROZNAVA;
-						_global_svaty1.typslav = SLAV_SPOMIENKA;
 						mystrcpy(_global_svaty1.meno, text_OKT_27[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
@@ -17439,9 +17439,9 @@ label_25_MAR:
 							break;
 							/* 2005-08-22: Všetko je zo spoloènej èasti na výroèie posviacky chrámu */
 						}
-						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+						_global_svaty1.smer = 8; /* mieste sviatky */
+						_global_svaty1.typslav = SLAV_SVIATOK;
 						_global_svaty1.typslav_lokal = LOKAL_SLAV_NITRA;
-						_global_svaty1.typslav = SLAV_SPOMIENKA;
 						mystrcpy(_global_svaty1.meno, text_NOV_20[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */

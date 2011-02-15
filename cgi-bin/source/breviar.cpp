@@ -139,6 +139,9 @@
 /*                  - pri ukladaní Visual Studio solution odteraz Release  */
 /*   2009-08-12a.D. | snáï hotový export -M2 (akoby offline web)           */
 /*   2009-08-26a.D. | nový batch export -M3 (ako -M2, ale pre mobily)      */
+/*   2009-11-26a.D. | oprava pre body 4, 8, 11 [Miestne slávnosti, Miestne */
+/*                    sviatky, Miestne povinné spomienky]; pred touto      */
+/*                    úpravou bola kontrola (_global_svaty1.smer >= 11)    */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -3578,12 +3581,14 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	/* 2006-02-02: pridané posv. èítania a upravené; 
 	 * keïže smer == 11 používame pre lokálne povinné spomienky, 
 	 * upravili sme kontrolu z 12 na 11
+	 * 2009-11-26: porovnávame klasicky, resp. špeciálne pre body 4, 8, 11 [Miestne slávnosti, Miestne sviatky, Miestne povinné spomienky]
+	 *             pred touto úpravou tu bola kontrola (_global_svaty1.smer >= 11)
 	 */
 	if((_global_den.litobd == OBD_CEZ_ROK) &&
 		(_global_den.denvt == DEN_SOBOTA) &&
 		(
 			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
-			((_global_svaty1.smer >= 11) && (_global_pocet_svatych > 0))) &&
+			(((_global_svaty1.smer >= 12) || (_global_svaty1.smer == 4) || (_global_svaty1.smer == 8) || (_global_svaty1.smer == 11)) && (_global_pocet_svatych > 0))) &&
 		(poradie_svateho == 4)){
 		/* teraz do _global_den priradim dane slavenie */
 		_local_den = _global_pm_sobota;
@@ -5471,8 +5476,11 @@ void _export_rozbor_dna(short int typ){
 					}
 				}
 				/* 2005-08-22: pôvodne sa tu porovnávalo s 12, ale aj pre 11 (lokálne slávenia) 
-				 * by mal systém ponúknu všedný deò - keï je to napr. v inej diecéze */
-				if((_global_svaty1.smer >= 11) &&
+				 *             by mal systém ponúknu všedný deò - keï je to napr. v inej diecéze
+				 * 2009-11-26: porovnávame klasicky, resp. špeciálne pre body 4, 8, 11 [Miestne slávnosti, Miestne sviatky, Miestne povinné spomienky]
+				 *             pred touto úpravou tu bolo: if((_global_svaty1.smer >= 11) && atï.
+				 */
+				if(((_global_svaty1.smer >= 12) || (_global_svaty1.smer == 4) || (_global_svaty1.smer == 8) || (_global_svaty1.smer == 11)) &&
 					(typ != EXPORT_DNA_VIAC_DNI)){
 					/* ak je to iba lubovolna spomienka, tak vsedny den */
 					NEWLINE;
@@ -5481,7 +5489,7 @@ void _export_rozbor_dna(short int typ){
 			}
 			else{
 				/* ¾ubovo¾ná spomienka svätého/svätých, prièom všedný deò má vyššiu prioritu slávenia */
-				if((_global_svaty1.smer >= 11) &&
+				if(((_global_svaty1.smer >= 12) || (_global_svaty1.smer == 4) || (_global_svaty1.smer == 8) || (_global_svaty1.smer == 11)) &&
 					(typ != EXPORT_DNA_VIAC_DNI)){
 					/* ak je to iba lubovolna spomienka, tak vsedny den */
 					BUTTONS(typ, 0);
@@ -5515,7 +5523,7 @@ void _export_rozbor_dna(short int typ){
 			/* 2005-08-22: pôvodne sa tu porovnávalo s 12, ale aj pre 11 (lokálne slávenia) 
 			 * by mal systém ponúknu (v sobotu) spomienku p. márie - keï je to napr. v inej diecéze */
 			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
-			((_global_svaty1.smer >= 11) && (_global_pocet_svatych > 0))) &&
+			(((_global_svaty1.smer >= 12) || (_global_svaty1.smer == 4) || (_global_svaty1.smer == 8) || (_global_svaty1.smer == 11)) && (_global_pocet_svatych > 0))) &&
 		(typ != EXPORT_DNA_VIAC_DNI)){
 		NEWLINE;
 		BUTTONS(typ, 4);
@@ -5794,8 +5802,11 @@ void _export_rozbor_dna_batch(short int typ, short int modlitba = MODL_NEURCENA,
 			}
 			/* 2008-10-31: upravené pod¾a _export_rozbor_dna() */
 			/* 2005-08-22: pôvodne sa tu porovnávalo s 12, ale aj pre 11 (lokálne slávenia) 
-			 * by mal systém ponúknu všedný deò - keï je to napr. v inej diecéze */
-			if((_global_svaty1.smer >= 11) &&
+			 *             by mal systém ponúknu všedný deò - keï je to napr. v inej diecéze 
+			 * 2009-11-26: porovnávame klasicky, resp. špeciálne pre body 4, 8, 11 [Miestne slávnosti, Miestne sviatky, Miestne povinné spomienky]
+			 *             pred touto úpravou tu bolo: if((_global_svaty1.smer >= 11) && atï.
+			 */
+			if(((_global_svaty1.smer >= 12) || (_global_svaty1.smer == 4) || (_global_svaty1.smer == 8) || (_global_svaty1.smer == 11)) &&
 				(typ != EXPORT_DNA_VIAC_DNI)){
 				/* ak je to iba lubovolna spomienka, tak vsedny den */
 				execute_batch_command(0, batch_command, modlitba, d_from_m_from_r_from);
@@ -5820,7 +5831,7 @@ void _export_rozbor_dna_batch(short int typ, short int modlitba = MODL_NEURCENA,
 		(_global_den.denvt == DEN_SOBOTA) &&
 		(
 			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
-			((_global_svaty1.smer >= 11) && (_global_pocet_svatych > 0))) &&
+			(((_global_svaty1.smer >= 12) || (_global_svaty1.smer == 4) || (_global_svaty1.smer == 8) || (_global_svaty1.smer == 11)) && (_global_pocet_svatych > 0))) &&
 		(typ != EXPORT_DNA_VIAC_DNI)){
 		execute_batch_command(4, batch_command, modlitba, d_from_m_from_r_from);
 	}
