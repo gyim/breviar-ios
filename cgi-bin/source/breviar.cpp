@@ -7319,6 +7319,9 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				else if(_global_jazyk == JAZYK_EN){
 					sprintf(pom, "%s %d, %d", nazov_Mesiaca(m - 1), d, r);
 				}
+				else if(_global_jazyk == JAZYK_HU){
+					sprintf(pom, "%s %d., %d", nazov_Mesiaca(m - 1), d, r);
+				}
 				else{
 					/* doterajšie správanie pre slovenèinu a èeštinu */
 					sprintf(pom, "%d. %s %d", d, nazov_mesiaca(m - 1), r);
