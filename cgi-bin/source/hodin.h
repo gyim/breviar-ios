@@ -2198,7 +2198,7 @@ const char *text_NEDELA_PANOVHO_ZMRTVYCHVSTANIA[] =
  "",
  "",
  "",
- "(pro dominikány není)",
+ "",
  "hu_name",
  };
 const char *text_NEDELA_VO_VELKONOCNEJ_OKTAVE[] = 
