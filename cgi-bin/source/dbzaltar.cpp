@@ -12818,7 +12818,7 @@ label_25_MAR:
 						modlitba = MODL_PRVE_VESPERY;
 						_vlastna_cast_full(modlitba);
 						_vlastna_cast_modlitba_prve_vesp;
-						_set_zalmy_sviatok_duch_past(modlitba);
+						_set_zalmy_sviatok_sv_muzov(modlitba);
 
 						/* 2007-11-14: doplnené invitatórium */
 						modlitba = MODL_INVITATORIUM;
@@ -12835,6 +12835,7 @@ label_25_MAR:
 						_vlastna_cast_kresponz;
 						_vlastna_cast_1citanie;
 						_vlastna_cast_2citanie;
+						_set_zalmy_sviatok_sv_muzov(modlitba); /* 2009-07-06: upravené - doplnené */
 
 						/* 2006-01-24: doplnené modlitby cez deò */
 						_vlastna_cast_mcd_ant_kcitresp_modl;
@@ -12849,7 +12850,7 @@ label_25_MAR:
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
-						_set_zalmy_sviatok_duch_past(modlitba);
+						_set_zalmy_sviatok_sv_muzov(modlitba);
 
 						/* 2008-12-09: doplnené kompletórium */
 						modlitba = MODL_PRVE_KOMPLETORIUM;
@@ -13252,7 +13253,11 @@ label_25_MAR:
 
 						modlitba = MODL_PRVE_VESPERY;
 						_vlastna_cast_full(modlitba);
-						_set_zalmy_slavnost_Cyrila_a_Metoda(modlitba);
+						/* 2009-07-06, upravené: slovenský breviár má iné žalmy */
+						if(_global_jazyk == JAZYK_SK)
+							_set_zalmy_slavnost_Cyrila_a_Metoda(modlitba);
+						else
+							_set_zalmy_sviatok_duch_past(modlitba);
 
 						/* 2007-11-14: doplnené invitatórium */
 						modlitba = MODL_INVITATORIUM;
@@ -13264,7 +13269,11 @@ label_25_MAR:
 
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_full(modlitba);
-						_set_zalmy_slavnost_Cyrila_a_Metoda(modlitba);
+						/* 2009-07-06, upravené: slovenský breviár má iné žalmy */
+						if(_global_jazyk == JAZYK_SK)
+							_set_zalmy_slavnost_Cyrila_a_Metoda(modlitba);
+						else
+							_set_zalmy_sviatok_duch_past(modlitba);
 						/* hymnus ako na vešpery */
 						sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(MODL_VESPERY), ANCHOR_HYMNUS);
 						_set_hymnus(modlitba, _file, _anchor);
@@ -13283,7 +13292,11 @@ label_25_MAR:
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
-						_set_zalmy_slavnost_Cyrila_a_Metoda(modlitba);
+						/* 2009-07-06, upravené: slovenský breviár má iné žalmy */
+						if(_global_jazyk == JAZYK_SK)
+							_set_zalmy_slavnost_Cyrila_a_Metoda(modlitba);
+						else
+							_set_zalmy_sviatok_duch_past(modlitba);
 
 						/* 2008-07-11: doplnené kompletórium */
 						modlitba = MODL_KOMPLETORIUM;
