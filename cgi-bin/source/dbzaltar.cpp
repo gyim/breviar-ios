@@ -11996,7 +11996,7 @@ label_25_MAR:
 					break;
 				case 21: /* MES_MAY */
 					/* 2006-08-16: pridané */
-					if(_global_jazyk == JAZYK_CZ){
+					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
 							if(query_type != PRM_DETAILY)
@@ -12011,9 +12011,11 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					}
-					/* 2009-03-24: odvetvené pre dominikánov */
-					else if(_global_jazyk == JAZYK_CZ_OP){
-						if(poradie_svaty == 1){
+					/* 2009-03-24: odvetvené pre dominikánov;
+					 * 2009-05-16: upravené, aby mali všeobecný kalendár
+					 */
+					if(_global_jazyk == JAZYK_CZ_OP){
+						if(poradie_svaty == 2){
 							/* definovanie parametrov pre modlitbu */
 
 							if(query_type != PRM_DETAILY)
@@ -12031,11 +12033,13 @@ label_25_MAR:
 
 							break;
 						}
-						_global_svaty1.typslav = SLAV_SPOMIENKA;
-						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-						mystrcpy(_global_svaty1.meno, text_MAJ_21_2[_global_jazyk], MENO_SVIATKU);
-						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
-						_global_svaty1.farba = LIT_FARBA_BIELA;
+						pocet = 2;
+						_global_svaty2.typslav = SLAV_SPOMIENKA;
+						_global_svaty2.smer = 12; /* povinne spomienky podla vseobecneho kalendara - nastavené ako ¾ubovo¾ná*/
+						mystrcpy(_global_svaty2.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
+						strcat(_global_svaty2.meno, text_MAJ_21_2[_global_jazyk]);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+						_global_svaty2.farba = LIT_FARBA_BIELA;
 					}
 					break;
 				case 22: /* MES_MAY */

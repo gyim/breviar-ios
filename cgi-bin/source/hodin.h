@@ -1244,11 +1244,11 @@ const char *text_ZAKONCENIE_LEBO_TY_kratke[] =
 /* 2009-05-15, doplnené: pre dominikánov */
 const char *text_PRO_OP[] = 
 {"Pre dominikánov (CZ_OP): ",
-"Pro dominikány (CZ OP): ",
+"Pro dominikány (OP CZ): ",
  "",
  "",
  "",
- "Pro dominikány (CZ OP): ",
+ "Pro OP CZ: ",
  "hu_",
  };
 
