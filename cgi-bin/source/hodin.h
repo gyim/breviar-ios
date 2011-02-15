@@ -2645,6 +2645,15 @@ const char *text_JUL_17_3[] =
  "Bl. Èeslava z Polska, knìze",
  "hu_",
  };
+const char *text_JUL_18[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Bl. Mannesa neboli Mamesa, knìze, bratra sv. Otce Dominika",
+ "hu_",
+ };
 const char *text_JUL_20[] = 
 {"(na Slovensku nie je)",
  "Sv. Apolináøe, biskupa a muèedníka",
@@ -2939,7 +2948,7 @@ const char *text_AUG_18[] =
  "",
  "la_",
  "",
- "Bl. Mannesa neboli Mamesa, knìze, bratra sv. Otce Dominika",
+ "xxx",
  "hu_",
  };
 const char *text_AUG_19[] = 
