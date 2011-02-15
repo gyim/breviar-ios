@@ -48,6 +48,8 @@
 /*   2008-06-24a.D. | doplnené LOKAL_SLAV_SPIS_BA_PATRON       */
 /*   2008-08-15a.D. | pridaný ïalší "jazyk" (cz-op)            */
 /*   2009-01-29a.D. | pridaný ïalší jazyk - maïarèina (hu)     */
+/*   2009-04-08a.D. | zakonèenie modlitby trojaké (krátke/dlhé)*/
+/*   2009-05-15a.D. | pridané text_PRO_OP[]                    */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -1120,7 +1122,7 @@ void _init_dm(_struct_dm a);
  * upravené 2007-08-16, pretože sa používa aj v _main_dnes()
  */
 #define _INIT_DM(a) {\
-	a.den = 1;        /* cislo dna mesiaca (1--31) */\
+	a.den = 1;        /* cislo dna v mesiaci (1--31) */\
 	a.mesiac = 1;     /* cislo mesiaca (1--12) */\
 	a.rok = 1900;        /* rok */\
 	a.denvt = 0;     /* cislo dna v tyzdni (0--6) DEN_... */ /* deò v roku */\
@@ -1249,6 +1251,8 @@ extern const char *text_ZAKONCENIE_LEBO_ON_dlhe[];
 extern const char *text_ZAKONCENIE_LEBO_ON_kratke[];
 extern const char *text_ZAKONCENIE_LEBO_TY_dlhe[];
 extern const char *text_ZAKONCENIE_LEBO_TY_kratke[];
+
+extern const char *text_PRO_OP[];
 
 #endif /* __LITURGIA_H_ */
 

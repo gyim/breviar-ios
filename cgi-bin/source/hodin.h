@@ -32,6 +32,7 @@
 /*   2009-03-24a.D. | úpravy liturgického kalendára pre czop   */
 /*   2009-04-08a.D. | zakonèenie modlitby (pre modlitbu cezdeò */
 /*                    a komplet. sa pouíva kratšie zakonèenie)*/
+/*   2009-05-15a.D. | pridané text_PRO_OP[]                    */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -1237,6 +1238,17 @@ const char *text_ZAKONCENIE_LEBO_TY_kratke[] =
  "",
  "",
  "Nebo ty iješ a kraluješ na vìky vìkù.",
+ "hu_",
+ };
+
+/* 2009-05-15, doplnené: pre dominikánov */
+const char *text_PRO_OP[] = 
+{"Pre dominikánov (CZ_OP): ",
+"Pro dominikány (CZ OP): ",
+ "",
+ "",
+ "",
+ "Pro dominikány (CZ OP): ",
  "hu_",
  };
 

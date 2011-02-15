@@ -690,7 +690,7 @@ static void stuffenv(char *var){
 	/*
 	 * Check for the presence of the variable.
 	 */
-	if ((oldval = getenv(buf)))
+	if ((oldval = getenv(buf))) // 2009-05-15: netreba oprava = na == ?
 	{
 #ifdef DEBUG
 		Log("  Variable %s exists with value %s\n", buf, oldval);
@@ -2695,6 +2695,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 	 *
 	 * den, mesiac, rok, denvr, denvt
 	 */
+	Log("urcenie 'obcianskych' zalezitosti dna:\n");
 	_global_den.den = datum.den;
 	_global_den.mesiac = datum.mesiac;
 	_global_den.rok = rok;
@@ -3363,8 +3364,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 		}
 	}/* (_global_pocet_svatych > 0) */
 
-	_rozbor_dna_LOG("sviatky_svatych(%d, %d) skoncila a ukoncilo sa aj rozhodovanie\n",
-		_global_den.den, _global_den.mesiac);
+	_rozbor_dna_LOG("sviatky_svatych(%d, %d) skoncila a ukoncilo sa aj rozhodovanie\n", _global_den.den, _global_den.mesiac);
 
 	/* prikazane sviatky - boli oznacene na prislusnych miestach */
 
@@ -3884,6 +3884,11 @@ short int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, short int rok, short
 		_global_den.rok);
 
 	liturgicke_obdobie(_global_den.litobd, _global_den.tyzden, _global_den.denvt, _global_den.tyzzal, poradie_svateho);
+
+	Log("PO:\t%d. %s %d\n",
+		_global_den.den,
+		nazov_mesiaca(_global_den.mesiac - 1),
+		_global_den.rok);
 
 	Log("-- _rozbor_dna_s_modlitbou:\n");
 	Log("\t%d. %s %d, %s\n",
