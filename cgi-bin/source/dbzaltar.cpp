@@ -15939,6 +15939,7 @@ label_25_MAR:
 							Log("Svatý Václav: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
 							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty, ANO, ANO, ANO, ANO, ANO); /* 2009-10-12: berú sa všetky veci zo spol. èasti */
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_PRVE_KOMPLETORIUM;
@@ -17827,28 +17828,25 @@ label_8_DEC:
 						Log("jumping to label_8_DEC...\n");
 						goto label_8_DEC;
 					}
-					/* 2008-12-04: pridané pre czop */
-					if(_global_jazyk == JAZYK_CZ_OP){
-						if(poradie_svaty == 1){
-							/* definovanie parametrov pre modlitbu */
-							if(query_type != PRM_DETAILY)
-								set_spolocna_cast(sc, poradie_svaty);
-							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_modlitba;
-							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_modlitba;
-							_vlastna_cast_2citanie;
-							modlitba = MODL_VESPERY;
-							_vlastna_cast_modlitba;
-							break;
-						}
-						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-						mystrcpy(_global_svaty1.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
-						strcat(_global_svaty1.meno, text_DEC_09[_global_jazyk]);
-						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
-						_global_svaty1.farba = LIT_FARBA_BIELA; // ??
+					/* 2008-12-04: pridané pre czop; 2009-10-12: pridané aj pre cz a sk */
+					if(poradie_svaty == 1){
+						/* definovanie parametrov pre modlitbu */
+						if(query_type != PRM_DETAILY)
+							set_spolocna_cast(sc, poradie_svaty);
+						modlitba = MODL_RANNE_CHVALY;
+						_vlastna_cast_modlitba;
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+						modlitba = MODL_VESPERY;
+						_vlastna_cast_modlitba;
+						break;
 					}
+					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+					mystrcpy(_global_svaty1.meno, text_DEC_09[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
+					_global_svaty1.farba = LIT_FARBA_BIELA;
 					break;
 				case 11: /* MES_DEC */
 					if(poradie_svaty == 1){
@@ -17880,27 +17878,25 @@ label_8_DEC:
 				 */
 
 				case 12: /* MES_DEC */
-					/* 2008-12-04: pridané pre czop */
-					if(_global_jazyk == JAZYK_CZ_OP){
-						if(poradie_svaty == 1){
-							/* definovanie parametrov pre modlitbu */
-							if(query_type != PRM_DETAILY)
-								set_spolocna_cast(sc, poradie_svaty);
-							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_modlitba;
-							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_modlitba;
-							_vlastna_cast_2citanie;
-							modlitba = MODL_VESPERY;
-							_vlastna_cast_modlitba;
-							break;
-						}
-						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-						mystrcpy(_global_svaty1.meno, text_DEC_12[_global_jazyk], MENO_SVIATKU);
-						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
-						_global_svaty1.farba = LIT_FARBA_BIELA;
+					/* 2008-12-04: pridané pre czop; 2009-10-12: pridané aj pre cz a sk */
+					if(poradie_svaty == 1){
+						/* definovanie parametrov pre modlitbu */
+						if(query_type != PRM_DETAILY)
+							set_spolocna_cast(sc, poradie_svaty);
+						modlitba = MODL_RANNE_CHVALY;
+						_vlastna_cast_modlitba;
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_modlitba;
+						_vlastna_cast_2citanie;
+						modlitba = MODL_VESPERY;
+						_vlastna_cast_modlitba;
+						break;
 					}
+					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+					mystrcpy(_global_svaty1.meno, text_DEC_12[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+					_global_svaty1.farba = LIT_FARBA_BIELA;
 					break;
 				case 13: /* MES_DEC */
 					if(poradie_svaty == 1){

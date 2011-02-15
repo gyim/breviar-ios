@@ -3894,12 +3894,12 @@ const char *text_DEC_08[] =
  "A Boldogságos Szûz Mária szeplõtelen fogantatása",
  };
 const char *text_DEC_09[] = 
-{"(nie je)",
- "(není)",
+{"Sv. Didaka Cuauhtlatoatzina",
+ "Sv. Jana Didaka Cuauhtlatoatzina",
  "",
  "",
  "",
- "Sv. Jana Didaka Cuauhtlatoazina",
+ "Sv. Jana Didaka Cuauhtlatoatzina",
  "(nincs Magyarországon)",
  };
 const char *text_DEC_11[] = 
@@ -3912,7 +3912,7 @@ const char *text_DEC_11[] =
  "Szent I. Damazusz pápa",
  };
 const char *text_DEC_12[] = 
-{"(nie je)",
+{"Prebl. Panny Márie Guadalupskej",
  "Panny Marie Guadalupské",
  "",
  "",
