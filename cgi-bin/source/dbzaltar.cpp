@@ -15814,20 +15814,24 @@ label_25_MAR:
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
+							modlitba = MODL_INVITATORIUM;
+							_vlastna_cast_antifona_inv;
+
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_modlitba;
+							_vlastna_cast_full_okrem_prosieb(modlitba);
 
 							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_hymnus;
 							_vlastna_cast_modlitba;
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_modlitba;
+							_vlastna_cast_full_okrem_prosieb(modlitba);
 
 							break;
 						}
-						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						_global_svaty1.smer = 11; /* povinne spomienky podla vseobecneho kalendara - zmenené na miestne povinne spomienky podla vseobecneho kalendara */
 						mystrcpy(_global_svaty1.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
 						strcat(_global_svaty1.meno, text_AUG_17[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
@@ -16119,6 +16123,7 @@ label_25_MAR:
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
+						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 
 						modlitba = MODL_POSV_CITANIE;
@@ -16126,6 +16131,7 @@ label_25_MAR:
 						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
+						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
 
 						break;
