@@ -14613,7 +14613,7 @@ label_25_MAR:
 						// _vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
 						modlitba = MODL_POSV_CITANIE;
-						if(_global_jazyk == JAZYK_CZ_OP || _global_jazyk == JAZYK_CZ){
+						if(_global_jazyk == JAZYK_CZ){
 							/* 2010-07-19: pre èeský mi dodali ètení */
 							_vlastna_cast_2citanie;
 						}
