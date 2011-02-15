@@ -3370,19 +3370,19 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 								if((_global_opt3 != sc.a1)
 								&& (_global_opt3 != sc.a2)
 								&& (_global_opt3 != sc.a3)){
-									_global_opt3 = sc.a1; /* iba ak nie je ani pod¾a jednej z nenullovývh, zmením */
+									_global_opt3 = sc.a1; /* iba ak nie je ani pod¾a jednej z nenullovývch, zmením */
 								}
 							}
 							else{
 								if((_global_opt3 != sc.a1)
 								&& (_global_opt3 != sc.a2)){
-									_global_opt3 = sc.a1; /* iba ak nie je ani pod¾a jednej z nenullovývh, zmením */
+									_global_opt3 = sc.a1; /* iba ak nie je ani pod¾a jednej z nenullovývch, zmením */
 								}
 							}
 						}
 						else{
 							if(_global_opt3 != sc.a1){
-								_global_opt3 = sc.a1; /* iba ak nie je ani pod¾a jednej z nenullovývh, zmením */
+								_global_opt3 = sc.a1; /* iba ak nie je ani pod¾a jednej z nenullovývch, zmením */
 							}
 						}
 					}

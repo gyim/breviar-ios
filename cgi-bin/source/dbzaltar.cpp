@@ -9140,8 +9140,8 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty
 	 * sviatky_svatych() -- 18/02/2000A.D.
 	 */
 
-	/* 2007-09-28: doplnené */
-	if(_global_den.typslav == SLAV_SLAVNOST){
+	/* 2007-09-28: doplnené; 2009-10-27: pokusne doplnené aj _global_svaty1.typslav */
+	if((_global_den.typslav == SLAV_SLAVNOST) || (_global_svaty1.typslav == SLAV_SLAVNOST)){
 		Log("	teraz nastavujem žalmy pre modlitbu cez deò slávností...\n");
 		if(_global_den.denvt != DEN_NEDELA){
 			Log("  _set_zalm_cez_den_doplnkova_psalmodia()...\n");
@@ -9152,20 +9152,28 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty
 			Log("  žalmy ostávajú z nedele (nemením ich)...\n");
 		}
 	}
+	else{
+		Log("	nie je slávnos...\n");
+	}
+	Log("	_global_opt3 == %d\n", _global_opt3);
 
 	/* podla _global_opt3 urcime, ktoru spolocnu cast dat */
 	if(sc.a1 != MODL_SPOL_CAST_NEURCENA){
 		if(_global_opt3 == sc.a1){
+			Log("	vstupujem do _set_spolocna_cast()...(_global_opt3 == sc.a1)\n");
 			_set_spolocna_cast(_global_opt3, brat_antifony, brat_zalmy, brat_1citanie, brat_kresp_prosby, brat_2citanie);
 		}
 		else{
+			Log("	neplatí _global_opt3 == sc.a1 ...\n");
 			if(sc.a2 != MODL_SPOL_CAST_NEURCENA){
 				if(_global_opt3 == sc.a2){
+					Log("	vstupujem do _set_spolocna_cast()...(_global_opt3 == sc.a2)\n");
 					_set_spolocna_cast(_global_opt3, brat_antifony, brat_zalmy, brat_1citanie, brat_kresp_prosby, brat_2citanie);
 				}
 				else{
 					if(sc.a3 != MODL_SPOL_CAST_NEURCENA){
 						if(_global_opt3 == sc.a3){
+							Log("	vstupujem do _set_spolocna_cast()...(_global_opt3 == sc.a3)\n");
 							_set_spolocna_cast(_global_opt3, brat_antifony, brat_zalmy, brat_1citanie, brat_kresp_prosby, brat_2citanie);
 						}
 						else{
@@ -15913,6 +15921,12 @@ label_25_MAR:
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){ /* 2008-10-09: odvetvené len pre Èesko; prevzaté pod¾a cyrila a metoda */
 
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
+						_global_opt3 = MODL_SPOL_CAST_MUCENIK; // 2009-10-27: doplnené, aby sa to mohlo použi v set_spolocna_cast()
+						_global_svaty1.typslav = SLAV_SLAVNOST;
+						_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
+						mystrcpy(_global_svaty1.meno, text_SEP_28[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+
 						if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 							/* preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o slavnost,
 							 * ktora ma takmer najvacsiu prioritu, a preto ma aj prve
@@ -15946,8 +15960,11 @@ label_25_MAR:
 							_set_zalmy_1nedele_rch();
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_full(modlitba);
-							_set_zalmy_sviatok_muc(modlitba);
+							_vlastna_cast_hymnus;
+							_vlastna_cast_1citanie;
+							_vlastna_cast_2citanie;
+							_vlastna_cast_modlitba;
+							// _set_zalmy_sviatok_muc(modlitba); // 2009-10-27: netreba, zabezpeèí predsunutie priradení navrch a volanie set_spolocna_cast()
 
 							_vlastna_cast_mcd_ant_kcitresp_modl;
 
@@ -15973,10 +15990,6 @@ label_25_MAR:
 
 							if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 						}
-						_global_svaty1.typslav = SLAV_SLAVNOST;
-						_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
-						mystrcpy(_global_svaty1.meno, text_SEP_28[_global_jazyk], MENO_SVIATKU);
-						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
 					}/* 2008-10-09: odvetvené len pre Èesko */
 					else{
 						/* 2009-03-24: pre dominikánov czop sa slávi 26.9. */
