@@ -162,6 +162,9 @@ extern short int _global_css; /* 2008-08-08: Pridané kvôli rôznym css */
 /* 2006-10-17: Pridané kvôli kompletóriu: niekedy obsahuje až dva žalmy */
 extern short int _global_pocet_zalmov_kompletorium;
 
+/* 2009-08-03, pridané */
+extern short int _global_opt_batch_monthly;
+
 #ifndef OS_linux
 /* kedysi bolo void main;
  * 2003-07-14, kvoli gcc version 3.2.2 20030222 (Red Hat Linux 3.2.2-5) christ-net.sk 

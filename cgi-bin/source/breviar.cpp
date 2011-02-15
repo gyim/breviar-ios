@@ -420,6 +420,8 @@ char pom_MODL_OPT_DATE_FORMAT [SMALL] = STR_EMPTY;
 
 /* 2009-08-02: pridanÈ pre batch mÛd */
 char pom_EXPORT_MONTHLY [SMALL] = STR_EMPTY;
+/* 2009-08-03: pridanÈ pre batch mÛd po mesiacoch */
+short int export_month_zaciatok = NIE;
 
 char bad_param_str[MAX_STR] = STR_EMPTY; /* inicializacia pridana 2003-08-13 */
 
@@ -463,11 +465,23 @@ char include_dir[MAX_STR] = STR_EMPTY;
 char name_binary_executable[MAX_STR] = STR_EMPTY;
 char name_batch_file[MAX_STR] = STR_EMPTY;
 FILE *batch_file = NULL;
+
 /* 2004-03-16 pridane pre batch mode, parameter `k', aby exportoval aj zoznam modlitieb do HTML */
 char name_batch_html_file[MAX_STR] = STR_EMPTY;
 FILE *batch_html_file = NULL;
+
 /* 2009-08-02: pridan˝ n·zov adres·ra pre batch mÛd: generovanie po mesiacoch, parameter `M' */
 char dir_name[MAX_STR] = STR_EMPTY;
+
+/* 2009-08-03: pridan˝ s˙bor a jeho n·zov pre batch mÛd: generovanie po mesiacoch, parameter `M' */
+FILE *batch_month_file = NULL;
+char name_batch_month_file[MAX_STR] = STR_EMPTY;
+
+/* 2009-08-03: pridan˝ reùazec pre batch mÛd, vytvorenie novÈho adres·ra: generovanie po mesiacoch, parameter `M' */
+char system_command[MAX_STR] = STR_EMPTY;
+
+/* 2009-08-03: Ëi sa podarilo vytvoriù index.htm [DEFAULT_MONTH_EXPORT] vn˙tri adres·ra jednotlivÈho mesiaca pre 'M' -- mesaËn˝ export v batch mÛde */
+short int index_pre_mesiac_otvoreny = NIE;
 
 /*
  * 2009-01-28: jednotlivÈ define t˝kaj˙ce sa riadenia modlitby presunutÈ sem na zaËiatok s˙boru, 
@@ -1216,7 +1230,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 
 					/* 2009-04-08, doplnenÈ: zakonËenie modlitby (pre modlitbu cez deÚ a kompletÛrium sa pouûÌva kratöie zakonËenie) */
 
-					// ToDo: eöte ost·va dorieöiù niektorÈ prÌpady (v slovenËine)
+					// ToDo: eöte ost·va dorieöiù niektorÈ prÌpady (v slovenËine s mal˝m -- pokraËovanie vety "skrze")
 
 					/* zakonËenie modlitby - Skrze... */
 					if(equals(rest, PARAM_ZAKONCENIE_SKRZE)){
@@ -5280,7 +5294,26 @@ void execute_batch_command(short int a, char batch_command[MAX_STR]){
 	/* 2006-01-31 pridan˝ z·pis modlitby cez deÚ a posv. ËÌtania */
 	/* 2008-04-09 pridan˝ z·pis modlitby cez deÚ (predpoludnÌm a popoludnÌ), invitatÛrium a kompletÛrium; doplnen˝ jazyk */
 	/* 2008-08-08: TODO: ost·va prilepiù info o css */
-	fprintf(batch_html_file, "<li>%d. %s %d: \n", _global_den.den, nazov_mesiaca(_global_den.mesiac - 1), _global_den.rok);
+	/* 2009-09-03: podæa nastavenia exportujeme do odliön˝ch s˙borov odliönÈ veci */
+	FILE *batch_export_file = NULL;
+	char parameter_M[SMALL] = STR_EMPTY;
+
+	/* 2009-08-03: exportovanie do adres·rov po mesiacoch */
+	if(_global_opt_batch_monthly == ANO && index_pre_mesiac_otvoreny == ANO){
+		/* najskÙr do zoznamu mesiacov vyprintujeme odkaz na index.htm danÈho mesiaca (ak bolo prvÈho resp. zaËiatok exportu)... */
+		if(_global_den.den == 1 || export_month_zaciatok == ANO){
+			fprintf(batch_html_file, "<li><a href=\"%s\">%s %d</a></li>\n", name_batch_month_file, nazov_mesiaca(_global_den.mesiac - 1), _global_den.rok);
+			export_month_zaciatok = NIE;
+		}
+		/* ... a presmerujeme v˝stup pre dan˝ deÚ do index.htm danÈho mesiaca */
+		batch_export_file = batch_month_file;
+		mystrcpy(parameter_M, " -M", SMALL);
+	}
+	else{
+		batch_export_file = batch_html_file;
+		mystrcpy(parameter_M, "", SMALL);
+	}
+	fprintf(batch_export_file, "<li>%d. %s %d: \n", _global_den.den, nazov_mesiaca(_global_den.mesiac - 1), _global_den.rok);
 	for(i = MODL_INVITATORIUM; i < MODL_NEURCENA; i++){
 		Log("/* generujem: %d `%s'...\n */", i, nazov_modlitby(i));
 		if((a != 4) || (a == 4 && (i != MODL_VESPERY && i != MODL_KOMPLETORIUM))){ /* 2006-01-31-TUTOLA; 2008-04-09 presunutÈ */
@@ -5288,17 +5321,18 @@ void execute_batch_command(short int a, char batch_command[MAX_STR]){
 				fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -x%d -p%s -j%s\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk]); /* modlitba `i' */
 			}/* endif _global_opt_append == YES */
 			else{
-				fprintf(batch_file, "%s%d%c.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s\n", batch_command, a, char_modlitby[i], _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk]); /* modlitba `i' */
+				/* 2009-08-03: doplnen· moûnosù exportovaù parameter -M ak exportuje batch mÛd pre jednotlivÈ mesiace kvÙli hlaviËke jednotlivej modlitby */
+				fprintf(batch_file, "%s%d%c.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s\n", batch_command, a, char_modlitby[i], _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M); /* modlitba `i' */
 				// fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%d%c.htm\">%s</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a, char_modlitby[i], nazov_modlitby(i));
 				/* 2008-11-29: rozliËn˝ export */
 				if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
-					fprintf(batch_html_file, "\t<a href=\""FILENAME_EXPORT_DATE_SIMPLE"_%d%c.htm\">%s</a>, \n", _global_den.rok % 100, _global_den.mesiac, _global_den.den, a, char_modlitby[i], nazov_modlitby(i));
+					fprintf(batch_export_file, "\t<a href=\""FILENAME_EXPORT_DATE_SIMPLE"_%d%c.htm\">%s</a>, \n", _global_den.rok % 100, _global_den.mesiac, _global_den.den, a, char_modlitby[i], nazov_modlitby(i));
 				else /* EXPORT_DATE_FULL */
-					fprintf(batch_html_file, "\t<a href=\""FILENAME_EXPORT_DATE_FULL"_%d%c.htm\">%s</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a, char_modlitby[i], nazov_modlitby(i));
+					fprintf(batch_export_file, "\t<a href=\""FILENAME_EXPORT_DATE_FULL"_%d%c.htm\">%s</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a, char_modlitby[i], nazov_modlitby(i));
 			}
 		}
 	}
-	fprintf(batch_html_file, "</li>\n");
+	fprintf(batch_export_file, "</li>\n");
 }/* execute_batch_command() */
 
 void _export_rozbor_dna_batch(short int typ){
@@ -7493,7 +7527,7 @@ void _main_batch_mode(
 				batch_html_file = fopen(name_batch_html_file, "wt");
 				if(batch_html_file != NULL){
 					Log("File `%s' opened for writing...\n", name_batch_html_file);
-					hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_html_file);
+					hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_html_file, -1 /* t.j. bez ˙prav linky */);
 					fprintf(batch_html_file, "\n");
 					fprintf(batch_html_file, "<center><h2>Zoznam modlitieb</h2></center>\n");
 					fprintf(batch_html_file, "<ul>\n");
@@ -7522,6 +7556,7 @@ void _main_batch_mode(
 					 *
 					 */
 
+					export_month_zaciatok = ANO;
 					/* 2003-07-08
 					 * _global_string vyuzijeme na to, aby sme si medzi jednotlivymi dnami
 					 * posielali nazov suboru v pripade, ze chce vsetky modlitby
@@ -7545,9 +7580,24 @@ void _main_batch_mode(
 						else /* EXPORT_DATE_FULL */
 							sprintf(dir_name, DIRNAME_EXPORT_MONTH_FULL, r_from, m_from + 1, nazov_mesiaca_asci(m_from));
 						/* m_to resp. m_from: s˙ hodnoty 0--11, resp. VSETKY_MESIACE resp. UNKNOWN_MESIAC */
-						fprintf(batch_file, "mkdir \"%s\"\n", dir_name);
+						sprintf(system_command, "mkdir \"%s\"\n", dir_name);
+						// fprintf(batch_file, system_command);
+						system(system_command);
 						fprintf(batch_file, "cd \"%s\"\n", dir_name);
 						som_dnu = ANO;
+						/* 2009-08-03: otvorÌm aj s˙bor pre jednotliv˝ mesiac */
+						mystrcpy(name_batch_month_file, dir_name, MAX_STR);
+						strcat(name_batch_month_file, STR_PATH_SEPARATOR);
+						strcat(name_batch_month_file, DEFAULT_MONTH_EXPORT);
+						batch_month_file = fopen(name_batch_month_file, "wt");
+						if(batch_month_file != NULL){
+							Log("File `%s' opened for writing...\n", name_batch_month_file);
+							hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_month_file, 1);
+							fprintf(batch_month_file, "\n");
+							fprintf(batch_month_file, "<center><h2>Zoznam modlitieb pre %s %d</h2></center>\n", nazov_mesiaca(m_from), r_from);
+							fprintf(batch_month_file, "<ul>\n");
+							index_pre_mesiac_otvoreny = ANO;
+						}
 					}
 
 					/* 2003-07-07 
@@ -7568,21 +7618,43 @@ void _main_batch_mode(
 							d_a_m = por_den_mesiac(i, r_from);
 							d = d_a_m.den;
 							m = d_a_m.mesiac;
-							if(d == 1){ /* ak je prvÈho, treba vytvoriù nov˝ adres·r */
+							if(_global_opt_batch_monthly == ANO && d == 1){ /* ak je prvÈho, treba vytvoriù nov˝ adres·r */
+								Log("batch mode: nov˝ mesiac -- %s %d...\n", nazov_mesiaca(m - 1), r_from);
 								/* 2009-08-02: exportovanie do adres·rov po mesiacoch */
-								if(_global_opt_batch_monthly == ANO && som_dnu == ANO){
+								if(som_dnu == ANO){
 									fprintf(batch_file, "cd ..\n");
 									som_dnu = NIE;
 								}
-								if(_global_opt_batch_monthly == ANO){
-									/* n·zov executable resp. include dir sme zmenili hneÔ v getArgv() (lebo budeme meniù adres·r) */
-									if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
-										sprintf(dir_name, DIRNAME_EXPORT_MONTH_SIMPLE, r_from % 100, m, nazov_mes[m - 1]);
-									else /* EXPORT_DATE_FULL */
-										sprintf(dir_name, DIRNAME_EXPORT_MONTH_FULL, r_from, m, nazov_mesiaca_asci(m - 1));
-									fprintf(batch_file, "mkdir \"%s\"\n", dir_name);
-									fprintf(batch_file, "cd \"%s\"\n", dir_name);
-									som_dnu = ANO;
+								/* 2009-08-03: zatvorenie s˙boru (index.htm) pre jednotliv˝ mesiac */
+								if(index_pre_mesiac_otvoreny == ANO){
+									fprintf(batch_month_file, "</ul>\n");
+									patka(batch_month_file);
+									fclose(batch_month_file);
+									Log("batch mode: export pre predoöl˝ mesiac skonËen˝, s˙bor zatvoren˝.\n");
+									index_pre_mesiac_otvoreny = NIE;
+								}
+								/* n·zov executable resp. include dir sme zmenili hneÔ v getArgv() (lebo budeme meniù adres·r) */
+								if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
+									sprintf(dir_name, DIRNAME_EXPORT_MONTH_SIMPLE, r_from % 100, m, nazov_mes[m - 1]);
+								else /* EXPORT_DATE_FULL */
+									sprintf(dir_name, DIRNAME_EXPORT_MONTH_FULL, r_from, m, nazov_mesiaca_asci(m - 1));
+								sprintf(system_command, "mkdir \"%s\"\n", dir_name);
+								// fprintf(batch_file, system_command);
+								system(system_command);
+								fprintf(batch_file, "cd \"%s\"\n", dir_name);
+								som_dnu = ANO;
+								/* 2009-08-03: otvorÌm aj s˙bor pre jednotliv˝ mesiac */
+								mystrcpy(name_batch_month_file, dir_name, MAX_STR);
+								strcat(name_batch_month_file, STR_PATH_SEPARATOR);
+								strcat(name_batch_month_file, DEFAULT_MONTH_EXPORT);
+								batch_month_file = fopen(name_batch_month_file, "wt");
+								if(batch_month_file != NULL){
+									Log("File `%s' opened for writing...\n", name_batch_month_file);
+									hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_month_file, 1);
+									fprintf(batch_month_file, "\n");
+									fprintf(batch_month_file, "<center><h2>Zoznam modlitieb pre %s %d</h2></center>\n", nazov_mesiaca(m - 1), r_from);
+									fprintf(batch_month_file, "<ul>\n");
+									index_pre_mesiac_otvoreny = ANO;
 								}
 							}
 							_rozbor_dna(d_a_m, r_from);
@@ -7603,21 +7675,43 @@ void _main_batch_mode(
 								d_a_m = por_den_mesiac(i, y);
 								d = d_a_m.den;
 								m = d_a_m.mesiac;
-								if(d == 1){ /* ak je prvÈho, treba vytvoriù nov˝ adres·r */
+								if(_global_opt_batch_monthly == ANO && d == 1){ /* ak je prvÈho, treba vytvoriù nov˝ adres·r */
+									Log("batch mode: nov˝ mesiac -- %s %d...\n", nazov_mesiaca(m - 1), y);
 									/* 2009-08-02: exportovanie do adres·rov po mesiacoch */
-									if(_global_opt_batch_monthly == ANO && som_dnu == ANO){
+									if(som_dnu == ANO){
 										fprintf(batch_file, "cd ..\n");
 										som_dnu = NIE;
 									}
-									if(_global_opt_batch_monthly == ANO){
-										/* n·zov executable resp. include dir sme zmenili hneÔ v getArgv() (lebo budeme meniù adres·r) */
-										if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
-											sprintf(dir_name, DIRNAME_EXPORT_MONTH_SIMPLE, y % 100, m, nazov_mes[m - 1]);
-										else /* EXPORT_DATE_FULL */
-											sprintf(dir_name, DIRNAME_EXPORT_MONTH_FULL, y, m, nazov_mesiaca_asci(m - 1));
-										fprintf(batch_file, "mkdir \"%s\"\n", dir_name);
-										fprintf(batch_file, "cd \"%s\"\n", dir_name);
-										som_dnu = ANO;
+									/* 2009-08-03: zatvorenie s˙boru (index.htm) pre jednotliv˝ mesiac */
+									if(index_pre_mesiac_otvoreny == ANO){
+										fprintf(batch_month_file, "</ul>\n");
+										patka(batch_month_file);
+										fclose(batch_month_file);
+										Log("batch mode: export pre predoöl˝ mesiac skonËen˝, s˙bor zatvoren˝.\n");
+										index_pre_mesiac_otvoreny = NIE;
+									}
+									/* n·zov executable resp. include dir sme zmenili hneÔ v getArgv() (lebo budeme meniù adres·r) */
+									if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
+										sprintf(dir_name, DIRNAME_EXPORT_MONTH_SIMPLE, y % 100, m, nazov_mes[m - 1]);
+									else /* EXPORT_DATE_FULL */
+										sprintf(dir_name, DIRNAME_EXPORT_MONTH_FULL, y, m, nazov_mesiaca_asci(m - 1));
+									sprintf(system_command, "mkdir \"%s\"\n", dir_name);
+									// fprintf(batch_file, system_command);
+									system(system_command);
+									fprintf(batch_file, "cd \"%s\"\n", dir_name);
+									som_dnu = ANO;
+									/* 2009-08-03: otvorÌm aj s˙bor pre jednotliv˝ mesiac */
+									mystrcpy(name_batch_month_file, dir_name, MAX_STR);
+									strcat(name_batch_month_file, STR_PATH_SEPARATOR);
+									strcat(name_batch_month_file, DEFAULT_MONTH_EXPORT);
+									batch_month_file = fopen(name_batch_month_file, "wt");
+									if(batch_month_file != NULL){
+										Log("File `%s' opened for writing...\n", name_batch_month_file);
+										hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_month_file, 1);
+										fprintf(batch_month_file, "\n");
+										fprintf(batch_month_file, "<center><h2>Zoznam modlitieb pre %s %d</h2></center>\n", nazov_mesiaca(m - 1), y);
+										fprintf(batch_month_file, "<ul>\n");
+										index_pre_mesiac_otvoreny = ANO;
 									}
 								}
 								_rozbor_dna(d_a_m, y);
@@ -7638,21 +7732,43 @@ void _main_batch_mode(
 							d_a_m = por_den_mesiac(i, r_to);
 							d = d_a_m.den;
 							m = d_a_m.mesiac;
-							if(d == 1){ /* ak je prvÈho, treba vytvoriù nov˝ adres·r */
+							if(_global_opt_batch_monthly == ANO && d == 1){ /* ak je prvÈho, treba vytvoriù nov˝ adres·r */
+								Log("batch mode: nov˝ mesiac -- %s %d...\n", nazov_mesiaca(m - 1), r_to);
 								/* 2009-08-02: exportovanie do adres·rov po mesiacoch */
-								if(_global_opt_batch_monthly == ANO && som_dnu == ANO){
+								if(som_dnu == ANO){
 									fprintf(batch_file, "cd ..\n");
 									som_dnu = NIE;
 								}
-								if(_global_opt_batch_monthly == ANO){
-									/* n·zov executable resp. include dir sme zmenili hneÔ v getArgv() (lebo budeme meniù adres·r) */
-									if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
-										sprintf(dir_name, DIRNAME_EXPORT_MONTH_SIMPLE, r_to % 100, m, nazov_mes[m - 1]);
-									else /* EXPORT_DATE_FULL */
-										sprintf(dir_name, DIRNAME_EXPORT_MONTH_FULL, r_to, m, nazov_mesiaca_asci(m - 1));
-									fprintf(batch_file, "mkdir \"%s\"\n", dir_name);
-									fprintf(batch_file, "cd \"%s\"\n", dir_name);
-									som_dnu = ANO;
+								/* 2009-08-03: zatvorenie s˙boru (index.htm) pre jednotliv˝ mesiac */
+								if(index_pre_mesiac_otvoreny == ANO){
+									fprintf(batch_month_file, "</ul>\n");
+									patka(batch_month_file);
+									fclose(batch_month_file);
+									Log("batch mode: export pre predoöl˝ mesiac skonËen˝, s˙bor zatvoren˝.\n");
+									index_pre_mesiac_otvoreny = NIE;
+								}
+								/* n·zov executable resp. include dir sme zmenili hneÔ v getArgv() (lebo budeme meniù adres·r) */
+								if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
+									sprintf(dir_name, DIRNAME_EXPORT_MONTH_SIMPLE, r_to % 100, m, nazov_mes[m - 1]);
+								else /* EXPORT_DATE_FULL */
+									sprintf(dir_name, DIRNAME_EXPORT_MONTH_FULL, r_to, m, nazov_mesiaca_asci(m - 1));
+								sprintf(system_command, "mkdir \"%s\"\n", dir_name);
+								// fprintf(batch_file, system_command);
+								system(system_command);
+								fprintf(batch_file, "cd \"%s\"\n", dir_name);
+								som_dnu = ANO;
+								/* 2009-08-03: otvorÌm aj s˙bor pre jednotliv˝ mesiac */
+								mystrcpy(name_batch_month_file, dir_name, MAX_STR);
+								strcat(name_batch_month_file, STR_PATH_SEPARATOR);
+								strcat(name_batch_month_file, DEFAULT_MONTH_EXPORT);
+								batch_month_file = fopen(name_batch_month_file, "wt");
+								if(batch_month_file != NULL){
+									Log("File `%s' opened for writing...\n", name_batch_month_file);
+									hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_month_file, 1);
+									fprintf(batch_month_file, "\n");
+									fprintf(batch_month_file, "<center><h2>Zoznam modlitieb pre %s %d</h2></center>\n", nazov_mesiaca(m - 1), r_to);
+									fprintf(batch_month_file, "<ul>\n");
+									index_pre_mesiac_otvoreny = ANO;
 								}
 							}
 							_rozbor_dna(d_a_m, r_to);
@@ -7672,21 +7788,43 @@ void _main_batch_mode(
 							d_a_m = por_den_mesiac(i, r_from);
 							d = d_a_m.den;
 							m = d_a_m.mesiac;
-							if(d == 1){ /* ak je prvÈho, treba vytvoriù nov˝ adres·r */
+							if(_global_opt_batch_monthly == ANO && d == 1){ /* ak je prvÈho, treba vytvoriù nov˝ adres·r */
+								Log("batch mode: nov˝ mesiac -- %s %d...\n", nazov_mesiaca(m - 1), r_from /* == r_to */);
 								/* 2009-08-02: exportovanie do adres·rov po mesiacoch */
-								if(_global_opt_batch_monthly == ANO && som_dnu == ANO){
+								if(som_dnu == ANO){
 									fprintf(batch_file, "cd ..\n");
 									som_dnu = NIE;
 								}
-								if(_global_opt_batch_monthly == ANO){
-									/* n·zov executable resp. include dir sme zmenili hneÔ v getArgv() (lebo budeme meniù adres·r) */
-									if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
-										sprintf(dir_name, DIRNAME_EXPORT_MONTH_SIMPLE, r_from % 100, m, nazov_mes[m - 1]);
-									else /* EXPORT_DATE_FULL */
-										sprintf(dir_name, DIRNAME_EXPORT_MONTH_FULL, r_from, m, nazov_mesiaca_asci(m - 1));
-									fprintf(batch_file, "mkdir \"%s\"\n", dir_name);
-									fprintf(batch_file, "cd \"%s\"\n", dir_name);
-									som_dnu = ANO;
+								/* 2009-08-03: zatvorenie s˙boru (index.htm) pre jednotliv˝ mesiac */
+								if(index_pre_mesiac_otvoreny == ANO){
+									fprintf(batch_month_file, "</ul>\n");
+									patka(batch_month_file);
+									fclose(batch_month_file);
+									Log("batch mode: export pre predoöl˝ mesiac skonËen˝, s˙bor zatvoren˝.\n");
+									index_pre_mesiac_otvoreny = NIE;
+								}
+								/* n·zov executable resp. include dir sme zmenili hneÔ v getArgv() (lebo budeme meniù adres·r) */
+								if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
+									sprintf(dir_name, DIRNAME_EXPORT_MONTH_SIMPLE, r_from % 100, m, nazov_mes[m - 1]);
+								else /* EXPORT_DATE_FULL */
+									sprintf(dir_name, DIRNAME_EXPORT_MONTH_FULL, r_from, m, nazov_mesiaca_asci(m - 1));
+								sprintf(system_command, "mkdir \"%s\"\n", dir_name);
+								// fprintf(batch_file, system_command);
+								system(system_command);
+								fprintf(batch_file, "cd \"%s\"\n", dir_name);
+								som_dnu = ANO;
+								/* 2009-08-03: otvorÌm aj s˙bor pre jednotliv˝ mesiac */
+								mystrcpy(name_batch_month_file, dir_name, MAX_STR);
+								strcat(name_batch_month_file, STR_PATH_SEPARATOR);
+								strcat(name_batch_month_file, DEFAULT_MONTH_EXPORT);
+								batch_month_file = fopen(name_batch_month_file, "wt");
+								if(batch_month_file != NULL){
+									Log("File `%s' opened for writing...\n", name_batch_month_file);
+									hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_month_file, 1);
+									fprintf(batch_month_file, "\n");
+									fprintf(batch_month_file, "<center><h2>Zoznam modlitieb pre %s %d</h2></center>\n", nazov_mesiaca(m - 1), r_from);
+									fprintf(batch_month_file, "<ul>\n");
+									index_pre_mesiac_otvoreny = ANO;
 								}
 							}
 							_rozbor_dna(d_a_m, r_from);
@@ -7694,12 +7832,21 @@ void _main_batch_mode(
 						}
 					}/* r_from == r_to */
 
-					/* 2009-08-02: exportovanie do adres·rov po mesiacoch -- vr·time sa sp‰ù */
-					if(_global_opt_batch_monthly == ANO && som_dnu == ANO){
-						fprintf(batch_file, "cd ..\n");
-						som_dnu = NIE;
+					if(_global_opt_batch_monthly == ANO){
+						/* 2009-08-03: zatvorenie s˙boru (index.htm) pre jednotliv˝ mesiac */
+						if(index_pre_mesiac_otvoreny == ANO){
+							fprintf(batch_month_file, "</ul>\n");
+							patka(batch_month_file);
+							fclose(batch_month_file);
+							Log("batch mode: export pre posledn˝ mesiac skonËen˝, s˙bor zatvoren˝; toto bol posledn˝ s˙bor %s.\n", DEFAULT_MONTH_EXPORT);
+							index_pre_mesiac_otvoreny = NIE;
+						}
+						/* 2009-08-02: exportovanie do adres·rov po mesiacoch -- vr·time sa sp‰ù */
+						if(som_dnu == ANO){
+							fprintf(batch_file, "cd ..\n");
+							som_dnu = NIE;
+						}
 					}
-
 					fprintf(batch_html_file, "</ul>\n");
 					patka(batch_html_file);
 					fclose(batch_html_file);
@@ -8234,17 +8381,6 @@ short int getArgv(int argc, char **argv){
 		/* dokoncili sme parsovanie options (switchov apod),
 		 * a teraz rozoberieme, co sme zistili */
 
-		/* 2009-08-02: pri exportovanÌ do adres·rov po mesiacoch je potrebnÈ upraviù name_binary_executable resp. include_dir */
-		if(_global_opt_batch_monthly == ANO){
-			/* musÌme upraviù n·zov executable, lebo budeme meniù adres·r v _main_batch_mode() */
-			mystrcpy(pom_name_binary_executable, "..\\", MAX_STR);
-			strcat(pom_name_binary_executable, name_binary_executable);
-			mystrcpy(name_binary_executable, pom_name_binary_executable, MAX_STR);
-			/* musÌme upraviù n·zov adres·ra s include, lebo budeme meniù adres·r v _main_batch_mode() */
-			mystrcpy(pom_include_dir, "..\\", MAX_STR);
-			strcat(pom_include_dir, include_dir);
-			mystrcpy(include_dir, pom_include_dir, MAX_STR);
-		}
 		/* najprv nakopirujeme chybovu hlasku do bad_param_str */
 		if(equals(pom_QUERY_TYPE, STR_EMPTY)){
 			/* zmenene <b> na <span class="bold">, 2003-07-02 */
@@ -8263,6 +8399,19 @@ short int getArgv(int argc, char **argv){
 		if(query_type != PRM_SIMULACIA_QS){
 			Log("query_type != PRM_SIMULACIA_QS, so running getQueryTypeFrom_QS(%s)...\n", pom_QUERY_TYPE);
 			query_type = getQueryTypeFrom_QS(pom_QUERY_TYPE);
+		}
+		/* 2009-08-02: pri exportovanÌ do adres·rov po mesiacoch je potrebnÈ upraviù name_binary_executable resp. include_dir 
+		 * 2009-08-03: ale len v batch mÛde (teda nie pre jednotliv˙ generovan˙ modlitbu) -- preto presunutÈ aû sem, za zistenie query_type
+		 */
+		if(query_type == PRM_BATCH_MODE && _global_opt_batch_monthly == ANO){
+			/* musÌme upraviù n·zov executable, lebo budeme meniù adres·r v _main_batch_mode() */
+			mystrcpy(pom_name_binary_executable, "..\\", MAX_STR);
+			strcat(pom_name_binary_executable, name_binary_executable);
+			mystrcpy(name_binary_executable, pom_name_binary_executable, MAX_STR);
+			/* musÌme upraviù n·zov adres·ra s include, lebo budeme meniù adres·r v _main_batch_mode() */
+			mystrcpy(pom_include_dir, "..\\", MAX_STR);
+			strcat(pom_include_dir, include_dir);
+			mystrcpy(include_dir, pom_include_dir, MAX_STR);
 		}
 	}
 

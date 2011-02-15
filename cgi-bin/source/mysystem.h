@@ -79,8 +79,8 @@
 /* Modely pre ostré použitie */
 //#define MODEL_linux
 //#define MODEL_linux_commandline
-//#define MODEL_Windows_RUBY
-#define MODEL_Windows_commandline
+#define MODEL_Windows_RUBY
+//#define MODEL_Windows_commandline
 
 /* Modely pre debugovanie */
 //#define MODEL_DEBUG_linux
@@ -179,6 +179,8 @@
 /* 2008-08-08: Pridané */
 #define		STR_PATH_SEPARATOR_linux	"/"
 #define		STR_PATH_SEPARATOR_Windows	"\\"
+/* 2009-08-03: pridané pre HTML súbory */
+#define		STR_PATH_SEPARATOR_HTML	STR_PATH_SEPARATOR_linux
 
 /* 2007-05-29: upravené; pre Ruby on Windows tiež separátor ako pod linuxom */
 #if defined(OS_linux)

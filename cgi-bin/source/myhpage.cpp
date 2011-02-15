@@ -42,7 +42,7 @@
 #include "liturgia.h" /* 2006-07-31 kvôli jazyku */
 
 /* exportuje hlavicku HTML dokumentu, kam pojde vysledok query */
-void hlavicka(char *title){
+void hlavicka(char *title, short int level){
 	/* 
 	 * 2003-07-01, pridane pripadne citanie zo suboru
 	 * 2008-08-08: èítanie zo súboru odstránené
@@ -70,8 +70,22 @@ void hlavicka(char *title){
 	Export("\t<link rel=\"stylesheet\" type=\"text/css\" href=\"");
 #ifdef	EXPORT_CMDLINE_CSS
 	// pre command-line použitie (aj pre batch mód): "./breviar.css" resp. ".\breviar.css"
-	Export(".");
-	Export(STR_PATH_SEPARATOR);
+	/* 2009-08-03: level oznaèuje poèet adresárov, o ktoré je treba ís "hore" (pre mesaèný export) */
+	if(level == 0 && _global_opt_batch_monthly == ANO)
+		level = 1;
+	if(level < 0 || level > 5)
+		level = 0;
+	if(level == 0)
+		Export(".");
+	else{
+		while(level > 1){
+			Export("..");
+			Export(STR_PATH_SEPARATOR_HTML);
+			level--;
+		}
+		Export("..");
+	}
+	Export(STR_PATH_SEPARATOR_HTML);
 #else
 	// pre web-použitie (aj pre ruby): "/breviar.css"
 	Export("/");
@@ -83,7 +97,7 @@ void hlavicka(char *title){
 	return;
 }/* hlavicka() */
 
-void hlavicka(char *title, FILE * expt){
+void hlavicka(char *title, FILE * expt, short int level){
 	/* 
 	 * 2003-07-01, pridane pripadne citanie zo suboru
 	 * 2008-08-08: èítanie zo súboru odstránené
@@ -111,8 +125,22 @@ void hlavicka(char *title, FILE * expt){
 	fprintf(expt, "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"");
 #ifdef	EXPORT_CMDLINE_CSS
 	// pre command-line použitie (aj pre batch mód): "./breviar.css" resp. ".\breviar.css"
-	fprintf(expt, ".");
-	fprintf(expt, STR_PATH_SEPARATOR);
+	/* 2009-08-03: level oznaèuje poèet adresárov, o ktoré je treba ís "hore" (pre mesaèný export) */
+	if(level == 0 && _global_opt_batch_monthly == ANO)
+		level = 1;
+	if(level < 0 || level > 5)
+		level = 0;
+	if(level == 0)
+		fprintf(expt, ".");
+	else{
+		while(level > 1){
+			fprintf(expt, "..");
+			fprintf(expt, STR_PATH_SEPARATOR_HTML);
+			level--;
+		}
+		fprintf(expt, "..");
+	}
+	fprintf(expt, STR_PATH_SEPARATOR_HTML);
 #else
 	// pre web-použitie (aj pre ruby): "/breviar.css"
 	fprintf(expt, "/");
