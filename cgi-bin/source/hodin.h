@@ -872,6 +872,11 @@ const char *html_text_modlitby_pre_den[] = {"modlitby pre deò", "modlitby pro de
 const char *html_text_alebo_pre[] = {"alebo pre", "anebo pro", "or for", "vel per", "", "anebo pro", "hu_or for"};
 const char *html_text_dnesok[] = {"dnešok", "dnešní den", "today", "hódie", "", "dnešní den", "ma"};
 
+/* 2010-02-15: pridané kvôli "zoznam.htm" batch mode */
+const char *html_text_Breviar_dnes[] = {"Breviár dnes", "Breviáø dnes", "Breviary today", "Breviar hódie", "", "Breviáø dnes", "hu_"};
+const char *html_text_Dnesne_modlitby[] = {"Dnešné modlitby", "Dnešní modlitby", "Today's prayers", "la_hódie", "", "Dnešní modlitby", "hu_ma"};
+const char *html_text_Prehlad_mesiaca[] = {"Preh¾ad mesiaca", "Pøehled mìsíce", "Current month", "la_", "", "Pøehled mìsíce", "hu_"};
+
 const char *html_text_Vysvetlivky[] = {"Vysvetlivky", "Vysvìtlivky", "Legenda", "Legenda", "", "Vysvìtlivky", "Jelmagyarázat"};
 
 const char *html_text_dalsie_moznosti[] = {"Vyberte si ïalšie možnosti ", "Další možnosti výbìru ", "Choose from above (buttons) or from the following options: ", "", "", "Další možnosti výbìru", "Válassz egy imaórát vagy az alábbi lehetõségek közül"};

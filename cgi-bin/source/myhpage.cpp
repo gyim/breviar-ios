@@ -57,9 +57,16 @@ char pismeno_next[1];
 char ext[MAX_EXT];
 char file_name_pom[MAX_STR];
 char *ptr;
+short int _local_modlitba;
 
 /* exportuje hlavicku HTML dokumentu, kam pojde vysledok query */
-void hlavicka(char *title, short int level){
+void hlavicka(char *title, short int level, short int spec){
+	_local_modlitba = _global_modlitba;
+	if((_local_modlitba == MODL_PRVE_VESPERY) || (_local_modlitba == MODL_DRUHE_VESPERY))
+		_local_modlitba = MODL_VESPERY;
+	if((_local_modlitba == MODL_PRVE_KOMPLETORIUM) || (_local_modlitba == MODL_DRUHE_KOMPLETORIUM))
+		_local_modlitba = MODL_KOMPLETORIUM;
+
 	/* 2009-08-04: viackrát sa pri exporte modlitby do HTML exportovala hlavièka; pridaná kontrola */
 	if(_global_hlavicka_Export > 0)
 		return;
@@ -110,36 +117,33 @@ void hlavicka(char *title, short int level){
 	Export("%s\">\n", nazov_css_suboru); // názov css súboru
 	Export("<title>%s</title>\n", title);
 	Export("</head>\n\n");
-	Export("<body>\n");
-/*
-	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
-		// ^ hore
-		Export("<p><a href=\".%s%s\">", STR_PATH_SEPARATOR_HTML, _global_export_navig_hore); // v tom istom adresári
-		Export((char *)html_text_batch_Back[_global_jazyk]);
-		Export("</a></p>");
-	}
-*/
+	/* 2010-02-15: kvôli špeciálnemu "zoznam.htm" */
+	if(spec == 1)
+		Export("<body onLoad=\"fn_aktualne(0,0,0)\">\n");
+	else
+		Export("<body>\n");
+
 	/* 2010-02-15: doplnené predošlá a nasledovná modlitba */
 	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
 		Export("<center>\n");
 		pismeno_modlitby = '_';
-		if((_global_modlitba < MODL_NEURCENA) && (_global_modlitba >= MODL_INVITATORIUM))
-			pismeno_modlitby = char_modlitby[_global_modlitba];
+		if((_local_modlitba < MODL_NEURCENA) && (_local_modlitba >= MODL_INVITATORIUM))
+			pismeno_modlitby = char_modlitby[_local_modlitba];
 		sprintf(ext, "%c", pismeno_modlitby);
 		strcat(ext, ".htm");
 		Export("<p>");
 		// << prev
 		mystrcpy(file_name_pom, FILE_EXPORT, MAX_STR);
 		ptr = strstr(file_name_pom, ext);
-		if((_global_modlitba < MODL_NEURCENA) && (_global_modlitba > MODL_INVITATORIUM)){
+		if((_local_modlitba < MODL_NEURCENA) && (_local_modlitba > MODL_INVITATORIUM)){
 			if(ptr != NULL){
-				sprintf(pismeno_prev, "%c", char_modlitby[_global_modlitba - 1]);
+				sprintf(pismeno_prev, "%c", char_modlitby[_local_modlitba - 1]);
 				strncpy(ptr, pismeno_prev, 1);
 			}
 			Export("<a href=\"%s\">", file_name_pom);
 			Export((char *)html_text_batch_Prev[_global_jazyk]);
 			Export(" ");
-			Export((char *)nazov_modlitby(_global_modlitba - 1));
+			Export((char *)nazov_modlitby(_local_modlitba - 1));
 			Export("</a>");
 		}
 		// |
@@ -153,13 +157,13 @@ void hlavicka(char *title, short int level){
 		// >> next
 		mystrcpy(file_name_pom, FILE_EXPORT, MAX_STR);
 		ptr = strstr(file_name_pom, ext);
-		if((_global_modlitba != MODL_NEURCENA) && (_global_modlitba < MODL_KOMPLETORIUM)){
+		if((_local_modlitba != MODL_NEURCENA) && (_local_modlitba < MODL_KOMPLETORIUM)){
 			if(ptr != NULL){
-				sprintf(pismeno_next, "%c", char_modlitby[_global_modlitba + 1]);
+				sprintf(pismeno_next, "%c", char_modlitby[_local_modlitba + 1]);
 				strncpy(ptr, pismeno_next, 1);
 			}
 			Export("<a href=\"%s\">", file_name_pom);
-			Export((char *)nazov_modlitby(_global_modlitba + 1));
+			Export((char *)nazov_modlitby(_local_modlitba + 1));
 			Export(" ");
 			Export((char *)html_text_batch_Next[_global_jazyk]);
 			Export("</a>");
@@ -171,7 +175,13 @@ void hlavicka(char *title, short int level){
 	return;
 }/* hlavicka() */
 
-void hlavicka(char *title, FILE * expt, short int level){
+void hlavicka(char *title, FILE * expt, short int level, short int spec){
+	_local_modlitba = _global_modlitba;
+	if((_local_modlitba == MODL_PRVE_VESPERY) || (_local_modlitba == MODL_DRUHE_VESPERY))
+		_local_modlitba = MODL_VESPERY;
+	if((_local_modlitba == MODL_PRVE_KOMPLETORIUM) || (_local_modlitba == MODL_DRUHE_KOMPLETORIUM))
+		_local_modlitba = MODL_KOMPLETORIUM;
+
 	/* 
 	 * 2003-07-01, pridane pripadne citanie zo suboru
 	 * 2008-08-08: èítanie zo súboru odstránené
@@ -218,36 +228,34 @@ void hlavicka(char *title, FILE * expt, short int level){
 	fprintf(expt, "%s\">\n", nazov_css_suboru); // názov css súboru
 	fprintf(expt, "<title>%s</title>\n", title);
 	fprintf(expt, "</head>\n\n");
-	fprintf(expt, "<body>\n");
-/*
-	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
-		// ^ hore
-		fprintf(expt, "<p><a href=\".%s%s\">", STR_PATH_SEPARATOR_HTML, _global_export_navig_hore); // v tom istom adresári
-		fprintf(expt, (char *)html_text_batch_Back[_global_jazyk]);
-		fprintf(expt, "</a></p>");
-	}
-*/
+
+	/* 2010-02-15: kvôli špeciálnemu "zoznam.htm" */
+	if(spec == 1)
+		fprintf(expt, "<body onLoad=\"fn_aktualne(0,0,0)\">\n");
+	else
+		fprintf(expt, "<body>\n");
+
 	/* 2010-02-15: doplnené predošlá a nasledovná modlitba */
 	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
 		fprintf(expt, "<center>\n");
 		pismeno_modlitby = '_';
-		if((_global_modlitba < MODL_NEURCENA) && (_global_modlitba >= MODL_INVITATORIUM))
-			pismeno_modlitby = char_modlitby[_global_modlitba];
+		if((_local_modlitba < MODL_NEURCENA) && (_local_modlitba >= MODL_INVITATORIUM))
+			pismeno_modlitby = char_modlitby[_local_modlitba];
 		sprintf(ext, "%c", pismeno_modlitby);
 		strcat(ext, ".htm");
 		fprintf(expt, "<p>");
 		// << prev
 		mystrcpy(file_name_pom, FILE_EXPORT, MAX_STR);
 		ptr = strstr(file_name_pom, ext);
-		if((_global_modlitba < MODL_NEURCENA) && (_global_modlitba > MODL_INVITATORIUM)){
+		if((_local_modlitba < MODL_NEURCENA) && (_local_modlitba > MODL_INVITATORIUM)){
 			if(ptr != NULL){
-				sprintf(pismeno_prev, "%c", char_modlitby[_global_modlitba - 1]);
+				sprintf(pismeno_prev, "%c", char_modlitby[_local_modlitba - 1]);
 				strncpy(ptr, pismeno_prev, 1);
 			}
 			fprintf(expt, "<a href=\"%s\">", file_name_pom);
 			fprintf(expt, (char *)html_text_batch_Prev[_global_jazyk]);
 			fprintf(expt, " ");
-			fprintf(expt, (char *)nazov_modlitby(_global_modlitba - 1));
+			fprintf(expt, (char *)nazov_modlitby(_local_modlitba - 1));
 			fprintf(expt, "</a>");
 		}
 		// |
@@ -261,13 +269,13 @@ void hlavicka(char *title, FILE * expt, short int level){
 		// >> next
 		mystrcpy(file_name_pom, FILE_EXPORT, MAX_STR);
 		ptr = strstr(file_name_pom, ext);
-		if((_global_modlitba != MODL_NEURCENA) && (_global_modlitba < MODL_KOMPLETORIUM)){
+		if((_local_modlitba != MODL_NEURCENA) && (_local_modlitba < MODL_KOMPLETORIUM)){
 			if(ptr != NULL){
-				sprintf(pismeno_next, "%c", char_modlitby[_global_modlitba + 1]);
+				sprintf(pismeno_next, "%c", char_modlitby[_local_modlitba + 1]);
 				strncpy(ptr, pismeno_next, 1);
 			}
 			fprintf(expt, "<a href=\"%s\">", file_name_pom);
-			fprintf(expt, (char *)nazov_modlitby(_global_modlitba + 1));
+			fprintf(expt, (char *)nazov_modlitby(_local_modlitba + 1));
 			fprintf(expt, " ");
 			fprintf(expt, (char *)html_text_batch_Next[_global_jazyk]);
 			fprintf(expt, "</a>");
@@ -294,6 +302,12 @@ const char *html_mail_label_short = "J. V.";
 
 /* exportuje patku HTML dokumentu (vysledok query) */
 void patka(void){
+	_local_modlitba = _global_modlitba;
+	if((_local_modlitba == MODL_PRVE_VESPERY) || (_local_modlitba == MODL_DRUHE_VESPERY))
+		_local_modlitba = MODL_VESPERY;
+	if((_local_modlitba == MODL_PRVE_KOMPLETORIUM) || (_local_modlitba == MODL_DRUHE_KOMPLETORIUM))
+		_local_modlitba = MODL_KOMPLETORIUM;
+
 	time_t t;
 	struct tm dnes;
 	int baserok = 1999;
@@ -316,23 +330,23 @@ void patka(void){
 	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
 		Export("<center>\n");
 		pismeno_modlitby = '_';
-		if((_global_modlitba < MODL_NEURCENA) && (_global_modlitba >= MODL_INVITATORIUM))
-			pismeno_modlitby = char_modlitby[_global_modlitba];
+		if((_local_modlitba < MODL_NEURCENA) && (_local_modlitba >= MODL_INVITATORIUM))
+			pismeno_modlitby = char_modlitby[_local_modlitba];
 		sprintf(ext, "%c", pismeno_modlitby);
 		strcat(ext, ".htm");
 		Export("<p>");
 		// << prev
 		mystrcpy(file_name_pom, FILE_EXPORT, MAX_STR);
 		ptr = strstr(file_name_pom, ext);
-		if((_global_modlitba < MODL_NEURCENA) && (_global_modlitba > MODL_INVITATORIUM)){
+		if((_local_modlitba < MODL_NEURCENA) && (_local_modlitba > MODL_INVITATORIUM)){
 			if(ptr != NULL){
-				sprintf(pismeno_prev, "%c", char_modlitby[_global_modlitba - 1]);
+				sprintf(pismeno_prev, "%c", char_modlitby[_local_modlitba - 1]);
 				strncpy(ptr, pismeno_prev, 1);
 			}
 			Export("<a href=\"%s\">", file_name_pom);
 			Export((char *)html_text_batch_Prev[_global_jazyk]);
 			Export(" ");
-			Export((char *)nazov_modlitby(_global_modlitba - 1));
+			Export((char *)nazov_modlitby(_local_modlitba - 1));
 			Export("</a>");
 		}
 		// |
@@ -346,13 +360,13 @@ void patka(void){
 		// >> next
 		mystrcpy(file_name_pom, FILE_EXPORT, MAX_STR);
 		ptr = strstr(file_name_pom, ext);
-		if((_global_modlitba != MODL_NEURCENA) && (_global_modlitba < MODL_KOMPLETORIUM)){
+		if((_local_modlitba != MODL_NEURCENA) && (_local_modlitba < MODL_KOMPLETORIUM)){
 			if(ptr != NULL){
-				sprintf(pismeno_next, "%c", char_modlitby[_global_modlitba + 1]);
+				sprintf(pismeno_next, "%c", char_modlitby[_local_modlitba + 1]);
 				strncpy(ptr, pismeno_next, 1);
 			}
 			Export("<a href=\"%s\">", file_name_pom);
-			Export((char *)nazov_modlitby(_global_modlitba + 1));
+			Export((char *)nazov_modlitby(_local_modlitba + 1));
 			Export(" ");
 			Export((char *)html_text_batch_Next[_global_jazyk]);
 			Export("</a>");
@@ -363,13 +377,20 @@ void patka(void){
 
 	Export("<hr>\n"); /* bolo tu <hr size=1>, ale to je v css-ku; 2003-07-02 */
 	Export("<center>");
+
+	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
+		mystrcpy(html_mail_label, html_mail_label_short, MAX_MAIL_LABEL);
+	}
+	else
+	{
+		mystrcpy(html_mail_label, html_mail_label_long, MAX_MAIL_LABEL);
+	}
+
 	/* 2010-02-15: celé zapoznámkované */
 	if(1 == 1 || _global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
-		mystrcpy(html_mail_label, html_mail_label_short, MAX_MAIL_LABEL);
 		Export("<"HTML_P_PATKA">\n");
 	}
 	else{
-		mystrcpy(html_mail_label, html_mail_label_long, MAX_MAIL_LABEL);
 		Export("<"HTML_P_PATKA">%s\n", gpage[_global_jazyk]);
 		/* Export("(%s). ", ctime(&t) + 4); */
 		/* 2008-12-22: odvetvené - pre commandline export (do súboru) sa netlaèí èasová zložka, kedy bolo HTML generované */
@@ -411,6 +432,12 @@ void patka(void){
 
 /* exportuje patku HTML dokumentu (vysledok query) */
 void patka(FILE * expt){
+	_local_modlitba = _global_modlitba;
+	if((_local_modlitba == MODL_PRVE_VESPERY) || (_local_modlitba == MODL_DRUHE_VESPERY))
+		_local_modlitba = MODL_VESPERY;
+	if((_local_modlitba == MODL_PRVE_KOMPLETORIUM) || (_local_modlitba == MODL_DRUHE_KOMPLETORIUM))
+		_local_modlitba = MODL_KOMPLETORIUM;
+
 	time_t t;
 	struct tm dnes;
 	int baserok = 1999;
@@ -433,23 +460,23 @@ void patka(FILE * expt){
 	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
 		fprintf(expt, "<center>\n");
 		pismeno_modlitby = '_';
-		if((_global_modlitba < MODL_NEURCENA) && (_global_modlitba >= MODL_INVITATORIUM))
-			pismeno_modlitby = char_modlitby[_global_modlitba];
+		if((_local_modlitba < MODL_NEURCENA) && (_local_modlitba >= MODL_INVITATORIUM))
+			pismeno_modlitby = char_modlitby[_local_modlitba];
 		sprintf(ext, "%c", pismeno_modlitby);
 		strcat(ext, ".htm");
 		fprintf(expt, "<p>");
 		// << prev
 		mystrcpy(file_name_pom, FILE_EXPORT, MAX_STR);
 		ptr = strstr(file_name_pom, ext);
-		if((_global_modlitba < MODL_NEURCENA) && (_global_modlitba > MODL_INVITATORIUM)){
+		if((_local_modlitba < MODL_NEURCENA) && (_local_modlitba > MODL_INVITATORIUM)){
 			if(ptr != NULL){
-				sprintf(pismeno_prev, "%c", char_modlitby[_global_modlitba - 1]);
+				sprintf(pismeno_prev, "%c", char_modlitby[_local_modlitba - 1]);
 				strncpy(ptr, pismeno_prev, 1);
 			}
 			fprintf(expt, "<a href=\"%s\">", file_name_pom);
 			fprintf(expt, (char *)html_text_batch_Prev[_global_jazyk]);
 			fprintf(expt, " ");
-			fprintf(expt, (char *)nazov_modlitby(_global_modlitba - 1));
+			fprintf(expt, (char *)nazov_modlitby(_local_modlitba - 1));
 			fprintf(expt, "</a>");
 		}
 		// |
@@ -463,13 +490,13 @@ void patka(FILE * expt){
 		// >> next
 		mystrcpy(file_name_pom, FILE_EXPORT, MAX_STR);
 		ptr = strstr(file_name_pom, ext);
-		if((_global_modlitba != MODL_NEURCENA) && (_global_modlitba < MODL_KOMPLETORIUM)){
+		if((_local_modlitba != MODL_NEURCENA) && (_local_modlitba < MODL_KOMPLETORIUM)){
 			if(ptr != NULL){
-				sprintf(pismeno_next, "%c", char_modlitby[_global_modlitba + 1]);
+				sprintf(pismeno_next, "%c", char_modlitby[_local_modlitba + 1]);
 				strncpy(ptr, pismeno_next, 1);
 			}
 			fprintf(expt, "<a href=\"%s\">", file_name_pom);
-			fprintf(expt, (char *)nazov_modlitby(_global_modlitba + 1));
+			fprintf(expt, (char *)nazov_modlitby(_local_modlitba + 1));
 			fprintf(expt, " ");
 			fprintf(expt, (char *)html_text_batch_Next[_global_jazyk]);
 			fprintf(expt, "</a>");
@@ -481,13 +508,19 @@ void patka(FILE * expt){
 	fprintf(expt, "<hr>\n"); /* bolo tu <hr size=1>, ale to je v css-ku; 2003-07-02 */
 	fprintf(expt, "<center>");
 
+	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
+		mystrcpy(html_mail_label, html_mail_label_short, MAX_MAIL_LABEL);
+	}
+	else
+	{
+		mystrcpy(html_mail_label, html_mail_label_long, MAX_MAIL_LABEL);
+	}
+
 	/* 2010-02-15: celé zapoznámkované */
 	if(1 == 1 || _global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
-		mystrcpy(html_mail_label, html_mail_label_short, MAX_MAIL_LABEL);
 		fprintf(expt, "<"HTML_P_PATKA">\n");
 	}
 	else{
-		mystrcpy(html_mail_label, html_mail_label_long, MAX_MAIL_LABEL);
 		fprintf(expt, "<"HTML_P_PATKA">%s\n", gpage[_global_jazyk]);
 		/* fprintf(expt, "(%s). ", ctime(&t) + 4); */
 		/* 2008-12-22: odvetvené - pre commandline export (do súboru) sa netlaèí èasová zložka, kedy bolo HTML generované */

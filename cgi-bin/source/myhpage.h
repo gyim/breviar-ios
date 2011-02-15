@@ -23,8 +23,8 @@
 // #define FILE_FOOTER "_footer.htm"
 
 /* exportuje hlavicku HTML dokumentu, kam pojde vysledok query */
-void hlavicka(char *, short int level = 0);
-void hlavicka(char *, FILE *, short int level = 0);
+void hlavicka(char *, short int level = 0, short int spec = 0);
+void hlavicka(char *, FILE *, short int level = 0, short int spec = 0);
 
 /* exportuje patku HTML dokumentu (vysledok query) */
 void patka(void);
