@@ -151,6 +151,8 @@
 /*                  - tam, kde typslav = SLAV_SPOMIENKA ide o dominikánske, nastavené smer = 11 */
 /*                  - neštandardné zásahy do slávnosti Cyrila a Metoda kvôli CZOP               */
 /*   2010-07-08a.D. | zavedené ïalšie _vlastna_cast_full_okrem_...(); opravy CZOP               */
+/*   2010-07-12a.D. | upravené _set_spolocna_cast(): spoloèná èas na ofícium za zosnulıch      */
+/*                    vdy berie vlastné almy                                                  */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -9081,6 +9083,10 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 	else if(a == MODL_SPOL_CAST_ZA_ZOSNULYCH){
 
 		Log("/* spolocna cast na oficium za zosnulych */\n");
+		/* 2010-07-12: upravené tak, e spoloèná èas na ofícium za zosnulıch vdy berie vlastné almy */
+		Log("/* upravené tak, e spoloèná èas na ofícium za zosnulıch vdy berie vlastné almy */\n");
+		short int _global_opt2_pom = _global_opt2;
+		_global_opt2 = MODL_ZALMY_ZO_SV;
 
 		/* invitatórium; 2007-11-14 */
 		modlitba = MODL_INVITATORIUM;
@@ -9133,6 +9139,8 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		 */
 		_spolocna_cast_1cit_zvazok(modlitba, _anchor_pom, _anchor_zvazok, _anchor_head, _file, brat_1citanie);
 
+		Log("/* upravené tak, e spoloèná èas na ofícium za zosnulıch vdy berie vlastné almy; vraciam spä nastavenie _global_opt2 */\n");
+		_global_opt2 = _global_opt2_pom;
 	}/* MODL_SPOL_CAST_ZA_ZOSNULYCH */
 
 	/* spolocna cast na sviatky posviacky chramu */
