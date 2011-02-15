@@ -10832,31 +10832,34 @@ label_25_MAR:
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					break;
 				case 5: /* MES_APR */
-					if(poradie_svaty == 1){
-						/* definovanie parametrov pre modlitbu */
+					/* 2009-03-25: pre Slovensko, Èesko atï. pod¾a všeobecného kalendára sv. Vincenta Ferrera, pre dominikánov presunuté na 5.5.... */
+					if(_global_jazyk != JAZYK_CZ_OP){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
 
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
 
-						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_benediktus;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
 
-						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
 
-						modlitba = MODL_VESPERY;
-						_vlastna_cast_magnifikat;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
 
-						break;
+							break;
+						}
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty1.meno, text_APR_05[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					}
-					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, text_APR_05[_global_jazyk], MENO_SVIATKU);
-					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
-					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					break;
 				case 7: /* MES_APR */
 					if(poradie_svaty == 1){
@@ -11491,6 +11494,36 @@ label_25_MAR:
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
 					break;
+				case 5: /* MES_MAY */
+					/* 2009-03-25: pre dominikánov presunuté z 5.4. zo všeobecného kalendára sv. Vincenta Ferrera... */
+					if(_global_jazyk == JAZYK_CZ_OP){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						_global_svaty1.smer = 10; /* povinne spomienky podla (vseobecneho) kalendara */
+						mystrcpy(_global_svaty1.meno, text_APR_05[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+					}
+					break;
 				case 6: /* MES_MAY */
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
@@ -11987,7 +12020,7 @@ label_25_MAR:
 						_global_svaty1.typslav = SLAV_SPOMIENKA;
 						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 						mystrcpy(_global_svaty1.meno, text_MAJ_24[_global_jazyk], MENO_SVIATKU);
-						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 					}
 					break;
@@ -14217,7 +14250,7 @@ label_25_MAR:
 						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					}
 					mystrcpy(_global_svaty1.meno, text_AUG_08[_global_jazyk], MENO_SVIATKU);
-					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ /*, MODL_SPOL_CAST_SV_MUZ_REHOLNIK */);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					break;
 				case 9: /* MES_AUG */
