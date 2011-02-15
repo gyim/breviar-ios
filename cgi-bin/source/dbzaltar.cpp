@@ -7660,16 +7660,17 @@ short int _spol_cast_je_panna(_struct_sc sc){
 #define _spolocna_cast_modlitba_prve_vesp _vlastna_cast_modlitba_prve_vesp
 /* #define _spolocna_cast_antifony		_vlastna_cast_antifony*/
 /* ... az na antifony... */
+/* 2009-11-10: upravenÈ pre modlitbu cez deÚ */
 #define _spolocna_cast_antifony {\
 	if((_global_opt3 != MODL_SPOL_CAST_NEBRAT)){\
 		Log("  antifony vlastnej casti zo sviatku...\n");\
-		sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1);\
+		sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI))? ANCHOR_ANTIFONY : ANCHOR_ANTIFONA1);\
 		_set_antifona1(modlitba, _file, _anchor);\
 		set_LOG_svsv;\
-		sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA2);\
+		sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI))? ANCHOR_ANTIFONY : ANCHOR_ANTIFONA2);\
 		_set_antifona2(modlitba, _file, _anchor);\
 		set_LOG_svsv;\
-		sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA3);\
+		sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI))? ANCHOR_ANTIFONY : ANCHOR_ANTIFONA3);\
 		_set_antifona3(modlitba, _file, _anchor);\
 		set_LOG_svsv;\
 	}\
@@ -9051,16 +9052,25 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		 */
 		_spolocna_cast_1cit_zvazok(modlitba, _anchor_pom, _anchor_zvazok, _anchor_head, _file, brat_1citanie);
 
-		/* modlitba cez deÚ, pridanÈ 2009-01-07; ûalmy a antifÛny sa ber˙ ako vo vöedn˝ deÚ */
+		/* modlitba cez deÚ, pridanÈ 2009-01-07; ûalmy a antifÛny sa ber˙ ako vo vöedn˝ deÚ 
+		 * 2009-11-10: antifÛny z vlastnej Ëasti
+		 * 2009-11-17: problÈm: pre v˝roËie posviacky Later·nskej baziliky nemaj˙ sa vziaù antifÛny a ûalmy zo spoloËnej Ëasti, ale zo dÚa
+		 */
 		modlitba = MODL_PREDPOLUDNIM;
+		if((_global_den.den != 9) && (_global_den.mesiac - 1 != MES_NOV))
+			_spolocna_cast_antifony;
 		_spolocna_cast_kcitanie;
 		_spolocna_cast_kresponz;
 		_spolocna_cast_modlitba;
 		modlitba = MODL_NAPOLUDNIE;
+		if((_global_den.den != 9) && (_global_den.mesiac - 1 != MES_NOV))
+			_spolocna_cast_antifony;
 		_spolocna_cast_kcitanie;
 		_spolocna_cast_kresponz;
 		_spolocna_cast_modlitba;
 		modlitba = MODL_POPOLUDNI;
+		if((_global_den.den != 9) && (_global_den.mesiac - 1 != MES_NOV))
+			_spolocna_cast_antifony;
 		_spolocna_cast_kcitanie;
 		_spolocna_cast_kresponz;
 		_spolocna_cast_modlitba;
@@ -16744,7 +16754,7 @@ label_25_MAR:
 						}
 						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
 						_global_svaty1.typslav_lokal = LOKAL_SLAV_KONSEKR_KOSTOLY;
-						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						_global_svaty1.typslav = SLAV_SLAVNOST;
 						mystrcpy(_global_svaty1.meno, text_OKT_26[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
@@ -16938,6 +16948,10 @@ label_25_MAR:
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
+						if(_global_jazyk == JAZYK_CZ){
+							/* 2009-11-10: odvetvenÈ pre Ëesk˝ brevi·¯ */
+							_vlastna_cast_hymnus;
+						}
 						_vlastna_cast_modlitba;
 
 						modlitba = MODL_POSV_CITANIE;
@@ -16945,6 +16959,10 @@ label_25_MAR:
 						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
+						if(_global_jazyk == JAZYK_CZ){
+							/* 2009-11-10: odvetvenÈ pre Ëesk˝ brevi·¯ */
+							_vlastna_cast_hymnus;
+						}
 						_vlastna_cast_modlitba;
 
 						break;
@@ -17110,6 +17128,7 @@ label_25_MAR:
 						 * ostatnÈ zo spoloËnej Ëasti [doplnenÈ do spoloËnej Ëasti: _set_spolocna_cast()];
 						 * doplnenÈ, aby modlitba aj pre modlitbu cez deÚ bola zo spoloËnej Ëasti
 						 * mimochodom, je predpÌsanÈ Te Deum
+						 * 2009-11-17: problÈm: nemaj˙ sa vziaù antifÛny a ûalmy zo spoloËnej Ëasti, ale zo dÚa... vyrieöenÈ v 
 						 */
 						break;
 					}
@@ -17240,6 +17259,8 @@ label_25_MAR:
 							_vlastna_cast_full(modlitba);
 
 							/* modlitba cez deÚ, pridanÈ 2009-08-04 */
+							/* 2009-11-17: odstavenÈ; totiû kedysi bol "sviatok", teraz "spomienka"; upozornil Mgr. Martin Kubeö, not·¯ */
+							/*
 							modlitba = MODL_PREDPOLUDNIM;
 							_vlastna_cast_kcitanie;
 							_vlastna_cast_kresponz;
@@ -17254,7 +17275,7 @@ label_25_MAR:
 							_vlastna_cast_kcitanie;
 							_vlastna_cast_kresponz;
 							_vlastna_cast_modlitba;
-
+							*/
 							break;
 						}
 						_global_svaty1.typslav = SLAV_SPOMIENKA;
@@ -17353,6 +17374,10 @@ label_25_MAR:
 						_vlastna_cast_modlitba;
 
 						modlitba = MODL_POSV_CITANIE;
+						if(_global_jazyk == JAZYK_CZ){
+							/* 2009-11-17: odvetvenÈ pre Ëesk˝ brevi·¯ */
+							_vlastna_cast_hymnus;
+						}
 						_vlastna_cast_modlitba;
 						_vlastna_cast_2citanie;
 
