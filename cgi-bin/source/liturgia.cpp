@@ -19,6 +19,7 @@
 /*   2004-08-14a.D. | char zmeneny na unsigned (_nedelne_p...) */
 /*   2005-03-21a.D. | pridany typ vypisu linky LINK_ISO_8601   */
 /*   2005-07-27a.D. | nová premenná v štrukt.dm: typslav_lokal */
+/*   2010-02-19a.D. | oprava velkonocna_nedela (špec. prípady) */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -802,8 +803,27 @@ _struct_den_mesiac velkonocna_nedela(short int R){
 	d = (x + (19 * a)) MOD 30;  /* DEBUG("d==%d", d); */
 	e = (y + (2 * b) + (4 * c) + (6 * d)) MOD 7;  /* DEBUG("e==%d", e); */
 /* velkonocna nedela je (22 + d + e). marca == (d + e - 9). aprila */
+	/* 22 + d + e je "poradové èíslo dòa v marci" (22 až 56), a teda ak je väèšie ako 31, je to apríl; 
+	 * ak je viac ako 56, treba posunú na predošlú nede¾u; viï nižšie
+	 */
 	if((22 + d + e) > 31){
-		result.den = d + e - 9;
+		/* 2010-02-18: opravené
+		 * ak ve¾konoèná nede¾a Gaussovým pravidlom vyjde na 26. apríla, posunie sa o týždeò dopredu 
+		 * upozornil Peter Chren <zal@zal.sk> 
+		 * pod¾a http://en.wikipedia.org/wiki/Computus upravené:
+		 * Gregorian Easter is 22 + d + e March or d + e - 9 April
+		 * if d = 29 and e = 6, replace 26 April with 19 April
+		 * if d = 28, e = 6, and (11M + 11) mod 30 < 19, replace 25 April with 18 April
+		 */
+		if((d == 29) && (e == 6)){
+			result.den = 19;
+		}
+		else if((d == 28) && (e == 6) && ((11 * x + 11) MOD 30 < 19)){
+			result.den = 18;
+		}
+		else{
+			result.den = d + e - 9;
+		}
 		result.mesiac = 4; /* april */
 	}
 	else{

@@ -145,6 +145,8 @@
 /*   2009-12-14a.D. | zakonèenie modlitby s malým písmenkom na zaèiatku    */
 /*   2010-02-15a.D. | upravené hlavièky aj pätky; kvôli tomu parsovanie    */
 /*                    parametra _global_modlitba predsunuté pred hlavicka()*/
+/*   2010-02-19a.D. | oprava funkcie velkonocna_nedela (špec. prípady pre  */
+/*                    Gaussovo pravidlo; èiastoène upozornil Peter Chren)  */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
