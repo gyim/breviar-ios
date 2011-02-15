@@ -14832,6 +14832,8 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+						if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))
+							_vlastna_cast_benediktus;
 
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
@@ -14839,6 +14841,8 @@ label_25_MAR:
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
+						if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))
+							_vlastna_cast_magnifikat;
 
 						break;
 					}
@@ -14846,7 +14850,14 @@ label_25_MAR:
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					/* kedysi pre CZ: _global_svaty1.typslav_lokal = LOKAL_SLAV_MORAVA_SPOMIENKA; */
 					mystrcpy(_global_svaty1.meno, text_JUL_27[_global_jazyk], MENO_SVIATKU);
-					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VIACERI);
+					if(_global_jazyk == JAZYK_SK){
+						/* 2010-07-27: slovenský breviár má: zo spol. èasti svätých mužov */
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VIACERI);
+					}
+					else{
+						/* 2010-07-27: èeský breviáø má: spol. texty o duchovních pastýøech */
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_VIACERI);
+					}
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					break;
 				case 29: /* MES_JUL */
