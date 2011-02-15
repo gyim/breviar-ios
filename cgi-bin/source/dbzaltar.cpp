@@ -11067,6 +11067,11 @@ label_25_MAR:
 								_vlastna_cast_hymnus;
 							}
 
+							if((_global_jazyk == JAZYK_CZ_OP) || ((_global_jazyk == JAZYK_CZ))){
+								/* 2009-08-27: doplnené modlitby cez deò */
+								_vlastna_cast_mcd_kcitresp_modl;
+							}
+
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
