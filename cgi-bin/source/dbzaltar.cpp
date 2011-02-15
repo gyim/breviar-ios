@@ -155,6 +155,7 @@
 /*                    vždy berie vlastné žalmy                                                  */
 /*   2010-08-03a.D. | upravené zaltar_kompletorium() a set_hymnus() kvôli dominikánom CZOP      */
 /*                  - nastavené _global_svaty[1,2,3].kalendar v sviatky_svatych()               */
+/*   2010-09-10a.D. | opravy správneho použitia responza pred 1. èítaním v posv. èítaniach      */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -7837,6 +7838,7 @@ short int _spol_cast_je_panna(_struct_sc sc){
  *
  * 2009-01-07: dorobené debug výpisy
  * 2009-09-18: nové parametre; Log("brat_antifony == %d\n", brat_antifony);
+ * 2010-09-10: pre posv. èítanie sa responz medzi psalmódiou a 1. èítaním berie len v prípade, že sa berie vlastné 1. èítanie
  */
 #define _spolocna_cast_full(modl) {\
 	Log("_spolocna_cast_full(%s)\n", nazov_modlitby(modl));\
@@ -7851,10 +7853,13 @@ short int _spol_cast_je_panna(_struct_sc sc){
 		_vlastna_cast_kcitanie;\
 	}\
 	if(((je_1cit_vlastne) || (brat_1citanie == ANO)) && (modl == MODL_POSV_CITANIE)){\
+		_spolocna_cast_kresponz;\
 		_spolocna_cast_1citanie;\
 	}\
 	if(su_kcit_kresp_prosby_vlastne || brat_kresp_prosby == ANO){\
-		_spolocna_cast_kresponz;\
+		if(modl != MODL_POSV_CITANIE){\
+			_spolocna_cast_kresponz;\
+		}\
 		_vlastna_cast_prosby;\
 	}\
 	if(modl == MODL_RANNE_CHVALY){\
@@ -8118,8 +8123,13 @@ void _spolocna_cast_kresponz_zvazok(short int modlitba, char *_anchor_pom, char 
 	Log("\tanchor_zvazok == %s\n", _anchor_zvazok);
 	Log("\tanchor == %s\n", _anchor);
 	Log("\tfile == %s\n", _file);
-	/* 2007-10-23 / 2007-09-28: pridané */
-	if(su_kcit_kresp_prosby_vlastne){
+	/* 2007-10-23 / 2007-09-28: pridané 
+	 * 2010-09-10: opravené, aby pre posv. èítanie bralo sa responzum len v prípade, že je vlastné 1. èítanie
+	 */
+	if(((modlitba != MODL_POSV_CITANIE) && (su_kcit_kresp_prosby_vlastne))
+		||
+		(((je_1cit_vlastne) /* || (brat_1citanie == ANO) */) && (modlitba == MODL_POSV_CITANIE))
+		){
 		if(!equals(_anchor_pom, STR_EMPTY)){
 			sprintf(_anchor_lokal, "%s%s%s%c%s", _anchor, _anchor_pom, _anchor_zvazok, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ);
 		}
