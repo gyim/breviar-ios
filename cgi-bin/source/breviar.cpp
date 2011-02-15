@@ -1504,8 +1504,8 @@ void interpretParameter(short int type, char *paramname){
 			Log("  ALELUJA_ALELUJA_BEGIN: skipping -- because skipping ZAKONCENIE\n");
 		}
 		else{
-			/* Od nedele P novho zmrtvychvstania a§ do Druhej velkonocnej nedele
-			 * vr tane, ako aj na druh‚ veçpery sl vnosti Zoslania Ducha Sv„t‚ho */
+			/* Od nedele Pánovho zmàtvychvstania až do Druhej ve¾konoènej nedele
+			 * vrátane, ako aj na druhé vešpery slávnosti Zoslania Ducha Svätého (teda ve¾konoèná oktáva + zakonèenie ve¾konoèného obdobia) */
 			if(je_aleluja_aleluja){
 #if defined(EXPORT_HTML_SPECIALS)
 				Export("velkonocna oktava");
@@ -1528,8 +1528,8 @@ void interpretParameter(short int type, char *paramname){
 			Log("  ALELUJA_ALELUJA_END: skipping -- because skipping ZAKONCENIE\n");
 		}
 		else{
-			/* Od nedele Panovho zmrtvychvstania az do Druhej velkonocnej nedele
-			 * vratane, ako aj na druhe vespery slavnosti Zoslania Ducha Svateho */
+			/* Od nedele Pánovho zmàtvychvstania až do Druhej ve¾konoènej nedele
+			 * vrátane, ako aj na druhé vešpery slávnosti Zoslania Ducha Svätého (teda ve¾konoèná oktáva + zakonèenie ve¾konoèného obdobia) */
 			if(je_aleluja_aleluja){
 				Export("<!--");
 #if defined(EXPORT_HTML_SPECIALS)

@@ -146,6 +146,7 @@
 /*                    zo spoloËnej Ëasti v set_spolocna_cast()                                  */
 /*   2010-05-17a.D. | pridanÈ niektorÈ maÔarskÈ sl·venia, zaËÌnam spracov·vaù JAZYK_HU          */
 /*   2010-06-07a.D. | opravenÈ generovanie niektor˝ch ËastÌ zo spol. ËastÌ pre spomienky        */
+/*   2010-06-08a.D. | pridan˝ popis ku kompletÛriu bielej soboty                                */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -6428,6 +6429,9 @@ label_24_DEC:
 				_set_zalmy_biela_sobota(modlitba);
 				modlitba = MODL_POPOLUDNI;
 				_set_zalmy_biela_sobota(modlitba);
+				modlitba = MODL_KOMPLETORIUM;
+				/* 2010-06-08: pridan˝ popis ku kompletÛriu bielej soboty */
+				_vtroj_popis;
 			}/* nie nedela, ale biela sobota */
 			else if(den == DEN_PIATOK){
 				modlitba = MODL_POSV_CITANIE;
