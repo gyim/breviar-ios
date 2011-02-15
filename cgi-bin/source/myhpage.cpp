@@ -21,6 +21,7 @@
 /*   2008-09-26a.D. | pridané použitie nazov_mesiaca()         */
 /*   2008-12-22a.D. | upravené exportovanie pätky (čas)        */
 /*   2009-08-05a.D. | upravené exportovanie hlavičky           */
+/*   2010-02-15a.D. | upravené hlavičky aj pätky (navigácia)   */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -41,6 +42,21 @@
 #include "mylog.h"
 #include "breviar.h" /* 2006-07-31 kvôli jazyku a css (2008-08-08) */
 #include "liturgia.h" /* 2006-07-31 kvôli jazyku */
+
+#ifndef __MYHPAGE_CPP_HTML_CONST
+#define __MYHPAGE_CPP_HTML_CONST
+const char *html_header_1 = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\n\t\"http://www.w3.org/TR/html4/loose.dtd\">\n<html>\n<head>\n\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1250\">\n\t<meta name=\"Author\" content=\"Juraj Vidéky\">\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"";
+#endif /*__MYHPAGE_CPP_HTML_CONST*/
+
+#define MAX_MAIL_LABEL 20
+#define MAX_EXT 5
+char html_mail_label[MAX_MAIL_LABEL];
+char pismeno_modlitby;
+char pismeno_prev[1];
+char pismeno_next[1];
+char ext[MAX_EXT];
+char file_name_pom[MAX_STR];
+char *ptr;
 
 /* exportuje hlavicku HTML dokumentu, kam pojde vysledok query */
 void hlavicka(char *title, short int level){
@@ -67,12 +83,8 @@ void hlavicka(char *title, short int level){
 	Log("creating header...\n");
 	/* 2003-07-15, zmenene na hlavicku pre css-ko; zrusene <style> */
 	/* 2008-08-08: pridané dynamicky css-ko */
-	Export("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\n");
-	Export("\t\"http://www.w3.org/TR/html4/loose.dtd\">\n");
-	Export("<html>\n<head>\n");
-	Export("\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1250\">\n");
-	Export("\t<meta name=\"Author\" content=\"Juraj Vidéky\">\n");
-	Export("\t<link rel=\"stylesheet\" type=\"text/css\" href=\"");
+	/* 2010-02-15: statické texty do konštánt */
+	Export((char *)html_header_1);
 #ifdef	EXPORT_CMDLINE_CSS
 	// pre command-line použitie (aj pre batch mód): "./breviar.css" resp. ".\breviar.css"
 	/* 2009-08-03: level označuje počet adresárov, o ktoré je treba ísť "hore" (pre mesačný export) */
@@ -99,12 +111,63 @@ void hlavicka(char *title, short int level){
 	Export("<title>%s</title>\n", title);
 	Export("</head>\n\n");
 	Export("<body>\n");
+/*
 	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
 		// ^ hore
 		Export("<p><a href=\".%s%s\">", STR_PATH_SEPARATOR_HTML, _global_export_navig_hore); // v tom istom adresári
 		Export((char *)html_text_batch_Back[_global_jazyk]);
 		Export("</a></p>");
 	}
+*/
+	/* 2010-02-15: doplnené predošlá a nasledovná modlitba */
+	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
+		Export("<center>\n");
+		pismeno_modlitby = '_';
+		if((_global_modlitba < MODL_NEURCENA) && (_global_modlitba >= MODL_INVITATORIUM))
+			pismeno_modlitby = char_modlitby[_global_modlitba];
+		sprintf(ext, "%c", pismeno_modlitby);
+		strcat(ext, ".htm");
+		Export("<p>");
+		// << prev
+		mystrcpy(file_name_pom, FILE_EXPORT, MAX_STR);
+		ptr = strstr(file_name_pom, ext);
+		if((_global_modlitba < MODL_NEURCENA) && (_global_modlitba > MODL_INVITATORIUM)){
+			if(ptr != NULL){
+				sprintf(pismeno_prev, "%c", char_modlitby[_global_modlitba - 1]);
+				strncpy(ptr, pismeno_prev, 1);
+			}
+			Export("<a href=\"%s\">", file_name_pom);
+			Export((char *)html_text_batch_Prev[_global_jazyk]);
+			Export(" ");
+			Export((char *)nazov_modlitby(_global_modlitba - 1));
+			Export("</a>");
+		}
+		// |
+		Export(" | ");
+		// ^ hore
+		Export("<a href=\".%s%s\">", STR_PATH_SEPARATOR_HTML, _global_export_navig_hore); // v tom istom adresári
+		Export((char *)html_text_batch_Back[_global_jazyk]);
+		Export("</a>");
+		// |
+		Export(" | ");
+		// >> next
+		mystrcpy(file_name_pom, FILE_EXPORT, MAX_STR);
+		ptr = strstr(file_name_pom, ext);
+		if((_global_modlitba != MODL_NEURCENA) && (_global_modlitba < MODL_KOMPLETORIUM)){
+			if(ptr != NULL){
+				sprintf(pismeno_next, "%c", char_modlitby[_global_modlitba + 1]);
+				strncpy(ptr, pismeno_next, 1);
+			}
+			Export("<a href=\"%s\">", file_name_pom);
+			Export((char *)nazov_modlitby(_global_modlitba + 1));
+			Export(" ");
+			Export((char *)html_text_batch_Next[_global_jazyk]);
+			Export("</a>");
+		}
+		Export("</p>");
+		Export("</center>\n");
+	}/* << predošlá | ^ hore | nasledovná >> */
+
 	return;
 }/* hlavicka() */
 
@@ -128,12 +191,8 @@ void hlavicka(char *title, FILE * expt, short int level){
 	Log("creating header...\n");
 	/* 2003-07-15, zmenene na hlavicku pre css-ko; zrusene <style> */
 	/* 2008-08-08: pridané dynamicky css-ko */
-	fprintf(expt, "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"");
-	fprintf(expt, "\t\"http://www.w3.org/TR/html4/loose.dtd\">");
-	fprintf(expt, "<html>\n<head>\n");
-	fprintf(expt, "\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1250\">\n");
-	fprintf(expt, "\t<meta name=\"Author\" content=\"Juraj Vidéky\">\n");
-	fprintf(expt, "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"");
+	/* 2010-02-15: statické texty do konštánt */
+	fprintf(expt, (char *)html_header_1);
 #ifdef	EXPORT_CMDLINE_CSS
 	// pre command-line použitie (aj pre batch mód): "./breviar.css" resp. ".\breviar.css"
 	/* 2009-08-03: level označuje počet adresárov, o ktoré je treba ísť "hore" (pre mesačný export) */
@@ -160,12 +219,63 @@ void hlavicka(char *title, FILE * expt, short int level){
 	fprintf(expt, "<title>%s</title>\n", title);
 	fprintf(expt, "</head>\n\n");
 	fprintf(expt, "<body>\n");
+/*
 	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
 		// ^ hore
 		fprintf(expt, "<p><a href=\".%s%s\">", STR_PATH_SEPARATOR_HTML, _global_export_navig_hore); // v tom istom adresári
 		fprintf(expt, (char *)html_text_batch_Back[_global_jazyk]);
 		fprintf(expt, "</a></p>");
 	}
+*/
+	/* 2010-02-15: doplnené predošlá a nasledovná modlitba */
+	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
+		fprintf(expt, "<center>\n");
+		pismeno_modlitby = '_';
+		if((_global_modlitba < MODL_NEURCENA) && (_global_modlitba >= MODL_INVITATORIUM))
+			pismeno_modlitby = char_modlitby[_global_modlitba];
+		sprintf(ext, "%c", pismeno_modlitby);
+		strcat(ext, ".htm");
+		fprintf(expt, "<p>");
+		// << prev
+		mystrcpy(file_name_pom, FILE_EXPORT, MAX_STR);
+		ptr = strstr(file_name_pom, ext);
+		if((_global_modlitba < MODL_NEURCENA) && (_global_modlitba > MODL_INVITATORIUM)){
+			if(ptr != NULL){
+				sprintf(pismeno_prev, "%c", char_modlitby[_global_modlitba - 1]);
+				strncpy(ptr, pismeno_prev, 1);
+			}
+			fprintf(expt, "<a href=\"%s\">", file_name_pom);
+			fprintf(expt, (char *)html_text_batch_Prev[_global_jazyk]);
+			fprintf(expt, " ");
+			fprintf(expt, (char *)nazov_modlitby(_global_modlitba - 1));
+			fprintf(expt, "</a>");
+		}
+		// |
+		fprintf(expt, " | ");
+		// ^ hore
+		fprintf(expt, "<a href=\".%s%s\">", STR_PATH_SEPARATOR_HTML, _global_export_navig_hore); // v tom istom adresári
+		fprintf(expt, (char *)html_text_batch_Back[_global_jazyk]);
+		fprintf(expt, "</a>");
+		// |
+		fprintf(expt, " | ");
+		// >> next
+		mystrcpy(file_name_pom, FILE_EXPORT, MAX_STR);
+		ptr = strstr(file_name_pom, ext);
+		if((_global_modlitba != MODL_NEURCENA) && (_global_modlitba < MODL_KOMPLETORIUM)){
+			if(ptr != NULL){
+				sprintf(pismeno_next, "%c", char_modlitby[_global_modlitba + 1]);
+				strncpy(ptr, pismeno_next, 1);
+			}
+			fprintf(expt, "<a href=\"%s\">", file_name_pom);
+			fprintf(expt, (char *)nazov_modlitby(_global_modlitba + 1));
+			fprintf(expt, " ");
+			fprintf(expt, (char *)html_text_batch_Next[_global_jazyk]);
+			fprintf(expt, "</a>");
+		}
+		fprintf(expt, "</p>");
+		fprintf(expt, "</center>\n");
+	}/* << predošlá | ^ hore | nasledovná >> */
+
 	return;
 }/* hlavicka() */
 
@@ -178,6 +288,9 @@ const char *datum_cas_template[POCET_JAZYKOV + 1] = {"%d. %s %d, %02d:%02d", "%d
 const char *build_template[POCET_JAZYKOV + 1] = {"<!--Verzia: %s.-->", "<!--Verze: %s.-->", "<!--Build: %s.-->", "<!--Build: %s.-->", "<!--Build: %s.-->", "<!--Verze: %s.-->", "<!--Build: %s.-->"};
 // Generované + dátum (bez času - pre batch mód, aby sa ľahko porovnávali vygenerované modlitby): "%d. %s %d"
 const char *datum_template[POCET_JAZYKOV + 1] = {"%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d"};
+
+const char *html_mail_label_long = "Juraj Vidéky";
+const char *html_mail_label_short = "J. V.";
 
 /* exportuje patku HTML dokumentu (vysledok query) */
 void patka(void){
@@ -199,39 +312,96 @@ void patka(void){
 		sprintf(rok, "-%d", dnes.tm_year);
 	}
 
+	/* 2010-02-15: vložené "^ hore" podľa hlavicka(); doplnené predošlá a nasledovná modlitba */
+	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
+		Export("<center>\n");
+		pismeno_modlitby = '_';
+		if((_global_modlitba < MODL_NEURCENA) && (_global_modlitba >= MODL_INVITATORIUM))
+			pismeno_modlitby = char_modlitby[_global_modlitba];
+		sprintf(ext, "%c", pismeno_modlitby);
+		strcat(ext, ".htm");
+		Export("<p>");
+		// << prev
+		mystrcpy(file_name_pom, FILE_EXPORT, MAX_STR);
+		ptr = strstr(file_name_pom, ext);
+		if((_global_modlitba < MODL_NEURCENA) && (_global_modlitba > MODL_INVITATORIUM)){
+			if(ptr != NULL){
+				sprintf(pismeno_prev, "%c", char_modlitby[_global_modlitba - 1]);
+				strncpy(ptr, pismeno_prev, 1);
+			}
+			Export("<a href=\"%s\">", file_name_pom);
+			Export((char *)html_text_batch_Prev[_global_jazyk]);
+			Export(" ");
+			Export((char *)nazov_modlitby(_global_modlitba - 1));
+			Export("</a>");
+		}
+		// |
+		Export(" | ");
+		// ^ hore
+		Export("<a href=\".%s%s\">", STR_PATH_SEPARATOR_HTML, _global_export_navig_hore); // v tom istom adresári
+		Export((char *)html_text_batch_Back[_global_jazyk]);
+		Export("</a>");
+		// |
+		Export(" | ");
+		// >> next
+		mystrcpy(file_name_pom, FILE_EXPORT, MAX_STR);
+		ptr = strstr(file_name_pom, ext);
+		if((_global_modlitba != MODL_NEURCENA) && (_global_modlitba < MODL_KOMPLETORIUM)){
+			if(ptr != NULL){
+				sprintf(pismeno_next, "%c", char_modlitby[_global_modlitba + 1]);
+				strncpy(ptr, pismeno_next, 1);
+			}
+			Export("<a href=\"%s\">", file_name_pom);
+			Export((char *)nazov_modlitby(_global_modlitba + 1));
+			Export(" ");
+			Export((char *)html_text_batch_Next[_global_jazyk]);
+			Export("</a>");
+		}
+		Export("</p>");
+		Export("</center>\n");
+	}/* << predošlá | ^ hore | nasledovná >> */
+
 	Export("<hr>\n"); /* bolo tu <hr size=1>, ale to je v css-ku; 2003-07-02 */
 	Export("<center>");
-	Export("<"HTML_P_PATKA">%s\n", gpage[_global_jazyk]);
-	/* Export("(%s). ", ctime(&t) + 4); */
-	/* 2008-12-22: odvetvené - pre commandline export (do súboru) sa netlačí časová zložka, kedy bolo HTML generované */
+	/* 2010-02-15: celé zapoznámkované */
+	if(1 == 1 || _global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
+		mystrcpy(html_mail_label, html_mail_label_short, MAX_MAIL_LABEL);
+		Export("<"HTML_P_PATKA">\n");
+	}
+	else{
+		mystrcpy(html_mail_label, html_mail_label_long, MAX_MAIL_LABEL);
+		Export("<"HTML_P_PATKA">%s\n", gpage[_global_jazyk]);
+		/* Export("(%s). ", ctime(&t) + 4); */
+		/* 2008-12-22: odvetvené - pre commandline export (do súboru) sa netlačí časová zložka, kedy bolo HTML generované */
 #if defined(EXPORT_TO_FILE)
-	Export((char *)datum_template[_global_jazyk],
-		dnes.tm_mday,
-		nazov_mesiaca(dnes.tm_mon)/* (_global_jazyk == JAZYK_CZ) ? nm_cz[dnes.tm_mon] : nm[dnes.tm_mon] */,
-		dnes.tm_year
-		);
+		Export((char *)datum_template[_global_jazyk],
+			dnes.tm_mday,
+			nazov_mesiaca(dnes.tm_mon)/* (_global_jazyk == JAZYK_CZ) ? nm_cz[dnes.tm_mon] : nm[dnes.tm_mon] */,
+			dnes.tm_year
+			);
 #else
-	Export((char *)datum_cas_template[_global_jazyk],
-		dnes.tm_mday,
-		nazov_mesiaca(dnes.tm_mon)/* (_global_jazyk == JAZYK_CZ) ? nm_cz[dnes.tm_mon] : nm[dnes.tm_mon] */,
-		dnes.tm_year,
-		dnes.tm_hour,
-		dnes.tm_min
-		// , dnes.tm_sec
-		);
+		Export((char *)datum_cas_template[_global_jazyk],
+			dnes.tm_mday,
+			nazov_mesiaca(dnes.tm_mon)/* (_global_jazyk == JAZYK_CZ) ? nm_cz[dnes.tm_mon] : nm[dnes.tm_mon] */,
+			dnes.tm_year,
+			dnes.tm_hour,
+			dnes.tm_min
+			// , dnes.tm_sec
+			);
 #endif
-	Export(". ");
+		Export(". ");
 
-	/* nezabudni zmenit #define BUILD_DATE v mydefs.h!!! (2003-07-15) */
-	Export((char *)build_template[_global_jazyk], BUILD_DATE);
+		/* nezabudni zmenit #define BUILD_DATE v mydefs.h!!! (2003-07-15) */
+		Export((char *)build_template[_global_jazyk], BUILD_DATE);
 
-	/* zapoznamkovane, 2003-06-30 */
-	/* Export("Kódovanie Windows-1250 (Central European).\n"); */
-	Export("<br>\n");
+		/* zapoznamkovane, 2003-06-30 */
+		/* Export("Kódovanie Windows-1250 (Central European).\n"); */
+		Export("<br>\n");
+	}
 
 	/* pridana stranka cfg_HTTP_ADDRESS_default, 12/04/2000A.D. */
 	Export("<"HTML_LINK_NORMAL" href=\"%s\" target=\"_top\">%s</a>\n", cfg_HTTP_ADDRESS_default, cfg_HTTP_DISPLAY_ADDRESS_default);
-	Export("&#169; %d%s <"HTML_LINK_NORMAL" href=\"mailto:%s\">Juraj Vidéky</a>\n", baserok, rok, cfg_MAIL_ADDRESS_default);
+	Export("&#169; %d%s <"HTML_LINK_NORMAL" href=\"mailto:%s\">%s</a>\n", baserok, rok, cfg_MAIL_ADDRESS_default, html_mail_label);
 
 	Export("</p>\n"); /* pridane kvoli tomu, ze cele to bude <p class="patka">, 2003-07-02 */
 	Export("</center>");
@@ -259,39 +429,97 @@ void patka(FILE * expt){
 		sprintf(rok, "-%d", dnes.tm_year);
 	}
 
+	/* 2010-02-15: vložené "^ hore" podľa hlavicka(); doplnené predošlá a nasledovná modlitba */
+	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
+		fprintf(expt, "<center>\n");
+		pismeno_modlitby = '_';
+		if((_global_modlitba < MODL_NEURCENA) && (_global_modlitba >= MODL_INVITATORIUM))
+			pismeno_modlitby = char_modlitby[_global_modlitba];
+		sprintf(ext, "%c", pismeno_modlitby);
+		strcat(ext, ".htm");
+		fprintf(expt, "<p>");
+		// << prev
+		mystrcpy(file_name_pom, FILE_EXPORT, MAX_STR);
+		ptr = strstr(file_name_pom, ext);
+		if((_global_modlitba < MODL_NEURCENA) && (_global_modlitba > MODL_INVITATORIUM)){
+			if(ptr != NULL){
+				sprintf(pismeno_prev, "%c", char_modlitby[_global_modlitba - 1]);
+				strncpy(ptr, pismeno_prev, 1);
+			}
+			fprintf(expt, "<a href=\"%s\">", file_name_pom);
+			fprintf(expt, (char *)html_text_batch_Prev[_global_jazyk]);
+			fprintf(expt, " ");
+			fprintf(expt, (char *)nazov_modlitby(_global_modlitba - 1));
+			fprintf(expt, "</a>");
+		}
+		// |
+		fprintf(expt, " | ");
+		// ^ hore
+		fprintf(expt, "<a href=\".%s%s\">", STR_PATH_SEPARATOR_HTML, _global_export_navig_hore); // v tom istom adresári
+		fprintf(expt, (char *)html_text_batch_Back[_global_jazyk]);
+		fprintf(expt, "</a>");
+		// |
+		fprintf(expt, " | ");
+		// >> next
+		mystrcpy(file_name_pom, FILE_EXPORT, MAX_STR);
+		ptr = strstr(file_name_pom, ext);
+		if((_global_modlitba != MODL_NEURCENA) && (_global_modlitba < MODL_KOMPLETORIUM)){
+			if(ptr != NULL){
+				sprintf(pismeno_next, "%c", char_modlitby[_global_modlitba + 1]);
+				strncpy(ptr, pismeno_next, 1);
+			}
+			fprintf(expt, "<a href=\"%s\">", file_name_pom);
+			fprintf(expt, (char *)nazov_modlitby(_global_modlitba + 1));
+			fprintf(expt, " ");
+			fprintf(expt, (char *)html_text_batch_Next[_global_jazyk]);
+			fprintf(expt, "</a>");
+		}
+		fprintf(expt, "</p>");
+		fprintf(expt, "</center>\n");
+	}/* << predošlá | ^ hore | nasledovná >> */
+
 	fprintf(expt, "<hr>\n"); /* bolo tu <hr size=1>, ale to je v css-ku; 2003-07-02 */
 	fprintf(expt, "<center>");
-	fprintf(expt, "<"HTML_P_PATKA">%s\n", gpage[_global_jazyk]);
-	/* fprintf(expt, "(%s). ", ctime(&t) + 4); */
-	/* 2008-12-22: odvetvené - pre commandline export (do súboru) sa netlačí časová zložka, kedy bolo HTML generované */
+
+	/* 2010-02-15: celé zapoznámkované */
+	if(1 == 1 || _global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
+		mystrcpy(html_mail_label, html_mail_label_short, MAX_MAIL_LABEL);
+		fprintf(expt, "<"HTML_P_PATKA">\n");
+	}
+	else{
+		mystrcpy(html_mail_label, html_mail_label_long, MAX_MAIL_LABEL);
+		fprintf(expt, "<"HTML_P_PATKA">%s\n", gpage[_global_jazyk]);
+		/* fprintf(expt, "(%s). ", ctime(&t) + 4); */
+		/* 2008-12-22: odvetvené - pre commandline export (do súboru) sa netlačí časová zložka, kedy bolo HTML generované */
 #if defined(EXPORT_TO_FILE)
-	fprintf(expt, (char *)datum_template[_global_jazyk],
-		dnes.tm_mday,
-		nazov_mesiaca(dnes.tm_mon) /* nm[dnes.tm_mon] */,
-		dnes.tm_year
-		);
+		fprintf(expt, (char *)datum_template[_global_jazyk],
+			dnes.tm_mday,
+			nazov_mesiaca(dnes.tm_mon) /* nm[dnes.tm_mon] */,
+			dnes.tm_year
+			);
 #else
-	fprintf(expt, (char *)datum_cas_template[_global_jazyk],
-		dnes.tm_mday,
-		nazov_mesiaca(dnes.tm_mon) /* nm[dnes.tm_mon] */,
-		dnes.tm_year,
-		dnes.tm_hour,
-		dnes.tm_min
-		// , dnes.tm_sec
-		);
+		fprintf(expt, (char *)datum_cas_template[_global_jazyk],
+			dnes.tm_mday,
+			nazov_mesiaca(dnes.tm_mon) /* nm[dnes.tm_mon] */,
+			dnes.tm_year,
+			dnes.tm_hour,
+			dnes.tm_min
+			// , dnes.tm_sec
+			);
 #endif
-	fprintf(expt, ". ");
+		fprintf(expt, ". ");
 
-	/* nezabudni zmenit #define BUILD_DATE v mydefs.h!!! (2003-07-15) */
-	fprintf(expt, (char *)build_template[_global_jazyk], BUILD_DATE);
+		/* nezabudni zmenit #define BUILD_DATE v mydefs.h!!! (2003-07-15) */
+		fprintf(expt, (char *)build_template[_global_jazyk], BUILD_DATE);
 
-	/* zapoznamkovane, 2003-06-30 */
-	/* fprintf(expt, "Kódovanie Windows-1250 (Central European).\n"); */
-	fprintf(expt, "<br>\n");
+		/* zapoznamkovane, 2003-06-30 */
+		/* fprintf(expt, "Kódovanie Windows-1250 (Central European).\n"); */
+		fprintf(expt, "<br>\n");
+	}
 
 	/* pridana stranka cfg_HTTP_ADDRESS_default, 12/04/2000A.D. */
 	fprintf(expt, "<"HTML_LINK_NORMAL" href=\"%s\" target=\"_top\">%s</a>\n", cfg_HTTP_ADDRESS_default, cfg_HTTP_DISPLAY_ADDRESS_default);
-	fprintf(expt, "&#169; %d%s <"HTML_LINK_NORMAL" href=\"mailto:%s\">Juraj Vidéky</a>\n", baserok, rok, cfg_MAIL_ADDRESS_default);
+	fprintf(expt, "&#169; %d%s <"HTML_LINK_NORMAL" href=\"mailto:%s\">%s</a>\n", baserok, rok, cfg_MAIL_ADDRESS_default, html_mail_label);
 
 	fprintf(expt, "</p>\n"); /* pridane kvoli tomu, ze cele to bude <p class="patka">, 2003-07-02 */
 	fprintf(expt, "</center>");

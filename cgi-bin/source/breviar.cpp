@@ -143,6 +143,8 @@
 /*                    sviatky, Miestne povinné spomienky]; pred touto      */
 /*                    úpravou bola kontrola (_global_svaty1.smer >= 11)    */
 /*   2009-12-14a.D. | zakonèenie modlitby s malım písmenkom na zaèiatku    */
+/*   2010-02-15a.D. | upravené hlavièky aj pätky; kvôli tomu parsovanie    */
+/*                    parametra _global_modlitba predsunuté pred hlavicka()*/
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -6679,7 +6681,7 @@ short int atocss(char *css){
 /* 2006-02-10: novı define; pouíva premenné int i, p 
  * 2006-10-11: odpoznámkované invitatórium a kompletórium
  */
-#define _parsuj_parameter_MODLITBA {\
+#define _parsuj_parameter_MODLITBA(modlitba, p) {\
 	/* rozparsovanie parametra modlitba */\
 	Log("/* rozparsovanie parametra modlitba */\n");\
 	if(equals(modlitba, STR_EMPTY))\
@@ -6714,13 +6716,13 @@ short int atocss(char *css){
 		 * a to pre konstanty MODL_INVITATORIUM -- MODL_DETAILY (vratane)\
 		 */\
 		Log("/* druhı pokus urèenia modlitby pod¾a jazykovo závislıch reazcov pre modlitba == `%s' */\n", modlitba);\
-		for(i = MODL_INVITATORIUM; i <= MODL_DETAILY; i++){\
-			Log("/* step: %d `%s'...\n */", i, nazov_modlitby(i));\
-			if(equals(modlitba, nazov_modlitby(i)) || \
-				equals(modlitba, nazov_Modlitby(i)) /*|| \
-				equals(modlitba, nazov_MODLITBY[i])*/){\
+		for(int pom_i = MODL_INVITATORIUM; pom_i <= MODL_DETAILY; pom_i++){\
+			Log("/* step: %d `%s'...\n */", pom_i, nazov_modlitby(pom_i));\
+			if(equals(modlitba, nazov_modlitby(pom_i)) || \
+				equals(modlitba, nazov_Modlitby(pom_i)) /*|| \
+				equals(modlitba, nazov_MODLITBY[pom_i])*/){\
 				/* ak je zhoda, potom prirad do p a ukonci `for' */\
-				p = i;\
+				p = pom_i;\
 				break;\
 			}\
 		}\
@@ -6953,7 +6955,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 	Log("sv == `%s' (upravené na %d)\n", poradie_svaty, s);
 
 	/* rozparsovanie parametra modlitba */
-	_parsuj_parameter_MODLITBA;
+	_parsuj_parameter_MODLITBA(modlitba, p);
 
 	_global_modlitba = p;
 	Log("modl == %s (%d, %s) -- priradene do _global_modlitba\n", modlitba, p, nazov_modlitby(p));
@@ -7397,7 +7399,7 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 	Log("sv == `%s' (upravené na %d)\n", poradie_svaty, s);
 
 	/* rozparsovanie parametra modlitba */
-	_parsuj_parameter_MODLITBA;
+	_parsuj_parameter_MODLITBA(modlitba, p);
 
 	_global_modlitba = p;
 	Log("modl == %s (%d, %s) -- priradene do _global_modlitba\n", modlitba, p, nazov_modlitby(p));
@@ -10681,6 +10683,8 @@ int main(int argc, char **argv){
 					Log("continuing to export in FILE_EXPORT (`%s')...\n", FILE_EXPORT);
 				}
 				else{
+					/* 2010-02-15? pridané: rozparsovanie parametra modlitba */
+					_parsuj_parameter_MODLITBA(pom_MODLITBA, _global_modlitba);
 					/* pridane 2003-07-08 */
 					if(_global_opt_append == YES){
 						/* pridame na koniec nazvu suboru "+" aby to vedel initExport() */
@@ -10969,6 +10973,8 @@ _main_SIMULACIA_QS:
 			}
 
 			_main_LOG_to_Export("_global_jazyk == %s\n", nazov_jazyka[_global_jazyk]);
+			/* 2010-02-15? pridané: rozparsovanie parametra modlitba */
+			_parsuj_parameter_MODLITBA(pom_MODLITBA, _global_modlitba);
 			hlavicka((char *)html_title[_global_jazyk]);
 
 			_main_LOG_to_Export("/* teraz nasleduje vykonanie jadra programu podla parametrov */\n");
