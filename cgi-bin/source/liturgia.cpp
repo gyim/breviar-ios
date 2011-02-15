@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* liturgia.cpp                                                */
-/* (c)1999-2005 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2010 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne vecicky pre liturgiu hodin  */
 /* document history                                            */
@@ -20,6 +20,7 @@
 /*   2005-03-21a.D. | pridany typ vypisu linky LINK_ISO_8601   */
 /*   2005-07-27a.D. | nová premenná v štrukt.dm: typslav_lokal */
 /*   2010-02-19a.D. | oprava velkonocna_nedela (špec. prípady) */
+/*   2010-05-21a.D. | nejaké doplnenia pre maïarèinu (JAZYK_HU)*/
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -663,6 +664,15 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 					}
 					else if(_global_jazyk == JAZYK_EN){
 						sprintf(pom, "%s %d", nazov_Mesiaca(mesiac - 1), den);
+						if(typ == LINK_DEN_MESIAC_ROK){
+							/* pridame aj rok */
+							strcat(_global_link, pom);
+							sprintf(pom, ", %d", rok);
+						}
+					}
+					/* 2010-05-21: doplnené pre maïarèinu */
+					else if(_global_jazyk == JAZYK_HU){
+						sprintf(pom, "%s %d.", nazov_Mesiaca(mesiac - 1), den);
 						if(typ == LINK_DEN_MESIAC_ROK){
 							/* pridame aj rok */
 							strcat(_global_link, pom);
@@ -1382,21 +1392,24 @@ void Log(_struct_dm g){
 		sc.a1, nazov_spolc(sc.a1), sc.a2, nazov_spolc(sc.a2), sc.a3, nazov_spolc(sc.a3));
 }
 
+/* 2010-05-21: rozšírené kvôli spomienkam a ¾ubovo¾ným spomienkam v pôstnom období (zobrazenie po modlitbe dòa pôstnej férie) */
 void Log(struct tmodlitba1 t){
 	Log_struktura_tm1("struktura tmodlitba1:\n");
-	Log_struktura_tm1("   popis           file `%s', anchor `%s'\n", t.popis.file, t.popis.anchor);
-	Log_struktura_tm1("   hymnus          file `%s', anchor `%s'\n", t.hymnus.file, t.hymnus.anchor);
-	Log_struktura_tm1("   antifona1       file `%s', anchor `%s'\n", t.antifona1.file, t.antifona1.anchor);
-	Log_struktura_tm1("   zalm1           file `%s', anchor `%s'\n", t.zalm1.file, t.zalm1.anchor);
-	Log_struktura_tm1("   antifona2       file `%s', anchor `%s'\n", t.antifona2.file, t.antifona2.anchor);
-	Log_struktura_tm1("   zalm2           file `%s', anchor `%s'\n", t.zalm2.file, t.zalm2.anchor);
-	Log_struktura_tm1("   antifona3       file `%s', anchor `%s'\n", t.antifona3.file, t.antifona3.anchor);
-	Log_struktura_tm1("   zalm3           file `%s', anchor `%s'\n", t.zalm3.file, t.zalm3.anchor);
-	Log_struktura_tm1("   kcitanie (c1)   file `%s', anchor `%s'\n", t.kcitanie.file, t.kcitanie.anchor);
-	Log_struktura_tm1("   kresponz        file `%s', anchor `%s'\n", t.kresponz.file, t.kresponz.anchor);
-	Log_struktura_tm1("   bened/mag (c2)  file `%s', anchor `%s'\n", t.benediktus.file, t.benediktus.anchor); /* antifona na benediktus/magnifikat */
-	Log_struktura_tm1("   prosby          file `%s', anchor `%s'\n", t.prosby.file, t.prosby.anchor);
-	Log_struktura_tm1("   modlitba        file `%s', anchor `%s'\n", t.modlitba.file, t.modlitba.anchor);
+	Log_struktura_tm1("   popis             file `%s', anchor `%s'\n", t.popis.file, t.popis.anchor);
+	Log_struktura_tm1("   hymnus            file `%s', anchor `%s'\n", t.hymnus.file, t.hymnus.anchor);
+	Log_struktura_tm1("   antifona1         file `%s', anchor `%s'\n", t.antifona1.file, t.antifona1.anchor);
+	Log_struktura_tm1("   zalm1             file `%s', anchor `%s'\n", t.zalm1.file, t.zalm1.anchor);
+	Log_struktura_tm1("   antifona2         file `%s', anchor `%s'\n", t.antifona2.file, t.antifona2.anchor);
+	Log_struktura_tm1("   zalm2             file `%s', anchor `%s'\n", t.zalm2.file, t.zalm2.anchor);
+	Log_struktura_tm1("   antifona3         file `%s', anchor `%s'\n", t.antifona3.file, t.antifona3.anchor);
+	Log_struktura_tm1("   zalm3             file `%s', anchor `%s'\n", t.zalm3.file, t.zalm3.anchor);
+	Log_struktura_tm1("   kcitanie (c1)     file `%s', anchor `%s'\n", t.kcitanie.file, t.kcitanie.anchor);
+	Log_struktura_tm1("   kresponz          file `%s', anchor `%s'\n", t.kresponz.file, t.kresponz.anchor);
+	Log_struktura_tm1("   bened/mag (c2)    file `%s', anchor `%s'\n", t.benediktus.file, t.benediktus.anchor); /* antifona na benediktus/magnifikat */
+	Log_struktura_tm1("   prosby            file `%s', anchor `%s'\n", t.prosby.file, t.prosby.anchor);
+	Log_struktura_tm1("   modlitba          file `%s', anchor `%s'\n", t.modlitba.file, t.modlitba.anchor);
+	Log_struktura_tm1("   ant_spompost      file `%s', anchor `%s'\n", t.ant_spompost.file, t.ant_spompost.anchor);
+	Log_struktura_tm1("   modlitba_spompost file `%s', anchor `%s'\n", t.modlitba_spompost.file, t.modlitba_spompost.anchor);
 }
 
 void Log(struct tmodlitba2 t){

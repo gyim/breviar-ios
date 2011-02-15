@@ -154,11 +154,16 @@
 /*   * ako kompilovat a linkovat?                                          */
 /*     najdi zarazku KOMPILACIA -- niekde ku koncu                         */
 /*     pozri tiez POUCENIE                                                 */
+/*                                                                         */
 /*   * unfinished parts: oznaèené !!! alebo xxx                            */
-/*   * debug in VC++/VStuido: alt+f7, zalozka Debug, Program arguments     */
+/*                                                                         */
+/*   * èasti na cleanup (vyèistenie kódu) ozn. TODO_CLEANUP (2010-05-21)   */
+/*                                                                         */
+/*   * debug in VC++/VStudio: alt+f7, zalozka Debug, Program arguments     */
 /*     napr. -qpbm -d1 -m1 -r2000 -f2 -g2 -p2001 -ba.txt                   */
 /*     -i..\..\..\web\include\ -qpsqs -s"qt=pcr&dvt=pondelok&t=2&p=mpc"    */
 /*     lh -qpdt -d30 -m4 -r2002 -pmrch -ic:\temp\breviar\ -emoja.htm       */
+/*                                                                         */
 /*                                                                         */
 /***************************************************************************/
 
@@ -1786,6 +1791,41 @@ void interpretParameter(short int type, char *paramname){
 		}
 	}
 
+	/* 2010-05-21: pridané volite¾né zobrazovanie antifóny a modlitby pre spomienku svätca v pôstnom období */
+	else if(equals(paramname, PARAM_POST_SPOMIENKA_BEGIN)){
+		if(je_post){
+			/* zobrazi antifónu/modlitbu v pôste na spomienky svätcov */
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("zobrazit ant.");
+#endif
+			Export("-->");
+			Log("  `spom.post.': begin...\n");
+		}
+		else{
+			/* nezobrazi antifónu/modlitbu v pôste na spomienky svätcov */
+			_global_skip_in_prayer = ANO;
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("nezobrazit spom.post.");
+#endif
+			Log("  `spom.post.' skipping...\n");
+		}
+	}
+	else if(equals(paramname, PARAM_POST_SPOMIENKA_END)){
+		if(je_post){
+			/* zobrazi antifónu/modlitbu v pôste na spomienky svätcov */
+			Export("<!--");
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("zobrazit spom.post.");
+#endif
+			Log("  `spom.post.': copied.\n");
+		}
+		else{
+			/* nezobrazi antifónu/modlitbu v pôste na spomienky svätcov */
+			_global_skip_in_prayer = NIE;
+			Log("  `spom.post.' skipped.\n");
+		}
+	}
+
 	/* pokracuju dalsie klasicke `tagy' v modlitbach (teda templatoch) */
 	else if(equals(paramname, PARAM_POPIS)){
 		/* pridane 05/04/2000A.D. */
@@ -2370,6 +2410,36 @@ void interpretParameter(short int type, char *paramname){
 				break;
 		}/* switch */
 	}/* PARAM_MODLITBA */
+	else if(equals(paramname, PARAM_ANT_SPOMPOST)){ /* 2010-05-21: pridané kvôli spomienkam a ¾ubovo¾nım spomienkam v pôstnom období (zobrazenie po modlitbe dòa pôstnej férie) */
+		switch(type){
+			case MODL_RANNE_CHVALY:
+				strcat(path, _global_modl_ranne_chvaly.ant_spompost.file);
+				includeFile(type, paramname, path, _global_modl_ranne_chvaly.ant_spompost.anchor);
+				break;
+			case MODL_VESPERY:
+				strcat(path, _global_modl_vespery.ant_spompost.file);
+				includeFile(type, paramname, path, _global_modl_vespery.ant_spompost.anchor);
+				break;
+			default:
+				/* tieto modlitby nemajú monos spomienky na svätca v pôstnom období */
+				break;
+		}/* switch */
+	}/* PARAM_ANT_SPOMPOST */
+	else if(equals(paramname, PARAM_MODL_SPOMPOST)){ /* 2010-05-21: pridané kvôli spomienkam a ¾ubovo¾nım spomienkam v pôstnom období (zobrazenie po modlitbe dòa pôstnej férie) */
+		switch(type){
+			case MODL_RANNE_CHVALY:
+				strcat(path, _global_modl_ranne_chvaly.modlitba_spompost.file);
+				includeFile(type, paramname, path, _global_modl_ranne_chvaly.modlitba_spompost.anchor);
+				break;
+			case MODL_VESPERY:
+				strcat(path, _global_modl_vespery.modlitba_spompost.file);
+				includeFile(type, paramname, path, _global_modl_vespery.modlitba_spompost.anchor);
+				break;
+			default:
+				/* tieto modlitby nemajú monos spomienky na svätca v pôstnom období */
+				break;
+		}/* switch */
+	}/* PARAM_MODL_SPOMPOST */
 	Log("interpretParameter(%s): Dumped by %s - OK.\n", paramname, paramname);
 }/* interpretParameter() */
 
@@ -5478,9 +5548,30 @@ void _export_rozbor_dna(short int typ){
 		if((_global_den.smer > _global_svaty1.smer) ||
 			(_global_den.smer == 9) && (_global_svaty1.smer == 12)){
 				/* 2009-01-05: Vlado K. ma upozornil, e ak je smer svätı == 12, ale deò je 9 (bod 59. smerníc o LH a kalendári, è. 12),
-				 * bolo by lepšie ponúknu najprv deò a a potom ostatné slávenia */
+				 *             bolo by lepšie ponúknu najprv deò a a potom ostatné slávenia 
+				 * 2010-05-21: Rastislav Hamráèek SDB <rastohamracek@sdb.sk> upozornil defacto na to isté ako Vlado: aby to bolo pod¾a direktória
+				 */
 			if(_global_den.smer > _global_svaty1.smer){
-				/* sviatok, spomienka alebo ¾ubovo¾ná spomienka svätého/svätıch, ide prv ako všednı deò */
+
+				/* 2005-08-22: pôvodne sa tu porovnávalo s 12, ale aj pre 11 (lokálne slávenia) 
+				 *             by mal systém ponúknu všednı deò - keï je to napr. v inej diecéze
+				 * 2009-11-26: porovnávame klasicky, resp. špeciálne pre body 4, 8, 11 [Miestne slávnosti, Miestne sviatky, Miestne povinné spomienky]
+				 *             pred touto úpravou tu bolo: if((_global_svaty1.smer >= 11) && atï.
+				 * 2010-05-21: sem presunuté potenciálne vypisovanie (export) všedného dòa pred prvého svätca, ak je ¾ubovo¾ná spomienka
+				 *             teraz vlastne obe vetvy vyzerajú rovnako, asi to zjednotím èasom... (TODO_CLEANUP)
+				 */
+				if(((_global_svaty1.smer >= 12) || (_global_svaty1.smer == 4) || (_global_svaty1.smer == 8) || (_global_svaty1.smer == 11)) &&
+					(typ != EXPORT_DNA_VIAC_DNI)){
+					/* ak je to iba lubovolna spomienka, tak vsedny den */
+					/* 2010-05-21: NEWLINE; bolo pred; musíme ho zaradi za :) */
+					BUTTONS(typ, 0);
+					NEWLINE;
+				}
+
+				/* 2010-05-21: pôvodne bolo: "sviatok, spomienka alebo ¾ubovo¾ná spomienka svätého/svätıch, ide prv ako všednı deò"; 
+				 *             dnes ide prv len ak je to sviatok alebo spomienka 
+				 *             (a vlastne vtedy sa všednı deò vypisuje len pre lokálne sviatky resp. spomienky) 
+				 */
 				BUTTONS(typ, 1);
 				if(_global_pocet_svatych > 1){
 					NEWLINE;
@@ -5490,17 +5581,7 @@ void _export_rozbor_dna(short int typ){
 						BUTTONS(typ, 3);
 					}
 				}
-				/* 2005-08-22: pôvodne sa tu porovnávalo s 12, ale aj pre 11 (lokálne slávenia) 
-				 *             by mal systém ponúknu všednı deò - keï je to napr. v inej diecéze
-				 * 2009-11-26: porovnávame klasicky, resp. špeciálne pre body 4, 8, 11 [Miestne slávnosti, Miestne sviatky, Miestne povinné spomienky]
-				 *             pred touto úpravou tu bolo: if((_global_svaty1.smer >= 11) && atï.
-				 */
-				if(((_global_svaty1.smer >= 12) || (_global_svaty1.smer == 4) || (_global_svaty1.smer == 8) || (_global_svaty1.smer == 11)) &&
-					(typ != EXPORT_DNA_VIAC_DNI)){
-					/* ak je to iba lubovolna spomienka, tak vsedny den */
-					NEWLINE;
-					BUTTONS(typ, 0);
-				}
+				/* 2010-05-21: odtia¾to presunuté potenciálne vypisovanie (export) všedného dòa pred prvého svätca, ak je ¾ubovo¾ná spomienka */
 			}
 			else{
 				/* ¾ubovo¾ná spomienka svätého/svätıch, prièom všednı deò má vyššiu prioritu slávenia */
@@ -7319,6 +7400,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				else if(_global_jazyk == JAZYK_EN){
 					sprintf(pom, "%s %d, %d", nazov_Mesiaca(m - 1), d, r);
 				}
+				/* 2010-05-21: doplnené pre maïarèinu */
 				else if(_global_jazyk == JAZYK_HU){
 					sprintf(pom, "%s %d., %d", nazov_Mesiaca(m - 1), d, r);
 				}
@@ -7421,6 +7503,10 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 	}
 	else if(_global_jazyk == JAZYK_EN){
 		sprintf(pom, "%s %d, %d", nazov_Mesiaca(dnes.tm_mon - 1), dnes.tm_mday, dnes.tm_year);
+	}
+	/* 2010-05-21: doplnené pre maïarèinu */
+	else if(_global_jazyk == JAZYK_HU){
+		sprintf(pom, "%s %d., %d", nazov_Mesiaca(dnes.tm_mon - 1), dnes.tm_mday, dnes.tm_year);
 	}
 	else{
 		/* doterajšie správanie pre slovenèinu a èeštinu */

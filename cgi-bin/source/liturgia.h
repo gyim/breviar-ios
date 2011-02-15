@@ -53,6 +53,7 @@
 /*   2009-12-14a.D. | zakonËenie modlitby s mal˝m pÌsmenkom na zaËiatku */
 /*   2010-03-16a.D. | doplnenÈ LOKAL_SLAV_BRATISLAVA           */
 /*   2010-05-17a.D. | pridanÈ niektorÈ maÔarskÈ sl·venia       */
+/*   2010-05-21a.D. | doplnenÈ: PARAM_POST_SPOMIENKA_BEGIN/END */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -146,6 +147,8 @@ struct tmodlitba1{
 	_struct_anchor_and_file benediktus; /* antifona na benediktus/magnifikat/nunc dimittis; 2. citanie pre posvatne citanie */
 	_struct_anchor_and_file prosby    ; /* pre posvatne citanie nedefinovane */
 	_struct_anchor_and_file modlitba  ;
+	_struct_anchor_and_file ant_spompost; /* 2010-05-21: pridanÈ kvÙli spomienkam a æubovoæn˝m spomienkam v pÙstnom obdobÌ (zobrazenie po modlitbe dÚa pÙstnej fÈrie) */
+	_struct_anchor_and_file modlitba_spompost; /* 2010-05-21: pridanÈ kvÙli spomienkam a æubovoæn˝m spomienkam v pÙstnom obdobÌ (zobrazenie po modlitbe dÚa pÙstnej fÈrie) */
 };
 typedef struct tmodlitba1 _type_ranne_chvaly;
 typedef struct tmodlitba1 _type_vespery;
@@ -315,33 +318,36 @@ extern const char *TEMPLAT[];
 #define INCLUDE_END     "END"   /* koniec */
 
 /* parameter identifiers */
-#define PARAM_POPIS        "POPIS" /* pridane 05/04/2000A.D. */
-#define PARAM_HYMNUS       "HYMNUS"
-#define PARAM_ANTIFONA1    "ANTIFONA1"
-#define PARAM_ANTIFONA2    "ANTIFONA2"
-#define PARAM_ANTIFONA3    "ANTIFONA3"
-#define PARAM_ZALM1        "ZALM1"
-#define PARAM_ZALM2        "ZALM2"
-#define PARAM_ZALM3        "ZALM3"
-#define PARAM_ANTRCHVAL    "ANTRCHVAL" /* vlastne ANTIFONA2 */
-#define PARAM_ANTVCHVAL    "ANTVCHVAL" /* vlastne ANTIFONA3 */
-#define PARAM_RCHVALOSPEV  "RCHVALOSPEV" /* vlastne ZALM2 */
-#define PARAM_VCHVALOSPEV  "VCHVALOSPEV" /* vlastne ZALM3 */
-#define PARAM_KCITANIE     "KCITANIE"
-#define PARAM_KRESPONZ     "KRESPONZ"
-#define PARAM_MAGNIFIKAT   "MAGNIFIKAT" /* antifona na magnifikat */
-#define PARAM_BENEDIKTUS   "BENEDIKTUS" /* antifona na benediktus */
-#define PARAM_PROSBY       "PROSBY"
-#define PARAM_MODLITBA     "MODLITBA"
+#define PARAM_POPIS         "POPIS" /* pridane 05/04/2000A.D. */
+#define PARAM_HYMNUS        "HYMNUS"
+#define PARAM_ANTIFONA1     "ANTIFONA1"
+#define PARAM_ANTIFONA2     "ANTIFONA2"
+#define PARAM_ANTIFONA3     "ANTIFONA3"
+#define PARAM_ZALM1         "ZALM1"
+#define PARAM_ZALM2         "ZALM2"
+#define PARAM_ZALM3         "ZALM3"
+#define PARAM_ANTRCHVAL     "ANTRCHVAL" /* vlastne ANTIFONA2 */
+#define PARAM_ANTVCHVAL     "ANTVCHVAL" /* vlastne ANTIFONA3 */
+#define PARAM_RCHVALOSPEV   "RCHVALOSPEV" /* vlastne ZALM2 */
+#define PARAM_VCHVALOSPEV   "VCHVALOSPEV" /* vlastne ZALM3 */
+#define PARAM_KCITANIE      "KCITANIE"
+#define PARAM_KRESPONZ      "KRESPONZ"
+#define PARAM_MAGNIFIKAT    "MAGNIFIKAT" /* antifona na magnifikat */
+#define PARAM_BENEDIKTUS    "BENEDIKTUS" /* antifona na benediktus */
+#define PARAM_PROSBY        "PROSBY"
+#define PARAM_MODLITBA      "MODLITBA"
 /* pridane 2003-08-06, upravene 2003-08-21 */                                        
-#define PARAM_CITANIE1     "CITANIE1" /* vlastne KCITANIE */
-#define PARAM_CITANIE2     "CITANIE2" /* vlastne BENEDIKTUS */
+#define PARAM_CITANIE1      "CITANIE1" /* vlastne KCITANIE */
+#define PARAM_CITANIE2      "CITANIE2" /* vlastne BENEDIKTUS */
 /* 2007-10-02: pridanÈ kvÙli rovnak˝m antifÛnam pre modlitbu cez deÚ */
-#define PARAM_ANTIFONA1x   "ANTIFONA1_DRUHA"
-#define PARAM_ANTIFONA3x   "ANTIFONA3_PRVA"
+#define PARAM_ANTIFONA1x    "ANTIFONA1_DRUHA"
+#define PARAM_ANTIFONA3x    "ANTIFONA3_PRVA"
 /* 2008-04-03: pridanÈ kvÙli kompletÛriu vo veækonoËnom obdobÌ, Ëi pri druhej antifÛne zobraziù dvojku alebo nie */
-#define PARAM_ANTIFONA1k   "ANTIFONA1_KOMPLET"
-#define PARAM_ANTIFONA2k   "ANTIFONA2_KOMPLET"
+#define PARAM_ANTIFONA1k    "ANTIFONA1_KOMPLET"
+#define PARAM_ANTIFONA2k    "ANTIFONA2_KOMPLET"
+/* 2010-05-21: pridanÈ kvÙli spomienkam a æubovoæn˝m spomienkam v pÙstnom obdobÌ (zobrazenie po modlitbe dÚa pÙstnej fÈrie) */
+#define PARAM_ANT_SPOMPOST  "ANT_SPOMPOST"
+#define PARAM_MODL_SPOMPOST "MODL_SPOMPOST"
 
 /* dalsie parametre: specificke pre obdobie */
 /* Od nedele P·novho zm‡tvychvstania aû do Druhej veækonoËnej nedele vr·tane,
@@ -389,6 +395,9 @@ extern const char *TEMPLAT[];
 #define PARAM_ZAKONCENIE_SKRZE_MALE         "ZAKONCENIE_SKRZE_MALE"
 #define PARAM_ZAKONCENIE_LEBO_TY_MALE       "ZAKONCENIE_LEBO_TY_MALE"
 #define PARAM_ZAKONCENIE_LEBO_ON_MALE       "ZAKONCENIE_LEBO_ON_MALE"
+/* 2010-05-21: doplnenÈ zobrazenie antifÛny a modlitby pre spomienku sv‰tca v pÙstnom obdobÌ */
+#define PARAM_POST_SPOMIENKA_BEGIN           "POST_SPOMIENKA_BEGIN"
+#define PARAM_POST_SPOMIENKA_END             "POST_SPOMIENKA_END"
 
 /* stringy parametrov vstupu pre MODL_OPT..., ktore generovanie modlitby
  * ovplyvnuju */
@@ -1158,6 +1167,7 @@ void _init_dm(_struct_dm a);
 	mystrcpy(a.anchor, STR_UNDEF, MAX_STR_AF_ANCHOR); \
 }
 
+/* 2010-05-21: rozöÌrenÈ kvÙli spomienkam a æubovoæn˝m spomienkam v pÙstnom obdobÌ (zobrazenie po modlitbe dÚa pÙstnej fÈrie) */
 #define _INIT_TMODLITBA1(a) {\
 	_INIT_ANCHOR_AND_FILE(a.popis); \
 	_INIT_ANCHOR_AND_FILE(a.hymnus); \
@@ -1172,6 +1182,8 @@ void _init_dm(_struct_dm a);
 	_INIT_ANCHOR_AND_FILE(a.benediktus); \
 	_INIT_ANCHOR_AND_FILE(a.prosby); \
 	_INIT_ANCHOR_AND_FILE(a.modlitba); \
+	_INIT_ANCHOR_AND_FILE(a.ant_spompost); \
+	_INIT_ANCHOR_AND_FILE(a.modlitba_spompost); \
 };
 
 #define _INIT_TMODLITBA2(a) {\
