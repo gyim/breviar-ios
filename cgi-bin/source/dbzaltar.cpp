@@ -8283,7 +8283,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* prvé vešpery */
 		modlitba = MODL_PRVE_VESPERY;
-		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV)){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX */
+		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnené brat_zalmy */
 			Log("  _set_zalmy_sviatok_duch_past(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_duch_past(modlitba);
 		}
@@ -8429,7 +8429,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* prvé vešpery */
 		modlitba = MODL_PRVE_VESPERY;
-		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV)){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX */
+		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnené brat_zalmy */
 			Log("  _set_zalmy_sviatok_muc(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_muc(modlitba);
 		}
@@ -8501,7 +8501,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* prvé vešpery */
 		modlitba = MODL_PRVE_VESPERY;
-		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV)){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX */
+		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnené brat_zalmy */
 			Log("  _set_zalmy_sviatok_muc(%s, 2)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_muc(modlitba, 2);
 		}
@@ -8790,7 +8790,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* prvé vešpery */
 		modlitba = MODL_PRVE_VESPERY;
-		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV)){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX */
+		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnené brat_zalmy */
 			Log("  _set_zalmy_sviatok_duch_past(%s)... - pretože pre svätých mužov sa berú tie isté žalmy\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_duch_past(modlitba);
 		}
@@ -8865,7 +8865,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* prvé vešpery */
 		modlitba = MODL_PRVE_VESPERY;
-		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV)){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX */
+		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnené brat_zalmy */
 			Log("  _set_zalmy_sviatok_panien(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_panien(modlitba);
 		}
@@ -8930,7 +8930,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* prvé vešpery */
 		modlitba = MODL_PRVE_VESPERY;
-		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV)){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX */
+		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnené brat_zalmy */
 			Log("  _set_zalmy_sviatok_panien(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_panien(modlitba);
 		}
@@ -8984,7 +8984,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* prvé vešpery */
 		modlitba = MODL_PRVE_VESPERY;
-		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV)){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX */
+		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnené brat_zalmy */
 			Log("  _set_zalmy_sviatok_marie(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_marie(modlitba);
 		}
@@ -9115,7 +9115,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* prvé vešpery */
 		modlitba = MODL_PRVE_VESPERY;
-		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV)){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX */
+		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnené brat_zalmy */
 			Log("  _set_zalmy_posviacka_chramu(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_posviacka_chramu(modlitba);
 		}
@@ -12907,6 +12907,8 @@ label_25_MAR:
 					_global_svaty3.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					break;
 				case 26: /* MES_MAY */
+					_global_svaty1.typslav = SLAV_SPOMIENKA;
+					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
 						if(query_type != PRM_DETAILY)
@@ -12924,8 +12926,6 @@ label_25_MAR:
 
 						break;
 					}
-					_global_svaty1.typslav = SLAV_SPOMIENKA;
-					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, text_MAJ_26[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */

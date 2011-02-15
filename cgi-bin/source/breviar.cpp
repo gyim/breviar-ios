@@ -149,6 +149,7 @@
 /*                    Gaussovo pravidlo; èiastoène upozornil Peter Chren)  */
 /*   2010-05-14a.D. | presunuté niektoré definy do breviar.h               */
 /*   2010-05-24a.D. | upravený maïarský formát dátumu                      */
+/*   2010-06-04a.D. | zapracované zobrazovanie ant. po Sláva Otcu v inv.   */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -2037,6 +2038,20 @@ void interpretParameter(short int type, char *paramname){
 				if((_global_modl_kompletorium.pocet_zalmov == 2) && (_global_skip_in_prayer != ANO)){
 					strcat(path, _global_modl_kompletorium.antifona2.file);
 					includeFile(type, paramname, path, _global_modl_kompletorium.antifona2.anchor);
+				}
+				break;
+			/* 2010-06-04: zneužitie parametra "ANTIFONA2" pre zobrazenie "závereènej" antifóny v prípade, že sa tlaèí aj Sláva Otcu 
+			 *             funguje tak, že ak chce zobrazi Sláva Otcu (if(_global_opt1 == ANO)), nastaví sa interpretovanie pod¾a ANTIFONA1; ináè sa niè nevykoná
+			 */
+			case MODL_INVITATORIUM:
+				if(_global_opt1 == ANO){
+					strcat(path, _global_modl_invitatorium.antifona1.file);
+					includeFile(type, paramname, path, _global_modl_invitatorium.antifona1.anchor);
+				}
+				else{
+					Export("-->");
+					Export((char *)html_text_inv_slavaotcu[_global_jazyk]);
+					Export("<!--");
 				}
 				break;
 			default:
