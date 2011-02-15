@@ -1,0 +1,44 @@
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+   <title>OPRAVY</title>
+<script LANGUAGE="JavaScript"><!-- Hide from old browsers
+if (document.images)
+        {
+        normal1 = new Image(164,42);
+        normal1.src = "img/olb0.jpg"; 
+
+        over1 = new Image(164,42);
+        over1.src = "img/olb1.jpg"; 
+
+        } 
+
+function mOver(num) 
+        {
+        if (document.images) 
+            {
+            document.images['button'+ num].src = eval('over' + num).src;
+            }
+        }
+       
+   function mOut(num) 
+        {
+        if (document.images) 
+            {
+            document.images['button'+ num].src = eval('normal' + num).src;
+            }                   
+        }
+// Stop hiding from old browsers -->
+</script></head>
+<body text="#000000" bgcolor="#FFFFF0" link="#000000" vlink="#000000" alink="#000000">
+<style>
+<!--
+A:link {color: Black;}
+A:hover {color: red;}
+-->
+</style>
+<center>
+<a href="breviar.htm" TARGET="Obsah" ONMOUSEOVER="mOver(1)" ONMOUSEOUT="mOut(1)"><img SRC="img/olb0.jpg" NAME="button1" ALT="on-line BREVIAR" BORDER=0></a>
+</center>
+</body>
+</html>

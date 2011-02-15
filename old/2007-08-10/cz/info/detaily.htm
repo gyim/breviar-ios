@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+   <meta name="Author" content="Juraj Videky">
+   <link rel="stylesheet" type="text/css" href="../breviar.css">
+   <title>program-detaily</title>
+</head>
+<body>
+
+<center>
+<h2>Informácie | O programe (podrobnejšie)</h2>
+^ <a href="program.htm">O programe</a> | ^^ <a href="index.htm">Informácie</a> |  <a href="ulohy.htm">Úlohy</a> &gt;&gt;
+</center>
+
+<h4 class="blue">Ako to funguje (podrobnejšie)</h4>
+
+<p>Na základe <a href="parametre.htm">vstupných parametrov</a> sa program rozhodne, 
+ktorú z <a href="ulohy.htm">úloh</a> ide riešiť.
+Vo väčšine z úloh je potrebné analyzovať rok, a to podľa (pohyblivého) dátumu veľkonočnej nedele, ktorá
+určuje ostatné liturgické obdobia. Presnejšie, vykonajú sa nasledovné kroky:
+
+<ol class="level1">
+
+<li>Zistí sa aktuálny dátum.</li>
+
+<li>Pre daný rok sa spustí funkcia <tt>analyzuj_rok()</tt>, ktorá
+naplní <a href="struct.htm#rok">štruktúru pre daný (kalendárny) rok</a>, 
+ktorá obsahuje dátumy najvýznamnejších medzníkov liturgického roka v danom kalendárnom
+roku a charakteristiky roka.
+<a name="medznik"></a><i>Medzníkmi</i> pre účely programu sú:
+	<ol class="level2">
+	<li>Krst Krista Kráľa (1. nedeľa v období „cez rok“, ktorou sa končí Vianočné obdobie),</li>
+	<li>Popolcová streda (začína sa Pôstne obdobie),</li>
+	<li>Veľkonočná nedeľa (končí sa Pôstne obdobie a začína sa Veľkonočné obdobie),</li>
+	<li>Nanebovstúpenie Pána (končí sa Veľkonočné obdobie a pokračuje obdobie „cez rok“),</li>
+	<li>Prvá adventná nedeľa (končí sa obdobe „cez rok“, začína Adventné obdobie),</li>
+	<li>Sviatok Svätej rodiny.</li>
+	</ol>
+Ostatné pohyblivé slávenia sa ľahko vypočítajú podľa medzníkov, napr.:
+	<ol class="level2">
+	<li>Kvetná nedeľa: 7 dní pred Veľkonočnou nedeľou (podobne Zelený štvrtok,
+	Veľký piatok, Biela sobota, Veľkonočný pondelok, Nedeľa vo Veľkonočnej oktáve),</li>
+	<li>Najsvätejšej Trojice: 7 dní po Zoslaní Ducha Svätého,</li>
+	<li>Najsvätejšieho Tela a Krvi: 11 dní po Zoslaní Ducha Svätého,</li>
+	<li>Najsvätejšieho Srdca Ježišovho: 19 dní po Zoslaní Ducha Svätého.</li>
+	</ol>
+Charakteristikami roka sú:
+	<ol class="level2">
+	<li>či je rok <a href="../msg/prestupn.htm">priestupný</a>,</li>
+	<li><a href="../msg/lr_pism.htm">písmeno liturgického roka</a>, ktorý začína Prvou adventnou nedeľou kalendárneho roka,</li>
+	<li><a href="../msg/nedpism.htm">nedeľné písmeno/písmená</a> (niekedy nedeľná litera),</li>
+	<li>poradové číslo týždňa obdobia „cez rok“, v ktorom začína Pôstne obdobie (teda v ktorom je Popolcová streda),</li>
+	<li>poradové číslo týždňa obdobia „cez rok“, ktorý nasleduje po Nedeli Zoslania Ducha Svätého, ktorou sa končí Veľkonočné obdobie.</li>
+	</ol>
+</li>
+
+<li>Pre daný dátum sa spustí funkcia <tt>rozbor_dna()</tt>, ktorá naplní 
+<a href="struct.htm#den">štruktúru pre každý deň</a> údajmi jednak kalendárnymi
+(deň v týždni, poradie dňa v roku), „dvak“ liturgickými (<a href="../msg/lr_pism.htm">liturgický
+rok</a>, liturgické obdobie, týždeň žaltára, poradové číslo slávenia podľa
+<a href="../docs/smer_lrk.htm#c59">č. 59</a> 
+<a href="../docs/smer_lrk.htm">Všeobecných smerníc o liturgickom roku
+a o kalendári</a>, či je slávenie prikázaným sviatkom, napokon prípadné vlastné meno slávenia),</li>
+
+<li>Podľa takto pripravených štruktúr sa ľahko vygeneruje stránka s aktuálnymi údajmi (dátum, mesiac, roky).</li>
+</ol>
+
+<h4 class="blue">Informácie o jednotlivom dni</h4>
+
+Pre generovanie informácie o jednotlivom dni (bez určenej modlitby) vyzerá
+postup programu nasledovne: spustí funkciu&nbsp;<a name="rozbor_dna"></a><tt>rozbor_dna()</tt>
+pre daný deň a výsledok zobrazí. Spomínaná funkcia <tt>rozbor_dna()</tt>
+je jednou z kľúčových funkčností aplikácie, preto sa jej budem venovať trošku podrobnejšie.
+
+<ul class="level1">
+
+<li>1. fáza: <b>Všeobecné liturgické dáta</b>
+<br>Táto fáza zaradí daný deň (podľa dátumu, presnejšie poradového čísla
+dňa v roku) do liturgického obdobia, teda podľa medzníkov <a href="#medznik">spomínaných
+vyššie</a> určí, o aké liturgické obdobie ide. Program pritom interne používa nasledovné konštanty:
+<ul class="level0">
+<li>
+<tt>/* liturgicke obdobia */</tt>
+<br><tt>//OBD_ADVENTNE</tt>
+<br><tt>#define OBD_ADVENTNE_I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1 /* do 16. decembra */</tt>
+<br><tt>#define OBD_ADVENTNE_II&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+2 /* po 16. decembri */</tt>
+<br><tt>//OBD_VIANOCNE</tt>
+<br><tt>#define OBD_VIANOCNE_I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+3 /* do slavnosti zjavenia pana */</tt>
+<br><tt>#define OBD_VIANOCNE_II&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+4 /* po slavnosti zjavenia pana */</tt>
+<br><tt>//OBD_CEZ_ROK</tt>
+<br><tt>#define OBD_CEZ_ROK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+5</tt>
+<br><tt>//OBD_POSTNE</tt>
+<br><tt>#define OBD_POSTNE_I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+6 /* do soboty v piatom tyzdni */</tt>
+<br><tt>#define OBD_POSTNE_II_VELKY_TYZDEN 7 /* velky tyzden */</tt>
+<br><tt>//OBD_VELKONOCNE</tt>
+<br><tt>#define OBD_VELKONOCNE_TROJDNIE&nbsp;&nbsp;&nbsp; 8 /* umucenia
+a zmrtvychvstania Pana */</tt>
+<br><tt>#define OBD_VELKONOCNE_I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+9 /* do nanebovstupenia pana */</tt>
+<br><tt>#define OBD_VELKONOCNE_II&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+10 /* po nanebovstupeni pana */</tt>
+<br><tt>/* nasleduju specialne pod-obdobia */</tt>
+<br><tt>#define OBD_VELKONOCNA_OKTAVA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0 /*
+velkonocna nedela -- 2. velk. ne */</tt>
+<br><tt>#define OBD_OKTAVA_NARODENIA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 11 /*
+narodenie Pana -- 1. jan. */</tt>
+</li>
+</ul>
+V tejto časti sa určia všetky slávenia, ktoré sú v breviári v častiach
+<i>Vlastné časti liturgických období</i> a <i>Slávnosti v období „cez rok“</i>.
+Ďalej sa určia poradové týždne: týždeň daného obdobia, týždeň žaltára.určia
+aj prípadné slávenia, ktoré pripadnú na hraničné dni medzi obdobiami (medzníky).
+</li>
+
+<li>2. fáza: <b>Liturgické dáta pre sviatky svätých</b>
+<br>Táto fáza pre daný deň (bez ohľadu na predošlé liturgické začlenenie)
+zistí počet sviatkov svätých (berieme totiž do úvahy, že v daný deň môže
+byť viac ľubovoľných spomienok) a pre každý z nich vytvorí dátovú štruktúru,
+ktorá obsahuje najmä názov slávenia, typ slávenia a podštruktúru s dátami,
+ktoré určujú, odkiaľ sa má brať spoločná časť slávenia. Príklad uvádza
+čiastočné nastavenie dátových štruktúr pre dátum 24. apríla:
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; _global_svaty1.typslav = SLAV_LUB_SPOMIENKA;</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; _global_svaty1.smer = 12; /* lubovolne
+spomienky podla vseobecneho kalendara */</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; strcpy(_global_svaty1.meno, "Sv. Juraja,
+mučeníka");</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; _global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; pocet = 2;</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; _global_svaty2.typslav = SLAV_LUB_SPOMIENKA;</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; _global_svaty2.smer = 12; /* lubovolne
+spomienky podla vseobecneho kalendara */</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; strcpy(_global_svaty2.meno, "Sv. Fidéla
+zo Sigmaringenu, kňaza a mučeníka");</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; _global_svaty2.spolcast =</tt>
+<ul class="level0">
+<li>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp; _encode_spol_cast(MODL_SPOL_CAST_MUCENIK,
+MODL_SPOL_CAST_DUCH_PAST_KNAZ);</tt>
+</li>
+</ul>
+Pripomíname, že v tejto fáze sa všetky slávenia, ktoré sú v breviári zaradené
+v časti <i>Vlastné časti na sviatky svätých</i>.
+</li>
+
+<li>3. fáza: <b>Porovnanie</b>
+<br>Zo všetkých slávení, prichádzajúcich do úvahy sa uprednostní to slávenie, ktoré má v 
+<a href="../docs/smer_lrk.htm#tabulka">tabuľke liturgických dní</a> vyšší stupeň. Ak ide o sobotu v období
+cez rok, berie sa do úvahy aj spomienka Panny Márie v sobotu.
+</li>
+
+</ul>
+
+<h4 class="blue">Vytvorenie modlitby</h4>
+
+Pre generovanie modlitby vyzerá postup programu nasledovne:
+<ul>
+<li>
+ak ide o vešpery/kompletórium, treba generovať „nadvakrát“, a to preto,
+lebo v prípade, keď prvé vešpery nasledujúceho dňa majú prednosť pred vešperami
+tohoto dňa,</li>
+
+<li>
+teda v prípade vešpier/kompletória spustí funkciu <tt>rozbor_dna()</tt>
+pre nasledujúci deň (a ak si to okolnosti vyžadujú, tak aj <tt>analyzuj_rok()</tt>
+pre nasledujúci rok), výsledok uchová,</li>
+
+<li>
+spustí funkciu <tt>rozbor_dna()</tt> pre daný deň, ako je <a href="#rozbor_dna">popísané
+vyššie</a>, a výsledok uchová,</li>
+
+<li>
+nastavia sa spoločné časti pre slávenia z vlastnej časti svätých, a to
+podľa toho, čo bolo nastavené funkciou <tt>rozbor_dna()</tt> pre daný
+deň, ako bolo <a href="#rozbor_dna">popísané vyššie</a>,</li>
+
+<li>
+ak slávenie používa žalmy zo žaltára, spustí sa funkcia, ktorá vráti požadované
+žalmy,</li>
+
+<li>
+v prípade vešpier/kompletória zobrazí modlitbu pre ten deň, ktorý má prednosť,</li>
+
+<li>
+vyššie spomínaný výsledok obsahuje dátovú štruktúru s jednotlivými zložkami
+modlitby, a to dvojice &lt;<i>súbor, kotva</i>&gt; pre každú časť modlitby.
+(Zodpovedá to <a href="text.htm#znackovanie">označkovaniu v jednotlivých HTML súboroch</a>.)
+Pod <i>časťou</i> sa rozumie každá antifóna, žalm, responzórium, hymnus,
+modlitba dňa či slávenia (kolekta), jednoducho všetko, čo sa potenciálne
+môže opakovať a často sa aj opakuje. To je dôvod, prečo sa modlitba generuje,
+a nie je v statickej pobode. Isteže, pohodlnejšie je celý breviár mať v
+statickej podobe tak, ako je, na internete Avšak on-line
+breviár umožňuje vygenerovať súvislý text modlitby bez toho, že by
+bolo potrebné listovať v breviári a hľadať hymnus na inom mieste ako antifóny
+a na ďalšom mieste žalmy resp. chválospev.</li>
+
+<li>
+Modlitba sa generuje tak, že do prázdnej šablóny (obsahuje iba nadpisy
+jednotlivých častí modlitby a pevné súčasti modlitby, ako úvodné Sláva
+Otcu či záverečné požehnanie) sa postupne vkladajú časti, a to tak, že
+daná časť sa hľadá v súbore <i>súbor</i> od miesta BEGIN:<i>kotva</i> po
+miesto END:<i>kotva</i> (a to aj viacnásobne) podľa dvojice &lt;<i>súbor,
+kotva</i>&gt;, a to podľa toho, ako je to v jednotlivom 
+<a href="text.htm#znackovanie">zdrojovom HTML súbore vyznačené</a>.</li>
+</ul>
+
+<h4 class="blue">Náčrt ostatnej funkčnosti</h4>
+
+Pre generovanie tabuľky pohyblivých slávení vyzerá postup programu nasledovne:
+<ul>
+<li>pre každý rok sa spustí funkcia <tt>analyzuj_rok()</tt>, ktorá naplní 
+<a href="struct.htm#rok">štruktúru pre daný (kalendárny) rok,</a></li>
+<li>jednotlivé údaje sa vypíšu do riadka tabuľky (s prípadnými hypertextovými odkazmi).</li>
+</ul>
+Podobne sa generuje aj analýza roka, kde sa naviac generujú aj tlačidlá
+pre nasledujúci a predchádzajúci rok.
+<br>
+
+<hr>
+<p class="patka">
+Autor programovej časti © 1999-2007 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
+<br>Všetky práva vyhradené.
+</p>
+
+</body>
+</html>

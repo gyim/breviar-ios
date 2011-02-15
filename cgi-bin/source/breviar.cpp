@@ -123,6 +123,7 @@
 /*   2009-01-28a.D. | ˙prava includeFile()                                 */
 /*   2009-01-29a.D. | pridan˝ ÔalöÌ jazyk - maÔarËina (hu) [prvÈ kroky]    */
 /*   2009-02-17a.D. | posv. ËÌtanie (button) pre vöetky jazykovÈ mut·cie   */
+/*   2009-04-02a.D. | 8.11.2008 na veöpery treba braù pre sviatok 9.11.    */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -5665,9 +5666,17 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 		Log("spustam analyzu roka (rok %d)...\n", _local_rok);
 		analyzuj_rok(_local_rok); /* vysledok da do _global_r */
 		LOG_ciara;
-		Log("spustam analyzu nasledujuceho dna (%d. %s %d)...\n", 
-			datum.den, nazov_mesiaca(datum.mesiac - 1), _local_rok);
-		ret = _rozbor_dna_s_modlitbou(datum, _local_rok, modlitba, UNKNOWN_PORADIE_SVATEHO);
+
+		/* 2009-04-02: kvÙli öpecialite: 8.11.2008 na veöpery a kompletÛrium treba braù pre sviatok 9.11. */
+		short int svaty_dalsi_den = UNKNOWN_PORADIE_SVATEHO;
+		short int denvt_dalsi_den = den_v_tyzdni(datum.den, datum.mesiac, _local_rok);
+		if((datum.den == 9) && (datum.mesiac == MES_NOV + 1) && (denvt_dalsi_den == DEN_NEDELA)){
+			Log("˙prava kvÙli rozliËn˝m sl·veniam [9. november, ktor˝ padne na nedeæu]: svaty_dalsi_den = 1...\n");
+			svaty_dalsi_den = 1;
+		}
+
+		Log("spustam analyzu nasledujuceho dna (%d. %s %d), poradie_svaty == %d...\n", datum.den, nazov_mesiaca(datum.mesiac - 1), _local_rok, svaty_dalsi_den);
+		ret = _rozbor_dna_s_modlitbou(datum, _local_rok, modlitba, svaty_dalsi_den);
 		if(ret == FAILURE){
 			Log("_rozbor_dna_s_modlitbou() pre nasledujuci den returned FAILURE, so...\n");
 			Log("-- rozbor_dna_s_modlitbou(int, int, int, int): uncomplete end\n");

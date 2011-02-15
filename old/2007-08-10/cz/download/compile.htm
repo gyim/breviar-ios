@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+	<link rel="stylesheet" type="text/css" href="../breviar.css">
+	<title>kompilácia</title>
+</head>
+<body>
+
+<center><h2>Download | Kompilace</h2>
+^ <a href="index.htm">Download</a>
+</center>
+
+<p align="center">Ospravedlnění: Mnohé zde uvedené stránky ještě nejsou funkční, některé nejsou přeloženy ze slovenštiny do češtiny (napište nám, jestli můžete a chcete pomoct).</p>
+
+<p>V tejto časti popisujem, ako kompilovať a linkovať zdrojové kódy tak, aby ste vytvorili build ako command-line aplikáciu alebo pre web (cgi skript).
+
+<p>V princípe rozlišujeme kompiláciu pre nasledovné dva účely:
+<ol class="level1">
+	<li>binárka, ktorá bude generovať výstup do súborov (HTML), teda <span class="blue">samostatná aplikácia</span> (pre Windows alebo linux);</li>
+	<li>binárka, ktorá bude generovať výstup na štandardný výstup (stdout) za účelom použitia ako <span class="blue">cgi skript pre webserver</span> (napr. Apache pre Windows/Ruby alebo pre linux).</li>
+</ol>
+
+<p>Obidva spôsoby sa riadia pomocou <span class="tt">#define</span> v súbore <span class="tt">mysystem.h</span>:
+<ol class="level1">
+	<li><span class="blue">samostatná command-line aplikácia</span>: <span class="tt">MODEL_linux_commandline</span> alebo <span class="tt">MODEL_Windows_commandline</span>;</li>
+	<li><span class="blue">cgi skript pre webserver</span>: <span class="tt">MODEL_linux</span> alebo <span class="tt">MODEL_Windows</span>.</li>
+</ol>
+
+<p>Samozrejme, ostatné je potrebné zapoznámkovať. Pre účely testovania a debugovania kľudne použite aj ďalšie možnosti (sú popísané aj priamo v súbore <span class="tt">mysystem.h</span>).
+
+<h4 class="blue">Postup kompilácie</h4>
+
+<p>V podstate postačí súboru <span class="tt">urob</span> dať práva (v linuxe <span class="tt">chmod 755</span>) a spustiť ho. 
+Alebo sa inšpirujte priamo jeho obsahom: treba zlinkovať nasledovné súbory: 
+<pre>
+breviar.cpp 
+dbzaltar.cpp 
+liturgia.cpp 
+mygetopt.cpp 
+mylog.cpp 
+myhpage.cpp 
+myexpt.cpp 
+cgiutils.cpp 
+myconf.cpp 
+mydefs.cpp 
+mystring.cpp
+</pre>
+
+<p>Výsledkom bude požadovaná binárka, ktorú pomenujte podľa vlastného uváženia (pre webserver by mala mať príponu cgi) 
+a prípadne jej nastavte práva na execute.
+
+<p>Ak máte akékoľvek pripomienky, vylepšenia, nápady alebo postrehy, pošlite ich prosím <a href="mailto:videky@breviar.sk">mailom</a>.</p>
+
+<h4 class="blue">Aký je rozdiel medzi "aplikáciou" a "skriptom pre webserver"?</h4>
+
+<p>Keď webserver volá nejaký skript, ten mu pošle výstup na stdout. Preto všetok výstup ide na stdout. 
+Naviac, prvé riadky MUSIA byť také, ktoré obsahujú Content-type, aby webserver vedel, čo má
+zobraziť (či ide o HTML súbor, alebo ide o filelisting, alebo ide o bitmapu, obrázok, pakovaný súbor a pod.).
+
+<p>Aplikácia (presnejšie, command-line samostatná binárka) okrem generovania jednotlivých stránok dokáže generovať modlitby pre viacero dní naraz použitím tzv. <a href="../info/batchmode.htm">batch móde (dávkové spracovanie)</a>
+<hr>
+<p class="patka">© 1999-2007 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a></p>
+
+</body>
+</html>

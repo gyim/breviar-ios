@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+   <meta name="Author" content="Juraj Videky">
+   <link rel="stylesheet" type="text/css" href="../breviar.css">
+   <title>ulohy</title>
+</head>
+<body>
+
+<center>
+<h2>O programe | Parametre</h2>
+&lt;&lt; <a href="ulohy.htm">Úlohy</a> | ^ <a href="program.htm">O programe</a> | ^^ <a href="index.htm">Informácie</a> | <a href="struct.htm">Niektoré použité štruktúry</a> &gt;&gt;
+</center>
+ 
+<h4 class="blue">Parametre programu</h4>
+
+<p>Keďže program má použitie aj ako CGI skript (teda internetová aplikácia, ktorá z prehliadača získa
+údaje vo forme GET, POST alebo zmiešaného URL requestu), ale aj ako program spustiteľný z príkazového riadka
+(či už v linuxe alebo pod DOS/Windows), parametre sa v niektorých prípadoch rôznia. Je to z toho dôvodu,
+že command-line verzia často používa jeden parameter v závislosti od ostatných na rôzne účely, avšak
+pre webovské rozhranie je potrebné, aby každý parameter mal osobitné meno (úvodný formulár napr.
+potrebuje viacero údajov určujúcich roky). 
+Odlišnosti medzi parametrami pre URL requesty a command-line verziu programu uvádzame na príslušných miestach.
+<p>Okrem toho command-line verzia môže byť spustená v tzv. <a href="batchmode.htm">batch móde
+(dávkové spracovanie)</a>, keď pre určité dvoma dátumami ohraničené obdobie vytvorí dávkový súbor (skript),
+ktorý po spustení generuje modlitby pre dané obdobie. Tento spôsob použitia sa značne líši od ostatných, preto
+ho popisujeme na <a href="batchmode.htm">osobitnom mieste</a>.
+
+
+<ul class="level1">
+
+<li><span class="parameter">q</span> | Typ <a href="ulohy.htm">úlohy</a>, ktorú má program vykonať (query type)
+	<ul class="level2">
+	<li><span class="value">pdnes</span> | Úvodné okno</li>
+	<li><span class="value">pdt</span> | Závisí od hodnôt ďalších parametrov
+		<ul class="level3">
+		<li>ak je zadaný presný dátum (bez modlitby) | Informácie o dni</li>
+		<li>ak je zadaný presný dátum s modlitbou | Konkrétna modlitba</li>
+		<li>ak je zadaný dátum s použitím * | Liturgický kalendár pre daný mesiac alebo pre celý rok</li>
+		</ul>
+	</li>
+	<li><span class="value">pdet</span> | Detaily dňa</li>
+	<li><span class="value">par</span> | Prikázané sviatky a slávnosti Pána</li>
+	<li><span class="value">ptab</span> | Tabuľka dátumov pohyblivých slávení</li>
+	<li><span class="value">pcr</span> | Cezročné obdobie</li>
+	<li><span class="value">pmr</span> | Liturgický kalendár</li>
+	<li><span class="value">pbm</span> | Tzv. <a href="batchmode.htm">batch mode (dávkové spracovanie)</a>.</li>
+	</ul>
+</li>
+
+<li><span class="parameter">d</span> | Deň dátumu (pre <span class="parameter">pdt</span>, <span class="parameter">pdnes</span>, hodnoty: <span class="value">1</span>-<span class="value">31</span>, <span class="value">*</span> znamená "všetky dni")</li>
+<li><span class="parameter">dvt</span> (pre command line: <span class="parameter">d</span>) | Deň v týždni (pre <span class="parameter">pcr</span>, hodnoty: <span class="value">1</span>-<span class="value">31</span> resp. <span class="value">pondelok</span>-<span class="value">nedeľa</span>)</li>
+<li><span class="parameter">m</span> | Mesiac dátumu (pre <span class="parameter">pdt</span>, <span class="parameter">pdnes</span>, hodnoty: <span class="value">1</span>-<span class="value">12</span>, resp. <span class="value">január</span>-<span class="value">december</span>, <span class="value">*</span> znamená "všetky mesiace")</li>
+<li><span class="parameter">mr</span> (pre command line: <span class="parameter">m</span>) | Mesiac roka (pre <span class="parameter">pmr</span>)</li>
+<li><span class="parameter">r</span> | Rok dátumu (napr. <span class="value">2000</span>)</li>
+<li><span class="parameter">rr</span> (pre command line: <span class="parameter">r</span>) | Rok (<span class="parameter">pmr</span>)</li>
+<li><span class="parameter">p</span> | Modlitba
+	<ul class="level2">
+	<li><span class="value">mrch</span> | ranné chvály</li>
+	<li><span class="value">mpred</span> | modlitba predpoludním</li>
+	<li><span class="value">mna</span> | modlitba napoludnie</li>
+	<li><span class="value">mpo</span> | modlitba popoludní</li>
+	<li><span class="value">mv</span> | vešpery</li>
+	</ul>
+</li>
+<li><span class="parameter">t</span> | Týždeň žaltára (hodnoty: <span class="value">1</span>-<span class="value">4</span>) pre <span class="parameter">pcr</span></li>
+<li><span class="parameter">ds</span>  (pre command line: <span class="parameter">x</span>) | "poradie svätého" (hodnoty: <span class="value">1</span>-<span class="value">3</span>, niekedy je totiž viacero svätcov na jeden deň, 
+a v takom prípade je možné voliť ktorúkoľvek ľubovoľnú spomienku, resp. <span class="value">4</span> pre spomienku Panny Márie v sobotu)</li> 
+<li><span class="parameter">o1</span> (pre command line: <span class="parameter">1</span>) | možnosť 1 (option 1)
+	<ul class="level2">
+	<li>Pre generovanie textu modlity: Možnosť, či zobraziť nemenné súčasti modlitby (default: nie) </li>
+	<li>Pri generovaní liturgického kalendára pre jednotlivý mesiac alebo celý rok: Možnosť, či vypisovať všetky typy slávení (ak ich je viac) do 1 riadka (default: nie) </li>
+	</ul>
+</li>
+<li><span class="parameter">o2</span> (pre command line: <span class="parameter">2</span>) | možnosť 2 (option 2)
+	<ul class="level2">
+	<li>Pre generovanie textu modlity: Možnosť, či brať žalmy zo dňa (default: nie) alebo z vlastnej/spoločnej časti slávenia </li>
+	<li>Pri generovaní liturgického kalendára pre jednotlivý mesiac alebo celý rok: Možnosť, či vypisovať dátum pre deň iba ako číslo (default: áno) alebo celý dátum podľa normy ISO-8601 (napr. 2005-03-22) </li>
+	</ul>
+</li>
+<li><span class="parameter">o3</span> (pre command line: <span class="parameter">3</span>) | Ak je možnosť výberu viacerých spoločných častí, tento parameter určuje, ktorú spoločnú časť brať</li>
+<li><span class="parameter">o4</span> (pre command line: <span class="parameter">4</span>) | Možnosť, či zobraziť popis k modlitbe z vlastnej časti (zväčša stručný životopis svätca dňa; default: áno)</li>
+<li><span class="parameter">o5</span> (pre command line: <span class="parameter">5</span>) | Možnosť, či brať žalmy k modlitbe cez deň z bežnej alebo doplnkovej psalmódie (default: nie)</li>
+<li><span class="parameter">rfrom</span> (pre command line: <span class="parameter">f</span>) | Rok, počnúc ktorým sú roky zobrazené v tabuľke pohyblivých slávení (pre <span class="parameter">ptab</span>)</li>
+<li><span class="parameter">rto</span> (pre command line: <span class="parameter">g</span>) | Rok, do ktorého sú zobrazené roky v tabuľke pohyblivých slávení (pre <span class="parameter">ptab</span>)</li>
+<li><span class="parameter">l</span> (len pre command line) | Možnosť, či zobrazovať hypertextové linky (default: nie)</li>
+<li><span class="parameter">e</span> (len pre command line) | Názov súboru, do ktorého sa 
+má exportovať (DOS default: <span class="tt">export.htm</span>, linux default: stdout)</li>
+<li><span class="parameter">a</span> (len pre command line) | Možnosť, či v prípade existencie
+súboru pre export do tohto súboru pridávať (teda neprepísať ho - append; default: nie - čiže prepísať)</li>
+
+</ul>
+
+<p>Pre parametre určujúce možnosti majú nasledovné hodnoty: 
+<span class="value">1</span> - áno, <span class="value">0</span> - nie.
+
+<p>Ak dostane program nesprávne parametre (zahŕňa i prípady nesprávnych hodnôt parametrov 
+alebo ďalšie chýbajúce parametre závisiace od iných parametrov), export obsahuje chybové hlásenie.
+Naviac, command line verzia vypíše chybové hlásenie na stderr.
+
+<a name="example"></a>
+<h4 class="blue">Príklady</h4>
+
+<p>Ako sa vraví, príklad môže všetky pochybnosti razom odstrániť alebo naopak, podnietiť ďalšie otázky.
+Za oboma účelmi sú uvedené nasledovné príkady použitia command-line programu.
+
+<ul class="level1">
+<li><span class="tt">breviar.exe -qpdt -d30 -m4 -r2002 -pmrch -ic:\breviar\ -emoja.htm -a1</span><br>
+<span class="explain">Program vygeneruje do súboru <span class="tt">moja.htm</span>
+modlitbu ranných chvál na 30. apríla 2002. 
+Ak súbor <span class="tt">moja.htm</span> existuje, neprepíše sa, ale program pridá modlitbu
+na jeho koniec (append).
+Pritom <span class="tt">include</span> adresár sa nachádza v adresári <span class="tt">c:\breviar\</span>
+(meno programu je <span class="tt">breviar.exe</span>). (Použitie v DOSe/Windows.)
+</span>
+</li>
+
+<li><span class="tt">breviar.exe -qpsqs -s"qt=pdt&amp;d=12&amp;m=7&amp;r=2003"</span><br>
+<span class="explain">Program vygeneruje do default súboru (<span class="tt">export.htm</span>)
+rozbor dňa 12. júla 2003. 
+Pritom parametre sú dané simuláciou query stringu.
+</span>
+</li>
+</ul>
+
+<hr>
+<p class="patka">
+Autor programovej časti © 1999-2007 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
+<br>Všetky práva vyhradené.
+</p>
+
+</body>
+</html>

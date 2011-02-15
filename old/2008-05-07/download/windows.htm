@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+	<link rel="stylesheet" type="text/css" href="../breviar.css">
+	<title>download - windows</title>
+</head>
+<!-- replace ´ -- ‘ -- not this ' or this ’ -->
+<!-- replace " -- „this“ -- not this ” or this " -->
+
+<body>
+
+<!-- 2007-09-11-komplet-web | ruby186-25.exe -->
+
+<center>
+<h2>Download | Windows</h2>
+^ <a href="index.htm">Download</a> | <a href="cmdline.htm">command-line (Windows/DOS)</a> &gt;&gt;
+</center>
+
+<p>V tejto časti si môžete stiahnuť aplikáciu pod OS Windows 95/98/NT/2000/XP/Vista, 
+	ktorá generuje stránky v podobe HTML priamo zobraziteľných vo vašom prehliadači (Internet Explorer, Netscape, Mozilla, Firefox a pod.), ako na týchto stránkach, 
+	a to bez potreby pripojenia k internetu.
+
+<p>Pracuje na inom princípe ako klasické okienkové aplikácie. Princíp spočíva v tom, že na Vašom lokálnom počítači beží lokálny webserver. Ten kliknutia na stránky
+	(na tlačidlá alebo odkazy) „prekladá“ aplikácii, ktorá následne vytvorí výstup, pošle ho späť prehliadaču, ktorý výstup zobrazí presne tak isto ako na internete.
+
+<p>Súbory na stiahnutie: 
+<ul>
+	<li>„balíček programu a textov“ (<a href="2007-09-11-komplet-web.zip">zip</a>, <a href="2007-09-11-komplet-web.rar">rar</a>)</li>
+	<li><a href="ruby186-25.exe">webserver</a> (Ruby z <a target="_blank" href="http://rubyforge.org/">http://rubyforge.org/</a>)</li>
+</ul>
+</p>
+
+<h4 class="blue">Postup inštalácie</h4>
+
+<ol class="level1">
+<li>Stiahnite si oba súbory („balíček programu a textov“ [<a href="2007-09-11-komplet-web.zip">zip</a> alebo <a href="2007-09-11-komplet-web.rar">rar</a>] a <a href="ruby186-25.exe">webserver</a>) na disk („Save as“). Najskôr budeme inštalovať webserver, následne samotný program.</li>
+<li><span class="it">Inštalácia webservera</span>: Spustite súbor <span class="tt">ruby186-25.exe</span>. Riaďte sa inštalačnými inštrukciami (sú v anglickom jazyku; v podstate stačí odklikávať tlačidlo <span class="blue">Next</span> príp. <span class="blue">I Agree</span>
+	a <span class="blue">Finish</span>). Do jedného adresára (napr. <span class="tt">c:\ruby</span>) je nainštalovaný interpréter programovacieho jazyka Ruby. Ten následne spúšťa lokálny
+	webserver.</li>
+<li><span class="it">Inštalácia aplikácie</span>: Rozbaľte (napr. pomocou programov WinZip, WinArj, WinRAR, PowerArchiver) „balíček programu a textov“ (<span class="tt">2007-09-11-komplet-web.zip</span> resp. <span class="tt">2007-09-11-komplet-web.rar</span>) do nejakého adresára na vašom disku
+	(pre ďalšie úvahy predpokladáme, že je to <span class="tt">c:\breviar</span>).
+<br><b>Upozornenie:</b> Názov adresára NESMIE obsahovať diakritiku!</li>
+<li>Tým je inštalácia ukončená.</li>
+</ol>
+
+<h4 class="blue">Používanie aplikácie</h4>
+
+<ol>
+	<li>Pred každým použitím aplikácie je potrebné&nbsp;spustiť webserver, a to spustením skriptu <span class="tt">spusti.server.bat</span> (nachádza sa v&nbsp;kmeňovom adresári
+		aplikácie, teda v našom príklade <span class="tt">c:\breviar</span>). Malo by sa otvoriť okno príkazového riadka, v ktorom by mali byť
+		približne nasledovné riadky:
+		<blockquote>
+			<p class="explain">c:\breviar>ruby.exe server.rb<br>
+			[2007-07-11 16:53:05] INFO  WEBrick 1.3.1<br>
+			[2007-07-11 16:53:05] INFO  ruby 1.8.6 (2007-03-13) [i386-mswin32]<br>
+			[2007-07-11 16:53:05] INFO  WEBrick::HTTPServer#start: pid=1976 port=2000</blockquote>
+		O konfigurácii pozri <a href="#config"> nižšie</a>.
+	</li>
+	<li>Otvorte svoj obľúbený internetový prehliadač a do okienka pre internetové adresy napíšte nasledovnú adresu: <a href="http://localhost:2000/">http://localhost:2000/</a>
+		(to je adresa vášho lokálneho webservera).</li>
+	<li>Malo by sa vám zobraziť úvodné okno. V prehliadači generujete modlitbu presne tak isto, ako pri pripojení na Internet. Okno príkazového riadka by malo zachytávať
+		jednotlivé akcie, ktoré lokálny webserver vykonáva (volania aplikácie).</li>
+</ol>
+
+<a name="config"></a>
+<h4 class="blue">Konfigurácia (nastavenie) webservera</h4>
+
+<ol>
+	<li>Súbor: <span class="tt">server.rb</span>
+	<li>V podstate jediným zaujímavým riadkom je ten, v ktorom nastavujete port pre váš webserver: <span class="blue">Port => 2000</span>. Ak chcete zmeniť hodnotu, upravte súbor server.rb v akomkoľvcek
+		textovom editore a uložte. Váš lokálny webserver bude mať potom adresu <span class="tt">http://localhost:port/</span>, kde <span class="tt">port</span> je číslo portu, uvedené v konfiguračnom súbore.
+	</li>
+</ol>
+
+<h4 class="blue">Konfigurácia (nastavenie) ciest</h4>
+
+<ol>
+	<li>Súbor: <span class="tt">spusti.server.bat</span>
+	<li>Tento súbor obsahuje jediný riadok: <span class="blue">"C:\Program Files\ruby\bin\ruby.exe" server.rb</span>. 
+		Ak ste nainštalovali ruby do iného adresára, je potrebné to v tomto skripte zmeniť. Teda napríklad: <span class="blue">"C:\ruby\bin\ruby.exe" server.rb</span>.
+	</li>
+</ol>
+
+<p>Ak máte akékoľvek pripomienky, vylepšenia, nápady alebo postrehy, pošlite ich prosím <a href="mailto:videky@breviar.sk">mailom</a>.</p>
+
+<hr>
+<center>OAMDG
+<br><a href="../info/copyright.htm">Copyrights detailed</a>
+<br>Partial Text Copyright 1999 © Vydavateľstvo Serafín.
+<br>Partial Source Code Copyright 1999 © Miroslav Murgaš.
+<br>Un-CGI 1.10 Copyright 1994 © Steven Grimm.
+<br>cgiutils 1.1 Copyright 1995-1996 © William E. Weinman.
+<br>Partial Source Code Copyright 2007 © Marek Eliáš.
+<br>Ruby Support 2005 © Jozef Fülöp.
+<br>Ruby © <a target="_blank" href="http://rubyforge.org/">http://rubyforge.org/</a>
+<br>Copyright 1999-2007 © Juraj Vidéky. All rights reserved.</center>
+
+<hr>
+<p class="patka">© 1999-2008 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a></p>
+
+</body>
+</html>

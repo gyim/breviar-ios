@@ -1,0 +1,68 @@
+/* tento subor obsahuje opravane chyby s datumom opravy */
+
+26/05/2000: include/iz45.htm, slovo "opevnil" --> "upevnil"
+05/06/2000: include/vn2.htm, okolo textu kratkeho respoznoria rannych chval 7. velkonocnej
+	nedele (Kriste... Ty si vstal zmrtvych): 
+	zla kotva "<!--{BEGIN:VN1_rNECIT}-->" resp. "<!--{END:VN1_rNECIT}-->" 
+	zmenena na "<!--{BEGIN:VN2_rRESPNE}-->" resp. "<!--{END:VN2_rRESPNE}-->"
+06/06/2000: dodatok/pc_bs.htm: linka na z95.htm zmenena na "../include/z95.htm"
+18/06/2000: include/troj.htm: prve vesp., kratke cit., [A kto mu dal nieèo] "prv" --> "prvý"
+-	include/sv_jun.htm: (9.jun) modlitba: "svojim" --> "svojím"
+-	pridane v programe do spol. casti sv. muzov (dbzaltar.cpp), aby aj pre vespery
+	generovali kresponz prip. s velkonocnou priponou VE;
+	taktiez pridane aj k ucitelom cirkvi VE pre kresponz
+26/06/2000: include/z118.htm: "znie v stánkoch spravodlivých." --> "...spravodlivých:"
+-	include/z15.htm: "koná pravodlivo" --> "koná spravodlivo"
+04/07/2000: include/_1ut.htm: "<!--{END:_1UTr_MODLITBA}--></b>" -->
+	"</b><br><!--{END:_1UTr_MODLITBA}-->"
+-	include/sv_jul.htm, 03JUL_vCIT: odstranena chyba (bol tam <br> v texte)
+-	source/breviar.cpp, source/dbzaltar.cpp: zmeny spojene s tym, ze program negeneroval
+	korektne spomienku "neposkvrneneho srdca prebl. panny marie" + padanie vtedy,
+	ked (napriek tomu, ze nemohla byt) sa dalo -x4 (dalsi_svaty == 4, sp.p.m.v sobotu)
+06/07/2000: include/sc_pn.htm: "že panne doprial víazstvo,ä" --> bez "ä" (SCPN_rHYMNUS)
+-	include/_3stv.htm, _3STVv_PROSBY: bol vymeneny BEGIN a END
+-	pridany adresar download/, subory index.htm a verzia.txt a tiez disk[1,2].zip
+24/07/2000: include/z122.htm: "Pokoj s tebou" --> spravne uvodzovky
+-	vsetky adresy dane na videky@breviar.sk
+-	generovana modlitba ma v hlavicke <style>...</style>,
+	zmena v source/myhpage.cpp::hlavicka()
+-	zmena v lhwin: (pozor! nemenit subory .rc ani resource.h!)
+	- pridany subor lhwin/mybuild.h (aj do projektu)
+	- na zaciatok lhwin.rc treba dat include, potom cast lhwin.rc:
+		#include "mybuild.h" /* vlozene 24/07/2000A.D. kvoli DATUM_BUILDU */
+		...
+		    LTEXT           DATUM_BUILDU,IDC_STATIC,85,30,58,8
+		...
+		    EDITTEXT        IDC_EDIT_export,220,34,100,12,ES_AUTOHSCROLL
+		#ifndef DUURKO
+					 | WS_DISABLED
+		#endif
+					,WS_EX_ACCEPTFILES
+		...
+		IDD_lhwin_DIALOG DIALOGEX 0, 0, 342, 270
+		STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+		#ifdef DUURKO
+			| WS_MINIMIZEBOX 
+		#endif
+26/07/2000: dodatok/eotcenas.htm: "hallowed by thy name" --> "hallowed be thy name"
+14/09/2000: include/sc_ap.htm: pridane kotvy SCAP_vMAGNIFIKAT a SCAP_rBENEDIKTUS
+16/09/2000: include/sv_sep.htm: zmenene uvodzovky pri "Abba, Otce!" v anchor 15SEP_vCIT
+18/09/2000: include/cezrok.htm: zrusene (24NE_MODLITBA) break v texte
+09/10/2000: include/rchvaly.htm: "nepriatelov" --> "nepriate¾ov", 
+		"chlapcek" --> "chlapèek", "poucís" --> "pouèíš"
+21/10/2000: include/_1ne.htm: "<!--{END:_1NE1_CIT}--></b>" --> "</b><!--{END:_1NE1_CIT}-->"
+-	include/z112.htm: "bude mocné za zemi" --> "bude mocné na zemi"
+-	include/sc_sm.htm: "tých aj predurèil že sa" --> "tých aj predurèil, že sa"
+09/11/2000: include/z132.htm: "neuložím sa svoje lôžko" --> "neuložím na svoje lôžko"
+11/11/2000: include/z45.htm: "zabudni sa svoj" --> "zabudni na svoj"
+13/11/2000: include/_4po.htm: "lebo a zveèerieva" --> "lebo sa zveèerieva"
+02/01/2001: include/pmb.htm: "vrátik" --> "vráti k"
+-	include/pmb.htm: Otèe náš prehodený až za <!--{END:PMB_rPROSBY}-->
+03/01/2001: dodatok/index.htm: "Dodatky z brevára" --> "Dodatky z breviára"
+-	pridana ficuria usage/ (napr. lista.htm: "<a href="usage/index.htm" target="Obsah">Štatistiky</a><font size=-1><sup>NOVÉ!</sup></font>"
+08/01/2001: include/vian2.htm: vnutri VIAN2_vRESP: "všetky kmene" --> "Všetky kmene"
+-	include/krst.htm: "Svojim krstom" --> "Svojím krstom"
+11/01/2001: dodatok/eotcenas.htm: "tempation" --> "temptation"
+29/01/2001: include/_4ut.htm, _4UTr_MODLITBA: "Prosím a" --> "Prosíme a", "žijea" --> "žije a"
+
+

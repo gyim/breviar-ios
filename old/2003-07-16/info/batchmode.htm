@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+   <meta name="Author" content="Juraj Videky">
+   <link rel="stylesheet" type="text/css" href="../breviar.css">
+   <title>ulohy</title>
+</head>
+<body>
+
+<center>
+<h2>O programe | Parametre (batch mode)</h2>
+^ <a href="ulohy.htm">Úlohy</a> | ^ <a href="parametre.htm">Parametre (všeobecne)</a> | ^^ <a href="program.htm">O programe</a>
+</center>
+ 
+<h4 class="blue">Parametre programu (batch mode)</h4>
+
+<p>Command-line verzia programu (teda verzia spustiteľná z príkazového riadka) môže byť spustená štandardným 
+spôsobom (pozri viac o <a href="parametre.htm">parametroch tohto použitia</a>), alebo v tzv. 
+<span class="bold">batch móde (dávkové spracovanie)</span>, keď pre určité dvoma dátumami ohraničené obdobie 
+<a name="datumy"></a>(<span class="it">počiatočný dátum</span>, <span class="it">koncový dátum</span>)
+vytvorí dávkový súbor (skript), obsahujúci volania programu s nastavenými parametrami. Skript 
+po spustení generuje modlitby pre dané obdobie (buď pre každú modlitbu
+do samostatného súboru, alebo všetky modlitby do jedného súboru). 
+Tento spôsob použitia sa značne líši od ostatných, preto
+ho popisujeme na tomto mieste osobitne.
+
+
+<ul class="level1">
+
+<li><span class="parameter">q</span> | Typ <a href="ulohy.htm">úlohy</a>, ktorú má program vykonať (query type)
+	<ul class="level2">
+	<li><span class="value">pbm</span> | batch mode (dávkové spracovanie)</li>
+	<li>ostatné hodnoty: viď <a href="parametre.htm">parametre použitia programu (všeobecne)</a>
+	</ul>
+</li>
+
+<li><span class="parameter">d</span> | Deň <a href="#datumy">počiatočného</a> dátumu (hodnoty: <span class="value">1</span>-<span class="value">31</span>)</li>
+<li><span class="parameter">m</span> | Mesiac <a href="#datumy">počiatočného</a> dátumu (hodnoty: <span class="value">1</span>-<span class="value">12</span>)</li>
+<li><span class="parameter">r</span> | Rok <a href="#datumy">počiatočného</a> dátumu (napr. <span class="value">2000</span>)</li>
+<li><span class="parameter">f</span> | Deň <a href="#datumy">koncového</a> dátumu (hodnoty: <span class="value">1</span>-<span class="value">31</span>)</li>
+<li><span class="parameter">g</span> | Mesiac <a href="#datumy">koncového</a> dátumu (hodnoty: <span class="value">1</span>-<span class="value">12</span>)</li>
+<li><span class="parameter">p</span> | Rok <a href="#datumy">koncového</a> dátumu (napr. <span class="value">2000</span>).
+<br>Malo by pritom platiť: počiatočný dátum &lt;= koncový dátum.</li>
+
+<li><span class="parameter">b</span> | Názov výsledného skriptu (napr. <span class="tt">rob.bat</span>). <a href="#output">Výsledky jeho spustenia</a> sú popísané nižšie.</li>
+<li><span class="parameter">n</span> | Názov použitého command-line príkazu online breviára 
+(napr. <span class="tt">lh.exe</span> pre DOS).
+Tento názov bude použitý vo výslednom skripte.</li>
+
+<li><span class="parameter">1</span> | Možnosť, či zobraziť nemenné súčasti modlitby (default: nie)</li>
+<li><span class="parameter">2</span> | Možnosť, či brať žalmy zo dňa alebo z vlastnej/spoločnej časti slávenia</li>
+<li><span class="parameter">3</span> | Ak je možnosť výberu viacerých spoločných častí, tento parameter určuje, ktorú spoločnú časť brať</li>
+<li><span class="parameter">4</span> | Možnosť, či zobraziť popis k modlitbe z vlastnej časti (zväčša stručný životopis svätca dňa; default: áno)</li>
+<!--<li><span class="parameter">l</span> | Možnosť, či zobrazovať hypertextové linky (default: nie)</li>-->
+<li><span class="parameter">e</span> | Názov súboru, do ktorého sa 
+má exportovať (DOS default: <span class="tt">export.htm</span>, linux default: stdout). Tento súbor bude v prípade
+chýb obsahovať chybové hlásenia. V prípade úspechu bude obsahovať iba hlavičku HTML dokumentu, pretože výsledkom
+bude skript, ktorého meno špecifikoval parameter <span class="parameter">b</span>.</li>
+
+<li><span class="parameter">a</span> | Možnosť, či všetky modlitby dať do 1 súboru (default: nie)</li>
+
+</ul>
+
+<p>Pre parametre určujúce možnosti majú nasledovné hodnoty: 
+<span class="value">1</span> - áno, <span class="value">0</span> - nie.
+
+<a name="output"></a>
+<h4 class="blue">Výsledky po spustení vytvoreného skriptu</h4>
+
+<p>Vytvorený skript po spustení vygeneruje modlitby pre dané obdobie 
+do súborov <span class="tt">yyyy-mm-dd_xp.htm</span>, kde význam 
+jednotlivých častí mena súboru je nasledovný:
+<ul class="level1">
+<li><span class="parameter">yyyy</span> | rok</li>
+<li><span class="parameter">mm</span> | mesiac (napr. <span class="value">05</span> pre máj)</li>
+<li><span class="parameter">dd</span> | deň (napr. <span class="value">07</span>)
+<br>Dátum je uvedený v súlade s normou ISO 8601.
+</li>
+<li><span class="parameter">x</span> | poradie svätého (<span class="value">0</span> 
+až <span class="value">4</span>). <span class="value">0</span> zväčša znamená všedný deň alebo slávnosť 
+s najvyššou prioritou. <span class="value">4</span> znamená ľubovoľnú spomienku Panny Márie v sobotu,
+<span class="value">1</span> až <span class="value">3</span> znamenajú zväčša sviatky svätých.</li>
+<li><span class="parameter">p</span> | modlitba (<span class="value">r</span> = ranné chvály, <span class="value">v</span> = vešpery)</li>
+</ul>
+
+<p>V prípade, že je použitý parameter <span class="parameter">a</span> (append), 
+bude vytvorený len jeden súbor s nasledovným menom:
+<span class="tt">yyyy-mm-dd_YYYY-MM-DD.htm</span>, kde význam 
+jednotlivých častí mena súboru je nasledovný:
+<ul class="level1">
+<li><span class="parameter">yyyy</span> | rok <a href="#datumy">počiatočného</a> dátumu</li>
+<li><span class="parameter">mm</span> | mesiac <a href="#datumy">počiatočného</a> dátumu</li>
+<li><span class="parameter">dd</span> | deň <a href="#datumy">počiatočného</a> dátumu</li>
+<li><span class="parameter">YYYY</span> | rok <a href="#datumy">koncového</a> dátumu</li>
+<li><span class="parameter">MM</span> | mesiac <a href="#datumy">koncového</a> dátumu</li>
+<li><span class="parameter">DD</span> | deň <a href="#datumy">koncového</a> dátumu
+<br>Dátumy sú uvedené v súlade s normou ISO 8601.
+</li>
+</ul>
+
+<p>Ak dostane program nesprávne parametre (zahŕňa i prípady nesprávnych hodnôt parametrov 
+alebo ďalšie chýbajúce parametre závisiace od iných parametrov), export obsahuje chybové hlásenie.
+Naviac, command line verzia vypíše chybové hlásenie na stderr.
+
+<a name="example"></a>
+<h4 class="blue">Príklady</h4>
+
+<p>Ako sa vraví, príklad môže všetky pochybnosti razom odstrániť alebo naopak, podnietiť ďalšie otázky.
+Za oboma účelmi sú uvedené nasledovné príkady použitia batch módu.
+
+<ul class="level1">
+<li><span class="tt">lh.exe -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.bat -nlh.exe -ic:\breviar\</span><br>
+<span class="explain">Program vygeneruje skript <span class="tt">rob.bat</span>, ktorý vytvorí 
+modlitby od 7. mája 2000 do 3. apríla 2001. 
+Pritom <span class="tt">include</span> adresár sa nachádza v adresári <span class="tt">c:\breviar\</span>
+a meno programu je <span class="tt">lh.exe</span>. (Použitie v DOSe/Windows.)
+</span>
+</li>
+
+<li><span class="tt">lh.exe -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.bat -nlh.exe -ic:\breviar\ -a1</span><br>
+<span class="explain">Program vygeneruje skript <span class="tt">rob.bat</span>, ktorý vytvorí 
+modlitby od 7. mája 2000 do 3. apríla 2001. 
+Po spustení skriptu budú všetky modlitby vytvorené do jednoho súboru s menom
+<span class="tt">2000-05-07_2001-04-03.htm</span>.
+Pritom <span class="tt">include</span> adresár sa nachádza v adresári <span class="tt">c:\breviar\</span>
+a meno programu je <span class="tt">lh.exe</span>. (Použitie v DOSe/Windows.)
+</span>
+</li>
+
+<li><span class="tt">lh -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.sh -nlh -i~/breviar/</span><br>
+<span class="explain">
+Program vygeneruje skript <span class="tt">rob.sh</span> (možno bude potrebný <span class="tt">chmod</span>
+ na nastavenie práv), ktorý vytvorí modlitby od 7. mája 2000 do 3. apríla 2001. 
+Pritom <span class="tt">include</span> adresár sa nachádza v adresári <span class="tt">~/breviar/</span>
+a meno programu je <span class="tt">lh</span>. (Použitie v UNIXe.)
+</span>
+</li>
+</ul>
+
+Ak sa vyskytnú nejaké nezrovnalosti alebo nefunkčnosti, prosím 
+<a href="mailto:videky@breviar.sk">píšte</a>, pretože batch mód je zatiaľ
+iba taký experiment. Ďakujem.
+
+<p><hr>
+<p class="patka">
+Autor programovej časti © 1999-2003 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
+<br>Všetky práva vyhradené.
+</p>
+
+</body>
+</html>

@@ -9214,7 +9214,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 	 * 1, 2 alebo 3) vycisti udaje;
 	 * to je vtedy, ked je tato funkcia volana poprvykrat
 	 */
-
 	if((poradie_svaty < 1) || (poradie_svaty > 3)){ /* napr. aj UNKNOWN_PORADIE_SVATEHO */
 		/* den */
 		_global_svaty1.den = _global_svaty2.den = _global_svaty3.den = den;

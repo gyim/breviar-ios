@@ -1,0 +1,94 @@
+/* tento súbor obsahuje opravené chyby s dátumom opravy,
+ * èi už ide o zmeny v zdrojových textoch modlitieb (adresár include),
+ * alebo priamo v zdrojových textoch programu. 2003-07-16a.D.
+ */
+----------zaèiatok----------
+2003-07-15: oprava v texte 1. vešpier z nedele 3. týždòa žaltára:
+-	include/_3ne.htm, BEGIN:_3NE1_PROSBY: "Ježiš Kristus" -> "Kristus"
+	zaslal Mário Bosý <medus@katarinka.sk> (ïakujem)
+-	mybase.cpp a mybase.h sú odstránené z projektu (nepoužívané)
+-	všetky texty obsahujú referenciu na CSS súbor breviar.css
+	(pre web je potrebné, aby tam bolo "/breviar.css")
+-	uncgi.c - zmenená použitá verzia (1.10),
+	odstránené problémy pri kompilovaní na Red Hat linuxe, gcc v3.2.2
+	(predtým kompilované na debian linuxe, gcc 2.95).
+2003-07-01: dalšie opravy v kóde:
+-	¾ubovo¾ná spomienka Panny Márie v sobotu: 
+	už je možné stlaèi tlaèidlo "Detaily..." (predtým to zobrazovalo chybu)
+2003-06-30: opravené nejaké chyby a dalšie zmeny:
+-	sv.Peter a sv.Pavol: bol problém s prvými vešperami,
+	ked tento sviatok padol na nede¾u (èiže v r. 2003)
+-	spomienka Nepoškvrneného srdca Panny Márie (sobota po Najsv. Srdci Ježišovom):
+	precedencia sv. Ireneja (2003-06-28) opravená.
+-	prerobená pätka stránok, zobrazuje build (BUILD_DATE)
+	a nezobrazuje typ kódovania.
+2003-03-19: dodatok/tedeum.htm: "Sväý" --> "Svätý"
+2002-08-15: include/sv_aug.htm: "Tu si nám" --> "Ty si nám" (chyba aj v tlaèenom breviári)
+2002-08-05: zmenene poradie (najnovsie navrch)
+-	include/sc_pn.htm: "moje srde" --> "moje srdce"
+-	znama chyba: "v tomto roku je na 8.4. prelozene Zvestovanie Pana z 25.3. 
+	(z Velkeho tyzdna). Tvoj engine ponuka pondelok velkonocneho obdobia."
+	zaslal Peter Santavy <ps@christ-net.sk>, vdaka.
+-	msg/juldat.htm: oprava julianskeho datumu pre 1.1.1
+	"Srdeène Vás pozdravujem. Myslím si, že v on-line BREVIÁRI 
+	v èlánku Juliánsky dátum máte uvedený chybný údaj. Uvádzate, že 
+	JD 1. januára po Kr. je 1721058. 1. január 1 po Kr. je 1. január 1 n.l. 
+	Rok 0 po Kr. je vlastne rok 1 pred Kr. Po roku 1 pred Kr. nasleduje hneï 
+	rok 1 po Kr. Dátum 1.1.1 pred Kr. má JD 1721058 a dátum 1.1.1 po Kr. 
+	má JD 1721424. Údaje som èerpal z publikácie Encyklopédia Astronómie, 
+	Vydavate¾stvo Obzor, Bratislava 1987."
+	zaslal Stanislav Vrba <stanislavvrba@kiwwi.sk>, vïaka.
+2002-01-22: include/ozz.htm: "zotrel sizy" --> "zotrel slzy"
+-	zmeneny format datumu podla normy ISO 8601
+-	pridana liturgia na 9. augusta (sv. Edita Stein) podla casopisu Liturgia 37 (1/2000)
+2001-10-30: include/_1stv.htm: "cie¾ svojej cesty" --> "cie¾ svojej viery"
+2001-09-26: include/sv_jul.htm, sv_aug.htm, sv_apr.htm: upravené spolupatrónky Európy Sv. Katarína Sienská 29.4., Sv Brigita 23.7., Sv. Terézia Benedikta (Edita Steinová) 9.8.
+-	zmeneny kod (dbzaltar.cpp) aby sa správne tieto slávenia generovali
+2001-09-12: zmeneny kod
+2001-01-29: include/_4ut.htm, _4UTr_MODLITBA: "Prosím a" --> "Prosíme a", "žijea" --> "žije a"
+2001-01-11: dodatok/eotcenas.htm: "tempation" --> "temptation"
+2001-01-08: include/vian2.htm: vnutri VIAN2_vRESP: "všetky kmene" --> "Všetky kmene"
+-	include/krst.htm: "Svojim krstom" --> "Svojím krstom"
+2001-01-03: dodatok/index.htm: "Dodatky z brevára" --> "Dodatky z breviára"
+-	pridana ficuria usage/ (napr. lista.htm: "<a href="usage/index.htm" target="Obsah">Štatistiky</a><font size=-1><sup>NOVÉ!</sup></font>"
+2001-01-02: include/pmb.htm: "vrátik" --> "vráti k"
+-	include/pmb.htm: Otèe náš prehodený až za <!--{END:PMB_rPROSBY}-->
+2000-11-13: include/_4po.htm: "lebo a zveèerieva" --> "lebo sa zveèerieva"
+2000-11-11: include/z45.htm: "zabudni sa svoj" --> "zabudni na svoj"
+2000-11-09: include/z132.htm: "neuložím sa svoje lôžko" --> "neuložím na svoje lôžko"
+2000-10-21: include/_1ne.htm: "<!--{END:_1NE1_CIT}--></b>" --> "</b><!--{END:_1NE1_CIT}-->"
+-	include/z112.htm: "bude mocné za zemi" --> "bude mocné na zemi"
+-	include/sc_sm.htm: "tých aj predurèil že sa" --> "tých aj predurèil, že sa"
+2000-10-09: include/rchvaly.htm: "nepriatelov" --> "nepriate¾ov", 
+		"chlapcek" --> "chlapèek", "poucís" --> "pouèíš"
+2000-09-18: include/cezrok.htm: zrusene (24NE_MODLITBA) break v texte
+2000-09-16: include/sv_sep.htm: zmenene uvodzovky pri "Abba, Otce!" v anchor 15SEP_vCIT
+2000-09-14: include/sc_ap.htm: pridane kotvy SCAP_vMAGNIFIKAT a SCAP_rBENEDIKTUS
+2000-07-26: dodatok/eotcenas.htm: "hallowed by thy name" --> "hallowed be thy name"
+2000-07-24: include/z122.htm: "Pokoj s tebou" --> spravne uvodzovky
+-	všetky e-mailové adresy nastavené na videky@breviar.sk
+-	generovaná modlitba má v hlavièke <style>...</style>,
+	zmena v source/myhpage.cpp::hlavicka()
+2000-07-06: include/sc_pn.htm: "že panne doprial víazstvo,ä" --> bez "ä" (SCPN_rHYMNUS)
+-	include/_3stv.htm, _3STVv_PROSBY: bol vymeneny BEGIN a END
+-	pridany adresar download/, subory index.htm a verzia.txt a tiez disk[1,2].zip
+2000-07-04: include/_1ut.htm: "<!--{END:_1UTr_MODLITBA}--></b>" -->
+	"</b><br><!--{END:_1UTr_MODLITBA}-->"
+-	include/sv_jul.htm, 03JUL_vCIT: odstranena chyba (bol tam <br> v texte)
+-	source/breviar.cpp, source/dbzaltar.cpp: zmeny spojene s tym, ze program negeneroval
+	korektne spomienku "neposkvrneneho srdca prebl. panny marie" + padanie vtedy,
+	ked (napriek tomu, ze nemohla byt) sa dalo -x4 (dalsi_svaty == 4, sp.p.m.v sobotu)
+2000-06-26: include/z118.htm: "znie v stánkoch spravodlivých." --> "...spravodlivých:"
+-	include/z15.htm: "koná pravodlivo" --> "koná spravodlivo"
+2000-06-18: include/troj.htm: prve vesp., kratke cit., [A kto mu dal nieèo] "prv" --> "prvý"
+-	include/sv_jun.htm: (9.jun) modlitba: "svojim" --> "svojím"
+-	pridane v programe do spol. casti sv. muzov (dbzaltar.cpp), aby aj pre vespery
+	generovali kresponz prip. s velkonocnou priponou VE;
+	taktiez pridane aj k ucitelom cirkvi VE pre kresponz
+2000-06-06: dodatok/pc_bs.htm: linka na z95.htm zmenena na "../include/z95.htm"
+2000-06-05: include/vn2.htm, okolo textu kratkeho respoznoria rannych chval 7. velkonocnej
+	nedele (Kriste... Ty si vstal zmrtvych): 
+	zla kotva "<!--{BEGIN:VN1_rNECIT}-->" resp. "<!--{END:VN1_rNECIT}-->" 
+	zmenena na "<!--{BEGIN:VN2_rRESPNE}-->" resp. "<!--{END:VN2_rRESPNE}-->"
+2000-05-26: include/iz45.htm, slovo "opevnil" --> "upevnil"
+----------koniec----------
