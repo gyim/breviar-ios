@@ -88,9 +88,10 @@
 #define JAZYK_HU    6
 
 /* 2008-08-15: Pridané POCET_CSS, aby mohol by "dolník" (CSS_UNDEF) hodnota 0 */
-#define POCET_CSS	8
+#define POCET_CSS	9
 /* 2006-08-08: Pridané kvôli rôznym css-kám 
  * 2009-04-02: pridané historické css-ká
+ * 2010-02-25: pridané css pre webstránky http://www.jm-krize.cz/
  */
 #define CSS_UNDEF				0
 #define CSS_breviar_sk			1
@@ -101,6 +102,7 @@
 #define CSS_breviar_hist_2005	6
 #define CSS_breviar_hist_2007	7
 #define CSS_breviar_hist_2008	8
+#define CSS_jm_krize_cz			9
 
 /* nasledovne 2 definovane 2003-08-13; zmenene 2004-04-28 (12->16) */
 #define MAX_STR_AF_FILE   16
