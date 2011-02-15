@@ -4496,7 +4496,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 
 		}/* if(poradie_svateho != 4) */
 		else{
-			/* 2006-10-11: treba eöte jedno odsadenie, aby Detaily... boli pod sebou, ak sa jedn· napr. o sobotu */
+			/* 2006-10-11: treba eöte jedno odsadenie, aby Detaily... boli pod sebou, ak ide napr. o sobotu */
 			/* oddelenie */
 			if(som_v_tabulke == ANO)
 				Export("</td>\n<td>");
@@ -9779,7 +9779,7 @@ short int parseQueryString(void){
 	Log("pok˙öam sa zistiù query type...\n");
 	while((ok != ANO) && (i < pocet)){
 		Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
-		if(equals(param[i].name, STR_QUERY_TYPE)){ /* zistÌme typ akcie, lebo sa jedn· o dobr˝ parameter */
+		if(equals(param[i].name, STR_QUERY_TYPE)){ /* zistÌme typ akcie, lebo ide o dobr˝ parameter */
 			if(equals(param[i].val, STR_PRM_DATUM)){
 				/* ide o parameter STR_PRM_DATUM */
 				query_type = PRM_DATUM;
