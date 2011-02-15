@@ -7601,6 +7601,18 @@ short int _spol_cast_je_panna(_struct_sc sc){
 	_vlastna_cast_modlitba;\
 }
 
+#define _vlastna_cast_full_okrem_antifon(modl) {\
+	_vlastna_cast_hymnus;\
+	if(modl == MODL_POSV_CITANIE){_vlastna_cast_1citanie;}\
+	else {_vlastna_cast_kcitanie;}\
+	_vlastna_cast_kresponz;\
+	if(modl == MODL_RANNE_CHVALY){_vlastna_cast_benediktus;}\
+	else if((modl == MODL_VESPERY) || (modl == MODL_PRVE_VESPERY)){_vlastna_cast_magnifikat;}\
+	else if(modl == MODL_POSV_CITANIE){_vlastna_cast_2citanie;}\
+	_vlastna_cast_prosby;\
+	_vlastna_cast_modlitba;\
+}
+
 #define _vlastna_cast_full_okrem_prosieb(modl) {\
 	_vlastna_cast_hymnus;\
 	_vlastna_cast_antifony;\
@@ -7623,6 +7635,7 @@ short int _spol_cast_je_panna(_struct_sc sc){
 	else if(modl == MODL_POSV_CITANIE){_vlastna_cast_2citanie;}\
 	_vlastna_cast_modlitba;\
 }
+
 /* full -- vsetko (hymnus, antifony, kcitanie, kresponz,
  * benediktus/magnifikat, prosby, modlitba -- ina ako na rchv a vesp */
 #define _vlastna_cast_antifony_ako_na_ranne_chvaly {\
@@ -11598,19 +11611,9 @@ label_25_MAR:
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
 
-						/* 2008-05-08: doplnené */
-						modlitba = MODL_PREDPOLUDNIM;
-						_vlastna_cast_kcitanie; /* zo spoloènej èasti apoštolov */
-						_vlastna_cast_kresponz;
-						_vlastna_cast_modlitba;
-						modlitba = MODL_PREDPOLUDNIM;
-						_vlastna_cast_kcitanie; /* zo spoloènej èasti apoštolov */
-						_vlastna_cast_kresponz;
-						_vlastna_cast_modlitba;
-						modlitba = MODL_POPOLUDNI;
-						_vlastna_cast_kcitanie; /* zo spoloènej èasti apoštolov */
-						_vlastna_cast_kresponz;
-						_vlastna_cast_modlitba;
+						/* 2008-05-08: doplnené; 2009-10-21: upravené */
+						_vlastna_cast_mcd_kcitresp_modl;
+
 						break;
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
@@ -11850,19 +11853,9 @@ label_25_MAR:
 						_vlastna_cast_modlitba;
 						_vlastna_cast_magnifikat;
 
-						/* 2008-05-14: doplnené pod¾a 3. mája */
-						modlitba = MODL_PREDPOLUDNIM;
-						_vlastna_cast_kcitanie; /* zo spoloènej èasti apoštolov */
-						_vlastna_cast_kresponz;
-						_vlastna_cast_modlitba;
-						modlitba = MODL_PREDPOLUDNIM;
-						_vlastna_cast_kcitanie; /* zo spoloènej èasti apoštolov */
-						_vlastna_cast_kresponz;
-						_vlastna_cast_modlitba;
-						modlitba = MODL_POPOLUDNI;
-						_vlastna_cast_kcitanie; /* zo spoloènej èasti apoštolov */
-						_vlastna_cast_kresponz;
-						_vlastna_cast_modlitba;
+						/* 2008-05-14: doplnené pod¾a 3. mája; 2009-10-21: upravené */
+						_vlastna_cast_mcd_kcitresp_modl;
+
 						break;
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
@@ -13245,16 +13238,8 @@ label_25_MAR:
 							_vlastna_cast_hymnus;
 						}
 
-						/* 2009-08-17: doplnené krátke èítanie zo spol. èasti; modlitba ako na ranné chvály */
-						modlitba = MODL_PREDPOLUDNIM;
-						_vlastna_cast_kcitanie;
-						_vlastna_cast_modlitba;
-						modlitba = MODL_NAPOLUDNIE;
-						_vlastna_cast_kcitanie;
-						_vlastna_cast_modlitba;
-						modlitba = MODL_POPOLUDNI;
-						_vlastna_cast_kcitanie;
-						_vlastna_cast_modlitba;
+						/* 2009-08-17: doplnené krátke èítanie zo spol. èasti; modlitba ako na ranné chvály; 2009-10-21: upravené; doplnené krátke resp. */
+						_vlastna_cast_mcd_kcitresp_modl;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_antifony_ako_na_ranne_chvaly;
@@ -13988,13 +13973,8 @@ label_25_MAR:
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
 
-						/* 2009-07-30: doplnené krátke èítanie zo spol. èasti */
-						modlitba = MODL_PREDPOLUDNIM;
-						_vlastna_cast_kcitanie;
-						modlitba = MODL_NAPOLUDNIE;
-						_vlastna_cast_kcitanie;
-						modlitba = MODL_POPOLUDNI;
-						_vlastna_cast_kcitanie;
+						/* 2009-07-30: doplnené krátke èítanie zo spol. èasti; 2009-10-21: doplnené mcd ináè ako bolo dávnejšie */
+						_vlastna_cast_mcd_kcitresp_modl;
 
 						break;
 					}
@@ -14959,6 +14939,9 @@ label_25_MAR:
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 
+						/* 2009-10-21: doplnené mcd */
+						_vlastna_cast_mcd_kcitresp_modl;
+
 						break;
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
@@ -15763,6 +15746,9 @@ label_25_MAR:
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
 
+						/* 2009-10-21: doplnené mcd */
+						_vlastna_cast_mcd_kcitresp_modl;
+
 						break;
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
@@ -15940,7 +15926,6 @@ label_25_MAR:
 
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty, ANO, ANO, ANO, ANO, ANO); /* 2009-10-12: berú sa všetky veci zo spol. èasti */
-								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_PRVE_KOMPLETORIUM;
 							if(den != DEN_NEDELA){
@@ -15957,7 +15942,7 @@ label_25_MAR:
 							_vlastna_cast_antifona_inv;
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_full(modlitba);
+							_vlastna_cast_full_okrem_antifon(modlitba);
 							_set_zalmy_1nedele_rch();
 
 							modlitba = MODL_POSV_CITANIE;
@@ -16787,6 +16772,9 @@ label_25_MAR:
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 
+						/* 2009-10-21: doplnené mcd */
+						_vlastna_cast_mcd_kcitresp_modl;
+
 						break;
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
@@ -17593,6 +17581,9 @@ label_25_MAR:
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
 
+						/* 2009-10-21: doplnené mcd */
+						_vlastna_cast_mcd_kcitresp_modl;
+
 						break;
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
@@ -18097,21 +18088,8 @@ label_8_DEC:
 						_vlastna_cast_modlitba;
 						_set_zalmy_sviatok_jana_ap(modlitba);
 
-						/* modlitba cez deò, pridané 2006-02-05 */
-						modlitba = MODL_PREDPOLUDNIM;
-						_vlastna_cast_kcitanie;
-						_vlastna_cast_kresponz;
-						_vlastna_cast_modlitba;
-
-						modlitba = MODL_NAPOLUDNIE;
-						_vlastna_cast_kcitanie;
-						_vlastna_cast_kresponz;
-						_vlastna_cast_modlitba;
-
-						modlitba = MODL_POPOLUDNI;
-						_vlastna_cast_kcitanie;
-						_vlastna_cast_kresponz;
-						_vlastna_cast_modlitba;
+						/* modlitba cez deò, pridané 2006-02-05; 2009-10-21: upravené */
+						_vlastna_cast_mcd_kcitresp_modl;
 
 						/* vespery -- vsetko je z oktavy narodenia Pana */
 						break;
