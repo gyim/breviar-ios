@@ -501,6 +501,7 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 	mystrcpy(pom2, STR_EMPTY, MAX_STR); /* 2006-07-31: pridanÈ */
 
 	char str_subor[SMALL] = STR_EMPTY; /* 2009-08-12: pridanÈ */
+	char str_month[SMALL] = STR_EMPTY; /* 2009-08-12: pridanÈ */
 
 	/* ak pozadujeme vytvorenie linku s inou farbou pre prestupny rok, 2003-07-02 */
 	if(typ == LINK_DEN_MESIAC_ROK_PRESTUP)
@@ -570,6 +571,17 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 		}
 	}/* if(_global_opt_batch_monthly == NIE) */
 	else{
+		// najprv podæa typu exportu rozhodneme, Ëi treba predlepiù aj adres·r
+		if(typ == LINK_DEN_MESIAC_PREDOSLY || typ == LINK_DEN_MESIAC_NASLEDOVNY){
+			if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
+				sprintf(str_month, ".."STR_PATH_SEPARATOR_HTML""DIRNAME_EXPORT_MONTH_SIMPLE""STR_PATH_SEPARATOR_HTML, rok % 100, mesiac, nazov_mes[mesiac - 1]);
+			else /* EXPORT_DATE_FULL */
+				sprintf(str_month, ".."STR_PATH_SEPARATOR_HTML""DIRNAME_EXPORT_MONTH_FULL""STR_PATH_SEPARATOR_HTML, rok, mesiac, nazov_mesiaca_asci(mesiac - 1));
+		}
+		else{
+			mystrcpy(str_month, STR_EMPTY, SMALL);
+		}
+		Log("str_month == %s\n", str_month);
 		// reùazec pre deÚ a pre n·zov s˙boru
 		if(den != VSETKY_DNI){
 			if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
@@ -584,7 +596,8 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 			else /* EXPORT_DATE_FULL */
 				sprintf(str_subor, FILENAME_EXPORT_MONTH_FULL, rok, mesiac);
 		}
-		sprintf(pom, "%s.htm", str_subor);
+		Log("str_subor == %s\n", str_subor);
+		sprintf(pom, "%s%s.htm", str_month, str_subor);
 		Log("\treùazec pom == %s\n", pom);
 		strcat(_global_link, pom);
 	}

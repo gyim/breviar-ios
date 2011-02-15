@@ -463,6 +463,7 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #define HTML_RIGHT_ARROW		"&raquo;"
 /* 2009-08-12: pridané */
 #define HTML_LINK_CALL1         "%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s"
+#define HTML_LINK_CALL2         "%s?%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s"
 
 /* definície HTML prvkov upravené a presunuté do hodin.h, 2006-08-01;
  * tu ponechané len z historických dôvodov zakomentované
