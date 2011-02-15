@@ -821,6 +821,11 @@ const char *html_button_kompletorium_nunkdim[] = {"Kompletórium + Nunk dimittis"
 #define HTML_BUTTON_KOMPLETORIUM_NUNKDIM	html_button_kompletorium_nunkdim[_global_jazyk]
 #endif
 
+/* html <title> element for generated pages */
+/* doplnené, 2009-05-21 */
+const char *html_title[] = {"Liturgia hodín", "Liturgie hodin", "Liturgy of Hours", "la_", "", "Liturgie hodin", "hu_"};
+const char *html_title_batch_mode[] = {"Batch mód", "Dávkový režim", "Batch mode", "la_", "", "Dávkový režim", "hu_"};
+
 /* navigation buttons/texts: previous, next, today */
 const char *html_button_predchadzajuci_[] = {"Predchádzajúci", "Pøedchozí", "Previous", "Praecedénte", "", "Pøedchozí", "Elõzõ"};
 const char *html_button_nasledujuci_[] = {"Nasledujúci", "Následující", "Next", "Successívo", "", "Následující", "Következõ"};

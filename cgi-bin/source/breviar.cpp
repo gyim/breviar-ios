@@ -127,6 +127,8 @@
 /*   2009-04-08a.D. | zakonËenie modlitby dynamicky (pre modlitbu cez deÚ a*/
 /*                    kompletÛrium sa pouûÌva kratöie zakonËenie)          */
 /*                    eöte ost·va dorieöiù niektorÈ prÌpady (v slovenËine) */
+/*   2009-05-22a.D. | hlavicka((char *)html_title[_global_jazyk]);         */
+/*                  - ˙prava v _main_dnes(): nov˝ deÚ aû po pol tretej     */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -6741,7 +6743,10 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 	Log("-- _main_dnes(char *, char *): begin (%s, %s)\n", modlitba, poradie_svaty);
 
 	/* zisti denny cas */
-	timer = time(NULL);
+	/* 2009-05-22: pÙvodne tu bolo: timer = time(NULL); 
+	 * Pavel KuËera <teni@volny.cz> vöak poprosil, aby aj po polnoci eöte chvÌæu bolo moûnÈ modliù sa kompletÛrium
+	 */
+	timer = time(NULL)-(time_t)(2.5*60*60);
 
 	/* konvertuje date/time na strukturu */
 	dnes = *localtime(&timer);
@@ -7476,7 +7481,7 @@ void _main_batch_mode(
 				batch_html_file = fopen(name_batch_html_file, "wt");
 				if(batch_html_file != NULL){
 					Log("File `%s' opened for writing...\n", name_batch_html_file);
-					hlavicka("Batch mÛd", batch_html_file);
+					hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_html_file);
 					fprintf(batch_html_file, "\n");
 					fprintf(batch_html_file, "<center><h2>Zoznam modlitieb</h2></center>\n");
 					fprintf(batch_html_file, "<ul>\n");
@@ -9497,7 +9502,7 @@ int main(int argc, char **argv){
 	_main_LOG("uncgi_name == %s\n", uncgi_name);
 
 	initExport();
-//	hlavicka("Liturgia hodÌn");
+//	hlavicka((char *)html_title[_global_jazyk]);
 
 	/* nasledovalo tu vypisanie headingu 1,
 	 * avsak to je teraz v kazdej funkcii _main_...
@@ -9607,13 +9612,13 @@ int main(int argc, char **argv){
 					/* a napokon puovodna pasaz pred 2003-07-08 */
 					if(initExport(file_export) == SUCCESS){
 						Log("initExport(`%s'): success\n", file_export);
-						hlavicka("Liturgia hodÌn");
+						hlavicka((char *)html_title[_global_jazyk]);
 					}
 					else{
 						Log("initExport(`%s'): failure, \n", file_export);
 						Log("continuing to export into DEFAULT_FILE_EXPORT (`%s')\n", DEFAULT_FILE_EXPORT);
 						initExport(DEFAULT_FILE_EXPORT);
-						hlavicka("Liturgia hodÌn");
+						hlavicka((char *)html_title[_global_jazyk]);
 					}
 				}
 			}
@@ -9632,7 +9637,7 @@ int main(int argc, char **argv){
 			 */
 			/*
 			initExport();
-			hlavicka("Liturgia hodÌn");
+			hlavicka((char *)html_title[_global_jazyk]);
 			*/
 			break;
 		}
@@ -9844,7 +9849,7 @@ _main_SIMULACIA_QS:
 
 			LOG_ciara;
 
-			hlavicka("Liturgia hodÌn");
+			hlavicka((char *)html_title[_global_jazyk]);
 
 			_main_LOG_to_Export("/* teraz nasleduje vykonanie jadra programu podla parametrov */\n");
 			_main_LOG_to_Export("switch: podla query_type...\n");
