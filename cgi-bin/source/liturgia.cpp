@@ -670,13 +670,16 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 							sprintf(pom, ", %d", rok);
 						}
 					}
-					/* 2010-05-21: doplnené pre maïarèinu */
+					/* 2010-05-21: doplnené pre maïarèinu: 1999. augusztus 1. -- http://en.wikipedia.org/wiki/Date_and_time_notation_by_country#Hungary [2010-05-24] */
 					else if(_global_jazyk == JAZYK_HU){
-						sprintf(pom, "%s %d.", nazov_Mesiaca(mesiac - 1), den);
 						if(typ == LINK_DEN_MESIAC_ROK){
-							/* pridame aj rok */
+							/* pridáme najprv rok */
+							sprintf(pom, "%d. ", rok);
 							strcat(_global_link, pom);
-							sprintf(pom, ", %d", rok);
+							sprintf(pom, "%s %d.", nazov_mesiaca(mesiac - 1), den);
+						}
+						else{
+							sprintf(pom, "%s %d.", nazov_Mesiaca(mesiac - 1), den);
 						}
 					}
 					else{

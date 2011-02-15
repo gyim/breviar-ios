@@ -148,6 +148,7 @@
 /*   2010-02-19a.D. | oprava funkcie velkonocna_nedela (špec. prípady pre  */
 /*                    Gaussovo pravidlo; èiastoène upozornil Peter Chren)  */
 /*   2010-05-14a.D. | presunuté niektoré definy do breviar.h               */
+/*   2010-05-24a.D. | upravenı maïarskı formát dátumu                      */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -1791,9 +1792,11 @@ void interpretParameter(short int type, char *paramname){
 		}
 	}
 
-	/* 2010-05-21: pridané volite¾né zobrazovanie antifóny a modlitby pre spomienku svätca v pôstnom období */
+	/* 2010-05-21: pridané volite¾né zobrazovanie antifóny a modlitby pre spomienku svätca v pôstnom období 
+	 * 2010-05-24: podmienka zosilnená, aby sa v pôste nezobrazovalo "Ant." èervenou farbou z templáty, ak nie je nastavená tá ant. + modlitba pre spomienku
+	 */
 	else if(equals(paramname, PARAM_POST_SPOMIENKA_BEGIN)){
-		if(je_post){
+		if(je_post && je_ant_modl_spom_post){
 			/* zobrazi antifónu/modlitbu v pôste na spomienky svätcov */
 #if defined(EXPORT_HTML_SPECIALS)
 			Export("zobrazit ant.");
@@ -1811,7 +1814,7 @@ void interpretParameter(short int type, char *paramname){
 		}
 	}
 	else if(equals(paramname, PARAM_POST_SPOMIENKA_END)){
-		if(je_post){
+		if(je_post && je_ant_modl_spom_post){
 			/* zobrazi antifónu/modlitbu v pôste na spomienky svätcov */
 			Export("<!--");
 #if defined(EXPORT_HTML_SPECIALS)
@@ -5545,60 +5548,39 @@ void _export_rozbor_dna(short int typ){
 	}/* if((_global_den.denvt == DEN_NEDELA) || (_global_den.prik == PRIKAZANY_SVIATOK) || (_global_den.smer < 5)) */
 	else if(_global_pocet_svatych > 0){
 		/* sviatky (spomienky, ls) svatych */
-		if((_global_den.smer > _global_svaty1.smer) ||
-			(_global_den.smer == 9) && (_global_svaty1.smer == 12)){
-				/* 2009-01-05: Vlado K. ma upozornil, e ak je smer svätı == 12, ale deò je 9 (bod 59. smerníc o LH a kalendári, è. 12),
-				 *             bolo by lepšie ponúknu najprv deò a a potom ostatné slávenia 
-				 * 2010-05-21: Rastislav Hamráèek SDB <rastohamracek@sdb.sk> upozornil defacto na to isté ako Vlado: aby to bolo pod¾a direktória
-				 */
-			if(_global_den.smer > _global_svaty1.smer){
-
-				/* 2005-08-22: pôvodne sa tu porovnávalo s 12, ale aj pre 11 (lokálne slávenia) 
-				 *             by mal systém ponúknu všednı deò - keï je to napr. v inej diecéze
-				 * 2009-11-26: porovnávame klasicky, resp. špeciálne pre body 4, 8, 11 [Miestne slávnosti, Miestne sviatky, Miestne povinné spomienky]
-				 *             pred touto úpravou tu bolo: if((_global_svaty1.smer >= 11) && atï.
-				 * 2010-05-21: sem presunuté potenciálne vypisovanie (export) všedného dòa pred prvého svätca, ak je ¾ubovo¾ná spomienka
-				 *             teraz vlastne obe vetvy vyzerajú rovnako, asi to zjednotím èasom... (TODO_CLEANUP)
-				 */
-				if(((_global_svaty1.smer >= 12) || (_global_svaty1.smer == 4) || (_global_svaty1.smer == 8) || (_global_svaty1.smer == 11)) &&
-					(typ != EXPORT_DNA_VIAC_DNI)){
-					/* ak je to iba lubovolna spomienka, tak vsedny den */
-					/* 2010-05-21: NEWLINE; bolo pred; musíme ho zaradi za :) */
-					BUTTONS(typ, 0);
-					NEWLINE;
-				}
-
-				/* 2010-05-21: pôvodne bolo: "sviatok, spomienka alebo ¾ubovo¾ná spomienka svätého/svätıch, ide prv ako všednı deò"; 
-				 *             dnes ide prv len ak je to sviatok alebo spomienka 
-				 *             (a vlastne vtedy sa všednı deò vypisuje len pre lokálne sviatky resp. spomienky) 
-				 */
-				BUTTONS(typ, 1);
-				if(_global_pocet_svatych > 1){
-					NEWLINE;
-					BUTTONS(typ, 2);
-					if(_global_pocet_svatych > 2){
-						NEWLINE;
-						BUTTONS(typ, 3);
-					}
-				}
-				/* 2010-05-21: odtia¾to presunuté potenciálne vypisovanie (export) všedného dòa pred prvého svätca, ak je ¾ubovo¾ná spomienka */
+		if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer == 9) && (_global_svaty1.smer == 12)){
+			/* 2009-01-05: Vlado K. ma upozornil, e ak je smer svätı == 12, ale deò je 9 (bod 59. smerníc o LH a kalendári, è. 12),
+			 *             bolo by lepšie ponúknu najprv deò a a potom ostatné slávenia 
+			 * 2010-05-21: Rastislav Hamráèek SDB <rastohamracek@sdb.sk> upozornil defacto na to isté ako Vlado: aby to bolo pod¾a direktória
+			 * ----------------------------------------------------------------------------
+			 * 2005-08-22: pôvodne sa tu porovnávalo s 12, ale aj pre 11 (lokálne slávenia) 
+			 *             by mal systém ponúknu všednı deò - keï je to napr. v inej diecéze
+			 * 2009-11-26: porovnávame klasicky, resp. špeciálne pre body 4, 8, 11 [Miestne slávnosti, Miestne sviatky, Miestne povinné spomienky]
+			 *             pred touto úpravou tu bolo: if((_global_svaty1.smer >= 11) && atï.
+			 * 2010-05-21: sem presunuté potenciálne vypisovanie (export) všedného dòa pred prvého svätca, ak je ¾ubovo¾ná spomienka
+			 *             teraz vlastne obe vetvy vyzerajú rovnako, asi to zjednotím èasom...
+			 * 2010-05-24: zjednotené; bolo odvetvené "if(_global_den.smer > _global_svaty1.smer)"; 
+			 *             else vetva mala napísané: "¾ubovo¾ná spomienka svätého/svätıch, prièom všednı deò má vyššiu prioritu slávenia"
+			 *             a ešte: "2010-05-21: odtia¾to presunuté potenciálne vypisovanie (export) všedného dòa pred prvého svätca, ak je ¾ubovo¾ná spomienka"
+			 */
+			if(((_global_svaty1.smer >= 12) || (_global_svaty1.smer == 4) || (_global_svaty1.smer == 8) || (_global_svaty1.smer == 11)) &&
+				(typ != EXPORT_DNA_VIAC_DNI)){
+				/* ak je to iba lubovolna spomienka, tak vsedny den */
+				/* 2010-05-21: NEWLINE; bolo pred; musíme ho zaradi za :) */
+				BUTTONS(typ, 0);
+				NEWLINE;
 			}
-			else{
-				/* ¾ubovo¾ná spomienka svätého/svätıch, prièom všednı deò má vyššiu prioritu slávenia */
-				if(((_global_svaty1.smer >= 12) || (_global_svaty1.smer == 4) || (_global_svaty1.smer == 8) || (_global_svaty1.smer == 11)) &&
-					(typ != EXPORT_DNA_VIAC_DNI)){
-					/* ak je to iba lubovolna spomienka, tak vsedny den */
-					BUTTONS(typ, 0);
+			/* 2010-05-21: pôvodne bolo: "sviatok, spomienka alebo ¾ubovo¾ná spomienka svätého/svätıch, ide prv ako všednı deò"; 
+			 *             dnes ide prv len ak je to sviatok alebo spomienka 
+			 *             (a vlastne vtedy sa všednı deò vypisuje len pre lokálne sviatky resp. spomienky) 
+			 */
+			BUTTONS(typ, 1);
+			if(_global_pocet_svatych > 1){
+				NEWLINE;
+				BUTTONS(typ, 2);
+				if(_global_pocet_svatych > 2){
 					NEWLINE;
-				}
-				BUTTONS(typ, 1);
-				if(_global_pocet_svatych > 1){
-					NEWLINE;
-					BUTTONS(typ, 2);
-					if(_global_pocet_svatych > 2){
-						NEWLINE;
-						BUTTONS(typ, 3);
-					}
+					BUTTONS(typ, 3);
 				}
 			}
 		}/* svaty ma prednost */
@@ -7400,9 +7382,9 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				else if(_global_jazyk == JAZYK_EN){
 					sprintf(pom, "%s %d, %d", nazov_Mesiaca(m - 1), d, r);
 				}
-				/* 2010-05-21: doplnené pre maïarèinu */
+				/* 2010-05-21: doplnené pre maïarèinu: 1999. augusztus 1. -- http://en.wikipedia.org/wiki/Date_and_time_notation_by_country#Hungary [2010-05-24] */
 				else if(_global_jazyk == JAZYK_HU){
-					sprintf(pom, "%s %d., %d", nazov_Mesiaca(m - 1), d, r);
+					sprintf(pom, "%d. %s %d.", r, nazov_mesiaca(m - 1), d);
 				}
 				else{
 					/* doterajšie správanie pre slovenèinu a èeštinu */
@@ -7504,9 +7486,9 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 	else if(_global_jazyk == JAZYK_EN){
 		sprintf(pom, "%s %d, %d", nazov_Mesiaca(dnes.tm_mon - 1), dnes.tm_mday, dnes.tm_year);
 	}
-	/* 2010-05-21: doplnené pre maïarèinu */
+	/* 2010-05-21: doplnené pre maïarèinu: 1999. augusztus 1. -- http://en.wikipedia.org/wiki/Date_and_time_notation_by_country#Hungary [2010-05-24] */
 	else if(_global_jazyk == JAZYK_HU){
-		sprintf(pom, "%s %d., %d", nazov_Mesiaca(dnes.tm_mon - 1), dnes.tm_mday, dnes.tm_year);
+		sprintf(pom, "%d. %s %d.", dnes.tm_year, nazov_mesiaca(dnes.tm_mon - 1), dnes.tm_mday);
 	}
 	else{
 		/* doterajšie správanie pre slovenèinu a èeštinu */

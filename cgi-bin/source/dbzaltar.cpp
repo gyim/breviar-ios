@@ -12718,8 +12718,8 @@ label_25_MAR:
 							break;
 						}
 						pocet = 3;
-						_global_svaty3.typslav = SLAV_SPOMIENKA;
-						_global_svaty3.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+						_global_svaty3.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty3.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 						mystrcpy(_global_svaty3.meno, text_MAJ_21_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_VIACERI);
 						_global_svaty3.farba = LIT_FARBA_CERVENA;
@@ -12742,8 +12742,8 @@ label_25_MAR:
 							break;
 						}
 						pocet = 2;
-						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
+						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 						mystrcpy(_global_svaty2.meno, text_MAJ_21_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_VIACERI);
 						_global_svaty2.farba = LIT_FARBA_CERVENA;
@@ -12796,21 +12796,35 @@ label_25_MAR:
 					_global_svaty1.farba = LIT_FARBA_BIELA;
 					break;
 				case 24: /* MES_MAY */
-					/* 2009-03-24: doplnenÈ pre dominik·nov */
+					/* 2009-03-24: doplnenÈ pre dominik·nov 
+					 * 2010-05-24: doplnenÈ podæa toho, Ëo sa m· braù z vlastnej Ëasti
+					 */
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
+							modlitba = MODL_INVITATORIUM;
+							_vlastna_cast_antifona_inv;
+
 							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_hymnus;
 							_vlastna_cast_modlitba;
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
 
 							break;
