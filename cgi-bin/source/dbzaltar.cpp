@@ -3245,6 +3245,13 @@ void _set_zalmy_najsv_mena_jezisovho(short int modlitba){
 	Log("_set_zalmy_najsv_mena_jezisovho(%s) -- end\n", nazov_modlitby(modlitba));
 }
 
+/* 2009-06-10: doplnený popis */
+#define _vlastne_slavenie_popis(anchor) {\
+	sprintf(_anchor, "%s_%s", anchor, ANCHOR_POPIS);\
+	_set_popis(modlitba, _file, _anchor);\
+	set_LOG_litobd;\
+}
+
 /* 2007-11-14: doplnené invitatórium; použite¾né pre _bohorod, _krkrala, _krst... a pod. */
 #define _vlastne_slavenie_invitat(anchor) {\
 	sprintf(_anchor, "%s_%c%s", anchor, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1);\
@@ -18193,13 +18200,12 @@ label_8_DEC:
 		poradie_svaty = 1;
 		if(poradie_svaty == 1){
 			/* definovanie parametrov pre modlitbu */
-
 			if(query_type != PRM_DETAILY)
 			set_spolocna_cast(sc, poradie_svaty);
-			/* ZNOVUNASTAVENIE_POPISU_NA_DUMMY, 2003-06-30 */
-			Log("vo funkcii sviatky_svatych() spustam set_popis_dummy(); - kvoli spomienke neposkvrneneho srdca panny marie...\n");
-			set_popis_dummy();
-			Log("set_popis_dummy() skoncila.\n");
+			/* ZNOVUNASTAVENIE_POPISU_NA_DUMMY, 2003-06-30; 2009-06-10: zapoznámkované */
+			// Log("vo funkcii sviatky_svatych() spustam set_popis_dummy(); - kvoli spomienke neposkvrneneho srdca panny marie...\n");
+			// set_popis_dummy();
+			// Log("set_popis_dummy() skoncila.\n");
 
 			mystrcpy(_file, FILE_SRDCA_PM, MAX_STR_AF_FILE);
 			mystrcpy(_anchor, ANCHOR_SRDCA_PM, MAX_STR_AF_ANCHOR);
@@ -18209,10 +18215,12 @@ label_8_DEC:
 			modlitba = MODL_RANNE_CHVALY;
 			_vlastne_slavenie_benediktus(_anchor_vlastne_slavenie);
 			_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+			_vlastne_slavenie_popis(_anchor_vlastne_slavenie); /* 2009-06-10: doplnené */
 			/* 2005-08-25: Pridané */
 			modlitba = MODL_POSV_CITANIE;
 			_srdca_pm_2cit;
 			_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+			_vlastne_slavenie_popis(_anchor_vlastne_slavenie); /* 2009-06-10: doplnené */
 		}
 		_global_svaty1.typslav = SLAV_SPOMIENKA;
 		/* 2003-06-30: kedysi tu bolo 11: "miestne povinne spomienky podla vseobecneho kalendara"
