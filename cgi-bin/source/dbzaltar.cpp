@@ -2943,6 +2943,8 @@ void _set_zalmy_sviatok_apostolov(short int modlitba){
 	Log("_set_zalmy_sviatok_apostolov(%s) -- end\n", nazov_modlitby(modlitba));
 }
 
+/* 2009-03-27: tie isté žalmy sa používajú aj pre sviatky svätých mužov */
+#define _set_zalmy_sviatok_sv_muzov(a) _set_zalmy_sviatok_duch_past(a)
 void _set_zalmy_sviatok_duch_past(short int modlitba){
 	Log("_set_zalmy_sviatok_duch_past(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_VESPERY){
@@ -3370,26 +3372,18 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 	  * 28/03/2000A.D.
 	  * rovnako tak slavnost vsetkych svatych (1. novembra) - bez ohladu na to, ci ide o nedelu,
 	  * 29/03/2000A.D.
-	  *
 	  * 2003-06-30a.D.: rovnako tak pre slavnost sv. Petra a sv. Pavla (29. juna)
-	  *
 	  * 2006-02-07: pravdupovediac, všetko sa nenastavilo (modlitba cez deò, žalmy) - musím to fixnú
-	  * 
 	  * 2007-07-17: vyzerá to tak, že asi je potrebné zbehnú aj v týchto prípadoch nastavenia 
 	  *		kvôli modlitbe cez deò tak, ako to bolo len pre sviatok povýšenia sv. kríža
-	  *
 	  * 2008-02-27: doplnený aj prípad, keï na nede¾u padne slávnos nanebovzatia PM (15. augusta)
-	  *
 	  * 2008-07-03: nemusí to nutne by nede¾a; vtedy si to všetko slávnosti musia nastavi 
 	  *		samotné - bolo tu "(_global_den.denvt == DEN_NEDELA) && " - odstránené
 	  *		ponechané jedine pre modlitbu cez deò, ktorá v slávnosti padne mimo nedele
-	  *
 	  * 2008-07-11: doplnená aj slávnos sv. cyrila a metoda (možno by bolo lepšie, ak by to bolo pod¾a stupòa (sviatok pána resp. slávnos svätca) v cezroènom období)
-	  *
 	  * 2008-10-09: doplnená pre èeský breviáø slávnos sv. václava
-	  *
 	  * 2009-01-06: doplnená poznámka k Premeneniu Pána
-	  *
+	  * 2009-03-27: doplnený aj sviatok - výroèie posviacky lateránskej baziliky, ak padne na nede¾u (nižšie)
 	  */
 	Log("najprv treba skontrolova, èi nejde o deò [pôvodne nede¾u], na ktorú pripadol sviatok premenenia pána a podobné... (ak áno, nenastavuj niè)\n");
 	if(
@@ -3419,12 +3413,18 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				}
 	}
 	else{
-		Log("NEjde o: premenenie pána || petra a pavla || povýšenie sv. kríža || všetkých svätých...\n");
+		Log("NEjde o: premenenie pána || petra a pavla || povýšenie sv. kríža || všetkých svätých || nanebovzatia PM...\n");
 	}
 
-	Log("teraz spustíme zaltar_zvazok(); - pôvodne sa púšala s dvoma parametrami, pridaný parameter pre zväzok breviára (voláme s hodnotou ZALTAR_VSETKO)\n");
-	/* 2006-01-24: pôvodne sa púšala fnkcia s 2 parametrami; pridaný ïalší parameter pre zväzok breviára */
-	zaltar_zvazok(den, tyzzal, _global_den.litobd, ZALTAR_VSETKO);
+	/* 2009-03-27: doplnený aj sviatok - výroèie posviacky lateránskej baziliky, ak padne na nede¾u */
+	if((_global_den.den == 9) && (_global_den.mesiac - 1 == MES_NOV) && (_global_den.denvt == DEN_NEDELA)){
+		Log("výroèie posviacky lateránskej baziliky, ak padne na nede¾u - netreba žaltár... (budú aj prvé vešpery)\n");
+	}
+	else{
+		Log("teraz spustíme zaltar_zvazok(); - pôvodne sa púšala s dvoma parametrami, pridaný parameter pre zväzok breviára (voláme s hodnotou ZALTAR_VSETKO)\n");
+		/* 2006-01-24: pôvodne sa púšala fnkcia s 2 parametrami; pridaný ïalší parameter pre zväzok breviára */
+		zaltar_zvazok(den, tyzzal, _global_den.litobd, ZALTAR_VSETKO);
+	}
 
 	Log("následne odlišný súbor pre posvätné èítania...\n");
 	file_name_litobd(litobd);
@@ -7363,8 +7363,8 @@ short int modlitba;
  *
  * az na konci nastavi .den a .mesiac, ostatne sa nastavia inde !!!
  *
- * 09/02/2000A.D.: tato funkcia default dostava vstup poradie_svaty == 0;
- * to sa rovna 'staremu pouzitiu'; v pripade, ze poradie_svaty != 0,
+ * 09/02/2000A.D.: tato funkcia default dostava vstup poradie_svaty == 0 (resp. UNKNOWN_PORADIE_SVATEHO);
+ * to sa rovna 'staremu pouzitiu'; v pripade, ze poradie_svaty != 0 (resp. UNKNOWN_PORADIE_SVATEHO),
  * znamena to, ze chceme uz pri generovani modlitby nastavit konkretne
  * pre danu modlitbu (svateho) atributy.
  *
@@ -9013,7 +9013,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc){
 	nazov_spolc(sc.a3), sc.a3); Log
 
 void set_spolocna_cast(_struct_sc sc, short int poradie_svaty){
-	/* poradie_svaty je vstupom iba kvoli tomu, ze ak je 0,
+	/* poradie_svaty je vstupom iba kvoli tomu, ze ak je 0 -> UNKNOWN_PORADIE_SVATEHO,
 	 * potom nas neznepokojuju vypisy typu Error: not assigned...
 	 *
 	 * 22/02/2000A.D.: ked nastavi vo formulari (detaily) zalmy zo `sviatku'
@@ -9103,7 +9103,7 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty){
 						}
 						else
 						/* sem by to nemalo prist */
-						if(poradie_svaty != 0){
+						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO){
 							set_LOG_sc("-- Error: sc (a1, a2) su sice urcene, ale _global_opt3 sa nerovna ani jednej z nich!\n");
 							Export("%s\n", "Error: _global_opt3 assigned incorectly (a1, a2 -- ok)");
 							ALERT;
@@ -9119,7 +9119,7 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty){
 				}
 				else
 				/* sem by to nemalo prist */
-				if(poradie_svaty != 0){
+				if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO){
 					set_LOG_sc("-- Error: sc (a1) je sice urcena, ale _global_opt3 sa jej nerovna!\n");
 					Export("%s\n", "Error: _global_opt3 assigned incorectly (a1 -- ok)");
 					ALERT;
@@ -9130,7 +9130,7 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty){
 	}/* sc.a1 je urcene */
 	else{
 		/* sem by to nemalo prist */
-		if(poradie_svaty != 0){
+		if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO){
 			Log("-- Error: sc (a1) nie je urcene; _global_opt3 == %s\n", nazov_spolc(_global_opt3));
 			Export("%s\n", "Error: a1 (member of sc) assigned incorectly");
 			ALERT;
@@ -9207,7 +9207,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 	 * to je vtedy, ked je tato funkcia volana poprvykrat
 	 */
 
-	if((poradie_svaty < 1) || (poradie_svaty > 3)){
+	if((poradie_svaty < 1) || (poradie_svaty > 3)){ /* napr. aj UNKNOWN_PORADIE_SVATEHO */
 		/* den */
 		_global_svaty1.den = _global_svaty2.den = _global_svaty3.den = den;
 		/* mesiac */
@@ -9252,13 +9252,13 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 		Log("   (tu bola pasaz, co je teraz v sviakty_svatych() so 4 vstupmi)\n");
 	}
 	/* dalsia cast v zatvorkach {, } je sice len pre pripad, ze
-	 * poradie_svaty == 1, 2, 3; avsak aj pre 0 je to
+	 * poradie_svaty == 1, 2, 3; avsak aj pre 0 resp. UNKNOWN_PORADIE_SVATEHO je to
 	 * preto, ze aj ked nie je svaty urceny, moze ist o slavnost,
 	 * ktora ma takmer najvacsiu prioritu, a preto ma aj prve
 	 * vespery - a vtedy by to normalne nefungovalo
 	 */
 	{/* pasaz kt. ma zmysel len pre poradie_svaty == 1, 2, 3, ale
-	  * v pripade slavnosti aj pre == 0 */
+	  * v pripade slavnosti aj pre == 0 resp. UNKNOWN_PORADIE_SVATEHO */
 		Log("/* nastavenie nazvu suboru, kotvy apod. (sviatky_svatych) */\n");
 		/* nastavenie nazvu suboru, kotvy apod. */
 		if(poradie_svaty > 1) /* pridame cislo svateho */
@@ -9825,8 +9825,9 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					 * treba vsak upravit kotvu _anchor
 					 */
 				case 2: /* MES_FEB */
-					//if(poradie_svaty == 1){
-					if((poradie_svaty == 0) || (poradie_svaty == 1)){
+					// if(poradie_svaty == 1){
+					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
+					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 						/* definovanie parametrov pre modlitbu */
 
 						if((poradie_svaty == 1) &&
@@ -9861,7 +9862,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_sviatok_krstu(modlitba);
 
-						if(poradie_svaty != 0) break;
+						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 5; /* sviatky Pana uvedene vo vseobecnom kalendari */
@@ -10560,8 +10561,9 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					break;
 				case 19: /* MES_MAR */
 label_19_MAR:
-					//if(poradie_svaty == 1){
-					if((poradie_svaty == 0) || (poradie_svaty == 1)){
+					// if(poradie_svaty == 1){
+					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
+					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 						/* definovanie parametrov pre modlitbu */
 
 						if((poradie_svaty == 1) &&
@@ -10576,7 +10578,7 @@ label_19_MAR:
 						else if((_global_den.litobd == OBD_POSTNE_I) || (_global_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN)){
 							_vlastna_cast_kresponz_po;
 						}
-						_set_zalmy_sviatok_duch_past(modlitba);
+						_set_zalmy_sviatok_sv_muzov(modlitba);
 
 						/* 2007-11-14: doplnené invitatórium */
 						modlitba = MODL_INVITATORIUM;
@@ -10595,6 +10597,7 @@ label_19_MAR:
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_antifony;
+						_set_zalmy_sviatok_sv_muzov(modlitba); /* 2009-03-27: doplnené */
 						_vlastna_cast_modlitba;
 						_vlastna_cast_kresponz;
 						_vlastna_cast_1citanie;
@@ -10619,7 +10622,7 @@ label_19_MAR:
 						else if((_global_den.litobd == OBD_POSTNE_I) || (_global_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN)){
 							_vlastna_cast_kresponz_po;
 						}
-						_set_zalmy_sviatok_duch_past(modlitba);
+						_set_zalmy_sviatok_sv_muzov(modlitba);
 
 						/* 2008-12-09: doplnené kompletórium */
 						modlitba = MODL_PRVE_KOMPLETORIUM;
@@ -10628,7 +10631,7 @@ label_19_MAR:
 						modlitba = MODL_KOMPLETORIUM;
 						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
 
-						if(poradie_svaty != 0) break;
+						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
 					_global_svaty1.typslav = SLAV_SLAVNOST;
 					_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
@@ -10674,8 +10677,9 @@ label_19_MAR:
 					break;
 				case 25: /* MES_MAR */
 label_25_MAR:
-					//if(poradie_svaty == 1){
-					if((poradie_svaty == 0) || (poradie_svaty == 1)){
+					// if(poradie_svaty == 1){
+					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
+					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 						/* definovanie parametrov pre modlitbu */
 
 						if((poradie_svaty == 1) &&
@@ -10747,7 +10751,7 @@ label_25_MAR:
 						modlitba = MODL_KOMPLETORIUM;
 						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
 
-						if(poradie_svaty != 0) break;
+						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
 					_global_svaty1.typslav = SLAV_SLAVNOST;
 					_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
@@ -12189,6 +12193,10 @@ label_25_MAR:
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
+							/* 2009-03-27: doplnené invitatórium */
+							modlitba = MODL_INVITATORIUM;
+							_vlastna_cast_antifona_inv;
+
 							modlitba = MODL_RANNE_CHVALY;
 							_vlastna_cast_full(modlitba);
 
@@ -12719,8 +12727,9 @@ label_25_MAR:
 					_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					break;
 				case 24: /* MES_JUN */
-					//if(poradie_svaty == 1){
-					if((poradie_svaty == 0) || (poradie_svaty == 1)){
+					// if(poradie_svaty == 1){
+					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
+					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 						/* definovanie parametrov pre modlitbu */
 
 						if((poradie_svaty == 1) &&
@@ -12770,7 +12779,7 @@ label_25_MAR:
 						modlitba = MODL_KOMPLETORIUM;
 						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
 
-						if(poradie_svaty != 0) break;
+						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
 					_global_svaty1.typslav = SLAV_SLAVNOST;
 					_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
@@ -12878,8 +12887,9 @@ label_25_MAR:
 					break;
 				case 29: /* MES_JUN */
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
-					if((poradie_svaty == 0) || (poradie_svaty == 1)){
-						/* preto 0, ze aj ked nie je svaty urceny, ide o slavnost,
+					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
+					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
+						/* preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o slavnost,
 						 * ktora ma takmer najvacsiu prioritu, a preto ma aj prve
 						 * vespery - a vtedy by to normalne nefungovalo;
 						 * nastavenie veci pre modlitbu by sa muselo diat
@@ -12949,7 +12959,7 @@ label_25_MAR:
 							_set_kompletorium_nedela(modlitba);
 						}
 
-						if(poradie_svaty != 0) break;
+						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
 					_global_svaty1.typslav = SLAV_SLAVNOST;
 					_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
@@ -13135,8 +13145,9 @@ label_25_MAR:
 					break;
 				case 5: /* MES_JUL */
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
-					if((poradie_svaty == 0) || (poradie_svaty == 1)){
-						/* preto 0, ze aj ked nie je svaty urceny, ide o slavnost,
+					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
+					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
+						/* preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o slavnost,
 						 * ktora ma takmer najvacsiu prioritu, a preto ma aj prve
 						 * vespery - a vtedy by to normalne nefungovalo;
 						 * nastavenie veci pre modlitbu by sa muselo diat
@@ -13204,7 +13215,7 @@ label_25_MAR:
 							_set_kompletorium_nedela(modlitba);
 						}
 
-						if(poradie_svaty != 0) break;
+						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
 					_global_svaty1.typslav = SLAV_SLAVNOST;
 					_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
@@ -14113,8 +14124,9 @@ label_25_MAR:
 				case 6: /* MES_AUG */
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
-					if((poradie_svaty == 0) || (poradie_svaty == 1)){
-						/* preto 0, ze aj ked nie je svaty urceny, ide o sviatok Pana,
+					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
+					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
+						/* preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o sviatok Pana,
 						 * ktora ma velku prioritu, a preto ma aj - ak je nedela - prve
 						 * vespery 
 						 */
@@ -14162,7 +14174,7 @@ label_25_MAR:
 						modlitba = MODL_KOMPLETORIUM; /* 2009-01-06: keïže v liturgicke_obdobie() bolo odvetvené, niè sa pre kompletórium nenastavovalo - doplnené */
 						zaltar_kompletorium(_global_den.denvt, _global_den.litobd /* OBD_CEZ_ROK */, ZALTAR_VSETKO /* specialne */);
 
-						if(poradie_svaty != 0) break;
+						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 5; /* sviatky Pana uvedene vo vseobecnom kalendari */
@@ -14423,8 +14435,9 @@ label_25_MAR:
 				case 15: /* MES_AUG */
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
-					if((poradie_svaty == 0) || (poradie_svaty == 1)){
-						/* preto 0, ze aj ked nie je svaty urceny, ide o sviatok Pana,
+					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
+					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
+						/* preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o sviatok Pana,
 						 * ktora ma velku prioritu, a preto ma aj - ak je nedela - prve
 						 * vespery 
 						 */
@@ -14480,7 +14493,7 @@ label_25_MAR:
 						modlitba = MODL_KOMPLETORIUM;
 						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
 
-						if(poradie_svaty != 0) break;
+						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
 					_global_svaty1.typslav = SLAV_SLAVNOST;
 					_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
@@ -15174,8 +15187,9 @@ label_25_MAR:
 				case 14: /* MES_SEP */
 					_global_svaty1.spolcast =
 						_encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
-					if((poradie_svaty == 0) || (poradie_svaty == 1)){
-						/* preto 0, ze aj ked nie je svaty urceny, ide o sviatok Pana,
+					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
+					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
+						/* preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o sviatok Pana,
 						 * ktora ma velku prioritu, a preto ma aj - ak je nedela - prve
 						 * vespery 
 						 */
@@ -15220,7 +15234,7 @@ label_25_MAR:
 						modlitba = MODL_KOMPLETORIUM;
 						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
 
-						if(poradie_svaty != 0) break;
+						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
 					_global_svaty1.smer = 5; /* sviatky Pana uvedene vo vseobecnom kalendari */
@@ -15229,8 +15243,8 @@ label_25_MAR:
 					break;
 				case 15: /* MES_SEP */
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
-					if(((poradie_svaty == 0) && (_global_jazyk == JAZYK_SK)) || (poradie_svaty == 1)){
-						/* preto 0, ze aj ked nie je svaty urceny, ide o slavnost (2006-09-12: len na Slovensku),
+					if(((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) && (_global_jazyk == JAZYK_SK)) || (poradie_svaty == 1)){
+						/* preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o slavnost (2006-09-12: len na Slovensku),
 						 * ktora ma takmer najvacsiu prioritu, a preto ma aj prve
 						 * vespery - a vtedy by to normalne nefungovalo;
 						 * nastavenie veci pre modlitbu by sa muselo diat
@@ -15282,7 +15296,7 @@ label_25_MAR:
 						modlitba = MODL_KOMPLETORIUM;
 						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
 
-						if(poradie_svaty != 0) break;
+						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
 					if(_global_jazyk == JAZYK_SK){ /* 2006-09-12: odvetvené pre Slovensko */
 						_global_svaty1.typslav = SLAV_SLAVNOST;
@@ -15700,8 +15714,8 @@ label_25_MAR:
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){ /* 2008-10-09: odvetvené len pre Èesko; prevzaté pod¾a cyrila a metoda */
 
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
-						if((poradie_svaty == 0) || (poradie_svaty == 1)){
-							/* preto 0, ze aj ked nie je svaty urceny, ide o slavnost,
+						if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
+							/* preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o slavnost,
 							 * ktora ma takmer najvacsiu prioritu, a preto ma aj prve
 							 * vespery - a vtedy by to normalne nefungovalo;
 							 * nastavenie veci pre modlitbu by sa muselo diat
@@ -15759,7 +15773,7 @@ label_25_MAR:
 								_set_kompletorium_nedela(modlitba);
 							}
 
-							if(poradie_svaty != 0) break;
+							if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 						}
 						_global_svaty1.typslav = SLAV_SLAVNOST;
 						_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
@@ -16652,8 +16666,8 @@ label_25_MAR:
 			switch(den){
 				case 1: /* MES_NOV */
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
-					if((poradie_svaty == 0) || (poradie_svaty == 1)){
-						/* preto 0, ze aj ked nie je svaty urceny, ide o sviatok Pana,
+					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
+						/* preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o sviatok Pana,
 						 * ktora ma velku prioritu, a preto ma aj - ak je nedela - prve
 						 * vespery 
 						 */
@@ -16704,7 +16718,7 @@ label_25_MAR:
 						modlitba = MODL_KOMPLETORIUM;
 						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
 
-						if(poradie_svaty != 0) break;
+						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
 					_global_svaty1.typslav = SLAV_SLAVNOST;
 					_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
@@ -16881,7 +16895,9 @@ label_25_MAR:
 					}
 					break;
 				case 9: /* MES_NOV */
-					if(poradie_svaty == 1){
+					// if(poradie_svaty == 1){
+					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
+					if(((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) && (_global_den.denvt == DEN_NEDELA)) || (poradie_svaty == 1)){
 						/* definovanie parametrov pre modlitbu */
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
@@ -17541,8 +17557,8 @@ label_25_MAR:
 				case 8: /* MES_DEC */
 label_8_DEC:
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
-					if((poradie_svaty == 0) || (poradie_svaty == 1)){
-						/* preto 0, ze aj ked nie je svaty urceny, ide o slavnost,
+					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
+						/* preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o slavnost,
 						 * ktora ma takmer najvacsiu prioritu, a preto ma aj prve
 						 * vespery - a vtedy by to normalne nefungovalo;
 						 * nastavenie veci pre modlitbu by sa muselo diat
@@ -17597,7 +17613,7 @@ label_8_DEC:
 						modlitba = MODL_KOMPLETORIUM;
 						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
 
-						if(poradie_svaty != 0) break;
+						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
 					_global_svaty1.typslav = SLAV_SLAVNOST;
 					_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
@@ -18134,8 +18150,8 @@ label_8_DEC:
 short int sviatky_svatych(short int den, short int mesiac){
 	short int ret;
 	Log("-- sviatky_svatych(%d, %d) -- spustam bez tretieho parametra\n", den, mesiac);
-	Log("   (poradie_svaty == 0)\n");
-	ret = sviatky_svatych(den, mesiac, 0);
+	Log("   (poradie_svaty == UNKNOWN_PORADIE_SVATEHO [%d])\n", UNKNOWN_PORADIE_SVATEHO);
+	ret = sviatky_svatych(den, mesiac, UNKNOWN_PORADIE_SVATEHO);
 	Log("-- sviatky_svatych(%d, %d) -- spustene bez tretieho parametra, vysledok (pocet svatych) == %d\n", den, mesiac, ret);
 	return ret;
 }/* sviatky_svatych(); -- 2 vstupy */

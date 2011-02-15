@@ -2581,11 +2581,11 @@ short int atomes(char *mesiac){
  *                 do _global_den veci z _global_svaty1
  * 28/03/2000A.D.: navratova hodnota je SUCCESS alebo FAILURE
  */
-#define _rozbor_dna_LOG Log("_rozbor_dna(): "); Log
+#define _rozbor_dna_LOG Log("-- _rozbor_dna({%d, %d}, %d, %d): ", datum.den, datum.mesiac, rok, poradie_svaty); Log
+
 short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie_svaty){
 	Log("_rozbor_dna(): 3 parametre -- begin\n");
-	Log("-- _rozbor_dna(_struct_den_mesiac, int, int): begin ({%d, %d} %d, %d)\n",
-		datum.den, datum.mesiac, rok, poradie_svaty);
+	_rozbor_dna_LOG("begin\n");
 
 	if(poradie_svaty == UNKNOWN_PORADIE_SVATEHO){
 		Log("spustam pre poradie_svaty == UNKNOWN_PORADIE_SVATEHO\n");
@@ -3083,29 +3083,26 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 		/* 27/04/2000A.D. */
 	}
 
-	Log("_rozbor_dna(): _global_den:\n");
-	Log(_global_den); /* pridane 01/03/2000A.D. */
+	// _rozbor_dna_LOG("_global_den:\n"); Log(_global_den); // pridane 01/03/2000A.D.
 
-	Log("_rozbor_dna(): Nasleduje porovnanie so sviatkami sv‰t˝ch (mÙûe ich byù viacero):\n");
+	_rozbor_dna_LOG("Nasleduje porovnanie so sviatkami sv‰t˝ch (mÙûe ich byù viacero):\n");
 	/* nasleduje porovnanie so sviatkami svatych;
 	 * berieme do uvahy, ze moze byt viac lubovolnych spomienok
 	 */
-	Log("_global_den.smer == %d\n", _global_den.smer);
-	Log("_global_den.spolcast == %d\n", _global_den.spolcast);
+	_rozbor_dna_LOG("_global_den.smer == %d\n", _global_den.smer);
+	_rozbor_dna_LOG("_global_den.spolcast == %d\n", _global_den.spolcast);
 
 	/* 2003-06-30, odkomentovane kvoli lepsiemu debugovaniu */
-	Log("spustam sviatky_svatych(%d, %d);...\n", _global_den.den, _global_den.mesiac);
+	_rozbor_dna_LOG("spustam sviatky_svatych(%d, %d);...\n", _global_den.den, _global_den.mesiac);
 
 	_global_pocet_svatych = sviatky_svatych(_global_den.den, _global_den.mesiac);
 	_rozbor_dna_LOG("_global_pocet_svatych = %d\n", _global_pocet_svatych);
 
 	/* 2003-06-30 */
 	/* 2003-10-07; prve nedelne vespery nemali prosby, chyba bola v dbzaltar.cpp::_SET_SPOLOCNE_VECI_NEDELA */
-	// Log("(1) _global_modl_prve_vespery:\n");
-	// Log(_global_modl_prve_vespery);
+	// _rozbor_dna_LOG("(1) _global_modl_prve_vespery:\n"); Log(_global_modl_prve_vespery);
 	/* 2009-03-19: debugovanie kvÙli kompletÛriu po prv˝ch veöper·ch 18. marca - sv. Jozefa */
-	Log("(1) _global_modl_prve_kompletorium:\n");
-	Log(_global_modl_prve_kompletorium);
+	// _rozbor_dna_LOG("(1) _global_modl_prve_kompletorium:\n"); Log(_global_modl_prve_kompletorium);
 
 	/* pridane 28/03/2000A.D.: ak chce vacsie cislo (poradie svateho) ako je v _global_pocet_svatych
 	 * resp. ked nie je sobota a chce poradie svateho 4 (spomienka p. marie v sobotu)
@@ -3114,36 +3111,40 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 		Export("V tento deÚ nie je sviatok ûiadneho sv‰tÈho, preto nemÙûete poûadovaù sv‰tÈho Ë. %d.",
 			poradie_svaty);
 		ALERT;
-		Log("returning from _rozbor_dna(), because: (_global_pocet_svatych == 0) && (_global_pocet_svatych < poradie_svaty) && (poradie_svaty != 4)\n");
+		_rozbor_dna_LOG("returning from _rozbor_dna(), because: (_global_pocet_svatych == 0) && (_global_pocet_svatych < poradie_svaty) && (poradie_svaty != 4)\n");
 		return FAILURE;
 	}
 	else if((_global_pocet_svatych < poradie_svaty) && (poradie_svaty != 4)){
 		Export("Nie je viac ako %d sviatkov sv‰t˝ch v tento deÚ, preto nemÙûete poûadovaù sv‰tÈho Ë. %d.",
 			_global_pocet_svatych, poradie_svaty);
 		ALERT;
-		Log("returning from _rozbor_dna(), because: (_global_pocet_svatych < poradie_svaty) && (poradie_svaty != 4)\n");
+		_rozbor_dna_LOG("returning from _rozbor_dna(), because: (_global_pocet_svatych < poradie_svaty) && (poradie_svaty != 4)\n");
 		return FAILURE;
 	}
 	else if((_global_den.denvt != DEN_SOBOTA) && (poradie_svaty == 4)){
 		Export("Tento deÚ je %s, a nie je sobota, takûe nemÙûete poûadovaù modlitbu `Spomienka Panny M·rie v sobotu'.\n",
 			nazov_dna(_global_den.denvt));
 		ALERT;
-		Log("returning from _rozbor_dna(), because: (_global_den.denvt != DEN_SOBOTA) && (poradie_svaty == 4)\n");
+		_rozbor_dna_LOG("returning from _rozbor_dna(), because: (_global_den.denvt != DEN_SOBOTA) && (poradie_svaty == 4)\n");
 		return FAILURE;
 	}
 
 	/* ak predoölÈ kontroly s˙ OK, ideme porovn·vaù "dÙleûitosù" sviatku urËenÈho v sviatky_svatych() s "beûn˝m" dÚom urËen˝m vyööie */
+	_rozbor_dna_LOG("ak predoölÈ kontroly s˙ OK, ideme porovn·vaù `dÙleûitosù' sviatku urËenÈho v sviatky_svatych() s `beûn˝m' dÚom urËen˝m vyööie\n");
 	if(_global_pocet_svatych > 0){
-		Log("sviatky_svatych() == %d\n", _global_pocet_svatych);
+		_rozbor_dna_LOG("sviatky_svatych() == %d\n", _global_pocet_svatych);
 
 		/* treba pamatat na to, ze v poste sa vsetky spomienky stavaju lubovolnymi (c. 14 vseob. smernic) */
 		if((_global_den.litobd == OBD_POSTNE_I) &&
 			(_global_svaty1.typslav == SLAV_SPOMIENKA)){
-			 Log("je postne obdobie, tak menim `spomienku' na `lubovolnu spomienku'\n");
+			 _rozbor_dna_LOG("je postne obdobie, tak menim `spomienku' na `lubovolnu spomienku'\n");
 			 _global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 			 /* 2006-01-20: doplnenÈ, lebo nezobrazovalo tieto æubovoænÈ spomienky */
 			 if(_global_svaty1.smer < 12)
 				 _global_svaty1.smer = 12;
+		}
+		else{
+			_rozbor_dna_LOG("nie je pÙstne obdobie, nie je potrebnÈ meniù spomienku na æubovoæn˙ spomienku...\n");
 		}
 
 		/* c. 12 v c. 59 vseob. smernic: "lubovolne spomienky, ktore sa mozu
@@ -3167,8 +3168,8 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 			 * (18/02/2000A.D.)
 			 */
 			/* 23/02/2000A.D. -- SVATY_VEDIE */
-			Log("svaty ma prednost pred dnom (SVATY_VEDIE)\n");
-			Log("_global_den.smer == %d, _global_svaty1.smer == %d, _global_svaty1.prik == %d\n",
+			_rozbor_dna_LOG("svaty ma prednost pred dnom (SVATY_VEDIE)\n");
+			_rozbor_dna_LOG("_global_den.smer == %d, _global_svaty1.smer == %d, _global_svaty1.prik == %d\n",
 				_global_den.smer, _global_svaty1.smer, _global_svaty1.prik);
 
 			/* cele to tu bolo asi kvoli tomu, ze niektore veci sa pri generovani modlitby
@@ -3180,34 +3181,40 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 			 * takze som to napokon dal sem a pridal podmienku "iba ak ide o slavnost"
 			 * 15/03/2000A.D.
 			 */
-			Log("2006-12-08: modlitba == %d (%s)...\n", _global_modlitba, nazov_modlitby(_global_modlitba));
+			_rozbor_dna_LOG("modlitba == %d (%s)...\n", _global_modlitba, nazov_modlitby(_global_modlitba));
 			if((_global_modlitba != MODL_NEURCENA) && 
 				(
-					(poradie_svaty != 0) || /* 08/03/2000A.D. -- pridane */
-					((poradie_svaty == 0) &&(_global_svaty1.smer < 5)) /* slavnosti */
+					(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) || /* 08/03/2000A.D. -- pridanÈ; 2009-03-27: zmenen· konötanta 0 na UNKNOWN_PORADIE_SVATEHO */
+					((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) && (_global_svaty1.smer < 5)) /* slavnosti */
+					|| ((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) && (_global_svaty1.smer == 5)  && (_global_den.denvt == DEN_NEDELA)) /* 2009-03-27: v˝znamnÈ sviatky, ktorÈ padli na nedeæu */
 				)
 				){ /* 15/03/2000A.D. -- modifikovane; POKUS 2006-12-08: vyÚat· podmienka (_global_modlitba != MODL_NEURCENA) &&  nepomohla, len pokazila */
 				/* tato pasaz je cela divna... */
 				/* menim, lebo svaty ma prednost */
 				/* 2006-02-06: pre viacero æubovoæn˝ch spomienok treba byù obozretnejöÌ */
-				Log("\tporadie_svaty == %d\n", poradie_svaty);
-				Log("menim, lebo `%s' ma prednost...\n", 
+				_rozbor_dna_LOG("\tporadie_svaty == %d\n", poradie_svaty);
+				_rozbor_dna_LOG("menim, lebo `%s' ma prednost...\n", 
 					poradie_svaty == 1 ? _global_svaty1.meno :
 					(poradie_svaty == 2 ? _global_svaty2.meno : 
-					(poradie_svaty == 3 ? _global_svaty3.meno : "spomienka PM v sobotu")));
+					(poradie_svaty == 3 ? _global_svaty3.meno : "spomienka PM v sobotu (prÌp. nieËo inÈ)")));
 
+				Log("do _global_den priraÔujem _global_svaty1... (`%s')\n", _global_svaty1.meno);
 				mystrcpy(_global_den.meno, _global_svaty1.meno, MENO_SVIATKU); /* priradenie n·zvu dÚa */
 				_global_den.smer = _global_svaty1.smer; /* dÙleûitosù sviatku podæa smernÌc */
 				_global_den.typslav = _global_svaty1.typslav;
 				_global_den.typslav_lokal = _global_svaty1.typslav_lokal; /* pridanÈ 2005-07-27 */
 				_global_den.spolcast = _global_svaty1.spolcast; /* pridane 22/02/2000A.D. */
 				_global_den.prik = _global_svaty1.prik; /* pridane 23/02/2000A.D. */
+				/* 2009-03-27: doplnenÈ */
+				if(poradie_svaty == UNKNOWN_PORADIE_SVATEHO)
+					poradie_svaty = 1;
+
 				// Log(_global_den); /* kvÙli p·traniu pridanÈ 2006-02-06 */
 				/* pridanÈ 2006-02-06; upravujeme premenn˙ _global_opt3 ak nebola nastaven· MODL_SPOL_CAST_NEBRAT
 				 * treba nastaviù podæa toho, ktor˝ sv‰t˝ je (mÙûe byù 1--3) 
 				 * a z·roveÚ braù do ˙vahy eventu·lne prednastavenie od pouûÌvateæa
 				 */
-				Log("\tPremenn· _global_opt3 pred ˙pravou == %d (%s)...\n", 
+				_rozbor_dna_LOG("\tPremenn· _global_opt3 pred ˙pravou == %d (%s)...\n", 
 					_global_opt3, 
 					_global_opt3 <= MODL_SPOL_CAST_NEBRAT ? nazov_spolc(_global_opt3) : EMPTY_STR);
 				if(_global_opt3 != MODL_SPOL_CAST_NEBRAT){
@@ -3225,7 +3232,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 							sc.a1 = MODL_SPOL_CAST_PANNA_MARIA; /* 2006-02-06: spomienka PM v sobotu */
 							break;
 					}/* switch */
-					Log("\tNastavil som do premennej sc == (%d) %s, (%d) %s, (%d) %s\n",
+					_rozbor_dna_LOG("\tNastavil som do premennej sc == (%d) %s, (%d) %s, (%d) %s\n",
 						sc.a1, nazov_spolc(sc.a1), sc.a2, nazov_spolc(sc.a2), sc.a3, nazov_spolc(sc.a3));
 					if(sc.a1 != MODL_SPOL_CAST_NEURCENA){
 						if(sc.a2 != MODL_SPOL_CAST_NEURCENA){
@@ -3250,7 +3257,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 						}
 					}
 					else{
-						Log("\tHmmm, pre sv‰tca nie je nastaven· spoloËn· Ëasù, nech·vam _global_opt3 tak ako je...\n");
+						_rozbor_dna_LOG("\tHmmm, pre sv‰tca nie je nastaven· spoloËn· Ëasù, nech·vam _global_opt3 tak ako je...\n");
 					}
 					/* pÙvodne - nespr·vne - som sem dnes, 2006-02-06, dal:
 					 * _global_opt3 = 
@@ -3258,32 +3265,33 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					 *	(poradie_svaty == 2 ? (_decode_spol_cast(_global_svaty2.spolcast)).a1 : 
 					 *	(poradie_svaty == 3 ? (_decode_spol_cast(_global_svaty3.spolcast)).a1 : MODL_SPOL_CAST_PANNA_MARIA));
 					 */
-					Log("\tNastavil som _global_opt3 == %d (%s)...\n", 
+					_rozbor_dna_LOG("\tNastavil som _global_opt3 == %d (%s)...\n", 
 						_global_opt3, 
 						_global_opt3 <= MODL_SPOL_CAST_NEBRAT ? nazov_spolc(_global_opt3) : EMPTY_STR);
 				} /* if(_global_opt3 != MODL_SPOL_CAST_NEBRAT) */
 				else{
-					Log("\tKeÔûe pouûÌvateæ nechcel braù spoloËn˙ Ëasù, neupravujem.\n");
+					_rozbor_dna_LOG("\tKeÔûe pouûÌvateæ nechcel braù spoloËn˙ Ëasù, neupravujem.\n");
 				}
 			}/* koniec menenia pre _global_modlitba != MODL_NEURCENA a svaty > 0 resp. slavnost */
 		}
 		else{
 			/* neuprednostnujeme svatych pred dnom */
+			_rozbor_dna_LOG("neuprednostnujeme svatych pred dnom (alternatÌva k SVATY_VEDIE)\n");
 			_global_pocet_svatych = 0;
 		}
-	}
-	Log("sviatky_svatych(%d, %d) skoncila a ukoncilo sa aj rozhodovanie\n",
+	}/* (_global_pocet_svatych > 0) */
+
+	_rozbor_dna_LOG("sviatky_svatych(%d, %d) skoncila a ukoncilo sa aj rozhodovanie\n",
 		_global_den.den, _global_den.mesiac);
 
 	/* prikazane sviatky - boli oznacene na prislusnych miestach */
 
 	/* inicializujem spomienku panny marie v sobotu */
+	_rozbor_dna_LOG("inicializujem spomienku panny m·rie v sobotu... (realizuje sa vûdy napevno)\n");
 	init_global_pm_sobota(); /* v liturgia.cpp */
-	Log("init_global_pm_sobota(): _global_pm_sobota:\n");
-	Log(_global_pm_sobota); /* pridane 27/04/2000A.D. */
+	// _rozbor_dna_LOG("init_global_pm_sobota(): _global_pm_sobota:\n"); Log(_global_pm_sobota); // pridane 27/04/2000A.D.
 
-	Log("-- _rozbor_dna(_struct_den_mesiac, int, int): end ({%d, %d}, %d, %d)\n",
-		datum.den, datum.mesiac, rok, poradie_svaty);
+	_rozbor_dna_LOG("end\n", datum.den, datum.mesiac, rok, poradie_svaty);
 	/* export -- je inde
 	 * _export_rozbor_dna() a v _rozbor_dna_s_modlitbou();
 	 */
@@ -3293,8 +3301,8 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 
 short int _rozbor_dna(_struct_den_mesiac datum, short int rok){
 	short int ret;
-	Log("_rozbor_dna(): 2 parametre -- begin\n");
-	ret = _rozbor_dna(datum, rok, 0);
+	Log("_rozbor_dna(): 2 parametre -- begin (sp˙öùame s tretÌm parametrom == UNKNOWN_PORADIE_SVATEHO [%d])\n", UNKNOWN_PORADIE_SVATEHO);
+	ret = _rozbor_dna(datum, rok, UNKNOWN_PORADIE_SVATEHO);
 	Log("_rozbor_dna(): 2 parametre -- returning %d\n", ret);
 	return ret;
 }
@@ -3840,7 +3848,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 				mystrcpy(pom, STR_EMPTY, MAX_STR);
 		}
 		else{/* nezobrazovat linky */
-			if((poradie_svateho >= 0) && (poradie_svateho < 5))
+			if((poradie_svateho >= UNKNOWN_PORADIE_SVATEHO) && (poradie_svateho < 5)) // 2009-03-27: sn·Ô OK: UNKNOWN_PORADIE_SVATEHO (bolo tu: poradie_svateho >= 0)
 				sprintf(pom, "%s%d.htm", FILE_NAME_POKEC, poradie_svateho);
 			else
 				mystrcpy(pom, FILE_NAME_CHYBA, MAX_STR);
@@ -5682,13 +5690,13 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 		_local_modl_vespery = _global_modl_vespery;
 		_local_modl_kompletorium = _global_modl_kompletorium;
 		/* logy pridane 2003-06-30 */
-		/* Log("_local_modl_vespery obsahuje:\n"); Log(_local_modl_vespery);
+		// Log("_local_modl_vespery obsahuje:\n"); Log(_local_modl_vespery);
 		// pridane 2003-10-07 kvoli debugovaniu, co prve vespery nediel ocr nemali prosby
 			Log("_local_modl_prve_vespery obsahuje:\n"); Log(_local_modl_prve_vespery);
-		*/
+		//
 
-		Log("_global_modl_kompletorium obsahuje:\n"); Log(_global_modl_kompletorium);
-		Log("_global_modl_prve_kompletorium obsahuje:\n"); Log(_global_modl_prve_kompletorium);
+		// Log("_global_modl_kompletorium obsahuje:\n"); Log(_global_modl_kompletorium);
+		// Log("_global_modl_prve_kompletorium obsahuje:\n"); Log(_global_modl_prve_kompletorium);
 		// Log("_local_modl_prve_kompletorium obsahuje:\n"); Log(_local_modl_prve_kompletorium);
 
 		mystrcpy(_local_string, _global_string, MAX_STR);
@@ -5723,8 +5731,7 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 	Log("_global_modl_vespery:\n"); Log(_global_modl_vespery);
  */
 	/* 2009-03-19: debugovanie kvÙli kompletÛriu po prv˝ch veöper·ch 18. marca - sv. Jozefa */
-	Log("(2) _global_modl_prve_kompletorium:\n");
-	Log(_global_modl_prve_kompletorium);
+	// Log("(2) _global_modl_prve_kompletorium:\n"); Log(_global_modl_prve_kompletorium);
 
 	/* ak ma nasledujuci den prioritu pred dnesnym dnom */
 	if((modlitba == MODL_VESPERY) || (modlitba == MODL_KOMPLETORIUM)){
@@ -5763,8 +5770,8 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 			_local_den.smer, nazov_dna(_local_den.denvt), nazov_obdobia(_local_den.litobd), _local_den.smer);
 		// 2003-06-30
 		// Log(_local_den);
-		// Log("_local_modl_prve_vespery obsahuje:\n"); Log(_local_modl_prve_vespery);
-		Log("_local_modl_prve_kompletorium obsahuje:\n"); Log(_local_modl_prve_kompletorium);
+		Log("_local_modl_prve_vespery obsahuje:\n"); Log(_local_modl_prve_vespery);
+		// Log("_local_modl_prve_kompletorium obsahuje:\n"); Log(_local_modl_prve_kompletorium);
 		
 		Log("tento den (%d.%d): _global_den.smer == %d, _global_den.denvt == %s, _global_den.litobd == %s (%d)\n",
 			_global_den.den, _global_den.mesiac,
@@ -5838,6 +5845,7 @@ LABEL_ZMENA:
 			(_local_den.denvt == DEN_NEDELA)
 			/* nedela */
 		){
+			Log("LABEL_ZMENA:...\n");
 			/* cl. 61: ak na ten isty den pripadnu vespery bezneho dna
 			 * a prve vespery nasledujuceho dna, maju prednost vespery slavenia,
 			 * ktore ma v tabulke liturgickych dni vyssi stupen. v pripade
@@ -5851,8 +5859,7 @@ LABEL_ZMENA:
 					)
 				)
 			){
-				Log("priradujem %s z dalsieho dna\n",
-					nazov_Modlitby(modlitba));
+				Log("priradujem %s z dalsieho dna\n", nazov_Modlitby(modlitba));
 				_global_den = _local_den;
 				_global_modl_vespery = _local_modl_prve_vespery;
 				_global_modl_kompletorium = _local_modl_prve_kompletorium;
@@ -5860,14 +5867,14 @@ LABEL_ZMENA:
 				_global_modl_prve_vespery = _local_modl_prve_vespery;
 				_global_modl_prve_kompletorium = _local_modl_prve_kompletorium;
 				//??? -- divna pasaz!!!
-				/*
+				
 				// begin: docasny vypis - 16/02/2000A.D.
 				Log("prve vespery:\n");
 				Log(_global_modl_prve_vespery);
 				Log("vespery:\n");
 				Log(_global_modl_vespery);
 				// end: docasny vypis - 16/02/2000A.D.
-				*/
+				
 				if(modlitba == MODL_VESPERY){
 					_global_modlitba = MODL_PRVE_VESPERY;
 					Log("-- MODL_PRVE_VESPERY\n");
@@ -6319,7 +6326,12 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 	r = atoi(rok); /* vrati 0 v pripade chyby; alebo int */
 	Log("rok == `%s' (%d)\n", rok, r);
 	s = atoi(poradie_svaty); /* ak je viac svatych, ktory z nich (1--3) */
-	Log("sv == `%s' (%d)\n", poradie_svaty, s);
+	/* 2009-03-27: doplnenÈ - nezn·my je konötanta; zmysel maj˙ len vstupy 1--3*/
+	if(s < 1)
+		s = UNKNOWN_PORADIE_SVATEHO;
+	if(s > 4)
+		s = UNKNOWN_PORADIE_SVATEHO;
+	Log("sv == `%s' (upravenÈ na %d)\n", poradie_svaty, s);
 
 	/* rozparsovanie parametra modlitba */
 	_parsuj_parameter_MODLITBA;
@@ -6657,7 +6669,12 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 	short int s, p, i;
 
 	s = atoi(poradie_svaty); /* ak je viac svatych, ktory z nich (1--3) */
-	Log("sv == `%s' (%d)\n", poradie_svaty, s);
+	/* 2009-03-27: doplnenÈ - nezn·my je konötanta; zmysel maj˙ len vstupy 1--3*/
+	if(s < 1)
+		s = UNKNOWN_PORADIE_SVATEHO;
+	if(s > 4)
+		s = UNKNOWN_PORADIE_SVATEHO;
+	Log("sv == `%s' (upravenÈ na %d)\n", poradie_svaty, s);
 
 	/* rozparsovanie parametra modlitba */
 	_parsuj_parameter_MODLITBA;
