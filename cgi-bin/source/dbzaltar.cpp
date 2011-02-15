@@ -121,14 +121,15 @@
  *		sa bude podæa poradie_svaty porovn·vaù s _global_svaty[1|2|3].typslav... 
  *		a eöte k tomu by mohlo byù v su_antifony_vlastne() porovnanie aj na glob·lnu premenn˙, Ëi pouûÌvateæ explicitne ûiadal spoloËn˙ Ëasù...
  */
-/*   2009-03-19a.D. | problÈm sv. Jozefa - antifÛny pre kompletÛrium    */
-/*                    nastavenÈ pri prvom spustenÌ volania "sviatky     */
-/*                    sv‰t˝ch" prekrylo nastavenie z liturgickÈho obdobia... */
-/*                                                                      */
-/* notes |                                                              */
-/*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                 */
-/*                                                                      */
-/************************************************************************/
+/*   2009-03-19a.D. | problÈm sv. Jozefa - antifÛny pre kompletÛrium                            */
+/*                    nastavenÈ pri prvom spustenÌ volania "sviatky                             */
+/*                    sv‰t˝ch" prekrylo nastavenie z liturgickÈho obdobia...                    */
+/*   2009-03-23a.D. | opravenÈ ûalmy pre zvestovanie p·na; maj˙ byù podæa narodenia p·na        */
+/*                                                                                              */
+/* notes |                                                                                      */
+/*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
+/*                                                                                              */
+/************************************************************************************************/
 
 //#define DETAIL_LOG_SVATY /* 22/02/2000A.D. */
 //#define DETAIL_LOG_GLOBAL_DEN /* 22/02/2000A.D. */
@@ -10514,7 +10515,8 @@ label_25_MAR:
 						else if((_global_den.litobd == OBD_POSTNE_I) || (_global_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN)){
 							_vlastna_cast_kresponz_po;
 						}
-						_set_zalmy_sviatok_krstu(modlitba);
+						/* 2009-03-23: boli tu ûalmy z krstu krista p·na: _set_zalmy_sviatok_krstu(modlitba); maj˙ byù podæa narodenia p·na */
+						_set_zalmy_narodenie(modlitba);
 
 						/* 2007-11-14: doplnenÈ invitatÛrium */
 						modlitba = MODL_INVITATORIUM;
@@ -10542,14 +10544,16 @@ label_25_MAR:
 						/* 2006-01-24: doplnenÈ modlitby cez deÚ */
 						_vlastna_cast_mcd_ant_kcitresp_modl;
 						
+						/* 2009-03-23: boli tu ûalmy inak (pozri niûöie); maj˙ byù podæa narodenia p·na */
+						_set_zalmy_narodenie(modlitba);
 						/* 2006-02-04: ak je modlitba cez deÚ na sl·vnosù, tak by sa mali pouûiù ûalmy z doplnkovej psalmÛdie */
-						if(_global_den.denvt != DEN_NEDELA) {
+/*						if(_global_den.denvt != DEN_NEDELA) {
 							_set_zalm_cez_den_doplnkova_psalmodia();
 						}
 						else {
 							_set_zalmy_1nedele_mcd();
 						}
-
+*/
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
 						if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
@@ -10558,7 +10562,8 @@ label_25_MAR:
 						else if((_global_den.litobd == OBD_POSTNE_I) || (_global_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN)){
 							_vlastna_cast_kresponz_po;
 						}
-						_set_zalmy_sviatok_krstu(modlitba);
+						/* 2009-03-23: boli tu ûalmy z krstu krista p·na: _set_zalmy_sviatok_krstu(modlitba); maj˙ byù podæa narodenia p·na */
+						_set_zalmy_narodenie(modlitba);
 
 						/* 2008-12-09: doplnenÈ kompletÛrium */
 						modlitba = MODL_PRVE_KOMPLETORIUM;
