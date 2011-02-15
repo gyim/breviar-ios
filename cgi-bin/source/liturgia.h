@@ -50,6 +50,7 @@
 /*   2009-01-29a.D. | pridaný ïalší jazyk - maïarèina (hu)     */
 /*   2009-04-08a.D. | zakonèenie modlitby trojaké (krátke/dlhé)*/
 /*   2009-05-15a.D. | pridané text_PRO_OP[]                    */
+/*   2009-12-14a.D. | zakonèenie modlitby s malým písmenkom na zaèiatku */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -380,6 +381,10 @@ extern const char *TEMPLAT[];
 #define PARAM_ZAKONCENIE_SKRZE              "ZAKONCENIE_SKRZE"
 #define PARAM_ZAKONCENIE_LEBO_TY            "ZAKONCENIE_LEBO_TY"
 #define PARAM_ZAKONCENIE_LEBO_ON            "ZAKONCENIE_LEBO_ON"
+/* 2009-12-14, doplnené: zakonèenie modlitby trojaké, krátke resp. dlhé s malým písmenkom na zaèiatku */
+#define PARAM_ZAKONCENIE_SKRZE_MALE         "ZAKONCENIE_SKRZE_MALE"
+#define PARAM_ZAKONCENIE_LEBO_TY_MALE       "ZAKONCENIE_LEBO_TY_MALE"
+#define PARAM_ZAKONCENIE_LEBO_ON_MALE       "ZAKONCENIE_LEBO_ON_MALE"
 
 /* stringy parametrov vstupu pre MODL_OPT..., ktore generovanie modlitby
  * ovplyvnuju */

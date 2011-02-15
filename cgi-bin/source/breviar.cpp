@@ -142,6 +142,7 @@
 /*   2009-11-26a.D. | oprava pre body 4, 8, 11 [Miestne slávnosti, Miestne */
 /*                    sviatky, Miestne povinné spomienky]; pred touto      */
 /*                    úpravou bola kontrola (_global_svaty1.smer >= 11)    */
+/*   2009-12-14a.D. | zakonèenie modlitby s malým písmenkom na zaèiatku    */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -1141,8 +1142,8 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 	char rest[MAX_BUFFER];
 	char isbuff = 0;
 	char write = 0;
-	char vnutri_inkludovaneho = 0;
-	/* 17/02/2000A.D., kvoli "V.O. Aleluja" v inkludovanych napr. antifonach */
+	char vnutri_inkludovaneho = 0; /* 17/02/2000A.D., kvoli "V.O. Aleluja" v inkludovanych napr. antifonach */
+	char zakoncenie[MAX_STR]; /* 2009-12-14: zakonèenie s ve¾kým písmenkom na zaèiatku, následne sa prípadne mení 1. písmeno na malé */
 
 	Log("--includeFile(%d, %s, %s, %s): begin,\n",
 		type, paramname, fname, modlparam);
@@ -1258,7 +1259,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 					// ToDo: ešte ostáva dorieši niektoré prípady (v slovenèine s malým -- pokraèovanie vety "skrze")
 
 					/* zakonèenie modlitby - Skrze... */
-					if(equals(rest, PARAM_ZAKONCENIE_SKRZE)){
+					if(equals(rest, PARAM_ZAKONCENIE_SKRZE) || equals(rest, PARAM_ZAKONCENIE_SKRZE_MALE)){
 						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
 							write = 0;
 #if defined(EXPORT_HTML_SPECIALS)
@@ -1266,11 +1267,15 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 #endif
 							Export("-->");
 							if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
-								Export((char *)text_ZAKONCENIE_SKRZE_kratke[_global_jazyk]);
+								mystrcpy(zakoncenie, text_ZAKONCENIE_SKRZE_kratke[_global_jazyk], MAX_STR);
 							}
 							else{
-								Export((char *)text_ZAKONCENIE_SKRZE_dlhe[_global_jazyk]);
+								mystrcpy(zakoncenie, text_ZAKONCENIE_SKRZE_dlhe[_global_jazyk], MAX_STR);
 							}
+							if(equals(rest, PARAM_ZAKONCENIE_SKRZE_MALE)){
+								zakoncenie[0] = zakoncenie[0] + ('a'-'A'); // posun z ve¾kého písmena na malé: pozor, funguje len pre základné znaky ASCII
+							}
+							Export(zakoncenie);
 							Log("skrze-zaèiatok...\n");
 						}
 						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
@@ -1283,7 +1288,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 						}
 					}/* zakonèenie modlitby - Skrze... */
 					/* zakonèenie modlitby - Lebo ty... */
-					if(equals(rest, PARAM_ZAKONCENIE_LEBO_TY)){
+					if(equals(rest, PARAM_ZAKONCENIE_LEBO_TY) || equals(rest, PARAM_ZAKONCENIE_LEBO_TY_MALE)){
 						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
 							write = 0;
 #if defined(EXPORT_HTML_SPECIALS)
@@ -1291,11 +1296,15 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 #endif
 							Export("-->");
 							if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
-								Export((char *)text_ZAKONCENIE_LEBO_TY_kratke[_global_jazyk]);
+								mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_TY_kratke[_global_jazyk], MAX_STR);
 							}
 							else{
-								Export((char *)text_ZAKONCENIE_LEBO_TY_dlhe[_global_jazyk]);
+								mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_TY_dlhe[_global_jazyk], MAX_STR);
 							}
+							if(equals(rest, PARAM_ZAKONCENIE_LEBO_TY_MALE)){
+								zakoncenie[0] = zakoncenie[0] + ('a'-'A'); // posun z ve¾kého písmena na malé: pozor, funguje len pre základné znaky ASCII
+							}
+							Export(zakoncenie);
 							Log("lebo-ty-zaèiatok...\n");
 						}
 						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
@@ -1308,7 +1317,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 						}
 					}/* zakonèenie modlitby - Lebo ty... */
 					/* zakonèenie modlitby - Lebo on... */
-					if(equals(rest, PARAM_ZAKONCENIE_LEBO_ON)){
+					if(equals(rest, PARAM_ZAKONCENIE_LEBO_ON) || equals(rest, PARAM_ZAKONCENIE_LEBO_ON_MALE)){
 						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
 							write = 0;
 #if defined(EXPORT_HTML_SPECIALS)
@@ -1316,11 +1325,15 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 #endif
 							Export("-->");
 							if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
-								Export((char *)text_ZAKONCENIE_LEBO_ON_kratke[_global_jazyk]);
+								mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_ON_kratke[_global_jazyk], MAX_STR);
 							}
 							else{
-								Export((char *)text_ZAKONCENIE_LEBO_ON_dlhe[_global_jazyk]);
+								mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_ON_dlhe[_global_jazyk], MAX_STR);
 							}
+							if(equals(rest, PARAM_ZAKONCENIE_LEBO_ON_MALE)){
+								zakoncenie[0] = zakoncenie[0] + ('a'-'A'); // posun z ve¾kého písmena na malé: pozor, funguje len pre základné znaky ASCII
+							}
+							Export(zakoncenie);
 							Log("lebo-on-zaèiatok...\n");
 						}
 						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
