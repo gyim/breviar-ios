@@ -1250,7 +1250,7 @@ const char *text_ZAKONCENIE_LEBO_ON_dlhe[] =
  "",
  "",
  "",
- "Nebo on s tebou v jednotì Ducha svatého ije a kraluje po všechny vìky vìkù.",
+ "Nebo on s tebou v jednotì Ducha Svatého ije a kraluje po všechny vìky vìkù.",
  "hu_",
  };
 const char *text_ZAKONCENIE_LEBO_ON_kratke[] = 
@@ -1268,7 +1268,7 @@ const char *text_ZAKONCENIE_LEBO_TY_dlhe[] =
  "",
  "",
  "",
- "Nebo ty iješ a kraluješ s Bohem Otcem v jednotì Ducha svatého po všechny vìky vìkù.",
+ "Nebo ty iješ a kraluješ s Bohem Otcem v jednotì Ducha Svatého po všechny vìky vìkù.",
  "hu_",
  };
 const char *text_ZAKONCENIE_LEBO_TY_kratke[] = 

@@ -9961,7 +9961,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 
 						modlitba = MODL_PRVE_VESPERY;
 						_vlastna_cast_full(modlitba);
-						_set_zalmy_sviatok_krstu(modlitba);
+						_set_zalmy_sviatok_obetovania(modlitba); // 2010-02-04: opravené
 
 						/* 2007-11-14: doplnené invitatórium */
 						modlitba = MODL_INVITATORIUM;
@@ -9985,7 +9985,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
-						_set_zalmy_sviatok_krstu(modlitba);
+						_set_zalmy_sviatok_obetovania(modlitba); // 2010-02-04: opravené
 
 						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
