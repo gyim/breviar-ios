@@ -9253,7 +9253,7 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty
 	set_popis(MODL_NAPOLUDNIE, _file, _anchor);
 	set_popis(MODL_POPOLUDNI, _file, _anchor);
 	/* 2003-06-30: tento POPIS nie je dobre nastaveny pre spomienku
-	 * Nepoškvrneného Srdca prebl. Panny Márie,
+	 * "Nepoškvrneného Srdca prebl. Panny Márie" -> "Nepoškvrneného Srdca Panny Márie",
 	 * preto je tam nastaveny este raz na dummy, vid ZNOVUNASTAVENIE_POPISU_NA_DUMMY */
 
 	/* tu bola pasaz, nastavujuca _global_opt3 na sc.a1 v pripade,
@@ -19103,7 +19103,7 @@ label_8_DEC:
 		 * smer == 11; 10/03/2000A.D.;" -- zmenene 2003-06-30
 		 * porov. pasaz venovanu srdcu pm vo funkcii breviar.cpp::_rozbor_dna()
 		 */
-		mystrcpy(_global_svaty1.meno, "Nepoškvrneného Srdca prebl. Panny Márie", MENO_SVIATKU);
+		mystrcpy(_global_svaty1.meno, "Nepoškvrneného Srdca Panny Márie", MENO_SVIATKU);
 		_global_svaty1.spolcast =
 			_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 	}/* srdca panny marie */

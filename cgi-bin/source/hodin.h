@@ -2285,7 +2285,7 @@ const char *text_NAJSV_SRDCA_JEZISOVHO[] =
  "hu_name",
  };
 const char *text_NEPOSKVRNENEHO_SRDCA_PM[] = 
-{"Nepoškvrneného Srdca prebl. Panny Márie",
+{"Nepoškvrneného Srdca Panny Márie", // 2010-06-16: opravený názov pod¾a breviára i direktória
  "Neposkvrnìného Srdce Panny Marie",
  "",
  "",
