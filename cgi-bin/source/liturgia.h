@@ -66,7 +66,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-#define MENO_SVIATKU 128 /* 2009-03-24: rozšírené kvôli text_SEP_26_2[] */
+#define MENO_SVIATKU 156 /* 2009-03-24: rozšírené kvôli text_SEP_26_2[]; 2009-03-24: rozšírené kvôli text_PRO_OP[] */
 
 /* 2006-07-31: kvôli jazykovým mutáciám; zmenené 2008-08-15 na 5 
  * 2009-01-29: zmenené na 6 (maïarèina)
