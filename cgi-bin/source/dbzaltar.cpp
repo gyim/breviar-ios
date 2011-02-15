@@ -121,6 +121,9 @@
  *		sa bude podæa poradie_svaty porovn·vaù s _global_svaty[1|2|3].typslav... 
  *		a eöte k tomu by mohlo byù v su_antifony_vlastne() porovnanie aj na glob·lnu premenn˙, Ëi pouûÌvateæ explicitne ûiadal spoloËn˙ Ëasù...
  */
+/*   2009-03-19a.D. | problÈm sv. Jozefa - antifÛny pre kompletÛrium    */
+/*                    nastavenÈ pri prvom spustenÌ volania "sviatky     */
+/*                    sv‰t˝ch" prekrylo nastavenie z liturgickÈho obdobia... */
 /*                                                                      */
 /* notes |                                                              */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                 */
@@ -1151,7 +1154,7 @@ void set_antifony(short int den, short int tyzzal, short int zvazok, short int m
 			set_LOG_litobd_pc;
 		}
 	}
-}
+}/* set_antifony() */
 
 void set_kcitanie(short int den, short int tyzzal, short int modlitba){
 	/* pridanÈ Ëasti pre kompletÛrium, 2006-10-24 */
@@ -7207,6 +7210,31 @@ label_24_DEC:
 				}
 				break; /* case 0: */
 		}/* switch(poradie_svateho) */
+	}/* if(poradie_svateho > 0) */
+	/* 2009-03-19: ak poradie_svateho bolo UNKNOWN_PORADIE_SVATEHO, znamen· to, ûe sa chcelo volanie moûno pre nasledovn˝ deÚ;
+	 * problÈm sv. Jozefa - antifÛny pre kompletÛrium nastavenÈ pri prvom spustenÌ volania "sviatky sv‰t˝ch" prekrylo nastavenie z liturgickÈho obdobia...
+	 */
+	else if((poradie_svateho == UNKNOWN_PORADIE_SVATEHO) && (_global_pocet_svatych > 0)
+		&& (_global_den.smer >= _global_svaty1.smer) && (_global_svaty1.typslav == SLAV_SLAVNOST)){
+		/* bolo to volanie pre nasleduj˙ci deÚ, treba oöetriù napr. kompletÛrium po prv˝ch veöper·ch, aby sa nepriradilo zo ûalt·ra */
+		Log("poradie_svateho == UNKNOWN_PORADIE_SVATEHO...\n");
+		Log("_global_pocet_svatych == %d\n", _global_pocet_svatych);
+		Log("_global_den.smer == %d\n", _global_den.smer);
+		Log("_global_svaty1.smer == %d\n", _global_svaty1.smer);
+		// 2009-03-19: ak bol "if" tu, hrozilo, ûe by sme odstavili niektor˙ z nasledovn˝ch "else" vetiev...
+		// if((_global_den.smer >= _global_svaty1.smer) && (_global_svaty1.typslav == SLAV_SLAVNOST)){ // s veækou pravdepodobnosùou bolo do _global_den.smer priradenÈ _global_svaty1.smer
+		/* do _local_den priradim dane slavenie */
+		/* 2009-03-19: TODO: zv·ûiù prÌpadne podmienku:
+			if((_global_den.denvt == DEN_NEDELA) ||
+					(_global_den.prik == PRIKAZANY_SVIATOK) ||
+					(_global_den.smer < 5))
+		*/
+		_local_den = _global_svaty1;
+		poradie_svateho = 1;
+		Log("spustam druhykrat sviatky_svatych(), tentokrat pre %d. svateho\n", poradie_svateho);
+		sviatky_svatych(_local_den.den, _local_den.mesiac, poradie_svateho, 2);
+		Log("po druhom spustenÌ sviatky_svatych(), pre %d. sv‰tÈho (nastavenÈ natvrdo)\n", poradie_svateho);
+		// pravedpodobne nie je potrebn˝ clean-up: poradie_svateho = UNKNOWN_PORADIE_SVATEHO;
 	}
 	else if((_global_den.denvt == DEN_NEDELA) ||
 		(_global_den.prik == PRIKAZANY_SVIATOK)){
@@ -7214,6 +7242,7 @@ label_24_DEC:
 		_local_den = _global_den;
 	}
 	else if((poradie_svateho > 0) && (_global_pocet_svatych > 0)){
+		/* 2009-03-19: nech·pem, preËo je to tu; sem sa to predsa nedostane, pretoûe kontrola na (poradie_svateho > 0) je vyööie */
 	}/* if(_global_pocet_svatych > 0) */
 	else{
 		/* obycajny den */
@@ -7236,6 +7265,8 @@ label_24_DEC:
 		_local_den = _global_den;
 		sviatky_svatych(_local_den.den, _local_den.mesiac, poradie_svateho, 2);
 	}
+
+	/* spomienka panny m·rie v sobotu */
 	if((_global_den.litobd == OBD_CEZ_ROK) &&
 		(_global_den.denvt == DEN_SOBOTA) &&
 		((_global_den.denvr != (_global_r._ZOSLANIE_DUCHA_SV.denvr + 20))) && /* pridane 04/07/2000A.D. */
@@ -7248,7 +7279,6 @@ label_24_DEC:
 		mystrcpy(_file, FILE_SPOM_PM_SOBOTA, MAX_STR_AF_FILE);
 
 		/* rannÈ chv·ly */
-
 		modlitba = MODL_RANNE_CHVALY;
 		/* hymnus */
 		/* su tri hymny, preto ich dame podla tyzzal MOD 3 (0, 1, 2) */
@@ -7284,23 +7314,19 @@ label_24_DEC:
 		set_LOG_litobd;
 
 		/* 2006-02-02: pridanÈ posv‰tnÈ ËÌtanie */
-
 		modlitba = MODL_POSV_CITANIE;
 		/* hymnus */
 		/* su tri hymny, preto ich dame podla tyzzal MOD 3 (0, 1, 2) */
 		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_HYMNUS, tyzzal MOD 3);
 		_set_hymnus(modlitba, _file, _anchor);
 		set_LOG_litobd;
-
 		/* antifÛny, ûalmy, verö a prvÈ ËÌtanie s responzÛriom sa berie z prÌsluönej soboty */
-
 		/* druhÈ ËÌtanie */
 		/* s˙ ötyri hymny, preto ich d·me podæa tyzzal MOD 4 (0, 1, 2, 3) */
 		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_CITANIE2, tyzzal MOD 4);
 		_set_citanie2(modlitba, _file, _anchor);
 		set_LOG_litobd;
-
-	}
+	}/* spomienka panny m·rie v sobotu */
 
 	_global_den = _local_den;
 #ifdef DETAIL_LOG_GLOBAL_DEN
@@ -7308,8 +7334,8 @@ label_24_DEC:
 	Log(_global_den);
 #endif
 	/* koniec casti podla dnes.cpp::init_global_string(); */
-	Log("-- liturgicke_obdobie(%d, %d, %d, %d) -- koniec\n",
-		litobd, tyzden, den, tyzzal);
+	Log("-- liturgicke_obdobie(%d, %d, %d, %d: svaty: %d) -- koniec\n",
+		litobd, tyzden, den, tyzzal, poradie_svateho);
 }/* liturgicke_obdobie(); */
 
 /* --------------------------------------------------------------------- */
@@ -14255,9 +14281,11 @@ label_25_MAR:
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
 						_vlastna_cast_2citanie;
-						/* hymnus ako na veöpery */
-						sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(MODL_VESPERY), ANCHOR_HYMNUS);
-						_set_hymnus(modlitba, _file, _anchor);
+						if(_global_jazyk == JAZYK_SK){ /* 2009-03-19: odvetvenÈ len pre Slovensko */
+							/* hymnus ako na veöpery */
+							sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(MODL_VESPERY), ANCHOR_HYMNUS);
+							_set_hymnus(modlitba, _file, _anchor);
+						}
 						set_LOG_svsv;
 
 						modlitba = MODL_VESPERY;

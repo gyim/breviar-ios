@@ -181,9 +181,6 @@ char *_global_buf2; /* 2006-08-01: vytvorené; túto premennú tiež alokujeme */
 #define ANCHOR_VYSVETLIVKY_TABULKA "VYSVETL_TABULKA"
 #define FILE_VYSVETLIVKY_TABULKA "vysvetlt.htm"
 
-#define UNKNOWN_PORADIE_SVATEHO -1 
-/* 28/03/2000A.D.: naschval < 0, aby nebol problem s porovnanim s _global_pocet_svatych v _rozbor_dna() */
-
 #define LOG_ciara Log("---------------------\n");
 
 #define FILE_LOG "breviar.log" // zmenené na breviar.log; ve¾mi dlho bolo dnes.log :) 2007-06-28
@@ -3104,8 +3101,11 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 
 	/* 2003-06-30 */
 	/* 2003-10-07; prve nedelne vespery nemali prosby, chyba bola v dbzaltar.cpp::_SET_SPOLOCNE_VECI_NEDELA */
-	Log("(1) _global_modl_prve_vespery:\n");
-	Log(_global_modl_prve_vespery);
+	// Log("(1) _global_modl_prve_vespery:\n");
+	// Log(_global_modl_prve_vespery);
+	/* 2009-03-19: debugovanie kvôli kompletóriu po prvých vešperách 18. marca - sv. Jozefa */
+	Log("(1) _global_modl_prve_kompletorium:\n");
+	Log(_global_modl_prve_kompletorium);
 
 	/* pridane 28/03/2000A.D.: ak chce vacsie cislo (poradie svateho) ako je v _global_pocet_svatych
 	 * resp. ked nie je sobota a chce poradie svateho 4 (spomienka p. marie v sobotu)
@@ -3408,6 +3408,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			return FAILURE;
 			break;
 		case 0:
+		case UNKNOWN_PORADIE_SVATEHO: /* 2009-03-19: doplnené */
 			/* bezny den */
 			Log("/* bezny den */\n");
 			obyc = ANO;
@@ -3725,17 +3726,23 @@ short int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, short int rok, short
 	set_popis_dummy();
 	Log("set_popis_dummy() skoncila.\n");
 
+	Log("vo funkcii _rozbor_dna_s_modlitbou() spustam _rozbor_dna();\n");
 	ret = _rozbor_dna(datum, rok, poradie_svateho);
 	if(ret == FAILURE){
 		Log("_rozbor_dna() returned FAILURE, so returning FAILURE...\n");
 		return FAILURE;
 	}
+	Log("_rozbor_dna() skoncila.\n");
 
+	/*
+	 * 2009-03-19: zapozunámkoval som toto nastavenie, pretože konštantu som definoval do liturgia.h, 
+	 * nech sa presne vie, že je to kvôli volaniu nasledujúceho dòa
 	if(poradie_svateho == UNKNOWN_PORADIE_SVATEHO){
-		/* kedze neviem poradie svateho, lebo robim nasledujuci den, priradim 0 */
-		Log("/* kedze neviem poradie svateho, lebo robim nasledujuci den, priradim 0 */\n");
+		// kedze neviem poradie svateho, lebo robim nasledujuci den, priradim 0
+		Log("// kedze neviem poradie svateho, lebo robim nasledujuci den, priradim 0\n");
 		poradie_svateho = 0;
 	}
+	*/
 
 	/* nasledovna pasaz pridana 28/03/2000A.D. -- aby sme dobre kontrolovali, ci vobec mozeme
 	 * spustit generovanie modlitby
@@ -5715,6 +5722,10 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 	Log("(2) _global_modl_prve_vespery:\n"); Log(_global_modl_prve_vespery);
 	Log("_global_modl_vespery:\n"); Log(_global_modl_vespery);
  */
+	/* 2009-03-19: debugovanie kvôli kompletóriu po prvých vešperách 18. marca - sv. Jozefa */
+	Log("(2) _global_modl_prve_kompletorium:\n");
+	Log(_global_modl_prve_kompletorium);
+
 	/* ak ma nasledujuci den prioritu pred dnesnym dnom */
 	if((modlitba == MODL_VESPERY) || (modlitba == MODL_KOMPLETORIUM)){
 		Log("teraz uvidime, ci vespery/kompletorium nasledovneho dna nemaju nahodou prioritu...\n");
@@ -5751,15 +5762,17 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 			_local_den.den, _local_den.mesiac,
 			_local_den.smer, nazov_dna(_local_den.denvt), nazov_obdobia(_local_den.litobd), _local_den.smer);
 		// 2003-06-30
-		Log(_local_den);
+		// Log(_local_den);
 		// Log("_local_modl_prve_vespery obsahuje:\n"); Log(_local_modl_prve_vespery);
+		Log("_local_modl_prve_kompletorium obsahuje:\n"); Log(_local_modl_prve_kompletorium);
 		
 		Log("tento den (%d.%d): _global_den.smer == %d, _global_den.denvt == %s, _global_den.litobd == %s (%d)\n",
 			_global_den.den, _global_den.mesiac,
 			_global_den.smer, nazov_dna(_global_den.denvt), nazov_obdobia(_global_den.litobd), _global_den.smer);
 		// 2003-06-30
-		Log(_global_den);
+		// Log(_global_den);
 		// Log("(3) _global_modl_prve_vespery obsahuje:\n"); Log(_global_modl_prve_vespery);
+		Log("(3) _global_modl_prve_kompletorium obsahuje:\n"); Log(_global_modl_prve_kompletorium);
 
 		/* if VYNIMKY: porov. nizsie. 14/03/2000A.D. */
 		if((_global_den.smer > _local_den.smer) ||
