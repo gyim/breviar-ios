@@ -336,7 +336,7 @@ const char *nazov_slavenia_jazyk[POCET_SLAVENI + 1][POCET_JAZYKOV + 1] =
 #define		nazov_slavenia(a)	nazov_slavenia_jazyk[a][_global_jazyk]
 
 /* 2010-08-03: pridaný kalendár */
-const char *nazov_kalendara[] =
+const char *nazov_kalendara[POCET_KALENDAROV + 1] =
 {"neurèený"
 ,"všeobecný"
 ,"všeobecný SK"
@@ -345,6 +345,11 @@ const char *nazov_kalendara[] =
 ,"SK CSSR"
 ,"všeobecný HU"
 };
+
+/* calendar codes; internal usage for HTTP requests */
+const char *skratka_kalendara[POCET_KALENDAROV + 1] =
+{"??", "la", "sk", "cz", "czop", "cssr", "hu"};
+
 
 /* special "local" or "partial" characteristics of various celebrations - each in one language; no need to translate; special strings will be added */
 /* 2005-07-27: doplnené

@@ -750,7 +750,7 @@ extern const char *nazov_slavenia_lokal[];
 #define KALENDAR_SK_CSSR                    5
 #define KALENDAR_VSEOBECNY_HU               6
 
-#define KALENDAR_POCET                      7
+#define POCET_KALENDAROV                    6
 
 /* prikazany / neprikazany sviatok */
 #define PRIKAZANY_SVIATOK 1
@@ -1056,11 +1056,12 @@ extern char *_global_buf2; /* 2006-08-01: túto premennú tiež alokujeme */
 /* pridane 13/04/2000A.D.; definovane v breviar.cpp */
 extern short int _global_linky;
 
-/* 2006-07-11: Pridané kvôli jazykovým mutáciám (breviar.cpp) */
-extern short int _global_language;
-#ifndef _global_jazyk
-#define	_global_jazyk	_global_language
-#endif
+/* 2006-07-11: Pridané kvôli jazykovým mutáciám (breviar.cpp) 
+ * 2010-08-04: zmenené _global_language na _global_jazyk (doteraz bolo len pomocou #define)
+ */
+extern short int _global_jazyk;
+/* 2010-08-04: pridané kvôli kalendárom (napr. reho¾ný), súvisí s jazykovými mutáciami */
+extern short int _global_kalendar;
 
 extern short int _global_css; /* 2008-08-08: Pridané kvôli rôznym css */
 
@@ -1070,6 +1071,9 @@ extern short int _global_pocet_zalmov_kompletorium;
 extern const char *nazov_jazyka[];
 extern const char *skratka_jazyka[];
 extern const char *postfix_jazyka[];
+
+extern const char *nazov_kalendara[];
+extern const char *skratka_kalendara[];
 
 extern const char *skratka_css[];
 extern const char *nazov_css[];

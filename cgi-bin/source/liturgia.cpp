@@ -570,6 +570,16 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 			Log("\tPrilepil som aj jazyk: `%s' (2006-07-31)\n", pom2);
 		}
 
+		/* 2010-08-04: pridané odovzdanie parametra pre kalendár */
+		if(((_global_jazyk == JAZYK_SK) && ((_global_kalendar != KALENDAR_VSEOBECNY) || (_global_kalendar != KALENDAR_VSEOBECNY_SK)))
+			|| ((_global_jazyk == JAZYK_CZ) && ((_global_kalendar != KALENDAR_VSEOBECNY) || (_global_kalendar != KALENDAR_VSEOBECNY_CZ)))
+			|| ((_global_jazyk == JAZYK_CZ_OP) && ((_global_kalendar != KALENDAR_VSEOBECNY) || (_global_kalendar != KALENDAR_VSEOBECNY_CZ) || (_global_kalendar != KALENDAR_CZ_OP)))
+			){
+			sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
+			strcat(_global_link, pom2);
+			Log("\tPrilepil som aj kalendár: `%s' (2010-08-04)\n", pom2);
+		}
+
 		/* 2008-08-08: pridané odovzdanie parametra pre css */
 		if(_global_css != CSS_breviar_sk){
 			sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_CSS, skratka_css[_global_css]);

@@ -152,11 +152,12 @@ extern char *_global_buf; /* 2006-08-01: túto premennú tiež alokujeme */
 extern char *_global_buf2; /* 2006-08-01: túto premennú tiež alokujeme */
 /* ------------------------------------------------------------------- */
 
-/* 2006-07-11: Pridané kvôli jazykovým mutáciám (breviar.cpp) */
-extern short int _global_language;
-#ifndef _global_jazyk
-#define	_global_jazyk	_global_language
-#endif
+/* 2006-07-11: Pridané kvôli jazykovým mutáciám (breviar.cpp)
+ * 2010-08-04: zmenené _global_language na _global_jazyk (doteraz bolo len pomocou #define)
+ */
+extern short int _global_jazyk;
+/* 2010-08-04: pridané kvôli kalendárom (napr. reho¾ný), súvisí s jazykovými mutáciami */
+extern short int _global_kalendar;
 
 extern short int _global_css; /* 2008-08-08: Pridané kvôli rôznym css */
 

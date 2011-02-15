@@ -25,6 +25,7 @@
 /*   2006-08-18a.D. | zmena int na short int (staèí 32tis.)    */
 /*   2008-11-29a.D. | pridané rôzne možnosti batch exportu     */
 /*   2009-08-12a.D. | pridané ïalšie možnosti batch exportu    */
+/*   2010-08-04a.D. | pridané KALENDAR a STR_KALENDAR          */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -61,7 +62,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2010-08-03"
+#define BUILD_DATE "2010-08-04"
 
 #define BYTES 250
 #define SMALL 80
@@ -418,6 +419,14 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPT_DATE_FORMAT "MODL_OPT_DATE_FORMAT"
 #else
 	#define STR_MODL_OPT_DATE_FORMAT "u"
+#endif
+
+/* 2010-08-04: Pridané kvôli jazykovým mutáciám -- kalendár (napr. reho¾ný) */
+#define KALENDAR 42
+#ifdef LONG_PARAM_NAMES
+	#define STR_KALENDAR "KALENDAR"
+#else
+	#define STR_KALENDAR "k"
 #endif
 
 
