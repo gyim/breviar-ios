@@ -52,6 +52,7 @@
 /*   2009-05-15a.D. | pridané text_PRO_OP[]                    */
 /*   2009-12-14a.D. | zakonèenie modlitby s malým písmenkom na zaèiatku */
 /*   2010-03-16a.D. | doplnené LOKAL_SLAV_BRATISLAVA           */
+/*   2010-05-17a.D. | pridané niektoré maïarské slávenia       */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -721,6 +722,7 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_CESKE_BUDEJOVICE_PAMATKA	38
 #define LOKAL_SLAV_SPIS_BA_PATRON			39 /* pre 11. novembra, patróna BA-arcidiecézy; 2008-06-24; nahrádza LOKAL_SLAV_SPIS_PATRON */
 #define LOKAL_SLAV_BRATISLAVA				40 /* doplnené 2010-03-16 */
+#define LOKAL_SLAV_KONIEC_OKTAVY_NAR_HU		41 /* doplnené 2010-05-17 */
 
 /* prikazany / neprikazany sviatok */
 #define PRIKAZANY_SVIATOK 1

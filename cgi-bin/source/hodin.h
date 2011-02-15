@@ -34,6 +34,7 @@
 /*                    a komplet. sa pouíva kratšie zakonèenie)*/
 /*   2009-05-15a.D. | pridané text_PRO_OP[]                    */
 /*   2009-08-26a.D. | pridané html_button_nazov_modlitby()     */
+/*   2010-05-17a.D. | pridané niektoré maïarské slávenia       */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -382,6 +383,7 @@ const char *nazov_slavenia_lokal[] =
 ,"v èeskobudìjovické diecézi památka"
 ,"v Bratislavskej arcidiecéze a v Spišskej diecéze sviatok hlavného patróna" /* doplnené 2008-06-24 */
 ,"v Bratislavskej arcidiecéze" /* doplnené 2010-03-16 */
+,"Karácsony nyolcada-Kiskarácsony" /* doplnené 2010-05-17 */
 };
 
 /* names of liturgical colors */
@@ -736,12 +738,12 @@ const char *skratka_css[POCET_CSS + 1] =
 
 /* strings of buttons - abbreviations of prayer names */
 /* 2006-10-11: definovanie reazcov aj pre invitatórium a kompletórium */
-const char *html_button_invitatorium[] = {"Inv.", "Inv.", "Inv.", "Inv.", "", "Inv.", "Inv."};
+const char *html_button_invitatorium[] = {"Inv.", "Inv.", "Inv.", "Inv.", "", "Inv.", "Imád."};
 #ifndef HTML_BUTTON_INVITATORIUM
 #define HTML_BUTTON_INVITATORIUM	html_button_invitatorium[_global_jazyk]
 #endif
 
-const char *html_button_kompletorium[] = {"Kompl.", "Kompl.", "Compl.", "Compl.", "", "Kompl.", "Kompl."};
+const char *html_button_kompletorium[] = {"Kompl.", "Kompl.", "Compl.", "Compl.", "", "Kompl.", "Bef."};
 #ifndef HTML_BUTTON_KOMPLETORIUM
 #define HTML_BUTTON_KOMPLETORIUM	html_button_kompletorium[_global_jazyk]
 #endif
@@ -752,17 +754,17 @@ const char *html_button_ranne_chvaly[] = {"Ranné chvály", "Ranní chvály", "Morni
 #define HTML_BUTTON_RANNE_CHVALY	html_button_ranne_chvaly[_global_jazyk]
 #endif
 
-const char *html_button_predpoludnim[] = {"9h", "9h", "9h", "Tertia", "", "Tercie", "Tertia"};
+const char *html_button_predpoludnim[] = {"9h", "9h", "9h", "Tertia", "", "Tercie", "Délelõtt"};
 #ifndef HTML_BUTTON_PREDPOLUDNIM
 #define HTML_BUTTON_PREDPOLUDNIM	html_button_predpoludnim[_global_jazyk]
 #endif
 
-const char *html_button_napoludnie[] = {"12h", "12h", "12h", "Sexta", "", "Sexta", "Sexta"};
+const char *html_button_napoludnie[] = {"12h", "12h", "12h", "Sexta", "", "Sexta", "Délben"};
 #ifndef HTML_BUTTON_NAPOLUDNIE
 #define HTML_BUTTON_NAPOLUDNIE	html_button_napoludnie[_global_jazyk]
 #endif
 
-const char *html_button_popoludni[] = {"15h", "15h", "15h", "Nona", "", "Nona", "Nona"};
+const char *html_button_popoludni[] = {"15h", "15h", "15h", "Nona", "", "Nona", "Délután"};
 #ifndef HTML_BUTTON_POPOLUDNI
 #define HTML_BUTTON_POPOLUDNI	html_button_popoludni[_global_jazyk]
 #endif
@@ -778,14 +780,14 @@ const char *html_button_posv_citanie[] = {"Posv. èít.", "Ètení", "Reading", "Off
 #endif
 
 const char *html_button_nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] = 
-{ {"Inv.", "Inv.", "Inv.", "Inv.", "", "Inv.", "Inv."}
+{ {"Inv.", "Inv.", "Inv.", "Inv.", "", "Inv.", "Imád."}
 , {"Ranné chvály", "Ranní chvály", "Morning prayer", "Laudes", "", "Ranní chvály", "Reggeli dicséret"}
 , {"Posv. èít.", "Ètení", "Reading", "Off. lect.", "", "Ètení", "Olvasmányos imaóra"}
-, {"9h", "9h", "9h", "Tertia", "", "Tercie", "Tertia"}
-, {"12h", "12h", "12h", "Sexta", "", "Sexta", "Sexta"}
-, {"15h", "15h", "15h", "Nona", "", "Nona", "Nona"}
+, {"9h", "9h", "9h", "Tertia", "", "Tercie", "Délelõtt"}
+, {"12h", "12h", "12h", "Sexta", "", "Sexta", "Délben"}
+, {"15h", "15h", "15h", "Nona", "", "Nona", "Délután"}
 , {"Vešpery", "Nešpory", "Vesperae", "Vésperae", "", "Veèerní chvály", "Esti dicséret"}
-, {"Kompl.", "Kompl.", "Compl.", "Compl.", "", "Kompl.", "Kompl."}
+, {"Kompl.", "Kompl.", "Compl.", "Compl.", "", "Kompl.", "Bef."}
 // táto sa pre HTML buttony nepouíva
 	, {"neurèená", "neurèena", "not-defined", "no data", "", "neurèena", "nem azonosított"}
 , {"prvé vešpery", "první nešpory", "1st Vesperae", "I vesper&#230;", "", "První veèerní chvály", "I. esti dicséret" }
@@ -851,10 +853,10 @@ const char *html_button_kompletorium_nunkdim[] = {"Kompletórium + Nunk dimittis"
 
 /* html <title> element for generated pages */
 /* doplnené, 2009-05-21 */
-const char *html_title[] = {"Liturgia hodín", "Liturgie hodin", "Liturgy of Hours", "la_", "", "Liturgie hodin", "hu_"};
+const char *html_title[] = {"Liturgia hodín", "Liturgie hodin", "Liturgy of Hours", "la_", "", "Liturgie hodin", "Az Imaórák Liturgiája"};
 /* 2009-08-04: upravené pre batch mód */
 // const char *html_title_batch_mode[] = {"Batch mód", "Dávkovı reim", "Batch mode", "la_", "", "Dávkovı reim", "hu_"};
-const char *html_title_batch_mode[] = {"Liturgia hodín - statické texty", "Liturgie hodin - statické texty", "Liturgy of Hours - static texts", "la_", "", "Liturgie hodin - statické texty", "hu_"};
+const char *html_title_batch_mode[] = {"Liturgia hodín - statické texty", "Liturgie hodin - statické texty", "Liturgy of Hours - static texts", "la_", "", "Liturgie hodin - statické texty", "Az Imaórák Liturgiája - hu_"};
 
 /* navigation buttons/texts: previous, next, today */
 const char *html_button_predchadzajuci_[] = {"Predchádzajúci", "Pøedchozí", "Previous", "Praecedénte", "", "Pøedchozí", "Elõzõ"};
@@ -878,7 +880,7 @@ const char *html_text_dnesok[] = {"dnešok", "dnešní den", "today", "hódie", "", 
 
 /* 2010-02-15: pridané kvôli "zoznam.htm" batch mode */
 const char *html_text_Breviar_dnes[] = {"Breviár dnes", "Breviáø dnes", "Breviary today", "Breviar hódie", "", "Breviáø dnes", "hu_"};
-const char *html_text_Dnesne_modlitby[] = {"Dnešné modlitby", "Dnešní modlitby", "Today's prayers", "la_hódie", "", "Dnešní modlitby", "hu_ma"};
+const char *html_text_Dnesne_modlitby[] = {"Dnešné modlitby", "Dnešní modlitby", "Today's prayers", "la_hódie", "", "Dnešní modlitby", "hu_"};
 const char *html_text_Prehlad_mesiaca[] = {"Preh¾ad mesiaca", "Pøehled mìsíce", "Current month", "la_", "", "Pøehled mìsíce", "hu_"};
 
 const char *html_text_Vysvetlivky[] = {"Vysvetlivky", "Vysvìtlivky", "Legenda", "Legenda", "", "Vysvìtlivky", "Jelmagyarázat"};
@@ -1244,7 +1246,7 @@ const char *text_ZAKONCENIE_SKRZE_dlhe[] =
  "",
  "",
  "Skrze tvého Syna Jeíše Krista, našeho Pána, nebo on s tebou v jednotì Ducha Svatého ije a kraluje po všechny vìky vìkù.",
- "hu_",
+ "A mi Urunk, Jézus Krisztus, a te Fiad által, áld veled él és uralkodik a Szentlélekkel egységben, Isten mindörökkönörökké.",
  };
 const char *text_ZAKONCENIE_SKRZE_kratke[] = 
 {"Skrze Krista, nášho Pána.",
@@ -1253,7 +1255,7 @@ const char *text_ZAKONCENIE_SKRZE_kratke[] =
  "",
  "",
  "Skrze Krista, našeho Pána.",
- "hu_",
+ "Krisztus, a mi Urunk által.",
  };
 const char *text_ZAKONCENIE_LEBO_ON_dlhe[] = 
 {"Lebo on je Boh a s tebou ije a kra¾uje v jednote s Duchom Svätım po všetky veky vekov.",
@@ -1262,7 +1264,7 @@ const char *text_ZAKONCENIE_LEBO_ON_dlhe[] =
  "",
  "",
  "Nebo on s tebou v jednotì Ducha Svatého ije a kraluje po všechny vìky vìkù.",
- "hu_",
+ "Aki veled él és uralkodik a Szentlélekkel egységben, Isten mindörökkön-örökké.",
  };
 const char *text_ZAKONCENIE_LEBO_ON_kratke[] = 
 {"Lebo on ije a kra¾uje na veky vekov.",
@@ -1271,7 +1273,7 @@ const char *text_ZAKONCENIE_LEBO_ON_kratke[] =
  "",
  "",
  "Nebo on s tebou ije a kraluje na vìky vìkù.",
- "hu_",
+ "Aki él és uralkodik mindörökkön-örökké.",
  };
 const char *text_ZAKONCENIE_LEBO_TY_dlhe[] = 
 {"Lebo ty si Boh a iješ a kra¾uješ s Bohom Otcom v jednote s Duchom Svätım po všetky veky vekov.",
@@ -1280,7 +1282,7 @@ const char *text_ZAKONCENIE_LEBO_TY_dlhe[] =
  "",
  "",
  "Nebo ty iješ a kraluješ s Bohem Otcem v jednotì Ducha Svatého po všechny vìky vìkù.",
- "hu_",
+ "Aki élsz és uralkodói az Atyaistennel és a Szentlélek­kel egységben, Isten mindörökkön-örökké.",
  };
 const char *text_ZAKONCENIE_LEBO_TY_kratke[] = 
 {"Lebo ty iješ a kra¾uješ na veky vekov.",
@@ -1289,7 +1291,7 @@ const char *text_ZAKONCENIE_LEBO_TY_kratke[] =
  "",
  "",
  "Nebo ty iješ a kraluješ na vìky vìkù.",
- "hu_",
+ "Aki élsz és uralkodói mindörökkön-örökké.",
  };
 
 /* 2009-05-15, doplnené: pre dominikánov */
@@ -1312,7 +1314,7 @@ const char *text_DRUHA_NEDELA_PO_NAR_PANA[] =
  "",
  "",
  "2. nedìle po Narození Pánì",
- "hu_",
+ "Karácsony Utáni II. Vasárnap",
  };
 const char *text_JAN_01[] = 
 {"Panny Márie Bohorodièky",
@@ -1339,7 +1341,7 @@ const char *text_JAN_03[] =
  "",
  "",
  "Nejsvìtìjšího Jména Jeíš",
- "(nincs Magyarországon)",
+ "(Najsvätejšieho mena Jeiš)",
  };
 const char *text_JAN_06[] = 
 {"Zjavenie Pána",
@@ -1348,7 +1350,7 @@ const char *text_JAN_06[] =
  "In Epiphania Domini",
  "",
  "Zjevení Pánì",
- "Urunk Megjelenése",
+ "Urunk Megjelenése (Vízkereszt)",
  };
 const char *text_JAN_07[] = 
 {"Sv. Rajmunda z Peòafortu, kòaza",
@@ -1384,7 +1386,7 @@ const char *text_JAN_15[] =
  "la_",
  "",
  "Sv. Františka Fernándeze de Capillas, knìze, Petra Sanse, biskupa, a druhù, èínskıch muèedníkù",
- "hu_",
+ "Remete Szent Pál", // 2010-05-17: pozor, nieèo úplne iné ako pre czop!
  };
 const char *text_JAN_17[] = 
 {"Sv. Antona, opáta",
@@ -1411,7 +1413,7 @@ const char *text_JAN_19[] =
  "la_",
  "",
  "Sv. Markéty Uherské, panny, mnišky",
- "hu_",
+ "Árpádházi Szent Margit szûz", // v maïarsku 18. januára
  };
 const char *text_JAN_20_1[] = 
 {"Sv. Fabiána, pápea a muèeníka",
@@ -1510,7 +1512,7 @@ const char *text_JAN_31[] =
  "S. Ioannis Bosco, presb.",
  "",
  "Sv. Jana Boska, knìze",
- "Bosco Szent János",
+ "Bosco Szent János áldozópap",
  };
 const char *text_FEB_02[] = 
 {"Obetovanie Pána",
@@ -1582,7 +1584,7 @@ const char *text_FEB_08_2[] =
  "",
  "",
  "Sv. Josefíny Bakhity, panny",
- "(nincs Magyarországon)",
+ "(Sv. Jozefíny Bakhita, panny)",
  };
 const char *text_FEB_10[] = 
 {"Sv. Školastiky, panny",
@@ -1621,13 +1623,13 @@ const char *text_FEB_13[] =
  "hu_",
  };
 const char *text_FEB_14[] = 
-{"(na Slovensku sa slávi 5. júla)",
+{"Sv. Cyrila, mnícha, a sv. Metoda, biskupa, patrónov Európy", // (na Slovensku sa slávi 5. júla)
  "(slaví se 5. èervna)",
  "",
  "Ss. Cyrilli, monachi, et Methodii, ep.",
  "",
  "hu_name",
- "Szent Cirill szerzetes és Szent Metód püspök, Európa társvédõszentjei",
+ "Szent Cirill szerzetes és Szent Metód püspök, Európa társ védõszentjei",
  };
 const char *text_FEB_17[] = 
 {"Siedmich svätıch zakladate¾ov rehole Sluobníkov Panny Márie",
@@ -2284,7 +2286,7 @@ const char *text_NARODENIE_PANA[] =
  "",
  "",
  "Narození Pánì",
- "hu_name",
+ "Urunk Születése (Karácsony)",
  };
 const char *text_ZOSLANIE_DUCHA_SVATEHO[] = 
 {"Zoslanie Ducha Svätého",

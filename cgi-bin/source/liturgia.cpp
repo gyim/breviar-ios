@@ -474,6 +474,11 @@ char *caps_BIG(const char *input){
 				/* spoluhlasky -- dlhe */
 				case 'å': c = 'Å'; break;
 				case 'à': c = 'À'; break;
+				/* maïarské znaky */
+				case 'û': c = 'Û'; break;
+				case 'õ': c = 'Õ'; break;
+				case 'ü': c = 'Ü'; break;
+				case 'ö': c = 'Ö'; break;
 			}
 		}
 		if(_global_pom_str[i] != c)

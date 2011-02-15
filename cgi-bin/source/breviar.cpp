@@ -2897,6 +2897,9 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 					_global_den.typslav_lokal = LOKAL_SLAV_KONIEC_OKTAVY_NAR_CZ;
 				}
+				else if(_global_jazyk == JAZYK_HU){
+					_global_den.typslav_lokal = LOKAL_SLAV_KONIEC_OKTAVY_NAR_HU;
+				}
 				else {
 					_global_den.typslav_lokal = LOKAL_SLAV_KONIEC_OKTAVY_NAR;
 				}
