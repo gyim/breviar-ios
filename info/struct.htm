@@ -25,7 +25,7 @@
 <br><tt>&nbsp;/* toto boli "obcianske" zalezitosti */</tt>
 <br><tt>&nbsp;char litrok;&nbsp;&nbsp;&nbsp; /* liturgicky rok ('A'--'C') */</tt>
 <br><tt>&nbsp;int tyzden;&nbsp;&nbsp;&nbsp;&nbsp; /* tyzden v danom liturgickom obdobi */</tt>
-<br><tt>&nbsp;int tyzzal;&nbsp;&nbsp;&nbsp;&nbsp; /* tyzden v zaltari (vacsinou ((tyzden - 1) % 4) + 1) */</tt>
+<br><tt>&nbsp;int tyzzal;&nbsp;&nbsp;&nbsp;&nbsp; /* tyzden v zaltari (vacsinou ((tyzden – 1) % 4) + 1) */</tt>
 <br><tt>&nbsp;int litobd;&nbsp;&nbsp;&nbsp;&nbsp; /* liturgicke obdobie, OBD_... */</tt>
 <br><tt>&nbsp;int typslav;&nbsp;&nbsp;&nbsp; /* typ slavenia (1--5): SLAV_... */</tt>
 <br><tt>&nbsp;int typslav_lokal;&nbsp;&nbsp;&nbsp; /* lokálny typ slavenia : LOKAL_SLAV_... */</tt>
@@ -41,8 +41,8 @@
 <br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * spolcast == a1 + a2 * MAX + a3 * MAX * MAX,</tt>
 <br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *</tt>
 <br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * kde</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * - MAX je MAX_MODL_SPOL_CAST,</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * - a1, a2, a3 su konstanty MODL_SPOL_CAST_...</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * – MAX je MAX_MODL_SPOL_CAST,</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * – a1, a2, a3 su konstanty MODL_SPOL_CAST_...</tt>
 <br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;&nbsp; (v poradi a1, ak druhe tak a2, ak tretie tak aj a3)</tt>
 <br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *</tt>
 <br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * _encode_..., _decode_spol_cast();</tt>

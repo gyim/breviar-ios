@@ -140,6 +140,8 @@
 /*   2009-08-25a.D. | drobnÈ opravy pre Ëesk˝ kalend·r (sv. Vojtech, sv. Prokop)                */
 /*   2009-09-18a.D. | doplnenÈ parametre vo volanÌ set_spolocna_cast() -- force zo spol. Ëasti  */
 /*   2010-03-16a.D. | doplnenÈ LOKAL_SLAV_BRATISLAVA kvÙli 8. marcu                             */
+/*   2010-03-25a.D. | postupne prid·vam ËeskÈ (czop) odvetvenia;                                */
+/*                    meno CZ pre CZOP: (_global_jazyk == JAZYK_CZ_OP)? JAZYK_CZ: _global_jazyk */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -7498,6 +7500,7 @@ short int _spol_cast_je_panna(_struct_sc sc){
 /* antifony */
 /* kedysi tam pred celym blokom bolo if(_global_opt2 == MODL_ZALMY_ZO_SV) 
  * 2005-07-27: pre sviatky sv‰t˝ch posv‰tnÈ ËÌtania maj˙ antifÛny tam, kde ËÌtania
+ * 2010-03-25: pre ˙Ëely modlitby cez deÚ (keÔ s˙ ant. 1 aû 3 rovnakÈ) pouûi _vlastna_cast_antifony_rovnake
  */
 #define _vlastna_cast_antifony {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1);\
@@ -14616,20 +14619,15 @@ label_25_MAR:
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_full(modlitba);
 
-							modlitba = MODL_PREDPOLUDNIM;
-							_vlastna_cast_kcitanie;
-							_vlastna_cast_kresponz;
-							_vlastna_cast_modlitba;
-
-							modlitba = MODL_NAPOLUDNIE;
-							_vlastna_cast_kcitanie;
-							_vlastna_cast_kresponz;
-							_vlastna_cast_modlitba;
-
-							modlitba = MODL_POPOLUDNI;
-							_vlastna_cast_kcitanie;
-							_vlastna_cast_kresponz;
-							_vlastna_cast_modlitba;
+							_vlastna_cast_mcd_ant_kcitresp_modl;
+						
+							/* ak je modlitba cez deÚ na sl·vnosù, tak by sa mali pouûiù ûalmy z doplnkovej psalmÛdie */
+							if(_global_den.denvt != DEN_NEDELA) {
+								_set_zalm_cez_den_doplnkova_psalmodia();
+							}
+							else {
+								_set_zalmy_1nedele_mcd();
+							}
 
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_full(modlitba);
@@ -15269,21 +15267,57 @@ label_25_MAR:
 
 						break;
 					}
-					/* 2009-03-24: doplnenÈ odvetvenie pre dominik·nov */
-					if(_global_jazyk == JAZYK_CZ_OP){
-						_global_svaty1.typslav = SLAV_SVIATOK;
-						_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
-						/* 2009-07-10: odvetvenÈ pre dominik·nov */
-						mystrcpy(_global_svaty1.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
-						strcat(_global_svaty1.meno, text_AUG_28[_global_jazyk]);
-					}
-					else{
-						_global_svaty1.typslav = SLAV_SPOMIENKA;
-						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-						mystrcpy(_global_svaty1.meno, text_AUG_28[_global_jazyk], MENO_SVIATKU);
-					}
+					_global_svaty1.typslav = SLAV_SPOMIENKA;
+					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+					mystrcpy(_global_svaty1.meno, text_AUG_28[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+					if(_global_jazyk == JAZYK_CZ_OP){
+						/* 2009-03-24: odvetvenÈ pre dominik·nov;
+						 * 2010-03-25: pre dominik·nov samostatne
+						 */
+						if(poradie_svaty == 2){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_INVITATORIUM;
+							_vlastna_cast_antifona_inv;
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_full_okrem_prosieb(modlitba);
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_full(modlitba);
+
+							modlitba = MODL_PREDPOLUDNIM;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_NAPOLUDNIE;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POPOLUDNI;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_full_okrem_prosieb(modlitba);
+
+							break;
+						}
+						pocet = 2;
+						_global_svaty2.typslav = SLAV_SVIATOK;
+						_global_svaty2.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
+						mystrcpy(_global_svaty2.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
+						strcat(_global_svaty2.meno, text_AUG_28[_global_jazyk]);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
+						_global_svaty2.farba = LIT_FARBA_BIELA;
+					}/* czop only */
 					break;
 				case 29: /* MES_AUG */
 					if(poradie_svaty == 1){
@@ -16389,21 +16423,57 @@ label_25_MAR:
 
 						break;
 					}
-					/* 2009-03-24: doplnenÈ odvetvenie pre dominik·nov */
-					if(_global_jazyk == JAZYK_CZ_OP){
-						_global_svaty1.typslav = SLAV_SVIATOK;
-						_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
-						/* 2009-07-10: odvetvenÈ pre dominik·nov */
-						mystrcpy(_global_svaty1.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
-						strcat(_global_svaty1.meno, text_OKT_04[_global_jazyk]);
-					}
-					else{
-						_global_svaty1.typslav = SLAV_SPOMIENKA;
-						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-						mystrcpy(_global_svaty1.meno, text_OKT_04[_global_jazyk], MENO_SVIATKU);
-					}
+					_global_svaty1.typslav = SLAV_SPOMIENKA;
+					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+					mystrcpy(_global_svaty1.meno, text_OKT_04[(_global_jazyk == JAZYK_CZ_OP)? JAZYK_CZ: _global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+					if(_global_jazyk == JAZYK_CZ_OP){
+						/* 2009-03-24: odvetvenÈ pre dominik·nov;
+						 * 2010-03-25: pre dominik·nov samostatne
+						 */
+						if(poradie_svaty == 2){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_INVITATORIUM;
+							_vlastna_cast_antifona_inv;
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_full(modlitba);
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_full_okrem_antifon(modlitba);
+
+							modlitba = MODL_PREDPOLUDNIM;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_NAPOLUDNIE;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POPOLUDNI;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_full(modlitba);
+
+							break;
+						}
+						pocet = 2;
+						_global_svaty2.typslav = SLAV_SVIATOK;
+						_global_svaty2.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
+						mystrcpy(_global_svaty2.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
+						strcat(_global_svaty2.meno, text_OKT_04[_global_jazyk]);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+						_global_svaty2.farba = LIT_FARBA_BIELA;
+					}/* czop only */
 					break;
 				case 5: /* MES_OCT */
 					/* 2009-03-24: doplnenÈ pre dominik·nov */
@@ -17600,18 +17670,57 @@ label_25_MAR:
 
 						break;
 					}
-					/* 2009-03-24: doplnenÈ odvetvenie pre dominik·nov */
-					if(_global_jazyk == JAZYK_CZ_OP){
-						_global_svaty1.typslav = SLAV_SVIATOK;
-						_global_svaty1.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
-					}
-					else{
-						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
-					}
+					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+					_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, text_NOV_15[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+					if(_global_jazyk == JAZYK_CZ_OP){
+						/* 2009-03-24: odvetvenÈ pre dominik·nov;
+						 * 2010-03-25: pre dominik·nov samostatne
+						 */
+						if(poradie_svaty == 2){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_INVITATORIUM;
+							_vlastna_cast_antifona_inv;
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_full_okrem_prosieb(modlitba);
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_full(modlitba);
+
+							modlitba = MODL_PREDPOLUDNIM;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_NAPOLUDNIE;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POPOLUDNI;
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_full_okrem_prosieb(modlitba);
+
+							break;
+						}
+						pocet = 2;
+						_global_svaty2.typslav = SLAV_SVIATOK;
+						_global_svaty2.smer = 7; /* sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
+						mystrcpy(_global_svaty2.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
+						strcat(_global_svaty2.meno, text_NOV_15[_global_jazyk]);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
+						_global_svaty2.farba = LIT_FARBA_BIELA;
+					}/* czop only */
 					break;
 				case 16: /* MES_NOV */
 					if(poradie_svaty == 1){

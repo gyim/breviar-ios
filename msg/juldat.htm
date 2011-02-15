@@ -60,7 +60,7 @@ function show_jd()
 		jy = year;
 		jm = month + 1;
 	} else {
-		jy = year - 1;
+		jy = year – 1;
 		jm = month + 13;
 	}
 	var intgr = Math.floor( Math.floor(365.25*jy) + Math.floor(30.6001*jm) + day + 1720995 );
@@ -68,10 +68,10 @@ function show_jd()
  var gregcal = 15 + 31*( 10 + 12*1582 );
 	if( day + 31*(month + 12*year) >= gregcal ) {
 		ja = Math.floor(0.01*jy);
-		intgr += 2 - ja + Math.floor(0.25*ja);
+		intgr += 2 – ja + Math.floor(0.25*ja);
 	}
 	// upravuje rozdiel o polden
-	var dayfrac = hour/24.0 - 0.5;
+	var dayfrac = hour/24.0 – 0.5;
 	if( dayfrac < 0.0 ) {
 		dayfrac += 1.0;
 		--intgr;
@@ -81,7 +81,7 @@ function show_jd()
  // zaokruhli na cele sekundy
  var jd0 = (intgr + frac)*1000;
  var jd = Math.floor(jd0);
- if( jd0 - jd > 0.5 ) ++jd;
+ if( jd0 – jd > 0.5 ) ++jd;
  document.write(jd/1000);
 }
 // koniec predpisu -->
@@ -140,7 +140,7 @@ zaslal Stanislav Vrba <stanislavvrba@kiwwi.sk>, vdaka. -->
 <li>1. január 1968: 2439857 JD (pod¾a gregoriánskeho kalendára)</li>
 </ul>
 <p>Pre dvadsiate storoèie sa pouíva aj <i>modifikovanı juliánsky dátum</i>
-(<b>MJD</b>), ktorého hodnota je MJD = JD - 2400000.</p>
+(<b>MJD</b>), ktorého hodnota je MJD = JD – 2400000.</p>
 <p>Juliánsky dátum sa pouíva napríklad vtedy, keï chceme vypoèíta, ko¾ko
 dní uplynulo medzi nejakımi dvoma dátumami.</p>
 <h4 class="blue">Ïalšie súvisiace odkazy</h4>
