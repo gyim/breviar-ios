@@ -3724,6 +3724,15 @@ const char *text_NOV_07[] =
  "Všech svatých Øádu kazatelù",
  "hu_",
  };
+const char *text_NOV_08[] = 
+{"(na Slovensku nie je)",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "Všech zemøelých bratøí a sester kazatelského øádu ", /* Øádu kazatelù*/
+ "hu_",
+ };
 const char *text_NOV_09[] = 
 {"Výroèie posviacky Lateránskej baziliky",
  "Posvìcení lateránské baziliky",

@@ -401,6 +401,7 @@ extern const char *text_NOV_04[];
 extern const char *text_NOV_05[];
 extern const char *text_NOV_06[];
 extern const char *text_NOV_07[];
+extern const char *text_NOV_08[];
 extern const char *text_NOV_09[];
 extern const char *text_NOV_10[];
 extern const char *text_NOV_11[];
