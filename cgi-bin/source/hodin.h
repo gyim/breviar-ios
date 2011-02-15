@@ -1239,7 +1239,7 @@ const char *text_ZAKONCENIE_SKRZE_dlhe[] =
  "",
  "",
  "",
- "Skrze tvého Syna Jeíše Krista, našeho Pána, nebo on s tebou v jednotì Ducha svatého ije a kraluje po všechny vìky vìkù.",
+ "Skrze tvého Syna Jeíše Krista, našeho Pána, nebo on s tebou v jednotì Ducha Svatého ije a kraluje po všechny vìky vìkù.",
  "hu_",
  };
 const char *text_ZAKONCENIE_SKRZE_kratke[] = 
