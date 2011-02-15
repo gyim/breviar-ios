@@ -60,7 +60,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2009-07-30"
+#define BUILD_DATE "2009-08-02"
 
 #define BYTES 250
 #define SMALL 80
@@ -501,6 +501,8 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 
 #define FILENAME_EXPORT_DATE_SIMPLE "%.2d%.2d%.2d"
 #define FILENAME_EXPORT_DATE_FULL   "%.4d-%.2d-%.2d"
+#define DIRNAME_EXPORT_MONTH_SIMPLE "%.2d%.2d-%s"
+#define DIRNAME_EXPORT_MONTH_FULL   "%.4d-%.2d-%s"
 
 #endif /*__MYDEFS_H_*/
 
