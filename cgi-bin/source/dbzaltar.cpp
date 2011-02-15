@@ -9295,6 +9295,16 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty
 	_vlastna_cast_modlitba;\
 }
 
+/* 2010-05-03: doplnené */
+#define _vlastna_cast_mcd_modlitba {\
+	modlitba = MODL_PREDPOLUDNIM;\
+	_vlastna_cast_modlitba;\
+	modlitba = MODL_NAPOLUDNIE;\
+	_vlastna_cast_modlitba;\
+	modlitba = MODL_POPOLUDNI;\
+	_vlastna_cast_modlitba;\
+}
+
 /* 2008-02-22: vytvorený nový define, aby nebolo to¾ko copy-paste miest v kóde */
 #define _vlastna_cast_mcd_hymnus_kcitresp_modl {\
 	modlitba = MODL_PREDPOLUDNIM;\
@@ -11817,7 +11827,9 @@ label_25_MAR:
 
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
-						_vlastna_cast_hymnus;
+						// 2010-05-03: èeský breviáø má hymnus zo spol. èasti
+						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ_OP))
+							_vlastna_cast_hymnus;
 						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
@@ -11825,8 +11837,15 @@ label_25_MAR:
 						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
 
-						/* 2008-05-08: doplnené; 2009-10-21: upravené */
-						_vlastna_cast_mcd_kcitresp_modl;
+						/* 2008-05-08: doplnené; 2009-10-21: upravené
+						 * 2010-05-03: èeský breviáø má krátké ètení a responz zo spol. èasti
+						 */
+						if(_global_jazyk == JAZYK_CZ){
+							_vlastna_cast_mcd_modlitba;
+						}
+						else{
+							_vlastna_cast_mcd_kcitresp_modl;
+						}
 
 						break;
 					}
