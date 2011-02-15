@@ -2646,7 +2646,7 @@ const char *text_JUL_17_3[] =
  "hu_",
  };
 const char *text_JUL_20[] = 
-{"(na Slovensku nie je)",
+{"Sv. Apolinára, biskupa a muèeníka",
  "Sv. Apolináøe, biskupa a muèedníka",
  "",
  "",
@@ -2682,7 +2682,7 @@ const char *text_JUL_23[] =
  "Szent Brigitta szerzetesnõ",
  };
 const char *text_JUL_24[] = 
-{"Sv. Charbela Makhlufa, kòaza",
+{"Sv. Sarbela Makhlufa, kòaza", /* 2009-07-15: direktórium má "Sarbel", predtým bolo "Charbel" a asi sa èíta "Šarbel" */
  "Sv. Šarbela Makhlúfa, knìze",
  "",
  "",
