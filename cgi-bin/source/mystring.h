@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* mystring.h                                                  */
-/* (c)1999-2009 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2010 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description |                                               */
 /* document history                                            */

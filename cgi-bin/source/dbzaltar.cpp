@@ -1,7 +1,7 @@
 /************************************************************************/
 /*                                                                      */
 /* dbzaltar.cpp                                                         */
-/* (c)1999-2009 | Juraj Videky | videky@breviar.sk                      */
+/* (c)1999-2010 | Juraj Videky | videky@breviar.sk                      */
 /*                                                                      */
 /* description | program tvoriaci stranky pre liturgiu hodin            */
 /* document history                                                     */
@@ -4760,7 +4760,7 @@ label_24_DEC:
 				/* posvätné èítanie; 2006-02-05 */
 				modlitba = MODL_POSV_CITANIE;
 				_bohorod_hymnus(_anchor_vlastne_slavenie);
-				_set_zalmy_sviatok_marie(modlitba);
+				_set_zalmy_vian_oktava(_global_den.den, modlitba); // 2010-01-08: opravené; pôvodne bolo _set_zalmy_sviatok_marie(modlitba);
 				_bohorod_antifony;
 				_bohorod_kresponz(_anchor_vlastne_slavenie);
 				_vlastne_slavenie_ine_citanie1(_anchor_vlastne_slavenie);
@@ -16968,10 +16968,13 @@ label_25_MAR:
 						}
 
 						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_2citanie;
-						if(_global_jazyk != JAZYK_CZ_OP){
-							/* 2009-11-20: odvetvené pre èeský dominikánský breviáø (všetko sa tam berie zo spol. èasti) */
-							_vlastna_cast_modlitba;
+						// 2010-01-08: ak padne toto slávenie na nede¾u, berie sa nede¾né ofícium
+						if(_global_den.denvt != DEN_NEDELA){
+							_vlastna_cast_2citanie;
+							if(_global_jazyk != JAZYK_CZ_OP){
+								/* 2009-11-20: odvetvené pre èeský dominikánský breviáø (všetko sa tam berie zo spol. èasti) */
+								_vlastna_cast_modlitba;
+							}
 						}
 
 						modlitba = MODL_VESPERY;
@@ -16987,7 +16990,13 @@ label_25_MAR:
 						break;
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
-					_global_svaty1.smer = 3; /* vsetkych vernych zosnulych */
+					// 2010-01-08: ak padne toto slávenie na nede¾u, berie sa nede¾né ofícium
+					if(_global_den.denvt != DEN_NEDELA){
+						_global_svaty1.smer = 3; /* vsetkych vernych zosnulych */
+					}
+					else{
+						_global_svaty1.smer = 12; /* vsetkych vernych zosnulych; len "¾ubovo¾né" slávenie; odstavenie */
+					}
 					mystrcpy(_global_svaty1.meno, text_NOV_02[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_ZA_ZOSNULYCH);
 					_global_svaty1.farba = LIT_FARBA_FIALOVA; /* 2006-08-19: pridané */

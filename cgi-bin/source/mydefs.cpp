@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* mydefs.cpp                                                  */
-/* (c)1999-2009 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2010 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne define'y                    */
 /* document history                                            */
