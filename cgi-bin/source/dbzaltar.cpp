@@ -126,6 +126,7 @@
 /*                    sv‰t˝ch" prekrylo nastavenie z liturgickÈho obdobia...                    */
 /*   2009-03-23a.D. | opravenÈ ûalmy pre zvestovanie p·na; maj˙ byù podæa narodenia p·na        */
 /*   2009-03-24a.D. | ˙pravy liturgickÈho kalend·ra pre czop - pre dominik·nov                  */
+/*   2009-04-01a.D. | doplnenÈ _set_zalmy_najsv_mena_jezisovho()                                */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -3203,6 +3204,19 @@ void _set_zalmy_vsetkych_svatych(short int modlitba){
 		_set_zalmy_1nedele_rch();
 	}
 	Log("_set_zalmy_vsetkych_svatych(%s) -- end\n", nazov_modlitby(modlitba));
+}
+void _set_zalmy_najsv_mena_jezisovho(short int modlitba){
+	/* 2009-04-01: doplnenÈ pre text_JAN_03 */
+	Log("_set_zalmy_najsv_mena_jezisovho(%s) -- begin\n", nazov_modlitby(modlitba));
+	if(modlitba == MODL_VESPERY){
+		set_zalm(1, modlitba, "z113.htm", "ZALM113");
+		set_zalm(2, modlitba, "z135.htm", "ZALM135_CELY");
+		set_zalm(3, modlitba, "flp2.htm", "CHVAL_FLP2");
+	}
+	else if(modlitba == MODL_RANNE_CHVALY){
+		_set_zalmy_1nedele_rch();
+	}
+	Log("_set_zalmy_najsv_mena_jezisovho(%s) -- end\n", nazov_modlitby(modlitba));
 }
 
 /* 2007-11-14: doplnenÈ invitatÛrium; pouûiteænÈ pre _bohorod, _krkrala, _krst... a pod. */
@@ -9322,12 +9336,32 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
+
+						/* 2009-04-01: doplnenÈ invitatÛrium */
+						modlitba = MODL_INVITATORIUM;
+						_vlastna_cast_antifona_inv;
+
 						modlitba = MODL_RANNE_CHVALY;
+						_set_zalmy_najsv_mena_jezisovho(modlitba);
+						_vlastna_cast_hymnus;
+						_vlastna_cast_antifony;
+						_vlastna_cast_kcitanie;
+						_vlastna_cast_kresponz;
+						_vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
+
 						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_hymnus;
 						_vlastna_cast_modlitba;
 						_vlastna_cast_2citanie;
+
 						modlitba = MODL_VESPERY;
+						_set_zalmy_najsv_mena_jezisovho(modlitba);
+						_vlastna_cast_hymnus;
+						_vlastna_cast_antifony;
+						_vlastna_cast_kcitanie;
+						_vlastna_cast_kresponz;
+						_vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
 						break;
 					}

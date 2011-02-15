@@ -1208,12 +1208,12 @@ const char *text_JAN_02[] =
  "Nagy Szent Vazul és Nazianzi Szent Gergely püspökök és egyháztanítók",
  };
 const char *text_JAN_03[] = 
-{"(nie je)",
- "(není)",
+{"Najsvätejšieho mena Ježiš",
+ "Nejsvìtìjšího Jména Ježíš",
  "",
  "",
  "",
- "Nejsvìtìjšího Jména Ježíš ",
+ "Nejsvìtìjšího Jména Ježíš",
  "(nincs Magyarországon)",
  };
 const char *text_JAN_06[] = 
