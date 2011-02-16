@@ -406,9 +406,13 @@ extern const char *TEMPLAT[];
 #define PARAM_ZAKONCENIE_LEBO_ON_MALE       "ZAKONCENIE_LEBO_ON_MALE"
 /* 2010-06-07, doplnené: ešte jedno zakonèenie modlitby pre slovenèinu, krátke resp. dlhé (POST1_MODLITBA5NE) */
 #define PARAM_ZAKONCENIE_ON_JE              "ZAKONCENIE_ON_JE"
+/* 2010-01-14, doplnené: ešte jedno zakonèenie modlitby pre slovenèinu, krátke resp. dlhé */
+#define PARAM_ZAKONCENIE_KTORY_JE            "ZAKONCENIE_KTORY_JE"
 /* 2010-05-21: doplnené zobrazenie antifóny a modlitby pre spomienku svätca v pôstnom období */
 #define PARAM_POST_SPOMIENKA_BEGIN           "POST_SPOMIENKA_BEGIN"
 #define PARAM_POST_SPOMIENKA_END             "POST_SPOMIENKA_END"
+/* 2011-01-12: doplnené zobrazenie/skrytie alternatívnej antifóny žalmu/chválospevu ("myšlienka k žalmu" pod¾a bodu 111 VSLH) */
+#define PARAM_MYSLIENKA_K_ZALMU              "MYSLIENKA_K_ZALMU"
 
 /* stringy parametrov vstupu pre MODL_OPT..., ktore generovanie modlitby
  * ovplyvnuju */

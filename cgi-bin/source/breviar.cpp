@@ -168,6 +168,9 @@
 /*                    deò (svaty == 0) bol "prebitý" slávnosou            */
 /*                  - snáï opravené aj to, že keï pripadne lokálna slávnos*/
 /*                    na nede¾u (czop: 8.8.2010), tak fungujú obe možnosti */
+/*   2011-01-12a.D. | doplnené volite¾né zobrazovanie/skrývanie myšlienky  */
+/*                    (alternatívnej antifóny) pre žalmy/chválospevy       */
+/*   2011-01-14a.D. | SK doplnené ZAKONCENIE_KTORY_JE                      */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -1276,6 +1279,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 							Log("  opat writing to export file, end of V.O. Aleluja.\n");
 						}
 					}/* aleluja vo velkonocnom obdobi */
+
 					/* 2009-01-28, doplnené: aleluja mimo pôstneho obdobia - doteraz fungovala len pre templáty - interpretParameter() */
 					if((je_post) && (equals(rest, PARAM_ALELUJA_NIE_V_POSTE))){
 						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
@@ -1327,6 +1331,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 							Log("skrze-koniec.\n");
 						}
 					}/* zakonèenie modlitby - Skrze... */
+
 					/* zakonèenie modlitby - Lebo ty... */
 					if(equals(rest, PARAM_ZAKONCENIE_LEBO_TY) || equals(rest, PARAM_ZAKONCENIE_LEBO_TY_MALE)){
 						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
@@ -1356,6 +1361,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 							Log("lebo-ty-koniec.\n");
 						}
 					}/* zakonèenie modlitby - Lebo ty... */
+
 					/* zakonèenie modlitby - Lebo on... */
 					if(equals(rest, PARAM_ZAKONCENIE_LEBO_ON) || equals(rest, PARAM_ZAKONCENIE_LEBO_ON_MALE)){
 						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
@@ -1385,6 +1391,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 							Log("lebo-on-koniec.\n");
 						}
 					}/* zakonèenie modlitby - Lebo on... */
+
 					/* zakonèenie modlitby - On je... (len SK); doplnené 2010-06-07 */
 					if(equals(rest, PARAM_ZAKONCENIE_ON_JE) && _global_jazyk == JAZYK_SK){
 						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
@@ -1411,6 +1418,52 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 							Log("on-je-koniec.\n");
 						}
 					}/* zakonèenie modlitby - On je... (len SK) */
+
+					/* zakonèenie modlitby - ktorý je... (len SK); doplnené 2011-01-14 */
+					if(equals(rest, PARAM_ZAKONCENIE_KTORY_JE) && _global_jazyk == JAZYK_SK){
+						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
+							write = 0;
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("(start)ktorý je...");
+#endif
+							Export("-->");
+							if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
+								mystrcpy(zakoncenie, text_ZAKONCENIE_KTORY_JE_kratke, MAX_STR);
+							}
+							else{
+								mystrcpy(zakoncenie, text_ZAKONCENIE_KTORY_JE_dlhe, MAX_STR);
+							}
+							Export(zakoncenie);
+							Log("ktorý-je-zaèiatok...\n");
+						}
+						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
+							Export("<!--");
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("ktorý je...(stop)");
+#endif
+							write = 1;
+							Log("ktorý-je-koniec.\n");
+						}
+					}/* zakonèenie modlitby - ktorý je... (len SK) */
+
+					/* 2011-01-12: doplnené volite¾né zobrazovanie/skrývanie alternatívnej antifóny pre žalmy/chválospevy */
+					if((_global_den.litobd != OBD_CEZ_ROK) && (equals(rest, PARAM_MYSLIENKA_K_ZALMU))){
+						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
+							write = 0;
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("(stop)nie je ocr");
+#endif
+							Log("  rusim writing to export file, kvoli myslienka-k-zalmu...\n");
+						}
+						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("nie je ocr(start)");
+#endif
+							write = 1;
+							Log("  opat writing to export file, end of myslienka-k-zalmu.\n");
+						}
+					}/* volite¾né zobrazovanie/skrývanie alternatívnej antifóny pre žalmy/chválospevy */
+
 				}/* !equalsi(rest, modlparam) */
 				continue;
 		}

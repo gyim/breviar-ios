@@ -36,6 +36,7 @@
 /*   2009-08-26a.D. | pridané html_button_nazov_modlitby()     */
 /*   2010-05-17a.D. | pridané niektoré maïarské slávenia       */
 /*   2010-10-11a.D. | pridané nazov_slavenia_lokal_kalendar[]  */
+/*   2011-01-14a.D. | pridané ZAKONCENIE_KTORY_JE              */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -1313,7 +1314,7 @@ const char *text_ZAKONCENIE_SKRZE_dlhe[] =
  "Skrze tvého Syna Jeíše Krista, našeho Pána, nebo on s tebou v jednotì Ducha svatého ije a kraluje po všechny vìky vìkù.",
  "",
  "",
- "",
+ "Per Christum",
  "Skrze tvého Syna Jeíše Krista, našeho Pána, nebo on s tebou v jednotì Ducha Svatého ije a kraluje po všechny vìky vìkù.",
  "A mi Urunk, Jézus Krisztus, a te Fiad által, áld veled él és uralkodik a Szentlélekkel egységben, Isten mindörökkönörökké.",
  };
@@ -1322,7 +1323,7 @@ const char *text_ZAKONCENIE_SKRZE_kratke[] =
  "Skrze Krista, našeho Pána.",
  "",
  "",
- "",
+ "Per Christum",
  "Skrze Krista, našeho Pána.",
  "Krisztus, a mi Urunk által.",
  };
@@ -1331,7 +1332,7 @@ const char *text_ZAKONCENIE_LEBO_ON_dlhe[] =
  "Nebo on s tebou v jednotì Ducha svatého ije a kraluje po všechny vìky vìkù.",
  "",
  "",
- "",
+ "Qui vivit",
  "Nebo on s tebou v jednotì Ducha Svatého ije a kraluje po všechny vìky vìkù.",
  "Aki veled él és uralkodik a Szentlélekkel egységben, Isten mindörökkön-örökké.",
  };
@@ -1340,7 +1341,7 @@ const char *text_ZAKONCENIE_LEBO_ON_kratke[] =
  "Nebo on s tebou ije a kraluje na vìky vìkù.",
  "",
  "",
- "",
+ "Qui vivit",
  "Nebo on s tebou ije a kraluje na vìky vìkù.",
  "Aki él és uralkodik mindörökkön-örökké.",
  };
@@ -1349,7 +1350,7 @@ const char *text_ZAKONCENIE_LEBO_TY_dlhe[] =
  "Nebo ty iješ a kraluješ s Bohem Otcem v jednotì Ducha svatého po všechny vìky vìkù.",
  "",
  "",
- "",
+ "Qui vivis",
  "Nebo ty iješ a kraluješ s Bohem Otcem v jednotì Ducha Svatého po všechny vìky vìkù.",
  "Aki élsz és uralkodói az Atyaistennel és a Szentlélek­kel egységben, Isten mindörökkön-örökké.",
  };
@@ -1358,13 +1359,22 @@ const char *text_ZAKONCENIE_LEBO_TY_kratke[] =
  "Nebo ty iješ a kraluješ na vìky vìkù.",
  "",
  "",
- "",
+ "Qui vivis",
  "Nebo ty iješ a kraluješ na vìky vìkù.",
  "Aki élsz és uralkodói mindörökkön-örökké.",
  };
-// 2010-06-07: pridané len pre SK (POST1_MODLITBA5NE)
+/* 2010-06-07: pridané len pre SK (POST1_MODLITBA5NE) */
 const char *text_ZAKONCENIE_ON_JE_dlhe = "On je Boh a s tebou ije a kra¾uje v jednote s Duchom Svätım po všetky veky vekov.";
 const char *text_ZAKONCENIE_ON_JE_kratke = "On ije a kra¾uje na veky vekov.";
+/* 2011-01-14: pridané len pre SK 
+		(04NOV_MODLITBA, 24APR2_MODLITBA, 11JUN_MODLITBA, 19OKT2_MODLITBA, VN1_MODLITBA3STR, ADV12PO_MODLITBA, ADV12STR_MODLITBA, 
+		VTYZ_MODLITBA6PO, ADV12UT_MODLITBA, ADV12PI_MODLITBA, ADV13STV_MODLITBA, OZZ_MODLITBA, SCDP_MODLITBA, PMB_rMODLITBA, SCPM_MODLITBA, 
+		SCSM_MODLITBA, 24APR_MODLITBA, 25APR_MODLITBA, 02AUG_MODLITBA, 05AUG_MODLITBA, 15AUG_1MODLITBA, 16JUL_MODLITBA, 30JUL2_MODLITBA, 
+		24OKT_MODLITBA, VIAN2_MODLITBA11, VN1_MODLITBA4NE, SPMVSr_MODLITBA2, 24JUN_1MODLITBA, 
+		VN1_MODLITBA6STV [nepouíva sa], VN1_rPROSBY6PI_pred_nan [nepouíva sa], VN1_vPROSBY6PI_pred_nan [nepouíva sa])
+ */
+const char *text_ZAKONCENIE_KTORY_JE_dlhe = "ktorı je Boh a s tebou ije a kra¾uje v jednote s Duchom Svätım po všetky veky vekov.";
+const char *text_ZAKONCENIE_KTORY_JE_kratke = "ktorı ije a kra¾uje na veky vekov.";
 
 /* 2009-05-15, doplnené: pre dominikánov */
 const char *text_PRO_OP[] = 
