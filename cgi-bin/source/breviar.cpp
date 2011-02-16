@@ -1159,6 +1159,7 @@ void _export_heading_center(const char *string){
  *
  */
 void _main_prazdny_formular(void){
+	hlavicka((char *)html_title[_global_jazyk]);
 	Export("Programu neboli zadané argumenty.\n");
 	ALERT;
 }

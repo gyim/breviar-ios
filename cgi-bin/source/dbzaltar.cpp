@@ -13551,6 +13551,7 @@ label_25_MAR:
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
 					break;
 				case 27: /* MES_MAY */
+					/* vöeobecn˝ kalend·r */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
 						if(query_type != PRM_DETAILY)
@@ -13574,6 +13575,26 @@ label_25_MAR:
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
+					/* 2006-09-14: pridanÈ;
+					 * 2010-12-16: presunutÈ z 2. decembra
+					 */
+					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
+						if(poradie_svaty == 2){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+							break;
+							/* Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
+						}
+						pocet = 2;
+						_global_svaty2.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
+						_global_svaty2.typslav_lokal = LOKAL_SLAV_PLZEN;
+						_global_svaty2.typslav = SLAV_SVIATOK;
+						mystrcpy(_global_svaty2.meno, text_DEC_02[_global_jazyk], MENO_SVIATKU);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+						_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+						_global_svaty2.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridanÈ */
+					}
 					break;
 				case 30: /* MES_MAY */
 					/* 2009-03-24: doplnenÈ pre dominik·nov aj Ëesk˝ brevi·¯ */
@@ -19754,25 +19775,9 @@ label_25_MAR:
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridanÈ */
 					}
 					break;
-				case 2: /* MES_DEC */
-					/* 2006-09-14: pridanÈ */
-					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
-						if(poradie_svaty == 1){
-							/* definovanie parametrov pre modlitbu */
-							if(query_type != PRM_DETAILY)
-								set_spolocna_cast(sc, poradie_svaty);
-							break;
-							/* Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
-						}
-						_global_svaty1.smer = 11; /* mieste povinne spomienky podla vseobecneho kalendara */
-						_global_svaty1.typslav_lokal = LOKAL_SLAV_PLZEN;
-						_global_svaty1.typslav = SLAV_SVIATOK;
-						mystrcpy(_global_svaty1.meno, text_DEC_02[_global_jazyk], MENO_SVIATKU);
-						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
-						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
-						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridanÈ */
-					}
-					break;
+
+				/* case 2: MES_DEC -- pÙvodne sa sl·vilo pre Ëesk˝ brevi·¯ "Sv·tek v˝roËÌ posvÏcenÌ plzeÚskÈ katedr·ly"; upravenÈ 2010-12-16: presunutÈ na 27. kvÏten */
+
 				case 3: /* MES_DEC */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
@@ -20087,7 +20092,7 @@ label_8_DEC:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, text_DEC_14[_global_jazyk], MENO_SVIATKU);
-					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_UCITEL_CIRKVI);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_UCITEL_CIRKVI); /* 2010-12-16: zapozn·mkovanÈ MODL_SPOL_CAST_DUCH_PAST_KNAZ; podæa brevi·ra len spol. Ëasù uËiteæov Cirkvi */
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
 					break;

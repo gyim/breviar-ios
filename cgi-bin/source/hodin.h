@@ -108,32 +108,32 @@ const char *nazov_Modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 /* the names of the common texts (e.g.: for bishops, for saint men, for apostles...) */
 const char *nazov_spolc_jazyk[POCET_SPOL_CASTI + 1][POCET_JAZYKOV + 1] =
 {{"neurèená", "neurèena", "not decided", "", "", "", ""}, 
- {"duchovnıch pastierov - pre kòazov", "duchovních pastıøù - o knìích", "", "", "", "O duchovních pastıøích - o knìích", "lelkipásztorok - papok"}, 
- {"duchovnıch pastierov - pre biskupov", "duchovních pastıøù - o biskupech", "", "", "", "O duchovních pastıøích - o biskupech", "lelkipásztorok - püspökök"}, 
- {"duchovnıch pastierov - pre pápeov", "duchovních pastıøù - o papei", "", "", "", "O duchovních pastıøích - o papei", "pásztorok - pápa"}, 
+ {"duchovnıch pastierov – pre kòazov", "duchovních pastıøù – o knìích", "", "", "", "O duchovních pastıøích – o knìích", "lelkipásztorok – papok"}, 
+ {"duchovnıch pastierov – pre biskupov", "duchovních pastıøù – o biskupech", "", "", "", "O duchovních pastıøích – o biskupech", "lelkipásztorok – püspökök"}, 
+ {"duchovnıch pastierov – pre pápeov", "duchovních pastıøù – o papei", "", "", "", "O duchovních pastıøích – o papei", "pásztorok – pápa"}, 
  {"uèite¾ov Cirkvi", "uèitelù církve", "", "", "", "O uèitelích Církve", "egyháztanítók"}, 
  {"apoštolov", "apoštolù", "", "", "", "O apoštolech", "apostolok"}, 
  {"jedného muèeníka", "jednoho muèedníka", "", "", "", "O muèedníkovi", "vértanú"}, 
  {"viacerıch muèeníkov", "více muèedníkù", "", "", "", "O více muèednících", "vértanúk"}, 
  {"Panny Márie", "Panny Marie", "", "", "", "Panny Marie", "Szûz Mária"}, 
- {"svätıch muov - pre reho¾níkov", "svatıch muù - o øeholnících", "", "", "", "O øeholnících", "szerzetes"}, 
+ {"svätıch muov – pre reho¾níkov", "svatıch muù – o øeholnících", "", "", "", "O øeholnících", "szerzetes"}, 
  {"svätıch muov", "svatıch muù", "", "", "","O svatıch muích", "szent férfiak"}, 
  {"panien", "panen", "", "", "","O pannách", "szûz"}, 
- {"svätıch ien - pre reho¾nice", "svatıch en - o øeholnicích", "", "", "", "O svatıch enách - o øeholnicích", "apáca"}, 
+ {"svätıch ien – pre reho¾nice", "svatıch en – o øeholnicích", "", "", "", "O svatıch enách - o øeholnicích", "apáca"}, 
  {"svätıch ien", "svatıch en", "", "", "", "O svatıch enách", "szent asszonyok"}, 
  {"duchovnıch pastierov - pre viacerıch", "duchvních pastıøù - o více pastıøích", "", "", "", "O duchovních pastıøích", "több lelkipásztor"}, 
  {"jednej muèenice", "jedné muèednice", "", "", "", "O muèednici", "vértanú"}, 
  {"svätıch ien - pre vychovávate¾ky", "svatıch en - o vychovatelce", "", "", "", "O svatıch enách - o vychovatelkách", "egyháztanító férfiak"}, 
- {"svätıch muov - pre vychovávate¾ov", "svatıch muù - o vychovatelıch", "", "", "", "O svatıch muích - o vychovatelích", "egyháztanító asszonyok"}, 
- {"svätıch ien - pre tie, èo konali skutky milosrdenstva", "svatıch en - o enì, která vynikala milosrdnımi skutky", "", "", "", "O svatıch enách - o enì, která vynikala milosrdnımi skutky", "jótékonykodó asszonyok"}, 
- {"svätıch muov - pre tıch, èo konali skutky milosrdenstva", "svatıch muù - o mui, kterı vynikal milosrdnımi skutky", "", "", "", "O svatıch muích - o mui, kterı vynikal milosrdnımi skutky", "jótékonykodó férfiak"}, 
- {"svätıch ien - pre viaceré", "svatıch en - o více enách", "", "", "", "O svatıch enách", "több szent asszony"}, 
- {"svätıch muov - pre viacerıch", "svatıch muù - o více muích", "", "", "", "O svatıch muích", "több szent férfi"}, 
+ {"svätıch muov - pre vychovávate¾ov", "svatıch muù - o vychovatelıch", "", "", "", "O svatıch muích – o vychovatelích", "egyháztanító asszonyok"}, 
+ {"svätıch ien – pre tie, èo konali skutky milosrdenstva", "svatıch en – o enì, která vynikala milosrdnımi skutky", "", "", "", "O svatıch enách – o enì, která vynikala milosrdnımi skutky", "jótékonykodó asszonyok"}, 
+ {"svätıch muov – pre tıch, èo konali skutky milosrdenstva", "svatıch muù – o mui, kterı vynikal milosrdnımi skutky", "", "", "", "O svatıch muích – o mui, kterı vynikal milosrdnımi skutky", "jótékonykodó férfiak"}, 
+ {"svätıch ien – pre viaceré", "svatıch en – o více enách", "", "", "", "O svatıch enách", "több szent asszony"}, 
+ {"svätıch muov – pre viacerıch", "svatıch muù – o více muích", "", "", "", "O svatıch muích", "több szent férfi"}, 
  {"viacerıch panien", "více pannen", "", "", "","O pannách", "szüzek"}, 
  {"posviacky chrámu", "posvìcení kostela", "", "", "", "Posvìcení kostela", "templomszentelés"}, 
  {"zosnulıch", "zemøelıch", "", "", "","Za zemøelé", "halottakért"}, 
- {"svätıch ien - pre tie, èo ili v manelstve", "svatıch en - o enì, která ila v manelství", "", "", "", "O svatıch enách - o enì, která ila v manelství", "házas szent asszonyok"}, 
- {"svätıch muov - pre tıch, èo ili v manelstve", "svatıch muù - o mui, kterı il v manelství", "", "", "", "O svatıch muích - o mui, kterı il v manelství", "házas szent férfiak"}, 
+ {"svätıch ien – pre tie, èo ili v manelstve", "svatıch en – o enì, která ila v manelství", "", "", "", "O svatıch enách – o enì, která ila v manelství", "házas szent asszonyok"}, 
+ {"svätıch muov – pre tıch, èo ili v manelstve", "svatıch muù – o mui, kterı il v manelství", "", "", "", "O svatıch muích – o mui, kterı il v manelství", "házas szent férfiak"}, 
  {"nebra", "nevzít", "do not use", "", "", "nevzít", "mindent sajátból"}
 };
 
@@ -403,7 +403,7 @@ const char *nazov_slavenia_lokal[] =
 ,"v praské arcidiecézi"
 ,"v brnìnské diecézi"
 ,"na Moravì památka"
-,"Druhá nedìle velikonoèní - Boího milosrdenství"
+,"Druhá nedìle velikonoèní – Boího milosrdenství"
 ,"v praské katedrále slavnost"
 ,"v èeskobudìjovické diecézi"
 ,"v olomoucké arcidiecézi"

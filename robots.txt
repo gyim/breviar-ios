@@ -1,0 +1,5 @@
+User-Agent: *
+Crawl-delay: 15
+Allow: /
+Disallow: /cgi-bin/
+
