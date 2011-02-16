@@ -3215,7 +3215,14 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				_global_den.typslav = SLAV_SLAVNOST;
 				_global_den.litobd = OBD_OKTAVA_NARODENIA;
 				_global_den.prik = PRIKAZANY_SVIATOK;
-				mystrcpy(_global_den.meno, text_JAN_01[_global_jazyk], MENO_SVIATKU);
+				/* 2011-02-01: pre SJ odliön˝ n·zov; in·Ë je vöetko rovnakÈ */
+				if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SJ)){
+					mystrcpy(_global_den.meno, text_JAN_01_SJ[_global_jazyk], MENO_SVIATKU);
+					_global_den.kalendar = KALENDAR_SK_SJ;
+				}
+				else{
+					mystrcpy(_global_den.meno, text_JAN_01[_global_jazyk], MENO_SVIATKU);
+				}
 				/* 2006-02-16: podreùazec (koniec Okt·vy narodenia P·na) podobne ako (2. veækonoËn· nedeæa) rieöen˝ pomocou "typslav_lokal" */
 				if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 					_global_den.typslav_lokal = LOKAL_SLAV_KONIEC_OKTAVY_NAR_CZ;
@@ -7857,30 +7864,30 @@ short int atocss(char *css){
 	/* 2007-06-01: nasledovn· pas·û kontroluje, Ëi niektorÈ z options nie s˙ GLOBAL_OPTION_NULL */\
 	/*             a z·roveÚ prÌpadne nastavÌ na default podæa jazyka */\
 	/* 2011-01-26: doplnenÈ opt1 aû opt5 force (okrem opt3); default sa nastavuje podæa "ne-force" verziÌ */\
-	/* 2011-01-27: CFG_OPTION1_DEFAULT..CFG_OPTION5_DEFAULT doplnenÈ v myconf.h */\
+	/* 2011-01-27: CFG_OPTION1_DEFAULT..CFG_OPTION5_DEFAULT doplnenÈ v myconf.h; opravenÈ ich pouûitie :) 2011-02-01 */\
 	if(_global_opt1 == GLOBAL_OPTION_NULL){\
-		_global_opt1 = cfg_option1_default;\
-		Log("SK: KeÔûe bolo _global_opt1 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", CFG_OPTION1_DEFAULT);\
+		_global_opt1 = CFG_OPTION1_DEFAULT;\
+		Log("KeÔûe bolo _global_opt1 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", _global_opt1);\
 	}\
 	if(_global_opt2 == GLOBAL_OPTION_NULL){\
-		_global_opt2 = cfg_option2_default;\
-		Log("SK: KeÔûe bolo _global_opt2 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", CFG_OPTION2_DEFAULT);\
+		_global_opt2 = CFG_OPTION2_DEFAULT;\
+		Log("KeÔûe bolo _global_opt2 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", _global_opt2);\
 	}\
 	if(_global_opt4 == GLOBAL_OPTION_NULL){\
-		_global_opt4 = cfg_option4_default;\
-		Log("SK: KeÔûe bolo _global_opt4 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", CFG_OPTION4_DEFAULT);\
+		_global_opt4 = CFG_OPTION4_DEFAULT;\
+		Log("KeÔûe bolo _global_opt4 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", _global_opt4);\
 	}\
 	if(_global_opt5 == GLOBAL_OPTION_NULL){\
-		_global_opt5 = cfg_option5_default;\
-		Log("SK: KeÔûe bolo _global_opt5 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", CFG_OPTION5_DEFAULT);\
+		_global_opt5 = CFG_OPTION5_DEFAULT;\
+		Log("KeÔûe bolo _global_opt5 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", _global_opt5);\
 	}\
 	if(_global_opt6 == GLOBAL_OPTION_NULL){\
-		_global_opt6 = cfg_option6_default;\
-		Log("SK: KeÔûe bolo _global_opt6 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", CFG_OPTION6_DEFAULT);\
+		_global_opt6 = CFG_OPTION6_DEFAULT;\
+		Log("KeÔûe bolo _global_opt6 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", _global_opt6);\
 	}\
 	if(_global_opt7 == GLOBAL_OPTION_NULL){\
-		_global_opt7 = cfg_option7_default;\
-		Log("SK: KeÔûe bolo _global_opt7 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", CFG_OPTION7_DEFAULT);\
+		_global_opt7 = CFG_OPTION7_DEFAULT;\
+		Log("KeÔûe bolo _global_opt7 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", _global_opt7);\
 	}\
 	if(_global_optf1 == GLOBAL_OPTION_NULL){\
 		_global_optf1 = _global_opt1;\

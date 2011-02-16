@@ -38,7 +38,7 @@
  * a to je definovane nasledovne:
  *
  */
-char FILE_EXPORT[50] = DEFAULT_FILE_EXPORT;
+char FILE_EXPORT[MAX_STR] = DEFAULT_FILE_EXPORT;
 
 /* navratove hodnoty su prerobene na int-y; vysledok SUCCESS resp. FAILURE */
 

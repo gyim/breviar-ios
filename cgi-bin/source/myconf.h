@@ -10,6 +10,7 @@
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-07-15a.D. | #include "mybase.h" nahradeny "mydefs.h" */
 /*   2004-03-17a.D. | pridany INCLUDE_DIR                      */
+/*   2011-01-31a.D. | pridané CFG_OPTION1_DEFAULT (1 až 5)     */
 /*                                                             */
 /***************************************************************/
 

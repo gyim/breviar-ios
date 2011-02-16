@@ -34,7 +34,7 @@ void dumpFile(char *fname);
 
 /* povodne tu bolo #define FILE_EXPORT "export.htm" */
 /* deklarovane tu; definovane v myexpt.c -- 21/02/2000A.D. */
-extern char FILE_EXPORT[];
+extern char FILE_EXPORT[MAX_STR];
 
 extern short int exptused;
 extern FILE *exportfile;
