@@ -3505,6 +3505,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 	  * 2008-10-09: doplnen· pre Ëesk˝ brevi·¯ sl·vnosù sv. v·clava
 	  * 2009-01-06: doplnen· pozn·mka k Premeneniu P·na
 	  *
+	  * 2010-09-28: Ëasù prevzat· do: init_global_string(), hoci tam sa pouûije len pre smer == 5 (sviatky p·na); sl·vnosti sa rieöia samostatne
 	  */
 	Log("najprv treba skontrolovaù, Ëi nejde o deÚ [pÙvodne nedeæu], na ktor˙ pripadol sviatok premenenia p·na a podobnÈ... (ak ·no, nenastavuj niË)\n");
 	if(
@@ -16635,13 +16636,16 @@ label_25_MAR:
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_sv_kriz(modlitba);
 
-						/* 2008-12-09: doplnenÈ kompletÛrium */
-						modlitba = MODL_PRVE_KOMPLETORIUM;
-						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+						/* 2008-12-09: doplnenÈ kompletÛrium 
+						 * 2010-09-28: kompletÛrium öpeci·lne nastavenÈ len ak sviatok padne na nedeæu
+						 */
+						if(_global_den.denvt == DEN_NEDELA){
+							modlitba = MODL_PRVE_KOMPLETORIUM;
+							_set_kompletorium_slavnost(modlitba, _global_den.litobd);
 
-						modlitba = MODL_KOMPLETORIUM;
-						_set_kompletorium_slavnost(modlitba, _global_den.litobd);
-
+							modlitba = MODL_KOMPLETORIUM;
+							_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+						}
 						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
@@ -18605,7 +18609,7 @@ label_25_MAR:
 						break;
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
-					_global_svaty1.smer =  5; /* sviatky Pana uvedene vo vseobecnom kalendari */
+					_global_svaty1.smer = 5; /* sviatky Pana uvedene vo vseobecnom kalendari */
 						/* povodne: 7; sviatky preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 						/* lenze 9. NOV 1997 mal tento sviatok prednost pred 32. nedelou v ocr, takze smer == 5 */
 					mystrcpy(_global_svaty1.meno, text_NOV_09[_global_jazyk], MENO_SVIATKU);
