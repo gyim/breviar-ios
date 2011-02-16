@@ -1,0 +1,62 @@
+/* apply to all elements */ { font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; font-size: 100%; }
+.red { color: #ff0000; }
+.blue { color: #0066ff; }
+.redsmall { color: #ff0000; font-size: 80%; }
+.redbold { color: #ff0000; font-weight: bold; }
+.bluebold { color: #0066ff; font-weight: bold; }
+.bold { font-weight: bold; }
+.boldit { font-weight: bold; font-style: italic; }
+.it { font-style: italic; }
+.normal { color: #000000; }
+.odkaz { color: #ffff33; font-style: italic; }
+
+body { 
+	background-color: #663300; 
+	color: #FFFFFF; 
+	font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; 
+	font-size: 90%; 
+	noscroll;
+	scrollbar-face-color: #FFFFFF;
+	scrollbar-shadow-color: #330000;
+	scrollbar-highlight-color: #330000;
+	scrollbar-3dlight-color: #FFFFFF;
+	scrollbar-darkshadow-color: #330000;
+	scrollbar-track-color: #d0bba0; 
+	scrollbar-arrow-color: #330000;
+}
+p { 
+	font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; 
+	color: #FFFFFF; 
+	text-style: normal; 
+}
+p.duoraz { 
+	font-weight: bold; 
+}
+p.patka { 
+	font-size: 71%; 
+	text-align: center; 
+	text-indent: 0em;  
+	margin-top: -1mm; 
+	letter-spacing: 0mm 
+}
+
+p.item {
+	margin-top: 0mm; 
+	margin-botton: -3mm;
+}
+
+p.normal {
+	margin-top: 0mm; 
+	margin-botton: -1mm;
+}
+
+a { font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; color: #FFFFFF; text-decoration: none; }
+a:hover { color: #FFFFFF; background-color: #000000; text-decoration:none; }
+a:active { color: #FFFFFF; text-decoration: none; }
+a img { border: none }
+
+table { background-color: #663300; color: #ffff33; }
+td { font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; color: #ffff33; }
+hr {	height: 0.2mm;
+	width: 33%; 
+	color: gray; }
