@@ -157,6 +157,7 @@
 /*                  - nastavené _global_svaty[1,2,3].kalendar v sviatky_svatych()               */
 /*   2010-09-10a.D. | opravy správneho pouitia responza pred 1. èítaním v posv. èítaniach      */
 /*   2010-10-13a.D. | doplnené èasti pre liturgickı kalendár redemptoristov (cssr)              */
+/*   2010-11-05a.D. | úpravy v èasti pre ofícium za zosnulıch                                   */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -8145,10 +8146,13 @@ void _spolocna_cast_prosby_viac(short int kolko, char *_anchor_head, char *_anch
 		set_LOG_svsv;
 	}
 }
-/* viac responzórií -- dorobene 29/03/2000A.D., oficium za zosnulych */
+/* viac responzórií -- dorobene 29/03/2000A.D., oficium za zosnulych 
+ * 2010-11-05: upravené, lebo pôvodne bolo pre vıber z (2) moností: (_global_den.den MOD kolko) + 1
+ *             keïe vdy je den == 2, tak vdy sa brala 1. monos
+ */
 void _spolocna_cast_kresponz_viac(short int kolko, char *_anchor_head, char *_anchor, char *_file){
 	if(su_kcit_kresp_prosby_vlastne){
-		sprintf(_anchor, "%s%c%s%d", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ, (_global_den.den MOD kolko) + 1);
+		sprintf(_anchor, "%s%c%s%d", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ, (_global_den.denvt MOD kolko) + 1);
 		_set_kresponz(modlitba, _file, _anchor);
 		set_LOG_svsv;
 	}
