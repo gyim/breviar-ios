@@ -6273,12 +6273,24 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
  *
  */
 /* 2005-03-21: Pridany dalsi typ exportu - EXPORT_DNA_VIAC_DNI_SIMPLE */
-#define NEWLINE if(typ == EXPORT_DNA_VIAC_DNI_SIMPLE) Export("; "); \
-	else if(som_v_tabulke == NIE){\
-		if(typ == EXPORT_DNA_VIAC_DNI) Export("\n<br>\n&nbsp;&nbsp;&nbsp;%s\n", html_text_alebo[_global_jazyk]); \
-		else if(typ != EXPORT_DNA_VIAC_DNI_TXT) Export("\n<p>\n");\
-	}\
-	else Export("</td>\n</tr>\n\n<tr valign=baseline>\n<td></td>\n<td></td>\n<td>")
+#define NEWLINE		{\
+	if(typ == EXPORT_DNA_VIAC_DNI_SIMPLE){ \
+		Export("; "); \
+	} \
+	else if(som_v_tabulke == NIE){ \
+		if(typ == EXPORT_DNA_VIAC_DNI){ \
+			Export("\n<br>\n&nbsp;&nbsp;&nbsp;%s\n", html_text_alebo[_global_jazyk]); \
+		} \
+		else{ \
+			if(typ != EXPORT_DNA_VIAC_DNI_TXT){ \
+				Export("\n<p>\n"); \
+			} \
+		} \
+	} \
+	else{ \
+		Export("</td>\n</tr>\n\n<tr valign=baseline>\n<td></td>\n<td></td>\n<td>"); \
+	} \
+}
 
 #define BUTTONS(typ, a);     {\
 	init_global_string(typ, a); \
@@ -6289,7 +6301,9 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	if(typ == EXPORT_DNA_VIAC_DNI_TXT){ \
 		Export("\";"); \
 	}\
-    _export_rozbor_dna_buttons(typ, a); }
+    _export_rozbor_dna_buttons(typ, a); \
+}
+
 /* 
  * 2003-08-13 ked som sa snazil zistit priciny segfaultu, 
  * nachvilku som #define nahradil procedurou:
@@ -6382,7 +6396,7 @@ void _export_rozbor_dna(short int typ){
 		dvojbodka = 0;
 		ciarka = 0;
 	}/* typ == EXPORT_DNA_VIAC_DNI_TXT */
-	else if(typ == EXPORT_DNA_VIAC_DNI_SIMPLE){
+	else{
 		i = LINK_DEN_MESIAC_NIE; /* 2008-01-22: zmenené, pôvodne tu bolo LINK_DEN_MESIAC_ROK */
 		/* najprv toto, -- if(_global_den.denvt != DEN_NEDELA) mystrcpy(pom3, nazov_dna(_global_den.denvt), MAX_SMALL);
 		 * potom toto: -- if((_global_den.denvt != DEN_NEDELA) 
