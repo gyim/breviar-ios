@@ -80,8 +80,9 @@
  * 2009-03-24: rozšírené kvôli text_PRO_OP[] 
  * 2010-12-07: rozšírené kvôli text_JAN_19_SJ[]; (plus 34)
  * 2011-01-31: rozšírené kvôli text_JAN_31_SDB[]; 
+ * 2011-02-02: rozšírené kvôli text_FEB_04_SJ[];
  */
-#define MENO_SVIATKU 230
+#define MENO_SVIATKU 250
 
 /* 2006-07-31: kvôli jazykovým mutáciám; zmenené 2008-08-15 na 5 
  * 2009-01-29: zmenené na 6 (maïarèina)

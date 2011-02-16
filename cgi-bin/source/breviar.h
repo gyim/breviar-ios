@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* breviar.h                                                   */
-/* (c)1999-2010 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2011 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje deklaracie globalnych premennych     */
 /*               a funkciu main() z dnes.cpp kde su definovane */
@@ -15,6 +15,7 @@
 /*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám          */
 /*   2006-08-18a.D. | zmena int na short int (staèí 32tis.)    */
 /*   2010-05-14a.D. | presunuté niektoré definy z breviar.cpp  */
+/*   2011-02-02a.D. | zadef. MIESTNE_SLAVENIE_CZOP_SVATY1 až 3 */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -206,6 +207,11 @@ extern short int _global_opt_export_date_format;
 	(strcmp(_global_modl_vespery.modlitba_spompost.file, EMPTY_STR) != 0) && (strcmp(_global_modl_vespery.modlitba_spompost.file, STR_UNDEF) != 0) \
 ) \
 ))
+
+/* 2011-02-02: presunuté do #define -- kontrola, ktorá zabezpeèuje, že normálne správanie sa slávení nie je prebité pre "CZOP miestne slávenia" */
+#define MIESTNE_SLAVENIE_CZOP_SVATY1 ((_global_svaty1.kalendar == KALENDAR_CZ_OP) && ((_global_svaty1.smer == 4) || (_global_svaty1.smer == 8) || (_global_svaty1.smer == 11)))
+#define MIESTNE_SLAVENIE_CZOP_SVATY2 ((_global_svaty2.kalendar == KALENDAR_CZ_OP) && ((_global_svaty2.smer == 4) || (_global_svaty2.smer == 8) || (_global_svaty2.smer == 11)))
+#define MIESTNE_SLAVENIE_CZOP_SVATY3 ((_global_svaty3.kalendar == KALENDAR_CZ_OP) && ((_global_svaty3.smer == 4) || (_global_svaty3.smer == 8) || (_global_svaty3.smer == 11)))
 
 #ifndef OS_linux
 /* kedysi bolo void main;

@@ -1,7 +1,7 @@
 /***************************************************************************/
 /*                                                                         */
 /* breviar.cpp                                                             */
-/* (c)1998-2009 | Juraj Videky | videky@breviar.sk                         */
+/* (c)1998-2011 | Juraj Videky | videky@breviar.sk                         */
 /*                                                                         */
 /*                http://www.breviar.sk                                    */
 /*                                                                         */
@@ -175,6 +175,8 @@
 /*                    pridanie VYPISOVAT_PREDCHADZAJUCI_NASLEDUJUCI_BUTTON */
 /*                  - dorobené force "opt1" (_global_optf1)                */
 /*   2011-01-27a.D. | BUTTONY_PREDOSLY_NASLEDOVNY_ROK_MESIAC_DEN_HORE      */
+/*   2011-02-02a.D. | použité MIESTNE_SLAVENIE_CZOP_SVATY1 až 3            */
+/*   2011-02-02a.D. | dokonèený liturgický kalendár pre SDB a SJ, úpravy   */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -3662,10 +3664,11 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 		 * [t.j. .smer]. */
 		/* 2010-07-28: doplnené alternatívne porovnanie aj s _global_svaty2.smer (kvôli dominikánskej slávnosti 8.8.) 
 		 * 2010-10-06: upravené; nesmie ís o lokálnu slávnos (smer == 4) lebo nemá prebíja "globálnu" v danom kalendári [napr. czop pre 22.10.]
+		 * 2011-02-02: zadefinované MIESTNE_SLAVENIE_CZOP_SVATY1 až 3, aby sa zjednodušila podmienka (platí len pre CZOP)
 		 */
-			((_global_den.smer > _global_svaty1.smer) && !(_global_svaty1.smer == 4 || _global_svaty1.smer == 8 || _global_svaty1.smer == 11))
-			|| ((_global_den.smer > _global_svaty2.smer) && !(_global_svaty2.smer == 4 || _global_svaty2.smer == 8 || _global_svaty2.smer == 11))
-			|| ((_global_den.smer > _global_svaty3.smer) && !(_global_svaty3.smer == 4 || _global_svaty3.smer == 8 || _global_svaty3.smer == 11))
+			((_global_den.smer > _global_svaty1.smer) && !MIESTNE_SLAVENIE_CZOP_SVATY1)
+			|| ((_global_den.smer > _global_svaty2.smer) && !MIESTNE_SLAVENIE_CZOP_SVATY2)
+			|| ((_global_den.smer > _global_svaty3.smer) && !MIESTNE_SLAVENIE_CZOP_SVATY3)
 		){
 
 			/* ked bola nasledovna pasaz zapoznamkovana,
@@ -3697,8 +3700,9 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) && (_global_svaty1.smer < 5)
 						/* a neplatí, že ide o lokálnu slávnos: tá nesmie prebi všedný deò
 						 * 2010-10-06: upravené; nesmie ís o lokálnu slávnos (smer == 4) lebo nemá prebíja "globálnu" v danom kalendári [napr. czop pre 22.10.]
+						 * 2011-02-02: zadefinované MIESTNE_SLAVENIE_CZOP_SVATY1 až 3, aby sa zjednodušila podmienka (platí len pre CZOP)
 						 */
-						&& !(_global_svaty1.smer == 4 || _global_svaty1.smer == 8 || _global_svaty1.smer == 11)
+						&& !MIESTNE_SLAVENIE_CZOP_SVATY1
 					) /* slavnosti */
 				)
 				){ /* 15/03/2000A.D. -- modifikovane; POKUS 2006-12-08: vyòatá podmienka (_global_modlitba != MODL_NEURCENA) &&  nepomohla, len pokazila */
@@ -3991,12 +3995,13 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	 * upravili sme kontrolu z 12 na 11
 	 * 2009-11-26: porovnávame klasicky, resp. špeciálne pre body 4, 8, 11 [Miestne slávnosti, Miestne sviatky, Miestne povinné spomienky]
 	 *             pred touto úpravou tu bola kontrola (_global_svaty1.smer >= 11)
+	 * 2011-02-02: zadefinované MIESTNE_SLAVENIE_CZOP_SVATY1 až 3, aby sa zjednodušila podmienka (platí len pre CZOP)
 	 */
 	if((_global_den.litobd == OBD_CEZ_ROK) &&
 		(_global_den.denvt == DEN_SOBOTA) &&
 		(
 			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
-			(((_global_svaty1.smer >= 12) || (_global_svaty1.smer == 4) || (_global_svaty1.smer == 8) || (_global_svaty1.smer == 11)) && (_global_pocet_svatych > 0))) &&
+			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_CZOP_SVATY1) && (_global_pocet_svatych > 0))) &&
 		(poradie_svateho == 4)){
 		/* teraz do _global_den priradim dane slavenie */
 		_local_den = _global_pm_sobota;
@@ -6354,10 +6359,11 @@ void _export_rozbor_dna(short int typ){
 		/* 2010-07-28: doplnené alternatívne porovnanie aj s _global_svaty2.smer (kvôli dominikánskej slávnosti 8.8.)
 		 * 2010-10-06: upravené; nesmie ís o lokálnu slávnos (smer == 4) lebo nemá prebíja "globálnu" v danom kalendári [napr. czop pre 22.10.]
 		 *             pôvodne tu bolo: if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
+		 * 2011-02-02: zadefinované MIESTNE_SLAVENIE_CZOP_SVATY1 až 3, aby sa zjednodušila podmienka (platí len pre CZOP)
 		 */
-		if(((_global_den.smer > _global_svaty1.smer) && !(_global_svaty1.smer == 4 || _global_svaty1.smer == 8 || _global_svaty1.smer == 11))
-			|| ((_global_den.smer > _global_svaty2.smer) && !(_global_svaty2.smer == 4 || _global_svaty2.smer == 8 || _global_svaty2.smer == 11))
-			|| ((_global_den.smer > _global_svaty3.smer) && !(_global_svaty3.smer == 4 || _global_svaty3.smer == 8 || _global_svaty3.smer == 11))
+		if(((_global_den.smer > _global_svaty1.smer) && !MIESTNE_SLAVENIE_CZOP_SVATY1)
+			|| ((_global_den.smer > _global_svaty2.smer) && !MIESTNE_SLAVENIE_CZOP_SVATY2)
+			|| ((_global_den.smer > _global_svaty3.smer) && !MIESTNE_SLAVENIE_CZOP_SVATY3)
 			){
 			if(_global_den.smer > _global_svaty1.smer){
 				BUTTONS(typ, 1);
@@ -6404,8 +6410,9 @@ void _export_rozbor_dna(short int typ){
 			 * 2010-05-24: zjednotené; bolo odvetvené "if(_global_den.smer > _global_svaty1.smer)"; 
 			 *             else vetva mala napísané: "¾ubovo¾ná spomienka svätého/svätých, prièom všedný deò má vyššiu prioritu slávenia"
 			 *             a ešte: "2010-05-21: odtia¾to presunuté potenciálne vypisovanie (export) všedného dòa pred prvého svätca, ak je ¾ubovo¾ná spomienka"
+			 * 2011-02-02: zadefinované MIESTNE_SLAVENIE_CZOP_SVATY1 až 3, aby sa zjednodušila podmienka (platí len pre CZOP)
 			 */
-			if(((_global_svaty1.smer >= 12) || (_global_svaty1.smer == 4) || (_global_svaty1.smer == 8) || (_global_svaty1.smer == 11)) &&
+			if(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_CZOP_SVATY1) &&
 				(typ != EXPORT_DNA_VIAC_DNI)){
 				/* ak je to iba lubovolna spomienka, tak vsedny den */
 				/* 2010-05-21: NEWLINE; bolo pred; musíme ho zaradi za :) */
@@ -6441,9 +6448,11 @@ void _export_rozbor_dna(short int typ){
 		(_global_den.denvt == DEN_SOBOTA) &&
 		(
 			/* 2005-08-22: pôvodne sa tu porovnávalo s 12, ale aj pre 11 (lokálne slávenia) 
-			 * by mal systém ponúknu (v sobotu) spomienku p. márie - keï je to napr. v inej diecéze */
+			 * by mal systém ponúknu (v sobotu) spomienku p. márie - keï je to napr. v inej diecéze 
+			 * 2011-02-02: zadefinované MIESTNE_SLAVENIE_CZOP_SVATY1 až 3, aby sa zjednodušila podmienka (platí len pre CZOP)
+			 */
 			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
-			(((_global_svaty1.smer >= 12) || (_global_svaty1.smer == 4) || (_global_svaty1.smer == 8) || (_global_svaty1.smer == 11)) && (_global_pocet_svatych > 0))) &&
+			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_CZOP_SVATY1) && (_global_pocet_svatych > 0))) &&
 		(typ != EXPORT_DNA_VIAC_DNI)){
 		NEWLINE;
 		BUTTONS(typ, 4);
@@ -6704,11 +6713,12 @@ void _export_rozbor_dna_batch(short int typ, short int modlitba = MODL_NEURCENA,
 		/* 2010-07-28: doplnené alternatívne porovnanie aj s _global_svaty2.smer (kvôli dominikánskej slávnosti 8.8.)
 		 * 2010-10-06: upravené; nesmie ís o lokálnu slávnos (smer == 4) lebo nemá prebíja "globálnu" v danom kalendári [napr. czop pre 22.10.]
 		 *             pôvodne tu bolo: if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
+		 * 2011-02-02: zadefinované MIESTNE_SLAVENIE_CZOP_SVATY1 až 3, aby sa zjednodušila podmienka (platí len pre CZOP)
 		 */
 		short int aaa;
-		if(((_global_den.smer > _global_svaty1.smer) && !(_global_svaty1.smer == 4 || _global_svaty1.smer == 8 || _global_svaty1.smer == 11))
-			|| ((_global_den.smer > _global_svaty2.smer) && !(_global_svaty2.smer == 4 || _global_svaty2.smer == 8 || _global_svaty2.smer == 11))
-			|| ((_global_den.smer > _global_svaty3.smer) && !(_global_svaty3.smer == 4 || _global_svaty3.smer == 8 || _global_svaty3.smer == 11))
+		if(((_global_den.smer > _global_svaty1.smer) && !MIESTNE_SLAVENIE_CZOP_SVATY1)
+			|| ((_global_den.smer > _global_svaty2.smer) && !MIESTNE_SLAVENIE_CZOP_SVATY2)
+			|| ((_global_den.smer > _global_svaty3.smer) && !MIESTNE_SLAVENIE_CZOP_SVATY3)
 			){
 			if(_global_den.smer > _global_svaty1.smer)
 				aaa = 1;
@@ -6755,8 +6765,9 @@ void _export_rozbor_dna_batch(short int typ, short int modlitba = MODL_NEURCENA,
 			 *             by mal systém ponúknu všedný deò - keï je to napr. v inej diecéze 
 			 * 2009-11-26: porovnávame klasicky, resp. špeciálne pre body 4, 8, 11 [Miestne slávnosti, Miestne sviatky, Miestne povinné spomienky]
 			 *             pred touto úpravou tu bolo: if((_global_svaty1.smer >= 11) && atï.
+			 * 2011-02-02: zadefinované MIESTNE_SLAVENIE_CZOP_SVATY1 až 3, aby sa zjednodušila podmienka (platí len pre CZOP)
 			 */
-			if(((_global_svaty1.smer >= 12) || (_global_svaty1.smer == 4) || (_global_svaty1.smer == 8) || (_global_svaty1.smer == 11)) &&
+			if(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_CZOP_SVATY1) &&
 				(typ != EXPORT_DNA_VIAC_DNI)){
 				/* ak je to iba lubovolna spomienka, tak vsedny den */
 				execute_batch_command(0, batch_command, modlitba, d_from_m_from_r_from);
@@ -6776,12 +6787,13 @@ void _export_rozbor_dna_batch(short int typ, short int modlitba = MODL_NEURCENA,
 	/* 2006-02-02: pridané posv. èítania a upravené; 
 	 * keïže smer == 11 používame pre lokálne povinné spomienky, 
 	 * upravili sme kontrolu z 12 na 11
+	 * 2011-02-02: zadefinované MIESTNE_SLAVENIE_CZOP_SVATY1 až 3, aby sa zjednodušila podmienka (platí len pre CZOP)
 	 */
 	if((_global_den.litobd == OBD_CEZ_ROK) &&
 		(_global_den.denvt == DEN_SOBOTA) &&
 		(
 			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
-			(((_global_svaty1.smer >= 12) || (_global_svaty1.smer == 4) || (_global_svaty1.smer == 8) || (_global_svaty1.smer == 11)) && (_global_pocet_svatych > 0))) &&
+			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_CZOP_SVATY1) && (_global_pocet_svatych > 0))) &&
 		(typ != EXPORT_DNA_VIAC_DNI)){
 		execute_batch_command(4, batch_command, modlitba, d_from_m_from_r_from);
 	}
@@ -10496,7 +10508,7 @@ short int getArgv(int argc, char **argv){
 					printf("\tProgram vytvara stranky (HTML vystup) pre Liturgiu hodin.\n");
 					/* build pridany 2003-07-04 */
 					printf("\tBuild: %s\n", BUILD_DATE);
-					printf("\t(c)1999-2010 Juraj Vidéky <videky@breviar.sk>\n");
+					printf("\t(c)1999-2011 Juraj Vidéky <videky@breviar.sk>\n");
 					printf("\n");
 					printf("\npouzitie:\n");
 					printf("\tlh [prepinac [hodnota]...]\n");
@@ -12243,7 +12255,7 @@ int main(int argc, char **argv){
 	_main_LOG("\n");
 // #endif
 	
-	_main_LOG("-- log file programu pre Liturgiu hodín (c)1999-2010 Juraj Vidéky --\n");
+	_main_LOG("-- log file programu pre Liturgiu hodín (c)1999-2011 Juraj Vidéky --\n");
 
 	/* config: dorobene 30/03/2000A.D. */
 	_main_LOG("first, reading configuration (file %s)...\n", CONFIG_FILE);

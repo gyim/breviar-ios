@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* hodin.h                                                     */
-/* (c)1999-2010 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2011 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | definovane stringove kontanty                 */
 /* document history                                            */
@@ -1584,7 +1584,7 @@ const char *text_JAN_19[POCET_JAZYKOV + 1] =
  "Árpádházi Szent Margit szûz", // v maïarsku 18. januára
  };
 const char *text_JAN_19_SJ[POCET_JAZYKOV + 1] = 
-{"Bl. Jakuba Sal&egrave;sa a Viliama Saultemouchea, Ignáca de Azevedo a spol., <br>Jakuba Bonnauda a spol., muèeníkov zo Spoloènosti Ježišovej",
+{"Bl. Jakuba Sal&egrave;sa a Viliama Saultemouchea, Ignáca de Azevedo a spoloèníkov, <br>Jakuba Bonnauda a spoloèníkov, muèeníkov",
  "cz_",
  "",
  "la_",
@@ -1785,7 +1785,7 @@ const char *text_FEB_04_CZOP[POCET_JAZYKOV + 1] =
  "hu_",
  };
 const char *text_FEB_04_SJ[POCET_JAZYKOV + 1] = 
-{"Sv. Jána de Brito, bl. Rudolfa Acquavivu a spol, bl. Františka Pacheca, <br>Karola Spinolu a spol., bl. Jakuba Berthieua, Leva Mangina a spol., muèeníkov",
+{"Sv. Jána de Brito, kòaza, bl. Rudolfa Acquavivu, kòaza a jeho spoloèníkov; <br>bl. Františka Pacheca, Karola Spinolu, kòazov a spoloèníkov, muèeníkov; <br>bl. Jakuba Berthieu, kòaza, Leva Mangina, kòaza a spoloèníkov, muèeníkov",
  "(v Èechách, na Moravì a ve Slezsku není)",
  "",
  "la_",
@@ -3030,7 +3030,7 @@ const char *text_JUN_30_CSSR[POCET_JAZYKOV + 1] =
 /* --------------- 07 júl --------------- */
 
 const char *text_JUL_02_SJ[POCET_JAZYKOV + 1] = 
-{"Sv. Bernardína Realina, Sv. Jána Františka Régisa, Sv. Františka de Geronimo, <br>bl. Juliána Maunoira, bl. Antona Baldinucciho, kòazov", // text_JUL_01_SJ: na Slovensku sa slávi 1. júla
+{"Sv. Bernardína Realina, sv. Jána Františka Régisa, sv. Františka de Geronimo, <br>bl. Juliána Maunoira, bl. Antona Baldinucciho, kòazov", // text_JUL_01_SJ: na Slovensku sa slávi 1. júla
  "",
  "",
  "",
@@ -4212,7 +4212,7 @@ const char *text_OKT_19_1[POCET_JAZYKOV + 1] =
  "De Brébeuf Szent János és Jogues Szent Izsák áldozópap és társaik vértanúk",
  };
 const char *text_OKT_19_SJ[POCET_JAZYKOV + 1] = 
-{"Sv. Jána de Brébeuf, Izáka Jogues, kòazov, a spoloèníkov, muèeníkov",
+{"Sv. Jána de Brébeuf, Izáka Joguesa, kòazov, a spoloèníkov, muèeníkov",
  "",
  "",
  "",
@@ -4412,7 +4412,7 @@ const char *text_NOV_04[POCET_JAZYKOV + 1] =
  "Sv. Karla Boromejského, biskupa",
  "Borromeo Szent Károly püspök",
  };
-const char *text_NOV_05[POCET_JAZYKOV + 1] = 
+const char *text_NOV_05_SK[POCET_JAZYKOV + 1] = 
 {"Sv. Imricha",
  "(v Èechách, na Moravì a na Slezsku není)",
  "",
@@ -4638,7 +4638,7 @@ const char *text_NOV_23_2[POCET_JAZYKOV + 1] =
  "Szent Kolumbán apát",
  };
 const char *text_NOV_23_SJ[POCET_JAZYKOV + 1] = 
-{"Bl. Michala Augustína Pro, kòaza a muèeníka ",
+{"Bl. Michala Augustína Pro, kòaza a muèeníka",
  "",
  "",
  "",
