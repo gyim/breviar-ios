@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* mydefs.h                                                    */
-/* (c)1999-2010 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2011 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne define'y                    */
 /* document history                                            */
@@ -62,7 +62,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2011-01-17"
+#define BUILD_DATE "2011-01-25"
 
 #define BYTES 250
 #define SMALL 80
@@ -181,18 +181,25 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_PRM_SVIATOK "psv"
 #endif
 
-#define PRM_ANALYZA_ROKU 	3   /* dotaz na sviatky v roku */
+#define PRM_ANALYZA_ROKU	3   /* dotaz na sviatky v roku */
 #ifdef LONG_PARAM_NAMES
 	#define STR_PRM_ANALYZA_ROKU  "PRM_ANALYZA_ROKU"
 #else
 	#define STR_PRM_ANALYZA_ROKU  "par"
 #endif
 
-#define PRM_DNES 4 /* to, co bolo kedysi bez parametra - info o dnesnom dni */
+#define PRM_DNES		4 /* to, co bolo kedysi bez parametra - info o dnesnom dni */
 #ifdef LONG_PARAM_NAMES
 	#define STR_PRM_DNES "PRM_DNES"
 #else
 	#define STR_PRM_DNES "pdnes"
+#endif
+
+#define PRM_LIT_OBD 	5    /* pod¾a pôvodného PRM_CEZ_ROK */
+#ifdef LONG_PARAM_NAMES
+	#define STR_PRM_CEZ_ROK "PRM_LIT_OBD"
+#else
+	#define STR_PRM_LIT_OBD "plo"
 #endif
 
 #define PRM_MESIAC_ROKA 17
@@ -289,6 +296,14 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_ANALYZA_ROKU "ANALYZA_ROKU"
 #else
 	#define STR_ANALYZA_ROKU "ar"
+#endif
+
+/* nasledujú parametre z formulárov pre dotaz PRM_LIT_OBD */
+#define LIT_OBD 10
+#ifdef LONG_PARAM_NAMES
+	#define STR_LIT_OBD "LIT_OBD"
+#else
+	#define STR_LIT_OBD "lo"
 #endif
 
 /* nasleduju parametre z formularov pre dotaz PRM_MESIAC_ROKA */

@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* liturgia.h                                                  */
-/* (c)1999-2010 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2011 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne vecicky pre liturgiu hodin  */
 /* document history                                            */
@@ -59,6 +59,7 @@
 /*                    vöeobecn˝ danej cirkevnej provincie      */
 /*                    alebo nejak˝ rehoæn˝ a pod.              */
 /*   2010-10-11a.D. | pridanÈ nazov_slavenia_lokal_kalendar[]  */
+/*   2011-01-25a.D. | premenovanÈ niektorÈ HTML s˙bory         */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -301,15 +302,17 @@ extern const char *nazov_Modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1];
 
 /* extern const char *nazov_MODLITBY[]; */
 
-/* ... a file templates (suborove vzory) pre modlitby */
-#define TEMPLAT_INVITATORIUM     "invitat.htm"
-#define TEMPLAT_RANNE_CHVALY     "rchvaly.htm"
-#define TEMPLAT_POSV_CITANIE     "posvcit.htm"
-#define TEMPLAT_CEZ_DEN_9        "predpol.htm"
-#define TEMPLAT_CEZ_DEN_12       "napol.htm"
-#define TEMPLAT_CEZ_DEN_3        "popol.htm"
-#define TEMPLAT_VESPERY          "vespery.htm"
-#define TEMPLAT_KOMPLETORIUM     "komplet.htm"
+/* ... a file templates (suborove vzory) pre modlitby
+ * 2011-01-25: premenovanÈ (aby mali spoloËn˝ prefix)
+ */
+#define TEMPLAT_INVITATORIUM     "m_invitat.htm"
+#define TEMPLAT_RANNE_CHVALY     "m_rchvaly.htm"
+#define TEMPLAT_POSV_CITANIE     "m_posvcit.htm"
+#define TEMPLAT_CEZ_DEN_9        "m_predpol.htm"
+#define TEMPLAT_CEZ_DEN_12       "m_napol.htm"
+#define TEMPLAT_CEZ_DEN_3        "m_popol.htm"
+#define TEMPLAT_VESPERY          "m_vespery.htm"
+#define TEMPLAT_KOMPLETORIUM     "m_komplet.htm"
 
 /* pridanÈ 2006-10-24 pre kompletÛrium */
 #define nazov_obd_KOMPLETORIUM   "cezrok_k.htm"
@@ -652,6 +655,10 @@ typedef struct dm _struct_dm;
 /* zv‰zok brevi·ra - zv‰zok, v ktorom sa nach·dza danÈ liturgickÈ obdobie; doplnenÈ 2007-12-20; opravenÈ 2008-01-23 */
 const short int zvazok_breviara[POCET_OBDOBI + 1] = 
 {2, 1, 1, 1, 1, 3, 2, 2, 2, 2, 2, 1}; // nepotrebujeme rozlÌöiù 3. a 4. zv‰zok, ktorÈ obidva obsahuj˙ OBD_CEZ_ROK
+
+/* poËet t˝ûdÚov pre danÈ liturgickÈ obdobie; doplnenÈ 2011-01-25 */
+const short int lit_obd_pocet_tyzdnov[POCET_OBDOBI + 1] = 
+{1, 4, 1, 2, 1, 34, 6, 1, 1, 7, 2, 1};
 
 /* nazov_obdobia: string pre nazov liturgickeho obdobia */
 //extern const char *nazov_obdobia[];
@@ -1317,6 +1324,8 @@ extern const char *text_ZAKONCENIE_LEBO_TY_dlhe[];
 extern const char *text_ZAKONCENIE_LEBO_TY_kratke[];
 extern const char *text_ZAKONCENIE_ON_JE_dlhe; // len SK
 extern const char *text_ZAKONCENIE_ON_JE_kratke; // len SK
+extern const char *text_ZAKONCENIE_KTORY_JE_dlhe; // len SK
+extern const char *text_ZAKONCENIE_KTORY_JE_kratke; // len SK
 
 extern const char *text_PRO_OP[];
 

@@ -930,8 +930,9 @@ const char *html_text_do_roku[] = {"do roku", "po rok", "till year", "", "", "po
 const char *html_text_zobrazit_linky[] = {"zobrazi tabu¾ku vrátane hypertextovıch odkazov na jednotlivé dni", "zobrazit tabulku s hypertextovımi odkazy pro jednotlivé dny", "display the table including hypertext links to each date", "", "", "zobrazit tabulku s hypertextovımi odkazy pro jednotlivé dny", "minden felirat mutasson a megfelelõ oldalunkra"};
 const char *html_text_pre_cezrocne_obd[] = {"pre cezroèné obdobie", "pro mezidobí", "for ...", "", "", "pro dobu bìhem roku", ""};
 const char *html_text_tyzden_zaltara[] = {". tıdeò altára", ". tıden altáøe", "week of Psaltary", "hebdomada", "", ". tıden altáøe", ". zsoltáros hét"};
-const char *html_text_tyzden[] = {". tıdeò", ". tıden", "week", "hebdomada", "", ". tıden", "hét"};
+const char *html_text_tyzden[] = {". tıdeò", ". tıden", ". week", ". hebdomada", "", ". tıden", ". hét"};
 const char *html_text_v_tyzdni_zaltara[] = {". tıdni altára", ". tıdnu altáøe", "week of Psaltary", "hebdomada", "", ". tıdnu altáøe", ". zsoltáros hét"};
+const char *html_text_pre[] = {"pre", "pro", "for", "per", "", "pro", ""};
 /* in the following: you MUST keep all HTML elements, e.g. <a href...>, <br> etc. */
 const char *html_text_dnes_je_atd[] = 
 {"Dnes je %d. deò v roku%s, <a href=\"%s%s\">juliánsky dátum</a> JD = %ld%s.\n<br>\n",
