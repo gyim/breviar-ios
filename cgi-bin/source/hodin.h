@@ -346,15 +346,16 @@ const char *nazov_kalendara[POCET_KALENDAROV + 1] =
 ,"SK CSSR"
 ,"všeobecnı HU"
 ,"SK SVD"
+,"SK SJ"
 };
 
 /* calendar codes; internal usage for HTTP requests */
 const char *skratka_kalendara[POCET_KALENDAROV + 1] =
-{"??", "la", "sk", "cz", "czop", "cssr", "hu", "svd"};
+{"??", "la", "sk", "cz", "czop", "cssr", "hu", "svd", "sj"};
 
 /* filenames for special calendars / názov súbora pre kalendáre -- "pro" == propriá */
 const char *nazov_htm_kalendar[POCET_KALENDAROV + 1] =
-{"", "", "", "", "", "pro_cssr.htm", "", "pro_svd.htm"};
+{"", "", "", "", "", "pro_cssr.htm", "", "pro_svd.htm", "pro_sj.htm"};
 
 /* doplnené 2010-10-11 */
 const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1] =
@@ -366,6 +367,7 @@ const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1] =
 ,"pre Kongregáciu najsvätejšieho Vykupite¾a — redemptoristov"
 ,""
 ,"pre Spoloènos Boieho Slova — verbistov"
+,"pre Spoloènos Jeišovu — jezuitov"
 };
 
 /* special "local" or "partial" characteristics of various celebrations - each in one language; no need to translate; special strings will be added */
@@ -1512,6 +1514,15 @@ const char *text_JAN_19[] =
  "Sv. Markéty Uherské, panny, mnišky",
  "Árpádházi Szent Margit szûz", // v maïarsku 18. januára
  };
+const char *text_JAN_19_1[] = 
+{"Bl. Jakuba Salésa a Viliama Saultemouchea, Ignáca de Azevedo a spol., <br>Jakuba Bonnauda a spol., muèeníkov zo Spoloènosti Jeišovej",
+ "cz_",
+ "",
+ "la_",
+ "",
+ "czop_",
+ "hu_",
+ };
 const char *text_JAN_20_1[] = 
 {"Sv. Fabiána, pápea a muèeníka",
  "Sv. Fabiána, papee a muèedníka",
@@ -1654,6 +1665,15 @@ const char *text_FEB_04[] =
  "la_",
  "",
  "Sv. Kateøiny z Ricci, panny, øeholnice",
+ "hu_",
+ };
+const char *text_FEB_04_1[] = 
+{"Sv. Jána de Brito, bl. Rudolfa Acquavivu a spol, bl. Františka Pacheca, <br>Karola Spinolu a spol., bl. Jakuba Berthieua, Leva Mangina a spol., muèeníkov",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "czop_",
  "hu_",
  };
 const char *text_FEB_05[] = 

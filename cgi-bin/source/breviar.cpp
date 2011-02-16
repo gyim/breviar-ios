@@ -4031,7 +4031,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	}
 
 	/* 2010-08-03: pridaný ako poznámka typ kalendára */
-	if((_local_den.kalendar >= KALENDAR_NEURCENY) && (_local_den.kalendar < POCET_KALENDAROV)){
+	if((_local_den.kalendar >= KALENDAR_NEURCENY) && (_local_den.kalendar <= POCET_KALENDAROV)){
 		sprintf(pom, "<!-- kalendár: %s -->",
 			nazov_kalendara[_local_den.kalendar]);
 		Log("pridávam ako poznámku typ kalendára: %s\n", pom);
@@ -5437,7 +5437,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<select name=\"%s\">\n", STR_KALENDAR);
 
 		Export("<option%s>%s\n", 
-			((_global_kalendar == KALENDAR_SK_CSSR) || (_global_kalendar == KALENDAR_SK_SVD))? STR_EMPTY: html_option_selected,
+			((_global_kalendar == KALENDAR_SK_CSSR) || (_global_kalendar == KALENDAR_SK_SVD) || (_global_kalendar == KALENDAR_SK_SJ))? STR_EMPTY: html_option_selected,
 			nazov_slavenia_lokal_kalendar[KALENDAR_VSEOBECNY_SK] /* nazov_kalendara[KALENDAR_VSEOBECNY_SK][_global_jazyk] */); // todo -- pre viaceré jazyky
 		Export("<option%s>%s\n", 
 			(_global_kalendar == KALENDAR_SK_CSSR)? html_option_selected: STR_EMPTY,
@@ -5445,6 +5445,9 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<option%s>%s\n", 
 			(_global_kalendar == KALENDAR_SK_SVD)? html_option_selected: STR_EMPTY,
 			nazov_slavenia_lokal_kalendar[KALENDAR_SK_SVD] /* nazov_kalendara[KALENDAR_SK_SVD] */);
+		Export("<option%s>%s\n", 
+			(_global_kalendar == KALENDAR_SK_SJ)? html_option_selected: STR_EMPTY,
+			nazov_slavenia_lokal_kalendar[KALENDAR_SK_SJ]);
 
 		Export("</select>\n");
 		Export("<br><span class=\"explain\">");
