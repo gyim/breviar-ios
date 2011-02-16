@@ -4105,7 +4105,7 @@ const char *text_DEC_08[] =
  "A Boldogságos Szûz Mária szeplõtelen fogantatása",
  };
 const char *text_DEC_09[] = 
-{"Sv. Didaka Cuauhtlatoatzina",
+{"Sv. Jána Didaka Cuauhtlatoatzina",
  "Sv. Jana Didaka Cuauhtlatoatzina",
  "",
  "",
