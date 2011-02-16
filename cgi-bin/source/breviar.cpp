@@ -2761,12 +2761,12 @@ void showPrayer(short int type){
 	Log("showPrayer: opt7 == `%s' (%d)\n", pom_MODL_OPT7, _global_opt7);
 
 	/* 2011-01-26: doplnené force parametre opt1 až opt5 */
-	Log("showPrayer: opt1 == `%s' (%d)\n", pom_MODL_OPTF1, _global_optf1);
-	Log("showPrayer: opt2 == `%s' (%d)\n", pom_MODL_OPTF2, _global_optf2);
-	Log("showPrayer: opt3 == `%s' (%d -- %s)\n", 
+	Log("showPrayer: optf1 == `%s' (%d)\n", pom_MODL_OPTF1, _global_optf1);
+	Log("showPrayer: optf2 == `%s' (%d)\n", pom_MODL_OPTF2, _global_optf2);
+	Log("showPrayer: optf3 == `%s' (%d -- %s)\n", 
 		pom_MODL_OPTF3, _global_optf3, _global_optf3 <= MODL_SPOL_CAST_NEBRAT ? nazov_spolc(_global_optf3) : EMPTY_STR);
-	Log("showPrayer: opt4 == `%s' (%d)\n", pom_MODL_OPTF4, _global_optf4);
-	Log("showPrayer: opt5 == `%s' (%d -- %s)\n", pom_MODL_OPTF5, _global_optf5, 
+	Log("showPrayer: optf4 == `%s' (%d)\n", pom_MODL_OPTF4, _global_optf4);
+	Log("showPrayer: optf5 == `%s' (%d -- %s)\n", pom_MODL_OPTF5, _global_optf5, 
 		(_global_optf5 == MODL_CEZ_DEN_ZALMY_ZO_DNA)? STR_MODL_CEZ_DEN_ZALMY_ZO_DNA: STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
 
 	if(_global_opt1 != _global_optf1){
@@ -3207,6 +3207,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 			if(_global_den.denvr == PMB){
 				/* slavnost panny marie bohorodicky */
 				_rozbor_dna_LOG("/* slavnost panny marie bohorodicky */\n");
+				_global_den.tyzden = 1; /* 2011-01-27: doplnené; overoval som, èi to nemôže padnú na iný týždeò (nemôže) */
 				_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 				_global_den.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 				_global_den.smer = 3;
@@ -3534,9 +3535,11 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					_global_den.litobd = OBD_OKTAVA_NARODENIA; /* pretoze do 31.12. */
 					/* 2008-01-05: pod¾a smerníc, è. 133, nie je 1. týždeò žaltára; 
 					 * pokraèuje sa v týždòoch od 1. adventnej nedele
-					 * upozornil Vlado Kiš
-					 * kedysi tu bolo: _global_den.tyzden = 1; */
-					_global_den.tyzden = ((_global_den.denvr - PAN) DIV 7) + 1;
+					 * upozornil Vlado Kiš (napr. 29. december 2007 al. 2012 = 4. týždeò žaltára)
+					 * kedysi tu bolo: _global_den.tyzden = 1; 
+					 * 2011-01-27: keïže sa to používa na urèenie týždòa žaltára, môžeme tam pokojne da "MOD 4", pretože "5. týždeò" nemá zmysel
+					 */
+					_global_den.tyzden = (((_global_den.denvr - PAN) DIV 7) MOD 4) + 1;
 					if(_global_den.denvr == NAR){
 						/* narodenie pana */
 						_rozbor_dna_LOG("/* narodenie pana */\n");
@@ -4345,7 +4348,7 @@ short int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, short int rok, short
 
 	/* urcenie dat k modlitbe */
 	Log("spustam liturgicke_obdobie(%s, %d. tyzden, %s, %d. tyzden zaltara; svaty: %d)...\n",
-		nazov_obdobia(_global_den.litobd),// nazov_obdobia_
+		nazov_obdobia_ext(_global_den.litobd),// nazov_obdobia_
 		_global_den.tyzden,
 		nazov_dna(_global_den.denvt),
 		_global_den.tyzzal,
@@ -5763,14 +5766,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export(" \n");
 	/* pole WWW_MODL_OPTF1 */
 	Export("<select name=\"%s\">\n", STR_MODL_OPTF1);
-	if(_global_optf1 == ANO)
-		Export("<option selected>%s\n", STR_ANO);
-	else
-		Export("<option>%s\n", STR_ANO);
-	if(_global_optf1 == NIE)
-		Export("<option selected>%s\n", STR_NIE);
-	else
-		Export("<option>%s\n", STR_NIE);
+	Export("<option%s>%s\n", (_global_optf1 == ANO)? html_option_selected: STR_EMPTY, STR_ANO);
+	Export("<option%s>%s\n", (_global_optf1 == NIE)? html_option_selected: STR_EMPTY, STR_NIE);
 	Export("</select>\n");
 	Export("</li>");
 
@@ -5781,8 +5778,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export(" \n");
 	/* pole WWW_MODL_OPTF4 */
 	Export("<select name=\"%s\">\n", STR_MODL_OPTF4);
-	Export("<option>%s\n", STR_ANO);
-	Export("<option selected>%s\n", STR_NIE);
+	Export("<option%s>%s\n", (_global_optf4 == ANO)? html_option_selected: STR_EMPTY, STR_ANO);
+	Export("<option%s>%s\n", (_global_optf4 == NIE)? html_option_selected: STR_EMPTY, STR_NIE);
 	Export("</select>\n");
 	Export("</li>");
 #endif
@@ -5794,8 +5791,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export(" \n");
 	/* pole WWW_MODL_OPTF2 */
 	Export("<select name=\"%s\">\n", STR_MODL_OPTF2);
-	Export("<option selected>%s\n", STR_MODL_ZALMY_ZO_DNA);
-	Export("<option>%s\n", STR_MODL_ZALMY_ZO_SV);
+	Export("<option%s>%s\n", (_global_optf2 == MODL_ZALMY_ZO_DNA)? html_option_selected: STR_EMPTY, STR_MODL_ZALMY_ZO_DNA);
+	Export("<option%s>%s\n", (_global_optf2 == MODL_ZALMY_ZO_SV)? html_option_selected: STR_EMPTY, STR_MODL_ZALMY_ZO_SV);
 	Export("</select>\n");
 	Export("</li>");
 #endif
@@ -5806,14 +5803,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export(" \n");
 	/* pole WWW_MODL_OPTF5 */
 	Export("<select name=\"%s\">\n", STR_MODL_OPTF5);
-	if(_global_optf5 == MODL_CEZ_DEN_ZALMY_ZO_DNA)
-		Export("<option selected>%s\n", STR_MODL_CEZ_DEN_ZALMY_ZO_DNA);
-	else
-		Export("<option>%s\n", STR_MODL_CEZ_DEN_ZALMY_ZO_DNA);
-	if(_global_optf5 == MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA)
-		Export("<option selected>%s\n", STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
-	else
-		Export("<option>%s\n", STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
+	Export("<option%s>%s\n", (_global_optf5 == MODL_CEZ_DEN_ZALMY_ZO_DNA)? html_option_selected: STR_EMPTY, STR_MODL_CEZ_DEN_ZALMY_ZO_DNA);
+	Export("<option%s>%s\n", (_global_optf5 == MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA)? html_option_selected: STR_EMPTY, STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
 	Export("</select>\n");
 	Export("</li>");
 
@@ -5848,20 +5839,16 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	/* pole WWW_DEN */
 	Export("<select name=\"%s\">\n", STR_DEN);
-	for(day = 1; day < 32; day++)
-		if(day == dnes.tm_mday)
-			Export("<option selected>%d", day);
-		else
-			Export("<option>%d", day);
+	for(day = 1; day < 32; day++){
+		Export("<option%s>%d\n", (day == dnes.tm_mday)? html_option_selected: STR_EMPTY, day);
+	}
 	Export("\n</select>&nbsp;.\n");
 
 	/* pole WWW_MESIAC */
 	Export("<select name=\"%s\">\n", STR_MESIAC);
-	for(month = 1; month < 13; month++)
-		if(month == dnes.tm_mon)
-			Export("<option selected>%s", nazov_mesiaca(month - 1));
-		else
-			Export("<option>%s", nazov_mesiaca(month - 1));
+	for(month = 1; month < 13; month++){
+		Export("<option%s>%s\n", (month == dnes.tm_mon)? html_option_selected: STR_EMPTY, nazov_mesiaca(month - 1));
+	}
 	Export("\n</select>&nbsp;\n");
 
 	/* pole WWW_ROK */
@@ -5961,11 +5948,9 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export(" &nbsp;"); /* 2003-07-16; povodne tu bolo "mesiac" */
 	/* pole WWW_MESIAC_ROKA */
 	Export("<select name=\"%s\">\n", STR_MESIAC_ROKA);
-	for(month = 1; month < 13; month++)
-		if(month == dnes.tm_mon)
-			Export("<option selected>%s", nazov_mesiaca(month - 1));
-		else
-			Export("<option>%s", nazov_mesiaca(month - 1));
+	for(month = 1; month < 13; month++){
+		Export("<option%s>%s\n", (month == dnes.tm_mon)? html_option_selected: STR_EMPTY, nazov_mesiaca(month - 1));
+	}
 	Export("\n</select>&nbsp;\n");
 
 	Export("");
@@ -6042,11 +6027,9 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	/* pole WWW_DEN_V_TYZDNI */
 	Export("<select name=\"%s\">\n", STR_DEN_V_TYZDNI);
-	for(day = 0; day < 7; day++)
-		if(day == dnes.tm_wday)
-			Export("<option selected>%s", nazov_dna(day));
-		else
-			Export("<option>%s", nazov_dna(day));
+	for(day = DEN_NEDELA; day <= DEN_SOBOTA; day++){
+		Export("<option%s>%s\n", (day == dnes.tm_wday)? html_option_selected: STR_EMPTY, nazov_dna(day));
+	}
 	Export("\n</select>\n");
 
 	Export(", \n");
@@ -6055,21 +6038,17 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	/* pole WWW_LIT_ROK */
 	Export("<select name=\"%s\">\n", STR_LIT_ROK);
-	for(lo = 'A'; lo <= 'C'; lo++)
-		if(lo == _global_den.litrok)
-			Export("<option selected>%c", lo);
-		else
-			Export("<option>%c", lo);
+	for(lo = 'A'; lo <= 'C'; lo++){
+		Export("<option%s>%c\n", (lo == _global_den.litrok)? html_option_selected: STR_EMPTY, lo);
+	}
 	Export("\n</select>\n");
 	Export(", <br>\n");
 
 	/* pole WWW_TYZDEN */
 	Export("<select name=\"%s\">\n", STR_TYZDEN);
-	for(day = 0; day < POCET_NEDIEL_CEZ_ROK; day++)
-		if(day == _global_den.tyzden)
-			Export("<option selected>%d", day);
-		else
-			Export("<option>%d", day);
+	for(day = 0; day <= POCET_NEDIEL_CEZ_ROK; day++){
+		Export("<option%s>%d\n", (day == _global_den.tyzden)? html_option_selected: STR_EMPTY, day);
+	}
 	Export("\n</select>&nbsp;");
 
 	Export((char *)html_text_tyzden[_global_jazyk]);
@@ -6077,11 +6056,9 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	/* pole WWW_LIT_OBD */
 	Export("<select name=\"%s\">\n", STR_LIT_OBD);
-	for(lo = 0; lo <= POCET_OBDOBI; lo++)
-		if(lo == _global_den.litobd)
-			Export("<option selected>%s", nazov_obdobia_ext(lo));
-		else
-			Export("<option>%s", nazov_obdobia_ext(lo));
+	for(lo = 0; lo <= POCET_OBDOBI; lo++){
+		Export("<option%s>%s\n", (lo == _global_den.litobd)? html_option_selected: STR_EMPTY, nazov_obdobia_ext(lo));
+	}
 	Export("\n</select>\n");
 
 	Export("</td></tr></table>\n");
@@ -6118,20 +6095,16 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	/* pole WWW_DEN_V_TYZDNI */
 	Export("<select name=\"%s\">\n", STR_DEN_V_TYZDNI);
-	for(day = 0; day < 7; day++)
-		if(day == dnes.tm_wday)
-			Export("<option selected>%s", nazov_dna(day));
-		else
-			Export("<option>%s", nazov_dna(day));
+	for(day = DEN_NEDELA; day <= DEN_SOBOTA; day++){
+		Export("<option%s>%s\n", (day == dnes.tm_wday)? html_option_selected: STR_EMPTY, nazov_dna(day));
+	}
 	Export("\n</select>&nbsp;v\n");
 
 	/* pole WWW_TYZDEN */
 	Export("<select name=\"%s\">\n", STR_TYZDEN);
-	for(day = 1; day < 5; day++)
-		if(day == _global_den.tyzzal)
-			Export("<option selected>%d", day);
-		else
-			Export("<option>%d", day);
+	for(day = 1; day < 5; day++){
+		Export("<option%s>%d\n", (day == _global_den.tyzzal)? html_option_selected: STR_EMPTY, day);
+	}
 	Export("\n</select>&nbsp;");
 	Export((char *)html_text_v_tyzdni_zaltara[_global_jazyk]); /* 2006-08-02 */
 
@@ -6942,8 +6915,8 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 	Export(" \n");
 	/* pole WWW_MODL_OPT1 */
 	Export("<select name=\"%s\">\n", STR_MODL_OPT1);
-	Export("<option>%s\n", STR_ANO);
-	Export("<option selected>%s\n", STR_NIE);
+	Export("<option%s>%s\n", (_global_opt1 == ANO)? html_option_selected: STR_EMPTY, STR_ANO);
+	Export("<option%s>%s\n", (_global_opt1 == NIE)? html_option_selected: STR_EMPTY, STR_NIE);
 	Export("</select>\n");
 	Export("<br><span class=\"explain\">");
 	Export((char *)html_text_nemenne_sucasti_explain[_global_jazyk]);
@@ -6957,8 +6930,8 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 		Export(" \n");
 		/* pole WWW_MODL_OPT4 */
 		Export("<select name=\"%s\">\n", STR_MODL_OPT4);
-		Export("<option>%s\n", STR_ANO);
-		Export("<option selected>%s\n", STR_NIE);
+		Export("<option%s>%s\n", (_global_opt4 == ANO)? html_option_selected: STR_EMPTY, STR_ANO);
+		Export("<option%s>%s\n", (_global_opt4 == NIE)? html_option_selected: STR_EMPTY, STR_NIE);
 		Export("</select>\n");
 		Export("<br><span class=\"explain\">");
 		Export((char *)html_text_popis_svaty_explain[_global_jazyk]);
@@ -6975,8 +6948,8 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 		Export(" \n");
 		/* pole WWW_MODL_OPT2 */
 		Export("<select name=\"%s\">\n", STR_MODL_OPT2);
-		Export("<option selected>%s\n", STR_MODL_ZALMY_ZO_DNA);
-		Export("<option>%s\n", STR_MODL_ZALMY_ZO_SV);
+		Export("<option%s>%s\n", (_global_opt2 == MODL_ZALMY_ZO_DNA)? html_option_selected: STR_EMPTY, STR_MODL_ZALMY_ZO_DNA);
+		Export("<option%s>%s\n", (_global_opt2 == MODL_ZALMY_ZO_SV)? html_option_selected: STR_EMPTY, STR_MODL_ZALMY_ZO_SV);
 		Export("</select>\n");
 		Export((char *)html_text_zalmy_brat_zo_okrem_mcd[_global_jazyk]); /* pridane 2003-08-13; upravený popis 2006-01-25 */
 		Export("<br><span class=\"explain\">");
@@ -7017,8 +6990,8 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 	Export(" \n");
 	/* pole WWW_MODL_OPT5 */
 	Export("<select name=\"%s\">\n", STR_MODL_OPT5);
-	Export("<option selected>%s\n", STR_MODL_CEZ_DEN_ZALMY_ZO_DNA);
-	Export("<option>%s\n", STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
+	Export("<option%s>%s\n", (_global_opt5 == MODL_CEZ_DEN_ZALMY_ZO_DNA)? html_option_selected: STR_EMPTY, STR_MODL_CEZ_DEN_ZALMY_ZO_DNA);
+	Export("<option%s>%s\n", (_global_opt5 == MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA)? html_option_selected: STR_EMPTY, STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
 	Export("</select>\n");
 	Export("<br><span class=\"explain\">");
 	Export((char *)html_text_zalmy_pre_mcd_explain[_global_jazyk]);
@@ -7283,7 +7256,7 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 		 * co pripadli na nedelu, tak to bolo treba preskumat */
 		Log("dalsi den (%d.%d): _local_den.smer == %d, _local_den.denvt == %s, _local_den.litobd == %s (%d)\n",
 			_local_den.den, _local_den.mesiac,
-			_local_den.smer, nazov_dna(_local_den.denvt), nazov_obdobia(_local_den.litobd), _local_den.smer);
+			_local_den.smer, nazov_dna(_local_den.denvt), nazov_obdobia_ext(_local_den.litobd), _local_den.smer);
 		// 2003-06-30
 		// Log(_local_den);
 		Log("_local_modl_prve_vespery obsahuje:\n"); Log(_local_modl_prve_vespery);
@@ -7291,7 +7264,7 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 		
 		Log("tento den (%d.%d): _global_den.smer == %d, _global_den.denvt == %s, _global_den.litobd == %s (%d)\n",
 			_global_den.den, _global_den.mesiac,
-			_global_den.smer, nazov_dna(_global_den.denvt), nazov_obdobia(_global_den.litobd), _global_den.smer);
+			_global_den.smer, nazov_dna(_global_den.denvt), nazov_obdobia_ext(_global_den.litobd), _global_den.smer);
 		// 2003-06-30
 		// Log(_global_den);
 		// Log("(3) _global_modl_prve_vespery obsahuje:\n"); Log(_global_modl_prve_vespery);
@@ -8752,6 +8725,10 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 			_global_modlitba = MODL_KOMPLETORIUM;
 	}/* nie je to nedela */
 
+	/* rozparsovanie parametrov opt1...opt5 */
+	Log("volám _rozparsuj_parametre_OPT z _main_liturgicke_obdobie()...\n");
+	_rozparsuj_parametre_OPT;
+
 	/* 2011-01-26: nastavenie niektorých atribútov pre _global_den */
 	_global_den.denvt = d;
 	_global_den.litobd = lo;
@@ -8907,6 +8884,28 @@ void _main_analyza_roku(char *rok){
 	char pom3[MAX_STR]; /* 2008-08-08: pridané kvôli css */
 	mystrcpy(pom3, STR_EMPTY, MAX_STR);
 
+#define LOG  Log("analyza_roku(): "); Log
+	Log("-- _main_analyza_roku(): zaciatok\n");
+
+#define ExportROK	Export("<br>"); Export
+	year = atoi(rok);
+	if(year <= 0){
+		_export_heading("Analýza roku");
+		Export("Nevhodný údaj: ");
+		if(equals(rok, STR_EMPTY))
+			Export("nezadaný rok.\n");
+		else if(equals(rok, "0"))
+			Export("nepoznám rok <"HTML_SPAN_BOLD">0</span>.\n"); /* zmenene <b> na <span class="bold">, 2003-07-02 */
+		else
+			Export("chybné èíslo (%s).\n", rok);
+		ALERT;
+		return;
+	}
+
+	/* rozparsovanie parametrov opt1...opt5 */
+	Log("volám _rozparsuj_parametre_OPT z _main_analyza_roku()...\n");
+	_rozparsuj_parametre_OPT;
+
 	/* 2006-08-01: pridané odovzdanie parametra pre jazyk */
 	if(_global_jazyk != JAZYK_SK){
 		sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_JAZYK, skratka_jazyka[_global_jazyk]);
@@ -8953,24 +8952,6 @@ void _main_analyza_roku(char *rok){
 		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT5, _global_opt5);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj opt5: `%s' (2011-01-26)\n", pom3);
-	}
-
-#define LOG  Log("analyza_roku(): "); Log
-	Log("-- _main_analyza_roku(): zaciatok\n");
-
-#define ExportROK	Export("<br>"); Export
-	year = atoi(rok);
-	if(year <= 0){
-		_export_heading("Analýza roku");
-		Export("Nevhodný údaj: ");
-		if(equals(rok, STR_EMPTY))
-			Export("nezadaný rok.\n");
-		else if(equals(rok, "0"))
-			Export("nepoznám rok <"HTML_SPAN_BOLD">0</span>.\n"); /* zmenene <b> na <span class="bold">, 2003-07-02 */
-		else
-			Export("chybné èíslo (%s).\n", rok);
-		ALERT;
-		return;
 	}
 
 	sprintf(pom, (char *)html_text_Rok_x[_global_jazyk], year);
@@ -9204,6 +9185,10 @@ void _main_tabulka(char *rok_from, char *rok_to, char *tab_linky){
 		ALERT;
 		return;
 	}
+
+	/* rozparsovanie parametrov opt1...opt5 */
+	Log("volám _rozparsuj_parametre_OPT z _main_tabulka()...\n");
+	_rozparsuj_parametre_OPT;
 
 	_export_heading_center((char *)html_text_datumy_pohyblivych_slaveni[_global_jazyk]);
 

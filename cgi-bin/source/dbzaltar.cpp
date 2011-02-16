@@ -6745,6 +6745,7 @@ label_24_DEC:
 				mystrcpy(_file_pc, FILE_NANEBOVSTUPENIE, MAX_STR_AF_FILE); /* 2006-02-09: doplnené */
 				mystrcpy(_anchor_vlastne_slavenie, ANCHOR_NANEBOVSTUPENIE, MAX_STR_AF_ANCHOR); /* 2007-11-14: pridané */
 				Log("  ide o nanebovstupenie Pana: _file = `%s', den = %s...\n", _file, nazov_dna(den));
+				Log("_anchor_vlastne_slavenie == %s...\n", _anchor_vlastne_slavenie);
 
 				/* 2008-05-08: pridané kompletórium po prvých aj druhých vešperách (copy+paste kódu pre nede¾u, z 2007-12-06) */
 				modlitba = MODL_PRVE_KOMPLETORIUM;
@@ -10241,6 +10242,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
+						_set_zalmy_1nedele_rch(); /* 2011-01-27: doplnené */
 						if(_global_jazyk == JAZYK_SK){ /* 2008-10-15: odvetvené len pre Slovensko */
 							_vlastna_cast_full_okrem_prosieb(modlitba);
 						}
@@ -10256,6 +10258,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
+						_set_zalmy_sviatok_muc(modlitba); /* 2011-01-27: doplnené */
 						if(_global_jazyk == JAZYK_SK){ /* 2008-10-15: odvetvené len pre Slovensko */
 							_vlastna_cast_full_okrem_prosieb(modlitba);
 						}
@@ -14479,7 +14482,7 @@ label_25_MAR:
 						_vlastna_cast_antifona_inv;
 
 						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_full_okrem_antifon(modlitba); /* 2010-07-08: zjednodušené */
+						_vlastna_cast_full(modlitba); /* 2010-07-08: zjednodušené; 2011-01-27: opravené */
 						_set_zalmy_sviatok_apostolov(modlitba); /* 2008-06-30: doplnené */
 
 						modlitba = MODL_RANNE_CHVALY;
