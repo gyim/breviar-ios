@@ -360,7 +360,9 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 
 /* nasleduju parametre pre modlitbu (PRM_DATUM, PRM_DETAILY)
  * -- specialne options, ktore platia rovnako pre oboje, ale
- * de facto sa vyuzivaju len pre PRM_DETAILY */
+ * de facto sa vyuzivaju len pre PRM_DETAILY 
+ * 2011-01-26: doplnené aj verzie "force" pre formulár; používajú sa totiž aj na PRM_DNES hlavnom okne
+ */
 #define MODL_OPT1 31
 #ifdef LONG_PARAM_NAMES
 	#define STR_MODL_OPT1 "MODL_OPT1"
@@ -428,6 +430,43 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #else
 	#define STR_MODL_OPT7 "o7"
 #endif
+
+/* --- force verzie pre o1 až o5 --- */
+#define MODL_OPTF1 51
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF1 "MODL_OPTF1"
+#else
+	#define STR_MODL_OPTF1 "of1"
+#endif
+
+#define MODL_OPTF2 52
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF2 "MODL_OPTF2"
+#else
+	#define STR_MODL_OPTF2 "of2"
+#endif
+
+#define MODL_OPTF3 53
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF3 "MODL_OPTF3"
+#else
+	#define STR_MODL_OPTF3 "of3"
+#endif
+
+#define MODL_OPTF4 54
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF4 "MODL_OPTF4"
+#else
+	#define STR_MODL_OPTF4 "of4"
+#endif
+
+#define MODL_OPTF5 56
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF5 "MODL_OPTF5"
+#else
+	#define STR_MODL_OPTF5 "of5"
+#endif
+/* --- force verzie pre o1 až o5 --- */
 
 /* 2008-08-08: Pridané kvôli rôznym css */
 #define CSS 40
@@ -497,6 +536,12 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 /* 2009-08-12: pridané */
 #define HTML_LINK_CALL1         "%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s"
 #define HTML_LINK_CALL2         "%s?%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s"
+/* 2011-01-26: pridané jednoduché šípky v¾avo/vpravo */
+#define HTML_LEFT_ARROW_SINGLE	"&lsaquo;"
+#define HTML_RIGHT_ARROW_SINGLE	"&rsaquo;"
+/* 2011-01-26: pridané "trojité" šípky v¾avo/vpravo */
+#define HTML_LEFT_ARROW_HUGE	"&lsaquo;&laquo;"
+#define HTML_RIGHT_ARROW_HUGE	"&raquo;&rsaquo;"
 
 /* definície HTML prvkov upravené a presunuté do hodin.h, 2006-08-01;
  * tu ponechané len z historických dôvodov zakomentované

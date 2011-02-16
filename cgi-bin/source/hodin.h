@@ -918,7 +918,8 @@ const char *html_title_batch_mode[] = {"Liturgia hodín - statické texty", "Litur
 /* navigation buttons/texts: previous, next, today */
 const char *html_button_predchadzajuci_[] = {"Predchádzajúci", "Pøedchozí", "Previous", "Praecedénte", "", "Pøedchozí", "Elõzõ"};
 const char *html_button_nasledujuci_[] = {"Nasledujúci", "Následující", "Next", "Successívo", "", "Následující", "Következõ"};
-const char *html_button_dnes[] = {"Dnes", "Dnes", "Today", "Hódie", "", "Dnes", "Ma"};
+const char *html_button_dnes[] = {"dnes", "dnes", "today", "hódie", "", "dnes", "ma"};
+const char *html_button_Dnes[] = {"Dnes", "Dnes", "Today", "Hódie", "", "Dnes", "Ma"};
 
 /* basic words: day, month, year */
 const char *html_text_den[] = {"deò", "den", "day", "die", "", "den", "nap"};
@@ -942,13 +943,14 @@ const char *html_text_Prehlad_mesiaca[] = {"Preh¾ad mesiaca", "Pøehled mìsíce", 
 
 const char *html_text_Vysvetlivky[] = {"Vysvetlivky", "Vysvìtlivky", "Legenda", "Legenda", "", "Vysvìtlivky", "Jelmagyarázat"};
 
-const char *html_text_dalsie_moznosti[] = {"Vyberte si ïalšie monosti ", "Další monosti vıbìru ", "Choose from above (buttons) or from the following options: ", "", "", "Další monosti vıbìru", "Válassz egy imaórát vagy az alábbi lehetõségek közül"};
+const char *html_text_dalsie_moznosti[] = // {"Vyberte si ïalšie monosti ", "Další monosti vıbìru ", "Choose from above (buttons) or from the following options: ", "", "", "Další monosti vıbìru", "Válassz egy imaórát vagy az alábbi lehetõségek közül"};
+	{"Vıber ïalších moností", "Další monosti vıbìru ", "Choose from above (buttons) or from the following options: ", "", "", "Další monosti vıbìru", "Válassz egy imaórát vagy az alábbi lehetõségek közül"};
 const char *html_text_prik_sviatky_atd[] = {"prikázané sviatky a slávnosti Pána v roku ", "zasvìcené svátky a slavnosti Pánì v roce ", "obligatory celebrations in year ", "", "", "zasvìcené svátky a slavnosti Pánì v roce", "kötelezõ ünnepek"};
 const char *html_text_lit_kalendar[] = {"liturgickı kalendár pre", "liturgickı kalendáø pro", "liturgical calendar for", "", "", "liturgickı kalendáø pro", "liturgikus naptár"};
 const char *html_text_roku[] = {"roku", "roku", "of year", "", "", "roku", ""};
 const char *html_text_tabulka_pohyblive_od[] = {"tabu¾ka dátumov pohyblivıch slávení od roku", "tabulka s daty promìnnıch slavností od roku", "table with dates of movable celebrations from year", "", "", "tabulka s daty promìnnıch slavností od roku", "a változó ünnepek listája a következõ években"};
 const char *html_text_do_roku[] = {"do roku", "po rok", "till year", "", "", "po rok", ""};
-const char *html_text_zobrazit_linky[] = {"zobrazi tabu¾ku vrátane hypertextovıch odkazov na jednotlivé dni", "zobrazit tabulku s hypertextovımi odkazy pro jednotlivé dny", "display the table including hypertext links to each date", "", "", "zobrazit tabulku s hypertextovımi odkazy pro jednotlivé dny", "minden felirat mutasson a megfelelõ oldalunkra"};
+const char *html_text_zobrazit_linky[] = {"zobrazi tabu¾ku <i>vrátane hypertextovıch odkazov</i> na jednotlivé dni", "zobrazit tabulku s hypertextovımi odkazy pro jednotlivé dny", "display the table including hypertext links to each date", "", "", "zobrazit tabulku s hypertextovımi odkazy pro jednotlivé dny", "minden felirat mutasson a megfelelõ oldalunkra"};
 const char *html_text_pre_cezrocne_obd[] = {"pre cezroèné obdobie", "pro mezidobí", "for ...", "", "", "pro dobu bìhem roku", ""};
 const char *html_text_tyzden_zaltara[] = {". tıdeò altára", ". tıden altáøe", "week of Psaltary", "hebdomada", "", ". tıden altáøe", ". zsoltáros hét"};
 const char *html_text_tyzden[] = {". tıdeò", ". tıden", ". week", ". hebdomada", "", ". tıden", ". hét"};
@@ -1291,7 +1293,7 @@ const char *html_text_kalendar_miestny[] =
  "hu_"
 };
 const char *html_text_kalendar_explain[] = 
-{"Je moné zvoli aj miestny kalendár niektorej reho¾nej rodiny, rádu, inštitútu.", 
+{"(Je moné zvoli aj miestny kalendár niektorej <i>reho¾nej rodiny, rádu, inštitútu</i>.)", 
  "xxx", 
  "xxx", 
  "",

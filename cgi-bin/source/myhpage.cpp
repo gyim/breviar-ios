@@ -46,6 +46,7 @@
 #ifndef __MYHPAGE_CPP_HTML_CONST
 #define __MYHPAGE_CPP_HTML_CONST
 const char *html_header_1 = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\n\t\"http://www.w3.org/TR/html4/loose.dtd\">\n<html>\n<head>\n\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1250\">\n\t<meta name=\"Author\" content=\"Juraj Vidéky\">\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"";
+const char *html_footer_1 = "<p>"; // "<p><center>______</center>"; // "<hr>";
 #endif /*__MYHPAGE_CPP_HTML_CONST*/
 
 #define MAX_MAIL_LABEL 20
@@ -375,8 +376,7 @@ void patka(void){
 		Export("</center>\n");
 	}/* << predošlá | ^ hore | nasledovná >> */
 
-	Export("<hr>\n"); /* bolo tu <hr size=1>, ale to je v css-ku; 2003-07-02 */
-	Export("<center>");
+	Export((char *)html_footer_1);
 
 	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
 		mystrcpy(html_mail_label, html_mail_label_short, MAX_MAIL_LABEL);
@@ -425,7 +425,6 @@ void patka(void){
 	Export("&#169; %d%s <"HTML_LINK_NORMAL" href=\"mailto:%s\">%s</a>\n", baserok, rok, cfg_MAIL_ADDRESS_default, html_mail_label);
 
 	Export("</p>\n"); /* pridane kvoli tomu, ze cele to bude <p class="patka">, 2003-07-02 */
-	Export("</center>");
 
 	Export("</body>\n</html>\n");
 }
@@ -505,8 +504,7 @@ void patka(FILE * expt){
 		fprintf(expt, "</center>\n");
 	}/* << predošlá | ^ hore | nasledovná >> */
 
-	fprintf(expt, "<hr>\n"); /* bolo tu <hr size=1>, ale to je v css-ku; 2003-07-02 */
-	fprintf(expt, "<center>");
+	fprintf(expt, (char *)html_footer_1);
 
 	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
 		mystrcpy(html_mail_label, html_mail_label_short, MAX_MAIL_LABEL);
@@ -555,7 +553,6 @@ void patka(FILE * expt){
 	fprintf(expt, "&#169; %d%s <"HTML_LINK_NORMAL" href=\"mailto:%s\">%s</a>\n", baserok, rok, cfg_MAIL_ADDRESS_default, html_mail_label);
 
 	fprintf(expt, "</p>\n"); /* pridane kvoli tomu, ze cele to bude <p class="patka">, 2003-07-02 */
-	fprintf(expt, "</center>");
 
 	fprintf(expt, "</body>\n</html>\n");
 }
