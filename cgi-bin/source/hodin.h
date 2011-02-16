@@ -943,8 +943,11 @@ const char *html_text_Prehlad_mesiaca[] = {"Preh¾ad mesiaca", "Pøehled mìsíce", 
 
 const char *html_text_Vysvetlivky[] = {"Vysvetlivky", "Vysvìtlivky", "Legenda", "Legenda", "", "Vysvìtlivky", "Jelmagyarázat"};
 
-const char *html_text_dalsie_moznosti[] = // {"Vyberte si ïalšie monosti ", "Další monosti vıbìru ", "Choose from above (buttons) or from the following options: ", "", "", "Další monosti vıbìru", "Válassz egy imaórát vagy az alábbi lehetõségek közül"};
-	{"Vıber ïalších moností", "Další monosti vıbìru ", "Choose from above (buttons) or from the following options: ", "", "", "Další monosti vıbìru", "Válassz egy imaórát vagy az alábbi lehetõségek közül"};
+const char *html_text_dalsie_moznosti[] = {"Vıber ïalších moností", "Další monosti vıbìru ", "Choose from above (buttons) or from the following options: ", "", "", "Další monosti vıbìru", "Válassz egy imaórát vagy az alábbi lehetõségek közül"};
+
+const char *html_text_dalsie_moznosti_1[] = {"Nasledovné vo¾by ovplyvnia všetky modlitby (potrebné stlaèi tlaèidlo Zobraz):", "Následujucící monosti vıbìru ovlivní všechno (nutno stlaèit Uka):", "Choose from above (buttons) or from the following options: ", "", "", "Následujucící monosti vıbìru ovlivní všechno (nutno stlaèit Uka):", "Válassz egy imaórát vagy az alábbi lehetõségek közül"};
+const char *html_text_dalsie_moznosti_2[] = {"Zvo¾te ïalšiu funkènos stránok (vıberom gulièky; potrebné stlaèi tlaèidlo Zobraz):", "Vyberte další funkènosti (oznaète kulièkou; nutno stlaèit Uka):", "Choose from above (buttons) or from the following options: ", "", "", "Vyberte další funkènosti (oznaète kulièkou; nutno stlaèit Uka):", "Válassz egy imaórát vagy az alábbi lehetõségek közül"};
+
 const char *html_text_prik_sviatky_atd[] = {"prikázané sviatky a slávnosti Pána v roku ", "zasvìcené svátky a slavnosti Pánì v roce ", "obligatory celebrations in year ", "", "", "zasvìcené svátky a slavnosti Pánì v roce", "kötelezõ ünnepek"};
 const char *html_text_lit_kalendar[] = {"liturgickı kalendár pre", "liturgickı kalendáø pro", "liturgical calendar for", "", "", "liturgickı kalendáø pro", "liturgikus naptár"};
 const char *html_text_roku[] = {"roku", "roku", "of year", "", "", "roku", ""};

@@ -91,7 +91,7 @@
 #define MAX_POM_QUERY_TYPE	300 /* pom_QUERY_TYPE */
 #define MAX_GLOBAL_LINK		300 /* maximalna dlzka retazca _global_link */
 //#define MAX_ENV	100 /* maximalna dlzka environmentalnej premennej */ /* 2006-08-01: nepouûÌva sa */
-#define MAX_VARIABLES		20 /* maximalny pocet syst. premennych WWW_..., zvyseny 2003-08-07 a op‰tovne 2006-08-01 */
+#define MAX_VARIABLES		25 /* maximalny pocet syst. premennych WWW_..., zvyseny 2003-08-07 a op‰tovne 2006-08-01 a op‰ù 2011-01-26 */
 #define MAX_GLOBAL_BUFFER	500 /* _global_buf, pridanÈ 2005-08-01 */
 /***************************************************************/
 /* EOF of former file mybase.h                                 */

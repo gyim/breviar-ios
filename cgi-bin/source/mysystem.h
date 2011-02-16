@@ -23,17 +23,25 @@
 #undef MODEL_DEBUG_Windows_RUBY
 #undef MODEL_DEBUG_Windows_commandline
 
+/* Modely pre Windows */
+
+/* Modely pre ostré použitie -- for release */
+#define MODEL_Windows_RUBY
+//#define MODEL_Windows_commandline
+
+/* Modely pre debugovanie -- for debug */
+//#define MODEL_DEBUG_Windows_RUBY
+//#define MODEL_DEBUG_Windows_commandline
+
+/* Modely pre linux */
+
 /* Modely pre ostré použitie -- for release */
 //#define MODEL_linux
 //#define MODEL_linux_commandline
-//#define MODEL_Windows_RUBY
-//#define MODEL_Windows_commandline
 
 /* Modely pre debugovanie -- for debug */
 //#define MODEL_DEBUG_linux
 //#define MODEL_DEBUG_linux_commandline
-#define MODEL_DEBUG_Windows_RUBY
-//#define MODEL_DEBUG_Windows_commandline
 
 /***************************************************************/
 /*                                                             */

@@ -596,6 +596,21 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 			strcat(_global_link, pom2);
 			Log("\tPrilepil som aj opt1: `%s' (2011-01-26)\n", pom2);
 		}
+		if(_global_opt2 != 36){
+			sprintf(pom2, HTML_AMPERSAND"%s=%d", STR_MODL_OPT2, _global_opt2);
+			strcat(_global_link, pom2);
+			Log("\tPrilepil som aj opt2: `%s' (2011-01-26)\n", pom2);
+		}
+		if(_global_opt4 != 36){
+			sprintf(pom2, HTML_AMPERSAND"%s=%d", STR_MODL_OPT4, _global_opt4);
+			strcat(_global_link, pom2);
+			Log("\tPrilepil som aj opt4: `%s' (2011-01-26)\n", pom2);
+		}
+		if(_global_opt5 != 36){
+			sprintf(pom2, HTML_AMPERSAND"%s=%d", STR_MODL_OPT5, _global_opt5);
+			strcat(_global_link, pom2);
+			Log("\tPrilepil som aj opt5: `%s' (2011-01-26)\n", pom2);
+		}
 
 	}/* if(_global_opt_batch_monthly == NIE) */
 	else{
