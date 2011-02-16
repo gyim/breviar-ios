@@ -1408,7 +1408,7 @@ const char *text_JAN_02[] =
  };
 const char *text_JAN_03[] = 
 {"Najsvätejšieho mena Ježiš",
- "Nejsvìtìjšího Jména Ježíš",
+ "Nejsvìtìjšího jména Ježíš",
  "",
  "",
  "",

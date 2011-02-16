@@ -8548,7 +8548,7 @@ void _main_batch_mode(
 					 */
 					if(_global_opt_batch_monthly == ANO){
 						fprintf(batch_html_file, "<center><h2><b>%s</b></h2></center>\n", (char *)html_text_Breviar_dnes[_global_jazyk]);
-						fprintf(batch_html_file, "<!-- Odkazy na dnešný deò (Dnešné modlitby) a Preh¾ad mesiaca vyžadujú JavaScript. JavaScript funkcia (c) 2009 Peter Sahajda; upravil (c) 2010 Juraj Vidéky -->\n");
+						fprintf(batch_html_file, "<!-- SK: Odkazy na dnešný deò (Dnešné modlitby) a Preh¾ad mesiaca vyžadujú JavaScript. JavaScript funkcia (c) 2009 Peter Sahajda; upravil (c) 2010 Juraj Vidéky -->\n");
 						fprintf(batch_html_file, "\n");
 						fprintf(batch_html_file, "<script language=\"javascript\" type=\"text/javascript\">\n");
 						fprintf(batch_html_file, "var dnes=new Date();\n");
@@ -8575,9 +8575,9 @@ void _main_batch_mode(
 						fprintf(batch_html_file, "\n");
 						fprintf(batch_html_file, "var output='';\n");
 						fprintf(batch_html_file, "\n");
-						fprintf(batch_html_file, "output = output + '<ul><li> '+tag1+cestax+'>Dnešné modlitby ('+den+'. '+mesiac+'. 20'+rok+')'+tag2+'<br></li>';\n");
+						fprintf(batch_html_file, "output = output + '<ul><li> '+tag1+cestax+'>%s ('+den+'. '+mesiac+'. 20'+rok+')'+tag2+'<br></li>';\n", (char *)html_text_Dnesne_modlitby[_global_jazyk]);
 						fprintf(batch_html_file, "\n");
-						fprintf(batch_html_file, "output = output + '<li>'+tag1+cesta_mesiac+'>Preh¾ad mesiaca ('+mesiac+'/20'+rok+')'+tag2+'</li></ul>';\n");
+						fprintf(batch_html_file, "output = output + '<li>'+tag1+cesta_mesiac+'>%s ('+mesiac+'/20'+rok+')'+tag2+'</li></ul>';\n", (char *)html_text_Prehlad_mesiaca[_global_jazyk]);
 						fprintf(batch_html_file, "\n");
 						fprintf(batch_html_file, "document.write(output);\n");
 						fprintf(batch_html_file, "</script>\n");

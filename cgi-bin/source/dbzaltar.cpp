@@ -161,6 +161,7 @@
 /*   2010-11-16a.D. | oprava pre modlitbu (a benediktus) spomienky PM v sobotu                  */
 /*   2010-11-22a.D. | èeskı breviár nemá monos pre duch. pastierov "pre viacerıch"            */
 /*                    (MODL_SPOL_CAST_DUCH_PAST_VIACERI)                                        */
+/*   2011-01-11a.D. | opravené (pod¾a latinského) 3.1. (najsv. mena jeiš) pre iné ako czop     */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -9746,28 +9747,44 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 3: /* MES_JAN */
-					/* 2008-12-04: pridané pre czop; 2009-03-24: zmenené aj pre ostatné, pretoe je to vo všeobecnom kalendári */
+					/* 2008-12-04: pridané pre czop; 
+					 * 2009-03-24: zmenené aj pre ostatné, pretoe je to vo všeobecnom kalendári 
+					 * 2011-01-11: dominikáni majú mnoho vecí naviac; v latinskom je samostatne len ant. pre ben+magn, 2. èítanie a modlitba
+					 */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
-						/* 2009-04-01: doplnené invitatórium */
-						modlitba = MODL_INVITATORIUM;
-						_vlastna_cast_antifona_inv;
+						if(_global_jazyk == JAZYK_CZ_OP){
+							/* 2009-04-01: doplnené invitatórium; 2011-01-11: len pre dominikánov */
+							modlitba = MODL_INVITATORIUM;
+							_vlastna_cast_antifona_inv;
 
-						modlitba = MODL_RANNE_CHVALY;
-						_set_zalmy_najsv_mena_jezisovho(modlitba);
-						_vlastna_cast_full_okrem_prosieb(modlitba); // 2010-05-10: upravené (pouitı skrátenı alias)
+							modlitba = MODL_RANNE_CHVALY;
+							_set_zalmy_najsv_mena_jezisovho(modlitba);
+							_vlastna_cast_full_okrem_prosieb(modlitba); // 2010-05-10: upravené (pouitı skrátenı alias)
+
+							modlitba = MODL_VESPERY;
+							_set_zalmy_najsv_mena_jezisovho(modlitba);
+							_vlastna_cast_full_okrem_prosieb(modlitba); // 2010-05-10: upravené (pouitı skrátenı alias)
+						}
+						else{
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
+						}
 
 						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_hymnus;
+						if(_global_jazyk == JAZYK_CZ_OP){
+							_vlastna_cast_hymnus;
+						}
 						_vlastna_cast_modlitba;
 						_vlastna_cast_2citanie;
-
-						modlitba = MODL_VESPERY;
-						_set_zalmy_najsv_mena_jezisovho(modlitba);
-						_vlastna_cast_full_okrem_prosieb(modlitba); // 2010-05-10: upravené (pouitı skrátenı alias)
 
 						break;
 					}
