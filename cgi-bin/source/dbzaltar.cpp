@@ -8158,6 +8158,13 @@ void _spolocna_cast_ant3_viac(short int kolko, char *_anchor_head, char *_anchor
 	_set_antifona3(modlitba, _file, _anchor);
 	set_LOG_svsv;
 }
+/* 2010-11-04: pre ofÌcium za zosnul˝ch je potrebnÈ vyberaù ûalm (146, 150 na RCH) spolu s antofÛnou rovnak˝m kritÈriom; 
+ *             to je uvedenÈ priamo v _set_zalmy_za_zosnulych() */
+void _spolocna_cast_ant3_viac_ozz(char *_anchor_head, char *_anchor, char *_file){
+	sprintf(_anchor, "%s%c%s%d", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA3, (_global_den.tyzden MOD 2 == 0)? 1: 2);
+	_set_antifona3(modlitba, _file, _anchor);
+	set_LOG_svsv;
+}
 /* 2005-08-05: posv‰tnÈ ËÌtania, 1. ËÌtanie 
 // 2007-09-28: zapozn·mkovanÈ, lebo sa nepouûÌva
 void _spolocna_cast_1cit_viac(short int kolko, char *_anchor_head, char *_anchor, char *_file){
@@ -9235,7 +9242,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		_spolocna_cast_full(modlitba);
 		if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II))
 			_spolocna_cast_benediktus_ve;
-		_spolocna_cast_ant3_viac(2, _anchor_head, _anchor, _file);
+		_spolocna_cast_ant3_viac_ozz(_anchor_head, _anchor, _file); // 2010-11-04: opravenÈ
 
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
