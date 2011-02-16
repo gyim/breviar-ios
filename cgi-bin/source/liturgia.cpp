@@ -591,22 +591,22 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 		}
 
 		/* 2011-01-26: pridané odovzdanie parametrov pre options1 atï. */
-		if(_global_opt1 != 36){
+		if(_global_opt1 != CFG_OPTION1_DEFAULT){
 			sprintf(pom2, HTML_AMPERSAND"%s=%d", STR_MODL_OPT1, _global_opt1);
 			strcat(_global_link, pom2);
 			Log("\tPrilepil som aj opt1: `%s' (2011-01-26)\n", pom2);
 		}
-		if(_global_opt2 != 36){
+		if(_global_opt2 != CFG_OPTION2_DEFAULT){
 			sprintf(pom2, HTML_AMPERSAND"%s=%d", STR_MODL_OPT2, _global_opt2);
 			strcat(_global_link, pom2);
 			Log("\tPrilepil som aj opt2: `%s' (2011-01-26)\n", pom2);
 		}
-		if(_global_opt4 != 36){
+		if(_global_opt4 != CFG_OPTION4_DEFAULT){
 			sprintf(pom2, HTML_AMPERSAND"%s=%d", STR_MODL_OPT4, _global_opt4);
 			strcat(_global_link, pom2);
 			Log("\tPrilepil som aj opt4: `%s' (2011-01-26)\n", pom2);
 		}
-		if(_global_opt5 != 36){
+		if(_global_opt5 != CFG_OPTION5_DEFAULT){
 			sprintf(pom2, HTML_AMPERSAND"%s=%d", STR_MODL_OPT5, _global_opt5);
 			strcat(_global_link, pom2);
 			Log("\tPrilepil som aj opt5: `%s' (2011-01-26)\n", pom2);

@@ -55,15 +55,55 @@ select { background: white; font-family: Cambria, Verdana, Tahoma, Georgia, Sans
 
 input { border: 1px; font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; font-size : 95%; color: #000000; }
 
+/* modlitby */
 input.button, input.reset { 
 	cursor: pointer;
 	margin-left: 0px!important;
-	background: white; 
+	background: #ffcc99; /* #ffcc66; Tan; Peru; BurlyWood; */
 	font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; 
 	font-size : 90%; 
-	text-decoration:none; 
+	font-style: normal;
+	text-decoration: none; 
 	color: #000000; 
-	border: solid 1px #226500; }
+	border: solid 1px #000000; }
+
+/* << >> */
+input.button0, input.reset0 { 
+	cursor: pointer;
+	margin-left: 0px!important;
+	background: DimGray;
+	font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; 
+	font-size : 85%; 
+	font-style: normal;
+	text-decoration: none; 
+	color: White; 
+	border: solid 0px #000000; }
+
+/* dnes */
+input.button1, input.reset1 { 
+	cursor: pointer;
+	margin-left: 0px!important;
+	background: DimGray;
+	font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; 
+	font-size : 85%; 
+	font-style: normal;
+	font-weight: bold;
+	font-variant: none;
+	text-decoration: none; 
+	color: White;
+	border: solid 0px #000000; }
+
+/* menej podstatné buttony */
+input.button2, input.reset2 { 
+	cursor: pointer;
+	margin-left: 0px!important;
+	background: #cccc99;
+	font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; 
+	font-size : 90%; 
+	font-style: italic;
+	text-decoration: none; 
+	color: #000000; 
+	border: solid 1px #000000; }
 
 input.text { border-style: solid; background: white; }
 

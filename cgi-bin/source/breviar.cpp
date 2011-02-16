@@ -4176,9 +4176,15 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 
 	/* teraz typ slavenia */
 	if(_local_den.typslav != SLAV_NEURCENE){
+		/* 2011-01-27: ˙prava (moûnosù zalomenia; Igor Gal·d) */
+#ifdef TYPSLAV_NOVY_RIADOK
+		sprintf(pom, ", <br />");
+#else
+		sprintf(pom, ", <br />");
+#endif
+		strcat(_global_string, pom);
 		/* zmenene <font color> na <span>, 2003-07-02 */
-		sprintf(pom, ", <"HTML_SPAN_RED">%s</span>",
-			nazov_slavenia(_local_den.typslav));
+		sprintf(pom, "<"HTML_SPAN_RED">%s</span>", nazov_slavenia(_local_den.typslav));
 		Log("prid·vam typ sl·venia: %s\n", pom);
 		strcat(_global_string, pom);
 	}
@@ -4466,22 +4472,22 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 			}
 
 			/* 2011-01-26: pridanÈ odovzdanie parametrov pre options1 atÔ. */
-			if(_global_opt1 != 36){
+			if(_global_opt1 != CFG_OPTION1_DEFAULT){
 				sprintf(pom2, HTML_AMPERSAND"%s=%d", STR_MODL_OPT1, _global_opt1);
 				strcat(pom, pom2);
 				Log("\tPrilepil som aj opt1: `%s' (2011-01-26)\n", pom2);
 			}
-			if(_global_opt2 != 36){
+			if(_global_opt2 != CFG_OPTION2_DEFAULT){
 				sprintf(pom2, HTML_AMPERSAND"%s=%d", STR_MODL_OPT2, _global_opt2);
 				strcat(pom, pom2);
 				Log("\tPrilepil som aj opt2: `%s' (2011-01-26)\n", pom2);
 			}
-			if(_global_opt4 != 36){
+			if(_global_opt4 != CFG_OPTION4_DEFAULT){
 				sprintf(pom2, HTML_AMPERSAND"%s=%d", STR_MODL_OPT4, _global_opt4);
 				strcat(pom, pom2);
 				Log("\tPrilepil som aj opt4: `%s' (2011-01-26)\n", pom2);
 			}
-			if(_global_opt5 != 36){
+			if(_global_opt5 != CFG_OPTION5_DEFAULT){
 				sprintf(pom2, HTML_AMPERSAND"%s=%d", STR_MODL_OPT5, _global_opt5);
 				strcat(pom, pom2);
 				Log("\tPrilepil som aj opt5: `%s' (2011-01-26)\n", pom2);
@@ -4958,7 +4964,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 				STR_ROK, _global_den.rok,
 				STR_MODLITBA, STR_MODL_DETAILY,
 				pom);
-			Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
+			Export("<"HTML_FORM_INPUT_SUBMIT2" value=\"");
 			Export("%s", html_button_nazov_modlitby(i));
 			Export("\">\n"); /* zmenene 2003-08-06 */
 			Export("</form>\n");
@@ -5032,22 +5038,22 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 			}
 
 			/* 2011-01-26: pridanÈ odovzdanie parametrov pre options1 atÔ. */
-			if(_global_opt1 != 36){
+			if(_global_opt1 != CFG_OPTION1_DEFAULT){
 				sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT1, _global_opt1);
 				strcat(pom2, pom3);
 				Log("\tPrilepil som aj opt1: `%s' (2011-01-26)\n", pom3);
 			}
-			if(_global_opt2 != 36){
+			if(_global_opt2 != CFG_OPTION2_DEFAULT){
 				sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT2, _global_opt2);
 				strcat(pom2, pom3);
 				Log("\tPrilepil som aj opt2: `%s' (2011-01-26)\n", pom3);
 			}
-			if(_global_opt4 != 36){
+			if(_global_opt4 != CFG_OPTION4_DEFAULT){
 				sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT4, _global_opt4);
 				strcat(pom2, pom3);
 				Log("\tPrilepil som aj opt4: `%s' (2011-01-26)\n", pom3);
 			}
-			if(_global_opt5 != 36){
+			if(_global_opt5 != CFG_OPTION5_DEFAULT){
 				sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT5, _global_opt5);
 				strcat(pom2, pom3);
 				Log("\tPrilepil som aj opt5: `%s' (2011-01-26)\n", pom3);
@@ -5092,7 +5098,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 			if(som_v_tabulke == ANO){
 				Export("<td align=\"right\"><form action=\"%s\" method=\"post\">\n", pom);
 				/* 2003-07-16; << zmenene na &lt;&lt; 2007-03-19: zmenenÈ na HTML_LEFT_ARROW; 2011-01-26: zmenenÈ na HTML_LEFT_ARROW_HUGE */
-				Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_LEFT_ARROW_HUGE" ");
+				Export("<"HTML_FORM_INPUT_SUBMIT0" value=\""HTML_LEFT_ARROW_HUGE" ");
 #ifdef VYPISOVAT_PREDCHADZAJUCI_NASLEDUJUCI_BUTTON
 				Export((char *)html_button_predchadzajuci_[_global_jazyk]);
 				Export(" ");
@@ -5138,7 +5144,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 		if(_global_opt_batch_monthly == NIE){
 			if(som_v_tabulke == ANO){
 				Export("<td align=\"right\"><form action=\"%s\" method=\"post\">\n", pom);
-				Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_LEFT_ARROW" ");
+				Export("<"HTML_FORM_INPUT_SUBMIT0" value=\""HTML_LEFT_ARROW" ");
 #ifdef VYPISOVAT_PREDCHADZAJUCI_NASLEDUJUCI_BUTTON
 				Export((char *)html_button_predchadzajuci_[_global_jazyk]);
 				Export(" ");
@@ -5204,7 +5210,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 		if(som_v_tabulke == ANO){
 			Export("<td align=\"right\"><form action=\"%s\" method=\"post\">\n", pom);
 			/* 2003-07-16; < zmenene na &lt; 2007-03-19: zmenenÈ na HTML_LEFT_ARROW; 2011-01-26: zmenenÈ na HTML_LEFT_ARROW_SINGLE */
-			Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_LEFT_ARROW_SINGLE" ");
+			Export("<"HTML_FORM_INPUT_SUBMIT0" value=\""HTML_LEFT_ARROW_SINGLE" ");
 #ifdef VYPISOVAT_PREDCHADZAJUCI_NASLEDUJUCI_BUTTON
 			Export((char *)html_button_predchadzajuci_[_global_jazyk]);
 			Export(" ");
@@ -5229,7 +5235,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 				STR_QUERY_TYPE, 
 				STR_PRM_DNES, 
 				pom2);
-			Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
+			Export("<"HTML_FORM_INPUT_SUBMIT1" value=\"");
 #ifdef VYPISOVAT_PREDCHADZAJUCI_NASLEDUJUCI_BUTTON
 			Export((char *)html_button_Dnes[_global_jazyk]);
 #else
@@ -5292,7 +5298,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 		if(som_v_tabulke == ANO){
 			Export("<td><form action=\"%s\" method=\"post\">\n", pom);
 			/* 2003-07-16; > zmenene na &gt; 2007-03-19: zmenenÈ na HTML_RIGHT_ARROW; 2011-01-26: zmenenÈ na HTML_RIGHT_ARROW_SINGLE */
-			Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
+			Export("<"HTML_FORM_INPUT_SUBMIT0" value=\"");
 #ifdef VYPISOVAT_PREDCHADZAJUCI_NASLEDUJUCI_BUTTON
 			Export((char *)html_button_nasledujuci_[_global_jazyk]);
 			Export(" ");
@@ -5337,7 +5343,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 		if(_global_opt_batch_monthly == NIE){
 			if(som_v_tabulke == ANO){
 				Export("<td align=\"right\"><form action=\"%s\" method=\"post\">\n", pom);
-				Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
+				Export("<"HTML_FORM_INPUT_SUBMIT0" value=\"");
 #ifdef VYPISOVAT_PREDCHADZAJUCI_NASLEDUJUCI_BUTTON
 				Export((char *)html_button_nasledujuci_[_global_jazyk]);
 				Export(" ");
@@ -5379,7 +5385,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 			if(som_v_tabulke == ANO){
 				Export("<td align=\"right\"><form action=\"%s\" method=\"post\">\n", pom);
 				/* 2003-07-16; >> zmenene na &gt;&gt; 2007-03-19: zmenenÈ na HTML_RIGHT_ARROW; 2011-01-26: zmenenÈ na HTML_RIGHT_ARROW_HUGE */
-				Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
+				Export("<"HTML_FORM_INPUT_SUBMIT0" value=\"");
 #ifdef VYPISOVAT_PREDCHADZAJUCI_NASLEDUJUCI_BUTTON
 				Export((char *)html_button_nasledujuci_[_global_jazyk]);
 				Export(" ");
@@ -5455,22 +5461,22 @@ void _export_rozbor_dna_kalendar(short int typ){
 		}
 
 		/* 2011-01-26: pridanÈ odovzdanie parametrov pre options1 atÔ. */
-		if(_global_opt1 != 36){
+		if(_global_opt1 != CFG_OPTION1_DEFAULT){
 			sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT1, _global_opt1);
 			strcat(pom2, pom3);
 			Log("\tPrilepil som aj opt1: `%s' (2011-01-26)\n", pom3);
 		}
-		if(_global_opt2 != 36){
+		if(_global_opt2 != CFG_OPTION2_DEFAULT){
 			sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT2, _global_opt2);
 			strcat(pom2, pom3);
 			Log("\tPrilepil som aj opt2: `%s' (2011-01-26)\n", pom3);
 		}
-		if(_global_opt4 != 36){
+		if(_global_opt4 != CFG_OPTION4_DEFAULT){
 			sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT4, _global_opt4);
 			strcat(pom2, pom3);
 			Log("\tPrilepil som aj opt4: `%s' (2011-01-26)\n", pom3);
 		}
-		if(_global_opt5 != 36){
+		if(_global_opt5 != CFG_OPTION5_DEFAULT){
 			sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT5, _global_opt5);
 			strcat(pom2, pom3);
 			Log("\tPrilepil som aj opt5: `%s' (2011-01-26)\n", pom3);
@@ -5710,22 +5716,22 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	}
 
 	/* 2011-01-26: pridanÈ odovzdanie parametrov pre options1 atÔ. */
-	if(_global_opt1 != 36){
+	if(_global_opt1 != CFG_OPTION1_DEFAULT){
 		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT1, _global_opt1);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj opt1: `%s' (2011-01-26)\n", pom3);
 	}
-	if(_global_opt2 != 36){
+	if(_global_opt2 != CFG_OPTION2_DEFAULT){
 		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT2, _global_opt2);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj opt2: `%s' (2011-01-26)\n", pom3);
 	}
-	if(_global_opt4 != 36){
+	if(_global_opt4 != CFG_OPTION4_DEFAULT){
 		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT4, _global_opt4);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj opt4: `%s' (2011-01-26)\n", pom3);
 	}
-	if(_global_opt5 != 36){
+	if(_global_opt5 != CFG_OPTION5_DEFAULT){
 		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT5, _global_opt5);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj opt5: `%s' (2011-01-26)\n", pom3);
@@ -5811,7 +5817,30 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	/* option 3: Ëasti modlitby zo spoloËnej Ëasti ... -- toto tu byù nemÙûe, bude potrebnÈ doplniù pre kaûd˝ riadok modlitby */
 
 	Export("</ul>\n");
+
+	/* 2011-01-28: doplnenÈ podæa buttonov na konci formul·ra; v podstate vykonaj˙ ten ist˝ efekt
+	 */
+	Export("\n<center>\n");
+	/* button Nastaviù (GO!) */
+	Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
+	Export((char *)HTML_BUTTON_DNES_APPLY);
+	Export("\">");
+
+	/* button PÙvodnÈ hodnoty (CLEAR!) */
+	Export("&nbsp;&nbsp;&nbsp;\n");
+	Export("<"HTML_FORM_INPUT_RESET2" value=\"");
+	Export((char *)HTML_BUTTON_DNES_DEFAULTS);
+	Export("\">");
+
+	Export("</center>\n\n");
+
 	Export("</td></tr>\n\n");
+
+/* ------------------------------------------- */
+	Export("<tr>\n<td>\n");
+	Export("<!-- pr·zdny riadok -->\n<p>&nbsp;</p>\n");
+	Export("</td>");
+	Export("</tr>\n\n");
 
 /* ------------------------------------------- */
 	Export("<tr>\n<td>\n");
@@ -6000,7 +6029,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 #ifdef formular_PRM_LIT_OBD
 /* ------------------------------------------- */
 	Export("<tr>\n<td>\n");
-	Export("<table align=\"left\">\n<tr><td>\n");
+	Export("<table align=\"left\">\n<tr><td valign=\"top\">\n");
 	/* 2011-01-25; formul·r nahr·dzaj˙ci "PRM_CEZ_ROK" */
 	/* formul·r pre PRM_LIT_OBD */
 	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
@@ -6118,14 +6147,14 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	 * tak tu musi byt <center> kvoli buttonom; 2003-07-09
 	 */
 	Export("\n<center>\n");
-	/* button Vyhladaj (GO!) */
+	/* button Zobraziù (GO!) */
 	Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
 	Export((char *)HTML_BUTTON_DNES_SHOW);
 	Export("\">");
 
-	/* button Vycisti (CLEAR!) */
+	/* button PÙvodnÈ hodnoty (CLEAR!) */
 	Export("&nbsp;&nbsp;&nbsp;\n");
-	Export("<"HTML_FORM_INPUT_RESET" value=\"");
+	Export("<"HTML_FORM_INPUT_RESET2" value=\"");
 	Export((char *)HTML_BUTTON_DNES_DEFAULTS);
 	Export("\">");
 
@@ -6263,7 +6292,7 @@ void _export_rozbor_dna(short int typ){
 
 	/* prvy stlpec: cislo dna */
 	if(som_v_tabulke == ANO)
-		Export("<td align=\"right\">");
+		Export("<td align=\"right\" valign=\"top\">");
 	else
 		Export("\n");
 	Export("%s%s%s%c", pom1, _global_link, pom2, dvojbodka);
@@ -6281,7 +6310,7 @@ void _export_rozbor_dna(short int typ){
 	 */
 	if(typ != EXPORT_DNA_VIAC_DNI_SIMPLE){
 		if(som_v_tabulke == ANO)
-			Export("<td align=\"left\">");
+			Export("<td align=\"left\" valign=\"top\">");
 		Export("%s%s%s%c", pom1, pom3, pom2, ciarka);
 		if(som_v_tabulke == ANO)
 			Export("</td>\n");
@@ -6867,22 +6896,22 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 	}
 
 	/* 2011-01-26: pridanÈ odovzdanie parametrov pre options1 atÔ. */
-	if(_global_opt1 != 36){
+	if(_global_opt1 != CFG_OPTION1_DEFAULT){
 		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT1, _global_opt1);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj opt1: `%s' (2011-01-26)\n", pom3);
 	}
-	if(_global_opt2 != 36){
+	if(_global_opt2 != CFG_OPTION2_DEFAULT){
 		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT2, _global_opt2);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj opt2: `%s' (2011-01-26)\n", pom3);
 	}
-	if(_global_opt4 != 36){
+	if(_global_opt4 != CFG_OPTION4_DEFAULT){
 		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT4, _global_opt4);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj opt4: `%s' (2011-01-26)\n", pom3);
 	}
-	if(_global_opt5 != 36){
+	if(_global_opt5 != CFG_OPTION5_DEFAULT){
 		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT5, _global_opt5);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj opt5: `%s' (2011-01-26)\n", pom3);
@@ -7024,7 +7053,7 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 
 	/* button Vycisti (CLEAR!) */
 	Export("&nbsp;&nbsp;&nbsp;\n");
-	Export("<"HTML_FORM_INPUT_RESET" value=\"");
+	Export("<"HTML_FORM_INPUT_RESET2" value=\"");
 	Export((char *)HTML_BUTTON_DET_DEFAULTS);
 	Export("\">");
 
@@ -7825,57 +7854,30 @@ short int atocss(char *css){
 	/* 2007-06-01: nasledovn· pas·û kontroluje, Ëi niektorÈ z options nie s˙ GLOBAL_OPTION_NULL */\
 	/*             a z·roveÚ prÌpadne nastavÌ na default podæa jazyka */\
 	/* 2011-01-26: doplnenÈ opt1 aû opt5 force (okrem opt3); default sa nastavuje podæa "ne-force" verziÌ */\
-	if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU)){\
-		if(_global_opt1 == GLOBAL_OPTION_NULL){\
-			_global_opt1 = cfg_option1_default;\
-			Log("SK: KeÔûe bolo _global_opt1 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option1_default);\
-		}\
-		if(_global_opt2 == GLOBAL_OPTION_NULL){\
-			_global_opt2 = cfg_option2_default;\
-			Log("SK: KeÔûe bolo _global_opt2 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option2_default);\
-		}\
-		if(_global_opt4 == GLOBAL_OPTION_NULL){\
-			_global_opt4 = cfg_option4_default;\
-			Log("SK: KeÔûe bolo _global_opt4 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option4_default);\
-		}\
-		if(_global_opt5 == GLOBAL_OPTION_NULL){\
-			_global_opt5 = cfg_option5_default;\
-			Log("SK: KeÔûe bolo _global_opt5 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option5_default);\
-		}\
-		if(_global_opt6 == GLOBAL_OPTION_NULL){\
-			_global_opt6 = cfg_option6_default;\
-			Log("SK: KeÔûe bolo _global_opt6 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option6_default);\
-		}\
-		if(_global_opt7 == GLOBAL_OPTION_NULL){\
-			_global_opt7 = cfg_option7_default;\
-			Log("SK: KeÔûe bolo _global_opt7 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option7_default);\
-		}\
+	/* 2011-01-27: CFG_OPTION1_DEFAULT..CFG_OPTION5_DEFAULT doplnenÈ v myconf.h */\
+	if(_global_opt1 == GLOBAL_OPTION_NULL){\
+		_global_opt1 = cfg_option1_default;\
+		Log("SK: KeÔûe bolo _global_opt1 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", CFG_OPTION1_DEFAULT);\
 	}\
-	else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){\
-		if(_global_opt1 == GLOBAL_OPTION_NULL){\
-			_global_opt1 = cfg_option1_cz;\
-			Log("CZ: KeÔûe bolo _global_opt1 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option1_cz);\
-		}\
-		if(_global_opt2 == GLOBAL_OPTION_NULL){\
-			_global_opt2 = cfg_option2_cz;\
-			Log("CZ: KeÔûe bolo _global_opt2 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option2_cz);\
-		}\
-		if(_global_opt4 == GLOBAL_OPTION_NULL){\
-			_global_opt4 = cfg_option4_cz;\
-			Log("CZ: KeÔûe bolo _global_opt4 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option4_cz);\
-		}\
-		if(_global_opt5 == GLOBAL_OPTION_NULL){\
-			_global_opt5 = cfg_option5_cz;\
-			Log("CZ: KeÔûe bolo _global_opt5 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option5_cz);\
-		}\
-		if(_global_opt6 == GLOBAL_OPTION_NULL){\
-			_global_opt6 = cfg_option6_cz;\
-			Log("CZ: KeÔûe bolo _global_opt6 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option6_cz);\
-		}\
-		if(_global_opt7 == GLOBAL_OPTION_NULL){\
-			_global_opt7 = cfg_option7_cz;\
-			Log("CZ: KeÔûe bolo _global_opt7 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option7_cz);\
-		}\
+	if(_global_opt2 == GLOBAL_OPTION_NULL){\
+		_global_opt2 = cfg_option2_default;\
+		Log("SK: KeÔûe bolo _global_opt2 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", CFG_OPTION2_DEFAULT);\
+	}\
+	if(_global_opt4 == GLOBAL_OPTION_NULL){\
+		_global_opt4 = cfg_option4_default;\
+		Log("SK: KeÔûe bolo _global_opt4 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", CFG_OPTION4_DEFAULT);\
+	}\
+	if(_global_opt5 == GLOBAL_OPTION_NULL){\
+		_global_opt5 = cfg_option5_default;\
+		Log("SK: KeÔûe bolo _global_opt5 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", CFG_OPTION5_DEFAULT);\
+	}\
+	if(_global_opt6 == GLOBAL_OPTION_NULL){\
+		_global_opt6 = cfg_option6_default;\
+		Log("SK: KeÔûe bolo _global_opt6 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", CFG_OPTION6_DEFAULT);\
+	}\
+	if(_global_opt7 == GLOBAL_OPTION_NULL){\
+		_global_opt7 = cfg_option7_default;\
+		Log("SK: KeÔûe bolo _global_opt7 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", CFG_OPTION7_DEFAULT);\
 	}\
 	if(_global_optf1 == GLOBAL_OPTION_NULL){\
 		_global_optf1 = _global_opt1;\
@@ -7983,22 +7985,22 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 	}
 
 	/* 2011-01-26: pridanÈ odovzdanie parametrov pre options1 atÔ. */
-	if(_global_opt1 != 36){
+	if(_global_opt1 != CFG_OPTION1_DEFAULT){
 		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT1, _global_opt1);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj opt1: `%s' (2011-01-26)\n", pom3);
 	}
-	if(_global_opt2 != 36){
+	if(_global_opt2 != CFG_OPTION2_DEFAULT){
 		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT2, _global_opt2);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj opt2: `%s' (2011-01-26)\n", pom3);
 	}
-	if(_global_opt4 != 36){
+	if(_global_opt4 != CFG_OPTION4_DEFAULT){
 		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT4, _global_opt4);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj opt4: `%s' (2011-01-26)\n", pom3);
 	}
-	if(_global_opt5 != 36){
+	if(_global_opt5 != CFG_OPTION5_DEFAULT){
 		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT5, _global_opt5);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj opt5: `%s' (2011-01-26)\n", pom3);
@@ -8135,7 +8137,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 			STR_ROK, r - 1,
 			pom2);
 		/* 2003-07-16; << zmenene na &lt;&lt; 2007-03-19: zmenenÈ na HTML_LEFT_ARROW */
-		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_LEFT_ARROW" %d (", r - 1);
+		Export("<"HTML_FORM_INPUT_SUBMIT0" value=\""HTML_LEFT_ARROW" %d (", r - 1);
 		Export((char *)html_button_predchadzajuci_[_global_jazyk]);
 		Export(" ");
 		Export((char *)html_text_rok[_global_jazyk]);
@@ -8151,7 +8153,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 			STR_ROK, r + 1,
 			pom2);
 		/* 2003-07-16; >> zmenene na &gt;&gt; 2007-03-19: zmenenÈ na HTML_RIGHT_ARROW */
-		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"(");
+		Export("<"HTML_FORM_INPUT_SUBMIT0" value=\"(");
 		Export((char *)html_button_nasledujuci_[_global_jazyk]);
 		Export(" ");
 		Export((char *)html_text_rok[_global_jazyk]);
@@ -8248,7 +8250,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				if(som_v_tabulke == ANO){
 					Export("<td align=\"right\"><form action=\"%s\" method=\"post\">\n", pom);
 					/* 2007-03-19: << zmenenÈ na HTML_LEFT_ARROW */
-					Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_LEFT_ARROW" %s %d\">\n", nazov_Mesiaca(pm - 1), pr);
+					Export("<"HTML_FORM_INPUT_SUBMIT0" value=\""HTML_LEFT_ARROW" %s %d\">\n", nazov_Mesiaca(pm - 1), pr);
 					Export("</form></td>\n");
 				}			
 				else{
@@ -8290,7 +8292,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				if(som_v_tabulke == ANO){
 					Export("<td align=\"right\"><form action=\"%s\" method=\"post\">\n", pom);
 					/* 2007-03-19: >> zmenenÈ na HTML_RIGHT_ARROW */
-					Export("<"HTML_FORM_INPUT_SUBMIT" value=\"%s %d "HTML_RIGHT_ARROW"\">\n", nazov_Mesiaca(pm - 1), pr);
+					Export("<"HTML_FORM_INPUT_SUBMIT0" value=\"%s %d "HTML_RIGHT_ARROW"\">\n", nazov_Mesiaca(pm - 1), pr);
 					Export("</form></td>\n");
 				}
 				else{
@@ -8327,7 +8329,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 						Export("<tr>\n");
 						// ...sem
 						Export("<td align=\"right\"><form action=\"%s\" method=\"post\">\n", pom);
-						Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_LEFT_ARROW" %s %d\">\n", nazov_Mesiaca(pm - 1), pr);
+						Export("<"HTML_FORM_INPUT_SUBMIT0" value=\""HTML_LEFT_ARROW" %s %d\">\n", nazov_Mesiaca(pm - 1), pr);
 						Export("</form></td>\n");
 					}
 					else{
@@ -8357,7 +8359,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				if(_global_opt_batch_monthly == NIE){
 					if(som_v_tabulke == ANO){
 						Export("<td align=\"left\"><form action=\"%s\" method=\"post\">\n", pom);
-						Export("<"HTML_FORM_INPUT_SUBMIT" value=\"%s %d "HTML_RIGHT_ARROW"\">\n", nazov_Mesiaca(pm - 1), pr);
+						Export("<"HTML_FORM_INPUT_SUBMIT0" value=\"%s %d "HTML_RIGHT_ARROW"\">\n", nazov_Mesiaca(pm - 1), pr);
 						Export("</form></td>\n");
 					}
 					else{
@@ -8944,22 +8946,22 @@ void _main_analyza_roku(char *rok){
 	}
 
 	/* 2011-01-26: pridanÈ odovzdanie parametrov pre options1 atÔ. */
-	if(_global_opt1 != 36){
+	if(_global_opt1 != CFG_OPTION1_DEFAULT){
 		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT1, _global_opt1);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj opt1: `%s' (2011-01-26)\n", pom3);
 	}
-	if(_global_opt2 != 36){
+	if(_global_opt2 != CFG_OPTION2_DEFAULT){
 		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT2, _global_opt2);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj opt2: `%s' (2011-01-26)\n", pom3);
 	}
-	if(_global_opt4 != 36){
+	if(_global_opt4 != CFG_OPTION4_DEFAULT){
 		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT4, _global_opt4);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj opt4: `%s' (2011-01-26)\n", pom3);
 	}
-	if(_global_opt5 != 36){
+	if(_global_opt5 != CFG_OPTION5_DEFAULT){
 		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT5, _global_opt5);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj opt5: `%s' (2011-01-26)\n", pom3);
@@ -9136,7 +9138,7 @@ void _main_analyza_roku(char *rok){
 			STR_ANALYZA_ROKU, year - 1,
 			pom2);
 		/* 2003-07-16; << zmenene na &lt;&lt; 2007-03-19: zmenenÈ na HTML_LEFT_ARROW */
-		Export("<"HTML_FORM_INPUT_SUBMIT" value=\""HTML_LEFT_ARROW" %d (", year - 1);
+		Export("<"HTML_FORM_INPUT_SUBMIT0" value=\""HTML_LEFT_ARROW" %d (", year - 1);
 		Export((char *)html_button_predchadzajuci_[_global_jazyk]);
 		Export(" ");
 		Export((char *)html_text_rok[_global_jazyk]);
@@ -9150,7 +9152,7 @@ void _main_analyza_roku(char *rok){
 			STR_ANALYZA_ROKU, year + 1,
 			pom2);
 		/* 2003-07-16; >> zmenene na &gt;&gt; 2007-03-19: zmenenÈ na HTML_RIGHT_ARROW */
-		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"(");
+		Export("<"HTML_FORM_INPUT_SUBMIT0" value=\"(");
 		Export((char *)html_button_nasledujuci_[_global_jazyk]);
 		Export(" ");
 		Export((char *)html_text_rok[_global_jazyk]);

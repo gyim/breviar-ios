@@ -855,15 +855,14 @@ const char *html_button_nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV 
 	, {"druhé vešpery", "druhé nešpory", "2nd Vesperae", "II vesper&#230;", "", "Druhé veèerní chvály", "II. esti dicséret" }
 // táto sa pre HTML buttony nepouíva
 	, {"kompletórium po druhıch vešperách", "kompletáø po druhıch nešporech", "2nd Completary", "II completorio", "", "Kompletáø po druhıch veèerních chválách", "II. esti dicséret után" }
-, {"Detaily...", "Podrobnìji...", "Details...", "Optiónes...", "", "Podrobnìji...", "Részletek..."}
+, {"Vo¾ba detailov...", "Podrobnìji...", "Details...", "Optiónes...", "", "Podrobnìji...", "Részletek..."}
 };
 
 #define		html_button_nazov_modlitby(a)	html_button_nazov_modlitby_jazyk[a][_global_jazyk]
 
 /* special button: Details... */
-const char *html_button_detaily[POCET_JAZYKOV + 1] = {"Detaily...", "Podrobnìji...", "Details...", "Optiónes...", "", "Podrobnìji...", "Részletek..."};
 #ifndef HTML_BUTTON_DETAILY
-#define HTML_BUTTON_DETAILY	html_button_detaily[_global_jazyk]
+#define HTML_BUTTON_DETAILY	html_button_nazov_modlitby_jazyk[MODL_DETAILY][_global_jazyk]
 #endif
 
 /* special button: Show prayer */
@@ -879,15 +878,21 @@ const char *html_button_det_defaults[POCET_JAZYKOV + 1] = {"Pôvodné hodnoty", "P
 #endif
 
 /* special button (today): Show */
-const char *html_button_dnes_show[POCET_JAZYKOV + 1] = {"Zobraz", "Uka", "Show", "___", "", "Uka", "Mutasd"};
+const char *html_button_dnes_show[POCET_JAZYKOV + 1] = {"Zobrazi", "Uka", "Show", "___", "", "Uka", "Mutasd"};
 #ifndef HTML_BUTTON_DNES_SHOW
 #define HTML_BUTTON_DNES_SHOW	html_button_dnes_show[_global_jazyk]
 #endif
 
 /* special button (today): Defaults (clear form) */
-const char *html_button_dnes_defaults[POCET_JAZYKOV + 1] = {"Vyèisti", "Vyèisti", "Clear", "???", "", "Vyèisti", "Töröl"};
+// const char *html_button_dnes_defaults[POCET_JAZYKOV + 1] = {"Vyèisti", "Vyèisti", "Clear", "???", "", "Vyèisti", "Töröl"};
 #ifndef HTML_BUTTON_DNES_DEFAULTS
-#define HTML_BUTTON_DNES_DEFAULTS	html_button_dnes_defaults[_global_jazyk]
+#define HTML_BUTTON_DNES_DEFAULTS	HTML_BUTTON_DET_DEFAULTS
+#endif
+
+/* special button (today): Apply setting options */
+const char *html_button_dnes_apply[POCET_JAZYKOV + 1] = {"Potvrdi", "Potvrdit", "Apply", "___", "", "Potvrdit", "hu_apply"};
+#ifndef HTML_BUTTON_DNES_APPLY
+#define HTML_BUTTON_DNES_APPLY	html_button_dnes_apply[_global_jazyk]
 #endif
 
 /* special button (today): Morning prayer with canticum of Zekariah */
@@ -947,8 +952,8 @@ const char *html_text_Vysvetlivky[POCET_JAZYKOV + 1] = {"Vysvetlivky", "Vysvìtli
 
 const char *html_text_dalsie_moznosti[POCET_JAZYKOV + 1] = {"Vıber ïalších moností", "Další monosti vıbìru ", "Choose from above (buttons) or from the following options: ", "", "", "Další monosti vıbìru", "Válassz egy imaórát vagy az alábbi lehetõségek közül"};
 
-const char *html_text_dalsie_moznosti_1[POCET_JAZYKOV + 1] = {"Nasledovné vo¾by ovplyvnia všetky modlitby (potrebné stlaèi tlaèidlo Zobraz):", "Následujucící monosti vıbìru ovlivní všechno (nutno stlaèit Uka):", "Choose from above (buttons) or from the following options: ", "", "", "Následujucící monosti vıbìru ovlivní všechno (nutno stlaèit Uka):", "Válassz egy imaórát vagy az alábbi lehetõségek közül"};
-const char *html_text_dalsie_moznosti_2[POCET_JAZYKOV + 1] = {"Zvo¾te ïalšiu funkènos stránok (vıberom gulièky; potrebné stlaèi tlaèidlo Zobraz):", "Vyberte další funkènosti (oznaète kulièkou; nutno stlaèit Uka):", "Choose from above (buttons) or from the following options: ", "", "", "Vyberte další funkènosti (oznaète kulièkou; nutno stlaèit Uka):", "Válassz egy imaórát vagy az alábbi lehetõségek közül"};
+const char *html_text_dalsie_moznosti_1[POCET_JAZYKOV + 1] = {"Vo¾by vybranıch detailov (ovplyvnia všetky zvolené modlitby):", "Volby pro vybrané detaily (ovplyvní všechny modlitby):", "Choose from above (buttons) or from the following options: ", "", "", "Volby pro vybrané detaily (ovplyvní všechny modlitby):", "Válassz egy imaórát vagy az alábbi lehetõségek közül"};
+const char *html_text_dalsie_moznosti_2[POCET_JAZYKOV + 1] = {"Vo¾by pre ïalšie zobrazenia:", "Volby pro další zobrazení:", "Choose from above (buttons) or from the following options: ", "", "", "Volby pro další zobrazení:", "Válassz egy imaórát vagy az alábbi lehetõségek közül"};
 
 const char *html_text_prik_sviatky_atd[POCET_JAZYKOV + 1] = {"prikázané sviatky a slávnosti Pána v roku ", "zasvìcené svátky a slavnosti Pánì v roce ", "obligatory celebrations in year ", "", "", "zasvìcené svátky a slavnosti Pánì v roce", "kötelezõ ünnepek"};
 const char *html_text_lit_kalendar[POCET_JAZYKOV + 1] = {"liturgickı kalendár pre", "liturgickı kalendáø pro", "liturgical calendar for", "", "", "liturgickı kalendáø pro", "liturgikus naptár"};
@@ -1266,21 +1271,21 @@ const char *html_text_spol_casti_vziat_zo_explain[POCET_JAZYKOV + 1] =
 };
 
 const char *html_text_zalmy_pre_mcd[POCET_JAZYKOV + 1] = 
-{"almy pre modlitbu cez deò bra z ", 
- "almy pro modlitbu pøes den brát ze ", 
- "take psalmody for the prayer during the day from ", 
+{"almy pre <i>modlitbu cez deò</i> bra z ", 
+ "almy pro <i>modlitbu bìhem dne</i> brát ze ", 
+ "take psalmody for the <i>prayer during the day</i> from ", 
  "",
  "",
- "almy pro modlitbu bìhem dne brát ze ",
+ "almy pro <i>modlitbu bìhem dne</i> brát ze ",
  "hu_"
 };
 const char *html_text_zalmy_pre_mcd_explain[POCET_JAZYKOV + 1] = 
-{"Doplnková psalmódia zahàòa 3 série tzv. graduálnych almov ( 120-129), ktoré mono bra namiesto almov zo altára.", 
- "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120-129), které je mono brát místo almù ze altáøe.", 
+{"Doplnková psalmódia zahàòa 3 série tzv. graduálnych almov ( 120 – 129), ktoré mono bra namiesto almov zo altára.", 
+ "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120 – 129), které je mono brát místo almù ze altáøe.", 
  "xxx", 
  "",
  "", 
- "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120-129), které je mono brát místo almù ze altáøe.",
+ "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120 – 129), které je mono brát místo almù ze altáøe.",
  "hu_"
 };
 

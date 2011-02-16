@@ -62,7 +62,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2011-01-27"
+#define BUILD_DATE "2011-01-28"
 
 #define BYTES 250
 #define SMALL 80
@@ -503,12 +503,19 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 
 #define ALERT	Export("<p>Ak probl&eacute;my pretrv&aacute;vaj&uacute;, kontaktujte pros&iacute;m <a href=\"mailto:%s\">autora str&aacute;nky</a>.</p>\n", cfg_MAIL_ADDRESS_default)
 
-/* HTML stringy - casti stringov sustredene na tomto mieste; pridane 2003-07-02 */
+/* HTML stringy - casti stringov sustredene na tomto mieste; pridane 2003-07-02; rozšírené 2011-01-27 */
 #define HTML_FORM_INPUT_SUBMIT   "input type=\"submit\" class=\"button\""
 #define HTML_FORM_INPUT_RESET    "input type=\"reset\" class=\"reset\""
 #define HTML_FORM_INPUT_RADIO    "input type=\"radio\" class=\"radio\""
 #define HTML_FORM_INPUT_TEXT     "input type=\"text\" class=\"text\""
 #define HTML_FORM_INPUT_CHECKBOX "input type=\"checkbox\" class=\"checkbox\""
+/* 2011-01-27: pridané buttony (0. level: pre predošlý/nasledovný; 1. level: button "dnes"; 2. level: použité pre menej dôležité buttony) */
+#define HTML_FORM_INPUT_SUBMIT0  "input type=\"submit\" class=\"button0\""
+#define HTML_FORM_INPUT_RESET0   "input type=\"reset\" class=\"reset0\""
+#define HTML_FORM_INPUT_SUBMIT1  "input type=\"submit\" class=\"button1\""
+#define HTML_FORM_INPUT_RESET1   "input type=\"reset\" class=\"reset1\""
+#define HTML_FORM_INPUT_SUBMIT2  "input type=\"submit\" class=\"button2\""
+#define HTML_FORM_INPUT_RESET2   "input type=\"reset\" class=\"reset2\""
 
 #define HTML_LINK_RED    "a class=\"red\""
 #define HTML_LINK_NORMAL "a"
@@ -542,24 +549,6 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 /* 2011-01-26: pridané "trojité" šípky v¾avo/vpravo */
 #define HTML_LEFT_ARROW_HUGE	"&lsaquo;&laquo;"
 #define HTML_RIGHT_ARROW_HUGE	"&raquo;&rsaquo;"
-
-/* definície HTML prvkov upravené a presunuté do hodin.h, 2006-08-01;
- * tu ponechané len z historických dôvodov zakomentované
- * -- pridane 2003-07-15 
- * #define HTML_BUTTON_RANNE_CHVALY "Ranné chvály"
- * #define HTML_BUTTON_PREDPOLUDNIM "9h"
- * #define HTML_BUTTON_NAPOLUDNIE   "12h"
- * #define HTML_BUTTON_POPOLUDNI    "15h"
- * #define HTML_BUTTON_VESPERY      "Vešpery"
- * -- dalsie pridane 2003-08-06 
- * #define HTML_BUTTON_POSV_CITANIE "Posv.èít."
- * #define HTML_BUTTON_DETAILY      "Detaily..."
- * #define HTML_BUTTON_DET_SHOW     "Zobraz modlitbu"
- * #define HTML_BUTTON_DET_DEFAULTS "Pôvodné hodnoty"
- * -- pridané 2003-08-07 
- * #define HTML_BUTTON_DNES_SHOW     "Zobraz"
- * #define HTML_BUTTON_DNES_DEFAULTS "Vyèisti"
- */
 
 /* 2007-03-19: výpis "Dnes je..." sa zobrazí len pri tomto nastavení, ak je 1 */
 #define HTML_ZOBRAZIT_DNES_JE	0
