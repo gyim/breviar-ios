@@ -5446,9 +5446,12 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<option%s>%s\n", 
 			(_global_kalendar == KALENDAR_SK_SVD)? html_option_selected: STR_EMPTY,
 			nazov_slavenia_lokal_kalendar[KALENDAR_SK_SVD] /* nazov_kalendara[KALENDAR_SK_SVD] */);
+		// 2010-12-17: odvetvené, aby sa to nedostalo na web (tam OS_linux)
+#ifdef OS_Windows_Ruby
 		Export("<option%s>%s\n", 
 			(_global_kalendar == KALENDAR_SK_SJ)? html_option_selected: STR_EMPTY,
 			nazov_slavenia_lokal_kalendar[KALENDAR_SK_SJ]);
+#endif
 
 		Export("</select>\n");
 		Export("<br><span class=\"explain\">");

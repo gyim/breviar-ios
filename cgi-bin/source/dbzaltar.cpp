@@ -12947,6 +12947,33 @@ label_25_MAR:
 						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}
 					break;
+				case 11: /* MES_MAY */
+					if(_global_jazyk == JAZYK_SK){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara - Slovensko */
+						mystrcpy(_global_svaty1.meno, text_MAJ_11[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENICA, MODL_SPOL_CAST_PANNA);
+						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
+					}
+					break;
 				case 12: /* MES_MAY */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */

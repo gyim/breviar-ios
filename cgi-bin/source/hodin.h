@@ -2135,6 +2135,15 @@ const char *text_MAJ_10[] =
  "Sv. Antonína Pierozziho neboli Florentského, biskupa",
  "hu_",
  };
+const char *text_MAJ_11[] = 
+{"Bl. Sáry Salkaháziovej, panny a muèenice",
+ "",
+ "",
+ "(non est in Latina)",
+ "",
+ "",
+ "(nincs Magyarországon)",
+ };
 const char *text_MAJ_12_1[] = 
 {"Sv. Nerea a Achila, muèeníkov",
  "Sv. Nerea a Achillea, muèedníkù",

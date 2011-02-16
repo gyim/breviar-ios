@@ -210,6 +210,7 @@ extern const char *text_MAJ_03[];
 extern const char *text_MAJ_06[];
 extern const char *text_MAJ_08[];
 extern const char *text_MAJ_10[];
+extern const char *text_MAJ_11[];
 extern const char *text_MAJ_12_1[];
 extern const char *text_MAJ_12_2[];
 extern const char *text_MAJ_12_3[];
