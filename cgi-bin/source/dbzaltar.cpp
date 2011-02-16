@@ -9246,8 +9246,10 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		 */
 		_spolocna_cast_1cit_zvazok(modlitba, _anchor_pom, _anchor_zvazok, _anchor_head, _file, brat_1citanie);
 		_spolocna_cast_kresponz_zvazok(modlitba, _anchor_pom, _anchor_zvazok, _anchor_head, _file);
-		/* 2009-09-18/2005-08-27: doplnené druhé èítanie */
-		_spolocna_cast_2cit_rozne(modlitba, _anchor_pom, _anchor, _file);
+		/* 2009-09-18/2005-08-27: doplnené druhé èítanie;
+		 * 2011-02-09: opravené _spolocna_cast_2cit_rozne -> _spolocna_cast_2citanie
+		 */
+		_spolocna_cast_2citanie; // _spolocna_cast_2cit_rozne(modlitba, _anchor_pom, _anchor, _file);
 
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
@@ -13595,7 +13597,9 @@ label_25_MAR:
 							// _vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
 							modlitba = MODL_POSV_CITANIE;
-							//_vlastna_cast_2citanie;
+							if(_global_jazyk == JAZYK_SK){
+								_vlastna_cast_2citanie;
+							}
 							_vlastna_cast_modlitba;
 							modlitba = MODL_VESPERY;
 							// _vlastna_cast_magnifikat;
@@ -14034,6 +14038,9 @@ label_25_MAR:
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_modlitba;
+							if(_global_jazyk == JAZYK_SK){
+								_vlastna_cast_2citanie; // 2011-02-09: doplnený pracovný preklad
+							}
 
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_modlitba;
@@ -14056,11 +14063,16 @@ label_25_MAR:
 						/* definovanie parametrov pre modlitbu */
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
+
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_modlitba;
+
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
-						// _vlastna_cast_2citanie;
+						if(_global_jazyk == JAZYK_SK){
+							_vlastna_cast_2citanie; // 2011-02-09: doplnený pracovný preklad
+						}
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
 						break;
@@ -15817,7 +15829,9 @@ label_25_MAR:
 
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
-						/* _vlastna_cast_2citanie; */
+						if(_global_jazyk == JAZYK_SK){
+							_vlastna_cast_2citanie; // 2011-02-09: doplnený pracovný preklad
+						}
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -16166,15 +16180,15 @@ label_25_MAR:
 						/* definovanie parametrov pre modlitbu */
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
+
 						modlitba = MODL_RANNE_CHVALY;
 						// _vlastna_cast_benediktus;
 						_vlastna_cast_modlitba;
+
 						modlitba = MODL_POSV_CITANIE;
-						if(_global_jazyk == JAZYK_CZ){
-							/* 2010-07-19: pre èeský mi dodali ètení */
-							_vlastna_cast_2citanie;
-						}
+						_vlastna_cast_2citanie;
 						_vlastna_cast_modlitba;
+
 						modlitba = MODL_VESPERY;
 						// _vlastna_cast_magnifikat;
 						_vlastna_cast_modlitba;
