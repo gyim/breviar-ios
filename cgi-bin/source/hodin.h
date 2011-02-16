@@ -2950,8 +2950,17 @@ const char *text_JUL_31[] =
  "Sv. Ignáce z Loyoly, knìze",
  "Loyolai Szent Ignác áldozópap",
  };
+const char *text_CSSR_TITUL_KONGREGACIE[] = 
+{"Najsvätejšieho Vykupite¾a, titul Kongregácie",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_AUG_01[] = 
-{"Sv. Alfonza Márie de Ligouri, biskupa a uèite¾a Cirkvi",
+{"Sv. Alfonza Márie de Liguori, biskupa a uèite¾a Cirkvi",
  "Sv. Alfonsa z Liguori, biskupa a uèitele církve",
  "",
  "",
@@ -2960,7 +2969,7 @@ const char *text_AUG_01[] =
  "Liguori Szent Alfonz Mária püspök és egyháztanító",
  };
 const char *text_AUG_01_1[] = 
-{"Sv. Alfonza Márie de Ligouri, biskupa a uèite¾a Cirkvi, zakladate¾a kongregácie",
+{"Sv. Alfonza Márie de Liguori, biskupa a uèite¾a Cirkvi, zakladate¾a kongregácie",
  "",
  "",
  "",

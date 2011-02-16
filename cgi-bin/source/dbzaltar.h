@@ -120,6 +120,8 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 #define ANCHOR_KRST_PANA "KRST"
 #define FILE_KRST_PANA "krst.htm" /* 14/03/2000A.D. -- kotvy v nom su podla ANCHOR_KRST_PANA */
 
+#define ANCHOR_CSSR_TITUL "TITUL"
+
 extern const char *text_JAN_01[];
 extern const char *text_JAN_02[];
 extern const char *text_JAN_03[];
@@ -306,6 +308,7 @@ extern const char *text_JUL_29[];
 extern const char *text_JUL_30[];
 extern const char *text_JUL_30_1[];
 extern const char *text_JUL_31[];
+extern const char *text_CSSR_TITUL_KONGREGACIE[];
 
 extern const char *text_AUG_01[];
 extern const char *text_AUG_01_1[];

@@ -3260,6 +3260,16 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 						_global_den.typslav = SLAV_SLAVNOST;
 						mystrcpy(_global_den.meno, text_KRISTA_KRALA[_global_jazyk], MENO_SVIATKU);
 					}
+					/* 2010-10-13: pridané: pre redemptoristov: 3. nede¾a v júli */ 
+					else if(((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_CSSR)) && (_global_den.mesiac - 1 == MES_JUL) && (_global_den.den > 14) && (_global_den.den <= 21)){
+						/* pre redemptoristov: 3. nede¾a v júli */
+						_global_den.farba = LIT_FARBA_BIELA;
+						_rozbor_dna_LOG("/* pre redemptoristov: 3. nede¾a v júli */\n");
+						_global_den.smer = 3; /* slavnosti pana */
+						_global_den.typslav = SLAV_SLAVNOST;
+						mystrcpy(_global_den.meno, text_CSSR_TITUL_KONGREGACIE[_global_jazyk], MENO_SVIATKU);
+						_global_den.kalendar = KALENDAR_SK_CSSR;
+					}
 					else{
 						_global_den.smer = 6; /* nedele vianocneho obdobia a obdobia "cez rok" */
 					}

@@ -156,6 +156,7 @@
 /*   2010-08-03a.D. | upravené zaltar_kompletorium() a set_hymnus() kvôli dominikánom CZOP      */
 /*                  - nastavené _global_svaty[1,2,3].kalendar v sviatky_svatych()               */
 /*   2010-09-10a.D. | opravy správneho použitia responza pred 1. èítaním v posv. èítaniach      */
+/*   2010-10-13a.D. | doplnené èasti pre liturgický kalendár redemptoristov (cssr)              */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -3320,6 +3321,32 @@ void _set_zalmy_najsv_mena_jezisovho(short int modlitba){
 	Log("_set_zalmy_najsv_mena_jezisovho(%s) -- end\n", nazov_modlitby(modlitba));
 }
 
+/* 2010-10-13: pre redemptoristov -- hlavný titul kongregácie */
+void _set_zalmy_cssr_titul(short int modlitba){
+	Log("_set_zalmy_cssr_titul(%s) -- begin\n", nazov_modlitby(modlitba));
+	if(modlitba == MODL_PRVE_VESPERY){
+		set_zalm(1, modlitba, "z111.htm", "ZALM111");
+		set_zalm(2, modlitba, "z138.htm", "ZALM138");
+		set_zalm(3, modlitba, "kol1.htm", "CHVAL_KOL1");
+	}
+	else if(modlitba == MODL_VESPERY){
+		set_zalm(1, modlitba, "z116.htm", "ZALM116,10-19");
+		set_zalm(2, modlitba, "z130.htm", "ZALM130");
+		set_zalm(3, modlitba, "zjv4_5.htm", "CHVAL_ZJV45");
+	}
+	else if(modlitba == MODL_POSV_CITANIE){
+		/* 2005-08-24: Pridané */
+		set_zalm(1, modlitba, "z8.htm", "ZALM8");
+		set_zalm(2, modlitba, "z145.htm", "ZALM145_I");
+		set_zalm(3, modlitba, "z145.htm", "ZALM145_II");
+	}
+	else if(modlitba == MODL_RANNE_CHVALY){
+		_set_zalmy_1nedele_rch();
+	}
+	Log("_set_zalmy_cssr_titul(%s) -- end\n", nazov_modlitby(modlitba));
+}
+
+
 /* 2009-06-10: doplnený popis */
 #define _vlastne_slavenie_popis(anchor) {\
 	sprintf(_anchor, "%s_%s", anchor, ANCHOR_POPIS);\
@@ -5415,6 +5442,75 @@ label_24_DEC:
 						_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
 						_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
 					}/* najsv. trojice */
+					/* 2010-10-13: pridané: pre redemptoristov: 3. nede¾a v júli */ 
+					else if(((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_CSSR)) && (_global_den.mesiac - 1 == MES_JUL) && (_global_den.den > 14) && (_global_den.den <= 21)){
+						file_name_vlastny_kalendar(_global_kalendar);
+						mystrcpy(_anchor, ANCHOR_CSSR_TITUL, MAX_STR_AF_ANCHOR);
+						mystrcpy(_anchor_vlastne_slavenie, ANCHOR_CSSR_TITUL, MAX_STR_AF_ANCHOR);
+						Log("  pre CSSR: ide o slávnos NAJSVÄTEJŠIEHO VYKUPITE¼A, TITULÁRNY SVIATOK KONGREGÁCIE: _file = `%s', _anchor = %s...\n", _file, _anchor);
+
+						modlitba = MODL_PRVE_VESPERY;
+						_set_zalmy_cssr_titul(modlitba);
+						_vlastne_slavenie_hymnus(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_magnifikat(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_prosby(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
+
+						modlitba = MODL_INVITATORIUM;
+						_vlastne_slavenie_invitat(_anchor_vlastne_slavenie);
+
+						modlitba = MODL_POSV_CITANIE;
+						_set_zalmy_cssr_titul(modlitba);
+						_vlastne_slavenie_hymnus(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_citanie1(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_citanie2(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
+
+						modlitba = MODL_RANNE_CHVALY;
+						_set_zalmy_cssr_titul(modlitba);
+						_vlastne_slavenie_hymnus(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_benediktus(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_prosby(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
+
+						modlitba = MODL_VESPERY;
+						_set_zalmy_cssr_titul(modlitba);
+						_vlastne_slavenie_hymnus(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_magnifikat(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_prosby(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
+
+						modlitba = MODL_PREDPOLUDNIM;
+						_set_zalmy_1nedele_mcd();
+						_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+						modlitba = MODL_NAPOLUDNIE;
+						_set_zalmy_1nedele_mcd();
+						_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+						modlitba = MODL_POPOLUDNI;
+						_set_zalmy_1nedele_mcd();
+						_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
+						_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+
+					}/* pre redemptoristov: 3. nede¾a v júli */
 					else if(tyzden == 34){
 						/* krista krala -- 34. nedela obdobia `cez rok'; 10/03/2000A.D. */
 						mystrcpy(_file, FILE_KRISTA_KRALA, MAX_STR_AF_FILE);
@@ -14227,7 +14323,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty2.meno, text_JUN_30_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU /* MODL_SPOL_CAST_SV_MUZ */);
 						_global_svaty2.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
-						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
+						_global_svaty2.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
 					/* všeobecný kalendár */
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_CSSR)){
@@ -14239,22 +14335,14 @@ label_25_MAR:
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
-							modlitba = MODL_INVITATORIUM;
-							_vlastna_cast_antifona_inv;
-
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_hymnus;
-							_vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_1citanie;
 							_vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_hymnus;
-							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
 
 							break;
@@ -15371,8 +15459,10 @@ label_25_MAR:
 			switch(den){
 				case 1: /* MES_AUG */
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_CSSR)){
-						/* todo */
 						if(poradie_svaty == 1){
+
+							file_name_vlastny_kalendar(_global_kalendar);
+
 							/* definovanie parametrov pre modlitbu */
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
