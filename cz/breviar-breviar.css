@@ -1,6 +1,14 @@
 /* apply to all elements */ { font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; font-size: 100%; }
-.odkaz { color: #ffff33; font-style: italic; }
+.red { color: #ff0000; }
+.blue { color: #0066ff; }
+.redsmall { color: #ff0000; font-size: 80%; }
+.redbold { color: #ff0000; font-weight: bold; }
+.bluebold { color: #0066ff; font-weight: bold; }
+.bold { font-weight: bold; }
+.boldit { font-weight: bold; font-style: italic; }
 .it { font-style: italic; }
+.normal { color: #000000; }
+.odkaz { color: #ffff33; font-style: italic; }
 
 body { 
 	background-color: #663300; 
