@@ -5437,11 +5437,14 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<select name=\"%s\">\n", STR_KALENDAR);
 
 		Export("<option%s>%s\n", 
-			(_global_kalendar == KALENDAR_SK_CSSR)? STR_EMPTY: html_option_selected,
+			((_global_kalendar == KALENDAR_SK_CSSR) || (_global_kalendar == KALENDAR_SK_SVD))? STR_EMPTY: html_option_selected,
 			nazov_slavenia_lokal_kalendar[KALENDAR_VSEOBECNY_SK] /* nazov_kalendara[KALENDAR_VSEOBECNY_SK][_global_jazyk] */); // todo -- pre viaceré jazyky
 		Export("<option%s>%s\n", 
 			(_global_kalendar == KALENDAR_SK_CSSR)? html_option_selected: STR_EMPTY,
 			nazov_slavenia_lokal_kalendar[KALENDAR_SK_CSSR] /* nazov_kalendara[KALENDAR_SK_CSSR] */);
+		Export("<option%s>%s\n", 
+			(_global_kalendar == KALENDAR_SK_SVD)? html_option_selected: STR_EMPTY,
+			nazov_slavenia_lokal_kalendar[KALENDAR_SK_SVD] /* nazov_kalendara[KALENDAR_SK_SVD] */);
 
 		Export("</select>\n");
 		Export("<br><span class=\"explain\">");

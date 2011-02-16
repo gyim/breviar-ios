@@ -345,15 +345,16 @@ const char *nazov_kalendara[POCET_KALENDAROV + 1] =
 ,"CZOP"
 ,"SK CSSR"
 ,"všeobecnı HU"
+,"SK SVD"
 };
 
 /* calendar codes; internal usage for HTTP requests */
 const char *skratka_kalendara[POCET_KALENDAROV + 1] =
-{"??", "la", "sk", "cz", "czop", "cssr", "hu"};
+{"??", "la", "sk", "cz", "czop", "cssr", "hu", "svd"};
 
-/* filenames for special calendars / názov súbora pre kalendáre */
+/* filenames for special calendars / názov súbora pre kalendáre -- "pro" == propriá */
 const char *nazov_htm_kalendar[POCET_KALENDAROV + 1] =
-{"", "", "", "", "", "kal_cssr.htm", ""};
+{"", "", "", "", "", "pro_cssr.htm", "", "pro_svd.htm"};
 
 /* doplnené 2010-10-11 */
 const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1] =
@@ -364,6 +365,7 @@ const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1] =
 ,""
 ,"pre Kongregáciu najsvätejšieho Vykupite¾a — redemptoristov"
 ,""
+,"pre Spoloènos Boieho Slova — verbistov"
 };
 
 /* special "local" or "partial" characteristics of various celebrations - each in one language; no need to translate; special strings will be added */
@@ -1474,6 +1476,15 @@ const char *text_JAN_15[] =
  "Sv. Františka Fernándeze de Capillas, knìze, Petra Sanse, biskupa, a druhù, èínskıch muèedníkù",
  "Remete Szent Pál", // 2010-05-17: pozor, nieèo úplne iné ako pre czop!
  };
+const char *text_JAN_15_1[] = 
+{"Sv. Arnolda Janssena, kòaza a zakladate¾a troch misijnıch reho¾nıch spoloèností",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "",
+ "",
+ };
 const char *text_JAN_17[] = 
 {"Sv. Antona, opáta",
  "Sv. Antonína, opata",
@@ -1590,6 +1601,15 @@ const char *text_JAN_28[] =
  "",
  "Sv. Tomáše Akvinského, knìze a uèitele Církve",
  "Aquinói Szent Tamás áldozópap és egyháztanító",
+ };
+const char *text_JAN_29[] = 
+{"Sv. Jozefa Freinademetza, kòaza",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "",
+ "",
  };
 const char *text_JAN_31[] = 
 {"Sv. Jána Boska, kòaza",

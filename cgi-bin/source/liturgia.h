@@ -753,8 +753,9 @@ extern const char *nazov_slavenia_lokal[];
 #define KALENDAR_CZ_OP                      4
 #define KALENDAR_SK_CSSR                    5
 #define KALENDAR_VSEOBECNY_HU               6
+#define KALENDAR_SK_SVD                     7
 
-#define POCET_KALENDAROV                    6
+#define POCET_KALENDAROV                    7
 
 /* 2010-10-11: doplnené */
 extern const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1];

@@ -132,6 +132,7 @@ extern const char *text_JAN_KRST[];
 extern const char *text_JAN_13[];
 extern const char *text_JAN_14[];
 extern const char *text_JAN_15[];
+extern const char *text_JAN_15_1[];
 extern const char *text_JAN_17[];
 extern const char *text_JAN_18[];
 extern const char *text_JAN_19[];
@@ -145,6 +146,7 @@ extern const char *text_JAN_25[];
 extern const char *text_JAN_26[];
 extern const char *text_JAN_27[];
 extern const char *text_JAN_28[];
+extern const char *text_JAN_29[];
 extern const char *text_JAN_31[];
 
 extern const char *text_FEB_02[];
