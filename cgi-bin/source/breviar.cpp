@@ -166,6 +166,8 @@
 /*   2010-10-06a.D. | sn·Ô opravenÈ to, ûe pre niektorÈ lok·lne (czop)     */
 /*                    sl·vnosti [22.10. alebo 25.10.] ten zobrazen˝ vöedn˝ */
 /*                    deÚ (svaty == 0) bol "prebit˝" sl·vnosùou            */
+/*                  - sn·Ô opravenÈ aj to, ûe keÔ pripadne lok·lna sl·vnosù*/
+/*                    na nedeæu (czop: 8.8.2010), tak funguj˙ obe moûnosti */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -3469,10 +3471,12 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 		/* ... alebo c. 60: "ak na jeden den pripadnu viacere slavenia,
 		 * uprednostni sa to, ktore ma v tabulke liturgickych dni vyssi stupen
 		 * [t.j. .smer]. */
-		/* 2010-07-28: doplnenÈ alternatÌvne porovnanie aj s _global_svaty2.smer (kvÙli dominik·nskej sl·vnosti 8.8.) */
-			(_global_den.smer > _global_svaty1.smer)
-			|| (_global_den.smer > _global_svaty2.smer)
-			|| (_global_den.smer > _global_svaty3.smer)
+		/* 2010-07-28: doplnenÈ alternatÌvne porovnanie aj s _global_svaty2.smer (kvÙli dominik·nskej sl·vnosti 8.8.) 
+		 * 2010-10-06: upravenÈ; nesmie Ìsù o lok·lnu sl·vnosù (smer == 4) lebo nem· prebÌjaù "glob·lnu" v danom kalend·ri [napr. czop pre 22.10.]
+		 */
+			((_global_den.smer > _global_svaty1.smer) && !(_global_svaty1.smer == 4 || _global_svaty1.smer == 8 || _global_svaty1.smer == 11))
+			|| ((_global_den.smer > _global_svaty2.smer) && !(_global_svaty2.smer == 4 || _global_svaty2.smer == 8 || _global_svaty2.smer == 11))
+			|| ((_global_den.smer > _global_svaty3.smer) && !(_global_svaty3.smer == 4 || _global_svaty3.smer == 8 || _global_svaty3.smer == 11))
 		){
 
 			/* ked bola nasledovna pasaz zapoznamkovana,
@@ -3592,8 +3596,15 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 		}
 		else{
 			/* neuprednostnujeme svatych pred dnom */
-			_rozbor_dna_LOG("neuprednostnujeme svatych pred dnom (alternatÌva k SVATY_VEDIE)\n");
-			_global_pocet_svatych = 0;
+			_rozbor_dna_LOG("neuprednostÚujeme sv‰t˝ch pred dÚom (alternatÌva k SVATY_VEDIE)\n");
+			/* 2010-10-06: upravenÈ; v tejto vetve rozhodovania treba rieöiù to, ûe nebola splnen· vyööie uveden· novo-upraven· podmienka o "prebitÌ" nedele napr. lok·lnou sl·vnosùou
+			 */
+			if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
+				_rozbor_dna_LOG("HOCI neuprednostÚujeme sv‰t˝ch pred dÚom (alternatÌva k SVATY_VEDIE), keÔûe je tu lok·lna sl·vnosù, ponech·vame nastavenÈ _global_pocet_svatych == %d\n", _global_pocet_svatych);
+			}
+			else{
+				_global_pocet_svatych = 0;
+			}
 		}
 	}/* (_global_pocet_svatych > 0) */
 
@@ -5748,8 +5759,14 @@ void _export_rozbor_dna(short int typ){
 		/* ... alebo c. 60: "ak na jeden den pripadnu viacere slavenia,
 		 * uprednostni sa to, ktore ma v tabulke liturgickych dni vyssi stupen
 		 * [t.j. .smer]. */
-		/* 2010-07-28: doplnenÈ alternatÌvne porovnanie aj s _global_svaty2.smer (kvÙli dominik·nskej sl·vnosti 8.8.) */
-		if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
+		/* 2010-07-28: doplnenÈ alternatÌvne porovnanie aj s _global_svaty2.smer (kvÙli dominik·nskej sl·vnosti 8.8.)
+		 * 2010-10-06: upravenÈ; nesmie Ìsù o lok·lnu sl·vnosù (smer == 4) lebo nem· prebÌjaù "glob·lnu" v danom kalend·ri [napr. czop pre 22.10.]
+		 *             pÙvodne tu bolo: if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
+		 */
+		if(((_global_den.smer > _global_svaty1.smer) && !(_global_svaty1.smer == 4 || _global_svaty1.smer == 8 || _global_svaty1.smer == 11))
+			|| ((_global_den.smer > _global_svaty2.smer) && !(_global_svaty2.smer == 4 || _global_svaty2.smer == 8 || _global_svaty2.smer == 11))
+			|| ((_global_den.smer > _global_svaty3.smer) && !(_global_svaty3.smer == 4 || _global_svaty3.smer == 8 || _global_svaty3.smer == 11))
+			){
 			if(_global_den.smer > _global_svaty1.smer){
 				BUTTONS(typ, 1);
 			}
@@ -5762,6 +5779,21 @@ void _export_rozbor_dna(short int typ){
 		}
 		else{
 			BUTTONS(typ, 0);
+			/* 2010-10-06: upravenÈ; v tejto vetve rozhodovania treba rieöiù to, ûe je splnen· z·kladn· podmienka (nedeæa alebo prik·zan˝ sviatok alebo smer < 5),
+			 *             avöak nebola splnen· vyööie uveden· novo-upraven· podmienka o "prebitÌ" nedele napr. lok·lnou sl·vnosùou
+			 */
+			if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
+				NEWLINE;
+				if(_global_den.smer > _global_svaty1.smer){
+					BUTTONS(typ, 1);
+				}
+				else if(_global_den.smer > _global_svaty2.smer){
+					BUTTONS(typ, 2);
+				}
+				else if(_global_den.smer > _global_svaty3.smer){
+					BUTTONS(typ, 3);
+				}
+			}
 		}
 	}/* if((_global_den.denvt == DEN_NEDELA) || (_global_den.prik == PRIKAZANY_SVIATOK) || (_global_den.smer < 5)) */
 	else if(_global_pocet_svatych > 0){
@@ -6069,27 +6101,41 @@ void _export_rozbor_dna_batch(short int typ, short int modlitba = MODL_NEURCENA,
 		 * uprednostni sa to, ktore ma v tabulke liturgickych dni vyssi stupen
 		 * [t.j. .smer]. */
 
-		/* 2006-12-07: sl·vnosti sv‰t˝ch (k fixn˝m d·tumom: napr. 8.12., 29.û., 5.˝., 15.8.), ktorÈ nepripadn˙ na nedeæu, neboli spr·vne zobrazovanÈ */
-#undef DEBUG_2006_12_07
-		/* 2010-07-28: doplnenÈ alternatÌvne porovnanie aj s _global_svaty2.smer (kvÙli dominik·nskej sl·vnosti 8.8.) */
-		if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
-			short int aaa;
+		/* 2006-12-07: sl·vnosti sv‰t˝ch (k fixn˝m d·tumom: napr. 8.12., 29.6., 5.7., 15.8.), ktorÈ nepripadn˙ na nedeæu, neboli spr·vne zobrazovanÈ */
+		/* 2010-07-28: doplnenÈ alternatÌvne porovnanie aj s _global_svaty2.smer (kvÙli dominik·nskej sl·vnosti 8.8.)
+		 * 2010-10-06: upravenÈ; nesmie Ìsù o lok·lnu sl·vnosù (smer == 4) lebo nem· prebÌjaù "glob·lnu" v danom kalend·ri [napr. czop pre 22.10.]
+		 *             pÙvodne tu bolo: if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
+		 */
+		short int aaa;
+		if(((_global_den.smer > _global_svaty1.smer) && !(_global_svaty1.smer == 4 || _global_svaty1.smer == 8 || _global_svaty1.smer == 11))
+			|| ((_global_den.smer > _global_svaty2.smer) && !(_global_svaty2.smer == 4 || _global_svaty2.smer == 8 || _global_svaty2.smer == 11))
+			|| ((_global_den.smer > _global_svaty3.smer) && !(_global_svaty3.smer == 4 || _global_svaty3.smer == 8 || _global_svaty3.smer == 11))
+			){
 			if(_global_den.smer > _global_svaty1.smer)
 				aaa = 1;
 			else if(_global_den.smer > _global_svaty2.smer)
 				aaa = 2;
 			else if(_global_den.smer > _global_svaty3.smer)
 				aaa = 3;
-#ifdef DEBUG_2006_12_07
-			Export("<p>pre %d sa pouûil %d...</p>\n", _global_den.den, aaa);
-#endif
+			// Export("<p>pre %d sa pouûil %d...</p>\n", _global_den.den, aaa);
 			execute_batch_command(aaa, batch_command, modlitba, d_from_m_from_r_from);
 		}
 		else{
-#ifdef DEBUG_2006_12_07
-			Export("<p>pre %d sa pouûil 0...</p>\n", _global_den.den);
-#endif
+			// Export("<p>pre %d sa pouûil 0...</p>\n", _global_den.den);
 			execute_batch_command(0, batch_command, modlitba, d_from_m_from_r_from);
+			/* 2010-10-06: upravenÈ; v tejto vetve rozhodovania treba rieöiù to, ûe je splnen· z·kladn· podmienka (nedeæa alebo prik·zan˝ sviatok alebo smer < 5),
+			 *             avöak nebola splnen· vyööie uveden· novo-upraven· podmienka o "prebitÌ" nedele napr. lok·lnou sl·vnosùou
+			 */
+			if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
+				if(_global_den.smer > _global_svaty1.smer)
+					aaa = 1;
+				else if(_global_den.smer > _global_svaty2.smer)
+					aaa = 2;
+				else if(_global_den.smer > _global_svaty3.smer)
+					aaa = 3;
+				// Export("<p>okrem 0 sa pre %d sa pouûil aj %d...</p>\n", _global_den.den, aaa);
+				execute_batch_command(aaa, batch_command, modlitba, d_from_m_from_r_from);
+			}
 		}
 	}/* if((_global_den.denvt == DEN_NEDELA) || (_global_den.prik == PRIKAZANY_SVIATOK) || (_global_den.smer < 5)) */
 	else if(_global_pocet_svatych > 0){
