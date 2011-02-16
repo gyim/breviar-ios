@@ -440,48 +440,60 @@ short int cislo_mesiaca(char *mesiac){
 }
 
 /* ------------------------------------------------------------------- */
-/* urobi velke pismena */
+/* urobi velke pismena 
+ * 2011-01-31: nesmie pritom v HTML stringoch upravova kódové mená, napr. &mdash; na ve¾ké písmená
+ */
 char *caps_BIG(const char *input){
+	short int ok = TRUE;
 	short int i = 0;
 	char c;
 	mystrcpy(_global_pom_str, input, MAX_STR);
 	while(( c = _global_pom_str[i]) != '\0'){
-		if((c >= 'a') && (c <= 'z')){
-			c = (char)(c - 32);
+		if((c == '&') && (ok == TRUE)){
+			ok = FALSE;
 		}
-		else{
-			switch(c){
-				/* samohlasky -- dlhe */
-				case 'á': c = 'Á'; break;
-				case 'é': c = 'É'; break;
-				case 'í': c = 'Í'; break;
-				case 'ó': c = 'Ó'; break;
-				case 'ú': c = 'Ú'; break;
-				case 'ý': c = 'Ý'; break;
-				/* samohlasky -- specialne */
-				case 'ä': c = 'Ä'; break;
-				case 'ô': c = 'Ô'; break;
-				case 'ì': c = 'Ì'; break;
-				case 'ù': c = 'Ù'; break;
-				/* spoluhlasky -- makke */
-				case 'è': c = 'È'; break;
-				case 'ï': c = 'Ï'; break;
-				case '¾': c = '¼'; break;
-				case 'ò': c = 'Ò'; break;
-				case 'ø': c = 'Ø'; break;
-				case 'š': c = 'Š'; break;
-				case '': c = ''; break;
-				case 'ž': c = 'Ž'; break;
-				/* spoluhlasky -- dlhe */
-				case 'å': c = 'Å'; break;
-				case 'à': c = 'À'; break;
-				/* maïarské znaky */
-				case 'û': c = 'Û'; break;
-				case 'õ': c = 'Õ'; break;
-				case 'ü': c = 'Ü'; break;
-				case 'ö': c = 'Ö'; break;
+		if((c == ';') && (ok == FALSE)){
+			ok = TRUE;
+		}
+		/* 2011-01-31: ToDo: ešte by bolo potrebné ošetri aj to, že za & nenasleduje regulérny znak pre špeciálny HTML kód, t. j. nieèo iné ako upper+lowercase ascii abeceda + # a èíslice */
+		if(ok == TRUE){
+			if((c >= 'a') && (c <= 'z')){
+				c = (char)(c - 32);
 			}
-		}
+			else{
+				switch(c){
+					/* samohlasky -- dlhe */
+					case 'á': c = 'Á'; break;
+					case 'é': c = 'É'; break;
+					case 'í': c = 'Í'; break;
+					case 'ó': c = 'Ó'; break;
+					case 'ú': c = 'Ú'; break;
+					case 'ý': c = 'Ý'; break;
+					/* samohlasky -- specialne */
+					case 'ä': c = 'Ä'; break;
+					case 'ô': c = 'Ô'; break;
+					case 'ì': c = 'Ì'; break;
+					case 'ù': c = 'Ù'; break;
+					/* spoluhlasky -- makke */
+					case 'è': c = 'È'; break;
+					case 'ï': c = 'Ï'; break;
+					case '¾': c = '¼'; break;
+					case 'ò': c = 'Ò'; break;
+					case 'ø': c = 'Ø'; break;
+					case 'š': c = 'Š'; break;
+					case '': c = ''; break;
+					case 'ž': c = 'Ž'; break;
+					/* spoluhlasky -- dlhe */
+					case 'å': c = 'Å'; break;
+					case 'à': c = 'À'; break;
+					/* maïarské znaky */
+					case 'û': c = 'Û'; break;
+					case 'õ': c = 'Õ'; break;
+					case 'ü': c = 'Ü'; break;
+					case 'ö': c = 'Ö'; break;
+				}
+			}
+		}/* ok == TRUE */
 		if(_global_pom_str[i] != c)
 			_global_pom_str[i] = c;
 		i++;

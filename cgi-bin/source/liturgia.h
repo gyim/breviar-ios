@@ -76,11 +76,12 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-/* 2009-03-24: rozšírené kvôli text_SEP_26_2[]; 
+/* 2009-03-24: rozšírené kvôli text_SEP_26_CZOP[]; 
  * 2009-03-24: rozšírené kvôli text_PRO_OP[] 
- * 2010-12-07: rozšírené kvôli text_JAN_19_1[]; (plus 34)
+ * 2010-12-07: rozšírené kvôli text_JAN_19_SJ[]; (plus 34)
+ * 2011-01-31: rozšírené kvôli text_JAN_31_SDB[]; 
  */
-#define MENO_SVIATKU 180
+#define MENO_SVIATKU 230
 
 /* 2006-07-31: kvôli jazykovým mutáciám; zmenené 2008-08-15 na 5 
  * 2009-01-29: zmenené na 6 (maïarèina)
@@ -773,8 +774,9 @@ extern const char *nazov_slavenia_lokal[];
 #define KALENDAR_VSEOBECNY_HU               6
 #define KALENDAR_SK_SVD                     7
 #define KALENDAR_SK_SJ                      8
+#define KALENDAR_SK_SDB                     9
 
-#define POCET_KALENDAROV                    8
+#define POCET_KALENDAROV                    9
 
 /* 2010-10-11: doplnené */
 extern const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1];

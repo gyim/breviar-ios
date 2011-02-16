@@ -5816,6 +5816,46 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	/* option 3: Ëasti modlitby zo spoloËnej Ëasti ... -- toto tu byù nemÙûe, bude potrebnÈ doplniù pre kaûd˝ riadok modlitby */
 
+	/* 2011-01-31: sem presunut· moûnosù v˝beru liturgickÈho kalend·ra */
+	if(_global_jazyk == JAZYK_SK){
+		Export("<li>\n");
+		Export((char *)html_text_kalendar_miestny[_global_jazyk]); /* 2006-08-02 */
+		Export("<br />\n");
+
+		Export("&nbsp;&nbsp;&nbsp;&nbsp; \n");
+		/* pole WWW_KALENDAR */
+		Export("<select name=\"%s\">\n", STR_KALENDAR);
+
+		Export("<option%s>%s\n", 
+			((_global_kalendar == KALENDAR_SK_CSSR) || (_global_kalendar == KALENDAR_SK_SVD) || (_global_kalendar == KALENDAR_SK_SJ))? STR_EMPTY: html_option_selected,
+			nazov_slavenia_lokal_kalendar[KALENDAR_VSEOBECNY_SK] /* nazov_kalendara[KALENDAR_VSEOBECNY_SK][_global_jazyk] */); // todo -- pre viacerÈ jazyky
+		Export("<option%s>%s\n", 
+			(_global_kalendar == KALENDAR_SK_CSSR)? html_option_selected: STR_EMPTY,
+			nazov_slavenia_lokal_kalendar[KALENDAR_SK_CSSR] /* nazov_kalendara[KALENDAR_SK_CSSR] */);
+		Export("<option%s>%s\n", 
+			(_global_kalendar == KALENDAR_SK_SVD)? html_option_selected: STR_EMPTY,
+			nazov_slavenia_lokal_kalendar[KALENDAR_SK_SVD] /* nazov_kalendara[KALENDAR_SK_SVD] */);
+		// 2010-12-17: odvetvenÈ, aby sa to nedostalo na web (tam OS_linux)
+#ifdef OS_Windows_Ruby
+		Export("<option%s>%s\n", 
+			(_global_kalendar == KALENDAR_SK_SJ)? html_option_selected: STR_EMPTY,
+			nazov_slavenia_lokal_kalendar[KALENDAR_SK_SJ]);
+		Export("<option%s>%s\n", 
+			(_global_kalendar == KALENDAR_SK_SDB)? html_option_selected: STR_EMPTY,
+			nazov_slavenia_lokal_kalendar[KALENDAR_SK_SDB]);
+#endif
+		Export("</select>\n");
+
+		Export("<br />");
+
+		Export("&nbsp;&nbsp;&nbsp;&nbsp; \n");
+		Export("<span class=\"explain\">");
+		Export("&nbsp;");
+		Export((char *)html_text_kalendar_explain[_global_jazyk]);
+		Export("</span>");
+		Export("</li>\n");
+	}
+
 	Export("</ul>\n");
 
 	/* 2011-01-28: doplnenÈ podæa buttonov na konci formul·ra; v podstate vykonaj˙ ten ist˝ efekt
@@ -5894,44 +5934,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export((char *)html_text_dnesok[_global_jazyk]); /* 2006-08-02 */
 	Export("</a></td>\n");
 
-	if(_global_jazyk == JAZYK_SK){
-		Export("</tr>\n");
-		Export("<tr>\n");
-		Export("<td align=\"left\">\n");
-		Export("&nbsp;");
-		Export("</td>\n");
-		Export("<td align=\"left\">\n");
-		Export("&nbsp;");
-		Export((char *)html_text_kalendar_miestny[_global_jazyk]); /* 2006-08-02 */
-		Export("\n");
-		/* pole WWW_KALENDAR */
-		Export("<select name=\"%s\">\n", STR_KALENDAR);
-
-		Export("<option%s>%s\n", 
-			((_global_kalendar == KALENDAR_SK_CSSR) || (_global_kalendar == KALENDAR_SK_SVD) || (_global_kalendar == KALENDAR_SK_SJ))? STR_EMPTY: html_option_selected,
-			nazov_slavenia_lokal_kalendar[KALENDAR_VSEOBECNY_SK] /* nazov_kalendara[KALENDAR_VSEOBECNY_SK][_global_jazyk] */); // todo -- pre viacerÈ jazyky
-		Export("<option%s>%s\n", 
-			(_global_kalendar == KALENDAR_SK_CSSR)? html_option_selected: STR_EMPTY,
-			nazov_slavenia_lokal_kalendar[KALENDAR_SK_CSSR] /* nazov_kalendara[KALENDAR_SK_CSSR] */);
-		Export("<option%s>%s\n", 
-			(_global_kalendar == KALENDAR_SK_SVD)? html_option_selected: STR_EMPTY,
-			nazov_slavenia_lokal_kalendar[KALENDAR_SK_SVD] /* nazov_kalendara[KALENDAR_SK_SVD] */);
-		// 2010-12-17: odvetvenÈ, aby sa to nedostalo na web (tam OS_linux)
-#ifdef OS_Windows_Ruby
-		Export("<option%s>%s\n", 
-			(_global_kalendar == KALENDAR_SK_SJ)? html_option_selected: STR_EMPTY,
-			nazov_slavenia_lokal_kalendar[KALENDAR_SK_SJ]);
-#endif
-		Export("</select>\n");
-
-		Export("</td></tr>\n<tr><td></td><td>");
-
-		Export("<span class=\"explain\">");
-		Export("&nbsp;");
-		Export((char *)html_text_kalendar_explain[_global_jazyk]);
-		Export("</span>");
-		Export("</td>\n");
-	}
+	/* 2011-01-31: chvÌæu tu bol v˝ber liturgickÈho kalend·ra (len pre SK), napr. SVD, SDB, SJ, CSsR; presunutÈ inde */
 
 	Export("</tr></table>\n");
 	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
