@@ -16,7 +16,7 @@
 /*   29/03/2000A.D. | ukoncene vsetky mesiace MES_JAN - MES_DEC         */
 /*   06/09/2001A.D. | tento popis                                       */
 /*   07/09/2001A.D. | opravene: sv. Brigity (sviatok)                   */
-/*   26/09/2001A.D. | opravene: sv. Terezie Benedikty (sviatok)         */
+/*   26/09/2001A.D. | opravene: sv. Terézie Benedikty (sviatok)         */
 /*   2003-06-30a.D. | zmeny pre spomienku neposkvrn.srdca PM            */
 /*   2003-08-11a.D. | -Wall upozornila na / * within comments           */
 /*   2003-08-13a.D. | odstranene DEBUG_MODLITBA_CEZ_DEN                 */
@@ -19332,7 +19332,7 @@ label_25_MAR:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, text_NOV_17[_global_jazyk], MENO_SVIATKU);
-					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK, MODL_SPOL_CAST_SV_ZENA_MANZ /* 2006-08-08: doplnené */, MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL); /* 2010-11-18: v breviári je len: "pre tých, èo konali skutky milosrdenstva" */
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
