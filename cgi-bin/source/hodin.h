@@ -442,6 +442,7 @@ const char *nazov_slavenia_lokal[] =
 ,"v Bratislavskej arcidiecéze a v Spišskej diecéze sviatok hlavného patróna" /* doplnené 2008-06-24 */
 ,"v Bratislavskej arcidiecéze" /* doplnené 2010-03-16 */
 ,"Karácsony nyolcada-Kiskarácsony" /* doplnené 2010-05-17 */
+,"len pre Kongregáciu milosrdných sestier Sv. kríža" /* doplnené 2011-01-27 */
 };
 
 /* names of liturgical colors */

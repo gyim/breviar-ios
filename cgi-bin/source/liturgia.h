@@ -761,6 +761,7 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_SPIS_BA_PATRON			39 /* pre 11. novembra, patróna BA-arcidiecézy; 2008-06-24; nahrádza LOKAL_SLAV_SPIS_PATRON */
 #define LOKAL_SLAV_BRATISLAVA				40 /* doplnené 2010-03-16 */
 #define LOKAL_SLAV_KONIEC_OKTAVY_NAR_HU		41 /* doplnené 2010-05-17 */
+#define LOKAL_SLAV_KONGREGACIA_SSK			42 /* doplnené 2011-01-27 */
 
 /* 2010-08-03: pridaný kalendár */
 #define KALENDAR_NEURCENY                   0

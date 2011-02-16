@@ -15668,6 +15668,7 @@ label_25_MAR:
 						pocet = 2;
 						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 						_global_svaty2.smer = 12; /* lubovolne spomienky podla vseobecneho kalendara - Slovensko */
+						_global_svaty2.typslav_lokal = LOKAL_SLAV_KONGREGACIA_SSK; /* 2011-01-27: pridané */
 						mystrcpy(_global_svaty2.meno, text_JUL_30_1[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENICA, MODL_SPOL_CAST_PANNA);
 						_global_svaty2.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
