@@ -35,6 +35,7 @@
 /*   2009-05-15a.D. | pridané text_PRO_OP[]                    */
 /*   2009-08-26a.D. | pridané html_button_nazov_modlitby()     */
 /*   2010-05-17a.D. | pridané niektoré maïarské slávenia       */
+/*   2010-10-11a.D. | pridané nazov_slavenia_lokal_kalendar[]  */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -354,6 +355,16 @@ const char *skratka_kalendara[POCET_KALENDAROV + 1] =
 const char *nazov_htm_kalendar[POCET_KALENDAROV + 1] =
 {"", "", "", "", "", "kal_cssr.htm", ""};
 
+/* doplnené 2010-10-11 */
+const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1] =
+{""
+,""
+,"všeobecnı [pre Slovensko]"
+,""
+,""
+,"pre Kongregáciu najsvätejšieho Vykupite¾a — redemptoristov"
+,""
+};
 
 /* special "local" or "partial" characteristics of various celebrations - each in one language; no need to translate; special strings will be added */
 /* 2005-07-27: doplnené
@@ -381,7 +392,7 @@ const char *nazov_slavenia_lokal[] =
 ,"na Slovensku 5. júla, slávnos; v Európe sviatok"
 ,"v Roòavskej diecéze sviatok hlavného patróna"
 ,"len v konsekrovanıch kostoloch"
-,"Druhá ve¾konoèná nede¾a - Boieho milosrdenstva"
+,"Druhá ve¾konoèná nede¾a — Boieho milosrdenstva"
 ,"koniec Oktávy narodenia Pána"
 ,"konec Oktávu Narození Pánì"
 ,"hlavního patrona praské arcidiecéze"
@@ -1239,6 +1250,9 @@ const char *html_text_zalmy_pre_mcd_explain[] =
  "hu_"
 };
 
+/* 2010-10-11: HTML option selected */
+const char html_option_selected[] = " selected";
+
 /* 2010-09-14: doplnené */
 const char *html_text_kalendar_miestny[] = 
 {"kalendár Liturgie hodín poui: ", 
@@ -1397,6 +1411,15 @@ const char *text_JAN_03[] =
  "Nejsvìtìjšího Jména Jeíš",
  "(Najsvätejšieho mena Jeiš)",
  };
+const char *text_JAN_05[] = 
+{"Sv. Jána Nepomuckého Neumanna, biskupa",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_JAN_06[] = 
 {"Zjavenie Pána",
  "Zjevení Pánì",
@@ -1432,6 +1455,15 @@ const char *text_JAN_13[] =
  "",
  "Sv. Hilaria, biskupa a uèitele Církve",
  "Szent Hiláriusz (Vidor) püspök és egyháztanító",
+ };
+const char *text_JAN_14[] = 
+{"Bl. Petra Dondersa, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_JAN_15[] = 
 {"(na Slovensku nie je)",
@@ -1801,6 +1833,15 @@ const char *text_MAR_10[] =
  "",
  "Sv. Jana Ogilvie, knìze a muèedníka",
  "(nincs Magyarországon)",
+ };
+const char *text_MAR_15[] = 
+{"Sv. Klementa Márie Hofbauera, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_MAR_17[] = 
 {"Sv. Patrika, biskupa",
@@ -2576,6 +2617,15 @@ const char *text_JUN_27_1[] =
  "(pro dominikány není)",
  "Szent László király",
  };
+const char *text_JUN_27_2[] = 
+{"Panny Márie, Matky ustaviènej pomoci",
+ "(v Èechách, na Moravì a na Slezsku není)",
+ "",
+ "",
+ "",
+ "(pro dominikány není)",
+ "",
+ };
 const char *text_JUN_28[] = 
 {"Sv. Ireneja, biskupa a muèeníka",
  "Sv. Ireneje, biskupa a muèedníka",
@@ -2610,6 +2660,15 @@ const char *text_JUN_30_1[] =
  "",
  "",
  "Vıroèí posvìcení katedrály sv. Václava",
+ "(nincs Magyarországon)",
+ };
+const char *text_JUN_30_2[] = 
+{"Bl. Januára Márie Sarnelliho, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
  "(nincs Magyarországon)",
  };
 const char *text_JUL_03[] = 
@@ -2899,6 +2958,15 @@ const char *text_AUG_01[] =
  "",
  "Sv. Alfonsa z Liguori, biskupa a uèitele Církve",
  "Liguori Szent Alfonz Mária püspök és egyháztanító",
+ };
+const char *text_AUG_01_1[] = 
+{"Sv. Alfonza Márie de Ligouri, biskupa a uèite¾a Cirkvi, zakladate¾a kongregácie",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_AUG_02_1[] = 
 {"Sv. Euzébia Vercellského, biskupa",
@@ -3385,6 +3453,15 @@ const char *text_SEP_26[] =
  "",
  "Sv. Kosmy a Damiána, muèedníkù",
  "Szent Kozma és Damján vértanúk",
+ };
+const char *text_SEP_26_1[] = 
+{"Bl. Gašpara Stanggassingera, kòaza",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "",
+ "la_",
+ "",
+ "(v Èechách, na Moravì a ve Slezsku není)",
+ "hu_",
  };
 const char *text_SEP_26_2[] = 
 {"(na Slovensku nie je)",

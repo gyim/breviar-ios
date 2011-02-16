@@ -58,6 +58,7 @@
 /*                    špecifikáciu, o aký kalendár ide:        */
 /*                    všeobecný danej cirkevnej provincie      */
 /*                    alebo nejaký reho¾ný a pod.              */
+/*   2010-10-11a.D. | pridané nazov_slavenia_lokal_kalendar[]  */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -754,6 +755,9 @@ extern const char *nazov_slavenia_lokal[];
 #define KALENDAR_VSEOBECNY_HU               6
 
 #define POCET_KALENDAROV                    6
+
+/* 2010-10-11: doplnené */
+extern const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1];
 
 /* prikazany / neprikazany sviatok */
 #define PRIKAZANY_SVIATOK 1

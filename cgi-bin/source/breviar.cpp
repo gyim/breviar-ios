@@ -3665,7 +3665,11 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	_INIT_DM(_local_den); /* 2003-08-07 pridana */
 
 	char pom[MAX_STR];
+	char popisok_lokal[MAX_STR]; /* 2010-10-11: pridanÈ */
+	char popisok_kalendar[MAX_STR]; /* 2010-10-11: pridanÈ */
 	mystrcpy(pom, STR_EMPTY, MAX_STR); /* 2003-08-11 pridana inicializacia */
+	mystrcpy(popisok_lokal, STR_EMPTY, MAX_STR); /* 2010-10-11 pridan· inicializ·cia */
+	mystrcpy(popisok_kalendar, STR_EMPTY, MAX_STR); /* 2010-10-11 pridan· inicializ·cia */
 	mystrcpy(_global_string, STR_EMPTY, MAX_GLOBAL_STR); /* inicializacia */
 	mystrcpy(_global_string2, STR_EMPTY, MAX_GLOBAL_STR2); /* inicializ·cia, upraven· dÂûka */
 	mystrcpy(_global_string_farba, STR_EMPTY, MAX_GLOBAL_STR_FARBA); /* 2006-08-19: pridanÈ - inicializ·cia */
@@ -3996,12 +4000,23 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		Log("prid·vam typ sl·venia: %s\n", pom);
 		strcat(_global_string, pom);
 	}
+	
+	/* 2010-10-11: pÙvodne tu bola len lokaliz·cia slavenia; pridali sme k tomu aj prÌpadn˙ pozn·mku o lok·lnom kalend·ri */
 
-	/* teraz lokaliz·cia slavenia, 2005-07-27: pridanÈ */
-	if(_local_den.typslav_lokal != LOKAL_SLAV_NEURCENE){
-		sprintf(pom, "\n<br> <"HTML_SPAN_RED_SMALL">(%s)</span>\n",
-			nazov_slavenia_lokal[_local_den.typslav_lokal]);
-		Log("prid·vam lokaliz·ciu sl·venia: %s\n", pom);
+	sprintf(popisok_kalendar, nazov_slavenia_lokal_kalendar[_local_den.kalendar]);
+	mystrcpy(popisok_lokal, STR_EMPTY, MAX_STR); /* 2010-10-11: pridanÈ vyËistenie */
+	/* teraz lokaliz·cia slavenia resp. pozn·mku o lok·lnom kalend·ri, 2005-07-27: pridanÈ; 2010-10-11: rozöÌrenÈ */
+	if(_local_den.typslav_lokal != LOKAL_SLAV_NEURCENE) {
+		sprintf(popisok_lokal, nazov_slavenia_lokal[_local_den.typslav_lokal]);
+	}
+	short int strlen_popisok_kalendar = 0, strlen_popisok_lokal = 0;
+	strlen_popisok_kalendar = strlen(popisok_kalendar);
+	strlen_popisok_lokal = strlen(popisok_lokal);
+	if(strlen_popisok_kalendar + strlen_popisok_lokal > 0){
+		if((strlen_popisok_kalendar > 0) && (strlen_popisok_lokal > 0))
+			strcat(popisok_kalendar, " | ");
+		sprintf(pom, "\n<br> <"HTML_SPAN_RED_SMALL">(%s%s)</span>\n", popisok_kalendar, popisok_lokal);
+		Log("prid·vam lokaliz·ciu sl·venia resp. pozn·mku o lok·lnom kalend·ri: %s\n", pom);
 		strcat(_global_string, pom);
 	}
 
@@ -4251,7 +4266,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 			/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 			 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 			 */
-			if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) /* || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) */ ))
+			if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
 				|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
 				|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
 				|| DOCASNE_ANO /* doËasnÈ rieöenie */
@@ -4794,7 +4809,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 			/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 			 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 			 */
-			if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) /* || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) */ ))
+			if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
 				|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
 				|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
 				|| DOCASNE_ANO /* doËasnÈ rieöenie */
@@ -5088,7 +5103,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 		/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 		 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 		 */
-		if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) /* || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) */ ))
+		if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
 			|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
 			|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
 			|| DOCASNE_ANO /* doËasnÈ rieöenie */
@@ -5320,7 +5335,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 	 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 	 */
-	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) /* || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) */ ))
+	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
 		|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
 		|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
 		|| DOCASNE_ANO /* doËasnÈ rieöenie */
@@ -5358,8 +5373,9 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	/* formular pre PRM_DATUM */
 	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\" checked>",
 		STR_QUERY_TYPE, STR_PRM_DATUM);
-	Export("</td><td>\n");
-
+	Export("</td>\n");
+	
+	Export("<td align=\"left\">\n");
 	Export("&nbsp;");
 	Export((char *)html_text_modlitby_pre_den[_global_jazyk]); /* 2006-08-02 */
 	Export(" &nbsp;\n"); /* 2006-02-02: upravenÈ, pridan˝ "dnes" */
@@ -5397,7 +5413,35 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export((char *)html_text_dnesok[_global_jazyk]); /* 2006-08-02 */
 	Export("</a></td>\n");
 
-	Export("</td></tr></table>\n");
+	if(_global_jazyk == JAZYK_SK){
+		Export("</tr>\n");
+		Export("<tr>\n");
+		Export("<td align=\"left\">\n");
+		Export("&nbsp;");
+		Export("</td>\n");
+		Export("<td align=\"left\">\n");
+		Export("&nbsp;");
+		Export((char *)html_text_kalendar_miestny[_global_jazyk]); /* 2006-08-02 */
+		Export("\n");
+		/* pole WWW_KALENDAR */
+		Export("<select name=\"%s\">\n", STR_KALENDAR);
+
+		Export("<option%s>%s\n", 
+			(_global_kalendar == KALENDAR_SK_CSSR)? STR_EMPTY: html_option_selected,
+			nazov_slavenia_lokal_kalendar[KALENDAR_VSEOBECNY_SK] /* nazov_kalendara[KALENDAR_VSEOBECNY_SK][_global_jazyk] */); // todo -- pre viacerÈ jazyky
+		Export("<option%s>%s\n", 
+			(_global_kalendar == KALENDAR_SK_CSSR)? html_option_selected: STR_EMPTY,
+			nazov_slavenia_lokal_kalendar[KALENDAR_SK_CSSR] /* nazov_kalendara[KALENDAR_SK_CSSR] */);
+
+		Export("</select>\n");
+		Export("<br><span class=\"explain\">");
+		Export("&nbsp;");
+		Export((char *)html_text_kalendar_explain[_global_jazyk]);
+		Export("</span>");
+		Export("</td>\n");
+	}
+
+	Export("</tr></table>\n");
 	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
 
 #ifdef FORMULAR_PRE_PRM_SVIATOK
@@ -5409,34 +5453,6 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		STR_QUERY_TYPE, STR_PRM_SVIATOK);
 	Export("</td><td>\n");
 	/* !!! sviatky --- */
-	Export("</td></tr></table>\n");
-	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
-#endif
-
-#undef NOT_YET
-#ifdef NOT_YET
-/* ------------------------------------------- */
-	/* 2010-09-14: doplnenÈ */
-	Export("<tr>\n<td>\n");
-	Export("<table align=\"left\">\n<tr><td>\n");
-	/* formular pre STR_PRM_DATUM s in˝m, miestnym kalend·rom */
-	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
-		STR_QUERY_TYPE, STR_PRM_DATUM);
-	Export("</td><td>\n");
-	Export("&nbsp;");
-	Export((char *)html_text_kalendar_miestny[_global_jazyk]); /* 2006-08-02 */
-	Export("\n");
-	/* pole WWW_KALENDAR */
-	Export("<select name=\"%s\">\n", STR_KALENDAR);
-	Export("<option selected>%s\n", nazov_kalendara[KALENDAR_VSEOBECNY_SK] /* [_global_jazyk] */); // todo -- pre viacerÈ jazyky
-	if(_global_jazyk == JAZYK_SK){
-		Export("<option>%s\n", nazov_kalendara[KALENDAR_SK_CSSR]);
-	}
-	Export("</select>\n");
-	Export("<br><span class=\"explain\">");
-	Export((char *)html_text_kalendar_explain[_global_jazyk]);
-	Export("</span>");
-
 	Export("</td></tr></table>\n");
 	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
 #endif
@@ -6289,7 +6305,7 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 	/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 	 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 	 */
-	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) /* || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) */ ))
+	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
 		|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
 		|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
 		|| DOCASNE_ANO /* doËasnÈ rieöenie */
@@ -6457,25 +6473,6 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 	Export((char *)html_text_zalmy_pre_mcd_explain[_global_jazyk]);
 	Export("</span>");
 	Export("</li>\n");
-
-#undef NOT_YET
-#ifdef NOT_YET
-	/* 2010-09-14: pridanÈ -- miestne kalend·re pre jednotlivÈ rehoænÈ spoloËenstv·, kongreg·cie a inötit˙ty */
-	Export("<li>");
-	Export((char *)html_text_kalendar_miestny[_global_jazyk]);
-	Export(" \n");
-	/* pole WWW_KALENDAR */
-	Export("<select name=\"%s\">\n", STR_KALENDAR);
-	Export("<option selected>%s\n", nazov_kalendara[KALENDAR_NEURCENY] /* [_global_jazyk] */); // todo -- pre viacerÈ jazyky
-	if(_global_jazyk == JAZYK_SK){
-		Export("<option>%s\n", nazov_kalendara[KALENDAR_SK_CSSR]);
-	}
-	Export("</select>\n");
-	Export("<br><span class=\"explain\">");
-	Export((char *)html_text_kalendar_explain[_global_jazyk]);
-	Export("</span>");
-	Export("</li>\n");
-#endif
 
 	Export("</ul>\n");
 
@@ -7033,12 +7030,13 @@ short int atojazyk(char *jazyk){
 
 /* 2010-08-04: vytvorenÈ kvÙli jazykov˝m mut·ci·m -- kalend·r, napr. rehoæn˝
  * popis: vr·ti ËÌslo kalend·ra
- *			 inak vrati KALENDAR_NEURCENY
+ *        inak vrati KALENDAR_NEURCENY
+ * 2010-10-11: doplnenÈ porovnanie aj s nazov_slavenia_lokal_kalendar[]
  */
 short int atokalendar(char *kalendar){
 	short int i = 0;
 	do{
-		if(equalsi(kalendar, skratka_kalendara[i]) || equalsi(kalendar, nazov_kalendara[i])){
+		if(equalsi(kalendar, skratka_kalendara[i]) || equalsi(kalendar, nazov_kalendara[i]) || equalsi(kalendar, nazov_slavenia_lokal_kalendar[i])){
 			return i;
 		}
 		i++;
@@ -7317,7 +7315,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 	/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 	 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 	 */
-	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) /* || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) */ ))
+	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
 		|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
 		|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
 		|| DOCASNE_ANO /* doËasnÈ rieöenie */
@@ -8004,7 +8002,7 @@ void _main_analyza_roku(char *rok){
 	/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 	 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 	 */
-	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) /* || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) */ ))
+	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
 		|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
 		|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
 		|| DOCASNE_ANO /* doËasnÈ rieöenie */
@@ -10192,17 +10190,20 @@ short int parseQueryString(void){
 		i++;
 	}
 
-	/* 2010-08-04: pridanÈ kvÙli jazykov˝m mut·ci·m -- kalend·r */
-	i = 0; /* param[0] by mal sÌce obsahovaù typ akcie, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù kalend·r...\n");
-	while((equalsi(pom_KALENDAR, STR_EMPTY)) && (i < pocet)){
+	/* 2010-08-04: pridanÈ kvÙli jazykov˝m mut·ci·m -- kalend·r 
+	 *             pÙdodn· pozn·mka pre while cyklus resp. inicializ·ciu i: param[0] by mal sÌce obsahovaù typ akcie, ale radöej kontrolujeme aj 0
+	 * 2010-10-11: Pre POST query sa tam kalend·r priliepa aj na zaËiatok, aj sa ËÌta z form-ul·ra (t. j. pri v˝bere z qt=pdnes), preto ËÌtam "odzadu"
+	 */
+	i = pocet;
+	Log("pok˙öam sa zistiù kalend·r (od poslednÈho parametra k prvÈmu)...\n");
+	while((equalsi(pom_KALENDAR, STR_EMPTY)) && (i > 0)){
 		Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
 		if(equals(param[i].name, STR_KALENDAR)){
 			/* ide o parameter STR_KALENDAR */
 			mystrcpy(pom_KALENDAR, param[i].val, SMALL);
 			Log("kalend·r zisten˝.\n");
 		}
-		i++;
+		i--;
 	}
 
 	/* 2008-08-08: pridanÈ kvÙli rÙznym css */
