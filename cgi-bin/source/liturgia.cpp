@@ -589,6 +589,14 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 			strcat(_global_link, pom2);
 			Log("\tPrilepil som aj css: `%s' (2008-08-08)\n", pom2);
 		}
+
+		/* 2011-01-26: pridanÈ odovzdanie parametrov pre options1 atÔ. */
+		if(_global_opt1 != 36){
+			sprintf(pom2, HTML_AMPERSAND"%s=%d", STR_MODL_OPT1, _global_opt1);
+			strcat(_global_link, pom2);
+			Log("\tPrilepil som aj opt1: `%s' (2011-01-26)\n", pom2);
+		}
+
 	}/* if(_global_opt_batch_monthly == NIE) */
 	else{
 		// najprv podæa typu exportu rozhodneme, Ëi treba predlepiù aj adres·r

@@ -173,6 +173,7 @@
 /*   2011-01-14a.D. | SK doplnenÈ ZAKONCENIE_KTORY_JE                      */
 /*   2011-01-26a.D. | zmeny dizajnu,                                       */
 /*                    pridanie VYPISOVAT_PREDCHADZAJUCI_NASLEDUJUCI_BUTTON */
+/*                  - dorobenÈ force "opt1" (_global_optf1)                */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -2768,7 +2769,7 @@ void showPrayer(short int type){
 	Log("showPrayer: opt5 == `%s' (%d -- %s)\n", pom_MODL_OPTF5, _global_optf5, 
 		(_global_optf5 == MODL_CEZ_DEN_ZALMY_ZO_DNA)? STR_MODL_CEZ_DEN_ZALMY_ZO_DNA: STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
 
-	if(_global_opt1 == NIE && _global_optf1 == ANO){
+	if(_global_opt1 != _global_optf1){
 		Log("showPrayer: pouûÌvam _global_optf1 (force)...\n");
 		_global_opt1 = _global_optf1;
 	}
@@ -4443,6 +4444,14 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 				strcat(pom, pom2);
 				Log("\tPrilepil som aj css: `%s' (2008-08-08)\n", pom2);
 			}
+
+			/* 2011-01-26: pridanÈ odovzdanie parametrov pre options1 atÔ. */
+			if(_global_opt1 != 36){
+				sprintf(pom2, HTML_AMPERSAND"%s=%d", STR_MODL_OPT1, _global_opt1);
+				strcat(pom, pom2);
+				Log("\tPrilepil som aj opt1: `%s' (2011-01-26)\n", pom2);
+			}
+
 		}/* if(_global_opt_batch_monthly == NIE) */
 		else{
 			/* 2009-11-08: nov˝ spÙsob exportu pre batch mÛd s prepÌnaËom 'M' */
@@ -4993,11 +5002,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 				strcat(pom2, pom3);
 				Log("\tPrilepil som aj opt1: `%s' (2011-01-26)\n", pom3);
 			}
-			if(_global_optf1 != 36){
-				sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPTF1, _global_optf1);
-				strcat(pom2, pom3);
-				Log("\tPrilepil som aj optf1: `%s' (2011-01-26)\n", pom3);
-			}
+
 		}/* if(_global_opt_batch_monthly == NIE) */
 
 		Export("<!-- nasleduje tabuæka s buttonmi predoöl˝, nasledovn˝ rok/mesiac/deÚ -->\n");
@@ -5406,11 +5411,6 @@ void _export_rozbor_dna_kalendar(short int typ){
 			strcat(pom2, pom3);
 			Log("\tPrilepil som aj opt1: `%s' (2011-01-26)\n", pom3);
 		}
-		if(_global_optf1 != 36){
-			sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPTF1, _global_optf1);
-			strcat(pom2, pom3);
-			Log("\tPrilepil som aj optf1: `%s' (2011-01-26)\n", pom3);
-		}
 
 		/* 2007-08-15: pokus o krajöie zobrazenie formou kalend·ra */
 #undef ZOZNAM_DNI_MESIACOV_OLD
@@ -5650,11 +5650,6 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT1, _global_opt1);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj opt1: `%s' (2011-01-26)\n", pom3);
-	}
-	if(_global_optf1 != 36){
-		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPTF1, _global_optf1);
-		strcat(pom2, pom3);
-		Log("\tPrilepil som aj optf1: `%s' (2011-01-26)\n", pom3);
 	}
 
 	/* 2006-02-02: prevzat· Ëasù z _main_dnes */
@@ -6790,11 +6785,6 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj opt1: `%s' (2011-01-26)\n", pom3);
 	}
-	if(_global_optf1 != 36){
-		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPTF1, _global_optf1);
-		strcat(pom2, pom3);
-		Log("\tPrilepil som aj optf1: `%s' (2011-01-26)\n", pom3);
-	}
 
 	Export("<p>");
 	Export((char *)html_text_detaily_uvod[_global_jazyk]);
@@ -7735,43 +7725,47 @@ short int atocss(char *css){
 	if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU)){\
 		if(_global_opt1 == GLOBAL_OPTION_NULL){\
 			_global_opt1 = cfg_option1_default;\
-			Log("SK: KeÔûe bolo _global_opt1 == GLOBAL_OPTION_NULL, nastavujem na `'...\n", cfg_option1_default);\
+			Log("SK: KeÔûe bolo _global_opt1 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option1_default);\
 		}\
 		if(_global_opt2 == GLOBAL_OPTION_NULL){\
 			_global_opt2 = cfg_option2_default;\
-			Log("SK: KeÔûe bolo _global_opt2 == GLOBAL_OPTION_NULL, nastavujem na `'...\n", cfg_option2_default);\
+			Log("SK: KeÔûe bolo _global_opt2 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option2_default);\
 		}\
 		if(_global_opt4 == GLOBAL_OPTION_NULL){\
 			_global_opt4 = cfg_option4_default;\
-			Log("SK: KeÔûe bolo _global_opt4 == GLOBAL_OPTION_NULL, nastavujem na `'...\n", cfg_option4_default);\
+			Log("SK: KeÔûe bolo _global_opt4 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option4_default);\
 		}\
 		if(_global_opt5 == GLOBAL_OPTION_NULL){\
 			_global_opt5 = cfg_option5_default;\
-			Log("SK: KeÔûe bolo _global_opt5 == GLOBAL_OPTION_NULL, nastavujem na `'...\n", cfg_option5_default);\
+			Log("SK: KeÔûe bolo _global_opt5 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option5_default);\
 		}\
 		if(_global_opt6 == GLOBAL_OPTION_NULL){\
 			_global_opt6 = cfg_option6_default;\
-			Log("SK: KeÔûe bolo _global_opt6 == GLOBAL_OPTION_NULL, nastavujem na `'...\n", cfg_option6_default);\
+			Log("SK: KeÔûe bolo _global_opt6 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option6_default);\
 		}\
 		if(_global_opt7 == GLOBAL_OPTION_NULL){\
 			_global_opt7 = cfg_option7_default;\
-			Log("SK: KeÔûe bolo _global_opt7 == GLOBAL_OPTION_NULL, nastavujem na `'...\n", cfg_option7_default);\
+			Log("SK: KeÔûe bolo _global_opt7 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option7_default);\
 		}\
 		if(_global_optf1 == GLOBAL_OPTION_NULL){\
-			_global_optf1 = cfg_option1_default;\
-			Log("SK: KeÔûe bolo _global_optf1 == GLOBAL_OPTION_NULL, nastavujem na `'...\n", cfg_option1_default);\
+			_global_optf1 = _global_opt1;\
+			Log("SK: KeÔûe bolo _global_optf1 == GLOBAL_OPTION_NULL, nastavujem na _global_opt1 == `%d'...\n", _global_optf1);\
+		}\
+		else{\
+			_global_opt1 = _global_optf1;\
+			Log("SK: Force; do _global_opt1 priraÔujem _global_optf1 (`%d')...\n", _global_optf1);\
 		}\
 		if(_global_optf2 == GLOBAL_OPTION_NULL){\
 			_global_optf2 = cfg_option2_default;\
-			Log("SK: KeÔûe bolo _global_optf2 == GLOBAL_OPTION_NULL, nastavujem na `'...\n", cfg_option2_default);\
+			Log("SK: KeÔûe bolo _global_optf2 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option2_default);\
 		}\
 		if(_global_optf4 == GLOBAL_OPTION_NULL){\
 			_global_optf4 = cfg_option4_default;\
-			Log("SK: KeÔûe bolo _global_optf4 == GLOBAL_OPTION_NULL, nastavujem na `'...\n", cfg_option4_default);\
+			Log("SK: KeÔûe bolo _global_optf4 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option4_default);\
 		}\
 		if(_global_optf5 == GLOBAL_OPTION_NULL){\
 			_global_optf5 = cfg_option5_default;\
-			Log("SK: KeÔûe bolo _global_optf5 == GLOBAL_OPTION_NULL, nastavujem na `'...\n", cfg_option5_default);\
+			Log("SK: KeÔûe bolo _global_optf5 == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", cfg_option5_default);\
 		}\
 	}\
 	else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){\
