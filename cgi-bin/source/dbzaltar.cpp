@@ -158,6 +158,7 @@
 /*   2010-09-10a.D. | opravy správneho použitia responza pred 1. èítaním v posv. èítaniach      */
 /*   2010-10-13a.D. | doplnené èasti pre liturgický kalendár redemptoristov (cssr)              */
 /*   2010-11-05a.D. | úpravy v èasti pre ofícium za zosnulých                                   */
+/*   2010-11-16a.D. | oprava pre modlitbu (a benediktus) spomienky PM v sobotu                  */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -7519,9 +7520,9 @@ label_24_DEC:
 		_set_kresponz(modlitba, _file, _anchor);
 		set_LOG_litobd;
 		/* benediktus */
-		/* je ich 6, takze tyzzal MOD 6 + 1 (1 -- 6) */
+		/* 2010-11-16, oprava: je ich 6, pôvodne bolo: takze tyzzal MOD 6 + 1 (1 -- 6); avšak tyzzal je 1--4, opravené na _global_den.tyzden */
 		/* preto "+ 1", aby sme dodrzali povodne cislovanie */
-		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_BENEDIKTUS, tyzzal MOD 6);
+		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_BENEDIKTUS, (tyzden MOD 6) + 1);
 		_set_benediktus(modlitba, _file, _anchor);
 		set_LOG_litobd;
 		/* prosby */
@@ -7530,9 +7531,9 @@ label_24_DEC:
 		_set_prosby(modlitba, _file, _anchor);
 		set_LOG_litobd;
 		/* modlitba */
-		/* je ich 6, takze tyzzal MOD 6 + 1 (1 -- 6) */
+		/* 2010-11-16, oprava: je ich 6, pôvodne bolo: takze tyzzal MOD 6 + 1 (1 -- 6); avšak tyzzal je 1--4, opravené na _global_den.tyzden */
 		/* preto "+ 1", aby sme dodrzali povodne cislovanie */
-		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_MODLITBA, tyzzal MOD 6);
+		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_MODLITBA, (tyzden MOD 6) + 1);
 		_set_modlitba(modlitba, _file, _anchor);
 		set_LOG_litobd;
 
@@ -7549,6 +7550,13 @@ label_24_DEC:
 		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_CITANIE2, tyzzal MOD 4);
 		_set_citanie2(modlitba, _file, _anchor);
 		set_LOG_litobd;
+		/* modlitba -- ako na ranné chvály; doplnené 2010-11-16 */
+		/* 2010-11-16, oprava: je ich 6, pôvodne bolo: takze tyzzal MOD 6 + 1 (1 -- 6); avšak tyzzal je 1--4, opravené na _global_den.tyzden */
+		/* preto "+ 1", aby sme dodrzali povodne cislovanie */
+		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(MODL_RANNE_CHVALY /* modlitba */), ANCHOR_MODLITBA, (tyzden MOD 6) + 1);
+		_set_modlitba(modlitba, _file, _anchor);
+		set_LOG_litobd;
+
 	}/* spomienka panny márie v sobotu */
 
 	Log("do _global_den nastavujem _local_den...\n");
