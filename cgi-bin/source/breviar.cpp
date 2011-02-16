@@ -1446,8 +1446,10 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 						}
 					}/* zakonèenie modlitby - ktorý je... (len SK) */
 
-					/* 2011-01-12: doplnené volite¾né zobrazovanie/skrývanie alternatívnej antifóny pre žalmy/chválospevy */
-					if((_global_den.litobd != OBD_CEZ_ROK) && (equals(rest, PARAM_MYSLIENKA_K_ZALMU))){
+					/* 2011-01-12: doplnené volite¾né zobrazovanie/skrývanie alternatívnej antifóny pre žalmy/chválospevy 
+					 * 2011-01-17: upravené tak, aby sa nezobrazovalo len pre spomienky svätých [tam spadajú aj liturgické slávenia 1.1. a pod.]
+					 */
+					if( /*(_global_den.litobd != OBD_CEZ_ROK) */ (_global_den.spolcast != _encode_spol_cast(MODL_SPOL_CAST_NEURCENA)) && (equals(rest, PARAM_MYSLIENKA_K_ZALMU))){
 						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
 							write = 0;
 #if defined(EXPORT_HTML_SPECIALS)
