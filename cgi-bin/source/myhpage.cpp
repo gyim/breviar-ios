@@ -46,7 +46,7 @@
 #ifndef __MYHPAGE_CPP_HTML_CONST
 #define __MYHPAGE_CPP_HTML_CONST
 const char *html_header_1 = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\n\t\"http://www.w3.org/TR/html4/loose.dtd\">\n<html>\n<head>\n\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1250\">\n\t<meta name=\"Author\" content=\"Juraj Vidéky\">\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"";
-const char *html_footer_1 = "<p>"; // "<p><center>______</center>"; // "<hr>";
+const char *html_footer_1 = STR_EMPTY; // "<p><center>______</center>"; // "<hr>";
 #endif /*__MYHPAGE_CPP_HTML_CONST*/
 
 #define MAX_MAIL_LABEL 20
@@ -298,6 +298,8 @@ const char *build_template[POCET_JAZYKOV + 1] = {"<!--Verzia: %s.-->", "<!--Verz
 // Generované + dátum (bez času - pre batch mód, aby sa ľahko porovnávali vygenerované modlitby): "%d. %s %d"
 const char *datum_template[POCET_JAZYKOV + 1] = {"%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d"};
 
+#define HTML_P_PATKA "p class=\"patka\""
+
 const char *html_mail_label_long = "Juraj Vidéky";
 const char *html_mail_label_short = "J. V.";
 
@@ -386,6 +388,7 @@ void patka(void){
 		mystrcpy(html_mail_label, html_mail_label_long, MAX_MAIL_LABEL);
 	}
 
+	Export("\n");
 	/* 2010-02-15: celé zapoznámkované */
 	if(1 == 1 || _global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
 		Export("<"HTML_P_PATKA">\n");
@@ -514,6 +517,7 @@ void patka(FILE * expt){
 		mystrcpy(html_mail_label, html_mail_label_long, MAX_MAIL_LABEL);
 	}
 
+	Export("\n");
 	/* 2010-02-15: celé zapoznámkované */
 	if(1 == 1 || _global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
 		fprintf(expt, "<"HTML_P_PATKA">\n");

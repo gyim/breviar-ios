@@ -990,6 +990,8 @@ const char *html_text_den_v_roku[POCET_JAZYKOV + 1] = {"deò v roku", "den v roce
 const char *html_text_zacina[POCET_JAZYKOV + 1] = {"zaèína", "zaèíná", "starts", "", "", "zaèíná", "kezdõdik"};
 const char *html_text_liturgicky_rok[POCET_JAZYKOV + 1] = {"liturgický rok", "liturgický rok", "liturgical year", "", "", "liturgický rok", "liturgikus év"};
 
+const char *html_text_txt_export[POCET_JAZYKOV + 1] = {"Textový výstup: ", "Textový výstup: ", "Text export: ", "", "", "Textový výstup: ", "Text export: "};
+
 const char *html_text_pohyblive1[POCET_JAZYKOV + 1] = {
 	"<td align=center>Rok<br>Pána</td>\n",
 	"<td align=center>Léto<br>Pánì</td>\n", 

@@ -4116,10 +4116,10 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 						/* <font size=-1></font> zmeneny na <span class="small"></span>, 2003-07-14 */
 						/* 2008-01-05: doplnen· viacjazyËnosù pre text "po Popolcovej strede" */
 						if(typ != EXPORT_DNA_VIAC_DNI_TXT){
-							sprintf(pom2, "</span><br><span class=\"small\">");
+							sprintf(pom2, "</span><br><"HTML_SPAN_SMALL">");
 						}
 						else{
-							sprintf(pom2, STR_EMPTY);
+							mystrcpy(pom2, STR_EMPTY, MAX_STR);
 						}
 						sprintf(pom, "%s %s, %s", nazov_Dna(_local_den.denvt), (char *)text_PO_POPOLCOVEJ_STREDE[_global_jazyk], nazov_obdobia(_local_den.litobd));
 						strcat(pom, pom2);
@@ -4134,10 +4134,10 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 					 */
 					else if(_local_den.litobd == OBD_OKTAVA_NARODENIA){
 						if(typ != EXPORT_DNA_VIAC_DNI_TXT){
-							sprintf(pom2, "</span><br><span class=\"small\">");
+							sprintf(pom2, "</span><br><"HTML_SPAN_SMALL">");
 						}
 						else{
-							sprintf(pom2, STR_EMPTY);
+							mystrcpy(pom2, STR_EMPTY, MAX_STR);
 						}
 						sprintf(pom, "%s %s", nazov_Dna(_local_den.denvt), (char *)text_V_OKTAVE_NARODENIA[_global_jazyk]);
 						strcat(pom, pom2);
@@ -4153,7 +4153,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 							sprintf(pom2, "</span>");
 						}
 						else{
-							sprintf(pom2, STR_EMPTY);
+							mystrcpy(pom2, STR_EMPTY, MAX_STR);
 						}
 						sprintf(pom, "%d. %s, %s", _local_den.den, nazov_mesiaca_gen(_local_den.mesiac - 1), nazov_obdobia(_local_den.litobd));
 						strcat(pom, pom2);
@@ -4166,14 +4166,15 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 							sprintf(pom2, "</span>");
 						}
 						else{
-							sprintf(pom2, STR_EMPTY);
+							mystrcpy(pom2, STR_EMPTY, MAX_STR);
 						}
 						sprintf(pom, "%s, %s, %d", nazov_Dna(_local_den.denvt), nazov_obdobia(_local_den.litobd), _local_den.tyzden);
 						strcat(pom, html_text_tyzden[_global_jazyk]);
+						strcat(pom, pom2);
 						if(typ != EXPORT_DNA_VIAC_DNI_TXT){
 							strcat(_global_string, pom); /* 2006-08-03: prilepujeme nadvakr·t */
-							sprintf(pom2, "<br><"HTML_SPAN_SMALL">");
-							sprintf(pom, " %d", tyzden_zaltara(_local_den.tyzden));
+							sprintf(pom, "<br><"HTML_SPAN_SMALL">");
+							sprintf(pom2, "%d", tyzden_zaltara(_local_den.tyzden));
 							strcat(pom, pom2);
 							strcat(pom, html_text_tyzden_zaltara[_global_jazyk]);
 						}
@@ -4251,7 +4252,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			sprintf(pom, "<"HTML_SPAN_RED">");
 		}
 		else{
-			sprintf(pom, STR_EMPTY);
+			mystrcpy(pom, STR_EMPTY, MAX_STR);
 		}
 		sprintf(pom2, "%s", nazov_slavenia(_local_den.typslav));
 		strcat(pom, pom2);
@@ -5584,7 +5585,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 #ifdef ZOZNAM_DNI_MESIACOV_OLD
 		/* zoznam cisel dni */
 		/* <font size=-1></font> zmeneny na <span class="small"></span>, 2003-07-14 */
-		Export("<span class=\"small\">\n");
+		Export("<"HTML_SPAN_SMALL">\n");
 
 		Vytvor_global_link(VSETKY_DNI, _global_den.mesiac, _global_den.rok, LINK_DEN_MESIAC);
 		/* zmenene <b> na <span class="bold">, 2003-07-02 */
@@ -6275,7 +6276,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 #define NEWLINE if(typ == EXPORT_DNA_VIAC_DNI_SIMPLE) Export("; "); \
 	else if(som_v_tabulke == NIE){\
 		if(typ == EXPORT_DNA_VIAC_DNI) Export("\n<br>\n&nbsp;&nbsp;&nbsp;%s\n", html_text_alebo[_global_jazyk]); \
-		else Export("\n<p>\n"); }\
+		else if(typ != EXPORT_DNA_VIAC_DNI_TXT) Export("\n<p>\n");\
+	}\
 	else Export("</td>\n</tr>\n\n<tr valign=baseline>\n<td></td>\n<td></td>\n<td>")
 
 #define BUTTONS(typ, a);     {\
@@ -6285,7 +6287,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	}\
     Export("%s", _global_string); \
 	if(typ == EXPORT_DNA_VIAC_DNI_TXT){ \
-		Export("\""); \
+		Export("\";"); \
 	}\
     _export_rozbor_dna_buttons(typ, a); }
 /* 
@@ -6375,7 +6377,12 @@ void _export_rozbor_dna(short int typ){
 			i = LINK_DEN;
 		mystrcpy(pom3, nazov_Dn(_global_den.denvt), MAX_SMALL);
 	}/* typ == EXPORT_DNA_VIAC_DNI_SIMPLE */
-	else{
+	else if(typ == EXPORT_DNA_VIAC_DNI_TXT){
+		i = LINK_DEN_MESIAC_NIE;
+		dvojbodka = 0;
+		ciarka = 0;
+	}/* typ == EXPORT_DNA_VIAC_DNI_TXT */
+	else if(typ == EXPORT_DNA_VIAC_DNI_SIMPLE){
 		i = LINK_DEN_MESIAC_NIE; /* 2008-01-22: zmenenÈ, pÙvodne tu bolo LINK_DEN_MESIAC_ROK */
 		/* najprv toto, -- if(_global_den.denvt != DEN_NEDELA) mystrcpy(pom3, nazov_dna(_global_den.denvt), MAX_SMALL);
 		 * potom toto: -- if((_global_den.denvt != DEN_NEDELA) 
@@ -6383,10 +6390,10 @@ void _export_rozbor_dna(short int typ){
 		 *	) ciarka = ',';
 		 */
 		dvojbodka = ' '; /* 2008-01-22: zmenenÈ, pÙvodne tu bolo dvojbodka = ':'; */
-	}/* typ != EXPORT_DNA_VIAC_DNI ani EXPORT_DNA_VIAC_DNI_SIMPLE */
+	}/* typ != EXPORT_DNA_VIAC_DNI ani EXPORT_DNA_VIAC_DNI_SIMPLE ani EXPORT_DNA_VIAC_DNI_TXT */
 
 	if(i == LINK_DEN_MESIAC_NIE){
-		mystrcpy(_global_link, "", MAX_STR);
+		mystrcpy(_global_link, STR_EMPTY, MAX_STR);
 	}
 	else{
 		vytvor_global_link(_global_den.den, _global_den.mesiac, _global_den.rok, i);
@@ -6412,19 +6419,14 @@ void _export_rozbor_dna(short int typ){
 	if(som_v_tabulke == ANO){
 		Export("<td align=\"right\" valign=\"top\">");
 	}
-	else{
-		if(typ == EXPORT_DNA_VIAC_DNI_TXT){
-			Export("\n");
-		}
-	}
-	Export("%s%s%s%c", pom1, _global_link, pom2, dvojbodka);
+	Export("%s%s%s", pom1, _global_link, pom2);
+	if(dvojbodka > 0)
+		Export("%c", dvojbodka);
 	if(som_v_tabulke == ANO)
 		Export("</td>\n");
 	else{
-		if(typ != EXPORT_DNA_JEDEN_DEN)
+		if((typ != EXPORT_DNA_JEDEN_DEN) && (typ != EXPORT_DNA_VIAC_DNI_TXT))
 			Export("&nbsp;\n");
-		else
-			Export("\n");
 	}
 
 	/* druhy stlpec: nazov dna 
@@ -6434,18 +6436,15 @@ void _export_rozbor_dna(short int typ){
 		if(som_v_tabulke == ANO){
 			Export("<td align=\"left\" valign=\"top\">");
 		}
-		Export("%s%s%s%c", pom1, pom3, pom2, ciarka);
+		Export("%s%s%s", pom1, pom3, pom2);
+		if(ciarka > 0)
+			Export("%c", ciarka);
 		if(som_v_tabulke == ANO){
 			Export("</td>\n");
 		}
 		else{
-			if(typ != EXPORT_DNA_JEDEN_DEN)
+			if((typ != EXPORT_DNA_JEDEN_DEN) && (typ != EXPORT_DNA_VIAC_DNI_TXT))
 				Export("&nbsp;\n");
-			else{
-				if(typ == EXPORT_DNA_VIAC_DNI_TXT){
-					Export("\n");
-				}
-			}
 		}
 	}
 
@@ -6721,7 +6720,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 	}/* if(_global_opt_batch_monthly == ANO) */
 	else{
 		batch_export_file = batch_html_file;
-		mystrcpy(parameter_M, "", SMALL);
+		mystrcpy(parameter_M, STR_EMPTY, SMALL);
 	}/* else if(_global_opt_batch_monthly == ANO) */
 
 	/* 2009-08-04: in˝ export */
@@ -6739,7 +6738,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 				if(a > 0)
 					sprintf(poradie_svateho, "/%d", a);
 				else
-					mystrcpy(poradie_svateho, "", SMALL);
+					mystrcpy(poradie_svateho, STR_EMPTY, SMALL);
 				if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
 					fprintf(batch_export_file, "<a href=\""FILENAME_EXPORT_DATE_SIMPLE"_%d%c.htm\">%d%s</a> | ", _global_den.rok % 100, _global_den.mesiac, _global_den.den, a, char_modlitby[i], _global_den.den, /* char */ poradie_svateho);
 				else /* EXPORT_DATE_FULL */
@@ -6979,7 +6978,7 @@ void _export_rozbor_dna_mesiaca_batch(short int d, short int m, short int r){
 	}/* if(_global_opt_batch_monthly == ANO) */
 	else{
 		batch_export_file = batch_html_file;
-		mystrcpy(parameter_M, "", SMALL);
+		mystrcpy(parameter_M, STR_EMPTY, SMALL);
 	}/* else if(_global_opt_batch_monthly == ANO) */
 	// samotnÈ vytlaËenie prÌkazu
 	fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -j%s%s\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, skratka_jazyka[_global_jazyk], parameter_M);
@@ -7729,7 +7728,15 @@ void rozbor_mesiaca(short int mesiac, short int rok, short int txt_export = 0){
 		Log("-- rozbor_mesiaca: vol·m _rozbor_dna() pre deÚ %d...\n", datum.den);
 		if(typ == EXPORT_DNA_VIAC_DNI_TXT){
 			Export("\n");
-			Export("mesiac == %d, den == %d [%02d%02d]\n", mesiac, datum.den, datum.den, mesiac);
+#ifdef NIELEN_PRE_PETA_ZIMENA
+			Export((char *)html_text_mesiac[_global_jazyk]);
+			Export(" == %d, ", mesiac);
+			Export((char *)html_text_den[_global_jazyk]);
+			Export(" == %d ", datum.den);
+#endif
+			Export("expt"); // PZ: $rkc // 2011-02-03
+			Export("[%02d%02d]", datum.den, mesiac);
+			Export("=");
 		}
 		_rozbor_dna(datum, rok);
 		Log("-- rozbor_mesiaca: nasleduje _export_rozbor_dna() pre deÚ %d...\n", datum.den);
@@ -8261,7 +8268,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 			/* <font size=-1></font> zmeneny na <span class="small"></span>, 2003-07-14 
 			 * a napokon uplne odstraneny...
 			 */
-			Export("<br><span class=\"small\"><a href=\"#explain\">%s</a></span>\n", html_text_Vysvetlivky[_global_jazyk]);
+			Export("<br><"HTML_SPAN_SMALL"><a href=\"#explain\">%s</a></span>\n", html_text_Vysvetlivky[_global_jazyk]);
 			/* napokon ciaru (kedysi tu bol element hr) */
 			Export("</center>\n<p>\n");
 		}
@@ -8584,7 +8591,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 	Log("-- _main_rozbor_dna(char *, char *, char *, char *, char *): end\n");
 }/* _main_rozbor_dna() */
 
-
+/* 2011-02-02: pridan· funkcia pre jednoduch˝ TXT export konkrÈtneho roka */
 void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
 	/* na z·klade _main_rozbor_dna; textov˝ export len pre RKC */
 	short int heading_written = 0;
@@ -8597,7 +8604,6 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
 	mystrcpy(pom2, STR_EMPTY, MAX_STR); /* 2006-08-01: pridanÈ */
 	char pom3[MAX_STR]; /* 2008-08-08: pridanÈ kvÙli css */
 	mystrcpy(pom3, STR_EMPTY, MAX_STR);
-	char str_month[SMALL] = STR_EMPTY; /* 2009-08-12: pridanÈ */
 
 	/* rozparsovanie parametrov den, mesiac, rok */
 	Log("/* rozparsovanie parametrov den, mesiac, rok */\n");
@@ -8641,13 +8647,26 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
 
 	Log("/* teraz result == SUCCESS */\n");
 	if(m == VSETKY_MESIACE){
+		Export("<h2>");
+		Export((char *)html_text_txt_export[_global_jazyk]);
+		Export((char *)html_text_lit_kalendar[_global_jazyk]);
+		Export(" ");
+		Export((char *)html_text_rok[_global_jazyk]);
+		Export(" %d", r);
+		Export("</h2>");
 		Export("\n");
-		Export("<pre>\n");
+		Export("<pre>");
 		/* teraz generujem jednotlive mesiace so vsetkymi dnami */
 		for(m = MES_JAN; m <= MES_DEC; m++){
-			Export("mesiac == %d\n", m + 1);
+#ifdef NIELEN_PRE_PETA_ZIMENA
+			Export("\n\n");
+			Export((char *)html_text_mesiac[_global_jazyk]);
+			Export(" == %d ", m + 1);
+			Export("(%s)\n", nazov_mesiaca(m));
+#endif
 			rozbor_mesiaca(m + 1, r, 1); /* tam sa vol· _rozbor_dna() a potom _export_rozbor_dna() */
 		}/* for */
+		Export("\n");
 		Export("</pre>\n");
 	}/* m == VSETKY_MESIACE */
 	else{/* m != VSETKY_MESIACE */

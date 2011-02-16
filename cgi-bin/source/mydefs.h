@@ -62,7 +62,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2011-02-02"
+#define BUILD_DATE "2011-02-03"
 
 #define BYTES 250
 #define SMALL 80
@@ -535,8 +535,6 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #define HTML_SPAN_BLUE_BOLD "span class=\"bluebold\""
 #define HTML_SPAN_RED_SMALL "span class=\"redsmall\""
 #define HTML_SPAN_SMALL     "span class=\"small\""
-
-#define HTML_P_PATKA "p class=\"patka\""
 
 /* pridane 2003-07-09, zmenene v cestach pre skript */
 #define HTML_AMPERSAND          "&amp;"
