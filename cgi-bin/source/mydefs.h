@@ -86,7 +86,7 @@
 #define MAX_STR				300 /* maximalna dlzka retazca */
 #define MAX_GLOBAL_STR		360 /* _global_string; 31/03/2000A.D.; 2010-12-07: rozšírené */
 #define MAX_GLOBAL_STR2		20 /* _global_string2, pridané 2006-08-19 */
-#define MAX_GLOBAL_STR_FARBA 150 /* _global_string_farba, pridané 2006-08-19 */
+#define MAX_GLOBAL_STR_FARBA 200 /* _global_string_farba, pridané 2006-08-19 */
 #define MAX_QUERY_STR		300 /* query_string */
 #define MAX_POM_QUERY_TYPE	300 /* pom_QUERY_TYPE */
 #define MAX_GLOBAL_LINK		300 /* maximalna dlzka retazca _global_link */
