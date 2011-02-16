@@ -8536,56 +8536,44 @@ void _main_batch_mode(
 				if(batch_html_file != NULL){
 					Log("batch mode: File `%s' opened for writing...\n", name_batch_html_file);
 					hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_html_file, -1 /* t.j. bez úprav linky */, _global_opt_batch_monthly /* element <body> špeciálne */);
-					/* 2010-02-15: doplnené "zrýchlené vo¾by" */
+					/* 2010-02-15: doplnené "zrýchlené vo¾by" 
+					 * 2010-12-03: opravené, nako¾ko na niektorých mobilných zariadeniach JavaScript funkcie 
+					 */
 					if(_global_opt_batch_monthly == ANO){
 						fprintf(batch_html_file, "<center><h2><b>%s</b></h2></center>\n", (char *)html_text_Breviar_dnes[_global_jazyk]);
-						fprintf(batch_html_file, "<!-- Odkazy na dnešný deò (Dnešné modlitby) a Preh¾ad mesiaca vyžadujú JavaScript. JavaScript funkcia (c) 2009 Peter Sahajda -->\n");
-						fprintf(batch_html_file, "<script language=\"JavaScript\" type=\"text/javascript\" >\n");
-						fprintf(batch_html_file, "<!--\n");
-						fprintf(batch_html_file, "function fn_aktualne(posun_den, posun_mesiac, zmen_typ_cesty)\n");
-						fprintf(batch_html_file, "{\n");
-						fprintf(batch_html_file, "document.bgColor = \"#FFFFCC\";\n");
-						fprintf(batch_html_file, "output=\"\";\n");
+						fprintf(batch_html_file, "<!-- Odkazy na dnešný deò (Dnešné modlitby) a Preh¾ad mesiaca vyžadujú JavaScript. JavaScript funkcia (c) 2009 Peter Sahajda; upravil (c) 2010 Juraj Vidéky -->\n");
 						fprintf(batch_html_file, "\n");
-						fprintf(batch_html_file, "d = new Date();\n");
-						fprintf(batch_html_file, "rok = d.getYear();\n");
-						fprintf(batch_html_file, "if(rok < 2000) { rok += 1900 }\n");
+						fprintf(batch_html_file, "<script language=\"javascript\" type=\"text/javascript\">\n");
+						fprintf(batch_html_file, "var dnes=new Date();\n");
+						fprintf(batch_html_file, "var den=dnes.getDate();\n");
+						fprintf(batch_html_file, "var mesiac_text = [\"jan\",\"feb\",\"mar\",\"apr\",\"maj\",\"jun\",\"jul\",\"aug\",\"sep\",\"okt\",\"nov\",\"dec\"]; \n");
+						fprintf(batch_html_file, "var mesiac=dnes.getMonth() + 1;\n"); // mesiac je od 0 po 11
+						fprintf(batch_html_file, "var mesiac_text1=mesiac_text[dnes.getMonth()];\n");
+						fprintf(batch_html_file, "// var rok=dnes.getFullYear();\n");
+						fprintf(batch_html_file, "var rok = dnes.getYear();\n");
+						fprintf(batch_html_file, "if(rok < 2000) { rok = rok + 1900; }\n");
 						fprintf(batch_html_file, "rok = rok.toString().slice(2);\n");
-						fprintf(batch_html_file, "mesiac = (d.getMonth()+1);\n");
-						fprintf(batch_html_file, "den = d.getDate();\n");
-						fprintf(batch_html_file, "var mesiac_text = new Array(\"nic\",\"jan\",\"feb\",\"mar\",\"apr\",\"maj\",\"jun\",\"jul\",\"aug\",\"sep\",\"okt\",\"nov\",\"dec\");\n");
 						fprintf(batch_html_file, "\n");
-						fprintf(batch_html_file, "mesiac_text1 = mesiac_text[mesiac];\n");
-						fprintf(batch_html_file, "ddnes=den+\".\"+mesiac+\".\"+rok;\n");
+						fprintf(batch_html_file, "if(mesiac <= 9) {mesiac = '0' + mesiac;}\n");
+						fprintf(batch_html_file, "if(den <= 9 ) {den = '0' + den;}\n");
 						fprintf(batch_html_file, "\n");
-						fprintf(batch_html_file, "if( mesiac <= 9) {mesiac = \"0\" + mesiac;}\n");
-						fprintf(batch_html_file, "if(den <= 9 ) {den = \"0\" + den;}\n");
+						/* 2010-12-03: cesty k súborom pod¾a -M3 natvrdo ukazujú na RRMM.htm (rok+mesiac, napr. 1012 pre december 2010); prípadne prerobi, aby pre -M1 export ukazovali na index.htm... */
+						fprintf(batch_html_file, "var cestax = rok.toString()+mesiac.toString()+'-'+mesiac_text1+'/'+rok.toString()+''+mesiac.toString()+''+den.toString()+'.htm';\n");
+						fprintf(batch_html_file, "var cesta_mesiac = rok.toString()+mesiac.toString()+'-'+mesiac_text1+'/'+rok.toString()+''+mesiac.toString()+'.htm';\n");
 						fprintf(batch_html_file, "\n");
-						fprintf(batch_html_file, "datum_cas = rok+\"\"+mesiac+\"\"+den;\n");
+						fprintf(batch_html_file, "var tag1 = '<a href=./';\n");
 						fprintf(batch_html_file, "\n");
-						fprintf(batch_html_file, "var cestax = rok.toString()+mesiac.toString()+\"-\"+mesiac_text1+\"/\"+rok.toString()+\"\"+mesiac.toString()+\"\"+den.toString()+\".htm\";\n");
-						fprintf(batch_html_file, "var cesta_mesiac = rok.toString()+mesiac.toString()+\"-\"+mesiac_text1+\"/\"+rok.toString()+\"\"+mesiac.toString()+\".htm\";\n");
+						fprintf(batch_html_file, "var tag2 = '</a>';\n");
+						fprintf(batch_html_file, "tag2+='<br>';\n");
 						fprintf(batch_html_file, "\n");
-						fprintf(batch_html_file, "var tag1 = \"<a href=./\";\n");
+						fprintf(batch_html_file, "var output='';\n");
 						fprintf(batch_html_file, "\n");
-						fprintf(batch_html_file, "var tag2 = \"</a>\";\n");
-						fprintf(batch_html_file, "tag2+=\"<br>\";\n");
+						fprintf(batch_html_file, "output = output + '<ul><li> '+tag1+cestax+'>Dnešné modlitby ('+den+'. '+mesiac+'. 20'+rok+')'+tag2+'<br></li>';\n");
 						fprintf(batch_html_file, "\n");
-						fprintf(batch_html_file, "output+=\"<ul><li> \"+tag1+cestax+\">%s (\"+den+\". \"+mesiac+\". 20\"+rok+\")\"+tag2+\"<br></li>\";\n", (char *)html_text_Dnesne_modlitby[_global_jazyk]);
+						fprintf(batch_html_file, "output = output + '<li>'+tag1+cesta_mesiac+'>Preh¾ad mesiaca ('+mesiac+'/20'+rok+')'+tag2+'</li></ul>';\n");
 						fprintf(batch_html_file, "\n");
-						// fprintf(batch_html_file, "output+=\"<br>\";\n");
-						fprintf(batch_html_file, "output+=\"<li>\"+tag1+cesta_mesiac+\">%s (\"+mesiac+\"/20\"+rok+\")\"+tag2+\"</li></ul>\";\n", (char *)html_text_Prehlad_mesiaca[_global_jazyk]);
-						// fprintf(batch_html_file, "output+=\"<br>\";\n");
-						fprintf(batch_html_file, "\n");
-						fprintf(batch_html_file, "document.getElementById('txt').innerHTML=output;\n");
-						fprintf(batch_html_file, "\n");
-						fprintf(batch_html_file, "output=\"\";\n");
-						fprintf(batch_html_file, "\n");
-						fprintf(batch_html_file, "return \"0\";\n");
-						fprintf(batch_html_file, "}\n");
-						fprintf(batch_html_file, "-->\n");
+						fprintf(batch_html_file, "document.write(output);\n");
 						fprintf(batch_html_file, "</script>\n");
-						fprintf(batch_html_file, "<div id=\"txt\"></div>\n");
 					}
 
 					fprintf(batch_html_file, "\n");
@@ -9316,9 +9304,12 @@ short int getArgv(int argc, char **argv){
 	 *            `M' (Monthly) spôsob zapisovania v batch móde do adresárov po mesiacoch
 	 * 2010-08-04: pridaný nasledovný parameter:
 	 *            `k' (Kalendár) špecifikácia prípadného lokálneho (reho¾ného) kalendára, súvisí s parametrom 'j' (jazyk)
+	 * 2010-11-29: pridané nasledovné parametre:
+	 *            `H' (header) špeciálne správanie pre 2. až predposledný súbor generovaný append režimom (-a1): includovanie hlavièky
+	 *            `F' (footer) špeciálne správanie pre 2. až predposledný súbor generovaný append režimom (-a1): includovanie pätky
 	 *
 	 */
-	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::1::2::3::4::5::6::7::a::h::e::f::g::l::i::\?::b::n::o::k::j::c::u::M::I::", MAX_STR);
+	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::1::2::3::4::5::6::7::a::h::e::f::g::l::i::\?::b::n::o::k::j::c::u::M::I::H::F::", MAX_STR);
 	/* tie options, ktore maju za sebou : maju povinny argument;
 	 *	ak maju :: tak maju volitelny */
 

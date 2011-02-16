@@ -19601,7 +19601,9 @@ label_25_MAR:
 
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ_OP)){ /* 2010-11-29: odvetvené pre Slovensko a czop */
+							_vlastna_cast_2citanie;
+						}
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
