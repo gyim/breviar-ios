@@ -218,6 +218,13 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_PRM_BATCH_MODE "pbm"
 #endif
 
+#define PRM_TXT 	20
+#ifdef LONG_PARAM_NAMES
+	#define STR_PRM_TXT "PRM_DATUM_TXT"
+#else
+	#define STR_PRM_TXT "ptxt"
+#endif
+
 /* nasleduju parametre z formularov pre vsetky typy dotazov,
  * kedysi bolo pre kazdy STR_... definovane WWW_STR_...,
  * teraz ADD_WWW_PREFIX_(STR_...) 

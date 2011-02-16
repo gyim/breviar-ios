@@ -405,7 +405,7 @@ const char *nazov_slavenia_lokal[] =
 {""
 ,"len v rožòavskej katedrále"
 ,"hlavný patrón Trnavskej arcidiecézy" /* "hlavný patrón Bratislavsko-Trnavskej arcidiecézy" */
-,"v Bratislavskej a Trnavskej arcidiecéze a v Banskobystrickej, Košickej, Nitrianskej a Rožòavskej diecéze" /* "v Bratislavsko-Trnavskej arcidiecéze a v Banskobystrickej, Košickej, Nitrianskej a Rožòavskej diecéze" */
+,"v Bratislavskej a Trnavskej arcidiecéze <br>a v Banskobystrickej, Košickej, Nitrianskej a Rožòavskej diecéze" /* "v Bratislavsko-Trnavskej arcidiecéze a v Banskobystrickej, Košickej, Nitrianskej a Rožòavskej diecéze" */
 ,"v Nitrianskej diecéze sviatok hlavných patrónov"
 ,"len v Košickej diecéze"
 ,"len v Nitrianskej diecéze"
