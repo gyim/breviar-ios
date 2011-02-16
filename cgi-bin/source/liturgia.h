@@ -630,11 +630,14 @@ typedef struct dm _struct_dm;
 #define VSETKY_DNI   32
 #define STR_VSETKY_DNI  "*"
 
-/* liturgicke obdobia */
+/* liturgickÈ obdobia 
+ * 2011-01-26: ËÌsla konötant·m pridelenÈ tak, aby reöpektovali plynulosù liturgickÈho roka od zv‰zku I brevi·ra
+ */
 //OBD_ADVENTNE
-#define OBD_ADVENTNE_I             1 /* do 16. decembra */
-#define OBD_ADVENTNE_II            2 /* po 16. decembri */
+#define OBD_ADVENTNE_I             0 /* do 16. decembra */
+#define OBD_ADVENTNE_II            1 /* po 16. decembri */
 //OBD_VIANOCNE
+#define OBD_OKTAVA_NARODENIA       2 /* narodenie Pana -- 1. jan. */
 #define OBD_VIANOCNE_I             3 /* do slavnosti zjavenia pana */
 #define OBD_VIANOCNE_II            4 /* po slavnosti zjavenia pana */
 //OBD_CEZ_ROK
@@ -642,23 +645,22 @@ typedef struct dm _struct_dm;
 //OBD_POSTNE
 #define OBD_POSTNE_I               6 /* do soboty v piatom tyzdni */
 #define OBD_POSTNE_II_VELKY_TYZDEN 7 /* velky tyzden */
-//OBD_VELKONOCNE
+//OBD_VELKONOCNE_TROJDNIE
 #define OBD_VELKONOCNE_TROJDNIE    8 /* umucenia a zmrtvychvstania Pana */
-#define OBD_VELKONOCNE_I           9 /* do nanebovstupenia pana */
-#define OBD_VELKONOCNE_II         10 /* po nanebovstupeni pana */
-/* nasleduju specialne pod-obdobia */
-#define OBD_VELKONOCNA_OKTAVA      0 /* velkonocna nedela -- 2. velk. ne */
-#define OBD_OKTAVA_NARODENIA      11 /* narodenie Pana -- 1. jan. */
+//OBD_VELKONOCNE
+#define OBD_VELKONOCNA_OKTAVA      9 /* velkonocna nedela -- 2. velk. ne */
+#define OBD_VELKONOCNE_I          10 /* do nanebovstupenia pana */
+#define OBD_VELKONOCNE_II         11 /* po nanebovstupeni pana */
 
 #define	POCET_OBDOBI	11
 
 /* zv‰zok brevi·ra - zv‰zok, v ktorom sa nach·dza danÈ liturgickÈ obdobie; doplnenÈ 2007-12-20; opravenÈ 2008-01-23 */
 const short int zvazok_breviara[POCET_OBDOBI + 1] = 
-{2, 1, 1, 1, 1, 3, 2, 2, 2, 2, 2, 1}; // nepotrebujeme rozlÌöiù 3. a 4. zv‰zok, ktorÈ obidva obsahuj˙ OBD_CEZ_ROK
+{1, 1, 1, 1, 1, 3, 2, 2, 2, 2, 2, 2}; // nepotrebujeme rozlÌöiù 3. a 4. zv‰zok, ktorÈ obidva obsahuj˙ OBD_CEZ_ROK
 
 /* poËet t˝ûdÚov pre danÈ liturgickÈ obdobie; doplnenÈ 2011-01-25 */
 const short int lit_obd_pocet_tyzdnov[POCET_OBDOBI + 1] = 
-{1, 4, 1, 2, 1, 34, 6, 1, 1, 7, 2, 1};
+{4, 1, 1, 2, 1, 34, 6, 1, 1, 1, 7, 2};
 
 /* nazov_obdobia: string pre nazov liturgickeho obdobia */
 //extern const char *nazov_obdobia[];

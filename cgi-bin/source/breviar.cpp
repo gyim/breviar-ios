@@ -487,6 +487,8 @@ short int export_month_nova_modlitba = NIE;
 
 /* 2011-01-25: pridanÈ pre liturgickÈ obdobie */
 char pom_LIT_OBD [SMALL] = STR_EMPTY;
+/* 2011-01-26: pridanÈ pre liturgick˝ rok */
+char pom_LIT_ROK [VERY_SMALL] = STR_EMPTY;
 
 char bad_param_str[MAX_STR] = STR_EMPTY; /* inicializacia pridana 2003-08-13 */
 
@@ -2840,7 +2842,7 @@ short int kontrola(short int den, short int mesiac, short int rok){
 short int atolitobd(char *lo){
 	short int i = 0;
 	do{
-		if(equals(lo, nazov_obdobia(i)) || equals(lo, nazov_obdobia_v(i))){
+		if(equals(lo, nazov_obdobia_ext(i))){
 			return i;
 		}
 		i++;
@@ -5649,7 +5651,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("</select>\n");
 
 	Export("&nbsp;");
-	Export((char *)html_text_pre[_global_jazyk]);
+	Export((char *)html_text_den[_global_jazyk]);
 	Export("&nbsp;");
 
 	/* pole WWW_DEN_V_TYZDNI */
@@ -5660,28 +5662,40 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		else
 			Export("<option>%s", nazov_dna(day));
 	Export("\n</select>\n");
-	Export(",<br>\n");
+
+	Export(", \n");
+	Export((char *)html_text_liturgicky_rok[_global_jazyk]);
+	Export("&nbsp;");
+
+	/* pole WWW_LIT_ROK */
+	Export("<select name=\"%s\">\n", STR_LIT_ROK);
+	for(lo = 'A'; lo <= 'C'; lo++)
+		if(lo == _global_den.litrok)
+			Export("<option selected>%c", lo);
+		else
+			Export("<option>%c", lo);
+	Export("\n</select>\n");
+	Export(", <br>\n");
 
 	/* pole WWW_TYZDEN */
 	Export("<select name=\"%s\">\n", STR_TYZDEN);
 	for(day = 0; day < POCET_NEDIEL_CEZ_ROK; day++)
-		if(day == _global_den.tyzzal)
+		if(day == _global_den.tyzden)
 			Export("<option selected>%d", day);
 		else
 			Export("<option>%d", day);
 	Export("\n</select>&nbsp;");
 
 	Export((char *)html_text_tyzden[_global_jazyk]);
-
-	Export("&nbsp;");
+	Export(", \n");
 
 	/* pole WWW_LIT_OBD */
 	Export("<select name=\"%s\">\n", STR_LIT_OBD);
 	for(lo = 0; lo <= POCET_OBDOBI; lo++)
 		if(lo == _global_den.litobd)
-			Export("<option selected>%s", nazov_obdobia(lo));
+			Export("<option selected>%s", nazov_obdobia_ext(lo));
 		else
-			Export("<option>%s", nazov_obdobia(lo));
+			Export("<option>%s", nazov_obdobia_ext(lo));
 	Export("\n</select>\n");
 
 	Export("</td></tr></table>\n");
@@ -8120,8 +8134,10 @@ void _main_zaltar(char *den, char *tyzden, char *modlitba){
 
 /*---------------------------------------------------------------------*/
 /* _main_liturgicke_obdobie() podæa _main_zaltar() */
-void _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char *litobd){
-	short int d, t, p, i, lo, tz;
+short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char *litobd, char *litrok){
+	short int d, t, p, i, lo, tz, poradie_svateho = 0, ret;
+	char lr;
+	lr = litrok[0];
 	lo = atolitobd(litobd);
 	d = atodenvt(den);
 	t = atoi(tyzden);
@@ -8129,6 +8145,17 @@ void _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char *lit
 
 	/* do bud˙cnosti treba rieöiù niektorÈ öpeciality, napr. adv. obd. II alebo vian. obd. II (dni urËenÈ d·tumom); triduum a pod. */
 
+	if(lr > 'C' || lr < 'A'){
+		Export("NevhodnÈ ˙daje:<br>\n<ul>");
+		/* tyzden */
+		if(equals(tyzden, STR_EMPTY))
+			Export("<li>tak˝ liturgick˝ rok nemoûno ûiadaù</li>\n");
+		else if((t < 1) || (t > 4))
+			Export("<li>t˝ûdeÚ = <"HTML_SPAN_BOLD">%c</span></li>\n", lr);
+		Export("</ul>\n");
+		ALERT;
+		return FAILURE;
+	}
 	if(t > lit_obd_pocet_tyzdnov[lo]){
 		Export("NevhodnÈ ˙daje:<br>\n<ul>");
 		/* tyzden */
@@ -8138,7 +8165,7 @@ void _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char *lit
 			Export("<li>t˝ûdeÚ = <"HTML_SPAN_BOLD">%s</span></li>\n", tyzden);
 		Export("</ul>\n");
 		ALERT;
-		return;
+		return FAILURE;
 	}
 	/* pÙstne obdobie nezaËÌna nedeæou, ale popolcovou stredou; technicky ide o 0. t˝ûdeÚ pÙstneho obdobia */
 	if((d < DEN_NEDELA) || (d > DEN_SOBOTA) || ((t < 0) || ((t == 0) && ((lo != OBD_POSTNE_I) && (d < DEN_STREDA)))) || (t > POCET_NEDIEL_CEZ_ROK)){
@@ -8155,7 +8182,7 @@ void _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char *lit
 			Export("<li>t˝ûdeÚ = <"HTML_SPAN_BOLD">%s</span></li>\n", tyzden); /* zmenene <b> na <span class="bold">, 2003-07-02 */
 		Export("</ul>\n");
 		ALERT;
-		return;
+		return FAILURE;
 	}
 	p = MODL_NEURCENA;
 	for(i = MODL_INVITATORIUM; i <= MODL_DRUHE_KOMPLETORIUM; i++){
@@ -8187,7 +8214,7 @@ void _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char *lit
 	}
 	if(p == MODL_NEURCENA){
 		Export("NevhodnÈ ˙daje: nie je urËen· modlitba.\n");
-		return;
+		return FAILURE;
 	}
 	_global_modlitba = p;
 	/* vstupom pre showPrayer() je iba zakladny typ modlitby;
@@ -8205,26 +8232,122 @@ void _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char *lit
 			_global_modlitba = MODL_KOMPLETORIUM;
 	}/* nie je to nedela */
 
+	_global_modlitba = p;
+	/* 2011-01-26: nastavenie niektor˝ch atrib˙tov pre _global_den */
 	_global_den.denvt = d;
 	_global_den.litobd = lo;
 	_global_den.tyzzal = tz;
 	_global_den.tyzden = t;
-	/* _global_den.litrok = ??? 
+	_global_den.litrok = lr; // default: litrok  = (char)('A' + nedelny_cyklus(den, mesiac, rok));
+	mystrcpy(_global_den.meno, STR_EMPTY, MENO_SVIATKU);
+	/* öpeci·lne nastavenie hodnoty smer */
+	switch(lo){
+		case OBD_VELKONOCNE_TROJDNIE:
+			_global_den.smer = 1; /* trojdnie */
+			_global_den.farba = LIT_FARBA_BIELA;
+			break;
+		case OBD_ADVENTNE_I:
+			if(d == DEN_NEDELA)
+				_global_den.smer = 2; /* nedele adventnÈ */
+			else
+				_global_den.smer = 13; /* vöednÈ dni adventnÈ */
+			_global_den.farba = LIT_FARBA_FIALOVA;
+			break;
+		case OBD_ADVENTNE_II:
+			if(d == DEN_NEDELA)
+				_global_den.smer = 2; /* nedele adventnÈ */
+			else
+				_global_den.smer = 9; /* vöednÈ dni od 17. do 24. decembra */
+			_global_den.farba = LIT_FARBA_FIALOVA;
+			break;
+		case OBD_VELKONOCNA_OKTAVA:
+			_global_den.smer = 2; /* veækonoËn· okt·va */
+		case OBD_POSTNE_I:
+			if(d == DEN_NEDELA)
+				_global_den.smer = 2; /* nedele pÙstne */
+			else{
+				if((d == DEN_STREDA) && (t == 0))
+					_global_den.smer = 2; /* popolcov· streda */
+				else
+					_global_den.smer = 9; /* vöednÈ dni v pÙste */
+			}
+			_global_den.farba = LIT_FARBA_FIALOVA;
+			break;
+		case OBD_POSTNE_II_VELKY_TYZDEN:
+			_global_den.smer = 2;
+			_global_den.farba = LIT_FARBA_FIALOVA;
+			break;
+		case OBD_VELKONOCNE_I:
+			if(d == DEN_NEDELA)
+				_global_den.smer = 2; /* nedele veækonoËnÈ */
+			else
+				_global_den.smer = 13; /* vöednÈ dni veækonoËnÈ od pondelka po veækonoËnej okt·ve aû do soboty pred ZoslanÌm Ducha Sv‰tÈho vËÌtane */
+			_global_den.farba = LIT_FARBA_BIELA;
+			break;
+		case OBD_VELKONOCNE_II:
+			if(d == DEN_NEDELA)
+				_global_den.smer = 2; /* nedele veækonoËnÈ */
+			else
+				_global_den.smer = 13; /* vöednÈ dni veækonoËnÈ od pondelka po veækonoËnej okt·ve aû do soboty pred ZoslanÌm Ducha Sv‰tÈho vËÌtane */
+			_global_den.farba = LIT_FARBA_BIELA;
+			break;
+		case OBD_VIANOCNE_I:
+			if(d == DEN_NEDELA)
+				_global_den.smer = 6; /* nedele vianoËnÈ */
+			else
+				_global_den.smer = 13; /* vöednÈ dni vianoËnÈ */
+			_global_den.farba = LIT_FARBA_BIELA;
+			break;
+		case OBD_VIANOCNE_II:
+			if(d == DEN_NEDELA)
+				_global_den.smer = 6; /* nedele vianoËnÈ */
+			else
+				_global_den.smer = 13; /* vöednÈ dni vianoËnÈ */
+			_global_den.farba = LIT_FARBA_BIELA;
+			break;
+		case OBD_OKTAVA_NARODENIA:
+			_global_den.smer = 9; /* vianoËn· okt·va */
+			_global_den.farba = LIT_FARBA_BIELA;
+			break;
+		case OBD_CEZ_ROK:
+			if(d == DEN_NEDELA)
+				_global_den.smer = 6; /* nedele cezroËnÈ */
+			else
+				_global_den.smer = 13; /* vöednÈ dni cezroËnÈ */
+			_global_den.farba = LIT_FARBA_ZELENA;
+			break;
+		default:
+			_global_den.smer = 13;
+			_global_den.farba = LIT_FARBA_ZELENA;
+			break;
+	}/* switch(lo) */
+	/* 
 	treba nejako hack-ovaù a nastaviù aj tieto:
-		_global_den.litobd
-		_global_den.litrok
 		_global_den.den pre adv2 a vian1 (25, 26 atd.)
-		_global_den.denvt
 		devr pre öpeciality cezroËnÈho
 	 */
-	liturgicke_obdobie(lo, t, d, tz, 0);
+	liturgicke_obdobie(lo, t, d, tz, poradie_svateho);
 
-	Log("spustam showPrayer(%s)...\n",
-		nazov_Modlitby(_global_modlitba));
+	/* 2011-01-26: skopÌrovanÈ podæa funkcie _rozbor_dna_s_modlitbou(); uklad· heading do stringu _global_string */
+	Log("spustam init_global_string(EXPORT_DNA_JEDEN_DEN, svaty == %d, modlitba == %s)...\n", poradie_svateho, nazov_modlitby(p));
+	ret = init_global_string(EXPORT_DNA_JEDEN_DEN, poradie_svateho, p);
 
+	if(ret == FAILURE){
+		Log("init_global_string() returned FAILURE, so returning FAILURE...\n");
+		return FAILURE;
+	}
+
+	_export_heading_center(_global_string);
+
+	Log("spustam showPrayer(%s) z funkcie _main_liturgicke_obdobie()...\n", nazov_Modlitby(_global_modlitba));
 	/* predpokladam, ze aj _global_modlitba je prve/druhe vespery,
 	 * v _global_prve_vespery su spravne udaje (podobne kompletorium) */
+	LOG_ciara;
 	showPrayer(p);
+	LOG_ciara;
+	Log("...po n·vrate zo showPrayer(%s) vo funkcii _main_liturgicke_obdobie().\n", nazov_Modlitby(_global_modlitba));
+
+	return SUCCESS;
 }/* _main_liturgicke_obdobie() */
 
 /*---------------------------------------------------------------------*/
@@ -10294,6 +10417,23 @@ short int getForm(void){
 			Log("Premenn· pom_LIT_OBD je uû naplnen· (%s). NeËÌtam z %s...\n", pom_LIT_OBD, ADD_WWW_PREFIX_(STR_LIT_OBD));
 		}
 
+		/* premenna WWW_LIT_ROK */
+		/* ak je naplnena pom_LIT_ROK, znamena to, ze uz bola naplnena, preto nemusi existovat */
+		if(equals(pom_LIT_ROK, STR_EMPTY)){
+			ptr = getenv(ADD_WWW_PREFIX_(STR_LIT_ROK));
+			if(ptr == NULL){
+				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_LIT_ROK));
+				ALERT;
+				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_LIT_ROK));
+				return FAILURE; /* failure */
+			}
+			if(strcmp(ptr, EMPTY_STR) != 0)
+				mystrcpy(pom_LIT_ROK, ptr, SMALL);
+		}
+		else{
+			Log("Premenn· pom_LIT_ROK je uû naplnen· (%s). NeËÌtam z %s...\n", pom_LIT_ROK, ADD_WWW_PREFIX_(STR_LIT_ROK));
+		}
+
 	}/* query_type == PRM_LIT_OBD */
 
 	else if(query_type == PRM_SVIATOK){
@@ -11184,6 +11324,27 @@ short int parseQueryString(void){
 				return FAILURE; /* failure */
 			}
 
+			/* premenn· LIT_ROK
+			 *
+			 * 2011-01-26: doplnenÈ
+			 */
+			i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
+			Log("pok˙öam sa zistiù hodnotu parametra %s...\n", STR_LIT_ROK);
+			while((equalsi(pom_LIT_ROK, STR_EMPTY)) && (i < pocet)){
+				Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
+				if(equals(param[i].name, STR_LIT_ROK)){
+					/* ide o parameter STR_LIT_ROK */
+					mystrcpy(pom_LIT_ROK, param[i].val, SMALL);
+					Log("hodnota parametra %s je %s.\n", STR_LIT_ROK, pom_LIT_ROK);
+				}
+				i++;
+			}
+			if(equalsi(pom_LIT_ROK, STR_EMPTY)){
+				Export("Nebola zadan· premenn· %s.\n", STR_LIT_ROK);
+				ALERT;
+				return FAILURE; /* failure */
+			}
+
 			break; /* case */
 		}
 
@@ -11948,11 +12109,9 @@ _main_SIMULACIA_QS:
 				 * tam nieco dostane...
 				 */
 				case PRM_DATUM:
-					_main_LOG_to_Export("spustam _main_rozbor_dna(stringy: pom_DEN = %s, pom_MESIAC = %s, pom_ROK = %s, pom_MODLITBA = %s, pom_DALSI_SVATY = %s);\n",
-						pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA, pom_DALSI_SVATY);
+					_main_LOG_to_Export("spustam _main_rozbor_dna(stringy: pom_DEN = %s, pom_MESIAC = %s, pom_ROK = %s, pom_MODLITBA = %s, pom_DALSI_SVATY = %s);\n", pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA, pom_DALSI_SVATY);
 					_main_rozbor_dna(pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA, pom_DALSI_SVATY);
-					_main_LOG_to_Export("spat po skonceni _main_rozbor_dna(%s, %s, %s, %s, %s);\n",
-						pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA, pom_DALSI_SVATY);
+					_main_LOG_to_Export("spat po skonceni _main_rozbor_dna(%s, %s, %s, %s, %s);\n", pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA, pom_DALSI_SVATY);
 					break;
 				case PRM_CEZ_ROK:
 					_main_LOG_to_Export("spustam _main_zaltar(%s, %s, %s);\n", pom_DEN_V_TYZDNI, pom_TYZDEN, pom_MODLITBA);
@@ -11960,9 +12119,9 @@ _main_SIMULACIA_QS:
 					_main_LOG_to_Export("spat po skonceni _main_zaltar(%s, %s, %s);\n", pom_DEN_V_TYZDNI, pom_TYZDEN, pom_MODLITBA);
 					break;
 				case PRM_LIT_OBD: /* 2011-01-25: doplnenÈ; prÌpad, ûe ide o v˝ber dÚa v liturgickom obdobÌ */
-					_main_LOG_to_Export("spustam _main_liturgicke_obdobie(%s, %s, %s, %s);\n", pom_DEN_V_TYZDNI, pom_TYZDEN, pom_MODLITBA, pom_LIT_OBD);
-					_main_liturgicke_obdobie(pom_DEN_V_TYZDNI, pom_TYZDEN, pom_MODLITBA, pom_LIT_OBD);
-					_main_LOG_to_Export("spat po skonceni _main_liturgicke_obdobie(%s, %s, %s, %s);\n", pom_DEN_V_TYZDNI, pom_TYZDEN, pom_MODLITBA, pom_LIT_OBD);
+					_main_LOG_to_Export("spustam _main_liturgicke_obdobie(%s, %s, %s, %s, %s);\n", pom_DEN_V_TYZDNI, pom_TYZDEN, pom_MODLITBA, pom_LIT_OBD, pom_LIT_ROK);
+					_main_liturgicke_obdobie(pom_DEN_V_TYZDNI, pom_TYZDEN, pom_MODLITBA, pom_LIT_OBD, pom_LIT_ROK);
+					_main_LOG_to_Export("spat po skonceni _main_liturgicke_obdobie(%s, %s, %s, %s, %s);\n", pom_DEN_V_TYZDNI, pom_TYZDEN, pom_MODLITBA, pom_LIT_OBD, pom_LIT_ROK);
 					break;
 				case PRM_SVIATOK:
 					_main_LOG_to_Export("spustam sviatok(%s);\n", pom_SVIATOK);

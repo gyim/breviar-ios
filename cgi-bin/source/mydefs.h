@@ -62,10 +62,11 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2011-01-25"
+#define BUILD_DATE "2011-01-26"
 
 #define BYTES 250
 #define SMALL 80
+#define VERY_SMALL 8
 
 /* neurèená hodnota pre global option */
 #define GLOBAL_OPTION_NULL -1
@@ -267,7 +268,7 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_DALSI_SVATY  "ds"
 #endif
 
-/* nasleduju parametre z formularov pre dotaz PRM_CEZ_ROK */
+/* nasledujú parametre z formulárov pre dotaz PRM_CEZ_ROK -- používa ich aj PRM_LIT_OBD */
 #define DEN_V_TYZDNI 6         /* dotaz na konkretny den */
 #ifdef LONG_PARAM_NAMES
 	#define STR_DEN_V_TYZDNI "DEN_V_TYZDNI"
@@ -304,6 +305,13 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_LIT_OBD "LIT_OBD"
 #else
 	#define STR_LIT_OBD "lo"
+#endif
+
+#define LIT_ROK 11
+#ifdef LONG_PARAM_NAMES
+	#define STR_LIT_ROK "LIT_ROK"
+#else
+	#define STR_LIT_ROK "lr"
 #endif
 
 /* nasleduju parametre z formularov pre dotaz PRM_MESIAC_ROKA */
