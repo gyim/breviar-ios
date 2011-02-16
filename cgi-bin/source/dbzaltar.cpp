@@ -7337,7 +7337,11 @@ label_24_DEC:
 	 * problÈm sv. Jozefa - antifÛny pre kompletÛrium nastavenÈ pri prvom spustenÌ volania "sviatky sv‰t˝ch" prekrylo nastavenie z liturgickÈho obdobia...
 	 */
 	else if((poradie_svateho == UNKNOWN_PORADIE_SVATEHO) && (_global_pocet_svatych > 0)
-		&& (_global_den.smer >= _global_svaty1.smer) && (_global_svaty1.typslav == SLAV_SLAVNOST)){
+		&& (_global_den.smer >= _global_svaty1.smer) && (_global_svaty1.typslav == SLAV_SLAVNOST)
+		/* a neplatÌ, ûe ide o lok·lnu sl·vnosù: t· nesmie prebiù vöedn˝ deÚ
+		 * 2010-10-06: upravenÈ; nesmie Ìsù o lok·lnu sl·vnosù (smer == 4) lebo nem· prebÌjaù "glob·lnu" v danom kalend·ri [napr. czop pre 22.10.]
+		 */
+		&& !(_global_svaty1.smer == 4 || _global_svaty1.smer == 8 || _global_svaty1.smer == 11)){
 		/* bolo to volanie pre nasleduj˙ci deÚ, treba oöetriù napr. kompletÛrium po prv˝ch veöper·ch, aby sa nepriradilo zo ûalt·ra */
 		Log("poradie_svateho == UNKNOWN_PORADIE_SVATEHO...\n");
 		Log("_global_pocet_svatych == %d\n", _global_pocet_svatych);
@@ -17342,7 +17346,7 @@ label_25_MAR:
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
-						if(_global_jazyk == JAZYK_SK){ /* 2008-10-12: odvetvenÈ len pre Slovensko */
+						if(_global_jazyk != JAZYK_CZ){ /* 2008-10-12: odvetvenÈ len pre Slovensko; 2010-10-06: pridanÈ aj pre CZOP */
 							_vlastna_cast_hymnus;
 						}
 						_vlastna_cast_modlitba;
@@ -17352,7 +17356,7 @@ label_25_MAR:
 						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
-						if(_global_jazyk == JAZYK_SK){ /* 2008-10-12: odvetvenÈ len pre Slovensko */
+						if(_global_jazyk != JAZYK_CZ){ /* 2008-10-12: odvetvenÈ len pre Slovensko; 2010-10-06: pridanÈ aj pre CZOP */
 							_vlastna_cast_hymnus;
 						}
 						_vlastna_cast_modlitba;
@@ -18017,7 +18021,7 @@ label_25_MAR:
 							/* 2005-08-22: Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
 						}
 						_global_svaty1.typslav = SLAV_SLAVNOST;
-						_global_svaty1.smer = 11; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari - zmenenÈ na æubovoæn˙ */
+						_global_svaty1.smer = 4 /* 8 aj 11 funguje, opravil som aj 4-ku; 2010-10-06 */; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari - zmenenÈ na æubovoæn˙ spomienku */
 						mystrcpy(_global_svaty1.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
 						strcat(_global_svaty1.meno, text_OKT_22[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
@@ -18193,7 +18197,7 @@ label_25_MAR:
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_modlitba;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_modlitba;

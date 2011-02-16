@@ -163,6 +163,9 @@
 /*                  - pokus o dorobenie èítania pom_KALENDAR z formov      */
 /*   2010-09-28a.D. | doplnená podmienka v init_global_string() pre prípad */
 /*                    prvých vešpier napr. na sviatky pána (14.9.2008)     */
+/*   2010-10-06a.D. | snáï opravené to, že pre niektoré lokálne (czop)     */
+/*                    slávnosti [22.10. alebo 25.10.] ten zobrazený všedný */
+/*                    deò (svaty == 0) bol "prebitý" slávnosou            */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -3261,7 +3264,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				}
 				else{
 					/* den v i.-tom tyzdni obdobia cez rok */
-					_rozbor_dna_LOG("/* den v i.-tom tyzdni obdobia cez rok */\n");
+					_rozbor_dna_LOG("/* den v %d. tyzdni obdobia cez rok */\n", _global_den.tyzden);
 					if(_global_den.denvr == TELAKRVI){
 						/* najsv. krist. tela a krvi == ZDS + 11 */
 						_global_den.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
@@ -3467,7 +3470,10 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 		 * uprednostni sa to, ktore ma v tabulke liturgickych dni vyssi stupen
 		 * [t.j. .smer]. */
 		/* 2010-07-28: doplnené alternatívne porovnanie aj s _global_svaty2.smer (kvôli dominikánskej slávnosti 8.8.) */
-			(_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
+			(_global_den.smer > _global_svaty1.smer)
+			|| (_global_den.smer > _global_svaty2.smer)
+			|| (_global_den.smer > _global_svaty3.smer)
+		){
 
 			/* ked bola nasledovna pasaz zapoznamkovana,
 			 * tak vsetko (bez modlitby) slo v poriadku; neslo generovanie
@@ -3495,7 +3501,12 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 			if((_global_modlitba != MODL_NEURCENA) && 
 				(
 					(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) || /* 08/03/2000A.D. -- pridané; 2009-03-27: zmenená konštanta 0 na UNKNOWN_PORADIE_SVATEHO */
-					((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) && (_global_svaty1.smer < 5)) /* slavnosti */
+					((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) && (_global_svaty1.smer < 5)
+						/* a neplatí, že ide o lokálnu slávnos: tá nesmie prebi všedný deò
+						 * 2010-10-06: upravené; nesmie ís o lokálnu slávnos (smer == 4) lebo nemá prebíja "globálnu" v danom kalendári [napr. czop pre 22.10.]
+						 */
+						&& !(_global_svaty1.smer == 4 || _global_svaty1.smer == 8 || _global_svaty1.smer == 11)
+					) /* slavnosti */
 				)
 				){ /* 15/03/2000A.D. -- modifikovane; POKUS 2006-12-08: vyòatá podmienka (_global_modlitba != MODL_NEURCENA) &&  nepomohla, len pokazila */
 				/* tato pasaz je cela divna... */
@@ -11451,7 +11462,7 @@ _main_SIMULACIA_QS:
 				 * tam nieco dostane...
 				 */
 				case PRM_DATUM:
-					_main_LOG_to_Export("spustam _main_rozbor_dna(pom_DEN = %s, pom_MESIAC = %s, pom_ROK = %s, pom_MODLITBA = %s, pom_DALSI_SVATY = %s);\n",
+					_main_LOG_to_Export("spustam _main_rozbor_dna(stringy: pom_DEN = %s, pom_MESIAC = %s, pom_ROK = %s, pom_MODLITBA = %s, pom_DALSI_SVATY = %s);\n",
 						pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA, pom_DALSI_SVATY);
 					_main_rozbor_dna(pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA, pom_DALSI_SVATY);
 					_main_LOG_to_Export("spat po skonceni _main_rozbor_dna(%s, %s, %s, %s, %s);\n",
