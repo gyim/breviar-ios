@@ -62,7 +62,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2010-09-13"
+#define BUILD_DATE "2010-09-14"
 
 #define BYTES 250
 #define SMALL 80
@@ -80,6 +80,7 @@
 #define FALSE 0
 #define ANO   1
 #define NIE   0
+#define DOCASNE_ANO 0
 
 #define MAX_STR				300 /* maximalna dlzka retazca */
 #define MAX_GLOBAL_STR		300 /* _global_string */ /* 31/03/2000A.D. */

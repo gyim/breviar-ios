@@ -379,6 +379,7 @@ extern const char *text_OKT_14[];
 extern const char *text_OKT_15[];
 extern const char *text_OKT_16_1[];
 extern const char *text_OKT_16_2[];
+extern const char *text_OKT_16_3[];
 extern const char *text_OKT_17[];
 extern const char *text_OKT_18[];
 extern const char *text_OKT_19_1[];

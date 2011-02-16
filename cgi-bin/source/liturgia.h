@@ -677,6 +677,9 @@ extern const char *nazov_obd_htm_pc[];
 /* 2005-08-05: Pridané. zväzok breviára (LH) pre spoloèné èasti svätých v kotvách */
 extern const char *zvazok_OBD[];
 
+/* filenames for special calendars / názov súbora pre kalendáre */
+extern const char *nazov_htm_kalendar[];
+
 /* typy slavenia */
 #define SLAV_NEURCENE            0
 #define SLAV_SLAVNOST            1

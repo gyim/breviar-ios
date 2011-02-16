@@ -350,6 +350,10 @@ const char *nazov_kalendara[POCET_KALENDAROV + 1] =
 const char *skratka_kalendara[POCET_KALENDAROV + 1] =
 {"??", "la", "sk", "cz", "czop", "cssr", "hu"};
 
+/* filenames for special calendars / názov súbora pre kalendáre */
+const char *nazov_htm_kalendar[POCET_KALENDAROV + 1] =
+{"", "", "", "", "", "kal_cssr.htm", ""};
+
 
 /* special "local" or "partial" characteristics of various celebrations - each in one language; no need to translate; special strings will be added */
 /* 2005-07-27: doplnené
@@ -1232,6 +1236,26 @@ const char *html_text_zalmy_pre_mcd_explain[] =
  "",
  "", 
  "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120-129), které je mono brát místo almù ze altáøe.",
+ "hu_"
+};
+
+/* 2010-09-14: doplnené */
+const char *html_text_kalendar_miestny[] = 
+{"kalendár Liturgie hodín poui: ", 
+ "kalendáø obecní nebo místní: ", 
+ "local or general calendar: ", 
+ "",
+ "",
+ "kalendáø obecní nebo místní: ",
+ "hu_"
+};
+const char *html_text_kalendar_explain[] = 
+{"Je moné zvoli aj miestny kalendár niektorej reho¾nej rodiny, rádu, inštitútu.", 
+ "xxx", 
+ "xxx", 
+ "",
+ "", 
+ "xxx", 
  "hu_"
 };
 
@@ -3541,6 +3565,15 @@ const char *text_OKT_16_2[] =
  "",
  "Sv. Hedviky, øeholnice, hlavní patronky Slezska",
  "Szent Hedvig szerzetesnõ",
+ };
+const char *text_OKT_16_3[] = 
+{"Sv. Gerarda Majellu, reho¾níka",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_OKT_17[] = 
 {"Sv. Ignáca Antiochijského, biskupa a muèeníka",
