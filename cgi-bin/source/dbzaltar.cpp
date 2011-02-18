@@ -166,6 +166,7 @@
 /*                    taktiež premenované šablóny (templáty) modlitieb; prefix "m_"             */
 /*   2011-02-02a.D. | použité MIESTNE_SLAVENIE_CZOP_SVATY1 až 3 (zjednodušenie podmienok, CZOP) */
 /*   2011-02-02a.D. | dokonèený liturgický kalendár pre SDB a SJ, úpravy: úroveò slávení a pod. */
+/*   2011-02-18a.D. | opravy pre ant. benediktus+magnifikat pre spomienky v II. a III. zväzku   */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -10938,23 +10939,39 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					}/* kalendár pre KALENDAR_SK_SJ */
 					break;
 				case 5: /* MES_FEB -- 05FEB */
+					/* 2011-02-18: sv. agaty je aj vo zväzku II, preto som to obalil "pôstnou spomienkou" */
 					if(poradie_svaty == 1){
-						/* definovanie parametrov pre modlitbu */
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
+						/* na spomienku v pôste */
+						if(je_post){
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_benediktus_spompost;
+							_vlastna_cast_modlitba_spompost;
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_magnifikat_spompost;
+							_vlastna_cast_modlitba_spompost;
+						}/* je_post */
+						else{
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+							modlitba = MODL_RANNE_CHVALY;
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
 
-						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_benediktus;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
 
-						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
-
-						modlitba = MODL_VESPERY;
-						_vlastna_cast_magnifikat;
-						_vlastna_cast_modlitba;
-
+							modlitba = MODL_VESPERY;
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
+						}/* nie je_post */
 						break;
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
@@ -10983,7 +11000,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 							modlitba = MODL_RANNE_CHVALY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
@@ -10991,7 +11011,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
 						}/* nie je_post */
 						break;
@@ -11225,7 +11248,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_RANNE_CHVALY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
@@ -11233,7 +11259,11 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 * naviac, ant. na vešpery vo zväzku pre 10.2. chýba; je len v zväzku II... (III predpokladá použitie zo spol. èasti)
+							 */
+							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
 						}/* nie je_post */
 						break;
@@ -11263,7 +11293,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_RANNE_CHVALY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
@@ -11271,7 +11304,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
 						}/* nie je_post */
 						break;
@@ -11398,7 +11434,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_spolocna_cast(sc, poradie_svaty);
 
 								modlitba = MODL_RANNE_CHVALY;
-								/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+								/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+								 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+								 */
+								_vlastna_cast_benediktus;
 								_vlastna_cast_modlitba;
 
 								modlitba = MODL_POSV_CITANIE;
@@ -11406,7 +11445,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								_vlastna_cast_2citanie;
 
 								modlitba = MODL_VESPERY;
-								/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+								/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+								 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+								 */
+								_vlastna_cast_magnifikat;
 								_vlastna_cast_modlitba;
 							}/* nie je_post */
 							break;
@@ -11482,7 +11524,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_RANNE_CHVALY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
@@ -11490,7 +11535,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
 						}/* nie je_post */
 						break;
@@ -11568,7 +11616,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_RANNE_CHVALY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
@@ -11576,7 +11627,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
 						}/* nie je_post */
 						break;
@@ -11637,7 +11691,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_RANNE_CHVALY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
@@ -11645,7 +11702,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
 						}/* nie je_post */
 						break;
@@ -11711,7 +11771,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_RANNE_CHVALY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
@@ -11719,7 +11782,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
 						}/* nie je_post */
 						break;
@@ -11756,7 +11822,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_RANNE_CHVALY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
@@ -11764,7 +11833,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
 						}/* nie je_post */
 						break;
@@ -11794,7 +11866,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_RANNE_CHVALY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
@@ -11802,7 +11877,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
 						}/* nie je_post */
 						break;
@@ -11849,7 +11927,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_RANNE_CHVALY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
@@ -11857,7 +11938,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
+							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období 
+							 * 2011-02-18: tak je to vo zväzku II (pôst+ve¾ká noc); avak v III je to normálne, vlastná ant.; opravené
+							 */
+							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
 						}/* nie je_post */
 						break;
@@ -11869,6 +11953,8 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
+/* 2011-02-18: do 9. marca sú propriá vo zväzku III (cezroèné obdobie), potom sa pokraèuje až dòon 12. mája; 
+ *             zrušené preto èasti "else" vetiev if(je_post), lebo nie sú potrebné */
 				case 10: /* MES_MAR -- 10MAR */
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
@@ -11882,23 +11968,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								// _vlastna_cast_magnifikat_spompost;
 								_vlastna_cast_modlitba_spompost;
 							}/* je_post */
-							else{
-								/* definovanie parametrov pre modlitbu */
-								if(query_type != PRM_DETAILY)
-									set_spolocna_cast(sc, poradie_svaty);
-
-								modlitba = MODL_RANNE_CHVALY;
-								/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
-								_vlastna_cast_modlitba;
-
-								modlitba = MODL_POSV_CITANIE;
-								_vlastna_cast_modlitba;
-								_vlastna_cast_2citanie;
-
-								modlitba = MODL_VESPERY;
-								/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
-								_vlastna_cast_modlitba;
-							}/* nie je_post */
 							break;
 						}
 						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -11967,23 +12036,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							_vlastna_cast_magnifikat_spompost;
 							_vlastna_cast_modlitba_spompost;
 						}/* je_post */
-						else{
-							/* definovanie parametrov pre modlitbu */
-							if(query_type != PRM_DETAILY)
-								set_spolocna_cast(sc, poradie_svaty);
-
-							modlitba = MODL_RANNE_CHVALY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
-							_vlastna_cast_modlitba;
-
-							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_modlitba;
-							_vlastna_cast_2citanie;
-
-							modlitba = MODL_VESPERY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
-							_vlastna_cast_modlitba;
-						}/* nie je_post */
 						break;
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -12002,20 +12054,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							_vlastna_cast_modlitba_spompost;
 							/* nema modlitba = MODL_VESPERY, lebo su prve vespery slavnosti sv. Jozefa */
 						}/* je_post */
-						else{
-							/* definovanie parametrov pre modlitbu */
-							if(query_type != PRM_DETAILY)
-								set_spolocna_cast(sc, poradie_svaty);
-							modlitba = MODL_RANNE_CHVALY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
-							_vlastna_cast_modlitba;
-
-							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_modlitba;
-							_vlastna_cast_2citanie;
-
-							/* nema modlitba = MODL_VESPERY, lebo su prve vespery slavnosti sv. Jozefa */
-						}/* nie je_post */
 						break;
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -12121,23 +12159,6 @@ label_19_MAR:
 							_vlastna_cast_magnifikat_spompost;
 							_vlastna_cast_modlitba_spompost;
 						}/* je_post */
-						else{
-							/* definovanie parametrov pre modlitbu */
-							if(query_type != PRM_DETAILY)
-								set_spolocna_cast(sc, poradie_svaty);
-
-							modlitba = MODL_RANNE_CHVALY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
-							_vlastna_cast_modlitba;
-
-							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_modlitba;
-							_vlastna_cast_2citanie;
-
-							modlitba = MODL_VESPERY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
-							_vlastna_cast_modlitba;
-						}/* nie je_post */
 						break;
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -12260,23 +12281,6 @@ label_25_MAR:
 							_vlastna_cast_magnifikat_spompost;
 							_vlastna_cast_modlitba_spompost;
 						}/* je_post */
-						else{
-							/* definovanie parametrov pre modlitbu */
-							if(query_type != PRM_DETAILY)
-								set_spolocna_cast(sc, poradie_svaty);
-
-							modlitba = MODL_RANNE_CHVALY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
-							_vlastna_cast_modlitba;
-
-							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_modlitba;
-							_vlastna_cast_2citanie;
-
-							modlitba = MODL_VESPERY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
-							_vlastna_cast_modlitba;
-						}/* nie je_post */
 						break;
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -12298,23 +12302,6 @@ label_25_MAR:
 							_vlastna_cast_magnifikat_spompost;
 							_vlastna_cast_modlitba_spompost;
 						}/* je_post */
-						else{
-							/* definovanie parametrov pre modlitbu */
-							if(query_type != PRM_DETAILY)
-								set_spolocna_cast(sc, poradie_svaty);
-
-							modlitba = MODL_RANNE_CHVALY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
-							_vlastna_cast_modlitba;
-
-							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_modlitba;
-							_vlastna_cast_2citanie;
-
-							modlitba = MODL_VESPERY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
-							_vlastna_cast_modlitba;
-						}/* nie je_post */
 						break;
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -12339,23 +12326,6 @@ label_25_MAR:
 							_vlastna_cast_magnifikat_spompost;
 							_vlastna_cast_modlitba_spompost;
 						}/* je_post */
-						else{
-							/* definovanie parametrov pre modlitbu */
-							if(query_type != PRM_DETAILY)
-								set_spolocna_cast(sc, poradie_svaty);
-
-							modlitba = MODL_RANNE_CHVALY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
-							_vlastna_cast_modlitba;
-
-							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_modlitba;
-							_vlastna_cast_2citanie;
-
-							modlitba = MODL_VESPERY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
-							_vlastna_cast_modlitba;
-						}/* nie je_post */
 						break;
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -12377,23 +12347,6 @@ label_25_MAR:
 							_vlastna_cast_magnifikat_spompost;
 							_vlastna_cast_modlitba_spompost;
 						}/* je_post */
-						else{
-							/* definovanie parametrov pre modlitbu */
-							if(query_type != PRM_DETAILY)
-								set_spolocna_cast(sc, poradie_svaty);
-
-							modlitba = MODL_RANNE_CHVALY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
-							_vlastna_cast_modlitba;
-
-							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_modlitba;
-							_vlastna_cast_2citanie;
-
-							modlitba = MODL_VESPERY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
-							_vlastna_cast_modlitba;
-						}/* nie je_post */
 						break;
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
@@ -12415,23 +12368,6 @@ label_25_MAR:
 							_vlastna_cast_magnifikat_spompost;
 							_vlastna_cast_modlitba_spompost;
 						}/* je_post */
-						else{
-							/* definovanie parametrov pre modlitbu */
-							if(query_type != PRM_DETAILY)
-								set_spolocna_cast(sc, poradie_svaty);
-
-							modlitba = MODL_RANNE_CHVALY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
-							_vlastna_cast_modlitba;
-
-							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_modlitba;
-							_vlastna_cast_2citanie;
-
-							modlitba = MODL_VESPERY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
-							_vlastna_cast_modlitba;
-						}/* nie je_post */
 						break;
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
@@ -12453,23 +12389,6 @@ label_25_MAR:
 							_vlastna_cast_magnifikat_spompost;
 							_vlastna_cast_modlitba_spompost;
 						}/* je_post */
-						else{
-							/* definovanie parametrov pre modlitbu */
-							if(query_type != PRM_DETAILY)
-								set_spolocna_cast(sc, poradie_svaty);
-
-							modlitba = MODL_RANNE_CHVALY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
-							_vlastna_cast_modlitba;
-
-							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_modlitba;
-							_vlastna_cast_2citanie;
-
-							modlitba = MODL_VESPERY;
-							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
-							_vlastna_cast_modlitba;
-						}/* nie je_post */
 						break;
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -13490,6 +13409,7 @@ label_25_MAR:
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
 					}
 					break;
+/* 2011-02-18: do 9. marca sú propriá vo zväzku III (cezroèné obdobie), potom sa pokraèuje až dòon 12. mája */
 				case 12: /* MES_MAY -- 12MAJ */
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
