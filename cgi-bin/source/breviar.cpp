@@ -5941,10 +5941,10 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<option%s>%s\n", 
 			(_global_kalendar == KALENDAR_SK_SJ)? html_option_selected: STR_EMPTY,
 			nazov_slavenia_lokal_kalendar[KALENDAR_SK_SJ]);
+#endif
 		Export("<option%s>%s\n", 
 			(_global_kalendar == KALENDAR_SK_SDB)? html_option_selected: STR_EMPTY,
 			nazov_slavenia_lokal_kalendar[KALENDAR_SK_SDB]);
-#endif
 		Export("</select>\n");
 
 		Export("<br />");

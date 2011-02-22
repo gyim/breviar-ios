@@ -10087,7 +10087,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -10370,7 +10370,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -10675,7 +10675,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -10757,6 +10757,9 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 1: /* MES_FEB -- 01FEB */
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SDB)){
 						if(poradie_svaty == 1){
+
+							file_name_vlastny_kalendar(_global_kalendar);
+
 							/* definovanie parametrov pre modlitbu */
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
@@ -11078,11 +11081,11 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							/* na spomienku v pôste */
 							if(je_post){
 								modlitba = MODL_RANNE_CHVALY;
-								_vlastna_cast_benediktus_spompost;
+								// _vlastna_cast_benediktus_spompost;
 								_vlastna_cast_modlitba_spompost;
 
 								modlitba = MODL_VESPERY;
-								_vlastna_cast_magnifikat_spompost;
+								// _vlastna_cast_magnifikat_spompost;
 								_vlastna_cast_modlitba_spompost;
 							}/* je_post */
 							else{
@@ -11091,7 +11094,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_spolocna_cast(sc, poradie_svaty);
 
 								modlitba = MODL_POSV_CITANIE;
-								_vlastna_cast_2citanie;
+								// _vlastna_cast_2citanie;
 								_vlastna_cast_modlitba;
 
 								modlitba = MODL_RANNE_CHVALY;
@@ -11196,11 +11199,11 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							/* na spomienku v pôste */
 							if(je_post){
 								modlitba = MODL_RANNE_CHVALY;
-								_vlastna_cast_benediktus_spompost;
+								// _vlastna_cast_benediktus_spompost;
 								_vlastna_cast_modlitba_spompost;
 
 								modlitba = MODL_VESPERY;
-								_vlastna_cast_magnifikat_spompost;
+								// _vlastna_cast_magnifikat_spompost;
 								_vlastna_cast_modlitba_spompost;
 							}/* je_post */
 							else{
@@ -11214,7 +11217,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 
 								modlitba = MODL_POSV_CITANIE;
 								_vlastna_cast_modlitba;
-								_vlastna_cast_2citanie;
+								// _vlastna_cast_2citanie;
 
 								modlitba = MODL_VESPERY;
 								/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
@@ -11733,7 +11736,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_modlitba;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
 							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
@@ -13304,7 +13307,7 @@ label_25_MAR:
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_modlitba;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
 							/* 2010-05-14: antifóna na benediktus/magnifikat: vlastná sa berie iba na spomienku v pôstnom období */
@@ -13493,7 +13496,7 @@ label_25_MAR:
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_modlitba;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_modlitba;
@@ -13689,7 +13692,7 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -13743,7 +13746,7 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -14048,7 +14051,7 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -14222,7 +14225,7 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -14679,7 +14682,7 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -14950,7 +14953,7 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -15715,7 +15718,7 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -16679,7 +16682,7 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -17681,7 +17684,7 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -18672,7 +18675,7 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -19251,7 +19254,7 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -19524,7 +19527,7 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -19952,7 +19955,7 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -20135,7 +20138,7 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -20868,7 +20871,7 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -20987,7 +20990,7 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -21621,7 +21624,7 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie;
+							// _vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;

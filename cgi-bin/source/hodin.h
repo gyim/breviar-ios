@@ -2849,7 +2849,7 @@ const char *text_JUN_11[POCET_JAZYKOV + 1] =
  "Szent Barnabás apostol",
  };
 const char *text_JUN_12_SDB[POCET_JAZYKOV + 1] = 
-{"Bl. Františka Kesyho a spoloèníkov, muèeníkov",
+{"Bl. Františka K&#553;syho a spoloèníkov, muèeníkov", // Bl. Františka Kesyho a spoloèníkov, muèeníkov (small latin letter e with cedilla)
  "",
  "",
  "",
