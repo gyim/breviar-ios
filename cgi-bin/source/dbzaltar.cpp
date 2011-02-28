@@ -11746,7 +11746,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						_global_svaty1.smer = 8; /* miestne sviatky */
 						mystrcpy(_global_svaty1.meno, text_FEB_25_SDB[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
-						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.farba = LIT_FARBA_CERVENA;
 						_global_svaty1.kalendar = KALENDAR_SK_SDB;
 					}/* kalendár pre KALENDAR_SK_SDB */
 					break;
@@ -13708,7 +13708,7 @@ label_25_MAR:
 						_global_svaty2.smer = 12; /* lubovolne spomienky */
 						mystrcpy(_global_svaty2.meno, text_MAJ_16_SDB[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
-						_global_svaty2.farba = LIT_FARBA_CERVENA;
+						_global_svaty2.farba = LIT_FARBA_BIELA;
 						_global_svaty2.kalendar = KALENDAR_SK_SDB;
 					}/* kalendár pre KALENDAR_SK_SDB */
 					break;
@@ -13762,7 +13762,7 @@ label_25_MAR:
 						_global_svaty2.smer = 12; /* lubovolne spomienky */
 						mystrcpy(_global_svaty2.meno, text_MAJ_18_SDB[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
-						_global_svaty2.farba = LIT_FARBA_CERVENA;
+						_global_svaty2.farba = LIT_FARBA_BIELA;
 						_global_svaty2.kalendar = KALENDAR_SK_SDB;
 					}/* kalendár pre KALENDAR_SK_SDB */
 					break;

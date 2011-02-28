@@ -1730,7 +1730,7 @@ const char *text_JAN_31[POCET_JAZYKOV + 1] =
  "Bosco Szent János áldozópap",
  };
 const char *text_JAN_31_SDB[POCET_JAZYKOV + 1] = 
-{"Sv. Jána Boska, kòaza, otca a uèite¾a mládee, <br>zakladate¾a Spoloènosti svätého Františka Saleského, <br>Inštitútu dcér Márie Pomocnice a saleziánskych spolupracovníkov",
+{"Sv. Jána Boska, kòaza, otca a uèite¾a mládee, <br>zakladate¾a Spoloènosti svätého Františka Saleského, <br>Inštitútu dcér Márie Pomocnice <br>a saleziánskych spolupracovníkov",
  "",
  "",
  "",
@@ -2528,7 +2528,7 @@ const char *text_MAJ_24_CZOP[POCET_JAZYKOV + 1] =
  "hu_",
  };
 const char *text_MAJ_24_SDB[POCET_JAZYKOV + 1] = 
-{"Panny Márie, Pomocnice kresanov, <br>hlavnej patrónky Inštitútu dcér Márie Pomocnice a celej saleziánskej rodiny",
+{"Panny Márie, Pomocnice kresanov, <br>hlavnej patrónky Inštitútu dcér Márie Pomocnice <br>a celej saleziánskej rodiny",
  "",
  "",
  "",
