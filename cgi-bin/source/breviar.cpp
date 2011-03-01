@@ -1522,21 +1522,31 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 
 					/* 2011-01-12: doplnené volite¾né zobrazovanie/skrývanie alternatívnej antifóny pre žalmy/chválospevy 
 					 * 2011-01-17: upravené tak, aby sa nezobrazovalo len pre spomienky svätých [tam spadajú aj liturgické slávenia 1.1. a pod.]
+					 * 2011-03-01: upravené tak, že sa nezobrazuje len pre slávnosti a sviatky; pre spomienky sa zobrazuje (smer < 5: pre trojdnie)
 					 */
-					if( /*(_global_den.litobd != OBD_CEZ_ROK) */ (_global_den.spolcast != _encode_spol_cast(MODL_SPOL_CAST_NEURCENA)) && (equals(rest, PARAM_MYSLIENKA_K_ZALMU))){
-						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
-							write = 0;
+					if(equals(rest, PARAM_MYSLIENKA_K_ZALMU)){
+						if(!((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.typslav == SLAV_VLASTNE)
+							|| (_global_den.smer == 1)) 
+							/* && (_global_den.spolcast != _encode_spol_cast(MODL_SPOL_CAST_NEURCENA)) */){
 #if defined(EXPORT_HTML_SPECIALS)
-							Export("(stop)nie je ocr");
+							Export("myslienka");
 #endif
-							Log("  rusim writing to export file, kvoli myslienka-k-zalmu...\n");
 						}
-						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
+						else{
+							if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
+								write = 0;
 #if defined(EXPORT_HTML_SPECIALS)
-							Export("nie je ocr(start)");
+								Export("(stop)nie je myslienka");
 #endif
-							write = 1;
-							Log("  opat writing to export file, end of myslienka-k-zalmu.\n");
+								Log("  rusim writing to export file, kvoli myslienka-k-zalmu...\n");
+							}
+							else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
+#if defined(EXPORT_HTML_SPECIALS)
+								Export("nie je myslienka(start)");
+#endif
+								write = 1;
+								Log("  opat writing to export file, end of myslienka-k-zalmu.\n");
+							}
 						}
 					}/* volite¾né zobrazovanie/skrývanie alternatívnej antifóny pre žalmy/chválospevy */
 

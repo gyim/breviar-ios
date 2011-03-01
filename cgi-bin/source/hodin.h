@@ -1351,8 +1351,8 @@ const char *text_ZAKONCENIE_SKRZE_dlhe[POCET_JAZYKOV + 1] =
 {"Skrze nášho Pána Jeiša Krista, tvojho Syna, ktorı je Boh a s tebou ije a kra¾uje v jednote s Duchom Svätım po všetky veky vekov.",
  "Skrze tvého Syna Jeíše Krista, našeho Pána, nebo on s tebou v jednotì Ducha svatého ije a kraluje po všechny vìky vìkù.",
  "",
+ "Per Dóminum nostrum Iesum Christum, Fílium tuum, qui tecum vivit et regnat in unitáte Spíritus Sancti, Deus, per ómnia saecula saeculórum.",
  "",
- "Per Christum",
  "Skrze tvého Syna Jeíše Krista, našeho Pána, nebo on s tebou v jednotì Ducha Svatého ije a kraluje po všechny vìky vìkù.",
  "A mi Urunk, Jézus Krisztus, a te Fiad által, áld veled él és uralkodik a Szentlélekkel egységben, Isten mindörökkönörökké.",
  };
@@ -1360,8 +1360,8 @@ const char *text_ZAKONCENIE_SKRZE_kratke[POCET_JAZYKOV + 1] =
 {"Skrze Krista, nášho Pána.",
  "Skrze Krista, našeho Pána.",
  "",
+ "Per Christum Dóminum nostrum.",
  "",
- "Per Christum",
  "Skrze Krista, našeho Pána.",
  "Krisztus, a mi Urunk által.",
  };
@@ -1369,8 +1369,8 @@ const char *text_ZAKONCENIE_LEBO_ON_dlhe[POCET_JAZYKOV + 1] =
 {"Lebo on je Boh a s tebou ije a kra¾uje v jednote s Duchom Svätım po všetky veky vekov.",
  "Nebo on s tebou v jednotì Ducha svatého ije a kraluje po všechny vìky vìkù.",
  "",
+ "Qui tecum vivit et regnat in unitáte Spíritus Sancti, Deus, per ómnia saecula saeculórum.",
  "",
- "Qui vivit",
  "Nebo on s tebou v jednotì Ducha Svatého ije a kraluje po všechny vìky vìkù.",
  "Aki veled él és uralkodik a Szentlélekkel egységben, Isten mindörökkön-örökké.",
  };
@@ -1378,8 +1378,8 @@ const char *text_ZAKONCENIE_LEBO_ON_kratke[POCET_JAZYKOV + 1] =
 {"Lebo on ije a kra¾uje na veky vekov.",
  "Nebo on s tebou ije a kraluje na vìky vìkù.",
  "",
+ "Qui vivit et regnat in saecula saeculórum.",
  "",
- "Qui vivit",
  "Nebo on s tebou ije a kraluje na vìky vìkù.",
  "Aki él és uralkodik mindörökkön-örökké.",
  };
@@ -1387,8 +1387,8 @@ const char *text_ZAKONCENIE_LEBO_TY_dlhe[POCET_JAZYKOV + 1] =
 {"Lebo ty si Boh a iješ a kra¾uješ s Bohom Otcom v jednote s Duchom Svätım po všetky veky vekov.",
  "Nebo ty iješ a kraluješ s Bohem Otcem v jednotì Ducha svatého po všechny vìky vìkù.",
  "",
+ "Qui vivis et regnas cum Deo Patre in unitáte Spíritus Sancti, Deus, per ómnia saecula saeculórum.",
  "",
- "Qui vivis",
  "Nebo ty iješ a kraluješ s Bohem Otcem v jednotì Ducha Svatého po všechny vìky vìkù.",
  "Aki élsz és uralkodói az Atyaistennel és a Szentlélek­kel egységben, Isten mindörökkön-örökké.",
  };
@@ -1396,8 +1396,8 @@ const char *text_ZAKONCENIE_LEBO_TY_kratke[POCET_JAZYKOV + 1] =
 {"Lebo ty iješ a kra¾uješ na veky vekov.",
  "Nebo ty iješ a kraluješ na vìky vìkù.",
  "",
+ "Qui vivis et regnas in saecula saeculórum.",
  "",
- "Qui vivis",
  "Nebo ty iješ a kraluješ na vìky vìkù.",
  "Aki élsz és uralkodói mindörökkön-örökké.",
  };
