@@ -11793,15 +11793,9 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						}/* nie je_post */
 						break;
 					}
-					if(_global_jazyk == JAZYK_SK){
-						_global_svaty1.typslav = SLAV_SPOMIENKA;
-						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					}
-					else {
-						/* v èeskom liturgickom kalendári "Nezávazná památka" */
-						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-						_global_svaty1.smer = 12; /* lubovolne spomienky */
-					}
+					/* 2011-03-07: opravené na ¾ubovo¾nú spomienku */
+					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+					_global_svaty1.smer = 12; /* lubovolne spomienky */
 					mystrcpy(_global_svaty1.meno, text_MAR_04[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
