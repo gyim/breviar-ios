@@ -2017,7 +2017,7 @@ const char *text_MAR_08[POCET_JAZYKOV + 1] =
  "Sv. Jana z Boha, øeholníka",
  "Istenes Szent János szerzetes",
  };
-const char *text_MAR_08_SK[POCET_JAZYKOV + 1] = 
+const char *text_MAR_10_SK[POCET_JAZYKOV + 1] = 
 {"Výroèie posviacky katedrálneho chrámu v Bratislave",
  "(v Èechách, na Moravì a na Slezsku není)",
  "",

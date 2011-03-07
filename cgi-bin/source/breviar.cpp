@@ -180,6 +180,8 @@
 /*   2011-02-02a.D. | zaËiatok PRM_TXT -- export LK pre RKC (Peùo Zimen)   */
 /*                  - ToDo: 1. doladiù export &nbsp; a <p> HTML tagov      */
 /*                          2. nejako popracovaù na "zlepenÌ" pre 1 deÚ    */
+/*   2011-03-07a.D. | MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ */
+/*                    lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1..3*/
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -3678,10 +3680,11 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 		/* 2010-07-28: doplnenÈ alternatÌvne porovnanie aj s _global_svaty2.smer (kvÙli dominik·nskej sl·vnosti 8.8.) 
 		 * 2010-10-06: upravenÈ; nesmie Ìsù o lok·lnu sl·vnosù (smer == 4) lebo nem· prebÌjaù "glob·lnu" v danom kalend·ri [napr. czop pre 22.10.]
 		 * 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3, aby sa zjednoduöila podmienka (platÌ len pre CZOP)
+		 * 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 aû 3
 		 */
-			((_global_den.smer > _global_svaty1.smer) && !MIESTNE_SLAVENIE_CZOP_SVATY1)
-			|| ((_global_den.smer > _global_svaty2.smer) && !MIESTNE_SLAVENIE_CZOP_SVATY2)
-			|| ((_global_den.smer > _global_svaty3.smer) && !MIESTNE_SLAVENIE_CZOP_SVATY3)
+			((_global_den.smer > _global_svaty1.smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY1)
+			|| ((_global_den.smer > _global_svaty2.smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY2)
+			|| ((_global_den.smer > _global_svaty3.smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY3)
 		){
 
 			/* ked bola nasledovna pasaz zapoznamkovana,
@@ -3714,8 +3717,9 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 						/* a neplatÌ, ûe ide o lok·lnu sl·vnosù: t· nesmie prebiù vöedn˝ deÚ
 						 * 2010-10-06: upravenÈ; nesmie Ìsù o lok·lnu sl·vnosù (smer == 4) lebo nem· prebÌjaù "glob·lnu" v danom kalend·ri [napr. czop pre 22.10.]
 						 * 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3, aby sa zjednoduöila podmienka (platÌ len pre CZOP)
+						 * 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 aû 3
 						 */
-						&& !MIESTNE_SLAVENIE_CZOP_SVATY1
+						&& !MIESTNE_SLAVENIE_LOKAL_SVATY1
 					) /* slavnosti */
 				)
 				){ /* 15/03/2000A.D. -- modifikovane; POKUS 2006-12-08: vyÚat· podmienka (_global_modlitba != MODL_NEURCENA) &&  nepomohla, len pokazila */
@@ -4010,12 +4014,13 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	 * 2009-11-26: porovn·vame klasicky, resp. öpeci·lne pre body 4, 8, 11 [Miestne sl·vnosti, Miestne sviatky, Miestne povinnÈ spomienky]
 	 *             pred touto ˙pravou tu bola kontrola (_global_svaty1.smer >= 11)
 	 * 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3, aby sa zjednoduöila podmienka (platÌ len pre CZOP)
+	 * 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 aû 3
 	 */
 	if((_global_den.litobd == OBD_CEZ_ROK) &&
 		(_global_den.denvt == DEN_SOBOTA) &&
 		(
 			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
-			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_CZOP_SVATY1) && (_global_pocet_svatych > 0))) &&
+			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY1) && (_global_pocet_svatych > 0))) &&
 		(poradie_svateho == 4)){
 		/* teraz do _global_den priradim dane slavenie */
 		_local_den = _global_pm_sobota;
@@ -6496,10 +6501,11 @@ void _export_rozbor_dna(short int typ){
 		 * 2010-10-06: upravenÈ; nesmie Ìsù o lok·lnu sl·vnosù (smer == 4) lebo nem· prebÌjaù "glob·lnu" v danom kalend·ri [napr. czop pre 22.10.]
 		 *             pÙvodne tu bolo: if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
 		 * 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3, aby sa zjednoduöila podmienka (platÌ len pre CZOP)
+		 * 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 aû 3
 		 */
-		if(((_global_den.smer > _global_svaty1.smer) && !MIESTNE_SLAVENIE_CZOP_SVATY1)
-			|| ((_global_den.smer > _global_svaty2.smer) && !MIESTNE_SLAVENIE_CZOP_SVATY2)
-			|| ((_global_den.smer > _global_svaty3.smer) && !MIESTNE_SLAVENIE_CZOP_SVATY3)
+		if(((_global_den.smer > _global_svaty1.smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY1)
+			|| ((_global_den.smer > _global_svaty2.smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY2)
+			|| ((_global_den.smer > _global_svaty3.smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY3)
 			){
 			if(_global_den.smer > _global_svaty1.smer){
 				BUTTONS(typ, 1);
@@ -6547,8 +6553,9 @@ void _export_rozbor_dna(short int typ){
 			 *             else vetva mala napÌsanÈ: "æubovoæn· spomienka sv‰tÈho/sv‰t˝ch, priËom vöedn˝ deÚ m· vyööiu prioritu sl·venia"
 			 *             a eöte: "2010-05-21: odtiaæto presunutÈ potenci·lne vypisovanie (export) vöednÈho dÚa pred prvÈho sv‰tca, ak je æubovoæn· spomienka"
 			 * 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3, aby sa zjednoduöila podmienka (platÌ len pre CZOP)
+			 * 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 aû 3
 			 */
-			if(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_CZOP_SVATY1) &&
+			if(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY1) &&
 				(typ != EXPORT_DNA_VIAC_DNI)){
 				/* ak je to iba lubovolna spomienka, tak vsedny den */
 				/* 2010-05-21: NEWLINE; bolo pred; musÌme ho zaradiù za :) */
@@ -6586,9 +6593,10 @@ void _export_rozbor_dna(short int typ){
 			/* 2005-08-22: pÙvodne sa tu porovn·valo s 12, ale aj pre 11 (lok·lne sl·venia) 
 			 * by mal systÈm pon˙knuù (v sobotu) spomienku p. m·rie - keÔ je to napr. v inej diecÈze 
 			 * 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3, aby sa zjednoduöila podmienka (platÌ len pre CZOP)
+			 * 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 aû 3
 			 */
 			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
-			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_CZOP_SVATY1) && (_global_pocet_svatych > 0))) &&
+			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY1) && (_global_pocet_svatych > 0))) &&
 		(typ != EXPORT_DNA_VIAC_DNI)){
 		NEWLINE;
 		BUTTONS(typ, 4);
@@ -6861,11 +6869,12 @@ void _export_rozbor_dna_batch(short int typ, short int modlitba = MODL_NEURCENA,
 		 * 2010-10-06: upravenÈ; nesmie Ìsù o lok·lnu sl·vnosù (smer == 4) lebo nem· prebÌjaù "glob·lnu" v danom kalend·ri [napr. czop pre 22.10.]
 		 *             pÙvodne tu bolo: if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
 		 * 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3, aby sa zjednoduöila podmienka (platÌ len pre CZOP)
+		 * 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 aû 3
 		 */
 		short int aaa;
-		if(((_global_den.smer > _global_svaty1.smer) && !MIESTNE_SLAVENIE_CZOP_SVATY1)
-			|| ((_global_den.smer > _global_svaty2.smer) && !MIESTNE_SLAVENIE_CZOP_SVATY2)
-			|| ((_global_den.smer > _global_svaty3.smer) && !MIESTNE_SLAVENIE_CZOP_SVATY3)
+		if(((_global_den.smer > _global_svaty1.smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY1)
+			|| ((_global_den.smer > _global_svaty2.smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY2)
+			|| ((_global_den.smer > _global_svaty3.smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY3)
 			){
 			if(_global_den.smer > _global_svaty1.smer)
 				aaa = 1;
@@ -6913,8 +6922,9 @@ void _export_rozbor_dna_batch(short int typ, short int modlitba = MODL_NEURCENA,
 			 * 2009-11-26: porovn·vame klasicky, resp. öpeci·lne pre body 4, 8, 11 [Miestne sl·vnosti, Miestne sviatky, Miestne povinnÈ spomienky]
 			 *             pred touto ˙pravou tu bolo: if((_global_svaty1.smer >= 11) && atÔ.
 			 * 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3, aby sa zjednoduöila podmienka (platÌ len pre CZOP)
+			 * 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 aû 3
 			 */
-			if(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_CZOP_SVATY1) &&
+			if(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY1) &&
 				(typ != EXPORT_DNA_VIAC_DNI)){
 				/* ak je to iba lubovolna spomienka, tak vsedny den */
 				execute_batch_command(0, batch_command, modlitba, d_from_m_from_r_from);
@@ -6935,12 +6945,13 @@ void _export_rozbor_dna_batch(short int typ, short int modlitba = MODL_NEURCENA,
 	 * keÔûe smer == 11 pouûÌvame pre lok·lne povinnÈ spomienky, 
 	 * upravili sme kontrolu z 12 na 11
 	 * 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3, aby sa zjednoduöila podmienka (platÌ len pre CZOP)
+	 * 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 aû 3
 	 */
 	if((_global_den.litobd == OBD_CEZ_ROK) &&
 		(_global_den.denvt == DEN_SOBOTA) &&
 		(
 			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
-			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_CZOP_SVATY1) && (_global_pocet_svatych > 0))) &&
+			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY1) && (_global_pocet_svatych > 0))) &&
 		(typ != EXPORT_DNA_VIAC_DNI)){
 		execute_batch_command(4, batch_command, modlitba, d_from_m_from_r_from);
 	}

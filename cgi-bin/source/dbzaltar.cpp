@@ -167,6 +167,8 @@
 /*   2011-02-02a.D. | pouûitÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 (zjednoduöenie podmienok, CZOP) */
 /*   2011-02-02a.D. | dokonËen˝ liturgick˝ kalend·r pre SDB a SJ, ˙pravy: ˙roveÚ sl·venÌ a pod. */
 /*   2011-02-18a.D. | opravy pre ant. benediktus+magnifikat pre spomienky v II. a III. zv‰zku   */
+/*   2011-03-07a.D. | MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ (slovenskÈ)          */
+/*                    lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 aû 3                   */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -7472,8 +7474,9 @@ label_24_DEC:
 		/* a neplatÌ, ûe ide o lok·lnu sl·vnosù: t· nesmie prebiù vöedn˝ deÚ
 		 * 2010-10-06: upravenÈ; nesmie Ìsù o lok·lnu sl·vnosù (smer == 4) lebo nem· prebÌjaù "glob·lnu" v danom kalend·ri [napr. czop pre 22.10.]
 		 * 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3, aby sa zjednoduöila podmienka (platÌ len pre CZOP)
+		 * 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 aû 3
 		 */
-		&& !MIESTNE_SLAVENIE_CZOP_SVATY1){
+		&& !MIESTNE_SLAVENIE_LOKAL_SVATY1){
 		/* bolo to volanie pre nasleduj˙ci deÚ, treba oöetriù napr. kompletÛrium po prv˝ch veöper·ch, aby sa nepriradilo zo ûalt·ra */
 		Log("poradie_svateho == UNKNOWN_PORADIE_SVATEHO...\n");
 		Log("_global_pocet_svatych == %d\n", _global_pocet_svatych);
@@ -7529,9 +7532,11 @@ label_24_DEC:
 		(_global_den.denvt == DEN_SOBOTA) &&
 		((_global_den.denvr != (_global_r._ZOSLANIE_DUCHA_SV.denvr + 20))) && /* pridane 04/07/2000A.D. */
 		(
-			/* 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3, aby sa zjednoduöila podmienka (platÌ len pre CZOP) */
+			/* 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3, aby sa zjednoduöila podmienka (platÌ len pre CZOP)
+			 * 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 aû 3
+			 */
 			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
-			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_CZOP_SVATY1) && (_global_pocet_svatych > 0))) &&
+			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY1) && (_global_pocet_svatych > 0))) &&
 		(poradie_svateho == 4)){
 		/* teraz do _global_den priradim dane slavenie */
 		_local_den = _global_pm_sobota;
@@ -11888,23 +11893,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK, MODL_SPOL_CAST_SV_MUZ_SKUTKYMIL);
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
-					if(_global_jazyk == JAZYK_SK){ /* 2010-03-16: pridanÈ len pre Slovensko */
-						if(poradie_svaty == 2){
-							/* definovanie parametrov pre modlitbu */
-							if(query_type != PRM_DETAILY)
-								set_spolocna_cast(sc, poradie_svaty);
-							break;
-							/* Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
-						}
-						pocet = 2;
-						_global_svaty2.smer = 8; /* miestne sviatky */
-						_global_svaty2.typslav = SLAV_SVIATOK;
-						_global_svaty2.typslav_lokal = LOKAL_SLAV_BRATISLAVA;
-						mystrcpy(_global_svaty2.meno, text_MAR_08_SK[_global_jazyk], MENO_SVIATKU);
-						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
-						_global_svaty2.farba = LIT_FARBA_BIELA;
-						_global_svaty2.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridanÈ */
-					}
 					break;
 				case 9: /* MES_MAR -- 09MAR */
 					if(poradie_svaty == 1){
@@ -11973,6 +11961,22 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridanÈ */
+					}
+					/* else */ if(_global_jazyk == JAZYK_SK){ /* 2010-03-16: pridanÈ len pre Slovensko; 2011-03-07: opravenÈ pre SK ("termÌn v˝roËia posviacky katedr·lneho chr·mu sa bude kaûdoroËne sl·viù 10. marca. P. Brunovsk˝") */
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+							break;
+							/* Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
+						}
+						_global_svaty1.smer = 8; /* miestne sviatky */
+						_global_svaty1.typslav = SLAV_SVIATOK;
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_BRATISLAVA;
+						mystrcpy(_global_svaty1.meno, text_MAR_10_SK[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridanÈ */
 					}
 					break;
 				case 15: /* MES_MAR -- 15MAR */
