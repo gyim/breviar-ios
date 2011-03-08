@@ -487,8 +487,10 @@ extern const char *text_OKT_13_SDB[POCET_JAZYKOV + 1];
 extern const char *text_OKT_24_SDB[POCET_JAZYKOV + 1];
 extern const char *text_OKT_25_SDB[POCET_JAZYKOV + 1];
 extern const char *text_OKT_29_SDB[POCET_JAZYKOV + 1];
+extern const char *text_NOV_05_SDB[POCET_JAZYKOV + 1];
 extern const char *text_NOV_13_SDB[POCET_JAZYKOV + 1];
 extern const char *text_NOV_15_SDB[POCET_JAZYKOV + 1];
+extern const char *text_NOV_25_SDB[POCET_JAZYKOV + 1];
 extern const char *text_DEC_05_SDB[POCET_JAZYKOV + 1];
 
 /* --------------- SJ propriá --------------- */

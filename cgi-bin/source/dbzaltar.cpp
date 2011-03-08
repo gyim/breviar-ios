@@ -20550,6 +20550,35 @@ label_25_MAR:
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridané */
 					}
+					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SDB)){
+						if(poradie_svaty == 2){
+
+							file_name_vlastny_kalendar(_global_kalendar);
+
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							/*
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+							*/
+							break;
+						}
+						pocet = 2;
+						_global_svaty2.typslav = SLAV_SPOMIENKA;
+						_global_svaty2.smer = 10; /* mieste povinné spomienky pod¾a miestneho kalendára; technicky 10, hoci pod¾a smerníc 11 */
+						mystrcpy(_global_svaty2.meno, text_NOV_05_SDB[_global_jazyk], MENO_SVIATKU);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_ZA_ZOSNULYCH);
+						_global_svaty2.farba = LIT_FARBA_FIALOVA;
+						_global_svaty2.kalendar = KALENDAR_SK_SDB;
+					}/* kalendár pre KALENDAR_SK_SDB */
 					break;
 				case 6: /* MES_NOV -- 06NOV */
 					/* 2009-03-24: doplnené pre dominikánov */
@@ -21391,6 +21420,36 @@ label_25_MAR:
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_MUCENIK);
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridané */
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
+					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SDB)){
+						if(poradie_svaty == 2){
+
+							file_name_vlastny_kalendar(_global_kalendar);
+
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							/*
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+							*/
+							break;
+						}
+						pocet = 2;
+						_global_svaty2.typslav = SLAV_SPOMIENKA;
+						_global_svaty2.smer = 10; /* mieste povinné spomienky pod¾a miestneho kalendára; technicky 10, hoci pod¾a smerníc 11 */
+						mystrcpy(_global_svaty2.meno, text_NOV_25_SDB[_global_jazyk], MENO_SVIATKU);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_ZA_ZOSNULYCH);
+						_global_svaty2.farba = LIT_FARBA_FIALOVA;
+						_global_svaty2.kalendar = KALENDAR_SK_SDB;
+					}/* kalendár pre KALENDAR_SK_SDB */
+					break;
 					break;
 				case 26: /* MES_NOV -- 26NOV */
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SJ)){

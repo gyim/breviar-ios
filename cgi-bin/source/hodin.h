@@ -4432,6 +4432,15 @@ const char *text_NOV_05_SJ[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_NOV_05_SDB[POCET_JAZYKOV + 1] = 
+{"Všetkých zomrelých dobrodincov Saleziánskej rodiny",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_NOV_06_CZOP[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",
  "(v Èechách, na Moravì a ve Slezsku není)",
@@ -4665,6 +4674,15 @@ const char *text_NOV_25[POCET_JAZYKOV + 1] =
  "",
  "Sv. Kateøiny Alexandrijské, panny a muèednice",
  "(nincs Magyarországon)",
+ };
+const char *text_NOV_25_SDB[POCET_JAZYKOV + 1] = 
+{"Všetkých zomrelých rodièov saleziánov",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_NOV_26_SJ[POCET_JAZYKOV + 1] = 
 {"Sv. Jána Berchmansa, reho¾níka",
