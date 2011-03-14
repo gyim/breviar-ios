@@ -182,6 +182,8 @@
 /*                          2. nejako popracovaù na "zlepenÌ" pre 1 deÚ    */
 /*   2011-03-07a.D. | MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ */
 /*                    lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1..3*/
+/*   2011-03-14a.D. | batch mÛd: nastavenie parametra o5 (_global_opt5)    */
+/*                    pre modlitbu cez deÚ (beûn·/doplnkov· psalmÛdia)     */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -6715,12 +6717,14 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 /* 2009-08-04: rozöÌrenÈ o nepovinn˝ vstupn˝ parameter 'modlitba', ktor˝ hovorÌ, 
  *             Ëi sa maj˙ exportovaù vöetky modlitby (ako doteraz)
  *             alebo len t·to modlitba (pre export_monthly_druh >= 1)
+ * 2011-03-14: doplnenÈ vyplnenie parametra o5 (_global_opt5) pre modlitbu cez deÚ [doteraz sme generovali pre vöetky 3 modlitby MCD ûalmy "vlastnÈ", teraz pre 2 z nich budeme d·vaù doplnkov˙ psalmÛdiu]
  */
 	FILE *batch_export_file = NULL;
 	char parameter_M[SMALL] = STR_EMPTY; // parametre pre v˝slednÈ HTML (parameter 'M' a parametre pre odkazy na s˙bory, napr. 'I')
 	char parameter_I[SMALL] = STR_EMPTY;
 	char poradie_svateho[SMALL] = STR_EMPTY; // pre export_monthly_druh >= 1
 	char _local_export_navig_hore[SMALL] = STR_EMPTY;
+	char parameter_o5[SMALL] = STR_EMPTY; // parameter o5 (_global_opt5) pre modlitbu cez deÚ (beûn· alebo doplnkov· psalmÛdia)
 
 	/* 2009-08-03: exportovanie do adres·rov po mesiacoch */
 	if(_global_opt_batch_monthly == ANO){
@@ -6765,7 +6769,20 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 			export_month_nova_modlitba = 0;
 		}
 		if((a != 4) || (a == 4 && (i != MODL_VESPERY && i != MODL_KOMPLETORIUM))){ /* 2006-01-31-TUTOLA; 2008-04-09 presunutÈ */
-			fprintf(batch_file, "%s%d%c.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s\n", batch_command, a, char_modlitby[i], _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M); /* modlitba `i' */
+			/* 2011-03-14: nastavenie parametra o5 (_global_opt5) pre modlitbu cez deÚ (beûn· alebo doplnkov· psalmÛdia) */
+			if((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI)){
+				sprintf(parameter_o5, "-5");
+				if((_global_den.denvr + _global_den.rok + i) MOD 3 == 0){
+					strcat(parameter_o5, "0"); /* MODL_CEZ_DEN_ZALMY_ZO_DNA */
+				}
+				else{
+					strcat(parameter_o5, "1"); /* MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA */
+				}
+			}
+			else{
+				sprintf(parameter_o5, STR_EMPTY);
+			}
+			fprintf(batch_file, "%s%d%c.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s %s\n", batch_command, a, char_modlitby[i], _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, parameter_o5); /* modlitba `i' */
 			if(export_monthly_druh == 1){
 				if(a > 0)
 					sprintf(poradie_svateho, "/%d", a);
@@ -6787,8 +6804,21 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 					fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -x%d -p%s -j%s\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk]); /* modlitba `i' */
 				}/* endif _global_opt_append == YES */
 				else{
+					/* 2011-03-14: nastavenie parametra o5 (_global_opt5) pre modlitbu cez deÚ (beûn· alebo doplnkov· psalmÛdia) */
+					if((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI)){
+						sprintf(parameter_o5, "-5");
+						if((_global_den.denvr + _global_den.rok + i) MOD 3 == 0){
+							strcat(parameter_o5, "0"); /* MODL_CEZ_DEN_ZALMY_ZO_DNA */
+						}
+						else{
+							strcat(parameter_o5, "1"); /* MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA */
+						}
+					}
+					else{
+						sprintf(parameter_o5, STR_EMPTY);
+					}
 					/* 2009-08-03: doplnen· moûnosù exportovaù parameter -M ak exportuje batch mÛd pre jednotlivÈ mesiace kvÙli hlaviËke jednotlivej modlitby */
-					fprintf(batch_file, "%s%d%c.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s\n", batch_command, a, char_modlitby[i], _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M); /* modlitba `i' */
+					fprintf(batch_file, "%s%d%c.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s %s\n", batch_command, a, char_modlitby[i], _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, parameter_o5); /* modlitba `i' */
 					// fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%d%c.htm\">%s</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a, char_modlitby[i], nazov_modlitby(i));
 					/* 2008-11-29: rozliËn˝ export */
 					if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
