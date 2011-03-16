@@ -535,6 +535,16 @@ extern const char *text_JAN_05_OFM[POCET_JAZYKOV + 1];
 extern const char *text_JAN_12_OFM[POCET_JAZYKOV + 1];
 extern const char *text_JAN_14_OFM[POCET_JAZYKOV + 1];
 extern const char *text_JAN_16_OFM[POCET_JAZYKOV + 1];
+extern const char *text_JAN_20_OFM[POCET_JAZYKOV + 1];
+extern const char *text_JAN_30_OFM[POCET_JAZYKOV + 1];
+extern const char *text_FEB_04_OFM[POCET_JAZYKOV + 1];
+extern const char *text_FEB_06_OFM[POCET_JAZYKOV + 1];
+extern const char *text_FEB_07_OFM[POCET_JAZYKOV + 1];
+extern const char *text_MAR_02_OFM[POCET_JAZYKOV + 1];
+extern const char *text_MAR_12_OFM[POCET_JAZYKOV + 1];
+extern const char *text_MAR_18_OFM[POCET_JAZYKOV + 1];
+extern const char *text_APR_21_OFM[POCET_JAZYKOV + 1];
+extern const char *text_APR_23_OFM[POCET_JAZYKOV + 1];
 
 #endif /* __DBZALTAR_H_ */
 

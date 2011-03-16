@@ -187,7 +187,7 @@ extern short int _global_opt_export_date_format;
 #define je_aleluja_aleluja ((_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || ((_global_den.litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvt == DEN_NEDELA)) || (equals(_global_den.meno, _global_r._ZOSLANIE_DUCHA_SV.meno) && (_global_modlitba == MODL_VESPERY)))
 #define je_34_ocr ((_global_den.litobd == OBD_CEZ_ROK) && (_global_den.tyzden == 34) && (_global_den.denvt != DEN_NEDELA))
 #define je_tedeum (type == MODL_POSV_CITANIE) && (((_global_den.denvt == DEN_NEDELA) && (_global_den.litobd != OBD_POSTNE_I) && (_global_den.litobd != OBD_POSTNE_II_VELKY_TYZDEN)) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || (_global_den.litobd == OBD_OKTAVA_NARODENIA))
-/* 2010-05-24: doplnené */
+/* 2010-05-24: doplnené; 2011-03-16: rozšírené o posvätné èítanie */
 #define je_ant_modl_spom_post (( \
 (_global_modlitba == MODL_RANNE_CHVALY &&  \
 	(_global_modl_ranne_chvaly.ant_spompost.anchor != NULL) && (_global_modl_ranne_chvaly.ant_spompost.file != NULL) && \
@@ -205,6 +205,12 @@ extern short int _global_opt_export_date_format;
 	(strcmp(_global_modl_vespery.modlitba_spompost.anchor, EMPTY_STR) != 0) && (strcmp(_global_modl_vespery.modlitba_spompost.anchor, STR_UNDEF) != 0) && \
 	(strcmp(_global_modl_vespery.ant_spompost.file, EMPTY_STR) != 0) && (strcmp(_global_modl_vespery.ant_spompost.file, STR_UNDEF) != 0) &&  \
 	(strcmp(_global_modl_vespery.modlitba_spompost.file, EMPTY_STR) != 0) && (strcmp(_global_modl_vespery.modlitba_spompost.file, STR_UNDEF) != 0) \
+) \
+||  \
+(_global_modlitba == MODL_POSV_CITANIE &&  \
+	(_global_modl_posv_citanie.prosby.anchor != NULL) && (_global_modl_posv_citanie.prosby.file != NULL) && \
+	(strcmp(_global_modl_posv_citanie.prosby.anchor, EMPTY_STR) != 0) && (strcmp(_global_modl_posv_citanie.prosby.anchor, STR_UNDEF) != 0) &&  \
+	(strcmp(_global_modl_posv_citanie.prosby.file, EMPTY_STR) != 0) && (strcmp(_global_modl_posv_citanie.prosby.file, STR_UNDEF) != 0) \
 ) \
 ))
 

@@ -157,7 +157,7 @@ struct tmodlitba1{
 	_struct_anchor_and_file kcitanie  ; /* 1. citanie pre posvatne citanie */
 	_struct_anchor_and_file kresponz  ; 
 	_struct_anchor_and_file benediktus; /* antifona na benediktus/magnifikat/nunc dimittis; 2. citanie pre posvatne citanie */
-	_struct_anchor_and_file prosby    ; /* pre posvatne citanie nedefinovane */
+	_struct_anchor_and_file prosby    ; /* pre posvatne citanie nedefinovane; 2011-03-16: "zneužité" (použité) pre hagiografické èítanie (¾ubovo¾nej) spomienky svätca v pôste */
 	_struct_anchor_and_file modlitba  ;
 	_struct_anchor_and_file ant_spompost; /* 2010-05-21: pridané kvôli spomienkam a ¾ubovo¾ným spomienkam v pôstnom období (zobrazenie po modlitbe dòa pôstnej férie) */
 	_struct_anchor_and_file modlitba_spompost; /* 2010-05-21: pridané kvôli spomienkam a ¾ubovo¾ným spomienkam v pôstnom období (zobrazenie po modlitbe dòa pôstnej férie) */
@@ -362,6 +362,8 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 /* 2010-05-21: pridané kvôli spomienkam a ¾ubovo¾ným spomienkam v pôstnom období (zobrazenie po modlitbe dòa pôstnej férie) */
 #define PARAM_ANT_SPOMPOST  "ANT_SPOMPOST"
 #define PARAM_MODL_SPOMPOST "MODL_SPOMPOST"
+/* 2011-03-16: pridané kvôli spomienkam a ¾ubovo¾ným spomienkam v pôstnom období (zobrazenie po 2. èítaní v posv. èítaní) */
+#define PARAM_CITANIE2_SPOMPOST "CITANIE2_SPOMPOST"
 
 /* dalsie parametre: specificke pre obdobie */
 /* Od nedele Pánovho zmàtvychvstania až do Druhej ve¾konoènej nedele vrátane,
@@ -763,6 +765,7 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_KONGREGACIA_SSK			42 /* doplnené 2011-01-27 */
 #define LOKAL_SLAV_SPOMIENKA_OFMCAP			43 /* doplnené 2011-03-16 */
 #define LOKAL_SLAV_SVIATOK_OFM				44 /* doplnené 2011-03-16 */
+#define LOKAL_SLAV_SPOMIENKA_OFM			45 /* doplnené 2011-03-16 */
 
 /* 2010-08-03: pridaný kalendár */
 #define KALENDAR_NEURCENY                   0

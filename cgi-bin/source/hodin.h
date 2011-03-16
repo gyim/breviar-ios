@@ -449,6 +449,7 @@ const char *nazov_slavenia_lokal[] =
 ,"len pre Kongregáciu milosrdných sestier Sv. kríža" /* doplnené 2011-01-27 */
 ,"Spomienka pre OFMCap" /* doplnené 2011-03-16 */
 ,"Sviatok pre OFM" /* doplnené 2011-03-16 */
+,"Spomienka pre OFM" /* doplnené 2011-03-16 */
 };
 
 /* names of liturgical colors */
@@ -1661,6 +1662,15 @@ const char *text_JAN_20_2[POCET_JAZYKOV + 1] =
  "Sv. Šebestiána, muèedníka",
  "Szent Sebestyén vértanú",
  };
+const char *text_JAN_20_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. Jána Krstite¾a Triquerie, kòaza a muèeníka, èlena 1. rádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_JAN_21[POCET_JAZYKOV + 1] = 
 {"Sv. Agnesy, panny a muèenice",
  "Sv. Anežky, panny a muèednice",
@@ -1769,6 +1779,15 @@ const char *text_JAN_30_SDB[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_JAN_30_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Hyacinty Mariscottiovej, panny, èlenky 3. rádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_JAN_31[POCET_JAZYKOV + 1] = 
 {"Sv. Jána Boska, kòaza",
  "Sv. Jana Boska, knìze",
@@ -1837,12 +1856,21 @@ const char *text_FEB_04_CZOP[POCET_JAZYKOV + 1] =
  };
 const char *text_FEB_04_SJ[POCET_JAZYKOV + 1] = 
 {"Sv. Jána de Brito, kòaza, bl. Rudolfa Acquavivu, kòaza a jeho spoloèníkov; <br>bl. Františka Pacheca, Karola Spinolu, kòazov a spoloèníkov, muèeníkov; <br>bl. Jakuba Berthieu, kòaza, Leva Mangina, kòaza a spoloèníkov, muèeníkov",
- "(v Èechách, na Moravì a ve Slezsku není)",
  "",
- "la_",
  "",
- "czop_",
- "hu_",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_FEB_04_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Jozefa z Leonissy, kòaza, èlena 1. rádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_FEB_05[POCET_JAZYKOV + 1] = 
 {"Sv. Agaty, panny a muèenice",
@@ -1871,6 +1899,15 @@ const char *text_FEB_06_SJ[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_FEB_06_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Petra Baptistu, kòaza, a spoloèníkov, františkánskych muèeníkov",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_FEB_07_CZOP[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",
  "(v Èechách, na Moravì a ve Slezsku není)",
@@ -1884,10 +1921,19 @@ const char *text_FEB_07_SDB[POCET_JAZYKOV + 1] =
 {"Bl. Pia IX., pápeža",
  "",
  "",
- "la_",
  "",
  "",
- "hu_",
+ "",
+ "",
+ };
+const char *text_FEB_07_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Kolety z Corbie, panny, èlenky 2. rádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_FEB_08_1[POCET_JAZYKOV + 1] = 
 {"Sv. Hieronyma Emilianiho",
@@ -2039,6 +2085,15 @@ const char *text_POPOLCOVA_STREDA[POCET_JAZYKOV + 1] =
 
 /* --------------- 03 marec --------------- */
 
+const char *text_MAR_02_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Anežky Èeskej, panny, èlenky 2. rádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_MAR_04[POCET_JAZYKOV + 1] = 
 {"Sv. Kazimíra",
  "Sv. Kazimíra",
@@ -2093,6 +2148,15 @@ const char *text_MAR_10_CZ[POCET_JAZYKOV + 1] =
  "Sv. Jana Ogilvie, knìze a muèedníka",
  "(nincs Magyarországon)",
  };
+const char *text_MAR_12_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. Angely Salawovej, panny, èlenky 3. rádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_MAR_15_CSSR[POCET_JAZYKOV + 1] = 
 {"Sv. Klementa Márie Hofbauera, kòaza",
  "",
@@ -2119,6 +2183,15 @@ const char *text_MAR_18[POCET_JAZYKOV + 1] =
  "",
  "Sv. Cyrila Jeruzalémského, biskupa a uèitele Církve",
  "Jeruzsálemi Szent Cirill püspök és egyháztanító",
+ };
+const char *text_MAR_18_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Salvatora z Horty, kòaza, èlena 1. rádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_MAR_19[POCET_JAZYKOV + 1] = 
 {"Sv. Jozefa, ženícha Panny Márie",
@@ -2222,6 +2295,15 @@ const char *text_APR_21[POCET_JAZYKOV + 1] =
  "Sv. Anselma, biskupa a uèitele Církve",
  "Szent Anzelm püspök és egyháztanító",
  };
+const char *text_APR_21_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Konráda z Parzhamu, reho¾níka, èlena 1. rádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_APR_22_SJ[POCET_JAZYKOV + 1] = 
 {"Prebl. Panny Márie, Matky Spoloènosti Ježišovej",
  "",
@@ -2239,6 +2321,15 @@ const char *text_APR_23[POCET_JAZYKOV + 1] =
  "",
  "Sv. Vojtìcha, biskupa a muèedníka",
  "Szent Adalbert (Béla) püspök és vértanú",
+ };
+const char *text_APR_23_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. Egida z Assisi, reho¾níka, èlena 1. rádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_APR_24_1[POCET_JAZYKOV + 1] = 
 {"Sv. Juraja, muèeníka",
