@@ -761,6 +761,8 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_BRATISLAVA				40 /* doplnené 2010-03-16 */
 #define LOKAL_SLAV_KONIEC_OKTAVY_NAR_HU		41 /* doplnené 2010-05-17 */
 #define LOKAL_SLAV_KONGREGACIA_SSK			42 /* doplnené 2011-01-27 */
+#define LOKAL_SLAV_SPOMIENKA_OFMCAP			43 /* doplnené 2011-03-16 */
+#define LOKAL_SLAV_SVIATOK_OFM				44 /* doplnené 2011-03-16 */
 
 /* 2010-08-03: pridaný kalendár */
 #define KALENDAR_NEURCENY                   0
@@ -773,8 +775,9 @@ extern const char *nazov_slavenia_lokal[];
 #define KALENDAR_SK_SVD                     7
 #define KALENDAR_SK_SJ                      8
 #define KALENDAR_SK_SDB                     9
+#define KALENDAR_SK_OFM                    10
 
-#define POCET_KALENDAROV                    9
+#define POCET_KALENDAROV                   10
 
 /* filenames for special calendars / názov súbora pre kalendáre */
 extern const char *nazov_htm_kalendar[POCET_KALENDAROV + 1];

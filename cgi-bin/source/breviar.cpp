@@ -184,6 +184,7 @@
 /*                    lokálne slávenia ako MIESTNE_SLAVENIE_LOKAL_SVATY1..3*/
 /*   2011-03-14a.D. | batch mód: nastavenie parametra o5 (_global_opt5)    */
 /*                    pre modlitbu cez deò (bežná/doplnková psalmódia)     */
+/*   2011-03-16a.D. | liturgický kalendár pre OFM (zaèiatok)               */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -5953,11 +5954,14 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<option%s>%s\n", 
 			(_global_kalendar == KALENDAR_SK_SVD)? html_option_selected: STR_EMPTY,
 			nazov_slavenia_lokal_kalendar[KALENDAR_SK_SVD] /* nazov_kalendara[KALENDAR_SK_SVD] */);
-		// 2010-12-17: odvetvené, aby sa to nedostalo na web (tam OS_linux)
+		// 2010-12-17: odvetvené, aby sa to nedostalo na web (tam OS_linux); 2011-03-16: pridaní františkáni (OFM)
 #ifdef OS_Windows_Ruby
 		Export("<option%s>%s\n", 
 			(_global_kalendar == KALENDAR_SK_SJ)? html_option_selected: STR_EMPTY,
 			nazov_slavenia_lokal_kalendar[KALENDAR_SK_SJ]);
+		Export("<option%s>%s\n", 
+			(_global_kalendar == KALENDAR_SK_OFM)? html_option_selected: STR_EMPTY,
+			nazov_slavenia_lokal_kalendar[KALENDAR_SK_OFM]);
 #endif
 		Export("<option%s>%s\n", 
 			(_global_kalendar == KALENDAR_SK_SDB)? html_option_selected: STR_EMPTY,

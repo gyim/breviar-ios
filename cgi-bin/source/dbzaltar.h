@@ -529,5 +529,12 @@ extern const char *text_NOV_26_SJ[POCET_JAZYKOV + 1];
 extern const char *text_DEC_01_SJ[POCET_JAZYKOV + 1];
 extern const char *text_DEC_03_SJ[POCET_JAZYKOV + 1];
 
+/* --------------- OFM propriá --------------- */
+extern const char *text_JAN_04_OFM[POCET_JAZYKOV + 1];
+extern const char *text_JAN_05_OFM[POCET_JAZYKOV + 1];
+extern const char *text_JAN_12_OFM[POCET_JAZYKOV + 1];
+extern const char *text_JAN_14_OFM[POCET_JAZYKOV + 1];
+extern const char *text_JAN_16_OFM[POCET_JAZYKOV + 1];
+
 #endif /* __DBZALTAR_H_ */
 

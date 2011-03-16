@@ -371,15 +371,16 @@ const char *nazov_kalendara[POCET_KALENDAROV + 1] =
 ,"SK SVD"
 ,"SK SJ"
 ,"SK SDB"
+,"SK OFM"
 };
 
 /* calendar codes; internal usage for HTTP requests */
 const char *skratka_kalendara[POCET_KALENDAROV + 1] =
-{"??", "la", "sk", "cz", "czop", "cssr", "hu", "svd", "sj", "sdb"};
+{"??", "la", "sk", "cz", "czop", "cssr", "hu", "svd", "sj", "sdb", "ofm"};
 
 /* filenames for special calendars / n·zov s˙bora pre kalend·re -- "pro" == propri· */
 const char *nazov_htm_kalendar[POCET_KALENDAROV + 1] =
-{"", "", "", "", "", "pro_cssr.htm", "", "pro_svd.htm", "pro_sj.htm", "pro_sdb.htm"};
+{"", "", "", "", "", "pro_cssr.htm", "", "pro_svd.htm", "pro_sj.htm", "pro_sdb.htm", "pro_ofm.htm"};
 
 /* doplnenÈ 2010-10-11 */
 const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1] =
@@ -393,6 +394,7 @@ const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1] =
 ,"pre SpoloËnosù Boûieho Slova ó verbistov"
 ,"pre SpoloËnosù Jeûiöovu ó jezuitov"
 ,"pre SpoloËnosù sv‰tÈho Frantiöka SaleskÈho ó salezi·nov dona Bosca"
+,"pre frantiök·nsku rodinu ó frantiök·nov, kapucÌnov, minoritov"
 };
 
 /* special "local" or "partial" characteristics of various celebrations - each in one language; no need to translate; special strings will be added */
@@ -445,6 +447,8 @@ const char *nazov_slavenia_lokal[] =
 ,"v Bratislavskej arcidiecÈze" /* doplnenÈ 2010-03-16 */
 ,"Kar·csony nyolcada-Kiskar·csony" /* doplnenÈ 2010-05-17 */
 ,"len pre Kongreg·ciu milosrdn˝ch sestier Sv. krÌûa" /* doplnenÈ 2011-01-27 */
+,"Spomienka pre OFMCap" /* doplnenÈ 2011-03-16 */
+,"Sviatok pre OFM" /* doplnenÈ 2011-03-16 */
 };
 
 /* names of liturgical colors */
@@ -1477,8 +1481,26 @@ const char *text_JAN_03[POCET_JAZYKOV + 1] =
  "NejsvÏtÏjöÌho JmÈna JeûÌö",
  "(Najsv‰tejöieho mena Jeûiö)",
  };
+const char *text_JAN_04_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. Angely z Foligna, rehoænÌËky, Ëlenky 3. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_JAN_05_CSSR[POCET_JAZYKOV + 1] = 
 {"Sv. J·na NepomuckÈho Neumanna, biskupa",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_JAN_05_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. Didaka Jozefa z C·dizu, kÚaza, Ëlena 1. r·du",
  "",
  "",
  "",
@@ -1513,6 +1535,15 @@ const char *text_JAN_KRST[POCET_JAZYKOV + 1] =
  "K¯tu P·nÏ",
  "Urunk MegkeresztelkedÈse",
  };
+const char *text_JAN_12_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Bernarda z Corleone, rehoænÌka, Ëlena 1. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_JAN_13[POCET_JAZYKOV + 1] = 
 {"Sv. Hil·ra, biskupa a uËiteæa Cirkvi",
  "Sv. Hilaria, biskupa a uËitele cÌrkve",
@@ -1524,6 +1555,15 @@ const char *text_JAN_13[POCET_JAZYKOV + 1] =
  };
 const char *text_JAN_14_CSSR[POCET_JAZYKOV + 1] = 
 {"Bl. Petra Dondersa, kÚaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_JAN_14_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. Odorika z Pordenone, kÚaza, Ëlena 1. r·du",
  "",
  "",
  "",
@@ -1554,6 +1594,15 @@ const char *text_JAN_15_SDB[POCET_JAZYKOV + 1] =
  "(v »ech·ch, na MoravÏ a ve Slezsku nenÌ)",
  "",
  "la_",
+ "",
+ "",
+ "",
+ };
+const char *text_JAN_16_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Berarda, kÚaza, a spoloËnÌkov, prv˝ch frantiök·nskych muËenÌkov",
+ "",
+ "",
+ "",
  "",
  "",
  "",
