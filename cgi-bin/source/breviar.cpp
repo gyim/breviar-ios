@@ -6851,8 +6851,8 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 					sprintf(export_doplnkova_psalmodia, " (<a href=\""FILENAME_EXPORT_DATE_FULL"_%d%cd.htm\">alt</a>)", _global_den.rok, _global_den.mesiac, _global_den.den, a, char_modlitby[i]);
 			}
 			else{
-				sprintf(parameter_o5, STR_EMPTY);
-				sprintf(export_doplnkova_psalmodia, STR_EMPTY);
+				strcpy(parameter_o5, STR_EMPTY);
+				strcpy(export_doplnkova_psalmodia, STR_EMPTY);
 			}
 			fprintf(batch_file, "%s%d%c.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s\n", batch_command, a, char_modlitby[i], _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M); /* modlitba `i' */
 			if(export_monthly_druh == 1){
@@ -6897,8 +6897,8 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 							sprintf(export_doplnkova_psalmodia, " (<a href=\""FILENAME_EXPORT_DATE_FULL"_%d%cd.htm\">alt</a>)", _global_den.rok, _global_den.mesiac, _global_den.den, a, char_modlitby[i]);
 					}
 					else{
-						sprintf(parameter_o5, STR_EMPTY);
-						sprintf(export_doplnkova_psalmodia, STR_EMPTY);
+						strcpy(parameter_o5, STR_EMPTY);
+						strcpy(export_doplnkova_psalmodia, STR_EMPTY);
 					}
 					/* 2009-08-03: doplnen· moûnosù exportovaù parameter -M ak exportuje batch mÛd pre jednotlivÈ mesiace kvÙli hlaviËke jednotlivej modlitby */
 					fprintf(batch_file, "%s%d%c.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s\n", batch_command, a, char_modlitby[i], _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M); /* modlitba `i' */
