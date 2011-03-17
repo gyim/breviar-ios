@@ -763,9 +763,14 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_BRATISLAVA				40 /* doplnené 2010-03-16 */
 #define LOKAL_SLAV_KONIEC_OKTAVY_NAR_HU		41 /* doplnené 2010-05-17 */
 #define LOKAL_SLAV_KONGREGACIA_SSK			42 /* doplnené 2011-01-27 */
-#define LOKAL_SLAV_SPOMIENKA_OFMCAP			43 /* doplnené 2011-03-16 */
-#define LOKAL_SLAV_SVIATOK_OFM				44 /* doplnené 2011-03-16 */
-#define LOKAL_SLAV_SPOMIENKA_OFM			45 /* doplnené 2011-03-16 */
+#define LOKAL_SLAV_SPOMIENKA_OFMCAP			43 /* nasledovné doplnené 2011-03-16 */
+#define LOKAL_SLAV_SVIATOK_OFM				44
+#define LOKAL_SLAV_SPOMIENKA_OFM			45
+#define LOKAL_SLAV_SVIATOK_OFMCAP			46 /* nasledovné doplnené 2011-03-17 */
+#define LOKAL_SLAV_SPOMIENKA_FMA			47
+#define LOKAL_SLAV_SLAVNOST_FMA				48
+#define LOKAL_SLAV_SLAVNOST_SDB				49
+#define LOKAL_SLAV_SVIATOK_VDB				50
 
 /* 2010-08-03: pridaný kalendár */
 #define KALENDAR_NEURCENY                   0

@@ -389,12 +389,12 @@ const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1] =
 ,"vöeobecn˝ [pre Slovensko]"
 ,""
 ,""
-,"pre Kongreg·ciu najsv‰tejöieho Vykupiteæa ó redemptoristov"
+,"pre Kongreg·ciu najsv‰tejöieho Vykupiteæa ó redemptoristov (CSsR)"
 ,""
-,"pre SpoloËnosù Boûieho Slova ó verbistov"
-,"pre SpoloËnosù Jeûiöovu ó jezuitov"
-,"pre SpoloËnosù sv‰tÈho Frantiöka SaleskÈho ó salezi·nov dona Bosca"
-,"pre frantiök·nsku rodinu ó frantiök·nov, kapucÌnov, minoritov"
+,"pre SpoloËnosù Boûieho Slova ó verbistov (SVD)"
+,"pre SpoloËnosù Jeûiöovu ó jezuitov (SJ)"
+,"pre salezi·nsku rodinu ó SDB, FMA, VDB"
+,"pre frantiök·nsku rodinu ó frantiök·nov<!-- (OFM)-->, kapucÌnov<!--  (OFMCap)-->, minoritov<!--  (OFMConv)-->"
 };
 
 /* special "local" or "partial" characteristics of various celebrations - each in one language; no need to translate; special strings will be added */
@@ -447,9 +447,14 @@ const char *nazov_slavenia_lokal[] =
 ,"v Bratislavskej arcidiecÈze" /* doplnenÈ 2010-03-16 */
 ,"Kar·csony nyolcada-Kiskar·csony" /* doplnenÈ 2010-05-17 */
 ,"len pre Kongreg·ciu milosrdn˝ch sestier Sv. krÌûa" /* doplnenÈ 2011-01-27 */
-,"Spomienka pre OFMCap" /* doplnenÈ 2011-03-16 */
-,"Sviatok pre OFM" /* doplnenÈ 2011-03-16 */
-,"Spomienka pre OFM" /* doplnenÈ 2011-03-16 */
+,"pre OFMCap: spomienka" /* nasledovnÈ doplnenÈ 2011-03-16 */
+,"pre OFM: sviatok"
+,"pre OFM: spomienka"
+,"pre OFMCap: sviatok" /* nasledovnÈ doplnenÈ 2011-03-17 */
+,"pre FMA: spomienka"
+,"pre FMA: sl·vnosù"
+,"pre SDB: sl·vnosù"
+,"pre VDB: sviatok"
 };
 
 /* names of liturgical colors */
@@ -2349,6 +2354,15 @@ const char *text_APR_24_2[POCET_JAZYKOV + 1] =
  "Sv. Fidela ze Sigmaringy, knÏze a muËednÌka",
  "Sigmaringeni Szent FidÈl ·ldozÛpap Ès vÈrtan˙",
  };
+const char *text_APR_24_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Fidela zo Sigmaringenu, kÚaza a muËenÌka, Ëlena 1. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_APR_25[POCET_JAZYKOV + 1] = 
 {"Sv. Marka, evanjelistu",
  "Sv. Marka, evangelisty",
@@ -2411,6 +2425,15 @@ const char *text_APR_30_2[POCET_JAZYKOV + 1] =
  "",
  "Sv. Zikmunda, muËednÌka",
  "(nincs Magyarorsz·gon)",
+ };
+const char *text_APR_30_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. Benedikta z Urbina, kÚaza, Ëlena 1. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 
 /* --------------- 05 m·j --------------- */
@@ -2478,6 +2501,42 @@ const char *text_MAJ_08_CZ[POCET_JAZYKOV + 1] =
  "Panny Marie, Prost¯ednice vöech milostÌ",
  "(nincs Magyarorsz·gon)",
  };
+const char *text_MAJ_08_OFM[POCET_JAZYKOV + 1] = 
+{"Preblahoslavenej Panny M·rie, Matky a Sprostredkovateæky milostÌ",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_MAJ_08_2_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. Ulriky Nischovej, panny, rehoænÌËky, Ëlenky 3. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_MAJ_08_3_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. Jeremi·öa z Valaöska, rehoænÌka, Ëlena 1. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_MAJ_09_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. KatarÌny z Bologne, panny, Ëlenky 2. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_MAJ_10_CZOP[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",
  "(v »ech·ch, na MoravÏ a ve Slezsku nenÌ)",
@@ -2495,6 +2554,15 @@ const char *text_MAJ_11_SK[POCET_JAZYKOV + 1] =
  "",
  "",
  "(nincs Magyarorsz·gon)",
+ };
+const char *text_MAJ_11_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Ign·ca z Laconie, rehoænÌka, Ëlena 1. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_MAJ_12_1[POCET_JAZYKOV + 1] = 
 {"Sv. Nerea a Achila, muËenÌkov",
@@ -2523,6 +2591,15 @@ const char *text_MAJ_12_CZ[POCET_JAZYKOV + 1] =
  "V˝roËÌ posvÏcenÌ katedr·ly sv. VÌta",
  "(nincs Magyarorsz·gon)",
  };
+const char *text_MAJ_12_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Leopolda MandiÊa, kÚaza, Ëlena 1. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_MAJ_13[POCET_JAZYKOV + 1] = 
 {"Panny M·rie Fatimskej",
  "Panny Marie FatimskÈ",
@@ -2534,6 +2611,15 @@ const char *text_MAJ_13[POCET_JAZYKOV + 1] =
  };
 const char *text_MAJ_13_SDB[POCET_JAZYKOV + 1] = 
 {"Sv. M·rie Dominiky Mazzarellovej, panny, <br>spoluzakladateæky Inötit˙tu dcÈr M·rie Pomocnice",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_MAJ_13_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Petra Regalada, kÚaza, Ëlena 1. r·du",
  "",
  "",
  "",
@@ -2586,6 +2672,24 @@ const char *text_MAJ_16_SDB[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_MAJ_16_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Margity z Cortony, kaj˙cnice, Ëlenky 3. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_MAJ_17_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Paschala Baylona, rehoænÌka, Ëlena 1. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_MAJ_18[POCET_JAZYKOV + 1] = 
 {"Sv. J·na I., p·peûa a muËenÌka",
  "Sv. Jana I., papeûe a muËednÌka",
@@ -2597,6 +2701,24 @@ const char *text_MAJ_18[POCET_JAZYKOV + 1] =
  };
 const char *text_MAJ_18_SDB[POCET_JAZYKOV + 1] = 
 {"Sv. Leonarda Murialda, kÚaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_MAJ_18_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Felixa z Cantalicie, rehoænÌka, Ëlena 1. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_MAJ_19_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. KriöpÌna z Viterba, rehoænÌka, Ëlena 1. r·du",
  "",
  "",
  "",
@@ -2621,6 +2743,15 @@ const char *text_MAJ_20[POCET_JAZYKOV + 1] =
  "",
  "Sv. Bernardina SienskÈho, knÏze",
  "Sienai Szent Bernardin ·ldozÛpap",
+ };
+const char *text_MAJ_20_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. BernardÌna SienskÈho, kÚaza, Ëlena 1. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_MAJ_21_CZ[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",
@@ -2666,6 +2797,15 @@ const char *text_MAJ_24_CZOP[POCET_JAZYKOV + 1] =
  "",
  "P¯enesenÌ ostatk˘ sv. Otce Dominika",
  "hu_",
+ };
+const char *text_MAJ_24_OFM[POCET_JAZYKOV + 1] = 
+{"V˝roËie posviacky Baziliky sv. Frantiöka v Assisi",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_MAJ_24_SDB[POCET_JAZYKOV + 1] = 
 {"Panny M·rie, Pomocnice kresùanov, <br>hlavnej patrÛnky Inötit˙tu dcÈr M·rie Pomocnice <br>a celej salezi·nskej rodiny",
