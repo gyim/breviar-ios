@@ -62,7 +62,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2011-03-17"
+#define BUILD_DATE "2011-03-18"
 
 #define BYTES 250
 #define SMALL 80
@@ -81,7 +81,6 @@
 #define FALSE 0
 #define ANO   1
 #define NIE   0
-#define DOCASNE_ANO 0
 
 #define MAX_STR				300 /* maximalna dlzka retazca */
 #define MAX_GLOBAL_STR		420 /* _global_string; 31/03/2000A.D.; 2010-12-07: rozšírené; 2011-01-31: rozšírené kvôli text_JAN_31_SDB[]; 2011-02-02: rozšírené kvôli text_FEB_04_SJ[]; */

@@ -959,6 +959,9 @@ const char *html_text_dnesok[POCET_JAZYKOV + 1] = {"dnešok", "dnešní den", "toda
 const char *html_text_Breviar_dnes[POCET_JAZYKOV + 1] = {"Breviár dnes", "Breviáø dnes", "Breviary today", "Breviar hódie", "", "Breviáø dnes", "hu_"};
 const char *html_text_Dnesne_modlitby[POCET_JAZYKOV + 1] = {"Dnešné modlitby", "Dnešní modlitby", "Today's prayers", "la_hódie", "", "Dnešní modlitby", "hu_"};
 const char *html_text_Prehlad_mesiaca[POCET_JAZYKOV + 1] = {"Preh¾ad mesiaca", "Pøehled mìsíce", "Current month", "la_", "", "Pøehled mìsíce", "hu_"};
+/* 2011-03-18: pridané do "zoznam.htm" batch mode -- kalendáre a hlavný nadpis */
+const char *html_text_batch_mode_h1[POCET_JAZYKOV + 1] = {"Liturgia hodín - Predgenerované modlitby", "Liturgie hodin - Pøedgenerovány modlitby", "Liturgy of Hours - Pregenerated prayers", "la_", "", "Liturgie hodin - Pøedgenerovány modlitby", "Az Imaórák Liturgiája - hu_"};
+const char *html_text_Kalendar[POCET_JAZYKOV + 1] = {"Kalendár", "Kalendáø", "Proprietary calendary", "Propria", "", "Kalendáø", "hu_"};
 
 const char *html_text_Vysvetlivky[POCET_JAZYKOV + 1] = {"Vysvetlivky", "Vysvìtlivky", "Legenda", "Legenda", "", "Vysvìtlivky", "Jelmagyarázat"};
 

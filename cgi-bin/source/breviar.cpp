@@ -4567,7 +4567,6 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 			if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
 				|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
 				|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
-				|| DOCASNE_ANO /* doËasnÈ rieöenie */
 				){
 				sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
 				strcat(pom, pom2);
@@ -5189,7 +5188,6 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 			if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
 				|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
 				|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
-				|| DOCASNE_ANO /* doËasnÈ rieöenie */
 				){
 				sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
 				strcat(pom2, pom3);
@@ -5615,7 +5613,6 @@ void _export_rozbor_dna_kalendar(short int typ){
 		if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
 			|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
 			|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
-			|| DOCASNE_ANO /* doËasnÈ rieöenie */
 			){
 			sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
 			strcat(pom2, pom3);
@@ -5873,7 +5870,6 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
 		|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
 		|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
-		|| DOCASNE_ANO /* doËasnÈ rieöenie */
 		){
 		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
 		strcat(pom2, pom3);
@@ -6775,6 +6771,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
  *             Ëi sa maj˙ exportovaù vöetky modlitby (ako doteraz)
  *             alebo len t·to modlitba (pre export_monthly_druh >= 1)
  * 2011-03-14: doplnenÈ vyplnenie parametra o5 (_global_opt5) pre modlitbu cez deÚ [doteraz sme generovali pre vöetky 3 modlitby MCD ûalmy "vlastnÈ", teraz pre 2 z nich budeme d·vaù doplnkov˙ psalmÛdiu]
+ * 2011-03-18: doplnenÈ exportovanie parametra k (_global_kalendar)
  */
 	FILE *batch_export_file = NULL;
 	char parameter_M[SMALL] = STR_EMPTY; // parametre pre v˝slednÈ HTML (parameter 'M' a parametre pre odkazy na s˙bory, napr. 'I')
@@ -6783,6 +6780,22 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 	char _local_export_navig_hore[SMALL] = STR_EMPTY;
 	char parameter_o5[SMALL] = STR_EMPTY; // parameter o5 (_global_opt5) pre modlitbu cez deÚ (beûn· alebo doplnkov· psalmÛdia)
 	char export_doplnkova_psalmodia[SMALL] = STR_EMPTY; // reùazec pre alternatÌvny s˙bor modlitby cez deÚ obsahuj˙ci doplnkov˙ psalmÛdiu
+	char export_kalendar[SMALL] = STR_EMPTY; // reùazec pre kalend·r
+
+	/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
+	 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
+	 * 2011-03-18: pouûitÈ z in˝ch miest aj v execute_batch_command() -- exportovanie parametra k (_global_kalendar)
+	 */
+	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
+		|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
+		|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
+		){
+		sprintf(export_kalendar, " -k%s", skratka_kalendara[_global_kalendar]);
+	}
+	else{
+		strcpy(export_kalendar, STR_EMPTY);
+	}
+	Log("Exportujem kalend·r: `%s'\n", export_kalendar);
 
 	/* 2009-08-03: exportovanie do adres·rov po mesiacoch */
 	if(_global_opt_batch_monthly == ANO){
@@ -6827,14 +6840,11 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 			export_month_nova_modlitba = 0;
 		}
 		if((a != 4) || (a == 4 && (i != MODL_VESPERY && i != MODL_KOMPLETORIUM))){ /* 2006-01-31-TUTOLA; 2008-04-09 presunutÈ */
-			/* 2011-03-14: nastavenie parametra o5 (_global_opt5) pre modlitbu cez deÚ (beûn· alebo doplnkov· psalmÛdia) */
-
-
 			/* 2011-03-14: nastavenie parametra o5 (_global_opt5) pre modlitbu cez deÚ (beûn· alebo doplnkov· psalmÛdia) 
 			 * 2011-03-16: upravenÈ tak, ûe je to len fakultatÌvne (ako odliön˝ s˙bor)
 			 */
 			if((_global_opt5 != MODL_CEZ_DEN_ZALMY_ZO_DNA) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
-				sprintf(parameter_o5, "-5");
+				sprintf(parameter_o5, " -5");
 				strcat(parameter_o5, "1"); // MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA
 				/*
 				if((_global_den.denvr + _global_den.rok + i) MOD 3 == 0){
@@ -6844,7 +6854,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 					strcat(parameter_o5, "1"); // MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA
 				}
 				*/
-				fprintf(batch_file, "%s%d%cd.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s %s\n", batch_command, a, char_modlitby[i], _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, parameter_o5); /* modlitba `i' */
+				fprintf(batch_file, "%s%d%cd.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s%s\n", batch_command, a, char_modlitby[i], _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar, parameter_o5); /* modlitba `i' */
 				if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
 					sprintf(export_doplnkova_psalmodia, " (<a href=\""FILENAME_EXPORT_DATE_SIMPLE"_%d%cd.htm\">alt</a>)", _global_den.rok % 100, _global_den.mesiac, _global_den.den, a, char_modlitby[i]);
 				else /* EXPORT_DATE_FULL */
@@ -6854,7 +6864,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 				strcpy(parameter_o5, STR_EMPTY);
 				strcpy(export_doplnkova_psalmodia, STR_EMPTY);
 			}
-			fprintf(batch_file, "%s%d%c.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s\n", batch_command, a, char_modlitby[i], _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M); /* modlitba `i' */
+			fprintf(batch_file, "%s%d%c.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); /* modlitba `i' */
 			if(export_monthly_druh == 1){
 				if(a > 0)
 					sprintf(poradie_svateho, "/%d", a);
@@ -6873,14 +6883,14 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 			Log("/* generujem: %d `%s'... */\n", i, nazov_modlitby(i));
 			if((a != 4) || (a == 4 && (i != MODL_VESPERY && i != MODL_KOMPLETORIUM))){ /* 2006-01-31-TUTOLA; 2008-04-09 presunutÈ */
 				if(_global_opt_append == YES){
-					fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -5%d -x%d -p%s -j%s\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, _global_opt5, a, str_modlitby[i], skratka_jazyka[_global_jazyk]); /* modlitba `i' */
+					fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -5%d -x%d -p%s -j%s%s\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, _global_opt5, a, str_modlitby[i], skratka_jazyka[_global_jazyk], export_kalendar); /* modlitba `i' */
 				}/* endif _global_opt_append == YES */
 				else{
 					/* 2011-03-14: nastavenie parametra o5 (_global_opt5) pre modlitbu cez deÚ (beûn· alebo doplnkov· psalmÛdia) 
 					 * 2011-03-16: upravenÈ tak, ûe je to len fakultatÌvne (ako odliön˝ s˙bor)
 					 */
 					if((_global_opt5 != MODL_CEZ_DEN_ZALMY_ZO_DNA) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
-						sprintf(parameter_o5, "-5");
+						sprintf(parameter_o5, " -5");
 						strcat(parameter_o5, "1"); // MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA
 						/*
 						if((_global_den.denvr + _global_den.rok + i) MOD 3 == 0){
@@ -6890,7 +6900,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 							strcat(parameter_o5, "1"); // MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA
 						}
 						*/
-						fprintf(batch_file, "%s%d%cd.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s %s\n", batch_command, a, char_modlitby[i], _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, parameter_o5); /* modlitba `i' */
+						fprintf(batch_file, "%s%d%cd.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s%s\n", batch_command, a, char_modlitby[i], _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar, parameter_o5); /* modlitba `i' */
 						if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
 							sprintf(export_doplnkova_psalmodia, " (<a href=\""FILENAME_EXPORT_DATE_SIMPLE"_%d%cd.htm\">alt</a>)", _global_den.rok % 100, _global_den.mesiac, _global_den.den, a, char_modlitby[i]);
 						else /* EXPORT_DATE_FULL */
@@ -6901,7 +6911,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 						strcpy(export_doplnkova_psalmodia, STR_EMPTY);
 					}
 					/* 2009-08-03: doplnen· moûnosù exportovaù parameter -M ak exportuje batch mÛd pre jednotlivÈ mesiace kvÙli hlaviËke jednotlivej modlitby */
-					fprintf(batch_file, "%s%d%c.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s\n", batch_command, a, char_modlitby[i], _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M); /* modlitba `i' */
+					fprintf(batch_file, "%s%d%c.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s5s\n", batch_command, a, char_modlitby[i], _global_opt1, _global_opt2, _global_opt3, _global_opt4, a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); /* modlitba `i' */
 					// fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%d%c.htm\">%s</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a, char_modlitby[i], nazov_modlitby(i));
 					/* 2008-11-29: rozliËn˝ export */
 					if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
@@ -7079,6 +7089,23 @@ void _export_rozbor_dna_mesiaca_batch(short int d, short int m, short int r){
 	char str_subor[SMALL] = STR_EMPTY;
 	char str_month[SMALL] = STR_EMPTY; /* 2009-08-12: pridanÈ */
 	char _local_export_navig_hore[SMALL] = STR_EMPTY;
+	char export_kalendar[SMALL] = STR_EMPTY; // reùazec pre kalend·r
+
+	/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
+	 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
+	 * 2011-03-18: pouûitÈ z in˝ch miest aj v _export_rozbor_dna_mesiaca_batch() -- exportovanie parametra k (_global_kalendar)
+	 */
+	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
+		|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
+		|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
+		){
+		sprintf(export_kalendar, " -k%s", skratka_kalendara[_global_kalendar]);
+	}
+	else{
+		strcpy(export_kalendar, STR_EMPTY);
+	}
+	Log("Exportujem kalend·r: `%s'\n", export_kalendar);
+
 
 	// reùazec pre deÚ a pre n·zov s˙boru
 	if(d != VSETKY_DNI){
@@ -7129,7 +7156,7 @@ void _export_rozbor_dna_mesiaca_batch(short int d, short int m, short int r){
 		mystrcpy(parameter_M, STR_EMPTY, SMALL);
 	}/* else if(_global_opt_batch_monthly == ANO) */
 	// samotnÈ vytlaËenie prÌkazu
-	fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -5%d -j%s%s\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, _global_opt5, skratka_jazyka[_global_jazyk], parameter_M);
+	fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -5%d -j%s%s%s\n", batch_command, _global_opt1, _global_opt2, _global_opt3, _global_opt4, _global_opt5, skratka_jazyka[_global_jazyk], parameter_M, export_kalendar);
 	Log("_export_rozbor_dna_mesiaca_batch() -- koniec\n");
 }/* _export_rozbor_dna_mesiaca_batch() */
 
@@ -7174,7 +7201,6 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
 		|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
 		|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
-		|| DOCASNE_ANO /* doËasnÈ rieöenie */
 		){
 		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
 		strcat(pom2, pom3);
@@ -8293,7 +8319,6 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
 		|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
 		|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
-		|| DOCASNE_ANO /* doËasnÈ rieöenie */
 		){
 		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
 		strcat(pom2, pom3);
@@ -9344,7 +9369,6 @@ void _main_analyza_roku(char *rok){
 	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
 		|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
 		|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
-		|| DOCASNE_ANO /* doËasnÈ rieöenie */
 		){
 		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
 		strcat(pom2, pom3);
@@ -9875,7 +9899,13 @@ void _main_batch_mode(
 					 * 2010-12-03: opravenÈ, nakoæko na niektor˝ch mobiln˝ch zariadeniach JavaScript funkcie 
 					 */
 					if(_global_opt_batch_monthly == ANO){
-						fprintf(batch_html_file, "<center><h2><b>%s</b></h2></center>\n", (char *)html_text_Breviar_dnes[_global_jazyk]);
+						fprintf(batch_html_file, "<center><h1>%s</h1></center>\n", (char *)html_text_batch_mode_h1[_global_jazyk]);
+						if((_global_jazyk == JAZYK_SK) && ((_global_kalendar != KALENDAR_NEURCENY) && (_global_kalendar != KALENDAR_VSEOBECNY) && (_global_kalendar != KALENDAR_VSEOBECNY_SK))){
+							fprintf(batch_html_file, "<p align=\"center\">%s: \n", (char *)html_text_Kalendar[_global_jazyk]);
+							fprintf(batch_html_file, "<span class=\"redsmall\">%s</span>\n", (char *)nazov_slavenia_lokal_kalendar[_global_kalendar]);
+							fprintf(batch_html_file, "</p>\n");
+						}
+						fprintf(batch_html_file, "<center><h2>%s</h2></center>\n", (char *)html_text_Breviar_dnes[_global_jazyk]);
 						fprintf(batch_html_file, "<!-- SK: Odkazy na dneön˝ deÚ (DneönÈ modlitby) a Prehæad mesiaca vyûaduj˙ JavaScript. JavaScript funkcia (c) 2009 Peter Sahajda; upravil (c) 2010 Juraj VidÈky -->\n");
 						fprintf(batch_html_file, "\n");
 						fprintf(batch_html_file, "<script language=\"javascript\" type=\"text/javascript\">\n");
