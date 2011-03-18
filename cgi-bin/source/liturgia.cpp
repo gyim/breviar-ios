@@ -585,10 +585,7 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 		/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 		 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 		 */
-		if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
-			|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
-			|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
-			){
+		if(PODMIENKA_EXPORTOVAT_KALENDAR){
 			sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
 			strcat(_global_link, pom2);
 			Log("\tPrilepil som aj kalend·r: `%s' (2010-08-04)\n", pom2);

@@ -224,6 +224,13 @@ extern short int _global_opt_export_date_format;
 #define MIESTNE_SLAVENIE_LOKAL_SVATY2 (((_global_svaty2.kalendar == KALENDAR_CZ_OP) || (_global_svaty2.typslav_lokal != LOKAL_SLAV_NEURCENE)) && ((_global_svaty2.smer == 4) || (_global_svaty2.smer == 8) || (_global_svaty2.smer == 11)))
 #define MIESTNE_SLAVENIE_LOKAL_SVATY3 (((_global_svaty3.kalendar == KALENDAR_CZ_OP) || (_global_svaty3.typslav_lokal != LOKAL_SLAV_NEURCENE)) && ((_global_svaty3.smer == 4) || (_global_svaty3.smer == 8) || (_global_svaty3.smer == 11)))
 
+/* 2011-03-18: presunuté samostatne na jedno jediné miesto */
+#define PODMIENKA_EXPORTOVAT_KALENDAR ( \
+((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) )) \
+|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ))) \
+|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP))) \
+)
+
 #ifndef OS_linux
 /* kedysi bolo void main;
  * 2003-07-14, kvoli gcc version 3.2.2 20030222 (Red Hat Linux 3.2.2-5) christ-net.sk 

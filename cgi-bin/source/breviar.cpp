@@ -4564,10 +4564,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 			/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 			 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 			 */
-			if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
-				|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
-				|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
-				){
+			if(PODMIENKA_EXPORTOVAT_KALENDAR){
 				sprintf(pom2, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
 				strcat(pom, pom2);
 				Log("\tPrilepil som aj kalend·r: `%s' (2010-08-04)\n", pom2);
@@ -5185,10 +5182,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 			/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 			 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 			 */
-			if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
-				|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
-				|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
-				){
+			if(PODMIENKA_EXPORTOVAT_KALENDAR){
 				sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
 				strcat(pom2, pom3);
 				Log("\tPrilepil som aj kalend·r: `%s' (2010-08-04)\n", pom3);
@@ -5610,10 +5604,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 		/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 		 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 		 */
-		if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
-			|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
-			|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
-			){
+			if(PODMIENKA_EXPORTOVAT_KALENDAR){
 			sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
 			strcat(pom2, pom3);
 			Log("\tPrilepil som aj kalend·r: `%s' (2010-08-04)\n", pom3);
@@ -5867,10 +5858,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 	 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 	 */
-	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
-		|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
-		|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
-		){
+			if(PODMIENKA_EXPORTOVAT_KALENDAR){
 		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj kalend·r: `%s' (2010-08-04)\n", pom3);
@@ -6786,10 +6774,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 	 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 	 * 2011-03-18: pouûitÈ z in˝ch miest aj v execute_batch_command() -- exportovanie parametra k (_global_kalendar)
 	 */
-	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
-		|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
-		|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
-		){
+	if(PODMIENKA_EXPORTOVAT_KALENDAR){
 		sprintf(export_kalendar, " -k%s", skratka_kalendara[_global_kalendar]);
 	}
 	else{
@@ -7095,10 +7080,7 @@ void _export_rozbor_dna_mesiaca_batch(short int d, short int m, short int r){
 	 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 	 * 2011-03-18: pouûitÈ z in˝ch miest aj v _export_rozbor_dna_mesiaca_batch() -- exportovanie parametra k (_global_kalendar)
 	 */
-	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
-		|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
-		|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
-		){
+	if(PODMIENKA_EXPORTOVAT_KALENDAR){
 		sprintf(export_kalendar, " -k%s", skratka_kalendara[_global_kalendar]);
 	}
 	else{
@@ -7198,10 +7180,7 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 	/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 	 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 	 */
-	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
-		|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
-		|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
-		){
+	if(PODMIENKA_EXPORTOVAT_KALENDAR){
 		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj kalend·r: `%s' (2010-08-04)\n", pom3);
@@ -8316,10 +8295,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 	/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 	 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 	 */
-	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
-		|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
-		|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
-		){
+	if(PODMIENKA_EXPORTOVAT_KALENDAR){
 		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj kalend·r: `%s' (2010-08-04)\n", pom3);
@@ -9366,10 +9342,7 @@ void _main_analyza_roku(char *rok){
 	/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 	 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 	 */
-	if(((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) ))
-		|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ)))
-		|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP)))
-		){
+	if(PODMIENKA_EXPORTOVAT_KALENDAR){
 		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj kalend·r: `%s' (2010-08-04)\n", pom3);
@@ -9902,7 +9875,7 @@ void _main_batch_mode(
 						fprintf(batch_html_file, "<center><h1>%s</h1></center>\n", (char *)html_text_batch_mode_h1[_global_jazyk]);
 						if((_global_jazyk == JAZYK_SK) && ((_global_kalendar != KALENDAR_NEURCENY) && (_global_kalendar != KALENDAR_VSEOBECNY) && (_global_kalendar != KALENDAR_VSEOBECNY_SK))){
 							fprintf(batch_html_file, "<p align=\"center\">%s: \n", (char *)html_text_Kalendar[_global_jazyk]);
-							fprintf(batch_html_file, "<span class=\"redsmall\">%s</span>\n", (char *)nazov_slavenia_lokal_kalendar[_global_kalendar]);
+							fprintf(batch_html_file, "<"HTML_SPAN_RED">%s</span>\n", (char *)nazov_slavenia_lokal_kalendar[_global_kalendar]);
 							fprintf(batch_html_file, "</p>\n");
 						}
 						fprintf(batch_html_file, "<center><h2>%s</h2></center>\n", (char *)html_text_Breviar_dnes[_global_jazyk]);
