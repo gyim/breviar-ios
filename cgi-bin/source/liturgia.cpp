@@ -590,6 +590,9 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 			strcat(_global_link, pom2);
 			Log("\tPrilepil som aj kalend·r: `%s' (2010-08-04)\n", pom2);
 		}
+		else{
+			Log("\tNetreba prilepiù kalend·r (jazyk == %s, kalend·r == %s)\n", skratka_jazyka[_global_jazyk], skratka_kalendara[_global_kalendar]);
+		}
 
 		/* 2008-08-08: pridanÈ odovzdanie parametra pre css */
 		if(_global_css != CSS_breviar_sk){

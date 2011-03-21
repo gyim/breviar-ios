@@ -560,6 +560,17 @@ extern const char *text_MAJ_18_OFM[POCET_JAZYKOV + 1];
 extern const char *text_MAJ_19_OFM[POCET_JAZYKOV + 1];
 extern const char *text_MAJ_20_OFM[POCET_JAZYKOV + 1];
 extern const char *text_MAJ_24_OFM[POCET_JAZYKOV + 1];
+extern const char *text_JUN_02_OFM[POCET_JAZYKOV + 1];
+extern const char *text_JUN_08_OFM[POCET_JAZYKOV + 1];
+extern const char *text_JUN_12_OFM[POCET_JAZYKOV + 1];
+extern const char *text_JUN_12_2_OFM[POCET_JAZYKOV + 1];
+extern const char *text_JUN_12_3_OFM[POCET_JAZYKOV + 1];
+extern const char *text_JUN_13_OFM[POCET_JAZYKOV + 1];
+extern const char *text_JUN_16_OFM[POCET_JAZYKOV + 1];
+extern const char *text_JUN_16_2_OFM[POCET_JAZYKOV + 1];
+extern const char *text_JUN_17_OFM[POCET_JAZYKOV + 1];
+extern const char *text_JUN_26_OFM[POCET_JAZYKOV + 1];
+extern const char *text_NEPOSKVRNENEHO_SRDCA_PM_OFM[POCET_JAZYKOV + 1];
 
 #endif /* __DBZALTAR_H_ */
 

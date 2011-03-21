@@ -394,7 +394,8 @@ const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1] =
 ,"pre SpoloËnosù Boûieho Slova ó verbistov (SVD)"
 ,"pre SpoloËnosù Jeûiöovu ó jezuitov (SJ)"
 ,"pre salezi·nsku rodinu ó SDB, FMA, VDB"
-,"pre frantiök·nsku rodinu ó frantiök·nov<!-- (OFM)-->, kapucÌnov<!--  (OFMCap)-->, minoritov<!--  (OFMConv)-->"
+// ,"pre frantiök·nsku rodinu ó frantiök·nov<!-- (OFM)-->, kapucÌnov<!--  (OFMCap)-->, minoritov<!--  (OFMConv)-->" // 2011-03-21: nefungovalo porovnanie atokalendar lebo HTML odstr·nilo pozn·mky
+,"pre frantiök·nsku rodinu ó frantiök·nov, kapucÌnov, minoritov"
 };
 
 /* special "local" or "partial" characteristics of various celebrations - each in one language; no need to translate; special strings will be added */
@@ -455,6 +456,7 @@ const char *nazov_slavenia_lokal[] =
 ,"pre FMA: sl·vnosù"
 ,"pre SDB: sl·vnosù"
 ,"pre VDB: sviatok"
+,"pre SCSC: sviatok"
 };
 
 /* names of liturgical colors */
@@ -2984,6 +2986,15 @@ const char *text_NEPOSKVRNENEHO_SRDCA_PM[POCET_JAZYKOV + 1] =
  "NeposkvrnÏnÈho Srdce Panny Marie",
  "hu_name",
  };
+const char *text_NEPOSKVRNENEHO_SRDCA_PM_OFM[POCET_JAZYKOV + 1] = 
+{"NepoökvrnenÈho Srdca Panny M·rie, <br>patrÛnky slovenskej provincie R·du menöÌch bratov kapucÌnov",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_NARODENIE_PANA[POCET_JAZYKOV + 1] = 
 {"Narodenie P·na",
  "NarozenÌ P·nÏ",
@@ -3050,6 +3061,15 @@ const char *text_JUN_02[POCET_JAZYKOV + 1] =
  "Sv. Marcelina a Petra, muËednÌk˘",
  "Szent MarcellÌnusz Ès Szent PÈter vÈrtan˙k",
  };
+const char *text_JUN_02_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Felixa z NikÛzie, rehoænÌka, Ëlena 1. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_JUN_03[POCET_JAZYKOV + 1] = 
 {"Sv. Karola Lwangu a spoloËnÌkov, muËenÌkov",
  "Sv. Karla Lwangy a druh˘, muËednÌk˘",
@@ -3085,6 +3105,15 @@ const char *text_JUN_06[POCET_JAZYKOV + 1] =
  "",
  "Sv. Norberta, biskupa",
  "Szent Norbert p¸spˆk",
+ };
+const char *text_JUN_08_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. Mikul·öa z Gesturi, rehoænÌka, Ëlena 1. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_JUN_08_CZOP[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",
@@ -3132,7 +3161,43 @@ const char *text_JUN_11[POCET_JAZYKOV + 1] =
  "Szent Barnab·s apostol",
  };
 const char *text_JUN_12_SDB[POCET_JAZYKOV + 1] = 
-{"Bl. Frantiöka K&#553;syho a spoloËnÌkov, muËenÌkov", // Bl. Frantiöka Kesyho a spoloËnÌkov, muËenÌkov (small latin letter e with cedilla)
+{"Bl. Frantiöka K&#281;syho a spoloËnÌkov, muËenÌkov", // Bl. Frantiöka Kesyho a spoloËnÌkov, muËenÌkov (small latin letter e with ogonek)
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_JUN_12_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. Jolandy Uhorskej, rehoænÌËky, Ëlenky 2. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_JUN_12_2_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. Floridy Cevoliovej, panny, Ëlenky 2. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_JUN_12_3_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. Antona BajewskÈho a spoloËnÌkov, muËenÌkov: <br>Pia Bartoöika, Inocenta Guza, Achilla Puchalu, Hermana St&#281;npie&nacute;a, kÚazov; <br>Timoteja TrojanowskÈho, Bonif·ca &#379;ukowskÈho, rehoænÌkov, Ëlenov 1. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_JUN_13_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Antona Padu·nskeho, kÚaza a uËiteæa Cirkvi, Ëlena 1. r·du",
  "",
  "",
  "",
@@ -3166,6 +3231,33 @@ const char *text_JUN_16_SK[POCET_JAZYKOV + 1] =
  "",
  "(pro dominik·ny nenÌ)",
  "(nincs Magyarorsz·gon)",
+ };
+const char *text_JUN_16_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. M·rie TerÈzie Schererovej, panny, rehoænÌËky, Ëlenky 3. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_JUN_16_2_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. Aniceta Koplina, kÚaza, a spoloËnÌkov, muËenÌkov, Ëlenov 1. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_JUN_17_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Alberta ChmielowskÈho, rehoænÌka, Ëlena 3. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_JUN_19[POCET_JAZYKOV + 1] = 
 {"Sv. Romualda, op·ta",
@@ -3238,6 +3330,15 @@ const char *text_JUN_24[POCET_JAZYKOV + 1] =
  "",
  "NarozenÌ svatÈho Jana K¯titele",
  "Keresztelı Szent J·nos sz¸letÈse",
+ };
+const char *text_JUN_26_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. Andreja Hyacinta Longina, biskupa, Ëlena 1. r·du",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_JUN_27[POCET_JAZYKOV + 1] = 
 {"Sv. Cyrila AlexandrijskÈho, biskupa a uËiteæa Cirkvi",

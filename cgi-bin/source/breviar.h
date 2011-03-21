@@ -16,6 +16,8 @@
 /*   2006-08-18a.D. | zmena int na short int (staèí 32tis.)    */
 /*   2010-05-14a.D. | presunuté niektoré definy z breviar.cpp  */
 /*   2011-02-02a.D. | zadef. MIESTNE_SLAVENIE_CZOP_SVATY1 až 3 */
+/*   2011-03-07a.D. | zadef. MIESTNE_SLAVENIE_LOKAL_SVATY1..3  */
+/*   2011-03-18a.D. | zadef. PODMIENKA_EXPORTOVAT_KALENDAR     */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -227,8 +229,8 @@ extern short int _global_opt_export_date_format;
 /* 2011-03-18: presunuté samostatne na jedno jediné miesto */
 #define PODMIENKA_EXPORTOVAT_KALENDAR ( \
 ((_global_jazyk == JAZYK_SK) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK) )) \
-|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ))) \
-|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP))) \
+|| ((_global_jazyk == JAZYK_CZ) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) )) \
+|| ((_global_jazyk == JAZYK_CZ_OP) && !((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ) || (_global_kalendar == KALENDAR_CZ_OP) )) \
 )
 
 #ifndef OS_linux

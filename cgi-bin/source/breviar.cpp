@@ -3513,9 +3513,18 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 						 * "zrejme pre Slovensko je tato lubovolna spomienka povinna; 
 						 *  aby sa nebila s inou spomienkou, dal som tam smer == 11; 10/03/2000A.D." 
 						 */
-						_global_den.smer = 10;
-						_global_den.typslav = SLAV_SPOMIENKA;
-						mystrcpy(_global_den.meno, text_NEPOSKVRNENEHO_SRDCA_PM[_global_jazyk], MENO_SVIATKU);
+						if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_OFM)){
+							_global_den.smer = 10;
+							_global_den.typslav = SLAV_SPOMIENKA;
+							_global_den.kalendar = KALENDAR_SK_OFM;
+							_global_den.typslav_lokal = LOKAL_SLAV_SVIATOK_OFMCAP;
+							mystrcpy(_global_den.meno, text_NEPOSKVRNENEHO_SRDCA_PM_OFM[_global_jazyk], MENO_SVIATKU);
+						}
+						else{
+							_global_den.smer = 10;
+							_global_den.typslav = SLAV_SPOMIENKA;
+							mystrcpy(_global_den.meno, text_NEPOSKVRNENEHO_SRDCA_PM[_global_jazyk], MENO_SVIATKU);
+						}
 							/* pridane 04/07/2000A.D. */
 						_global_den.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 						_global_opt3 = MODL_SPOL_CAST_PANNA_MARIA;
@@ -4569,6 +4578,9 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 				strcat(pom, pom2);
 				Log("\tPrilepil som aj kalend·r: `%s' (2010-08-04)\n", pom2);
 			}
+			else{
+				Log("\tNetreba prilepiù kalend·r (jazyk == %s, kalend·r == %s)\n", skratka_jazyka[_global_jazyk], skratka_kalendara[_global_kalendar]);
+			}
 
 			/* 2008-08-08: pridanÈ odovzdanie parametra pre css */
 			if(_global_css != CSS_breviar_sk){
@@ -5187,6 +5199,9 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 				strcat(pom2, pom3);
 				Log("\tPrilepil som aj kalend·r: `%s' (2010-08-04)\n", pom3);
 			}
+			else{
+				Log("\tNetreba prilepiù kalend·r (jazyk == %s, kalend·r == %s)\n", skratka_jazyka[_global_jazyk], skratka_kalendara[_global_kalendar]);
+			}
 
 			/* 2008-08-08: pridanÈ odovzdanie parametra pre css */
 			if(_global_css != CSS_breviar_sk){
@@ -5604,10 +5619,13 @@ void _export_rozbor_dna_kalendar(short int typ){
 		/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 		 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 		 */
-			if(PODMIENKA_EXPORTOVAT_KALENDAR){
+		if(PODMIENKA_EXPORTOVAT_KALENDAR){
 			sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
 			strcat(pom2, pom3);
 			Log("\tPrilepil som aj kalend·r: `%s' (2010-08-04)\n", pom3);
+		}
+		else{
+			Log("\tNetreba prilepiù kalend·r (jazyk == %s, kalend·r == %s)\n", skratka_jazyka[_global_jazyk], skratka_kalendara[_global_kalendar]);
 		}
 
 		/* 2008-08-08: pridanÈ odovzdanie parametra pre css */
@@ -5858,10 +5876,13 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 	 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 	 */
-			if(PODMIENKA_EXPORTOVAT_KALENDAR){
+	if(PODMIENKA_EXPORTOVAT_KALENDAR){
 		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj kalend·r: `%s' (2010-08-04)\n", pom3);
+	}
+	else{
+		Log("\tNetreba prilepiù kalend·r (jazyk == %s, kalend·r == %s)\n", skratka_jazyka[_global_jazyk], skratka_kalendara[_global_kalendar]);
 	}
 
 	/* 2008-08-08: pridanÈ odovzdanie parametra pre css */
@@ -5991,15 +6012,15 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<option%s>%s\n", 
 			(_global_kalendar == KALENDAR_SK_SVD)? html_option_selected: STR_EMPTY,
 			nazov_slavenia_lokal_kalendar[KALENDAR_SK_SVD] /* nazov_kalendara[KALENDAR_SK_SVD] */);
-		// 2010-12-17: odvetvenÈ, aby sa to nedostalo na web (tam OS_linux); 2011-03-16: pridanÌ frantiök·ni (OFM)
+		// 2010-12-17: odvetvenÈ, aby sa to nedostalo na web (tam OS_linux); 2011-03-16: pridanÌ frantiök·ni (OFM); 2011-03-21: OFM pre verejnosù (hoci nekompletnÈ)
 #ifdef OS_Windows_Ruby
 		Export("<option%s>%s\n", 
 			(_global_kalendar == KALENDAR_SK_SJ)? html_option_selected: STR_EMPTY,
 			nazov_slavenia_lokal_kalendar[KALENDAR_SK_SJ]);
+#endif
 		Export("<option%s>%s\n", 
 			(_global_kalendar == KALENDAR_SK_OFM)? html_option_selected: STR_EMPTY,
 			nazov_slavenia_lokal_kalendar[KALENDAR_SK_OFM]);
-#endif
 		Export("<option%s>%s\n", 
 			(_global_kalendar == KALENDAR_SK_SDB)? html_option_selected: STR_EMPTY,
 			nazov_slavenia_lokal_kalendar[KALENDAR_SK_SDB]);
@@ -6778,6 +6799,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 		sprintf(export_kalendar, " -k%s", skratka_kalendara[_global_kalendar]);
 	}
 	else{
+		Log("\tNetreba prilepiù kalend·r (jazyk == %s, kalend·r == %s)\n", skratka_jazyka[_global_jazyk], skratka_kalendara[_global_kalendar]);
 		strcpy(export_kalendar, STR_EMPTY);
 	}
 	Log("Exportujem kalend·r: `%s'\n", export_kalendar);
@@ -7084,6 +7106,7 @@ void _export_rozbor_dna_mesiaca_batch(short int d, short int m, short int r){
 		sprintf(export_kalendar, " -k%s", skratka_kalendara[_global_kalendar]);
 	}
 	else{
+		Log("\tNetreba prilepiù kalend·r (jazyk == %s, kalend·r == %s)\n", skratka_jazyka[_global_jazyk], skratka_kalendara[_global_kalendar]);
 		strcpy(export_kalendar, STR_EMPTY);
 	}
 	Log("Exportujem kalend·r: `%s'\n", export_kalendar);
@@ -7184,6 +7207,9 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj kalend·r: `%s' (2010-08-04)\n", pom3);
+	}
+	else{
+		Log("\tNetreba prilepiù kalend·r (jazyk == %s, kalend·r == %s)\n", skratka_jazyka[_global_jazyk], skratka_kalendara[_global_kalendar]);
 	}
 
 	/* 2008-08-08: pridanÈ odovzdanie parametra pre css */
@@ -8300,6 +8326,9 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj kalend·r: `%s' (2010-08-04)\n", pom3);
 	}
+	else{
+		Log("\tNetreba prilepiù kalend·r (jazyk == %s, kalend·r == %s)\n", skratka_jazyka[_global_jazyk], skratka_kalendara[_global_kalendar]);
+	}
 
 	/* 2006-08-01: pridanÈ odovzdanie parametra pre css */
 	if(_global_css != CSS_breviar_sk){
@@ -9346,6 +9375,9 @@ void _main_analyza_roku(char *rok){
 		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj kalend·r: `%s' (2010-08-04)\n", pom3);
+	}
+	else{
+		Log("\tNetreba prilepiù kalend·r (jazyk == %s, kalend·r == %s)\n", skratka_jazyka[_global_jazyk], skratka_kalendara[_global_kalendar]);
 	}
 
 	/* 2006-08-01: pridanÈ odovzdanie parametra pre css */
