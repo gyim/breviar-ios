@@ -52,17 +52,23 @@
 const char *TEMPLAT[POCET_MODLITIEB /* + 1 */] =
 {TEMPLAT_INVITATORIUM, TEMPLAT_RANNE_CHVALY, TEMPLAT_POSV_CITANIE,
  TEMPLAT_CEZ_DEN_9, TEMPLAT_CEZ_DEN_12, TEMPLAT_CEZ_DEN_3,
+ TEMPLAT_VESPERY, TEMPLAT_KOMPLETORIUM, STR_EMPTY,
+ TEMPLAT_VESPERY, TEMPLAT_KOMPLETORIUM, 
  TEMPLAT_VESPERY, TEMPLAT_KOMPLETORIUM};
 
 /* 2008-04-09: doplnené pre batch generovanie modlitieb */
 const char char_modlitby[POCET_MODLITIEB /* + 1 */] =
 {CHAR_MODL_INVITATORIUM, CHAR_MODL_RANNE_CHVALY, CHAR_MODL_POSV_CITANIE,
  CHAR_MODL_CEZ_DEN_9, CHAR_MODL_CEZ_DEN_12, CHAR_MODL_CEZ_DEN_3,
+ CHAR_MODL_VESPERY, CHAR_MODL_KOMPLETORIUM, 32 /* ' ' */,
+ CHAR_MODL_PRVE_VESPERY, CHAR_MODL_PRVE_KOMPLETORIUM, 
  CHAR_MODL_VESPERY, CHAR_MODL_KOMPLETORIUM};
 
 const char *str_modlitby[POCET_MODLITIEB /* + 1 */] =
 {STR_MODL_INVITATORIUM, STR_MODL_RANNE_CHVALY, STR_MODL_POSV_CITANIE,
  STR_MODL_PREDPOLUDNIM, STR_MODL_NAPOLUDNIE, STR_MODL_POPOLUDNI,
+ STR_MODL_VESPERY, STR_MODL_KOMPLETORIUM, STR_EMPTY,
+ STR_MODL_PRVE_VESPERY, STR_MODL_PRVE_KOMPLETORIUM, 
  STR_MODL_VESPERY, STR_MODL_KOMPLETORIUM};
 
 /* the names of the prayers, lowercase (sample text) */
@@ -863,8 +869,8 @@ const char *html_button_nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV 
 , {"Kompl.", "Kompl.", "Compl.", "Compl.", "", "Kompl.", "Bef."}
 // táto sa pre HTML buttony nepoužíva
 	, {"neurèená", "neurèena", "not-defined", "no data", "", "neurèena", "nem azonosított"}
-, {"prvé vešpery", "první nešpory", "1st Vesperae", "I vesper&#230;", "", "První veèerní chvály", "I. esti dicséret" }
-, {"Kompl.", "Kompl.", "Compl.", "Compl.", "", "Kompl.", "Kompl."}
+, {"Prvé vešpery", "První nešpory", "1st Vesperae", "I vesper&#230;", "", "První veèerní chvály", "I. esti dicséret" }
+, {"Kompl. po prvých vešp.", "Kompl. po prv. nešp.", "Compl.", "Compl.", "", "Kompl. po prvních v. chv.", "Kompl."}
 // táto sa pre HTML buttony nepoužíva
 	, {"druhé vešpery", "druhé nešpory", "2nd Vesperae", "II vesper&#230;", "", "Druhé veèerní chvály", "II. esti dicséret" }
 // táto sa pre HTML buttony nepoužíva

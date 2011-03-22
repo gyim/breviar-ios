@@ -2074,6 +2074,14 @@ void interpretParameter(short int type, char *paramname){
 					strcat(path, _global_modl_kompletorium.popis.file);
 					includeFile(type, paramname, path, _global_modl_kompletorium.popis.anchor);
 					break;
+				case MODL_PRVE_VESPERY: /* 2011-03-22: pridanÈ */
+					strcat(path, _global_modl_prve_vespery.popis.file);
+					includeFile(type, paramname, path, _global_modl_prve_vespery.popis.anchor);
+					break;
+				case MODL_PRVE_KOMPLETORIUM: /* 2011-03-22: pridanÈ */
+					strcat(path, _global_modl_prve_kompletorium.popis.file);
+					includeFile(type, paramname, path, _global_modl_prve_kompletorium.popis.anchor);
+					break;
 				default:
 					/* tieto modlitby nemaju popis */
 					break;
@@ -2132,6 +2140,22 @@ void interpretParameter(short int type, char *paramname){
 				strcat(path, _global_modl_kompletorium.hymnus.file);
 				includeFile(type, paramname, path, _global_modl_kompletorium.hymnus.anchor);
 				break;
+			case MODL_PRVE_VESPERY: /* 2011-03-22: pridanÈ */
+				if((_global_jazyk == JAZYK_CZ) && (je_34_ocr)){
+					Log("pro neöpory 34. t˝dne v mezidobÌ se bere jin˝ hymnus");
+#if defined(EXPORT_HTML_SPECIALS)
+					Export("jin˝ hymnus pro 34. t˝den mezidobÌ");
+#endif
+				}
+				else{
+					strcat(path, _global_modl_prve_vespery.hymnus.file);
+					includeFile(type, paramname, path, _global_modl_prve_vespery.hymnus.anchor);
+				}
+				break;
+			case MODL_PRVE_KOMPLETORIUM: /* 2011-03-22: pridanÈ */
+				strcat(path, _global_modl_prve_kompletorium.hymnus.file);
+				includeFile(type, paramname, path, _global_modl_prve_kompletorium.hymnus.anchor);
+				break;
 			default:
 				/* tieto modlitby nemaju hymnus */
 				break;
@@ -2171,6 +2195,14 @@ void interpretParameter(short int type, char *paramname){
 				strcat(path, _global_modl_posv_citanie.antifona1.file);
 				includeFile(type, paramname, path, _global_modl_posv_citanie.antifona1.anchor);
 				break;
+			case MODL_PRVE_VESPERY: /* 2011-03-22: pridanÈ */
+				strcat(path, _global_modl_prve_vespery.antifona1.file);
+				includeFile(type, paramname, path, _global_modl_prve_vespery.antifona1.anchor);
+				break;
+			case MODL_PRVE_KOMPLETORIUM: /* 2011-03-22: pridanÈ */
+				strcat(path, _global_modl_prve_kompletorium.antifona1.file);
+				includeFile(type, paramname, path, _global_modl_prve_kompletorium.antifona1.anchor);
+				break;
 			default:
 				/* tieto modlitby nemaju antifonu1 */
 				break;
@@ -2201,6 +2233,12 @@ void interpretParameter(short int type, char *paramname){
 				if((_global_ant_mcd_rovnake == NIE) /* (_global_modl_kompletorium.pocet_zalmov == 2) */){
 					strcat(path, _global_modl_kompletorium.antifona1.file);
 					includeFile(type, PARAM_ANTIFONA1, path, _global_modl_kompletorium.antifona1.anchor);
+				}
+				break;
+			case MODL_PRVE_KOMPLETORIUM: /* 2011-03-22: pridanÈ */
+				if((_global_ant_mcd_rovnake == NIE) /* (_global_modl_kompletorium.pocet_zalmov == 2) */){
+					strcat(path, _global_modl_prve_kompletorium.antifona1.file);
+					includeFile(type, paramname, path, _global_modl_prve_kompletorium.antifona1.anchor);
 				}
 				break;
 			default:
@@ -2242,6 +2280,17 @@ void interpretParameter(short int type, char *paramname){
 				if((_global_modl_kompletorium.pocet_zalmov == 2) && (_global_skip_in_prayer != ANO)){
 					strcat(path, _global_modl_kompletorium.antifona2.file);
 					includeFile(type, paramname, path, _global_modl_kompletorium.antifona2.anchor);
+				}
+				break;
+			case MODL_PRVE_VESPERY: /* 2011-03-22: pridanÈ */
+				strcat(path, _global_modl_prve_vespery.antifona2.file);
+				includeFile(type, paramname, path, _global_modl_prve_vespery.antifona2.anchor);
+				break;
+			case MODL_PRVE_KOMPLETORIUM: /* 2011-03-22: pridanÈ */
+				/* 2008-04-03: pridan· podmienka, aby sa preskakovalo v modlitbe kompletÛria pre veækonoËnÈ obdobie - vnoren· kotva */
+				if((_global_modl_kompletorium.pocet_zalmov == 2) && (_global_skip_in_prayer != ANO)){
+					strcat(path, _global_modl_prve_kompletorium.antifona2.file);
+					includeFile(type, paramname, path, _global_modl_prve_kompletorium.antifona2.anchor);
 				}
 				break;
 			/* 2010-06-04: zneuûitie parametra "ANTIFONA2" pre zobrazenie "z·vereËnej" antifÛny v prÌpade, ûe sa tlaËÌ aj Sl·va Otcu 
@@ -2322,7 +2371,7 @@ void interpretParameter(short int type, char *paramname){
 	}/* PARAM_ANTIFONA3x */
 	else if(equals(paramname, PARAM_ANTIFONA1k)){
 		/* 2008-04-03: pridanÈ kvÙli kompletÛriu vo veækonoËnom obdobÌ, Ëi pri druhej antifÛne zobraziù dvojku alebo nie */
-		if((type == MODL_KOMPLETORIUM) && (_global_ant_mcd_rovnake == NIE) && (_global_modl_kompletorium.pocet_zalmov == 2)){
+		if(((type == MODL_KOMPLETORIUM) || (type == MODL_PRVE_KOMPLETORIUM)) && (_global_ant_mcd_rovnake == NIE) && (_global_modl_kompletorium.pocet_zalmov == 2)){
 			Export("-->1<!--");
 		}
 		else{
@@ -2334,7 +2383,7 @@ void interpretParameter(short int type, char *paramname){
 	}/* ANTIFONA1_KOMPLET */
 	else if(equals(paramname, PARAM_ANTIFONA2k)){
 		/* 2008-04-03: pridanÈ kvÙli kompletÛriu vo veækonoËnom obdobÌ, Ëi pri druhej antifÛne zobraziù dvojku alebo nie */
-		if((type == MODL_KOMPLETORIUM) && (_global_ant_mcd_rovnake == NIE) && (_global_modl_kompletorium.pocet_zalmov == 2)){
+		if(((type == MODL_KOMPLETORIUM) || (type == MODL_PRVE_KOMPLETORIUM)) && (_global_ant_mcd_rovnake == NIE) && (_global_modl_kompletorium.pocet_zalmov == 2)){
 			Export("-->2<!--");
 		}
 		else{
@@ -2379,6 +2428,14 @@ void interpretParameter(short int type, char *paramname){
 				strcat(path, _global_modl_posv_citanie.zalm1.file);
 				includeFile(type, paramname, path, _global_modl_posv_citanie.zalm1.anchor);
 				break;
+			case MODL_PRVE_VESPERY: /* 2011-03-22: pridanÈ */
+				strcat(path, _global_modl_prve_vespery.zalm1.file);
+				includeFile(type, paramname, path, _global_modl_prve_vespery.zalm1.anchor);
+				break;
+			case MODL_PRVE_KOMPLETORIUM: /* 2011-03-22: pridanÈ */
+				strcat(path, _global_modl_prve_kompletorium.zalm1.file);
+				includeFile(type, paramname, path, _global_modl_prve_kompletorium.zalm1.anchor);
+				break;
 			default:
 				/* tieto modlitby nemaju zalm1 */
 				break;
@@ -2411,6 +2468,16 @@ void interpretParameter(short int type, char *paramname){
 				if(_global_modl_kompletorium.pocet_zalmov == 2){
 					strcat(path, _global_modl_kompletorium.zalm2.file);
 					includeFile(type, paramname, path, _global_modl_kompletorium.zalm2.anchor);
+				}
+				break;
+			case MODL_PRVE_VESPERY: /* 2011-03-22: pridanÈ */
+				strcat(path, _global_modl_prve_vespery.zalm2.file);
+				includeFile(type, paramname, path, _global_modl_prve_vespery.zalm2.anchor);
+				break;
+			case MODL_PRVE_KOMPLETORIUM: /* 2011-03-22: pridanÈ */
+				if(_global_modl_kompletorium.pocet_zalmov == 2){
+					strcat(path, _global_modl_prve_kompletorium.zalm2.file);
+					includeFile(type, paramname, path, _global_modl_prve_kompletorium.zalm2.anchor);
 				}
 				break;
 			default:
@@ -2472,6 +2539,14 @@ void interpretParameter(short int type, char *paramname){
 				strcat(path, _global_modl_kompletorium.kcitanie.file);
 				includeFile(type, paramname, path, _global_modl_kompletorium.kcitanie.anchor);
 				break;
+			case MODL_PRVE_VESPERY: /* 2011-03-22: pridanÈ */
+				strcat(path, _global_modl_prve_vespery.kcitanie.file);
+				includeFile(type, paramname, path, _global_modl_prve_vespery.kcitanie.anchor);
+				break;
+			case MODL_PRVE_KOMPLETORIUM: /* 2011-03-22: pridanÈ */
+				strcat(path, _global_modl_prve_kompletorium.kcitanie.file);
+				includeFile(type, paramname, path, _global_modl_prve_kompletorium.kcitanie.anchor);
+				break;
 			default:
 				/* tieto modlitby nemaju kcitanie */
 				break;
@@ -2508,6 +2583,14 @@ void interpretParameter(short int type, char *paramname){
 				strcat(path, _global_modl_posv_citanie.kresponz.file);
 				includeFile(type, paramname, path, _global_modl_posv_citanie.kresponz.anchor);
 				break;
+			case MODL_PRVE_VESPERY: /* 2011-03-22: pridanÈ */
+				strcat(path, _global_modl_prve_vespery.kresponz.file);
+				includeFile(type, paramname, path, _global_modl_prve_vespery.kresponz.anchor);
+				break;
+			case MODL_PRVE_KOMPLETORIUM: /* 2011-03-22: pridanÈ */
+				strcat(path, _global_modl_prve_kompletorium.kresponz.file);
+				includeFile(type, paramname, path, _global_modl_prve_kompletorium.kresponz.anchor);
+				break;
 			default:
 				/* tieto modlitby nemaju kresponz */
 				break;
@@ -2533,9 +2616,15 @@ void interpretParameter(short int type, char *paramname){
 	}/* PARAM_CITANIE2 */
 	else if(equals(paramname, PARAM_MAGNIFIKAT)){
 		/* ak _global_skip_in_prayer je ANO, tak preskoc Magnifikat */
-		if((type == MODL_VESPERY) && (_global_skip_in_prayer != ANO)){
-			strcat(path, _global_modl_vespery.magnifikat.file);
-			includeFile(type, paramname, path, _global_modl_vespery.magnifikat.anchor);
+		if(((type == MODL_VESPERY) || (type == MODL_PRVE_VESPERY)) && (_global_skip_in_prayer != ANO)){
+			if(type == MODL_VESPERY){
+				strcat(path, _global_modl_vespery.magnifikat.file);
+				includeFile(type, paramname, path, _global_modl_vespery.magnifikat.anchor);
+			}
+			else{ /* type == MODL_PRVE_VESPERY */
+				strcat(path, _global_modl_prve_vespery.magnifikat.file);
+				includeFile(type, paramname, path, _global_modl_prve_vespery.magnifikat.anchor);
+			}
 		}
 		else /* ostatne modlitby magnifikat nemaju */
 		;
@@ -2545,6 +2634,10 @@ void interpretParameter(short int type, char *paramname){
 			strcat(path, _global_modl_vespery.antifona3.file);
 			includeFile(type, paramname, path, _global_modl_vespery.antifona3.anchor);
 		}
+		else if(type == MODL_PRVE_VESPERY){
+			strcat(path, _global_modl_prve_vespery.antifona3.file);
+			includeFile(type, paramname, path, _global_modl_prve_vespery.antifona3.anchor);
+		}
 		else /* ostatne modlitby nemaju vecerny chvalospev */
 		;
 	}/* PARAM_ANTVCHVAL */
@@ -2552,6 +2645,10 @@ void interpretParameter(short int type, char *paramname){
 		if(type == MODL_VESPERY){
 			strcat(path, _global_modl_vespery.zalm3.file);
 			includeFile(type, paramname, path, _global_modl_vespery.zalm3.anchor);
+		}
+		else if(type == MODL_PRVE_VESPERY){
+			strcat(path, _global_modl_prve_vespery.zalm3.file);
+			includeFile(type, paramname, path, _global_modl_prve_vespery.zalm3.anchor);
 		}
 		else /* ostatne modlitby nemaju vecerny chvalospev */
 		;
@@ -2591,6 +2688,10 @@ void interpretParameter(short int type, char *paramname){
 				strcat(path, _global_modl_vespery.prosby.file);
 				includeFile(type, paramname, path, _global_modl_vespery.prosby.anchor);
 				break;
+			case MODL_PRVE_VESPERY: /* 2011-03-22: pridanÈ */
+				strcat(path, _global_modl_prve_vespery.prosby.file);
+				includeFile(type, paramname, path, _global_modl_prve_vespery.prosby.anchor);
+				break;
 			default:
 				/* tieto modlitby nemaju prosby */
 				break;
@@ -2627,6 +2728,14 @@ void interpretParameter(short int type, char *paramname){
 				strcat(path, _global_modl_posv_citanie.modlitba.file);
 				includeFile(type, paramname, path, _global_modl_posv_citanie.modlitba.anchor);
 				break;
+			case MODL_PRVE_VESPERY: /* 2011-03-22: pridanÈ */
+				strcat(path, _global_modl_prve_vespery.modlitba.file);
+				includeFile(type, paramname, path, _global_modl_prve_vespery.modlitba.anchor);
+				break;
+			case MODL_PRVE_KOMPLETORIUM: /* 2011-03-22: pridanÈ */
+				strcat(path, _global_modl_prve_kompletorium.modlitba.file);
+				includeFile(type, paramname, path, _global_modl_prve_kompletorium.modlitba.anchor);
+				break;
 			default:
 				/* tieto modlitby nemaju antifonu1 */
 				break;
@@ -2642,6 +2751,10 @@ void interpretParameter(short int type, char *paramname){
 				strcat(path, _global_modl_vespery.ant_spompost.file);
 				includeFile(type, paramname, path, _global_modl_vespery.ant_spompost.anchor);
 				break;
+			case MODL_PRVE_VESPERY: /* 2011-03-22: pridanÈ */
+				strcat(path, _global_modl_prve_vespery.ant_spompost.file);
+				includeFile(type, paramname, path, _global_modl_prve_vespery.ant_spompost.anchor);
+				break;
 			default:
 				/* tieto modlitby nemaj˙ moûnosù spomienky na sv‰tca v pÙstnom obdobÌ */
 				break;
@@ -2656,6 +2769,10 @@ void interpretParameter(short int type, char *paramname){
 			case MODL_VESPERY:
 				strcat(path, _global_modl_vespery.modlitba_spompost.file);
 				includeFile(type, paramname, path, _global_modl_vespery.modlitba_spompost.anchor);
+				break;
+			case MODL_PRVE_VESPERY: /* 2011-03-22: pridanÈ */
+				strcat(path, _global_modl_prve_vespery.modlitba_spompost.file);
+				includeFile(type, paramname, path, _global_modl_prve_vespery.modlitba_spompost.anchor);
 				break;
 			default:
 				/* tieto modlitby nemaj˙ moûnosù spomienky na sv‰tca v pÙstnom obdobÌ */
@@ -2826,7 +2943,7 @@ void showPrayer(short int type){
 	Log("showPrayer(type %i, %s), _global_modlitba == %s\n",
 		type, nazov_Modlitby(type), nazov_Modlitby(_global_modlitba));
 
-	if((type > MODL_KOMPLETORIUM) || (type < MODL_INVITATORIUM)){
+	if( ((type > MODL_PRVE_KOMPLETORIUM) || (type < MODL_INVITATORIUM)) || (type == MODL_NEURCENA) ){
 		Export("Nezn·my typ modlitby.\n");
 		ALERT;
 		return;
@@ -4517,6 +4634,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
  */
 	Log("--- _export_rozbor_dna_buttons(typ == %d) -- begin\n", typ); /* 2005-03-22: Pridane */
 	short int i = MODL_NEURCENA;
+	short int smer = SLAV_NEURCENE;
 	char pom[MAX_STR];
 	char pom2[MAX_STR]; /* 2006-07-31: pridanÈ */
 
@@ -4774,12 +4892,125 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 		} /* if(_global_opt1 != ANO) */
 #endif // BUTTON_SKRATKY_DALSIE_20070913
 
-/* 2006-10-11: dorobenÈ tlaËidlo pre invitatÛrium */
-
 		/* oddelenie */
 		if(som_v_tabulke == ANO){
 			Export("</td>\n<td valign=\"middle\">");
 		}
+
+		/* 2011-03-22: doplnenÈ prvÈ veöpery; mÙûu byù pre smer < 5 ale nie pre vöetky dni, preto t·to podmienka... */
+		// if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
+		smer = _global_den.smer;
+		smer = (smer > _global_svaty1.smer) ? _global_svaty1.smer : smer;
+		if(poradie_svateho == 2){
+			smer = (smer > _global_svaty2.smer) ? _global_svaty2.smer : smer;
+		}
+		if(poradie_svateho == 3){
+			smer = (smer > _global_svaty3.smer) ? _global_svaty3.smer : smer;
+		}
+		if(
+		((smer < 5) ||
+			/* cl. 11: slavnosti su zvlast vyznacnymi dnami. ich slavenie
+			 * sa zacina prvymi vesperami v predchadzajuci den. */
+			((smer == 5) && (_global_den.denvt == DEN_NEDELA) &&
+					((_global_den.litobd == OBD_CEZ_ROK) ||
+					 (_global_den.litobd == OBD_VIANOCNE_I) ||
+					 (_global_den.litobd == OBD_VIANOCNE_II))) ||
+			/* cl. 13: sviatky sa slavia v rozsahu jedneho dna, a preto nemaju
+			 * prve vespery, ak len nejde o sviatky pana, ktore pripadaju na
+			 * nedelu v obdobi ,,cez rok" a na nedelu vo vianocnom obdobi
+			 * a nahradzuju nedelnajsiu liturgiu hodin. */
+			(_global_den.denvt == DEN_NEDELA) ||
+			/* nedela */
+			(
+				((_global_den.litobd == OBD_VELKONOCNA_OKTAVA) && (_global_den.denvt == DEN_SOBOTA)) ||/* 2. velkonocna nedela, pridane 09/03/2000A.D. */
+				((_global_den.mesiac - 1 == MES_DEC) && (_global_den.den == 25)) /* ked narodenie pana pripadne na pondelok, tak prve vespery maju prednost pred 4. adventnou nedelou; napr. rok 2000, pridane 14/03/2000A.D. */
+			)
+		)
+		&& !(
+			((_global_den.denvr <= VN + 5) && (_global_den.denvr >= KVET + 1)) // vöednÈ dni veækÈho t˝ûdÚa poËn˙c pondelkom, veækonoËnÈ trojdnie od veækÈho piatka do veækonoËnej okt·vy, piatka
+			|| (_global_den.denvr == POS) // popolcov· streda
+		)){
+			/* 2011-03-22: prvÈ veöpery, len pre tie modlitby, ktorÈ mÙûu maù prvÈ veöpery */
+			/* prvÈ veöpery -- button */
+			i = MODL_PRVE_VESPERY;
+			if(_global_linky == ANO){
+				Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
+					script_name,
+					STR_QUERY_TYPE, STR_PRM_DATUM,
+					STR_DEN, _global_den.den,
+					STR_MESIAC, _global_den.mesiac,
+					STR_ROK, _global_den.rok,
+					STR_MODLITBA, STR_MODL_PRVE_VESPERY,
+					pom);
+			}
+			else{
+				INIT_POM(pom, i, 0);
+				if(som_v_tabulke == ANO)
+					Export("<form action=\"%s\">\n", pom);
+				else
+					Export("<br><a href=\"%s\">\n", pom);
+			}
+			if(som_v_tabulke == ANO){
+				Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
+				Export("%s", html_button_nazov_modlitby(i));
+				Export("\">\n");
+				Export("</form>\n");
+			}
+			else{
+				Export("%s", nazov_modlitby(i));
+				Export("</a>\n");
+			}
+
+			/* oddelenie */
+			if(som_v_tabulke == ANO)
+				Export("</td>\n<td valign=\"middle\">");
+
+			/* kompletÛrium po prv˝ch veöper·ch -- button */
+			i = MODL_PRVE_KOMPLETORIUM;
+			if(_global_linky == ANO){
+				Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
+					script_name,
+					STR_QUERY_TYPE, STR_PRM_DATUM,
+					STR_DEN, _global_den.den,
+					STR_MESIAC, _global_den.mesiac,
+					STR_ROK, _global_den.rok,
+					STR_MODLITBA, STR_MODL_PRVE_KOMPLETORIUM,
+					pom);
+					/* 2003-08-11 pozor, segfault bol spuosobeny tym, ze
+					 * ako %s sa vypisoval int! (chybal prefix STR_...)
+					 */
+			}
+			else{
+				INIT_POM(pom, i, 0);
+				if(som_v_tabulke == ANO)
+					Export("<form action=\"%s\">\n", pom);
+				else
+					Export("<br><a href=\"%s\">\n", pom);
+			}
+			if(som_v_tabulke == ANO){
+				Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
+				Export("%s", html_button_nazov_modlitby(i));
+				Export("\">\n");
+				Export("</form>\n");
+			}
+			else{
+				Export("%s", nazov_modlitby(i));
+				Export("</a>\n");
+			}
+
+		}/* if(_global_den.smer < 5)... */
+		else{
+			// Log Export("nemÙûu byù prvÈ veöpery (smer == %d, denvt == %d, denvr == %d, VN == %d, KVET == %d, POS == %d)...\n", _global_den.smer, _global_den.denvt, _global_den.denvr, VN, KVET, POS);
+			/* oddelenie */
+			if(som_v_tabulke == ANO)
+				Export("</td>\n<td valign=\"middle\">");
+		}
+
+		/* 2006-10-11: dorobenÈ tlaËidlo pre invitatÛrium */
+
+		/* oddelenie */
+		if(som_v_tabulke == ANO)
+			Export("</td>\n<td valign=\"middle\">");
 
 		/* invitatÛrium -- button */
 		i = MODL_INVITATORIUM;
@@ -5071,7 +5302,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 				Export("</a>\n");
 			}
 
-			/* 2006-10-11: dorobenÈ tlaËidlo pre invitatÛrium */
+			/* 2006-10-11: dorobenÈ tlaËidlo pre kompletÛrium */
 
 			/* oddelenie */
 			if(som_v_tabulke == ANO)
@@ -7586,6 +7817,14 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 	/* 2009-03-19: debugovanie kvÙli kompletÛriu po prv˝ch veöper·ch 18. marca - sv. Jozefa */
 	// Log("(2) _global_modl_prve_kompletorium:\n"); Log(_global_modl_prve_kompletorium);
 
+	/* 2011-03-22: doplnenÈ; boli explicitne vyûiadanÈ prvÈ veöpery resp. kompletÛrium po prv˝ch veöper·ch */
+	if((modlitba == MODL_PRVE_VESPERY) || (modlitba == MODL_PRVE_KOMPLETORIUM)){
+		Log("-- explicitne vyûiadanÈ MODL_PRVE_VESPERY || MODL_PRVE_KOMPLETORIUM\n");
+		sprintf(pom, " (%s)", nazov_Modlitby(_global_modlitba));
+		Log("pom == %s -- rozbor_dna_s_modlitbou()...\n", pom);
+		strcat(_global_string, pom);
+	}/* if((modlitba == MODL_PRVE_VESPERY) || (modlitba == MODL_PRVE_KOMPLETORIUM)) */
+
 	/* ak ma nasledujuci den prioritu pred dnesnym dnom */
 	if((modlitba == MODL_VESPERY) || (modlitba == MODL_KOMPLETORIUM)){
 		Log("teraz uvidime, ci vespery/kompletorium nasledovneho dna nemaju nahodou prioritu...\n");
@@ -7781,6 +8020,9 @@ LABEL_NIE_INE_VESPERY: /* 08/03/2000A.D. */
 			break;
 		case MODL_VESPERY:
 			Log(_global_modl_vespery);
+			break;
+		case MODL_PRVE_VESPERY: /* 2011-03-22: doplnenÈ */
+			Log(_global_modl_prve_vespery);
 			break;
 		case MODL_INVITATORIUM: /* invitatÛrium a kompletÛrium pridanÈ 2006-10-13 */
 			Log(_global_modl_invitatorium);
@@ -8006,6 +8248,11 @@ short int atocss(char *css){
 		p = MODL_VESPERY;\
 	else if(equals(modlitba, STR_MODL_KOMPLETORIUM))\
 		p = MODL_KOMPLETORIUM;\
+	/* 2011-03-22 pridanÈ prvÈ veöpery a kompletÛrium po prv˝ch veöper·ch (experiment·lne) */\
+	else if(equals(modlitba, STR_MODL_PRVE_VESPERY))\
+		p = MODL_PRVE_VESPERY;\
+	else if(equals(modlitba, STR_MODL_PRVE_KOMPLETORIUM))\
+		p = MODL_PRVE_KOMPLETORIUM;\
 	else\
 		p = MODL_NEURCENA;\
 	/* este treba skontrolovat, ci nazov modlitby nie je\

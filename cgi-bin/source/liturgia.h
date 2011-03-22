@@ -262,6 +262,8 @@ typedef struct den_mesiac _struct_den_mesiac;
 	#define		STR_MODL_POPOLUDNI		"MODL_POPOLUDNI"
 	#define		STR_MODL_DETAILY		"MODL_DETAILY"
 	#define		STR_MODL_KOMPLETORIUM	"MODL_KOMPLETORIUM"
+	#define		STR_MODL_PRVE_VESPERY	"MODL_PRVE_VESPERY"
+	#define		STR_MODL_PRVE_KOMPLETORIUM	"MODL_PRVE_KOMPLETORIUM"
 #else
 	#define		STR_MODL_INVITATORIUM	"mi"
 	#define		STR_MODL_RANNE_CHVALY	"mrch"
@@ -272,6 +274,8 @@ typedef struct den_mesiac _struct_den_mesiac;
 	#define		STR_MODL_POPOLUDNI		"mpo"
 	#define		STR_MODL_DETAILY		"*"
 	#define		STR_MODL_KOMPLETORIUM	"mk"
+	#define		STR_MODL_PRVE_VESPERY	"mpv"
+	#define		STR_MODL_PRVE_KOMPLETORIUM	"mpk"
 #endif
 
 /* 2005-03-27: Vlozene do definicnej casti z funkcie dbzaltar.cpp::pismenko_modlitby() */
