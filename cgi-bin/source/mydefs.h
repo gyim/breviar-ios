@@ -62,7 +62,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2011-03-21"
+#define BUILD_DATE "2011-03-22"
 
 #define BYTES 250
 #define SMALL 80
@@ -435,6 +435,13 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPT7 "MODL_OPT7"
 #else
 	#define STR_MODL_OPT7 "o7"
+#endif
+
+#define MODL_OPT8 43
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPT8 "MODL_OPT8"
+#else
+	#define STR_MODL_OPT8 "o8"
 #endif
 
 /* --- force verzie pre o1 až o5 --- */

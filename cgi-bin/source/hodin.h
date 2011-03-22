@@ -401,7 +401,8 @@ const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1] =
 ,"pre SpoloËnosù Jeûiöovu ó jezuitov (SJ)"
 ,"pre salezi·nsku rodinu ó SDB, FMA, VDB"
 // ,"pre frantiök·nsku rodinu ó frantiök·nov<!-- (OFM)-->, kapucÌnov<!--  (OFMCap)-->, minoritov<!--  (OFMConv)-->" // 2011-03-21: nefungovalo porovnanie atokalendar lebo HTML odstr·nilo pozn·mky
-,"pre frantiök·nsku rodinu ó frantiök·nov, kapucÌnov, minoritov"
+// ,"pre frantiök·nsku rodinu ó frantiök·nov, kapucÌnov, minoritov" // 2011-03-22: s˙ tam aj mnohÈ Ôalöie rehole a kongreg·cie, takûe ma br. Jakub OFM poprosil, aby ostalo iba "pre frantiök·nsku rodinu"
+,"pre frantiök·nsku rodinu"
 };
 
 /* special "local" or "partial" characteristics of various celebrations - each in one language; no need to translate; special strings will be added */
