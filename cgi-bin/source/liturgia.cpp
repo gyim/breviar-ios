@@ -622,6 +622,11 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 			strcat(_global_link, pom2);
 			Log("\tPrilepil som aj opt5: `%s' (2011-01-26)\n", pom2);
 		}
+		if(_global_opt8 != CFG_OPTION8_DEFAULT){
+			sprintf(pom2, HTML_AMPERSAND"%s=%d", STR_MODL_OPT8, _global_opt8);
+			strcat(_global_link, pom2);
+			Log("\tPrilepil som aj opt8: `%s' (2011-03-23)\n", pom2);
+		}
 
 	}/* if(_global_opt_batch_monthly == NIE) */
 	else{

@@ -1315,6 +1315,25 @@ const char *html_text_zalmy_pre_mcd_explain[POCET_JAZYKOV + 1] =
  "hu_"
 };
 
+const char *html_text_zobrazit_prve_vespery[POCET_JAZYKOV + 1] = 
+{"zobrazi tlaèidlo pre <i>prvé vešpery</i> (a kompletórium po nich) <br>pre nedele a slávnosti aj v samotnı deò slávenia ", 
+ "zobrazit tlaèítko pro <i>první nešpory</i> (a kompletáø po nich) <br>pro nedìle a slavnosti také v den slavení ", 
+ "display button for <i>first vesperas</i> (and completory after them) <br>for Sundays and solemnitas also for the day of celebration ", 
+ "",
+ "",
+ "zobrazit tlaèítko pro <i>první veèerní chvály</i> (a kompletáø po nich) <br>pro nedìle a slavnosti také v den slavení ", 
+ "hu_"
+};
+const char *html_text_zobrazit_prve_vespery_explain[POCET_JAZYKOV + 1] = 
+{"Keïe základnım kritériom pre zobrazovanie modlitieb daného dòa je dátum, formálne prvé vešpery nedie¾ a slávností (a tie kompletórium po nich) nespadajú pod danı dátum, ale pre predošlı deò, kde sa zobrazujú ako bené vešpery.", 
+ "Jeliko základním kritériem pro zobrazování ponuky modliteb daného dne je datum, první nešpory nedìl a slavností (a také kompletáø po nich) nespadají pod danı datum, nıbr pro pøedcházející den, kde jsou zobrazeny jako bìné nešpory.", 
+ "xxx", 
+ "",
+ "", 
+ "Jeliko základním kritériem pro zobrazování ponuky modliteb daného dne je datum, první veèerní chvály nedìl a slavností (a také kompletáø po nich) nespadají pod danı datum, nıbr pro pøedcházející den, kde jsou zobrazeny jako bìné první veèerní chvály.", 
+ "hu_"
+};
+
 /* 2010-10-11: HTML option selected */
 const char *html_option_selected = " selected";
 
