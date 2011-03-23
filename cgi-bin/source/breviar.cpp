@@ -4048,7 +4048,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	_struct_dm _local_den;
 	_INIT_DM(_local_den); /* 2003-08-07 pridana */
 
-	char pom[MAX_STR], pom2[MAX_STR]; /* pom2 doplnenÈ 2011-02-02 */
+	char pom[MAX_STR], pom2[MAX_STR], pom3[SMALL]; /* pom2 doplnenÈ 2011-02-02; pom3 doplnenÈ 2011-03-23 */
 	char popisok_lokal[MAX_STR]; /* 2010-10-11: pridanÈ */
 	char popisok_kalendar[MAX_STR]; /* 2010-10-11: pridanÈ */
 	mystrcpy(pom, STR_EMPTY, MAX_STR); /* 2003-08-11 pridana inicializacia */
@@ -4279,9 +4279,8 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_VIAC_DNI_TXT)){
 				strcat(_global_string, pom); /* 2006-08-03: prilepujeme nadvakr·t */
 				sprintf(pom, "<br><"HTML_SPAN_SMALL">");
-				sprintf(pom2, " %d", tyzden_zaltara(_local_den.tyzden));
+				sprintf(pom2, html_text_tyzden_zaltara[_global_jazyk], tyzden_zaltara(_local_den.tyzden));
 				strcat(pom, pom2);
-				strcat(pom, html_text_tyzden_zaltara[_global_jazyk]);
 				strcat(pom, "</span>");
 			}
 			strcat(_global_string, pom);
@@ -4292,6 +4291,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			if(obyc == ANO){
 			/* 2005-03-21: Pridany dalsi typ exportu */
 				if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE)){
+					Log("(typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE)\n");
 #ifdef OLD_STYLE_obycajny_den /* 08/03/2000A.D. */
 					sprintf(pom, "%s, %s</span>, %d",
 						nazov_Dna(_local_den.denvt),
@@ -4301,6 +4301,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 #else
 					/* dni po popolcovej strede na zaËiatku pÙstneho obdobia - "nult˝" t˝ûdeÚ */
 					if((_local_den.tyzden == 0) && (_local_den.litobd == OBD_POSTNE_I)){
+						Log("dni po popolcovej strede na zaËiatku pÙstneho obdobia - 'nult˝' t˝ûdeÚ\n");
 						/* <font size=-1></font> zmeneny na <span class="small"></span>, 2003-07-14 */
 						/* 2008-01-05: doplnen· viacjazyËnosù pre text "po Popolcovej strede" */
 						if(typ != EXPORT_DNA_VIAC_DNI_TXT){
@@ -4312,15 +4313,15 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 						sprintf(pom, "%s %s, %s", nazov_Dna(_local_den.denvt), (char *)text_PO_POPOLCOVEJ_STREDE[_global_jazyk], nazov_obdobia(_local_den.litobd));
 						strcat(pom, pom2);
 						if(typ != EXPORT_DNA_VIAC_DNI_TXT){
-							sprintf(pom2, " %d", tyzden_zaltara(_local_den.tyzden));
+							sprintf(pom2, html_text_tyzden_zaltara[_global_jazyk], tyzden_zaltara(_local_den.tyzden));
 							strcat(pom, pom2);
-							strcat(pom, html_text_tyzden_zaltara[_global_jazyk]);
 						}
 					}/* ((_local_den.tyzden == 0) && (_local_den.litobd == OBD_POSTNE_I)) */
 					/* dni po narodenÌ p·na pred nedeæou v okt·ve narodenia p·na (ak je) maj˙ ûalt·r zo 4. t˝ûdÚa
 					 * 2008-01-05: doplnennÈ, zmenen˝ popis
 					 */
 					else if(_local_den.litobd == OBD_OKTAVA_NARODENIA){
+						Log("_local_den.litobd == OBD_OKTAVA_NARODENIA\n");
 						if(typ != EXPORT_DNA_VIAC_DNI_TXT){
 							sprintf(pom2, "</span><br><"HTML_SPAN_SMALL">");
 						}
@@ -4330,25 +4331,26 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 						sprintf(pom, "%s %s", nazov_Dna(_local_den.denvt), (char *)text_V_OKTAVE_NARODENIA[_global_jazyk]);
 						strcat(pom, pom2);
 						if(typ != EXPORT_DNA_VIAC_DNI_TXT){
-							sprintf(pom2, " %d", tyzden_zaltara(_local_den.tyzden));
+							sprintf(pom2, html_text_tyzden_zaltara[_global_jazyk], tyzden_zaltara(_local_den.tyzden));
 							strcat(pom, pom2);
-							strcat(pom, html_text_tyzden_zaltara[_global_jazyk]);
 						}
 					}/* (_local_den.litobd == OBD_OKTAVA_NARODENIA) */
 					/* skontrolujeme eöte 17.-23. decembra (obdobie OBD_ADVENTNE_II) */
 					else if((_local_den.litobd == OBD_ADVENTNE_II) && (typ != EXPORT_DNA_VIAC_DNI)){
+						Log("(_local_den.litobd == OBD_ADVENTNE_II) && (typ != EXPORT_DNA_VIAC_DNI)\n");
 						if(typ != EXPORT_DNA_VIAC_DNI_TXT){
 							sprintf(pom2, "</span>");
 						}
 						else{
 							mystrcpy(pom2, STR_EMPTY, MAX_STR);
 						}
-						sprintf(pom, "%d. %s, %s", _local_den.den, nazov_mesiaca_gen(_local_den.mesiac - 1), nazov_obdobia(_local_den.litobd));
+						sprintf(pom, "%d. %s, %s, ", _local_den.den, nazov_mesiaca_gen(_local_den.mesiac - 1), nazov_obdobia(_local_den.litobd));
 						strcat(pom, pom2);
-						sprintf(pom2, ", %d%s", _local_den.tyzden, html_text_tyzden[_global_jazyk]);
+						sprintf(pom2, html_text_tyzden[_global_jazyk], _local_den.tyzden);
 						strcat(pom, pom2);
 					}/* ((_local_den.litobd == OBD_ADVENTNE_II) && (typ != EXPORT_DNA_VIAC_DNI)) */
 					else{
+						Log("else...\n");
 						/* <font size=-1></font> zmeneny na <span class="small"></span>, 2003-07-14 */
 						if(typ != EXPORT_DNA_VIAC_DNI_TXT){
 							sprintf(pom2, "</span>");
@@ -4356,37 +4358,39 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 						else{
 							mystrcpy(pom2, STR_EMPTY, MAX_STR);
 						}
-						sprintf(pom, "%s, %s, %d", nazov_Dna(_local_den.denvt), nazov_obdobia(_local_den.litobd), _local_den.tyzden);
-						strcat(pom, html_text_tyzden[_global_jazyk]);
+						sprintf(pom, "%s, %s, ", nazov_Dna(_local_den.denvt), nazov_obdobia(_local_den.litobd));
+						sprintf(pom3, html_text_tyzden[_global_jazyk], _local_den.tyzden);
+						strcat(pom, pom3);
 						strcat(pom, pom2);
 						if(typ != EXPORT_DNA_VIAC_DNI_TXT){
 							strcat(_global_string, pom); /* 2006-08-03: prilepujeme nadvakr·t */
 							sprintf(pom, "<br><"HTML_SPAN_SMALL">");
-							sprintf(pom2, "%d", tyzden_zaltara(_local_den.tyzden));
-							strcat(pom, pom2);
-							strcat(pom, html_text_tyzden_zaltara[_global_jazyk]);
+							sprintf(pom3, html_text_tyzden_zaltara[_global_jazyk], tyzden_zaltara(_local_den.tyzden));
+							strcat(pom, pom3);
+							// strcat(pom, pom2); // </span> sa priliepa niûöie; 2011-03-23
 						}
 					}/* default, cezroËnÈ obdobie a ostatnÈ "obyËajnÈ" dni */
 #endif
 					strcat(_global_string, pom);
 				}/* nie export na viac dnÌ */
 				else 
+					Log("else [ (typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) ] \n");
 					if (typ == EXPORT_DNA_VIAC_DNI_SIMPLE){
 						/* 2005-03-21: Pridane */
-						sprintf(pom, "%s, %s</span>, %d%s",
-							nazov_Dna(_local_den.denvt),
-							nazov_obdobia(_local_den.litobd),
-							_local_den.tyzden,
-							html_text_tyzden[_global_jazyk]);
+						sprintf(pom, "%s, %s</span>, ", nazov_Dna(_local_den.denvt), nazov_obdobia(_local_den.litobd));
+						sprintf(pom2, html_text_tyzden[_global_jazyk], _local_den.tyzden);
+						strcat(pom, pom2);
 						strcat(_global_string, pom);
 					}
 				/* inak ostane string prazdny */
 
 				if((farba == COLOR_RED) && (typ != EXPORT_DNA_VIAC_DNI_TXT)){
+					Log("(farba == COLOR_RED) && (typ != EXPORT_DNA_VIAC_DNI_TXT), priliepam koniec span...\n");
 					/* zmenene <font color> na <span>, 2003-07-02 */
 					strcat(_global_string, "</span>");
 				}
 				if(typ != EXPORT_DNA_VIAC_DNI_TXT){
+					Log("typ != EXPORT_DNA_VIAC_DNI_TXT, priliepam koniec span...\n");
 					strcat(_global_string, "</span>"); /* zmenene <b> na <span class="bold">, 2003-07-02 */
 				}
 			}

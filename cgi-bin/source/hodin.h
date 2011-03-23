@@ -79,13 +79,13 @@ const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 , {"modlitba predpoludním", "modlitba dopoledne", "Terce", "tertia", "", "Tercie", "tertia" }
 , {"modlitba napoludnie", "modlitba v poledne", "Sext", "sexta", "", "Sexta", "sexta" }
 , {"modlitba popoludní", "modlitba odpoledne", "None", "nona", "", "Nona", "nona" }
-, {"vešpery", "nešpory", "Vesperae", "vesper&#230;", "", "Veèerní chvály", "esti dicséret" }
+, {"vešpery", "nešpory", "Vesperae", "vesperae", "", "Veèerní chvály", "esti dicséret" }
 , {"kompletórium", "kompletáø", "Completary", "completorio", "", "Kompletáø", "befejezõ imaóra" }
 , {"neurèená", "neurèena", "not-defined", "no data", "", "neurèena", "nem azonosított"}
-, {"prvé vešpery", "první nešpory", "1st Vesperae", "I vesper&#230;", "", "První veèerní chvály", "I. esti dicséret" }
+, {"prvé vešpery", "první nešpory", "1st Vesperae", "I vesperae", "", "První veèerní chvály", "I. esti dicséret" }
 	/* 2007-12-05: zmenené, kedysi bolo: "prvé kompletórium" */
 , {"kompletórium po prvıch vešperách", "kompletáø po prvních nešporách", "1st Completary", "I completorio", "", "Kompletáø po prvních veèerních chválách", "I. esti dicséret után" }
-, {"druhé vešpery", "druhé nešpory", "2nd Vesperae", "II vesper&#230;", "", "Druhé veèerní chvály", "II. esti dicséret" }
+, {"druhé vešpery", "druhé nešpory", "2nd Vesperae", "II vesperae", "", "Druhé veèerní chvály", "II. esti dicséret" }
 	/* 2007-12-05: zmenené, kedysi bolo: "druhé kompletórium" */
 , {"kompletórium po druhıch vešperách", "kompletáø po druhıch nešporech", "2nd Completary", "II completorio", "", "Kompletáø po druhıch veèerních chválách", "II. esti dicséret után" }
 , {"detaily", "detaily", "Details", "details", "", "detaily", "részletek" }
@@ -101,12 +101,12 @@ const char *nazov_Modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 , {"Modlitba predpoludním", "Modlitba dopoledne", "Terce", "Tertia", "", "Tercie" , "Tertia" }
 , {"Modlitba napoludnie", "Modlitba v poledne", "Sext", "Sexta", "", "Sexta" , "Sexta" }
 , {"Modlitba popoludní", "Modlitba odpoledne", "None", "Nona", "", "Nona" , "Nona" }
-, {"Vešpery", "Nešpory", "Vesperae", "Vesper&#230;", "", "Veèerní chvály" , "Esti dicséret" }
+, {"Vešpery", "Nešpory", "Vesperae", "Vesperae", "", "Veèerní chvály" , "Esti dicséret" }
 , {"Kompletórium", "Kompletáø", "Completary", "Completorio", "", "Kompletáø" , "Befejezõ imaóra" }
 , {"Neureená", "Neureena", "not-defined", "No data", "", "Neurèená" , "Nem azonosított"}
-, {"Prvé vešpery", "První nešpory", "1st Vesperae", "I Vesper&#230;", "", "První veèerní chvály" , "I. Esti dicséret" }
+, {"Prvé vešpery", "První nešpory", "1st Vesperae", "I Vesperae", "", "První veèerní chvály" , "I. Esti dicséret" }
 , {"Kompletórium po prvıch vešperách", "Kompletáø po prvních nešporách", "1st Completary", "I Completorio", "", "Kompletáø po prvních veèerních chválách" , "I. Esti dicséret után" }
-, {"Druhé vešpery", "Druhé nešpory", "2nd Vesperae", "II Vesper&#230;", "", "Druhé veèerní chvály" , "II. Esti dicséret" }
+, {"Druhé vešpery", "Druhé nešpory", "2nd Vesperae", "II Vesperae", "", "Druhé veèerní chvály" , "II. Esti dicséret" }
 , {"Kompletórium po druhıch vešperách", "Kompletáø po druhıch nešporech", "2nd Completary", "II Completorio", "", "Kompletáø po druhıch veèerních chválách" , "II. Esti dicséret után" }
 , {"Detaily", "Detaily", "Details", "Details", "", "Detaily", "Részletek" }
 };
@@ -510,13 +510,13 @@ const char char_nedelny_cyklus[3] =
 /* names of the days in week, starting with Sunday (lowercase) / nazov_dna: string pre nazov dna; suhlasi s struct tm.tm_wday;
  * Weekday (0--6; Sunday/nedela = 0) */
 const char *nazov_dna_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1] = 
-{ {"nede¾a", "nedìle", "Sunday", "domínica", "", "nedìle", "vasárnap"}
-, {"pondelok" , "pondìlí", "Monday", "feria secúnda", "", "pondìlí", "hétfõ"}
-, {"utorok" , "úterı", "Tuesday", "feria tértia", "", "úterı", "kedd"}
+{ {"nede¾a", "nedìle", "Sunday", "dominica", "", "nedìle", "vasárnap"}
+, {"pondelok" , "pondìlí", "Monday", "feria secunda", "", "pondìlí", "hétfõ"}
+, {"utorok" , "úterı", "Tuesday", "feria tertia", "", "úterı", "kedd"}
 , {"streda" , "støeda", "Wednesday", "feria quarta", "", "støeda", "szerda"}
 , {"štvrtok" , "ètvrtek", "Thursday", "feria quinta", "", "ètvrtek", "csütörtök"}
 , {"piatok" , "pátek", "Friday", "feria sexta", "", "pátek", "péntek"}
-, {"sobota" , "sobota", "Saturday", "sábbatum", "", "sobota", "szombat"}
+, {"sobota" , "sobota", "Saturday", "sabbato", "", "sobota", "szombat"}
 , {"neznámy" , "neznámı", "unknown", "???", "", "neznámı", "ismeretlen"}
 };
 
@@ -530,7 +530,7 @@ const char *nazov_dna_asci_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1] =
 , {"streda" , "streda", "Wednesday", "Feria quarta", "", "streda", "szerda"}
 , {"stvrtok" , "ctvrtek", "Thursday", "Feria quinta", "", "ctvrtek", "csutortok"}
 , {"piatok" , "patek", "Friday", "Feria sexta", "", "patek", "pentek"}
-, {"sobota" , "sobota", "Saturday", "Sabbatum", "", "sobota", "szombat"}
+, {"sobota" , "sobota", "Saturday", "Sabbato", "", "sobota", "szombat"}
 , {"neznamy" , "neznamy", "unknown", "???", "", "neznamy", "ismeretlen"}
 };
 
@@ -538,13 +538,13 @@ const char *nazov_dna_asci_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1] =
 
 /* names of the days in week, starting with Sunday (sentence case) */
 const char *nazov_Dna_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1] = 
-{ {"Nede¾a", "Nedìle", "Sunday", "Domínica", "", "Nedìle", "Vasárnap"}
-, {"Pondelok" , "Pondìlí", "Monday", "Feria secúnda", "", "Pondìlí", "Hétfõ"}
-, {"Utorok" , "Úterı", "Tuesday", "Feria tértia", "", "Úterı", "Kedd"}
+{ {"Nede¾a", "Nedìle", "Sunday", "Dominica", "", "Nedìle", "Vasárnap"}
+, {"Pondelok" , "Pondìlí", "Monday", "Feria secunda", "", "Pondìlí", "Hétfõ"}
+, {"Utorok" , "Úterı", "Tuesday", "Feria tertia", "", "Úterı", "Kedd"}
 , {"Streda" , "Støeda", "Wednesday", "Feria quarta", "", "Støeda", "Szerda"}
 , {"Štvrtok" , "Ètvrtek", "Thursday", "Feria quinta", "", "Ètvrtek", "Csütörtök"}
 , {"Piatok" , "Pátek", "Friday", "Feria sexta", "", "Pátek", "Péntek"}
-, {"Sobota" , "Sobota", "Saturday", "Sábbatum", "", "Sobota", "Szombat"}
+, {"Sobota" , "Sobota", "Saturday", "Sabbato", "", "Sobota", "Szombat"}
 , {"Neznámy" , "Neznámı", "unknown", "???", "", "Neznámı", "Ismeretlen"}
 };
 
@@ -590,18 +590,18 @@ const char *nazov_dn_asci[POCET_DNI + 1] =
 /* the names of the months (lowecase) / nazov_mesiaca: string pre nazov dna; suhlasi s struct tm.tm_mon;
  * Month (0--11) */
 const char *nazov_mesiaca_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1] = 
-{ {"január", "leden", "January", "ianuárius", "", "leden", "január"}
-, {"február" , "únor", "February", "feb", "", "únor", "február"}
-, {"marec" , "bøezen", "March", "mar", "", "bøezen", "március"}
-, {"apríl" , "duben", "April", "apr", "", "duben", "április"}
-, {"máj" , "kvìten", "May", "mai", "", "kvìten", "május"}
-, {"jún" , "èerven", "June", "iun", "", "èerven", "június"}
-, {"júl" , "èervenec", "July", "iul", "", "èervenec", "július"}
-, {"august" , "srpen", "August", "aug", "", "srpen", "augusztus"}
-, {"september" , "záøí", "September", "sep", "", "záøí", "szeptember"}
-, {"október" , "øíjen", "October", "oct", "", "øíjen", "október"}
-, {"november" , "listopad", "November", "nov", "", "listopad", "november"}
-, {"december" , "prosinec", "December", "dec", "", "prosinec", "december"}
+{ {"január", "leden", "January", "ianuarius", "", "leden", "január"}
+, {"február" , "únor", "February", "februarius", "", "únor", "február"}
+, {"marec" , "bøezen", "March", "martius", "", "bøezen", "március"}
+, {"apríl" , "duben", "April", "aprilis", "", "duben", "április"}
+, {"máj" , "kvìten", "May", "maius", "", "kvìten", "május"}
+, {"jún" , "èerven", "June", "iunius", "", "èerven", "június"}
+, {"júl" , "èervenec", "July", "iulius", "", "èervenec", "július"}
+, {"august" , "srpen", "August", "augustus", "", "srpen", "augusztus"}
+, {"september" , "záøí", "September", "september", "", "záøí", "szeptember"}
+, {"október" , "øíjen", "October", "october", "", "øíjen", "október"}
+, {"november" , "listopad", "November", "november", "", "listopad", "november"}
+, {"december" , "prosinec", "December", "december", "", "prosinec", "december"}
 , {"neznámy" , "neznámı", "unknown", "___", "", "neznámı", "ismeretlen"}
 };
 
@@ -628,18 +628,18 @@ const char *nazov_mesiaca_asci_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1] =
 
 /* the names of the months (sentence case) */
 const char *nazov_Mesiaca_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1] = 
-{ {"Január", "Leden", "January", "Ianuárius", "", "Leden", "Január"}
-, {"Február" , "Únor", "February", "Februárius", "", "Únor", "Február"}
-, {"Marec", "Bøezen", "March", "Mártius", "", "Bøezen", "Március"}
-, {"Apríl" , "Duben", "April", "Aprílis", "", "Duben", "Április"}
+{ {"Január", "Leden", "January", "Ianuarius", "", "Leden", "Január"}
+, {"Február" , "Únor", "February", "Februarius", "", "Únor", "Február"}
+, {"Marec", "Bøezen", "March", "Martius", "", "Bøezen", "Március"}
+, {"Apríl" , "Duben", "April", "Aprilis", "", "Duben", "Április"}
 , {"Máj" , "Kvìten", "May", "Maius", "", "Kvìten", "Május"}
-, {"Jún" , "Èerven", "June", "Iúnius", "", "Èerven", "Június"}
-, {"Júl" , "Èervenec", "July", "Iúlius", "", "Èervenec", "Július"}
-, {"August" , "Srpen", "August", "Augústus", "", "Srpen", "Augusztus"}
-, {"September" , "Záøí", "September", "Septémber", "", "Záøí", "Szeptember"}
-, {"Október" , "Øíjen", "October", "Octóber", "", "Øíjen", "Október"}
-, {"November" , "Listopad", "November", "Novémber", "", "Listopad", "November"}
-, {"December" , "Prosinec", "December", "Decémber", "", "Prosinec", "December"}
+, {"Jún" , "Èerven", "June", "Iunius", "", "Èerven", "Június"}
+, {"Júl" , "Èervenec", "July", "Iulius", "", "Èervenec", "Július"}
+, {"August" , "Srpen", "August", "Augustus", "", "Srpen", "Augusztus"}
+, {"September" , "Záøí", "September", "September", "", "Záøí", "Szeptember"}
+, {"Október" , "Øíjen", "October", "October", "", "Øíjen", "Október"}
+, {"November" , "Listopad", "November", "November", "", "Listopad", "November"}
+, {"December" , "Prosinec", "December", "December", "", "Prosinec", "December"}
 , {"Neznámy" , "Neznámı", "unknown", "???", "", "Neznámı", "Ismeretlen"}
 };
 
@@ -647,18 +647,18 @@ const char *nazov_Mesiaca_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1] =
 
 /* the names of the months (uppercase) */
 const char *nazov_MESIACA_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1] = 
-{ {"JANUÁR", "LEDEN", "JANUARY", "IANUÁRIUS", "", "LEDEN", "JANUÁR"}
-, {"FEBRUÁR" , "ÚNOR", "FEBRUARY", "FEBRUÁRIUS", "", "ÚNOR", "FEBRUÁR"}
-, {"MAREC", "BØEZEN", "MARCH", "MÁRTIUS", "", "BØEZEN", "MÁRCIUS"}
-, {"APRÍL" , "DUBEN", "APRIL", "APRÍLIS", "", "DUBEN", "ÁPRILIS"}
+{ {"JANUÁR", "LEDEN", "JANUARY", "IANUARIUS", "", "LEDEN", "JANUÁR"}
+, {"FEBRUÁR" , "ÚNOR", "FEBRUARY", "FEBRUARIUS", "", "ÚNOR", "FEBRUÁR"}
+, {"MAREC", "BØEZEN", "MARCH", "MARTIUS", "", "BØEZEN", "MÁRCIUS"}
+, {"APRÍL" , "DUBEN", "APRIL", "APRILIS", "", "DUBEN", "ÁPRILIS"}
 , {"MÁJ" , "KVÌTEN", "MAY", "MAIUS", "", "KVÌTEN", "MÁJUS"}
-, {"JÚN" , "ÈERVEN", "JUNE", "IÚNIUS", "", "ÈERVEN", "JÚNIUS"}
-, {"JÚL" , "ÈERVENEC", "JULY", "IÚLIUS", "", "ÈERVENEC", "JÚLIUS"}
-, {"AUGUST" , "SRPEN", "AUGUST", "AUGÚSTUS", "", "SRPEN", "AUGUSZTUS"}
-, {"SEPTEMBER" , "ZÁØÍ", "SEPTEMBER", "SEPTÉMBER", "", "ZÁØÍ", "SZEPTEMBER"}
-, {"OKTÓBER" , "ØÍJEN", "OCTOBER", "OCTÓBER", "", "ØÍJEN", "OKTÓBER"}
-, {"NOVEMBER" , "LISTOPAD", "NOVEMBER", "NOVÉMBER", "", "LISTOPAD", "NOVEMBER"}
-, {"DECEMBER" , "PROSINEC", "DECEMBER", "DECÉMBER", "", "PROSINEC", "DECEMBER"}
+, {"JÚN" , "ÈERVEN", "JUNE", "IUNIUS", "", "ÈERVEN", "JÚNIUS"}
+, {"JÚL" , "ÈERVENEC", "JULY", "IULIUS", "", "ÈERVENEC", "JÚLIUS"}
+, {"AUGUST" , "SRPEN", "AUGUST", "AUGUSTUS", "", "SRPEN", "AUGUSZTUS"}
+, {"SEPTEMBER" , "ZÁØÍ", "SEPTEMBER", "SEPTEMBER", "", "ZÁØÍ", "SZEPTEMBER"}
+, {"OKTÓBER" , "ØÍJEN", "OCTOBER", "OCTOBER", "", "ØÍJEN", "OKTÓBER"}
+, {"NOVEMBER" , "LISTOPAD", "NOVEMBER", "NOVEMBER", "", "LISTOPAD", "NOVEMBER"}
+, {"DECEMBER" , "PROSINEC", "DECEMBER", "DECEMBER", "", "PROSINEC", "DECEMBER"}
 , {"NEZNÁMY" , "NEZNÁMİ", "UNKNOWN", "???", "", "NEZNÁMİ", "ISMERETLEN"}
 };
 
@@ -668,18 +668,18 @@ const char *nazov_MESIACA_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1] =
 /* usage: when generated string for date, e.g. en: "1st January 2000", sk: "1. januára 2000" */
 /* 2007-03-20: pridanı genitív názvu mesiaca kvôli latinèine */
 const char *nazov_mesiaca_gen_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1] = 
-{ {"januára", "ledna", "January", "ianuárii", "", "ledna", "január"}
-, {"februára" , "února", "February", "februárii", "", "února", "február"}
-, {"marca" , "bøezna", "March", "mártii", "", "bøezna", "március"}
-, {"apríla" , "dubna", "April", "aprílis", "", "dubna", "április"}
+{ {"januára", "ledna", "January", "ianuarii", "", "ledna", "január"}
+, {"februára" , "února", "February", "februarii", "", "února", "február"}
+, {"marca" , "bøezna", "March", "martii", "", "bøezna", "március"}
+, {"apríla" , "dubna", "April", "aprilis", "", "dubna", "április"}
 , {"mája" , "kvìtna", "May", "maii", "", "kvìtna", "május"}
-, {"júna" , "èervna", "June", "iúnii", "", "èervna", "június"}
-, {"júla" , "èervence", "July", "iúlii", "", "èervence", "július"}
-, {"augusta" , "srpna", "August", "augústi", "", "srpna", "augusztus"}
-, {"septembra" , "záøí", "September", "septémbris", "", "záøí", "szeptember"}
-, {"októbra" , "øíjna", "October", "octóbris", "", "øíjna", "október"}
-, {"novembra" , "listopadu", "November", "novémbris", "", "listopadu", "november"}
-, {"decembra" , "prosince", "December", "decémbris", "", "prosince", "december"}
+, {"júna" , "èervna", "June", "iunii", "", "èervna", "június"}
+, {"júla" , "èervence", "July", "iulii", "", "èervence", "július"}
+, {"augusta" , "srpna", "August", "augusti", "", "srpna", "augusztus"}
+, {"septembra" , "záøí", "September", "septembris", "", "záøí", "szeptember"}
+, {"októbra" , "øíjna", "October", "octobris", "", "øíjna", "október"}
+, {"novembra" , "listopadu", "November", "novembris", "", "listopadu", "november"}
+, {"decembra" , "prosince", "December", "decembris", "", "prosince", "december"}
 , {"neznámeho" , "neznámého", "unknown", "___", "", "neznámého", "ismeretlen"}
 };
 
@@ -687,18 +687,18 @@ const char *nazov_mesiaca_gen_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1] =
 
 /* 2007-03-20: pridanı genitív názvu mesiaca kvôli latinèine */
 const char *nazov_Mesiaca_gen_jazyk[POCET_MESIACOV + 1][POCET_JAZYKOV + 1] = 
-{ {"Januára", "Ledna", "January", "Ianuárii", "", "Ledna", "Január"}
-, {"Februára" , "Února", "February", "Februárii", "", "Února", "Február"}
-, {"Marca" , "Bøezna", "March", "Mártii", "", "Bøezna", "Március"}
-, {"Apríla" , "Dubna", "April", "Aprílis", "", "Dubna", "Április"}
+{ {"Januára", "Ledna", "January", "Ianuarii", "", "Ledna", "Január"}
+, {"Februára" , "Února", "February", "Februarii", "", "Února", "Február"}
+, {"Marca" , "Bøezna", "March", "Martii", "", "Bøezna", "Március"}
+, {"Apríla" , "Dubna", "April", "Aprilis", "", "Dubna", "Április"}
 , {"Mája" , "Kvìtna", "May", "Maii", "", "Kvìtna", "Május"}
-, {"Júna" , "Èervna", "June", "Iúnii", "", "Èervna", "Június"}
-, {"Júla" , "Èervence", "July", "Iúlii", "", "Èervence", "Július"}
-, {"Augusta" , "Srpna", "August", "Augústi", "", "Srpna", "Augusztus"}
-, {"Septembra" , "Záøí", "September", "Septémbris", "", "Záøí", "Szeptember"}
-, {"Októbra" , "Øíjna", "October", "Octóbris", "", "Øíjna", "Október"}
-, {"Novembra" , "Listopadu", "November", "Novémbris", "", "Listopadu", "November"}
-, {"Decembra" , "Prosince", "December", "Decémbris", "", "Prosince", "December"}
+, {"Júna" , "Èervna", "June", "Iunii", "", "Èervna", "Június"}
+, {"Júla" , "Èervence", "July", "Iulii", "", "Èervence", "Július"}
+, {"Augusta" , "Srpna", "August", "Augusti", "", "Srpna", "Augusztus"}
+, {"Septembra" , "Záøí", "September", "Septembris", "", "Záøí", "Szeptember"}
+, {"Októbra" , "Øíjna", "October", "Octobris", "", "Øíjna", "Október"}
+, {"Novembra" , "Listopadu", "November", "Novembris", "", "Listopadu", "November"}
+, {"Decembra" , "Prosince", "December", "Decembris", "", "Prosince", "December"}
 , {"Neznámeho" , "Neznámého", "Unknown", "___", "", "Neznámého", "Ismeretlen"}
 };
 
@@ -870,10 +870,10 @@ const char *html_button_nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV 
 , {"Kompl.", "Kompl.", "Compl.", "Compl.", "", "Kompl.", "Bef."}
 // táto sa pre HTML buttony nepouíva
 	, {"neurèená", "neurèena", "not-defined", "no data", "", "neurèena", "nem azonosított"}
-, {"Prvé vešpery", "První nešpory", "1st Vesperae", "I vesper&#230;", "", "První veèerní chvály", "I. esti dicséret" }
+, {"Prvé vešpery", "První nešpory", "1st Vesperae", "I vesperae", "", "První veèerní chvály", "I. esti dicséret" }
 , {"Kompl. po prvıch vešp.", "Kompl. po prv. nešp.", "Compl.", "Compl.", "", "Kompl. po prvních v. chv.", "Kompl."}
 // táto sa pre HTML buttony nepouíva
-	, {"druhé vešpery", "druhé nešpory", "2nd Vesperae", "II vesper&#230;", "", "Druhé veèerní chvály", "II. esti dicséret" }
+	, {"druhé vešpery", "druhé nešpory", "2nd Vesperae", "II vesperae", "", "Druhé veèerní chvály", "II. esti dicséret" }
 // táto sa pre HTML buttony nepouíva
 	, {"kompletórium po druhıch vešperách", "kompletáø po druhıch nešporech", "2nd Completary", "II completorio", "", "Kompletáø po druhıch veèerních chválách", "II. esti dicséret után" }
 , {"Vo¾ba detailov...", "Podrobnìji...", "Details...", "Optiónes...", "", "Podrobnìji...", "Részletek..."}
@@ -938,7 +938,7 @@ const char *html_button_kompletorium_nunkdim[POCET_JAZYKOV + 1] = {"Kompletórium
 
 /* html <title> element for generated pages */
 /* doplnené, 2009-05-21 */
-const char *html_title[POCET_JAZYKOV + 1] = {"Liturgia hodín", "Liturgie hodin", "Liturgy of Hours", "la_", "", "Liturgie hodin", "Az Imaórák Liturgiája"};
+const char *html_title[POCET_JAZYKOV + 1] = {"Liturgia hodín", "Liturgie hodin", "Liturgy of Hours", "Liturgia horarum", "", "Liturgie hodin", "Az Imaórák Liturgiája"};
 /* 2009-08-04: upravené pre batch mód */
 // const char *html_title_batch_mode[POCET_JAZYKOV + 1] = {"Batch mód", "Dávkovı reim", "Batch mode", "la_", "", "Dávkovı reim", "hu_"};
 const char *html_title_batch_mode[POCET_JAZYKOV + 1] = {"Liturgia hodín - statické texty", "Liturgie hodin - statické texty", "Liturgy of Hours - static texts", "la_", "", "Liturgie hodin - statické texty", "Az Imaórák Liturgiája - hu_"};
@@ -946,12 +946,12 @@ const char *html_title_batch_mode[POCET_JAZYKOV + 1] = {"Liturgia hodín - static
 /* navigation buttons/texts: previous, next, today */
 const char *html_button_predchadzajuci_[POCET_JAZYKOV + 1] = {"Predchádzajúci", "Pøedchozí", "Previous", "Praecedénte", "", "Pøedchozí", "Elõzõ"};
 const char *html_button_nasledujuci_[POCET_JAZYKOV + 1] = {"Nasledujúci", "Následující", "Next", "Successívo", "", "Následující", "Következõ"};
-const char *html_button_dnes[POCET_JAZYKOV + 1] = {"dnes", "dnes", "today", "hódie", "", "dnes", "ma"};
-const char *html_button_Dnes[POCET_JAZYKOV + 1] = {"Dnes", "Dnes", "Today", "Hódie", "", "Dnes", "Ma"};
+const char *html_button_dnes[POCET_JAZYKOV + 1] = {"dnes", "dnes", "today", "hodie", "", "dnes", "ma"};
+const char *html_button_Dnes[POCET_JAZYKOV + 1] = {"Dnes", "Dnes", "Today", "Hodie", "", "Dnes", "Ma"};
 
 /* basic words: day, month, year */
 const char *html_text_den[POCET_JAZYKOV + 1] = {"deò", "den", "day", "die", "", "den", "nap"};
-const char *html_text_mesiac[POCET_JAZYKOV + 1] = {"mesiac", "mìsíc", "month", "(mesiac)", "", "mìsíc", "hó"};
+const char *html_text_mesiac[POCET_JAZYKOV + 1] = {"mesiac", "mìsíc", "month", "mense", "", "mìsíc", "hó"};
 const char *html_text_rok[POCET_JAZYKOV + 1] = {"rok", "rok", "year", "anno", "", "rok", "év"};
 const char *html_text_Rok[POCET_JAZYKOV + 1] = {"Rok", "Rok", "Year", "Anno", "", "Rok", "Év"};
 /* in the following: you MUST keep all %d, %c, %s etc. variables - these are replaced by numbers, characters, strings, etc. respectively */
@@ -962,11 +962,11 @@ const char *html_text_zoznam_mesiacov[POCET_JAZYKOV + 1] = {"zoznam mesiacov", "
 const char *html_text_modlitba[POCET_JAZYKOV + 1] = {"modlitba", "modlitba", "prayer", "ora", "", "modlitba", "imádság"};
 const char *html_text_modlitby_pre_den[POCET_JAZYKOV + 1] = {"modlitby pre deò", "modlitby pro den", "prayers for date", "", "", "modlitby pro den", "hu_prayers for date"};
 const char *html_text_alebo_pre[POCET_JAZYKOV + 1] = {"alebo pre", "anebo pro", "or for", "vel per", "", "anebo pro", "hu_or for"};
-const char *html_text_dnesok[POCET_JAZYKOV + 1] = {"dnešok", "dnešní den", "today", "hódie", "", "dnešní den", "ma"};
+const char *html_text_dnesok[POCET_JAZYKOV + 1] = {"dnešok", "dnešní den", "today", "hodie", "", "dnešní den", "ma"};
 
 /* 2010-02-15: pridané kvôli "zoznam.htm" batch mode */
-const char *html_text_Breviar_dnes[POCET_JAZYKOV + 1] = {"Breviár dnes", "Breviáø dnes", "Breviary today", "Breviar hódie", "", "Breviáø dnes", "hu_"};
-const char *html_text_Dnesne_modlitby[POCET_JAZYKOV + 1] = {"Dnešné modlitby", "Dnešní modlitby", "Today's prayers", "la_hódie", "", "Dnešní modlitby", "hu_"};
+const char *html_text_Breviar_dnes[POCET_JAZYKOV + 1] = {"Breviár dnes", "Breviáø dnes", "Breviary today", "Liturgia horarum hodie", "", "Breviáø dnes", "hu_"};
+const char *html_text_Dnesne_modlitby[POCET_JAZYKOV + 1] = {"Dnešné modlitby", "Dnešní modlitby", "Today's prayers", "la_hodie", "", "Dnešní modlitby", "hu_"};
 const char *html_text_Prehlad_mesiaca[POCET_JAZYKOV + 1] = {"Preh¾ad mesiaca", "Pøehled mìsíce", "Current month", "la_", "", "Pøehled mìsíce", "hu_"};
 /* 2011-03-18: pridané do "zoznam.htm" batch mode -- kalendáre a hlavnı nadpis */
 const char *html_text_batch_mode_h1[POCET_JAZYKOV + 1] = {"Liturgia hodín - Predgenerované modlitby", "Liturgie hodin - Pøedgenerovány modlitby", "Liturgy of Hours - Pregenerated prayers", "la_", "", "Liturgie hodin - Pøedgenerovány modlitby", "Az Imaórák Liturgiája - hu_"};
@@ -981,13 +981,13 @@ const char *html_text_dalsie_moznosti_2[POCET_JAZYKOV + 1] = {"Vo¾by pre ïalšie 
 
 const char *html_text_prik_sviatky_atd[POCET_JAZYKOV + 1] = {"prikázané sviatky a slávnosti Pána v roku ", "zasvìcené svátky a slavnosti Pánì v roce ", "obligatory celebrations in year ", "", "", "zasvìcené svátky a slavnosti Pánì v roce", "kötelezõ ünnepek"};
 const char *html_text_lit_kalendar[POCET_JAZYKOV + 1] = {"liturgickı kalendár pre", "liturgickı kalendáø pro", "liturgical calendar for", "", "", "liturgickı kalendáø pro", "liturgikus naptár"};
-const char *html_text_roku[POCET_JAZYKOV + 1] = {"roku", "roku", "of year", "", "", "roku", ""};
+const char *html_text_roku[POCET_JAZYKOV + 1] = {"roku", "roku", "of year", "anno", "", "roku", ""};
 const char *html_text_tabulka_pohyblive_od[POCET_JAZYKOV + 1] = {"tabu¾ka dátumov pohyblivıch slávení od roku", "tabulka s daty promìnnıch slavností od roku", "table with dates of movable celebrations from year", "", "", "tabulka s daty promìnnıch slavností od roku", "a változó ünnepek listája a következõ években"};
 const char *html_text_do_roku[POCET_JAZYKOV + 1] = {"do roku", "po rok", "till year", "", "", "po rok", ""};
 const char *html_text_zobrazit_linky[POCET_JAZYKOV + 1] = {"zobrazi tabu¾ku <i>vrátane hypertextovıch odkazov</i> na jednotlivé dni", "zobrazit tabulku s hypertextovımi odkazy pro jednotlivé dny", "display the table including hypertext links to each date", "", "", "zobrazit tabulku s hypertextovımi odkazy pro jednotlivé dny", "minden felirat mutasson a megfelelõ oldalunkra"};
-const char *html_text_pre_cezrocne_obd[POCET_JAZYKOV + 1] = {"pre cezroèné obdobie", "pro mezidobí", "for ...", "", "", "pro dobu bìhem roku", ""};
-const char *html_text_tyzden_zaltara[POCET_JAZYKOV + 1] = {". tıdeò altára", ". tıden altáøe", "week of Psaltary", "hebdomada", "", ". tıden altáøe", ". zsoltáros hét"};
-const char *html_text_tyzden[POCET_JAZYKOV + 1] = {". tıdeò", ". tıden", ". week", ". hebdomada", "", ". tıden", ". hét"};
+const char *html_text_pre_cezrocne_obd[POCET_JAZYKOV + 1] = {"pre cezroèné obdobie", "pro mezidobí", "for ...", "per annum", "", "pro dobu bìhem roku", ""};
+const char *html_text_tyzden_zaltara[POCET_JAZYKOV + 1] = {"%d. tıdeò altára", "%d. tıden altáøe", "%d. week of Psaltary", "hebdomada %d psalterii", "%d", "%d. tıden altáøe", "%d. zsoltáros hét"};
+const char *html_text_tyzden[POCET_JAZYKOV + 1] = {"%d. tıdeò", "%d. tıden", "%d. week", "hebdomada %d", "%d", "%d. tıden", "%d. hét"};
 const char *html_text_v_tyzdni_zaltara[POCET_JAZYKOV + 1] = {". tıdni altára", ". tıdnu altáøe", "week of Psaltary", "hebdomada", "", ". tıdnu altáøe", ". zsoltáros hét"};
 const char *html_text_pre[POCET_JAZYKOV + 1] = {"pre", "pro", "for", "per", "", "pro", ""};
 /* in the following: you MUST keep all HTML elements, e.g. <a href...>, <br> etc. */
@@ -1012,7 +1012,7 @@ const char *html_text_den_v_roku[POCET_JAZYKOV + 1] = {"deò v roku", "den v roce
 const char *html_text_zacina[POCET_JAZYKOV + 1] = {"zaèína", "zaèíná", "starts", "", "", "zaèíná", "kezdõdik"};
 const char *html_text_liturgicky_rok[POCET_JAZYKOV + 1] = {"liturgickı rok", "liturgickı rok", "liturgical year", "", "", "liturgickı rok", "liturgikus év"};
 
-const char *html_text_txt_export[POCET_JAZYKOV + 1] = {"Textovı vıstup: ", "Textovı vıstup: ", "Text export: ", "", "", "Textovı vıstup: ", "Text export: "};
+const char *html_text_txt_export[POCET_JAZYKOV + 1] = {"Textovı vıstup: ", "Textovı vıstup: ", "Text export: ", "Text export:", "", "Textovı vıstup: ", "Text export: "};
 
 const char *html_text_pohyblive1[POCET_JAZYKOV + 1] = {
 	"<td align=center>Rok<br>Pána</td>\n",
@@ -1058,7 +1058,7 @@ const char *html_text_pohyblive5[POCET_JAZYKOV + 1] = {
 	"<td align=center><a href=\"#explain\">OCR<br>pred<br>PO</a></td>\n",
 	"<td align=center><a href=\"#explain\">OCR<br>pøed<br>postem</a></td>\n", 
 	"<td align=center>...</td>\n",
-	"<td align=center>...</td>\n",
+	"<td align=center>PA fest.</td>\n",
 	"",
 	"<td align=center><a href=\"#explain\">OCR<br>pøed<br>postem</a></td>\n",
 	"hu_<td align=center>PA before Fast</td>\n"
@@ -1078,7 +1078,7 @@ const char *html_text_pohyblive7[POCET_JAZYKOV + 1] = {
 	"<td align=center>Ve¾ká<br>noc</td>\n",
 	"<td align=center>Veliko-<br>noce</td>\n", 
 	"<td align=center>Easter</td>\n",
-	"<td align=center>...</td>\n",
+	"<td align=center>Pascha</td>\n",
 	"",
 	"<td align=center>Veliko-<br>noce</td>\n",
 	"hu_<td align=center>...</td>\n"
@@ -1150,7 +1150,7 @@ const char *html_text_Po_Velkej_noci_atd[POCET_JAZYKOV + 1] = {
 	"Po Ve¾kej noci nasleduje %d. %s v cezroènom období.\n",
 	"Po Velikonocích následuje %d. %s v mezibdobí.\n",
 	"After Easter follows %d. %s per annum.\n",
-	"Po Ve¾kej noci nasleduje %d. %s v období „cez rok“.\n",
+	"Po Ve¾kej noci nasleduje %d. %s per annum.\n",
 	"Po Ve¾kej noci nasleduje %d. %s v období „cez rok“.\n",
 	"Po Velikonocích následuje %d. %s v mezibdobí.\n",
 	"Húsvét után évközi %d. %s következik.\n",
@@ -1193,7 +1193,7 @@ const char *str_modl_zalmy_zo_sv[POCET_JAZYKOV + 1] =
 #define		STR_MODL_ZALMY_ZO_SV 	str_modl_zalmy_zo_sv[_global_jazyk]
 
 const char *str_ano[POCET_JAZYKOV + 1] = 
-	{"áno", "ano", "yes", "___", "___", "ano", "igen"};
+	{"áno", "ano", "yes", "sic", "___", "ano", "igen"};
 #define		STR_ANO		str_ano[_global_jazyk]
 
 const char *str_nie[POCET_JAZYKOV + 1] = 
@@ -1342,7 +1342,7 @@ const char *html_text_kalendar_miestny[POCET_JAZYKOV + 1] =
 {"kalendár Liturgie hodín poui: ", 
  "kalendáø obecní nebo místní: ", 
  "local or general calendar: ", 
- "",
+ "calendario per Liturgia horarum: ",
  "",
  "kalendáø obecní nebo místní: ",
  "hu_"
@@ -1371,8 +1371,8 @@ const char *html_text_detaily_explain[POCET_JAZYKOV + 1] =
 const char *html_text_inv_slavaotcu[POCET_JAZYKOV + 1] = 
 {"<p>&nbsp;&nbsp;&nbsp; <font size=\"-1\"><font color=\"#ff0000\">Nasleduje </font>Sláva Otcu<font color=\"#ff0000\"> a opakuje sa antifóna.</font></font>", 
  "<p>&nbsp;&nbsp;&nbsp; <font size=\"-1\"><font color=\"#ff0000\">Následuje </font>Sláva Otci<font color=\"#ff0000\"> a opakuje se antifona.</font></font>", 
- "<p>&nbsp;&nbsp;&nbsp; <font size=\"-1\"><font color=\"#ff0000\">Nasleduje </font>Sláva Otcu<font color=\"#ff0000\"> a opakuje sa antifóna.</font></font>", 
- "<p>&nbsp;&nbsp;&nbsp; <font size=\"-1\"><font color=\"#ff0000\">Nasleduje </font>Sláva Otcu<font color=\"#ff0000\"> a opakuje sa antifóna.</font></font>", 
+ "<p>&nbsp;&nbsp;&nbsp; <font size=\"-1\"><font color=\"#ff0000\">Follows </font>Glory...<font color=\"#ff0000\"> a opakuje sa antifóna.</font></font>", 
+ "<p>&nbsp;&nbsp;&nbsp; <font size=\"-1\"><font color=\"#ff0000\">Nasleduje </font>Gloria Patri<font color=\"#ff0000\"> a opakuje sa antifóna.</font></font>", 
  "<p>&nbsp;&nbsp;&nbsp; <font size=\"-1\"><font color=\"#ff0000\">Nasleduje </font>Sláva Otcu<font color=\"#ff0000\"> a opakuje sa antifóna.</font></font>", 
  "<p>&nbsp;&nbsp;&nbsp; <font size=\"-1\"><font color=\"#ff0000\">Následuje </font>Sláva Otci<font color=\"#ff0000\"> a opakuje se antifona.</font></font>", 
  "<p>&nbsp;&nbsp;&nbsp; <font size=\"-1\"><font color=\"#ff0000\">Nasleduje </font>Sláva Otcu<font color=\"#ff0000\"> a opakuje sa antifóna.</font></font>", 
