@@ -1316,21 +1316,21 @@ const char *html_text_zalmy_pre_mcd_explain[POCET_JAZYKOV + 1] =
 };
 
 const char *html_text_zobrazit_prve_vespery[POCET_JAZYKOV + 1] = 
-{"zobrazi tlaèidlo pre <i>prvé vešpery</i> (a kompletórium po nich) <br>pre nedele a slávnosti aj v samotnı deò slávenia ", 
- "zobrazit tlaèítko pro <i>první nešpory</i> (a kompletáø po nich) <br>pro nedìle a slavnosti také v den slavení ", 
- "display button for <i>first vesperas</i> (and completory after them) <br>for Sundays and solemnitas also for the day of celebration ", 
+{"zobrazi tlaèidlo pre <i>prvé vešpery (a kompletórium po nich)</i> <br>pre nedele a slávnosti v samotnı deò slávenia ", 
+ "zobrazit tlaèítko pro <i>první nešpory (a kompletáø po nich)</i> <br>pro nedìle a slavnosti v den slavení ", 
+ "display button for <i>first vesperas (and completory after them)</i> <br>for Sundays and solemnitas for the day of celebration ", 
  "",
  "",
- "zobrazit tlaèítko pro <i>první veèerní chvály</i> (a kompletáø po nich) <br>pro nedìle a slavnosti také v den slavení ", 
+ "zobrazit tlaèítko pro <i>první veèerní chvály (a kompletáø po nich)</i> <br>pro nedìle a slavnosti v den slavení ", 
  "hu_"
 };
 const char *html_text_zobrazit_prve_vespery_explain[POCET_JAZYKOV + 1] = 
-{"Keïe základnım kritériom pre zobrazovanie modlitieb daného dòa je dátum, formálne prvé vešpery nedie¾ a slávností (a tie kompletórium po nich) nespadajú pod danı dátum, ale pre predošlı deò, kde sa zobrazujú ako bené vešpery.", 
- "Jeliko základním kritériem pro zobrazování ponuky modliteb daného dne je datum, první nešpory nedìl a slavností (a také kompletáø po nich) nespadají pod danı datum, nıbr pro pøedcházející den, kde jsou zobrazeny jako bìné nešpory.", 
+{"Keïe základnım kritériom pre zobrazovanie modlitieb daného dòa je dátum, formálne prvé vešpery nedie¾ a slávností (a tie kompletórium po nich) nespadajú pod danı dátum, ale pre predošlı deò, kde sa zobrazujú ako bené vešpery. Pre sobotné slávenie sa nebude tlaèidlo pre vešpery (a kompletórium) zobrazova.", 
+ "Jeliko základním kritériem pro zobrazování ponuky modliteb daného dne je datum, první nešpory nedìl a slavností (a také kompletáø po nich) nespadají pod danı datum, nıbr pro pøedcházející den, kde jsou zobrazeny jako bìné nešpory. Pro sobotní slavení se tlaèítko pro nešpory (a kompletáø) nebude zobrazovat.", 
  "xxx", 
  "",
  "", 
- "Jeliko základním kritériem pro zobrazování ponuky modliteb daného dne je datum, první veèerní chvály nedìl a slavností (a také kompletáø po nich) nespadají pod danı datum, nıbr pro pøedcházející den, kde jsou zobrazeny jako bìné první veèerní chvály.", 
+ "Jeliko základním kritériem pro zobrazování ponuky modliteb daného dne je datum, první veèerní chvály nedìl a slavností (a také kompletáø po nich) nespadají pod danı datum, nıbr pro pøedcházející den, kde jsou zobrazeny jako bìné první veèerní chvály. Pro sobotní slavení se tlaèítko pro veèerní chvály (a kompletáø) nebude zobrazovat.", 
  "hu_"
 };
 
