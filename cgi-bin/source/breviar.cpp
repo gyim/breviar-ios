@@ -4284,7 +4284,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_VIAC_DNI_TXT)){
 				strcat(_global_string, pom); /* 2006-08-03: prilepujeme nadvakrát */
 				sprintf(pom, "<br><"HTML_SPAN_SMALL">");
-				sprintf(pom2, html_text_tyzden_zaltara[_global_jazyk], tyzden_zaltara(_local_den.tyzden));
+				sprintf(pom2, html_text_tyzden_zaltara_cislo[_global_jazyk], tyzden_zaltara(_local_den.tyzden));
 				strcat(pom, pom2);
 				strcat(pom, "</span>");
 			}
@@ -4318,7 +4318,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 						sprintf(pom, "%s %s, %s", nazov_Dna(_local_den.denvt), (char *)text_PO_POPOLCOVEJ_STREDE[_global_jazyk], nazov_obdobia(_local_den.litobd));
 						strcat(pom, pom2);
 						if(typ != EXPORT_DNA_VIAC_DNI_TXT){
-							sprintf(pom2, html_text_tyzden_zaltara[_global_jazyk], tyzden_zaltara(_local_den.tyzden));
+							sprintf(pom2, html_text_tyzden_zaltara_cislo[_global_jazyk], tyzden_zaltara(_local_den.tyzden));
 							strcat(pom, pom2);
 						}
 					}/* ((_local_den.tyzden == 0) && (_local_den.litobd == OBD_POSTNE_I)) */
@@ -4336,7 +4336,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 						sprintf(pom, "%s %s", nazov_Dna(_local_den.denvt), (char *)text_V_OKTAVE_NARODENIA[_global_jazyk]);
 						strcat(pom, pom2);
 						if(typ != EXPORT_DNA_VIAC_DNI_TXT){
-							sprintf(pom2, html_text_tyzden_zaltara[_global_jazyk], tyzden_zaltara(_local_den.tyzden));
+							sprintf(pom2, html_text_tyzden_zaltara_cislo[_global_jazyk], tyzden_zaltara(_local_den.tyzden));
 							strcat(pom, pom2);
 						}
 					}/* (_local_den.litobd == OBD_OKTAVA_NARODENIA) */
@@ -4351,7 +4351,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 						}
 						sprintf(pom, "%d. %s, %s, ", _local_den.den, nazov_mesiaca_gen(_local_den.mesiac - 1), nazov_obdobia(_local_den.litobd));
 						strcat(pom, pom2);
-						sprintf(pom2, html_text_tyzden[_global_jazyk], _local_den.tyzden);
+						sprintf(pom2, html_text_tyzden_cislo[_global_jazyk], _local_den.tyzden);
 						strcat(pom, pom2);
 					}/* ((_local_den.litobd == OBD_ADVENTNE_II) && (typ != EXPORT_DNA_VIAC_DNI)) */
 					else{
@@ -4364,13 +4364,13 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 							mystrcpy(pom2, STR_EMPTY, MAX_STR);
 						}
 						sprintf(pom, "%s, %s, ", nazov_Dna(_local_den.denvt), nazov_obdobia(_local_den.litobd));
-						sprintf(pom3, html_text_tyzden[_global_jazyk], _local_den.tyzden);
+						sprintf(pom3, html_text_tyzden_cislo[_global_jazyk], _local_den.tyzden);
 						strcat(pom, pom3);
 						strcat(pom, pom2);
 						if(typ != EXPORT_DNA_VIAC_DNI_TXT){
 							strcat(_global_string, pom); /* 2006-08-03: prilepujeme nadvakrát */
 							sprintf(pom, "<br><"HTML_SPAN_SMALL">");
-							sprintf(pom3, html_text_tyzden_zaltara[_global_jazyk], tyzden_zaltara(_local_den.tyzden));
+							sprintf(pom3, html_text_tyzden_zaltara_cislo[_global_jazyk], tyzden_zaltara(_local_den.tyzden));
 							strcat(pom, pom3);
 							// strcat(pom, pom2); // </span> sa priliepa nižšie; 2011-03-23
 						}
@@ -4383,7 +4383,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 					if (typ == EXPORT_DNA_VIAC_DNI_SIMPLE){
 						/* 2005-03-21: Pridane */
 						sprintf(pom, "%s, %s</span>, ", nazov_Dna(_local_den.denvt), nazov_obdobia(_local_den.litobd));
-						sprintf(pom2, html_text_tyzden[_global_jazyk], _local_den.tyzden);
+						sprintf(pom2, html_text_tyzden_zaltara_cislo[_global_jazyk], _local_den.tyzden);
 						strcat(pom, pom2);
 						strcat(_global_string, pom);
 					}
@@ -6609,13 +6609,18 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export(", <br>\n");
 
 	/* pole WWW_TYZDEN */
+	if(_global_jazyk == JAZYK_LA){
+		Export((char *)html_text_tyzden[_global_jazyk]);
+	}
 	Export("<select name=\"%s\">\n", STR_TYZDEN);
 	for(day = 0; day <= POCET_NEDIEL_CEZ_ROK; day++){
 		Export("<option%s>%d\n", (day == _global_den.tyzden)? html_option_selected: STR_EMPTY, day);
 	}
 	Export("\n</select>&nbsp;");
 
-	Export((char *)html_text_tyzden[_global_jazyk]);
+	if(_global_jazyk != JAZYK_LA){
+		Export((char *)html_text_tyzden[_global_jazyk]);
+	}
 	Export(", \n");
 
 	/* pole WWW_LIT_OBD */
