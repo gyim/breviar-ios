@@ -87,7 +87,7 @@ const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 , {"kompletórium po prvých vešperách", "kompletáø po prvních nešporách", "1st Completary", "I completorio", "", "Kompletáø po prvních veèerních chválách", "I. esti dicséret után" }
 , {"druhé vešpery", "druhé nešpory", "2nd Vesperae", "II vesperae", "", "Druhé veèerní chvály", "II. esti dicséret" }
 	/* 2007-12-05: zmenené, kedysi bolo: "druhé kompletórium" */
-, {"kompletórium po druhých vešperách", "kompletáø po druhých nešporech", "2nd Completary", "II completorio", "", "Kompletáø po druhých veèerních chválách", "II. esti dicséret után" }
+, {"kompletórium po druhých vešperách", "kompletáø po druhých nešporách", "2nd Completary", "II completorio", "", "Kompletáø po druhých veèerních chválách", "II. esti dicséret után" }
 , {"detaily", "detaily", "Details", "details", "", "detaily", "részletek" }
 };
 
@@ -107,7 +107,7 @@ const char *nazov_Modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 , {"Prvé vešpery", "První nešpory", "1st Vesperae", "I Vesperae", "", "První veèerní chvály" , "I. Esti dicséret" }
 , {"Kompletórium po prvých vešperách", "Kompletáø po prvních nešporách", "1st Completary", "I Completorio", "", "Kompletáø po prvních veèerních chválách" , "I. Esti dicséret után" }
 , {"Druhé vešpery", "Druhé nešpory", "2nd Vesperae", "II Vesperae", "", "Druhé veèerní chvály" , "II. Esti dicséret" }
-, {"Kompletórium po druhých vešperách", "Kompletáø po druhých nešporech", "2nd Completary", "II Completorio", "", "Kompletáø po druhých veèerních chválách" , "II. Esti dicséret után" }
+, {"Kompletórium po druhých vešperách", "Kompletáø po druhých nešporách", "2nd Completary", "II Completorio", "", "Kompletáø po druhých veèerních chválách" , "II. Esti dicséret után" }
 , {"Detaily", "Detaily", "Details", "Details", "", "Detaily", "Részletek" }
 };
 
@@ -884,7 +884,7 @@ const char *html_button_nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV 
 // táto sa pre HTML buttony nepoužíva
 	, {"druhé vešpery", "druhé nešpory", "2nd Vesperae", "II vesperae", "", "Druhé veèerní chvály", "II. esti dicséret" }
 // táto sa pre HTML buttony nepoužíva
-	, {"kompletórium po druhých vešperách", "kompletáø po druhých nešporech", "2nd Completary", "II completorio", "", "Kompletáø po druhých veèerních chválách", "II. esti dicséret után" }
+	, {"kompletórium po druhých vešperách", "kompletáø po druhých nešporách", "2nd Completary", "II completorio", "", "Kompletáø po druhých veèerních chválách", "II. esti dicséret után" }
 , {"Vo¾ba detailov...", "Podrobnìji...", "Details...", "Optiónes...", "", "Podrobnìji...", "Részletek..."}
 };
 
