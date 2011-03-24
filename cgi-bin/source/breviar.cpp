@@ -3365,6 +3365,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					/* vsedne dni velkeho tyzdna od pondelka do stvrtka vratane */
 					if(_global_den.denvr == ZS){
 						mystrcpy(_global_den.meno, text_ZELENY_STVRTOK[_global_jazyk], MENO_SVIATKU);
+						_global_den.farba = LIT_FARBA_FIALOVA_BIELA; /* 2011-03-24: pridané */
 					}
 				}
 				else{
@@ -4065,6 +4066,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	short int velkost = CASE_MALE;
 	short int obyc = NIE;
 	short int liturgicka_farba = LIT_FARBA_NEURCENA; /* 2006-08-19: pridané */
+	short int liturgicka_farba_alt = LIT_FARBA_NEURCENA; /* 2011-03-24: pridané */
 
 	Log("-- init_global_string(EXPORT_DNA_%d, %d, %s) -- zaèiatok (inicializuje tri _global_string* premenné)\n",
 		typ, poradie_svateho, nazov_modlitby(modlitba));
@@ -4523,21 +4525,60 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	/* 2006-08-19: pridaná liturgická farba */
 	liturgicka_farba = _local_den.farba;
 
-	/* 2009-08-26: pre iný export netreba tabu¾ku */
-	if(_global_opt_batch_monthly == ANO && export_monthly_druh > 2){
-		sprintf(_global_string_farba, "\n&nbsp;&nbsp;&nbsp;\n<span style=\"background-color: %s; color: %s\">(%s)</span>\n<br>\n", // "\n<"HTML_SPAN_SMALL">(%s)</span>\n",
-			(char *)html_farba_pozadie[liturgicka_farba], 
-			(char *)html_farba_popredie[liturgicka_farba], 
-			(char *)nazov_farby(liturgicka_farba));
+	/* 2011-03-24: zložené farby
+		LIT_FARBA_FIALOVA_CIERNA	== LIT_FARBA_FIALOVA a LIT_FARBA_CIERNA
+		LIT_FARBA_FIALOVA_BIELA		== LIT_FARBA_FIALOVA a LIT_FARBA_BIELA
+	 */
+	if((liturgicka_farba == LIT_FARBA_FIALOVA_CIERNA) || (liturgicka_farba == LIT_FARBA_FIALOVA_BIELA)){
+		liturgicka_farba_alt = (liturgicka_farba == LIT_FARBA_FIALOVA_CIERNA)? LIT_FARBA_CIERNA : LIT_FARBA_BIELA;
+		liturgicka_farba = LIT_FARBA_FIALOVA;
 	}
 	else{
-		sprintf(_global_string_farba,
-			"\n<table width=\"100%%\" bgcolor=\"%s\" style=\"border: 1px solid %s\"><tr><td align=\"center\"><font color=\"%s\" size=\""HTML_FONT_SIZE_FARBA"\">%s</font></td></tr></table>\n", 
+		liturgicka_farba_alt = LIT_FARBA_NEURCENA;
+	}
+	/* 2009-08-26: pre iný export netreba tabu¾ku */
+	if(_global_opt_batch_monthly == ANO && export_monthly_druh > 2){
+		sprintf(_global_string_farba, "\n&nbsp;&nbsp;&nbsp;\n<span style=\"background-color: %s; color: %s\">(%s)</span>\n", // "\n<"HTML_SPAN_SMALL">(%s)</span>\n",
 			(char *)html_farba_pozadie[liturgicka_farba], 
 			(char *)html_farba_popredie[liturgicka_farba], 
+			(char *)nazov_farby(liturgicka_farba));
+		if(liturgicka_farba_alt != LIT_FARBA_NEURCENA){
+			/* odde¾ovaè */
+			sprintf(pom, "/");
+			strcat(_global_string_farba, pom);
+			/* druhá farba */
+			sprintf(pom, "<span style=\"background-color: %s; color: %s\">(%s)</span>\n",
+				(char *)html_farba_pozadie[liturgicka_farba_alt], 
+				(char *)html_farba_popredie[liturgicka_farba_alt], 
+				(char *)nazov_farby(liturgicka_farba_alt));
+			strcat(_global_string_farba, pom);
+		}/* liturgicka_farba_alt != LIT_FARBA_NEURCENA */
+		sprintf(pom, "<br>\n");
+		strcat(_global_string_farba, pom);
+	}/* if(_global_opt_batch_monthly == ANO && export_monthly_druh > 2) */
+	else{
+		sprintf(_global_string_farba, "\n<table width=\"100%%\"><tr>");
+		sprintf(pom, "<td align=\"center\" bgcolor=\"%s\" style=\"border: 1px solid %s\"><font color=\"%s\" size=\""HTML_FONT_SIZE_FARBA"\">%s</font></td>\n", 
+			(char *)html_farba_pozadie[liturgicka_farba], 
+			(char *)html_farba_okraj[liturgicka_farba], 
 			(char *)html_farba_popredie[liturgicka_farba], 
 			(char *)nazov_farby(liturgicka_farba));
-	}
+		strcat(_global_string_farba, pom);
+		if(liturgicka_farba_alt != LIT_FARBA_NEURCENA){
+			/* odde¾ovaè */
+			sprintf(pom, "<td>/</td>\n");
+			strcat(_global_string_farba, pom);
+			/* druhá farba */
+			sprintf(pom, "<td align=\"center\" bgcolor=\"%s\" style=\"border: 1px solid %s\"><font color=\"%s\" size=\""HTML_FONT_SIZE_FARBA"\">%s</font></td>\n", 
+				(char *)html_farba_pozadie[liturgicka_farba_alt], 
+				(char *)html_farba_okraj[liturgicka_farba_alt], 
+				(char *)html_farba_popredie[liturgicka_farba_alt], 
+				(char *)nazov_farby(liturgicka_farba_alt));
+			strcat(_global_string_farba, pom);
+		}/* liturgicka_farba_alt != LIT_FARBA_NEURCENA */
+		sprintf(pom, "</tr></table>\n");
+		strcat(_global_string_farba, pom);
+	}/* else (_global_opt_batch_monthly == ANO && export_monthly_druh > 2) */
 
 	Log("  -- _global_string_farba == %s\n", _global_string_farba);
 
@@ -6086,10 +6127,10 @@ void _export_rozbor_dna_kalendar(short int typ){
 					Export("</tr>\n");
 					Export("<tr><!--(ïalší riadok)-->\n");
 					/* nedela */
-					Export("<td align=\"right\" bgcolor=\"black\"><font color=\"%s\"><b>%d</b></font></td> ", (char *)html_farba_pozadie[LIT_FARBA_BIELA], i);
+					Export("<td align=\"right\" bgcolor=\"%s\"><font color=\"%s\"><b>%d</b></font></td> ", (char *)html_farba_pozadie_cal, (char *)html_farba_popredie_cal, i);
 				}
 				else
-					Export("<td align=\"right\" bgcolor=\"black\"><font color=\"%s\">%d</font></td> ", (char *)html_farba_pozadie[LIT_FARBA_BIELA], i);
+					Export("<td align=\"right\" bgcolor=\"%s\"><font color=\"%s\">%d</font></td> ", (char *)html_farba_pozadie_cal, (char *)html_farba_popredie_cal, i);
 			}
 			else{
 				vytvor_global_link(i, _global_den.mesiac, _global_den.rok, LINK_DEN);

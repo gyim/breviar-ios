@@ -85,7 +85,7 @@
 #define MAX_STR				300 /* maximalna dlzka retazca */
 #define MAX_GLOBAL_STR		420 /* _global_string; 31/03/2000A.D.; 2010-12-07: rozšírené; 2011-01-31: rozšírené kvôli text_JAN_31_SDB[]; 2011-02-02: rozšírené kvôli text_FEB_04_SJ[]; */
 #define MAX_GLOBAL_STR2		20 /* _global_string2, pridané 2006-08-19 */
-#define MAX_GLOBAL_STR_FARBA 200 /* _global_string_farba, pridané 2006-08-19 */
+#define MAX_GLOBAL_STR_FARBA 350 /* _global_string_farba, pridané 2006-08-19; 2011-03-24: rozšírené kvôli dvojkombináciám */
 #define MAX_QUERY_STR		300 /* query_string */
 #define MAX_POM_QUERY_TYPE	300 /* pom_QUERY_TYPE */
 #define MAX_GLOBAL_LINK		300 /* maximalna dlzka retazca _global_link */

@@ -11129,7 +11129,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						_global_svaty1.smer = 10; /* mieste povinné spomienky pod¾a miestneho kalendára; technicky 10, hoci pod¾a smerníc 11 */
 						mystrcpy(_global_svaty1.meno, text_FEB_01_SDB[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_ZA_ZOSNULYCH);
-						_global_svaty1.farba = LIT_FARBA_FIALOVA;
+						_global_svaty1.farba = LIT_FARBA_FIALOVA_CIERNA;
 						_global_svaty1.kalendar = KALENDAR_SK_SDB;
 					}/* kalendár pre KALENDAR_SK_SDB */
 					break;
@@ -11489,7 +11489,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						mystrcpy(_global_svaty1.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
 						strcat(_global_svaty1.meno, text_FEB_07_CZOP[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_ZA_ZOSNULYCH);
-						_global_svaty1.farba = LIT_FARBA_FIALOVA; /* 2006-08-19: pridané */
+						_global_svaty1.farba = LIT_FARBA_FIALOVA_CIERNA; /* 2006-08-19: pridané */
 						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridané */
 					}/* czop only */
 					else if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SDB)){
@@ -22078,8 +22078,8 @@ label_25_MAR:
 					}
 					mystrcpy(_global_svaty1.meno, text_NOV_02[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_ZA_ZOSNULYCH);
-					_global_svaty1.farba = LIT_FARBA_FIALOVA; /* 2006-08-19: pridané */
-					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
+					_global_svaty1.farba = LIT_FARBA_FIALOVA_CIERNA;
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
 					break;
 				case 3: /* MES_NOV -- 03NOV */
 					if(poradie_svaty == 1){
@@ -22280,7 +22280,7 @@ label_25_MAR:
 						_global_svaty2.smer = 10; /* mieste povinné spomienky pod¾a miestneho kalendára; technicky 10, hoci pod¾a smerníc 11 */
 						mystrcpy(_global_svaty2.meno, text_NOV_05_SDB[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_ZA_ZOSNULYCH);
-						_global_svaty2.farba = LIT_FARBA_FIALOVA;
+						_global_svaty2.farba = LIT_FARBA_FIALOVA_CIERNA;
 						_global_svaty2.kalendar = KALENDAR_SK_SDB;
 					}/* kalendár pre KALENDAR_SK_SDB */
 					break;
@@ -22383,7 +22383,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_PRO_OP[_global_jazyk], MENO_SVIATKU);
 						strcat(_global_svaty1.meno, text_NOV_08_CZOP[_global_jazyk]);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_ZA_ZOSNULYCH);
-						_global_svaty1.farba = LIT_FARBA_FIALOVA;
+						_global_svaty1.farba = LIT_FARBA_FIALOVA_CIERNA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP;
 					}/* czop only */
 					break;
@@ -23149,7 +23149,7 @@ label_25_MAR:
 						_global_svaty2.smer = 10; /* mieste povinné spomienky pod¾a miestneho kalendára; technicky 10, hoci pod¾a smerníc 11 */
 						mystrcpy(_global_svaty2.meno, text_NOV_25_SDB[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_ZA_ZOSNULYCH);
-						_global_svaty2.farba = LIT_FARBA_FIALOVA;
+						_global_svaty2.farba = LIT_FARBA_FIALOVA_CIERNA;
 						_global_svaty2.kalendar = KALENDAR_SK_SDB;
 					}/* kalendár pre KALENDAR_SK_SDB */
 					break;

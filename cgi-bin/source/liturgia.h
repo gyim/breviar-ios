@@ -818,15 +818,19 @@ extern const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1];
 #define LIT_FARBA_ZELENA			3
 #define LIT_FARBA_FIALOVA			4
 #define LIT_FARBA_RUZOVA			5
+#define LIT_FARBA_CIERNA			6
+#define LIT_FARBA_FIALOVA_CIERNA	7 /* LIT_FARBA_FIALOVA a LIT_FARBA_CIERNA */
+#define LIT_FARBA_FIALOVA_BIELA		8 /* LIT_FARBA_FIALOVA a LIT_FARBA_BIELA */
 
-#define POCET_FARIEB				5
+#define POCET_FARIEB				8
+#define POCET_FARIEB_REALNYCH		6
 
 /* nazov_farby: string pre názov liturgickej farby */
-extern const char *nazov_farby_jazyk[POCET_FARIEB + 1][POCET_JAZYKOV + 1];
+extern const char *nazov_farby_jazyk[POCET_FARIEB_REALNYCH + 1][POCET_JAZYKOV + 1];
 #define		nazov_farby(a)	nazov_farby_jazyk[a][_global_jazyk]
 
-extern const char *html_farba_pozadie[POCET_FARIEB + 1];
-extern const char *html_farba_popredie[POCET_FARIEB + 1];
+extern const char *html_farba_pozadie[POCET_FARIEB_REALNYCH + 1];
+extern const char *html_farba_popredie[POCET_FARIEB_REALNYCH + 1];
 
 /* juliansky datum, funkcia juliansky_datum, dane synonymum JD */
 #define	JD	juliansky_datum

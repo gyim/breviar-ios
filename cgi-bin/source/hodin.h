@@ -467,25 +467,34 @@ const char *nazov_slavenia_lokal[] =
 };
 
 /* names of liturgical colors */
-const char *nazov_farby_jazyk[POCET_FARIEB + 1][POCET_JAZYKOV + 1] =
+const char *nazov_farby_jazyk[POCET_FARIEB_REALNYCH + 1][POCET_JAZYKOV + 1] =
 {{"___", "___", "___", "___", "___", "___", "___"},
- {"Ëerven·", "Ëerven·", "red", "rosa", "", "Ëerven·", "piros"},
- {"biela", "bÌl·", "white", "alba", "", "bÌl·", "fehÈr"},
- {"zelen·", "zelen·", "green", "___", "", "zelen·", "zˆld"},
- {"fialov·", "fialov·", "purple", "___", "", "fialov·", "lila"},
- {"ruûov·", "r˘ûov·", "rose", "___", "", "r˘ûov·", "rÛzsaszÌn"},
+ {"Ëerven·", "Ëerven·", "red", "ruber", "", "Ëerven·", "piros"},
+ {"biela", "bÌl·", "white", "albus", "", "bÌl·", "fehÈr"},
+ {"zelen·", "zelen·", "green", "viridis", "", "zelen·", "zˆld"},
+ {"fialov·", "fialov·", "purple", "violaceus", "", "fialov·", "lila"},
+ {"ruûov·", "r˘ûov·", "rose", "rosaceus", "", "r˘ûov·", "rÛzsaszÌn"},
+ {"Ëierna", "Ëern·", "black", "niger", "", "Ëern·", "fekete"},
 };
 
 #define		nazov_farby(a)	nazov_farby_jazyk[a][_global_jazyk]
 
 /* 2009-08-26: zmena na ötandardnÈ HTML elementy, aby sa dalo pouûÌvaù ako inline CSS style */
 /* codes for colors - HTML specific */
-const char *html_farba_pozadie[POCET_FARIEB + 1] =
-{"#000000" /* "black" */, "#ff0000" /* "red" */, "#ffffff" /* "white" */, "#008000" /* "green" */, "#800080" /* "purple" */, "#FF6699" /* "fuchsia" */};
+const char *html_farba_pozadie[POCET_FARIEB_REALNYCH + 1] =
+{"#000000" /* "black" */, "#ff0000" /* "red" */, "#ffffff" /* "white" */, "#008000" /* "green" */, "#800080" /* "purple" */, "#FF6699" /* "fuchsia" */, "#000000" /* black */};
 
 /* codes for colors - HTML specific */
-const char *html_farba_popredie[POCET_FARIEB + 1] =
-{"#ffffff" /* "white" */, "#ffffff" /* "white" */, "#000000" /* "black" */, "#ffffff" /* "white" */, "#ffffff" /* "white" */, "#0000ff" /* "blue" */};
+const char *html_farba_popredie[POCET_FARIEB_REALNYCH + 1] =
+{"#ffffff" /* "white" */, "#ffffff" /* "white" */, "#000000" /* "black" */, "#ffffff" /* "white" */, "#ffffff" /* "white" */, "#0000ff" /* "blue" */, "#ffffff" /* "white" */};
+
+/* codes for colors - HTML specific */
+const char *html_farba_okraj[POCET_FARIEB_REALNYCH + 1] =
+{"#000000" /* "black" */, "#000000" /* "black" */, "#000000" /* "black" */, "#000000" /* "black" */, "#000000" /* "black" */, "#000000" /* "black" */, "#000000" /* black */};
+
+/* 2011-03-24: pridanÈ pre kalend·rik */
+const char *html_farba_pozadie_cal = "#000000";
+const char *html_farba_popredie_cal = "#ffffff";
 
 /* codes for number of the week from psaltery (psalterium per quattuor hebdomadas distributum) */
 const char *rimskymi_tyzden_zaltara[5] =
@@ -516,7 +525,7 @@ const char *nazov_dna_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1] =
 , {"streda" , "st¯eda", "Wednesday", "feria quarta", "", "st¯eda", "szerda"}
 , {"ötvrtok" , "Ëtvrtek", "Thursday", "feria quinta", "", "Ëtvrtek", "cs¸tˆrtˆk"}
 , {"piatok" , "p·tek", "Friday", "feria sexta", "", "p·tek", "pÈntek"}
-, {"sobota" , "sobota", "Saturday", "sabbato", "", "sobota", "szombat"}
+, {"sobota" , "sobota", "Saturday", "sabbatum", "", "sobota", "szombat"}
 , {"nezn·my" , "nezn·m˝", "unknown", "???", "", "nezn·m˝", "ismeretlen"}
 };
 
@@ -530,7 +539,7 @@ const char *nazov_dna_asci_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1] =
 , {"streda" , "streda", "Wednesday", "Feria quarta", "", "streda", "szerda"}
 , {"stvrtok" , "ctvrtek", "Thursday", "Feria quinta", "", "ctvrtek", "csutortok"}
 , {"piatok" , "patek", "Friday", "Feria sexta", "", "patek", "pentek"}
-, {"sobota" , "sobota", "Saturday", "Sabbato", "", "sobota", "szombat"}
+, {"sobota" , "sobota", "Saturday", "Sabbatum", "", "sobota", "szombat"}
 , {"neznamy" , "neznamy", "unknown", "???", "", "neznamy", "ismeretlen"}
 };
 
@@ -544,7 +553,7 @@ const char *nazov_Dna_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1] =
 , {"Streda" , "St¯eda", "Wednesday", "Feria quarta", "", "St¯eda", "Szerda"}
 , {"ätvrtok" , "»tvrtek", "Thursday", "Feria quinta", "", "»tvrtek", "Cs¸tˆrtˆk"}
 , {"Piatok" , "P·tek", "Friday", "Feria sexta", "", "P·tek", "PÈntek"}
-, {"Sobota" , "Sobota", "Saturday", "Sabbato", "", "Sobota", "Szombat"}
+, {"Sobota" , "Sobota", "Saturday", "Sabbatum", "", "Sobota", "Szombat"}
 , {"Nezn·my" , "Nezn·m˝", "unknown", "???", "", "Nezn·m˝", "Ismeretlen"}
 };
 
@@ -552,13 +561,13 @@ const char *nazov_Dna_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1] =
 
 /* names of the days in week, starting with Sunday (uppercase) */
 const char *nazov_DNA_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1] = 
-{ {"NEDEºA", "NEDÃLE", "SUNDAY", "DOMÕNICA", "", "NEDÃLE", "VAS¡RNAP"}
-, {"PONDELOK" , "PONDÃLÕ", "MONDAY", "FERIA SEC⁄NDA", "", "PONDÃLÕ", "H…TF’"}
-, {"UTOROK" , "⁄TER›", "TUESDAY", "FERIA T…RTIA", "", "⁄TER›", "KEDD"}
+{ {"NEDEºA", "NEDÃLE", "SUNDAY", "DOMINICA", "", "NEDÃLE", "VAS¡RNAP"}
+, {"PONDELOK" , "PONDÃLÕ", "MONDAY", "FERIA SECUNDA", "", "PONDÃLÕ", "H…TF’"}
+, {"UTOROK" , "⁄TER›", "TUESDAY", "FERIA TERTIA", "", "⁄TER›", "KEDD"}
 , {"STREDA" , "STÿEDA", "WEDNESDAY", "FERIA QUARTA", "", "STÿEDA", "SZERDA"}
 , {"äTVRTOK" , "»TVRTEK", "THURSDAY", "FERIA QUINTA", "", "»TVRTEK", "CS‹T÷RT÷K"}
 , {"PIATOK" , "P¡TEK", "FRIDAY", "FERIA SEXTA", "", "P¡TEK", "P…NTEK"}
-, {"SOBOTA" , "SOBOTA", "SATURDAY", "S¡BBATUM", "", "SOBOTA", "SZOMBAT"}
+, {"SOBOTA" , "SOBOTA", "SATURDAY", "SABBATUM", "", "SOBOTA", "SZOMBAT"}
 , {"NEZN¡MY" , "NEZN¡M›", "UNKNOWN", "???", "", "NEZN¡M›", "ISMERETLEN"}
 };
 
@@ -951,7 +960,7 @@ const char *html_button_Dnes[POCET_JAZYKOV + 1] = {"Dnes", "Dnes", "Today", "Hod
 
 /* basic words: day, month, year */
 const char *html_text_den[POCET_JAZYKOV + 1] = {"deÚ", "den", "day", "die", "", "den", "nap"};
-const char *html_text_mesiac[POCET_JAZYKOV + 1] = {"mesiac", "mÏsÌc", "month", "mense", "", "mÏsÌc", "hÛ"};
+const char *html_text_mesiac[POCET_JAZYKOV + 1] = {"mesiac", "mÏsÌc", "month", "mensis", "", "mÏsÌc", "hÛ"};
 const char *html_text_rok[POCET_JAZYKOV + 1] = {"rok", "rok", "year", "anno", "", "rok", "Èv"};
 const char *html_text_Rok[POCET_JAZYKOV + 1] = {"Rok", "Rok", "Year", "Anno", "", "Rok", "…v"};
 /* in the following: you MUST keep all %d, %c, %s etc. variables - these are replaced by numbers, characters, strings, etc. respectively */
