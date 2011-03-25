@@ -13001,16 +13001,15 @@ label_25_MAR:
 
 						/* 2006-01-24: doplnenÈ modlitby cez deÚ */
 						_vlastna_cast_mcd_ant_kcitresp_modl;
-						/* 2009-03-23: boli tu ûalmy inak (pozri niûöie); maj˙ byù podæa narodenia p·na */
-						_set_zalmy_narodenie(modlitba);
+
 						/* 2006-02-04: ak je modlitba cez deÚ na sl·vnosù, tak by sa mali pouûiù ûalmy z doplnkovej psalmÛdie */
-/*						if(_global_den.denvt != DEN_NEDELA) {
+						if(_global_den.denvt != DEN_NEDELA) {
 							_set_zalm_cez_den_doplnkova_psalmodia();
 						}
 						else {
 							_set_zalmy_1nedele_mcd();
 						}
-*/
+
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
 						if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
