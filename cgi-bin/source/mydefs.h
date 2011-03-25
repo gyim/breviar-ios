@@ -444,6 +444,13 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPT8 "o8"
 #endif
 
+#define MODL_OPT9 44
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPT9 "MODL_OPT9"
+#else
+	#define STR_MODL_OPT9 "o9"
+#endif
+
 /* --- force verzie pre o1 až o5 --- */
 #define MODL_OPTF1 51
 #ifdef LONG_PARAM_NAMES
@@ -486,6 +493,13 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPTF8 "MODL_OPTF8"
 #else
 	#define STR_MODL_OPTF8 "of8"
+#endif
+
+#define MODL_OPTF9 58
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF9 "MODL_OPTF9"
+#else
+	#define STR_MODL_OPTF9 "of9"
 #endif
 
 /* 2008-08-08: Pridané kvôli rôznym css */

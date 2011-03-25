@@ -723,8 +723,8 @@ void _set_kcitanie(short int modlitba, const char *file, const char *anchor){
 			break;
 		/* pridane 2003-11-20 */
 		case MODL_POSV_CITANIE:
-			mystrcpy(_global_modl_posv_citanie.kcitanie.file, file, MAX_STR_AF_FILE);
-			mystrcpy(_global_modl_posv_citanie.kcitanie.anchor, anchor, MAX_STR_AF_ANCHOR);
+			mystrcpy(_global_modl_posv_citanie.citanie1.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_posv_citanie.citanie1.anchor, anchor, MAX_STR_AF_ANCHOR);
 			break;
 	}/* switch(modlitba) */
 }
@@ -794,8 +794,8 @@ void _set_benediktus(short int modlitba, const char *file, const char *anchor){
 			break;
 		/* pridane 2003-11-20 */
 		case MODL_POSV_CITANIE:
-			mystrcpy(_global_modl_posv_citanie.benediktus.file, file, MAX_STR_AF_FILE);
-			mystrcpy(_global_modl_posv_citanie.benediktus.anchor, anchor, MAX_STR_AF_ANCHOR);
+			mystrcpy(_global_modl_posv_citanie.citanie2.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_posv_citanie.citanie2.anchor, anchor, MAX_STR_AF_ANCHOR);
 			break;
 	}/* switch(modlitba) */
 }
@@ -888,8 +888,8 @@ void _set_modlitba_spompost(short int modlitba, const char *file, const char *an
 void _set_2citanie_spompost(short int modlitba, const char *file, const char *anchor){
 	switch(modlitba){
 		case MODL_POSV_CITANIE:
-			mystrcpy(_global_modl_posv_citanie.prosby.file, file, MAX_STR_AF_FILE);
-			mystrcpy(_global_modl_posv_citanie.prosby.anchor, anchor, MAX_STR_AF_ANCHOR);
+			mystrcpy(_global_modl_posv_citanie.citanie_spompost.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_posv_citanie.citanie_spompost.anchor, anchor, MAX_STR_AF_ANCHOR);
 			break;
 	}/* switch(modlitba) */
 }

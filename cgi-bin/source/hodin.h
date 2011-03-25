@@ -1344,6 +1344,25 @@ const char *html_text_zobrazit_prve_vespery_explain[POCET_JAZYKOV + 1] =
  "hu_"
 };
 
+const char *html_text_zobrazit_vigiliu[POCET_JAZYKOV + 1] = 
+{"zobrazi <i>predåené slávenie vigílie</i> pre posvätné èítanie <br>na nedele, slávnosti a sviatky ", 
+ "zobrazit <i>prodlouené slavení vigilie</i> pro modlitbu se ètením <br>pro nedìle, slavnosti a svátky ", 
+ "display <i>celebrating of vigily</i> for prayer with readings <br>for Sundays, solemnitas and festivus ", 
+ "",
+ "",
+ "zobrazit <i>prodlouené slavení vigilie</i> pro modlitbu se ètením <br>pro nedìle, slavnosti a svátky ", 
+ "hu_"
+};
+const char *html_text_zobrazit_vigiliu_explain[POCET_JAZYKOV + 1] = 
+{"Tí, èo chcú pod¾a tradície predåi vigíliu nedele, slávnosti alebo sviatku, èo sa ve¾mi odporúèa, najprv recitujú posvätné èítanie; po oboch èítaniach, pred hymnom Te Deum, pridávajú sa chválospevy a evanjelium.", 
+ "Tí, èo chcú pod¾a tradície predåi vigíliu nedele, slávnosti alebo sviatku, èo sa ve¾mi odporúèa, najprv recitujú posvätné èítanie; po oboch èítaniach, pred hymnom Te Deum, pridávajú sa chválospevy a evanjelium.", 
+ "xxx", 
+ "",
+ "", 
+ "Tí, èo chcú pod¾a tradície predåi vigíliu nedele, slávnosti alebo sviatku, èo sa ve¾mi odporúèa, najprv recitujú posvätné èítanie; po oboch èítaniach, pred hymnom Te Deum, pridávajú sa chválospevy a evanjelium.", 
+ "hu_"
+};
+
 /* 2010-10-11: HTML option selected */
 const char *html_option_selected = " selected";
 

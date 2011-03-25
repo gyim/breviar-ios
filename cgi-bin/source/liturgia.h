@@ -165,7 +165,7 @@ struct tmodlitba1{
 typedef struct tmodlitba1 _type_ranne_chvaly;
 typedef struct tmodlitba1 _type_vespery;
 typedef struct tmodlitba1 _type_1vespery;
-typedef struct tmodlitba1 _type_posv_citanie;
+// typedef struct tmodlitba1 _type_posv_citanie;
 
 struct tmodlitba2{
 	/* 2003-07-15, pridane _struct_anchor_and_file popis */
@@ -211,6 +211,28 @@ struct tmodlitba4{
 };
 typedef struct tmodlitba4 _type_invitatorium;
 
+/* 2011-03-25: pre posvätné èítanie kvôli sláveniu vigílií nový typ */
+struct tmodlitba5{
+	_struct_anchor_and_file popis     ;
+	_struct_anchor_and_file hymnus    ;
+	_struct_anchor_and_file antifona1 ;
+	_struct_anchor_and_file zalm1     ;
+	_struct_anchor_and_file antifona2 ;
+	_struct_anchor_and_file zalm2     ;
+	_struct_anchor_and_file antifona3 ;
+	_struct_anchor_and_file zalm3     ;
+	_struct_anchor_and_file kresponz  ; 
+	_struct_anchor_and_file citanie1  ; /* 1. citanie pre posvatne citanie */
+	_struct_anchor_and_file citanie2  ; /* 2. citanie pre posvatne citanie */
+	_struct_anchor_and_file citanie_spompost ; /* 2011-03-16: "zneužité" (použité) pre hagiografické èítanie (¾ubovo¾nej) spomienky svätca v pôste; 2011-03-25: nový typ -> nové meno */
+	_struct_anchor_and_file ant_chval ; /* vigília: antifóna pre chválospevy */
+	_struct_anchor_and_file chval1    ; /* vigília: chválospev I */
+	_struct_anchor_and_file chval2    ; /* vigília: chválospev II */
+	_struct_anchor_and_file chval3    ; /* vigília: chválospev III */
+	_struct_anchor_and_file evanjelium; /* vigília: evanjelium */
+	_struct_anchor_and_file modlitba  ;
+};
+typedef struct tmodlitba5 _type_posv_citanie;
 
 struct den_mesiac{ /* takto povodne vyzerala struct dm */
 	short int den;        /* cislo dna mesiaca (1--31) */
@@ -1096,6 +1118,7 @@ extern short int _global_opt5; /* pridane 2003-08-07 */
 extern short int _global_opt6; /* pridané 2007-06-01 */
 extern short int _global_opt7; /* pridané 2007-06-01 */
 extern short int _global_opt8; /* pridané 2011-03-22 */
+extern short int _global_opt9; /* pridané 2011-03-25 */
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
 extern char *_global_string;
@@ -1297,6 +1320,28 @@ void _init_dm(_struct_dm a);
 	_INIT_ANCHOR_AND_FILE(a.zalm1); \
 };
 
+/* 2011-03-25: doplnené pre posvätné èítanie */
+#define _INIT_TMODLITBA5(a) {\
+	_INIT_ANCHOR_AND_FILE(a.popis); \
+	_INIT_ANCHOR_AND_FILE(a.hymnus); \
+	_INIT_ANCHOR_AND_FILE(a.antifona1); \
+	_INIT_ANCHOR_AND_FILE(a.zalm1); \
+	_INIT_ANCHOR_AND_FILE(a.antifona2); \
+	_INIT_ANCHOR_AND_FILE(a.zalm2); \
+	_INIT_ANCHOR_AND_FILE(a.antifona3); \
+	_INIT_ANCHOR_AND_FILE(a.zalm3); \
+	_INIT_ANCHOR_AND_FILE(a.kresponz); \
+	_INIT_ANCHOR_AND_FILE(a.citanie1); \
+	_INIT_ANCHOR_AND_FILE(a.citanie2); \
+	_INIT_ANCHOR_AND_FILE(a.citanie_spompost); \
+	_INIT_ANCHOR_AND_FILE(a.ant_chval); \
+	_INIT_ANCHOR_AND_FILE(a.chval1); \
+	_INIT_ANCHOR_AND_FILE(a.chval2); \
+	_INIT_ANCHOR_AND_FILE(a.chval3); \
+	_INIT_ANCHOR_AND_FILE(a.evanjelium); \
+	_INIT_ANCHOR_AND_FILE(a.modlitba); \
+};
+
 #define Log_struktura_dm Log("  <dm>"); Log
 void Log(_struct_dm g);
 #define Log_struktura_rok Log("  <rok>"); Log
@@ -1309,6 +1354,8 @@ void Log(struct tmodlitba2);
 void Log(struct tmodlitba3);
 #define Log_struktura_tm4 Log("  <tm4>"); Log
 void Log(struct tmodlitba4);
+#define Log_struktura_tm5 Log("  <tm5>"); Log
+void Log(struct tmodlitba5);
 
 int _encode_spol_cast(short int, short int, short int);
 int _encode_spol_cast(short int, short int);

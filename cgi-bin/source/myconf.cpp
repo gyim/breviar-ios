@@ -48,6 +48,7 @@ short int cfg_option5_default;
 short int cfg_option6_default;
 short int cfg_option7_default;
 short int cfg_option8_default;
+short int cfg_option9_default;
 /* hodnoty options pre JAZYK_CZ */
 short int cfg_option1_cz;
 short int cfg_option2_cz;
@@ -56,6 +57,7 @@ short int cfg_option5_cz;
 short int cfg_option6_cz;
 short int cfg_option7_cz;
 short int cfg_option8_cz;
+short int cfg_option9_cz;
 /* hodnoty options pre JAZYK_CZ_OP */
 short int cfg_option1_czop;
 short int cfg_option2_czop;
@@ -64,6 +66,7 @@ short int cfg_option5_czop;
 short int cfg_option6_czop;
 short int cfg_option7_czop;
 short int cfg_option8_czop;
+short int cfg_option9_czop;
 
 void printConfigOptions(void){
 /* hodnoty options pre default jazyk, teda pre JAZYK_SK */
@@ -75,6 +78,7 @@ void printConfigOptions(void){
 	Log("cfg_option6_default == `%d'\n", cfg_option6_default);
 	Log("cfg_option7_default == `%d'\n", cfg_option7_default);
 	Log("cfg_option8_default == `%d'\n", cfg_option8_default);
+	Log("cfg_option9_default == `%d'\n", cfg_option9_default);
 /* hodnoty options pre JAZYK_CZ */
 	Log("=== CZ: Hodnoty option parametrov pre JAZYK_CZ ===\n");
 	Log("cfg_option1_cz == `%d'\n", cfg_option1_cz);
@@ -84,6 +88,7 @@ void printConfigOptions(void){
 	Log("cfg_option6_cz == `%d'\n", cfg_option6_cz);
 	Log("cfg_option7_cz == `%d'\n", cfg_option7_cz);
 	Log("cfg_option8_cz == `%d'\n", cfg_option8_cz);
+	Log("cfg_option9_cz == `%d'\n", cfg_option9_cz);
 /* hodnoty options pre JAZYK_CZ_OP */
 	Log("=== CZ_OP: Hodnoty option parametrov pre JAZYK_CZ_OP ===\n");
 	Log("cfg_option1_czop == `%d'\n", cfg_option1_czop);
@@ -93,6 +98,7 @@ void printConfigOptions(void){
 	Log("cfg_option6_czop == `%d'\n", cfg_option6_czop);
 	Log("cfg_option7_czop == `%d'\n", cfg_option7_czop);
 	Log("cfg_option8_czop == `%d'\n", cfg_option8_czop);
+	Log("cfg_option9_czop == `%d'\n", cfg_option9_czop);
 }
 
 void readConfig(void)
@@ -219,6 +225,10 @@ void readConfig(void)
 			if(isdigit(hodnota[0])){
 				cfg_option8_default = atoi(hodnota);
 			}
+		} else if (!strcmp(option, "ne_slav_sviat_vigilia_def")){
+			if(isdigit(hodnota[0])){
+				cfg_option9_default = atoi(hodnota);
+			}
 /* hodnoty options pre JAZYK_CZ */
 		} else if (!strcmp(option, "pevne_casti_modl_cz")){
 			if(isdigit(hodnota[0])){
@@ -248,6 +258,10 @@ void readConfig(void)
 			if(isdigit(hodnota[0])){
 				cfg_option8_cz = atoi(hodnota);
 			}
+		} else if (!strcmp(option, "ne_slav_sviat_vigilia_cz")){
+			if(isdigit(hodnota[0])){
+				cfg_option9_cz = atoi(hodnota);
+			}
 /* hodnoty options pre JAZYK_CZ_OP */
 		} else if (!strcmp(option, "pevne_casti_modl_czop")){
 			if(isdigit(hodnota[0])){
@@ -276,6 +290,10 @@ void readConfig(void)
 		} else if (!strcmp(option, "button_prve_vespery_czop")){
 			if(isdigit(hodnota[0])){
 				cfg_option8_czop = atoi(hodnota);
+			}
+		} else if (!strcmp(option, "ne_slav_sviat_vigilia_czop")){
+			if(isdigit(hodnota[0])){
+				cfg_option9_czop = atoi(hodnota);
 			}
 		}
 

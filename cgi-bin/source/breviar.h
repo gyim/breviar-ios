@@ -146,6 +146,7 @@ extern short int _global_opt5; /* pridane 2003-08-07 */
 extern short int _global_opt6; /* pridané 2007-06-01 */
 extern short int _global_opt7; /* pridané 2007-06-01 */
 extern short int _global_opt8; /* pridané 2011-03-22 */
+extern short int _global_opt9; /* pridané 2011-03-25 */
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
 extern char *_global_string;
@@ -211,9 +212,9 @@ extern short int _global_opt_export_date_format;
 ) \
 ||  \
 (_global_modlitba == MODL_POSV_CITANIE &&  \
-	(_global_modl_posv_citanie.prosby.anchor != NULL) && (_global_modl_posv_citanie.prosby.file != NULL) && \
-	(strcmp(_global_modl_posv_citanie.prosby.anchor, EMPTY_STR) != 0) && (strcmp(_global_modl_posv_citanie.prosby.anchor, STR_UNDEF) != 0) &&  \
-	(strcmp(_global_modl_posv_citanie.prosby.file, EMPTY_STR) != 0) && (strcmp(_global_modl_posv_citanie.prosby.file, STR_UNDEF) != 0) \
+	(_global_modl_posv_citanie.citanie_spompost.anchor != NULL) && (_global_modl_posv_citanie.citanie_spompost.file != NULL) && \
+	(strcmp(_global_modl_posv_citanie.citanie_spompost.anchor, EMPTY_STR) != 0) && (strcmp(_global_modl_posv_citanie.citanie_spompost.anchor, STR_UNDEF) != 0) &&  \
+	(strcmp(_global_modl_posv_citanie.citanie_spompost.file, EMPTY_STR) != 0) && (strcmp(_global_modl_posv_citanie.citanie_spompost.file, STR_UNDEF) != 0) \
 ) \
 ))
 
