@@ -821,8 +821,9 @@ extern const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1];
 #define LIT_FARBA_CIERNA			6
 #define LIT_FARBA_FIALOVA_CIERNA	7 /* LIT_FARBA_FIALOVA a LIT_FARBA_CIERNA */
 #define LIT_FARBA_FIALOVA_BIELA		8 /* LIT_FARBA_FIALOVA a LIT_FARBA_BIELA */
+#define LIT_FARBA_RUZOVA_FIALOVA	9 /* LIT_FARBA_RUZOVA a LIT_FARBA_FIALOVA */
 
-#define POCET_FARIEB				8
+#define POCET_FARIEB				9
 #define POCET_FARIEB_REALNYCH		6
 
 /* nazov_farby: string pre názov liturgickej farby */

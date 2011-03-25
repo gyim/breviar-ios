@@ -3341,7 +3341,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 						_global_den.smer = 2; /* nedele adventne, postne a velkonocne */
 						/* 2006-08-22: pre 4. pÙstnu nedeæu je ruûov· farbe r˙cha */
 						if(_global_den.denvr == PN4)
-							_global_den.farba = LIT_FARBA_RUZOVA; /* 2006-08-22: pridanÈ */
+							_global_den.farba = LIT_FARBA_RUZOVA_FIALOVA; /* 2006-08-22: pridanÈ; 2011-03-25: upravenÈ */
 					}
 					else{
 						/* vsedny den v poste */
@@ -3727,7 +3727,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					}
 					/* 2006-08-22: pre 3. adventn˙ nedeæu je ruûov· farbe r˙cha */
 					if(_global_den.denvr == AN3)
-						_global_den.farba = LIT_FARBA_RUZOVA; /* 2006-08-22: pridanÈ */
+						_global_den.farba = LIT_FARBA_RUZOVA_FIALOVA; /* 2006-08-22: pridanÈ; 2011-03-25: upravenÈ */
 				}/* if(_global_den.denvr < NAR) */
 				else if(_global_den.denvr >= NAR){
 					/* vianocne obdobie */
@@ -4528,10 +4528,18 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	/* 2011-03-24: zloûenÈ farby
 		LIT_FARBA_FIALOVA_CIERNA	== LIT_FARBA_FIALOVA a LIT_FARBA_CIERNA
 		LIT_FARBA_FIALOVA_BIELA		== LIT_FARBA_FIALOVA a LIT_FARBA_BIELA
+	 * 2011-03-25: eöte zloûen· farba
+		LIT_FARBA_RUZOVA_FIALOVA	== LIT_FARBA_RUZOVA a LIT_FARBA_FIALOVA
 	 */
-	if((liturgicka_farba == LIT_FARBA_FIALOVA_CIERNA) || (liturgicka_farba == LIT_FARBA_FIALOVA_BIELA)){
-		liturgicka_farba_alt = (liturgicka_farba == LIT_FARBA_FIALOVA_CIERNA)? LIT_FARBA_CIERNA : LIT_FARBA_BIELA;
-		liturgicka_farba = LIT_FARBA_FIALOVA;
+	if((liturgicka_farba == LIT_FARBA_FIALOVA_CIERNA) || (liturgicka_farba == LIT_FARBA_FIALOVA_BIELA) || (liturgicka_farba == LIT_FARBA_RUZOVA_FIALOVA)){
+		if(liturgicka_farba == LIT_FARBA_RUZOVA_FIALOVA){
+			liturgicka_farba_alt = LIT_FARBA_FIALOVA;
+			liturgicka_farba = LIT_FARBA_RUZOVA;
+		}
+		else{
+			liturgicka_farba_alt = (liturgicka_farba == LIT_FARBA_FIALOVA_CIERNA)? LIT_FARBA_CIERNA : LIT_FARBA_BIELA;
+			liturgicka_farba = LIT_FARBA_FIALOVA;
+		}
 	}
 	else{
 		liturgicka_farba_alt = LIT_FARBA_NEURCENA;
@@ -9298,6 +9306,9 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 	/* zisti denny cas */
 	/* 2009-05-22: pÙvodne tu bolo: timer = time(NULL); 
 	 * Pavel KuËera <teni@volny.cz> vöak poprosil, aby aj po polnoci eöte chvÌæu bolo moûnÈ modliù sa kompletÛrium
+	 * posunutÈ na pol tretiu: m· to hlbok˙ logiku: pravdepodobne nik sa -- hoci aj po polnoci -- nemodlÌ ofÌcium z nasledovnÈho dÚa... 
+	 * invitatÛrium by malo byù prvou rannou modlitbou po zobudenÌ. 
+	 * myslÌm, ûe s˙ v˝nimoËnÈ prÌpady, ûe æuda regulÈrne modliaci sa brevi·r vst·vaj˙ o jednej, o druhej v noci (ËÌm zaËne ich nov˝ deÚ).
 	 */
 	timer = time(NULL)-(time_t)(2.5*60*60);
 
