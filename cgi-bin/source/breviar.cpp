@@ -193,6 +193,8 @@
 /*                    parameter o8 zatiaæ neexportuje)                     */
 /*   2011-03-25a.D. | doplnenie moûnosti predÂûenej vigÌlie (option 9)     */
 /*                  - moûnosù force pre option 9 + pridanie do formul·ra   */
+/*   2011-03-29a.D. | vysporiadanie sa so situ·ciou, keÔ include s˙bor     */
+/*                    obsahuje zabl˙den˝ znak '{' mimo regulÈrnej kotvy    */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -1353,8 +1355,9 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 #endif
 	while((c = fgetc(body)) != EOF){
 		switch (c){
+			/* 2011-03-29: ak sa nach·dza znak CHAR_KEYWORD_BEGIN (t. j. '{') len tak voæne v texte, program zblbol; nevedel zistiù, Ëi ide o keyword alebo nie; pokus o opravu */
 			case CHAR_KEYWORD_BEGIN:
-				isbuff= 1;
+				isbuff = 1;
 				buff_index = 0;
 				continue;
 			case CHAR_KEYWORD_END:
@@ -1613,16 +1616,30 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 
 				}/* !equalsi(rest, modlparam) */
 				continue;
-		}
+		}/* switch(c) */
 		if(!isbuff){
 			if(write){
 				Export("%c", c); /* fputc(c, exportfile); */
 				DetailLog("%c", c);
 			}
 			else ; //skip
-		}
-		else strbuff[buff_index++] = (char)c;
-	}
+		}/* if(!isbuff) */
+		else{
+			strbuff[buff_index++] = (char)c;
+			/* 2011-03-29: doplnen· kontrola, Ëi nejde o osamoten˝ znak '{' */
+			if((isbuff == 1) && ((strlen(strbuff) > MAX_BUFFER - 1)) || (buff_index > MAX_BUFFER - 1)){
+				Log("pravdepodobne osamoten˝ znak '{'...\n");
+				isbuff = 0;
+				if(write){
+					Export("%s", strbuff);
+					DetailLog("%s", strbuff);
+				}
+				/* vyËistenie buffra */
+				buff_index = 0;
+				strbuff[buff_index] = '\0';
+			}
+		}/* else if(!isbuff) */
+	}/* while((c = fgetc(body)) != EOF) */
 	fclose(body);
 	Log("--includeFile(): end\n");
 }
@@ -2656,7 +2673,9 @@ void interpretParameter(short int type, char *paramname){
 		/* pridane 2003-11-20 */
 		if(type == MODL_POSV_CITANIE){
 			strcat(path, _global_modl_posv_citanie.citanie1.file);
+			Log("interpretParameter(): equals(paramname, PARAM_CITANIE1). idem spustiù includeFile()...\n");
 			includeFile(type, paramname, path, _global_modl_posv_citanie.citanie1.anchor);
+			Log("interpretParameter(): equals(paramname, PARAM_CITANIE1), po spustenÌ includeFile().\n");
 		}
 		else /* ostatne modlitby 1. citanie nemaju */
 		;
