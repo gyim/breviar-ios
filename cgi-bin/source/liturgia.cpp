@@ -282,6 +282,7 @@ short int _deallocate_global_var(void){
 	Log("_global_modl_1kompletorium_ptr\n"); free(_global_modl_1kompletorium_ptr);
 	Log("_global_modl_invitatorium_ptr\n"); free(_global_modl_invitatorium_ptr);
 	Log("_global_modl_ranne_chvaly_ptr\n"); free(_global_modl_ranne_chvaly_ptr);
+	Log("_global_modl_posv_citanie_ptr\n"); free(_global_modl_posv_citanie_ptr); // 2011-03-29: doplnené
 	Log("_global_modl_cez_den_9_ptr\n"); free(_global_modl_cez_den_9_ptr);
 	Log("_global_modl_cez_den_12_ptr\n"); free(_global_modl_cez_den_12_ptr);
 	Log("_global_modl_cez_den_3_ptr\n"); free(_global_modl_cez_den_3_ptr);

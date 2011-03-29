@@ -138,10 +138,10 @@ typedef struct _anchor_and_file _struct_anchor_and_file;
 /* vers po psalmodii pred citaniami - je kresponz */
 
 /* prve  citanie aj s responzoriom za nim */
-#define	citanie1	kcitanie
+// #define	citanie1	kcitanie
 
 /* druhe citanie aj s responzoriom za nim */
-#define	citanie2	benediktus
+// #define	citanie2	benediktus
 
 /* prosby ostavaju pre posvatne citania nedefinovane */
 
