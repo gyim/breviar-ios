@@ -858,7 +858,7 @@ const char *html_button_popoludni[POCET_JAZYKOV + 1] = {"15h", "15h", "15h", "No
 #define HTML_BUTTON_POPOLUDNI	html_button_popoludni[_global_jazyk]
 #endif
 
-const char *html_button_vespery[POCET_JAZYKOV + 1] = {"Vešpery", "Nešpory", "Vesperae", "Vésperae", "", "Veèerní chvály", "Esti dicséret"};
+const char *html_button_vespery[POCET_JAZYKOV + 1] = {"Vešpery", "Nešpory", "Vesperae", "Vesperae", "", "Veèerní chvály", "Esti dicséret"};
 #ifndef HTML_BUTTON_VESPERY
 #define HTML_BUTTON_VESPERY	html_button_vespery[_global_jazyk]
 #endif
@@ -875,7 +875,7 @@ const char *html_button_nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV 
 , {"9h", "9h", "9h", "Tertia", "", "Tercie", "Délelõtt"}
 , {"12h", "12h", "12h", "Sexta", "", "Sexta", "Délben"}
 , {"15h", "15h", "15h", "Nona", "", "Nona", "Délután"}
-, {"Vešpery", "Nešpory", "Vesperae", "Vésperae", "", "Veèerní chvály", "Esti dicséret"}
+, {"Vešpery", "Nešpory", "Vesperae", "Vesperae", "", "Veèerní chvály", "Esti dicséret"}
 , {"Kompl.", "Kompl.", "Compl.", "Compl.", "", "Kompl.", "Bef."}
 // táto sa pre HTML buttony nepouíva
 	, {"neurèená", "neurèena", "not-defined", "no data", "", "neurèena", "nem azonosított"}
@@ -1360,6 +1360,25 @@ const char *html_text_zobrazit_vigiliu_explain[POCET_JAZYKOV + 1] =
  "",
  "", 
  "Tí, èo chcú pod¾a tradície predåi vigíliu nedele, slávnosti alebo sviatku, èo sa ve¾mi odporúèa, najprv recitujú posvätné èítanie; po oboch èítaniach, pred hymnom Te Deum, pridávajú sa chválospevy a evanjelium.", 
+ "hu_"
+};
+
+const char *html_text_zobrazit_cislovanie_versov[POCET_JAZYKOV + 1] = 
+{"zobrazi <i>èíslovanie veršov</i> pre almy, chválospevy a dlhšie biblické èítania", 
+ "zobrazit <i>èíslování veršù</i> pro almy, kantika a dlhší biblická ètení", 
+ "display <i>verse numbering</i> for psalms, canticles and longer biblical readings", 
+ "",
+ "",
+ "zobrazit <i>èíslování veršù</i> pro almy, kantika a dlhší biblická ètení", 
+ "hu_"
+};
+const char *html_text_zobrazit_cislovanie_versov_explain[POCET_JAZYKOV + 1] = 
+{"Liturgia hodín (latinské typické vydanie) zobrazuje èíslovanie veršov v rámci almu, chválospevu alebo dlhšieho biblického èítania; niektoré vydania tieto èísla veršov neuvádzajú.", 
+ "xxx", 
+ "xxx", 
+ "",
+ "", 
+ "xxx", 
  "hu_"
 };
 

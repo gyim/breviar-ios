@@ -125,3 +125,10 @@ h1 { font-size: 180%; }
 h2 { font-size: 150%; }
 h3 { font-size: 100%; }
 h4 { font-size: 100%; }
+
+sup {
+	vertical-align: baseline;
+	font-size: 0.7em;
+	position: relative;
+	top: -0.4em;
+}

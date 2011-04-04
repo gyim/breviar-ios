@@ -62,7 +62,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2011-03-30"
+#define BUILD_DATE "2011-04-04"
 
 #define BYTES 250
 #define SMALL 80
@@ -451,6 +451,13 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPT9 "o9"
 #endif
 
+#define MODL_OPT0 45
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPT0 "MODL_OPT0"
+#else
+	#define STR_MODL_OPT0 "o0"
+#endif
+
 /* --- force verzie pre o1 až o5 --- */
 #define MODL_OPTF1 51
 #ifdef LONG_PARAM_NAMES
@@ -500,6 +507,13 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPTF9 "MODL_OPTF9"
 #else
 	#define STR_MODL_OPTF9 "of9"
+#endif
+
+#define MODL_OPTF0 59
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF0 "MODL_OPTF0"
+#else
+	#define STR_MODL_OPTF0 "of0"
 #endif
 
 /* 2008-08-08: Pridané kvôli rôznym css */

@@ -33,6 +33,7 @@ extern char cfg_HTTP_ADDRESS_default[MAX_HTTP_STR];
 extern char cfg_HTTP_DISPLAY_ADDRESS_default[MAX_HTTP_STR];
 extern char cfg_MAIL_ADDRESS_default[MAX_MAIL_STR];
 extern char cfg_INCLUDE_DIR_default [MAX_INCD_STR];
+
 /* hodnoty options pre default jazyk, teda pre JAZYK_SK */
 extern short int cfg_option1_default;
 extern short int cfg_option2_default;
@@ -42,6 +43,7 @@ extern short int cfg_option6_default;
 extern short int cfg_option7_default;
 extern short int cfg_option8_default;
 extern short int cfg_option9_default;
+extern short int cfg_option0_default;
 /* hodnoty options pre JAZYK_CZ */
 extern short int cfg_option1_cz;
 extern short int cfg_option2_cz;
@@ -51,6 +53,7 @@ extern short int cfg_option6_cz;
 extern short int cfg_option7_cz;
 extern short int cfg_option8_cz;
 extern short int cfg_option9_cz;
+extern short int cfg_option0_cz;
 /* hodnoty options pre JAZYK_CZ_OP */
 extern short int cfg_option1_czop;
 extern short int cfg_option2_czop;
@@ -60,6 +63,7 @@ extern short int cfg_option6_czop;
 extern short int cfg_option7_czop;
 extern short int cfg_option8_czop;
 extern short int cfg_option9_czop;
+extern short int cfg_option0_czop;
 
 #define CFG_OPTION1_DEFAULT (((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU))? cfg_option1_default: ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))? cfg_option1_cz: cfg_option1_default)
 #define CFG_OPTION2_DEFAULT (((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU))? cfg_option2_default: ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))? cfg_option2_cz: cfg_option2_default)
@@ -69,6 +73,7 @@ extern short int cfg_option9_czop;
 #define CFG_OPTION7_DEFAULT (((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU))? cfg_option7_default: ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))? cfg_option7_cz: cfg_option7_default)
 #define CFG_OPTION8_DEFAULT (((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU) || (_global_jazyk == JAZYK_CZ))? cfg_option8_default: ((_global_jazyk == JAZYK_CZ_OP))? cfg_option8_czop: cfg_option8_default)
 #define CFG_OPTION9_DEFAULT (((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU))? cfg_option9_default: ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))? cfg_option9_cz: cfg_option9_default)
+#define CFG_OPTION0_DEFAULT (((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU))? cfg_option0_default: ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))? cfg_option0_cz: cfg_option0_default)
 
 void readConfig(void);
 void printConfig(void);

@@ -148,6 +148,7 @@ extern short int _global_opt6; /* pridané 2007-06-01 */
 extern short int _global_opt7; /* pridané 2007-06-01 */
 extern short int _global_opt8; /* pridané 2011-03-22 */
 extern short int _global_opt9; /* pridané 2011-03-25 */
+extern short int _global_opt0; /* pridané 2011-04-04 */
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
 extern char *_global_string;
@@ -298,6 +299,11 @@ extern short int _global_opt_export_date_format;
 		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT9, _global_opt9);\
 		strcat(pom2, pom3);\
 		Log("\tPrilepil som aj opt9: `%s' (2011-03-23)\n", pom3);\
+	}\
+	if(_global_opt0 != CFG_OPTION0_DEFAULT){\
+		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT0, _global_opt0);\
+		strcat(pom2, pom3);\
+		Log("\tPrilepil som aj opt0: `%s' (2011-03-23)\n", pom3);\
 	}\
 }
 

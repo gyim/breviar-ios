@@ -352,6 +352,10 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 #define CHAR_KEYWORD_BEGIN   '{'
 #define CHAR_KEYWORD_END     '}'
 #define CHAR_KEYWORD_DIVIDER ':'
+/*
+#define CHAR_KEYWORD2_BEGIN  '<'
+#define CHAR_KEYWORD2_END    '>'
+*/
 
 /* include parameters (parametre v inkludovanych suboroch) */
 #define INCLUDE_BEGIN   "BEGIN" /* zaciatok */
@@ -446,6 +450,10 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 #define PARAM_POST_SPOMIENKA_END             "POST_SPOMIENKA_END"
 /* 2011-01-12: doplnené zobrazenie/skrytie alternatívnej antifóny žalmu/chválospevu ("myšlienka k žalmu" pod¾a bodu 111 VSLH) */
 #define PARAM_MYSLIENKA_K_ZALMU              "MYSLIENKA_K_ZALMU"
+
+/* 2011-04-04: doplnené zobrazenie/skrytie èíslovania veršov v žalmoch, chválospevoch a biblických èítaniach */
+#define PARAM_CISLO_VERSA_BEGIN				"v"
+#define PARAM_CISLO_VERSA_END				"/v"
 
 /* stringy parametrov vstupu pre MODL_OPT..., ktore generovanie modlitby
  * ovplyvnuju */
@@ -1119,6 +1127,7 @@ extern short int _global_opt6; /* pridané 2007-06-01 */
 extern short int _global_opt7; /* pridané 2007-06-01 */
 extern short int _global_opt8; /* pridané 2011-03-22 */
 extern short int _global_opt9; /* pridané 2011-03-25 */
+extern short int _global_opt0; /* pridané 2011-04-04 */
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
 extern char *_global_string;
