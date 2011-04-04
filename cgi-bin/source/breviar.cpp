@@ -1747,7 +1747,35 @@ void interpretParameter(short int type, char *paramname){
 
 	Log("interpretParameter(%s): Dumping by %s\n", paramname, paramname);
 
-	if(equals(paramname, PARAM_ALELUJA_NIE_V_POSTE_BEGIN)){
+	if(equals(paramname, PARAM_CISLO_VERSA_BEGIN)){
+		if(_global_opt0 == NIE){
+			/*
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("<!--Ë.veröa:zaË.");
+#endif
+			Log("  ruöÌm writing to export file, kvÙli PARAM_CISLO_VERSA_BEGIN...\n");
+			*/
+			Export("<!--");
+		}
+		else{
+			Export("</b><sup class=\"red\">");
+		}
+	}/* zobraziù/nezobraziù ËÌslovanie veröov */
+	else if(equals(paramname, PARAM_CISLO_VERSA_END)){
+		if(_global_opt0 == NIE){
+			/*
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("Ë.veröa:end-->");
+#endif
+			Log("  op‰ù writing to export file, PARAM_CISLO_VERSA_END...\n");
+			*/
+			Export("-->");
+		}
+		else{
+			Export("</sup><b>");
+		}
+	}/* zobraziù/nezobraziù ËÌslovanie veröov */
+	else if(equals(paramname, PARAM_ALELUJA_NIE_V_POSTE_BEGIN)){
 		if(!je_post){
 #if defined(EXPORT_HTML_SPECIALS)
 			Export("nie je post");
