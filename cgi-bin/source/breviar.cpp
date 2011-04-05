@@ -1450,7 +1450,10 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 					if(equals(strbuff, PARAM_REFERENCIA_END) && (vnutri_inkludovaneho == 1)){
 						refbuff[ref_index] = '\0';
 						if(_global_opt0 == ANO){
+<<<<<<< HEAD
 							/* ToDo: èasom da odkaz napr. do konfiguraèného súboru */
+=======
+>>>>>>> 80c64ba65ff2fc1b70bbb8729f512a82a477f75b
 							Export("<a href=\"http://dkc.kbs.sk/?in=");
 							DetailLog("\trest     == %s\n", rest);
 							DetailLog("\trefrest  == %s\n", refrest);
