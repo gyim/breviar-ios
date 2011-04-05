@@ -502,6 +502,87 @@ char *caps_BIG(const char *input){
 	return (_global_pom_str);
 }
 
+/* ------------------------------------------------------------------- */
+/* odstráni diakritiku
+ * 2011-04-05: nesmie pritom v HTML stringoch upravova kódové mená, napr. &mdash;
+ */
+char *remove_diacritics(const char *input){
+	short int ok = TRUE;
+	short int i = 0;
+	char c;
+	mystrcpy(_global_pom_str, input, MAX_STR);
+	while(( c = _global_pom_str[i]) != '\0'){
+		if((c == '&') && (ok == TRUE)){
+			ok = FALSE;
+		}
+		if((c == ';') && (ok == FALSE)){
+			ok = TRUE;
+		}
+		/* 2011-01-31: ToDo: ešte by bolo potrebné ošetri aj to, e za & nenasleduje regulérny znak pre špeciálny HTML kód, t. j. nieèo iné ako upper+lowercase ascii abeceda + # a èíslice */
+		if(ok == TRUE){
+			switch(c){
+				/* samohlasky -- dlhe */
+				case 'á': c = 'a'; break;
+				case 'é': c = 'e'; break;
+				case 'í': c = 'i'; break;
+				case 'ó': c = 'o'; break;
+				case 'ú': c = 'u'; break;
+				case 'ı': c = 'y'; break;
+				case 'Á': c = 'A'; break;
+				case 'É': c = 'E'; break;
+				case 'Í': c = 'I'; break;
+				case 'Ó': c = 'O'; break;
+				case 'Ú': c = 'U'; break;
+				case 'İ': c = 'Y'; break;
+				/* samohlasky -- specialne */
+				case 'ä': c = 'a'; break;
+				case 'ô': c = 'o'; break;
+				case 'ì': c = 'e'; break;
+				case 'ù': c = 'u'; break;
+				case 'Ä': c = 'A'; break;
+				case 'Ô': c = 'O'; break;
+				case 'Ì': c = 'E'; break;
+				case 'Ù': c = 'U'; break;
+				/* spoluhlasky -- makke */
+				case 'è': c = 'c'; break;
+				case 'ï': c = 'd'; break;
+				case '¾': c = 'l'; break;
+				case 'ò': c = 'n'; break;
+				case 'ø': c = 'r'; break;
+				case 'š': c = 's'; break;
+				case '': c = 't'; break;
+				case '': c = 'z'; break;
+				case 'È': c = 'C'; break;
+				case 'Ï': c = 'D'; break;
+				case '¼': c = 'L'; break;
+				case 'Ò': c = 'N'; break;
+				case 'Ø': c = 'R'; break;
+				case 'Š': c = 'S'; break;
+				case '': c = 'T'; break;
+				case '': c = 'Z'; break;
+				/* spoluhlasky -- dlhe */
+				case 'å': c = 'l'; break;
+				case 'à': c = 'r'; break;
+				case 'Å': c = 'L'; break;
+				case 'À': c = 'R'; break;
+				/* maïarské znaky */
+				case 'û': c = 'u'; break;
+				case 'õ': c = 'o'; break;
+				case 'ü': c = 'u'; break;
+				case 'ö': c = 'o'; break;
+				case 'Û': c = 'U'; break;
+				case 'Õ': c = 'O'; break;
+				case 'Ü': c = 'U'; break;
+				case 'Ö': c = 'O'; break;
+			}/* switch */
+		}/* ok == TRUE */
+		if(_global_pom_str[i] != c)
+			_global_pom_str[i] = c;
+		i++;
+	}
+	return (_global_pom_str);
+}
+
 /* do globalneho stringu _global_link vrati retazec, ktory je linkou
  * na SCRIPT_NAME ++ ? zoznam param(i) = value(i)
  *

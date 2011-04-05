@@ -197,6 +197,8 @@
 /*                    obsahuje zablúdený znak '{' mimo regulérnej kotvy    */
 /*   2011-03-30a.D. | použitie PRILEP_REQUEST_OPTIONS na 6-tich rovnakých  */
 /*                    miestach (prilepovanie parametrov do query stringu)  */
+/*   2011-04-05a.D. | rozšírenie exportu (èíslovanie veršov, hypertextový  */
+/*                    odkaz na dkc.kbs.sk)                                 */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -1355,8 +1357,8 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 	char vnutri_inkludovaneho = 0; /* 17/02/2000A.D., kvoli "V.O. Aleluja" v inkludovanych napr. antifonach */
 	char zakoncenie[MAX_STR]; /* 2009-12-14: zakonèenie s ve¾kým písmenkom na zaèiatku, následne sa prípadne mení 1. písmeno na malé */
 	char vnutri_referencie = 0; /* 2011-04-05, kvôli biblickým referenciám v inkludovaných súboroch */
-	char refbuff[MAX_BUFFER];
-	char refrest[MAX_BUFFER];
+	char refbuff[MAX_BUFFER]; /* 2011-04-05: buffer pre referenciu */
+	char refrest[MAX_BUFFER]; /* 2011-04-05: 'rest' uložené zo zaèiatku referencie (používa sa až pri parsovaní konca referencie) */
 
 	Log("--includeFile(%d, %s, %s, %s): begin,\n",
 		type, paramname, fname, modlparam);
@@ -1456,9 +1458,9 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 							DetailLog("\trefrest  == %s\n", refrest);
 							if((refrest != NULL) && !(equals(refrest, STR_EMPTY))){
 								/* ToDo: doplni nevypisovanie refbuff, ak refrest obsahuje medzeru */
-								Export("%s", refrest);
+								Export("%s", remove_diacritics(refrest));
 							}/* naèítanie na zaèiatok referencie */
-							Export("%s\" target=\"_blank\" class=\"quiet\">", refbuff); /* a.quiet { text-decoration:none; color: inherit; } */
+							Export("%s\" target=\"_blank\" class=\"quiet\">", remove_diacritics(refbuff)); /* a.quiet { text-decoration:none; color: inherit; } */
 						}
 						Export("%s", refbuff);
 						if(_global_opt0 == ANO){

@@ -1185,6 +1185,7 @@ short int equalsi(char *, const char *);
 
 short int cislo_mesiaca(char *mesiac);
 char *caps_BIG(const char *input);
+char *remove_diacritics(const char *input);
 
 /* podla toho, ako sa funkcia vola, urcim case */
 #define vytvor_global_link(den, mesiac, rok, typ)	_vytvor_global_link(den, mesiac, rok, CASE_case, typ)
