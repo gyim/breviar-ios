@@ -33,6 +33,14 @@ body
 	font-size:75%;
 	color:#000;
 	}
+
+/* inherit nefunguje v IE 7 */
+a.quiet { text-decoration:none; color: inherit; }
+a.quiet:link { text-decoration:none; color: inherit; }
+a.quiet:hover { text-decoration:none; color: inherit; }
+a.quiet:visited { text-decoration:none; color: inherit; }
+a.quiet:active { text-decoration:none; color: inherit; }
+
 a
 	{
 	color:#A3561D;
@@ -118,3 +126,10 @@ fieldset
 	margin:5px 0px;
 	padding:10px;
 	}
+
+sup {
+	vertical-align: baseline;
+	font-size: 0.7em;
+	position: relative;
+	top: -0.4em;
+}

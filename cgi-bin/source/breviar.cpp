@@ -1347,13 +1347,16 @@ void _main_prazdny_formular(void){
  */
 #define DetailLog emptyLog
 void includeFile(short int type, char *paramname, char *fname, char *modlparam){
-	short int c, buff_index = 0; /* 01/03/2000A.D. - inicializacia buff_index */
+	short int c, buff_index = 0, ref_index = 0;
 	char strbuff[MAX_BUFFER];
 	char rest[MAX_BUFFER];
 	char isbuff = 0;
 	char write = 0;
 	char vnutri_inkludovaneho = 0; /* 17/02/2000A.D., kvoli "V.O. Aleluja" v inkludovanych napr. antifonach */
 	char zakoncenie[MAX_STR]; /* 2009-12-14: zakonËenie s veæk˝m pÌsmenkom na zaËiatku, n·sledne sa prÌpadne menÌ 1. pÌsmeno na malÈ */
+	char vnutri_referencie = 0; /* 2011-04-05, kvÙli biblick˝m referenci·m v inkludovan˝ch s˙boroch */
+	char refbuff[MAX_BUFFER];
+	char refrest[MAX_BUFFER];
 
 	Log("--includeFile(%d, %s, %s, %s): begin,\n",
 		type, paramname, fname, modlparam);
@@ -1431,6 +1434,42 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 					/* write = 0; -- aby mohli byt nestovane viacere :-) */
 					DetailLog("paramenter not matches: %s != %s\n", rest, modlparam);
 
+					/* 2011-04-05: upraviù referencie na hyperlinky */
+					if(equals(strbuff, PARAM_REFERENCIA_BEGIN) && (vnutri_inkludovaneho == 1)){
+						vnutri_referencie = 1;
+						write = 0;
+						ref_index = 0;
+						if(_global_opt0 == ANO){
+							if(rest != NULL){
+								mystrcpy(refrest, rest, MAX_BUFFER);
+							}
+							DetailLog("\trest     == %s\n", rest);
+							DetailLog("\trefrest  == %s\n", refrest);
+						}
+					}/* upraviù referencie na hyperlinky */
+					if(equals(strbuff, PARAM_REFERENCIA_END) && (vnutri_inkludovaneho == 1)){
+						refbuff[ref_index] = '\0';
+						if(_global_opt0 == ANO){
+							/* ToDo: Ëasom daù odkaz napr. do konfiguraËnÈho s˙boru */
+							Export("<a href=\"http://dkc.kbs.sk/?in=");
+							DetailLog("\trest     == %s\n", rest);
+							DetailLog("\trefrest  == %s\n", refrest);
+							if((refrest != NULL) && !(equals(refrest, STR_EMPTY))){
+								/* ToDo: doplniù nevypisovanie refbuff, ak refrest obsahuje medzeru */
+								Export("%s", refrest);
+							}/* naËÌtanie na zaËiatok referencie */
+							Export("%s\" target=\"_blank\" class=\"quiet\">", refbuff); /* a.quiet { text-decoration:none; color: inherit; } */
+						}
+						Export("%s", refbuff);
+						if(_global_opt0 == ANO){
+							Export("</a>");
+						}
+						vnutri_referencie = 0;
+						write = 1;
+						strcpy(refrest, STR_EMPTY);
+					}/* upraviù referencie na hyperlinky */
+
+					/* 2011-04-04: zobraziù/nezobraziù ËÌslovanie veröov */
 					if(equals(strbuff, PARAM_CISLO_VERSA_BEGIN) && (vnutri_inkludovaneho == 1)){
 						if(_global_opt0 == NIE){
 							write = 0;
@@ -1678,6 +1717,10 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 				continue;
 		}/* switch(c) */
 		if(!isbuff){
+			if(vnutri_referencie == 1){
+				/* bez ohæadu na to, ako je nastavenÈ write */
+				refbuff[ref_index++] = (char)c;
+			}
 			if(write){
 				Export("%c", c); /* fputc(c, exportfile); */
 				DetailLog("%c", c);
@@ -1697,7 +1740,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 				/* vyËistenie buffra */
 				buff_index = 0;
 				strbuff[buff_index] = '\0';
-			}
+			}/* osamoten˝ znak '{' */
 		}/* else if(!isbuff) */
 	}/* while((c = fgetc(body)) != EOF) */
 	fclose(body);
@@ -1748,32 +1791,36 @@ void interpretParameter(short int type, char *paramname){
 	Log("interpretParameter(%s): Dumping by %s\n", paramname, paramname);
 
 	if(equals(paramname, PARAM_CISLO_VERSA_BEGIN)){
-		if(_global_opt0 == NIE){
-			/*
-#if defined(EXPORT_HTML_SPECIALS)
-			Export("<!--Ë.veröa:zaË.");
-#endif
-			Log("  ruöÌm writing to export file, kvÙli PARAM_CISLO_VERSA_BEGIN...\n");
-			*/
-			Export("<!--");
-		}
-		else{
-			Export("</b><sup class=\"red\">");
-		}
+		if(_global_skip_in_prayer != ANO){
+			if(_global_opt0 == NIE){
+				/*
+	#if defined(EXPORT_HTML_SPECIALS)
+				Export("<!--Ë.veröa:zaË.");
+	#endif
+				Log("  ruöÌm writing to export file, kvÙli PARAM_CISLO_VERSA_BEGIN...\n");
+				*/
+				Export("<!--");
+			}
+			else{
+				Export("</b><sup class=\"red\">");
+			}
+		}/* skip in prayer */
 	}/* zobraziù/nezobraziù ËÌslovanie veröov */
 	else if(equals(paramname, PARAM_CISLO_VERSA_END)){
-		if(_global_opt0 == NIE){
-			/*
-#if defined(EXPORT_HTML_SPECIALS)
-			Export("Ë.veröa:end-->");
-#endif
-			Log("  op‰ù writing to export file, PARAM_CISLO_VERSA_END...\n");
-			*/
-			Export("-->");
-		}
-		else{
-			Export("</sup><b>");
-		}
+		if(_global_skip_in_prayer != ANO){
+			if(_global_opt0 == NIE){
+				/*
+	#if defined(EXPORT_HTML_SPECIALS)
+				Export("Ë.veröa:end-->");
+	#endif
+				Log("  op‰ù writing to export file, PARAM_CISLO_VERSA_END...\n");
+				*/
+				Export("-->");
+			}
+			else{
+				Export("</sup><b>");
+			}
+		}/* skip in prayer */
 	}/* zobraziù/nezobraziù ËÌslovanie veröov */
 	else if(equals(paramname, PARAM_ALELUJA_NIE_V_POSTE_BEGIN)){
 		if(!je_post){
