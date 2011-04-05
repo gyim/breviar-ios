@@ -455,6 +455,10 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 #define PARAM_CISLO_VERSA_BEGIN				"v"
 #define PARAM_CISLO_VERSA_END				"/v"
 
+/* 2011-04-05: doplnené dplnenie referencie pod¾a biblického odkazu na stránky dkc.kbs.sk (Biblia -- Matúš Brilla) */
+#define PARAM_REFERENCIA_BEGIN				"r"
+#define PARAM_REFERENCIA_END				"/r"
+
 /* stringy parametrov vstupu pre MODL_OPT..., ktore generovanie modlitby
  * ovplyvnuju */
 /* option 1 */

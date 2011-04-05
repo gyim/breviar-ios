@@ -36,6 +36,13 @@ p.patka {
 	margin-top: -1mm; 
 	letter-spacing: 0mm }
 
+/* inherit nefunguje v IE 7 */
+a.quiet { text-decoration:none; color: inherit; }
+a.quiet:link { text-decoration:none; color: inherit; }
+a.quiet:hover { text-decoration:none; color: inherit; }
+a.quiet:visited { text-decoration:none; color: inherit; }
+a.quiet:active { text-decoration:none; color: inherit; }
+
 a { font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; color: #000000; text-decoration: underline; }
 a:hover { color: white; background-color: #663300; text-decoration:none; }
 a:active { color: gray; text-decoration: underline; }
