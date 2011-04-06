@@ -1443,7 +1443,7 @@ const char *text_ZAKONCENIE_SKRZE_dlhe[POCET_JAZYKOV + 1] =
  "Per Dóminum nostrum Iesum Christum, Fílium tuum, qui tecum vivit et regnat in unitáte Spíritus Sancti, Deus, per ómnia saecula saeculórum.",
  "",
  "Skrze tvého Syna Jeíše Krista, našeho Pána, nebo on s tebou v jednotì Ducha Svatého ije a kraluje po všechny vìky vìkù.",
- "A mi Urunk, Jézus Krisztus, a te Fiad által, áld veled él és uralkodik a Szentlélekkel egységben, Isten mindörökkönörökké.",
+ "A mi Urunk, Jézus Krisztus, a te Fiad által, aki veled él és uralkodik a Szentlélekkel egységben, Isten mindörökkön-örökké.",
  };
 const char *text_ZAKONCENIE_SKRZE_kratke[POCET_JAZYKOV + 1] = 
 {"Skrze Krista, nášho Pána.",
@@ -1461,7 +1461,7 @@ const char *text_ZAKONCENIE_LEBO_ON_dlhe[POCET_JAZYKOV + 1] =
  "Qui tecum vivit et regnat in unitáte Spíritus Sancti, Deus, per ómnia saecula saeculórum.",
  "",
  "Nebo on s tebou v jednotì Ducha Svatého ije a kraluje po všechny vìky vìkù.",
- "Aki veled él és uralkodik a Szentlélekkel egységben, Isten mindörökkön-örökké.",
+ "Aki veled él és uralkodol a Szentlélekkel egységben, Isten mindörökkön-örökké.",
  };
 const char *text_ZAKONCENIE_LEBO_ON_kratke[POCET_JAZYKOV + 1] = 
 {"Lebo on ije a kra¾uje na veky vekov.",
@@ -1470,7 +1470,7 @@ const char *text_ZAKONCENIE_LEBO_ON_kratke[POCET_JAZYKOV + 1] =
  "Qui vivit et regnat in saecula saeculórum.",
  "",
  "Nebo on s tebou ije a kraluje na vìky vìkù.",
- "Aki él és uralkodik mindörökkön-örökké.",
+ "Aki él és uralkodol mindörökkön-örökké.",
  };
 const char *text_ZAKONCENIE_LEBO_TY_dlhe[POCET_JAZYKOV + 1] = 
 {"Lebo ty si Boh a iješ a kra¾uješ s Bohom Otcom v jednote s Duchom Svätım po všetky veky vekov.",
@@ -1479,7 +1479,7 @@ const char *text_ZAKONCENIE_LEBO_TY_dlhe[POCET_JAZYKOV + 1] =
  "Qui vivis et regnas cum Deo Patre in unitáte Spíritus Sancti, Deus, per ómnia saecula saeculórum.",
  "",
  "Nebo ty iješ a kraluješ s Bohem Otcem v jednotì Ducha Svatého po všechny vìky vìkù.",
- "Aki élsz és uralkodói az Atyaistennel és a Szentlélek­kel egységben, Isten mindörökkön-örökké.",
+ "Aki élsz és uralkodol az Atyaistennel és a Szentlélek­kel egységben, Isten mindörökkön-örökké.",
  };
 const char *text_ZAKONCENIE_LEBO_TY_kratke[POCET_JAZYKOV + 1] = 
 {"Lebo ty iješ a kra¾uješ na veky vekov.",
