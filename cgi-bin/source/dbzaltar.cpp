@@ -169,7 +169,9 @@
 /*   2011-02-18a.D. | opravy pre ant. benediktus+magnifikat pre spomienky v II. a III. zväzku   */
 /*   2011-03-07a.D. | MIESTNE_SLAVENIE_CZOP_SVATY1 až 3 použité aj pre iné (slovenské)          */
 /*                    lokálne slávenia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 až 3                   */
-/*   2011-03-14a.D. | na ostatné hodiny modlitby cez deò sa berie doplnková psalmódia           */
+/*   2011-03-14a.D. | na ostatné hodiny modlitby cez deò sa berie doplnková psalmódia (upravené)*/
+/*   2011-04-06a.D. | nastavenie antifón z doplnkovej psalmódie: funkcia                        */
+/*                    _set_antifony_mcd_doplnkova_psalmodia(void)                               */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
@@ -1494,20 +1496,45 @@ void set_kresponz_kompletorium_obd(short int den, short int tyzzal, short int mo
 
 /* nasledovné funkcie používame pre špeciálne nastavenia (ktoré sa èasto používajú), 2007-12-06 */
 
-void _set_zalm_cez_den_doplnkova_psalmodia(void){
+void _set_zalmy_mcd_doplnkova_psalmodia(void){
+	Log("_set_zalmy_mcd_doplnkova_psalmodia() -- begin\n");
 	/* modlitba predpoludnim, 1. seria doplnkovej psalmodie */
-		set_zalm(1, MODL_PREDPOLUDNIM, "z120.htm", "ZALM120");
-		set_zalm(2, MODL_PREDPOLUDNIM, "z121.htm", "ZALM121");
-		set_zalm(3, MODL_PREDPOLUDNIM, "z122.htm", "ZALM122");
+	set_zalm(1, MODL_PREDPOLUDNIM, "z120.htm", "ZALM120");
+	set_zalm(2, MODL_PREDPOLUDNIM, "z121.htm", "ZALM121");
+	set_zalm(3, MODL_PREDPOLUDNIM, "z122.htm", "ZALM122");
 	/* modlitba napoludnie, 2. seria doplnkovej psalmodie */
-		set_zalm(1, MODL_NAPOLUDNIE, "z123.htm", "ZALM123");
-		set_zalm(2, MODL_NAPOLUDNIE, "z124.htm", "ZALM124");
-		set_zalm(3, MODL_NAPOLUDNIE, "z125.htm", "ZALM125");
+	set_zalm(1, MODL_NAPOLUDNIE, "z123.htm", "ZALM123");
+	set_zalm(2, MODL_NAPOLUDNIE, "z124.htm", "ZALM124");
+	set_zalm(3, MODL_NAPOLUDNIE, "z125.htm", "ZALM125");
 	/* modlitba popoludni, 3. seria doplnkovej psalmodie */
-		set_zalm(1, MODL_POPOLUDNI, "z126.htm", "ZALM126");
-		set_zalm(2, MODL_POPOLUDNI, "z127.htm", "ZALM127");
-		set_zalm(3, MODL_POPOLUDNI, "z128.htm", "ZALM128");
-}
+	set_zalm(1, MODL_POPOLUDNI, "z126.htm", "ZALM126");
+	set_zalm(2, MODL_POPOLUDNI, "z127.htm", "ZALM127");
+	set_zalm(3, MODL_POPOLUDNI, "z128.htm", "ZALM128");
+	Log("_set_zalmy_mcd_doplnkova_psalmodia() -- end\n");
+	/* antifóny nastavuje funkcia _set_antifony_mcd_doplnkova_psalmodia() -- ale len pre cezroèné obdobie; pre vlastné sa používa define _vlastna_cast_mcd_ant_kcitresp_modl; */
+}/* _set_zalmy_mcd_doplnkova_psalmodia() */
+
+/* 2011-04-06: nastavenie správnych antifón z doplnkovej psalmódie */
+void _set_antifony_mcd_doplnkova_psalmodia(void){
+	Log("_set_antifony_mcd_doplnkova_psalmodia() -- begin\n");
+	char file[SMALL]; /* nazov súboru, napr. _1ne.htm */
+	char anchor[SMALL];
+	short int modlitba;
+	mystrcpy(file, FILE_DOPLNKOVA_PSALMODIA, MAX_STR_AF_FILE);
+	for(modlitba = MODL_PREDPOLUDNIM; modlitba <= MODL_POPOLUDNI; modlitba++){
+		/* modlitba predpoludnim -- napoludnie -- popoludní, 1. až 3. séria doplnkovej psalmódie */
+		sprintf(anchor, "%s%c_%s", ANCHOR_DOPLNKOVA_PSALMODIA, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1);
+		_set_antifona1(modlitba, file, anchor);
+		set_LOG_zaltar;
+		sprintf(anchor, "%s%c_%s", ANCHOR_DOPLNKOVA_PSALMODIA, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA2);
+		_set_antifona2(modlitba, file, anchor);
+		set_LOG_zaltar;
+		sprintf(anchor, "%s%c_%s", ANCHOR_DOPLNKOVA_PSALMODIA, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA3);
+		_set_antifona3(modlitba, file, anchor);
+		set_LOG_zaltar;
+	}/* for */
+	Log("_set_antifony_mcd_doplnkova_psalmodia() -- end\n");
+}/* _set_antifony_mcd_doplnkova_psalmodia() */
 
 /* 2006-01-24: pridané žalmy nedele 1. týždòa kvôli modlitbe cez deò */
 void _set_zalmy_1nedele_mcd(void){/* modlitba cez deò; rovnaké žalmy sú pre nede¾u 3. týždòa; 2007-01-11 */
@@ -2462,8 +2489,11 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 	Log("napokon idem pre modlitbu cez deò skontrolova, èi netreba bra doplnkovú psalmódiu...\n");
 	if(_global_opt5 == MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA){
 		Log("\táno, beriem doplnkovú psalmódiu.\n");
-		_set_zalm_cez_den_doplnkova_psalmodia();
+		_set_zalmy_mcd_doplnkova_psalmodia();
 		/* 2006-01-24: vyòaté do samostatnej funkcie */
+		if(_global_den.litobd == OBD_CEZ_ROK){
+			_set_antifony_mcd_doplnkova_psalmodia();
+		}/* pre cezroèné obdobie nastavíme aj antifóny */
 	}/* _global_opt5 == MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA */
 	else{
 		/* 2006-02-07: doplnené */
@@ -2761,7 +2791,7 @@ void _set_zalmy_posviacka_chramu(short int modlitba){
 		set_zalm(3, modlitba, "z87.htm", "ZALM87");
 	}
 	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
-		_set_zalm_cez_den_doplnkova_psalmodia();
+		_set_zalmy_mcd_doplnkova_psalmodia();
 	}
 	Log("_set_zalmy_posviacka_chramu(%s) -- end\n", nazov_modlitby(modlitba));
 }
@@ -2935,7 +2965,7 @@ void _set_zalmy_telakrvi(short int modlitba){
 	}
 	/* 2006-01-24: doplnené žalmy pre modlitbu cez deò */
 	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
-		_set_zalm_cez_den_doplnkova_psalmodia();
+		_set_zalmy_mcd_doplnkova_psalmodia();
 	}
 	Log("_set_zalmy_telakrvi(%s) -- end\n", nazov_modlitby(modlitba));
 }
@@ -2964,7 +2994,7 @@ void _set_zalmy_srdca(short int modlitba){
 	}
 	/* 2006-01-24: doplnené žalmy pre modlitbu cez deò */
 	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
-		_set_zalm_cez_den_doplnkova_psalmodia();
+		_set_zalmy_mcd_doplnkova_psalmodia();
 	}
 	Log("_set_zalmy_srdca(%s) -- end\n", nazov_modlitby(modlitba));
 }
@@ -5076,9 +5106,10 @@ label_24_DEC:
 				_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
 				_sv_rodiny_kresponz(_anchor_vlastne_slavenie);
 				_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+				/* 2011-04-06: hoci sú vo vlastnej èasti uvedené aj antifóny pre modlitbu cez deò, sú rovnaké ako pre vianoèné obdobie, preto netreba nastavova */
 				/* ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
 				if(_global_den.denvt != DEN_NEDELA) {
-					_set_zalm_cez_den_doplnkova_psalmodia();
+					_set_zalmy_mcd_doplnkova_psalmodia();
 				}
 				else {
 					_set_zalmy_1nedele_mcd();
@@ -5088,9 +5119,10 @@ label_24_DEC:
 				_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
 				_sv_rodiny_kresponz(_anchor_vlastne_slavenie);
 				_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+				/* 2011-04-06: hoci sú vo vlastnej èasti uvedené aj antifóny pre modlitbu cez deò, sú rovnaké ako pre vianoèné obdobie, preto netreba nastavova */
 				/* ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
 				if(_global_den.denvt != DEN_NEDELA) {
-					_set_zalm_cez_den_doplnkova_psalmodia();
+					_set_zalmy_mcd_doplnkova_psalmodia();
 				}
 				else {
 					_set_zalmy_1nedele_mcd();
@@ -5100,9 +5132,10 @@ label_24_DEC:
 				_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
 				_sv_rodiny_kresponz(_anchor_vlastne_slavenie);
 				_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+				/* 2011-04-06: hoci sú vo vlastnej èasti uvedené aj antifóny pre modlitbu cez deò, sú rovnaké ako pre vianoèné obdobie, preto netreba nastavova */
 				/* ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
 				if(_global_den.denvt != DEN_NEDELA) {
-					_set_zalm_cez_den_doplnkova_psalmodia();
+					_set_zalmy_mcd_doplnkova_psalmodia();
 				}
 				else {
 					_set_zalmy_1nedele_mcd();
@@ -9586,8 +9619,8 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty
 	if((_global_den.typslav == SLAV_SLAVNOST) || (_global_svaty1.typslav == SLAV_SLAVNOST)){
 		Log("	teraz nastavujem žalmy pre modlitbu cez deò slávností...\n");
 		if(_global_den.denvt != DEN_NEDELA){
-			Log("  _set_zalm_cez_den_doplnkova_psalmodia()...\n");
-			_set_zalm_cez_den_doplnkova_psalmodia();
+			Log("  _set_zalmy_mcd_doplnkova_psalmodia()...\n");
+			_set_zalmy_mcd_doplnkova_psalmodia();
 		}
 		else{
 			// nede¾a - žalmy pre modlitbu cez deò sú z nedele; nemením ich, ibaže by boli pod¾a bodu 135 smerníc nastavené vlastné
@@ -10313,7 +10346,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 
 							/* 2010-10-18: ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
 							if(_global_den.denvt != DEN_NEDELA) {
-								_set_zalm_cez_den_doplnkova_psalmodia();
+								_set_zalmy_mcd_doplnkova_psalmodia();
 							}
 							else {
 								_set_zalmy_1nedele_mcd();
@@ -12889,7 +12922,7 @@ label_19_MAR:
 
 						/* 2006-02-04: ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
 						if(_global_den.denvt != DEN_NEDELA) {
-							_set_zalm_cez_den_doplnkova_psalmodia();
+							_set_zalmy_mcd_doplnkova_psalmodia();
 						}
 						else {
 							_set_zalmy_1nedele_mcd();
@@ -13004,7 +13037,7 @@ label_25_MAR:
 
 						/* 2006-02-04: ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
 						if(_global_den.denvt != DEN_NEDELA) {
-							_set_zalm_cez_den_doplnkova_psalmodia();
+							_set_zalmy_mcd_doplnkova_psalmodia();
 						}
 						else {
 							_set_zalmy_1nedele_mcd();
@@ -16673,7 +16706,7 @@ label_25_MAR:
 
 						/* 2006-02-04: ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
 						if(_global_den.denvt != DEN_NEDELA) {
-							_set_zalm_cez_den_doplnkova_psalmodia();
+							_set_zalmy_mcd_doplnkova_psalmodia();
 						}
 						else {
 							_set_zalmy_1nedele_mcd();
@@ -16913,7 +16946,7 @@ label_25_MAR:
 
 						/* 2006-02-04: ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
 						if(_global_den.denvt != DEN_NEDELA) {
-							_set_zalm_cez_den_doplnkova_psalmodia();
+							_set_zalmy_mcd_doplnkova_psalmodia();
 						}
 						else {
 							_set_zalmy_1nedele_mcd();
@@ -17293,7 +17326,7 @@ label_25_MAR:
 
 							/* 2006-02-04: ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
 							if(_global_den.denvt != DEN_NEDELA) {
-								_set_zalm_cez_den_doplnkova_psalmodia();
+								_set_zalmy_mcd_doplnkova_psalmodia();
 							}
 							else {
 								_set_zalmy_1nedele_mcd();
@@ -18186,7 +18219,7 @@ label_25_MAR:
 
 							/* 2010-10-18: ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
 							if(_global_den.denvt != DEN_NEDELA) {
-								_set_zalm_cez_den_doplnkova_psalmodia();
+								_set_zalmy_mcd_doplnkova_psalmodia();
 							}
 							else {
 								_set_zalmy_1nedele_mcd();
@@ -18270,7 +18303,7 @@ label_25_MAR:
 
 							/* 2010-10-11: ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
 							if(_global_den.denvt != DEN_NEDELA) {
-								_set_zalm_cez_den_doplnkova_psalmodia();
+								_set_zalmy_mcd_doplnkova_psalmodia();
 							}
 							else {
 								_set_zalmy_1nedele_mcd();
@@ -18538,7 +18571,7 @@ label_25_MAR:
 						/* 2008-06-30: prevzaté pod¾a 15. augusta */
 						/* 2006-02-04: ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
 						if(_global_den.denvt != DEN_NEDELA) {
-							_set_zalm_cez_den_doplnkova_psalmodia();
+							_set_zalmy_mcd_doplnkova_psalmodia();
 						}
 						else {
 							_set_zalmy_1nedele_mcd();
@@ -18692,7 +18725,7 @@ label_25_MAR:
 
 							/* ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
 							if(_global_den.denvt != DEN_NEDELA) {
-								_set_zalm_cez_den_doplnkova_psalmodia();
+								_set_zalmy_mcd_doplnkova_psalmodia();
 							}
 							else {
 								_set_zalmy_1nedele_mcd();
@@ -18939,7 +18972,7 @@ label_25_MAR:
 
 						/* 2006-02-04: ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
 						if(_global_den.denvt != DEN_NEDELA) {
-							_set_zalm_cez_den_doplnkova_psalmodia();
+							_set_zalmy_mcd_doplnkova_psalmodia();
 						}
 						else {
 							_set_zalmy_1nedele_mcd();
@@ -20001,7 +20034,7 @@ label_25_MAR:
 
 							/* 2006-02-04: ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
 							if(_global_den.denvt != DEN_NEDELA) {
-								_set_zalm_cez_den_doplnkova_psalmodia();
+								_set_zalmy_mcd_doplnkova_psalmodia();
 							}
 							else {
 								_set_zalmy_1nedele_mcd();
@@ -20613,7 +20646,7 @@ label_25_MAR:
 
 							/* ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
 							if(_global_den.denvt != DEN_NEDELA) {
-								_set_zalm_cez_den_doplnkova_psalmodia();
+								_set_zalmy_mcd_doplnkova_psalmodia();
 							}
 							else {
 								_set_zalmy_1nedele_mcd();
@@ -22003,7 +22036,7 @@ label_25_MAR:
 
 						/* 2006-02-04: ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
 						if(_global_den.denvt != DEN_NEDELA) {
-							_set_zalm_cez_den_doplnkova_psalmodia();
+							_set_zalmy_mcd_doplnkova_psalmodia();
 						}
 						else {
 							_set_zalmy_1nedele_mcd();
@@ -23500,7 +23533,7 @@ label_8_DEC:
 
 						/* 2006-02-04: ak je modlitba cez deò na slávnos, tak by sa mali použi žalmy z doplnkovej psalmódie */
 						if(_global_den.denvt != DEN_NEDELA) {
-							_set_zalm_cez_den_doplnkova_psalmodia();
+							_set_zalmy_mcd_doplnkova_psalmodia();
 						}
 						else {
 							_set_zalmy_1nedele_mcd();

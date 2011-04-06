@@ -120,6 +120,9 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 #define ANCHOR_KRST_PANA "KRST"
 #define FILE_KRST_PANA "krst.htm" /* 14/03/2000A.D. -- kotvy v nom su podla ANCHOR_KRST_PANA */
 
+#define ANCHOR_DOPLNKOVA_PSALMODIA "PSCOM"
+#define FILE_DOPLNKOVA_PSALMODIA "pscom.htm"
+
 #define ANCHOR_CSSR_TITUL "TITUL"
 
 extern const char *text_JAN_01[POCET_JAZYKOV + 1];

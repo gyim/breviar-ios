@@ -199,6 +199,8 @@
 /*                    miestach (prilepovanie parametrov do query stringu)  */
 /*   2011-04-05a.D. | rozöÌrenie exportu (ËÌslovanie veröov, hypertextov˝  */
 /*                    odkaz na dkc.kbs.sk)                                 */
+/*   2011-04-06a.D. | nastavenie antifÛn z doplnkovej psalmÛdie: funkcia   */
+/*                    _set_antifony_mcd_doplnkova_psalmodia(void)          */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -5394,6 +5396,8 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 			Export("%s", html_button_nazov_modlitby(i));
 			Export("\">\n");
 			Export("</form>\n");
+// 2011-04-06: odvetvenÈ, aby sa to nedostalo na web resp. jeho simul·ciu, teda len pre command-line export (tam BEHAVIOUR_CMDLINE)
+#ifndef BEHAVIOUR_WEB
 			if(_global_opt5 != MODL_CEZ_DEN_ZALMY_ZO_DNA){
 				INIT_POM(pom, i, _global_opt5);
 				Export("<form action=\"%s\">\n", pom);
@@ -5402,16 +5406,20 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 				Export("\">\n");
 				Export("</form>\n");
 			}/* alternatÌva s doplnkovou psalmÛdiou */
+#endif
 		}
 		else{
 			Export("%s", nazov_modlitby(i));
 			Export("</a>\n");
+// 2011-04-06: odvetvenÈ, aby sa to nedostalo na web resp. jeho simul·ciu, teda len pre command-line export (tam BEHAVIOUR_CMDLINE)
+#ifndef BEHAVIOUR_WEB
 			if(_global_opt5 != MODL_CEZ_DEN_ZALMY_ZO_DNA){
 				INIT_POM(pom, i, _global_opt5);
 				Export("<a href=\"%s\">\n", pom);
 				Export("(alt)"); // alternatÌva s doplnkovou psalmÛdiou [prÌpadne neskÙr dorieöiù krajöie]
 				Export("</a>\n");
 			}/* alternatÌva s doplnkovou psalmÛdiou */
+#endif
 		}
 
 		/* oddelenie */
@@ -5441,6 +5449,8 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 			Export("%s", html_button_nazov_modlitby(i));
 			Export("\">\n");
 			Export("</form>\n");
+// 2011-04-06: odvetvenÈ, aby sa to nedostalo na web resp. jeho simul·ciu, teda len pre command-line export (tam BEHAVIOUR_CMDLINE)
+#ifndef BEHAVIOUR_WEB
 			if(_global_opt5 != MODL_CEZ_DEN_ZALMY_ZO_DNA){
 				INIT_POM(pom, i, _global_opt5);
 				Export("<form action=\"%s\">\n", pom);
@@ -5449,16 +5459,20 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 				Export("\">\n");
 				Export("</form>\n");
 			}/* alternatÌva s doplnkovou psalmÛdiou */
+#endif
 		}
 		else{
 			Export("%s", nazov_modlitby(i));
 			Export("</a>\n");
+// 2011-04-06: odvetvenÈ, aby sa to nedostalo na web resp. jeho simul·ciu, teda len pre command-line export (tam BEHAVIOUR_CMDLINE)
+#ifndef BEHAVIOUR_WEB
 			if(_global_opt5 != MODL_CEZ_DEN_ZALMY_ZO_DNA){
 				INIT_POM(pom, i, _global_opt5);
 				Export("<a href=\"%s\">\n", pom);
 				Export("(alt)"); // alternatÌva s doplnkovou psalmÛdiou [prÌpadne neskÙr dorieöiù krajöie]
 				Export("</a>\n");
 			}/* alternatÌva s doplnkovou psalmÛdiou */
+#endif
 		}
 
 		/* oddelenie */
@@ -5488,6 +5502,8 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 			Export("%s", html_button_nazov_modlitby(i));
 			Export("\">\n");
 			Export("</form>\n");
+// 2011-04-06: odvetvenÈ, aby sa to nedostalo na web resp. jeho simul·ciu, teda len pre command-line export (tam BEHAVIOUR_CMDLINE)
+#ifndef BEHAVIOUR_WEB
 			if(_global_opt5 != MODL_CEZ_DEN_ZALMY_ZO_DNA){
 				INIT_POM(pom, i, _global_opt5);
 				Export("<form action=\"%s\">\n", pom);
@@ -5496,16 +5512,20 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 				Export("\">\n");
 				Export("</form>\n");
 			}/* alternatÌva s doplnkovou psalmÛdiou */
+#endif
 		}
 		else{
 			Export("%s", nazov_modlitby(i));
 			Export("</a>\n");
+// 2011-04-06: odvetvenÈ, aby sa to nedostalo na web resp. jeho simul·ciu, teda len pre command-line export (tam BEHAVIOUR_CMDLINE)
+#ifndef BEHAVIOUR_WEB
 			if(_global_opt5 != MODL_CEZ_DEN_ZALMY_ZO_DNA){
 				INIT_POM(pom, i, _global_opt5);
 				Export("<a href=\"%s\">\n", pom);
 				Export("(alt)"); // alternatÌva s doplnkovou psalmÛdiou [prÌpadne neskÙr dorieöiù krajöie]
 				Export("</a>\n");
 			}/* alternatÌva s doplnkovou psalmÛdiou */
+#endif
 		}
 
 /* 2003-07-15 pokracuje sa buttonom `Vespery' */
