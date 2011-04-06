@@ -505,6 +505,7 @@ char *caps_BIG(const char *input){
 /* ------------------------------------------------------------------- */
 /* odstráni diakritiku
  * 2011-04-05: nesmie pritom v HTML stringoch upravova kódové mená, napr. &mdash;
+ * 2011-04-06: zmení aj dlhé pomlèky na obyèajnı spojovník (znak mínus)
  */
 char *remove_diacritics(const char *input){
 	short int ok = TRUE;
@@ -521,6 +522,9 @@ char *remove_diacritics(const char *input){
 		/* 2011-01-31: ToDo: ešte by bolo potrebné ošetri aj to, e za & nenasleduje regulérny znak pre špeciálny HTML kód, t. j. nieèo iné ako upper+lowercase ascii abeceda + # a èíslice */
 		if(ok == TRUE){
 			switch(c){
+				/* špeciálne znaky */
+				case '—': c = '-'; break;
+				case '–': c = '-'; break;
 				/* samohlasky -- dlhe */
 				case 'á': c = 'a'; break;
 				case 'é': c = 'e'; break;
