@@ -608,6 +608,8 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 	char str_subor[SMALL] = STR_EMPTY; /* 2009-08-12: pridané */
 	char str_month[SMALL] = STR_EMPTY; /* 2009-08-12: pridané */
 
+	short int i; /* kvôli PRILEP_REQUEST_OPTIONS */
+
 	/* ak pozadujeme vytvorenie linku s inou farbou pre prestupny rok, 2003-07-02 */
 	if(typ == LINK_DEN_MESIAC_ROK_PRESTUP)
 		mystrcpy(_global_link, "<"HTML_LINK_RED" href=\"", MAX_GLOBAL_LINK); /* 2003-08-11 zmenene na mystrcpy(...,MAX_GLOBAL_LINK) */
@@ -661,8 +663,7 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 			strcat(_global_link, ".htm");
 		}/* linka nie */
 
-		/* PRILEP_REQUEST_OPTIONS(pom2, pom3, prvy_ampersand) */
-		PRILEP_REQUEST_OPTIONS(_global_link, pom2, ANO);
+		PRILEP_REQUEST_OPTIONS(_global_link, pom2, ANO); /* PRILEP_REQUEST_OPTIONS(pom2, pom3, prvy_ampersand) */
 
 	}/* if(_global_opt_batch_monthly == NIE) */
 	else{

@@ -1121,17 +1121,9 @@ extern _struct_lrok *_global_r_ptr;
  */
 extern short int _global_pocet_svatych;
 
-/* globalne premenne, obsahujuce pom_MODL_OPT... */
-extern short int _global_opt1/* = NIE*/;
-extern short int _global_opt2/* = MODL_ZALMY_ZO_DNA*/;
-extern short int _global_opt3;
-extern short int _global_opt4;
-extern short int _global_opt5; /* pridane 2003-08-07 */
-extern short int _global_opt6; /* pridané 2007-06-01 */
-extern short int _global_opt7; /* pridané 2007-06-01 */
-extern short int _global_opt8; /* pridané 2011-03-22 */
-extern short int _global_opt9; /* pridané 2011-03-25 */
-extern short int _global_opt0; /* pridané 2011-04-04 */
+#define POCET_GLOBAL_OPT 10
+/* globálna premenná -- pole -- obsahujúca options; pôvodne to boli globálne premenné _global_opt1.._global_opt9 atï., obsahujú pom_MODL_OPT... */
+extern short int _global_opt[POCET_GLOBAL_OPT];
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
 extern char *_global_string;
