@@ -5577,6 +5577,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 	char str_month[SMALL] = STR_EMPTY; /* 2009-08-12: pridané */
 	short int zmena_mesiaca = NIE;
 	short int som_v_tabulke = ANO; /* 2009-08-26: èi sa používa tabu¾ka; bežne pre web áno, pre export pre mobilné zariadenia [export_monthly_druh >= 3] netreba tabu¾ku */
+	short int i; /* kvôli PRILEP_REQUEST_OPTIONS */
 
 	if(_global_opt_batch_monthly == ANO && export_monthly_druh > 2){
 		som_v_tabulke = NIE;
@@ -6172,6 +6173,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	struct tm dnes;
 	short int month, day;
 	short int lo; /* liturgické obdobie; 2011-01-25 */
+	short int i; /* kvôli PRILEP_REQUEST_OPTIONS */
 
 	dnes.tm_mday = den;
 	dnes.tm_mon  = mesiac;
@@ -7485,6 +7487,8 @@ void _export_rozbor_dna_mesiaca_batch(short int d, short int m, short int r){
  *
  */
 void showDetails(short int den, short int mesiac, short int rok, short int poradie_svaty){
+
+	short int i; /* kvôli PRILEP_REQUEST_OPTIONS */
 
 	Log("spustam showDetails(%d, %s, %d, %d)...\n", den,
 		nazov_mesiaca(mesiac - 1), rok, poradie_svaty);
