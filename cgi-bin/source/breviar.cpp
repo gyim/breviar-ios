@@ -201,6 +201,10 @@
 /*                    odkaz na dkc.kbs.sk)                                 */
 /*   2011-04-06a.D. | nastavenie antifÛn z doplnkovej psalmÛdie: funkcia   */
 /*                    _set_antifony_mcd_doplnkova_psalmodia(void)          */
+/*   2011-04-07a.D. | po dlhom boji prerobenÈ options a force options      */
+/*                    parametre na polia;                                  */
+/*                    zjednotenÈ local_str[SMALL] (predt˝m bolo MAX_STR)   */
+/*                    (d˙fam, ûe toto skr·tenie v 3 funkci·ch nebude vadiù)*/
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -220,12 +224,11 @@
 /*     You can pass command line arguments in on the line that says        */
 /*     Command Arguments                                                   */
 /*                                                                         */
-/*     napr.                                                               */
-/*     -i..\..\breviar.sk\include\ -qpsqs -s"qt=pdnes"                     */
-/*     -qpbm -d1 -m1 -r2000 -f2 -g2 -p2001 -ba.txt                         */
-/*     -i..\..\..\web\include\ -qpsqs -s"qt=pcr&dvt=pondelok&t=2&p=mpc"    */
-/*     lh -qpdt -d30 -m4 -r2002 -pmrch -ic:\temp\breviar\ -emoja.htm       */
-/*     -iD:\personal\breviar\www.breviar.sk\include\ -qpsqs -s"qt=pdt&d=26&m=5&r=2010&p=mrch&ds=1" */
+/*   -i..\..\breviar.sk\include\ -qpsqs -s"qt=pdnes"                       */
+/*   -qpbm -d1 -m1 -r2000 -f2 -g2 -p2001 -ba.txt                           */
+/*   -i..\..\breviar.sk\include\ -qpsqs -s"qt=pcr&dvt=pondelok&t=2&p=mpc"  */
+/*   -qpdt -d30 -m4 -r2002 -pmrch -ic:\temp\breviar\ -emoja.htm            */
+/*   -qpsqs -s"qt=pdt&d=26&m=5&r=2010&p=mrch&ds=1"                         */
 /*                                                                         */
 /*                                                                         */
 /***************************************************************************/
@@ -8488,97 +8491,41 @@ void log_pom_MODL_OPTF(void){
 	/*             a z·roveÚ prÌpadne nastavÌ na default podæa jazyka */\
 	/* 2011-01-26: doplnenÈ opt1 aû opt5 force (okrem opt3); default sa nastavuje podæa "ne-force" verziÌ */\
 	/* 2011-01-27: CFG_OPTION1_DEFAULT..CFG_OPTION5_DEFAULT doplnenÈ v myconf.h; opravenÈ ich pouûitie :) 2011-02-01 */\
-	if(_global_opt[1] == GLOBAL_OPTION_NULL){\
-		_global_opt[1] = CFG_OPTION1_DEFAULT;\
-		Log("KeÔûe bolo _global_opt[1] == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", _global_opt[1]);\
-	}\
-	if(_global_opt[2] == GLOBAL_OPTION_NULL){\
-		_global_opt[2] = CFG_OPTION2_DEFAULT;\
-		Log("KeÔûe bolo _global_opt[2] == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", _global_opt[2]);\
-	}\
-	if(_global_opt[4] == GLOBAL_OPTION_NULL){\
-		_global_opt[4] = CFG_OPTION4_DEFAULT;\
-		Log("KeÔûe bolo _global_opt[4] == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", _global_opt[4]);\
-	}\
-	if(_global_opt[5] == GLOBAL_OPTION_NULL){\
-		_global_opt[5] = CFG_OPTION5_DEFAULT;\
-		Log("KeÔûe bolo _global_opt[5] == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", _global_opt[5]);\
-	}\
-	if(_global_opt[6] == GLOBAL_OPTION_NULL){\
-		_global_opt[6] = CFG_OPTION6_DEFAULT;\
-		Log("KeÔûe bolo _global_opt[6] == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", _global_opt[6]);\
-	}\
-	if(_global_opt[7] == GLOBAL_OPTION_NULL){\
-		_global_opt[7] = CFG_OPTION7_DEFAULT;\
-		Log("KeÔûe bolo _global_opt[7] == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", _global_opt[7]);\
-	}\
-	if(_global_opt[8] == GLOBAL_OPTION_NULL){\
-		_global_opt[8] = CFG_OPTION8_DEFAULT;\
-		Log("KeÔûe bolo _global_opt[8] == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", _global_opt[8]);\
-	}\
-	if(_global_opt[9] == GLOBAL_OPTION_NULL){\
-		_global_opt[9] = CFG_OPTION9_DEFAULT;\
-		Log("KeÔûe bolo _global_opt[9] == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", _global_opt[9]);\
-	}\
-	if(_global_opt[0] == GLOBAL_OPTION_NULL){\
-		_global_opt[0] = CFG_OPTION0_DEFAULT;\
-		Log("KeÔûe bolo _global_opt[0] == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", _global_opt[0]);\
-	}\
-	if(_global_optf[1] == GLOBAL_OPTION_NULL){\
-		_global_optf[1] = _global_opt[1];\
-		Log("KeÔûe bolo _global_optf[1] == GLOBAL_OPTION_NULL, nastavujem na _global_opt[1 == `%d'...\n", _global_optf[1]);\
-	}\
-	else{\
-		_global_opt[1] = _global_optf[1];\
-		Log("Force; do _global_opt[1 priraÔujem _global_optf[1 (`%d')...\n", _global_optf[1]);\
-	}\
-	if(_global_optf[2] == GLOBAL_OPTION_NULL){\
-		_global_optf[2] = _global_opt[2];\
-		Log("KeÔûe bolo _global_optf[2] == GLOBAL_OPTION_NULL, nastavujem na _global_opt[2 == `%d'...\n", _global_opt[2]);\
-	}\
-	else{\
-		_global_opt[2] = _global_optf[2];\
-		Log("Force; do _global_opt[2 priraÔujem _global_optf[2 (`%d')...\n", _global_optf[2]);\
-	}\
-	if(_global_optf[4] == GLOBAL_OPTION_NULL){\
-		_global_optf[4] = _global_opt[4];\
-		Log("KeÔûe bolo _global_optf[4] == GLOBAL_OPTION_NULL, nastavujem na _global_opt[4 == `%d'...\n", _global_opt[4]);\
-	}\
-	else{\
-		_global_opt[4] = _global_optf[4];\
-		Log("Force; do _global_opt[4 priraÔujem _global_optf[4 (`%d')...\n", _global_optf[4]);\
-	}\
-	if(_global_optf[5] == GLOBAL_OPTION_NULL){\
-		_global_optf[5] = _global_opt[5];\
-		Log("KeÔûe bolo _global_optf[5] == GLOBAL_OPTION_NULL, nastavujem na _global_opt[5 == `%d'...\n", _global_opt[5]);\
-	}\
-	else{\
-		_global_opt[5] = _global_optf[5];\
-		Log("Force; do _global_opt[5 priraÔujem _global_optf[5 (`%d')...\n", _global_optf[5]);\
-	}\
-	if(_global_optf[8] == GLOBAL_OPTION_NULL){\
-		_global_optf[8] = _global_opt[8];\
-		Log("KeÔûe bolo _global_optf[8] == GLOBAL_OPTION_NULL, nastavujem na _global_opt[8 == `%d'...\n", _global_opt[8]);\
-	}\
-	else{\
-		_global_opt[8] = _global_optf[8];\
-		Log("Force; do _global_opt[8 priraÔujem _global_optf[8 (`%d')...\n", _global_optf[8]);\
-	}\
-	if(_global_optf[9] == GLOBAL_OPTION_NULL){\
-		_global_optf[9] = _global_opt[9];\
-		Log("KeÔûe bolo _global_optf[9] == GLOBAL_OPTION_NULL, nastavujem na _global_opt[9 == `%d'...\n", _global_opt[9]);\
-	}\
-	else{\
-		_global_opt[9] = _global_optf[9];\
-		Log("Force; do _global_opt[9 priraÔujem _global_optf[9 (`%d')...\n", _global_optf[9]);\
-	}\
-	if(_global_optf[0] == GLOBAL_OPTION_NULL){\
-		_global_optf[0] = _global_opt[0];\
-		Log("KeÔûe bolo _global_optf[0] == GLOBAL_OPTION_NULL, nastavujem na _global_opt[0 == `%d'...\n", _global_opt[0]);\
-	}\
-	else{\
-		_global_opt[0] = _global_optf[0];\
-		Log("Force; do _global_opt[0 priraÔujem _global_optf[0 (`%d')...\n", _global_optf[0]);\
+	/* 2011-04-07: upravenÈ */\
+	for(i = 0; i < POCET_GLOBAL_OPT; i++){\
+		Log("i == %d...\n", i);\
+		if(i == 3)\
+			continue;\
+		if(_global_opt[i] == GLOBAL_OPTION_NULL){\
+			switch(i){\
+				case 0: _global_opt[i] = CFG_OPTION0_DEFAULT; break;\
+				case 1: _global_opt[i] = CFG_OPTION1_DEFAULT; break;\
+				case 2: _global_opt[i] = CFG_OPTION2_DEFAULT; break;\
+				/* case 3: vynechan˝; nem· default */ \
+				case 4: _global_opt[i] = CFG_OPTION4_DEFAULT; break;\
+				case 5: _global_opt[i] = CFG_OPTION5_DEFAULT; break;\
+				case 6: _global_opt[i] = CFG_OPTION6_DEFAULT; break;\
+				case 7: _global_opt[i] = CFG_OPTION7_DEFAULT; break;\
+				case 8: _global_opt[i] = CFG_OPTION8_DEFAULT; break;\
+				case 9: _global_opt[i] = CFG_OPTION9_DEFAULT; break;\
+			}/* switch(i) */\
+			Log("KeÔûe bolo _global_opt[%d] == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", i, _global_opt[i]);\
+		}\
+	}/* for i */\
+\
+	for(i = 0; i < POCET_GLOBAL_OPT; i++){\
+		if(i == 3)\
+			continue;\
+		if((i == 6) || (i == 7))\
+			continue;\
+		if(_global_optf[i] == GLOBAL_OPTION_NULL){\
+			_global_optf[i] = _global_opt[i];\
+			Log("KeÔûe bolo _global_optf[%d] == GLOBAL_OPTION_NULL, nastavujem na _global_opt[%d] == `%d'...\n", i, i, _global_optf[i]);\
+		}\
+		else{\
+			_global_opt[i] = _global_optf[i];\
+			Log("Force; do _global_opt[%d] priraÔujem _global_optf[%d] (`%d')...\n", i, i, _global_optf[i]);\
+		}\
 	}\
 	Log("=== Po potenci·lnych ˙prav·ch (nastavenie default hodnÙt podæa jazyka) ===\n"); \
 	log_pom_MODL_OPT(); \
@@ -11335,167 +11282,57 @@ short int getForm(void){
 
 	/* premennÈ WWW_MODL_OPT... presunutÈ sem, aby sa ËÌtali vûdy (2011-01-26); tieû doplnenÈ force verzie (opt1 aû opt5); niektorÈ sa pouûÌvali aj v PRM_MESIAC_ROKA */
 
-	/* premenna WWW_MODL_OPT1 */
-	ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPT1));
-	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
-	 * lebo pom_... su inicializovane na STR_EMPTY */
-	if(ptr != NULL){
-		if(strcmp(ptr, STR_EMPTY) != 0)
-			mystrcpy(pom_MODL_OPT[1], ptr, SMALL);
-	}
+	/* 2011-04-07: options premennÈ */
+	for(i = 0; i < POCET_GLOBAL_OPT; i++){
+		/* premenn· WWW_MODL_OPTi */
+		mystrcpy(local_str, WWW_PREFIX, SMALL);
+		switch(i){
+			case 0: strcat(local_str, STR_MODL_OPT0); break;
+			case 1: strcat(local_str, STR_MODL_OPT1); break;
+			case 2: strcat(local_str, STR_MODL_OPT2); break;
+			case 3: strcat(local_str, STR_MODL_OPT3); break;
+			case 4: strcat(local_str, STR_MODL_OPT4); break;
+			case 5: strcat(local_str, STR_MODL_OPT5); break;
+			case 6: strcat(local_str, STR_MODL_OPT6); break;
+			case 7: strcat(local_str, STR_MODL_OPT7); break;
+			case 8: strcat(local_str, STR_MODL_OPT8); break;
+			case 9: strcat(local_str, STR_MODL_OPT9); break;
+		}/* switch(i) */
+		ptr = getenv(local_str);
+		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
+		 * lebo pom_... su inicializovane na STR_EMPTY */
+		if(ptr != NULL){
+			if(strcmp(ptr, STR_EMPTY) != 0)
+				mystrcpy(pom_MODL_OPT[i], ptr, SMALL);
+		}
+	}/* for i */
 
-	/* premenna WWW_MODL_OPT2 */
-	ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPT2));
-	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
-	 * lebo pom_... su inicializovane na STR_EMPTY */
-	if(ptr != NULL){
-		if(strcmp(ptr, STR_EMPTY) != 0)
-			mystrcpy(pom_MODL_OPT[2], ptr, SMALL);
-	}
-
-	/* premenna WWW_MODL_OPT3 */
-	ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPT3));
-	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
-	 * lebo pom_... su inicializovane na STR_EMPTY */
-	if(ptr != NULL){
-		if(strcmp(ptr, STR_EMPTY) != 0)
-			mystrcpy(pom_MODL_OPT[3], ptr, SMALL);
-	}
-
-	/* premenna WWW_MODL_OPT4 */
-	ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPT4));
-	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
-	 * lebo pom_... su inicializovane na STR_EMPTY */
-	if(ptr != NULL){
-		if(strcmp(ptr, STR_EMPTY) != 0)
-			mystrcpy(pom_MODL_OPT[4], ptr, SMALL);
-	}
-
-	/* premenna WWW_MODL_OPT5, pridana 2003-08-13 */
-	ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPT5));
-	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
-	 * lebo pom_... su inicializovane na STR_EMPTY */
-	if(ptr != NULL){
-		if(strcmp(ptr, STR_EMPTY) != 0)
-			mystrcpy(pom_MODL_OPT[5], ptr, SMALL);
-	}
-
-	/* premenn· WWW_MODL_OPT6, pridan· 2007-06-01 */
-	ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPT6));
-	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
-	 * lebo pom_... su inicializovane na STR_EMPTY */
-	if(ptr != NULL){
-		if(strcmp(ptr, STR_EMPTY) != 0)
-			mystrcpy(pom_MODL_OPT[6], ptr, SMALL);
-	}
-
-	/* premenn· WWW_MODL_OPT7, pridan· 2007-06-01 */
-	ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPT7));
-	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
-	 * lebo pom_... su inicializovane na STR_EMPTY */
-	if(ptr != NULL){
-		if(strcmp(ptr, STR_EMPTY) != 0)
-			mystrcpy(pom_MODL_OPT[7], ptr, SMALL);
-	}
-
-	/* premenn· WWW_MODL_OPT8, pridan· 2011-03-22 */
-	ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPT8));
-	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
-	 * lebo pom_... su inicializovane na STR_EMPTY */
-	if(ptr != NULL){
-		if(strcmp(ptr, STR_EMPTY) != 0)
-			mystrcpy(pom_MODL_OPT[8], ptr, SMALL);
-	}
-
-	/* premenn· WWW_MODL_OPT9, pridan· 2011-03-25 */
-	ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPT9));
-	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
-	 * lebo pom_... su inicializovane na STR_EMPTY */
-	if(ptr != NULL){
-		if(strcmp(ptr, STR_EMPTY) != 0)
-			mystrcpy(pom_MODL_OPT[9], ptr, SMALL);
-	}
-
-	/* premenn· WWW_MODL_OPT0, pridan· 2011-04-04 */
-	ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPT0));
-	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
-	 * lebo pom_... su inicializovane na STR_EMPTY */
-	if(ptr != NULL){
-		if(strcmp(ptr, STR_EMPTY) != 0)
-			mystrcpy(pom_MODL_OPT[0], ptr, SMALL);
-	}
-
-	/* premenna WWW_MODL_OPTF1 */
-	ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPTF1));
-	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
-	 * lebo pom_... su inicializovane na STR_EMPTY */
-	if(ptr != NULL){
-		if(strcmp(ptr, STR_EMPTY) != 0)
-			mystrcpy(pom_MODL_OPTF[1], ptr, SMALL);
-	}
-
-	/* premenna WWW_MODL_OPTF2 */
-	ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPTF2));
-	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
-	 * lebo pom_... su inicializovane na STR_EMPTY */
-	if(ptr != NULL){
-		if(strcmp(ptr, STR_EMPTY) != 0)
-			mystrcpy(pom_MODL_OPTF[2], ptr, SMALL);
-	}
-
-	/* premenna WWW_MODL_OPTF3 */
-	ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPTF3));
-	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
-	 * lebo pom_... su inicializovane na STR_EMPTY */
-	if(ptr != NULL){
-		if(strcmp(ptr, STR_EMPTY) != 0)
-			mystrcpy(pom_MODL_OPTF[3], ptr, SMALL);
-	}
-
-	/* premenna WWW_MODL_OPTF4 */
-	ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPTF4));
-	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
-	 * lebo pom_... su inicializovane na STR_EMPTY */
-	if(ptr != NULL){
-		if(strcmp(ptr, STR_EMPTY) != 0)
-			mystrcpy(pom_MODL_OPTF[4], ptr, SMALL);
-	}
-
-	/* premenna WWW_MODL_OPTF5 */
-	ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPTF5));
-	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
-	 * lebo pom_... su inicializovane na STR_EMPTY */
-	if(ptr != NULL){
-		if(strcmp(ptr, STR_EMPTY) != 0)
-			mystrcpy(pom_MODL_OPTF[5], ptr, SMALL);
-	}
-
-	/* premenna WWW_MODL_OPTF8 */
-	ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPTF8));
-	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
-	 * lebo pom_... su inicializovane na STR_EMPTY */
-	if(ptr != NULL){
-		if(strcmp(ptr, STR_EMPTY) != 0)
-			mystrcpy(pom_MODL_OPTF[8], ptr, SMALL);
-	}
-
-	/* premenna WWW_MODL_OPTF9 */
-	ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPTF9));
-	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
-	 * lebo pom_... su inicializovane na STR_EMPTY */
-	if(ptr != NULL){
-		if(strcmp(ptr, STR_EMPTY) != 0)
-			mystrcpy(pom_MODL_OPTF[9], ptr, SMALL);
-	}
-
-	/* premenna WWW_MODL_OPTF0 */
-	ptr = getenv(ADD_WWW_PREFIX_(STR_MODL_OPTF0));
-	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
-	 * lebo pom_... su inicializovane na STR_EMPTY */
-	if(ptr != NULL){
-		if(strcmp(ptr, STR_EMPTY) != 0)
-			mystrcpy(pom_MODL_OPTF[0], ptr, SMALL);
-	}
+	/* 2011-04-07: force options premennÈ */
+	for(i = 0; i < POCET_GLOBAL_OPT; i++){
+		/* premenn· WWW_MODL_OPTFi */
+		if((i == 6) || (i == 7))\
+			continue;\
+		mystrcpy(local_str, WWW_PREFIX, SMALL);
+		switch(i){
+			case 0: strcat(local_str, STR_MODL_OPTF0); break;
+			case 1: strcat(local_str, STR_MODL_OPTF1); break;
+			case 2: strcat(local_str, STR_MODL_OPTF2); break;
+			case 3: strcat(local_str, STR_MODL_OPTF3); break;
+			case 4: strcat(local_str, STR_MODL_OPTF4); break;
+			case 5: strcat(local_str, STR_MODL_OPTF5); break;
+			case 6: strcat(local_str, STR_MODL_OPTF6); break;
+			case 7: strcat(local_str, STR_MODL_OPTF7); break;
+			case 8: strcat(local_str, STR_MODL_OPTF8); break;
+			case 9: strcat(local_str, STR_MODL_OPTF9); break;
+		}/* switch(i) */
+		ptr = getenv(local_str);
+		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
+		 * lebo pom_... su inicializovane na STR_EMPTY */
+		if(ptr != NULL){
+			if(strcmp(ptr, STR_EMPTY) != 0)
+				mystrcpy(pom_MODL_OPTF[i], ptr, SMALL);
+		}
+	}/* for i */
 
 	if((query_type == PRM_DATUM) || (query_type == PRM_DETAILY) || (query_type == PRM_TXT)){
 		/* datum: treba nacitat den, mesiac a rok */
@@ -11933,6 +11770,7 @@ short int parseQueryString(void){
 
 	short int i, pocet, ok;
 	char local_str[SMALL] = STR_EMPTY;
+	short int j; /* kvÙli PRILEP_REQUEST_OPTIONS */
 
 	Log("parseQueryString() -- begin\n");
 	if(query_string != NULL)
@@ -12084,312 +11922,77 @@ short int parseQueryString(void){
 	 * 2011-01-26: doplnenÈ tieû force opt1 aû opt5
 	 * 2011-04-07: prerobenÈ na dve polia premenn˝ch
 	 */
+	for(j = 0; j < POCET_GLOBAL_OPT; j++){
+		Log("j == %d...\n", j);
+		mystrcpy(local_str, STR_EMPTY, SMALL);
+		switch(j){
+			case 0: strcat(local_str, STR_MODL_OPT0); break;
+			case 1: strcat(local_str, STR_MODL_OPT1); break;
+			case 2: strcat(local_str, STR_MODL_OPT2); break;
+			case 3: strcat(local_str, STR_MODL_OPT3); break;
+			case 4: strcat(local_str, STR_MODL_OPT4); break;
+			case 5: strcat(local_str, STR_MODL_OPT5); break;
+			case 6: strcat(local_str, STR_MODL_OPT6); break;
+			case 7: strcat(local_str, STR_MODL_OPT7); break;
+			case 8: strcat(local_str, STR_MODL_OPT8); break;
+			case 9: strcat(local_str, STR_MODL_OPT9); break;
+		}/* switch(j) */
+		/* premenn· MODL_OPTj (nepovinn·), j = 0 aû 9
+		 * 2006-08-01: dynamickÈ zisùovanie hodnÙt parametrov */
+		i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
+		Log("pok˙öam sa zistiù hodnotu parametra %s...\n", local_str);
+		while((equalsi(pom_MODL_OPT[j], STR_EMPTY)) && (i < pocet)){
+			// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
+			if(equals(param[i].name, local_str)){
+				/* ide o parameter STR_MODL_OPTj */
+				mystrcpy(pom_MODL_OPT[j], param[i].val, SMALL);
+				Log("hodnota parametra %s je %s.\n", local_str, pom_MODL_OPT[j]);
+			}
+			i++;
+		}
+		if(equalsi(pom_MODL_OPT[j], STR_EMPTY)){
+			Log("Nebola zadan· premenn· %s (nevadÌ).\n", local_str);
+		}
+	}/* for j */
 
-	/* premenn· MODL_OPT1 (nepovinn·)
-	 * 
-	 * 2006-08-01: dynamickÈ zisùovanie hodnÙt parametrov */
-	i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù hodnotu parametra %s...\n", STR_MODL_OPT1);
-	while((equalsi(pom_MODL_OPT[1], STR_EMPTY)) && (i < pocet)){
-		// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
-		if(equals(param[i].name, STR_MODL_OPT1)){
-			/* ide o parameter STR_MODL_OPT1 */
-			mystrcpy(pom_MODL_OPT[1], param[i].val, SMALL);
-			Log("hodnota parametra %s je %s.\n", STR_MODL_OPT1, pom_MODL_OPT[1]);
+// 2011-04-07 debug
+if(0==1)
+	for(j = 0; j < POCET_GLOBAL_OPT; j++){
+		Log("j == %d...\n", j);
+		if(j == 3)
+			continue;
+		if((j == 6) || (j == 7))
+			continue;
+		mystrcpy(local_str, STR_EMPTY, SMALL);
+		switch(j){
+			case 0: strcat(local_str, STR_MODL_OPTF0); break;
+			case 1: strcat(local_str, STR_MODL_OPTF1); break;
+			case 2: strcat(local_str, STR_MODL_OPTF2); break;
+			case 3: strcat(local_str, STR_MODL_OPTF3); break;
+			case 4: strcat(local_str, STR_MODL_OPTF4); break;
+			case 5: strcat(local_str, STR_MODL_OPTF5); break;
+			case 6: strcat(local_str, STR_MODL_OPTF6); break;
+			case 7: strcat(local_str, STR_MODL_OPTF7); break;
+			case 8: strcat(local_str, STR_MODL_OPTF8); break;
+			case 9: strcat(local_str, STR_MODL_OPTF9); break;
+		}/* switch(j) */
+		/* premenn· MODL_OPTFj (nepovinn·), j = 0 aû 9
+		 * 2006-08-01: dynamickÈ zisùovanie hodnÙt parametrov */
+		i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
+		Log("pok˙öam sa zistiù hodnotu parametra %s...\n", local_str);
+		while((equalsi(pom_MODL_OPTF[j], STR_EMPTY)) && (i < pocet)){
+			// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
+			if(equals(param[i].name, local_str)){
+				/* ide o parameter STR_MODL_OPTFj */
+				mystrcpy(pom_MODL_OPTF[j], param[i].val, SMALL);
+				Log("hodnota parametra %s je %s.\n", local_str, pom_MODL_OPTF[j]);
+			}
+			i++;
 		}
-		i++;
-	}
-	if(equalsi(pom_MODL_OPT[1], STR_EMPTY)){
-		Log("Nebola zadan· premenn· %s (nevadÌ).\n", STR_MODL_OPT1);
-	}
-
-	/* premenn· MODL_OPT2 (nepovinn·)
-	 * 
-	 * 2006-08-01: dynamickÈ zisùovanie hodnÙt parametrov */
-	i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù hodnotu parametra %s...\n", STR_MODL_OPT2);
-	while((equalsi(pom_MODL_OPT[2], STR_EMPTY)) && (i < pocet)){
-		// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
-		if(equals(param[i].name, STR_MODL_OPT2)){
-			/* ide o parameter STR_MODL_OPT2 */
-			mystrcpy(pom_MODL_OPT[2], param[i].val, SMALL);
-			Log("hodnota parametra %s je %s.\n", STR_MODL_OPT2, pom_MODL_OPT[2]);
+		if(equalsi(pom_MODL_OPTF[j], STR_EMPTY)){
+			Log("Nebola zadan· premenn· %s (nevadÌ).\n", local_str);
 		}
-		i++;
-	}
-	if(equalsi(pom_MODL_OPT[2], STR_EMPTY)){
-		Log("Nebola zadan· premenn· %s (nevadÌ).\n", STR_MODL_OPT2);
-	}
-	
-	/* premenn· MODL_OPT3 (nepovinn·)
-	 * 
-	 * 2006-08-01: dynamickÈ zisùovanie hodnÙt parametrov */
-	i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù hodnotu parametra %s...\n", STR_MODL_OPT3);
-	while((equalsi(pom_MODL_OPT[3], STR_EMPTY)) && (i < pocet)){
-		// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
-		if(equals(param[i].name, STR_MODL_OPT3)){
-			/* ide o parameter STR_MODL_OPT3 */
-			mystrcpy(pom_MODL_OPT[3], param[i].val, SMALL);
-			Log("hodnota parametra %s je %s.\n", STR_MODL_OPT3, pom_MODL_OPT[3]);
-		}
-		i++;
-	}
-	if(equalsi(pom_MODL_OPT[3], STR_EMPTY)){
-		Log("Nebola zadan· premenn· %s (nevadÌ).\n", STR_MODL_OPT3);
-	}
-	
-	/* premenn· MODL_OPT4 (nepovinn·)
-	 * 
-	 * 2006-08-01: dynamickÈ zisùovanie hodnÙt parametrov */
-	i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù hodnotu parametra %s...\n", STR_MODL_OPT4);
-	while((equalsi(pom_MODL_OPT[4], STR_EMPTY)) && (i < pocet)){
-		// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
-		if(equals(param[i].name, STR_MODL_OPT4)){
-			/* ide o parameter STR_MODL_OPT4 */
-			mystrcpy(pom_MODL_OPT[4], param[i].val, SMALL);
-			Log("hodnota parametra %s je %s.\n", STR_MODL_OPT4, pom_MODL_OPT[4]);
-		}
-		i++;
-	}
-	if(equalsi(pom_MODL_OPT[4], STR_EMPTY)){
-		Log("Nebola zadan· premenn· %s (nevadÌ).\n", STR_MODL_OPT4);
-	}
-
-	/* premenn· MODL_OPT6 (nepovinn·); pridan· podæa OPT1 2007-06-01
-	 * 
-	 * 2006-08-01: dynamickÈ zisùovanie hodnÙt parametrov */
-	i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù hodnotu parametra %s...\n", STR_MODL_OPT6);
-	while((equalsi(pom_MODL_OPT[6], STR_EMPTY)) && (i < pocet)){
-		// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
-		if(equals(param[i].name, STR_MODL_OPT6)){
-			/* ide o parameter STR_MODL_OPT6 */
-			mystrcpy(pom_MODL_OPT[6], param[i].val, SMALL);
-			Log("hodnota parametra %s je %s.\n", STR_MODL_OPT6, pom_MODL_OPT[6]);
-		}
-		i++;
-	}
-	if(equalsi(pom_MODL_OPT[6], STR_EMPTY)){
-		Log("Nebola zadan· premenn· %s (nevadÌ).\n", STR_MODL_OPT6);
-	}
-
-	/* premenn· MODL_OPT7 (nepovinn·); pridan· podæa OPT1 2007-06-01
-	 * 
-	 * 2006-08-01: dynamickÈ zisùovanie hodnÙt parametrov */
-	i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù hodnotu parametra %s...\n", STR_MODL_OPT7);
-	while((equalsi(pom_MODL_OPT[7], STR_EMPTY)) && (i < pocet)){
-		// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
-		if(equals(param[i].name, STR_MODL_OPT7)){
-			/* ide o parameter STR_MODL_OPT7 */
-			mystrcpy(pom_MODL_OPT[7], param[i].val, SMALL);
-			Log("hodnota parametra %s je %s.\n", STR_MODL_OPT7, pom_MODL_OPT[7]);
-		}
-		i++;
-	}
-	if(equalsi(pom_MODL_OPT[7], STR_EMPTY)){
-		Log("Nebola zadan· premenn· %s (nevadÌ).\n", STR_MODL_OPT7);
-	}
-
-	/* premenn· MODL_OPT8 (nepovinn·); pridan· podæa OPT7 2011-03-22
-	 * 
-	 * 2006-08-01: dynamickÈ zisùovanie hodnÙt parametrov */
-	i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù hodnotu parametra %s...\n", STR_MODL_OPT8);
-	while((equalsi(pom_MODL_OPT[8], STR_EMPTY)) && (i < pocet)){
-		// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
-		if(equals(param[i].name, STR_MODL_OPT8)){
-			/* ide o parameter STR_MODL_OPT8 */
-			mystrcpy(pom_MODL_OPT[8], param[i].val, SMALL);
-			Log("hodnota parametra %s je %s.\n", STR_MODL_OPT8, pom_MODL_OPT[8]);
-		}
-		i++;
-	}
-	if(equalsi(pom_MODL_OPT[8], STR_EMPTY)){
-		Log("Nebola zadan· premenn· %s (nevadÌ).\n", STR_MODL_OPT8);
-	}
-
-	/* premenn· MODL_OPT9 (nepovinn·); pridan· podæa OPT8 2011-03-25
-	 * 
-	 * 2006-09-01: dynamickÈ zisùovanie hodnÙt parametrov */
-	i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù hodnotu parametra %s...\n", STR_MODL_OPT9);
-	while((equalsi(pom_MODL_OPT[9], STR_EMPTY)) && (i < pocet)){
-		// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
-		if(equals(param[i].name, STR_MODL_OPT9)){
-			/* ide o parameter STR_MODL_OPT9 */
-			mystrcpy(pom_MODL_OPT[9], param[i].val, SMALL);
-			Log("hodnota parametra %s je %s.\n", STR_MODL_OPT9, pom_MODL_OPT[9]);
-		}
-		i++;
-	}
-	if(equalsi(pom_MODL_OPT[9], STR_EMPTY)){
-		Log("Nebola zadan· premenn· %s (nevadÌ).\n", STR_MODL_OPT9);
-	}
-
-	/* premenn· MODL_OPT0 (nepovinn·); pridan· podæa OPT9 2011-04-04
-	 * 
-	 * 2006-00-01: dynamickÈ zisùovanie hodnÙt parametrov */
-	i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù hodnotu parametra %s...\n", STR_MODL_OPT0);
-	while((equalsi(pom_MODL_OPT[0], STR_EMPTY)) && (i < pocet)){
-		// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
-		if(equals(param[i].name, STR_MODL_OPT0)){
-			/* ide o parameter STR_MODL_OPT0 */
-			mystrcpy(pom_MODL_OPT[0], param[i].val, SMALL);
-			Log("hodnota parametra %s je %s.\n", STR_MODL_OPT0, pom_MODL_OPT[0]);
-		}
-		i++;
-	}
-	if(equalsi(pom_MODL_OPT[0], STR_EMPTY)){
-		Log("Nebola zadan· premenn· %s (nevadÌ).\n", STR_MODL_OPT0);
-	}
-
-	/* premenn· MODL_OPT5 (nepovinn·) -- doplnenÈ 2011-01-26, asi sa na Úu predt˝m zabudlo?... */
-	i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù hodnotu parametra %s...\n", STR_MODL_OPT5);
-	while((equalsi(pom_MODL_OPT[5], STR_EMPTY)) && (i < pocet)){
-		// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
-		if(equals(param[i].name, STR_MODL_OPT5)){
-			/* ide o parameter STR_MODL_OPT5 */
-			mystrcpy(pom_MODL_OPT[5], param[i].val, SMALL);
-			Log("hodnota parametra %s je %s.\n", STR_MODL_OPT5, pom_MODL_OPT[5]);
-		}
-		i++;
-	}
-	if(equalsi(pom_MODL_OPT[5], STR_EMPTY)){
-		Log("Nebola zadan· premenn· %s (nevadÌ).\n", STR_MODL_OPT5);
-	}
-
-	/* premenn· MODL_OPTF1 (nepovinn·) */
-	i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù hodnotu parametra %s...\n", STR_MODL_OPTF1);
-	while((equalsi(pom_MODL_OPTF[1], STR_EMPTY)) && (i < pocet)){
-		// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
-		if(equals(param[i].name, STR_MODL_OPTF1)){
-			/* ide o parameter STR_MODL_OPTF1 */
-			mystrcpy(pom_MODL_OPTF[1], param[i].val, SMALL);
-			Log("hodnota parametra %s je %s.\n", STR_MODL_OPTF1, pom_MODL_OPTF[1]);
-		}
-		i++;
-	}
-	if(equalsi(pom_MODL_OPTF[1], STR_EMPTY)){
-		Log("Nebola zadan· premenn· %s (nevadÌ).\n", STR_MODL_OPTF1);
-	}
-
-	/* premenn· MODL_OPTF2 (nepovinn·) */
-	i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù hodnotu parametra %s...\n", STR_MODL_OPTF2);
-	while((equalsi(pom_MODL_OPTF[2], STR_EMPTY)) && (i < pocet)){
-		// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
-		if(equals(param[i].name, STR_MODL_OPTF2)){
-			/* ide o parameter STR_MODL_OPTF2 */
-			mystrcpy(pom_MODL_OPTF[2], param[i].val, SMALL);
-			Log("hodnota parametra %s je %s.\n", STR_MODL_OPTF2, pom_MODL_OPTF[2]);
-		}
-		i++;
-	}
-	if(equalsi(pom_MODL_OPTF[2], STR_EMPTY)){
-		Log("Nebola zadan· premenn· %s (nevadÌ).\n", STR_MODL_OPTF2);
-	}
-	
-	/* premenn· MODL_OPTF3 (nepovinn·) */
-	i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù hodnotu parametra %s...\n", STR_MODL_OPTF3);
-	while((equalsi(pom_MODL_OPTF[3], STR_EMPTY)) && (i < pocet)){
-		// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
-		if(equals(param[i].name, STR_MODL_OPTF3)){
-			/* ide o parameter STR_MODL_OPTF3 */
-			mystrcpy(pom_MODL_OPTF[3], param[i].val, SMALL);
-			Log("hodnota parametra %s je %s.\n", STR_MODL_OPTF3, pom_MODL_OPTF[3]);
-		}
-		i++;
-	}
-	if(equalsi(pom_MODL_OPTF[3], STR_EMPTY)){
-		Log("Nebola zadan· premenn· %s (nevadÌ).\n", STR_MODL_OPTF3);
-	}
-	
-	/* premenn· MODL_OPTF4 (nepovinn·) */
-	i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù hodnotu parametra %s...\n", STR_MODL_OPTF4);
-	while((equalsi(pom_MODL_OPTF[4], STR_EMPTY)) && (i < pocet)){
-		// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
-		if(equals(param[i].name, STR_MODL_OPTF4)){
-			/* ide o parameter STR_MODL_OPTF4 */
-			mystrcpy(pom_MODL_OPTF[4], param[i].val, SMALL);
-			Log("hodnota parametra %s je %s.\n", STR_MODL_OPTF4, pom_MODL_OPTF[4]);
-		}
-		i++;
-	}
-	if(equalsi(pom_MODL_OPTF[4], STR_EMPTY)){
-		Log("Nebola zadan· premenn· %s (nevadÌ).\n", STR_MODL_OPTF4);
-	}
-
-	/* premenn· MODL_OPTF5 (nepovinn·) */
-	i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù hodnotu parametra %s...\n", STR_MODL_OPTF5);
-	while((equalsi(pom_MODL_OPTF[5], STR_EMPTY)) && (i < pocet)){
-		// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
-		if(equals(param[i].name, STR_MODL_OPTF5)){
-			/* ide o parameter STR_MODL_OPTF5 */
-			mystrcpy(pom_MODL_OPTF[5], param[i].val, SMALL);
-			Log("hodnota parametra %s je %s.\n", STR_MODL_OPTF5, pom_MODL_OPTF[5]);
-		}
-		i++;
-	}
-	if(equalsi(pom_MODL_OPTF[5], STR_EMPTY)){
-		Log("Nebola zadan· premenn· %s (nevadÌ).\n", STR_MODL_OPTF5);
-	}
-
-	/* premenn· MODL_OPTF8 (nepovinn·) */
-	i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù hodnotu parametra %s...\n", STR_MODL_OPTF8);
-	while((equalsi(pom_MODL_OPTF[8], STR_EMPTY)) && (i < pocet)){
-		// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
-		if(equals(param[i].name, STR_MODL_OPTF8)){
-			/* ide o parameter STR_MODL_OPTF8 */
-			mystrcpy(pom_MODL_OPTF[8], param[i].val, SMALL);
-			Log("hodnota parametra %s je %s.\n", STR_MODL_OPTF8, pom_MODL_OPTF[8]);
-		}
-		i++;
-	}
-	if(equalsi(pom_MODL_OPTF[8], STR_EMPTY)){
-		Log("Nebola zadan· premenn· %s (nevadÌ).\n", STR_MODL_OPTF8);
-	}
-
-	/* premenn· MODL_OPTF9 (nepovinn·) */
-	i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù hodnotu parametra %s...\n", STR_MODL_OPTF9);
-	while((equalsi(pom_MODL_OPTF[9], STR_EMPTY)) && (i < pocet)){
-		// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
-		if(equals(param[i].name, STR_MODL_OPTF9)){
-			/* ide o parameter STR_MODL_OPTF9 */
-			mystrcpy(pom_MODL_OPTF[9], param[i].val, SMALL);
-			Log("hodnota parametra %s je %s.\n", STR_MODL_OPTF9, pom_MODL_OPTF[9]);
-		}
-		i++;
-	}
-	if(equalsi(pom_MODL_OPTF[9], STR_EMPTY)){
-		Log("Nebola zadan· premenn· %s (nevadÌ).\n", STR_MODL_OPTF9);
-	}
-
-	/* premenn· MODL_OPTF0 (nepovinn·) */
-	i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù hodnotu parametra %s...\n", STR_MODL_OPTF0);
-	while((equalsi(pom_MODL_OPTF[0], STR_EMPTY)) && (i < pocet)){
-		// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
-		if(equals(param[i].name, STR_MODL_OPTF0)){
-			/* ide o parameter STR_MODL_OPTF0 */
-			mystrcpy(pom_MODL_OPTF[0], param[i].val, SMALL);
-			Log("hodnota parametra %s je %s.\n", STR_MODL_OPTF0, pom_MODL_OPTF[0]);
-		}
-		i++;
-	}
-	if(equalsi(pom_MODL_OPTF[0], STR_EMPTY)){
-		Log("Nebola zadan· premenn· %s (nevadÌ).\n", STR_MODL_OPTF0);
-	}
+	}/* for j */
 
 	Log("\tswitch(query_type)...\n");
 	switch(query_type){
