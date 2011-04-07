@@ -1,3 +1,5 @@
+breviar.exe -i..\..\breviar.sk\include\ -qpsqs -s"qt=pdnes"
+
 breviar.exe -qpbm -d1 -m1 -r2011 -f31 -g12 -p2011 -11 -brob2011.bat -jsk -ksdb -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M3
 	-- 2011-03-18: kalendárny rok 2011 slovensky, hyperlinky (pre saleziánov); bez doplnkovej psalmódie ("klasika")
 

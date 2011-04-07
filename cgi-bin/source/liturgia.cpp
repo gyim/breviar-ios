@@ -661,8 +661,7 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 			strcat(_global_link, ".htm");
 		}/* linka nie */
 
-		/* PRILEP_REQUEST_OPTIONS(pom2, pom3, prvy_ampersand) */
-		PRILEP_REQUEST_OPTIONS(_global_link, pom2, ANO);
+		PRILEP_REQUEST_OPTIONS(_global_link, pom2, ANO); /* PRILEP_REQUEST_OPTIONS(pom2, pom3, prvy_ampersand) */
 
 	}/* if(_global_opt_batch_monthly == NIE) */
 	else{

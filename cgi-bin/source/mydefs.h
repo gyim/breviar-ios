@@ -493,23 +493,36 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #else
 	#define STR_MODL_OPTF5 "of5"
 #endif
-/* --- force verzie pre o1 až o5 --- */
 
-#define MODL_OPTF8 57
+#define MODL_OPTF6 57
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF6 "MODL_OPTF6"
+#else
+	#define STR_MODL_OPTF6 "of6"
+#endif
+
+#define MODL_OPTF7 58
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF7 "MODL_OPTF7"
+#else
+	#define STR_MODL_OPTF7 "of7"
+#endif
+
+#define MODL_OPTF8 59
 #ifdef LONG_PARAM_NAMES
 	#define STR_MODL_OPTF8 "MODL_OPTF8"
 #else
 	#define STR_MODL_OPTF8 "of8"
 #endif
 
-#define MODL_OPTF9 58
+#define MODL_OPTF9 60
 #ifdef LONG_PARAM_NAMES
 	#define STR_MODL_OPTF9 "MODL_OPTF9"
 #else
 	#define STR_MODL_OPTF9 "of9"
 #endif
 
-#define MODL_OPTF0 59
+#define MODL_OPTF0 61
 #ifdef LONG_PARAM_NAMES
 	#define STR_MODL_OPTF0 "MODL_OPTF0"
 #else

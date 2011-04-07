@@ -194,7 +194,7 @@ char _anchor_head[SMALL];
 #include "mylog.h"
 #include <string.h>
 #include "mystring.h" /* pridane 2003-08-11 kvoli _INIT_DM */
-#include "breviar.h"  /* pridane 2003-08-13 kvoli _global_opt5 */
+#include "breviar.h"  /* pridane 2003-08-13 kvoli _global_opt[5] */
 
 #define LOG_ciara_sv Log("  -------------------------\n");
 
@@ -223,7 +223,7 @@ char _anchor_head[SMALL];
 #define su_kcit_kresp_prosby_vlastne ((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.typslav == SLAV_SPOMIENKA) || ((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV))) // rovnakÈ kritÈrium pre kr·tke ËÌtanie (rch, v) a 1. ËÌtanie (posv. ËÌtania); moûno pouûiù aj na 2. ËÌtanie posv. ËÌt.; 2007-10-23: pouûiù aj pre kr·tke responzÛrium (rch, v) a prosby (rch, v); 2010-11-08 [len doplnen· pozn·mka]: pre ofÌcium za zosnul˝ch pouûiù (2.11.)
 #define je_1cit_vlastne ((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || ((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV))) // rovnakÈ kritÈrium pre kr·tke ËÌtanie (rch, v) a 1. ËÌtanie (posv. ËÌtania); moûno pouûiù aj na 2. ËÌtanie posv. ËÌt.; 2007-10-23: pouûiù aj pre kr·tke responzÛrium (rch, v) a prosby (rch, v)
 // 2010-06-07: upravenÈ: su_antifony_vlastne aj vtedy, ak je to spomienka a explicitne si vyberie ûalmy+antifÛny zo spoloËnej Ëasti
-#define su_antifony_vlastne(m) ((_global_den.typslav == SLAV_SLAVNOST) || ((_global_den.typslav == SLAV_SVIATOK) && ((m == MODL_RANNE_CHVALY) || (m == MODL_POSV_CITANIE) || (m == MODL_VESPERY))) || ((_global_den.typslav == SLAV_SPOMIENKA) && (_global_opt2 == ANO) && ((m == MODL_RANNE_CHVALY) || (m == MODL_POSV_CITANIE) || (m == MODL_VESPERY))) || ((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)))
+#define su_antifony_vlastne(m) ((_global_den.typslav == SLAV_SLAVNOST) || ((_global_den.typslav == SLAV_SVIATOK) && ((m == MODL_RANNE_CHVALY) || (m == MODL_POSV_CITANIE) || (m == MODL_VESPERY))) || ((_global_den.typslav == SLAV_SPOMIENKA) && (_global_opt[2] == ANO) && ((m == MODL_RANNE_CHVALY) || (m == MODL_POSV_CITANIE) || (m == MODL_VESPERY))) || ((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)))
 
 /* 2007-09-28: upravenÈ priraÔovanie spoloËnej Ëasti; berie sa iba v prÌpade sl·vnostÌ resp. sviatkov,
  * pre spomienky a æubovoænÈ spomienky by malo ostaù to, Ëo je zo dÚa (2007-10-02, 2007-10-22)
@@ -1667,7 +1667,7 @@ void _set_kompletorium_slavnost_oktava(short int modlitba, short int litobd, sho
  *
  * nastavi do _global_modl_... (podla _global_modlitba) udaje potrebne
  * k modlitbe
- * 2003-08-13: nakoniec pridane porovnanie s _global_opt5 
+ * 2003-08-13: nakoniec pridane porovnanie s _global_opt[5] 
  *             (ci brat zalmy z doplnkovej psalmodie pre modlitbu cez den)
  *
  * 2006-01-24: ûalmy pre posv‰tnÈ ËÌtanie s˙ v II. zv‰zku ûalt·ra (pÙst, veæk· noc)
@@ -2487,14 +2487,14 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 
 	/* nasledujuca pasaz pridana 2003-08-13 */
 	Log("napokon idem pre modlitbu cez deÚ skontrolovaù, Ëi netreba braù doplnkov˙ psalmÛdiu...\n");
-	if(_global_opt5 == MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA){
+	if(_global_opt[5] == MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA){
 		Log("\t·no, beriem doplnkov˙ psalmÛdiu.\n");
 		_set_zalmy_mcd_doplnkova_psalmodia();
 		/* 2006-01-24: vyÚatÈ do samostatnej funkcie */
 		if(_global_den.litobd == OBD_CEZ_ROK){
 			_set_antifony_mcd_doplnkova_psalmodia();
 		}/* pre cezroËnÈ obdobie nastavÌme aj antifÛny */
-	}/* _global_opt5 == MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA */
+	}/* _global_opt[5] == MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA */
 	else{
 		/* 2006-02-07: doplnenÈ */
 		Log("\tnie, doplnkov˙ psalmÛdiu neberiem.\n");
@@ -2528,7 +2528,7 @@ void _set_zalmy_velky_piatok(short int modlitba){
 		set_zalm(3, modlitba, "z38.htm", "ZALM38_CELY");
 	}
 	/* 2006-01-26: doplnenÈ ûalmy pre modlitbu cez deÚ */
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt5 == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt[5] == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
 		/* 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia */
 		set_zalm(1, modlitba, "z40.htm", "ZALM40");
 		set_zalm(2, modlitba, "z54.htm", "ZALM54");
@@ -2556,7 +2556,7 @@ void _set_zalmy_biela_sobota(short int modlitba){
 		set_zalm(3, modlitba, "z24.htm", "ZALM24");
 	}
 	/* 2006-01-26: doplnenÈ ûalmy pre modlitbu cez deÚ */
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt5 == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt[5] == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
 		/* 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia */
 		set_zalm(1, modlitba, "z27.htm", "ZALM27");
 		set_zalm(2, modlitba, "z30.htm", "ZALM30");
@@ -2586,7 +2586,7 @@ void _set_zalmy_za_zosnulych(short int modlitba){
 		set_zalm(2, modlitba, "z40.htm", "ZALM40_II");
 		set_zalm(3, modlitba, "z42.htm", "ZALM42");
 	}
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt5 == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt[5] == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
 		/* 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia */
 		set_zalm(1, modlitba, "z70.htm", "ZALM70");
 		set_zalm(2, modlitba, "z85.htm", "ZALM85");
@@ -2683,7 +2683,7 @@ void _set_zalmy_velk_oktava(short int den, short int modlitba){
 				break;
 		}/* switch(den) */
 	}
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt5 == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt[5] == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
 		/* 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia */
 		/* modlitba cez deÚ */
 		switch(den){
@@ -2815,7 +2815,7 @@ void _set_zalmy_velkonocna_nedela(short int modlitba){
 	else if(modlitba == MODL_POSV_CITANIE){
 		_set_zalmy_1nedele_pc();
 	}
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt5 == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt[5] == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
 		/* 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia */
 		_set_zalmy_1nedele_mcd();
 	}
@@ -2844,7 +2844,7 @@ void _set_zalmy_nanebovstupenie(short int modlitba){
 		set_zalm(2, modlitba, "z68.htm", "ZALM68_II");
 		set_zalm(3, modlitba, "z68.htm", "ZALM68_III");
 	}
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt5 == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt[5] == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
 		/* 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia */
 		set_zalm(1, modlitba, "z8.htm", "ZALM8");
 		set_zalm(2, modlitba, "z19.htm", "ZALM19_I");
@@ -2875,7 +2875,7 @@ void _set_zalmy_zoslanie_ducha_sv(short int modlitba){
 		set_zalm(2, modlitba, "z104.htm", "ZALM104_II");
 		set_zalm(3, modlitba, "z104.htm", "ZALM104_III");
 	}
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt5 == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt[5] == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
 		/* 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia */
 		_set_zalmy_1nedele_mcd();
 	}
@@ -2904,7 +2904,7 @@ void _set_zalmy_najsv_trojice(short int modlitba){
 		_set_zalmy_1nedele_rch();
 	}
 	/* 2006-01-24: doplnenÈ ûalmy pre modlitbu cez deÚ */
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt5 == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt[5] == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
 		/* 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia */
 		_set_zalmy_1nedele_mcd();
 	}
@@ -2934,7 +2934,7 @@ void _set_zalmy_krista_krala(short int modlitba){
 		_set_zalmy_1nedele_rch();
 	}
 	/* 2006-01-24: doplnenÈ ûalmy pre modlitbu cez deÚ */
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt5 == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt[5] == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
 		/* 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia */
 		_set_zalmy_1nedele_mcd();
 	}
@@ -3019,7 +3019,7 @@ void _set_zalmy_narodenie(short int modlitba){
 		set_zalm(2, modlitba, "z19.htm", "ZALM19,2-7");
 		set_zalm(3, modlitba, "z45.htm", "ZALM45");
 	}
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt5 == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt[5] == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
 		/* 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia */
 		set_zalm(1, modlitba, "z19.htm", "ZALM19,8-15");
 		set_zalm(2, modlitba, "z47.htm", "ZALM47");
@@ -3047,7 +3047,7 @@ void _set_zalmy_zjv(short int modlitba){
 		set_zalm(2, modlitba, "z96.htm", "ZALM96");
 		set_zalm(3, modlitba, "z97.htm", "ZALM97");
 	}
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt5 == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt[5] == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
 		/* 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia */
 		set_zalm(1, modlitba, "z47.htm", "ZALM47");
 		set_zalm(2, modlitba, "z86.htm", "ZALM86,1-10");
@@ -3244,7 +3244,7 @@ void _set_zalmy_sviatok_krstu(short int modlitba){
 	}
 	/* 2006-01-24: doplnenÈ ûalmy pre modlitbu cez deÚ - overiù, Ëi s˙ naozaj z nedele 1. t˝ûdÚa */
 	/* 2007-01-11: pre mcd ûalmy z nedele 2. t˝ûdÚa (7.1.) alebo z nedele 3. t˝ûdÚa podæa roka */
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt5 == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (_global_opt[5] == MODL_CEZ_DEN_ZALMY_ZO_DNA)){
 		/* 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia */
 		if(_global_den.denvr == 7){
 			// ak je to 7.1.
@@ -6675,7 +6675,7 @@ label_24_DEC:
 				_set_zalmy_velkonocna_nedela(modlitba);
 				/* 2006-01-27: pridan˝ popis k posv. ËÌtaniu veækonoËnej nedele */
 				_vtroj_popis;
-				if(_global_opt5 == MODL_CEZ_DEN_ZALMY_ZO_DNA){
+				if(_global_opt[5] == MODL_CEZ_DEN_ZALMY_ZO_DNA){
 					/* 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia (realizovanÈ aj v _set_zalmy_velkonocna_nedela()...) */
 					modlitba = MODL_PREDPOLUDNIM;
 					_set_zalmy_velkonocna_nedela(modlitba);
@@ -6692,7 +6692,7 @@ label_24_DEC:
 				_set_zalmy_biela_sobota(modlitba);
 				modlitba = MODL_POSV_CITANIE;
 				_set_zalmy_biela_sobota(modlitba);
-				if(_global_opt5 == MODL_CEZ_DEN_ZALMY_ZO_DNA){
+				if(_global_opt[5] == MODL_CEZ_DEN_ZALMY_ZO_DNA){
 					/* 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia (realizovanÈ aj v _set_zalmy_biela_sobota()...) */
 					modlitba = MODL_PREDPOLUDNIM;
 					_set_zalmy_biela_sobota(modlitba);
@@ -6708,7 +6708,7 @@ label_24_DEC:
 			else if(den == DEN_PIATOK){
 				modlitba = MODL_POSV_CITANIE;
 				_set_zalmy_velky_piatok(modlitba);
-				if(_global_opt5 == MODL_CEZ_DEN_ZALMY_ZO_DNA){
+				if(_global_opt[5] == MODL_CEZ_DEN_ZALMY_ZO_DNA){
 					/* 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia (realizovanÈ aj v _set_zalmy_velky_piatok()...) */
 					modlitba = MODL_PREDPOLUDNIM;
 					_set_zalmy_velky_piatok(modlitba);
@@ -7822,7 +7822,7 @@ short int _spol_cast_je_panna(_struct_sc sc){
 	else{_set_hymnus(modlitba, _file, _anchor);}\
 	set_LOG_svsv;}
 /* antifony */
-/* kedysi tam pred celym blokom bolo if(_global_opt2 == MODL_ZALMY_ZO_SV) 
+/* kedysi tam pred celym blokom bolo if(_global_opt[2] == MODL_ZALMY_ZO_SV) 
  * 2005-07-27: pre sviatky sv‰t˝ch posv‰tnÈ ËÌtania maj˙ antifÛny tam, kde ËÌtania
  * 2010-03-25: pre ˙Ëely modlitby cez deÚ (keÔ s˙ ant. 1 aû 3 rovnakÈ) pouûi _vlastna_cast_antifony_rovnake
  */
@@ -8066,7 +8066,7 @@ short int _spol_cast_je_panna(_struct_sc sc){
 /* ... az na antifony... */
 /* 2009-11-10: upravenÈ pre modlitbu cez deÚ */
 #define _spolocna_cast_antifony {\
-	if((_global_opt3 != MODL_SPOL_CAST_NEBRAT)){\
+	if((_global_opt[3] != MODL_SPOL_CAST_NEBRAT)){\
 		Log("  antifony vlastnej casti zo sviatku...\n");\
 		sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI))? ANCHOR_ANTIFONY : ANCHOR_ANTIFONA1);\
 		_set_antifona1(modlitba, _file, _anchor);\
@@ -8502,7 +8502,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
-		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_prve_vespery_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_sviatok_apostolov(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_apostolov(modlitba);
 		}
@@ -8520,7 +8520,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* posvatne citanie */
 		modlitba = MODL_POSV_CITANIE;
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_sviatok_apostolov(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_apostolov(modlitba);
 		}
@@ -8539,11 +8539,11 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		/* 2006-01-25: PÙvodne tu bolo AND; upravenÈ kvÙli tomu, aby sa ûalmy z nedele 1. t˝ûdÚa
 		 *             zobrazili aj v prÌpade, ak by podæa smernÌc nemali (nemuseli) byù,
 		 *             ale pouûÌvateæ si to v detailoch vyberie.
-		 *             Pritom default pre _global_opt2 sme zmenili na MODL_ZALMY_ZO_DNA.
+		 *             Pritom default pre _global_opt[2] sme zmenili na MODL_ZALMY_ZO_DNA.
 		 *             Takto isto zmenenÈ na vöetk˝ch ostatn˝ch miestach - bez pozn·mky.
 		 *             2006-01-25_ZALMY1NE_FIX
 		 */
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-01-25_ZALMY1NE_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-01-25_ZALMY1NE_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			_set_zalmy_1nedele_rch();
 		}
 		_spolocna_cast_full(modlitba);
@@ -8587,7 +8587,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
 			modlitba = MODL_VESPERY;
-			if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+			if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 				Log("  _set_zalmy_sviatok_apostolov(%s)...\n", nazov_modlitby(modlitba));
 				_set_zalmy_sviatok_apostolov(modlitba);
 			}
@@ -8628,7 +8628,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
-		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_prve_vespery_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_sviatok_duch_past(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_duch_past(modlitba);
 		}
@@ -8638,7 +8638,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-01-25_ZALMY1NE_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-01-25_ZALMY1NE_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			_set_zalmy_1nedele_rch();
 		}
 		_spolocna_cast_full(modlitba);
@@ -8648,7 +8648,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* posvatne citanie */
 		modlitba = MODL_POSV_CITANIE;
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_sviatok_duch_past(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_duch_past(modlitba);
 		}
@@ -8668,7 +8668,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
 			modlitba = MODL_VESPERY;
-			if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+			if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 				Log("  _set_zalmy_sviatok_duch_past(%s)...\n", nazov_modlitby(modlitba));
 				_set_zalmy_sviatok_duch_past(modlitba);
 			}
@@ -8774,7 +8774,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
-		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_prve_vespery_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_sviatok_muc(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_muc(modlitba);
 		}
@@ -8786,7 +8786,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-01-25_ZALMY1NE_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-01-25_ZALMY1NE_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			_set_zalmy_1nedele_rch();
 		}
 		_spolocna_cast_full(modlitba);
@@ -8796,7 +8796,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* posvatne citanie */
 		modlitba = MODL_POSV_CITANIE;
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_sviatok_muc(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_muc(modlitba);
 		}
@@ -8814,7 +8814,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
 			modlitba = MODL_VESPERY;
-			if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+			if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 				Log("  _set_zalmy_sviatok_muc(%s)...\n", nazov_modlitby(modlitba));
 				_set_zalmy_sviatok_muc(modlitba);
 			}
@@ -8846,7 +8846,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
-		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_prve_vespery_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_sviatok_muc(%s, 2)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_muc(modlitba, 2);
 		}
@@ -8857,7 +8857,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-01-25_ZALMY1NE_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-01-25_ZALMY1NE_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			_set_zalmy_1nedele_rch();
 		}
 		_spolocna_cast_full(modlitba);
@@ -8869,7 +8869,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* posvatne citanie */
 		modlitba = MODL_POSV_CITANIE;
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_sviatok_muc(%s, 2)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_muc(modlitba, 2);
 		}
@@ -8884,7 +8884,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
 			modlitba = MODL_VESPERY;
-			if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+			if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 				Log("  _set_zalmy_sviatok_muc(%s, 2)...\n", nazov_modlitby(modlitba));
 				_set_zalmy_sviatok_muc(modlitba, 2);
 			}
@@ -9135,7 +9135,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
-		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_prve_vespery_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_sviatok_duch_past(%s)... - pretoûe pre sv‰t˝ch muûov sa ber˙ tie istÈ ûalmy\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_duch_past(modlitba);
 		}
@@ -9144,7 +9144,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-01-25_ZALMY1NE_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-01-25_ZALMY1NE_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			_set_zalmy_1nedele_rch();
 		}
 		_spolocna_cast_full(modlitba);
@@ -9156,7 +9156,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* posvatne citanie */
 		modlitba = MODL_POSV_CITANIE;
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_sviatok_duch_past(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_duch_past(modlitba);
 		}
@@ -9180,7 +9180,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
 			modlitba = MODL_VESPERY;
-			if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+			if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 				Log("  _set_zalmy_sviatok_duch_past(%s)...\n", nazov_modlitby(modlitba));
 				_set_zalmy_sviatok_duch_past(modlitba);
 			}
@@ -9210,7 +9210,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
-		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_prve_vespery_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_sviatok_panien(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_panien(modlitba);
 		}
@@ -9219,7 +9219,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-01-25_ZALMY1NE_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-01-25_ZALMY1NE_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			_set_zalmy_1nedele_rch();
 		}
 		_spolocna_cast_full(modlitba);
@@ -9229,7 +9229,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* posvatne citanie */
 		modlitba = MODL_POSV_CITANIE;
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_sviatok_panien(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_panien(modlitba);
 		}
@@ -9253,7 +9253,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
 			modlitba = MODL_VESPERY;
-			if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+			if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 				Log("  _set_zalmy_sviatok_panien(%s)...\n", nazov_modlitby(modlitba));
 				_set_zalmy_sviatok_panien(modlitba);
 			}
@@ -9275,7 +9275,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
-		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_prve_vespery_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_sviatok_panien(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_panien(modlitba);
 		}
@@ -9286,7 +9286,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-01-25_ZALMY1NE_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-01-25_ZALMY1NE_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			_set_zalmy_1nedele_rch();
 		}
 		_spolocna_cast_full(modlitba);
@@ -9295,7 +9295,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* posvatne citanie */
 		modlitba = MODL_POSV_CITANIE;
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_sviatok_panien(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_panien(modlitba);
 		}
@@ -9307,7 +9307,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
 			modlitba = MODL_VESPERY;
-			if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+			if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 				Log("  _set_zalmy_sviatok_panien(%s)...\n", nazov_modlitby(modlitba));
 				_set_zalmy_sviatok_panien(modlitba);
 			}
@@ -9329,7 +9329,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
-		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_prve_vespery_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_sviatok_marie(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_marie(modlitba);
 		}
@@ -9340,7 +9340,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-01-25_ZALMY1NE_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-01-25_ZALMY1NE_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			_set_zalmy_1nedele_rch();
 		}
 		_spolocna_cast_full(modlitba);
@@ -9359,7 +9359,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* posvatne citanie */
 		modlitba = MODL_POSV_CITANIE;
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_sviatok_marie(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_sviatok_marie(modlitba);
 		}
@@ -9379,7 +9379,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
 			modlitba = MODL_VESPERY;
-			if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+			if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 				Log("  _set_zalmy_sviatok_marie(%s)...\n", nazov_modlitby(modlitba));
 				_set_zalmy_sviatok_marie(modlitba);
 			}
@@ -9399,8 +9399,8 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		Log("/* spolocna cast na oficium za zosnulych */\n");
 		/* 2010-07-12: upravenÈ tak, ûe spoloËn· Ëasù na ofÌcium za zosnul˝ch vûdy berie vlastnÈ ûalmy */
 		Log("/* upravenÈ tak, ûe spoloËn· Ëasù na ofÌcium za zosnul˝ch vûdy berie vlastnÈ ûalmy */\n");
-		short int _global_opt2_pom = _global_opt2;
-		_global_opt2 = MODL_ZALMY_ZO_SV;
+		short int _global_opt2_pom = _global_opt[2];
+		_global_opt[2] = MODL_ZALMY_ZO_SV;
 
 		/* invitatÛrium; 2007-11-14 */
 		modlitba = MODL_INVITATORIUM;
@@ -9408,7 +9408,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_za_zosnulych(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_za_zosnulych(modlitba);
 		}
@@ -9420,7 +9420,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
 			modlitba = MODL_VESPERY;
-			if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+			if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 				Log("  _set_zalmy_za_zosnulych(%s)...\n", nazov_modlitby(modlitba));
 				_set_zalmy_za_zosnulych(modlitba);
 			}
@@ -9441,7 +9441,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* 2007-11-08 / posv‰tnÈ ËÌtanie; 2006-02-11 */
 		modlitba = MODL_POSV_CITANIE;
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_za_zosnulych(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_za_zosnulych(modlitba);
 		}
@@ -9453,8 +9453,8 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		 */
 		_spolocna_cast_1cit_zvazok(modlitba, _anchor_pom, _anchor_zvazok, _anchor_head, _file, brat_1citanie);
 
-		Log("/* upravenÈ tak, ûe spoloËn· Ëasù na ofÌcium za zosnul˝ch vûdy berie vlastnÈ ûalmy; vraciam sp‰ù nastavenie _global_opt2 */\n");
-		_global_opt2 = _global_opt2_pom;
+		Log("/* upravenÈ tak, ûe spoloËn· Ëasù na ofÌcium za zosnul˝ch vûdy berie vlastnÈ ûalmy; vraciam sp‰ù nastavenie _global_opt[2] */\n");
+		_global_opt[2] = _global_opt2_pom;
 	}/* MODL_SPOL_CAST_ZA_ZOSNULYCH */
 
 	/* spolocna cast na sviatky posviacky chramu */
@@ -9468,7 +9468,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* prvÈ veöpery */
 		modlitba = MODL_PRVE_VESPERY;
-		if(su_zalmy_prve_vespery_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_prve_vespery_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2010-06-04/2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_posviacka_chramu(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_posviacka_chramu(modlitba);
 		}
@@ -9480,7 +9480,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* ranne chvaly */
 		modlitba = MODL_RANNE_CHVALY;
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_posviacka_chramu(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_posviacka_chramu(modlitba);
 		}
@@ -9499,7 +9499,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 
 		/* posv‰tnÈ ËÌtanie; 2006-02-11 */
 		modlitba = MODL_POSV_CITANIE;
-		if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+		if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 			Log("  _set_zalmy_posviacka_chramu(%s)...\n", nazov_modlitby(modlitba));
 			_set_zalmy_posviacka_chramu(modlitba);
 		}
@@ -9537,7 +9537,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		/* vespery */
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
 			modlitba = MODL_VESPERY;
-			if(su_zalmy_vlastne || (_global_opt2 == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
+			if(su_zalmy_vlastne || (_global_opt[2] == MODL_ZALMY_ZO_SV) || brat_zalmy == ANO){ /* 2006-02-04_ZALMY_ZO_SVIATKU_FIX; 2009-09-18: doplnenÈ brat_zalmy */
 				Log("  _set_zalmy_posviacka_chramu(%s)...\n", nazov_modlitby(modlitba));
 				_set_zalmy_posviacka_chramu(modlitba);
 			}
@@ -9597,8 +9597,8 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty
 	 */
 	Log("set_spolocna_cast({%s, %s, %s}) -- begin\n",
 		nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3));
-	Log("          _global_opt3 == %s (%d)\n",
-		nazov_spolc(_global_opt3), _global_opt3);
+	Log("          _global_opt[3] == %s (%d)\n",
+		nazov_spolc(_global_opt[3]), _global_opt[3]);
 
 	/* 2011-03-17: tu bolo nastavenie popisu pre danÈho sv‰tÈho; presunutÈ do samostatnej Ëasti, nakoæko sa to pouûÌva aj pre spomienky v pÙste, kde sa set_spolocna_cast) nevol· */
 	Log("teraz nastavujem POPIS (pre danÈho sv‰tÈho) -- vol·m set_popis_svaty_rch_mcd_pc_vesp()...\n");
@@ -9608,7 +9608,7 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty
 	 * "NepoökvrnenÈho Srdca prebl. Panny M·rie" -> "NepoökvrnenÈho Srdca Panny M·rie",
 	 * preto je tam nastaveny este raz na dummy, vid ZNOVUNASTAVENIE_POPISU_NA_DUMMY */
 
-	/* tu bola pasaz, nastavujuca _global_opt3 na sc.a1 v pripade,
+	/* tu bola pasaz, nastavujuca _global_opt[3] na sc.a1 v pripade,
 	 * ze je neurcena;
 	 * je teraz v sviatky_svatych() so styrmi vstupmi,
 	 * pretoze sa musi vykonat iba pri druhom spusteni funkcie
@@ -9630,52 +9630,52 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty
 	else{
 		Log("	nie je sl·vnosù (kvÙli nastaveniu ûalmov pre modlitbu cez deÚ)...\n");
 	}
-	Log("	_global_opt3 == %d\n", _global_opt3);
+	Log("	_global_opt[3] == %d\n", _global_opt[3]);
 
-	/* podla _global_opt3 urcime, ktoru spolocnu cast dat */
+	/* podla _global_opt[3] urcime, ktoru spolocnu cast dat */
 	if(sc.a1 != MODL_SPOL_CAST_NEURCENA){
-		if(_global_opt3 == sc.a1){
-			Log("	vstupujem do _set_spolocna_cast()...(_global_opt3 == sc.a1)\n");
-			_set_spolocna_cast(_global_opt3, brat_antifony, brat_zalmy, brat_1citanie, brat_kresp_prosby, brat_2citanie, brat_antifony_mcd);
+		if(_global_opt[3] == sc.a1){
+			Log("	vstupujem do _set_spolocna_cast()...(_global_opt[3] == sc.a1)\n");
+			_set_spolocna_cast(_global_opt[3], brat_antifony, brat_zalmy, brat_1citanie, brat_kresp_prosby, brat_2citanie, brat_antifony_mcd);
 		}
 		else{
-			Log("	neplatÌ _global_opt3 == sc.a1 ...\n");
+			Log("	neplatÌ _global_opt[3] == sc.a1 ...\n");
 			if(sc.a2 != MODL_SPOL_CAST_NEURCENA){
-				if(_global_opt3 == sc.a2){
-					Log("	vstupujem do _set_spolocna_cast()...(_global_opt3 == sc.a2)\n");
-					_set_spolocna_cast(_global_opt3, brat_antifony, brat_zalmy, brat_1citanie, brat_kresp_prosby, brat_2citanie, brat_antifony_mcd);
+				if(_global_opt[3] == sc.a2){
+					Log("	vstupujem do _set_spolocna_cast()...(_global_opt[3] == sc.a2)\n");
+					_set_spolocna_cast(_global_opt[3], brat_antifony, brat_zalmy, brat_1citanie, brat_kresp_prosby, brat_2citanie, brat_antifony_mcd);
 				}
 				else{
 					if(sc.a3 != MODL_SPOL_CAST_NEURCENA){
-						if(_global_opt3 == sc.a3){
-							Log("	vstupujem do _set_spolocna_cast()...(_global_opt3 == sc.a3)\n");
-							_set_spolocna_cast(_global_opt3, brat_antifony, brat_zalmy, brat_1citanie, brat_kresp_prosby, brat_2citanie, brat_antifony_mcd);
+						if(_global_opt[3] == sc.a3){
+							Log("	vstupujem do _set_spolocna_cast()...(_global_opt[3] == sc.a3)\n");
+							_set_spolocna_cast(_global_opt[3], brat_antifony, brat_zalmy, brat_1citanie, brat_kresp_prosby, brat_2citanie, brat_antifony_mcd);
 						}
 						else{
-							if(_global_opt3 == MODL_SPOL_CAST_NEBRAT){
+							if(_global_opt[3] == MODL_SPOL_CAST_NEBRAT){
 								set_LOG_sc("  neberiem spolocnu cast\n");
 								Export("<!--neberiem spolocnu cast-->");
 							}
 							else
 							/* sem by to nemalo prist */
 							{
-							set_LOG_sc("-- Error: sc (a1, a2, a3) su sice urcene, ale _global_opt3 sa nerovna ani jednej z nich!\n");
-							Export("%s\n", "Error: _global_opt3 assigned incorectly (a1, a2, a3 -- ok)");
+							set_LOG_sc("-- Error: sc (a1, a2, a3) su sice urcene, ale _global_opt[3] sa nerovna ani jednej z nich!\n");
+							Export("%s\n", "Error: _global_opt[3] assigned incorectly (a1, a2, a3 -- ok)");
 							ALERT;
 							return;
 							}
 						}
 					}/* sc.a3 je urcena */
 					else{
-						if(_global_opt3 == MODL_SPOL_CAST_NEBRAT){
+						if(_global_opt[3] == MODL_SPOL_CAST_NEBRAT){
 							set_LOG_sc("  neberiem spolocnu cast\n");
 							Export("<!--neberiem spolocnu cast-->");
 						}
 						else
 						/* sem by to nemalo prist */
 						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO){
-							set_LOG_sc("-- Error: sc (a1, a2) su sice urcene, ale _global_opt3 sa nerovna ani jednej z nich!\n");
-							Export("%s\n", "Error: _global_opt3 assigned incorectly (a1, a2 -- ok)");
+							set_LOG_sc("-- Error: sc (a1, a2) su sice urcene, ale _global_opt[3] sa nerovna ani jednej z nich!\n");
+							Export("%s\n", "Error: _global_opt[3] assigned incorectly (a1, a2 -- ok)");
 							ALERT;
 							return;
 						}
@@ -9683,15 +9683,15 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty
 				}
 			}/* sc.a2 je urcena */
 			else{
-				if(_global_opt3 == MODL_SPOL_CAST_NEBRAT){
+				if(_global_opt[3] == MODL_SPOL_CAST_NEBRAT){
 					set_LOG_sc("  neberiem spolocnu cast\n");
 					Export("<!--neberiem spolocnu cast-->");
 				}
 				else
 				/* sem by to nemalo prist */
 				if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO){
-					set_LOG_sc("-- Error: sc (a1) je sice urcena, ale _global_opt3 sa jej nerovna!\n");
-					Export("%s\n", "Error: _global_opt3 assigned incorectly (a1 -- ok)");
+					set_LOG_sc("-- Error: sc (a1) je sice urcena, ale _global_opt[3] sa jej nerovna!\n");
+					Export("%s\n", "Error: _global_opt[3] assigned incorectly (a1 -- ok)");
 					ALERT;
 					return;
 				}
@@ -9701,13 +9701,13 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty
 	else{
 		/* sem by to nemalo prist */
 		if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO){
-			Log("-- Error: sc (a1) nie je urcene; _global_opt3 == %s\n", nazov_spolc(_global_opt3));
+			Log("-- Error: sc (a1) nie je urcene; _global_opt[3] == %s\n", nazov_spolc(_global_opt[3]));
 			Export("%s\n", "Error: a1 (member of sc) assigned incorectly");
 			ALERT;
 			return;
 		}
 	}
-	Log("set_spolocna_cast(_global_opt3 == %s) -- end\n", nazov_spolc(_global_opt3));
+	Log("set_spolocna_cast(_global_opt[3] == %s) -- end\n", nazov_spolc(_global_opt[3]));
 }/* set_spolocna_cast(); */
 
 /* 2007-10-02: vytvoren˝ nov˝ define, aby nebolo toæko copy-paste miest v kÛde */
@@ -16134,7 +16134,7 @@ label_25_MAR:
 						/* 2005-08-27: sviatok apoötola Barnab·öa - ûalmy a antifÛny zo dÚa - ale 
 						 * len pre rannÈ chv·ly; preto vlastne to ignorujeme, nech sa napr. posv‰tnÈ ËÌtanie 
 						 * alebo veöpery ber˙ z apoötolov - preto sme zapozn·mkovali nasledovnÈ priradenie:
-						 * _global_opt2 = MODL_ZALMY_ZO_DNA; - ûalmy a antifÛny zo dÚa - ale len pre rannÈ chv·ly */
+						 * _global_opt[2] = MODL_ZALMY_ZO_DNA; - ûalmy a antifÛny zo dÚa - ale len pre rannÈ chv·ly */
 						if(query_type != PRM_DETAILY)
 							set_spolocna_cast(sc, poradie_svaty);
 
@@ -17245,7 +17245,7 @@ label_25_MAR:
 				case 5: /* MES_JUL -- 05JUL */
 					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
-						_global_opt3 = _decode_spol_cast(_global_svaty1.spolcast).a1; /* 2010-07-06: doplnenÈ */
+						_global_opt[3] = _decode_spol_cast(_global_svaty1.spolcast).a1; /* 2010-07-06: doplnenÈ */
 						_global_svaty1.typslav = SLAV_SLAVNOST;
 						_global_den.typslav = SLAV_SLAVNOST; /* 2010-07-06: doplnenÈ kvÙli spr·vnemu fungovaniu set_spolocna_cast(), t. j. tamojöÌch kontrol, Ëi napr. s˙ ûalmy vlastnÈ */
 						_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
@@ -20596,7 +20596,7 @@ label_25_MAR:
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){ /* 2008-10-09: odvetvenÈ len pre »esko; prevzatÈ podæa cyrila a metoda */
 
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
-						_global_opt3 = MODL_SPOL_CAST_MUCENIK; // 2009-10-27: doplnenÈ, aby sa to mohlo pouûiù v set_spolocna_cast()
+						_global_opt[3] = MODL_SPOL_CAST_MUCENIK; // 2009-10-27: doplnenÈ, aby sa to mohlo pouûiù v set_spolocna_cast()
 						_global_svaty1.typslav = SLAV_SLAVNOST;
 						_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 						mystrcpy(_global_svaty1.meno, text_SEP_28[_global_jazyk], MENO_SVIATKU);
@@ -24128,12 +24128,12 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 	_struct_sc sc = _decode_spol_cast(_global_den.spolcast);
 
 	/* 2006-02-06: doplnen˝ debug v˝pis */
-	Log("a hned nastavujem _global_opt3 (ak je neurËenÈ: je teraz %d) na sc.a1):\n", _global_opt3);
+	Log("a hned nastavujem _global_opt[3] (ak je neurËenÈ: je teraz %d) na sc.a1):\n", _global_opt[3]);
 	/* ak opt3 je MODL_SPOL_CAST_NEURCENA, tak ju urcime podla
 	 * 1. spolocnej casti */
-	if(_global_opt3 == MODL_SPOL_CAST_NEURCENA){
-		_global_opt3 = sc.a1;
-		Log("\tsetting _global_opt3 to sc.a1 == %d\n", sc.a1);
+	if(_global_opt[3] == MODL_SPOL_CAST_NEURCENA){
+		_global_opt[3] = sc.a1;
+		Log("\tsetting _global_opt[3] to sc.a1 == %d\n", sc.a1);
 	}
 	else {
 		Log("\tnie je potrebnÈ modifikovaù, lebo uû je nastaven· (hoci sc.a1 == %d)\n", sc.a1);

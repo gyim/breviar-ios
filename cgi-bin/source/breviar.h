@@ -10,7 +10,7 @@
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-07-01a.D. | void main je zakomentovane ak linux      */
 /*   2003-07-14a.D. | zmena void main -> int main (gcc v3.2.2 )*/
-/*   2003-08-07a.D. | pridane _global_opt5                     */
+/*   2003-08-07a.D. | pridane _global_opt[5]                   */
 /*   2003-08-13a.D. | pridane _type a _global_modl pre posv.cit*/
 /*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám          */
 /*   2006-08-18a.D. | zmena int na short int (staèí 32tis.)    */
@@ -138,17 +138,8 @@ extern _struct_lrok *_global_r_ptr;
  */
 extern short int _global_pocet_svatych;
 
-/* globalne premenne, obsahujuce pom_MODL_OPT... */
-extern short int _global_opt1/* = NIE */;
-extern short int _global_opt2/* = MODL_ZALMY_ZO_DNA; 2006-01-25: upravené, bolo tu MODL_ZALMY_ZO_SV */;
-extern short int _global_opt3;
-extern short int _global_opt4;
-extern short int _global_opt5; /* pridane 2003-08-07 */
-extern short int _global_opt6; /* pridané 2007-06-01 */
-extern short int _global_opt7; /* pridané 2007-06-01 */
-extern short int _global_opt8; /* pridané 2011-03-22 */
-extern short int _global_opt9; /* pridané 2011-03-25 */
-extern short int _global_opt0; /* pridané 2011-04-04 */
+/* globálna premenná -- pole -- obsahujúca options; pôvodne to boli globálne premenné _global_opt[1].._global_opt[9] atï., obsahujú pom_MODL_OPT... */
+extern short int _global_opt[POCET_GLOBAL_OPT];
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
 extern char *_global_string;
@@ -270,38 +261,38 @@ extern short int _global_opt_export_date_format;
 	}\
 \
 	/* 2011-01-26: pridané odovzdanie parametrov pre options1 atï. */\
-	if(_global_opt1 != CFG_OPTION1_DEFAULT){\
-		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT1, _global_opt1);\
+	if(_global_opt[1] != CFG_OPTION1_DEFAULT){\
+		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT1, _global_opt[1]);\
 		strcat(pom2, pom3);\
 		Log("\tPrilepil som aj opt1: `%s' (2011-01-26)\n", pom3);\
 	}\
-	if(_global_opt2 != CFG_OPTION2_DEFAULT){\
-		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT2, _global_opt2);\
+	if(_global_opt[2] != CFG_OPTION2_DEFAULT){\
+		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT2, _global_opt[2]);\
 		strcat(pom2, pom3);\
 		Log("\tPrilepil som aj opt2: `%s' (2011-01-26)\n", pom3);\
 	}\
-	if(_global_opt4 != CFG_OPTION4_DEFAULT){\
-		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT4, _global_opt4);\
+	if(_global_opt[4] != CFG_OPTION4_DEFAULT){\
+		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT4, _global_opt[4]);\
 		strcat(pom2, pom3);\
 		Log("\tPrilepil som aj opt4: `%s' (2011-01-26)\n", pom3);\
 	}\
-	if(_global_opt5 != CFG_OPTION5_DEFAULT){\
-		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT5, _global_opt5);\
+	if(_global_opt[5] != CFG_OPTION5_DEFAULT){\
+		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT5, _global_opt[5]);\
 		strcat(pom2, pom3);\
 		Log("\tPrilepil som aj opt5: `%s' (2011-01-26)\n", pom3);\
 	}\
-	if(_global_opt8 != CFG_OPTION8_DEFAULT){\
-		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT8, _global_opt8);\
+	if(_global_opt[8] != CFG_OPTION8_DEFAULT){\
+		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT8, _global_opt[8]);\
 		strcat(pom2, pom3);\
 		Log("\tPrilepil som aj opt8: `%s' (2011-03-23)\n", pom3);\
 	}\
-	if(_global_opt9 != CFG_OPTION9_DEFAULT){\
-		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT9, _global_opt9);\
+	if(_global_opt[9] != CFG_OPTION9_DEFAULT){\
+		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT9, _global_opt[9]);\
 		strcat(pom2, pom3);\
 		Log("\tPrilepil som aj opt9: `%s' (2011-03-23)\n", pom3);\
 	}\
-	if(_global_opt0 != CFG_OPTION0_DEFAULT){\
-		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT0, _global_opt0);\
+	if(_global_opt[0] != CFG_OPTION0_DEFAULT){\
+		sprintf(pom3, HTML_AMPERSAND"%s=%d", STR_MODL_OPT0, _global_opt[0]);\
 		strcat(pom2, pom3);\
 		Log("\tPrilepil som aj opt0: `%s' (2011-03-23)\n", pom3);\
 	}\

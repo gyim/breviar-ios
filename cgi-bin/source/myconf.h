@@ -67,6 +67,7 @@ extern short int cfg_option0_czop;
 
 #define CFG_OPTION1_DEFAULT (((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU))? cfg_option1_default: ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))? cfg_option1_cz: cfg_option1_default)
 #define CFG_OPTION2_DEFAULT (((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU))? cfg_option2_default: ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))? cfg_option2_cz: cfg_option2_default)
+// option 3 nemá default
 #define CFG_OPTION4_DEFAULT (((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU))? cfg_option4_default: ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))? cfg_option4_cz: cfg_option4_default)
 #define CFG_OPTION5_DEFAULT (((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU))? cfg_option5_default: ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))? cfg_option5_cz: cfg_option5_default)
 #define CFG_OPTION6_DEFAULT (((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU))? cfg_option6_default: ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))? cfg_option6_cz: cfg_option6_default)
