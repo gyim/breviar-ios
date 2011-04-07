@@ -889,6 +889,7 @@ static void scanquery(char *q){
 short int setForm(void){
 	char local_str[SMALL] = STR_EMPTY;
 	short int ret;
+	short int i; /* kvôli PRILEP_REQUEST_OPTIONS */
 
 	Log("setForm() -- begin\n");
 
@@ -967,178 +968,57 @@ short int setForm(void){
 		ret = putenv(local_str);
 		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
 	}
-	/* pom_MODL_OPT[1]..pom_MODL_OPT[5] */
-	mystrcpy(local_str, STR_EMPTY, SMALL);
-	if(!equals(pom_MODL_OPT[1], STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT1), SMALL);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPT[1]);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
-	}
-	mystrcpy(local_str, STR_EMPTY, SMALL);
-	if(!equals(pom_MODL_OPT[2], STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT2), SMALL);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPT[2]);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
-	}
-	mystrcpy(local_str, STR_EMPTY, SMALL);
-	if(!equals(pom_MODL_OPT[3], STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT3), SMALL);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPT[3]);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
-	}
-	mystrcpy(local_str, STR_EMPTY, SMALL);
-	if(!equals(pom_MODL_OPT[4], STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT4), SMALL);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPT[4]);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
-	}
-	mystrcpy(local_str, STR_EMPTY, SMALL);
-	if(!equals(pom_MODL_OPT[5], STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT5), SMALL);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPT[5]);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
+
+	/* 2011-04-07: upravené; options */
+	for(i = 0; i < POCET_GLOBAL_OPT; i++){
+		mystrcpy(local_str, STR_EMPTY, SMALL);
+		if(!equals(pom_MODL_OPT[i], STR_EMPTY)){
+			mystrcpy(local_str, WWW_PREFIX, SMALL);
+			switch(i){
+				case 0: strcat(local_str, STR_MODL_OPT0); break;
+				case 1: strcat(local_str, STR_MODL_OPT1); break;
+				case 2: strcat(local_str, STR_MODL_OPT2); break;
+				case 3: strcat(local_str, STR_MODL_OPT3); break;
+				case 4: strcat(local_str, STR_MODL_OPT4); break;
+				case 5: strcat(local_str, STR_MODL_OPT5); break;
+				case 6: strcat(local_str, STR_MODL_OPT6); break;
+				case 7: strcat(local_str, STR_MODL_OPT7); break;
+				case 8: strcat(local_str, STR_MODL_OPT8); break;
+				case 9: strcat(local_str, STR_MODL_OPT9); break;
+			}/* switch(i) */
+			strcat(local_str, "=");
+			strcat(local_str, pom_MODL_OPT[i]);
+			Log("--- setForm: putenv(%s); ...\n", local_str);
+			ret = putenv(local_str);
+			Log("--- setForm: putenv returned %d.\n", ret);
+		}
 	}
 
-	/* pom_MODL_OPT[6] resp. pom_MODL_OPT[7] pridané 2007-06-01, pretože sa používali (pre rozbor mesiaca) opt1 resp. opt2; default sa "bil" */
-	mystrcpy(local_str, STR_EMPTY, SMALL);
-	if(!equals(pom_MODL_OPT[6], STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT6), SMALL);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPT[6]);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret);
-	}
-	mystrcpy(local_str, STR_EMPTY, SMALL);
-	if(!equals(pom_MODL_OPT[7], STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT7), SMALL);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPT[7]);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret);
-	}
-
-	/* pom_MODL_OPT[8] pridané 2011-03-22 */
-	mystrcpy(local_str, STR_EMPTY, SMALL);
-	if(!equals(pom_MODL_OPT[8], STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT8), SMALL);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPT[8]);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret);
-	}
-
-	/* pom_MODL_OPT[9] pridané 2011-03-25 */
-	mystrcpy(local_str, STR_EMPTY, SMALL);
-	if(!equals(pom_MODL_OPT[9], STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT9), SMALL);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPT[9]);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret);
-	}
-
-	/* pom_MODL_OPT[0] pridané 2011-03-25 */
-	mystrcpy(local_str, STR_EMPTY, SMALL);
-	if(!equals(pom_MODL_OPT[0], STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPT0), SMALL);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPT[0]);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret);
-	}
-
-	/* pom_MODL_OPTF[1]..pom_MODL_OPTF[1] -- force verzie pom_MODL_OPT[1]..pom_MODL_OPT[5] */
-	mystrcpy(local_str, STR_EMPTY, SMALL);
-	if(!equals(pom_MODL_OPTF[1], STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPTF1), SMALL);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPTF[1]);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret);
-	}
-	mystrcpy(local_str, STR_EMPTY, SMALL);
-	if(!equals(pom_MODL_OPTF[2], STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPTF2), SMALL);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPT[2]);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret);
-	}
-	mystrcpy(local_str, STR_EMPTY, SMALL);
-	if(!equals(pom_MODL_OPTF[3], STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPTF3), SMALL);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPTF[3]);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret);
-	}
-	mystrcpy(local_str, STR_EMPTY, SMALL);
-	if(!equals(pom_MODL_OPTF[4], STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPTF4), SMALL);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPTF[4]);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret);
-	}
-	mystrcpy(local_str, STR_EMPTY, SMALL);
-	if(!equals(pom_MODL_OPTF[5], STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPTF5), SMALL);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPTF[5]);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret);
-	}
-	mystrcpy(local_str, STR_EMPTY, SMALL);
-	if(!equals(pom_MODL_OPTF[8], STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPTF8), SMALL);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPTF[8]);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret);
-	}
-	mystrcpy(local_str, STR_EMPTY, SMALL);
-	if(!equals(pom_MODL_OPTF[9], STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPTF9), SMALL);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPTF[9]);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret);
-	}
-	mystrcpy(local_str, STR_EMPTY, SMALL);
-	if(!equals(pom_MODL_OPTF[0], STR_EMPTY)){
-		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_MODL_OPTF0), SMALL);
-		strcat(local_str, "=");
-		strcat(local_str, pom_MODL_OPTF[0]);
-		Log("--- setForm: putenv(%s); ...\n", local_str);
-		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret);
+	/* 2011-04-07: upravené; force options */
+	for(i = 0; i < POCET_GLOBAL_OPT; i++){
+		if((i == 6) || (i == 7))
+			continue;
+		mystrcpy(local_str, STR_EMPTY, SMALL);
+		if(!equals(pom_MODL_OPTF[i], STR_EMPTY)){
+			mystrcpy(local_str, WWW_PREFIX, SMALL);
+			switch(i){
+				case 0: strcat(local_str, STR_MODL_OPTF0); break;
+				case 1: strcat(local_str, STR_MODL_OPTF1); break;
+				case 2: strcat(local_str, STR_MODL_OPTF2); break;
+				case 3: strcat(local_str, STR_MODL_OPTF3); break;
+				case 4: strcat(local_str, STR_MODL_OPTF4); break;
+				case 5: strcat(local_str, STR_MODL_OPTF5); break;
+				case 6: strcat(local_str, STR_MODL_OPTF6); break;
+				case 7: strcat(local_str, STR_MODL_OPTF7); break;
+				case 8: strcat(local_str, STR_MODL_OPTF8); break;
+				case 9: strcat(local_str, STR_MODL_OPTF9); break;
+			}/* switch(i) */
+			strcat(local_str, "=");
+			strcat(local_str, pom_MODL_OPTF[i]);
+			Log("--- setForm: putenv(%s); ...\n", local_str);
+			ret = putenv(local_str);
+			Log("--- setForm: putenv returned %d.\n", ret);
+		}
 	}
 
 	/* 2006-07-11: Pridané kvôli jazykovým mutáciám */
@@ -5577,6 +5457,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 	char str_month[SMALL] = STR_EMPTY; /* 2009-08-12: pridané */
 	short int zmena_mesiaca = NIE;
 	short int som_v_tabulke = ANO; /* 2009-08-26: èi sa používa tabu¾ka; bežne pre web áno, pre export pre mobilné zariadenia [export_monthly_druh >= 3] netreba tabu¾ku */
+	short int i; /* kvôli PRILEP_REQUEST_OPTIONS */
 
 	if(_global_opt_batch_monthly == ANO && export_monthly_druh > 2){
 		som_v_tabulke = NIE;
@@ -6172,6 +6053,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	struct tm dnes;
 	short int month, day;
 	short int lo; /* liturgické obdobie; 2011-01-25 */
+	short int i; /* kvôli PRILEP_REQUEST_OPTIONS */
 
 	dnes.tm_mday = den;
 	dnes.tm_mon  = mesiac;
@@ -7485,6 +7367,8 @@ void _export_rozbor_dna_mesiaca_batch(short int d, short int m, short int r){
  *
  */
 void showDetails(short int den, short int mesiac, short int rok, short int poradie_svaty){
+
+	short int i; /* kvôli PRILEP_REQUEST_OPTIONS */
 
 	Log("spustam showDetails(%d, %s, %d, %d)...\n", den,
 		nazov_mesiaca(mesiac - 1), rok, poradie_svaty);
@@ -13174,32 +13058,32 @@ int main(int argc, char **argv){
 	
 	_main_LOG("-- log file programu pre Liturgiu hodín (c)1999-2011 Juraj Vidéky --\n");
 
-	// _main_LOG("inicializácia po¾a pom_MODL_OPT[]...\n");
+	_main_LOG("inicializácia po¾a pom_MODL_OPT[]...\n");
 	for(i = 0; i < POCET_GLOBAL_OPT; i++){
 		mystrcpy(pom_MODL_OPT[i], STR_EMPTY, SMALL);
 		// _main_LOG("pom_MODL_OPT[%d] == `%s'...\n", i, pom_MODL_OPT[i]);
 	}/* nastavenie pom_MODL_OPT[i] */
 
-	// _main_LOG("inicializácia po¾a pom_MODL_OPTF[]...\n");
+	_main_LOG("inicializácia po¾a pom_MODL_OPTF[]...\n");
 	for(i = 0; i < POCET_GLOBAL_OPT; i++){
 		mystrcpy(pom_MODL_OPTF[i], STR_EMPTY, SMALL);
 		// _main_LOG("pom_MODL_OPTF[%d] == `%s'...\n", i, pom_MODL_OPTF[i]);
 	}/* nastavenie pom_MODL_OPTF[i] */
 
-	// _main_LOG("spúšam log_pom_MODL_OPT();...\n");
-	// log_pom_MODL_OPT();
+	_main_LOG("spúšam log_pom_MODL_OPT();...\n");
+	log_pom_MODL_OPT();
 
-	// _main_LOG("spúšam log_pom_MODL_OPTF();...\n");
-	// log_pom_MODL_OPTF();
+	_main_LOG("spúšam log_pom_MODL_OPTF();...\n");
+	log_pom_MODL_OPTF();
 
 	/* config: dorobene 30/03/2000A.D. */
 	_main_LOG("first, reading configuration (file %s)...\n", CONFIG_FILE);
 
-	// _main_LOG("spúšam readConfig();...\n");
+	_main_LOG("spúšam readConfig();...\n");
 	readConfig();
 	/* 2007-06-01: keïže pribúda mnoho konfiguraèných parametrov, presunuli sme ich výpis do funkcie */
-	// _main_LOG("spúšam printConfig();...\n");
-	// printConfig();
+	_main_LOG("spúšam printConfig();...\n");
+	printConfig();
 	/* 2004-03-17 na inom mieste sa upravuje include_dir - je to 2004-03-17_TUTOLA */
 
 	_main_LOG("spúšam updateScriptName();...\n");
