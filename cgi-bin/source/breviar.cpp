@@ -6183,9 +6183,6 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("</li>");
 #endif
 
-// #ifdef MAIN_FORM_ZOBRAZIT_OPTION0
-// 2011-04-04: odvetvenÈ, aby sa to nedostalo na web (tam OS_linux)
-#ifdef OS_Windows_Ruby
 	Export("<li>\n");
 	/* option 0: zobraziù ËÌslovanie veröov, biblickÈ referencie... (pouûÌvame force opt0) */
 	Export((char *)html_text_zobrazit_option0[_global_jazyk]);
@@ -6200,7 +6197,6 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	}
 	Export("</select>\n");
 	Export("</li>");
-#endif
 
 	/* 2011-01-31: sem presunut· moûnosù v˝beru liturgickÈho kalend·ra */
 	if(_global_jazyk == JAZYK_SK){
