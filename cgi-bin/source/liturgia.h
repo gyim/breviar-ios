@@ -1121,9 +1121,15 @@ extern _struct_lrok *_global_r_ptr;
  */
 extern short int _global_pocet_svatych;
 
+#define OPT_0_VERSE_REF 0
+
 #define POCET_GLOBAL_OPT 10
 /* globálna premenná -- pole -- obsahujúca options; pôvodne to boli globálne premenné _global_opt1.._global_opt9 atï., obsahujú pom_MODL_OPT... */
 extern short int _global_opt[POCET_GLOBAL_OPT];
+
+/* 2011-04-08: úprava významu (a interpretácie) option 0 */
+#define BIT_OPT_0_VERSE      1
+#define BIT_OPT_0_REFERENCIE 2
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
 extern char *_global_string;

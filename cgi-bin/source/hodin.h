@@ -1210,6 +1210,27 @@ const char *str_nie[POCET_JAZYKOV + 1] =
 	{"nie", "ne", "no", "non", "___", "ne", "nem"};
 #define		STR_NIE		str_nie[_global_jazyk]
 
+/* 2011-04-08: úprava vıznamu (a interpretácie) option 0 */
+const char *str_opt_0_nic[POCET_JAZYKOV + 1] = 
+	{"(niè naviac)", "(nic navíc)", "(nothing else)", "()", "", "(nic navíc)", "hu_(nothing else)"};
+#define		STR_OPT_0_NIC 	str_opt_0_nic[_global_jazyk]
+#define		OPT_0_NIC		(NIE * BIT_OPT_0_VERSE + NIE * BIT_OPT_0_REFERENCIE)
+
+const char *str_opt_0_verse[POCET_JAZYKOV + 1] = 
+	{"èísla veršov", "èíslování veršù", "verse numbering", "verse numbers", "", "èíslování veršù", "hu_verse numbers"};
+#define		STR_OPT_0_VERSE 	str_opt_0_verse[_global_jazyk]
+#define		OPT_0_VERSE		(ANO * BIT_OPT_0_VERSE + NIE * BIT_OPT_0_REFERENCIE)
+
+const char *str_opt_0_verse_referencie[POCET_JAZYKOV + 1] = 
+	{"èísla veršov a biblické odkazy", "èíslování veršù a biblické odkazy", "verse numbering and biblical references", "verse numbers and refs", "", "èíslování veršù a biblické odkazy", "hu_verse numbers and refs"};
+#define		STR_OPT_0_VERSE_REFERENCIE 	str_opt_0_verse_referencie[_global_jazyk]
+#define		OPT_0_VERSE_REFERENCIE		(ANO * BIT_OPT_0_VERSE + ANO * BIT_OPT_0_REFERENCIE)
+
+const char *str_opt_0_referencie[POCET_JAZYKOV + 1] = 
+	{"biblické odkazy na dkc.kbs.sk", "biblické odkazy", "biblical references", "Bible references", "", "biblické odkazy", "hu_bible references"};
+#define		STR_OPT_0_REFERENCIE 	str_opt_0_referencie[_global_jazyk]
+#define		OPT_0_REFERENCIE		(NIE * BIT_OPT_0_VERSE + ANO * BIT_OPT_0_REFERENCIE)
+
 const char *html_text_detaily_uvod[POCET_JAZYKOV + 1] = 
 {"Nasledovné monosti ovplyvnia vzh¾ad i obsah vygenerovanej modlitby.\nVyberte tie monosti, pod¾a ktorıch sa má modlitba vygenerova.", 
  "Následující monosti mají vliv na vzhled i obsah vygenerované modlitby.\nVyberte si monosti, podle kterıch má bıt modlitba vygenerována.", 
@@ -1355,31 +1376,40 @@ const char *html_text_zobrazit_vigiliu[POCET_JAZYKOV + 1] =
 };
 const char *html_text_zobrazit_vigiliu_explain[POCET_JAZYKOV + 1] = 
 {"Tí, èo chcú pod¾a tradície predåi vigíliu nedele, slávnosti alebo sviatku, èo sa ve¾mi odporúèa, najprv recitujú posvätné èítanie; po oboch èítaniach, pred hymnom Te Deum, pridávajú sa chválospevy a evanjelium.", 
- "Tí, èo chcú pod¾a tradície predåi vigíliu nedele, slávnosti alebo sviatku, èo sa ve¾mi odporúèa, najprv recitujú posvätné èítanie; po oboch èítaniach, pred hymnom Te Deum, pridávajú sa chválospevy a evanjelium.", 
+ "Ti, kteøí chtìjí podle tradice prodlouit vigilii nedìle, slavnosti nebo svátku, co se velmi doporuèuje, recitují nejprve ètení; po obou èteních, pøed hymnem Te Deum, se pøidávají chvalozpìvy a evangelium.", 
  "xxx", 
  "",
  "", 
- "Tí, èo chcú pod¾a tradície predåi vigíliu nedele, slávnosti alebo sviatku, èo sa ve¾mi odporúèa, najprv recitujú posvätné èítanie; po oboch èítaniach, pred hymnom Te Deum, pridávajú sa chválospevy a evanjelium.", 
+ "Ti, kteøí chtìjí podle tradice prodlouit vigilii nedìle, slavnosti nebo svátku, co se velmi doporuèuje, recitují nejprve ètení; po obou èteních, pøed hymnem Te Deum, se pøidávají chvalozpìvy a evangelium.", 
  "hu_"
 };
 
-const char *html_text_zobrazit_cislovanie_versov[POCET_JAZYKOV + 1] = 
-{"zobrazi <i>èíslovanie veršov</i> pre almy, chválospevy a dlhšie biblické èítania", 
- "zobrazit <i>èíslování veršù</i> pro almy, kantika a dlhší biblická ètení", 
- "display <i>verse numbering</i> for psalms, canticles and longer biblical readings", 
+const char *html_text_zobrazit_option0[POCET_JAZYKOV + 1] = 
+{"v texte modlitieb zobrazi: ", 
+ "v textu modliteb zobrazit: ", 
+ "in the text of prayers display: ", 
  "",
  "",
- "zobrazit <i>èíslování veršù</i> pro almy, kantika a dlhší biblická ètení", 
+ "v textu modliteb zobrazit: ", 
  "hu_"
 };
-const char *html_text_zobrazit_cislovanie_versov_explain[POCET_JAZYKOV + 1] = 
+const char *html_text_zobrazit_option0_explain[POCET_JAZYKOV + 1] = 
 {"Liturgia hodín (latinské typické vydanie) zobrazuje èíslovanie veršov v rámci almu, chválospevu alebo dlhšieho biblického èítania; niektoré vydania tieto èísla veršov neuvádzajú.", 
- "xxx", 
+ "Liturgie hodin uvádí jako horní indexy èísla veršù biblickıch textù (almù, chvalozpìvù a prvních ètení), které mùe program zobrazit.", 
  "xxx", 
  "",
  "", 
- "xxx", 
+ "Liturgie hodin uvádí jako horní indexy èísla veršù biblickıch textù (almù, chvalozpìvù a prvních ètení), které mùe program zobrazit.", 
  "hu_"
+};
+const char *html_text_zobrazit_option0_explain2[POCET_JAZYKOV + 1] = 
+{"<br>Taktie je moné v modlitbe všetky biblické odkazy (napr. <i>Jn 3, 16</i>) nahradi aktívnymi odkazmi na text katolíckeho prekladu Biblie na adrese dkc.kbs.sk.", 
+ "", 
+ "", 
+ "",
+ "", 
+ "", 
+ ""
 };
 
 /* 2010-10-11: HTML option selected */

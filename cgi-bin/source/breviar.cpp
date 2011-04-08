@@ -205,6 +205,7 @@
 /*                    parametre na polia;                                  */
 /*                    zjednotenÈ local_str[SMALL] (predt˝m bolo MAX_STR)   */
 /*                    (d˙fam, ûe toto skr·tenie v 3 funkci·ch nebude vadiù)*/
+/*   2011-04-08a.D. | ˙prava v˝znamu (a interpret·cie) option 0            */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -1300,7 +1301,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 						vnutri_referencie = ANO;
 						write = NIE;
 						ref_index = 0;
-						if(_global_opt[0] == ANO){
+						if((_global_opt[OPT_0_VERSE_REF] & BIT_OPT_0_REFERENCIE) == BIT_OPT_0_REFERENCIE){
 							if(rest != NULL){
 								mystrcpy(refrest, rest, MAX_BUFFER);
 							}
@@ -1310,7 +1311,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 					}/* upraviù referencie na hyperlinky */
 					if(equals(strbuff, PARAM_REFERENCIA_END) && (vnutri_inkludovaneho == 1)){
 						refbuff[ref_index] = '\0';
-						if(_global_opt[0] == ANO){
+						if((_global_opt[OPT_0_VERSE_REF] & BIT_OPT_0_REFERENCIE) == BIT_OPT_0_REFERENCIE){
 							/* ToDo: Ëasom daù odkaz napr. do konfiguraËnÈho s˙boru */
 							Export("<a href=\"http://dkc.kbs.sk/?in=");
 							DetailLog("\trest     == %s\n", rest);
@@ -1322,7 +1323,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 							Export("%s\" target=\"_blank\" "HTML_CLASS_QUIET">", remove_diacritics(refbuff)); /* a.quiet { text-decoration:none; color: inherit; } */
 						}
 						Export("%s", refbuff);
-						if(_global_opt[0] == ANO){
+						if((_global_opt[OPT_0_VERSE_REF] & BIT_OPT_0_REFERENCIE) == BIT_OPT_0_REFERENCIE){
 							Export("</a>");
 						}
 						vnutri_referencie = NIE;
@@ -1332,27 +1333,27 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 
 					/* 2011-04-04: zobraziù/nezobraziù ËÌslovanie veröov */
 					if(equals(strbuff, PARAM_CISLO_VERSA_BEGIN) && (vnutri_inkludovaneho == 1)){
-						if(_global_opt[0] == NIE){
+						if((_global_opt[OPT_0_VERSE_REF] & BIT_OPT_0_VERSE) == BIT_OPT_0_VERSE){
+							Export("</b><"HTML_SUP_RED">");
+						}
+						else{
 							write = NIE;
 #if defined(EXPORT_HTML_SPECIALS)
 							Export("<!--Ë.veröa:zaË.");
 #endif
 							Log("  ruöÌm writing to export file, kvÙli PARAM_CISLO_VERSA_BEGIN...\n");
 						}
-						else{
-							Export("</b><"HTML_SUP_RED">");
-						}
 					}/* zobraziù/nezobraziù ËÌslovanie veröov */
 					if(equals(strbuff, PARAM_CISLO_VERSA_END) && (vnutri_inkludovaneho == 1)){
-						if(_global_opt[0] == NIE){
+						if((_global_opt[OPT_0_VERSE_REF] & BIT_OPT_0_VERSE) == BIT_OPT_0_VERSE){
+							Export("</sup><b>");
+						}
+						else{
 							write = ANO;
 #if defined(EXPORT_HTML_SPECIALS)
 							Export("Ë.veröa:end-->");
 #endif
 							Log("  op‰ù writing to export file, PARAM_CISLO_VERSA_END...\n");
-						}
-						else{
-							Export("</sup><b>");
 						}
 					}/* zobraziù/nezobraziù ËÌslovanie veröov */
 
@@ -1650,25 +1651,25 @@ void interpretParameter(short int type, char *paramname){
 
 	if(equals(paramname, PARAM_CISLO_VERSA_BEGIN)){
 		if(_global_skip_in_prayer != ANO){
-			if(_global_opt[0] == NIE){
+			if((_global_opt[OPT_0_VERSE_REF] & BIT_OPT_0_VERSE) == BIT_OPT_0_VERSE){
+				Export("</b><"HTML_SUP_RED">");
+			}
+			else{
 				// Log("  ruöÌm writing to export file, kvÙli PARAM_CISLO_VERSA_BEGIN...\n");
 				_global_skip_in_prayer_2 = ANO;
 				// Export("<!--");
-			}
-			else{
-				Export("</b><"HTML_SUP_RED">");
 			}
 		}/* skip in prayer */
 	}/* zobraziù/nezobraziù ËÌslovanie veröov */
 	else if(equals(paramname, PARAM_CISLO_VERSA_END)){
 		if(_global_skip_in_prayer != ANO){
-			if(_global_opt[0] == NIE){
+			if((_global_opt[OPT_0_VERSE_REF] & BIT_OPT_0_VERSE) == BIT_OPT_0_VERSE){
+				Export("</sup><b>");
+			}
+			else{
 				// Log("  op‰ù writing to export file, PARAM_CISLO_VERSA_END...\n");
 				// Export("-->");
 				_global_skip_in_prayer_2 = NIE;
-			}
-			else{
-				Export("</sup><b>");
 			}
 		}/* skip in prayer */
 	}/* zobraziù/nezobraziù ËÌslovanie veröov */
@@ -2974,6 +2975,11 @@ void showPrayer(short int type){
 			_global_opt[i] = _global_optf[i];
 		}
 	}/* override pre _global_opt[i] z _global_optf[i] */
+
+	/* 2011-04-08: log option 0 */
+	Log("option 0 == %d, Ëo znamen·: \n", _global_opt[OPT_0_VERSE_REF]);
+	Log("\t BIT_OPT_0_VERSE == %d (·no == %d)\n", _global_opt[OPT_0_VERSE_REF] & BIT_OPT_0_VERSE, BIT_OPT_0_VERSE);
+	Log("\t BIT_OPT_0_REFERENCIE == %d (·no == %d)\n", _global_opt[OPT_0_VERSE_REF] & BIT_OPT_0_REFERENCIE, BIT_OPT_0_REFERENCIE);
 
 	/* samotne vypisanie, o aku modlitbu ide */
 	Log("showPrayer(type %i, %s), _global_modlitba == %s\n",
@@ -6181,13 +6187,17 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 // 2011-04-04: odvetvenÈ, aby sa to nedostalo na web (tam OS_linux)
 #ifdef OS_Windows_Ruby
 	Export("<li>\n");
-	/* option 0: zobraziù ËÌslovanie veröov (pouûÌvame force opt0) */
-	Export((char *)html_text_zobrazit_cislovanie_versov[_global_jazyk]);
+	/* option 0: zobraziù ËÌslovanie veröov, biblickÈ referencie... (pouûÌvame force opt0) */
+	Export((char *)html_text_zobrazit_option0[_global_jazyk]);
 	Export(" \n");
 	/* pole WWW_MODL_OPTF0 */
 	Export("<select name=\"%s\">\n", STR_MODL_OPTF0);
-	Export("<option%s>%s\n", (_global_optf[0] == ANO)? html_option_selected: STR_EMPTY, STR_ANO);
-	Export("<option%s>%s\n", (_global_optf[0] == NIE)? html_option_selected: STR_EMPTY, STR_NIE);
+	Export("<option%s>%s\n", (_global_optf[OPT_0_VERSE_REF] == OPT_0_NIC)? html_option_selected: STR_EMPTY, STR_OPT_0_NIC);
+	Export("<option%s>%s\n", (_global_optf[OPT_0_VERSE_REF] == OPT_0_VERSE)? html_option_selected: STR_EMPTY, STR_OPT_0_VERSE);
+	if(_global_jazyk == JAZYK_SK){
+		Export("<option%s>%s\n", (_global_optf[OPT_0_VERSE_REF] == OPT_0_REFERENCIE)? html_option_selected: STR_EMPTY, STR_OPT_0_REFERENCIE);
+		Export("<option%s>%s\n", (_global_optf[OPT_0_VERSE_REF] == OPT_0_VERSE_REFERENCIE)? html_option_selected: STR_EMPTY, STR_OPT_0_VERSE_REFERENCIE);
+	}
 	Export("</select>\n");
 	Export("</li>");
 #endif
@@ -7536,15 +7546,20 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 
 	/* pridane 2011-04-04 */
 	Export("<li>");
-	Export((char *)html_text_zobrazit_cislovanie_versov[_global_jazyk]);
+	Export((char *)html_text_zobrazit_option0[_global_jazyk]);
 	Export(" \n");
 	/* pole WWW_MODL_OPT0 */
 	Export("<select name=\"%s\">\n", STR_MODL_OPT0);
-	Export("<option%s>%s\n", (_global_opt[0] == ANO)? html_option_selected: STR_EMPTY, STR_ANO);
-	Export("<option%s>%s\n", (_global_opt[0] == NIE)? html_option_selected: STR_EMPTY, STR_NIE);
+	Export("<option%s>%s\n", (_global_optf[OPT_0_VERSE_REF] == OPT_0_NIC)? html_option_selected: STR_EMPTY, STR_OPT_0_NIC);
+	Export("<option%s>%s\n", (_global_optf[OPT_0_VERSE_REF] == OPT_0_VERSE)? html_option_selected: STR_EMPTY, STR_OPT_0_VERSE);
+	if(_global_jazyk == JAZYK_SK){
+		Export("<option%s>%s\n", (_global_optf[OPT_0_VERSE_REF] == OPT_0_REFERENCIE)? html_option_selected: STR_EMPTY, STR_OPT_0_REFERENCIE);
+		Export("<option%s>%s\n", (_global_optf[OPT_0_VERSE_REF] == OPT_0_VERSE_REFERENCIE)? html_option_selected: STR_EMPTY, STR_OPT_0_VERSE_REFERENCIE);
+	}
 	Export("</select>\n");
 	Export("<br><"HTML_SPAN_EXPLAIN">");
-	Export((char *)html_text_zobrazit_cislovanie_versov_explain[_global_jazyk]);
+	Export((char *)html_text_zobrazit_option0_explain[_global_jazyk]);
+	Export((char *)html_text_zobrazit_option0_explain2[_global_jazyk]);
 	Export("</span>");
 	Export("</li>\n");
 
@@ -8247,7 +8262,7 @@ void log_pom_MODL_OPTF(void){
 
 /* 2006-02-10: nov˝ define; pouûÌva premenn˙ int i */
 #define _rozparsuj_parametre_OPT {\
-	Log("/* rozparsovanie parametrov opt1...opt5 */ (#define _rozparsuj_parametre_OPT)\n"); \
+	Log("/* rozparsovanie option parametrov */ (#define _rozparsuj_parametre_OPT)\n"); \
  \
 	/* option 1 */ \
 	if(equals(pom_MODL_OPT[1], STR_ANO) || equals(pom_MODL_OPT[1], "1")){ \
@@ -8368,17 +8383,28 @@ void log_pom_MODL_OPTF(void){
 	Log("opt9 == `%s' (%d)\n", pom_MODL_OPT[9], _global_opt[9]); \
  \
 	/* option 0 */ \
-	if(equals(pom_MODL_OPT[0], STR_ANO) || equals(pom_MODL_OPT[0], "1")){ \
-		_global_opt[0] = ANO; \
+	if((pom_MODL_OPT[OPT_0_VERSE_REF] == NULL) || (strlen(pom_MODL_OPT[OPT_0_VERSE_REF]) < 1)){ \
+		i = GLOBAL_OPTION_NULL; \
 	} \
-	else if(equals(pom_MODL_OPT[0], STR_NIE) || equals(pom_MODL_OPT[0], "0")){ \
-		_global_opt[0] = NIE; \
-	}/* inak ostane _global_opt[0] neurËen˝ */ \
-	else \
-		_global_opt[0] = GLOBAL_OPTION_NULL; \
-	Log("opt0 == `%s' (%d)\n", pom_MODL_OPT[0], _global_opt[0]); \
+	else if(equals(pom_MODL_OPT[OPT_0_VERSE_REF], STR_OPT_0_NIC)){ \
+		i = OPT_0_NIC; \
+	} \
+	else if(equals(pom_MODL_OPT[OPT_0_VERSE_REF], STR_OPT_0_VERSE)){ \
+		i = OPT_0_VERSE; \
+	} \
+	else if(equals(pom_MODL_OPT[OPT_0_VERSE_REF], STR_OPT_0_REFERENCIE)){ \
+		i = OPT_0_REFERENCIE; \
+	} \
+	else if(equals(pom_MODL_OPT[OPT_0_VERSE_REF], STR_OPT_0_VERSE_REFERENCIE)){ \
+		i = OPT_0_VERSE_REFERENCIE; \
+	} \
+	else{ \
+		i = atoi(pom_MODL_OPT[OPT_0_VERSE_REF]); \
+	} \
+	_global_opt[OPT_0_VERSE_REF] = i; \
+	Log("opt0 == `%s' (%d)\n", pom_MODL_OPT[OPT_0_VERSE_REF], _global_opt[OPT_0_VERSE_REF]); \
  \
-	/* force options 1 aû 5 pridanÈ 2011-01-26 */ \
+	/* force options */ \
  \
 	/* option force 1 */ \
 	if(equals(pom_MODL_OPTF[1], STR_ANO) || equals(pom_MODL_OPTF[1], "1")){ \
@@ -8477,15 +8503,26 @@ void log_pom_MODL_OPTF(void){
 	Log("optf9 == `%s' (%d)\n", pom_MODL_OPTF[9], _global_optf[9]); \
  \
 	/* option force 0 */ \
-	if(equals(pom_MODL_OPTF[0], STR_NIE) || equals(pom_MODL_OPTF[0], "0")){ \
-		_global_optf[0] = NIE; \
+	if((pom_MODL_OPTF[OPT_0_VERSE_REF] == NULL) || (strlen(pom_MODL_OPTF[OPT_0_VERSE_REF]) < 1)){ \
+		i = GLOBAL_OPTION_NULL; \
 	} \
-	else if(equals(pom_MODL_OPTF[0], STR_ANO) || equals(pom_MODL_OPTF[0], "1")){ \
-		_global_optf[0] = ANO; \
-	}/* inak ostane _global_optf[0] neurËen˝ */ \
-	else \
-		_global_optf[0] = GLOBAL_OPTION_NULL; \
-	Log("optf0 == `%s' (%d)\n", pom_MODL_OPTF[0], _global_optf[0]); \
+	else if(equals(pom_MODL_OPTF[OPT_0_VERSE_REF], STR_OPT_0_NIC)){ \
+		i = OPT_0_NIC; \
+	} \
+	else if(equals(pom_MODL_OPTF[OPT_0_VERSE_REF], STR_OPT_0_VERSE)){ \
+		i = OPT_0_VERSE; \
+	} \
+	else if(equals(pom_MODL_OPTF[OPT_0_VERSE_REF], STR_OPT_0_REFERENCIE)){ \
+		i = OPT_0_REFERENCIE; \
+	} \
+	else if(equals(pom_MODL_OPTF[OPT_0_VERSE_REF], STR_OPT_0_VERSE_REFERENCIE)){ \
+		i = OPT_0_VERSE_REFERENCIE; \
+	} \
+	else{ \
+		i = atoi(pom_MODL_OPTF[OPT_0_VERSE_REF]); \
+	} \
+	_global_optf[OPT_0_VERSE_REF] = i; \
+	Log("optf0 == `%s' (%d)\n", pom_MODL_OPTF[OPT_0_VERSE_REF], _global_optf[OPT_0_VERSE_REF]); \
  \
 	/* 2007-06-01: nasledovn· pas·û kontroluje, Ëi niektorÈ z options nie s˙ GLOBAL_OPTION_NULL */\
 	/*             a z·roveÚ prÌpadne nastavÌ na default podæa jazyka */\
@@ -11038,7 +11075,7 @@ short int getArgv(int argc, char **argv){
 				case '0': /* MODL_OPT0 */
 					/* parameter pridan˝ 2011-04-04 */
 					if(optarg != NULL){
-						mystrcpy(pom_MODL_OPT[0], optarg, SMALL);
+						mystrcpy(pom_MODL_OPT[OPT_0_VERSE_REF], optarg, SMALL);
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
 
@@ -12621,7 +12658,7 @@ int main(int argc, char **argv){
 	_global_opt[7] = NIE;
 	_global_opt[8] = NIE;
 	_global_opt[9] = NIE;
-	_global_opt[0] = NIE;
+	_global_opt[OPT_0_VERSE_REF] = OPT_0_NIC;
 
 	strcpy(pom_QUERY_TYPE, STR_EMPTY);
 	strcpy(pom_DEN, STR_EMPTY);
