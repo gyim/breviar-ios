@@ -8409,8 +8409,12 @@ void _rozparsuj_parametre_OPT(void){
 	Log("_rozparsuj_parametre_OPT() -- zaèiatok...\n");
 
 	/* option 1 */
-	i = atoi(pom_MODL_OPT[OPT_1_CASTI_MODLITBY]);
-	_global_opt[OPT_1_CASTI_MODLITBY] = i;
+	if((pom_MODL_OPT[OPT_1_CASTI_MODLITBY] == NULL) || (strlen(pom_MODL_OPT[OPT_1_CASTI_MODLITBY]) < 1)){
+		_global_opt[OPT_1_CASTI_MODLITBY] = GLOBAL_OPTION_NULL;
+	}
+	else{
+		_global_opt[OPT_1_CASTI_MODLITBY] = atoi(pom_MODL_OPT[OPT_1_CASTI_MODLITBY]);
+	}
 	Log("opt1 == `%s' (%d)\n", pom_MODL_OPT[OPT_1_CASTI_MODLITBY], _global_opt[OPT_1_CASTI_MODLITBY]);
 
 	/* option 2 */
@@ -12863,7 +12867,7 @@ int main(int argc, char **argv){
 	_global_opt[8] = NIE;
 	_global_opt[9] = NIE;
 	_global_opt[OPT_0_VERSE_REF] = OPT_0_NIC;
-	_global_opt[OPT_1_CASTI_MODLITBY] = 0;
+	_global_opt[OPT_1_CASTI_MODLITBY] = GLOBAL_OPTION_NULL;
 
 	strcpy(pom_QUERY_TYPE, STR_EMPTY);
 	strcpy(pom_DEN, STR_EMPTY);
