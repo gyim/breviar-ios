@@ -11,6 +11,7 @@
 /*   2003-07-15a.D. | #include "mybase.h" nahradeny "mydefs.h" */
 /*   2004-03-17a.D. | pridany INCLUDE_DIR                      */
 /*   2011-01-31a.D. | pridané CFG_OPTION1_DEFAULT (1 až 5)     */
+/*   2011-04-11a.D. | CONFIG_FILE sa nastavuje pod¾a "OS"      */
 /*                                                             */
 /***************************************************************/
 
@@ -27,7 +28,11 @@
 #define MAX_OPTION_LENGTH	40
 #define MAX_VALUE_LENGTH	80
 
-#define CONFIG_FILE "breviar.cfg"
+#ifdef OS_Windows_Ruby
+#define CONFIG_FILE "breviar-local.cfg"
+#else
+#define CONFIG_FILE "breviar-web.cfg"
+#endif
 
 extern char cfg_HTTP_ADDRESS_default[MAX_HTTP_STR];
 extern char cfg_HTTP_DISPLAY_ADDRESS_default[MAX_HTTP_STR];
