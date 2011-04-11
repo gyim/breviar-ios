@@ -1430,7 +1430,7 @@ void set_hymnus_kompletorium_obd(short int den, short int tyzzal, short int modl
 	if(pom_litobd == OBD_VELKONOCNE_I){
 		dva_hymny = 0;
 	}
-	/* 2008-12-11: pre dominikánsky rovnako ako pre slovenský, teda jeden hymnus VN */
+	/* 2008-12-11: pre dominikánsky rovnako ako pre slovenský, teda jeden hymnus VELKONOCNA_NEDELA */
 	if(_global_jazyk == JAZYK_CZ) /* || (_global_jazyk == JAZYK_CZ_OP)) */ {
 		sprintf(_anchor, "%c_%s_%s", 
 			pismenko_modlitby(modlitba), ANCHOR_HYMNUS, nazov_DN_asci[den]);
@@ -7402,7 +7402,7 @@ label_24_DEC:
 			_set_zalmy_velkonocna_nedela(modlitba);
 
 			/* a veci pre prve vespery */
-			if(den == DEN_NEDELA){ /* v skutoènosti platí aj: (_global_den.denvr == VN2) */
+			if(den == DEN_NEDELA){ /* v skutoènosti platí aj: (_global_den.denvr == DRUHA_VELKONOCNA_NEDELA) */
 				/* 2007-12-06: pridané kompletórium po prvých vešperách */
 				modlitba = MODL_PRVE_KOMPLETORIUM;
 				set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);

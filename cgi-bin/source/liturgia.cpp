@@ -966,7 +966,7 @@ long juliansky_datum(short int den, short int mesiac, short int rok){
 /* ------------------------------------------------------------------- */
 /* nasledujuce funkcie zistuju datum velkonocnej nedele */
 
-/* urcenie datumu VN podla Gaussovho pravidla */
+/* urcenie datumu VELKONOCNA_NEDELA podla Gaussovho pravidla */
 _struct_den_mesiac velkonocna_nedela(short int R){
 	short int x, y, k, q, p, a, b, c, d, e;
 	_struct_den_mesiac result;
@@ -1157,17 +1157,17 @@ short int _krst_krista_pana(short int rok){
 	return i;
 }
 
-/* popolcova streda je 46.-ty den pred velkou nocou, treba VN - 46 */
+/* popolcova streda je 46.-ty den pred velkou nocou, treba VELKONOCNA_NEDELA - 46 */
 short int _popolcova_streda(short int rok){
 	return (_velkonocna_nedela(rok) + OD_VELKEJ_NOCI_PO_POPOLCOVU_STR);
 }
 
-/* nanebovstupenie pana je 40.-ty den po velkej noci, treba VN + 39 */
+/* nanebovstupenie pana je 40.-ty den po velkej noci, treba VELKONOCNA_NEDELA + 39 */
 short int _nanebovstupenie(short int rok){
 	return (_velkonocna_nedela(rok) + OD_VELKEJ_NOCI_PO_NANEBOSTUPENIE);
 }
 
-/* zoslanie ducha sv. je 50.-ty den po velkej noci, treba VN + 49 */
+/* zoslanie ducha sv. je 50.-ty den po velkej noci, treba VELKONOCNA_NEDELA + 49 */
 short int _zoslanie_ducha(short int rok){
 	return (_velkonocna_nedela(rok) + OD_VELKEJ_NOCI_PO_ZOSLANIE_DUCHA);
 }
@@ -1536,13 +1536,13 @@ void Log(_struct_lrok r){ /* 01/03/2000A.D. */
 	Log_struktura_rok("   litrok: %c\n", r.litrok);
 	Log_struktura_rok("   tyzden_ocr_po_vn: %d\n", r.tyzden_ocr_po_vn);
 	Log_struktura_rok("   struct dm _den[POCET_ALIASOV]:\n");
-	Log_struktura_rok("   _KRST_KRISTA_PANA         :\n"); Log(r._den[KRST_KRISTA_PANA]);
-	Log_struktura_rok("   _POPOLCOVA_STREDA         :\n"); Log(r._den[POPOLCOVA_STREDA]);
-	Log_struktura_rok("   _VELKONOCNA_NEDELA        :\n"); Log(r._den[VELKONOCNA_NEDELA]);
-	Log_struktura_rok("   _NANEBOVSTUPENIE_PANA     :\n"); Log(r._den[NANEBOVSTUPENIE_PANA]);
-	Log_struktura_rok("   _PRVA_ADVENTNA_NEDELA     :\n"); Log(r._den[PRVA_ADVENTNA_NEDELA]);
-	Log_struktura_rok("   _ZOSLANIE_DUCHA_SV        :\n"); Log(r._den[ZOSLANIE_DUCHA_SV]);
-	Log_struktura_rok("   _SVATEJ_RODINY            :\n"); Log(r._den[SVATEJ_RODINY]);
+	Log_struktura_rok("   _KRST_KRISTA_PANA         :\n"); Log(r._den[idx_KRST_KRISTA_PANA]);
+	Log_struktura_rok("   _POPOLCOVA_STREDA         :\n"); Log(r._den[idx_POPOLCOVA_STREDA]);
+	Log_struktura_rok("   _VELKONOCNA_NEDELA        :\n"); Log(r._den[idx_VELKONOCNA_NEDELA]);
+	Log_struktura_rok("   _NANEBOVSTUPENIE_PANA     :\n"); Log(r._den[idx_NANEBOVSTUPENIE_PANA]);
+	Log_struktura_rok("   _PRVA_ADVENTNA_NEDELA     :\n"); Log(r._den[idx_PRVA_ADVENTNA_NEDELA]);
+	Log_struktura_rok("   _ZOSLANIE_DUCHA_SV        :\n"); Log(r._den[idx_ZOSLANIE_DUCHA_SV]);
+	Log_struktura_rok("   _SVATEJ_RODINY            :\n"); Log(r._den[idx_SVATEJ_RODINY]);
 }
 
 void Log(_struct_dm g){

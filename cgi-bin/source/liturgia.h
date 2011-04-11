@@ -972,22 +972,22 @@ extern const char *poradie_SLOVOM_jazyk[POCET_TYZDNOV + 1][POCET_JAZYKOV + 1];
 
 #define POCET_ALIASOV          7
 /* sucast struktury lrok, indexy */
-#define KRST_KRISTA_PANA       0
-#define POPOLCOVA_STREDA       1
-#define VELKONOCNA_NEDELA      2
-#define NANEBOVSTUPENIE_PANA   3
-#define ZOSLANIE_DUCHA_SV      4
-#define PRVA_ADVENTNA_NEDELA   5
-#define SVATEJ_RODINY          6
+#define idx_KRST_KRISTA_PANA       0
+#define idx_POPOLCOVA_STREDA       1
+#define idx_VELKONOCNA_NEDELA      2
+#define idx_NANEBOVSTUPENIE_PANA   3
+#define idx_ZOSLANIE_DUCHA_SV      4
+#define idx_PRVA_ADVENTNA_NEDELA   5
+#define idx_SVATEJ_RODINY          6
 
 /* sucast struktury lrok, aliasy */
-#define _KRST_KRISTA_PANA         _den[KRST_KRISTA_PANA]
-#define _POPOLCOVA_STREDA         _den[POPOLCOVA_STREDA]
-#define _VELKONOCNA_NEDELA        _den[VELKONOCNA_NEDELA]
-#define _NANEBOVSTUPENIE_PANA     _den[NANEBOVSTUPENIE_PANA]
-#define _PRVA_ADVENTNA_NEDELA     _den[PRVA_ADVENTNA_NEDELA]
-#define _ZOSLANIE_DUCHA_SV        _den[ZOSLANIE_DUCHA_SV]
-#define _SVATEJ_RODINY            _den[SVATEJ_RODINY]
+#define _KRST_KRISTA_PANA         _den[idx_KRST_KRISTA_PANA]
+#define _POPOLCOVA_STREDA         _den[idx_POPOLCOVA_STREDA]
+#define _VELKONOCNA_NEDELA        _den[idx_VELKONOCNA_NEDELA]
+#define _NANEBOVSTUPENIE_PANA     _den[idx_NANEBOVSTUPENIE_PANA]
+#define _PRVA_ADVENTNA_NEDELA     _den[idx_PRVA_ADVENTNA_NEDELA]
+#define _ZOSLANIE_DUCHA_SV        _den[idx_ZOSLANIE_DUCHA_SV]
+#define _SVATEJ_RODINY            _den[idx_SVATEJ_RODINY]
 
 #define YES 1
 #define NO  0
