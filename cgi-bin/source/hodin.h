@@ -1242,9 +1242,9 @@ const char *html_text_detaily_uvod[POCET_JAZYKOV + 1] =
 };
 
 const char *html_text_nemenne_sucasti[POCET_JAZYKOV + 1] = 
-{"zobrazi <i>nemenné súèasti</i> modlitby?", 
- "zobrazit <i>nemìnné souèásti</i> modlitby?", 
- "display <i>non-changeable parts</i> prayer?", 
+{"zobrazi nasledovné súèasti modlitby?",
+ "zobrazit <i>nemìnné souèásti</i> modlitby?",
+ "display <i>non-changeable parts</i> prayer?",
  "", 
  "", 
  "zobrazit <i>nemìnné souèásti</i> modlitby?",
@@ -1412,8 +1412,68 @@ const char *html_text_zobrazit_option0_explain2[POCET_JAZYKOV + 1] =
  ""
 };
 
+const char *html_text_option1_chvalospevy[POCET_JAZYKOV + 1] = 
+{"evanjeliové chválospevy (Benediktus, Magnifikat, Nunk dimittis) a Te Deum", 
+ "kantika (Mariino, Zachariášovo, Simeonovo) a Te Deum", 
+ "canticles (Benedictus, Magnificat, Nunc dimittis) and Te Deum", 
+ "",
+ "",
+ "chvalozpìvy (Benedictus, Magnificat, Nunc dimittis) a Te Deum", 
+ "hu_"
+};
+const char *html_text_option1_chvalospevy_explain[POCET_JAZYKOV + 1] = 
+{"Liturgia hodín štandardne tieto evanjeliové chválospevy nezobrazuje.", 
+ "", 
+ "", 
+ "",
+ "", 
+ "", 
+ "hu_"
+};
+
+const char *html_text_option1_slava_otcu[POCET_JAZYKOV + 1] = 
+{"Sláva Otcu (na konci almov a chválospevov)", 
+ "Sláva Otci (na konci almù a kantik)", 
+ "Gloria to the Father (at the end of psalms and canticles)", 
+ "",
+ "",
+ "Sláva Otci (na konci almù a chvalozpìvù)", 
+ "hu_"
+};
+const char *html_text_option1_slava_otcu_explain[POCET_JAZYKOV + 1] = 
+{"Liturgia hodín štandardne Sláva Otcu na konci almov a chválospevov nezobrazuje.", 
+ "", 
+ "", 
+ "",
+ "", 
+ "", 
+ "hu_"
+};
+
+const char *html_text_option1_rubriky[POCET_JAZYKOV + 1] = 
+{"rubriky (pokyny Liturgie hodín uvádzané èervenım písmom)", 
+ "rubriky", 
+ "rubrics", 
+ "",
+ "",
+ "rubriky", 
+ "hu_"
+};
+const char *html_text_option1_rubriky_explain[POCET_JAZYKOV + 1] = 
+{"Liturgia hodín zobrazuje èervenım písmom rozlièné pokyny, zvyèajne vysvet¾ujúce, k modlitbe (pod¾a Všeobecnıch smerníc o LH).", 
+ "", 
+ "", 
+ "",
+ "", 
+ "", 
+ "hu_"
+};
+
 /* 2010-10-11: HTML option selected */
 const char *html_option_selected = " selected";
+
+/* 2011-04-11: HTML option checked (pre checkboxy) */
+const char *html_option_checked = " checked";
 
 /* 2010-09-14: doplnené */
 const char *html_text_kalendar_miestny[POCET_JAZYKOV + 1] = 

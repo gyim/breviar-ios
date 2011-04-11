@@ -138,7 +138,7 @@ extern _struct_lrok *_global_r_ptr;
  */
 extern short int _global_pocet_svatych;
 
-/* globálna premenná -- pole -- obsahujúca options; pôvodne to boli globálne premenné _global_opt[1].._global_opt[9] atï., obsahujú pom_MODL_OPT... */
+/* globálna premenná -- pole -- obsahujúca options; pôvodne to boli globálne premenné _global_opt 1..9 atï., obsahujú pom_MODL_OPT... */
 extern short int _global_opt[POCET_GLOBAL_OPT];
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
@@ -229,6 +229,7 @@ extern short int _global_opt_export_date_format;
 )
 
 #define PRILEP_REQUEST_OPTIONS(pom2, pom3, prvy_ampersand) {\
+	Log("PRILEP_REQUEST_OPTIONS -- zaèiatok...\n"); \
 	/* 2006-07-31: pridané odovzdanie parametra pre jazyk */\
 	if(_global_jazyk != JAZYK_SK){\
 		if(prvy_ampersand == ANO){\
@@ -301,6 +302,7 @@ extern short int _global_opt_export_date_format;
 			Log("\tPrilepil som aj opt%d: `%s'\n", i, pom3);\
 		}\
 	}\
+	Log("PRILEP_REQUEST_OPTIONS -- koniec.\n"); \
 }
 
 #ifndef OS_linux

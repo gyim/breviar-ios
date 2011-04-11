@@ -90,7 +90,7 @@
 #define MAX_POM_QUERY_TYPE	300 /* pom_QUERY_TYPE */
 #define MAX_GLOBAL_LINK		300 /* maximalna dlzka retazca _global_link */
 //#define MAX_ENV	100 /* maximalna dlzka environmentalnej premennej */ /* 2006-08-01: nepouûÌva sa */
-#define MAX_VARIABLES		25 /* maximalny pocet syst. premennych WWW_..., zvyseny 2003-08-07 a op‰tovne 2006-08-01 a op‰ù 2011-01-26 */
+#define MAX_VARIABLES		30 /* maximalny pocet syst. premennych WWW_..., zvyseny 2003-08-07 a op‰tovne 2006-08-01 a op‰ù 2011-01-26 a zas 2011-04-11 */
 #define MAX_GLOBAL_BUFFER	500 /* _global_buf, pridanÈ 2005-08-01 */
 /***************************************************************/
 /* EOF of former file mybase.h                                 */
@@ -529,6 +529,48 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPTF0 "of0"
 #endif
 
+/* pre force option 1 jednotlivÈ parci·lne voæby */
+
+// evanjeliovÈ chv·lospevy (benediktus, magnifikat, nunk dimittis)
+#define MODL_OPTF1_CHV 71
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF1_CHV "MODL_OPTF1_CHV"
+#else
+	#define STR_MODL_OPTF1_CHV "of1c"
+#endif
+
+// sl·va otcu na konci ûalmov a chv·lospevov
+#define MODL_OPTF1_SL 72
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF1_SL "MODL_OPTF1_SL"
+#else
+	#define STR_MODL_OPTF1_SL "of1s"
+#endif
+
+// rubriky
+#define MODL_OPTF1_RUB 73
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF1_RUB "MODL_OPTF1_RUB"
+#else
+	#define STR_MODL_OPTF1_RUB "of1r"
+#endif
+
+// OtËen·ö
+#define MODL_OPTF1_OT 74
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF1_OT "MODL_OPTF1_OT"
+#else
+	#define STR_MODL_OPTF1_OT "of1o"
+#endif
+
+// Te Deum
+#define MODL_OPTF1_TD 75
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF1_TD "MODL_OPTF1_TD"
+#else
+	#define STR_MODL_OPTF1_TD "of1t"
+#endif
+
 /* 2008-08-08: PridanÈ kvÙli rÙznym css */
 #define CSS 40
 #ifdef LONG_PARAM_NAMES
@@ -577,6 +619,7 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #define HTML_FORM_INPUT_RESET1   "input type=\"reset\" class=\"reset1\""
 #define HTML_FORM_INPUT_SUBMIT2  "input type=\"submit\" class=\"button2\""
 #define HTML_FORM_INPUT_RESET2   "input type=\"reset\" class=\"reset2\""
+#define HTML_FORM_INPUT_HIDDEN   "input type=\"hidden\""
 
 #define HTML_LINK_RED    "a class=\"red\""
 #define HTML_LINK_NORMAL "a"

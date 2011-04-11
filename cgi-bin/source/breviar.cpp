@@ -173,7 +173,7 @@
 /*   2011-01-14a.D. | SK doplnenÈ ZAKONCENIE_KTORY_JE                      */
 /*   2011-01-26a.D. | zmeny dizajnu,                                       */
 /*                    pridanie VYPISOVAT_PREDCHADZAJUCI_NASLEDUJUCI_BUTTON */
-/*                  - dorobenÈ force "opt1" (_global_optf[1])              */
+/*                  - dorobenÈ force "opt1" (_global_optf 1 )              */
 /*   2011-01-27a.D. | BUTTONY_PREDOSLY_NASLEDOVNY_ROK_MESIAC_DEN_HORE      */
 /*   2011-02-02a.D. | pouûitÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3            */
 /*   2011-02-02a.D. | dokonËen˝ liturgick˝ kalend·r pre SDB a SJ, ˙pravy   */
@@ -244,6 +244,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <math.h> /* kvÙli funckii pow(); */
 
 #include "mystring.h" /* 31/03/2000A.D. */
 #include "myconf.h" /* 30/03/2000A.D. */
@@ -404,6 +405,8 @@ short int _global_pocet_svatych;
 short int _global_opt[POCET_GLOBAL_OPT];
 /* glob·lna premenn· -- pole -- obsahuj˙ca force options; pÙvodne to boli glob·lne premennÈ _global_optf[1].._global_optf[9] atÔ., obsahuj˙ pom_MODL_OPTF... */
 short int _global_optf[POCET_GLOBAL_OPT];
+/* glob·lna premenn· -- pole -- obsahuj˙ca jednotlivÈ bity pre force option 1 */
+short int _global_opt_casti_modlitby[POCET_GLOBAL_OPT_CASTI_MODLITBY];
 
 /* pridane 2003-07-08, append parameter */
 short int _global_opt_append = NIE;
@@ -461,7 +464,7 @@ char _global_export_navig_hore_day[SMALL] = DEFAULT_MONTH_EXPORT;
 
 /* globalna premenna, ktora hovori, ci preskakovat <!--{ ... }--> tagy
  * pri preskakovani Magnifikat / Benediktus
- * (ak je _global_opt[1] == ANO)
+ * (ak je _global_opt 1 == ANO)
  */
 short int _global_skip_in_prayer = NIE;
 short int _global_skip_in_prayer_2 = NIE; // 2011-04-07: kvÙli ËÌslovaniu veröov v Ëastiach, kde sa pouûÌva _global_skip_in_prayer
@@ -488,6 +491,7 @@ char pom_MODLITBA   [SMALL] = STR_EMPTY;
 
 char pom_MODL_OPT[POCET_GLOBAL_OPT][SMALL];
 char pom_MODL_OPTF[POCET_GLOBAL_OPT][SMALL]; /* 2011-01-26: doplnenÈ force verzie pre opt1 aû opt5; 2011-04-07: prepracovanÈ na pole */
+char pom_MODL_OPTF_CASTI_MODLITBY[POCET_GLOBAL_OPT_CASTI_MODLITBY][SMALL]; /* 2011-04-11: pole pre force option 1 (jednotlivÈ bit-komponenty) */
 
 /* append pridany 2003-07-08, bude v _global_opt_append */
 char pom_MODL_OPT_APPEND  [SMALL] = STR_EMPTY;
@@ -1019,6 +1023,26 @@ short int setForm(void){
 			}/* switch(i) */
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF[i]);
+			Log("--- setForm: putenv(%s); ...\n", local_str);
+			ret = putenv(local_str);
+			Log("--- setForm: putenv returned %d.\n", ret);
+		}
+	}
+
+	// 2011-04-11: doplenÈ; force option 1, jednotlivÈ bit-komponenty
+	for(i = 0; i < POCET_GLOBAL_OPT_CASTI_MODLITBY; i++){
+		mystrcpy(local_str, STR_EMPTY, SMALL);
+		if(!equals(pom_MODL_OPTF_CASTI_MODLITBY[i], STR_EMPTY)){
+			mystrcpy(local_str, WWW_PREFIX, SMALL);
+			switch(i){
+				case 0: strcat(local_str, STR_MODL_OPTF1_CHV); break;
+				case 1: strcat(local_str, STR_MODL_OPTF1_SL); break;
+				case 2: strcat(local_str, STR_MODL_OPTF1_RUB); break;
+				case 3: strcat(local_str, STR_MODL_OPTF1_OT); break;
+				case 4: strcat(local_str, STR_MODL_OPTF1_TD); break;
+			}// switch(i)
+			strcat(local_str, "=");
+			strcat(local_str, pom_MODL_OPTF_CASTI_MODLITBY[i]);
 			Log("--- setForm: putenv(%s); ...\n", local_str);
 			ret = putenv(local_str);
 			Log("--- setForm: putenv returned %d.\n", ret);
@@ -1781,7 +1805,7 @@ void interpretParameter(short int type, char *paramname){
 	/* najprv co sa tyka option1:
 	 * ide o vynechanie Magnifikat/Benediktus, pozehnania, Otcenasa */
 	else if(equals(paramname, PARAM_OTCENAS_BEGIN)){
-		if(_global_opt[1] == ANO){
+		if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_OTCENAS) == BIT_OPT_1_OTCENAS){
 			/* zobrazit Otcenas */
 #if defined(EXPORT_HTML_SPECIALS)
 			Export("zobrazit Otcenas");
@@ -1799,7 +1823,7 @@ void interpretParameter(short int type, char *paramname){
 		}
 	}
 	else if(equals(paramname, PARAM_OTCENAS_END)){
-		if(_global_opt[1] == ANO){
+		if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_OTCENAS) == BIT_OPT_1_OTCENAS){
 			/* zobrazit Otcenas */
 			Export("<!--");
 #if defined(EXPORT_HTML_SPECIALS)
@@ -1814,7 +1838,14 @@ void interpretParameter(short int type, char *paramname){
 		}
 	}
 	else if(equals(paramname, PARAM_CHVALOSPEV_BEGIN)){
-		if(_global_opt[1] == NIE){
+		Log("_global_opt[OPT_1_CASTI_MODLITBY == %d] == %d\n", OPT_1_CASTI_MODLITBY, _global_opt[OPT_1_CASTI_MODLITBY]);
+		if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_CHVALOSPEVY) == BIT_OPT_1_CHVALOSPEVY){
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("zobrazit chvalospev");
+#endif
+			Log("  `chvalospev': begin...\n");
+		}
+		else{
 			/* nezobrazovat chvalospev */
 			_global_skip_in_prayer = ANO;
 #if defined(EXPORT_HTML_SPECIALS)
@@ -1822,24 +1853,19 @@ void interpretParameter(short int type, char *paramname){
 #endif
 			Log("  `chvalospev' skipping...\n");
 		}
-		else{
-#if defined(EXPORT_HTML_SPECIALS)
-			Export("zobrazit chvalospev");
-#endif
-			Log("  `chvalospev': begin...\n");
-		}
 	}
 	else if(equals(paramname, PARAM_CHVALOSPEV_END)){
-		if(_global_opt[1] == NIE){
-			/* nezobrazovat chvalospev */
-			_global_skip_in_prayer = NIE;
-			Log("  `chvalospev' skipped.\n");
-		}
-		else{
+		Log("_global_opt[OPT_1_CASTI_MODLITBY == %d] == %d\n", OPT_1_CASTI_MODLITBY, _global_opt[OPT_1_CASTI_MODLITBY]);
+		if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_CHVALOSPEVY) == BIT_OPT_1_CHVALOSPEVY){
 #if defined(EXPORT_HTML_SPECIALS)
 			Export("zobrazit chvalospev");
 #endif
 			Log("  `chvalospev' copied.\n");
+		}
+		else{
+			/* nezobrazovat chvalospev */
+			_global_skip_in_prayer = NIE;
+			Log("  `chvalospev' skipped.\n");
 		}
 	}
 	/* 2007-06-28: podmienka na Te Deum osamostatnen· */
@@ -1873,7 +1899,7 @@ void interpretParameter(short int type, char *paramname){
 		}
 	}
 	else if(equals(paramname, PARAM_ZAKONCENIE_BEGIN)){
-		if(_global_opt[1] == NIE){
+		if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_RUBRIKY) != BIT_OPT_1_RUBRIKY){
 			/* nezobrazit zakoncenie */
 			_global_skip_in_prayer = ANO;
 #if defined(EXPORT_HTML_SPECIALS)
@@ -1890,7 +1916,7 @@ void interpretParameter(short int type, char *paramname){
 		}
 	}
 	else if(equals(paramname, PARAM_ZAKONCENIE_END)){
-		if(_global_opt[1] == NIE){
+		if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_RUBRIKY) != BIT_OPT_1_RUBRIKY){
 			/* nezobrazit zakoncenie */
 			_global_skip_in_prayer = NIE;
 			Log("  `zakoncenie' skipped.\n");
@@ -1939,7 +1965,7 @@ void interpretParameter(short int type, char *paramname){
 		/* 2007-05-18: zosilnen· podmienka, aby Sl·va Otcu nebolo pre öpeci·lne prÌpady 
 		 * 2007-12-04: opraven· podmienka, pretoûe nefungovala pre modlitby odliönÈ od rann˝ch chv·l
 		 */
-		if(_global_opt[1] == ANO && (
+		if(((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SLAVA_OTCU) == BIT_OPT_1_SLAVA_OTCU) && (
 			_global_modlitba != MODL_RANNE_CHVALY
 			|| (_global_modlitba == MODL_RANNE_CHVALY
 				&& !(_global_pocet_slava_otcu == 2 && equals(_global_modl_ranne_chvaly.zalm2.anchor, "DAN3,57-88.56"))
@@ -1965,7 +1991,7 @@ void interpretParameter(short int type, char *paramname){
 		/* 2007-05-18: zosilnen· podmienka, aby Sl·va Otcu nebolo pre öpeci·lne prÌpady 
 		 * 2007-12-04: opraven· podmienka, pretoûe nefungovala pre modlitby odliönÈ od rann˝ch chv·l
 		 */
-		if(_global_opt[1] == ANO && (
+		if(((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SLAVA_OTCU) == BIT_OPT_1_SLAVA_OTCU) && (
 			_global_modlitba != MODL_RANNE_CHVALY
 			|| (_global_modlitba == MODL_RANNE_CHVALY
 				&& !(_global_pocet_slava_otcu == 2 && equals(_global_modl_ranne_chvaly.zalm2.anchor, "DAN3,57-88.56"))
@@ -2353,10 +2379,10 @@ void interpretParameter(short int type, char *paramname){
 				}
 				break;
 			/* 2010-06-04: zneuûitie parametra "ANTIFONA2" pre zobrazenie "z·vereËnej" antifÛny v prÌpade, ûe sa tlaËÌ aj Sl·va Otcu 
-			 *             funguje tak, ûe ak chce zobraziù Sl·va Otcu (if(_global_opt[1] == ANO)), nastavÌ sa interpretovanie podæa ANTIFONA1; in·Ë sa niË nevykon·
+			 *             funguje tak, ûe ak chce zobraziù Sl·va Otcu (if(_global_opt 1 == ANO)), nastavÌ sa interpretovanie podæa ANTIFONA1; in·Ë sa niË nevykon·
 			 */
 			case MODL_INVITATORIUM:
-				if(_global_opt[1] == ANO){
+				if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SLAVA_OTCU) != BIT_OPT_1_SLAVA_OTCU){
 					strcat(path, _global_modl_invitatorium.antifona1.file);
 					includeFile(type, paramname, path, _global_modl_invitatorium.antifona1.anchor);
 				}
@@ -4804,7 +4830,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 #undef BUTTON_SKRATKY_DALSIE_20070913
 #ifdef BUTTON_SKRATKY_DALSIE_20070913
 		/* 2009-08-11: zosilnen· podmienka */
-		if((_global_opt[1] != ANO) && (_global_opt_batch_monthly == NIE)){
+		if((_global_opt[OPT_1_CASTI_MODLITBY] != ANO) && (_global_opt_batch_monthly == NIE)){
 			// ak je to na zaËiatku, teda v tom riadku, kde ˙plne pÙvodne boli Inv., RannÈ chv·ly atÔ., netreba vloûiù niË
 			// ak je to na konci, treba teraz vloûiù zalomenie po vöetk˝ch buttonoch
 
@@ -4937,7 +4963,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 				// ak je to na zaËiatku, treba teraz vloûiù zalomenie po öpeci·lnom riadku pred buttonmi
 				Export("\n</tr>\n<tr valign=\"%s\">\n<td colspan=\"6\">&nbsp;</td>\n", VALIGN_DRUHY);
 			}
-		} /* if(_global_opt[1] != ANO) */
+		} /* if(_global_opt[OPT_1_CASTI_MODLITBY] != ANO) */
 #endif // BUTTON_SKRATKY_DALSIE_20070913
 
 		/* oddelenie */
@@ -6108,12 +6134,37 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<li>");
 	/* option 1: zobraziù nemennÈ s˙Ëasti modlitby (pouûÌvame force opt1) */
 	Export((char *)html_text_nemenne_sucasti[_global_jazyk]);
+#ifdef MAIN_FORM_OPTION1_OLD_BEHAVIOUR
 	Export(" \n");
 	/* pole WWW_MODL_OPTF1 */
 	Export("<select name=\"%s\">\n", STR_MODL_OPTF1);
-	Export("<option%s>%s\n", (_global_optf[1] == ANO)? html_option_selected: STR_EMPTY, STR_ANO);
-	Export("<option%s>%s\n", (_global_optf[1] == NIE)? html_option_selected: STR_EMPTY, STR_NIE);
+	Export("<option%s>%s\n", (_global_optf[OPT_1_CASTI_MODLITBY] == ANO)? html_option_selected: STR_EMPTY, STR_ANO);
+	Export("<option%s>%s\n", (_global_optf[OPT_1_CASTI_MODLITBY] == NIE)? html_option_selected: STR_EMPTY, STR_NIE);
 	Export("</select>\n");
+#else
+	Log("_global_opt[OPT_1_CASTI_MODLITBY == %d] == %d\n", OPT_1_CASTI_MODLITBY, _global_opt[OPT_1_CASTI_MODLITBY]);
+	Log("_global_optf[OPT_1_CASTI_MODLITBY == %d] == %d\n", OPT_1_CASTI_MODLITBY, _global_optf[OPT_1_CASTI_MODLITBY]);
+	/* pole (checkbox) WWW_MODL_OPTF1_CHV */
+	Export("<br>\n");
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_CHV, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\"%s>\n", STR_MODL_OPTF1_CHV, ANO, ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_CHVALOSPEVY) == BIT_OPT_1_CHVALOSPEVY)? html_option_checked: STR_EMPTY);
+	Export((char *)html_text_option1_chvalospevy[_global_jazyk]);
+	Export(" \n");
+
+	/* pole (checkbox) WWW_MODL_OPTF1_SL */
+	Export("<br>\n");
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_SL, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\"%s>\n", STR_MODL_OPTF1_SL, ANO, ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SLAVA_OTCU) == BIT_OPT_1_SLAVA_OTCU)? html_option_checked: STR_EMPTY);
+	Export((char *)html_text_option1_slava_otcu[_global_jazyk]);
+	Export(" \n");
+
+	/* pole (checkbox) WWW_MODL_OPTF1_RUB */
+	Export("<br>\n");
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_RUB, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\"%s>\n", STR_MODL_OPTF1_RUB, ANO, ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_RUBRIKY) == BIT_OPT_1_RUBRIKY)? html_option_checked: STR_EMPTY);
+	Export((char *)html_text_option1_rubriky[_global_jazyk]);
+	Export(" \n");
+#endif
 	Export("</li>");
 
 #ifdef MAIN_FORM_ZOBRAZIT_OPTION4
@@ -7061,7 +7112,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 			if((_global_opt[5] != MODL_CEZ_DEN_ZALMY_ZO_DNA) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
 				sprintf(parameter_o5, " -5");
 				strcat(parameter_o5, "1"); // MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA
-				fprintf(batch_file, "%s%d%cd.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s%s\n", batch_command, a, char_modlitby[i], _global_opt[1], _global_opt[2], _global_opt[3], _global_opt[4], a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar, parameter_o5); /* modlitba `i' */
+				fprintf(batch_file, "%s%d%cd.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s%s\n", batch_command, a, char_modlitby[i], _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[2], _global_opt[3], _global_opt[4], a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar, parameter_o5); /* modlitba `i' */
 				if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
 					sprintf(export_doplnkova_psalmodia, " (<a href=\""FILENAME_EXPORT_DATE_SIMPLE"_%d%cd.htm\">alt</a>)", _global_den.rok % 100, _global_den.mesiac, _global_den.den, a, char_modlitby[i]);
 				else /* EXPORT_DATE_FULL */
@@ -7071,7 +7122,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 				strcpy(parameter_o5, STR_EMPTY);
 				strcpy(export_doplnkova_psalmodia, STR_EMPTY);
 			}
-			fprintf(batch_file, "%s%d%c.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], _global_opt[1], _global_opt[2], _global_opt[3], _global_opt[4], a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); /* modlitba `i' */
+			fprintf(batch_file, "%s%d%c.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[2], _global_opt[3], _global_opt[4], a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); /* modlitba `i' */
 			if(export_monthly_druh == 1){
 				if(a > 0)
 					sprintf(poradie_svateho, "/%d", a);
@@ -7091,7 +7142,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 			/* 2011-03-23: upravenÈ: negenerovaù veöpery pre soboty, ak je nastavenÈ _global_opt[8] == ANO */
 			if(((a != 4) || (a == 4 && (i != MODL_VESPERY && i != MODL_KOMPLETORIUM))) && !((_global_opt[8] == ANO) && (_global_den.denvt == DEN_SOBOTA))){ /* 2006-01-31-TUTOLA; 2008-04-09 presunutÈ */
 				if(_global_opt_append == YES){
-					fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -5%d -x%d -p%s -j%s%s\n", batch_command, _global_opt[1], _global_opt[2], _global_opt[3], _global_opt[4], _global_opt[5], a, str_modlitby[i], skratka_jazyka[_global_jazyk], export_kalendar); /* modlitba `i' */
+					fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -5%d -x%d -p%s -j%s%s\n", batch_command, _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[2], _global_opt[3], _global_opt[4], _global_opt[5], a, str_modlitby[i], skratka_jazyka[_global_jazyk], export_kalendar); /* modlitba `i' */
 				}/* endif _global_opt_append == YES */
 				else{
 					/* 2011-03-14: nastavenie parametra o5 (_global_opt[5]) pre modlitbu cez deÚ (beûn· alebo doplnkov· psalmÛdia) 
@@ -7100,7 +7151,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 					if((_global_opt[5] != MODL_CEZ_DEN_ZALMY_ZO_DNA) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
 						sprintf(parameter_o5, " -5");
 						strcat(parameter_o5, "1"); // MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA
-						fprintf(batch_file, "%s%d%cd.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s%s\n", batch_command, a, char_modlitby[i], _global_opt[1], _global_opt[2], _global_opt[3], _global_opt[4], a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar, parameter_o5); /* modlitba `i' */
+						fprintf(batch_file, "%s%d%cd.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s%s\n", batch_command, a, char_modlitby[i], _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[2], _global_opt[3], _global_opt[4], a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar, parameter_o5); /* modlitba `i' */
 						if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
 							sprintf(export_doplnkova_psalmodia, " (<a href=\""FILENAME_EXPORT_DATE_SIMPLE"_%d%cd.htm\">alt</a>)", _global_den.rok % 100, _global_den.mesiac, _global_den.den, a, char_modlitby[i]);
 						else /* EXPORT_DATE_FULL */
@@ -7111,7 +7162,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 						strcpy(export_doplnkova_psalmodia, STR_EMPTY);
 					}
 					/* 2009-08-03: doplnen· moûnosù exportovaù parameter -M ak exportuje batch mÛd pre jednotlivÈ mesiace kvÙli hlaviËke jednotlivej modlitby */
-					fprintf(batch_file, "%s%d%c.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], _global_opt[1], _global_opt[2], _global_opt[3], _global_opt[4], a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); /* modlitba `i' */
+					fprintf(batch_file, "%s%d%c.htm -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[2], _global_opt[3], _global_opt[4], a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); /* modlitba `i' */
 					// fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%d%c.htm\">%s</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a, char_modlitby[i], nazov_modlitby(i));
 					/* 2008-11-29: rozliËn˝ export */
 					if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
@@ -7354,7 +7405,7 @@ void _export_rozbor_dna_mesiaca_batch(short int d, short int m, short int r){
 		mystrcpy(parameter_M, STR_EMPTY, SMALL);
 	}/* else if(_global_opt_batch_monthly == ANO) */
 	// samotnÈ vytlaËenie prÌkazu
-	fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -5%d -j%s%s%s\n", batch_command, _global_opt[1], _global_opt[2], _global_opt[3], _global_opt[4], _global_opt[5], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar);
+	fprintf(batch_file, "%s -1%d -2%d -3%d -4%d -5%d -j%s%s%s\n", batch_command, _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[2], _global_opt[3], _global_opt[4], _global_opt[5], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar);
 	Log("_export_rozbor_dna_mesiaca_batch() -- koniec\n");
 }/* _export_rozbor_dna_mesiaca_batch() */
 
@@ -7429,8 +7480,8 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 	Export(" \n");
 	/* pole WWW_MODL_OPT1 */
 	Export("<select name=\"%s\">\n", STR_MODL_OPT1);
-	Export("<option%s>%s\n", (_global_opt[1] == ANO)? html_option_selected: STR_EMPTY, STR_ANO);
-	Export("<option%s>%s\n", (_global_opt[1] == NIE)? html_option_selected: STR_EMPTY, STR_NIE);
+	Export("<option%s>%s\n", (_global_opt[OPT_1_CASTI_MODLITBY] == ANO)? html_option_selected: STR_EMPTY, STR_ANO);
+	Export("<option%s>%s\n", (_global_opt[OPT_1_CASTI_MODLITBY] == NIE)? html_option_selected: STR_EMPTY, STR_NIE);
 	Export("</select>\n");
 	Export("<br><"HTML_SPAN_EXPLAIN">");
 	Export((char *)html_text_nemenne_sucasti_explain[_global_jazyk]);
@@ -8254,315 +8305,338 @@ void log_pom_MODL_OPTF(void){
 	for(i = 0; i < POCET_GLOBAL_OPT; i++){
 		Log("optf%d == `%s' (%d)\n", i, pom_MODL_OPTF[i], _global_optf[i]);
 	}
+	for(i = 0; i < POCET_GLOBAL_OPT_CASTI_MODLITBY; i++){
+		Log("optf[%d]%d == `%s'\n", OPT_1_CASTI_MODLITBY, i, pom_MODL_OPTF_CASTI_MODLITBY[i]);
+	}
 }
 
-/* 2006-02-10: nov˝ define; pouûÌva premenn˙ int i */
-#define _rozparsuj_parametre_OPT {\
-	Log("/* rozparsovanie option parametrov */ (#define _rozparsuj_parametre_OPT)\n"); \
- \
-	/* option 1 */ \
-	if(equals(pom_MODL_OPT[1], STR_ANO) || equals(pom_MODL_OPT[1], "1")){ \
-		_global_opt[1] = ANO; \
-	} \
-	else if(equals(pom_MODL_OPT[1], STR_NIE) || equals(pom_MODL_OPT[1], "0")){ \
-		_global_opt[1] = NIE; \
-	}/* inak ostane _global_opt[1] neurËen˝ */ \
-	else \
-		_global_opt[1] = GLOBAL_OPTION_NULL; \
-	Log("opt1 == `%s' (%d)\n", pom_MODL_OPT[1], _global_opt[1]); \
- \
-	/* option 2 */ \
-	if(equals(pom_MODL_OPT[2], STR_MODL_ZALMY_ZO_DNA) || equals(pom_MODL_OPT[2], "0")){ \
-		_global_opt[2] = MODL_ZALMY_ZO_DNA; \
-	} \
-	else if(equals(pom_MODL_OPT[2], STR_MODL_ZALMY_ZO_SV) || equals(pom_MODL_OPT[2], "1")){ \
-		_global_opt[2] = MODL_ZALMY_ZO_SV; \
-	}/* inak ostane _global_opt[2] neurËen˝ - upravena copy-paste chyba; 2005-03-22 */ \
-	else \
-		_global_opt[2] = GLOBAL_OPTION_NULL; \
-	Log("opt2 == `%s' (%d)\n", pom_MODL_OPT[2], _global_opt[2]); \
- \
-	/* option 3 */ \
-	i = atoi(pom_MODL_OPT[3]); \
-	/* povodne pre debuggovanie v DOSe, potom sa ukazalo, ze je to uzitocne \
-	 * aj pod linuxom (v ostrej prevadzke); 18/02/2000A.D. \
-	 * predpokladam, ze tento parameter moze byt \
-	 * zadany eventualne cislom (teda retazcom, kt. hodnota pri konverzii \
-	 * na int je int, urcujuci opt3 \
-	 */ \
-	if((i > MODL_SPOL_CAST_NEBRAT) || (i <= 0)){ \
-		i = 0; \
-		/* ide o znakovy retazec nekonvertovatelny na cislo */ \
-	} \
-	else{ \
-		mystrcpy(pom_MODL_OPT[3], nazov_spolc(i), SMALL); \
-		/* ak je zadane cislo spravne, tak i bude spravny int \
-		 * a pom_MODL_OPT[3] bude spravny char* */ \
-	} \
-	Log("opt3: i == %d\n", i); \
-	while(i <= MODL_SPOL_CAST_NEBRAT){ \
-		if(equals(pom_MODL_OPT[3], nazov_spolc(i))){ \
-			_global_opt[3] = i; \
-			break; \
-		} \
-		i++; \
-	} \
-	if(i > MODL_SPOL_CAST_NEBRAT){ \
-		_global_opt[3] = MODL_SPOL_CAST_NEURCENA; \
-	} \
-	Log("opt3 == `%s' (%d)\n", pom_MODL_OPT[3], _global_opt[3]); \
- \
-	/* option 4 */ \
-	if(equals(pom_MODL_OPT[4], STR_ANO) || equals(pom_MODL_OPT[4], "1")){ /* 2003-07-08 opravene z "4" na "1" */ \
-		_global_opt[4] = ANO; \
-	} \
-	else if(equals(pom_MODL_OPT[4], STR_NIE) || equals(pom_MODL_OPT[4], "0")){ \
-		_global_opt[4] = NIE; \
-	}/* inak ostane _global_opt[4] neurËen˝ */ \
-	else \
-		_global_opt[4] = GLOBAL_OPTION_NULL; \
-	Log("opt4 == `%s' (%d)\n", pom_MODL_OPT[4], _global_opt[4]); \
- \
-	/* option 5, pridana 2003-08-12, upravena 2003-08-13 */ \
-	if(equals(pom_MODL_OPT[5], STR_MODL_CEZ_DEN_ZALMY_ZO_DNA) || equals(pom_MODL_OPT[5], "0")){ \
-		_global_opt[5] = MODL_CEZ_DEN_ZALMY_ZO_DNA; \
-	} \
-	else if(equals(pom_MODL_OPT[5], STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA) || equals(pom_MODL_OPT[5], "1")){ \
-		_global_opt[5] = MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA; \
-	}/* inak ostane _global_opt[5] neurËen˝ */ \
-	else \
-		_global_opt[5] = GLOBAL_OPTION_NULL; \
-	Log("opt5 == `%s' (%d)\n", pom_MODL_OPT[5], _global_opt[5]); \
-\
-	/* option 6 */ \
-	if(equals(pom_MODL_OPT[6], STR_ANO) || equals(pom_MODL_OPT[6], "1")){ \
-		_global_opt[6] = ANO; \
-	} \
-	else if(equals(pom_MODL_OPT[6], STR_NIE) || equals(pom_MODL_OPT[6], "0")){ \
-		_global_opt[6] = NIE; \
-	}/* inak ostane _global_opt[6] neurËen˝ */ \
-	else \
-		_global_opt[6] = GLOBAL_OPTION_NULL; \
-	Log("opt6 == `%s' (%d)\n", pom_MODL_OPT[6], _global_opt[6]); \
- \
-	/* option 7 */ \
-	if(equals(pom_MODL_OPT[7], STR_ANO) || equals(pom_MODL_OPT[7], "1")){ \
-		_global_opt[7] = ANO; \
-	} \
-	else if(equals(pom_MODL_OPT[7], STR_NIE) || equals(pom_MODL_OPT[7], "0")){ \
-		_global_opt[7] = NIE; \
-	}/* inak ostane _global_opt[7] neurËen˝ */ \
-	else \
-		_global_opt[7] = GLOBAL_OPTION_NULL; \
-	Log("opt7 == `%s' (%d)\n", pom_MODL_OPT[7], _global_opt[7]); \
- \
-	/* option 8 */ \
-	if(equals(pom_MODL_OPT[8], STR_ANO) || equals(pom_MODL_OPT[8], "1")){ \
-		_global_opt[8] = ANO; \
-	} \
-	else if(equals(pom_MODL_OPT[8], STR_NIE) || equals(pom_MODL_OPT[8], "0")){ \
-		_global_opt[8] = NIE; \
-	}/* inak ostane _global_opt[8] neurËen˝ */ \
-	else \
-		_global_opt[8] = GLOBAL_OPTION_NULL; \
-	Log("opt8 == `%s' (%d)\n", pom_MODL_OPT[8], _global_opt[8]); \
- \
-	/* option 9 */ \
-	if(equals(pom_MODL_OPT[9], STR_ANO) || equals(pom_MODL_OPT[9], "1")){ \
-		_global_opt[9] = ANO; \
-	} \
-	else if(equals(pom_MODL_OPT[9], STR_NIE) || equals(pom_MODL_OPT[9], "0")){ \
-		_global_opt[9] = NIE; \
-	}/* inak ostane _global_opt[9] neurËen˝ */ \
-	else \
-		_global_opt[9] = GLOBAL_OPTION_NULL; \
-	Log("opt9 == `%s' (%d)\n", pom_MODL_OPT[9], _global_opt[9]); \
- \
-	/* option 0 */ \
-	if((pom_MODL_OPT[OPT_0_VERSE_REF] == NULL) || (strlen(pom_MODL_OPT[OPT_0_VERSE_REF]) < 1)){ \
-		i = GLOBAL_OPTION_NULL; \
-	} \
-	else if(equals(pom_MODL_OPT[OPT_0_VERSE_REF], STR_OPT_0_NIC)){ \
-		i = OPT_0_NIC; \
-	} \
-	else if(equals(pom_MODL_OPT[OPT_0_VERSE_REF], STR_OPT_0_VERSE)){ \
-		i = OPT_0_VERSE; \
-	} \
-	else if(equals(pom_MODL_OPT[OPT_0_VERSE_REF], STR_OPT_0_REFERENCIE)){ \
-		i = OPT_0_REFERENCIE; \
-	} \
-	else if(equals(pom_MODL_OPT[OPT_0_VERSE_REF], STR_OPT_0_VERSE_REFERENCIE)){ \
-		i = OPT_0_VERSE_REFERENCIE; \
-	} \
-	else{ \
-		i = atoi(pom_MODL_OPT[OPT_0_VERSE_REF]); \
-	} \
-	_global_opt[OPT_0_VERSE_REF] = i; \
-	Log("opt0 == `%s' (%d)\n", pom_MODL_OPT[OPT_0_VERSE_REF], _global_opt[OPT_0_VERSE_REF]); \
- \
-	/* force options */ \
- \
-	/* option force 1 */ \
-	if(equals(pom_MODL_OPTF[1], STR_ANO) || equals(pom_MODL_OPTF[1], "1")){ \
-		_global_optf[1] = ANO; \
-	} \
-	else if(equals(pom_MODL_OPTF[1], STR_NIE) || equals(pom_MODL_OPTF[1], "0")){ \
-		_global_optf[1] = NIE; \
-	}/* inak ostane _global_optf[1] neurËen˝ */ \
-	else \
-		_global_optf[1] = GLOBAL_OPTION_NULL; \
-	Log("optf1 == `%s' (%d)\n", pom_MODL_OPTF[1], _global_optf[1]); \
- \
-	/* option force 2 */ \
-	if(equals(pom_MODL_OPTF[2], STR_MODL_ZALMY_ZO_DNA) || equals(pom_MODL_OPTF[2], "0")){ \
-		_global_optf[2] = MODL_ZALMY_ZO_DNA; \
-	} \
-	else if(equals(pom_MODL_OPTF[2], STR_MODL_ZALMY_ZO_SV) || equals(pom_MODL_OPTF[2], "1")){ \
-		_global_optf[2] = MODL_ZALMY_ZO_SV; \
-	}/* inak ostane _global_optf[2] neurËen˝ - upravena copy-paste chyba; 2005-03-22 */ \
-	else \
-		_global_optf[2] = GLOBAL_OPTION_NULL; \
-	Log("optf2 == `%s' (%d)\n", pom_MODL_OPTF[2], _global_optf[2]); \
- \
-	/* option force 3 */ \
-	i = atoi(pom_MODL_OPTF[3]); \
-	/* povodne pre debuggovanie v DOSe, potom sa ukazalo, ze je to uzitocne \
-	 * aj pod linuxom (v ostrej prevadzke); 18/02/2000A.D. \
-	 * predpokladam, ze tento parameter moze byt \
-	 * zadany eventualne cislom (teda retazcom, kt. hodnota pri konverzii \
-	 * na int je int, urcujuci opt3 \
-	 */ \
-	if((i > MODL_SPOL_CAST_NEBRAT) || (i <= 0)){ \
-		i = 0; \
-		/* ide o znakovy retazec nekonvertovatelny na cislo */ \
-	} \
-	else{ \
-		mystrcpy(pom_MODL_OPTF[3], nazov_spolc(i), SMALL); \
-		/* ak je zadane cislo spravne, tak i bude spravny int \
-		 * a pom_MODL_OPTF[3] bude spravny char* */ \
-	} \
-	Log("optf3: i == %d\n", i); \
-	while(i <= MODL_SPOL_CAST_NEBRAT){ \
-		if(equals(pom_MODL_OPTF[3], nazov_spolc(i))){ \
-			_global_optf[3] = i; \
-			break; \
-		} \
-		i++; \
-	} \
-	if(i > MODL_SPOL_CAST_NEBRAT){ \
-		_global_optf[3] = MODL_SPOL_CAST_NEURCENA; \
-	} \
-	Log("optf3 == `%s' (%d)\n", pom_MODL_OPTF[3], _global_optf[3]); \
- \
-	/* option force 4 */ \
-	if(equals(pom_MODL_OPTF[4], STR_ANO) || equals(pom_MODL_OPTF[4], "1")){ /* 2003-07-08 opravene z "4" na "1" */ \
-		_global_optf[4] = ANO; \
-	} \
-	else if(equals(pom_MODL_OPTF[4], STR_NIE) || equals(pom_MODL_OPTF[4], "0")){ \
-		_global_optf[4] = NIE; \
-	}/* inak ostane _global_optf[4] neurËen˝ */ \
-	else \
-		_global_optf[4] = GLOBAL_OPTION_NULL; \
-	Log("optf4 == `%s' (%d)\n", pom_MODL_OPTF[4], _global_optf[4]); \
- \
-	/* option force 5 */ \
-	if(equals(pom_MODL_OPTF[5], STR_MODL_CEZ_DEN_ZALMY_ZO_DNA) || equals(pom_MODL_OPTF[5], "0")){ \
-		_global_optf[5] = MODL_CEZ_DEN_ZALMY_ZO_DNA; \
-	} \
-	else if(equals(pom_MODL_OPTF[5], STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA) || equals(pom_MODL_OPTF[5], "1")){ \
-		_global_optf[5] = MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA; \
-	}/* inak ostane _global_optf[5] neurËen˝ */ \
-	else \
-		_global_optf[5] = GLOBAL_OPTION_NULL; \
-	Log("optf5 == `%s' (%d)\n", pom_MODL_OPTF[5], _global_optf[5]); \
- \
-	/* option force 8 */ \
-	if(equals(pom_MODL_OPTF[8], STR_NIE) || equals(pom_MODL_OPTF[8], "0")){ \
-		_global_optf[8] = NIE; \
-	} \
-	else if(equals(pom_MODL_OPTF[8], STR_ANO) || equals(pom_MODL_OPTF[8], "1")){ \
-		_global_optf[8] = ANO; \
-	}/* inak ostane _global_optf[8] neurËen˝ */ \
-	else \
-		_global_optf[8] = GLOBAL_OPTION_NULL; \
-	Log("optf8 == `%s' (%d)\n", pom_MODL_OPTF[8], _global_optf[8]); \
- \
-	/* option force 9 */ \
-	if(equals(pom_MODL_OPTF[9], STR_NIE) || equals(pom_MODL_OPTF[9], "0")){ \
-		_global_optf[9] = NIE; \
-	} \
-	else if(equals(pom_MODL_OPTF[9], STR_ANO) || equals(pom_MODL_OPTF[9], "1")){ \
-		_global_optf[9] = ANO; \
-	}/* inak ostane _global_optf[9] neurËen˝ */ \
-	else \
-		_global_optf[9] = GLOBAL_OPTION_NULL; \
-	Log("optf9 == `%s' (%d)\n", pom_MODL_OPTF[9], _global_optf[9]); \
- \
-	/* option force 0 */ \
-	if((pom_MODL_OPTF[OPT_0_VERSE_REF] == NULL) || (strlen(pom_MODL_OPTF[OPT_0_VERSE_REF]) < 1)){ \
-		i = GLOBAL_OPTION_NULL; \
-	} \
-	else if(equals(pom_MODL_OPTF[OPT_0_VERSE_REF], STR_OPT_0_NIC)){ \
-		i = OPT_0_NIC; \
-	} \
-	else if(equals(pom_MODL_OPTF[OPT_0_VERSE_REF], STR_OPT_0_VERSE)){ \
-		i = OPT_0_VERSE; \
-	} \
-	else if(equals(pom_MODL_OPTF[OPT_0_VERSE_REF], STR_OPT_0_REFERENCIE)){ \
-		i = OPT_0_REFERENCIE; \
-	} \
-	else if(equals(pom_MODL_OPTF[OPT_0_VERSE_REF], STR_OPT_0_VERSE_REFERENCIE)){ \
-		i = OPT_0_VERSE_REFERENCIE; \
-	} \
-	else{ \
-		i = atoi(pom_MODL_OPTF[OPT_0_VERSE_REF]); \
-	} \
-	_global_optf[OPT_0_VERSE_REF] = i; \
-	Log("optf0 == `%s' (%d)\n", pom_MODL_OPTF[OPT_0_VERSE_REF], _global_optf[OPT_0_VERSE_REF]); \
- \
-	/* 2007-06-01: nasledovn· pas·û kontroluje, Ëi niektorÈ z options nie s˙ GLOBAL_OPTION_NULL */\
-	/*             a z·roveÚ prÌpadne nastavÌ na default podæa jazyka */\
-	/* 2011-01-26: doplnenÈ opt1 aû opt5 force (okrem opt3); default sa nastavuje podæa "ne-force" verziÌ */\
-	/* 2011-01-27: CFG_OPTION1_DEFAULT..CFG_OPTION5_DEFAULT doplnenÈ v myconf.h; opravenÈ ich pouûitie :) 2011-02-01 */\
-	/* 2011-04-07: upravenÈ */\
-	for(i = 0; i < POCET_GLOBAL_OPT; i++){\
-		Log("i == %d...\n", i);\
-		if(i == 3)\
-			continue;\
-		if(_global_opt[i] == GLOBAL_OPTION_NULL){\
-			switch(i){\
-				case 0: _global_opt[i] = CFG_OPTION0_DEFAULT; break;\
-				case 1: _global_opt[i] = CFG_OPTION1_DEFAULT; break;\
-				case 2: _global_opt[i] = CFG_OPTION2_DEFAULT; break;\
-				/* case 3: vynechan˝; nem· default */ \
-				case 4: _global_opt[i] = CFG_OPTION4_DEFAULT; break;\
-				case 5: _global_opt[i] = CFG_OPTION5_DEFAULT; break;\
-				case 6: _global_opt[i] = CFG_OPTION6_DEFAULT; break;\
-				case 7: _global_opt[i] = CFG_OPTION7_DEFAULT; break;\
-				case 8: _global_opt[i] = CFG_OPTION8_DEFAULT; break;\
-				case 9: _global_opt[i] = CFG_OPTION9_DEFAULT; break;\
-			}/* switch(i) */\
-			Log("KeÔûe bolo _global_opt[%d] == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", i, _global_opt[i]);\
-		}\
-	}/* for i */\
-\
-	for(i = 0; i < POCET_GLOBAL_OPT; i++){\
-		if(i == 3)\
-			continue;\
-		if((i == 6) || (i == 7))\
-			continue;\
-		if(_global_optf[i] == GLOBAL_OPTION_NULL){\
-			_global_optf[i] = _global_opt[i];\
-			Log("KeÔûe bolo _global_optf[%d] == GLOBAL_OPTION_NULL, nastavujem na _global_opt[%d] == `%d'...\n", i, i, _global_optf[i]);\
-		}\
-		else{\
-			_global_opt[i] = _global_optf[i];\
-			Log("Force; do _global_opt[%d] priraÔujem _global_optf[%d] (`%d')...\n", i, i, _global_optf[i]);\
-		}\
-	}\
-	Log("=== Po potenci·lnych ˙prav·ch (nastavenie default hodnÙt podæa jazyka) ===\n"); \
-	log_pom_MODL_OPT(); \
-	log_pom_MODL_OPTF(); \
+/* 2006-02-10: nov˝ define; pouûÌva premenn˙ int i 
+ * 2011-04-11: prerobenÈ na funkciu
+ */
+void _rozparsuj_parametre_OPT(void){
+	/* rozparsovanie option parametrov */
+	short int i;
+	short int aspon_jedna_nenulova;
+	Log("_rozparsuj_parametre_OPT() -- zaËiatok...\n");
+
+	/* option 1 */
+	i = atoi(pom_MODL_OPT[OPT_1_CASTI_MODLITBY]);
+	_global_opt[OPT_1_CASTI_MODLITBY] = i;
+	Log("opt1 == `%s' (%d)\n", pom_MODL_OPT[OPT_1_CASTI_MODLITBY], _global_opt[OPT_1_CASTI_MODLITBY]);
+
+	/* option 2 */
+	if(equals(pom_MODL_OPT[2], STR_MODL_ZALMY_ZO_DNA) || equals(pom_MODL_OPT[2], "0")){
+		_global_opt[2] = MODL_ZALMY_ZO_DNA;
+	}
+	else if(equals(pom_MODL_OPT[2], STR_MODL_ZALMY_ZO_SV) || equals(pom_MODL_OPT[2], "1")){
+		_global_opt[2] = MODL_ZALMY_ZO_SV;
+	}/* inak ostane _global_opt[2] neurËen˝ - upravena copy-paste chyba; 2005-03-22 */
+	else
+		_global_opt[2] = GLOBAL_OPTION_NULL;
+	Log("opt2 == `%s' (%d)\n", pom_MODL_OPT[2], _global_opt[2]);
+
+	/* option 3 */
+	i = atoi(pom_MODL_OPT[3]);
+	/* povodne pre debuggovanie v DOSe, potom sa ukazalo, ze je to uzitocne
+	 * aj pod linuxom (v ostrej prevadzke); 18/02/2000A.D.
+	 * predpokladam, ze tento parameter moze byt
+	 * zadany eventualne cislom (teda retazcom, kt. hodnota pri konverzii
+	 * na int je int, urcujuci opt3
+	 */
+	if((i > MODL_SPOL_CAST_NEBRAT) || (i <= 0)){
+		i = 0;
+		/* ide o znakovy retazec nekonvertovatelny na cislo */
+	}
+	else{
+		mystrcpy(pom_MODL_OPT[3], nazov_spolc(i), SMALL);
+		/* ak je zadane cislo spravne, tak i bude spravny int
+		 * a pom_MODL_OPT[3] bude spravny char* */
+	}
+	Log("opt3: i == %d\n", i);
+	while(i <= MODL_SPOL_CAST_NEBRAT){
+		if(equals(pom_MODL_OPT[3], nazov_spolc(i))){
+			_global_opt[3] = i;
+			break;
+		}
+		i++;
+	}
+	if(i > MODL_SPOL_CAST_NEBRAT){
+		_global_opt[3] = MODL_SPOL_CAST_NEURCENA;
+	}
+	Log("opt3 == `%s' (%d)\n", pom_MODL_OPT[3], _global_opt[3]);
+
+	/* option 4 */
+	if(equals(pom_MODL_OPT[4], STR_ANO) || equals(pom_MODL_OPT[4], "1")){ /* 2003-07-08 opravene z "4" na "1" */
+		_global_opt[4] = ANO;
+	}
+	else if(equals(pom_MODL_OPT[4], STR_NIE) || equals(pom_MODL_OPT[4], "0")){
+		_global_opt[4] = NIE;
+	}/* inak ostane _global_opt[4] neurËen˝ */
+	else
+		_global_opt[4] = GLOBAL_OPTION_NULL;
+	Log("opt4 == `%s' (%d)\n", pom_MODL_OPT[4], _global_opt[4]);
+
+	/* option 5, pridana 2003-08-12, upravena 2003-08-13 */
+	if(equals(pom_MODL_OPT[5], STR_MODL_CEZ_DEN_ZALMY_ZO_DNA) || equals(pom_MODL_OPT[5], "0")){
+		_global_opt[5] = MODL_CEZ_DEN_ZALMY_ZO_DNA;
+	}
+	else if(equals(pom_MODL_OPT[5], STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA) || equals(pom_MODL_OPT[5], "1")){
+		_global_opt[5] = MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA;
+	}/* inak ostane _global_opt[5] neurËen˝ */
+	else
+		_global_opt[5] = GLOBAL_OPTION_NULL;
+	Log("opt5 == `%s' (%d)\n", pom_MODL_OPT[5], _global_opt[5]);
+
+	/* option 6 */
+	if(equals(pom_MODL_OPT[6], STR_ANO) || equals(pom_MODL_OPT[6], "1")){
+		_global_opt[6] = ANO;
+	}
+	else if(equals(pom_MODL_OPT[6], STR_NIE) || equals(pom_MODL_OPT[6], "0")){
+		_global_opt[6] = NIE;
+	}/* inak ostane _global_opt[6] neurËen˝ */
+	else
+		_global_opt[6] = GLOBAL_OPTION_NULL;
+	Log("opt6 == `%s' (%d)\n", pom_MODL_OPT[6], _global_opt[6]);
+
+	/* option 7 */
+	if(equals(pom_MODL_OPT[7], STR_ANO) || equals(pom_MODL_OPT[7], "1")){
+		_global_opt[7] = ANO;
+	}
+	else if(equals(pom_MODL_OPT[7], STR_NIE) || equals(pom_MODL_OPT[7], "0")){
+		_global_opt[7] = NIE;
+	}/* inak ostane _global_opt[7] neurËen˝ */
+	else
+		_global_opt[7] = GLOBAL_OPTION_NULL;
+	Log("opt7 == `%s' (%d)\n", pom_MODL_OPT[7], _global_opt[7]);
+
+	/* option 8 */
+	if(equals(pom_MODL_OPT[8], STR_ANO) || equals(pom_MODL_OPT[8], "1")){
+		_global_opt[8] = ANO;
+	}
+	else if(equals(pom_MODL_OPT[8], STR_NIE) || equals(pom_MODL_OPT[8], "0")){
+		_global_opt[8] = NIE;
+	}/* inak ostane _global_opt[8] neurËen˝ */
+	else
+		_global_opt[8] = GLOBAL_OPTION_NULL;
+	Log("opt8 == `%s' (%d)\n", pom_MODL_OPT[8], _global_opt[8]);
+
+	/* option 9 */
+	if(equals(pom_MODL_OPT[9], STR_ANO) || equals(pom_MODL_OPT[9], "1")){
+		_global_opt[9] = ANO;
+	}
+	else if(equals(pom_MODL_OPT[9], STR_NIE) || equals(pom_MODL_OPT[9], "0")){
+		_global_opt[9] = NIE;
+	}/* inak ostane _global_opt[9] neurËen˝ */
+	else
+		_global_opt[9] = GLOBAL_OPTION_NULL;
+	Log("opt9 == `%s' (%d)\n", pom_MODL_OPT[9], _global_opt[9]);
+
+	/* option 0 */
+	if((pom_MODL_OPT[OPT_0_VERSE_REF] == NULL) || (strlen(pom_MODL_OPT[OPT_0_VERSE_REF]) < 1)){
+		i = GLOBAL_OPTION_NULL;
+	}
+	else if(equals(pom_MODL_OPT[OPT_0_VERSE_REF], STR_OPT_0_NIC)){
+		i = OPT_0_NIC;
+	}
+	else if(equals(pom_MODL_OPT[OPT_0_VERSE_REF], STR_OPT_0_VERSE)){
+		i = OPT_0_VERSE;
+	}
+	else if(equals(pom_MODL_OPT[OPT_0_VERSE_REF], STR_OPT_0_REFERENCIE)){
+		i = OPT_0_REFERENCIE;
+	}
+	else if(equals(pom_MODL_OPT[OPT_0_VERSE_REF], STR_OPT_0_VERSE_REFERENCIE)){
+		i = OPT_0_VERSE_REFERENCIE;
+	}
+	else{
+		i = atoi(pom_MODL_OPT[OPT_0_VERSE_REF]);
+	}
+	_global_opt[OPT_0_VERSE_REF] = i;
+	Log("opt0 == `%s' (%d)\n", pom_MODL_OPT[OPT_0_VERSE_REF], _global_opt[OPT_0_VERSE_REF]);
+
+	/* force options */
+
+	/* option force 1 */
+	/*
+	i = atoi(pom_MODL_OPTF[OPT_1_CASTI_MODLITBY]);
+	_global_optf[OPT_1_CASTI_MODLITBY] = i;
+	Log("optf1 == `%s' (%d)\n", pom_MODL_OPTF[OPT_1_CASTI_MODLITBY], _global_optf[OPT_1_CASTI_MODLITBY]);
+	*/
+	/* option force 1 -- jednotlivÈ komponenty */
+	_global_optf[OPT_1_CASTI_MODLITBY] = GLOBAL_OPTION_NULL;
+	aspon_jedna_nenulova = NIE;
+	for(i = 0; i < POCET_GLOBAL_OPT_CASTI_MODLITBY; i++){
+		if((pom_MODL_OPTF_CASTI_MODLITBY[i] == NULL) || (strlen(pom_MODL_OPTF_CASTI_MODLITBY[i]) < 1)){
+			_global_opt_casti_modlitby[i] = GLOBAL_OPTION_NULL;
+		}
+		else{
+			_global_opt_casti_modlitby[i] = atoi(pom_MODL_OPTF_CASTI_MODLITBY[i]);
+			aspon_jedna_nenulova = ANO;
+		}
+		Log("optf[%d][%d] == `%s' (%d)\n", OPT_1_CASTI_MODLITBY, i, pom_MODL_OPTF_CASTI_MODLITBY[i], _global_opt_casti_modlitby[i]);
+	}// for i
+	if(aspon_jedna_nenulova == ANO){
+		_global_optf[OPT_1_CASTI_MODLITBY] = 0;
+		/* nastavenie _global_optf[OPT_1_CASTI_MODLITBY] podæa jednotliv˝ch bit-komponentov, ktorÈ s˙ nastavenÈ v _global_opt_casti_modlitby[] */
+		for(i = 0; i < POCET_GLOBAL_OPT_CASTI_MODLITBY; i++){
+			if(_global_opt_casti_modlitby[i] != GLOBAL_OPTION_NULL){
+				_global_optf[OPT_1_CASTI_MODLITBY] += (int)pow(2.0, i) * _global_opt_casti_modlitby[i];
+			}
+		}// for i
+		Log("optf[%d] vyskladan· == %d\n", OPT_1_CASTI_MODLITBY, _global_optf[OPT_1_CASTI_MODLITBY]);
+	}
+	Log("optf1 == `%s' (%d)\n", pom_MODL_OPTF[OPT_1_CASTI_MODLITBY], _global_optf[OPT_1_CASTI_MODLITBY]);
+
+	/* option force 2 */
+	if(equals(pom_MODL_OPTF[2], STR_MODL_ZALMY_ZO_DNA) || equals(pom_MODL_OPTF[2], "0")){
+		_global_optf[2] = MODL_ZALMY_ZO_DNA;
+	}
+	else if(equals(pom_MODL_OPTF[2], STR_MODL_ZALMY_ZO_SV) || equals(pom_MODL_OPTF[2], "1")){
+		_global_optf[2] = MODL_ZALMY_ZO_SV;
+	}/* inak ostane _global_optf[2] neurËen˝ - upravena copy-paste chyba; 2005-03-22 */
+	else
+		_global_optf[2] = GLOBAL_OPTION_NULL;
+	Log("optf2 == `%s' (%d)\n", pom_MODL_OPTF[2], _global_optf[2]);
+
+	/* option force 3 */
+	i = atoi(pom_MODL_OPTF[3]);
+	/* povodne pre debuggovanie v DOSe, potom sa ukazalo, ze je to uzitocne
+	 * aj pod linuxom (v ostrej prevadzke); 18/02/2000A.D.
+	 * predpokladam, ze tento parameter moze byt
+	 * zadany eventualne cislom (teda retazcom, kt. hodnota pri konverzii
+	 * na int je int, urcujuci opt3
+	 */
+	if((i > MODL_SPOL_CAST_NEBRAT) || (i <= 0)){
+		i = 0;
+		/* ide o znakovy retazec nekonvertovatelny na cislo */
+	}
+	else{
+		mystrcpy(pom_MODL_OPTF[3], nazov_spolc(i), SMALL);
+		/* ak je zadane cislo spravne, tak i bude spravny int
+		 * a pom_MODL_OPTF[3] bude spravny char* */
+	}
+	Log("optf3: i == %d\n", i);
+	while(i <= MODL_SPOL_CAST_NEBRAT){
+		if(equals(pom_MODL_OPTF[3], nazov_spolc(i))){
+			_global_optf[3] = i;
+			break;
+		}
+		i++;
+	}
+	if(i > MODL_SPOL_CAST_NEBRAT){
+		_global_optf[3] = MODL_SPOL_CAST_NEURCENA;
+	}
+	Log("optf3 == `%s' (%d)\n", pom_MODL_OPTF[3], _global_optf[3]);
+
+	/* option force 4 */
+	if(equals(pom_MODL_OPTF[4], STR_ANO) || equals(pom_MODL_OPTF[4], "1")){ /* 2003-07-08 opravene z "4" na "1" */
+		_global_optf[4] = ANO;
+	}
+	else if(equals(pom_MODL_OPTF[4], STR_NIE) || equals(pom_MODL_OPTF[4], "0")){
+		_global_optf[4] = NIE;
+	}/* inak ostane _global_optf[4] neurËen˝ */
+	else
+		_global_optf[4] = GLOBAL_OPTION_NULL;
+	Log("optf4 == `%s' (%d)\n", pom_MODL_OPTF[4], _global_optf[4]);
+
+	/* option force 5 */
+	if(equals(pom_MODL_OPTF[5], STR_MODL_CEZ_DEN_ZALMY_ZO_DNA) || equals(pom_MODL_OPTF[5], "0")){
+		_global_optf[5] = MODL_CEZ_DEN_ZALMY_ZO_DNA;
+	}
+	else if(equals(pom_MODL_OPTF[5], STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA) || equals(pom_MODL_OPTF[5], "1")){
+		_global_optf[5] = MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA;
+	}/* inak ostane _global_optf[5] neurËen˝ */
+	else
+		_global_optf[5] = GLOBAL_OPTION_NULL;
+	Log("optf5 == `%s' (%d)\n", pom_MODL_OPTF[5], _global_optf[5]);
+
+	/* option force 8 */
+	if(equals(pom_MODL_OPTF[8], STR_NIE) || equals(pom_MODL_OPTF[8], "0")){
+		_global_optf[8] = NIE;
+	}
+	else if(equals(pom_MODL_OPTF[8], STR_ANO) || equals(pom_MODL_OPTF[8], "1")){
+		_global_optf[8] = ANO;
+	}/* inak ostane _global_optf[8] neurËen˝ */
+	else
+		_global_optf[8] = GLOBAL_OPTION_NULL;
+	Log("optf8 == `%s' (%d)\n", pom_MODL_OPTF[8], _global_optf[8]);
+
+	/* option force 9 */
+	if(equals(pom_MODL_OPTF[9], STR_NIE) || equals(pom_MODL_OPTF[9], "0")){
+		_global_optf[9] = NIE;
+	}
+	else if(equals(pom_MODL_OPTF[9], STR_ANO) || equals(pom_MODL_OPTF[9], "1")){
+		_global_optf[9] = ANO;
+	}/* inak ostane _global_optf[9] neurËen˝ */
+	else
+		_global_optf[9] = GLOBAL_OPTION_NULL;
+	Log("optf9 == `%s' (%d)\n", pom_MODL_OPTF[9], _global_optf[9]);
+
+	/* option force 0 */
+	if((pom_MODL_OPTF[OPT_0_VERSE_REF] == NULL) || (strlen(pom_MODL_OPTF[OPT_0_VERSE_REF]) < 1)){
+		i = GLOBAL_OPTION_NULL;
+	}
+	else if(equals(pom_MODL_OPTF[OPT_0_VERSE_REF], STR_OPT_0_NIC)){
+		i = OPT_0_NIC;
+	}
+	else if(equals(pom_MODL_OPTF[OPT_0_VERSE_REF], STR_OPT_0_VERSE)){
+		i = OPT_0_VERSE;
+	}
+	else if(equals(pom_MODL_OPTF[OPT_0_VERSE_REF], STR_OPT_0_REFERENCIE)){
+		i = OPT_0_REFERENCIE;
+	}
+	else if(equals(pom_MODL_OPTF[OPT_0_VERSE_REF], STR_OPT_0_VERSE_REFERENCIE)){
+		i = OPT_0_VERSE_REFERENCIE;
+	}
+	else{
+		i = atoi(pom_MODL_OPTF[OPT_0_VERSE_REF]);
+	}
+	_global_optf[OPT_0_VERSE_REF] = i;
+	Log("optf0 == `%s' (%d)\n", pom_MODL_OPTF[OPT_0_VERSE_REF], _global_optf[OPT_0_VERSE_REF]);
+
+	/* 2007-06-01: nasledovn· pas·û kontroluje, Ëi niektorÈ z options nie s˙ GLOBAL_OPTION_NULL */
+	/*             a z·roveÚ prÌpadne nastavÌ na default podæa jazyka */
+	/* 2011-01-26: doplnenÈ opt1 aû opt5 force (okrem opt3); default sa nastavuje podæa "ne-force" verziÌ */
+	/* 2011-01-27: CFG_OPTION1_DEFAULT..CFG_OPTION5_DEFAULT doplnenÈ v myconf.h; opravenÈ ich pouûitie :) 2011-02-01 */
+	/* 2011-04-07: upravenÈ */
+	for(i = 0; i < POCET_GLOBAL_OPT; i++){
+		Log("i == %d...\n", i);
+		if(i == 3)
+			continue;
+		if(_global_opt[i] == GLOBAL_OPTION_NULL){
+			switch(i){
+				case 0: _global_opt[i] = CFG_OPTION0_DEFAULT; break;
+				case 1: _global_opt[i] = CFG_OPTION1_DEFAULT; break;
+				case 2: _global_opt[i] = CFG_OPTION2_DEFAULT; break;
+				/* case 3: vynechan˝; nem· default */
+				case 4: _global_opt[i] = CFG_OPTION4_DEFAULT; break;
+				case 5: _global_opt[i] = CFG_OPTION5_DEFAULT; break;
+				case 6: _global_opt[i] = CFG_OPTION6_DEFAULT; break;
+				case 7: _global_opt[i] = CFG_OPTION7_DEFAULT; break;
+				case 8: _global_opt[i] = CFG_OPTION8_DEFAULT; break;
+				case 9: _global_opt[i] = CFG_OPTION9_DEFAULT; break;
+			}/* switch(i) */
+			Log("KeÔûe bolo _global_opt[%d] == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", i, _global_opt[i]);
+		}
+	}/* for i */
+
+	for(i = 0; i < POCET_GLOBAL_OPT; i++){
+		if(i == 3)
+			continue;
+		if((i == 6) || (i == 7))
+			continue;
+		if(_global_optf[i] == GLOBAL_OPTION_NULL){
+			_global_optf[i] = _global_opt[i];
+			Log("KeÔûe bolo _global_optf[%d] == GLOBAL_OPTION_NULL, nastavujem na _global_opt[%d] == `%d'...\n", i, i, _global_optf[i]);
+		}
+		else{
+			_global_opt[i] = _global_optf[i];
+			Log("Force; do _global_opt[%d] priraÔujem _global_optf[%d] (`%d')...\n", i, i, _global_optf[i]);
+		}
+	}
+	Log("=== Po potenci·lnych ˙prav·ch (nastavenie default hodnÙt podæa jazyka) ===\n");
+	log_pom_MODL_OPT();
+	log_pom_MODL_OPTF();
+	Log("_rozparsuj_parametre_OPT() -- koniec.\n");
 }
 
 /*---------------------------------------------------------------------*/
@@ -8625,7 +8699,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 	 * 2007-06-01: upravenÈ tak, aby sa v prÌpade nenastavenia dala hodnota GLOBAL_OPTION_NULL
 	 */
 	Log("vol·m _rozparsuj_parametre_OPT z _main_rozbor_dna()...\n");
-	_rozparsuj_parametre_OPT;
+	_rozparsuj_parametre_OPT();
 
 	/* option a (append), pridana 2003-07-08 - nastavi sa v getArgv(); */
 
@@ -8710,7 +8784,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 		VYSVETLIVKY();
 
 		if((_global_linky == ANO) && (_global_opt[6] == NIE)){
-		/* 2005-03-22: Upravene; podmienka zosilnena (and _global_opt[1] == NIE); 2007-06-01 upravenÈ, aby sa neriadilo opt1, ale opt6 */
+		/* 2005-03-22: Upravene; podmienka zosilnena (and _global_opt[OPT_1_CASTI_MODLITBY] == NIE); 2007-06-01 upravenÈ, aby sa neriadilo opt1, ale opt6 */
 		/* pridane 13/04/2000A.D. */
 		/* pridane 25/02/2000A.D. -- buttony Predchadzajuci, Nasledujuci rok */
 		Export("\n<br>\n<center><table>\n");
@@ -8787,7 +8861,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 
 			/* 2009-08-12: podmienka upraven·; export aj pre batch mÛd mesaËn˝ */
 			if(((_global_linky == ANO) && (_global_opt[6] == NIE)) || ((_global_opt_batch_monthly == ANO) && (export_monthly_druh >= 2))){
-			/* 2005-03-22: Upravene; podmienka zosilnena (and _global_opt[1] == NIE); 2007-06-01 upravenÈ, aby sa neriadilo opt1, ale opt6 */
+			/* 2005-03-22: Upravene; podmienka zosilnena (and _global_opt[OPT_1_CASTI_MODLITBY] == NIE); 2007-06-01 upravenÈ, aby sa neriadilo opt1, ale opt6 */
 				/* pridane 13/04/2000A.D. */
 				/* pridane 25/02/2000A.D. -- buttony Predchadzajuci, Nasledujuci mesiac */
 				if(som_v_tabulke == ANO)
@@ -9104,7 +9178,7 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
  *
  */
 void _main_dnes(char *modlitba, char *poradie_svaty){
-	short int s, p, i;
+	short int s, p;
 	time_t timer;
 	struct tm dnes;
 	long jd_dnes;
@@ -9157,7 +9231,7 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 	 * 2007-06-01: upravenÈ tak, aby sa v prÌpade nenastavenia dala hodnota GLOBAL_OPTION_NULL
 	 */
 	Log("vol·m _rozparsuj_parametre_OPT z _main_dnes()...\n");
-	_rozparsuj_parametre_OPT;
+	_rozparsuj_parametre_OPT();
 
 	/* vypis */
 	Log("/* teraz vypisujem heading 1, datum %d. %s %d */\n",
@@ -9417,7 +9491,7 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 
 	/* rozparsovanie parametrov opt1...opt5 */
 	Log("vol·m _rozparsuj_parametre_OPT z _main_liturgicke_obdobie()...\n");
-	_rozparsuj_parametre_OPT;
+	_rozparsuj_parametre_OPT();
 
 	/* 2011-01-26: nastavenie niektor˝ch atrib˙tov pre _global_den */
 	_global_den.denvt = d;
@@ -9594,7 +9668,7 @@ void _main_analyza_roku(char *rok){
 
 	/* rozparsovanie parametrov opt1...opt5 */
 	Log("vol·m _rozparsuj_parametre_OPT z _main_analyza_roku()...\n");
-	_rozparsuj_parametre_OPT;
+	_rozparsuj_parametre_OPT();
 
 	PRILEP_REQUEST_OPTIONS(pom2, pom3, ANO); /* PRILEP_REQUEST_OPTIONS(pom2, pom3, prvy_ampersand) */
 
@@ -9753,7 +9827,7 @@ void _main_analyza_roku(char *rok){
 	Export("\n</center>\n");
 #endif
 	if((_global_linky == ANO) && (_global_opt[6] == NIE)){
-	/* 2005-03-22: Upravene; podmienka zosilnena (and _global_opt[1] == NIE); 2007-06-01 upravenÈ, aby sa neriadilo opt1, ale opt6 */
+	/* 2005-03-22: Upravene; podmienka zosilnena (and _global_opt[OPT_1_CASTI_MODLITBY] == NIE); 2007-06-01 upravenÈ, aby sa neriadilo opt1, ale opt6 */
 	/* pridane 13/04/2000A.D. */
 	/* pridane 21/02/2000A.D. -- buttony Predchadzajuci, Nasledujuci rok */
 		ExportROK("<table align=\"center\">\n");
@@ -9827,7 +9901,7 @@ void _main_tabulka(char *rok_from, char *rok_to, char *tab_linky){
 
 	/* rozparsovanie parametrov opt1...opt5 */
 	Log("vol·m _rozparsuj_parametre_OPT z _main_tabulka()...\n");
-	_rozparsuj_parametre_OPT;
+	_rozparsuj_parametre_OPT();
 
 	_export_heading_center((char *)html_text_datumy_pohyblivych_slaveni[_global_jazyk]);
 
@@ -9979,7 +10053,7 @@ void _main_batch_mode(
 	 * 2007-06-01: upravenÈ tak, aby sa v prÌpade nenastavenia dala hodnota GLOBAL_OPTION_NULL
 	 */
 	Log("vol·m _rozparsuj_parametre_OPT z _main_batch_mode()...\n");
-	_rozparsuj_parametre_OPT;
+	_rozparsuj_parametre_OPT();
 
 	/* option a (append), pridana 2003-07-08 - nastavi sa v getArgv(); */
 
@@ -11367,6 +11441,26 @@ short int getForm(void){
 		}
 	}/* for i */
 
+	/* 2011-04-11: force option 1 premennÈ -- jednotlivÈ bit-komponenty */
+	for(i = 0; i < POCET_GLOBAL_OPT_CASTI_MODLITBY; i++){
+		/* premenn· WWW_MODL_OPTF1_... */
+		mystrcpy(local_str, WWW_PREFIX, SMALL);
+		switch(i){
+			case 0: strcat(local_str, STR_MODL_OPTF1_CHV); break;
+			case 1: strcat(local_str, STR_MODL_OPTF1_SL); break;
+			case 2: strcat(local_str, STR_MODL_OPTF1_RUB); break;
+			case 3: strcat(local_str, STR_MODL_OPTF1_OT); break;
+			case 4: strcat(local_str, STR_MODL_OPTF1_TD); break;
+		}/* switch(i) */
+		ptr = getenv(local_str);
+		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
+		 * lebo pom_... su inicializovane na STR_EMPTY */
+		if(ptr != NULL){
+			if(strcmp(ptr, STR_EMPTY) != 0)
+				mystrcpy(pom_MODL_OPTF_CASTI_MODLITBY[i], ptr, SMALL);
+		}
+	}/* for i */
+
 	if((query_type == PRM_DATUM) || (query_type == PRM_DETAILY) || (query_type == PRM_TXT)){
 		/* datum: treba nacitat den, mesiac a rok */
 
@@ -11989,8 +12083,6 @@ short int parseQueryString(void){
 		}
 	}/* for j */
 
-// 2011-04-07 debug
-if(0==1)
 	for(j = 0; j < POCET_GLOBAL_OPT; j++){
 		Log("j == %d...\n", j);
 		if(j == 3)
@@ -12024,6 +12116,34 @@ if(0==1)
 			i++;
 		}
 		if(equalsi(pom_MODL_OPTF[j], STR_EMPTY)){
+			Log("Nebola zadan· premenn· %s (nevadÌ).\n", local_str);
+		}
+	}/* for j */
+
+	/* 2011-04-11: force option 1 premennÈ -- jednotlivÈ bit-komponenty */
+	for(j = 0; j < POCET_GLOBAL_OPT_CASTI_MODLITBY; j++){
+		Log("j == %d...\n", j);
+		mystrcpy(local_str, STR_EMPTY, SMALL);
+		switch(j){
+			case 0: strcat(local_str, STR_MODL_OPTF1_CHV); break;
+			case 1: strcat(local_str, STR_MODL_OPTF1_SL); break;
+			case 2: strcat(local_str, STR_MODL_OPTF1_RUB); break;
+			case 3: strcat(local_str, STR_MODL_OPTF1_OT); break;
+			case 4: strcat(local_str, STR_MODL_OPTF1_TD); break;
+		}/* switch(j) */
+		/* premenn· WWW_MODL_OPTF1_... (nepovinn·), j = 0 aû POCET_GLOBAL_OPT_CASTI_MODLITBY
+		i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
+		Log("pok˙öam sa zistiù hodnotu parametra %s...\n", local_str);
+		while((equalsi(pom_MODL_OPTF[j], STR_EMPTY)) && (i < pocet)){
+			// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
+			if(equals(param[i].name, local_str)){
+				/* ide o parameter STR_MODL_OPTFj */
+				mystrcpy(pom_MODL_OPTF_CASTI_MODLITBY[j], param[i].val, SMALL);
+				Log("hodnota parametra %s je %s.\n", local_str, pom_MODL_OPTF_CASTI_MODLITBY[j]);
+			}
+			i++;
+		}
+		if(equalsi(pom_MODL_OPTF_CASTI_MODLITBY[j], STR_EMPTY)){
 			Log("Nebola zadan· premenn· %s (nevadÌ).\n", local_str);
 		}
 	}/* for j */
@@ -12644,7 +12764,6 @@ int main(int argc, char **argv){
 	 *
 	 * 2009-08-05: prerobenie ËÌtania jazyka (skopÌrovanÈ eöte na jedno vyööie miesto); uû by sa <title> malo vypisovaù pri generovanÌ inojazyËn˝ch modlitieb spr·vne
 	 */
-	_global_opt[1] = NIE;
 	_global_opt[2] = MODL_ZALMY_ZO_DNA; /* 2006-01-25: upravenÈ, bolo tu MODL_ZALMY_ZO_SV */
 	_global_opt[3] = MODL_SPOL_CAST_NEURCENA; /* 2003-08-11 -Wall upozornila `statement with no effect' */
 	_global_opt[4] = ANO;
@@ -12655,6 +12774,7 @@ int main(int argc, char **argv){
 	_global_opt[8] = NIE;
 	_global_opt[9] = NIE;
 	_global_opt[OPT_0_VERSE_REF] = OPT_0_NIC;
+	_global_opt[OPT_1_CASTI_MODLITBY] = 0;
 
 	strcpy(pom_QUERY_TYPE, STR_EMPTY);
 	strcpy(pom_DEN, STR_EMPTY);
@@ -12698,20 +12818,20 @@ int main(int argc, char **argv){
 	_main_LOG("inicializ·cia poæa pom_MODL_OPT[]...\n");
 	for(i = 0; i < POCET_GLOBAL_OPT; i++){
 		mystrcpy(pom_MODL_OPT[i], STR_EMPTY, SMALL);
-		// _main_LOG("pom_MODL_OPT[%d] == `%s'...\n", i, pom_MODL_OPT[i]);
+//		_main_LOG("pom_MODL_OPT[%d] == `%s'...\n", i, pom_MODL_OPT[i]);
 	}/* nastavenie pom_MODL_OPT[i] */
 
 	_main_LOG("inicializ·cia poæa pom_MODL_OPTF[]...\n");
 	for(i = 0; i < POCET_GLOBAL_OPT; i++){
 		mystrcpy(pom_MODL_OPTF[i], STR_EMPTY, SMALL);
-		// _main_LOG("pom_MODL_OPTF[%d] == `%s'...\n", i, pom_MODL_OPTF[i]);
+//		_main_LOG("pom_MODL_OPTF[%d] == `%s'...\n", i, pom_MODL_OPTF[i]);
 	}/* nastavenie pom_MODL_OPTF[i] */
 
-	_main_LOG("sp˙öùam log_pom_MODL_OPT();...\n");
-	log_pom_MODL_OPT();
+//	_main_LOG("sp˙öùam log_pom_MODL_OPT();...\n");
+//	log_pom_MODL_OPT();
 
-	_main_LOG("sp˙öùam log_pom_MODL_OPTF();...\n");
-	log_pom_MODL_OPTF();
+//	_main_LOG("sp˙öùam log_pom_MODL_OPTF();...\n");
+//	log_pom_MODL_OPTF();
 
 	/* config: dorobene 30/03/2000A.D. */
 	_main_LOG("first, reading configuration (file %s)...\n", CONFIG_FILE);
@@ -12719,8 +12839,8 @@ int main(int argc, char **argv){
 	_main_LOG("sp˙öùam readConfig();...\n");
 	readConfig();
 	/* 2007-06-01: keÔûe prib˙da mnoho konfiguraËn˝ch parametrov, presunuli sme ich v˝pis do funkcie */
-	_main_LOG("sp˙öùam printConfig();...\n");
-	printConfig();
+//	_main_LOG("sp˙öùam printConfig();...\n");
+//	printConfig();
 	/* 2004-03-17 na inom mieste sa upravuje include_dir - je to 2004-03-17_TUTOLA */
 
 	_main_LOG("sp˙öùam updateScriptName();...\n");
