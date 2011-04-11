@@ -409,11 +409,6 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 /* 2005-08-15: DoplnenÈ parametre pre voænÈ, inÈ hymny v 34. t˝ûdni OCR */
 #define PARAM_HYMNUS_34_OCR_INY_BEGIN       "HYMNUS_34_OCR_INY_BEGIN"
 #define PARAM_HYMNUS_34_OCR_INY_END         "HYMNUS_34_OCR_INY_END"
-/* 2005-11-11: DoplnenÈ parametre pre Te Deum 
-#define PARAM_HYMNUS_TEDEUM_BEGIN           "HYMNUS_TEDEUM_BEGIN"
-#define PARAM_HYMNUS_TEDEUM_END             "HYMNUS_TEDEUM_END"
-	- napokon sa nepouûÌva zatiaæ
-*/
 /* nasleduju casti, ktore sa mozu pri generovani modlitby vynechat
  * alebo doplnit podla lubovole */
 #define PARAM_OTCENAS_BEGIN                 "OTCENAS_BEGIN"
@@ -427,9 +422,15 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 /* 2007-03-23: doplnenÈ Sl·va Otcu */
 #define PARAM_SLAVAOTCU_BEGIN               "SLAVAOTCU_BEGIN"
 #define PARAM_SLAVAOTCU_END                 "SLAVAOTCU_END"
-/* 2007-06-28: doplnenÈ Te Deum; nemÙûe sa riadiù rovnak˝mi pravidlami ako chv·lospevy */
+/* 2007-06-28: doplnenÈ Te Deum; nemÙûe sa riadiù rovnak˝mi pravidlami ako chv·lospevy 
+ * 2011-04-11: pridan˝ ÔalöÌ p·r parametrov
+ *             JE_TEDEUM_BEGIN a END hovoria, Ëi v danej modlitbe m· vÙbec byù zobrazen· Ëo i len zmienka o Te Deum (riadenÈ podmienkou je_tedeum);
+ *             TEDEUM_BEGIN a END hovoria, ûe ak m· byù Te Deum (je_tedeum), tak ak chce pouûÌvateæ zobraziù pln˝ text, ohraniËuj˙ ho
+ */
 #define PARAM_TEDEUM_BEGIN                  "TEDEUM_BEGIN"
 #define PARAM_TEDEUM_END                    "TEDEUM_END"
+#define PARAM_JE_TEDEUM_BEGIN               "JE_TEDEUM_BEGIN"
+#define PARAM_JE_TEDEUM_END                 "JE_TEDEUM_END"
 /* 2007-10-02: doplnenÈ skrytie rovnak˝ch antifÛn pre mcd */
 #define PARAM_SKRY_ANTIFONU_BEGIN           "SKRY_ANTIFONU_BEGIN"
 #define PARAM_SKRY_ANTIFONU_END             "SKRY_ANTIFONU_END"
@@ -444,12 +445,15 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 /* 2010-06-07, doplnenÈ: eöte jedno zakonËenie modlitby pre slovenËinu, kr·tke resp. dlhÈ (POST1_MODLITBA5NE) */
 #define PARAM_ZAKONCENIE_ON_JE              "ZAKONCENIE_ON_JE"
 /* 2010-01-14, doplnenÈ: eöte jedno zakonËenie modlitby pre slovenËinu, kr·tke resp. dlhÈ */
-#define PARAM_ZAKONCENIE_KTORY_JE            "ZAKONCENIE_KTORY_JE"
+#define PARAM_ZAKONCENIE_KTORY_JE           "ZAKONCENIE_KTORY_JE"
 /* 2010-05-21: doplnenÈ zobrazenie antifÛny a modlitby pre spomienku sv‰tca v pÙstnom obdobÌ */
-#define PARAM_POST_SPOMIENKA_BEGIN           "POST_SPOMIENKA_BEGIN"
-#define PARAM_POST_SPOMIENKA_END             "POST_SPOMIENKA_END"
+#define PARAM_POST_SPOMIENKA_BEGIN          "POST_SPOMIENKA_BEGIN"
+#define PARAM_POST_SPOMIENKA_END            "POST_SPOMIENKA_END"
 /* 2011-01-12: doplnenÈ zobrazenie/skrytie alternatÌvnej antifÛny ûalmu/chv·lospevu ("myölienka k ûalmu" podæa bodu 111 VSLH) */
-#define PARAM_MYSLIENKA_K_ZALMU              "MYSLIENKA_K_ZALMU"
+#define PARAM_MYSLIENKA_K_ZALMU             "MYSLIENKA_K_ZALMU"
+
+#define PARAM_RUBRIKA_BEGIN                 "RUBRIKA_BEGIN"
+#define PARAM_RUBRIKA_END                   "RUBRIKA_END"
 
 /* 2011-04-04: doplnenÈ zobrazenie/skrytie ËÌslovania veröov v ûalmoch, chv·lospevoch a biblick˝ch ËÌtaniach */
 #define PARAM_CISLO_VERSA_BEGIN				"v"
@@ -1132,15 +1136,15 @@ extern short int _global_opt[POCET_GLOBAL_OPT];
 extern short int _global_opt_casti_modlitby[POCET_GLOBAL_OPT_CASTI_MODLITBY];
 
 /* 2011-04-08: ˙prava v˝znamu (a interpret·cie) option 0 ==  OPT_0_VERSE_REF */
-#define BIT_OPT_0_VERSE      1
-#define BIT_OPT_0_REFERENCIE 2
+#define BIT_OPT_0_VERSE       1
+#define BIT_OPT_0_REFERENCIE  2
 
 /* 2011-04-11: ˙prava v˝znamu (a interpret·cie) option 1 == OPT_1_CASTI_MODLITBY */
-#define BIT_OPT_1_CHVALOSPEVY 1
-#define BIT_OPT_1_SLAVA_OTCU  2
-#define BIT_OPT_1_RUBRIKY     4
-#define BIT_OPT_1_OTCENAS     8
-#define BIT_OPT_1_TEDEUM     16
+#define BIT_OPT_1_TEDEUM      1
+#define BIT_OPT_1_RUBRIKY     2
+#define BIT_OPT_1_CHVALOSPEVY 4
+#define BIT_OPT_1_SLAVA_OTCU  8
+#define BIT_OPT_1_OTCENAS    16
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
 extern char *_global_string;
@@ -1201,6 +1205,8 @@ char *remove_diacritics(const char *input);
 #define Vytvor_global_link(den, mesiac, rok, typ)	_vytvor_global_link(den, mesiac, rok, CASE_Case, typ)
 #define VYTVOR_global_link(den, mesiac, rok, typ)	_vytvor_global_link(den, mesiac, rok, CASE_CASE, typ)
 void _vytvor_global_link(short int den, short int mesiac, short int rok, short int _case, short int typ);
+
+void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int prvy_ampersand);
 
 short int prestupny(short int);
 short int pocet_dni_v_roku(short int);

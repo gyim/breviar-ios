@@ -587,6 +587,84 @@ char *remove_diacritics(const char *input){
 	return (_global_pom_str);
 }
 
+void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int prvy_ampersand){
+	short int i;
+	Log("prilep_request_options() -- zaËiatok...\n");
+	/* 2006-07-31: pridanÈ odovzdanie parametra pre jazyk */
+	if(_global_jazyk != JAZYK_SK){
+		if(prvy_ampersand == ANO){
+			sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_JAZYK, skratka_jazyka[_global_jazyk]);
+		}
+		else{
+			sprintf(pom3, "%s=%s", STR_JAZYK, skratka_jazyka[_global_jazyk]);
+		}
+		strcat(pom2, pom3);
+		Log("\tPrilepil som aj jazyk: `%s' (2006-07-31)\n", pom3);
+	}
+
+	/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r
+	 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
+	 */
+	if(PODMIENKA_EXPORTOVAT_KALENDAR){
+		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_KALENDAR, skratka_kalendara[_global_kalendar]);
+		strcat(pom2, pom3);
+		Log("\tPrilepil som aj kalend·r: `%s' (2010-08-04)\n", pom3);
+	}
+	else{
+		Log("\tNetreba prilepiù kalend·r (jazyk == %s, kalend·r == %s)\n", skratka_jazyka[_global_jazyk], skratka_kalendara[_global_kalendar]);
+	}
+
+	/* 2008-08-08: pridanÈ odovzdanie parametra pre css */
+	if(_global_css != CSS_breviar_sk){
+		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_CSS, skratka_css[_global_css]);
+		strcat(pom2, pom3);
+		Log("\tPrilepil som aj css: `%s' (2008-08-08)\n", pom3);
+	}
+
+	/* 2011-01-26: pridanÈ odovzdanie parametrov pre options1 atÔ. */
+    /* 2011-04-07: upravenÈ -- pouûitie polÌ */
+	char local_str[SMALL];
+	short int local_opt_default;
+	for(i = 0; i < POCET_GLOBAL_OPT; i++){
+		Log("i == %d...\n", i);
+		if(i == 3)
+			continue;
+		if((i == 6) || (i == 7))
+			continue;
+		switch(i){
+			case 0: local_opt_default = CFG_OPTION0_DEFAULT; break;
+			case 1: local_opt_default = CFG_OPTION1_DEFAULT; break;
+			case 2: local_opt_default = CFG_OPTION2_DEFAULT; break;
+			/* case 3: vynechan˝; nem· default */
+			case 4: local_opt_default = CFG_OPTION4_DEFAULT; break;
+			case 5: local_opt_default = CFG_OPTION5_DEFAULT; break;
+			case 6: local_opt_default = CFG_OPTION6_DEFAULT; break;
+			case 7: local_opt_default = CFG_OPTION7_DEFAULT; break;
+			case 8: local_opt_default = CFG_OPTION8_DEFAULT; break;
+			case 9: local_opt_default = CFG_OPTION9_DEFAULT; break;
+		}/* switch(i) */
+		if(_global_opt[i] != local_opt_default){
+			strcpy(local_str, STR_EMPTY);
+			switch(i){
+				case 0: strcat(local_str, STR_MODL_OPT0); break;
+				case 1: strcat(local_str, STR_MODL_OPT1); break;
+				case 2: strcat(local_str, STR_MODL_OPT2); break;
+				case 3: strcat(local_str, STR_MODL_OPT3); break;
+				case 4: strcat(local_str, STR_MODL_OPT4); break;
+				case 5: strcat(local_str, STR_MODL_OPT5); break;
+				case 6: strcat(local_str, STR_MODL_OPT6); break;
+				case 7: strcat(local_str, STR_MODL_OPT7); break;
+				case 8: strcat(local_str, STR_MODL_OPT8); break;
+				case 9: strcat(local_str, STR_MODL_OPT9); break;
+			}/* switch(i) */
+			sprintf(pom3, HTML_AMPERSAND"%s=%d", local_str, _global_opt[i]);
+			strcat(pom2, pom3);
+			Log("\tPrilepil som aj opt%d: `%s'\n", i, pom3);
+		}
+	}
+	Log("prilep_request_options() -- koniec.\n");
+}// prilep_request_options();
+
 /* do globalneho stringu _global_link vrati retazec, ktory je linkou
  * na SCRIPT_NAME ++ ? zoznam param(i) = value(i)
  *
@@ -607,8 +685,6 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 
 	char str_subor[SMALL] = STR_EMPTY; /* 2009-08-12: pridanÈ */
 	char str_month[SMALL] = STR_EMPTY; /* 2009-08-12: pridanÈ */
-
-	short int i; /* kvÙli PRILEP_REQUEST_OPTIONS */
 
 	/* ak pozadujeme vytvorenie linku s inou farbou pre prestupny rok, 2003-07-02 */
 	if(typ == LINK_DEN_MESIAC_ROK_PRESTUP)
@@ -663,7 +739,7 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 			strcat(_global_link, ".htm");
 		}/* linka nie */
 
-		PRILEP_REQUEST_OPTIONS(_global_link, pom2, ANO); /* PRILEP_REQUEST_OPTIONS(pom2, pom3, prvy_ampersand) */
+		prilep_request_options(_global_link, pom2, ANO); /* prilep_request_options(pom2, pom3, prvy_ampersand) */
 
 	}/* if(_global_opt_batch_monthly == NIE) */
 	else{

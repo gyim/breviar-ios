@@ -183,9 +183,9 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 
 #define PRM_ANALYZA_ROKU	3   /* dotaz na sviatky v roku */
 #ifdef LONG_PARAM_NAMES
-	#define STR_PRM_ANALYZA_ROKU  "PRM_ANALYZA_ROKU"
+	#define STR_PRM_ANALYZA_ROKU "PRM_ANALYZA_ROKU"
 #else
-	#define STR_PRM_ANALYZA_ROKU  "par"
+	#define STR_PRM_ANALYZA_ROKU "par"
 #endif
 
 #define PRM_DNES		4 /* to, co bolo kedysi bez parametra - info o dnesnom dni */
@@ -269,9 +269,9 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 
 #define DALSI_SVATY 16
 #ifdef LONG_PARAM_NAMES
-	#define STR_DALSI_SVATY  "DALSI_SVATY"
+	#define STR_DALSI_SVATY "DALSI_SVATY"
 #else
-	#define STR_DALSI_SVATY  "ds"
+	#define STR_DALSI_SVATY "ds"
 #endif
 
 /* nasledujú parametre z formulárov pre dotaz PRM_CEZ_ROK -- používa ich aj PRM_LIT_OBD */
@@ -599,9 +599,9 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 /* global */
 #define QUERY_TYPE	20
 #ifdef LONG_PARAM_NAMES
-	#define STR_QUERY_TYPE	"QUERY_TYPE"
+	#define STR_QUERY_TYPE "QUERY_TYPE"
 #else
-	#define STR_QUERY_TYPE	"qt"
+	#define STR_QUERY_TYPE "qt"
 #endif
 
 #define ALERT	Export("<p>Ak probl&eacute;my pretrv&aacute;vaj&uacute;, kontaktujte pros&iacute;m <a href=\"mailto:%s\">autora str&aacute;nky</a>.</p>\n", cfg_MAIL_ADDRESS_default)
@@ -635,6 +635,8 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #define HTML_SPAN_EXPLAIN   "span class=\"explain\""
 #define HTML_SPAN_PARAMETER "span class=\"parameter\""
 #define HTML_SPAN_VALUE     "span class=\"value\""
+
+#define HTML_SPAN_TOOLTIP   "span title=\"%s\"" // obsahuje %s
 
 #define HTML_SUP_RED        "sup class=\"red\""
 

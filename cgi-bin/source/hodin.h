@@ -1413,16 +1413,16 @@ const char *html_text_zobrazit_option0_explain2[POCET_JAZYKOV + 1] =
 };
 
 const char *html_text_option1_chvalospevy[POCET_JAZYKOV + 1] = 
-{"evanjeliové chválospevy (Benediktus, Magnifikat, Nunk dimittis) a Te Deum", 
+{"evanjeliové chválospevy (Benediktus, Magnifikat, Nunk dimittis)", 
  "kantika (Mariino, Zachariášovo, Simeonovo) a Te Deum", 
- "canticles (Benedictus, Magnificat, Nunc dimittis) and Te Deum", 
+ "canticles (Benedictus, Magnificat, Nunc dimittis)", 
  "",
  "",
- "chvalozpìvy (Benedictus, Magnificat, Nunc dimittis) a Te Deum", 
+ "chvalozpìvy (Benedictus, Magnificat, Nunc dimittis)", 
  "hu_"
 };
 const char *html_text_option1_chvalospevy_explain[POCET_JAZYKOV + 1] = 
-{"Liturgia hodín štandardne tieto evanjeliové chválospevy nezobrazuje.", 
+{"Liturgia hodín štandardne tieto evanjeliové chválospevy neuvádza.", 
  "", 
  "", 
  "",
@@ -1441,7 +1441,7 @@ const char *html_text_option1_slava_otcu[POCET_JAZYKOV + 1] =
  "hu_"
 };
 const char *html_text_option1_slava_otcu_explain[POCET_JAZYKOV + 1] = 
-{"Liturgia hodín štandardne Sláva Otcu na konci žalmov a chválospevov nezobrazuje.", 
+{"Liturgia hodín štandardne Sláva Otcu na konci žalmov a chválospevov neuvádza.", 
  "", 
  "", 
  "",
@@ -1451,7 +1451,7 @@ const char *html_text_option1_slava_otcu_explain[POCET_JAZYKOV + 1] =
 };
 
 const char *html_text_option1_rubriky[POCET_JAZYKOV + 1] = 
-{"rubriky (pokyny Liturgie hodín uvádzané èerveným písmom)", 
+{"rubriky (napr. závereèné požehnanie)", 
  "rubriky", 
  "rubrics", 
  "",
@@ -1461,6 +1461,44 @@ const char *html_text_option1_rubriky[POCET_JAZYKOV + 1] =
 };
 const char *html_text_option1_rubriky_explain[POCET_JAZYKOV + 1] = 
 {"Liturgia hodín zobrazuje èerveným písmom rozlièné pokyny, zvyèajne vysvet¾ujúce, k modlitbe (pod¾a Všeobecných smerníc o LH).", 
+ "", 
+ "", 
+ "",
+ "", 
+ "", 
+ "hu_"
+};
+
+const char *html_text_option1_otcenas[POCET_JAZYKOV + 1] = 
+{"modlitba Pána (Otèenáš)", 
+ "modlitba Pánì (Otèenáš)", 
+ "Lord's Prayer (Our Father)", 
+ "",
+ "",
+ "modlitba Pánì (Otèenáš)", 
+ "hu_"
+};
+const char *html_text_option1_otcenas_explain[POCET_JAZYKOV + 1] = 
+{"Liturgia hodín štandardne modlitbu Pána (Otèenáš) v ranných chválach a vešperách v plnom znení neuvádza.", 
+ "", 
+ "", 
+ "",
+ "", 
+ "", 
+ "hu_"
+};
+
+const char *html_text_option1_tedeum[POCET_JAZYKOV + 1] = 
+{"hymnus Te Deum", 
+ "hymnus Te Deum", 
+ "hymnus Te Deum", 
+ "",
+ "",
+ "hymnus Te Deum", 
+ "hu_"
+};
+const char *html_text_option1_tedeum_explain[POCET_JAZYKOV + 1] = 
+{"Liturgia hodín štandardne hymnus Te Deum v posvätnom èítaní neuvádza.", 
  "", 
  "", 
  "",
