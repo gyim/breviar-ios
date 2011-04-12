@@ -1261,6 +1261,26 @@ const char *html_text_nemenne_sucasti_explain[POCET_JAZYKOV + 1] =
  "hu_ (we will translate it later)"
 };
 
+const char *html_text_dalsie_prepinace[POCET_JAZYKOV + 1] = 
+{"ïalšie monosti pre vısledné modlitby",
+ "další monosti pro vısledné modlitby",
+ "futher options for generated prayers",
+ "", 
+ "", 
+ "další monosti pro vısledné modlitby",
+ "hu_ (we will translate it later)"
+};
+
+const char *html_text_dalsie_prepinace_explain[POCET_JAZYKOV + 1] = 
+{"", 
+ "", 
+ "", 
+ "",
+ "", 
+ "",
+ ""
+};
+
 const char *html_text_popis_svaty[POCET_JAZYKOV + 1] = 
 {"zobrazi <i>popis</i> k modlitbe svätého?", 
  "zobrazit <i>popis</i> pøi modlitbì ke cti svìtce?", 
@@ -1366,12 +1386,12 @@ const char *html_text_zobrazit_prve_vespery_explain[POCET_JAZYKOV + 1] =
 };
 
 const char *html_text_zobrazit_vigiliu[POCET_JAZYKOV + 1] = 
-{"zobrazi <i>predåené slávenie vigílie</i> pre posvätné èítanie <br>na nedele, slávnosti a sviatky ", 
- "zobrazit <i>prodlouené slavení vigilie</i> pro modlitbu se ètením <br>pro nedìle, slavnosti a svátky ", 
- "display <i>celebrating of vigily</i> for prayer with readings <br>for Sundays, solemnitas and festivus ", 
+{"predåené slávenie vigílie pre posvätné èítanie (na nedele, slávnosti a sviatky)", 
+ "prodlouené slavení vigilie pro modlitbu se ètením (pro nedìle, slavnosti a svátky)", 
+ "celebrating of vigily for prayer with readings (for Sundays, solemnitas and festivus)", 
  "",
  "",
- "zobrazit <i>prodlouené slavení vigilie</i> pro modlitbu se ètením <br>pro nedìle, slavnosti a svátky ", 
+ "prodlouené slavení vigilie pro modlitbu se ètením (pro nedìle, slavnosti a svátky)", 
  "hu_"
 };
 const char *html_text_zobrazit_vigiliu_explain[POCET_JAZYKOV + 1] = 
@@ -1504,6 +1524,25 @@ const char *html_text_option1_tedeum_explain[POCET_JAZYKOV + 1] =
  "",
  "", 
  "", 
+ "hu_"
+};
+
+const char *html_text_option1_mcd_doplnkova_psalmodia[POCET_JAZYKOV + 1] = 
+{"pre modlitbu cez deò poui doplnkovú psalmódiu", 
+ "pro modlitbu bìhem dne brát almy z doplòovacího cyklu", 
+ "xxx", 
+ "supplementaris psalmodia",
+ "",
+ "pro modlitbu bìhem dne brát almy z doplòovacího cyklu", 
+ "hu_"
+};
+const char *html_text_option1_mcd_doplnkova_psalmodia_explain[POCET_JAZYKOV + 1] = 
+{"Pokia¾ sa niekto modlí viac modlitieb cez deò, v prvej vezme benú psalmódiu; v ostatnıch sa pouije doplnková psalmódia. Zahàòa 3 série tzv. graduálnych almov ( 120 – 129).", 
+ "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120 – 129), které je mono brát místo almù ze altáøe.", 
+ "", 
+ "",
+ "", 
+ "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120 – 129), které je mono brát místo almù ze altáøe.", 
  "hu_"
 };
 

@@ -10,7 +10,7 @@
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-07-01a.D. | void main je zakomentovane ak linux      */
 /*   2003-07-14a.D. | zmena void main -> int main (gcc v3.2.2 )*/
-/*   2003-08-07a.D. | pridane _global_opt[5]                   */
+/*   2003-08-07a.D. | pridane _global_opt 5                    */
 /*   2003-08-13a.D. | pridane _type a _global_modl pre posv.cit*/
 /*   2006-07-11a.D. | prvé kroky k jazykovým mutáciám          */
 /*   2006-08-18a.D. | zmena int na short int (staèí 32tis.)    */

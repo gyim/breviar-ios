@@ -571,6 +571,22 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPTF1_TD "of1t"
 #endif
 
+// doplnková psalmódia pre modlitbu cez deò
+#define MODL_OPTF1_MCD_DPS 76
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF1_MCD_DPS "MODL_OPTF1_MCD_DPS"
+#else
+	#define STR_MODL_OPTF1_MCD_DPS "of1dps"
+#endif
+
+// vigília v posvätnom èítaní
+#define MODL_OPTF1_VIGILIA 77
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF1_VIGILIA "MODL_OPTF1_VIGILIA"
+#else
+	#define STR_MODL_OPTF1_VIGILIA "of1v"
+#endif
+
 /* 2008-08-08: Pridané kvôli rôznym css */
 #define CSS 40
 #ifdef LONG_PARAM_NAMES

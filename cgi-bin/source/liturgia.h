@@ -533,11 +533,6 @@ extern const char *str_modl_zalmy_zo_sv[POCET_JAZYKOV + 1];
 #define MODL_SPOL_CAST_NEBRAT            27 /* nechce zo spol. casti */
 #define POCET_SPOL_CASTI	MAX_MODL_SPOL_CAST - 1
 
-/* option 5, 2003-08-06, upravena 2003-08-13; 2007-06-01: presunuté do mydefs.h
-#define MODL_CEZ_DEN_ZALMY_ZO_DNA         0
-#define MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA  1
-*/
-
 //#define STR_MODL_CEZ_DEN_ZALMY_ZO_DNA        "bežnej"
 extern const char *str_modl_cez_den_zalmy_zo_dna[POCET_JAZYKOV + 1];
 #ifndef		STR_MODL_CEZ_DEN_ZALMY_ZO_DNA
@@ -1127,12 +1122,14 @@ extern short int _global_pocet_svatych;
 
 #define OPT_0_VERSE_REF       0
 #define OPT_1_CASTI_MODLITBY  1
+#define OPT_5_DOPLNKOVA_PSALMODIA  5 // netreba
+#define OPT_9_VIGILIA         9 // netreba
 
 #define POCET_GLOBAL_OPT 10
 /* globálna premenná -- pole -- obsahujúca options; pôvodne to boli globálne premenné _global_opt1.._global_opt9 atï., obsahujú pom_MODL_OPT... */
 extern short int _global_opt[POCET_GLOBAL_OPT];
 
-#define POCET_GLOBAL_OPT_CASTI_MODLITBY 5 /* jednotlivé komponenty option 1 -- bity pre force option1 */
+#define POCET_GLOBAL_OPT_CASTI_MODLITBY 7 /* jednotlivé komponenty option 1 -- bity pre force option1 */
 extern short int _global_opt_casti_modlitby[POCET_GLOBAL_OPT_CASTI_MODLITBY];
 
 /* 2011-04-08: úprava významu (a interpretácie) option 0 ==  OPT_0_VERSE_REF */
@@ -1145,6 +1142,8 @@ extern short int _global_opt_casti_modlitby[POCET_GLOBAL_OPT_CASTI_MODLITBY];
 #define BIT_OPT_1_CHVALOSPEVY 4
 #define BIT_OPT_1_SLAVA_OTCU  8
 #define BIT_OPT_1_OTCENAS    16
+#define BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA 32
+#define BIT_OPT_1_PC_VIGILIA 64
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
 extern char *_global_string;
