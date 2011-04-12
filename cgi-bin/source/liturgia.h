@@ -1133,7 +1133,7 @@ extern short int _global_pocet_svatych;
 #define OPT_8_BUTTON_PRVE_VESPERY  8
 #define OPT_9_VIGILIA              9 // netreba
 
-#define POCET_GLOBAL_OPT 10
+#define POCET_GLOBAL_OPT           9
 /* globálna premenná -- pole -- obsahujúca options; pôvodne to boli globálne premenné _global_opt 1..9 atï., obsahujú pom_MODL_OPT... */
 extern short int _global_opt[POCET_GLOBAL_OPT];
 

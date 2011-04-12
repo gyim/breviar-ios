@@ -641,7 +641,6 @@ void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int 
 			case OPT_6_OFFLINE_EXPORT:	local_opt_default = CFG_OPTION6_DEFAULT; break;
 			case OPT_7_ISO_DATUM:		local_opt_default = CFG_OPTION7_DEFAULT; break;
 			case OPT_8_BUTTON_PRVE_VESPERY: local_opt_default = CFG_OPTION8_DEFAULT; break;
-			case OPT_9_VIGILIA:		local_opt_default = CFG_OPTION9_DEFAULT; break;
 		}/* switch(i) */
 		if(_global_opt[i] != local_opt_default){
 			strcpy(local_str, STR_EMPTY);
@@ -655,7 +654,6 @@ void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int 
 				case OPT_6_OFFLINE_EXPORT:	strcat(local_str, STR_MODL_OPT6); break;
 				case OPT_7_ISO_DATUM:		strcat(local_str, STR_MODL_OPT7); break;
 				case OPT_8_BUTTON_PRVE_VESPERY: strcat(local_str, STR_MODL_OPT8); break;
-				case OPT_9_VIGILIA:		strcat(local_str, STR_MODL_OPT9); break;
 			}/* switch(i) */
 			sprintf(pom3, HTML_AMPERSAND"%s=%d", local_str, _global_opt[i]);
 			strcat(pom2, pom3);

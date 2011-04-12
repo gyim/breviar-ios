@@ -998,7 +998,6 @@ short int setForm(void){
 				case OPT_6_OFFLINE_EXPORT:	strcat(local_str, STR_MODL_OPT6); break;
 				case OPT_7_ISO_DATUM:		strcat(local_str, STR_MODL_OPT7); break;
 				case OPT_8_BUTTON_PRVE_VESPERY: strcat(local_str, STR_MODL_OPT8); break;
-				case OPT_9_VIGILIA:		strcat(local_str, STR_MODL_OPT9); break;
 			}/* switch(i) */
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPT[i]);
@@ -1025,7 +1024,6 @@ short int setForm(void){
 				case OPT_6_OFFLINE_EXPORT:	strcat(local_str, STR_MODL_OPTF6); break;
 				case OPT_7_ISO_DATUM:		strcat(local_str, STR_MODL_OPTF7); break;
 				case OPT_8_BUTTON_PRVE_VESPERY: strcat(local_str, STR_MODL_OPTF8); break;
-				case OPT_9_VIGILIA:		strcat(local_str, STR_MODL_OPTF9); break;
 			}/* switch(i) */
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF[i]);
@@ -7618,20 +7616,6 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 	Export("</span>");
 	Export("</li>\n");
 
-	/* pridane 2011-03-25 */
-	Export("<li>");
-	Export((char *)html_text_zobrazit_vigiliu[_global_jazyk]);
-	Export(" \n");
-	/* pole WWW_MODL_OPT9 */
-	Export("<select name=\"%s\">\n", STR_MODL_OPT9);
-	Export("<option%s>%s\n", (_global_opt[OPT_9_VIGILIA] == ANO)? html_option_selected: STR_EMPTY, STR_ANO);
-	Export("<option%s>%s\n", (_global_opt[OPT_9_VIGILIA] == NIE)? html_option_selected: STR_EMPTY, STR_NIE);
-	Export("</select>\n");
-	Export("<br><"HTML_SPAN_EXPLAIN">");
-	Export((char *)html_text_zobrazit_vigiliu_explain[_global_jazyk]);
-	Export("</span>");
-	Export("</li>\n");
-
 	/* pridane 2011-04-04 */
 	Export("<li>");
 	Export((char *)html_text_zobrazit_option0[_global_jazyk]);
@@ -8465,17 +8449,6 @@ void _rozparsuj_parametre_OPT(void){
 		_global_opt[OPT_8_BUTTON_PRVE_VESPERY] = GLOBAL_OPTION_NULL;
 	Log("opt8 == `%s' (%d)\n", pom_MODL_OPT[OPT_8_BUTTON_PRVE_VESPERY], _global_opt[OPT_8_BUTTON_PRVE_VESPERY]);
 
-	/* option 9 */
-	if(equals(pom_MODL_OPT[OPT_9_VIGILIA], STR_ANO) || equals(pom_MODL_OPT[OPT_9_VIGILIA], "1")){
-		_global_opt[OPT_9_VIGILIA] = ANO;
-	}
-	else if(equals(pom_MODL_OPT[OPT_9_VIGILIA], STR_NIE) || equals(pom_MODL_OPT[OPT_9_VIGILIA], "0")){
-		_global_opt[OPT_9_VIGILIA] = NIE;
-	}/* inak ostane _global_opt 9 neurèený */
-	else
-		_global_opt[OPT_9_VIGILIA] = GLOBAL_OPTION_NULL;
-	Log("opt9 == `%s' (%d)\n", pom_MODL_OPT[OPT_9_VIGILIA], _global_opt[OPT_9_VIGILIA]);
-
 	/* option 0 */
 	if((pom_MODL_OPT[OPT_0_VERSE_REF] == NULL) || (strlen(pom_MODL_OPT[OPT_0_VERSE_REF]) < 1)){
 		i = GLOBAL_OPTION_NULL;
@@ -8605,17 +8578,6 @@ void _rozparsuj_parametre_OPT(void){
 		_global_optf[OPT_8_BUTTON_PRVE_VESPERY] = GLOBAL_OPTION_NULL;
 	Log("optf8 == `%s' (%d)\n", pom_MODL_OPTF[OPT_8_BUTTON_PRVE_VESPERY], _global_optf[OPT_8_BUTTON_PRVE_VESPERY]);
 
-	/* option force 9 */
-	if(equals(pom_MODL_OPTF[OPT_9_VIGILIA], STR_NIE) || equals(pom_MODL_OPTF[OPT_9_VIGILIA], "0")){
-		_global_optf[OPT_9_VIGILIA] = NIE;
-	}
-	else if(equals(pom_MODL_OPTF[OPT_9_VIGILIA], STR_ANO) || equals(pom_MODL_OPTF[OPT_9_VIGILIA], "1")){
-		_global_optf[OPT_9_VIGILIA] = ANO;
-	}/* inak ostane _global_optf 9 neurèený */
-	else
-		_global_optf[OPT_9_VIGILIA] = GLOBAL_OPTION_NULL;
-	Log("optf9 == `%s' (%d)\n", pom_MODL_OPTF[OPT_9_VIGILIA], _global_optf[OPT_9_VIGILIA]);
-
 	/* option force 0 */
 	if((pom_MODL_OPTF[OPT_0_VERSE_REF] == NULL) || (strlen(pom_MODL_OPTF[OPT_0_VERSE_REF]) < 1)){
 		i = GLOBAL_OPTION_NULL;
@@ -8658,7 +8620,6 @@ void _rozparsuj_parametre_OPT(void){
 				case OPT_6_OFFLINE_EXPORT:	_global_opt[i] = CFG_OPTION6_DEFAULT; break;
 				case OPT_7_ISO_DATUM:		_global_opt[i] = CFG_OPTION7_DEFAULT; break;
 				case OPT_8_BUTTON_PRVE_VESPERY: _global_opt[i] = CFG_OPTION8_DEFAULT; break;
-				case OPT_9_VIGILIA:		_global_opt[i] = CFG_OPTION9_DEFAULT; break;
 			}/* switch(i) */
 			Log("Keïže bolo _global_opt[%d] == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", i, _global_opt[i]);
 		}
@@ -11416,7 +11377,6 @@ short int getForm(void){
 			case OPT_6_OFFLINE_EXPORT:	strcat(local_str, STR_MODL_OPT6); break;
 			case OPT_7_ISO_DATUM:		strcat(local_str, STR_MODL_OPT7); break;
 			case OPT_8_BUTTON_PRVE_VESPERY: strcat(local_str, STR_MODL_OPT8); break;
-			case OPT_9_VIGILIA:		strcat(local_str, STR_MODL_OPT9); break;
 		}/* switch(i) */
 		ptr = getenv(local_str);
 		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
@@ -11443,7 +11403,6 @@ short int getForm(void){
 			case OPT_6_OFFLINE_EXPORT:	strcat(local_str, STR_MODL_OPTF6); break;
 			case OPT_7_ISO_DATUM:		strcat(local_str, STR_MODL_OPTF7); break;
 			case OPT_8_BUTTON_PRVE_VESPERY: strcat(local_str, STR_MODL_OPTF8); break;
-			case OPT_9_VIGILIA:		strcat(local_str, STR_MODL_OPTF9); break;
 		}/* switch(i) */
 		ptr = getenv(local_str);
 		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
@@ -12792,7 +12751,6 @@ int main(int argc, char **argv){
 	_global_opt[OPT_6_OFFLINE_EXPORT] = NIE;
 	_global_opt[OPT_7_ISO_DATUM] = NIE;
 	_global_opt[OPT_8_BUTTON_PRVE_VESPERY] = NIE;
-	_global_opt[OPT_9_VIGILIA] = NIE; // _global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PC_VIGILIA
 
 	_global_opt_append = NIE;
 
