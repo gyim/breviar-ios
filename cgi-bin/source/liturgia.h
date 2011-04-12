@@ -869,17 +869,19 @@ extern const char *html_farba_popredie[POCET_FARIEB_REALNYCH + 1];
 /* juliansky datum, funkcia juliansky_datum, dane synonymum JD */
 #define	JD	juliansky_datum
 
+#define ZVAZKY_LH 4
 /* tyzden zaltara (1, 2, 3, 4) podla tyzdna t; 06/03/2000A.D.: namiesto "-1" prerobene na "+3" */
 #define  tyzden_zaltara(t)  ((((t) + 3) % 4) + 1)
-extern const char *rimskymi_tyzden_zaltara[5];
+extern const char *rimskymi_tyzden_zaltara[ZVAZKY_LH + 1];
 
 extern const short int prvy_den[12];
 
 extern short int pocet_dni[12];
 
-extern const char char_nedelne_pismeno[7];
+extern const char char_nedelne_pismeno[POCET_DNI];
 
-extern const char char_nedelny_cyklus[3];
+#define POCET_NEDELNY_CYKLUS 3
+extern const char char_nedelny_cyklus[POCET_NEDELNY_CYKLUS];
 
 #define	ROK_1968		1968
 #define	JUL_DATE_0_JAN_1968	2439856L /* juliansky datum pre 0. januar 1968 */
@@ -1120,30 +1122,41 @@ extern _struct_lrok *_global_r_ptr;
  */
 extern short int _global_pocet_svatych;
 
-#define OPT_0_VERSE_REF       0
-#define OPT_1_CASTI_MODLITBY  1
+#define OPT_0_VERSE_REF            0
+#define OPT_1_CASTI_MODLITBY       1
+#define OPT_2_ZALMY_ZO_SVIATKU     2 // netreba
+#define OPT_3_SPOLOCNA_CAST        3
+#define OPT_4_POPIS_SVATY          4 // netreba
 #define OPT_5_DOPLNKOVA_PSALMODIA  5 // netreba
-#define OPT_9_VIGILIA         9 // netreba
+#define OPT_6_OFFLINE_EXPORT       6
+#define OPT_7_ISO_DATUM            7
+#define OPT_8_BUTTON_PRVE_VESPERY  8
+#define OPT_9_VIGILIA              9 // netreba
 
 #define POCET_GLOBAL_OPT 10
-/* globálna premenná -- pole -- obsahujúca options; pôvodne to boli globálne premenné _global_opt1.._global_opt9 atï., obsahujú pom_MODL_OPT... */
+/* globálna premenná -- pole -- obsahujúca options; pôvodne to boli globálne premenné _global_opt 1..9 atï., obsahujú pom_MODL_OPT... */
 extern short int _global_opt[POCET_GLOBAL_OPT];
 
-#define POCET_GLOBAL_OPT_CASTI_MODLITBY 7 /* jednotlivé komponenty option 1 -- bity pre force option1 */
-extern short int _global_opt_casti_modlitby[POCET_GLOBAL_OPT_CASTI_MODLITBY];
+#define POCET_OPT_1_CASTI_MODLITBY 9 /* jednotlivé komponenty option 1 -- bity pre force option1 */
+extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
 
 /* 2011-04-08: úprava významu (a interpretácie) option 0 ==  OPT_0_VERSE_REF */
 #define BIT_OPT_0_VERSE       1
 #define BIT_OPT_0_REFERENCIE  2
 
 /* 2011-04-11: úprava významu (a interpretácie) option 1 == OPT_1_CASTI_MODLITBY */
-#define BIT_OPT_1_TEDEUM      1
-#define BIT_OPT_1_RUBRIKY     2
-#define BIT_OPT_1_CHVALOSPEVY 4
-#define BIT_OPT_1_SLAVA_OTCU  8
-#define BIT_OPT_1_OTCENAS    16
-#define BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA 32
-#define BIT_OPT_1_PC_VIGILIA 64
+#define BIT_OPT_1_TEDEUM                    1
+#define BIT_OPT_1_RUBRIKY                   2
+#define BIT_OPT_1_CHVALOSPEVY               4
+#define BIT_OPT_1_SLAVA_OTCU                8
+#define BIT_OPT_1_OTCENAS                  16
+#define BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA  32
+#define BIT_OPT_1_PC_VIGILIA               64
+#define BIT_OPT_1_SKRY_POPIS              128
+#define BIT_OPT_1_ZALMY_ZO_SVIATKU        256
+
+/* 2011-04-08: úprava významu (a interpretácie) option 6 */
+#define BIT_OPT_6_MESIAC_RIADOK             1
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
 extern char *_global_string;

@@ -632,30 +632,30 @@ void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int 
 		if((i == 6) || (i == 7))
 			continue;
 		switch(i){
-			case 0: local_opt_default = CFG_OPTION0_DEFAULT; break;
-			case 1: local_opt_default = CFG_OPTION1_DEFAULT; break;
-			case 2: local_opt_default = CFG_OPTION2_DEFAULT; break;
-			/* case 3: vynechaný; nemá default */
-			case 4: local_opt_default = CFG_OPTION4_DEFAULT; break;
-			case 5: local_opt_default = CFG_OPTION5_DEFAULT; break;
-			case 6: local_opt_default = CFG_OPTION6_DEFAULT; break;
-			case 7: local_opt_default = CFG_OPTION7_DEFAULT; break;
-			case 8: local_opt_default = CFG_OPTION8_DEFAULT; break;
-			case 9: local_opt_default = CFG_OPTION9_DEFAULT; break;
+			case OPT_0_VERSE_REF:		local_opt_default = CFG_OPTION0_DEFAULT; break;
+			case OPT_1_CASTI_MODLITBY:	local_opt_default = CFG_OPTION1_DEFAULT; break;
+			case OPT_2_ZALMY_ZO_SVIATKU:	local_opt_default = CFG_OPTION2_DEFAULT; break;
+			/* option 3 */
+			case OPT_4_POPIS_SVATY:		local_opt_default = CFG_OPTION4_DEFAULT; break;
+			case OPT_5_DOPLNKOVA_PSALMODIA:	local_opt_default = CFG_OPTION5_DEFAULT; break;
+			case OPT_6_OFFLINE_EXPORT:	local_opt_default = CFG_OPTION6_DEFAULT; break;
+			case OPT_7_ISO_DATUM:		local_opt_default = CFG_OPTION7_DEFAULT; break;
+			case OPT_8_BUTTON_PRVE_VESPERY: local_opt_default = CFG_OPTION8_DEFAULT; break;
+			case OPT_9_VIGILIA:		local_opt_default = CFG_OPTION9_DEFAULT; break;
 		}/* switch(i) */
 		if(_global_opt[i] != local_opt_default){
 			strcpy(local_str, STR_EMPTY);
 			switch(i){
-				case 0: strcat(local_str, STR_MODL_OPT0); break;
-				case 1: strcat(local_str, STR_MODL_OPT1); break;
-				case 2: strcat(local_str, STR_MODL_OPT2); break;
-				case 3: strcat(local_str, STR_MODL_OPT3); break;
-				case 4: strcat(local_str, STR_MODL_OPT4); break;
-				case 5: strcat(local_str, STR_MODL_OPT5); break;
-				case 6: strcat(local_str, STR_MODL_OPT6); break;
-				case 7: strcat(local_str, STR_MODL_OPT7); break;
-				case 8: strcat(local_str, STR_MODL_OPT8); break;
-				case 9: strcat(local_str, STR_MODL_OPT9); break;
+				case OPT_0_VERSE_REF:		strcat(local_str, STR_MODL_OPT0); break;
+				case OPT_1_CASTI_MODLITBY:	strcat(local_str, STR_MODL_OPT1); break;
+				case OPT_2_ZALMY_ZO_SVIATKU:	strcat(local_str, STR_MODL_OPT2); break;
+				case OPT_3_SPOLOCNA_CAST:	strcat(local_str, STR_MODL_OPT3); break;
+				case OPT_4_POPIS_SVATY:		strcat(local_str, STR_MODL_OPT4); break;
+				case OPT_5_DOPLNKOVA_PSALMODIA:	strcat(local_str, STR_MODL_OPT5); break;
+				case OPT_6_OFFLINE_EXPORT:	strcat(local_str, STR_MODL_OPT6); break;
+				case OPT_7_ISO_DATUM:		strcat(local_str, STR_MODL_OPT7); break;
+				case OPT_8_BUTTON_PRVE_VESPERY: strcat(local_str, STR_MODL_OPT8); break;
+				case OPT_9_VIGILIA:		strcat(local_str, STR_MODL_OPT9); break;
 			}/* switch(i) */
 			sprintf(pom3, HTML_AMPERSAND"%s=%d", local_str, _global_opt[i]);
 			strcat(pom2, pom3);

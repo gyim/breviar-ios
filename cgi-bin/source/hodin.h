@@ -497,7 +497,7 @@ const char *html_farba_pozadie_cal = "#000000";
 const char *html_farba_popredie_cal = "#ffffff";
 
 /* codes for number of the week from psaltery (psalterium per quattuor hebdomadas distributum) */
-const char *rimskymi_tyzden_zaltara[5] =
+const char *rimskymi_tyzden_zaltara[ZVAZKY_LH + 1] =
 {"_", "I", "II", "III", "IV"};
 
 /* const: ordinal number of the first day in specific month */
@@ -509,11 +509,11 @@ short int pocet_dni[12] =
 	{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 /* const: "the Sunday's letter" A--g */
-const char char_nedelne_pismeno[7] =
+const char char_nedelne_pismeno[POCET_DNI] =
 	{'b', 'c', 'd', 'e', 'f', 'g', 'A'};
 
 /* const: the Sunday's cycle A--C */
-const char char_nedelny_cyklus[3] =
+const char char_nedelny_cyklus[POCET_NEDELNY_CYKLUS] =
 	{'A', 'B', 'C'};
 
 /* names of the days in week, starting with Sunday (lowercase) / nazov_dna: string pre nazov dna; suhlasi s struct tm.tm_wday;
@@ -1281,26 +1281,6 @@ const char *html_text_dalsie_prepinace_explain[POCET_JAZYKOV + 1] =
  ""
 };
 
-const char *html_text_popis_svaty[POCET_JAZYKOV + 1] = 
-{"zobrazi <i>popis</i> k modlitbe svätého?", 
- "zobrazit <i>popis</i> pøi modlitbì ke cti svìtce?", 
- "display <i>description</i> for prayer for the saints?", 
- "", 
- "", 
- "zobrazit <i>popis</i> pøi modlitbì ke cti svìtce?",
- "hu_ (we will translate it later)"
-};
-
-const char *html_text_popis_svaty_explain[POCET_JAZYKOV + 1] = 
-{"Modlitby zväèša obsahujú pred názvom modlitby ivotopis svätého, popis sviatku alebo podobnú struènú charakteristiku, ktorú pre jednoduchos nazıvame <i>popis</i>.", 
- "Modlitby ke cti svatıch obsahují struènı ivotopis svatého, pøi svátku je to struènı popis svátku a podobnì. Tyto charakteristiky pro struènost nazıváme <i>popis</i>.", 
- "xxx", 
- "",
- "", 
- "Modlitby ke cti svatıch obsahují struènı ivotopis svatého, u svátku je to struènı popis svátku a podobnì. Tyto charakteristiky pro struènost nazıváme <i>popis</i>.",
- "hu_ (we will translate it later)"
-};
-
 const char *html_text_zalmy_brat_zo[POCET_JAZYKOV + 1] = 
 {"almy bra zo ", 
  "almy brát ze ", 
@@ -1544,6 +1524,26 @@ const char *html_text_option1_mcd_doplnkova_psalmodia_explain[POCET_JAZYKOV + 1]
  "", 
  "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120 – 129), které je mono brát místo almù ze altáøe.", 
  "hu_"
+};
+
+const char *html_text_option1_skryt_popis_svaty[POCET_JAZYKOV + 1] = 
+{"nezobrazi popis k modlitbe svätého", 
+ "nezobrazit popis pøi modlitbì ke cti svìtce", 
+ "do not display description for prayer for the saints", 
+ "", 
+ "", 
+ "nezobrazit popis pøi modlitbì ke cti svìtce",
+ "hu_ (we will translate it later)"
+};
+
+const char *html_text_option1_skryt_popis_svaty_explain[POCET_JAZYKOV + 1] = 
+{"Modlitby zväèša obsahujú pred názvom modlitby ivotopis svätého, popis sviatku alebo podobnú struènú charakteristiku, ktorú pre jednoduchos nazıvame popis.", 
+ "Modlitby ke cti svatıch obsahují struènı ivotopis svatého, pøi svátku je to struènı popis svátku a podobnì. Tyto charakteristiky pro struènost nazıváme popis.", 
+ "xxx", 
+ "",
+ "", 
+ "Modlitby ke cti svatıch obsahují struènı ivotopis svatého, u svátku je to struènı popis svátku a podobnì. Tyto charakteristiky pro struènost nazıváme popis.",
+ "hu_ (we will translate it later)"
 };
 
 /* 2010-10-11: HTML option selected */
