@@ -629,29 +629,21 @@ void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int 
 		Log("i == %d...\n", i);
 		if(i == 3)
 			continue;
-		if((i == 6) || (i == 7))
-			continue;
 		switch(i){
 			case OPT_0_VERSE_REF:		local_opt_default = CFG_OPTION0_DEFAULT; break;
 			case OPT_1_CASTI_MODLITBY:	local_opt_default = CFG_OPTION1_DEFAULT; break;
-			case OPT_2_ZALMY_ZO_SVIATKU:	local_opt_default = CFG_OPTION2_DEFAULT; break;
+			case OPT_2_HTML_EXPORT:		local_opt_default = CFG_OPTION2_DEFAULT; break;
 			/* option 3 */
-			case OPT_4_POPIS_SVATY:		local_opt_default = CFG_OPTION4_DEFAULT; break;
-			case OPT_5_DOPLNKOVA_PSALMODIA:	local_opt_default = CFG_OPTION5_DEFAULT; break;
-			case OPT_6_OFFLINE_EXPORT:	local_opt_default = CFG_OPTION6_DEFAULT; break;
-			case OPT_7_HTML_EXPORT:		local_opt_default = CFG_OPTION7_DEFAULT; break;
+			case OPT_4_OFFLINE_EXPORT:	local_opt_default = CFG_OPTION4_DEFAULT; break;
 		}/* switch(i) */
 		if(_global_opt[i] != local_opt_default){
 			strcpy(local_str, STR_EMPTY);
 			switch(i){
 				case OPT_0_VERSE_REF:		strcat(local_str, STR_MODL_OPT0); break;
 				case OPT_1_CASTI_MODLITBY:	strcat(local_str, STR_MODL_OPT1); break;
-				case OPT_2_ZALMY_ZO_SVIATKU:	strcat(local_str, STR_MODL_OPT2); break;
+				case OPT_2_HTML_EXPORT:		strcat(local_str, STR_MODL_OPT2); break;
 				case OPT_3_SPOLOCNA_CAST:	strcat(local_str, STR_MODL_OPT3); break;
-				case OPT_4_POPIS_SVATY:		strcat(local_str, STR_MODL_OPT4); break;
-				case OPT_5_DOPLNKOVA_PSALMODIA:	strcat(local_str, STR_MODL_OPT5); break;
-				case OPT_6_OFFLINE_EXPORT:	strcat(local_str, STR_MODL_OPT6); break;
-				case OPT_7_HTML_EXPORT:		strcat(local_str, STR_MODL_OPT7); break;
+				case OPT_4_OFFLINE_EXPORT:	strcat(local_str, STR_MODL_OPT4); break;
 			}/* switch(i) */
 			sprintf(pom3, HTML_AMPERSAND"%s=%d", local_str, _global_opt[i]);
 			strcat(pom2, pom3);

@@ -1546,6 +1546,26 @@ const char *html_text_option1_skryt_popis_svaty_explain[POCET_JAZYKOV + 1] =
  "hu_ (we will translate it later)"
 };
 
+const char *html_text_option1_zalmy_zo_sviatku[POCET_JAZYKOV + 1] = 
+{"braù ûalmy zo sviatku (zo spoloËnej Ëasti)", 
+ "br·t ûalmy ze sv·tku (ze spoleËnÈ Ë·sti)", 
+ "take psalms from celebration (commmons)", 
+ "", 
+ "", 
+ "br·t ûalmy ze sv·tku (ze spoleËnÈ Ë·sti)",
+ "hu_ (we will translate it later)"
+};
+
+const char *html_text_option1_zalmy_zo_sviatku_explain[POCET_JAZYKOV + 1] = 
+{"Zvoliù, Ëi sa ûalmy pouûij˙ zo dÚa alebo zo sviatku (ak je to moûnÈ).", 
+ "", 
+ "", 
+ "",
+ "", 
+ "",
+ "hu_ (we will translate it later)"
+};
+
 /* 2010-10-11: HTML option selected */
 const char *html_option_selected = " selected";
 

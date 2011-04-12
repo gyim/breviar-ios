@@ -43,6 +43,8 @@
 #include "breviar.h" /* 2006-07-31 kvôli jazyku a css (2008-08-08) */
 #include "liturgia.h" /* 2006-07-31 kvôli jazyku */
 
+short int bol_content_type_text_html = NIE;
+
 #ifndef __MYHPAGE_CPP_HTML_CONST
 #define __MYHPAGE_CPP_HTML_CONST
 const char *html_header_1 = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\n\t\"http://www.w3.org/TR/html4/loose.dtd\">\n<html>\n<head>\n\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1250\">\n\t<meta name=\"Author\" content=\"Juraj Vidéky\">\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"";
@@ -81,13 +83,16 @@ void hlavicka(char *title, short int level, short int spec){
 		nazov_css_suboru = nazov_css[CSS_breviar_sk];
 	else
 		nazov_css_suboru = nazov_css[_global_css];
+	if(bol_content_type_text_html == NIE){
 #if defined(OS_linux)
-	Export("Content-type: text/html\n");
-	Export("\n");
+		Export("Content-type: text/html\n");
+		Export("\n");
 #elif defined(OS_Windows_Ruby)
-	Export("Content-type: text/html\n");
-	Export("\n");
+		Export("Content-type: text/html\n");
+		Export("\n");
 #endif
+		bol_content_type_text_html = ANO;
+	}
 	Log("creating header...\n");
 	/* 2003-07-15, zmenene na hlavicku pre css-ko; zrusene <style> */
 	/* 2008-08-08: pridané dynamicky css-ko */
@@ -192,13 +197,16 @@ void hlavicka(char *title, FILE * expt, short int level, short int spec){
 		nazov_css_suboru = nazov_css[CSS_breviar_sk];
 	else
 		nazov_css_suboru = nazov_css[_global_css];
+	if(bol_content_type_text_html == NIE){
 #if defined(OS_linux)
-	fprintf(expt, "Content-type: text/html\n");
-	fprintf(expt, "\n");
+		fprintf(expt, "Content-type: text/html\n");
+		fprintf(expt, "\n");
 #elif defined(OS_Windows_Ruby)
-	fprintf(expt, "Content-type: text/html\n");
-	fprintf(expt, "\n");
+		fprintf(expt, "Content-type: text/html\n");
+		fprintf(expt, "\n");
 #endif
+		bol_content_type_text_html = ANO;
+	}
 	Log("creating header...\n");
 	/* 2003-07-15, zmenene na hlavicku pre css-ko; zrusene <style> */
 	/* 2008-08-08: pridané dynamicky css-ko */

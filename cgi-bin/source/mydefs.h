@@ -90,7 +90,7 @@
 #define MAX_POM_QUERY_TYPE	300 /* pom_QUERY_TYPE */
 #define MAX_GLOBAL_LINK		300 /* maximalna dlzka retazca _global_link */
 //#define MAX_ENV	100 /* maximalna dlzka environmentalnej premennej */ /* 2006-08-01: nepouûÌva sa */
-#define MAX_VARIABLES		32 /* maximalny pocet syst. premennych WWW_..., zvyseny 2003-08-07 a op‰tovne 2006-08-01 a op‰ù 2011-01-26 a zas 2011-04-11 */
+#define MAX_VARIABLES		50 /* maximalny pocet syst. premennych WWW_..., zvyseny 2003-08-07 a op‰tovne 2006-08-01 a op‰ù 2011-01-26 a zas 2011-04-11 a 2011-04-12 (na 50) */
 #define MAX_GLOBAL_BUFFER	500 /* _global_buf, pridanÈ 2005-08-01 */
 /***************************************************************/
 /* EOF of former file mybase.h                                 */
@@ -369,6 +369,13 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
  * de facto sa vyuzivaju len pre PRM_DETAILY 
  * 2011-01-26: doplnenÈ aj verzie "force" pre formul·r; pouûÌvaj˙ sa totiû aj na PRM_DNES hlavnom okne
  */
+#define MODL_OPT0 38
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPT0 "MODL_OPT0"
+#else
+	#define STR_MODL_OPT0 "o0"
+#endif
+
 #define MODL_OPT1 31
 #ifdef LONG_PARAM_NAMES
 	#define STR_MODL_OPT1 "MODL_OPT1"
@@ -405,15 +412,6 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPT_APPEND "a"
 #endif
 
-/* option 5 pridana 2003-08-07,
- * urcuje, ci brat pre modlitbu cez den zalmy z doplnkovej psalmodie */
-#define MODL_OPT5 36
-#ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPT5 "MODL_OPT5"
-#else
-	#define STR_MODL_OPT5 "o5"
-#endif
-
 /* 2006-07-11: PridanÈ kvÙli jazykov˝m mut·ci·m */
 #define JAZYK 37
 #ifdef LONG_PARAM_NAMES
@@ -422,43 +420,14 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_JAZYK "j"
 #endif
 
-/* MODL_OPT6 resp. MODL_OPT7 pridanÈ 2007-06-01, pretoûe sa pouûÌvali (pre rozbor mesiaca) opt1 resp. opt2; default sa "bil" */
-#define MODL_OPT6 38
+/* --- force verzie pre option 0 aû 4 --- */
+#define MODL_OPTF0 50
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPT6 "MODL_OPT6"
+	#define STR_MODL_OPTF0 "MODL_OPTF0"
 #else
-	#define STR_MODL_OPT6 "o6"
+	#define STR_MODL_OPTF0 "of0"
 #endif
 
-#define MODL_OPT7 39
-#ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPT7 "MODL_OPT7"
-#else
-	#define STR_MODL_OPT7 "o7"
-#endif
-
-#define MODL_OPT8 43
-#ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPT8 "MODL_OPT8"
-#else
-	#define STR_MODL_OPT8 "o8"
-#endif
-
-#define MODL_OPT9 44
-#ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPT9 "MODL_OPT9"
-#else
-	#define STR_MODL_OPT9 "o9"
-#endif
-
-#define MODL_OPT0 45
-#ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPT0 "MODL_OPT0"
-#else
-	#define STR_MODL_OPT0 "o0"
-#endif
-
-/* --- force verzie pre o1 aû o5 --- */
 #define MODL_OPTF1 51
 #ifdef LONG_PARAM_NAMES
 	#define STR_MODL_OPTF1 "MODL_OPTF1"
@@ -485,48 +454,6 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPTF4 "MODL_OPTF4"
 #else
 	#define STR_MODL_OPTF4 "of4"
-#endif
-
-#define MODL_OPTF5 56
-#ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF5 "MODL_OPTF5"
-#else
-	#define STR_MODL_OPTF5 "of5"
-#endif
-
-#define MODL_OPTF6 57
-#ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF6 "MODL_OPTF6"
-#else
-	#define STR_MODL_OPTF6 "of6"
-#endif
-
-#define MODL_OPTF7 58
-#ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF7 "MODL_OPTF7"
-#else
-	#define STR_MODL_OPTF7 "of7"
-#endif
-
-#define MODL_OPTF8 59
-#ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF8 "MODL_OPTF8"
-#else
-	#define STR_MODL_OPTF8 "of8"
-#endif
-
-#define MODL_OPTF9 60
-#ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF9 "MODL_OPTF9"
-#else
-	#define STR_MODL_OPTF9 "of9"
-#endif
-
-#define MODL_OPTF0 61
-#ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF0 "MODL_OPTF0"
-#else
-	#define STR_MODL_OPTF0 "of0"
 #endif
 
 /* pre force option 1 jednotlivÈ parci·lne voæby */
@@ -593,6 +520,14 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPTF1_SKRY_POPIS "MODL_OPTF1_SKRY_POPIS"
 #else
 	#define STR_MODL_OPTF1_SKRY_POPIS "of1sp"
+#endif
+
+// ûalmy zo sviatku
+#define MODL_OPTF1_ZALMY_SV 79
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF1_ZALMY_SV "MODL_OPTF1_ZALMY_SV"
+#else
+	#define STR_MODL_OPTF1_ZALMY_SV "of1zsv"
 #endif
 
 /* 2008-08-08: PridanÈ kvÙli rÙznym css */

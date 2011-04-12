@@ -7539,6 +7539,7 @@ label_24_DEC:
 				}
 				else{
 					/* sice chce svateho c. 2, ale mam len jedneho */
+					hlavicka((char *)html_title[_global_jazyk]);
 					Log("-- Error: _global_svaty2 not assigned\n");
 					Export("%s\n", "Error: _global_svaty2 not assigned");
 					ALERT;
@@ -7553,12 +7554,14 @@ label_24_DEC:
 				}
 				else{
 					/* sice chce svateho c. 3, ale nemam troch */
+					hlavicka((char *)html_title[_global_jazyk]);
 					Log("-- Error: _global_svaty3 not assigned\n");
 					Export("%s\n", "Error: _global_svaty3 not assigned");
 					ALERT;
 				}
 				break; /* case 3: */
 			case 5:
+				hlavicka((char *)html_title[_global_jazyk]);
 				Log("-- Error: poradie_svateho == 5\n");
 				Export("Error: poradie_svateho == 5\n");
 				ALERT;
@@ -7573,6 +7576,7 @@ label_24_DEC:
 				}
 				else{
 					/* sice chce obycajny den, ale nemoze byt */
+					hlavicka((char *)html_title[_global_jazyk]);
 					Log("-- Error: _global_den not assigned\n");
 					Export("%s\n", "Error: _global_den not assigned");
 					ALERT;
@@ -9661,13 +9665,13 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty
 								set_LOG_sc("  neberiem spolocnu cast\n");
 								Export("<!--neberiem spolocnu cast-->");
 							}
-							else
+							else{
 							/* sem by to nemalo prist */
-							{
-							set_LOG_sc("-- Error: sc (a1, a2, a3) su sice urcene, ale _global_opt[OPT_3_SPOLOCNA_CAST] sa nerovna ani jednej z nich!\n");
-							Export("%s\n", "Error: _global_opt[OPT_3_SPOLOCNA_CAST] assigned incorectly (a1, a2, a3 -- ok)");
-							ALERT;
-							return;
+								hlavicka((char *)html_title[_global_jazyk]);
+								set_LOG_sc("-- Error: sc (a1, a2, a3) su sice urcene, ale _global_opt[OPT_3_SPOLOCNA_CAST] sa nerovna ani jednej z nich!\n");
+								Export("%s\n", "Error: _global_opt[OPT_3_SPOLOCNA_CAST] assigned incorectly (a1, a2, a3 -- ok)");
+								ALERT;
+								return;
 							}
 						}
 					}/* sc.a3 je urcena */
@@ -9676,13 +9680,15 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty
 							set_LOG_sc("  neberiem spolocnu cast\n");
 							Export("<!--neberiem spolocnu cast-->");
 						}
-						else
+						else{
 						/* sem by to nemalo prist */
-						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO){
-							set_LOG_sc("-- Error: sc (a1, a2) su sice urcene, ale _global_opt[OPT_3_SPOLOCNA_CAST] sa nerovna ani jednej z nich!\n");
-							Export("%s\n", "Error: _global_opt[OPT_3_SPOLOCNA_CAST] assigned incorectly (a1, a2 -- ok)");
-							ALERT;
-							return;
+							if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO){
+								hlavicka((char *)html_title[_global_jazyk]);
+								set_LOG_sc("-- Error: sc (a1, a2) su sice urcene, ale _global_opt[OPT_3_SPOLOCNA_CAST] sa nerovna ani jednej z nich!\n");
+								Export("%s\n", "Error: _global_opt[OPT_3_SPOLOCNA_CAST] assigned incorectly (a1, a2 -- ok)");
+								ALERT;
+								return;
+							}
 						}
 					}
 				}
@@ -9692,13 +9698,15 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty
 					set_LOG_sc("  neberiem spolocnu cast\n");
 					Export("<!--neberiem spolocnu cast-->");
 				}
-				else
+				else{
 				/* sem by to nemalo prist */
-				if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO){
-					set_LOG_sc("-- Error: sc (a1) je sice urcena, ale _global_opt[OPT_3_SPOLOCNA_CAST] sa jej nerovna!\n");
-					Export("%s\n", "Error: _global_opt[OPT_3_SPOLOCNA_CAST] assigned incorectly (a1 -- ok)");
-					ALERT;
-					return;
+					if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO){
+						hlavicka((char *)html_title[_global_jazyk]);
+						set_LOG_sc("-- Error: sc (a1) je sice urcena, ale _global_opt[OPT_3_SPOLOCNA_CAST] sa jej nerovna!\n");
+						Export("%s\n", "Error: _global_opt[OPT_3_SPOLOCNA_CAST] assigned incorectly (a1 -- ok)");
+						ALERT;
+						return;
+					}
 				}
 			}
 		}
@@ -9706,6 +9714,7 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty
 	else{
 		/* sem by to nemalo prist */
 		if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO){
+			hlavicka((char *)html_title[_global_jazyk]);
 			Log("-- Error: sc (a1) nie je urcene; _global_opt[OPT_3_SPOLOCNA_CAST] == %s\n", nazov_spolc(_global_opt[OPT_3_SPOLOCNA_CAST]));
 			Export("%s\n", "Error: a1 (member of sc) assigned incorectly");
 			ALERT;

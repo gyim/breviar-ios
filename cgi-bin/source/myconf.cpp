@@ -41,70 +41,40 @@ char cfg_MAIL_ADDRESS_default[MAX_MAIL_STR] = "videky@breviar.sk";
 char cfg_INCLUDE_DIR_default[MAX_INCD_STR] = "../include/";
 
 /* hodnoty options pre default jazyk, teda pre JAZYK_SK */
+short int cfg_option0_default;
 short int cfg_option1_default;
 short int cfg_option2_default;
 short int cfg_option4_default;
-short int cfg_option5_default;
-short int cfg_option6_default;
-short int cfg_option7_default;
-short int cfg_option8_default;
-short int cfg_option9_default;
-short int cfg_option0_default;
 /* hodnoty options pre JAZYK_CZ */
+short int cfg_option0_cz;
 short int cfg_option1_cz;
 short int cfg_option2_cz;
 short int cfg_option4_cz;
-short int cfg_option5_cz;
-short int cfg_option6_cz;
-short int cfg_option7_cz;
-short int cfg_option8_cz;
-short int cfg_option9_cz;
-short int cfg_option0_cz;
 /* hodnoty options pre JAZYK_CZ_OP */
+short int cfg_option0_czop;
 short int cfg_option1_czop;
 short int cfg_option2_czop;
 short int cfg_option4_czop;
-short int cfg_option5_czop;
-short int cfg_option6_czop;
-short int cfg_option7_czop;
-short int cfg_option8_czop;
-short int cfg_option9_czop;
-short int cfg_option0_czop;
 
 void printConfigOptions(void){
 /* hodnoty options pre default jazyk, teda pre JAZYK_SK */
 	Log("=== SK: Hodnoty option parametrov pre JAZYK_SK ===\n");
+	Log("cfg_option0_default == `%d'\n", cfg_option0_default);
 	Log("cfg_option1_default == `%d'\n", cfg_option1_default);
 	Log("cfg_option2_default == `%d'\n", cfg_option2_default);
 	Log("cfg_option4_default == `%d'\n", cfg_option4_default);
-	Log("cfg_option5_default == `%d'\n", cfg_option5_default);
-	Log("cfg_option6_default == `%d'\n", cfg_option6_default);
-	Log("cfg_option7_default == `%d'\n", cfg_option7_default);
-	Log("cfg_option8_default == `%d'\n", cfg_option8_default);
-	Log("cfg_option9_default == `%d'\n", cfg_option9_default);
-	Log("cfg_option0_default == `%d'\n", cfg_option0_default);
 /* hodnoty options pre JAZYK_CZ */
 	Log("=== CZ: Hodnoty option parametrov pre JAZYK_CZ ===\n");
+	Log("cfg_option0_cz == `%d'\n", cfg_option0_cz);
 	Log("cfg_option1_cz == `%d'\n", cfg_option1_cz);
 	Log("cfg_option2_cz == `%d'\n", cfg_option2_cz);
 	Log("cfg_option4_cz == `%d'\n", cfg_option4_cz);
-	Log("cfg_option5_cz == `%d'\n", cfg_option5_cz);
-	Log("cfg_option6_cz == `%d'\n", cfg_option6_cz);
-	Log("cfg_option7_cz == `%d'\n", cfg_option7_cz);
-	Log("cfg_option8_cz == `%d'\n", cfg_option8_cz);
-	Log("cfg_option9_cz == `%d'\n", cfg_option9_cz);
-	Log("cfg_option0_cz == `%d'\n", cfg_option0_cz);
 /* hodnoty options pre JAZYK_CZ_OP */
 	Log("=== CZ_OP: Hodnoty option parametrov pre JAZYK_CZ_OP ===\n");
+	Log("cfg_option0_czop == `%d'\n", cfg_option0_czop);
 	Log("cfg_option1_czop == `%d'\n", cfg_option1_czop);
 	Log("cfg_option2_czop == `%d'\n", cfg_option2_czop);
 	Log("cfg_option4_czop == `%d'\n", cfg_option4_czop);
-	Log("cfg_option5_czop == `%d'\n", cfg_option5_czop);
-	Log("cfg_option6_czop == `%d'\n", cfg_option6_czop);
-	Log("cfg_option7_czop == `%d'\n", cfg_option7_czop);
-	Log("cfg_option8_czop == `%d'\n", cfg_option8_czop);
-	Log("cfg_option9_czop == `%d'\n", cfg_option9_czop);
-	Log("cfg_option0_czop == `%d'\n", cfg_option0_czop);
 }
 
 void readConfig(void)
@@ -203,6 +173,10 @@ void readConfig(void)
 			strcpy(cfg_MAIL_ADDRESS_default, hodnota);
 		} else if (!strcmp(option, "incldir_def")){
 			strcpy(cfg_INCLUDE_DIR_default, hodnota);
+		} else if (!strcmp(option, "cislovanie_versov_def")){
+			if(isdigit(hodnota[0])){
+				cfg_option0_default = atoi(hodnota);
+			}
 		} else if (!strcmp(option, "pevne_casti_modl_def")){
 			if(isdigit(hodnota[0])){
 				cfg_option1_default = atoi(hodnota);
@@ -215,31 +189,11 @@ void readConfig(void)
 			if(isdigit(hodnota[0])){
 				cfg_option4_default = atoi(hodnota);
 			}
-		} else if (!strcmp(option, "mcd_zalmy_doplnkpsalm_def")){
-			if(isdigit(hodnota[0])){
-				cfg_option5_default = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "expt_viac_dni_simple_def")){
-			if(isdigit(hodnota[0])){
-				cfg_option6_default = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "datum_iso_8601_def")){
-			if(isdigit(hodnota[0])){
-				cfg_option7_default = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "button_prve_vespery_def")){
-			if(isdigit(hodnota[0])){
-				cfg_option8_default = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "ne_slav_sviat_vigilia_def")){
-			if(isdigit(hodnota[0])){
-				cfg_option9_default = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "cislovanie_versov_def")){
-			if(isdigit(hodnota[0])){
-				cfg_option0_default = atoi(hodnota);
-			}
 /* hodnoty options pre JAZYK_CZ */
+		} else if (!strcmp(option, "cislovanie_versov_cz")){
+			if(isdigit(hodnota[0])){
+				cfg_option0_cz = atoi(hodnota);
+			}
 		} else if (!strcmp(option, "pevne_casti_modl_cz")){
 			if(isdigit(hodnota[0])){
 				cfg_option1_cz = atoi(hodnota);
@@ -252,31 +206,11 @@ void readConfig(void)
 			if(isdigit(hodnota[0])){
 				cfg_option4_cz = atoi(hodnota);
 			}
-		} else if (!strcmp(option, "mcd_zalmy_doplnkpsalm_cz")){
-			if(isdigit(hodnota[0])){
-				cfg_option5_cz = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "expt_viac_dni_simple_cz")){
-			if(isdigit(hodnota[0])){
-				cfg_option6_cz = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "datum_iso_8601_cz")){
-			if(isdigit(hodnota[0])){
-				cfg_option7_cz = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "button_prve_vespery_cz")){
-			if(isdigit(hodnota[0])){
-				cfg_option8_cz = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "ne_slav_sviat_vigilia_cz")){
-			if(isdigit(hodnota[0])){
-				cfg_option9_cz = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "cislovanie_versov_cz")){
-			if(isdigit(hodnota[0])){
-				cfg_option0_cz = atoi(hodnota);
-			}
 /* hodnoty options pre JAZYK_CZ_OP */
+		} else if (!strcmp(option, "cislovanie_versov_czop")){
+			if(isdigit(hodnota[0])){
+				cfg_option0_czop = atoi(hodnota);
+			}
 		} else if (!strcmp(option, "pevne_casti_modl_czop")){
 			if(isdigit(hodnota[0])){
 				cfg_option1_czop = atoi(hodnota);
@@ -288,30 +222,6 @@ void readConfig(void)
 		} else if (!strcmp(option, "popis_pri_modlitbe_czop")){
 			if(isdigit(hodnota[0])){
 				cfg_option4_czop = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "mcd_zalmy_doplnkpsalm_czop")){
-			if(isdigit(hodnota[0])){
-				cfg_option5_czop = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "expt_viac_dni_simple_czop")){
-			if(isdigit(hodnota[0])){
-				cfg_option6_czop = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "datum_iso_8601_czop")){
-			if(isdigit(hodnota[0])){
-				cfg_option7_czop = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "button_prve_vespery_czop")){
-			if(isdigit(hodnota[0])){
-				cfg_option8_czop = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "ne_slav_sviat_vigilia_czop")){
-			if(isdigit(hodnota[0])){
-				cfg_option9_czop = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "cislovanie_versov_czop")){
-			if(isdigit(hodnota[0])){
-				cfg_option0_czop = atoi(hodnota);
 			}
 		}
 

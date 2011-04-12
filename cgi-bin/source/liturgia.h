@@ -1124,17 +1124,16 @@ extern short int _global_pocet_svatych;
 
 #define OPT_0_VERSE_REF            0
 #define OPT_1_CASTI_MODLITBY       1
-#define OPT_2_ZALMY_ZO_SVIATKU     2 // netreba
+#define OPT_2_HTML_EXPORT          2
 #define OPT_3_SPOLOCNA_CAST        3
-#define OPT_4_POPIS_SVATY          4 // netreba
-#define OPT_5_DOPLNKOVA_PSALMODIA  5 // netreba
-#define OPT_6_OFFLINE_EXPORT       6
-#define OPT_7_HTML_EXPORT          7
+#define OPT_4_OFFLINE_EXPORT       4
 
-#define POCET_GLOBAL_OPT           8
+#define POCET_GLOBAL_OPT           5
 /* glob·lna premenn· -- pole -- obsahuj˙ca options; pÙvodne to boli glob·lne premennÈ _global_opt 1..9 atÔ., obsahuj˙ pom_MODL_OPT... */
 extern short int _global_opt[POCET_GLOBAL_OPT];
 
+#define POCET_OPT_0_VERSE_REF               2 /* jednotlivÈ komponenty option 0 -- bity pre force option 0 */
+// extern short int _global_opt_cerse_ref[POCET_OPT_0_VERSE_REF];
 /* 2011-04-08: ˙prava v˝znamu (a interpret·cie) option 0 ==  OPT_0_VERSE_REF (zobraziù/nezobraziù "pridan˙ hodnotu" oproti papierovej LH) */
 #define BIT_OPT_0_VERSE                     1
 #define BIT_OPT_0_REFERENCIE                2
@@ -1152,14 +1151,16 @@ extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
 #define BIT_OPT_1_SKRY_POPIS              128
 #define BIT_OPT_1_ZALMY_ZO_SVIATKU        256
 
-/* 2011-04-08: ˙prava v˝znamu (a interpret·cie) option 6 (rozliËnÈ prepÌnaËe pre offline export, napr. aj batch mÛd) */
-#define BIT_OPT_6_MESIAC_RIADOK             1
+#define POCET_OPT_2_HTML_EXPORT             2 /* jednotlivÈ komponenty option 2 -- bity pre force option 2 */
+extern short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];
+/* 2011-04-12: ˙prava v˝znamu (a interpret·cie) option 2 (rozliËnÈ prepÌnaËe pre [online aj offline] export, napr. tlaËidl·, zobrazenie d·tumov a podobne) */
+#define BIT_OPT_2_ISO_DATUM                 1
+#define BIT_OPT_2_BUTTON_PRVE_VESPERY       2
 
-#define POCET_OPT_7_HTML_EXPORT             2 /* jednotlivÈ komponenty option 7 -- bity pre force option 7 */
-extern short int _global_opt_html_export[POCET_OPT_7_HTML_EXPORT];
-/* 2011-04-12: ˙prava v˝znamu (a interpret·cie) option 7 (rozliËnÈ prepÌnaËe pre [online aj offline] export, napr. tlaËidl·, zobrazenie d·tumov a podobne) */
-#define BIT_OPT_7_ISO_DATUM                 1
-#define BIT_OPT_7_BUTTON_PRVE_VESPERY       2
+#define POCET_OPT_4_OFFLINE_EXPORT          1 /* jednotlivÈ komponenty option 4 -- bity pre force option 4 */
+extern short int _global_opt_offline_export[POCET_OPT_4_OFFLINE_EXPORT];
+/* 2011-04-08: ˙prava v˝znamu (a interpret·cie) option 4 (rozliËnÈ prepÌnaËe pre offline export, napr. aj batch mÛd) */
+#define BIT_OPT_4_MESIAC_RIADOK             1
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
 extern char *_global_string;

@@ -27,11 +27,14 @@
 #include "myexpt.h" /* export do suboru alebo na konzolu printf */
 #include "mylog.h"
 #include <string.h>
+#include "myhpage.h" /* kvôli hlavicka() ¡*/
 
 /* aby sa dala pouzivat v zaltar(); */
 short int sviatky_svatych(short int, short int);
 short int sviatky_svatych(short int, short int, short int);
 short int sviatky_svatych(short int, short int, short int, short int); /* spustam druhykrat */
+
+extern const char *html_title[POCET_JAZYKOV + 1];
 
 void set_popis_dummy(void); /* pridane 05/04/2000A.D. */
 
