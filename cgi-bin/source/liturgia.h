@@ -1129,21 +1129,19 @@ extern short int _global_pocet_svatych;
 #define OPT_4_POPIS_SVATY          4 // netreba
 #define OPT_5_DOPLNKOVA_PSALMODIA  5 // netreba
 #define OPT_6_OFFLINE_EXPORT       6
-#define OPT_7_ISO_DATUM            7
-#define OPT_8_BUTTON_PRVE_VESPERY  8
+#define OPT_7_HTML_EXPORT          7
 
-#define POCET_GLOBAL_OPT           9
+#define POCET_GLOBAL_OPT           8
 /* globálna premenná -- pole -- obsahujúca options; pôvodne to boli globálne premenné _global_opt 1..9 atï., obsahujú pom_MODL_OPT... */
 extern short int _global_opt[POCET_GLOBAL_OPT];
 
-#define POCET_OPT_1_CASTI_MODLITBY 9 /* jednotlivé komponenty option 1 -- bity pre force option1 */
+/* 2011-04-08: úprava vıznamu (a interpretácie) option 0 ==  OPT_0_VERSE_REF (zobrazi/nezobrazi "pridanú hodnotu" oproti papierovej LH) */
+#define BIT_OPT_0_VERSE                     1
+#define BIT_OPT_0_REFERENCIE                2
+
+#define POCET_OPT_1_CASTI_MODLITBY          9 /* jednotlivé komponenty option 1 -- bity pre force option 1 */
 extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
-
-/* 2011-04-08: úprava vıznamu (a interpretácie) option 0 ==  OPT_0_VERSE_REF */
-#define BIT_OPT_0_VERSE       1
-#define BIT_OPT_0_REFERENCIE  2
-
-/* 2011-04-11: úprava vıznamu (a interpretácie) option 1 == OPT_1_CASTI_MODLITBY */
+/* 2011-04-11: úprava vıznamu (a interpretácie) option 1 == OPT_1_CASTI_MODLITBY (zobrazi/nezobrazi najmä pevné/nemenné súèasti modlitieb, ale aj iné, èo sú/nie sú v LH) */
 #define BIT_OPT_1_TEDEUM                    1
 #define BIT_OPT_1_RUBRIKY                   2
 #define BIT_OPT_1_CHVALOSPEVY               4
@@ -1154,8 +1152,14 @@ extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
 #define BIT_OPT_1_SKRY_POPIS              128
 #define BIT_OPT_1_ZALMY_ZO_SVIATKU        256
 
-/* 2011-04-08: úprava vıznamu (a interpretácie) option 6 */
+/* 2011-04-08: úprava vıznamu (a interpretácie) option 6 (rozlièné prepínaèe pre offline export, napr. aj batch mód) */
 #define BIT_OPT_6_MESIAC_RIADOK             1
+
+#define POCET_OPT_7_HTML_EXPORT             2 /* jednotlivé komponenty option 7 -- bity pre force option 7 */
+extern short int _global_opt_html_export[POCET_OPT_7_HTML_EXPORT];
+/* 2011-04-12: úprava vıznamu (a interpretácie) option 7 (rozlièné prepínaèe pre [online aj offline] export, napr. tlaèidlá, zobrazenie dátumov a podobne) */
+#define BIT_OPT_7_ISO_DATUM                 1
+#define BIT_OPT_7_BUTTON_PRVE_VESPERY       2
 
 /* globalna premenna, co obsahuje string vypisany na obsazovku */
 extern char *_global_string;
