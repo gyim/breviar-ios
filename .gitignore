@@ -3,6 +3,20 @@ l.cgi
 l.cgi.gz
 *-l.cgi
 *-l.cgi.gz
+cgi-bin/source/*.h~
+cgi-bin/source/*.cpp~
+docs/vslh.zip
+docs/vslh.rar
+docs/biblia.zip
+info/docs/*
+download/*.zip
+download/*.rar
+download/*.7z
+download/ebook/
+stats/*
+.gitignore~
+# napr. ruby pre download
+*.exe
 # Visual Studio temp súbory (debug, release)
 *.obj
 *.pdb
