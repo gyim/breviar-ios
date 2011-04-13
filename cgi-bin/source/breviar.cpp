@@ -4167,7 +4167,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok){
 }
 
 #define EXPORT_DNA_VIAC_DNI_TXT 4 /* 2011-02-02: pridané */
-#define EXPORT_DNA_VIAC_DNI_SIMPLE 3 /* 2005-03-21: Pridany dalsi typ exportu */
+#define EXPORT_DNA_VIAC_DNI_SIMPLE 3 /* 2005-03-21: Pridany dalsi typ exportu; 2011-04-13: nerozumiem naèo; asi sa nepoužíva... */
 #define EXPORT_DNA_JEDEN_DEN 1
 #define EXPORT_DNA_VIAC_DNI 2
 #define EXPORT_DNA_DNES 0
@@ -6008,7 +6008,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
  */
 void _export_rozbor_dna_kalendar(short int typ){
 	Log("--- _export_rozbor_dna_kalendar(typ == %d) -- begin\n", typ); /* 2005-03-22: Pridane */
-	if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE)){
+	if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE)  && (typ != EXPORT_DNA_VIAC_DNI_TXT)){
 		Log("--- _export_rozbor_dna_kalendar(): idem tlacit kalendar...\n");
 		short int i, j, k;
 
@@ -7085,7 +7085,8 @@ void _export_rozbor_dna(short int typ){
 		Export("</table>\n");
 	}
 
-	if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_TXT)){
+	if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_VIAC_DNI_TXT)){
+
 		if((_global_linky == ANO) || ((_global_opt_batch_monthly == ANO) && (export_monthly_druh >= 2))){ /* pridane 13/04/2000A.D.; upravené 2009-08-12 */
 
 			/* 2007-08-15: vložené vypísanie kalendára a hlavného formulára 
@@ -7108,7 +7109,9 @@ void _export_rozbor_dna(short int typ){
 			Log("_global_opt_batch_monthly == %d [2011-04-13]\n", _global_opt_batch_monthly);
 			Log("export_monthly_druh == %d [2011-04-13]\n", export_monthly_druh);
 
-			if((_global_opt_batch_monthly == ANO) && (export_monthly_druh > 2)){ /* 2009-08-26: doplnené */
+			if((_global_opt_batch_monthly == ANO) && (export_monthly_druh > 2)
+				|| ((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_VIAC_DNI_TXT))
+				){ /* 2009-08-26: doplnené; 2011-04-13: postaèuje, aby to bolo na viac ako jeden deò, už sa kalendár nevypisuje; podmienka aj hore */
 				Log("pre tento typ exportu sa kalendárik negeneruje\n");
 			}
 			else{
@@ -9065,7 +9068,7 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
 	short int heading_written = 0;
 	char pom[MAX_STR];
 	Log("-- _main_rozbor_dna_txt(char *, char *, char *): begin (%s, %s, %s)\n", den, mesiac, rok);
-	short int d, m, r;
+	short int d, m, mi, r;
 
 	char pom2[MAX_STR]; /* 2006-08-01: pridané kvôli transferu údajov o jazyku */
 	mystrcpy(pom, STR_EMPTY, MAX_STR); /* 2006-08-01: pridaná inicializácia */
@@ -9115,32 +9118,44 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
 	}
 
 	Log("/* teraz result == SUCCESS */\n");
-	if(m == VSETKY_MESIACE){
+	if(m != UNKNOWN_MESIAC){
 		Export("<h2>");
 		Export((char *)html_text_txt_export[_global_jazyk]);
 		Export((char *)html_text_lit_kalendar[_global_jazyk]);
 		Export(" ");
-		Export((char *)html_text_rok[_global_jazyk]);
-		Export(" %d", r);
+		if(m == VSETKY_MESIACE){
+			Export((char *)html_text_rok[_global_jazyk]);
+			Export(" %d", r);
+		}/* if(m == VSETKY_MESIACE) */
+		else{
+			Export((char *)html_text_mesiac[_global_jazyk]);
+			Export(" %s", nazov_mesiaca(m));
+			Export(" %d", r);
+		}/* else (m != VSETKY_MESIACE) */
 		Export("</h2>");
 		Export("\n");
 		Export("<pre>");
-		/* teraz generujem jednotlive mesiace so vsetkymi dnami */
-		for(m = MES_JAN; m <= MES_DEC; m++){
+		/* teraz generujem jednotlivé mesiace so všetkými dòami */
+		if(m == VSETKY_MESIACE){
+			for(mi = MES_JAN; mi <= MES_DEC; mi++){
 #ifdef NIELEN_PRE_PETA_ZIMENA
-			Export("\n\n");
-			Export((char *)html_text_mesiac[_global_jazyk]);
-			Export(" == %d ", m + 1);
-			Export("(%s)\n", nazov_mesiaca(m));
+				Export("\n\n");
+				Export((char *)html_text_mesiac[_global_jazyk]);
+				Export(" == %d ", mi + 1);
+				Export("(%s)\n", nazov_mesiaca(m));
 #endif
+				rozbor_mesiaca(mi + 1, r, 1); /* tam sa volá _rozbor_dna() a potom _export_rozbor_dna() */
+			}/* for mi */
+		}/* if(m == VSETKY_MESIACE) */
+		else{
 			rozbor_mesiaca(m + 1, r, 1); /* tam sa volá _rozbor_dna() a potom _export_rozbor_dna() */
-		}/* for */
+		}
 		Export("\n");
 		Export("</pre>\n");
-	}/* m == VSETKY_MESIACE */
-	else{/* m != VSETKY_MESIACE */
+	}/* m != UNKNOWN_MESIAC */
+	else{/* m == UNKNOWN_MESIAC */
 		/* nesmiem zabudnut, ze m je 0--11 */
-		Export("nepodporovaný vstup.\n");
+		Export("Èíslo mesiaca: nezadaný alebo nepodporovaný vstup.\n");
 	}/* m != VSETKY_MESIACE */
 
 	Log("-- _main_rozbor_dna_txt(char *, char *, char *): end\n");
