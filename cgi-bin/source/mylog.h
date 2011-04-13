@@ -33,5 +33,5 @@ short int closeLog(void);
 short int __Log(char *fmt, ...);
 void Logint(int c);
 
-#endif /*__MYLOG_H_*/
+#endif /* __MYLOG_H_ */
 

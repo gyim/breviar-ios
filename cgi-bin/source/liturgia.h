@@ -60,11 +60,13 @@
 /*                    alebo nejakı reho¾nı a pod.              */
 /*   2010-10-11a.D. | pridané nazov_slavenia_lokal_kalendar[]  */
 /*   2011-01-25a.D. | premenované niektoré HTML súbory         */
+/*   2011-04-13a.D. | reazcové funkcie equals() presunuté     */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
 
 #include "vstudio.h"
+
 #ifndef __LITURGIA_H_
 #define __LITURGIA_H_
 
@@ -83,11 +85,6 @@
  * 2011-02-02: rozšírené kvôli text_FEB_04_SJ[];
  */
 #define MENO_SVIATKU 250
-
-/* 2006-07-31: kvôli jazykovım mutáciám; zmenené 2008-08-15 na 5 
- * 2009-01-29: zmenené na 6 (maïarèina)
- */
-#define	POCET_JAZYKOV	6
 
 /* 2006-07-11: Pridané kvôli jazykovım mutáciám 
  * 2006-12-12: Pridaná latinèina, kódy sú pod¾a ISO 639-1 (a na èeštinu)
@@ -1128,7 +1125,6 @@ extern short int _global_pocet_svatych;
 #define OPT_3_SPOLOCNA_CAST        3
 #define OPT_4_OFFLINE_EXPORT       4
 
-#define POCET_GLOBAL_OPT           5
 /* globálna premenná -- pole -- obsahujúca options; pôvodne to boli globálne premenné _global_opt 1..9 atï., obsahujú pom_MODL_OPT... */
 extern short int _global_opt[POCET_GLOBAL_OPT];
 
@@ -1202,15 +1198,6 @@ extern const char *nazov_css[POCET_CSS + 1];
 
 short int _allocate_global_var(void);
 short int _deallocate_global_var(void);
-
-short int equals(char *, char *);
-short int equals(const char *, const char *);
-short int equals(const char *, char *);
-short int equals(char *, const char *);
-short int equalsi(char *, char *);
-short int equalsi(const char *, const char *);
-short int equalsi(const char *, char *);
-short int equalsi(char *, const char *);
 
 short int cislo_mesiaca(char *mesiac);
 char *caps_BIG(const char *input);

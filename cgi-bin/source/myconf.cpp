@@ -24,6 +24,9 @@
 
 #include "vstudio.h"
 
+#ifndef __MYCONF_CPP_
+#define __MYCONF_CPP_
+
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
@@ -34,48 +37,31 @@
 #include "mysystem.h"
 #include "mylog.h"
 #include "mydefs.h"
+#include "mystring.h"
+#include "liturgia.h"
 
 char cfg_HTTP_ADDRESS_default[MAX_HTTP_STR] = "http://www.breviar.sk/";
 char cfg_HTTP_DISPLAY_ADDRESS_default[MAX_HTTP_STR] = "http://www.breviar.sk/";
 char cfg_MAIL_ADDRESS_default[MAX_MAIL_STR] = "videky@breviar.sk";
 char cfg_INCLUDE_DIR_default[MAX_INCD_STR] = "../include/";
 
-/* hodnoty options pre default jazyk, teda pre JAZYK_SK */
-short int cfg_option0_default;
-short int cfg_option1_default;
-short int cfg_option2_default;
-short int cfg_option4_default;
-/* hodnoty options pre JAZYK_CZ */
-short int cfg_option0_cz;
-short int cfg_option1_cz;
-short int cfg_option2_cz;
-short int cfg_option4_cz;
-/* hodnoty options pre JAZYK_CZ_OP */
-short int cfg_option0_czop;
-short int cfg_option1_czop;
-short int cfg_option2_czop;
-short int cfg_option4_czop;
+short int cfg_option_default[POCET_GLOBAL_OPT][POCET_JAZYKOV + 1];
+
+const char *cfg_option_prefix[POCET_GLOBAL_OPT] = 
+{"specialne", "casti_modlitby", "html_export", "", "offline_export"};
+#define ODDELOVAC_CFG_OPTION_PREFIX_POSTFIX "_"
+const char *cfg_option_postfix[POCET_JAZYKOV + 1] = 
+{"def", "cz", "en", "la", "", "czop", "hu"};
 
 void printConfigOptions(void){
-/* hodnoty options pre default jazyk, teda pre JAZYK_SK */
-	Log("=== SK: Hodnoty option parametrov pre JAZYK_SK ===\n");
-	Log("cfg_option0_default == `%d'\n", cfg_option0_default);
-	Log("cfg_option1_default == `%d'\n", cfg_option1_default);
-	Log("cfg_option2_default == `%d'\n", cfg_option2_default);
-	Log("cfg_option4_default == `%d'\n", cfg_option4_default);
-/* hodnoty options pre JAZYK_CZ */
-	Log("=== CZ: Hodnoty option parametrov pre JAZYK_CZ ===\n");
-	Log("cfg_option0_cz == `%d'\n", cfg_option0_cz);
-	Log("cfg_option1_cz == `%d'\n", cfg_option1_cz);
-	Log("cfg_option2_cz == `%d'\n", cfg_option2_cz);
-	Log("cfg_option4_cz == `%d'\n", cfg_option4_cz);
-/* hodnoty options pre JAZYK_CZ_OP */
-	Log("=== CZ_OP: Hodnoty option parametrov pre JAZYK_CZ_OP ===\n");
-	Log("cfg_option0_czop == `%d'\n", cfg_option0_czop);
-	Log("cfg_option1_czop == `%d'\n", cfg_option1_czop);
-	Log("cfg_option2_czop == `%d'\n", cfg_option2_czop);
-	Log("cfg_option4_czop == `%d'\n", cfg_option4_czop);
-}
+	short int j = 0, o = 0;
+	for(j = 0; j <= POCET_JAZYKOV; j++){
+		Log("=== Jazyk `%s' (%s): Default hodnoty option parametrov (konfiguraèný súbor %s) ===\n", skratka_jazyka[j], nazov_jazyka[j], CONFIG_FILE);
+		for(o = 0; o < POCET_GLOBAL_OPT; o++){
+			Log("cfg_option_default[%d][%d] == `%d'\n", o, j, cfg_option_default[o][j]);
+		}/* for o */
+	}/* for j */
+}/* printConfigOptions() */
 
 void readConfig(void)
 {
@@ -83,7 +69,18 @@ void readConfig(void)
 	char option[MAX_OPTION_LENGTH];
 	char hodnota[MAX_VALUE_LENGTH];
 	int znak = '\0';
-	int i = 0;
+	short int i = 0, j = 0, o = 0;
+	char nazov_option[MAX_STR];
+
+	Log("readConfig() -- zaèiatok...\n");
+	Log("============================ súbor `%s' ============================\n", CONFIG_FILE);
+
+	Log("Naplním všetky defaulty hodnotou GLOBAL_OPTION_NULL.\n");
+	for(o = 0; o < POCET_GLOBAL_OPT; o++){
+		for(j = 0; j <= POCET_JAZYKOV; j++){
+			cfg_option_default[o][j] = GLOBAL_OPTION_NULL;
+		}/* for j */
+	}/* for o */
 
 	if(! (subor = fopen(CONFIG_FILE, "r")) ){
 		Log("Nemôžem otvori súbor `%s'.\n", CONFIG_FILE);
@@ -167,64 +164,33 @@ void readConfig(void)
 		Log("Parsovaná hodnota == `%s'\n", hodnota);
 		if (!strcmp(option, "http_adresa_def")){
 			strncpy(cfg_HTTP_ADDRESS_default, hodnota, MAX_HTTP_STR);
-		} else if (!strcmp(option, "http_zobraz_adr_def")){
-			strcpy(cfg_HTTP_DISPLAY_ADDRESS_default, hodnota);
-		} else if (!strcmp(option, "mail_adresa_def")){
-			strcpy(cfg_MAIL_ADDRESS_default, hodnota);
-		} else if (!strcmp(option, "incldir_def")){
-			strcpy(cfg_INCLUDE_DIR_default, hodnota);
-		} else if (!strcmp(option, "cislovanie_versov_def")){
-			if(isdigit(hodnota[0])){
-				cfg_option0_default = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "pevne_casti_modl_def")){
-			if(isdigit(hodnota[0])){
-				cfg_option1_default = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "zalmy_zo_dna_def")){
-			if(isdigit(hodnota[0])){
-				cfg_option2_default = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "popis_pri_modlitbe_def")){
-			if(isdigit(hodnota[0])){
-				cfg_option4_default = atoi(hodnota);
-			}
-/* hodnoty options pre JAZYK_CZ */
-		} else if (!strcmp(option, "cislovanie_versov_cz")){
-			if(isdigit(hodnota[0])){
-				cfg_option0_cz = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "pevne_casti_modl_cz")){
-			if(isdigit(hodnota[0])){
-				cfg_option1_cz = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "zalmy_zo_dna_cz")){
-			if(isdigit(hodnota[0])){
-				cfg_option2_cz = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "popis_pri_modlitbe_cz")){
-			if(isdigit(hodnota[0])){
-				cfg_option4_cz = atoi(hodnota);
-			}
-/* hodnoty options pre JAZYK_CZ_OP */
-		} else if (!strcmp(option, "cislovanie_versov_czop")){
-			if(isdigit(hodnota[0])){
-				cfg_option0_czop = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "pevne_casti_modl_czop")){
-			if(isdigit(hodnota[0])){
-				cfg_option1_czop = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "zalmy_zo_dna_czop")){
-			if(isdigit(hodnota[0])){
-				cfg_option2_czop = atoi(hodnota);
-			}
-		} else if (!strcmp(option, "popis_pri_modlitbe_czop")){
-			if(isdigit(hodnota[0])){
-				cfg_option4_czop = atoi(hodnota);
-			}
 		}
-
+		else if (!strcmp(option, "http_zobraz_adr_def")){
+			strcpy(cfg_HTTP_DISPLAY_ADDRESS_default, hodnota);
+		}
+		else if (!strcmp(option, "mail_adresa_def")){
+			strcpy(cfg_MAIL_ADDRESS_default, hodnota);
+		}
+		else if (!strcmp(option, "incldir_def")){
+			strcpy(cfg_INCLUDE_DIR_default, hodnota);
+		}
+		else {
+			for(o = 0; o < POCET_GLOBAL_OPT; o++){
+				for(j = 0; j <= POCET_JAZYKOV; j++){
+					if(!equals(cfg_option_prefix[o], STR_EMPTY) && !equals(cfg_option_postfix[j], STR_EMPTY)){
+						// vyskladaj názov option pre jazyk j a option o
+						mystrcpy(nazov_option, cfg_option_prefix[o], MAX_STR);
+						strcat(nazov_option, ODDELOVAC_CFG_OPTION_PREFIX_POSTFIX);
+						strcat(nazov_option, cfg_option_postfix[j]);
+						if(!strcmp(option, nazov_option)){
+							if(isdigit(hodnota[0])){
+								cfg_option_default[o][j] = atoi(hodnota);
+							}
+						}/* if(!strcmp(option, nazov_option)) */
+					}
+				}/* for j */
+			}/* for o */
+		}
 		for(; (znak != EOF) && (znak != '\n'); znak = fgetc(subor) );
 
 		if(znak == EOF){
@@ -235,13 +201,16 @@ void readConfig(void)
 	}
 	fclose(subor);
 
+	Log("============================ súbor `%s' ============================\n", CONFIG_FILE);
+	Log("readConfig() -- koniec.\n");
+
 	return;
-}
+}/* readConfig() */
 
 /* 2007-06-01: kedze pribuda mnoho konfiguracnych parametrov, je uzitocne spravit funkciu na ich vypis */
 void printConfig(void){
 	Log("\n");
-	Log("=== BEGIN:configuration ===\n");
+	Log("=== BEGIN:configuration (%s) ===\n", CONFIG_FILE);
 
 	/* 2007-06-01: niekolko prvych parametrov: prevzate z breviar.cpp::main() */
 	Log("cfg_HTTP_ADDRESS_default == `%s'\n", cfg_HTTP_ADDRESS_default);
@@ -251,6 +220,9 @@ void printConfig(void){
 	Log("cfg_INCLUDE_DIR_default == `%s'\n", cfg_INCLUDE_DIR_default);
 	/* 2007-06-01: nasleduju nové parametre */
 	printConfigOptions();
-	Log("=== END:configuration ===\n");
+	Log("=== END:configuration (%s) ===\n", CONFIG_FILE);
 	Log("\n");
-}
+}/* printConfig() */
+
+#endif /* __MYCONF_CPP_ */
+

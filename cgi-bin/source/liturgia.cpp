@@ -27,8 +27,8 @@
 
 #include "vstudio.h"
 
-#ifndef __LITURGIA_C_
-#define __LITURGIA_C_
+#ifndef __LITURGIA_CPP_
+#define __LITURGIA_CPP_
 
 #include "liturgia.h"
 #include "breviar.h"
@@ -301,134 +301,6 @@ short int _deallocate_global_var(void){
 }
 
 /* ------------------------------------------------------------------- */
-/* string comparator -- pre vsetky kombinacie dvojic
- * [const] char, [const] char
- */
-short int equals(char *s1, char *s2){
-	if(strcmp(s1, s2) == 0)
-		return 1;
-	else
-		return 0;
-}
-
-short int equals(const char *s1, char *s2){
-	if(strcmp(s1, s2) == 0)
-		return 1;
-	else
-		return 0;
-}
-
-short int equals(const char *s1, const char *s2){
-	if(strcmp(s1, s2) == 0)
-		return 1;
-	else
-		return 0;
-}
-
-short int equals(char *s1, const char *s2){
-	if(strcmp(s1, s2) == 0)
-		return 1;
-	else
-		return 0;
-}
-
-/* string comparator without case sensitivity  -- pre vsetky kombinacie
- * dvojic [const] char, [const] char
- */
-
-short int equalsi(char *is1, char *is2){
-#if defined(DEFINED_strcmpi)
-	if(strcmpi(is1, is2) == 0)
-		return 1;
-	else
-		return 0;
-#else
-	short int i, length;
-	char s1[MAX_STR], s2[MAX_STR];
-	mystrcpy(s1, is1, MAX_STR);
-	mystrcpy(s2, is2, MAX_STR);
-	length = strlen(s1);
-	for(i = 0; i < length; i++){
-		s1[i] = (char)tolower(s1[i]);
-	}
-	length = strlen(s2);
-	for(i = 0; i < length; i++){
-		s2[i] = (char)tolower(s2[i]);
-	}
-	return equals(s1, s2);
-#endif
-}
-
-short int equalsi(const char *is1, char *is2){
-#if defined(DEFINED_strcmpi)
-	if(strcmpi(is1, is2) == 0)
-		return 1;
-	else
-		return 0;
-#else
-	short int i, length;
-	char s1[MAX_STR], s2[MAX_STR];
-	mystrcpy(s1, is1, MAX_STR);
-	mystrcpy(s2, is2, MAX_STR);
-	length = strlen(s1);
-	for(i = 0; i < length; i++){
-		s1[i] = (char)tolower(s1[i]);
-	}
-	length = strlen(s2);
-	for(i = 0; i < length; i++){
-		s2[i] = (char)tolower(s2[i]);
-	}
-	return equals(s1, s2);
-#endif
-}
-
-short int equalsi(const char *is1, const char *is2){
-#if defined(DEFINED_strcmpi)
-	if(strcmpi(is1, is2) == 0)
-		return 1;
-	else
-		return 0;
-#else
-	short int i, length;
-	char s1[MAX_STR], s2[MAX_STR];
-	mystrcpy(s1, is1, MAX_STR);
-	mystrcpy(s2, is2, MAX_STR);
-	length = strlen(s1);
-	for(i = 0; i < length; i++){
-		s1[i] = (char)tolower(s1[i]);
-	}
-	length = strlen(s2);
-	for(i = 0; i < length; i++){
-		s2[i] = (char)tolower(s2[i]);
-	}
-	return equals(s1, s2);
-#endif
-}
-
-short int equalsi(char *is1, const char *is2){
-#if defined(DEFINED_strcmpi)
-	if(strcmpi(is1, is2) == 0)
-		return 1;
-	else
-		return 0;
-#else
-	short int i, length;
-	char s1[MAX_STR], s2[MAX_STR];
-	mystrcpy(s1, is1, MAX_STR);
-	mystrcpy(s2, is2, MAX_STR);
-	length = strlen(s1);
-	for(i = 0; i < length; i++){
-		s1[i] = (char)tolower(s1[i]);
-	}
-	length = strlen(s2);
-	for(i = 0; i < length; i++){
-		s2[i] = (char)tolower(s2[i]);
-	}
-	return equals(s1, s2);
-#endif
-}
-
-/* ------------------------------------------------------------------- */
 /* vezme retazec a porovna s nazvami mesiaca; ak najde, vrati, inak 0 */
 short int cislo_mesiaca(char *mesiac){
 	short int ret = 0;
@@ -629,13 +501,7 @@ void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int 
 		Log("i == %d...\n", i);
 		if(i == 3)
 			continue;
-		switch(i){
-			case OPT_0_VERSE_REF:		local_opt_default = CFG_OPTION0_DEFAULT; break;
-			case OPT_1_CASTI_MODLITBY:	local_opt_default = CFG_OPTION1_DEFAULT; break;
-			case OPT_2_HTML_EXPORT:		local_opt_default = CFG_OPTION2_DEFAULT; break;
-			/* option 3 */
-			case OPT_4_OFFLINE_EXPORT:	local_opt_default = CFG_OPTION4_DEFAULT; break;
-		}/* switch(i) */
+		local_opt_default = CFG_OPTION_DEFAULT(i);
 		if(_global_opt[i] != local_opt_default){
 			strcpy(local_str, STR_EMPTY);
 			switch(i){
@@ -1672,5 +1538,5 @@ _struct_sc _decode_spol_cast(int spolc){
 	return ret;
 }
 
-#endif /* __LITURGIA_C_ */
+#endif /* __LITURGIA_CPP_ */
 

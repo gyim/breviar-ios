@@ -13,6 +13,9 @@
 
 #include "vstudio.h"
 
+#ifndef __MYDEFS_CPP_
+#define __MYDEFS_CPP_
+
 #include "mydefs.h"
 #include <string.h>
 #include "mystring.h" /* pridane 2003-08-13 */
@@ -29,4 +32,6 @@ void updateUnCGIName(void){
 	strcpy(uncgi_name, cfg_HTTP_ADDRESS_default);
 	strcat(uncgi_name, UNCGI_SCRIPT_NAME);
 }
+
+#endif /* __MYDEFS_CPP_ */
 

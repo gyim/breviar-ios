@@ -19,6 +19,9 @@
 
 #include "vstudio.h"
 
+#ifndef __GETOPT_H_
+#define __GETOPT_H_
+
 #include <stdio.h>
 
 /* Declarations for getopt.
@@ -41,9 +44,6 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
 USA.  */
-
-#ifndef _GETOPT_H
-#define _GETOPT_H 1
 
 #ifdef	__cplusplus
 extern "C" {
@@ -131,5 +131,5 @@ int getopt(
 	char *const *argv,
 	const char *optstring);
 
-#endif /* _GETOPT_H */
+#endif /* __GETOPT_H_ */
 

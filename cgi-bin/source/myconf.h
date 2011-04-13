@@ -17,10 +17,10 @@
 
 #include "vstudio.h"
 
-#ifndef __MYCONFIG_H
-#define __MYCONFIG_H
+#ifndef __MYCONF_H_
+#define __MYCONF_H_
 
-#include "mydefs.h"
+#include "mysystem.h"
 
 #define MAX_HTTP_STR	80
 #define MAX_MAIL_STR	50
@@ -39,30 +39,19 @@ extern char cfg_HTTP_DISPLAY_ADDRESS_default[MAX_HTTP_STR];
 extern char cfg_MAIL_ADDRESS_default[MAX_MAIL_STR];
 extern char cfg_INCLUDE_DIR_default [MAX_INCD_STR];
 
-/* hodnoty options pre default jazyk, teda pre JAZYK_SK */
-extern short int cfg_option0_default;
-extern short int cfg_option1_default;
-extern short int cfg_option2_default;
-extern short int cfg_option4_default;
-/* hodnoty options pre JAZYK_CZ */
-extern short int cfg_option0_cz;
-extern short int cfg_option1_cz;
-extern short int cfg_option2_cz;
-extern short int cfg_option4_cz;
-/* hodnoty options pre JAZYK_CZ_OP */
-extern short int cfg_option0_czop;
-extern short int cfg_option1_czop;
-extern short int cfg_option2_czop;
-extern short int cfg_option4_czop;
+extern short int cfg_option_default[POCET_GLOBAL_OPT][POCET_JAZYKOV + 1];
 
-#define CFG_OPTION0_DEFAULT (((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU))? cfg_option0_default: ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))? cfg_option0_cz: cfg_option0_default)
-#define CFG_OPTION1_DEFAULT (((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU))? cfg_option1_default: ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))? cfg_option1_cz: cfg_option1_default)
-#define CFG_OPTION2_DEFAULT (((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU) || (_global_jazyk == JAZYK_CZ))? cfg_option2_default: ((_global_jazyk == JAZYK_CZ_OP))? cfg_option2_czop: cfg_option2_default)
-// option 3 nemá default
-#define CFG_OPTION4_DEFAULT (((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU))? cfg_option4_default: ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))? cfg_option4_cz: cfg_option4_default)
+#define CFG_OPTION_DEFAULT(i) cfg_option_default[i][_global_jazyk]
+
+const short int cfg_option_default_PROG[POCET_GLOBAL_OPT] = 
+#ifdef OS_Windows_Ruby
+{3, 64, 1, 0, 1};
+#else
+{0, 95, 1, 0, 1};
+#endif
 
 void readConfig(void);
 void printConfig(void);
 
-#endif /* __MYCONFIG_H */
+#endif /* __MYCONF_H_ */
 

@@ -28,8 +28,8 @@
 
 #include "vstudio.h"
 
-#ifndef __MYHPAGE_C_
-#define __MYHPAGE_C_
+#ifndef __MYHPAGE_CPP_
+#define __MYHPAGE_CPP_
 
 #include <stdio.h>
 #include <string.h>
@@ -569,4 +569,4 @@ void patka(FILE * expt){
 	fprintf(expt, "</body>\n</html>\n");
 }
 
-#endif /*__MYHPAGE_C_*/
+#endif /* __MYHPAGE_CPP_ */

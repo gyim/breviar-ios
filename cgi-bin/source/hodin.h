@@ -44,8 +44,8 @@
 
 #include "vstudio.h"
 
-#ifndef __HODIN_H
-#define __HODIN_H
+#ifndef __HODIN_H_
+#define __HODIN_H_
 
 #include "liturgia.h"
 
@@ -5615,4 +5615,4 @@ const char *text_V_OKTAVE_NARODENIA[POCET_JAZYKOV + 1] =
  "hu_name",
  };
 
-#endif /* __HODIN_H */
+#endif /* __HODIN_H_ */

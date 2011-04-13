@@ -51,6 +51,9 @@ USA.  */
 
 #include "vstudio.h"
 
+#ifndef _GETOPT_CPP_
+#define _GETOPT_CPP_
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "mygetopt.h"
@@ -868,5 +871,6 @@ int main(int argc, char **argv){
 
 	return 0;
 }
-#endif /*MAIN*/
+#endif /* MAIN */
 
+#endif /* _GETOPT_CPP_ */

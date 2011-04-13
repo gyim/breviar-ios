@@ -1,7 +1,7 @@
 #include "vstudio.h"
 
-#ifndef __CGIUTILS_C_
-#define __CGIUTILS_C_
+#ifndef __CGIUTILS_CPP_
+#define __CGIUTILS_CPP_
 
 #include "cgiutils.h"
 
@@ -80,5 +80,5 @@ for(i = 0, j = 0; url[j]; ++i, ++j)
 url[i] = '\0';  /* terminate it at the new length */
 }
 
-#endif /* __CGIUTILS_C_ */
+#endif /* __CGIUTILS_CPP_ */
 

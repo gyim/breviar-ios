@@ -27,8 +27,8 @@
 
 #include "vstudio.h"
 
-#ifndef __MYLOG_C_
-#define __MYLOG_C_
+#ifndef __MYLOG_CPP_
+#define __MYLOG_CPP_
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -167,5 +167,5 @@ short int NoLog(char *fmt, ...){
 }
 
 
-#endif /*__MYLOG_C_*/
+#endif /* __MYLOG_CPP_ */
 

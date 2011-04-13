@@ -19,8 +19,8 @@
 
 #include "vstudio.h"
 
-#ifndef __MYEXPT_C_
-#define __MYEXPT_C_
+#ifndef __MYEXPT_CPP_
+#define __MYEXPT_CPP_
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -205,5 +205,5 @@ short int ExpL2HTML(char *fmt)
 	return 0;
 }
 
-#endif /*__MYEXPT_C_*/
+#endif /*__MYEXPT_CPP_*/
 

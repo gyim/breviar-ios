@@ -13,10 +13,10 @@
 
 #include "vstudio.h"
 
-#ifndef _MYMAIL_H
-#define _MYMAIL_H
+#ifndef __MYMAIL_H
+#define __MYMAIL_H
 
 #define cfg_MAIL_ADDRESS_default "videky@breviar.sk"
 
-#endif /* _MYMAIL_H */
+#endif /* __MYMAIL_H */
 

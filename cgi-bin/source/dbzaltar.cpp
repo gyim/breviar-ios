@@ -178,10 +178,10 @@
 /*                                                                                              */
 /************************************************************************************************/
 
-//#define DETAIL_LOG_SVATY /* 22/02/2000A.D. */
-//#define DETAIL_LOG_GLOBAL_DEN /* 22/02/2000A.D. */
-
 #include "vstudio.h"
+
+#ifndef __DBZALTAR_CPP_
+#define __DBZALTAR_CPP_
 
 #include "dbzaltar.h" /* 22/02/2000A.D. -- rozdelene na .h a .cpp subor */
 
@@ -24157,4 +24157,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 	Log("-- sviatky_svatych(%d, %d) -- spustene druhykrat, vysledok (pocet svatych) == %d\n", den, mesiac, ret);
 	return ret;
 }/* sviatky_svatych(); -- 4 vstupy; posledny == 2 */
+
+#endif /* __DBZALTAR_CPP_ */
 

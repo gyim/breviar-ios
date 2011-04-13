@@ -243,8 +243,8 @@
 
 #include "vstudio.h"
 
-#ifndef __BREVIAR_C_
-#define __BREVIAR_C_
+#ifndef __BREVIAR_CPP_
+#define __BREVIAR_CPP_
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -8544,13 +8544,7 @@ void _rozparsuj_parametre_OPT(void){
 		if(i == 3)
 			continue;
 		if(_global_opt[i] == GLOBAL_OPTION_NULL){
-			switch(i){
-				case OPT_0_VERSE_REF:		_global_opt[i] = CFG_OPTION0_DEFAULT; break;
-				case OPT_1_CASTI_MODLITBY:	_global_opt[i] = CFG_OPTION1_DEFAULT; break;
-				case OPT_2_HTML_EXPORT:		_global_opt[i] = CFG_OPTION2_DEFAULT; break;
-				/* option 3 */
-				case OPT_4_OFFLINE_EXPORT:	_global_opt[i] = CFG_OPTION4_DEFAULT; break;
-			}/* switch(i) */
+			_global_opt[i] = CFG_OPTION_DEFAULT(i);
 			Log("KeÔûe bolo _global_opt[%d] == GLOBAL_OPTION_NULL, nastavujem na `%d'...\n", i, _global_opt[i]);
 		}
 	}/* for i */
@@ -12676,6 +12670,26 @@ short int parseQueryString(void){
 	}\
 }
 
+/*
+ * 2011-04-13: vytvorenÈ kvÙli tomu, ûe config s˙bor nemusÌ obsahovaù hodnoty pre vöetky options
+ */
+void setConfigDefaults(short int jazyk){
+	short int sk_default, o;
+	Log("setConfigDefaults(%d) -- zaËiatok...\n", jazyk);
+	/* 2011-04-13: ak s˙ niektorÈ options GLOBAL_OPTION_NULL, je potrebnÈ ich na nieËo nastaviù */
+	for(o = 0; o < POCET_GLOBAL_OPT; o++){
+		if(jazyk != JAZYK_SK)
+			sk_default = cfg_option_default[o][JAZYK_SK];
+		else
+			sk_default = GLOBAL_OPTION_NULL;
+		if(cfg_option_default[o][jazyk] == GLOBAL_OPTION_NULL){
+			cfg_option_default[o][jazyk] = (sk_default == GLOBAL_OPTION_NULL)? cfg_option_default_PROG[o]: sk_default;
+			Log("keÔûe cfg_option_default[%d][%d] bolo GLOBAL_OPTION_NULL, nastavujem podæa program defaults na %d...\n", o, jazyk, cfg_option_default[o][jazyk]);
+		}
+	}/* for o */
+	Log("setConfigDefaults(%d) -- koniec.\n", jazyk);
+}/* */
+
 /* kedysi bolo void main;
  * 2003-07-14, kvoli gcc version 3.2.2 20030222 (Red Hat Linux 3.2.2-5) christ-net.sk 
  */
@@ -12759,8 +12773,8 @@ int main(int argc, char **argv){
 	_main_LOG("sp˙öùam readConfig();...\n");
 	readConfig();
 	/* 2007-06-01: keÔûe prib˙da mnoho konfiguraËn˝ch parametrov, presunuli sme ich v˝pis do funkcie */
-//	_main_LOG("sp˙öùam printConfig();...\n");
-//	printConfig();
+	_main_LOG("sp˙öùam printConfig();...\n");
+	printConfig();
 	/* 2004-03-17 na inom mieste sa upravuje include_dir - je to 2004-03-17_TUTOLA */
 
 	_main_LOG("sp˙öùam updateScriptName();...\n");
@@ -12880,6 +12894,9 @@ int main(int argc, char **argv){
 					_main_LOG_to_Export("\t(vzhæadom k neurËenÈmu jazyku pouûÌvam default)\n");
 				}
 				_main_LOG_to_Export("...jazyk (%s) = %i, teda %s (%s)\n", pom_JAZYK, _global_jazyk, nazov_jazyka[_global_jazyk], skratka_jazyka[_global_jazyk]);
+
+				_main_LOG_to_Export("sp˙öùam setConfigDefaults()...\n");
+				setConfigDefaults(_global_jazyk); // 2011-04-13: doplnenÈ
 
 				/* 2010-08-04: pridanÈ parsovanie jazyka kvÙli jazykov˝m mut·ci·m -- kalend·r, napr. rehoæn˝ (danÈ aj niûöe, ako jazyk) */
 				_main_LOG_to_Export("zisùujem kalend·r (pom_KALENDAR == %s)...\n", pom_KALENDAR);
@@ -13041,6 +13058,9 @@ _main_SIMULACIA_QS:
 				_main_LOG_to_Export("\t(vzhæadom k neurËenÈmu jazyku pouûÌvam default)\n");
 			}
 			_main_LOG_to_Export("...jazyk (%s) = %i, teda %s (%s)\n", pom_JAZYK, _global_jazyk, nazov_jazyka[_global_jazyk], skratka_jazyka[_global_jazyk]);
+
+			_main_LOG_to_Export("sp˙öùam setConfigDefaults()...\n");
+			setConfigDefaults(_global_jazyk); // 2011-04-13: doplnenÈ
 
 			/* 2010-08-04: pridanÈ parsovanie jazyka kvÙli jazykov˝m mut·ci·m -- kalend·r, napr. rehoæn˝ (danÈ aj vyööie, ako jazyk) */
 			_main_LOG_to_Export("zisùujem kalend·r (pom_KALENDAR == %s)...\n", pom_KALENDAR);
@@ -13341,4 +13361,4 @@ _main_end:
 	return 0; /* 2003-07-14, kvoli gcc version 3.2.2 20030222 (Red Hat Linux 3.2.2-5) christ-net.sk */
 }
 
-#endif /* __BREVIAR_C_ */
+#endif /* __BREVIAR_CPP_ */

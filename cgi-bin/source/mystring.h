@@ -9,15 +9,16 @@
 /*   06/09/2001A.D. | tento popis                              */
 /*   2003-08-13a.D. | pridane definicie STR_EMPTY a STR_UNDEF  */
 /*   2009-08-05a.D. | pridan· funkcia substring()              */
+/*   2011-04-13a.D. | sem presunutÈ reùazcovÈ funkcie equals() */
 /*                                                             */
 /***************************************************************/
 
 #include "vstudio.h"
 
-#include <string.h>
+#ifndef __MYSTRING_H_
+#define __MYSTRING_H_
 
-#ifndef __MYSTRING_H
-#define __MYSTRING_H
+#include <string.h>
 
 #define STR_EMPTY ""
 #define STR_UNDEF "(undef)"
@@ -31,5 +32,14 @@ char *mystrcpy(char *dest, char *src, short int count);
 char *mystrcpy(char *dest, const char *src, short int count);
 int substring(char *str1, char *str2);
 
-#endif /* __MYSTRING_H */
+short int equals(char *, char *);
+short int equals(const char *, const char *);
+short int equals(const char *, char *);
+short int equals(char *, const char *);
+short int equalsi(char *, char *);
+short int equalsi(const char *, const char *);
+short int equalsi(const char *, char *);
+short int equalsi(char *, const char *);
+
+#endif /* __MYSTRING_H_ */
 

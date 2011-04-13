@@ -30,5 +30,5 @@ void hlavicka(char *, FILE *, short int level = 0, short int spec = 0);
 void patka(void);
 void patka(FILE *);
 
-#endif /*__MYHPAGE_H_*/
+#endif /* __MYHPAGE_H_ */
 

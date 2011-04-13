@@ -25,8 +25,8 @@
 
 #include "vstudio.h"
 
-#ifndef __BREVIAR_H
-#define __BREVIAR_H
+#ifndef __BREVIAR_H_
+#define __BREVIAR_H_
 
 #include "liturgia.h"
 #include "mysystem.h" /* kvuoli OS_linux/OS_Windows_Ruby, zapoznámkovanie void main, 2003-07-01; upravené 2007-05-29 */
@@ -240,5 +240,5 @@ int main(int argc, char **argv);
 	#define putenv _putenv
 #endif   // VC8+
 
-#endif /* __BREVIAR_H */
+#endif /* __BREVIAR_H_ */
 

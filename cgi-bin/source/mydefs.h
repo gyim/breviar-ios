@@ -62,14 +62,11 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2011-04-12"
+#define BUILD_DATE "2011-04-13"
 
 #define BYTES 250
 #define SMALL 80
 #define VERY_SMALL 8
-
-/* neurèená hodnota pre global option */
-#define GLOBAL_OPTION_NULL -1
 
 /* navratova hodnota funkcii */
 #define NO_RESULT 2
@@ -82,7 +79,6 @@
 #define ANO   1
 #define NIE   0
 
-#define MAX_STR				300 /* maximalna dlzka retazca */
 #define MAX_GLOBAL_STR		420 /* _global_string; 31/03/2000A.D.; 2010-12-07: rozšírené; 2011-01-31: rozšírené kvôli text_JAN_31_SDB[]; 2011-02-02: rozšírené kvôli text_FEB_04_SJ[]; */
 #define MAX_GLOBAL_STR2		20 /* _global_string2, pridané 2006-08-19 */
 #define MAX_GLOBAL_STR_FARBA 350 /* _global_string_farba, pridané 2006-08-19; 2011-03-24: rozšírené kvôli dvojkombináciám */

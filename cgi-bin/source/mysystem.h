@@ -252,4 +252,14 @@
 /* 2006-07-31: Pridané */
 #define		UNDERSCORE	'_'
 
+/* 2006-07-31: kvôli jazykovým mutáciám; zmenené 2008-08-15 na 5 
+ * 2009-01-29: zmenené na 6 (maïarèina)
+ * 2011-04-13: presunuté sem spolu s POCET_GLOBAL_OPT aj MAX_STR, GLOBAL_OPTION_NULL
+ */
+#define	POCET_JAZYKOV	     6
+#define POCET_GLOBAL_OPT     5
+#define MAX_STR            300 /* maximalna dlzka retazca */
+#define GLOBAL_OPTION_NULL  -1 /* neurèená hodnota pre global option */
+
+
 #endif /* __MYSYSTEM_H_ */
