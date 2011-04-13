@@ -6008,7 +6008,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
  */
 void _export_rozbor_dna_kalendar(short int typ){
 	Log("--- _export_rozbor_dna_kalendar(typ == %d) -- begin\n", typ); /* 2005-03-22: Pridane */
-	if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE)  && (typ != EXPORT_DNA_VIAC_DNI_TXT)){
+	if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_VIAC_DNI_TXT)){
 		Log("--- _export_rozbor_dna_kalendar(): idem tlacit kalendar...\n");
 		short int i, j, k;
 
@@ -7110,8 +7110,8 @@ void _export_rozbor_dna(short int typ){
 			Log("export_monthly_druh == %d [2011-04-13]\n", export_monthly_druh);
 
 			if((_global_opt_batch_monthly == ANO) && (export_monthly_druh > 2)
-				|| ((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_VIAC_DNI_TXT))
-				){ /* 2009-08-26: doplnené; 2011-04-13: postaèuje, aby to bolo na viac ako jeden deò, už sa kalendár nevypisuje; podmienka aj hore */
+				&& ((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_VIAC_DNI_TXT))
+				){ /* 2009-08-26: doplnené; 2011-04-13: postaèuje, aby to bolo na viac ako jeden deò, už sa kalendár nevypisuje; podmienka aj hore (tu je prakticky zbytoèná) */
 				Log("pre tento typ exportu sa kalendárik negeneruje\n");
 			}
 			else{
