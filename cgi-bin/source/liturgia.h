@@ -1119,7 +1119,7 @@ extern _struct_lrok *_global_r_ptr;
  */
 extern short int _global_pocet_svatych;
 
-#define OPT_0_VERSE_REF            0
+#define OPT_0_SPECIALNE            0
 #define OPT_1_CASTI_MODLITBY       1
 #define OPT_2_HTML_EXPORT          2
 #define OPT_3_SPOLOCNA_CAST        3
@@ -1128,9 +1128,9 @@ extern short int _global_pocet_svatych;
 /* glob·lna premenn· -- pole -- obsahuj˙ca options; pÙvodne to boli glob·lne premennÈ _global_opt 1..9 atÔ., obsahuj˙ pom_MODL_OPT... */
 extern short int _global_opt[POCET_GLOBAL_OPT];
 
-#define POCET_OPT_0_VERSE_REF               2 /* jednotlivÈ komponenty option 0 -- bity pre force option 0 */
-// extern short int _global_opt_cerse_ref[POCET_OPT_0_VERSE_REF];
-/* 2011-04-08: ˙prava v˝znamu (a interpret·cie) option 0 ==  OPT_0_VERSE_REF (zobraziù/nezobraziù "pridan˙ hodnotu" oproti papierovej LH) */
+#define POCET_OPT_0_SPECIALNE               2 /* jednotlivÈ komponenty option 0 -- bity pre force option 0 */
+extern short int _global_opt_specialne[POCET_OPT_0_SPECIALNE];
+/* 2011-04-08: ˙prava v˝znamu (a interpret·cie) option 0 ==  OPT_0_SPECIALNE (zobraziù/nezobraziù "pridan˙ hodnotu" oproti papierovej LH) */
 #define BIT_OPT_0_VERSE                     1
 #define BIT_OPT_0_REFERENCIE                2
 

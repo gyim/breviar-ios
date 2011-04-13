@@ -411,9 +411,11 @@ short int _global_pocet_svatych;
 short int _global_opt[POCET_GLOBAL_OPT];
 /* glob·lna premenn· -- pole -- obsahuj˙ca force options; pÙvodne to boli glob·lne premennÈ _global_optf 1..9 atÔ., obsahuj˙ pom_MODL_OPTF... */
 short int _global_optf[POCET_GLOBAL_OPT];
-short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];      /* glob·lna premenn· -- pole -- obsahuj˙ca jednotlivÈ bity pre force option 1 */
-short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];            /* glob·lna premenn· -- pole -- obsahuj˙ca jednotlivÈ bity pre force option 2 */
-short int _global_opt_offline_export[POCET_OPT_4_OFFLINE_EXPORT];      /* glob·lna premenn· -- pole -- obsahuj˙ca jednotlivÈ bity pre force option 4 */
+/* glob·lne premennÈ -- polia -- obsahuj˙ce jednotlivÈ bity pre force option 0, 1, 2, 4 */
+short int _global_opt_specialne[POCET_OPT_0_SPECIALNE];
+short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];      
+short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];
+short int _global_opt_offline_export[POCET_OPT_4_OFFLINE_EXPORT];
 
 /* pridane 2003-07-08, append parameter */
 short int _global_opt_append = NIE;
@@ -498,9 +500,11 @@ char pom_MODLITBA   [SMALL] = STR_EMPTY;
 
 char pom_MODL_OPT[POCET_GLOBAL_OPT][SMALL];
 char pom_MODL_OPTF[POCET_GLOBAL_OPT][SMALL]; /* 2011-01-26: doplnenÈ force verzie pre options; 2011-04-07: prepracovanÈ na pole */
-char pom_MODL_OPTF_CASTI_MODLITBY[POCET_OPT_1_CASTI_MODLITBY][SMALL];   /* reùazcovÈ pole pre force option 1 (jednotlivÈ bit-komponenty) */
-char pom_MODL_OPTF_HTML_EXPORT[POCET_OPT_2_HTML_EXPORT][SMALL];         /* reùazcovÈ pole pre force option 2 (jednotlivÈ bit-komponenty) */
-char pom_MODL_OPTF_OFFLINE_EXPORT[POCET_OPT_4_OFFLINE_EXPORT][SMALL];   /* reùazcovÈ pole pre force option 4 (jednotlivÈ bit-komponenty) */
+/* reùazcovÈ polia pre force option 0, 1, 2, 4 (jednotlivÈ bit-komponenty) */
+char pom_MODL_OPTF_SPECIALNE[POCET_OPT_0_SPECIALNE][SMALL];
+char pom_MODL_OPTF_CASTI_MODLITBY[POCET_OPT_1_CASTI_MODLITBY][SMALL];
+char pom_MODL_OPTF_HTML_EXPORT[POCET_OPT_2_HTML_EXPORT][SMALL];
+char pom_MODL_OPTF_OFFLINE_EXPORT[POCET_OPT_4_OFFLINE_EXPORT][SMALL];
 
 /* append pridany 2003-07-08, bude v _global_opt_append */
 char pom_MODL_OPT_APPEND  [SMALL] = STR_EMPTY;
@@ -992,7 +996,7 @@ short int setForm(void){
 		if(!equals(pom_MODL_OPT[i], STR_EMPTY)){
 			mystrcpy(local_str, WWW_PREFIX, SMALL);
 			switch(i){
-				case OPT_0_VERSE_REF:		strcat(local_str, STR_MODL_OPT0); break;
+				case OPT_0_SPECIALNE:		strcat(local_str, STR_MODL_OPT0); break;
 				case OPT_1_CASTI_MODLITBY:	strcat(local_str, STR_MODL_OPT1); break;
 				case OPT_2_HTML_EXPORT:		strcat(local_str, STR_MODL_OPT2); break;
 				case OPT_3_SPOLOCNA_CAST:	strcat(local_str, STR_MODL_OPT3); break;
@@ -1012,7 +1016,7 @@ short int setForm(void){
 		if(!equals(pom_MODL_OPTF[i], STR_EMPTY)){
 			mystrcpy(local_str, WWW_PREFIX, SMALL);
 			switch(i){
-				case OPT_0_VERSE_REF:		strcat(local_str, STR_MODL_OPTF0); break;
+				case OPT_0_SPECIALNE:		strcat(local_str, STR_MODL_OPTF0); break;
 				case OPT_1_CASTI_MODLITBY:	strcat(local_str, STR_MODL_OPTF1); break;
 				case OPT_2_HTML_EXPORT:		strcat(local_str, STR_MODL_OPTF2); break;
 				case OPT_3_SPOLOCNA_CAST:	strcat(local_str, STR_MODL_OPTF3); break;
@@ -1026,7 +1030,26 @@ short int setForm(void){
 		}
 	}
 
+	// 2011-04-13: doplenÈ; force option 0, jednotlivÈ bit-komponenty
+	Log("force option %d, jednotlivÈ bit-komponenty...\n", OPT_0_SPECIALNE);
+	for(i = 0; i < POCET_OPT_0_SPECIALNE; i++){
+		mystrcpy(local_str, STR_EMPTY, SMALL);
+		if(!equals(pom_MODL_OPTF_SPECIALNE[i], STR_EMPTY)){
+			mystrcpy(local_str, WWW_PREFIX, SMALL);
+			switch(i){
+				case 0: strcat(local_str, STR_MODL_OPTF0_VERSE); break;
+				case 1: strcat(local_str, STR_MODL_OPTF0_REF); break;
+			}// switch(i)
+			strcat(local_str, "=");
+			strcat(local_str, pom_MODL_OPTF_SPECIALNE[i]);
+			Log("--- setForm: putenv(%s); ...\n", local_str);
+			ret = putenv(local_str);
+			Log("--- setForm: putenv returned %d.\n", ret);
+		}
+	}
+
 	// 2011-04-11: doplenÈ; force option 1, jednotlivÈ bit-komponenty
+	Log("force option %d, jednotlivÈ bit-komponenty...\n", OPT_1_CASTI_MODLITBY);
 	for(i = 0; i < POCET_OPT_1_CASTI_MODLITBY; i++){
 		mystrcpy(local_str, STR_EMPTY, SMALL);
 		if(!equals(pom_MODL_OPTF_CASTI_MODLITBY[i], STR_EMPTY)){
@@ -1326,7 +1349,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 						vnutri_referencie = ANO;
 						write = NIE;
 						ref_index = 0;
-						if((_global_opt[OPT_0_VERSE_REF] & BIT_OPT_0_REFERENCIE) == BIT_OPT_0_REFERENCIE){
+						if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_REFERENCIE) == BIT_OPT_0_REFERENCIE){
 							if(rest != NULL){
 								mystrcpy(refrest, rest, MAX_BUFFER);
 							}
@@ -1336,7 +1359,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 					}/* upraviù referencie na hyperlinky */
 					if(equals(strbuff, PARAM_REFERENCIA_END) && (vnutri_inkludovaneho == 1)){
 						refbuff[ref_index] = '\0';
-						if((_global_opt[OPT_0_VERSE_REF] & BIT_OPT_0_REFERENCIE) == BIT_OPT_0_REFERENCIE){
+						if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_REFERENCIE) == BIT_OPT_0_REFERENCIE){
 							/* ToDo: Ëasom daù odkaz napr. do konfiguraËnÈho s˙boru */
 							Export("<a href=\"http://dkc.kbs.sk/?in=");
 							DetailLog("\trest     == %s\n", rest);
@@ -1348,7 +1371,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 							Export("%s\" target=\"_blank\" "HTML_CLASS_QUIET">", remove_diacritics(refbuff)); /* a.quiet { text-decoration:none; color: inherit; } */
 						}
 						Export("%s", refbuff);
-						if((_global_opt[OPT_0_VERSE_REF] & BIT_OPT_0_REFERENCIE) == BIT_OPT_0_REFERENCIE){
+						if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_REFERENCIE) == BIT_OPT_0_REFERENCIE){
 							Export("</a>");
 						}
 						vnutri_referencie = NIE;
@@ -1358,7 +1381,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 
 					/* 2011-04-04: zobraziù/nezobraziù ËÌslovanie veröov */
 					if(equals(strbuff, PARAM_CISLO_VERSA_BEGIN) && (vnutri_inkludovaneho == 1)){
-						if((_global_opt[OPT_0_VERSE_REF] & BIT_OPT_0_VERSE) == BIT_OPT_0_VERSE){
+						if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_VERSE) == BIT_OPT_0_VERSE){
 							Export("</b><"HTML_SUP_RED">");
 						}
 						else{
@@ -1370,7 +1393,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 						}
 					}/* zobraziù/nezobraziù ËÌslovanie veröov */
 					if(equals(strbuff, PARAM_CISLO_VERSA_END) && (vnutri_inkludovaneho == 1)){
-						if((_global_opt[OPT_0_VERSE_REF] & BIT_OPT_0_VERSE) == BIT_OPT_0_VERSE){
+						if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_VERSE) == BIT_OPT_0_VERSE){
 							Export("</sup><b>");
 						}
 						else{
@@ -1674,7 +1697,7 @@ void interpretParameter(short int type, char *paramname){
 
 	if(equals(paramname, PARAM_CISLO_VERSA_BEGIN)){
 		if(_global_skip_in_prayer != ANO){
-			if((_global_opt[OPT_0_VERSE_REF] & BIT_OPT_0_VERSE) == BIT_OPT_0_VERSE){
+			if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_VERSE) == BIT_OPT_0_VERSE){
 				Export("</b><"HTML_SUP_RED">");
 			}
 			else{
@@ -1686,7 +1709,7 @@ void interpretParameter(short int type, char *paramname){
 	}/* zobraziù/nezobraziù ËÌslovanie veröov */
 	else if(equals(paramname, PARAM_CISLO_VERSA_END)){
 		if(_global_skip_in_prayer != ANO){
-			if((_global_opt[OPT_0_VERSE_REF] & BIT_OPT_0_VERSE) == BIT_OPT_0_VERSE){
+			if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_VERSE) == BIT_OPT_0_VERSE){
 				Export("</sup><b>");
 			}
 			else{
@@ -3075,9 +3098,9 @@ void showPrayer(short int type){
 	}/* override pre _global_opt[i] z _global_optf[i] */
 
 	/* 2011-04-08: log option 0 */
-	Log("option 0 == %d, Ëo znamen·: \n", _global_opt[OPT_0_VERSE_REF]);
-	Log("\t BIT_OPT_0_VERSE == %d (·no == %d)\n", _global_opt[OPT_0_VERSE_REF] & BIT_OPT_0_VERSE, BIT_OPT_0_VERSE);
-	Log("\t BIT_OPT_0_REFERENCIE == %d (·no == %d)\n", _global_opt[OPT_0_VERSE_REF] & BIT_OPT_0_REFERENCIE, BIT_OPT_0_REFERENCIE);
+	Log("option 0 == %d, Ëo znamen·: \n", _global_opt[OPT_0_SPECIALNE]);
+	Log("\t BIT_OPT_0_VERSE == %d (·no == %d)\n", _global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_VERSE, BIT_OPT_0_VERSE);
+	Log("\t BIT_OPT_0_REFERENCIE == %d (·no == %d)\n", _global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_REFERENCIE, BIT_OPT_0_REFERENCIE);
 
 	/* samotne vypisanie, o aku modlitbu ide */
 	Log("showPrayer(type %i, %s), _global_modlitba == %s\n",
@@ -6212,6 +6235,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<li>");
 	/* option 1: zobraziù nasledovnÈ (nemennÈ, pevnÈ) s˙Ëasti modlitby (pouûÌvame force opt1)... */
 	Export((char *)html_text_nemenne_sucasti[_global_jazyk]);
+	Export(" \n");
 /*
 	Log("_global_opt[OPT_1_CASTI_MODLITBY == %d] == %d\n", OPT_1_CASTI_MODLITBY, _global_opt[OPT_1_CASTI_MODLITBY]);
 	Log("_global_optf[OPT_1_CASTI_MODLITBY == %d] == %d\n", OPT_1_CASTI_MODLITBY, _global_optf[OPT_1_CASTI_MODLITBY]);
@@ -6258,6 +6282,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<li>");
 	/* option 1: Ôalöie bity ovplyvÚuj˙ce vygenerovan˙ modlitbu (pouûÌvame force opt1)... */
 	Export((char *)html_text_dalsie_prepinace[_global_jazyk]);
+	Export(" \n");
 
 	/* pole (checkbox) WWW_MODL_OPTF1_SKRY_POPIS */
 	Export("<br>\n");
@@ -6295,20 +6320,32 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	/* option 3: Ëasti modlitby zo spoloËnej Ëasti ... -- toto tu byù nemÙûe, bude potrebnÈ doplniù pre kaûd˝ riadok modlitby */
 
+	/* ---------------------------------------------------------------------------------- */
+
 	Export("<li>\n");
-	/* option 0: zobraziù ËÌslovanie veröov, biblickÈ referencie... (pouûÌvame force opt0) */
-	Export((char *)html_text_zobrazit_option0[_global_jazyk]);
+	/* option 0: Ôalöie bity ovplyvÚuj˙ce vygenerovan˙ modlitbu (ËÌslovanie veröov, biblickÈ referencie...) (pouûÌvame force opt0)... */
+	Export((char *)html_text_option0_specialne[_global_jazyk]);
 	Export(" \n");
-	/* pole WWW_MODL_OPTF0 */
-	Export("<select name=\"%s\">\n", STR_MODL_OPTF0);
-	Export("<option%s>%s\n", (_global_optf[OPT_0_VERSE_REF] == OPT_0_NIC)? html_option_selected: STR_EMPTY, STR_OPT_0_NIC);
-	Export("<option%s>%s\n", (_global_optf[OPT_0_VERSE_REF] == OPT_0_VERSE)? html_option_selected: STR_EMPTY, STR_OPT_0_VERSE);
+
+	/* pole (checkbox) WWW_MODL_OPTF0_VERSE */
+	Export("<br>\n");
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF0_VERSE, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF0_VERSE, ANO, html_text_option0_verse_explain[_global_jazyk], ((_global_optf[OPT_0_SPECIALNE] & BIT_OPT_0_VERSE) == BIT_OPT_0_VERSE)? html_option_checked: STR_EMPTY);
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option0_verse_explain[_global_jazyk], html_text_option0_verse[_global_jazyk]);
+	Export(" \n");
+
 	if(_global_jazyk == JAZYK_SK){
-		Export("<option%s>%s\n", (_global_optf[OPT_0_VERSE_REF] == OPT_0_REFERENCIE)? html_option_selected: STR_EMPTY, STR_OPT_0_REFERENCIE);
-		Export("<option%s>%s\n", (_global_optf[OPT_0_VERSE_REF] == OPT_0_VERSE_REFERENCIE)? html_option_selected: STR_EMPTY, STR_OPT_0_VERSE_REFERENCIE);
-	}
-	Export("</select>\n");
+		/* pole (checkbox) WWW_MODL_OPTF0_REF */
+		Export("<br>\n");
+		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF0_REF, NIE);
+		Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF0_REF, ANO, html_text_option0_referencie_explain[_global_jazyk], ((_global_optf[OPT_0_SPECIALNE] & BIT_OPT_0_VERSE) == BIT_OPT_0_VERSE)? html_option_checked: STR_EMPTY);
+		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option0_referencie_explain[_global_jazyk], html_text_option0_referencie[_global_jazyk]);
+		Export(" \n");
+	}/* if(_global_jazyk == JAZYK_SK) */
+
 	Export("</li>");
+
+	/* ---------------------------------------------------------------------------------- */
 
 	/* 2011-01-31: sem presunut· moûnosù v˝beru liturgickÈho kalend·ra */
 	if(_global_jazyk == JAZYK_SK){
@@ -6351,7 +6388,9 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export((char *)html_text_kalendar_explain[_global_jazyk]);
 		Export("</span>");
 		Export("</li>\n");
-	}
+	}/* if(_global_jazyk == JAZYK_SK) */
+
+	/* ---------------------------------------------------------------------------------- */
 
 	Export("</ul>\n");
 
@@ -7580,25 +7619,6 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 		Export("</li>\n");
 	}/* if(poradie svateho in 1, 2, 3) */
 
-	/* pridane 2011-04-04 */
-	Export("<li>");
-	Export((char *)html_text_zobrazit_option0[_global_jazyk]);
-	Export(" \n");
-	/* pole WWW_MODL_OPT0 */
-	Export("<select name=\"%s\">\n", STR_MODL_OPT0);
-	Export("<option%s>%s\n", (_global_optf[OPT_0_VERSE_REF] == OPT_0_NIC)? html_option_selected: STR_EMPTY, STR_OPT_0_NIC);
-	Export("<option%s>%s\n", (_global_optf[OPT_0_VERSE_REF] == OPT_0_VERSE)? html_option_selected: STR_EMPTY, STR_OPT_0_VERSE);
-	if(_global_jazyk == JAZYK_SK){
-		Export("<option%s>%s\n", (_global_optf[OPT_0_VERSE_REF] == OPT_0_REFERENCIE)? html_option_selected: STR_EMPTY, STR_OPT_0_REFERENCIE);
-		Export("<option%s>%s\n", (_global_optf[OPT_0_VERSE_REF] == OPT_0_VERSE_REFERENCIE)? html_option_selected: STR_EMPTY, STR_OPT_0_VERSE_REFERENCIE);
-	}
-	Export("</select>\n");
-	Export("<br><"HTML_SPAN_EXPLAIN">");
-	Export((char *)html_text_zobrazit_option0_explain[_global_jazyk]);
-	Export((char *)html_text_zobrazit_option0_explain2[_global_jazyk]);
-	Export("</span>");
-	Export("</li>\n");
-
 	Export("</ul>\n");
 
 	/* 2003-08-13 pridane vysvetlenie */
@@ -8294,6 +8314,9 @@ void log_pom_MODL_OPTF(void){
 	for(i = 0; i < POCET_GLOBAL_OPT; i++){
 		Log("optf%d == `%s' (%d)\n", i, pom_MODL_OPTF[i], _global_optf[i]);
 	}
+	for(i = 0; i < POCET_OPT_0_SPECIALNE; i++){
+		Log("optf[%d]%d == `%s'\n", OPT_0_SPECIALNE, i, pom_MODL_OPTF_SPECIALNE[i]);
+	}
 	for(i = 0; i < POCET_OPT_1_CASTI_MODLITBY; i++){
 		Log("optf[%d]%d == `%s'\n", OPT_1_CASTI_MODLITBY, i, pom_MODL_OPTF_CASTI_MODLITBY[i]);
 	}
@@ -8308,6 +8331,15 @@ void _rozparsuj_parametre_OPT(void){
 	short int aspon_jedna_nenulova;
 	Log("_rozparsuj_parametre_OPT() -- zaËiatok...\n");
 
+	/* option 0 */
+	if((pom_MODL_OPT[OPT_0_SPECIALNE] == NULL) || (strlen(pom_MODL_OPT[OPT_0_SPECIALNE]) < 1)){
+		_global_opt[OPT_0_SPECIALNE] = GLOBAL_OPTION_NULL;
+	}
+	else{
+		_global_opt[OPT_0_SPECIALNE] = atoi(pom_MODL_OPT[OPT_0_SPECIALNE]);
+	}
+	Log("opt%d == `%s' (%d)\n", OPT_0_SPECIALNE, pom_MODL_OPT[OPT_0_SPECIALNE], _global_opt[OPT_0_SPECIALNE]);
+
 	/* option 1 */
 	if((pom_MODL_OPT[OPT_1_CASTI_MODLITBY] == NULL) || (strlen(pom_MODL_OPT[OPT_1_CASTI_MODLITBY]) < 1)){
 		_global_opt[OPT_1_CASTI_MODLITBY] = GLOBAL_OPTION_NULL;
@@ -8315,7 +8347,7 @@ void _rozparsuj_parametre_OPT(void){
 	else{
 		_global_opt[OPT_1_CASTI_MODLITBY] = atoi(pom_MODL_OPT[OPT_1_CASTI_MODLITBY]);
 	}
-	Log("opt1 == `%s' (%d)\n", pom_MODL_OPT[OPT_1_CASTI_MODLITBY], _global_opt[OPT_1_CASTI_MODLITBY]);
+	Log("opt%d == `%s' (%d)\n", OPT_1_CASTI_MODLITBY, pom_MODL_OPT[OPT_1_CASTI_MODLITBY], _global_opt[OPT_1_CASTI_MODLITBY]);
 
 	/* option 2 */
 	if((pom_MODL_OPT[OPT_2_HTML_EXPORT] == NULL) || (strlen(pom_MODL_OPT[OPT_2_HTML_EXPORT]) < 1)){
@@ -8324,7 +8356,7 @@ void _rozparsuj_parametre_OPT(void){
 	else{
 		_global_opt[OPT_2_HTML_EXPORT] = atoi(pom_MODL_OPT[OPT_2_HTML_EXPORT]);
 	}
-	Log("opt2 == `%s' (%d)\n", pom_MODL_OPT[OPT_2_HTML_EXPORT], _global_opt[OPT_2_HTML_EXPORT]);
+	Log("opt%d == `%s' (%d)\n", OPT_2_HTML_EXPORT, pom_MODL_OPT[OPT_2_HTML_EXPORT], _global_opt[OPT_2_HTML_EXPORT]);
 
 	/* option 3 */
 	i = atoi(pom_MODL_OPT[OPT_3_SPOLOCNA_CAST]);
@@ -8343,7 +8375,7 @@ void _rozparsuj_parametre_OPT(void){
 		/* ak je zadane cislo spravne, tak i bude spravny int
 		 * a pom_MODL_OPT[OPT_3_SPOLOCNA_CAST] bude spravny char* */
 	}
-	Log("opt3: i == %d\n", i);
+	Log("opt%d: i == %d\n", OPT_3_SPOLOCNA_CAST, i);
 	while(i <= MODL_SPOL_CAST_NEBRAT){
 		if(equals(pom_MODL_OPT[OPT_3_SPOLOCNA_CAST], nazov_spolc(i))){
 			_global_opt[OPT_3_SPOLOCNA_CAST] = i;
@@ -8354,7 +8386,7 @@ void _rozparsuj_parametre_OPT(void){
 	if(i > MODL_SPOL_CAST_NEBRAT){
 		_global_opt[OPT_3_SPOLOCNA_CAST] = MODL_SPOL_CAST_NEURCENA;
 	}
-	Log("opt3 == `%s' (%d)\n", pom_MODL_OPT[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_3_SPOLOCNA_CAST]);
+	Log("opt%d == `%s' (%d)\n", OPT_3_SPOLOCNA_CAST, pom_MODL_OPT[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_3_SPOLOCNA_CAST]);
 
 	/* option 4 */
 	if((pom_MODL_OPT[OPT_4_OFFLINE_EXPORT] == NULL) || (strlen(pom_MODL_OPT[OPT_4_OFFLINE_EXPORT]) < 1)){
@@ -8363,37 +8395,46 @@ void _rozparsuj_parametre_OPT(void){
 	else{
 		_global_opt[OPT_4_OFFLINE_EXPORT] = atoi(pom_MODL_OPT[OPT_4_OFFLINE_EXPORT]);
 	}
-	Log("opt4 == `%s' (%d)\n", pom_MODL_OPT[OPT_4_OFFLINE_EXPORT], _global_opt[OPT_4_OFFLINE_EXPORT]);
-
-	/* option 0 */
-	if((pom_MODL_OPT[OPT_0_VERSE_REF] == NULL) || (strlen(pom_MODL_OPT[OPT_0_VERSE_REF]) < 1)){
-		i = GLOBAL_OPTION_NULL;
-	}
-	else if(equals(pom_MODL_OPT[OPT_0_VERSE_REF], STR_OPT_0_NIC)){
-		i = OPT_0_NIC;
-	}
-	else if(equals(pom_MODL_OPT[OPT_0_VERSE_REF], STR_OPT_0_VERSE)){
-		i = OPT_0_VERSE;
-	}
-	else if(equals(pom_MODL_OPT[OPT_0_VERSE_REF], STR_OPT_0_REFERENCIE)){
-		i = OPT_0_REFERENCIE;
-	}
-	else if(equals(pom_MODL_OPT[OPT_0_VERSE_REF], STR_OPT_0_VERSE_REFERENCIE)){
-		i = OPT_0_VERSE_REFERENCIE;
-	}
-	else{
-		i = atoi(pom_MODL_OPT[OPT_0_VERSE_REF]);
-	}
-	_global_opt[OPT_0_VERSE_REF] = i;
-	Log("opt0 == `%s' (%d)\n", pom_MODL_OPT[OPT_0_VERSE_REF], _global_opt[OPT_0_VERSE_REF]);
+	Log("opt%d == `%s' (%d)\n", OPT_4_OFFLINE_EXPORT, pom_MODL_OPT[OPT_4_OFFLINE_EXPORT], _global_opt[OPT_4_OFFLINE_EXPORT]);
 
 	/* force options */
+
+	/* option force 0 */
+	/*
+	i = atoi(pom_MODL_OPTF[OPT_0_SPECIALNE]);
+	_global_optf[OPT_0_SPECIALNE] = i;
+	Log("optf%d == `%s' (%d)\n", OPT_0_SPECIALNE, pom_MODL_OPTF[OPT_0_SPECIALNE], _global_optf[OPT_0_SPECIALNE]);
+	*/
+	/* option force 1 -- jednotlivÈ komponenty */
+	_global_optf[OPT_0_SPECIALNE] = GLOBAL_OPTION_NULL;
+	aspon_jedna_nenulova = NIE;
+	for(i = 0; i < POCET_OPT_0_SPECIALNE; i++){
+		if((pom_MODL_OPTF_SPECIALNE[i] == NULL) || (strlen(pom_MODL_OPTF_SPECIALNE[i]) < 1)){
+			_global_opt_specialne[i] = GLOBAL_OPTION_NULL;
+		}
+		else{
+			_global_opt_specialne[i] = atoi(pom_MODL_OPTF_SPECIALNE[i]);
+			aspon_jedna_nenulova = ANO;
+		}
+		Log("optf[%d][%d] == `%s' (%d)\n", OPT_0_SPECIALNE, i, pom_MODL_OPTF_SPECIALNE[i], _global_opt_specialne[i]);
+	}// for i
+	if(aspon_jedna_nenulova == ANO){
+		_global_optf[OPT_0_SPECIALNE] = 0;
+		/* nastavenie _global_optf[OPT_0_SPECIALNE] podæa jednotliv˝ch bit-komponentov, ktorÈ s˙ nastavenÈ v _global_opt_specialne[] */
+		for(i = 0; i < POCET_OPT_0_SPECIALNE; i++){
+			if(_global_opt_specialne[i] != GLOBAL_OPTION_NULL){
+				_global_optf[OPT_0_SPECIALNE] += (int)pow(2.0, i) * _global_opt_specialne[i];
+			}
+		}// for i
+		Log("optf[%d] vyskladan· == %d\n", OPT_0_SPECIALNE, _global_optf[OPT_0_SPECIALNE]);
+	}
+	Log("optf%d == `%s' (%d)\n", OPT_0_SPECIALNE, pom_MODL_OPTF[OPT_0_SPECIALNE], _global_optf[OPT_0_SPECIALNE]);
 
 	/* option force 1 */
 	/*
 	i = atoi(pom_MODL_OPTF[OPT_1_CASTI_MODLITBY]);
 	_global_optf[OPT_1_CASTI_MODLITBY] = i;
-	Log("optf1 == `%s' (%d)\n", pom_MODL_OPTF[OPT_1_CASTI_MODLITBY], _global_optf[OPT_1_CASTI_MODLITBY]);
+	Log("optf%d == `%s' (%d)\n", OPT_1_CASTI_MODLITBY, pom_MODL_OPTF[OPT_1_CASTI_MODLITBY], _global_optf[OPT_1_CASTI_MODLITBY]);
 	*/
 	/* option force 1 -- jednotlivÈ komponenty */
 	_global_optf[OPT_1_CASTI_MODLITBY] = GLOBAL_OPTION_NULL;
@@ -8418,13 +8459,13 @@ void _rozparsuj_parametre_OPT(void){
 		}// for i
 		Log("optf[%d] vyskladan· == %d\n", OPT_1_CASTI_MODLITBY, _global_optf[OPT_1_CASTI_MODLITBY]);
 	}
-	Log("optf1 == `%s' (%d)\n", pom_MODL_OPTF[OPT_1_CASTI_MODLITBY], _global_optf[OPT_1_CASTI_MODLITBY]);
+	Log("optf%d == `%s' (%d)\n", OPT_1_CASTI_MODLITBY, pom_MODL_OPTF[OPT_1_CASTI_MODLITBY], _global_optf[OPT_1_CASTI_MODLITBY]);
 
 	/* option force 2 */
 	/*
 	i = atoi(pom_MODL_OPTF[OPT_2_HTML_EXPORT]);
 	_global_optf[OPT_2_HTML_EXPORT] = i;
-	Log("optf2 == `%s' (%d)\n", pom_MODL_OPTF[OPT_2_HTML_EXPORT], _global_optf[OPT_2_HTML_EXPORT]);
+	Log("optf%d == `%s' (%d)\n", OPT_2_HTML_EXPORT, pom_MODL_OPTF[OPT_2_HTML_EXPORT], _global_optf[OPT_2_HTML_EXPORT]);
 	*/
 	/* option force 2 -- jednotlivÈ komponenty */
 	_global_optf[OPT_2_HTML_EXPORT] = GLOBAL_OPTION_NULL;
@@ -8449,7 +8490,7 @@ void _rozparsuj_parametre_OPT(void){
 		}// for i
 		Log("optf[%d] vyskladan· == %d\n", OPT_2_HTML_EXPORT, _global_optf[OPT_2_HTML_EXPORT]);
 	}
-	Log("optf2 == `%s' (%d)\n", pom_MODL_OPTF[OPT_2_HTML_EXPORT], _global_optf[OPT_2_HTML_EXPORT]);
+	Log("optf%d == `%s' (%d)\n", OPT_2_HTML_EXPORT, pom_MODL_OPTF[OPT_2_HTML_EXPORT], _global_optf[OPT_2_HTML_EXPORT]);
 
 	/* option force 3 */
 	i = atoi(pom_MODL_OPTF[OPT_3_SPOLOCNA_CAST]);
@@ -8479,13 +8520,13 @@ void _rozparsuj_parametre_OPT(void){
 	if(i > MODL_SPOL_CAST_NEBRAT){
 		_global_optf[OPT_3_SPOLOCNA_CAST] = MODL_SPOL_CAST_NEURCENA;
 	}
-	Log("optf3 == `%s' (%d)\n", pom_MODL_OPTF[OPT_3_SPOLOCNA_CAST], _global_optf[OPT_3_SPOLOCNA_CAST]);
+	Log("optf%d == `%s' (%d)\n", OPT_3_SPOLOCNA_CAST, pom_MODL_OPTF[OPT_3_SPOLOCNA_CAST], _global_optf[OPT_3_SPOLOCNA_CAST]);
 
 	/* option force 4 */
 	/*
 	i = atoi(pom_MODL_OPTF[OPT_4_OFFLINE_EXPORT]);
 	_global_optf[OPT_4_OFFLINE_EXPORT] = i;
-	Log("optf4 == `%s' (%d)\n", pom_MODL_OPTF[OPT_4_OFFLINE_EXPORT], _global_optf[OPT_4_OFFLINE_EXPORT]);
+	Log("optf%d == `%s' (%d)\n", OPT_4_OFFLINE_EXPORT, pom_MODL_OPTF[OPT_4_OFFLINE_EXPORT], _global_optf[OPT_4_OFFLINE_EXPORT]);
 	*/
 	/* option force 4 -- jednotlivÈ komponenty */
 	_global_optf[OPT_4_OFFLINE_EXPORT] = GLOBAL_OPTION_NULL;
@@ -8510,29 +8551,7 @@ void _rozparsuj_parametre_OPT(void){
 		}// for i
 		Log("optf[%d] vyskladan· == %d\n", OPT_4_OFFLINE_EXPORT, _global_optf[OPT_4_OFFLINE_EXPORT]);
 	}
-	Log("optf4 == `%s' (%d)\n", pom_MODL_OPTF[OPT_4_OFFLINE_EXPORT], _global_optf[OPT_4_OFFLINE_EXPORT]);
-
-	/* option force 0 */
-	if((pom_MODL_OPTF[OPT_0_VERSE_REF] == NULL) || (strlen(pom_MODL_OPTF[OPT_0_VERSE_REF]) < 1)){
-		i = GLOBAL_OPTION_NULL;
-	}
-	else if(equals(pom_MODL_OPTF[OPT_0_VERSE_REF], STR_OPT_0_NIC)){
-		i = OPT_0_NIC;
-	}
-	else if(equals(pom_MODL_OPTF[OPT_0_VERSE_REF], STR_OPT_0_VERSE)){
-		i = OPT_0_VERSE;
-	}
-	else if(equals(pom_MODL_OPTF[OPT_0_VERSE_REF], STR_OPT_0_REFERENCIE)){
-		i = OPT_0_REFERENCIE;
-	}
-	else if(equals(pom_MODL_OPTF[OPT_0_VERSE_REF], STR_OPT_0_VERSE_REFERENCIE)){
-		i = OPT_0_VERSE_REFERENCIE;
-	}
-	else{
-		i = atoi(pom_MODL_OPTF[OPT_0_VERSE_REF]);
-	}
-	_global_optf[OPT_0_VERSE_REF] = i;
-	Log("optf0 == `%s' (%d)\n", pom_MODL_OPTF[OPT_0_VERSE_REF], _global_optf[OPT_0_VERSE_REF]);
+	Log("optf%d == `%s' (%d)\n", OPT_4_OFFLINE_EXPORT, pom_MODL_OPTF[OPT_4_OFFLINE_EXPORT], _global_optf[OPT_4_OFFLINE_EXPORT]);
 
 	/* 2007-06-01: nasledovn· pas·û kontroluje, Ëi niektorÈ z options nie s˙ GLOBAL_OPTION_NULL */
 	/*             a z·roveÚ prÌpadne nastavÌ na default podæa jazyka */
@@ -11046,7 +11065,7 @@ short int getArgv(int argc, char **argv){
 				case '0': /* MODL_OPT0 */
 					/* parameter pridan˝ 2011-04-04 */
 					if(optarg != NULL){
-						mystrcpy(pom_MODL_OPT[OPT_0_VERSE_REF], optarg, SMALL);
+						mystrcpy(pom_MODL_OPT[OPT_0_SPECIALNE], optarg, SMALL);
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
 
@@ -11294,7 +11313,7 @@ short int getForm(void){
 		/* premenn· WWW_MODL_OPTi */
 		mystrcpy(local_str, WWW_PREFIX, SMALL);
 		switch(i){
-			case OPT_0_VERSE_REF:		strcat(local_str, STR_MODL_OPT0); break;
+			case OPT_0_SPECIALNE:		strcat(local_str, STR_MODL_OPT0); break;
 			case OPT_1_CASTI_MODLITBY:	strcat(local_str, STR_MODL_OPT1); break;
 			case OPT_2_HTML_EXPORT:		strcat(local_str, STR_MODL_OPT2); break;
 			case OPT_3_SPOLOCNA_CAST:	strcat(local_str, STR_MODL_OPT3); break;
@@ -11314,7 +11333,7 @@ short int getForm(void){
 		/* premenn· WWW_MODL_OPTFi */
 		mystrcpy(local_str, WWW_PREFIX, SMALL);
 		switch(i){
-			case OPT_0_VERSE_REF:		strcat(local_str, STR_MODL_OPTF0); break;
+			case OPT_0_SPECIALNE:		strcat(local_str, STR_MODL_OPTF0); break;
 			case OPT_1_CASTI_MODLITBY:	strcat(local_str, STR_MODL_OPTF1); break;
 			case OPT_2_HTML_EXPORT:		strcat(local_str, STR_MODL_OPTF2); break;
 			case OPT_3_SPOLOCNA_CAST:	strcat(local_str, STR_MODL_OPTF3); break;
@@ -11329,7 +11348,26 @@ short int getForm(void){
 		}
 	}/* for i */
 
-	/* 2011-04-11: force option 1 premennÈ -- jednotlivÈ bit-komponenty */
+	// 2011-04-13: force option 0 premennÈ -- jednotlivÈ bit-komponenty
+	Log("force option %d, jednotlivÈ bit-komponenty...\n", OPT_0_SPECIALNE);
+	for(i = 0; i < POCET_OPT_0_SPECIALNE; i++){
+		/* premenn· WWW_MODL_OPTF0_... */
+		mystrcpy(local_str, WWW_PREFIX, SMALL);
+		switch(i){
+			case 0: strcat(local_str, STR_MODL_OPTF0_VERSE); break;
+			case 1: strcat(local_str, STR_MODL_OPTF0_REF); break;
+		}/* switch(i) */
+		ptr = getenv(local_str);
+		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
+		 * lebo pom_... su inicializovane na STR_EMPTY */
+		if(ptr != NULL){
+			if(strcmp(ptr, STR_EMPTY) != 0)
+				mystrcpy(pom_MODL_OPTF_SPECIALNE[i], ptr, SMALL);
+		}
+	}/* for i */
+
+	// 2011-04-11: force option 1 premennÈ -- jednotlivÈ bit-komponenty
+	Log("force option %d, jednotlivÈ bit-komponenty...\n", OPT_1_CASTI_MODLITBY);
 	for(i = 0; i < POCET_OPT_1_CASTI_MODLITBY; i++){
 		/* premenn· WWW_MODL_OPTF1_... */
 		mystrcpy(local_str, WWW_PREFIX, SMALL);
@@ -12017,7 +12055,34 @@ short int parseQueryString(void){
 		}
 	}/* for j */
 
-	/* 2011-04-11: force option 1 premennÈ -- jednotlivÈ bit-komponenty */
+	// 2011-04-13: force option 0 premennÈ -- jednotlivÈ bit-komponenty
+	Log("force option %d, jednotlivÈ bit-komponenty...\n", OPT_0_SPECIALNE);
+	for(j = 0; j < POCET_OPT_0_SPECIALNE; j++){
+		Log("j == %d...\n", j);
+		mystrcpy(local_str, STR_EMPTY, SMALL);
+		switch(j){
+			case 0: strcat(local_str, STR_MODL_OPTF0_VERSE); break;
+			case 1: strcat(local_str, STR_MODL_OPTF0_REF); break;
+		}/* switch(j) */
+		/* premenn· WWW_MODL_OPTF0_... (nepovinn·), j = 0 aû POCET_OPT_0_SPECIALNE */
+		i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
+		Log("pok˙öam sa zistiù hodnotu parametra %s...\n", local_str);
+		while((equalsi(pom_MODL_OPTF[j], STR_EMPTY)) && (i < pocet)){
+			// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
+			if(equals(param[i].name, local_str)){
+				/* ide o parameter STR_MODL_OPTFj */
+				mystrcpy(pom_MODL_OPTF_SPECIALNE[j], param[i].val, SMALL);
+				Log("hodnota parametra %s je %s.\n", local_str, pom_MODL_OPTF_SPECIALNE[j]);
+			}
+			i++;
+		}
+		if(equalsi(pom_MODL_OPTF_SPECIALNE[j], STR_EMPTY)){
+			Log("Nebola zadan· premenn· %s (nevadÌ).\n", local_str);
+		}
+	}/* for j */
+
+	// 2011-04-11: force option 1 premennÈ -- jednotlivÈ bit-komponenty
+	Log("force option %d, jednotlivÈ bit-komponenty...\n", OPT_1_CASTI_MODLITBY);
 	for(j = 0; j < POCET_OPT_1_CASTI_MODLITBY; j++){
 		Log("j == %d...\n", j);
 		mystrcpy(local_str, STR_EMPTY, SMALL);
@@ -12702,7 +12767,7 @@ int main(int argc, char **argv){
 	 *
 	 * 2009-08-05: prerobenie ËÌtania jazyka (skopÌrovanÈ eöte na jedno vyööie miesto); uû by sa <title> malo vypisovaù pri generovanÌ inojazyËn˝ch modlitieb spr·vne
 	 */
-	_global_opt[OPT_0_VERSE_REF] = OPT_0_NIC;
+	_global_opt[OPT_0_SPECIALNE] = GLOBAL_OPTION_NULL;
 	_global_opt[OPT_1_CASTI_MODLITBY] = GLOBAL_OPTION_NULL;
 	_global_opt[OPT_3_SPOLOCNA_CAST] = MODL_SPOL_CAST_NEURCENA;
 	_global_opt[OPT_4_OFFLINE_EXPORT] = NIE;

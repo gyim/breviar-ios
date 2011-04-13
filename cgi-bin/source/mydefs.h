@@ -452,7 +452,25 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPTF4 "of4"
 #endif
 
-/* pre force option 1 jednotlivé parciálne vo¾by */
+/* pre force option 0 jednotlivé bit-komponenty (parciálne vo¾by) */
+
+// èíslovanie (èísla) veršov
+#define MODL_OPTF0_VERSE 61
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF0_VERSE "MODL_OPTF0_VERSE"
+#else
+	#define STR_MODL_OPTF0_VERSE "of0v"
+#endif
+
+// referencie (biblické odkazy)
+#define MODL_OPTF0_REF 62
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF0_REF "MODL_OPTF0_REF"
+#else
+	#define STR_MODL_OPTF0_REF "of0r"
+#endif
+
+/* pre force option 1 jednotlivé bit-komponenty (parciálne vo¾by) */
 
 // evanjeliové chválospevy (benediktus, magnifikat, nunk dimittis)
 #define MODL_OPTF1_CHV 71
