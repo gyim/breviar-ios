@@ -7109,9 +7109,8 @@ void _export_rozbor_dna(short int typ){
 			Log("_global_opt_batch_monthly == %d [2011-04-13]\n", _global_opt_batch_monthly);
 			Log("export_monthly_druh == %d [2011-04-13]\n", export_monthly_druh);
 
-			if((_global_opt_batch_monthly == ANO) && (export_monthly_druh > 2)
-				&& ((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_VIAC_DNI_TXT))
-				){ /* 2009-08-26: doplnené; 2011-04-13: postaèuje, aby to bolo na viac ako jeden deò, už sa kalendár nevypisuje; podmienka aj hore (tu je prakticky zbytoèná) */
+			if((_global_opt_batch_monthly == ANO) && (export_monthly_druh > 2)){
+				/* 2009-08-26: doplnené; 2011-04-13: podmienka rozšírená vyššie ((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_VIAC_DNI_TXT)) */
 				Log("pre tento typ exportu sa kalendárik negeneruje\n");
 			}
 			else{
