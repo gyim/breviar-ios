@@ -395,7 +395,7 @@ const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1] =
 ,"všeobecnı [pre Slovensko]"
 ,""
 ,""
-,"pre Kongregáciu najsvätejšieho Vykupite¾a — redemptoristov (CSsR)"
+,"pre Kongregáciu najsv. Vykupite¾a — redemptoristov (CSsR)" // bol ve¾mi dlhı combo-box, keï bolo: "pre Kongregáciu najsvätejšieho Vykupite¾a — redemptoristov (CSsR)"
 ,""
 ,"pre Spoloènos Boieho Slova — verbistov (SVD)"
 ,"pre Spoloènos Jeišovu — jezuitov (SJ)"
@@ -1583,13 +1583,13 @@ const char *html_text_kalendar_miestny[POCET_JAZYKOV + 1] =
  "kalendáø obecní nebo místní: ",
  "hu_"
 };
-const char *html_text_kalendar_explain[POCET_JAZYKOV + 1] = 
-{"(Je moné zvoli miestny kalendár niektorej <i>reho¾nej rodiny, rádu, inštitútu</i>.)", 
- "xxx", 
- "xxx", 
+const char *html_text_kalendar_miestny_explain[POCET_JAZYKOV + 1] = 
+{"Je moné zvoli miestny kalendár niektorej reho¾nej rodiny, rádu, inštitútu.", 
+ "", 
+ "", 
  "",
  "", 
- "xxx", 
+ "", 
  "hu_"
 };
 

@@ -599,6 +599,7 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 
 #define HTML_SPAN_NORMAL    "span class=\"normal\""
 #define HTML_SPAN_BOLD      "span class=\"bold\""
+#define HTML_SPAN_BOLD_IT   "span class=\"boldit\""
 #define HTML_SPAN_RED       "span class=\"red\""
 #define HTML_SPAN_RED_BOLD  "span class=\"redbold\""
 #define HTML_SPAN_BLUE      "span class=\"blue\""
