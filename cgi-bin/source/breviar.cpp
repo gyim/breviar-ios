@@ -4951,7 +4951,8 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 #undef BUTTON_SKRATKY_DALSIE_20070913
 #ifdef BUTTON_SKRATKY_DALSIE_20070913
 		/* 2009-08-11: zosilnen· podmienka */
-		if((_global_opt[OPT_1_CASTI_MODLITBY] != ANO) && (_global_opt_batch_monthly == NIE)){
+		// 2011-04-13: ak by sa chcela t·to podmienka pouûÌvaù, treba asi do option 1 pridaù ÔalöÌ bit (hovoriaci o tom, Ëi zobraziù aj tieto odkazy)
+		if(((_global_opt[OPT_1_CASTI_MODLITBY] & nov˝ bit) != nov˝ bit) && (_global_opt_batch_monthly == NIE)){
 			// ak je to na zaËiatku, teda v tom riadku, kde ˙plne pÙvodne boli Inv., RannÈ chv·ly atÔ., netreba vloûiù niË
 			// ak je to na konci, treba teraz vloûiù zalomenie po vöetk˝ch buttonoch
 
@@ -5084,7 +5085,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 				// ak je to na zaËiatku, treba teraz vloûiù zalomenie po öpeci·lnom riadku pred buttonmi
 				Export("\n</tr>\n<tr valign=\"%s\">\n<td colspan=\"6\">&nbsp;</td>\n", VALIGN_DRUHY);
 			}
-		} /* if(_global_opt[OPT_1_CASTI_MODLITBY] != ANO) */
+		} /* if(_global_opt[OPT_1_CASTI_MODLITBY]) */
 #endif // BUTTON_SKRATKY_DALSIE_20070913
 
 		/* oddelenie */
@@ -7104,6 +7105,9 @@ void _export_rozbor_dna(short int typ){
 				Export("</p></center>\n");
 			}/* if(_global_linky == ANO) */
 
+			Log("_global_opt_batch_monthly == %d [2011-04-13]\n", _global_opt_batch_monthly);
+			Log("export_monthly_druh == %d [2011-04-13]\n", export_monthly_druh);
+
 			if((_global_opt_batch_monthly == ANO) && (export_monthly_druh > 2)){ /* 2009-08-26: doplnenÈ */
 				Log("pre tento typ exportu sa kalend·rik negeneruje\n");
 			}
@@ -8717,7 +8721,9 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 			return;
 		}/* p != MODL_NEURCENA */
 		if((_global_opt[OPT_4_OFFLINE_EXPORT] & BIT_OPT_4_MESIAC_RIADOK) != BIT_OPT_4_MESIAC_RIADOK){
-			/* 2005-03-22: Toto zobrazujeme len pre isty typ exportu; 2007-06-01 upravenÈ, aby sa neriadilo opt1, ale opt6 */
+			/* 2005-03-22: Toto zobrazujeme len pre isty typ exportu; 2007-06-01 upravenÈ, aby sa neriadilo opt1, ale opt6 
+			 * 2011-04-13: podmienka sa riadi jedn˝m z bitov option 4
+			 */
 			Log("/* teraz vypisujem heading, rok %d */\n", r);
 			sprintf(pom, (char *)html_text_Rok_x[_global_jazyk], r);
 			_export_heading_center(pom);
@@ -8726,8 +8732,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 			Export("<center>\n");
 			/* najprv vygenerujem zoznam liniek (mesiace) */
 			for(m = MES_JAN; m <= MES_DEC; m++){
-				Export("<a href=\"#mesiac%d\">%s</a>&nbsp;\n",
-					m, nazov_MESIACA(m));
+				Export("<a href=\"#mesiac%d\">%s</a>&nbsp;\n", m, nazov_MESIACA(m));
 			}
 			/* teraz linku na #explain -- vysvetlivky */
 
@@ -8748,10 +8753,11 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 			*/
 			if((_global_opt[OPT_4_OFFLINE_EXPORT] & BIT_OPT_4_MESIAC_RIADOK) != BIT_OPT_4_MESIAC_RIADOK){
 				/* 2005-03-22: Toto zobrazujeme len pre isty typ exportu */
-				/* nezobrazovalo sa korektne; pridane </a>, 2003-07-02; 2007-06-01 upravenÈ, aby sa neriadilo opt1, ale opt6 */
+				/* nezobrazovalo sa korektne; pridane </a>, 2003-07-02; 2007-06-01 upravenÈ, aby sa neriadilo opt1, ale opt6 
+				 * 2011-04-13: podmienka sa riadi jedn˝m z bitov option 4
+				 */
 				Export("\n\n<a name=\"mesiac%d\"></a>", m);
-				Export("\n<p><center><"HTML_SPAN_RED_BOLD">%s</span>",
-					nazov_MESIACA(m));
+				Export("\n<p><center><"HTML_SPAN_RED_BOLD">%s</span>", nazov_MESIACA(m));
 				Export(" (<a href=\"#rok\">%s</a>)</center>\n", html_text_zoznam_mesiacov[_global_jazyk]);
 			}
 			rozbor_mesiaca(m + 1, r);
@@ -8760,43 +8766,43 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 		VYSVETLIVKY();
 
 		if((_global_linky == ANO) && ((_global_opt[OPT_4_OFFLINE_EXPORT] & BIT_OPT_4_MESIAC_RIADOK) != BIT_OPT_4_MESIAC_RIADOK)){
-		/* 2005-03-22: Upravene; podmienka zosilnena (and _global_opt[OPT_1_CASTI_MODLITBY] == NIE); 2007-06-01 upravenÈ, aby sa neriadilo opt1, ale opt6 */
-		/* pridane 13/04/2000A.D. */
-		/* pridane 25/02/2000A.D. -- buttony Predchadzajuci, Nasledujuci rok */
-		Export("\n<br>\n<center><table>\n");
-		/* predosly rok -- button */
-		Export("<td align=\"right\"><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n",
-			script_name,
-			STR_QUERY_TYPE, STR_PRM_DATUM,
-			STR_DEN, STR_VSETKY_DNI,
-			STR_MESIAC, STR_VSETKY_MESIACE,
-			STR_ROK, r - 1,
-			pom2);
-		/* 2003-07-16; << zmenene na &lt;&lt; 2007-03-19: zmenenÈ na HTML_LEFT_ARROW */
-		Export("<"HTML_FORM_INPUT_SUBMIT0" value=\""HTML_LEFT_ARROW" %d (", r - 1);
-		Export((char *)html_button_predchadzajuci_[_global_jazyk]);
-		Export(" ");
-		Export((char *)html_text_rok[_global_jazyk]);
-		Export(" )\">\n");
-		Export("</form></td>\n");
+			/* 2005-03-22: Upravene; podmienka zosilnena (and _global_opt[OPT_1_CASTI_MODLITBY] == NIE); 2007-06-01 upravenÈ, aby sa neriadilo opt1, ale opt6 */
+			/* pridane 13/04/2000A.D. */
+			/* pridane 25/02/2000A.D. -- buttony Predchadzajuci, Nasledujuci rok */
+			Export("\n<br>\n<center><table>\n");
+			/* predosly rok -- button */
+			Export("<td align=\"right\"><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n",
+				script_name,
+				STR_QUERY_TYPE, STR_PRM_DATUM,
+				STR_DEN, STR_VSETKY_DNI,
+				STR_MESIAC, STR_VSETKY_MESIACE,
+				STR_ROK, r - 1,
+				pom2);
+			/* 2003-07-16; << zmenene na &lt;&lt; 2007-03-19: zmenenÈ na HTML_LEFT_ARROW */
+			Export("<"HTML_FORM_INPUT_SUBMIT0" value=\""HTML_LEFT_ARROW" %d (", r - 1);
+			Export((char *)html_button_predchadzajuci_[_global_jazyk]);
+			Export(" ");
+			Export((char *)html_text_rok[_global_jazyk]);
+			Export(" )\">\n");
+			Export("</form></td>\n");
 
-		/* nasledujuci rok -- button */
-		Export("<td align=\"right\"><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n",
-			script_name,
-			STR_QUERY_TYPE, STR_PRM_DATUM,
-			STR_DEN, STR_VSETKY_DNI,
-			STR_MESIAC, STR_VSETKY_MESIACE,
-			STR_ROK, r + 1,
-			pom2);
-		/* 2003-07-16; >> zmenene na &gt;&gt; 2007-03-19: zmenenÈ na HTML_RIGHT_ARROW */
-		Export("<"HTML_FORM_INPUT_SUBMIT0" value=\"(");
-		Export((char *)html_button_nasledujuci_[_global_jazyk]);
-		Export(" ");
-		Export((char *)html_text_rok[_global_jazyk]);
-		Export(" ) %d "HTML_RIGHT_ARROW"\">\n", r + 1);
-		Export("</form></td>\n");
-		/* koniec buttonov */
-		Export("</table></center>\n");
+			/* nasledujuci rok -- button */
+			Export("<td align=\"right\"><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n",
+				script_name,
+				STR_QUERY_TYPE, STR_PRM_DATUM,
+				STR_DEN, STR_VSETKY_DNI,
+				STR_MESIAC, STR_VSETKY_MESIACE,
+				STR_ROK, r + 1,
+				pom2);
+			/* 2003-07-16; >> zmenene na &gt;&gt; 2007-03-19: zmenenÈ na HTML_RIGHT_ARROW */
+			Export("<"HTML_FORM_INPUT_SUBMIT0" value=\"(");
+			Export((char *)html_button_nasledujuci_[_global_jazyk]);
+			Export(" ");
+			Export((char *)html_text_rok[_global_jazyk]);
+			Export(" ) %d "HTML_RIGHT_ARROW"\">\n", r + 1);
+			Export("</form></td>\n");
+			/* koniec buttonov */
+			Export("</table></center>\n");
 		}/* if(_global_linky == ANO) */
 	}/* m == VSETKY_MESIACE */
 	else{/* m != VSETKY_MESIACE */
@@ -8837,7 +8843,9 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 
 			/* 2009-08-12: podmienka upraven·; export aj pre batch mÛd mesaËn˝ */
 			if(((_global_linky == ANO) && ((_global_opt[OPT_4_OFFLINE_EXPORT] & BIT_OPT_4_MESIAC_RIADOK) != BIT_OPT_4_MESIAC_RIADOK)) || ((_global_opt_batch_monthly == ANO) && (export_monthly_druh >= 2))){
-			/* 2005-03-22: Upravene; podmienka zosilnena (and _global_opt[OPT_1_CASTI_MODLITBY] == NIE); 2007-06-01 upravenÈ, aby sa neriadilo opt1, ale opt6 */
+			/* 2005-03-22: Upravene; podmienka zosilnena (and _global_opt[OPT_1_CASTI_MODLITBY] == NIE); 2007-06-01 upravenÈ, aby sa neriadilo opt1, ale opt6 
+			 * 2011-04-13: podmienka sa riadi jedn˝m z bitov option 4
+			 */
 				/* pridane 13/04/2000A.D. */
 				/* pridane 25/02/2000A.D. -- buttony Predchadzajuci, Nasledujuci mesiac */
 				if(som_v_tabulke == ANO)
@@ -9810,9 +9818,11 @@ void _main_analyza_roku(char *rok){
 	Export("\n</center>\n");
 #endif
 	if((_global_linky == ANO) && ((_global_opt[OPT_4_OFFLINE_EXPORT] & BIT_OPT_4_MESIAC_RIADOK) != BIT_OPT_4_MESIAC_RIADOK)){
-	/* 2005-03-22: Upravene; podmienka zosilnena (and _global_opt[OPT_1_CASTI_MODLITBY] == NIE); 2007-06-01 upravenÈ, aby sa neriadilo opt1, ale opt6 */
-	/* pridane 13/04/2000A.D. */
-	/* pridane 21/02/2000A.D. -- buttony Predchadzajuci, Nasledujuci rok */
+		/* 2005-03-22: Upravene; podmienka zosilnena (and _global_opt[OPT_1_CASTI_MODLITBY] == NIE); 2007-06-01 upravenÈ, aby sa neriadilo opt1, ale opt6 
+		 * 2011-04-13: podmienka sa riadi jedn˝m z bitov option 4
+		 */
+		/* pridane 13/04/2000A.D. */
+		/* pridane 21/02/2000A.D. -- buttony Predchadzajuci, Nasledujuci rok */
 		ExportROK("<table align=\"center\">\n");
 		/* predosly rok -- button */
 		Export("<td align=\"right\"><form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n",
