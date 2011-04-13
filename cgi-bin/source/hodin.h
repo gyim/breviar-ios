@@ -332,7 +332,7 @@ const char *nazov_OBD[POCET_OBDOBI + 1] =
 {"ADV1", "ADV2", "OKTNAR",
  "VIAN1", "VIAN2", "OCR",
  "POST1", "VTYZ", 
- "VTROJ", "VNOKT", "VN1", "DRUHA_VELKONOCNA_NEDELA"
+ "VTROJ", "VNOKT", "VN1", "VN2"
 };
 
 /* filenames - same for all languages (based on Slovak) */
@@ -1115,12 +1115,12 @@ const char *html_text_pohyblive9[POCET_JAZYKOV + 1] = {
 };
 
 const char *html_text_pohyblive10[POCET_JAZYKOV + 1] = {
-	"<td align=center><a href=\"#explain\">OCR<br>po<br>VELKONOCNA_NEDELA</a></td>\n",
-	"<td align=center><a href=\"#explain\">OCR<br>po<br>VELKONOCNA_NEDELA</a></td>\n", 
+	"<td align=center><a href=\"#explain\">OCR<br>po<br>VN</a></td>\n",
+	"<td align=center><a href=\"#explain\">OCR<br>po<br>VN</a></td>\n", 
 	"<td align=center>...</td>\n",
 	"<td align=center>...</td>\n",
 	"",
-	"<td align=center><a href=\"#explain\">OCR<br>po<br>VELKONOCNA_NEDELA</a></td>\n",
+	"<td align=center><a href=\"#explain\">OCR<br>po<br>VN</a></td>\n",
 	"hu_<td align=center>...</td>\n"
 };
 

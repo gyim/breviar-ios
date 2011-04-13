@@ -9977,7 +9977,7 @@ void _main_tabulka(char *rok_from, char *rok_to, char *tab_linky){
 			Export("%s", _global_link);
 		Export("</td>\n");
 
-		/* nedelne litery */
+		/* nede¾né litery */
 		Export("<td align=center>\n");
 		if(_global_r.prestupny == YES)
 			Export("%c %c", _global_r.p1, _global_r.p2);
@@ -9985,20 +9985,20 @@ void _main_tabulka(char *rok_from, char *rok_to, char *tab_linky){
 			Export("%c", _global_r.p1);
 		Export("</td>\n");
 	
-		/* nedelne litery */
+		/* nede¾ný cyklus */
 		Export("<td>\n");
 		datum = prva_adventna_nedela(year - 1);
 		i = nedelny_cyklus(datum.den, datum.mesiac, year - 1);
 		Export("%c-%c", 'A' + i, 'A' + ((i + 1) MOD 3));
 		Export("</td>\n");
 	
-		/* aliasy -- vyznacne dni */
+		/* aliasy -- význaèné dni liturgického roka */
 		for(i = 0; i < POCET_ALIASOV; i++){
-			if(i == PRVA_ADVENTNA_NEDELA){
+			if(i == idx_PRVA_ADVENTNA_NEDELA){
 				/* pred prvou adv. nedelou, po zoslani ducha sv. ide vypis, aky tyzden obdobia cez rok ide po velkej noci */
 				Export("<td align=right>%d.</td>", _global_r.tyzden_ocr_po_vn);
 			}
-			else if(i == POPOLCOVA_STREDA){
+			else if(i == idx_POPOLCOVA_STREDA){
 				/* pred popolcovou stredou, aky tyzden obdobia cez rok ide pred postom */
 				Export("<td align=center>%d</td>", _global_r.tyzden_ocr_pred_po);
 			}
