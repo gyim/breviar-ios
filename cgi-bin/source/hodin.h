@@ -1365,25 +1365,6 @@ const char *html_text_zobrazit_prve_vespery_explain[POCET_JAZYKOV + 1] =
  "hu_"
 };
 
-const char *html_text_zobrazit_vigiliu[POCET_JAZYKOV + 1] = 
-{"predåené slávenie vigílie pre posvätné èítanie (na nedele, slávnosti a sviatky)", 
- "prodlouené slavení vigilie pro modlitbu se ètením (pro nedìle, slavnosti a svátky)", 
- "celebrating of vigily for prayer with readings (for Sundays, solemnitas and festivus)", 
- "",
- "",
- "prodlouené slavení vigilie pro modlitbu se ètením (pro nedìle, slavnosti a svátky)", 
- "hu_"
-};
-const char *html_text_zobrazit_vigiliu_explain[POCET_JAZYKOV + 1] = 
-{"Tí, èo chcú pod¾a tradície predåi vigíliu nedele, slávnosti alebo sviatku, èo sa ve¾mi odporúèa, najprv recitujú posvätné èítanie; po oboch èítaniach, pred hymnom Te Deum, pridávajú sa chválospevy a evanjelium.", 
- "Ti, kteøí chtìjí podle tradice prodlouit vigilii nedìle, slavnosti nebo svátku, co se velmi doporuèuje, recitují nejprve ètení; po obou èteních, pøed hymnem Te Deum, se pøidávají chvalozpìvy a evangelium.", 
- "xxx", 
- "",
- "", 
- "Ti, kteøí chtìjí podle tradice prodlouit vigilii nedìle, slavnosti nebo svátku, co se velmi doporuèuje, recitují nejprve ètení; po obou èteních, pøed hymnem Te Deum, se pøidávají chvalozpìvy a evangelium.", 
- "hu_"
-};
-
 const char *html_text_zobrazit_option0[POCET_JAZYKOV + 1] = 
 {"v texte modlitieb zobrazi: ", 
  "v textu modliteb zobrazit: ", 
@@ -1414,11 +1395,11 @@ const char *html_text_zobrazit_option0_explain2[POCET_JAZYKOV + 1] =
 
 const char *html_text_option1_chvalospevy[POCET_JAZYKOV + 1] = 
 {"evanjeliové chválospevy (Benediktus, Magnifikat, Nunk dimittis)", 
- "kantika (Mariino, Zachariášovo, Simeonovo) a Te Deum", 
- "canticles (Benedictus, Magnificat, Nunc dimittis)", 
+ "evangelijní kantika (Mariino, Zachariášovo, Simeonovo)", 
+ "Gospel canticles (Benedictus, Magnificat, Nunc dimittis)", 
  "",
  "",
- "chvalozpìvy (Benedictus, Magnificat, Nunc dimittis)", 
+ "evangelijní chvalozpìvy (Benedictus, Magnificat, Nunc dimittis)", 
  "hu_"
 };
 const char *html_text_option1_chvalospevy_explain[POCET_JAZYKOV + 1] = 
@@ -1544,6 +1525,25 @@ const char *html_text_option1_skryt_popis_svaty_explain[POCET_JAZYKOV + 1] =
  "", 
  "Modlitby ke cti svatıch obsahují struènı ivotopis svatého, u svátku je to struènı popis svátku a podobnì. Tyto charakteristiky pro struènost nazıváme popis.",
  "hu_ (we will translate it later)"
+};
+
+const char *html_text_option1_vigilia[POCET_JAZYKOV + 1] = 
+{"predåené slávenie vigílie pre posvätné èítanie (na nedele, slávnosti a sviatky)", 
+ "prodlouené slavení vigilie pro modlitbu se ètením (pro nedìle, slavnosti a svátky)", 
+ "celebrating of vigily for prayer with readings (for Sundays, solemnitas and festivus)", 
+ "",
+ "",
+ "prodlouené slavení vigilie pro modlitbu se ètením (pro nedìle, slavnosti a svátky)", 
+ "hu_"
+};
+const char *html_text_option1_vigilia_explain[POCET_JAZYKOV + 1] = 
+{"Tí, èo chcú pod¾a tradície predåi vigíliu nedele, slávnosti alebo sviatku, èo sa ve¾mi odporúèa, najprv recitujú posvätné èítanie; po oboch èítaniach, pred hymnom Te Deum, pridávajú sa chválospevy a evanjelium.", 
+ "Ti, kteøí chtìjí podle tradice prodlouit vigilii nedìle, slavnosti nebo svátku, co se velmi doporuèuje, recitují nejprve ètení; po obou èteních, pøed hymnem Te Deum, se pøidávají chvalozpìvy a evangelium.", 
+ "xxx", 
+ "",
+ "", 
+ "Ti, kteøí chtìjí podle tradice prodlouit vigilii nedìle, slavnosti nebo svátku, co se velmi doporuèuje, recitují nejprve ètení; po obou èteních, pøed hymnem Te Deum, se pøidávají chvalozpìvy a evangelium.", 
+ "hu_"
 };
 
 const char *html_text_option1_zalmy_zo_sviatku[POCET_JAZYKOV + 1] = 
