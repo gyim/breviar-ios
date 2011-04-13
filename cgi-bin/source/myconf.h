@@ -45,9 +45,9 @@ extern short int cfg_option_default[POCET_GLOBAL_OPT][POCET_JAZYKOV + 1];
 
 const short int cfg_option_default_PROG[POCET_GLOBAL_OPT] = 
 #ifdef OS_Windows_Ruby
-{3, 64, 1, 0, 1};
+{3, 64, 0, 0, 0};
 #else
-{0, 95, 1, 0, 1};
+{0, 31, 0, 0, 0};
 #endif
 
 void readConfig(void);
