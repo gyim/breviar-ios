@@ -7175,22 +7175,24 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
  * 2011-03-18: doplnenÈ exportovanie parametra k (_global_kalendar)
  * 2011-03-23: upravenÈ: negenerovaù veöpery pre soboty, ak je nastavenÈ (_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTON_PRVE_VESPERY) == BIT_OPT_2_BUTTON_PRVE_VESPERY (hoci sa parameter o8 zatiaæ neexportuje)
  * 2011-04-12: keÔûe _global_opt 5 sa st·va s˙Ëasùou _global_opt 1, nie je potrebnÈ nastaviù o5; je vöak potrebnÈ spr·vne upraviù o1
+ * 2011-04-13: doplnenÈ exportovanie ch˝baj˙cich option 0 aû 4
  */
 	FILE *batch_export_file = NULL;
 	char parameter_M[SMALL] = STR_EMPTY; // parametre pre v˝slednÈ HTML (parameter 'M' a parametre pre odkazy na s˙bory, napr. 'I')
 	char parameter_I[SMALL] = STR_EMPTY;
 	char poradie_svateho[SMALL] = STR_EMPTY; // pre export_monthly_druh >= 1
 	char _local_export_navig_hore[SMALL] = STR_EMPTY;
-	short int parameter_o1_mcd_doplnkova; // parameter o1 (_global_opt 1) pre modlitbu cez deÚ (doplnkov· psalmÛdia)
+	short int _global_opt_casti_modlitby_orig; // parameter o1 (_global_opt 1) pre modlitbu cez deÚ (doplnkov· psalmÛdia)
 	char export_doplnkova_psalmodia[SMALL] = STR_EMPTY; // reùazec pre alternatÌvny s˙bor modlitby cez deÚ obsahuj˙ci doplnkov˙ psalmÛdiu
 	char export_kalendar[SMALL] = STR_EMPTY; // reùazec pre kalend·r
 
-	/* 2011-04-12: nastavenie parametra o1 pre beûn˙ a doplnkov˙ psalmÛdiu; parameter o1 oËistÌme a parameter_o1_mcd_doplnkova bude obsahovaù aj bit pre doplnkov˙ psalmÛdiu */
+	_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY]; // backup pÙvodnej hodnoty
+	/* 2011-04-12: nastavenie parametra o1 pre beûn˙ a doplnkov˙ psalmÛdiu; parameter o1 oËistÌme a _global_opt_casti_modlitby_orig bude obsahovaù aj bit pre doplnkov˙ psalmÛdiu */
 	if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) == BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA){
 		Log("Pre option 1 odstraÚujem bit pre 'doplnkov˙ psalmÛdiu', pomocn· premenn· to bude obsahovaù\n");
 		_global_opt[OPT_1_CASTI_MODLITBY] -= BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA;
+		_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY] + BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA;
 	}
-	parameter_o1_mcd_doplnkova = _global_opt[OPT_1_CASTI_MODLITBY] + BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA;
 	/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 	 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 	 * 2011-03-18: pouûitÈ z in˝ch miest aj v execute_batch_command() -- exportovanie parametra k (_global_kalendar)
@@ -7250,10 +7252,13 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 			/* 2011-03-14: nastavenie parametra o5 (_global_opt 5) pre modlitbu cez deÚ (beûn· alebo doplnkov· psalmÛdia) 
 			 * 2011-03-16: upravenÈ tak, ûe je to len fakultatÌvne (ako odliön˝ s˙bor)
 			 * 2011-03-23: upravenÈ: negenerovaù veöpery pre soboty, ak je nastavenÈ (_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTON_PRVE_VESPERY) == BIT_OPT_2_BUTTON_PRVE_VESPERY
-			 * 2011-04-12: pouûÌva sa option 1 (jej upraven· hodnota parameter_o1_mcd_doplnkova)
+			 * 2011-04-12: pouûÌva sa option 1 (jej upraven· hodnota _global_opt_casti_modlitby_orig)
+			 * 2011-04-13: nemÙûeme porovn·vaù s _global_opt[1] (bola oËisten·), ale s _global_opt_casti_modlitby_orig (obsahuje pÙvodn˙ hodnotu)
 			 */
-			if(((_global_opt[1] & BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) == BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
-				fprintf(batch_file, "%s%d%cd.htm -1%d -3%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], parameter_o1_mcd_doplnkova /* _global_opt[OPT_1_CASTI_MODLITBY] */, _global_opt[OPT_3_SPOLOCNA_CAST], a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); /* modlitba `i' */
+			if(((_global_opt_casti_modlitby_orig & BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) == BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
+				fprintf(batch_file, "%s%d%cd.htm -0%d -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], 
+					_global_opt[OPT_0_SPECIALNE], _global_opt_casti_modlitby_orig /* _global_opt[OPT_1_CASTI_MODLITBY] */, _global_opt[OPT_2_HTML_EXPORT], _global_opt[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_4_OFFLINE_EXPORT], 
+					a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); /* modlitba `i' */
 				if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
 					sprintf(export_doplnkova_psalmodia, " (<a href=\""FILENAME_EXPORT_DATE_SIMPLE"_%d%cd.htm\">alt</a>)", _global_den.rok % 100, _global_den.mesiac, _global_den.den, a, char_modlitby[i]);
 				else /* EXPORT_DATE_FULL */
@@ -7262,7 +7267,9 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 			else{
 				strcpy(export_doplnkova_psalmodia, STR_EMPTY);
 			}
-			fprintf(batch_file, "%s%d%c.htm -1%d -3%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[OPT_3_SPOLOCNA_CAST], a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); /* modlitba `i' */
+			fprintf(batch_file, "%s%d%c.htm -0%d -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], 
+				_global_opt[OPT_0_SPECIALNE], _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[OPT_2_HTML_EXPORT], _global_opt[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_4_OFFLINE_EXPORT], 
+				a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); /* modlitba `i' */
 			if(export_monthly_druh == 1){
 				if(a > 0)
 					sprintf(poradie_svateho, "/%d", a);
@@ -7282,15 +7289,20 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 			/* 2011-03-23: upravenÈ: negenerovaù veöpery pre soboty, ak je nastavenÈ (_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTON_PRVE_VESPERY) == BIT_OPT_2_BUTTON_PRVE_VESPERY */
 			if(((a != 4) || (a == 4 && (i != MODL_VESPERY && i != MODL_KOMPLETORIUM))) && !(((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTON_PRVE_VESPERY) == BIT_OPT_2_BUTTON_PRVE_VESPERY) && (_global_den.denvt == DEN_SOBOTA))){ /* 2006-01-31-TUTOLA; 2008-04-09 presunutÈ */
 				if(_global_opt_append == YES){
-					fprintf(batch_file, "%s -1%d -3%d -x%d -p%s -j%s%s\n", batch_command, _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[OPT_3_SPOLOCNA_CAST], a, str_modlitby[i], skratka_jazyka[_global_jazyk], export_kalendar); /* modlitba `i' */
+					fprintf(batch_file, "%s -0%d -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s\n", batch_command, 
+						_global_opt[OPT_0_SPECIALNE], _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[OPT_2_HTML_EXPORT], _global_opt[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_4_OFFLINE_EXPORT], 
+						a, str_modlitby[i], skratka_jazyka[_global_jazyk], export_kalendar); /* modlitba `i' */
 				}/* endif _global_opt_append == YES */
 				else{
 					/* 2011-03-14: nastavenie parametra o5 (_global_opt 5) pre modlitbu cez deÚ (beûn· alebo doplnkov· psalmÛdia) 
 					 * 2011-03-16: upravenÈ tak, ûe je to len fakultatÌvne (ako odliön˝ s˙bor)
-					 * 2011-04-12: pouûÌva sa option 1 (jej upraven· hodnota parameter_o1_mcd_doplnkova)
+					 * 2011-04-12: pouûÌva sa option 1 (jej upraven· hodnota _global_opt_casti_modlitby_orig)
+					 * 2011-04-13: nemÙûeme porovn·vaù s _global_opt[1] (bola oËisten·), ale s _global_opt_casti_modlitby_orig (obsahuje pÙvodn˙ hodnotu)
 					 */
-					if(((_global_opt[1] & BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) == BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
-						fprintf(batch_file, "%s%d%cd.htm -1%d -3%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], parameter_o1_mcd_doplnkova /* _global_opt[OPT_1_CASTI_MODLITBY] */, _global_opt[OPT_3_SPOLOCNA_CAST], a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); /* modlitba `i' */
+					if(((_global_opt_casti_modlitby_orig & BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) == BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
+						fprintf(batch_file, "%s%d%cd.htm -0%d -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], 
+							_global_opt[OPT_0_SPECIALNE], _global_opt_casti_modlitby_orig /* _global_opt[OPT_1_CASTI_MODLITBY] */, _global_opt[OPT_2_HTML_EXPORT], _global_opt[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_4_OFFLINE_EXPORT], 
+							a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); /* modlitba `i' */
 						if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
 							sprintf(export_doplnkova_psalmodia, " (<a href=\""FILENAME_EXPORT_DATE_SIMPLE"_%d%cd.htm\">alt</a>)", _global_den.rok % 100, _global_den.mesiac, _global_den.den, a, char_modlitby[i]);
 						else /* EXPORT_DATE_FULL */
@@ -7300,7 +7312,9 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 						strcpy(export_doplnkova_psalmodia, STR_EMPTY);
 					}
 					/* 2009-08-03: doplnen· moûnosù exportovaù parameter -M ak exportuje batch mÛd pre jednotlivÈ mesiace kvÙli hlaviËke jednotlivej modlitby */
-					fprintf(batch_file, "%s%d%c.htm -1%d -3%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[OPT_3_SPOLOCNA_CAST], a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); /* modlitba `i' */
+					fprintf(batch_file, "%s%d%c.htm -0%d -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], 
+						_global_opt[OPT_0_SPECIALNE], _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[OPT_2_HTML_EXPORT], _global_opt[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_4_OFFLINE_EXPORT], 
+						a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); /* modlitba `i' */
 					// fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%d%c.htm\">%s</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a, char_modlitby[i], nazov_modlitby(i));
 					/* 2008-11-29: rozliËn˝ export */
 					if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
@@ -7312,6 +7326,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 		}
 		fprintf(batch_export_file, "</li>\n");
 	}/* else if(export_monthly_druh >= 1) */
+	_global_opt[OPT_1_CASTI_MODLITBY] = _global_opt_casti_modlitby_orig; // restore pÙvodnej hodnoty
 }/* execute_batch_command() */
 
 void _export_rozbor_dna_batch(short int typ, short int modlitba = MODL_NEURCENA, short int d_from_m_from_r_from = 0){
@@ -7542,8 +7557,12 @@ void _export_rozbor_dna_mesiaca_batch(short int d, short int m, short int r){
 		batch_export_file = batch_html_file;
 		mystrcpy(parameter_M, STR_EMPTY, SMALL);
 	}/* else if(_global_opt_batch_monthly == ANO) */
+
 	// samotnÈ vytlaËenie prÌkazu
-	fprintf(batch_file, "%s -1%d -3%d -j%s%s%s\n", batch_command, _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[OPT_3_SPOLOCNA_CAST], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar);
+	/* 2011-04-13: doplnenÈ exportovanie ch˝baj˙cich option 0 aû 4 */
+	fprintf(batch_file, "%s -0%d -1%d -2%d -3%d -4%d -j%s%s%s\n", batch_command, 
+		_global_opt[OPT_0_SPECIALNE], _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[OPT_2_HTML_EXPORT], _global_opt[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_4_OFFLINE_EXPORT], 
+		skratka_jazyka[_global_jazyk], parameter_M, export_kalendar);
 	Log("_export_rozbor_dna_mesiaca_batch() -- koniec\n");
 }/* _export_rozbor_dna_mesiaca_batch() */
 
@@ -10953,9 +10972,10 @@ short int getArgv(int argc, char **argv){
 	 * 2010-11-29: pridanÈ nasledovnÈ parametre:
 	 *            `H' (header) öpeci·lne spr·vanie pre 2. aû predposledn˝ s˙bor generovan˝ append reûimom (-a1): includovanie hlaviËky
 	 *            `F' (footer) öpeci·lne spr·vanie pre 2. aû predposledn˝ s˙bor generovan˝ append reûimom (-a1): includovanie p‰tky
+	 * 2011-04-13: upravenÈ (pridan· option 0 a odstr·nenÈ od ËÌsla 5 aû po 9)
 	 *
 	 */
-	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::1::2::3::4::5::6::7::8::9::a::h::e::f::g::l::i::\?::b::n::o::k::j::c::u::M::I::H::F::", MAX_STR);
+	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::0::1::2::3::4::a::h::e::f::g::l::i::\?::b::n::o::k::j::c::u::M::I::H::F::", MAX_STR);
 	/* tie options, ktore maju za sebou : maju povinny argument;
 	 *	ak maju :: tak maju volitelny */
 
@@ -11092,32 +11112,29 @@ short int getArgv(int argc, char **argv){
 					Log("option %c with value `%s' -- poradie svateho\n", c, optarg); break;
 
 				/* nasledovne case'y sa tykaju MODL_OPT... */
-				case '1': /* MODL_OPT1 */
+				case '0':
+					if(optarg != NULL){
+						mystrcpy(pom_MODL_OPT[OPT_0_SPECIALNE], optarg, SMALL);
+					}
+					Log("option %c with value `%s'\n", c, optarg); break;
+				case '1':
 					if(optarg != NULL){
 						mystrcpy(pom_MODL_OPT[OPT_1_CASTI_MODLITBY], optarg, SMALL);
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
-				case '3': /* MODL_OPT3 */
-					if(optarg != NULL){
-						mystrcpy(pom_MODL_OPT[OPT_3_SPOLOCNA_CAST], optarg, SMALL);
-					}
-					Log("option %c with value `%s'\n", c, optarg); break;
-				case '6': /* MODL_OPT6 */
-					/* parameter pridan˝ 2007-06-01 */
-					if(optarg != NULL){
-						mystrcpy(pom_MODL_OPT[6], optarg, SMALL);
-					}
-					Log("option %c with value `%s'\n", c, optarg); break;
-				case '7': /* MODL_OPT7 */
-					/* parameter pridan˝ 2007-06-01 */
+				case '2':
 					if(optarg != NULL){
 						mystrcpy(pom_MODL_OPT[OPT_2_HTML_EXPORT], optarg, SMALL);
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
-				case '0': /* MODL_OPT0 */
-					/* parameter pridan˝ 2011-04-04 */
+				case '3':
 					if(optarg != NULL){
-						mystrcpy(pom_MODL_OPT[OPT_0_SPECIALNE], optarg, SMALL);
+						mystrcpy(pom_MODL_OPT[OPT_3_SPOLOCNA_CAST], optarg, SMALL);
+					}
+					Log("option %c with value `%s'\n", c, optarg); break;
+				case '4':
+					if(optarg != NULL){
+						mystrcpy(pom_MODL_OPT[OPT_4_OFFLINE_EXPORT], optarg, SMALL);
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
 
@@ -11200,12 +11217,11 @@ short int getArgv(int argc, char **argv){
 					printf("\t\t resp. rok do pre davkove spracovanie\n"); /* pridane 2003-07-07 */
 					printf("\tx  dalsi svaty (%s): 1--3 resp. 4 pre lubovolnu spomienku PM v sobotu\n", STR_DALSI_SVATY);
 					/* 2004-03-11, zlepseny popis; 2007-06-01: opt1 a opt2 pri rozbore mesiaca zmenene na opt6 a opt7 */
-					printf("\t1  ci zobrazit nemenne casti modlitby (default 0) \n");
-					printf("\t2  ci brat zalmy zo dna (0) alebo z vlastnej casti (1) \n");
+					printf("\t0  specialne casti modlitby (verse, referencie)\n");
+					printf("\t1  prepinace pre zobrazovanie casti modlitby\n");
+					printf("\t2  prepinace pre html export\n");
 					printf("\t3  ktoru spolocnu cast brat, ak je ich viac (0, 1, 2, 3) \n");
-					printf("\t6  pri rozbore mesiaca: ci vypisovat vsetko do 1 riadka (default 0)\n"); /* upravene 2005-03-22 */
-					printf("\t7  pri rozbore mesiaca: ci datum zobrazit v ISO-8601 standarde \n");
-					printf("\t   (napr. 2005-03-22) (1) alebo jednoducho ako cislo (0, default) \n"); /* upravene 2005-03-22 a zasa 2006-01-25 */
+					printf("\t4  prepinace pre offline export\n");
 					printf("\tf  rok from (resp. den do pre davkove spracovanie)\n");
 					printf("\tg  rok to (resp. mesiac do pre davkove spracovanie)\n");
 					printf("\tl  ci zobrazovat linky \n");
