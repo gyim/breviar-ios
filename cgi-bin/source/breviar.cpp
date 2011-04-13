@@ -215,6 +215,7 @@
 /*   2011-04-13a.D. | ˙prava konfiguraËnÈho s˙boru, dokonËenie zl˙Ëenia    */
 /*                    options, rozdelenie force options na bit-komponenty  */
 /*                  - v exporte zruöenÈ \n v sekvencii <br>\n (kvÙli IE)   */
+/*                  - ˙prava vo funkcii stuffenv()                         */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -740,7 +741,8 @@ static void url_unescape(/* unsigned */ char *str){
  */
 static void stuffenv(char *var){
 	char *buf, *c, *s, *t, *oldval, *newval;
-	short int	despace = 0, got_cr = 0;
+	short int despace = 0, got_cr = 0;
+	int putenv_ret;
 
 #ifdef DEBUG
 	Log("Before unescape: %s\n", var);
@@ -834,7 +836,7 @@ static void stuffenv(char *var){
 	/*
 	 * Check for the presence of the variable.
 	 */
-	if ((oldval = getenv(buf))) // 2009-05-15: netreba oprava = na == ?
+	if ((oldval = getenv(buf))) // priradenie do oldval a n·sledn˝ test, Ëi nie je pointer NULL
 	{
 #ifdef DEBUG
 		Log("  Variable %s exists with value %s\n", buf, oldval);
@@ -845,7 +847,8 @@ static void stuffenv(char *var){
 			return;
 		}
 		*c = '=';
-		sprintf(newval, "%s#%s", buf, oldval);
+		sprintf(newval, "%s#%s", buf, oldval); // pÙvodne tu bolo toto; zapozn·mkovanÈ 2011-04-13 (pokus)
+		// sprintf(newval, "%s", buf);
 		*c = '\0';
 
 		/*
@@ -869,7 +872,13 @@ static void stuffenv(char *var){
 #ifdef DEBUG
 	Log("  putenv %s\n", newval);
 #endif
-	putenv(newval);
+	putenv_ret = putenv(newval);
+	if(putenv_ret != 0){
+		Log("  putenv vr·tila chybu! (%s)\n", newval);
+	}
+	else{
+		Log("  putenv OK (%s, %s)\n", buf, newval);
+	}
 	
 	if (oldval)
 	{
@@ -877,10 +886,16 @@ static void stuffenv(char *var){
 		 * Do the actual freeing of the old value after it's not
 		 * being referred to any more.
 		 */
-		free(oldval);
-		free(buf);
-	}
-}
+		/* 2011-04-13: neviem preËo, ale tieto free() spÙsobovali, ûe v logu nasledovn· premenn· neöla korektne nastaviù (putenv vr·tila chybu)
+		 *             preto som tieto free() zapozn·mkoval
+		 *             zrejme kvÙli tomu, ûe v query stringu sa nach·dzaj˙ aj hidden checkboxy
+		 */
+		// Log("free oldval (%s)...\n", oldval);
+		// free(oldval);
+		// Log("free buf (%s)...\n", buf);
+		// free(buf);
+	}/* if (oldval) */
+}/* stuffenv() */
 
 /*---------------------------------------------------------------------*/
 /*
@@ -903,7 +918,7 @@ static void scanquery(char *q){
 		Log("uncgi::scanquery(): \n\tq == %s\n\t_global_buf == %s\n", q, _global_buf);
 	} while (q != NULL);
 	Log("uncgi::scanquery() -- koniec\n");
-}
+}/* scanquery() */
 
 /*---------------------------------------------------------------------*/
 /* popis: naplni premenne WWW_... hodnotami z QS, t.j. akoby to vratilo uncgi.c
@@ -1155,7 +1170,7 @@ short int getSrciptParamFrom(int argc){
 		Log("method == %s\n", method);
 	else
 		Log("method is NULL\n");
-	if (method != NULL && ! strcmp(method, "POST")){
+	if (method != NULL && !strcmp(method, "POST")){
 		ret = postread();
 		if(ret == SUCCESS){
 			Log("OK. Pokracujem skenovanim query...\n");
@@ -1174,6 +1189,7 @@ short int getSrciptParamFrom(int argc){
 					Log("2006-08-01: Experiment - prilepujem _global_buf2 na koniec query_stringu...\n");
 					strcat(query_string, "&");
 					strcat(query_string, _global_buf2);
+					Log("query_string == %s...\n", query_string);
 				}
 			}
 		}
