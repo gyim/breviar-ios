@@ -26,6 +26,7 @@
 /*   2008-11-29a.D. | pridané rôzne možnosti batch exportu     */
 /*   2009-08-12a.D. | pridané ïalšie možnosti batch exportu    */
 /*   2010-08-04a.D. | pridané KALENDAR a STR_KALENDAR          */
+/*   2011-04-13a.D. | definované HTML_FORM_INPUT_TEXT_ROK      */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -584,6 +585,7 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #define HTML_FORM_INPUT_RESET    "input type=\"reset\" class=\"reset\""
 #define HTML_FORM_INPUT_RADIO    "input type=\"radio\" class=\"radio\""
 #define HTML_FORM_INPUT_TEXT     "input type=\"text\" class=\"text\""
+#define HTML_FORM_INPUT_TEXT_ROK "input type=\"text\" class=\"text\" size=\"4\" maxlength=\"4\" style=\"font-family:monospace\""
 #define HTML_FORM_INPUT_CHECKBOX "input type=\"checkbox\" class=\"checkbox\""
 /* 2011-01-27: pridané buttony (0. level: pre predošlý/nasledovný; 1. level: button "dnes"; 2. level: použité pre menej dôležité buttony) */
 #define HTML_FORM_INPUT_SUBMIT0  "input type=\"submit\" class=\"button0\""

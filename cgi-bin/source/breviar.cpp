@@ -6474,8 +6474,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("\n</select>&nbsp;\n");
 
 	/* pole WWW_ROK */
-	Export("<"HTML_FORM_INPUT_TEXT" name=\"%s\" size=5 value=\"%d\">\n",
-		STR_ROK, dnes.tm_year);
+	Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK, dnes.tm_year);
 	
 	/* 2006-02-02: upravené, pridaný "dnes" */
 	Export("&nbsp; ");
@@ -6515,7 +6514,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export((char *)html_text_prik_sviatky_atd[_global_jazyk]); /* 2006-08-02 */
 	Export("\n");
 	/* pole WWW_ANALYZA_ROKU */
-	Export("<"HTML_FORM_INPUT_TEXT" name=\"%s\" size=5 value=\"%d\">\n", STR_ANALYZA_ROKU, dnes.tm_year);
+	Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ANALYZA_ROKU, dnes.tm_year);
 	Export("</td></tr></table>\n");
 	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
 
@@ -6540,8 +6539,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export((char *)html_text_roku[_global_jazyk]); /* 2006-08-02 */
 	Export(" \n"); /* 2003-07-16; povodne tu bolo "v roku" */
 	/* pole WWW_ROK_ROKA */
-	Export("<"HTML_FORM_INPUT_TEXT" name=\"%s\" size=5 value=\"%d\">\n",
-		STR_ROK_ROKA, dnes.tm_year);
+	Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK_ROKA, dnes.tm_year);
 	Export("</td></tr></table>\n");
 	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
 
@@ -6556,14 +6554,12 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export((char *)html_text_tabulka_pohyblive_od[_global_jazyk]); /* 2006-08-02 */
 	Export("&nbsp;");
 	/* pole WWW_ROK_FROM */
-	Export("<"HTML_FORM_INPUT_TEXT" name=\"%s\" size=5 value=\"%d\">\n",
-		STR_ROK_FROM, dnes.tm_year - 12);
+	Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK_FROM, dnes.tm_year - 12);
 	Export("&nbsp;");
 	Export((char *)html_text_do_roku[_global_jazyk]); /* 2006-08-02 */
 	Export("&nbsp;\n");
 	/* pole WWW_ROK_TO */
-	Export("<"HTML_FORM_INPUT_TEXT" name=\"%s\" size=5 value=\"%d\">\n",
-		STR_ROK_TO, dnes.tm_year + 12);
+	Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK_TO, dnes.tm_year + 12);
 	Export("</td></tr>\n<tr><td></td><td>");
 	/* pole WWW_TABULKA_LINKY */
 	Export("&nbsp;&nbsp;&nbsp;&nbsp; "); // 2011-01-26
