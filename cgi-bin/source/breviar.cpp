@@ -403,6 +403,9 @@ _struct_lrok *_global_r_ptr;
 /*_struct_lrok _global_r;*/
 #define _global_r (*_global_r_ptr)
 
+/* glob·lna premenn·, ktor˙ je potrebnÈ na miestach, kde by sme potrebovali zistiù v runtime #define a kombinovaù ho s podmienkou z runtime (2011-04-20) */
+short int _global_system;
+
 /* globalna premenna, do ktorej sviatky_svatych() uklada
  * pocet sviatkov (de facto lubovolnych spomienok), ktore
  * pripadaju na dany den
@@ -6314,13 +6317,16 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_MCD_DPS, ANO, html_text_option1_mcd_doplnkova_psalmodia_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) == BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA)? html_option_checked: STR_EMPTY);
 	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_mcd_doplnkova_psalmodia_explain[_global_jazyk], html_text_option1_mcd_doplnkova_psalmodia[_global_jazyk]);
 
-#ifdef OS_Windows_Ruby
-	/* pole (checkbox) WWW_MODL_OPTF1_MCD_DPS */
-	Export("<br>");
-	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_VIGILIA, NIE);
-	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_VIGILIA, ANO, html_text_option1_vigilia_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PC_VIGILIA) == BIT_OPT_1_PC_VIGILIA)? html_option_checked: STR_EMPTY);
-	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_vigilia_explain[_global_jazyk], html_text_option1_vigilia[_global_jazyk]);
+	/* 2011-04-20: pre CZOP zobrazovaù aj prepÌnatko... (moûno Ëasom sa podmienka ˙plne odstr·ni a bude to zobrazenÈ pre vöetky jazyky/systÈmy) */
+	if((_global_system == SYSTEM_RUBY) || (_global_jazyk == JAZYK_CZ_OP)){
+		/* pole (checkbox) WWW_MODL_OPTF1_MCD_DPS */
+		Export("<br>");
+		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_VIGILIA, NIE);
+		Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_VIGILIA, ANO, html_text_option1_vigilia_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PC_VIGILIA) == BIT_OPT_1_PC_VIGILIA)? html_option_checked: STR_EMPTY);
+		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_vigilia_explain[_global_jazyk], html_text_option1_vigilia[_global_jazyk]);
+	}
 
+#ifdef OS_Windows_Ruby
 	/* pole (checkbox) WWW_MODL_OPTF1_SKRY_POPIS */
 	Export("<br>");
 	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_ZALMY_SV, NIE);
@@ -12828,6 +12834,14 @@ void setConfigDefaults(short int jazyk){
  */
 int main(int argc, char **argv){
 	short int i;
+	/* 2011-04-20: naplnenie _global_system */
+#if defined(OS_linux)
+	_global_system = SYSTEM_LINUX;
+#elif defined(OS_Windows_Ruby)
+	_global_system = SYSTEM_RUBY;
+#else
+	_global_system = SYSTEM_WINDOWS;
+#endif
 	/* pretoze pocas behu win32-release verzie on-line breviara sa spusta
 	 * main() viackrat bez zrusenia programu,
 	 * je potrebne inicializovat globalne premenne pri kazdom pusteni jej behu
