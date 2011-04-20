@@ -216,6 +216,7 @@
 /*                    options, rozdelenie force options na bit-komponenty  */
 /*                  - v exporte zruöenÈ \n v sekvencii <br>\n (kvÙli IE)   */
 /*                  - ˙prava vo funkcii stuffenv()                         */
+/*   2011-04-20a.D. | zobrazenie _global_opt 2 vo formul·ri, naËÌtanie     */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -1029,7 +1030,7 @@ short int setForm(void){
 			ret = putenv(local_str);
 			Log("--- setForm: putenv returned %d.\n", ret);
 		}
-	}
+	}/* for i */
 
 	/* 2011-04-07: upravenÈ; force options */
 	for(i = 0; i < POCET_GLOBAL_OPT; i++){
@@ -1049,7 +1050,7 @@ short int setForm(void){
 			ret = putenv(local_str);
 			Log("--- setForm: putenv returned %d.\n", ret);
 		}
-	}
+	}/* for i */
 
 	// 2011-04-13: doplenÈ; force option 0, jednotlivÈ bit-komponenty
 	Log("force option %d, jednotlivÈ bit-komponenty...\n", OPT_0_SPECIALNE);
@@ -1067,7 +1068,7 @@ short int setForm(void){
 			ret = putenv(local_str);
 			Log("--- setForm: putenv returned %d.\n", ret);
 		}
-	}
+	}/* for i */
 
 	// 2011-04-11: doplenÈ; force option 1, jednotlivÈ bit-komponenty
 	Log("force option %d, jednotlivÈ bit-komponenty...\n", OPT_1_CASTI_MODLITBY);
@@ -1092,7 +1093,25 @@ short int setForm(void){
 			ret = putenv(local_str);
 			Log("--- setForm: putenv returned %d.\n", ret);
 		}
-	}
+	}/* for i */
+
+	// 2011-04-20: doplenÈ; force option 2, jednotlivÈ bit-komponenty
+	Log("force option %d, jednotlivÈ bit-komponenty...\n", OPT_2_HTML_EXPORT);
+	for(i = 0; i < POCET_OPT_2_HTML_EXPORT; i++){
+		mystrcpy(local_str, STR_EMPTY, SMALL);
+		if(!equals(pom_MODL_OPTF_HTML_EXPORT[i], STR_EMPTY)){
+			mystrcpy(local_str, WWW_PREFIX, SMALL);
+			switch(i){
+				case 0: strcat(local_str, STR_MODL_OPTF2_ISO_DATUM); break;
+				case 1: strcat(local_str, STR_MODL_OPTF2_PRVE_VESPERY); break;
+			}// switch(i)
+			strcat(local_str, "=");
+			strcat(local_str, pom_MODL_OPTF_HTML_EXPORT[i]);
+			Log("--- setForm: putenv(%s); ...\n", local_str);
+			ret = putenv(local_str);
+			Log("--- setForm: putenv returned %d.\n", ret);
+		}
+	}/* for i */
 
 	/* 2006-07-11: PridanÈ kvÙli jazykov˝m mut·ci·m */
 	mystrcpy(local_str, STR_EMPTY, SMALL);
@@ -6256,7 +6275,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	/* formular pre options... */
 
 	/* option 1: zobraziù nasledovnÈ (nemennÈ, pevnÈ) s˙Ëasti modlitby (pouûÌvame force opt1)... */
-	Export((char *)html_text_nemenne_sucasti[_global_jazyk]);
+	Export("<"HTML_SPAN_BOLD">%s</span>", html_text_option1_nemenne_sucasti[_global_jazyk]);
 
 	/* pole (checkbox) WWW_MODL_OPTF1_CHV */
 	Export("<br>");
@@ -6303,7 +6322,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	/* formular pre options... */
 
 	/* option 1: Ôalöie bity ovplyvÚuj˙ce vygenerovan˙ modlitbu (pouûÌvame force opt1)... */
-	Export((char *)html_text_dalsie_prepinace[_global_jazyk]);
+	Export("<"HTML_SPAN_BOLD">%s</span>", html_text_option1_dalsie_prepinace[_global_jazyk]);
 
 	/* pole (checkbox) WWW_MODL_OPTF1_SKRY_POPIS */
 	Export("<br>");
@@ -6317,16 +6336,13 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_MCD_DPS, ANO, html_text_option1_mcd_doplnkova_psalmodia_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) == BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA)? html_option_checked: STR_EMPTY);
 	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_mcd_doplnkova_psalmodia_explain[_global_jazyk], html_text_option1_mcd_doplnkova_psalmodia[_global_jazyk]);
 
-	/* 2011-04-20: pre CZOP zobrazovaù aj prepÌnatko... (moûno Ëasom sa podmienka ˙plne odstr·ni a bude to zobrazenÈ pre vöetky jazyky/systÈmy) */
-	if((_global_system == SYSTEM_RUBY) || (_global_jazyk == JAZYK_CZ_OP)){
-		/* pole (checkbox) WWW_MODL_OPTF1_MCD_DPS */
-		Export("<br>");
-		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_VIGILIA, NIE);
-		Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_VIGILIA, ANO, html_text_option1_vigilia_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PC_VIGILIA) == BIT_OPT_1_PC_VIGILIA)? html_option_checked: STR_EMPTY);
-		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_vigilia_explain[_global_jazyk], html_text_option1_vigilia[_global_jazyk]);
-	}
-
 #ifdef OS_Windows_Ruby
+	/* pole (checkbox) WWW_MODL_OPTF1_MCD_DPS */
+	Export("<br>");
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_VIGILIA, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_VIGILIA, ANO, html_text_option1_vigilia_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PC_VIGILIA) == BIT_OPT_1_PC_VIGILIA)? html_option_checked: STR_EMPTY);
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_vigilia_explain[_global_jazyk], html_text_option1_vigilia[_global_jazyk]);
+
 	/* pole (checkbox) WWW_MODL_OPTF1_SKRY_POPIS */
 	Export("<br>");
 	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_ZALMY_SV, NIE);
@@ -6342,37 +6358,6 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	/* ---------------------------------------------------------------------------------- */
 
 	/* option 3: Ëasti modlitby zo spoloËnej Ëasti ... -- toto tu byù nemÙûe, bude potrebnÈ doplniù pre kaûd˝ riadok modlitby */
-
-	/* ---------------------------------------------------------------------------------- */
-
-	Export("<tr>\n<td>\n");
-	Export("<!-- tabuæka pre checkboxy 3 (options pre modlitbu) -->\n");
-	Export("<table align=\"left\">\n"); // table option 0
-
-	Export("<tr><td>\n");
-	/* formular pre options... */
-
-	/* option 0: Ôalöie bity ovplyvÚuj˙ce vygenerovan˙ modlitbu (ËÌslovanie veröov, biblickÈ referencie...) (pouûÌvame force opt0)... */
-	Export((char *)html_text_option0_specialne[_global_jazyk]);
-
-	/* pole (checkbox) WWW_MODL_OPTF0_VERSE */
-	Export("<br>");
-	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF0_VERSE, NIE);
-	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF0_VERSE, ANO, html_text_option0_verse_explain[_global_jazyk], ((_global_optf[OPT_0_SPECIALNE] & BIT_OPT_0_VERSE) == BIT_OPT_0_VERSE)? html_option_checked: STR_EMPTY);
-	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option0_verse_explain[_global_jazyk], html_text_option0_verse[_global_jazyk]);
-
-	if(_global_jazyk == JAZYK_SK){
-		/* pole (checkbox) WWW_MODL_OPTF0_REF */
-		Export("<br>");
-		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF0_REF, NIE);
-		Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF0_REF, ANO, html_text_option0_referencie_explain[_global_jazyk], ((_global_optf[OPT_0_SPECIALNE] & BIT_OPT_0_REFERENCIE) == BIT_OPT_0_REFERENCIE)? html_option_checked: STR_EMPTY);
-		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option0_referencie_explain[_global_jazyk], html_text_option0_referencie[_global_jazyk]);
-	}/* if(_global_jazyk == JAZYK_SK) */
-
-	Export("</td></tr>\n");
-
-	Export("</table>\n"); // table option 0
-	Export("</td></tr>\n\n");
 
 	/* ---------------------------------------------------------------------------------- */
 
@@ -6431,6 +6416,71 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("</td></tr>\n\n");
 	}/* if(_global_jazyk == JAZYK_SK) */
 
+	/* ---------------------------------------------------------------------------------- */
+
+	Export("<tr>\n<td>\n");
+	Export("<!-- tabuæka pre checkboxy 3 (options pre modlitbu) -->\n");
+	Export("<table align=\"left\">\n"); // table option 0
+
+	Export("<tr><td>\n");
+	/* formular pre options... */
+
+	/* option 0: Ôalöie bity ovplyvÚuj˙ce vygenerovan˙ modlitbu (ËÌslovanie veröov, biblickÈ referencie...) (pouûÌvame force opt0)... */
+	Export("<"HTML_SPAN_BOLD">%s</span>", html_text_option0_specialne[_global_jazyk]);
+
+	/* pole (checkbox) WWW_MODL_OPTF0_VERSE */
+	Export("<br>");
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF0_VERSE, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF0_VERSE, ANO, html_text_option0_verse_explain[_global_jazyk], ((_global_optf[OPT_0_SPECIALNE] & BIT_OPT_0_VERSE) == BIT_OPT_0_VERSE)? html_option_checked: STR_EMPTY);
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option0_verse_explain[_global_jazyk], html_text_option0_verse[_global_jazyk]);
+
+	if(_global_jazyk == JAZYK_SK){
+		/* pole (checkbox) WWW_MODL_OPTF0_REF */
+		Export("<br>");
+		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF0_REF, NIE);
+		Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF0_REF, ANO, html_text_option0_referencie_explain[_global_jazyk], ((_global_optf[OPT_0_SPECIALNE] & BIT_OPT_0_REFERENCIE) == BIT_OPT_0_REFERENCIE)? html_option_checked: STR_EMPTY);
+		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option0_referencie_explain[_global_jazyk], html_text_option0_referencie[_global_jazyk]);
+	}/* if(_global_jazyk == JAZYK_SK) */
+
+	Export("</td></tr>\n");
+
+	Export("</table>\n"); // table option 0
+	Export("</td></tr>\n\n");
+
+	/* ---------------------------------------------------------------------------------- */
+if((_global_system == SYSTEM_RUBY) || (_global_jazyk == JAZYK_CZ_OP)){
+	Export("<tr>\n<td>\n");
+	Export("<!-- tabuæka pre checkboxy 4 (options pre modlitbu) -->\n");
+	Export("<table align=\"left\">\n"); // table option 2
+
+	Export("<tr><td>\n");
+	/* formular pre options... */
+
+	/* option 2: bity ovplyvÚuj˙ce HTML export -- vygenerovanÈ str·nky, nie vygenerovanÈ modlitby (ISO d·tum, button prvÈ veöpery...) (pouûÌvame force opt2)... */
+	Export("<"HTML_SPAN_BOLD">%s</span>", html_text_option2_html_export[_global_jazyk]);
+
+#ifdef OS_Windows_Ruby
+	/* pole (checkbox) WWW_MODL_OPTF2_ISO_DATUM */
+	Export("<br>");
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF2_ISO_DATUM, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF2_ISO_DATUM, ANO, html_text_option2_iso_datum_explain[_global_jazyk], ((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_ISO_DATUM) == BIT_OPT_2_ISO_DATUM)? html_option_checked: STR_EMPTY);
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option2_iso_datum_explain[_global_jazyk], html_text_option2_iso_datum[_global_jazyk]);
+#endif
+
+	/* 2011-04-20: pre CZOP zobrazovaù aj prepÌnatko... (moûno Ëasom sa podmienka ˙plne odstr·ni a bude to zobrazenÈ pre vöetky jazyky/systÈmy) */
+	if((_global_system == SYSTEM_RUBY) || (_global_jazyk == JAZYK_CZ_OP)){
+		/* pole (checkbox) WWW_MODL_OPTF2_PRVE_VESPERY */
+		Export("<br>");
+		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF2_PRVE_VESPERY, NIE);
+		Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF2_PRVE_VESPERY, ANO, html_text_option2_prve_vespery_explain[_global_jazyk], ((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTON_PRVE_VESPERY) == BIT_OPT_2_BUTTON_PRVE_VESPERY)? html_option_checked: STR_EMPTY);
+		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option2_prve_vespery_explain[_global_jazyk], html_text_option2_prve_vespery[_global_jazyk]);
+	}
+
+	Export("</td></tr>\n");
+
+	Export("</table>\n"); // table option 2
+	Export("</td></tr>\n\n");
+}
 	/* ---------------------------------------------------------------------------------- */
 
 	/* 2011-01-28: doplnenÈ podæa buttonov na konci formul·ra; v podstate vykonaj˙ ten ist˝ efekt
@@ -7637,7 +7687,7 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 	Export("</li>\n");
 
 	Export("<li>");
-	Export((char *)html_text_nemenne_sucasti[_global_jazyk]);
+	Export((char *)html_text_option1_nemenne_sucasti[_global_jazyk]);
 	Export(" \n");
 	/* pole WWW_MODL_OPT1 */
 	Export("<select name=\"%s\">\n", STR_MODL_OPT1);
@@ -7645,7 +7695,7 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 	Export("<option%s>%s\n", (_global_opt[OPT_1_CASTI_MODLITBY] == NIE)? html_option_selected: STR_EMPTY, STR_NIE);
 	Export("</select>\n");
 	Export("<br><"HTML_SPAN_EXPLAIN">");
-	Export((char *)html_text_nemenne_sucasti_explain[_global_jazyk]);
+	Export((char *)html_text_option1_nemenne_sucasti_explain[_global_jazyk]);
 	Export("</span>");
 	Export("</li>\n");
 
@@ -11465,6 +11515,24 @@ short int getForm(void){
 		}
 	}/* for i */
 
+	// 2011-04-20: doplenÈ; force option 2, jednotlivÈ bit-komponenty
+	Log("force option %d, jednotlivÈ bit-komponenty...\n", OPT_2_HTML_EXPORT);
+	for(i = 0; i < POCET_OPT_2_HTML_EXPORT; i++){
+		/* premenn· WWW_MODL_OPTF2_... */
+		mystrcpy(local_str, WWW_PREFIX, SMALL);
+		switch(i){
+			case 0: strcat(local_str, STR_MODL_OPTF2_ISO_DATUM); break;
+			case 1: strcat(local_str, STR_MODL_OPTF2_PRVE_VESPERY); break;
+		}/* switch(i) */
+		ptr = getenv(local_str);
+		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
+		 * lebo pom_... su inicializovane na STR_EMPTY */
+		if(ptr != NULL){
+			if(strcmp(ptr, STR_EMPTY) != 0)
+				mystrcpy(pom_MODL_OPTF_HTML_EXPORT[i], ptr, SMALL);
+		}
+	}/* for i */
+
 	if((query_type == PRM_DATUM) || (query_type == PRM_DETAILY) || (query_type == PRM_TXT)){
 		/* datum: treba nacitat den, mesiac a rok */
 
@@ -12184,6 +12252,32 @@ short int parseQueryString(void){
 			i++;
 		}
 		if(equalsi(pom_MODL_OPTF_CASTI_MODLITBY[j], STR_EMPTY)){
+			Log("Nebola zadan· premenn· %s (nevadÌ).\n", local_str);
+		}
+	}/* for j */
+
+	// 2011-04-20: force option 2 premennÈ -- jednotlivÈ bit-komponenty
+	Log("force option %d, jednotlivÈ bit-komponenty...\n", OPT_2_HTML_EXPORT);
+	for(j = 0; j < POCET_OPT_2_HTML_EXPORT; j++){
+		Log("j == %d...\n", j);
+		mystrcpy(local_str, STR_EMPTY, SMALL);
+		switch(j){
+			case 0: strcat(local_str, STR_MODL_OPTF2_ISO_DATUM); break;
+			case 1: strcat(local_str, STR_MODL_OPTF2_PRVE_VESPERY); break;
+		}/* switch(j) */
+		/* premenn· WWW_MODL_OPT2_... (nepovinn·), j = 0 aû POCET_OPT_2_HTML_EXPORT */
+		i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
+		Log("pok˙öam sa zistiù hodnotu parametra %s...\n", local_str);
+		while((equalsi(pom_MODL_OPTF[j], STR_EMPTY)) && (i < pocet)){
+			// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
+			if(equals(param[i].name, local_str)){
+				/* ide o parameter STR_MODL_OPTFj */
+				mystrcpy(pom_MODL_OPTF_HTML_EXPORT[j], param[i].val, SMALL);
+				Log("hodnota parametra %s je %s.\n", local_str, pom_MODL_OPTF_HTML_EXPORT[j]);
+			}
+			i++;
+		}
+		if(equalsi(pom_MODL_OPTF_HTML_EXPORT[j], STR_EMPTY)){
 			Log("Nebola zadan· premenn· %s (nevadÌ).\n", local_str);
 		}
 	}/* for j */

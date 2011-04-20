@@ -1220,7 +1220,7 @@ const char *html_text_detaily_uvod[POCET_JAZYKOV + 1] =
  "hu_ (we will translate it later)"
 };
 
-const char *html_text_nemenne_sucasti[POCET_JAZYKOV + 1] = 
+const char *html_text_option1_nemenne_sucasti[POCET_JAZYKOV + 1] = 
 {"zobrazi nasledovné súèasti modlitby?",
  "zobrazit <i>nemìnné souèásti</i> modlitby?",
  "display <i>non-changeable parts</i> prayer?",
@@ -1230,7 +1230,7 @@ const char *html_text_nemenne_sucasti[POCET_JAZYKOV + 1] =
  "hu_ (we will translate it later)"
 };
 
-const char *html_text_nemenne_sucasti_explain[POCET_JAZYKOV + 1] = 
+const char *html_text_option1_nemenne_sucasti_explain[POCET_JAZYKOV + 1] = 
 {"Kadé ranné chvály obsahujú Benediktus, vešpery Magnifikat, obe modlitby obsahujú Otèenáš a zakonèenie modlitby, a napokon posvätné èítanie obsahuje niekedy hymnus Te Deum; tieto èasti modlitby nazıvame <i>nemenné súèasti</i>.", 
  "Kadé ranní chvály obsahují Zachariášovo kantikum, nešpory Mariin Magnifikat, obì modlitbu Pánì a zakonèení modlitby, a koneènì modlitba se ètením nìkdy obsahuje hymnus Te Deum; tyto èásti modliteb nazıváme <i>nemìnné souèásti</i>.", 
  "Each morning prayer contains Benedictus, vesperae contains Magnificat, both contain the Lord's Prayer and a conclusion of the prayer; finally, the holy reading sometimes contains the Te Deum hymnus; all these parts we call <i>un-changeable parts</i>.", 
@@ -1240,7 +1240,7 @@ const char *html_text_nemenne_sucasti_explain[POCET_JAZYKOV + 1] =
  "hu_ (we will translate it later)"
 };
 
-const char *html_text_dalsie_prepinace[POCET_JAZYKOV + 1] = 
+const char *html_text_option1_dalsie_prepinace[POCET_JAZYKOV + 1] = 
 {"ïalšie monosti pre vısledné modlitby",
  "další monosti pro vısledné modlitby",
  "futher options for generated prayers",
@@ -1250,7 +1250,7 @@ const char *html_text_dalsie_prepinace[POCET_JAZYKOV + 1] =
  "hu_ (we will translate it later)"
 };
 
-const char *html_text_dalsie_prepinace_explain[POCET_JAZYKOV + 1] = 
+const char *html_text_option1_dalsie_prepinace_explain[POCET_JAZYKOV + 1] = 
 {"", 
  "", 
  "", 
@@ -1322,25 +1322,6 @@ const char *html_text_zalmy_pre_mcd_explain[POCET_JAZYKOV + 1] =
  "",
  "", 
  "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120 – 129), které je mono brát místo almù ze altáøe.",
- "hu_"
-};
-
-const char *html_text_zobrazit_prve_vespery[POCET_JAZYKOV + 1] = 
-{"zobrazi tlaèidlo pre <i>prvé vešpery (a kompletórium po nich)</i> <br>pre nedele a slávnosti v samotnı deò slávenia ", 
- "zobrazit tlaèítko pro <i>první nešpory (a kompletáø po nich)</i> <br>pro nedìle a slavnosti v den slavení ", 
- "display button for <i>first vesperas (and completory after them)</i> <br>for Sundays and solemnitas for the day of celebration ", 
- "",
- "",
- "zobrazit tlaèítko pro <i>první veèerní chvály (a kompletáø po nich)</i> <br>pro nedìle a slavnosti v den slavení ", 
- "hu_"
-};
-const char *html_text_zobrazit_prve_vespery_explain[POCET_JAZYKOV + 1] = 
-{"Keïe základnım kritériom pre zobrazovanie modlitieb daného dòa je dátum, formálne prvé vešpery nedie¾ a slávností (a tie kompletórium po nich) nespadajú pod danı dátum, ale pre predošlı deò, kde sa zobrazujú ako bené vešpery. Pre sobotné slávenie sa nebude tlaèidlo pre vešpery (a kompletórium) zobrazova.", 
- "Jeliko základním kritériem pro zobrazování ponuky modliteb daného dne je datum, první nešpory nedìl a slavností (a také kompletáø po nich) nespadají pod danı datum, nıbr pro pøedcházející den, kde jsou zobrazeny jako bìné nešpory. Pro sobotní slavení se tlaèítko pro nešpory (a kompletáø) nebude zobrazovat.", 
- "xxx", 
- "",
- "", 
- "Jeliko základním kritériem pro zobrazování ponuky modliteb daného dne je datum, první veèerní chvály nedìl a slavností (a také kompletáø po nich) nespadají pod danı datum, nıbr pro pøedcházející den, kde jsou zobrazeny jako bìné první veèerní chvály. Pro sobotní slavení se tlaèítko pro veèerní chvály (a kompletáø) nebude zobrazovat.", 
  "hu_"
 };
 
@@ -1565,6 +1546,54 @@ const char *html_text_option1_zalmy_zo_sviatku_explain[POCET_JAZYKOV + 1] =
  "", 
  "",
  "hu_ (we will translate it later)"
+};
+
+const char *html_text_option2_html_export[POCET_JAZYKOV + 1] = 
+{"monosti zobrazenia stránok (neovplyvnia texty modlitieb)",
+ "monosti zobrazení stránek (neovlivní texty modliteb)",
+ "display options (without influence to texts of prayers)",
+ "",
+ "",
+ "monosti zobrazení stránek (neovlivní texty modliteb)",
+ "hu_"
+};
+
+const char *html_text_option2_prve_vespery[POCET_JAZYKOV + 1] = 
+{"zobrazi tlaèidlo pre prvé vešpery <!--(a kompletórium po nich)--> pre nedele a slávnosti v deò slávenia",
+ "zobrazit tlaèítko pro první nešpory <!--(a kompletáø po nich)--> pro nedìle a slavnosti v den slavení",
+ "display button for first vesperas <!--(and completory after them)--> for Sundays and solemnitas for the day of celebration",
+ "",
+ "",
+ "zobrazit tlaèítko pro první veèerní chvály <!--(a kompletáø po nich)--> pro nedìle a slavnosti v den slavení",
+ "hu_"
+};
+const char *html_text_option2_prve_vespery_explain[POCET_JAZYKOV + 1] = 
+{"Keïe základnım kritériom pre zobrazovanie modlitieb daného dòa je dátum, formálne prvé vešpery nedie¾ a slávností (a tie kompletórium po nich) nespadajú pod danı dátum, ale pre predošlı deò, kde sa zobrazujú ako bené vešpery. Pre sobotné slávenie sa nebude tlaèidlo pre vešpery (a kompletórium) zobrazova.", 
+ "Jeliko základním kritériem pro zobrazování ponuky modliteb daného dne je datum, první nešpory nedìl a slavností (a také kompletáø po nich) nespadají pod danı datum, nıbr pro pøedcházející den, kde jsou zobrazeny jako bìné nešpory. Pro sobotní slavení se tlaèítko pro nešpory (a kompletáø) nebude zobrazovat.", 
+ "xxx", 
+ "",
+ "", 
+ "Jeliko základním kritériem pro zobrazování ponuky modliteb daného dne je datum, první veèerní chvály nedìl a slavností (a také kompletáø po nich) nespadají pod danı datum, nıbr pro pøedcházející den, kde jsou zobrazeny jako bìné první veèerní chvály. Pro sobotní slavení se tlaèítko pro veèerní chvály (a kompletáø) nebude zobrazovat.", 
+ "hu_"
+};
+
+const char *html_text_option2_iso_datum[POCET_JAZYKOV + 1] = 
+{"zobrazi dátum v ISO 8601 formáte (RRRR-MM-DD)", 
+ "zobrazit datum v ISO 8601 formátu (RRRR-MM-DD)", 
+ "display date in ISO 8601 format (RRRR-MM-DD)", 
+ "",
+ "",
+ "zobrazit datum v ISO 8601 formátu (RRRR-MM-DD)", 
+ "hu_"
+};
+const char *html_text_option2_iso_datum_explain[POCET_JAZYKOV + 1] = 
+{"", 
+ "", 
+ "", 
+ "",
+ "", 
+ "", 
+ ""
 };
 
 /* 2010-10-11: HTML option selected */

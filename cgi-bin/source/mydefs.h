@@ -63,7 +63,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2011-04-13"
+#define BUILD_DATE "2011-04-20"
 
 #define BYTES 250
 #define SMALL 80
@@ -543,6 +543,24 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPTF1_ZALMY_SV "MODL_OPTF1_ZALMY_SV"
 #else
 	#define STR_MODL_OPTF1_ZALMY_SV "of1zsv"
+#endif
+
+/* pre force option 2 jednotlivÈ bit-komponenty (parci·lne voæby) */
+
+// ISO form·t d·tumu
+#define MODL_OPTF2_ISO_DATUM 81
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF2_ISO_DATUM "MODL_OPTF2_ISO_DATUM"
+#else
+	#define STR_MODL_OPTF2_ISO_DATUM "of2id"
+#endif
+
+// zobrazovaù button "prvÈ veöpery" v r·mci danÈho sl·venia (teda "ignoruj˙c d·tum")
+#define MODL_OPTF2_PRVE_VESPERY 82
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF2_PRVE_VESPERY "MODL_OPTF2_PRVE_VESPERY"
+#else
+	#define STR_MODL_OPTF2_PRVE_VESPERY "of2pv"
 #endif
 
 /* 2008-08-08: PridanÈ kvÙli rÙznym css */
