@@ -428,7 +428,7 @@ short int _global_opt_offline_export[POCET_OPT_4_OFFLINE_EXPORT];
 /* pridane 2003-07-08, append parameter */
 short int _global_opt_append = NIE;
 short int _global_opt_tedeum = NIE; /* pridaná 2007-05-18 */
-short int _global_pocet_slava_otcu = 0; /* pridaná 2007-05-18 */
+short int _global_pocet_slava_otcu = 0; /* pridaná 2007-05-18; 2011-04-28: zrušil som porovnanie pri kontrole chválospevu Dan 3, 57-88. 56; asi je táto premenná zbytoèná, ale možno sa ešte zíde :) */
 
 short int _global_ant_mcd_rovnake = NIE; /* 2007-10-02: pridané pre modlitbu cez deò */
 /* 2008-11-29, pridané */
@@ -2104,11 +2104,12 @@ void interpretParameter(short int type, char *paramname){
 		_global_pocet_slava_otcu = _global_pocet_slava_otcu + 1;
 		/* 2007-05-18: zosilnená podmienka, aby Sláva Otcu nebolo pre špeciálne prípady 
 		 * 2007-12-04: opravená podmienka, pretože nefungovala pre modlitby odlišné od ranných chvál
+		 * 2011-04-28: doplnením ïalších "Sláva Otcu", ktoré sa rozba¾ujú, sa posunulo èíslovanie, a tak radšej podmienku "_global_pocet_slava_otcu == 2" zrušíme
 		 */
 		if(((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SLAVA_OTCU) == BIT_OPT_1_SLAVA_OTCU) && (
 			_global_modlitba != MODL_RANNE_CHVALY
 			|| (_global_modlitba == MODL_RANNE_CHVALY
-				&& !(_global_pocet_slava_otcu == 2 && equals(_global_modl_ranne_chvaly.zalm2.anchor, "DAN3,57-88.56"))
+				&& !(equals(_global_modl_ranne_chvaly.zalm2.anchor, "DAN3,57-88.56"))
 			)
 		)){
 			/* zobrazit Slava Otcu */
@@ -2130,11 +2131,12 @@ void interpretParameter(short int type, char *paramname){
 	else if(equals(paramname, PARAM_SLAVAOTCU_END)){
 		/* 2007-05-18: zosilnená podmienka, aby Sláva Otcu nebolo pre špeciálne prípady 
 		 * 2007-12-04: opravená podmienka, pretože nefungovala pre modlitby odlišné od ranných chvál
+		 * 2011-04-28: doplnením ïalších "Sláva Otcu", ktoré sa rozba¾ujú, sa posunulo èíslovanie, a tak radšej podmienku "_global_pocet_slava_otcu == 2" zrušíme
 		 */
 		if(((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SLAVA_OTCU) == BIT_OPT_1_SLAVA_OTCU) && (
 			_global_modlitba != MODL_RANNE_CHVALY
 			|| (_global_modlitba == MODL_RANNE_CHVALY
-				&& !(_global_pocet_slava_otcu == 2 && equals(_global_modl_ranne_chvaly.zalm2.anchor, "DAN3,57-88.56"))
+				&& !(equals(_global_modl_ranne_chvaly.zalm2.anchor, "DAN3,57-88.56"))
 			)
 		)){
 			Export("<!--");
