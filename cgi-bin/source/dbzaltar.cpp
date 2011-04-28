@@ -172,6 +172,7 @@
 /*   2011-03-14a.D. | na ostatné hodiny modlitby cez deò sa berie doplnková psalmódia (upravené)*/
 /*   2011-04-06a.D. | nastavenie antifón z doplnkovej psalmódie: funkcia                        */
 /*                    _set_antifony_mcd_doplnkova_psalmodia(void)                               */
+/*   2011-04-28a.D. | oprava kompletória v oktávach (krátke èítanie, CZ: aj hymnus (nede¾ný)    */
 /*                                                                                              */
 /* notes |                                                                                      */
 /*   * povodne islo o dva fajly, dbzaltar.c a dbsvaty.c                                         */
