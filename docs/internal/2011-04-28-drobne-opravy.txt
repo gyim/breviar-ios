@@ -1,0 +1,13 @@
+LA, vol. I, p. 294: v referencii má by za èíslom zväzku SCh 34 èiarka, nie bodka
+
+SK (a ostatné), opravené odkazy na "Sources Chrétiennes" SCh (bolo: SC)
+
+SK, zjednotený názov homílie Melitona zo Sárd (zv. II, str. 420 a 524):
+	v tlaèenom breviári, LH II, str. 524, je Melitóna, ale na str. 420 je Melitona; zjednotene mám Melitona
+	v LA majú obe homílie, VTYZ_cCIT2_6STV aj VNOKT_cCIT2_1PO, rovnaký nadpis aj referenciu; 
+	opravené pod¾a latinského "Cap. 2-7, 100-103" -> "Nn. 2-7. 100-103", "SC" -> "SCh" pod¾a LA
+	použil som "Z homílie biskupa Melitona Sardského o Ve¾kej noci" -> "Z Ve¾konoènej homílie biskupa Melitona Sardského"
+
+SK: slovenské vydanie má "SCh 71, 244-246", všetky 4 zväzky LA majú: PG 12, 871-872 (VPCHR_cCIT2)
+	vol. I, p. 1048, vol. II, p. 1505, vol. III, p. 1404, vol. IV, p. 1394
+
