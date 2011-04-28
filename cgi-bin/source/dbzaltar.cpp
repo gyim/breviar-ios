@@ -1261,15 +1261,24 @@ void set_antifony(short int den, short int tyzzal, short int zvazok, short int m
 	}
 }/* set_antifony() */
 
-void set_kcitanie(short int den, short int tyzzal, short int modlitba){
-	/* pridané èasti pre kompletórium, 2006-10-24 */
+void set_kcitanie(short int den, short int tyzzal, short int modlitba, short int ktore = 2){
+	/* pridané èasti pre kompletórium, 2006-10-24
+	 * 2011-04-28: doplnené pre ve¾konoènú oktávu (parameter "ktore")
+	 */
+	char pismenko_modlitby_pom = pismenko_modlitby(modlitba);
+	// Log("set_kcitanie() -- zaèiatok...\n");
+	// Log("den == %d, tyzzal == %d, modlitba == %d, ktore == %d...\n", den, tyzzal, modlitba, ktore);
 	if((modlitba == MODL_KOMPLETORIUM) || (modlitba == MODL_PRVE_KOMPLETORIUM)){
 		file_name_zapamataj();
 		file_name_kompletorium(OBD_CEZ_ROK);
 		if((_global_den.typslav == SLAV_SLAVNOST) && ((den != DEN_NEDELA) && (den != DEN_SOBOTA))){
 			den = DEN_UNKNOWN; /* 2008-05-08: ide o slávnos mimo nedie¾ */
 		}
-		sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], pismenko_modlitby(modlitba), ANCHOR_KCITANIE);
+		if((modlitba == MODL_KOMPLETORIUM) && (ktore == 1)){
+			/* 2011-04-28: škaredı drát, ak poaduje explicitne kompletórium po prvıch vešperách pre oktávu */
+			pismenko_modlitby_pom = pismenko_modlitby(MODL_PRVE_KOMPLETORIUM);
+		}
+		sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], pismenko_modlitby_pom, ANCHOR_KCITANIE);
 		_set_kcitanie(modlitba, _file, _anchor);
 		set_LOG_zaltar;
 		file_name_obnov();
@@ -1280,7 +1289,8 @@ void set_kcitanie(short int den, short int tyzzal, short int modlitba){
 		_set_kcitanie(modlitba, _file, _anchor);
 		set_LOG_zaltar;
 	}
-}
+	// Log("set_kcitanie() -- koniec.\n");
+}/* set_kcitanie() */
 
 void set_kresponz(short int den, short int tyzzal, short int modlitba){
 	/* pridané èasti pre kompletórium, 2006-10-24 */
@@ -1625,6 +1635,7 @@ void _set_kompletorium_slavnost_oktava(short int modlitba, short int litobd, sho
 	 *	- "ktore" -		urèuje, èi ide o kompletórium po prvıch vešperách slávnosti (1) alebo po druhıch vešperách (2) 
 	 *  2008-05-08: prerobené, aby vstupom bol parameter "modlitba" (nie ako doteraz, "short int ktore (1, 2)"
 	 *  2009-04-16: opravená modlitba pre ve¾konoènú oktávu
+	 *  2011-04-28: opravené, aby sa pre ve¾konoènú oktávu pre ktore == 1 bralo správne èítanie
 	 */
 	Log("_set_kompletorium_slavnost_oktava(%d - %s), %d -- begin\n", modlitba, nazov_modlitby(modlitba), ktore);
 	if(_global_den.denvt == DEN_NEDELA){
@@ -1654,7 +1665,7 @@ void _set_kompletorium_slavnost_oktava(short int modlitba, short int litobd, sho
 			set_modlitba(DEN_UNKNOWN, _global_den.tyzzal, modlitba); /* je to jeden konkrétny deò mimo nedele */
 		}
 		/* nasledujúèe závisia od liturgického obdobia, preto nastavíme inú kotvu (pevne z nedele) */
-		set_kcitanie(DEN_NEDELA, _global_den.tyzzal, modlitba);
+		set_kcitanie(DEN_NEDELA, _global_den.tyzzal, modlitba, ktore /* == 1 */);
 		set_kresponz(DEN_NEDELA, _global_den.tyzzal, modlitba);
 	}
 	Log("_set_kompletorium_slavnost_oktava(%d) -- end\n", modlitba);
@@ -4826,7 +4837,7 @@ label_24_DEC:
 			/* 2009-01-05: tu v skutoènosti zaèína VIANOÈNÁ OKTÁVA */
 			/* 2009-01-05: kompletórium vo vianoènej oktáve - podobne ako vo ve¾konoènej oktáve - je z nedele po prvıch resp. druhıch vešperách */
 			modlitba = MODL_KOMPLETORIUM;
-			_set_kompletorium_slavnost_oktava(modlitba, litobd, /* ktore */ (_global_den.den MOD 2) + 1);
+			_set_kompletorium_slavnost_oktava(modlitba, litobd, /* ktore = 1 alebo 2 */ (_global_den.den MOD 2) + 1);
 			Log("OBD_OKTAVA_NARODENIA - pokraèujeme ako vianoèné obdobie I...\n");
 			/* a pokracujeme ako vianocne obdobie I; 14/03/2000A.D. */
 /* switch(litobd), case OBD_VIANOCNE_I -- begin ----------------------------------------------- */
@@ -7376,7 +7387,7 @@ label_24_DEC:
 			_set_kompletorium_nedela(modlitba);
 			 * ponechané však nastavenie nasledovnıch èastí:
 			 */
-			set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
+			set_hymnus_kompletorium_obd(DEN_NEDELA, tyzzal, modlitba, litobd); /* 2011-04-28: den nastavenı na DEN_NEDELA; kvôli JAZYK_CZ -- v oktáve sa berie nede¾nı hymnus */
 			set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
 			set_antifony_kompletorium_obd(DEN_NEDELA, tyzzal, modlitba, litobd); /* keïe sa berie nede¾né kompletórium; beztak je to pre kadı deò Aleluja, Aleluja, Aleluja */
 
