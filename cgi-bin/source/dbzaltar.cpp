@@ -1334,15 +1334,24 @@ void set_prosby(short int den, short int tyzzal, short int modlitba){
 	set_LOG_zaltar;
 }
 
-void set_modlitba(short int den, short int tyzzal, short int modlitba){
-	/* pridanÈ Ëasti pre kompletÛrium, 2006-10-24 */
+void set_modlitba(short int den, short int tyzzal, short int modlitba, short int ktore = 2){
+	/* pridanÈ Ëasti pre kompletÛrium, 2006-10-24 
+	 * 2011-04-28: doplnenÈ pre veækonoËn˙ okt·vu (parameter "ktore")
+	 */
+	char pismenko_modlitby_pom = pismenko_modlitby(modlitba);
+	// Log("set_modlitba() -- zaËiatok...\n");
+	// Log("den == %d, tyzzal == %d, modlitba == %d, ktore == %d...\n", den, tyzzal, modlitba, ktore);
 	if((modlitba == MODL_KOMPLETORIUM) || (modlitba == MODL_PRVE_KOMPLETORIUM)){
 		file_name_zapamataj();
 		file_name_kompletorium(OBD_CEZ_ROK);
 		if((_global_den.typslav == SLAV_SLAVNOST) && ((den != DEN_NEDELA) && (den != DEN_SOBOTA))){
 			den = DEN_UNKNOWN; /* 2008-05-08: ide o sl·vnosù mimo nedieæ */
 		}
-		sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], pismenko_modlitby(modlitba), ANCHOR_MODLITBA);
+		if((modlitba == MODL_KOMPLETORIUM) && (ktore == 1)){
+			/* 2011-04-28: ökared˝ dr·t, ak poûaduje explicitne kompletÛrium po prv˝ch veöper·ch pre okt·vu */
+			pismenko_modlitby_pom = pismenko_modlitby(MODL_PRVE_KOMPLETORIUM);
+		}
+		sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], pismenko_modlitby_pom, ANCHOR_MODLITBA);
 		_set_modlitba(modlitba, _file, _anchor);
 		set_LOG_zaltar;
 		file_name_obnov();
@@ -1361,7 +1370,8 @@ void set_modlitba(short int den, short int tyzzal, short int modlitba){
 		_set_modlitba(modlitba, _file, _anchor);
 		set_LOG_zaltar;
 	}
-}
+	// Log("set_modlitba() -- koniec.\n");
+}/* set_modlitba() */
 
 void set_benediktus(short int den, short int tyzzal, short int modlitba){
 	/* prvy a treti, resp. druhy a stvrty tyzden maju rovnake */
@@ -1646,8 +1656,10 @@ void _set_kompletorium_slavnost_oktava(short int modlitba, short int litobd, sho
 	}
 	else if(ktore == 2){ /* norm·lne nedeænÈ kompletÛrium po 2. veöper·ch */
 		_set_kompletorium_slavnost(modlitba, litobd);
-		/* 2009-04-16: opraven· modlitba pre veækonoËn˙ okt·vu */
-		if(litobd == OBD_VELKONOCNA_OKTAVA){
+		/* 2009-04-16: opraven· modlitba pre veækonoËn˙ okt·vu
+		 * 2011-04-29: aj pre vianoËn˙ okt·vu
+		 */
+		if((litobd == OBD_VELKONOCNA_OKTAVA) || (litobd == OBD_OKTAVA_NARODENIA)){
 			set_modlitba(DEN_NEDELA, _global_den.tyzzal, modlitba); /* vo veækonoËnej okt·ve sa berie modlitba z nedele */
 		}
 	}
@@ -1658,9 +1670,11 @@ void _set_kompletorium_slavnost_oktava(short int modlitba, short int litobd, sho
 		set_zalm(2, modlitba, "z134.htm", "ZALM134");
 		set_hymnus(DEN_NEDELA /* den */, _global_den.tyzzal, modlitba);
 		set_antifony(DEN_NEDELA, _global_den.tyzzal, 9 /* zvazok - pre kompletÛrium sa nepouûÌvalo, vyuûitÈ na öpeci·lne nastavenie */, modlitba);
-		/* 2009-04-16: opraven· modlitba pre veækonoËn˙ okt·vu */
-		if(litobd == OBD_VELKONOCNA_OKTAVA){
-			set_modlitba(DEN_NEDELA, _global_den.tyzzal, modlitba); /* vo veækonoËnej okt·ve sa berie modlitba z nedele */
+		/* 2009-04-16: opraven· modlitba pre veækonoËn˙ okt·vu
+		 * 2011-04-29: aj pre vianoËn˙ okt·vu
+		 */
+		if((litobd == OBD_VELKONOCNA_OKTAVA) || (litobd == OBD_OKTAVA_NARODENIA)){
+			set_modlitba(DEN_NEDELA, _global_den.tyzzal, modlitba, ktore /* == 1 */); /* vo veækonoËnej okt·ve sa berie modlitba z nedele */
 		}
 		else{
 			set_modlitba(DEN_UNKNOWN, _global_den.tyzzal, modlitba); /* je to jeden konkrÈtny deÚ mimo nedele */
