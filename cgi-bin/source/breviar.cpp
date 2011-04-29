@@ -217,6 +217,10 @@
 /*                  - v exporte zrušené \n v sekvencii <br>\n (kvôli IE)   */
 /*                  - úprava vo funkcii stuffenv()                         */
 /*   2011-04-20a.D. | zobrazenie _global_opt 2 vo formulári, naèítanie     */
+/*   2011-04-29a.D. | doplnené Sláva Otcu "špeciálne" kvôli chválospevu    */
+/*                    Dan 3, 57-88. 56, kde nie je "Sláva Otcu" (pôvodne   */
+/*                    to bolo dané poradím, ale templáty pre rôzne jazyky  */
+/*                    majú rozlièné poradie tohto "Sláva Otcu")            */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -2100,16 +2104,17 @@ void interpretParameter(short int type, char *paramname){
 	}
 
 	/* 2007-03-23: pridané Sláva Otcu */
-	else if(equals(paramname, PARAM_SLAVAOTCU_BEGIN)){
+	else if(equals(paramname, PARAM_SLAVAOTCU_BEGIN) || equals(paramname, PARAM_SLAVAOTCU_SPEC_BEGIN)){
 		_global_pocet_slava_otcu = _global_pocet_slava_otcu + 1;
 		/* 2007-05-18: zosilnená podmienka, aby Sláva Otcu nebolo pre špeciálne prípady 
 		 * 2007-12-04: opravená podmienka, pretože nefungovala pre modlitby odlišné od ranných chvál
 		 * 2011-04-28: doplnením ïalších "Sláva Otcu", ktoré sa rozba¾ujú, sa posunulo èíslovanie, a tak radšej podmienku "_global_pocet_slava_otcu == 2" zrušíme
+		 * 2011-04-29: doplnené Sláva Otcu "špeciálne" pre úèely chválospevu Dan 3, 57-88. 56, kde nie je "Sláva Otcu" (pôvodne to bolo dané poradím, ale templáty pre rôzne jazyky majú rozlièné poradie tohto "Sláva Otcu")
 		 */
 		if(((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SLAVA_OTCU) == BIT_OPT_1_SLAVA_OTCU) && (
 			_global_modlitba != MODL_RANNE_CHVALY
 			|| (_global_modlitba == MODL_RANNE_CHVALY
-				&& !(equals(_global_modl_ranne_chvaly.zalm2.anchor, "DAN3,57-88.56"))
+				&& !(equals(paramname, PARAM_SLAVAOTCU_SPEC_BEGIN) && equals(_global_modl_ranne_chvaly.zalm2.anchor, "DAN3,57-88.56"))
 			)
 		)){
 			/* zobrazit Slava Otcu */
@@ -2128,15 +2133,16 @@ void interpretParameter(short int type, char *paramname){
 			Log("  `Slava Otcu' skipping...\n");
 		}
 	}
-	else if(equals(paramname, PARAM_SLAVAOTCU_END)){
+	else if(equals(paramname, PARAM_SLAVAOTCU_END) || equals(paramname, PARAM_SLAVAOTCU_SPEC_END)){
 		/* 2007-05-18: zosilnená podmienka, aby Sláva Otcu nebolo pre špeciálne prípady 
 		 * 2007-12-04: opravená podmienka, pretože nefungovala pre modlitby odlišné od ranných chvál
 		 * 2011-04-28: doplnením ïalších "Sláva Otcu", ktoré sa rozba¾ujú, sa posunulo èíslovanie, a tak radšej podmienku "_global_pocet_slava_otcu == 2" zrušíme
+		 * 2011-04-29: doplnené Sláva Otcu "špeciálne" pre úèely chválospevu Dan 3, 57-88. 56, kde nie je "Sláva Otcu" (pôvodne to bolo dané poradím, ale templáty pre rôzne jazyky majú rozlièné poradie tohto "Sláva Otcu")
 		 */
 		if(((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SLAVA_OTCU) == BIT_OPT_1_SLAVA_OTCU) && (
 			_global_modlitba != MODL_RANNE_CHVALY
 			|| (_global_modlitba == MODL_RANNE_CHVALY
-				&& !(equals(_global_modl_ranne_chvaly.zalm2.anchor, "DAN3,57-88.56"))
+				&& !(equals(paramname, PARAM_SLAVAOTCU_SPEC_END) && equals(_global_modl_ranne_chvaly.zalm2.anchor, "DAN3,57-88.56"))
 			)
 		)){
 			Export("<!--");

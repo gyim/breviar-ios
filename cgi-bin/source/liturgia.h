@@ -419,6 +419,9 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 /* 2007-03-23: doplnené Sláva Otcu */
 #define PARAM_SLAVAOTCU_BEGIN               "SLAVAOTCU_BEGIN"
 #define PARAM_SLAVAOTCU_END                 "SLAVAOTCU_END"
+/* 2011-04-29: doplnené Sláva Otcu "špeciálne" pre úèely chválospevu Dan 3, 57-88. 56, kde nie je "Sláva Otcu" (pôvodne to bolo dané poradím, ale templáty pre rôzne jazyky majú rozlièné poradie tohto "Sláva Otcu") */
+#define PARAM_SLAVAOTCU_SPEC_BEGIN          "SLAVAOTCU_SPEC_BEGIN"
+#define PARAM_SLAVAOTCU_SPEC_END            "SLAVAOTCU_SPEC_END"
 /* 2007-06-28: doplnené Te Deum; nemôe sa riadi rovnakımi pravidlami ako chválospevy 
  * 2011-04-11: pridanı ïalší pár parametrov
  *             JE_TEDEUM_BEGIN a END hovoria, èi v danej modlitbe má vôbec by zobrazená èo i len zmienka o Te Deum (riadené podmienkou je_tedeum);
