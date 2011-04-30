@@ -1635,9 +1635,10 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 					/* 2011-01-12: doplnené volite¾né zobrazovanie/skrývanie alternatívnej antifóny pre žalmy/chválospevy 
 					 * 2011-01-17: upravené tak, aby sa nezobrazovalo len pre spomienky svätých [tam spadajú aj liturgické slávenia 1.1. a pod.]
 					 * 2011-03-01: upravené tak, že sa nezobrazuje len pre slávnosti a sviatky; pre spomienky sa zobrazuje (smer < 5: pre trojdnie)
+					 * 2011-04-30: doplnené, aby sa nezobrazovalo vo Ve¾konoènej oktáve
 					 */
 					if(equals(rest, PARAM_MYSLIENKA_K_ZALMU)){
-						if(!((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.typslav == SLAV_VLASTNE)
+						if(!((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.typslav == SLAV_VLASTNE) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA)
 							|| (_global_den.smer == 1)) 
 							/* && (_global_den.spolcast != _encode_spol_cast(MODL_SPOL_CAST_NEURCENA)) */){
 #if defined(EXPORT_HTML_SPECIALS)
