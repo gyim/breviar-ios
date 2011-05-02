@@ -49,3 +49,18 @@ CZ: replace in files, nezlomite¾né medzery (2) = spustené druhıkrát (opraví aj "
 CZ: replace in files, nezlomite¾né medzery (3) == nišie uvedené replace na zaèiatku riadkov
 %^([aiouksvz]^) 
 ^1_
+
+CZ: opravené jednopísmenkové predloky na konci riadkov
+
+find in files:
+ [aiouksvz]$
+
+replace in files:
+ ^([aiouksvz]^)$
+^p^1_
+(lene ruène som musel odstraòova ten ^p za tım celım...)
+
+replace:
+^([aiouksvz]^)_^p
+^1_
+
