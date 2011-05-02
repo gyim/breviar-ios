@@ -16,3 +16,11 @@ spustené naostro (pozor, na konci 1. riadka, string to find, je medzera!):
 ^([% _>]^)^([aiouksvz]^) 
 ^1^2_
 
+SK: replace in files, nezlomite¾né medzery (1)
+SK: replace in files, nezlomite¾né medzery (2) = spustené druhýkrát (opraví aj "a_v tebe" -> "a_v_tebe")
+
+nezafungovalo % v [] takže:
+%^([aiouksvz]^) 
+^1_
+
+SK: replace in files, nezlomite¾né medzery (3)
