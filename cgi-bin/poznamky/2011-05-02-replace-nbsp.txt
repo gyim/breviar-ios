@@ -1,0 +1,18 @@
+ultraedit replace in files, preserve case, regular expressions
+
+vylúèi súbory "kat_..." (katechézy) resp. vždy spravi revert
+
+search:
+^([ _>]^)k^([ ^p_]^)
+
+(nerieši konce riadkov; zaèiatky = %)
+
+pokus:
+^([ _>]^)k[ _]
+^1k_
+
+
+spustené naostro (pozor, na konci 1. riadka, string to find, je medzera!):
+^([% _>]^)^([aiouksvz]^) 
+^1^2_
+
