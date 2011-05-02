@@ -132,7 +132,7 @@ void hlavicka(char *title, short int level, short int spec){
 	/* 2010-02-15: doplnené predošlá a nasledovná modlitba */
 	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
 		Export("<center>\n");
-		pismeno_modlitby = '_';
+		pismeno_modlitby = CHAR_MODL_NEURCENA;
 		if((_local_modlitba < MODL_NEURCENA) && (_local_modlitba >= MODL_INVITATORIUM))
 			pismeno_modlitby = char_modlitby[_local_modlitba];
 		sprintf(ext, "%c", pismeno_modlitby);
@@ -247,7 +247,7 @@ void hlavicka(char *title, FILE * expt, short int level, short int spec){
 	/* 2010-02-15: doplnené predošlá a nasledovná modlitba */
 	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
 		fprintf(expt, "<center>\n");
-		pismeno_modlitby = '_';
+		pismeno_modlitby = CHAR_MODL_NEURCENA;
 		if((_local_modlitba < MODL_NEURCENA) && (_local_modlitba >= MODL_INVITATORIUM))
 			pismeno_modlitby = char_modlitby[_local_modlitba];
 		sprintf(ext, "%c", pismeno_modlitby);
@@ -340,7 +340,7 @@ void patka(void){
 	/* 2010-02-15: vložené "^ hore" pod¾a hlavicka(); doplnené predošlá a nasledovná modlitba */
 	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
 		Export("<center>\n");
-		pismeno_modlitby = '_';
+		pismeno_modlitby = CHAR_MODL_NEURCENA;
 		if((_local_modlitba < MODL_NEURCENA) && (_local_modlitba >= MODL_INVITATORIUM))
 			pismeno_modlitby = char_modlitby[_local_modlitba];
 		sprintf(ext, "%c", pismeno_modlitby);
@@ -469,7 +469,7 @@ void patka(FILE * expt){
 	/* 2010-02-15: vložené "^ hore" pod¾a hlavicka(); doplnené predošlá a nasledovná modlitba */
 	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
 		fprintf(expt, "<center>\n");
-		pismeno_modlitby = '_';
+		pismeno_modlitby = CHAR_MODL_NEURCENA;
 		if((_local_modlitba < MODL_NEURCENA) && (_local_modlitba >= MODL_INVITATORIUM))
 			pismeno_modlitby = char_modlitby[_local_modlitba];
 		sprintf(ext, "%c", pismeno_modlitby);

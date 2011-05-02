@@ -344,8 +344,7 @@ extern const char *nazov_Modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1];
 
 extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 
-/* znaky, ktore znacia (pre interpretovanie templatu) zaciatok a koniec
- * klucoveho slova */
+/* znaky, ktore znacia (pre interpretovanie templatu) zaciatok a koniec klucoveho slova */
 #define CHAR_KEYWORD_BEGIN   '{'
 #define CHAR_KEYWORD_END     '}'
 #define CHAR_KEYWORD_DIVIDER ':'
@@ -353,6 +352,11 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 #define CHAR_KEYWORD2_BEGIN  '<'
 #define CHAR_KEYWORD2_END    '>'
 */
+
+/* znak '_' používame ako zástupný pre nezlomite¾nú medzeru (exportuje sa ako HTML_NONBREAKING_SPACE == "&nbsp;" definované v mydefs.h) 
+ * 2011-05-02: pridané; nevadí, že je duplicita s UNDERSCORE resp. CHAR_MODL_NEURCENA 
+ */
+#define CHAR_NONBREAKING_SPACE '_'
 
 /* include parameters (parametre v inkludovanych suboroch) */
 #define INCLUDE_BEGIN   "BEGIN" /* zaciatok */
@@ -1205,6 +1209,7 @@ short int _deallocate_global_var(void);
 short int cislo_mesiaca(char *mesiac);
 char *caps_BIG(const char *input);
 char *remove_diacritics(const char *input);
+char *convert_nonbreaking_spaces(const char *input);
 
 /* podla toho, ako sa funkcia vola, urcim case */
 #define vytvor_global_link(den, mesiac, rok, typ)	_vytvor_global_link(den, mesiac, rok, CASE_case, typ)

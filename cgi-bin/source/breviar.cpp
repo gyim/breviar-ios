@@ -221,6 +221,8 @@
 /*                    Dan 3, 57-88. 56, kde nie je "Sl·va Otcu" (pÙvodne   */
 /*                    to bolo danÈ poradÌm, ale templ·ty pre rÙzne jazyky  */
 /*                    maj˙ rozliËnÈ poradie tohto "Sl·va Otcu")            */
+/*   2011-05-02a.D. | znak '_' pouûÌvame ako z·stupn˝ pre nezlomiteæn˙     */
+/*                    medzeru (exportuje sa ako &nbsp;) v include s˙boroch */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -1298,6 +1300,7 @@ void _main_prazdny_formular(void){
  * podla parametra paramname (PARAM_...)
  * 
  * 2006-01-28: upraven˝ spÙsob v˝pisu kvÙli zjednoduöenej diagnostike
+ * 2011-05-02: znak '_' pouûÌvame ako z·stupn˝ pre nezlomiteæn˙ medzeru (exportuje sa ako &nbsp;)
  * 
  */
 #define DetailLog emptyLog
@@ -1672,7 +1675,13 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 				refbuff[ref_index++] = (char)c;
 			}
 			if(write == ANO){
-				Export("%c", c); /* fputc(c, exportfile); */
+				/* 2011-05-02: nezlomiteænÈ medzery; v DetailLog logujeme 1:1 presne znak bez transform·cie */
+				if(c == CHAR_NONBREAKING_SPACE){
+					Export(HTML_NONBREAKING_SPACE);
+				}
+				else{
+					Export("%c", c); /* fputc(c, exportfile); */
+				}
 				DetailLog("%c", c);
 			}
 			else ; //skip
@@ -1684,7 +1693,8 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 				Log("pravdepodobne osamoten˝ znak '{'...\n");
 				isbuff = 0;
 				if(write == ANO){
-					Export("%s", strbuff);
+					/* 2011-05-02: nezlomiteænÈ medzery; v DetailLog logujeme 1:1 presne reùazec bez transform·cie */
+					Export("%s", convert_nonbreaking_spaces(strbuff));
 					DetailLog("%s", strbuff);
 				}
 				/* vyËistenie buffra */
@@ -3050,6 +3060,8 @@ void interpretParameter(short int type, char *paramname){
  * CHAR_KEYWORD_BEGIN a CHAR_KEYWORD_END su #define'ovane v liturgia.h
  * exportfile je definovane v myexpt.[h|c]
  *
+ * 2011-05-02: znak '_' pouûÌvame ako z·stupn˝ pre nezlomiteæn˙ medzeru (exportuje sa ako &nbsp;)
+ *
  */
 void interpretTemplate(short int type, char *tempfile){
 	short int c, buff_index = 0; /* 01/03/2000A.D. - inicializacia */
@@ -3083,7 +3095,12 @@ void interpretTemplate(short int type, char *tempfile){
 		}/* switch(c) */
 		if(!isbuff){
 			if((_global_skip_in_prayer != ANO) && (_global_skip_in_prayer_2 != ANO)){
-				Export("%c", c); /* fputc(c, exportfile); */
+				if(c == CHAR_NONBREAKING_SPACE){
+					Export(HTML_NONBREAKING_SPACE);
+				}
+				else{
+					Export("%c", c); /* fputc(c, exportfile); */
+				}
 			}/* !_global_skip_in_prayer && !_global_skip_in_prayer_2 */
 		}/* if(!isbuff) */
 		else{

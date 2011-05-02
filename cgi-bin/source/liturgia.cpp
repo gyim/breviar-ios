@@ -372,7 +372,7 @@ char *caps_BIG(const char *input){
 		i++;
 	}
 	return (_global_pom_str);
-}
+}/* caps_BIG() */
 
 /* ------------------------------------------------------------------- */
 /* odstráni diakritiku
@@ -411,7 +411,7 @@ char *remove_diacritics(const char *input){
 				case 'Ú': c = 'U'; break;
 				case 'Ý': c = 'Y'; break;
 				/* samohlasky -- specialne */
-				case 'ä': c = 'a'; break;
+ 				case 'ä': c = 'a'; break;
 				case 'ô': c = 'o'; break;
 				case 'ì': c = 'e'; break;
 				case 'ù': c = 'u'; break;
@@ -457,7 +457,27 @@ char *remove_diacritics(const char *input){
 		i++;
 	}
 	return (_global_pom_str);
-}
+}/* remove_diacritics() */
+
+/* ------------------------------------------------------------------- */
+/* konvertuje underscore na nezlomite¾né medzery
+ * 2011-05-02: vytvorené
+ */
+char *convert_nonbreaking_spaces(const char *input){
+	short int i = 0;
+	char c;
+	mystrcpy(_global_pom_str, STR_EMPTY, MAX_STR);
+	while(( c = input[i]) != '\0'){
+		if(c == CHAR_NONBREAKING_SPACE){
+			strcat(_global_pom_str, HTML_NONBREAKING_SPACE);
+		}/* c == CHAR_NONBREAKING_SPACE */
+		else{
+			strcat(_global_pom_str, (char *)c);
+		}
+		i++;
+	}
+	return (_global_pom_str);
+}/* convert_nonbreaking_spaces() */
 
 void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int prvy_ampersand){
 	short int i;
