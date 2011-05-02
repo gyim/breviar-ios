@@ -35,3 +35,12 @@ akceptované/upravené:
 -- v hymnuse _2NEr_HYMNUS: "Odprosujeme nekoneènú moc a" na konci riadka (dal som tam radšej "_", nech to nemýli)
 -- v èítaní OCR20NEc_CIT1 verš 9 zalomený takto: "„H¾a tu som, mòa pošli.“ <br>On vravel: „Choï a_povedz tomuto ¾udu:"; v LA (IV, 93) nie je ako poetický text
 
+
+__________________________________
+
+
+CZ: replace in files, nezlomite¾né medzery (1)
+spustené naostro (pozor, na konci 1. riadka, string to find, je medzera!):
+^([% _>]^)^([aiouksvz]^) 
+^1^2_
+
