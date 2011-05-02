@@ -3741,18 +3741,13 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 						/* ve¾konoèná oktáva - 'všedný deò' vo ve¾konoènej oktáve */
 						_rozbor_dna_LOG("/* ve¾konoèná oktáva - 'všedný deò' vo ve¾konoènej oktáve */\n");
 						if(_global_jazyk == JAZYK_SK){
-							sprintf(_global_den.meno, text_DEN_VO_VELKONOCNEJ_OKTAVE[_global_jazyk],
-								koncovka_dna(_global_den.denvt),
-								nazov_dna(_global_den.denvt));
+							sprintf(_global_den.meno, text_DEN_VO_VELKONOCNEJ_OKTAVE[_global_jazyk], koncovka_dna(_global_den.denvt), nazov_dna(_global_den.denvt));
 						}
 						else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
-							sprintf(_global_den.meno, text_DEN_VO_VELKONOCNEJ_OKTAVE[_global_jazyk],
-								nazov_Dna(_global_den.denvt));
+							sprintf(_global_den.meno, text_DEN_VO_VELKONOCNEJ_OKTAVE[_global_jazyk], nazov_Dna(_global_den.denvt));
 						}
 						else{ /* default */
-							sprintf(_global_den.meno, text_DEN_VO_VELKONOCNEJ_OKTAVE[_global_jazyk],
-								koncovka_dna(_global_den.denvt),
-								nazov_dna(_global_den.denvt));
+							sprintf(_global_den.meno, text_DEN_VO_VELKONOCNEJ_OKTAVE[_global_jazyk], nazov_dna(_global_den.denvt));
 						}
 					}
 				}
@@ -9864,8 +9859,7 @@ void _main_analyza_roku(char *rok){
 
 	vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, year, LINK_DEN_MESIAC_ROK);
 	/* zmenene <font color> na <span>, 2003-07-02 */
-	ExportROK((char *)html_text_Prikazane_sviatky_v_roku[_global_jazyk], /* 2008-08-15 */
-		_global_link);
+	ExportROK((char *)html_text_Prikazane_sviatky_v_roku[_global_jazyk], _global_link);
 	Export("<br>\n");
 	Export("\n<table>\n");
 
@@ -9914,8 +9908,7 @@ void _main_analyza_roku(char *rok){
 	/* teraz nasleduju jednotlive mesiace roku s linkami na ne */
 	vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, year, LINK_DEN_MESIAC_ROK);
 	/* zmenene <font color> na <span>, 2003-07-02 */
-	ExportROK((char *)html_text_Jednotlive_mesiace_roku[_global_jazyk], /* 2008-08-15 */
-		_global_link);
+	ExportROK((char *)html_text_Jednotlive_mesiace_roku[_global_jazyk], _global_link);
 #ifdef RICH_JEDNOTLIVE_MESIACE
 	Export("<ul>\n");
 	for(i = MES_JAN; i <= MES_DEC; i++){

@@ -1153,7 +1153,8 @@ const char *html_text_Od_prvej_adv_atd[POCET_JAZYKOV + 1] = {
 	"From the 1st Advent Sunday in the year %d (%s) continues <a href=\"%s%s\">liturgical year</a> <"HTML_SPAN_BOLD">%c</span>.\n",
 	"Od prvej adventnej nedele v roku %d (%s) pokraèuje <a href=\"%s%s\">liturgický rok</a> <"HTML_SPAN_BOLD">%c</span>.\n",
 	"",
-	"Od první nedìle adventní v roce %d (%s) pokraèuje <a href=\"%s%s\">liturgický rok</a> <"HTML_SPAN_BOLD">%c</span>.\n"
+	"Od první nedìle adventní v roce %d (%s) pokraèuje <a href=\"%s%s\">liturgický rok</a> <"HTML_SPAN_BOLD">%c</span>.\n",
+	"Od prvej adventnej nedele v roku %d (%s) pokraèuje <a href=\"%s%s\">liturgický rok</a> <"HTML_SPAN_BOLD">%c</span>.\n",
 };
 
 const char *html_text_Po_Velkej_noci_atd[POCET_JAZYKOV + 1] = {
