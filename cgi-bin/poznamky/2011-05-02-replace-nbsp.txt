@@ -35,6 +35,11 @@ akceptované/upravené:
 -- v hymnuse _2NEr_HYMNUS: "Odprosujeme nekoneènú moc a" na konci riadka (dal som tam radšej "_", nech to nemýli)
 -- v èítaní OCR20NEc_CIT1 verš 9 zalomený takto: "„H¾a tu som, mòa pošli.“ <br>On vravel: „Choï a_povedz tomuto ¾udu:"; v LA (IV, 93) nie je ako poetický text
 
+SK: opravené jednopísmenkové predložky (s podtrhovníkom) na konci riadkov
+
+replace:
+^([aiouksvz]^)_^p
+^p^1_
 
 __________________________________
 
@@ -63,4 +68,6 @@ replace in files:
 replace:
 ^([aiouksvz]^)_^p
 ^1_
+
+__________________________________
 
