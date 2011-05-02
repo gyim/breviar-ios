@@ -23,7 +23,7 @@ nezafungovalo % v [] takže:
 %^([aiouksvz]^) 
 ^1_
 
-SK: replace in files, nezlomite¾né medzery (3)
+SK: replace in files, nezlomite¾né medzery (3) == vyššie uvedené replace na zaèiatku riadkov
 
 SK: ruène upravené jednopísmenkové predložky na konci riadkov
 
@@ -44,3 +44,8 @@ spustené naostro (pozor, na konci 1. riadka, string to find, je medzera!):
 ^([% _>]^)^([aiouksvz]^) 
 ^1^2_
 
+CZ: replace in files, nezlomite¾né medzery (2) = spustené druhýkrát (opraví aj "a_v tebe" -> "a_v_tebe")
+
+CZ: replace in files, nezlomite¾né medzery (3) == nižšie uvedené replace na zaèiatku riadkov
+%^([aiouksvz]^) 
+^1_
