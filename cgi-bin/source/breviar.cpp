@@ -226,6 +226,8 @@
 /*   2011-05-03a.D. | vianoËn· okt·va: m· modlitbu kompletÛria pre sl·vnosù*/
 /*                  - opravenÈ: nezobrazovaù referencie v myölienke        */
 /*                    k ûalmu, ak sa t·to nezobrazuje                      */
+/*                  - pridanÈ preskoËenie veækej Ëasti öablÛny pre posv.   */
+/*                    ËÌtanie na veækonoËn˙ nedeæu                         */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -494,6 +496,7 @@ char _global_export_navig_hore_day[SMALL] = DEFAULT_MONTH_EXPORT;
  */
 short int _global_skip_in_prayer = NIE;
 short int _global_skip_in_prayer_2 = NIE; // 2011-04-07: kvÙli ËÌslovaniu veröov v Ëastiach, kde sa pouûÌva _global_skip_in_prayer
+short int _global_skip_in_prayer_vnpc = NIE; // 2011-05-03: kvÙli veækonoËnej nedeli, posv‰tnÈ ËÌtanie
 
 /* globalna premenna, ktora hovori, ci generujeme modlitbu */
 //int _global_gen_modlitba; == (_global_modlitba == MODL_NEURCENA)
@@ -1324,13 +1327,11 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 	char refbuff[MAX_BUFFER]; /* 2011-04-05: buffer pre referenciu */
 	char refrest[MAX_BUFFER]; /* 2011-04-05: 'rest' uloûenÈ zo zaËiatku referencie (pouûÌva sa aû pri parsovanÌ konca referencie) */
 
-	Log("--includeFile(%d, %s, %s, %s): begin,\n",
-		type, paramname, fname, modlparam);
+	Log("--includeFile(%d, %s, %s, %s): begin,\n", type, paramname, fname, modlparam);
 
 	FILE *body = fopen(fname, "r");
 
-	Log("  replacing {%s} with %s from file `%s':\n",
-		paramname, modlparam, fname);
+	Log("  replacing {%s} with %s from file `%s':\n", paramname, modlparam, fname);
 	if(body == NULL){
 		/*printf("error `%s'\n", sys_errlist[errno]);*/
 		Log("  file `%s' not found\n", fname);
@@ -1352,6 +1353,12 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 #elif defined(EXPORT_HTML_ANCHOR)
 	Export("(anchor `%s')", modlparam);
 #endif
+
+	/* 2011-05-03: doplnenÈ */
+	if((_global_skip_in_prayer == ANO) || (_global_skip_in_prayer_vnpc == ANO)){
+		Log("--includeFile(): end (because _global_skip_in_prayer || _global_skip_in_prayer_vnpc == ANO)\n");
+		return;
+	}
 
 	/* 2011-05-03: nastavenie toho, Ëi sa m· zobrazovaù myölienka k ûalmom/chv·lospevom */
 	if((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.typslav == SLAV_VLASTNE) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || (_global_den.smer == 1) /* && (_global_den.spolcast != _encode_spol_cast(MODL_SPOL_CAST_NEURCENA)) */){
@@ -1742,7 +1749,42 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 	}/* while((c = fgetc(body)) != EOF) */
 	fclose(body);
 	Log("--includeFile(): end\n");
-}
+}/* includeFile() */
+
+/*---------------------------------------------------------------------*/
+/* definicie pre _rozbor_dna():
+ *
+ * obsahuju sviatky, ktore su bud pevne alebo pohyblive,
+ * v kazdom pripade su to dolezite "hranicne" dni medzi obdobiami
+ *
+ * 2011-05-03: predsunutÈ pred interpretParameter(), lebo sa tu pouûÌvaj˙
+ *
+ */
+
+/* 2006-08-01: pozor, koncovky s˙ pre kaûd˝ jazyk odliönÈ */
+#define koncovka_dna_asci(denvt) ((nazov_dna((denvt))[strlen(nazov_dna((denvt))) - 1] == 'a')? 'a': 'y')
+#define koncovka_dna(denvt) ((nazov_dna((denvt))[strlen(nazov_dna((denvt))) - 1] == 'a')? '·': '˝')
+#define KRST _global_r._KRST_KRISTA_PANA.denvr    /* nedela po 6. januari */
+#define POPOLCOVA_STREDA  _global_r._POPOLCOVA_STREDA.denvr
+#define VELKONOCNA_NEDELA   _global_r._VELKONOCNA_NEDELA.denvr   /* velkonocna nedela */
+#define KVETNA_NEDELA (VELKONOCNA_NEDELA - 7)                     /* kvetna nedela */
+#define ZELENY_STVRTOK   (VELKONOCNA_NEDELA - 3) 						   /* zeleny stvrtok */
+#define VELKY_PIATOK   (VELKONOCNA_NEDELA - 2) 						   /* velky piatok */
+#define BIELA_SOBOTA   (VELKONOCNA_NEDELA - 1) 						   /* biela sobota */
+#define VELKONOCNY_PONDELOK (VELKONOCNA_NEDELA + 1) 						   /* velkonocny pondelok */
+#define DRUHA_VELKONOCNA_NEDELA  (VELKONOCNA_NEDELA + 7) 						   /* nedela vo velkonocnej oktave */
+#define NANEBOVSTUPENIE  _global_r._NANEBOVSTUPENIE_PANA.denvr
+#define PRVA_ADVENTNA_NEDELA  _global_r._PRVA_ADVENTNA_NEDELA.denvr
+#define ZOSLANIE_DUCHA_SV  _global_r._ZOSLANIE_DUCHA_SV.denvr
+#define SV_RODINY  _global_r._SVATEJ_RODINY.denvr
+#define TROJICA (ZOSLANIE_DUCHA_SV + 7)             /* prva nedela po ZOSLANIE_DUCHA_SV: sv. trojice */
+#define TELAKRVI (ZOSLANIE_DUCHA_SV + 11) /* stvrtok po trojici: kristovho tela a krvi */
+#define SRDCA (ZOSLANIE_DUCHA_SV + 19) /* piatok po druhej nedeli po ZOSLANIE_DUCHA_SV: najsv. srdca jezisovho */
+#define SRDPM (ZOSLANIE_DUCHA_SV + 20) /* sobota po druhej nedeli po ZOSLANIE_DUCHA_SV: neposkvrneneho srdca prebl. p. marie */
+/* 2006-08-22: kvÙli ruûovej farbe r˙cha potrebujeme define aj pre 
+ * 3. adventn˙ nedeæu a 4. pÙstnu nedeæu */
+#define TRETIA_ADVENTNA_NEDELA		(PRVA_ADVENTNA_NEDELA + 14) /* tretia adventn· nedeæa - dva t˝ûdne po prvej AN */
+#define STVRTA_POSTNA_NEDELA		(VELKONOCNA_NEDELA - 21)  /* ötvrt· pÙstna nedeæa - tri t˝ûdne pred VELKONOCNA_NEDELA */
 
 /*---------------------------------------------------------------------*/
 /* interpretParameter():
@@ -2151,6 +2193,40 @@ void interpretParameter(short int type, char *paramname){
 		}
 	}
 
+	/* 2011-05-03: pridanÈ preskoËenie veækej Ëasti öablÛny pre posv‰tnÈ ËÌtanie na veækonoËn˙ nedeæu */
+	else if(equals(paramname, PARAM_VN_VYNECHAJ_BEGIN)){
+		if(_global_den.denvr != VELKONOCNA_NEDELA){
+			/* zobrazit rubriky */
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("zobraziù posv.ËÌtanie");
+#endif
+			Export("-->");
+			Log("  `posv.ËÌtanie': begin...\n");
+		}
+		else{
+			/* nezobrazovaù celÈ posv. ËÌtanie */
+			_global_skip_in_prayer_vnpc = ANO;
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("nezobraziù posv.ËÌtanie");
+#endif
+			Log("  `posv.ËÌtanie' skipping...\n");
+		}
+	}
+	else if(equals(paramname, PARAM_VN_VYNECHAJ_END)){
+		if(_global_den.denvr != VELKONOCNA_NEDELA){
+			Export("<!--");
+#if defined(EXPORT_HTML_SPECIALS)
+			Export("zobraziù posv.ËÌtanie");
+#endif
+			Log("  `posv.ËÌtanie': copied.\n");
+		}
+		else{
+			/* zobrazovaù celÈ posv. ËÌtanie */
+			_global_skip_in_prayer_vnpc = NIE;
+			Log("  `posv.ËÌtanie' skipped.\n");
+		}
+	}
+
 	/* 2007-03-23: pridanÈ Sl·va Otcu */
 	else if(equals(paramname, PARAM_SLAVAOTCU_BEGIN) || equals(paramname, PARAM_SLAVAOTCU_SPEC_BEGIN)){
 		_global_pocet_slava_otcu = _global_pocet_slava_otcu + 1;
@@ -2167,7 +2243,7 @@ void interpretParameter(short int type, char *paramname){
 		)){
 			/* zobrazit Slava Otcu */
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("zobrazit Slava Otcu(%d)", _global_pocet_slava_otcu);
+			Export("zobraziù Slava Otcu(%d)", _global_pocet_slava_otcu);
 #endif
 			Export("-->");
 			Log("  `Slava Otcu': begin...\n");
@@ -2176,7 +2252,7 @@ void interpretParameter(short int type, char *paramname){
 			/* nezobrazovat Slava Otcu */
 			_global_skip_in_prayer = ANO;
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("nezobrazit Slava Otcu (%d)", _global_pocet_slava_otcu);
+			Export("nezobraziù Slava Otcu (%d)", _global_pocet_slava_otcu);
 #endif
 			Log("  `Slava Otcu' skipping...\n");
 		}
@@ -2195,7 +2271,7 @@ void interpretParameter(short int type, char *paramname){
 		)){
 			Export("<!--");
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("zobrazit Slava Otcu(%d)", _global_pocet_slava_otcu);
+			Export("zobraziù Slava Otcu(%d)", _global_pocet_slava_otcu);
 #endif
 			Log("  `Slava Otcu': copied.\n");
 		}
@@ -2232,7 +2308,7 @@ void interpretParameter(short int type, char *paramname){
 			/* zobraziù alternatÌvny hymnus 34. t˝ûdÚa OCR */
 			Export("<!--");
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("je 34. tyzden OCR");
+			Export("je 34.t˝ûdeÚ OCR");
 #endif
 			Log("JE 34.t˝ûdeÚ OCR... END\n");
 		}
@@ -2248,7 +2324,7 @@ void interpretParameter(short int type, char *paramname){
 		if(_global_ant_mcd_rovnake == NIE){
 			/* zobrazit nazvy antifon */
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("zobrazit ant.");
+			Export("zobraziù ant.");
 #endif
 			Export("-->");
 			Log("  `Ant.': begin...\n");
@@ -2257,7 +2333,7 @@ void interpretParameter(short int type, char *paramname){
 			/* nezobrazovat nazvy antifon */
 			_global_skip_in_prayer = ANO;
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("nezobrazit ant.");
+			Export("nezobraziù ant.");
 #endif
 			Log("  `Ant.' skipping...\n");
 		}
@@ -2267,7 +2343,7 @@ void interpretParameter(short int type, char *paramname){
 			/* zobrazit nazvy antifon */
 			Export("<!--");
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("zobrazit ant.");
+			Export("zobraziù ant.");
 #endif
 			Log("  `Ant.': copied.\n");
 		}
@@ -2285,18 +2361,18 @@ void interpretParameter(short int type, char *paramname){
 		if(je_post && je_ant_modl_spom_post){
 			/* zobraziù antifÛnu/modlitbu v pÙste na spomienky sv‰tcov */
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("zobrazit ant.");
+			Export("zobraziù spom.pÙst.");
 #endif
 			Export("-->");
-			Log("  `spom.post.': begin...\n");
+			Log("  `spom.pÙst.': begin...\n");
 		}
 		else{
 			/* nezobraziù antifÛnu/modlitbu v pÙste na spomienky sv‰tcov */
 			_global_skip_in_prayer = ANO;
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("nezobrazit spom.post.");
+			Export("nezobraziù spom.pÙst.");
 #endif
-			Log("  `spom.post.' skipping...\n");
+			Log("  `spom.pÙst.' skipping...\n");
 		}
 	}
 	else if(equals(paramname, PARAM_POST_SPOMIENKA_END)){
@@ -2304,14 +2380,14 @@ void interpretParameter(short int type, char *paramname){
 			/* zobraziù antifÛnu/modlitbu v pÙste na spomienky sv‰tcov */
 			Export("<!--");
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("zobrazit spom.post.");
+			Export("zobraziù spom.pÙst.");
 #endif
-			Log("  `spom.post.': copied.\n");
+			Log("  `spom.pÙst.': copied.\n");
 		}
 		else{
 			/* nezobraziù antifÛnu/modlitbu v pÙste na spomienky sv‰tcov */
 			_global_skip_in_prayer = NIE;
-			Log("  `spom.post.' skipped.\n");
+			Log("  `spom.pÙst.' skipped.\n");
 		}
 	}
 
@@ -3131,7 +3207,7 @@ void interpretTemplate(short int type, char *tempfile){
 				continue;
 		}/* switch(c) */
 		if(!isbuff){
-			if((_global_skip_in_prayer != ANO) && (_global_skip_in_prayer_2 != ANO)){
+			if((_global_skip_in_prayer != ANO) && (_global_skip_in_prayer_2 != ANO) && (_global_skip_in_prayer_vnpc != ANO)){
 				if(c == CHAR_NONBREAKING_SPACE){
 					Export(HTML_NONBREAKING_SPACE);
 				}
@@ -3411,39 +3487,6 @@ short int atomes(char *mesiac){
 	}while(i < UNKNOWN_MESIAC);
 	return UNKNOWN_MESIAC;
 }
-
-/*---------------------------------------------------------------------*/
-/* definicie pre _rozbor_dna():
- *
- * obsahuju sviatky, ktore su bud pevne alebo pohyblive,
- * v kazdom pripade su to dolezite "hranicne" dni medzi obdobiami
- *
- */
-
-/* 2006-08-01: pozor, koncovky s˙ pre kaûd˝ jazyk odliönÈ */
-#define koncovka_dna_asci(denvt) ((nazov_dna((denvt))[strlen(nazov_dna((denvt))) - 1] == 'a')? 'a': 'y')
-#define koncovka_dna(denvt) ((nazov_dna((denvt))[strlen(nazov_dna((denvt))) - 1] == 'a')? '·': '˝')
-#define KRST _global_r._KRST_KRISTA_PANA.denvr    /* nedela po 6. januari */
-#define POPOLCOVA_STREDA  _global_r._POPOLCOVA_STREDA.denvr
-#define VELKONOCNA_NEDELA   _global_r._VELKONOCNA_NEDELA.denvr   /* velkonocna nedela */
-#define KVETNA_NEDELA (VELKONOCNA_NEDELA - 7)                     /* kvetna nedela */
-#define ZELENY_STVRTOK   (VELKONOCNA_NEDELA - 3) 						   /* zeleny stvrtok */
-#define VELKY_PIATOK   (VELKONOCNA_NEDELA - 2) 						   /* velky piatok */
-#define BIELA_SOBOTA   (VELKONOCNA_NEDELA - 1) 						   /* biela sobota */
-#define VELKONOCNY_PONDELOK (VELKONOCNA_NEDELA + 1) 						   /* velkonocny pondelok */
-#define DRUHA_VELKONOCNA_NEDELA  (VELKONOCNA_NEDELA + 7) 						   /* nedela vo velkonocnej oktave */
-#define NANEBOVSTUPENIE  _global_r._NANEBOVSTUPENIE_PANA.denvr
-#define PRVA_ADVENTNA_NEDELA  _global_r._PRVA_ADVENTNA_NEDELA.denvr
-#define ZOSLANIE_DUCHA_SV  _global_r._ZOSLANIE_DUCHA_SV.denvr
-#define SV_RODINY  _global_r._SVATEJ_RODINY.denvr
-#define TROJICA (ZOSLANIE_DUCHA_SV + 7)             /* prva nedela po ZOSLANIE_DUCHA_SV: sv. trojice */
-#define TELAKRVI (ZOSLANIE_DUCHA_SV + 11) /* stvrtok po trojici: kristovho tela a krvi */
-#define SRDCA (ZOSLANIE_DUCHA_SV + 19) /* piatok po druhej nedeli po ZOSLANIE_DUCHA_SV: najsv. srdca jezisovho */
-#define SRDPM (ZOSLANIE_DUCHA_SV + 20) /* sobota po druhej nedeli po ZOSLANIE_DUCHA_SV: neposkvrneneho srdca prebl. p. marie */
-/* 2006-08-22: kvÙli ruûovej farbe r˙cha potrebujeme define aj pre 
- * 3. adventn˙ nedeæu a 4. pÙstnu nedeæu */
-#define TRETIA_ADVENTNA_NEDELA		(PRVA_ADVENTNA_NEDELA + 14) /* tretia adventn· nedeæa - dva t˝ûdne po prvej AN */
-#define STVRTA_POSTNA_NEDELA		(VELKONOCNA_NEDELA - 21)  /* ötvrt· pÙstna nedeæa - tri t˝ûdne pred VELKONOCNA_NEDELA */
 
 /*---------------------------------------------------------------------*/
 /* _rozbor_dna()

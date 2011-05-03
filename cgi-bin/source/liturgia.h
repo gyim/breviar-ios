@@ -459,6 +459,10 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 #define PARAM_RUBRIKA_BEGIN                 "RUBRIKA_BEGIN"
 #define PARAM_RUBRIKA_END                   "RUBRIKA_END"
 
+/* 2011-05-03: doplnené kvôli posvätnému èítaniu na ve¾konoènú nede¾u */
+#define PARAM_VN_VYNECHAJ_BEGIN             "VELK_NEDELA_VYNECHAJ_BEGIN"
+#define PARAM_VN_VYNECHAJ_END               "VELK_NEDELA_VYNECHAJ_END"
+
 /* 2011-04-04: doplnené zobrazenie/skrytie èíslovania veršov v žalmoch, chválospevoch a biblických èítaniach */
 #define PARAM_CISLO_VERSA_BEGIN				"v"
 #define PARAM_CISLO_VERSA_END				"/v"
