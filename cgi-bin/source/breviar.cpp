@@ -1313,6 +1313,8 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 	char vnutri_inkludovaneho = 0; /* 17/02/2000A.D., kvoli "V.O. Aleluja" v inkludovanych napr. antifonach */
 	char zakoncenie[MAX_STR]; /* 2009-12-14: zakonèenie s ve¾kım písmenkom na zaèiatku, následne sa prípadne mení 1. písmeno na malé */
 	short int vnutri_referencie = NIE; /* 2011-04-05, kvôli biblickım referenciám v inkludovanıch súboroch */
+	short int vnutri_myslienky = NIE; /* 2011-05-03, kvôli myšlienkam k almom, ktoré v sebe vnútri môu obsahova biblickú referenciu */
+	short int je_myslienka = NIE; /* 2011-05-03, èi sa má myšlienka vklada alebo nie */
 	char refbuff[MAX_BUFFER]; /* 2011-04-05: buffer pre referenciu */
 	char refrest[MAX_BUFFER]; /* 2011-04-05: 'rest' uloené zo zaèiatku referencie (pouíva sa a pri parsovaní konca referencie) */
 
@@ -1344,6 +1346,15 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 #elif defined(EXPORT_HTML_ANCHOR)
 	Export("(anchor `%s')", modlparam);
 #endif
+
+	/* 2011-05-03: nastavenie toho, èi sa má zobrazova myšlienka k almom/chválospevom */
+	if((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.typslav == SLAV_VLASTNE) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || (_global_den.smer == 1) /* && (_global_den.spolcast != _encode_spol_cast(MODL_SPOL_CAST_NEURCENA)) */){
+		je_myslienka = NIE;
+	}
+	else{
+		je_myslienka = ANO;
+	}
+	Log("nastavil som je_myslienka = %d\n", je_myslienka);
 	while((c = fgetc(body)) != EOF){
 		switch (c){
 			/* 2011-03-29: ak sa nachádza znak CHAR_KEYWORD_BEGIN (t. j. '{') len tak vo¾ne v texte, program zblbol; nevedel zisti, èi ide o keyword alebo nie; pokus o opravu */
@@ -1423,7 +1434,23 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 							Export("</a>");
 						}
 						vnutri_referencie = NIE;
-						write = ANO;
+
+						/* 2011-05-02: doplnené kvôli referenciám, ktoré sú v rámci myšlienok, èo sa nemajú zobrazova */
+						if(!vnutri_myslienky || je_myslienka){
+							write = ANO;
+						}
+						/*
+						// ekvivalentné nasledovnému: 
+						if(vnutri_myslienky){
+							if(je_myslienka){
+								write = ANO; // ak je_myslienka == ANO, tak len vtedy nastav write na ANO
+							}
+						}
+						else{
+							write = ANO;
+						}
+						*/
+
 						strcpy(refrest, STR_EMPTY);
 					}/* upravi referencie na hyperlinky */
 
@@ -1639,30 +1666,35 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 					 * 2011-01-17: upravené tak, aby sa nezobrazovalo len pre spomienky svätıch [tam spadajú aj liturgické slávenia 1.1. a pod.]
 					 * 2011-03-01: upravené tak, e sa nezobrazuje len pre slávnosti a sviatky; pre spomienky sa zobrazuje (smer < 5: pre trojdnie)
 					 * 2011-04-30: doplnené, aby sa nezobrazovalo vo Ve¾konoènej oktáve
+					 * 2011-05-03: upravené, aby sa nastavovalo vnutri_myslienky kvôli tomu, e z viacerıch miest sa nastavovalo write
 					 */
 					if(equals(rest, PARAM_MYSLIENKA_K_ZALMU)){
-						if(!((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.typslav == SLAV_VLASTNE) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA)
-							|| (_global_den.smer == 1)) 
-							/* && (_global_den.spolcast != _encode_spol_cast(MODL_SPOL_CAST_NEURCENA)) */){
+						if(je_myslienka){
 #if defined(EXPORT_HTML_SPECIALS)
 							Export("myslienka");
 #endif
 						}
 						else{
-							if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
-								write = NIE;
+							if(equals(strbuff, INCLUDE_BEGIN)){
+								vnutri_myslienky = ANO;
+								if(vnutri_inkludovaneho == 1){
+									write = NIE;
 #if defined(EXPORT_HTML_SPECIALS)
-								Export("(stop)nie je myslienka");
+									Export("(stop)nie je myslienka");
 #endif
-								Log("  rusim writing to export file, kvoli myslienka-k-zalmu...\n");
-							}
-							else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
+									Log("  rusim writing to export file, kvoli myslienka-k-zalmu...\n");
+								}/* vnutri_inkludovaneho == 1 */
+							}/* INCLUDE_BEGIN */
+							else if(equals(strbuff, INCLUDE_END)){
+								vnutri_myslienky = NIE;
+								if(vnutri_inkludovaneho == 1){
 #if defined(EXPORT_HTML_SPECIALS)
-								Export("nie je myslienka(start)");
+									Export("nie je myslienka(start)");
 #endif
-								write = ANO;
-								Log("  opat writing to export file, end of myslienka-k-zalmu.\n");
-							}
+									write = ANO;
+									Log("  opat writing to export file, end of myslienka-k-zalmu.\n");
+								}/* vnutri_inkludovaneho == 1 */
+							}/* INCLUDE_END */
 						}
 					}/* volite¾né zobrazovanie/skrıvanie alternatívnej antifóny pre almy/chválospevy */
 
