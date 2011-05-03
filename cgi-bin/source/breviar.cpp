@@ -1301,9 +1301,12 @@ void _main_prazdny_formular(void){
  * 
  * 2006-01-28: upraven˝ spÙsob v˝pisu kvÙli zjednoduöenej diagnostike
  * 2011-05-02: znak '_' pouûÌvame ako z·stupn˝ pre nezlomiteæn˙ medzeru (exportuje sa ako &nbsp;)
+ * 2011-05-03: zadefinovanÈ EXPORT_REFERENCIA -- aby sa neexportovala referencia, ak netreba (v r·mci HTML pozn·mky)
+ *             (moûno Ëasom sa uk·ûe, ûe treba testovaù aj nieËo inÈ ako len referencie v r·mci myölienok k ûalmom/chv·lospevom)
  * 
  */
 #define DetailLog emptyLog
+#define EXPORT_REFERENCIA (!vnutri_myslienky || je_myslienka)
 void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 	short int c, buff_index = 0, ref_index = 0;
 	char strbuff[MAX_BUFFER];
@@ -1355,6 +1358,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 		je_myslienka = ANO;
 	}
 	Log("nastavil som je_myslienka = %d\n", je_myslienka);
+
 	while((c = fgetc(body)) != EOF){
 		switch (c){
 			/* 2011-03-29: ak sa nach·dza znak CHAR_KEYWORD_BEGIN (t. j. '{') len tak voæne v texte, program zblbol; nevedel zistiù, Ëi ide o keyword alebo nie; pokus o opravu */
@@ -1420,37 +1424,35 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 						refbuff[ref_index] = '\0';
 						if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_REFERENCIE) == BIT_OPT_0_REFERENCIE){
 							/* ToDo: Ëasom daù odkaz napr. do konfiguraËnÈho s˙boru */
-							Export("<a href=\"http://dkc.kbs.sk/?in=");
+							if(EXPORT_REFERENCIA){
+								Export("<a href=\"http://dkc.kbs.sk/?in=");
+							}
 							DetailLog("\trest     == %s\n", rest);
 							DetailLog("\trefrest  == %s\n", refrest);
 							if((refrest != NULL) && !(equals(refrest, STR_EMPTY))){
 								/* ToDo: doplniù nevypisovanie refbuff, ak refrest obsahuje medzeru */
-								Export("%s", remove_diacritics(refrest));
+								if(EXPORT_REFERENCIA){
+									Export("%s", remove_diacritics(refrest));
+								}
 							}/* naËÌtanie na zaËiatok referencie */
-							Export("%s\" target=\"_blank\" "HTML_CLASS_QUIET">", remove_diacritics(refbuff)); /* a.quiet { text-decoration:none; color: inherit; } */
+							if(EXPORT_REFERENCIA){
+								Export("%s\" target=\"_blank\" "HTML_CLASS_QUIET">", remove_diacritics(refbuff)); /* a.quiet { text-decoration:none; color: inherit; } */
+							}
 						}
-						Export("%s", refbuff);
+						if(EXPORT_REFERENCIA){
+							Export("%s", refbuff);
+						}
 						if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_REFERENCIE) == BIT_OPT_0_REFERENCIE){
-							Export("</a>");
+							if(EXPORT_REFERENCIA){
+								Export("</a>");
+							}
 						}
 						vnutri_referencie = NIE;
 
 						/* 2011-05-02: doplnenÈ kvÙli referenci·m, ktorÈ s˙ v r·mci myölienok, Ëo sa nemaj˙ zobrazovaù */
-						if(!vnutri_myslienky || je_myslienka){
+						if(EXPORT_REFERENCIA){
 							write = ANO;
 						}
-						/*
-						// ekvivalentnÈ nasledovnÈmu: 
-						if(vnutri_myslienky){
-							if(je_myslienka){
-								write = ANO; // ak je_myslienka == ANO, tak len vtedy nastav write na ANO
-							}
-						}
-						else{
-							write = ANO;
-						}
-						*/
-
 						strcpy(refrest, STR_EMPTY);
 					}/* upraviù referencie na hyperlinky */
 
