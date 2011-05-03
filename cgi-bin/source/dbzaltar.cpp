@@ -1659,7 +1659,7 @@ void _set_kompletorium_slavnost_oktava(short int modlitba, short int litobd, sho
 		/* 2009-04-16: opravená modlitba pre ve¾konoènú oktávu
 		 * 2011-04-29: aj pre vianoènú oktávu
 		 */
-		if((litobd == OBD_VELKONOCNA_OKTAVA) || (litobd == OBD_OKTAVA_NARODENIA)){
+		if(litobd == OBD_VELKONOCNA_OKTAVA){
 			set_modlitba(DEN_NEDELA, _global_den.tyzzal, modlitba); /* vo ve¾konoènej oktáve sa berie modlitba z nedele */
 		}
 	}
@@ -1673,7 +1673,7 @@ void _set_kompletorium_slavnost_oktava(short int modlitba, short int litobd, sho
 		/* 2009-04-16: opravená modlitba pre ve¾konoènú oktávu
 		 * 2011-04-29: aj pre vianoènú oktávu
 		 */
-		if((litobd == OBD_VELKONOCNA_OKTAVA) || (litobd == OBD_OKTAVA_NARODENIA)){
+		if(litobd == OBD_VELKONOCNA_OKTAVA){
 			set_modlitba(DEN_NEDELA, _global_den.tyzzal, modlitba, ktore /* == 1 */); /* vo ve¾konoènej oktáve sa berie modlitba z nedele */
 		}
 		else{

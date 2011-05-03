@@ -223,6 +223,9 @@
 /*                    majú rozlièné poradie tohto "Sláva Otcu")            */
 /*   2011-05-02a.D. | znak '_' pouívame ako zástupnı pre nezlomite¾nú     */
 /*                    medzeru (exportuje sa ako &nbsp;) v include súboroch */
+/*   2011-05-03a.D. | vianoèná oktáva: má modlitbu kompletória pre slávnos*/
+/*                  - opravené: nezobrazova referencie v myšlienke        */
+/*                    k almu, ak sa táto nezobrazuje                      */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
