@@ -6380,7 +6380,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	/* formular pre options... */
 
 	/* option 1: zobraziù nasledovnÈ (nemennÈ, pevnÈ) s˙Ëasti modlitby (pouûÌvame force opt1)... */
-	Export("<"HTML_SPAN_BOLD">%s</span>", html_text_option1_nemenne_sucasti[_global_jazyk]);
+	Export("<"HTML_SPAN_BOLD_TOOLTIP">%s</span>", html_text_option1_nemenne_sucasti_explain[_global_jazyk], html_text_option1_nemenne_sucasti[_global_jazyk]);
 
 	/* pole (checkbox) WWW_MODL_OPTF1_CHV */
 	Export("<br>");
@@ -6427,7 +6427,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	/* formular pre options... */
 
 	/* option 1: Ôalöie bity ovplyvÚuj˙ce vygenerovan˙ modlitbu (pouûÌvame force opt1)... */
-	Export("<"HTML_SPAN_BOLD">%s</span>", html_text_option1_dalsie_prepinace[_global_jazyk]);
+	Export("<"HTML_SPAN_BOLD_TOOLTIP">%s</span>", html_text_option1_dalsie_prepinace_explain[_global_jazyk], html_text_option1_dalsie_prepinace[_global_jazyk]);
 
 	/* pole (checkbox) WWW_MODL_OPTF1_SKRY_POPIS */
 	Export("<br>");
@@ -6531,7 +6531,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	/* formular pre options... */
 
 	/* option 0: Ôalöie bity ovplyvÚuj˙ce vygenerovan˙ modlitbu (ËÌslovanie veröov, biblickÈ referencie...) (pouûÌvame force opt0)... */
-	Export("<"HTML_SPAN_BOLD">%s</span>", html_text_option0_specialne[_global_jazyk]);
+	Export("<"HTML_SPAN_BOLD_TOOLTIP">%s</span>", html_text_option0_specialne_explain[_global_jazyk], html_text_option0_specialne[_global_jazyk]);
 
 	/* pole (checkbox) WWW_MODL_OPTF0_VERSE */
 	Export("<br>");
@@ -6561,7 +6561,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	/* formular pre options... */
 
 	/* option 2: bity ovplyvÚuj˙ce HTML export -- vygenerovanÈ str·nky, nie vygenerovanÈ modlitby (ISO d·tum, button prvÈ veöpery...) (pouûÌvame force opt2)... */
-	Export("<"HTML_SPAN_BOLD">%s</span>", html_text_option2_html_export[_global_jazyk]);
+	Export("<"HTML_SPAN_BOLD_TOOLTIP">%s</span>", html_text_option2_html_export_explain[_global_jazyk], html_text_option2_html_export[_global_jazyk]);
 
 #ifdef OS_Windows_Ruby
 	/* pole (checkbox) WWW_MODL_OPTF2_ISO_DATUM */

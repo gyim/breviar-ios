@@ -1232,13 +1232,13 @@ const char *html_text_option1_nemenne_sucasti[POCET_JAZYKOV + 1] =
 };
 
 const char *html_text_option1_nemenne_sucasti_explain[POCET_JAZYKOV + 1] = 
-{"Kadé ranné chvály obsahujú Benediktus, vešpery Magnifikat, obe modlitby obsahujú Otèenáš a zakonèenie modlitby, a napokon posvätné èítanie obsahuje niekedy hymnus Te Deum; tieto èasti modlitby nazıvame <i>nemenné súèasti</i>.", 
- "Kadé ranní chvály obsahují Zachariášovo kantikum, nešpory Mariin Magnifikat, obì modlitbu Pánì a zakonèení modlitby, a koneènì modlitba se ètením nìkdy obsahuje hymnus Te Deum; tyto èásti modliteb nazıváme <i>nemìnné souèásti</i>.", 
- "Each morning prayer contains Benedictus, vesperae contains Magnificat, both contain the Lord's Prayer and a conclusion of the prayer; finally, the holy reading sometimes contains the Te Deum hymnus; all these parts we call <i>un-changeable parts</i>.", 
+{"Kadé ranné chvály obsahujú Benediktus, vešpery Magnifikat, obe modlitby obsahujú Otèenáš a zakonèenie modlitby, a napokon posvätné èítanie obsahuje niekedy hymnus Te Deum; tieto èasti modlitby mono zobrazi alebo skry.", 
+ "Kadé ranní chvály obsahují Zachariášovo kantikum, nešpory Mariin Magnifikat, obì modlitbu Pánì a zakonèení modlitby, a koneènì modlitba se ètením nìkdy obsahuje hymnus Te Deum; tyto èásti modliteb je moné zobrazit/skrıt.", 
+ "Each morning prayer contains Benedictus, vesperae contains Magnificat, both contain the Lord's Prayer and a conclusion of the prayer; finally, the holy reading sometimes contains the Te Deum hymnus; all these parts can be shown/hidden.", 
  "",
  "", 
- "Kadé ranní chvály obsahují Zachariášovo kantikum, veèerní chvály kantikum Panny Marie, obì modlitbu Pánì a zakonèení modlitby, a koneènì modlitba se ètením nìkdy obsahuje hymnus Te Deum; tyto èásti modliteb nazıváme <i>nemìnné souèásti</i>.",
- "hu_ (we will translate it later)"
+ "Kadé ranní chvály obsahují Zachariášovo kantikum, veèerní chvály kantikum Panny Marie, obì modlitbu Pánì a zakonèení modlitby, a koneènì modlitba se ètením nìkdy obsahuje hymnus Te Deum; tyto èásti je moné zobrazit/skrıt.",
+ ""
 };
 
 const char *html_text_option1_dalsie_prepinace[POCET_JAZYKOV + 1] = 
@@ -1252,7 +1252,7 @@ const char *html_text_option1_dalsie_prepinace[POCET_JAZYKOV + 1] =
 };
 
 const char *html_text_option1_dalsie_prepinace_explain[POCET_JAZYKOV + 1] = 
-{"", 
+{"Rozlièné alterantívne vıbery pre vısledné modlitby.", 
  "", 
  "", 
  "",
@@ -1334,6 +1334,16 @@ const char *html_text_option0_specialne[POCET_JAZYKOV + 1] =
  "",
  "v textu modliteb zobrazit",
  "hu_"
+};
+
+const char *html_text_option0_specialne_explain[POCET_JAZYKOV + 1] = 
+{"Monos zobrazi ïalšie údaje v texte modlitieb (èísla veršov, referencie a pod.).",
+ "",
+ "",
+ "",
+ "",
+ "",
+ ""
 };
 
 const char *html_text_option0_verse[POCET_JAZYKOV + 1] = 
@@ -1550,12 +1560,22 @@ const char *html_text_option1_zalmy_zo_sviatku_explain[POCET_JAZYKOV + 1] =
 };
 
 const char *html_text_option2_html_export[POCET_JAZYKOV + 1] = 
-{"monosti zobrazenia stránok (neovplyvnia texty modlitieb)",
- "monosti zobrazení stránek (neovlivní texty modliteb)",
- "display options (without influence to texts of prayers)",
+{"monosti zobrazenia stránok",
+ "monosti zobrazení stránek",
+ "display options",
  "",
  "",
- "monosti zobrazení stránek (neovlivní texty modliteb)",
+ "monosti zobrazení stránek",
+ "hu_"
+};
+
+const char *html_text_option2_html_export_explain[POCET_JAZYKOV + 1] = 
+{"Tieto monosti ovplyvnia rozlièné zobrazenia, nemajú vplyv na obsah (text) modlitieb.",
+ "Monosti ovlivní rozlièná zobrazení, neovlivní obsah (text) modliteb.",
+ "These various options have no influence to generated text of prayers, used only for visualization.",
+ "",
+ "",
+ "Monosti ovlivní rozlièná zobrazení, neovlivní obsah (text) modliteb.",
  "hu_"
 };
 
@@ -1607,7 +1627,7 @@ const char *html_text_option2_font_family[POCET_JAZYKOV + 1] =
  "hu_"
 };
 const char *html_text_option2_font_family_explain[POCET_JAZYKOV + 1] = 
-{"Zvo¾te si pätkové písmo (Serif) resp. bezpätkové písmo (Sans Serif).", 
+{"Zvo¾te si pätkové písmo (Serif) resp. bezpätkové písmo (Sans Serif) pod¾a toho, èo vám viac vyhovuje pre komfort modlitby.", 
  "", 
  "", 
  "",

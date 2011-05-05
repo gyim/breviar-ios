@@ -641,6 +641,7 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #define HTML_SPAN_VALUE     "span class=\"value\""
 
 #define HTML_SPAN_TOOLTIP   "span title=\"%s\"" // obsahuje %s
+#define HTML_SPAN_BOLD_TOOLTIP   "span class=\"bold\" title=\"%s\"" // obsahuje %s
 
 #define HTML_SUP_RED        "sup class=\"red\""
 
