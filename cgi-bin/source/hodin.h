@@ -816,7 +816,7 @@ const char *postfix_jazyka[POCET_JAZYKOV + 1] =
 /* filename of CSS file; the number of CSS does not directly correspond to the number of languages */
 /* 2006-08-08: Pridané kvôli rôznym css */
 const char *nazov_css[POCET_CSS + 1] =
-{"(css neurèené)", "breviar.css", "breviar_kbd.css", "ebreviar_cz.css", "ebreviar_cz_op.css"
+{"(css neurèené)", "breviar.css", "breviar-kbd.css", "ebreviar-cz.css", "breviar-cz-op.css"
 	, "breviar-2003-07-16.css", "breviar-2005-10-13.css", "breviar-2007-08-10.css", "breviar-2008-05-07.css"
 	, "breviar-jm-krize-cz.css"};
 

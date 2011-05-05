@@ -6553,7 +6553,6 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("</td></tr>\n\n");
 
 	/* ---------------------------------------------------------------------------------- */
-if((_global_system == SYSTEM_RUBY) || (_global_jazyk == JAZYK_CZ_OP)){
 	Export("<tr>\n<td>\n");
 	Export("<!-- tabu¾ka pre checkboxy 4 (options pre modlitbu) -->\n");
 	Export("<table align=\"left\">\n"); // table option 2
@@ -6581,19 +6580,17 @@ if((_global_system == SYSTEM_RUBY) || (_global_jazyk == JAZYK_CZ_OP)){
 		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option2_prve_vespery_explain[_global_jazyk], html_text_option2_prve_vespery[_global_jazyk]);
 	}
 
-#ifdef OS_Windows_Ruby
 	/* pole (checkbox) WWW_MODL_OPTF2_FONT_FAMILY */
 	Export("<br>");
 	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF2_FONT_FAMILY, NIE);
 	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF2_FONT_FAMILY, ANO, html_text_option2_font_family_explain[_global_jazyk], ((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_FAMILY) == BIT_OPT_2_FONT_FAMILY)? html_option_checked: STR_EMPTY);
 	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option2_font_family_explain[_global_jazyk], html_text_option2_font_family[_global_jazyk]);
-#endif
 
 	Export("</td></tr>\n");
 
 	Export("</table>\n"); // table option 2
 	Export("</td></tr>\n\n");
-}
+
 	/* ---------------------------------------------------------------------------------- */
 
 	/* 2011-01-28: doplnené pod¾a buttonov na konci formulára; v podstate vykonajú ten istý efekt
