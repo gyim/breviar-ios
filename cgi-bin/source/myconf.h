@@ -34,6 +34,15 @@
 #define CONFIG_FILE "breviar-web.cfg"
 #endif
 
+#ifdef OS_Windows_Ruby
+#define DEFAULT_FONT_FAMILY_SERIF "Cambria, Constantia, Georgia, Serif"
+#define DEFAULT_FONT_FAMILY_SANS_SERIF "Candara, Verdana, Tahoma, Sans Serif"
+#else
+#define DEFAULT_FONT_FAMILY_SERIF "Serif"
+#define DEFAULT_FONT_FAMILY_SANS_SERIF "Sans Serif"
+#endif
+
+
 extern char cfg_HTTP_ADDRESS_default[MAX_HTTP_STR];
 extern char cfg_HTTP_DISPLAY_ADDRESS_default[MAX_HTTP_STR];
 extern char cfg_MAIL_ADDRESS_default[MAX_MAIL_STR];

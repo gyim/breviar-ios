@@ -479,7 +479,7 @@ char _global_export_navig_hore_month[SMALL] = DEFAULT_MONTH_EXPORT;
 char _global_export_navig_hore_day[SMALL] = DEFAULT_MONTH_EXPORT;
 
 /* 2011-05-05: kvÙli moûnosti serif/sans serif override (z css sme odstr·nili font-family) */
-char _global_font_family[MAX_STR] = DEFAULT_FONT_FAMILY;
+char _global_font_family[MAX_STR] = DEFAULT_FONT_FAMILY_SERIF; // zatiaæ len pevnÈ reùazce; Ëasom moûno bude premenn· pre n·zov fontu
 
 /* ------------------------------------------------------------------- */
 
@@ -1119,6 +1119,7 @@ short int setForm(void){
 			switch(i){
 				case 0: strcat(local_str, STR_MODL_OPTF2_ISO_DATUM); break;
 				case 1: strcat(local_str, STR_MODL_OPTF2_PRVE_VESPERY); break;
+				case 2: strcat(local_str, STR_MODL_OPTF2_FONT_FAMILY); break;
 			}// switch(i)
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF_HTML_EXPORT[i]);
@@ -6580,6 +6581,14 @@ if((_global_system == SYSTEM_RUBY) || (_global_jazyk == JAZYK_CZ_OP)){
 		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option2_prve_vespery_explain[_global_jazyk], html_text_option2_prve_vespery[_global_jazyk]);
 	}
 
+#ifdef OS_Windows_Ruby
+	/* pole (checkbox) WWW_MODL_OPTF2_FONT_FAMILY */
+	Export("<br>");
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF2_FONT_FAMILY, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF2_FONT_FAMILY, ANO, html_text_option2_font_family_explain[_global_jazyk], ((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_FAMILY) == BIT_OPT_2_FONT_FAMILY)? html_option_checked: STR_EMPTY);
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option2_font_family_explain[_global_jazyk], html_text_option2_font_family[_global_jazyk]);
+#endif
+
 	Export("</td></tr>\n");
 
 	Export("</table>\n"); // table option 2
@@ -8857,9 +8866,10 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 
 	/* rozparsovanie parametrov opt1...opt5, 2005-03-22; presunutÈ do define 2006-02-10;
 	 * 2007-06-01: upravenÈ tak, aby sa v prÌpade nenastavenia dala hodnota GLOBAL_OPTION_NULL
+	 * 2011-05-05: presunutÈ do main(); tu radöej iba zapozn·mkovanÈ
 	 */
-	Log("vol·m _rozparsuj_parametre_OPT z _main_rozbor_dna()...\n");
-	_rozparsuj_parametre_OPT();
+	// Log("vol·m _rozparsuj_parametre_OPT z _main_rozbor_dna()...\n");
+	// _rozparsuj_parametre_OPT();
 
 	/* option a (append), pridana 2003-07-08 - nastavi sa v getArgv(); */
 
@@ -9407,9 +9417,10 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 
 	/* rozparsovanie parametrov opt1...opt5; v define 2006-02-10 podæa _main_rozbor_dna 
 	 * 2007-06-01: upravenÈ tak, aby sa v prÌpade nenastavenia dala hodnota GLOBAL_OPTION_NULL
+	 * 2011-05-05: presunutÈ do main(); tu radöej iba zapozn·mkovanÈ
 	 */
-	Log("vol·m _rozparsuj_parametre_OPT z _main_dnes()...\n");
-	_rozparsuj_parametre_OPT();
+	// Log("vol·m _rozparsuj_parametre_OPT z _main_dnes()...\n");
+	// _rozparsuj_parametre_OPT();
 
 	/* vypis */
 	Log("/* teraz vypisujem heading 1, datum %d. %s %d */\n",
@@ -9671,9 +9682,11 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 			_global_modlitba = MODL_KOMPLETORIUM;
 	}/* nie je to nedela */
 
-	/* rozparsovanie parametrov opt1...opt5 */
-	Log("vol·m _rozparsuj_parametre_OPT z _main_liturgicke_obdobie()...\n");
-	_rozparsuj_parametre_OPT();
+	/* rozparsovanie parametrov opt1...opt5 
+	 * 2011-05-05: presunutÈ do main(); tu radöej iba zapozn·mkovanÈ
+	 */
+	// Log("vol·m _rozparsuj_parametre_OPT z _main_liturgicke_obdobie()...\n");
+	// _rozparsuj_parametre_OPT();
 
 	/* 2011-01-26: nastavenie niektor˝ch atrib˙tov pre _global_den */
 	_global_den.denvt = d;
@@ -9850,9 +9863,11 @@ void _main_analyza_roku(char *rok){
 		return;
 	}
 
-	/* rozparsovanie parametrov opt1...opt5 */
-	Log("vol·m _rozparsuj_parametre_OPT z _main_analyza_roku()...\n");
-	_rozparsuj_parametre_OPT();
+	/* rozparsovanie parametrov opt1...opt5 
+	 * 2011-05-05: presunutÈ do main(); tu radöej iba zapozn·mkovanÈ
+	 */
+	// Log("vol·m _rozparsuj_parametre_OPT z _main_analyza_roku()...\n");
+	// _rozparsuj_parametre_OPT();
 
 	prilep_request_options(pom2, pom3, ANO); /* prilep_request_options(pom2, pom3, prvy_ampersand) */
 
@@ -10084,9 +10099,11 @@ void _main_tabulka(char *rok_from, char *rok_to, char *tab_linky){
 		return;
 	}
 
-	/* rozparsovanie parametrov opt1...opt5 */
-	Log("vol·m _rozparsuj_parametre_OPT z _main_tabulka()...\n");
-	_rozparsuj_parametre_OPT();
+	/* rozparsovanie parametrov opt1...opt5 
+	 * 2011-05-05: presunutÈ do main(); tu radöej iba zapozn·mkovanÈ
+	 */
+	// Log("vol·m _rozparsuj_parametre_OPT z _main_tabulka()...\n");
+	// _rozparsuj_parametre_OPT();
 
 	_export_heading_center((char *)html_text_datumy_pohyblivych_slaveni[_global_jazyk]);
 
@@ -10236,9 +10253,10 @@ void _main_batch_mode(
 	 * nebolo by to mozno ani treba, 2003-07-04, prevzate z _main_rozbor_dna();
 	 * presunutÈ do define 2006-02-10; zapracovanÈ tu aû 2007-06-01
 	 * 2007-06-01: upravenÈ tak, aby sa v prÌpade nenastavenia dala hodnota GLOBAL_OPTION_NULL
+	 * 2011-05-05: presunutÈ do main(); tu radöej iba zapozn·mkovanÈ
 	 */
-	Log("vol·m _rozparsuj_parametre_OPT z _main_batch_mode()...\n");
-	_rozparsuj_parametre_OPT();
+	// Log("vol·m _rozparsuj_parametre_OPT z _main_batch_mode()...\n");
+	// _rozparsuj_parametre_OPT();
 
 	/* option a (append), pridana 2003-07-08 - nastavi sa v getArgv(); */
 
@@ -11625,6 +11643,7 @@ short int getForm(void){
 		switch(i){
 			case 0: strcat(local_str, STR_MODL_OPTF2_ISO_DATUM); break;
 			case 1: strcat(local_str, STR_MODL_OPTF2_PRVE_VESPERY); break;
+			case 2: strcat(local_str, STR_MODL_OPTF2_FONT_FAMILY); break;
 		}/* switch(i) */
 		ptr = getenv(local_str);
 		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
@@ -12366,6 +12385,7 @@ short int parseQueryString(void){
 		switch(j){
 			case 0: strcat(local_str, STR_MODL_OPTF2_ISO_DATUM); break;
 			case 1: strcat(local_str, STR_MODL_OPTF2_PRVE_VESPERY); break;
+			case 2: strcat(local_str, STR_MODL_OPTF2_FONT_FAMILY); break;
 		}/* switch(j) */
 		/* premenn· WWW_MODL_OPT2_... (nepovinn·), j = 0 aû POCET_OPT_2_HTML_EXPORT */
 		i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
@@ -13561,8 +13581,16 @@ _main_SIMULACIA_QS:
 			}
 
 			_main_LOG_to_Export("_global_jazyk == %s\n", nazov_jazyka[_global_jazyk]);
-			/* 2010-02-15? pridanÈ: rozparsovanie parametra modlitba */
+			/* 2010-02-15, pridanÈ: rozparsovanie parametra modlitba */
 			_parsuj_parameter_MODLITBA(pom_MODLITBA, _global_modlitba);
+
+			/* rozparsovanie parametrov opt1...opt5, 2005-03-22; presunutÈ do define 2006-02-10;
+			 * 2007-06-01: upravenÈ tak, aby sa v prÌpade nenastavenia dala hodnota GLOBAL_OPTION_NULL
+			 * 2011-05-05: presunutÈ sem z jednotliv˝ch proced˙r: _main_rozbor_dna(), _main_dnes(), _main_liturgicke_obdobie(), _main_analyza_roku(), _main_tabulka(), _main_batch_mode()
+			 */
+			Log("vol·m _rozparsuj_parametre_OPT z main()...\n");
+			_rozparsuj_parametre_OPT();
+
 			hlavicka((char *)html_title[_global_jazyk]);
 
 			_main_LOG_to_Export("/* teraz nasleduje vykonanie jadra programu podla parametrov */\n");

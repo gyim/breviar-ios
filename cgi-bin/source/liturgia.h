@@ -1158,11 +1158,12 @@ extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
 #define BIT_OPT_1_SKRY_POPIS              128
 #define BIT_OPT_1_ZALMY_ZO_SVIATKU        256
 
-#define POCET_OPT_2_HTML_EXPORT             2 /* jednotlivé komponenty option 2 -- bity pre force option 2 */
+#define POCET_OPT_2_HTML_EXPORT             3 /* jednotlivé komponenty option 2 -- bity pre force option 2 */
 extern short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];
 /* 2011-04-12: úprava významu (a interpretácie) option 2 (rozlièné prepínaèe pre [online aj offline] export, napr. tlaèidlá, zobrazenie dátumov a podobne) */
 #define BIT_OPT_2_ISO_DATUM                 1
 #define BIT_OPT_2_BUTTON_PRVE_VESPERY       2
+#define BIT_OPT_2_FONT_FAMILY               4 // 0 = Serif, 1 = Sans Serif
 
 #define POCET_OPT_4_OFFLINE_EXPORT          1 /* jednotlivé komponenty option 4 -- bity pre force option 4 */
 extern short int _global_opt_offline_export[POCET_OPT_4_OFFLINE_EXPORT];

@@ -64,6 +64,7 @@ short int _local_modlitba;
 
 /* exportuje hlavicku HTML dokumentu, kam pojde vysledok query */
 void hlavicka(char *title, short int level, short int spec){
+	Log("hlavicka() -- zaËiatok...\n");
 	_local_modlitba = _global_modlitba;
 	if((_local_modlitba == MODL_PRVE_VESPERY) || (_local_modlitba == MODL_DRUHE_VESPERY))
 		_local_modlitba = MODL_VESPERY;
@@ -83,6 +84,18 @@ void hlavicka(char *title, short int level, short int spec){
 		nazov_css_suboru = nazov_css[CSS_breviar_sk];
 	else
 		nazov_css_suboru = nazov_css[_global_css];
+Log("_global_opt[OPT_2_HTML_EXPORT] == %d\n", _global_opt[OPT_2_HTML_EXPORT]);
+	/*
+	 * 2011-05-05: nastavenie font-family
+	 *             zatiaæ len pevnÈ reùazce; Ëasom moûno bude premenn· pre n·zov fontu
+	 */
+	if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_FAMILY) == BIT_OPT_2_FONT_FAMILY){
+		mystrcpy(_global_font_family, DEFAULT_FONT_FAMILY_SANS_SERIF, MAX_STR);
+	}
+	else{
+		mystrcpy(_global_font_family, DEFAULT_FONT_FAMILY_SERIF, MAX_STR);
+	}
+
 	if(bol_content_type_text_html == NIE){
 #if defined(OS_linux)
 		Export("Content-type: text/html\n");
@@ -179,11 +192,12 @@ void hlavicka(char *title, short int level, short int spec){
 		Export("</p>");
 		Export("</center>\n");
 	}/* << predoöl· | ^ hore | nasledovn· >> */
-
+	Log("hlavicka() -- koniec.\n");
 	return;
 }/* hlavicka() */
 
 void hlavicka(char *title, FILE * expt, short int level, short int spec){
+	Log("hlavicka() -- zaËiatok...\n");
 	_local_modlitba = _global_modlitba;
 	if((_local_modlitba == MODL_PRVE_VESPERY) || (_local_modlitba == MODL_DRUHE_VESPERY))
 		_local_modlitba = MODL_VESPERY;
@@ -199,6 +213,18 @@ void hlavicka(char *title, FILE * expt, short int level, short int spec){
 		nazov_css_suboru = nazov_css[CSS_breviar_sk];
 	else
 		nazov_css_suboru = nazov_css[_global_css];
+
+	/*
+	 * 2011-05-05: nastavenie font-family
+	 *             zatiaæ len pevnÈ reùazce; Ëasom moûno bude premenn· pre n·zov fontu
+	 */
+	if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_FAMILY) == BIT_OPT_2_FONT_FAMILY){
+		mystrcpy(_global_font_family, DEFAULT_FONT_FAMILY_SANS_SERIF, MAX_STR);
+	}
+	else{
+		mystrcpy(_global_font_family, DEFAULT_FONT_FAMILY_SERIF, MAX_STR);
+	}
+
 	if(bol_content_type_text_html == NIE){
 #if defined(OS_linux)
 		fprintf(expt, "Content-type: text/html\n");
@@ -296,7 +322,7 @@ void hlavicka(char *title, FILE * expt, short int level, short int spec){
 		fprintf(expt, "</p>");
 		fprintf(expt, "</center>\n");
 	}/* << predoöl· | ^ hore | nasledovn· >> */
-
+	Log("hlavicka() -- koniec.\n");
 	return;
 }/* hlavicka() */
 

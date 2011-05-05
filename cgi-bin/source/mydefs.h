@@ -563,6 +563,14 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPTF2_PRVE_VESPERY "of2pv"
 #endif
 
+// Serif vs. Sans Serif font family
+#define MODL_OPTF2_FONT_FAMILY 83
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF2_FONT_FAMILY "MODL_OPTF2_FONT_FAMILY"
+#else
+	#define STR_MODL_OPTF2_FONT_FAMILY "of2ff"
+#endif
+
 /* 2008-08-08: Pridané kvôli rôznym css */
 #define CSS 40
 #ifdef LONG_PARAM_NAMES

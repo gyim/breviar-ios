@@ -1597,6 +1597,25 @@ const char *html_text_option2_iso_datum_explain[POCET_JAZYKOV + 1] =
  ""
 };
 
+const char *html_text_option2_font_family[POCET_JAZYKOV + 1] = 
+{"poui bezpätkové písmo? (ináè pätkové)", 
+ "pouít bezpatkové písmo? (jinak patkové)", 
+ "use Sans Serif font? (otherwise, Serif is used)", 
+ "",
+ "",
+ "pouít bezpatkové písmo? (jinak patkové)", 
+ "hu_"
+};
+const char *html_text_option2_font_family_explain[POCET_JAZYKOV + 1] = 
+{"Zvo¾te si pätkové písmo (Serif) resp. bezpätkové písmo (Sans Serif).", 
+ "", 
+ "", 
+ "",
+ "", 
+ "", 
+ ""
+};
+
 /* 2010-10-11: HTML option selected */
 const char *html_option_selected = " selected";
 
