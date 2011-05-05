@@ -228,6 +228,7 @@
 /*                    k almu, ak sa táto nezobrazuje                      */
 /*                  - pridané preskoèenie ve¾kej èasti šablóny pre posv.   */
 /*                    èítanie na ve¾konoènú nede¾u                         */
+/*   2011-05-05a.D. | vyèistenie CSS, monos serif/sans-serif font-family */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
