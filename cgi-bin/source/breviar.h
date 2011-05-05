@@ -169,6 +169,9 @@ extern short int _global_opt_batch_monthly;
 extern short int _global_hlavicka_Export;
 // extern char name_batch_html_file[MAX_STR];
 
+/* 2011-05-05: kvôli možnosti serif/sans serif override (z css sme odstránili font-family) */
+extern char _global_font_family[MAX_STR];
+
 /* 2009-08-12, pridané */
 extern char _global_export_navig_hore[SMALL];
 extern short int _global_opt_export_date_format;

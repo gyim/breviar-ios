@@ -49,7 +49,7 @@ short int bol_content_type_text_html = NIE;
 #define __MYHPAGE_CPP_HTML_CONST
 const char *html_header_1 = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\n\t\"http://www.w3.org/TR/html4/loose.dtd\">\n<html>\n<head>\n\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1250\">\n\t<meta name=\"Author\" content=\"Juraj Vidéky\">\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"";
 const char *html_footer_1 = STR_EMPTY; // "<p><center>______</center>"; // "<hr>";
-#endif /*__MYHPAGE_CPP_HTML_CONST*/
+#endif /* __MYHPAGE_CPP_HTML_CONST */
 
 #define MAX_MAIL_LABEL 20
 #define MAX_EXT 5
@@ -123,11 +123,13 @@ void hlavicka(char *title, short int level, short int spec){
 	Export("%s\">\n", nazov_css_suboru); // názov css súboru
 	Export("<title>%s</title>\n", title);
 	Export("</head>\n\n");
+	/* 2011-05-05: pridanie font-family */
+	Export("<body style=\"font-family: %s\"", _global_font_family);
 	/* 2010-02-15: kvôli špeciálnemu "zoznam.htm" */
-	if(spec == 1)
-		Export("<body onLoad=\"fn_aktualne(0,0,0)\">\n");
-	else
-		Export("<body>\n");
+	if(spec == 1){
+		Export(" onLoad=\"fn_aktualne(0,0,0)\"");
+	}
+	Export(">\n");
 
 	/* 2010-02-15: doplnené predošlá a nasledovná modlitba */
 	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
@@ -238,11 +240,13 @@ void hlavicka(char *title, FILE * expt, short int level, short int spec){
 	fprintf(expt, "<title>%s</title>\n", title);
 	fprintf(expt, "</head>\n\n");
 
+	/* 2011-05-05: pridanie font-family */
+	fprintf(expt, "<body style=\"font-family: %s\"", _global_font_family);
 	/* 2010-02-15: kvôli špeciálnemu "zoznam.htm" */
-	if(spec == 1)
-		fprintf(expt, "<body onLoad=\"fn_aktualne(0,0,0)\">\n");
-	else
-		fprintf(expt, "<body>\n");
+	if(spec == 1){
+		fprintf(expt, " onLoad=\"fn_aktualne(0,0,0)\"");
+	}
+	fprintf(expt, ">\n");
 
 	/* 2010-02-15: doplnené predošlá a nasledovná modlitba */
 	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){

@@ -478,6 +478,9 @@ char _global_export_navig_hore_month[SMALL] = DEFAULT_MONTH_EXPORT;
 /* 2009-08-12: pridané pre batch mód; názov súboru pre odkaz "^ hore" / index.htm v modlitbe */
 char _global_export_navig_hore_day[SMALL] = DEFAULT_MONTH_EXPORT;
 
+/* 2011-05-05: kvôli možnosti serif/sans serif override (z css sme odstránili font-family) */
+char _global_font_family[MAX_STR] = DEFAULT_FONT_FAMILY;
+
 /* ------------------------------------------------------------------- */
 
 

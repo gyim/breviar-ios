@@ -26,6 +26,7 @@
 #define DEFAULT_FILE_EXPORT "export.htm"
 #define DEFAULT_HTML_EXPORT "zoznam.htm" // "export2.htm"
 #define DEFAULT_MONTH_EXPORT "index.htm" // "^ hore"
+#define DEFAULT_FONT_FAMILY "Cambria, Constantia, Candara, Verdana, Tahoma, Georgia, Sans Serif"
 
 short int Export(char *fmt, ...);
 short int ExpL2HTML(char *fmt);
