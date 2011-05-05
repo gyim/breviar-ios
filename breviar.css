@@ -19,9 +19,9 @@
 /* 2003-07-09; 2004-03-23; 2008-02-27 */
 /* apply to all elements */ { font-family: inherit; font-size: 100%; }
 body, html { 
-	background-color: #FFFFCC; 
-	color: #000000; 
-	font-family: inherit; 
+	background-color: #FFFFCC;
+	color: #000000;
+	font-family: Cambria, Constantia, Georgia, Lido STF, DejaVu, Liberation, GentiumPlus, Gentium, Garamond, Serif;
 }
 p { font-family: inherit; color: #000000; font-style: normal; }
 
