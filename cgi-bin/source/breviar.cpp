@@ -229,6 +229,9 @@
 /*                  - pridanÈ preskoËenie veækej Ëasti öablÛny pre posv.   */
 /*                    ËÌtanie na veækonoËn˙ nedeæu                         */
 /*   2011-05-05a.D. | vyËistenie CSS, moûnosù serif/sans-serif font-family */
+/*   2011-05-06a.D. | öpeci·lna ˙prava pri nastavovanÌ _global_opt[] resp. */
+/*                    _global_optf[]: zohæadnenie defaultu z config s˙boru */
+/*                    pre 4. bit (BIT_OPT_2_FONT_CHOOSER)                  */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -469,6 +472,8 @@ short int _global_kalendar;
 
 short int _global_css; /* 2008-08-08: PridanÈ kvÙli rÙznym css */
 
+short int _global_font; /* 2011-05-06: PridanÈ kvÙli rÙznym fontom */
+
 /* 2006-10-17: PridanÈ kvÙli kompletÛriu: niekedy obsahuje aû dva ûalmy */
 short int _global_pocet_zalmov_kompletorium;
 
@@ -550,6 +555,9 @@ char pom_KALENDAR   [SMALL] = STR_EMPTY;
 
 /* 2008-08-08: PridanÈ kvÙli rÙznym css */
 char pom_CSS		[SMALL] = STR_EMPTY;
+
+/* 2011-05-06: PridanÈ kvÙli rÙznym fontom */
+char pom_FONT		[SMALL] = STR_EMPTY;
 
 /* 2008-11-29: pridanÈ rÙzne moûnosti batch exportu */
 char pom_MODL_OPT_DATE_FORMAT [SMALL] = STR_EMPTY;
@@ -1121,6 +1129,7 @@ short int setForm(void){
 				case 0: strcat(local_str, STR_MODL_OPTF2_ISO_DATUM); break;
 				case 1: strcat(local_str, STR_MODL_OPTF2_PRVE_VESPERY); break;
 				case 2: strcat(local_str, STR_MODL_OPTF2_FONT_FAMILY); break;
+				case 3: strcat(local_str, STR_MODL_OPTF2_FONT_CHOOSER); break;
 			}// switch(i)
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF_HTML_EXPORT[i]);
@@ -1158,6 +1167,17 @@ short int setForm(void){
 		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_CSS), SMALL);
 		strcat(local_str, "=");
 		strcat(local_str, pom_CSS);
+		Log("--- setForm: putenv(%s); ...\n", local_str);
+		ret = putenv(local_str);
+		Log("--- setForm: putenv returned %d.\n", ret);
+	}
+
+	/* 2011-05-06: PridanÈ kvÙli rÙznym fontom */
+	mystrcpy(local_str, STR_EMPTY, SMALL);
+	if(!equals(pom_FONT, STR_EMPTY)){
+		mystrcpy(local_str, ADD_WWW_PREFIX_(STR_FONT_NAME), SMALL);
+		strcat(local_str, "=");
+		strcat(local_str, pom_FONT);
 		Log("--- setForm: putenv(%s); ...\n", local_str);
 		ret = putenv(local_str);
 		Log("--- setForm: putenv returned %d.\n", ret);
@@ -6338,6 +6358,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	struct tm dnes;
 	short int month, day;
 	short int lo; /* liturgickÈ obdobie; 2011-01-25 */
+	short int font;
 
 	dnes.tm_mday = den;
 	dnes.tm_mon  = mesiac;
@@ -6478,10 +6499,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		/* formular pre options... */
 
 		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_kalendar_miestny_explain[_global_jazyk], html_text_kalendar_miestny[_global_jazyk]);
-
-		// 2011-04-13: upravenie exportu
-		// Export("<br>"); // netreba do novÈho riadka
-		// Export("&nbsp;&nbsp;&nbsp;&nbsp;"); // nie je potrebnÈ odsadzovaù (uû tam nie je <ul>)
+	
+		/* drop-down list pre v˝ber kalend·ra (propri·) */
 		/* pole WWW_KALENDAR */
 		Export("<select name=\"%s\" title=\"%s\">\n", STR_KALENDAR, html_text_kalendar_miestny_explain[_global_jazyk]);
 
@@ -6586,6 +6605,20 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF2_FONT_FAMILY, NIE);
 	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF2_FONT_FAMILY, ANO, html_text_option2_font_family_explain[_global_jazyk], ((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_FAMILY) == BIT_OPT_2_FONT_FAMILY)? html_option_checked: STR_EMPTY);
 	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option2_font_family_explain[_global_jazyk], html_text_option2_font_family[_global_jazyk]);
+
+	/* drop-down list pre v˝ber n·zvu pÌsma, len ak je nastaven· OPT_2_HTML_EXPORT.BIT_OPT_2_FONT_CHOOSER */
+	if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_CHOOSER) == BIT_OPT_2_FONT_CHOOSER){
+		Export("<br>");
+		Export("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_font_name_explain[_global_jazyk], html_text_font_name[_global_jazyk]);
+
+		/* pole WWW_FONT_NAME */
+		Export("<select name=\"%s\" title=\"%s\">\n", STR_FONT_NAME, html_text_font_name_explain[_global_jazyk]);
+		for(font = FONT_UNDEF; font <= POCET_FONTOV; font++){
+			Export("<option%s>%s\n", (font == _global_font)? html_option_selected: STR_EMPTY, nazov_fontu[font]);
+		}
+		Export("</select>\n");
+	}
 
 	Export("</td></tr>\n");
 
@@ -8466,6 +8499,21 @@ short int atocss(char *css){
 	return CSS_UNDEF;
 }
 
+/* 2011-05-06: vytvorenÈ kvÙli n·zvom fontov
+ * popis: vr·ti ËÌslo fontu
+ *			 inak vrati FONT_UNDEF
+ */
+short int atofont(char *font){
+	short int i = 0;
+	do{
+		if(equalsi(font, nazov_fontu[i])){
+			return i;
+		}
+		i++;
+	}while(i <= POCET_FONTOV);
+	return FONT_UNDEF;
+}
+
 /* 2006-02-10: nov˝ define; pouûÌva premennÈ int i, p 
  * 2006-10-11: odpozn·mkovanÈ invitatÛrium a kompletÛrium
  */
@@ -8547,7 +8595,7 @@ void log_pom_MODL_OPTF(void){
  */
 void _rozparsuj_parametre_OPT(void){
 	/* rozparsovanie option parametrov */
-	short int i;
+	short int i, opt2fn;
 	short int aspon_jedna_nenulova;
 	Log("_rozparsuj_parametre_OPT() -- zaËiatok...\n");
 
@@ -8799,12 +8847,33 @@ void _rozparsuj_parametre_OPT(void){
 			_global_opt[i] = _global_optf[i];
 			Log("Force; do _global_opt[%d] priraÔujem _global_optf[%d] (`%d')...\n", i, i, _global_optf[i]);
 		}
-	}
+		/* 2011-05-06: öpeci·lna ˙prava: zohæadnenie defaultu z config s˙boru pre 4. bit (BIT_OPT_2_FONT_CHOOSER) */
+		if(i == OPT_2_HTML_EXPORT){
+			// teraz platÌ, ûe _global_opt[i] == _global_optf[i], takûe staËÌ testovaù jednu z nich, ale upraviù treba obe hodnoty
+			Log("öpeci·lna ˙prava: zohæadnenie defaultu z config s˙boru pre 4. bit (BIT_OPT_2_FONT_CHOOSER)\n");
+			opt2fn = ((CFG_OPTION_DEFAULT(i) & BIT_OPT_2_FONT_CHOOSER) == BIT_OPT_2_FONT_CHOOSER)? ANO: NIE;
+			if(((_global_optf[i] & BIT_OPT_2_FONT_CHOOSER) == BIT_OPT_2_FONT_CHOOSER) && (opt2fn == NIE)){
+				Log("odstraÚujem z _global_opt aj _global_optf[%d] bit pre BIT_OPT_2_FONT_CHOOSER\n...", i);
+				_global_optf[i] -= BIT_OPT_2_FONT_CHOOSER;
+				_global_opt[i] -= BIT_OPT_2_FONT_CHOOSER;
+			}
+			else if(((_global_optf[i] & BIT_OPT_2_FONT_CHOOSER) != BIT_OPT_2_FONT_CHOOSER) && (opt2fn == ANO)){
+				Log("prid·vam do _global_optf[%d] bit pre BIT_OPT_2_FONT_CHOOSER\n...", i);
+				_global_optf[i] += BIT_OPT_2_FONT_CHOOSER;
+				_global_opt[i] += BIT_OPT_2_FONT_CHOOSER;
+			}
+			else{
+				Log("nie je potrebnÈ upravovaù ani _global_opt ani _global_optf[%d].\n", i);
+			}
+			Log("po potenci·lnej ˙prave: _global_opt aj _global_optf[%d] == `%d'...\n", i, _global_optf[i]);
+		}/* (i == OPT_2_HTML_EXPORT) */
+	}/* for i */
+
 	Log("=== Po potenci·lnych ˙prav·ch (nastavenie default hodnÙt podæa jazyka) ===\n");
 	log_pom_MODL_OPT();
 	log_pom_MODL_OPTF();
 	Log("_rozparsuj_parametre_OPT() -- koniec.\n");
-}
+}/* _rozparsuj_parametre_OPT() */
 
 /*---------------------------------------------------------------------*/
 /* _main_rozbor_dna(char *, char *, char *, char *, char *)
@@ -11147,6 +11216,8 @@ short int getArgv(int argc, char **argv){
 	 *            `H' (header) öpeci·lne spr·vanie pre 2. aû predposledn˝ s˙bor generovan˝ append reûimom (-a1): includovanie hlaviËky
 	 *            `F' (footer) öpeci·lne spr·vanie pre 2. aû predposledn˝ s˙bor generovan˝ append reûimom (-a1): includovanie p‰tky
 	 * 2011-04-13: upravenÈ (pridan· option 0 a odstr·nenÈ od ËÌsla 5 aû po 9)
+	 * 2011-05-06: upravenÈ (hodnota `F' ani `H' sa nepouûÌvali)
+	 *            `F' (font): moûnosù zvoliù font pre override CSS
 	 *
 	 */
 	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::0::1::2::3::4::a::h::e::f::g::l::i::\?::b::n::o::k::j::c::u::M::I::H::F::", MAX_STR);
@@ -11223,6 +11294,11 @@ short int getArgv(int argc, char **argv){
 				case 'f': /* tabulka - rok from; pre batch mode je to DEN DO */
 					if(optarg != NULL){
 						mystrcpy(pom_ROK_FROM, optarg, SMALL);
+					}
+					Log("option %c with value `%s'\n", c, optarg); break;
+				case 'F': /* font, pridanÈ 2011-05-06 */
+					if(optarg != NULL){
+						mystrcpy(pom_FONT, optarg, SMALL);
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
 				case 'g': /* tabulka - rok to; pre batch mode je to MESIAC DO */
@@ -11548,6 +11624,15 @@ short int getForm(void){
 			mystrcpy(pom_CSS, ptr, SMALL);
 	}
 
+	/* premenn· WWW_FONT_NAME pridan· 2011-05-06 kvÙli rÙznym fontom */
+	ptr = getenv(ADD_WWW_PREFIX_(STR_FONT_NAME));
+	/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
+	 * lebo pom_... su inicializovane na STR_EMPTY */
+	if(ptr != NULL){
+		if(strcmp(ptr, STR_EMPTY) != 0)
+			mystrcpy(pom_FONT, ptr, SMALL);
+	}
+
 	/* premennÈ WWW_MODL_OPT... presunutÈ sem, aby sa ËÌtali vûdy (2011-01-26); tieû doplnenÈ force verzie (opt1 aû opt5); niektorÈ sa pouûÌvali aj v PRM_MESIAC_ROKA */
 
 	/* 2011-04-07: options premennÈ */
@@ -11642,6 +11727,7 @@ short int getForm(void){
 			case 0: strcat(local_str, STR_MODL_OPTF2_ISO_DATUM); break;
 			case 1: strcat(local_str, STR_MODL_OPTF2_PRVE_VESPERY); break;
 			case 2: strcat(local_str, STR_MODL_OPTF2_FONT_FAMILY); break;
+			case 3: strcat(local_str, STR_MODL_OPTF2_FONT_CHOOSER); break;
 		}/* switch(i) */
 		ptr = getenv(local_str);
 		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
@@ -12177,6 +12263,19 @@ short int parseQueryString(void){
 		i++;
 	}
 
+	/* 2011-05-05: pridanÈ kvÙli rÙznym fontom */
+	i = 0; /* param[0] by mal sÌce obsahovaù typ akcie, ale radöej kontrolujeme od 0 */
+	Log("pok˙öam sa zistiù font...\n");
+	while((equalsi(pom_FONT, STR_EMPTY)) && (i < pocet)){
+		Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
+		if(equals(param[i].name, STR_FONT_NAME)){
+			/* ide o parameter STR_FONT_NAME */
+			mystrcpy(pom_FONT, param[i].val, SMALL);
+			Log("font zisten˝ (%s).\n", pom_FONT);
+		}
+		i++;
+	}
+
 	/* 2006-08-01: pÙvodne sme predpokladali, ûe param[0] by mal obsahovaù typ akcie; 
 	 * odteraz ho hæad·me v celom zozname parametrov
 	 * 2011-01-25: doplnenÈ PRM_LIT_OBD
@@ -12384,6 +12483,7 @@ short int parseQueryString(void){
 			case 0: strcat(local_str, STR_MODL_OPTF2_ISO_DATUM); break;
 			case 1: strcat(local_str, STR_MODL_OPTF2_PRVE_VESPERY); break;
 			case 2: strcat(local_str, STR_MODL_OPTF2_FONT_FAMILY); break;
+			case 3: strcat(local_str, STR_MODL_OPTF2_FONT_CHOOSER); break;
 		}/* switch(j) */
 		/* premenn· WWW_MODL_OPT2_... (nepovinn·), j = 0 aû POCET_OPT_2_HTML_EXPORT */
 		i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
@@ -13013,6 +13113,7 @@ short int parseQueryString(void){
 	_main_LOG_to_Export("\tparam12== %s (pom_JAZYK)\n", pom_JAZYK);\
 	_main_LOG_to_Export("\tparam  == %s (pom_KALENDAR)\n", pom_KALENDAR);\
 	_main_LOG_to_Export("\tparam  == %s (pom_CSS)\n", pom_CSS);\
+	_main_LOG_to_Export("\tparam  == %s (pom_FONT)\n", pom_FONT);\
 	_main_LOG_to_Export("\tparam  == %s (pom_MODL_OPT_DATE_FORMAT)\n", pom_MODL_OPT_DATE_FORMAT);\
 	_main_LOG_to_Export("\tparam  == %s (pom_EXPORT_MONTHLY)\n", pom_EXPORT_MONTHLY);\
 	for(i = 0; i < POCET_GLOBAL_OPT; i++){\
@@ -13082,6 +13183,7 @@ int main(int argc, char **argv){
 	strcpy(pom_LINKY, STR_EMPTY);
 	strcpy(pom_JAZYK, STR_EMPTY); /* 2006-07-11: PridanÈ kvÙli jazykov˝m mut·ci·m */
 	strcpy(pom_CSS, STR_EMPTY); /* 2008-08-08: PridanÈ kvÙli rÙznym css */
+	strcpy(pom_FONT, STR_EMPTY); /* 2011-05-06: PridanÈ kvÙli rÙznym fontom */
 	strcpy(pom_MODL_OPT_DATE_FORMAT, STR_EMPTY); /* 2009-08-03: PridanÈ kvÙli rÙznym spÙsobom exportovania form·tu d·tumu */
 	strcpy(pom_EXPORT_MONTHLY, STR_EMPTY); /* 2009-08-03: PridanÈ kvÙli rÙznym spÙsobom exportu po mesiacoch, prepÌnaË -M */
 	/* koniec inicializacie globalnych premennych; teraz samotna main()
@@ -13441,6 +13543,17 @@ _main_SIMULACIA_QS:
 			}
 			_main_LOG_to_Export("...css (%s) = %i, teda %s (%s)\n", pom_CSS, _global_css, nazov_css[_global_css], skratka_css[_global_css]);
 
+			/* 2011-05-06: PridanÈ naËÌtanie n·zvu fontu kvÙli rÙznym fontom */
+			_main_LOG_to_Export("zisùujem font...\n");
+			_global_font = atofont(pom_FONT);
+			/*
+			if(_global_font == FONT_UNDEF){
+				_global_font = FONT_CSS;
+				_main_LOG_to_Export("\t(vzhæadom k neurËenÈmu fontu pouûÌvam default z CSS)\n");
+			}
+			*/
+			_main_LOG_to_Export("...font (%s) = %i, teda %s\n", pom_FONT, _global_font, nazov_fontu[_global_css]);
+ 
 			LOG_ciara;
 
 			/* pridane 27/04/2000A.D.

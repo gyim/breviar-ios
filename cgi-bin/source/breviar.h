@@ -159,6 +159,8 @@ extern short int _global_kalendar;
 
 extern short int _global_css; /* 2008-08-08: Pridané kvôli rôznym css */
 
+extern short int _global_font; /* 2011-05-06: Pridané kvôli rôznym fontom */
+
 /* 2006-10-17: Pridané kvôli kompletóriu: niekedy obsahuje až dva žalmy */
 extern short int _global_pocet_zalmov_kompletorium;
 

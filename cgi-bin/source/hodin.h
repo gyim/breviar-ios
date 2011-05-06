@@ -825,6 +825,10 @@ const char *skratka_css[POCET_CSS + 1] =
 	, "2003", "2005", "2007", "2008"
 	, "jmkcz"};
 
+/* 2011-05-06: pridané kvôli monosti vo¾by písma */
+const char *nazov_fontu[POCET_FONTOV + 1] =
+{"", "pod¾a CSS", "pod¾a vıberu", "Cambria", "Candara", "Georgia", "Tahoma"};
+
 /* strings of buttons - abbreviations of prayer names */
 /* 2006-10-11: definovanie reazcov aj pre invitatórium a kompletórium */
 const char *html_button_invitatorium[POCET_JAZYKOV + 1] = {"Inv.", "Inv.", "Inv.", "Inv.", "", "Inv.", "Imád."};
@@ -1627,7 +1631,27 @@ const char *html_text_option2_font_family[POCET_JAZYKOV + 1] =
  "hu_"
 };
 const char *html_text_option2_font_family_explain[POCET_JAZYKOV + 1] = 
-{"Zvo¾te si pätkové písmo (Serif) resp. bezpätkové písmo (Sans Serif) pod¾a toho, èo vám viac vyhovuje pre komfort modlitby.", 
+{"Zvo¾te si pätkové písmo (Serif) resp. bezpätkové písmo (Sans Serif) pod¾a toho, èo vám viac vyhovuje pre komfort modlitby. Pouije sa predvolené písmo prehliadaèa.", 
+ "", 
+ "", 
+ "",
+ "", 
+ "", 
+ ""
+};
+
+/* 2011-05-06: doplnené */
+const char *html_text_font_name[POCET_JAZYKOV + 1] = 
+{"alebo poui písmo ", 
+ "nebo pouij písmo ", 
+ "or use font ", 
+ "vel font ",
+ "",
+ "nebo pouij písmo ", 
+ "hu_"
+};
+const char *html_text_font_name_explain[POCET_JAZYKOV + 1] = 
+{"Ak nie je zvolené konkrétne písmo, pouije sa predvolené písmo prehliadaèa (pätkové alebo bezpätkové pod¾a predchádzajúcej vo¾by zaškrtávacieho políèka).", 
  "", 
  "", 
  "",

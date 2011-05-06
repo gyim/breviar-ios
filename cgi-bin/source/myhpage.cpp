@@ -85,16 +85,26 @@ void hlavicka(char *title, short int level, short int spec){
 	else
 		nazov_css_suboru = nazov_css[_global_css];
 Log("_global_opt[OPT_2_HTML_EXPORT] == %d\n", _global_opt[OPT_2_HTML_EXPORT]);
+Log("_global_font == %d\n", _global_font);
 	/*
 	 * 2011-05-05: nastavenie font-family
 	 *             zatia¾ len pevné reazce; èasom možno bude premenná pre názov fontu
+	 * 2011-05-06: doplnené: najprv sa testuje nastavenie _global_font; následne sa prípadne nastavia defaulty
 	 */
-	if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_FAMILY) == BIT_OPT_2_FONT_FAMILY){
-		mystrcpy(_global_font_family, DEFAULT_FONT_FAMILY_SANS_SERIF, MAX_STR);
-	}
+	if(_global_font == FONT_UNDEF){
+		if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_FAMILY) == BIT_OPT_2_FONT_FAMILY){
+			mystrcpy(_global_font_family, DEFAULT_FONT_FAMILY_SANS_SERIF, MAX_STR);
+		}
+		else{
+			mystrcpy(_global_font_family, DEFAULT_FONT_FAMILY_SERIF, MAX_STR);
+		}
+	}/* (_global_font == FONT_UNDEF) */
+	else if(_global_font == FONT_CSS){
+		mystrcpy(_global_font_family, DEFAULT_FONT_FAMILY_INHERIT, MAX_STR);
+	}/* (_global_font == FONT_CSS) */
 	else{
-		mystrcpy(_global_font_family, DEFAULT_FONT_FAMILY_SERIF, MAX_STR);
-	}
+		mystrcpy(_global_font_family, nazov_fontu[_global_font], MAX_STR);
+	}/* else */
 
 	if(bol_content_type_text_html == NIE){
 #if defined(OS_linux)
@@ -136,8 +146,12 @@ Log("_global_opt[OPT_2_HTML_EXPORT] == %d\n", _global_opt[OPT_2_HTML_EXPORT]);
 	Export("%s\">\n", nazov_css_suboru); // názov css súboru
 	Export("<title>%s</title>\n", title);
 	Export("</head>\n\n");
-	/* 2011-05-05: pridanie font-family */
-	Export("<body style=\"font-family: %s\"", _global_font_family);
+	/* 2011-05-05: pridanie font-family 
+	 * 2011-05-06: font sa nepridáva vždy
+	 */
+	if(_global_font != FONT_CSS){
+		Export("<body style=\"font-family: %s\"", _global_font_family);
+	}
 	/* 2010-02-15: kvôli špeciálnemu "zoznam.htm" */
 	if(spec == 1){
 		Export(" onLoad=\"fn_aktualne(0,0,0)\"");

@@ -41,7 +41,7 @@
 #define DEFAULT_FONT_FAMILY_SERIF "Serif"
 #define DEFAULT_FONT_FAMILY_SANS_SERIF "Sans-Serif"
 #endif
-
+#define DEFAULT_FONT_FAMILY_INHERIT "inherit"
 
 extern char cfg_HTTP_ADDRESS_default[MAX_HTTP_STR];
 extern char cfg_HTTP_DISPLAY_ADDRESS_default[MAX_HTTP_STR];

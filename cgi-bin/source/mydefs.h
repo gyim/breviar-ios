@@ -63,7 +63,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2011-05-05"
+#define BUILD_DATE "2011-05-06"
 
 #define BYTES 250
 #define SMALL 80
@@ -571,6 +571,14 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPTF2_FONT_FAMILY "of2ff"
 #endif
 
+// font family chooser (drop-down list)
+#define MODL_OPTF2_FONT_CHOOSER 84
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF2_FONT_CHOOSER "MODL_OPTF2_FONT_CHOOSER"
+#else
+	#define STR_MODL_OPTF2_FONT_CHOOSER "of2fc"
+#endif
+
 /* 2008-08-08: Pridané kvôli rôznym css */
 #define CSS 40
 #ifdef LONG_PARAM_NAMES
@@ -593,6 +601,14 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_KALENDAR "KALENDAR"
 #else
 	#define STR_KALENDAR "k"
+#endif
+
+/* 2011-05-06: pridané */
+#define FONT_NAME 43
+#ifdef LONG_PARAM_NAMES
+	#define STR_FONT_NAME "FONT_NAME"
+#else
+	#define STR_FONT_NAME "f"
 #endif
 
 
