@@ -513,6 +513,16 @@ void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int 
 		Log("\tPrilepil som aj css: `%s' (2008-08-08)\n", pom3);
 	}
 
+	/* 2011-05-06: pridanÈ odovzdanie parametra pre font */
+	if(_global_font != FONT_CSS){
+		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_FONT_NAME, nazov_fontu[_global_font]);
+		strcat(pom2, pom3);
+		Log("\tPrilepil som aj font: `%s'\n", pom3);
+	}
+	else{
+		Log("\tNetreba prilepiù font (_global_font == %d, n·zov == %s)\n", _global_font, nazov_fontu[_global_font]);
+	}
+
 	/* 2011-01-26: pridanÈ odovzdanie parametrov pre options1 atÔ. */
     /* 2011-04-07: upravenÈ -- pouûitie polÌ */
 	char local_str[SMALL];

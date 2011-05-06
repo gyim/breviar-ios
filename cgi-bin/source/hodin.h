@@ -827,7 +827,11 @@ const char *skratka_css[POCET_CSS + 1] =
 
 /* 2011-05-06: pridané kvôli monosti vo¾by písma */
 const char *nazov_fontu[POCET_FONTOV + 1] =
-{"", "pod¾a CSS", "pod¾a vıberu", "Cambria", "Candara", "Georgia", "Tahoma"};
+{"", "pod¾a CSS", "pod¾a vıberu", "Cambria", "Candara", "Georgia", "Tahoma", "Helvetica", "serif", "sans-serif"};
+const char *nazov_fontu_CHECKBOX[POCET_JAZYKOV + 1] =
+{"pod¾a vıberu", "podle vıbìru", "according to checkbox above", "checkbox", "", "podle vıbìru", "checkbox"};
+const char *nazov_fontu_CSS[POCET_FONTOV + 1] =
+{"pod¾a CSS", "podle CSS", "according to CSS", "CSS", "CSS", "podle CSS", "CSS"};
 
 /* strings of buttons - abbreviations of prayer names */
 /* 2006-10-11: definovanie reazcov aj pre invitatórium a kompletórium */

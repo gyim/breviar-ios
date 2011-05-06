@@ -6365,7 +6365,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	dnes.tm_year = rok;
 	dnes.tm_wday = denvt;
 
-	char pom2[MAX_STR]; /* 2006-08-01: pridanÈ */
+	char pom2[MAX_STR]; /* 2006-08-01: pridanÈ; 2011-05-06: pouûitÈ aj pre nazov_fontu[] */
 	mystrcpy(pom2, STR_EMPTY, MAX_STR); /* 2006-07-31: pridanÈ */
 	char pom3[MAX_STR]; /* 2008-08-08: pridanÈ */
 	mystrcpy(pom3, STR_EMPTY, MAX_STR);
@@ -6614,8 +6614,18 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 		/* pole WWW_FONT_NAME */
 		Export("<select name=\"%s\" title=\"%s\">\n", STR_FONT_NAME, html_text_font_name_explain[_global_jazyk]);
-		for(font = FONT_UNDEF; font <= POCET_FONTOV; font++){
-			Export("<option%s>%s\n", (font == _global_font)? html_option_selected: STR_EMPTY, nazov_fontu[font]);
+		// FONT_UNDEF neexportujeme
+		for(font = FONT_UNDEF + 1; font <= POCET_FONTOV; font++){
+			mystrcpy(pom2, nazov_fontu[font], MAX_STR);
+			if((_global_jazyk != JAZYK_SK) && ((font == FONT_CSS) || (font == FONT_CHECKBOX))){
+				if(font == FONT_CSS){
+					mystrcpy(pom2, nazov_fontu_CSS[_global_jazyk], MAX_STR);
+				}
+				else if(font == FONT_CHECKBOX){
+					mystrcpy(pom2, nazov_fontu_CHECKBOX[_global_jazyk], MAX_STR);
+				}
+			}
+			Export("<option%s>%s\n", (font == _global_font)? html_option_selected: STR_EMPTY, pom2 /* nazov_fontu[font] */);
 		}
 		Export("</select>\n");
 	}
@@ -8507,6 +8517,12 @@ short int atofont(char *font){
 	short int i = 0;
 	do{
 		if(equalsi(font, nazov_fontu[i])){
+			return i;
+		}
+		if((i == FONT_CSS) && equalsi(font, nazov_fontu_CSS[_global_jazyk])){
+			return i;
+		}
+		if((i == FONT_CHECKBOX) && equalsi(font, nazov_fontu_CHECKBOX[_global_jazyk])){
 			return i;
 		}
 		i++;
@@ -12233,13 +12249,13 @@ short int parseQueryString(void){
 
 	/* 2010-08-04: pridanÈ kvÙli jazykov˝m mut·ci·m -- kalend·r 
 	 *             pÙdodn· pozn·mka pre while cyklus resp. inicializ·ciu i: param[0] by mal sÌce obsahovaù typ akcie, ale radöej kontrolujeme aj 0
-	 * 2010-10-11: Pre POST query sa tam kalend·r priliepa aj na zaËiatok, aj sa ËÌta z form-ul·ra (t. j. pri v˝bere z qt=pdnes), preto ËÌtam "odzadu"
+	 * 2010-10-11: Pre POST query sa tam kalend·r priliepa aj na zaËiatok, aj sa ËÌta z form-ul·ra (t. j. pri v˝bere z qt=pdnes), preto ËÌtam "odzadu", "zozadu"
 	 *             ak by sa neölo smerom "dolu" (t. j. k prvÈmu parametru od konca), 
 	 *             nefungovalo by "override" z tabuæky "Voæby vybran˝ch detailov", ak uû v query stringu nejak· hodnota je
 	 * 2011-04-07: keÔûe poËet parametrov je "pocet", indexovanÈ s˙ 0 aû pocet - 1, a preto opravenÈ: najprv znÌûime --i;
 	 */
 	i = pocet;
-	Log("pok˙öam sa zistiù kalend·r (od poslednÈho parametra k prvÈmu)...\n");
+	Log("pok˙öam sa zistiù kalend·r (od poslednÈho parametra k prvÈmu, t. j. odzadu)...\n");
 	while((equalsi(pom_KALENDAR, STR_EMPTY)) && (i > 0)){
 		--i;
 		Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
@@ -12263,17 +12279,21 @@ short int parseQueryString(void){
 		i++;
 	}
 
-	/* 2011-05-05: pridanÈ kvÙli rÙznym fontom */
-	i = 0; /* param[0] by mal sÌce obsahovaù typ akcie, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù font...\n");
-	while((equalsi(pom_FONT, STR_EMPTY)) && (i < pocet)){
+	/* 2011-05-05: pridanÈ kvÙli rÙznym fontom 
+	 * 2011-05-06: Pre POST query sa tam font priliepa aj na zaËiatok (rovnako ako kalend·r), aj sa ËÌta z form-ul·ra (t. j. pri v˝bere z qt=pdnes), 
+	 *             preto ËÌtam "odzadu", "zozadu" (rovnako ako kalend·r), ak by sa neölo smerom "dolu" (t. j. k prvÈmu parametru od konca), 
+	 *             nefungovalo by "override" z tabuæky "Voæby vybran˝ch detailov", ak uû v query stringu nejak· hodnota je
+	 */
+	i = pocet;
+	Log("pok˙öam sa zistiù font (od poslednÈho parametra k prvÈmu, t. j. odzadu)...\n");
+	while((equalsi(pom_FONT, STR_EMPTY)) && (i > 0)){
+		--i;
 		Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
 		if(equals(param[i].name, STR_FONT_NAME)){
 			/* ide o parameter STR_FONT_NAME */
 			mystrcpy(pom_FONT, param[i].val, SMALL);
 			Log("font zisten˝ (%s).\n", pom_FONT);
 		}
-		i++;
 	}
 
 	/* 2006-08-01: pÙvodne sme predpokladali, ûe param[0] by mal obsahovaù typ akcie; 
@@ -13370,6 +13390,15 @@ int main(int argc, char **argv){
 				}
 				_main_LOG_to_Export("...kalend·r (%s) = %i, teda %s (%s)\n", pom_KALENDAR, _global_kalendar, nazov_kalendara[_global_kalendar], skratka_kalendara[_global_kalendar]);
 
+				/* 2011-05-06: PridanÈ naËÌtanie n·zvu fontu kvÙli rÙznym fontom */
+				_main_LOG_to_Export("zisùujem font...\n");
+				_global_font = atofont(pom_FONT);
+				if(_global_font == FONT_UNDEF){
+					_global_font = FONT_CSS;
+					_main_LOG_to_Export("\t(vzhæadom k neurËenÈmu fontu pouûÌvam default -- braù font z CSS)\n");
+				}
+				_main_LOG_to_Export("...font (%s) = %i, teda %s\n", pom_FONT, _global_font, nazov_fontu[_global_font]);
+				
 				Log("file_export == `%s'...\n", file_export);
 				if(equals(file_export, STR_EMPTY) || equals(file_export, "+")){
 					/* "+" -- error, chce pridavat do nicoho */
@@ -13546,13 +13575,11 @@ _main_SIMULACIA_QS:
 			/* 2011-05-06: PridanÈ naËÌtanie n·zvu fontu kvÙli rÙznym fontom */
 			_main_LOG_to_Export("zisùujem font...\n");
 			_global_font = atofont(pom_FONT);
-			/*
 			if(_global_font == FONT_UNDEF){
 				_global_font = FONT_CSS;
-				_main_LOG_to_Export("\t(vzhæadom k neurËenÈmu fontu pouûÌvam default z CSS)\n");
+				_main_LOG_to_Export("\t(vzhæadom k neurËenÈmu fontu pouûÌvam default -- braù font z CSS)\n");
 			}
-			*/
-			_main_LOG_to_Export("...font (%s) = %i, teda %s\n", pom_FONT, _global_font, nazov_fontu[_global_css]);
+			_main_LOG_to_Export("...font (%s) = %i, teda %s\n", pom_FONT, _global_font, nazov_fontu[_global_font]);
  
 			LOG_ciara;
 

@@ -116,7 +116,7 @@
 #define CSS_breviar_hist_2008	8
 #define CSS_jm_krize_cz			9
 
-#define	POCET_FONTOV	     6
+#define	POCET_FONTOV	9
 
 /* 2011-05-06: jednotlivé fonty na výber v drop-down liste */
 #define FONT_UNDEF		0
@@ -126,6 +126,9 @@
 #define FONT_CANDARA	4
 #define FONT_GEORGIA	5
 #define FONT_TAHOMA		6
+#define FONT_HELVETICA	7
+#define FONT_SERIF		8
+#define FONT_SANS_SERIF	9
 
 /* nasledovne 2 definovane 2003-08-13; zmenene 2004-04-28 (12->16) */
 #define MAX_STR_AF_FILE   16
@@ -1218,6 +1221,8 @@ extern const char *skratka_css[POCET_CSS + 1];
 extern const char *nazov_css[POCET_CSS + 1];
 
 extern const char *nazov_fontu[POCET_FONTOV + 1];
+extern const char *nazov_fontu_CHECKBOX[POCET_JAZYKOV + 1];
+extern const char *nazov_fontu_CSS[POCET_FONTOV + 1];
 
 /* ------------------------------------------------------------------- */
 

@@ -98,7 +98,7 @@ Log("_global_font == %d\n", _global_font);
 		else{
 			mystrcpy(_global_font_family, DEFAULT_FONT_FAMILY_SERIF, MAX_STR);
 		}
-	}/* (_global_font == FONT_UNDEF) */
+	}/* (_global_font == FONT_UNDEF)  || (_global_font == FONT_CHECKBOX) */
 	else if(_global_font == FONT_CSS){
 		mystrcpy(_global_font_family, DEFAULT_FONT_FAMILY_INHERIT, MAX_STR);
 	}/* (_global_font == FONT_CSS) */
@@ -149,8 +149,9 @@ Log("_global_font == %d\n", _global_font);
 	/* 2011-05-05: pridanie font-family 
 	 * 2011-05-06: font sa nepridáva vždy
 	 */
+	Export("<body");
 	if(_global_font != FONT_CSS){
-		Export("<body style=\"font-family: %s\"", _global_font_family);
+		Export(" style=\"font-family: %s\"", _global_font_family);
 	}
 	/* 2010-02-15: kvôli špeciálnemu "zoznam.htm" */
 	if(spec == 1){
