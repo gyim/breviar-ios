@@ -91,7 +91,7 @@ Log("_global_font == %d\n", _global_font);
 	 *             zatiaæ len pevnÈ reùazce; Ëasom moûno bude premenn· pre n·zov fontu
 	 * 2011-05-06: doplnenÈ: najprv sa testuje nastavenie _global_font; n·sledne sa prÌpadne nastavia defaulty
 	 */
-	if(_global_font == FONT_UNDEF){
+	if((_global_font == FONT_UNDEF) || (_global_font == FONT_CHECKBOX)){
 		if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_FAMILY) == BIT_OPT_2_FONT_FAMILY){
 			mystrcpy(_global_font_family, DEFAULT_FONT_FAMILY_SANS_SERIF, MAX_STR);
 		}
