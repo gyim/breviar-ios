@@ -232,6 +232,9 @@
 /*   2011-05-06a.D. | öpeci·lna ˙prava pri nastavovanÌ _global_opt[] resp. */
 /*                    _global_optf[]: zohæadnenie defaultu z config s˙boru */
 /*                    pre 4. bit (BIT_OPT_2_FONT_CHOOSER)                  */
+/*                  - ToDo: urobiù krajöie defaultnÈ nastavenie: nastaviù  */
+/*                    podæa toho, Ëo je v config (konfiguraËnom s˙bore);   */
+/*                    zatiaæ to tam nie je                                 */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -13394,7 +13397,13 @@ int main(int argc, char **argv){
 				_main_LOG_to_Export("zisùujem font...\n");
 				_global_font = atofont(pom_FONT);
 				if(_global_font == FONT_UNDEF){
-					_global_font = FONT_CSS;
+					// ToDo: urobiù krajöie, podæa default nastavenia v config (konfiguraËnom s˙bore); zatiaæ to tam nie je
+					if(_global_jazyk == JAZYK_CZ){
+						_global_font = FONT_CHECKBOX;
+					}
+					else{
+						_global_font = FONT_CSS;
+					}// default
 					_main_LOG_to_Export("\t(vzhæadom k neurËenÈmu fontu pouûÌvam default -- braù font z CSS)\n");
 				}
 				_main_LOG_to_Export("...font (%s) = %i, teda %s\n", pom_FONT, _global_font, nazov_fontu[_global_font]);
@@ -13576,7 +13585,13 @@ _main_SIMULACIA_QS:
 			_main_LOG_to_Export("zisùujem font...\n");
 			_global_font = atofont(pom_FONT);
 			if(_global_font == FONT_UNDEF){
-				_global_font = FONT_CSS;
+				// ToDo: urobiù krajöie, podæa default nastavenia v config (konfiguraËnom s˙bore); zatiaæ to tam nie je
+				if(_global_jazyk == JAZYK_CZ){
+					_global_font = FONT_CHECKBOX;
+				}
+				else{
+					_global_font = FONT_CSS;
+				}// default
 				_main_LOG_to_Export("\t(vzhæadom k neurËenÈmu fontu pouûÌvam default -- braù font z CSS)\n");
 			}
 			_main_LOG_to_Export("...font (%s) = %i, teda %s\n", pom_FONT, _global_font, nazov_fontu[_global_font]);
