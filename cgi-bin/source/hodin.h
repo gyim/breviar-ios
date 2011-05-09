@@ -1467,7 +1467,7 @@ const char *html_text_option1_otcenas_explain[POCET_JAZYKOV + 1] =
  "",
  "", 
  "", 
- "hu_"
+ "Az imaórák liturgiája az Úr imádságát (Miatyánkot) a Reggeli és Esti dicséretben nem szokta feltüntetni."
 };
 
 const char *html_text_option1_tedeum[POCET_JAZYKOV + 1] = 
