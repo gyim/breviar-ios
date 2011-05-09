@@ -10002,12 +10002,23 @@ void _main_analyza_roku(char *rok){
 	datum = prva_adventna_nedela(year - 1);
 	vytvor_global_link(datum.den, datum.mesiac, year - 1, LINK_DEN_MESIAC);
 	/* vytvor_global_link nastavi _global_link */
-	ExportROK((char *)html_text_Od_prvej_adv_atd[_global_jazyk], /* 2006-08-07 */
-		year - 1,
-		_global_link,
-		pom,
-		FILE_LITURGICKY_ROK,
-		'A' + nedelny_cyklus(datum.den, datum.mesiac, year - 1));
+	if(_global_jazyk == JAZYK_HU){
+		/* 2011-05-09: inÈ poradie vypisovan˝ch reùazcov */
+		ExportROK((char *)html_text_Od_prvej_adv_atd[_global_jazyk],
+			year - 1,
+			_global_link,
+			'A' + nedelny_cyklus(datum.den, datum.mesiac, year - 1),
+			pom,
+			FILE_LITURGICKY_ROK);
+	}
+	else{
+		ExportROK((char *)html_text_Od_prvej_adv_atd[_global_jazyk], /* 2006-08-07 */
+			year - 1,
+			_global_link,
+			pom,
+			FILE_LITURGICKY_ROK,
+			'A' + nedelny_cyklus(datum.den, datum.mesiac, year - 1));
+	}
 
 	Export("\n<table>\n");
 	for(i = 0; i < POCET_ALIASOV; i++){
