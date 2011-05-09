@@ -127,7 +127,7 @@ extern char FILE_PATH[MAX_STR]; // inicializovane v breviar.cpp
 #define FILE_PRESTUPNY_ROK		MESSAGE_FOLDER"prestupn.htm"
 #define FILE_JULIANSKY_DATUM	MESSAGE_FOLDER"juldat.htm"
 #define FILE_NEDELNE_PISMENO	MESSAGE_FOLDER"nedpism.htm"
-#define FILE_LITURGICKY_ROK	    MESSAGE_FOLDER"lr_pism.htm"
+#define FILE_LITURGICKY_ROK	    MESSAGE_FOLDER"lr-pism.htm"
 #define FILE_NAME_POKEC         MESSAGE_FOLDER"xxx"
 #define FILE_NAME_CHYBA         MESSAGE_FOLDER"chyba.htm"
 
