@@ -8,9 +8,9 @@
 .boldit { font-weight: bold; font-style: italic; }
 .it { font-style: italic; }
 .normal { color: #000000; }
-.tt { font-family: Courier, Monospaced; }
-.parameter { font-weight: bold; font-style: normal; font-family: Courier, Monospaced; color: black; }
-.value { font-weight: bold; font-style: normal; font-family: Courier, Monospaced; color: brown; }
+.tt { font-family: Courier, Monospace; }
+.parameter { font-weight: bold; font-style: normal; font-family: Courier, Monospace; color: black; }
+.value { font-weight: bold; font-style: normal; font-family: Courier, Monospace; color: brown; }
 .explain { font-size: 90%; color: #330000; }
 .small { font-size: 90%; }
 
