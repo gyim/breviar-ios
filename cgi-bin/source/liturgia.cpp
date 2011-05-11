@@ -549,6 +549,68 @@ void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int 
 	Log("prilep_request_options() -- koniec.\n");
 }// prilep_request_options();
 
+char *_vytvor_string_z_datumu(short int den, short int mesiac, short int rok, short int _case, short int typ, short int align){
+	/* 2007-03-20: spÙsob v˝pisu d·tumu podæa jazyka 
+	 * 2011-05-11: vytiahnut˝ z _vytvor_global_pom_str() ako samostatn· funkcia
+	 */
+	char pom[MAX_STR] = STR_EMPTY;
+	char vypln[SMALL] = STR_EMPTY;
+	mystrcpy(_global_pom_str, STR_EMPTY, MAX_STR);
+	// pre export medzery pre jednocifernÈ ËÌsla dnÌ zarovn·me nezlomiteænou medzerou
+	if((align != NIE) && (den < 10)){
+		mystrcpy(vypln, HTML_NONBREAKING_SPACE, SMALL);
+	}
+	if(_global_jazyk == JAZYK_LA){
+		sprintf(pom, "%s%d. %s", vypln, den, nazov_Mesiaca_gen(mesiac - 1));
+		if(typ == LINK_DEN_MESIAC_ROK){
+			/* pridame aj rok */
+			strcat(_global_pom_str, pom);
+			sprintf(pom, " %d", rok);
+		}
+	}
+	else if(_global_jazyk == JAZYK_EN){
+		sprintf(pom, "%s %s%d", nazov_Mesiaca(mesiac - 1), vypln, den);
+		if(typ == LINK_DEN_MESIAC_ROK){
+			/* pridame aj rok */
+			strcat(_global_pom_str, pom);
+			sprintf(pom, ", %d", rok);
+		}
+	}
+	/* 2010-05-21: doplnenÈ pre maÔarËinu: 1999. augusztus 1. -- http://en.wikipedia.org/wiki/Date_and_time_notation_by_country#Hungary [2010-05-24] */
+	else if(_global_jazyk == JAZYK_HU){
+		if(typ == LINK_DEN_MESIAC_ROK){
+			/* prid·me najprv rok */
+			sprintf(pom, "%d. ", rok);
+			strcat(_global_pom_str, pom);
+			sprintf(pom, "%s %s%d.", nazov_mesiaca(mesiac - 1), vypln, den);
+		}
+		else{
+			sprintf(pom, "%s %s%d.", nazov_Mesiaca(mesiac - 1), vypln, den);
+		}
+	}
+	else{
+		/* doterajöie spr·vanie pre slovenËinu a Ëeötinu */
+		switch(_case){
+			case CASE_case:
+				sprintf(pom, "%s%d. %s", vypln, den, nazov_mesiaca(mesiac - 1));
+				break;
+			case CASE_Case:
+				sprintf(pom, "%s%d. %s", vypln, den, nazov_Mesiaca(mesiac - 1));
+				break;
+			case CASE_CASE:
+				sprintf(pom, "%s%d. %s", vypln, den, nazov_MESIACA(mesiac - 1));
+				break;
+		}/* switch(_case) */
+		if(typ == LINK_DEN_MESIAC_ROK){
+			/* pridame aj rok */
+			strcat(_global_pom_str, pom);
+			sprintf(pom, " %d", rok);
+		}
+	}
+	strcat(_global_pom_str, pom);
+	return (_global_pom_str);
+}/* _vytvor_string_z_datumu() */
+
 /* do globalneho stringu _global_link vrati retazec, ktory je linkou
  * na SCRIPT_NAME ++ ? zoznam param(i) = value(i)
  *
@@ -559,7 +621,7 @@ void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int 
  * alebo   1999-12-11        (LINK_ISO_8601) - pridane 2005-03-21
  *
  */
-void _vytvor_global_link(short int den, short int mesiac, short int rok, short int _case, short int typ){
+void _vytvor_global_link(short int den, short int mesiac, short int rok, short int _case, short int typ, short int align){
 	/* 2003-07-09 zmeneny & na HTML_AMPERSAND kvoli HTML 4.01 */
 	char pom[MAX_STR];
 	mystrcpy(pom, STR_EMPTY, MAX_STR); /* 2003-08-11 pridana inicializacia */
@@ -702,54 +764,8 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 				else if(typ == LINK_DEN_MESIAC_NASLEDOVNY)
 					sprintf(pom, ""HTML_RIGHT_ARROW"");
 				else{
-					/* 2007-03-20: spÙsob v˝pisu d·tumu podæa jazyka */
-					if(_global_jazyk == JAZYK_LA){
-						sprintf(pom, "%d. %s", den, nazov_Mesiaca_gen(mesiac - 1));
-						if(typ == LINK_DEN_MESIAC_ROK){
-							/* pridame aj rok */
-							strcat(_global_link, pom);
-							sprintf(pom, " %d", rok);
-						}
-					}
-					else if(_global_jazyk == JAZYK_EN){
-						sprintf(pom, "%s %d", nazov_Mesiaca(mesiac - 1), den);
-						if(typ == LINK_DEN_MESIAC_ROK){
-							/* pridame aj rok */
-							strcat(_global_link, pom);
-							sprintf(pom, ", %d", rok);
-						}
-					}
-					/* 2010-05-21: doplnenÈ pre maÔarËinu: 1999. augusztus 1. -- http://en.wikipedia.org/wiki/Date_and_time_notation_by_country#Hungary [2010-05-24] */
-					else if(_global_jazyk == JAZYK_HU){
-						if(typ == LINK_DEN_MESIAC_ROK){
-							/* prid·me najprv rok */
-							sprintf(pom, "%d. ", rok);
-							strcat(_global_link, pom);
-							sprintf(pom, "%s %d.", nazov_mesiaca(mesiac - 1), den);
-						}
-						else{
-							sprintf(pom, "%s %d.", nazov_Mesiaca(mesiac - 1), den);
-						}
-					}
-					else{
-						/* doterajöie spr·vanie pre slovenËinu a Ëeötinu */
-						switch(_case){
-							case CASE_case:
-								sprintf(pom, "%d. %s", den, nazov_mesiaca(mesiac - 1));
-								break;
-							case CASE_Case:
-								sprintf(pom, "%d. %s", den, nazov_Mesiaca(mesiac - 1));
-								break;
-							case CASE_CASE:
-								sprintf(pom, "%d. %s", den, nazov_MESIACA(mesiac - 1));
-								break;
-						}/* switch(_case) */
-						if(typ == LINK_DEN_MESIAC_ROK){
-							/* pridame aj rok */
-							strcat(_global_link, pom);
-							sprintf(pom, " %d", rok);
-						}
-					}
+					/* 2011-05-11: vytiahnutÈ do _vytvor_string_z_datumu() ako samostatn· funkcia */
+					strcpy(pom, _vytvor_string_z_datumu(den, mesiac, rok, _case, typ, align));
 				}
 				strcat(pom, "</a>");
 			}/* den != VSETKY_DNI */
@@ -978,16 +994,16 @@ unsigned char _nedelne_pismeno(short int den, short int mesiac, short int rok){
 }
 
 /* vrati nedelne pismeno v spravnej casti roka, ale neberie do uvahy
- * typ modlitby, t.j. ked su (prve) vespery, vrati zly den!!! pozor!!!
+ * typ modlitby, t.j. ked su (prve) vespery, vrati zly den, pozor na to (prÌpadne [ToDo] dokonËiù)
  */
 unsigned char _nedelne_pismeno(_struct_den_mesiac den_a_mesiac, short int rok){
 	return
 	_nedelne_pismeno(poradie(den_a_mesiac.den, den_a_mesiac.mesiac, rok), rok);
-}
+}/* _nedelne_pismeno() */
 
 char nedelne_pismeno(_struct_den_mesiac den_a_mesiac, short int rok){
 	return char_nedelne_pismeno[_nedelne_pismeno(den_a_mesiac, rok)];
-}
+}/* nedelne_pismeno() */
 
 /* ------------------------------------------------------------------- */
 

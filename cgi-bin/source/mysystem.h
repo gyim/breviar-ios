@@ -3,7 +3,7 @@
 /* mysystem.h                                                  */
 /* (c)1999-2011 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
-/* !!! popis nižšie -- for description see below !!!           */
+/* NOTE: popis nižšie -- for description see below             */
 /*                                                             */
 /***************************************************************/
 #include "vstudio.h"

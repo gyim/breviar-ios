@@ -194,25 +194,25 @@ extern short int _global_opt_export_date_format;
 (_global_modlitba == MODL_RANNE_CHVALY &&  \
 	(_global_modl_ranne_chvaly.ant_spompost.anchor != NULL) && (_global_modl_ranne_chvaly.ant_spompost.file != NULL) && \
 	(_global_modl_ranne_chvaly.modlitba_spompost.anchor != NULL) && (_global_modl_ranne_chvaly.modlitba_spompost.file != NULL) && \
-	(!equals(_global_modl_ranne_chvaly.ant_spompost.anchor, EMPTY_STR)) && (!equals(_global_modl_ranne_chvaly.ant_spompost.anchor, STR_UNDEF)) &&  \
-	(!equals(_global_modl_ranne_chvaly.modlitba_spompost.anchor, EMPTY_STR)) && (!equals(_global_modl_ranne_chvaly.modlitba_spompost.anchor, STR_UNDEF)) && \
-	(!equals(_global_modl_ranne_chvaly.ant_spompost.file, EMPTY_STR)) && (!equals(_global_modl_ranne_chvaly.ant_spompost.file, STR_UNDEF)) &&  \
-	(!equals(_global_modl_ranne_chvaly.modlitba_spompost.file, EMPTY_STR)) && (!equals(_global_modl_ranne_chvaly.modlitba_spompost.file, STR_UNDEF)) \
+	(!equals(_global_modl_ranne_chvaly.ant_spompost.anchor, STR_EMPTY)) && (!equals(_global_modl_ranne_chvaly.ant_spompost.anchor, STR_UNDEF)) &&  \
+	(!equals(_global_modl_ranne_chvaly.modlitba_spompost.anchor, STR_EMPTY)) && (!equals(_global_modl_ranne_chvaly.modlitba_spompost.anchor, STR_UNDEF)) && \
+	(!equals(_global_modl_ranne_chvaly.ant_spompost.file, STR_EMPTY)) && (!equals(_global_modl_ranne_chvaly.ant_spompost.file, STR_UNDEF)) &&  \
+	(!equals(_global_modl_ranne_chvaly.modlitba_spompost.file, STR_EMPTY)) && (!equals(_global_modl_ranne_chvaly.modlitba_spompost.file, STR_UNDEF)) \
 ) \
 ||  \
 (_global_modlitba == MODL_VESPERY &&  \
 	(_global_modl_vespery.ant_spompost.anchor != NULL) && (_global_modl_vespery.ant_spompost.file != NULL) && \
 	(_global_modl_vespery.modlitba_spompost.anchor != NULL) && (_global_modl_vespery.modlitba_spompost.file != NULL) && \
-	(strcmp(_global_modl_vespery.ant_spompost.anchor, EMPTY_STR) != 0) && (strcmp(_global_modl_vespery.ant_spompost.anchor, STR_UNDEF) != 0) &&  \
-	(strcmp(_global_modl_vespery.modlitba_spompost.anchor, EMPTY_STR) != 0) && (strcmp(_global_modl_vespery.modlitba_spompost.anchor, STR_UNDEF) != 0) && \
-	(strcmp(_global_modl_vespery.ant_spompost.file, EMPTY_STR) != 0) && (strcmp(_global_modl_vespery.ant_spompost.file, STR_UNDEF) != 0) &&  \
-	(strcmp(_global_modl_vespery.modlitba_spompost.file, EMPTY_STR) != 0) && (strcmp(_global_modl_vespery.modlitba_spompost.file, STR_UNDEF) != 0) \
+	(strcmp(_global_modl_vespery.ant_spompost.anchor, STR_EMPTY) != 0) && (strcmp(_global_modl_vespery.ant_spompost.anchor, STR_UNDEF) != 0) &&  \
+	(strcmp(_global_modl_vespery.modlitba_spompost.anchor, STR_EMPTY) != 0) && (strcmp(_global_modl_vespery.modlitba_spompost.anchor, STR_UNDEF) != 0) && \
+	(strcmp(_global_modl_vespery.ant_spompost.file, STR_EMPTY) != 0) && (strcmp(_global_modl_vespery.ant_spompost.file, STR_UNDEF) != 0) &&  \
+	(strcmp(_global_modl_vespery.modlitba_spompost.file, STR_EMPTY) != 0) && (strcmp(_global_modl_vespery.modlitba_spompost.file, STR_UNDEF) != 0) \
 ) \
 ||  \
 (_global_modlitba == MODL_POSV_CITANIE &&  \
 	(_global_modl_posv_citanie.citanie_spompost.anchor != NULL) && (_global_modl_posv_citanie.citanie_spompost.file != NULL) && \
-	(strcmp(_global_modl_posv_citanie.citanie_spompost.anchor, EMPTY_STR) != 0) && (strcmp(_global_modl_posv_citanie.citanie_spompost.anchor, STR_UNDEF) != 0) &&  \
-	(strcmp(_global_modl_posv_citanie.citanie_spompost.file, EMPTY_STR) != 0) && (strcmp(_global_modl_posv_citanie.citanie_spompost.file, STR_UNDEF) != 0) \
+	(strcmp(_global_modl_posv_citanie.citanie_spompost.anchor, STR_EMPTY) != 0) && (strcmp(_global_modl_posv_citanie.citanie_spompost.anchor, STR_UNDEF) != 0) &&  \
+	(strcmp(_global_modl_posv_citanie.citanie_spompost.file, STR_EMPTY) != 0) && (strcmp(_global_modl_posv_citanie.citanie_spompost.file, STR_UNDEF) != 0) \
 ) \
 ))
 

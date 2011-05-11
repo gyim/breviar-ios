@@ -242,9 +242,7 @@
 /*     najdi zarazku KOMPILACIA -- niekde ku koncu                         */
 /*     pozri tiez POUCENIE                                                 */
 /*                                                                         */
-/*   * unfinished parts: oznaËenÈ !!! alebo xxx                            */
-/*                                                                         */
-/*   * Ëasti na cleanup (vyËistenie kÛdu) ozn. TODO_CLEANUP (2010-05-21)   */
+/*   * unfinished parts: oznaËenÈ ToDo resp. [ToDo]                        */
 /*                                                                         */
 /*   * debug in VC++/VStudio: alt+f7, zalozka Debug, Program arguments     */
 /*   * debug in Visual Studio: Alt+F7, or, in solution explorer,           */
@@ -406,7 +404,7 @@ char *_global_link_ptr;
 /*char _global_link[MAX_STR];*/
 #define _global_link _global_link_ptr
 
-char *_global_pom_str; /* pomocny string pre velke pismena */
+char *_global_pom_str; /* pomocn˝ string: n·vratov· hodnota viacer˝ch funkciÌ (hæadaj "return (_global_pom_str);") */
 /*char _global_pom_str[MAX_STR];*/
 
 /* globalna premenna, do ktorej sa ukladaju info o jednotlivych
@@ -594,9 +592,6 @@ urlvariable param[MAX_VARIABLES];
  *
  */
 
-#define EMPTY_STR empty_str
-char empty_str[6] = "ˇNULL";
-
 char file_export[SMALL] = STR_EMPTY; 
 /* nazov suboru, do ktoreho sa mozno exportuje
  * v pripade pouzitia switchu `e' pri getArgv();
@@ -643,26 +638,6 @@ short int index_pre_mesiac_otvoreny = NIE;
  * je_post | je_velka_noc | je_aleluja_aleluja | je_34_ocr | je_tedeum
  * vöetky testuj˙ premenn˙ "_global_den" a je_tedeum aj "type"
  */
-
-/*---------------------------------------------------------------------*/
-/* popis: odstrani backslashe zo stringu (argv[1]) a vrati novy string
- * ale NEVRATI novy string
- * 2006-08-18: hm, zaujÌmav˝ popis; naviac, funkcia sa nepouûÌva... preto zapozn·mkovanÈ.
- *
-short int odstran_backslashe(char *input){
-	short int i, j = 0;
-	short int ilen;
-	ilen = strlen(input);
-	for(i = 0; i < ilen; i++){
-		if(input[i] != '\\'){
-			input[j] = input[i];
-			j++;
-		}
-	}
-	input[j] = '\0';
-	return 0;
-}
-*/
 
 /*---------------------------------------------------------------------*/
 /*
@@ -981,7 +956,7 @@ short int setForm(void){
 			strcat(local_str, pom_QUERY_TYPE);
 		Log("--- setForm: putenv(%s); ... ", local_str);
 		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
+		Log("--- setForm: putenv returned %d.\n", ret);
 	}
 
 	/* den */
@@ -992,7 +967,7 @@ short int setForm(void){
 		strcat(local_str, pom_DEN);
 		Log("--- setForm: putenv(%s); ...\n", local_str);
 		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
+		Log("--- setForm: putenv returned %d.\n", ret);
 	}
 	/* mesiac */
 	mystrcpy(local_str, STR_EMPTY, SMALL);
@@ -1002,7 +977,7 @@ short int setForm(void){
 		strcat(local_str, pom_MESIAC);
 		Log("--- setForm: putenv(%s); ...\n", local_str);
 		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
+		Log("--- setForm: putenv returned %d.\n", ret);
 	}
 	/* rok */
 	mystrcpy(local_str, STR_EMPTY, SMALL);
@@ -1016,7 +991,7 @@ short int setForm(void){
 		strcat(local_str, pom_ROK);
 		Log("--- setForm: putenv(%s); ...\n", local_str);
 		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
+		Log("--- setForm: putenv returned %d.\n", ret);
 	}
 	/* modlitba */
 	mystrcpy(local_str, STR_EMPTY, SMALL);
@@ -1026,7 +1001,7 @@ short int setForm(void){
 		strcat(local_str, pom_MODLITBA);
 		Log("--- setForm: putenv(%s); ...\n", local_str);
 		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
+		Log("--- setForm: putenv returned %d.\n", ret);
 	}
 	/* pom_DALSI_SVATY */
 	mystrcpy(local_str, STR_EMPTY, SMALL);
@@ -1036,7 +1011,7 @@ short int setForm(void){
 		strcat(local_str, pom_DALSI_SVATY);
 		Log("--- setForm: putenv(%s); ...\n", local_str);
 		ret = putenv(local_str);
-		Log("--- setForm: putenv returned %d.\n", ret); /* 2005-03-30: Pridany vypis */
+		Log("--- setForm: putenv returned %d.\n", ret);
 	}
 
 	/* 2011-04-07: upravenÈ; options */
@@ -1240,13 +1215,7 @@ short int getSrciptParamFrom(int argc){
 				scanquery(_global_buf);
 				/* 2006-08-01: _global_buf sa menÌ, my si budujeme kÛpiu v _global_buf2 */
 				Log("POST::Vysledok == %s\n", _global_buf2);
-				// _main_LOG_to_Export("spustam setForm(); hodnota pom_QUERY_TYPE == %s\n", pom_QUERY_TYPE);
-				// ret = setForm(); /* 2005-03-29: Pokus */
-				// _main_LOG_to_Export("spat po skonceni setForm()\n");
-				/* 2006-08-01: Neviem, Ëi vyööie uveden˝ pokus tak celkom vyöiel;
-				 * v prÌpade, ak je query string nepr·zdny (napr. obsahuje öpecifik·ciu jazyka),
-				 * ale ostatnÈ premennÈ sa ËÌtaj˙ z formul·ra (vr·tane query type),
-				 * tak to nefunguje, preto op‰ù in˝ pokus: prilepÌme ku query stringu aj cel˝ global buffer */
+				/* 2006-08-01: prilepÌme ku query stringu aj cel˝ global buffer */
 				if(query_string != NULL && !equals(query_string, STR_EMPTY)){
 					Log("2006-08-01: Experiment - prilepujem _global_buf2 na koniec query_stringu...\n");
 					strcat(query_string, "&");
@@ -1255,9 +1224,10 @@ short int getSrciptParamFrom(int argc){
 				}
 			}
 		}
-		else
+		else{
 			Log("Chyba.\n");
-	}
+		}
+	}/* POST */
 
 	Log("--- getSrciptParamFrom(): end...\n");
 	/* systemova premenna QUERY_STRING existuje prave vtedy,
@@ -1299,14 +1269,14 @@ void _export_heading(/* int size, */const char *string){
 	/* 2003-07-16; pre prehladnost pridany este jeden \n */
 	size = 4;
 	Export("\n<h%d "HTML_CLASS_BLUE">%s</h%d>\n\n", size, string, size);
-}
+}/* _export_heading() */
+
 /* 2003-07-16; podobna funkcnost ako puovodne _export_heading */
 void _export_heading_center(const char *string){
 	short int size = 2;
 	/* 2003-07-16; pridany default vypis */
 	Export("\n<center><h%d>%s</h%d></center>\n\n", size, string, size);
-}
-
+}/* _export_heading_center() */
 
 /*---------------------------------------------------------------------*/
 /*
@@ -1323,10 +1293,7 @@ void _main_prazdny_formular(void){
 	hlavicka((char *)html_title[_global_jazyk]);
 	Export("Programu neboli zadanÈ argumenty.\n");
 	ALERT;
-}
-
-/*---------------------------------------------------------------------*/
-/* nasleduje pasaz, ktora bola povodne v lithod.[h|cpp]                */
+}/* _main_prazdny_formular() */
 
 /*---------------------------------------------------------------------*/
 /* includeFile():
@@ -3250,7 +3217,7 @@ void interpretTemplate(short int type, char *tempfile){
 	}
 	fclose(ftemplate);
 	Log("interpretTemplate(): end.\n");
-}
+}/* interpretTemplate() */
 
 /*---------------------------------------------------------------------*/
 /* showPrayer():
@@ -3385,43 +3352,36 @@ void showPrayer(short int type){
 	interpretTemplate(type, path);
 	Log("showPrayer(): end\n");
 }/* showPrayer(); */
-/*---------------------------------------------------------------------*/
-/* koniec pasaze, ktora bola povodne v lithod.[h|cpp]                  */
 
 /*---------------------------------------------------------------------*/
-void VYSVETLIVKY(void){ /* 13/03/2000A.D. */
+void vysvetlivky(void){ /* 13/03/2000A.D. */
 	char fname[MAX_STR] = STR_EMPTY;
 	mystrcpy(fname, include_dir, MAX_STR);
-	/* 2004-03-17 // strcat(fname, FILE_PATH); // prerobene 05/06/2000A.D. */
-
 	strcat(fname, FILE_VYSVETLIVKY);
 	Export("<!--"); /* simulacia toho, ze replacujeme nejaky anchor */
 	includeFile(0, ANCHOR_VYSVETLIVKY, fname, ANCHOR_VYSVETLIVKY);
-	/* bolo tu Export("--!>"); zmenene 2003-07-08 */
 	Export("-->"); /* simulacia toho, ze replacujeme nejaky anchor */
 }
-void VYSVETLIVKY_TABULKA(void){ /* 15/03/2000A.D. */
+
+void vysvetlivky_tabulka(void){ /* 15/03/2000A.D. */
 	char fname[MAX_STR] = STR_EMPTY;
 	mystrcpy(fname, include_dir, MAX_STR);
-	/* 2004-03-17 // strcat(fname, FILE_PATH); // prerobene 05/06/2000A.D. */
-
 	strcat(fname, FILE_VYSVETLIVKY_TABULKA);
 	Export("<!--"); /* simulacia toho, ze replacujeme nejaky anchor */
 	includeFile(0, ANCHOR_VYSVETLIVKY_TABULKA, fname, ANCHOR_VYSVETLIVKY_TABULKA);
-	/* bolo tu Export("--!>"); zmenene 2003-07-08 */
 	Export("-->"); /* simulacia toho, ze replacujeme nejaky anchor */
 }
 
 /*---------------------------------------------------------------------*/
 /*
- * kontrola();
+ * kontrola_den_mesiac_rok();
  *
- * skontroluje datum, ci je ok zadany,
+ * skontroluje d·tum, Ëi je spr·vne zadan˝,
  * vracia: on success, returns SUCCESS
  *         on error,   returns FAILURE
  */
 #define ExportKONTROLA _export_heading("Kontrola dÚa"); Export
-short int kontrola(short int den, short int mesiac, short int rok){
+short int kontrola_den_mesiac_rok(short int den, short int mesiac, short int rok){
 	if((mesiac < 1) || (mesiac > 12)){
 		ExportKONTROLA("Tak˝to mesiac nepozn·m (%d).\n", mesiac);
 		//ALERT;
@@ -3448,10 +3408,10 @@ short int kontrola(short int den, short int mesiac, short int rok){
 		return FAILURE;
 	}
 	return SUCCESS;
-}/* kontrola() */
+}/* kontrola_den_mesiac_rok() */
 
 /* popis: vr·ti ËÌslo liturgickÈho obdobia (0--6), ak sa lo == cezroËnÈ atÔ...
- *			 inak vr·ti OBD_CEZ_ROK (cezroËnÈ obdobie)
+ *        inak vr·ti OBD_CEZ_ROK (cezroËnÈ obdobie)
  */
 short int atolitobd(char *lo){
 	short int i = 0;
@@ -3461,8 +3421,11 @@ short int atolitobd(char *lo){
 		}
 		i++;
 	}while(i < POCET_OBDOBI);
-	return OBD_CEZ_ROK;
-}
+	/* 2011-05-11: ak sa nenaölo obdobie porovnanÌm s reùazcom, sk˙sim prekonvertovaù na ËÌslo */
+	i = atoi(lo);
+	return ((i < OBD_ADVENTNE_I) || (i > OBD_VELKONOCNE_II)) ? OBD_CEZ_ROK : i;
+	// return OBD_CEZ_ROK;
+}/* atolitobd() */
 
 /* popis: vrati cislo dna (0--6), ak sa den == pondelok...
  *			 inak vrati UNKNOWN_DEN
@@ -3475,8 +3438,11 @@ short int atodenvt(char *den){
 		}
 		i++;
 	}while(i < DEN_UNKNOWN);
-	return DEN_UNKNOWN;
-}
+	/* 2011-05-11: ak sa nenaöiel deÚ v t˝ûdni porovnanÌm s reùazcom, sk˙sim prekonvertovaù na ËÌslo */
+	i = atoi(den);
+	return ((i < DEN_NEDELA) || (i > DEN_SOBOTA)) ? DEN_UNKNOWN : i;
+	// return DEN_UNKNOWN;
+}/* atodenvt() */
 
 /* popis: vrati int (cislo dna 1--31), ak sa den == 1,2...
  *        alebo (ako den == STR_VSETKY_DNI) vrati VSETKY_DNI;
@@ -3490,11 +3456,11 @@ short int atoden(char *den){
 		d = atoi(den);
 		return ((d < 0) || (d > 31)) ? 0 : d;
 	}
-}
+}/* atoden() */
 
 /* popis: vrati cislo mesiaca (0--11), ak sa den == januar...
  *        alebo vrati VSETKY_MESIACE,  ak den == STR_VSETKY_MESIACE;
- *			 inak vrati UNKNOWN_MESIAC
+ *        inak vrati UNKNOWN_MESIAC
  */
 short int atomes(char *mesiac){
 	/* sprintf(pom_MESIAC, "%d", cislo_mesiaca(pom_MESIAC)); */
@@ -3514,7 +3480,74 @@ short int atomes(char *mesiac){
 		i++;
 	}while(i < UNKNOWN_MESIAC);
 	return UNKNOWN_MESIAC;
-}
+}/* atomes */
+
+/* 2006-07-12: vytvorenÈ kvÙli jazykov˝m mut·ci·m
+ * popis: vr·ti ËÌslo jazyka 
+ *        inak vrati JAZYK_UNDEF
+ */
+short int atojazyk(char *jazyk){
+	short int i = 0;
+	do{
+		if(equalsi(jazyk, skratka_jazyka[i]) || equalsi(jazyk, nazov_jazyka[i])){
+			return i;
+		}
+		i++;
+	}while(i <= POCET_JAZYKOV);
+	return JAZYK_UNDEF;
+}/* atojazyk() */
+
+/* 2010-08-04: vytvorenÈ kvÙli jazykov˝m mut·ci·m -- kalend·r, napr. rehoæn˝
+ * popis: vr·ti ËÌslo kalend·ra
+ *        inak vrati KALENDAR_NEURCENY
+ * 2010-10-11: doplnenÈ porovnanie aj s nazov_slavenia_lokal_kalendar[]
+ */
+short int atokalendar(char *kalendar){
+	short int i = 0;
+	do{
+		if(equalsi(kalendar, skratka_kalendara[i]) || equalsi(kalendar, nazov_kalendara[i]) || equalsi(kalendar, nazov_slavenia_lokal_kalendar[i])){
+			return i;
+		}
+		i++;
+	}while(i <= POCET_KALENDAROV);
+	return KALENDAR_NEURCENY;
+}/* atokalendar() */
+
+/* 2008-08-08: vytvorenÈ kvÙli rÙznym css-k·m
+ * popis: vr·ti ËÌslo css-ka
+ *        inak vrati CSS_UNDEF
+ */
+short int atocss(char *css){
+	short int i = 0;
+	do{
+		if(equalsi(css, skratka_css[i]) || equalsi(css, nazov_css[i])){
+			return i;
+		}
+		i++;
+	}while(i <= POCET_CSS);
+	return CSS_UNDEF;
+}/* atocss() */
+
+/* 2011-05-06: vytvorenÈ kvÙli n·zvom fontov
+ * popis: vr·ti ËÌslo fontu
+ *        inak vrati FONT_UNDEF
+ */
+short int atofont(char *font){
+	short int i = 0;
+	do{
+		if(equalsi(font, nazov_fontu[i])){
+			return i;
+		}
+		if((i == FONT_CSS) && equalsi(font, nazov_fontu_CSS[_global_jazyk])){
+			return i;
+		}
+		if((i == FONT_CHECKBOX) && equalsi(font, nazov_fontu_CHECKBOX[_global_jazyk])){
+			return i;
+		}
+		i++;
+	}while(i <= POCET_FONTOV);
+	return FONT_UNDEF;
+}/* atofont() */
 
 /*---------------------------------------------------------------------*/
 /* _rozbor_dna()
@@ -3555,7 +3588,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 	sc.a2 = MODL_SPOL_CAST_NEURCENA;
 	sc.a3 = MODL_SPOL_CAST_NEURCENA;
 
-	/* urcenie "obcianskych" zalezitosti dna:
+	/* urËenie "obËianskych" (civiln˝ch) z·leûitostÌ dÚa:
 	 *
 	 * den, mesiac, rok, denvr, denvt
 	 */
@@ -3566,7 +3599,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 	_global_den.denvr = poradie(datum.den, datum.mesiac, rok);
 	_global_den.denvt = den_v_tyzdni(datum.den, datum.mesiac, rok);
 
-	/* urcenie vseobecnych "liturgickych" zalezitosti dna:
+	/* urËenie vöeobecnych "liturgick˝ch" z·leûitostÌ dÚa:
 	 *
 	 * litrok,
 	 * tyzzal	= 0;
@@ -3598,7 +3631,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 	_global_den.farba = LIT_FARBA_NEURCENA; /* 2010-08-03/2006-08-19: pridanÈ */
 	_global_den.kalendar = KALENDAR_NEURCENY; /* 2010-08-03: pridanÈ */
 
-	/* urcenie ostatnych specifickych "liturgickych" zalezitosti:
+	/* urËenie ostatn˝ch öpecifick˝ch "liturgick˝ch" z·leûitostÌ:
 	 *
 	 * tyzzal, litobd, tyzden, smer, typslav, prip. meno
 	 */
@@ -4064,17 +4097,14 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 	}/* if(_global_den.denvr >= VELKONOCNA_NEDELA) */
 
 	if(_global_den.tyzzal == 0){
-		/* neurcili sme tyzden v zaltari, urobime tak teraz */
-		_rozbor_dna_LOG("/* neurcili sme tyzden v zaltari, urobime tak teraz */\n");
+		/* neurËili sme t˝ûdeÚ v ûalt·ri, urobÌme tak teraz */
+		_rozbor_dna_LOG("/* neurËili sme t˝ûdeÚ v ûalt·ri, urobÌme tak teraz */\n");
 		_rozbor_dna_LOG("/* _global_den.tyzden == %d */\n", _global_den.tyzden);
-		_global_den.tyzzal = ((_global_den.tyzden + 3) MOD 4) + 1;
-			/* povodne tu bolo: (_global_den.tyzden - 1) MOD 4; 06/03/2000A.D. */
+		_global_den.tyzzal = ((_global_den.tyzden + 3) MOD 4) + 1; // povodne tu bolo: (_global_den.tyzden - 1) MOD 4; 06/03/2000A.D.
 		_rozbor_dna_LOG("tyzzal == %d\n", _global_den.tyzzal);
 	}
 	else{
-		_rozbor_dna_LOG("/* tyzden zaltara uz bol urceny, tyzzal == %d */\n", 
-			_global_den.tyzzal);
-		/* 27/04/2000A.D. */
+		_rozbor_dna_LOG("/* t˝ûdeÚ ûalt·ra uû bol urËen˝, tyzzal == %d */\n", _global_den.tyzzal);
 	}
 
 	// _rozbor_dna_LOG("_global_den:\n"); Log(_global_den); // pridane 01/03/2000A.D.
@@ -4315,7 +4345,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok){
 	ret = _rozbor_dna(datum, rok, UNKNOWN_PORADIE_SVATEHO);
 	Log("_rozbor_dna(): 2 parametre -- returning %d\n", ret);
 	return ret;
-}
+}/* _rozbor_dna() */
 
 #define EXPORT_DNA_VIAC_DNI_TXT 4 /* 2011-02-02: pridanÈ */
 #define EXPORT_DNA_VIAC_DNI_SIMPLE 3 /* 2005-03-21: Pridany dalsi typ exportu; 2011-04-13: nerozumiem naËo; asi sa nepouûÌva... */
@@ -4844,7 +4874,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	}
 	/* 2009-08-26: pre in˝ export netreba tabuæku */
 	if(_global_opt_batch_monthly == ANO && export_monthly_druh > 2){
-		sprintf(_global_string_farba, "\n&nbsp;&nbsp;&nbsp;\n<span style=\"background-color: %s; color: %s\">(%s)</span>\n", // "\n<"HTML_SPAN_SMALL">(%s)</span>\n",
+		sprintf(_global_string_farba, "\n"HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE"\n<span style=\"background-color: %s; color: %s\">(%s)</span>\n", // "\n<"HTML_SPAN_SMALL">(%s)</span>\n",
 			(char *)html_farba_pozadie[liturgicka_farba], 
 			(char *)html_farba_popredie[liturgicka_farba], 
 			(char *)nazov_farby(liturgicka_farba));
@@ -5084,12 +5114,14 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 
 		/* 2006-08-19: pridan· liturgick· farba - pre buttons je treba v kaûdom riadku */
 		if(som_v_tabulke == ANO){
-			Export("</td>\n<td>&nbsp;");
+			Export("</td>\n<td>");
+			Export(HTML_NONBREAKING_SPACE); // empty table cell
 			Export("</td>\n<td valign=\"middle\">");
 		}
 		Export("%s", _global_string_farba);
 		if(som_v_tabulke == ANO){
-			Export("</td>\n<td valign=\"middle\">&nbsp;");
+			Export("</td>\n<td valign=\"middle\">");
+			Export(HTML_NONBREAKING_SPACE);
 		}
 
 		/* 2003-07-15 vycistene poznamky, dorobene modlitby cez den */
@@ -5146,7 +5178,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 			Export("</form>\n");
 #else
 			Export("</a>\n");
-			Export("&nbsp; | &nbsp;"); /* 2008-12-20: doplnenÈ */
+			Export(" | "); /* 2008-12-20: doplnenÈ */
 #endif
 
 			// veöpery s magnifikat
@@ -5188,7 +5220,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 				Export("</form>\n");
 #else
 				Export("</a>\n");
-				Export("&nbsp; | &nbsp;"); /* 2008-12-20: doplnenÈ */
+				Export(" | "); /* 2008-12-20: doplnenÈ */
 #endif
 
 				/* kompletÛrium */
@@ -5229,12 +5261,12 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 #endif
 			}
 			else{
-				Export("&nbsp;");
+				Export(HTML_NONBREAKING_SPACE);
 			}
 
 			if(som_v_tabulke == ANO){
 				// ak je to na zaËiatku, treba teraz vloûiù zalomenie po öpeci·lnom riadku pred buttonmi
-				Export("\n</tr>\n<tr valign=\"%s\">\n<td colspan=\"6\">&nbsp;</td>\n", VALIGN_DRUHY);
+				Export("\n</tr>\n<tr valign=\"%s\">\n<td colspan=\"6\">"HTML_NONBREAKING_SPACE"</td>\n", VALIGN_DRUHY);
 			}
 		} /* if(_global_opt[OPT_1_CASTI_MODLITBY]) */
 #endif // BUTTON_SKRATKY_DALSIE_20070913
@@ -5745,8 +5777,10 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho){
 		Log("--- _export_rozbor_dna_buttons_dni(): buttony ned·vam...\n");
 		if(typ == EXPORT_DNA_VIAC_DNI){
 			/* 2006-08-19: pridan· liturgick· farba - pre buttons je treba v kaûdom riadku */
-			if(som_v_tabulke == ANO)
-				Export("<td>&nbsp;</td>\n<td>%s</td>\n", _global_string_farba);
+			if(som_v_tabulke == ANO){
+				Export("<td>"HTML_NONBREAKING_SPACE"</td>\n"); // empty table cell
+				Export("<td>%s</td>\n", _global_string_farba);
+			}
 		}/* (typ == EXPORT_DNA_VIAC_DNI) */
 	}
 	Log("--- _export_rozbor_dna_buttons(typ == %d) -- end\n", typ); /* 2005-03-22: Pridane */
@@ -5799,10 +5833,10 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 			Export("\n<table align=\"center\">\n<tr>\n");
 		else{
 			Export("\n<p>\n");
-			Export("&nbsp;|&nbsp;\n");
+			Export(HTML_NONBREAKING_SPACE); Export(HTML_VERTICAL_BAR); Export(HTML_NONBREAKING_SPACE); Export("\n");
 		}
 
-		/* vypocitanie toho isteho dna v predoslom roku */
+		/* vypoËÌtanie toho istÈho dÚa v predoölom roku */
 		datum.den = _global_den.den;
 		datum.mesiac = _global_den.mesiac;
 		_local_rok = _global_den.rok - 1;
@@ -5811,7 +5845,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 				datum.den = 28;
 		}
 
-		/* predosly rok -- button */
+		/* predoöl˝ rok -- button */
 		if(_global_opt_batch_monthly == NIE){
 			sprintf(pom, HTML_LINK_CALL1,
 				script_name,
@@ -5841,7 +5875,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 			}
 			else{
 				Export("<a href=\"%s\">"HTML_LEFT_ARROW_HUGE" %s %s</a>\n", pom, html_button_predchadzajuci_[_global_jazyk], html_text_rok[_global_jazyk]);
-				Export("&nbsp;|&nbsp;\n");
+				Export(HTML_NONBREAKING_SPACE); Export(HTML_VERTICAL_BAR); Export(HTML_NONBREAKING_SPACE); Export("\n");
 			}
 		}
 
@@ -5887,11 +5921,11 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 			}
 			else{
 				Export("<a href=\"%s\">"HTML_LEFT_ARROW" %s %s</a>\n", pom, html_button_predchadzajuci_[_global_jazyk], html_text_mesiac[_global_jazyk]);
-				Export("&nbsp;|&nbsp;\n");
+				Export(HTML_NONBREAKING_SPACE); Export(HTML_VERTICAL_BAR); Export(HTML_NONBREAKING_SPACE); Export("\n");
 			}
 		}
 
-		/* vypocitanie predosleho dna */
+		/* vypoËÌtanie predoölÈho dÚa */
 		zmena_mesiaca = NIE;
 		_local_rok = _global_den.rok;
 		if(_global_den.den == 1){
@@ -5921,7 +5955,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 		}
 		Log("str_month == %s\n", str_month);
 
-		/* predosly den -- button */
+		/* predoöl˝ deÚ -- button */
 		if(_global_opt_batch_monthly == NIE){
 			sprintf(pom, HTML_LINK_CALL1,
 				script_name,
@@ -5953,7 +5987,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 		}
 		else{
 			Export("<a href=\"%s\">"HTML_LEFT_ARROW_SINGLE" %s %s</a>\n", pom, html_button_predchadzajuci_[_global_jazyk], html_text_den[_global_jazyk]);
-			Export("&nbsp;|&nbsp;\n");
+			Export(HTML_NONBREAKING_SPACE); Export(HTML_VERTICAL_BAR); Export(HTML_NONBREAKING_SPACE); Export("\n");
 		}
 
 		/* 2007-03-19: DorobenÈ tlaËidlo pre dneöok */
@@ -5979,7 +6013,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 		}
 #endif
 
-		/* vypocitanie nasledujuceho dna */
+		/* vypoËÌtanie nasleduj˙ceho dÚa */
 		zmena_mesiaca = NIE;
 		_local_rok = _global_den.rok;
 		if(_global_den.den == pocet_dni[_global_den.mesiac - 1]){
@@ -6009,7 +6043,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 		}
 		Log("str_month == %s\n", str_month);
 
-		/* nasledujuci den -- button */
+		/* nasleduj˙ci deÚ -- button */
 		if(_global_opt_batch_monthly == NIE){
 			sprintf(pom, HTML_LINK_CALL1,
 				script_name,
@@ -6041,7 +6075,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 		}
 		else{
 			Export("<a href=\"%s\">%s %s "HTML_RIGHT_ARROW_SINGLE"</a>\n", pom, html_button_nasledujuci_[_global_jazyk], html_text_den[_global_jazyk]);
-			Export("&nbsp;|&nbsp;\n");
+			Export(HTML_NONBREAKING_SPACE); Export(HTML_VERTICAL_BAR); Export(HTML_NONBREAKING_SPACE); Export("\n");
 		}
 
 		/* >> nasledovn˝ mesiac */
@@ -6086,11 +6120,11 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 			}
 			else{
 				Export("<a href=\"%s\">"HTML_LEFT_ARROW" %s %s</a>\n", pom, html_button_nasledujuci_[_global_jazyk], html_text_mesiac[_global_jazyk]);
-				Export("&nbsp;|&nbsp;\n");
+				Export(HTML_NONBREAKING_SPACE); Export(HTML_VERTICAL_BAR); Export(HTML_NONBREAKING_SPACE); Export("\n");
 			}
 		}
 
-		/* vypocitanie toho isteho dna v nasledujucom roku */
+		/* vypoËÌtanie toho istÈho dÚa v nasleduj˙com roku */
 		datum.den = _global_den.den;
 		datum.mesiac = _global_den.mesiac;
 		_local_rok = _global_den.rok + 1;
@@ -6098,7 +6132,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 			if(!prestupny(_local_rok))
 				datum.den = 28;
 		}
-		/* nasledujuci rok -- button */
+		/* nasleduj˙ci rok -- button */
 		if(_global_opt_batch_monthly == NIE){
 			sprintf(pom, HTML_LINK_CALL1,
 				script_name,
@@ -6128,7 +6162,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 			}
 			else{
 				Export("<a href=\"%s\">%s %s "HTML_RIGHT_ARROW_HUGE"</a>\n", pom, html_button_nasledujuci_[_global_jazyk], html_text_rok[_global_jazyk]);
-				Export("&nbsp;|&nbsp;\n");
+				Export(HTML_NONBREAKING_SPACE); Export(HTML_VERTICAL_BAR); Export(HTML_NONBREAKING_SPACE); Export("\n");
 			}
 		}
 
@@ -6141,7 +6175,7 @@ void _export_rozbor_dna_buttons_dni(short int typ){
 
 	}/* if(typ) */
 	else{
-		/* inak buttony nedavam */
+		/* inak buttony ned·vam */
 		Log("--- _export_rozbor_dna_buttons_dni(): buttony ned·vam...\n");
 	}
 	Log("--- _export_rozbor_dna_buttons_dni(typ == %d) -- end\n", typ); /* 2005-03-22: Pridane */
@@ -6176,7 +6210,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 		/* zoznam cisel dni */
 		Export("<"HTML_SPAN_SMALL">\n");
 
-		Vytvor_global_link(VSETKY_DNI, _global_den.mesiac, _global_den.rok, LINK_DEN_MESIAC);
+		Vytvor_global_link(VSETKY_DNI, _global_den.mesiac, _global_den.rok, LINK_DEN_MESIAC, NIE);
 		Export("<"HTML_SPAN_BOLD">%s:</span> ", _global_link);
 		for(i = 1; i <= pocet_dni[_global_den.mesiac - 1]; i++){
 			if(i == _global_den.den){
@@ -6187,7 +6221,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 					Export("<"HTML_SPAN_BLUE">%d</span> ", i);
 			}
 			else{
-				vytvor_global_link(i, _global_den.mesiac, _global_den.rok, LINK_DEN);
+				vytvor_global_link(i, _global_den.mesiac, _global_den.rok, LINK_DEN, NIE);
 				if(((i + _global_den.denvt - _global_den.den) MOD 7) == 0)
 					/* nedela */
 					Export("<"HTML_SPAN_BOLD">%s</span> ", _global_link);
@@ -6198,14 +6232,14 @@ void _export_rozbor_dna_kalendar(short int typ){
 		Export("<br>");
 
 		/* teraz zoznam mesiacov */
-		Vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, _global_den.rok, LINK_DEN_MESIAC);
+		Vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, _global_den.rok, LINK_DEN_MESIAC, NIE);
 		Export("<"HTML_SPAN_BOLD">%s:</span> ", _global_link);
 		for(i = 1; i <= 12; i++){
 			if(i == _global_den.mesiac){
 				Export("<"HTML_SPAN_BLUE">%s</span> ", nazov_Mesiaca(i - 1));
 			}
 			else{
-				Vytvor_global_link(VSETKY_DNI, i, _global_den.rok, LINK_DEN_MESIAC);
+				Vytvor_global_link(VSETKY_DNI, i, _global_den.rok, LINK_DEN_MESIAC, NIE);
 				Export("%s ", _global_link);
 			}
 		}
@@ -6232,20 +6266,20 @@ void _export_rozbor_dna_kalendar(short int typ){
 			i = pocet_dni[j - 1];
 		else
 			i = _global_den.den;
-		Vytvor_global_link(i, j, k, LINK_DEN_MESIAC_PREDOSLY);
+		Vytvor_global_link(i, j, k, LINK_DEN_MESIAC_PREDOSLY, NIE);
 		Export("<"HTML_SPAN_BOLD">%s</span>", _global_link);
 
-		Export("&nbsp;"); // oddelenie << a mesiaca
+		Export(HTML_NONBREAKING_SPACE); // oddelenie << a mesiaca
 
 		/* n·zov mesiaca */
-		Vytvor_global_link(VSETKY_DNI, _global_den.mesiac, _global_den.rok, LINK_DEN_MESIAC);
+		Vytvor_global_link(VSETKY_DNI, _global_den.mesiac, _global_den.rok, LINK_DEN_MESIAC, NIE);
 		Export("<"HTML_SPAN_BOLD">%s</span>", _global_link);
 
-		Export("&nbsp;"); // oddelenie mesiaca a roka
+		Export(HTML_NONBREAKING_SPACE); // oddelenie mesiaca a roka
 
 		/* rok */
 		if(_global_opt_batch_monthly == NIE){
-			Vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, _global_den.rok, LINK_DEN_MESIAC);
+			Vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, _global_den.rok, LINK_DEN_MESIAC, NIE);
 		}/* if(_global_opt_batch_monthly == NIE) */
 		else{
 			// 2009-08-12: pre batch mÛd export vytlaËÌme len rok bez linku
@@ -6253,7 +6287,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 		}/* else if(_global_opt_batch_monthly == NIE) */
 		Export("<"HTML_SPAN_BOLD">%s</span>", _global_link);
 
-		Export("&nbsp;"); // oddelenie roka a >>
+		Export(HTML_NONBREAKING_SPACE); // oddelenie roka a >>
 
 		/* >> nasledovn˝ mesiac */
 		if((_global_den.mesiac - 1) == MES_DEC){
@@ -6268,7 +6302,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 			i = pocet_dni[j - 1];
 		else
 			i = _global_den.den;
-		Vytvor_global_link(i, j, k, LINK_DEN_MESIAC_NASLEDOVNY);
+		Vytvor_global_link(i, j, k, LINK_DEN_MESIAC_NASLEDOVNY, NIE);
 		Export("<"HTML_SPAN_BOLD">%s</span>", _global_link);
 
 		Export("</th>\n</tr>\n");
@@ -6288,7 +6322,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 			j += 7;
 		if(j > 0){
 			for(k = 0; k < j; k++){
-				Export("<td>&nbsp;<!--_(%s)_--></td>", (char *)nazov_Dn(k));
+				Export("<td>"HTML_NONBREAKING_SPACE"<!--_(%s)_--></td>", (char *)nazov_Dn(k));
 			}
 		}
 
@@ -6305,7 +6339,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 					Export("<td align=\"right\" bgcolor=\"%s\"><font color=\"%s\">%d</font></td> ", (char *)html_farba_pozadie_cal, (char *)html_farba_popredie_cal, i);
 			}
 			else{
-				vytvor_global_link(i, _global_den.mesiac, _global_den.rok, LINK_DEN);
+				vytvor_global_link(i, _global_den.mesiac, _global_den.rok, LINK_DEN, NIE);
 				if(((i + _global_den.denvt - _global_den.den) MOD 7) == 0){
 					Export("</tr>\n");
 					Export("<tr><!--(ÔalöÌ riadok)-->\n");
@@ -6323,7 +6357,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 			j += 7;
 		if(j < 6){
 			for(k = j + 1; k < 7; k++){
-				Export("<td>&nbsp;<!--_(%s)_--></td>", (char *)nazov_Dn(k));
+				Export("<td>"HTML_NONBREAKING_SPACE"<!--_(%s)_--></td>", (char *)nazov_Dn(k));
 			}
 		}
 //		if(som_v_tabulke == ANO){
@@ -6530,14 +6564,6 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 			nazov_slavenia_lokal_kalendar[KALENDAR_SK_SDB]);
 		Export("</select>\n");
 
-		/*
-		Export("<br>&nbsp;&nbsp;&nbsp;&nbsp; \n");
-		Export("<"HTML_SPAN_EXPLAIN">");
-		Export("&nbsp;");
-		Export((char *)html_text_kalendar_miestny_explain[_global_jazyk]);
-		Export("</span>");
-		*/
-
 		Export("</td></tr>\n");
 
 		Export("</table>\n"); // table option kalendar
@@ -6631,7 +6657,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 			Export("<option%s>%s\n", (font == _global_font)? html_option_selected: STR_EMPTY, pom2 /* nazov_fontu[font] */);
 		}
 		Export("</select>\n");
-	}
+	}/* if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_CHOOSER) == BIT_OPT_2_FONT_CHOOSER) */
 
 	Export("</td></tr>\n");
 
@@ -6652,7 +6678,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("\">");
 /*
 	// button PÙvodnÈ hodnoty
-	Export("&nbsp;&nbsp;&nbsp;\n");
+	Export(""HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE"\n");
 	Export("<"HTML_FORM_INPUT_RESET2" value=\"");
 	Export((char *)HTML_BUTTON_DNES_DEFAULTS);
 	Export("\">");
@@ -6661,7 +6687,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 /* ------------------------------------------- */
 	Export("<tr>\n<td>\n");
-	Export("<!-- pr·zdny riadok -->\n&nbsp;\n");
+	Export("<!-- pr·zdny riadok -->\n"HTML_NONBREAKING_SPACE"\n");
 	Export("</td>");
 	Export("</tr>\n\n");
 
@@ -6684,30 +6710,29 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("</td>\n");
 	
 	Export("<td align=\"left\">\n");
-	Export("&nbsp;");
+	Export(HTML_NONBREAKING_SPACE);
 	Export((char *)html_text_modlitby_pre_den[_global_jazyk]); /* 2006-08-02 */
-	Export(" &nbsp;\n"); /* 2006-02-02: upravenÈ, pridan˝ "dnes" */
-	/* pÙvodne tu bolo: Export("&nbsp;vyööie uveden˝ rozbor dÚa pre &nbsp;&nbsp;\n"); pÙvodn˝ koment·r: 2003-07-16; kedysi tu bolo "d·tum" */
+	Export(" \n"); /* 2006-02-02: upravenÈ, pridan˝ "dnes" */
 
 	/* pole WWW_DEN */
 	Export("<select name=\"%s\">\n", STR_DEN);
 	for(day = 1; day < 32; day++){
 		Export("<option%s>%d\n", (day == dnes.tm_mday)? html_option_selected: STR_EMPTY, day);
 	}
-	Export("\n</select>&nbsp;.\n");
+	Export("\n</select>.\n");
 
 	/* pole WWW_MESIAC */
 	Export("<select name=\"%s\">\n", STR_MESIAC);
 	for(month = 1; month < 13; month++){
 		Export("<option%s>%s\n", (month == dnes.tm_mon)? html_option_selected: STR_EMPTY, nazov_mesiaca(month - 1));
 	}
-	Export("\n</select>&nbsp;\n");
+	Export("\n</select>\n");
 
 	/* pole WWW_ROK */
 	Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK, dnes.tm_year);
 	
 	/* 2006-02-02: upravenÈ, pridan˝ "dnes" */
-	Export("&nbsp; ");
+	Export(HTML_NONBREAKING_SPACE);
 	Export((char *)html_text_alebo_pre[_global_jazyk]); /* 2006-08-02 */
 	Export(" ");
 	Export("<a href=\"%s?%s=%s"HTML_AMPERSAND"%s\">\n",
@@ -6729,7 +6754,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">\n",
 		STR_QUERY_TYPE, STR_PRM_SVIATOK);
 	Export("</td><td>\n");
-	/* !!! sviatky --- */
+	// sviatky --- [ToDo]
 	Export("</td></tr></table>\n");
 	Export("</tr>\n\n"); /* 2003-07-09, podozrivo tam bolo aj </td> */
 #endif
@@ -6740,7 +6765,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	/* formular pre PRM_ANALYZA_ROKU */
 	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">", STR_QUERY_TYPE, STR_PRM_ANALYZA_ROKU);
 	Export("</td><td>\n");
-	Export("&nbsp;");
+	Export(HTML_NONBREAKING_SPACE);
 	Export((char *)html_text_prik_sviatky_atd[_global_jazyk]); /* 2006-08-02 */
 	Export("\n");
 	/* pole WWW_ANALYZA_ROKU */
@@ -6755,17 +6780,16 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
 		STR_QUERY_TYPE, STR_PRM_MESIAC_ROKA);
 	Export("</td><td>\n");
-	Export("&nbsp;");
+	Export(HTML_NONBREAKING_SPACE);
 	Export((char *)html_text_lit_kalendar[_global_jazyk]); /* 2006-08-02 */
-	Export(" &nbsp;"); /* 2003-07-16; povodne tu bolo "mesiac" */
+	Export(" \n"); /* 2003-07-16; povodne tu bolo "mesiac" */
 	/* pole WWW_MESIAC_ROKA */
 	Export("<select name=\"%s\">\n", STR_MESIAC_ROKA);
 	for(month = 1; month < 13; month++){
 		Export("<option%s>%s\n", (month == dnes.tm_mon)? html_option_selected: STR_EMPTY, nazov_mesiaca(month - 1));
 	}
-	Export("\n</select>&nbsp;\n");
+	Export("\n</select>\n");
 
-	Export("");
 	Export((char *)html_text_roku[_global_jazyk]); /* 2006-08-02 */
 	Export(" \n"); /* 2003-07-16; povodne tu bolo "v roku" */
 	/* pole WWW_ROK_ROKA */
@@ -6780,22 +6804,23 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
 		STR_QUERY_TYPE, STR_PRM_TABULKA);
 	Export("</td><td>\n");
-	Export("&nbsp;");
+	Export(HTML_NONBREAKING_SPACE);
 	Export((char *)html_text_tabulka_pohyblive_od[_global_jazyk]); /* 2006-08-02 */
-	Export("&nbsp;");
+	Export(HTML_NONBREAKING_SPACE);
 	/* pole WWW_ROK_FROM */
 	Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK_FROM, dnes.tm_year - 12);
-	Export("&nbsp;");
+	Export(HTML_NONBREAKING_SPACE);
 	Export((char *)html_text_do_roku[_global_jazyk]); /* 2006-08-02 */
-	Export("&nbsp;\n");
+	Export(HTML_NONBREAKING_SPACE);
+	Export("\n");
 	/* pole WWW_ROK_TO */
 	Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK_TO, dnes.tm_year + 12);
 	Export("</td></tr>\n<tr><td></td><td>");
 	/* pole WWW_TABULKA_LINKY */
-	Export("&nbsp;&nbsp;&nbsp;&nbsp; "); // 2011-01-26
+	Export(HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE); // 2011-01-26
 	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\">\n",
 		STR_TABULKA_LINKY, 1); /* ked bude zaskrtnuty, tak vrati hodnotu 1; 15/03/2000A.D. */
-	Export("&nbsp;");
+	Export(HTML_NONBREAKING_SPACE);
 
 	Export("<"HTML_SPAN_EXPLAIN">");
 	Export((char *)html_text_zobrazit_linky[_global_jazyk]); /* 2006-08-02 */
@@ -6830,9 +6855,9 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<option>%s\n", nazov_modlitby(MODL_DRUHE_KOMPLETORIUM));
 	Export("</select>\n");
 
-	Export("&nbsp;");
+	Export(HTML_NONBREAKING_SPACE);
 	Export((char *)html_text_den[_global_jazyk]);
-	Export("&nbsp;");
+	Export(HTML_NONBREAKING_SPACE);
 
 	/* pole WWW_DEN_V_TYZDNI */
 	Export("<select name=\"%s\">\n", STR_DEN_V_TYZDNI);
@@ -6843,7 +6868,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	Export(", \n");
 	Export((char *)html_text_liturgicky_rok[_global_jazyk]);
-	Export("&nbsp;");
+	Export(HTML_NONBREAKING_SPACE);
 
 	/* pole WWW_LIT_ROK */
 	Export("<select name=\"%s\">\n", STR_LIT_ROK);
@@ -6861,7 +6886,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	for(day = 0; day <= POCET_NEDIEL_CEZ_ROK; day++){
 		Export("<option%s>%d\n", (day == _global_den.tyzden)? html_option_selected: STR_EMPTY, day);
 	}
-	Export("\n</select>&nbsp;");
+	Export("\n</select>"HTML_NONBREAKING_SPACE);
 
 	if(_global_jazyk != JAZYK_LA){
 		Export((char *)html_text_tyzden[_global_jazyk]);
@@ -6902,9 +6927,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<option>%s\n", nazov_modlitby(MODL_DRUHE_KOMPLETORIUM)); /* invitatÛrium a kompletÛrium pridanÈ 2006-10-13 */
 	Export("</select>\n");
 
-	Export("&nbsp;");
+	Export(HTML_NONBREAKING_SPACE);
 	Export((char *)html_text_pre_cezrocne_obd[_global_jazyk]); /* 2006-08-02 */
-	// Export(",&nbsp;&nbsp;\n"); 2008-01-22
 	Export(",<br>");
 
 	/* pole WWW_DEN_V_TYZDNI */
@@ -6912,14 +6936,14 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	for(day = DEN_NEDELA; day <= DEN_SOBOTA; day++){
 		Export("<option%s>%s\n", (day == dnes.tm_wday)? html_option_selected: STR_EMPTY, nazov_dna(day));
 	}
-	Export("\n</select>&nbsp;v\n");
+	Export("\n</select> v\n");
 
 	/* pole WWW_TYZDEN */
 	Export("<select name=\"%s\">\n", STR_TYZDEN);
 	for(day = 1; day < 5; day++){
 		Export("<option%s>%d\n", (day == _global_den.tyzzal)? html_option_selected: STR_EMPTY, day);
 	}
-	Export("\n</select>&nbsp;");
+	Export("\n</select> ");
 	Export((char *)html_text_v_tyzdni_zaltara[_global_jazyk]); /* 2006-08-02 */
 
 	Export("</td></tr></table>\n");
@@ -6938,7 +6962,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("\">");
 
 	/* button PÙvodnÈ hodnoty (CLEAR!) */
-	Export("&nbsp;&nbsp;&nbsp;\n");
+	Export(HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE"\n");
 	Export("<"HTML_FORM_INPUT_RESET2" value=\"");
 	Export((char *)HTML_BUTTON_DNES_DEFAULTS);
 	Export("\">");
@@ -6960,7 +6984,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	} \
 	else if(som_v_tabulke == NIE){ \
 		if(typ == EXPORT_DNA_VIAC_DNI){ \
-			Export("\n<br>&nbsp;&nbsp;&nbsp;%s\n", html_text_alebo[_global_jazyk]); \
+			Export("\n<br>"HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE"%s\n", html_text_alebo[_global_jazyk]); \
 		} \
 		else{ \
 			if(typ != EXPORT_DNA_VIAC_DNI_TXT){ \
@@ -7008,15 +7032,11 @@ void _export_rozbor_dna(short int typ){
  *    (spomienka panny marie v sobotu)
  */
 	short int i;
-#define MAX_SMALL 30 
-	/* bolo tu MAX_PAT a MAX_DESAT, ale kopiroval som tam HTML_SPAN_, 
-	 * ktore su dlhsie, 2003-07-02;
-	 * unifikovane na MAX_SMALL, 2003-08-11 */
-	char pom1[MAX_SMALL] = STR_EMPTY;
+	char pom1[SMALL] = STR_EMPTY;
 	char ciarka = ' ';     /* 2003-08-11 bolo tu 0 */
 	char dvojbodka = ' ';  /* 2003-08-11 bolo tu 0 */
-	char pom2[MAX_SMALL] = STR_EMPTY;
-	char pom3[MAX_SMALL] = STR_EMPTY;
+	char pom2[SMALL] = STR_EMPTY;
+	char pom3[SMALL] = STR_EMPTY;
 	short int som_v_tabulke = ANO; /* 2009-08-26: Ëi sa pouûÌva tabuæka; beûne pre web ·no, pre export pre mobilnÈ zariadenia [export_monthly_druh >= 3] netreba tabuæku */
 
 	Log("-- _export_rozbor_dna(typ == %d): zaËiatok...\n", typ);
@@ -7055,9 +7075,9 @@ void _export_rozbor_dna(short int typ){
 		}else{
 			i = LINK_DEN;
 		}
-		mystrcpy(pom1, "<"HTML_SPAN_BOLD">", MAX_SMALL);
-		mystrcpy(pom2, "</span>", MAX_SMALL);
-		mystrcpy(pom3, nazov_Dn(_global_den.denvt), MAX_SMALL);
+		mystrcpy(pom1, "<"HTML_SPAN_BOLD">", SMALL);
+		mystrcpy(pom2, "</span>", SMALL);
+		mystrcpy(pom3, nazov_Dn(_global_den.denvt), SMALL);
 		if(som_v_tabulke == NIE)
 			dvojbodka = '.';
 	}/* typ == EXPORT_DNA_VIAC_DNI */
@@ -7066,11 +7086,13 @@ void _export_rozbor_dna(short int typ){
 		 * 2006-01-15: Vzhæadom k zmene default hodnoty zmenen· podmienka (pÙvodne: NIE).
 		 * 2007-06-01: ZmenenÈ - namiesto _global_opt 2 sa kontroluje nov· _global_opt 7.
 		 */
-		if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ISO_DATUM) == BIT_OPT_2_ISO_DATUM)
+		if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ISO_DATUM) == BIT_OPT_2_ISO_DATUM){
 			i = LINK_ISO_8601;
-		else
+		}
+		else{
 			i = LINK_DEN;
-		mystrcpy(pom3, nazov_Dn(_global_den.denvt), MAX_SMALL);
+		}
+		mystrcpy(pom3, nazov_Dn(_global_den.denvt), SMALL);
 	}/* typ == EXPORT_DNA_VIAC_DNI_SIMPLE */
 	else if(typ == EXPORT_DNA_VIAC_DNI_TXT){
 		i = LINK_DEN_MESIAC_NIE;
@@ -7079,7 +7101,7 @@ void _export_rozbor_dna(short int typ){
 	}/* typ == EXPORT_DNA_VIAC_DNI_TXT */
 	else{
 		i = LINK_DEN_MESIAC_NIE; /* 2008-01-22: zmenenÈ, pÙvodne tu bolo LINK_DEN_MESIAC_ROK */
-		/* najprv toto, -- if(_global_den.denvt != DEN_NEDELA) mystrcpy(pom3, nazov_dna(_global_den.denvt), MAX_SMALL);
+		/* najprv toto, -- if(_global_den.denvt != DEN_NEDELA) mystrcpy(pom3, nazov_dna(_global_den.denvt), SMALL);
 		 * potom toto: -- if((_global_den.denvt != DEN_NEDELA) 
 		 *	-- zapoznamkovane && (!equals(_global_den.meno, STR_EMPTY))
 		 *	) ciarka = ',';
@@ -7091,7 +7113,7 @@ void _export_rozbor_dna(short int typ){
 		mystrcpy(_global_link, STR_EMPTY, MAX_STR);
 	}
 	else{
-		vytvor_global_link(_global_den.den, _global_den.mesiac, _global_den.rok, i);
+		vytvor_global_link(_global_den.den, _global_den.mesiac, _global_den.rok, i, NIE);
 		/* 2006-08-19: okrem premennej _global_string t·to funkcia eöte naplnÌ aj _global_string2 a _global_string_farba */
 	}
 
@@ -7118,11 +7140,12 @@ void _export_rozbor_dna(short int typ){
 	if(dvojbodka > 0)
 		Export("%c", dvojbodka);
 	if(som_v_tabulke == ANO)
-		Export("</td>\n");
+		Export("</td>");
 	else{
 		if((typ != EXPORT_DNA_JEDEN_DEN) && (typ != EXPORT_DNA_VIAC_DNI_TXT))
-			Export("&nbsp;\n");
+			Export(HTML_NONBREAKING_SPACE);
 	}
+	Export("\n");
 
 	/* druhy stlpec: nazov dna 
 	 * 2005-03-21: Vypisujeme, iba ak typ != EXPORT_DNA_VIAC_DNI_SIMPLE
@@ -7135,13 +7158,15 @@ void _export_rozbor_dna(short int typ){
 		if(ciarka > 0)
 			Export("%c", ciarka);
 		if(som_v_tabulke == ANO){
-			Export("</td>\n");
+			Export("</td>");
 		}
 		else{
-			if((typ != EXPORT_DNA_JEDEN_DEN) && (typ != EXPORT_DNA_VIAC_DNI_TXT))
-				Export("&nbsp;\n");
+			if((typ != EXPORT_DNA_JEDEN_DEN) && (typ != EXPORT_DNA_VIAC_DNI_TXT)){
+				Export(HTML_NONBREAKING_SPACE);
+			}
 		}
 	}
+	Export("\n");
 
 	/* ÔalöÌ stÂpec: buttons (tlaËidl·), podæa typu v˝pisu */
 	if(som_v_tabulke == ANO){
@@ -7275,7 +7300,8 @@ void _export_rozbor_dna(short int typ){
 			Export("<div align=\"right\">"); /* 2006-08-19: podæa mÚa zbytoËne sa to vypisovalo aj pri obyËajnom exporte 1 dÚa */
 		}
 		else{
-			Export("&nbsp;\n");
+			Export(HTML_NONBREAKING_SPACE);
+			Export("\n");
 		}
 		/* vypisanie rimskeho cisla (citanie) */
 		Export("%s", _global_string2);
@@ -7333,7 +7359,7 @@ void _export_rozbor_dna(short int typ){
 			}
 			if(_global_linky == ANO){
 				Export("\n</td>\n<!-- pr·zdny stÂpec ako oddelenie -->\n");
-				Export("<td>&nbsp;&nbsp;&nbsp;</td>\n");
+				Export("<td>"HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE"</td>\n");
 				Export("<!--nasleduje formul·r-->\n<td align=\"left\" valign=\"top\">\n");
 				_export_main_formular(_global_den.den, _global_den.mesiac, _global_den.rok, _global_den.denvt);
 			}/* if(_global_linky == ANO) */
@@ -7893,13 +7919,13 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 	Export("</p>\n");
 
 	Export("<center>\n");
-	/* button Zobraz modlitbu (GO!) */
+	/* button "Zobraz modlitbu" */
 	Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
 	Export((char *)HTML_BUTTON_DET_SHOW);
 	Export("\">");
 
-	/* button Vycisti (CLEAR!) */
-	Export("&nbsp;&nbsp;&nbsp;\n");
+	/* button "VyËisti" */
+	Export(""HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE"\n");
 	Export("<"HTML_FORM_INPUT_RESET2" value=\"");
 	Export((char *)HTML_BUTTON_DET_DEFAULTS);
 	Export("\">");
@@ -7919,7 +7945,7 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
  * pracuje nasledovne:
  *
  * - kvoli prvym vesperam nasledujuceho dna spusti analyzuj_rok(rok + 1);
- * - spusti _rozbor_dna(datum + 1, ???) (rok alebo rok + 1, podla dna)
+ * - spusti _rozbor_dna(datum + 1, X) (kde X je rok alebo rok + 1, podla dna)
  * - ulozi vysledok do lokalnej premennej _local_den, _local_svaty...
  * - spusti analyzuj_rok(rok);
  * - spusti _rozbor_dna(datum, rok);
@@ -8250,7 +8276,7 @@ LABEL_ZMENA:
 				//???
 				_global_modl_prve_vespery = _local_modl_prve_vespery;
 				_global_modl_prve_kompletorium = _local_modl_prve_kompletorium;
-				//??? -- divna pasaz!!!
+				//??? -- divna pasaz!
 				
 				// begin: docasny vypis - 16/02/2000A.D.
 				Log("prve vespery:\n");
@@ -8392,7 +8418,7 @@ void rozbor_dna(short int den, short int mesiac, short int rok){
 	Log("-- rozbor_dna(): _export_rozbor_dna(EXPORT_DNA_JEDEN_DEN) skonËila.\n");
 
 	Log("-- rozbor_dna(int, int, int): end (%d. %d. %d)\n", den, mesiac, rok);
-}
+}/* rozbor_dna() */
 
 /*---------------------------------------------------------------------*/
 /* rozbor_mesiaca(int, int)
@@ -8466,75 +8492,9 @@ void rozbor_mesiaca(short int mesiac, short int rok, short int txt_export = 0){
 	Log("-- rozbor_mesiaca(%d/%d): koniec\n", mesiac, rok);
 }/* rozbor_mesiaca(); */
 
-/* 2006-07-12: vytvorenÈ kvÙli jazykov˝m mut·ci·m
- * popis: vr·ti ËÌslo jazyka 
- *			 inak vrati JAZYK_UNDEF
- */
-short int atojazyk(char *jazyk){
-	short int i = 0;
-	do{
-		if(equalsi(jazyk, skratka_jazyka[i]) || equalsi(jazyk, nazov_jazyka[i])){
-			return i;
-		}
-		i++;
-	}while(i <= POCET_JAZYKOV);
-	return JAZYK_UNDEF;
-}
-
-/* 2010-08-04: vytvorenÈ kvÙli jazykov˝m mut·ci·m -- kalend·r, napr. rehoæn˝
- * popis: vr·ti ËÌslo kalend·ra
- *        inak vrati KALENDAR_NEURCENY
- * 2010-10-11: doplnenÈ porovnanie aj s nazov_slavenia_lokal_kalendar[]
- */
-short int atokalendar(char *kalendar){
-	short int i = 0;
-	do{
-		if(equalsi(kalendar, skratka_kalendara[i]) || equalsi(kalendar, nazov_kalendara[i]) || equalsi(kalendar, nazov_slavenia_lokal_kalendar[i])){
-			return i;
-		}
-		i++;
-	}while(i <= POCET_KALENDAROV);
-	return KALENDAR_NEURCENY;
-}
-
-/* 2008-08-08: vytvorenÈ kvÙli rÙznym css-k·m
- * popis: vr·ti ËÌslo css-ka
- *			 inak vrati CSS_UNDEF
- */
-short int atocss(char *css){
-	short int i = 0;
-	do{
-		if(equalsi(css, skratka_css[i]) || equalsi(css, nazov_css[i])){
-			return i;
-		}
-		i++;
-	}while(i <= POCET_CSS);
-	return CSS_UNDEF;
-}
-
-/* 2011-05-06: vytvorenÈ kvÙli n·zvom fontov
- * popis: vr·ti ËÌslo fontu
- *			 inak vrati FONT_UNDEF
- */
-short int atofont(char *font){
-	short int i = 0;
-	do{
-		if(equalsi(font, nazov_fontu[i])){
-			return i;
-		}
-		if((i == FONT_CSS) && equalsi(font, nazov_fontu_CSS[_global_jazyk])){
-			return i;
-		}
-		if((i == FONT_CHECKBOX) && equalsi(font, nazov_fontu_CHECKBOX[_global_jazyk])){
-			return i;
-		}
-		i++;
-	}while(i <= POCET_FONTOV);
-	return FONT_UNDEF;
-}
-
 /* 2006-02-10: nov˝ define; pouûÌva premennÈ int i, p 
  * 2006-10-11: odpozn·mkovanÈ invitatÛrium a kompletÛrium
+ * 2011-05-11: moûno by bolo osoûnÈ prerobiù öt˝lom funkcie atodenvt(), atoden(), atomes()... [ToDo]
  */
 #define _parsuj_parameter_MODLITBA(modlitba, p) {\
 	/* rozparsovanie parametra modlitba */\
@@ -9009,7 +8969,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 			Export("<center>\n");
 			/* najprv vygenerujem zoznam liniek (mesiace) */
 			for(m = MES_JAN; m <= MES_DEC; m++){
-				Export("<a href=\"#mesiac%d\">%s</a>&nbsp;\n", m, nazov_MESIACA(m));
+				Export("<a href=\"#mesiac%d\">%s</a>"HTML_NONBREAKING_SPACE"\n", m, nazov_MESIACA(m));
 			}
 			/* teraz linku na #explain -- vysvetlivky */
 
@@ -9021,7 +8981,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 		/* teraz generujem jednotlive mesiace so vsetkymi dnami */
 		for(m = MES_JAN; m <= MES_DEC; m++){
 			/*
-				Vytvor_global_link(VSETKY_DNI, m + 1, r);
+				Vytvor_global_link(VSETKY_DNI, m + 1, r, NIE);
 				// nezobrazovalo sa korektne; pridane </a>, 2003-07-02
 				Export("\n\n<a name=\"mesiac%d\"></a>", m);
 				Export("\n<p><center><"HTML_SPAN_BOLD">%s</span> (<a href=\"#rok\">zoznam mesiacov</a>)</center>\n",
@@ -9040,7 +9000,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 			rozbor_mesiaca(m + 1, r);
 		}/* for */
 
-		VYSVETLIVKY();
+		vysvetlivky();
 
 		if((_global_linky == ANO) && ((_global_opt[OPT_4_OFFLINE_EXPORT] & BIT_OPT_4_MESIAC_RIADOK) != BIT_OPT_4_MESIAC_RIADOK)){
 			/* 2005-03-22: Upravene; podmienka zosilnena (and _global_opt[OPT_1_CASTI_MODLITBY] == NIE); 2007-06-01 upravenÈ, aby sa neriadilo opt1, ale opt6 */
@@ -9099,7 +9059,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				pocet_dni[MES_FEB] = 28;
 			/* 2009-08-12: odvetvenÈ */
 			if(_global_opt_batch_monthly == NIE){
-				vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, r, LINK_DEN_MESIAC_ROK);
+				vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, r, LINK_DEN_MESIAC_ROK, NIE);
 			}/* if(_global_opt_batch_monthly == NIE) */
 			else{
 				// 2009-08-12: pre batch mÛd export vytlaËÌme len rok bez linku
@@ -9116,7 +9076,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 
 			rozbor_mesiaca(m, r);
 
-			VYSVETLIVKY();
+			vysvetlivky();
 
 			/* 2009-08-12: podmienka upraven·; export aj pre batch mÛd mesaËn˝ */
 			if(((_global_linky == ANO) && ((_global_opt[OPT_4_OFFLINE_EXPORT] & BIT_OPT_4_MESIAC_RIADOK) != BIT_OPT_4_MESIAC_RIADOK)) || ((_global_opt_batch_monthly == ANO) && (export_monthly_druh >= 2))){
@@ -9129,7 +9089,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 					Export("\n<table align=\"center\">\n");
 				else{
 					Export("\n<p>\n");
-					Export("&nbsp;|&nbsp;\n");
+					Export(HTML_NONBREAKING_SPACE); Export(HTML_VERTICAL_BAR); Export(HTML_NONBREAKING_SPACE); Export("\n");
 				}
 
 				/* 2008-02-27: nasleduj˙ tlaËidl·; doplnen˝ "ten ist˝ mesiac pred rokom", "ten ist˝ mesiac o rok" */
@@ -9176,7 +9136,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				}			
 				else{
 					Export("<a href=\"%s\">"HTML_LEFT_ARROW" %s %d</a>\n", pom, nazov_Mesiaca(pm - 1), pr);
-					Export("&nbsp;|&nbsp;\n");
+					Export(HTML_NONBREAKING_SPACE); Export(HTML_VERTICAL_BAR); Export(HTML_NONBREAKING_SPACE); Export("\n");
 				}
 
 				/* nasledujuci mesiac -- button */
@@ -9218,7 +9178,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				}
 				else{
 					Export("<a href=\"%s\">%s %d "HTML_RIGHT_ARROW"</a>\n", pom, nazov_Mesiaca(pm - 1), pr);
-					Export("&nbsp;|&nbsp;\n");
+					Export(HTML_NONBREAKING_SPACE); Export(HTML_VERTICAL_BAR); Export(HTML_NONBREAKING_SPACE); Export("\n");
 				}
 
 				if(som_v_tabulke == ANO){
@@ -9254,10 +9214,10 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 						Export("</form></td>\n");
 					}
 					else{
-						Export("&nbsp;|&nbsp;\n");
+						Export(HTML_NONBREAKING_SPACE); Export(HTML_VERTICAL_BAR); Export(HTML_NONBREAKING_SPACE); Export("\n");
 						//
 						Export("<a href=\"%s\">"HTML_LEFT_ARROW" %s %d</a>\n", pom, nazov_Mesiaca(pm - 1), pr);
-						Export("&nbsp;|&nbsp;\n");
+						Export(HTML_NONBREAKING_SPACE); Export(HTML_VERTICAL_BAR); Export(HTML_NONBREAKING_SPACE); Export("\n");
 					}
 				}
 
@@ -9285,7 +9245,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 					}
 					else{
 						Export("<a href=\"%s\">%s %d "HTML_RIGHT_ARROW"</a>\n", pom, nazov_Mesiaca(pm - 1), pr);
-						Export("&nbsp;|&nbsp;\n");
+						Export(HTML_NONBREAKING_SPACE); Export(HTML_VERTICAL_BAR); Export(HTML_NONBREAKING_SPACE); Export("\n");
 					}
 				}
 
@@ -9300,7 +9260,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 			}/* _global_linky == ANO */
 		}/* d == VSETKY_DNI */
 		else{/* d != VSETKY_DNI */
-			if(!kontrola(d, m, r)){
+			if(!kontrola_den_mesiac_rok(d, m, r)){
 				Log("/* teraz vypisujem heading 1, datum %d. %s %d */\n",
 					d, nazov_mesiaca(m - 1), r);
 				/* 2007-03-20: spÙsob v˝pisu d·tumu podæa jazyka */
@@ -9900,13 +9860,14 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 /*---------------------------------------------------------------------*/
 /* _main_sviatok() */
 void _main_sviatok(char *sviatok){
+	// [ToDo]
 	if(equals(sviatok, STR_EMPTY)){
 		hlavicka((char *)html_title[_global_jazyk]);
 		Export("NevhodnÈ ˙daje: ch˝ba ˙daj o sviatku");
 		ALERT;
 		return;
 	}
-	// unfinished !!!
+	// unfinished
 	Export("Chces %s? Este nejde...\n", sviatok);
 }/* _main_sviatok() */
 
@@ -9969,7 +9930,7 @@ void _main_analyza_roku(char *rok){
 	Export((char *)html_text_zakladne_info[_global_jazyk]); /* 2006-08-02 */
 	Export(":</span>\n");
 	Export("<br>\n");
-	vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, year, LINK_DEN_MESIAC_ROK);
+	vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, year, LINK_DEN_MESIAC_ROK, NIE);
 
 	/* 13/04/2000A.D.: pridane rozhodovanie podla _global_linky */
 	if(_global_linky == ANO)
@@ -10000,7 +9961,7 @@ void _main_analyza_roku(char *rok){
 	}
 
 	datum = prva_adventna_nedela(year - 1);
-	vytvor_global_link(datum.den, datum.mesiac, year - 1, LINK_DEN_MESIAC);
+	vytvor_global_link(datum.den, datum.mesiac, year - 1, LINK_DEN_MESIAC, NIE);
 	/* vytvor_global_link nastavi _global_link */
 	if(_global_jazyk == JAZYK_HU){
 		/* 2011-05-09: inÈ poradie vypisovan˝ch reùazcov */
@@ -10022,52 +9983,46 @@ void _main_analyza_roku(char *rok){
 
 	Export("\n<table>\n");
 	for(i = 0; i < POCET_ALIASOV; i++){
-		vytvor_global_link(_global_r._den[i].den, _global_r._den[i].mesiac, _global_r._den[i].rok,
-			LINK_DEN_MESIAC);
+		vytvor_global_link(_global_r._den[i].den, _global_r._den[i].mesiac, _global_r._den[i].rok, LINK_DEN_MESIAC, NIE);
 		/* 2008-09-09: spoloËn· Ëasù v˝pisu presunut· vyööie */
 		if(i == VELKONOCNA_NEDELA)
 			mystrcpy(_global_r._den[i].meno, text_VELKONOCNA_NEDELA[_global_jazyk], MENO_SVIATKU);
-		Export("<tr valign=baseline><td>%s</td><td>%s</td><td>(%s, %d. ",
+		Export("<tr valign=baseline><td>%s</td><td>%s</td><td>(%s, ", 
 			_global_r._den[i].meno,
 			_global_link,
-			nazov_dna(_global_r._den[i].denvt),
-			_global_r._den[i].denvr);
-		Export((char *)html_text_den_v_roku[_global_jazyk]); /* 2008-09-09 */
+			nazov_dna(_global_r._den[i].denvt));
+		/* 2011-05-11: kvÙli inÈmu poradia vypisovan˝ch reùazcov (HU) presunutÈ "%d" do konötanty */
+		Export((char *)html_text_den_v_roku[_global_jazyk], _global_r._den[i].denvr);
 		Export(")");
 		if(i == PRVA_ADVENTNA_NEDELA){
 			Export(", ");
 			Export((char *)html_text_zacina[_global_jazyk]); /* 2008-09-09 */
-			Export(" <a href=\"%s%s\">",
-				pom,
-				FILE_LITURGICKY_ROK);
+			Export(" <a href=\"%s%s\">", pom, FILE_LITURGICKY_ROK);
 			Export((char *)html_text_liturgicky_rok[_global_jazyk]); /* 2008-09-09 */
-			Export("</a> <"HTML_SPAN_BOLD">%c</span>.",
-				_global_r._den[i].litrok);
+			Export("</a> <"HTML_SPAN_BOLD">%c</span>.", _global_r._den[i].litrok);
 		}
 		Export("\n</td></tr>\n");
 	}
 	Export("</table>\n");
 
-	ExportROK((char *)html_text_Po_Velkej_noci_atd[_global_jazyk], /* 2008-08-15 */
-		_global_r.tyzden_ocr_po_vn + 1,
-		nazov_dna(DEN_NEDELA));
+	ExportROK((char *)html_text_Po_Velkej_noci_atd[_global_jazyk], _global_r.tyzden_ocr_po_vn + 1, nazov_dna(DEN_NEDELA));
 
-	vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, year, LINK_DEN_MESIAC_ROK);
+	vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, year, LINK_DEN_MESIAC_ROK, NIE);
 	/* zmenene <font color> na <span>, 2003-07-02 */
 	ExportROK((char *)html_text_Prikazane_sviatky_v_roku[_global_jazyk], _global_link);
 	Export("<br>\n");
 	Export("\n<table>\n");
 
 	/* 1. januara */
-	vytvor_global_link(1, 1, year, LINK_DEN_MESIAC);
+	vytvor_global_link(1, 1, year, LINK_DEN_MESIAC, NIE);
 	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n", _global_link, text_JAN_01[_global_jazyk]);
 
 	/* 6. januara */
-	vytvor_global_link(6, 1, year, LINK_DEN_MESIAC);
+	vytvor_global_link(6, 1, year, LINK_DEN_MESIAC, NIE);
 	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n", _global_link, text_JAN_06[_global_jazyk]);
 
 	/* nanebovstupenie pana, pridane 2003-07-01 */
-	vytvor_global_link(_global_r._NANEBOVSTUPENIE_PANA.den, _global_r._NANEBOVSTUPENIE_PANA.mesiac, year, LINK_DEN_MESIAC);
+	vytvor_global_link(_global_r._NANEBOVSTUPENIE_PANA.den, _global_r._NANEBOVSTUPENIE_PANA.mesiac, year, LINK_DEN_MESIAC, NIE);
 	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n", _global_link, text_NANEBOVSTUPENIE_PANA[_global_jazyk]);
 
 	/* najsv. kristovho tela a krvi, pridane 2003-07-01 */
@@ -10075,39 +10030,39 @@ void _main_analyza_roku(char *rok){
 	 * ide vlastne o datum (cislo v roku) pre ZOSLANIE_DUCHA_SV + 11, ako je definovany TELAKRVI,
 	 * vyuzijeme parameter datum na zistenie dna a mesiaca */
 	datum = por_den_mesiac(TELAKRVI, year);
-	vytvor_global_link(datum.den, datum.mesiac, year, LINK_DEN_MESIAC);
+	vytvor_global_link(datum.den, datum.mesiac, year, LINK_DEN_MESIAC, NIE);
 	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n", _global_link, text_NAJSV_KRISTOVHO_TELA_A_KRVI[_global_jazyk]);
 
 	/* 29. juna */
-	vytvor_global_link(29, 6, year, LINK_DEN_MESIAC);
+	vytvor_global_link(29, 6, year, LINK_DEN_MESIAC, NIE);
 	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n", _global_link, text_JUN_29[_global_jazyk]);
 
 	/* 15. augusta */
-	vytvor_global_link(15, 8, year, LINK_DEN_MESIAC);
+	vytvor_global_link(15, 8, year, LINK_DEN_MESIAC, NIE);
 	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n", _global_link, text_AUG_15[_global_jazyk]);
 
 	/* 1. novembra */
-	vytvor_global_link(1, 11, year, LINK_DEN_MESIAC);
+	vytvor_global_link(1, 11, year, LINK_DEN_MESIAC, NIE);
 	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n", _global_link, text_NOV_01[_global_jazyk]);
 
 	/* 8. decembra */
-	vytvor_global_link(8, 12, year, LINK_DEN_MESIAC);
+	vytvor_global_link(8, 12, year, LINK_DEN_MESIAC, NIE);
 	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n", _global_link, text_DEC_08[_global_jazyk]);
 
 	/* 25. decembra */
-	vytvor_global_link(25, 12, year, LINK_DEN_MESIAC);
+	vytvor_global_link(25, 12, year, LINK_DEN_MESIAC, NIE);
 	Export("<tr valign=baseline>\n<td>%s</td><td>%s</td></tr>\n", _global_link, text_NARODENIE_PANA[_global_jazyk]);
 
 	Export("</table>\n");
 
 	/* teraz nasleduju jednotlive mesiace roku s linkami na ne */
-	vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, year, LINK_DEN_MESIAC_ROK);
+	vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, year, LINK_DEN_MESIAC_ROK, NIE);
 	/* zmenene <font color> na <span>, 2003-07-02 */
 	ExportROK((char *)html_text_Jednotlive_mesiace_roku[_global_jazyk], _global_link);
 #ifdef RICH_JEDNOTLIVE_MESIACE
 	Export("<ul>\n");
 	for(i = MES_JAN; i <= MES_DEC; i++){
-		Vytvor_global_link(VSETKY_DNI, i + 1, year, LINK_DEN_MESIAC_ROK);
+		Vytvor_global_link(VSETKY_DNI, i + 1, year, LINK_DEN_MESIAC_ROK, NIE);
 		Export("\n<li>%s</li>", _global_link);
 	}
 	Export("</ul>\n");
@@ -10115,7 +10070,7 @@ void _main_analyza_roku(char *rok){
 	Export("<br>\n<p><center>\n");
 	/* teraz zoznam mesiacov -- podla casti pre analyzu dna */
 	for(i = 1; i <= 12; i++){
-		Vytvor_global_link(VSETKY_DNI, i, year, LINK_DEN_MESIAC);
+		Vytvor_global_link(VSETKY_DNI, i, year, LINK_DEN_MESIAC, NIE);
 		Export("%s ", _global_link);
 	}
 	Export("\n</center>\n");
@@ -10211,12 +10166,12 @@ void _main_tabulka(char *rok_from, char *rok_to, char *tab_linky){
 	Export((char *)html_text_pohyblive2[_global_jazyk]);
 	Export((char *)html_text_pohyblive3[_global_jazyk]);
 	Export((char *)html_text_pohyblive4[_global_jazyk]);
-	Export((char *)html_text_pohyblive5[_global_jazyk]); /* fajl VYSVETLIVKY_TABULKA(); */
+	Export((char *)html_text_pohyblive5[_global_jazyk]); /* s˙bor vysvetlivky_tabulka(); */
 	Export((char *)html_text_pohyblive6[_global_jazyk]);
 	Export((char *)html_text_pohyblive7[_global_jazyk]);
 	Export((char *)html_text_pohyblive8[_global_jazyk]);
 	Export((char *)html_text_pohyblive9[_global_jazyk]);
-	Export((char *)html_text_pohyblive10[_global_jazyk]); /* fajl VYSVETLIVKY_TABULKA(); */
+	Export((char *)html_text_pohyblive10[_global_jazyk]); /* s˙bor vysvetlivky_tabulka(); */
 	Export((char *)html_text_pohyblive11[_global_jazyk]);
 	Export((char *)html_text_pohyblive12[_global_jazyk]);
 
@@ -10231,13 +10186,16 @@ void _main_tabulka(char *rok_from, char *rok_to, char *tab_linky){
 		Export("<td>\n");
 		if(linky == ANO){
 			/* aj linka musi obsahovat 'prestupnost', podla toho ma farbu */
-			if(_global_r.prestupny == YES)
-				vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, year, LINK_DEN_MESIAC_ROK_PRESTUP);
-			else
-				vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, year, LINK_DEN_MESIAC_ROK);
+			if(_global_r.prestupny == YES){
+				vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, year, LINK_DEN_MESIAC_ROK_PRESTUP, NIE);
+			}
+			else{
+				vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, year, LINK_DEN_MESIAC_ROK, NIE);
+			}
 		}
-		else
+		else{
 			sprintf(_global_link, "%d", year);
+		}
 		/* kedze <font color=#ff0000> neprebil nastavenia css-ka, 
 		 * 1. pridal som globalnu definiciu .red { color: #ff0000; } kt. sa da menit;
 		 * 2. pri prestupnom roku sa voli iny parameter ().
@@ -10275,12 +10233,18 @@ void _main_tabulka(char *rok_from, char *rok_to, char *tab_linky){
 				Export("<td align=center>%d</td>", _global_r.tyzden_ocr_pred_po);
 			}
 			Export("<td>");
-			if(_global_r._den[i].den < 10)
-				Export("&nbsp;");
-			if(linky == ANO)
-				vytvor_global_link(_global_r._den[i].den, _global_r._den[i].mesiac, _global_r._den[i].rok, LINK_DEN_MESIAC);
-			else
-				sprintf(_global_link, "%d. %s", _global_r._den[i].den, nazov_mesiaca(_global_r._den[i].mesiac - 1));
+			/*
+			 * 2011-05-11: pÙvodn˝ export medzery pre jednocifernÈ ËÌsla dnÌ presunut˝ do _vytvor_string_z_datumu()
+			if((_global_r._den[i].den < 10) && (_global_jazyk == JAZYK_SK))
+				Export(HTML_NONBREAKING_SPACE);
+			*/
+			if(linky == ANO){
+				vytvor_global_link(_global_r._den[i].den, _global_r._den[i].mesiac, _global_r._den[i].rok, LINK_DEN_MESIAC, ANO);
+			}
+			else{
+				strcpy(_global_link, _vytvor_string_z_datumu(_global_r._den[i].den, _global_r._den[i].mesiac, _global_r._den[i].rok, CASE_case, LINK_DEN_MESIAC, ANO));
+				// sprintf(_global_link, "%d. %s", _global_r._den[i].den, nazov_mesiaca(_global_r._den[i].mesiac - 1));
+			}
 			Export("%s</td>\n", _global_link);
 		}/* for -- pre aliasy */
 
@@ -10288,7 +10252,8 @@ void _main_tabulka(char *rok_from, char *rok_to, char *tab_linky){
 	}/* for */
 	Export("</table></center>\n");
 
-	VYSVETLIVKY_TABULKA();
+	vysvetlivky_tabulka();
+
 	Log("-- _main_tabulka(): koniec\n");
 }/* _main_tabulka() */
 
@@ -10299,7 +10264,7 @@ void dumpFile(char *fname, FILE *expt){
 		while((c = fgetc(input_file)) != EOF)
 			fputc(c, expt);
 	}
-}
+}/* dumpFile() */
 
 /*---------------------------------------------------------------------*/
 /* _main_batch_mode(); 2003-07-04

@@ -173,10 +173,10 @@ short int ExpL2HTML(char *fmt)
 			case 'ê': YYcharHTML(144, 144, 69, "&Eacute;", "\\\'E ", 144); /*E dlzen*/ break;
 			case 'ß': YYcharHTML(145, 167, 122, "û", "\\vz ", 122); /*z makcen*/ break;
 			case '¶': YYcharHTML(146, 166, 90, "é", "\\vZ ", 90); /*Z makcen*/ break;
-			case 'ì': YYcharHTML(147, 147, 111, "&ocirc;", "\\^o ", 147); /*o vokan !!!*/ break;
+			case 'ì': YYcharHTML(147, 147, 111, "&ocirc;", "\\^o ", 147); /*o vokan */ break;
 			case 'î': YYcharHTML(148, 148, 111, "&ouml;", "\\\"o", 148); /*o bodky*/ break;
 			case '‡': YYcharHTML(149, 224, 79, "&Oacute;", "\\\'O", 79); /*O dlzen*/ break;
-			case 'Ö': YYcharHTML(150, 133, 117, "˘", "\\ou ", 117); /*u kruzok !!!*/ break;
+			case 'Ö': YYcharHTML(150, 133, 117, "˘", "\\ou ", 117); /*u kruzok */ break;
 			case 'È': YYcharHTML(151, 233, 85, "&Uacute;", "\\\'U ", 85); /*U dlzen*/ break;
 			case 'Ï': YYcharHTML(152, 236, 121, "&yacute;", "\\\'y", 121); /*y dlzen*/ break;
 			case 'ô': YYcharHTML(153, 153, 79, "&Ouml;", "\\\"O", 153); /*O bodky*/ break;
@@ -192,13 +192,13 @@ short int ExpL2HTML(char *fmt)
 			case '£': YYcharHTML(163, 163, 117, "&uacute;", "\\\'u ", 163); /*u dlzen*/ break;
 			case 'Â': YYcharHTML(164, 229, 110, "Ú", "\\vn ", 110); /*n makcen*/ break;
 			case '’': YYcharHTML(165, 213, 78, "“", "\\vN ", 78); /*N makcen*/ break;
-			case 'ﬁ': YYcharHTML(166, 222, 85, "Ÿ", "\\oU ", 85); /*U kruzok !!!*/ break;
-			case '‚': YYcharHTML(167, 226, 79, "&Ocirc;", STR_EMPTY, 79); /*O vokan !!!*/ break;
+			case 'ﬁ': YYcharHTML(166, 222, 85, "Ÿ", "\\oU ", 85); /*U kruzok */ break;
+			case '‚': YYcharHTML(167, 226, 79, "&Ocirc;", STR_EMPTY, 79); /*O vokan */ break;
 			case 'Á': YYcharHTML(168, 231, 115, "ö", "\\vs ", 115); /*s makcen*/ break;
 			case '˝': YYcharHTML(169, 253, 114, "¯", "\\vr ", 114); /*r makcen*/ break;
 			case 'Í': YYcharHTML(170, 234, 114, "‡", "\\\'r ", 114); /*r dlzen*/ break;
 			case 'Ë': YYcharHTML(171, 232, 82, "¿", "\\\'R ", 82); /*R dlzen*/ break;
-			case 'ı': YYcharHTML(173, 245, 0, "ß", STR_EMPTY, 0); /*paragraf !!!*/ break;
+			case 'ı': YYcharHTML(173, 245, 0, "ß", STR_EMPTY, 0); /*paragraf */ break;
 			default: YYdefault();
 		}
 	}

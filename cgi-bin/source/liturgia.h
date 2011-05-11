@@ -61,6 +61,7 @@
 /*   2010-10-11a.D. | pridanÈ nazov_slavenia_lokal_kalendar[]  */
 /*   2011-01-25a.D. | premenovanÈ niektorÈ HTML s˙bory         */
 /*   2011-04-13a.D. | reùazcovÈ funkcie equals() presunutÈ     */
+/*   2011-05-11a.D. | vytvorenÈ: _vytvor_string_z_datumu()     */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -1237,11 +1238,13 @@ char *caps_BIG(const char *input);
 char *remove_diacritics(const char *input);
 char *convert_nonbreaking_spaces(const char *input);
 
-/* podla toho, ako sa funkcia vola, urcim case */
-#define vytvor_global_link(den, mesiac, rok, typ)	_vytvor_global_link(den, mesiac, rok, CASE_case, typ)
-#define Vytvor_global_link(den, mesiac, rok, typ)	_vytvor_global_link(den, mesiac, rok, CASE_Case, typ)
-#define VYTVOR_global_link(den, mesiac, rok, typ)	_vytvor_global_link(den, mesiac, rok, CASE_CASE, typ)
-void _vytvor_global_link(short int den, short int mesiac, short int rok, short int _case, short int typ);
+char *_vytvor_string_z_datumu(short int den, short int mesiac, short int rok, short int _case, short int typ, short int align);
+/* podæa toho, ako sa funkcia vol·, urËÌm case (pouûitie veæk˝ch/mal˝ch pÌsmen) */
+#define vytvor_global_link(den, mesiac, rok, typ, align)	_vytvor_global_link(den, mesiac, rok, CASE_case, typ, align)
+#define Vytvor_global_link(den, mesiac, rok, typ, align)	_vytvor_global_link(den, mesiac, rok, CASE_Case, typ, align)
+#define VYTVOR_global_link(den, mesiac, rok, typ, align)	_vytvor_global_link(den, mesiac, rok, CASE_CASE, typ, align)
+/* 2011-05-11: doplnen˝ nov˝ parameter align -- Ëi zarovnaù jednocifernÈ d·tumy (ËÌslovka dÚa) medzerou zæava */
+void _vytvor_global_link(short int den, short int mesiac, short int rok, short int _case, short int typ, short int align);
 
 void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int prvy_ampersand);
 

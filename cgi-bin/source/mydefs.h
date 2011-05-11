@@ -63,7 +63,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2011-05-06"
+#define BUILD_DATE "2011-05-11"
 
 #define BYTES 250
 #define SMALL 80
@@ -642,6 +642,7 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #define HTML_LINK_NORMAL "a"
 
 #define HTML_NONBREAKING_SPACE "&nbsp;"
+#define HTML_VERTICAL_BAR "|"
 
 #define HTML_SPAN_NORMAL    "span class=\"normal\""
 #define HTML_SPAN_BOLD      "span class=\"bold\""

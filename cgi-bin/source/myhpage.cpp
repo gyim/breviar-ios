@@ -468,7 +468,7 @@ void patka(void){
 #endif
 		Export(". ");
 
-		/* nezabudni zmenit #define BUILD_DATE v mydefs.h!!! (2003-07-15) */
+		/* nezabudni zmenit #define BUILD_DATE v mydefs.h (2003-07-15) */
 		Export((char *)build_template[_global_jazyk], BUILD_DATE);
 
 		/* zapoznamkovane, 2003-06-30 */
@@ -597,7 +597,7 @@ void patka(FILE * expt){
 #endif
 		fprintf(expt, ". ");
 
-		/* nezabudni zmenit #define BUILD_DATE v mydefs.h!!! (2003-07-15) */
+		/* nezabudni zmenit #define BUILD_DATE v mydefs.h (2003-07-15) */
 		fprintf(expt, (char *)build_template[_global_jazyk], BUILD_DATE);
 
 		/* zapoznamkovane, 2003-06-30 */

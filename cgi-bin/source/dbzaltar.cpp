@@ -3927,8 +3927,8 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 
 			if(den == DEN_NEDELA){ /* nede¾a: 1.-3. adventná nede¾a */
 				/* prve vespery */
-				/* 2007-12-04: bola tu dlho táto poznámka: "!!! sem treba zadratovat, ze 16. decembra, 1. vespery,
-				 *                                              uz maju mnohe veci z OBD_ADVENTNE_II"
+				/* 2007-12-04: bola tu dlho táto poznámka: 
+				 *             "sem treba zadratovat, ze 16. decembra, 1. vespery, uz maju mnohe veci z OBD_ADVENTNE_II"
 				 * to je však zabezpeèené tım, e pre všepery 16. decembra (ak je to sobota, ako napr. v roku 2006)
 				 * sa jednak vezme všednı deò (sobota), jednak nasledujúci deò, teda 17. decembra, a prvé vešpery 
 				 * sú u z adventného obdobia II., väèšina vecí z 3. adventnej nedele je pod¾a OBD_ADVENTNE_II, 
@@ -7775,7 +7775,7 @@ short int modlitba;
  *                 // o liturgii hodin a kalendari
  *	    meno[MAX_MENO]; // nazov prip. sviatku
  *
- * az na konci nastavi .den a .mesiac, ostatne sa nastavia inde !!!
+ * az na konci nastavi .den a .mesiac, ostatne sa nastavia inde
  *
  * 09/02/2000A.D.: tato funkcia default dostava vstup poradie_svaty == 0 (resp. UNKNOWN_PORADIE_SVATEHO);
  * to sa rovna 'staremu pouzitiu'; v pripade, ze poradie_svaty != 0 (resp. UNKNOWN_PORADIE_SVATEHO),
@@ -8152,7 +8152,7 @@ short int _spol_cast_je_panna(_struct_sc sc){
 		_spolocna_cast_antifony;\
 	}\
 	else\
-		Log("_spolocna_cast_antifony(%s) - NEBERÚ SA!!!\n", nazov_modlitby(modl));\
+		Log("_spolocna_cast_antifony(%s) - NEBERÚ SA!\n", nazov_modlitby(modl));\
 	if(((su_kcit_kresp_prosby_vlastne) || (brat_1citanie == ANO)) && (modl != MODL_POSV_CITANIE)){\
 		_vlastna_cast_kcitanie;\
 	}\
@@ -9625,9 +9625,9 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty
 	 *
 	 * 22/02/2000A.D.: ked nastavi vo formulari (detaily) zalmy zo `sviatku'
 	 * a spolocnu cast `nebrat', predsa sa nevyvolaju zalmy zo sviatku,
-	 * lebo sa nespusti _set_spolocna_cast(); !!! -- mozno by bolo dobre
-	 * oddelit nastavenie pre spolocnu cast a potom inde dat samotne zalmy...
-	 * !!!
+	 * lebo sa nespusti _set_spolocna_cast(); 
+	 * [ToDo] -- mozno by bolo dobre oddelit nastavenie pre spolocnu cast a potom inde dat samotne zalmy...
+	 * 
 	 * 2009-09-18: doplnenı nepovinnı tretí parameter, ktorım sa dajú vynúti antifóny zo spoloènej èasti, aj ak je to len spomienka alebo ¾ubovo¾ná spomienka
 	 */
 	Log("set_spolocna_cast({%s, %s, %s}) -- begin\n",
