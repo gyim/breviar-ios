@@ -552,6 +552,7 @@ void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int 
 char *_vytvor_string_z_datumu(short int den, short int mesiac, short int rok, short int _case, short int typ, short int align){
 	/* 2007-03-20: spÙsob v˝pisu d·tumu podæa jazyka 
 	 * 2011-05-11: vytiahnut˝ z _vytvor_global_pom_str() ako samostatn· funkcia
+	 * 2011-05-12: Ëasom by sa moûno mohli pouûiù konötanty FORMAT_DATUMU_DEN_MESIAC_ROK a Ôalöie
 	 */
 	char pom[MAX_STR] = STR_EMPTY;
 	char vypln[SMALL] = STR_EMPTY;

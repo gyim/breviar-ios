@@ -100,6 +100,13 @@
 #define JAZYK_CZ_OP 5
 #define JAZYK_HU    6
 
+/* 2011-05-12: form·ty vypisovania d·tumu, kvÙli maÔarËine, angliËtine... */
+#define FORMAT_DATUMU_DEN_MESIAC_ROK 0
+#define FORMAT_DATUMU_MESIAC_DEN_ROK 1
+#define FORMAT_DATUMU_ROK_MESIAC_DEN 2
+
+extern const short int format_datumu[POCET_JAZYKOV + 1];
+
 /* 2008-08-15: PridanÈ POCET_CSS, aby mohol byù "dolnÌk" (CSS_UNDEF) hodnota 0 */
 #define POCET_CSS	9
 /* 2006-08-08: PridanÈ kvÙli rÙznym css-k·m 

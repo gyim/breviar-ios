@@ -6645,16 +6645,17 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<select name=\"%s\" title=\"%s\">\n", STR_FONT_NAME, html_text_font_name_explain[_global_jazyk]);
 		// FONT_UNDEF neexportujeme
 		for(font = FONT_UNDEF + 1; font <= POCET_FONTOV; font++){
-			mystrcpy(pom2, nazov_fontu[font], MAX_STR);
+			// 2011-05-12: pom2 bolo nastavené funkciou prilep_request_options() a používa sa v ïalšom; použi môžeme pom3
+			mystrcpy(pom3, nazov_fontu[font], MAX_STR);
 			if((_global_jazyk != JAZYK_SK) && ((font == FONT_CSS) || (font == FONT_CHECKBOX))){
 				if(font == FONT_CSS){
-					mystrcpy(pom2, nazov_fontu_CSS[_global_jazyk], MAX_STR);
+					mystrcpy(pom3, nazov_fontu_CSS[_global_jazyk], MAX_STR);
 				}
 				else if(font == FONT_CHECKBOX){
-					mystrcpy(pom2, nazov_fontu_CHECKBOX[_global_jazyk], MAX_STR);
+					mystrcpy(pom3, nazov_fontu_CHECKBOX[_global_jazyk], MAX_STR);
 				}
 			}
-			Export("<option%s>%s\n", (font == _global_font)? html_option_selected: STR_EMPTY, pom2 /* nazov_fontu[font] */);
+			Export("<option%s>%s\n", (font == _global_font)? html_option_selected: STR_EMPTY, pom3 /* nazov_fontu[font] */);
 		}
 		Export("</select>\n");
 	}/* if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_CHOOSER) == BIT_OPT_2_FONT_CHOOSER) */
@@ -6710,34 +6711,76 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("</td>\n");
 	
 	Export("<td align=\"left\">\n");
-	Export(HTML_NONBREAKING_SPACE);
-	Export((char *)html_text_modlitby_pre_den[_global_jazyk]); /* 2006-08-02 */
-	Export(" \n"); /* 2006-02-02: upravené, pridaný "dnes" */
-
-	/* pole WWW_DEN */
-	Export("<select name=\"%s\">\n", STR_DEN);
-	for(day = 1; day < 32; day++){
-		Export("<option%s>%d\n", (day == dnes.tm_mday)? html_option_selected: STR_EMPTY, day);
-	}
-	Export("\n</select>.\n");
-
-	/* pole WWW_MESIAC */
-	Export("<select name=\"%s\">\n", STR_MESIAC);
-	for(month = 1; month < 13; month++){
-		Export("<option%s>%s\n", (month == dnes.tm_mon)? html_option_selected: STR_EMPTY, nazov_mesiaca(month - 1));
-	}
-	Export("\n</select>\n");
-
-	/* pole WWW_ROK */
-	Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK, dnes.tm_year);
 	
+	if(strlen(html_text_modlitby_pre_den[_global_jazyk]) > 0){
+		// Export(HTML_NONBREAKING_SPACE); // netreba, je to v tabu¾ke
+		Export((char *)html_text_modlitby_pre_den[_global_jazyk]); /* 2006-08-02 */
+		Export(" \n"); /* 2006-02-02: upravené, pridaný "dnes" */
+	}
+
+	if(format_datumu[_global_jazyk] == FORMAT_DATUMU_ROK_MESIAC_DEN){
+		/* pole WWW_ROK */
+		Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK, dnes.tm_year);
+
+		/* pole WWW_MESIAC */
+		Export("<select name=\"%s\">\n", STR_MESIAC);
+		for(month = 1; month < 13; month++){
+			Export("<option%s>%s\n", (month == dnes.tm_mon)? html_option_selected: STR_EMPTY, nazov_mesiaca(month - 1));
+		}
+		Export("\n</select>\n");
+
+		/* pole WWW_DEN */
+		Export("<select name=\"%s\">\n", STR_DEN);
+		for(day = 1; day < 32; day++){
+			Export("<option%s>%d\n", (day == dnes.tm_mday)? html_option_selected: STR_EMPTY, day);
+		}
+		Export("\n</select>.\n");
+
+	}/* FORMAT_DATUMU_ROK_MESIAC_DEN */
+	else if(format_datumu[_global_jazyk] == FORMAT_DATUMU_MESIAC_DEN_ROK){
+		/* pole WWW_MESIAC */
+		Export("<select name=\"%s\">\n", STR_MESIAC);
+		for(month = 1; month < 13; month++){
+			Export("<option%s>%s\n", (month == dnes.tm_mon)? html_option_selected: STR_EMPTY, nazov_mesiaca(month - 1));
+		}
+		Export("\n</select>\n");
+
+		/* pole WWW_DEN */
+		Export("<select name=\"%s\">\n", STR_DEN);
+		for(day = 1; day < 32; day++){
+			Export("<option%s>%d\n", (day == dnes.tm_mday)? html_option_selected: STR_EMPTY, day);
+		}
+		Export("\n</select>.\n");
+
+		/* pole WWW_ROK */
+		Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK, dnes.tm_year);
+	}/* FORMAT_DATUMU_MESIAC_DEN_ROK */
+	else{ // if(format_datumu[_global_jazyk] == FORMAT_DATUMU_DEN_MESIAC_ROK){
+		/* pole WWW_DEN */
+		Export("<select name=\"%s\">\n", STR_DEN);
+		for(day = 1; day < 32; day++){
+			Export("<option%s>%d\n", (day == dnes.tm_mday)? html_option_selected: STR_EMPTY, day);
+		}
+		Export("\n</select>.\n");
+
+		/* pole WWW_MESIAC */
+		Export("<select name=\"%s\">\n", STR_MESIAC);
+		for(month = 1; month < 13; month++){
+			Export("<option%s>%s\n", (month == dnes.tm_mon)? html_option_selected: STR_EMPTY, nazov_mesiaca(month - 1));
+		}
+		Export("\n</select>\n");
+
+		/* pole WWW_ROK */
+		Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK, dnes.tm_year);
+	}/* FORMAT_DATUMU_DEN_MESIAC_ROK */
+
 	/* 2006-02-02: upravené, pridaný "dnes" */
 	Export(HTML_NONBREAKING_SPACE);
 	Export((char *)html_text_alebo_pre[_global_jazyk]); /* 2006-08-02 */
 	Export(" ");
 	Export("<a href=\"%s?%s=%s"HTML_AMPERSAND"%s\">\n",
 		script_name,
-		STR_QUERY_TYPE, STR_PRM_DNES, pom2); /* 2006-08-01: pridaný jazyk */
+		STR_QUERY_TYPE, STR_PRM_DNES, pom2); /* 2006-08-01: pridaný jazyk; 2011-05-12: bolo nastavené funkciou prilep_request_options() */
 	Export((char *)html_text_dnesok[_global_jazyk]); /* 2006-08-02 */
 	Export("</a></td>\n");
 
@@ -6765,7 +6808,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	/* formular pre PRM_ANALYZA_ROKU */
 	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">", STR_QUERY_TYPE, STR_PRM_ANALYZA_ROKU);
 	Export("</td><td>\n");
-	Export(HTML_NONBREAKING_SPACE);
+	// Export(HTML_NONBREAKING_SPACE); // netreba, je to v tabu¾ke
 	Export((char *)html_text_prik_sviatky_atd[_global_jazyk]); /* 2006-08-02 */
 	Export("\n");
 	/* pole WWW_ANALYZA_ROKU */
@@ -6780,7 +6823,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
 		STR_QUERY_TYPE, STR_PRM_MESIAC_ROKA);
 	Export("</td><td>\n");
-	Export(HTML_NONBREAKING_SPACE);
+	// Export(HTML_NONBREAKING_SPACE); // netreba, je to v tabu¾ke
 	Export((char *)html_text_lit_kalendar[_global_jazyk]); /* 2006-08-02 */
 	Export(" \n"); /* 2003-07-16; povodne tu bolo "mesiac" */
 	/* pole WWW_MESIAC_ROKA */
@@ -6804,7 +6847,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
 		STR_QUERY_TYPE, STR_PRM_TABULKA);
 	Export("</td><td>\n");
-	Export(HTML_NONBREAKING_SPACE);
+	// Export(HTML_NONBREAKING_SPACE); // netreba, je to v tabu¾ke
 	Export((char *)html_text_tabulka_pohyblive_od[_global_jazyk]); /* 2006-08-02 */
 	Export(HTML_NONBREAKING_SPACE);
 	/* pole WWW_ROK_FROM */
@@ -9261,23 +9304,26 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 		}/* d == VSETKY_DNI */
 		else{/* d != VSETKY_DNI */
 			if(!kontrola_den_mesiac_rok(d, m, r)){
-				Log("/* teraz vypisujem heading 1, datum %d. %s %d */\n",
-					d, nazov_mesiaca(m - 1), r);
-				/* 2007-03-20: spôsob výpisu dátumu pod¾a jazyka */
-				if(_global_jazyk == JAZYK_LA){
-					sprintf(pom, "%d. %s %d", d, nazov_Mesiaca_gen(m - 1), r);
-				}
-				else if(_global_jazyk == JAZYK_EN){
-					sprintf(pom, "%s %d, %d", nazov_Mesiaca(m - 1), d, r);
-				}
-				/* 2010-05-21: doplnené pre maïarèinu: 1999. augusztus 1. -- http://en.wikipedia.org/wiki/Date_and_time_notation_by_country#Hungary [2010-05-24] */
-				else if(_global_jazyk == JAZYK_HU){
-					sprintf(pom, "%d. %s %d.", r, nazov_mesiaca(m - 1), d);
-				}
+				Log("/* teraz vypisujem heading 1, datum %d. %s %d */\n", d, nazov_mesiaca(m - 1), r);
+				/* 2007-03-20: spôsob výpisu dátumu pod¾a jazyka 
+				 * 2011-05-12: doplnené nové konštanty
+				 */
+				if(format_datumu[_global_jazyk] == FORMAT_DATUMU_ROK_MESIAC_DEN){
+					/* 2011-05-12: pôvodne bolo: 2010-05-21: doplnené pre maïarèinu: 1999. augusztus 1. -- http://en.wikipedia.org/wiki/Date_and_time_notation_by_country#Hungary [2010-05-24] */
+					if(_global_jazyk == JAZYK_HU){
+						sprintf(pom, "%d. %s %d.", r, nazov_mesiaca(m - 1), d);
+					}
+				}/* FORMAT_DATUMU_ROK_MESIAC_DEN */
+				else if(format_datumu[_global_jazyk] == FORMAT_DATUMU_MESIAC_DEN_ROK){
+					if(_global_jazyk == JAZYK_EN){
+						sprintf(pom, "%s %d, %d", nazov_Mesiaca(m - 1), d, r);
+					}
+				}/* FORMAT_DATUMU_MESIAC_DEN_ROK */
 				else{
-					/* doterajšie správanie pre slovenèinu a èeštinu */
-					sprintf(pom, "%d. %s %d", d, nazov_mesiaca(m - 1), r);
-				}
+					// format_datumu[_global_jazyk] == FORMAT_DATUMU_DEN_MESIAC_ROK
+					// latinèina používa genitív
+					sprintf(pom, "%d. %s %d", d, (_global_jazyk == JAZYK_LA)? nazov_Mesiaca_gen(m - 1): nazov_mesiaca(m - 1), r);
+				}/* FORMAT_DATUMU_DEN_MESIAC_ROK */
 				_export_heading_center(pom);
 				/* 2003-06-30: podla toho, ci je alebo nie je urcena modlitba */
 				if(p == MODL_NEURCENA){
@@ -9469,23 +9515,25 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 	// _rozparsuj_parametre_OPT();
 
 	/* vypis */
-	Log("/* teraz vypisujem heading 1, datum %d. %s %d */\n",
-		dnes.tm_mday, nazov_mesiaca(dnes.tm_mon - 1), dnes.tm_year);
-	/* 2007-03-20: spôsob výpisu dátumu pod¾a jazyka */
+	Log("/* teraz vypisujem heading 1, datum %d. %s %d */\n", dnes.tm_mday, nazov_mesiaca(dnes.tm_mon - 1), dnes.tm_year);
+	/* 2007-03-20: spôsob výpisu dátumu pod¾a jazyka 
+	 * 2011-05-12: použitá funkcia _vytvor_string_z_datumu()
+	 */
+	strcpy(pom, _vytvor_string_z_datumu(dnes.tm_mday, dnes.tm_mon, dnes.tm_year, ((_global_jazyk == JAZYK_LA) || (_global_jazyk == JAZYK_EN))? CASE_Case : CASE_case, LINK_DEN_MESIAC_ROK, NIE));
+/*
 	if(_global_jazyk == JAZYK_LA){
 		sprintf(pom, "%d. %s %d", dnes.tm_mday, nazov_Mesiaca_gen(dnes.tm_mon - 1), dnes.tm_year);
 	}
 	else if(_global_jazyk == JAZYK_EN){
 		sprintf(pom, "%s %d, %d", nazov_Mesiaca(dnes.tm_mon - 1), dnes.tm_mday, dnes.tm_year);
 	}
-	/* 2010-05-21: doplnené pre maïarèinu: 1999. augusztus 1. -- http://en.wikipedia.org/wiki/Date_and_time_notation_by_country#Hungary [2010-05-24] */
 	else if(_global_jazyk == JAZYK_HU){
 		sprintf(pom, "%d. %s %d.", dnes.tm_year, nazov_mesiaca(dnes.tm_mon - 1), dnes.tm_mday);
 	}
 	else{
-		/* doterajšie správanie pre slovenèinu a èeštinu */
 		sprintf(pom, "%d. %s %d", dnes.tm_mday, nazov_mesiaca(dnes.tm_mon - 1), dnes.tm_year);
 	}
+*/
 	_export_heading_center(pom);
 
 	/* 2006-02-10: výpis juliánskeho dátumu, len ak nie je urèená modlitba 
