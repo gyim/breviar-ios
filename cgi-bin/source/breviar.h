@@ -160,6 +160,7 @@ extern short int _global_kalendar;
 extern short int _global_css; /* 2008-08-08: Pridané kvôli rôznym css */
 
 extern short int _global_font; /* 2011-05-06: Pridané kvôli rôznym fontom */
+extern short int _global_font_size; /* 2011-05-13: Pridané kvôli rôznym ve¾kostiam fontov */
 
 /* 2006-10-17: Pridané kvôli kompletóriu: niekedy obsahuje až dva žalmy */
 extern short int _global_pocet_zalmov_kompletorium;
@@ -172,7 +173,9 @@ extern short int _global_hlavicka_Export;
 // extern char name_batch_html_file[MAX_STR];
 
 /* 2011-05-05: kvôli možnosti serif/sans serif override (z css sme odstránili font-family) */
-extern char _global_font_family[MAX_STR];
+extern char _global_css_font_family[SMALL];
+/* 2011-05-13: kvôli možnosti vo¾by ve¾kosti písma */
+extern char _global_css_font_size[SMALL];
 
 /* 2009-08-12, pridané */
 extern char _global_export_navig_hore[SMALL];

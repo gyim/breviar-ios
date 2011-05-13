@@ -22,6 +22,7 @@
 /*   2008-12-22a.D. | upravenÈ exportovanie p‰tky (Ëas)        */
 /*   2009-08-05a.D. | upravenÈ exportovanie hlaviËky           */
 /*   2010-02-15a.D. | upravenÈ hlaviËky aj p‰tky (navig·cia)   */
+/*   2011-05-13a.D. | doplnen· aj veækosù fontu                */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -84,8 +85,7 @@ void hlavicka(char *title, short int level, short int spec){
 		nazov_css_suboru = nazov_css[CSS_breviar_sk];
 	else
 		nazov_css_suboru = nazov_css[_global_css];
-Log("_global_opt[OPT_2_HTML_EXPORT] == %d\n", _global_opt[OPT_2_HTML_EXPORT]);
-Log("_global_font == %d\n", _global_font);
+
 	/*
 	 * 2011-05-05: nastavenie font-family
 	 *             zatiaæ len pevnÈ reùazce; Ëasom moûno bude premenn· pre n·zov fontu
@@ -93,17 +93,29 @@ Log("_global_font == %d\n", _global_font);
 	 */
 	if((_global_font == FONT_UNDEF) || (_global_font == FONT_CHECKBOX)){
 		if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_FAMILY) == BIT_OPT_2_FONT_FAMILY){
-			mystrcpy(_global_font_family, DEFAULT_FONT_FAMILY_SANS_SERIF, MAX_STR);
+			mystrcpy(_global_css_font_family, DEFAULT_FONT_FAMILY_SANS_SERIF, MAX_STR);
 		}
 		else{
-			mystrcpy(_global_font_family, DEFAULT_FONT_FAMILY_SERIF, MAX_STR);
+			mystrcpy(_global_css_font_family, DEFAULT_FONT_FAMILY_SERIF, MAX_STR);
 		}
 	}/* (_global_font == FONT_UNDEF)  || (_global_font == FONT_CHECKBOX) */
 	else if(_global_font == FONT_CSS){
-		mystrcpy(_global_font_family, DEFAULT_FONT_FAMILY_INHERIT, MAX_STR);
+		mystrcpy(_global_css_font_family, DEFAULT_FONT_FAMILY_INHERIT, MAX_STR);
 	}/* (_global_font == FONT_CSS) */
 	else{
-		mystrcpy(_global_font_family, nazov_fontu[_global_font], MAX_STR);
+		mystrcpy(_global_css_font_family, nazov_fontu[_global_font], MAX_STR);
+	}/* else */
+	/*
+	 * 2011-05-13: doplnenÈ: nastavenie font-size
+	 */
+	if(_global_font_size == FONT_SIZE_UNDEF){
+		mystrcpy(_global_css_font_size, STR_EMPTY, MAX_STR);
+	}/* (_global_font_size == FONT_SIZE_UNDEF) */
+	else if(_global_font_size == FONT_SIZE_CSS){
+		mystrcpy(_global_css_font_size, DEFAULT_FONT_SIZE_INHERIT, MAX_STR);
+	}/* (_global_font_size == FONT_SIZE_CSS) */
+	else{
+		mystrcpy(_global_css_font_size, nazov_font_size_css[_global_font_size], MAX_STR);
 	}/* else */
 
 	if(bol_content_type_text_html == NIE){
@@ -150,8 +162,18 @@ Log("_global_font == %d\n", _global_font);
 	 * 2011-05-06: font sa neprid·va vûdy
 	 */
 	Export("<body");
-	if(_global_font != FONT_CSS){
-		Export(" style=\"font-family: %s\"", _global_font_family);
+	if((_global_font != FONT_CSS) || (_global_font_size != FONT_SIZE_CSS)){
+		Export(" style=\"");
+		if(_global_font != FONT_CSS){
+			Export("font-family: %s", _global_css_font_family);
+		}
+		if(_global_font_size != FONT_SIZE_CSS){
+			if(_global_font != FONT_CSS){
+				Export("; ");
+			}
+			Export("font-size: %s", _global_css_font_size);
+		}
+		Export("\"");
 	}
 	/* 2010-02-15: kvÙli öpeci·lnemu "zoznam.htm" */
 	if(spec == 1){
@@ -232,13 +254,34 @@ void hlavicka(char *title, FILE * expt, short int level, short int spec){
 	/*
 	 * 2011-05-05: nastavenie font-family
 	 *             zatiaæ len pevnÈ reùazce; Ëasom moûno bude premenn· pre n·zov fontu
+	 * 2011-05-06: doplnenÈ: najprv sa testuje nastavenie _global_font; n·sledne sa prÌpadne nastavia defaulty
 	 */
-	if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_FAMILY) == BIT_OPT_2_FONT_FAMILY){
-		mystrcpy(_global_font_family, DEFAULT_FONT_FAMILY_SANS_SERIF, MAX_STR);
-	}
+	if((_global_font == FONT_UNDEF) || (_global_font == FONT_CHECKBOX)){
+		if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_FAMILY) == BIT_OPT_2_FONT_FAMILY){
+			mystrcpy(_global_css_font_family, DEFAULT_FONT_FAMILY_SANS_SERIF, MAX_STR);
+		}
+		else{
+			mystrcpy(_global_css_font_family, DEFAULT_FONT_FAMILY_SERIF, MAX_STR);
+		}
+	}/* (_global_font == FONT_UNDEF)  || (_global_font == FONT_CHECKBOX) */
+	else if(_global_font == FONT_CSS){
+		mystrcpy(_global_css_font_family, DEFAULT_FONT_FAMILY_INHERIT, MAX_STR);
+	}/* (_global_font == FONT_CSS) */
 	else{
-		mystrcpy(_global_font_family, DEFAULT_FONT_FAMILY_SERIF, MAX_STR);
-	}
+		mystrcpy(_global_css_font_family, nazov_fontu[_global_font], MAX_STR);
+	}/* else */
+	/*
+	 * 2011-05-13: doplnenÈ: nastavenie font-size
+	 */
+	if(_global_font_size == FONT_SIZE_UNDEF){
+		mystrcpy(_global_css_font_size, STR_EMPTY, MAX_STR);
+	}/* (_global_font_size == FONT_SIZE_UNDEF) */
+	else if(_global_font_size == FONT_SIZE_CSS){
+		mystrcpy(_global_css_font_size, DEFAULT_FONT_SIZE_INHERIT, MAX_STR);
+	}/* (_global_font_size == FONT_SIZE_CSS) */
+	else{
+		mystrcpy(_global_css_font_size, nazov_font_size_css[_global_font_size], MAX_STR);
+	}/* else */
 
 	if(bol_content_type_text_html == NIE){
 #if defined(OS_linux)
@@ -281,8 +324,23 @@ void hlavicka(char *title, FILE * expt, short int level, short int spec){
 	fprintf(expt, "<title>%s</title>\n", title);
 	fprintf(expt, "</head>\n\n");
 
-	/* 2011-05-05: pridanie font-family */
-	fprintf(expt, "<body style=\"font-family: %s\"", _global_font_family);
+	/* 2011-05-05: pridanie font-family 
+	 * 2011-05-06: font sa neprid·va vûdy
+	 */
+	fprintf(expt, "<body");
+	if((_global_font != FONT_CSS) || (_global_font_size != FONT_SIZE_CSS)){
+		fprintf(expt, " style=\"");
+		if(_global_font != FONT_CSS){
+			fprintf(expt, "font-family: %s", _global_css_font_family);
+		}
+		if(_global_font_size != FONT_SIZE_CSS){
+			if(_global_font != FONT_CSS){
+				fprintf(expt, "; ");
+			}
+			fprintf(expt, "font-size: %s", _global_css_font_size);
+		}
+		fprintf(expt, "\"");
+	}
 	/* 2010-02-15: kvÙli öpeci·lnemu "zoznam.htm" */
 	if(spec == 1){
 		fprintf(expt, " onLoad=\"fn_aktualne(0,0,0)\"");

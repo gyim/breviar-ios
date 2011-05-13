@@ -838,6 +838,21 @@ const char *nazov_fontu_CHECKBOX[POCET_JAZYKOV + 1] =
 {"pod¾a vıberu", "podle vıbìru", "according to checkbox above", "checkbox", "", "podle vıbìru", "checkbox"};
 const char *nazov_fontu_CSS[POCET_FONTOV + 1] =
 {"pod¾a CSS", "podle CSS", "according to CSS", "CSS", "CSS", "podle CSS", "CSS"};
+/* 2011-05-13: pridané kvôli monosti vo¾by ve¾kosti písma */
+const char *nazov_font_size_jazyk[POCET_FONT_SIZE + 1][POCET_JAZYKOV + 1] = {
+{"", "", "", "", "", "", ""},
+{"pod¾a CSS", "podle CSS", "according to CSS", "CSS", "", "podle CSS", "hu_CSS"},
+{"malilinké", "malinkaté", "xx-small", "xx-small", "", "malinkaté", "hu_xx-small"},
+{"ve¾mi malé", "velmi malé", "extra small", "extra small", "", "velmi malé", "hu_extra small"},
+{"malé", "malé", "small", "small", "", "malé", "hu_small"},
+{"stredné", "støední", "medium", "medium", "", "støední", "hu_medium"},
+{"ve¾ké", "veliké", "large", "large", "", "veliké", "hu_large"},
+{"ve¾mi ve¾ké", "velmi veliké", "extra large", "extra large", "", "velmi veliké", "hu_extra large"},
+{"obrovské", "obrovské", "xx-large", "xx-large", "", "obrovské", "hu_xx-large"}
+};
+#define nazov_font_size(a) nazov_font_size_jazyk[a][_global_jazyk]
+const char *nazov_font_size_css[POCET_FONT_SIZE + 1] = 
+{"", "inherit", "xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large"};
 
 /* strings of buttons - abbreviations of prayer names */
 /* 2006-10-11: definovanie reazcov aj pre invitatórium a kompletórium */
@@ -1653,12 +1668,12 @@ const char *html_text_option2_font_family_explain[POCET_JAZYKOV + 1] =
 
 /* 2011-05-06: doplnené */
 const char *html_text_font_name[POCET_JAZYKOV + 1] = 
-{"alebo poui písmo ", 
- "nebo pouij písmo ", 
- "or use font ", 
- "vel font ",
+{"alebo poui písmo", 
+ "nebo pouij písmo", 
+ "or use font", 
+ "vel font",
  "",
- "nebo pouij písmo ", 
+ "nebo pouij písmo", 
  "betûtípus választása"
 };
 const char *html_text_font_name_explain[POCET_JAZYKOV + 1] = 
@@ -1669,6 +1684,26 @@ const char *html_text_font_name_explain[POCET_JAZYKOV + 1] =
  "", 
  "", 
  "Ha nem választunk betûtípust, akkor a böngészõ ablakban látható az alapértelmezett (talpas vagy talpatlan az elõzõ kiválasztás szerint)."
+};
+
+/* 2011-05-13: doplnené */
+const char *html_text_font_size[POCET_JAZYKOV + 1] = 
+{"ve¾kos písma", 
+ "velikost písma", 
+ "font size", 
+ "font size",
+ "",
+ "velikost písma", 
+ "hu_"
+};
+const char *html_text_font_size_explain[POCET_JAZYKOV + 1] = 
+{"Ve¾kos písma", 
+ "", 
+ "", 
+ "",
+ "", 
+ "", 
+ "hu_"
 };
 
 /* 2010-10-11: HTML option selected */

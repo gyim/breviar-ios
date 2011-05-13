@@ -138,6 +138,19 @@ extern const short int format_datumu[POCET_JAZYKOV + 1];
 #define FONT_SERIF		8
 #define FONT_SANS_SERIF	9
 
+#define	POCET_FONT_SIZE	8
+
+/* 2011-05-13: jednotlivÈ fonty na v˝ber v drop-down liste */
+#define FONT_SIZE_UNDEF		0
+#define FONT_SIZE_CSS		1 // inherit
+#define FONT_SIZE_XX_SMALL	2
+#define FONT_SIZE_X_SMALL 	3
+#define FONT_SIZE_SMALL   	4
+#define FONT_SIZE_MEDIUM  	5
+#define FONT_SIZE_LARGE   	6
+#define FONT_SIZE_X_LARGE 	7
+#define FONT_SIZE_XX_LARGE	8
+
 /* nasledovne 2 definovane 2003-08-13; zmenene 2004-04-28 (12->16) */
 #define MAX_STR_AF_FILE   16
 #define MAX_STR_AF_ANCHOR 23
@@ -1180,13 +1193,14 @@ extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
 #define BIT_OPT_1_SKRY_POPIS              128
 #define BIT_OPT_1_ZALMY_ZO_SVIATKU        256
 
-#define POCET_OPT_2_HTML_EXPORT             4 /* jednotlivÈ komponenty option 2 -- bity pre force option 2 */
+#define POCET_OPT_2_HTML_EXPORT             5 /* jednotlivÈ komponenty option 2 -- bity pre force option 2 */
 extern short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];
 /* 2011-04-12: ˙prava v˝znamu (a interpret·cie) option 2 (rozliËnÈ prepÌnaËe pre [online aj offline] export, napr. tlaËidl·, zobrazenie d·tumov a podobne) */
 #define BIT_OPT_2_ISO_DATUM                 1
 #define BIT_OPT_2_BUTTON_PRVE_VESPERY       2
 #define BIT_OPT_2_FONT_FAMILY               4 // 0 = Serif, 1 = Sans Serif
-#define BIT_OPT_2_FONT_CHOOSER              8 // 1 = zobraziù drop-down list s moûnosùou voæby font (family) name
+#define BIT_OPT_2_FONT_NAME_CHOOSER         8 // 1 = zobraziù drop-down list s moûnosùou voæby font (family) name
+#define BIT_OPT_2_FONT_SIZE_CHOOSER        16 // 1 = zobraziù drop-down list s moûnosùou voæby veækosti fontu
 
 #define POCET_OPT_4_OFFLINE_EXPORT          1 /* jednotlivÈ komponenty option 4 -- bity pre force option 4 */
 extern short int _global_opt_offline_export[POCET_OPT_4_OFFLINE_EXPORT];
@@ -1214,6 +1228,7 @@ extern short int _global_kalendar;
 extern short int _global_css; /* 2008-08-08: PridanÈ kvÙli rÙznym css */
 
 extern short int _global_font; /* 2011-05-06: PridanÈ kvÙli rÙznym fontom */
+extern short int _global_font_size; /* 2011-05-13: PridanÈ kvÙli rÙznym veækostiam fontov */
 
 /* 2006-10-17: PridanÈ kvÙli kompletÛriu: niekedy obsahuje aû dva ûalmy */
 extern short int _global_pocet_zalmov_kompletorium;
@@ -1231,6 +1246,9 @@ extern const char *nazov_css[POCET_CSS + 1];
 extern const char *nazov_fontu[POCET_FONTOV + 1];
 extern const char *nazov_fontu_CHECKBOX[POCET_JAZYKOV + 1];
 extern const char *nazov_fontu_CSS[POCET_FONTOV + 1];
+
+extern const char *nazov_font_size_jazyk[POCET_FONT_SIZE + 1][POCET_JAZYKOV + 1];
+extern const char *nazov_font_size_css[POCET_FONT_SIZE + 1];
 
 /* ------------------------------------------------------------------- */
 

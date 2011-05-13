@@ -63,7 +63,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2011-05-12"
+#define BUILD_DATE "2011-05-13"
 
 #define BYTES 250
 #define SMALL 80
@@ -291,7 +291,7 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #ifdef LONG_PARAM_NAMES
 	#define STR_NAZOV_SVIATOK "SVIATOK"
 #else
-	#define STR_NAZOV_SVIATOK "s"
+	#define STR_NAZOV_SVIATOK "sv"
 #endif
 
 /* nasleduju parametre z formularov pre dotaz PRM_ANALYZA_ROKU */
@@ -572,11 +572,19 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #endif
 
 // font family chooser (drop-down list)
-#define MODL_OPTF2_FONT_CHOOSER 84
+#define MODL_OPTF2_FONT_NAME_CHOOSER 84
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF2_FONT_CHOOSER "MODL_OPTF2_FONT_CHOOSER"
+	#define STR_MODL_OPTF2_FONT_NAME_CHOOSER "MODL_OPTF2_FONT_NAME_CHOOSER"
 #else
-	#define STR_MODL_OPTF2_FONT_CHOOSER "of2fc"
+	#define STR_MODL_OPTF2_FONT_NAME_CHOOSER "of2fc"
+#endif
+
+// font size
+#define MODL_OPTF2_FONT_SIZE 85
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF2_FONT_SIZE "MODL_OPTF2_FONT_SIZE"
+#else
+	#define STR_MODL_OPTF2_FONT_SIZE "of2fs"
 #endif
 
 /* 2008-08-08: Pridané kvôli rôznym css */
@@ -609,6 +617,14 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_FONT_NAME "FONT_NAME"
 #else
 	#define STR_FONT_NAME "f"
+#endif
+
+/* 2011-05-13: pridané */
+#define FONT_SIZE 44
+#ifdef LONG_PARAM_NAMES
+	#define STR_FONT_SIZE "FONT_SIZE"
+#else
+	#define STR_FONT_SIZE "s"
 #endif
 
 
