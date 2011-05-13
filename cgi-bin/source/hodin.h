@@ -1027,8 +1027,8 @@ const char *html_text_dnes_je_atd[POCET_JAZYKOV + 1] =
 const char *html_text_alebo[POCET_JAZYKOV + 1] = {"alebo:", "nebo:", "or:", "", "", "nebo:", ""};
 
 const char *html_text_zakladne_info[POCET_JAZYKOV + 1] = {"Základné informácie", "Základní informace", "Basic info", "__info__", "", "Základní informace", "Alapvetõ információk"};
-const char *html_text_je[POCET_JAZYKOV + 1] = {"je", "je", "is", "est", "", "je", "van"};
-const char *html_text_nie_je[POCET_JAZYKOV + 1] = {"nie je", "není", "is not", "non est", "", "není", "nem"};
+const char *html_text_je[POCET_JAZYKOV + 1] = {"je", "je", "is", "est", "", "je", /* HU: van, ale nie pre prestupný */ ""};
+const char *html_text_nie_je[POCET_JAZYKOV + 1] = {"nie je", "není", "is not", "non est", "", "není", /* HU: nincs, ale nie pre prestupný */ "nem"};
 const char *html_text_prestupny[POCET_JAZYKOV + 1] = {"prestupný", "pøestupný", "...", "...", "", "pøestupný", "szökõév"};
 const char *html_text_datumy_pohyblivych_slaveni[POCET_JAZYKOV + 1] = {"Dátumy pohyblivých slávení", "Dáta promìnlivých slávení", "Dates for movable celebrations", "", "", "Data promìnlivých slavení", "A mozgó (változó) ünnepek dátumai"};
 
@@ -1417,7 +1417,7 @@ const char *html_text_option1_chvalospevy_explain[POCET_JAZYKOV + 1] =
  "",
  "", 
  "Liturgie hodin evangelijní chvalozpìvy v plném znìní obvykle neuvádí.", 
- "Az imaórák liturgiája ezeket az evangéliumi kantikumok alaphelyzetben nem mutatja."
+ "Az imaórák liturgiája ezeket az evangéliumi kantikumokat alaphelyzetben nem mutatja."
 };
 
 const char *html_text_option1_slava_otcu[POCET_JAZYKOV + 1] = 
