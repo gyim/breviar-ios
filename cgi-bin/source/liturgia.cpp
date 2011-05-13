@@ -527,10 +527,10 @@ void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int 
 	if(_global_font_size != FONT_SIZE_CSS){
 		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_FONT_SIZE, nazov_font_size_css[_global_font_size]);
 		strcat(pom2, pom3);
-		Log("\tPrilepil som aj font: `%s'\n", pom3);
+		Log("\tPrilepil som aj font size: `%s'\n", pom3);
 	}
 	else{
-		Log("\tNetreba prilepiù font (_global_font_size == %d, n·zov == %s)\n", _global_font_size, nazov_font_size_css[_global_font_size]);
+		Log("\tNetreba prilepiù font size (_global_font_size == %d, n·zov == %s)\n", _global_font_size, nazov_font_size_css[_global_font_size]);
 	}
 
 	/* 2011-01-26: pridanÈ odovzdanie parametrov pre options1 atÔ. */

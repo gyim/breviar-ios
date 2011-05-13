@@ -1114,7 +1114,7 @@ short int setForm(void){
 				case 1: strcat(local_str, STR_MODL_OPTF2_PRVE_VESPERY); break;
 				case 2: strcat(local_str, STR_MODL_OPTF2_FONT_FAMILY); break;
 				case 3: strcat(local_str, STR_MODL_OPTF2_FONT_NAME_CHOOSER); break;
-				case 4: strcat(local_str, STR_MODL_OPTF2_FONT_SIZE); break;
+				// case 4: strcat(local_str, STR_MODL_OPTF2_FONT_SIZE); break;
 			}// switch(i)
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF_HTML_EXPORT[i]);
@@ -8668,7 +8668,7 @@ void log_pom_MODL_OPTF(void){
  */
 void _rozparsuj_parametre_OPT(void){
 	/* rozparsovanie option parametrov */
-	short int i, opt2fn;
+	short int i, opt2fn /* font name chooser */, opt2fs /* font size chooser */;
 	short int aspon_jedna_nenulova;
 	Log("_rozparsuj_parametre_OPT() -- zaËiatok...\n");
 
@@ -8936,6 +8936,24 @@ void _rozparsuj_parametre_OPT(void){
 				Log("prid·vam do _global_optf[%d] bit pre BIT_OPT_2_FONT_NAME_CHOOSER\n...", i);
 				_global_optf[i] += BIT_OPT_2_FONT_NAME_CHOOSER;
 				_global_opt[i] += BIT_OPT_2_FONT_NAME_CHOOSER;
+			}
+			else{
+				Log("nie je potrebnÈ upravovaù ani _global_opt ani _global_optf[%d].\n", i);
+			}
+			Log("po potenci·lnej ˙prave: _global_opt aj _global_optf[%d] == `%d'...\n", i, _global_optf[i]);
+
+			// öpeci·lne: pre 5. bit (BIT_OPT_2_FONT_SIZE_CHOOSER)
+			Log("öpeci·lna ˙prava: zohæadnenie defaultu z config s˙boru pre 5. bit (BIT_OPT_2_FONT_SIZE_CHOOSER)\n");
+			opt2fs = ((CFG_OPTION_DEFAULT(i) & BIT_OPT_2_FONT_SIZE_CHOOSER) == BIT_OPT_2_FONT_SIZE_CHOOSER)? ANO: NIE;
+			if(((_global_optf[i] & BIT_OPT_2_FONT_SIZE_CHOOSER) == BIT_OPT_2_FONT_SIZE_CHOOSER) && (opt2fs == NIE)){
+				Log("odstraÚujem z _global_opt aj _global_optf[%d] bit pre BIT_OPT_2_FONT_SIZE_CHOOSER\n...", i);
+				_global_optf[i] -= BIT_OPT_2_FONT_SIZE_CHOOSER;
+				_global_opt[i] -= BIT_OPT_2_FONT_SIZE_CHOOSER;
+			}
+			else if(((_global_optf[i] & BIT_OPT_2_FONT_SIZE_CHOOSER) != BIT_OPT_2_FONT_SIZE_CHOOSER) && (opt2fs == ANO)){
+				Log("prid·vam do _global_optf[%d] bit pre BIT_OPT_2_FONT_SIZE_CHOOSER\n...", i);
+				_global_optf[i] += BIT_OPT_2_FONT_SIZE_CHOOSER;
+				_global_opt[i] += BIT_OPT_2_FONT_SIZE_CHOOSER;
 			}
 			else{
 				Log("nie je potrebnÈ upravovaù ani _global_opt ani _global_optf[%d].\n", i);
@@ -11839,7 +11857,7 @@ short int getForm(void){
 			case 1: strcat(local_str, STR_MODL_OPTF2_PRVE_VESPERY); break;
 			case 2: strcat(local_str, STR_MODL_OPTF2_FONT_FAMILY); break;
 			case 3: strcat(local_str, STR_MODL_OPTF2_FONT_NAME_CHOOSER); break;
-			case 4: strcat(local_str, STR_MODL_OPTF2_FONT_SIZE); break;
+			// case 4: strcat(local_str, STR_MODL_OPTF2_FONT_SIZE); break;
 		}/* switch(i) */
 		ptr = getenv(local_str);
 		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
@@ -12617,7 +12635,7 @@ short int parseQueryString(void){
 			case 1: strcat(local_str, STR_MODL_OPTF2_PRVE_VESPERY); break;
 			case 2: strcat(local_str, STR_MODL_OPTF2_FONT_FAMILY); break;
 			case 3: strcat(local_str, STR_MODL_OPTF2_FONT_NAME_CHOOSER); break;
-			case 4: strcat(local_str, STR_MODL_OPTF2_FONT_SIZE); break;
+			// case 4: strcat(local_str, STR_MODL_OPTF2_FONT_SIZE); break;
 		}/* switch(j) */
 		/* premenn· WWW_MODL_OPT2_... (nepovinn·), j = 0 aû POCET_OPT_2_HTML_EXPORT */
 		i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
