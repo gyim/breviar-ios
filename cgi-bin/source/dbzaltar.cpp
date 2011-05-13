@@ -14318,13 +14318,18 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_RANNE_CHVALY;
+							// _vlastna_cast_full_okrem_prosieb(modlitba); // 2011-05-13: keï budú dodané texty, treba upravi
+							_vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
+							// 2011-05-13: keï budú dodané texty, treba skontrolova
 							_vlastna_cast_modlitba;
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
+							// _vlastna_cast_full_okrem_kresp_a_prosieb(modlitba); // 2011-05-13: keï budú dodané texty, treba upravi
+							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
 
 							break;
