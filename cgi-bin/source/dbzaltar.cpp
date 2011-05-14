@@ -14808,7 +14808,12 @@ label_25_MAR:
 							set_spolocna_cast(sc, poradie_svaty, ANO, ANO, ANO, ANO, ANO, NIE);
 
 						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_hymnus; /* 2008-05-14: doplnené - pre èeskú verziu vlastnı, pre slovenskú rovnakı ako na posv. èítanie */
+						if(_global_jazyk == JAZYK_CZ){
+							/* 2008-05-14: doplnené - pre èeskú verziu vlastnı, pre slovenskú rovnakı ako na posv. èítanie 
+							 * 2011-05-14: latinskı ani slovenskı neurèuje, e sa pre RCH má bra vlastnı hymnus; ten je len pre posv. èítanie
+							 */
+							_vlastna_cast_hymnus;
+						}
 						_vlastna_cast_modlitba;
 						_vlastna_cast_benediktus;
 
