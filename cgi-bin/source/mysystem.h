@@ -241,10 +241,15 @@
 #define		SYSTEM_LINUX   1
 #define		SYSTEM_WINDOWS 2
 
-/* 2007-05-29: upravené; pre Ruby on Windows tiež separátor ako pod linuxom */
+/* 2007-05-29: upravené; pre Ruby on Windows tiež separátor ako pod linuxom
+ * 2011-05-16: pri debugovaní Ruby on Windows treba backslashe
+ */
 #if defined(OS_linux)
 	#define		PATH_SEPARATOR	PATH_SEPARATOR_linux
 	#define		STR_PATH_SEPARATOR	STR_PATH_SEPARATOR_linux
+#elif defined(OS_Windows_Ruby) && defined(DEBUG)
+	#define		PATH_SEPARATOR	PATH_SEPARATOR_Windows
+	#define		STR_PATH_SEPARATOR	STR_PATH_SEPARATOR_Windows
 #elif defined(OS_Windows_Ruby)
 	#define		PATH_SEPARATOR	PATH_SEPARATOR_linux
 	#define		STR_PATH_SEPARATOR	STR_PATH_SEPARATOR_linux

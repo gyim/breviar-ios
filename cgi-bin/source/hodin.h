@@ -837,18 +837,18 @@ const char *nazov_fontu[POCET_FONTOV + 1] =
 const char *nazov_fontu_CHECKBOX[POCET_JAZYKOV + 1] =
 {"pod¾a vıberu", "podle vıbìru", "according to checkbox above", "checkbox", "", "podle vıbìru", "checkbox"};
 const char *nazov_fontu_CSS[POCET_FONTOV + 1] =
-{"pod¾a CSS", "podle CSS", "according to CSS", "CSS", "CSS", "podle CSS", "CSS"};
+{"pod¾a CSS", "podle CSS", "according to CSS", "CSS", "CSS", "podle CSS", "CSS szerint"};
 /* 2011-05-13: pridané kvôli monosti vo¾by ve¾kosti písma */
 const char *nazov_font_size_jazyk[POCET_FONT_SIZE + 1][POCET_JAZYKOV + 1] = {
 {"", "", "", "", "", "", ""},
-{"pod¾a CSS", "podle CSS", "according to CSS", "CSS", "", "podle CSS", "hu_CSS"},
-{"malilinké", "malinkaté", "xx-small", "xx-small", "", "malinkaté", "hu_xx-small"},
-{"ve¾mi malé", "velmi malé", "extra small", "extra small", "", "velmi malé", "hu_extra small"},
-{"malé", "malé", "small", "small", "", "malé", "hu_small"},
-{"stredné", "støední", "medium", "medium", "", "støední", "hu_medium"},
-{"ve¾ké", "veliké", "large", "large", "", "veliké", "hu_large"},
-{"ve¾mi ve¾ké", "velmi veliké", "extra large", "extra large", "", "velmi veliké", "hu_extra large"},
-{"obrovské", "obrovské", "xx-large", "xx-large", "", "obrovské", "hu_xx-large"}
+{"pod¾a CSS", "podle CSS", "according to CSS", "CSS", "", "podle CSS", "CSS szerint"},
+{"malilinké", "malinkaté", "xx-small", "xx-small", "", "malinkaté", "apró"},
+{"ve¾mi malé", "velmi malé", "extra small", "extra small", "", "velmi malé", "nagyon kicsi"},
+{"malé", "malé", "small", "small", "", "malé", "kicsi"},
+{"stredné", "støední", "medium", "medium", "", "støední", "közepes"},
+{"ve¾ké", "veliké", "large", "large", "", "veliké", "nagy"},
+{"ve¾mi ve¾ké", "velmi veliké", "extra large", "extra large", "", "velmi veliké", "nagyon nagy"},
+{"obrovské", "obrovské", "xx-large", "xx-large", "", "obrovské", "óriási"}
 };
 #define nazov_font_size(a) nazov_font_size_jazyk[a][_global_jazyk]
 const char *nazov_font_size_css[POCET_FONT_SIZE + 1] = 
@@ -980,6 +980,9 @@ const char *html_title[POCET_JAZYKOV + 1] = {"Liturgia hodín", "Liturgie hodin",
 /* 2009-08-04: upravené pre batch mód */
 // const char *html_title_batch_mode[POCET_JAZYKOV + 1] = {"Batch mód", "Dávkovı reim", "Batch mode", "la_", "", "Dávkovı reim", "hu_"};
 const char *html_title_batch_mode[POCET_JAZYKOV + 1] = {"Liturgia hodín - statické texty", "Liturgie hodin - statické texty", "Liturgy of Hours - static texts", "la_", "", "Liturgie hodin - statické texty", "Az Imaórák Liturgiája - hu_"};
+
+/* doplnené, 2011-05-16 */
+const char *html_error_template[POCET_JAZYKOV + 1] = {"Šablóna pre modlitbu sa nenašla. Zrejme neexistuje súbor `%s'.", "Šablona pro modlitbu se nenašla. Patrnì neexistuje soubor `%s'.", "Template for prayer not found. File `%s' does not exist.", "Template for prayer not found. File `%s' does not exist.", "", "Šablona pro modlitbu se nenašla. Patrnì neexistuje soubor `%s'.", "Template for prayer not found. File `%s' does not exist."};
 
 /* navigation buttons/texts: previous, next, today */
 const char *html_button_predchadzajuci_[POCET_JAZYKOV + 1] = {"Predchádzajúci", "Pøedchozí", "Previous", "Praecedénte", "", "Pøedchozí", "Elõzõ"};
@@ -1694,7 +1697,7 @@ const char *html_text_font_size[POCET_JAZYKOV + 1] =
  "font size",
  "",
  "velikost písma", 
- "hu_"
+ "betûméret"
 };
 const char *html_text_font_size_explain[POCET_JAZYKOV + 1] = 
 {"Ve¾kos písma", 
@@ -1703,7 +1706,7 @@ const char *html_text_font_size_explain[POCET_JAZYKOV + 1] =
  "",
  "", 
  "", 
- "hu_"
+ "betûméret"
 };
 
 /* 2010-10-11: HTML option selected */
@@ -1764,8 +1767,8 @@ const char *html_text_batch_Next[POCET_JAZYKOV + 1] = {"&gt;&gt;", "&gt;&gt;", "
 
 /* 2009-04-08, doplnené: zakonèenie modlitby trojaké, krátke resp. dlhé */
 const char *text_ZAKONCENIE_SKRZE_dlhe[POCET_JAZYKOV + 1] = 
-{"Skrze nášho Pána Jeiša Krista, tvojho Syna, ktorı je Boh a s tebou ije a kra¾uje v jednote s Duchom Svätım po všetky veky vekov.",
- "Skrze tvého Syna Jeíše Krista, našeho Pána, nebo on s tebou v jednotì Ducha svatého ije a kraluje po všechny vìky vìkù.",
+{"Skrze nášho Pána Jeiša Krista, tvojho Syna, ktorı je Boh a_s_tebou ije a_kra¾uje v_jednote s_Duchom Svätım po všetky veky vekov.",
+ "Skrze tvého Syna Jeíše Krista, našeho Pána, nebo on s_tebou v_jednotì Ducha svatého ije a_kraluje po všechny vìky vìkù.",
  "",
  "Per Dóminum nostrum Iesum Christum, Fílium tuum, qui tecum vivit et regnat in unitáte Spíritus Sancti, Deus, per ómnia saecula saeculórum.",
  "",
@@ -1782,8 +1785,8 @@ const char *text_ZAKONCENIE_SKRZE_kratke[POCET_JAZYKOV + 1] =
  "Krisztus, a mi Urunk által.",
  };
 const char *text_ZAKONCENIE_LEBO_ON_dlhe[POCET_JAZYKOV + 1] = 
-{"Lebo on je Boh a s tebou ije a kra¾uje v jednote s Duchom Svätım po všetky veky vekov.",
- "Nebo on s tebou v jednotì Ducha svatého ije a kraluje po všechny vìky vìkù.",
+{"Lebo on je Boh a_s_tebou ije a_kra¾uje v_jednote s_Duchom Svätım po všetky veky vekov.",
+ "Nebo on s_tebou v_jednotì Ducha svatého ije a_kraluje po všechny vìky vìkù.",
  "",
  "Qui tecum vivit et regnat in unitáte Spíritus Sancti, Deus, per ómnia saecula saeculórum.",
  "",
@@ -1791,8 +1794,8 @@ const char *text_ZAKONCENIE_LEBO_ON_dlhe[POCET_JAZYKOV + 1] =
  "Aki veled él és uralkodol a Szentlélekkel egységben, Isten mindörökkön-örökké.",
  };
 const char *text_ZAKONCENIE_LEBO_ON_kratke[POCET_JAZYKOV + 1] = 
-{"Lebo on ije a kra¾uje na veky vekov.",
- "Nebo on s tebou ije a kraluje na vìky vìkù.",
+{"Lebo on ije a_kra¾uje na veky vekov.",
+ "Nebo on s_tebou ije a_kraluje na vìky vìkù.",
  "",
  "Qui vivit et regnat in saecula saeculórum.",
  "",
@@ -1800,8 +1803,8 @@ const char *text_ZAKONCENIE_LEBO_ON_kratke[POCET_JAZYKOV + 1] =
  "Aki él és uralkodol mindörökkön-örökké.",
  };
 const char *text_ZAKONCENIE_LEBO_TY_dlhe[POCET_JAZYKOV + 1] = 
-{"Lebo ty si Boh a iješ a kra¾uješ s Bohom Otcom v jednote s Duchom Svätım po všetky veky vekov.",
- "Nebo ty iješ a kraluješ s Bohem Otcem v jednotì Ducha svatého po všechny vìky vìkù.",
+{"Lebo ty si Boh a_iješ a_kra¾uješ s Bohom Otcom v_jednote s_Duchom Svätım po všetky veky vekov.",
+ "Nebo ty iješ a_kraluješ s_Bohem Otcem v_jednotì Ducha svatého po všechny vìky vìkù.",
  "",
  "Qui vivis et regnas cum Deo Patre in unitáte Spíritus Sancti, Deus, per ómnia saecula saeculórum.",
  "",
@@ -1809,8 +1812,8 @@ const char *text_ZAKONCENIE_LEBO_TY_dlhe[POCET_JAZYKOV + 1] =
  "Aki élsz és uralkodol az Atyaistennel és a Szentlélek­kel egységben, Isten mindörökkön-örökké.",
  };
 const char *text_ZAKONCENIE_LEBO_TY_kratke[POCET_JAZYKOV + 1] = 
-{"Lebo ty iješ a kra¾uješ na veky vekov.",
- "Nebo ty iješ a kraluješ na vìky vìkù.",
+{"Lebo ty iješ a_kra¾uješ na veky vekov.",
+ "Nebo ty iješ a_kraluješ na vìky vìkù.",
  "",
  "Qui vivis et regnas in saecula saeculórum.",
  "",
@@ -1818,8 +1821,8 @@ const char *text_ZAKONCENIE_LEBO_TY_kratke[POCET_JAZYKOV + 1] =
  "Aki élsz és uralkodói mindörökkön-örökké.",
  };
 /* 2010-06-07: pridané len pre SK (POST1_MODLITBA5NE) */
-const char *text_ZAKONCENIE_ON_JE_dlhe = "On je Boh a s tebou ije a kra¾uje v jednote s Duchom Svätım po všetky veky vekov.";
-const char *text_ZAKONCENIE_ON_JE_kratke = "On ije a kra¾uje na veky vekov.";
+const char *text_ZAKONCENIE_ON_JE_dlhe = "On je Boh a_s_tebou ije a_kra¾uje v_jednote s_Duchom Svätım po všetky veky vekov.";
+const char *text_ZAKONCENIE_ON_JE_kratke = "On ije a_kra¾uje na veky vekov.";
 /* 2011-01-14: pridané len pre SK 
 		(04NOV_MODLITBA, 24APR2_MODLITBA, 11JUN_MODLITBA, 19OKT2_MODLITBA, VN1_MODLITBA3STR, ADV12PO_MODLITBA, ADV12STR_MODLITBA, 
 		VTYZ_MODLITBA6PO, ADV12UT_MODLITBA, ADV12PI_MODLITBA, ADV13STV_MODLITBA, OZZ_MODLITBA, SCDP_MODLITBA, PMB_rMODLITBA, SCPM_MODLITBA, 
@@ -1827,8 +1830,8 @@ const char *text_ZAKONCENIE_ON_JE_kratke = "On ije a kra¾uje na veky vekov.";
 		24OKT_MODLITBA, VIAN2_MODLITBA11, VN1_MODLITBA4NE, SPMVSr_MODLITBA2, 24JUN_1MODLITBA, 
 		VN1_MODLITBA6STV [nepouíva sa], VN1_rPROSBY6PI_pred_nan [nepouíva sa], VN1_vPROSBY6PI_pred_nan [nepouíva sa])
  */
-const char *text_ZAKONCENIE_KTORY_JE_dlhe = "ktorı je Boh a s tebou ije a kra¾uje v jednote s Duchom Svätım po všetky veky vekov.";
-const char *text_ZAKONCENIE_KTORY_JE_kratke = "ktorı ije a kra¾uje na veky vekov.";
+const char *text_ZAKONCENIE_KTORY_JE_dlhe = "ktorı je Boh a_s_tebou ije a_kra¾uje v_jednote s_Duchom Svätım po všetky veky vekov.";
+const char *text_ZAKONCENIE_KTORY_JE_kratke = "ktorı ije a_kra¾uje na veky vekov.";
 
 /* 2009-05-15, doplnené: pre dominikánov */
 const char *text_PRO_OP[POCET_JAZYKOV + 1] = 

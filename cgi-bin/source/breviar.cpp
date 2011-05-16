@@ -1325,6 +1325,7 @@ void _main_prazdny_formular(void){
  * 
  */
 #define DetailLog emptyLog
+#define MAX_ZAKONCENIE 200
 #define EXPORT_REFERENCIA (!vnutri_myslienky || je_myslienka)
 void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 	short int c, buff_index = 0, ref_index = 0;
@@ -1333,7 +1334,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 	char isbuff = 0;
 	short int write = NIE;
 	char vnutri_inkludovaneho = 0; /* 17/02/2000A.D., kvoli "V.O. Aleluja" v inkludovanych napr. antifonach */
-	char zakoncenie[MAX_STR]; /* 2009-12-14: zakonËenie s veæk˝m pÌsmenkom na zaËiatku, n·sledne sa prÌpadne menÌ 1. pÌsmeno na malÈ */
+	char zakoncenie[MAX_ZAKONCENIE]; /* 2009-12-14: zakonËenie s veæk˝m pÌsmenkom na zaËiatku, n·sledne sa prÌpadne menÌ 1. pÌsmeno na malÈ */
 	short int vnutri_referencie = NIE; /* 2011-04-05, kvÙli biblick˝m referenci·m v inkludovan˝ch s˙boroch */
 	short int vnutri_myslienky = NIE; /* 2011-05-03, kvÙli myölienkam k ûalmom, ktorÈ v sebe vn˙tri mÙûu obsahovaù biblick˙ referenciu */
 	short int je_myslienka = NIE; /* 2011-05-03, Ëi sa m· myölienka vkladaù alebo nie */
@@ -1552,15 +1553,16 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 #endif
 							Export("-->");
 							if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
-								mystrcpy(zakoncenie, text_ZAKONCENIE_SKRZE_kratke[_global_jazyk], MAX_STR);
+								mystrcpy(zakoncenie, text_ZAKONCENIE_SKRZE_kratke[_global_jazyk], MAX_ZAKONCENIE);
 							}
 							else{
-								mystrcpy(zakoncenie, text_ZAKONCENIE_SKRZE_dlhe[_global_jazyk], MAX_STR);
+								mystrcpy(zakoncenie, text_ZAKONCENIE_SKRZE_dlhe[_global_jazyk], MAX_ZAKONCENIE);
 							}
 							if(equals(rest, PARAM_ZAKONCENIE_SKRZE_MALE)){
 								zakoncenie[0] = zakoncenie[0] + ('a'-'A'); // posun z veækÈho pÌsmena na malÈ: pozor, funguje len pre z·kladnÈ znaky ASCII
 							}
-							Export(zakoncenie);
+							/* 2011-05-16: nezlomiteænÈ medzery */
+							Export("%s", convert_nonbreaking_spaces(zakoncenie));
 							Log("skrze-zaËiatok...\n");
 						}
 						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
@@ -1582,15 +1584,16 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 #endif
 							Export("-->");
 							if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
-								mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_TY_kratke[_global_jazyk], MAX_STR);
+								mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_TY_kratke[_global_jazyk], MAX_ZAKONCENIE);
 							}
 							else{
-								mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_TY_dlhe[_global_jazyk], MAX_STR);
+								mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_TY_dlhe[_global_jazyk], MAX_ZAKONCENIE);
 							}
 							if(equals(rest, PARAM_ZAKONCENIE_LEBO_TY_MALE)){
 								zakoncenie[0] = zakoncenie[0] + ('a'-'A'); // posun z veækÈho pÌsmena na malÈ: pozor, funguje len pre z·kladnÈ znaky ASCII
 							}
-							Export(zakoncenie);
+							/* 2011-05-16: nezlomiteænÈ medzery */
+							Export("%s", convert_nonbreaking_spaces(zakoncenie));
 							Log("lebo-ty-zaËiatok...\n");
 						}
 						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
@@ -1612,15 +1615,16 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 #endif
 							Export("-->");
 							if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
-								mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_ON_kratke[_global_jazyk], MAX_STR);
+								mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_ON_kratke[_global_jazyk], MAX_ZAKONCENIE);
 							}
 							else{
-								mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_ON_dlhe[_global_jazyk], MAX_STR);
+								mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_ON_dlhe[_global_jazyk], MAX_ZAKONCENIE);
 							}
 							if(equals(rest, PARAM_ZAKONCENIE_LEBO_ON_MALE)){
 								zakoncenie[0] = zakoncenie[0] + ('a'-'A'); // posun z veækÈho pÌsmena na malÈ: pozor, funguje len pre z·kladnÈ znaky ASCII
 							}
-							Export(zakoncenie);
+							/* 2011-05-16: nezlomiteænÈ medzery */
+							Export("%s", convert_nonbreaking_spaces(zakoncenie));
 							Log("lebo-on-zaËiatok...\n");
 						}
 						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
@@ -1642,12 +1646,13 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 #endif
 							Export("-->");
 							if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
-								mystrcpy(zakoncenie, text_ZAKONCENIE_ON_JE_kratke, MAX_STR);
+								mystrcpy(zakoncenie, text_ZAKONCENIE_ON_JE_kratke, MAX_ZAKONCENIE);
 							}
 							else{
-								mystrcpy(zakoncenie, text_ZAKONCENIE_ON_JE_dlhe, MAX_STR);
+								mystrcpy(zakoncenie, text_ZAKONCENIE_ON_JE_dlhe, MAX_ZAKONCENIE);
 							}
-							Export(zakoncenie);
+							/* 2011-05-16: nezlomiteænÈ medzery */
+							Export("%s", convert_nonbreaking_spaces(zakoncenie));
 							Log("on-je-zaËiatok...\n");
 						}
 						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
@@ -1669,12 +1674,13 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 #endif
 							Export("-->");
 							if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
-								mystrcpy(zakoncenie, text_ZAKONCENIE_KTORY_JE_kratke, MAX_STR);
+								mystrcpy(zakoncenie, text_ZAKONCENIE_KTORY_JE_kratke, MAX_ZAKONCENIE);
 							}
 							else{
-								mystrcpy(zakoncenie, text_ZAKONCENIE_KTORY_JE_dlhe, MAX_STR);
+								mystrcpy(zakoncenie, text_ZAKONCENIE_KTORY_JE_dlhe, MAX_ZAKONCENIE);
 							}
-							Export(zakoncenie);
+							/* 2011-05-16: nezlomiteænÈ medzery */
+							Export("%s", convert_nonbreaking_spaces(zakoncenie));
 							Log("ktor˝-je-zaËiatok...\n");
 						}
 						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
@@ -3197,12 +3203,12 @@ void interpretTemplate(short int type, char *tempfile){
 	_global_pocet_slava_otcu = 0; /* pre kaûd˝ s˙bor templ·tu individu·lne poËÌtame sl·va otcu; 2007-05-18 */
 	FILE *ftemplate = fopen(tempfile, "rb");
 
-	Log("interpretTemplate(%s): Interpreting template %s\n",
-		tempfile, tempfile);
+	Log("interpretTemplate(%s): Interpreting template %s\n", tempfile, tempfile);
 
 	if(ftemplate == NULL){
 		hlavicka((char *)html_title[_global_jazyk]);
-		Export("Templ·t pre modlitbu sa nenaöiel. Zrejme neexistuje s˙bor `%s'.\n", tempfile);
+		Export((char *)html_error_template[_global_jazyk], tempfile);
+		Export("\n");
 		ALERT;
 		return;
 	}
@@ -3574,10 +3580,10 @@ short int atofont(char *font){
 short int atofontsize(char *font){
 	short int i = 0;
 	do{
-		if(equalsi(font, nazov_font_size_css[i])){
+		if(equalsi(font, nazov_font_size(i))){
 			return i;
 		}
-		if(equalsi(font, nazov_font_size(i))){
+		if(equalsi(font, nazov_font_size_css[i])){
 			return i;
 		}
 		i++;
@@ -4621,22 +4627,30 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		Log("sl·venie nem· vlastn˝ n·zov...\n");
 		if(_local_den.denvt == DEN_NEDELA){
 			Log("nedeæa, ktor· nem· vlastn˝ n·zov... (_global_string == %s)\n", _global_string);
-			/* nedela bez vlastneho nazvu */
-			/* 2008-12-20: ˙prava n·zvov nedieæ v öt˝le "3. NEDEºA V ADVENTNOM OBDOBÕ" -> "Tretia adventn· nedeæa" */
-			if(_global_jazyk == JAZYK_SK &&
-				(
-					(_local_den.litobd == OBD_ADVENTNE_I) || (_local_den.litobd == OBD_ADVENTNE_II)
-					|| (_local_den.litobd == OBD_POSTNE_I)
-					|| (_local_den.litobd == OBD_VELKONOCNE_I) || (_local_den.litobd == OBD_VELKONOCNE_II)
-				)
-				/* zatiaæ iba pre slovenËinu - advent, pÙst, veækonoËnÈ obdobie */
+			/* nedeæa bez vlastneho nazvu */
+			/* 2008-12-20: ˙prava n·zvov nedieæ v öt˝le "3. NEDEºA V ADVENTNOM OBDOBÕ" -> "Tretia adventn· nedeæa" 
+			 * 2011-05-16: dlho bolo len pre slovenËinu; upravenÈ kvÙli maÔarËine
+			 */
+			if(
+				(_local_den.litobd == OBD_ADVENTNE_I) || (_local_den.litobd == OBD_ADVENTNE_II)
+				|| (_local_den.litobd == OBD_POSTNE_I)
+				|| (_local_den.litobd == OBD_VELKONOCNE_I) || (_local_den.litobd == OBD_VELKONOCNE_II)
 			){
-				sprintf(pom, "%s %s %s", poradie_SLOVOM(_local_den.tyzden - 1), nazov_OBDOBIA_AKA(_local_den.litobd), nazov_DNA(_local_den.denvt));
-			}
+				if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
+					sprintf(pom, "%s %s %s", poradie_SLOVOM(_local_den.tyzden - 1), nazov_DNA(_local_den.denvt), nazov_OBDOBIA_AKA(_local_den.litobd));
+				}
+				else if(_global_jazyk == JAZYK_HU){
+					sprintf(pom, "%s %s %s", nazov_OBDOBIA_AKA(_local_den.litobd), poradie_SLOVOM(_local_den.tyzden - 1), nazov_DNA(_local_den.denvt));
+				}
+				else /* if(_global_jazyk == JAZYK_SK) */{
+					sprintf(pom, "%s %s %s", poradie_SLOVOM(_local_den.tyzden - 1), nazov_OBDOBIA_AKA(_local_den.litobd), nazov_DNA(_local_den.denvt));
+				}
+			}/* öpeci·lne nedele slovom */
 			else{
 				/* _local_den.litobd == OBD_CEZ_ROK; pre cezroËnÈ ost·va poradovÈ ËÌslo */
 				sprintf(pom, "%d. %s %s", _local_den.tyzden, nazov_DNA(_local_den.denvt), nazov_OBDOBIA_V(_local_den.litobd));
-			}
+			}/* ostatnÈ nedele ËÌslom */
+
 			if((farba == COLOR_RED) && (typ != EXPORT_DNA_VIAC_DNI_TXT)){
 				/* zmenene <font color> na <span>, 2003-07-02 */
 				strcat(pom, "</span>");
@@ -10058,7 +10072,10 @@ void _main_analyza_roku(char *rok){
 	else /* _global_linky == NIE */
 		mystrcpy(pom, MESSAGE_FOLDER, MAX_STR);
 
-	ExportROK((char *)html_text_Rok[_global_jazyk]);
+	if(_global_jazyk != JAZYK_HU){
+		// 2011-05-16: v maÔarËine sa tam slovo 'rok' (Èv) vÙbec nehodÌ. Ak by si ho tam chcel maù, tak by muselo byù  za ËÌslovkou a k ËÌslovke by bolo treba pridaù eöte koncovku. (mamedv)
+		ExportROK((char *)html_text_Rok[_global_jazyk]);
+	}
 	Export(" %s <"HTML_SPAN_BOLD">", _global_link);
 	if(_global_r.prestupny == YES){
 		Export((char *)html_text_je[_global_jazyk]); /* 2006-08-02 */

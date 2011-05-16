@@ -298,7 +298,7 @@ short int _deallocate_global_var(void){
 
 	Log("...done.\n");
 	return SUCCESS;
-}
+}/* _deallocate_global_var() */
 
 /* ------------------------------------------------------------------- */
 /* vezme retazec a porovna s nazvami mesiaca; ak najde, vrati, inak 0 */
@@ -310,7 +310,7 @@ short int cislo_mesiaca(char *mesiac){
 			ret = i + 1;
 	}
 	return ret;
-}
+}/* cislo_mesiaca() */
 
 /* ------------------------------------------------------------------- */
 /* urobi velke pismena 
@@ -462,20 +462,27 @@ char *remove_diacritics(const char *input){
 /* ------------------------------------------------------------------- */
 /* konvertuje underscore na nezlomiteænÈ medzery
  * 2011-05-02: vytvorenÈ
+ * 2011-05-16: opravenÈ (char sa musÌ najprv konvertovaù na char * a aû potom appendovaù strcat)
  */
 char *convert_nonbreaking_spaces(const char *input){
 	short int i = 0;
 	char c;
+	char c_str[VERY_SMALL];
+	Log("convert_nonbreaking_spaces() -- zaËiatok...\n");
 	mystrcpy(_global_pom_str, STR_EMPTY, MAX_STR);
-	while(( c = input[i]) != '\0'){
+	// _global_pom_str[0] = '\0';  /* terminate it at the new length */
+	while(((c = input[i]) != '\0') /* && (i < MAX_STR) */){
 		if(c == CHAR_NONBREAKING_SPACE){
-			strcat(_global_pom_str, HTML_NONBREAKING_SPACE);
-		}/* c == CHAR_NONBREAKING_SPACE */
+			strcat(_global_pom_str, (char *)HTML_NONBREAKING_SPACE);
+		}// c == CHAR_NONBREAKING_SPACE
 		else{
-			strcat(_global_pom_str, (char *)c);
+			c_str[0] = c;
+			c_str[1] = '\0';
+			strcat(_global_pom_str, (char *)c_str);
 		}
 		i++;
 	}
+	Log("convert_nonbreaking_spaces() -- koniec, returning `%s'.\n", _global_pom_str);
 	return (_global_pom_str);
 }/* convert_nonbreaking_spaces() */
 
@@ -506,15 +513,15 @@ void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int 
 		Log("\tNetreba prilepiù kalend·r (jazyk == %s, kalend·r == %s)\n", skratka_jazyka[_global_jazyk], skratka_kalendara[_global_kalendar]);
 	}
 
-	/* 2008-08-08: pridanÈ odovzdanie parametra pre css */
-	if(_global_css != CSS_breviar_sk){
+	/* 2008-08-08: pridanÈ odovzdanie parametra pre css; 2011-05-16: neexportuje sa, ak je nedefinovanÈ */
+	if((_global_css != CSS_breviar_sk) && (_global_css != CSS_UNDEF)){
 		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_CSS, skratka_css[_global_css]);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj css: `%s' (2008-08-08)\n", pom3);
 	}
 
-	/* 2011-05-06: pridanÈ odovzdanie parametra pre font */
-	if(_global_font != FONT_CSS){
+	/* 2011-05-06: pridanÈ odovzdanie parametra pre font; 2011-05-16: neexportuje sa, ak je nedefinovanÈ */
+	if((_global_font != FONT_CSS) && (_global_font != FONT_UNDEF)){
 		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_FONT_NAME, nazov_fontu[_global_font]);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj font: `%s'\n", pom3);
@@ -523,8 +530,8 @@ void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int 
 		Log("\tNetreba prilepiù font (_global_font == %d, n·zov == %s)\n", _global_font, nazov_fontu[_global_font]);
 	}
 
-	/* 2011-05-13: pridanÈ odovzdanie parametra pre font size */
-	if(_global_font_size != FONT_SIZE_CSS){
+	/* 2011-05-13: pridanÈ odovzdanie parametra pre font size; 2011-05-16: neexportuje sa, ak je nedefinovanÈ */
+	if((_global_font_size != FONT_SIZE_CSS) && (_global_font_size != FONT_SIZE_UNDEF)){
 		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_FONT_SIZE, nazov_font_size_css[_global_font_size]);
 		strcat(pom2, pom3);
 		Log("\tPrilepil som aj font size: `%s'\n", pom3);
