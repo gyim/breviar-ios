@@ -601,11 +601,11 @@ char *_vytvor_string_z_datumu(short int den, short int mesiac, short int rok, sh
 			sprintf(pom, "%d. ", rok);
 			strcat(_global_pom_str, pom);
 		}
-		sprintf(pom, "%s %d.", nazov_Mesiaca(mesiac - 1));
-		// 2011-05-17: ToDo: zatiaæ sa nepouûÌva; predpripravenÈ modelovÈ volanie (treba dorobiù pre vöetky jazyky) z _main_rozbor_dna()
+		sprintf(pom, "%s", nazov_Mesiaca(mesiac - 1));
+		// 2011-05-17: ToDo: zatiaæ sa pre VSETKY_DNI nepouûÌva; predpripravenÈ modelovÈ volanie (treba dorobiù pre vöetky jazyky) z _main_rozbor_dna()
 		if(den != VSETKY_DNI){
 			strcat(_global_pom_str, pom);
-			sprintf(pom, "%s%d.", vypln, den);
+			sprintf(pom, " %s%d.", vypln, den);
 		}
 	}
 	else{
