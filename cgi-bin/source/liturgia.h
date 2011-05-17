@@ -852,6 +852,7 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_SLAVNOST_SDB				49
 #define LOKAL_SLAV_SVIATOK_VDB				50
 #define LOKAL_SLAV_SVIATOK_SCSC				51
+#define LOKAL_SLAV_DRUHA_VELK_NEDELA_HU		52
 
 /* 2010-08-03: pridaný kalendár */
 #define KALENDAR_NEURCENY                   0

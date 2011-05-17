@@ -3919,6 +3919,8 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 							_global_den.typslav_lokal = LOKAL_SLAV_DRUHA_VELK_NEDELA;
 						else if(_global_jazyk == JAZYK_CZ)
 							_global_den.typslav_lokal = LOKAL_SLAV_DRUHA_VELK_NEDELA_CZ;
+						else if(_global_jazyk == JAZYK_HU)
+							_global_den.typslav_lokal = LOKAL_SLAV_DRUHA_VELK_NEDELA_HU;
 					}
 					else{
 						/* ve¾konoèná oktáva - 'všedný deò' vo ve¾konoènej oktáve */

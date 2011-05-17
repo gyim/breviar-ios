@@ -464,6 +464,7 @@ const char *nazov_slavenia_lokal[] =
 ,"pre SDB: slávnos"
 ,"pre VDB: sviatok"
 ,"pre SCSC: sviatok"
+,"Húsvét 2. vasárnapja — Az Isteni irgalmasság vasárnapja"
 };
 
 /* names of liturgical colors */

@@ -14952,6 +14952,7 @@ label_25_MAR:
 
 							modlitba = MODL_RANNE_CHVALY;
 							_vlastna_cast_full(modlitba);
+							_set_zalmy_1nedele_rch(); // 2011-05-17: kvôli slovenskému (CZ má sviatok, tam je to automaticky)
 							if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II))
 								_vlastna_cast_kresponz_ve;
 							/* inak zostane cezrocne, ale bez pripony */
@@ -14967,6 +14968,7 @@ label_25_MAR:
 
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_full(modlitba);
+							_set_zalmy_sviatok_muc(modlitba); // 2011-05-17: kvôli slovenskému (CZ má sviatok, tam je to automaticky)
 							if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II))
 								_vlastna_cast_kresponz_ve;
 							/* inak zostane cezrocne, ale bez pripony */
