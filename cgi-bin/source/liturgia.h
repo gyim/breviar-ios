@@ -101,9 +101,9 @@
 #define JAZYK_HU    6
 
 /* 2011-05-12: formáty vypisovania dátumu, kvôli maïarèine, angliètine... */
-#define FORMAT_DATUMU_DEN_MESIAC_ROK 0
-#define FORMAT_DATUMU_MESIAC_DEN_ROK 1
-#define FORMAT_DATUMU_ROK_MESIAC_DEN 2
+#define FORMAT_DATUMU_DEN_MESIAC_ROK 0 // DD. MM RRRR
+#define FORMAT_DATUMU_MESIAC_DEN_ROK 1 // MM DD RRRR
+#define FORMAT_DATUMU_ROK_MESIAC_DEN 2 // RRRR. MM DD
 
 extern const short int format_datumu[POCET_JAZYKOV + 1];
 

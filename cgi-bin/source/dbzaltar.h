@@ -90,10 +90,10 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 /* podobne ako v liturgia.h::char *nazov_obd_htm[] */
 #define FILE_SPOM_PM_SOBOTA "spmvs.htm" /* 2006-02-02: nachádzajú sa tam aj posv. èítania */
 
-#define ANCHOR_NANEBOVSTUPENIE "NANEBOVSTUPENIE" /* 2007-11-14: doplenné kvôli invitatóriu */
+#define ANCHOR_NANEBOVSTUPENIE "NAN" /* 2007-11-14: doplenné kvôli invitatóriu */
 #define FILE_NANEBOVSTUPENIE "nan.htm" /* 10/03/2000A.D. -- kotvy v nom su podla OBD_VELKONOCNE_I */
 
-#define ANCHOR_ZOSLANIE_DUCHA_SV "ZOSLANIE_DUCHA_SV"
+#define ANCHOR_ZOSLANIE_DUCHA_SV "ZDS"
 #define FILE_ZOSLANIE_DUCHA_SV "zds.htm" /* 10/03/2000A.D. -- kotvy v nom su podla OBD_VELKONOCNE_II, ANCHOR_ZOSLANIE_DUCHA_SV */
 
 #define ANCHOR_NAJSV_TROJICE "TROJ"
@@ -111,11 +111,11 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 #define ANCHOR_SRDCA_PM "SRDCAPM"
 #define FILE_SRDCA_PM "nspm.htm" /* 10/03/2000A.D. -- kotvy v nom su podla ANCHOR_SRDCA_PM */
 
-#define ANCHOR_PM_BOHOROD "BOHORODICKY_PANNY_MARIE"
+#define ANCHOR_PM_BOHOROD "PMB"
 #define FILE_PM_BOHOROD "pmb.htm" /* 14/03/2000A.D. -- kotvy v nom su podla ANCHOR_PM_BOHOROD */
 
 #define ANCHOR_2NE_PO_NAR "2NE" /* 14/03/2000A.D. */
-#define ANCHOR_ZJAVENIE_PANA "ZJAVENIE_PANA" /* 14/03/2000A.D. */
+#define ANCHOR_ZJAVENIE_PANA "ZJV" /* 14/03/2000A.D. */
 
 #define ANCHOR_SV_RODINY "SVROD"
 #define FILE_SV_RODINY "svrod.htm" /* 14/03/2000A.D. -- kotvy v nom su podla ANCHOR_SV_RODINY */

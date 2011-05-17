@@ -307,8 +307,8 @@ const char *nazov_OBDOBIA_AKA_jazyk[POCET_OBDOBI + 1][POCET_JAZYKOV + 1] =
  {"V OKTÁVE NARODENIA PÁNA", "V OKTÁVU NAROZENÍ PÁNÌ", "", "", "", "V OKTÁVU NAROZENÍ PÁNÌ", "A KARÁCSONY NYOLCADÁBAN"}, // not used / nepoužíva sa
  {"VIANOÈNÁ", "VÁNOÈNÍ", "", "", "", "VÁNOÈNÍ", "KARÁCSONY"},
  {"VIANOÈNÁ", "VÁNOÈNÍ", "", "", "", "VÁNOÈNÍ", "KARÁCSONY"},
- {"CEZROÈNÁ", "V MEZIDOBÍ", "", "", "", "BÌHEM ROKU", "hu_"}, // not used / nepoužíva sa
- {"PÔSTNA", "POSTNÍ", "", "", "", "POSTNÍ", "ÉVKÖZI"},
+ {"CEZROÈNÁ", "V MEZIDOBÍ", "", "", "", "BÌHEM ROKU", "ÉVKÖZI"},
+ {"PÔSTNA", "POSTNÍ", "", "", "", "POSTNÍ", "NAGYBÖJT"},
  {"VO VE¼KOM TÝŽDNI", "VE SVATÉM TÝDNU", "", "", "", "VE SVATÉM TÝDNU", "hu_"}, // not used / nepoužíva sa
  {"VO VE¼KONOÈNOM TROJDNÍ", "VE VELIKONOÈNÍM TRIDUU", "", "", "", "VE VELIKONOÈNÍM TRIDUU", "hu_"}, // not used / nepoužíva sa
  {"VO VE¼KONOÈNEJ OKTÁVE", "VE VELIKONOÈNÍM OKTÁVU", "", "", "", "V OKTÁVU VELIKONOÈNÍM", "HÚSVÉT NYOLCACADÁBAN"}, // not used / nepoužíva sa
@@ -572,6 +572,10 @@ const char *nazov_DNA_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1] =
 };
 
 #define		nazov_DNA(a)	nazov_DNA_jazyk[a][_global_jazyk]
+
+/* 2011-05-17: doplnené */
+#define KONCOVKA_DNA_HU "JA" // vasárnapja
+#define KONCOVKA_DNA_HU_SMALL "ja"
 
 /* two/three-letter abbreviations of the names of the days in week, starting with Sunday (sentence case) */
 const char *nazov_Dn_jazyk[POCET_DNI + 1][POCET_JAZYKOV + 1] = 
@@ -1855,7 +1859,7 @@ const char *text_DRUHA_NEDELA_PO_NAR_PANA[POCET_JAZYKOV + 1] =
  "",
  "",
  "2. nedìle po Narození Pánì",
- "Karácsony Utáni II. Vasárnap",
+ "Karácsony Utáni 2. Vasárnap",
  };
 
 /* --------------- 01 január --------------- */

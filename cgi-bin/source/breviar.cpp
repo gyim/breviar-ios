@@ -4640,7 +4640,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 					sprintf(pom, "%s %s %s", poradie_SLOVOM(_local_den.tyzden - 1), nazov_DNA(_local_den.denvt), nazov_OBDOBIA_AKA(_local_den.litobd));
 				}
 				else if(_global_jazyk == JAZYK_HU){
-					sprintf(pom, "%s %s %s", nazov_OBDOBIA_AKA(_local_den.litobd), poradie_SLOVOM(_local_den.tyzden - 1), nazov_DNA(_local_den.denvt));
+					sprintf(pom, "%s %s %s%s", nazov_OBDOBIA_AKA(_local_den.litobd), poradie_SLOVOM(_local_den.tyzden - 1), nazov_DNA(_local_den.denvt), KONCOVKA_DNA_HU);
 				}
 				else /* if(_global_jazyk == JAZYK_SK) */{
 					sprintf(pom, "%s %s %s", poradie_SLOVOM(_local_den.tyzden - 1), nazov_OBDOBIA_AKA(_local_den.litobd), nazov_DNA(_local_den.denvt));
@@ -4648,7 +4648,12 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			}/* špeciálne nedele slovom */
 			else{
 				/* _local_den.litobd == OBD_CEZ_ROK; pre cezroèné ostáva poradové èíslo */
-				sprintf(pom, "%d. %s %s", _local_den.tyzden, nazov_DNA(_local_den.denvt), nazov_OBDOBIA_V(_local_den.litobd));
+				if(_global_jazyk == JAZYK_HU){
+					sprintf(pom, "%s %d. %s", nazov_OBDOBIA_AKA(_local_den.litobd), _local_den.tyzden, nazov_DNA(_local_den.denvt));
+				}
+				else{
+					sprintf(pom, "%d. %s %s", _local_den.tyzden, nazov_DNA(_local_den.denvt), nazov_OBDOBIA_V(_local_den.litobd));
+				}
 			}/* ostatné nedele èíslom */
 
 			if((farba == COLOR_RED) && (typ != EXPORT_DNA_VIAC_DNI_TXT)){
@@ -9179,13 +9184,14 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				ExportUDAJE("pre viacej dní zobrazenie modlitby nie je podporované\n");
 				return;
 			}
-			Log("/* teraz vypisujem heading 1, mesiac %s, rok %d */\n",
-				nazov_mesiaca(m - 1), r);
+			Log("/* teraz vypisujem heading 1, mesiac %s, rok %d */\n", nazov_mesiaca(m - 1), r);
 			/* 2003-07-16; presunute sem vyssie */
-			if(prestupny(r))
+			if(prestupny(r)){
 				pocet_dni[MES_FEB] = 29;
-			else
+			}
+			else{
 				pocet_dni[MES_FEB] = 28;
+			}
 			/* 2009-08-12: odvetvené */
 			if(_global_opt_batch_monthly == NIE){
 				vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, r, LINK_DEN_MESIAC_ROK, NIE);
@@ -9194,14 +9200,15 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				// 2009-08-12: pre batch mód export vytlaèíme len rok bez linku
 				sprintf(_global_link, "%d", r);
 			}/* else if(_global_opt_batch_monthly == NIE) */
-			sprintf(pom, "%s %s", nazov_Mesiaca(m - 1), _global_link); /* 2003-07-16; bolo tu %d - r */
+			if(format_datumu[_global_jazyk] == FORMAT_DATUMU_ROK_MESIAC_DEN){
+				sprintf(pom, "%s. %s", _global_link, nazov_mesiaca(m - 1));
+			}
+			else{
+				sprintf(pom, "%s %s", nazov_Mesiaca(m - 1), _global_link);
+			}
 			_export_heading_center(pom);
-			/* 2003-07-16 zapoznamkovane - je to redundantne
-			 * Export("\n<center><h2>Rok %s</h2></center>\n", _global_link);
-			 */
 
-			Export("<center><"HTML_SPAN_RED_BOLD">%s</span></center>\n",
-				nazov_MESIACA(m - 1));
+			Export("<center><"HTML_SPAN_RED_BOLD">%s</span></center>\n", nazov_MESIACA(m - 1));
 
 			rozbor_mesiaca(m, r);
 
