@@ -1,19 +1,20 @@
-/***************************************************************/
-/*                                                             */
-/* myexpt.h                                                    */
-/* (c)1999-2011 | Juraj Videky | videky@breviar.sk             */
-/*                                                             */
-/* description | obsahuje exportne rutinky na export           */
-/*               do suboru FILE_EXPORT alebo stdout            */
-/* document history                                            */
-/*   14/11/1999A.D. | created                                  */
-/*   10/02/2000A.D. | zmenena definicia FILE_EXPORT            */
-/*   06/09/2001A.D. | tento popis                              */
-/*   2003-07-15a.D. | odstraneny #include "mybase.h"           */
-/*   2004-03-15a.D. | pridany DEFAULT_HTML_EXPORT (batch mode) */
-/*   2009-08-03a.D. | pridaný DEFAULT_MONTH_EXPORT (batch mód) */
-/*                                                             */
-/***************************************************************/
+/***********************************************************************/
+/*                                                                     */
+/* myexpt.h                                                            */
+/* (c)1999-2011 | Juraj Videky | videky@breviar.sk                     */
+/*                                                                     */
+/* description | obsahuje exportne rutinky na export                   */
+/*               do suboru FILE_EXPORT alebo stdout                    */
+/* document history                                                    */
+/*   14/11/1999A.D. | created                                          */
+/*   10/02/2000A.D. | zmenena definicia FILE_EXPORT                    */
+/*   06/09/2001A.D. | tento popis                                      */
+/*   2003-07-15a.D. | odstraneny #include "mybase.h"                   */
+/*   2004-03-15a.D. | pridany DEFAULT_HTML_EXPORT (batch mode)         */
+/*   2009-08-03a.D. | pridaný DEFAULT_MONTH_EXPORT (batch mód)         */
+/*   2011-05-18a.D. | odstránené ExpL2HTML(), pridané Export_to_file() */
+/*                                                                     */
+/***********************************************************************/
 
 #include "vstudio.h"
 
@@ -28,7 +29,8 @@
 #define DEFAULT_MONTH_EXPORT "index.htm" // "^ hore"
 
 short int Export(char *fmt, ...);
-short int ExpL2HTML(char *fmt);
+short int Export_to_file(FILE * expt, char *fmt, ...);
+
 void bothExports(void);
 void dumpFile(char *fname);
 
