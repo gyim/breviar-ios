@@ -465,7 +465,7 @@ const char *nazov_slavenia_lokal[] =
 ,"pre SDB: sl·vnosù"
 ,"pre VDB: sviatok"
 ,"pre SCSC: sviatok"
-,"H˙svÈt 2. vas·rnapja ó Az Isteni irgalmass·g vas·rnapja"
+,"H˙svÈt 2. vas·rnapja ó Az Isteni Irgalmass·g vas·rnapja"
 };
 
 /* names of liturgical colors */
@@ -3362,7 +3362,7 @@ const char *text_NAJSVATEJSEJ_TROJICE[POCET_JAZYKOV + 1] =
  "",
  "",
  "NejsvÏtÏjöÌ Trojice",
- "hu_name",
+ "Szenth·roms·gvas·rnap",
  };
 const char *text_KRISTA_KRALA[POCET_JAZYKOV + 1] = 
 {"Krista Kr·æa",
@@ -3371,7 +3371,7 @@ const char *text_KRISTA_KRALA[POCET_JAZYKOV + 1] =
  "",
  "",
  "JeûÌöe Krista Kr·le",
- "hu_name",
+ "Krisztus Kir·ly",
  };
 const char *text_NAJSV_KRISTOVHO_TELA_A_KRVI[POCET_JAZYKOV + 1] = 
 {"Najsv‰tejöieho Kristovho tela a krvi",
