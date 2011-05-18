@@ -1241,8 +1241,10 @@ extern const char *postfix_jazyka[POCET_JAZYKOV + 1];
 extern const char *nazov_kalendara[POCET_KALENDAROV + 1];
 extern const char *skratka_kalendara[POCET_KALENDAROV + 1];
 
-extern const char *skratka_css[POCET_CSS + 1];
 extern const char *nazov_css[POCET_CSS + 1];
+extern const char *skratka_css[POCET_CSS + 1];
+
+extern const char *charset_jazyka[POCET_JAZYKOV + 1];
 
 extern const char *nazov_fontu[POCET_FONTOV + 1];
 extern const char *nazov_fontu_CHECKBOX[POCET_JAZYKOV + 1];

@@ -38,6 +38,7 @@
 /*   2010-10-11a.D. | pridané nazov_slavenia_lokal_kalendar[]  */
 /*   2011-01-14a.D. | pridané ZAKONCENIE_KTORY_JE              */
 /*   2011-01-26a.D. | upravené poradie konštánt pre lit. obd.  */
+/*   2011-05-18a.D. | doplnené charset_jazyka[]                */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -835,6 +836,10 @@ const char *skratka_css[POCET_CSS + 1] =
 {"__", "def", "kbd", "cz", "czop"
 	, "2003", "2005", "2007", "2008"
 	, "jmkcz"};
+
+/* language charset (encoding); used for HTML heading */
+const char *charset_jazyka[POCET_JAZYKOV + 1] =
+{"windows-1250", "windows-1250", "windows-1251", "windows-1251", "utf-8", "windows-1250", "windows-1250"};
 
 /* 2011-05-06: pridané kvôli možnosti vo¾by písma */
 const char *nazov_fontu[POCET_FONTOV + 1] =

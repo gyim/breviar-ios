@@ -23,6 +23,7 @@
 /*   2009-08-05a.D. | upravené exportovanie hlavičky           */
 /*   2010-02-15a.D. | upravené hlavičky aj pätky (navigácia)   */
 /*   2011-05-13a.D. | doplnená aj veľkosť fontu                */
+/*   2011-05-18a.D. | doplnené použitie charset_jazyka[]       */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -48,7 +49,8 @@ short int bol_content_type_text_html = NIE;
 
 #ifndef __MYHPAGE_CPP_HTML_CONST
 #define __MYHPAGE_CPP_HTML_CONST
-const char *html_header_1 = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\n\t\"http://www.w3.org/TR/html4/loose.dtd\">\n<html>\n<head>\n\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1250\">\n\t<meta name=\"Author\" content=\"Juraj Vidéky\">\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"";
+// obsahuje %s
+const char *html_header_1 = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\n\t\"http://www.w3.org/TR/html4/loose.dtd\">\n<html>\n<head>\n\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=%s\">\n\t<meta name=\"Author\" content=\"Juraj Vidéky\">\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"";
 const char *html_footer_1 = STR_EMPTY; // "<p><center>______</center>"; // "<hr>";
 #endif /* __MYHPAGE_CPP_HTML_CONST */
 
@@ -129,10 +131,12 @@ void hlavicka(char *title, short int level, short int spec){
 		bol_content_type_text_html = ANO;
 	}
 	Log("creating header...\n");
-	/* 2003-07-15, zmenene na hlavicku pre css-ko; zrusene <style> */
-	/* 2008-08-08: pridané dynamicky css-ko */
-	/* 2010-02-15: statické texty do konštánt */
-	Export((char *)html_header_1);
+	/* 2003-07-15, zmenene na hlavicku pre css-ko; zrusene <style>
+	 * 2008-08-08: pridané dynamicky css-ko
+	 * 2010-02-15: statické texty do konštánt
+	 * 2011-05-18: charset sa nastaví podľa jazyka
+	 */
+	Export((char *)html_header_1, charset_jazyka[_global_jazyk]);
 #ifdef	EXPORT_CMDLINE_CSS
 	// pre command-line použitie (aj pre batch mód): "./breviar.css" resp. ".\breviar.css"
 	/* 2009-08-03: level označuje počet adresárov, o ktoré je treba ísť "hore" (pre mesačný export) */
@@ -294,10 +298,12 @@ void hlavicka(char *title, FILE * expt, short int level, short int spec){
 		bol_content_type_text_html = ANO;
 	}
 	Log("creating header...\n");
-	/* 2003-07-15, zmenene na hlavicku pre css-ko; zrusene <style> */
-	/* 2008-08-08: pridané dynamicky css-ko */
-	/* 2010-02-15: statické texty do konštánt */
-	fprintf(expt, (char *)html_header_1);
+	/* 2003-07-15, zmenene na hlavicku pre css-ko; zrusene <style>
+	 * 2008-08-08: pridané dynamicky css-ko
+	 * 2010-02-15: statické texty do konštánt
+	 * 2011-05-18: charset sa nastaví podľa jazyka
+	 */
+	fprintf(expt, (char *)html_header_1, charset_jazyka[_global_jazyk]);
 #ifdef	EXPORT_CMDLINE_CSS
 	// pre command-line použitie (aj pre batch mód): "./breviar.css" resp. ".\breviar.css"
 	/* 2009-08-03: level označuje počet adresárov, o ktoré je treba ísť "hore" (pre mesačný export) */
