@@ -71,3 +71,8 @@ replace:
 
 __________________________________
 
+2011-05-20, update:
+
+je potrebné vyh¾ada aj jednopísmenkové predloky/spojky, ktoré nasledujú po jednoduchej (‚) alebo obyèajnej („) úvodzovke [zaèiatoènej]
+__________________________________
+
