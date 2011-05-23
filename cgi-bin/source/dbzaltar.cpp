@@ -17605,6 +17605,9 @@ label_25_MAR:
 						if(_global_jazyk == JAZYK_SK){
 							_vlastna_cast_prosby;
 						}/* 2008-07-11: èeské má zo spoloènej èasti: o sv. mužích nebo o øeholnících */
+						if(_global_jazyk == JAZYK_CZ_OP){
+							_vlastna_cast_kresponz;
+						}/* 2011-05-23: èeské CZOP má v spoloènej èasti: o sv. mužích odlišné ako vo vlastnej èasti... */
 						_vlastna_cast_modlitba;
 
 						modlitba = MODL_POSV_CITANIE;
@@ -17614,11 +17617,13 @@ label_25_MAR:
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_hymnus;
-						_vlastna_cast_kresponz;
 						_vlastna_cast_magnifikat;
 						if(_global_jazyk == JAZYK_SK){
+							_vlastna_cast_kresponz;
 							_vlastna_cast_prosby;
-						}/* 2008-07-11: èeské má zo spoloènej èasti: o sv. mužích nebo o øeholnících */
+						}/* 2008-07-11: èeské má zo spoloènej èasti: o sv. mužích nebo o øeholnících
+						  * 2011-05-23: to isté aj krátke responzórium
+						  */
 						_vlastna_cast_modlitba;
 
 						break;
