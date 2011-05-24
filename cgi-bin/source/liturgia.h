@@ -108,21 +108,23 @@
 extern const short int format_datumu[POCET_JAZYKOV + 1];
 
 /* 2008-08-15: Pridané POCET_CSS, aby mohol by "dolník" (CSS_UNDEF) hodnota 0 */
-#define POCET_CSS	9
+#define POCET_CSS	10
 /* 2006-08-08: Pridané kvôli rôznym css-kám 
  * 2009-04-02: pridané historické css-ká
  * 2010-02-25: pridané css pre webstránky http://www.jm-krize.cz/
+ * 2011-05-24: pridanı "inverznı" štıl pre mobilné zariadenia (èierne pozadie, biely text)
  */
 #define CSS_UNDEF				0
 #define CSS_breviar_sk			1
-#define CSS_kbd_sk				2
-#define CSS_ebreviar_cz			3
-#define CSS_breviar_cz_op		4
-#define CSS_breviar_hist_2003	5
-#define CSS_breviar_hist_2005	6
-#define CSS_breviar_hist_2007	7
-#define CSS_breviar_hist_2008	8
-#define CSS_jm_krize_cz			9
+#define CSS_breviar_sk_invert	2
+#define CSS_kbd_sk				3
+#define CSS_ebreviar_cz			4
+#define CSS_breviar_cz_op		5
+#define CSS_breviar_hist_2003	6
+#define CSS_breviar_hist_2005	7
+#define CSS_breviar_hist_2007	8
+#define CSS_breviar_hist_2008	9
+#define CSS_jm_krize_cz			10
 
 #define	POCET_FONTOV	9
 

@@ -236,6 +236,8 @@
 /*                    pod¾a toho, èo je v config (konfiguraènom súbore);   */
 /*                    zatia¾ to tam nie je                                 */
 /*   2011-05-13a.D. | doplnenie font size                                  */
+/*   2011-05-24a.D. | pridaný "inverzný" štýl pre mobilné zariadenia       */
+/*                    (èierne pozadie, biely text)                         */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
