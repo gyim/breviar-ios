@@ -3520,6 +3520,15 @@ const char *text_JUN_06[POCET_JAZYKOV + 1] =
  "Sv. Norberta, biskupa",
  "Szent Norbert püspök",
  };
+const char *text_JUN_08_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Prágai szent Ágnes szûz",
+ };
 const char *text_JUN_08_OFM[POCET_JAZYKOV + 1] = 
 {"Bl. Mikuláša z Gesturi, reho¾níka, èlena 1. rádu",
  "",
@@ -3563,7 +3572,7 @@ const char *text_JUN_10_CZOP[POCET_JAZYKOV + 1] =
  "la_",
  "",
  "Bl. Jana Dominiciho, biskupa",
- "hu_",
+ "",
  };
 const char *text_JUN_11[POCET_JAZYKOV + 1] = 
 {"Sv. Barnabáša, apoštola",
@@ -3629,13 +3638,22 @@ const char *text_JUN_13[POCET_JAZYKOV + 1] =
  "Páduai Szent Antal áldozópap és egyháztanító",
  };
 const char *text_JUN_15_CZ[POCET_JAZYKOV + 1] = 
-{"(na Slovensku nie je)",
+{"",
  "Sv. Víta, muèedníka",
  "",
  "",
  "",
  "Sv. Víta, muèedníka",
- "(nincs Magyarországon)",
+ "",
+ };
+const char *text_JUN_15_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Árpád-házi boldog Jolán szerzetesnõ",
  };
 const char *text_JUN_16_SK[POCET_JAZYKOV + 1] = 
 {"Sv. Neita, muèeníka",
