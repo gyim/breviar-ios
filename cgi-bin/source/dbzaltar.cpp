@@ -8221,7 +8221,7 @@ short int _spol_cast_je_panna(_struct_sc sc){
 	_set_magnifikat(modlitba, _file, _anchor);\
 	set_LOG_svsv;\
 }
-#define _spolocna_cast_kresponz_ve _vlastna_cast_kresponz_ve
+// 2011-06-02: kedysi bolo definované _spolocna_cast_kresponz_ve := _vlastna_cast_kresponz_ve, ale používame _spolocna_cast_kresp_ve definované inde
 #define _vlastna_cast_kresponz_ve {\
 	sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ, VELKONOCNA_PRIPONA);\
 	_set_kresponz(modlitba, _file, _anchor);\
@@ -8309,7 +8309,7 @@ void _spolocna_cast_2cit_rozne(short int modlitba, char *_anchor_pom, char *_anc
 	set_LOG_svsv;\
 }
 
-/* specialne veci pre sviatky panien */
+/* specialne veci pre sviatky panien (aj pre sväté ženy) */
 #define _spolocna_cast_kresp_ve {\
 	if(su_kcit_kresp_prosby_vlastne){\
 		sprintf(_anchor, "%s%c%s%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ, VELKONOCNA_PRIPONA);\
@@ -9291,6 +9291,9 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 			}
 			_spolocna_cast_full(modlitba);
 			_spolocna_cast_hymnus_rozne(modlitba, _anchor_pom, _anchor, _file);
+			// odlišné krátke resp. pre ve¾konoèné obdobie
+			if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II))
+				_spolocna_cast_kresp_ve;
 		}/* v OBD_OKTAVA_NARODENIA -- vespery su zo dna */
 
 	}/* MODL_SPOL_CAST_SV_ZENA_[VIACERE]... */
@@ -9510,7 +9513,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		}
 		_spolocna_cast_full(modlitba);
 		if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II))
-			_spolocna_cast_kresponz_ve;
+			_spolocna_cast_kresp_ve;
 		if((_global_den.litobd == OBD_POSTNE_I) || (_global_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN))
 			_spolocna_cast_ant1_3_po;
 
@@ -9522,7 +9525,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 		}
 		_spolocna_cast_full(modlitba);
 		if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II))
-			_spolocna_cast_kresponz_ve;
+			_spolocna_cast_kresp_ve;
 
 		/* 2005-08-25: pridaný ïalší pomocný anchor, ktorý pojednáva o zväzku breviára kvôli posv. èítaniam */
 		sprintf(_anchor_pom, "%s", STR_EMPTY);
@@ -9581,7 +9584,7 @@ void _set_spolocna_cast(short int a, _struct_sc sc
 			if((_global_den.litobd == OBD_POSTNE_I) || (_global_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN))
 				_spolocna_cast_ant1_3_po;
 			if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II))
-				_spolocna_cast_kresponz_ve;
+				_spolocna_cast_kresp_ve;
 		}/* v OBD_OKTAVA_NARODENIA -- vespery su zo dna */
 
 	}/* MODL_SPOL_CAST_POSVIACKA_CHRAMU */
@@ -15810,6 +15813,9 @@ label_25_MAR:
 
 							modlitba = MODL_RANNE_CHVALY;
 							_vlastna_cast_full(modlitba);
+							if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
+								_vlastna_cast_kresponz_ve;
+							}
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_hymnus;
@@ -15819,6 +15825,9 @@ label_25_MAR:
 
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_full(modlitba);
+							if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
+								_vlastna_cast_kresponz_ve;
+							}
 
 							break;
 						}
