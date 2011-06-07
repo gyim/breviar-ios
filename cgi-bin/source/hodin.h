@@ -466,6 +466,11 @@ const char *nazov_slavenia_lokal[] =
 ,"pre VDB: sviatok"
 ,"pre SCSC: sviatok"
 ,"Húsvét 2. vasárnapja — Az Isteni Irgalmasság vasárnapja"
+,"A Szombathelyi egyházmegyében"
+,"Pozsonyi Fõegyházmegye és a Nagyszombati Egyházmegye fõpátronusa"
+,"A Szeged-Csanádi egyházmegye északi részében: az egyházmegye védöszentje; fõünnep"
+,"A Pécsi egyházmegyében"
+,"A Pécsi egyházmegyében: az egyházmegye védöszentje"
 };
 
 /* names of liturgical colors */
@@ -3502,6 +3507,15 @@ const char *text_JUN_04_CZOP[POCET_JAZYKOV + 1] =
  "Sv. Petra Veronského, knìze a muèedníka",
  "hu_",
  };
+const char *text_JUN_04_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Szent Quirinus (Kerény) püspök és vértanú",
+ };
 const char *text_JUN_05[POCET_JAZYKOV + 1] = 
 {"Sv. Bonifáca, biskupa a muèeníka",
  "Sv. Bonifáce, biskupa a muèedníka",
@@ -3637,6 +3651,15 @@ const char *text_JUN_13[POCET_JAZYKOV + 1] =
  "Sv. Antonína z Padovy, knìze a uèitele Církve",
  "Páduai Szent Antal áldozópap és egyháztanító",
  };
+const char *text_JUN_14_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "A Szombathelyi székesegyház felszentelése",
+ };
 const char *text_JUN_15_CZ[POCET_JAZYKOV + 1] = 
 {"",
  "Sv. Víta, muèedníka",
@@ -3681,6 +3704,15 @@ const char *text_JUN_16_2_OFM[POCET_JAZYKOV + 1] =
  "",
  "",
  "",
+ };
+const char *text_JUN_16_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Tours-i szent Márton püspök ereklyéinek átvitele",
  };
 const char *text_JUN_17_OFM[POCET_JAZYKOV + 1] = 
 {"Sv. Alberta Chmielowského, reho¾níka, èlena 3. rádu",
@@ -3745,6 +3777,15 @@ const char *text_JUN_22_1[POCET_JAZYKOV + 1] =
  "Sv. Jana Fishera, biskupa, a Tomáše Mora, muèedníkù",
  "Fisher Szent János püspök és Morus Szent Tamás vértanúk",
  };
+const char *text_JUN_22_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "A Pécsi székesegyház felszentelése",
+ };
 const char *text_JUN_23_SDB[POCET_JAZYKOV + 1] = 
 {"Sv. Jozefa Cafassa, kòaza",
  "",
@@ -3779,7 +3820,7 @@ const char *text_JUN_27[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Cyrila Alexandrijského, biskupa a uèitele církve",
- "(nincs Magyarországon)",
+ "Alexandriai szent Cirill püspök és egyháztanító", // HU: 26JUN
  };
 const char *text_JUN_27_SK_HU[POCET_JAZYKOV + 1] = 
 {"Sv. Ladislava",
