@@ -3457,7 +3457,7 @@ const char *text_SPOMIENKA_PM_V_SOBOTU[POCET_JAZYKOV + 1] =
  "Memoria S. Mariae in sabbato",
  "",
  "Sobotní památka Panny Marie",
- "hu_name",
+ "Szûz Mária szombati emléknapja",
  };
 
 /* --------------- 06 jún --------------- */
