@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Breviář</string>
+    <string name="back">Spátky</string>
+    <string name="today">Dnes</string>
+    <string name="forward">Vpřed</string>
+    <string name="pgdn">Dál</string>
+    <string name="lang_sk">SK</string>
+    <string name="lang_cz">CZ</string>
+</resources>
