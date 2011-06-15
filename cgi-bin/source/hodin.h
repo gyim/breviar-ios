@@ -1833,7 +1833,7 @@ const char *text_ZAKONCENIE_LEBO_TY_kratke[POCET_JAZYKOV + 1] =
  "Qui vivis et regnas in saecula saeculórum.",
  "",
  "Nebo ty iješ a kraluješ na vìky vìkù.",
- "Aki élsz és uralkodói mindörökkön-örökké.",
+ "Aki élsz és uralkodol mindörökkön-örökké.",
  };
 /* 2010-06-07: pridané len pre SK (POST1_MODLITBA5NE) */
 const char *text_ZAKONCENIE_ON_JE_dlhe = "On je Boh a_s_tebou ije a_kra¾uje v_jednote s_Duchom Svätım po všetky veky vekov.";
