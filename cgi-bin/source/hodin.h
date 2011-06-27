@@ -3985,7 +3985,25 @@ const char *text_JUL_09_CZOP[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Jana Kolínského, knìze, a druhù, muèedníkù",
- "(nincs Magyarországon)",
+ "",
+ };
+const char *text_JUL_09_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Mikuláša Picka, Antona von Willehada a spoloèníkov, <br>muèeníkov v Holandsku, èlenov 1. rádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_JUL_10_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Veroniky Giulianiovej, panny, èlenky 2. rádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_JUL_11[POCET_JAZYKOV + 1] = 
 {"Sv. Benedikta, opáta, patróna Európy",
@@ -4013,6 +4031,15 @@ const char *text_JUL_14[POCET_JAZYKOV + 1] =
  "",
  "Sv. Kamila de Lellis, knìze",
  "Lellisi Szent Kamill áldozópap",
+ };
+const char *text_JUL_14_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Františka Solanského, kòaza, èlena 1. rádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_JUL_14_CZ[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",
