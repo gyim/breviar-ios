@@ -860,6 +860,7 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_SZEGED_CSAN_PATRON       55
 #define LOKAL_SLAV_PECSI_EGYH               56
 #define LOKAL_SLAV_PECSI_EGYH_VEDO          57
+#define LOKAL_SLAV_SZEGED_CSAN_EGYH         58
 
 /* 2010-08-03: pridaný kalendár */
 #define KALENDAR_NEURCENY                   0

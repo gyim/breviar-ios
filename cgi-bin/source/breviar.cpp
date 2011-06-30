@@ -4522,6 +4522,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		default:
 			/* 2010-09-28: odvetvenÈ kvÙli t˝m prÌpadom, keÔ na nedeæu padne sviatok p·na, ale pouûÌva sa poradie_svaty == UNKNOWN_PORADIE_SVATEHO == 0 
 			 *             Ëasù prevzat· z: liturgicke_obdobie(), zaËiatok funkcie; hoci tu sa pouûije len pre smer == 5 (sviatky p·na); sl·vnosti sa rieöia samostatne
+			 * 2011-06-30: cyril a metod odvetven˝ pre SK a CZ only
 			 */
 			Log("_global_den.smer == %d\n", _global_den.smer);
 			Log("_global_svaty1.smer == %d\n", _global_svaty1.smer);
@@ -4529,7 +4530,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 				((_global_den.den == 6) && (_global_den.mesiac - 1 == MES_AUG)) ||
 				((_global_den.den == 15) && (_global_den.mesiac - 1 == MES_AUG)) ||
 				((_global_den.den == 29) && (_global_den.mesiac - 1 == MES_JUN)) ||
-				((_global_den.den == 5) && (_global_den.mesiac - 1 == MES_JUL)) ||
+				((_global_den.den == 5) && (_global_den.mesiac - 1 == MES_JUL) && ((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
 				((_global_den.den == 28) && (_global_den.mesiac - 1 == MES_SEP) && ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
 				((_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) ) ||
 				((_global_den.den == 1) && (_global_den.mesiac - 1 == MES_NOV))

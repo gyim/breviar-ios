@@ -3698,13 +3698,14 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 	  * 2009-01-06: doplnen· pozn·mka k Premeneniu P·na
 	  *
 	  * 2010-09-28: Ëasù prevzat· do: init_global_string(), hoci tam sa pouûije len pre smer == 5 (sviatky p·na); sl·vnosti sa rieöia samostatne
+      * 2011-06-30: cyril a metod odvetven˝ pre SK a CZ only
 	  */
 	Log("najprv treba skontrolovaù, Ëi nejde o deÚ [pÙvodne nedeæu], na ktor˙ pripadol sviatok premenenia p·na a podobnÈ... (ak ·no, nenastavuj niË)\n");
 	if(
 		((_global_den.den == 6) && (_global_den.mesiac - 1 == MES_AUG)) ||
 		((_global_den.den == 15) && (_global_den.mesiac - 1 == MES_AUG)) ||
 		((_global_den.den == 29) && (_global_den.mesiac - 1 == MES_JUN)) ||
-		((_global_den.den == 5) && (_global_den.mesiac - 1 == MES_JUL)) ||
+		((_global_den.den == 5) && (_global_den.mesiac - 1 == MES_JUL) && ((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
 		((_global_den.den == 28) && (_global_den.mesiac - 1 == MES_SEP) && ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
 		((_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) ) ||
 		((_global_den.den == 1) && (_global_den.mesiac - 1 == MES_NOV))
@@ -16459,6 +16460,10 @@ label_25_MAR:
 							/* definovanie parametrov pre modlitbu */
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_2citanie;
+
 							break;
 							/* 2005-08-22: Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
 						}
@@ -17377,7 +17382,7 @@ label_25_MAR:
 					break;
 				case 2: /* MES_JUL -- 02JUL */
 					/* vo vöeobecnom kalend·ri sa sl·vi 31. m·ja */
-					if(_global_jazyk == JAZYK_SK){
+					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
 							if(query_type != PRM_DETAILY)
@@ -17399,6 +17404,10 @@ label_25_MAR:
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_full(modlitba);
 
+							if(_global_jazyk == JAZYK_HU){
+								_vlastna_cast_mcd_kcitresp_modl;
+							}
+
 							break;
 						}
 						_global_svaty1.typslav = SLAV_SVIATOK;
@@ -17406,8 +17415,13 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_MAJ_31[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
-						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridanÈ */
-					}
+						if(_global_jazyk == JAZYK_SK){
+							_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridanÈ */
+						}
+						else if(_global_jazyk == JAZYK_HU){
+							_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+						}
+					}/* SK, HU only */
 					break;
 				case 3: /* MES_JUL -- 03JUL */
 					if(poradie_svaty == 1){
@@ -17451,8 +17465,10 @@ label_25_MAR:
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
 					break;
 				case 4: /* MES_JUL -- 04JUL */
-					if(_global_jazyk == JAZYK_SK){
-						/* 2009-07-09: odvetvenÈ len pre SK; 2009-08-25: je aj pre cz+czop, ale aû ako 2. v poradÌ */
+					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU) || (_global_jazyk == JAZYK_LA)){
+						/* 2009-07-09: odvetvenÈ len pre SK; 2009-08-25: je aj pre cz+czop, ale aû ako 2. v poradÌ 
+						 * 2011-06-30: pridanÈ aj HU a LA
+						 */
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
 							if(query_type != PRM_DETAILY)
@@ -17465,7 +17481,11 @@ label_25_MAR:
 							_vlastna_cast_modlitba;
 							_vlastna_cast_2citanie;
 
-							/* nema vespery, lebo su 1. vespery zo sv. cyrila a metoda */
+							if(_global_jazyk != JAZYK_SK){
+								/* SK nem· veöpery, lebo s˙ 1. veöpery zo sv. cyrila a metoda */
+								modlitba = MODL_VESPERY;
+								_vlastna_cast_modlitba;
+							}
 							break;
 						}
 						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -17635,7 +17655,33 @@ label_25_MAR:
 
 							if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 						}
-					}
+					}/* SK, CZ only */
+					else if((_global_jazyk == JAZYK_HU) || (_global_jazyk == JAZYK_LA)){
+						/* 2011-06-30: vo vöeobecnom kalend·ri sa sl·vi; presunutÈ na SK na 7. j˙la */
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 12; /* lubovolne spomienky */
+						mystrcpy(_global_svaty1.meno, text_JUL_07_SK[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_VYCH, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
+					}/* SK only */
 					break;
 				case 6: /* MES_JUL -- 06JUL */
 					if(poradie_svaty == 1){
@@ -17720,11 +17766,11 @@ label_25_MAR:
 						}
 						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 						_global_svaty1.smer = 12; /* lubovolne spomienky */
-						mystrcpy(_global_svaty1.meno, text_JUL_07[_global_jazyk], MENO_SVIATKU);
+						mystrcpy(_global_svaty1.meno, text_JUL_07_SK[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_VYCH, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridanÈ */
-					}
+					}/* SK only */
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SDB)){
 						if(poradie_svaty == 2){
 
@@ -17755,6 +17801,28 @@ label_25_MAR:
 						_global_svaty2.farba = LIT_FARBA_BIELA;
 						_global_svaty2.kalendar = KALENDAR_SK_SDB;
 					}/* kalend·r pre KALENDAR_SK_SDB */
+					break;
+				case 8: /* MES_JUL -- 08JUL */
+					if(_global_jazyk == JAZYK_HU){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_2citanie;
+
+							break;
+							/* Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
+						}
+						_global_svaty1.smer = 8; /* miestne sviatky */
+						_global_svaty1.typslav = SLAV_SVIATOK;
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_SZEGED_CSAN_EGYH;
+						mystrcpy(_global_svaty1.meno, text_JUL_08_HU[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+					}
 					break;
 				case 9: /* MES_JUL -- 09JUL */
 					/* 2008-07-01: doplnenÈ (upozornil Michal Paz˙rik <m.pazurik@gmail.com>)
@@ -17914,7 +17982,10 @@ label_25_MAR:
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_hymnus;
 						_vlastna_cast_magnifikat;
-						if(_global_jazyk == JAZYK_SK){
+						if(_global_jazyk == JAZYK_HU){
+							_vlastna_cast_kresponz;
+						}
+						else if(_global_jazyk == JAZYK_SK){
 							_vlastna_cast_kresponz;
 							_vlastna_cast_prosby;
 						}/* 2008-07-11: ËeskÈ m· zo spoloËnej Ëasti: o sv. muûÌch nebo o ¯eholnÌcÌch

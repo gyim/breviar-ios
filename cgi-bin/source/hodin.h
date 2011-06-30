@@ -471,6 +471,7 @@ const char *nazov_slavenia_lokal[] =
 ,"A Szeged-Csanádi egyházmegye északi részében: az egyházmegye védöszentje; fõünnep"
 ,"A Pécsi egyházmegyében"
 ,"A Pécsi egyházmegyében: az egyházmegye védöszentje"
+,"A Szeged-Csanádi egyházmegye északi részében; ünnep"
 };
 
 /* names of liturgical colors */
@@ -3310,7 +3311,7 @@ const char *text_MAJ_31[POCET_JAZYKOV + 1] =
  "",
  "",
  "Navštívení Panny Marie",
- "(nincs Magyarországon)",
+ "Szûz Mária látogatása erzsébetnél<br>(Sarlós Boldogasszony)",
  };
 
 /* --------------- 00 pohyblivé slávenia --------------- */
@@ -3951,14 +3952,14 @@ const char *text_JUL_06_CZOP[POCET_JAZYKOV + 1] =
  "Blaholaveného Pier Giorgio Frassatiho, laika OP",
  "nincs Magyarországon)",
  };
-const char *text_JUL_07[POCET_JAZYKOV + 1] = 
+const char *text_JUL_07_SK[POCET_JAZYKOV + 1] = /* vo všeobecnom kalendári sa slávi 5. júla */
 {"Sv. Antona Márie Zaccariu, kòaza",
  "(v Èechách, na Moravì a na Slezsku není)",
  "",
  "",
  "",
  "(pro dominikány není)",
- "(nincs Magyarországon)",
+ "Zaccaria szent Antal Mária áldozópap",
  };
 const char *text_JUL_07_SDB[POCET_JAZYKOV + 1] = 
 {"Bl. Márie Romerovej Meneses, panny",
@@ -3968,6 +3969,15 @@ const char *text_JUL_07_SDB[POCET_JAZYKOV + 1] =
  "",
  "",
  "",
+ };
+const char *text_JUL_08_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "A Székesegyház felszentelése",
  };
 const char *text_JUL_09[POCET_JAZYKOV + 1] = 
 {"Sv. Augustína Zhao Rong, kòaza, a spoloèníkov, muèeníkov",
