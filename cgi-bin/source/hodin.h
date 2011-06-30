@@ -3194,7 +3194,7 @@ const char *text_MAJ_21[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Kryštofa Magallanese, knìze a druhù, muèedníkù",
- "hu_",
+ "Magallanes szent Krištof... (HU)",
  };
 const char *text_MAJ_21_CZOP[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",
@@ -3203,7 +3203,7 @@ const char *text_MAJ_21_CZOP[POCET_JAZYKOV + 1] =
  "la_",
  "",
  "Bl. Hyacinta Marie Cormiera, knìze",
- "hu_",
+ "",
  };
 const char *text_MAJ_22[POCET_JAZYKOV + 1] = 
 {"Sv. Rity z Kassie, reho¾níèky",
@@ -3986,7 +3986,7 @@ const char *text_JUL_09[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Augustina Žao Ronga, knìze a jeho druhù, muèedníkù",
- "",
+ "Rong Zhaho szent Augustin...(HU)",
  };
 const char *text_JUL_09_CZOP[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",
