@@ -18112,29 +18112,63 @@ label_25_MAR:
 					}/* kalendár pre KALENDAR_SK_OFM */
 					break;
 				case 15: /* MES_JUL -- 15JUL */
-					if(poradie_svaty == 1){
-						/* definovanie parametrov pre modlitbu */
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
+					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_OFM)){
+						if(poradie_svaty == 1){
+							file_name_vlastny_kalendar(_global_kalendar);
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
 
-						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_INVITATORIUM;
+							_vlastna_cast_antifona_inv;
 
-						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_full(modlitba);
 
-						modlitba = MODL_VESPERY;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_VESPERY;
+							_set_zalmy_sviatok_duch_past(modlitba);
+							_vlastna_cast_full(modlitba);
 
-						break;
+							modlitba = MODL_POSV_CITANIE;
+							_set_zalmy_sviatok_duch_past(modlitba);
+							_vlastna_cast_full(modlitba);
+
+							_vlastna_cast_mcd_kcitresp_modl;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_SVIATOK;
+						_global_svaty1.smer = 8; /* miestne sviatky */
+						mystrcpy(_global_svaty1.meno, text_JUL_15_OFM[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
+						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_SK_OFM;
+					}/* kalendár pre KALENDAR_SK_OFM */
+					else{
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty1.meno, text_JUL_15[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					}
-					_global_svaty1.typslav = SLAV_SPOMIENKA;
-					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
-					mystrcpy(_global_svaty1.meno, text_JUL_15[_global_jazyk], MENO_SVIATKU);
-					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
-					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridané */
-					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridané */
 					break;
 				case 16: /* MES_JUL -- 16JUL */
 					if(poradie_svaty == 1){

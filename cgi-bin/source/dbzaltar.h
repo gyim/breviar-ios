@@ -589,6 +589,7 @@ extern const char *text_NEPOSKVRNENEHO_SRDCA_PM_OFM[POCET_JAZYKOV + 1];
 extern const char *text_JUL_09_OFM[POCET_JAZYKOV + 1];
 extern const char *text_JUL_10_OFM[POCET_JAZYKOV + 1];
 extern const char *text_JUL_14_OFM[POCET_JAZYKOV + 1];
+extern const char *text_JUL_15_OFM[POCET_JAZYKOV + 1];
 
 #endif /* __DBZALTAR_H_ */
 

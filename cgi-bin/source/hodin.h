@@ -4070,6 +4070,15 @@ const char *text_JUL_15[POCET_JAZYKOV + 1] =
  "Sv. Bonaventury, biskupa a uèitele Církve",
  "Szent Bonaventúra püspök és egyháztanító",
  };
+const char *text_JUL_15_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Bonaventúru z Bagnoregia, biskupa a uèite¾a Cirkvi, èlena 1. rádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_JUL_16[POCET_JAZYKOV + 1] = 
 {"Prebl. Panny Márie Karmelskej",
  "Panny Marie Karmelské",
