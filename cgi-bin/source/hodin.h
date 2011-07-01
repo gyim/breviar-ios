@@ -470,8 +470,9 @@ const char *nazov_slavenia_lokal[] =
 ,"Pozsonyi Fõegyházmegye és a Nagyszombati Egyházmegye fõpátronusa"
 ,"A Szeged-Csanádi egyházmegye északi részében: az egyházmegye védöszentje; fõünnep"
 ,"A Pécsi egyházmegyében"
-,"A Pécsi egyházmegyében: az egyházmegye védöszentje"
+,"A Pécsi egyházmegyében: az egyházmegye védöszentje; ünnep"
 ,"A Szeged-Csanádi egyházmegye északi részében; ünnep"
+,"A Veszprémi egyházmegyében: Szent Anna, az egyházmegye védõszentje; ünnep"
 };
 
 /* names of liturgical colors */
@@ -3986,7 +3987,7 @@ const char *text_JUL_09[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Augustina Žao Ronga, knìze a jeho druhù, muèedníkù",
- "Rong Zhaho szent Augustin...(HU)",
+ "Zhao Rong Szent Ágoston áldozópap és társai, kínai vértanúk",
  };
 const char *text_JUL_09_CZOP[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",
@@ -4114,6 +4115,15 @@ const char *text_JUL_17_CZOP[POCET_JAZYKOV + 1] =
  "Bl. Èeslava z Polska, knìze",
  "hu_",
  };
+const char *text_JUL_18_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Boldog Hedvig királyné",
+ };
 const char *text_JUL_20[POCET_JAZYKOV + 1] = 
 {"Sv. Apolinára, biskupa a muèeníka",
  "Sv. Apolináøe, biskupa a muèedníka",
@@ -4121,7 +4131,7 @@ const char *text_JUL_20[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Apolináøe, biskupa a muèedníka",
- "(nincs Magyarországon)",
+ "Apolinárius szent púspok...(HU)",
  };
 const char *text_JUL_21[POCET_JAZYKOV + 1] = 
 {"Sv. Vavrinca z Brindisi, kòaza a uèite¾a Cirkvi",
@@ -4157,7 +4167,16 @@ const char *text_JUL_24[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Šarbela Makhlúfa, knìze",
+ "Sarbel szent Makhluf (HU)",
+ };
+const char *text_JUL_24_HU[POCET_JAZYKOV + 1] = 
+{"",
  "",
+ "",
+ "",
+ "",
+ "",
+ "Árpád-házi szent Kinga szûz",
  };
 const char *text_JUL_25[POCET_JAZYKOV + 1] = 
 {"Sv. Jakuba, apoštola",

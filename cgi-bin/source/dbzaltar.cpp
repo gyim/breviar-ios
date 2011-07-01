@@ -17260,7 +17260,7 @@ label_25_MAR:
 					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
 					if(_global_jazyk == JAZYK_HU){
-						_global_svaty1.typslav_lokal = LOKAL_SLAV_PECSI_EGYH_VEDO; /* 2011-06-07: pridanÈ */
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_PECSI_EGYH_PATRON; /* 2011-06-07: pridanÈ */
 					}
 					break;
 				case 30: /* MES_JUN -- 30JUN */
@@ -18214,6 +18214,35 @@ label_25_MAR:
 						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK; /* 2010-08-03: pridanÈ */
 					}
+					else if(_global_jazyk == JAZYK_HU){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 12; /* lubovolne spomienky */
+						mystrcpy(_global_svaty1.meno, text_JUL_17_SK[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VIACERI);
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+					}
 					else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
@@ -18284,6 +18313,32 @@ label_25_MAR:
 							_global_svaty2.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridanÈ */
 						}/* czop only */
 					}
+					break;
+				case 18: /* MES_JUL -- 18JUL */
+					if(poradie_svaty == 1){
+						/* definovanie parametrov pre modlitbu */
+						if(query_type != PRM_DETAILY)
+							set_spolocna_cast(sc, poradie_svaty);
+
+						modlitba = MODL_RANNE_CHVALY;
+						_vlastna_cast_benediktus;
+						_vlastna_cast_modlitba;
+
+						modlitba = MODL_POSV_CITANIE;
+						_vlastna_cast_2citanie;
+						_vlastna_cast_modlitba;
+
+						modlitba = MODL_VESPERY;
+						_vlastna_cast_magnifikat;
+						_vlastna_cast_modlitba;
+						break;
+					}
+					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+					_global_svaty1.smer = 12; /* lubovolne spomienky */
+					mystrcpy(_global_svaty1.meno, text_JUL_18_HU[_global_jazyk], MENO_SVIATKU);
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA);
+					_global_svaty1.farba = LIT_FARBA_BIELA;
+					_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
 					break;
 				case 20: /* MES_JUL -- 20JUL */
 					/* 2008-12-04: pridanÈ pre czop;
@@ -18420,32 +18475,60 @@ label_25_MAR:
 				case 24: /* MES_JUL -- 24JUL */
 					/* 2008-07-18: pridanÈ
 					 * 2009-07-15: podæa direktÛria upraven· na SLAV_LUB_SPOMIENKA
+					 * 2011-07-01: pre HU odvetvenÈ
 					 */
-					if(poradie_svaty == 1){
-						/* definovanie parametrov pre modlitbu */
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
+					if(_global_jazyk == JAZYK_HU){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
 
-						modlitba = MODL_RANNE_CHVALY;
-						// _vlastna_cast_benediktus;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
 
-						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_2citanie;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
 
-						modlitba = MODL_VESPERY;
-						// _vlastna_cast_magnifikat;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
 
-						break;
+							break;
+						}
+						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty1.meno, text_JUL_24_HU[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VIACERI);
+						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+					}/* HU only */
+					else{
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							// _vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_2citanie;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_VESPERY;
+							// _vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 12; /* lubovolne spomienky */
+						mystrcpy(_global_svaty1.meno, text_JUL_24[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
 					}
-					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-					_global_svaty1.smer = 12; /* lubovolne spomienky */
-					mystrcpy(_global_svaty1.meno, text_JUL_24[_global_jazyk], MENO_SVIATKU);
-					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
-					_global_svaty1.farba = LIT_FARBA_BIELA;
-					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
 					break;
 				case 25: /* MES_JUL -- 25JUL */
 					if(poradie_svaty == 1){
@@ -18514,6 +18597,9 @@ label_25_MAR:
 						/* 2006-08-07: upravenÈ lebo ûili v manûelstve :) pridan· moûnosù aj pre sv. ûeny - 2006-08-19 */
 					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
+					if(_global_jazyk == JAZYK_HU){
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_VESZPREMI_EGYH_PATRON;
+					}
 					break;
 				case 27: /* MES_JUL -- 27JUL */
 					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
@@ -18591,7 +18677,7 @@ label_25_MAR:
 					break;
 				case 30: /* MES_JUL -- 30JUL */
 				/* 2004-08-14, duurko
-				 * Sviatok Bl. Zdenky Schelingovej, panny a muËenice, ako 2. moznost.
+				 * Sviatok Bl. Zdenky Schelingovej, panny a muËenice, ako 2. moûnosù
 				 * Upozornil Jan Kusenda <exonkuda@savba.sk>.
 				 */
 					if(poradie_svaty == 1){
@@ -18701,7 +18787,8 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_RANNE_CHVALY;
-							if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ_OP)) // v slovenskom brevi·ri m· vlastn˝ hymnus, v Ëeskom nie; 2008-09-09; v dominik·nskom ·no; 2009-09-09
+							// v slovenskom brevi·ri m· vlastn˝ hymnus, v Ëeskom nie; 2008-09-09; v dominik·nskom ·no; 2009-09-09; aj v maÔarskom vlastn˝ hymnus; 2011-07-01
+							if(_global_jazyk != JAZYK_CZ)
 								_vlastna_cast_hymnus;
 							_vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
@@ -18711,7 +18798,8 @@ label_25_MAR:
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
-							if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ_OP)) // v slovenskom brevi·ri m· vlastn˝ hymnus, v Ëeskom nie; 2008-09-09; v dominik·nskom ·no; 2009-09-09
+							// v slovenskom brevi·ri m· vlastn˝ hymnus, v Ëeskom nie; 2008-09-09; v dominik·nskom ·no; 2009-09-09; aj v maÔarskom vlastn˝ hymnus; 2011-07-01
+							if(_global_jazyk != JAZYK_CZ)
 								_vlastna_cast_hymnus;
 							_vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
