@@ -35,7 +35,17 @@
 /* globalne premenne -- deklarovane v liturgia.h, definovane tu */
 /* 18/02/2000A.D. */
 
+extern short int _global_poradie_svaty;
+
 extern short int query_type; /* premenna obsahujuca PRM_..., deklarovana v mydefs.h */
+
+#define EXPORT_DNA_VIAC_DNI_TXT 4 /* 2011-02-02: pridané */
+#define EXPORT_DNA_VIAC_DNI_SIMPLE 3 /* 2005-03-21: Pridany dalsi typ exportu; 2011-04-13: nerozumiem naèo; asi sa nepoužíva... */
+#define EXPORT_DNA_JEDEN_DEN 1
+#define EXPORT_DNA_VIAC_DNI 2
+#define EXPORT_DNA_DNES 0
+
+extern void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho);
 
 /* globalna premenna, do ktorej sa ukladaju info o analyzovanom dni
  * pouziva ju void nove_rozbor_dna() funkcia */
@@ -171,6 +181,8 @@ extern short int _global_opt_batch_monthly;
 /* 2009-08-05, pridané */
 extern short int _global_hlavicka_Export;
 // extern char name_batch_html_file[MAX_STR];
+/* 2011-07-01, pridané */
+extern short int _global_patka_Export;
 
 /* 2011-05-05: kvôli možnosti serif/sans serif override (z css sme odstránili font-family) */
 extern char _global_css_font_family[SMALL];

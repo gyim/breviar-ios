@@ -587,6 +587,14 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPTF2_FONT_SIZE "of2fs"
 #endif
 
+// zobrazovaù navig·ciu v textoch modlitieb
+#define MODL_OPTF2_NAVIGATION 86
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF2_NAVIGATION "MODL_OPTF2_NAVIGATION"
+#else
+	#define STR_MODL_OPTF2_NAVIGATION "of2nav"
+#endif
+
 /* 2008-08-08: PridanÈ kvÙli rÙznym css */
 #define CSS 40
 #ifdef LONG_PARAM_NAMES

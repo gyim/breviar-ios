@@ -238,6 +238,7 @@
 /*   2011-05-13a.D. | doplnenie font size                                  */
 /*   2011-05-24a.D. | pridan˝ "inverzn˝" öt˝l pre mobilnÈ zariadenia       */
 /*                    (Ëierne pozadie, biely text)                         */
+/*   2011-07-01a.D. | prv˝ krok k zapracovaniu navig·cie do modlitieb      */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -464,6 +465,8 @@ short int _global_opt_export_date_format = EXPORT_DATE_SIMPLE;
 short int _global_opt_batch_monthly = NIE;
 /* 2009-08-05, pridanÈ */
 short int _global_hlavicka_Export = 0;
+/* 2011-07-01, pridanÈ */
+short int _global_patka_Export = 0;
 
 /* globalna premenna, co obsahuje string vypisany na obrazovku */
 char *_global_string;
@@ -501,6 +504,8 @@ char _global_export_navig_hore_day[SMALL] = DEFAULT_MONTH_EXPORT;
 char _global_css_font_family[SMALL] = DEFAULT_FONT_FAMILY_SERIF; // zatiaæ len pevnÈ reùazce; Ëasom moûno bude premenn· pre n·zov fontu
 /* 2011-05-13: kvÙli moûnosti voæby veækosti pÌsma */
 char _global_css_font_size[SMALL] = STR_EMPTY;
+
+short int _global_poradie_svaty = 0;
 
 /* ------------------------------------------------------------------- */
 
@@ -1125,6 +1130,7 @@ short int setForm(void){
 				case 2: strcat(local_str, STR_MODL_OPTF2_FONT_FAMILY); break;
 				case 3: strcat(local_str, STR_MODL_OPTF2_FONT_NAME_CHOOSER); break;
 				// case 4: strcat(local_str, STR_MODL_OPTF2_FONT_SIZE); break;
+				case 5: strcat(local_str, STR_MODL_OPTF2_NAVIGATION); break;
 			}// switch(i)
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF_HTML_EXPORT[i]);
@@ -4401,11 +4407,6 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok){
 	return ret;
 }/* _rozbor_dna() */
 
-#define EXPORT_DNA_VIAC_DNI_TXT 4 /* 2011-02-02: pridanÈ */
-#define EXPORT_DNA_VIAC_DNI_SIMPLE 3 /* 2005-03-21: Pridany dalsi typ exportu; 2011-04-13: nerozumiem naËo; asi sa nepouûÌva... */
-#define EXPORT_DNA_JEDEN_DEN 1
-#define EXPORT_DNA_VIAC_DNI 2
-#define EXPORT_DNA_DNES 0
 /* 08/03/2000A.D. -- pridane init_global_string(int, int, int) s troma
  * parametrami, lebo sa vyskytla potreba (zeleny stvrtok), ze meno sviatku
  * zavisi od modlitby
@@ -6742,6 +6743,14 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		}
 		Export("</select>\n");
 	}/* if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_SIZE_CHOOSER) == BIT_OPT_2_FONT_SIZE_CHOOSER) */
+
+	if(_global_system == SYSTEM_RUBY){
+		/* pole (checkbox) WWW_MODL_OPTF2_NAVIGATION */
+		Export("<br>");
+		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF2_NAVIGATION, NIE);
+		Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF2_NAVIGATION, ANO, html_text_option2_navigation_explain[_global_jazyk], ((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_NAVIGATION) == BIT_OPT_2_NAVIGATION)? html_option_checked: STR_EMPTY);
+		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option2_navigation_explain[_global_jazyk], html_text_option2_navigation[_global_jazyk]);
+	}
 
 	Export("</td></tr>\n");
 
@@ -9439,6 +9448,10 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 					 */
 				}
 				else{
+					_global_den.den = d;
+					_global_den.mesiac = m;
+					_global_den.rok = r;
+					_global_poradie_svaty = s;
 					rozbor_dna_s_modlitbou(d, m, r, p, s);
 				}
 			}
@@ -11895,6 +11908,7 @@ short int getForm(void){
 			case 2: strcat(local_str, STR_MODL_OPTF2_FONT_FAMILY); break;
 			case 3: strcat(local_str, STR_MODL_OPTF2_FONT_NAME_CHOOSER); break;
 			// case 4: strcat(local_str, STR_MODL_OPTF2_FONT_SIZE); break;
+			case 5: strcat(local_str, STR_MODL_OPTF2_NAVIGATION); break;
 		}/* switch(i) */
 		ptr = getenv(local_str);
 		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
@@ -12673,6 +12687,7 @@ short int parseQueryString(void){
 			case 2: strcat(local_str, STR_MODL_OPTF2_FONT_FAMILY); break;
 			case 3: strcat(local_str, STR_MODL_OPTF2_FONT_NAME_CHOOSER); break;
 			// case 4: strcat(local_str, STR_MODL_OPTF2_FONT_SIZE); break;
+			case 5: strcat(local_str, STR_MODL_OPTF2_NAVIGATION); break;
 		}/* switch(j) */
 		/* premenn· WWW_MODL_OPT2_... (nepovinn·), j = 0 aû POCET_OPT_2_HTML_EXPORT */
 		i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
@@ -13369,6 +13384,7 @@ int main(int argc, char **argv){
 	_global_opt_export_date_format = EXPORT_DATE_SIMPLE;
 	_global_opt_batch_monthly = NIE;
 	_global_hlavicka_Export = 0;
+	_global_patka_Export = 0;
 	export_monthly_druh = 0;
 	export_month_zaciatok = NIE;
 	export_month_nova_modlitba = NIE;
@@ -14098,6 +14114,8 @@ _main_SIMULACIA_QS:
 					ALERT;
 					break;
 			}/* switch(query_type) */
+
+			patka(); // 2011-07-01: doplnenÈ (eöte pred dealokovanie premenn˝ch)
 
 			_deallocate_global_var();
 			/* dealokovanie som sem presunul 24/02/2000A.D. */

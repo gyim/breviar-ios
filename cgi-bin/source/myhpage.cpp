@@ -259,7 +259,7 @@ const char *gpage[POCET_JAZYKOV + 1] = {"GenerovanÈ: ", "Generov·no: ", "Generat
 // GenerovanÈ + d·tum: "%d. %s %d, %02d:%02d:%02d" -- pÙvodne to bolo v z·tvork·ch
 const char *datum_cas_template[POCET_JAZYKOV + 1] = {"%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d", "%d. %s %d, %02d:%02d"};
 // Build: "Build: %s. "
-const char *build_template[POCET_JAZYKOV + 1] = {"<!--Verzia: %s.-->", "<!--Verze: %s.-->", "<!--Build: %s.-->", "<!--Build: %s.-->", "<!--Build: %s.-->", "<!--Verze: %s.-->", "<!--Build: %s.-->"};
+const char *build_template[POCET_JAZYKOV + 1] = {"<!--Verzia: %s -->", "<!--Verze: %s -->", "<!--Build: %s -->", "<!--Build: %s -->", "<!--Build: %s -->", "<!--Verze: %s -->", "<!--Build: %s -->"};
 // GenerovanÈ + d·tum (bez Ëasu - pre batch mÛd, aby sa æahko porovn·vali vygenerovanÈ modlitby): "%d. %s %d"
 const char *datum_template[POCET_JAZYKOV + 1] = {"%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d", "%d. %s %d"};
 
@@ -276,6 +276,11 @@ void _patka(FILE * expt){
 		_local_modlitba = MODL_VESPERY;
 	if((_local_modlitba == MODL_PRVE_KOMPLETORIUM) || (_local_modlitba == MODL_DRUHE_KOMPLETORIUM))
 		_local_modlitba = MODL_KOMPLETORIUM;
+
+	/* 2011-07-01: viackr·t sa pri exporte modlitby do HTML exportovala p‰tka; pridan· kontrola */
+	if(_global_patka_Export > 0)
+		return;
+	_global_patka_Export++;
 
 	time_t t;
 	struct tm dnes;
@@ -343,6 +348,22 @@ void _patka(FILE * expt){
 		Export_to_file(expt, "</p>");
 		Export_to_file(expt, "</center>\n");
 	}/* << predoöl· | ^ hore | nasledovn· >> */
+	else{
+#ifdef BEHAVIOUR_WEB
+		/* 2011-07-01: doplnen· moûnosù zobrazenia navig·cie v texte modlitieb */
+		if(((_local_modlitba < MODL_NEURCENA) && (_local_modlitba > MODL_INVITATORIUM)) && ((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_NAVIGATION) == BIT_OPT_2_NAVIGATION)){
+			// pracovn· verzia!!!
+			// ToDo:
+			// 1. upraviù _export_rozbor_dna_buttons, aby pouûÌval export prÌpadne do s˙boru... to bude ùaûkÈ
+			// 2. odstr·niù exportovanie farby
+			// 3. umoûniù tieto tlaËidl· aj do z·hlavia --> radöej rieöiù nejakou direktÌvou "<!--{NAVIGACIA}-->" v m_... öablÛnach modlitieb
+			// Export_to_file(expt, "tu bud˙ linky prev/next");
+//			Export("<table align=\"center\"><tr><td>\n");
+//			_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN, _global_poradie_svaty);
+//			Export("</td></tr></table>\n");
+		}
+#endif
+	}/* navig·cia */
 
 	Export_to_file(expt, (char *)html_footer_1);
 
@@ -355,12 +376,13 @@ void _patka(FILE * expt){
 	}
 
 	Export("\n");
-	/* 2010-02-15: celÈ zapozn·mkovanÈ */
-	if(1 == 1 || _global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
-		Export_to_file(expt, "<"HTML_P_PATKA">\n");
-	}
-	else{
-		Export_to_file(expt, "<"HTML_P_PATKA">%s\n", gpage[_global_jazyk]);
+	/* 2010-02-15: celÈ zapozn·mkovanÈ 
+	 * 2011-07-01: pre web sa exportuje
+	 */
+	Export_to_file(expt, "<"HTML_P_PATKA">\n");
+#ifdef BEHAVIOUR_WEB
+	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
+		Export_to_file(expt, "%s\n", gpage[_global_jazyk]);
 		/* Export_to_file(expt, "(%s). ", ctime(&t) + 4); */
 		/* 2008-12-22: odvetvenÈ - pre commandline export (do s˙boru) sa netlaËÌ Ëasov· zloûka, kedy bolo HTML generovanÈ */
 #if defined(EXPORT_TO_FILE) && !defined(IO_ANDROID)
@@ -380,14 +402,14 @@ void _patka(FILE * expt){
 			);
 #endif
 		Export_to_file(expt, ". ");
-
-		/* nezabudni zmenit #define BUILD_DATE v mydefs.h (2003-07-15) */
-		Export_to_file(expt, (char *)build_template[_global_jazyk], BUILD_DATE);
-
-		/* zapoznamkovane, 2003-06-30 */
-		/* Export_to_file(expt, "KÛdovanie Windows-1250 (Central European).\n"); */
-		Export_to_file(expt, "<br>\n");
 	}
+	/* nezabudni zmenit #define BUILD_DATE v mydefs.h (2003-07-15) */
+	Export_to_file(expt, (char *)build_template[_global_jazyk], BUILD_DATE);
+
+	/* zapoznamkovane, 2003-06-30 */
+	/* Export_to_file(expt, "KÛdovanie Windows-1250 (Central European).\n"); */
+	Export_to_file(expt, "<br>\n");
+#endif
 
 	/* pridana stranka cfg_HTTP_ADDRESS_default, 12/04/2000A.D. */
 	Export_to_file(expt, "<"HTML_LINK_NORMAL" href=\"%s\" target=\"_top\">%s</a>\n", cfg_HTTP_ADDRESS_default, cfg_HTTP_DISPLAY_ADDRESS_default);

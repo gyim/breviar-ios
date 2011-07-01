@@ -1686,6 +1686,24 @@ const char *html_text_option2_font_family_explain[POCET_JAZYKOV + 1] =
  "Válasszon talpas (Serif) vagy talp nélküli (Sans Serif) betût, kényelem szerint. A böngészõ ablakban mutatott betûtípus az alapértelmezett."
 };
 
+const char *html_text_option2_navigation[POCET_JAZYKOV + 1] = 
+{"zobrazi navigáciu v textoch modlitieb",
+ "xxx", 
+ "xxx", 
+ "",
+ "",
+ "xxx", 
+ "xxx", 
+};
+const char *html_text_option2_navigation_explain[POCET_JAZYKOV + 1] = 
+{"Èi sa majú zobrazova hypertextové odkazy na ostatné modlitby daného dòa, príp. predošlı/nasledovnı deò priamo v texte modlitby.", 
+ "xxx", 
+ "xxx", 
+ "",
+ "", 
+ "xxx", 
+ "xxx", 
+};
 /* 2011-05-06: doplnené */
 const char *html_text_font_name[POCET_JAZYKOV + 1] = 
 {"alebo poui písmo", 

@@ -1203,7 +1203,7 @@ extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
 #define BIT_OPT_1_SKRY_POPIS              128
 #define BIT_OPT_1_ZALMY_ZO_SVIATKU        256
 
-#define POCET_OPT_2_HTML_EXPORT             5 /* jednotlivÈ komponenty option 2 -- bity pre force option 2 */
+#define POCET_OPT_2_HTML_EXPORT             6 /* jednotlivÈ komponenty option 2 -- bity pre force option 2 */
 extern short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];
 /* 2011-04-12: ˙prava v˝znamu (a interpret·cie) option 2 (rozliËnÈ prepÌnaËe pre [online aj offline] export, napr. tlaËidl·, zobrazenie d·tumov a podobne) */
 #define BIT_OPT_2_ISO_DATUM                 1
@@ -1211,6 +1211,7 @@ extern short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];
 #define BIT_OPT_2_FONT_FAMILY               4 // 0 = Serif, 1 = Sans Serif
 #define BIT_OPT_2_FONT_NAME_CHOOSER         8 // 1 = zobraziù drop-down list s moûnosùou voæby font (family) name
 #define BIT_OPT_2_FONT_SIZE_CHOOSER        16 // 1 = zobraziù drop-down list s moûnosùou voæby veækosti fontu
+#define BIT_OPT_2_NAVIGATION               32 // 1 = zobraziù navig·ciu v modlitbe (predoöl·, nasledovn· modlitba a pod.)
 
 #define POCET_OPT_4_OFFLINE_EXPORT          1 /* jednotlivÈ komponenty option 4 -- bity pre force option 4 */
 extern short int _global_opt_offline_export[POCET_OPT_4_OFFLINE_EXPORT];
