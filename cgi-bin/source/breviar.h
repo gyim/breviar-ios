@@ -45,7 +45,10 @@ extern short int query_type; /* premenna obsahujuca PRM_..., deklarovana v mydef
 #define EXPORT_DNA_VIAC_DNI 2
 #define EXPORT_DNA_DNES 0
 
-extern void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho);
+extern void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short int export_farbu = ANO);
+extern void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes = ANO);
+
+extern short int _global_pocet_navigacia; /* 2011-07-03: poèet prejdených/spracovaných parametrov PARAM_NAVIGACIA */
 
 /* globalna premenna, do ktorej sa ukladaju info o analyzovanom dni
  * pouziva ju void nove_rozbor_dna() funkcia */

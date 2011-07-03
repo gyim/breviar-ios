@@ -348,22 +348,6 @@ void _patka(FILE * expt){
 		Export_to_file(expt, "</p>");
 		Export_to_file(expt, "</center>\n");
 	}/* << predoöl· | ^ hore | nasledovn· >> */
-	else{
-#ifdef BEHAVIOUR_WEB
-		/* 2011-07-01: doplnen· moûnosù zobrazenia navig·cie v texte modlitieb */
-		if(((_local_modlitba < MODL_NEURCENA) && (_local_modlitba > MODL_INVITATORIUM)) && ((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_NAVIGATION) == BIT_OPT_2_NAVIGATION)){
-			// pracovn· verzia!!!
-			// ToDo:
-			// 1. upraviù _export_rozbor_dna_buttons, aby pouûÌval export prÌpadne do s˙boru... to bude ùaûkÈ
-			// 2. odstr·niù exportovanie farby
-			// 3. umoûniù tieto tlaËidl· aj do z·hlavia --> radöej rieöiù nejakou direktÌvou "<!--{NAVIGACIA}-->" v m_... öablÛnach modlitieb
-			// Export_to_file(expt, "tu bud˙ linky prev/next");
-//			Export("<table align=\"center\"><tr><td>\n");
-//			_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN, _global_poradie_svaty);
-//			Export("</td></tr></table>\n");
-		}
-#endif
-	}/* navig·cia */
 
 	Export_to_file(expt, (char *)html_footer_1);
 

@@ -432,6 +432,8 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 #define PARAM_MODL_SPOMPOST "MODL_SPOMPOST"
 /* 2011-03-16: pridané kvôli spomienkam a ¾ubovo¾ným spomienkam v pôstnom období (zobrazenie po 2. èítaní v posv. èítaní) */
 #define PARAM_CITANIE2_SPOMPOST "CITANIE2_SPOMPOST"
+/* 2011-07-03: pridané kvôli navigácii v modlitbe */
+#define PARAM_NAVIGACIA     "NAVIGACIA"
 
 /* dalsie parametre: specificke pre obdobie */
 /* Od nedele Pánovho zmàtvychvstania až do Druhej ve¾konoènej nedele vrátane,
