@@ -5919,10 +5919,13 @@ void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO 
 	short int zmena_mesiaca = NIE;
 	short int som_v_tabulke = ANO; /* 2009-08-26: èi sa pouíva tabu¾ka; bene pre web áno, pre export pre mobilné zariadenia [export_monthly_druh >= 3] netreba tabu¾ku */
 
+	short int _local_den = _global_den.den;
+	short int _local_mesiac = _global_den.mesiac;
+	short int _local_rok = _global_den.rok;
+
 	if(dnes_dnes != ANO){
 		/* 2011-07-05: pre tlaèidlá predošlého a nasledujúceho dòa pre navigáciu v modlitbe treba poui inı dátum ako _global_den, 
 		 * nako¾ko pre vešpery v predveèer nedele resp. slávnosti sa dátum posunul o jeden deò...
-		 * ToDo: ak by sa do budúcnosti ukázalo, e sa _global_den pouíva, tak treba odloi pôvodné hodnoty pre deò, mesiac a rok a na konci tejto funkcie ich vráti spä do _global_den
 		 */
 		_global_den.den = _global_vstup_den;
 		_global_den.mesiac = _global_vstup_mesiac;
@@ -6339,6 +6342,9 @@ void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO 
 		/* inak buttony nedávam */
 		Log("--- _export_rozbor_dna_buttons_dni(): buttony nedávam...\n");
 	}
+	_global_den.den = _local_den;
+	_global_den.mesiac = _local_mesiac;
+	_global_den.rok = _local_rok;
 	Log("--- _export_rozbor_dna_buttons_dni(typ == %d) -- end\n", typ); /* 2005-03-22: Pridane */
 }/* _export_rozbor_dna_buttons_dni */
 
