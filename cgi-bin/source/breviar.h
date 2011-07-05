@@ -35,6 +35,9 @@
 /* globalne premenne -- deklarovane v liturgia.h, definovane tu */
 /* 18/02/2000A.D. */
 
+extern short int _global_vstup_den;
+extern short int _global_vstup_mesiac;
+extern short int _global_vstup_rok;
 extern short int _global_poradie_svaty;
 
 extern short int query_type; /* premenna obsahujuca PRM_..., deklarovana v mydefs.h */

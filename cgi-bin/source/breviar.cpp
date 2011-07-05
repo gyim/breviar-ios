@@ -508,6 +508,9 @@ char _global_css_font_family[SMALL] = DEFAULT_FONT_FAMILY_SERIF; // zatiaæ len p
 /* 2011-05-13: kvÙli moûnosti voæby veækosti pÌsma */
 char _global_css_font_size[SMALL] = STR_EMPTY;
 
+short int _global_vstup_den = 0;
+short int _global_vstup_mesiac = 0;
+short int _global_vstup_rok = 0;
 short int _global_poradie_svaty = 0;
 
 short int _global_pocet_navigacia = 0; /* 2011-07-03: poËet prejden˝ch/spracovan˝ch parametrov PARAM_NAVIGACIA */
@@ -5916,6 +5919,16 @@ void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO 
 	short int zmena_mesiaca = NIE;
 	short int som_v_tabulke = ANO; /* 2009-08-26: Ëi sa pouûÌva tabuæka; beûne pre web ·no, pre export pre mobilnÈ zariadenia [export_monthly_druh >= 3] netreba tabuæku */
 
+	if(dnes_dnes != ANO){
+		/* 2011-07-05: pre tlaËidl· predoölÈho a nasleduj˙ceho dÚa pre navig·ciu v modlitbe treba pouûiù in˝ d·tum ako _global_den, 
+		 * nakoæko pre veöpery v predveËer nedele resp. sl·vnosti sa d·tum posunul o jeden deÚ...
+		 * ToDo: ak by sa do bud˙cnosti uk·zalo, ûe sa _global_den pouûÌva, tak treba odloûiù pÙvodnÈ hodnoty pre deÚ, mesiac a rok a na konci tejto funkcie ich vr·tiù sp‰ù do _global_den
+		 */
+		_global_den.den = _global_vstup_den;
+		_global_den.mesiac = _global_vstup_mesiac;
+		_global_den.rok = _global_vstup_rok;
+	}
+
 	if(_global_opt_batch_monthly == ANO && export_monthly_druh > 2){
 		som_v_tabulke = NIE;
 		Log("-- _export_rozbor_dna_buttons(typ == %d): keÔûe sme v _global_opt_batch_monthly == ANO a export_monthly_druh (%d) > 2, nebudeme exportovaù tabuæku...\n", typ, export_monthly_druh);
@@ -9527,9 +9540,9 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 					 */
 				}
 				else{
-					_global_den.den = d;
-					_global_den.mesiac = m;
-					_global_den.rok = r;
+					_global_vstup_den = d;
+					_global_vstup_mesiac = m;
+					_global_vstup_rok = r;
 					_global_poradie_svaty = s;
 					rozbor_dna_s_modlitbou(d, m, r, p, s);
 				}
@@ -9780,6 +9793,10 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 	}
 	else{
 		/* ak je urËen· modlitba, postupujeme rovnako ako v _main_rozbor_dna */
+		_global_vstup_den = datum.den;
+		_global_vstup_mesiac = datum.mesiac;
+		_global_vstup_rok = dnes.tm_year;
+		_global_poradie_svaty = s;
 		rozbor_dna_s_modlitbou(datum.den, datum.mesiac, dnes.tm_year, p, s);
 	}
 
