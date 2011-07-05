@@ -468,9 +468,9 @@ const char *nazov_slavenia_lokal[] =
 ,"Húsvét 2. vasárnapja — Az Isteni Irgalmasság vasárnapja"
 ,"A Szombathelyi egyházmegyében"
 ,"Pozsonyi Fõegyházmegye és a Nagyszombati Egyházmegye fõpátronusa"
-,"A Szeged-Csanádi egyházmegye északi részében: az egyházmegye védöszentje; fõünnep"
+,"A Szeged-Csanádi egyházmegye északi részében: az egyházmegye védõszentje; fõünnep"
 ,"A Pécsi egyházmegyében"
-,"A Pécsi egyházmegyében: az egyházmegye védöszentje; ünnep"
+,"A Pécsi egyházmegyében: az egyházmegye védõszentje; ünnep"
 ,"A Szeged-Csanádi egyházmegye északi részében; ünnep"
 ,"A Veszprémi egyházmegyében: Szent Anna, az egyházmegye védõszentje; ünnep"
 };
@@ -1789,7 +1789,7 @@ const char *html_text_inv_slavaotcu[POCET_JAZYKOV + 1] =
  "<p>&nbsp;&nbsp;&nbsp; <font size=\"-1\"><font color=\"#ff0000\">Nasleduje </font>Gloria Patri<font color=\"#ff0000\"> a opakuje sa antifóna.</font></font>", 
  "<p>&nbsp;&nbsp;&nbsp; <font size=\"-1\"><font color=\"#ff0000\">Nasleduje </font>Sláva Otcu<font color=\"#ff0000\"> a opakuje sa antifóna.</font></font>", 
  "<p>&nbsp;&nbsp;&nbsp; <font size=\"-1\"><font color=\"#ff0000\">Následuje </font>Sláva Otci<font color=\"#ff0000\"> a opakuje se antifona.</font></font>", 
- "<p>&nbsp;&nbsp;&nbsp; <font size=\"-1\"><font color=\"#ff0000\">Nasleduje </font>Sláva Otcu<font color=\"#ff0000\"> a opakuje sa antifóna.</font></font>", 
+ "<p>&nbsp;&nbsp;&nbsp; <font size=\"-1\"><font color=\"#ff0000\">Következik a </font>Dicsõség az Atyának<font color=\"#ff0000\"> és megismételjük az antifónát.</font></font>", 
 };
 
 /* 2009-08-04, doplnené: pre batch mód */
@@ -3331,7 +3331,7 @@ const char *text_MAJ_31[POCET_JAZYKOV + 1] =
  "",
  "",
  "Navštívení Panny Marie",
- "Szûz Mária látogatása erzsébetnél<br>(Sarlós Boldogasszony)",
+ "Szûz Mária látogatása Erzsébetnél<br>(Sarlós Boldogasszony)",
  };
 
 /* --------------- 00 pohyblivé slávenia --------------- */
@@ -4006,7 +4006,7 @@ const char *text_JUL_09[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Augustina Žao Ronga, knìze a jeho druhù, muèedníkù",
- "Zhao Rong Szent Ágoston áldozópap és társai, kínai vértanúk",
+ "Szent Zhao Rong Ágoston áldozópap és társai, kínai vértanúk",
  };
 const char *text_JUL_09_CZOP[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",
@@ -4159,7 +4159,7 @@ const char *text_JUL_20[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Apolináøe, biskupa a muèedníka",
- "Apolinárius szent púspok...(HU)",
+ "Szent Apollinaris püspök és vértanú",
  };
 const char *text_JUL_21[POCET_JAZYKOV + 1] = 
 {"Sv. Vavrinca z Brindisi, kòaza a uèite¾a Cirkvi",
@@ -4195,7 +4195,7 @@ const char *text_JUL_24[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Šarbela Makhlúfa, knìze",
- "Sarbel szent Makhluf (HU)",
+ "Szent Charbel Makhlouf áldozópap",
  };
 const char *text_JUL_24_HU[POCET_JAZYKOV + 1] = 
 {"",
@@ -4204,7 +4204,7 @@ const char *text_JUL_24_HU[POCET_JAZYKOV + 1] =
  "",
  "",
  "",
- "Árpád-házi szent Kinga szûz",
+ "Árpád-házi szent Kinga szûz", // 2011-07-05: sv. Sarbela v HU majú 27. júla
  };
 const char *text_JUL_25[POCET_JAZYKOV + 1] = 
 {"Sv. Jakuba, apoštola",

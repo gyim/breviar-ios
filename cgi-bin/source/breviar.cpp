@@ -241,6 +241,7 @@
 /*   2011-07-01a.D. | prvı krok k zapracovaniu navigácie do modlitieb      */
 /*   2011-07-03a.D. | navigácia zapracovaná                                */
 /*                    ToDo: dorieši 4. júla; vešpery berú deò 5. júla     */
+/*                    ešte: predsunú èítanie parametrov niekam vyššie do spoloènej èasti; pre "lit. obd." sa tam dáva 1.1.1900 (neurèenı _global_den)... */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
