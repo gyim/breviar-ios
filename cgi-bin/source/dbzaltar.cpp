@@ -644,12 +644,14 @@ void _set_zalm3(short int modlitba, const char *file, const char *anchor){
 			/* predpoludnim */
 			mystrcpy(_global_modl_cez_den_9.zalm3.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_cez_den_9.zalm3.anchor, anchor, MAX_STR_AF_ANCHOR);
-			if(modlitba == MODL_PREDPOLUDNIM) break;
+			if(modlitba == MODL_PREDPOLUDNIM)
+				break;
 		case MODL_NAPOLUDNIE:
 			/* napoludnie */
 			mystrcpy(_global_modl_cez_den_12.zalm3.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_cez_den_12.zalm3.anchor, anchor, MAX_STR_AF_ANCHOR);
-			if(modlitba == MODL_NAPOLUDNIE) break;
+			if(modlitba == MODL_NAPOLUDNIE)
+				break;
 		case MODL_POPOLUDNI:
 			/* popoludni */
 			mystrcpy(_global_modl_cez_den_3.zalm3.file, file, MAX_STR_AF_FILE);

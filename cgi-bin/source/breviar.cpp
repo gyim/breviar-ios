@@ -178,7 +178,7 @@
 /*   2011-02-02a.D. | pouûitÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3            */
 /*   2011-02-02a.D. | dokonËen˝ liturgick˝ kalend·r pre SDB a SJ, ˙pravy   */
 /*   2011-02-02a.D. | zaËiatok PRM_TXT -- export LK pre RKC (Peùo Zimen)   */
-/*                  - ToDo: 1. doladiù export &nbsp; a <p> HTML tagov      */
+/*                  - eöte: 1. doladiù export &nbsp; a <p> HTML tagov      */
 /*                          2. nejako popracovaù na "zlepenÌ" pre 1 deÚ    */
 /*   2011-03-07a.D. | MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ */
 /*                    lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1..3*/
@@ -208,7 +208,7 @@
 /*   2011-04-08a.D. | ˙prava v˝znamu (a interpret·cie) option 0            */
 /*   2011-04-11a.D. | ˙prava v˝znamu (a interpret·cie) option 1;           */
 /*                    rozdelenie na jednotlivÈ bit-komponenty              */
-/*                  - ToDo: -- option 3 zahrn˙ù ako bit do option 1;       */
+/*                  - eöte: -- option 3 zahrn˙ù ako bit do option 1;       */
 /*                          -- option 0 rozbiù tieû na bitovÈ komponenty   */
 /*   2011-04-12a.D. | _global_opt 5 je jedn˝m z bitov _global_opt 1        */
 /*                  - tlaËidlo "Detaily" netreba, ZOBRAZ_BUTTON_DETAILY    */
@@ -1478,7 +1478,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 							DetailLog("\trest     == %s\n", rest);
 							DetailLog("\trefrest  == %s\n", refrest);
 							if((refrest != NULL) && !(equals(refrest, STR_EMPTY))){
-								/* ToDo: doplniù nevypisovanie refbuff, ak refrest obsahuje medzeru */
+								// [ToDo]: doplniù nevypisovanie refbuff, ak refrest obsahuje medzeru
 								if(EXPORT_REFERENCIA){
 									Export("%s", remove_diacritics(refrest));
 								}
@@ -1776,7 +1776,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 		else{
 			strbuff[buff_index++] = (char)c;
 			/* 2011-03-29: doplnen· kontrola, Ëi nejde o osamoten˝ znak '{' */
-			if((isbuff == 1) && ((strlen(strbuff) > MAX_BUFFER - 1)) || (buff_index > MAX_BUFFER - 1)){
+			if(((isbuff == 1) && (strlen(strbuff) > MAX_BUFFER - 1)) || (buff_index > MAX_BUFFER - 1)){
 				Log("pravdepodobne osamoten˝ znak '{'...\n");
 				isbuff = 0;
 				if(write == ANO){
@@ -6710,7 +6710,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 		Export("<option%s>%s\n", 
 			((_global_kalendar == KALENDAR_SK_CSSR) || (_global_kalendar == KALENDAR_SK_SVD) || (_global_kalendar == KALENDAR_SK_SJ))? STR_EMPTY: html_option_selected,
-			nazov_slavenia_lokal_kalendar[KALENDAR_VSEOBECNY_SK] /* nazov_kalendara[KALENDAR_VSEOBECNY_SK][_global_jazyk] */); // todo -- pre viacerÈ jazyky
+			nazov_slavenia_lokal_kalendar[KALENDAR_VSEOBECNY_SK] /* nazov_kalendara[KALENDAR_VSEOBECNY_SK][_global_jazyk] */); // ToDo -- pre viacerÈ jazyky
 		Export("<option%s>%s\n", 
 			(_global_kalendar == KALENDAR_SK_CSSR)? html_option_selected: STR_EMPTY,
 			nazov_slavenia_lokal_kalendar[KALENDAR_SK_CSSR] /* nazov_kalendara[KALENDAR_SK_CSSR] */);
@@ -7462,7 +7462,7 @@ void _export_rozbor_dna(short int typ){
 	}/* if((_global_den.denvt == DEN_NEDELA) || (_global_den.prik == PRIKAZANY_SVIATOK) || (_global_den.smer < 5)) */
 	else if(_global_pocet_svatych > 0){
 		/* sviatky (spomienky, ls) svatych */
-		if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer == 9) && (_global_svaty1.smer == 12)){
+		if((_global_den.smer > _global_svaty1.smer) || ((_global_den.smer == 9) && (_global_svaty1.smer == 12))){
 			/* 2009-01-05: Vlado K. ma upozornil, ûe ak je smer sv‰t˝ == 12, ale deÚ je 9 (bod 59. smernÌc o LH a kalend·ri, Ë. 12),
 			 *             bolo by lepöie pon˙knuù najprv deÚ a aû potom ostatnÈ sl·venia 
 			 * 2010-05-21: Rastislav Hamr·Ëek SDB <rastohamracek@sdb.sk> upozornil defacto na to istÈ ako Vlado: aby to bolo podæa direktÛria
@@ -7686,7 +7686,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 			mystrcpy(_local_export_navig_hore,_global_export_navig_hore, SMALL);
 		if(index_pre_mesiac_otvoreny == ANO){
 			/* najskÙr do zoznamu mesiacov vyprintujeme odkaz na index.htm danÈho mesiaca (ak bolo prvÈho resp. zaËiatok exportu)... */
-			if((_global_den.den == 1 && (export_monthly_druh >= 1 && modlitba == MODL_INVITATORIUM || export_monthly_druh != 1)) || export_month_zaciatok == ANO){
+			if((_global_den.den == 1 && ((export_monthly_druh >= 1 && modlitba == MODL_INVITATORIUM) || export_monthly_druh != 1)) || export_month_zaciatok == ANO){
 				// sem sa uû name_batch_month_file dostane s upraven˝m oddeæovaËom STR_PATH_SEPARATOR_HTML; upravenÈ v _main_batch_mode()
 				fprintf(batch_html_file, "<li><a href=\"%s\">%s %d</a></li>\n", name_batch_month_file, nazov_mesiaca(_global_den.mesiac - 1), _global_den.rok);
 				export_month_zaciatok = NIE;
@@ -7906,7 +7906,7 @@ void _export_rozbor_dna_batch(short int typ, short int modlitba = MODL_NEURCENA,
 		/* sviatky (spomienky, ls) svatych */
 		/* 2010-07-28: doplnenÈ alternatÌvne porovnanie aj s _global_svaty2.smer (kvÙli dominik·nskej sl·vnosti 8.8.) */
 		if(((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)) ||
-			(_global_den.smer == 9) && (_global_svaty1.smer == 12)){
+			((_global_den.smer == 9) && (_global_svaty1.smer == 12))){
 		/* svaty */
 			execute_batch_command(1, batch_command, modlitba, d_from_m_from_r_from);
 			if(_global_pocet_svatych > 1){
@@ -10032,6 +10032,7 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 			break;
 		case OBD_VELKONOCNA_OKTAVA:
 			_global_den.smer = 2; /* veækonoËn· okt·va */
+			break;
 		case OBD_POSTNE_I:
 			if(d == DEN_NEDELA)
 				_global_den.smer = 2; /* nedele pÙstne */
@@ -11274,7 +11275,9 @@ void _main_batch_mode(
  * v linuxe treba definovat extern char **environ;
  */
 
+#ifdef OS_linux
 extern char **environ;
+#endif
 void write(void){
 	short int i = 0;
 	while (environ[i]){
@@ -11786,12 +11789,14 @@ short int getArgv(int argc, char **argv){
 					printf("\thttp://www.breviar.sk/info/parametre.htm - o parametroch\n");
 					printf("\thttp://www.breviar.sk/info/batchmode.htm - o davkovom mode (batch mode)\n");
 
-					Log("option %c (without value)\n", c, optarg); break;
+					Log("option %c (without value)\n", c, optarg);
+					break;
 				default:
 				/* znamena option uvedenu v optionstringu, pre ktoru
 				 * nebolo definovane case vyssie
 				 */
 					Log("?? getopt returned character `%c' ??\n", c);
+					break;
 			}/*switch*/
 		}/*while*/
 		if(optind < argc){
