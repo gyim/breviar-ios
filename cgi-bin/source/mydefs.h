@@ -63,7 +63,7 @@
 /***************************************************************/
 #include <stdio.h>
 
-#define BUILD_DATE "2011-07-05"
+#define BUILD_DATE "2011-07-07"
 
 #define BYTES 250
 #define SMALL 80
@@ -543,6 +543,14 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPTF1_ZALMY_SV "MODL_OPTF1_ZALMY_SV"
 #else
 	#define STR_MODL_OPTF1_ZALMY_SV "of1zsv"
+#endif
+
+// dlhšie zakonèenie responzória
+#define MODL_OPTF1_DLHE_RESP 80
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF1_DLHE_RESP "MODL_OPTF1_DLHE_RESP"
+#else
+	#define STR_MODL_OPTF1_DLHE_RESP "of1dr"
 #endif
 
 /* pre force option 2 jednotlivé bit-komponenty (parciálne vo¾by) */

@@ -502,6 +502,9 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 #define PARAM_VN_VYNECHAJ_BEGIN             "VELK_NEDELA_VYNECHAJ_BEGIN"
 #define PARAM_VN_VYNECHAJ_END               "VELK_NEDELA_VYNECHAJ_END"
 
+/* 2011-07-07: doplnenÈ kvÙli zobrazovaniu/skr˝vaniu dlhöÌch z·verov responzÛriÌ v posv‰tnom ËÌtanÌ */
+#define PARAM_DLHSIE_RESP                   "DLHSIE_RESP"
+
 /* 2011-04-04: doplnenÈ zobrazenie/skrytie ËÌslovania veröov v ûalmoch, chv·lospevoch a biblick˝ch ËÌtaniach */
 #define PARAM_CISLO_VERSA_BEGIN				"v"
 #define PARAM_CISLO_VERSA_END				"/v"
@@ -1192,7 +1195,7 @@ extern short int _global_opt_specialne[POCET_OPT_0_SPECIALNE];
 #define BIT_OPT_0_VERSE                     1
 #define BIT_OPT_0_REFERENCIE                2
 
-#define POCET_OPT_1_CASTI_MODLITBY          9 /* jednotlivÈ komponenty option 1 -- bity pre force option 1 */
+#define POCET_OPT_1_CASTI_MODLITBY         10 /* jednotlivÈ komponenty option 1 -- bity pre force option 1 */
 extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
 /* 2011-04-11: ˙prava v˝znamu (a interpret·cie) option 1 == OPT_1_CASTI_MODLITBY (zobraziù/nezobraziù najm‰ pevnÈ/nemennÈ s˙Ëasti modlitieb, ale aj inÈ, Ëo s˙/nie s˙ v LH) */
 #define BIT_OPT_1_TEDEUM                    1
@@ -1204,6 +1207,7 @@ extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
 #define BIT_OPT_1_PC_VIGILIA               64
 #define BIT_OPT_1_SKRY_POPIS              128
 #define BIT_OPT_1_ZALMY_ZO_SVIATKU        256
+#define BIT_OPT_1_DLHE_RESP               512
 
 #define POCET_OPT_2_HTML_EXPORT             6 /* jednotlivÈ komponenty option 2 -- bity pre force option 2 */
 extern short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];

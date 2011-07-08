@@ -1117,6 +1117,7 @@ short int setForm(void){
 				case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break;
 				case 7: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break;
 				case 8: strcat(local_str, STR_MODL_OPTF1_ZALMY_SV); break;
+				case 9: strcat(local_str, STR_MODL_OPTF1_DLHE_RESP); break;
 			}// switch(i)
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF_CASTI_MODLITBY[i]);
@@ -1716,6 +1717,37 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 							Log("ktor˝-je-koniec.\n");
 						}
 					}/* zakonËenie modlitby - ktor˝ je... (len SK) */
+
+					/* 2011-07-07, doplnenÈ: zobrazovanie/skr˝vanie dlhöieho zakonËenia responzÛria po druhom ËÌtanÌ (tlaËen· verzia m· kratöie zakonËenie, pokiaæ nie je responzÛrium rozdelenÈ zlomom strany, presnejöie, otoËenÌm listu) */
+
+					/* zakonËenie modlitby - Skrze... */
+					if(equals(rest, PARAM_DLHSIE_RESP)){
+						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("(start)dlhe-resp.");
+#endif
+							if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_DLHE_RESP) == BIT_OPT_1_DLHE_RESP){
+								;
+							}
+							else{
+								write = NIE;
+								Log("  ruöÌm writing to export file, kvÙli PARAM_DLHSIE_RESP...\n");
+							}
+						}// INCLUDE_BEGIN
+						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("dlhe-resp.(stop)");
+#endif
+							if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_DLHE_RESP) == BIT_OPT_1_DLHE_RESP){
+								;
+							}
+							else{
+								write = ANO;
+								Log("  op‰ù writing to export file, PARAM_DLHSIE_RESP...\n");
+							}
+							Log("resp-koniec.\n");
+						}// INCLUDE_END
+					}/* zakonËenie modlitby - Skrze... */
 
 					/* 2011-01-12: doplnenÈ voliteænÈ zobrazovanie/skr˝vanie alternatÌvnej antifÛny pre ûalmy/chv·lospevy 
 					 * 2011-01-17: upravenÈ tak, aby sa nezobrazovalo len pre spomienky sv‰t˝ch [tam spadaj˙ aj liturgickÈ sl·venia 1.1. a pod.]
@@ -11994,6 +12026,7 @@ short int getForm(void){
 			case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break;
 			case 7: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break;
 			case 8: strcat(local_str, STR_MODL_OPTF1_ZALMY_SV); break;
+			case 9: strcat(local_str, STR_MODL_OPTF1_DLHE_RESP); break;
 		}/* switch(i) */
 		ptr = getenv(local_str);
 		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
@@ -12765,6 +12798,7 @@ short int parseQueryString(void){
 			case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break;
 			case 7: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break;
 			case 8: strcat(local_str, STR_MODL_OPTF1_ZALMY_SV); break;
+			case 9: strcat(local_str, STR_MODL_OPTF1_DLHE_RESP); break;
 		}/* switch(j) */
 		/* premenn· WWW_MODL_OPTF1_... (nepovinn·), j = 0 aû POCET_OPT_1_CASTI_MODLITBY */
 		i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
