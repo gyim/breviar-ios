@@ -514,6 +514,9 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 #define PARAM_REFERENCIA_BEGIN				"r"
 #define PARAM_REFERENCIA_END				"/r"
 
+/* 2011-07-08: doplnené zobrazovanie/nezobrazenie krížika (antifóna totožná s veršom žalmu/chválospevu) */
+#define PARAM_KRIZIK				        "KRIZIK"
+
 /* stringy parametrov vstupu pre MODL_OPT..., ktore generovanie modlitby
  * ovplyvnuju */
 /* option 1 */

@@ -1352,12 +1352,16 @@ void _main_prazdny_formular(void){
 #define DetailLog emptyLog
 #define MAX_ZAKONCENIE 200
 #define EXPORT_REFERENCIA (!vnutri_myslienky || je_myslienka)
+short int antifona_pocet = 0; // 2011-07-08: poèet antifón (ant1, ant2, ant3 pre psalmódiu a ant. na benediktus/magnifikat kvôli krížikom)
+char rest_krizik[MAX_BUFFER]; // 2011-07-08: pre to, èo je za krížikom v antifóne
 void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 	short int c, buff_index = 0, ref_index = 0;
 	char strbuff[MAX_BUFFER];
 	char rest[MAX_BUFFER];
 	char isbuff = 0;
 	short int write = NIE;
+	short int je_antifona = NIE; // 2011-07-08: kvôli krížikom
+	short int write_krizik = NIE; // 2011-07-08: kvôli krížikom
 	char vnutri_inkludovaneho = 0; /* 17/02/2000A.D., kvoli "V.O. Aleluja" v inkludovanych napr. antifonach */
 	char zakoncenie[MAX_ZAKONCENIE]; /* 2009-12-14: zakonèenie s ve¾kým písmenkom na zaèiatku, následne sa prípadne mení 1. písmeno na malé */
 	short int vnutri_referencie = NIE; /* 2011-04-05, kvôli biblickým referenciám v inkludovaných súboroch */
@@ -1424,37 +1428,82 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 				DetailLog("\tstrbuff  == %s\n", strbuff);
 				DetailLog("\trest     == %s\n", rest);
 				DetailLog("\tmodlparam== %s\n", modlparam);
+
 				if(equalsi(rest, modlparam)){
+#if defined(EXPORT_HTML_FILENAME_ANCHOR)
+					Export("[%s|%s:%s]", fname, strbuff, modlparam);
+#elif defined(EXPORT_HTML_ANCHOR)
+					Export("%s:%s", strbuff, modlparam);
+#endif
 					if(equals(strbuff, INCLUDE_BEGIN)){
 						write = ANO;
 						vnutri_inkludovaneho = ANO;
-#if defined(EXPORT_HTML_FILENAME_ANCHOR)
-						Export("begin of `%s', anchor `%s'", fname, modlparam);
-#elif defined(EXPORT_HTML_ANCHOR)
-						Export("BEGIN:%s", modlparam);
-#endif
-						Log("  begin of `%s' in `%s'\n", modlparam, fname);
-					}
+					}// INCLUDE_BEGIN
 					else if(equals(strbuff, INCLUDE_END)){
 						write = NIE;
 						vnutri_inkludovaneho = NIE;
-#if defined(EXPORT_HTML_FILENAME_ANCHOR)
-						Export("end of `%s', anchor `%s'", fname, modlparam);
-#elif defined(EXPORT_HTML_ANCHOR)
-						Export("END:%s", modlparam);
-#endif
 						/* pridane 2003-08-13 kvoli viacnasobnym inkludom */
 						Export("--><!--");
 						/* ak to aj je posledny inklude, potom v nadradenom subore,
 						 * do ktoreho "inkludujeme", sa vypise "-->"
 						 */
-						Log("  end of `%s' in `%s'\n", modlparam, fname);
-					}
+					}// INCLUDE_END
+					Log("[%s|%s:%s]", fname, strbuff, modlparam);
 				}/* equalsi(rest, modlparam) */
+				else if(equals(strbuff, PARAM_KRIZIK) && (vnutri_inkludovaneho == ANO) && (write == ANO)){
+					Export("[INPUT:paramname=%s|fname=%s|modlparam=%s|READ:strbuff=%s|rest=%s]", paramname, fname, modlparam, strbuff, rest);
+					if(equals(paramname, PARAM_ANTIFONA1) || equals(paramname, PARAM_ANTIFONA2) || equals(paramname, PARAM_ANTIFONA3) || equals(paramname, PARAM_ANTRCHVAL) || equals(paramname, PARAM_ANTVCHVAL) || equals(paramname, PARAM_ANTIFONA1x) || equals(paramname, PARAM_ANTIFONA3x)){
+						je_antifona = ANO;
+						if(rest != NULL && strlen(rest) > 0)
+							mystrcpy(rest_krizik, rest, MAX_BUFFER);
+						Export("antifóna[%d] -> zapamätám, ku ktorému žalmu/chválospevu patrí...\n", antifona_pocet);
+					}
+#if defined(EXPORT_HTML_FILENAME_ANCHOR)
+					Export("[%s:%s|rest_krizik=%s]", strbuff, modlparam, (rest_krizik == NULL) ? STR_EMPTY: rest_krizik);
+#elif defined(EXPORT_HTML_ANCHOR)
+					Export("%s:%s", strbuff, modlparam);
+#endif
+					/* 2011-07-08: krížik v texte includovaného žalmu/chválospevu */
+					if((je_antifona == ANO) || (equals(paramname, PARAM_ZALM1) || equals(paramname, PARAM_ZALM2) || equals(paramname, PARAM_ZALM3) || equals(paramname, PARAM_RCHVALOSPEV) || equals(paramname, PARAM_VCHVALOSPEV))){
+						write_krizik = ANO;
+						if((je_antifona == ANO) && ((antifona_pocet MOD 2) == 0)){
+							// krížik sa vypisuje len v poèiatoèných (nepárnych) antifónach [ToDo] preveri, èi funguje dobre aj pre modlitbu cez deò v silných obdobiach
+							Log("-párna antifóna-");
+							write_krizik = NIE;
+						}
+						if((je_antifona == ANO) && (antifona_pocet > 1) && (_global_modlitba == MODL_INVITATORIUM)){
+							// pre invitatórium sa antifóna opakuje... krížik sa vypisuje len na zaèiatku
+							Log("-párna antifóna-");
+							write_krizik = NIE;
+						}
+						/*
+						 * [ToDo] môže nasta situácia, že antifóna má v sebe krížik, ale nasleduje taký žalm/chválospev, ktorý tam ten verš nemá?
+						 * pre žaltár sa to asi nemôže sta, ale pre volite¾né napr. spomienky (keï si vezme iné žalmy), by sa to teoreticky sta mohlo... 
+						 * potom treba vyšpecifikova podmienku, ktorá bude kontrolova: ak je to antifóna 1, treba porovna, èi equals(rest_krizik, "_global_modl_...".zalm1.anchor) a pod.
+						 * case pre danú modlitbu: pre MODL_RANNE_CHVALY: _global_modl_ranne_chvaly.zalm1.anchor; pre iné modlitby iný "_global_modl_..."
+
+						if((je_antifona == ANO) && ((antifona_pocet MOD 2) == 1) && (-- zložitá podmienka --)){
+							// krížik sa vypisuje v poèiatoèných (nepárnych) antifónach len vtedy, ak nasledujúci žalm/chválospev je ten zodpovedajúci
+							Log("-nepárna antifóna/iný žalm-");
+							write_krizik = NIE;
+						}
+						*/
+						if((je_antifona == NIE) && !equals(modlparam, rest_krizik)){
+							// krížik sa v žalmoch/chválospevoch vypisuje len v prípade, že predtým (v naèítanej antifóne) bolo správne uvedené, ku ktorému žalmu sa to vzahuje
+							Log("-iný žalm-");
+							write_krizik = NIE;
+						}
+						if(write_krizik == ANO){
+							Export("-->");
+							Export(" <font color=\"#FF0000\">†</font>");
+							Export("<!--");
+						}
+					}// vypísa krížik, nako¾ko antifóna nastavila, že má by; ináè nerob niè
+				}// PARAM_KRIZIK
 				else{
 					/* !equalsi(rest, modlparam) */
 					/* write = NIE; -- aby mohli byt nestovane viacere :-) */
-					DetailLog("paramenter not matches: %s != %s\n", rest, modlparam);
+					DetailLog("parameter does not match: %s != %s\n", rest, modlparam);
 
 					/* 2011-04-05: upravi referencie na hyperlinky */
 					if(equals(strbuff, PARAM_REFERENCIA_BEGIN) && (vnutri_inkludovaneho == 1)){
@@ -2628,6 +2677,7 @@ void interpretParameter(short int type, char *paramname){
 		}/* switch */
 	}/* PARAM_HYMNUS */
 	else if(equals(paramname, PARAM_ANTIFONA1)){
+		antifona_pocet++;
 		switch(type){
 			case MODL_INVITATORIUM:
 				strcat(path, _global_modl_invitatorium.antifona1.file);
@@ -2675,6 +2725,7 @@ void interpretParameter(short int type, char *paramname){
 		}/* switch */
 	}/* PARAM_ANTIFONA1 */
 	else if(equals(paramname, PARAM_ANTIFONA1x)){
+		antifona_pocet++;
 		switch(type){
 			case MODL_CEZ_DEN_9:
 				if(_global_ant_mcd_rovnake == NIE){
@@ -2713,6 +2764,7 @@ void interpretParameter(short int type, char *paramname){
 		}/* switch */
 	}/* PARAM_ANTIFONA1x */
 	else if(equals(paramname, PARAM_ANTIFONA2)){
+		antifona_pocet++;
 		switch(type){
 			// ranné chvály nie
 			case MODL_CEZ_DEN_9:
@@ -2779,6 +2831,7 @@ void interpretParameter(short int type, char *paramname){
 		}/* switch */
 	}/* PARAM_ANTIFONA2 */
 	else if(equals(paramname, PARAM_ANTIFONA3)){
+		antifona_pocet++;
 		switch(type){
 			case MODL_RANNE_CHVALY:
 				strcat(path, _global_modl_ranne_chvaly.antifona3.file);
@@ -2811,6 +2864,7 @@ void interpretParameter(short int type, char *paramname){
 		}/* switch */
 	}/* PARAM_ANTIFONA3 */
 	else if(equals(paramname, PARAM_ANTIFONA3x)){
+		antifona_pocet++;
 		switch(type){
 			case MODL_CEZ_DEN_9:
 				if(_global_ant_mcd_rovnake == NIE){
@@ -3098,6 +3152,7 @@ void interpretParameter(short int type, char *paramname){
 		;
 	}/* PARAM_MAGNIFIKAT */
 	else if(equals(paramname, PARAM_ANTVCHVAL)){
+		antifona_pocet++;
 		if(type == MODL_VESPERY){
 			strcat(path, _global_modl_vespery.antifona3.file);
 			includeFile(type, paramname, path, _global_modl_vespery.antifona3.anchor);
@@ -3131,6 +3186,7 @@ void interpretParameter(short int type, char *paramname){
 		;
 	}/* PARAM_BENEDIKTUS */
 	else if(equals(paramname, PARAM_ANTRCHVAL)){
+		antifona_pocet++;
 		if(type == MODL_RANNE_CHVALY){
 			strcat(path, _global_modl_ranne_chvaly.antifona2.file);
 			includeFile(type, paramname, path, _global_modl_ranne_chvaly.antifona2.anchor);
