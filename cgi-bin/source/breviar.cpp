@@ -1451,12 +1451,12 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 					Log("[%s|%s:%s]", fname, strbuff, modlparam);
 				}/* equalsi(rest, modlparam) */
 				else if(equals(strbuff, PARAM_KRIZIK) && (vnutri_inkludovaneho == ANO) && (write == ANO)){
-					Export("[INPUT:paramname=%s|fname=%s|modlparam=%s|READ:strbuff=%s|rest=%s]", paramname, fname, modlparam, strbuff, rest);
+					// Export("[INPUT:paramname=%s|fname=%s|modlparam=%s|READ:strbuff=%s|rest=%s]", paramname, fname, modlparam, strbuff, rest);
 					if(equals(paramname, PARAM_ANTIFONA1) || equals(paramname, PARAM_ANTIFONA2) || equals(paramname, PARAM_ANTIFONA3) || equals(paramname, PARAM_ANTRCHVAL) || equals(paramname, PARAM_ANTVCHVAL) || equals(paramname, PARAM_ANTIFONA1x) || equals(paramname, PARAM_ANTIFONA3x)){
 						je_antifona = ANO;
 						if(rest != NULL && strlen(rest) > 0)
 							mystrcpy(rest_krizik, rest, MAX_BUFFER);
-						Export("antifóna[%d] -> zapamätám, ku ktorému žalmu/chválospevu patrí...\n", antifona_pocet);
+						// Export("antifóna[%d] -> zapamätám, ku ktorému žalmu/chválospevu patrí...\n", antifona_pocet);
 					}
 #if defined(EXPORT_HTML_FILENAME_ANCHOR)
 					Export("[%s:%s|rest_krizik=%s]", strbuff, modlparam, (rest_krizik == NULL) ? STR_EMPTY: rest_krizik);
@@ -1495,7 +1495,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 						}
 						if(write_krizik == ANO){
 							Export("-->");
-							Export(" <font color=\"#FF0000\">†</font>");
+							Export(" <font color=\"#FF0000\">†</font> ");
 							Export("<!--");
 						}
 					}// vypísa krížik, nako¾ko antifóna nastavila, že má by; ináè nerob niè
