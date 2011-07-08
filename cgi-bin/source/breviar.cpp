@@ -1450,53 +1450,55 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 					}// INCLUDE_END
 					Log("[%s|%s:%s]", fname, strbuff, modlparam);
 				}/* equalsi(rest, modlparam) */
-				else if(equals(strbuff, PARAM_KRIZIK) && (vnutri_inkludovaneho == ANO) && (write == ANO)){
-					// Export("[INPUT:paramname=%s|fname=%s|modlparam=%s|READ:strbuff=%s|rest=%s]", paramname, fname, modlparam, strbuff, rest);
-					if(equals(paramname, PARAM_ANTIFONA1) || equals(paramname, PARAM_ANTIFONA2) || equals(paramname, PARAM_ANTIFONA3) || equals(paramname, PARAM_ANTRCHVAL) || equals(paramname, PARAM_ANTVCHVAL) || equals(paramname, PARAM_ANTIFONA1x) || equals(paramname, PARAM_ANTIFONA3x)){
-						je_antifona = ANO;
-						if(rest != NULL && strlen(rest) > 0)
-							mystrcpy(rest_krizik, rest, MAX_BUFFER);
-						// Export("antifóna[%d] -> zapamätám, ku ktorému žalmu/chválospevu patrí...\n", antifona_pocet);
-					}
+				else if(equals(strbuff, PARAM_KRIZIK)){
+					if((vnutri_inkludovaneho == ANO) && (write == ANO)){
+						// Export("[INPUT:paramname=%s|fname=%s|modlparam=%s|READ:strbuff=%s|rest=%s]", paramname, fname, modlparam, strbuff, rest);
+						if(equals(paramname, PARAM_ANTIFONA1) || equals(paramname, PARAM_ANTIFONA2) || equals(paramname, PARAM_ANTIFONA3) || equals(paramname, PARAM_ANTRCHVAL) || equals(paramname, PARAM_ANTVCHVAL) || equals(paramname, PARAM_ANTIFONA1x) || equals(paramname, PARAM_ANTIFONA3x)){
+							je_antifona = ANO;
+							if(rest != NULL && strlen(rest) > 0)
+								mystrcpy(rest_krizik, rest, MAX_BUFFER);
+							// Export("antifóna[%d] -> zapamätám, ku ktorému žalmu/chválospevu patrí...\n", antifona_pocet);
+						}
 #if defined(EXPORT_HTML_FILENAME_ANCHOR)
-					Export("[%s:%s|rest_krizik=%s]", strbuff, modlparam, (rest_krizik == NULL) ? STR_EMPTY: rest_krizik);
+						Export("[%s:%s|rest_krizik=%s]", strbuff, modlparam, (rest_krizik == NULL) ? STR_EMPTY: rest_krizik);
 #elif defined(EXPORT_HTML_ANCHOR)
-					Export("%s:%s", strbuff, modlparam);
+						Export("%s:%s", strbuff, modlparam);
 #endif
-					/* 2011-07-08: krížik v texte includovaného žalmu/chválospevu */
-					if((je_antifona == ANO) || (equals(paramname, PARAM_ZALM1) || equals(paramname, PARAM_ZALM2) || equals(paramname, PARAM_ZALM3) || equals(paramname, PARAM_RCHVALOSPEV) || equals(paramname, PARAM_VCHVALOSPEV))){
-						write_krizik = ANO;
-						if((je_antifona == ANO) && ((antifona_pocet MOD 2) == 0)){
-							// krížik sa vypisuje len v poèiatoèných (nepárnych) antifónach [ToDo] preveri, èi funguje dobre aj pre modlitbu cez deò v silných obdobiach
-							Log("-párna antifóna-");
-							write_krizik = NIE;
-						}
-						if((je_antifona == ANO) && (antifona_pocet > 1) && (_global_modlitba == MODL_INVITATORIUM)){
-							// pre invitatórium sa antifóna opakuje... krížik sa vypisuje len na zaèiatku
-							Log("-párna antifóna-");
-							write_krizik = NIE;
-						}
-						/*
-						 * [ToDo] môže nasta situácia, že antifóna má v sebe krížik, ale nasleduje taký žalm/chválospev, ktorý tam ten verš nemá?
-						 * pre žaltár sa to asi nemôže sta, ale pre volite¾né napr. spomienky (keï si vezme iné žalmy), by sa to teoreticky sta mohlo... 
-						 * potom treba vyšpecifikova podmienku, ktorá bude kontrolova: ak je to antifóna 1, treba porovna, èi equals(rest_krizik, "_global_modl_...".zalm1.anchor) a pod.
-						 * case pre danú modlitbu: pre MODL_RANNE_CHVALY: _global_modl_ranne_chvaly.zalm1.anchor; pre iné modlitby iný "_global_modl_..."
+						/* 2011-07-08: krížik v texte includovaného žalmu/chválospevu */
+						if((je_antifona == ANO) || (equals(paramname, PARAM_ZALM1) || equals(paramname, PARAM_ZALM2) || equals(paramname, PARAM_ZALM3) || equals(paramname, PARAM_RCHVALOSPEV) || equals(paramname, PARAM_VCHVALOSPEV))){
+							write_krizik = ANO;
+							if((je_antifona == ANO) && ((antifona_pocet MOD 2) == 0)){
+								// krížik sa vypisuje len v poèiatoèných (nepárnych) antifónach [ToDo] preveri, èi funguje dobre aj pre modlitbu cez deò v silných obdobiach
+								Log("-párna antifóna-");
+								write_krizik = NIE;
+							}
+							if((je_antifona == ANO) && (antifona_pocet > 1) && (_global_modlitba == MODL_INVITATORIUM)){
+								// pre invitatórium sa antifóna opakuje... krížik sa vypisuje len na zaèiatku
+								Log("-párna antifóna-");
+								write_krizik = NIE;
+							}
+							/*
+							 * [ToDo] môže nasta situácia, že antifóna má v sebe krížik, ale nasleduje taký žalm/chválospev, ktorý tam ten verš nemá?
+							 * pre žaltár sa to asi nemôže sta, ale pre volite¾né napr. spomienky (keï si vezme iné žalmy), by sa to teoreticky sta mohlo... 
+							 * potom treba vyšpecifikova podmienku, ktorá bude kontrolova: ak je to antifóna 1, treba porovna, èi equals(rest_krizik, "_global_modl_...".zalm1.anchor) a pod.
+							 * case pre danú modlitbu: pre MODL_RANNE_CHVALY: _global_modl_ranne_chvaly.zalm1.anchor; pre iné modlitby iný "_global_modl_..."
 
-						if((je_antifona == ANO) && ((antifona_pocet MOD 2) == 1) && (-- zložitá podmienka --)){
-							// krížik sa vypisuje v poèiatoèných (nepárnych) antifónach len vtedy, ak nasledujúci žalm/chválospev je ten zodpovedajúci
-							Log("-nepárna antifóna/iný žalm-");
-							write_krizik = NIE;
-						}
-						*/
-						if((je_antifona == NIE) && !equals(modlparam, rest_krizik)){
-							// krížik sa v žalmoch/chválospevoch vypisuje len v prípade, že predtým (v naèítanej antifóne) bolo správne uvedené, ku ktorému žalmu sa to vzahuje
-							Log("-iný žalm-");
-							write_krizik = NIE;
-						}
-						if(write_krizik == ANO){
-							Export("-->");
-							Export(" <font color=\"#FF0000\">†</font> ");
-							Export("<!--");
+							if((je_antifona == ANO) && ((antifona_pocet MOD 2) == 1) && (-- zložitá podmienka --)){
+								// krížik sa vypisuje v poèiatoèných (nepárnych) antifónach len vtedy, ak nasledujúci žalm/chválospev je ten zodpovedajúci
+								Log("-nepárna antifóna/iný žalm-");
+								write_krizik = NIE;
+							}
+							*/
+							if((je_antifona == NIE) && !equals(modlparam, rest_krizik)){
+								// krížik sa v žalmoch/chválospevoch vypisuje len v prípade, že predtým (v naèítanej antifóne) bolo správne uvedené, ku ktorému žalmu sa to vzahuje
+								Log("-iný žalm-");
+								write_krizik = NIE;
+							}
+							if(write_krizik == ANO){
+								Export("-->");
+								Export(" <font color=\"#FF0000\">†</font> ");
+								Export("<!--");
+							}
 						}
 					}// vypísa krížik, nako¾ko antifóna nastavila, že má by; ináè nerob niè
 				}// PARAM_KRIZIK
