@@ -1400,6 +1400,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 	/* 2011-05-03: doplnené */
 	if((_global_skip_in_prayer == ANO) || (_global_skip_in_prayer_vnpc == ANO)){
 		Log("--includeFile(): end (because _global_skip_in_prayer || _global_skip_in_prayer_vnpc == ANO)\n");
+		Export("|ret");
 		return;
 	}
 
