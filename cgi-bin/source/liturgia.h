@@ -503,8 +503,8 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 #define PARAM_VN_VYNECHAJ_END               "VELK_NEDELA_VYNECHAJ_END"
 
 /* 2011-07-07: doplnené kvôli zobrazovaniu/skrývaniu dlhších záverov responzórií v posvätnom èítaní */
-#define PARAM_DLHSIE_RESP                   "DLHSIE_RESP"
-#define PARAM_DLHSIE_RESP_BODKA             "DLHSIE_RESP_BODKA"
+#define PARAM_PLNE_RESP                     "PLNE_RESP"
+#define PARAM_PLNE_RESP_BODKA               "PLNE_RESP_BODKA"
 
 /* 2011-04-04: doplnené zobrazenie/skrytie èíslovania veršov v žalmoch, chválospevoch a biblických èítaniach */
 #define PARAM_CISLO_VERSA_BEGIN				"v"
