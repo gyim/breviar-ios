@@ -546,11 +546,11 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #endif
 
 // dlhšie zakonèenie responzória
-#define MODL_OPTF1_DLHE_RESP 80
+#define MODL_OPTF1_PLNE_RESP 80
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF1_DLHE_RESP "MODL_OPTF1_DLHE_RESP"
+	#define STR_MODL_OPTF1_PLNE_RESP "MODL_OPTF1_PLNE_RESP"
 #else
-	#define STR_MODL_OPTF1_DLHE_RESP "of1dr"
+	#define STR_MODL_OPTF1_PLNE_RESP "of1pr"
 #endif
 
 /* pre force option 2 jednotlivé bit-komponenty (parciálne vo¾by) */

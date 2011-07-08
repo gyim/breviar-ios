@@ -1117,7 +1117,7 @@ short int setForm(void){
 				case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break;
 				case 7: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break;
 				case 8: strcat(local_str, STR_MODL_OPTF1_ZALMY_SV); break;
-				case 9: strcat(local_str, STR_MODL_OPTF1_DLHE_RESP); break;
+				case 9: strcat(local_str, STR_MODL_OPTF1_PLNE_RESP); break;
 			}// switch(i)
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF_CASTI_MODLITBY[i]);
@@ -1726,7 +1726,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 #if defined(EXPORT_HTML_SPECIALS)
 							Export("(start)dlhe-resp.");
 #endif
-							if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_DLHE_RESP) == BIT_OPT_1_DLHE_RESP){
+							if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PLNE_RESP) == BIT_OPT_1_PLNE_RESP){
 								;
 							}
 							else{
@@ -1738,7 +1738,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 #if defined(EXPORT_HTML_SPECIALS)
 							Export("dlhe-resp.(stop)");
 #endif
-							if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_DLHE_RESP) == BIT_OPT_1_DLHE_RESP){
+							if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PLNE_RESP) == BIT_OPT_1_PLNE_RESP){
 								;
 							}
 							else{
@@ -6669,6 +6669,12 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_TD, NIE);
 	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_TD, ANO, html_text_option1_tedeum_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_TEDEUM) == BIT_OPT_1_TEDEUM)? html_option_checked: STR_EMPTY);
 	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_tedeum_explain[_global_jazyk], html_text_option1_tedeum[_global_jazyk]);
+
+	/* pole (checkbox) WWW_MODL_OPTF1_PLNE_RESP */
+	Export("<br>");
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_PLNE_RESP, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_PLNE_RESP, ANO, html_text_option1_plne_resp_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PLNE_RESP) == BIT_OPT_1_PLNE_RESP)? html_option_checked: STR_EMPTY);
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_plne_resp_explain[_global_jazyk], html_text_option1_plne_resp[_global_jazyk]);
 
 	Export("</td></tr>\n");
 
@@ -12026,7 +12032,7 @@ short int getForm(void){
 			case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break;
 			case 7: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break;
 			case 8: strcat(local_str, STR_MODL_OPTF1_ZALMY_SV); break;
-			case 9: strcat(local_str, STR_MODL_OPTF1_DLHE_RESP); break;
+			case 9: strcat(local_str, STR_MODL_OPTF1_PLNE_RESP); break;
 		}/* switch(i) */
 		ptr = getenv(local_str);
 		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
@@ -12798,7 +12804,7 @@ short int parseQueryString(void){
 			case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break;
 			case 7: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break;
 			case 8: strcat(local_str, STR_MODL_OPTF1_ZALMY_SV); break;
-			case 9: strcat(local_str, STR_MODL_OPTF1_DLHE_RESP); break;
+			case 9: strcat(local_str, STR_MODL_OPTF1_PLNE_RESP); break;
 		}/* switch(j) */
 		/* premenn· WWW_MODL_OPTF1_... (nepovinn·), j = 0 aû POCET_OPT_1_CASTI_MODLITBY */
 		i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */

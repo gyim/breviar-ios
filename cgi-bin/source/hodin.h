@@ -1532,6 +1532,25 @@ const char *html_text_option1_tedeum_explain[POCET_JAZYKOV + 1] =
  "Az imaórák liturgiája a Téged, Isten, dicsérünk ... himnuszt az Olvasmányos imaórában alaphelyzetben nem mutatja."
 };
 
+const char *html_text_option1_plne_resp[POCET_JAZYKOV + 1] = 
+{"plné znenie responzórií pre posvätné èítania", 
+ "plné znìní krátkıch zpìvù v modlitbe se ètením", 
+ "", 
+ "",
+ "",
+ "", 
+ ""
+};
+const char *html_text_option1_plne_resp_explain[POCET_JAZYKOV + 1] = 
+{"Liturgia hodín responzóriá po èítaniach v posvätnom èítaní v plnom znení neuvádza (druhá, opakujúca sa èas, je v tlaèenej LH skrátená).", 
+ "", 
+ "", 
+ "",
+ "", 
+ "", 
+ ""
+};
+
 const char *html_text_option1_mcd_doplnkova_psalmodia[POCET_JAZYKOV + 1] = 
 {"pre modlitbu cez deò poui doplnkovú psalmódiu", 
  "pro modlitbu bìhem dne brát almy z doplòovacího cyklu", 

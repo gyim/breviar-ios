@@ -1207,7 +1207,7 @@ extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
 #define BIT_OPT_1_PC_VIGILIA               64
 #define BIT_OPT_1_SKRY_POPIS              128
 #define BIT_OPT_1_ZALMY_ZO_SVIATKU        256
-#define BIT_OPT_1_DLHE_RESP               512
+#define BIT_OPT_1_PLNE_RESP               512
 
 #define POCET_OPT_2_HTML_EXPORT             6 /* jednotlivé komponenty option 2 -- bity pre force option 2 */
 extern short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];
