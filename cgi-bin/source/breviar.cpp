@@ -308,7 +308,7 @@ char *_global_buf2; /* 2006-08-01: vytvorené; túto premennú tiež alokujeme */
 #define ishex(x) (((x) >= '0' && (x) <= '9') || ((x) >= 'a' && (x) <= 'f') || \
 		  ((x) >= 'A' && (x) <= 'F'))
 
-#define MAX_BUFFER 50
+#define MAX_BUFFER 80
 
 #define ANCHOR_VYSVETLIVKY "VYSVETLIVKY"
 #define FILE_VYSVETLIVKY "vysvetl.htm"
@@ -1400,7 +1400,6 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 	/* 2011-05-03: doplnené */
 	if((_global_skip_in_prayer == ANO) || (_global_skip_in_prayer_vnpc == ANO)){
 		Log("--includeFile(): end (because _global_skip_in_prayer || _global_skip_in_prayer_vnpc == ANO)\n");
-		Export("|ret");
 		return;
 	}
 
@@ -1411,9 +1410,11 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 	else{
 		je_myslienka = ANO;
 	}
-	Log("nastavil som je_myslienka = %d\n", je_myslienka);
+	Log("nastavil som je_myslienka == %d\n", je_myslienka);
 
+	// Export("before while...");
 	while((c = fgetc(body)) != EOF){
+		// Export("inside[%c]...", c);
 		switch (c){
 			/* 2011-03-29: ak sa nachádza znak CHAR_KEYWORD_BEGIN (t. j. '{') len tak vo¾ne v texte, program zblbol; nevedel zisti, èi ide o keyword alebo nie; pokus o opravu */
 			case CHAR_KEYWORD_BEGIN:
@@ -1857,7 +1858,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 				else{
 					Export("%c", c); /* fputc(c, exportfile); */
 				}
-				DetailLog("%c", c);
+				// DetailLog("%c", c);
 			}
 			else ; //skip
 		}/* if(!isbuff) */
@@ -1870,7 +1871,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 				if(write == ANO){
 					/* 2011-05-02: nezlomite¾né medzery; v DetailLog logujeme 1:1 presne reazec bez transformácie */
 					Export("%s", convert_nonbreaking_spaces(strbuff));
-					DetailLog("%s", strbuff);
+					// DetailLog("%s", strbuff);
 				}
 				/* vyèistenie buffra */
 				buff_index = 0;
