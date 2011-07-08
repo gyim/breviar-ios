@@ -1563,8 +1563,9 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 						}
 						else{
 							write = NIE;
+							Export("<!--");
 #if defined(EXPORT_HTML_SPECIALS)
-							Export("<!--è.verša:zaè.");
+							Export("è.verša:zaè.");
 #endif
 							Log("  ruším writing to export file, kvôli PARAM_CISLO_VERSA_BEGIN...\n");
 						}
