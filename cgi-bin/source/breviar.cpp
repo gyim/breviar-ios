@@ -3351,6 +3351,8 @@ void interpretTemplate(short int type, char *tempfile){
 
 	_global_pocet_slava_otcu = 0; /* pre každý súbor templátu individuálne poèítame sláva otcu; 2007-05-18 */
 	_global_pocet_navigacia = 0; /* podobne aj poèet parametrov navigácie; 2011-07-03 */
+	antifona_pocet = 0; // 2011-07-08: poèet antifón (ant1, ant2, ant3 pre psalmódiu a ant. na benediktus/magnifikat kvôli krížikom)
+	mystrcpy(rest_krizik, STR_EMPTY, MAX_BUFFER); // 2011-07-08: pre to, èo je za krížikom v antifóne
 
 	FILE *ftemplate = fopen(tempfile, "rb");
 
