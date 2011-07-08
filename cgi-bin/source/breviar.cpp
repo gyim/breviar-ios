@@ -1721,7 +1721,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 					/* 2011-07-07, doplnené: zobrazovanie/skrývanie dlhšieho zakonèenia responzória po druhom èítaní (tlaèená verzia má kratšie zakonèenie, pokia¾ nie je responzórium rozdelené zlomom strany, presnejšie, otoèením listu) */
 
 					/* zakonèenie modlitby - Skrze... */
-					if(equals(rest, PARAM_DLHSIE_RESP)){
+					if((equals(rest, PARAM_DLHSIE_RESP)) || (equals(rest, PARAM_DLHSIE_RESP_BODKA))){
 						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
 #if defined(EXPORT_HTML_SPECIALS)
 							Export("(start)dlhe-resp.");
@@ -1744,6 +1744,10 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 							else{
 								write = ANO;
 								Log("  opä writing to export file, PARAM_DLHSIE_RESP...\n");
+								// 2011-07-08: ak konèí iným znakom ako bodkou (napr. ?!), pri skrátenom výpise (indikovaný iným parametrom) je treba vypísa bodku
+								if(equals(rest, PARAM_DLHSIE_RESP_BODKA)){
+									Export("-->.<!--");
+								}
 							}
 							Log("resp-koniec.\n");
 						}// INCLUDE_END
