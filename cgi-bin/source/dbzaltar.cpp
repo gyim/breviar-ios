@@ -672,7 +672,9 @@ void _set_zalm3(short int modlitba, const char *file, const char *anchor){
 	}/* switch(modlitba) */
 }
 
-/* 2009-01-06: doplnen· funkcia, ktor· obaæuje _set_zalm1 aû 3, aby sa dali vypisovaù debug v˝pisy */
+/* 2009-01-06: doplnen· funkcia, ktor· obaæuje _set_zalm1 aû 3, aby sa dali vypisovaù debug v˝pisy 
+ * 2011-07-08: oprava v˝pisu, ak je funkcia pouûit· pre ûalmy na vöetky modlitby cez deÚ (predpoludnÌm, napoludnie, popoludnÌ)
+ */
 void set_zalm(short int ktory, short int modlitba, const char *file, const char *anchor){
 	switch(ktory){
 		case 1:
@@ -685,7 +687,7 @@ void set_zalm(short int ktory, short int modlitba, const char *file, const char 
 			_set_zalm3(modlitba, file, anchor);
 			break;
 	}/* switch(ktory) */
-	Log("_set_zalm%d: %s: s˙bor `%s', kotva `%s' [volanie set_zalm()]\n", ktory, nazov_modlitby(modlitba), file, anchor);
+	Log("_set_zalm%d: %s: s˙bor `%s', kotva `%s' [volanie set_zalm()]\n", ktory, (modlitba == MODL_CEZ_DEN_VSETKY)? "MCD-all": nazov_modlitby(modlitba), file, anchor);
 }/* set_zalm() */
 
 /* pri posvatnom citani plati pre 1. citanie */
