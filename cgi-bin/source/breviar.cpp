@@ -2810,7 +2810,7 @@ void interpretParameter(short int type, char *paramname){
 				break;
 			case MODL_PRVE_KOMPLETORIUM: /* 2011-03-22: pridané */
 				/* 2008-04-03: pridaná podmienka, aby sa preskakovalo v modlitbe kompletória pre ve¾konoèné obdobie - vnorená kotva */
-				if((_global_modl_kompletorium.pocet_zalmov == 2) && (_global_skip_in_prayer != ANO)){
+				if((_global_modl_prve_kompletorium.pocet_zalmov == 2) && (_global_skip_in_prayer != ANO)){
 					strcat(path, _global_modl_prve_kompletorium.antifona2.file);
 					includeFile(type, paramname, path, _global_modl_prve_kompletorium.antifona2.anchor);
 				}
@@ -2894,8 +2894,10 @@ void interpretParameter(short int type, char *paramname){
 		}/* switch */
 	}/* PARAM_ANTIFONA3x */
 	else if(equals(paramname, PARAM_ANTIFONA1k)){
-		/* 2008-04-03: pridané kvôli kompletóriu vo ve¾konoènom období, èi pri druhej antifóne zobrazi dvojku alebo nie */
-		if(((type == MODL_KOMPLETORIUM) || (type == MODL_PRVE_KOMPLETORIUM)) && (_global_ant_mcd_rovnake == NIE) && (_global_modl_kompletorium.pocet_zalmov == 2)){
+		/* 2008-04-03: pridané kvôli kompletóriu vo ve¾konoènom období, èi pri druhej antifóne zobrazi dvojku alebo nie 
+		 * 2011-07-09: opravená podmienka
+		 */
+		if((((type == MODL_KOMPLETORIUM) && (_global_modl_kompletorium.pocet_zalmov == 2)) || ((type == MODL_PRVE_KOMPLETORIUM) && (_global_modl_prve_kompletorium.pocet_zalmov == 2))) && (_global_ant_mcd_rovnake == NIE)){
 			Export("-->1<!--");
 		}
 		else{
@@ -2906,8 +2908,10 @@ void interpretParameter(short int type, char *paramname){
 		}
 	}/* ANTIFONA1_KOMPLET */
 	else if(equals(paramname, PARAM_ANTIFONA2k)){
-		/* 2008-04-03: pridané kvôli kompletóriu vo ve¾konoènom období, èi pri druhej antifóne zobrazi dvojku alebo nie */
-		if(((type == MODL_KOMPLETORIUM) || (type == MODL_PRVE_KOMPLETORIUM)) && (_global_ant_mcd_rovnake == NIE) && (_global_modl_kompletorium.pocet_zalmov == 2)){
+		/* 2008-04-03: pridané kvôli kompletóriu vo ve¾konoènom období, èi pri druhej antifóne zobrazi dvojku alebo nie 
+		 * 2011-07-09: opravená podmienka
+		 */
+		if((((type == MODL_KOMPLETORIUM) && (_global_modl_kompletorium.pocet_zalmov == 2)) || ((type == MODL_PRVE_KOMPLETORIUM) && (_global_modl_prve_kompletorium.pocet_zalmov == 2))) && (_global_ant_mcd_rovnake == NIE)){
 			Export("-->2<!--");
 		}
 		else{
@@ -2999,7 +3003,7 @@ void interpretParameter(short int type, char *paramname){
 				includeFile(type, paramname, path, _global_modl_prve_vespery.zalm2.anchor);
 				break;
 			case MODL_PRVE_KOMPLETORIUM: /* 2011-03-22: pridané */
-				if(_global_modl_kompletorium.pocet_zalmov == 2){
+				if(_global_modl_prve_kompletorium.pocet_zalmov == 2){
 					strcat(path, _global_modl_prve_kompletorium.zalm2.file);
 					includeFile(type, paramname, path, _global_modl_prve_kompletorium.zalm2.anchor);
 				}
@@ -3519,6 +3523,12 @@ void showPrayer(short int type){
 				(type == MODL_KOMPLETORIUM) && (_global_modl_kompletorium.pocet_zalmov == 2)
 				&& (equals(_global_modl_kompletorium.antifona1.file, _global_modl_kompletorium.antifona2.file))
 				&& (equals(_global_modl_kompletorium.antifona1.anchor, _global_modl_kompletorium.antifona2.anchor))
+			)
+			||
+			(
+				(type == MODL_PRVE_KOMPLETORIUM) && (_global_modl_prve_kompletorium.pocet_zalmov == 2)
+				&& (equals(_global_modl_prve_kompletorium.antifona1.file, _global_modl_prve_kompletorium.antifona2.file))
+				&& (equals(_global_modl_prve_kompletorium.antifona1.anchor, _global_modl_prve_kompletorium.antifona2.anchor))
 			)
 		)	
 		_global_ant_mcd_rovnake = ANO;
@@ -8685,12 +8695,19 @@ LABEL_NIE_INE_VESPERY: /* 08/03/2000A.D. */
 		case MODL_KOMPLETORIUM: /* invitatórium a kompletórium pridané 2006-10-13 */
 			Log(_global_modl_kompletorium);
 			break;
+		case MODL_PRVE_KOMPLETORIUM: // 2011-07-09: doplnené
+			Log(_global_modl_prve_kompletorium);
+			break;
 	}
 /*	Log("_global_den:\n");	Log(_global_den); */
 
-	/* 2006-10-18: pridané */
-	if((modlitba == MODL_KOMPLETORIUM) || (modlitba == MODL_PRVE_KOMPLETORIUM) || (modlitba == MODL_DRUHE_KOMPLETORIUM))
+	/* 2006-10-18: pridané 
+	 * 2011-07-09: rozšírené
+	 */
+	if((modlitba == MODL_KOMPLETORIUM) || (modlitba == MODL_DRUHE_KOMPLETORIUM))
 		_global_pocet_zalmov_kompletorium = _global_modl_kompletorium.pocet_zalmov;
+	else if(modlitba == MODL_PRVE_KOMPLETORIUM)
+		_global_pocet_zalmov_kompletorium = _global_modl_prve_kompletorium.pocet_zalmov;
 	else
 		_global_pocet_zalmov_kompletorium = 1;
 
