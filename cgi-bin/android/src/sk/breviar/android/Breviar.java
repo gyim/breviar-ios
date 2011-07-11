@@ -18,10 +18,14 @@ import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.util.Log;
 import android.text.Html;
+import android.net.Uri;
+import android.content.Intent;
+import android.graphics.Bitmap;
 
 public class Breviar extends Activity
 {
     WebView wv;
+    int scale;
     Server S = null;
     static String scriptname = "cgi-bin/l.cgi";
     String language;
@@ -37,6 +41,15 @@ public class Breviar extends Activity
       wv.loadUrl("http://localhost:" + S.port + "/" + scriptname + "?qt=pdnes" );
     }
 
+    public boolean tryOpenBible(String url) {
+      try {
+        startActivity(new Intent("sk.ksp.riso.svpismo.action.SHOW", Uri.parse(url)));
+      } catch (android.content.ActivityNotFoundException e) {
+        return false;
+      }
+      return true;
+    }
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -48,6 +61,7 @@ public class Breviar extends Activity
       // Restore preferences
       SharedPreferences settings = getSharedPreferences(prefname, 0);
       language = settings.getString("language", "sk");
+      scale = settings.getInt("scale", 100);
       String opts = settings.getString("params", "");
 
       if (S==null) {
@@ -61,33 +75,65 @@ public class Breviar extends Activity
       setContentView(R.layout.breviar);
 
       wv = (WebView)findViewById(R.id.wv);
+      wv.getSettings().setBuiltInZoomControls(true);
+      wv.setInitialScale(scale);
       if (wv.restoreState(savedInstanceState) == null) goHome();
 
-      wv.getSettings().setBuiltInZoomControls(true);
-      wv.getSettings().setDefaultZoom(WebSettings.ZoomDensity.FAR);
-
+      final Breviar parent = this;
       wv.setWebViewClient(new WebViewClient() {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
+          if (url.startsWith("mailto:")) {
+            String[] blah_email = url.split(":");
+            Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+            emailIntent.setType("text/plain");
+            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{blah_email[1]});
+            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Komentár k breviáru");
+            startActivity(emailIntent);
+            return true;
+          }
+          if (url.startsWith("http://dkc.kbs.sk")) {
+            if (tryOpenBible(url)) return true;
+          }
+          if (url.startsWith("svpismo:")) {
+            if (tryOpenBible(url)) return true;
+          }
+
+          parent.syncScale();
           view.loadUrl(url);
           return true;
+        }
+
+        @Override
+        public void onScaleChanged(WebView view, float oldSc, float newSc) {
+          parent.scale = (int)(newSc*100);
+          view.setInitialScale(parent.scale);
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+//          Log.v("breviar", "onPageStarted");
+          parent.syncScale();
         }
       } );
 
       ((Button)findViewById(R.id.backBtn)).setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
+          parent.syncScale();
           wv.goBack();
         }
       });
  
       ((Button)findViewById(R.id.forwardBtn)).setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
+          parent.syncScale();
           wv.goForward();
         }
       });
  
       ((Button)findViewById(R.id.todayBtn)).setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
+          parent.syncScale();
           goHome();
         }
       });
@@ -101,23 +147,38 @@ public class Breviar extends Activity
     }
 
     protected void onSaveInstanceState(Bundle outState) {
+//      Log.v("breviar", "onSaveInstanceState");
+      syncScale();
       wv.saveState(outState);
+      syncPreferences();
     }
 
-    protected void onStop(){
-      super.onStop();
-
+    void syncPreferences() {
       // We need an Editor object to make preference changes.
       // All objects are from android.context.Context
       SharedPreferences settings = getSharedPreferences(prefname, 0);
       SharedPreferences.Editor editor = settings.edit();
       editor.putString("language", language);
+      editor.putInt("scale", scale);
       if (S != null) {
         editor.putString("params", S.getOpts());
       }
 
       // Commit the edits!
       editor.commit();
+    }
+
+    protected void syncScale() {
+      scale = (int)(wv.getScale()*100);
+      wv.setInitialScale(scale);
+//      Log.v("breviar", "syncScale "+scale);
+    }
+
+    protected void onStop(){
+//      Log.v("breviar", "onStop");
+      syncScale();
+      super.onStop();
+      syncPreferences();
     }
 
     @Override

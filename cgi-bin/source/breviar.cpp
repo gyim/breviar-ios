@@ -301,6 +301,7 @@
 #include "mybuild.h" // 2011-07-11: pridanÈ, kvÙli BUILD_DATE
 
 #include "android.h"
+#include "citania.h"
 
 /* 2005-03-28: Pridane, pokusy nahradit uncgi */
 char *_global_buf; /* 2006-08-01: t˙to premenn˙ tieû alokujeme */
@@ -1093,6 +1094,9 @@ short int setForm(void){
 			switch(i){
 				case 0: strcat(local_str, STR_MODL_OPTF0_VERSE); break;
 				case 1: strcat(local_str, STR_MODL_OPTF0_REF); break;
+#ifdef LITURGICKE_CITANIA
+				case 2: strcat(local_str, STR_MODL_OPTF0_CIT); break;
+#endif
 			}// switch(i)
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF_SPECIALNE[i]);
@@ -4579,7 +4583,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok){
 #define CASE_MALE   4
 #define COLOR_RED   3
 #define COLOR_BLACK 2
-short int init_global_string(short int typ, short int poradie_svateho, short int modlitba){
+short int init_global_string(short int typ, short int poradie_svateho, short int modlitba, bool aj_citanie=true) {
 	/* lokalna premenna, do ktorej sa ukladaju info o analyzovanom dni
 	 * pouziva ju void nove_rozbor_dna() funkcia */
 	/* 2003-07-07: obavam sa, ze nove_rozbor_dna() je alebo
@@ -4605,6 +4609,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	short int obyc = NIE;
 	short int liturgicka_farba = LIT_FARBA_NEURCENA; /* 2006-08-19: pridanÈ */
 	short int liturgicka_farba_alt = LIT_FARBA_NEURCENA; /* 2011-03-24: pridanÈ */
+        struct citanie *cit = NULL;
 
 	Log("-- init_global_string(EXPORT_DNA_%d, %d, %s) -- zaËiatok (inicializuje tri _global_string* premennÈ)\n",
 		typ, poradie_svateho, nazov_modlitby(modlitba));
@@ -4632,12 +4637,14 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		case 1:
 			/* do _local_den priradim dane slavenie */
 			_local_den = _global_svaty1;
+			cit = najdiCitanie(getCode(&_global_svaty1));
 			Log("priradujem _local_den = _global_svaty1;\n");
 			break; /* case 1: */
 		case 2:
 			if(_global_pocet_svatych > 1){
 				/* do _local_den priradim dane slavenie */
 				_local_den = _global_svaty2;
+				cit = najdiCitanie(getCode(&_global_svaty2));
 				Log("priradujem _local_den = _global_svaty2;\n");
 			}
 			else{
@@ -4655,6 +4662,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			if(_global_pocet_svatych > 2){
 				/* teraz do _local_den priradim dane slavenie */
 				_local_den = _global_svaty3;
+				cit = najdiCitanie(getCode(&_global_svaty3));
 				Log("priradujem _local_den = _global_svaty3;\n");
 			}
 			else{
@@ -4694,6 +4702,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 				)){
 				/* do _local_den priradim dane slavenie */
 				_local_den = _global_svaty1;
+				cit = najdiCitanie(getCode(&_global_svaty1));
 				Log("priradujem _local_den = _global_svaty1;\n");
 			}
 			else{
@@ -4705,6 +4714,8 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			break; /* case 0: */
 	}/* switch(poradie_svateho) */
 
+        int ma_nazov = 0;
+	if (!cit) cit = najdiCitanie(getCode(&_global_den));
 	Log("1:_local_den.meno == %s\n", _local_den.meno); /* 08/03/2000A.D. */
 
 	/* 21/03/2000A.D.
@@ -4844,6 +4855,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 				strcat(pom, "</span>");
 			}
 			strcat(_global_string, pom);
+                        ma_nazov = 1;
 		}/* nedeæa */
 		else{ /* nie nedeæa */
 			Log("deÚ in˝ ako nedeæa, ktor˝ nem· vlastn˝ n·zov... (_global_string == %s)\n", _global_string);
@@ -4930,6 +4942,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 					}/* default, cezroËnÈ obdobie a ostatnÈ "obyËajnÈ" dni */
 #endif
 					strcat(_global_string, pom);
+                                        ma_nazov = 1;
 				}/* nie export na viac dnÌ */
 				else 
 					Log("else [ (typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) ] \n");
@@ -4939,6 +4952,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 						sprintf(pom2, html_text_tyzden_zaltara_cislo[_global_jazyk], _local_den.tyzden);
 						strcat(pom, pom2);
 						strcat(_global_string, pom);
+                                                ma_nazov = 1;
 					}
 				/* inak ostane string prazdny */
 
@@ -4968,6 +4982,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			strcat(_global_string, caps_BIG(_local_den.meno));
 		else
 			strcat(_global_string, _local_den.meno);
+                ma_nazov = 1;
 
 		if((farba == COLOR_RED) && (typ != EXPORT_DNA_VIAC_DNI_TXT)){
 			/* zmenene <font color> na <span>, 2003-07-02 */
@@ -5045,6 +5060,35 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			sprintf(pom, "<!-- kalend·r nie je urËen˝ spr·vne -->");
 			strcat(_global_string, pom);
 		}
+#ifdef LITURGICKE_CITANIA
+                if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_CITANIA) == BIT_OPT_0_CITANIA) {
+                  if (cit && aj_citanie) {
+                    if (typ == EXPORT_DNA_DNES || typ == EXPORT_DNA_JEDEN_DEN || typ == EXPORT_DNA_VIAC_DNI) {
+                      if (ma_nazov) strcat(_global_string, "<br>");
+#ifdef IO_ANDROID
+                      sprintf(pom, "<a href=\"svpismo://svpismo.riso.ksp.sk/?d=%d&amp;m=%d&amp;y=%d&amp;c=", _local_den.den, _local_den.mesiac, _local_den.rok);
+#else
+                      sprintf(pom, "<a href=\"http://dkc.kbs.sk/dkc.php?in=");
+#endif
+                      strcat(_global_string, pom);
+                      strcat(_global_string, StringEncode(remove_diacritics(cit->citania)));
+
+#ifdef IO_ANDROID
+                      sprintf(pom, "&amp;zalm=");
+                      strcat(_global_string, pom);
+                      strcat(_global_string, StringEncode(toUtf(cit->zalm)));
+
+                      sprintf(pom, "&amp;aleluja=");
+                      strcat(_global_string, pom);
+                      strcat(_global_string, StringEncode(toUtf(cit->aleluja)));
+#endif
+
+                      sprintf(pom, "\">%s</a>", cit->citania);
+                      strcat(_global_string, pom);
+                    }
+                  }
+                }
+#endif
 	}/* lokaliz·cia sl·venia a kalend·r */
 
 	Log("  -- _global_string == %s\n", _global_string);
@@ -5222,7 +5266,7 @@ short int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, short int rok, short
 	/* teraz nasleduje nieco, co nahradza export - avsak data uklada do stringu _global_string */
 	Log("spustam init_global_string(EXPORT_DNA_JEDEN_DEN, svaty == %d, modlitba == %s)...\n",
 		poradie_svateho, nazov_modlitby(modlitba));
-	ret = init_global_string(EXPORT_DNA_JEDEN_DEN, poradie_svateho, modlitba);
+	ret = init_global_string(EXPORT_DNA_JEDEN_DEN, poradie_svateho, modlitba, false);
 
 	if(ret == FAILURE){
 		Log("init_global_string() returned FAILURE, so returning FAILURE...\n");
@@ -6920,6 +6964,13 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF0_REF, NIE);
 		Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF0_REF, ANO, html_text_option0_referencie_explain[_global_jazyk], ((_global_optf[OPT_0_SPECIALNE] & BIT_OPT_0_REFERENCIE) == BIT_OPT_0_REFERENCIE)? html_option_checked: STR_EMPTY);
 		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option0_referencie_explain[_global_jazyk], html_text_option0_referencie[_global_jazyk]);
+#ifdef LITURGICKE_CITANIA
+		/* pole (checkbox) WWW_MODL_OPTF0_CIT */
+		Export("<br>");
+		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF0_CIT, NIE);
+		Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF0_CIT, ANO, html_text_option0_citania_explain[_global_jazyk], ((_global_optf[OPT_0_SPECIALNE] & BIT_OPT_0_CITANIA) == BIT_OPT_0_CITANIA)? html_option_checked: STR_EMPTY);
+		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option0_citania_explain[_global_jazyk], html_text_option0_citania[_global_jazyk]);
+#endif
 	}/* if(_global_jazyk == JAZYK_SK) */
 
 	Export("</td></tr>\n");
@@ -12137,6 +12188,9 @@ short int getForm(void){
 		switch(i){
 			case 0: strcat(local_str, STR_MODL_OPTF0_VERSE); break;
 			case 1: strcat(local_str, STR_MODL_OPTF0_REF); break;
+#ifdef LITURGICKE_CITANIA
+			case 2: strcat(local_str, STR_MODL_OPTF0_CIT); break;
+#endif
 		}/* switch(i) */
 		ptr = getenv(local_str);
 		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
@@ -12901,6 +12955,9 @@ short int parseQueryString(void){
 		switch(j){
 			case 0: strcat(local_str, STR_MODL_OPTF0_VERSE); break;
 			case 1: strcat(local_str, STR_MODL_OPTF0_REF); break;
+#ifdef LITURGICKE_CITANIA
+			case 2: strcat(local_str, STR_MODL_OPTF0_CIT); break;
+#endif
 		}/* switch(j) */
 		/* premenn· WWW_MODL_OPTF0_... (nepovinn·), j = 0 aû POCET_OPT_0_SPECIALNE */
 		i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */

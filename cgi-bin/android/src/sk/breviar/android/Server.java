@@ -206,6 +206,7 @@ public class Server extends Thread
               "Connection: close\n"
               ).getBytes("UTF-8")
           );
+          client.getOutputStream().close();
         }
       }
     }
