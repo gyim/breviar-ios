@@ -46,6 +46,7 @@
 #include "mylog.h"
 #include "breviar.h" /* 2006-07-31 kvôli jazyku a css (2008-08-08) */
 #include "liturgia.h" /* 2006-07-31 kvôli jazyku */
+#include "mybuild.h" // 2011-07-11: pridané, kvôli BUILD_DATE
 
 short int bol_content_type_text_html = NIE;
 

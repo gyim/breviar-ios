@@ -298,6 +298,7 @@
 #include "mylog.h" /* logovanie udalosti do suboru */
 #include "myexpt.h" /* export do suboru alebo na konzolu printf */
 #include "myhpage.h" /* hlavicka(); patka(); */
+#include "mybuild.h" // 2011-07-11: pridané, kvôli BUILD_DATE
 
 #include "android.h"
 

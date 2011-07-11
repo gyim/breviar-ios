@@ -59,11 +59,10 @@
 /*   2003-07-15a.D. | RUN_MODLITBA_CEZ_DEN definovane          */
 /*   2003-07-15a.D. | vlozeny do mydefs.h                      */
 /*   2003-08-13a.D. | odstranenie RUN_MODLITBA_CEZ_DEN         */
+/*   2011-07-11a.D. | BUILD_DATE presunutý do mybuild.h        */
 /*                                                             */
 /***************************************************************/
 #include <stdio.h>
-
-#define BUILD_DATE "2011-07-08"
 
 #define BYTES 250
 #define SMALL 80
