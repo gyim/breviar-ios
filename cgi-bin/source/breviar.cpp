@@ -309,7 +309,7 @@ char *_global_buf2; /* 2006-08-01: vytvorené; túto premennú tiež alokujeme */
 #define ishex(x) (((x) >= '0' && (x) <= '9') || ((x) >= 'a' && (x) <= 'f') || \
 		  ((x) >= 'A' && (x) <= 'F'))
 
-#define MAX_BUFFER 80
+#define MAX_BUFFER 50
 
 #define ANCHOR_VYSVETLIVKY "VYSVETLIVKY"
 #define FILE_VYSVETLIVKY "vysvetl.htm"
@@ -1373,6 +1373,12 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 
 	Log("--includeFile(%d, %s, %s, %s): begin,\n", type, paramname, fname, modlparam);
 
+	// init
+	mystrcpy(strbuff, STR_EMPTY, MAX_BUFFER);
+	mystrcpy(rest, STR_EMPTY, MAX_BUFFER);
+	mystrcpy(refbuff, STR_EMPTY, MAX_BUFFER);
+	mystrcpy(refrest, STR_EMPTY, MAX_BUFFER);
+
 	FILE *body = fopen(fname, "r");
 
 	Log("  replacing {%s} with %s from file `%s':\n", paramname, modlparam, fname);
@@ -1866,7 +1872,7 @@ void includeFile(short int type, char *paramname, char *fname, char *modlparam){
 		else{
 			strbuff[buff_index++] = (char)c;
 			/* 2011-03-29: doplnená kontrola, èi nejde o osamotený znak '{' */
-			if(((isbuff == 1) && (strlen(strbuff) > MAX_BUFFER - 1)) || (buff_index > MAX_BUFFER - 1)){
+			if(((isbuff == 1) && (strlen(strbuff) > MAX_BUFFER - 2)) || (buff_index > MAX_BUFFER - 2)){
 				Log("pravdepodobne osamotený znak '{'...\n");
 				isbuff = 0;
 				if(write == ANO){
