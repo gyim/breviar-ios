@@ -2539,20 +2539,21 @@ void interpretParameter(short int type, char *paramname){
 		_global_pocet_navigacia++;
 		if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_NAVIGATION) == BIT_OPT_2_NAVIGATION){
 			Export("navig·cia:begin-->\n");
-			if(_global_pocet_navigacia > 1){
-				Export("<table align=\"center\">\n<tr><td>\n");
-				_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN, _global_poradie_svaty, NIE);
-				Export("</td></tr>\n</table>\n");
-				// najprv modlitby, potom dni
-				_export_rozbor_dna_buttons_dni(EXPORT_DNA_JEDEN_DEN, NIE);
-			}
-			else{
+			Export("<!-- navig·cia %d -->\n", _global_pocet_navigacia);
+			if(_global_pocet_navigacia <= 1){
 				_export_rozbor_dna_buttons_dni(EXPORT_DNA_JEDEN_DEN, NIE);
 				// najprv dni, potom modlitby
 				Export("<table align=\"center\">\n<tr><td>\n");
 				_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN, _global_poradie_svaty, NIE);
 				Export("</td></tr>\n</table>\n");
-			}
+			}// _global_pocet_navigacia <= 1
+			else{
+				Export("<table align=\"center\">\n<tr><td>\n");
+				_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN, _global_poradie_svaty, NIE);
+				Export("</td></tr>\n</table>\n");
+				// najprv modlitby, potom dni
+				_export_rozbor_dna_buttons_dni(EXPORT_DNA_JEDEN_DEN, NIE);
+			}// _global_pocet_navigacia > 1
 			Export("<!--navig·cia:end");
 		}
 		else{
@@ -5277,7 +5278,7 @@ short int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, short int rok, short
  * 2011-07-03: pridan˝ parameter, Ëi chce tlaËiù liturgick˙ farbu (pouûitie v navig·cii)
  *
  */
-void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short int export_farbu /* = ANO */){
+void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short int den_zoznam /* = ANO */){
 /* 2005-03-21: Pridany dalsi typ exportu 
  * 2009-08-11: pre tento typ exportu berieme do ˙vahy parameter 'M'
  */
@@ -5291,6 +5292,20 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 	mystrcpy(pom2, STR_EMPTY, MAX_STR); /* 2006-07-31: pridanÈ */
 
 	short int som_v_tabulke = ANO; /* 2009-08-26: Ëi sa pouûÌva tabuæka; beûne pre web ·no, pre export pre mobilnÈ zariadenia [export_monthly_druh >= 3] netreba tabuæku */
+
+	short int _local_den = _global_den.den;
+	short int _local_mesiac = _global_den.mesiac;
+	short int _local_rok = _global_den.rok;
+
+	if(den_zoznam != ANO){
+		/* 2011-07-05/2011-07-11: pre tlaËidl· predoölÈho a nasleduj˙ceho dÚa pre navig·ciu v modlitbe treba pouûiù in˝ d·tum ako _global_den, 
+		 * nakoæko pre veöpery v predveËer nedele resp. sl·vnosti sa d·tum posunul o jeden deÚ...
+		 */
+		// Export("<!-- ˙prava _global_den na: den %d | mesiac %d | rok %d -->", _global_vstup_den, _global_vstup_mesiac, _global_vstup_rok);
+		_global_den.den = _global_vstup_den;
+		_global_den.mesiac = _global_vstup_mesiac;
+		_global_den.rok = _global_vstup_rok;
+	}
 
 	if(_global_opt_batch_monthly == ANO && export_monthly_druh > 2){
 		som_v_tabulke = NIE;
@@ -5312,6 +5327,14 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 
 	if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_VIAC_DNI_TXT)){
 		Log("--- _export_rozbor_dna_buttons(): idem tlacit buttony...\n");
+
+		Export("\n");
+		if(den_zoznam == ANO){
+			Export("<!-- tabuæka s buttonmi pre jednotlivÈ modlitby riadka v r·mci dÚa -->\n");
+		}
+		else{
+			Export("<!-- tabuæka s buttonmi pre jednotlivÈ modlitby zvolenÈho sl·venia dÚa -->\n");
+		}
 
 		if(_global_opt_batch_monthly == NIE){
 			/* prerobene 13/04/2000A.D.: tlacitka niekedy linkuju iba subor, 
@@ -5339,7 +5362,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 			/* bude sa nastavovaù na prÌsluönom mieste */
 		}/* else if(_global_opt_batch_monthly == NIE) */
 
-		if(export_farbu == ANO){
+		if(den_zoznam == ANO){
 			/* 2006-08-19: pridan· liturgick· farba - pre buttons je treba v kaûdom riadku 
 			 * 2011-07-03: moûnosù explicitne neeexportovaù farbu
 			 */
@@ -5353,7 +5376,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 				Export("</td>\n<td valign=\"middle\">");
 				Export(HTML_NONBREAKING_SPACE);
 			}
-		}/* export_farbu == ANO */
+		}/* den_zoznam == ANO */
 
 		/* 2003-07-15 vycistene poznamky, dorobene modlitby cez den */
 
@@ -6014,6 +6037,12 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 			}
 		}/* (typ == EXPORT_DNA_VIAC_DNI) */
 	}
+
+	// sp‰ù pÙvodnÈ nastavenia (pre den_zoznam != ANO boli zmenenÈ)
+	_global_den.den = _local_den;
+	_global_den.mesiac = _local_mesiac;
+	_global_den.rok = _local_rok;
+
 	Log("--- _export_rozbor_dna_buttons(typ == %d) -- end\n", typ); /* 2005-03-22: Pridane */
 }/* _export_rozbor_dna_buttons */
 
@@ -6042,6 +6071,7 @@ void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO 
 		/* 2011-07-05: pre tlaËidl· predoölÈho a nasleduj˙ceho dÚa pre navig·ciu v modlitbe treba pouûiù in˝ d·tum ako _global_den, 
 		 * nakoæko pre veöpery v predveËer nedele resp. sl·vnosti sa d·tum posunul o jeden deÚ...
 		 */
+		// Export("<!-- ˙prava _global_den na: den %d | mesiac %d | rok %d -->", _global_vstup_den, _global_vstup_mesiac, _global_vstup_rok);
 		_global_den.den = _global_vstup_den;
 		_global_den.mesiac = _global_vstup_mesiac;
 		_global_den.rok = _global_vstup_rok;
@@ -6072,7 +6102,12 @@ void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO 
 			prilep_request_options(pom2, pom3, ANO); /* prilep_request_options(pom2, pom3, prvy_ampersand) */
 		}/* if(_global_opt_batch_monthly == NIE) */
 
-		Export("<!-- tabuæka s buttonmi predoöl˝, nasledovn˝ rok/mesiac/deÚ presunut· pred rozbor danÈho dÚa (teda navrh str·nky) -->\n");
+		if(dnes_dnes == ANO){
+			Export("<!-- tabuæka s buttonmi predoöl˝, nasledovn˝ rok/mesiac/deÚ presunut· pred rozbor danÈho dÚa (teda navrh str·nky) -->\n");
+		}
+		else{
+			Export("<!-- tabuæka s buttonmi predoöl˝, nasledovn˝ deÚ -->\n");
+		}
 
 		/* tabuæka pre buttony Predch·dzaj˙ci/Nasleduj˙ci deÚ/mesiac/rok a Dnes */
 		if(som_v_tabulke == ANO)
@@ -6457,9 +6492,12 @@ void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO 
 		/* inak buttony ned·vam */
 		Log("--- _export_rozbor_dna_buttons_dni(): buttony ned·vam...\n");
 	}
+
+	// sp‰ù pÙvodnÈ nastavenia (pre dnes_dnes != ANO boli zmenenÈ)
 	_global_den.den = _local_den;
 	_global_den.mesiac = _local_mesiac;
 	_global_den.rok = _local_rok;
+
 	Log("--- _export_rozbor_dna_buttons_dni(typ == %d) -- end\n", typ); /* 2005-03-22: Pridane */
 }/* _export_rozbor_dna_buttons_dni */
 
@@ -9678,6 +9716,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 					_global_vstup_mesiac = m;
 					_global_vstup_rok = r;
 					_global_poradie_svaty = s;
+					// Export("<!-- den %d | mesiac %d | rok %d -->\n", _global_vstup_den, _global_vstup_mesiac, _global_vstup_rok);
 					rozbor_dna_s_modlitbou(d, m, r, p, s);
 				}
 			}
@@ -9926,11 +9965,12 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 		 */
 	}
 	else{
-		/* ak je urËen· modlitba, postupujeme rovnako ako v _main_rozbor_dna */
+		// ak je urËen· modlitba, postupujeme rovnako ako v _main_rozbor_dna
 		_global_vstup_den = datum.den;
 		_global_vstup_mesiac = datum.mesiac;
 		_global_vstup_rok = dnes.tm_year;
 		_global_poradie_svaty = s;
+		// Export("<!-- den %d | mesiac %d | rok %d -->\n", _global_vstup_den, _global_vstup_mesiac, _global_vstup_rok);
 		rozbor_dna_s_modlitbou(datum.den, datum.mesiac, dnes.tm_year, p, s);
 	}
 
