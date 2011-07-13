@@ -280,9 +280,10 @@
 #include <string.h>
 #include <math.h> /* kvôli funckii pow(); */
 
-#include "mystring.h" /* 31/03/2000A.D. */
-#include "myconf.h" /* 30/03/2000A.D. */
-#include "mysystem.h" /* hovori, ci som v systeme linux/DOS */
+#include "mystring.h"
+#include "myconf.h"
+#include "mysystem.h"
+#include "mysysdef.h"
 #include "hodin.h"
 #include "liturgia.h"                  
 #include "cgiutils.h" /* parsovanie query stringu */
@@ -4616,8 +4617,8 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	short int liturgicka_farba_alt = LIT_FARBA_NEURCENA; /* 2011-03-24: pridané */
         struct citanie *cit = NULL;
 
-	Log("-- init_global_string(EXPORT_DNA_%d, %d, %s) -- zaèiatok (inicializuje tri _global_string* premenné)\n",
-		typ, poradie_svateho, nazov_modlitby(modlitba));
+	Log("-- init_global_string(EXPORT_DNA_%d, %d, %s, %s) -- zaèiatok\n", typ, poradie_svateho, nazov_modlitby(modlitba), aj_citanie);
+	Log("   (inicializuje tri _global_string* premenné)\n");
 	/* -------------------------------------------------------------------- */
 	/* najprv priradime do _local_den to, co tam ma byt */
 
@@ -5202,7 +5203,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 
 	Log("  -- _global_string_farba == %s\n", _global_string_farba);
 
-	Log("-- init_global_string(EXPORT_DNA_%d, %d, %s) -- returning SUCCESS\n", typ, poradie_svateho, nazov_modlitby(modlitba));
+	Log("-- init_global_string(EXPORT_DNA_%d, %d, %s, %s) -- returning SUCCESS\n", typ, poradie_svateho, nazov_modlitby(modlitba), aj_citanie);
 	return SUCCESS;
 }/* init_global_string(); -- 3 vstupy  */
 

@@ -3,6 +3,7 @@
 
 #include "breviar.h"
 #include "mysystem.h"
+#include "mysysdef.h"
 
 #ifdef LITURGICKE_CITANIA
 

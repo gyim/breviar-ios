@@ -72,6 +72,7 @@
 #define __LITURGIA_H_
 
 #include "mysystem.h"
+#include "mysysdef.h"
 #include "mydefs.h"
 #include "mylog.h"
 #include <time.h>

@@ -36,8 +36,9 @@
 #ifndef __MYDEFS_H_
 #define __MYDEFS_H_
 
-#include "mysystem.h" /* tam pozri exportovanie, logovanie, system */
-#include "myconf.h" /* kvoli cfg_MAIL_ADDRESS_default, cfg_HTTP_ADDRESS_default; pridane 30/03/2000A.D. */
+#include "mysystem.h"
+#include "mysysdef.h"
+#include "myconf.h"
 
 #if defined(OS_linux)
 #elif defined(OS_Windows)

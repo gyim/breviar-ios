@@ -1,4 +1,5 @@
 #include "mysystem.h"
+#include "mysysdef.h"
 #include "citania.h"
 #include "liturgia.h"
 #include <string.h>

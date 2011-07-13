@@ -37,6 +37,7 @@
 #include "myexpt.h"
 #include "mydefs.h"
 #include "mysystem.h"
+#include "mysysdef.h"
 #include "mystring.h"
 #include <ctype.h>
 
