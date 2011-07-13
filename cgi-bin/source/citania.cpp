@@ -1,7 +1,10 @@
+#include "mysystem.h"
 #include "citania.h"
 #include "liturgia.h"
 #include <string.h>
 #include <stdlib.h>
+
+#ifdef LITURGICKE_CITANIA
 
 static struct citanie Citania[] = {
 #include "citania-gen.cpp"
@@ -69,7 +72,7 @@ char *StringEncode(const char *in) {
   const char *s;
   static char out[65536];
 
-  for (s=(const char *)in,i=0; i<sizeof(out)-5 && *s; s++) {
+  for (s=(const char *)in,i=0; i<(int)sizeof(out)-5 && *s; s++) {
     if (
         ( (*s>='a')&&(*s<='z') ) ||
         ( (*s>='A')&&(*s<='Z') ) ||
@@ -94,7 +97,7 @@ char *toUtf(const char *in) {
   static char out[65536];
 
   out[0] = 0;
-  for (s=in, i=out; *s && i-out<sizeof(out)-5; i += strlen(i), s++) {
+  for (s=in, i=out; *s && i-out<(int)sizeof(out)-5; i += strlen(i), s++) {
     switch(*s) {
       case '\x97': strcpy(i, "\xe2\x80"); break;
       case '\x96': strcpy(i, "\xe2\x80"); break;
@@ -152,3 +155,4 @@ char *toUtf(const char *in) {
   return out;
 }
 
+#endif // LITURGICKE_CITANIA

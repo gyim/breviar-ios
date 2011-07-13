@@ -300,8 +300,13 @@
 #include "myhpage.h" /* hlavicka(); patka(); */
 #include "mybuild.h" // 2011-07-11: pridané, kvôli BUILD_DATE
 
+#ifdef IO_ANDROID
 #include "android.h"
+#endif // IO_ANDROID
+
+#ifdef LITURGICKE_CITANIA
 #include "citania.h"
+#endif // LITURGICKE_CITANIA
 
 /* 2005-03-28: Pridane, pokusy nahradit uncgi */
 char *_global_buf; /* 2006-08-01: túto premennú tiež alokujeme */
@@ -4583,7 +4588,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok){
 #define CASE_MALE   4
 #define COLOR_RED   3
 #define COLOR_BLACK 2
-short int init_global_string(short int typ, short int poradie_svateho, short int modlitba, bool aj_citanie=true) {
+short int init_global_string(short int typ, short int poradie_svateho, short int modlitba, short int aj_citanie=TRUE) {
 	/* lokalna premenna, do ktorej sa ukladaju info o analyzovanom dni
 	 * pouziva ju void nove_rozbor_dna() funkcia */
 	/* 2003-07-07: obavam sa, ze nove_rozbor_dna() je alebo
@@ -4637,14 +4642,18 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		case 1:
 			/* do _local_den priradim dane slavenie */
 			_local_den = _global_svaty1;
+#ifdef LITURGICKE_CITANIA
 			cit = najdiCitanie(getCode(&_global_svaty1));
+#endif // LITURGICKE_CITANIA
 			Log("priradujem _local_den = _global_svaty1;\n");
 			break; /* case 1: */
 		case 2:
 			if(_global_pocet_svatych > 1){
 				/* do _local_den priradim dane slavenie */
 				_local_den = _global_svaty2;
+#ifdef LITURGICKE_CITANIA
 				cit = najdiCitanie(getCode(&_global_svaty2));
+#endif // LITURGICKE_CITANIA
 				Log("priradujem _local_den = _global_svaty2;\n");
 			}
 			else{
@@ -4662,7 +4671,9 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			if(_global_pocet_svatych > 2){
 				/* teraz do _local_den priradim dane slavenie */
 				_local_den = _global_svaty3;
+#ifdef LITURGICKE_CITANIA
 				cit = najdiCitanie(getCode(&_global_svaty3));
+#endif // LITURGICKE_CITANIA
 				Log("priradujem _local_den = _global_svaty3;\n");
 			}
 			else{
@@ -4702,7 +4713,9 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 				)){
 				/* do _local_den priradim dane slavenie */
 				_local_den = _global_svaty1;
+#ifdef LITURGICKE_CITANIA
 				cit = najdiCitanie(getCode(&_global_svaty1));
+#endif // LITURGICKE_CITANIA
 				Log("priradujem _local_den = _global_svaty1;\n");
 			}
 			else{
@@ -4715,7 +4728,9 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	}/* switch(poradie_svateho) */
 
         int ma_nazov = 0;
+#ifdef LITURGICKE_CITANIA
 	if (!cit) cit = najdiCitanie(getCode(&_global_den));
+#endif // LITURGICKE_CITANIA
 	Log("1:_local_den.meno == %s\n", _local_den.meno); /* 08/03/2000A.D. */
 
 	/* 21/03/2000A.D.
@@ -5266,7 +5281,7 @@ short int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, short int rok, short
 	/* teraz nasleduje nieco, co nahradza export - avsak data uklada do stringu _global_string */
 	Log("spustam init_global_string(EXPORT_DNA_JEDEN_DEN, svaty == %d, modlitba == %s)...\n",
 		poradie_svateho, nazov_modlitby(modlitba));
-	ret = init_global_string(EXPORT_DNA_JEDEN_DEN, poradie_svateho, modlitba, false);
+	ret = init_global_string(EXPORT_DNA_JEDEN_DEN, poradie_svateho, modlitba, FALSE);
 
 	if(ret == FAILURE){
 		Log("init_global_string() returned FAILURE, so returning FAILURE...\n");
