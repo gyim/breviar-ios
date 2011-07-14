@@ -1365,7 +1365,7 @@ void _main_prazdny_formular(void){
 #define EXPORT_REFERENCIA (!vnutri_myslienky || je_myslienka)
 short int antifona_pocet = 0; // 2011-07-08: poèet antifón (ant1, ant2, ant3 pre psalmódiu a ant. na benediktus/magnifikat kvôli krížikom)
 char rest_krizik[MAX_BUFFER] = STR_EMPTY; // 2011-07-08: pre to, èo je za krížikom v antifóne
-void includeFile(short int type, char *paramname, char *fname, char *modlparam){
+void includeFile(short int type, const char *paramname, const char *fname, const char *modlparam){
 	short int c, buff_index = 0, ref_index = 0;
 	char strbuff[MAX_BUFFER];
 	char rest[MAX_BUFFER];
@@ -4589,7 +4589,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok){
 #define CASE_MALE   4
 #define COLOR_RED   3
 #define COLOR_BLACK 2
-short int init_global_string(short int typ, short int poradie_svateho, short int modlitba, short int aj_citanie=TRUE) {
+short int init_global_string(short int typ, short int poradie_svateho, short int modlitba, short int aj_citanie = TRUE) {
 	/* lokalna premenna, do ktorej sa ukladaju info o analyzovanom dni
 	 * pouziva ju void nove_rozbor_dna() funkcia */
 	/* 2003-07-07: obavam sa, ze nove_rozbor_dna() je alebo
