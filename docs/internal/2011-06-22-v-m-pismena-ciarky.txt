@@ -6,3 +6,6 @@
 
 -- hymnus pre pondelok, vešpery [_2POv_HYMNUS], 5. (posledná) strofa, 2. verš: "svätému Ohòu rovnaká moc stála": 2. týždeò žaltára (zv. III, str. 873; zv. IV, str. 815) má ve¾ké "S" [Svätému Ohòu]; 4. týždeò žaltára (zv. III, str. 1191; zv. IV, str. 1133) má malé "s"
 
+-- hymnus pre stredu, ranné chvály; sviatky jednoho muèeníka, vešpery; posv. èítanie, 1. a 3. týždeò piatok (II.) má rozdielne "Kriste, krá¾ dobrý, láskavý," s malým "k" vs. "Krá¾" s ve¾kým K
+
+-- Ammon vs. Amon (Amonèania vs. Ammonèania)
