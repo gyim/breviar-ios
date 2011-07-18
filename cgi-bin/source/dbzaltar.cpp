@@ -18372,8 +18372,8 @@ label_25_MAR:
 							_vlastna_cast_modlitba;
 							break;
 						}
-						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-						_global_svaty1.smer = 12; /* lubovolne spomienky */
+						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 						mystrcpy(_global_svaty1.meno, text_JUL_18_HU[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA);
 						_global_svaty1.farba = LIT_FARBA_BIELA;

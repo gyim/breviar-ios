@@ -4211,7 +4211,7 @@ const char *text_JUL_18_HU[POCET_JAZYKOV + 1] =
  "",
  "",
  "",
- "Boldog Hedvig királyné",
+ "Szent Hedvig királyné",
  };
 const char *text_JUL_20[POCET_JAZYKOV + 1] = 
 {"Sv. Apolinára, biskupa a muèeníka",
