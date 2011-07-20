@@ -4640,7 +4640,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	short int liturgicka_farba_alt = LIT_FARBA_NEURCENA; /* 2011-03-24: pridané */
         struct citanie *cit = NULL;
 
-	Log("-- init_global_string(EXPORT_DNA_%d, %d, %s, %s) -- zaèiatok\n", typ, poradie_svateho, nazov_modlitby(modlitba), aj_citanie);
+	Log("-- init_global_string(EXPORT_DNA_%d, %d, %s, %d) -- zaèiatok\n", typ, poradie_svateho, nazov_modlitby(modlitba), aj_citanie);
 	Log("   (inicializuje tri _global_string* premenné)\n");
 	/* -------------------------------------------------------------------- */
 	/* najprv priradime do _local_den to, co tam ma byt */
@@ -5226,7 +5226,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 
 	Log("  -- _global_string_farba == %s\n", _global_string_farba);
 
-	Log("-- init_global_string(EXPORT_DNA_%d, %d, %s, %s) -- returning SUCCESS\n", typ, poradie_svateho, nazov_modlitby(modlitba), aj_citanie);
+	Log("-- init_global_string(EXPORT_DNA_%d, %d, %s, %d) -- returning SUCCESS\n", typ, poradie_svateho, nazov_modlitby(modlitba), aj_citanie);
 	return SUCCESS;
 }/* init_global_string(); -- 3 vstupy  */
 

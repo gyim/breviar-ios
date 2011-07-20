@@ -30,6 +30,7 @@ public class Breviar extends Activity
     static String scriptname = "cgi-bin/l.cgi";
     String language;
     static final String prefname = "BreviarPrefs";
+    boolean initialized;
 
     void goHome() {
       wv.loadUrl("http://localhost:" + S.port + "/" + scriptname + "?qt=pdnes" + Html.fromHtml(S.getOpts()));
@@ -77,6 +78,8 @@ public class Breviar extends Activity
       wv = (WebView)findViewById(R.id.wv);
       wv.getSettings().setBuiltInZoomControls(true);
       wv.setInitialScale(scale);
+      initialized = false;
+      //Log.v("breviar", "setting scale = " + scale);
       if (wv.restoreState(savedInstanceState) == null) goHome();
 
       final Breviar parent = this;
@@ -99,6 +102,7 @@ public class Breviar extends Activity
             if (tryOpenBible(url)) return true;
           }
 
+          //Log.v("breviar", "sync in overrideurlloading");
           parent.syncScale();
           view.loadUrl(url);
           return true;
@@ -107,13 +111,15 @@ public class Breviar extends Activity
         @Override
         public void onScaleChanged(WebView view, float oldSc, float newSc) {
           parent.scale = (int)(newSc*100);
+          //Log.v("breviar", "onScaleChanged: setting scale = " + scale);
           view.setInitialScale(parent.scale);
         }
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
-//          Log.v("breviar", "onPageStarted");
-          parent.syncScale();
+          //Log.v("breviar", "onPageStarted");
+          if (parent.initialized) parent.syncScale();
+          parent.initialized = true;
         }
       } );
 
@@ -147,7 +153,7 @@ public class Breviar extends Activity
     }
 
     protected void onSaveInstanceState(Bundle outState) {
-//      Log.v("breviar", "onSaveInstanceState");
+      //Log.v("breviar", "onSaveInstanceState");
       syncScale();
       wv.saveState(outState);
       syncPreferences();
@@ -171,11 +177,11 @@ public class Breviar extends Activity
     protected void syncScale() {
       scale = (int)(wv.getScale()*100);
       wv.setInitialScale(scale);
-//      Log.v("breviar", "syncScale "+scale);
+      //Log.v("breviar", "syncScale "+scale);
     }
 
     protected void onStop(){
-//      Log.v("breviar", "onStop");
+      //Log.v("breviar", "onStop");
       syncScale();
       super.onStop();
       syncPreferences();
