@@ -473,6 +473,9 @@ const char *nazov_slavenia_lokal[] =
 ,"A Pécsi egyházmegyében: az egyházmegye védõszentje; ünnep"
 ,"A Szeged-Csanádi egyházmegye északi részében; ünnep"
 ,"A Veszprémi egyházmegyében: Szent Anna, az egyházmegye védõszentje; ünnep"
+,"A Gyõri és Székesfehérvári egyházmegyében: az egyházmegye védõszéntje"
+,"A Kaposvári egyházmegyében; ünnep"
+,"A Váci egyházmegyében; ünnep"
 };
 
 /* names of liturgical colors */
@@ -4388,7 +4391,7 @@ const char *text_AUG_02_2[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Petra Juliána Eymarda, knìze",
- "(nincs Magyarországon)",
+ "Szent Eymard Julián Péter áldozópap",
  };
 const char *text_AUG_02_CZOP[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",
@@ -4478,7 +4481,7 @@ const char *text_AUG_09[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Terezie Benedikty, panny a muèednice, patronky Evropy",
- "",
+ "A keresztrõl nevezett Szent Teréz Benedikta (Edith Stein) <br>szûz és vértanú, Európa társvédõszentje",
  };
 const char *text_AUG_10[POCET_JAZYKOV + 1] = 
 {"Sv. Vavrinca, diakona a muèeníka",
@@ -4505,7 +4508,7 @@ const char *text_AUG_12[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Jany Františky de Chantal, øeholnice",
- "",
+ "Chantal szent Johanna Franciska szerzetesnõ",
  };
 const char *text_AUG_13[POCET_JAZYKOV + 1] = 
 {"Sv. Ponciána, pápeža, a sv. Hypolita, kòaza, muèeníkov",
@@ -4514,7 +4517,16 @@ const char *text_AUG_13[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Ponciána, papeže, a Hippolyta, knìze, muèedníkù",
- "Szent Ponciánusz pápa és szent Hippolitusz áldozópap és vértanúk",
+ "Szent Ponciánusz pápa és szent Hippolitusz áldozópap és vértanúk", // HU: 16AUG
+ };
+const char *text_AUG_13_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Boldog XI. Ince pápa", // HU
  };
 const char *text_AUG_14[POCET_JAZYKOV + 1] = 
 {"Sv. Maximiliána Kolbeho, kòaza a muèeníka",
@@ -4551,6 +4563,24 @@ const char *text_AUG_17_CZOP[POCET_JAZYKOV + 1] =
  "",
  "Sv. Hyacinta z Polska, knìze",
  "hu_",
+ };
+const char *text_AUG_17_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "A Székesegyház felszentelése",
+ };
+const char *text_AUG_18_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "A Székesegyház felszentelése",
  };
 const char *text_AUG_18_SJ[POCET_JAZYKOV + 1] = 
 {"Bl. Alberta Hurtada Cruchagu, kòaza",

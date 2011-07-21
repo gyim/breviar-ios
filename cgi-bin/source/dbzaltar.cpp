@@ -18988,7 +18988,9 @@ label_25_MAR:
 
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+						if(_global_jazyk != JAZYK_HU){
+							_vlastna_cast_2citanie;
+						}
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -19369,7 +19371,9 @@ label_25_MAR:
 
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+						if(_global_jazyk != JAZYK_HU){
+							_vlastna_cast_2citanie;
+						}
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
@@ -19511,14 +19515,26 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky */
-					mystrcpy(_global_svaty1.meno, text_AUG_13[_global_jazyk], MENO_SVIATKU);
-						/* 2010-11-22: Ëesk˝ brevi·r nem· moûnosù pre duch. pastierov "pre viacer˝ch" -- MODL_SPOL_CAST_DUCH_PAST_VIACERI */
-						if((_global_jazyk != JAZYK_CZ) && (_global_jazyk != JAZYK_CZ_OP))
-							_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_VIACERI);
-						else
-							_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
-					_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
-					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
+					if(_global_jazyk == JAZYK_HU){
+						mystrcpy(_global_svaty1.meno, text_AUG_13_HU[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+					}
+					else{
+						mystrcpy(_global_svaty1.meno, text_AUG_13[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.farba = LIT_FARBA_CERVENA; /* 2006-08-19: pridanÈ */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
+					}
+					/* 2010-11-22: Ëesk˝ brevi·r nem· moûnosù pre duch. pastierov "pre viacer˝ch" -- MODL_SPOL_CAST_DUCH_PAST_VIACERI */
+					if((_global_jazyk != JAZYK_CZ) && (_global_jazyk != JAZYK_CZ_OP)){
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_VIACERI);
+					}
+					else if(_global_jazyk == JAZYK_HU){
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
+					}
+					else{
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
+					}
 					break;
 				case 14: /* MES_AUG -- 14AUG */
 					if(poradie_svaty == 1){
@@ -19601,6 +19617,9 @@ label_25_MAR:
 						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
 					_global_svaty1.typslav = SLAV_SLAVNOST;
+					if(_global_jazyk == JAZYK_HU){
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_GYORI_SZEKESFEH_EGYH;
+					}
 					_global_svaty1.smer = 3; /* slavnosti Pana, preblahoslavenej Panny Marie a svatych, uvedene vo vseobecnom kalendari */
 					_global_svaty1.prik = PRIKAZANY_SVIATOK;
 					mystrcpy(_global_svaty1.meno, text_AUG_15[_global_jazyk], MENO_SVIATKU);
@@ -19627,10 +19646,19 @@ label_25_MAR:
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; /* lubovolne spomienky */
-					mystrcpy(_global_svaty1.meno, text_AUG_16[_global_jazyk], MENO_SVIATKU);
-					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_MANZ); /* 2006-08-07: upravenÈ lebo ûil v manûelstve :) */
-					_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
-					_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
+					// [ToDo] 2011-07-21: Preveriù, Ëi presun 13. a 16. augusta je len z·leûitosùou JAZYK_HU; slovenskÈ direktÛrium na rok 2011 to neobsahuje
+					if(_global_jazyk == JAZYK_HU){
+						mystrcpy(_global_svaty1.meno, text_AUG_13[_global_jazyk], MENO_SVIATKU); // presun zo vöeobecnÈho kalend·ra
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV, MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
+						_global_svaty1.farba = LIT_FARBA_CERVENA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+					}
+					else{
+						mystrcpy(_global_svaty1.meno, text_AUG_16[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_MANZ); /* 2006-08-07: upravenÈ lebo ûil v manûelstve :) */
+						_global_svaty1.farba = LIT_FARBA_BIELA; /* 2006-08-19: pridanÈ */
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY; /* 2010-08-03: pridanÈ */
+					}
 					break;
 				case 17: /* MES_AUG -- 17AUG */
 					/* 2009-03-24: doplnenÈ pre dominik·nov */
@@ -19664,6 +19692,26 @@ label_25_MAR:
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP; /* 2010-08-03: pridanÈ */
 					}/* czop only */
+					if(_global_jazyk == JAZYK_HU){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_2citanie;
+
+							break;
+							/* Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
+						}
+						_global_svaty1.smer = 8; /* miestne sviatky */
+						_global_svaty1.typslav = SLAV_SVIATOK;
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_KAPORSVAR_FELSZ;
+						mystrcpy(_global_svaty1.meno, text_AUG_17_HU[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+					}/* hu only */
 					break;
 				case 18: /* MES_AUG -- 18AUG */
 					/* 2009-03-24: doplnenÈ pre dominik·nov */
@@ -19723,6 +19771,26 @@ label_25_MAR:
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_SK_SJ;
 					}/* kalend·r pre KALENDAR_SK_SJ */
+					else if(_global_jazyk == JAZYK_HU){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_2citanie;
+
+							break;
+							/* Vöetko je zo spoloËnej Ëasti na v˝roËie posviacky chr·mu */
+						}
+						_global_svaty1.smer = 8; /* miestne sviatky */
+						_global_svaty1.typslav = SLAV_SVIATOK;
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_VACI_FELSZ;
+						mystrcpy(_global_svaty1.meno, text_AUG_18_HU[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+					}/* hu only */
 					break;
 				case 19: /* MES_AUG -- 19AUG */
 					if(poradie_svaty == 1){
