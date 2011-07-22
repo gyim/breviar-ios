@@ -4553,7 +4553,7 @@ const char *text_AUG_16[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Štìpána Uherského",
- "(nincs Magyarországon)",
+ "Szent István király, Magyarország fôvédôszentje",
  };
 const char *text_AUG_17_CZOP[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",
@@ -4616,7 +4616,7 @@ const char *text_AUG_20[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Bernarda, opata a uèitele Církve",
- "",
+ "Szent Bernát apát és egyháztanító", // HU 19AUG
  };
 const char *text_AUG_21[POCET_JAZYKOV + 1] = 
 {"Sv. Pia X., pápeža",
