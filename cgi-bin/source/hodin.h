@@ -473,9 +473,11 @@ const char *nazov_slavenia_lokal[] =
 ,"A Pécsi egyházmegyében: az egyházmegye védõszentje; ünnep"
 ,"A Szeged-Csanádi egyházmegye északi részében; ünnep"
 ,"A Veszprémi egyházmegyében: Szent Anna, az egyházmegye védõszentje; ünnep"
-,"A Gyõri és Székesfehérvári egyházmegyében: az egyházmegye védõszéntje"
+,"A gyõri és székesfehérvári egyházmegyében: az egyházmegye védõszéntje"
 ,"A Kaposvári egyházmegyében; ünnep"
 ,"A Váci egyházmegyében; ünnep"
+,"Kalocsa-Kecskemét: a fõegyházmegye védõszentje; fõünnep"
+,"A Esztergom fõszékesegyház felszentelése; ünnep"
 };
 
 /* names of liturgical colors */
@@ -4553,7 +4555,7 @@ const char *text_AUG_16[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Štìpána Uherského",
- "Szent István király, Magyarország fôvédôszentje",
+ "Szent István király, Magyarország fõvédõszentje",
  };
 const char *text_AUG_17_CZOP[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",
@@ -4571,7 +4573,7 @@ const char *text_AUG_17_HU[POCET_JAZYKOV + 1] =
  "",
  "",
  "",
- "A Székesegyház felszentelése",
+ "Kaposvár: A székesegyház felszentelése",
  };
 const char *text_AUG_18_HU[POCET_JAZYKOV + 1] = 
 {"",
@@ -4580,7 +4582,7 @@ const char *text_AUG_18_HU[POCET_JAZYKOV + 1] =
  "",
  "",
  "",
- "A Székesegyház felszentelése",
+ "Vác: A székesegyház felszentelése",
  };
 const char *text_AUG_18_SJ[POCET_JAZYKOV + 1] = 
 {"Bl. Alberta Hurtada Cruchagu, kòaza",
@@ -4725,6 +4727,15 @@ const char *text_AUG_30_SK[POCET_JAZYKOV + 1] =
  "",
  "(pro dominikány není)",
  "(nincs Magyarországon)",
+ };
+const char *text_AUG_31_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Esztergom: A fõszékesegyház felszentelése",
  };
 
 /* --------------- 09 september --------------- */

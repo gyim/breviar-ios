@@ -878,6 +878,8 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_GYORI_SZEKESFEH_EGYH     60
 #define LOKAL_SLAV_KAPORSVAR_FELSZ          61
 #define LOKAL_SLAV_VACI_FELSZ               62
+#define LOKAL_SLAV_KAL_KECS_FOEGYH          63
+#define LOKAL_SLAV_ESZTERGOM_FOEGYH         64
 
 /* 2010-08-03: pridaný kalendár */
 #define KALENDAR_NEURCENY                   0
