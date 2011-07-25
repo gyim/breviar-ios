@@ -452,32 +452,33 @@ const char *nazov_slavenia_lokal[] =
 ,"v plzeòské diecézi"
 ,"ve Slezsku svátek"
 ,"v èeskobudìjovické diecézi památka"
-,"v Bratislavskej arcidiecéze a v Spišskej diecéze sviatok hlavného patróna" /* doplnené 2008-06-24 */
-,"v Bratislavskej arcidiecéze" /* doplnené 2010-03-16 */
-,"Karácsony nyolcada-Kiskarácsony" /* doplnené 2010-05-17 */
-,"len pre Kongregáciu milosrdnıch sestier Sv. kría" /* doplnené 2011-01-27 */
-,"pre OFMCap: spomienka" /* nasledovné doplnené 2011-03-16 */
-,"pre OFM: sviatok"
-,"pre OFM: spomienka"
-,"pre OFMCap: sviatok" /* nasledovné doplnené 2011-03-17 */
-,"pre FMA: spomienka"
-,"pre FMA: slávnos"
-,"pre SDB: slávnos"
-,"pre VDB: sviatok"
-,"pre SCSC: sviatok"
-,"Húsvét 2. vasárnapja — Az Isteni Irgalmasság vasárnapja"
-,"A Szombathelyi egyházmegyében"
-,"Pozsonyi Fõegyházmegye és a Nagyszombati Egyházmegye fõpátronusa"
-,"A Szeged-Csanádi egyházmegye északi részében: az egyházmegye védõszentje; fõünnep"
-,"A Pécsi egyházmegyében"
-,"A Pécsi egyházmegyében: az egyházmegye védõszentje; ünnep"
-,"A Szeged-Csanádi egyházmegye északi részében; ünnep"
-,"A Veszprémi egyházmegyében: Szent Anna, az egyházmegye védõszentje; ünnep"
-,"A gyõri és székesfehérvári egyházmegyében: az egyházmegye védõszéntje"
-,"A Kaposvári egyházmegyében; ünnep"
-,"A Váci egyházmegyében; ünnep"
-,"Kalocsa-Kecskemét: a fõegyházmegye védõszentje; fõünnep"
-,"A Esztergom fõszékesegyház felszentelése; ünnep"
+,"v Bratislavskej arcidiecéze a v Spišskej diecéze sviatok hlavného patróna"						// LOKAL_SLAV_SPIS_BA_PATRON
+,"v Bratislavskej arcidiecéze"																		// LOKAL_SLAV_BRATISLAVA
+,"Karácsony nyolcada-Kiskarácsony"																	// LOKAL_SLAV_KONIEC_OKTAVY_NAR_HU
+,"len pre Kongregáciu milosrdnıch sestier Sv. kría"												// LOKAL_SLAV_KONGREGACIA_SSK
+,"pre OFMCap: spomienka"																			// LOKAL_SLAV_SPOMIENKA_OFMCAP
+,"pre OFM: sviatok"																					// LOKAL_SLAV_SVIATOK_OFM
+,"pre OFM: spomienka"																				// LOKAL_SLAV_SPOMIENKA_OFM
+,"pre OFMCap: sviatok"																				// LOKAL_SLAV_SVIATOK_OFMCAP
+,"pre FMA: spomienka"																				// LOKAL_SLAV_SPOMIENKA_FMA
+,"pre FMA: slávnos"																				// LOKAL_SLAV_SLAVNOST_FMA
+,"pre SDB: slávnos"																				// LOKAL_SLAV_SLAVNOST_SDB
+,"pre VDB: sviatok"																					// LOKAL_SLAV_SVIATOK_VDB
+,"pre SCSC: sviatok"																				// LOKAL_SLAV_SVIATOK_SCSC/
+,"Húsvét 2. vasárnapja — Az Isteni Irgalmasság vasárnapja"											// LOKAL_SLAV_DRUHA_VELK_NEDELA_HU
+,"A Szombathelyi egyházmegyében"																	// LOKAL_SLAV_SZOMBATHELYI_EGYH
+,"Pozsonyi fõegyházmegye és a Nagyszombati egyházmegye fõpátronusa"									// LOKAL_SLAV_POZS_NAGYSZ_PATRON
+,"A Szeged-Csanádi egyházmegye északi részében: az egyházmegye védõszentje; fõünnep"				// LOKAL_SLAV_SZEGED_CSAN_PATRON
+,"A Pécsi egyházmegyében"																			// LOKAL_SLAV_PECSI_EGYH
+,"A Pécsi egyházmegyében: az egyházmegye védõszentje; ünnep"										// LOKAL_SLAV_PECSI_EGYH_PATRON
+,"A Szeged-Csanádi egyházmegye északi részében; ünnep"												// LOKAL_SLAV_SZEGED_CSAN_EGYH
+,"A Veszprémi egyházmegyében: Szent Anna, az egyházmegye védõszentje; ünnep"						// LOKAL_SLAV_VESZPREMI_EGYH_PATRON
+,"A gyõri és székesfehérvári egyházmegyében: az egyházmegye védõszéntje"							// LOKAL_SLAV_GYORI_SZEKESFEH_EGYH
+,"A Kaposvári egyházmegyében; ünnep"																// LOKAL_SLAV_KAPORSVAR_FELSZ
+,"A Váci egyházmegyében; ünnep"																		// LOKAL_SLAV_VACI_FELSZ
+,"Kalocsa-Kecskemét: a fõegyházmegye védõszentje; fõünnep"											// LOKAL_SLAV_KAL_KECS_FOEGYH
+,"A Esztergom-Budapest, a fôszékesegyházban; fõünnep"												// LOKAL_SLAV_ESZTERGOM_BUDA_FOEGYH
+,"A fôszékesegyházban; fõünnep"																		// LOKAL_SLAV_KAL_KECS_FELSZ
 };
 
 /* names of liturgical colors */
@@ -4683,6 +4684,15 @@ const char *text_AUG_25_CZ[POCET_JAZYKOV + 1] =
  "Sv. Benedikta, Jana, Matouše, Izáka a Kristina, muèedníkù",
  "(nincs Magyarországon)",
  };
+const char *text_AUG_25_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Kalocsa-Kecskemét: A fõszékesegyház felszentelése",
+ };
 const char *text_AUG_26_SDB[POCET_JAZYKOV + 1] = 
 {"Bl. Zefirína Namuncurá, mladíka",
  "",
@@ -4735,7 +4745,7 @@ const char *text_AUG_31_HU[POCET_JAZYKOV + 1] =
  "",
  "",
  "",
- "Esztergom: A fõszékesegyház felszentelése",
+ "Esztergom-Budapest: A prímási bazilika-<br>fõszékesegyház felszentelése",
  };
 
 /* --------------- 09 september --------------- */

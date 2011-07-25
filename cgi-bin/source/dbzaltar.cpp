@@ -20220,6 +20220,28 @@ label_25_MAR:
 						_global_svaty3.farba = LIT_FARBA_CERVENA;
 						_global_svaty3.kalendar = KALENDAR_VSEOBECNY_CZ; /* 2010-08-03: pridané */
 					}
+
+					if(_global_jazyk == JAZYK_HU){
+						if(poradie_svaty == 3){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_2citanie;
+
+							break;
+							/* Všetko je zo spoloènej èasti na výroèie posviacky chrámu */
+						}
+						pocet = 3;
+						_global_svaty3.smer = 8; /* miestne sviatky */
+						_global_svaty3.typslav = SLAV_SVIATOK;
+						_global_svaty3.typslav_lokal = LOKAL_SLAV_KAL_KECS_FELSZ;
+						mystrcpy(_global_svaty3.meno, text_AUG_25_HU[_global_jazyk], MENO_SVIATKU);
+						_global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+						_global_svaty3.farba = LIT_FARBA_BIELA;
+						_global_svaty3.kalendar = KALENDAR_VSEOBECNY_HU;
+					}/* hu only */
 					break;
 				case 26: /* MES_AUG -- 26AUG */
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SDB)){
@@ -20414,7 +20436,7 @@ label_25_MAR:
 						}
 						_global_svaty1.smer = 8; /* miestne sviatky */
 						_global_svaty1.typslav = SLAV_SVIATOK;
-						_global_svaty1.typslav_lokal = LOKAL_SLAV_ESZTERGOM_FOEGYH;
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_ESZTERGOM_BUDA_FOEGYH;
 						mystrcpy(_global_svaty1.meno, text_AUG_31_HU[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
