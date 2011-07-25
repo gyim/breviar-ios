@@ -411,74 +411,75 @@ const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1] =
  * 2007-08-31: upravené TT -> BA-TT
  * 2008-06-23: upravené vzh¾adom k novému usporiadaniu diecéz (intuitívne)
  * 2010-03-16: doplnené BA
+ * 2011-07-25: doplnené názvy èíselnıch konštánt
  */
 const char *nazov_slavenia_lokal[] =
-{""
-,"len v roòavskej katedrále"
-,"hlavnı patrón Trnavskej arcidiecézy" /* "hlavnı patrón Bratislavsko-Trnavskej arcidiecézy" */
-,"v Bratislavskej a Trnavskej arcidiecéze <br>a v Banskobystrickej, Košickej, Nitrianskej a Roòavskej diecéze" /* "v Bratislavsko-Trnavskej arcidiecéze a v Banskobystrickej, Košickej, Nitrianskej a Roòavskej diecéze" */
-,"v Nitrianskej diecéze sviatok hlavnıch patrónov"
-,"len v Košickej diecéze"
-,"len v Nitrianskej diecéze"
-,"len v Banskobystrickej diecéze"
-,"len v Spišskej diecéze"
-,"len v Roòavskej diecéze"
-,"len v Trnavskej arcidiecéze" /* "len v Bratislavsko-trnavskej arcidiecéze" */ /* LOKAL_SLAV_TRNAVA - pôvodne bolo "len v Trnavskej diecéze", upravené 2007-08-31*/
-,"len v Dóme sv. Martina v Bratislave"
-,"v Spišskej diecéze sviatok hlavného patróna"
-,"v Banskobystrickej diecéze sviatok hlavného patróna"
-,"v Bratislavskej a Trnavskej arcidiecéze <br>a v Banskobystrickej, Nitrianskej a Roòavskej diecéze" /* "v Bratislavsko-Trnavskej arcidiecéze a v Banskobystrickej, Nitrianskej a Roòavskej diecéze" */
-,"v Košickej diecéze sviatok hlavného patróna"
-,"na Slovensku 5. júla, slávnos; v Európe sviatok"
-,"v Roòavskej diecéze sviatok hlavného patróna"
-,"len v konsekrovanıch kostoloch"
-,"Druhá ve¾konoèná nede¾a — Boieho milosrdenstva"
-,"koniec Oktávy narodenia Pána"
-,"konec Oktávu Narození Pánì"
-,"hlavního patrona praské arcidiecéze"
-,"v praské arcidiecézi"
-,"v brnìnské diecézi"
-,"na Moravì památka"
-,"Druhá nedìle velikonoèní – Boího milosrdenství"
-,"v praské katedrále slavnost"
-,"v èeskobudìjovické diecézi"
-,"v olomoucké arcidiecézi"
-,"v Èechách svátek"
-,"v plzeòské diecézi svátek hlavního patrona"
-,"v ostravsko-opavské diecézi"
-,"v litomìøické diecézi"
-,"v královéhradecké diecézi"
-,"jen v posvìcenıch kostelích"
-,"v plzeòské diecézi"
-,"ve Slezsku svátek"
-,"v èeskobudìjovické diecézi památka"
-,"v Bratislavskej arcidiecéze a v Spišskej diecéze sviatok hlavného patróna"						// LOKAL_SLAV_SPIS_BA_PATRON
-,"v Bratislavskej arcidiecéze"																		// LOKAL_SLAV_BRATISLAVA
-,"Karácsony nyolcada-Kiskarácsony"																	// LOKAL_SLAV_KONIEC_OKTAVY_NAR_HU
-,"len pre Kongregáciu milosrdnıch sestier Sv. kría"												// LOKAL_SLAV_KONGREGACIA_SSK
-,"pre OFMCap: spomienka"																			// LOKAL_SLAV_SPOMIENKA_OFMCAP
-,"pre OFM: sviatok"																					// LOKAL_SLAV_SVIATOK_OFM
-,"pre OFM: spomienka"																				// LOKAL_SLAV_SPOMIENKA_OFM
-,"pre OFMCap: sviatok"																				// LOKAL_SLAV_SVIATOK_OFMCAP
-,"pre FMA: spomienka"																				// LOKAL_SLAV_SPOMIENKA_FMA
-,"pre FMA: slávnos"																				// LOKAL_SLAV_SLAVNOST_FMA
-,"pre SDB: slávnos"																				// LOKAL_SLAV_SLAVNOST_SDB
-,"pre VDB: sviatok"																					// LOKAL_SLAV_SVIATOK_VDB
-,"pre SCSC: sviatok"																				// LOKAL_SLAV_SVIATOK_SCSC/
-,"Húsvét 2. vasárnapja — Az Isteni Irgalmasság vasárnapja"											// LOKAL_SLAV_DRUHA_VELK_NEDELA_HU
-,"A Szombathelyi egyházmegyében"																	// LOKAL_SLAV_SZOMBATHELYI_EGYH
-,"Pozsonyi fõegyházmegye és a Nagyszombati egyházmegye fõpátronusa"									// LOKAL_SLAV_POZS_NAGYSZ_PATRON
-,"A Szeged-Csanádi egyházmegye északi részében: az egyházmegye védõszentje; fõünnep"				// LOKAL_SLAV_SZEGED_CSAN_PATRON
-,"A Pécsi egyházmegyében"																			// LOKAL_SLAV_PECSI_EGYH
-,"A Pécsi egyházmegyében: az egyházmegye védõszentje; ünnep"										// LOKAL_SLAV_PECSI_EGYH_PATRON
-,"A Szeged-Csanádi egyházmegye északi részében; ünnep"												// LOKAL_SLAV_SZEGED_CSAN_EGYH
-,"A Veszprémi egyházmegyében: Szent Anna, az egyházmegye védõszentje; ünnep"						// LOKAL_SLAV_VESZPREMI_EGYH_PATRON
-,"A gyõri és székesfehérvári egyházmegyében: az egyházmegye védõszéntje"							// LOKAL_SLAV_GYORI_SZEKESFEH_EGYH
-,"A Kaposvári egyházmegyében; ünnep"																// LOKAL_SLAV_KAPORSVAR_FELSZ
-,"A Váci egyházmegyében; ünnep"																		// LOKAL_SLAV_VACI_FELSZ
-,"Kalocsa-Kecskemét: a fõegyházmegye védõszentje; fõünnep"											// LOKAL_SLAV_KAL_KECS_FOEGYH
-,"A Esztergom-Budapest, a fôszékesegyházban; fõünnep"												// LOKAL_SLAV_ESZTERGOM_BUDA_FOEGYH
-,"A fôszékesegyházban; fõünnep"																		// LOKAL_SLAV_KAL_KECS_FELSZ
+{""                                                                                                             // LOKAL_SLAV_NEURCENE
+,"len v roòavskej katedrále"                                                                                   // LOKAL_SLAV_ROZNAVA_KATEDRALA
+,"hlavnı patrón Trnavskej arcidiecézy"                                                                          // LOKAL_SLAV_TRNAVA_PATRON
+,"v Bratislavskej a Trnavskej arcidiecéze <br>a v Banskobystrickej, Košickej, Nitrianskej a Roòavskej diecéze" // LOKAL_SLAV_TT_BB_KE_NR_RO
+,"v Nitrianskej diecéze sviatok hlavnıch patrónov"                                                              // LOKAL_SLAV_NITRA_PATRON
+,"len v Košickej diecéze"                                                                                       // LOKAL_SLAV_KOSICE
+,"len v Nitrianskej diecéze"                                                                                    // LOKAL_SLAV_NITRA
+,"len v Banskobystrickej diecéze"                                                                               // LOKAL_SLAV_BYSTRICA
+,"len v Spišskej diecéze"                                                                                       // LOKAL_SLAV_SPIS
+,"len v Roòavskej diecéze"                                                                                     // LOKAL_SLAV_ROZNAVA
+,"len v Trnavskej arcidiecéze"                                                                                  // LOKAL_SLAV_TRNAVA
+,"len v Dóme sv. Martina v Bratislave"                                                                          // LOKAL_SLAV_DOM_SV_MARTINA
+,"v Spišskej diecéze sviatok hlavného patróna"                                                                  // LOKAL_SLAV_SPIS_PATRON
+,"v Banskobystrickej diecéze sviatok hlavného patróna"                                                          // LOKAL_SLAV_BYSTRICA_PATRON
+,"v Bratislavskej a Trnavskej arcidiecéze <br>a v Banskobystrickej, Nitrianskej a Roòavskej diecéze"           // LOKAL_SLAV_TT_BB_NR_RO
+,"v Košickej diecéze sviatok hlavného patróna"                                                                  // LOKAL_SLAV_KOSICE_PATRON
+,"na Slovensku 5. júla, slávnos; v Európe sviatok"                                                             // LOKAL_SLAV_14_FEB_CYRIL_METOD
+,"v Roòavskej diecéze sviatok hlavného patróna"                                                                // LOKAL_SLAV_ROZNAVA_PATRON
+,"len v konsekrovanıch kostoloch"                                                                               // LOKAL_SLAV_KONSEKR_KOSTOLY
+,"Druhá ve¾konoèná nede¾a — Boieho milosrdenstva"                                                              // LOKAL_SLAV_DRUHA_VELK_NEDELA
+,"koniec Oktávy narodenia Pána"                                                                                 // LOKAL_SLAV_KONIEC_OKTAVY_NAR
+,"konec Oktávu Narození Pánì"                                                                                   // LOKAL_SLAV_KONIEC_OKTAVY_NAR_CZ
+,"hlavního patrona praské arcidiecéze"                                                                         // LOKAL_SLAV_PRAHA_PATRON
+,"v praské arcidiecézi"                                                                                        // LOKAL_SLAV_PRAHA
+,"v brnìnské diecézi"                                                                                           // LOKAL_SLAV_BRNO
+,"na Moravì památka"                                                                                            // LOKAL_SLAV_MORAVA_SPOMIENKA
+,"Druhá nedìle velikonoèní – Boího milosrdenství"                                                              // LOKAL_SLAV_DRUHA_VELK_NEDELA_CZ
+,"v praské katedrále slavnost"                                                                                 // LOKAL_SLAV_PRAHA_KATEDRALA
+,"v èeskobudìjovické diecézi"                                                                                   // LOKAL_SLAV_CESKE_BUDEJOVICE
+,"v olomoucké arcidiecézi"                                                                                      // LOKAL_SLAV_OLOMOUC
+,"v Èechách svátek"                                                                                             // LOKAL_SLAV_CECHY_SPOMIENKA
+,"v plzeòské diecézi svátek hlavního patrona"                                                                   // LOKAL_SLAV_PLZEN_PATRON
+,"v ostravsko-opavské diecézi"                                                                                  // LOKAL_SLAV_OSTRAVA_OPAVA
+,"v litomìøické diecézi"                                                                                        // LOKAL_SLAV_LITOMERICE
+,"v královéhradecké diecézi"                                                                                    // LOKAL_SLAV_HRADEC_KRALOVE
+,"jen v posvìcenıch kostelích"                                                                                  // LOKAL_SLAV_KONSEKR_KOSTOLY_CZ 
+,"v plzeòské diecézi"                                                                                           // LOKAL_SLAV_PLZEN 
+,"ve Slezsku svátek"                                                                                            // LOKAL_SLAV_SLEZSKO_SVATEK
+,"v èeskobudìjovické diecézi památka"                                                                           // LOKAL_SLAV_CESKE_BUDEJOVICE_PAMATKA
+,"v Bratislavskej arcidiecéze a v Spišskej diecéze sviatok hlavného patróna"                                    // LOKAL_SLAV_SPIS_BA_PATRON
+,"v Bratislavskej arcidiecéze"                                                                                  // LOKAL_SLAV_BRATISLAVA
+,"Karácsony nyolcada-Kiskarácsony"                                                                              // LOKAL_SLAV_KONIEC_OKTAVY_NAR_HU
+,"len pre Kongregáciu milosrdnıch sestier Sv. kría"                                                            // LOKAL_SLAV_KONGREGACIA_SSK
+,"pre OFMCap: spomienka"                                                                                        // LOKAL_SLAV_SPOMIENKA_OFMCAP
+,"pre OFM: sviatok"                                                                                             // LOKAL_SLAV_SVIATOK_OFM
+,"pre OFM: spomienka"                                                                                           // LOKAL_SLAV_SPOMIENKA_OFM
+,"pre OFMCap: sviatok"                                                                                          // LOKAL_SLAV_SVIATOK_OFMCAP
+,"pre FMA: spomienka"                                                                                           // LOKAL_SLAV_SPOMIENKA_FMA
+,"pre FMA: slávnos"                                                                                            // LOKAL_SLAV_SLAVNOST_FMA
+,"pre SDB: slávnos"                                                                                            // LOKAL_SLAV_SLAVNOST_SDB
+,"pre VDB: sviatok"                                                                                             // LOKAL_SLAV_SVIATOK_VDB
+,"pre SCSC: sviatok"                                                                                            // LOKAL_SLAV_SVIATOK_SCSC/
+,"Húsvét 2. vasárnapja — Az Isteni Irgalmasság vasárnapja"                                                      // LOKAL_SLAV_DRUHA_VELK_NEDELA_HU
+,"A Szombathelyi egyházmegyében"                                                                                // LOKAL_SLAV_SZOMBATHELYI_EGYH
+,"Pozsonyi fõegyházmegye és a Nagyszombati egyházmegye fõpátronusa"                                             // LOKAL_SLAV_POZS_NAGYSZ_PATRON
+,"A Szeged-Csanádi egyházmegye északi részében: az egyházmegye védõszentje; fõünnep"                            // LOKAL_SLAV_SZEGED_CSAN_PATRON
+,"A Pécsi egyházmegyében"                                                                                       // LOKAL_SLAV_PECSI_EGYH
+,"A Pécsi egyházmegyében: az egyházmegye védõszentje; ünnep"                                                    // LOKAL_SLAV_PECSI_EGYH_PATRON
+,"A Szeged-Csanádi egyházmegye északi részében; ünnep"                                                          // LOKAL_SLAV_SZEGED_CSAN_EGYH
+,"A Veszprémi egyházmegyében: Szent Anna, az egyházmegye védõszentje; ünnep"                                    // LOKAL_SLAV_VESZPREMI_EGYH_PATRON
+,"A gyõri és székesfehérvári egyházmegyében: az egyházmegye védõszéntje"                                        // LOKAL_SLAV_GYORI_SZEKESFEH_EGYH
+,"A Kaposvári egyházmegyében; ünnep"                                                                            // LOKAL_SLAV_KAPORSVAR_FELSZ
+,"A Váci egyházmegyében; ünnep"                                                                                 // LOKAL_SLAV_VACI_FELSZ
+,"Kalocsa-Kecskemét: a fõegyházmegye védõszentje; fõünnep"                                                      // LOKAL_SLAV_KAL_KECS_FOEGYH
+,"A Esztergom-Budapest, a fôszékesegyházban; fõünnep"                                                           // LOKAL_SLAV_ESZTERGOM_BUDA_FOEGYH
+,"A fôszékesegyházban; fõünnep"                                                                                 // LOKAL_SLAV_KAL_KECS_FELSZ
 };
 
 /* names of liturgical colors */
