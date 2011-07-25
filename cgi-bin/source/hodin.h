@@ -1893,7 +1893,7 @@ const char *text_ZAKONCENIE_LEBO_ON_dlhe[POCET_JAZYKOV + 1] =
  "Qui tecum vivit et regnat in unitáte Spíritus Sancti, Deus, per ómnia saecula saeculórum.",
  "",
  "Nebo on s tebou v jednotì Ducha Svatého ije a kraluje po všechny vìky vìkù.",
- "Aki veled él és uralkodol a Szentlélekkel egységben, Isten mindörökkön-örökké.",
+ "Aki veled él és uralkodik a Szentlélekkel egységben, Isten mindörökkön-örökké.",
  };
 const char *text_ZAKONCENIE_LEBO_ON_kratke[POCET_JAZYKOV + 1] = 
 {"Lebo on ije a_kra¾uje na veky vekov.",
@@ -1902,7 +1902,7 @@ const char *text_ZAKONCENIE_LEBO_ON_kratke[POCET_JAZYKOV + 1] =
  "Qui vivit et regnat in saecula saeculórum.",
  "",
  "Nebo on s tebou ije a kraluje na vìky vìkù.",
- "Aki él és uralkodol mindörökkön-örökké.",
+ "Aki él és uralkodik mindörökkön-örökké.",
  };
 const char *text_ZAKONCENIE_LEBO_TY_dlhe[POCET_JAZYKOV + 1] = 
 {"Lebo ty si Boh a_iješ a_kra¾uješ s Bohom Otcom v_jednote s_Duchom Svätım po všetky veky vekov.",
