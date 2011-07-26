@@ -844,12 +844,12 @@ const short int format_datumu[POCET_JAZYKOV + 1] = {
 const char *nazov_css[POCET_CSS + 1] =
 {"(css neurèené)", "breviar.css", "breviar-invert.css", "breviar-kbd.css", "ebreviar-cz.css", "breviar-cz-op.css"
 	, "breviar-2003-07-16.css", "breviar-2005-10-13.css", "breviar-2007-08-10.css", "breviar-2008-05-07.css"
-	, "breviar-jm-krize-cz.css"};
+	, "breviar-jm-krize-cz.css", "breviar-kbs.css"};
 
 const char *skratka_css[POCET_CSS + 1] =
 {"__", "def", "invert", "kbd", "cz", "czop"
 	, "2003", "2005", "2007", "2008"
-	, "jmkcz"};
+	, "jmkcz", "kbs"};
 
 /* language charset (encoding); used for HTML heading */
 const char *charset_jazyka[POCET_JAZYKOV + 1] =
