@@ -4757,11 +4757,9 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 #ifdef LITURGICKE_CITANIA
 	if (!cit){
 		Log("nepodarilo sa naËÌtaù cit, preto pouûijem default...\n");
-		Export("<!-- DEF... -->");
 		cit = najdiCitanie(getCode(&_global_den));
 		if (!cit){
 			Log("nepodarilo sa naËÌtaù ani len default pre cit.\n");
-			Export("<!-- DEF NOT FOUND -->");
 		}// if (!cit); 2. pokus
 	}// if (!cit)
 #endif // LITURGICKE_CITANIA
@@ -5136,15 +5134,17 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			}// if (cit && aj_citanie)
 			else{
 #ifndef IO_ANDROID
-				if(cit)
-					sprintf(pom, "<!--lit.citania (cit)-->");
-				else if(aj_citanie)
-					sprintf(pom, "<!--lit.citania (aj_citanie)%s-->", getCode(&_global_den));
-				else
-					sprintf(pom, "<!--lit.citania!!!-->");
-				strcat(_global_string, pom);
+				if(cit){
+					Log("cit is not NULL\n");
+				}
+				else if(aj_citanie){
+					Log("aj_citanie is TRUE\n");
+				}
+				else{
+					Log("cit is NULL && aj_citanie is FALSE\n");
+				}
 #endif
-			}
+			}// if (cit && aj_citanie)
 		}// if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_CITANIA) == BIT_OPT_0_CITANIA)
 #endif
 	}/* lokaliz·cia sl·venia a kalend·r */
@@ -5153,15 +5153,11 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 
 	/* inicializujem _global_string2 */
 	if(((_global_r._POPOLCOVA_STREDA.den == _local_den.den) &&
-		 (_global_r._POPOLCOVA_STREDA.mesiac == _local_den.mesiac)) ||
-		/* popolcova streda */
-		((_local_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN) &&
-		 (typ == EXPORT_DNA_VIAC_DNI)) ||
-		/* pondelok -- streda velkeho tyzdna */
-		(_local_den.smer > 8)){
-		/* nie slavnosti ani sviatky ani nedele */
-		mystrcpy(_global_string2,
-			rimskymi_tyzden_zaltara[tyzden_zaltara(_global_den.tyzden)], MAX_GLOBAL_STR2);
+		(_global_r._POPOLCOVA_STREDA.mesiac == _local_den.mesiac)) || // popolcova streda
+		((_local_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN) && (typ == EXPORT_DNA_VIAC_DNI)) || // pondelok -- streda velkeho tyzdna
+		(_local_den.smer > 8)) // nie slavnosti ani sviatky ani nedele
+	{
+		mystrcpy(_global_string2, rimskymi_tyzden_zaltara[tyzden_zaltara(_global_den.tyzden)], MAX_GLOBAL_STR2);
 	}
 	else if(_local_den.denvt == DEN_NEDELA){
 		/* 13/03/2000A.D. -- pridane, aby aj nedele mali tyzden zaltara */

@@ -7,12 +7,14 @@
 
 #ifdef LITURGICKE_CITANIA
 
-static struct citanie Citania[] = {
+#define POCET_CITANIA 1128 // [ToDo] dorieši krajšie
+
+static struct citanie Citania[POCET_CITANIA] = {
 #include "citania-gen.cpp"
   { NULL, NULL, NULL, NULL }
 };
 
-static int nc = -1;
+static short int nc = POCET_CITANIA - 1;
 
 static int cmpcitanie(const void *a, const void *b) {
   return strcmp((const char *)a, ((struct citanie *)b)->kod);
