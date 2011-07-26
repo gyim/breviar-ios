@@ -5115,7 +5115,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 #ifdef IO_ANDROID
 					sprintf(pom, "<a href=\"svpismo://svpismo.riso.ksp.sk/?d=%d&amp;m=%d&amp;y=%d&amp;c=", _local_den.den, _local_den.mesiac, _local_den.rok);
 #else
-					sprintf(pom, "<a href=\"http://dkc.kbs.sk/dkc.php?in=");
+					sprintf(pom, "<a target=\"_blank\" "HTML_CLASS_QUIET" href=\"http://dkc.kbs.sk/?in=");
 #endif
 					strcat(_global_string, pom);
 					strcat(_global_string, StringEncode(remove_diacritics(cit->citania)));
