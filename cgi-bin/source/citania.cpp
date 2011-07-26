@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#ifdef LITURGICKE_CITANIA
+#ifdef LITURGICKE_CITANIA_ANDROID
 
 #define POCET_CITANIA 1128 // [ToDo] dorieöiù krajöie
 
@@ -158,4 +158,4 @@ char *toUtf(const char *in) {
   return out;
 }
 
-#endif // LITURGICKE_CITANIA
+#endif // LITURGICKE_CITANIA_ANDROID
