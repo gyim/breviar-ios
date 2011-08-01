@@ -4360,7 +4360,7 @@ const char *text_CSSR_TITUL_KONGREGACIE[POCET_JAZYKOV + 1] =
 /* --------------- 08 august --------------- */
 
 const char *text_AUG_01[POCET_JAZYKOV + 1] = 
-{"Sv. Alfonza Márie de Liguori, biskupa a uèite¾a Cirkvi",
+{"Sv. Alfonza Márie de’ Liguori, biskupa a uèite¾a Cirkvi",
  "Sv. Alfonsa z Liguori, biskupa a uèitele církve",
  "",
  "",
@@ -4369,7 +4369,7 @@ const char *text_AUG_01[POCET_JAZYKOV + 1] =
  "Liguori Szent Alfonz Mária püspök és egyháztanító",
  };
 const char *text_AUG_01_CSSR[POCET_JAZYKOV + 1] = 
-{"Sv. Alfonza Márie de Liguori, biskupa a uèite¾a Cirkvi, zakladate¾a kongregácie",
+{"Sv. Alfonza Márie de’ Liguori, biskupa a uèite¾a Cirkvi, zakladate¾a kongregácie",
  "",
  "",
  "",
