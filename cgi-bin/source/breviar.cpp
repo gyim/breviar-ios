@@ -5147,7 +5147,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			// 2011-07-26: doplnené pre BEHAVIOUR_WEB ináè ako pre ANDROID
 			sprintf(pom, "<br><"HTML_SPAN_ITALIC">");
 			strcat(_global_string, pom);
-			sprintf(pom, "<a target=\"_blank\" href=\"http://lc.kbs.sk/?den%04d%02d%02d=", _local_den.rok, _local_den.mesiac, _local_den.den);
+			sprintf(pom, "<a target=\"_blank\" href=\"http://lc.kbs.sk/?den=%04d%02d%02d", _local_den.rok, _local_den.mesiac, _local_den.den);
 			strcat(_global_string, pom);
 			sprintf(pom, "\">%s</a>", (char *)html_text_option0_citania[_global_jazyk]);
 			strcat(_global_string, pom);
