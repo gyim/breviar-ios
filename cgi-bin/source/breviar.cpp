@@ -10976,7 +10976,7 @@ void _main_batch_mode(
 		if(strcmp(name_batch_file, STR_EMPTY) != 0){
 			batch_file = fopen(name_batch_file, "wt");
 			if(batch_file != NULL){
-				Log("batch mode: File `%s' opened for writing...\n", name_batch_file);
+				Log("batch mode: File `%s' opened for writing... (batch_file)\n", name_batch_file);
 				/* teraz zacina cela sranda :)) ... */
 				/* 2004-03-16: vystupny zoznam sa pripadne zapisuje aj ako HTML do suboru 
 				 * na zapisovanie do batch_html_file nevyuzivame Export() */
@@ -10984,7 +10984,11 @@ void _main_batch_mode(
 					mystrcpy(name_batch_html_file, DEFAULT_HTML_EXPORT, MAX_STR);
 				batch_html_file = fopen(name_batch_html_file, "wt");
 				if(batch_html_file != NULL){
-					Log("batch mode: File `%s' opened for writing...\n", name_batch_html_file);
+					Log("batch mode: File `%s' opened for writing... (batch_html_file)\n", name_batch_html_file);
+					// 2011-08-02: doplnenÈ vynulovanie
+					_global_hlavicka_Export = 0;
+					_global_patka_Export = 0;
+					myhpage_init_globals(); // bol_content_type_text_html = NIE;
 					hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_html_file, -1 /* t.j. bez ˙prav linky */, _global_opt_batch_monthly /* element <body> öpeci·lne */);
 					/* 2010-02-15: doplnenÈ "zr˝chlenÈ voæby" 
 					 * 2010-12-03: opravenÈ, nakoæko na niektor˝ch mobiln˝ch zariadeniach JavaScript funkcie 
@@ -11140,7 +11144,7 @@ void _main_batch_mode(
 									/* 2009-08-03: otvorÌm aj s˙bor pre jednotliv˝ mesiac */
 									batch_month_file = fopen(name_batch_month_file, "wt");
 									if(batch_month_file != NULL){
-										Log("batch mode: File `%s' opened for writing...\n", name_batch_month_file);
+										Log("batch mode: File `%s' opened for writing... (batch_month_file/1)\n", name_batch_month_file);
 										// mÙûeme upraviù n·zov tak, ako ho budeme printovaù do dokumentov -- aby obsahoval STR_PATH_SEPARATOR_HTML namiesto STR_PATH_SEPARATOR
 										// pre pouûitie vo funkcii execute_batch_command()
 										mystrcpy(name_batch_month_file, dir_name, MAX_STR);
@@ -11234,7 +11238,7 @@ void _main_batch_mode(
 							strcat(name_batch_month_file, _global_export_navig_hore /* DEFAULT_MONTH_EXPORT */);
 							batch_month_file = fopen(name_batch_month_file, "wt");
 							if(batch_month_file != NULL){
-								Log("batch mode: File `%s' opened for writing...\n", name_batch_month_file);
+								Log("batch mode: File `%s' opened for writing... (batch_month_file/2)\n", name_batch_month_file);
 								hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_month_file, 1);
 								fprintf(batch_month_file, "\n");
 								fprintf(batch_month_file, "<center><h2>");
@@ -11296,7 +11300,7 @@ void _main_batch_mode(
 									strcat(name_batch_month_file, _global_export_navig_hore /* DEFAULT_MONTH_EXPORT */);
 									batch_month_file = fopen(name_batch_month_file, "wt");
 									if(batch_month_file != NULL){
-										Log("batch mode: File `%s' opened for writing...\n", name_batch_month_file);
+										Log("batch mode: File `%s' opened for writing... (batch_month_file/3)\n", name_batch_month_file);
 										hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_month_file, 1);
 										fprintf(batch_month_file, "\n");
 										fprintf(batch_month_file, "<center><h2>");
@@ -11363,7 +11367,7 @@ void _main_batch_mode(
 										strcat(name_batch_month_file, _global_export_navig_hore /* DEFAULT_MONTH_EXPORT */);
 										batch_month_file = fopen(name_batch_month_file, "wt");
 										if(batch_month_file != NULL){
-											Log("batch mode: File `%s' opened for writing...\n", name_batch_month_file);
+											Log("batch mode: File `%s' opened for writing... (batch_month_file/4)\n", name_batch_month_file);
 											hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_month_file, 1);
 											fprintf(batch_month_file, "\n");
 											fprintf(batch_month_file, "<center><h2>");
@@ -11429,7 +11433,7 @@ void _main_batch_mode(
 									strcat(name_batch_month_file, DEFAULT_MONTH_EXPORT);
 									batch_month_file = fopen(name_batch_month_file, "wt");
 									if(batch_month_file != NULL){
-										Log("batch mode: File `%s' opened for writing...\n", name_batch_month_file);
+										Log("batch mode: File `%s' opened for writing... (batch_month_file/5)\n", name_batch_month_file);
 										hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_month_file, 1);
 										fprintf(batch_month_file, "\n");
 										fprintf(batch_month_file, "<center><h2>");
@@ -11494,7 +11498,7 @@ void _main_batch_mode(
 									strcat(name_batch_month_file, _global_export_navig_hore /* DEFAULT_MONTH_EXPORT */);
 									batch_month_file = fopen(name_batch_month_file, "wt");
 									if(batch_month_file != NULL){
-										Log("batch mode: File `%s' opened for writing...\n", name_batch_month_file);
+										Log("batch mode: File `%s' opened for writing... (batch_month_file/6)\n", name_batch_month_file);
 										hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_month_file, 1);
 										fprintf(batch_month_file, "\n");
 										fprintf(batch_month_file, "<center><h2>");
