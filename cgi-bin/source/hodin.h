@@ -1735,21 +1735,21 @@ const char *html_text_option2_font_family_explain[POCET_JAZYKOV + 1] =
 
 const char *html_text_option2_navigation[POCET_JAZYKOV + 1] = 
 {"zobrazi navigáciu v textoch modlitieb",
- "xxx", 
+ "zobrazit navigaci v textech modliteb", 
  "xxx", 
  "",
  "",
- "xxx", 
- "xxx", 
+ "zobrazit navigaci v textech modliteb", 
+ "navigáció", 
 };
 const char *html_text_option2_navigation_explain[POCET_JAZYKOV + 1] = 
 {"Èi sa majú zobrazova hypertextové odkazy na ostatné modlitby daného dòa, príp. predošlı/nasledovnı deò priamo v texte modlitby.", 
- "xxx", 
+ "Zda zobrazit hypertextové odkazy na ostatní modlitby daného dne, resp. pøedešlı/následující den pøímo v textu modlitby.", 
  "xxx", 
  "",
  "", 
- "xxx", 
- "xxx", 
+ "Zda zobrazit hypertextové odkazy na ostatní modlitby daného dne, resp. pøedešlı/následující den pøímo v textu modlitby.", 
+ "navigáció", 
 };
 
 const char *html_text_option2_textwrap[POCET_JAZYKOV + 1] = 

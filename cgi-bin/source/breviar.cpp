@@ -7114,7 +7114,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("</select>\n");
 	}/* if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_SIZE_CHOOSER) == BIT_OPT_2_FONT_SIZE_CHOOSER) */
 
-	if((_global_system == SYSTEM_RUBY) || (_global_jazyk == JAZYK_SK)){
+	if((_global_system == SYSTEM_RUBY) || (_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 		/* pole (checkbox) WWW_MODL_OPTF2_NAVIGATION */
 		Export("<br>");
 		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF2_NAVIGATION, NIE);
