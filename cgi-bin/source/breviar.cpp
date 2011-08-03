@@ -5110,14 +5110,9 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			if (cit && aj_citanie) {
 				if (typ == EXPORT_DNA_DNES || typ == EXPORT_DNA_JEDEN_DEN || typ == EXPORT_DNA_VIAC_DNI) {
 					if (ma_nazov) strcat(_global_string, "<br>");
-#ifdef IO_ANDROID
 					sprintf(pom, "<a href=\"svpismo://svpismo.riso.ksp.sk/?d=%d&amp;m=%d&amp;y=%d&amp;c=", _local_den.den, _local_den.mesiac, _local_den.rok);
-#else
-					sprintf(pom, "<a target=\"_blank\" "HTML_CLASS_QUIET" href=\"http://dkc.kbs.sk/?in=");
-#endif
 					strcat(_global_string, pom);
 					strcat(_global_string, StringEncode(remove_diacritics(cit->citania)));
-#ifdef IO_ANDROID
 					sprintf(pom, "&amp;zalm=");
 					strcat(_global_string, pom);
 					strcat(_global_string, StringEncode(toUtf(cit->zalm)));
@@ -5125,23 +5120,9 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 					sprintf(pom, "&amp;aleluja=");
 					strcat(_global_string, pom);
 					strcat(_global_string, StringEncode(toUtf(cit->aleluja)));
-#endif
 					sprintf(pom, "\">%s</a>", cit->citania);
 					strcat(_global_string, pom);
 				}
-			}// if (cit && aj_citanie)
-			else{
-#ifndef IO_ANDROID
-				if(cit){
-					Log("cit is not NULL\n");
-				}
-				else if(aj_citanie){
-					Log("aj_citanie is TRUE\n");
-				}
-				else{
-					Log("cit is NULL && aj_citanie is FALSE\n");
-				}
-#endif
 			}// if (cit && aj_citanie)
 #elif defined(BEHAVIOUR_WEB)
 			// 2011-07-26: doplnené pre BEHAVIOUR_WEB ináè ako pre ANDROID
