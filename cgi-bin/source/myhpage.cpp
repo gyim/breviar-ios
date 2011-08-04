@@ -281,6 +281,7 @@ const char *html_mail_label_short = "J. V.";
 
 /* exportuje patku HTML dokumentu (vysledok query) */
 void _patka(FILE * expt){
+	char mail_addr[MAX_MAIL_STR] = "";
 	Log("_patka() -- zaèiatok...\n");
 	_local_modlitba = _global_modlitba;
 	if((_local_modlitba == MODL_PRVE_VESPERY) || (_local_modlitba == MODL_DRUHE_VESPERY))
@@ -408,7 +409,16 @@ void _patka(FILE * expt){
 
 	/* pridana stranka cfg_HTTP_ADDRESS_default, 12/04/2000A.D. */
 	Export_to_file(expt, "<"HTML_LINK_NORMAL" href=\"%s\" target=\"_top\">%s</a>\n", cfg_HTTP_ADDRESS_default, cfg_HTTP_DISPLAY_ADDRESS_default);
-	Export_to_file(expt, "&#169; %d%s <"HTML_LINK_NORMAL" href=\"mailto:%s\">%s</a>\n", baserok, rok, cfg_MAIL_ADDRESS_default, html_mail_label);
+	if(_global_jazyk == JAZYK_HU){
+		Log("cfg_MAIL_ADDRESS_default_HU == %s\n", cfg_MAIL_ADDRESS_default_HU);
+		mystrcpy(mail_addr, cfg_MAIL_ADDRESS_default_HU, MAX_MAIL_STR);
+	}
+	else{
+		Log("cfg_MAIL_ADDRESS_default == %s\n", cfg_MAIL_ADDRESS_default);
+		mystrcpy(mail_addr, cfg_MAIL_ADDRESS_default, MAX_MAIL_STR);
+	}
+	Log("mail_addr == %s\n", mail_addr);
+	Export_to_file(expt, "&#169; %d%s <"HTML_LINK_NORMAL" href=\"mailto:%s\">%s</a>\n", baserok, rok, mail_addr, html_mail_label);
 
 	Export_to_file(expt, "</p>\n"); /* pridane kvoli tomu, ze cele to bude <p class="patka">, 2003-07-02 */
 
