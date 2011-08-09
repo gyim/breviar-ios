@@ -14053,7 +14053,7 @@ int main(int argc, char **argv){
 				_main_LOG_to_Export("zisùujem font size...\n");
 				_global_font_size = atofontsize(pom_FONT_SIZE);
 				if(_global_font_size == FONT_SIZE_UNDEF){
-					_global_font = FONT_SIZE_CSS;
+					_global_font_size = FONT_SIZE_CSS;
 					_main_LOG_to_Export("\t(vzhæadom k neurËenej font size pouûÌvam default -- braù font size z CSS)\n");
 				}
 				_main_LOG_to_Export("...font size (%s) = %i, teda %s\n", pom_FONT_SIZE, _global_font_size, nazov_font_size(_global_font_size));
@@ -14250,7 +14250,7 @@ _main_SIMULACIA_QS:
 			_main_LOG_to_Export("zisùujem font size...\n");
 			_global_font_size = atofontsize(pom_FONT_SIZE);
 			if(_global_font_size == FONT_SIZE_UNDEF){
-				_global_font = FONT_SIZE_CSS;
+				_global_font_size = FONT_SIZE_CSS;
 				_main_LOG_to_Export("\t(vzhæadom k neurËenej font size pouûÌvam default -- braù font size z CSS)\n");
 			}
 			_main_LOG_to_Export("...font size (%s) = %i, teda %s\n", pom_FONT_SIZE, _global_font_size, nazov_font_size(_global_font_size));
