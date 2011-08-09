@@ -15,11 +15,11 @@
 .small { font-size: 80%; }
 
 /* 2003-07-09; 2004-03-23 */
-/* apply to all elements */ { font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 100%; }
+/* apply to all elements */ { font-family: Verdana, Tahoma, Georgia, Sans-Serif; font-size: 100%; }
 body, html { 
 	background-color: #d0bba0; 
 	color: #000000; 
-	font-family: Verdana, Tahoma, Georgia, Sans Serif; 
+	font-family: Verdana, Tahoma, Georgia, Sans-Serif; 
 	scrollbar-base-color: #fff1cc;
 	scrollbar-face-color: #fff1cc;
 	scrollbar-shadow-color: #a05000;
@@ -29,7 +29,7 @@ body, html {
 	scrollbar-track-color: #d0bba0; 
 	scrollbar-arrow-color: #a05000;
 }
-p { font-family: Verdana, Tahoma, Georgia, Sans Serif; color: #000000; font-style: normal; }
+p { font-family: Verdana, Tahoma, Georgia, Sans-Serif; color: #000000; font-style: normal; }
 
 p.duoraz { 
 	font-weight: bold; }
@@ -40,7 +40,7 @@ p.patka {
 	margin-top: -1mm; 
 	letter-spacing: 0mm }
 
-a { font-family: Verdana, Tahoma, Georgia, Sans Serif; color: #000000; text-decoration: underline; }
+a { font-family: Verdana, Tahoma, Georgia, Sans-Serif; color: #000000; text-decoration: underline; }
 a:hover { color: #fff1cc; background-color: #800000; text-decoration:none; }
 a:active { color: #fff1cc; text-decoration: underline; }
 a img { border: none }
@@ -48,19 +48,19 @@ a.explain { color: #a05000; font-size: 100%; }
 
 table { color: #505000; }
 tr.paragraph { text-indent: 3em; line-height: 120%; }
-td { font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 90%; color: #000000}
+td { font-family: Verdana, Tahoma, Georgia, Sans-Serif; font-size: 90%; color: #000000}
 
 hr {	height: 0.2mm;
 	size: 1px;
 	width: 33%; 
 	color: gray; }
 
-select { background: #fff1cc; font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 90%; color: #000000}
+select { background: #fff1cc; font-family: Verdana, Tahoma, Georgia, Sans-Serif; font-size: 90%; color: #000000}
 
-input { border: 1px; font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 90%; color: #000000; }
+input { border: 1px; font-family: Verdana, Tahoma, Georgia, Sans-Serif; font-size: 90%; color: #000000; }
 
-input.button { background: #800000; Verdana, Tahoma, Georgia, Sans Serif; font-size : 80%; font-weight: bold; color: #FFFFFF; border: 1px solid }
-input.reset { background: #400000; Verdana, Tahoma, Georgia, Sans Serif; font-size : 80%; font-weight: bold; color: #FFFFFF; border: 1px solid }
+input.button { background: #800000; Verdana, Tahoma, Georgia, Sans-Serif; font-size : 80%; font-weight: bold; color: #FFFFFF; border: 1px solid }
+input.reset { background: #400000; Verdana, Tahoma, Georgia, Sans-Serif; font-size : 80%; font-weight: bold; color: #FFFFFF; border: 1px solid }
 
 input.text { border-style: solid; background: #fff1cc; }
 input.radio { }

@@ -32,14 +32,14 @@
 .explain { font-size: 90%; color: #330000; }
 .small { font-size: 90%; }
 
-/* apply to all elements */ { font-family: Tahoma, Verdana, Sans Serif; font-size: 100%; }
+/* apply to all elements */ { font-family: Tahoma, Verdana, Sans-Serif; font-size: 100%; }
 body, html { 
 	background-color: #F4F2F3;
 	color: #000000; 
-	font-family: Tahoma, Verdana, Sans Serif; 
+	font-family: Tahoma, Verdana, Sans-Serif; 
 	font-size: 11pt;
 }
-p { font-family: Tahoma, Verdana, Sans Serif; color: #000000; font-style: normal; }
+p { font-family: Tahoma, Verdana, Sans-Serif; color: #000000; font-style: normal; }
 
 
 .duoraz { 
@@ -59,7 +59,7 @@ a.quiet:hover { text-decoration:none; color: inherit; }
 a.quiet:visited { text-decoration:none; color: inherit; }
 a.quiet:active { text-decoration:none; color: inherit; }
 
-a { font-family: Tahoma, Verdana, Sans Serif; color: #000000; text-decoration: underline; }
+a { font-family: Tahoma, Verdana, Sans-Serif; color: #000000; text-decoration: underline; }
 a:hover { color: white; background-color: #772C35; text-decoration:none; }
 a:active { color: gray; text-decoration: underline; }
 a img { border: none }
@@ -68,23 +68,23 @@ a.nounderline { text-decoration:none; }
 
 table { color: #505000; }
 tr.paragraph { text-indent: 3em; line-height: 120%; }
-td { font-family: Tahoma, Verdana, Sans Serif; font-size: 95%; color: #000000}
+td { font-family: Tahoma, Verdana, Sans-Serif; font-size: 95%; color: #000000}
 
 hr {	height: 0.2mm;
 	size: 1px;
 	width: 33%; 
 	color: gray; }
 
-select { background: #F4F2F3; font-family: Tahoma, Verdana, Sans Serif; font-size : 95%; color: #000000}
+select { background: #F4F2F3; font-family: Tahoma, Verdana, Sans-Serif; font-size : 95%; color: #000000}
 
-input { border: 1px; font-family: Tahoma, Verdana, Sans Serif; font-size : 95%; color: #000000; }
+input { border: 1px; font-family: Tahoma, Verdana, Sans-Serif; font-size : 95%; color: #000000; }
 
 /* modlitby */
 input.button, input.reset { 
 	cursor: pointer;
 	margin-left: 0px!important;
 	background: #FFE8E8; 
-	font-family: Tahoma, Verdana, Sans Serif; 
+	font-family: Tahoma, Verdana, Sans-Serif; 
 	font-size : 90%; 
 	font-style: normal;
 	text-decoration: none; 
@@ -96,7 +96,7 @@ input.button0, input.reset0 {
 	cursor: pointer;
 	margin-left: 0px!important;
 	background: DimGray;
-	font-family: Tahoma, Verdana, Sans Serif; 
+	font-family: Tahoma, Verdana, Sans-Serif; 
 	font-size : 85%; 
 	font-style: normal;
 	text-decoration: none; 
@@ -108,7 +108,7 @@ input.button1, input.reset1 {
 	cursor: pointer;
 	margin-left: 0px!important;
 	background: DimGray;
-	font-family: Tahoma, Verdana, Sans Serif; 
+	font-family: Tahoma, Verdana, Sans-Serif; 
 	font-size : 85%; 
 	font-style: normal;
 	font-weight: bold;
@@ -122,7 +122,7 @@ input.button2, input.reset2 {
 	cursor: pointer;
 	margin-left: 0px!important;
 	background: #FFE8E8; 
-	font-family: Tahoma, Verdana, Sans Serif; 
+	font-family: Tahoma, Verdana, Sans-Serif; 
 	font-size : 90%; 
 	font-style: italic;
 	text-decoration: none; 

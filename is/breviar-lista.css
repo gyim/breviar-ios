@@ -1,15 +1,15 @@
-/* apply to all elements */ { font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; font-size: 100%; }
+/* apply to all elements */ { font-family: Cambria, Verdana, Tahoma, Georgia, Sans-Serif; font-size: 100%; }
 body { 
 	background-color: #663300; 
 	color: #FFFFFF; 
-	font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; 
+	font-family: Cambria, Verdana, Tahoma, Georgia, Sans-Serif; 
 	font-size: 90%; 
 	noscroll;
 	font-weight: normal;
 }
 
 p { 
-	font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; 
+	font-family: Cambria, Verdana, Tahoma, Georgia, Sans-Serif; 
 	color: #FFFFFF; 
 	text-style: normal; 
 }
@@ -23,7 +23,7 @@ p.patka {
 	text-align: left; 
 }
 
-a { font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; color: #FFFFFF; text-decoration: none; }
+a { font-family: Cambria, Verdana, Tahoma, Georgia, Sans-Serif; color: #FFFFFF; text-decoration: none; }
 a:hover { color: #FFFFFF; background-color: #000000; text-decoration:none; }
 a:active { color: #FFFFFF; text-decoration: none; }
 a img { border: none }

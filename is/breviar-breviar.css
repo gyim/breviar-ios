@@ -1,4 +1,4 @@
-/* apply to all elements */ { font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; font-size: 100%; }
+/* apply to all elements */ { font-family: Cambria, Verdana, Tahoma, Georgia, Sans-Serif; font-size: 100%; }
 .red { color: #ff0000; }
 .blue { color: #0066ff; }
 .redsmall { color: #ff0000; font-size: 80%; }
@@ -13,7 +13,7 @@
 body { 
 	background-color: #663300; 
 	color: #FFFFFF; 
-	font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; 
+	font-family: Cambria, Verdana, Tahoma, Georgia, Sans-Serif; 
 	font-size: 90%; 
 	noscroll;
 	scrollbar-face-color: #FFFFFF;
@@ -25,7 +25,7 @@ body {
 	scrollbar-arrow-color: #330000;
 }
 p { 
-	font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; 
+	font-family: Cambria, Verdana, Tahoma, Georgia, Sans-Serif; 
 	color: #FFFFFF; 
 	text-style: normal; 
 }
@@ -50,13 +50,13 @@ p.normal {
 	margin-botton: -1mm;
 }
 
-a { font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; color: #FFFFFF; text-decoration: none; }
+a { font-family: Cambria, Verdana, Tahoma, Georgia, Sans-Serif; color: #FFFFFF; text-decoration: none; }
 a:hover { color: #FFFFFF; background-color: #000000; text-decoration:none; }
 a:active { color: #FFFFFF; text-decoration: none; }
 a img { border: none }
 
 table { background-color: #663300; color: #ffff33; }
-td { font-family: Cambria, Verdana, Tahoma, Georgia, Sans Serif; color: #ffff33; }
+td { font-family: Cambria, Verdana, Tahoma, Georgia, Sans-Serif; color: #ffff33; }
 hr {	height: 0.2mm;
 	width: 33%; 
 	color: gray; }

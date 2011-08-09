@@ -1,11 +1,11 @@
-/* apply to all elements */ { font-family: Verdana, Tahoma, Georgia, Sans Serif; font-size: 100%; }
+/* apply to all elements */ { font-family: Verdana, Tahoma, Georgia, Sans-Serif; font-size: 100%; }
 .odkaz { color: #a05000; font-style: italic; }
 .it { font-style: italic; }
 
 body { 
 	background-color: #000000; 
 	color: #fff1cc; 
-	font-family: Verdana, Tahoma, Georgia, Sans Serif; 
+	font-family: Verdana, Tahoma, Georgia, Sans-Serif; 
 	font-size: 90%; 
 	noscroll;
 	scrollbar-face-color: #fff1cc;
@@ -17,7 +17,7 @@ body {
 	scrollbar-arrow-color: #a05000;
 }
 p { 
-	font-family: Verdana, Tahoma, Georgia, Sans Serif; 
+	font-family: Verdana, Tahoma, Georgia, Sans-Serif; 
 	color: #fff1cc; 
 	text-style: normal; 
 }
@@ -42,13 +42,13 @@ p.normal {
 	margin-botton: -1mm;
 }
 
-a { font-family: Verdana, Tahoma, Georgia, Sans Serif; color: #fff1cc; text-decoration: none; }
+a { font-family: Verdana, Tahoma, Georgia, Sans-Serif; color: #fff1cc; text-decoration: none; }
 a:hover { color: #fff1cc; background-color: #800000; text-decoration:none; }
 a:active { color: #fff1cc; text-decoration: none; }
 a img { border: none }
 
 table { background-color: #000000; color: #a05000; }
-td { font-family: Verdana, Tahoma, Georgia, Sans Serif; color: #a05000}
+td { font-family: Verdana, Tahoma, Georgia, Sans-Serif; color: #a05000}
 hr {	height: 0.2mm;
 	width: 33%; 
 	color: gray; }
