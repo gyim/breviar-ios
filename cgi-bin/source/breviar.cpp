@@ -9818,6 +9818,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 					_global_vstup_mesiac = m;
 					_global_vstup_rok = r;
 					_global_poradie_svaty = s;
+					Log("_global_poradie_svaty = %d\n", _global_poradie_svaty);
 					// Export("<!-- den %d | mesiac %d | rok %d -->\n", _global_vstup_den, _global_vstup_mesiac, _global_vstup_rok);
 					rozbor_dna_s_modlitbou(d, m, r, p, s);
 				}
@@ -10072,6 +10073,7 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 		_global_vstup_mesiac = datum.mesiac;
 		_global_vstup_rok = dnes.tm_year;
 		_global_poradie_svaty = s;
+		Log("_global_poradie_svaty = %d\n", _global_poradie_svaty);
 		// Export("<!-- den %d | mesiac %d | rok %d -->\n", _global_vstup_den, _global_vstup_mesiac, _global_vstup_rok);
 		rozbor_dna_s_modlitbou(datum.den, datum.mesiac, dnes.tm_year, p, s);
 	}
