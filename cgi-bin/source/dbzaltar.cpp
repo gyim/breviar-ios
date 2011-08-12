@@ -19426,6 +19426,8 @@ label_25_MAR:
 							set_LOG_svsv;
 						}
 
+						_vlastna_cast_mcd_kcitresp_modl; // modlitba cez deò, doplnené 2011-08-10
+
 						modlitba = MODL_VESPERY;
 						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ_OP)){ // v slovenskom breviári má vlastný hymnus, v èeskom nie; 2008-09-09
 							_vlastna_cast_full_okrem_prosieb(modlitba);
