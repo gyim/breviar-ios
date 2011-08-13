@@ -226,7 +226,8 @@ char _anchor_head[SMALL];
 #define je_1cit_vlastne ((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || ((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV))) // rovnakÈ kritÈrium pre kr·tke ËÌtanie (rch, v) a 1. ËÌtanie (posv. ËÌtania); moûno pouûiù aj na 2. ËÌtanie posv. ËÌt.; 2007-10-23: pouûiù aj pre kr·tke responzÛrium (rch, v) a prosby (rch, v)
 // 2010-06-07: upravenÈ: su_antifony_vlastne aj vtedy, ak je to spomienka a explicitne si vyberie ûalmy+antifÛny zo spoloËnej Ëasti
 #define su_antifony_vlastne(m) ((_global_den.typslav == SLAV_SLAVNOST) || ((_global_den.typslav == SLAV_SVIATOK) && ((m == MODL_RANNE_CHVALY) || (m == MODL_POSV_CITANIE) || (m == MODL_VESPERY))) || ((_global_den.typslav == SLAV_SPOMIENKA) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALMY_ZO_SVIATKU) == BIT_OPT_1_ZALMY_ZO_SVIATKU) && ((m == MODL_RANNE_CHVALY) || (m == MODL_POSV_CITANIE) || (m == MODL_VESPERY))) || ((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)))
-#define su_antifony_modlitba_spolc_mcd(m) ((_global_den.typslav == SLAV_SLAVNOST) || ((_global_poradie_svaty == 1) && (_global_svaty1.typslav == SLAV_SLAVNOST)))
+// 2011-08-13: zohæadnenie bodov 229, 232, 236
+#define su_kcit_kresp_modlitba_mcd_vlastne(m) ((_global_den.typslav == SLAV_SLAVNOST) || ((_global_poradie_svaty == 1) && (_global_svaty1.typslav == SLAV_SLAVNOST)))
 
 /* 2007-09-28: upravenÈ priraÔovanie spoloËnej Ëasti; berie sa iba v prÌpade sl·vnostÌ resp. sviatkov,
  * pre spomienky a æubovoænÈ spomienky by malo ostaù to, Ëo je zo dÚa (2007-10-02, 2007-10-22)
@@ -8153,6 +8154,7 @@ short int _spol_cast_je_panna(_struct_sc sc){
  * 2009-09-18: novÈ parametre; Log("brat_antifony == %d\n", brat_antifony);
  * 2010-09-10: pre posv. ËÌtanie sa responz medzi psalmÛdiou a 1. ËÌtanÌm berie len v prÌpade, ûe sa berie vlastnÈ 1. ËÌtanie
  * 2011-08-12: doplnenÈ pouûitie pre modlitbu cez deÚ; modlitba sa pouûije zo spoloËnej Ëasti len pre sl·vnosti a sviatky (in·Ë sa MCD berie zo dÚa, bod Ë. 236 vöeobecn˝ch smernÌc)
+ * 2011-08-13: zohæadnenie bodov 229, 232, 236
  */
 #define _spolocna_cast_full(modl) {\
 	Log("_global_poradie_svaty = %d\n", _global_poradie_svaty);\
@@ -8166,27 +8168,35 @@ short int _spol_cast_je_panna(_struct_sc sc){
 	}\
 	else if((modl == MODL_PREDPOLUDNIM) || (modl == MODL_NAPOLUDNIE) || (modl == MODL_POPOLUDNI)){\
 		Log("_spolocna_cast_antifony(%s) - MCD...\n", nazov_modlitby(modl));\
-		if(su_antifony_modlitba_spolc_mcd(modl) || (brat_antifony_mcd == ANO)){\
+		if(su_kcit_kresp_modlitba_mcd_vlastne(modl) || (brat_antifony_mcd == ANO)){\
 			_spolocna_cast_antifony;\
 		}\
 	}\
 	else {\
 		Log("_spolocna_cast_antifony(%s) - NEBER⁄ SA!\n", nazov_modlitby(modl));\
 	}\
-	if(((su_kcit_kresp_prosby_vlastne) || (brat_1citanie == ANO)) && (modl != MODL_POSV_CITANIE)){\
-		_vlastna_cast_kcitanie;\
+	if((modl == MODL_PREDPOLUDNIM) || (modl == MODL_NAPOLUDNIE) || (modl == MODL_POPOLUDNI)){\
+		if(su_kcit_kresp_modlitba_mcd_vlastne(modl)){\
+			_vlastna_cast_kcitanie;\
+			_spolocna_cast_kresponz;\
+		}\
+	}\
+	else{\
+		if(((su_kcit_kresp_prosby_vlastne) || (brat_1citanie == ANO)) && (modl != MODL_POSV_CITANIE)){\
+			_vlastna_cast_kcitanie;\
+		}\
+		if(su_kcit_kresp_prosby_vlastne || brat_kresp_prosby == ANO){\
+			if(modl != MODL_POSV_CITANIE){\
+				_spolocna_cast_kresponz;\
+			}\
+			if((modl == MODL_RANNE_CHVALY) || (modl == MODL_VESPERY) || (modl == MODL_PRVE_VESPERY)){\
+				_vlastna_cast_prosby;\
+			}\
+		}\
 	}\
 	if(((je_1cit_vlastne) || (brat_1citanie == ANO)) && (modl == MODL_POSV_CITANIE)){\
 		_spolocna_cast_kresponz;\
 		_spolocna_cast_1citanie;\
-	}\
-	if(su_kcit_kresp_prosby_vlastne || brat_kresp_prosby == ANO){\
-		if(modl != MODL_POSV_CITANIE){\
-			_spolocna_cast_kresponz;\
-		}\
-		if((modl == MODL_RANNE_CHVALY) || (modl == MODL_VESPERY) || (modl == MODL_PRVE_VESPERY)){\
-			_vlastna_cast_prosby;\
-		}\
 	}\
 	if(modl == MODL_RANNE_CHVALY){\
 		_vlastna_cast_benediktus;\
@@ -8200,7 +8210,7 @@ short int _spol_cast_je_panna(_struct_sc sc){
 		}\
 	}\
 	if((modl == MODL_PREDPOLUDNIM) || (modl == MODL_NAPOLUDNIE) || (modl == MODL_POPOLUDNI)){\
-		if(su_antifony_modlitba_spolc_mcd(modl)){\
+		if(su_kcit_kresp_modlitba_mcd_vlastne(modl)){\
 			_vlastna_cast_modlitba;\
 		}\
 	}\
