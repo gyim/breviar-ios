@@ -523,6 +523,14 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 /* 2011-07-14: doplnené zobrazovanie/nezobrazenie zalomených textov tak, ako je v tlaèenom vydaní LH (dlhé riadky-verše žalmov/chválospevov a pod.) */
 #define PARAM_ZALOMENIE                     "ZALOMENIE"
 
+// 2011-08-15: force pre jednotlivé èasti modlitby, funkcie _set_spolocna_cast()...
+#define FORCE_BRAT_ANTIFONY      1
+#define FORCE_BRAT_ZALMY         2
+#define FORCE_BRAT_KCIT_1CIT     4 // krátke èítanie pre rch+v; 1. èítanie pre posvätné èítanie
+#define FORCE_BRAT_KRESP_PROSBY  8
+#define FORCE_BRAT_2CITANIE     16
+#define FORCE_BRAT_ANTIFONY_MCD 32
+
 /* stringy parametrov vstupu pre MODL_OPT..., ktore generovanie modlitby
  * ovplyvnuju */
 /* option 1 */
