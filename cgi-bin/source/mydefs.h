@@ -705,6 +705,8 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #define HTML_SPAN_EXPLAIN   "span class=\"explain\""
 #define HTML_SPAN_PARAMETER "span class=\"parameter\""
 #define HTML_SPAN_VALUE     "span class=\"value\""
+#define HTML_SPAN_SMALLCAPS "span class=\"smallcaps\""
+#define HTML_SPAN_XS_CAPS   "span class=\"xsmallcaps\""
 
 #define HTML_SPAN_TOOLTIP   "span title=\"%s\"" // obsahuje %s
 #define HTML_SPAN_BOLD_TOOLTIP   "span class=\"bold\" title=\"%s\"" // obsahuje %s

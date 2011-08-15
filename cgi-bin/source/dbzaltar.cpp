@@ -222,6 +222,7 @@ char _anchor_head[SMALL];
 //#define su_zalmy_vlastne ((_global_den.denvt == DEN_NEDELA) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || ((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)))
 // 2011-08-15: prerobenÈ na funkciu
 short int su_zalmy_vlastne(short int m){
+	Log("su_zalmy_vlastne(%d): ", m);
 	short int ret;
 	ret = FALSE;
 	if(!((m == MODL_PREDPOLUDNIM) || (m == MODL_NAPOLUDNIE) || (m == MODL_POPOLUDNI))){
@@ -246,12 +247,14 @@ short int su_zalmy_vlastne(short int m){
 			ret = TRUE;
 		}// NOV02 == 02NOV
 	}// nie mcd
+	Log("%d\n", ret);
 	return ret;
 }// su_zalmy_vlastne()
 
 //#define su_zalmy_prve_vespery_vlastne ((_global_den.denvt == DEN_NEDELA) || (_global_den.typslav == SLAV_SLAVNOST) || ((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)))
 // 2011-08-15: prerobenÈ na funkciu
 short int su_zalmy_prve_vespery_vlastne(short int m){
+	Log("su_zalmy_prve_vespery_vlastne(%d): ", m);
 	short int ret;
 	ret = FALSE;
 	if((m == MODL_PRVE_VESPERY) || (m == MODL_VESPERY)){
@@ -276,6 +279,7 @@ short int su_zalmy_prve_vespery_vlastne(short int m){
 			ret = TRUE;
 		}// NOV02 == 02NOV
 	}// nie mcd
+	Log("%d\n", ret);
 	return ret;
 }// su_zalmy_prve_vespery_vlastne()
 
@@ -283,6 +287,7 @@ short int su_zalmy_prve_vespery_vlastne(short int m){
 //#define su_kcit_kresp_prosby_vlastne ((_global_den.typslav == SLAV_SLAVNOST) || ((_global_den.typslav == SLAV_SVIATOK) || ((_global_poradie_svaty == 1) && (_global_svaty1.typslav == SLAV_SVIATOK))) || (_global_den.typslav == SLAV_SPOMIENKA) || ((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV))) // rovnakÈ kritÈrium pre kr·tke ËÌtanie (rch, v) a 1. ËÌtanie (posv. ËÌtania); moûno pouûiù aj na 2. ËÌtanie posv. ËÌt.; 2007-10-23: pouûiù aj pre kr·tke responzÛrium (rch, v) a prosby (rch, v); 2010-11-08 [len doplnen· pozn·mka]: pre ofÌcium za zosnul˝ch pouûiù (2.11.)
 // 2011-08-15: prerobenÈ na funkciu
 short int su_kcit_kresp_prosby_vlastne(short int m){
+	Log("su_kcit_kresp_prosby_vlastne(%d): ", m);
 	short int ret;
 	ret = FALSE;
 	if(!((m == MODL_PREDPOLUDNIM) || (m == MODL_NAPOLUDNIE) || (m == MODL_POPOLUDNI))){
@@ -304,6 +309,7 @@ short int su_kcit_kresp_prosby_vlastne(short int m){
 			ret = TRUE;
 		}// NOV02 == 02NOV
 	}// nie mcd
+	Log("%d\n", ret);
 	return ret;
 }// su_kcit_kresp_prosby_vlastne()
 
@@ -311,6 +317,7 @@ short int su_kcit_kresp_prosby_vlastne(short int m){
 //#define je_1cit_vlastne ((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || ((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV))) // rovnakÈ kritÈrium pre kr·tke ËÌtanie (rch, v) a 1. ËÌtanie (posv. ËÌtania); moûno pouûiù aj na 2. ËÌtanie posv. ËÌt.; 2007-10-23: pouûiù aj pre kr·tke responzÛrium (rch, v) a prosby (rch, v)
 // 2011-08-15: prerobenÈ na funkciu
 short int je_1cit_vlastne(short int m){
+	Log("je_1cit_vlastne(%d): ", m);
 	short int ret;
 	ret = FALSE;
 	if(m == MODL_POSV_CITANIE){
@@ -332,6 +339,7 @@ short int je_1cit_vlastne(short int m){
 			ret = TRUE;
 		}// NOV02 == 02NOV
 	}// pc
+	Log("%d\n", ret);
 	return ret;
 }// je_1cit_vlastne()
 
@@ -339,6 +347,7 @@ short int je_1cit_vlastne(short int m){
 //#define su_antifony_vlastne(m) ((_global_den.typslav == SLAV_SLAVNOST) || ((_global_den.typslav == SLAV_SVIATOK) && ((m == MODL_RANNE_CHVALY) || (m == MODL_POSV_CITANIE) || (m == MODL_VESPERY))) || ((_global_den.typslav == SLAV_SPOMIENKA) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALMY_ZO_SVIATKU) == BIT_OPT_1_ZALMY_ZO_SVIATKU) && ((m == MODL_RANNE_CHVALY) || (m == MODL_POSV_CITANIE) || (m == MODL_VESPERY))) || ((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)))
 // 2011-08-15: prerobenÈ na funkciu
 short int su_antifony_vlastne(short int m){
+	Log("su_antifony_vlastne(%d): ", m);
 	short int ret;
 	ret = FALSE;
 	switch(_global_poradie_svaty){
@@ -374,31 +383,39 @@ short int su_antifony_vlastne(short int m){
 			ret = TRUE;
 		}// NOV02 == 02NOV
 	}// rch, pc, v
+	Log("%d\n", ret);
 	return ret;
 }// su_antifony_vlastne()
 
-// 2011-08-13: zohæadnenie bodov 229, 232, 236
+/* 2011-08-13: zohæadnenie bodov 229, 232, 236
+ * 229. V modlitbe cez deÚ, Ëiûe predpoludnÌm, napoludnie a popoludnÌ (tercia, sexta a nÛna), sa berie, ak nie je uvedenÈ inak, hymnus dÚa. éalmy s˙ z doplnkovÈho cyklu s vlastnou antifÛnou; v nedeæu sa vöak ber˙ ûalmy z nedele prvÈho t˝ûdÚa zo ûalt·ra; kr·tke ËÌtanie a z·vereËn· modlitba s˙ vlastnÈ.
+ *      Na niektorÈ sl·vnosti P·na sa uv·dzaj˙ osobitnÈ ûalmy.
+ * 232. V modlitbe cez deÚ, Ëiûe predpoludnÌm, napoludnie a popoludnÌ (tercia, sexta a nÛna), sa berie hymnus dÚa; ûalmy s antifÛnami sa ber˙ z fÈrie, ak si osobitn˝ dÙvod alebo tradÌcia nevyûaduje v modlitbe cez deÚ vlastn˙ antifÛnu, Ëo sa uvedie na prÌsluönom mieste. Kr·tke ËÌtanie a z·vereËn· modlitba s˙ vlastnÈ.
+ * 236. V modlitbe cez deÚ, Ëiûe predpoludnÌm, napoludnie a popoludnÌ, a v kompletÛriu sa neberie niË z ofÌcia o sv‰tom, vöetko je zo vöednÈho dÚa.
+ */
 //#define su_kcit_kresp_modlitba_mcd_vlastne(m) ((_global_den.typslav == SLAV_SLAVNOST) || ((_global_poradie_svaty == 1) && (_global_svaty1.typslav == SLAV_SLAVNOST)))
 // 2011-08-15: prerobenÈ na funkciu
 short int su_kcit_kresp_modlitba_mcd_vlastne(short int m){
+	Log("su_kcit_kresp_modlitba_mcd_vlastne(%d): ", m);
 	short int ret;
 	ret = FALSE;
 	if((m == MODL_PREDPOLUDNIM) || (m == MODL_NAPOLUDNIE) || (m == MODL_POPOLUDNI)){
 		switch(_global_poradie_svaty){
-			case 0: if(_global_den.typslav == SLAV_SLAVNOST)
+			case 0: if((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK))
 						ret = TRUE;
 				break;
-			case 1: if(_global_svaty1.typslav == SLAV_SLAVNOST)
+			case 1: if((_global_svaty1.typslav == SLAV_SLAVNOST) || (_global_svaty1.typslav == SLAV_SVIATOK))
 						ret = TRUE;
 				break;
-			case 2: if(_global_svaty2.typslav == SLAV_SLAVNOST)
+			case 2: if((_global_svaty2.typslav == SLAV_SLAVNOST) || (_global_svaty2.typslav == SLAV_SVIATOK))
 						ret = TRUE;
 				break;
-			case 3: if(_global_svaty3.typslav == SLAV_SLAVNOST)
+			case 3: if((_global_svaty3.typslav == SLAV_SLAVNOST) || (_global_svaty3.typslav == SLAV_SVIATOK))
 						ret = TRUE;
 				break;
 		}// swicht(_global_poradie_svaty)
 	}// mcd
+	Log("%d\n", ret);
 	return ret;
 }// su_kcit_kresp_modlitba_mcd_vlastne()
 
@@ -8331,6 +8348,11 @@ short int _spol_cast_je_panna(_struct_sc sc){
  */
 #define _spolocna_cast_full(modl) {\
 	Log("_global_poradie_svaty = %d\n", _global_poradie_svaty);\
+	Log("force = %d\n", force);\
+	Log("_global_den.typslav = %d\n", _global_den.typslav);\
+	Log("_global_svaty1.typslav = %d\n", _global_svaty1.typslav);\
+	Log("_global_svaty2.typslav = %d\n", _global_svaty2.typslav);\
+	Log("_global_svaty3.typslav = %d\n", _global_svaty3.typslav);\
 	Log("_spolocna_cast_full(%s)\n", nazov_modlitby(modl));\
 	if(!((modl == MODL_PREDPOLUDNIM) || (modl == MODL_NAPOLUDNIE) || (modl == MODL_POPOLUDNI))){\
 		_spolocna_cast_hymnus;\
@@ -8341,7 +8363,7 @@ short int _spol_cast_je_panna(_struct_sc sc){
 	}\
 	else if((modl == MODL_PREDPOLUDNIM) || (modl == MODL_NAPOLUDNIE) || (modl == MODL_POPOLUDNI)){\
 		Log("_spolocna_cast_antifony(%s) - MCD...\n", nazov_modlitby(modl));\
-		if(su_kcit_kresp_modlitba_mcd_vlastne(modl) || ((force & FORCE_BRAT_ANTIFONY_MCD) == FORCE_BRAT_ANTIFONY_MCD)){\
+		if(su_antifony_vlastne(modl) || ((force & FORCE_BRAT_ANTIFONY_MCD) == FORCE_BRAT_ANTIFONY_MCD)){\
 			_spolocna_cast_antifony;\
 		}\
 	}\
@@ -8391,6 +8413,7 @@ short int _spol_cast_je_panna(_struct_sc sc){
 		_vlastna_cast_modlitba;\
 	}\
 }
+// _spolocna_cast_full()
 
 /* 2005-07-27: kedysi bolo nasledovnÈ: #define _spolocna_cast_kresponz           _vlastna_cast_kresponz
  * ale potrebujeme, aby spoloËn· Ëasù mala zo spoloËnej Ëasti. preto nasledovn· definÌcia:
@@ -21477,7 +21500,8 @@ label_25_MAR:
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
 						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty, FORCE_BRAT_ANTIFONY + FORCE_BRAT_ZALMY + FORCE_BRAT_KCIT_1CIT + FORCE_BRAT_KRESP_PROSBY + FORCE_BRAT_2CITANIE);
+							// set_spolocna_cast(sc, poradie_svaty, FORCE_BRAT_ANTIFONY + FORCE_BRAT_ZALMY + FORCE_BRAT_KCIT_1CIT + FORCE_BRAT_KRESP_PROSBY + FORCE_BRAT_2CITANIE);
+							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
 						if(_global_jazyk != JAZYK_CZ)

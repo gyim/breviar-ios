@@ -1446,22 +1446,22 @@ const char *html_text_option0_referencie_explain[POCET_JAZYKOV + 1] =
 
 const char *html_text_option0_citania[POCET_JAZYKOV + 1] = 
 {"liturgické èítania",
- "liturgická ètení"
+ "liturgická ètení",
  "liturgical readings",
  "liturgical readings",
  "",
  "liturgická ètení",
- "hu_liturgicke citania"
+ "liturgikus olvasmányok"
 };
 
 const char *html_text_option0_citania_explain[POCET_JAZYKOV + 1] = 
-{"Zobrazí odkaz na liturgické èítania.", 
- "", 
+{"Zobrazí odkaz na liturgické èítania (lc.kbs.sk).", 
+ "Zobrazí odkaz na liturgická ètení (katolik.cz).", 
  "", 
  "",
  "", 
- "", 
- ""
+ "Zobrazí odkaz na liturgická ètení (katolik.cz).", 
+ "Liturgikus olvasmányok (katolikus.hu)."
 };
 
 const char *html_text_option1_chvalospevy[POCET_JAZYKOV + 1] = 
