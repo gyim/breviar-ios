@@ -1450,7 +1450,9 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 				// Export("[INPUT:paramname=%s|fname=%s|modlparam=%s|READ:strbuff=%s|rest=%s]", paramname, fname, modlparam, strbuff, rest);
 
 				if(equalsi(rest, modlparam)){
-#if defined(EXPORT_HTML_FILENAME_ANCHOR)
+#if defined(EXPORT_HTML_SPECIALS)
+					Export("[%s|%s:%s]", fname, strbuff, modlparam);
+#elif defined(EXPORT_HTML_FILENAME_ANCHOR)
 					Export("[%s|%s:%s]", fname, strbuff, modlparam);
 #elif defined(EXPORT_HTML_ANCHOR)
 					Export("%s:%s", strbuff, modlparam);
@@ -1479,8 +1481,10 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 								mystrcpy(rest_krizik, rest, MAX_BUFFER);
 							// Export("antifóna[%d] -> zapamätám, ku ktorému žalmu/chválospevu patrí...\n", antifona_pocet);
 						}
-#if defined(EXPORT_HTML_FILENAME_ANCHOR)
+#if defined(EXPORT_HTML_SPECIALS)
 						Export("[%s:%s|rest_krizik=%s]", strbuff, modlparam, (rest_krizik == NULL) ? STR_EMPTY: rest_krizik);
+#elif defined(EXPORT_HTML_FILENAME_ANCHOR)
+						Export("[%s:%s]", strbuff, modlparam);
 #elif defined(EXPORT_HTML_ANCHOR)
 						Export("%s:%s", strbuff, modlparam);
 #endif
@@ -1578,13 +1582,13 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 
 					/* 2011-07-14: zobrazi/nezobrazi zalomenie veršov pod¾a tlaèenej LH */
 					if(equals(strbuff, PARAM_ZALOMENIE) && (vnutri_inkludovaneho == 1)){
-						/*
-#if defined(EXPORT_HTML_FILENAME_ANCHOR)
+#if defined(EXPORT_HTML_SPECIALS)
 						Export("[%s:%s|rest=%s]", strbuff, modlparam, (rest == NULL) ? STR_EMPTY: rest);
+#elif defined(EXPORT_HTML_FILENAME_ANCHOR)
+						Export("[%s:%s]", strbuff, modlparam);
 #elif defined(EXPORT_HTML_ANCHOR)
 						Export("%s:%s", strbuff, modlparam);
 #endif
-						*/
 						if((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_TEXT_WRAP) == BIT_OPT_2_TEXT_WRAP){
 							// MAX_BUFFER bol zvýšený, lebo strbuff bol v tomto prípade ve¾mi dlhý
 							Export("zalomenie-->%s<!--zalomenie", rest);
