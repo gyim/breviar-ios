@@ -18,13 +18,13 @@
 .xsmallcaps { font-variant: small-caps; font-size: 70%; }
 
 /* 2003-07-09; 2004-03-23; 2008-02-27 */
-/* apply to all elements */ { font-size: 100%; }
+/* apply to all elements */ { font-family: inherit; font-size: 100%; }
 body, html { 
 	background-color: #FFFFCC;
 	color: #000000;
 	font-family: Verdana, Tahoma, Helvetica, Arial, Sans-Serif;
 }
-p { color: #000000; font-style: normal; }
+p { font-family: inherit; color: #000000; font-style: normal; }
 
 .duoraz { 
 	font-weight: bold; }
@@ -43,7 +43,7 @@ a.quiet:hover { text-decoration:none; color: inherit; }
 a.quiet:visited { text-decoration:none; color: inherit; }
 a.quiet:active { text-decoration:none; color: inherit; }
 
-a { color: #000000; text-decoration: underline; }
+a { font-family: inherit; color: #000000; text-decoration: underline; }
 a:hover { color: white; background-color: #663300; text-decoration:none; }
 a:active { color: gray; text-decoration: underline; }
 a img { border: none }
@@ -52,22 +52,23 @@ a.nounderline { text-decoration:none; }
 
 table { color: #505000; }
 tr.paragraph { text-indent: 3em; line-height: 120%; }
-td { font-size: 95%; color: #000000}
+td { font-family: inherit; font-size: 95%; color: #000000}
 
 hr {	height: 0.2mm;
 	size: 1px;
 	width: 33%; 
 	color: gray; }
 
-select { background: white; font-size : 95%; color: #000000}
+select { background: white; font-family: inherit; font-size : 95%; color: #000000}
 
-input { border: 1px; font-size : 95%; color: #000000; }
+input { border: 1px; font-family: inherit; font-size : 95%; color: #000000; }
 
 /* modlitby */
 input.button, input.reset { 
 	cursor: pointer;
 	margin-left: 0px!important;
 	background: #ffcc99; /* #ffcc66; Tan; Peru; BurlyWood; */
+	font-family: inherit; 
 	font-size : 90%; 
 	font-style: normal;
 	text-decoration: none; 
@@ -79,6 +80,7 @@ input.button0, input.reset0 {
 	cursor: pointer;
 	margin-left: 0px!important;
 	background: DimGray;
+	font-family: inherit; 
 	font-size : 85%; 
 	font-style: normal;
 	text-decoration: none; 
@@ -90,6 +92,7 @@ input.button1, input.reset1 {
 	cursor: pointer;
 	margin-left: 0px!important;
 	background: DimGray;
+	font-family: inherit; 
 	font-size : 85%; 
 	font-style: normal;
 	font-weight: bold;
@@ -103,6 +106,7 @@ input.button2, input.reset2 {
 	cursor: pointer;
 	margin-left: 0px!important;
 	background: #cccc99;
+	font-family: inherit; 
 	font-size : 90%; 
 	font-style: italic;
 	text-decoration: none; 
