@@ -2588,8 +2588,8 @@ void interpretParameter(short int type, char *paramname){
 			Export("<!--navigácia:end");
 		}
 		else{
-			Export("skipping POPIS");
-			Log("skipping POPIS\n");
+			Export("skipping NAVIGACIA");
+			Log("skipping NAVIGACIA\n");
 		}
 #endif
 	}/* PARAM_NAVIGACIA */
