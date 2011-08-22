@@ -69,7 +69,9 @@ public class Breviar extends Activity
         try {
           S = new Server(this, scriptname, language, opts);
         } catch (IOException e) {
+          Log.v("breviar", "Can not initialize server!");
           finish();
+          return;
         }
         S.start();
       }
