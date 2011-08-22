@@ -474,7 +474,7 @@ const char *nazov_slavenia_lokal[] =
 ,"A Pécsi egyházmegyében: az egyházmegye védõszentje; ünnep"                                                    // LOKAL_SLAV_PECSI_EGYH_PATRON
 ,"A Szeged-Csanádi egyházmegye északi részében; ünnep"                                                          // LOKAL_SLAV_SZEGED_CSAN_EGYH
 ,"A Veszprémi egyházmegyében: Szent Anna, az egyházmegye védõszentje; ünnep"                                    // LOKAL_SLAV_VESZPREMI_EGYH_PATRON
-,"A gyõri és székesfehérvári egyházmegyében: az egyházmegye védõszéntje"                                        // LOKAL_SLAV_GYORI_SZEKESFEH_EGYH
+,"A gyõri és székesfehérvári egyházmegyében: az egyházmegye védõszentje"                                        // LOKAL_SLAV_GYORI_SZEKESFEH_EGYH
 ,"A Kaposvári egyházmegyében; ünnep"                                                                            // LOKAL_SLAV_KAPORSVAR_FELSZ
 ,"A Váci egyházmegyében; ünnep"                                                                                 // LOKAL_SLAV_VACI_FELSZ
 ,"Kalocsa-Kecskemét: a fõegyházmegye védõszentje; fõünnep"                                                      // LOKAL_SLAV_KAL_KECS_FOEGYH
@@ -1566,7 +1566,7 @@ const char *html_text_option1_plne_resp[POCET_JAZYKOV + 1] =
  "",
  "",
  "", 
- ""
+ "a válaszos énekek teljes szövege"
 };
 const char *html_text_option1_plne_resp_explain[POCET_JAZYKOV + 1] = 
 {"Liturgia hodín responzóriá po èítaniach v posvätnom èítaní v plnom znení neuvádza (druhá, opakujúca sa èas, je v tlaèenej LH skrátená).", 
@@ -1575,7 +1575,7 @@ const char *html_text_option1_plne_resp_explain[POCET_JAZYKOV + 1] =
  "",
  "", 
  "", 
- ""
+ "Az Imaórák Liturgiája az olvasmányos imaórák válaszos énekeinek teljes szövegét nem mutatja (a második ismétlõdõ rész nyomtatott kiadásban rövidített)."
 };
 
 const char *html_text_option1_mcd_doplnkova_psalmodia[POCET_JAZYKOV + 1] = 
@@ -1740,7 +1740,7 @@ const char *html_text_option2_navigation[POCET_JAZYKOV + 1] =
  "",
  "",
  "zobrazit navigaci v textech modliteb", 
- "navigáció", 
+ "navigálás megjelenítése az imaórák szövegében", 
 };
 const char *html_text_option2_navigation_explain[POCET_JAZYKOV + 1] = 
 {"Èi sa majú zobrazova hypertextové odkazy na ostatné modlitby daného dòa, príp. predošlı/nasledovnı deò priamo v texte modlitby.", 
@@ -1749,7 +1749,7 @@ const char *html_text_option2_navigation_explain[POCET_JAZYKOV + 1] =
  "",
  "", 
  "Zda zobrazit hypertextové odkazy na ostatní modlitby daného dne, resp. pøedešlı/následující den pøímo v textu modlitby.", 
- "navigáció", 
+ "Legyen-e hiperhivatkozás a nap többi imaórájára is,  illetve mutassa-e az elõzõ és következõ nap imaóráit is közvetlenül a szövegben.", 
 };
 
 const char *html_text_option2_textwrap[POCET_JAZYKOV + 1] = 
@@ -1759,7 +1759,7 @@ const char *html_text_option2_textwrap[POCET_JAZYKOV + 1] =
  "",
  "",
  "xxx", 
- "xxx", 
+ "hosszú sorok tördelése, mint a nyomtatott kiadásban (versrészek)", 
 };
 const char *html_text_option2_textwrap_explain[POCET_JAZYKOV + 1] = 
 {"Èi sa majú v texte modlitby dlhé riadky almov, chválospevov a inıch poetickıch èastí zalamova ako v tlaèenom vydaní.", 
@@ -1768,7 +1768,7 @@ const char *html_text_option2_textwrap_explain[POCET_JAZYKOV + 1] =
  "",
  "", 
  "xxx", 
- "xxx", 
+ "Legyenek-e tördelve az imaórák szövegében  a zsoltárok, kantikumok és más versrészek hosszú sorai, mint a nyomtatott kiadásban.", 
 };
 
 /* 2011-05-06: doplnené */
