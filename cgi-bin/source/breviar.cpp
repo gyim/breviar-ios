@@ -4640,7 +4640,9 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	short int obyc = NIE;
 	short int liturgicka_farba = LIT_FARBA_NEURCENA; /* 2006-08-19: pridané */
 	short int liturgicka_farba_alt = LIT_FARBA_NEURCENA; /* 2011-03-24: pridané */
+#ifdef LITURGICKE_CITANIA_ANDROID
 	struct citanie *cit = NULL;
+#endif // LITURGICKE_CITANIA_ANDROID
 
 	Log("-- init_global_string(EXPORT_DNA_%d, %d, %s, %d) -- zaèiatok\n", typ, poradie_svateho, nazov_modlitby(modlitba), aj_citanie);
 	Log("   (inicializuje tri _global_string* premenné)\n");
