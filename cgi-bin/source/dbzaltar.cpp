@@ -21101,7 +21101,7 @@ label_25_MAR:
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
-						if(_global_jazyk =! JAZYK_CZ){
+						if(_global_jazyk != JAZYK_CZ){
 							_vlastna_cast_hymnus;
 						}
 						_vlastna_cast_modlitba;
@@ -21111,7 +21111,7 @@ label_25_MAR:
 						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
-						if(_global_jazyk =! JAZYK_CZ){
+						if(_global_jazyk != JAZYK_CZ){
 							_vlastna_cast_hymnus;
 						}
 						_vlastna_cast_modlitba;
