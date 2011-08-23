@@ -891,6 +891,9 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_KAL_KECS_FOEGYH          63
 #define LOKAL_SLAV_ESZTERGOM_BUDA_FOEGYH    64
 #define LOKAL_SLAV_KAL_KECS_FELSZ           65
+#define LOKAL_SLAV_GYORI_SZEKESEGYH_FELSZ   66
+#define LOKAL_SLAV_VACI_PATRON              67
+#define LOKAL_SLAV_SZEGED_CSAN_PATRON2      68
 
 /* 2010-08-03: pridaný kalendár */
 #define KALENDAR_NEURCENY                   0
@@ -1397,8 +1400,8 @@ void _init_dm(_struct_dm a);
 	a.prik = NEPRIKAZANY_SVIATOK;      /* ci je to prikazany sviatok alebo nie: PRIKAZANY_SVIATOK resp. NEPRIKAZANY_SVIATOK */\
 	a.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA); /* MODL_SPOL_CAST_NEURCENA; spolocna cast -- zakodovane data pre svatych o tom, z akej spolocnej casti sa ma modlit */\
 	mystrcpy(a.meno, STR_UNDEF, MENO_SVIATKU); /* nazov prip. sviatku */\
-	a.farba = LIT_FARBA_NEURCENA; /* 2006-08-19: pridané */\
-	a.kalendar = KALENDAR_NEURCENY; /* 2010-08-03: pridané */\
+	a.farba = LIT_FARBA_NEURCENA;\
+	a.kalendar = KALENDAR_NEURCENY;\
 }
 
 /* inicializacne definy pridane 2003-08-13 */

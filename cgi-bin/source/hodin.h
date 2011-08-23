@@ -480,6 +480,9 @@ const char *nazov_slavenia_lokal[] =
 ,"Kalocsa-Kecskemét: a fõegyházmegye védõszentje; fõünnep"                                                      // LOKAL_SLAV_KAL_KECS_FOEGYH
 ,"A Esztergom-Budapest, a fôszékesegyházban; fõünnep"                                                           // LOKAL_SLAV_ESZTERGOM_BUDA_FOEGYH
 ,"A fôszékesegyházban; fõünnep"                                                                                 // LOKAL_SLAV_KAL_KECS_FELSZ
+,"A Gyõri egyházmegyében: székesegyház felszentelése; ünnep"                                                    // LOKAL_SLAV_GYORI_SZEKESEGYH_FELSZ
+,"A Váci egyházmegyében: Szent Mihály fõangyal, az egyházmegye védõszentje"                                     // LOKAL_SLAV_VACI_PATRON
+,"A Szeged-Csanád: az egyházmegye védõszentje; fõünnep"                                                         // LOKAL_SLAV_SZEGED_CSAN_PATRON2
 };
 
 /* names of liturgical colors */
@@ -4758,6 +4761,15 @@ const char *text_SEP_03[POCET_JAZYKOV + 1] =
  "Sv. Øehoøe Velikého, papeže a uèitele Církve",
  "Nagy Szent Gergely pápa és egyháztanító",
  };
+const char *text_SEP_05[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Kalkuttai Boldog Teréz szûz",
+ };
 const char *text_SEP_06_SK[POCET_JAZYKOV + 1] = 
 {"Výroèie posviacky katedrálneho chrámu v Košiciach",
  "(v Èechách, na Moravì a na Slezsku není)",
@@ -4774,7 +4786,7 @@ const char *text_SEP_07[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Melichara Grodeckého, knìze a muèedníka",
- "(nincs Magyarországon)",
+ "Boldog Márk, István és Menyhért áldozópapok, Kassai vértanúk",
  };
 const char *text_SEP_07_SJ[POCET_JAZYKOV + 1] = 
 {"Sv. košických muèeníkov: Štefana Pongrácza a Melichara Grodzieckého, kòazov Spoloènosti Ježišovej; <br>Marka Križina, ostrihomského kanonika, patrónov Slovenskej provincie Spoloènosti Ježišovej",
@@ -4801,7 +4813,7 @@ const char *text_SEP_09[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Petra Klavera, knìze",
- "(nincs Magyarországon)",
+ "Claver Szent Péter áldozópap",
  };
 const char *text_SEP_09_SJ[POCET_JAZYKOV + 1] = 
 {"Sv. Petra Clavera, kòaza",
@@ -4847,6 +4859,15 @@ const char *text_SEP_13[POCET_JAZYKOV + 1] =
  "",
  "Sv. Jana Zlatoústého, biskupa a uèitele církve",
  "Aranyszájú (Krizosztomosz) Szent János püspök és egyháztanító",
+ };
+const char *text_SEP_13_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Gyõr: A székesegyház felszentelése",
  };
 const char *text_SEP_14[POCET_JAZYKOV + 1] = 
 {"Povýšenie svätého kríža",
@@ -4972,7 +4993,7 @@ const char *text_SEP_23[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Pia z Pietrelciny, knìze",
- "(nincs Magyarországon)",
+ "Pietrelcinai Szent Pio áldozópap",
  };
 const char *text_SEP_24_SK[POCET_JAZYKOV + 1] = 
 {"Výroèie posviacky katedrálneho chrámu v Banskej Bystrici",
@@ -4982,6 +5003,15 @@ const char *text_SEP_24_SK[POCET_JAZYKOV + 1] =
  "",
  "(pro dominikány není)",
  "(nincs Magyarországon)",
+ };
+const char *text_SEP_24_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Szent Gellért püspök és vértanú",
  };
 const char *text_SEP_26[POCET_JAZYKOV + 1] = 
 {"Sv. Kozmu a Damiána, muèeníkov",
@@ -5035,7 +5065,7 @@ const char *text_SEP_28_2[POCET_JAZYKOV + 1] =
  "",
  "",
  "(pro dominikány není - 26.9.)",
- "(nincs Magyarországon)",
+ "Ruiz Szent Lôrinc és társai, Fülöp-szigeteki vértanúk",
  };
 const char *text_SEP_29[POCET_JAZYKOV + 1] = 
 {"Sv. Michala, Gabriela a Rafaela, archanjelov",
