@@ -1945,7 +1945,7 @@ void _set_kompletorium_slavnost_oktava(short int modlitba, short int litobd, sho
 /* 2009-01-06: vytvorenÈ vyÚatÌm ËastÌ pre kompletÛrium z zaltar_zvazok(); premennÈ tyzzal ani zvazok nepotrebujeme */
 /* 2010-08-03: potrebujeme premenn˙ tyzzal */
 void zaltar_kompletorium(short int den, short int obdobie, short int specialne, short int tyzzal){
-	Log("-- zaltar_kompletorium(%d, %d, %d) -- zaËiatok\n", den, obdobie, specialne);
+	Log("-- zaltar_kompletorium(%d, %d, %d, %d) -- zaËiatok\n", den, obdobie, specialne, tyzzal);
 	Log("nastavujem poËet ûalmov pre kompletÛrium v z·vislosti od dÚa v t˝ûdni (%d - %s)...\n", den, nazov_dna(den));
 	/* 2006-10-17: DoplnenÈ kvÙli rÙznemu poËtu ûalmov pre kompletÛrium; upravenÈ 2006-10-18 */
 	if(den == DEN_STREDA){
@@ -2003,7 +2003,7 @@ void zaltar_kompletorium(short int den, short int obdobie, short int specialne, 
 		case DEN_SOBOTA:
 			break;
 	}/* switch(den) */
-	Log("-- zaltar_kompletorium(%d, %d, %d) -- koniec\n", den, obdobie, specialne);
+	Log("-- zaltar_kompletorium(%d, %d, %d, %d) -- koniec\n", den, obdobie, specialne, tyzzal);
 }/* zaltar_kompletorium() */
 
 void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int specialne){
@@ -19506,8 +19506,16 @@ label_25_MAR:
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_premenenie(modlitba);
 
-						modlitba = MODL_KOMPLETORIUM; /* 2009-01-06: keÔûe v liturgicke_obdobie() bolo odvetvenÈ, niË sa pre kompletÛrium nenastavovalo - doplnenÈ */
-						zaltar_kompletorium(_global_den.denvt, _global_den.litobd /* OBD_CEZ_ROK */, ZALTAR_VSETKO /* specialne */, _global_den.tyzzal);
+						// 2009-01-06: keÔûe v liturgicke_obdobie() bolo odvetvenÈ, niË sa pre kompletÛrium nenastavovalo - doplnenÈ
+						modlitba = MODL_KOMPLETORIUM;
+						// 2011-08-24: ak padne tento sviatok na sobotu, kompletÛrium (po druh˝ch veöper·ch) m· byù nedeænÈ, po prv˝ch veöper·ch
+						if(_global_den.denvt == DEN_SOBOTA){
+							zaltar_kompletorium(DEN_NEDELA /* _global_den.denvt */, _global_den.litobd /* OBD_CEZ_ROK */, ZALTAR_VSETKO /* specialne */, _global_den.tyzzal);
+							_global_modl_kompletorium = _global_modl_prve_kompletorium;
+						}// DEN_SOBOTA
+						else{
+							zaltar_kompletorium(_global_den.denvt, _global_den.litobd /* OBD_CEZ_ROK */, ZALTAR_VSETKO /* specialne */, _global_den.tyzzal);
+						}// in˝ deÚ ako sobota
 
 						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
@@ -20419,7 +20427,7 @@ label_25_MAR:
 					if(poradie_svaty == 1){
 						/* definovanie parametrov pre modlitbu */
 						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty, FORCE_BRAT_ANTIFONY + FORCE_BRAT_ZALMY + FORCE_BRAT_KCIT_1CIT + FORCE_BRAT_KRESP_PROSBY + FORCE_BRAT_2CITANIE);
+							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_hymnus;
@@ -21196,7 +21204,7 @@ label_25_MAR:
 
 							modlitba = MODL_KOMPLETORIUM;
 							_set_kompletorium_slavnost(modlitba, _global_den.litobd);
-						}
+						}// DEN_NEDELA
 						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
 					_global_svaty1.typslav = SLAV_SVIATOK;
