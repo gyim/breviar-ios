@@ -3186,9 +3186,17 @@ void _set_zalmy_telakrvi(short int modlitba){
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
 	}
-	/* 2006-01-24: doplnenÈ ûalmy pre modlitbu cez deÚ */
+	/* 2006-01-24: doplnenÈ ûalmy pre modlitbu cez deÚ
+	 * 2011-08-26: "Doplnkov· psalmÛdia. KeÔ sa sl·vnosù kon· v nedeæu, ûalmy sa ber˙ z nedele prvÈho t˝ûdÚa." zv. III, str. 618
+	 *             pre JAZYK_SK je to vûdy vo ötvrtok, avöak pre inÈ sa prÌpadne mÙûe sl·viù inokedy
+	 */
 	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
-		_set_zalmy_mcd_doplnkova_psalmodia();
+		if(_global_den.denvt == DEN_NEDELA){
+			_set_zalmy_1nedele_mcd();
+		} // DEN_NEDELA
+		else{
+			_set_zalmy_mcd_doplnkova_psalmodia();
+		}
 	}
 	Log("_set_zalmy_telakrvi(%s) -- end\n", nazov_modlitby(modlitba));
 }
@@ -7886,57 +7894,64 @@ label_24_DEC:
 		_local_den = _global_pm_sobota;
 		mystrcpy(_file, FILE_SPOM_PM_SOBOTA, MAX_STR_AF_FILE);
 
+		/* invitatÛrium */
+		modlitba = MODL_INVITATORIUM;
+		// s˙ 2, takûe tyzzal MOD 2 (0, 1)
+		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1, tyzzal MOD 2);
+		_set_antifona1(modlitba, _file, _anchor);
+		set_LOG_litobd;
+
 		/* rannÈ chv·ly */
 		modlitba = MODL_RANNE_CHVALY;
-		/* hymnus */
-		/* su tri hymny, preto ich dame podla tyzzal MOD 3 (0, 1, 2) */
+		// hymnus
+		// s˙ tri hymny, preto ich d·me podæa tyzzal MOD 3 (0, 1, 2)
 		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_HYMNUS, tyzzal MOD 3);
 		_set_hymnus(modlitba, _file, _anchor);
 		set_LOG_litobd;
-		/* kratke citanie */
-		/* su tri, preto ich dame podla tyzzal MOD 3 (0, 1, 2) */
+		// kr·tke ËÌtanie
+		// s˙ tri, preto ich d·me podæa tyzzal MOD 3 (0, 1, 2)
 		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_KCITANIE, tyzzal MOD 3);
 		_set_kcitanie(modlitba, _file, _anchor);
 		set_LOG_litobd;
-		/* kratke responzorium  */
-		/* su tri, preto ich dame podla tyzzal MOD 3 (0, 1, 2) */
+		// kr·tke responzÛrium
+		// s˙ tri, preto ich d·me podæa tyzzal MOD 3 (0, 1, 2)
 		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ, tyzzal MOD 3);
 		_set_kresponz(modlitba, _file, _anchor);
 		set_LOG_litobd;
-		/* benediktus */
-		/* 2010-11-16, oprava: je ich 6, pÙvodne bolo: takze tyzzal MOD 6 + 1 (1 -- 6); avöak tyzzal je 1--4, opravenÈ na _global_den.tyzden */
-		/* preto "+ 1", aby sme dodrzali povodne cislovanie */
+		// benediktus
+		// 2010-11-16, oprava: je ich 6, pÙvodne bolo: takze tyzzal MOD 6 + 1 (1 -- 6); avöak tyzzal je 1--4, opravenÈ na _global_den.tyzden
+		// preto "+ 1", aby sme dodrûali povodnÈ ËÌslovanie
 		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_BENEDIKTUS, (tyzden MOD 6) + 1);
 		_set_benediktus(modlitba, _file, _anchor);
 		set_LOG_litobd;
-		/* prosby */
-		/* su 2, takze tyzzal MOD 2 (0, 1) */
+		// prosby
+		// s˙ 2, takûe tyzzal MOD 2 (0, 1)
 		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_PROSBY, tyzzal MOD 2);
 		_set_prosby(modlitba, _file, _anchor);
 		set_LOG_litobd;
-		/* modlitba */
-		/* 2010-11-16, oprava: je ich 6, pÙvodne bolo: takze tyzzal MOD 6 + 1 (1 -- 6); avöak tyzzal je 1--4, opravenÈ na _global_den.tyzden */
-		/* preto "+ 1", aby sme dodrzali povodne cislovanie */
+		// modlitba
+		// 2010-11-16, oprava: je ich 6, pÙvodne bolo: takûe tyzzal MOD 6 + 1 (1 -- 6); avöak tyzzal je 1--4, opravenÈ na _global_den.tyzden
+		// preto "+ 1", aby sme dodrûali pÙvodnÈ ËÌslovanie */
 		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_MODLITBA, (tyzden MOD 6) + 1);
 		_set_modlitba(modlitba, _file, _anchor);
 		set_LOG_litobd;
 
-		/* 2006-02-02: pridanÈ posv‰tnÈ ËÌtanie */
+		/* posv‰tnÈ ËÌtanie */
 		modlitba = MODL_POSV_CITANIE;
-		/* hymnus */
-		/* su tri hymny, preto ich dame podla tyzzal MOD 3 (0, 1, 2) */
+		// hymnus
+		// s˙ tri hymny, preto ich d·me podæa tyzzal MOD 3 (0, 1, 2)
 		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_HYMNUS, tyzzal MOD 3);
 		_set_hymnus(modlitba, _file, _anchor);
 		set_LOG_litobd;
-		/* antifÛny, ûalmy, verö a prvÈ ËÌtanie s responzÛriom sa berie z prÌsluönej soboty */
-		/* druhÈ ËÌtanie */
-		/* s˙ ötyri hymny, preto ich d·me podæa tyzzal MOD 4 (0, 1, 2, 3) */
+		// antifÛny, ûalmy, verö a prvÈ ËÌtanie s responzÛriom sa berie z prÌsluönej soboty
+		// druhÈ ËÌtanie
+		// s˙ ötyri hymny, preto ich d·me podæa tyzzal MOD 4 (0, 1, 2, 3)
 		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_CITANIE2, tyzzal MOD 4);
 		_set_citanie2(modlitba, _file, _anchor);
 		set_LOG_litobd;
-		/* modlitba -- ako na rannÈ chv·ly; doplnenÈ 2010-11-16 */
-		/* 2010-11-16, oprava: je ich 6, pÙvodne bolo: takze tyzzal MOD 6 + 1 (1 -- 6); avöak tyzzal je 1--4, opravenÈ na _global_den.tyzden */
-		/* preto "+ 1", aby sme dodrzali povodne cislovanie */
+		// modlitba -- ako na rannÈ chv·ly; doplnenÈ 2010-11-16
+		// 2010-11-16, oprava: je ich 6, pÙvodne bolo: takûe tyzzal MOD 6 + 1 (1 -- 6); avöak tyzzal je 1--4, opravenÈ na _global_den.tyzden
+		// preto "+ 1", aby sme dodrûali pÙvodnÈ ËÌslovanie
 		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(MODL_RANNE_CHVALY /* modlitba */), ANCHOR_MODLITBA, (tyzden MOD 6) + 1);
 		_set_modlitba(modlitba, _file, _anchor);
 		set_LOG_litobd;
