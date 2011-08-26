@@ -6231,7 +6231,7 @@ label_24_DEC:
 						_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
 					}/* srdca */
 					else if(_global_den.denvr == (_global_r._ZOSLANIE_DUCHA_SV.denvr + 20)){ /* 2008-05-08: v breviar.cpp sa používa define SRDPM */
-						/* neposkvrneneho srdca prebl. panny marie; 04/07/2000A.D. */
+						// neposkvrneneho srdca prebl. panny marie
 						Log("  (hoci tu nic nenastavujem) ide o spomienku neposkvrneneho srdca prebl. panny marie\n");
 					}
 					else {
@@ -7756,7 +7756,7 @@ label_24_DEC:
 			case 4:
 				/* do _local_den priradim slavenie pm v sobotu v dalsom */
 				_local_den = _global_pm_sobota;
-				/* ale predsalen aspon _local_den = _global_pm_sobota; urobim tu; 04/07/2000A.D. */
+				// ale predsalen aspon _local_den = _global_pm_sobota; urobim tu
 				break; /* case 4: */
 			case 1:
 				/* do _local_den priradim dane slavenie */
@@ -7801,7 +7801,7 @@ label_24_DEC:
 				ALERT;
 				break;
 			case 0:
-				/* je smiesne, ze case 0 tu vobec je: ved toto je mrtvy kus kodu! 04/07/2000A.D. */
+				// [ToDo]: je smiesne, ze case 0 tu vobec je: ved toto je mrtvy kus kodu!
 				/* bezny den */
 				if(_global_svaty1.smer >= 12){
 					/* ak je to iba lubovolna spomienka, tak vsedny den */
@@ -7865,8 +7865,7 @@ label_24_DEC:
 	/* este spomienka panny marie v sobotu, cl. 15 */
 	/* najprv sa spytame tej soboty, ci nahodou nie je 
 	   spomienka neposkvrneneho srdca panny marie;
-	   ak je, tak uprednostnime tuto.
-	   pridane 04/07/2000A.D. */
+	   ak je, tak uprednostnime tuto. pridane 04/07/2000A.D. */
 	/* 2006-02-02: pridané posv. èítania a upravené; 
 	 * keïže smer == 11 používame pre lokálne povinné spomienky, 
 	 * upravili sme kontrolu z 12 na 11
@@ -7882,7 +7881,7 @@ label_24_DEC:
 	/* spomienka panny márie v sobotu */
 	if((_global_den.litobd == OBD_CEZ_ROK) &&
 		(_global_den.denvt == DEN_SOBOTA) &&
-		((_global_den.denvr != (_global_r._ZOSLANIE_DUCHA_SV.denvr + 20))) && /* pridane 04/07/2000A.D. */
+		((_global_den.denvr != (_global_r._ZOSLANIE_DUCHA_SV.denvr + 20))) &&
 		(
 			/* 2011-02-02: zadefinované MIESTNE_SLAVENIE_CZOP_SVATY1 až 3, aby sa zjednodušila podmienka (platí len pre CZOP)
 			 * 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 až 3 použité aj pre iné lokálne slávenia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 až 3
@@ -25272,7 +25271,7 @@ label_8_DEC:
 		Log(" neposkvrneneho srdca panny marie: \n");
 		Log(" ...berie sa len v takom pripade, ked to nekoliduje\n");
 		Log(" ...so slavenim, co ma vyssiu prioritu (smer < 10)\n");
-		/* 04/07/2000A.D.: vypisanie logu, uprava */
+
 		poradie_svaty = 1;
 		if(poradie_svaty == 1){
 			/* definovanie parametrov pre modlitbu */
