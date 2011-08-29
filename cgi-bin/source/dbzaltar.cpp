@@ -20703,7 +20703,7 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_full(modlitba);
-						_set_zalmy_1nedele_rch(); /* 2006-09-05: doplnené pod¾a breviára, upozornil Medus */
+						_set_zalmy_1nedele_rch(); // 2006-09-05: doplnené pod¾a breviára, upozornil Medus
 
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
@@ -20717,6 +20717,7 @@ label_25_MAR:
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full(modlitba);
+						_set_zalmy_sviatok_muc(modlitba); // 2011-08-29: doplnené pod¾a breviára
 
 						break;
 					}
