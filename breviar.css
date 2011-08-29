@@ -11,6 +11,8 @@
 .tt { font-family: Monospace; }
 .parameter { font-weight: bold; font-style: normal; font-family: Monospace; color: black; }
 .value { font-weight: bold; font-style: normal; font-family: Monospace; color: brown; }
+.brown { color: brown; }
+.brownsmall { font-size: 85%; color: brown; }
 .explain { font-size: 90%; color: #330000; }
 .small { font-size: 80%; }
 .verysmall { font-size: 60%; }
