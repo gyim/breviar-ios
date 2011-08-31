@@ -1361,7 +1361,7 @@ void _main_prazdny_formular(void){
  */
 #define DetailLog emptyLog
 #define MAX_ZAKONCENIE 200
-#define EXPORT_REFERENCIA (!vnutri_myslienky || je_myslienka)
+#define EXPORT_REFERENCIA ((!vnutri_myslienky || je_myslienka) || (!vnutri_nadpisu || je_nadpis))
 short int antifona_pocet = 0; // 2011-07-08: poèet antifón (ant1, ant2, ant3 pre psalmódiu a ant. na benediktus/magnifikat kvôli kríikom)
 char rest_krizik[MAX_BUFFER] = STR_EMPTY; // 2011-07-08: pre to, èo je za kríikom v antifóne
 void includeFile(short int type, const char *paramname, const char *fname, const char *modlparam){
@@ -1376,7 +1376,9 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 	char zakoncenie[MAX_ZAKONCENIE]; /* 2009-12-14: zakonèenie s ve¾kım písmenkom na zaèiatku, následne sa prípadne mení 1. písmeno na malé */
 	short int vnutri_referencie = NIE; /* 2011-04-05, kvôli biblickım referenciám v inkludovanıch súboroch */
 	short int vnutri_myslienky = NIE; /* 2011-05-03, kvôli myšlienkam k almom, ktoré v sebe vnútri môu obsahova biblickú referenciu */
-	short int je_myslienka = NIE; /* 2011-05-03, èi sa má myšlienka vklada alebo nie */
+	short int vnutri_nadpisu = NIE; // 2011-08-31, kvôli nadpisu pre psalmódiu
+	short int je_myslienka = NIE; // 2011-05-03, èi sa má myšlienka vklada alebo nie
+	short int je_nadpis = NIE; // 2011-08-31, èi sa má nadpis pre psalmódiu vklada alebo nie
 	char refbuff[MAX_BUFFER]; /* 2011-04-05: buffer pre referenciu */
 	char refrest[MAX_BUFFER]; /* 2011-04-05: 'rest' uloené zo zaèiatku referencie (pouíva sa a pri parsovaní konca referencie) */
 
@@ -1419,12 +1421,15 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 		return;
 	}
 
-	/* 2011-05-03: nastavenie toho, èi sa má zobrazova myšlienka k almom/chválospevom */
+	// 2011-05-03: nastavenie toho, èi sa má zobrazova myšlienka k almom/chválospevom
+	// 2011-08-31: doplnené aj nastavenie pre zobrazenie nadpisu pre alm/chválospev (zatia¾ rovnako ako pre myšlienku)
 	if((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (_global_den.typslav == SLAV_VLASTNE) || (_global_den.litobd == OBD_VELKONOCNA_OKTAVA) || (_global_den.smer == 1) /* && (_global_den.spolcast != _encode_spol_cast(MODL_SPOL_CAST_NEURCENA)) */){
 		je_myslienka = NIE;
+		je_nadpis = NIE;
 	}
 	else{
 		je_myslienka = ANO;
+		je_nadpis = ANO;
 	}
 	Log("nastavil som je_myslienka == %d\n", je_myslienka);
 
@@ -1854,7 +1859,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 					 * 2011-04-30: doplnené, aby sa nezobrazovalo vo Ve¾konoènej oktáve
 					 * 2011-05-03: upravené, aby sa nastavovalo vnutri_myslienky kvôli tomu, e z viacerıch miest sa nastavovalo write
 					 */
-					if(equals(rest, PARAM_MYSLIENKA_K_ZALMU)){
+					if(equals(rest, PARAM_PSALMODIA_MYSLIENKA)){
 						if(je_myslienka){
 #if defined(EXPORT_HTML_SPECIALS)
 							Export("myslienka");
@@ -1883,6 +1888,37 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							}/* INCLUDE_END */
 						}
 					}/* volite¾né zobrazovanie/skrıvanie alternatívnej antifóny pre almy/chválospevy */
+
+					// 2011-08-31: doplnené volite¾né zobrazovanie/skrıvanie nadpisu pre almy/chválospevy pod¾a myšlienky
+					if(equals(rest, PARAM_PSALMODIA_NADPIS)){
+						if(je_nadpis){
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("nadpis");
+#endif
+						}
+						else{
+							if(equals(strbuff, INCLUDE_BEGIN)){
+								vnutri_nadpisu = ANO;
+								if(vnutri_inkludovaneho == 1){
+									write = NIE;
+#if defined(EXPORT_HTML_SPECIALS)
+									Export("(stop)nie je nadpis");
+#endif
+									Log("  rusim writing to export file, kvoli psalmodia-nadpis...\n");
+								}/* vnutri_inkludovaneho == 1 */
+							}/* INCLUDE_BEGIN */
+							else if(equals(strbuff, INCLUDE_END)){
+								vnutri_nadpisu = NIE;
+								if(vnutri_inkludovaneho == 1){
+#if defined(EXPORT_HTML_SPECIALS)
+									Export("nie je nadpis(start)");
+#endif
+									write = ANO;
+									Log("  opat writing to export file, end of psalmodia-nadpis.\n");
+								}/* vnutri_inkludovaneho == 1 */
+							}/* INCLUDE_END */
+						}
+					}/* volite¾né zobrazovanie/skrıvanie nadpisu pre almy/chválospevy */
 
 				}/* !equalsi(rest, modlparam) */
 				continue;

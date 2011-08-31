@@ -477,26 +477,28 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 #define PARAM_TEDEUM_END                    "TEDEUM_END"
 #define PARAM_JE_TEDEUM_BEGIN               "JE_TEDEUM_BEGIN"
 #define PARAM_JE_TEDEUM_END                 "JE_TEDEUM_END"
-/* 2007-10-02: doplnené skrytie rovnakých antifón pre mcd */
+// 2007-10-02: doplnené skrytie rovnakých antifón pre mcd
 #define PARAM_SKRY_ANTIFONU_BEGIN           "SKRY_ANTIFONU_BEGIN"
 #define PARAM_SKRY_ANTIFONU_END             "SKRY_ANTIFONU_END"
-/* 2009-04-08, doplnené: zakonèenie modlitby trojaké, krátke resp. dlhé */
+// 2009-04-08, doplnené: zakonèenie modlitby trojaké, krátke resp. dlhé
 #define PARAM_ZAKONCENIE_SKRZE              "ZAKONCENIE_SKRZE"
 #define PARAM_ZAKONCENIE_LEBO_TY            "ZAKONCENIE_LEBO_TY"
 #define PARAM_ZAKONCENIE_LEBO_ON            "ZAKONCENIE_LEBO_ON"
-/* 2009-12-14, doplnené: zakonèenie modlitby trojaké, krátke resp. dlhé s malým písmenkom na zaèiatku */
+// 2009-12-14, doplnené: zakonèenie modlitby trojaké, krátke resp. dlhé s malým písmenkom na zaèiatku
 #define PARAM_ZAKONCENIE_SKRZE_MALE         "ZAKONCENIE_SKRZE_MALE"
 #define PARAM_ZAKONCENIE_LEBO_TY_MALE       "ZAKONCENIE_LEBO_TY_MALE"
 #define PARAM_ZAKONCENIE_LEBO_ON_MALE       "ZAKONCENIE_LEBO_ON_MALE"
-/* 2010-06-07, doplnené: ešte jedno zakonèenie modlitby pre slovenèinu, krátke resp. dlhé (POST1_MODLITBA5NE) */
+// 2010-06-07, doplnené: ešte jedno zakonèenie modlitby pre slovenèinu, krátke resp. dlhé (POST1_MODLITBA5NE)
 #define PARAM_ZAKONCENIE_ON_JE              "ZAKONCENIE_ON_JE"
-/* 2010-01-14, doplnené: ešte jedno zakonèenie modlitby pre slovenèinu, krátke resp. dlhé */
+// 2010-01-14, doplnené: ešte jedno zakonèenie modlitby pre slovenèinu, krátke resp. dlhé
 #define PARAM_ZAKONCENIE_KTORY_JE           "ZAKONCENIE_KTORY_JE"
-/* 2010-05-21: doplnené zobrazenie antifóny a modlitby pre spomienku svätca v pôstnom období */
+// 2010-05-21: doplnené zobrazenie antifóny a modlitby pre spomienku svätca v pôstnom období
 #define PARAM_POST_SPOMIENKA_BEGIN          "POST_SPOMIENKA_BEGIN"
 #define PARAM_POST_SPOMIENKA_END            "POST_SPOMIENKA_END"
-/* 2011-01-12: doplnené zobrazenie/skrytie alternatívnej antifóny žalmu/chválospevu ("myšlienka k žalmu" pod¾a bodu 111 VSLH) */
-#define PARAM_MYSLIENKA_K_ZALMU             "MYSLIENKA_K_ZALMU"
+// 2011-01-12: doplnené zobrazenie/skrytie myšlienky k žalmu -- pre cezroèné obdobie alternatívnej antifóny žalmu/chválospevu ("myšlienka k žalmu" pod¾a bodu 111 a 114 VSLH)
+#define PARAM_PSALMODIA_MYSLIENKA           "PSALMODIA_MYSLIENKA" // 2011-08-31: zmenené; pôvodne bolo: PARAM_MYSLIENKA_K_ZALMU "MYSLIENKA_K_ZALMU"
+// 2011-08-31: doplnené zobrazenie/skrytie nadpisu k žalmu/chválospevu ("nadpis k žalmu" pod¾a bodu 111 VSLH)
+#define PARAM_PSALMODIA_NADPIS              "PSALMODIA_NADPIS"
 
 #define PARAM_RUBRIKA_BEGIN                 "RUBRIKA_BEGIN"
 #define PARAM_RUBRIKA_END                   "RUBRIKA_END"
