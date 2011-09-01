@@ -242,6 +242,7 @@
 /*   2011-07-03a.D. | navigácia zapracovaná                                */
 /*                    ToDo: dorieši 4. júla; vešpery berú deò 5. júla     */
 /*                    ešte: predsunú èítanie parametrov niekam vyššie do spoloènej èasti; pre "lit. obd." sa tam dáva 1.1.1900 (neurèenı _global_den)... */
+/*   2011-09-01a.D. | zapracovanie odkazov na katechézy ako referencie     */
 /*                                                                         */
 /*                                                                         */
 /* poznámky |                                                              */
@@ -1357,6 +1358,7 @@ void _main_prazdny_formular(void){
  * 2011-05-02: znak '_' pouívame ako zástupnı pre nezlomite¾nú medzeru (exportuje sa ako &nbsp;)
  * 2011-05-03: zadefinované EXPORT_REFERENCIA -- aby sa neexportovala referencia, ak netreba (v rámci HTML poznámky)
  *             (mono èasom sa ukáe, e treba testova aj nieèo iné ako len referencie v rámci myšlienok k almom/chválospevom)
+ * 2011-09-01: exportovanie odkazu na katechézu podobne ako referencie (pouíva BIT_OPT_0_REFERENCIE a EXPORT_REFERENCIA ako referencie)
  * 
  */
 #define DetailLog emptyLog
@@ -1365,22 +1367,25 @@ void _main_prazdny_formular(void){
 short int antifona_pocet = 0; // 2011-07-08: poèet antifón (ant1, ant2, ant3 pre psalmódiu a ant. na benediktus/magnifikat kvôli kríikom)
 char rest_krizik[MAX_BUFFER] = STR_EMPTY; // 2011-07-08: pre to, èo je za kríikom v antifóne
 void includeFile(short int type, const char *paramname, const char *fname, const char *modlparam){
-	short int c, buff_index = 0, ref_index = 0;
+	short int c, buff_index = 0, ref_index = 0, kat_index = 0;
 	char strbuff[MAX_BUFFER];
 	char rest[MAX_BUFFER];
 	char isbuff = 0;
 	short int write = NIE;
 	short int je_antifona = NIE; // 2011-07-08: kvôli kríikom
 	short int write_krizik = NIE; // 2011-07-08: kvôli kríikom
-	char vnutri_inkludovaneho = 0; /* 17/02/2000A.D., kvoli "V.O. Aleluja" v inkludovanych napr. antifonach */
-	char zakoncenie[MAX_ZAKONCENIE]; /* 2009-12-14: zakonèenie s ve¾kım písmenkom na zaèiatku, následne sa prípadne mení 1. písmeno na malé */
-	short int vnutri_referencie = NIE; /* 2011-04-05, kvôli biblickım referenciám v inkludovanıch súboroch */
-	short int vnutri_myslienky = NIE; /* 2011-05-03, kvôli myšlienkam k almom, ktoré v sebe vnútri môu obsahova biblickú referenciu */
+	char vnutri_inkludovaneho = 0; // 17/02/2000A.D., kvoli "V.O. Aleluja" v inkludovanych napr. antifonach
+	char zakoncenie[MAX_ZAKONCENIE]; // 2009-12-14: zakonèenie s ve¾kım písmenkom na zaèiatku, následne sa prípadne mení 1. písmeno na malé
+	short int vnutri_referencie = NIE; // 2011-04-05, kvôli biblickım referenciám v inkludovanıch súboroch
+	short int vnutri_katechezy = NIE; // 2011-09-01, kvôli odkazom na katechézy v inkludovanıch súboroch
+	short int vnutri_myslienky = NIE; // 2011-05-03, kvôli myšlienkam k almom, ktoré v sebe vnútri môu obsahova biblickú referenciu
 	short int vnutri_nadpisu = NIE; // 2011-08-31, kvôli nadpisu pre psalmódiu
 	short int je_myslienka = NIE; // 2011-05-03, èi sa má myšlienka vklada alebo nie
 	short int je_nadpis = NIE; // 2011-08-31, èi sa má nadpis pre psalmódiu vklada alebo nie
-	char refbuff[MAX_BUFFER]; /* 2011-04-05: buffer pre referenciu */
-	char refrest[MAX_BUFFER]; /* 2011-04-05: 'rest' uloené zo zaèiatku referencie (pouíva sa a pri parsovaní konca referencie) */
+	char refbuff[MAX_BUFFER]; // 2011-04-05: buffer pre referenciu
+	char refrest[MAX_BUFFER]; // 2011-04-05: 'rest' uloené zo zaèiatku referencie (pouíva sa a pri parsovaní konca referencie)
+	char katbuff[MAX_BUFFER]; // 2011-09-01: buffer pre odkaz na katechézu
+	char katrest[MAX_BUFFER]; // 2011-09-01: 'rest' uloené zo zaèiatku odkazu na katechézu (pouíva sa a pri parsovaní konca odkazu na katechézu)
 
 	Log("--includeFile(%d, %s, %s, %s): begin,\n", type, paramname, fname, modlparam);
 
@@ -1389,6 +1394,8 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 	mystrcpy(rest, STR_EMPTY, MAX_BUFFER);
 	mystrcpy(refbuff, STR_EMPTY, MAX_BUFFER);
 	mystrcpy(refrest, STR_EMPTY, MAX_BUFFER);
+	mystrcpy(katbuff, STR_EMPTY, MAX_BUFFER);
+	mystrcpy(katrest, STR_EMPTY, MAX_BUFFER);
 
 	FILE *body = fopen(fname, "r");
 
@@ -1536,7 +1543,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 					/* write = NIE; -- aby mohli byt nestovane viacere :-) */
 					DetailLog("parameter does not match: %s != %s\n", rest, modlparam);
 
-					/* 2011-04-05: upravi referencie na hyperlinky */
+					// 2011-04-05: upravi referencie na hyperlinky
 					if(equals(strbuff, PARAM_REFERENCIA_BEGIN) && (vnutri_inkludovaneho == 1)){
 						vnutri_referencie = ANO;
 						write = NIE;
@@ -1548,7 +1555,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							DetailLog("\trest     == %s\n", rest);
 							DetailLog("\trefrest  == %s\n", refrest);
 						}
-					}/* upravi referencie na hyperlinky */
+					}// upravi referencie na hyperlinky -- PARAM_REFERENCIA_BEGIN
 					if(equals(strbuff, PARAM_REFERENCIA_END) && (vnutri_inkludovaneho == 1)){
 						refbuff[ref_index] = '\0';
 						if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_REFERENCIE) == BIT_OPT_0_REFERENCIE){
@@ -1583,9 +1590,59 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							write = ANO;
 						}
 						strcpy(refrest, STR_EMPTY);
-					}/* upravi referencie na hyperlinky */
+					}// upravi referencie na hyperlinky -- PARAM_REFERENCIA_END
 
-					/* 2011-07-14: zobrazi/nezobrazi zalomenie veršov pod¾a tlaèenej LH */
+					// 2011-09-01: upravi odkazy na katechézy (zatia¾ napojené na BIT_OPT_0_REFERENCIE a EXPORT_REFERENCIA ako referencie)
+					if(equals(strbuff, PARAM_KATECHEZA_BEGIN) && (vnutri_inkludovaneho == 1)){
+						vnutri_katechezy = ANO;
+						write = NIE;
+						kat_index = 0;
+						if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_REFERENCIE) == BIT_OPT_0_REFERENCIE){
+							if(rest != NULL){
+								mystrcpy(katrest, rest, MAX_BUFFER);
+							}
+							DetailLog("\trest     == %s\n", rest);
+							DetailLog("\tkatrest  == %s\n", katrest);
+						}
+					}// upravi odkazy na katechézy na hyperlinky -- PARAM_KATECHEZA_BEGIN
+					if(equals(strbuff, PARAM_KATECHEZA_END) && (vnutri_inkludovaneho == 1)){
+						katbuff[kat_index] = '\0';
+						if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_REFERENCIE) == BIT_OPT_0_REFERENCIE){
+							/* ToDo: èasom dynamicky */
+							if(EXPORT_REFERENCIA){
+								Export("<a href=\"/include/");
+							}
+							DetailLog("\trest     == %s\n", rest);
+							DetailLog("\tkatrest  == %s\n", katrest);
+							if((katrest != NULL) && !(equals(katrest, STR_EMPTY))){
+								// [ToDo]: doplni nevypisovanie katbuff, ak katrest obsahuje medzeru (prevzaté z èasti pre referencie)
+								if(EXPORT_REFERENCIA){
+									Export("%s", remove_diacritics(katrest));
+								}
+							}// naèítanie na zaèiatok referencie
+							if(EXPORT_REFERENCIA){
+								// prípadne odstráni target=\"_blank\"
+								Export("\" target=\"_blank\" "HTML_CLASS_QUIET">"); // a.quiet { text-decoration:none; color: inherit; }
+							}
+						}
+						if(EXPORT_REFERENCIA){
+							Export("%s", katbuff);
+						}
+						if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_REFERENCIE) == BIT_OPT_0_REFERENCIE){
+							if(EXPORT_REFERENCIA){
+								Export("</a>");
+							}
+						}
+						vnutri_katechezy = NIE;
+
+						// prevzaté z èasti pre referencie: 2011-05-02: doplnené kvôli referenciám, ktoré sú v rámci myšlienok, èo sa nemajú zobrazova
+						if(EXPORT_REFERENCIA){
+							write = ANO;
+						}
+						strcpy(katrest, STR_EMPTY);
+					}// upravi odkazy na katechézy na hyperlinky -- PARAM_KATECHEZA_END
+
+					// 2011-07-14: zobrazi/nezobrazi zalomenie veršov pod¾a tlaèenej LH
 					if(equals(strbuff, PARAM_ZALOMENIE) && (vnutri_inkludovaneho == 1)){
 #if defined(EXPORT_HTML_SPECIALS)
 						Export("[%s:%s|rest=%s]", strbuff, modlparam, (rest == NULL) ? STR_EMPTY: rest);
@@ -1603,7 +1660,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							Export("zalomenie-nie");
 #endif
 						}
-					}/* zobrazi/nezobrazi zalomenie veršov pod¾a tlaèenej LH */
+					}// zobrazi/nezobrazi zalomenie veršov pod¾a tlaèenej LH -- PARAM_ZALOMENIE
 
 					/* 2011-04-04: zobrazi/nezobrazi èíslovanie veršov */
 					if(equals(strbuff, PARAM_CISLO_VERSA_BEGIN) && (vnutri_inkludovaneho == 1)){
@@ -1925,8 +1982,12 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 		}/* switch(c) */
 		if(!isbuff){
 			if(vnutri_referencie == ANO){
-				/* bez oh¾adu na to, ako je nastavené write */
+				// bez oh¾adu na to, ako je nastavené write
 				refbuff[ref_index++] = (char)c;
+			}
+			if(vnutri_katechezy == ANO){
+				// bez oh¾adu na to, ako je nastavené write
+				katbuff[kat_index++] = (char)c;
 			}
 			if(write == ANO){
 				/* 2011-05-02: nezlomite¾né medzery; v DetailLog logujeme 1:1 presne znak bez transformácie */

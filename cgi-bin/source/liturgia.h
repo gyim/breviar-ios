@@ -503,26 +503,30 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 #define PARAM_RUBRIKA_BEGIN                 "RUBRIKA_BEGIN"
 #define PARAM_RUBRIKA_END                   "RUBRIKA_END"
 
-/* 2011-05-03: doplnené kvôli posvätnému èítaniu na ve¾konoènú nede¾u */
+// 2011-05-03: doplnené kvôli posvätnému èítaniu na ve¾konoènú nede¾u
 #define PARAM_VN_VYNECHAJ_BEGIN             "VELK_NEDELA_VYNECHAJ_BEGIN"
 #define PARAM_VN_VYNECHAJ_END               "VELK_NEDELA_VYNECHAJ_END"
 
-/* 2011-07-07: doplnené kvôli zobrazovaniu/skrývaniu dlhších záverov responzórií v posvätnom èítaní */
+// 2011-07-07: doplnené kvôli zobrazovaniu/skrývaniu dlhších záverov responzórií v posvätnom èítaní
 #define PARAM_PLNE_RESP                     "PLNE_RESP"
 #define PARAM_PLNE_RESP_BODKA               "PLNE_RESP_BODKA"
 
-/* 2011-04-04: doplnené zobrazenie/skrytie èíslovania veršov v žalmoch, chválospevoch a biblických èítaniach */
+// 2011-04-04: doplnené zobrazenie/skrytie èíslovania veršov v žalmoch, chválospevoch a biblických èítaniach
 #define PARAM_CISLO_VERSA_BEGIN				"v"
 #define PARAM_CISLO_VERSA_END				"/v"
 
-/* 2011-04-05: doplnené dplnenie referencie pod¾a biblického odkazu na stránky dkc.kbs.sk (Biblia -- Matúš Brilla) */
+// 2011-04-05: doplnenie referencie pod¾a biblického odkazu na stránky dkc.kbs.sk (Biblia -- Matúš Brilla)
 #define PARAM_REFERENCIA_BEGIN				"r"
 #define PARAM_REFERENCIA_END				"/r"
 
-/* 2011-07-08: doplnené zobrazovanie/nezobrazenie krížika (antifóna totožná s veršom žalmu/chválospevu) */
+// 2011-09-01: doplnenie odkazu na katechézy (pôvodne v HTML zdrojákoch bola subscript hviezdièka za nadpisom)
+#define PARAM_KATECHEZA_BEGIN				"k"
+#define PARAM_KATECHEZA_END					"/k"
+
+// 2011-07-08: doplnené zobrazovanie/nezobrazenie krížika (antifóna totožná s veršom žalmu/chválospevu)
 #define PARAM_KRIZIK                        "KRIZIK"
 
-/* 2011-07-14: doplnené zobrazovanie/nezobrazenie zalomených textov tak, ako je v tlaèenom vydaní LH (dlhé riadky-verše žalmov/chválospevov a pod.) */
+// 2011-07-14: doplnené zobrazovanie/nezobrazenie zalomených textov tak, ako je v tlaèenom vydaní LH (dlhé riadky-verše žalmov/chválospevov a pod.)
 #define PARAM_ZALOMENIE                     "ZALOMENIE"
 
 // 2011-08-15: force pre jednotlivé èasti modlitby, funkcie _set_spolocna_cast()...
