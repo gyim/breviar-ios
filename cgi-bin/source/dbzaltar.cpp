@@ -2153,7 +2153,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 	switch(tyzzal){
 		case 1: /* prvy tyzden zaltara */
 			switch(den){
-				case DEN_NEDELA:
+				case DEN_NEDELA: // 1
 				/* prve vespery */
 					set_zalm(1, MODL_PRVE_VESPERY, "z141.htm", "ZALM141");
 					set_zalm(2, MODL_PRVE_VESPERY, "z142.htm", "ZALM142");
@@ -2169,7 +2169,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z3.htm", "ZALM3");
 					break;
 
-				case DEN_PONDELOK:
+				case DEN_PONDELOK: // 1
 				/* ranne chvaly */
 					set_zalm(1, MODL_RANNE_CHVALY, "z5.htm", "ZALM5");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_1krn29.htm", "CHVAL_1KRN29");
@@ -2187,7 +2187,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z9.htm", "ZALM9_II");
 					break;
 
-				case DEN_UTOROK:
+				case DEN_UTOROK: // 1
 				/* ranne chvaly */
 					// 2011-09-06: moûnosù zvoliù ûalm 95
 					if((_global_opt[1] & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY){
@@ -2211,7 +2211,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z12.htm", "ZALM12");
 					break;
 
-				case DEN_STREDA:
+				case DEN_STREDA: // 1
 				/* ranne chvaly */
 					set_zalm(1, MODL_RANNE_CHVALY, "z36.htm", "ZALM36");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_jdt16.htm", "CHVAL_JDT16");
@@ -2229,7 +2229,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z18.htm", "ZALM18_III");
 					break;
 
-				case DEN_STVRTOK:
+				case DEN_STVRTOK: // 1
 				/* ranne chvaly */
 					set_zalm(1, MODL_RANNE_CHVALY, "z57.htm", "ZALM57");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_jer31.htm", "CHVAL_JER31");
@@ -2247,7 +2247,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z18.htm", "ZALM18_VI");
 					break;
 
-				case DEN_PIATOK:
+				case DEN_PIATOK: // 1
 				/* ranne chvaly */
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz45.htm", "CHVAL_IZ45");
 					// 2011-09-06: moûnosù zvoliù ûalm 95
@@ -2270,7 +2270,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z35.htm", "ZALM35_III");
 					break;
 
-				case DEN_SOBOTA:
+				case DEN_SOBOTA: // 1
 				/* ranne chvaly */
 					set_zalm(1, MODL_RANNE_CHVALY, "z119.htm", "ZALM119_KOF");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_ex15.htm", "CHVAL_EX15");
@@ -2304,7 +2304,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 
 		case 2: /* druhy tyzden zaltara */
 			switch(den){
-				case DEN_NEDELA:
+				case DEN_NEDELA: // 2
 				/* prve vespery */
 					set_zalm(1, MODL_PRVE_VESPERY, "z119.htm", "ZALM119_NUN");
 					set_zalm(2, MODL_PRVE_VESPERY, "z16.htm", "ZALM16");
@@ -2318,7 +2318,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z104.htm", "ZALM104_III");
 					break;
 
-				case DEN_PONDELOK:
+				case DEN_PONDELOK: // 2
 				/* ranne chvaly */
 					set_zalm(1, MODL_RANNE_CHVALY, "z42.htm", "ZALM42");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_sir36.htm", "CHVAL_SIR36");
@@ -2336,7 +2336,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z31.htm", "ZALM31_III");
 					break;
 
-				case DEN_UTOROK:
+				case DEN_UTOROK: // 2
 				/* ranne chvaly */
 					set_zalm(1, MODL_RANNE_CHVALY, "z43.htm", "ZALM43");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz38.htm", "CHVAL_IZ38");
@@ -2354,7 +2354,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z37.htm", "ZALM37_III");
 					break;
 
-				case DEN_STREDA:
+				case DEN_STREDA: // 2
 				/* ranne chvaly */
 					set_zalm(1, MODL_RANNE_CHVALY, "z77.htm", "ZALM77");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_1sam2.htm", "CHVAL_1SAM2");
@@ -2378,7 +2378,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z52.htm", "ZALM52");
 					break;
 
-				case DEN_STVRTOK:
+				case DEN_STVRTOK: // 2
 				/* ranne chvaly */
 					set_zalm(1, MODL_RANNE_CHVALY, "z80.htm", "ZALM80");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz12.htm", "CHVAL_IZ12");
@@ -2396,7 +2396,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z44.htm", "ZALM44_III");
 					break;
 
-				case DEN_PIATOK:
+				case DEN_PIATOK: // 2
 				/* ranne chvaly */
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_hab3.htm", "CHVAL_HAB3");
 					set_zalm(3, MODL_RANNE_CHVALY, "z147.htm", "ZALM147,12-20");
@@ -2413,7 +2413,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z38.htm", "ZALM38_III");
 					break;
 
-				case DEN_SOBOTA:
+				case DEN_SOBOTA: // 2
 				/* ranne chvaly */
 					set_zalm(1, MODL_RANNE_CHVALY, "z92.htm", "ZALM92");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_dt32.htm", "CHVAL_DT32");
@@ -2449,7 +2449,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 
 		case 3: /* treti tyzden zaltara */
 			switch(den){
-				case DEN_NEDELA:
+				case DEN_NEDELA: // 3
 				/* prve vespery */
 					set_zalm(1, MODL_PRVE_VESPERY, "z113.htm", "ZALM113");
 					set_zalm(2, MODL_PRVE_VESPERY, "z116.htm", "ZALM116,10-19");
@@ -2465,7 +2465,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z145.htm", "ZALM145pc_III");
 					break;
 
-				case DEN_PONDELOK:
+				case DEN_PONDELOK: // 3
 				/* ranne chvaly */
 					set_zalm(1, MODL_RANNE_CHVALY, "z84.htm", "ZALM84");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz2.htm", "CHVAL_IZ2");
@@ -2483,7 +2483,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z50.htm", "ZALM50_III");
 					break;
 
-				case DEN_UTOROK:
+				case DEN_UTOROK: // 3
 				/* ranne chvaly */
 					set_zalm(1, MODL_RANNE_CHVALY, "z85.htm", "ZALM85");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz26.htm", "CHVAL_IZ26");
@@ -2507,7 +2507,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z68.htm", "ZALM68_III");
 					break;
 
-				case DEN_STREDA:
+				case DEN_STREDA: // 3
 				/* ranne chvaly */
 					set_zalm(1, MODL_RANNE_CHVALY, "z86.htm", "ZALM86");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz33.htm", "CHVAL_IZ33");
@@ -2525,7 +2525,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z89.htm", "ZALM89_III");
 					break;
 
-				case DEN_STVRTOK:
+				case DEN_STVRTOK: // 3
 				/* ranne chvaly */
 					set_zalm(1, MODL_RANNE_CHVALY, "z87.htm", "ZALM87");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz40.htm", "CHVAL_IZ40");
@@ -2543,7 +2543,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z90.htm", "ZALM90");
 					break;
 
-				case DEN_PIATOK:
+				case DEN_PIATOK: // 3
 				/* ranne chvaly */
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_jer14.htm", "CHVAL_JER14");
 					// 2011-09-06: moûnosù zvoliù ûalm 95
@@ -2566,7 +2566,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z69.htm", "ZALM69_III");
 					break;
 
-				case DEN_SOBOTA:
+				case DEN_SOBOTA: // 3
 				/* ranne chvaly */
 					set_zalm(1, MODL_RANNE_CHVALY, "z119.htm", "ZALM119_KOF");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_mud9.htm", "CHVAL_MUD9");
@@ -2584,7 +2584,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 
 		case 4: /* stvrty tyzden zaltara */
 			switch(den){
-				case DEN_NEDELA:
+				case DEN_NEDELA: // 4
 				/* prve vespery */
 					set_zalm(1, MODL_PRVE_VESPERY, "z122.htm", "ZALM122");
 					set_zalm(2, MODL_PRVE_VESPERY, "z130.htm", "ZALM130");
@@ -2604,7 +2604,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z66.htm", "ZALM66_II");
 					break;
 
-				case DEN_PONDELOK:
+				case DEN_PONDELOK: // 4
 				/* ranne chvaly */
 					set_zalm(1, MODL_RANNE_CHVALY, "z90.htm", "ZALM90");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz42.htm", "CHVAL_IZ42");
@@ -2622,7 +2622,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z73.htm", "ZALM73_III");
 					break;
 
-				case DEN_UTOROK:
+				case DEN_UTOROK: // 4
 				/* ranne chvaly */
 					set_zalm(1, MODL_RANNE_CHVALY, "z101.htm", "ZALM101");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_dan3_26.htm", "CHVAL_DAN3,26");
@@ -2640,7 +2640,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z102.htm", "ZALM102_III");
 					break;
 
-				case DEN_STREDA:
+				case DEN_STREDA: // 4
 				/* ranne chvaly */
 					set_zalm(1, MODL_RANNE_CHVALY, "z108.htm", "ZALM108");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz61.htm", "CHVAL_IZ61");
@@ -2658,7 +2658,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z103.htm", "ZALM103_III");
 					break;
 
-				case DEN_STVRTOK:
+				case DEN_STVRTOK: // 4
 				/* ranne chvaly */
 					set_zalm(1, MODL_RANNE_CHVALY, "z143.htm", "ZALM143");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz66.htm", "CHVAL_IZ66");
@@ -2676,7 +2676,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(3, MODL_POSV_CITANIE, "z44.htm", "ZALM44_III");
 					break;
 
-				case DEN_PIATOK:
+				case DEN_PIATOK: // 4
 				/* ranne chvaly */
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_tob13.htm", "CHVAL_TOB13,8-11");
 					set_zalm(3, MODL_RANNE_CHVALY, "z147.htm", "ZALM147,12-20");
@@ -2709,7 +2709,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					 */
 					break;
 
-				case DEN_SOBOTA:
+				case DEN_SOBOTA: // 4
 				/* ranne chvaly */
 					set_zalm(1, MODL_RANNE_CHVALY, "z92.htm", "ZALM92");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_ez36.htm", "CHVAL_EZ36");
