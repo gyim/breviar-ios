@@ -521,12 +521,12 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPTF1_TD "of1t"
 #endif
 
-// doplnková psalmódia pre modlitbu cez deò
-#define MODL_OPTF1_MCD_DPS 76
+// doplnková psalmódia pre modlitbu cez deò | žalm 95 pre ranné chvály/vešpery namiesto ž 24, 67, 100
+#define MODL_OPTF1_ZALMY_INE 76
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF1_MCD_DPS "MODL_OPTF1_MCD_DPS"
+	#define STR_MODL_OPTF1_ZALMY_INE "MODL_OPTF1_ZALMY_INE"
 #else
-	#define STR_MODL_OPTF1_MCD_DPS "of1dps"
+	#define STR_MODL_OPTF1_ZALMY_INE "of1aps"
 #endif
 
 // vigília v posvätnom èítaní

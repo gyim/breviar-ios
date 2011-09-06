@@ -243,6 +243,7 @@
 /*                    ToDo: dorieöiù 4. j˙la; veöpery ber˙ deÚ 5. j˙la     */
 /*                    eöte: predsun˙ù ËÌtanie parametrov niekam vyööie do spoloËnej Ëasti; pre "lit. obd." sa tam d·va 1.1.1900 (neurËen˝ _global_den)... */
 /*   2011-09-01a.D. | zapracovanie odkazov na katechÈzy ako referencie     */
+/*   2011-09-06a.D. | pouûitie prepÌnaËa BIT_OPT_1_INE_ZALMY pre ûalm 95 namiesto 24, 67, 100 */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -1123,7 +1124,7 @@ short int setForm(void){
 				case 2: strcat(local_str, STR_MODL_OPTF1_CHV); break;
 				case 3: strcat(local_str, STR_MODL_OPTF1_SL); break;
 				case 4: strcat(local_str, STR_MODL_OPTF1_OT); break;
-				case 5: strcat(local_str, STR_MODL_OPTF1_MCD_DPS); break;
+				case 5: strcat(local_str, STR_MODL_OPTF1_ZALMY_INE); break;
 				case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break;
 				case 7: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break;
 				case 8: strcat(local_str, STR_MODL_OPTF1_ZALMY_SV); break;
@@ -1617,7 +1618,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							if((katrest != NULL) && !(equals(katrest, STR_EMPTY))){
 								// [ToDo]: doplniù nevypisovanie katbuff, ak katrest obsahuje medzeru (prevzatÈ z Ëasti pre referencie)
 								if(EXPORT_REFERENCIA){
-									Export("%s", remove_diacritics(katrest));
+									Export("%s", katrest);
 								}
 							}// naËÌtanie na zaËiatok referencie
 							if(EXPORT_REFERENCIA){
@@ -5989,7 +5990,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 			Export("</form>\n");
 // 2011-04-06: odvetvenÈ, aby sa to nedostalo na web resp. jeho simul·ciu, teda len pre command-line export (tam BEHAVIOUR_CMDLINE)
 #ifndef BEHAVIOUR_WEB
-			if((_global_opt[1] & BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) == BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA){
+			if((_global_opt[1] & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY){
 				INIT_POM(pom, i, MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
 				Export("<form action=\"%s\">\n", pom);
 				Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
@@ -6004,7 +6005,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 			Export("</a>\n");
 // 2011-04-06: odvetvenÈ, aby sa to nedostalo na web resp. jeho simul·ciu, teda len pre command-line export (tam BEHAVIOUR_CMDLINE)
 #ifndef BEHAVIOUR_WEB
-			if((_global_opt[1] & BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) == BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA){
+			if((_global_opt[1] & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY){
 				INIT_POM(pom, i, MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
 				Export("<a href=\"%s\">\n", pom);
 				Export("(alt)"); // alternatÌva s doplnkovou psalmÛdiou [prÌpadne neskÙr dorieöiù krajöie]
@@ -6042,7 +6043,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 			Export("</form>\n");
 // 2011-04-06: odvetvenÈ, aby sa to nedostalo na web resp. jeho simul·ciu, teda len pre command-line export (tam BEHAVIOUR_CMDLINE)
 #ifndef BEHAVIOUR_WEB
-			if((_global_opt[1] & BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) == BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA){
+			if((_global_opt[1] & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY){
 				INIT_POM(pom, i, MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
 				Export("<form action=\"%s\">\n", pom);
 				Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
@@ -6057,7 +6058,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 			Export("</a>\n");
 // 2011-04-06: odvetvenÈ, aby sa to nedostalo na web resp. jeho simul·ciu, teda len pre command-line export (tam BEHAVIOUR_CMDLINE)
 #ifndef BEHAVIOUR_WEB
-			if((_global_opt[1] & BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) == BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA){
+			if((_global_opt[1] & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY){
 				INIT_POM(pom, i, MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
 				Export("<a href=\"%s\">\n", pom);
 				Export("(alt)"); // alternatÌva s doplnkovou psalmÛdiou [prÌpadne neskÙr dorieöiù krajöie]
@@ -6095,7 +6096,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 			Export("</form>\n");
 // 2011-04-06: odvetvenÈ, aby sa to nedostalo na web resp. jeho simul·ciu, teda len pre command-line export (tam BEHAVIOUR_CMDLINE)
 #ifndef BEHAVIOUR_WEB
-			if((_global_opt[1] & BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) == BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA){
+			if((_global_opt[1] & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY){
 				INIT_POM(pom, i, MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
 				Export("<form action=\"%s\">\n", pom);
 				Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
@@ -6110,7 +6111,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 			Export("</a>\n");
 // 2011-04-06: odvetvenÈ, aby sa to nedostalo na web resp. jeho simul·ciu, teda len pre command-line export (tam BEHAVIOUR_CMDLINE)
 #ifndef BEHAVIOUR_WEB
-			if((_global_opt[1] & BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) == BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA){
+			if((_global_opt[1] & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY){
 				INIT_POM(pom, i, MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
 				Export("<a href=\"%s\">\n", pom);
 				Export("(alt)"); // alternatÌva s doplnkovou psalmÛdiou [prÌpadne neskÙr dorieöiù krajöie]
@@ -7020,14 +7021,14 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_SKRY_POPIS, ANO, html_text_option1_skryt_popis_svaty_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SKRY_POPIS) == BIT_OPT_1_SKRY_POPIS)? html_option_checked: STR_EMPTY);
 	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_skryt_popis_svaty_explain[_global_jazyk], html_text_option1_skryt_popis_svaty[_global_jazyk]);
 
-	/* pole (checkbox) WWW_MODL_OPTF1_MCD_DPS */
+	/* pole (checkbox) WWW_MODL_OPTF1_ZALMY_INE */
 	Export("<br>");
-	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_MCD_DPS, NIE);
-	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_MCD_DPS, ANO, html_text_option1_mcd_doplnkova_psalmodia_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) == BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA)? html_option_checked: STR_EMPTY);
-	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_mcd_doplnkova_psalmodia_explain[_global_jazyk], html_text_option1_mcd_doplnkova_psalmodia[_global_jazyk]);
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_ZALMY_INE, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_ZALMY_INE, ANO, html_text_option1_mcd_ine_zalmy_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY)? html_option_checked: STR_EMPTY);
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_mcd_ine_zalmy_explain[_global_jazyk], html_text_option1_mcd_ine_zalmy[_global_jazyk]);
 
 #ifdef OS_Windows_Ruby
-	/* pole (checkbox) WWW_MODL_OPTF1_MCD_DPS */
+	/* pole (checkbox) WWW_MODL_OPTF1_ZALMY_INE */
 	Export("<br>");
 	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_VIGILIA, NIE);
 	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_VIGILIA, ANO, html_text_option1_vigilia_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PC_VIGILIA) == BIT_OPT_1_PC_VIGILIA)? html_option_checked: STR_EMPTY);
@@ -8033,11 +8034,12 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 	char export_kalendar[SMALL] = STR_EMPTY; // reùazec pre kalend·r
 
 	_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY]; // backup pÙvodnej hodnoty
-	/* 2011-04-12: nastavenie parametra o1 pre beûn˙ a doplnkov˙ psalmÛdiu; parameter o1 oËistÌme a _global_opt_casti_modlitby_orig bude obsahovaù aj bit pre doplnkov˙ psalmÛdiu */
-	if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) == BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA){
-		Log("Pre option 1 odstraÚujem bit pre 'doplnkov˙ psalmÛdiu', pomocn· premenn· to bude obsahovaù\n");
-		_global_opt[OPT_1_CASTI_MODLITBY] -= BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA;
-		_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY] + BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA;
+	// 2011-04-12: nastavenie parametra o1 pre beûn˙ a doplnkov˙ psalmÛdiu; parameter o1 oËistÌme a _global_opt_casti_modlitby_orig bude obsahovaù aj bit pre doplnkov˙ psalmÛdiu
+	// 2011-09-06: nerieöime ot·zku ûalmu 95 pre rannÈ chv·ly resp. veöpery, kde je pouûit˝ ûalm 24, 67, 100
+	if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY){
+		Log("Pre option 1 odstraÚujem bit pre 'doplnkov˙ psalmÛdiu/û95', pomocn· premenn· to bude obsahovaù\n");
+		_global_opt[OPT_1_CASTI_MODLITBY] -= BIT_OPT_1_INE_ZALMY;
+		_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY] + BIT_OPT_1_INE_ZALMY;
 	}
 	/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 	 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
@@ -8101,7 +8103,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 			 * 2011-04-12: pouûÌva sa option 1 (jej upraven· hodnota _global_opt_casti_modlitby_orig)
 			 * 2011-04-13: nemÙûeme porovn·vaù s _global_opt[1] (bola oËisten·), ale s _global_opt_casti_modlitby_orig (obsahuje pÙvodn˙ hodnotu)
 			 */
-			if(((_global_opt_casti_modlitby_orig & BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) == BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
+			if(((_global_opt_casti_modlitby_orig & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
 				fprintf(batch_file, "%s%d%cd.htm -0%d -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], 
 					_global_opt[OPT_0_SPECIALNE], _global_opt_casti_modlitby_orig /* _global_opt[OPT_1_CASTI_MODLITBY] */, _global_opt[OPT_2_HTML_EXPORT], _global_opt[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_4_OFFLINE_EXPORT], 
 					a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); /* modlitba `i' */
@@ -8145,7 +8147,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 					 * 2011-04-12: pouûÌva sa option 1 (jej upraven· hodnota _global_opt_casti_modlitby_orig)
 					 * 2011-04-13: nemÙûeme porovn·vaù s _global_opt[1] (bola oËisten·), ale s _global_opt_casti_modlitby_orig (obsahuje pÙvodn˙ hodnotu)
 					 */
-					if(((_global_opt_casti_modlitby_orig & BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) == BIT_OPT_1_MCD_DOPLNKOVA_PSALMODIA) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
+					if(((_global_opt_casti_modlitby_orig & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
 						fprintf(batch_file, "%s%d%cd.htm -0%d -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], 
 							_global_opt[OPT_0_SPECIALNE], _global_opt_casti_modlitby_orig /* _global_opt[OPT_1_CASTI_MODLITBY] */, _global_opt[OPT_2_HTML_EXPORT], _global_opt[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_4_OFFLINE_EXPORT], 
 							a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); /* modlitba `i' */
@@ -12380,7 +12382,7 @@ short int getForm(void){
 			case 2: strcat(local_str, STR_MODL_OPTF1_CHV); break;
 			case 3: strcat(local_str, STR_MODL_OPTF1_SL); break;
 			case 4: strcat(local_str, STR_MODL_OPTF1_OT); break;
-			case 5: strcat(local_str, STR_MODL_OPTF1_MCD_DPS); break;
+			case 5: strcat(local_str, STR_MODL_OPTF1_ZALMY_INE); break;
 			case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break;
 			case 7: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break;
 			case 8: strcat(local_str, STR_MODL_OPTF1_ZALMY_SV); break;
@@ -13154,7 +13156,7 @@ short int parseQueryString(void){
 			case 2: strcat(local_str, STR_MODL_OPTF1_CHV); break;
 			case 3: strcat(local_str, STR_MODL_OPTF1_SL); break;
 			case 4: strcat(local_str, STR_MODL_OPTF1_OT); break;
-			case 5: strcat(local_str, STR_MODL_OPTF1_MCD_DPS); break;
+			case 5: strcat(local_str, STR_MODL_OPTF1_ZALMY_INE); break;
 			case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break;
 			case 7: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break;
 			case 8: strcat(local_str, STR_MODL_OPTF1_ZALMY_SV); break;
