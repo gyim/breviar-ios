@@ -1368,7 +1368,7 @@ void _main_prazdny_formular(void){
 short int antifona_pocet = 0; // 2011-07-08: poËet antifÛn (ant1, ant2, ant3 pre psalmÛdiu a ant. na benediktus/magnifikat kvÙli krÌûikom)
 char rest_krizik[MAX_BUFFER] = STR_EMPTY; // 2011-07-08: pre to, Ëo je za krÌûikom v antifÛne
 void includeFile(short int type, const char *paramname, const char *fname, const char *modlparam){
-	short int c, buff_index = 0, ref_index = 0, kat_index = 0;
+	short int c, buff_index = 0, ref_index = 0, kat_index = 0, z95_index = 0;
 	char strbuff[MAX_BUFFER];
 	char rest[MAX_BUFFER];
 	char isbuff = 0;
@@ -1379,6 +1379,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 	char zakoncenie[MAX_ZAKONCENIE]; // 2009-12-14: zakonËenie s veæk˝m pÌsmenkom na zaËiatku, n·sledne sa prÌpadne menÌ 1. pÌsmeno na malÈ
 	short int vnutri_referencie = NIE; // 2011-04-05, kvÙli biblick˝m referenci·m v inkludovan˝ch s˙boroch
 	short int vnutri_katechezy = NIE; // 2011-09-01, kvÙli odkazom na katechÈzy v inkludovan˝ch s˙boroch
+	short int vnutri_z95 = NIE; // 2011-09-06, kvÙli odkazu na modlitbu so ûalmom 95
 	short int vnutri_myslienky = NIE; // 2011-05-03, kvÙli myölienkam k ûalmom, ktorÈ v sebe vn˙tri mÙûu obsahovaù biblick˙ referenciu
 	short int vnutri_nadpisu = NIE; // 2011-08-31, kvÙli nadpisu pre psalmÛdiu
 	short int je_myslienka = NIE; // 2011-05-03, Ëi sa m· myölienka vkladaù alebo nie
@@ -1387,8 +1388,18 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 	char refrest[MAX_BUFFER]; // 2011-04-05: 'rest' uloûenÈ zo zaËiatku referencie (pouûÌva sa aû pri parsovanÌ konca referencie)
 	char katbuff[MAX_BUFFER]; // 2011-09-01: buffer pre odkaz na katechÈzu
 	char katrest[MAX_BUFFER]; // 2011-09-01: 'rest' uloûenÈ zo zaËiatku odkazu na katechÈzu (pouûÌva sa aû pri parsovanÌ konca odkazu na katechÈzu)
+	char z95buff[MAX_BUFFER]; // 2011-09-06: buffer pre odkaz na û95
+	char z95rest[MAX_BUFFER]; // 2011-09-06: 'rest' uloûenÈ zo zaËiatku odkazu na û 95
 
 	Log("--includeFile(%d, %s, %s, %s): begin,\n", type, paramname, fname, modlparam);
+
+	// nasledovnÈ s˙ potrebnÈ pre hyperlink v texte modlitby s prÌpadne upraven˝mi parametrami
+	short int _global_opt_casti_modlitby_orig; // parameter o1 (_global_opt 1) pre modlitbu cez deÚ (doplnkov· psalmÛdia)
+
+	char pom[MAX_STR];
+	mystrcpy(pom, STR_EMPTY, MAX_STR);
+	char pompom[MAX_STR];
+	mystrcpy(pompom, STR_EMPTY, MAX_STR);
 
 	// init
 	mystrcpy(strbuff, STR_EMPTY, MAX_BUFFER);
@@ -1397,6 +1408,8 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 	mystrcpy(refrest, STR_EMPTY, MAX_BUFFER);
 	mystrcpy(katbuff, STR_EMPTY, MAX_BUFFER);
 	mystrcpy(katrest, STR_EMPTY, MAX_BUFFER);
+	mystrcpy(z95buff, STR_EMPTY, MAX_BUFFER);
+	mystrcpy(z95rest, STR_EMPTY, MAX_BUFFER);
 
 	FILE *body = fopen(fname, "r");
 
@@ -1642,6 +1655,66 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 						}
 						strcpy(katrest, STR_EMPTY);
 					}// upraviù odkazy na katechÈzy na hyperlinky -- PARAM_KATECHEZA_END
+
+					// 2011-09-06: upraviù odkaz na ûalm 95 (zatiaæ napojenÈ na BEHAVIOUR_WEB)
+					if(equals(strbuff, PARAM_LINK_ZALM95_BEGIN) && (vnutri_inkludovaneho == 1)){
+						vnutri_z95 = ANO;
+						write = NIE;
+						z95_index = 0;
+#ifdef BEHAVIOUR_WEB
+						if(rest != NULL){
+							mystrcpy(z95rest, rest, MAX_BUFFER);
+						}
+						DetailLog("\trest     == %s\n", rest);
+						DetailLog("\tz95rest  == %s\n", z95rest);
+#endif
+					}// upraviù odkaz na ûalm 95 na hyperlink -- PARAM_LINK_ZALM95_BEGIN
+					if(equals(strbuff, PARAM_LINK_ZALM95_END) && (vnutri_inkludovaneho == 1)){
+						z95buff[z95_index] = '\0';
+#ifdef BEHAVIOUR_WEB
+						// najprv upravÌme o1
+						_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY]; // backup pÙvodnej hodnoty
+						// nastavenie parametra o1: prid·me bit pre alternatÌvnu psalmÛdiu
+						if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_INE_ZALMY) != BIT_OPT_1_INE_ZALMY){
+							Log("Pre option 1 odstraÚujem bit pre 'doplnkov˙ psalmÛdiu/û95', pomocn· premenn· to bude obsahovaù\n");
+							_global_opt[OPT_1_CASTI_MODLITBY] += BIT_OPT_1_INE_ZALMY;
+							_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY] - BIT_OPT_1_INE_ZALMY;
+						}
+						// teraz vytvorÌme reùazec s options
+						prilep_request_options(pom, pompom, NIE);
+						// export hyperlinku
+						// ToDo: hyperlink podæa toho, Ëi bolo volanÈ pre PRM_DNES => PRM_DATUM alebo pre PRM_LIT_OBD
+						// ToDo: prÌpadne v hyperlinku daù aj #z95 a do z95.htm doplniù <a name>...
+						Export("<a href=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\"",
+							script_name,
+							STR_QUERY_TYPE, STR_PRM_DATUM,
+							STR_DEN, _global_den.den,
+							STR_MESIAC, _global_den.mesiac,
+							STR_ROK, _global_den.rok,
+							STR_MODLITBA, str_modlitby[_global_modlitba],
+							pom);
+						// napokon o1 vr·time sp‰ù
+						_global_opt[OPT_1_CASTI_MODLITBY] = _global_opt_casti_modlitby_orig; // restore pÙvodnej hodnoty
+						/*
+						// pre ûalm 95 by nemalo za referenciou nasledovaù niË; ak, tak to nevypisujeme
+						DetailLog("\trest     == %s\n", rest);
+						DetailLog("\tz95rest  == %s\n", z95rest);
+						if((z95rest != NULL) && !(equals(z95rest, STR_EMPTY))){
+							// Export("%s", z95rest);
+						}
+						*/
+						Export(" "HTML_CLASS_QUIET">"); // a.quiet { text-decoration:none; color: inherit; }
+#endif
+						Export("%s", z95buff);
+#ifdef BEHAVIOUR_WEB
+						Export("</a>");
+#endif
+						vnutri_z95 = NIE;
+
+						// prevzatÈ z Ëasti pre referencie: 2011-05-02: doplnenÈ kvÙli referenci·m, ktorÈ s˙ v r·mci myölienok, Ëo sa nemaj˙ zobrazovaù
+						write = ANO;
+						strcpy(z95rest, STR_EMPTY);
+					}// upraviù odkaz na ûalm 95 na hyperlink -- PARAM_LINK_ZALM95_END
 
 					// 2011-07-14: zobraziù/nezobraziù zalomenie veröov podæa tlaËenej LH
 					if(equals(strbuff, PARAM_ZALOMENIE) && (vnutri_inkludovaneho == 1)){
@@ -1989,6 +2062,10 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 			if(vnutri_katechezy == ANO){
 				// bez ohæadu na to, ako je nastavenÈ write
 				katbuff[kat_index++] = (char)c;
+			}
+			if(vnutri_z95 == ANO){
+				// bez ohæadu na to, ako je nastavenÈ write
+				z95buff[z95_index++] = (char)c;
 			}
 			if(write == ANO){
 				/* 2011-05-02: nezlomiteænÈ medzery; v DetailLog logujeme 1:1 presne znak bez transform·cie */

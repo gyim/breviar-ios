@@ -523,6 +523,10 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 #define PARAM_KATECHEZA_BEGIN				"k"
 #define PARAM_KATECHEZA_END					"/k"
 
+// 2011-09-06: doplnenie odkazu na žalm 95 (pôvodne v HTML zdrojákoch pre žalmy 24, 67, 100 bol natvrdo <a href> odkaz)
+#define PARAM_LINK_ZALM95_BEGIN				"z95"
+#define PARAM_LINK_ZALM95_END				"/z95"
+
 // 2011-07-08: doplnené zobrazovanie/nezobrazenie krížika (antifóna totožná s veršom žalmu/chválospevu)
 #define PARAM_KRIZIK                        "KRIZIK"
 
