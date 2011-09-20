@@ -4786,7 +4786,7 @@ const char *text_SEP_07[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Melichara Grodeckého, knìze a muèedníka",
- "Boldog Márk, István és Menyhért áldozópapok, Kassai vértanúk",
+ "Szent Márk, István és Menyhért áldozópapok, kassai vértanúk",
  };
 const char *text_SEP_07_SJ[POCET_JAZYKOV + 1] = 
 {"Sv. košických muèeníkov: Štefana Pongrácza a Melichara Grodzieckého, kòazov Spoloènosti Ježišovej; <br>Marka Križina, ostrihomského kanonika, patrónov Slovenskej provincie Spoloènosti Ježišovej",
