@@ -478,11 +478,12 @@ const char *nazov_slavenia_lokal[] =
 ,"A Kaposvári egyházmegyében; ünnep"                                                                            // LOKAL_SLAV_KAPORSVAR_FELSZ
 ,"A Váci egyházmegyében; ünnep"                                                                                 // LOKAL_SLAV_VACI_FELSZ
 ,"Kalocsa-Kecskemét: a fõegyházmegye védõszentje; fõünnep"                                                      // LOKAL_SLAV_KAL_KECS_FOEGYH
-,"A Esztergom-Budapest, a fôszékesegyházban; fõünnep"                                                           // LOKAL_SLAV_ESZTERGOM_BUDA_FOEGYH
+,"A Esztergom-Budapest, a fõszékesegyházban; fõünnep"                                                           // LOKAL_SLAV_ESZTERGOM_BUDA_FOEGYH
 ,"A fôszékesegyházban; fõünnep"                                                                                 // LOKAL_SLAV_KAL_KECS_FELSZ
 ,"A Gyõri egyházmegyében: székesegyház felszentelése; ünnep"                                                    // LOKAL_SLAV_GYORI_SZEKESEGYH_FELSZ
 ,"A Váci egyházmegyében: Szent Mihály fõangyal, az egyházmegye védõszentje"                                     // LOKAL_SLAV_VACI_PATRON
 ,"A Szeged-Csanád: az egyházmegye védõszentje; fõünnep"                                                         // LOKAL_SLAV_SZEGED_CSAN_PATRON2
+,"A Veszprém, a fõszékesegyházban; fõünnep"															            // LOKAL_SLAV_VESZPREM_FOEGYH
 };
 
 /* names of liturgical colors */
@@ -5152,6 +5153,15 @@ const char *text_OKT_05_SDB[POCET_JAZYKOV + 1] =
  "",
  "hu_",
  };
+const char *text_OKT_05_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Veszprém: A bazilika-fõszékesegyház felszentelése",
+ };
 const char *text_OKT_05_CZOP[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",
  "(v Èechách, na Moravì a ve Slezsku není)",
@@ -5186,7 +5196,16 @@ const char *text_OKT_07[POCET_JAZYKOV + 1] =
  "",
  "",
  "Panny Marie Rùžencové",
- "Rózsafûzér Királynõje",
+ "Rózsafüzér Királynõje",
+ };
+const char *text_OKT_08_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Szûz Mária, Magyarok nagyaszszonya, Magyarország fõpátronája",
  };
 const char *text_OKT_09_1[POCET_JAZYKOV + 1] = 
 {"Sv. Dionýzia, biskupa, a spoloèníkov, muèeníka",
@@ -5214,6 +5233,15 @@ const char *text_OKT_09_CZOP[POCET_JAZYKOV + 1] =
  "",
  "Sv. Ludvíka Bertrána, knìze",
  "hu_",
+ };
+const char *text_OKT_11[POCET_JAZYKOV + 1] = 
+{"Bl. Jána XXIII., pápeža",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Boldog XXIII. János pápa",
  };
 const char *text_OKT_12_CZ[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",

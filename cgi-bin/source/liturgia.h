@@ -904,6 +904,7 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_GYORI_SZEKESEGYH_FELSZ   66
 #define LOKAL_SLAV_VACI_PATRON              67
 #define LOKAL_SLAV_SZEGED_CSAN_PATRON2      68
+#define LOKAL_SLAV_VESZPREM_FOEGYH          69
 
 /* 2010-08-03: pridaný kalendár */
 #define KALENDAR_NEURCENY                   0
