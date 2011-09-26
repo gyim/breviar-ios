@@ -244,6 +244,7 @@
 /*                    eöte: predsun˙ù ËÌtanie parametrov niekam vyööie do spoloËnej Ëasti; pre "lit. obd." sa tam d·va 1.1.1900 (neurËen˝ _global_den)... */
 /*   2011-09-01a.D. | zapracovanie odkazov na katechÈzy ako referencie     */
 /*   2011-09-06a.D. | pouûitie prepÌnaËa BIT_OPT_1_INE_ZALMY pre ûalm 95 namiesto 24, 67, 100 */
+/*   2011-09-26a.D. | pouûitie prepÌnaËa BIT_OPT_1_ZALM95 pre ûalm 95 namiesto 24, 67, 100 */
 /*                                                                         */
 /*                                                                         */
 /* pozn·mky |                                                              */
@@ -1124,11 +1125,12 @@ short int setForm(void){
 				case 2: strcat(local_str, STR_MODL_OPTF1_CHV); break;
 				case 3: strcat(local_str, STR_MODL_OPTF1_SL); break;
 				case 4: strcat(local_str, STR_MODL_OPTF1_OT); break;
-				case 5: strcat(local_str, STR_MODL_OPTF1_ZALMY_INE); break;
+				case 5: strcat(local_str, STR_MODL_OPTF1_MCD_ZALMY_INE); break;
 				case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break;
 				case 7: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break;
 				case 8: strcat(local_str, STR_MODL_OPTF1_ZALMY_SV); break;
 				case 9: strcat(local_str, STR_MODL_OPTF1_PLNE_RESP); break;
+				case 10: strcat(local_str, STR_MODL_OPTF1_ZALM95); break;
 			}// switch(i)
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF_CASTI_MODLITBY[i]);
@@ -1675,10 +1677,10 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 						// najprv upravÌme o1
 						_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY]; // backup pÙvodnej hodnoty
 						// nastavenie parametra o1: prid·me bit pre alternatÌvnu psalmÛdiu
-						if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_INE_ZALMY) != BIT_OPT_1_INE_ZALMY){
-							Log("Pre option 1 odstraÚujem bit pre 'doplnkov˙ psalmÛdiu/û95', pomocn· premenn· to bude obsahovaù\n");
-							_global_opt[OPT_1_CASTI_MODLITBY] += BIT_OPT_1_INE_ZALMY;
-							_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY] - BIT_OPT_1_INE_ZALMY;
+						if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALM95) != BIT_OPT_1_ZALM95){
+							Log("Pre option 1 odstraÚujem bit pre û95, pomocn· premenn· to bude obsahovaù\n");
+							_global_opt[OPT_1_CASTI_MODLITBY] += BIT_OPT_1_ZALM95;
+							_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY] - BIT_OPT_1_ZALM95;
 						}
 						// teraz vytvorÌme reùazec s options
 						prilep_request_options(pom, pompom, NIE);
@@ -7098,11 +7100,17 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_SKRY_POPIS, ANO, html_text_option1_skryt_popis_svaty_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SKRY_POPIS) == BIT_OPT_1_SKRY_POPIS)? html_option_checked: STR_EMPTY);
 	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_skryt_popis_svaty_explain[_global_jazyk], html_text_option1_skryt_popis_svaty[_global_jazyk]);
 
-	/* pole (checkbox) WWW_MODL_OPTF1_ZALMY_INE */
+	/* pole (checkbox) WWW_MODL_OPTF1_MCD_ZALMY_INE */
 	Export("<br>");
-	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_ZALMY_INE, NIE);
-	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_ZALMY_INE, ANO, html_text_option1_mcd_ine_zalmy_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY)? html_option_checked: STR_EMPTY);
-	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_mcd_ine_zalmy_explain[_global_jazyk], html_text_option1_mcd_ine_zalmy[_global_jazyk]);
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_MCD_ZALMY_INE, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_MCD_ZALMY_INE, ANO, html_text_option1_mcd_zalmy_ine_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE)? html_option_checked: STR_EMPTY);
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_mcd_zalmy_ine_explain[_global_jazyk], html_text_option1_mcd_zalmy_ine[_global_jazyk]);
+
+	/* pole (checkbox) WWW_MODL_OPTF1_ZALM95 */
+	Export("<br>");
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_ZALM95, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_ZALM95, ANO, html_text_option1_zalm95_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALM95) == BIT_OPT_1_ZALM95)? html_option_checked: STR_EMPTY);
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_zalm95_explain[_global_jazyk], html_text_option1_zalm95[_global_jazyk]);
 
 #ifdef OS_Windows_Ruby
 	/* pole (checkbox) WWW_MODL_OPTF1_ZALMY_INE */
@@ -8113,10 +8121,10 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 	_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY]; // backup pÙvodnej hodnoty
 	// 2011-04-12: nastavenie parametra o1 pre beûn˙ a doplnkov˙ psalmÛdiu; parameter o1 oËistÌme a _global_opt_casti_modlitby_orig bude obsahovaù aj bit pre doplnkov˙ psalmÛdiu
 	// 2011-09-06: nerieöime ot·zku ûalmu 95 pre rannÈ chv·ly resp. veöpery, kde je pouûit˝ ûalm 24, 67, 100
-	if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY){
-		Log("Pre option 1 odstraÚujem bit pre 'doplnkov˙ psalmÛdiu/û95', pomocn· premenn· to bude obsahovaù\n");
-		_global_opt[OPT_1_CASTI_MODLITBY] -= BIT_OPT_1_INE_ZALMY;
-		_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY] + BIT_OPT_1_INE_ZALMY;
+	if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE){
+		Log("Pre option 1 odstraÚujem bit pre 'doplnkov˙ psalmÛdiu', pomocn· premenn· to bude obsahovaù\n");
+		_global_opt[OPT_1_CASTI_MODLITBY] -= BIT_OPT_1_MCD_ZALMY_INE;
+		_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY] + BIT_OPT_1_MCD_ZALMY_INE;
 	}
 	/* 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 	 * 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
@@ -8180,7 +8188,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 			 * 2011-04-12: pouûÌva sa option 1 (jej upraven· hodnota _global_opt_casti_modlitby_orig)
 			 * 2011-04-13: nemÙûeme porovn·vaù s _global_opt[1] (bola oËisten·), ale s _global_opt_casti_modlitby_orig (obsahuje pÙvodn˙ hodnotu)
 			 */
-			if(((_global_opt_casti_modlitby_orig & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
+			if(((_global_opt_casti_modlitby_orig & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
 				fprintf(batch_file, "%s%d%cd.htm -0%d -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], 
 					_global_opt[OPT_0_SPECIALNE], _global_opt_casti_modlitby_orig /* _global_opt[OPT_1_CASTI_MODLITBY] */, _global_opt[OPT_2_HTML_EXPORT], _global_opt[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_4_OFFLINE_EXPORT], 
 					a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); /* modlitba `i' */
@@ -8224,7 +8232,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 					 * 2011-04-12: pouûÌva sa option 1 (jej upraven· hodnota _global_opt_casti_modlitby_orig)
 					 * 2011-04-13: nemÙûeme porovn·vaù s _global_opt[1] (bola oËisten·), ale s _global_opt_casti_modlitby_orig (obsahuje pÙvodn˙ hodnotu)
 					 */
-					if(((_global_opt_casti_modlitby_orig & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
+					if(((_global_opt_casti_modlitby_orig & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
 						fprintf(batch_file, "%s%d%cd.htm -0%d -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], 
 							_global_opt[OPT_0_SPECIALNE], _global_opt_casti_modlitby_orig /* _global_opt[OPT_1_CASTI_MODLITBY] */, _global_opt[OPT_2_HTML_EXPORT], _global_opt[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_4_OFFLINE_EXPORT], 
 							a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); /* modlitba `i' */
@@ -12459,11 +12467,12 @@ short int getForm(void){
 			case 2: strcat(local_str, STR_MODL_OPTF1_CHV); break;
 			case 3: strcat(local_str, STR_MODL_OPTF1_SL); break;
 			case 4: strcat(local_str, STR_MODL_OPTF1_OT); break;
-			case 5: strcat(local_str, STR_MODL_OPTF1_ZALMY_INE); break;
+			case 5: strcat(local_str, STR_MODL_OPTF1_MCD_ZALMY_INE); break;
 			case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break;
 			case 7: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break;
 			case 8: strcat(local_str, STR_MODL_OPTF1_ZALMY_SV); break;
 			case 9: strcat(local_str, STR_MODL_OPTF1_PLNE_RESP); break;
+			case 10: strcat(local_str, STR_MODL_OPTF1_ZALM95); break;
 		}/* switch(i) */
 		ptr = getenv(local_str);
 		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
@@ -13233,11 +13242,12 @@ short int parseQueryString(void){
 			case 2: strcat(local_str, STR_MODL_OPTF1_CHV); break;
 			case 3: strcat(local_str, STR_MODL_OPTF1_SL); break;
 			case 4: strcat(local_str, STR_MODL_OPTF1_OT); break;
-			case 5: strcat(local_str, STR_MODL_OPTF1_ZALMY_INE); break;
+			case 5: strcat(local_str, STR_MODL_OPTF1_MCD_ZALMY_INE); break;
 			case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break;
 			case 7: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break;
 			case 8: strcat(local_str, STR_MODL_OPTF1_ZALMY_SV); break;
 			case 9: strcat(local_str, STR_MODL_OPTF1_PLNE_RESP); break;
+			case 10: strcat(local_str, STR_MODL_OPTF1_ZALM95); break;
 		}/* switch(j) */
 		/* premenn· WWW_MODL_OPTF1_... (nepovinn·), j = 0 aû POCET_OPT_1_CASTI_MODLITBY */
 		i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */

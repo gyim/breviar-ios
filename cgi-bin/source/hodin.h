@@ -1581,23 +1581,42 @@ const char *html_text_option1_plne_resp_explain[POCET_JAZYKOV + 1] =
  "Az Imaórák Liturgiája az olvasmányos imaórák válaszos énekeinek teljes szövegét nem mutatja (a második ismétlõdõ rész nyomtatott kiadásban rövidített)."
 };
 
-const char *html_text_option1_mcd_ine_zalmy[POCET_JAZYKOV + 1] = 
-{"pre modlitbu cez deò poui doplnkovú psalmódiu; namiesto almov 24, 67 resp. 100 poui alm 95", 
- "pro modlitbu bìhem dne brát almy z doplòovacího cyklu; místo almù 24, 67 resp. 100 brát alm 95", 
+const char *html_text_option1_mcd_zalmy_ine[POCET_JAZYKOV + 1] = 
+{"pre modlitbu cez deò poui doplnkovú psalmódiu", 
+ "pro modlitbu bìhem dne brát almy z doplòovacího cyklu", 
  "xxx", 
  "supplementaris psalmodia",
  "",
- "pro modlitbu bìhem dne brát almy z doplòovacího cyklu; místo almù 24, 67 resp. 100 brát alm 95", 
+ "pro modlitbu bìhem dne brát almy z doplòovacího cyklu", 
  "a Napközi imaórában a kiegészítõ zsoltárokat vegyék"
 };
-const char *html_text_option1_mcd_ine_zalmy_explain[POCET_JAZYKOV + 1] = 
-{"Pokia¾ sa niekto modlí viac modlitieb cez deò, v prvej vezme benú psalmódiu; v ostatnıch sa pouije doplnková psalmódia. Zahàòa 3 série tzv. graduálnych almov ( 120 – 129). Ak sa v rannıch chválach alebo vešperách vyskytne alm 24, 67 resp. 100, ktorı bol pouitı pre invitatórium, nahradí sa v príslušnej modlitbe almom 95.", 
+const char *html_text_option1_mcd_zalmy_ine_explain[POCET_JAZYKOV + 1] = 
+{"Pokia¾ sa niekto modlí viac modlitieb cez deò, v prvej vezme benú psalmódiu; v ostatnıch sa pouije doplnková psalmódia. Zahàòa 3 série tzv. graduálnych almov ( 120 – 129).", 
  "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120 – 129), které je mono brát místo almù ze altáøe.", 
  "", 
  "",
  "", 
  "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120 – 129), které je mono brát místo almù ze altáøe.", 
  "Aki több Napközi imaórát mond, az egyik imaórában a soros zsoltárösszeállítást veszi, a többin a kiegészítõt. Ez az úgynevezett „zarándokzsoltárokból“ vett három-három zsoltárból áll (Zsolt 119 – 127)."
+};
+
+const char *html_text_option1_zalm95[POCET_JAZYKOV + 1] = 
+{"namiesto almov 24, 67 resp. 100 poui alm 95", 
+ "místo almù 24, 67 resp. 100 brát alm 95", 
+ "xxx", 
+ "psalm 95",
+ "",
+ "místo almù 24, 67 resp. 100 brát alm 95", 
+ "hu_xxx"
+};
+const char *html_text_option1_zalm95_explain[POCET_JAZYKOV + 1] = 
+{"Ak sa v rannıch chválach alebo vešperách vyskytne alm 24, 67 resp. 100, ktorı bol pouitı pre invitatórium, nahradí sa v príslušnej modlitbe almom 95.", 
+ "xxx", 
+ "xxx", 
+ "xxx",
+ "xxx", 
+ "xxx", 
+ "hu_xxx"
 };
 
 const char *html_text_option1_skryt_popis_svaty[POCET_JAZYKOV + 1] = 

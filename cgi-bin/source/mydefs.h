@@ -521,12 +521,12 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPTF1_TD "of1t"
 #endif
 
-// doplnková psalmódia pre modlitbu cez deò | žalm 95 pre ranné chvály/vešpery namiesto ž 24, 67, 100
-#define MODL_OPTF1_ZALMY_INE 76
+// doplnková psalmódia pre modlitbu cez deò
+#define MODL_OPTF1_MCD_ZALMY_INE 76
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF1_ZALMY_INE "MODL_OPTF1_ZALMY_INE"
+	#define STR_MODL_OPTF1_MCD_ZALMY_INE "MODL_OPTF1_MCD_ZALMY_INE"
 #else
-	#define STR_MODL_OPTF1_ZALMY_INE "of1aps"
+	#define STR_MODL_OPTF1_MCD_ZALMY_INE "of1dps"
 #endif
 
 // vigília v posvätnom èítaní
@@ -554,11 +554,19 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #endif
 
 // dlhšie zakonèenie responzória
-#define MODL_OPTF1_PLNE_RESP 80
+#define MODL_OPTF1_PLNE_RESP 90
 #ifdef LONG_PARAM_NAMES
 	#define STR_MODL_OPTF1_PLNE_RESP "MODL_OPTF1_PLNE_RESP"
 #else
 	#define STR_MODL_OPTF1_PLNE_RESP "of1pr"
+#endif
+
+// žalm 95 pre ranné chvály/vešpery namiesto ž 24, 67, 100
+#define MODL_OPTF1_ZALM95 91
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF1_ZALM95 "MODL_OPTF1_ZALM95"
+#else
+	#define STR_MODL_OPTF1_ZALM95 "of1z95"
 #endif
 
 /* pre force option 2 jednotlivé bit-komponenty (parciálne vo¾by) */

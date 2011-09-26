@@ -1233,7 +1233,7 @@ extern short int _global_opt_specialne[POCET_OPT_0_SPECIALNE];
 #define BIT_OPT_0_REFERENCIE                2
 #define BIT_OPT_0_CITANIA                   4
 
-#define POCET_OPT_1_CASTI_MODLITBY         10 /* jednotlivÈ komponenty option 1 -- bity pre force option 1 */
+#define POCET_OPT_1_CASTI_MODLITBY         11 /* jednotlivÈ komponenty option 1 -- bity pre force option 1 */
 extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
 /* 2011-04-11: ˙prava v˝znamu (a interpret·cie) option 1 == OPT_1_CASTI_MODLITBY (zobraziù/nezobraziù najm‰ pevnÈ/nemennÈ s˙Ëasti modlitieb, ale aj inÈ, Ëo s˙/nie s˙ v LH) */
 #define BIT_OPT_1_TEDEUM                    1
@@ -1241,11 +1241,12 @@ extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
 #define BIT_OPT_1_CHVALOSPEVY               4
 #define BIT_OPT_1_SLAVA_OTCU                8
 #define BIT_OPT_1_OTCENAS                  16
-#define BIT_OPT_1_INE_ZALMY                32 // pouûÌva sa pre modlitbu cez deÚ -- alternatÌvna, doplnkov· psalmÛdia (BIT_OPT_1_INE_ZALMY), aj pre pre rannÈ chv·ly a veöpery -- Ëi vziaù namiesto ûalmov 24, 67, 100 ûalm 95 (BIT_OPT_1_ZALM95)
+#define BIT_OPT_1_MCD_ZALMY_INE            32 // pouûÌva sa pre modlitbu cez deÚ -- alternatÌvna, doplnkov· psalmÛdia
 #define BIT_OPT_1_PC_VIGILIA               64
 #define BIT_OPT_1_SKRY_POPIS              128
 #define BIT_OPT_1_ZALMY_ZO_SVIATKU        256
 #define BIT_OPT_1_PLNE_RESP               512
+#define BIT_OPT_1_ZALM95                 1024 // pouûÌva sa pre rannÈ chv·ly a veöpery -- Ëi vziaù namiesto ûalmov 24, 67, 100 ûalm 95
 
 #define POCET_OPT_2_HTML_EXPORT             7 /* jednotlivÈ komponenty option 2 -- bity pre force option 2 */
 extern short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];
