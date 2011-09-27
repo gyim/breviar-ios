@@ -484,9 +484,9 @@ short int _global_patka_Export = 0;
 
 /* globalna premenna, co obsahuje string vypisany na obrazovku */
 char *_global_string;
-/*char _global_string[MAX_STR];*/
+// char _global_string[MAX_GLOBAL_STR];
 char *_global_string2;
-/*char _global_string2[MAX_STR];*/ /* obsahuje I, II, III, IV, V alebo pismeno roka */
+// char _global_string2[MAX_GLOBAL_STR2]; // obsahuje I, II, III, IV, V alebo pismeno roka
 char *_global_string_farba; /* 2006-08-19: doplnenÈ */
 
 /* pridane 13/04/2000A.D.; deklarovane v liturgia.h */
@@ -5322,10 +5322,13 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			else{
 				sprintf(pom, "<a target=\"_blank\" href=\"%04d-%02d-%02d", _local_den.rok, _local_den.mesiac, _local_den.den);
 			}
+			Log("prid·vam odkaz na liturgickÈ ËÌtania (1): %s\n", pom);
 			strcat(_global_string, pom);
 			sprintf(pom, "\">%s</a>", (char *)html_text_option0_citania[_global_jazyk]);
+			Log("prid·vam odkaz na liturgickÈ ËÌtania (2): %s\n", pom);
 			strcat(_global_string, pom);
 			sprintf(pom, "</span>");
+			Log("prid·vam odkaz na liturgickÈ ËÌtania (3): %s\n", pom);
 			strcat(_global_string, pom);
 #endif // not LITURGICKE_CITANIA_ANDROID // BEHAVIOUR_WEB
 		}// if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_CITANIA) == BIT_OPT_0_CITANIA)
@@ -8726,8 +8729,8 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 	/* lokalna kopia roka; ak treba analyzovat dalsi rok */
 	short int _local_rok = -1; /* inicializacia dorobena 01/03/2000A.D. */
 
-	/* lokalna premenna, co obsahuje string vypisany na obsazovku */
-	char _local_string[MAX_STR];
+	// lok·lna premenn·, Ëo obsahuje string vypÌsan˝ na obrazovku -- je to kÛpia _global_string (preto veækosù 2011-09-27 opraven·)
+	char _local_string[MAX_GLOBAL_STR];
 
 	char pom[MAX_STR];
 
@@ -8796,7 +8799,7 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 		// Log("_global_modl_prve_kompletorium obsahuje:\n"); Log(_global_modl_prve_kompletorium);
 		// Log("_local_modl_prve_kompletorium obsahuje:\n"); Log(_local_modl_prve_kompletorium);
 
-		mystrcpy(_local_string, _global_string, MAX_STR);
+		mystrcpy(_local_string, _global_string, MAX_GLOBAL_STR); // veækosù 2011-09-27 opraven· podæa _global_string
 	}/* kompletorium alebo vespery */
 
 	/* teraz analyzujem dnesny den */
@@ -8994,7 +8997,7 @@ LABEL_ZMENA:
 					_global_modl_vespery = _global_modl_prve_vespery;
 					_global_modl_kompletorium = _global_modl_prve_kompletorium;
 				}
-				mystrcpy(_global_string, _local_string, MAX_STR);
+				mystrcpy(_global_string, _local_string, MAX_GLOBAL_STR); // veækosù 2011-09-27 opraven· podæa _global_string
 				sprintf(pom, " (%s)", nazov_Modlitby(_global_modlitba));
 				Log("pom == %s -- rozbor_dna_s_modlitbou()...\n", pom);
 				strcat(_global_string, pom);
