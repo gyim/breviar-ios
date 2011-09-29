@@ -1396,7 +1396,9 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 	Log("--includeFile(%d, %s, %s, %s): begin,\n", type, paramname, fname, modlparam);
 
 	// nasledovnÈ s˙ potrebnÈ pre hyperlink v texte modlitby s prÌpadne upraven˝mi parametrami
+#ifdef BEHAVIOUR_WEB
 	short int _global_opt_casti_modlitby_orig; // parameter o1 (_global_opt 1) pre modlitbu cez deÚ (doplnkov· psalmÛdia)
+#endif
 
 	char pom[MAX_STR];
 	mystrcpy(pom, STR_EMPTY, MAX_STR);
@@ -6072,7 +6074,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 			Export("</form>\n");
 // 2011-04-06: odvetvenÈ, aby sa to nedostalo na web resp. jeho simul·ciu, teda len pre command-line export (tam BEHAVIOUR_CMDLINE)
 #ifndef BEHAVIOUR_WEB
-			if((_global_opt[1] & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY){
+			if((_global_opt[1] & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE){
 				INIT_POM(pom, i, MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
 				Export("<form action=\"%s\">\n", pom);
 				Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
@@ -6087,7 +6089,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 			Export("</a>\n");
 // 2011-04-06: odvetvenÈ, aby sa to nedostalo na web resp. jeho simul·ciu, teda len pre command-line export (tam BEHAVIOUR_CMDLINE)
 #ifndef BEHAVIOUR_WEB
-			if((_global_opt[1] & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY){
+			if((_global_opt[1] & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE){
 				INIT_POM(pom, i, MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
 				Export("<a href=\"%s\">\n", pom);
 				Export("(alt)"); // alternatÌva s doplnkovou psalmÛdiou [prÌpadne neskÙr dorieöiù krajöie]
@@ -6125,7 +6127,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 			Export("</form>\n");
 // 2011-04-06: odvetvenÈ, aby sa to nedostalo na web resp. jeho simul·ciu, teda len pre command-line export (tam BEHAVIOUR_CMDLINE)
 #ifndef BEHAVIOUR_WEB
-			if((_global_opt[1] & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY){
+			if((_global_opt[1] & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE){
 				INIT_POM(pom, i, MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
 				Export("<form action=\"%s\">\n", pom);
 				Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
@@ -6140,7 +6142,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 			Export("</a>\n");
 // 2011-04-06: odvetvenÈ, aby sa to nedostalo na web resp. jeho simul·ciu, teda len pre command-line export (tam BEHAVIOUR_CMDLINE)
 #ifndef BEHAVIOUR_WEB
-			if((_global_opt[1] & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY){
+			if((_global_opt[1] & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE){
 				INIT_POM(pom, i, MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
 				Export("<a href=\"%s\">\n", pom);
 				Export("(alt)"); // alternatÌva s doplnkovou psalmÛdiou [prÌpadne neskÙr dorieöiù krajöie]
@@ -6178,7 +6180,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 			Export("</form>\n");
 // 2011-04-06: odvetvenÈ, aby sa to nedostalo na web resp. jeho simul·ciu, teda len pre command-line export (tam BEHAVIOUR_CMDLINE)
 #ifndef BEHAVIOUR_WEB
-			if((_global_opt[1] & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY){
+			if((_global_opt[1] & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE){
 				INIT_POM(pom, i, MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
 				Export("<form action=\"%s\">\n", pom);
 				Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
@@ -6193,7 +6195,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 			Export("</a>\n");
 // 2011-04-06: odvetvenÈ, aby sa to nedostalo na web resp. jeho simul·ciu, teda len pre command-line export (tam BEHAVIOUR_CMDLINE)
 #ifndef BEHAVIOUR_WEB
-			if((_global_opt[1] & BIT_OPT_1_INE_ZALMY) == BIT_OPT_1_INE_ZALMY){
+			if((_global_opt[1] & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE){
 				INIT_POM(pom, i, MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA);
 				Export("<a href=\"%s\">\n", pom);
 				Export("(alt)"); // alternatÌva s doplnkovou psalmÛdiou [prÌpadne neskÙr dorieöiù krajöie]
