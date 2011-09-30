@@ -77,13 +77,14 @@ void myhpage_init_globals() {
 /* exportuje hlavicku HTML dokumentu, kam pojde vysledok query */
 void _hlavicka(char *title, FILE * expt, short int level, short int spec){
 	Log("_hlavicka() -- zaèiatok...\n");
+
 	_local_modlitba = _global_modlitba;
 	if((_local_modlitba == MODL_PRVE_VESPERY) || (_local_modlitba == MODL_DRUHE_VESPERY))
 		_local_modlitba = MODL_VESPERY;
 	if((_local_modlitba == MODL_PRVE_KOMPLETORIUM) || (_local_modlitba == MODL_DRUHE_KOMPLETORIUM))
 		_local_modlitba = MODL_KOMPLETORIUM;
 
-	/* 2009-08-04: viackrát sa pri exporte modlitby do HTML exportovala hlavièka; pridaná kontrola */
+	// 2009-08-04: viackrát sa pri exporte modlitby do HTML exportovala hlavièka; pridaná kontrola
 	if(_global_hlavicka_Export > 0){
 		Log("return... (_global_hlavicka_Export > 0)\n");
 		return;
@@ -111,33 +112,34 @@ void _hlavicka(char *title, FILE * expt, short int level, short int spec){
 		Log("(_global_font == FONT_UNDEF) || (_global_font == FONT_CHECKBOX)...\n");
 		if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_FAMILY) == BIT_OPT_2_FONT_FAMILY){
 			Log("_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_FAMILY...\n");
-			mystrcpy(_global_css_font_family, DEFAULT_FONT_FAMILY_SANS_SERIF, MAX_STR);
+			mystrcpy(_global_css_font_family, DEFAULT_FONT_FAMILY_SANS_SERIF, SMALL);
 		}
 		else{
 			Log("NOT _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_FAMILY...\n");
-			mystrcpy(_global_css_font_family, DEFAULT_FONT_FAMILY_SERIF, MAX_STR);
+			mystrcpy(_global_css_font_family, DEFAULT_FONT_FAMILY_SERIF, SMALL);
 		}
 	}/* (_global_font == FONT_UNDEF)  || (_global_font == FONT_CHECKBOX) */
 	else if(_global_font == FONT_CSS){
 		Log("_global_font == FONT_CSS...\n");
-		mystrcpy(_global_css_font_family, DEFAULT_FONT_FAMILY_INHERIT, MAX_STR);
+		mystrcpy(_global_css_font_family, DEFAULT_FONT_FAMILY_INHERIT, SMALL);
 	}// (_global_font == FONT_CSS)
 	else{
 		Log("_global_font != FONT_CSS...\n");
-		mystrcpy(_global_css_font_family, nazov_fontu[_global_font], MAX_STR);
+		mystrcpy(_global_css_font_family, nazov_fontu[_global_font], SMALL);
 	}// else
 	Log("_global_css_font_family == %s...\n", _global_css_font_family);
+
 	/*
 	 * 2011-05-13: doplnené: nastavenie font-size
 	 */
 	if(_global_font_size == FONT_SIZE_UNDEF){
-		mystrcpy(_global_css_font_size, STR_EMPTY, MAX_STR);
+		mystrcpy(_global_css_font_size, STR_EMPTY, SMALL);
 	}/* (_global_font_size == FONT_SIZE_UNDEF) */
 	else if(_global_font_size == FONT_SIZE_CSS){
-		mystrcpy(_global_css_font_size, DEFAULT_FONT_SIZE_INHERIT, MAX_STR);
+		mystrcpy(_global_css_font_size, DEFAULT_FONT_SIZE_INHERIT, SMALL);
 	}// (_global_font_size == FONT_SIZE_CSS)
 	else{
-		mystrcpy(_global_css_font_size, nazov_font_size_css[_global_font_size], MAX_STR);
+		mystrcpy(_global_css_font_size, nazov_font_size_css[_global_font_size], SMALL);
 	}// else
 	Log("_global_css_font_size == %s...\n", _global_css_font_size);
 
@@ -260,7 +262,7 @@ void _hlavicka(char *title, FILE * expt, short int level, short int spec){
 	}/* << predošlá | ^ hore | nasledovná >> */
 	Log("_hlavicka() -- koniec.\n");
 	return;
-}/* _hlavicka() */
+}// _hlavicka()
 
 void hlavicka(char *title, short int level, short int spec){
 	_hlavicka(title, NULL, level, spec);
@@ -430,7 +432,7 @@ void _patka(FILE * expt){
 	Export_to_file(expt, "</body>\n</html>\n");
 	Log("_patka() -- koniec.\n");
 	return;
-}/* _patka() */
+}// _patka()
 
 void patka(void){
 	_patka(NULL);

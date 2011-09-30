@@ -178,7 +178,7 @@
 	#define EXPORT_TO_FILE
 	#define EXPORT_CMDLINE_CSS
 /* debugovanie linux/command-line -- vsetko sa loguje do suboru */
-#elif defined(MODEL_DEBUG_Windows_commandline)
+#elif defined(MODEL_DEBUG_linux_commandline)
 	#define BEHAVIOUR_CMDLINE
 	#define OS_linux
 	#define LOGGING
@@ -187,7 +187,6 @@
 	#define EXPORT_HTML_SPECIALS
 	#define EXPORT_TO_FILE
 	#define EXPORT_CMDLINE_CSS
-
 #else
 	#error Unsupported system model (see mysystem.h) - Nepodporovaný systémový model (pozri súbor mysystem.h)
 #endif
