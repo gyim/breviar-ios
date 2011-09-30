@@ -1362,11 +1362,14 @@ void _main_prazdny_formular(void){
  * 2011-05-03: zadefinované EXPORT_REFERENCIA -- aby sa neexportovala referencia, ak netreba (v rámci HTML poznámky)
  *             (mono èasom sa ukáe, e treba testova aj nieèo iné ako len referencie v rámci myšlienok k almom/chválospevom)
  * 2011-09-01: exportovanie odkazu na katechézu podobne ako referencie (pouíva BIT_OPT_0_REFERENCIE a EXPORT_REFERENCIA ako referencie)
+ * 2011-09-30: opravená definícia EXPORT_REFERENCIA -- musia by splnené obe podmienky
  * 
  */
 #define DetailLog emptyLog
 #define MAX_ZAKONCENIE 200
-#define EXPORT_REFERENCIA ((!vnutri_myslienky || je_myslienka) || (!vnutri_nadpisu || je_nadpis))
+#define EXPORT_REFERENCIA ((!vnutri_myslienky || je_myslienka) && (!vnutri_nadpisu || je_nadpis))
+// #define EXPORT_MYSLIENKA (!vnutri_myslienky || je_myslienka)
+// #define EXPORT_NADPIS (!vnutri_nadpisu || je_nadpis)
 short int antifona_pocet = 0; // 2011-07-08: poèet antifón (ant1, ant2, ant3 pre psalmódiu a ant. na benediktus/magnifikat kvôli kríikom)
 char rest_krizik[MAX_BUFFER] = STR_EMPTY; // 2011-07-08: pre to, èo je za kríikom v antifóne
 void includeFile(short int type, const char *paramname, const char *fname, const char *modlparam){
@@ -1457,6 +1460,15 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 		je_nadpis = ANO;
 	}
 	Log("nastavil som je_myslienka == %d\n", je_myslienka);
+	Log("nastavil som je_nadpis == %d\n", je_nadpis);
+
+	// 2011-09-30: bod è. 114 všeobecnıch smerníc: "V ofíciu v Cezroènom období, ak sa nespievajú, mono namiesto tıchto antifón poui — ak je to vhodné — myšlienky pripojené k almom."
+	/* zatia¾ zapoznámkované, lebo jedna vec je zobrazova to, druhá vec monos poui ako antifónu -- zobrazujeme pod¾a tlaèenej LH
+	if(_global_den.litobd != OBD_CEZ_ROK){
+		je_myslienka = NIE;
+		Log("upravil som je_myslienka == %d (nie je cezroèné obdobie)\n", je_myslienka);
+	}
+	*/
 
 	// Export("before while...");
 	while((c = fgetc(body)) != EOF){
