@@ -8095,8 +8095,13 @@ short int modlitba;
 		return MODL_SPOL_CAST_SV_MUZ;\
 	}\
 }
+
+/* 2011-09-30: opravenÈ; v spoloËnej Ëasti na sviatky uËiteæov cirkvi je uvedenÈ: "zo spoloËnej Ëasti na sviatky duchovn˝ch pastierov okrem toho, Ëo nasleduje"
+ *             preto opravenÈ (nevr·tim default MODL_SPOL_CAST_SV_MUZ, ale MODL_SPOL_CAST_DUCH_PAST_KNAZ)
+ *             skontrolovanÈ: len 3 sl·venia maj˙ uvedenÈ MODL_SPOL_CAST_UCITEL_CIRKVI bez doplnenia, Ëi to bol (diakon,) kÚaz, biskup, p·peû, panna: sv. EfrÈm, sv. Hieronym, sv. J·n z KrÌûa
+ */
 short int _spol_cast_vyber_dp_pn(_struct_sc sc){
-	Log("_spol_cast_vyber_dp_pn() -- skusam, co sedi...\n");
+	Log("_spol_cast_vyber_dp_pn() -- sk˙öam, Ëo sa zhoduje...\n");
 	short int a;
 	a = sc.a1;
 	Log("  sc.a1 == %s (%d)\n", nazov_spolc(a), a);
@@ -8107,13 +8112,13 @@ short int _spol_cast_vyber_dp_pn(_struct_sc sc){
 	a = sc.a3;
 	Log("  sc.a3 == %s (%d)\n", nazov_spolc(sc.a3), sc.a3);
 	otazka_sedi_to;
-	Log("not matches. returning %s (%d)\n", nazov_spolc(MODL_SPOL_CAST_SV_MUZ), MODL_SPOL_CAST_SV_MUZ);
-	return MODL_SPOL_CAST_SV_MUZ;
-}/* _spol_cast_vyber_dp_pn(); */
+	Log("not matches. returning %s (%d)\n", nazov_spolc(MODL_SPOL_CAST_DUCH_PAST_KNAZ), MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+	return MODL_SPOL_CAST_DUCH_PAST_KNAZ;
+}// _spol_cast_vyber_dp_pn();
 
 #define otazka_sedi_to2 if(a == MODL_SPOL_CAST_PANNA){Log("matches. returning ANO\n");return ANO;}
 short int _spol_cast_je_panna(_struct_sc sc){
-	Log("_spol_cast_je_panna() -- skusam, ci v sc je panna...\n");
+	Log("_spol_cast_je_panna() -- sk˙öam, Ëi v sc je panna...\n");
 	short int a;
 	a = sc.a1;
 	Log("  sc.a1 == %s (%d)\n", nazov_spolc(sc.a1), sc.a1);
@@ -8126,9 +8131,7 @@ short int _spol_cast_je_panna(_struct_sc sc){
 	otazka_sedi_to2;
 	Log("  returning NIE\n");
 	return NIE;
-}/* _spol_cast_je_panna(); */
-
-/* tu boli _set_zalmy_..., ale su inde; 14/03/2000A.D. */
+}// _spol_cast_je_panna();
 
 /* nastavenie jednotlivych parametrov modlitby -- predpoklad je, ze premenna
  * modlitba ma spravne nastavenu konstantu MODL_... */
@@ -25208,7 +25211,7 @@ label_8_DEC:
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
 					_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
 					mystrcpy(_global_svaty1.meno, text_DEC_14[_global_jazyk], MENO_SVIATKU);
-					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_UCITEL_CIRKVI); /* 2010-12-16: zapozn·mkovanÈ MODL_SPOL_CAST_DUCH_PAST_KNAZ; podæa brevi·ra len spol. Ëasù uËiteæov Cirkvi */
+					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_UCITEL_CIRKVI); // 2010-12-16: zapozn·mkovanÈ MODL_SPOL_CAST_DUCH_PAST_KNAZ; podæa brevi·ra len spol. Ëasù uËiteæov Cirkvi
 					_global_svaty1.farba = LIT_FARBA_BIELA;
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
 					break;
