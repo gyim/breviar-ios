@@ -22572,7 +22572,9 @@ label_25_MAR:
 					}/* czop only */
 					break;
 				case 8: /* MES_OCT -- 08OKT */
-					// _global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+					if(_global_jazyk == JAZYK_HU){
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+					}
 					if(((poradie_svaty == UNKNOWN_PORADIE_SVATEHO)  || (poradie_svaty == 1)) && (_global_jazyk == JAZYK_HU)){
 						/* definovanie parametrov pre modlitbu */
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
