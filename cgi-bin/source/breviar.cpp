@@ -4020,12 +4020,12 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 	 */
 
 	short int NARODENIE_PANA = poradie(25, 12, rok); /* narodenie pana */
-	/* slavnosti */
+	// slavnosti
 	short int BOHORODICKY_PANNY_MARIE = poradie(1, 1, rok); /* panny marie bohorodicky */
 	short int ZJAVENIE_PANA = poradie(6, 1, rok); /* zjavenie pana */
 	short int DECEMBER_16 = poradie(16, 12, rok); /* 16. december, prelom v adventnom obdobi */
 
-	/* 2006-02-06: pomocn· premenn· kvÙli eventu·lnemu prednastaveniu _global_opt 3 */
+	// 2006-02-06: pomocn· premenn· kvÙli eventu·lnemu prednastaveniu _global_opt 3
 	_struct_sc sc;
 	sc.a1 = MODL_SPOL_CAST_NEURCENA;
 	sc.a2 = MODL_SPOL_CAST_NEURCENA;
@@ -4707,9 +4707,9 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 							sc = _decode_spol_cast(_global_svaty3.spolcast);
 							break;
 						case 4:
-							sc.a1 = MODL_SPOL_CAST_PANNA_MARIA; /* 2006-02-06: spomienka PM v sobotu */
+							sc.a1 = MODL_SPOL_CAST_PANNA_MARIA; // 2006-02-06: spomienka PM v sobotu
 							break;
-					}/* switch */
+					}// switch(poradie_svaty)
 					_rozbor_dna_LOG("\tNastavil som do premennej sc == (%d) %s, (%d) %s, (%d) %s\n",
 						sc.a1, nazov_spolc(sc.a1), sc.a2, nazov_spolc(sc.a2), sc.a3, nazov_spolc(sc.a3));
 					if(sc.a1 != MODL_SPOL_CAST_NEURCENA){
@@ -5650,6 +5650,45 @@ void _export_rozbor_dna_button_modlitba(short int typ, short int poradie_svateho
 #endif
 }// _export_rozbor_dna_button_modlitba();
 
+short int ma_na_vyber_spolocne_casti(short int poradie_svateho){
+	// 2011-10-03: vytvorenÈ
+	short int ret = NIE;
+	_struct_sc sc;
+	sc.a1 = MODL_SPOL_CAST_NEURCENA;
+	sc.a2 = MODL_SPOL_CAST_NEURCENA;
+	sc.a3 = MODL_SPOL_CAST_NEURCENA;
+
+	Log("ma_na_vyber_spolocne_casti(%d) -- zaËiatok...\n");
+	/*
+	if(poradie_svateho == 4){
+		ret = NIE;
+	}
+	else if(poradie_svateho == 0){
+		ret = NIE;
+	}
+	*/
+	switch(poradie_svateho){
+		case 1:
+			sc = _decode_spol_cast(_global_svaty1.spolcast);
+			break;
+		case 2:
+			sc = _decode_spol_cast(_global_svaty2.spolcast);
+			break;
+		case 3:
+			sc = _decode_spol_cast(_global_svaty3.spolcast);
+			break;
+		case 4:
+			sc.a1 = MODL_SPOL_CAST_PANNA_MARIA; // 2006-02-06: spomienka PM v sobotu
+			break;
+	}// switch(poradie_svaty)
+	// if((sc.a1 != MODL_SPOL_CAST_NEURCENA) && (sc.a2 != MODL_SPOL_CAST_NEURCENA)){ // ak m· viac ako jednu spoloËn˙ Ëasù nastaven˙
+	if((sc.a1 != MODL_SPOL_CAST_NEURCENA) && (sc.a1 != MODL_SPOL_CAST_NEBRAT)){ // staËÌ, ûe m· jednu spoloËn˙ Ëasù nastaven˙
+		ret = ANO;
+	}
+	Log("ma_na_vyber_spolocne_casti(%d) -- koniec: %d.\n", ret);
+	return ret;
+}// ma_na_vyber_spolocne_casti();
+
 /*---------------------------------------------------------------------*/
 /* _export_rozbor_dna_buttons(typ, int, int)
  *
@@ -5950,25 +5989,27 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 
 #define ZOBRAZ_BUTTON_DETAILY
 #ifdef ZOBRAZ_BUTTON_DETAILY
-		// toto sa tyka buttonu 'Detaily...'
-		if(som_v_tabulke == ANO){
-			Export("</td>\n<td valign=\"middle\">");
-		}
-		i = MODL_DETAILY;
-		if(_global_linky == ANO){
-			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
-				script_name,
-				STR_QUERY_TYPE, STR_PRM_DETAILY,
-				STR_DEN, _global_den.den,
-				STR_MESIAC, _global_den.mesiac,
-				STR_ROK, _global_den.rok,
-				STR_MODLITBA, STR_MODL_DETAILY,
-				pom);
-			Export("<"HTML_FORM_INPUT_SUBMIT2" value=\"");
-			Export("%s", html_button_nazov_modlitby(i));
-			Export("\">\n");
-			Export("</form>\n");
-		}// ak nie zobrazovat linky na internet (2009-08-11: teda napr. pre batch mÛd), tlacidlo `Detaily...' je zbytocne
+		if(ma_na_vyber_spolocne_casti(poradie_svateho)){
+			// toto sa tyka buttonu 'Detaily...'
+			if(som_v_tabulke == ANO){
+				Export("</td>\n<td valign=\"middle\">");
+			}
+			i = MODL_DETAILY;
+			if(_global_linky == ANO){
+				Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
+					script_name,
+					STR_QUERY_TYPE, STR_PRM_DETAILY,
+					STR_DEN, _global_den.den,
+					STR_MESIAC, _global_den.mesiac,
+					STR_ROK, _global_den.rok,
+					STR_MODLITBA, STR_MODL_DETAILY,
+					pom);
+				Export("<"HTML_FORM_INPUT_SUBMIT2" value=\"");
+				Export("%s", html_button_nazov_modlitby(i));
+				Export("\">\n");
+				Export("</form>\n");
+			}// ak nie zobrazovat linky na internet (2009-08-11: teda napr. pre batch mÛd), tlacidlo `Detaily...' je zbytocne
+		}// ma_na_vyber_spolocne_casti(poradie_svateho)
 #endif
 	}// if(typ)
 	else{
@@ -8259,7 +8300,7 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 					Export("<option>%s\n", nazov_spolc(sc.a3));
 				}
 			}
-			Export("<option>%s\n", nazov_spolc(MODL_SPOL_CAST_NEBRAT));
+			Export("<option>%s\n", nazov_spolc(MODL_SPOL_CAST_NEBRAT)); // 2011-10-03: niekedy treba neumoûniù [ToDo]
 		}
 		else{
 			Export("<option selected>%s\n", nazov_spolc(MODL_SPOL_CAST_NEBRAT));
@@ -8317,6 +8358,9 @@ void showAllPrayers(short int den, short int mesiac, short int rok, short int po
 	Log("_global_den: \n");
 	Log(_global_den);
 
+	// top str·nky
+	Export("\n<a name=\"top\"></a>");
+
 	// ˙vodn· navig·cia
 	if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_NAVIGATION) == BIT_OPT_2_NAVIGATION){
 		Export("<!-- navig·cia zaËiatok -->\n");
@@ -8335,6 +8379,13 @@ void showAllPrayers(short int den, short int mesiac, short int rok, short int po
 		Log("sp˙öùam showPrayer(%s) z funkcie showAllPrayers()...\n", nazov_Modlitby(_global_modlitba));
 		LOG_ciara;
 		if(modlitba > MODL_INVITATORIUM){
+			// odkaz na vrch str·nky
+			Export("<p align=\"center\">");
+			Export("<a href=\"#top\" "HTML_CLASS_BUTTON">");
+			Export((char *)html_text_batch_Back[_global_jazyk]);
+			Export("</a>");
+			Export("</p>");
+			// oddelenie
 			Export("\n<hr>\n");
 		}
 		showPrayer(modlitba, /* aj_navigacia */ NIE);

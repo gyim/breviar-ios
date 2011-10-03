@@ -90,7 +90,7 @@ const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 	// 2007-12-05: zmenené, kedysi bolo: "druhé kompletórium"
 , {"kompletórium po druhých vešperách", "kompletáø po druhých nešporách", "2nd Completary", "II completorio", "", "Kompletáø po druhých veèerních chválách", "befejezõ imaóra II.e.d.után" }
 , {"detaily", "detaily", "Details", "details", "", "detaily", "részletek" }
-, {"všetky", "všechny", "all", "all", "", "všechny", "xxx" }
+, {"všetky", "všechny", "all", "all", "", "všechny", "összes" }
 };
 
 #define		nazov_modlitby(a)	nazov_modlitby_jazyk[a][_global_jazyk]
@@ -111,7 +111,7 @@ const char *nazov_Modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 , {"Druhé vešpery", "Druhé nešpory", "2nd Vesperae", "II Vesperae", "", "Druhé veèerní chvály" , "II. Esti dicséret" }
 , {"Kompletórium po druhých vešperách", "Kompletáø po druhých nešporách", "2nd Completary", "II Completorio", "", "Kompletáø po druhých veèerních chválách" , "Befejezõ imaóra II.e.d.után" }
 , {"Detaily", "Detaily", "Details", "Details", "", "Detaily", "Részletek" }
-, {"všetky", "všechny", "all", "all", "", "všechny", "xxx" }
+, {"všetky", "všechny", "all", "all", "", "všechny", "összes" }
 };
 
 #define		nazov_Modlitby(a)	nazov_Modlitby_jazyk[a][_global_jazyk]
@@ -947,8 +947,9 @@ const char *html_button_nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV 
 	, {"druhé vešpery", "druhé nešpory", "2nd Vesperae", "II vesperae", "", "Druhé veèerní chvály", "II. esti dicséret" }
 // táto sa pre HTML buttony nepoužíva
 	, {"kompletórium po druhých vešperách", "kompletáø po druhých nešporách", "2nd Completary", "II completorio", "", "Kompletáø po druhých veèerních chválách", "Befejezõ imaóra II.e.d.után" }
-, {"Vo¾ba detailov...", "Podrobnìji...", "Details...", "Optiónes...", "", "Podrobnìji...", "Részletek..."}
-, {"všetky", "všechny", "all", "all", "", "všechny", "xxx" }
+// , {"Vo¾ba detailov...", "Podrobnìji...", "Details...", "Optiónes...", "", "Podrobnìji...", "Részletek..."} // 2011-10-03: prakticky je to teraz len o výbere spoloèných èastí
+, {"výber spoloènej èasti...", "výbìr spoleèné èásti...", "common texts...", "optiónes...", "", "výbìr spoleèné èásti...", "xxx..."}
+, {"všetky", "všechny", "all", "all", "", "všechny", "összes" }
 };
 
 #define		html_button_nazov_modlitby(a)	html_button_nazov_modlitby_jazyk[a][_global_jazyk]
