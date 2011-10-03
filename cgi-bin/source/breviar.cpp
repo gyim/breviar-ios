@@ -1620,7 +1620,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 						strcpy(refrest, STR_EMPTY);
 					}// upraviù referencie na hyperlinky -- PARAM_REFERENCIA_END
 
-#if defined(BEHAVIOUR_WEB) && !defined(IO_ANDROID)
+#if defined(BEHAVIOUR_WEB)
 					// 2011-09-01: upraviù odkazy na katechÈzy (zatiaæ napojenÈ na BIT_OPT_0_REFERENCIE a EXPORT_REFERENCIA ako referencie)
 					if(equals(strbuff, PARAM_KATECHEZA_BEGIN) && (vnutri_inkludovaneho == 1)){
 						vnutri_katechezy = ANO;
@@ -4788,23 +4788,23 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok){
 	return ret;
 }/* _rozbor_dna() */
 
-/* 08/03/2000A.D. -- pridane init_global_string(int, int, int) s troma
- * parametrami, lebo sa vyskytla potreba (zeleny stvrtok), ze meno sviatku
- * zavisi od modlitby
- */
 /* -------------------------------------------------------------------- */
-/* init_global_string(int, int)
+/* init_global_string()
+ *
  * vstup: typ (o aky sposob vypisu ide)
  *        poradie_svateho
- * vystup: do _global_string da string (spolu s HTML tagmi)
- *         s nazvom slavenia;
- * 28/03/2000A.D.: navratova hodnota SUCCESS/FAILURE;
+ *        modlitba
+ *        aj_citanie -- Ëi prilepiù odkaz na liturgickÈ ËÌtanie
+ *
+ * vystup: do _global_string da string (spolu s HTML tagmi) s nazvom slavenia;
+ *
+ * navratova hodnota: SUCCESS/FAILURE
  */
 #define CASE_VELKE  5
 #define CASE_MALE   4
 #define COLOR_RED   3
 #define COLOR_BLACK 2
-short int init_global_string(short int typ, short int poradie_svateho, short int modlitba, short int aj_citanie = TRUE) {
+short int init_global_string(short int typ, short int poradie_svateho, short int modlitba, short int aj_citanie = NIE) {
 	/* lokalna premenna, do ktorej sa ukladaju info o analyzovanom dni
 	 * pouziva ju void nove_rozbor_dna() funkcia */
 	/* 2003-07-07: obavam sa, ze nove_rozbor_dna() je alebo
@@ -5301,7 +5301,8 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			sprintf(pom, "<!-- kalend·r nie je urËen˝ spr·vne -->");
 			strcat(_global_string, pom);
 		}
-		if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_CITANIA) == BIT_OPT_0_CITANIA) {
+		// 2011-10-03: odkaz na liturgickÈ ËÌtanie sa doplnÌ, iba ak je aj_citanie == ANO
+		if(((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_CITANIA) == BIT_OPT_0_CITANIA) && aj_citanie){
 #ifdef LITURGICKE_CITANIA_ANDROID
 			if (cit && aj_citanie) {
 				if (typ == EXPORT_DNA_DNES || typ == EXPORT_DNA_JEDEN_DEN || typ == EXPORT_DNA_VIAC_DNI) {
@@ -5345,7 +5346,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			Log("prid·vam odkaz na liturgickÈ ËÌtania (3): %s\n", pom);
 			strcat(_global_string, pom);
 #endif // not LITURGICKE_CITANIA_ANDROID // BEHAVIOUR_WEB
-		}// if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_CITANIA) == BIT_OPT_0_CITANIA)
+		}// if(((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_CITANIA) == BIT_OPT_0_CITANIA) && aj_citanie)
 	}/* lokaliz·cia sl·venia a kalend·r */
 
 	Log("  -- _global_string == %s\n", _global_string);
@@ -5442,11 +5443,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 
 	Log("-- init_global_string(EXPORT_DNA_%d, %d, %s, %d) -- returning SUCCESS\n", typ, poradie_svateho, nazov_modlitby(modlitba), aj_citanie);
 	return SUCCESS;
-}/* init_global_string(); -- 3 vstupy  */
-
-short int init_global_string(short int typ, short int poradie_svateho){
-	return init_global_string(typ, poradie_svateho, MODL_NEURCENA);
-}/* init_global_string(); -- 2 vstupy  */
+}// init_global_string();
 
 /*---------------------------------------------------------------------*/
 /* _rozbor_dna_s_modlitbou()
@@ -5516,17 +5513,16 @@ short int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, short int rok, short
 		return FAILURE;
 	}
 
-	/* teraz nasleduje nieco, co nahradza export - avsak data uklada do stringu _global_string */
-	Log("spustam init_global_string(EXPORT_DNA_JEDEN_DEN, svaty == %d, modlitba == %s)...\n",
-		poradie_svateho, nazov_modlitby(modlitba));
-	ret = init_global_string(EXPORT_DNA_JEDEN_DEN, poradie_svateho, modlitba, FALSE);
+	// teraz nasleduje nieËo, Ëo nahr·dza export -- avöak d·ta uklad· do stringu _global_string
+	Log("spustam init_global_string(EXPORT_DNA_JEDEN_DEN, svaty == %d, modlitba == %s)...\n", poradie_svateho, nazov_modlitby(modlitba));
+	ret = init_global_string(EXPORT_DNA_JEDEN_DEN, poradie_svateho, modlitba, /* aj_citanie */ NIE);
 
 	if(ret == FAILURE){
 		Log("init_global_string() returned FAILURE, so returning FAILURE...\n");
 		return FAILURE;
 	}
 
-	/* urcenie dat k modlitbe */
+	// urËenie d·t k modlitbe
 	Log("spustam liturgicke_obdobie(%s, %d. tyzden, %s, %d. tyzden zaltara; svaty: %d)...\n",
 		nazov_obdobia_ext(_global_den.litobd),// nazov_obdobia_
 		_global_den.tyzden,
@@ -5578,6 +5574,7 @@ short int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, short int rok, short
 void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short int den_zoznam /* = ANO */){
 /* 2005-03-21: Pridany dalsi typ exportu 
  * 2009-08-11: pre tento typ exportu berieme do ˙vahy parameter 'M'
+ * 2011-10-03: predsunut· Ëasù, ktor· bola s˙Ëasùou #define BUTTONS
  */
 	Log("--- _export_rozbor_dna_buttons(typ == %d) -- begin\n", typ); /* 2005-03-22: Pridane */
 	short int i = MODL_NEURCENA;
@@ -5593,6 +5590,19 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 	short int _local_den = _global_den.den;
 	short int _local_mesiac = _global_den.mesiac;
 	short int _local_rok = _global_den.rok;
+
+	// BEGIN: Ëasù podæa #define BUTTONS (len pre volania, kde bolo pouûitÈ BUTTONS, t. j. den_zoznam == ANO)
+	if(den_zoznam == ANO){
+		init_global_string(typ, poradie_svateho, MODL_NEURCENA, /* aj_citanie */ ((den_zoznam == ANO) && ((typ == EXPORT_DNA_JEDEN_DEN) || (typ == EXPORT_DNA_DNES)))? ANO: NIE);
+		if(typ == EXPORT_DNA_VIAC_DNI_TXT){
+			Export("\"");
+		}
+		Export("%s", _global_string);
+		if(typ == EXPORT_DNA_VIAC_DNI_TXT){
+			Export("\";");
+		}
+	}
+	// END: Ëasù podæa #define BUTTONS
 
 	if(den_zoznam != ANO){
 		/* 2011-07-05/2011-07-11: pre tlaËidl· predoölÈho a nasleduj˙ceho dÚa pre navig·ciu v modlitbe treba pouûiù in˝ d·tum ako _global_den, 
@@ -7708,8 +7718,9 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	} \
 }
 
+/*
 #define BUTTONS(typ, a, export_farba);     {\
-	init_global_string(typ, a); \
+	init_global_string(typ, a, MODL_NEURCENA); \
 	if(typ == EXPORT_DNA_VIAC_DNI_TXT){ \
 		Export("\""); \
 	}\
@@ -7719,7 +7730,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	}\
     _export_rozbor_dna_buttons(typ, a, export_farba); \
 }
-
+*/
 /* 
  * 2003-08-13 ked som sa snazil zistit priciny segfaultu, 
  * nachvilku som #define nahradil procedurou:
@@ -7910,30 +7921,30 @@ void _export_rozbor_dna(short int typ){
 			|| ((_global_den.smer > _global_svaty3.smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY3)
 			){
 			if(_global_den.smer > _global_svaty1.smer){
-				BUTTONS(typ, 1, ANO);
+				_export_rozbor_dna_buttons(typ, 1, ANO);
 			}
 			else if(_global_den.smer > _global_svaty2.smer){
-				BUTTONS(typ, 2, ANO);
+				_export_rozbor_dna_buttons(typ, 2, ANO);
 			}
 			else if(_global_den.smer > _global_svaty3.smer){
-				BUTTONS(typ, 3, ANO);
+				_export_rozbor_dna_buttons(typ, 3, ANO);
 			}
 		}
 		else{
-			BUTTONS(typ, 0, ANO);
+			_export_rozbor_dna_buttons(typ, 0, ANO);
 			/* 2010-10-06: upravenÈ; v tejto vetve rozhodovania treba rieöiù to, ûe je splnen· z·kladn· podmienka (nedeæa alebo prik·zan˝ sviatok alebo smer < 5),
 			 *             avöak nebola splnen· vyööie uveden· novo-upraven· podmienka o "prebitÌ" nedele napr. lok·lnou sl·vnosùou
 			 */
 			if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
 				NEWLINE;
 				if(_global_den.smer > _global_svaty1.smer){
-					BUTTONS(typ, 1, ANO);
+					_export_rozbor_dna_buttons(typ, 1, ANO);
 				}
 				else if(_global_den.smer > _global_svaty2.smer){
-					BUTTONS(typ, 2, ANO);
+					_export_rozbor_dna_buttons(typ, 2, ANO);
 				}
 				else if(_global_den.smer > _global_svaty3.smer){
-					BUTTONS(typ, 3, ANO);
+					_export_rozbor_dna_buttons(typ, 3, ANO);
 				}
 			}
 		}
@@ -7961,31 +7972,31 @@ void _export_rozbor_dna(short int typ){
 				(typ != EXPORT_DNA_VIAC_DNI)){
 				/* ak je to iba lubovolna spomienka, tak vsedny den */
 				/* 2010-05-21: NEWLINE; bolo pred; musÌme ho zaradiù za :) */
-				BUTTONS(typ, 0, ANO);
+				_export_rozbor_dna_buttons(typ, 0, ANO);
 				NEWLINE;
 			}
 			/* 2010-05-21: pÙvodne bolo: "sviatok, spomienka alebo æubovoæn· spomienka sv‰tÈho/sv‰t˝ch, ide prv ako vöedn˝ deÚ"; 
 			 *             dnes ide prv len ak je to sviatok alebo spomienka 
 			 *             (a vlastne vtedy sa vöedn˝ deÚ vypisuje len pre lok·lne sviatky resp. spomienky) 
 			 */
-			BUTTONS(typ, 1, ANO);
+			_export_rozbor_dna_buttons(typ, 1, ANO);
 			if(_global_pocet_svatych > 1){
 				NEWLINE;
-				BUTTONS(typ, 2, ANO);
+				_export_rozbor_dna_buttons(typ, 2, ANO);
 				if(_global_pocet_svatych > 2){
 					NEWLINE;
-					BUTTONS(typ, 3, ANO);
+					_export_rozbor_dna_buttons(typ, 3, ANO);
 				}
 			}
 		}/* svaty ma prednost */
 		else{
 		/* prednost ma den */
-			BUTTONS(typ, 0, ANO);
+			_export_rozbor_dna_buttons(typ, 0, ANO);
 		}
 	}/* if(_global_pocet_svatych > 0) */
 	else{
 		/* obycajne dni, nie sviatok */
-		BUTTONS(typ, 0, ANO);
+		_export_rozbor_dna_buttons(typ, 0, ANO);
 	}/* if(equals(_global_den.meno, STR_EMPTY)) */
 
 	/* este spomienka panny marie v sobotu, cl. 15 */
@@ -8001,7 +8012,7 @@ void _export_rozbor_dna(short int typ){
 			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY1) && (_global_pocet_svatych > 0))) &&
 		(typ != EXPORT_DNA_VIAC_DNI)){
 		NEWLINE;
-		BUTTONS(typ, 4, ANO);
+		_export_rozbor_dna_buttons(typ, 4, ANO);
 	}
 
 	if(typ == EXPORT_DNA_VIAC_DNI){
@@ -10591,9 +10602,9 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 	 */
 	liturgicke_obdobie(lo, t, d, tz, poradie_svateho);
 
-	/* 2011-01-26: skopÌrovanÈ podæa funkcie _rozbor_dna_s_modlitbou(); uklad· heading do stringu _global_string */
+	// 2011-01-26: skopÌrovanÈ podæa funkcie _rozbor_dna_s_modlitbou(); uklad· heading do stringu _global_string
 	Log("spustam init_global_string(EXPORT_DNA_JEDEN_DEN, svaty == %d, modlitba == %s)...\n", poradie_svateho, nazov_modlitby(_global_modlitba));
-	ret = init_global_string(EXPORT_DNA_JEDEN_DEN, poradie_svateho, _global_modlitba);
+	ret = init_global_string(EXPORT_DNA_JEDEN_DEN, poradie_svateho, _global_modlitba, /* aj_citanie */ NIE);
 
 	if(ret == FAILURE){
 		Log("init_global_string() returned FAILURE, so returning FAILURE...\n");
