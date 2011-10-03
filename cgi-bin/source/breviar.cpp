@@ -8182,16 +8182,17 @@ void _export_rozbor_dna_mesiaca_batch(short int d, short int m, short int r){
  *
  * vela z jadra je prevzateho z funkcie _main_dnes()
  *
+ * 2011-10-03: prerobená; opätovne sprístupnená
+ *
  */
 void showDetails(short int den, short int mesiac, short int rok, short int poradie_svaty){
-
-	Log("spustam showDetails(%d, %s, %d, %d)...\n", den, nazov_mesiaca(mesiac - 1), rok, poradie_svaty);
+	Log("showDetails(%d, %s, %d, %d) -- zaèiatok...\n", den, nazov_mesiaca(mesiac - 1), rok, poradie_svaty);
 	Log("_global_den: \n");
 	Log(_global_den);
 
-	char pom2[MAX_STR]; /* 2006-08-01: pridané */
-	mystrcpy(pom2, STR_EMPTY, MAX_STR); /* 2006-07-31: pridané */
-	char pom3[MAX_STR]; /* 2008-08-08: pridané */
+	char pom2[MAX_STR]; // 2006-08-01: pridané
+	mystrcpy(pom2, STR_EMPTY, MAX_STR); // 2006-07-31: pridané
+	char pom3[MAX_STR]; // 2008-08-08: pridané
 	mystrcpy(pom3, STR_EMPTY, MAX_STR);
 
 	prilep_request_options(pom2, pom3, ANO); // prilep_request_options(pom2, pom3, prvy_ampersand)
@@ -8227,16 +8228,16 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 
 	// pole WWW_MODLITBA
 	Export("<select name=\"%s\">\n", STR_MODLITBA);
-	Export("<option>%s\n", nazov_modlitby(MODL_INVITATORIUM)); /* invitatórium a kompletórium pridané 2006-10-13 */
+	Export("<option>%s\n", nazov_modlitby(MODL_INVITATORIUM)); // invitatórium a kompletórium pridané 2006-10-13
 	Export("<option selected>%s\n", nazov_modlitby(MODL_RANNE_CHVALY));
-	Export("<option>%s\n", nazov_modlitby(MODL_POSV_CITANIE)); /* posv.citanie pridane 2003-08-13 */
+	Export("<option>%s\n", nazov_modlitby(MODL_POSV_CITANIE)); // posv.citanie pridane 2003-08-13
 	Export("<option>%s\n", nazov_modlitby(MODL_PREDPOLUDNIM));
 	Export("<option>%s\n", nazov_modlitby(MODL_NAPOLUDNIE));
-	Export("<option>%s\n", nazov_modlitby(MODL_POPOLUDNI)); /* cez den: pridane 2003-08-13 */
+	Export("<option>%s\n", nazov_modlitby(MODL_POPOLUDNI)); // cez den: pridane 2003-08-13
 	// spomienka P. Marie v sobotu nema vespery ani kompletórium
 	if(poradie_svaty != 4){
 		Export("<option>%s\n", nazov_modlitby(MODL_VESPERY));
-		Export("<option>%s\n", nazov_modlitby(MODL_KOMPLETORIUM)); /* invitatórium a kompletórium pridané 2006-10-13 */
+		Export("<option>%s\n", nazov_modlitby(MODL_KOMPLETORIUM)); // invitatórium a kompletórium pridané 2006-10-13
 	}
 	Export("</select>\n");
 	Export("</li>\n");
@@ -8306,14 +8307,13 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 		_export_rozbor_dna_buttons_dni(EXPORT_DNA_JEDEN_DEN, NIE);
 	}
 	*/
-	Log("showDetails(%d, %s, %d, %d) -- end\n", den, nazov_mesiaca(mesiac - 1), rok, poradie_svaty);
-
+	Log("showDetails(%d, %s, %d, %d) -- koniec\n", den, nazov_mesiaca(mesiac - 1), rok, poradie_svaty);
 }// showDetails();
 
 void showAllPrayers(short int den, short int mesiac, short int rok, short int poradie_svaty){
 	// 2011-10-03: doplnené; v cykle volám showPrayer() pre všetky modlitby
 	short int modlitba, _local_modlitba = _global_modlitba, _local_linky = _global_linky;
-	Log("spustam showAllPrayers(%d, %s, %d, %d)...\n", den, nazov_mesiaca(mesiac - 1), rok, poradie_svaty);
+	Log("showAllPrayers(%d, %s, %d, %d) -- zaèiatok...\n", den, nazov_mesiaca(mesiac - 1), rok, poradie_svaty);
 	Log("_global_den: \n");
 	Log(_global_den);
 
@@ -8356,7 +8356,7 @@ void showAllPrayers(short int den, short int mesiac, short int rok, short int po
 	}
 
 	_global_modlitba = _local_modlitba;
-	Log("showAllPrayers(%d, %s, %d, %d) -- end\n", den, nazov_mesiaca(mesiac - 1), rok, poradie_svaty);
+	Log("showAllPrayers(%d, %s, %d, %d) -- koniec\n", den, nazov_mesiaca(mesiac - 1), rok, poradie_svaty);
 }// showAllPrayers();
 
 /*---------------------------------------------------------------------*/
@@ -12341,9 +12341,7 @@ short int getForm(void){
 			Log("Premenná pom_ROK je už naplnená (%s). Neèítam z %s...\n", pom_ROK, ADD_WWW_PREFIX_(STR_ROK));
 		}
 
-		/* nasledujuce sa zistuju kvoli 'Detaily...', formular vytvorila
-		 * funckia showDetails();
-		 * v normalnom formulari (vytvori ho _main_dnes();) nie su */
+		// nasledujuce sa zistuju kvoli 'Detaily...', formular vytvorila funckia showDetails(); v normalnom formulari (vytvori ho _main_dnes();) nie su
 
 		/* premenna WWW_MODLITBA */
 		ptr = getenv(ADD_WWW_PREFIX_(STR_MODLITBA));
