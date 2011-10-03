@@ -52,6 +52,16 @@ a:active { color: gray; text-decoration: underline; }
 a img { border: none }
 a.explain { color: #330000; font-size: 100%; }
 a.nounderline { text-decoration:none; }
+a.button { 
+	cursor: pointer;
+	margin-left: 0px!important;
+	background: #ffcc99; /* #ffcc66; Tan; Peru; BurlyWood; */
+	font-family: inherit; 
+	font-size : 90%; 
+	font-style: normal;
+	text-decoration: none; 
+	color: #000000; 
+	border: solid 1px #000000; }
 
 table { color: #505000; }
 tr.paragraph { text-indent: 3em; line-height: 120%; }
