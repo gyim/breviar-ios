@@ -1611,7 +1611,7 @@ const char *html_text_option1_zalm95[POCET_JAZYKOV + 1] =
  "psalm 95",
  "",
  "místo žalmù 24, 67 resp. 100 brát žalm 95", 
- "hu_xxx"
+ "a 23., 66. illetve a 99.  zsoltár helyett legyen a 94"
 };
 const char *html_text_option1_zalm95_explain[POCET_JAZYKOV + 1] = 
 {"Ak sa v ranných chválach alebo vešperách vyskytne žalm 24, 67 resp. 100, ktorý bol použitý pre invitatórium, nahradí sa v príslušnej modlitbe žalmom 95.", 
@@ -1620,7 +1620,7 @@ const char *html_text_option1_zalm95_explain[POCET_JAZYKOV + 1] =
  "xxx",
  "xxx", 
  "xxx", 
- "hu_xxx"
+ "Ha a reggeli vagy az esti dicséretben elõfordul a 23., 66. illetve 99. zsoltár, amely az Imádságra hívásban már imádkozva volt, akkor az adott imádságban a 94. zsoltár kerül helyébe."
 };
 
 const char *html_text_option1_skryt_popis_svaty[POCET_JAZYKOV + 1] = 
