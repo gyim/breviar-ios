@@ -43,8 +43,9 @@ extern short int _global_poradie_svaty;
 
 extern short int query_type; /* premenna obsahujuca PRM_..., deklarovana v mydefs.h */
 
-#define EXPORT_DNA_VIAC_DNI_TXT 4 /* 2011-02-02: pridané */
-#define EXPORT_DNA_VIAC_DNI_SIMPLE 3 /* 2005-03-21: Pridany dalsi typ exportu; 2011-04-13: nerozumiem naèo; asi sa nepoužíva... */
+#define EXPORT_DNA_JEDEN_DEN_LOCAL 5 // 2011-10-03: pridané
+#define EXPORT_DNA_VIAC_DNI_TXT 4 // 2011-02-02: pridané
+#define EXPORT_DNA_VIAC_DNI_SIMPLE 3 // 2005-03-21: Pridany dalsi typ exportu; 2011-04-13: nerozumiem naèo; asi sa nepoužíva...
 #define EXPORT_DNA_JEDEN_DEN 1
 #define EXPORT_DNA_VIAC_DNI 2
 #define EXPORT_DNA_DNES 0

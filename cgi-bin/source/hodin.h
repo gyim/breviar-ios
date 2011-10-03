@@ -55,7 +55,7 @@ const char *TEMPLAT[POCET_MODLITIEB /* + 1 */] =
  TEMPLAT_CEZ_DEN_9, TEMPLAT_CEZ_DEN_12, TEMPLAT_CEZ_DEN_3,
  TEMPLAT_VESPERY, TEMPLAT_KOMPLETORIUM, STR_EMPTY,
  TEMPLAT_VESPERY, TEMPLAT_KOMPLETORIUM, 
- TEMPLAT_VESPERY, TEMPLAT_KOMPLETORIUM};
+ TEMPLAT_VESPERY, TEMPLAT_KOMPLETORIUM, TEMPLAT_NEURCENY};
 
 /* 2008-04-09: doplnené pre batch generovanie modlitieb */
 const char char_modlitby[POCET_MODLITIEB /* + 1 */] =
@@ -63,14 +63,14 @@ const char char_modlitby[POCET_MODLITIEB /* + 1 */] =
  CHAR_MODL_CEZ_DEN_9, CHAR_MODL_CEZ_DEN_12, CHAR_MODL_CEZ_DEN_3,
  CHAR_MODL_VESPERY, CHAR_MODL_KOMPLETORIUM, 32 /* ' ' */,
  CHAR_MODL_PRVE_VESPERY, CHAR_MODL_PRVE_KOMPLETORIUM, 
- CHAR_MODL_VESPERY, CHAR_MODL_KOMPLETORIUM};
+ CHAR_MODL_VESPERY, CHAR_MODL_KOMPLETORIUM, CHAR_MODL_VSETKY};
 
 const char *str_modlitby[POCET_MODLITIEB /* + 1 */] =
 {STR_MODL_INVITATORIUM, STR_MODL_RANNE_CHVALY, STR_MODL_POSV_CITANIE,
  STR_MODL_PREDPOLUDNIM, STR_MODL_NAPOLUDNIE, STR_MODL_POPOLUDNI,
  STR_MODL_VESPERY, STR_MODL_KOMPLETORIUM, STR_EMPTY,
  STR_MODL_PRVE_VESPERY, STR_MODL_PRVE_KOMPLETORIUM, 
- STR_MODL_VESPERY, STR_MODL_KOMPLETORIUM};
+ STR_MODL_VESPERY, STR_MODL_KOMPLETORIUM, STR_MODL_VSETKY};
 
 /* the names of the prayers, lowercase (sample text) */
 const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] = 
@@ -90,6 +90,7 @@ const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 	/* 2007-12-05: zmenené, kedysi bolo: "druhé kompletórium" */
 , {"kompletórium po druhých vešperách", "kompletáø po druhých nešporách", "2nd Completary", "II completorio", "", "Kompletáø po druhých veèerních chválách", "befejezõ imaóra II.e.d.után" }
 , {"detaily", "detaily", "Details", "details", "", "detaily", "részletek" }
+, {"všetky", "všechny", "all", "all", "", "všechny", "xxx" }
 };
 
 #define		nazov_modlitby(a)	nazov_modlitby_jazyk[a][_global_jazyk]
@@ -110,6 +111,7 @@ const char *nazov_Modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 , {"Druhé vešpery", "Druhé nešpory", "2nd Vesperae", "II Vesperae", "", "Druhé veèerní chvály" , "II. Esti dicséret" }
 , {"Kompletórium po druhých vešperách", "Kompletáø po druhých nešporách", "2nd Completary", "II Completorio", "", "Kompletáø po druhých veèerních chválách" , "Befejezõ imaóra II.e.d.után" }
 , {"Detaily", "Detaily", "Details", "Details", "", "Detaily", "Részletek" }
+, {"všetky", "všechny", "all", "all", "", "všechny", "xxx" }
 };
 
 #define		nazov_Modlitby(a)	nazov_Modlitby_jazyk[a][_global_jazyk]
@@ -946,16 +948,17 @@ const char *html_button_nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV 
 // táto sa pre HTML buttony nepoužíva
 	, {"kompletórium po druhých vešperách", "kompletáø po druhých nešporách", "2nd Completary", "II completorio", "", "Kompletáø po druhých veèerních chválách", "Befejezõ imaóra II.e.d.után" }
 , {"Vo¾ba detailov...", "Podrobnìji...", "Details...", "Optiónes...", "", "Podrobnìji...", "Részletek..."}
+, {"všetky", "všechny", "all", "all", "", "všechny", "xxx" }
 };
 
 #define		html_button_nazov_modlitby(a)	html_button_nazov_modlitby_jazyk[a][_global_jazyk]
 
-/* special button: Details... */
+// special button: Details...
 #ifndef HTML_BUTTON_DETAILY
 #define HTML_BUTTON_DETAILY	html_button_nazov_modlitby_jazyk[MODL_DETAILY][_global_jazyk]
 #endif
 
-/* special button: Show prayer */
+// special button: Show prayer
 const char *html_button_det_show[POCET_JAZYKOV + 1] = {"Zobraz modlitbu", "Ukaž modlitbu", "Show prayer", "xxx", "", "Ukaž modlitbu", "Mutasd az imát"};
 #ifndef HTML_BUTTON_DET_SHOW
 #define HTML_BUTTON_DET_SHOW	html_button_det_show[_global_jazyk]

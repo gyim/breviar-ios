@@ -277,7 +277,7 @@ struct den_mesiac{ /* takto povodne vyzerala struct dm */
 };
 typedef struct den_mesiac _struct_den_mesiac;
 
-#define POCET_MODLITIEB         13 /* 2006-08-02: nepoužívalo sa; upravené na 13 (z pôvodných 8) */
+#define POCET_MODLITIEB         14 // 2006-08-02: nepoužívalo sa; upravené na 13 (z pôvodných 8); 2011-10-03: upravené na 14 kvôli MODL_VSETKY
 /* modlitby */
 #define MODL_INVITATORIUM       0
 #define MODL_RANNE_CHVALY       1
@@ -288,18 +288,20 @@ typedef struct den_mesiac _struct_den_mesiac;
 #define MODL_VESPERY            6
 #define MODL_KOMPLETORIUM       7
 #define MODL_NEURCENA           8
-/* dalsie, iba docasne modlitby */
+// dalsie, iba docasne modlitby
 #define MODL_PRVE_VESPERY       9
 #define MODL_PRVE_KOMPLETORIUM  10
 #define MODL_DRUHE_VESPERY      11
 #define MODL_DRUHE_KOMPLETORIUM 12
-/* formular s detailami ohladom generovania modlitby */
+// formular s detailami ohladom generovania modlitby -- 2011-10-03: odstavený
 #define MODL_DETAILY            13
-/* pre jednoduchsiu orientaciu pridane 2003-07-15 */
+// 2011-10-03: pridané pokusne
+#define MODL_VSETKY             14
+// pre jednoduchsiu orientaciu pridane 2003-07-15
 #define MODL_PREDPOLUDNIM       3
 #define MODL_NAPOLUDNIE         4
 #define MODL_POPOLUDNI          5
-/* pre modlitbu cez den kvoli zaltaru (psalmodii) rovnake, pridane 2003-08-13 */
+// pre modlitbu cez den kvoli zaltaru (psalmodii) rovnake, pridane 2003-08-13
 #define MODL_CEZ_DEN_VSETKY     20
 
 /* 2007-12-05: doplnené kvôli modlitbe kompletória, funkcia _set_kompletorium_nedela() */
@@ -323,18 +325,20 @@ typedef struct den_mesiac _struct_den_mesiac;
 	#define		STR_MODL_KOMPLETORIUM	"MODL_KOMPLETORIUM"
 	#define		STR_MODL_PRVE_VESPERY	"MODL_PRVE_VESPERY"
 	#define		STR_MODL_PRVE_KOMPLETORIUM	"MODL_PRVE_KOMPLETORIUM"
+	#define		STR_MODL_VSETKY            "MODL_VSETKY"
 #else
-	#define		STR_MODL_INVITATORIUM	"mi"
-	#define		STR_MODL_RANNE_CHVALY	"mrch"
-	#define		STR_MODL_POSV_CITANIE	"mpc"
-	#define		STR_MODL_VESPERY		"mv"
-	#define		STR_MODL_PREDPOLUDNIM	"mpred"
-	#define		STR_MODL_NAPOLUDNIE		"mna"
-	#define		STR_MODL_POPOLUDNI		"mpo"
-	#define		STR_MODL_DETAILY		"*"
-	#define		STR_MODL_KOMPLETORIUM	"mk"
-	#define		STR_MODL_PRVE_VESPERY	"mpv"
-	#define		STR_MODL_PRVE_KOMPLETORIUM	"mpk"
+	#define		STR_MODL_INVITATORIUM      "mi"
+	#define		STR_MODL_RANNE_CHVALY      "mrch"
+	#define		STR_MODL_POSV_CITANIE	   "mpc"
+	#define		STR_MODL_VESPERY           "mv"
+	#define		STR_MODL_PREDPOLUDNIM      "mpred"
+	#define		STR_MODL_NAPOLUDNIE        "mna"
+	#define		STR_MODL_POPOLUDNI         "mpo"
+	#define		STR_MODL_DETAILY           "mdet"
+	#define		STR_MODL_KOMPLETORIUM      "mk"
+	#define		STR_MODL_PRVE_VESPERY      "mpv"
+	#define		STR_MODL_PRVE_KOMPLETORIUM "mpk"
+	#define		STR_MODL_VSETKY            "*"
 #endif
 
 /* 2005-03-27: Vlozene do definicnej casti z funkcie dbzaltar.cpp::pismenko_modlitby() */
@@ -346,12 +350,13 @@ typedef struct den_mesiac _struct_den_mesiac;
 #define CHAR_MODL_CEZ_DEN_3          '3'
 #define CHAR_MODL_VESPERY            'v'
 #define CHAR_MODL_KOMPLETORIUM       'k'
-#define CHAR_MODL_NEURCENA           '_' /* toto by sa nemalo */
+#define CHAR_MODL_NEURCENA           '_' // toto by sa nemalo
 #define CHAR_MODL_PRVE_VESPERY       '1'
 #define CHAR_MODL_PRVE_KOMPLETORIUM  'p'
-#define CHAR_MODL_DRUHE_VESPERY      'w' /* toto by sa nemalo */
-#define CHAR_MODL_DRUHE_KOMPLETORIUM 'm' /* toto by sa nemalo */
-// #define CHAR_MODL_CEZ_DEN_VSETKY     'd' /* 2005-03-27: Pridane */
+#define CHAR_MODL_DRUHE_VESPERY      'w' // toto by sa nemalo
+#define CHAR_MODL_DRUHE_KOMPLETORIUM 'm' // toto by sa nemalo
+// #define CHAR_MODL_CEZ_DEN_VSETKY     'd' // 2005-03-27: pridané
+#define CHAR_MODL_VSETKY             '*' // 2011-10-03: pridané pokusne
 
 /* 2008-04-09: doplnené pre batch generovanie modlitieb */
 extern const char char_modlitby[POCET_MODLITIEB /* + 1 */];
@@ -378,6 +383,7 @@ extern const char *nazov_Modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1];
 #define TEMPLAT_CEZ_DEN_3        "m_popol.htm"
 #define TEMPLAT_VESPERY          "m_vespery.htm"
 #define TEMPLAT_KOMPLETORIUM     "m_komplet.htm"
+#define TEMPLAT_NEURCENY         "" // 2011-10-03: doplnené kvôli MODL_VSETKY
 
 /* pridané 2006-10-24 pre kompletórium */
 #define nazov_obd_KOMPLETORIUM   "cezrok_k.htm"
