@@ -484,6 +484,9 @@ const char *nazov_slavenia_lokal[] =
 ,"A Váci egyházmegyében: Szent Mihály fõangyal, az egyházmegye védõszentje"                                     // LOKAL_SLAV_VACI_PATRON
 ,"A Szeged-Csanád: az egyházmegye védõszentje; fõünnep"                                                         // LOKAL_SLAV_SZEGED_CSAN_PATRON2
 ,"A Veszprém, a fõszékesegyházban; fõünnep"															            // LOKAL_SLAV_VESZPREM_FOEGYH
+,"csak a felszentelt templomkban"                                                                               // LOKAL_SLAV_KONSEKR_KOSTOLY_HU
+,"A Szeged-Csanád: A székesegyházban; fõünnep"                                                                  // LOKAL_SLAV_SZEGED_CSAN_EGYH2
+,"A Pécsi egyházmegyében: A Pécsi egyházmegye társvédöszentje; fõünnep"                                         // LOKAL_SLAV_PECS_PATRON
 };
 
 /* names of liturgical colors */
@@ -5369,6 +5372,15 @@ const char *text_OKT_22_CZOP[POCET_JAZYKOV + 1] =
  "Výroèí posvìcení klášterního kostela",
  "hu_",
  };
+const char *text_OKT_22_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Boldog II. János Pál pápa",
+ };
 const char *text_OKT_23[POCET_JAZYKOV + 1] = 
 {"Sv. Jána Kapistránskeho, kòaza",
  "Sv. Jana Kapistránského, knìze",
@@ -5396,6 +5408,15 @@ const char *text_OKT_24_SDB[POCET_JAZYKOV + 1] =
  "",
  "hu_",
  };
+const char *text_OKT_24_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "A Székesegyház felszentelése",
+ };
 const char *text_OKT_25_SK[POCET_JAZYKOV + 1] = 
 {"Výroèie posviacky katedrálneho chrámu v Spišskom Podhradí",
  "(v Èechách, na Moravì a na Slezsku není)",
@@ -5414,6 +5435,15 @@ const char *text_OKT_25_SDB[POCET_JAZYKOV + 1] =
  "",
  "hu_",
  };
+const char *text_OKT_25_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Szent Mór püspök",
+ };
 const char *text_OKT_26[POCET_JAZYKOV + 1] = 
 {"Výroèie posviacky chrámov, ktorých deò posviacky je neznámy",
  "Výroèí posvìcení chrámu, jejichž den dedikace není známý",
@@ -5421,7 +5451,7 @@ const char *text_OKT_26[POCET_JAZYKOV + 1] =
  "",
  "",
  "Výroèí posvìcení chrámu, jejichž den dedikace není známý",
- "hu_",
+ "A saját templom felszentelése <br>(amennyiben annak napja nem ismeretes)", // A felszentelt templomokban: A saját templom felszentelése
  };
 const char *text_OKT_27_SK[POCET_JAZYKOV + 1] = 
 {"Výroèie posviacky katedrálneho chrámu v Rožòave",
@@ -5494,6 +5524,15 @@ const char *text_OKT_31_CZ[POCET_JAZYKOV + 1] =
  "",
  "Sv. Wolfganga, biskupa",
  "(nincs Magyarországon)",
+ };
+const char *text_OKT_31_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Boldog Romzsa Tódor püspök és vértanú",
  };
 
 /* --------------- 11 november --------------- */

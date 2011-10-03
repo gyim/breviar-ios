@@ -10593,7 +10593,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
 						_global_svaty2.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 12: /* MES_JAN -- 12JAN */
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_OFM)){
@@ -11432,7 +11432,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_UCITEL_CIRKVI, MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
 						_global_svaty2.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 29: /* MES_JAN -- 29JAN */
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SVD)){
@@ -11746,7 +11746,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					else if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SJ)){
 						if(poradie_svaty == 1){
 
@@ -11976,7 +11976,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_ZA_ZOSNULYCH);
 						_global_svaty1.farba = LIT_FARBA_FIALOVA_CIERNA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					else if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SDB)){
 						if(poradie_svaty == 1){
 
@@ -12386,7 +12386,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 13: /* MES_FEB --13FEB */
 					/* 2009-03-24: doplnené pre dominikánov */
@@ -14260,7 +14260,7 @@ label_25_MAR:
 						_global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty3.farba = LIT_FARBA_BIELA;
 						_global_svaty3.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 29: /* MES_APR -- 29APR */
 					if(poradie_svaty == 1){
@@ -14332,7 +14332,7 @@ label_25_MAR:
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
 						_global_svaty2.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 30: /* MES_APR -- 30APR */
 					/* 2009-03-24: upravené; dominikáni majú památku */
@@ -14477,7 +14477,7 @@ label_25_MAR:
 						_global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 						_global_svaty3.farba = LIT_FARBA_BIELA;
 						_global_svaty3.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 			}; break; /* case MES_APR */
 /* --------------- 05 máj --------------- */
@@ -15278,7 +15278,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					/* else */ if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SJ)){
 						if(poradie_svaty == 1){
 
@@ -15905,7 +15905,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					/* else */ if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SDB)){
 						if(poradie_svaty == 1){
 
@@ -16204,7 +16204,7 @@ label_25_MAR:
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
 						_global_svaty2.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 31: /* MES_MAY -- 31MAJ */
 					/* na Slovensku sa slávi 2. júla */
@@ -16391,7 +16391,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_CERVENA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					else if(_global_jazyk == JAZYK_HU){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
@@ -16417,7 +16417,7 @@ label_25_MAR:
 						_global_svaty1.farba = LIT_FARBA_CERVENA;
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
 						_global_svaty1.typslav_lokal = LOKAL_SLAV_SZOMBATHELYI_EGYH;
-					}/* hu only */
+					}// HU only
 					break;
 				case 5: /* MES_JUN -- 05JUN */
 					if(poradie_svaty == 1){
@@ -16509,7 +16509,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
-					}/* HU only */
+					}// HU only
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
@@ -16537,7 +16537,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNY_VIACERE);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_OFM)){
 						if(poradie_svaty == 1){
 							
@@ -16938,7 +16938,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
-					}/* hu only */
+					}// HU only
 					break;
 				case 16: /* MES_JUN -- 16JUN */
 					if(_global_jazyk == JAZYK_SK){
@@ -17055,7 +17055,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
-					}/* hu only */
+					}// HU only
 					break;
 				case 17: /* MES_JUN -- 17JUN */
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_OFM)){
@@ -17262,7 +17262,7 @@ label_25_MAR:
 						_global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty3.farba = LIT_FARBA_BIELA;
 						_global_svaty3.kalendar = KALENDAR_VSEOBECNY_HU;
-					}/* hu only */
+					}// HU only
 					break;
 				case 23: /* MES_JUN -- 23JUN */
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SDB)){
@@ -17425,7 +17425,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
-					}/* hu only */
+					}// HU only
 					break;
 				case 27: /* MES_JUN -- 27JUN */
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_CSSR)){
@@ -17568,7 +17568,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
-					}/* hu only */
+					}// HU only
 					break;
 				case 28: /* MES_JUN -- 28JUN */
 					if(poradie_svaty == 1){
@@ -18152,7 +18152,7 @@ label_25_MAR:
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 7: /* MES_JUL -- 07JUL */
 					if(_global_jazyk == JAZYK_SK){
@@ -18231,7 +18231,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
-					}
+					}// HU only
 					break;
 				case 9: /* MES_JUL -- 09JUL */
 					/* 2008-07-01: doplnené (upozornil Michal Pazúrik <m.pazurik@gmail.com>)
@@ -18294,7 +18294,7 @@ label_25_MAR:
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 						_global_svaty2.farba = LIT_FARBA_CERVENA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_OFM)){
 						pocet = 2;
 						if(poradie_svaty == 2){
@@ -18756,7 +18756,7 @@ label_25_MAR:
 							_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 							_global_svaty2.farba = LIT_FARBA_BIELA;
 							_global_svaty2.kalendar = KALENDAR_CZ_OP;
-						}/* czop only */
+						}// czop only
 					}
 					break;
 				case 18: /* MES_JUL -- 18JUL */
@@ -18950,7 +18950,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VIACERI);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
-					}/* HU only */
+					}// HU only
 					else{
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
@@ -19109,7 +19109,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
-					}/* HU only */
+					}// HU only
 					break;
 				case 29: /* MES_JUL -- 29JUL */
 					if(poradie_svaty == 1){
@@ -19501,7 +19501,7 @@ label_25_MAR:
 						_global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA);
 						_global_svaty3.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 4: /* MES_AUG -- 04AUG */
 					if(poradie_svaty == 1){
@@ -19769,7 +19769,7 @@ label_25_MAR:
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
 						_global_svaty2.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 9: /* MES_AUG -- 09AUG */
 					if(poradie_svaty == 1){
@@ -20105,7 +20105,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					if(_global_jazyk == JAZYK_HU){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
@@ -20125,7 +20125,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
-					}/* hu only */
+					}// HU only
 					break;
 				case 18: /* MES_AUG -- 18AUG */
 					/* 2009-03-24: doplnené pre dominikánov */
@@ -20156,7 +20156,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					else if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SJ)){
 						if(poradie_svaty == 1){
 
@@ -20228,7 +20228,7 @@ label_25_MAR:
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
 						_global_svaty2.kalendar = KALENDAR_VSEOBECNY_HU;
-					}/* hu only */
+					}// HU only
 					break;
 				case 19: /* MES_AUG -- 19AUG */
 					if(_global_jazyk == JAZYK_HU){
@@ -20518,7 +20518,7 @@ label_25_MAR:
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
 						_global_svaty2.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 24: /* MES_AUG -- 24AUG */
 					if(poradie_svaty == 1){
@@ -20649,7 +20649,7 @@ label_25_MAR:
 						_global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty3.farba = LIT_FARBA_BIELA;
 						_global_svaty3.kalendar = KALENDAR_VSEOBECNY_HU;
-					}/* hu only */
+					}// HU only
 					break;
 				case 26: /* MES_AUG -- 26AUG */
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SDB)){
@@ -20772,7 +20772,7 @@ label_25_MAR:
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
 						_global_svaty2.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 29: /* MES_AUG -- 29AUG */
 					if(poradie_svaty == 1){
@@ -20850,7 +20850,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
-					}/* hu only */
+					}// HU only
 					break;
 				default:
 					break;
@@ -21250,7 +21250,7 @@ label_25_MAR:
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
 						_global_svaty2.kalendar = KALENDAR_VSEOBECNY_HU;
-					}/* hu only */
+					}// HU only
 					break;
 				case 14: /* MES_SEP -- 14SEP */
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
@@ -21602,7 +21602,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 19: /* MES_SEP -- 19SEP */
 					if(poradie_svaty == 1){
@@ -21947,7 +21947,7 @@ label_25_MAR:
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 						_global_svaty2.farba = LIT_FARBA_CERVENA;
 						_global_svaty2.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_CSSR)){
 						if(poradie_svaty == 2){
@@ -22363,7 +22363,7 @@ label_25_MAR:
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
 						_global_svaty2.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 5: /* MES_OCT -- 05OKT */
 					/* 2009-03-24: doplnené pre dominikánov */
@@ -22394,7 +22394,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					/* else */ if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SDB)){
 						if(poradie_svaty == 1){
 
@@ -22442,7 +22442,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
-					}/* hu only */
+					}// HU only
 					break;
 				case 6: /* MES_OCT -- 06OKT */
 					if(poradie_svaty == 1){
@@ -22569,7 +22569,7 @@ label_25_MAR:
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
 						_global_svaty2.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 8: /* MES_OCT -- 08OKT */
 					if(_global_jazyk == JAZYK_HU){
@@ -22714,7 +22714,7 @@ label_25_MAR:
 						_global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty3.farba = LIT_FARBA_BIELA;
 						_global_svaty3.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 11: /* MES_OCT -- 11OKT */
 					if(_global_jazyk == JAZYK_HU){
@@ -22741,7 +22741,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
-					}/* hu only */
+					}// HU only
 					break;
 				case 12: /* MES_OCT -- 12OKT */
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
@@ -23152,7 +23152,47 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
+					if(_global_jazyk == JAZYK_HU){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+							break;
+							/* Všetko je zo spoloènej èasti na výroèie posviacky chrámu */
+						}
+						else if(poradie_svaty == 2){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty1.smer = 4; /* mieste slavnosti */
+						_global_svaty1.typslav = SLAV_SLAVNOST;
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_KONSEKR_KOSTOLY_HU;
+						mystrcpy(_global_svaty1.meno, text_OKT_26[_global_jazyk], MENO_SVIATKU); // SK: 26OKT; HU: 22OKT
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+						pocet = 2;
+						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty2.smer = 12; /* lubovolne spomienky */
+						mystrcpy(_global_svaty2.meno, text_OKT_22_HU[_global_jazyk], MENO_SVIATKU);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
+						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty2.kalendar = KALENDAR_VSEOBECNY_HU;
+					}// HU only
 					break;
 				case 23: /* MES_OCT -- 23OKT */
 					if(poradie_svaty == 1){
@@ -23232,9 +23272,29 @@ label_25_MAR:
 						_global_svaty2.farba = LIT_FARBA_BIELA;
 						_global_svaty2.kalendar = KALENDAR_SK_SDB;
 					}/* kalendár pre KALENDAR_SK_SDB */
+					if(_global_jazyk == JAZYK_HU){
+						if(poradie_svaty == 2){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_2citanie;
+
+							break;
+							/* Všetko je zo spoloènej èasti na výroèie posviacky chrámu */
+						}
+						pocet = 2;
+						_global_svaty2.smer = 4; /* mieste slavnosti */
+						_global_svaty2.typslav = SLAV_SLAVNOST;
+						_global_svaty2.typslav_lokal = LOKAL_SLAV_SZEGED_CSAN_EGYH2;
+						mystrcpy(_global_svaty2.meno, text_OKT_24_HU[_global_jazyk], MENO_SVIATKU);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
+						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty2.kalendar = KALENDAR_VSEOBECNY_HU;
+					}// HU only
 					break;
 				case 25: /* MES_OCT -- 25OKT */
-					/* 2005-10-13: pridané */
 					if(_global_jazyk == JAZYK_SK){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
@@ -23250,7 +23310,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK;
-					}
+					}// SK only
 					else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
@@ -23266,7 +23326,39 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_POSVIACKA_CHRAMU);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ;
-					}
+					}// CZ only
+					else if(_global_jazyk == JAZYK_HU){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_1citanie;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						_global_svaty1.smer = 10; /* povinne spomienky podla vseobecneho kalendara */
+						mystrcpy(_global_svaty1.meno, text_OKT_25_HU[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
+						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_PECS_PATRON;
+					}// HU only
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SDB)){
 
 						file_name_vlastny_kalendar(_global_kalendar);
@@ -23487,7 +23579,6 @@ label_25_MAR:
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_SK_SJ;
 					}/* kalendár pre KALENDAR_SK_SJ */
-					/* 2006-09-19: pridané */
 					else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							/* definovanie parametrov pre modlitbu */
@@ -23514,7 +23605,32 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ;
-					}
+					}// CZ only
+					else if(_global_jazyk == JAZYK_HU){
+						if(poradie_svaty == 1){
+							/* definovanie parametrov pre modlitbu */
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 12; /* lubovolne spomienky */
+						mystrcpy(_global_svaty1.meno, text_OKT_31_HU[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
+						_global_svaty1.farba = LIT_FARBA_CERVENA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+					}// HU only
 					break;
 			}; break; /* case MES_OCT */
 /* --------------- 11 november --------------- */
@@ -23722,7 +23838,7 @@ label_25_MAR:
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
 						_global_svaty2.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 4: /* MES_NOV -- 04NOV */
 					if(poradie_svaty == 1){
@@ -23865,7 +23981,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 						_global_svaty1.farba = LIT_FARBA_CERVENA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 7: /* MES_NOV -- 07NOV */
 					/* 2009-03-24: doplnené pre dominikánov */
@@ -23908,7 +24024,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 8: /* MES_NOV -- 08NOV */
 					if(_global_jazyk == JAZYK_CZ_OP){
@@ -23937,7 +24053,7 @@ label_25_MAR:
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_ZA_ZOSNULYCH);
 						_global_svaty1.farba = LIT_FARBA_FIALOVA_CIERNA;
 						_global_svaty1.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 9: /* MES_NOV -- 09NOV */
 					if(poradie_svaty == 1){
@@ -24261,7 +24377,7 @@ label_25_MAR:
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_UCITEL_CIRKVI);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
 						_global_svaty2.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SDB)){
 						if(poradie_svaty == 2){
@@ -24648,7 +24764,7 @@ label_25_MAR:
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 						_global_svaty2.farba = LIT_FARBA_CERVENA;
 						_global_svaty2.kalendar = KALENDAR_CZ_OP;
-					}/* czop only */
+					}// czop only
 					break;
 				case 25: /* MES_NOV -- 25NOV */
 					/* 2006-09-13: odvetvené pre Slovensko; 2008-12-04: aj pre CZ a CZ_OP */
