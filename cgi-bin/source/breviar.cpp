@@ -1304,7 +1304,7 @@ short int getSrciptParamFrom(int argc){
 		Log("returning SCRIPT_PARAM_FROM_ARGV -- nothing else matched.\n");
 		return SCRIPT_PARAM_FROM_ARGV;
 	}
-}/* getSrciptParamFrom(); */
+}// getSrciptParamFrom();
 
 /* 2003-07-16; zrusene nasledovne definy:
 #define _export_heading1(a)	_export_heading(1, a)
@@ -1326,14 +1326,14 @@ void _export_heading(/* int size, */const char *string){
 	/* 2003-07-16; pre prehladnost pridany este jeden \n */
 	size = 4;
 	Export("\n<h%d "HTML_CLASS_BLUE">%s</h%d>\n\n", size, string, size);
-}/* _export_heading() */
+}// _export_heading()
 
 /* 2003-07-16; podobna funkcnost ako puovodne _export_heading */
 void _export_heading_center(const char *string){
 	short int size = 2;
 	/* 2003-07-16; pridany default vypis */
 	Export("\n<center><h%d>%s</h%d></center>\n\n", size, string, size);
-}/* _export_heading_center() */
+}// _export_heading_center()
 
 /*---------------------------------------------------------------------*/
 /*
@@ -1350,7 +1350,7 @@ void _main_prazdny_formular(void){
 	hlavicka((char *)html_title[_global_jazyk]);
 	Export("Programu neboli zadanÈ argumenty.\n");
 	ALERT;
-}/* _main_prazdny_formular() */
+}// _main_prazdny_formular()
 
 /*---------------------------------------------------------------------*/
 /* includeFile():
@@ -2114,7 +2114,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 	}/* while((c = fgetc(body)) != EOF) */
 	fclose(body);
 	Log("--includeFile(): end\n");
-}/* includeFile() */
+}// includeFile()
 
 /*---------------------------------------------------------------------*/
 /* definicie pre _rozbor_dna():
@@ -2787,8 +2787,8 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 				Export("skipping NAVIGACIA");
 				Log("skipping NAVIGACIA\n");
 			}
-		}// if(aj_navigacia == ANO)
 #endif
+		}// if(aj_navigacia == ANO)
 	}// PARAM_NAVIGACIA
 	else if(equals(paramname, PARAM_POPIS)){
 		/* pridane 05/04/2000A.D. */
@@ -5623,7 +5623,12 @@ void _export_rozbor_dna_button_modlitba(short int typ, short int poradie_svateho
 		Export("</form>\n");
 	}
 	else{
-		Export("%s", nazov_modlitby(modl));
+		if(typ == EXPORT_DNA_JEDEN_DEN_LOCAL){
+			Export("%s", html_button_nazov_modlitby(modl));
+		}
+		else{
+			Export("%s", nazov_modlitby(modl));
+		}
 		Export("</a>\n");
 	}
 // 2011-04-06: odvetvenÈ, aby sa to nedostalo na web resp. jeho simul·ciu, teda len pre command-line export (tam BEHAVIOUR_CMDLINE)
@@ -6156,6 +6161,8 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 			Export("</td>\n<td valign=\"middle\">");
 		/* modlitba cez den (predpoludnim) -- button */
 		i = MODL_PREDPOLUDNIM;
+		_export_rozbor_dna_button_modlitba(typ, poradie_svateho, i, pom, /* doplnkova_psalmodia */ ANO, som_v_tabulke);
+		/*
 		if(_global_linky == ANO){
 			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
 				script_name,
@@ -6183,7 +6190,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 				Export("(alt)"); // alternatÌva s doplnkovou psalmÛdiou [prÌpadne neskÙr dorieöiù krajöie]
 				Export("\">\n");
 				Export("</form>\n");
-			}/* alternatÌva s doplnkovou psalmÛdiou */
+			}// alternatÌva s doplnkovou psalmÛdiou
 #endif
 		}
 		else{
@@ -6196,15 +6203,18 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 				Export("<a href=\"%s\">\n", pom);
 				Export("(alt)"); // alternatÌva s doplnkovou psalmÛdiou [prÌpadne neskÙr dorieöiù krajöie]
 				Export("</a>\n");
-			}/* alternatÌva s doplnkovou psalmÛdiou */
+			}// alternatÌva s doplnkovou psalmÛdiou
 #endif
 		}
+		*/
 
 		// oddelenie
 		if(som_v_tabulke == ANO)
 			Export("</td>\n<td valign=\"middle\">");
 		/* modlitba cez den (napoludnie) -- button */
 		i = MODL_NAPOLUDNIE;
+		_export_rozbor_dna_button_modlitba(typ, poradie_svateho, i, pom, /* doplnkova_psalmodia */ ANO, som_v_tabulke);
+		/*
 		if(_global_linky == ANO){
 			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
 				script_name,
@@ -6232,7 +6242,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 				Export("(alt)"); // alternatÌva s doplnkovou psalmÛdiou [prÌpadne neskÙr dorieöiù krajöie]
 				Export("\">\n");
 				Export("</form>\n");
-			}/* alternatÌva s doplnkovou psalmÛdiou */
+			}// alternatÌva s doplnkovou psalmÛdiou
 #endif
 		}
 		else{
@@ -6245,15 +6255,18 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 				Export("<a href=\"%s\">\n", pom);
 				Export("(alt)"); // alternatÌva s doplnkovou psalmÛdiou [prÌpadne neskÙr dorieöiù krajöie]
 				Export("</a>\n");
-			}/* alternatÌva s doplnkovou psalmÛdiou */
+			}// alternatÌva s doplnkovou psalmÛdiou
 #endif
 		}
+		*/
 
 		// oddelenie
 		if(som_v_tabulke == ANO)
 			Export("</td>\n<td valign=\"middle\">");
 		/* modlitba cez den (popoludni) -- button */
 		i = MODL_POPOLUDNI;
+		_export_rozbor_dna_button_modlitba(typ, poradie_svateho, i, pom, /* doplnkova_psalmodia */ ANO, som_v_tabulke);
+		/*
 		if(_global_linky == ANO){
 			Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
 				script_name,
@@ -6281,7 +6294,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 				Export("(alt)"); // alternatÌva s doplnkovou psalmÛdiou [prÌpadne neskÙr dorieöiù krajöie]
 				Export("\">\n");
 				Export("</form>\n");
-			}/* alternatÌva s doplnkovou psalmÛdiou */
+			}// alternatÌva s doplnkovou psalmÛdiou
 #endif
 		}
 		else{
@@ -6294,9 +6307,10 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 				Export("<a href=\"%s\">\n", pom);
 				Export("(alt)"); // alternatÌva s doplnkovou psalmÛdiou [prÌpadne neskÙr dorieöiù krajöie]
 				Export("</a>\n");
-			}/* alternatÌva s doplnkovou psalmÛdiou */
+			}// alternatÌva s doplnkovou psalmÛdiou
 #endif
 		}
+		*/
 
 		// 2003-07-15 pokracuje sa buttonom `Vespery'
 
@@ -6417,7 +6431,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 	_global_den.rok = _local_rok;
 
 	Log("--- _export_rozbor_dna_buttons(typ == %d) -- end\n", typ); /* 2005-03-22: Pridane */
-}/* _export_rozbor_dna_buttons */
+}// _export_rozbor_dna_buttons()
 
 /*---------------------------------------------------------------------*/
 /* _export_rozbor_dna_buttons_dni(int, int)
@@ -11502,7 +11516,7 @@ void _main_batch_mode(
 										fprintf(batch_month_file, (char *)html_text_batch_Zoznam2[_global_jazyk], nazov_mesiaca(m), r_from);
 										fprintf(batch_month_file, "</h2>");
 										// ^ hore
-										fprintf(batch_month_file, "<p><a href=\"..%s%s\">", STR_PATH_SEPARATOR_HTML, name_batch_html_file);
+										fprintf(batch_month_file, "<p><a href=\"..%s%s\" "HTML_CLASS_BUTTON">", STR_PATH_SEPARATOR_HTML, name_batch_html_file);
 										fprintf(batch_month_file, (char *)html_text_batch_Back[_global_jazyk]);
 										fprintf(batch_month_file, "</a></p>");
 										// koniec hlaviËky
@@ -11596,7 +11610,7 @@ void _main_batch_mode(
 								fprintf(batch_month_file, (char *)html_text_batch_Zoznam2[_global_jazyk], nazov_mesiaca(m_from), r_from);
 								fprintf(batch_month_file, "</h2>");
 								// ^ hore
-								fprintf(batch_month_file, "<p><a href=\"..%s%s\">", STR_PATH_SEPARATOR_HTML, name_batch_html_file);
+								fprintf(batch_month_file, "<p><a href=\"..%s%s\" "HTML_CLASS_BUTTON">", STR_PATH_SEPARATOR_HTML, name_batch_html_file);
 								fprintf(batch_month_file, (char *)html_text_batch_Back[_global_jazyk]);
 								fprintf(batch_month_file, "</a></p>");
 								// koniec hlaviËky
@@ -11663,7 +11677,7 @@ void _main_batch_mode(
 										fprintf(batch_month_file, (char *)html_text_batch_Zoznam2[_global_jazyk], nazov_mesiaca(m - 1), r_from);
 										fprintf(batch_month_file, "</h2>");
 										// ^ hore
-										fprintf(batch_month_file, "<p><a href=\"..%s%s\">", STR_PATH_SEPARATOR_HTML, name_batch_html_file);
+										fprintf(batch_month_file, "<p><a href=\"..%s%s\" "HTML_CLASS_BUTTON">", STR_PATH_SEPARATOR_HTML, name_batch_html_file);
 										fprintf(batch_month_file, (char *)html_text_batch_Back[_global_jazyk]);
 										fprintf(batch_month_file, "</a></p>");
 										// koniec hlaviËky
@@ -11735,7 +11749,7 @@ void _main_batch_mode(
 											fprintf(batch_month_file, (char *)html_text_batch_Zoznam2[_global_jazyk], nazov_mesiaca(m - 1), y);
 											fprintf(batch_month_file, "</h2>");
 											// ^ hore
-											fprintf(batch_month_file, "<p><a href=\"..%s%s\">", STR_PATH_SEPARATOR_HTML, name_batch_html_file);
+											fprintf(batch_month_file, "<p><a href=\"..%s%s\" "HTML_CLASS_BUTTON">", STR_PATH_SEPARATOR_HTML, name_batch_html_file);
 											fprintf(batch_month_file, (char *)html_text_batch_Back[_global_jazyk]);
 											fprintf(batch_month_file, "</a></p>");
 											// koniec hlaviËky
@@ -11806,7 +11820,7 @@ void _main_batch_mode(
 										fprintf(batch_month_file, (char *)html_text_batch_Zoznam2[_global_jazyk], nazov_mesiaca(m - 1), r_to);
 										fprintf(batch_month_file, "</h2>");
 										// ^ hore
-										fprintf(batch_month_file, "<p><a href=\"..%s%s\">", STR_PATH_SEPARATOR_HTML, name_batch_html_file);
+										fprintf(batch_month_file, "<p><a href=\"..%s%s\" "HTML_CLASS_BUTTON">", STR_PATH_SEPARATOR_HTML, name_batch_html_file);
 										fprintf(batch_month_file, (char *)html_text_batch_Back[_global_jazyk]);
 										fprintf(batch_month_file, "</a></p>");
 										// koniec hlaviËky
@@ -11876,7 +11890,7 @@ void _main_batch_mode(
 										fprintf(batch_month_file, (char *)html_text_batch_Zoznam2[_global_jazyk], nazov_mesiaca(m - 1), r_from);
 										fprintf(batch_month_file, "</h2>");
 										// ^ hore
-										fprintf(batch_month_file, "<p><a href=\"..%s%s\">", STR_PATH_SEPARATOR_HTML, name_batch_html_file);
+										fprintf(batch_month_file, "<p><a href=\"..%s%s\" "HTML_CLASS_BUTTON">", STR_PATH_SEPARATOR_HTML, name_batch_html_file);
 										fprintf(batch_month_file, (char *)html_text_batch_Back[_global_jazyk]);
 										fprintf(batch_month_file, "</a></p>");
 										// koniec hlaviËky
