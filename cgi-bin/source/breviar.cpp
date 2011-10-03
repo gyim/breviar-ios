@@ -5581,7 +5581,8 @@ short int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, short int rok, short
 
 void _export_rozbor_dna_button_modlitba(short int typ, short int poradie_svateho, short int modl, char pom[MAX_STR], short int doplnkova_psalmodia, short int som_v_tabulke){
 	short int orig_doplnkova_psalmodia = doplnkova_psalmodia;
-	doplnkova_psalmodia = MODL_CEZ_DEN_ZALMY_ZO_DNA;
+	if(orig_doplnkova_psalmodia == MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA)
+		doplnkova_psalmodia = MODL_CEZ_DEN_ZALMY_ZO_DNA;
 	// 2011-10-03: vytlaèenie buttona pre jednotlivú modlitbu; bolo nakopírované pre jednotlivé modlitby; zjednodušenie a zapracovanie pôvodnej INIT_POM()
 	if(_global_linky == ANO){
 		Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\" method=\"post\">\n",
