@@ -186,13 +186,13 @@ extern short int _global_font_size; /* 2011-05-13: Pridané kvôli rôznym ve¾kosti
 /* 2006-10-17: Pridané kvôli kompletóriu: niekedy obsahuje až dva žalmy */
 extern short int _global_pocet_zalmov_kompletorium;
 
-/* 2009-08-03, pridané */
+// 2009-08-03, pridané
 extern short int _global_opt_batch_monthly;
 
-/* 2009-08-05, pridané */
+// 2009-08-05, pridané
 extern short int _global_hlavicka_Export;
 // extern char name_batch_html_file[MAX_STR];
-/* 2011-07-01, pridané */
+// 2011-07-01, pridané
 extern short int _global_patka_Export;
 
 /* 2011-05-05: kvôli možnosti serif/sans serif override (z css sme odstránili font-family) */

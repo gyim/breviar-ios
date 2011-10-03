@@ -706,7 +706,7 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 			strcat(_global_link, ".htm");
 		}/* linka nie */
 
-		prilep_request_options(_global_link, pom2, ANO); /* prilep_request_options(pom2, pom3, prvy_ampersand) */
+		prilep_request_options(_global_link, pom2, ANO); // prilep_request_options(pom2, pom3, prvy_ampersand)
 
 	}/* if(_global_opt_batch_monthly == NIE) */
 	else{
