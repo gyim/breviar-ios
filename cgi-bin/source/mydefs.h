@@ -678,14 +678,14 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 
 #define ALERT	Export("<p>Ak probl&eacute;my pretrv&aacute;vaj&uacute;, kontaktujte pros&iacute;m <a href=\"mailto:%s\">autora str&aacute;nky</a>.</p>\n", cfg_MAIL_ADDRESS_default)
 
-/* HTML stringy - casti stringov sustredene na tomto mieste; pridane 2003-07-02; rozšírené 2011-01-27 */
+// HTML stringy - casti stringov sustredene na tomto mieste; pridane 2003-07-02; rozšírené 2011-01-27
 #define HTML_FORM_INPUT_SUBMIT   "input type=\"submit\" class=\"button\""
 #define HTML_FORM_INPUT_RESET    "input type=\"reset\" class=\"reset\""
 #define HTML_FORM_INPUT_RADIO    "input type=\"radio\" class=\"radio\""
 #define HTML_FORM_INPUT_TEXT     "input type=\"text\" class=\"text\""
 #define HTML_FORM_INPUT_TEXT_ROK "input type=\"text\" class=\"text\" size=\"4\" maxlength=\"4\" style=\"font-family:monospace\""
 #define HTML_FORM_INPUT_CHECKBOX "input type=\"checkbox\" class=\"checkbox\""
-/* 2011-01-27: pridané buttony (0. level: pre predošlý/nasledovný; 1. level: button "dnes"; 2. level: použité pre menej dôležité buttony) */
+// 2011-01-27: pridané buttony (0. level: pre predošlý/nasledovný; 1. level: button "dnes"; 2. level: použité pre menej dôležité buttony)
 #define HTML_FORM_INPUT_SUBMIT0  "input type=\"submit\" class=\"button0\""
 #define HTML_FORM_INPUT_RESET0   "input type=\"reset\" class=\"reset0\""
 #define HTML_FORM_INPUT_SUBMIT1  "input type=\"submit\" class=\"button1\""
@@ -726,6 +726,7 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #define HTML_CLASS_BOLD_IT  "class=\"boldit\""
 #define HTML_CLASS_LEVEL1   "class=\"level1\""
 #define HTML_CLASS_TT       "class=\"tt\""
+#define HTML_CLASS_BUTTON   "class=\"button\""
 
 /* pridane 2003-07-09, zmenene v cestach pre skript */
 #define HTML_AMPERSAND          "&amp;"
