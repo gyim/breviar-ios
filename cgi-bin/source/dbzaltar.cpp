@@ -7816,7 +7816,7 @@ label_24_DEC:
 #ifdef DETAIL_LOG_GLOBAL_DEN
 	Log(_global_den);
 #endif
-	/* -------------------------------------------------------------------- */
+	// --------------------------------------------------------------------
 	/* nasledujuca cast berie do uvahy, kedy sa ma `robit' svaty */
 	/* je to cast prevzata z dnes.cpp::init_global_string(); */
 	_struct_dm _local_den;
