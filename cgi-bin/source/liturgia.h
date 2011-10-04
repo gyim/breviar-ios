@@ -370,7 +370,9 @@ extern const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1];
 extern const char *nazov_Modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1];
 #define		nazov_Modlitby(a)	nazov_Modlitby_jazyk[a][_global_jazyk]
 
-/* extern const char *nazov_MODLITBY[]; */
+//extern const char *nazov_MODLITBY[];
+extern const char *nazov_MODLITBY_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1];
+#define		nazov_MODLITBY(a)	nazov_MODLITBY_jazyk[a][_global_jazyk]
 
 /* ... a file templates (suborove vzory) pre modlitby
  * 2011-01-25: premenovanÈ (aby mali spoloËn˝ prefix)
@@ -404,12 +406,12 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
  */
 #define CHAR_NONBREAKING_SPACE '_'
 
-/* include parameters (parametre v inkludovanych suboroch) */
+// include parameters (parametre v inkludovanych suboroch)
 #define INCLUDE_BEGIN   "BEGIN" /* zaciatok */
 #define INCLUDE_END     "END"   /* koniec */
 
-/* parameter identifiers */
-#define PARAM_POPIS         "POPIS" /* pridane 05/04/2000A.D. */
+// parameter identifiers
+#define PARAM_POPIS         "POPIS" // pridane 05/04/2000A.D.
 #define PARAM_HYMNUS        "HYMNUS"
 #define PARAM_ANTIFONA1     "ANTIFONA1"
 #define PARAM_ANTIFONA2     "ANTIFONA2"
@@ -417,34 +419,36 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 #define PARAM_ZALM1         "ZALM1"
 #define PARAM_ZALM2         "ZALM2"
 #define PARAM_ZALM3         "ZALM3"
-#define PARAM_ANTRCHVAL     "ANTRCHVAL" /* vlastne ANTIFONA2 */
-#define PARAM_ANTVCHVAL     "ANTVCHVAL" /* vlastne ANTIFONA3 */
-#define PARAM_RCHVALOSPEV   "RCHVALOSPEV" /* vlastne ZALM2 */
-#define PARAM_VCHVALOSPEV   "VCHVALOSPEV" /* vlastne ZALM3 */
+#define PARAM_ANTRCHVAL     "ANTRCHVAL" // vlastne ANTIFONA2
+#define PARAM_ANTVCHVAL     "ANTVCHVAL" // vlastne ANTIFONA3
+#define PARAM_RCHVALOSPEV   "RCHVALOSPEV" // vlastne ZALM2
+#define PARAM_VCHVALOSPEV   "VCHVALOSPEV" // vlastne ZALM3
 #define PARAM_KCITANIE      "KCITANIE"
 #define PARAM_KRESPONZ      "KRESPONZ"
-#define PARAM_MAGNIFIKAT    "MAGNIFIKAT" /* antifona na magnifikat */
-#define PARAM_BENEDIKTUS    "BENEDIKTUS" /* antifona na benediktus */
+#define PARAM_MAGNIFIKAT    "MAGNIFIKAT" // antifona na magnifikat
+#define PARAM_BENEDIKTUS    "BENEDIKTUS" // antifona na benediktus
 #define PARAM_PROSBY        "PROSBY"
 #define PARAM_MODLITBA      "MODLITBA"
-/* pridane 2003-08-06, upravene 2003-08-21 */                                        
-#define PARAM_CITANIE1      "CITANIE1" /* vlastne KCITANIE */
-#define PARAM_CITANIE2      "CITANIE2" /* vlastne BENEDIKTUS */
-/* 2007-10-02: pridanÈ kvÙli rovnak˝m antifÛnam pre modlitbu cez deÚ */
+// pridane 2003-08-06, upravene 2003-08-21
+#define PARAM_CITANIE1      "CITANIE1" // vlastne KCITANIE
+#define PARAM_CITANIE2      "CITANIE2" // vlastne BENEDIKTUS
+// 2007-10-02: pridanÈ kvÙli rovnak˝m antifÛnam pre modlitbu cez deÚ
 #define PARAM_ANTIFONA1x    "ANTIFONA1_DRUHA"
 #define PARAM_ANTIFONA3x    "ANTIFONA3_PRVA"
-/* 2008-04-03: pridanÈ kvÙli kompletÛriu vo veækonoËnom obdobÌ, Ëi pri druhej antifÛne zobraziù dvojku alebo nie */
+// 2008-04-03: pridanÈ kvÙli kompletÛriu vo veækonoËnom obdobÌ, Ëi pri druhej antifÛne zobraziù dvojku alebo nie
 #define PARAM_ANTIFONA1k    "ANTIFONA1_KOMPLET"
 #define PARAM_ANTIFONA2k    "ANTIFONA2_KOMPLET"
-/* 2010-05-21: pridanÈ kvÙli spomienkam a æubovoæn˝m spomienkam v pÙstnom obdobÌ (zobrazenie po modlitbe dÚa pÙstnej fÈrie) */
+// 2010-05-21: pridanÈ kvÙli spomienkam a æubovoæn˝m spomienkam v pÙstnom obdobÌ (zobrazenie po modlitbe dÚa pÙstnej fÈrie)
 #define PARAM_ANT_SPOMPOST  "ANT_SPOMPOST"
 #define PARAM_MODL_SPOMPOST "MODL_SPOMPOST"
-/* 2011-03-16: pridanÈ kvÙli spomienkam a æubovoæn˝m spomienkam v pÙstnom obdobÌ (zobrazenie po 2. ËÌtanÌ v posv. ËÌtanÌ) */
+// 2011-03-16: pridanÈ kvÙli spomienkam a æubovoæn˝m spomienkam v pÙstnom obdobÌ (zobrazenie po 2. ËÌtanÌ v posv. ËÌtanÌ)
 #define PARAM_CITANIE2_SPOMPOST "CITANIE2_SPOMPOST"
-/* 2011-07-03: pridanÈ kvÙli navig·cii v modlitbe */
+// 2011-07-03: pridanÈ kvÙli navig·cii v modlitbe
 #define PARAM_NAVIGACIA     "NAVIGACIA"
+// 2011-10-04: pridan˝ nadpis v modlitbe
+#define PARAM_NADPIS        "NADPIS"
 
-/* dalsie parametre: specificke pre obdobie */
+// dalsie parametre: specificke pre obdobie
 /* Od nedele P·novho zm‡tvychvstania aû do Druhej veækonoËnej nedele vr·tane,
  * ako aj na druhÈ veöpery sl·vnosti Zoslania Ducha Sv‰tÈho */
 #define PARAM_ALELUJA_ALELUJA_BEGIN         "ALELUJA_ALELUJA_BEGIN"
@@ -1278,6 +1282,8 @@ extern short int _global_opt_offline_export[POCET_OPT_4_OFFLINE_EXPORT];
 extern char *_global_string;
 extern char *_global_string2; /* obsahuje I, II, III, IV, V alebo pismeno roka */
 extern char *_global_string_farba; /* 2006-08-19: doplnenÈ */
+// 2011-10-04: pridanÈ, pre titulok modlitby (uû sa nepriliepa do _global_string)
+extern char _global_string_modlitba[SMALL];
 
 extern char *_global_buf; /* 2006-08-01: t˙to premenn˙ tieû alokujeme */
 extern char *_global_buf2; /* 2006-08-01: t˙to premenn˙ tieû alokujeme */

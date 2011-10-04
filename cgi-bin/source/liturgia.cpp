@@ -1585,7 +1585,7 @@ void Log(struct tmodlitba5 t){
 	Log_struktura_tm5("   modlitba          file `%s', anchor `%s'\n", t.modlitba.file, t.modlitba.anchor);
 }
 
-/*---------------------------------------------------------------------*/
+//---------------------------------------------------------------------
 /* popis:
  *
  * int _struct_dm::spolcast obsahuje zakodovane data pre svatych o tom,

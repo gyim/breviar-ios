@@ -166,6 +166,8 @@ extern short int _global_opt[POCET_GLOBAL_OPT];
 extern char *_global_string;
 extern char *_global_string2; /* obsahuje I, II, III, IV, V alebo pismeno roka */
 extern char *_global_string_farba; /* 2006-08-19: doplnené */
+// 2011-10-04: pridané, pre titulok modlitby (už sa nepriliepa do _global_string)
+extern char _global_string_modlitba[SMALL];
 
 extern char *_global_buf; /* 2006-08-01: túto premennú tiež alokujeme */
 extern char *_global_buf2; /* 2006-08-01: túto premennú tiež alokujeme */
