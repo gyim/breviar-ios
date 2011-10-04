@@ -4716,8 +4716,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 							sc.a1 = MODL_SPOL_CAST_PANNA_MARIA; // 2006-02-06: spomienka PM v sobotu
 							break;
 					}// switch(poradie_svaty)
-					_rozbor_dna_LOG("\tNastavil som do premennej sc == (%d) %s, (%d) %s, (%d) %s\n",
-						sc.a1, nazov_spolc(sc.a1), sc.a2, nazov_spolc(sc.a2), sc.a3, nazov_spolc(sc.a3));
+					_rozbor_dna_LOG("\tNastavil som do premennej sc == (%d) %s, (%d) %s, (%d) %s\n", sc.a1, nazov_spolc(sc.a1), sc.a2, nazov_spolc(sc.a2), sc.a3, nazov_spolc(sc.a3));
 					if(sc.a1 != MODL_SPOL_CAST_NEURCENA){
 						if(sc.a2 != MODL_SPOL_CAST_NEURCENA){
 							if(sc.a3 != MODL_SPOL_CAST_NEURCENA){
@@ -8842,6 +8841,7 @@ void showAllPrayers(short int den, short int mesiac, short int rok, short int po
 	_struct_den_mesiac datum;
 	datum.den = den;
 	datum.mesiac = mesiac;
+	short int opt3 = _global_opt[OPT_3_SPOLOCNA_CAST];
 
 	Log("showAllPrayers(%d, %s, %d, %d) -- zaèiatok...\n", den, nazov_mesiaca(mesiac - 1), rok, poradie_svaty);
 	Log("_global_den: \n");
@@ -8865,6 +8865,7 @@ void showAllPrayers(short int den, short int mesiac, short int rok, short int po
 	// cyklus pre všetky modlitby
 	for(modlitba = MODL_INVITATORIUM; modlitba <= MODL_KOMPLETORIUM; modlitba++){
 		_global_modlitba = modlitba;
+		_global_opt[OPT_3_SPOLOCNA_CAST] = opt3; // potrebné nastavi pôvodnú hodnotu, lebo sa niekde v rozbor_dna_s_modlitbou() upravuje
 		Log("spúšam showPrayer(%s) z funkcie showAllPrayers()...\n", nazov_modlitby(_global_modlitba));
 		LOG_ciara;
 		if(modlitba > MODL_INVITATORIUM){
