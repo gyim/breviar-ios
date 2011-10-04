@@ -8290,6 +8290,7 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 		Export("<option>%s\n", nazov_modlitby(MODL_VESPERY));
 		Export("<option>%s\n", nazov_modlitby(MODL_KOMPLETORIUM)); // invitatórium a kompletórium pridané 2006-10-13
 	}
+	Export("<option>%s\n", nazov_modlitby(MODL_VSETKY)); // všetky modlitby: pridané 2011-10-04
 	Export("</select>\n");
 	Export("</li>\n");
 
