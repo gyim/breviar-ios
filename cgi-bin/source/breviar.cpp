@@ -5454,15 +5454,20 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 }// init_global_string();
 
 void init_global_string_modlitba(short int modlitba){
+	short int _local_modlitba = _global_modlitba;
 	// 2011-10-04: vytvorené; reazec modlitby (dovtedy len "Prvé vešpery" a pod.) neprilepujeme do _global_string, ale do novej premennej _global_string_modlitba
 	Log("-- init_global_string_modlitba(%d, %s) -- zaèiatok\n", modlitba, nazov_modlitby(modlitba));
 	Log("pôvodná hodnota: %s\n", _global_string_modlitba);
-	if((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV) && ((modlitba == MODL_DRUHE_VESPERY) || ((modlitba == MODL_DRUHE_KOMPLETORIUM)))){
-		Log("Spomienka vsetkych vernych zosnulych -- nevypisem, ze su druhe vespery (resp. kompletórium po nich)...\n");
-		modlitba -= 5; // MODL_DRUHE_VESPERY -> MODL_VESPERY; MODL_DRUHE_KOMPLETORIUM -> MODL_KOMPLETORIUM
+	if(modlitba != _global_modlitba){
+		Export("<!-- modlitba == %d, _global_modlitba == %d -->\n", modlitba, _global_modlitba);
 	}
-	mystrcpy(_global_string_modlitba, nazov_MODLITBY(modlitba), SMALL);
+	if((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV) && ((_global_modlitba == MODL_DRUHE_VESPERY) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM))){
+		Log("Spomienka vsetkych vernych zosnulych -- nevypisem, ze su druhe vespery (resp. kompletórium po nich)...\n");
+		_global_modlitba -= 5; // MODL_DRUHE_VESPERY -> MODL_VESPERY; MODL_DRUHE_KOMPLETORIUM -> MODL_KOMPLETORIUM
+	}
+	mystrcpy(_global_string_modlitba, nazov_MODLITBY(_global_modlitba), SMALL);
 	Log("nová hodnota: %s\n", _global_string_modlitba);
+	_global_modlitba = _local_modlitba;
 	Log("-- init_global_string_modlitba(%d, %s) -- koniec\n", modlitba, nazov_modlitby(modlitba));
 }// init_global_string_modlitba()
 
