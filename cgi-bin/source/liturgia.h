@@ -280,8 +280,8 @@ typedef struct den_mesiac _struct_den_mesiac;
 #define POCET_MODLITIEB         14 // 2006-08-02: nepoužívalo sa; upravené na 13 (z pôvodných 8); 2011-10-03: upravené na 14 kvôli MODL_VSETKY
 // modlitby; 2011-10-05: vymenené ranné chvály a posvätné èítanie, rešpektujeme usporiadanie tlaèenej LH
 #define MODL_INVITATORIUM       0
-#define MODL_POSV_CITANIE       1
-#define MODL_RANNE_CHVALY       2
+#define MODL_POSV_CITANIE       2
+#define MODL_RANNE_CHVALY       1
 #define MODL_CEZ_DEN_9          3
 #define MODL_CEZ_DEN_12         4
 #define MODL_CEZ_DEN_3          5
