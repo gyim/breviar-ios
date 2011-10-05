@@ -1122,7 +1122,7 @@ typedef struct lrok _struct_lrok;
 #define LINK_DEN_MESIAC_PREDOSLY 6 /* 2007-08-15 pridané kvôli novému kalendáru */
 #define LINK_DEN_MESIAC_NASLEDOVNY 7 /* 2007-08-15 pridané kvôli novému kalendáru */
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 /* globalne premenne -- su definovane v dnes.cpp (18/02/2000A.D.) */
 
 /* globalna premenna, do ktorej sa ukladaju info o analyzovanom dni
@@ -1237,19 +1237,19 @@ extern short int _global_pocet_svatych;
 #define OPT_3_SPOLOCNA_CAST        3
 #define OPT_4_OFFLINE_EXPORT       4
 
-/* globálna premenná -- pole -- obsahujúca options; pôvodne to boli globálne premenné _global_opt 1..9 atï., obsahujú pom_MODL_OPT... */
+// globálna premenná -- pole -- obsahujúca options; pôvodne to boli globálne premenné _global_opt 1..9 atï., obsahujú pom_MODL_OPT...
 extern short int _global_opt[POCET_GLOBAL_OPT];
 
-#define POCET_OPT_0_SPECIALNE               3 /* jednotlivé komponenty option 0 -- bity pre force option 0 */
+#define POCET_OPT_0_SPECIALNE               3 // jednotlivé komponenty option 0 -- bity pre force option 0
 extern short int _global_opt_specialne[POCET_OPT_0_SPECIALNE];
-/* 2011-04-08: úprava vıznamu (a interpretácie) option 0 ==  OPT_0_SPECIALNE (zobrazi/nezobrazi "pridanú hodnotu" oproti papierovej LH) */
+// 2011-04-08: úprava vıznamu (a interpretácie) option 0 ==  OPT_0_SPECIALNE (zobrazi/nezobrazi "pridanú hodnotu" oproti papierovej LH)
 #define BIT_OPT_0_VERSE                     1
 #define BIT_OPT_0_REFERENCIE                2
 #define BIT_OPT_0_CITANIA                   4
 
-#define POCET_OPT_1_CASTI_MODLITBY         12 /* jednotlivé komponenty option 1 -- bity pre force option 1 */
+#define POCET_OPT_1_CASTI_MODLITBY         12 // jednotlivé komponenty option 1 -- bity pre force option 1
 extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
-/* 2011-04-11: úprava vıznamu (a interpretácie) option 1 == OPT_1_CASTI_MODLITBY (zobrazi/nezobrazi najmä pevné/nemenné súèasti modlitieb, ale aj iné, èo sú/nie sú v LH) */
+// 2011-04-11: úprava vıznamu (a interpretácie) option 1 == OPT_1_CASTI_MODLITBY (zobrazi/nezobrazi najmä pevné/nemenné súèasti modlitieb, ale aj iné, èo sú/nie sú v LH)
 #define BIT_OPT_1_TEDEUM                    1
 #define BIT_OPT_1_RUBRIKY                   2
 #define BIT_OPT_1_CHVALOSPEVY               4
@@ -1263,9 +1263,9 @@ extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
 #define BIT_OPT_1_ZALM95                 1024 // pouíva sa pre ranné chvály a vešpery -- 1 = vzia namiesto almov 24, 67, 100 alm 95
 #define BIT_OPT_1_PROSBY_ZVOLANIE        2048 // 1 = zvolanie v prosbách zobrazi (opakova) po kadej prosbe
 
-#define POCET_OPT_2_HTML_EXPORT             8 /* jednotlivé komponenty option 2 -- bity pre force option 2 */
+#define POCET_OPT_2_HTML_EXPORT             8 // jednotlivé komponenty option 2 -- bity pre force option 2
 extern short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];
-/* 2011-04-12: úprava vıznamu (a interpretácie) option 2 (rozlièné prepínaèe pre [online aj offline] export, napr. tlaèidlá, zobrazenie dátumov a podobne) */
+// 2011-04-12: úprava vıznamu (a interpretácie) option 2 (rozlièné prepínaèe pre [online aj offline] export, napr. tlaèidlá, zobrazenie dátumov a podobne)
 #define BIT_OPT_2_ISO_DATUM                 1
 #define BIT_OPT_2_BUTTON_PRVE_VESPERY       2
 #define BIT_OPT_2_FONT_FAMILY               4 // 0 = Serif, 1 = Sans Serif
@@ -1275,37 +1275,37 @@ extern short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];
 #define BIT_OPT_2_TEXT_WRAP                64 // 1 = zobrazi zalomenie v textoch modlitby pod¾a tlaèenej LH
 #define BIT_OPT_2_BUTTONY_USPORNE         128 // 1 = zobrazi buttony pre modlitby v úspornej podobe (tabu¾ka) kvôli mobilnım zariadeniam
 
-#define POCET_OPT_4_OFFLINE_EXPORT          1 /* jednotlivé komponenty option 4 -- bity pre force option 4 */
+#define POCET_OPT_4_OFFLINE_EXPORT          1 // jednotlivé komponenty option 4 -- bity pre force option 4
 extern short int _global_opt_offline_export[POCET_OPT_4_OFFLINE_EXPORT];
-/* 2011-04-08: úprava vıznamu (a interpretácie) option 4 (rozlièné prepínaèe pre offline export, napr. aj batch mód) */
+// 2011-04-08: úprava vıznamu (a interpretácie) option 4 (rozlièné prepínaèe pre offline export, napr. aj batch mód)
 #define BIT_OPT_4_MESIAC_RIADOK             1
 
-/* globalna premenna, co obsahuje string vypisany na obsazovku */
+// globalna premenna, co obsahuje string vypisany na obsazovku
 extern char *_global_string;
-extern char *_global_string2; /* obsahuje I, II, III, IV, V alebo pismeno roka */
-extern char *_global_string_farba; /* 2006-08-19: doplnené */
+extern char *_global_string2; // obsahuje I, II, III, IV, V alebo pismeno roka
+extern char *_global_string_farba; // 2006-08-19: doplnené
 // 2011-10-04: pridané, pre titulok modlitby (u sa nepriliepa do _global_string)
 extern char _global_string_modlitba[SMALL];
 
-extern char *_global_buf; /* 2006-08-01: túto premennú tie alokujeme */
-extern char *_global_buf2; /* 2006-08-01: túto premennú tie alokujeme */
+extern char *_global_buf; // 2006-08-01: túto premennú tie alokujeme
+extern char *_global_buf2; // 2006-08-01: túto premennú tie alokujeme
 
-/* pridane 13/04/2000A.D.; definovane v breviar.cpp */
+// pridane 13/04/2000A.D.; definovane v breviar.cpp
 extern short int _global_linky;
 
 /* 2006-07-11: Pridané kvôli jazykovım mutáciám (breviar.cpp) 
  * 2010-08-04: zmenené _global_language na _global_jazyk (doteraz bolo len pomocou #define)
  */
 extern short int _global_jazyk;
-/* 2010-08-04: pridané kvôli kalendárom (napr. reho¾nı), súvisí s jazykovımi mutáciami */
+// 2010-08-04: pridané kvôli kalendárom (napr. reho¾nı), súvisí s jazykovımi mutáciami
 extern short int _global_kalendar;
 
-extern short int _global_css; /* 2008-08-08: Pridané kvôli rôznym css */
+extern short int _global_css; // 2008-08-08: Pridané kvôli rôznym css
 
-extern short int _global_font; /* 2011-05-06: Pridané kvôli rôznym fontom */
-extern short int _global_font_size; /* 2011-05-13: Pridané kvôli rôznym ve¾kostiam fontov */
+extern short int _global_font; // 2011-05-06: Pridané kvôli rôznym fontom
+extern short int _global_font_size; // 2011-05-13: Pridané kvôli rôznym ve¾kostiam fontov
 
-/* 2006-10-17: Pridané kvôli kompletóriu: niekedy obsahuje a dva almy */
+// 2006-10-17: Pridané kvôli kompletóriu: niekedy obsahuje a dva almy
 extern short int _global_pocet_zalmov_kompletorium;
 
 extern const char *nazov_jazyka[POCET_JAZYKOV + 1];
@@ -1327,9 +1327,9 @@ extern const char *nazov_fontu_CSS[POCET_FONTOV + 1];
 extern const char *nazov_font_size_jazyk[POCET_FONT_SIZE + 1][POCET_JAZYKOV + 1];
 extern const char *nazov_font_size_css[POCET_FONT_SIZE + 1];
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 /* tu nasleduju funkcie(), ibaze by som inkludoval "liturgia.cpp" */
 
 short int _allocate_global_var(void);

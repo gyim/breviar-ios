@@ -32,7 +32,7 @@
 #include "mysystem.h"
 #include "mysysdef.h"
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 /* globalne premenne -- deklarovane v liturgia.h, definovane tu */
 /* 18/02/2000A.D. */
 
@@ -171,7 +171,7 @@ extern char _global_string_modlitba[SMALL];
 
 extern char *_global_buf; /* 2006-08-01: túto premennú tiež alokujeme */
 extern char *_global_buf2; /* 2006-08-01: túto premennú tiež alokujeme */
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 
 /* 2006-07-11: Pridané kvôli jazykovým mutáciám (breviar.cpp)
  * 2010-08-04: zmenené _global_language na _global_jazyk (doteraz bolo len pomocou #define)

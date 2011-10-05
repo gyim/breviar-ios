@@ -218,7 +218,7 @@ char _anchor_head[SMALL];
 
 /* #define (stringove konstanty) presunute do header-u dbzaltar.h, 2003-08-15 */
 /* globalne premenne prehodene do liturgia.h, 17/02/2000A.D. */
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 
 // 2007-11-07, doplnené: špeciálne správanie pre 2. november: VŠETKÝCH VERNÝCH ZOSNULÝCH, spomienka
 //#define su_zalmy_vlastne ((_global_den.denvt == DEN_NEDELA) || (_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || ((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)))
@@ -498,7 +498,7 @@ short int su_kcit_kresp_modlitba_mcd_vlastne(short int m){
  * 2007-10-23a.D.
  */
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 /* nasledujuca pasaz bola kedysi fajl sets.c */
 
 void _set_popis(short int modlitba, const char *file, const char *anchor){ /* pridana 05/04/2000A.D. */
@@ -1098,7 +1098,7 @@ void _set_2citanie_spompost(short int modlitba, const char *file, const char *an
 
 
 /* koniec pasaze, co bola kedysi sets.c -- 22/02/2000A.D. */
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 
 /* files - nazvy suborov pre zaltar styroch tyzdnov */
 char _file[SMALL]; /* nazov súboru, napr. _1ne.htm */

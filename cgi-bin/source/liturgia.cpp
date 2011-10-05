@@ -42,7 +42,7 @@
 #include <ctype.h>
 
 /* globalne premenne prehodene do liturgia.h, 17/02/2000A.D. */
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 short int _allocate_global_var(void){
 	short int ret = SUCCESS;
 	Log("Allocating memory...\n");
@@ -301,7 +301,7 @@ short int _deallocate_global_var(void){
 	return SUCCESS;
 }/* _deallocate_global_var() */
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 /* vezme retazec a porovna s nazvami mesiaca; ak najde, vrati, inak 0 */
 short int cislo_mesiaca(char *mesiac){
 	short int ret = 0;
@@ -313,7 +313,7 @@ short int cislo_mesiaca(char *mesiac){
 	return ret;
 }/* cislo_mesiaca() */
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 /* urobi velke pismena 
  * 2011-01-31: nesmie pritom v HTML stringoch upravovaù kÛdovÈ men·, napr. &mdash; na veækÈ pÌsmen·
  */
@@ -375,7 +375,7 @@ char *caps_BIG(const char *input){
 	return (_global_pom_str);
 }/* caps_BIG() */
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 /* odstr·ni diakritiku
  * 2011-04-05: nesmie pritom v HTML stringoch upravovaù kÛdovÈ men·, napr. &mdash;
  * 2011-04-06: zmenÌ aj dlhÈ pomlËky na obyËajn˝ spojovnÌk (znak mÌnus)
@@ -460,7 +460,7 @@ char *remove_diacritics(const char *input){
 	return (_global_pom_str);
 }/* remove_diacritics() */
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 /* konvertuje underscore na nezlomiteænÈ medzery
  * 2011-05-02: vytvorenÈ
  * 2011-05-16: opravenÈ (char sa musÌ najprv konvertovaù na char * a aû potom appendovaù strcat)
@@ -851,7 +851,7 @@ short int poradie(_struct_den_mesiac den_a_mesiac, short int rok){
 	return poradie(den_a_mesiac.den, den_a_mesiac.mesiac, rok);
 }
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 
 /* Francuzsky vedec Joseph Scaliger vydal v roku 1583 traktat
  * "Nova praca o zdokonaleni letopoctu". Zaviedol juliansky datum
@@ -884,7 +884,7 @@ long juliansky_datum(short int den, short int mesiac, short int rok){
 	return juliansky_datum(por, rok);
 }
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 /* nasledujuce funkcie zistuju datum velkonocnej nedele */
 
 /* urcenie datumu VELKONOCNA_NEDELA podla Gaussovho pravidla */
@@ -946,7 +946,7 @@ short int _velkonocna_nedela(short int rok){
 	return poradie(result, rok);
 }
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 /* nasledujuce funkcie podla velkonocnej nedele urcia den v tyzdni */
 
 /* vrati cislo dna v tyzdni zodpovedajuce datumu,
@@ -968,7 +968,7 @@ short int den_v_tyzdni(_struct_den_mesiac den_a_mesiac, short int rok){
 	return den_v_tyzdni(den_a_mesiac.den, den_a_mesiac.mesiac, rok);
 }
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 /* nasledujuce funkcie urcia nedelne pismeno/pismena roka resp. dna v roku */
 
 /* vrati nedelne pismeno pre dany rok;
@@ -1026,7 +1026,7 @@ char nedelne_pismeno(_struct_den_mesiac den_a_mesiac, short int rok){
 	return char_nedelne_pismeno[_nedelne_pismeno(den_a_mesiac, rok)];
 }/* nedelne_pismeno() */
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 
 /* z poradoveho cisla dna v roku urobi datum,
  * 1 == 1.1., 2 == 2.1., 32 == 1.2., ... 365 == 31.12./30.12.
@@ -1050,7 +1050,7 @@ _struct_den_mesiac por_den_mesiac(short int poradie, short int rok){
 	return result;
 }
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 /* nasledujuce short int _...() funkcie vracaju poradove cislo dna v roku */
 
 /* vrati poradove cislo dna, kt. zodpoveda sviatku sv. rodiny */
@@ -1109,14 +1109,14 @@ short int _prva_adventna_nedela(short int rok){
 	return (PRVA_ADVENTNA_NEDELA_b + p + prestupny(rok));
 }
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 /* nasledujuce _struct_den_mesiac ...() funkcie vracaju <den, mesiac> */
 
 _struct_den_mesiac prva_adventna_nedela(short int rok){
 	return (por_den_mesiac(_prva_adventna_nedela(rok), rok));
 }
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 
 /* vrati 0 == rok A, 1 == rok B, 2 == rok C */
 /* pozor!
@@ -1192,7 +1192,7 @@ _struct_dm por_den_mesiac_dm(short int poradie, short int rok){
 	return result;
 }
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 
 /* vrati cislo tyzdna v obdobi cez rok, ktory nasleduje po nedeli zoslania
  * ducha sv. - teda po konci velkonocneho obdobia
@@ -1234,7 +1234,7 @@ void init_global_pm_sobota(void){
 	_global_pm_sobota.kalendar = KALENDAR_VSEOBECNY;
 }
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 /* nasledujuce void _dm_...() funkcie strukturu dm zapisu do _global_result */
 void _dm_popolcova_streda(short int rok, short int _vn){
 
@@ -1406,7 +1406,7 @@ void _init_dm(_struct_dm a){
 }
 #endif
 
-/* ------------------------------------------------------------------- */
+//---------------------------------------------------------------------
 /* analyzuj_rok()
  *
  * vstup:  short int year
