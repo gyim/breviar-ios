@@ -1648,6 +1648,25 @@ const char *html_text_option1_zalm95_explain[POCET_JAZYKOV + 1] =
  "Ha a reggeli vagy az esti dicséretben elõfordul a 23., 66. illetve 99. zsoltár, amely az Imádságra hívásban már imádkozva volt, akkor az adott imádságban a 94. zsoltár kerül helyébe."
 };
 
+const char *html_text_option1_prosby_zvolanie[POCET_JAZYKOV + 1] = 
+{"zvolanie v prosbách opakova po kadej prosbe", 
+ "xxx", 
+ "xxx", 
+ "xxx",
+ "",
+ "xxx", 
+ "xxx"
+};
+const char *html_text_option1_prosby_zvolanie_explain[POCET_JAZYKOV + 1] = 
+{"V rannıch chválach a vešperách opakova zvolanie v prosbách po kadej prosbe.", 
+ "xxx", 
+ "xxx", 
+ "xxx",
+ "xxx", 
+ "xxx", 
+ "xxx"
+};
+
 const char *html_text_option1_skryt_popis_svaty[POCET_JAZYKOV + 1] = 
 {"nezobrazi popis k modlitbe svätého", 
  "nezobrazit popis pøi modlitbì ke cti svìtce", 
@@ -1820,6 +1839,25 @@ const char *html_text_option2_textwrap_explain[POCET_JAZYKOV + 1] =
  "", 
  "xxx", 
  "Legyenek-e tördelve az imaórák szövegében  a zsoltárok, kantikumok és más versrészek hosszú sorai, mint a nyomtatott kiadásban.", 
+};
+
+const char *html_text_option2_buttons_usporne[POCET_JAZYKOV + 1] = 
+{"tlaèidlá pre modlitby zobrazi úsporne",
+ "xxx", 
+ "xxx", 
+ "",
+ "",
+ "xxx", 
+ "xxx", 
+};
+const char *html_text_option2_buttons_usporne_explain[POCET_JAZYKOV + 1] = 
+{"Èi sa majú tlaèidlá pre modlitby zobrazi úsporne, v tabu¾ke (menšia šírka) kvôli mobilnım zariadeniam.", 
+ "xxx", 
+ "xxx", 
+ "",
+ "", 
+ "xxx", 
+ "xxx", 
 };
 
 // 2011-05-06: doplnené

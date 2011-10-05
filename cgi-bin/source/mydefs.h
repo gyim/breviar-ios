@@ -569,6 +569,14 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPTF1_ZALM95 "of1z95"
 #endif
 
+// zvolanie v prosb·ch zobraziù (opakovaù) po kaûdej prosbe
+#define MODL_OPTF1_PROSBY_ZVOLANIE 92
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF1_PROSBY_ZVOLANIE "MODL_OPTF1_PROSBY_ZVOLANIE"
+#else
+	#define STR_MODL_OPTF1_PROSBY_ZVOLANIE "of1prz"
+#endif
+
 /* pre force option 2 jednotlivÈ bit-komponenty (parci·lne voæby) */
 
 // ISO form·t d·tumu
@@ -625,6 +633,14 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 	#define STR_MODL_OPTF2_TEXT_WRAP "MODL_OPTF2_TEXT_WRAP"
 #else
 	#define STR_MODL_OPTF2_TEXT_WRAP "of2tw"
+#endif
+
+// zobraziù buttony pre modlitby v ˙spornej podobe (tabuæka) kvÙli mobiln˝m zariadeniam
+#define MODL_OPTF2_BUTTONY_USPORNE 88
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF2_BUTTONY_USPORNE "MODL_OPTF2_BUTTONY_USPORNE"
+#else
+	#define STR_MODL_OPTF2_BUTTONY_USPORNE "of2btnu"
 #endif
 
 /* 2008-08-08: PridanÈ kvÙli rÙznym css */

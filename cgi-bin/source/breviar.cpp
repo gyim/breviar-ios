@@ -1133,6 +1133,7 @@ short int setForm(void){
 				case 8: strcat(local_str, STR_MODL_OPTF1_ZALMY_SV); break;
 				case 9: strcat(local_str, STR_MODL_OPTF1_PLNE_RESP); break;
 				case 10: strcat(local_str, STR_MODL_OPTF1_ZALM95); break;
+				case 11: strcat(local_str, STR_MODL_OPTF1_PROSBY_ZVOLANIE); break;
 			}// switch(i)
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF_CASTI_MODLITBY[i]);
@@ -1156,6 +1157,7 @@ short int setForm(void){
 				// case 4: strcat(local_str, STR_MODL_OPTF2_FONT_SIZE); break;
 				case 5: strcat(local_str, STR_MODL_OPTF2_NAVIGATION); break;
 				case 6: strcat(local_str, STR_MODL_OPTF2_TEXT_WRAP); break;
+				case 7: strcat(local_str, STR_MODL_OPTF2_BUTTONY_USPORNE); break;
 			}// switch(i)
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF_HTML_EXPORT[i]);
@@ -6875,6 +6877,14 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_ZALM95, ANO, html_text_option1_zalm95_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALM95) == BIT_OPT_1_ZALM95)? html_option_checked: STR_EMPTY);
 	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_zalm95_explain[_global_jazyk], html_text_option1_zalm95[_global_jazyk]);
 
+	if(_global_jazyk == JAZYK_SK){
+		/* pole (checkbox) WWW_MODL_OPTF1_PROSBY_ZVOLANIE */
+		Export("<br>");
+		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_PROSBY_ZVOLANIE, NIE);
+		Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_PROSBY_ZVOLANIE, ANO, html_text_option1_prosby_zvolanie_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PROSBY_ZVOLANIE) == BIT_OPT_1_PROSBY_ZVOLANIE)? html_option_checked: STR_EMPTY);
+		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_prosby_zvolanie_explain[_global_jazyk], html_text_option1_prosby_zvolanie[_global_jazyk]);
+	}// if(_global_jazyk == JAZYK_SK)
+
 #ifdef OS_Windows_Ruby
 	/* pole (checkbox) WWW_MODL_OPTF1_ZALMY_INE */
 	Export("<br>");
@@ -7025,6 +7035,12 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF2_TEXT_WRAP, ANO, html_text_option2_textwrap_explain[_global_jazyk], ((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_TEXT_WRAP) == BIT_OPT_2_TEXT_WRAP)? html_option_checked: STR_EMPTY);
 		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option2_textwrap_explain[_global_jazyk], html_text_option2_textwrap[_global_jazyk]);
 	}
+
+	/* pole (checkbox) WWW_MODL_OPTF2_BUTTONY_USPORNE */
+	Export("<br>");
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF2_BUTTONY_USPORNE, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF2_BUTTONY_USPORNE, ANO, html_text_option2_buttons_usporne_explain[_global_jazyk], ((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTONY_USPORNE) == BIT_OPT_2_BUTTONY_USPORNE)? html_option_checked: STR_EMPTY);
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option2_buttons_usporne_explain[_global_jazyk], html_text_option2_buttons_usporne[_global_jazyk]);
 
 	Export("</td></tr>\n");
 
@@ -12345,6 +12361,7 @@ short int getForm(void){
 			case 8: strcat(local_str, STR_MODL_OPTF1_ZALMY_SV); break;
 			case 9: strcat(local_str, STR_MODL_OPTF1_PLNE_RESP); break;
 			case 10: strcat(local_str, STR_MODL_OPTF1_ZALM95); break;
+			case 11: strcat(local_str, STR_MODL_OPTF1_PROSBY_ZVOLANIE); break;
 		}/* switch(i) */
 		ptr = getenv(local_str);
 		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
@@ -12368,6 +12385,7 @@ short int getForm(void){
 			// case 4: strcat(local_str, STR_MODL_OPTF2_FONT_SIZE); break;
 			case 5: strcat(local_str, STR_MODL_OPTF2_NAVIGATION); break;
 			case 6: strcat(local_str, STR_MODL_OPTF2_TEXT_WRAP); break;
+			case 7: strcat(local_str, STR_MODL_OPTF2_BUTTONY_USPORNE); break;
 		}/* switch(i) */
 		ptr = getenv(local_str);
 		/* ak nie je vytvorena, ak t.j. ptr == NULL, tak nas to netrapi,
@@ -13118,6 +13136,7 @@ short int parseQueryString(void){
 			case 8: strcat(local_str, STR_MODL_OPTF1_ZALMY_SV); break;
 			case 9: strcat(local_str, STR_MODL_OPTF1_PLNE_RESP); break;
 			case 10: strcat(local_str, STR_MODL_OPTF1_ZALM95); break;
+			case 11: strcat(local_str, STR_MODL_OPTF1_PROSBY_ZVOLANIE); break;
 		}/* switch(j) */
 		/* premenn· WWW_MODL_OPTF1_... (nepovinn·), j = 0 aû POCET_OPT_1_CASTI_MODLITBY */
 		i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
@@ -13149,6 +13168,7 @@ short int parseQueryString(void){
 			// case 4: strcat(local_str, STR_MODL_OPTF2_FONT_SIZE); break;
 			case 5: strcat(local_str, STR_MODL_OPTF2_NAVIGATION); break;
 			case 6: strcat(local_str, STR_MODL_OPTF2_TEXT_WRAP); break;
+			case 7: strcat(local_str, STR_MODL_OPTF2_BUTTONY_USPORNE); break;
 		}/* switch(j) */
 		/* premenn· WWW_MODL_OPT2_... (nepovinn·), j = 0 aû POCET_OPT_2_HTML_EXPORT */
 		i = 0; /* param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0 */
