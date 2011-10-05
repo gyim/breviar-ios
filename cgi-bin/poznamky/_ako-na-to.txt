@@ -1,3 +1,36 @@
+breviar.exe -qpbm -d1 -m10 -r2011 -f31 -g10 -p2011 -brob2011_HU.bat -jhu -nbreviar.exe -i..\..\breviar.sk\include_hu\ -usimple -M2
+
+2011-09-30: batch mÛd opraven˝
+
+
+-M2: skoro ako web, tlaËidl·
+-M3: jednoduchöÌ layout, podobne ako web
+ToDo: pre M2 dorobiù aj zobrazovanie tlaËidiel ako je na webe (d·tum a modlitby)
+
+
+breviar.exe -qpbm -d1 -m9 -r2011 -f31 -g12 -p2011 -brob-2011-09--12-SK.bat -jsk -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M3
+
+2011-09-29: divnÈ spr·vanie sa batch mÛdu!
+
+breviar.exe -qpbm -d1 -m9 -r2011 -f31 -g10 -p2011 -brob2011_HU.bat -jhu -nbreviar.exe -i..\..\breviar.sk\include_hu\ -usimple -M2
+	-- 2011-09-29: maÔarsk˝ sept+okt vzor
+
+breviar.exe -qpbm -d1 -m9 -r2011 -f31 -g12 -p2011 -brob-2011-09--12-SK.bat -jsk -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M2
+	-- 2011-08-29: export pre mariangursky@gmail.com
+
+breviar.exe -qpbm -d1 -m8 -r2011 -f5 -g9 -p2011 -brob2011augSK.bat -jsk -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M2 -256
+
+breviar.exe -qpbm -d1 -m8 -r2011 -f5 -g9 -p2011 -brob2011augHU.bat -jhu -nbreviar.exe -i..\..\breviar.sk\include_hu\ -usimple -M2 -256
+	-- 2011-08-02: maÔarsk˝ august
+
+breviar.exe -qpbm -d1 -m4 -r2011 -f31 -g5 -p2011 -brob2011.bat -jsk -ksdb -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M2
+	-- 2011-04-13: aprÌl--m·j 2011 slovensky, buttony (pre salezi·nov); aj s doplnkovou psalmÛdiou (option1 = 64 pre local by default)
+
+__________________________________________________________________________________________________________________________________________
+
+prerobenie options a ich v˝znamu 2011-04
+__________________________________________________________________________________________________________________________________________
+
 breviar.exe -i..\..\breviar.sk\include\ -qpsqs -s"qt=pdnes"
 
 breviar.exe -qpbm -d1 -m1 -r2011 -f31 -g12 -p2011 -11 -brob2011.bat -jsk -ksdb -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M3
