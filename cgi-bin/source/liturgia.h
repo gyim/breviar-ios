@@ -518,6 +518,9 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 #define PARAM_PLNE_RESP                     "PLNE_RESP"
 #define PARAM_PLNE_RESP_BODKA               "PLNE_RESP_BODKA"
 
+// 2011-10-05: doplnené kvôli zobrazovaniu/skrývaniu opakovaného zvolania v prosbách (ranné chvály, vešpery)
+#define PARAM_ZVOLANIE                      "ZVOLANIE"
+
 // 2011-04-04: doplnené zobrazenie/skrytie èíslovania veršov v žalmoch, chválospevoch a biblických èítaniach
 #define PARAM_CISLO_VERSA_BEGIN				"v"
 #define PARAM_CISLO_VERSA_END				"/v"

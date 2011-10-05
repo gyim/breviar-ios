@@ -1821,7 +1821,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 
 					/* 2009-04-08, doplnenÈ: zakonËenie modlitby (pre modlitbu cez deÚ a kompletÛrium sa pouûÌva kratöie zakonËenie) */
 
-					/* zakonËenie modlitby - Skrze... */
+					// zakonËenie modlitby - Skrze...
 					if(equals(rest, PARAM_ZAKONCENIE_SKRZE) || equals(rest, PARAM_ZAKONCENIE_SKRZE_MALE)){
 						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
 							write = NIE;
@@ -1850,9 +1850,9 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							write = ANO;
 							Log("skrze-koniec.\n");
 						}
-					}/* zakonËenie modlitby - Skrze... */
+					}// zakonËenie modlitby - Skrze...
 
-					/* zakonËenie modlitby - Lebo ty... */
+					// zakonËenie modlitby - Lebo ty...
 					if(equals(rest, PARAM_ZAKONCENIE_LEBO_TY) || equals(rest, PARAM_ZAKONCENIE_LEBO_TY_MALE)){
 						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
 							write = NIE;
@@ -1881,9 +1881,9 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							write = ANO;
 							Log("lebo-ty-koniec.\n");
 						}
-					}/* zakonËenie modlitby - Lebo ty... */
+					}// zakonËenie modlitby - Lebo ty...
 
-					/* zakonËenie modlitby - Lebo on... */
+					// zakonËenie modlitby - Lebo on...
 					if(equals(rest, PARAM_ZAKONCENIE_LEBO_ON) || equals(rest, PARAM_ZAKONCENIE_LEBO_ON_MALE)){
 						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
 							write = NIE;
@@ -1900,7 +1900,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							if(equals(rest, PARAM_ZAKONCENIE_LEBO_ON_MALE)){
 								zakoncenie[0] = zakoncenie[0] + ('a'-'A'); // posun z veækÈho pÌsmena na malÈ: pozor, funguje len pre z·kladnÈ znaky ASCII
 							}
-							/* 2011-05-16: nezlomiteænÈ medzery */
+							// 2011-05-16: nezlomiteænÈ medzery
 							Export("%s", convert_nonbreaking_spaces(zakoncenie));
 							Log("lebo-on-zaËiatok...\n");
 						}
@@ -1912,9 +1912,9 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							write = ANO;
 							Log("lebo-on-koniec.\n");
 						}
-					}/* zakonËenie modlitby - Lebo on... */
+					}// zakonËenie modlitby - Lebo on...
 
-					/* zakonËenie modlitby - On je... (len SK); doplnenÈ 2010-06-07 */
+					// zakonËenie modlitby - On je... (len SK); doplnenÈ 2010-06-07
 					if(equals(rest, PARAM_ZAKONCENIE_ON_JE) && _global_jazyk == JAZYK_SK){
 						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
 							write = NIE;
@@ -1928,7 +1928,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							else{
 								mystrcpy(zakoncenie, text_ZAKONCENIE_ON_JE_dlhe, MAX_ZAKONCENIE);
 							}
-							/* 2011-05-16: nezlomiteænÈ medzery */
+							// 2011-05-16: nezlomiteænÈ medzery
 							Export("%s", convert_nonbreaking_spaces(zakoncenie));
 							Log("on-je-zaËiatok...\n");
 						}
@@ -1940,9 +1940,9 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							write = ANO;
 							Log("on-je-koniec.\n");
 						}
-					}/* zakonËenie modlitby - On je... (len SK) */
+					}// zakonËenie modlitby - On je... (len SK)
 
-					/* zakonËenie modlitby - ktor˝ je... (len SK); doplnenÈ 2011-01-14 */
+					// zakonËenie modlitby - ktor˝ je... (len SK); doplnenÈ 2011-01-14
 					if(equals(rest, PARAM_ZAKONCENIE_KTORY_JE) && _global_jazyk == JAZYK_SK){
 						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
 							write = NIE;
@@ -1956,7 +1956,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							else{
 								mystrcpy(zakoncenie, text_ZAKONCENIE_KTORY_JE_dlhe, MAX_ZAKONCENIE);
 							}
-							/* 2011-05-16: nezlomiteænÈ medzery */
+							// 2011-05-16: nezlomiteænÈ medzery
 							Export("%s", convert_nonbreaking_spaces(zakoncenie));
 							Log("ktor˝-je-zaËiatok...\n");
 						}
@@ -1968,11 +1968,11 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							write = ANO;
 							Log("ktor˝-je-koniec.\n");
 						}
-					}/* zakonËenie modlitby - ktor˝ je... (len SK) */
+					}// zakonËenie modlitby - ktor˝ je... (len SK)
 
-					/* 2011-07-07, doplnenÈ: zobrazovanie/skr˝vanie dlhöieho zakonËenia responzÛria po druhom ËÌtanÌ (tlaËen· verzia m· kratöie zakonËenie, pokiaæ nie je responzÛrium rozdelenÈ zlomom strany, presnejöie, otoËenÌm listu) */
+					// 2011-07-07, doplnenÈ: zobrazovanie/skr˝vanie dlhöieho zakonËenia responzÛria po druhom ËÌtanÌ (tlaËen· verzia m· kratöie zakonËenie, pokiaæ nie je responzÛrium rozdelenÈ zlomom strany, presnejöie, otoËenÌm listu)
 
-					/* zakonËenie modlitby - Skrze... */
+					// plnÈ responzÛrium...
 					if((equals(rest, PARAM_PLNE_RESP)) || (equals(rest, PARAM_PLNE_RESP_BODKA))){
 						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
 #if defined(EXPORT_HTML_SPECIALS)
@@ -2003,7 +2003,38 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							}
 							Log("resp-koniec.\n");
 						}// INCLUDE_END
-					}/* zakonËenie modlitby - Skrze... */
+					}// plnÈ responzÛrium...
+
+					// 2011-10-05, doplnenÈ: zobrazovanie/skr˝vanie opakovanÈho zvolania v prosb·ch (rannÈ chv·ly, veöpery)
+
+					// zvolanie v prosb·ch...
+					if(equals(rest, PARAM_ZVOLANIE)){
+						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("(start)zvolanie");
+#endif
+							if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PROSBY_ZVOLANIE) == BIT_OPT_1_PROSBY_ZVOLANIE){
+								;
+							}
+							else{
+								write = NIE;
+								Log("  ruöÌm writing to export file, kvÙli PARAM_ZVOLANIE...\n");
+							}
+						}// INCLUDE_BEGIN
+						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("zvolanie(stop)");
+#endif
+							if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PROSBY_ZVOLANIE) == BIT_OPT_1_PROSBY_ZVOLANIE){
+								;
+							}
+							else{
+								write = ANO;
+								Log("  op‰ù writing to export file, PARAM_ZVOLANIE...\n");
+							}
+							Log("resp-koniec.\n");
+						}// INCLUDE_END
+					}// zvolanie v prosb·ch...
 
 					/* 2011-01-12: doplnenÈ voliteænÈ zobrazovanie/skr˝vanie alternatÌvnej antifÛny pre ûalmy/chv·lospevy 
 					 * 2011-01-17: upravenÈ tak, aby sa nezobrazovalo len pre spomienky sv‰t˝ch [tam spadaj˙ aj liturgickÈ sl·venia 1.1. a pod.]
@@ -2026,8 +2057,8 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 									Export("(stop)nie je myslienka");
 #endif
 									Log("  rusim writing to export file, kvoli myslienka-k-zalmu...\n");
-								}/* vnutri_inkludovaneho == 1 */
-							}/* INCLUDE_BEGIN */
+								}// vnutri_inkludovaneho == 1
+							}// INCLUDE_BEGIN
 							else if(equals(strbuff, INCLUDE_END)){
 								vnutri_myslienky = NIE;
 								if(vnutri_inkludovaneho == 1){
@@ -2036,10 +2067,10 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 #endif
 									write = ANO;
 									Log("  opat writing to export file, end of myslienka-k-zalmu.\n");
-								}/* vnutri_inkludovaneho == 1 */
-							}/* INCLUDE_END */
+								}// vnutri_inkludovaneho == 1
+							}// INCLUDE_END
 						}
-					}/* voliteænÈ zobrazovanie/skr˝vanie alternatÌvnej antifÛny pre ûalmy/chv·lospevy */
+					}// voliteænÈ zobrazovanie/skr˝vanie alternatÌvnej antifÛny pre ûalmy/chv·lospevy
 
 					// 2011-08-31: doplnenÈ voliteænÈ zobrazovanie/skr˝vanie nadpisu pre ûalmy/chv·lospevy podæa myölienky
 					if(equals(rest, PARAM_PSALMODIA_NADPIS)){
@@ -2057,8 +2088,8 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 									Export("(stop)nie je nadpis");
 #endif
 									Log("  rusim writing to export file, kvoli psalmodia-nadpis...\n");
-								}/* vnutri_inkludovaneho == 1 */
-							}/* INCLUDE_BEGIN */
+								}// vnutri_inkludovaneho == 1
+							}// INCLUDE_BEGIN
 							else if(equals(strbuff, INCLUDE_END)){
 								vnutri_nadpisu = NIE;
 								if(vnutri_inkludovaneho == 1){
@@ -2067,14 +2098,14 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 #endif
 									write = ANO;
 									Log("  opat writing to export file, end of psalmodia-nadpis.\n");
-								}/* vnutri_inkludovaneho == 1 */
-							}/* INCLUDE_END */
+								}// vnutri_inkludovaneho == 1
+							}// INCLUDE_END
 						}
-					}/* voliteænÈ zobrazovanie/skr˝vanie nadpisu pre ûalmy/chv·lospevy */
+					}// voliteænÈ zobrazovanie/skr˝vanie nadpisu pre ûalmy/chv·lospevy
 
-				}/* !equalsi(rest, modlparam) */
+				}// !equalsi(rest, modlparam)
 				continue;
-		}/* switch(c) */
+		}// switch(c)
 		if(!isbuff){
 			if(vnutri_referencie == ANO){
 				// bez ohæadu na to, ako je nastavenÈ write
@@ -2089,34 +2120,34 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 				z95buff[z95_index++] = (char)c;
 			}
 			if(write == ANO){
-				/* 2011-05-02: nezlomiteænÈ medzery; v DetailLog logujeme 1:1 presne znak bez transform·cie */
+				// 2011-05-02: nezlomiteænÈ medzery; v DetailLog logujeme 1:1 presne znak bez transform·cie
 				if(c == CHAR_NONBREAKING_SPACE){
 					Export(HTML_NONBREAKING_SPACE);
 				}
 				else{
-					Export("%c", c); /* fputc(c, exportfile); */
+					Export("%c", c); // fputc(c, exportfile);
 				}
 				// DetailLog("%c", c);
 			}
 			else ; //skip
-		}/* if(!isbuff) */
+		}// if(!isbuff)
 		else{
 			strbuff[buff_index++] = (char)c;
-			/* 2011-03-29: doplnen· kontrola, Ëi nejde o osamoten˝ znak '{' */
+			// 2011-03-29: doplnen· kontrola, Ëi nejde o osamoten˝ znak '{'
 			if(((isbuff == 1) && (strlen(strbuff) > MAX_BUFFER - 2)) || (buff_index > MAX_BUFFER - 2)){
 				Log("pravdepodobne osamoten˝ znak '{'...\n");
 				isbuff = 0;
 				if(write == ANO){
-					/* 2011-05-02: nezlomiteænÈ medzery; v DetailLog logujeme 1:1 presne reùazec bez transform·cie */
+					// 2011-05-02: nezlomiteænÈ medzery; v DetailLog logujeme 1:1 presne reùazec bez transform·cie
 					Export("%s", convert_nonbreaking_spaces(strbuff));
 					// DetailLog("%s", strbuff);
 				}
-				/* vyËistenie buffra */
+				// vyËistenie buffra
 				buff_index = 0;
 				strbuff[buff_index] = '\0';
-			}/* osamoten˝ znak '{' */
-		}/* else if(!isbuff) */
-	}/* while((c = fgetc(body)) != EOF) */
+			}// osamoten˝ znak '{'
+		}// else if(!isbuff)
+	}// while((c = fgetc(body)) != EOF)
 	fclose(body);
 	Log("--includeFile(): end\n");
 }// includeFile()
