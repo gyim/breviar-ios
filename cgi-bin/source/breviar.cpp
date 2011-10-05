@@ -8854,6 +8854,7 @@ void showAllPrayers(short int den, short int mesiac, short int rok, short int po
 	datum.den = den;
 	datum.mesiac = mesiac;
 	short int opt3 = _global_opt[OPT_3_SPOLOCNA_CAST];
+	static short int opt1 = _global_opt[OPT_1_CASTI_MODLITBY]; // backup pôvodnej hodnoty; parameter o1 (_global_opt 1) pre modlitbu cez deò (doplnková psalmódia)
 
 	Log("showAllPrayers(%d, %s, %d, %d) -- zaèiatok...\n", den, nazov_mesiaca(mesiac - 1), rok, poradie_svaty);
 	Log("_global_den: \n");
@@ -8877,9 +8878,22 @@ void showAllPrayers(short int den, short int mesiac, short int rok, short int po
 	// cyklus pre všetky modlitby
 	for(modlitba = MODL_INVITATORIUM; modlitba <= MODL_KOMPLETORIUM; modlitba++){
 		_global_modlitba = modlitba;
+
 		_global_opt[OPT_3_SPOLOCNA_CAST] = opt3; // potrebné nastavi pôvodnú hodnotu, lebo sa niekde v rozbor_dna_s_modlitbou() upravuje
+
+		if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
+			Log("<!-- MCD (%d, %d) -->", modlitba, opt1);
+			if(((opt1 & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE) && /* delenie trojkou so zvyškom */ (((_global_den.denvr + rok + modlitba) MOD 3) != 0)){
+				Log("<!-- MCD (%d): doplnková psalmódia -->", modlitba);
+				Log("Pre option 1 nastavujem bit pre 'doplnkovú psalmódiu'\n");
+				_global_opt[OPT_1_CASTI_MODLITBY] += BIT_OPT_1_MCD_ZALMY_INE;
+			}// zmena: použitie doplnkovej psalmódie
+		}// mcd
+
 		Log("spúšam showPrayer(%s) z funkcie showAllPrayers()...\n", nazov_modlitby(_global_modlitba));
+
 		LOG_ciara;
+
 		if(modlitba > MODL_INVITATORIUM){
 			// odkaz na vrch stránky
 			Export("<p align=\"center\">");
@@ -8890,10 +8904,17 @@ void showAllPrayers(short int den, short int mesiac, short int rok, short int po
 			// oddelenie
 			Export("\n<hr>\n");
 		}
+
 		rozbor_dna_s_modlitbou(den, mesiac, rok, modlitba, poradie_svaty, /* aj_navigacia */ NIE);
+
 		LOG_ciara;
+
 		Log("...po návrate zo showPrayer(%s) vo funkcii showAllPrayers().\n", nazov_modlitby(_global_modlitba));
-	}
+
+		if(_global_opt[OPT_1_CASTI_MODLITBY] != opt1){
+			_global_opt[OPT_1_CASTI_MODLITBY] = opt1; // restore pôvodnej hodnoty
+		}// obnovenie opt1
+	}// for(modlitba)
 
 	// závereèná navigácia
 	if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_NAVIGATION) == BIT_OPT_2_NAVIGATION){
