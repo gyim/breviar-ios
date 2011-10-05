@@ -17,5 +17,6 @@
 
 -- pri vo¾be modlitby nie pod¾a dátumu (teda liturgické obdobie) navigaèné tlaèidlá pre predošlı, tento a nasledujúci deò strácajú opodstatnenie (je tam nezmysel 0.0.1900) -- da tam len "^ dnes"
 
--- doplni monos (v rámci option 2) generova tlaèidlá v tabu¾ke, aby to zaberalo menšiu šírku (napr. 3 ståpce, 4 riadky)
+-- doplni monos (v rámci option 2) generova tlaèidlá v tabu¾ke, aby to zaberalo menšiu šírku (napr. 3 ståpce, 4 riadky): príklad: 25. máj 2002
+
 
