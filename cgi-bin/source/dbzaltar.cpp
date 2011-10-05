@@ -2749,7 +2749,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 	Log("napokon idem pre modlitbu cez deò skontrolova, èi netreba bra doplnkovú psalmódiu...\n");
 	// 2011-09-06: nastavenie alm 95 ako alternatívy k  24, 67, 100 pre ranné chvály resp. vešpery sa robí na inom mieste
 	if((_global_opt[1] & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE){
-		Log("\táno, beriem doplnkovú psalmódiu.\n");
+		Log("-- áno, beriem doplnkovú psalmódiu.\n");
 		_set_zalmy_mcd_doplnkova_psalmodia();
 		// 2006-01-24: vyòaté do samostatnej funkcie
 		if(_global_den.litobd == OBD_CEZ_ROK){
@@ -2758,7 +2758,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 	}// (_global_opt[1] & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE
 	else{
 		// 2006-02-07: doplnené
-		Log("\tnie, doplnkovú psalmódiu neberiem.\n");
+		Log("-- nie, doplnkovú psalmódiu neberiem.\n");
 	}
 	Log("-- zaltar_zvazok(%d, %d, %d, %d) -- koniec\n", den, tyzzal, obdobie, specialne);
 }/* zaltar_zvazok(); */

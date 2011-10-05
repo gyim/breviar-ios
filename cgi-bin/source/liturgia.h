@@ -278,7 +278,7 @@ struct den_mesiac{ /* takto povodne vyzerala struct dm */
 typedef struct den_mesiac _struct_den_mesiac;
 
 #define POCET_MODLITIEB         14 // 2006-08-02: nepouûÌvalo sa; upravenÈ na 13 (z pÙvodn˝ch 8); 2011-10-03: upravenÈ na 14 kvÙli MODL_VSETKY
-// modlitby; 2011-10-05: vymenenÈ rannÈ chv·ly a posv‰tnÈ ËÌtanie, reöpektujeme usporiadanie tlaËenej LH
+// modlitby; 2011-10-05: vymenenÈ rannÈ chv·ly a posv‰tnÈ ËÌtanie, reöpektujeme usporiadanie tlaËenej LH (pre zmenu ID bude treba upraviù vöetky konötanty)
 #define MODL_INVITATORIUM       0
 #define MODL_POSV_CITANIE       2
 #define MODL_RANNE_CHVALY       1
@@ -304,15 +304,12 @@ typedef struct den_mesiac _struct_den_mesiac;
 // pre modlitbu cez den kvoli zaltaru (psalmodii) rovnake, pridane 2003-08-13
 #define MODL_CEZ_DEN_VSETKY     20
 
-/* 2007-12-05: doplnenÈ kvÙli modlitbe kompletÛria, funkcia _set_kompletorium_nedela() */
+// 2007-12-05: doplnenÈ kvÙli modlitbe kompletÛria, funkcia _set_kompletorium_nedela()
 #define MODL_KOMPLETORIUM_NEDELNA	0
 #define MODL_KOMPLETORIUM_SLAVNOSTI	1
 #define MODL_KOMPLETORIUM_TROJDNIE	2
 
-/* ... a stringy pre ne */
-/* pre modlitbu cez den pridane 2003-07-15 */
-/* pre posvatne citanie pridane 2003-08-06 */
-/* pre invitatÛrium a kompletÛrium pridanÈ 2006-10-11 */
+// ... a stringy pre ne
 #ifdef LONG_PARAM_NAMES
 	#define		STR_MODL_INVITATORIUM	"MODL_INVITATORIUM"
 	#define		STR_MODL_RANNE_CHVALY	"MODL_RANNE_CHVALY"
@@ -341,7 +338,7 @@ typedef struct den_mesiac _struct_den_mesiac;
 	#define		STR_MODL_VSETKY            "*"
 #endif
 
-/* 2005-03-27: Vlozene do definicnej casti z funkcie dbzaltar.cpp::pismenko_modlitby() */
+// 2005-03-27: Vlozene do definicnej casti z funkcie dbzaltar.cpp::pismenko_modlitby()
 #define CHAR_MODL_INVITATORIUM       'i'
 #define CHAR_MODL_RANNE_CHVALY       'r'
 #define CHAR_MODL_POSV_CITANIE       'c'
@@ -358,7 +355,7 @@ typedef struct den_mesiac _struct_den_mesiac;
 // #define CHAR_MODL_CEZ_DEN_VSETKY     'd' // 2005-03-27: pridanÈ
 #define CHAR_MODL_VSETKY             '*' // 2011-10-03: pridanÈ pokusne
 
-/* 2008-04-09: doplnenÈ pre batch generovanie modlitieb */
+// 2008-04-09: doplnenÈ pre batch generovanie modlitieb
 extern const char char_modlitby[POCET_MODLITIEB /* + 1 */];
 extern const char *str_modlitby[POCET_MODLITIEB /* + 1 */];
 
@@ -392,7 +389,7 @@ extern const char *nazov_MODLITBY_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1];
 
 extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 
-/* znaky, ktore znacia (pre interpretovanie templatu) zaciatok a koniec klucoveho slova */
+// znaky, ktore znacia (pre interpretovanie templatu) zaciatok a koniec klucoveho slova
 #define CHAR_KEYWORD_BEGIN   '{'
 #define CHAR_KEYWORD_END     '}'
 #define CHAR_KEYWORD_DIVIDER ':'
