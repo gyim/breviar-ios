@@ -969,7 +969,7 @@ const char *html_button_nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV 
 // táto sa pre HTML buttony nepouíva
 	, {"kompletórium po druhıch vešperách", "kompletáø po druhıch nešporách", "2nd Completary", "II completorio", "", "Kompletáø po druhıch veèerních chválách", "Befejezõ imaóra II.e.d.után" }
 // , {"Vo¾ba detailov...", "Podrobnìji...", "Details...", "Optiónes...", "", "Podrobnìji...", "Részletek..."} // 2011-10-03: prakticky je to teraz len o vıbere spoloènıch èastí
-, {"vıber spoloènej èasti...", "vıbìr spoleèné èásti...", "common texts...", "optiónes...", "", "vıbìr spoleèné èásti...", "xxx..."}
+, {"vıber spoloènej èasti...", "vıbìr spoleèné èásti...", "common texts...", "optiónes...", "", "vıbìr spoleèné èásti...", "közös rész kiválasztása..."}
 , {"všetky", "všechny", "all", "all", "", "všechny", "összes" }
 };
 
@@ -1308,7 +1308,7 @@ const char *html_text_detaily_uvod[POCET_JAZYKOV + 1] =
  "",
  "",
  "Následující monosti mají vliv na vzhled i obsah vygenerované modlitby.\nVyberte si monosti, podle kterıch má bıt modlitba vygenerována.",
- "hu_ (we will translate it later)"
+ "Ez a választási lehetõség befolyásolja a megszerkesztett ima megjelenítését és tartalmát.\nVálassz a szerkeszthetõ lehetõségek közül."
 };
 
 const char *html_text_option1_nemenne_sucasti[POCET_JAZYKOV + 1] = 
@@ -1394,7 +1394,7 @@ const char *html_text_spol_casti_vziat_zo_explain[POCET_JAZYKOV + 1] =
  "",
  "",
  "O svátku ke cti svìtce/svìtice se podle liturgickıch pravidel berou èásti, které se nenachází ve vlastních textech, ze spoleènıch textù, nìkdy je moné vybrat si z více spoleènıch textù; navíc je monost modlit se tyto èásti ze všedního dne.",
- "hu_"
+ "A szentek ünnepén, a liturgikus elõírások szerint, azok az ima részek, amelyek nem találhatók meg a zsolozsma saját részében,  tetszés szerint vehetõk vagy a  közös részbõl, néha több közös részbõl lehet választani, vagy a köznapról."
 };
 
 const char *html_text_zalmy_pre_mcd[POCET_JAZYKOV + 1] = 
@@ -1655,7 +1655,7 @@ const char *html_text_option1_prosby_zvolanie[POCET_JAZYKOV + 1] =
  "xxx",
  "",
  "xxx", 
- "xxx"
+ "minden könyörgés után ismételni a felhívást"
 };
 const char *html_text_option1_prosby_zvolanie_explain[POCET_JAZYKOV + 1] = 
 {"V rannıch chválach a vešperách opakova zvolanie v prosbách po kadej prosbe.", 
@@ -1664,7 +1664,7 @@ const char *html_text_option1_prosby_zvolanie_explain[POCET_JAZYKOV + 1] =
  "xxx",
  "xxx", 
  "xxx", 
- "xxx"
+ "A reggeli és az esti dicséretben minden kérés után ismételni a felhívást."
 };
 
 const char *html_text_option1_skryt_popis_svaty[POCET_JAZYKOV + 1] = 
@@ -1810,7 +1810,7 @@ const char *html_text_option2_navigation[POCET_JAZYKOV + 1] =
  "",
  "",
  "zobrazit navigaci v textech modliteb", 
- "navigálás megjelenítése az imaórák szövegében", 
+ "a  navigáció mutatása az imaszövegben", 
 };
 const char *html_text_option2_navigation_explain[POCET_JAZYKOV + 1] = 
 {"Èi sa majú zobrazova hypertextové odkazy na ostatné modlitby daného dòa, príp. predošlı/nasledovnı deò priamo v texte modlitby.", 
@@ -1848,7 +1848,7 @@ const char *html_text_option2_buttons_usporne[POCET_JAZYKOV + 1] =
  "",
  "",
  "xxx", 
- "xxx", 
+ "az imaórák gombjainak gazdaságos elhelyezése", 
 };
 const char *html_text_option2_buttons_usporne_explain[POCET_JAZYKOV + 1] = 
 {"Èi sa majú tlaèidlá pre modlitby zobrazi úsporne, v tabu¾ke (menšia šírka) kvôli mobilnım zariadeniam.", 
@@ -1857,7 +1857,7 @@ const char *html_text_option2_buttons_usporne_explain[POCET_JAZYKOV + 1] =
  "",
  "", 
  "xxx", 
- "xxx", 
+ "Legyenek-e az imaórák gombjai gazdaságosan elhelyezve, táblázatban (kisebb szélesség) a mobli készülékek céljából.", 
 };
 
 // 2011-05-06: doplnené
@@ -1933,7 +1933,7 @@ const char *html_text_detaily_explain[POCET_JAZYKOV + 1] =
  "",
  "", 
  "Kdy jsou nìkteré vıše uvedené volby nepouitelné pro nìjakou modlitbu, neberou se v úvahu (mohou bıt nastaveny dle libovùle).",
- "hu_"
+ "A többi beállítási lehetõség a fõoldalon található. <p>Amennyiben valamelyik kiválasztott paraméter nem mûködik, figyelmen kívül kell hagyni (vagyis tetszõlegesen állíthatók)."
 };
 
 // 2010-06-04: doplnenı text pre popis do invitatória
