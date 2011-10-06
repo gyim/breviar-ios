@@ -1536,20 +1536,20 @@ const char *html_text_option1_slava_otcu_explain[POCET_JAZYKOV + 1] =
 
 const char *html_text_option1_rubriky[POCET_JAZYKOV + 1] = 
 {"rubriky (napr. závereèné poehnanie)", 
- "rubriky", 
+ "rubriky (napø. závìreèné poehnání)", 
  "rubrics", 
  "",
  "",
- "rubriky", 
+ "rubriky (napø. závìreèné poehnání)", 
  "rubrikák (pl. záró áldás)"
 };
 const char *html_text_option1_rubriky_explain[POCET_JAZYKOV + 1] = 
-{"Liturgia hodín zobrazuje èervenım písmom rozlièné pokyny, zvyèajne vysvet¾ujúce, k modlitbe (pod¾a Všeobecnıch smerníc o LH).", 
- "", 
+{"Liturgia hodín zobrazuje èervenım písmom rozlièné zvyèajne vysvet¾ujúce pokyny k modlitbe (pod¾a Všeobecnıch smerníc o LH).", 
+ "Liturgie hodin uvádí èervenım písmem rozlièné pokyny k modlitbì (èasto podle Všeobecnıch smìrnic).", 
  "", 
  "",
  "", 
- "", 
+ "Liturgie hodin uvádí èervenım písmem rozlièné pokyny k modlitbì (èasto podle Všeobecnıch smìrnic).", 
  "Az imaórák liturgiája piros betûvel különbözõ többnyire magyarázó vagy az imaórát (az „Általános rendelkezések Az imaórák liturgiájáról“ szerint) szabályozó szövegeket jelenít meg. Alaphelyzetben nem mutatja."
 };
 
@@ -1564,11 +1564,11 @@ const char *html_text_option1_otcenas[POCET_JAZYKOV + 1] =
 };
 const char *html_text_option1_otcenas_explain[POCET_JAZYKOV + 1] = 
 {"Liturgia hodín štandardne modlitbu Pána (Otèenáš) v rannıch chválach a vešperách v plnom znení neuvádza.", 
- "", 
+ "Liturgie hodin modlitbu Pánì (Otèenáš) na pøíslušnıch místech v plném znìní neuvádí.", 
  "", 
  "",
  "", 
- "", 
+ "Liturgie hodin modlitbu Pánì (Otèenáš) na pøíslušnıch místech v plném znìní neuvádí.", 
  "Az imaórák liturgiája az Úr imádságát (Miatyánkot) a Reggeli és Esti dicséretben alaphelyzetben nem mutatja."
 };
 
@@ -1583,11 +1583,11 @@ const char *html_text_option1_tedeum[POCET_JAZYKOV + 1] =
 };
 const char *html_text_option1_tedeum_explain[POCET_JAZYKOV + 1] = 
 {"Liturgia hodín hymnus Te Deum v posvätnom èítaní v plnom znení neuvádza.", 
- "", 
+ "Liturgie hodin hymnus Te Deum na pøíslušnıch místech v plném znìní neuvádí.", 
  "", 
  "",
  "", 
- "", 
+ "Liturgie hodin hymnus Te Deum na pøíslušnıch místech v plném znìní neuvádí.", 
  "Az imaórák liturgiája a Téged, Isten, dicsérünk ... himnuszt az Olvasmányos imaórában alaphelyzetben nem mutatja."
 };
 
@@ -1597,16 +1597,16 @@ const char *html_text_option1_plne_resp[POCET_JAZYKOV + 1] =
  "", 
  "",
  "",
- "", 
+ "plné znìní responsorií v modlitbe se ètením", 
  "a válaszos énekek teljes szövege"
 };
 const char *html_text_option1_plne_resp_explain[POCET_JAZYKOV + 1] = 
 {"Liturgia hodín responzóriá po èítaniach v posvätnom èítaní v plnom znení neuvádza (druhá, opakujúca sa èas, je v tlaèenej LH skrátená).", 
- "", 
+ "Liturgie hodin responsoria po èteních v modlitbe se ètením neuvádí v druhé, opakující se èásti, plné znìní.", 
  "", 
  "",
  "", 
- "", 
+ "Liturgie hodin responsoria po èteních v modlitbe se ètením neuvádí v druhé, opakující se èásti, plné znìní.", 
  "Az Imaórák Liturgiája az olvasmányos imaórák válaszos énekeinek teljes szövegét nem mutatja (a második ismétlõdõ rész nyomtatott kiadásban rövidített)."
 };
 
@@ -1639,31 +1639,31 @@ const char *html_text_option1_zalm95[POCET_JAZYKOV + 1] =
  "a 23., 66. illetve a 99.  zsoltár helyett legyen a 94"
 };
 const char *html_text_option1_zalm95_explain[POCET_JAZYKOV + 1] = 
-{"Ak sa v rannıch chválach alebo vešperách vyskytne alm 24, 67 resp. 100, ktorı bol pouitı pre invitatórium, nahradí sa v príslušnej modlitbe almom 95.", 
- "xxx", 
+{"Ak sa v rannıch chválach, vešperách alebo posvätnom èítaní vyskytne alm 24, 67 resp. 100, ktorı bol pouitı pre invitatórium, nahradí sa v príslušnej modlitbe almom 95.", 
+ "Kdy se v ranních chválách, modlitbì se ètením nebo nešporách vyskytne alm 24, 67 resp. 100, kterı se pouil pro uvedení do první modlitby dne, nahradí se v pøíslušné modlitbì almem 95.", 
  "xxx", 
  "xxx",
  "xxx", 
- "xxx", 
+ "Kdy se v ranních chválách, modlitbì se ètením nebo veèerních chválách vyskytne alm 24, 67 resp. 100, kterı se pouil pro invitatorium, nahradí se v pøíslušné modlitbì almem 95.", 
  "Ha a reggeli vagy az esti dicséretben elõfordul a 23., 66. illetve 99. zsoltár, amely az Imádságra hívásban már imádkozva volt, akkor az adott imádságban a 94. zsoltár kerül helyébe."
 };
 
 const char *html_text_option1_prosby_zvolanie[POCET_JAZYKOV + 1] = 
 {"zvolanie v prosbách opakova po kadej prosbe", 
- "xxx", 
+ "svolání v prosbách zopakovat po kadé prosbì", 
  "xxx", 
  "xxx",
  "",
- "xxx", 
+ "svolání v prosbách zopakovat po kadé prosbì", 
  "minden könyörgés után ismételni a felhívást"
 };
 const char *html_text_option1_prosby_zvolanie_explain[POCET_JAZYKOV + 1] = 
 {"V rannıch chválach a vešperách opakova zvolanie v prosbách po kadej prosbe.", 
- "xxx", 
+ "V ranních chválách a nešporách opakovat svolání v prosbách po kadé prosbì.", 
  "xxx", 
  "xxx",
  "xxx", 
- "xxx", 
+ "V ranních a veèerních chválách opakovat svolání v prosbách po kadé prosbì.", 
  "A reggeli és az esti dicséretben minden kérés után ismételni a felhívást."
 };
 

@@ -7010,13 +7010,11 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_ZALM95, ANO, html_text_option1_zalm95_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALM95) == BIT_OPT_1_ZALM95)? html_option_checked: STR_EMPTY);
 	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_zalm95_explain[_global_jazyk], html_text_option1_zalm95[_global_jazyk]);
 
-	if(_global_jazyk == JAZYK_SK){
-		// pole (checkbox) WWW_MODL_OPTF1_PROSBY_ZVOLANIE
-		Export("<br>");
-		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_PROSBY_ZVOLANIE, NIE);
-		Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_PROSBY_ZVOLANIE, ANO, html_text_option1_prosby_zvolanie_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PROSBY_ZVOLANIE) == BIT_OPT_1_PROSBY_ZVOLANIE)? html_option_checked: STR_EMPTY);
-		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_prosby_zvolanie_explain[_global_jazyk], html_text_option1_prosby_zvolanie[_global_jazyk]);
-	}// if(_global_jazyk == JAZYK_SK)
+	// pole (checkbox) WWW_MODL_OPTF1_PROSBY_ZVOLANIE
+	Export("<br>");
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_PROSBY_ZVOLANIE, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_PROSBY_ZVOLANIE, ANO, html_text_option1_prosby_zvolanie_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PROSBY_ZVOLANIE) == BIT_OPT_1_PROSBY_ZVOLANIE)? html_option_checked: STR_EMPTY);
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_prosby_zvolanie_explain[_global_jazyk], html_text_option1_prosby_zvolanie[_global_jazyk]);
 
 #ifdef OS_Windows_Ruby
 	// pole (checkbox) WWW_MODL_OPTF1_ZALMY_INE
