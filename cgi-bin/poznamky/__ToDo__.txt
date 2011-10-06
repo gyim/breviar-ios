@@ -26,4 +26,8 @@
 	-- hotové (option 2)
 
 -- doplni do textov opakovanie zvolania v prosbách po kadej prosbe
+	-- èiastoène hotové
 
+2011-10-05, JUV:
+
+-- upravi zakonèenia tak, aby tam nebolo BEGIN a END, ale len jedno k¾úèové slovo, ako má napr. NAVIGACIA alebo ZVOLANIE
