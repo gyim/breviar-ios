@@ -27,6 +27,7 @@
 
 -- doplniù do textov opakovanie zvolania v prosb·ch po kaûdej prosbe
 	-- ËiastoËne hotovÈ
+<!--{BEGIN:ZVOLANIE}--><br><i>&nbsp;&nbsp;&nbsp;&nbsp; <font color="#FF0000">(</font>txtzvolanie<font color="#FF0000">)</font></i><!--{END:ZVOLANIE}-->
 
 2011-10-05, JUV:
 
