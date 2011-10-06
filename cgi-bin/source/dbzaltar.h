@@ -475,7 +475,7 @@ extern const char *text_DEC_28[POCET_JAZYKOV + 1];
 extern const char *text_DEC_29[POCET_JAZYKOV + 1];
 extern const char *text_DEC_31[POCET_JAZYKOV + 1];
 
-/* --------------- CSSR propriá --------------- */
+// --------------- CSSR propriá ---------------
 extern const char *text_JAN_05_CSSR[POCET_JAZYKOV + 1];
 extern const char *text_JAN_14_CSSR[POCET_JAZYKOV + 1];
 extern const char *text_MAR_15_CSSR[POCET_JAZYKOV + 1];
@@ -486,11 +486,11 @@ extern const char *text_AUG_01_CSSR[POCET_JAZYKOV + 1];
 extern const char *text_SEP_26_CSSR[POCET_JAZYKOV + 1];
 extern const char *text_OKT_16_CSSR[POCET_JAZYKOV + 1];
 
-/* --------------- SVD propriá --------------- */
+// --------------- SVD propriá ---------------
 extern const char *text_JAN_15_SVD[POCET_JAZYKOV + 1];
 extern const char *text_JAN_29_SVD[POCET_JAZYKOV + 1];
 
-/* --------------- SDB propriá --------------- */
+// --------------- SDB propriá ---------------
 extern const char *text_JAN_15_SDB[POCET_JAZYKOV + 1];
 extern const char *text_JAN_22_SDB[POCET_JAZYKOV + 1];
 extern const char *text_JAN_24_SDB[POCET_JAZYKOV + 1];
@@ -523,7 +523,7 @@ extern const char *text_NOV_15_SDB[POCET_JAZYKOV + 1];
 extern const char *text_NOV_25_SDB[POCET_JAZYKOV + 1];
 extern const char *text_DEC_05_SDB[POCET_JAZYKOV + 1];
 
-/* --------------- SJ propriá --------------- */
+// --------------- SJ propriá ---------------
 extern const char *text_JAN_01_SJ[POCET_JAZYKOV + 1];
 extern const char *text_JAN_19_SJ[POCET_JAZYKOV + 1];
 extern const char *text_FEB_04_SJ[POCET_JAZYKOV + 1];
@@ -559,7 +559,7 @@ extern const char *text_NOV_26_SJ[POCET_JAZYKOV + 1];
 extern const char *text_DEC_01_SJ[POCET_JAZYKOV + 1];
 extern const char *text_DEC_03_SJ[POCET_JAZYKOV + 1];
 
-/* --------------- OFM propriá --------------- */
+// --------------- OFM propriá ---------------
 extern const char *text_JAN_04_OFM[POCET_JAZYKOV + 1];
 extern const char *text_JAN_05_OFM[POCET_JAZYKOV + 1];
 extern const char *text_JAN_12_OFM[POCET_JAZYKOV + 1];

@@ -80,19 +80,17 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-/* 2009-03-24: rozšírené kvôli text_SEP_26_CZOP[]; 
- * 2009-03-24: rozšírené kvôli text_PRO_OP[] 
- * 2010-12-07: rozšírené kvôli text_JAN_19_SJ[]; (plus 34)
- * 2011-01-31: rozšírené kvôli text_JAN_31_SDB[]; 
- * 2011-02-02: rozšírené kvôli text_FEB_04_SJ[];
- */
+// 2009-03-24: rozšírené kvôli text_SEP_26_CZOP[]; 
+// 2009-03-24: rozšírené kvôli text_PRO_OP[] 
+// 2010-12-07: rozšírené kvôli text_JAN_19_SJ[]; (plus 34)
+// 2011-01-31: rozšírené kvôli text_JAN_31_SDB[]; 
+// 2011-02-02: rozšírené kvôli text_FEB_04_SJ[];
 #define MENO_SVIATKU 250
 
-/* 2006-07-11: Pridané kvôli jazykovım mutáciám 
- * 2006-12-12: Pridaná latinèina, kódy sú pod¾a ISO 639-1 (a na èeštinu)
- * 2008-08-15: Pridaná "dominikánska èeština"; presunuté sem bezprostredne za definíciu POCET_JAZYKOV
- * 2009-01-29: pridaná maïarèina
- */
+// 2006-07-11: Pridané kvôli jazykovım mutáciám 
+// 2006-12-12: Pridaná latinèina, kódy sú pod¾a ISO 639-1 (a na èeštinu)
+// 2008-08-15: Pridaná "dominikánska èeština"; presunuté sem bezprostredne za definíciu POCET_JAZYKOV
+// 2009-01-29: pridaná maïarèina
 #define JAZYK_SK	0
 #define JAZYK_CZ	1
 #define JAZYK_EN	2
@@ -101,21 +99,20 @@
 #define JAZYK_CZ_OP 5
 #define JAZYK_HU    6
 
-/* 2011-05-12: formáty vypisovania dátumu, kvôli maïarèine, angliètine... */
+// 2011-05-12: formáty vypisovania dátumu, kvôli maïarèine, angliètine...
 #define FORMAT_DATUMU_DEN_MESIAC_ROK 0 // DD. MM RRRR
 #define FORMAT_DATUMU_MESIAC_DEN_ROK 1 // MM DD RRRR
 #define FORMAT_DATUMU_ROK_MESIAC_DEN 2 // RRRR. MM DD
 
 extern const short int format_datumu[POCET_JAZYKOV + 1];
 
-/* 2008-08-15: Pridané POCET_CSS, aby mohol by "dolník" (CSS_UNDEF) hodnota 0 */
+// 2008-08-15: Pridané POCET_CSS, aby mohol by "dolník" (CSS_UNDEF) hodnota 0
 #define POCET_CSS	11
-/* 2006-08-08: Pridané kvôli rôznym css-kám 
- * 2009-04-02: pridané historické css-ká
- * 2010-02-25: pridané css pre webstránky http://www.jm-krize.cz/
- * 2011-05-24: pridanı "inverznı" štıl pre mobilné zariadenia (èierne pozadie, biely text)
- * 2011-07-26: pridanı vzh¾ad ako http://www.kbs.sk
- */
+// 2006-08-08: Pridané kvôli rôznym css-kám 
+// 2009-04-02: pridané historické css-ká
+// 2010-02-25: pridané css pre webstránky http://www.jm-krize.cz/
+// 2011-05-24: pridanı "inverznı" štıl pre mobilné zariadenia (èierne pozadie, biely text)
+// 2011-07-26: pridanı vzh¾ad ako http://www.kbs.sk
 #define CSS_UNDEF				0
 #define CSS_breviar_sk			1
 #define CSS_breviar_sk_invert	2
@@ -688,7 +685,7 @@ typedef struct sc _struct_sc;
 struct dm{
 	short int den;        /* cislo dna mesiaca (1--31) */
 	short int mesiac;     /* cislo mesiaca (1--12) */
-	short int rok;        /* rok */
+	short int rok;        // rok
 	short int denvt;      /* cislo dna v tyzdni (0--6) DEN_... */
 	short int denvr;      /* cislo dna v roku (1--365/366) */ /* deò v roku */
 	/* toto boli "obcianske" zalezitosti */
@@ -1409,37 +1406,35 @@ void _init_dm(_struct_dm a);
  * 2009-03-27: po zúfalıch pokusoch dnes - napokon som zistil, e u je úplne jedno, akú hodnotu bude táto konštanta ma, preto som ju dal opä na 0
  */
 
-/* definovany 2003-08-11 na zaklade funkcie _init_dm() 
- * upravené 2007-08-16, pretoe sa pouíva aj v _main_dnes()
- */
+// definovany 2003-08-11 na zaklade funkcie _init_dm() 
+// upravené 2007-08-16, pretoe sa pouíva aj v _main_dnes()
 #define _INIT_DM(a) {\
-	a.den = 1;        /* cislo dna v mesiaci (1--31) */\
-	a.mesiac = 1;     /* cislo mesiaca (1--12) */\
-	a.rok = 1900;        /* rok */\
-	a.denvt = 0;     /* cislo dna v tyzdni (0--6) DEN_... */ /* deò v roku */\
-	a.denvr = 1;      /* cislo dna v roku (1--365/366) */\
-	/* toto boli "obcianske" zalezitosti */\
-	a.litrok = 'A';     /* liturgicky rok ('A'--'C') */\
-	a.tyzden = 1;     /* tyzden v danom liturgickom obdobi */\
-	a.tyzzal = 1;     /* tyzden v zaltari (vacsinou ((tyzden - 1) % 4) + 1) */\
-	a.litobd = OBD_CEZ_ROK;    /* liturgicke obdobie, OBD_... */\
-	a.typslav = SLAV_NEURCENE;    /* typ slavenia (1--5): SLAV_... */\
-	a.typslav_lokal = LOKAL_SLAV_NEURCENE; /* LOKAL_SLAV_NEURCENE; nie je obmedzenie na lokalitu, pridané 2005-07-27 */\
-	a.smer = 99;     /* poradove cislo z c.59 Vseobecnych smernic o liturgii hodin a kalendari */\
-	a.prik = NEPRIKAZANY_SVIATOK;      /* ci je to prikazany sviatok alebo nie: PRIKAZANY_SVIATOK resp. NEPRIKAZANY_SVIATOK */\
-	a.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA); /* MODL_SPOL_CAST_NEURCENA; spolocna cast -- zakodovane data pre svatych o tom, z akej spolocnej casti sa ma modlit */\
-	mystrcpy(a.meno, STR_UNDEF, MENO_SVIATKU); /* nazov prip. sviatku */\
+	a.den = 1;    \
+	a.mesiac = 1; \
+	a.rok = 1900; \
+	a.denvt = 0;  \
+	a.denvr = 1;  \
+	a.litrok = 'A'; \
+	a.tyzden = 1;   \
+	a.tyzzal = 1;   \
+	a.litobd = OBD_CEZ_ROK; \
+	a.typslav = SLAV_NEURCENE; \
+	a.typslav_lokal = LOKAL_SLAV_NEURCENE; \
+	a.smer = 99; \
+	a.prik = NEPRIKAZANY_SVIATOK; \
+	a.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA); \
+	mystrcpy(a.meno, STR_UNDEF, MENO_SVIATKU); \
 	a.farba = LIT_FARBA_NEURCENA;\
 	a.kalendar = KALENDAR_NEURCENY;\
 }
 
-/* inicializacne definy pridane 2003-08-13 */
+// inicializacne definy pridane 2003-08-13
 #define _INIT_ANCHOR_AND_FILE(a) {\
 	mystrcpy(a.file, STR_UNDEF, MAX_STR_AF_FILE); \
 	mystrcpy(a.anchor, STR_UNDEF, MAX_STR_AF_ANCHOR); \
 }
 
-/* 2010-05-21: rozšírené kvôli spomienkam a ¾ubovo¾nım spomienkam v pôstnom období (zobrazenie po modlitbe dòa pôstnej férie) */
+// 2010-05-21: rozšírené kvôli spomienkam a ¾ubovo¾nım spomienkam v pôstnom období (zobrazenie po modlitbe dòa pôstnej férie)
 #define _INIT_TMODLITBA1(a) {\
 	_INIT_ANCHOR_AND_FILE(a.popis); \
 	_INIT_ANCHOR_AND_FILE(a.hymnus); \
@@ -1472,7 +1467,7 @@ void _init_dm(_struct_dm a);
 	_INIT_ANCHOR_AND_FILE(a.modlitba); \
 };
 
-/* 2006-10-11 doplnené */
+// 2006-10-11 doplnené
 #define _INIT_TMODLITBA3(a) {\
 	a.pocet_zalmov = 1;\
 	_INIT_ANCHOR_AND_FILE(a.popis); \
@@ -1486,14 +1481,14 @@ void _init_dm(_struct_dm a);
 	_INIT_ANCHOR_AND_FILE(a.modlitba); \
 };
 
-/* 2006-10-11 doplnené */
+// 2006-10-11 doplnené
 #define _INIT_TMODLITBA4(a) {\
 	_INIT_ANCHOR_AND_FILE(a.popis); \
 	_INIT_ANCHOR_AND_FILE(a.antifona1); \
 	_INIT_ANCHOR_AND_FILE(a.zalm1); \
 };
 
-/* 2011-03-25: doplnené pre posvätné èítanie */
+// 2011-03-25: doplnené pre posvätné èítanie
 #define _INIT_TMODLITBA5(a) {\
 	_INIT_ANCHOR_AND_FILE(a.popis); \
 	_INIT_ANCHOR_AND_FILE(a.hymnus); \

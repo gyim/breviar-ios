@@ -673,21 +673,21 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 			sprintf(pom, "?%s=%s"HTML_AMPERSAND, STR_QUERY_TYPE, STR_PRM_DATUM);
 			strcat(_global_link, pom);
 
-			/* den */
+			// deò
 			if(den == VSETKY_DNI)
 				sprintf(pom, "%s=%s"HTML_AMPERSAND, STR_DEN, STR_VSETKY_DNI);
 			else
 				sprintf(pom, "%s=%d"HTML_AMPERSAND, STR_DEN, den);
 			strcat(_global_link, pom);
 
-			/* mesiac */
+			// mesiac
 			if(mesiac == VSETKY_MESIACE)
 				sprintf(pom, "%s=%s"HTML_AMPERSAND, STR_MESIAC, STR_VSETKY_MESIACE);
 			else
 				sprintf(pom, "%s=%d"HTML_AMPERSAND, STR_MESIAC, mesiac);
 			strcat(_global_link, pom);
 
-			/* rok */
+			// rok
 			sprintf(pom, "%s=%d", STR_ROK, rok);
 			strcat(_global_link, pom);
 
@@ -1223,7 +1223,7 @@ void init_global_pm_sobota(void){
 	_global_pm_sobota.tyzden = _global_den.tyzden;
 	_global_pm_sobota.tyzzal = _global_den.tyzzal;
 	/* a teraz vlastne udaje */
-	_global_pm_sobota.smer = 12; /* lubovolna spomienka */
+	_global_pm_sobota.smer = 12; // ¾ubovo¾né spomienky
 	_global_pm_sobota.typslav = SLAV_LUB_SPOMIENKA; /* lubovolna spomienka */
 	_global_pm_sobota.typslav_lokal = LOKAL_SLAV_NEURCENE; /* nie je obmedzenie na lokalitu, pridané 2005-07-27 */
 	mystrcpy(_global_pm_sobota.meno, text_SPOMIENKA_PM_V_SOBOTU[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
@@ -1384,7 +1384,7 @@ void _dm_velkonocna_nedela(short int rok, short int _vn){
 void _init_dm(_struct_dm a){
 	a.den = 0;        /* cislo dna mesiaca (1--31) */
 	a.mesiac = 0;     /* cislo mesiaca (1--12) */
-	a.rok = 0;        /* rok */
+	a.rok = 0;        // rok
 	a.denvt = -1;     /* cislo dna v tyzdni (0--6) DEN_... */ /* deò v roku */
 	a.denvr = 0;      /* cislo dna v roku (1--365/366) */
 	a.litrok = 0;     /* liturgicky rok ('A'--'C') */
