@@ -558,7 +558,7 @@ void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int 
 				case OPT_2_HTML_EXPORT:		strcat(local_str, STR_MODL_OPT2); break;
 				case OPT_3_SPOLOCNA_CAST:	strcat(local_str, STR_MODL_OPT3); break;
 				case OPT_4_OFFLINE_EXPORT:	strcat(local_str, STR_MODL_OPT4); break;
-			}/* switch(i) */
+			}// switch(i)
 			sprintf(pom3, HTML_AMPERSAND"%s=%d", local_str, _global_opt[i]);
 			strcat(pom2, pom3);
 			Log("\tPrilepil som aj opt%d: `%s'\n", i, pom3);

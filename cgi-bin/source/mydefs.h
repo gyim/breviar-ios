@@ -768,7 +768,7 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 
 /* 2007-06-01: niektoré definy presunuté z liturgia.h */
 
-/* option 2 */
+// option 2
 #define MODL_ZALMY_ZO_DNA 0
 #define MODL_ZALMY_ZO_SV  1
 

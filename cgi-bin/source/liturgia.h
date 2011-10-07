@@ -550,7 +550,7 @@ extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
 
 /* stringy parametrov vstupu pre MODL_OPT..., ktore generovanie modlitby
  * ovplyvnuju */
-/* option 1 */
+// option 1
 //#define STR_ANO "áno"
 extern const char *str_ano[POCET_JAZYKOV + 1];
 #ifndef		STR_ANO
