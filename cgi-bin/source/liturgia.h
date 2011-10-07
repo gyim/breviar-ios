@@ -353,8 +353,8 @@ typedef struct den_mesiac _struct_den_mesiac;
 #define CHAR_MODL_VSETKY             '*' // 2011-10-03: pridané pokusne
 
 // 2008-04-09: doplnené pre batch generovanie modlitieb
-extern const char char_modlitby[POCET_MODLITIEB /* + 1 */];
-extern const char *str_modlitby[POCET_MODLITIEB /* + 1 */];
+extern const char char_modlitby[POCET_MODLITIEB + 1];
+extern const char *str_modlitby[POCET_MODLITIEB + 1];
 
 //extern const char *nazov_modlitby[];
 extern const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1];
@@ -384,7 +384,7 @@ extern const char *nazov_MODLITBY_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1];
 /* pridané 2006-10-24 pre kompletórium */
 #define nazov_obd_KOMPLETORIUM   "cezrok_k.htm"
 
-extern const char *TEMPLAT[POCET_MODLITIEB /* + 1 */];
+extern const char *TEMPLAT[POCET_MODLITIEB + 1];
 
 // znaky, ktore znacia (pre interpretovanie templatu) zaciatok a koniec klucoveho slova
 #define CHAR_KEYWORD_BEGIN   '{'
