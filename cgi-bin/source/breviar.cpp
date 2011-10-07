@@ -6323,9 +6323,9 @@ void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO 
 	short int zmena_mesiaca = NIE;
 	short int som_v_tabulke = ANO; /* 2009-08-26: Ëi sa pouûÌva tabuæka; beûne pre web ·no, pre export pre mobilnÈ zariadenia [export_monthly_druh >= 3] netreba tabuæku */
 
-	short int _local_den = _global_den.den;
-	short int _local_mesiac = _global_den.mesiac;
-	short int _local_rok = _global_den.rok;
+	short int _orig_den = _global_den.den;
+	short int _orig_mesiac = _global_den.mesiac;
+	short int _orig_rok = _global_den.rok;
 
 	_struct_den_mesiac datum;
 
@@ -6367,6 +6367,7 @@ void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO 
 
 	if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_VIAC_DNI_TXT)){
 		Log("--- _export_rozbor_dna_buttons_dni(): idem tlacit buttony...\n");
+		short int _local_rok;
 
 		if(dnes_dnes == ANO){
 			Export("<!-- tabuæka s buttonmi predoöl˝, nasledovn˝ rok/mesiac/deÚ presunut· pred rozbor danÈho dÚa (teda navrh str·nky) -->\n");
@@ -6723,9 +6724,9 @@ void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO 
 	}
 
 	// sp‰ù pÙvodnÈ nastavenia (pre dnes_dnes != ANO boli zmenenÈ)
-	_global_den.den = _local_den;
-	_global_den.mesiac = _local_mesiac;
-	_global_den.rok = _local_rok;
+	_global_den.den = _orig_den;
+	_global_den.mesiac = _orig_mesiac;
+	_global_den.rok = _orig_rok;
 
 	Log("--- _export_rozbor_dna_buttons_dni(typ == %d) -- end\n", typ); /* 2005-03-22: Pridane */
 }// _export_rozbor_dna_buttons_dni()
