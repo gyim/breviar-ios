@@ -12,18 +12,17 @@
 	-- èiastoène hotové
 
 -- pre modlitby, kde sa nachádzajú almy 24, 67, 100, doplni monos vygenerova modlitbu so almom 95 (ak tento nebol pouitı na invitatórium); mono sa bude da vyui prepínaè na doplnkovú psalmódiu MCD
-	-- hotové
-
+	-- hotovo
 
 2011-10-05, JUV:
 
 -- skontrolova vyššie uvedené úlohy (aspoò v slovenskom sú mnohé spravené)
-	-- hotové
+	-- hotovo
 
 -- pri vo¾be modlitby nie pod¾a dátumu (teda liturgické obdobie) navigaèné tlaèidlá pre predošlı, tento a nasledujúci deò strácajú opodstatnenie (je tam nezmysel 0.0.1900) -- da tam len "^ dnes"
 
 -- doplni monos (v rámci option 2) generova tlaèidlá v tabu¾ke, aby to zaberalo menšiu šírku (napr. 3 ståpce, 4 riadky): príklad: 25. máj 2002
-	-- hotové (option 2)
+	-- hotovo (option 2)
 
 -- doplni do textov opakovanie zvolania v prosbách po kadej prosbe
 	-- èiastoène hotové
@@ -36,6 +35,7 @@
 -- problémy pri "modlitba pre dané obdobie, deò..." (vo¾ba úplne dole) pre advent a pod.
 
 -- vymeni poradie konštánt ranné chvály <-> posvätné èítanie
+	-- hotovo
 
 -- opravi: alm 95 (linka) ignoruje poradie_svateho
-	-- hotovor
+	-- hotovo
