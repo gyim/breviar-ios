@@ -484,18 +484,7 @@ extern const char *TEMPLAT[POCET_MODLITIEB + 1];
 // 2007-10-02: doplnené skrytie rovnakých antifón pre mcd
 #define PARAM_SKRY_ANTIFONU_BEGIN           "SKRY_ANTIFONU_BEGIN"
 #define PARAM_SKRY_ANTIFONU_END             "SKRY_ANTIFONU_END"
-// 2009-04-08, doplnené: zakonèenie modlitby trojaké, krátke resp. dlhé
-#define PARAM_ZAKONCENIE_SKRZE              "ZAKONCENIE_SKRZE"
-#define PARAM_ZAKONCENIE_LEBO_TY            "ZAKONCENIE_LEBO_TY"
-#define PARAM_ZAKONCENIE_LEBO_ON            "ZAKONCENIE_LEBO_ON"
-// 2009-12-14, doplnené: zakonèenie modlitby trojaké, krátke resp. dlhé s malým písmenkom na zaèiatku
-#define PARAM_ZAKONCENIE_SKRZE_MALE         "ZAKONCENIE_SKRZE_MALE"
-#define PARAM_ZAKONCENIE_LEBO_TY_MALE       "ZAKONCENIE_LEBO_TY_MALE"
-#define PARAM_ZAKONCENIE_LEBO_ON_MALE       "ZAKONCENIE_LEBO_ON_MALE"
-// 2010-06-07, doplnené: ešte jedno zakonèenie modlitby pre slovenèinu, krátke resp. dlhé (POST1_MODLITBA5NE)
-#define PARAM_ZAKONCENIE_ON_JE              "ZAKONCENIE_ON_JE"
-// 2010-01-14, doplnené: ešte jedno zakonèenie modlitby pre slovenèinu, krátke resp. dlhé
-#define PARAM_ZAKONCENIE_KTORY_JE           "ZAKONCENIE_KTORY_JE"
+
 // 2010-05-21: doplnené zobrazenie antifóny a modlitby pre spomienku svätca v pôstnom období
 #define PARAM_POST_SPOMIENKA_BEGIN          "POST_SPOMIENKA_BEGIN"
 #define PARAM_POST_SPOMIENKA_END            "POST_SPOMIENKA_END"
@@ -539,6 +528,22 @@ extern const char *TEMPLAT[POCET_MODLITIEB + 1];
 
 // 2011-07-14: doplnené zobrazovanie/nezobrazenie zalomených textov tak, ako je v tlaèenom vydaní LH (dlhé riadky-verše žalmov/chválospevov a pod.)
 #define PARAM_ZALOMENIE                     "ZALOMENIE"
+
+// 2011-10-07: doplnené zakonèenie modlitieb (skrze, lebo on, lebo ty...) ináè (jednoduchšie, bez begin-end)
+#define PARAM_ZAKONCENIE                    "ZAKONCENIE"
+
+// 2009-04-08, doplnené: zakonèenie modlitby trojaké, krátke resp. dlhé
+#define PARAM_ZAKONCENIE_SKRZE              "SKRZE"
+#define PARAM_ZAKONCENIE_LEBO_TY            "LEBO_TY"
+#define PARAM_ZAKONCENIE_LEBO_ON            "LEBO_ON"
+// 2009-12-14, doplnené: zakonèenie modlitby trojaké, krátke resp. dlhé s malým písmenkom na zaèiatku
+#define PARAM_ZAKONCENIE_SKRZE_MALE         "SKRZE_MALE"
+#define PARAM_ZAKONCENIE_LEBO_TY_MALE       "LEBO_TY_MALE"
+#define PARAM_ZAKONCENIE_LEBO_ON_MALE       "LEBO_ON_MALE"
+// 2010-06-07, doplnené: ešte jedno zakonèenie modlitby pre slovenèinu, krátke resp. dlhé (POST1_MODLITBA5NE)
+#define PARAM_ZAKONCENIE_ON_JE              "ON_JE"
+// 2010-01-14, doplnené: ešte jedno zakonèenie modlitby pre slovenèinu, krátke resp. dlhé
+#define PARAM_ZAKONCENIE_KTORY_JE           "KTORY_JE"
 
 // 2011-08-15: force pre jednotlivé èasti modlitby, funkcie _set_spolocna_cast()...
 #define FORCE_BRAT_ANTIFONY      1

@@ -1375,6 +1375,7 @@ void _main_prazdny_formular(void){
 #define EXPORT_REFERENCIA ((!vnutri_myslienky || je_myslienka) && (!vnutri_nadpisu || je_nadpis))
 short int antifona_pocet = 0; // 2011-07-08: poèet antifón (ant1, ant2, ant3 pre psalmódiu a ant. na benediktus/magnifikat kvôli krížikom)
 char rest_krizik[MAX_BUFFER] = STR_EMPTY; // 2011-07-08: pre to, èo je za krížikom v antifóne
+char rest_zakoncenie[MAX_BUFFER] = STR_EMPTY;
 void includeFile(short int type, const char *paramname, const char *fname, const char *modlparam){
 	short int c, buff_index = 0, ref_index = 0, kat_index = 0, z95_index = 0;
 	char strbuff[MAX_BUFFER];
@@ -1383,6 +1384,8 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 	short int write = NIE;
 	short int je_antifona = NIE; // 2011-07-08: kvôli krížikom
 	short int write_krizik = NIE; // 2011-07-08: kvôli krížikom
+	short int je_modlitba = NIE;
+
 	char vnutri_inkludovaneho = 0; // 17/02/2000A.D., kvoli "V.O. Aleluja" v inkludovanych napr. antifonach
 	char zakoncenie[MAX_ZAKONCENIE]; // 2009-12-14: zakonèenie s ve¾kým písmenkom na zaèiatku, následne sa prípadne mení 1. písmeno na malé
 	short int vnutri_referencie = NIE; // 2011-04-05, kvôli biblickým referenciám v inkludovaných súboroch
@@ -1571,6 +1574,76 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 						}
 					}// vypísa krížik, nako¾ko antifóna nastavila, že má by; ináè nerob niè
 				}// PARAM_KRIZIK
+				// 2011-10-07: zakonèenie v texte includovanej modlitby
+				else if(equals(strbuff, PARAM_ZAKONCENIE)){
+					if((vnutri_inkludovaneho == ANO) && (write == ANO)){
+						// Export("[INPUT:paramname=%s|fname=%s|modlparam=%s|READ:strbuff=%s|rest=%s]", paramname, fname, modlparam, strbuff, rest);
+						if(equals(paramname, PARAM_MODLITBA)){
+							je_modlitba = ANO;
+							if(rest != NULL && strlen(rest) > 0)
+								mystrcpy(rest_zakoncenie, rest, MAX_BUFFER);
+						}
+						/*
+#if defined(EXPORT_HTML_SPECIALS)
+						Export("[%s:%s|rest_zakoncenie=%s]", strbuff, modlparam, (rest_zakoncenie == NULL) ? STR_EMPTY: rest_zakoncenie);
+#elif defined(EXPORT_HTML_FILENAME_ANCHOR)
+						Export("[%s:%s]", strbuff, modlparam);
+#elif defined(EXPORT_HTML_ANCHOR)
+						Export("%s:%s", strbuff, modlparam);
+#endif
+						*/
+						if((je_modlitba == ANO) || (equals(paramname, PARAM_MODLITBA))){
+							Export("%s--> ", (rest_zakoncenie == NULL) ? STR_EMPTY: rest_zakoncenie);
+							if(equals(rest_zakoncenie, PARAM_ZAKONCENIE_SKRZE) || equals(rest_zakoncenie, PARAM_ZAKONCENIE_SKRZE_MALE)){
+								if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
+									mystrcpy(zakoncenie, text_ZAKONCENIE_SKRZE_kratke[_global_jazyk], MAX_ZAKONCENIE);
+								}
+								else{
+									mystrcpy(zakoncenie, text_ZAKONCENIE_SKRZE_dlhe[_global_jazyk], MAX_ZAKONCENIE);
+								}
+							} // ZAKONCENIE_SKRZE
+							else if(equals(rest_zakoncenie, PARAM_ZAKONCENIE_LEBO_TY) || equals(rest_zakoncenie, PARAM_ZAKONCENIE_LEBO_TY_MALE)){
+								if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
+									mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_TY_kratke[_global_jazyk], MAX_ZAKONCENIE);
+								}
+								else{
+									mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_TY_dlhe[_global_jazyk], MAX_ZAKONCENIE);
+								}
+							} // ZAKONCENIE_LEBO_TY
+							else if(equals(rest_zakoncenie, PARAM_ZAKONCENIE_LEBO_ON) || equals(rest_zakoncenie, PARAM_ZAKONCENIE_LEBO_ON_MALE)){
+								if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
+									mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_ON_kratke[_global_jazyk], MAX_ZAKONCENIE);
+								}
+								else{
+									mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_ON_dlhe[_global_jazyk], MAX_ZAKONCENIE);
+								}
+							} // ZAKONCENIE_LEBO_ON
+							else if(equals(rest, PARAM_ZAKONCENIE_ON_JE) && _global_jazyk == JAZYK_SK){
+								if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
+									mystrcpy(zakoncenie, text_ZAKONCENIE_ON_JE_kratke, MAX_ZAKONCENIE);
+								}
+								else{
+									mystrcpy(zakoncenie, text_ZAKONCENIE_ON_JE_dlhe, MAX_ZAKONCENIE);
+								}
+							} // SK: ZAKONCENIE_ON_JE
+							else if(equals(rest, PARAM_ZAKONCENIE_KTORY_JE) && _global_jazyk == JAZYK_SK){
+								if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
+									mystrcpy(zakoncenie, text_ZAKONCENIE_KTORY_JE_kratke, MAX_ZAKONCENIE);
+								}
+								else{
+									mystrcpy(zakoncenie, text_ZAKONCENIE_KTORY_JE_dlhe, MAX_ZAKONCENIE);
+								}
+							} // SK: ZAKONCENIE_KTORY_JE
+							if(equals(rest_zakoncenie, PARAM_ZAKONCENIE_SKRZE_MALE) || equals(rest_zakoncenie, PARAM_ZAKONCENIE_LEBO_TY_MALE) || equals(rest_zakoncenie, PARAM_ZAKONCENIE_LEBO_ON_MALE)){
+								zakoncenie[0] = zakoncenie[0] + ('a'-'A'); // posun z ve¾kého písmena na malé: pozor, funguje len pre základné znaky ASCII
+							}
+							// 2011-05-16: nezlomite¾né medzery
+							Export("%s", convert_nonbreaking_spaces(zakoncenie));
+							Export("<!--%s", (rest_zakoncenie == NULL) ? STR_EMPTY: rest_zakoncenie);
+							je_modlitba = NIE;
+						}
+					}// vypísa zakonèenie
+				}// PARAM_ZAKONCENIE
 				else{
 					/* !equalsi(rest, modlparam) */
 					/* write = NIE; -- aby mohli byt nestovane viacere :-) */
@@ -1826,156 +1899,8 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 						}
 					}/* aleluja mimo pôstneho obdobia */
 
-					/* 2009-04-08, doplnené: zakonèenie modlitby (pre modlitbu cez deò a kompletórium sa používa kratšie zakonèenie) */
-
-					// zakonèenie modlitby - Skrze...
-					if(equals(rest, PARAM_ZAKONCENIE_SKRZE) || equals(rest, PARAM_ZAKONCENIE_SKRZE_MALE)){
-						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
-							write = NIE;
-#if defined(EXPORT_HTML_SPECIALS)
-							Export("(start)Skrze...");
-#endif
-							Export("-->");
-							if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
-								mystrcpy(zakoncenie, text_ZAKONCENIE_SKRZE_kratke[_global_jazyk], MAX_ZAKONCENIE);
-							}
-							else{
-								mystrcpy(zakoncenie, text_ZAKONCENIE_SKRZE_dlhe[_global_jazyk], MAX_ZAKONCENIE);
-							}
-							if(equals(rest, PARAM_ZAKONCENIE_SKRZE_MALE)){
-								zakoncenie[0] = zakoncenie[0] + ('a'-'A'); // posun z ve¾kého písmena na malé: pozor, funguje len pre základné znaky ASCII
-							}
-							/* 2011-05-16: nezlomite¾né medzery */
-							Export("%s", convert_nonbreaking_spaces(zakoncenie));
-							Log("skrze-zaèiatok...\n");
-						}
-						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
-							Export("<!--");
-#if defined(EXPORT_HTML_SPECIALS)
-							Export("Skrze...(stop)");
-#endif
-							write = ANO;
-							Log("skrze-koniec.\n");
-						}
-					}// zakonèenie modlitby - Skrze...
-
-					// zakonèenie modlitby - Lebo ty...
-					if(equals(rest, PARAM_ZAKONCENIE_LEBO_TY) || equals(rest, PARAM_ZAKONCENIE_LEBO_TY_MALE)){
-						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
-							write = NIE;
-#if defined(EXPORT_HTML_SPECIALS)
-							Export("(start)Lebo ty...");
-#endif
-							Export("-->");
-							if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
-								mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_TY_kratke[_global_jazyk], MAX_ZAKONCENIE);
-							}
-							else{
-								mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_TY_dlhe[_global_jazyk], MAX_ZAKONCENIE);
-							}
-							if(equals(rest, PARAM_ZAKONCENIE_LEBO_TY_MALE)){
-								zakoncenie[0] = zakoncenie[0] + ('a'-'A'); // posun z ve¾kého písmena na malé: pozor, funguje len pre základné znaky ASCII
-							}
-							/* 2011-05-16: nezlomite¾né medzery */
-							Export("%s", convert_nonbreaking_spaces(zakoncenie));
-							Log("lebo-ty-zaèiatok...\n");
-						}
-						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
-							Export("<!--");
-#if defined(EXPORT_HTML_SPECIALS)
-							Export("Lebo ty...(stop)");
-#endif
-							write = ANO;
-							Log("lebo-ty-koniec.\n");
-						}
-					}// zakonèenie modlitby - Lebo ty...
-
-					// zakonèenie modlitby - Lebo on...
-					if(equals(rest, PARAM_ZAKONCENIE_LEBO_ON) || equals(rest, PARAM_ZAKONCENIE_LEBO_ON_MALE)){
-						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
-							write = NIE;
-#if defined(EXPORT_HTML_SPECIALS)
-							Export("(start)Lebo on...");
-#endif
-							Export("-->");
-							if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
-								mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_ON_kratke[_global_jazyk], MAX_ZAKONCENIE);
-							}
-							else{
-								mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_ON_dlhe[_global_jazyk], MAX_ZAKONCENIE);
-							}
-							if(equals(rest, PARAM_ZAKONCENIE_LEBO_ON_MALE)){
-								zakoncenie[0] = zakoncenie[0] + ('a'-'A'); // posun z ve¾kého písmena na malé: pozor, funguje len pre základné znaky ASCII
-							}
-							// 2011-05-16: nezlomite¾né medzery
-							Export("%s", convert_nonbreaking_spaces(zakoncenie));
-							Log("lebo-on-zaèiatok...\n");
-						}
-						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
-							Export("<!--");
-#if defined(EXPORT_HTML_SPECIALS)
-							Export("Lebo on...(stop)");
-#endif
-							write = ANO;
-							Log("lebo-on-koniec.\n");
-						}
-					}// zakonèenie modlitby - Lebo on...
-
-					// zakonèenie modlitby - On je... (len SK); doplnené 2010-06-07
-					if(equals(rest, PARAM_ZAKONCENIE_ON_JE) && _global_jazyk == JAZYK_SK){
-						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
-							write = NIE;
-#if defined(EXPORT_HTML_SPECIALS)
-							Export("(start)On je...");
-#endif
-							Export("-->");
-							if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
-								mystrcpy(zakoncenie, text_ZAKONCENIE_ON_JE_kratke, MAX_ZAKONCENIE);
-							}
-							else{
-								mystrcpy(zakoncenie, text_ZAKONCENIE_ON_JE_dlhe, MAX_ZAKONCENIE);
-							}
-							// 2011-05-16: nezlomite¾né medzery
-							Export("%s", convert_nonbreaking_spaces(zakoncenie));
-							Log("on-je-zaèiatok...\n");
-						}
-						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
-							Export("<!--");
-#if defined(EXPORT_HTML_SPECIALS)
-							Export("On je...(stop)");
-#endif
-							write = ANO;
-							Log("on-je-koniec.\n");
-						}
-					}// zakonèenie modlitby - On je... (len SK)
-
-					// zakonèenie modlitby - ktorý je... (len SK); doplnené 2011-01-14
-					if(equals(rest, PARAM_ZAKONCENIE_KTORY_JE) && _global_jazyk == JAZYK_SK){
-						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
-							write = NIE;
-#if defined(EXPORT_HTML_SPECIALS)
-							Export("(start)ktorý je...");
-#endif
-							Export("-->");
-							if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
-								mystrcpy(zakoncenie, text_ZAKONCENIE_KTORY_JE_kratke, MAX_ZAKONCENIE);
-							}
-							else{
-								mystrcpy(zakoncenie, text_ZAKONCENIE_KTORY_JE_dlhe, MAX_ZAKONCENIE);
-							}
-							// 2011-05-16: nezlomite¾né medzery
-							Export("%s", convert_nonbreaking_spaces(zakoncenie));
-							Log("ktorý-je-zaèiatok...\n");
-						}
-						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
-							Export("<!--");
-#if defined(EXPORT_HTML_SPECIALS)
-							Export("ktorý je...(stop)");
-#endif
-							write = ANO;
-							Log("ktorý-je-koniec.\n");
-						}
-					}// zakonèenie modlitby - ktorý je... (len SK)
+					// 2009-04-08, doplnené: zakonèenie modlitby (pre modlitbu cez deò a kompletórium sa používa kratšie zakonèenie)
+					// 2011-10-07, upravené: zakonèenia modlitieb presunuté inde
 
 					// 2011-07-07, doplnené: zobrazovanie/skrývanie dlhšieho zakonèenia responzória po druhom èítaní (tlaèená verzia má kratšie zakonèenie, pokia¾ nie je responzórium rozdelené zlomom strany, presnejšie, otoèením listu)
 
@@ -2805,7 +2730,6 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		Export("<!--nadpis:end");
 	}// PARAM_NADPIS
 
-	// pokracuju dalsie klasicke `tagy' v modlitbach (teda templatoch)
 	else if(equals(paramname, PARAM_NAVIGACIA)){
 		if(aj_navigacia == ANO){
 #ifdef BEHAVIOUR_WEB
@@ -2839,6 +2763,8 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 #endif
 		}// if(aj_navigacia == ANO)
 	}// PARAM_NAVIGACIA
+
+	// pokracuju dalsie klasicke `tagy' v modlitbach (teda templatoch)
 	else if(equals(paramname, PARAM_POPIS)){
 		/* pridane 05/04/2000A.D. */
 		Log("  _global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SKRY_POPIS == %d: ", _global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SKRY_POPIS);
