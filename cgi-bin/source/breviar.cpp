@@ -1701,6 +1701,13 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							_global_opt[OPT_1_CASTI_MODLITBY] += BIT_OPT_1_ZALM95;
 							_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY] - BIT_OPT_1_ZALM95;
 						}
+						// prilepenie poradia svätca
+						if(_global_poradie_svaty > 0){
+							sprintf(pom, HTML_AMPERSAND"%s=%d", STR_DALSI_SVATY, _global_poradie_svaty);
+						}// _global_poradie_svaty > 0
+						else{
+							mystrcpy(pom, STR_EMPTY, MAX_STR);
+						}// !(_global_poradie_svaty > 0)
 						// teraz vytvoríme reazec s options
 						prilep_request_options(pom, pompom, NIE);
 						// export hyperlinku
@@ -5808,11 +5815,13 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 		if(_global_opt_batch_monthly == NIE){
 			// prerobene 13/04/2000A.D.: tlacitka niekedy linkuju iba subor, nie linku: podla _global_linky
 			if(_global_linky == ANO){
-				if(poradie_svateho > 0)
+				if(poradie_svateho > 0){
 					// 2003-07-16 zmeneny & na HTML_AMPERSAND
 					sprintf(pom, HTML_AMPERSAND"%s=%d", STR_DALSI_SVATY, poradie_svateho);
-				else
+				}// poradie_svateho > 0
+				else{
 					mystrcpy(pom, STR_EMPTY, MAX_STR);
+				}// !(poradie_svateho > 0)
 			}
 			else{/* nezobrazovat linky */
 				if((poradie_svateho >= UNKNOWN_PORADIE_SVATEHO) && (poradie_svateho < 5)) // 2009-03-27: snáï OK: UNKNOWN_PORADIE_SVATEHO (bolo tu: poradie_svateho >= 0)

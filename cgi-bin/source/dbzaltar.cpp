@@ -22322,6 +22322,7 @@ label_25_MAR:
 						else{
 							_vlastna_cast_full_okrem_prosieb_a_hymnu(modlitba);
 						}
+						_set_zalmy_1nedele_rch(); // 2011-10-07: doplnené pod¾a LH
 
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
@@ -22334,6 +22335,7 @@ label_25_MAR:
 						else{
 							_vlastna_cast_full_okrem_prosieb_a_hymnu(modlitba);
 						}
+						_set_zalmy_sviatok_marie(modlitba); // 2011-10-07: doplnené pod¾a LH
 
 						break;
 					}
