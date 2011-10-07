@@ -29,6 +29,13 @@
 	-- èiastoène hotové
 <!--{BEGIN:ZVOLANIE}--><br><i>&nbsp;&nbsp;&nbsp;&nbsp; <font color="#FF0000">(</font>txtzvolanie<font color="#FF0000">)</font></i><!--{END:ZVOLANIE}-->
 
-2011-10-05, JUV:
+2011-10-06, JUV:
 
 -- upravi zakonèenia tak, aby tam nebolo BEGIN a END, ale len jedno k¾úèové slovo, ako má napr. NAVIGACIA alebo ZVOLANIE
+
+-- problémy pri "modlitba pre dané obdobie, deò..." (vo¾ba úplne dole) pre advent a pod.
+
+-- vymeni poradie konštánt ranné chvály <-> posvätné èítanie
+
+-- opravi: alm 95 (linka) ignoruje poradie_svateho
+
