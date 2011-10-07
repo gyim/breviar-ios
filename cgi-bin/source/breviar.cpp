@@ -7399,8 +7399,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<table align=\"left\">\n<tr><td valign=\"top\">\n");
 	// 2011-01-25; formul·r nahr·dzaj˙ci "PRM_CEZ_ROK"
 	// formul·r pre PRM_LIT_OBD
-	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
-		STR_QUERY_TYPE, STR_PRM_LIT_OBD);
+	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">", STR_QUERY_TYPE, STR_PRM_LIT_OBD);
 	Export("</td><td align=\"left\">\n");
 
 	// pole WWW_MODLITBA
@@ -7408,8 +7407,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<option>%s\n", nazov_modlitby(MODL_PRVE_VESPERY));
 	Export("<option>%s\n", nazov_modlitby(MODL_PRVE_KOMPLETORIUM));
 	Export("<option>%s\n", nazov_modlitby(MODL_INVITATORIUM));
-	Export("<option selected>%s\n", nazov_modlitby(MODL_RANNE_CHVALY));
 	Export("<option>%s\n", nazov_modlitby(MODL_POSV_CITANIE));
+	Export("<option selected>%s\n", nazov_modlitby(MODL_RANNE_CHVALY));
 	Export("<option>%s\n", nazov_modlitby(MODL_PREDPOLUDNIM));
 	Export("<option>%s\n", nazov_modlitby(MODL_NAPOLUDNIE));
 	Export("<option>%s\n", nazov_modlitby(MODL_POPOLUDNI));
@@ -8429,13 +8428,14 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 	Export(" \n");
 
 	// pole WWW_MODLITBA
+	// ToDo: zv·ûiù pre sl·vnosti zobraziù aj prvÈ veöpery s kompletÛriom...
 	Export("<select name=\"%s\">\n", STR_MODLITBA);
-	Export("<option>%s\n", nazov_modlitby(MODL_INVITATORIUM)); // invitatÛrium a kompletÛrium pridanÈ 2006-10-13
+	Export("<option>%s\n", nazov_modlitby(MODL_INVITATORIUM));
+	Export("<option>%s\n", nazov_modlitby(MODL_POSV_CITANIE));
 	Export("<option selected>%s\n", nazov_modlitby(MODL_RANNE_CHVALY));
-	Export("<option>%s\n", nazov_modlitby(MODL_POSV_CITANIE)); // posv.citanie pridane 2003-08-13
 	Export("<option>%s\n", nazov_modlitby(MODL_PREDPOLUDNIM));
 	Export("<option>%s\n", nazov_modlitby(MODL_NAPOLUDNIE));
-	Export("<option>%s\n", nazov_modlitby(MODL_POPOLUDNI)); // cez den: pridane 2003-08-13
+	Export("<option>%s\n", nazov_modlitby(MODL_POPOLUDNI));
 	// spomienka P. Marie v sobotu nema vespery ani kompletÛrium
 	if(poradie_svaty != 4){
 		Export("<option>%s\n", nazov_modlitby(MODL_VESPERY));

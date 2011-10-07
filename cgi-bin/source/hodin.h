@@ -51,7 +51,7 @@
 #include "liturgia.h"
 
 const char *TEMPLAT[POCET_MODLITIEB /* + 1 */] =
-{TEMPLAT_INVITATORIUM, TEMPLAT_RANNE_CHVALY, TEMPLAT_POSV_CITANIE,
+{TEMPLAT_INVITATORIUM, TEMPLAT_POSV_CITANIE, TEMPLAT_RANNE_CHVALY,
  TEMPLAT_CEZ_DEN_9, TEMPLAT_CEZ_DEN_12, TEMPLAT_CEZ_DEN_3,
  TEMPLAT_VESPERY, TEMPLAT_KOMPLETORIUM, STR_EMPTY,
  TEMPLAT_VESPERY, TEMPLAT_KOMPLETORIUM, 
@@ -59,14 +59,14 @@ const char *TEMPLAT[POCET_MODLITIEB /* + 1 */] =
 
 // 2008-04-09: doplnené pre batch generovanie modlitieb
 const char char_modlitby[POCET_MODLITIEB /* + 1 */] =
-{CHAR_MODL_INVITATORIUM, CHAR_MODL_RANNE_CHVALY, CHAR_MODL_POSV_CITANIE,
+{CHAR_MODL_INVITATORIUM, CHAR_MODL_POSV_CITANIE, CHAR_MODL_RANNE_CHVALY, 
  CHAR_MODL_CEZ_DEN_9, CHAR_MODL_CEZ_DEN_12, CHAR_MODL_CEZ_DEN_3,
  CHAR_MODL_VESPERY, CHAR_MODL_KOMPLETORIUM, 32 /* ' ' */,
  CHAR_MODL_PRVE_VESPERY, CHAR_MODL_PRVE_KOMPLETORIUM, 
  CHAR_MODL_VESPERY, CHAR_MODL_KOMPLETORIUM, CHAR_MODL_VSETKY};
 
 const char *str_modlitby[POCET_MODLITIEB /* + 1 */] =
-{STR_MODL_INVITATORIUM, STR_MODL_RANNE_CHVALY, STR_MODL_POSV_CITANIE,
+{STR_MODL_INVITATORIUM, STR_MODL_POSV_CITANIE, STR_MODL_RANNE_CHVALY,
  STR_MODL_PREDPOLUDNIM, STR_MODL_NAPOLUDNIE, STR_MODL_POPOLUDNI,
  STR_MODL_VESPERY, STR_MODL_KOMPLETORIUM, STR_EMPTY,
  STR_MODL_PRVE_VESPERY, STR_MODL_PRVE_KOMPLETORIUM, 
@@ -75,8 +75,8 @@ const char *str_modlitby[POCET_MODLITIEB /* + 1 */] =
 // the names of the prayers, lowercase (sample text)
 const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] = 
 {{"invitatórium", "invitatoø", "Invitatory", "invitatorium", "", "Pozvání k modlitbì", "imádságra hívás" }
-, {"ranné chvály", "ranní chvály", "Laudes", "laudes matutinae", "", "Ranní chvály", "reggeli dicséret" }
 , {"posvätné èítanie", "modlitba se ètením", "Office of Readings", "officium lectionis", "", "Modlitba se ètením", "olvasmányos imaóra" }
+, {"ranné chvály", "ranní chvály", "Laudes", "laudes matutinae", "", "Ranní chvály", "reggeli dicséret" }
 , {"modlitba predpoludním", "modlitba dopoledne", "Terce", "tertia", "", "Tercie", "délelõtt" }
 , {"modlitba napoludnie", "modlitba v poledne", "Sext", "sexta", "", "Sexta", "délben" }
 , {"modlitba popoludní", "modlitba odpoledne", "None", "nona", "", "Nona", "délután" }
@@ -98,8 +98,8 @@ const char *nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 // the names of the prayers, sentence case (Sample text)
 const char *nazov_Modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] = 
 {{"Invitatórium", "Invitatoø", "Invitatory", "Invitatorium", "", "Pozvání k modlitbì" , "Imádságra hívás" }
-, {"Ranné chvály", "Ranní chvály", "Laudes", "Laudes matutinae", "", "Ranní chvály" , "Reggeli dicséret" }
 , {"Posvätné èítanie", "Modlitba se ètením", "Office of Readings", "Officium lectionis", "", "Modlitba se ètením" , "Olvasmányos imaóra" }
+, {"Ranné chvály", "Ranní chvály", "Laudes", "Laudes matutinae", "", "Ranní chvály" , "Reggeli dicséret" }
 , {"Modlitba predpoludním", "Modlitba dopoledne", "Terce", "Tertia", "", "Tercie" , "Délelõtt" }
 , {"Modlitba napoludnie", "Modlitba v poledne", "Sext", "Sexta", "", "Sexta" , "Délben" }
 , {"Modlitba popoludní", "Modlitba odpoledne", "None", "Nona", "", "Nona" , "Délután" }
@@ -119,8 +119,8 @@ const char *nazov_Modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 // the names of the prayers, all caps case (SAMPLE TEXT)
 const char *nazov_MODLITBY_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] = 
 {{"INVITATÓRIUM", "INVITATOØ", "INVITATORY", "INVITATORIUM", "", "POZVÁNÍ K MODLITBÌ" , "IMÁDSÁGRA HÍVÁS" }
-, {"RANNÉ CHVÁLY", "RANNÍ CHVÁLY", "LAUDES", "LAUDES MATUTINAE", "", "RANNÍ CHVÁLY" , "REGGELI DICSÉRET" }
 , {"POSVÄTNÉ ÈÍTANIE", "MODLITBA SE ÈTENÍM", "OFFICE OF READINGS", "OFFICIUM LECTIONIS", "", "MODLITBA SE ÈTENÍM" , "OLVASMÁNYOS IMAÓRA" }
+, {"RANNÉ CHVÁLY", "RANNÍ CHVÁLY", "LAUDES", "LAUDES MATUTINAE", "", "RANNÍ CHVÁLY" , "REGGELI DICSÉRET" }
 , {"MODLITBA PREDPOLUDNÍM", "MODLITBA DOPOLEDNE", "TERCE", "TERTIA", "", "TERCIE" , "DÉLELÕTT" }
 , {"MODLITBA NAPOLUDNIE", "MODLITBA V POLEDNE", "SEXT", "SEXTA", "", "SEXTA" , "DÉLBEN" }
 , {"MODLITBA POPOLUDNÍ", "MODLITBA ODPOLEDNE", "NONE", "NONA", "", "NONA" , "DÉLUTÁN" }
@@ -953,8 +953,8 @@ const char *html_button_posv_citanie[POCET_JAZYKOV + 1] = {"Posv. èít.", "Ètení"
 
 const char *html_button_nazov_modlitby_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] = 
 { {"Inv.", "Inv.", "Inv.", "Inv.", "", "Inv.", "Imád."}
-, {"Ranné chvály", "Ranní chvály", "Morning prayer", "Laudes", "", "Ranní chvály", "Reggeli dicséret"}
 , {"Posv. èít.", "Ètení", "Reading", "Off. lect.", "", "Ètení", "Olvasmányos imaóra"}
+, {"Ranné chvály", "Ranní chvály", "Morning prayer", "Laudes", "", "Ranní chvály", "Reggeli dicséret"}
 , {"9h", "9h", "9h", "Tertia", "", "Tercie", "Délelõtt"}
 , {"12h", "12h", "12h", "Sexta", "", "Sexta", "Délben"}
 , {"15h", "15h", "15h", "Nona", "", "Nona", "Délután"}
