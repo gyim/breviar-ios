@@ -6252,6 +6252,59 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 	Log("--- _export_rozbor_dna_buttons(typ == %d) -- end\n", typ); /* 2005-03-22: Pridane */
 }// _export_rozbor_dna_buttons()
 
+void _export_rozbor_dna_buttons_dni_dnes(short int typ, short int dnes_dnes, short int som_v_tabulke, char pom2[MAX_STR]){
+	char pom[MAX_STR] = STR_EMPTY;
+	// 2009-08-12: tlaèidlo pre dnešok sa pre 'M' (batch módový export) nezobrazuje
+#define	BUTTON_DNES
+#ifdef BUTTON_DNES
+	if(_global_opt_batch_monthly == NIE){
+		if(som_v_tabulke == ANO){
+			Export("<td align=\"center\">\n");
+		}
+		else{
+			Export("<center>");
+		}
+		if(dnes_dnes == ANO){
+			Export("<form action=\"%s?%s=%s%s\" method=\"post\">\n",
+				script_name,
+				STR_QUERY_TYPE, 
+				STR_PRM_DNES, 
+				pom2);
+		}
+		else{
+			sprintf(pom, HTML_LINK_CALL1,
+				script_name,
+				STR_QUERY_TYPE, STR_PRM_DATUM,
+				STR_DEN, _global_den.den,
+				STR_MESIAC, _global_den.mesiac,
+				STR_ROK, _global_den.rok,
+				pom2);
+			Export("<form action=\"%s\" method=\"post\">\n", pom);
+		}
+		Export("<"HTML_FORM_INPUT_SUBMIT1" value=\"");
+		if(dnes_dnes == ANO){
+#ifdef VYPISOVAT_PREDCHADZAJUCI_NASLEDUJUCI_BUTTON
+			Export((char *)html_button_Dnes[_global_jazyk]);
+#else
+			Export((char *)html_button_dnes[_global_jazyk]);
+		}
+		else{
+			Export((char *)html_button_hore[_global_jazyk]);
+			Export(_vytvor_string_z_datumu(_global_den.den, _global_den.mesiac, _global_den.rok, ((_global_jazyk == JAZYK_LA) || (_global_jazyk == JAZYK_EN))? CASE_Case : CASE_case, LINK_DEN_MESIAC_ROK, NIE));
+		}
+#endif
+		Export("\">\n");
+		Export("</form>");
+		if(som_v_tabulke == ANO){
+			Export("</td>\n");
+		}
+		else{
+			Export("</center>");
+		}
+	}// _global_opt_batch_monthly == NIE
+#endif
+}// _export_rozbor_dna_buttons_dni_dnes()
+
 //---------------------------------------------------------------------
 /* _export_rozbor_dna_buttons_dni(int, int)
  *
@@ -6274,8 +6327,21 @@ void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO 
 	short int _local_mesiac = _global_den.mesiac;
 	short int _local_rok = _global_den.rok;
 
+	_struct_den_mesiac datum;
+
+	char pom[MAX_STR] = STR_EMPTY;
+	char pom2[MAX_STR];
+	mystrcpy(pom2, STR_EMPTY, MAX_STR);
+	char pom3[MAX_STR];
+	mystrcpy(pom3, STR_EMPTY, MAX_STR);
+
+	if(_global_opt_batch_monthly == NIE){
+		prilep_request_options(pom2, pom3, ANO); // prilep_request_options(pom2, pom3, prvy_ampersand)
+	}// if(_global_opt_batch_monthly == NIE)
+
 	if(query_type == PRM_LIT_OBD){
-		Log("pre query_type == PRM_LIT_OBD sa dni netlaèia (nemám nastavený dátum)...\n");
+		Log("pre query_type == PRM_LIT_OBD sa dni netlaèia (nemám nastavený dátum), iba 'dnes'...\n");
+		_export_rozbor_dna_buttons_dni_dnes(typ, ANO /* dnes_dnes */, NIE /* som_v_tabulke */, pom2);
 		return;
 	}// query_type == PRM_LIT_OBD
 
@@ -6301,18 +6367,6 @@ void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO 
 
 	if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_VIAC_DNI_TXT)){
 		Log("--- _export_rozbor_dna_buttons_dni(): idem tlacit buttony...\n");
-		_struct_den_mesiac datum;
-		short int _local_rok;
-
-		char pom[MAX_STR] = STR_EMPTY;
-		char pom2[MAX_STR];
-		mystrcpy(pom2, STR_EMPTY, MAX_STR);
-		char pom3[MAX_STR];
-		mystrcpy(pom3, STR_EMPTY, MAX_STR);
-
-		if(_global_opt_batch_monthly == NIE){
-			prilep_request_options(pom2, pom3, ANO); // prilep_request_options(pom2, pom3, prvy_ampersand)
-		}// if(_global_opt_batch_monthly == NIE)
 
 		if(dnes_dnes == ANO){
 			Export("<!-- tabu¾ka s buttonmi predošlý, nasledovný rok/mesiac/deò presunutá pred rozbor daného dòa (teda navrh stránky) -->\n");
@@ -6491,45 +6545,8 @@ void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO 
 		}
 
 		// 2007-03-19: Dorobené tlaèidlo pre dnešok
-		// 2009-08-12: tlaèidlo pre dnešok sa pre 'M' (batch módový export) nezobrazuje
-#define	BUTTON_DNES
-#ifdef BUTTON_DNES
-		if(_global_opt_batch_monthly == NIE){
-			if(dnes_dnes == ANO){
-				Export("<td align=\"center\"><form action=\"%s?%s=%s%s\" method=\"post\">\n", /* 2008-08-15: odstránený HTML_AMPERSAND - bol tu dvakrát (je aj v pom2) */
-					script_name,
-					STR_QUERY_TYPE, 
-					STR_PRM_DNES, 
-					pom2);
-			}
-			else{
-				sprintf(pom, HTML_LINK_CALL1,
-					script_name,
-					STR_QUERY_TYPE, STR_PRM_DATUM,
-					STR_DEN, _global_den.den,
-					STR_MESIAC, _global_den.mesiac,
-					STR_ROK, _global_den.rok,
-					pom2);
-				Export("<td>\n<form action=\"%s\" method=\"post\">\n", pom);
-			}
-			Export("<"HTML_FORM_INPUT_SUBMIT1" value=\"");
-			if(dnes_dnes == ANO){
-#ifdef VYPISOVAT_PREDCHADZAJUCI_NASLEDUJUCI_BUTTON
-				Export((char *)html_button_Dnes[_global_jazyk]);
-#else
-				Export((char *)html_button_dnes[_global_jazyk]);
-			}
-			else{
-				Export((char *)html_button_hore[_global_jazyk]);
-				Export(_vytvor_string_z_datumu(_global_den.den, _global_den.mesiac, _global_den.rok, ((_global_jazyk == JAZYK_LA) || (_global_jazyk == JAZYK_EN))? CASE_Case : CASE_case, LINK_DEN_MESIAC_ROK, NIE));
-			}
-#endif
-			Export("\">\n");
-			Export("</form>");
-			if(som_v_tabulke == ANO)
-				Export("</td>\n");
-		}
-#endif
+		// 2011-10-07: presunuté do samostatnej funkcie
+		_export_rozbor_dna_buttons_dni_dnes(typ, dnes_dnes, som_v_tabulke, pom2);
 
 		// vypoèítanie nasledujúceho dòa
 		zmena_mesiaca = NIE;
