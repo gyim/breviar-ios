@@ -38,4 +38,4 @@
 -- vymeni poradie konštánt ranné chvály <-> posvätné èítanie
 
 -- opravi: alm 95 (linka) ignoruje poradie_svateho
-
+	-- hotovor
