@@ -20,6 +20,7 @@
 	-- hotovo
 
 -- pri vo¾be modlitby nie pod¾a dátumu (teda liturgické obdobie) navigaèné tlaèidlá pre predošlı, tento a nasledujúci deò strácajú opodstatnenie (je tam nezmysel 0.0.1900) -- da tam len "^ dnes"
+	-- hotovo (z ve¾kej èasti); je tam len button "dnes"; prerobené linky pre buttony modlitieb; ostáva to otestova pre cmdline a non-web-behavior
 
 -- doplni monos (v rámci option 2) generova tlaèidlá v tabu¾ke, aby to zaberalo menšiu šírku (napr. 3 ståpce, 4 riadky): príklad: 25. máj 2002
 	-- hotovo (option 2)
@@ -31,6 +32,7 @@
 2011-10-06, JUV:
 
 -- upravi zakonèenia tak, aby tam nebolo BEGIN a END, ale len jedno k¾úèové slovo, ako má napr. NAVIGACIA alebo ZVOLANIE
+	-- hotovo
 
 -- problémy pri "modlitba pre dané obdobie, deò..." (vo¾ba úplne dole) pre advent a pod.
 
@@ -39,3 +41,9 @@
 
 -- opravi: alm 95 (linka) ignoruje poradie_svateho
 	-- hotovo
+
+2011-10-08, JUV:
+
+-- odstráni vo¾bu pre "almy zo sviatku/zo dòa"; smernice jasne hovoria, aká psalmódia sa má bra; prerobi ho na parameter "vzia èasti zo spoloènej èasti (nie zo dòa)" pre spomienky a ¾ubovo¾né spomienky pod¾a è. 235 b) všeobecnıch smerníc
+
+
