@@ -1397,25 +1397,6 @@ const char *html_text_spol_casti_vziat_zo_explain[POCET_JAZYKOV + 1] =
  "A szentek ünnepén, a liturgikus elõírások szerint, azok az ima részek, amelyek nem találhatók meg a zsolozsma saját részében,  tetszés szerint vehetõk vagy a  közös részbõl, néha több közös részbõl lehet választani, vagy a köznapról."
 };
 
-const char *html_text_zalmy_pre_mcd[POCET_JAZYKOV + 1] = 
-{"almy pre <i>modlitbu cez deò</i> poui z ", 
- "almy pro <i>modlitbu bìhem dne</i> pouít ze ", 
- "take psalmody for the <i>prayer during the day</i> from ", 
- "",
- "",
- "almy pro <i>modlitbu bìhem dne</i> pouít ze ",
- "hu_"
-};
-const char *html_text_zalmy_pre_mcd_explain[POCET_JAZYKOV + 1] = 
-{"Doplnková psalmódia zahàòa 3 série tzv. graduálnych almov ( 120 – 129), ktoré mono poui namiesto almov zo altára.", 
- "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120 – 129), které je mono pouít místo almù ze altáøe.", 
- "xxx", 
- "",
- "", 
- "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120 – 129), které je mono pouít místo almù ze altáøe.",
- "hu_"
-};
-
 const char *html_text_option0_specialne[POCET_JAZYKOV + 1] = 
 {"v texte modlitieb zobrazi",
  "v textu modliteb zobrazit",
@@ -1705,27 +1686,7 @@ const char *html_text_option1_vigilia_explain[POCET_JAZYKOV + 1] =
  "Ti, kteøí chtìjí podle tradice prodlouit vigilii nedìle, slavnosti nebo svátku, co se velmi doporuèuje, recitují nejprve ètení; po obou èteních, pøed hymnem Te Deum, se pøidávají chvalozpìvy a evangelium.", 
  "Akik a hagyományokhoz híven vasárnap, fõünnep és ünnep elõtt hosszabb vigíliás ünneplést akarnak tartani, elõször végezzék el az Olvasmányos imaórát, a két olvasmány után és a Téged, Isten, dicsérünk himnusz elõtt vegyék hozzá a kantikumokat és utána az evangéliumot."
 };
-/*
-const char *html_text_option1_zalmy_zo_sviatku[POCET_JAZYKOV + 1] = 
-{"poui almy zo sviatku (zo spoloènej èasti)", 
- "pouít almy ze svátku (ze spoleèné èásti)", 
- "take psalms from celebration (commmons)", 
- "", 
- "", 
- "pouít almy ze svátku (ze spoleèné èásti)",
- "a zsoltárokat az ünneprõl (közös részbõl) vegyék"
-};
 
-const char *html_text_option1_zalmy_zo_sviatku_explain[POCET_JAZYKOV + 1] = 
-{"Zvoli, èi sa almy pouijú zo dòa alebo zo sviatku (ak je to moné).", 
- "", 
- "", 
- "",
- "", 
- "",
- "Annak választása, hogy az adott nap vagy az ünnep zsoltárai jelenjenek meg (amennyiben ez lehetséges)."
-};
-*/
 const char *html_text_option1_spomienka_spolcast[POCET_JAZYKOV + 1] = 
 {"na spomienky poui èasti zo spoloènıch èastí", 
  "na památky pouít èásti ze spoleènıch èástí", 

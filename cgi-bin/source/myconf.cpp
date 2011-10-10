@@ -64,7 +64,7 @@ void printConfigOptions(void){
 		Log("=== Jazyk `%s' (%s): Default hodnoty option parametrov (konfiguraèný súbor %s) ===\n", skratka_jazyka[j], nazov_jazyka[j], CONFIG_FILE);
 		for(o = 0; o < POCET_GLOBAL_OPT; o++){
 			Log("cfg_option_default[%d][%d] == `%d'\n", o, j, cfg_option_default[o][j]);
-		}/* for o */
+		}// for o
 	}// for j
 }// printConfigOptions()
 
@@ -85,7 +85,7 @@ void readConfig(void)
 		for(j = 0; j <= POCET_JAZYKOV; j++){
 			cfg_option_default[o][j] = GLOBAL_OPTION_NULL;
 		}// for j
-	}/* for o */
+	}// for o
 
 	if(! (subor = fopen(CONFIG_FILE, "r")) ){
 		Log("Nemôžem otvori súbor `%s'.\n", CONFIG_FILE);

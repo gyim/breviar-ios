@@ -451,7 +451,7 @@ char *remove_diacritics(const char *input){
 				case 'Õ': c = 'O'; break;
 				case 'Ü': c = 'U'; break;
 				case 'Ö': c = 'O'; break;
-			}/* switch */
+			}// switch
 		}/* ok == TRUE */
 		if(_global_pom_str[i] != c)
 			_global_pom_str[i] = c;
