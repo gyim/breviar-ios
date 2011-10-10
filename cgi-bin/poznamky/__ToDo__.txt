@@ -45,5 +45,5 @@
 2011-10-08, JUV:
 
 -- odstráni vo¾bu pre "almy zo sviatku/zo dòa"; smernice jasne hovoria, aká psalmódia sa má bra; prerobi ho na parameter "vzia èasti zo spoloènej èasti (nie zo dòa)" pre spomienky a ¾ubovo¾né spomienky pod¾a è. 235 b) všeobecnıch smerníc
-
+	-- hotovo, BIT_OPT_1_SPOMIENKA_SPOL_CAST; su_inv_hymnus_kcit_kresp_benmagn_prosby_vlastne()
 

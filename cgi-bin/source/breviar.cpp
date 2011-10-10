@@ -1130,7 +1130,7 @@ short int setForm(void){
 				case 5: strcat(local_str, STR_MODL_OPTF1_MCD_ZALMY_INE); break;
 				case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break;
 				case 7: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break;
-				case 8: strcat(local_str, STR_MODL_OPTF1_ZALMY_SV); break;
+				case 8: strcat(local_str, STR_MODL_OPTF1_SPOMIENKA_SPOL_CAST); break;
 				case 9: strcat(local_str, STR_MODL_OPTF1_PLNE_RESP); break;
 				case 10: strcat(local_str, STR_MODL_OPTF1_ZALM95); break;
 				case 11: strcat(local_str, STR_MODL_OPTF1_PROSBY_ZVOLANIE); break;
@@ -7017,11 +7017,11 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	// option 1: ïalšie bity ovplyvòujúce vygenerovanú modlitbu (používame force opt1)...
 	Export("<"HTML_SPAN_BOLD_TOOLTIP">%s</span>", html_text_option1_dalsie_prepinace_explain[_global_jazyk], html_text_option1_dalsie_prepinace[_global_jazyk]);
 
-	// pole (checkbox) WWW_MODL_OPTF1_SKRY_POPIS
+	// pole (checkbox) WWW_MODL_OPTF1_SPOMIENKA_SPOL_CAST
 	Export("<br>");
-	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_SKRY_POPIS, NIE);
-	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_SKRY_POPIS, ANO, html_text_option1_skryt_popis_svaty_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SKRY_POPIS) == BIT_OPT_1_SKRY_POPIS)? html_option_checked: STR_EMPTY);
-	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_skryt_popis_svaty_explain[_global_jazyk], html_text_option1_skryt_popis_svaty[_global_jazyk]);
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_SPOMIENKA_SPOL_CAST, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_SPOMIENKA_SPOL_CAST, ANO, html_text_option1_spomienka_spolcast_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SPOMIENKA_SPOL_CAST) == BIT_OPT_1_SPOMIENKA_SPOL_CAST)? html_option_checked: STR_EMPTY);
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_spomienka_spolcast_explain[_global_jazyk], html_text_option1_spomienka_spolcast[_global_jazyk]);
 
 	// pole (checkbox) WWW_MODL_OPTF1_MCD_ZALMY_INE
 	Export("<br>");
@@ -7042,17 +7042,17 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_prosby_zvolanie_explain[_global_jazyk], html_text_option1_prosby_zvolanie[_global_jazyk]);
 
 #ifdef OS_Windows_Ruby
+	// pole (checkbox) WWW_MODL_OPTF1_SKRY_POPIS
+	Export("<br>");
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_SKRY_POPIS, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_SKRY_POPIS, ANO, html_text_option1_skryt_popis_svaty_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SKRY_POPIS) == BIT_OPT_1_SKRY_POPIS)? html_option_checked: STR_EMPTY);
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_skryt_popis_svaty_explain[_global_jazyk], html_text_option1_skryt_popis_svaty[_global_jazyk]);
+
 	// pole (checkbox) WWW_MODL_OPTF1_VIGILIA
 	Export("<br>");
 	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_VIGILIA, NIE);
 	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_VIGILIA, ANO, html_text_option1_vigilia_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PC_VIGILIA) == BIT_OPT_1_PC_VIGILIA)? html_option_checked: STR_EMPTY);
 	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_vigilia_explain[_global_jazyk], html_text_option1_vigilia[_global_jazyk]);
-
-	// pole (checkbox) WWW_MODL_OPTF1_ZALMY_SV
-	Export("<br>");
-	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF1_ZALMY_SV, NIE);
-	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF1_ZALMY_SV, ANO, html_text_option1_zalmy_zo_sviatku_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALMY_ZO_SVIATKU) == BIT_OPT_1_ZALMY_ZO_SVIATKU)? html_option_checked: STR_EMPTY);
-	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_zalmy_zo_sviatku_explain[_global_jazyk], html_text_option1_zalmy_zo_sviatku[_global_jazyk]);
 #endif
 
 	Export("</td></tr>\n");
@@ -12518,7 +12518,7 @@ short int getForm(void){
 			case 5: strcat(local_str, STR_MODL_OPTF1_MCD_ZALMY_INE); break;
 			case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break;
 			case 7: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break;
-			case 8: strcat(local_str, STR_MODL_OPTF1_ZALMY_SV); break;
+			case 8: strcat(local_str, STR_MODL_OPTF1_SPOMIENKA_SPOL_CAST); break;
 			case 9: strcat(local_str, STR_MODL_OPTF1_PLNE_RESP); break;
 			case 10: strcat(local_str, STR_MODL_OPTF1_ZALM95); break;
 			case 11: strcat(local_str, STR_MODL_OPTF1_PROSBY_ZVOLANIE); break;
@@ -13274,7 +13274,7 @@ short int parseQueryString(void){
 			case 5: strcat(local_str, STR_MODL_OPTF1_MCD_ZALMY_INE); break;
 			case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break;
 			case 7: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break;
-			case 8: strcat(local_str, STR_MODL_OPTF1_ZALMY_SV); break;
+			case 8: strcat(local_str, STR_MODL_OPTF1_SPOMIENKA_SPOL_CAST); break;
 			case 9: strcat(local_str, STR_MODL_OPTF1_PLNE_RESP); break;
 			case 10: strcat(local_str, STR_MODL_OPTF1_ZALM95); break;
 			case 11: strcat(local_str, STR_MODL_OPTF1_PROSBY_ZVOLANIE); break;

@@ -1705,7 +1705,7 @@ const char *html_text_option1_vigilia_explain[POCET_JAZYKOV + 1] =
  "Ti, kteøí chtìjí podle tradice prodlouit vigilii nedìle, slavnosti nebo svátku, co se velmi doporuèuje, recitují nejprve ètení; po obou èteních, pøed hymnem Te Deum, se pøidávají chvalozpìvy a evangelium.", 
  "Akik a hagyományokhoz híven vasárnap, fõünnep és ünnep elõtt hosszabb vigíliás ünneplést akarnak tartani, elõször végezzék el az Olvasmányos imaórát, a két olvasmány után és a Téged, Isten, dicsérünk himnusz elõtt vegyék hozzá a kantikumokat és utána az evangéliumot."
 };
-
+/*
 const char *html_text_option1_zalmy_zo_sviatku[POCET_JAZYKOV + 1] = 
 {"bra almy zo sviatku (zo spoloènej èasti)", 
  "brát almy ze svátku (ze spoleèné èásti)", 
@@ -1724,6 +1724,26 @@ const char *html_text_option1_zalmy_zo_sviatku_explain[POCET_JAZYKOV + 1] =
  "", 
  "",
  "Annak választása, hogy az adott nap vagy az ünnep zsoltárai jelenjenek meg (amennyiben ez lehetséges)."
+};
+*/
+const char *html_text_option1_spomienka_spolcast[POCET_JAZYKOV + 1] = 
+{"bra na spomienky èasti zo spoloènıch èastí", 
+ "brát na památky èásti ze spoleènıch èástí", 
+ "take parts from celebration (commmons)", 
+ "", 
+ "", 
+ "brát na památky èásti ze spoleènıch èástí", 
+ "xxx"
+};
+
+const char *html_text_option1_spomienka_spolcast_explain[POCET_JAZYKOV + 1] = 
+{"Zvoli, èi sa antifóna na invitatórium, hymnus, krátke èítanie, antifóny na Benediktus a Magnifikat a prosby, ak nie sú vlastné berú zo spoloènej èasti (ináè z beného všedného dòa); è. 235 b) všeobecnıch smerníc.", 
+ "", 
+ "", 
+ "",
+ "", 
+ "",
+ "xxx"
 };
 
 const char *html_text_option2_html_export[POCET_JAZYKOV + 1] = 

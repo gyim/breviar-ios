@@ -546,11 +546,11 @@ extern short int query_type; /* premenna obsahujuca PRM_... */
 #endif
 
 // žalmy zo sviatku
-#define MODL_OPTF1_ZALMY_SV 79
+#define MODL_OPTF1_SPOMIENKA_SPOL_CAST 79
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF1_ZALMY_SV "MODL_OPTF1_ZALMY_SV"
+	#define STR_MODL_OPTF1_SPOMIENKA_SPOL_CAST "MODL_OPTF1_SPOMIENKA_SPOL_CAST"
 #else
-	#define STR_MODL_OPTF1_ZALMY_SV "of1zsv"
+	#define STR_MODL_OPTF1_SPOMIENKA_SPOL_CAST "of1spspc"
 #endif
 
 // dlhšie zakonèenie responzória
