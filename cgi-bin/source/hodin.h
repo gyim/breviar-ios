@@ -1636,7 +1636,7 @@ const char *html_text_option1_zalm95[POCET_JAZYKOV + 1] =
  "psalm 95",
  "",
  "místo almù 24, 67 resp. 100 brát alm 95", 
- "a 23., 66. illetve a 99.  zsoltár helyett legyen a 94"
+ "a 23., 66. illetve a 99.  zsoltár helyett legyen a 94."
 };
 const char *html_text_option1_zalm95_explain[POCET_JAZYKOV + 1] = 
 {"Ak sa v rannıch chválach, vešperách alebo posvätnom èítaní vyskytne alm 24, 67 resp. 100, ktorı bol pouitı pre invitatórium, nahradí sa v príslušnej modlitbe almom 95.", 
@@ -1645,7 +1645,7 @@ const char *html_text_option1_zalm95_explain[POCET_JAZYKOV + 1] =
  "xxx",
  "xxx", 
  "Kdy se v ranních chválách, modlitbì se ètením nebo veèerních chválách vyskytne alm 24, 67 resp. 100, kterı se pouil pro invitatorium, nahradí se v pøíslušné modlitbì almem 95.", 
- "Ha a reggeli vagy az esti dicséretben elõfordul a 23., 66. illetve 99. zsoltár, amely az Imádságra hívásban már imádkozva volt, akkor az adott imádságban a 94. zsoltár kerül helyébe."
+ "Ha a reggeli és az esti dicséretben, vagy az olvasmányos imaórában elõfordul a 23., 66. illetve 99. zsoltár, amely az Imádságra hívásban már imádkozva volt, akkor az adott imádságban a 94. zsoltár kerül helyébe."
 };
 
 const char *html_text_option1_prosby_zvolanie[POCET_JAZYKOV + 1] = 
@@ -1655,7 +1655,7 @@ const char *html_text_option1_prosby_zvolanie[POCET_JAZYKOV + 1] =
  "xxx",
  "",
  "svolání v prosbách zopakovat po kadé prosbì", 
- "minden könyörgés után ismételni a felhívást"
+ "minden fohász után ismételni a választ"
 };
 const char *html_text_option1_prosby_zvolanie_explain[POCET_JAZYKOV + 1] = 
 {"V rannıch chválach a vešperách opakova zvolanie v prosbách po kadej prosbe.", 
@@ -1664,7 +1664,7 @@ const char *html_text_option1_prosby_zvolanie_explain[POCET_JAZYKOV + 1] =
  "xxx",
  "xxx", 
  "V ranních a veèerních chválách opakovat svolání v prosbách po kadé prosbì.", 
- "A reggeli és az esti dicséretben minden kérés után ismételni a felhívást."
+ "A reggeli és az esti dicséretben minden fohász után ismételni a választ."
 };
 
 const char *html_text_option1_skryt_popis_svaty[POCET_JAZYKOV + 1] = 
