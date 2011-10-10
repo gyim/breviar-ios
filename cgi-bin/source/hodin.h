@@ -1352,12 +1352,12 @@ const char *html_text_option1_dalsie_prepinace_explain[POCET_JAZYKOV + 1] =
 };
 
 const char *html_text_zalmy_brat_zo[POCET_JAZYKOV + 1] = 
-{"almy bra zo ", 
- "almy brát ze ", 
+{"almy poui zo ", 
+ "almy pouít ze ", 
  "take psalmody from ", 
  "", 
  "", 
- "almy brát ze ",
+ "almy pouít ze ",
  "zsoltárok a következõ helyrõl:"
 };
 const char *html_text_zalmy_brat_zo_okrem_mcd[POCET_JAZYKOV + 1] = 
@@ -1398,21 +1398,21 @@ const char *html_text_spol_casti_vziat_zo_explain[POCET_JAZYKOV + 1] =
 };
 
 const char *html_text_zalmy_pre_mcd[POCET_JAZYKOV + 1] = 
-{"almy pre <i>modlitbu cez deò</i> bra z ", 
- "almy pro <i>modlitbu bìhem dne</i> brát ze ", 
+{"almy pre <i>modlitbu cez deò</i> poui z ", 
+ "almy pro <i>modlitbu bìhem dne</i> pouít ze ", 
  "take psalmody for the <i>prayer during the day</i> from ", 
  "",
  "",
- "almy pro <i>modlitbu bìhem dne</i> brát ze ",
+ "almy pro <i>modlitbu bìhem dne</i> pouít ze ",
  "hu_"
 };
 const char *html_text_zalmy_pre_mcd_explain[POCET_JAZYKOV + 1] = 
-{"Doplnková psalmódia zahàòa 3 série tzv. graduálnych almov ( 120 – 129), ktoré mono bra namiesto almov zo altára.", 
- "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120 – 129), které je mono brát místo almù ze altáøe.", 
+{"Doplnková psalmódia zahàòa 3 série tzv. graduálnych almov ( 120 – 129), ktoré mono poui namiesto almov zo altára.", 
+ "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120 – 129), které je mono pouít místo almù ze altáøe.", 
  "xxx", 
  "",
  "", 
- "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120 – 129), které je mono brát místo almù ze altáøe.",
+ "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120 – 129), které je mono pouít místo almù ze altáøe.",
  "hu_"
 };
 
@@ -1612,30 +1612,30 @@ const char *html_text_option1_plne_resp_explain[POCET_JAZYKOV + 1] =
 
 const char *html_text_option1_mcd_zalmy_ine[POCET_JAZYKOV + 1] = 
 {"pre modlitbu cez deò poui doplnkovú psalmódiu", 
- "pro modlitbu bìhem dne brát almy z doplòovacího cyklu", 
+ "pro modlitbu bìhem dne pouít almy z doplòovacího cyklu", 
  "xxx", 
  "supplementaris psalmodia",
  "",
- "pro modlitbu bìhem dne brát almy z doplòovacího cyklu", 
+ "pro modlitbu bìhem dne pouít almy z doplòovacího cyklu", 
  "a Napközi imaórában a kiegészítõ zsoltárokat vegyék"
 };
 const char *html_text_option1_mcd_zalmy_ine_explain[POCET_JAZYKOV + 1] = 
 {"Pokia¾ sa niekto modlí viac modlitieb cez deò, v prvej vezme benú psalmódiu; v ostatnıch sa pouije doplnková psalmódia. Zahàòa 3 série tzv. graduálnych almov ( 120 – 129).", 
- "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120 – 129), které je mono brát místo almù ze altáøe.", 
+ "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120 – 129), které je mono pouít místo almù ze altáøe.", 
  "", 
  "",
  "", 
- "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120 – 129), které je mono brát místo almù ze altáøe.", 
+ "Doplòovací cyklus almù obsahuje 3 série tzv. graduálních almù ( 120 – 129), které je mono pouít místo almù ze altáøe.", 
  "Aki több Napközi imaórát mond, az egyik imaórában a soros zsoltárösszeállítást veszi, a többin a kiegészítõt. Ez az úgynevezett „zarándokzsoltárokból“ vett három-három zsoltárból áll (Zsolt 119 – 127)."
 };
 
 const char *html_text_option1_zalm95[POCET_JAZYKOV + 1] = 
 {"namiesto almov 24, 67 resp. 100 poui alm 95", 
- "místo almù 24, 67 resp. 100 brát alm 95", 
+ "místo almù 24, 67 resp. 100 pouít alm 95", 
  "xxx", 
  "psalm 95",
  "",
- "místo almù 24, 67 resp. 100 brát alm 95", 
+ "místo almù 24, 67 resp. 100 pouít alm 95", 
  "a 23., 66. illetve a 99.  zsoltár helyett legyen a 94."
 };
 const char *html_text_option1_zalm95_explain[POCET_JAZYKOV + 1] = 
@@ -1650,11 +1650,11 @@ const char *html_text_option1_zalm95_explain[POCET_JAZYKOV + 1] =
 
 const char *html_text_option1_prosby_zvolanie[POCET_JAZYKOV + 1] = 
 {"zvolanie v prosbách opakova po kadej prosbe", 
- "svolání v prosbách zopakovat po kadé prosbì", 
+ "zvolání v prosbách zopakovat po kadé prosbì", 
  "xxx", 
  "xxx",
  "",
- "svolání v prosbách zopakovat po kadé prosbì", 
+ "zvolání v prosbách zopakovat po kadé prosbì", 
  "minden fohász után ismételni a választ"
 };
 const char *html_text_option1_prosby_zvolanie_explain[POCET_JAZYKOV + 1] = 
@@ -1707,12 +1707,12 @@ const char *html_text_option1_vigilia_explain[POCET_JAZYKOV + 1] =
 };
 /*
 const char *html_text_option1_zalmy_zo_sviatku[POCET_JAZYKOV + 1] = 
-{"bra almy zo sviatku (zo spoloènej èasti)", 
- "brát almy ze svátku (ze spoleèné èásti)", 
+{"poui almy zo sviatku (zo spoloènej èasti)", 
+ "pouít almy ze svátku (ze spoleèné èásti)", 
  "take psalms from celebration (commmons)", 
  "", 
  "", 
- "brát almy ze svátku (ze spoleèné èásti)",
+ "pouít almy ze svátku (ze spoleèné èásti)",
  "a zsoltárokat az ünneprõl (közös részbõl) vegyék"
 };
 
@@ -1727,12 +1727,12 @@ const char *html_text_option1_zalmy_zo_sviatku_explain[POCET_JAZYKOV + 1] =
 };
 */
 const char *html_text_option1_spomienka_spolcast[POCET_JAZYKOV + 1] = 
-{"bra na spomienky èasti zo spoloènıch èastí", 
- "brát na památky èásti ze spoleènıch èástí", 
+{"na spomienky poui èasti zo spoloènıch èastí", 
+ "na památky pouít èásti ze spoleènıch èástí", 
  "take parts from celebration (commmons)", 
  "", 
  "", 
- "brát na památky èásti ze spoleènıch èástí", 
+ "na památky pouít èásti ze spoleènıch èástí", 
  "xxx"
 };
 
