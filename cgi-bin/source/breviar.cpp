@@ -1103,9 +1103,9 @@ short int setForm(void){
 		if(!equals(pom_MODL_OPTF_SPECIALNE[i], STR_EMPTY)){
 			mystrcpy(local_str, WWW_PREFIX, SMALL);
 			switch(i){
-				case 0: strcat(local_str, STR_MODL_OPTF0_VERSE); break;
-				case 1: strcat(local_str, STR_MODL_OPTF0_REF); break;
-				case 2: strcat(local_str, STR_MODL_OPTF0_CIT); break;
+				case 0: strcat(local_str, STR_MODL_OPTF0_VERSE); break; // BIT_OPT_0_VERSE
+				case 1: strcat(local_str, STR_MODL_OPTF0_REF); break; // BIT_OPT_0_REFERENCIE
+				case 2: strcat(local_str, STR_MODL_OPTF0_CIT); break; // BIT_OPT_0_CITANIA
 			}// switch(i)
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF_SPECIALNE[i]);
@@ -1122,18 +1122,18 @@ short int setForm(void){
 		if(!equals(pom_MODL_OPTF_CASTI_MODLITBY[i], STR_EMPTY)){
 			mystrcpy(local_str, WWW_PREFIX, SMALL);
 			switch(i){
-				case 0: strcat(local_str, STR_MODL_OPTF1_TD); break;
-				case 1: strcat(local_str, STR_MODL_OPTF1_RUB); break;
-				case 2: strcat(local_str, STR_MODL_OPTF1_CHV); break;
-				case 3: strcat(local_str, STR_MODL_OPTF1_SL); break;
-				case 4: strcat(local_str, STR_MODL_OPTF1_OT); break;
-				case 5: strcat(local_str, STR_MODL_OPTF1_MCD_ZALMY_INE); break;
-				case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break;
-				case 7: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break;
-				case 8: strcat(local_str, STR_MODL_OPTF1_SPOMIENKA_SPOL_CAST); break;
-				case 9: strcat(local_str, STR_MODL_OPTF1_PLNE_RESP); break;
-				case 10: strcat(local_str, STR_MODL_OPTF1_ZALM95); break;
-				case 11: strcat(local_str, STR_MODL_OPTF1_PROSBY_ZVOLANIE); break;
+				case 0: strcat(local_str, STR_MODL_OPTF1_TD); break; // BIT_OPT_1_TEDEUM
+				case 1: strcat(local_str, STR_MODL_OPTF1_RUB); break; // BIT_OPT_1_RUBRIKY
+				case 2: strcat(local_str, STR_MODL_OPTF1_CHV); break; // BIT_OPT_1_CHVALOSPEVY
+				case 3: strcat(local_str, STR_MODL_OPTF1_SL); break; // BIT_OPT_1_SLAVA_OTCU
+				case 4: strcat(local_str, STR_MODL_OPTF1_OT); break; // BIT_OPT_1_OTCENAS
+				case 5: strcat(local_str, STR_MODL_OPTF1_MCD_ZALMY_INE); break; // BIT_OPT_1_MCD_ZALMY_INE
+				case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break; // BIT_OPT_1_PC_VIGILIA
+				case 7: strcat(local_str, STR_MODL_OPTF1_SPOMIENKA_SPOL_CAST); break; // BIT_OPT_1_SPOMIENKA_SPOL_CAST
+				case 8: strcat(local_str, STR_MODL_OPTF1_PLNE_RESP); break; // BIT_OPT_1_PLNE_RESP
+				case 9: strcat(local_str, STR_MODL_OPTF1_ZALM95); break; // BIT_OPT_1_ZALM95
+				case 10: strcat(local_str, STR_MODL_OPTF1_PROSBY_ZVOLANIE); break; // BIT_OPT_1_PROSBY_ZVOLANIE
+				case 11: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break; // BIT_OPT_1_SKRY_POPIS
 			}// switch(i)
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF_CASTI_MODLITBY[i]);
@@ -1150,14 +1150,14 @@ short int setForm(void){
 		if(!equals(pom_MODL_OPTF_HTML_EXPORT[i], STR_EMPTY)){
 			mystrcpy(local_str, WWW_PREFIX, SMALL);
 			switch(i){
-				case 0: strcat(local_str, STR_MODL_OPTF2_ISO_DATUM); break;
-				case 1: strcat(local_str, STR_MODL_OPTF2_PRVE_VESPERY); break;
-				case 2: strcat(local_str, STR_MODL_OPTF2_FONT_FAMILY); break;
-				case 3: strcat(local_str, STR_MODL_OPTF2_FONT_NAME_CHOOSER); break;
-				// case 4: strcat(local_str, STR_MODL_OPTF2_FONT_SIZE); break;
-				case 5: strcat(local_str, STR_MODL_OPTF2_NAVIGATION); break;
-				case 6: strcat(local_str, STR_MODL_OPTF2_TEXT_WRAP); break;
-				case 7: strcat(local_str, STR_MODL_OPTF2_BUTTONY_USPORNE); break;
+				case 0: strcat(local_str, STR_MODL_OPTF2_ISO_DATUM); break; // BIT_OPT_2_ISO_DATUM
+				case 1: strcat(local_str, STR_MODL_OPTF2_PRVE_VESPERY); break; // BIT_OPT_2_BUTTON_PRVE_VESPERY
+				case 2: strcat(local_str, STR_MODL_OPTF2_FONT_FAMILY); break; // BIT_OPT_2_FONT_FAMILY
+				case 3: strcat(local_str, STR_MODL_OPTF2_FONT_NAME_CHOOSER); break; // BIT_OPT_2_FONT_NAME_CHOOSER
+				// case 4: strcat(local_str, STR_MODL_OPTF2_FONT_SIZE); break; // BIT_OPT_2_FONT_SIZE_CHOOSER
+				case 5: strcat(local_str, STR_MODL_OPTF2_NAVIGATION); break; // BIT_OPT_2_NAVIGATION
+				case 6: strcat(local_str, STR_MODL_OPTF2_TEXT_WRAP); break; // BIT_OPT_2_TEXT_WRAP
+				case 7: strcat(local_str, STR_MODL_OPTF2_BUTTONY_USPORNE); break; // BIT_OPT_2_BUTTONY_USPORNE
 			}// switch(i)
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF_HTML_EXPORT[i]);
@@ -12463,9 +12463,9 @@ short int getForm(void){
 		/* premenn· WWW_MODL_OPTF0_... */
 		mystrcpy(local_str, WWW_PREFIX, SMALL);
 		switch(i){
-			case 0: strcat(local_str, STR_MODL_OPTF0_VERSE); break;
-			case 1: strcat(local_str, STR_MODL_OPTF0_REF); break;
-			case 2: strcat(local_str, STR_MODL_OPTF0_CIT); break;
+			case 0: strcat(local_str, STR_MODL_OPTF0_VERSE); break; // BIT_OPT_0_VERSE
+			case 1: strcat(local_str, STR_MODL_OPTF0_REF); break; // BIT_OPT_0_REFERENCIE
+			case 2: strcat(local_str, STR_MODL_OPTF0_CIT); break; // BIT_OPT_0_CITANIA
 		}// switch(i)
 		ptr = getenv(local_str);
 		if(ptr != NULL){
@@ -12480,18 +12480,18 @@ short int getForm(void){
 		// premenn· WWW_MODL_OPTF1_...
 		mystrcpy(local_str, WWW_PREFIX, SMALL);
 		switch(i){
-			case 0: strcat(local_str, STR_MODL_OPTF1_TD); break;
-			case 1: strcat(local_str, STR_MODL_OPTF1_RUB); break;
-			case 2: strcat(local_str, STR_MODL_OPTF1_CHV); break;
-			case 3: strcat(local_str, STR_MODL_OPTF1_SL); break;
-			case 4: strcat(local_str, STR_MODL_OPTF1_OT); break;
-			case 5: strcat(local_str, STR_MODL_OPTF1_MCD_ZALMY_INE); break;
-			case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break;
-			case 7: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break;
-			case 8: strcat(local_str, STR_MODL_OPTF1_SPOMIENKA_SPOL_CAST); break;
-			case 9: strcat(local_str, STR_MODL_OPTF1_PLNE_RESP); break;
-			case 10: strcat(local_str, STR_MODL_OPTF1_ZALM95); break;
-			case 11: strcat(local_str, STR_MODL_OPTF1_PROSBY_ZVOLANIE); break;
+			case 0: strcat(local_str, STR_MODL_OPTF1_TD); break; // BIT_OPT_1_TEDEUM
+			case 1: strcat(local_str, STR_MODL_OPTF1_RUB); break; // BIT_OPT_1_RUBRIKY
+			case 2: strcat(local_str, STR_MODL_OPTF1_CHV); break; // BIT_OPT_1_CHVALOSPEVY
+			case 3: strcat(local_str, STR_MODL_OPTF1_SL); break; // BIT_OPT_1_SLAVA_OTCU
+			case 4: strcat(local_str, STR_MODL_OPTF1_OT); break; // BIT_OPT_1_OTCENAS
+			case 5: strcat(local_str, STR_MODL_OPTF1_MCD_ZALMY_INE); break; // BIT_OPT_1_MCD_ZALMY_INE
+			case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break; // BIT_OPT_1_PC_VIGILIA
+			case 7: strcat(local_str, STR_MODL_OPTF1_SPOMIENKA_SPOL_CAST); break; // BIT_OPT_1_SPOMIENKA_SPOL_CAST
+			case 8: strcat(local_str, STR_MODL_OPTF1_PLNE_RESP); break; // BIT_OPT_1_PLNE_RESP
+			case 9: strcat(local_str, STR_MODL_OPTF1_ZALM95); break; // BIT_OPT_1_ZALM95
+			case 10: strcat(local_str, STR_MODL_OPTF1_PROSBY_ZVOLANIE); break; // BIT_OPT_1_PROSBY_ZVOLANIE
+			case 11: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break; // BIT_OPT_1_SKRY_POPIS
 		}// switch(i)
 		ptr = getenv(local_str);
 		if(ptr != NULL){
@@ -12506,14 +12506,14 @@ short int getForm(void){
 		// premenn· WWW_MODL_OPTF2_...
 		mystrcpy(local_str, WWW_PREFIX, SMALL);
 		switch(i){
-			case 0: strcat(local_str, STR_MODL_OPTF2_ISO_DATUM); break;
-			case 1: strcat(local_str, STR_MODL_OPTF2_PRVE_VESPERY); break;
-			case 2: strcat(local_str, STR_MODL_OPTF2_FONT_FAMILY); break;
-			case 3: strcat(local_str, STR_MODL_OPTF2_FONT_NAME_CHOOSER); break;
-			// case 4: strcat(local_str, STR_MODL_OPTF2_FONT_SIZE); break;
-			case 5: strcat(local_str, STR_MODL_OPTF2_NAVIGATION); break;
-			case 6: strcat(local_str, STR_MODL_OPTF2_TEXT_WRAP); break;
-			case 7: strcat(local_str, STR_MODL_OPTF2_BUTTONY_USPORNE); break;
+			case 0: strcat(local_str, STR_MODL_OPTF2_ISO_DATUM); break; // BIT_OPT_2_ISO_DATUM
+			case 1: strcat(local_str, STR_MODL_OPTF2_PRVE_VESPERY); break; // BIT_OPT_2_BUTTON_PRVE_VESPERY
+			case 2: strcat(local_str, STR_MODL_OPTF2_FONT_FAMILY); break; // BIT_OPT_2_FONT_FAMILY
+			case 3: strcat(local_str, STR_MODL_OPTF2_FONT_NAME_CHOOSER); break; // BIT_OPT_2_FONT_NAME_CHOOSER
+			// case 4: strcat(local_str, STR_MODL_OPTF2_FONT_SIZE); break; // BIT_OPT_2_FONT_SIZE_CHOOSER
+			case 5: strcat(local_str, STR_MODL_OPTF2_NAVIGATION); break; // BIT_OPT_2_NAVIGATION
+			case 6: strcat(local_str, STR_MODL_OPTF2_TEXT_WRAP); break; // BIT_OPT_2_TEXT_WRAP
+			case 7: strcat(local_str, STR_MODL_OPTF2_BUTTONY_USPORNE); break; // BIT_OPT_2_BUTTONY_USPORNE
 		}// switch(i)
 		ptr = getenv(local_str);
 		if(ptr != NULL){
@@ -13207,9 +13207,9 @@ short int parseQueryString(void){
 		Log("j == %d...\n", j);
 		mystrcpy(local_str, STR_EMPTY, SMALL);
 		switch(j){
-			case 0: strcat(local_str, STR_MODL_OPTF0_VERSE); break;
-			case 1: strcat(local_str, STR_MODL_OPTF0_REF); break;
-			case 2: strcat(local_str, STR_MODL_OPTF0_CIT); break;
+			case 0: strcat(local_str, STR_MODL_OPTF0_VERSE); break; // BIT_OPT_0_VERSE
+			case 1: strcat(local_str, STR_MODL_OPTF0_REF); break; // BIT_OPT_0_REFERENCIE
+			case 2: strcat(local_str, STR_MODL_OPTF0_CIT); break; // BIT_OPT_0_CITANIA
 		}// switch(j)
 		// premenn· WWW_MODL_OPTF0_... (nepovinn·), j = 0 aû POCET_OPT_0_SPECIALNE
 		i = 0; // param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0
@@ -13234,18 +13234,18 @@ short int parseQueryString(void){
 		Log("j == %d...\n", j);
 		mystrcpy(local_str, STR_EMPTY, SMALL);
 		switch(j){
-			case 0: strcat(local_str, STR_MODL_OPTF1_TD); break;
-			case 1: strcat(local_str, STR_MODL_OPTF1_RUB); break;
-			case 2: strcat(local_str, STR_MODL_OPTF1_CHV); break;
-			case 3: strcat(local_str, STR_MODL_OPTF1_SL); break;
-			case 4: strcat(local_str, STR_MODL_OPTF1_OT); break;
-			case 5: strcat(local_str, STR_MODL_OPTF1_MCD_ZALMY_INE); break;
-			case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break;
-			case 7: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break;
-			case 8: strcat(local_str, STR_MODL_OPTF1_SPOMIENKA_SPOL_CAST); break;
-			case 9: strcat(local_str, STR_MODL_OPTF1_PLNE_RESP); break;
-			case 10: strcat(local_str, STR_MODL_OPTF1_ZALM95); break;
-			case 11: strcat(local_str, STR_MODL_OPTF1_PROSBY_ZVOLANIE); break;
+			case 0: strcat(local_str, STR_MODL_OPTF1_TD); break; // BIT_OPT_1_TEDEUM
+			case 1: strcat(local_str, STR_MODL_OPTF1_RUB); break; // BIT_OPT_1_RUBRIKY
+			case 2: strcat(local_str, STR_MODL_OPTF1_CHV); break; // BIT_OPT_1_CHVALOSPEVY
+			case 3: strcat(local_str, STR_MODL_OPTF1_SL); break; // BIT_OPT_1_SLAVA_OTCU
+			case 4: strcat(local_str, STR_MODL_OPTF1_OT); break; // BIT_OPT_1_OTCENAS
+			case 5: strcat(local_str, STR_MODL_OPTF1_MCD_ZALMY_INE); break; // BIT_OPT_1_MCD_ZALMY_INE
+			case 6: strcat(local_str, STR_MODL_OPTF1_VIGILIA); break; // BIT_OPT_1_PC_VIGILIA
+			case 7: strcat(local_str, STR_MODL_OPTF1_SPOMIENKA_SPOL_CAST); break; // BIT_OPT_1_SPOMIENKA_SPOL_CAST
+			case 8: strcat(local_str, STR_MODL_OPTF1_PLNE_RESP); break; // BIT_OPT_1_PLNE_RESP
+			case 9: strcat(local_str, STR_MODL_OPTF1_ZALM95); break; // BIT_OPT_1_ZALM95
+			case 10: strcat(local_str, STR_MODL_OPTF1_PROSBY_ZVOLANIE); break; // BIT_OPT_1_PROSBY_ZVOLANIE
+			case 11: strcat(local_str, STR_MODL_OPTF1_SKRY_POPIS); break; // BIT_OPT_1_SKRY_POPIS
 		}// switch(j)
 		// premenn· WWW_MODL_OPTF1_... (nepovinn·), j = 0 aû POCET_OPT_1_CASTI_MODLITBY
 		i = 0; // param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0
@@ -13270,14 +13270,14 @@ short int parseQueryString(void){
 		Log("j == %d...\n", j);
 		mystrcpy(local_str, STR_EMPTY, SMALL);
 		switch(j){
-			case 0: strcat(local_str, STR_MODL_OPTF2_ISO_DATUM); break;
-			case 1: strcat(local_str, STR_MODL_OPTF2_PRVE_VESPERY); break;
-			case 2: strcat(local_str, STR_MODL_OPTF2_FONT_FAMILY); break;
-			case 3: strcat(local_str, STR_MODL_OPTF2_FONT_NAME_CHOOSER); break;
-			// case 4: strcat(local_str, STR_MODL_OPTF2_FONT_SIZE); break;
-			case 5: strcat(local_str, STR_MODL_OPTF2_NAVIGATION); break;
-			case 6: strcat(local_str, STR_MODL_OPTF2_TEXT_WRAP); break;
-			case 7: strcat(local_str, STR_MODL_OPTF2_BUTTONY_USPORNE); break;
+			case 0: strcat(local_str, STR_MODL_OPTF2_ISO_DATUM); break; // BIT_OPT_2_ISO_DATUM
+			case 1: strcat(local_str, STR_MODL_OPTF2_PRVE_VESPERY); break; // BIT_OPT_2_BUTTON_PRVE_VESPERY
+			case 2: strcat(local_str, STR_MODL_OPTF2_FONT_FAMILY); break; // BIT_OPT_2_FONT_FAMILY
+			case 3: strcat(local_str, STR_MODL_OPTF2_FONT_NAME_CHOOSER); break; // BIT_OPT_2_FONT_NAME_CHOOSER
+			// case 4: strcat(local_str, STR_MODL_OPTF2_FONT_SIZE); break; // BIT_OPT_2_FONT_SIZE_CHOOSER
+			case 5: strcat(local_str, STR_MODL_OPTF2_NAVIGATION); break; // BIT_OPT_2_NAVIGATION
+			case 6: strcat(local_str, STR_MODL_OPTF2_TEXT_WRAP); break; // BIT_OPT_2_TEXT_WRAP
+			case 7: strcat(local_str, STR_MODL_OPTF2_BUTTONY_USPORNE); break; // BIT_OPT_2_BUTTONY_USPORNE
 		}// switch(j)
 		// premenn· WWW_MODL_OPT2_... (nepovinn·), j = 0 aû POCET_OPT_2_HTML_EXPORT
 		i = 0; // param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0
