@@ -3,7 +3,7 @@
     <string name="app_name">Breviár</string>
     <string name="back">Späť</string>
     <string name="today">Dnes</string>
-    <string name="forward">Vpred</string>
+    <string name="pgup">Hore</string>
     <string name="pgdn">Ďalej</string>
     <string name="lang_sk">SK</string>
     <string name="lang_cz">CZ</string>
