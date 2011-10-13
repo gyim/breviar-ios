@@ -21164,7 +21164,7 @@ label_25_MAR:
 						else{
 							_vlastna_cast_full(modlitba);
 						}
-						_set_zalmy_1nedele_rch(); /* 2008-08-15: doplnené */
+						_set_zalmy_1nedele_rch(); // 2008-08-15: doplnené
 
 						modlitba = MODL_POSV_CITANIE;
 						// 2009-07-10: nastavenie pre èeský breviár - je to len spomienka
@@ -21229,10 +21229,7 @@ label_25_MAR:
 
 							modlitba = MODL_RANNE_CHVALY;
 							_vlastna_cast_full_okrem_prosieb(modlitba); // 2009-07-27: opravené
-							/*
-							_vlastna_cast_benediktus;
-							_vlastna_cast_modlitba;
-							*/
+							_set_zalmy_1nedele_rch(); // 2011-10-13: doplnené
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_hymnus;
@@ -21241,10 +21238,7 @@ label_25_MAR:
 
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_full_okrem_prosieb(modlitba); // 2009-07-27: opravené
-							/*
-							_vlastna_cast_benediktus;
-							_vlastna_cast_modlitba;
-							*/
+							_set_zalmy_sviatok_muc(modlitba);
 
 							break;
 						}
