@@ -20991,9 +20991,7 @@ label_25_MAR:
 
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
-						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU)){ // 2009-07-10: pre èeské breviáre všetko zo spoloènej èasti; 2009-08-11: modlitba je z vlastnej èasti
-							_vlastna_cast_2citanie;
-						}
+						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_modlitba;
