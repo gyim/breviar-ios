@@ -47,3 +47,9 @@
 -- odstráni vo¾bu pre "almy zo sviatku/zo dòa"; smernice jasne hovoria, aká psalmódia sa má bra; prerobi ho na parameter "vzia èasti zo spoloènej èasti (nie zo dòa)" pre spomienky a ¾ubovo¾né spomienky pod¾a è. 235 b) všeobecnıch smerníc
 	-- hotovo, BIT_OPT_1_SPOMIENKA_SPOL_CAST; su_inv_hymnus_kcit_kresp_benmagn_prosby_vlastne()
 
+2011-10-13, JUV:
+
+-- aj do ostatnıch jazykov do HTML zdrojákov pre almy a chválospevy doplni "kríiky"
+
+-- zvái, èi èervenú pomlèku, odde¾ujúcu jednotlivé strofy pre almy a chválospevy, spravi volite¾ne zobrazite¾nou (implementácia ako napr. <!--{ZAKONCENIE:SKRZE}-->)
+
