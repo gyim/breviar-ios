@@ -1760,7 +1760,7 @@ void _set_antifony_mcd_doplnkova_psalmodia(void){
 /* 2006-01-24: pridané žalmy nedele 1. týždòa kvôli modlitbe cez deò */
 void _set_zalmy_1nedele_mcd(void){/* modlitba cez deò; rovnaké žalmy sú pre nede¾u 3. týždòa; 2007-01-11 */
 	Log("_set_zalmy_1nedele_mcd() -- begin\n");
-	/* modlitba cez den */
+	// modlitba cez deò
 	set_zalm(1, MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_I");
 	set_zalm(2, MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_II");
 	set_zalm(3, MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_III");
@@ -1770,7 +1770,7 @@ void _set_zalmy_1nedele_mcd(void){/* modlitba cez deò; rovnaké žalmy sú pre nede
 /* 2007-01-11: pridané žalmy nedele 2. týždòa kvôli modlitbe cez deò */
 void _set_zalmy_2nedele_mcd(void){/* modlitba cez deò; rovnaké žalmy sú pre nede¾u 4. týždòa; 2007-01-11 */
 	Log("_set_zalmy_2nedele_mcd() -- begin\n");
-	/* modlitba cez den */
+	// modlitba cez deò
 	set_zalm(1, MODL_CEZ_DEN_VSETKY, "z23.htm", "ZALM23");
 	set_zalm(2, MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_I");
 	set_zalm(3, MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_II");
@@ -1945,12 +1945,12 @@ void _set_kompletorium_slavnost_oktava(short int modlitba, short int litobd, sho
 	} \
 }
 
-/* 2009-01-06: vytvorené vyòatím èastí pre kompletórium z zaltar_zvazok(); premenné tyzzal ani zvazok nepotrebujeme */
-/* 2010-08-03: potrebujeme premennú tyzzal */
+// 2009-01-06: vytvorené vyòatím èastí pre kompletórium z zaltar_zvazok(); premenné tyzzal ani zvazok nepotrebujeme7
+// 2010-08-03: potrebujeme premennú tyzzal
 void zaltar_kompletorium(short int den, short int obdobie, short int specialne, short int tyzzal){
 	Log("-- zaltar_kompletorium(%d, %d, %d, %d) -- zaèiatok\n", den, obdobie, specialne, tyzzal);
 	Log("nastavujem poèet žalmov pre kompletórium v závislosti od dòa v týždni (%d - %s)...\n", den, nazov_dna(den));
-	/* 2006-10-17: Doplnené kvôli rôznemu poètu žalmov pre kompletórium; upravené 2006-10-18 */
+	// 2006-10-17: Doplnené kvôli rôznemu poètu žalmov pre kompletórium; upravené 2006-10-18
 	if(den == DEN_STREDA){
 		_global_modl_kompletorium.pocet_zalmov = 2;
 	}
@@ -1963,11 +1963,11 @@ void zaltar_kompletorium(short int den, short int obdobie, short int specialne, 
 	}
 	if(specialne == ZALTAR_VSETKO){
 		Log("ZALTAR_VSETKO -- takže nastavujem všetko zo žaltára...\n");
-		/* 2006-10-13: pridané èasti pre kompletórium */
-		/* 2010-08-03: pridaná premenná tyzzal */
+		// 2006-10-13: pridané èasti pre kompletórium
+		// 2010-08-03: pridaná premenná tyzzal
 		set_hymnus(den, tyzzal, MODL_KOMPLETORIUM);
 		set_hymnus(den, tyzzal, MODL_PRVE_KOMPLETORIUM);
-		/* 2006-10-13: pridané ïalšie èasti pre kompletórium */
+		// 2006-10-13: pridané ïalšie èasti pre kompletórium
 		set_antifony(den, 1 /* tyzzal */, 1 /* zvazok */, MODL_KOMPLETORIUM);
 		set_antifony(den, 1 /* tyzzal */, 1 /* zvazok */, MODL_PRVE_KOMPLETORIUM);
 		set_kcitanie(den, 1 /* tyzzal */, MODL_KOMPLETORIUM);
@@ -1980,7 +1980,7 @@ void zaltar_kompletorium(short int den, short int obdobie, short int specialne, 
 	else{
 		Log("nebolo ZALTAR_VSETKO ani ZALTAR_IBA_ZALMY_HYMNUS_MCD -- takže nastavujem len žalmy...\n");
 	}
-	/* 2006-10-17: pridané kompletórium - pôvodná poznámka z zaltar_zvazok() */
+	// 2006-10-17: pridané kompletórium - pôvodná poznámka z zaltar_zvazok()
 	switch(den){
 		case DEN_NEDELA:
 			set_zalm(1, MODL_PRVE_KOMPLETORIUM, "z4.htm", "ZALM4");
@@ -1994,7 +1994,7 @@ void zaltar_kompletorium(short int den, short int obdobie, short int specialne, 
 			set_zalm(1, MODL_KOMPLETORIUM, "z143.htm", "ZALM143");
 			break;
 		case DEN_STREDA:
-			set_zalm(1, MODL_KOMPLETORIUM, "z31.htm", "ZALM31,1-6"); /* 2009-02-17: Zmenené; pôvodne bolo "ZALM31_1_6" */
+			set_zalm(1, MODL_KOMPLETORIUM, "z31.htm", "ZALM31,1-6"); // 2009-02-17: Zmenené; pôvodne bolo "ZALM31_1_6"
 			set_zalm(2, MODL_KOMPLETORIUM, "z130.htm", "ZALM130");
 			break;
 		case DEN_STVRTOK:
@@ -2005,9 +2005,9 @@ void zaltar_kompletorium(short int den, short int obdobie, short int specialne, 
 			break;
 		case DEN_SOBOTA:
 			break;
-	}/* switch(den) */
+	}// switch(den)
 	Log("-- zaltar_kompletorium(%d, %d, %d, %d) -- koniec\n", den, obdobie, specialne, tyzzal);
-}/* zaltar_kompletorium() */
+}// zaltar_kompletorium()
 
 void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int specialne){
 	/* 2006-01-24: pôvodná funkcia mala 2 parametre 
@@ -2044,15 +2044,15 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 
 	if(specialne == ZALTAR_VSETKO){
 		Log("ZALTAR_VSETKO -- takže nastavujem všetko zo žaltára...\n");
-		/* cast vseobecna pre vsetky 4 tyzdne zaltara upravena 2003-08-13. veci dane do dvoch makier */
+		// cast vseobecna pre vsetky 4 tyzdne zaltara upravena 2003-08-13. veci dane do dvoch makier
 
-		/* 2009-01-06: èasti pre kompletórium (pridané 2006-10-13) presunuté do zaltar_kompletorium() */
+		// 2009-01-06: èasti pre kompletórium (pridané 2006-10-13) presunuté do zaltar_kompletorium()
 
-		/* pridaná antifóna pre invitatórium, 2006-10-24; celá pasáž presunutá len pre ZALTAR_VSETKO */
+		// pridaná antifóna pre invitatórium, 2006-10-24; celá pasáž presunutá len pre ZALTAR_VSETKO
 		set_antifony(den, tyzzal, zvazok, MODL_INVITATORIUM);
 
 		if(den == DEN_NEDELA){
-			/* pridane casti pre modlitbu cez den a posvatne citanie, 2003-08-13 */
+			// pridane casti pre modlitbu cez den a posvatne citanie, 2003-08-13
 			_SET_SPOLOCNE_VECI_NEDELA(MODL_PRVE_VESPERY);
 			_SET_SPOLOCNE_VECI_NEDELA(MODL_RANNE_CHVALY);
 			_SET_SPOLOCNE_VECI_NEDELA(MODL_POSV_CITANIE);
@@ -2060,8 +2060,8 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 			_SET_SPOLOCNE_VECI_NEDELA(MODL_NAPOLUDNIE);
 			_SET_SPOLOCNE_VECI_NEDELA(MODL_POPOLUDNI);
 			_SET_SPOLOCNE_VECI_NEDELA(MODL_VESPERY);
-		}/* den == DEN_NEDELA */
-		else{/* nie nedela */
+		}// den == DEN_NEDELA
+		else{// nie nede¾a
 			_SET_SPOLOCNE_VECI_NIE_NEDELA(MODL_RANNE_CHVALY);
 			_SET_SPOLOCNE_VECI_NIE_NEDELA(MODL_VESPERY);
 			_SET_SPOLOCNE_VECI_NIE_NEDELA(MODL_POSV_CITANIE);
@@ -2070,30 +2070,29 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 			_SET_SPOLOCNE_VECI_NIE_NEDELA(MODL_POPOLUDNI);
 			set_benediktus(den, tyzzal, MODL_RANNE_CHVALY);
 			set_magnifikat(den, tyzzal, MODL_VESPERY);
-		}/* den != DEN_NEDELA */
-	}/* len ak if(specialne == ZALTAR_VSETKO) */
+		}// den != DEN_NEDELA
+	}// len ak if(specialne == ZALTAR_VSETKO)
 	else if(specialne == ZALTAR_IBA_ZALMY_HYMNUS_MCD){
 		Log("ZALTAR_IBA_ZALMY_HYMNUS_MCD -- takže nastavujem len hymny pre mcd...\n");
 		set_hymnus(den, tyzzal, MODL_PREDPOLUDNIM);
 		set_hymnus(den, tyzzal, MODL_NAPOLUDNIE);
 		set_hymnus(den, tyzzal, MODL_POPOLUDNI);
-	}/* len ak if(specialne == ZALTAR_IBA_ZALMY_HYMNUS_MCD) */
+	}// len ak if(specialne == ZALTAR_IBA_ZALMY_HYMNUS_MCD)
 	else{
 		Log("nebolo ZALTAR_VSETKO ani ZALTAR_IBA_ZALMY_HYMNUS_MCD -- takže nastavujem len žalmy...\n");
 	}
 
 	Log("ïalej nastavujem žalmy (špecialitky spoloèné pre niektoré týždne žaltára)...\n");
-	/* cast rovnaka pre kazdy tyzden zaltara */
-	/* 2009-01-06: èasti pre kompletórium vyòaté do zaltar_kompletorium() */
+	// cast rovnaka pre kazdy tyzden zaltara
+	// 2009-01-06: èasti pre kompletórium vyòaté do zaltar_kompletorium()
 	switch(den){
 		case DEN_NEDELA:
-			/* druhe vespery maju vzdy prvy zalm 110, 1-5.7 */
+			// druhe vespery maju vzdy prvy zalm 110, 1-5.7
 			set_zalm(1, MODL_VESPERY, "z110.htm", "ZALM110");
-			/* nedelny ranny hymnus je rovnaky v prvom a tretom,
-			 * resp. druhom a stvrtom tyzdni */
+			// nedelny ranny hymnus je rovnaky v prvom a tretom, resp. druhom a stvrtom tyzdni
 			if((tyzzal == 1) || (tyzzal == 3)){
 				set_zalm(2, MODL_RANNE_CHVALY, "ch_dan3_57.htm", "DAN3,57-88.56");
-				/* modlitba cez den */
+				// modlitba cez deò
 				_set_zalmy_1nedele_mcd(); // 2007-01-11 nahradené volaním funkcie
 				/*
 				set_zalm(1, MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_I");
@@ -2101,11 +2100,11 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 				set_zalm(3, MODL_CEZ_DEN_VSETKY, "z118.htm", "ZALM118_III");
 				*/
 			}
-			else{ /* if((tyzzal == 2) || (tyzzal == 4)) */
+			else{ // if((tyzzal == 2) || (tyzzal == 4))
 				set_zalm(1, MODL_RANNE_CHVALY, "z118.htm", "ZALM118");
 				set_zalm(2, MODL_RANNE_CHVALY, "ch_dan3_52.htm", "DAN3,52-57");
 				set_zalm(3, MODL_RANNE_CHVALY, "z150.htm", "ZALM150");
-				/* modlitba cez den */
+				// modlitba cez deò
 				_set_zalmy_2nedele_mcd(); // 2007-01-11 nahradené volaním funkcie; 2007-03-29 opravené
 				/*
 				set_zalm(1, MODL_CEZ_DEN_VSETKY, "z23.htm", "ZALM23");
@@ -2113,7 +2112,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 				set_zalm(3, MODL_CEZ_DEN_VSETKY, "z76.htm", "ZALM76_II");
 				*/
 			}
-			/* vecerne nedelne hymny su rovnake v kazdom tyzdni */
+			// vecerne nedelne hymny su rovnake v kazdom tyzdni
 			set_zalm(3, MODL_PRVE_VESPERY, "ch_flp2.htm", "CHVAL_FLP2");
 			if((_global_den.litobd != OBD_POSTNE_I) &&
 				(_global_den.litobd != OBD_POSTNE_II_VELKY_TYZDEN)){
@@ -2123,7 +2122,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 				set_zalm(3, MODL_VESPERY, "ch_1pt2.htm", "CHVAL_1PT2");
 			}
 			break;
-		/* vecerny hymnus vsedneho dna je rovnaky v kazdom tyzdni */
+		// vecerny hymnus vsedneho dna je rovnaky v kazdom tyzdni
 		case DEN_PONDELOK:
 			set_zalm(3, MODL_VESPERY, "ch_ef1.htm", "CHVAL_EF1");
 			break;
@@ -2137,23 +2136,23 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 			set_zalm(3, MODL_VESPERY, "ch_zjv11.htm", "CHVAL_ZJV11");
 			break;
 		case DEN_PIATOK:
-			/* kazdy piatok, ranne chvaly je zalm 51 */
+			// kazdy piatok, ranne chvaly je zalm 51 */
 			set_zalm(1, MODL_RANNE_CHVALY, "z51.htm", "ZALM51");
 			set_zalm(3, MODL_VESPERY, "ch_zjv15.htm", "CHVAL_ZJV15");
 			break;
 		case DEN_SOBOTA:
-			/* sobota v 1. a 3. tyzdni je zalm 34 */
+			// sobota v 1. a 3. tyzdni je zalm 34
 			if((tyzzal == 1) || (tyzzal == 3)){
 				set_zalm(2, MODL_CEZ_DEN_VSETKY, "z34.htm", "ZALM34_I");
 				set_zalm(3, MODL_CEZ_DEN_VSETKY, "z34.htm", "ZALM34_II");
 			}
 			break;
-	}/* switch(den) */
+	}// switch(den)
 
 	Log("ïalej nastavujem žalmy (pre jednotlivý týždeò žaltára)...\n");
-	/* cast specificka pre kazdy tyzden zaltara */
+	// cast specificka pre kazdy tyzden zaltara
 	switch(tyzzal){
-		case 1: /* prvy tyzden zaltara */
+		case 1: // prvy tyzden zaltara
 			switch(den){
 				case DEN_NEDELA: // 1
 				// prvé vešpery
@@ -2162,8 +2161,8 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 				// ranné chvály
 					set_zalm(1, MODL_RANNE_CHVALY, "z63.htm", "ZALM63");
 					set_zalm(3, MODL_RANNE_CHVALY, "z149.htm", "ZALM149");
-				/* modlitba cez den */
-				/* druhe vespery */
+				// modlitba cez deò
+				// druhé vešpery
 					set_zalm(2, MODL_VESPERY, "z114.htm", "ZALM114");
 				// posvätné èítanie
 					set_zalm(1, MODL_POSV_CITANIE, "z1.htm", "ZALM1");
@@ -2176,7 +2175,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(1, MODL_RANNE_CHVALY, "z5.htm", "ZALM5");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_1krn29.htm", "CHVAL_1KRN29");
 					set_zalm(3, MODL_RANNE_CHVALY, "z29.htm", "ZALM29");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z19.htm", "ZALM19,8-15");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z7.htm", "ZALM7_I");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z7.htm", "ZALM7_II");
@@ -2200,7 +2199,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					}
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_tob13.htm", "CHVAL_TOB13,2-8");
 					set_zalm(3, MODL_RANNE_CHVALY, "z33.htm", "ZALM33");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_ALEF");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z13.htm", "ZALM13");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z14.htm", "ZALM14");
@@ -2218,7 +2217,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(1, MODL_RANNE_CHVALY, "z36.htm", "ZALM36");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_jdt16.htm", "CHVAL_JDT16");
 					set_zalm(3, MODL_RANNE_CHVALY, "z47.htm", "ZALM47");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_BET");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z17.htm", "ZALM17_I");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z17.htm", "ZALM17_II");
@@ -2236,7 +2235,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(1, MODL_RANNE_CHVALY, "z57.htm", "ZALM57");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_jer31.htm", "CHVAL_JER31");
 					set_zalm(3, MODL_RANNE_CHVALY, "z48.htm", "ZALM48");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_GIMEL");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z25.htm", "ZALM25_I");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z25.htm", "ZALM25_II");
@@ -2259,7 +2258,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					else{
 						set_zalm(3, MODL_RANNE_CHVALY, "z100.htm", "ZALM100");
 					}
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_DALET");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z26.htm", "ZALM26");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z28.htm", "ZALM28,1-3.6-9");
@@ -2277,7 +2276,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(1, MODL_RANNE_CHVALY, "z119.htm", "ZALM119_KOF");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_ex15.htm", "CHVAL_EX15");
 					set_zalm(3, MODL_RANNE_CHVALY, "z117.htm", "ZALM117");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_HE");
 				// posvätné èítanie
 					if(je_odlisny_zaltar){
@@ -2290,29 +2289,24 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 						set_zalm(2, MODL_POSV_CITANIE, "z132.htm", "ZALM132_I");
 						set_zalm(3, MODL_POSV_CITANIE, "z132.htm", "ZALM132_II");
 					}
-					/* 2005-03-27:
-					 * Neviem preco tu bolo "z105.htm", "ZALM105_I" az "ZALM105_III"
-					 * Mozno z nejakeho ineho obdobia zaltara.
-					 * Opravene pre OCR na Z131 a Z132 I-II.
-					 *
-					 * 2006-01-24:
-					 * Odpoveï je jednoduchá: II. zväzok breviára má odlišné žalmy.
-					 *
-					 */
+					// 2005-03-27:
+					// Neviem preco tu bolo "z105.htm", "ZALM105_I" az "ZALM105_III". Mozno z nejakeho ineho obdobia zaltara. Opravene pre OCR na Z131 a Z132 I-II.
+					// 2006-01-24:
+					// Odpoveï je jednoduchá: II. zväzok breviára má odlišné žalmy.
 					break;
 
 				default: break;
-			}; break; /* case 1 */
+			}; break; // case 1
 
-		case 2: /* druhy tyzden zaltara */
+		case 2: // druhy tyzden zaltara
 			switch(den){
 				case DEN_NEDELA: // 2
 				// prvé vešpery
 					set_zalm(1, MODL_PRVE_VESPERY, "z119.htm", "ZALM119_NUN");
 					set_zalm(2, MODL_PRVE_VESPERY, "z16.htm", "ZALM16");
 				// ranné chvály
-				/* modlitba cez den */
-				/* druhe vespery */
+				// modlitba cez deò
+				// druhé vešpery
 					set_zalm(2, MODL_VESPERY, "z115.htm", "ZALM115");
 				// posvätné èítanie
 					set_zalm(1, MODL_POSV_CITANIE, "z104.htm", "ZALM104_I");
@@ -2325,7 +2319,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(1, MODL_RANNE_CHVALY, "z42.htm", "ZALM42");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_sir36.htm", "CHVAL_SIR36");
 					set_zalm(3, MODL_RANNE_CHVALY, "z19.htm", "ZALM19,2-7");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_VAU");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z40.htm", "ZALM40_I");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z40.htm", "ZALM40_II");
@@ -2343,7 +2337,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(1, MODL_RANNE_CHVALY, "z43.htm", "ZALM43");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz38.htm", "CHVAL_IZ38");
 					set_zalm(3, MODL_RANNE_CHVALY, "z65.htm", "ZALM65");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_ZAJIN");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z53.htm", "ZALM53");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z54.htm", "ZALM54");
@@ -2361,7 +2355,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(1, MODL_RANNE_CHVALY, "z77.htm", "ZALM77");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_1sam2.htm", "CHVAL_1SAM2");
 					set_zalm(3, MODL_RANNE_CHVALY, "z97.htm", "ZALM97");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_CHET");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z55.htm", "ZALM55_I");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z55.htm", "ZALM55_II");
@@ -2385,7 +2379,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(1, MODL_RANNE_CHVALY, "z80.htm", "ZALM80");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz12.htm", "CHVAL_IZ12");
 					set_zalm(3, MODL_RANNE_CHVALY, "z81.htm", "ZALM81");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_TET");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z56.htm", "ZALM56");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z57.htm", "ZALM57");
@@ -2402,7 +2396,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 				// ranné chvály
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_hab3.htm", "CHVAL_HAB3");
 					set_zalm(3, MODL_RANNE_CHVALY, "z147.htm", "ZALM147,12-20");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_JOD");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z59.htm", "ZALM59");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z60.htm", "ZALM60");
@@ -2420,7 +2414,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(1, MODL_RANNE_CHVALY, "z92.htm", "ZALM92");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_dt32.htm", "CHVAL_DT32");
 					set_zalm(3, MODL_RANNE_CHVALY, "z8.htm", "ZALM8");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_KAF");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z61.htm", "ZALM61");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z64.htm", "ZALM64");
@@ -2435,21 +2429,16 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 						set_zalm(2, MODL_POSV_CITANIE, "z136.htm", "ZALM136_II_PC");
 						set_zalm(3, MODL_POSV_CITANIE, "z136.htm", "ZALM136_III_PC"); /* inak je 136 cleneny pre pondelok 4. tyzdna, vespery */
 					}
-					/* 2005-03-27:
-					 * Neviem preco tu bolo "z106.htm", "ZALM106_I" az "ZALM106_III"
-					 * Mozno z nejakeho ineho obdobia zaltara (podobne sobota v 1. tyzdni).
-					 * Opravene pre OCR na Z136 I-III.
-					 *
-					 * 2006-01-24:
-					 * Odpoveï je jednoduchá: II. zväzok breviára má odlišné žalmy.
-					 *
-					 */
+					// 2005-03-27:
+					// Neviem preco tu bolo "z106.htm", "ZALM106_I" az "ZALM106_III". Mozno z nejakeho ineho obdobia zaltara (podobne sobota v 1. tyzdni). Opravene pre OCR na Z136 I-III.
+					// 2006-01-24:
+					// Odpoveï je jednoduchá: II. zväzok breviára má odlišné žalmy.
 					break;
 
 				default: break;
-			}; break; /* case 2 */
+			}; break; // case 2 */
 
-		case 3: /* treti tyzden zaltara */
+		case 3: // treti tyzden zaltara
 			switch(den){
 				case DEN_NEDELA: // 3
 				// prvé vešpery
@@ -2458,8 +2447,8 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 				// ranné chvály
 					set_zalm(1, MODL_RANNE_CHVALY, "z93.htm", "ZALM93");
 					set_zalm(3, MODL_RANNE_CHVALY, "z148.htm", "ZALM148");
-				/* modlitba cez den */
-				/* druhe vespery */
+				// modlitba cez deò
+				// druhé vešpery
 					set_zalm(2, MODL_VESPERY, "z111.htm", "ZALM111");
 				// posvätné èítanie
 					set_zalm(1, MODL_POSV_CITANIE, "z145.htm", "ZALM145pc_I");
@@ -2472,7 +2461,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(1, MODL_RANNE_CHVALY, "z84.htm", "ZALM84");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz2.htm", "CHVAL_IZ2");
 					set_zalm(3, MODL_RANNE_CHVALY, "z96.htm", "ZALM96");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_LAMED");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z71.htm", "ZALM71_I");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z71.htm", "ZALM71_II");
@@ -2496,7 +2485,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					else{
 						set_zalm(3, MODL_RANNE_CHVALY, "z67.htm", "ZALM67");
 					}
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_MEM");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z74.htm", "ZALM74_I");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z74.htm", "ZALM74_II");
@@ -2514,7 +2503,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(1, MODL_RANNE_CHVALY, "z86.htm", "ZALM86");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz33.htm", "CHVAL_IZ33");
 					set_zalm(3, MODL_RANNE_CHVALY, "z98.htm", "ZALM98");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_NUN");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z70.htm", "ZALM70");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z75.htm", "ZALM75");
@@ -2532,7 +2521,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(1, MODL_RANNE_CHVALY, "z87.htm", "ZALM87");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz40.htm", "CHVAL_IZ40");
 					set_zalm(3, MODL_RANNE_CHVALY, "z99.htm", "ZALM99");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_SAMECH");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z79.htm", "ZALM79");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z80.htm", "ZALM80");
@@ -2555,7 +2544,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					else{
 						set_zalm(3, MODL_RANNE_CHVALY, "z100.htm", "ZALM100");
 					}
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z22.htm", "ZALM22_I");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z22.htm", "ZALM22_II");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z22.htm", "ZALM22_III");
@@ -2573,7 +2562,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(1, MODL_RANNE_CHVALY, "z119.htm", "ZALM119_KOF");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_mud9.htm", "CHVAL_MUD9");
 					set_zalm(3, MODL_RANNE_CHVALY, "z117.htm", "ZALM117");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_AIN");
 				// posvätné èítanie
 					set_zalm(1, MODL_POSV_CITANIE, "z107.htm", "ZALM107_I");
@@ -2582,17 +2571,17 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					break;
 
 				default: break;
-			}; break; /* case 3 */
+			}; break; // case 3
 
-		case 4: /* stvrty tyzden zaltara */
+		case 4: // stvrty tyzden zaltara
 			switch(den){
 				case DEN_NEDELA: // 4
 				// prvé vešpery
 					set_zalm(1, MODL_PRVE_VESPERY, "z122.htm", "ZALM122");
 					set_zalm(2, MODL_PRVE_VESPERY, "z130.htm", "ZALM130");
 				// ranné chvály
-				/* modlitba cez den */
-				/* druhe vespery */
+				// modlitba cez deò
+				// druhé vešpery
 					set_zalm(2, MODL_VESPERY, "z112.htm", "ZALM112");
 				// posvätné èítanie
 					// 2011-09-06: možnos zvoli žalm 95
@@ -2611,7 +2600,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(1, MODL_RANNE_CHVALY, "z90.htm", "ZALM90");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz42.htm", "CHVAL_IZ42");
 					set_zalm(3, MODL_RANNE_CHVALY, "z135.htm", "ZALM135,1-12");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_PE");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z82.htm", "ZALM82");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z120.htm", "ZALM120");
@@ -2629,7 +2618,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(1, MODL_RANNE_CHVALY, "z101.htm", "ZALM101");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_dan3_26.htm", "CHVAL_DAN3,26");
 					set_zalm(3, MODL_RANNE_CHVALY, "z144.htm", "ZALM144,1-10");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_SADE");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z88.htm", "ZALM88_I");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z88.htm", "ZALM88_II");
@@ -2647,7 +2636,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(1, MODL_RANNE_CHVALY, "z108.htm", "ZALM108");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz61.htm", "CHVAL_IZ61");
 					set_zalm(3, MODL_RANNE_CHVALY, "z146.htm", "ZALM146");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_KOF");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z94.htm", "ZALM94_I");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z94.htm", "ZALM94_II");
@@ -2665,7 +2654,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(1, MODL_RANNE_CHVALY, "z143.htm", "ZALM143");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz66.htm", "CHVAL_IZ66");
 					set_zalm(3, MODL_RANNE_CHVALY, "z147.htm", "ZALM147,1-11");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_RES");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z128.htm", "ZALM128");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z129.htm", "ZALM129");
@@ -2682,7 +2671,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 				// ranné chvály
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_tob13.htm", "CHVAL_TOB13,8-11");
 					set_zalm(3, MODL_RANNE_CHVALY, "z147.htm", "ZALM147,12-20");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_SIN");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z133.htm", "ZALM133");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z140.htm", "ZALM140");
@@ -2716,7 +2705,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(1, MODL_RANNE_CHVALY, "z92.htm", "ZALM92");
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_ez36.htm", "CHVAL_EZ36");
 					set_zalm(3, MODL_RANNE_CHVALY, "z8.htm", "ZALM8");
-				/* modlitba cez den */
+				// modlitba cez deò
 					set_zalm(1, MODL_CEZ_DEN_VSETKY, "z119.htm", "ZALM119_TAU");
 					set_zalm(2, MODL_CEZ_DEN_VSETKY, "z45.htm", "ZALM45_I");
 					set_zalm(3, MODL_CEZ_DEN_VSETKY, "z45.htm", "ZALM45_II");
@@ -2743,9 +2732,9 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					break;
 
 				default: break;
-			}; break; /* case 4 */
+			}; break; // case 4
 
-	}/* switch(tyzzal) */
+	}// switch(tyzzal)
 
 	Log("napokon idem pre modlitbu cez deò skontrolova, èi netreba bra doplnkovú psalmódiu...\n");
 	// 2011-09-06: nastavenie žalm 95 ako alternatívy k ž 24, 67, 100 pre ranné chvály resp. vešpery sa robí na inom mieste
@@ -2762,14 +2751,14 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 		Log("-- nie, doplnkovú psalmódiu neberiem.\n");
 	}
 	Log("-- zaltar_zvazok(%d, %d, %d, %d) -- koniec\n", den, tyzzal, obdobie, specialne);
-}/* zaltar_zvazok(); */
+}// zaltar_zvazok();
 
 void zaltar(short int den, short int tyzzal){
-	/* 2006-01-24: kvôli spätnej kompatibilite ponechaná aj funkcia s 2 parametrami */
+	// 2006-01-24: kvôli spätnej kompatibilite ponechaná aj funkcia s 2 parametrami
 	Log("-- zaltar(%d, %d) -- zaciatok\n", den, tyzzal);
 	zaltar_zvazok(den, tyzzal, OBD_CEZ_ROK, ZALTAR_VSETKO);
 	Log("-- zaltar(%d, %d) -- koniec\n", den, tyzzal);
-}/* zaltar(); */
+}// zaltar();
 
 /* 2006-01-26: pridané posv. èítanie a modlitba cez deò */
 void _set_zalmy_velky_piatok(short int modlitba){
@@ -2905,7 +2894,7 @@ void _set_zalmy_1nedele_v_pre_1v(void){/* žalmy a chválospev z vešpier pre prvé 
 /* 2006-01-26: pridané žalmy nedele 1. týždòa kvôli posv. èítaniam (napr. druhá nede¾a vo ve¾k. oktáve) */
 void _set_zalmy_1nedele_pc(void){// prvé vešpery
 	Log("_set_zalmy_1nedele_pc() -- begin\n");
-	/* modlitba cez den */
+	// modlitba cez deò
 	set_zalm(1, MODL_POSV_CITANIE, "z1.htm", "ZALM1");
 	set_zalm(2, MODL_POSV_CITANIE, "z2.htm", "ZALM2");
 	set_zalm(3, MODL_POSV_CITANIE, "z3.htm", "ZALM3");
@@ -3979,6 +3968,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 	  * 2010-09-28: èas prevzatá do: init_global_string(), hoci tam sa použije len pre smer == 5 (sviatky pána); slávnosti sa riešia samostatne
       * 2011-06-30: cyril a metod odvetvený pre SK a CZ only
 	  * 2011-07-22: doplnené pre HU: 20AUG
+	  * 2011-10-13: zapoznámkované 14SEP kvôli CZ // nespúšalo sa totiž zaltar_zvazok(), a teda ani zaltar_kompletorium()
 	  */
 	Log("najprv treba skontrolova, èi nejde o deò [pôvodne nede¾u], na ktorú pripadol sviatok premenenia pána a podobné... (ak áno, nenastavuj niè)\n");
 	if(
@@ -3988,13 +3978,13 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 		((_global_den.den == 5) && (_global_den.mesiac - 1 == MES_JUL) && ((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
 		((_global_den.den == 20) && (_global_den.mesiac - 1 == MES_AUG) && (_global_jazyk == JAZYK_HU)) ||
 		((_global_den.den == 28) && (_global_den.mesiac - 1 == MES_SEP) && ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
-		((_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) ) ||
+		// ((_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) ) ||
 		((_global_den.den == 1) && (_global_den.mesiac - 1 == MES_NOV))
 		){
 			Log("premenenie pána || petra a pavla || povýšenie sv. kríža || všetkých svätých || nanebovzatia PM...\n");
 			if((_global_modlitba != MODL_PREDPOLUDNIM) && (_global_modlitba != MODL_NAPOLUDNIE) && (_global_modlitba != MODL_POPOLUDNI)){
 				Log("keïže nejde o modlitbu cez deò, preskakujeme nastavenia (všetky boli nastavené z vlastnej èasti)...\n");
-				/* 2009-01-06: pre Premenenie Pána chýbalo nastavenie kompletória vo vlastnej èasti, preto sa dávalo chybne; doplnené na príslušnom mieste */
+				// 2009-01-06: pre Premenenie Pána chýbalo nastavenie kompletória vo vlastnej èasti, preto sa dávalo chybne; doplnené na príslušnom mieste
 				return;
 			}
 			else 
@@ -4005,7 +3995,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				}
 				else{
 					Log("keïže ide o modlitbu cez deò MIMO nedele, nastavujeme všetky èasti ak nasleduje - zo dòa...\n");
-					/* žiaden return :) */
+					// žiaden return :)
 				}
 	}
 	else{
@@ -4013,28 +4003,28 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 	}
 
 	Log("teraz spustíme zaltar_zvazok(); - pôvodne sa púšala s dvoma parametrami, pridaný parameter pre zväzok breviára (voláme s hodnotou ZALTAR_VSETKO)\n");
-	/* 2006-01-24: pôvodne sa púšala fnkcia s 2 parametrami; pridaný ïalší parameter pre zväzok breviára */
+	// 2006-01-24: pôvodne sa púšala funkcia s 2 parametrami; pridaný ïalší parameter pre zväzok breviára
 	zaltar_zvazok(den, tyzzal, _global_den.litobd, ZALTAR_VSETKO);
 
 	Log("následne odlišný súbor pre posvätné èítania...\n");
 	file_name_litobd(litobd);
 	Log("  _file == %s\n", _file);
 
-	/* Log(_global_modl_posv_citanie); 2005-03-26: Pridany vypis */
+	// Log(_global_modl_posv_citanie); 2005-03-26: Pridany vypis
 
-	/* file pre posvatne citania; pridane 2003-11-20 */
+	// file pre posvatne citania; pridane 2003-11-20
 	file_name_litobd_pc(litobd);
 	Log("  _file_pc == %s\n", _file_pc);
 
-	/* 2004-04-28, pridane _file_pc_tyzden */
+	// 2004-04-28, pridane _file_pc_tyzden
 	mystrcpy(_file_pc_tyzden, STR_EMPTY, SMALL);
 	Log("  _file_pc_tyzden bude nastavene na prislusnom mieste (teraz == `%s').\n", _file_pc_tyzden);
 
 	char c;
-	/* char c sa pouziva vo vynimocnych pripadoch: napr. druha velkonocna nedela; 09/03/2000A.D. */
+	// char c sa pouziva vo vynimocnych pripadoch: napr. druha velkonocna nedela
 
-/* 2007-11-13: invitatórium */
-	/* použite¾né pre adventné obdobie, vianoèné... */
+// 2007-11-13: invitatórium
+	// použite¾né pre adventné obdobie, vianoèné...
 #define _obd_invitat {\
 	sprintf(_anchor, "%s%c_%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1);\
 	_set_antifona1(modlitba, _file, _anchor);\
@@ -4051,7 +4041,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 	set_LOG_litobd;\
 }
 
-/* 2006-01-27: preklopené spoloèné kusy kódu pre adventné obdobia do define-ov */
+// 2006-01-27: preklopené spoloèné kusy kódu pre adventné obdobia do define-ov
 #define _adv_hymnus {\
 	sprintf(_anchor, "%s%c_%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS);\
 	if(modlitba == MODL_POSV_CITANIE){\
@@ -4069,7 +4059,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 	set_LOG_litobd;\
 }
 
-/* 2007-10-02: upravené antifóny pre modlitbu cez deò - sú rovnaké, použitý anchor ANCHOR_ANTIFONY */
+// 2007-10-02: upravené antifóny pre modlitbu cez deò - sú rovnaké, použitý anchor ANCHOR_ANTIFONY
 #define _adv_antifony_mcd {\
 	/* 1. antifóna */\
 	sprintf(_anchor, "%s%c_%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_ANTIFONY);\
@@ -4134,18 +4124,18 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 	}\
 }
 
-	/* velky switch(litobd), podla ktoreho sa priradia zakladne udaje */
+	// velky switch(litobd), podla ktoreho sa priradia zakladne udaje
 	LOG_ciara_sv;
 
 	Log("Zaèiatok ve¾kého switch()-u pod¾a liturgických období\nTeraz nasleduje ve¾ký switch() pod¾a liturgických období...\n");
 	switch(litobd){
-/* switch(litobd), case OBD_ADVENTNE_I -- begin ----------------------------------------------- */
+// switch(litobd), case OBD_ADVENTNE_I -- begin -----------------------------------------------
 		case OBD_ADVENTNE_I :/* do 16. decembra */
 			Log("OBD_ADVENTNE_I\n");
 
-			/* spoloèné èasti bez oh¾adu na to, èi je alebo nie je nede¾a */
+			// spoloèné èasti bez oh¾adu na to, èi je alebo nie je nede¾a
 
-			/* invitatórium */
+			// invitatórium
 			modlitba = MODL_INVITATORIUM;
 			if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 				_obd_invitat_viac(2); /* 2007-12-04: pôvodne tu bolo "_obd_invitat;", ale èeský breviár má na výber 2 */
@@ -4191,19 +4181,19 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 			_adv_hymnus; /* hymnus */
 			_adv1_modlitba;  /* modlitba - rovnaka ako cez den */
 
-			/* 1. citanie */
+			// 1. èítanie
 			sprintf(_anchor, "%s%d%s%c_%s", nazov_OBD[litobd], tyzden, nazov_DN_asci[den], pismenko_modlitby(modlitba), ANCHOR_CITANIE1);
 			_set_citanie1(modlitba, _file_pc, _anchor);
 			set_LOG_litobd_pc;
 
-			/* 2. citanie */
+			// 2. èítanie
 			sprintf(_anchor, "%s%d%s%c_%s", nazov_OBD[litobd], tyzden, nazov_DN_asci[den], pismenko_modlitby(modlitba), ANCHOR_CITANIE2);
 			_set_citanie2(modlitba, _file_pc, _anchor);
 			set_LOG_litobd_pc;
 
 			if(tyzden == 3)
 				t = 1;
-			else if(tyzden == 4) /* nema efekt, lebo to uz je OBD_ADVENTNE_II */
+			else if(tyzden == 4) // nema efekt, lebo to uz je OBD_ADVENTNE_II
 				t = 2;
 			else
 				t = tyzden;
@@ -4217,7 +4207,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				 * sú už z adventného obdobia II., väèšina vecí z 3. adventnej nedele je pod¾a OBD_ADVENTNE_II, 
 				 * niektoré z OBD_ADVENTNE_I - práve to bolo potrebné opravi, dokonèené 2007-12-04.
 				 */
-				/* hymnus - rovnaky pre prve a druhe vespery */
+				// hymnus - rovnaky pre prve a druhe vespery
 				modlitba = MODL_PRVE_VESPERY;
 				sprintf(_anchor, "%s%c_%s",
 					nazov_OBD[litobd],
@@ -4225,20 +4215,20 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 					ANCHOR_HYMNUS);
 				_set_hymnus(MODL_PRVE_VESPERY, _file, _anchor);
 				set_LOG_litobd;
-				/* kratke responzorium - rovnaka pre prve a druhe vespery a pre vsetky nedele */
+				// kratke responzorium - rovnake pre prve a druhe vespery a pre vsetky nedele
 				sprintf(_anchor, "%s%s%c_%s",
 					nazov_OBD[litobd],
-					nazov_DN_asci[den], /* 'NE' */
-					pismenko_modlitby(MODL_VESPERY), /* 'v' */
+					nazov_DN_asci[den],
+					pismenko_modlitby(MODL_VESPERY),
 					ANCHOR_KRESPONZ);
 				_set_kresponz(modlitba, _file, _anchor);
 				_set_kresponz(MODL_VESPERY, _file, _anchor);
 				set_LOG_litobd;
 
 				modlitba = MODL_PRVE_VESPERY;
-				_adv1_antifony; /* antifony */
+				_adv1_antifony; // antifóny
 				_adv1_kcitanie; /* kratke citanie - rovnake pre vsetky tyzdne */
-				/* magnifikat */
+				// magnifikat
 				sprintf(_anchor, "%s%d%s%c_%s%c",
 					nazov_OBD[litobd],
 					tyzden,
@@ -4249,7 +4239,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				_set_magnifikat(modlitba, _file, _anchor);
 				set_LOG_litobd;
 				_adv1_prosby; /* prosby - rovnake pre prvu a tretiu, resp. druhu a stvrtu adventnu nedelu */
-				_adv1_modlitba; /* modlitba */
+				_adv1_modlitba; // modlitba
 
 				// posvätné èítanie
 				/* pridane 2003-11-20 */
@@ -4263,7 +4253,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 					ANCHOR_KRESPONZ);
 				_set_kresponz(modlitba, _file_pc, _anchor);
 				set_LOG_litobd;
-				_adv1_antifony; /* antifony */
+				_adv1_antifony; // antifóny
 
 				// ranné chvály
 				/* hymnus - rovnaky pre vsetky dni */
@@ -4276,9 +4266,9 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 					ANCHOR_KRESPONZ);
 				_set_kresponz(modlitba, _file, _anchor);
 				set_LOG_litobd;
-				_adv1_antifony; /* antifony */
+				_adv1_antifony; // antifóny
 				_adv1_kcitanie; /* kratke citanie - rovnake pre vsetky tyzdne */
-				/* benediktus */
+				// benediktus
 				sprintf(_anchor, "%s%d%s%c_%s%c",
 					nazov_OBD[litobd],
 					tyzden,
@@ -4289,13 +4279,13 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				_set_benediktus(modlitba, _file, _anchor);
 				set_LOG_litobd;
 				_adv1_prosby; /* prosby - rovnake pre prvu a tretiu, resp. druhu a stvrtu adventnu nedelu */
-				_adv1_modlitba; /* modlitba */
+				_adv1_modlitba; // modlitba
 
-				/* druhe vespery */
+				// druhé vešpery
 				modlitba = MODL_VESPERY;
-				_adv1_antifony; /* antifony */
+				_adv1_antifony; // antifóny
 				_adv1_kcitanie; /* kratke citanie - rovnake pre vsetky tyzdne */
-				/* magnifikat */
+				// magnifikat
 				sprintf(_anchor, "%s%d%s%c_%s%c",
 					nazov_OBD[litobd],
 					tyzden,
@@ -4306,7 +4296,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				_set_magnifikat(modlitba, _file, _anchor);
 				set_LOG_litobd;
 				_adv1_prosby; /* prosby - rovnake pre prvu a tretiu, resp. druhu a stvrtu adventnu nedelu */
-				_adv1_modlitba; /* modlitba */
+				_adv1_modlitba; // modlitba
 				/* modlitbu cez deò nie je potrebné špeciálne rieši, poznámka 2005-12-17 */
 			}/* nede¾a: 1.-3. adventná nede¾a */
 			else{ /* nie nede¾a, teda obyèajný deò adventného obdobia I. */
@@ -4337,7 +4327,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				set_LOG_litobd;
 				/* antifony - su zo vsedneho dna */
 				_adv1_kcitanie; /* kratke citanie - rovnake pre vsetky tyzdne */
-				/* benediktus */
+				// benediktus
 				sprintf(_anchor, "%s%d%s%c_%s",
 					nazov_OBD[litobd],
 					tyzden,
@@ -4362,7 +4352,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				set_LOG_litobd;
 				/* antifony - su zo vsedneho dna */
 				_adv1_kcitanie; /* kratke citanie - rovnake pre vsetky tyzdne */
-				/* magnifikat */
+				// magnifikat
 				sprintf(_anchor, "%s%d%s%c_%s",
 					nazov_OBD[litobd],
 					tyzden,
@@ -4373,7 +4363,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				set_LOG_litobd;
 				_adv1_prosby; /* prosby - rovnake pre prvu a tretiu, resp. druhu a stvrtu adventnu nedelu */
 				_adv1_modlitba; /* modlitba - rovnaka pre ranne chvaly aj vespery */
-			}/* nie nedela */
+			}// nie nede¾a
 			break;
 /* switch(litobd), case OBD_ADVENTNE_I -- end ------------------------------------------------- */
 
@@ -4469,7 +4459,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 
 			file_name_litobd(OBD_ADVENTNE_II);
 
-			/* invitatórium */
+			// invitatórium
 			modlitba = MODL_INVITATORIUM;
 			if(_global_den.den != 24)
 				{_obd_invitat;}
@@ -4494,7 +4484,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 			set_LOG_litobd;
 			/* dalsie zavisia od datumu (17. -- 24. december) */
 			_adv2_kcitanie; /* kratke citanie */
-			/* benediktus */
+			// benediktus
 			sprintf(_anchor, "%s%d%c_%s",
 				nazov_OBD[litobd],
 				_global_den.den,
@@ -4502,11 +4492,11 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				ANCHOR_BENEDIKTUS);
 			_set_benediktus(modlitba, _file, _anchor);
 			set_LOG_litobd;
-			_adv2_prosby; /* prosby */
+			_adv2_prosby; // prosby
 			_adv2_modlitba; /* modlitba - rovnaka pre rano i vecer */
 
 			// vešpery
-			/* antifony */
+			// antifóny
 			modlitba = MODL_VESPERY;
 			/* hymnus - rovnaky pre kazdy den */
 			_adv_hymnus;
@@ -4523,7 +4513,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 			_set_kresponz(modlitba, _file, _anchor);
 			set_LOG_litobd;
 			_adv2_kcitanie; /* kratke citanie */
-			/* magnifikat */
+			// magnifikat
 			sprintf(_anchor, "%s%d%c_%s",
 				nazov_OBD[litobd],
 				_global_den.den,
@@ -4531,7 +4521,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				ANCHOR_MAGNIFIKAT);
 			_set_benediktus(modlitba, _file, _anchor);
 			set_LOG_litobd;
-			_adv2_prosby; /* prosby */
+			_adv2_prosby; // prosby
 			_adv2_modlitba; /* modlitba - rovnaka pre rano i vecer */
 
 			/* modlitba cez deò, pridané 2005-12-17 trochu pod¾a ADV.I. */
@@ -4562,10 +4552,10 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 			/* posvatne citanie, pridane 2003-11-19, modifikovane 2003-12-07 */
 			modlitba = MODL_POSV_CITANIE;
 			_adv_hymnus; /* hymnus */
-			_adv2_antifony; /* antifony */
+			_adv2_antifony; // antifóny
 
 			/* dalsie zavisia od datumu (17. -- 24. december) */
-			/* 1. citanie */
+			// 1. èítanie
 			sprintf(_anchor, "%s%d%c_%s",
 				nazov_OBD[litobd],
 				_global_den.den,
@@ -4574,7 +4564,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 			_set_citanie1(modlitba, _file_pc, _anchor);
 			set_LOG_litobd;
 
-			/* 2. citanie */
+			// 2. èítanie
 			sprintf(_anchor, "%s%d%c_%s",
 				nazov_OBD[litobd],
 				_global_den.den,
@@ -4625,17 +4615,17 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 					/* hymnus pre obdobie OBD_ADVENTNE_II, teda tak, ako bol nastavený vyššie */
 					_adv1_antifony; /* antifóny - z tretej adventnej nedele, OBD_ADVENTNE_I; 2007-12-04 */
 					_adv1_kcitanie; /* pozor, používame z adv. obdobia I. - 2006-01-27 */
-					_adv1_modlitba; /* modlitba */
+					_adv1_modlitba; // modlitba
 					/* krátke responzórium - z tretej adventnej nedele, OBD_ADVENTNE_I; 2007-12-04 */
 					sprintf(_anchor, "%s%s%c_%s",
 						nazov_OBD[litobd],
-						nazov_DN_asci[den], /* 'NE' */
-						pismenko_modlitby(MODL_VESPERY), /* 'v' */
+						nazov_DN_asci[den],
+						pismenko_modlitby(MODL_VESPERY),
 						ANCHOR_KRESPONZ);
 					_set_kresponz(modlitba, _file, _anchor);
 					_set_kresponz(MODL_VESPERY, _file, _anchor);
 					set_LOG_litobd;
-					/* magnifikat */
+					// magnifikat
 					sprintf(_anchor, "%s%d%s%c_%s%c",
 						nazov_OBD[litobd],
 						tyzden,
@@ -4656,7 +4646,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 
 					/* posvätné èítanie - modlitba má by z 3. adventnej nedele, doplnené 2007-12-04 */
 					modlitba = MODL_POSV_CITANIE;
-					_adv1_modlitba; /* modlitba */
+					_adv1_modlitba; // modlitba
 
 					// ranné chvály
 					/* kratke responzorium - rovnake pre vsetky nedele */
@@ -4664,17 +4654,17 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 					sprintf(_anchor, "%s%s%c_%s", nazov_OBD[litobd], nazov_DN_asci[den], /* 'NE' */ pismenko_modlitby(modlitba), /* 'r' */ ANCHOR_KRESPONZ);
 					_set_kresponz(modlitba, _file, _anchor);
 					set_LOG_litobd;
-					_adv1_antifony; /* antifony */
+					_adv1_antifony; // antifóny
 					/* kratke citanie - rovnake pre vsetky adventne nedele */
 					_adv1_kcitanie; /* pozor, používame z adv. obdobia I. - 2006-01-27 */
-					_adv1_modlitba; /* modlitba */
+					_adv1_modlitba; // modlitba
 
-					/* druhe vespery */
+					// druhé vešpery
 					modlitba = MODL_VESPERY;
 					_adv1_antifony; /* antifóny */
 					/* kratke citanie - rovnake pre vsetky adventne nedele */
 					_adv1_kcitanie; /* pozor, používame z adv. obdobia I. - 2006-01-27 */
-					_adv1_modlitba; /* modlitba */
+					_adv1_modlitba; // modlitba
 					/* antifóna na magnifikat pre druhé vešpery nastavená vyššie, pod¾a dátumu, ako pre bežný deò */
 
 					/* modlitba cez deò, pridané 2005-12-17 pod¾a 2005-11-20 (ADV.I.) okrem hymnov */
@@ -4715,7 +4705,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 						ANCHOR_MAGNIFIKAT);
 					_set_benediktus(modlitba, _file, _anchor);
 					set_LOG_litobd;
-					/* prosby */
+					// prosby
 					sprintf(_anchor, "%s%d%c_%s",
 						nazov_OBD[litobd],
 						_global_den.den,
@@ -4726,26 +4716,26 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 
 					file_name_litobd(OBD_ADVENTNE_I);
 
-					/* kratke responzorium - rovnaka pre prve a druhe vespery a pre vsetky nedele */
+					// kratke responzorium - rovnake pre prve a druhe vespery a pre vsetky nedele
 					sprintf(_anchor, "%s%s%c_%s",
 						nazov_OBD[OBD_ADVENTNE_I],
-						nazov_DN_asci[den], /* 'NE' */
-						pismenko_modlitby(MODL_VESPERY), /* 'v' */
+						nazov_DN_asci[den],
+						pismenko_modlitby(MODL_VESPERY),
 						ANCHOR_KRESPONZ);
 					_set_kresponz(modlitba, nazov_obd_htm[OBD_ADVENTNE_I], _anchor);
 					_set_kresponz(MODL_VESPERY, _file, _anchor);
 					set_LOG_litobd;
 
 					modlitba = MODL_PRVE_VESPERY;
-					_adv1_antifony; /* antifony */
+					_adv1_antifony; // antifóny
 					_adv2_kcitanie_adv1; /* kratke citanie - rovnake pre vsetky adventne nedele */
-					_adv2_prosby_4advne; /* prosby */
-					_adv2_modlitba_ne; /* modlitba */
+					_adv2_prosby_4advne; // prosby
+					_adv2_modlitba_ne; // modlitba
 
-					/* ak je 24. dec., vsetko pre ranne chvaly sa berie zo dna 24. */
+					// ak je 24. dec., vsetko pre ranne chvaly sa berie zo dna 24.
 					if(_global_den.den == 24){
 						mystrcpy(_file, nazov_obd_htm[OBD_ADVENTNE_II], MAX_STR_AF_FILE);
-						/* benediktus */
+						// benediktus
 						sprintf(_anchor, "%s%d%c_%s",
 							nazov_OBD[litobd],
 							_global_den.den,
@@ -4766,11 +4756,11 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 						ANCHOR_KRESPONZ);
 					_set_kresponz(modlitba, nazov_obd_htm[OBD_ADVENTNE_I], _anchor);
 					set_LOG_litobd;
-					_adv1_antifony; /* antifony */
+					_adv1_antifony; // antifóny
 					_adv2_kcitanie_adv1; /* kratke citanie - rovnake pre vsetky adventne nedele */
-					/* benediktus */
+					// benediktus
 					if((_global_den.den == 21) || (_global_den.den == 23)){
-						/* treba brat Nebojte sa resp. Hla, splnilo sa */
+						// treba brat Nebojte sa resp. Hla, splnilo sa
 					}
 					else{
 					  sprintf(_anchor, "%s%d%s%c_%s%c",
@@ -4783,25 +4773,25 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 					  _set_benediktus(modlitba, _file, _anchor);
 					}
 					set_LOG_litobd;
-					_adv2_prosby_4advne; /* prosby */
-					_adv2_modlitba_ne; /* modlitba */
+					_adv2_prosby_4advne; // prosby
+					_adv2_modlitba_ne; // modlitba
 
-					/* druhe vespery */
+					// druhé vešpery
 					modlitba = MODL_VESPERY;
-					_adv1_antifony; /* antifony */
+					_adv1_antifony; // antifóny
 					_adv2_kcitanie_adv1; /* kratke citanie - rovnake pre vsetky adventne nedele */
-					_adv2_prosby_4advne; /* prosby */
-					_adv2_modlitba_ne; /* modlitba */
+					_adv2_prosby_4advne; // prosby
+					_adv2_modlitba_ne; // modlitba
 
 					/* modlitba cez deò, pridané 2005-12-17 trochu pod¾a 2005-11-20 (ADV.I.) okrem hymnov a antifón */
 					modlitba = MODL_PREDPOLUDNIM;
-					_adv2_modlitba_ne; /* modlitba */
+					_adv2_modlitba_ne; // modlitba
 
 					modlitba = MODL_NAPOLUDNIE;
-					_adv2_modlitba_ne; /* modlitba */
+					_adv2_modlitba_ne; // modlitba
 
 					modlitba = MODL_POPOLUDNI;
-					_adv2_modlitba_ne; /* modlitba */
+					_adv2_modlitba_ne; // modlitba
 
 					file_name_litobd(OBD_ADVENTNE_II);
 
@@ -4819,10 +4809,10 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 					_adv2_kcitanie_ne; /* krátke èítanie */
 					_adv2_kresponz; /* krátke responzórium - rovnaké pre všetky adventné týždne */
 
-				}/* stvrta adventna nedela */
-			}/* nedela */
+				}// stvrta adventna nedela
+			}// nede¾a
 			else{
-				/* upravime veci pre 24. dec. */
+				// upravime veci pre 24. dec.
 				if(_global_den.den == 24){
 label_24_DEC:
 					/* iba ranne chvaly */
@@ -5243,7 +5233,7 @@ label_24_DEC:
 				_set_zalmy_narodenie(modlitba);
 				_narodenie_antifony;
 
-				/* druhe vespery */
+				// druhé vešpery
 				modlitba = MODL_VESPERY;
 				_set_zalmy_narodenie(modlitba);
 				_narodenie_antifony;
@@ -5336,7 +5326,7 @@ label_24_DEC:
 				_vian1_2ne_prosby;
 				_vian1_2ne_antifony;
 				_vian1_2ne_modlitba;
-				/* druhe vespery */
+				// druhé vešpery
 				modlitba = MODL_VESPERY;
 				_vian1_2ne_kcitanie;
 				_vian1_2ne_magnifikat;
@@ -5650,7 +5640,7 @@ label_24_DEC:
 				_set_zalmy_zjv(modlitba);
 				_zjv_kcitanie;
 				_zjv_antifony;
-				/* druhe vespery */
+				// druhé vešpery
 				modlitba = MODL_VESPERY;
 				_set_zalmy_zjv(modlitba);
 				_zjv_kcitanie;
@@ -5744,7 +5734,7 @@ label_24_DEC:
 					Log("--- nedela OCR, nastavujem modlitbu dna...\n");
 					/* ak je specialna, tak _file sa nastavi v dalsom, 10/03/2000A.D. */
 					file_name_litobd(OBD_CEZ_ROK);
-					/* benediktus */
+					// benediktus
 					modlitba = MODL_RANNE_CHVALY;
 					sprintf(_anchor, "_%d%s%c_%s%c", tyzden, nazov_DN_asci[den], /* 'NE', nedela */ pismenko_modlitby(MODL_RANNE_CHVALY), ANCHOR_BENEDIKTUS, _global_den.litrok);
 					_set_benediktus(MODL_RANNE_CHVALY, _file, _anchor);
@@ -5759,7 +5749,7 @@ label_24_DEC:
 					sprintf(_anchor, "_%d%s%c_%s%c", tyzden, nazov_DN_asci[den], /* 'NE', nedela */ pismenko_modlitby(MODL_VESPERY), ANCHOR_MAGNIFIKAT, _global_den.litrok);
 					_set_magnifikat(MODL_VESPERY, _file, _anchor);
 					set_LOG_litobd;
-					/* modlitba */
+					// modlitba
 					sprintf(_anchor, "_%d%s_%s", tyzden, nazov_DN_asci[den], /* 'NE', nedela */ ANCHOR_MODLITBA); 
 					modlitba = MODL_RANNE_CHVALY;
 					_set_modlitba(MODL_RANNE_CHVALY, _file, _anchor);
@@ -5793,7 +5783,7 @@ label_24_DEC:
 
 					modlitba = MODL_POSV_CITANIE;
 
-					/* 1. citanie */
+					// 1. èítanie
 					sprintf(_anchor, "%s%d%s%c_%s",
 						nazov_OBD[litobd],
 						tyzden,
@@ -5804,7 +5794,7 @@ label_24_DEC:
 					set_LOG_litobd_pc_tyzden;
 					/* Log(_global_modl_posv_citanie); */
 
-					/* 2. citanie */
+					// 2. èítanie
 					sprintf(_anchor, "%s%d%s%c_%s",
 						nazov_OBD[litobd],
 						tyzden,
@@ -6116,7 +6106,7 @@ label_24_DEC:
 
 					modlitba = MODL_POSV_CITANIE;
 
-					/* 1. citanie */
+					// 1. èítanie
 					sprintf(_anchor, "%s%d%s%c_%s",
 						nazov_OBD[litobd],
 						tyzden,
@@ -6127,7 +6117,7 @@ label_24_DEC:
 					set_LOG_litobd_pc_tyzden;
 					/* Log(_global_modl_posv_citanie); */
 
-					/* 2. citanie */
+					// 2. èítanie
 					sprintf(_anchor, "%s%d%s%c_%s",
 						nazov_OBD[litobd],
 						tyzden,
@@ -6302,13 +6292,13 @@ label_24_DEC:
 						/* 2005-03-27: posvatne citania doplnena modlitba - je z prislusnej nedele OCR */
 						Log("--- modlitba dna pre bezne dni OCR je z prislusnej nedele...\n");
 						modlitba = MODL_POSV_CITANIE;
-						/* modlitba */
+						// modlitba
 						sprintf(_anchor, "_%d%s_%s", tyzden, nazov_DN_asci[DEN_NEDELA], ANCHOR_MODLITBA); 
 						modlitba = MODL_POSV_CITANIE;
 						_set_modlitba(MODL_POSV_CITANIE, _file, _anchor);
 						set_LOG_litobd;
 					}
-				}/* nie nedela */
+				}// nie nede¾a
 				/* 2006-01-24: chvála Bohu, dokonèené cezroèné obdobie 
 				 *             vrátane posv. èítania a modlity cez deò :) 
 				 * 2006-02-02: dokonèené pre cezroèné obdobie aj ¾s PM v sobotu :)
@@ -6520,22 +6510,20 @@ label_24_DEC:
 				// ranné chvály
 				modlitba = MODL_RANNE_CHVALY;
 				_post1_ne_antifony;
-				/* druhe vespery */
+				// druhé vešpery
 				modlitba = MODL_VESPERY;
 				_post1_ne_antifony;
-			}/* nedela */
+			}// nede¾a
 			else{
-			}/* nie nedela */
+			}// nie nede¾a
 			break;
-/* switch(litobd), case OBD_POSTNE_I -- end --------------------------------------------------- */
+// switch(litobd), case OBD_POSTNE_I -- end ---------------------------------------------------
 
-/* switch(litobd), case OBD_POSTNE_II -- begin ------------------------------------------------ */
+// switch(litobd), case OBD_POSTNE_II -- begin ------------------------------------------------
 		case OBD_POSTNE_II_VELKY_TYZDEN:/* velky tyzden */
 			Log("OBD_POSTNE_II_VELKY_TYZDEN\n");
-			/* 08/03/2000A.D. */
-/* 2006-01-25: upravené pre posvätné èítanie
- * 2006-01-25: pre modlitbu cez deò (okrem nedele) je hymnus ako pre pôstne obdobie I.
- */
+// 2006-01-25: upravené pre posvätné èítanie
+// 2006-01-25: pre modlitbu cez deò (okrem nedele) je hymnus ako pre pôstne obdobie I.
 #define _post2_hymnus {\
 	if(((den == DEN_STVRTOK) && (modlitba == MODL_VESPERY))\
 	|| ((den == DEN_NEDELA) && ((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)))){\
@@ -6759,7 +6747,7 @@ label_24_DEC:
 			_post2_modlitba;
 
 			if(den == DEN_NEDELA){
-				/* Kvetná nede¾a */
+				// Kvetná nede¾a
 
 				// prvé vešpery
 				modlitba = MODL_PRVE_VESPERY;
@@ -6771,30 +6759,29 @@ label_24_DEC:
 				_post2_prosby;
 				_post2_modlitba;
 
-				/* 2006-01-25: posvätné èítanie */
+				// 2006-01-25: posvätné èítanie
 				modlitba = MODL_POSV_CITANIE;
 				_post2_antifony;
-			}/* nedela */
+			}// nede¾a
 			else if(den == DEN_STVRTOK){
-				/* 2006-01-27: pridaný popis k vešperám zeleného štvrtka */
+				// 2006-01-27: pridaný popis k vešperám zeleného štvrtka
 				modlitba = MODL_VESPERY;
 				_vtroj_popis;
-				/* 2007-12-05: kompletórium je z nedele po druhých vešperách; ale ako na slávnosti; 2008-04-04 presunuté vyššie */
-			}/* nie nedela ale zelený štvrtok */
+				// 2007-12-05: kompletórium je z nedele po druhých vešperách; ale ako na slávnosti; 2008-04-04 presunuté vyššie
+			}// nie nedela ale zelený štvrtok
 			break;
-/* switch(litobd), case OBD_POSTNE_II -- end -------------------------------------------------- */
+// switch(litobd), case OBD_POSTNE_II -- end --------------------------------------------------
 
-/* switch(litobd), case OBD_VELKONOCNE_TROJDNIE -- begin -------------------------------------- */
-		case OBD_VELKONOCNE_TROJDNIE:/* umucenia a zmrtvychvstania Pana */
+// switch(litobd), case OBD_VELKONOCNE_TROJDNIE -- begin --------------------------------------
+		case OBD_VELKONOCNE_TROJDNIE:// umucenia a zmrtvychvstania Pana
 			Log("OBD_VELKONOCNE_TROJDNIE\n");
-			/* 08/03/2000A.D. */
-/* 2007-11-14: doplnené antifóny pre invitatórium */
+// 2007-11-14: doplnené antifóny pre invitatórium
 #define _vtroj_invitat {\
 	sprintf(_anchor, "%s_%c%s%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), nazov_DN_asci[den], ANCHOR_ANTIFONA1);\
 	_set_antifona1(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
 }
-/* 2006-01-26: doplnené posvätné èítanie */
+// 2006-01-26: doplnené posvätné èítanie
 #define _vtroj_hymnus {\
 	c = pismenko_modlitby(modlitba);\
 	if(modlitba == MODL_PRVE_VESPERY)\
@@ -6814,7 +6801,7 @@ label_24_DEC:
 	_set_kcitanie(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
 }
-/* 2006-01-26: doplnené posvätné èítanie */
+// 2006-01-26: doplnené posvätné èítanie
 #define _vtroj_kresponz {\
 	c = pismenko_modlitby(modlitba);\
 	if(modlitba == MODL_PRVE_VESPERY)\
@@ -6849,9 +6836,8 @@ label_24_DEC:
 	_set_modlitba(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
 }
-/* 2006-01-26: doplnené posvätné èítanie
- * 2008-03-30: upravené antifóny pre modlitbu cez deò - sú rovnaké, použitý anchor ANCHOR_ANTIFONY
- */
+// 2006-01-26: doplnené posvätné èítanie
+// 2008-03-30: upravené antifóny pre modlitbu cez deò - sú rovnaké, použitý anchor ANCHOR_ANTIFONY
 #define _vtroj_antifony {\
 	c = pismenko_modlitby(modlitba);\
 	if(modlitba == MODL_PRVE_VESPERY)\
@@ -6884,7 +6870,7 @@ label_24_DEC:
 		set_LOG_litobd;\
 	}\
 }
-/* 2006-01-26: doplnené posvätné èítanie */
+// 2006-01-26: doplnené posvätné èítanie
 #define _vtroj_citanie1 {\
 	sprintf(_anchor, "%s_%c%s_%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_CITANIE1, nazov_DN_asci[den]);\
 	_set_citanie1(modlitba, _file_pc, _anchor);\
@@ -6971,7 +6957,7 @@ label_24_DEC:
 				_set_zalmy_velkonocna_nedela(modlitba);
 				modlitba = MODL_POSV_CITANIE;
 				_set_zalmy_velkonocna_nedela(modlitba);
-				/* 2006-01-27: pridaný popis k posv. èítaniu ve¾konoènej nedele */
+				// 2006-01-27: pridaný popis k posv. èítaniu ve¾konoènej nedele
 				_vtroj_popis;
 				if((_global_opt[1] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE){
 					// 2011-03-14: opravené; na ostatné hodiny sa berie doplnková psalmódia (realizované aj v _set_zalmy_velkonocna_nedela()...)
@@ -6982,7 +6968,7 @@ label_24_DEC:
 					modlitba = MODL_POPOLUDNI;
 					_set_zalmy_velkonocna_nedela(modlitba);
 				}
-			}/* nedela */
+			}// nede¾a
 			else if(den == DEN_SOBOTA){
 				modlitba = MODL_RANNE_CHVALY;
 				_set_zalmy_biela_sobota(modlitba);
@@ -7000,9 +6986,9 @@ label_24_DEC:
 					_set_zalmy_biela_sobota(modlitba);
 				}
 				modlitba = MODL_KOMPLETORIUM;
-				/* 2010-06-08: pridaný popis ku kompletóriu bielej soboty */
+				// 2010-06-08: pridaný popis ku kompletóriu bielej soboty
 				_vtroj_popis;
-			}/* nie nedela, ale biela sobota */
+			}// nie nede¾a, ale biela sobota
 			else if(den == DEN_PIATOK){
 				modlitba = MODL_POSV_CITANIE;
 				_set_zalmy_velky_piatok(modlitba);
@@ -7018,19 +7004,18 @@ label_24_DEC:
 
 				modlitba = MODL_VESPERY;
 				_set_zalmy_velky_piatok(modlitba);
-				/* 2006-01-27: pridaný popis k vešperám ve¾kého piatka */
+				// 2006-01-27: pridaný popis k vešperám ve¾kého piatka
 				_vtroj_popis;
 				/* 2009-04-17: pridané - do budúcnosti; ak by mali jednotlivé modlitby svoju farbu, tak vigília má ma bielu; bežná biela sobota: fialová
 				_global_den.farba = LIT_FARBA_BIELA;
 				*/
-			}/* nie nedela, ani sobota, ale ve¾ký piatok */
+			}// nie nede¾a, ani sobota, ale ve¾ký piatok
 			break;
-/* switch(litobd), case OBD_VELKONOCNE_TROJDNIE -- end ---------------------------------------- */
+// switch(litobd), case OBD_VELKONOCNE_TROJDNIE -- end ----------------------------------------
 
-/* switch(litobd), case OBD_VELKONOCNE_I -- begin --------------------------------------------- */
+// switch(litobd), case OBD_VELKONOCNE_I -- begin ---------------------------------------------
 		case OBD_VELKONOCNE_I:/* do nanebovstupenia pana */
 			Log("OBD_VELKONOCNE_I\n");
-			/* 09/03/2000A.D. */
 /* zabezpecime nahodnost pri hymne vo feriu, kedy sa "podla lubovole" mozre brat nie nedelny hymnus */
 /* ((_global_den.den MOD 3) == 0) */
 /* 2006-01-27: pridaná modlitba posvätné èítanie 
@@ -7336,9 +7321,9 @@ label_24_DEC:
 				_velk1_modlitba;
 
 				if(den == DEN_NEDELA){
-					/* 2007-12-06: pridané kompletórium po prvých vešperách */
+					// 2007-12-06: pridané kompletórium po prvých vešperách
 					modlitba = MODL_PRVE_KOMPLETORIUM;
-					set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd); /* 2008-04-21: doplnené */
+					set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd); // 2008-04-21: doplnené
 					set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
 					set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd);
 					// prvé vešpery
@@ -7350,26 +7335,25 @@ label_24_DEC:
 					_velk1_prosby;
 					_velk1_modlitba;
 					_velk1_ne_antifony;
-					/* antifóny pre ranné chvály */
+					// antifóny pre ranné chvály
 					modlitba = MODL_RANNE_CHVALY;
 					_velk1_ne_antifony;
-					/* antifóny pre vešpery */
+					// antifóny pre vešpery
 					modlitba = MODL_VESPERY;
 					_velk1_ne_antifony;
-					/* 2006-02-09: doplnené posvätné èítanie */
+					// 2006-02-09: doplnené posvätné èítanie
 					modlitba = MODL_POSV_CITANIE;
 					_set_antifony_velk_pc(den, tyzden, modlitba);
-					/* toto sa musí urobi nakoniec, lebo sa tam mení súbor _file_pc */
-				}/* nedela */
-			}/* nie je nanebovstúpenie */
+					// toto sa musí urobi nakoniec, lebo sa tam mení súbor _file_pc
+				}// nede¾a
+			}// nie je nanebovstúpenie
 			break;
-/* switch(litobd), case OBD_VELKONOCNE_I -- end ----------------------------------------------- */
+// switch(litobd), case OBD_VELKONOCNE_I -- end -----------------------------------------------
 
-/* switch(litobd), case OBD_VELKONOCNE_II -- begin -------------------------------------------- */
-		case OBD_VELKONOCNE_II:/* po nanebovstupeni pana */
+// switch(litobd), case OBD_VELKONOCNE_II -- begin --------------------------------------------
+		case OBD_VELKONOCNE_II:// po nanebovstupeni pana
 			Log("OBD_VELKONOCNE_II\n");
-			/* 10/03/2000A.D. */
-/* 2006-02-11: doplnené posvätné èítanie */
+// 2006-02-11: doplnené posvätné èítanie
 #define _velk2_hymnus {\
 	sprintf(_anchor, "%s_%c%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS);\
 	if(modlitba == MODL_POSV_CITANIE){\
@@ -7382,9 +7366,7 @@ label_24_DEC:
 	}\
 }
 
-/* citania ako v OBD_VELKONOCNE_I; 7. tyzden ma na vespery vlastne citanie 
- * 2006-02-11: oprava
- */
+// citania ako v OBD_VELKONOCNE_I; 7. tyzden ma na vespery vlastne citanie | 2006-02-11: oprava
 #define _velk2_kcitanie {\
 	Log("\n\n _velk2_kcitanie \n\n");\
 	if(((den == DEN_NEDELA) || (modlitba == MODL_RANNE_CHVALY) || (tyzden == 6))\
@@ -7628,13 +7610,13 @@ label_24_DEC:
 					_set_antifony_velk_pc(den, tyzden, modlitba);
 					/* toto sa musí urobi nakoniec, lebo sa tam mení súbor _file_pc */
 
-				}/* nie je zoslanie ds */
-			}/* nedela */
+				}// nie je zoslanie ds
+			}// nede¾a
 			break;
-/* switch(litobd), case OBD_VELKONOCNE_II -- end ---------------------------------------------- */
+// switch(litobd), case OBD_VELKONOCNE_II -- end ----------------------------------------------
 
-/* switch(litobd), case OBD_VELKONOCNA_OKTAVA -- begin ---------------------------------------- */
-		case OBD_VELKONOCNA_OKTAVA:/* velkonocna nedela -- 2. velk. ne */
+// switch(litobd), case OBD_VELKONOCNA_OKTAVA -- begin ----------------------------------------
+		case OBD_VELKONOCNA_OKTAVA:// velkonocna nedela -- 2. velk. ne
 			Log("OBD_VELKONOCNA_OKTAVA\n");
 			/* velkonocna oktava: 09/03/2000A.D.
 			 *    - hymnus, antifony 1 -- 3, zalmy a chvalospev su z velkonocnej nedele;
@@ -7693,7 +7675,7 @@ label_24_DEC:
 			_vnokt_magnifikat;
 			_vnokt_modlitba;
 
-			/* teraz nastavime zalmy z velkonocnej nedele */
+			// teraz nastavime zalmy z velkonocnej nedele
 			modlitba = MODL_RANNE_CHVALY;
 			_set_zalmy_velkonocna_nedela(modlitba);
 			modlitba = MODL_VESPERY;
@@ -7701,7 +7683,7 @@ label_24_DEC:
 
 			/* a veci pre prve vespery */
 			if(den == DEN_NEDELA){ /* v skutoènosti platí aj: (_global_den.denvr == DRUHA_VELKONOCNA_NEDELA) */
-				/* 2007-12-06: pridané kompletórium po prvých vešperách */
+				// 2007-12-06: pridané kompletórium po prvých vešperách
 				modlitba = MODL_PRVE_KOMPLETORIUM;
 				set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
 				set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
@@ -7711,9 +7693,9 @@ label_24_DEC:
 				_vnokt_magnifikat;
 				_vnokt_modlitba;
 				_set_zalmy_velkonocna_nedela(modlitba);
-			}/* nedela */
+			}// nede¾a
 
-			/* 2006-01-27: žalmy pre modlitbu cez deò a posvätné èítania (pè-antifóny) */
+			// 2006-01-27: žalmy pre modlitbu cez deò a posvätné èítania (pè-antifóny)
 			modlitba = MODL_POSV_CITANIE;
 			_set_zalmy_velk_oktava(den, modlitba);
 			_vnokt_modlitba;
@@ -7732,8 +7714,8 @@ label_24_DEC:
 			_set_zalmy_velk_oktava(den, modlitba);
 			_vnokt_modlitba;
 
-			/* dalej nastavime citanie a prosby z velkonocneho obd. I */
-			mystrcpy(_file, nazov_obd_htm[OBD_VELKONOCNE_I], MAX_STR_AF_FILE); /* aby bolo z velkonocneho obd. I */
+			// dalej nastavime citanie a prosby z velkonocneho obd. I
+			mystrcpy(_file, nazov_obd_htm[OBD_VELKONOCNE_I], MAX_STR_AF_FILE); // aby bolo z velkonocneho obd. I
 			// ranné chvály
 			modlitba = MODL_RANNE_CHVALY;
 			_velk1_kcitanie;
@@ -7742,14 +7724,14 @@ label_24_DEC:
 			modlitba = MODL_VESPERY;
 			_velk1_kcitanie;
 			_velk1_prosby;
-			/* a veci pre prve vespery */
+			// a veci pre prve vespery
 			if(den == DEN_NEDELA){
 				modlitba = MODL_PRVE_VESPERY;
 				_velk1_kcitanie;
 				_velk1_prosby;
-			}/* nedela */
+			}// nede¾a
 
-			/* 2006-01-27: krátke èítanie pre modlitbu cez deò */
+			// 2006-01-27: krátke èítanie pre modlitbu cez deò
 			modlitba = MODL_PREDPOLUDNIM;
 			_velk1_kcitanie;
 			modlitba = MODL_NAPOLUDNIE;
@@ -7757,9 +7739,9 @@ label_24_DEC:
 			modlitba = MODL_POPOLUDNI;
 			_velk1_kcitanie;
 
-			/* napokon nastavime hymnus, antifony a kratke resp. z velkonocnej nedele */
-			mystrcpy(_file, nazov_obd_htm[OBD_VELKONOCNE_TROJDNIE], MAX_STR_AF_FILE); /* aby bolo z velkonocnej nedele */
-			mystrcpy(_file_pc, nazov_obd_htm_pc[OBD_VELKONOCNE_TROJDNIE], MAX_STR_AF_FILE); /* aby bolo z velkonocnej nedele */
+			// napokon nastavime hymnus, antifony a kratke resp. z velkonocnej nedele
+			mystrcpy(_file, nazov_obd_htm[OBD_VELKONOCNE_TROJDNIE], MAX_STR_AF_FILE); // aby bolo z velkonocnej nedele
+			mystrcpy(_file_pc, nazov_obd_htm_pc[OBD_VELKONOCNE_TROJDNIE], MAX_STR_AF_FILE); // aby bolo z velkonocnej nedele
 			den = DEN_NEDELA;
 			// ranné chvály
 			modlitba = MODL_RANNE_CHVALY;
@@ -7771,7 +7753,7 @@ label_24_DEC:
 			_vtroj_hymnus;
 			_vtroj_antifony;
 			_vtroj_kresponz;
-			/* 2006-01-27: modlitba cez deò a posvätné èítania */
+			// 2006-01-27: modlitba cez deò a posvätné èítania
 			modlitba = MODL_POSV_CITANIE;
 			_vtroj_hymnus;
 			modlitba = MODL_PREDPOLUDNIM;
@@ -7786,78 +7768,77 @@ label_24_DEC:
 			_vtroj_hymnus;
 			_vtroj_antifony;
 			_vtroj_kresponz;
-			/* a veci pre prve vespery */
+			// a veci pre prve vespery
 			if(den == DEN_NEDELA){
 				modlitba = MODL_PRVE_VESPERY;
 				_vtroj_hymnus;
 				_vtroj_antifony;
 				_vtroj_kresponz;
-			}/* nedela */
+			}// nede¾a
 
 			break;
-/* switch(litobd), case OBD_VELKONOCNA_OKTAVA -- end ------------------------------------------ */
+// switch(litobd), case OBD_VELKONOCNA_OKTAVA -- end ------------------------------------------
 
-	}/* switch(litobd) */
+	}// switch(litobd)
 	Log("Koniec ve¾kého switch()-u pod¾a liturgických období.\n");
 	LOG_ciara_sv;
-	/* koniec velkeho switchu, podla ktoreho sa priradia zakladne udaje */
+	// koniec velkeho switchu, podla ktoreho sa priradia zakladne udaje
 
 	Log("_global_den (nastavene v dbzaltar.cpp::liturgicke_obdobie() po velkom switchi, pred druhym spustanim sviatky_svatych()):\n");
 #ifdef DETAIL_LOG_GLOBAL_DEN
 	Log(_global_den);
 #endif
 	// --------------------------------------------------------------------
-	/* nasledujuca cast berie do uvahy, kedy sa ma `robit' svaty */
-	/* je to cast prevzata z dnes.cpp::init_global_string(); */
+	// nasledujuca cast berie do uvahy, kedy sa ma `robit' svaty | je to cast prevzata z dnes.cpp::init_global_string();
 	_struct_dm _local_den;
-	_INIT_DM(_local_den); /* 2003-08-11 pridane */
+	_INIT_DM(_local_den);
 
 	short int obyc = NIE;
-	/* najprv priradime do _local_den to, co tam ma byt */
+	// najprv priradime do _local_den to, co tam ma byt
 	if(poradie_svateho > 0){
-		/* sviatky (spomienky, ls) svatych */
+		// sviatky (spomienky, ls) svatych
 		switch(poradie_svateho){
 			case 4:
-				/* do _local_den priradim slavenie pm v sobotu v dalsom */
+				// do _local_den priradim slavenie pm v sobotu v dalsom
 				_local_den = _global_pm_sobota;
 				// ale predsalen aspon _local_den = _global_pm_sobota; urobim tu
-				break; /* case 4: */
+				break; // case 4:
 			case 1:
-				/* do _local_den priradim dane slavenie */
+				// do _local_den priradim dane slavenie
 				_local_den = _global_svaty1;
 				Log("spustam druhykrat sviatky_svatych(), tentokrat pre %d. svateho\n", poradie_svateho);
 				sviatky_svatych(_local_den.den, _local_den.mesiac, poradie_svateho, 2);
-				break; /* case 1: */
+				break; // case 1:
 			case 2:
 				if(_global_pocet_svatych > 1){
-					/* do _local_den priradim dane slavenie */
+					// do _local_den priradim dane slavenie
 					_local_den = _global_svaty2;
 					Log("spustam druhykrat sviatky_svatych(), tentokrat pre %d. svateho\n", poradie_svateho);
 					sviatky_svatych(_local_den.den, _local_den.mesiac, poradie_svateho, 2);
 				}
 				else{
-					/* sice chce svateho c. 2, ale mam len jedneho */
+					// sice chce svateho c. 2, ale mam len jedneho
 					hlavicka((char *)html_title[_global_jazyk]);
 					Log("-- Error: _global_svaty2 not assigned\n");
 					Export("%s\n", "Error: _global_svaty2 not assigned");
 					ALERT;
 				}
-				break; /* case 2: */
+				break; // case 2:
 			case 3:
 				if(_global_pocet_svatych > 2){
-					/* teraz do _local_den priradim dane slavenie */
+					// teraz do _local_den priradim dane slavenie
 					_local_den = _global_svaty3;
 					Log("spustam druhykrat sviatky_svatych(), tentokrat pre %d. svateho\n", poradie_svateho);
 					sviatky_svatych(_local_den.den, _local_den.mesiac, poradie_svateho, 2);
 				}
 				else{
-					/* sice chce svateho c. 3, ale nemam troch */
+					// sice chce svateho c. 3, ale nemam troch
 					hlavicka((char *)html_title[_global_jazyk]);
 					Log("-- Error: _global_svaty3 not assigned\n");
 					Export("%s\n", "Error: _global_svaty3 not assigned");
 					ALERT;
 				}
-				break; /* case 3: */
+				break; // case 3:
 			case 5:
 				hlavicka((char *)html_title[_global_jazyk]);
 				Log("-- Error: poradie_svateho == 5\n");
@@ -7866,22 +7847,22 @@ label_24_DEC:
 				break;
 			case 0:
 				// [ToDo]: je smiesne, ze case 0 tu vobec je: ved toto je mrtvy kus kodu!
-				/* bezny den */
+				// bezny den
 				if(_global_svaty1.smer >= 12){
-					/* ak je to iba lubovolna spomienka, tak vsedny den */
+					// ak je to iba lubovolna spomienka, tak vsedny den
 					obyc = ANO;
 					_local_den = _global_den;
 				}
 				else{
-					/* sice chce obycajny den, ale nemoze byt */
+					// sice chce obycajny den, ale nemoze byt
 					hlavicka((char *)html_title[_global_jazyk]);
 					Log("-- Error: _global_den not assigned\n");
 					Export("%s\n", "Error: _global_den not assigned");
 					ALERT;
 				}
-				break; /* case 0: */
-		}/* switch(poradie_svateho) */
-	}/* if(poradie_svateho > 0) */
+				break; // case 0:
+		}// switch(poradie_svateho)
+	}// if(poradie_svateho > 0)
 	/* 2009-03-19: ak poradie_svateho bolo UNKNOWN_PORADIE_SVATEHO, znamená to, že sa chcelo volanie možno pre nasledovný deò;
 	 * problém sv. Jozefa - antifóny pre kompletórium nastavené pri prvom spustení volania "sviatky svätých" prekrylo nastavenie z liturgického obdobia...
 	 */
@@ -7893,7 +7874,7 @@ label_24_DEC:
 		 * 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 až 3 použité aj pre iné lokálne slávenia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 až 3
 		 */
 		&& !MIESTNE_SLAVENIE_LOKAL_SVATY1){
-		/* bolo to volanie pre nasledujúci deò, treba ošetri napr. kompletórium po prvých vešperách, aby sa nepriradilo zo žaltára */
+		// bolo to volanie pre nasledujúci deò, treba ošetri napr. kompletórium po prvých vešperách, aby sa nepriradilo zo žaltára
 		Log("poradie_svateho == UNKNOWN_PORADIE_SVATEHO...\n");
 		Log("_global_pocet_svatych == %d\n", _global_pocet_svatych);
 		Log("_global_den.smer == %d\n", _global_den.smer);
@@ -7915,25 +7896,20 @@ label_24_DEC:
 	}
 	else if((_global_den.denvt == DEN_NEDELA) ||
 		(_global_den.prik == PRIKAZANY_SVIATOK)){
-		/* _local_den ostava _global_den */
+		// _local_den ostava _global_den
 		_local_den = _global_den;
 	}
 	else if((poradie_svateho > 0) && (_global_pocet_svatych > 0)){
-		/* 2009-03-19: nechápem, preèo je to tu; sem sa to predsa nedostane, pretože kontrola na (poradie_svateho > 0) je vyššie */
-	}/* if(_global_pocet_svatych > 0) */
+		// 2009-03-19: nechápem, preèo je to tu; sem sa to predsa nedostane, pretože kontrola na (poradie_svateho > 0) je vyššie
+	}// if(_global_pocet_svatych > 0)
 	else{
-		/* obycajny den */
+		// obyèajný deò
 		obyc = ANO;
 		_local_den = _global_den;
 	}
-	/* este spomienka panny marie v sobotu, cl. 15 */
-	/* najprv sa spytame tej soboty, ci nahodou nie je 
-	   spomienka neposkvrneneho srdca panny marie;
-	   ak je, tak uprednostnime tuto. pridane 04/07/2000A.D. */
-	/* 2006-02-02: pridané posv. èítania a upravené; 
-	 * keïže smer == 11 používame pre lokálne povinné spomienky, 
-	 * upravili sme kontrolu z 12 na 11
-	 */
+	// ešte spomienka panny márie v sobotu, cl. 15
+	// najprv sa spytame tej soboty, ci nahodou nie je spomienka neposkvrneneho srdca panny marie; ak je, tak uprednostnime tuto
+	// 2006-02-02: pridané posv. èítania a upravené; keïže smer == 11 používame pre lokálne povinné spomienky, upravili sme kontrolu z 12 na 11
 	if(_global_den.denvr == (_global_r._ZOSLANIE_DUCHA_SV.denvr + 20)){
 		/* pri spusteni liturgicke_obdobie(); spomienka neposkvrneneho srdca panny marie */
 		Log("/* pri spusteni liturgicke_obdobie(); spomienka neposkvrneneho srdca panny marie */\n");
@@ -7942,29 +7918,28 @@ label_24_DEC:
 		sviatky_svatych(_local_den.den, _local_den.mesiac, poradie_svateho, 2);
 	}
 
-	/* spomienka panny márie v sobotu */
+	// spomienka panny márie v sobotu
 	if((_global_den.litobd == OBD_CEZ_ROK) &&
 		(_global_den.denvt == DEN_SOBOTA) &&
 		((_global_den.denvr != (_global_r._ZOSLANIE_DUCHA_SV.denvr + 20))) &&
 		(
-			/* 2011-02-02: zadefinované MIESTNE_SLAVENIE_CZOP_SVATY1 až 3, aby sa zjednodušila podmienka (platí len pre CZOP)
-			 * 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 až 3 použité aj pre iné lokálne slávenia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 až 3
-			 */
+			// 2011-02-02: zadefinované MIESTNE_SLAVENIE_CZOP_SVATY1 až 3, aby sa zjednodušila podmienka (platí len pre CZOP)
+			// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 až 3 použité aj pre iné lokálne slávenia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 až 3
 			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
 			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY1) && (_global_pocet_svatych > 0))) &&
 		(poradie_svateho == 4)){
-		/* teraz do _global_den priradim dane slavenie */
+		// teraz do _global_den priradim dane slavenie
 		_local_den = _global_pm_sobota;
 		mystrcpy(_file, FILE_SPOM_PM_SOBOTA, MAX_STR_AF_FILE);
 
-		/* invitatórium */
+		// invitatórium
 		modlitba = MODL_INVITATORIUM;
 		// sú 2, takže tyzzal MOD 2 (0, 1)
 		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1, tyzzal MOD 2);
 		_set_antifona1(modlitba, _file, _anchor);
 		set_LOG_litobd;
 
-		/* ranné chvály */
+		// ranné chvály
 		modlitba = MODL_RANNE_CHVALY;
 		// hymnus
 		// sú tri hymny, preto ich dáme pod¾a tyzzal MOD 3 (0, 1, 2)
@@ -8015,11 +7990,11 @@ label_24_DEC:
 		// modlitba -- ako na ranné chvály; doplnené 2010-11-16
 		// 2010-11-16, oprava: je ich 6, pôvodne bolo: takže tyzzal MOD 6 + 1 (1 -- 6); avšak tyzzal je 1--4, opravené na _global_den.tyzden
 		// preto "+ 1", aby sme dodržali pôvodné èíslovanie
-		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(MODL_RANNE_CHVALY /* modlitba */), ANCHOR_MODLITBA, (tyzden MOD 6) + 1);
+		sprintf(_anchor, "%s%c_%s%d", SPOM_PM_SOBOTA, pismenko_modlitby(MODL_RANNE_CHVALY), ANCHOR_MODLITBA, (tyzden MOD 6) + 1);
 		_set_modlitba(modlitba, _file, _anchor);
 		set_LOG_litobd;
 
-	}/* spomienka panny márie v sobotu */
+	}// spomienka panny márie v sobotu
 
 	Log("do _global_den nastavujem _local_den...\n");
 	_global_den = _local_den;
@@ -8030,7 +8005,7 @@ label_24_DEC:
 	/* koniec casti podla dnes.cpp::init_global_string(); */
 	Log("-- liturgicke_obdobie(%d, %d, %d, %d: svaty: %d) -- koniec\n",
 		litobd, tyzden, den, tyzzal, poradie_svateho);
-}/* liturgicke_obdobie(); */
+}// liturgicke_obdobie();
 
 /* --------------------------------------------------------------------- */
 
@@ -8132,7 +8107,7 @@ short int _spol_cast_je_panna(_struct_sc sc){
 	if(modlitba == MODL_POSV_CITANIE){_set_hymnus(modlitba, _file_pc, _anchor);}\
 	else{_set_hymnus(modlitba, _file, _anchor);}\
 	set_LOG_svsv;}
-/* antifony */
+// antifóny
 /* kedysi tam pred celym blokom bolo if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALMY_ZO_SVIATKU) == BIT_OPT_1_ZALMY_ZO_SVIATKU) 
  * 2005-07-27: pre sviatky svätých posvätné èítania majú antifóny tam, kde èítania
  * 2010-03-25: pre úèely modlitby cez deò (keï sú ant. 1 až 3 rovnaké) použi _vlastna_cast_antifony_rovnake
@@ -8188,12 +8163,12 @@ short int _spol_cast_je_panna(_struct_sc sc){
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_BENEDIKTUS);\
 	_set_benediktus(modlitba, _file, _anchor);\
 	set_LOG_svsv;}
-/* magnifikat */
+// magnifikat
 #define _vlastna_cast_magnifikat {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_MAGNIFIKAT);\
 	_set_magnifikat(modlitba, _file, _anchor);\
 	set_LOG_svsv;}
-/* prosby */
+// prosby
 #define _vlastna_cast_prosby {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_PROSBY);\
 	_set_prosby(modlitba, _file, _anchor);\
@@ -22334,7 +22309,7 @@ label_25_MAR:
 							set_spolocna_cast(sc, poradie_svaty);
 
 						modlitba = MODL_RANNE_CHVALY;
-						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ_OP)){ /* 2008-10-15: odvetvené len pre Slovensko; 2009-07-09: pridané aj pre CZ_OP */
+						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ_OP)){ // 2008-10-15: odvetvené len pre Slovensko; 2009-07-09: pridané aj pre CZ_OP
 							_vlastna_cast_full_okrem_prosieb(modlitba);
 						}
 						else{
@@ -22347,7 +22322,7 @@ label_25_MAR:
 						_vlastna_cast_2citanie;
 
 						modlitba = MODL_VESPERY;
-						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ_OP)){ /* 2008-10-15: odvetvené len pre Slovensko; 2009-07-09: pridané aj pre CZ_OP */
+						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ_OP)){ // 2008-10-15: odvetvené len pre Slovensko; 2009-07-09: pridané aj pre CZ_OP
 							_vlastna_cast_full_okrem_prosieb(modlitba);
 						}
 						else{
@@ -22365,9 +22340,8 @@ label_25_MAR:
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
 
 					if(_global_jazyk == JAZYK_CZ_OP){
-						/* 2009-07-10: odvetvené pre dominikánov
-						 * 2010-03-22: pre dominikánov samostatne 
-						 */
+						// 2009-07-10: odvetvené pre dominikánov
+						// 2010-03-22: pre dominikánov samostatne 
 						if(poradie_svaty == 2){
 							// definovanie parametrov pre modlitbu
 							if(query_type != PRM_DETAILY)
@@ -22463,9 +22437,8 @@ label_25_MAR:
 					}// HU only
 					break;
 				case 9: /* MES_OCT -- 09OKT */
-					/* 2009-03-24: pre Slovensko, Èesko atï. pod¾a všeobecného kalendára sv. Kozmu a Damiána, pre dominikánov z 28.9. muèedníkov... 
-					 * 2009-05-15: upravené
-					 */
+					// 2009-03-24: pre Slovensko, Èesko atï. pod¾a všeobecného kalendára sv. Kozmu a Damiána, pre dominikánov z 28.9. muèedníkov... 
+					// 2009-05-15: upravené
 					if(poradie_svaty == 1){
 						// definovanie parametrov pre modlitbu
 						if(query_type != PRM_DETAILY)

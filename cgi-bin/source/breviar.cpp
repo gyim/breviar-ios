@@ -4875,6 +4875,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			 *             Ëasù prevzat· z: liturgicke_obdobie(), zaËiatok funkcie; hoci tu sa pouûije len pre smer == 5 (sviatky p·na); sl·vnosti sa rieöia samostatne
 			 * 2011-06-30: cyril a metod odvetven˝ pre SK a CZ only
 			 * 2011-07-22: doplnenÈ pre HU: 20AUG
+			 * 2011-10-13: zapozn·mkovanÈ 14SEP kvÙli CZ // nesp˙öùalo sa totiû zaltar_zvazok(), a teda ani zaltar_kompletorium()
 			 */
 			Log("_global_den.smer == %d\n", _global_den.smer);
 			Log("_global_svaty1.smer == %d\n", _global_svaty1.smer);
@@ -4885,7 +4886,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 				((_global_den.den == 5) && (_global_den.mesiac - 1 == MES_JUL) && ((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
 				((_global_den.den == 20) && (_global_den.mesiac - 1 == MES_AUG) && (_global_jazyk == JAZYK_HU)) ||
 				((_global_den.den == 28) && (_global_den.mesiac - 1 == MES_SEP) && ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
-				((_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) ) ||
+				// ((_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) ) ||
 				((_global_den.den == 1) && (_global_den.mesiac - 1 == MES_NOV))
 				)){
 				// do _local_den priradim dane slavenie
@@ -6671,7 +6672,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 		for(i = 1; i <= pocet_dni[_global_den.mesiac - 1]; i++){
 			if(i == _global_den.den){
 				if(((i + _global_den.denvt - _global_den.den) MOD 7) == 0)
-					/* nedela */
+					// nedeæa
 					Export("<"HTML_SPAN_BLUE_BOLD">%d</span> ", i);
 				else
 					Export("<"HTML_SPAN_BLUE">%d</span> ", i);
@@ -6679,7 +6680,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 			else{
 				vytvor_global_link(i, _global_den.mesiac, _global_den.rok, LINK_DEN, NIE);
 				if(((i + _global_den.denvt - _global_den.den) MOD 7) == 0)
-					/* nedela */
+					// nedeæa
 					Export("<"HTML_SPAN_BOLD">%s</span> ", _global_link);
 				else
 					Export("%s ", _global_link);
@@ -6763,7 +6764,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 
 		Export("</th>\n</tr>\n");
 
-		/* prv˝ riadok tabuæky "hlaviËka" so skratkami dnÌ v t˝ûdni */
+		// prv˝ riadok tabuæky "hlaviËka" so skratkami dnÌ v t˝ûdni
 		Export("<tr><!--(hlaviËka)-->\n");
 		for(k = DEN_NEDELA; k <= DEN_SOBOTA; k++){
 			Export("<td align=\"right\">%s</td>", (char *)nazov_Dn(k));
@@ -6772,7 +6773,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 
 		Export("<tr><!--(prv˝ riadok)-->\n");
 
-		/* prÌpadnÈ pr·zdne bunky */
+		// prÌpadnÈ pr·zdne bunky
 		j = ((1 + _global_den.denvt - _global_den.den) MOD 7);
 		if(j < 0)
 			j += 7;
@@ -6782,13 +6783,13 @@ void _export_rozbor_dna_kalendar(short int typ){
 			}
 		}
 
-		/* jednotlivÈ dni mesiaca */
+		// jednotlivÈ dni mesiaca
 		for(i = 1; i <= pocet_dni[_global_den.mesiac - 1]; i++){
 			if(i == _global_den.den){
 				if(((i + _global_den.denvt - _global_den.den) MOD 7) == 0){
 					Export("</tr>\n");
 					Export("<tr><!--(ÔalöÌ riadok)-->\n");
-					/* nedela */
+					// nedeæa
 					Export("<td align=\"right\" bgcolor=\"%s\"><font color=\"%s\"><b>%d</b></font></td> ", (char *)html_farba_pozadie_cal, (char *)html_farba_popredie_cal, i);
 				}
 				else
@@ -6799,7 +6800,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 				if(((i + _global_den.denvt - _global_den.den) MOD 7) == 0){
 					Export("</tr>\n");
 					Export("<tr><!--(ÔalöÌ riadok)-->\n");
-					/* nedela */
+					// nedeæa
 					Export("<td align=\"right\"><"HTML_SPAN_BOLD">%s</span></td> ", _global_link);
 				}
 				else
@@ -6807,7 +6808,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 			}
 		}
 
-		/* prÌpadnÈ pr·zdne bunky */
+		// prÌpadnÈ pr·zdne bunky
 		j = ((pocet_dni[_global_den.mesiac - 1] + _global_den.denvt - _global_den.den) MOD 7);
 		if(j < 0)
 			j += 7;
@@ -6822,13 +6823,13 @@ void _export_rozbor_dna_kalendar(short int typ){
 //		}
 #endif
 
-	}/* if(typ) */
+	}// if(typ)
 	else{
-		/* inak kalendar nedavam */
+		// inak kalendar nedavam
 		Log("--- _export_rozbor_dna_kalendar(): kalend·r ned·vam...\n");
 	}
 	Log("--- _export_rozbor_dna_kalendar(typ == %d) -- end\n", typ);
-}/* _export_rozbor_dna_kalendar */
+}// _export_rozbor_dna_kalendar()
 
 //---------------------------------------------------------------------
 /*
@@ -8791,7 +8792,7 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 			 * nedelu v obdobi ,,cez rok" a na nedelu vo vianocnom obdobi
 			 * a nahradzuju nedelnajsiu liturgiu hodin. */
 			(_global_den.denvt == DEN_NEDELA)
-			/* nedela */
+			// nedeæa
 		){
 			/* cl. 61: ak na ten isty den pripadnu vespery bezneho dna
 			 * a prve vespery nasledujuceho dna, maju prednost vespery slavenia,
@@ -8829,7 +8830,7 @@ LABEL_ZMENA:
 			 * nedelu v obdobi ,,cez rok" a na nedelu vo vianocnom obdobi
 			 * a nahradzuju nedelnajsiu liturgiu hodin. */
 			(_local_den.denvt == DEN_NEDELA)
-			/* nedela */
+			// nedeæa
 		){
 			Log("LABEL_ZMENA:...\n");
 			/* cl. 61: ak na ten isty den pripadnu vespery bezneho dna
@@ -12143,7 +12144,7 @@ short int getArgv(int argc, char **argv){
 						mystrcpy(pom_ROK, optarg, SMALL);
 					}
 					Log("option %c with value `%s' -- rok\n", c, optarg); break;
-				case 'p': /* MODLITBA */
+				case 'p': // modlitba
 					if(optarg != NULL){
 						mystrcpy(pom_MODLITBA, optarg, SMALL);
 					}
