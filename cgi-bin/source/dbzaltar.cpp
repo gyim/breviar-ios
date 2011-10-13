@@ -7820,7 +7820,7 @@ label_24_DEC:
 					// sice chce svateho c. 2, ale mam len jedneho
 					hlavicka((char *)html_title[_global_jazyk]);
 					Log("-- Error: _global_svaty2 not assigned\n");
-					Export("%s\n", "Error: _global_svaty2 not assigned");
+					Export("Error: _global_svaty2 not assigned\n");
 					ALERT;
 				}
 				break; // case 2:
@@ -7835,7 +7835,7 @@ label_24_DEC:
 					// sice chce svateho c. 3, ale nemam troch
 					hlavicka((char *)html_title[_global_jazyk]);
 					Log("-- Error: _global_svaty3 not assigned\n");
-					Export("%s\n", "Error: _global_svaty3 not assigned");
+					Export("Error: _global_svaty3 not assigned\n");
 					ALERT;
 				}
 				break; // case 3:
@@ -10003,7 +10003,7 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty, short int force =
 							// sem by to nemalo prÌsù
 								hlavicka((char *)html_title[_global_jazyk]);
 								set_LOG_sc("-- Error: sc (a1, a2, a3) su sice urcene, ale _global_opt[OPT_3_SPOLOCNA_CAST] sa nerovna ani jednej z nich!\n");
-								Export("%s\n", "Error: _global_opt[OPT_3_SPOLOCNA_CAST] assigned incorectly (a1, a2, a3 -- ok)");
+								Export("Error: _global_opt[OPT_3_SPOLOCNA_CAST] assigned incorectly (a1, a2, a3 -- ok)\n");
 								ALERT;
 								return;
 							}
@@ -10019,7 +10019,7 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty, short int force =
 							if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO){
 								hlavicka((char *)html_title[_global_jazyk]);
 								set_LOG_sc("-- Error: sc (a1, a2) su sice urcene, ale _global_opt[OPT_3_SPOLOCNA_CAST] sa nerovna ani jednej z nich!\n");
-								Export("%s\n", "Error: _global_opt[OPT_3_SPOLOCNA_CAST] assigned incorectly (a1, a2 -- ok)");
+								Export("Error: _global_opt[OPT_3_SPOLOCNA_CAST] assigned incorectly (a1, a2 -- ok)\n");
 								ALERT;
 								return;
 							}
@@ -10037,7 +10037,7 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty, short int force =
 					if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO){
 						hlavicka((char *)html_title[_global_jazyk]);
 						set_LOG_sc("-- Error: sc (a1) je sice urcena, ale _global_opt[OPT_3_SPOLOCNA_CAST] sa jej nerovna!\n");
-						Export("%s\n", "Error: _global_opt[OPT_3_SPOLOCNA_CAST] assigned incorectly (a1 -- ok)");
+						Export("Error: _global_opt[OPT_3_SPOLOCNA_CAST] assigned incorectly (a1 -- ok)\n");
 						ALERT;
 						return;
 					}
@@ -10050,7 +10050,7 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty, short int force =
 		if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO){
 			hlavicka((char *)html_title[_global_jazyk]);
 			Log("-- Error: sc (a1) nie je urcene; _global_opt[OPT_3_SPOLOCNA_CAST] == %s\n", nazov_spolc(_global_opt[OPT_3_SPOLOCNA_CAST]));
-			Export("%s\n", "Error: a1 (member of sc) assigned incorectly");
+			Export("Error: a1 (member of sc) unassigned | _global_opt[OPT_3_SPOLOCNA_CAST] == %s\n", nazov_spolc(_global_opt[OPT_3_SPOLOCNA_CAST]));
 			ALERT;
 			return;
 		}
@@ -18405,7 +18405,8 @@ label_25_MAR:
 					if(poradie_svaty == 1){
 						// definovanie parametrov pre modlitbu
 						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty, FORCE_BRAT_ANTIFONY + FORCE_BRAT_ZALMY + FORCE_BRAT_KCIT_1CIT + FORCE_BRAT_KRESP_PROSBY + FORCE_BRAT_2CITANIE);
+							set_spolocna_cast(sc, poradie_svaty);
+							// set_spolocna_cast(sc, poradie_svaty, FORCE_BRAT_ANTIFONY + FORCE_BRAT_ZALMY + FORCE_BRAT_KCIT_1CIT + FORCE_BRAT_KRESP_PROSBY + FORCE_BRAT_2CITANIE);
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_benediktus;
@@ -21135,9 +21136,9 @@ label_25_MAR:
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
 						Log("Sedembolestnej Panny Marie, patronky Slovenska: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
-						if(/*(poradie_svaty == 1) && */ // 23/02/2000A.D.; zobrate z 8.dec; 28/03/2000A.D.
-						  (query_type != PRM_DETAILY))
-							set_spolocna_cast(sc, poradie_svaty, FORCE_BRAT_ANTIFONY + FORCE_BRAT_ZALMY + FORCE_BRAT_KCIT_1CIT + FORCE_BRAT_KRESP_PROSBY + FORCE_BRAT_2CITANIE);
+						if(query_type != PRM_DETAILY)
+							set_spolocna_cast(sc, poradie_svaty);
+							// set_spolocna_cast(sc, poradie_svaty, FORCE_BRAT_ANTIFONY + FORCE_BRAT_ZALMY + FORCE_BRAT_KCIT_1CIT + FORCE_BRAT_KRESP_PROSBY + FORCE_BRAT_2CITANIE);
 
 						/* 2009-07-10: nastavenie pre Ëesk˝ brevi·r - je to len spomienka */
 						if(_global_jazyk == JAZYK_SK){
@@ -21838,7 +21839,8 @@ label_25_MAR:
 							Log("Svat˝ V·clav: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
 							if(query_type != PRM_DETAILY)
-								set_spolocna_cast(sc, poradie_svaty, FORCE_BRAT_ANTIFONY + FORCE_BRAT_ZALMY + FORCE_BRAT_KCIT_1CIT + FORCE_BRAT_KRESP_PROSBY + FORCE_BRAT_2CITANIE);
+								set_spolocna_cast(sc, poradie_svaty);
+								// set_spolocna_cast(sc, poradie_svaty, FORCE_BRAT_ANTIFONY + FORCE_BRAT_ZALMY + FORCE_BRAT_KCIT_1CIT + FORCE_BRAT_KRESP_PROSBY + FORCE_BRAT_2CITANIE);
 
 							modlitba = MODL_PRVE_KOMPLETORIUM;
 							if(den != DEN_NEDELA){
@@ -22384,9 +22386,9 @@ label_25_MAR:
 							sc = _decode_spol_cast(_global_svaty1.spolcast);
 							Log("Sz˚z M·ria, Magyarok nagyaszszonya, Magyarorsz·g fıp·tron·ja: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
-							if(/*(poradie_svaty == 1) && */
-							  (query_type != PRM_DETAILY))
-								set_spolocna_cast(sc, poradie_svaty, FORCE_BRAT_ANTIFONY + FORCE_BRAT_ZALMY + FORCE_BRAT_KCIT_1CIT + FORCE_BRAT_KRESP_PROSBY + FORCE_BRAT_2CITANIE);
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+								// set_spolocna_cast(sc, poradie_svaty, FORCE_BRAT_ANTIFONY + FORCE_BRAT_ZALMY + FORCE_BRAT_KCIT_1CIT + FORCE_BRAT_KRESP_PROSBY + FORCE_BRAT_2CITANIE);
 
 							modlitba = MODL_PRVE_VESPERY;
 							_vlastna_cast_full(modlitba);
