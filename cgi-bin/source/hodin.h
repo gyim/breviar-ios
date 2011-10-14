@@ -1694,7 +1694,7 @@ const char *html_text_option1_spomienka_spolcast[POCET_JAZYKOV + 1] =
  "", 
  "", 
  "na památky použít èásti ze spoleèných èástí", 
- "xxx"
+ "emléknapon a jelzett részeket a közös részbõl venni"
 };
 
 const char *html_text_option1_spomienka_spolcast_explain[POCET_JAZYKOV + 1] = 
@@ -1704,7 +1704,7 @@ const char *html_text_option1_spomienka_spolcast_explain[POCET_JAZYKOV + 1] =
  "",
  "", 
  "",
- "xxx"
+ "Kiválasztani, hogy az imádságra hívás antifónája, himnusz, rövid olvasmány, a Benedictus és a Magnifikat antifónája és a fohászok a közös részbõl legyenek véve (egyébként a köznapról) a 235 b) általános rendelkezés szerint."
 };
 
 const char *html_text_option2_html_export[POCET_JAZYKOV + 1] = 
