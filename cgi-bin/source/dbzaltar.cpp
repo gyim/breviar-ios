@@ -21156,12 +21156,7 @@ label_25_MAR:
 						_vlastna_cast_antifona_inv;
 
 						modlitba = MODL_RANNE_CHVALY;
-						if(_global_jazyk == JAZYK_CZ_OP){
-							_vlastna_cast_full_okrem_prosieb(modlitba);
-						}
-						else{
-							_vlastna_cast_full(modlitba);
-						}
+						_vlastna_cast_full_okrem_prosieb(modlitba);
 						_set_zalmy_1nedele_rch(); // 2008-08-15: doplnené
 
 						modlitba = MODL_POSV_CITANIE;
@@ -21189,12 +21184,7 @@ label_25_MAR:
 						}
 
 						modlitba = MODL_VESPERY;
-						if(_global_jazyk == JAZYK_CZ_OP){
-							_vlastna_cast_full_okrem_prosieb(modlitba);
-						}
-						else{
-							_vlastna_cast_full(modlitba);
-						}
+						_vlastna_cast_full_okrem_prosieb(modlitba);
 						_set_zalmy_sviatok_panien(modlitba);
 
 						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
