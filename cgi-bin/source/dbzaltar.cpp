@@ -21134,9 +21134,15 @@ label_25_MAR:
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
 						Log("Sedembolestnej Panny Marie, patronky Slovenska: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
 
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
-							// set_spolocna_cast(sc, poradie_svaty, FORCE_BRAT_ANTIFONY + FORCE_BRAT_ZALMY + FORCE_BRAT_KCIT_1CIT + FORCE_BRAT_KRESP_PROSBY + FORCE_BRAT_2CITANIE);
+						if(query_type != PRM_DETAILY){
+							if(_global_jazyk == JAZYK_SK){
+								set_spolocna_cast(sc, poradie_svaty);
+							}
+							else{
+								// predpísané sú prosby zo spoloènej èasti
+								set_spolocna_cast(sc, poradie_svaty, FORCE_BRAT_KRESP_PROSBY);
+							}
+						}
 
 						/* 2009-07-10: nastavenie pre èeský breviár - je to len spomienka */
 						if(_global_jazyk == JAZYK_SK){
