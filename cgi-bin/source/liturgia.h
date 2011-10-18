@@ -1345,6 +1345,7 @@ short int prestupny(short int);
 short int pocet_dni_v_roku(short int);
 short int poradie(short int den, short int mesiac, short int rok);
 short int poradie(_struct_den_mesiac den_a_mesiac, short int rok);
+short int zjavenie_pana(short int rok);
 long juliansky_datum(short int por, short int rok);
 long juliansky_datum(short int den, short int mesiac, short int rok);
 _struct_den_mesiac velkonocna_nedela(short int R);

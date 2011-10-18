@@ -836,20 +836,34 @@ short int pocet_dni_v_roku(short int rok){
 		return POCET_DNI_V_ROKU;
 }
 
-/* vrati poradove cislo dna v roku,
- * 1.1. == 1, 2.1. == 2, ..., 31.12. == 365/366
- * ocakava cislo mesiaca 1-12 (pozn. 2003-07-04)
- */
+// vrati poradove cislo dna v roku, 1.1. == 1, 2.1. == 2, ..., 31.12. == 365/366 | ocakava cislo mesiaca 1-12 (pozn. 2003-07-04)
 short int poradie(short int den, short int mesiac, short int rok){
 	if(mesiac > 2)
 		return prvy_den[mesiac - 1] + den - 1 + prestupny(rok);
 	else
 		return prvy_den[mesiac - 1] + den - 1;
-}
+}// poradie()
 
 short int poradie(_struct_den_mesiac den_a_mesiac, short int rok){
 	return poradie(den_a_mesiac.den, den_a_mesiac.mesiac, rok);
-}
+}// poradie()
+
+short int zjavenie_pana(short int rok){
+	// 2011-10-18: pod¾a èasti kódu v _rozbor_dna()
+	short int ZJAVENIE_PANA; // zjavenie Pána
+	char nedelne_pismenko = _global_r.p1;
+	if(_global_jazyk == JAZYK_HU){
+		if(nedelne_pismenko == 'A'){
+			nedelne_pismenko = 'h'; // aby vyšla nede¾a Zjavenia Pána na 8.1.
+		}
+		Log("Zjavenie Pána sa slávi v nede¾u; %c/%c\n", _global_r.p1, nedelne_pismenko);
+		ZJAVENIE_PANA = poradie((nedelne_pismenko - 'a') + 1, 1, rok); // nede¾a medzi 2. a 8. januárom
+	}
+	else{
+		ZJAVENIE_PANA = poradie(6, 1, rok);
+	}
+	return ZJAVENIE_PANA;
+}// zjavenie_pana()
 
 //---------------------------------------------------------------------
 

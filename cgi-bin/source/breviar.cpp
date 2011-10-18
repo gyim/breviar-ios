@@ -3973,16 +3973,24 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 	if(poradie_svaty == UNKNOWN_PORADIE_SVATEHO){
 		Log("spustam pre poradie_svaty == UNKNOWN_PORADIE_SVATEHO\n");
 	}
-	/* zapoznamkovane 2003-08-13
-		_rozbor_dna_LOG("vypisem, co je v analyze roku...\n");
-		Log(_global_r); // 01/03/2000A.D. 
-	 */
 
 	short int NARODENIE_PANA = poradie(25, 12, rok); // narodenie pana
 	// slavnosti
 	short int BOHORODICKY_PANNY_MARIE = poradie(1, 1, rok); // panny marie bohorodicky
-	short int ZJAVENIE_PANA = poradie(6, 1, rok); // zjavenie pana
-	short int DECEMBER_16 = poradie(16, 12, rok); // 16. december, prelom v adventnom obdobi
+	short int ZJAVENIE_PANA; // zjavenie P·na
+	char nedelne_pismenko = _global_r.p1;
+	if(_global_jazyk == JAZYK_HU){
+		if(nedelne_pismenko == 'A'){
+			nedelne_pismenko = 'h'; // aby vyöla nedeæa Zjavenia P·na na 8.1.
+		}
+		Log("Zjavenie P·na sa sl·vi v nedeæu; %c/%c\n", _global_r.p1, nedelne_pismenko);
+		ZJAVENIE_PANA = poradie((nedelne_pismenko - 'a') + 1, 1, rok); // nedeæa medzi 2. a 8. janu·rom
+	}
+	else{
+		ZJAVENIE_PANA = poradie(6, 1, rok);
+	}
+	// ToDo: ak padne Zjavenia P·na na nedeæu 7. alebo 8.1., treba upraviù sl·venie sviatku Krstu Krista P·na (SK LH, zv. I, str. 377)
+	short int DECEMBER_16 = poradie(16, 12, rok); // 16. december, prelom v adventnom obdobÌ
 
 	// 2006-02-06: pomocn· premenn· kvÙli eventu·lnemu prednastaveniu _global_opt 3
 	_struct_sc sc;
@@ -4162,7 +4170,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				_rozbor_dna_LOG("/* slavnost zjavenia pana */\n");
 				_global_den.farba = LIT_FARBA_BIELA;
 				_global_den.kalendar = KALENDAR_VSEOBECNY;
-				_global_den.smer = 2; /* zjavenie pana */
+				_global_den.smer = 2; // zjavenie P·na
 				_global_den.typslav = SLAV_SLAVNOST;
 				_global_den.litobd = OBD_VIANOCNE_II; // ma vlastne slavenie; zmenil som na vianocne obd. II
 				_global_den.prik = PRIKAZANY_SVIATOK;
@@ -4187,8 +4195,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				_global_den.farba = LIT_FARBA_BIELA;
 				_global_den.kalendar = KALENDAR_VSEOBECNY;
 				// _global_den.tyzden = 2; -- 2007-01-08: pripomienkoval don Val·bek; 2. t˝ûdeÚ je to aû po 2. nedeli po narodenÌ P·na
-				/* vsedne dni vianocneho obdobia od 2. januara
-				 * do soboty po zjaveni pana */
+				// vsedne dni vianocneho obdobia od 2. januara do soboty po zjaveni pana
 				_global_den.smer = 13;
 				// zistime, ci je pred alebo po zjaveni pana
 				if(_global_den.denvr < ZJAVENIE_PANA){
@@ -5098,7 +5105,12 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 						else{
 							mystrcpy(pom2, STR_EMPTY, MAX_STR);
 						}
-						sprintf(pom, "%s %s", nazov_Dna(_local_den.denvt), (char *)text_V_OKTAVE_NARODENIA[_global_jazyk]);
+						if(_global_jazyk == JAZYK_HU){
+							sprintf(pom, "%s alatti %d. nap", (char *)text_V_OKTAVE_NARODENIA[_global_jazyk], (_local_den.den - 24));
+						}
+						else{
+							sprintf(pom, "%s %s", nazov_Dna(_local_den.denvt), (char *)text_V_OKTAVE_NARODENIA[_global_jazyk]);
+						}
 						strcat(pom, pom2);
 						if(typ != EXPORT_DNA_VIAC_DNI_TXT){
 							sprintf(pom2, html_text_tyzden_zaltara_cislo[_global_jazyk], tyzden_zaltara(_local_den.tyzden));

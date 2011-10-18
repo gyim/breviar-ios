@@ -2039,7 +2039,7 @@ const char *text_JAN_01[POCET_JAZYKOV + 1] =
  "Sanctae Dei Genetricis Mariae",
  "",
  "Matky Boží, Panny Marie",
- "Szûz Mária, Isten Anyja",
+ "Szûz Mária, Isten Anyja (újév)",
  };
 const char *text_JAN_01_SJ[POCET_JAZYKOV + 1] = 
 {"Panny Márie Bohorodièky a Mena Ježiš <br>(Titulárny sviatok Spoloènosti Ježišovej)", // titulárny sviatok Spoloènosti Ježišovej
@@ -3605,7 +3605,7 @@ const char *text_NEDELA_SV_RODINY[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Rodiny Ježíše, Marie a Josefa",
- "Szent Család ünnepe" // "A Szent család: Jézus, Mária és József",
+ "A Szent család: Jézus, Mária és József", // "Szent Család ünnepe"
  };
 const char *text_SPOMIENKA_PM_V_SOBOTU[POCET_JAZYKOV + 1] = 
 {"Spomienka Panny Márie v sobotu",
@@ -5786,7 +5786,7 @@ const char *text_NOV_16_2[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Gertrudy, panny",
- "(nincs Magyarországon)",
+ "Nagy Szent Gertrúd szûz", // HU 17NOV
  };
 const char *text_NOV_16_SJ[POCET_JAZYKOV + 1] = 
 {"Sv. Rocha Gonzáleza, Alfonza Rodrígueza a Jána del Castillo, kòazov a muèeníkov",
@@ -5804,7 +5804,7 @@ const char *text_NOV_17[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Alžbìty Uherské, øeholnice",
- "hu_",
+ "Árpád-házi Szent Erzsébet", // HU 19NOV
  };
 const char *text_NOV_18[POCET_JAZYKOV + 1] = 
 {"Výroèie posviacky bazilík sv. Petra a sv. Pavla, apoštolov",
@@ -5885,7 +5885,7 @@ const char *text_NOV_25[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Kateøiny Alexandrijské, panny a muèednice",
- "(nincs Magyarországon)",
+ "Alexandriai Szent Katalin szûz és vértanú",
  };
 const char *text_NOV_25_SDB[POCET_JAZYKOV + 1] = 
 {"Všetkých zomrelých rodièov saleziánov",
@@ -6014,7 +6014,7 @@ const char *text_DEC_09[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Jana Didaka Cuauhtlatoatzina",
- "hu_",
+ "Szent Juan Diego Cuauhtlatoatzin, guadalupei látnok",
  };
 const char *text_DEC_11[POCET_JAZYKOV + 1] = 
 {"Sv. Damaza I., pápeža",
@@ -6104,7 +6104,7 @@ const char *text_DEC_28[POCET_JAZYKOV + 1] =
  "",
  "",
  "Svatých Mláïátek, muèedníkù",
- "hu_",
+ "Aprószentek",
  };
 const char *text_DEC_29[POCET_JAZYKOV + 1] = 
 {"Sv. Tomáša Becketa, biskupa a muèeníka",
@@ -6179,7 +6179,7 @@ const char *text_V_OKTAVE_NARODENIA[POCET_JAZYKOV + 1] =
  "",
  "",
  "v oktávu Narození Pánì",
- "hu_name",
+ "Karácsony nyolcadában",
  };
 
 #endif /* __HODIN_H_ */
