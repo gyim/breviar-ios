@@ -1,26 +1,27 @@
 package sk.breviar.android;
 
 import android.app.Activity;
-import android.os.Bundle;
-import sk.breviar.android.Server;
-import android.webkit.WebView;
-import java.io.IOException;
-import android.webkit.WebViewClient;
-import android.webkit.WebSettings;
 import android.content.Intent;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
-import android.widget.Button;
+import android.net.Uri;
+import android.os.Bundle;
+import android.text.Html;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.content.SharedPreferences;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MenuInflater;
-import android.util.Log;
-import android.text.Html;
-import android.net.Uri;
-import android.content.Intent;
-import android.graphics.Bitmap;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+import java.io.IOException;
+import sk.breviar.android.Server;
 
 public class Breviar extends Activity
 {
@@ -125,10 +126,10 @@ public class Breviar extends Activity
         }
       } );
 
-      ((Button)findViewById(R.id.backBtn)).setOnClickListener(new View.OnClickListener() {
+      ((Button)findViewById(R.id.forwardBtn)).setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           parent.syncScale();
-          wv.goBack();
+          wv.goForward();
         }
       });
  
@@ -217,5 +218,14 @@ public class Breviar extends Activity
         default:
           return super.onOptionsItemSelected(item);
       }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+      if ((keyCode == KeyEvent.KEYCODE_BACK) && wv.canGoBack()) {
+        wv.goBack();
+        return true;
+      }
+      return super.onKeyDown(keyCode, event);
     }
 }
