@@ -24431,7 +24431,7 @@ label_25_MAR:
 							_vlastna_cast_modlitba;
 							_vlastna_cast_2citanie;
 
-							_vlastna_cast_mcd_modlitba();
+							_vlastna_cast_mcd_modlitba;
 
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_full(modlitba);
