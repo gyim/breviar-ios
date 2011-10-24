@@ -507,7 +507,7 @@ const char *nazov_slavenia_lokal[] =
 ,"A Váci egyházmegyében: Szent Mihály fõangyal, az egyházmegye védõszentje"                                     // LOKAL_SLAV_VACI_PATRON
 ,"A Szeged-Csanád: az egyházmegye védõszentje; fõünnep"                                                         // LOKAL_SLAV_SZEGED_CSAN_PATRON2
 ,"A Veszprém, a fõszékesegyházban; fõünnep"															            // LOKAL_SLAV_VESZPREM_FOEGYH
-,"csak a felszentelt templomkban"                                                                               // LOKAL_SLAV_KONSEKR_KOSTOLY_HU
+,"csak a felszentelt templomokban"                                                                              // LOKAL_SLAV_KONSEKR_KOSTOLY_HU
 ,"A Szeged-Csanád: A székesegyházban; fõünnep"                                                                  // LOKAL_SLAV_SZEGED_CSAN_EGYH2
 ,"A Pécsi egyházmegyében: A Pécsi egyházmegye társvédöszentje; fõünnep"                                         // LOKAL_SLAV_PECS_PATRON
 };
