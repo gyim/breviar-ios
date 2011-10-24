@@ -5743,6 +5743,15 @@ const char *text_NOV_13_CZ[POCET_JAZYKOV + 1] =
  "Sv. Anežky Èeské, panny",
  "(nincs Magyarországon)",
  };
+const char *text_NOV_13_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Magyar szentek és boldogok",
+ };
 const char *text_NOV_14_SJ[POCET_JAZYKOV + 1] = 
 {"Sv. Jozefa Pignatelliho, kòaza",
  "",

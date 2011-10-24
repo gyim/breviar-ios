@@ -23718,15 +23718,19 @@ label_25_MAR:
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
+							modlitba = MODL_INVITATORIUM;
+							_vlastna_cast_antifona_inv;
+
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_modlitba;
+							_vlastna_cast_full(modlitba);
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_modlitba;
-							_vlastna_cast_2citanie;
-							// ToDo
+							_vlastna_cast_full(modlitba);
+
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_modlitba;
+							_vlastna_cast_full_okrem_antifon(modlitba);
+
+							_vlastna_cast_mcd_kcitresp_modl;
 
 							break;
 						}
@@ -23933,7 +23937,7 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						_set_zalmy_1nedele_rch(); // 2009-07-30: doplnené pod¾a breviára (ako napísal Vlado Kiš ešte ...)
-						if(_global_jazyk == JAZYK_SK){ // 2008-11-29: odvetvené len pre Slovensko
+						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU)){ // 2008-11-29: odvetvené len pre Slovensko | 2011-10-24: pridané aj HU
 							_vlastna_cast_full_okrem_prosieb(modlitba);
 						}
 						else{
@@ -23950,8 +23954,8 @@ label_25_MAR:
 						}
 
 						modlitba = MODL_VESPERY;
-						_set_zalmy_sviatok_duch_past(modlitba); /* 2009-07-30: doplnené pod¾a breviára (ako napísal Vlado Kiš ešte ) */
-						if(_global_jazyk == JAZYK_SK){ // 2008-11-29: odvetvené len pre Slovensko
+						_set_zalmy_sviatok_duch_past(modlitba); // 2009-07-30: doplnené pod¾a breviára (ako napísal Vlado Kiš ešte ...)
+						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU)){ // 2008-11-29: odvetvené len pre Slovensko | 2011-10-24: pridané aj HU
 							_vlastna_cast_full_okrem_prosieb(modlitba);
 						}
 						else{
@@ -24057,11 +24061,9 @@ label_25_MAR:
 								_vlastna_cast_full_okrem_prosieb(modlitba);
 							}
 
-							/* modlitba cez deò, pridané 2009-08-04 */
-							/* 2009-11-17: odstavené; totiž kedysi bol "sviatok", teraz "spomienka"; upozornil Mgr. Martin Kubeš, notáø */
-							/*
-							_vlastna_cast_mcd_kcitresp_modl;
-							*/
+							// modlitba cez deò, pridané 2009-08-04
+							// 2009-11-17: odstavené; totiž kedysi bol "sviatok", teraz "spomienka"; upozornil Mgr. Martin Kubeš, notáø
+							// _vlastna_cast_mcd_kcitresp_modl;
 							break;
 						}
 						_global_svaty1.typslav = SLAV_SPOMIENKA;
@@ -24099,6 +24101,32 @@ label_25_MAR:
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_SK_SDB;
 					}// kalendár pre KALENDAR_SK_SDB
+					else if(_global_jazyk == JAZYK_HU){
+						if(poradie_svaty == 1){
+							// definovanie parametrov pre modlitbu
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+								// všetko je zo spoloènej èasti pre sviatky svätých mužov
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						_global_svaty1.smer = 11; // miestne povinné spomienky
+						mystrcpy(_global_svaty1.meno, text_NOV_13_HU[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
+						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+					}// HU only
 					break;
 				case 14: /* MES_NOV -- 14NOV */
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SJ)){
@@ -24156,9 +24184,8 @@ label_25_MAR:
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
 
 					if(_global_jazyk == JAZYK_CZ_OP){
-						/* 2009-03-24: odvetvené pre dominikánov;
-						 * 2010-03-25: pre dominikánov samostatne
-						 */
+						// 2009-03-24: odvetvené pre dominikánov;
+						// 2010-03-25: pre dominikánov samostatne
 						if(poradie_svaty == 2){
 							// definovanie parametrov pre modlitbu
 							if(query_type != PRM_DETAILY)
@@ -24339,7 +24366,7 @@ label_25_MAR:
 
 							modlitba = MODL_POSV_CITANIE;
 							if(_global_jazyk == JAZYK_CZ){
-								/* 2009-11-17: odvetvené pre èeský breviáø */
+								// 2009-11-17: odvetvené pre èeský breviáø
 								_vlastna_cast_hymnus;
 							}
 							_vlastna_cast_modlitba;
@@ -24394,15 +24421,20 @@ label_25_MAR:
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
+							modlitba = MODL_INVITATORIUM;
+							_vlastna_cast_antifona_inv;
+
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_modlitba;
+							_vlastna_cast_full(modlitba);
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_modlitba;
 							_vlastna_cast_2citanie;
 
+							_vlastna_cast_mcd_modlitba(modlitba);
+
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_modlitba;
+							_vlastna_cast_full(modlitba);
 
 							break;
 						}
