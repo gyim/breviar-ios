@@ -553,15 +553,15 @@ void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int 
 		if(_global_opt[i] != local_opt_default){
 			strcpy(local_str, STR_EMPTY);
 			switch(i){
-				case OPT_0_SPECIALNE:		strcat(local_str, STR_MODL_OPT0); break;
-				case OPT_1_CASTI_MODLITBY:	strcat(local_str, STR_MODL_OPT1); break;
-				case OPT_2_HTML_EXPORT:		strcat(local_str, STR_MODL_OPT2); break;
-				case OPT_3_SPOLOCNA_CAST:	strcat(local_str, STR_MODL_OPT3); break;
-				case OPT_4_OFFLINE_EXPORT:	strcat(local_str, STR_MODL_OPT4); break;
+				case OPT_0_SPECIALNE:		strcat(local_str, STR_MODL_OPT_0); break;
+				case OPT_1_CASTI_MODLITBY:	strcat(local_str, STR_MODL_OPT_1); break;
+				case OPT_2_HTML_EXPORT:		strcat(local_str, STR_MODL_OPT_2); break;
+				case OPT_3_SPOLOCNA_CAST:	strcat(local_str, STR_MODL_OPT_3); break;
+				case OPT_4_OFFLINE_EXPORT:	strcat(local_str, STR_MODL_OPT_4); break;
 			}// switch(i)
 			sprintf(pom3, HTML_AMPERSAND"%s=%d", local_str, _global_opt[i]);
 			strcat(pom2, pom3);
-			Log("\tPrilepil som aj opt%d: `%s'\n", i, pom3);
+			Log("\tPrilepil som aj opt %d: `%s'\n", i, pom3);
 		}
 	}
 	Log("prilep_request_options() -- koniec.\n");

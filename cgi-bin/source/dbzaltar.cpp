@@ -9729,7 +9729,7 @@ void _set_spolocna_cast(short int a, short int poradie_svaty, _struct_sc sc, sho
 		// Log("/* upravenÈ tak, ûe spoloËn· Ëasù na ofÌcium za zosnul˝ch vûdy berie vlastnÈ ûalmy */\n");
 		// 2011-10-10: nie je potrebnÈ; ûalmy sa ber˙ podæa pravidiel vöeobecn˝ch smernÌc
 		/*
-		short int _global_opt1_pom = _global_opt[OPT_1_CASTI_MODLITBY];
+		short int _global_opt_1_pom = _global_opt[OPT_1_CASTI_MODLITBY];
 		if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALMY_ZO_SVIATKU) == BIT_OPT_1_ZALMY_ZO_SVIATKU){
 			_global_opt[OPT_1_CASTI_MODLITBY] -= BIT_OPT_1_ZALMY_ZO_SVIATKU;
 		}
@@ -9797,7 +9797,7 @@ void _set_spolocna_cast(short int a, short int poradie_svaty, _struct_sc sc, sho
 
 		/*
 		Log("// upravenÈ tak, ûe spoloËn· Ëasù na ofÌcium za zosnul˝ch vûdy berie vlastnÈ ûalmy; vraciam sp‰ù nastavenie _global_opt 1\n");
-		_global_opt[OPT_1_CASTI_MODLITBY] = _global_opt1_pom;
+		_global_opt[OPT_1_CASTI_MODLITBY] = _global_opt_1_pom;
 		*/
 	}// MODL_SPOL_CAST_ZA_ZOSNULYCH
 
@@ -25653,7 +25653,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 
 	/* 2006-02-06: doplnen˝ debug v˝pis */
 	Log("a hned nastavujem _global_opt[OPT_3_SPOLOCNA_CAST] (ak je neurËenÈ: je teraz %d) na sc.a1):\n", _global_opt[OPT_3_SPOLOCNA_CAST]);
-	/* ak opt3 je MODL_SPOL_CAST_NEURCENA, tak ju urcime podla
+	/* ak opt_3 je MODL_SPOL_CAST_NEURCENA, tak ju urcime podla
 	 * 1. spolocnej casti */
 	if(_global_opt[OPT_3_SPOLOCNA_CAST] == MODL_SPOL_CAST_NEURCENA){
 		_global_opt[OPT_3_SPOLOCNA_CAST] = sc.a1;

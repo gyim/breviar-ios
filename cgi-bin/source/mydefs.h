@@ -360,39 +360,39 @@ extern short int query_type; // premenna obsahujuca PRM_...
  * de facto sa vyuzivaju len pre PRM_DETAILY 
  * 2011-01-26: doplnenÈ aj verzie "force" pre formul·r; pouûÌvaj˙ sa totiû aj na PRM_DNES hlavnom okne
  */
-#define MODL_OPT0 38
+#define MODL_OPT_0 38
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPT0 "MODL_OPT0"
+	#define STR_MODL_OPT_0 "MODL_OPT_0"
 #else
-	#define STR_MODL_OPT0 "o0"
+	#define STR_MODL_OPT_0 "o0"
 #endif
 
-#define MODL_OPT1 31
+#define MODL_OPT_1 31
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPT1 "MODL_OPT1"
+	#define STR_MODL_OPT_1 "MODL_OPT_1"
 #else
-	#define STR_MODL_OPT1 "o1"
+	#define STR_MODL_OPT_1 "o1"
 #endif
 
-#define MODL_OPT2 32
+#define MODL_OPT_2 32
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPT2 "MODL_OPT2"
+	#define STR_MODL_OPT_2 "MODL_OPT_2"
 #else
-	#define STR_MODL_OPT2 "o2"
+	#define STR_MODL_OPT_2 "o2"
 #endif
 
-#define MODL_OPT3 33
+#define MODL_OPT_3 33
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPT3 "MODL_OPT3"
+	#define STR_MODL_OPT_3 "MODL_OPT_3"
 #else
-	#define STR_MODL_OPT3 "o3"
+	#define STR_MODL_OPT_3 "o3"
 #endif
 
-#define MODL_OPT4 34
+#define MODL_OPT_4 34
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPT4 "MODL_OPT4"
+	#define STR_MODL_OPT_4 "MODL_OPT_4"
 #else
-	#define STR_MODL_OPT4 "o4"
+	#define STR_MODL_OPT_4 "o4"
 #endif
 
 // append pridany 2003-07-08, bude v _global_opt_append; nemal by byt pouzity na webe
@@ -412,229 +412,229 @@ extern short int query_type; // premenna obsahujuca PRM_...
 #endif
 
 // --- force verzie pre option 0 aû 4 ---
-#define MODL_OPTF0 50
+#define MODL_OPTF_0 50
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF0 "MODL_OPTF0"
+	#define STR_MODL_OPTF_0 "MODL_OPTF_0"
 #else
-	#define STR_MODL_OPTF0 "of0"
+	#define STR_MODL_OPTF_0 "of0"
 #endif
 
-#define MODL_OPTF1 51
+#define MODL_OPTF_1 51
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF1 "MODL_OPTF1"
+	#define STR_MODL_OPTF_1 "MODL_OPTF_1"
 #else
-	#define STR_MODL_OPTF1 "of1"
+	#define STR_MODL_OPTF_1 "of1"
 #endif
 
-#define MODL_OPTF2 52
+#define MODL_OPTF_2 52
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF2 "MODL_OPTF2"
+	#define STR_MODL_OPTF_2 "MODL_OPTF_2"
 #else
-	#define STR_MODL_OPTF2 "of2"
+	#define STR_MODL_OPTF_2 "of2"
 #endif
 
-#define MODL_OPTF3 53
+#define MODL_OPTF_3 53
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF3 "MODL_OPTF3"
+	#define STR_MODL_OPTF_3 "MODL_OPTF_3"
 #else
-	#define STR_MODL_OPTF3 "of3"
+	#define STR_MODL_OPTF_3 "of3"
 #endif
 
-#define MODL_OPTF4 54
+#define MODL_OPTF_4 54
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF4 "MODL_OPTF4"
+	#define STR_MODL_OPTF_4 "MODL_OPTF_4"
 #else
-	#define STR_MODL_OPTF4 "of4"
+	#define STR_MODL_OPTF_4 "of4"
 #endif
 
 // pre force option 0 jednotlivÈ bit-komponenty (parci·lne voæby)
 
 // ËÌslovanie (ËÌsla) veröov
-#define MODL_OPTF0_VERSE 61
+#define MODL_OPTF_0_VERSE 61
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF0_VERSE "MODL_OPTF0_VERSE"
+	#define STR_MODL_OPTF_0_VERSE "MODL_OPTF_0_VERSE"
 #else
-	#define STR_MODL_OPTF0_VERSE "of0v"
+	#define STR_MODL_OPTF_0_VERSE "of0v"
 #endif
 
 // referencie (biblickÈ odkazy)
-#define MODL_OPTF0_REF 62
+#define MODL_OPTF_0_REF 62
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF0_REF "MODL_OPTF0_REF"
+	#define STR_MODL_OPTF_0_REF "MODL_OPTF_0_REF"
 #else
-	#define STR_MODL_OPTF0_REF "of0r"
+	#define STR_MODL_OPTF_0_REF "of0r"
 #endif
 
 // liturgickÈ ËÌtania
-#define MODL_OPTF0_CIT 63
+#define MODL_OPTF_0_CIT 63
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF0_CIT "MODL_OPTF0_CIT"
+	#define STR_MODL_OPTF_0_CIT "MODL_OPTF_0_CIT"
 #else
-	#define STR_MODL_OPTF0_CIT "of0cit"
+	#define STR_MODL_OPTF_0_CIT "of0cit"
 #endif
 
 // pre force option 1 jednotlivÈ bit-komponenty (parci·lne voæby)
 
 // evanjeliovÈ chv·lospevy (benediktus, magnifikat, nunk dimittis)
-#define MODL_OPTF1_CHV 71
+#define MODL_OPTF_1_CHV 71
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF1_CHV "MODL_OPTF1_CHV"
+	#define STR_MODL_OPTF_1_CHV "MODL_OPTF_1_CHV"
 #else
-	#define STR_MODL_OPTF1_CHV "of1c"
+	#define STR_MODL_OPTF_1_CHV "of1c"
 #endif
 
 // sl·va otcu na konci ûalmov a chv·lospevov
-#define MODL_OPTF1_SL 72
+#define MODL_OPTF_1_SL 72
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF1_SL "MODL_OPTF1_SL"
+	#define STR_MODL_OPTF_1_SL "MODL_OPTF_1_SL"
 #else
-	#define STR_MODL_OPTF1_SL "of1s"
+	#define STR_MODL_OPTF_1_SL "of1s"
 #endif
 
 // rubriky
-#define MODL_OPTF1_RUB 73
+#define MODL_OPTF_1_RUB 73
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF1_RUB "MODL_OPTF1_RUB"
+	#define STR_MODL_OPTF_1_RUB "MODL_OPTF_1_RUB"
 #else
-	#define STR_MODL_OPTF1_RUB "of1r"
+	#define STR_MODL_OPTF_1_RUB "of1r"
 #endif
 
 // OtËen·ö
-#define MODL_OPTF1_OT 74
+#define MODL_OPTF_1_OT 74
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF1_OT "MODL_OPTF1_OT"
+	#define STR_MODL_OPTF_1_OT "MODL_OPTF_1_OT"
 #else
-	#define STR_MODL_OPTF1_OT "of1o"
+	#define STR_MODL_OPTF_1_OT "of1o"
 #endif
 
 // Te Deum
-#define MODL_OPTF1_TD 75
+#define MODL_OPTF_1_TD 75
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF1_TD "MODL_OPTF1_TD"
+	#define STR_MODL_OPTF_1_TD "MODL_OPTF_1_TD"
 #else
-	#define STR_MODL_OPTF1_TD "of1t"
+	#define STR_MODL_OPTF_1_TD "of1t"
 #endif
 
 // doplnkov· psalmÛdia pre modlitbu cez deÚ
-#define MODL_OPTF1_MCD_ZALMY_INE 76
+#define MODL_OPTF_1_MCD_ZALMY_INE 76
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF1_MCD_ZALMY_INE "MODL_OPTF1_MCD_ZALMY_INE"
+	#define STR_MODL_OPTF_1_MCD_ZALMY_INE "MODL_OPTF_1_MCD_ZALMY_INE"
 #else
-	#define STR_MODL_OPTF1_MCD_ZALMY_INE "of1dps"
+	#define STR_MODL_OPTF_1_MCD_ZALMY_INE "of1dps"
 #endif
 
 // vigÌlia v posv‰tnom ËÌtanÌ
-#define MODL_OPTF1_VIGILIA 77
+#define MODL_OPTF_1_VIGILIA 77
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF1_VIGILIA "MODL_OPTF1_VIGILIA"
+	#define STR_MODL_OPTF_1_VIGILIA "MODL_OPTF_1_VIGILIA"
 #else
-	#define STR_MODL_OPTF1_VIGILIA "of1v"
+	#define STR_MODL_OPTF_1_VIGILIA "of1v"
 #endif
 
 // vigÌlia v posv‰tnom ËÌtanÌ
-#define MODL_OPTF1_SKRY_POPIS 78
+#define MODL_OPTF_1_SKRY_POPIS 78
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF1_SKRY_POPIS "MODL_OPTF1_SKRY_POPIS"
+	#define STR_MODL_OPTF_1_SKRY_POPIS "MODL_OPTF_1_SKRY_POPIS"
 #else
-	#define STR_MODL_OPTF1_SKRY_POPIS "of1sp"
+	#define STR_MODL_OPTF_1_SKRY_POPIS "of1sp"
 #endif
 
 // ûalmy zo sviatku
-#define MODL_OPTF1_SPOMIENKA_SPOL_CAST 79
+#define MODL_OPTF_1_SPOMIENKA_SPOL_CAST 79
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF1_SPOMIENKA_SPOL_CAST "MODL_OPTF1_SPOMIENKA_SPOL_CAST"
+	#define STR_MODL_OPTF_1_SPOMIENKA_SPOL_CAST "MODL_OPTF_1_SPOMIENKA_SPOL_CAST"
 #else
-	#define STR_MODL_OPTF1_SPOMIENKA_SPOL_CAST "of1spspc"
+	#define STR_MODL_OPTF_1_SPOMIENKA_SPOL_CAST "of1spspc"
 #endif
 
 // dlhöie zakonËenie responzÛria
-#define MODL_OPTF1_PLNE_RESP 90
+#define MODL_OPTF_1_PLNE_RESP 90
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF1_PLNE_RESP "MODL_OPTF1_PLNE_RESP"
+	#define STR_MODL_OPTF_1_PLNE_RESP "MODL_OPTF_1_PLNE_RESP"
 #else
-	#define STR_MODL_OPTF1_PLNE_RESP "of1pr"
+	#define STR_MODL_OPTF_1_PLNE_RESP "of1pr"
 #endif
 
 // ûalm 95 pre rannÈ chv·ly/veöpery namiesto û 24, 67, 100
-#define MODL_OPTF1_ZALM95 91
+#define MODL_OPTF_1_ZALM95 91
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF1_ZALM95 "MODL_OPTF1_ZALM95"
+	#define STR_MODL_OPTF_1_ZALM95 "MODL_OPTF_1_ZALM95"
 #else
-	#define STR_MODL_OPTF1_ZALM95 "of1z95"
+	#define STR_MODL_OPTF_1_ZALM95 "of1z95"
 #endif
 
 // zvolanie v prosb·ch zobraziù (opakovaù) po kaûdej prosbe
-#define MODL_OPTF1_PROSBY_ZVOLANIE 92
+#define MODL_OPTF_1_PROSBY_ZVOLANIE 92
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF1_PROSBY_ZVOLANIE "MODL_OPTF1_PROSBY_ZVOLANIE"
+	#define STR_MODL_OPTF_1_PROSBY_ZVOLANIE "MODL_OPTF_1_PROSBY_ZVOLANIE"
 #else
-	#define STR_MODL_OPTF1_PROSBY_ZVOLANIE "of1prz"
+	#define STR_MODL_OPTF_1_PROSBY_ZVOLANIE "of1prz"
 #endif
 
 // pre force option 2 jednotlivÈ bit-komponenty (parci·lne voæby)
 
 // ISO form·t d·tumu
-#define MODL_OPTF2_ISO_DATUM 81
+#define MODL_OPTF_2_ISO_DATUM 81
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF2_ISO_DATUM "MODL_OPTF2_ISO_DATUM"
+	#define STR_MODL_OPTF_2_ISO_DATUM "MODL_OPTF_2_ISO_DATUM"
 #else
-	#define STR_MODL_OPTF2_ISO_DATUM "of2id"
+	#define STR_MODL_OPTF_2_ISO_DATUM "of2id"
 #endif
 
 // zobrazovaù button "prvÈ veöpery" v r·mci danÈho sl·venia (teda "ignoruj˙c d·tum")
-#define MODL_OPTF2_PRVE_VESPERY 82
+#define MODL_OPTF_2_PRVE_VESPERY 82
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF2_PRVE_VESPERY "MODL_OPTF2_PRVE_VESPERY"
+	#define STR_MODL_OPTF_2_PRVE_VESPERY "MODL_OPTF_2_PRVE_VESPERY"
 #else
-	#define STR_MODL_OPTF2_PRVE_VESPERY "of2pv"
+	#define STR_MODL_OPTF_2_PRVE_VESPERY "of2pv"
 #endif
 
 // Serif vs. Sans Serif font family
-#define MODL_OPTF2_FONT_FAMILY 83
+#define MODL_OPTF_2_FONT_FAMILY 83
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF2_FONT_FAMILY "MODL_OPTF2_FONT_FAMILY"
+	#define STR_MODL_OPTF_2_FONT_FAMILY "MODL_OPTF_2_FONT_FAMILY"
 #else
-	#define STR_MODL_OPTF2_FONT_FAMILY "of2ff"
+	#define STR_MODL_OPTF_2_FONT_FAMILY "of2ff"
 #endif
 
 // font family chooser (drop-down list)
-#define MODL_OPTF2_FONT_NAME_CHOOSER 84
+#define MODL_OPTF_2_FONT_NAME_CHOOSER 84
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF2_FONT_NAME_CHOOSER "MODL_OPTF2_FONT_NAME_CHOOSER"
+	#define STR_MODL_OPTF_2_FONT_NAME_CHOOSER "MODL_OPTF_2_FONT_NAME_CHOOSER"
 #else
-	#define STR_MODL_OPTF2_FONT_NAME_CHOOSER "of2fc"
+	#define STR_MODL_OPTF_2_FONT_NAME_CHOOSER "of2fc"
 #endif
 
 // font size
-#define MODL_OPTF2_FONT_SIZE 85
+#define MODL_OPTF_2_FONT_SIZE 85
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF2_FONT_SIZE "MODL_OPTF2_FONT_SIZE"
+	#define STR_MODL_OPTF_2_FONT_SIZE "MODL_OPTF_2_FONT_SIZE"
 #else
-	#define STR_MODL_OPTF2_FONT_SIZE "of2fs"
+	#define STR_MODL_OPTF_2_FONT_SIZE "of2fs"
 #endif
 
 // zobrazovaù navig·ciu v textoch modlitieb
-#define MODL_OPTF2_NAVIGATION 86
+#define MODL_OPTF_2_NAVIGATION 86
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF2_NAVIGATION "MODL_OPTF2_NAVIGATION"
+	#define STR_MODL_OPTF_2_NAVIGATION "MODL_OPTF_2_NAVIGATION"
 #else
-	#define STR_MODL_OPTF2_NAVIGATION "of2nav"
+	#define STR_MODL_OPTF_2_NAVIGATION "of2nav"
 #endif
 
 // zobrazovaù zalomenie v textoch modlitieb podæa tlaËenej LH
-#define MODL_OPTF2_TEXT_WRAP 87
+#define MODL_OPTF_2_TEXT_WRAP 87
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF2_TEXT_WRAP "MODL_OPTF2_TEXT_WRAP"
+	#define STR_MODL_OPTF_2_TEXT_WRAP "MODL_OPTF_2_TEXT_WRAP"
 #else
-	#define STR_MODL_OPTF2_TEXT_WRAP "of2tw"
+	#define STR_MODL_OPTF_2_TEXT_WRAP "of2tw"
 #endif
 
 // zobraziù buttony pre modlitby v ˙spornej podobe (tabuæka) kvÙli mobiln˝m zariadeniam
-#define MODL_OPTF2_BUTTONY_USPORNE 88
+#define MODL_OPTF_2_BUTTONY_USPORNE 88
 #ifdef LONG_PARAM_NAMES
-	#define STR_MODL_OPTF2_BUTTONY_USPORNE "MODL_OPTF2_BUTTONY_USPORNE"
+	#define STR_MODL_OPTF_2_BUTTONY_USPORNE "MODL_OPTF_2_BUTTONY_USPORNE"
 #else
-	#define STR_MODL_OPTF2_BUTTONY_USPORNE "of2btnu"
+	#define STR_MODL_OPTF_2_BUTTONY_USPORNE "of2btnu"
 #endif
 
 // 2008-08-08: PridanÈ kvÙli rÙznym css
