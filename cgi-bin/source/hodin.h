@@ -509,7 +509,7 @@ const char *nazov_slavenia_lokal[] =
 ,"A Veszprém, a fõszékesegyházban; fõünnep"															            // LOKAL_SLAV_VESZPREM_FOEGYH
 ,"csak a felszentelt templomokban"                                                                              // LOKAL_SLAV_KONSEKR_KOSTOLY_HU
 ,"A Szeged-Csanád: A székesegyházban; fõünnep"                                                                  // LOKAL_SLAV_SZEGED_CSAN_EGYH2
-,"A Pécsi egyházmegyében: A Pécsi egyházmegye társvédöszentje; fõünnep"                                         // LOKAL_SLAV_PECS_PATRON
+,"A Pécsi egyházmegyében: A Pécsi egyházmegye társvédõszentje; fõünnep"                                         // LOKAL_SLAV_PECS_PATRON
 };
 
 // names of liturgical colors
