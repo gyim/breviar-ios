@@ -1961,9 +1961,40 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 								write = ANO;
 								Log("  op‰ù writing to export file, PARAM_ZVOLANIE...\n");
 							}
-							Log("resp-koniec.\n");
+							Log("zvolanie-koniec.\n");
 						}// INCLUDE_END
 					}// zvolanie v prosb·ch...
+
+					// 2011-10-26: pridanÈ zobrazovanie/skr˝vanie rubrÌk podæa interpretParameter()
+
+					// rubriky
+					if(equals(rest, PARAM_RUBRIKA)){
+						if(equals(strbuff, INCLUDE_BEGIN) && (vnutri_inkludovaneho == 1)){
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("(start)rubrika");
+#endif
+							if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_RUBRIKY) == BIT_OPT_1_RUBRIKY){
+								;
+							}
+							else{
+								write = NIE;
+								Log("  ruöÌm writing to export file, kvÙli PARAM_RUBRIKA...\n");
+							}
+						}// INCLUDE_BEGIN
+						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("rubrika(stop)");
+#endif
+							if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_RUBRIKY) == BIT_OPT_1_RUBRIKY){
+								;
+							}
+							else{
+								write = ANO;
+								Log("  op‰ù writing to export file, PARAM_RUBRIKA...\n");
+							}
+							Log("rubrika-koniec.\n");
+						}// INCLUDE_END
+					}// rubriky
 
 					/* 2011-01-12: doplnenÈ voliteænÈ zobrazovanie/skr˝vanie alternatÌvnej antifÛny pre ûalmy/chv·lospevy 
 					 * 2011-01-17: upravenÈ tak, aby sa nezobrazovalo len pre spomienky sv‰t˝ch [tam spadaj˙ aj liturgickÈ sl·venia 1.1. a pod.]
