@@ -2066,7 +2066,7 @@ const char *text_JAN_03[POCET_JAZYKOV + 1] =
  "",
  "",
  "Nejsvìtìjšího Jména Ježíš",
- "(Najsvätejšieho mena Ježiš)",
+ "Jézus szent neve",
  };
 const char *text_JAN_04_OFM[POCET_JAZYKOV + 1] = 
 {"Bl. Angely z Foligna, reho¾níèky, èlenky 3. rádu",
@@ -2095,7 +2095,7 @@ const char *text_JAN_05_OFM[POCET_JAZYKOV + 1] =
  "",
  "",
  };
-const char *text_JAN_06[POCET_JAZYKOV + 1] = 
+const char *text_JAN_06[POCET_JAZYKOV + 1] = // 6. januára | alebo nede¾u medzi 2. a 8. januárom
 {"Zjavenie Pána",
  "Zjevení Pánì",
  "",
@@ -2113,7 +2113,7 @@ const char *text_JAN_07[POCET_JAZYKOV + 1] =
  "Sv. Rajmunda z Peòafortu, knìze",
  "Penyaforti Szent Rajmund áldozópap",
  };
-const char *text_JAN_KRST[POCET_JAZYKOV + 1] = 
+const char *text_JAN_KRST[POCET_JAZYKOV + 1] = // v nede¾u po 6. januári | (v nede¾u po Zjavení Pána) alebo: ak však táto nede¾a (zrejme Zjavenia Pána) padne na deò 7. alebo 8. januára, ofícium sa slávi v nasledujúci deò
 {"Krst Krista Pána",
  "Køtu Pánì",
  "",
@@ -2165,7 +2165,7 @@ const char *text_JAN_15[POCET_JAZYKOV + 1] =
  "la_",
  "",
  "Sv. Františka Fernándeze de Capillas, knìze, Petra Sanse, biskupa, a druhù, èínských muèedníkù",
- "Remete Szent Pál", // 2010-05-17: pozor, nieèo úplne iné ako pre czop!
+ "Remete Szent Pál szerzetes", // 2010-05-17: pozor, nieèo úplne iné ako pre czop!
  };
 const char *text_JAN_15_SVD[POCET_JAZYKOV + 1] = 
 {"Sv. Arnolda Janssena, kòaza a zakladate¾a troch misijných reho¾ných spoloèností",

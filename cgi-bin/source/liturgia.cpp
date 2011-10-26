@@ -1326,51 +1326,54 @@ void _dm_prva_adventna_nedela(short int rok, short int p2){
 }
 
 void _dm_svatej_rodiny(short int rok){
-	/* v tomto kroku sa zapisu:
-	 * .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok */
+	// v tomto kroku sa zapisu: .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok
 	short int _svrod;
-	if(den_v_tyzdni(25, 12, rok) == DEN_NEDELA)
+	if(den_v_tyzdni(25, 12, rok) == DEN_NEDELA){
 		_svrod = poradie(30, 12, rok);
+	}
 	else{
 		_svrod = poradie(25, 12, rok);
-		while(den_v_tyzdni(_svrod, rok) != DEN_NEDELA)
+		while(den_v_tyzdni(_svrod, rok) != DEN_NEDELA){
 			_svrod++;
+		}
 	}
 	_global_result = por_den_mesiac_dm(_svrod, rok);
 	_global_result.typslav = SLAV_SVIATOK;
-	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE; /* nie je obmedzenie na lokalitu, pridané 2005-07-27 */
+	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE;
 	_global_result.litobd  = OBD_OKTAVA_NARODENIA;
 	_global_result.smer    = 5;
-	_global_result.tyzden  = 1; /* 1. tyzden vianocneho obdobia, oktava */
-	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 06/03/2000A.D. */
+	_global_result.tyzden  = 1; // 1. tyzden vianocneho obdobia, oktava
+	_global_result.prik    = NEPRIKAZANY_SVIATOK;
 	mystrcpy(_global_result.meno, text_NEDELA_SV_RODINY[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
-	_global_result.spolcast= /* pridane 06/03/2000A.D. */
-		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
-	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D. */
+	_global_result.spolcast= _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
+	_global_result.tyzzal  = 1;
 	_global_result.farba = LIT_FARBA_BIELA;
 	_global_result.kalendar = KALENDAR_VSEOBECNY;
-}
+}// _dm_svatej_rodiny()
 
 void _dm_krst_krista_pana(short int rok){
-	/* v tomto kroku sa zapisu:
-	 * .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok */
-	short int _krst = poradie(6, 1, rok) + 1;
-	while(den_v_tyzdni(_krst, rok) != DEN_NEDELA)
-		_krst++;
+	// v tomto kroku sa zapisu: .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok
+	// 2011-10-26: namiesto napevno daného Zjavenia Pána poradie(6, 1, rok) použijeme zjavenie_pana(short int rok)
+	static short int _zjavenie_pana = zjavenie_pana(rok);
+	short int _krst = _zjavenie_pana + 1;
+	if(!(((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_ZJAVENIE_PANA_NEDELA) == BIT_OPT_0_ZJAVENIE_PANA_NEDELA) && ((_zjavenie_pana == 7) || (_zjavenie_pana == 8)))){
+		while(den_v_tyzdni(_krst, rok) != DEN_NEDELA){
+			_krst++;
+		}// while -- h¾adáme nede¾u
+	}// Zjavenie Pána sa slávi 6.1. alebo v nede¾u medzi 2. a 8. januárom, ktorá však nepripadne na 7. alebo 8. januára
 	_global_result = por_den_mesiac_dm(_krst, rok);
 	_global_result.typslav = SLAV_SVIATOK;
-	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE; /* nie je obmedzenie na lokalitu, pridané 2005-07-27 */
+	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE;
 	_global_result.litobd  = OBD_CEZ_ROK;
-	_global_result.tyzden  = 1; /* 1. nedela "cez rok" */
+	_global_result.tyzden  = 1; // 1. nedela "cez rok"
 	_global_result.smer    = 5;
-	mystrcpy(_global_result.meno, text_JAN_KRST[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
-	_global_result.spolcast= /* pridane 06/03/2000A.D. */
-		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
-	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 27/04/2000A.D. */
-	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D.; 2007-01-11: neplatí pre urèenie žalmov modlitby cez deò */
+	mystrcpy(_global_result.meno, text_JAN_KRST[_global_jazyk], MENO_SVIATKU); // 2003-08-11 zmenena na mystrcpy
+	_global_result.spolcast= _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
+	_global_result.prik    = NEPRIKAZANY_SVIATOK;
+	_global_result.tyzzal  = 1;
 	_global_result.farba = LIT_FARBA_BIELA;
 	_global_result.kalendar = KALENDAR_VSEOBECNY;
-}
+}// _dm_krst_krista_pana()
 
 void _dm_velkonocna_nedela(short int rok, short int _vn){
 	/* v tomto kroku sa zapisu:
