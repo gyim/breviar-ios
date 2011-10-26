@@ -53,3 +53,20 @@
 
 -- zvái, èi èervenú pomlèku, odde¾ujúcu jednotlivé strofy pre almy a chválospevy, spravi volite¾ne zobrazite¾nou (implementácia ako napr. <!--{ZAKONCENIE:SKRZE}-->)
 
+2011-10-26, JUV:
+
+-- adv1_pc a adv2_pc krátke ukonèenia resp.
+
+<!--{BEGIN:PLNE_RESP}-->
+<!--{ZALOMENIE:<br>&nbsp;&nbsp;&nbsp;&nbsp; }-->
+<!--{ZALOMENIE:<br>}-->
+
+-- prosby zvolania
+
+post1.htm
+vn1.htm
+vn2.htm
+vpchr.htm
+vtroj.htm
+vtyz.htm
+
