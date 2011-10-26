@@ -5619,7 +5619,7 @@ label_24_DEC:
 
 			if(_global_den.denvr == zjavenie_pana(_global_den.rok)){ // zjavenie Pána; bolo tu kedysi: if((_global_den.den == 6) && (_global_den.mesiac == 1))
 
-				// ToDo: odlišné nastavenie kotiev pre krajiny, kde sa Zjavenie Pána slávi v nede¾u medzi 2. a 8. januárom
+				// ToDo: odlišné nastavenie kotiev pre krajiny, kde sa Zjavenie Pána slávi v nede¾u medzi 2. a 8. januárom | BIT_OPT_0_ZJAVENIE_PANA_NEDELA
 
 				// prvé vešpery
 				modlitba = MODL_PRVE_VESPERY;

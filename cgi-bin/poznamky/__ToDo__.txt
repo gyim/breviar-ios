@@ -74,3 +74,4 @@ vpchr.htm
 vtroj.htm
 vtyz.htm
 
+-- spracovaù BIT_OPT_0_ZJAVENIE_PANA_NEDELA
