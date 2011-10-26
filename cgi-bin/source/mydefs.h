@@ -473,6 +473,14 @@ extern short int query_type; // premenna obsahujuca PRM_...
 	#define STR_MODL_OPTF_0_CIT "of0cit"
 #endif
 
+// liturgické èítania
+#define MODL_OPTF_0_ZJAV_NED 64
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF_0_ZJAV_NED "MODL_OPTF_0_ZJAV_NED"
+#else
+	#define STR_MODL_OPTF_0_ZJAV_NED "of0zjvne"
+#endif
+
 // pre force option 1 jednotlivé bit-komponenty (parciálne vo¾by)
 
 // evanjeliové chválospevy (benediktus, magnifikat, nunk dimittis)
