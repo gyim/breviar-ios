@@ -4020,7 +4020,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 	else{
 		ZJAVENIE_PANA = poradie(6, 1, rok);
 	}
-	// ToDo: ak padne Zjavenia P·na na nedeæu 7. alebo 8.1., treba upraviù sl·venie sviatku Krstu Krista P·na (SK LH, zv. I, str. 377)
+	// ak padne Zjavenia P·na na nedeæu 7. alebo 8.1., treba upraviù sl·venie sviatku Krstu Krista P·na (SK LH, zv. I, str. 377) -- realizovanÈ v _dm_krst_krista_pana()
 	short int DECEMBER_16 = poradie(16, 12, rok); // 16. december, prelom v adventnom obdobÌ
 
 	// 2006-02-06: pomocn· premenn· kvÙli eventu·lnemu prednastaveniu _global_opt 3
