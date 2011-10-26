@@ -55,7 +55,11 @@
 
 2011-10-26, JUV:
 
--- adv1_pc a adv2_pc krátke ukonèenia resp.
+-- adv1_pc a adv2_pc krátke ukonèenia resp. a referencie
+	-- hotovo
+
+-- vian1_pc a vian2_pc krátke ukonèenia resp.
+	-- hotovo
 
 <!--{BEGIN:PLNE_RESP}-->
 <!--{ZALOMENIE:<br>&nbsp;&nbsp;&nbsp;&nbsp; }-->
