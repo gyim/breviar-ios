@@ -24419,6 +24419,7 @@ label_25_MAR:
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_modlitba;
+							_vlastna_cast_1citanie; // je síce zo spol. èasti (skm), ale iné krátke resp. po èítaní
 							_vlastna_cast_2citanie;
 
 							_vlastna_cast_mcd_modlitba;
