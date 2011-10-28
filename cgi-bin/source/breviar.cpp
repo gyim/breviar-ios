@@ -8408,6 +8408,32 @@ void _export_rozbor_dna_mesiaca_batch(short int d, short int m, short int r){
 
 //---------------------------------------------------------------------
 
+// 2011-10-28: vytvorenÈ podæa je_1cit_vlastne()
+short int je_mozne_spol_cast_nebrat(short int poradie_svaty){
+	Log("je_mozne_spol_cast_nebrat(%d): ", poradie_svaty);
+	short int ret;
+	ret = TRUE; // default
+	switch(poradie_svaty){
+		case 0: if((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK))
+					ret = FALSE;
+			break;
+		case 1: if((_global_svaty1.typslav == SLAV_SLAVNOST) || (_global_svaty1.typslav == SLAV_SVIATOK))
+					ret = FALSE;
+			break;
+		case 2: if((_global_svaty2.typslav == SLAV_SLAVNOST) || (_global_svaty2.typslav == SLAV_SVIATOK))
+					ret = FALSE;
+			break;
+		case 3: if((_global_svaty3.typslav == SLAV_SLAVNOST) || (_global_svaty3.typslav == SLAV_SVIATOK))
+					ret = FALSE;
+			break;
+	}// swicht(poradie_svaty)
+	if((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)){
+		ret = FALSE;
+	}// NOV02 == 02NOV
+	Log("%d\n", ret);
+	return ret;
+}// je_mozne_spol_cast_nebrat()
+
 /* showDetails():
  * vytvorena v Trencine, 29/01/2000A.D. */
 /* vyskusat Run -> Arguments...:
@@ -8501,7 +8527,9 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 					Export("<option>%s\n", nazov_spolc(sc.a3));
 				}
 			}
-			Export("<option>%s\n", nazov_spolc(MODL_SPOL_CAST_NEBRAT)); // 2011-10-03: niekedy treba neumoûniù [ToDo]
+			if(je_mozne_spol_cast_nebrat(poradie_svaty)){
+				Export("<option>%s\n", nazov_spolc(MODL_SPOL_CAST_NEBRAT));
+			}
 		}
 		else{
 			Export("<option selected>%s\n", nazov_spolc(MODL_SPOL_CAST_NEBRAT));
