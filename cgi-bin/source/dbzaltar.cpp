@@ -23486,11 +23486,11 @@ label_25_MAR:
 
 						modlitba = MODL_RANNE_CHVALY;
 						if(_global_jazyk == JAZYK_CZ){
-							/* 2009-11-10: odvetvené pre èeský breviáø */
+							// 2009-11-10: odvetvené pre èeský breviáø
 							_vlastna_cast_hymnus;
 						}
 						if(_global_jazyk != JAZYK_CZ_OP){
-							/* 2009-11-20: odvetvené pre èeský dominikánský breviáø (všetko sa tam berie zo spol. èasti) */
+							// 2009-11-20: odvetvené pre èeský dominikánský breviáø (všetko sa tam berie zo spol. èasti)
 							_vlastna_cast_modlitba;
 						}
 
@@ -23499,18 +23499,18 @@ label_25_MAR:
 						if(_global_den.denvt != DEN_NEDELA){
 							_vlastna_cast_2citanie;
 							if(_global_jazyk != JAZYK_CZ_OP){
-								/* 2009-11-20: odvetvené pre èeský dominikánský breviáø (všetko sa tam berie zo spol. èasti) */
+								// 2009-11-20: odvetvené pre èeský dominikánský breviáø (všetko sa tam berie zo spol. èasti)
 								_vlastna_cast_modlitba;
 							}
 						}
 
 						modlitba = MODL_VESPERY;
 						if(_global_jazyk == JAZYK_CZ){
-							/* 2009-11-10: odvetvené pre èeský breviáø */
+							// 2009-11-10: odvetvené pre èeský breviáø
 							_vlastna_cast_hymnus;
 						}
 						if(_global_jazyk != JAZYK_CZ_OP){
-							/* 2009-11-20: odvetvené pre èeský dominikánský breviáø (všetko sa tam berie zo spol. èasti) */
+							// 2009-11-20: odvetvené pre èeský dominikánský breviáø (všetko sa tam berie zo spol. èasti)
 							_vlastna_cast_modlitba;
 						}
 
