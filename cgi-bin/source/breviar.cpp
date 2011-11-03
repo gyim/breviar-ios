@@ -1106,6 +1106,7 @@ short int setForm(void){
 				case 1: strcat(local_str, STR_MODL_OPTF_0_REF); break; // BIT_OPT_0_REFERENCIE
 				case 2: strcat(local_str, STR_MODL_OPTF_0_CIT); break; // BIT_OPT_0_CITANIA
 				case 3: strcat(local_str, STR_MODL_OPTF_0_ZJAV_NED); break; // BIT_OPT_0_ZJAVENIE_PANA_NEDELA
+				case 4: strcat(local_str, STR_MODL_OPTF_0_NAN_NED); break; // BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA
 			}// switch(i)
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF_SPECIALNE[i]);
@@ -12514,6 +12515,7 @@ short int getForm(void){
 			case 1: strcat(local_str, STR_MODL_OPTF_0_REF); break; // BIT_OPT_0_REFERENCIE
 			case 2: strcat(local_str, STR_MODL_OPTF_0_CIT); break; // BIT_OPT_0_CITANIA
 			case 3: strcat(local_str, STR_MODL_OPTF_0_ZJAV_NED); break; // BIT_OPT_0_ZJAVENIE_PANA_NEDELA
+			case 4: strcat(local_str, STR_MODL_OPTF_0_NAN_NED); break; // BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA
 		}// switch(i)
 		ptr = getenv(local_str);
 		if(ptr != NULL){
@@ -13258,6 +13260,7 @@ short int parseQueryString(void){
 			case 1: strcat(local_str, STR_MODL_OPTF_0_REF); break; // BIT_OPT_0_REFERENCIE
 			case 2: strcat(local_str, STR_MODL_OPTF_0_CIT); break; // BIT_OPT_0_CITANIA
 			case 3: strcat(local_str, STR_MODL_OPTF_0_ZJAV_NED); break; // BIT_OPT_0_ZJAVENIE_PANA_NEDELA
+			case 4: strcat(local_str, STR_MODL_OPTF_0_NAN_NED); break; // BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA
 		}// switch(j)
 		// premenn· WWW_MODL_OPTF_0_... (nepovinn·), j = 0 aû POCET_OPT_0_SPECIALNE
 		i = 0; // param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0

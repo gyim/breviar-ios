@@ -1005,6 +1005,7 @@ extern const char char_nedelny_cyklus[POCET_NEDELNY_CYKLUS];
 
 #define	OD_VELKEJ_NOCI_PO_POPOLCOVU_STR		-46
 #define OD_VELKEJ_NOCI_PO_NANEBOSTUPENIE	39
+#define OD_VELKEJ_NOCI_PO_NANEBOSTUPENIE_NE	42
 #define	OD_VELKEJ_NOCI_PO_ZOSLANIE_DUCHA	49
 
 // sposob pisania slov
@@ -1233,13 +1234,14 @@ extern short int _global_pocet_svatych;
 // glob·lna premenn· -- pole -- obsahuj˙ca options; pÙvodne to boli glob·lne premennÈ _global_opt 1..9 atÔ., obsahuj˙ pom_MODL_OPT...
 extern short int _global_opt[POCET_GLOBAL_OPT];
 
-#define POCET_OPT_0_SPECIALNE               4 // jednotlivÈ komponenty option 0 -- bity pre force option 0
+#define POCET_OPT_0_SPECIALNE               5 // jednotlivÈ komponenty option 0 -- bity pre force option 0
 extern short int _global_opt_specialne[POCET_OPT_0_SPECIALNE];
 // 2011-04-08: ˙prava v˝znamu (a interpret·cie) option 0 ==  OPT_0_SPECIALNE (zobraziù/nezobraziù "pridan˙ hodnotu" oproti papierovej LH)
 #define BIT_OPT_0_VERSE                     1
 #define BIT_OPT_0_REFERENCIE                2
 #define BIT_OPT_0_CITANIA                   4
 #define BIT_OPT_0_ZJAVENIE_PANA_NEDELA      8 // Ëi sa Zjavenie P·na sl·vi v nedeæu (1) alebo nie (teda 6. janu·ra; hodnota 0 == default)
+#define BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA  16 // Ëi sa Nanebovst˙penie P·na sl·vi v nedeæu (1) alebo nie (teda vo ötvrtok, na 40.-ty deÚ po VeækonoËnej nedeli; hodnota 0 == default)
 
 #define POCET_OPT_1_CASTI_MODLITBY         12 // jednotlivÈ komponenty option 1 -- bity pre force option 1
 extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
@@ -1366,10 +1368,12 @@ unsigned char _nedelne_pismeno(short int den, short int mesiac, short int rok);
 unsigned char _nedelne_pismeno(_struct_den_mesiac den_a_mesiac, short int rok);
 char nedelne_pismeno(_struct_den_mesiac den_a_mesiac, short int rok);
 _struct_den_mesiac por_den_mesiac(short int poradie, short int rok);
+#ifdef FUNKCIE_PRE_SPECIALNE_DNI
 short int _svatej_rodiny(short int rok);
 short int _krst_krista_pana(short int rok);
 short int _popolcova_streda(short int rok);
 short int _nanebovstupenie(short int rok);
+#endif
 short int _zoslanie_ducha(short int rok);
 short int _prva_adventna_nedela(short int rok);
 _struct_den_mesiac prva_adventna_nedela(short int rok);
@@ -1391,13 +1395,6 @@ void _dm_krst_krista_pana(short int rok);
 void _dm_velkonocna_nedela(short int rok, short int _vn);
 
 void analyzuj_rok(short int year);
-
-/* pridana 2003-08-07 */
-/* zapoznamkovana 2003-08-11 */
-#undef ZAPOZNAMKOVANE_2003_08_11
-#ifdef ZAPOZNAMKOVANE_2003_08_11
-void _init_dm(_struct_dm a);
-#endif
 
 #define UNKNOWN_PORADIE_SVATEHO 0
 /* 28/03/2000A.D.: naschval < 0, aby nebol problem s porovnanim s _global_pocet_svatych v _rozbor_dna() 

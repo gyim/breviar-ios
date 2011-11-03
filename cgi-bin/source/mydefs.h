@@ -473,12 +473,20 @@ extern short int query_type; // premenna obsahujuca PRM_...
 	#define STR_MODL_OPTF_0_CIT "of0cit"
 #endif
 
-// liturgickÈ ËÌtania
+// zjavenie p·na -- Ëi sl·viù 6.1. alebo v nedeæu
 #define MODL_OPTF_0_ZJAV_NED 64
 #ifdef LONG_PARAM_NAMES
 	#define STR_MODL_OPTF_0_ZJAV_NED "MODL_OPTF_0_ZJAV_NED"
 #else
 	#define STR_MODL_OPTF_0_ZJAV_NED "of0zjvne"
+#endif
+
+// nanebovst˙penie p·na -- Ëi sl·viù vo ötvrtok (40. deÚ po VN) alebo v nedeæu
+#define MODL_OPTF_0_NAN_NED 65
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF_0_NAN_NED "MODL_OPTF_0_NANV_NED"
+#else
+	#define STR_MODL_OPTF_0_NAN_NED "of0nanne"
 #endif
 
 // pre force option 1 jednotlivÈ bit-komponenty (parci·lne voæby)

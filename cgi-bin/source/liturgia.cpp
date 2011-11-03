@@ -1065,12 +1065,12 @@ _struct_den_mesiac por_den_mesiac(short int poradie, short int rok){
 }
 
 //---------------------------------------------------------------------
-/* nasledujuce short int _...() funkcie vracaju poradove cislo dna v roku */
+// nasledujuce short int _...() funkcie vracaju poradove cislo dna v roku
+// 2011-11-03: zapozn·mkovanÈ; nepouûÌvaj˙ sa
 
-/* vrati poradove cislo dna, kt. zodpoveda sviatku sv. rodiny */
-/* je to nedela v oktave pana alebo (ak padne narodenie pana na nedelu)
- * 30. decembra bez prvych vespier
- */
+#ifdef FUNKCIE_PRE_SPECIALNE_DNI
+// vrati poradove cislo dna, kt. zodpoveda sviatku sv. rodiny
+// je to nedela v oktave pana alebo (ak padne narodenie pana na nedelu) 30. decembra bez prvych vespier
 short int _svatej_rodiny(short int rok){
 	short int i;
 	if(den_v_tyzdni(25, 12, rok) == DEN_NEDELA)
@@ -1083,8 +1083,8 @@ short int _svatej_rodiny(short int rok){
 	}
 }
 
-/* vrati poradove cislo dna, kt. zodpoveda sviatku krstu krista pana */
-/* je to nedela po zjaveni pana */
+// vrati poradove cislo dna, kt. zodpoveda sviatku krstu krista pana
+// je to nedela po zjaveni pana
 short int _krst_krista_pana(short int rok){
 	short int i = poradie(6, 1, rok) + 1;
 	while(den_v_tyzdni(i, rok) != DEN_NEDELA)
@@ -1092,43 +1092,50 @@ short int _krst_krista_pana(short int rok){
 	return i;
 }
 
-/* popolcova streda je 46.-ty den pred velkou nocou, treba VELKONOCNA_NEDELA - 46 */
+// popolcova streda je 46.-ty den pred velkou nocou, treba VELKONOCNA_NEDELA - 46
 short int _popolcova_streda(short int rok){
 	return (_velkonocna_nedela(rok) + OD_VELKEJ_NOCI_PO_POPOLCOVU_STR);
 }
 
-/* nanebovstupenie pana je 40.-ty den po velkej noci, treba VELKONOCNA_NEDELA + 39 */
+// nanebovstupenie pana je 40.-ty den po velkej noci, treba VELKONOCNA_NEDELA + 39
+// 2011-11-03: doplnen· moûnosù "V krajin·ch, kde sa sl·vnosù Nanebovst˙penia P·na pren·öa na nasleduj˙cu nedeæu"
 short int _nanebovstupenie(short int rok){
-	return (_velkonocna_nedela(rok) + OD_VELKEJ_NOCI_PO_NANEBOSTUPENIE);
+	static short int vn = _velkonocna_nedela(rok);
+	if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA) == BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA){
+		return (vn + OD_VELKEJ_NOCI_PO_NANEBOSTUPENIE_NE);
+	}
+	else{
+		return (vn + OD_VELKEJ_NOCI_PO_NANEBOSTUPENIE);
+	}
 }
 
-/* zoslanie ducha sv. je 50.-ty den po velkej noci, treba VELKONOCNA_NEDELA + 49 */
+#endif
+
+// zoslanie ducha sv. je 50.-ty den po velkej noci, treba VELKONOCNA_NEDELA + 49
 short int _zoslanie_ducha(short int rok){
 	return (_velkonocna_nedela(rok) + OD_VELKEJ_NOCI_PO_ZOSLANIE_DUCHA);
-}
+}// _zoslanie_ducha()
 
-/* _prva_adventna_nedela() vrati poradove cislo dna, kt. zodpoveda
- * 		prvej adventnej nedeli;
- * prva_adventna_nedela() vracia strukturu (datum) prvej adv. nedele
- */
+// _prva_adventna_nedela() vrati poradove cislo dna, kt. zodpoveda prvej adventnej nedeli;
+// prva_adventna_nedela() vracia strukturu (datum) prvej adv. nedele
 short int _prva_adventna_nedela(short int rok){
 	char p;
 	_struct_den_mesiac datum;
 
-	/* volime 1.3.rok */
+	// volime 1.3.rok
 	datum.den = 1;
 	datum.mesiac = 3;
-	/* po februari, pretoze potrebujeme DRUHE nedelne pismeno */
+	// po februari, pretoze potrebujeme DRUHE nedelne pismeno
 	p = _nedelne_pismeno(datum, rok);
 	return (PRVA_ADVENTNA_NEDELA_b + p + prestupny(rok));
-}
+}// _prva_adventna_nedela()
 
 //---------------------------------------------------------------------
-/* nasledujuce _struct_den_mesiac ...() funkcie vracaju <den, mesiac> */
+// nasledujuce _struct_den_mesiac ...() funkcie vracaju <den, mesiac>
 
 _struct_den_mesiac prva_adventna_nedela(short int rok){
 	return (por_den_mesiac(_prva_adventna_nedela(rok), rok));
-}
+}// prva_adventna_nedela()
 
 //---------------------------------------------------------------------
 
@@ -1202,7 +1209,7 @@ _struct_dm por_den_mesiac_dm(short int poradie, short int rok){
 	result.prik = NEPRIKAZANY_SVIATOK;
 	result.spolcast =
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
-	mystrcpy(result.meno, STR_EMPTY, MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
+	mystrcpy(result.meno, STR_EMPTY, MENO_SVIATKU);
 	return result;
 }
 
@@ -1240,7 +1247,7 @@ void init_global_pm_sobota(void){
 	_global_pm_sobota.smer = 12; // æubovoænÈ spomienky
 	_global_pm_sobota.typslav = SLAV_LUB_SPOMIENKA; /* lubovolna spomienka */
 	_global_pm_sobota.typslav_lokal = LOKAL_SLAV_NEURCENE; /* nie je obmedzenie na lokalitu, pridanÈ 2005-07-27 */
-	mystrcpy(_global_pm_sobota.meno, text_SPOMIENKA_PM_V_SOBOTU[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
+	mystrcpy(_global_pm_sobota.meno, text_SPOMIENKA_PM_V_SOBOTU[_global_jazyk], MENO_SVIATKU);
 	_global_pm_sobota.prik    = NEPRIKAZANY_SVIATOK; /* pridane 27/04/2000A.D. */
 	_global_pm_sobota.spolcast = /* pridane 27/04/2000A.D. */
 		_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
@@ -1249,84 +1256,77 @@ void init_global_pm_sobota(void){
 }
 
 //---------------------------------------------------------------------
-/* nasledujuce void _dm_...() funkcie strukturu dm zapisu do _global_result */
-void _dm_popolcova_streda(short int rok, short int _vn){
 
-	/* v tomto kroku sa zapisu:
-	 * .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok */
+// nasledujuce void _dm_...() funkcie strukturu dm zapisu do _global_result
+void _dm_popolcova_streda(short int rok, short int _vn){
 	_global_result = por_den_mesiac_dm(_vn + OD_VELKEJ_NOCI_PO_POPOLCOVU_STR, rok);
 	_global_result.typslav = SLAV_NEURCENE;
-	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE; /* nie je obmedzenie na lokalitu, pridanÈ 2005-07-27 */
+	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE;
 	_global_result.litobd  = OBD_POSTNE_I;
-	_global_result.tyzden  = 0; /* 4. tyzden zaltara */
+	_global_result.tyzden  = 0; // 4. tyzden zaltara
 	_global_result.smer    = 2;
-	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 06/03/2000A.D. */
-	mystrcpy(_global_result.meno, text_POPOLCOVA_STREDA[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
-	_global_result.tyzzal  = 4; /* pridane 06/03/2000A.D. */
-	_global_result.spolcast= /* pridane 06/03/2000A.D. */
-		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
+	_global_result.prik    = NEPRIKAZANY_SVIATOK;
+	mystrcpy(_global_result.meno, text_POPOLCOVA_STREDA[_global_jazyk], MENO_SVIATKU);
+	_global_result.tyzzal  = 4; // 4. tyzden zaltara
+	_global_result.spolcast= _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.farba = LIT_FARBA_FIALOVA;
 	_global_result.kalendar = KALENDAR_VSEOBECNY;
-}
+}// _dm_popolcova_streda()
 
-/* 2006-02-09: ch˝balo tu nastavenie denvt */
 void _dm_nanebovstupenie(short int rok, short int _vn){
-	/* v tomto kroku sa zapisu:
-	 * .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok */
-	_global_result = por_den_mesiac_dm(_vn + OD_VELKEJ_NOCI_PO_NANEBOSTUPENIE, rok);
+	short int _nan;
+	if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA) == BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA){
+		_nan = (_vn + OD_VELKEJ_NOCI_PO_NANEBOSTUPENIE_NE);
+	}
+	else{
+		_nan = (_vn + OD_VELKEJ_NOCI_PO_NANEBOSTUPENIE);
+	}
+	_global_result = por_den_mesiac_dm(_nan, rok);
 	_global_result.typslav = SLAV_SLAVNOST;
-	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE; /* nie je obmedzenie na lokalitu, pridanÈ 2005-07-27 */
-	_global_result.litobd  = OBD_VELKONOCNE_I; /* ma vlastne slavenie */
-	_global_result.tyzden  = 0; /* pridane kvoli kotvam vo fajli FILE_NANEBOVSTUPENIE, 10/03/2000A.D. */
-	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D., aby tam nebolo 'hausnumero' */
-/*	_global_result.denvt   = DEN_STVRTOK; pÙvodn· pozn·mka: 2006-02-09: pridanÈ, na Slovensku sa sl·vi vo ötvrtok */
+	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE;
+	_global_result.litobd  = OBD_VELKONOCNE_I;
+	_global_result.tyzden  = 0; // pridane kvoli kotvam v s˙bore FILE_NANEBOVSTUPENIE
+	_global_result.tyzzal  = 1;
+//	_global_result.denvt   = DEN_STVRTOK; pÙvodn· pozn·mka: 2006-02-09: pridanÈ, na Slovensku sa sl·vi vo ötvrtok | 2011-11-03: musÌ byù naÔalej zapozn·mkovanÈ kvÙli "V krajin·ch, kde sa sl·vnosù Nanebovst˙penia P·na pren·öa na nasleduj˙cu nedeæu"
 	_global_result.smer    = 2;
 	_global_result.prik    = PRIKAZANY_SVIATOK;
-	mystrcpy(_global_result.meno, text_NANEBOVSTUPENIE_PANA[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
-	_global_result.spolcast= /* pridane 06/03/2000A.D. */
-		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
+	mystrcpy(_global_result.meno, text_NANEBOVSTUPENIE_PANA[_global_jazyk], MENO_SVIATKU);
+	_global_result.spolcast= _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.farba = LIT_FARBA_BIELA;
 	_global_result.kalendar = KALENDAR_VSEOBECNY;
-}
+}// _dm_nanebovstupenie()
 
 void _dm_zoslanie_ducha(short int rok, short int _vn){
-	/* v tomto kroku sa zapisu:
-	 * .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok */
 	_global_result = por_den_mesiac_dm(_vn + OD_VELKEJ_NOCI_PO_ZOSLANIE_DUCHA, rok);
 	_global_result.typslav = SLAV_SLAVNOST;
-	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE; /* nie je obmedzenie na lokalitu, pridanÈ 2005-07-27 */
-	_global_result.litobd  = OBD_VELKONOCNE_II; /* ma vlastne slavenie */
-	_global_result.tyzden  = 0; /* pridane kvoli kotvam vo fajli FILE_ZOSLANIE_DUCHA_SV, 10/03/2000A.D. */
-	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D., aby tam nebolo 'hausnumero' */
+	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE;
+	_global_result.litobd  = OBD_VELKONOCNE_II;
+	_global_result.tyzden  = 0; // pridane kvoli kotvam v s˙bore FILE_ZOSLANIE_DUCHA_SV
+	_global_result.tyzzal  = 1;
 	_global_result.smer    = 2;
 	_global_result.prik    = PRIKAZANY_SVIATOK;
-	mystrcpy(_global_result.meno, text_ZOSLANIE_DUCHA_SVATEHO[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
-	_global_result.spolcast= /* pridane 06/03/2000A.D. */
-		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
+	mystrcpy(_global_result.meno, text_ZOSLANIE_DUCHA_SVATEHO[_global_jazyk], MENO_SVIATKU);
+	_global_result.spolcast= _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.farba = LIT_FARBA_CERVENA;
 	_global_result.kalendar = KALENDAR_VSEOBECNY;
-}
+}// _dm_zoslanie_ducha()
 
 void _dm_prva_adventna_nedela(short int rok, short int p2){
-	/* v tomto kroku sa zapisu:
-	 * .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok */
 	_global_result = por_den_mesiac_dm(PRVA_ADVENTNA_NEDELA_b + p2 + prestupny(rok), rok);
 	_global_result.typslav = SLAV_VLASTNE;
-	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE; /* nie je obmedzenie na lokalitu, pridanÈ 2005-07-27 */
+	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE;
 	_global_result.litobd  = OBD_ADVENTNE_I;
-	_global_result.tyzden  = 1; /* 1. adventna nedela */
+	_global_result.tyzden  = 1; // 1. adventna nedela
 	_global_result.smer    = 2;
-	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 06/03/2000A.D. */
-	mystrcpy(_global_result.meno, text_PRVA_ADVENTNA_NEDELA[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
-	_global_result.spolcast= /* pridane 06/03/2000A.D. */
-		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
-	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D. */
+	_global_result.prik    = NEPRIKAZANY_SVIATOK;
+	mystrcpy(_global_result.meno, text_PRVA_ADVENTNA_NEDELA[_global_jazyk], MENO_SVIATKU);
+	_global_result.spolcast= _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
+	_global_result.tyzzal  = 1;
 	_global_result.farba = LIT_FARBA_FIALOVA;
 	_global_result.kalendar = KALENDAR_VSEOBECNY;
-}
+}// _dm_prva_adventna_nedela()
 
 void _dm_svatej_rodiny(short int rok){
-	// v tomto kroku sa zapisu: .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok
 	short int _svrod;
 	if(den_v_tyzdni(25, 12, rok) == DEN_NEDELA){
 		_svrod = poradie(30, 12, rok);
@@ -1344,7 +1344,7 @@ void _dm_svatej_rodiny(short int rok){
 	_global_result.smer    = 5;
 	_global_result.tyzden  = 1; // 1. tyzden vianocneho obdobia, oktava
 	_global_result.prik    = NEPRIKAZANY_SVIATOK;
-	mystrcpy(_global_result.meno, text_NEDELA_SV_RODINY[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
+	mystrcpy(_global_result.meno, text_NEDELA_SV_RODINY[_global_jazyk], MENO_SVIATKU);
 	_global_result.spolcast= _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.tyzzal  = 1;
 	_global_result.farba = LIT_FARBA_BIELA;
@@ -1352,7 +1352,6 @@ void _dm_svatej_rodiny(short int rok){
 }// _dm_svatej_rodiny()
 
 void _dm_krst_krista_pana(short int rok){
-	// v tomto kroku sa zapisu: .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok
 	// 2011-10-26: namiesto napevno danÈho Zjavenia P·na poradie(6, 1, rok) pouûijeme zjavenie_pana(short int rok)
 	static short int _zjavenie_pana = zjavenie_pana(rok);
 	short int _krst = _zjavenie_pana + 1;
@@ -1376,52 +1375,20 @@ void _dm_krst_krista_pana(short int rok){
 }// _dm_krst_krista_pana()
 
 void _dm_velkonocna_nedela(short int rok, short int _vn){
-	/* v tomto kroku sa zapisu:
-	 * .den, .mesiac, .rok, .link, .denvt, .denvr, .litrok */
 	_global_result = por_den_mesiac_dm(_vn, rok);
 	_global_result.typslav = SLAV_SLAVNOST;
-	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE; /* nie je obmedzenie na lokalitu, pridanÈ 2005-07-27 */
+	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE;
 	_global_result.litobd  = OBD_VELKONOCNE_TROJDNIE;
-	_global_result.tyzden  = 1; /* 1. velkonocna nedela */
+	_global_result.tyzden  = 1; // 1. velkonocna nedela
 	_global_result.smer    = 1;
-	mystrcpy(_global_result.meno, text_VELKONOCNA_NEDELA[_global_jazyk], MENO_SVIATKU); /* 2003-08-11 zmenena na mystrcpy */
-	strcat(_global_result.meno, text_NEDELA_PANOVHO_ZMRTVYCHVSTANIA[_global_jazyk]); /* 2006-08-16 */
-	_global_result.spolcast= /* pridane 06/03/2000A.D. */
-		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
-	_global_result.prik    = NEPRIKAZANY_SVIATOK; /* pridane 27/04/2000A.D. */
-	_global_result.tyzzal  = 1; /* pridane 27/04/2000A.D. */
+	mystrcpy(_global_result.meno, text_VELKONOCNA_NEDELA[_global_jazyk], MENO_SVIATKU);
+	strcat(_global_result.meno, text_NEDELA_PANOVHO_ZMRTVYCHVSTANIA[_global_jazyk]);
+	_global_result.spolcast= _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
+	_global_result.prik    = NEPRIKAZANY_SVIATOK;
+	_global_result.tyzzal  = 1;
 	_global_result.farba = LIT_FARBA_BIELA;
 	_global_result.kalendar = KALENDAR_VSEOBECNY;
-}
-
-/* pridana 2003-08-07 */
-/* zapoznamkovana 2003-08-11 */
-#undef ZAPOZNAMKOVANE_2003_08_11
-#ifdef ZAPOZNAMKOVANE_2003_08_11
-void _init_dm(_struct_dm a){
-	a.den = 0;        /* cislo dna mesiaca (1--31) */
-	a.mesiac = 0;     /* cislo mesiaca (1--12) */
-	a.rok = 0;        // rok
-	a.denvt = -1;     /* cislo dna v tyzdni (0--6) DEN_... */ /* deÚ v roku */
-	a.denvr = 0;      /* cislo dna v roku (1--365/366) */
-	a.litrok = 0;     /* liturgicky rok ('A'--'C') */
-	a.tyzden = 0;     /* tyzden v danom liturgickom obdobi */
-	a.tyzzal = 0;     /* tyzden v zaltari (vacsinou ((tyzden - 1) % 4) + 1) */
-	a.litobd = -1;    /* liturgicke obdobie, OBD_... */
-	a.typslav = 0;    /* typ slavenia (1--5): SLAV_... */
-	a.typslav_lokal = 0; /* LOKAL_SLAV_NEURCENE; nie je obmedzenie na lokalitu, pridanÈ 2005-07-27 */
-	a.smer = 100;     /* poradove cislo z c.59 Vseobecnych smernic
-	                   * o liturgii hodin a kalendari */
-	a.prik = -1;      /* ci je to prikazany sviatok alebo nie:
-				       * PRIKAZANY_SVIATOK resp. NEPRIKAZANY_SVIATOK */
-	a.spolcast = -1;  /* spolocna cast -- pridane 09/02/2000A.D.,
-					   * zakodovane data pre svatych o tom, z akej spolocnej
-					   * casti sa ma modlit */
-	mystrcpy(a.meno, STR_EMPTY, MENO_SVIATKU); /* nazov prip. sviatku */
-	a.farba = LIT_FARBA_NEURCENA;
-	a.kalendar = KALENDAR_NEURCENY;
-}
-#endif
+}// _dm_velkonocna_nedela()
 
 //---------------------------------------------------------------------
 /* analyzuj_rok()
