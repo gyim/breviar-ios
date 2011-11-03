@@ -245,10 +245,11 @@ short int su_zalmy_vlastne(short int m){
 		if(_global_den.denvt == DEN_NEDELA){
 			ret = TRUE;
 		}// DEN_NEDELA
-		if((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)){
-			ret = TRUE;
-		}// NOV02 == 02NOV
 	}// nie mcd
+	// 2011-11-03: pre 2.11. sa ber˙ ûalmy vlastnÈ
+	if((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)){
+		ret = TRUE;
+	}// NOV02 == 02NOV
 	Log("%d\n", ret);
 	return ret;
 }// su_zalmy_vlastne()
@@ -308,10 +309,11 @@ short int su_inv_hymnus_kcit_kresp_benmagn_prosby_vlastne(short int m){
 						ret = TRUE;
 				break;
 		}// swicht(_global_poradie_svaty)
-		if((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)){
-			ret = TRUE;
-		}// NOV02 == 02NOV
 	}// nie mcd
+	// pre 2.11. sa vlastn˝ hymnus berie aj pre modlitbu cez deÚ
+	if((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)){
+		ret = TRUE;
+	}// NOV02 == 02NOV
 	Log("%d\n", ret);
 	return ret;
 }// su_inv_hymnus_kcit_kresp_benmagn_prosby_vlastne()
@@ -382,10 +384,11 @@ short int su_antifony_vlastne(short int m){
 						ret = TRUE;
 				break;
 		}// swicht(_global_poradie_svaty)
-		if((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)){
-			ret = TRUE;
-		}// NOV02 == 02NOV
 	}// rch, pc, v
+	// pre 2.11. sa vlastnÈ antifÛny ber˙ aj pre modlitbu cez deÚ
+	if((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)){
+		ret = TRUE;
+	}// NOV02 == 02NOV
 	Log("%d\n", ret);
 	return ret;
 }// su_antifony_vlastne()
@@ -418,6 +421,10 @@ short int su_kcit_kresp_modlitba_mcd_vlastne(short int m){
 				break;
 		}// swicht(_global_poradie_svaty)
 	}// mcd
+	// pre 2.11. sa pre modlitbu cez deÚ ber˙ vlastnÈ Ëasti
+	if((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)){
+		ret = TRUE;
+	}// NOV02 == 02NOV
 	Log("%d\n", ret);
 	return ret;
 }// su_kcit_kresp_modlitba_mcd_vlastne()
@@ -9741,13 +9748,28 @@ void _set_spolocna_cast(short int a, short int poradie_svaty, _struct_sc sc, sho
 		_spolocna_cast_ant3_viac_ozz(_anchor_head, _anchor, _file); // 2010-11-04: opravenÈ
 
 		// modlitba cez deÚ
+		// 2011-11-03: doplnenÈ ûalmy; hoci opravenÈ su_zalmy_vlastne(), nie je potrebnÈ to tu odvetviù pre 2.11.
 		modlitba = MODL_PREDPOLUDNIM;
+		_spolocna_cast_hymnus;
+		if(su_zalmy_vlastne(modlitba) || /* ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALMY_ZO_SVIATKU) == BIT_OPT_1_ZALMY_ZO_SVIATKU) || */ ((force & FORCE_BRAT_ZALMY) == FORCE_BRAT_ZALMY)){
+			Log("  _set_zalmy_za_zosnulych(%s)...\n", nazov_modlitby(modlitba));
+			_set_zalmy_za_zosnulych(modlitba);
+		}
 		_spolocna_cast_full(modlitba);
 		modlitba = MODL_NAPOLUDNIE;
+		_spolocna_cast_hymnus;
+		if(su_zalmy_vlastne(modlitba) || /* ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALMY_ZO_SVIATKU) == BIT_OPT_1_ZALMY_ZO_SVIATKU) || */ ((force & FORCE_BRAT_ZALMY) == FORCE_BRAT_ZALMY)){
+			Log("  _set_zalmy_za_zosnulych(%s)...\n", nazov_modlitby(modlitba));
+			_set_zalmy_za_zosnulych(modlitba);
+		}
 		_spolocna_cast_full(modlitba);
 		modlitba = MODL_POPOLUDNI;
+		_spolocna_cast_hymnus;
+		if(su_zalmy_vlastne(modlitba) || /* ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALMY_ZO_SVIATKU) == BIT_OPT_1_ZALMY_ZO_SVIATKU) || */ ((force & FORCE_BRAT_ZALMY) == FORCE_BRAT_ZALMY)){
+			Log("  _set_zalmy_za_zosnulych(%s)...\n", nazov_modlitby(modlitba));
+			_set_zalmy_za_zosnulych(modlitba);
+		}
 		_spolocna_cast_full(modlitba);
-		// doplniù ûalmy!!!
 
 		// veöpery
 		if(_global_den.litobd != OBD_OKTAVA_NARODENIA){
@@ -23502,6 +23524,16 @@ label_25_MAR:
 								// 2009-11-20: odvetvenÈ pre Ëesk˝ dominik·nsk˝ brevi·¯ (vöetko sa tam berie zo spol. Ëasti)
 								_vlastna_cast_modlitba;
 							}
+						}
+
+						// 2011-11-03: doplnen· vlastn· modlitba pre modlitbu cez deÚ (ostatnÈ opravenÈ: berie sa z ofÌcia za zosnul˝ch)
+						if(_global_jazyk != JAZYK_CZ_OP){
+							modlitba = MODL_PREDPOLUDNIM;
+							_vlastna_cast_modlitba;
+							modlitba = MODL_NAPOLUDNIE;
+							_vlastna_cast_modlitba;
+							modlitba = MODL_POPOLUDNI;
+							_vlastna_cast_modlitba;
 						}
 
 						modlitba = MODL_VESPERY;
