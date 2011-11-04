@@ -7050,6 +7050,7 @@ label_24_DEC:
 	set_LOG_litobd;\
 }
 // 2006-01-27: pridan· modlitba posv‰tnÈ ËÌtanie
+// 2011-11-04: upravenÈ pre krajiny, kde sa sl·vnosù Nanebovst˙penia P·na pren·öa na nasleduj˙cu nedeæu (ötvrtok, piatok, sobota v 6. veækonoËnom t˝ûdni)
 #define _velk1_kresponz {\
 	if(((den == DEN_NEDELA) || (modlitba == MODL_POSV_CITANIE))\
 		&& (modlitba != MODL_PREDPOLUDNIM) && (modlitba != MODL_NAPOLUDNIE) && (modlitba != MODL_POPOLUDNI)){\
@@ -7066,16 +7067,35 @@ label_24_DEC:
 		_set_kresponz(modlitba, _file, _anchor);\
 		set_LOG_litobd;\
 	}\
+	if((modlitba == MODL_POSV_CITANIE) && (((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA) == BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA) && ((_global_r._NANEBOVSTUPENIE_PANA.denvr - _global_den.denvr) < 4) && ((_global_r._NANEBOVSTUPENIE_PANA.denvr - _global_den.denvr) > 0))){\
+		Log("upravenÈ pre krajiny, kde sa sl·vnosù Nanebovst˙penia P·na pren·öa na nasleduj˙cu nedeæu\n");\
+		sprintf(_anchor, "%s_%c%s%s", nazov_OBD[OBD_VELKONOCNE_II], pismenko_modlitby(modlitba), ANCHOR_KRESPONZ, nazov_DN_asci[den + 1]);\
+		_set_kresponz(modlitba, nazov_obd_htm_pc[OBD_VELKONOCNE_II], _anchor);\
+		set_LOG_litobd_pc;\
+	}\
 }
 // 2006-01-27: doplnenÈ posv‰tnÈ ËÌtanie
+// 2011-11-04: upravenÈ pre krajiny, kde sa sl·vnosù Nanebovst˙penia P·na pren·öa na nasleduj˙cu nedeæu (ötvrtok, piatok, sobota v 6. veækonoËnom t˝ûdni)
 #define _velk1_citanie1 {\
-	sprintf(_anchor, "%s_%c%s_%d%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_CITANIE1, tyzden, nazov_DN_asci[den]);\
-	_set_citanie1(modlitba, _file_pc, _anchor);\
+	if(((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA) == BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA) && ((_global_r._NANEBOVSTUPENIE_PANA.denvr - _global_den.denvr) < 4) && ((_global_r._NANEBOVSTUPENIE_PANA.denvr - _global_den.denvr) > 0)){\
+		sprintf(_anchor, "%s_%c%s_%d%s", nazov_OBD[OBD_VELKONOCNE_II], pismenko_modlitby(modlitba), ANCHOR_CITANIE1, tyzden, nazov_DN_asci[den + 1]);\
+		_set_citanie1(modlitba, nazov_obd_htm_pc[OBD_VELKONOCNE_II], _anchor);\
+	}\
+	else{\
+		sprintf(_anchor, "%s_%c%s_%d%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_CITANIE1, tyzden, nazov_DN_asci[den]);\
+		_set_citanie1(modlitba, _file_pc, _anchor);\
+	}\
 	set_LOG_litobd_pc;\
 }
 #define _velk1_citanie2 {\
-	sprintf(_anchor, "%s_%c%s_%d%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_CITANIE2, tyzden, nazov_DN_asci[den]);\
-	_set_citanie2(modlitba, _file_pc, _anchor);\
+	if(((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA) == BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA) && ((_global_r._NANEBOVSTUPENIE_PANA.denvr - _global_den.denvr) < 4) && ((_global_r._NANEBOVSTUPENIE_PANA.denvr - _global_den.denvr) > 0)){\
+		sprintf(_anchor, "%s_%c%s_%d%s", nazov_OBD[OBD_VELKONOCNE_II], pismenko_modlitby(modlitba), ANCHOR_CITANIE2, tyzden, nazov_DN_asci[den + 1]);\
+		_set_citanie2(modlitba, nazov_obd_htm_pc[OBD_VELKONOCNE_II], _anchor);\
+	}\
+	else{\
+		sprintf(_anchor, "%s_%c%s_%d%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_CITANIE2, tyzden, nazov_DN_asci[den]);\
+		_set_citanie2(modlitba, _file_pc, _anchor);\
+	}\
 	set_LOG_litobd_pc;\
 }
 #define _velk1_prosby {\
@@ -7083,6 +7103,7 @@ label_24_DEC:
 	_set_prosby(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
 }
+// 2011-11-04: upravenÈ pre krajiny, kde sa sl·vnosù Nanebovst˙penia P·na pren·öa na nasleduj˙cu nedeæu (piatok, sobota v 6. veækonoËnom t˝ûdni)
 #define _velk1_benediktus {\
 	if(den == DEN_NEDELA){\
 		sprintf(_anchor, "%s_%c%s%d%s%c", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_BENEDIKTUS, tyzden, nazov_DN_asci[den], _global_den.litrok);\
@@ -7092,7 +7113,13 @@ label_24_DEC:
 	}\
 	_set_benediktus(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
+	if(((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA) == BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA) && ((_global_r._NANEBOVSTUPENIE_PANA.denvr - _global_den.denvr) < 3) && ((_global_r._NANEBOVSTUPENIE_PANA.denvr - _global_den.denvr) > 0)){\
+		sprintf(_anchor, "%s_%c%s%d%s", nazov_OBD[OBD_VELKONOCNE_II], pismenko_modlitby(modlitba), ANCHOR_BENEDIKTUS, tyzden, nazov_DN_asci[den]);\
+		_set_benediktus(modlitba, nazov_obd_htm[OBD_VELKONOCNE_II], _anchor);\
+		set_LOG_litobd;\
+	}\
 }
+// 2011-11-04: upravenÈ pre krajiny, kde sa sl·vnosù Nanebovst˙penia P·na pren·öa na nasleduj˙cu nedeæu (piatok, sobota v 6. veækonoËnom t˝ûdni)
 #define _velk1_magnifikat {\
 	if(den == DEN_NEDELA){\
 		sprintf(_anchor, "%s_%c%s%d%s%c", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_MAGNIFIKAT, tyzden, nazov_DN_asci[den], _global_den.litrok);\
@@ -7102,10 +7129,21 @@ label_24_DEC:
 	}\
 	_set_magnifikat(modlitba, _file, _anchor);\
 	set_LOG_litobd;\
+	if(((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA) == BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA) && ((_global_r._NANEBOVSTUPENIE_PANA.denvr - _global_den.denvr) < 3) && ((_global_r._NANEBOVSTUPENIE_PANA.denvr - _global_den.denvr) > 0)){\
+		sprintf(_anchor, "%s_%c%s%d%s", nazov_OBD[OBD_VELKONOCNE_II], pismenko_modlitby(modlitba), ANCHOR_MAGNIFIKAT, tyzden, nazov_DN_asci[den]);\
+		_set_magnifikat(modlitba, nazov_obd_htm[OBD_VELKONOCNE_II], _anchor);\
+		set_LOG_litobd;\
+	}\
 }
+// 2011-11-04: upravenÈ pre krajiny, kde sa sl·vnosù Nanebovst˙penia P·na pren·öa na nasleduj˙cu nedeæu (piatok, sobota v 6. veækonoËnom t˝ûdni)
 #define _velk1_modlitba {\
 	sprintf(_anchor, "%s_%s%d%s", nazov_OBD[litobd], ANCHOR_MODLITBA, tyzden, nazov_DN_asci[den]);\
-	_set_modlitba(modlitba, _file, _anchor);\
+	if(((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA) == BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA) && ((_global_r._NANEBOVSTUPENIE_PANA.denvr - _global_den.denvr) < 3) && ((_global_r._NANEBOVSTUPENIE_PANA.denvr - _global_den.denvr) > 0)){\
+		_set_modlitba(modlitba, nazov_obd_htm[OBD_VELKONOCNE_II], _anchor);\
+	}\
+	else{\
+		_set_modlitba(modlitba, _file, _anchor);\
+	}\
 	set_LOG_litobd;\
 }
 // 2006-01-28: doplnenÈ antifÛny pre posv‰tnÈ ËÌtania
