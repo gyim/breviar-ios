@@ -1574,11 +1574,11 @@ const char *html_text_option1_tedeum_explain[POCET_JAZYKOV + 1] =
 
 const char *html_text_option1_plne_resp[POCET_JAZYKOV + 1] = 
 {"plné znenie responzórií pre posvätné èítania", 
- "plné znìní krátkıch zpìvù v modlitbe se ètením", 
+ "plné znìní krátkıch zpìvù v modlitbì se ètením", 
  "", 
  "",
  "",
- "plné znìní responsorií v modlitbe se ètením", 
+ "plné znìní responsorií v modlitbì se ètením", 
  "a válaszos énekek teljes szövege"
 };
 const char *html_text_option1_plne_resp_explain[POCET_JAZYKOV + 1] = 
@@ -1805,39 +1805,39 @@ const char *html_text_option2_navigation_explain[POCET_JAZYKOV + 1] =
 
 const char *html_text_option2_textwrap[POCET_JAZYKOV + 1] = 
 {"zalamova dlhé riadky ako v tlaèenom vydaní (poetické èasti)",
- "xxx", 
+ "zalomit dlouhé øádky poetickıch textù jako v tištìném vydání", 
  "xxx", 
  "",
  "",
- "xxx", 
+ "zalomit dlouhé øádky poetickıch textù jako v tištìném vydání", 
  "hosszú sorok tördelése, mint a nyomtatott kiadásban (versrészek)", 
 };
 const char *html_text_option2_textwrap_explain[POCET_JAZYKOV + 1] = 
 {"Èi sa majú v texte modlitby dlhé riadky almov, chválospevov a inıch poetickıch èastí zalamova ako v tlaèenom vydaní.", 
- "xxx", 
+ "Zda zalomit dlouhé øádky poetickıch textù jako v tištìném vydání (normálnì: nezalamovat).", 
  "xxx", 
  "",
  "", 
- "xxx", 
+ "Zda zalomit dlouhé øádky poetickıch textù jako v tištìném vydání (normálnì: nezalamovat).", 
  "Legyenek-e tördelve az imaórák szövegében  a zsoltárok, kantikumok és más versrészek hosszú sorai, mint a nyomtatott kiadásban.", 
 };
 
 const char *html_text_option2_buttons_usporne[POCET_JAZYKOV + 1] = 
 {"tlaèidlá pre modlitby zobrazi úsporne",
- "xxx", 
+ "tlaèítka pro modlitby zobrazit úspornì", 
  "xxx", 
  "",
  "",
- "xxx", 
+ "tlaèítka pro modlitby zobrazit úspornì", 
  "az imaórák gombjainak gazdaságos elhelyezése", 
 };
 const char *html_text_option2_buttons_usporne_explain[POCET_JAZYKOV + 1] = 
 {"Èi sa majú tlaèidlá pre modlitby zobrazi úsporne, v tabu¾ke (menšia šírka) kvôli mobilnım zariadeniam.", 
- "xxx", 
+ "Zda se mají tlaèítka pro modlitby zobrazit úspornì, v tabulce (menší šíøka) pro mobilní zaøízení.", 
  "xxx", 
  "",
  "", 
- "xxx", 
+ "Zda se mají tlaèítka pro modlitby zobrazit úspornì, v tabulce (menší šíøka) pro mobilní zaøízení.", 
  "Legyenek-e az imaórák gombjai gazdaságosan elhelyezve, táblázatban (kisebb szélesség) a mobli készülékek céljából.", 
 };
 
