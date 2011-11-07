@@ -2127,25 +2127,25 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 // 2006-08-01: pozor, koncovky sú pre každý jazyk odlišné
 #define koncovka_dna_asci(denvt) ((nazov_dna((denvt))[strlen(nazov_dna((denvt))) - 1] == 'a')? 'a': 'y')
 #define koncovka_dna(denvt) ((nazov_dna((denvt))[strlen(nazov_dna((denvt))) - 1] == 'a')? 'á': 'ý')
-#define KRST _global_r._KRST_KRISTA_PANA.denvr                          // nedela po 6. januari
-#define POPOLCOVA_STREDA  _global_r._POPOLCOVA_STREDA.denvr
-#define VELKONOCNA_NEDELA   _global_r._VELKONOCNA_NEDELA.denvr          // velkonocna nedela
-#define KVETNA_NEDELA (VELKONOCNA_NEDELA - 7)                           // kvetna nedela
-#define ZELENY_STVRTOK   (VELKONOCNA_NEDELA - 3)                        // zeleny stvrtok
-#define VELKY_PIATOK   (VELKONOCNA_NEDELA - 2)                          // velky piatok
+#define KRST _global_r._KRST_KRISTA_PANA.denvr                          // nede¾a po 6. januári; v krajinách, kde sa Zjavenie Pána slávi v nede¾u, a ak táto pripadne na 7. alebo 8. januára, Krst Krista Pána sa slávi nasledujúci pondelok
+#define POPOLCOVA_STREDA  _global_r._POPOLCOVA_STREDA.denvr             // popolcová streda
+#define VELKONOCNA_NEDELA   _global_r._VELKONOCNA_NEDELA.denvr          // ve¾konoèná nede¾a
+#define KVETNA_NEDELA (VELKONOCNA_NEDELA - 7)                           // kvetná nede¾a
+#define ZELENY_STVRTOK   (VELKONOCNA_NEDELA - 3)                        // zelený štvrtok
+#define VELKY_PIATOK   (VELKONOCNA_NEDELA - 2)                          // ve¾ký piatok
 #define BIELA_SOBOTA   (VELKONOCNA_NEDELA - 1)                          // biela sobota
-#define VELKONOCNY_PONDELOK (VELKONOCNA_NEDELA + 1)                     // velkonocny pondelok
-#define DRUHA_VELKONOCNA_NEDELA  (VELKONOCNA_NEDELA + 7)                // nedela vo velkonocnej oktave
-#define NANEBOVSTUPENIE  _global_r._NANEBOVSTUPENIE_PANA.denvr
-#define PRVA_ADVENTNA_NEDELA  _global_r._PRVA_ADVENTNA_NEDELA.denvr
-#define ZOSLANIE_DUCHA_SV  _global_r._ZOSLANIE_DUCHA_SV.denvr
-#define SV_RODINY  _global_r._SVATEJ_RODINY.denvr
-#define TROJICA (ZOSLANIE_DUCHA_SV + 7)                                 // prva nedela po ZOSLANIE_DUCHA_SV: sv. trojice
-#define TELAKRVI (ZOSLANIE_DUCHA_SV + 11)                               // stvrtok po trojici: kristovho tela a krvi
-#define SRDCA (ZOSLANIE_DUCHA_SV + 19)                                  // piatok po druhej nedeli po ZOSLANIE_DUCHA_SV: najsv. srdca jezisovho
-#define SRDPM (ZOSLANIE_DUCHA_SV + 20)                                  // sobota po druhej nedeli po ZOSLANIE_DUCHA_SV: neposkvrneneho srdca prebl. p. marie
+#define VELKONOCNY_PONDELOK (VELKONOCNA_NEDELA + 1)                     // ve¾konoèný pondelok
+#define DRUHA_VELKONOCNA_NEDELA  (VELKONOCNA_NEDELA + 7)                // nede¾a vo ve¾konoènej oktáve
+#define NANEBOVSTUPENIE  _global_r._NANEBOVSTUPENIE_PANA.denvr          // nanebovstúpenie Pána (štvrtok, 40. deò po ve¾kej noci, alebo v krajinách, kde sa presúva na nasledujúcu nede¾u ("7. ve¾konoèná nede¾a")
+#define PRVA_ADVENTNA_NEDELA  _global_r._PRVA_ADVENTNA_NEDELA.denvr     // prvá adventná nede¾a
+#define ZOSLANIE_DUCHA_SV  _global_r._ZOSLANIE_DUCHA_SV.denvr           // zoslanie Ducha Svätého
+#define SV_RODINY  _global_r._SVATEJ_RODINY.denvr                       // sviatok svätej rodiny
+#define TROJICA (ZOSLANIE_DUCHA_SV + 7)                                 // prvá nede¾a po ZOSLANIE_DUCHA_SV: najsv. Trojice
+#define TELAKRVI (ZOSLANIE_DUCHA_SV + 11)                               // štvrtok po Trojici: Kristovho Tela a Krvi (alebo: v krajinách, kde sa presúva na nede¾u)
+#define SRDCA (ZOSLANIE_DUCHA_SV + 19)                                  // piatok po druhej nedeli po ZOSLANIE_DUCHA_SV: najsv. srdca Ježišovho
+#define SRDPM (ZOSLANIE_DUCHA_SV + 20)                                  // sobota po druhej nedeli po ZOSLANIE_DUCHA_SV: nepoškvrneného srdca prebl. p. márie
 // 2006-08-22: kvôli ružovej farbe rúcha potrebujeme define aj pre 3. adventnú nede¾u a 4. pôstnu nede¾u
-#define TRETIA_ADVENTNA_NEDELA (PRVA_ADVENTNA_NEDELA + 14)              // tretia adventná nede¾a - dva týždne po prvej AN
+#define TRETIA_ADVENTNA_NEDELA (PRVA_ADVENTNA_NEDELA + 14)              // tretia adventná nede¾a - dva týždne po prvej adventnej nedeli (PRVA_ADVENTNA_NEDELA)
 #define STVRTA_POSTNA_NEDELA (VELKONOCNA_NEDELA - 21)                   // štvrtá pôstna nede¾a - tri týždne pred VELKONOCNA_NEDELA
 
 //---------------------------------------------------------------------
@@ -4208,11 +4208,8 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				_global_den.prik = PRIKAZANY_SVIATOK;
 				mystrcpy(_global_den.meno, text_JAN_06[_global_jazyk], MENO_SVIATKU);
 			}
-			else if((_global_den.denvt == DEN_NEDELA) &&
-					  (_global_den.denvr >= 2) && (_global_den.denvr <= 5)){
-				/* druha nedela po narodeni pana medzi 2. a 5. januarom;
-				 * v krajinach, kde sa slavnost zjavenia pana slavi 6. januara
-				 */
+			else if((_global_den.denvt == DEN_NEDELA) && (_global_den.denvr >= 2) && (_global_den.denvr <= 5)){
+				// druha nedela po narodeni pana medzi 2. a 5. januarom; v krajinach, kde sa slavnost zjavenia pana slavi 6. januara
 				_rozbor_dna_LOG("/* druha nedela po narodeni pana medzi 2. a 5. januarom; v krajinach, kde sa slavnost zjavenia pana slavi 6. januara */\n");
 				_global_den.farba = LIT_FARBA_BIELA;
 				_global_den.kalendar = KALENDAR_VSEOBECNY;
@@ -4222,14 +4219,14 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				_global_den.tyzden = 2; // 2009-01-05: doplnené, keïže v èasti nižšie sme (správne) zapoznámkovali natvrdo nastavenie týždòa na 2
 			}
 			else if(_global_den.denvr < KRST){
-				// vianocne obdobie
+				// vianoèné obdobie
 				_rozbor_dna_LOG("/* vianocne obdobie */\n");
 				_global_den.farba = LIT_FARBA_BIELA;
 				_global_den.kalendar = KALENDAR_VSEOBECNY;
 				// _global_den.tyzden = 2; -- 2007-01-08: pripomienkoval don Valábek; 2. týždeò je to až po 2. nedeli po narodení Pána
-				// vsedne dni vianocneho obdobia od 2. januara do soboty po zjaveni pana
+				// všedné dni vianoèného obdobia od 2. januára do soboty po zjavení pána
 				_global_den.smer = 13;
-				// zistime, ci je pred alebo po zjaveni pana
+				// zistíme, èi je pred alebo po zjavení pána
 				if(_global_den.denvr < ZJAVENIE_PANA){
 					_global_den.litobd = OBD_VIANOCNE_I;
 					_rozbor_dna_LOG("/* pred zjavenim Pana */\n");
@@ -4238,16 +4235,14 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					_global_den.litobd = OBD_VIANOCNE_II;
 					_rozbor_dna_LOG("/* po zjaveni Pana (vratane) */\n");
 				}
-				/* 2007-01-08, upravené priradenie týždòa žaltára;
-				 * keïže KRST je poradové èíslo dòa v roku, ale je to vždy január, je to vlastne aj dátum */
+				// 2007-01-08, upravené priradenie týždòa žaltára;
+				// keïže KRST je poradové èíslo dòa v roku, ale je to vždy január, je to vlastne aj dátum
 				if(KRST == 7 || KRST == 8){
-					/* ak Krst Krista Pána pripadne na 7.1. alebo 8.1., 
-					 * všedné dni od 2. do 5. januára majú ma 1. týždeò žaltára (v týchto prípadoch 2. nede¾a po narodení Pána nie je) */
+					// ak Krst Krista Pána pripadne na 7.1. alebo 8.1., všedné dni od 2. do 5. januára majú ma 1. týždeò žaltára (v týchto prípadoch 2. nede¾a po narodení Pána nie je)
 					_global_den.tyzden = 1;
 				}
 				else{
-					/* keï Krst Krista Pána pripadne na 9.-13.1., závisí týždeò žaltára od toho, èi deò je pred 
-					 * alebo po 2. nedeli po narodení Pána (jej dátum je vlastne KRST - 7) */
+					// keï Krst Krista Pána pripadne na 9.-13.1., závisí týždeò žaltára od toho, èi deò je pred alebo po 2. nedeli po narodení Pána (jej dátum je vlastne KRST - 7)
 					if(KRST - 7 > _global_den.denvr)
 						_global_den.tyzden = 1;
 					else

@@ -1364,7 +1364,7 @@ void _dm_krst_krista_pana(short int rok){
 	_global_result.typslav = SLAV_SVIATOK;
 	_global_result.typslav_lokal = LOKAL_SLAV_NEURCENE;
 	_global_result.litobd  = OBD_CEZ_ROK;
-	_global_result.tyzden  = 1; // 1. nedela "cez rok"
+	_global_result.tyzden  = 1; // 1. nede¾a "cez rok" (resp. v krajinách, kde sa Zjavenie Pána slávi v nede¾u, prièom táto pripadne na 7. alebo 8. januára, je to pondelok)
 	_global_result.smer    = 5;
 	mystrcpy(_global_result.meno, text_JAN_KRST[_global_jazyk], MENO_SVIATKU); // 2003-08-11 zmenena na mystrcpy
 	_global_result.spolcast= _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
