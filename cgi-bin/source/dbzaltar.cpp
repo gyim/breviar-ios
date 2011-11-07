@@ -5808,6 +5808,84 @@ label_24_DEC:
 					_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
 					_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
 				}// krst krista pana
+				// 2011-11-07: Najsv. Kristovho tela a krvi je zvyèajne štvrtok (11.-ty deò po ZDS), ale v krajinách, kde nie je prikázaným sviatkom, slávi sa v nede¾u
+				// 2008-05-08: v breviar.cpp sa používa define TELAKRVI; 2011-11-07: upravené
+				else if(_global_den.denvr == (_global_r._ZOSLANIE_DUCHA_SV.denvr + (((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_TELAKRVI_NEDELA) == BIT_OPT_0_TELAKRVI_NEDELA)? 14: 11))){
+					// najsv. kristovho tela a krvi
+					mystrcpy(_file, FILE_TELA_A_KRVI, MAX_STR_AF_FILE);
+					mystrcpy(_anchor, ANCHOR_TELA_A_KRVI, MAX_STR_AF_ANCHOR);
+					mystrcpy(_anchor_vlastne_slavenie, ANCHOR_TELA_A_KRVI, MAX_STR_AF_ANCHOR);
+					Log("  ide o slavnost najsv. kristovho tela a krvi: _file = `%s', _anchor = %s...\n", _file, _anchor);
+
+					// kompletórium
+					modlitba = MODL_PRVE_KOMPLETORIUM;
+					_set_kompletorium_slavnost(modlitba, litobd);
+
+					modlitba = MODL_KOMPLETORIUM;
+					_set_kompletorium_slavnost(modlitba, litobd);
+
+					modlitba = MODL_PRVE_VESPERY;
+					_set_zalmy_telakrvi(modlitba);
+					_vlastne_slavenie_hymnus(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_magnifikat(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_prosby(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
+
+					// invitatórium
+					modlitba = MODL_INVITATORIUM;
+					_vlastne_slavenie_invitat(_anchor_vlastne_slavenie);
+
+					modlitba = MODL_RANNE_CHVALY;
+					_set_zalmy_telakrvi(modlitba);
+					_vlastne_slavenie_hymnus(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_benediktus(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_prosby(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
+
+					modlitba = MODL_VESPERY;
+					_set_zalmy_telakrvi(modlitba);
+					_vlastne_slavenie_hymnus(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_magnifikat(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_prosby(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
+
+					modlitba = MODL_POSV_CITANIE;
+					_set_zalmy_telakrvi(modlitba);
+					_vlastne_slavenie_hymnus(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_1citanie(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_2citanie(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
+
+					modlitba = MODL_PREDPOLUDNIM;
+					_set_zalmy_telakrvi(modlitba);
+					_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+					modlitba = MODL_NAPOLUDNIE;
+					_set_zalmy_telakrvi(modlitba);
+					_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+					modlitba = MODL_POPOLUDNI;
+					_set_zalmy_telakrvi(modlitba);
+					_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
+					_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+				}// tela a krvi
 				else if(_global_den.denvt == DEN_NEDELA){
 					Log("--- nedela OCR, nastavujem modlitbu dna...\n");
 					// ak je specialna, tak _file sa nastavi v dalsom
@@ -6139,83 +6217,7 @@ label_24_DEC:
 					set_LOG_litobd_pc_tyzden;
 					// Log(_global_modl_posv_citanie);
 
-					if(_global_den.denvr == (_global_r._ZOSLANIE_DUCHA_SV.denvr + 11)){ // 2008-05-08: v breviar.cpp sa používa define TELAKRVI
-						// najsv. kristovho tela a krvi
-						mystrcpy(_file, FILE_TELA_A_KRVI, MAX_STR_AF_FILE);
-						mystrcpy(_anchor, ANCHOR_TELA_A_KRVI, MAX_STR_AF_ANCHOR);
-						mystrcpy(_anchor_vlastne_slavenie, ANCHOR_TELA_A_KRVI, MAX_STR_AF_ANCHOR);
-						Log("  ide o slavnost najsv. kristovho tela a krvi: _file = `%s', _anchor = %s...\n", _file, _anchor);
-
-						// kompletórium
-						modlitba = MODL_PRVE_KOMPLETORIUM;
-						_set_kompletorium_slavnost(modlitba, litobd);
-
-						modlitba = MODL_KOMPLETORIUM;
-						_set_kompletorium_slavnost(modlitba, litobd);
-
-						modlitba = MODL_PRVE_VESPERY;
-						_set_zalmy_telakrvi(modlitba);
-						_vlastne_slavenie_hymnus(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_magnifikat(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_prosby(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
-
-						// invitatórium
-						modlitba = MODL_INVITATORIUM;
-						_vlastne_slavenie_invitat(_anchor_vlastne_slavenie);
-
-						modlitba = MODL_RANNE_CHVALY;
-						_set_zalmy_telakrvi(modlitba);
-						_vlastne_slavenie_hymnus(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_benediktus(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_prosby(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
-
-						modlitba = MODL_VESPERY;
-						_set_zalmy_telakrvi(modlitba);
-						_vlastne_slavenie_hymnus(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_magnifikat(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_prosby(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
-
-						modlitba = MODL_POSV_CITANIE;
-						_set_zalmy_telakrvi(modlitba);
-						_vlastne_slavenie_hymnus(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_1citanie(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_2citanie(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
-
-						modlitba = MODL_PREDPOLUDNIM;
-						_set_zalmy_telakrvi(modlitba);
-						_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
-						modlitba = MODL_NAPOLUDNIE;
-						_set_zalmy_telakrvi(modlitba);
-						_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
-						modlitba = MODL_POPOLUDNI;
-						_set_zalmy_telakrvi(modlitba);
-						_vlastne_slavenie_ne_antifony(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_kresponz(_anchor_vlastne_slavenie);
-						_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
-					}// tela a krvi
-					else if(_global_den.denvr == (_global_r._ZOSLANIE_DUCHA_SV.denvr + 19)){ // 2008-05-08: v breviar.cpp sa používa define SRDCA
+					if(_global_den.denvr == (_global_r._ZOSLANIE_DUCHA_SV.denvr + 19)){ // 2008-05-08: v breviar.cpp sa používa define SRDCA
 						// najsv. srdca jezisovho
 						mystrcpy(_file, FILE_SRDCA, MAX_STR_AF_FILE);
 						mystrcpy(_anchor, ANCHOR_SRDCA, MAX_STR_AF_ANCHOR);
