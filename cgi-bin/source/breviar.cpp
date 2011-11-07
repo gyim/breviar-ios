@@ -2142,7 +2142,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 #define ZOSLANIE_DUCHA_SV  _global_r._ZOSLANIE_DUCHA_SV.denvr           // zoslanie Ducha Sv‰tÈho
 #define SV_RODINY  _global_r._SVATEJ_RODINY.denvr                       // sviatok sv‰tej rodiny
 #define TROJICA (ZOSLANIE_DUCHA_SV + 7)                                 // prv· nedeæa po ZOSLANIE_DUCHA_SV: najsv. Trojice
-// #define TELAKRVI (ZOSLANIE_DUCHA_SV + 11)                               // ötvrtok po Trojici: Kristovho Tela a Krvi (alebo: v krajin·ch, kde sa pres˙va na nedeæu)
+// #define TELAKRVI (ZOSLANIE_DUCHA_SV + 11)                               // ötvrtok po Trojici: Kristovho tela a krvi (alebo: v krajin·ch, kde sa pres˙va na nedeæu)
 #define SRDCA (ZOSLANIE_DUCHA_SV + 19)                                  // piatok po druhej nedeli po ZOSLANIE_DUCHA_SV: najsv. srdca Jeûiöovho
 #define SRDPM (ZOSLANIE_DUCHA_SV + 20)                                  // sobota po druhej nedeli po ZOSLANIE_DUCHA_SV: nepoökvrnenÈho srdca prebl. p. m·rie
 // 2006-08-22: kvÙli ruûovej farbe r˙cha potrebujeme define aj pre 3. adventn˙ nedeæu a 4. pÙstnu nedeæu
@@ -4024,9 +4024,9 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 	}
 	// ak padne Zjavenia P·na na nedeæu 7. alebo 8.1., treba upraviù sl·venie sviatku Krstu Krista P·na (SK LH, zv. I, str. 377) -- realizovanÈ v _dm_krst_krista_pana()
 	short int DECEMBER_16 = poradie(16, 12, rok); // 16. december, prelom v adventnom obdobÌ
-	short int TELAKRVI; // ötvrtok po Trojici: Kristovho Tela a Krvi (alebo: v krajin·ch, kde sa pres˙va na nedeæu)
+	short int TELAKRVI; // ötvrtok po Trojici: Kristovho tela a krvi (alebo: v krajin·ch, kde sa pres˙va na nedeæu)
 	if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_TELAKRVI_NEDELA) == BIT_OPT_0_TELAKRVI_NEDELA){
-		Log("Najsv. Kristovho Tela a Krvi sa sl·vi v nedeæu\n");
+		Log("Najsv. Kristovho tela a krvi sa sl·vi v nedeæu\n");
 		TELAKRVI = (ZOSLANIE_DUCHA_SV + 14);
 	}
 	else{
@@ -4379,9 +4379,9 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				_global_den.tyzden = POCET_NEDIEL_CEZ_ROK -
 					((PRVA_ADVENTNA_NEDELA - _global_den.denvr - 1) DIV 7);
 				_rozbor_dna_LOG("/* %d. tyzden v obdobi cez rok */\n", _global_den.tyzden);
-				// 2011-11-07: sl·vnosù najsv. Kristovho Tela a Krvi predsunut· pred rozhodovanie, Ëi je nedeæa (pretoûe v niektor˝ch krajin·ch nie je ZOSLANIE_DUCHA_SV + 11 (teda vo ötvrtok), ale pres˙va sa na nedeæu)
+				// 2011-11-07: sl·vnosù najsv. Kristovho tela a krvi predsunut· pred rozhodovanie, Ëi je nedeæa (pretoûe v niektor˝ch krajin·ch nie je ZOSLANIE_DUCHA_SV + 11 (teda vo ötvrtok), ale pres˙va sa na nedeæu)
 				if(_global_den.denvr == TELAKRVI){
-					// najsv. Kristovho Tela a Krvi == ZOSLANIE_DUCHA_SV + 11
+					// najsv. Kristovho tela a krvi == ZOSLANIE_DUCHA_SV + 11
 					_global_den.farba = LIT_FARBA_BIELA;
 					_rozbor_dna_LOG("/* najsv. krist. tela a krvi */\n");
 					_global_den.smer = 3; // sl·vnosti P·na
@@ -6930,6 +6930,40 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	//---------------------------------------------------------------------
 
+	Export("<tr>\n<td>\n");
+	Export("<!-- tabuæka pre checkboxy 0 (options pre modlitbu) -->\n");
+	Export("<table align=\"left\">\n"); // table option 0 (1/2)
+
+	Export("<tr><td>\n");
+	// formular pre options...
+
+	// option 0: bity ovplyvÚuj˙ce liturgick˝ kalend·r (pouûÌvame force opt_0)...
+
+	// pole (checkbox) WWW_MODL_OPTF_0_VERSE
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_0_ZJAV_NED, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_0_ZJAV_NED, ANO, html_text_option0_zjv_ne_explain[_global_jazyk], ((_global_optf[OPT_0_SPECIALNE] & BIT_OPT_0_ZJAVENIE_PANA_NEDELA) == BIT_OPT_0_ZJAVENIE_PANA_NEDELA)? html_option_checked: STR_EMPTY);
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option0_zjv_ne_explain[_global_jazyk], html_text_option0_zjv_ne[_global_jazyk]);
+	Export("<br>");
+
+	// pole (checkbox) WWW_MODL_OPTF_0_VERSE
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_0_NAN_NED, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_0_NAN_NED, ANO, html_text_option0_nan_ne_explain[_global_jazyk], ((_global_optf[OPT_0_SPECIALNE] & BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA) == BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA)? html_option_checked: STR_EMPTY);
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option0_nan_ne_explain[_global_jazyk], html_text_option0_nan_ne[_global_jazyk]);
+	Export("<br>");
+
+	// pole (checkbox) WWW_MODL_OPTF_0_VERSE
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_0_TK_NED, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_0_TK_NED, ANO, html_text_option0_tk_ne_explain[_global_jazyk], ((_global_optf[OPT_0_SPECIALNE] & BIT_OPT_0_TELAKRVI_NEDELA) == BIT_OPT_0_TELAKRVI_NEDELA)? html_option_checked: STR_EMPTY);
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option0_tk_ne_explain[_global_jazyk], html_text_option0_tk_ne[_global_jazyk]);
+	Export("<br>");
+
+	Export("</td></tr>\n");
+
+	Export("</table>\n"); // table option 0
+	Export("</td></tr>\n\n");
+
+	//---------------------------------------------------------------------
+
 	// 2011-01-31: sem presunut· moûnosù v˝beru liturgickÈho kalend·ra
 	// 2011-09-26:L predsunut· pred vöetky ostatnÈ options (Igor Gal·d)
 	if(_global_jazyk == JAZYK_SK){
@@ -6976,7 +7010,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("</td></tr>\n\n");
 	}// if(_global_jazyk == JAZYK_SK)
 
-/* ------------------------------------------- */
+// -------------------------------------------
 	Export("<tr>\n<td>\n");
 	Export("<!-- tabuæka pre checkboxy 1 (options pre modlitbu) -->\n");
 	/* 2011-01-26: doplnen· tabuæka pre checkboxy (options pre modlitbu) 

@@ -1242,7 +1242,7 @@ extern short int _global_opt_specialne[POCET_OPT_0_SPECIALNE];
 #define BIT_OPT_0_CITANIA                   4
 #define BIT_OPT_0_ZJAVENIE_PANA_NEDELA      8 // èi sa Zjavenie Pána slávi v nede¾u (1) alebo nie (teda 6. januára; hodnota 0 == default)
 #define BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA  16 // èi sa Nanebovstúpenie Pána slávi v nede¾u (1) alebo nie (teda vo štvrtok, na 40.-ty deò po Ve¾konoènej nedeli; hodnota 0 == default)
-#define BIT_OPT_0_TELAKRVI_NEDELA          32 // èi sa Najsv. Kristovho Tela a Krvi slávi v nede¾u (1) alebo nie (teda vo štvrtok, 11.-ty deò po Zoslaní Ducha Sv.; hodnota 0 == default)
+#define BIT_OPT_0_TELAKRVI_NEDELA          32 // èi sa Najsv. Kristovho tela a krvi slávi v nede¾u (1) alebo nie (teda vo štvrtok, 11.-ty deò po Zoslaní Ducha Sv.; hodnota 0 == default)
 
 #define POCET_OPT_1_CASTI_MODLITBY         12 // jednotlivé komponenty option 1 -- bity pre force option 1
 extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];

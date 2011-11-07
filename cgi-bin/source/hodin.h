@@ -1477,6 +1477,66 @@ const char *html_text_option0_citania_explain[POCET_JAZYKOV + 1] =
  "Liturgikus olvasmányok (katolikus.hu)."
 };
 
+const char *html_text_option0_zjv_ne[POCET_JAZYKOV + 1] = 
+{"Zjavenie Pána slávi v nede¾u medzi 2. a 8. januárom",
+ "Zjevení Pánì slavit v nedeli mezi 2. a 8. lednem",
+ "",
+ "",
+ "",
+ "Zjevení Pánì slavit v nedeli mezi 2. a 8. lednem",
+ "Zjavenie Pána slávi v nede¾u medzi 2. a 8. januárom"
+};
+
+const char *html_text_option0_zjv_ne_explain[POCET_JAZYKOV + 1] = 
+{"Zjavenie Pána sa slávi dòa 6. januára; v niektorıch krajinách sa slávi v nede¾u medzi 2. a 8. januárom.", 
+ "", 
+ "", 
+ "",
+ "", 
+ "", 
+ "xxx"
+};
+
+const char *html_text_option0_nan_ne[POCET_JAZYKOV + 1] = 
+{"Nanebovstúpenie Pána slávi v nede¾u",
+ "Nanebevstoupení Pánì slavit v nedeli",
+ "",
+ "",
+ "",
+ "Nanebevstoupení Pánì slavit v nedeli",
+ "Nanebovstúpenie Pána slávi v nede¾u"
+};
+
+const char *html_text_option0_nan_ne_explain[POCET_JAZYKOV + 1] = 
+{"Nanebovstúpenie Pána sa slávi 40. deò po Ve¾kej noci (teda vo štvrtok); v niektorıch krajinách sa slávenie prekladá na najblišiu nede¾u (nahrádza 7. ve¾konoènú nede¾u).", 
+ "", 
+ "", 
+ "",
+ "", 
+ "", 
+ "xxx"
+};
+
+const char *html_text_option0_tk_ne[POCET_JAZYKOV + 1] = 
+{"Najsv. Kristovho tela a krvi slávi v nede¾u",
+ "Tìla a krve Pánì slavit v nedeli",
+ "",
+ "",
+ "",
+ "Tìla a krve Pánì slavit v nedeli",
+ "Najsv. Kristovho tela a krvi slávi v nede¾u"
+};
+
+const char *html_text_option0_tk_ne_explain[POCET_JAZYKOV + 1] = 
+{"Najsv. Kristovho tela a krvi sa slávi 11. deò po Zoslaní Ducha Svätého (teda vo štvrtok po Najsv. Trojici); v niektorıch krajinách sa slávenie prekladá na najblišiu nede¾u.", 
+ "", 
+ "", 
+ "",
+ "", 
+ "", 
+ "xxx"
+};
+
 const char *html_text_option1_chvalospevy[POCET_JAZYKOV + 1] = 
 {"evanjeliové chválospevy (Benediktus, Magnifikat, Nunk dimittis)", 
  "evangelijní kantika (Mariino, Zachariášovo, Simeonovo)", 
