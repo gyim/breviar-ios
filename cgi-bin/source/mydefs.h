@@ -489,6 +489,14 @@ extern short int query_type; // premenna obsahujuca PRM_...
 	#define STR_MODL_OPTF_0_NAN_NED "of0nanne"
 #endif
 
+// najsv. kristovho tela a krvi -- Ëi sl·viù vo ötvrtok (11. deÚ po ZDS) alebo v nedeæu
+#define MODL_OPTF_0_TK_NED 66
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF_0_TK_NED "MODL_OPTF_0_TK_NED"
+#else
+	#define STR_MODL_OPTF_0_TK_NED "of0tkne"
+#endif
+
 // pre force option 1 jednotlivÈ bit-komponenty (parci·lne voæby)
 
 // evanjeliovÈ chv·lospevy (benediktus, magnifikat, nunk dimittis)
