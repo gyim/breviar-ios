@@ -1397,34 +1397,33 @@ void _dm_velkonocna_nedela(short int rok, short int _vn){
  * vystup: do globalnej premennej struct lrok _global_r da jednotlive vyznacne dni
  *         a ostatne data (prestupny, p1, p2, litrok, tyzden_ocr_po_vn, _den[]
  */
-/* logovanie: 01/03/2000A.D. */
 void analyzuj_rok(short int year){
-	short int _vn; /* poradie velkonocnej nedele */
-	_struct_den_mesiac vn; /* datum velkonocnej nedele */
-	short int p1, p2; /* nedelne pismena */
+	short int _vn; // poradie velkonocnej nedele
+	_struct_den_mesiac vn; // datum velkonocnej nedele
+	short int p1, p2; // nedelne pismena
 
 	Log("analyzuj_rok(%d) -- begin\n", year);
 	vn = velkonocna_nedela(year);
 	_vn = poradie(vn, year);
 
-	/* ci je rok prestupny */
+	// ci je rok prestupny
 	if(prestupny(year))
 		_global_r.prestupny = YES;
 	else
 		_global_r.prestupny = NO;
 
-	/* urcime nedele pismena */
+	// urcime nedele pismena
 	p1 = ((_vn + 5) MOD 7);
 	p2 = (_global_r.prestupny == YES)?
-			((p1 + 6) MOD 7): /* ak je rok prestupny, ma dve nedelne pismena */
-			p1;               /* inak p1 == p2 */
-	/* teraz znaky (char) */
+			((p1 + 6) MOD 7): // ak je rok prestupny, ma dve nedelne pismena
+			p1;               // inak p1 == p2
+	// teraz znaky (char)
 	_global_r.p1 = char_nedelne_pismeno[p1];
 	_global_r.p2 = (_global_r.prestupny == YES)?
 		char_nedelne_pismeno[p2]:
 		NIJAKE_NEDELNE_PISMENO;
 
-	/* slavnosti a sviatky */
+	// slavnosti a sviatky
 	_dm_krst_krista_pana    (year);      _global_r._KRST_KRISTA_PANA     = _global_result;
 	_dm_popolcova_streda    (year, _vn); _global_r._POPOLCOVA_STREDA     = _global_result;
 	_dm_velkonocna_nedela   (year, _vn); _global_r._VELKONOCNA_NEDELA    = _global_result;
@@ -1433,22 +1432,18 @@ void analyzuj_rok(short int year){
 	_dm_prva_adventna_nedela(year, p2);  _global_r._PRVA_ADVENTNA_NEDELA = _global_result;
 	_dm_svatej_rodiny       (year);      _global_r._SVATEJ_RODINY        = _global_result;
 
-	/* cislo nedele obdobia "cez rok" po velkej noci */
-	_global_r.tyzden_ocr_po_vn = (POCET_NEDIEL_CEZ_ROK -
-		( (_global_r._PRVA_ADVENTNA_NEDELA.denvr - _global_r._ZOSLANIE_DUCHA_SV.denvr)
-		  DIV 7) ) + 1;
+	// cislo nedele obdobia "cez rok" po velkej noci
+	_global_r.tyzden_ocr_po_vn = (POCET_NEDIEL_CEZ_ROK - ( (_global_r._PRVA_ADVENTNA_NEDELA.denvr - _global_r._ZOSLANIE_DUCHA_SV.denvr) DIV 7) ) + 1;
 
-	/* cislo tyzdna obdobia "cez rok" pred postom, kedy zacina post; 15/03/2000A.D. */
-	_global_r.tyzden_ocr_pred_po = 
-		((_global_r._POPOLCOVA_STREDA.denvr - _global_r._KRST_KRISTA_PANA.denvr)
-			DIV 7) + 1;
+	// cislo tyzdna obdobia "cez rok" pred postom, kedy zacina post
+	_global_r.tyzden_ocr_pred_po = ((_global_r._POPOLCOVA_STREDA.denvr - _global_r._KRST_KRISTA_PANA.denvr) DIV 7) + 1;
 
 	Log("analyzuj_rok(%d) -- end\n", year);
-}/* analyzuj_rok(); */
+}// analyzuj_rok();
 
 /* pridane Log-ovacie utilitky pre rozne datove struktury */
 
-void Log(_struct_lrok r){ /* 01/03/2000A.D. */
+void Log(_struct_lrok r){
 	Log_struktura_rok("struktura liturgicky rok:\n");
 	Log_struktura_rok("   prestupny: %s\n", (r.prestupny == YES)? "ANO":"NIE");
 	Log_struktura_rok("   p1, p2: %c, %c\n", r.p1, r.p2);
@@ -1471,24 +1466,21 @@ void Log(_struct_dm g){
 	Log_struktura_dm("   rok:    %d\n", g.rok);
 	Log_struktura_dm("   denvt:  %s\n", nazov_dna(g.denvt));
 	Log_struktura_dm("   denvr:  %d\n", g.denvr);
-	/* toto boli "obcianske" zalezitosti */
+	// toto boli "obcianske" zalezitosti
 	Log_struktura_dm("   litrok: %c\n", g.litrok);
 	Log_struktura_dm("   tyzden: %d\n", g.tyzden);
 	Log_struktura_dm("   tyzzal: %d\n", g.tyzzal);
 	Log_struktura_dm("   litobd: %s\n", nazov_obdobia_[g.litobd]); // nazov_obdobia_
 	Log_struktura_dm("   typslav:%s\n", nazov_slavenia(g.typslav));
-	/* 2005-07-27: doplnené typslav_lokal */
 	Log_struktura_dm("   typslav_lokal: %s\n", nazov_slavenia_lokal[g.typslav_lokal]);	
 	Log_struktura_dm("   smer:   %d\n", g.smer);
 	Log_struktura_dm("   prik:   %d\n", g.prik);
 	Log_struktura_dm("   meno:   %s\n", g.meno);
 	_struct_sc sc = _decode_spol_cast(g.spolcast);
-	/* 2006-02-06: upravené, pridané aj èíselné hodnoty */
-	Log_struktura_dm("   spolcast: (%d) %s, (%d) %s, (%d) %s\n",
-		sc.a1, nazov_spolc(sc.a1), sc.a2, nazov_spolc(sc.a2), sc.a3, nazov_spolc(sc.a3));
+	Log_struktura_dm("   spolcast: (%d) %s, (%d) %s, (%d) %s\n", sc.a1, nazov_spolc(sc.a1), sc.a2, nazov_spolc(sc.a2), sc.a3, nazov_spolc(sc.a3));
 }
 
-/* 2010-05-21: rozšírené kvôli spomienkam a ¾ubovo¾ným spomienkam v pôstnom období (zobrazenie po modlitbe dòa pôstnej férie) */
+// 2010-05-21: rozšírené kvôli spomienkam a ¾ubovo¾ným spomienkam v pôstnom období (zobrazenie po modlitbe dòa pôstnej férie)
 void Log(struct tmodlitba1 t){
 	Log_struktura_tm1("struktura tmodlitba1:\n");
 	Log_struktura_tm1("   popis             file `%s', anchor `%s'\n", t.popis.file, t.popis.anchor);
@@ -1501,7 +1493,7 @@ void Log(struct tmodlitba1 t){
 	Log_struktura_tm1("   zalm3             file `%s', anchor `%s'\n", t.zalm3.file, t.zalm3.anchor);
 	Log_struktura_tm1("   kcitanie          file `%s', anchor `%s'\n", t.kcitanie.file, t.kcitanie.anchor);
 	Log_struktura_tm1("   kresponz          file `%s', anchor `%s'\n", t.kresponz.file, t.kresponz.anchor);
-	Log_struktura_tm1("   bened/magnifikat  file `%s', anchor `%s'\n", t.benediktus.file, t.benediktus.anchor); /* antifona na benediktus/magnifikat */
+	Log_struktura_tm1("   bened/magnifikat  file `%s', anchor `%s'\n", t.benediktus.file, t.benediktus.anchor); // antifona na benediktus/magnifikat
 	Log_struktura_tm1("   prosby            file `%s', anchor `%s'\n", t.prosby.file, t.prosby.anchor);
 	Log_struktura_tm1("   modlitba          file `%s', anchor `%s'\n", t.modlitba.file, t.modlitba.anchor);
 	Log_struktura_tm1("   ant_spompost      file `%s', anchor `%s'\n", t.ant_spompost.file, t.ant_spompost.anchor);
@@ -1523,7 +1515,7 @@ void Log(struct tmodlitba2 t){
 	Log_struktura_tm2("   modlitba     file `%s', anchor `%s'\n", t.modlitba.file, t.modlitba.anchor);
 }
 
-/* 2006-10-11 doplnené */
+// 2006-10-11 doplnené
 void Log(struct tmodlitba3 t){
 	Log_struktura_tm3("struktura tmodlitba3:\n");
 	Log_struktura_tm3("   pocet_zalmov = %d\n", t.pocet_zalmov);
@@ -1538,7 +1530,7 @@ void Log(struct tmodlitba3 t){
 	Log_struktura_tm3("   modlitba     file `%s', anchor `%s'\n", t.modlitba.file, t.modlitba.anchor);
 }
 
-/* 2006-10-13 doplnené */
+// 2006-10-13 doplnené
 void Log(struct tmodlitba4 t){
 	Log_struktura_tm4("struktura tmodlitba3:\n");
 	Log_struktura_tm4("   popis        file `%s', anchor `%s'\n", t.popis.file, t.popis.anchor);
@@ -1546,7 +1538,7 @@ void Log(struct tmodlitba4 t){
 	Log_struktura_tm4("   zalm1        file `%s', anchor `%s'\n", t.zalm1.file, t.zalm1.anchor);
 }
 
-/* 2011-03-25: pridané pre posvätné èítanie kvôli vigíliám */
+// 2011-03-25: pridané pre posvätné èítanie kvôli vigíliám
 void Log(struct tmodlitba5 t){
 	Log_struktura_tm5("struktura tmodlitba5:\n");
 	Log_struktura_tm5("   popis             file `%s', anchor `%s'\n", t.popis.file, t.popis.anchor);

@@ -4370,7 +4370,17 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				_global_den.tyzden = POCET_NEDIEL_CEZ_ROK -
 					((PRVA_ADVENTNA_NEDELA - _global_den.denvr - 1) DIV 7);
 				_rozbor_dna_LOG("/* %d. tyzden v obdobi cez rok */\n", _global_den.tyzden);
-				if(_global_den.denvt == DEN_NEDELA){
+				// 2011-11-07: sl·vnosù najsv. Kristovho Tela a Krvi predsunut· pred rozhodovanie, Ëi je nedeæa (pretoûe v niektor˝ch krajin·ch nie je ZOSLANIE_DUCHA_SV + 11 (teda vo ötvrtok), ale pres˙va sa na nedeæu)
+				if(_global_den.denvr == TELAKRVI){
+					// najsv. Kristovho Tela a Krvi == ZOSLANIE_DUCHA_SV + 11
+					_global_den.farba = LIT_FARBA_BIELA;
+					_rozbor_dna_LOG("/* najsv. krist. tela a krvi */\n");
+					_global_den.smer = 3; // sl·vnosti P·na
+					_global_den.typslav = SLAV_SLAVNOST;
+					_global_den.prik = PRIKAZANY_SVIATOK;
+					mystrcpy(_global_den.meno, text_NAJSV_KRISTOVHO_TELA_A_KRVI[_global_jazyk], MENO_SVIATKU);
+				}// TELAKRVI
+				else if(_global_den.denvt == DEN_NEDELA){
 					// i.-ta nedela v obdobi cez rok
 					_rozbor_dna_LOG("/* nedela v ocr */\n");
 					if(_global_den.denvr == TROJICA){
@@ -4402,20 +4412,11 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					else{
 						_global_den.smer = 6; // nedele vianocneho obdobia a obdobia "cez rok"
 					}
-				}
+				}// DEN_NEDELA
 				else{
 					// den v i.-tom tyzdni obdobia cez rok
 					_rozbor_dna_LOG("/* den v %d. tyzdni obdobia cez rok */\n", _global_den.tyzden);
-					if(_global_den.denvr == TELAKRVI){
-						// najsv. krist. tela a krvi == ZOSLANIE_DUCHA_SV + 11
-						_global_den.farba = LIT_FARBA_BIELA;
-						_rozbor_dna_LOG("/* najsv. krist. tela a krvi */\n");
-						_global_den.smer = 3; // sl·vnosti P·na
-						_global_den.typslav = SLAV_SLAVNOST;
-						_global_den.prik = PRIKAZANY_SVIATOK;
-						mystrcpy(_global_den.meno, text_NAJSV_KRISTOVHO_TELA_A_KRVI[_global_jazyk], MENO_SVIATKU);
-					}
-					else if(_global_den.denvr == SRDCA){
+					if(_global_den.denvr == SRDCA){
 						// srdca jezisovho == ZOSLANIE_DUCHA_SV + 19
 						_global_den.farba = LIT_FARBA_BIELA;
 						_rozbor_dna_LOG("/* srdca jezisovho */\n");
@@ -4428,12 +4429,8 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 						_global_den.farba = LIT_FARBA_BIELA;
 						_rozbor_dna_LOG("/* srdca prebl. panny marie */\n");
 
-						/* 2003-06-30: povodne tu bolo 11: "miestne povinne spomienky podla vseobecneho kalendara",
-						 * zmenil som to na 10.
-						 * nasleduje nejaka starsia vysvetlujuca poznamka; 
-						 * "zrejme pre Slovensko je tato lubovolna spomienka povinna; 
-						 *  aby sa nebila s inou spomienkou, dal som tam smer == 11; 10/03/2000A.D." 
-						 */
+						// 2003-06-30: povodne tu bolo 11: "miestne povinne spomienky podla vseobecneho kalendara",
+						// zmenil som to na 10.
 						if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_OFM)){
 							_global_den.smer = 10;
 							_global_den.typslav = SLAV_SPOMIENKA;
@@ -4454,7 +4451,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 						_global_den.smer = 13; // vsedne dni `cez rok'
 						_rozbor_dna_LOG("/* vsedne dni `cez rok' */\n");
 					}
-				}
+				}// vöedn˝ deÚ, nie nedeæa
 			}// if(_global_den.denvr < PRVA_ADVENTNA_NEDELA)
 			else if(_global_den.denvr >= PRVA_ADVENTNA_NEDELA){
 				// adventne obdobie resp. vianocne
