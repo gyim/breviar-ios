@@ -510,6 +510,8 @@ const char *nazov_slavenia_lokal[] =
 ,"csak a felszentelt templomokban"                                                                              // LOKAL_SLAV_KONSEKR_KOSTOLY_HU
 ,"A Szeged-Csanád: A székesegyházban; fõünnep"                                                                  // LOKAL_SLAV_SZEGED_CSAN_EGYH2
 ,"A Pécsi egyházmegyében: A Pécsi egyházmegye társvédõszentje; fõünnep"                                         // LOKAL_SLAV_PECS_PATRON
+,"Szombathely: Az egyházmegye védõszentje; fõünnep"                                                             // LOKAL_SLAV_SZOMBATHELYI_PATRON
+,"Székesfehérvár: A székesegyházban; fõünnep"                                                                   // LOKAL_SLAV_SZEKESFEHERVAR_EGYH
 };
 
 // names of liturgical colors
@@ -5882,7 +5884,7 @@ const char *text_NOV_18[POCET_JAZYKOV + 1] =
  "",
  "",
  "Posvìcení øímských bazilik svatých apoštolù Petra a Pavla",
- "Szent Péter- és Szent Pál-Bazilikák felszentelése",
+ "Szent Péter- és Szent Pál-bazilikák felszentelése",
  };
 const char *text_NOV_20_SK[POCET_JAZYKOV + 1] = 
 {"Výroèie posviacky katedrálneho chrámu v Nitre",
@@ -5955,6 +5957,15 @@ const char *text_NOV_25[POCET_JAZYKOV + 1] =
  "",
  "Sv. Kateøiny Alexandrijské, panny a muèednice",
  "Alexandriai Szent Katalin szûz és vértanú",
+ };
+const char *text_NOV_25_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "A bazilika-székesegyház felszentelése",
  };
 const char *text_NOV_25_SDB[POCET_JAZYKOV + 1] = 
 {"Všetkých zomrelých rodièov saleziánov",

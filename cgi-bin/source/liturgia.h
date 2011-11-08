@@ -919,6 +919,8 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_KONSEKR_KOSTOLY_HU		70
 #define LOKAL_SLAV_SZEGED_CSAN_EGYH2        71
 #define LOKAL_SLAV_PECS_PATRON              72
+#define LOKAL_SLAV_SZOMBATHELYI_PATRON      73
+#define LOKAL_SLAV_SZEKESFEHERVAR_EGYH      74
 
 // 2010-08-03: pridaný kalendár
 #define KALENDAR_NEURCENY                   0
