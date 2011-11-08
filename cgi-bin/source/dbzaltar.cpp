@@ -9853,6 +9853,15 @@ void _set_spolocna_cast(short int a, short int poradie_svaty, _struct_sc sc, sho
 		Log("// upravenÈ tak, ûe spoloËn· Ëasù na ofÌcium za zosnul˝ch vûdy berie vlastnÈ ûalmy; vraciam sp‰ù nastavenie _global_opt 1\n");
 		_global_opt[OPT_1_CASTI_MODLITBY] = _global_opt_1_pom;
 		*/
+
+		// 2011-11-08: kompletÛrium z nedele
+		modlitba = MODL_KOMPLETORIUM;
+		if(_global_den.den != DEN_NEDELA){
+			_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+		}
+		else{
+			_set_kompletorium_nedela(modlitba);
+		}
 	}// MODL_SPOL_CAST_ZA_ZOSNULYCH
 
 	// spolocna cast na sviatky posviacky chramu
