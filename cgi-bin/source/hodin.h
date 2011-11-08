@@ -1484,7 +1484,7 @@ const char *html_text_option0_zjv_ne[POCET_JAZYKOV + 1] =
  "",
  "",
  "Zjevení Pánì slavit v nedìli mezi 2. a 8. lednem",
- "Zjavenie Pána slávi v nede¾u medzi 2. a 8. januárom"
+ "Urunk megjelenése (Vízkereszt) megünneplése vasárnap, január 2. és 8. között"
 };
 
 const char *html_text_option0_zjv_ne_explain[POCET_JAZYKOV + 1] = 
@@ -1494,7 +1494,7 @@ const char *html_text_option0_zjv_ne_explain[POCET_JAZYKOV + 1] =
  "",
  "", 
  "", 
- "xxx"
+ "Urunk megjelenése (Vízkereszt) január 6.-án van; egyes országokban azonban vasárnap, január 2. és 8. között ünneplik."
 };
 
 const char *html_text_option0_nan_ne[POCET_JAZYKOV + 1] = 
@@ -1504,7 +1504,7 @@ const char *html_text_option0_nan_ne[POCET_JAZYKOV + 1] =
  "",
  "",
  "Nanebevstoupení Pánì slavit v nedìli",
- "Nanebovstúpenie Pána slávi v nede¾u"
+ "Urunk mennybemenetelét vasárnap ünnepelni"
 };
 
 const char *html_text_option0_nan_ne_explain[POCET_JAZYKOV + 1] = 
@@ -1514,7 +1514,7 @@ const char *html_text_option0_nan_ne_explain[POCET_JAZYKOV + 1] =
  "",
  "", 
  "", 
- "xxx"
+ "Urunk mennybemenetelét húsvét után a 40. napon van (tehát csütörtökön); egyes országokban azonban a legközelebbi vasárnapon ünneplik (vagyis Húsvét 7. vasárnapján)."
 };
 
 const char *html_text_option0_tk_ne[POCET_JAZYKOV + 1] = 
@@ -1524,7 +1524,7 @@ const char *html_text_option0_tk_ne[POCET_JAZYKOV + 1] =
  "",
  "",
  "Tìla a krve Pánì slavit v nedìli",
- "Najsv. Kristovho tela a krvi slávi v nede¾u"
+ "Krisztus Szent Teste és Vére ünnepe vasárnapra téve"
 };
 
 const char *html_text_option0_tk_ne_explain[POCET_JAZYKOV + 1] = 
@@ -1534,7 +1534,7 @@ const char *html_text_option0_tk_ne_explain[POCET_JAZYKOV + 1] =
  "",
  "", 
  "", 
- "xxx"
+ "Krisztus Szent Teste és Vére Pünkösd után a 11. napon van (tehát Szentháromság utáni csütörtökön); egyes országokban azonban a legközelebbi vasárnapon ünneplik."
 };
 
 const char *html_text_option1_chvalospevy[POCET_JAZYKOV + 1] = 
