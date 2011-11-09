@@ -430,12 +430,10 @@ const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1] =
 };
 
 // special "local" or "partial" characteristics of various celebrations - each in one language; no need to translate; special strings will be added
-/* 2005-07-27: doplnené
- * 2007-08-31: upravené TT -> BA-TT
- * 2008-06-23: upravené vzh¾adom k novému usporiadaniu diecéz (intuitívne)
- * 2010-03-16: doplnené BA
- * 2011-07-25: doplnené názvy èíselných konštánt
- */
+// 2007-08-31: upravené TT -> BA-TT
+// 2008-06-23: upravené vzh¾adom k novému usporiadaniu diecéz (intuitívne)
+// 2010-03-16: doplnené BA
+// 2011-07-25: doplnené názvy èíselných konštánt
 const char *nazov_slavenia_lokal[] =
 {""                                                                                                             // LOKAL_SLAV_NEURCENE
 ,"len v rožòavskej katedrále"                                                                                   // LOKAL_SLAV_ROZNAVA_KATEDRALA
@@ -6262,4 +6260,4 @@ const char *text_V_OKTAVE_NARODENIA[POCET_JAZYKOV + 1] =
  "Karácsony nyolcadában",
  };
 
-#endif /* __HODIN_H_ */
+#endif // __HODIN_H_
