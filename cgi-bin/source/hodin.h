@@ -1514,7 +1514,7 @@ const char *html_text_option0_nan_ne_explain[POCET_JAZYKOV + 1] =
  "",
  "", 
  "", 
- "Urunk mennybemenetelét húsvét után a 40. napon van (tehát csütörtökön); egyes országokban azonban a legközelebbi vasárnapon ünneplik (vagyis Húsvét 7. vasárnapján)."
+ "Urunk mennybemenetele húsvét után a 40. napon van (tehát csütörtökön); egyes országokban azonban a legközelebbi vasárnapon ünneplik (vagyis Húsvét 7. vasárnapján)."
 };
 
 const char *html_text_option0_tk_ne[POCET_JAZYKOV + 1] = 
