@@ -10063,6 +10063,9 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 				Log("/* teraz vypisujem heading 1, datum %d. %s %d */\n", d, nazov_mesiaca(m - 1), r);
 				// 2007-03-20: spôsob výpisu dátumu pod¾a jazyka 
 				// 2011-05-12: doplnené nové konštanty
+				// 2011-11-12: použitie funkcie _vytvor_string_z_datumu()
+				strcpy(pom, _vytvor_string_z_datumu(d, m, r, ((_global_jazyk == JAZYK_LA) || (_global_jazyk == JAZYK_EN))? CASE_Case : CASE_case, LINK_DEN_MESIAC_ROK, NIE));
+				/*
 				if(format_datumu[_global_jazyk] == FORMAT_DATUMU_ROK_MESIAC_DEN){
 					// 2011-05-12: pôvodne bolo: 2010-05-21: doplnené pre maïarèinu: 1999. augusztus 1. -- http://en.wikipedia.org/wiki/Date_and_time_notation_by_country#Hungary [2010-05-24]
 					if(_global_jazyk == JAZYK_HU){
@@ -10079,6 +10082,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 					// latinèina používa genitív
 					sprintf(pom, "%d. %s %d", d, (_global_jazyk == JAZYK_LA)? nazov_Mesiaca_gen(m - 1): nazov_mesiaca(m - 1), r);
 				}// FORMAT_DATUMU_DEN_MESIAC_ROK
+				*/
 				_export_heading_center(pom);
 				// 2003-06-30: podla toho, ci je alebo nie je urcena modlitba
 				if(p == MODL_NEURCENA){
@@ -10259,35 +10263,33 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 	_struct_den_mesiac datum;
 	datum.den = dnes.tm_mday;
 	datum.mesiac = dnes.tm_mon;
-	analyzuj_rok(dnes.tm_year); /* vysledok da do _global_r */
+	analyzuj_rok(dnes.tm_year); // vysledok da do _global_r
 
-	s = atoi(poradie_svaty); /* ak je viac svatych, ktory z nich (1--3) */
-	/* 2009-03-27: doplnené - neznámy je konštanta; zmysel majú len vstupy 1--3*/
+	s = atoi(poradie_svaty); // ak je viac svatych, ktory z nich (1--3)
+	// 2009-03-27: doplnené - neznámy je konštanta; zmysel majú len vstupy 1--3
 	if(s < 1)
 		s = UNKNOWN_PORADIE_SVATEHO;
 	if(s > 4)
 		s = UNKNOWN_PORADIE_SVATEHO;
 	Log("sv == `%s' (upravené na %d)\n", poradie_svaty, s);
 
-	/* rozparsovanie parametra modlitba */
+	// rozparsovanie parametra modlitba
 	Log("volanie _parsuj_parameter_MODLITBA() z _main_dnes()...\n");
 	_parsuj_parameter_MODLITBA(modlitba, p);
 
 	_global_modlitba = p;
 	Log("modl == %s (%d, %s) -- priradene do _global_modlitba\n", modlitba, p, nazov_modlitby(p));
 
-	/* rozparsovanie parametrov opt_0...opt_4; v define 2006-02-10 pod¾a _main_rozbor_dna 
-	 * 2007-06-01: upravené tak, aby sa v prípade nenastavenia dala hodnota GLOBAL_OPTION_NULL
-	 * 2011-05-05: presunuté do main(); tu radšej iba zapoznámkované
-	 */
+	// rozparsovanie parametrov opt_0...opt_4; v define 2006-02-10 pod¾a _main_rozbor_dna 
+	// 2007-06-01: upravené tak, aby sa v prípade nenastavenia dala hodnota GLOBAL_OPTION_NULL
+	// 2011-05-05: presunuté do main(); tu radšej iba zapoznámkované
 	// Log("volám _rozparsuj_parametre_OPT z _main_dnes()...\n");
 	// _rozparsuj_parametre_OPT();
 
-	/* vypis */
+	// vypis
 	Log("/* teraz vypisujem heading 1, datum %d. %s %d */\n", dnes.tm_mday, nazov_mesiaca(dnes.tm_mon - 1), dnes.tm_year);
-	/* 2007-03-20: spôsob výpisu dátumu pod¾a jazyka 
-	 * 2011-05-12: použitá funkcia _vytvor_string_z_datumu()
-	 */
+	// 2007-03-20: spôsob výpisu dátumu pod¾a jazyka 
+	// 2011-05-12: použitá funkcia _vytvor_string_z_datumu()
 	strcpy(pom, _vytvor_string_z_datumu(dnes.tm_mday, dnes.tm_mon, dnes.tm_year, ((_global_jazyk == JAZYK_LA) || (_global_jazyk == JAZYK_EN))? CASE_Case : CASE_case, LINK_DEN_MESIAC_ROK, NIE));
 /*
 	if(_global_jazyk == JAZYK_LA){
@@ -10305,9 +10307,8 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 */
 	_export_heading_center(pom);
 
-	/* 2006-02-10: výpis juliánskeho dátumu, len ak nie je urèená modlitba 
-	 * 2007-03-19: výpis "Dnes je..." sa zobrazí len pri nastavení HTML_ZOBRAZIT_DNES_JE == 1
-	 */
+	// 2006-02-10: výpis juliánskeho dátumu, len ak nie je urèená modlitba 
+	// 2007-03-19: výpis "Dnes je..." sa zobrazí len pri nastavení HTML_ZOBRAZIT_DNES_JE == 1
 	if(_global_modlitba == MODL_NEURCENA){
 		if(HTML_ZOBRAZIT_DNES_JE == ANO){
 			Export((char *)html_text_dnes_je_atd[_global_jazyk],
@@ -10344,10 +10345,8 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 
 		_export_rozbor_dna(EXPORT_DNA_DNES);
 
-		/* 2006-02-02: celý zvyšný formulár presunutý do samostatnej funkcie */
-		/* 2007-08-15: volanie _export_main_formular() presunuté do _export_rozbor_dna()
-		 * 	_export_main_formular(datum.den, datum.mesiac, dnes.tm_year, dnes.tm_wday);
-		 */
+		// 2006-02-02: celý zvyšný formulár presunutý do samostatnej funkcie
+		// 2007-08-15: volanie _export_main_formular() presunuté do _export_rozbor_dna() | _export_main_formular(datum.den, datum.mesiac, dnes.tm_year, dnes.tm_wday);
 	}
 	else if(p == MODL_VSETKY){
 		_global_vstup_den = datum.den;
