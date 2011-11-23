@@ -2635,39 +2635,50 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 
 	// 2005-08-15: Pridané parsovanie PARAM_HYMNUS_34_OCR_INY_BEGIN/END
 	// 2007-11-27: upravené (lebo to tam zahàòalo ten hymnus)
+	// 2011-11-22: odvetvenie pre CZ, ak je_34_ocr a má vlastnı hymnus: vtedy sa hymnus pre 34. tıdeò OCR neberie
 	else if(equals(paramname, PARAM_HYMNUS_34_OCR_INY_BEGIN)){
-		if(je_34_ocr){
-			// zobrazi alternatívny hymnus 34. tıdòa OCR
+		if(!((_global_jazyk == JAZYK_CZ) && (je_34_ocr) && ((su_inv_hymnus_kcit_kresp_benmagn_prosby_vlastne(type))))){
+			if(je_34_ocr){
+				// zobrazi alternatívny hymnus 34. tıdòa OCR
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("zobrazi alternatívny hymnus 34. tıdòa OCR");
+				Export("zobrazi alternatívny hymnus 34. tıdòa OCR");
 #endif
-			Export("-->");
-			Log("JE 34.tıdeò OCR... BEGIN\n");
-		}
+				Export("-->");
+				Log("JE 34.tıdeò OCR... BEGIN\n");
+			}
+			else{
+				// nezobrazi alternatívny hymnus 34. tıdòa OCR
+				_global_skip_in_prayer = ANO;
+#if defined(EXPORT_HTML_SPECIALS)
+				Export("nezobrazi alternatívny hymnus 34. tıdòa OCR");
+#endif
+				Log("NIE JE 34.tıdeò OCR... BEGIN\n");
+			}
+		}// pre iné ako CZ a pre CZ mimo 34. OCR kde má vlastnı hymnus 
 		else{
-			// nezobrazi alternatívny hymnus 34. tıdòa OCR
-			_global_skip_in_prayer = ANO;
-#if defined(EXPORT_HTML_SPECIALS)
-			Export("nezobrazi alternatívny hymnus 34. tıdòa OCR");
-#endif
-			Log("NIE JE 34.tıdeò OCR... BEGIN\n");
+			// odvetvenie pre CZ, ak je_34_ocr a má vlastnı hymnus: vtedy sa hymnus pre 34. tıdeò OCR neberie
 		}
-	}
+	}// PARAM_HYMNUS_34_OCR_INY_BEGIN
 	else if(equals(paramname, PARAM_HYMNUS_34_OCR_INY_END)){
-		if(je_34_ocr){
-			// zobrazi alternatívny hymnus 34. tıdòa OCR
-			Export("<!--");
+		if(!((_global_jazyk == JAZYK_CZ) && (je_34_ocr) && ((su_inv_hymnus_kcit_kresp_benmagn_prosby_vlastne(type))))){
+			if(je_34_ocr){
+				// zobrazi alternatívny hymnus 34. tıdòa OCR
+				Export("<!--");
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("je 34.tıdeò OCR");
+				Export("je 34.tıdeò OCR");
 #endif
-			Log("JE 34.tıdeò OCR... END\n");
-		}
+				Log("JE 34.tıdeò OCR... END\n");
+			}
+			else{
+				// nezobrazi alternatívny hymnus 34. tıdòa OCR
+				_global_skip_in_prayer = NIE;
+				Log("NIE JE 34.tıdeò OCR... END\n");
+			}
+		}// pre iné ako CZ a pre CZ mimo 34. OCR kde má vlastnı hymnus 
 		else{
-			// nezobrazi alternatívny hymnus 34. tıdòa OCR
-			_global_skip_in_prayer = NIE;
-			Log("NIE JE 34.tıdeò OCR... END\n");
+			// odvetvenie pre CZ, ak je_34_ocr a má vlastnı hymnus: vtedy sa hymnus pre 34. tıdeò OCR neberie
 		}
-	}
+	}// PARAM_HYMNUS_34_OCR_INY_END
 
 	// 2007-10-02: pridané nezobrazovanie "Ant. 2" a pod. keï sú rovnaké antifóny na mcd
 	else if(equals(paramname, PARAM_SKRY_ANTIFONU_BEGIN)){
@@ -2838,8 +2849,9 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 	else if(equals(paramname, PARAM_HYMNUS)){
 		switch(type){
 			case MODL_RANNE_CHVALY:
-				/* 2007-11-28: upravené pre èeskı breviár */
-				if((_global_jazyk == JAZYK_CZ) && (je_34_ocr)){
+				// 2007-11-28: upravené pre èeskı breviár
+				// 2011-11-22: odvetvenie pre CZ, ak je_34_ocr: len ak nemá vlastnı hymnus, tak vtedy sa hymnus pre 34. tıdeò OCR berie
+				if((_global_jazyk == JAZYK_CZ) && (je_34_ocr) && (!(su_inv_hymnus_kcit_kresp_benmagn_prosby_vlastne(type)))){
 					Log("pro ranní chvály 34. tıdne v mezidobí se bere jinı hymnus");
 #if defined(EXPORT_HTML_SPECIALS)
 					Export("jinı hymnus pro 34. tıden mezidobí");
@@ -2851,20 +2863,48 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 				}
 				break;
 			case MODL_CEZ_DEN_9:
-				strcat(path, _global_modl_cez_den_9.hymnus.file);
-				includeFile(type, paramname, path, _global_modl_cez_den_9.hymnus.anchor);
+				// 2011-11-22: odvetvenie pre CZ, ak je_34_ocr: len ak nemá vlastnı hymnus, tak vtedy sa hymnus pre 34. tıdeò OCR berie
+				if((_global_jazyk == JAZYK_CZ) && (je_34_ocr) && (!(su_inv_hymnus_kcit_kresp_benmagn_prosby_vlastne(type)))){
+					Log("pro modlitbu uprostøed dne 34. tıdne v mezidobí se bere jinı hymnus");
+#if defined(EXPORT_HTML_SPECIALS)
+					Export("jinı hymnus pro 34. tıden mezidobí");
+#endif
+				}
+				else{
+					strcat(path, _global_modl_cez_den_9.hymnus.file);
+					includeFile(type, paramname, path, _global_modl_cez_den_9.hymnus.anchor);
+				}
 				break;
 			case MODL_CEZ_DEN_12:
-				strcat(path, _global_modl_cez_den_12.hymnus.file);
-				includeFile(type, paramname, path, _global_modl_cez_den_12.hymnus.anchor);
+				// 2011-11-22: odvetvenie pre CZ, ak je_34_ocr: len ak nemá vlastnı hymnus, tak vtedy sa hymnus pre 34. tıdeò OCR berie
+				if((_global_jazyk == JAZYK_CZ) && (je_34_ocr) && (!(su_inv_hymnus_kcit_kresp_benmagn_prosby_vlastne(type)))){
+					Log("pro modlitbu uprostøed dne 34. tıdne v mezidobí se bere jinı hymnus");
+#if defined(EXPORT_HTML_SPECIALS)
+					Export("jinı hymnus pro 34. tıden mezidobí");
+#endif
+				}
+				else{
+					strcat(path, _global_modl_cez_den_12.hymnus.file);
+					includeFile(type, paramname, path, _global_modl_cez_den_12.hymnus.anchor);
+				}
 				break;
 			case MODL_CEZ_DEN_3:
-				strcat(path, _global_modl_cez_den_3.hymnus.file);
-				includeFile(type, paramname, path, _global_modl_cez_den_3.hymnus.anchor);
+				// 2011-11-22: odvetvenie pre CZ, ak je_34_ocr: len ak nemá vlastnı hymnus, tak vtedy sa hymnus pre 34. tıdeò OCR berie
+				if((_global_jazyk == JAZYK_CZ) && (je_34_ocr) && (!(su_inv_hymnus_kcit_kresp_benmagn_prosby_vlastne(type)))){
+					Log("pro modlitbu uprostøed dne 34. tıdne v mezidobí se bere jinı hymnus");
+#if defined(EXPORT_HTML_SPECIALS)
+					Export("jinı hymnus pro 34. tıden mezidobí");
+#endif
+				}
+				else{
+					strcat(path, _global_modl_cez_den_3.hymnus.file);
+					includeFile(type, paramname, path, _global_modl_cez_den_3.hymnus.anchor);
+				}
 				break;
 			case MODL_VESPERY:
-				/* 2007-11-28: upravené pre èeskı breviár */
-				if((_global_jazyk == JAZYK_CZ) && (je_34_ocr)){
+				// 2007-11-28: upravené pre èeskı breviár
+				// 2011-11-22: odvetvenie pre CZ, ak je_34_ocr: len ak nemá vlastnı hymnus, tak vtedy sa hymnus pre 34. tıdeò OCR berie
+				if((_global_jazyk == JAZYK_CZ) && (je_34_ocr) && (!(su_inv_hymnus_kcit_kresp_benmagn_prosby_vlastne(type)))){
 					Log("pro nešpory 34. tıdne v mezidobí se bere jinı hymnus");
 #if defined(EXPORT_HTML_SPECIALS)
 					Export("jinı hymnus pro 34. tıden mezidobí");
@@ -2876,15 +2916,25 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 				}
 				break;
 			case MODL_POSV_CITANIE:
-				strcat(path, _global_modl_posv_citanie.hymnus.file);
-				includeFile(type, paramname, path, _global_modl_posv_citanie.hymnus.anchor);
+				// 2011-11-22: odvetvenie pre CZ, ak je_34_ocr: len ak nemá vlastnı hymnus, tak vtedy sa hymnus pre 34. tıdeò OCR berie
+				if((_global_jazyk == JAZYK_CZ) && (je_34_ocr) && (!(su_inv_hymnus_kcit_kresp_benmagn_prosby_vlastne(type)))){
+					Log("pro modlitbu se ètením 34. tıdne v mezidobí se bere jinı hymnus");
+#if defined(EXPORT_HTML_SPECIALS)
+					Export("jinı hymnus pro 34. tıden mezidobí");
+#endif
+				}
+				else{
+					strcat(path, _global_modl_posv_citanie.hymnus.file);
+					includeFile(type, paramname, path, _global_modl_posv_citanie.hymnus.anchor);
+				}
 				break;
 			case MODL_KOMPLETORIUM:
 				strcat(path, _global_modl_kompletorium.hymnus.file);
 				includeFile(type, paramname, path, _global_modl_kompletorium.hymnus.anchor);
 				break;
-			case MODL_PRVE_VESPERY: /* 2011-03-22: pridané */
-				if((_global_jazyk == JAZYK_CZ) && (je_34_ocr)){
+			case MODL_PRVE_VESPERY:
+				// 2011-11-22: odvetvenie pre CZ, ak je_34_ocr: len ak nemá vlastnı hymnus, tak vtedy sa hymnus pre 34. tıdeò OCR berie
+				if((_global_jazyk == JAZYK_CZ) && (je_34_ocr) && (!(su_inv_hymnus_kcit_kresp_benmagn_prosby_vlastne(type)))){
 					Log("pro nešpory 34. tıdne v mezidobí se bere jinı hymnus");
 #if defined(EXPORT_HTML_SPECIALS)
 					Export("jinı hymnus pro 34. tıden mezidobí");
@@ -2895,12 +2945,12 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 					includeFile(type, paramname, path, _global_modl_prve_vespery.hymnus.anchor);
 				}
 				break;
-			case MODL_PRVE_KOMPLETORIUM: /* 2011-03-22: pridané */
+			case MODL_PRVE_KOMPLETORIUM:
 				strcat(path, _global_modl_prve_kompletorium.hymnus.file);
 				includeFile(type, paramname, path, _global_modl_prve_kompletorium.hymnus.anchor);
 				break;
 			default:
-				/* tieto modlitby nemaju hymnus */
+				// tieto modlitby nemaju hymnus
 				break;
 		}// switch
 	}/* PARAM_HYMNUS */
