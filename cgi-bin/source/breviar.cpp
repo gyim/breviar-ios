@@ -11901,9 +11901,7 @@ void _main_batch_mode(
 }// _main_batch_mode()
 
 //---------------------------------------------------------------------
-/* debugovacia funkcia vypisujuca systemove premenne WWW_ a query
- * v linuxe treba definovat extern char **environ;
- */
+// debugovacia funkcia vypisujuca systemove premenne WWW_ a query v linuxe treba definovat extern char **environ;
 
 #ifdef OS_linux
 extern char **environ;
@@ -11931,85 +11929,82 @@ short int getQueryTypeFrom_QS(char *qs){
 	Log("  qs == %s\n", qs);
 
 	if(strstr(qs, STR_PRM_DATUM) != NULL){
-		/* parameter STR_PRM_DATUM */
+		// parameter STR_PRM_DATUM
 		Log("getQueryTypeFrom_QS() -- end, returning PRM_DATUM\n");
 		return PRM_DATUM;
 	}
 	else if(strstr(qs, STR_PRM_DETAILY) != NULL){
-		/* parameter STR_PRM_DETAILY*/
+		// parameter STR_PRM_DETAILY
 		Log("getQueryTypeFrom_QS() -- end, returning PRM_DETAILY\n");
-		return PRM_DETAILY; /* pridane kvoli formularu 'Detaily...' */
+		return PRM_DETAILY; // pridane kvoli formularu 'Detaily...'
 	}
 	else if(strstr(qs, STR_PRM_CEZ_ROK) != NULL){
-		/* parameter STR_PRM_CEZ_ROK */
+		// parameter STR_PRM_CEZ_ROK
 		Log("getQueryTypeFrom_QS() -- end, returning PRM_CEZ_ROK\n");
 		return PRM_CEZ_ROK;
 	}
 	else if(strstr(qs, STR_PRM_LIT_OBD) != NULL){
-		/* parameter STR_PRM_LIT_OBD */
+		// parameter STR_PRM_LIT_OBD
 		Log("getQueryTypeFrom_QS() -- end, returning PRM_LIT_OBD\n");
 		return PRM_LIT_OBD;
 	}
 	else if(strstr(qs, STR_PRM_SVIATOK) != NULL){
-		/* parameter STR_PRM_SVIATOK*/
+		// parameter STR_PRM_SVIATOK
 		Log("getQueryTypeFrom_QS() -- end, returning PRM_SVIATOK\n");
 		return PRM_SVIATOK;
 	}
 	else if(strstr(qs, STR_PRM_ANALYZA_ROKU) != NULL){
-		/* parameter STR_PRM_ANALYZA_ROKU */
+		// parameter STR_PRM_ANALYZA_ROKU
 		Log("getQueryTypeFrom_QS() -- end, returning PRM_ANALYZA_ROKU\n");
 		return PRM_ANALYZA_ROKU;
 	}
 	else if(strstr(qs, STR_PRM_DNES) != NULL){
-		/* parameter STR_PRM_DNES */
+		// parameter STR_PRM_DNES
 		Log("getQueryTypeFrom_QS() -- end, returning PRM_DNES\n");
 		return PRM_DNES;
 	}
 	else if(strstr(qs, STR_PRM_MESIAC_ROKA) != NULL){
-		/* parameter STR_PRM_MESIAC_ROKA */
+		// parameter STR_PRM_MESIAC_ROKA
 		Log("getQueryTypeFrom_QS() -- end, returning PRM_MESIAC_ROKA\n");
 		return PRM_MESIAC_ROKA;
 	}
-	else if(strstr(qs, STR_PRM_TABULKA) != NULL){ /* pridane 15/03/2000A.D. */
-		/* parameter STR_PRM_TABULKA */
+	else if(strstr(qs, STR_PRM_TABULKA) != NULL){
+		// parameter STR_PRM_TABULKA
 		Log("getQueryTypeFrom_QS() -- end, returning PRM_TABULKA\n");
 		return PRM_TABULKA;
 	}
-	else if(strstr(qs, STR_PRM_BATCH_MODE) != NULL){ /* pridane 2003-07-04, batch mode */
-		/* parameter STR_PRM_BATCH_MODE */
+	else if(strstr(qs, STR_PRM_BATCH_MODE) != NULL){
+		// parameter STR_PRM_BATCH_MODE
 		Log("getQueryTypeFrom_QS() -- end, returning PRM_BATCH_MODE\n");
 		return PRM_BATCH_MODE;
 	}
 	else{
 		Log("getQueryTypeFrom_QS() -- end, returning PRM_UNKNOWN\n");
-		return PRM_UNKNOWN; /* argumenty neobsahuju STR_PRM_... */
+		return PRM_UNKNOWN; // argumenty neobsahuju STR_PRM_...
 	}
-}/* getQueryTypeFrom_QS() */
+}// getQueryTypeFrom_QS()
 
 //---------------------------------------------------------------------
 short int getQueryTypeFrom_WWW(void){
-	/* 2011-01-25: doplnenÈ PRM_LIT_OBD */
+	// 2011-01-25: doplnenÈ PRM_LIT_OBD
 	char *ptr;
 	short int ret;
 
 	Log("getQueryTypeFrom_WWW() -- begin\n");
-	ptr = getenv(ADD_WWW_PREFIX_(STR_QUERY_TYPE)); /* zistim, ci je to z formulara */
+	ptr = getenv(ADD_WWW_PREFIX_(STR_QUERY_TYPE)); // zistim, ci je to z formulara
 
 	if(ptr == NULL){
-		/* nie, dotaz nie je spusteny z formulara */
+		// nie, dotaz nie je spusteny z formulara
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_NONE\n");
-		ret = PRM_NONE; /* aj bez parametrov WWW_... */
+		ret = PRM_NONE; // aj bez parametrov WWW_...
 	}
-	/* v tomto pripade existuje premenna WWW_QUERY_TYPE */
+	// v tomto pripade existuje premenna WWW_QUERY_TYPE
 	else if(equals(ptr, STR_PRM_DATUM)){
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_DATUM\n");
 		ret = PRM_DATUM;
 	}
-	/* toto tu nemusi byt, lebo PRM_DETAILY sa pouziva len pre tlacidlo
-	 * 'Detaily...', aby sa dalo odlisit od uvodneho formulara -- kedysi sa
-	 * tam miesala modlitba (pole WWW_MODLITBA) z option 'PRM_CEZ_ROK',
-	 * ktora sa aplikovala aj na option 'PRM_DATUM'
-	 */
+	// toto tu nemusi byt, lebo PRM_DETAILY sa pouziva len pre tlacidlo 'Detaily...', aby sa dalo odlisit od uvodneho formulara 
+	// -- kedysi sa tam miesala modlitba (pole WWW_MODLITBA) z option 'PRM_CEZ_ROK', ktora sa aplikovala aj na option 'PRM_DATUM'
 	else if(equals(ptr, STR_PRM_DETAILY)){
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_DETAILY\n");
 		ret = PRM_DETAILY;
@@ -12038,52 +12033,41 @@ short int getQueryTypeFrom_WWW(void){
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_MESIAC_ROKA\n");
 		ret = PRM_MESIAC_ROKA;
 	}
-	else if(equals(ptr, STR_PRM_TABULKA)){ /* pridane 15/03/2000A.D. */
+	else if(equals(ptr, STR_PRM_TABULKA)){
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_TABULKA\n");
 		ret = PRM_TABULKA;
 	}
-	/* nie je tu PRM_BATCH_MODE, 
-	 * pretoze batch mode nie je urceny pre web,
-	 * 2003-07-04
-	 */
+	// nie je tu PRM_BATCH_MODE, pretoze batch mode nie je urceny pre web, 2003-07-04
 	else{
 		Log("getQueryTypeFrom_WWW() -- end, returning PRM_UNKNOWN\n");
 		ret = PRM_UNKNOWN; // failure
 	}
 	return ret;
-}/* getQueryTypeFrom_WWW(); */
+}// getQueryTypeFrom_WWW();
 
 //---------------------------------------------------------------------
-/* popis: naplni premenne pom_... hodnotami,
- *        ktore boli dodane ako sucast argumentu
- *        napriklad "-q PRM_DATUM -1 7 -2 5 -3 1976"
- *        vrati query_type == PRM_DATUM;
- *              pom_DEN == 7; pom_MESIAC == 5; pom_ROK == 1976
- * vracia: on success, returns SUCCESS
- *         on error,   returns FAILURE
- * popritom: nastavi do query_type to, co by malo byt po switchi -q
- */
+// popis: naplni premenne pom_... hodnotami, ktore boli dodane ako sucast argumentu
+//        napriklad "-q PRM_DATUM -1 7 -2 5 -3 1976" vrati query_type == PRM_DATUM; pom_DEN == 7; pom_MESIAC == 5; pom_ROK == 1976
+// vracia: on success, returns SUCCESS
+//         on error,   returns FAILURE
+// popritom: nastavi do query_type to, co by malo byt po switchi -q
 short int getArgv(int argc, char **argv){
 	short int c;
-	optind = 0; /* pokial tu toto nebolo, 
-				 * tak getopt sa neinicializovala pri dalsich volaniach
-				 * 10/04/2000A.D.
-				 */
-	/* short int digit_optind = 0; */
+	optind = 0; // pokial tu toto nebolo, tak getopt sa neinicializovala pri dalsich volaniach
+	// short int digit_optind = 0;
 	char *option_string;
-	/* short int this_option_optind; */
-	char pom_name_binary_executable[MAX_STR] = STR_EMPTY; /* 2009-08-02: doplnenÈ pre prilepenie ..\ pred n·zov name_binary_executable */
-	char pom_include_dir[MAX_STR] = STR_EMPTY; /* 2009-08-02: doplnenÈ pre prilepenie ..\ pred n·zov include_dir */
+	// short int this_option_optind;
+	char pom_name_binary_executable[MAX_STR] = STR_EMPTY; // 2009-08-02: doplnenÈ pre prilepenie ..\ pred n·zov name_binary_executable
+	char pom_include_dir[MAX_STR] = STR_EMPTY; // 2009-08-02: doplnenÈ pre prilepenie ..\ pred n·zov include_dir
 
 	Log("allocating memory for option_string...\n");
-	/* allocate memory for string */
+	// allocate memory for string
 	if((option_string = (char *) malloc(MAX_STR)) == NULL){
 		Log("Not enough memory to allocate buffer, so returning FAILURE\n");
 		//printf("Not enough memory to allocate buffer (getArgv(), char *option_string)\n");
-		/* exit(1); -- terminate program if out of memory */
-		return FAILURE; /* 13/03/2000A.D. */
+		// exit(1); -- terminate program if out of memory
+		return FAILURE;
 	}
-	/* 07/04/2000A.D. -- chybala dealokacia! */
 
 	/* option_string obsahuje options (case sensitive) */
 	/* 24/02/2000A.D.: odstranil som `e' switch -- sposoboval problemy;
@@ -12121,120 +12105,107 @@ short int getArgv(int argc, char **argv){
 	 *
 	 */
 	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::0::1::2::3::4::a::h::e::f::g::l::i::\?::b::n::o::k::j::c::u::M::I::H::F::S::", MAX_STR);
-	/* tie options, ktore maju za sebou : maju povinny argument;
-	 *	ak maju :: tak maju volitelny */
+	// tie options, ktore maju za sebou : maju povinny argument; ak maju :: tak maju volitelny
 
 	Log("-- getArgv(): begin\n");
 	DEBUG_GET_ARGV("argc == %d\n", argc);
 
 	if(argc == 1){
-		/* bud nie su zadane ziadne hodnoty alebo cerpam z premennych WWW_ */
-		/* sem sa to nemalo dostat, pretoze
-		 * najprv sme pouzili get_query_type() */
+		// bud nie su zadane ziadne hodnoty alebo cerpam z premennych WWW_
+		// sem sa to nemalo dostat, pretoze najprv sme pouzili get_query_type()
 
-		/* keby sa to sem vsak predsalen dostalo, dame sem nasledujucu pasaz,
-		 * aby sme mohli exportovat, pretoze pred pouzitim getArgv nie je
-		 * otvoreny fajl FILE_EXPORT
-		 */
+		// keby sa to sem vsak predsalen dostalo, dame sem nasledujucu pasaz, aby sme mohli exportovat, pretoze pred pouzitim getArgv nie je otvoreny fajl FILE_EXPORT
 		hlavicka((char *)html_title[_global_jazyk]);
 		Export("ObsluûnÈmu programu neboli zadanÈ ûiadne argumenty.\n");
 		Export("<p>getArgv();\n");
 		ALERT;
 		DEBUG_GET_ARGV("Nezadane ziadne argumenty (argc == 1).\n");
-		return FAILURE; /* nie su argumenty */
+		return FAILURE; // nie su argumenty
 	}
 	else{
 		Log("option_string == %s\n", option_string);
 		for(c = 0; c < argc; c++)
 			Log("argv[%d] == %s\n", c, argv[c]);
-		/* hodnoty su v dialogovom riadku */
-		/* zistujeme ich cez standardne mygetopt.c */
+		// hodnoty su v dialogovom riadku
+		// zistujeme ich cez standardne mygetopt.c
 		while(1){
-			/* this_option_optind = optind ? optind : 1; */
+			// this_option_optind = optind ? optind : 1;
 			c = getopt(argc, argv, option_string);
-			if (c == -1) /* uz nie je option, vyskoc z while(1) */
+			if (c == -1) // uz nie je option, vyskoc z while(1)
 				break;
-			switch (c){ /* podla option urob nieco */
-				case 'c': /* parameter pridan˝ 2008-08-08, ovplyvÚuje pouûitÈ css-ko; bude v _global_css */
+			switch (c){ // podla option urob nieco
+				case 'c': // parameter pridan˝ 2008-08-08, ovplyvÚuje pouûitÈ css-ko; bude v _global_css
 					if(optarg != NULL){
 						mystrcpy(pom_CSS, optarg, SMALL);
 					}
 					Log("option %c with value `%s' -- `%s' used for css\n", c, optarg, optarg); break;
 
-				case 'j': /* 2006-07-11: PridanÈ kvÙli jazykov˝m mut·ci·m */
+				case 'j': // 2006-07-11: PridanÈ kvÙli jazykov˝m mut·ci·m
 					if(optarg != NULL){
 						mystrcpy(pom_JAZYK, optarg, SMALL);
 					}
 					Log("option %c with value `%s' -- `%s' used for language mutation\n", c, optarg, optarg); break;
-				case 'k': /* 2010-08-04: PridanÈ kvÙli jazykov˝m mut·ci·m -- kalend·r (rehoæn˝, lok·lny) */
+				case 'k': // 2010-08-04: PridanÈ kvÙli jazykov˝m mut·ci·m -- kalend·r (rehoæn˝, lok·lny)
 					if(optarg != NULL){
 						mystrcpy(pom_KALENDAR, optarg, SMALL);
 					}
 					Log("option %c with value `%s' -- `%s' used for calendar mutation\n", c, optarg, optarg); break;
-				case 'o': /* pridane 2004-03-16, name_batch_html_file; 2010-08-04: upravenÈ 'k' -> 'o' */
+				case 'o': // pridane 2004-03-16, name_batch_html_file; 2010-08-04: upravenÈ 'k' -> 'o'
 					if(optarg != NULL){
 						mystrcpy(name_batch_html_file, optarg, SMALL);
 					}
 					Log("option %c with value `%s' -- batch file HTML name `%s' used for batch mode\n", c, optarg, optarg); break;
-				case 'b': /* pridane 2003-07-04, name_batch_file */
+				case 'b': // pridane 2003-07-04, name_batch_file
 					if(optarg != NULL){
 						mystrcpy(name_batch_file, optarg, SMALL);
 					}
 					Log("option %c with value `%s' -- batch file name `%s' used for batch mode\n", c, optarg, optarg); break;
-				case 'n': /* pridane 2003-07-04, name_binary_executable */
+				case 'n': // pridane 2003-07-04, name_binary_executable
 					if(optarg != NULL){
 						mystrcpy(name_binary_executable, optarg, SMALL);
 					}
 					Log("option %c with value `%s' -- binary executable name `%s' used for batch mode\n", c, optarg, optarg); break;
-				case 'i': /* pridane 05/06/2000A.D., include_dir */
+				case 'i': // pridane 05/06/2000A.D., include_dir
 					if(optarg != NULL){
 						mystrcpy(include_dir, optarg, SMALL);
 					}
 					Log("option %c with value `%s' -- including files from `%s'\n", c, optarg, optarg /* 2004-03-17 zapoznamkovane FILE_PATH */); break;
-				case 'f': /* tabulka - rok from; pre batch mode je to DEN DO */
+				case 'f': // tabulka - rok from; pre batch mode je to DEN DO
 					if(optarg != NULL){
 						mystrcpy(pom_ROK_FROM, optarg, SMALL);
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
-				case 'F': /* font, pridanÈ 2011-05-06 */
+				case 'F': // font, pridanÈ 2011-05-06
 					if(optarg != NULL){
 						mystrcpy(pom_FONT, optarg, SMALL);
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
-				case 'S': /* font size, pridanÈ 2011-05-13 */
+				case 'S': // font size, pridanÈ 2011-05-13
 					if(optarg != NULL){
 						mystrcpy(pom_FONT_SIZE, optarg, SMALL);
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
-				case 'g': /* tabulka - rok to; pre batch mode je to MESIAC DO */
+				case 'g': // tabulka - rok to; pre batch mode je to MESIAC DO
 					if(optarg != NULL){
 						mystrcpy(pom_ROK_TO, optarg, SMALL);
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
-				case 'l': /* tabulka - [hyper]linky */
+				case 'l': // tabulka - [hyper]linky
 					if(optarg != NULL){
 						mystrcpy(pom_LINKY, optarg, SMALL);
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
-				case 'e': /* export filename */
+				case 'e': // export filename
 					if(optarg != NULL){
 						mystrcpy(file_export, optarg, SMALL);
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
-			/* zmenene: *
-			 * povodne tu boli pri kazdom parametri aj '1' -- '5';
-			 * teraz: vyhodene case '1' -- '5',
-			 * ktorezto '1' -- '4' su pre options, vid dalej */
-				case 's': /* debuggovanie, query string */
+			// zmenene: povodne tu boli pri kazdom parametri aj '1' -- '5'; teraz: vyhodene case '1' -- '5', ktorezto '1' -- '4' su pre options, vid dalej
+				case 's': // debuggovanie, query string
 					if(optarg != NULL){
 						Log("--copying `%s' to query_string...", optarg);
 						mystrcpy(query_string, optarg, MAX_QUERY_STR);
-						/* to mozeme urobit;
-						 * predtym, ked sme este nealokovali pre query_string
-						 * miesto, bolo by lepsie urobit nejaku lokalnu premennu,
-						 * na ktoru by potom query_string ukazoval
-						 * 25/02/2000A.D.
-						 */
+						// to mozeme urobit; predtym, ked sme este nealokovali pre query_string miesto, bolo by lepsie urobit nejaku lokalnu premennu, na ktoru by potom query_string ukazoval
 						mystrcpy(pom_QUERY_TYPE, STR_PRM_SIMULACIA_QS, MAX_POM_QUERY_TYPE);
 						query_type = PRM_SIMULACIA_QS;
 					}
@@ -12245,12 +12216,12 @@ short int getArgv(int argc, char **argv){
 					}
 					Log("option %c with value `%s' -- den\n", c, optarg); break;
 				case 'm': // mesiac
-				case 't': /* TYZDEN */
+				case 't': // TYZDEN
 					if(optarg != NULL){
 						mystrcpy(pom_MESIAC, optarg, SMALL);
 					}
 					Log("option %c with value `%s' -- mesiac/tyzden\n", c, optarg); break;
-				case 'r': /* ROK, ANALYZA_ROKU */
+				case 'r': // ROK, ANALYZA_ROKU
 					if(optarg != NULL){
 						mystrcpy(pom_ROK, optarg, SMALL);
 					}
@@ -12260,13 +12231,13 @@ short int getArgv(int argc, char **argv){
 						mystrcpy(pom_MODLITBA, optarg, SMALL);
 					}
 					Log("option %c with value `%s' -- modlitba\n", c, optarg); break;
-				case 'x': /* DALSI_SVATY */
+				case 'x': // DALSI_SVATY
 					if(optarg != NULL){
 						mystrcpy(pom_DALSI_SVATY, optarg, SMALL);
 					}
 					Log("option %c with value `%s' -- poradie svateho\n", c, optarg); break;
 
-				/* nasledovne case'y sa tykaju MODL_OPT... */
+				// nasledovne case'y sa tykaju MODL_OPT...
 				case '0':
 					if(optarg != NULL){
 						mystrcpy(pom_MODL_OPT[OPT_0_SPECIALNE], optarg, SMALL);
@@ -12293,23 +12264,23 @@ short int getArgv(int argc, char **argv){
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
 
-				/* append pridany 2003-07-08, bude v _global_opt_append */
-				case 'a': /* MODL_OPT_APPEND */
+				// append pridany 2003-07-08, bude v _global_opt_append
+				case 'a': // MODL_OPT_APPEND
 					if(optarg != NULL){
 						mystrcpy(pom_MODL_OPT_APPEND, optarg, SMALL);
 					}
-					/* option a (append), pridana 2003-07-08 */
+					// option a (append), pridana 2003-07-08
 					if(equals(pom_MODL_OPT_APPEND, STR_ANO) || equals(pom_MODL_OPT_APPEND, "1")){
 						_global_opt_append = ANO;
 					}
 					else if(equals(pom_MODL_OPT_APPEND, STR_NIE) || equals(pom_MODL_OPT_APPEND, "0")){
 						_global_opt_append = NIE;
-					}/* inak ostane _global_opt_APPEND default */
+					}// inak ostane _global_opt_APPEND default
 					Log("opt_append == `%s' (%d)\n", pom_MODL_OPT_APPEND, _global_opt_append);
 					Log("option %c with value `%s'\n", c, optarg); break;
 
-				/* 2008-11-29: pridan˝ parameter `u' (d·tUm) spÙsob zapisovania d·tumu pre s˙bory v batch mÛde */
-				case 'u': /* MODL_OPT_APPEND */
+				// 2008-11-29: pridan˝ parameter `u' (d·tUm) spÙsob zapisovania d·tumu pre s˙bory v batch mÛde
+				case 'u': // MODL_OPT_APPEND
 					if(optarg != NULL){
 						mystrcpy(pom_MODL_OPT_DATE_FORMAT, optarg, SMALL);
 					}
@@ -12318,24 +12289,24 @@ short int getArgv(int argc, char **argv){
 					}
 					else if(equals(pom_MODL_OPT_DATE_FORMAT, STR_SIMPLE) || equals(pom_MODL_OPT_DATE_FORMAT, "0")){
 						_global_opt_export_date_format = EXPORT_DATE_SIMPLE;
-					}/* inak ostane _global_opt_export_date_format default */
+					}// inak ostane _global_opt_export_date_format default
 					Log("opt_append == `%s' (%d)\n", pom_MODL_OPT_DATE_FORMAT, _global_opt_export_date_format);
 					Log("option %c with value `%s'\n", c, optarg); break;
 
-				case 'q': /* QUERY_TYPE */
+				case 'q': // QUERY_TYPE
 					if(optarg != NULL){
 						mystrcpy(pom_QUERY_TYPE, optarg, MAX_POM_QUERY_TYPE);
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
 
-				case 'M': /* typ exportu pre batch mÛd; 2009-08-02 */
+				case 'M': // typ exportu pre batch mÛd; 2009-08-02
 					if(optarg != NULL){
 						mystrcpy(pom_EXPORT_MONTHLY, optarg, SMALL); // premenn· pom_EXPORT_MONTHLY sa parsuje priamo v _main()
 					}
 					_global_opt_batch_monthly = ANO;
 					Log("option %c with value `%s'\n", c, optarg); break;
 
-				case 'I': /* odkaz "^ hore" / index.htm (pre batch mÛd); 2009-08-12 */
+				case 'I': // odkaz "^ hore" / index.htm (pre batch mÛd); 2009-08-12
 					if(optarg != NULL){
 						mystrcpy(_global_export_navig_hore, optarg, SMALL);
 					}
@@ -12344,15 +12315,14 @@ short int getArgv(int argc, char **argv){
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
 
-				case '?': /* pridany 05/06/2000A.D., oprava 07/09/2001A.D. */
+				case '?':
 				case 'h':
-					/* opravene 07/09/2001A.D. - pridane niektore switche */
-					/* 2003-06-26 -- pridane -s (query string), -q psqs */
+					// 2003-06-26 -- pridane -s (query string), -q psqs
 					printf("\n");
 					printf("lh - command-line verzia on-line breviara (http://www.breviar.sk)\n");
-					/* pridane 2003-07-17 */
+					// pridane 2003-07-17
 					printf("\tProgram vytvara stranky (HTML vystup) pre Liturgiu hodin.\n");
-					/* build pridany 2003-07-04 */
+					// build pridany 2003-07-04
 					printf("\tBuild: %s\n", BUILD_DATE);
 					printf("\t(c)1999-2011 Juraj VidÈky <videky@breviar.sk>\n");
 					printf("\n");
@@ -12363,15 +12333,14 @@ short int getArgv(int argc, char **argv){
 						STR_PRM_DNES, STR_PRM_DATUM, STR_PRM_DETAILY, STR_PRM_TABULKA, STR_PRM_SIMULACIA_QS, STR_PRM_BATCH_MODE);
 					printf("\ts  query string (tak ako je na webe)\n");
 					printf("\td  den (%s|%s) (1--31, po--ne)\n", STR_DEN, STR_DEN_V_TYZDNI);
-					/* printf("\ts  SVIATOK \n"); */
+					// printf("\ts  SVIATOK \n");
 					printf("\tm  mesiac (%s) (1--12, jan--dec)\n", STR_MESIAC);
 					printf("\tt  tyzden zaltara (1--4) \n");
 					printf("\tr  rok (napr. 2000)\n");
 					printf("\tp  modlitba (%s): %s, %s, %s, %s, %s, %s, %s, %s, %s...) \n", 
 						STR_MODLITBA, STR_MODL_RANNE_CHVALY, STR_MODL_VESPERY, STR_MODL_POSV_CITANIE, STR_MODL_PREDPOLUDNIM, STR_MODL_NAPOLUDNIE, STR_MODL_POPOLUDNI, STR_MODL_DETAILY, STR_MODL_INVITATORIUM, STR_MODL_KOMPLETORIUM);
-					printf("\t\t resp. rok do pre davkove spracovanie\n"); /* pridane 2003-07-07 */
+					printf("\t\t resp. rok do pre davkove spracovanie\n");
 					printf("\tx  dalsi svaty (%s): 1--3 resp. 4 pre lubovolnu spomienku PM v sobotu\n", STR_DALSI_SVATY);
-					/* 2004-03-11, zlepseny popis; 2007-06-01: opt_1 a opt_2 pri rozbore mesiaca zmenene na opt6 a opt7 */
 					printf("\t0  specialne casti modlitby (verse, referencie)\n");
 					printf("\t1  prepinace pre zobrazovanie casti modlitby\n");
 					printf("\t2  prepinace pre html export\n");
@@ -12412,13 +12381,11 @@ short int getArgv(int argc, char **argv){
 					Log("option %c (without value)\n", c, optarg);
 					break;
 				default:
-				/* znamena option uvedenu v optionstringu, pre ktoru
-				 * nebolo definovane case vyssie
-				 */
+				// znamena option uvedenu v optionstringu, pre ktoru nebolo definovane case vyssie
 					Log("?? getopt returned character `%c' ??\n", c);
 					break;
-			}/*switch*/
-		}/*while*/
+			}// switch
+		}// while
 		if(optind < argc){
 			Log("non-option ARGV-elements: ");
 			while(optind < argc)
@@ -12426,10 +12393,9 @@ short int getArgv(int argc, char **argv){
 			Log("\n");
 		}
 
-		/* dokoncili sme parsovanie options (switchov apod),
-		 * a teraz rozoberieme, co sme zistili */
+		// dokoncili sme parsovanie options (switchov apod), a teraz rozoberieme, co sme zistili
 
-		/* najprv nakopirujeme chybovu hlasku do bad_param_str */
+		// najprv nakopirujeme chybovu hlasku do bad_param_str
 		if(equals(pom_QUERY_TYPE, STR_EMPTY)){
 			mystrcpy(bad_param_str, "<"HTML_SPAN_BOLD">nijak˝ parameter PRM_...</span>", MAX_STR);
 		}
@@ -12437,29 +12403,25 @@ short int getArgv(int argc, char **argv){
 			mystrcpy(bad_param_str, pom_QUERY_TYPE, MAX_STR);
 			strcat(bad_param_str, " (switch <"HTML_SPAN_BOLD">-q</span>)");
 		}
-		/* a teraz vydolujeme typ dotazu */
-		/* vynecham to v pripade, ze pom_QUERY_TYPE == STR_PRM_SIMULACIA_QS,
-		 * t.j. query_type == PRM_SIMULACIA_QS
-		 */
-		/* 24/02/2000A.D. */
+		// a teraz vydolujeme typ dotazu
+		// vynecham to v pripade, ze pom_QUERY_TYPE == STR_PRM_SIMULACIA_QS, t.j. query_type == PRM_SIMULACIA_QS
 		if(query_type != PRM_SIMULACIA_QS){
 			Log("query_type != PRM_SIMULACIA_QS, so running getQueryTypeFrom_QS(%s)...\n", pom_QUERY_TYPE);
 			query_type = getQueryTypeFrom_QS(pom_QUERY_TYPE);
 		}
-		/* 2009-08-02: pri exportovanÌ do adres·rov po mesiacoch je potrebnÈ upraviù name_binary_executable resp. include_dir 
-		 * 2009-08-03: ale len v batch mÛde (teda nie pre jednotliv˙ generovan˙ modlitbu) -- preto presunutÈ aû sem, za zistenie query_type
-		 */
+		// 2009-08-02: pri exportovanÌ do adres·rov po mesiacoch je potrebnÈ upraviù name_binary_executable resp. include_dir 
+		// 2009-08-03: ale len v batch mÛde (teda nie pre jednotliv˙ generovan˙ modlitbu) -- preto presunutÈ aû sem, za zistenie query_type
 		if(query_type == PRM_BATCH_MODE && _global_opt_batch_monthly == ANO){
-			/* musÌme upraviù n·zov executable, lebo budeme meniù adres·r v _main_batch_mode() */
+			// musÌme upraviù n·zov executable, lebo budeme meniù adres·r v _main_batch_mode()
 			mystrcpy(pom_name_binary_executable, "..\\", MAX_STR);
 			strcat(pom_name_binary_executable, name_binary_executable);
 			mystrcpy(name_binary_executable, pom_name_binary_executable, MAX_STR);
-			/* musÌme upraviù n·zov adres·ra s include, lebo budeme meniù adres·r v _main_batch_mode() */
+			// musÌme upraviù n·zov adres·ra s include, lebo budeme meniù adres·r v _main_batch_mode()
 			mystrcpy(pom_include_dir, "..\\", MAX_STR);
 			strcat(pom_include_dir, include_dir);
 			mystrcpy(include_dir, pom_include_dir, MAX_STR);
-		}
-	}
+		}// len pre batch mÛd, mesaËne
+	}// else vetva podmienky if(argc == 1)
 
 	Log("deallocating memory for option_string...\n");
 	free(option_string);
@@ -12468,7 +12430,7 @@ short int getArgv(int argc, char **argv){
 		query_type, query_string);
 
 	return SUCCESS;
-}/* getArgv(); */
+}// getArgv();
 
 //---------------------------------------------------------------------
 /* popis: naplni premenne pom_... hodnotami z environmentu, t.j.
