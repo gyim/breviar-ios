@@ -8097,7 +8097,8 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 	char _local_export_navig_hore[SMALL] = STR_EMPTY;
 	short int _global_opt_casti_modlitby_orig; // parameter o1 (_global_opt 1) pre modlitbu cez deÚ (doplnkov· psalmÛdia)
 	char export_doplnkova_psalmodia[SMALL] = STR_EMPTY; // reùazec pre alternatÌvny s˙bor modlitby cez deÚ obsahuj˙ci doplnkov˙ psalmÛdiu
-	char export_kalendar[SMALL] = STR_EMPTY; // reùazec pre kalend·r
+	char pom[SMALL] = STR_EMPTY; // pomocn˝ reùazec (priliepanie parametrov do export_dalsie_parametre)
+	char export_dalsie_parametre[SMALL] = STR_EMPTY; // reùazec pre kalend·r (export_kalendar); 2011-11-30: pridan˝ do toho istÈho reùazca aj font
 
 	_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY]; // backup pÙvodnej hodnoty
 	// 2011-04-12: nastavenie parametra o1 pre beûn˙ a doplnkov˙ psalmÛdiu; parameter o1 oËistÌme a _global_opt_casti_modlitby_orig bude obsahovaù aj bit pre doplnkov˙ psalmÛdiu
@@ -8107,17 +8108,41 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 		_global_opt[OPT_1_CASTI_MODLITBY] -= BIT_OPT_1_MCD_ZALMY_INE;
 		_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY] + BIT_OPT_1_MCD_ZALMY_INE;
 	}
-	// 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
+	// 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r; 2011-11-30: pridan˝ do toho istÈho reùazca aj font
 	// 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
+	strcpy(export_dalsie_parametre, STR_EMPTY);
 	// 2011-03-18: pouûitÈ z in˝ch miest aj v execute_batch_command() -- exportovanie parametra k (_global_kalendar)
 	if(PODMIENKA_EXPORTOVAT_KALENDAR){
-		sprintf(export_kalendar, " -k%s", skratka_kalendara[_global_kalendar]);
+		sprintf(pom, " -k%s", skratka_kalendara[_global_kalendar]);
 	}
 	else{
 		Log("\tNetreba prilepiù kalend·r (jazyk == %s, kalend·r == %s)\n", skratka_jazyka[_global_jazyk], skratka_kalendara[_global_kalendar]);
-		strcpy(export_kalendar, STR_EMPTY);
+		strcpy(pom, STR_EMPTY);
 	}
-	Log("Exportujem kalend·r: `%s'\n", export_kalendar);
+	strcat(export_dalsie_parametre, pom);
+	Log("Exportujem kalend·r: `%s'\n", export_dalsie_parametre);
+
+	// 2011-11-30: exportovanie parametra F (_global_font)
+	if(PODMIENKA_EXPORTOVAT_FONT){
+		sprintf(pom, " -F%s", nazov_fontu[_global_font]);
+	}
+	else{
+		Log("\tNetreba prilepiù font (kalend·r == %s)\n", nazov_fontu[_global_font]);
+		strcpy(pom, STR_EMPTY);
+	}
+	strcat(export_dalsie_parametre, pom);
+	Log("Exportujem font: `%s'\n", export_dalsie_parametre);
+
+	// 2011-11-30: exportovanie parametra S (_global_font_size)
+	if(PODMIENKA_EXPORTOVAT_FONTSIZE){
+		sprintf(pom, " -S%s", nazov_font_size_css[_global_font_size]);
+	}
+	else{
+		Log("\tNetreba prilepiù font size (kalend·r == %s)\n", nazov_font_size_css[_global_font_size]);
+		strcpy(pom, STR_EMPTY);
+	}
+	strcat(export_dalsie_parametre, pom);
+	Log("Exportujem font size: `%s'\n", export_dalsie_parametre);
 
 	// 2009-08-03: exportovanie do adres·rov po mesiacoch
 	if(_global_opt_batch_monthly == ANO){
@@ -8169,7 +8194,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 			if(((_global_opt_casti_modlitby_orig & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
 				fprintf(batch_file, "%s%d%cd.htm -0%d -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], 
 					_global_opt[OPT_0_SPECIALNE], _global_opt_casti_modlitby_orig /* _global_opt[OPT_1_CASTI_MODLITBY] */, _global_opt[OPT_2_HTML_EXPORT], _global_opt[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_4_OFFLINE_EXPORT], 
-					a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); // modlitba `i'
+					a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_dalsie_parametre); // modlitba `i'
 				if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
 					sprintf(export_doplnkova_psalmodia, " (<a href=\""FILENAME_EXPORT_DATE_SIMPLE"_%d%cd.htm\">alt</a>)", _global_den.rok % 100, _global_den.mesiac, _global_den.den, a, char_modlitby[i]);
 				else // EXPORT_DATE_FULL
@@ -8180,7 +8205,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 			}
 			fprintf(batch_file, "%s%d%c.htm -0%d -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], 
 				_global_opt[OPT_0_SPECIALNE], _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[OPT_2_HTML_EXPORT], _global_opt[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_4_OFFLINE_EXPORT], 
-				a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); // modlitba `i'
+				a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_dalsie_parametre); // modlitba `i'
 			if(export_monthly_druh == 1){
 				if(a > 0)
 					sprintf(poradie_svateho, "/%d", a);
@@ -8202,7 +8227,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 				if(_global_opt_append == YES){
 					fprintf(batch_file, "%s -0%d -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s\n", batch_command, 
 						_global_opt[OPT_0_SPECIALNE], _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[OPT_2_HTML_EXPORT], _global_opt[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_4_OFFLINE_EXPORT], 
-						a, str_modlitby[i], skratka_jazyka[_global_jazyk], export_kalendar); // modlitba `i'
+						a, str_modlitby[i], skratka_jazyka[_global_jazyk], export_dalsie_parametre); // modlitba `i'
 				}// endif _global_opt_append == YES
 				else{
 					// 2011-03-14: nastavenie parametra o5 (_global_opt 5) pre modlitbu cez deÚ (beûn· alebo doplnkov· psalmÛdia) 
@@ -8212,7 +8237,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 					if(((_global_opt_casti_modlitby_orig & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
 						fprintf(batch_file, "%s%d%cd.htm -0%d -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], 
 							_global_opt[OPT_0_SPECIALNE], _global_opt_casti_modlitby_orig /* _global_opt[OPT_1_CASTI_MODLITBY] */, _global_opt[OPT_2_HTML_EXPORT], _global_opt[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_4_OFFLINE_EXPORT], 
-							a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); // modlitba `i'
+							a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_dalsie_parametre); // modlitba `i'
 						if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
 							sprintf(export_doplnkova_psalmodia, " (<a href=\""FILENAME_EXPORT_DATE_SIMPLE"_%d%cd.htm\">alt</a>)", _global_den.rok % 100, _global_den.mesiac, _global_den.den, a, char_modlitby[i]);
 						else // EXPORT_DATE_FULL
@@ -8224,7 +8249,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int m
 					// 2009-08-03: doplnen· moûnosù exportovaù parameter -M ak exportuje batch mÛd pre jednotlivÈ mesiace kvÙli hlaviËke jednotlivej modlitby
 					fprintf(batch_file, "%s%d%c.htm -0%d -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], 
 						_global_opt[OPT_0_SPECIALNE], _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[OPT_2_HTML_EXPORT], _global_opt[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_4_OFFLINE_EXPORT], 
-						a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_kalendar); // modlitba `i'
+						a, str_modlitby[i], skratka_jazyka[_global_jazyk], parameter_M, export_dalsie_parametre); // modlitba `i'
 					// fprintf(batch_html_file, "\t<a href=\"%.4d-%.2d-%.2d_%d%c.htm\">%s</a>, \n", _global_den.rok, _global_den.mesiac, _global_den.den, a, char_modlitby[i], nazov_modlitby(i));
 					// 2008-11-29: rozliËn˝ export
 					if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
@@ -8380,20 +8405,45 @@ void _export_rozbor_dna_mesiaca_batch(short int d, short int m, short int r){
 	char str_subor[SMALL] = STR_EMPTY;
 	char str_month[SMALL] = STR_EMPTY;
 	char _local_export_navig_hore[SMALL] = STR_EMPTY;
-	char export_kalendar[SMALL] = STR_EMPTY; // reùazec pre kalend·r
+	char pom[SMALL] = STR_EMPTY; // pomocn˝ reùazec (priliepanie parametrov do export_dalsie_parametre)
+	char export_dalsie_parametre[SMALL] = STR_EMPTY; // reùazec pre kalend·r (export_kalendar); 2011-11-30: pridan˝ do toho istÈho reùazca aj font
 
 	// 2010-08-04: pridanÈ odovzdanie parametra pre kalend·r 
 	// 2010-09-14: podmienka opraven·; ak nie je kalend·r urËen˝ resp. je vöeobecn˝ pre dan˝ jazyk, nie je potrebnÈ ho exportovaù
 	// 2011-03-18: pouûitÈ z in˝ch miest aj v _export_rozbor_dna_mesiaca_batch() -- exportovanie parametra k (_global_kalendar)
+	strcpy(export_dalsie_parametre, STR_EMPTY);
+	// 2011-03-18: pouûitÈ z in˝ch miest aj v execute_batch_command() -- exportovanie parametra k (_global_kalendar)
 	if(PODMIENKA_EXPORTOVAT_KALENDAR){
-		sprintf(export_kalendar, " -k%s", skratka_kalendara[_global_kalendar]);
+		sprintf(pom, " -k%s", skratka_kalendara[_global_kalendar]);
 	}
 	else{
 		Log("\tNetreba prilepiù kalend·r (jazyk == %s, kalend·r == %s)\n", skratka_jazyka[_global_jazyk], skratka_kalendara[_global_kalendar]);
-		strcpy(export_kalendar, STR_EMPTY);
+		strcpy(pom, STR_EMPTY);
 	}
-	Log("Exportujem kalend·r: `%s'\n", export_kalendar);
+	strcat(export_dalsie_parametre, pom);
+	Log("Exportujem kalend·r: `%s'\n", export_dalsie_parametre);
 
+	// 2011-11-30: exportovanie parametra F (_global_font)
+	if(PODMIENKA_EXPORTOVAT_FONT){
+		sprintf(pom, " -F%s", nazov_fontu[_global_font]);
+	}
+	else{
+		Log("\tNetreba prilepiù font (kalend·r == %s)\n", nazov_fontu[_global_font]);
+		strcpy(pom, STR_EMPTY);
+	}
+	strcat(export_dalsie_parametre, pom);
+	Log("Exportujem font: `%s'\n", export_dalsie_parametre);
+
+	// 2011-11-30: exportovanie parametra S (_global_font_size)
+	if(PODMIENKA_EXPORTOVAT_FONTSIZE){
+		sprintf(pom, " -S%s", nazov_font_size_css[_global_font_size]);
+	}
+	else{
+		Log("\tNetreba prilepiù font size (kalend·r == %s)\n", nazov_font_size_css[_global_font_size]);
+		strcpy(pom, STR_EMPTY);
+	}
+	strcat(export_dalsie_parametre, pom);
+	Log("Exportujem font size: `%s'\n", export_dalsie_parametre);
 
 	// reùazec pre deÚ a pre n·zov s˙boru
 	if(d != VSETKY_DNI){
@@ -8448,7 +8498,7 @@ void _export_rozbor_dna_mesiaca_batch(short int d, short int m, short int r){
 	// 2011-04-13: doplnenÈ exportovanie ch˝baj˙cich option 0 aû 4
 	fprintf(batch_file, "%s -0%d -1%d -2%d -3%d -4%d -j%s%s%s\n", batch_command, 
 		_global_opt[OPT_0_SPECIALNE], _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[OPT_2_HTML_EXPORT], _global_opt[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_4_OFFLINE_EXPORT], 
-		skratka_jazyka[_global_jazyk], parameter_M, export_kalendar);
+		skratka_jazyka[_global_jazyk], parameter_M, export_dalsie_parametre);
 	Log("_export_rozbor_dna_mesiaca_batch() -- koniec\n");
 }// _export_rozbor_dna_mesiaca_batch()
 
@@ -14371,17 +14421,16 @@ _main_SIMULACIA_QS:
 	if(query_type != PRM_UNKNOWN){
 
 		if(ret == SUCCESS){
-			/* alokovanie pamate som sem premiestnil 24/02/2000A.D. */
+			// alokovanie pamate som sem premiestnil 24/02/2000A.D.
 			_main_LOG_to_Export("now allocating memory...\n");
 			if(_allocate_global_var() == FAILURE)
 				goto _main_end;
-			/* inicializacia pridana do _allocate_global_var 2003-08-13 */
+			// inicializacia pridana do _allocate_global_var 2003-08-13
 
 			LOG_ciara;
 
-			/* 2006-07-12: pridanÈ parsovanie jazyka kvÙli jazykov˝m mut·ci·m 
-			 * 2009-08-05: predsunutÈ vyööie (aj tu sme to pre istotu ponechali)
-			 */
+			// 2006-07-12: pridanÈ parsovanie jazyka kvÙli jazykov˝m mut·ci·m 
+			// 2009-08-05: predsunutÈ vyööie (aj tu sme to pre istotu ponechali)
 			_main_LOG_to_Export("zisùujem jazyk...\n");
 			_global_jazyk = atojazyk(pom_JAZYK);
 			if(_global_jazyk == JAZYK_UNDEF){
@@ -14393,7 +14442,7 @@ _main_SIMULACIA_QS:
 			_main_LOG_to_Export("sp˙öùam setConfigDefaults()...\n");
 			setConfigDefaults(_global_jazyk); // 2011-04-13: doplnenÈ
 
-			/* 2010-08-04: pridanÈ parsovanie jazyka kvÙli jazykov˝m mut·ci·m -- kalend·r, napr. rehoæn˝ (danÈ aj vyööie, ako jazyk) */
+			// 2010-08-04: pridanÈ parsovanie jazyka kvÙli jazykov˝m mut·ci·m -- kalend·r, napr. rehoæn˝ (danÈ aj vyööie, ako jazyk)
 			_main_LOG_to_Export("zisùujem kalend·r (pom_KALENDAR == %s)...\n", pom_KALENDAR);
 			_global_kalendar = atokalendar(pom_KALENDAR);
 			if(_global_kalendar == KALENDAR_NEURCENY){
@@ -14402,7 +14451,7 @@ _main_SIMULACIA_QS:
 			}
 			_main_LOG_to_Export("...kalend·r (%s) = %i, teda %s (%s)\n", pom_KALENDAR, _global_kalendar, nazov_kalendara[_global_kalendar], skratka_kalendara[_global_kalendar]);
 
-			/* 2008-08-08: PridanÈ naËÌtanie css kvÙli rÙznym css */
+			// 2008-08-08: PridanÈ naËÌtanie css kvÙli rÙznym css
 			_main_LOG_to_Export("zisùujem css...\n");
 			_global_css = atocss(pom_CSS);
 			if(_global_css == CSS_UNDEF){
@@ -14411,7 +14460,7 @@ _main_SIMULACIA_QS:
 			}
 			_main_LOG_to_Export("...css (%s) = %i, teda %s (%s)\n", pom_CSS, _global_css, nazov_css[_global_css], skratka_css[_global_css]);
 
-			/* 2011-05-06: PridanÈ naËÌtanie n·zvu fontu kvÙli rÙznym fontom */
+			// 2011-05-06: PridanÈ naËÌtanie n·zvu fontu kvÙli rÙznym fontom
 			_main_LOG_to_Export("zisùujem font...\n");
 			_global_font = atofont(pom_FONT);
 			if(_global_font == FONT_UNDEF){
@@ -14426,7 +14475,7 @@ _main_SIMULACIA_QS:
 			}
 			_main_LOG_to_Export("...font (%s) = %i, teda %s\n", pom_FONT, _global_font, nazov_fontu[_global_font]);
 
-			/* 2011-05-13: PridanÈ naËÌtanie veækosti fontu */
+			// 2011-05-13: PridanÈ naËÌtanie veækosti fontu
 			_main_LOG_to_Export("zisùujem font size...\n");
 			_global_font_size = atofontsize(pom_FONT_SIZE);
 			if(_global_font_size == FONT_SIZE_UNDEF){
@@ -14459,11 +14508,9 @@ _main_SIMULACIA_QS:
 			// inak ostane default hodnoty nastavene na zaciatku pre kazdy operacny system zvlast
 
 			_main_LOG_to_Export("˙prava include adres·ra...\n");
-			/* 2006-07-17: dokonËenie ˙pravy include adres·ra podæa jazyka */
+			// 2006-07-17: dokonËenie ˙pravy include adres·ra podæa jazyka
 
-			/* 2004-03-17 uprava ciest: cfg_INCLUDE_DIR_default a include_dir
-			 * tzv. miesto 2004-03-17_TUTOLA
-			 */
+			// 2004-03-17 uprava ciest: cfg_INCLUDE_DIR_default a include_dir | tzv. miesto 2004-03-17_TUTOLA
 			_main_LOG_to_Export("\tcfg_INCLUDE_DIR_default = `%s'\n\tinclude_dir = `%s'\n", cfg_INCLUDE_DIR_default, include_dir);
 			if(strcmp(include_dir, STR_EMPTY) == 0){
 				_main_LOG_to_Export("\tberiem cfg_INCLUDE_DIR_default...\n");
@@ -14472,12 +14519,12 @@ _main_SIMULACIA_QS:
 			else
 				_main_LOG_to_Export("\tberiem include_dir...\n");
 
-			/* 2006-07-17: prv· kontrola, Ëi include_dir konËÌ na backslash resp. slash */
+			// 2006-07-17: prv· kontrola, Ëi include_dir konËÌ na backslash resp. slash
 			len = strlen(include_dir) - 1;
 			_main_LOG_to_Export("prv· kontrola include adres·ra (Ëi konËÌ oddeæovaËom `%c' [dÂûka %d])...\n", PATH_SEPARATOR, len);
 			if(include_dir[len] != (short int)PATH_SEPARATOR){
 				include_dir[len + 1] = PATH_SEPARATOR;
-				len++; /* 2008-04-10: doplnenÈ */
+				len++; // 2008-04-10: doplnenÈ
 				_main_LOG_to_Export("\tupravenÈ (pridanÈ na koniec reùazca): %s\n", include_dir);
 			}
 			else{
@@ -14485,12 +14532,10 @@ _main_SIMULACIA_QS:
 			}
 
 			_main_LOG_to_Export("kontrola, Ëi include adres·r konËÌ reùazcom `%s'...\n", postfix_jazyka[_global_jazyk]);
-			/* 2008-04-09: treba najskÙr skontrolovaù, Ëi include dir uû n·hodou neobsahuje aj prilepen˝ postfix jazyka 
-			 *             include_dir[len] alebo include_dir[len + 1] obsahuje PATH_SEPARATOR
-			 *             teda znaky jeden a dva pred by mali obsahovaù postfix_jazyka[_global_jazyk][0] a [1]
-			 *
-			 * 2009-08-05: oprava kontroly, nemoûno kontrolovaù fixne 2 znaky, pretoûe postfix_jazyka mÙûe byù dlhöÌ (napr. pre "czop")
-			 */
+			// 2008-04-09: treba najskÙr skontrolovaù, Ëi include dir uû n·hodou neobsahuje aj prilepen˝ postfix jazyka 
+			//             include_dir[len] alebo include_dir[len + 1] obsahuje PATH_SEPARATOR
+			//             teda znaky jeden a dva pred by mali obsahovaù postfix_jazyka[_global_jazyk][0] a [1]
+			// 2009-08-05: oprava kontroly, nemoûno kontrolovaù fixne 2 znaky, pretoûe postfix_jazyka mÙûe byù dlhöÌ (napr. pre "czop")
 			char *include_dir_pom;
 			short int len_postfix_jazyka = strlen(postfix_jazyka[_global_jazyk]);
 			short int kontrola_prilepenia_postfix_jazyka = NIE;
@@ -14509,7 +14554,7 @@ _main_SIMULACIA_QS:
 				}
 				else
 					_main_LOG_to_Export("include_dir[len/len + 1] != (short int)PATH_SEPARATOR\n");
-			}/* if(include_dir_pom != NULL) */
+			}// if(include_dir_pom != NULL)
 			else{
 				_main_LOG_to_Export("include_dir_pom == NULL (teda include_dir[] neobsahuje postfix_jazyka (%s))\n", postfix_jazyka[_global_jazyk]);
 			}
@@ -14533,19 +14578,19 @@ _main_SIMULACIA_QS:
 			}
 			else{
 				_main_LOG_to_Export("include adres·ra NEkonËÌ reùazcom `%s' - je potrebnÈ prid·vaù (aktu·lne include_dir == %s; lenght == %d; len == %d): ", postfix_jazyka[_global_jazyk], include_dir, strlen(include_dir), len);
-				/* 2006-07-13: pridanÈ doplnenie jazyka kvÙli jazykov˝m mut·ci·m */
+				// 2006-07-13: pridanÈ doplnenie jazyka kvÙli jazykov˝m mut·ci·m
 				_main_LOG_to_Export("upravujem include adres·r podæa jazyka (%d - %s)...\n", _global_jazyk, nazov_jazyka[_global_jazyk]);
 
-				/* 2006-07-17: dokonËenie ˙pravy include adres·ra podæa jazyka */
+				// 2006-07-17: dokonËenie ˙pravy include adres·ra podæa jazyka
 				if(strlen(postfix_jazyka[_global_jazyk]) > 0){
-					/* 2006-07-31: pÙvodne sme uvaûovali, ûe include_dir bude napr. include/cz, incluce/en; teraz bude radöej include_cz, include_en t.j. nahraÔ backslash resp. slash znakom underscore */
+					// 2006-07-31: pÙvodne sme uvaûovali, ûe include_dir bude napr. include/cz, incluce/en; teraz bude radöej include_cz, include_en t.j. nahraÔ backslash resp. slash znakom underscore
 					include_dir[len] = UNDERSCORE;
 					strcat(include_dir, postfix_jazyka[_global_jazyk]);
-					_main_LOG_to_Export("\tupravenÈ (pridanÈ na koniec reùazca): %s\n", include_dir); /* 2008-04-10: doplnenÈ */
+					_main_LOG_to_Export("\tupravenÈ (pridanÈ na koniec reùazca): %s\n", include_dir); // 2008-04-10: doplnenÈ
 				}
 			}
 
-			/* 2006-07-17: druh· kontrola, Ëi include_dir konËÌ na backslash resp. slash */
+			// 2006-07-17: druh· kontrola, Ëi include_dir konËÌ na backslash resp. slash
 			len = strlen(include_dir) - 1;
 			_main_LOG_to_Export("druh· kontrola include adres·ra (Ëi konËÌ oddeæovaËom `%c' [dÂûka %d])...\n", PATH_SEPARATOR, len);
 			if(include_dir[len] != (short int)PATH_SEPARATOR){
@@ -14561,18 +14606,18 @@ _main_SIMULACIA_QS:
 			LOG_ciara;
 
 			Log("_global_opt_batch_monthly == %d\n", _global_opt_batch_monthly);
-			/* 2009-08-12: rozparsovanie premennej pom_EXPORT_MONTHLY, nastavenej v getArgv() [pÙvodne bolo aû v _main_batch_mode()] */
+			// 2009-08-12: rozparsovanie premennej pom_EXPORT_MONTHLY, nastavenej v getArgv() [pÙvodne bolo aû v _main_batch_mode()]
 			if(_global_opt_batch_monthly == ANO){
 				// rozparsovanie premennej pom_EXPORT_MONTHLY, nastavenej v getArgv()
 				Log("rozparsovanie premennej pom_EXPORT_MONTHLY, nastavenej v getArgv()\n");
 				export_monthly_druh = atoi(pom_EXPORT_MONTHLY);
 				if(export_monthly_druh <= 0)
-					export_monthly_druh = 0; /* moûno ide o znakov˝ reùazec nekonvertovateæn˝ na ËÌslo; berieme to ako default spr·vanie */
+					export_monthly_druh = 0; // moûno ide o znakov˝ reùazec nekonvertovateæn˝ na ËÌslo; berieme to ako default spr·vanie
 				Log("export_monthly_druh == %d\n", export_monthly_druh);
 			}// _global_opt_batch_monthly == ANO
 
 			_main_LOG_to_Export("_global_jazyk == %s\n", nazov_jazyka[_global_jazyk]);
-			/* 2010-02-15, pridanÈ: rozparsovanie parametra modlitba */
+			// 2010-02-15, pridanÈ: rozparsovanie parametra modlitba
 			Log("volanie _parsuj_parameter_MODLITBA() z main()... [2]\n");
 			_parsuj_parameter_MODLITBA(pom_MODLITBA, _global_modlitba);
 
@@ -14592,18 +14637,14 @@ _main_SIMULACIA_QS:
 			_main_LOG_to_Export("switch: podla query_type...\n");
 			switch(query_type){
 				case PRM_DETAILY:
-				/* presne to iste co PRM_DATUM s jedinkym rozdielom: co sa tyka
-				 * formularov, prvy (uvodny) formular pre PRM_DATUM vycisti
-				 * modlitbu (premenna pom_MODLITBA, ktora sa nacita zo systemovej
-				 * premennej WWW_MODLITBA) -- pretoze z inej casti fomrulara sa
-				 * tam nieco dostane...
-				 */
+				// presne to iste co PRM_DATUM s jedinkym rozdielom: co sa tyka formularov, prvy (uvodny) formular pre PRM_DATUM vycisti modlitbu 
+				// (premenna pom_MODLITBA, ktora sa nacita zo systemovej premennej WWW_MODLITBA) -- pretoze z inej casti fomrulara sa tam nieco dostane...
 				case PRM_DATUM:
 					_main_LOG_to_Export("spustam _main_rozbor_dna(stringy: pom_DEN = %s, pom_MESIAC = %s, pom_ROK = %s, pom_MODLITBA = %s, pom_DALSI_SVATY = %s);\n", pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA, pom_DALSI_SVATY);
 					_main_rozbor_dna(pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA, pom_DALSI_SVATY);
 					_main_LOG_to_Export("spat po skonceni _main_rozbor_dna(%s, %s, %s, %s, %s);\n", pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA, pom_DALSI_SVATY);
 					break;
-				case PRM_TXT: /* 2011-02-02: doplnenÈ; export do TXT pre RKC */
+				case PRM_TXT: // 2011-02-02: doplnenÈ; export do TXT pre RKC
 					_main_LOG_to_Export("spustam _main_rozbor_dna_txt(stringy: pom_DEN = %s, pom_MESIAC = %s, pom_ROK = %s);\n", pom_DEN, pom_MESIAC, pom_ROK);
 					_main_rozbor_dna_txt(pom_DEN, pom_MESIAC, pom_ROK);
 					_main_LOG_to_Export("spat po skonceni _main_rozbor_dna_txt(%s, %s, %s);\n", pom_DEN, pom_MESIAC, pom_ROK);
@@ -14638,11 +14679,10 @@ _main_SIMULACIA_QS:
 					_main_tabulka(pom_ROK_FROM, pom_ROK_TO, pom_LINKY);
 					_main_LOG_to_Export("spat po skonceni _main_tabulka();\n");
 					break;
-				/* pridany batch mode; 2003-07-04 */
-				case PRM_BATCH_MODE:
+				case PRM_BATCH_MODE: // pridany batch mode; 2003-07-04
 					_main_LOG_to_Export("spustam _main_batch_mode();\n");
 					Export("<center><h2>Batch mode (d·vkovÈ pouûitie)</h2></center>\n");
-					/* vyuzivam parametre, ktore boli nastavene */
+					// vyuzivam parametre, ktore boli nastavene
 					_main_batch_mode(// vyuzite parametre sa sice volaju haluzne, ale sluzia pre den from (prve tri), den to (dalsie tri), este jedno mam reserved; 2003-07-04
 						pom_DEN, pom_MESIAC, pom_ROK,
 						pom_ROK_FROM, pom_ROK_TO, pom_MODLITBA, 
@@ -14683,8 +14723,8 @@ _main_SIMULACIA_QS:
 
 			patka(); // 2011-07-01: doplnenÈ (eöte pred dealokovanie premenn˝ch)
 
+			// dealokovanie som sem presunul 24/02/2000A.D.
 			_deallocate_global_var();
-			/* dealokovanie som sem presunul 24/02/2000A.D. */
 
 		}// if(ret == SUCCESS)
 		else if(ret == FAILURE){
@@ -14692,12 +14732,11 @@ _main_SIMULACIA_QS:
 			_main_LOG_to_Export("ret == FAILURE\n");
 		}
 		else if(ret == NO_RESULT){
-			/* vtedy, ked
-			 * - case SCRIPT_PARAM_FROM_FORM
-			 * - query_type == PRM_NONE
-			 * - historicka poznamka: povodne spustilo sa prazdny_formular();
-			 * - v skutocnosti _main_prazdny_formular();
-			 */
+			// vtedy, ked
+			// - case SCRIPT_PARAM_FROM_FORM
+			// - query_type == PRM_NONE
+			// - historicka poznamka: povodne spustilo sa prazdny_formular();
+			// - v skutocnosti _main_prazdny_formular();
 			_main_LOG_to_Export("ret == NO_RESULT\n");
 		}
 	}// if(query_type != PRM_UNKNOWN)
