@@ -438,9 +438,9 @@ const char *nazov_slavenia_lokal[] =
 {""                                                                                                             // LOKAL_SLAV_NEURCENE
 ,"len v roûÚavskej katedr·le"                                                                                   // LOKAL_SLAV_ROZNAVA_KATEDRALA
 ,"hlavn˝ patrÛn Trnavskej arcidiecÈzy"                                                                          // LOKAL_SLAV_TRNAVA_PATRON
-,"v Bratislavskej a Trnavskej arcidiecÈze <br>a v Banskobystrickej, Koöickej, Nitrianskej a RoûÚavskej diecÈze" // LOKAL_SLAV_TT_BB_KE_NR_RO
+,"v Bratislavskej, Trnavskej a Koöickej arcidiecÈze <br>a v Banskobystrickej, Nitrianskej a RoûÚavskej diecÈze" // LOKAL_SLAV_TT_BB_KE_NR_RO
 ,"v Nitrianskej diecÈze sviatok hlavn˝ch patrÛnov"                                                              // LOKAL_SLAV_NITRA_PATRON
-,"len v Koöickej diecÈze"                                                                                       // LOKAL_SLAV_KOSICE
+,"len v Koöickej arcidiecÈze"                                                                                   // LOKAL_SLAV_KOSICE
 ,"len v Nitrianskej diecÈze"                                                                                    // LOKAL_SLAV_NITRA
 ,"len v Banskobystrickej diecÈze"                                                                               // LOKAL_SLAV_BYSTRICA
 ,"len v Spiöskej diecÈze"                                                                                       // LOKAL_SLAV_SPIS
@@ -450,7 +450,7 @@ const char *nazov_slavenia_lokal[] =
 ,"v Spiöskej diecÈze sviatok hlavnÈho patrÛna"                                                                  // LOKAL_SLAV_SPIS_PATRON
 ,"v Banskobystrickej diecÈze sviatok hlavnÈho patrÛna"                                                          // LOKAL_SLAV_BYSTRICA_PATRON
 ,"v Bratislavskej a Trnavskej arcidiecÈze <br>a v Banskobystrickej, Nitrianskej a RoûÚavskej diecÈze"           // LOKAL_SLAV_TT_BB_NR_RO
-,"v Koöickej diecÈze sviatok hlavnÈho patrÛna"                                                                  // LOKAL_SLAV_KOSICE_PATRON
+,"v Koöickej arcidiecÈze sviatok hlavnÈho patrÛna"                                                              // LOKAL_SLAV_KOSICE_PATRON
 ,"na Slovensku 5. j˙la, sl·vnosù; v EurÛpe sviatok"                                                             // LOKAL_SLAV_14_FEB_CYRIL_METOD
 ,"v RoûÚavskej diecÈze sviatok hlavnÈho patrÛna"                                                                // LOKAL_SLAV_ROZNAVA_PATRON
 ,"len v konsekrovan˝ch kostoloch"                                                                               // LOKAL_SLAV_KONSEKR_KOSTOLY
