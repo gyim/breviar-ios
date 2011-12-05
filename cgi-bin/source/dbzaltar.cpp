@@ -13352,7 +13352,7 @@ label_25_MAR:
 					_global_svaty1.farba = LIT_FARBA_BIELA;
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
 					break;
-				case 4: /* MES_APR -- 04APR */
+				case 4: // MES_APR -- 04APR
 					if(poradie_svaty == 1){
 						// na spomienku v pôste
 						if(je_post){
@@ -13381,10 +13381,9 @@ label_25_MAR:
 					_global_svaty1.farba = LIT_FARBA_BIELA;
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
 					break;
-				case 5: /* MES_APR -- 05APR */
-					/* 2009-03-25: pre Slovensko, Èesko atï. pod¾a všeobecného kalendára sv. Vincenta Ferrera, pre dominikánov presunuté na 5.5.... 
-					 * 2009-05-15: aj pre dominikánov platí všeobecný kalendár
-					 */
+				case 5: // MES_APR -- 05APR
+					// 2009-03-25: pre Slovensko, Èesko atï. pod¾a všeobecného kalendára sv. Vincenta Ferrera, pre dominikánov presunuté na 5.5.... 
+					// 2009-05-15: aj pre dominikánov platí všeobecný kalendár
 					if(poradie_svaty == 1){
 						// na spomienku v pôste
 						if(je_post){
@@ -13404,6 +13403,23 @@ label_25_MAR:
 							_vlastna_cast_modlitba;
 
 						}// je_post
+						else{
+							// definovanie parametrov pre modlitbu
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_2citanie;
+							_vlastna_cast_modlitba;
+						}// nie je pôst
 						break;
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -13413,7 +13429,7 @@ label_25_MAR:
 					_global_svaty1.farba = LIT_FARBA_BIELA;
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
 					break;
-				case 7: /* MES_APR -- 07APR */
+				case 7: // MES_APR -- 07APR
 					if(poradie_svaty == 1){
 						// na spomienku v pôste
 						if(je_post){
@@ -13433,6 +13449,23 @@ label_25_MAR:
 							_vlastna_cast_modlitba;
 
 						}// je_post
+						else{
+							// definovanie parametrov pre modlitbu
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_2citanie;
+							_vlastna_cast_modlitba;
+						}// nie je pôst
 						break;
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
@@ -13442,7 +13475,7 @@ label_25_MAR:
 					_global_svaty1.farba = LIT_FARBA_BIELA;
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
 					break;
-				case 11: /* MES_APR -- 11APR */
+				case 11: // MES_APR -- 11APR
 					if(poradie_svaty == 1){
 						// na spomienku v pôste
 						if(je_post){
@@ -13462,6 +13495,23 @@ label_25_MAR:
 							_vlastna_cast_modlitba;
 
 						}// je_post
+						else{
+							// definovanie parametrov pre modlitbu
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_2citanie;
+							_vlastna_cast_modlitba;
+						}// nie je pôst
 						break;
 					}
 					_global_svaty1.typslav = SLAV_SPOMIENKA;
@@ -13471,7 +13521,7 @@ label_25_MAR:
 					_global_svaty1.farba = LIT_FARBA_CERVENA;
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
 					break;
-				case 13: /* MES_APR -- 13APR */
+				case 13: // MES_APR -- 13APR
 					if(poradie_svaty == 1){
 						// na spomienku v pôste
 						if(je_post){
@@ -13491,6 +13541,23 @@ label_25_MAR:
 							_vlastna_cast_modlitba;
 
 						}// je_post
+						else{
+							// definovanie parametrov pre modlitbu
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_2citanie;
+							_vlastna_cast_modlitba;
+						}// nie je pôst
 						break;
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -13500,7 +13567,7 @@ label_25_MAR:
 					_global_svaty1.farba = LIT_FARBA_CERVENA;
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
 					break;
-				case 20: /* MES_APR -- 20APR */
+				case 20: // MES_APR -- 20APR
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
 							// definovanie parametrov pre modlitbu
