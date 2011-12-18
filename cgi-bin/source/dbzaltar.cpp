@@ -4618,6 +4618,10 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 						set_LOG_litobd;
 						goto label_24_DEC;
 					}
+					// posvätné èítanie; doplnené 2011-12-18
+					modlitba = MODL_POSV_CITANIE;
+					// ToDo: antifóny sú riešené tak, e v adv2_pc.htm sú pre všetky dátumy rovnaké -- zo 4. adventnej nedele | urobi ináè, lepšie!
+					_adv2_modlitba_ne; // modlitba
 
 					// ranné chvály
 					// kratke responzorium - rovnake pre vsetky nedele
