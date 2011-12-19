@@ -777,7 +777,7 @@ const char *poradie_Slovom_jazyk[POCET_TYZDNOV + 1][POCET_JAZYKOV + 1] =
 { {"Prvá", "První", "", "", "", "První", "1."}
 , {"Druhá" , "Druhá", "", "", "", "Druhá", "2."}
 , {"Tretia" , "Tøetí", "", "", "", "Tøetí", "3."}
-, {"Štvrtá" , "Ètrvtá", "", "", "", "Ètrvtá", "4."}
+, {"Štvrtá" , "Ètvrtá", "", "", "", "Ètvrtá", "4."}
 , {"Piata" , "Pátá", "", "", "", "Pátá", "5."}
 , {"Šiesta" , "Šestá", "", "", "", "Šestá", "6."}
 , {"Siedma" , "Sedmá", "", "", "", "Sedmá", "7."}
@@ -815,7 +815,7 @@ const char *poradie_SLOVOM_jazyk[POCET_TYZDNOV + 1][POCET_JAZYKOV + 1] =
 { {"PRVÁ", "PRVNÍ", "", "", "", "PRVNÍ", "1."}
 , {"DRUHÁ" , "DRUHÁ", "", "", "", "DRUHÁ", "2."}
 , {"TRETIA" , "TØETÍ", "", "", "", "TØETÍ", "3."}
-, {"ŠTVRTÁ" , "ÈTRVTÁ", "", "", "", "ÈTRVTÁ", "4."}
+, {"ŠTVRTÁ" , "ÈTVRTÁ", "", "", "", "ÈTVRTÁ", "4."}
 , {"PIATA" , "PÁTÁ", "", "", "", "PÁTÁ", "5."}
 , {"ŠIESTA" , "ŠESTÁ", "", "", "", "ŠESTÁ", "6."}
 , {"SIEDMA" , "SEDMÁ", "", "", "", "SEDMÁ", "7."}
