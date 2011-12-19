@@ -1084,6 +1084,7 @@ typedef struct lrok _struct_lrok;
 #define LINK_ISO_8601 5 // pridana kvoli SIMPLE exportu, 2005-03-21
 #define LINK_DEN_MESIAC_PREDOSLY 6 // 2007-08-15 pridané kvôli novému kalendáru
 #define LINK_DEN_MESIAC_NASLEDOVNY 7 // 2007-08-15 pridané kvôli novému kalendáru
+#define LINK_DEN_MESIAC_GEN 8 // 2011-12-19: to isté ako LINK_DEN_MESIAC, len mesiac je v genitíve
 
 //---------------------------------------------------------------------
 // globalne premenne -- su definovane v dnes.cpp (18/02/2000A.D.)

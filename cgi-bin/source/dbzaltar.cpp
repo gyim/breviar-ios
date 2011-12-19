@@ -4364,7 +4364,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				ANCHOR_KRESPONZ);
 			_set_kresponz(modlitba, _file, _anchor);
 			set_LOG_litobd;
-			// dalsie zavisia od datumu (17. -- 24. december)
+			// ïalšie závisia od dátumu (17. -- 24. december)
 			_adv2_kcitanie; // kratke citanie
 			// benediktus
 			sprintf(_anchor, "%s%d%c_%s",
@@ -4384,7 +4384,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 			_adv_hymnus;
 			// antifony - zavisia od dna v tyzdni (PONDELOK -- SOBOTA)
 			_adv2_antifony_vesp;
-			// dalsie zavisia od datumu (17. -- 24. december)
+			// ïalšie závisia od dátumu (17. -- 24. december)
 			// kratke responzorium - rovnake pre 17. a 18., resp. pre vsetky ostatne dni (19.-23.)
 			sprintf(_anchor, "%s%d%c_%s",
 				nazov_OBD[litobd],
@@ -4434,7 +4434,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 			_adv_hymnus; // hymnus
 			_adv2_antifony; // antifóny
 
-			// dalsie zavisia od datumu (17. -- 24. december)
+			// ïalšie závisia od dátumu (17. -- 24. december)
 			// 1. èítanie
 			sprintf(_anchor, "%s%d%c_%s",
 				nazov_OBD[litobd],

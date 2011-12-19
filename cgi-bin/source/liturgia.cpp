@@ -631,13 +631,13 @@ char *_vytvor_string_z_datumu(short int den, short int mesiac, short int rok, sh
 		// doterajšie správanie pre slovenèinu a èeštinu
 		switch(_case){
 			case CASE_case:
-				sprintf(pom, "%s%d. %s", vypln, den, nazov_mesiaca(mesiac - 1));
+				sprintf(pom, "%s%d. %s", vypln, den, (typ == LINK_DEN_MESIAC_GEN)? nazov_mesiaca_gen(mesiac - 1) : nazov_mesiaca(mesiac - 1));
 				break;
 			case CASE_Case:
-				sprintf(pom, "%s%d. %s", vypln, den, nazov_Mesiaca(mesiac - 1));
+				sprintf(pom, "%s%d. %s", vypln, den, (typ == LINK_DEN_MESIAC_GEN)? nazov_Mesiaca_gen(mesiac - 1) : nazov_Mesiaca(mesiac - 1));
 				break;
 			case CASE_CASE:
-				sprintf(pom, "%s%d. %s", vypln, den, nazov_MESIACA(mesiac - 1));
+				sprintf(pom, "%s%d. %s", vypln, den, /* (typ == LINK_DEN_MESIAC_GEN)? nazov_MESIACA_gen(mesiac - 1) : */ nazov_MESIACA(mesiac - 1));
 				break;
 		}// switch(_case)
 		if(typ == LINK_DEN_MESIAC_ROK){

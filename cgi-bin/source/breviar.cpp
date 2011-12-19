@@ -5203,13 +5203,23 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 					// skontrolujeme ešte 17.-23. decembra (obdobie OBD_ADVENTNE_II)
 					else if((_local_den.litobd == OBD_ADVENTNE_II) && (typ != EXPORT_DNA_VIAC_DNI)){
 						Log("(_local_den.litobd == OBD_ADVENTNE_II) && (typ != EXPORT_DNA_VIAC_DNI)\n");
+
+						// 2011-12-19: pôvodne: sprintf(pom, "%d. %s, %s, ", _local_den.den, nazov_mesiaca_gen(_local_den.mesiac - 1), nazov_obdobia(_local_den.litobd));
+						// najprv názov dòa (pondelok, utorok...)...
+						sprintf(pom, "%s, ", nazov_Dna(_local_den.denvt));
+						// ...potom dátum + genitív mesiaca...
+						sprintf(pom2, _vytvor_string_z_datumu(_local_den.den, _local_den.mesiac, _local_den.rok, ((_global_jazyk == JAZYK_LA) || (_global_jazyk == JAZYK_EN) || (_global_jazyk == JAZYK_HU))? CASE_Case : CASE_case, LINK_DEN_MESIAC_GEN, NIE));
+						strcat(pom, pom2);
+						// ...liturgické obdobie (adventné)...
+						sprintf(pom2, ", %s, ", nazov_obdobia(_local_den.litobd));
+						strcat(pom, pom2);
+						// ...a napokon týždeò žaltára
 						if(typ != EXPORT_DNA_VIAC_DNI_TXT){
 							sprintf(pom2, "</span>");
 						}
 						else{
 							mystrcpy(pom2, STR_EMPTY, MAX_STR);
 						}
-						sprintf(pom, "%d. %s, %s, ", _local_den.den, nazov_mesiaca_gen(_local_den.mesiac - 1), nazov_obdobia(_local_den.litobd));
 						strcat(pom, pom2);
 						sprintf(pom2, html_text_tyzden_cislo[_global_jazyk], _local_den.tyzden);
 						strcat(pom, pom2);
