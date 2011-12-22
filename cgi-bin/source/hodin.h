@@ -6158,7 +6158,7 @@ const char *text_DEC_23[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Jana Kentského, knìze",
- "Kety Szent János áldozópap",
+ "K&#281;ty Szent János áldozópap",
  };
 const char *text_DEC_26[POCET_JAZYKOV + 1] = 
 {"Sv. Štefana, prvého muèeníka",
