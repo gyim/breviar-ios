@@ -4227,7 +4227,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 			// od 1.1. po post, teda bud vianocne obdobie alebo obdobie cez rok
 			_rozbor_dna_LOG("/* od 1.1. po post, teda bud vianocne obdobie alebo obdobie cez rok */\n");
 			if(_global_den.denvr == BOHORODICKY_PANNY_MARIE){
-				/* slavnost panny marie bohorodicky */
+				// slavnost panny marie bohorodicky
 				_rozbor_dna_LOG("/* slavnost panny marie bohorodicky */\n");
 				_global_den.tyzden = 1; // 2011-01-27: doplnené; overoval som, èi to nemôe padnú na inı tıdeò (nemôe)
 				_global_den.farba = LIT_FARBA_BIELA;
@@ -4236,7 +4236,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				_global_den.typslav = SLAV_SLAVNOST;
 				_global_den.litobd = OBD_OKTAVA_NARODENIA;
 				_global_den.prik = PRIKAZANY_SVIATOK;
-				/* 2011-02-01: pre SJ odlišnı názov; ináè je všetko rovnaké */
+				// 2011-02-01: pre SJ odlišnı názov; ináè je všetko rovnaké
 				if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SJ)){
 					mystrcpy(_global_den.meno, text_JAN_01_SJ[_global_jazyk], MENO_SVIATKU);
 					_global_den.kalendar = KALENDAR_SK_SJ;
@@ -4282,7 +4282,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				_rozbor_dna_LOG("/* vianocne obdobie */\n");
 				_global_den.farba = LIT_FARBA_BIELA;
 				_global_den.kalendar = KALENDAR_VSEOBECNY;
-				// _global_den.tyzden = 2; -- 2007-01-08: pripomienkoval don Valábek; 2. tıdeò je to a po 2. nedeli po narodení Pána
+				// _global_den.tyzden = 2; -- 2007-01-08: pripomienkoval don Valábek; 2. tıdeò je to a po 2. nedeli po narodení Pána | 2012-01-01 opravené nišie
 				// všedné dni vianoèného obdobia od 2. januára do soboty po zjavení pána
 				_global_den.smer = 13;
 				// zistíme, èi je pred alebo po zjavení pána
@@ -4296,8 +4296,20 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				}
 				// 2007-01-08, upravené priradenie tıdòa altára;
 				// keïe KRST je poradové èíslo dòa v roku, ale je to vdy január, je to vlastne aj dátum
-				if(KRST == 7 || KRST == 8){
-					// ak Krst Krista Pána pripadne na 7.1. alebo 8.1., všedné dni od 2. do 5. januára majú ma 1. tıdeò altára (v tıchto prípadoch 2. nede¾a po narodení Pána nie je)
+				// 2012-01-01: opravené; pod¾a smerníc (è. 133) -- "prvı tıdeò sa zaèína na Prvú adventnú nede¾u, v prvı tıdeò v Cezroènom období, na Prvú pôstnu nede¾u a na Prvú ve¾konoènú nede¾u."
+				if(KRST == 8){
+					if(((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_ZJAVENIE_PANA_NEDELA) == BIT_OPT_0_ZJAVENIE_PANA_NEDELA)){
+						// v krajinách, kde sa Zjavenie Pána slávi v nede¾u: ak Krst Krista Pána padne na 8.1. (pondelok), potom pred nede¾ou Zjavenia Pána 7.1. sú všedné dni 1. tıdeò altára (8.1. ako Krst Krista Pána nemôe padnú na nede¾u; 8.1. ak je nede¾a, je to Zjavenie Pána a Krst Krista Pána je v pondelok 9.1.)
+						_global_den.tyzden = 1;
+					}
+					else{
+						// v krajinách, kde sa Zjavenie Pána slávi 6.1.: ak Krst Krista Pána pripadne na 8.1., všedné dni od 2. do 5. januára majú ma 1. tıdeò altára (v tomto prípade 2. nede¾a po narodení Pána nie je, ale jej úlohu akoby zohráva 1.1.)
+						_global_den.tyzden = 2;
+						Export("tyzden 2\n");
+					}// napr. SK rok 2012
+				}
+				else if(KRST == 7){
+					// ak Krst Krista Pána pripadne na 7.1., všedné dni od 2. do 5. januára majú ma 1. tıdeò altára (v tıchto prípadoch 2. nede¾a po narodení Pána nie je)
 					_global_den.tyzden = 1;
 				}
 				else{
@@ -4306,8 +4318,10 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 						_global_den.tyzden = 1;
 					else
 						_global_den.tyzden = 2;
+					// 2012-01-01: podmienka je pre krajiny, kde sa slávnos Zjavenia Pána slávi 6.1., ekvivalentná nasledovnej:
+					// _global_den.tyzden = _global_den.denvr < "_global_r.p1" + 1)? 1: 2; // pritom "_global_r.p1" je 'A' = 0, 'b' = 1, 'c' = 2, 'd' = 3..., 'g' = 6
 				}
-			}
+			}// vianoèné obdobie od KRST
 			else if(_global_den.denvr > KRST){
 				// obdobie cez rok po vianociach do popolcovej stredy
 				_rozbor_dna_LOG("/* obdobie cez rok po vianociach do popolcovej stredy */\n");
