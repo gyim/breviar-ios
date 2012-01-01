@@ -4305,7 +4305,6 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					else{
 						// v krajinách, kde sa Zjavenie Pána slávi 6.1.: ak Krst Krista Pána pripadne na 8.1., všedné dni od 2. do 5. januára majú ma 1. tıdeò altára (v tomto prípade 2. nede¾a po narodení Pána nie je, ale jej úlohu akoby zohráva 1.1.)
 						_global_den.tyzden = 2;
-						Export("tyzden 2\n");
 					}// napr. SK rok 2012
 				}
 				else if(KRST == 7){
