@@ -1144,6 +1144,16 @@ const char *html_text_pohyblive3[POCET_JAZYKOV + 1] = {
 	"<td align=center>Vasárnapi<br>ciklus</td>\n"
 };
 
+const char *html_text_pohyblive3b[POCET_JAZYKOV + 1] = {
+	"<td align=center>Zjavenie<br>Pána</td>\n",
+	"<td align=center>Zjevení<br>Pánì</td>\n", 
+	"<td align=center>Epiphany</td>\n",
+	"<td align=center>Epiphania<br>Domini</td>\n",
+	"",
+	"<td align=center>Zjevení<br>Pánì</td>\n",
+	"<td align=center>Urunk<br>megjelenése<br>(Vízkereszt)</td>\n"
+};
+
 const char *html_text_pohyblive4[POCET_JAZYKOV + 1] = {
 	"<td align=center>Krst Krista<br>Pána</td>\n",
 	"<td align=center>Køest Krista<br>Pánì</td>\n", 
@@ -1252,7 +1262,7 @@ const char *html_text_Po_Velkej_noci_atd[POCET_JAZYKOV + 1] = {
 	"Po Velikonocích následuje %d. %s v mezibdobí.\n",
 	"After Easter follows %d. %s per annum.\n",
 	"Po Ve¾kej noci nasleduje %d. %s per annum.\n",
-	"Po Ve¾kej noci nasleduje %d. %s v období „cez rok“.\n",
+	"Po Ve¾kej noci nasleduje %d. %s v cezroènom období.\n", // v období „cez rok“
 	"Po Velikonocích následuje %d. %s v mezibdobí.\n",
 	"Húsvét után az évközi idõ %d. %sja következik.\n", // vasárnapja, nede¾a = vasárnap
 };
