@@ -56,3 +56,11 @@ _[Uu]pgradeReport_Files*/
 [Pp]ackage/*
 ASPNETDB.MDF
 aspnetdb_log.ldf
+android/libs
+android/obj
+android/assets/cz/ordinar/*
+android/assets/docs/*
+android/assets/hu/docs/*
+android/assets/include/*
+android/assets/include_cz/*
+android/assets/include_hu/*
