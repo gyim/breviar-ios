@@ -870,12 +870,18 @@ short int zjavenie_pana(short int rok){
 	// 2011-10-18: pod¾a èasti kódu v _rozbor_dna()
 	short int ZJAVENIE_PANA; // zjavenie Pána
 	char nedelne_pismenko = _global_r.p1;
+
+	// Export("<br>rok == %d, nedelne pismenko == %c<br>\n", rok, nedelne_pismenko);
+
 	if((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_ZJAVENIE_PANA_NEDELA) == BIT_OPT_0_ZJAVENIE_PANA_NEDELA){ // if(_global_jazyk == JAZYK_HU){
 		if(nedelne_pismenko == 'A'){
 			nedelne_pismenko = 'h'; // aby vyšla nede¾a Zjavenia Pána na 8.1.
 		}
 		Log("Zjavenie Pána sa slávi v nede¾u; %c/%c\n", _global_r.p1, nedelne_pismenko);
 		ZJAVENIE_PANA = poradie((nedelne_pismenko - 'a') + 1, 1, rok); // nede¾a medzi 2. a 8. januárom
+
+		// Export("<br>rok == %d, ZJAVENIE_PANA == %d<br>\n", rok, ZJAVENIE_PANA);
+
 	}
 	else{
 		ZJAVENIE_PANA = poradie(6, 1, rok);
@@ -1371,8 +1377,11 @@ void _dm_svatej_rodiny(short int rok){
 
 void _dm_krst_krista_pana(short int rok){
 	// 2011-10-26: namiesto napevno daného Zjavenia Pána poradie(6, 1, rok) použijeme zjavenie_pana(short int rok)
-	static short int _zjavenie_pana = zjavenie_pana(rok);
+	short int _zjavenie_pana = zjavenie_pana(rok);
 	short int _krst = _zjavenie_pana + 1;
+
+	// Export("<br>rok == %d, zjavenie pana == %d<br>\n", rok, _zjavenie_pana);
+
 	if(!(((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_ZJAVENIE_PANA_NEDELA) == BIT_OPT_0_ZJAVENIE_PANA_NEDELA) && ((_zjavenie_pana == 7) || (_zjavenie_pana == 8)))){
 		while(den_v_tyzdni(_krst, rok) != DEN_NEDELA){
 			_krst++;
