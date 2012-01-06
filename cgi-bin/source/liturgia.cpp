@@ -1372,7 +1372,7 @@ void _dm_svatej_rodiny(short int rok){
 
 void _dm_krst_krista_pana(short int rok){
 	// 2011-10-26: namiesto napevno danÈho Zjavenia P·na poradie(6, 1, rok) pouûijeme zjavenie_pana(short int rok)
-	short int _zjavenie_pana = zjavenie_pana(rok);
+	short int _zjavenie_pana = zjavenie_pana(rok); // bolo tu static, ale pre viacn·sobnÈ volanie z analyzuj_rok() pre tabuæku tu 'static' nesmie byù
 	short int _krst = _zjavenie_pana + 1;
 
 	if(!(((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_ZJAVENIE_PANA_NEDELA) == BIT_OPT_0_ZJAVENIE_PANA_NEDELA) && ((_zjavenie_pana == 7) || (_zjavenie_pana == 8)))){
