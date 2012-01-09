@@ -24845,6 +24845,9 @@ label_25_MAR:
 						_vlastna_cast_modlitba;
 
 						modlitba = MODL_POSV_CITANIE;
+						if(_global_jazyk == JAZYK_CZ){ // 2012-01-09: doplnený vlastný hymnus pre posv. èítanie pre CZ
+							_vlastna_cast_hymnus;
+						}
 						_vlastna_cast_modlitba;
 						_vlastna_cast_1citanie;
 						_vlastna_cast_2citanie;
