@@ -4327,8 +4327,9 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				_global_den.farba = LIT_FARBA_ZELENA;
 				_global_den.kalendar = KALENDAR_VSEOBECNY;
 				_global_den.litobd = OBD_CEZ_ROK;
-				// urcenie tyzdna v obdobi "cez rok"
-				_global_den.tyzden = ((_global_den.denvr - KRST) DIV 7) + 1;
+				// urèenie týždòa v cezroènom období (v období "cez rok")
+				// 2012-01-13: oprava pre prípady, kedy KRST padol na pondelok (po nedeli Zjavenia Pána v krajinách, kde sa Zjavenie Pána slávi v nede¾u, napr. HU)
+				_global_den.tyzden = ((_global_den.denvr - KRST + _global_r._KRST_KRISTA_PANA.denvt) DIV 7) + 1; // nede¾a = 0, teda ako doteraz
 				if(_global_den.denvt == DEN_NEDELA){
 					// nedela v obdobi cez rok
 					_rozbor_dna_LOG("/* nedela v obdobi cez rok */\n");
