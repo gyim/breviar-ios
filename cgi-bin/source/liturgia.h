@@ -1273,6 +1273,7 @@ extern const char *skratka_kalendara[POCET_KALENDAROV + 1];
 
 extern const char *nazov_css[POCET_CSS + 1];
 extern const char *skratka_css[POCET_CSS + 1];
+extern const char *nazov_css_invert;
 
 extern const char *charset_jazyka[POCET_JAZYKOV + 1];
 
