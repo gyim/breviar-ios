@@ -94,3 +94,15 @@ vtyz.htm
 
 -- pre tabu¾ku treba zoh¾adni slávenie Zjavenia Pána v nede¾u
 	-- hotovo
+
+2012-01-16, JUV:
+
+-- úprava offline exportu (ondruska.drahoslav@slovanet.sk, 2012-01-13)
+
+	1. Vytvorit adresar "files" a tam dat vsetko okrem "zoznam.htm"
+	2. V subore "zoznam.htm" nahradit text (cast cesty) "./" -> "./files/".
+	3. Premenovat "zoznam.htm" na "Breviar.htm"
+	4. V 13 suboroch YYMM.htm nahradit "./../zoznam.htm" -> "./../../Breviar.htm"
+	
+	A je to ovela prehladnejsie napriklad v aplikacii GoodReader na iPade.
+
