@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="version">v1.7.0</string>
-
     <string name="lang_sk">SK</string>
     <string name="lang_cz">CZ</string>
     <string name="lang_hu">HU</string>
@@ -16,14 +14,10 @@
     Juraj Vidéky (videky@breviar.sk), Richard Královič (riso@ksp.sk)
     </string>
 
-    <string name="app_name">Breviary</string>
-    <string name="back">Back</string>
-    <string name="forward">Forward</string>
-    <string name="today">Today</string>
-    <string name="pgup">PgUp</string>
-    <string name="pgdn">PgDn</string>
-    <string name="news">
-     News in v1.7.0:\n
-     - Hungarian version (beta)\n\n
-    </string>
+    <string name="app_name">Imaórák liturgiája</string>
+    <string name="back">Vissza</string>
+    <string name="forward">Előre</string>
+    <string name="today">Ma</string>
+    <string name="pgup">Fel</string>
+    <string name="pgdn">Le</string>
 </resources>
