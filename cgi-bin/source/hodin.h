@@ -872,7 +872,7 @@ const short int format_datumu[POCET_JAZYKOV + 1] = {
 // filename of CSS file; the number of CSS does not directly correspond to the number of languages
 // 2006-08-08: Pridané kvôli rôznym css
 const char *nazov_css[POCET_CSS + 1] =
-{"(css neurèené)", "breviar.css", "breviar-invert.css", "breviar-kbd.css", "ebreviar-cz.css", "breviar-cz-op.css"
+{"(css neurèené)", "breviar.css", "breviar.css", "breviar-kbd.css", "ebreviar-cz.css", "breviar-cz-op.css"
 	, "breviar-2003-07-16.css", "breviar-2005-10-13.css", "breviar-2007-08-10.css", "breviar-2008-05-07.css"
 	, "breviar-jm-krize-cz.css", "breviar-kbs.css"};
 
@@ -880,6 +880,9 @@ const char *skratka_css[POCET_CSS + 1] =
 {"__", "def", "invert", "kbd", "cz", "czop"
 	, "2003", "2005", "2007", "2008"
 	, "jmkcz", "kbs"};
+
+// CSS obsahujuci invertovane farby
+const char *nazov_css_invert = "breviar-invert.css";
 
 // language charset (encoding); used for HTML heading
 const char *charset_jazyka[POCET_JAZYKOV + 1] =
@@ -1912,6 +1915,25 @@ const char *html_text_option2_buttons_usporne_explain[POCET_JAZYKOV + 1] =
  "", 
  "Zda se mají tlaèítka pro modlitby zobrazit úspornì, v tabulce (menší šíøka) pro mobilní zaøízení.", 
  "Legyenek-e az imaórák gombjai gazdaságosan elhelyezve, táblázatban (kisebb szélesség) a mobli készülékek céljából.", 
+};
+
+const char *html_text_option2_nocny_rezim[POCET_JAZYKOV + 1] = 
+{"noèný režim",
+ "noèní režim",
+ "xxx", 
+ "",
+ "",
+ "noèní režim",
+ "éjszakai mód", 
+};
+const char *html_text_option2_nocny_rezim_explain[POCET_JAZYKOV + 1] = 
+{"Zobrazí svetlý text na tmavom pozadí."
+ "Zobrazí svìtlý text na tmavém pozadí.",
+ "xxx", 
+ "",
+ "", 
+ "Zobrazí svìtlý text na tmavém pozadí.",
+ "Megmutatja világos szöveg sötét háttér.",
 };
 
 // 2011-05-06: doplnené

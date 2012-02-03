@@ -1220,7 +1220,7 @@ extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
 #define BIT_OPT_1_PROSBY_ZVOLANIE        1024 // 1 = zvolanie v prosb·ch zobraziù (opakovaù) po kaûdej prosbe
 #define BIT_OPT_1_SKRY_POPIS             2048
 
-#define POCET_OPT_2_HTML_EXPORT             8 // jednotlivÈ komponenty option 2 -- bity pre force option 2
+#define POCET_OPT_2_HTML_EXPORT             9 // jednotlivÈ komponenty option 2 -- bity pre force option 2
 extern short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];
 // 2011-04-12: ˙prava v˝znamu (a interpret·cie) option 2 (rozliËnÈ prepÌnaËe pre [online aj offline] export, napr. tlaËidl·, zobrazenie d·tumov a podobne)
 #define BIT_OPT_2_ISO_DATUM                 1
@@ -1231,6 +1231,7 @@ extern short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];
 #define BIT_OPT_2_NAVIGATION               32 // 1 = zobraziù navig·ciu v modlitbe (predoöl·, nasledovn· modlitba a pod.)
 #define BIT_OPT_2_TEXT_WRAP                64 // 1 = zobraziù zalomenie v textoch modlitby podæa tlaËenej LH
 #define BIT_OPT_2_BUTTONY_USPORNE         128 // 1 = zobraziù buttony pre modlitby v ˙spornej podobe (tabuæka) kvÙli mobiln˝m zariadeniam
+#define BIT_OPT_2_NOCNY_REZIM             256 // 1 = zobraziù invertovane farby (biele na ciernom)
 
 #define POCET_OPT_4_OFFLINE_EXPORT          1 // jednotlivÈ komponenty option 4 -- bity pre force option 4
 extern short int _global_opt_offline_export[POCET_OPT_4_OFFLINE_EXPORT];
@@ -1272,6 +1273,7 @@ extern const char *skratka_kalendara[POCET_KALENDAROV + 1];
 
 extern const char *nazov_css[POCET_CSS + 1];
 extern const char *skratka_css[POCET_CSS + 1];
+extern const char *nazov_css_invert;
 
 extern const char *charset_jazyka[POCET_JAZYKOV + 1];
 

@@ -661,6 +661,14 @@ extern short int query_type; // premenna obsahujuca PRM_...
 	#define STR_MODL_OPTF_2_BUTTONY_USPORNE "of2btnu"
 #endif
 
+// nocny rezim - svetly text na tmavom pozadi
+#define MODL_OPTF_2_NOCNY_REZIM 89
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF_2_NOCNY_REZIM "MODL_OPTF_2_NOCNY_REZIM"
+#else
+	#define STR_MODL_OPTF_2_NOCNY_REZIM "of2nr"
+#endif
+
 // 2008-08-08: Pridané kvôli rôznym css
 #define CSS 40
 #ifdef LONG_PARAM_NAMES
