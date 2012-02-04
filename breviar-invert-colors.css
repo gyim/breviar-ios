@@ -1,0 +1,59 @@
+/* override color settings for "night-mode" (inverted colors) */
+.red { color: #ff6600; }
+.redsmall { color: #ff6600; }
+.redbold { color: #ff6600; }
+.normal { color: #CCCCCC; }
+.parameter { font-family: Monospace; color: #CCCCCC; }
+.value { font-family: Monospace; color: yellow; }
+.explain { font-size: 90%; color: gray; }
+
+body, html { 
+	background-color: #333333;
+	color: #CCCCCC;
+}
+p { color: #CCCCCC; }
+
+a { color: #CCCCCC; }
+a:hover { color: yellow; background-color: #ff6633; }
+a:active { color: gray; }
+a.explain { color: #330000; }
+a.button { 
+	background: #CC9966; /* #ff9933; #ffcc66; Tan; Peru; BurlyWood; */
+	color: #333333; 
+	border: solid 1px #CCCCCC; }
+
+table { color: #CCCCCC; }
+td { color: #CCCCCC; }
+
+hr { color: gray; }
+
+select { background: #333333; color: #CCCCCC; }
+
+input { color: #CCCCCC; }
+
+/* modlitby */
+input.button, input.reset { 
+	background: #CC9966; /* #ff9933; #ffcc66; Tan; Peru; BurlyWood; */
+	color: #333333; 
+	border: solid 1px #CCCCCC; }
+
+/* << >> */
+input.button0, input.reset0 { 
+	background: #3366CC; /* #3399ff; */
+	color: #CCCCCC; 
+	border: solid 0px #CCCCCC; }
+
+/* dnes */
+input.button1, input.reset1 { 
+	background: #3366CC; /* #3399ff; */
+	color: #CCCCCC;
+	border: solid 0px #CCCCCC; }
+
+/* menej podstatné buttony */
+input.button2, input.reset2 { 
+	background: #CC9966; /* #ff9933; */
+	color: #333333;
+	border: solid 1px #CCCCCC; }
+
+input.text { background: #333333; }
+

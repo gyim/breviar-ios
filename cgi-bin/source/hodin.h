@@ -882,7 +882,7 @@ const char *skratka_css[POCET_CSS + 1] =
 	, "jmkcz", "kbs"};
 
 // CSS obsahujuci invertovane farby
-const char *nazov_css_invert = "breviar-invert.css";
+const char *nazov_css_invert_colors = "breviar-invert-colors.css";
 
 // language charset (encoding); used for HTML heading
 const char *charset_jazyka[POCET_JAZYKOV + 1] =

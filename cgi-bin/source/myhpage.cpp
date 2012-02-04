@@ -189,7 +189,7 @@ void _hlavicka(char *title, FILE * expt, short int level, short int spec){
 	Export_to_file(expt, (char *)html_header_1, charset_jazyka[_global_jazyk]);
         _header_css(expt, level, nazov_css_suboru);
         if (_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_NOCNY_REZIM) {
-          _header_css(expt, level, nazov_css_invert);
+          _header_css(expt, level, nazov_css_invert_colors);
         }
 	Export_to_file(expt, "<title>%s</title>\n", title);
 	Export_to_file(expt, "</head>\n\n");
