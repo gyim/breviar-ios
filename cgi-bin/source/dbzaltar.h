@@ -618,6 +618,8 @@ extern const char *text_JAN_11_OP[POCET_JAZYKOV + 1];
 extern const char *text_JAN_19_OP[POCET_JAZYKOV + 1];
 extern const char *text_JAN_22_OP[POCET_JAZYKOV + 1];
 extern const char *text_JAN_23_OP[POCET_JAZYKOV + 1];
+extern const char *text_JAN_27_OP[POCET_JAZYKOV + 1];
+extern const char *text_JAN_29_OP[POCET_JAZYKOV + 1];
 
 #endif /* __DBZALTAR_H_ */
 

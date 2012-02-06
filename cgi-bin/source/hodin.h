@@ -2507,6 +2507,15 @@ const char *text_JAN_27[POCET_JAZYKOV + 1] =
  "Sv. Andìly Mericiové, panny",
  "Merici Szent Angéla szûz",
  };
+const char *text_JAN_27_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Markolína z Forl&igrave;, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_JAN_28[POCET_JAZYKOV + 1] = 
 {"Sv. Tomáša Akvinského, kòaza a uèite¾a Cirkvi",
  "Sv. Tomáše Akvinského, knìze a uèitele církve",
@@ -2521,6 +2530,15 @@ const char *text_JAN_29_SVD[POCET_JAZYKOV + 1] =
  "(v Èechách, na Moravì a ve Slezsku není)",
  "",
  "la_",
+ "",
+ "",
+ "",
+ };
+const char *text_JAN_29_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Villany delle Botti, matky rodiny",
+ "",
+ "",
+ "",
  "",
  "",
  "",
