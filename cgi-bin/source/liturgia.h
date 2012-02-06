@@ -901,8 +901,9 @@ extern const char *nazov_slavenia_lokal[];
 #define KALENDAR_SK_SJ                      8
 #define KALENDAR_SK_SDB                     9
 #define KALENDAR_SK_OFM                    10
+#define KALENDAR_SK_OP                     11
 
-#define POCET_KALENDAROV                   10
+#define POCET_KALENDAROV                   11
 
 // filenames for special calendars / názov súbora pre kalendáre
 extern const char *nazov_htm_kalendar[POCET_KALENDAROV + 1];
