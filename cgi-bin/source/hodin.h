@@ -2724,7 +2724,7 @@ const char *text_FEB_08_2[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Josefíny Bakhity, panny",
- "(Sv. Jozefíny Bakhita, panny)",
+ "Bakhita Szent Jozefina szûz",
  };
 const char *text_FEB_09_SDB[POCET_JAZYKOV + 1] = 
 {"Bl. Euzébie Palominovej Yenes, panny",
