@@ -1516,8 +1516,8 @@ void Log(struct tmodlitba1 t){
 	Log_struktura_tm1("   bened/magnifikat  file `%s', anchor `%s'\n", t.benediktus.file, t.benediktus.anchor); // antifona na benediktus/magnifikat
 	Log_struktura_tm1("   prosby            file `%s', anchor `%s'\n", t.prosby.file, t.prosby.anchor);
 	Log_struktura_tm1("   modlitba          file `%s', anchor `%s'\n", t.modlitba.file, t.modlitba.anchor);
-	Log_struktura_tm1("   ant_spompost      file `%s', anchor `%s'\n", t.ant_spompost.file, t.ant_spompost.anchor);
-	Log_struktura_tm1("   modlitba_spompost file `%s', anchor `%s'\n", t.modlitba_spompost.file, t.modlitba_spompost.anchor);
+	Log_struktura_tm1("   ant_spomprivileg      file `%s', anchor `%s'\n", t.ant_spomprivileg.file, t.ant_spomprivileg.anchor);
+	Log_struktura_tm1("   modlitba_spomprivileg file `%s', anchor `%s'\n", t.modlitba_spomprivileg.file, t.modlitba_spomprivileg.anchor);
 }
 
 void Log(struct tmodlitba2 t){
@@ -1572,7 +1572,7 @@ void Log(struct tmodlitba5 t){
 	Log_struktura_tm5("   kresponz          file `%s', anchor `%s'\n", t.kresponz.file, t.kresponz.anchor);
 	Log_struktura_tm5("   1. citanie        file `%s', anchor `%s'\n", t.citanie1.file, t.citanie1.anchor);
 	Log_struktura_tm5("   2. citanie        file `%s', anchor `%s'\n", t.citanie2.file, t.citanie2.anchor);
-	Log_struktura_tm5("   citanie_spompost  file `%s', anchor `%s'\n", t.citanie_spompost.file, t.citanie_spompost.anchor);
+	Log_struktura_tm5("   citanie_spomprivileg  file `%s', anchor `%s'\n", t.citanie_spomprivileg.file, t.citanie_spomprivileg.anchor);
 	Log_struktura_tm5("   ant_chval         file `%s', anchor `%s'\n", t.ant_chval.file, t.ant_chval.anchor);
 	Log_struktura_tm5("   chval1            file `%s', anchor `%s'\n", t.chval1.file, t.chval1.anchor);
 	Log_struktura_tm5("   chval2            file `%s', anchor `%s'\n", t.chval2.file, t.chval2.anchor);

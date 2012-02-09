@@ -1036,38 +1036,44 @@ void _set_modlitba(short int modlitba, const char *file, const char *anchor){
 			break;
 	}// switch(modlitba)
 }
+
 // 2010-05-21: pridané kvôli spomienkam a ¾ubovo¾ným spomienkam v pôstnom období (zobrazenie po modlitbe dòa pôstnej férie)
-void _set_ant_spompost(short int modlitba, const char *file, const char *anchor){
+// 2012-02-09: zovšeobecnené v zmysle VSLH è. 238 (Spomienky pripadajúce na privilegované dni)
+void _set_ant_spomprivileg(short int modlitba, const char *file, const char *anchor){
 	switch(modlitba){
 		case MODL_RANNE_CHVALY:
-			mystrcpy(_global_modl_ranne_chvaly.ant_spompost.file, file, MAX_STR_AF_FILE);
-			mystrcpy(_global_modl_ranne_chvaly.ant_spompost.anchor, anchor, MAX_STR_AF_ANCHOR);
+			mystrcpy(_global_modl_ranne_chvaly.ant_spomprivileg.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_ranne_chvaly.ant_spomprivileg.anchor, anchor, MAX_STR_AF_ANCHOR);
 			break;
 		case MODL_VESPERY:
-			mystrcpy(_global_modl_vespery.ant_spompost.file, file, MAX_STR_AF_FILE);
-			mystrcpy(_global_modl_vespery.ant_spompost.anchor, anchor, MAX_STR_AF_ANCHOR);
+			mystrcpy(_global_modl_vespery.ant_spomprivileg.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_vespery.ant_spomprivileg.anchor, anchor, MAX_STR_AF_ANCHOR);
 			break;
 	}// switch(modlitba)
 }
+
 // 2010-05-21: pridané kvôli spomienkam a ¾ubovo¾ným spomienkam v pôstnom období (zobrazenie po modlitbe dòa pôstnej férie)
-void _set_modlitba_spompost(short int modlitba, const char *file, const char *anchor){
+// 2012-02-09: zovšeobecnené v zmysle VSLH è. 238 (Spomienky pripadajúce na privilegované dni)
+void _set_modlitba_spomprivileg(short int modlitba, const char *file, const char *anchor){
 	switch(modlitba){
 		case MODL_RANNE_CHVALY:
-			mystrcpy(_global_modl_ranne_chvaly.modlitba_spompost.file, file, MAX_STR_AF_FILE);
-			mystrcpy(_global_modl_ranne_chvaly.modlitba_spompost.anchor, anchor, MAX_STR_AF_ANCHOR);
+			mystrcpy(_global_modl_ranne_chvaly.modlitba_spomprivileg.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_ranne_chvaly.modlitba_spomprivileg.anchor, anchor, MAX_STR_AF_ANCHOR);
 			break;
 		case MODL_VESPERY:
-			mystrcpy(_global_modl_vespery.modlitba_spompost.file, file, MAX_STR_AF_FILE);
-			mystrcpy(_global_modl_vespery.modlitba_spompost.anchor, anchor, MAX_STR_AF_ANCHOR);
+			mystrcpy(_global_modl_vespery.modlitba_spomprivileg.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_vespery.modlitba_spomprivileg.anchor, anchor, MAX_STR_AF_ANCHOR);
 			break;
 	}// switch(modlitba)
 }
+
 // 2011-03-16: pridané kvôli spomienkam a ¾ubovo¾ným spomienkam v pôstnom období (zobrazenie po druhom èítaní)
-void _set_2citanie_spompost(short int modlitba, const char *file, const char *anchor){
+// 2012-02-09: zovšeobecnené v zmysle VSLH è. 238 (Spomienky pripadajúce na privilegované dni)
+void _set_2citanie_spomprivileg(short int modlitba, const char *file, const char *anchor){
 	switch(modlitba){
 		case MODL_POSV_CITANIE:
-			mystrcpy(_global_modl_posv_citanie.citanie_spompost.file, file, MAX_STR_AF_FILE);
-			mystrcpy(_global_modl_posv_citanie.citanie_spompost.anchor, anchor, MAX_STR_AF_ANCHOR);
+			mystrcpy(_global_modl_posv_citanie.citanie_spomprivileg.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_posv_citanie.citanie_spomprivileg.anchor, anchor, MAX_STR_AF_ANCHOR);
 			break;
 	}// switch(modlitba)
 }
@@ -8111,24 +8117,24 @@ short int _spol_cast_je_panna(_struct_sc sc){
 	set_LOG_svsv;}
 /* 2010-05-021: doplnené */
 /* bedediktus -- na spomienku svätca v pôste */
-#define _vlastna_cast_benediktus_spompost {\
+#define _vlastna_cast_benediktus_spomprivileg {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_BENEDIKTUS);\
-	_set_ant_spompost(modlitba, _file, _anchor);\
+	_set_ant_spomprivileg(modlitba, _file, _anchor);\
 	set_LOG_svsv;}
 /* magnifikat -- na spomienku svätca v pôste */
-#define _vlastna_cast_magnifikat_spompost {\
+#define _vlastna_cast_magnifikat_spomprivileg {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_MAGNIFIKAT);\
-	_set_ant_spompost(modlitba, _file, _anchor);\
+	_set_ant_spomprivileg(modlitba, _file, _anchor);\
 	set_LOG_svsv;}
 /* modlitba -- na spomienku svätca v pôste */
-#define _vlastna_cast_modlitba_spompost {\
+#define _vlastna_cast_modlitba_spomprivileg {\
 	sprintf(_anchor, "%s%s", _anchor_head, ANCHOR_MODLITBA);\
-	_set_modlitba_spompost(modlitba, _file, _anchor);\
+	_set_modlitba_spomprivileg(modlitba, _file, _anchor);\
 	set_LOG_svsv;}
 /* posvätzné èítanie (2. hagiografické èítanie) -- na spomienku svätca v pôste */
-#define _vlastna_cast_2citanie_spompost {\
+#define _vlastna_cast_2citanie_spomprivileg {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_CITANIE2);\
-	_set_2citanie_spompost(modlitba, _file_pc, _anchor);\
+	_set_2citanie_spomprivileg(modlitba, _file_pc, _anchor);\
 	set_LOG_svsv;}
 
 /* 2005-07-26: posvätné èítanie potrebuje 1. a 2. èítanie */
@@ -12059,15 +12065,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -12116,15 +12122,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -12180,15 +12186,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_popis_svaty_rch_mcd_pc_vesp();
 
 								modlitba = MODL_RANNE_CHVALY;
-								_vlastna_cast_benediktus_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_benediktus_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_VESPERY;
-								_vlastna_cast_magnifikat_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_magnifikat_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_POSV_CITANIE;
-								_vlastna_cast_2citanie_spompost;
+								_vlastna_cast_2citanie_spomprivileg;
 								_vlastna_cast_modlitba;
 
 							}// je_post
@@ -12228,15 +12234,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_popis_svaty_rch_mcd_pc_vesp();
 
 								modlitba = MODL_RANNE_CHVALY;
-								// _vlastna_cast_benediktus_spompost;
-								_vlastna_cast_modlitba_spompost;
+								// _vlastna_cast_benediktus_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_VESPERY;
-								// _vlastna_cast_magnifikat_spompost;
-								_vlastna_cast_modlitba_spompost;
+								// _vlastna_cast_magnifikat_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_POSV_CITANIE;
-								// _vlastna_cast_2citanie_spompost;
+								// _vlastna_cast_2citanie_spomprivileg;
 								_vlastna_cast_modlitba;
 
 							}// je_post
@@ -12275,15 +12281,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_popis_svaty_rch_mcd_pc_vesp();
 
 								modlitba = MODL_RANNE_CHVALY;
-								_vlastna_cast_benediktus_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_benediktus_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_VESPERY;
-								_vlastna_cast_magnifikat_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_magnifikat_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_POSV_CITANIE;
-								_vlastna_cast_2citanie_spompost;
+								_vlastna_cast_2citanie_spomprivileg;
 								_vlastna_cast_modlitba;
 
 							}// je_post
@@ -12322,15 +12328,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -12361,15 +12367,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							// _vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							// _vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							// _vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							// _vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -12419,15 +12425,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_popis_svaty_rch_mcd_pc_vesp();
 
 								modlitba = MODL_RANNE_CHVALY;
-								// _vlastna_cast_benediktus_spompost;
-								_vlastna_cast_modlitba_spompost;
+								// _vlastna_cast_benediktus_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_VESPERY;
-								// _vlastna_cast_magnifikat_spompost;
-								_vlastna_cast_modlitba_spompost;
+								// _vlastna_cast_magnifikat_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_POSV_CITANIE;
-								// _vlastna_cast_2citanie_spompost;
+								// _vlastna_cast_2citanie_spomprivileg;
 								_vlastna_cast_modlitba;
 
 							}// je_post
@@ -12467,15 +12473,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -12520,15 +12526,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -12573,15 +12579,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_popis_svaty_rch_mcd_pc_vesp();
 
 								modlitba = MODL_RANNE_CHVALY;
-								_vlastna_cast_benediktus_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_benediktus_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_VESPERY;
-								_vlastna_cast_magnifikat_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_magnifikat_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_POSV_CITANIE;
-								_vlastna_cast_2citanie_spompost;
+								_vlastna_cast_2citanie_spomprivileg;
 								_vlastna_cast_modlitba;
 
 							}// je_post
@@ -12628,15 +12634,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_popis_svaty_rch_mcd_pc_vesp();
 
 								modlitba = MODL_RANNE_CHVALY;
-								_vlastna_cast_benediktus_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_benediktus_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_VESPERY;
-								_vlastna_cast_magnifikat_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_magnifikat_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_POSV_CITANIE;
-								_vlastna_cast_2citanie_spompost;
+								_vlastna_cast_2citanie_spomprivileg;
 								_vlastna_cast_modlitba;
 
 							}// je_post
@@ -12683,15 +12689,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_popis_svaty_rch_mcd_pc_vesp();
 
 								modlitba = MODL_RANNE_CHVALY;
-								_vlastna_cast_benediktus_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_benediktus_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_VESPERY;
-								_vlastna_cast_magnifikat_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_magnifikat_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_POSV_CITANIE;
-								_vlastna_cast_2citanie_spompost;
+								_vlastna_cast_2citanie_spomprivileg;
 								_vlastna_cast_modlitba;
 
 							}// je_post
@@ -12746,15 +12752,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_popis_svaty_rch_mcd_pc_vesp();
 
 								modlitba = MODL_RANNE_CHVALY;
-								_vlastna_cast_benediktus_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_benediktus_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_VESPERY;
-								_vlastna_cast_magnifikat_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_magnifikat_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_POSV_CITANIE;
-								_vlastna_cast_2citanie_spompost;
+								_vlastna_cast_2citanie_spomprivileg;
 								_vlastna_cast_modlitba;
 
 							}// je_post
@@ -12790,15 +12796,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -12843,15 +12849,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_popis_svaty_rch_mcd_pc_vesp();
 
 								modlitba = MODL_RANNE_CHVALY;
-								_vlastna_cast_benediktus_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_benediktus_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_VESPERY;
-								_vlastna_cast_magnifikat_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_magnifikat_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_POSV_CITANIE;
-								_vlastna_cast_2citanie_spompost;
+								_vlastna_cast_2citanie_spomprivileg;
 								_vlastna_cast_modlitba;
 
 							}// je_post
@@ -12897,15 +12903,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -12978,15 +12984,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -13072,15 +13078,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_popis_svaty_rch_mcd_pc_vesp();
 
 								modlitba = MODL_RANNE_CHVALY;
-								_vlastna_cast_benediktus_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_benediktus_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_VESPERY;
-								_vlastna_cast_magnifikat_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_magnifikat_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_POSV_CITANIE;
-								_vlastna_cast_2citanie_spompost;
+								_vlastna_cast_2citanie_spomprivileg;
 								_vlastna_cast_modlitba;
 
 							}// je_post
@@ -13121,15 +13127,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -13174,15 +13180,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -13226,15 +13232,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -13278,15 +13284,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -13322,8 +13328,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					_global_svaty1.farba = LIT_FARBA_BIELA;
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
 					break;
-/* 2011-02-18: do 9. marca sú propriá vo zväzku III (cezroèné obdobie), potom sa pokraèuje až dòom 12. mája; 
- *             zrušené preto èasti "else" vetiev if(je_post), lebo nie sú potrebné */
+// 2011-02-18: do 9. marca sú propriá vo zväzku III (cezroèné obdobie), potom sa pokraèuje až dòom 12. mája; zrušené preto èasti "else" vetiev if(je_post), lebo nie sú potrebné
 				case 10: /* MES_MAR -- 10MAR */
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
@@ -13333,15 +13338,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_popis_svaty_rch_mcd_pc_vesp();
 
 								modlitba = MODL_RANNE_CHVALY;
-								_vlastna_cast_benediktus_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_benediktus_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_VESPERY;
-								_vlastna_cast_magnifikat_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_magnifikat_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_POSV_CITANIE;
-								_vlastna_cast_2citanie_spompost;
+								_vlastna_cast_2citanie_spomprivileg;
 								_vlastna_cast_modlitba;
 
 							}// je_post
@@ -13383,15 +13388,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_popis_svaty_rch_mcd_pc_vesp();
 
 								modlitba = MODL_RANNE_CHVALY;
-								_vlastna_cast_benediktus_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_benediktus_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_VESPERY;
-								_vlastna_cast_magnifikat_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_magnifikat_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_POSV_CITANIE;
-								_vlastna_cast_2citanie_spompost;
+								_vlastna_cast_2citanie_spomprivileg;
 								_vlastna_cast_modlitba;
 
 							}// je_post
@@ -13461,15 +13466,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -13490,13 +13495,13 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							// nema modlitba = MODL_VESPERY, lebo su prve vespery slavnosti sv. Jozefa
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -13519,18 +13524,18 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_popis_svaty_rch_mcd_pc_vesp();
 
 								modlitba = MODL_RANNE_CHVALY;
-								_vlastna_cast_benediktus_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_benediktus_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 
 								/*
 								 * nema modlitba = MODL_VESPERY, lebo su prve vespery slavnosti sv. Jozefa
 								modlitba = MODL_VESPERY;
-								_vlastna_cast_magnifikat_spompost;
-								_vlastna_cast_modlitba_spompost;
+								_vlastna_cast_magnifikat_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
 								 */
 
 								modlitba = MODL_POSV_CITANIE;
-								_vlastna_cast_2citanie_spompost;
+								_vlastna_cast_2citanie_spomprivileg;
 								_vlastna_cast_modlitba;
 
 							}// je_post
@@ -13635,15 +13640,15 @@ label_19_MAR:
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -13778,15 +13783,15 @@ label_25_MAR:
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -13807,15 +13812,15 @@ label_25_MAR:
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -13855,15 +13860,15 @@ label_25_MAR:
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -13901,15 +13906,15 @@ label_25_MAR:
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -13947,15 +13952,15 @@ label_25_MAR:
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
@@ -13993,15 +13998,15 @@ label_25_MAR:
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_benediktus_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
-							_vlastna_cast_magnifikat_spompost;
-							_vlastna_cast_modlitba_spompost;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_POSV_CITANIE;
-							_vlastna_cast_2citanie_spompost;
+							_vlastna_cast_2citanie_spomprivileg;
 							_vlastna_cast_modlitba;
 
 						}// je_post
