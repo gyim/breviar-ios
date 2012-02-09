@@ -90,7 +90,7 @@ public class Breviar extends Activity {
       wv.getSettings().setBuiltInZoomControls(true);
       wv.setInitialScale(scale);
       initialized = false;
-      //Log.v("breviar", "setting scale = " + scale);
+      Log.v("breviar", "setting scale = " + scale);
 
       final Breviar parent = this;
       wv.setWebViewClient(new WebViewClient() {
@@ -112,7 +112,7 @@ public class Breviar extends Activity {
             if (tryOpenBible(url)) return true;
           }
 
-          //Log.v("breviar", "sync in overrideurlloading");
+          Log.v("breviar", "sync in overrideurlloading");
           parent.syncScale();
           view.loadUrl(url);
           return true;
@@ -121,14 +121,14 @@ public class Breviar extends Activity {
         @Override
         public void onScaleChanged(WebView view, float oldSc, float newSc) {
           parent.scale = (int)(newSc*100);
-          //Log.v("breviar", "onScaleChanged: setting scale = " + scale);
+          Log.v("breviar", "onScaleChanged: setting scale = " + scale);
           view.setInitialScale(parent.scale);
           super.onScaleChanged(view, oldSc, newSc);
         }
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
-          //Log.v("breviar", "onPageStarted");
+          Log.v("breviar", "onPageStarted");
           if (parent.initialized) parent.syncScale();
           parent.initialized = true;
           super.onPageStarted(view, url, favicon);
@@ -136,7 +136,7 @@ public class Breviar extends Activity {
 
         @Override
         public void onPageFinished(WebView view, String url) {
-          //Log.v("breviar", "onPageFinished");
+          Log.v("breviar", "onPageFinished");
           if (parent.clearHistory) view.clearHistory();
           parent.clearHistory = false;
           super.onPageFinished(view, url);
@@ -178,7 +178,7 @@ public class Breviar extends Activity {
     }
 
     protected void onSaveInstanceState(Bundle outState) {
-      //Log.v("breviar", "onSaveInstanceState");
+      Log.v("breviar", "onSaveInstanceState");
       syncScale();
       wv.saveState(outState);
       syncPreferences();
@@ -210,11 +210,11 @@ public class Breviar extends Activity {
     protected void syncScale() {
       scale = (int)(wv.getScale()*100);
       wv.setInitialScale(scale);
-      //Log.v("breviar", "syncScale "+scale);
+      Log.v("breviar", "syncScale "+scale);
     }
 
     protected void onStop(){
-      //Log.v("breviar", "onStop");
+      Log.v("breviar", "onStop");
       syncScale();
       super.onStop();
       syncPreferences();
