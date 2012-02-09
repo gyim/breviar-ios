@@ -53,7 +53,7 @@
 /*   2009-12-14a.D. | zakonèenie modlitby s malým písmenkom na zaèiatku */
 /*   2010-03-16a.D. | doplnené LOKAL_SLAV_BRATISLAVA           */
 /*   2010-05-17a.D. | pridané niektoré maïarské slávenia       */
-/*   2010-05-21a.D. | doplnené: PARAM_POST_SPOMIENKA_BEGIN/END */
+/*   2010-05-21a.D. | doplnené: PARAM_SPOMIENKA_PRIVILEG_BEGIN/END */
 /*   2010-08-03a.D. | do štruktúry "dm" pridaná premenná pre   */
 /*                    špecifikáciu, o aký kalendár ide:        */
 /*                    všeobecný danej cirkevnej provincie      */
@@ -194,8 +194,8 @@ struct tmodlitba1{
 	_struct_anchor_and_file benediktus; // antifona na benediktus/magnifikat/nunc dimittis; 2. citanie pre posvatne citanie
 	_struct_anchor_and_file prosby    ; // pre posvatne citanie nedefinovane; 2011-03-16: "zneužité" (použité) pre hagiografické èítanie (¾ubovo¾nej) spomienky svätca v pôste
 	_struct_anchor_and_file modlitba  ;
-	_struct_anchor_and_file ant_spompost; // 2010-05-21: pridané kvôli spomienkam a ¾ubovo¾ným spomienkam v pôstnom období (zobrazenie po modlitbe dòa pôstnej férie)
-	_struct_anchor_and_file modlitba_spompost; // 2010-05-21: pridané kvôli spomienkam a ¾ubovo¾ným spomienkam v pôstnom období (zobrazenie po modlitbe dòa pôstnej férie)
+	_struct_anchor_and_file ant_spomprivileg; // 2010-05-21: pridané kvôli spomienkam a ¾ubovo¾ným spomienkam v pôstnom období (zobrazenie po modlitbe dòa pôstnej férie) // 2012-02-09: zovšeobecnené v zmysle VSLH è. 238 (Spomienky pripadajúce na privilegované dni)
+	_struct_anchor_and_file modlitba_spomprivileg; // 2010-05-21: pridané kvôli spomienkam a ¾ubovo¾ným spomienkam v pôstnom období (zobrazenie po modlitbe dòa pôstnej férie) // 2012-02-09: zovšeobecnené v zmysle VSLH è. 238 (Spomienky pripadajúce na privilegované dni)
 };
 typedef struct tmodlitba1 _type_ranne_chvaly;
 typedef struct tmodlitba1 _type_vespery;
@@ -258,7 +258,7 @@ struct tmodlitba5{
 	_struct_anchor_and_file kresponz  ; 
 	_struct_anchor_and_file citanie1  ; // 1. citanie pre posvatne citanie
 	_struct_anchor_and_file citanie2  ; // 2. citanie pre posvatne citanie
-	_struct_anchor_and_file citanie_spompost ; // 2011-03-16: "zneužité" (použité) pre hagiografické èítanie (¾ubovo¾nej) spomienky svätca v pôste; 2011-03-25: nový typ -> nové meno
+	_struct_anchor_and_file citanie_spomprivileg ; // 2011-03-16: "zneužité" (použité) pre hagiografické èítanie (¾ubovo¾nej) spomienky svätca v pôste; 2011-03-25: nový typ -> nové meno
 	_struct_anchor_and_file ant_chval ; // vigília: antifóna pre chválospevy
 	_struct_anchor_and_file chval1    ; // vigília: chválospev I
 	_struct_anchor_and_file chval2    ; // vigília: chválospev II
@@ -430,10 +430,12 @@ extern const char *TEMPLAT[POCET_MODLITIEB + 1];
 #define PARAM_ANTIFONA1k    "ANTIFONA1_KOMPLET"
 #define PARAM_ANTIFONA2k    "ANTIFONA2_KOMPLET"
 // 2010-05-21: pridané kvôli spomienkam a ¾ubovo¾ným spomienkam v pôstnom období (zobrazenie po modlitbe dòa pôstnej férie)
-#define PARAM_ANT_SPOMPOST  "ANT_SPOMPOST"
-#define PARAM_MODL_SPOMPOST "MODL_SPOMPOST"
+// 2012-02-09: zovšeobecnené v zmysle VSLH è. 238 (Spomienky pripadajúce na privilegované dni)
+#define PARAM_ANT_SPOMPRIVILEG  "ANT_SPOMPRIVILEG"
+#define PARAM_MODL_SPOMPRIVILEG "MODL_SPOMPRIVILEG"
 // 2011-03-16: pridané kvôli spomienkam a ¾ubovo¾ným spomienkam v pôstnom období (zobrazenie po 2. èítaní v posv. èítaní)
-#define PARAM_CITANIE2_SPOMPOST "CITANIE2_SPOMPOST"
+// 2012-02-09: zovšeobecnené v zmysle VSLH è. 238 (Spomienky pripadajúce na privilegované dni)
+#define PARAM_CITANIE2_SPOMPRIVILEG "CITANIE2_SPOMPRIVILEG"
 // 2011-07-03: pridané kvôli navigácii v modlitbe
 #define PARAM_NAVIGACIA     "NAVIGACIA"
 // 2011-10-04: pridaný nadpis v modlitbe
@@ -479,8 +481,9 @@ extern const char *TEMPLAT[POCET_MODLITIEB + 1];
 #define PARAM_SKRY_ANTIFONU_END             "SKRY_ANTIFONU_END"
 
 // 2010-05-21: doplnené zobrazenie antifóny a modlitby pre spomienku svätca v pôstnom období
-#define PARAM_POST_SPOMIENKA_BEGIN          "POST_SPOMIENKA_BEGIN"
-#define PARAM_POST_SPOMIENKA_END            "POST_SPOMIENKA_END"
+// 2012-02-09: zovšeobecnené v zmysle VSLH è. 238 (Spomienky pripadajúce na privilegované dni)
+#define PARAM_SPOMIENKA_PRIVILEG_BEGIN      "SPOMIENKA_PRIVILEG_BEGIN"
+#define PARAM_SPOMIENKA_PRIVILEG_END        "SPOMIENKA_PRIVILEG_END"
 // 2011-01-12: doplnené zobrazenie/skrytie myšlienky k žalmu -- pre cezroèné obdobie alternatívnej antifóny žalmu/chválospevu ("myšlienka k žalmu" pod¾a bodu 111 a 114 VSLH)
 #define PARAM_PSALMODIA_MYSLIENKA           "PSALMODIA_MYSLIENKA" // 2011-08-31: zmenené; pôvodne bolo: PARAM_MYSLIENKA_K_ZALMU "MYSLIENKA_K_ZALMU"
 // 2011-08-31: doplnené zobrazenie/skrytie nadpisu k žalmu/chválospevu ("nadpis k žalmu" pod¾a bodu 111 VSLH)
@@ -809,6 +812,9 @@ extern const char *zvazok_OBD[POCET_OBDOBI + 1];
 extern const char *nazov_slavenia_jazyk[POCET_SLAVENI + 1][POCET_JAZYKOV + 1];
 #define		nazov_slavenia(a)	nazov_slavenia_jazyk[a][_global_jazyk]
 
+// the name of celebration -- for memoria (in privileged days)
+extern const char *nazov_slavenia_na_spomienku_jazyk[POCET_JAZYKOV + 1];
+
 // extern const char *nazov_Slavenia[];
 
 extern const char *nazov_slavenia_lokal[];
@@ -901,8 +907,9 @@ extern const char *nazov_slavenia_lokal[];
 #define KALENDAR_SK_SJ                      8
 #define KALENDAR_SK_SDB                     9
 #define KALENDAR_SK_OFM                    10
+#define KALENDAR_SK_OP                     11
 
-#define POCET_KALENDAROV                   10
+#define POCET_KALENDAROV                   11
 
 // filenames for special calendars / názov súbora pre kalendáre
 extern const char *nazov_htm_kalendar[POCET_KALENDAROV + 1];
@@ -1404,8 +1411,8 @@ void analyzuj_rok(short int year);
 	_INIT_ANCHOR_AND_FILE(a.benediktus); \
 	_INIT_ANCHOR_AND_FILE(a.prosby); \
 	_INIT_ANCHOR_AND_FILE(a.modlitba); \
-	_INIT_ANCHOR_AND_FILE(a.ant_spompost); \
-	_INIT_ANCHOR_AND_FILE(a.modlitba_spompost); \
+	_INIT_ANCHOR_AND_FILE(a.ant_spomprivileg); \
+	_INIT_ANCHOR_AND_FILE(a.modlitba_spomprivileg); \
 };
 
 #define _INIT_TMODLITBA2(a) {\
@@ -1456,7 +1463,7 @@ void analyzuj_rok(short int year);
 	_INIT_ANCHOR_AND_FILE(a.kresponz); \
 	_INIT_ANCHOR_AND_FILE(a.citanie1); \
 	_INIT_ANCHOR_AND_FILE(a.citanie2); \
-	_INIT_ANCHOR_AND_FILE(a.citanie_spompost); \
+	_INIT_ANCHOR_AND_FILE(a.citanie_spomprivileg); \
 	_INIT_ANCHOR_AND_FILE(a.ant_chval); \
 	_INIT_ANCHOR_AND_FILE(a.chval1); \
 	_INIT_ANCHOR_AND_FILE(a.chval2); \

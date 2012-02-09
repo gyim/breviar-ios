@@ -2,6 +2,8 @@
 .red { color: #ff6600; }
 .redsmall { color: #ff6600; }
 .redbold { color: #ff6600; }
+.bold { color: #FFFFCC; }
+.boldit { color: #FFFFCC; }
 .normal { color: #CCCCCC; }
 .parameter { font-family: Monospace; color: #CCCCCC; }
 .value { font-family: Monospace; color: yellow; }
@@ -13,8 +15,10 @@ body, html {
 }
 p { color: #CCCCCC; }
 
+h1, h2, h3 { color: #FFFFCC; }
+
 a { color: #CCCCCC; }
-a:hover { color: yellow; background-color: #ff6633; }
+a:hover { color: yellow; background-color: #CC9966; } // #ff6633; }
 a:active { color: gray; }
 a.explain { color: #330000; }
 a.button { 
