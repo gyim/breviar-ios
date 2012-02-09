@@ -2221,13 +2221,13 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 	else if(equals(paramname, PARAM_ALELUJA_NIE_V_POSTE_BEGIN)){
 		if(!je_post){
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("nie je post");
+			Export("nie je pÙst");
 #endif
 			Export("-->");
 		}
 		else{
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("je post(");
+			Export("je pÙst(");
 #endif
 			Log("(beg)je postne obdobie\n");
 		}
@@ -2236,12 +2236,12 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		if(!je_post){
 			Export("<!--");
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("nie je post");
+			Export("nie je pÙst");
 #endif
 		}
 		else{
 #if defined(EXPORT_HTML_SPECIALS)
-			Export(")je post");
+			Export(")je pÙst");
 #endif
 			Log("(end)je postne obdobie\n");
 		}
@@ -2250,7 +2250,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 	else if(equals(paramname, PARAM_ALELUJA_VO_VELKONOCNOM_BEGIN)){
 		if(je_velka_noc){
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("je velkonocne obdobie");
+			Export("je veækonoËnÈ obdobie");
 #endif
 			Export("-->");
 		}
@@ -2265,7 +2265,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		if(je_velka_noc){
 			Export("<!--");
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("je velkonocne obdobie");
+			Export("je veækonoËnÈ obdobie");
 #endif
 		}
 		else{
@@ -2287,7 +2287,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			// Od nedele P·novho zm‡tvychvstania aû do Druhej veækonoËnej nedele vr·tane, ako aj na druhÈ veöpery sl·vnosti Zoslania Ducha Sv‰tÈho (teda veækonoËn· okt·va + zakonËenie veækonoËnÈho obdobia)
 			if(je_aleluja_aleluja){
 #if defined(EXPORT_HTML_SPECIALS)
-				Export("velkonocna oktava");
+				Export("veækonoËn· okt·va");
 #endif
 				Export("-->");
 				Log("  ALELUJA_ALELUJA_BEGIN: copying\n");
@@ -2311,7 +2311,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			if(je_aleluja_aleluja){
 				Export("<!--");
 #if defined(EXPORT_HTML_SPECIALS)
-				Export("velkonocna oktava");
+				Export("veækonoËn· okt·va");
 #endif
 				Log("  ALELUJA_ALELUJA_END: copying\n");
 			}
@@ -2325,7 +2325,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_OTCENAS) == BIT_OPT_1_OTCENAS){
 			// zobrazit Otcenas
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("zobrazit Otcenas");
+			Export("zobraziù OtËen·ö");
 #endif
 			Export("-->");
 			Log("  `Otcenas': begin...\n");
@@ -2334,7 +2334,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			// nezobrazovat Otcenas
 			_global_skip_in_prayer = ANO;
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("nezobrazit Otcenas");
+			Export("nezobraziù OtËen·ö");
 #endif
 			Log("  `Otcenas' skipping...\n");
 		}
@@ -2344,7 +2344,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			// zobrazit Otcenas
 			Export("<!--");
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("zobrazit Otcenas");
+			Export("zobraziù OtËen·ö");
 #endif
 			Log("  `Otcenas': copied.\n");
 		}
@@ -2358,7 +2358,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		Log("_global_opt[OPT_1_CASTI_MODLITBY == %d] == %d\n", OPT_1_CASTI_MODLITBY, _global_opt[OPT_1_CASTI_MODLITBY]);
 		if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_CHVALOSPEVY) == BIT_OPT_1_CHVALOSPEVY){
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("zobrazit chvalospev");
+			Export("zobraziù chv·lospev");
 #endif
 			Log("  `chvalospev': begin...\n");
 		}
@@ -2366,7 +2366,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			// nezobrazovat chvalospev
 			_global_skip_in_prayer = ANO;
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("nezobrazit chvalospev");
+			Export("nezobraziù chv·lospev");
 #endif
 			Log("  `chvalospev' skipping...\n");
 		}
@@ -2375,7 +2375,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		Log("_global_opt[OPT_1_CASTI_MODLITBY == %d] == %d\n", OPT_1_CASTI_MODLITBY, _global_opt[OPT_1_CASTI_MODLITBY]);
 		if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_CHVALOSPEVY) == BIT_OPT_1_CHVALOSPEVY){
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("zobrazit chvalospev");
+			Export("zobraziù chv·lospev");
 #endif
 			Log("  `chvalospev' copied.\n");
 		}
@@ -2456,13 +2456,13 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			// nezobrazit zakoncenie
 			_global_skip_in_prayer = ANO;
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("nezobrazit zakoncenie");
+			Export("nezobraziù zakonËenie");
 #endif
 			Log("  `zakoncenie' skipping...\n");
 		}
 		else{
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("zobrazit zakoncenie");
+			Export("zobraziù zakonËenie");
 #endif
 			Export("-->");
 			Log("  `zakoncenie': begin...\n");
@@ -2477,7 +2477,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		else{
 			Export("<!--");
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("zobrazit zakoncenie");
+			Export("zobraziù zakonËenie");
 #endif
 			Log("  `zakoncenie' copied.\n");
 		}
@@ -2596,7 +2596,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		)){
 			// zobrazit Slava Otcu
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("zobraziù Slava Otcu(%d)", _global_pocet_slava_otcu);
+			Export("zobraziù Sl·va Otcu(%d)", _global_pocet_slava_otcu);
 #endif
 			Export("-->");
 			Log("  `Slava Otcu': begin...\n");
@@ -2605,7 +2605,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			// nezobrazovat Slava Otcu
 			_global_skip_in_prayer = ANO;
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("nezobraziù Slava Otcu (%d)", _global_pocet_slava_otcu);
+			Export("nezobraziù Sl·va Otcu (%d)", _global_pocet_slava_otcu);
 #endif
 			Log("  `Slava Otcu' skipping...\n");
 		}
@@ -2623,7 +2623,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		)){
 			Export("<!--");
 #if defined(EXPORT_HTML_SPECIALS)
-			Export("zobraziù Slava Otcu(%d)", _global_pocet_slava_otcu);
+			Export("zobraziù Sl·va Otcu(%d)", _global_pocet_slava_otcu);
 #endif
 			Log("  `Slava Otcu': copied.\n");
 		}
@@ -2719,7 +2719,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 	// 2010-05-21: pridanÈ voliteænÈ zobrazovanie antifÛny a modlitby pre spomienku sv‰tca v pÙstnom obdobÌ 
 	// 2010-05-24: podmienka zosilnen·, aby sa v pÙste nezobrazovalo "Ant." Ëervenou farbou z templ·ty, ak nie je nastaven· t· ant. + modlitba pre spomienku
 	else if(equals(paramname, PARAM_SPOMIENKA_PRIVILEG_BEGIN)){
-		if(je_post && je_ant_modl_spomprivileg){
+		if(je_privileg && je_ant_modl_spomprivileg){
 			// zobraziù antifÛnu/modlitbu na spomienky sv‰tcov, ktorÈ padn˙ na privilegovanÈ dni (VSLH Ë. 238-239)
 #if defined(EXPORT_HTML_SPECIALS)
 			Export("zobraziù spom.privileg.");
@@ -2737,7 +2737,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		}
 	}
 	else if(equals(paramname, PARAM_SPOMIENKA_PRIVILEG_END)){
-		if(je_post && je_ant_modl_spomprivileg){
+		if(je_privileg && je_ant_modl_spomprivileg){
 			// zobraziù antifÛnu/modlitbu na spomienky sv‰tcov, ktorÈ padn˙ na privilegovanÈ dni (VSLH Ë. 238-239)
 			Export("<!--");
 #if defined(EXPORT_HTML_SPECIALS)
