@@ -389,6 +389,10 @@ const char *nazov_slavenia_jazyk[POCET_SLAVENI + 1][POCET_JAZYKOV + 1] =
 
 #define		nazov_slavenia(a)	nazov_slavenia_jazyk[a][_global_jazyk]
 
+// the name of celebration -- for memoria (in privileged days)
+const char *nazov_slavenia_na_spomienku_jazyk[POCET_JAZYKOV + 1] =
+{"na spomienku", "pro pøipomínku", "", "in memoria", "","pro pøipomínku", "megemlékezésül"};
+
 // 2010-08-03: pridaný kalendár
 const char *nazov_kalendara[POCET_KALENDAROV + 1] =
 {"neurèený"

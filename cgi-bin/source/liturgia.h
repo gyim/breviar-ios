@@ -812,6 +812,9 @@ extern const char *zvazok_OBD[POCET_OBDOBI + 1];
 extern const char *nazov_slavenia_jazyk[POCET_SLAVENI + 1][POCET_JAZYKOV + 1];
 #define		nazov_slavenia(a)	nazov_slavenia_jazyk[a][_global_jazyk]
 
+// the name of celebration -- for memoria (in privileged days)
+extern const char *nazov_slavenia_na_spomienku_jazyk[POCET_JAZYKOV + 1];
+
 // extern const char *nazov_Slavenia[];
 
 extern const char *nazov_slavenia_lokal[];

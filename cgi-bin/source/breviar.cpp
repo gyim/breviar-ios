@@ -5335,7 +5335,13 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		else{
 			mystrcpy(pom, STR_EMPTY, MAX_STR);
 		}
-		sprintf(pom2, "%s", nazov_slavenia(_local_den.typslav));
+		// 2012-02-09: pre spomienku na privilegované dni (VSLH è. 238-239) sa exportuje iný názov slávenia
+		if((_local_den.typslav == SLAV_LUB_SPOMIENKA) && (je_privileg)){
+			sprintf(pom2, "%s", nazov_slavenia_na_spomienku_jazyk[_global_jazyk]);
+		}
+		else{
+			sprintf(pom2, "%s", nazov_slavenia(_local_den.typslav));
+		}
 		strcat(pom, pom2);
 		if(typ != EXPORT_DNA_VIAC_DNI_TXT){
 			strcat(pom, "</span>");

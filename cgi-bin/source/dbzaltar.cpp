@@ -25689,24 +25689,44 @@ label_8_DEC:
 					_global_svaty1.farba = LIT_FARBA_BIELA;
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
 					break;
+				// odtia¾to až do konca roka sú tzv. privilegované dni
 				case 21: // MES_DEC -- 21DEC
 					if(poradie_svaty == 1){
-						// definovanie parametrov pre modlitbu
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
+						// na spomienku v privilegovaný deò (spomienka v advente v dòoch 17.-24. decembra)
+						if(je_privileg){
+							if(query_type != PRM_DETAILY)
+								set_popis_svaty_rch_mcd_pc_vesp();
 
-						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_benediktus;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
-						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
-						modlitba = MODL_VESPERY;
-						_vlastna_cast_magnifikat;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_2citanie_spomprivileg;
+							_vlastna_cast_modlitba;
 
+						}// je_privileg
+						else{
+							// definovanie parametrov pre modlitbu
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
+						}// nie je_privileg
 						break;
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -25736,22 +25756,41 @@ label_8_DEC:
 					break;
 				case 23: // MES_DEC -- 23DEC
 					if(poradie_svaty == 1){
-						// definovanie parametrov pre modlitbu
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
+						// na spomienku v privilegovaný deò (spomienka v advente v dòoch 17.-24. decembra)
+						if(je_privileg){
+							if(query_type != PRM_DETAILY)
+								set_popis_svaty_rch_mcd_pc_vesp();
 
-						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_benediktus;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
-						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
-						modlitba = MODL_VESPERY;
-						_vlastna_cast_magnifikat;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_2citanie_spomprivileg;
+							_vlastna_cast_modlitba;
 
+						}// je_privileg
+						else{
+							// definovanie parametrov pre modlitbu
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
+						}// nie je_privileg
 						break;
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -25850,22 +25889,41 @@ label_8_DEC:
 					break;
 				case 29: // MES_DEC -- 29DEC
 					if(poradie_svaty == 1){
-						// definovanie parametrov pre modlitbu
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
+						// na spomienku v privilegovaný deò (spomienka vo Vianoènej oktáve)
+						if(je_privileg){
+							if(query_type != PRM_DETAILY)
+								set_popis_svaty_rch_mcd_pc_vesp();
 
-						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_benediktus;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
-						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
-						modlitba = MODL_VESPERY;
-						_vlastna_cast_magnifikat;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_2citanie_spomprivileg;
+							_vlastna_cast_modlitba;
 
+						}// je_privileg
+						else{
+							// definovanie parametrov pre modlitbu
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
+						}// nie je_privileg
 						break;
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
@@ -25877,19 +25935,39 @@ label_8_DEC:
 					break;
 				case 31: // MES_DEC -- 31DEC
 					if(poradie_svaty == 1){
-						// definovanie parametrov pre modlitbu
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
+						// na spomienku v privilegovaný deò (spomienka vo Vianoènej oktáve)
+						if(je_privileg){
+							if(query_type != PRM_DETAILY)
+								set_popis_svaty_rch_mcd_pc_vesp();
 
-						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_benediktus;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_benediktus_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
-						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_magnifikat_spomprivileg;
+							_vlastna_cast_modlitba_spomprivileg;
 
-						// nema vespery, lebo uz su prve vespery slavnosti bohorodicky panny marie
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_2citanie_spomprivileg;
+							_vlastna_cast_modlitba;
+
+						}// je_privileg
+						else{
+							// definovanie parametrov pre modlitbu
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							// nema vespery, lebo uz su prve vespery slavnosti bohorodicky panny marie
+						}// nie je_privileg
 						break;
 					}
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
