@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="version">v1.7.8</string>
+    <string name="version">v1.7.9</string>
 
     <string name="lang_sk">SK</string>
     <string name="lang_cz">CZ</string>
@@ -23,14 +23,13 @@
     <string name="pgup">PgUp</string>
     <string name="pgdn">PgDn</string>
     <string name="news">
+     News in v1.7.9:\n
+     - Updates from www.breviar.sk\n\n
      News in v1.7.8:\n
      - Night mode\n
      - Updates from www.breviar.sk\n\n
      News in v1.7.7:\n
      - Fix crash in Android 2.2\n
      - Updates from www.breviar.sk\n\n
-     News in v1.7.3 - v1.7.6:\n
-     - Updates from www.breviar.sk\n
-     - Translations of buttons to Hungarian\n\n
     </string>
 </resources>
