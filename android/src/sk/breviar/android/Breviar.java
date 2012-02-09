@@ -91,7 +91,6 @@ public class Breviar extends Activity {
       wv.setInitialScale(scale);
       initialized = false;
       //Log.v("breviar", "setting scale = " + scale);
-      if (wv.restoreState(savedInstanceState) == null) goHome();
 
       final Breviar parent = this;
       wv.setWebViewClient(new WebViewClient() {
@@ -124,6 +123,7 @@ public class Breviar extends Activity {
           parent.scale = (int)(newSc*100);
           //Log.v("breviar", "onScaleChanged: setting scale = " + scale);
           view.setInitialScale(parent.scale);
+          super.onScaleChanged(view, oldSc, newSc);
         }
 
         @Override
@@ -131,6 +131,7 @@ public class Breviar extends Activity {
           //Log.v("breviar", "onPageStarted");
           if (parent.initialized) parent.syncScale();
           parent.initialized = true;
+          super.onPageStarted(view, url, favicon);
         }
 
         @Override
@@ -138,6 +139,7 @@ public class Breviar extends Activity {
           //Log.v("breviar", "onPageFinished");
           if (parent.clearHistory) view.clearHistory();
           parent.clearHistory = false;
+          super.onPageFinished(view, url);
         }
       } );
 
@@ -171,6 +173,8 @@ public class Breviar extends Activity {
         showDialog(DIALOG_NEWS);
         markVersion();
       }
+
+      if (wv.restoreState(savedInstanceState) == null) goHome();
     }
 
     protected void onSaveInstanceState(Bundle outState) {
@@ -178,6 +182,7 @@ public class Breviar extends Activity {
       syncScale();
       wv.saveState(outState);
       syncPreferences();
+      super.onSaveInstanceState(outState);
     }
 
     void syncPreferences() {
