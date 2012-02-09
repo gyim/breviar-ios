@@ -10919,7 +10919,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								modlitba = MODL_INVITATORIUM;
 								_vlastna_cast_antifona_inv;
 
-								_vlastna_cast_mcd_modlitba;
+								_vlastna_cast_mcd_ant_kcitresp_modl;
 							}
 
 							modlitba = MODL_RANNE_CHVALY;
@@ -10937,10 +10937,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							else{
 								_vlastna_cast_modlitba;
 								_vlastna_cast_2citanie;
-							}
-
-							if(_global_jazyk == JAZYK_HU){
-								_vlastna_cast_mcd_modlitba;
 							}
 
 							modlitba = MODL_VESPERY;
