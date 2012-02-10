@@ -2622,14 +2622,41 @@ const char *text_FEB_03_2[POCET_JAZYKOV + 1] =
  "Sv. Ansgara, biskupa",
  "Szent Anszgár (Oszkár) püspök",
  };
-const char *text_FEB_04_CZOP[POCET_JAZYKOV + 1] = 
-{"(na Slovensku nie je)",
- "(v Èechách, na Moravì a ve Slezsku není)",
+const char *text_FEB_03_1_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Petra Z Ruff&iacute;a, kòaza a muèeníka",
  "",
- "la_",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_FEB_03_2_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Antona Pavoniho, kòaza a muèeníka",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_FEB_03_3_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Bartolomeja Cerveriho, kòaza a muèeníka",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_FEB_04_OP[POCET_JAZYKOV + 1] = 
+{"Sv. Kataríny de’ Ricci, panny",
+ "",
+ "",
+ "",
  "",
  "Sv. Kateøiny z Ricci, panny, øeholnice",
- "hu_",
+ "",
  };
 const char *text_FEB_04_SJ[POCET_JAZYKOV + 1] = 
 {"Sv. Jána de Brito, kòaza, bl. Rudolfa Acquavivu, kòaza a jeho spoloèníkov; <br>bl. Františka Pacheca, Karola Spinolu, kòazov a spoloèníkov, muèeníkov; <br>bl. Jakuba Berthieu, kòaza, Leva Mangina, kòaza a spoloèníkov, muèeníkov",
@@ -2685,14 +2712,14 @@ const char *text_FEB_06_OFM[POCET_JAZYKOV + 1] =
  "",
  "",
  };
-const char *text_FEB_07_CZOP[POCET_JAZYKOV + 1] = 
-{"(na Slovensku nie je)",
- "(v Èechách, na Moravì a ve Slezsku není)",
+const char *text_FEB_07_OP[POCET_JAZYKOV + 1] = 
+{"Spomienka na zosnulých otcov a matky èlenov rehole",
  "",
- "la_",
+ "",
+ "",
  "",
  "Výroèní památka zemøelých otcù a matek",
- "hu_",
+ "",
  };
 const char *text_FEB_07_SDB[POCET_JAZYKOV + 1] = 
 {"Bl. Pia IX., pápeža",
@@ -2757,23 +2784,23 @@ const char *text_FEB_11[POCET_JAZYKOV + 1] =
  "Panny Marie Lurdské",
  "A Lourdes-i Boldogságos Szûz Mária",
  };
-const char *text_FEB_12_CZOP[POCET_JAZYKOV + 1] = 
-{"(na Slovensku nie je)",
- "(v Èechách, na Moravì a ve Slezsku není)",
+const char *text_FEB_12_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Reginalda Orleánskeho, kòaza",
  "",
- "la_",
+ "",
+ "",
  "",
  "Bl. Reginalda z Orléansu, knìze",
- "hu_",
- };
-const char *text_FEB_13_CZOP[POCET_JAZYKOV + 1] = 
-{"(na Slovensku nie je)",
- "(v Èechách, na Moravì a ve Slezsku není)",
  "",
- "la_",
+ };
+const char *text_FEB_13_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Jordána Saského, kòaza",
+ "",
+ "",
+ "",
  "",
  "Bl. Jordána Saského, knìze",
- "hu_",
+ "",
  };
 const char *text_FEB_14[POCET_JAZYKOV + 1] = 
 {"Sv. Cyrila, mnícha, a sv. Metoda, biskupa, patrónov Európy", // (na Slovensku sa slávi 5. júla)
