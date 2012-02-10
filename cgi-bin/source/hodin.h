@@ -2820,6 +2820,15 @@ const char *text_FEB_15_SJ[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_FEB_16_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Mikuláša Pagliu, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_FEB_17[POCET_JAZYKOV + 1] = 
 {"Siedmich svätých zakladate¾ov rehole Služobníkov Panny Márie",
  "Sv. Alexia a druhù, øeholníkù",
@@ -2829,14 +2838,32 @@ const char *text_FEB_17[POCET_JAZYKOV + 1] =
  "Sv. Alexia a druhù, øeholníkù",
  "A szervita rend hét szent alapítója",
  };
-const char *text_FEB_18_CZOP[POCET_JAZYKOV + 1] = 
-{"(na Slovensku nie je)",
- "(v Èechách, na Moravì a ve Slezsku není)",
+const char *text_FEB_18_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Jána (Angelika) z Fiesole, kòaza",
  "",
- "la_",
+ "",
+ "",
  "",
  "Bl. Jana z Fiesole neboli fra Angelica, knìze",
- "hu_",
+ "",
+ };
+const char *text_FEB_19_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Alvara z Kordovy, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_FEB_20_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Krištofa z Milána, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_FEB_21[POCET_JAZYKOV + 1] = 
 {"Sv. Petra Damianiho, biskupa a uèite¾a Cirkvi",
@@ -2864,6 +2891,15 @@ const char *text_FEB_23[POCET_JAZYKOV + 1] =
  "",
  "Sv. Polykarpa, biskupa a muèedníka",
  "Szent Polikárp püspök és vértanú",
+ };
+const char *text_FEB_24_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Konštanca z Fabriana, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_FEB_25_SDB[POCET_JAZYKOV + 1] = 
 {"Sv. Alojza Versigliu, biskupa, a Kalixta Caravaria, kòaza, <br>prvých saleziánskych muèeníkov",
