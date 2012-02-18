@@ -6462,7 +6462,7 @@ const char *text_PO_POPOLCOVEJ_STREDE[POCET_JAZYKOV + 1] =
  "",
  "",
  "po Popeleèní støedì",
- "hu_name",
+ "Hamvazószerda után",
  };
 const char *text_V_OKTAVE_NARODENIA[POCET_JAZYKOV + 1] = 
 {"v oktáve Narodenia Pána",
