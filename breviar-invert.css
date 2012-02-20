@@ -1,8 +1,9 @@
 /* apply to all elements, used for <span> (character style) and <div> (paragraph style) */
-.red { color: #ff6600; }
+.red { color: #FF3333; }
+.redit { color: #FF3333; font-style: italic; }
 .blue { color: #0066ff; }
-.redsmall { color: #ff6600; font-size: 80%; }
-.redbold { color: #ff6600; font-weight: bold; }
+.redsmall { color: #FF3333; font-size: 80%; }
+.redbold { color: #FF3333; font-weight: bold; }
 .bluebold { color: #0066ff; font-weight: bold; }
 .bold { font-weight: bold; }
 .boldit { font-weight: bold; font-style: italic; }
@@ -44,7 +45,7 @@ a.quiet:visited { text-decoration:none; color: inherit; }
 a.quiet:active { text-decoration:none; color: inherit; }
 
 a { font-family: inherit; color: #CCCCCC; text-decoration: underline; }
-a:hover { color: yellow; background-color: #ff6633; text-decoration:none; }
+a:hover { color: white; background-color: #ff6633; text-decoration:none; }
 a:active { color: gray; text-decoration: underline; }
 a img { border: none }
 a.explain { color: #330000; font-size: 100%; }

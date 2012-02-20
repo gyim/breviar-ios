@@ -1,5 +1,6 @@
 /* apply to all elements, used for <span> (character style) and <div> (paragraph style), 2005-07-27 */
 .red { color: #ff0000; }
+.redit { color: #ff0000; font-style: italic; }
 .blue { color: #0066ff; }
 .redsmall { color: #ff0000; font-size: 80%; }
 .redbold { color: #ff0000; font-weight: bold; }

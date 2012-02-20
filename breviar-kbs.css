@@ -3,6 +3,7 @@
 
 /* #FFE6D9; */
 .red { color: red; }
+.redit { color: red; font-style: italic; }
 .blue { color: #0066ff; }
 .redsmall { color: #A3868A; font-size: 80%; }
 .redbold { color: #772C35; font-weight: bold; }
