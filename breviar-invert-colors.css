@@ -1,7 +1,8 @@
 /* override color settings for "night-mode" (inverted colors) */
-.red { color: #ff6600; }
-.redsmall { color: #ff6600; }
-.redbold { color: #ff6600; }
+.red { color: #FF3333; }
+.redit { color: #FF3333; font-style: italic; }
+.redsmall { color: #FF3333; }
+.redbold { color: #FF3333; }
 .bold { color: #FFFFCC; }
 .boldit { color: #FFFFCC; }
 .normal { color: #CCCCCC; }
@@ -18,7 +19,7 @@ p { color: #CCCCCC; }
 h1, h2, h3 { color: #FFFFCC; }
 
 a { color: #CCCCCC; }
-a:hover { color: yellow; background-color: #CC9966; } // #ff6633; }
+a:hover { color: white; background-color: #CC9966; } // #ff6633; }
 a:active { color: gray; }
 a.explain { color: #330000; }
 a.button { 
