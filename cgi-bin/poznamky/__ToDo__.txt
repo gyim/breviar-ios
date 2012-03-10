@@ -106,3 +106,14 @@ vtyz.htm
 	
 	A je to ovela prehladnejsie napriklad v aplikacii GoodReader na iPade.
 
+2012-03-02, JUV:
+
+-- moûnosù zvoliù iba niektorÈ modlitby (naraz vygenerovaù):
+
+Jeste posilam priklad URL, ktera by napr. vygenerovala pro dnesni den
+ranni chvaly, nespory a kompletar:
+
+http://breviar.sk/cgi-bin/l.cgi?qt=pdt&d=2&m=3&r=2012&p=mrch|mv|mk&j=c2&o1=132
+
+JJ jan.jakous@gmail.com
+
