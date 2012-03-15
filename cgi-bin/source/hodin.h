@@ -428,7 +428,7 @@ const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1] =
 ,""
 ,"pre Spoloènos Boieho Slova — verbistov (SVD)"
 ,"pre Spoloènos Jeišovu — jezuitov (SJ)"
-,"pre saleziánsku rodinu — SDB, FMA, VDB"
+,"pre saleziánsku rodinu — SDB, FMA, ASC" // bolo VDB -> ASC; saleziáni spolupracovníci majú skratku ASC - Associazione dei salesiani cooperatori - teda Zdruzenie salezianov spolupravovnikov (upozornil Mao Linhart, 2012-02-13)
 // ,"pre františkánsku rodinu — františkánov<!-- (OFM)-->, kapucínov<!-- (OFMCap)-->, minoritov<!-- (OFMConv)-->" // 2011-03-21: nefungovalo porovnanie atokalendar lebo HTML odstránilo poznámky
 // ,"pre františkánsku rodinu — františkánov, kapucínov, minoritov" // 2011-03-22: sú tam aj mnohé ïalšie rehole a kongregácie, take ma br. Jakub OFM poprosil, aby ostalo iba "pre františkánsku rodinu"
 ,"pre františkánsku rodinu"
@@ -2595,7 +2595,7 @@ const char *text_JAN_31[POCET_JAZYKOV + 1] =
  "Bosco Szent János áldozópap",
  };
 const char *text_JAN_31_SDB[POCET_JAZYKOV + 1] = 
-{"Sv. Jána Boska, kòaza, otca a uèite¾a mládee, <br>zakladate¾a Spoloènosti svätého Františka Saleského, <br>Inštitútu dcér Márie Pomocnice <br>a saleziánskych spolupracovníkov",
+{"Sv. Jána Boska, kòaza, otca a uèite¾a mládee, <br>zakladate¾a Spoloènosti svätého Františka Saleského, <br>Inštitútu dcér Márie Pomocnice <br>a saleziánov spolupracovníkov",
  "",
  "",
  "",
