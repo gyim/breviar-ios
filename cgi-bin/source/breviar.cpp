@@ -7007,43 +7007,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	//---------------------------------------------------------------------
 
-	Export("<tr>\n<td>\n");
-	Export("<!-- tabuæka pre checkboxy 0 (options pre modlitbu) -->\n");
-	Export("<table align=\"left\">\n"); // table option 0 (1/2)
-
-	Export("<tr><td>\n");
-	// formular pre options...
-
-	// option 0: bity ovplyvÚuj˙ce liturgick˝ kalend·r (pouûÌvame force opt_0)...
-	Export("<"HTML_SPAN_BOLD_TOOLTIP">%s</span>", html_text_option1_kalendar_explain[_global_jazyk], html_text_option1_kalendar[_global_jazyk]);
-
-	// pole (checkbox) WWW_MODL_OPTF_0_VERSE
-	Export("<br>");
-	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_0_ZJAV_NED, NIE);
-	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_0_ZJAV_NED, ANO, html_text_option0_zjv_ne_explain[_global_jazyk], ((_global_optf[OPT_0_SPECIALNE] & BIT_OPT_0_ZJAVENIE_PANA_NEDELA) == BIT_OPT_0_ZJAVENIE_PANA_NEDELA)? html_option_checked: STR_EMPTY);
-	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option0_zjv_ne_explain[_global_jazyk], html_text_option0_zjv_ne[_global_jazyk]);
-
-	// pole (checkbox) WWW_MODL_OPTF_0_VERSE
-	Export("<br>");
-	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_0_NAN_NED, NIE);
-	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_0_NAN_NED, ANO, html_text_option0_nan_ne_explain[_global_jazyk], ((_global_optf[OPT_0_SPECIALNE] & BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA) == BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA)? html_option_checked: STR_EMPTY);
-	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option0_nan_ne_explain[_global_jazyk], html_text_option0_nan_ne[_global_jazyk]);
-
-	// pole (checkbox) WWW_MODL_OPTF_0_VERSE
-	Export("<br>");
-	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_0_TK_NED, NIE);
-	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_0_TK_NED, ANO, html_text_option0_tk_ne_explain[_global_jazyk], ((_global_optf[OPT_0_SPECIALNE] & BIT_OPT_0_TELAKRVI_NEDELA) == BIT_OPT_0_TELAKRVI_NEDELA)? html_option_checked: STR_EMPTY);
-	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option0_tk_ne_explain[_global_jazyk], html_text_option0_tk_ne[_global_jazyk]);
-
-	Export("</td></tr>\n");
-
-	Export("</table>\n"); // table option 0
-	Export("</td></tr>\n\n");
-
-	//---------------------------------------------------------------------
-
 	// 2011-01-31: sem presunut· moûnosù v˝beru liturgickÈho kalend·ra
-	// 2011-09-26:L predsunut· pred vöetky ostatnÈ options (Igor Gal·d)
+	// 2011-09-26: predsunut· pred vöetky ostatnÈ options (Igor Gal·d)
 	if(_global_jazyk == JAZYK_SK){
 
 		Export("<tr>\n<td>\n");
@@ -7246,6 +7211,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("</td></tr>\n\n");
 
 	//---------------------------------------------------------------------
+
 	Export("<tr>\n<td>\n");
 	Export("<!-- tabuæka pre checkboxy 4 (options pre modlitbu) -->\n");
 	Export("<table align=\"left\">\n"); // table option 2
@@ -7350,6 +7316,42 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("</td></tr>\n");
 
 	Export("</table>\n"); // table option 2
+	Export("</td></tr>\n\n");
+
+	//---------------------------------------------------------------------
+
+	// 2012-03-15: zasunutÈ niûöie, aby to nemiatlo (pripomienka MBK)
+	Export("<tr>\n<td>\n");
+	Export("<!-- tabuæka pre checkboxy 0 (options pre modlitbu) -->\n");
+	Export("<table align=\"left\">\n"); // table option 0 (1/2)
+
+	Export("<tr><td>\n");
+	// formular pre options...
+
+	// option 0: bity ovplyvÚuj˙ce liturgick˝ kalend·r (pouûÌvame force opt_0)...
+	Export("<"HTML_SPAN_BOLD_TOOLTIP">%s</span>", html_text_option1_kalendar_explain[_global_jazyk], html_text_option1_kalendar[_global_jazyk]);
+
+	// pole (checkbox) WWW_MODL_OPTF_0_VERSE
+	Export("<br>");
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_0_ZJAV_NED, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_0_ZJAV_NED, ANO, html_text_option0_zjv_ne_explain[_global_jazyk], ((_global_optf[OPT_0_SPECIALNE] & BIT_OPT_0_ZJAVENIE_PANA_NEDELA) == BIT_OPT_0_ZJAVENIE_PANA_NEDELA)? html_option_checked: STR_EMPTY);
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option0_zjv_ne_explain[_global_jazyk], html_text_option0_zjv_ne[_global_jazyk]);
+
+	// pole (checkbox) WWW_MODL_OPTF_0_VERSE
+	Export("<br>");
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_0_NAN_NED, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_0_NAN_NED, ANO, html_text_option0_nan_ne_explain[_global_jazyk], ((_global_optf[OPT_0_SPECIALNE] & BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA) == BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA)? html_option_checked: STR_EMPTY);
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option0_nan_ne_explain[_global_jazyk], html_text_option0_nan_ne[_global_jazyk]);
+
+	// pole (checkbox) WWW_MODL_OPTF_0_VERSE
+	Export("<br>");
+	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_0_TK_NED, NIE);
+	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_0_TK_NED, ANO, html_text_option0_tk_ne_explain[_global_jazyk], ((_global_optf[OPT_0_SPECIALNE] & BIT_OPT_0_TELAKRVI_NEDELA) == BIT_OPT_0_TELAKRVI_NEDELA)? html_option_checked: STR_EMPTY);
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option0_tk_ne_explain[_global_jazyk], html_text_option0_tk_ne[_global_jazyk]);
+
+	Export("</td></tr>\n");
+
+	Export("</table>\n"); // table option 0
 	Export("</td></tr>\n\n");
 
 	//---------------------------------------------------------------------
