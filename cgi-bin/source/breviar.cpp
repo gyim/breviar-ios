@@ -1578,8 +1578,16 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 				else if(equals(strbuff, PARAM_ZAKONCENIE)){
 					if((vnutri_inkludovaneho == ANO) && (write == ANO)){
 						// Export("[INPUT:paramname=%s|fname=%s|modlparam=%s|READ:strbuff=%s|rest=%s]", paramname, fname, modlparam, strbuff, rest);
-						if(equals(paramname, PARAM_MODLITBA)){
-							je_modlitba = ANO;
+						if((equals(paramname, PARAM_MODLITBA)) || (equals(paramname, PARAM_MODL_SPOMPRIVILEG))){
+
+							// pre ranné chvály a vešpery, ak sa pridáva 'modlitba' pre spomienku v privilegované dni, tak zakonèenie sa dáva až pre PARAM_MODL_SPOMPRIVILEG
+							if((equals(paramname, PARAM_MODLITBA)) && (je_ant_modl_spomprivileg))
+								je_modlitba = !(_global_modlitba == MODL_RANNE_CHVALY || _global_modlitba == MODL_VESPERY);
+							else if(equals(paramname, PARAM_MODL_SPOMPRIVILEG))
+								je_modlitba = ANO;
+							else
+								je_modlitba = ANO;
+							
 							if(rest != NULL && strlen(rest) > 0)
 								mystrcpy(rest_zakoncenie, rest, MAX_BUFFER);
 						}
@@ -1592,7 +1600,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 						Export("%s:%s", strbuff, modlparam);
 #endif
 						*/
-						if((je_modlitba == ANO) || (equals(paramname, PARAM_MODLITBA))){
+						if((je_modlitba == ANO) && ((equals(paramname, PARAM_MODLITBA)) || (equals(paramname, PARAM_MODL_SPOMPRIVILEG)))){
 							Export("%s--> ", (rest_zakoncenie == NULL) ? STR_EMPTY: rest_zakoncenie);
 							if(equals(rest_zakoncenie, PARAM_ZAKONCENIE_SKRZE) || equals(rest_zakoncenie, PARAM_ZAKONCENIE_SKRZE_MALE)){
 								if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
