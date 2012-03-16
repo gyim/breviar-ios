@@ -1642,6 +1642,10 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 									mystrcpy(zakoncenie, text_ZAKONCENIE_KTORY_JE_dlhe, MAX_ZAKONCENIE);
 								}
 							} // SK: ZAKONCENIE_KTORY_JE
+							else if(equals(rest_zakoncenie, PARAM_ZAKONCENIE_O_TO_TA_PROSIME)){
+								mystrcpy(zakoncenie, text_ZAKONCENIE_O_TO_TA_PROSIME[_global_jazyk], MAX_ZAKONCENIE);
+							} // PARAM_ZAKONCENIE_O_TO_TA_PROSIME
+
 							if(equals(rest_zakoncenie, PARAM_ZAKONCENIE_SKRZE_MALE) || equals(rest_zakoncenie, PARAM_ZAKONCENIE_LEBO_TY_MALE) || equals(rest_zakoncenie, PARAM_ZAKONCENIE_LEBO_ON_MALE)){
 								zakoncenie[0] = zakoncenie[0] + ('a'-'A'); // posun z ve¾kého písmena na malé: pozor, funguje len pre základné znaky ASCII
 							}

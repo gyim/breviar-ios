@@ -543,6 +543,8 @@ extern const char *TEMPLAT[POCET_MODLITIEB + 1];
 #define PARAM_ZAKONCENIE_ON_JE              "ON_JE"
 // 2010-01-14, doplnenÈ: eöte jedno zakonËenie modlitby pre slovenËinu, kr·tke resp. dlhÈ
 #define PARAM_ZAKONCENIE_KTORY_JE           "KTORY_JE"
+// 2012-03-16, doplnenÈ: predslovy k zakonËeniam, ktorÈ sa pre fÈrie nemaj˙ zobraziù, ak sa sl·vi spomienka v privilegovan˝ch dÚoch
+#define PARAM_ZAKONCENIE_O_TO_TA_PROSIME    "O_TO_TA_PROSIME"
 
 // 2011-08-15: force pre jednotlivÈ Ëasti modlitby, funkcie _set_spolocna_cast()...
 #define FORCE_BRAT_ANTIFONY      1
@@ -1531,6 +1533,7 @@ extern const char *text_ZAKONCENIE_ON_JE_dlhe; // len SK
 extern const char *text_ZAKONCENIE_ON_JE_kratke; // len SK
 extern const char *text_ZAKONCENIE_KTORY_JE_dlhe; // len SK
 extern const char *text_ZAKONCENIE_KTORY_JE_kratke; // len SK
+extern const char *text_ZAKONCENIE_O_TO_TA_PROSIME[POCET_JAZYKOV + 1];
 
 extern const char *text_PRO_OP[POCET_JAZYKOV + 1];
 

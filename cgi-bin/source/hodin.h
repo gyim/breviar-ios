@@ -2126,6 +2126,17 @@ const char *text_ZAKONCENIE_ON_JE_kratke = "On ûije a_kraæuje na veky vekov.";
 const char *text_ZAKONCENIE_KTORY_JE_dlhe = "ktor˝ je Boh a_s_tebou ûije a_kraæuje v_jednote s_Duchom Sv‰t˝m po vöetky veky vekov.";
 const char *text_ZAKONCENIE_KTORY_JE_kratke = "ktor˝ ûije a_kraæuje na veky vekov.";
 
+const char *text_ZAKONCENIE_O_TO_TA_PROSIME[POCET_JAZYKOV + 1] = 
+{"O_to ùa prosÌme",
+ "ProsÌme o_to",
+ "",
+ "",
+ "",
+ "ProsÌme o_to",
+ "",
+ };
+
+
 // 2009-05-15, doplnenÈ: pre dominik·nov
 const char *text_PRO_OP[POCET_JAZYKOV + 1] = 
 {"Pre dominik·nov (CZ_OP): ",
