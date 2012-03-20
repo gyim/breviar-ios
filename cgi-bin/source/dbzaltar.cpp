@@ -26126,6 +26126,9 @@ label_8_DEC:
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
 					_global_svaty1.farba = LIT_FARBA_BIELA;
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
+					if(_global_jazyk == JAZYK_HU){
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_EGER_FOEGYH;
+					}
 					break;
 				case 28: // MES_DEC -- 28DEC
 					if(poradie_svaty == 1){
@@ -26199,6 +26202,9 @@ label_8_DEC:
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_MUCENIK);
 					_global_svaty1.farba = LIT_FARBA_CERVENA;
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
+					if(_global_jazyk == JAZYK_HU){
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_ESZTERGOM_EML;
+					}
 					break;
 				case 31: // MES_DEC -- 31DEC
 					if(poradie_svaty == 1){

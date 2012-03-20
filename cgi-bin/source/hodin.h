@@ -518,6 +518,8 @@ const char *nazov_slavenia_lokal[] =
 ,"A Pécsi egyházmegyében: A Pécsi egyházmegye társvédõszentje; fõünnep"                                         // LOKAL_SLAV_PECS_PATRON
 ,"Szombathely: Az egyházmegye védõszentje; fõünnep"                                                             // LOKAL_SLAV_SZOMBATHELYI_PATRON
 ,"Székesfehérvár: A székesegyházban; fõünnep"                                                                   // LOKAL_SLAV_SZEKESFEHERVAR_EGYH
+,"Az Egri fõegyházmegyében: A fõegyházmegye védõszentje; ünnep"                                                 // LOKAL_SLAV_EGER_FOEGYH
+,"Az Esztergomi fõegyházmegyében: emléknap"                                                                     // LOKAL_SLAV_ESZTERGOM_EML
 };
 
 // names of liturgical colors
