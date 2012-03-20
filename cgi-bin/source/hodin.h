@@ -3504,7 +3504,7 @@ const char *text_MAJ_14[POCET_JAZYKOV + 1] =
  "S. Matthiae, apostoli",
  "",
  "Sv. Matìje, apoštola",
- "(nincs Magyarországon)",
+ "Szent Mátyás apostol", // v HU sa slávi 24.2.
  };
 const char *text_MAJ_15_CZOP[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",

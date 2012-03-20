@@ -13334,6 +13334,36 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							_global_svaty1.kalendar = KALENDAR_SK_OP;
 						}
 					}// kalend·r pre KALENDAR_SK_OP
+					if(_global_jazyk == JAZYK_HU){
+						if(poradie_svaty == 1){
+							// definovanie parametrov pre modlitbu
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_benediktus;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_2citanie;
+
+							_vlastna_cast_mcd_modlitba;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_magnifikat;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_SVIATOK;
+						_global_svaty1.smer = 7; // sviatky preblahoslavenej Panny M·rie a sv‰t˝ch, uvedenÈ vo vöeobecnom kalend·ri
+						mystrcpy(_global_svaty1.meno, text_MAJ_14[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+						_global_svaty1.farba = LIT_FARBA_CERVENA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+					}// v HU sa sl·vi 24.2.; vo vöeobecnom kalend·ri 14.5.
 					break;
 				case 25: // MES_FEB -- 25FEB
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SDB)){
@@ -15839,42 +15869,44 @@ label_25_MAR:
 					}// kalend·r pre KALENDAR_SK_OFM
 					break;
 				case 14: // MES_MAY -- 14MAJ
-					if(poradie_svaty == 1){
-						// definovanie parametrov pre modlitbu
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
+					if(_global_jazyk != JAZYK_HU){
+						if(poradie_svaty == 1){
+							// definovanie parametrov pre modlitbu
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
 
-						modlitba = MODL_RANNE_CHVALY;
-						if(_global_jazyk == JAZYK_CZ){
-							// 2008-05-14: doplnenÈ - pre Ëesk˙ verziu vlastn˝, pre slovensk˙ rovnak˝ ako na posv. ËÌtanie 
-							// 2011-05-14: latinsk˝ ani slovensk˝ neurËuje, ûe sa pre RCH m· braù vlastn˝ hymnus; ten je len pre posv. ËÌtanie
+							modlitba = MODL_RANNE_CHVALY;
+							if(_global_jazyk == JAZYK_CZ){
+								// 2008-05-14: doplnenÈ - pre Ëesk˙ verziu vlastn˝, pre slovensk˙ rovnak˝ ako na posv. ËÌtanie 
+								// 2011-05-14: latinsk˝ ani slovensk˝ neurËuje, ûe sa pre RCH m· braù vlastn˝ hymnus; ten je len pre posv. ËÌtanie
+								_vlastna_cast_hymnus;
+							}
+							_vlastna_cast_modlitba;
+							_vlastna_cast_benediktus;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
 							_vlastna_cast_hymnus;
+							_vlastna_cast_2citanie;
+
+							_vlastna_cast_mcd_modlitba;
+
+							modlitba = MODL_VESPERY;
+							if(_global_jazyk == JAZYK_CZ){
+								_vlastna_cast_hymnus; // 2009-07-27: doplnenÈ; je vlastn˝ hymnus, resp. klasick˝ obohaten˝ o 4. sloku
+							}
+							_vlastna_cast_modlitba;
+							_vlastna_cast_magnifikat;
+
+							break;
 						}
-						_vlastna_cast_modlitba;
-						_vlastna_cast_benediktus;
-
-						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
-						_vlastna_cast_hymnus;
-						_vlastna_cast_2citanie;
-
-						_vlastna_cast_mcd_modlitba;
-
-						modlitba = MODL_VESPERY;
-						if(_global_jazyk == JAZYK_CZ){
-							_vlastna_cast_hymnus; // 2009-07-27: doplnenÈ; je vlastn˝ hymnus, resp. klasick˝ obohaten˝ o 4. sloku
-						}
-						_vlastna_cast_modlitba;
-						_vlastna_cast_magnifikat;
-
-						break;
-					}
-					_global_svaty1.typslav = SLAV_SVIATOK;
-					_global_svaty1.smer = 7; // sviatky preblahoslavenej Panny M·rie a sv‰t˝ch, uvedenÈ vo vöeobecnom kalend·ri
-					mystrcpy(_global_svaty1.meno, text_MAJ_14[_global_jazyk], MENO_SVIATKU);
-					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
-					_global_svaty1.farba = LIT_FARBA_CERVENA;
-					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
+						_global_svaty1.typslav = SLAV_SVIATOK;
+						_global_svaty1.smer = 7; // sviatky preblahoslavenej Panny M·rie a sv‰t˝ch, uvedenÈ vo vöeobecnom kalend·ri
+						mystrcpy(_global_svaty1.meno, text_MAJ_14[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
+						_global_svaty1.farba = LIT_FARBA_CERVENA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
+					}// v HU sa sl·vi 24.2.
 					break;
 				case 15: // MES_MAY -- 15MAJ
 					if(_global_jazyk == JAZYK_CZ_OP){
