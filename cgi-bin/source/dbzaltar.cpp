@@ -12798,9 +12798,15 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							}// nie je_privileg
 							break;
 						}
-						// na Slovensku 5. j˙la, sl·vnosù; v EurÛpe sviatok
-						_global_svaty1.typslav = SLAV_SPOMIENKA;
-						_global_svaty1.smer = 10; // povinnÈ spomienky podæa vöeobecnÈho kalend·ra
+						// na Slovensku 5. j˙la, sl·vnosù; v EurÛpe sviatok (tak napr. HU)
+						if(_global_jazyk == JAZYK_HU){
+							_global_svaty1.typslav = SLAV_SVIATOK;
+							_global_svaty1.smer = 7; // sviatky preblahoslavenej Panny M·rie a sv‰t˝ch, uvedenÈ vo vöeobecnom kalend·ri
+						}
+						else{
+							_global_svaty1.typslav = SLAV_SPOMIENKA;
+							_global_svaty1.smer = 10; // povinnÈ spomienky podæa vöeobecnÈho kalend·ra
+						}
 						if(_global_jazyk == JAZYK_SK){
 							_global_svaty1.typslav_lokal = LOKAL_SLAV_14_FEB_CYRIL_METOD;
 						}
