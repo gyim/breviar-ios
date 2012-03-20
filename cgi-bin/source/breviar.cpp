@@ -7061,6 +7061,9 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<option%s>%s\n", 
 			(_global_kalendar == KALENDAR_SK_OP)? html_option_selected: STR_EMPTY,
 			nazov_slavenia_lokal_kalendar[KALENDAR_SK_OP]);
+		Export("<option%s>%s\n", 
+			(_global_kalendar == KALENDAR_SK_CM)? html_option_selected: STR_EMPTY,
+			nazov_slavenia_lokal_kalendar[KALENDAR_SK_CM]);
 #endif
 		Export("</select>\n");
 

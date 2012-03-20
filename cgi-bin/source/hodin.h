@@ -407,15 +407,16 @@ const char *nazov_kalendara[POCET_KALENDAROV + 1] =
 ,"SK SDB"
 ,"SK OFM"
 ,"SK OP"
+,"SK CM"
 };
 
 // calendar codes; internal usage for HTTP requests
 const char *skratka_kalendara[POCET_KALENDAROV + 1] =
-{"??", "la", "sk", "cz", "czop", "cssr", "hu", "svd", "sj", "sdb", "ofm", "op"};
+{"??", "la", "sk", "cz", "czop", "cssr", "hu", "svd", "sj", "sdb", "ofm", "op", "cm"};
 
 // filenames for special calendars / n·zov s˙bora pre kalend·re -- "pro" == propri·
 const char *nazov_htm_kalendar[POCET_KALENDAROV + 1] =
-{"", "", "", "", "", "pro_cssr.htm", "", "pro_svd.htm", "pro_sj.htm", "pro_sdb.htm", "pro_ofm.htm", "pro_op.htm"};
+{"", "", "", "", "", "pro_cssr.htm", "", "pro_svd.htm", "pro_sj.htm", "pro_sdb.htm", "pro_ofm.htm", "pro_op.htm", "pro_cm.htm"};
 
 // doplnenÈ 2010-10-11
 const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1] =
@@ -433,6 +434,7 @@ const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1] =
 // ,"pre frantiök·nsku rodinu ó frantiök·nov, kapucÌnov, minoritov" // 2011-03-22: s˙ tam aj mnohÈ Ôalöie rehole a kongreg·cie, takûe ma br. Jakub OFM poprosil, aby ostalo iba "pre frantiök·nsku rodinu"
 ,"pre frantiök·nsku rodinu"
 ,"pre Rehoæu kazateæov ó dominik·nov (OP)"
+,"pre Misijn˙ spoloËnosù sv. Vincenta de Paul ó lazaristov (CM)"
 };
 
 // special "local" or "partial" characteristics of various celebrations - each in one language; no need to translate; special strings will be added
