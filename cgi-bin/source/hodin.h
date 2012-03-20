@@ -493,8 +493,8 @@ const char *nazov_slavenia_lokal[] =
 ,"pre FMA: spomienka"                                                                                           // LOKAL_SLAV_SPOMIENKA_FMA
 ,"pre FMA: slávnos"                                                                                            // LOKAL_SLAV_SLAVNOST_FMA
 ,"pre SDB: slávnos"                                                                                            // LOKAL_SLAV_SLAVNOST_SDB
-,"pre VDB: sviatok"                                                                                             // LOKAL_SLAV_SVIATOK_VDB
-,"pre SCSC: sviatok"                                                                                            // LOKAL_SLAV_SVIATOK_SCSC/
+,"pre ASC: sviatok"                                                                                             // LOKAL_SLAV_SVIATOK_VDB // VDB -> ASC
+,"pre SCSC: sviatok"                                                                                            // LOKAL_SLAV_SVIATOK_SCSC
 ,"Húsvét 2. vasárnapja — Az Isteni Irgalmasság vasárnapja"                                                      // LOKAL_SLAV_DRUHA_VELK_NEDELA_HU
 ,"A Szombathelyi egyházmegyében"                                                                                // LOKAL_SLAV_SZOMBATHELYI_EGYH
 ,"Pozsonyi fõegyházmegye és a Nagyszombati egyházmegye fõpátronusa"                                             // LOKAL_SLAV_POZS_NAGYSZ_PATRON
