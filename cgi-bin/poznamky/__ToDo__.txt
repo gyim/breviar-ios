@@ -1,3 +1,4 @@
+_________________________________________________________________________
 2011-07-26, JUV:
 
 -- doplni èíslovanie veršov do almov a chválospevov
@@ -14,6 +15,7 @@
 -- pre modlitby, kde sa nachádzajú almy 24, 67, 100, doplni monos vygenerova modlitbu so almom 95 (ak tento nebol pouitı na invitatórium); mono sa bude da vyui prepínaè na doplnkovú psalmódiu MCD
 	-- hotovo
 
+_________________________________________________________________________
 2011-10-05, JUV:
 
 -- skontrolova vyššie uvedené úlohy (aspoò v slovenskom sú mnohé spravené)
@@ -29,6 +31,7 @@
 	-- èiastoène hotové
 <!--{BEGIN:ZVOLANIE}--><br><i>&nbsp;&nbsp;&nbsp;&nbsp; <font color="#FF0000">(</font>txtzvolanie<font color="#FF0000">)</font></i><!--{END:ZVOLANIE}-->
 
+_________________________________________________________________________
 2011-10-06, JUV:
 
 -- upravi zakonèenia tak, aby tam nebolo BEGIN a END, ale len jedno k¾úèové slovo, ako má napr. NAVIGACIA alebo ZVOLANIE
@@ -42,17 +45,20 @@
 -- opravi: alm 95 (linka) ignoruje poradie_svateho
 	-- hotovo
 
+_________________________________________________________________________
 2011-10-08, JUV:
 
 -- odstráni vo¾bu pre "almy zo sviatku/zo dòa"; smernice jasne hovoria, aká psalmódia sa má bra; prerobi ho na parameter "vzia èasti zo spoloènej èasti (nie zo dòa)" pre spomienky a ¾ubovo¾né spomienky pod¾a è. 235 b) všeobecnıch smerníc
 	-- hotovo, BIT_OPT_1_SPOMIENKA_SPOL_CAST; su_inv_hymnus_kcit_kresp_benmagn_prosby_vlastne()
 
+_________________________________________________________________________
 2011-10-13, JUV:
 
 -- aj do ostatnıch jazykov do HTML zdrojákov pre almy a chválospevy doplni "kríiky"
 
 -- zvái, èi èervenú pomlèku, odde¾ujúcu jednotlivé strofy pre almy a chválospevy, spravi volite¾ne zobrazite¾nou (implementácia ako napr. <!--{ZAKONCENIE:SKRZE}-->)
 
+_________________________________________________________________________
 2011-10-26, JUV:
 
 -- adv1_pc a adv2_pc krátke ukonèenia resp. a referencie
@@ -78,23 +84,27 @@ vtyz.htm
 -- spracova BIT_OPT_0_ZJAVENIE_PANA_NEDELA
 	-- hotovo
 
+_________________________________________________________________________
 2011-11-07, JUV: 
 
 -- dorieši krst keï padne v HU na pondelok po nedeli zjavenia Pána
 	-- hotovo
 -- doriešené aj presúvanie Najsv. Kristovho tela a krvi na nede¾u
 
+_________________________________________________________________________
 2011-11-08, JUV:
 
 -- chyba je, e v modlitbe cez deò ponúkam info o svätcovi; v podstate by pre spomienky a ¾ubovo¾né spomienky ani odkaz na modlitbu cez deò nemusel by (viï bod 236. smerníc: "V modlitbe cez deò, èie predpoludním, napoludnie a popoludní, a v kompletóriu sa neberie niè z ofícia o svätom, všetko je zo všedného dòa.")
 
 -- podobne asi neponúknu pre ¾ubovo¾né spomienky kompletórium
 
+_________________________________________________________________________
 2012-01-06, JUV:
 
 -- pre tabu¾ku treba zoh¾adni slávenie Zjavenia Pána v nede¾u
 	-- hotovo
 
+_________________________________________________________________________
 2012-01-16, JUV:
 
 -- úprava offline exportu (ondruska.drahoslav@slovanet.sk, 2012-01-13)
@@ -106,6 +116,7 @@ vtyz.htm
 	
 	A je to ovela prehladnejsie napriklad v aplikacii GoodReader na iPade.
 
+_________________________________________________________________________
 2012-03-02, JUV:
 
 -- monos zvoli iba niektoré modlitby (naraz vygenerova):
@@ -116,4 +127,12 @@ ranni chvaly, nespory a kompletar:
 http://breviar.sk/cgi-bin/l.cgi?qt=pdt&d=2&m=3&r=2012&p=mrch|mv|mk&j=c2&o1=132
 
 JJ jan.jakous@gmail.com
+
+_________________________________________________________________________
+2012-03-08, JUV:
+
+-- Chvála Kristu, v dobì postní mi v breviáøi chybí monost vybrat si hymnus, kdy se nìkdo modlí z papírového a modlí se jinı hymnus ne Soudce všeho svìta Boe, nezbıvá mi nic jiného, ne jen poslouchat.
+Míša Štegnerová / trebovskam@gmail.com
+
+_________________________________________________________________________
 

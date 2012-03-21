@@ -407,15 +407,16 @@ const char *nazov_kalendara[POCET_KALENDAROV + 1] =
 ,"SK SDB"
 ,"SK OFM"
 ,"SK OP"
+,"SK CM"
 };
 
 // calendar codes; internal usage for HTTP requests
 const char *skratka_kalendara[POCET_KALENDAROV + 1] =
-{"??", "la", "sk", "cz", "czop", "cssr", "hu", "svd", "sj", "sdb", "ofm", "op"};
+{"??", "la", "sk", "cz", "czop", "cssr", "hu", "svd", "sj", "sdb", "ofm", "op", "cm"};
 
 // filenames for special calendars / názov súbora pre kalendáre -- "pro" == propriá
 const char *nazov_htm_kalendar[POCET_KALENDAROV + 1] =
-{"", "", "", "", "", "pro_cssr.htm", "", "pro_svd.htm", "pro_sj.htm", "pro_sdb.htm", "pro_ofm.htm", "pro_op.htm"};
+{"", "", "", "", "", "pro_cssr.htm", "", "pro_svd.htm", "pro_sj.htm", "pro_sdb.htm", "pro_ofm.htm", "pro_op.htm", "pro_cm.htm"};
 
 // doplnené 2010-10-11
 const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1] =
@@ -428,11 +429,12 @@ const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1] =
 ,""
 ,"pre Spoloènos Boieho Slova — verbistov (SVD)"
 ,"pre Spoloènos Jeišovu — jezuitov (SJ)"
-,"pre saleziánsku rodinu — SDB, FMA, VDB"
+,"pre saleziánsku rodinu — SDB, FMA, ASC" // bolo VDB -> ASC; saleziáni spolupracovníci majú skratku ASC - Associazione dei salesiani cooperatori - teda Zdruzenie salezianov spolupravovnikov (upozornil Mao Linhart, 2012-02-13)
 // ,"pre františkánsku rodinu — františkánov<!-- (OFM)-->, kapucínov<!-- (OFMCap)-->, minoritov<!-- (OFMConv)-->" // 2011-03-21: nefungovalo porovnanie atokalendar lebo HTML odstránilo poznámky
 // ,"pre františkánsku rodinu — františkánov, kapucínov, minoritov" // 2011-03-22: sú tam aj mnohé ïalšie rehole a kongregácie, take ma br. Jakub OFM poprosil, aby ostalo iba "pre františkánsku rodinu"
 ,"pre františkánsku rodinu"
 ,"pre Reho¾u kazate¾ov — dominikánov (OP)"
+,"pre Misijnú spoloènos sv. Vincenta de Paul — lazaristov (CM)"
 };
 
 // special "local" or "partial" characteristics of various celebrations - each in one language; no need to translate; special strings will be added
@@ -491,8 +493,8 @@ const char *nazov_slavenia_lokal[] =
 ,"pre FMA: spomienka"                                                                                           // LOKAL_SLAV_SPOMIENKA_FMA
 ,"pre FMA: slávnos"                                                                                            // LOKAL_SLAV_SLAVNOST_FMA
 ,"pre SDB: slávnos"                                                                                            // LOKAL_SLAV_SLAVNOST_SDB
-,"pre VDB: sviatok"                                                                                             // LOKAL_SLAV_SVIATOK_VDB
-,"pre SCSC: sviatok"                                                                                            // LOKAL_SLAV_SVIATOK_SCSC/
+,"pre ASC: sviatok"                                                                                             // LOKAL_SLAV_SVIATOK_VDB // VDB -> ASC
+,"pre SCSC: sviatok"                                                                                            // LOKAL_SLAV_SVIATOK_SCSC
 ,"Húsvét 2. vasárnapja — Az Isteni Irgalmasság vasárnapja"                                                      // LOKAL_SLAV_DRUHA_VELK_NEDELA_HU
 ,"A Szombathelyi egyházmegyében"                                                                                // LOKAL_SLAV_SZOMBATHELYI_EGYH
 ,"Pozsonyi fõegyházmegye és a Nagyszombati egyházmegye fõpátronusa"                                             // LOKAL_SLAV_POZS_NAGYSZ_PATRON
@@ -516,6 +518,10 @@ const char *nazov_slavenia_lokal[] =
 ,"A Pécsi egyházmegyében: A Pécsi egyházmegye társvédõszentje; fõünnep"                                         // LOKAL_SLAV_PECS_PATRON
 ,"Szombathely: Az egyházmegye védõszentje; fõünnep"                                                             // LOKAL_SLAV_SZOMBATHELYI_PATRON
 ,"Székesfehérvár: A székesegyházban; fõünnep"                                                                   // LOKAL_SLAV_SZEKESFEHERVAR_EGYH
+,"Az Egri fõegyházmegyében: A fõegyházmegye védõszentje; ünnep"                                                 // LOKAL_SLAV_EGER_FOEGYH
+,"Az Esztergomi fõegyházmegyében; emléknap"                                                                     // LOKAL_SLAV_ESZTERGOM_EML
+,"A Gyõri egyházmegyében"                                                                                       // LOKAL_SLAV_GYOR_EGYH
+,"Az Esztergomi fõegyházmegyében"                                                                               // LOKAL_SLAV_ESZTERGOM_FOEGYH
 };
 
 // names of liturgical colors
@@ -2126,6 +2132,17 @@ const char *text_ZAKONCENIE_ON_JE_kratke = "On ije a_kra¾uje na veky vekov.";
 const char *text_ZAKONCENIE_KTORY_JE_dlhe = "ktorı je Boh a_s_tebou ije a_kra¾uje v_jednote s_Duchom Svätım po všetky veky vekov.";
 const char *text_ZAKONCENIE_KTORY_JE_kratke = "ktorı ije a_kra¾uje na veky vekov.";
 
+const char *text_ZAKONCENIE_O_TO_TA_PROSIME[POCET_JAZYKOV + 1] = 
+{"O_to a prosíme",
+ "Prosíme o_to",
+ "",
+ "",
+ "",
+ "Prosíme o_to",
+ "",
+ };
+
+
 // 2009-05-15, doplnené: pre dominikánov
 const char *text_PRO_OP[POCET_JAZYKOV + 1] = 
 {"Pre dominikánov (CZ_OP): ",
@@ -2474,7 +2491,7 @@ const char *text_JAN_23_SK[POCET_JAZYKOV + 1] =
  "",
  "(non est in Latina)",
  "",
- "hu_name",
+ "",
  "(nincs Magyarországon)",
  };
 const char *text_JAN_23_OP[POCET_JAZYKOV + 1] = 
@@ -2595,7 +2612,7 @@ const char *text_JAN_31[POCET_JAZYKOV + 1] =
  "Bosco Szent János áldozópap",
  };
 const char *text_JAN_31_SDB[POCET_JAZYKOV + 1] = 
-{"Sv. Jána Boska, kòaza, otca a uèite¾a mládee, <br>zakladate¾a Spoloènosti svätého Františka Saleského, <br>Inštitútu dcér Márie Pomocnice <br>a saleziánskych spolupracovníkov",
+{"Sv. Jána Boska, kòaza, otca a uèite¾a mládee, <br>zakladate¾a Spoloènosti svätého Františka Saleského, <br>Inštitútu dcér Márie Pomocnice <br>a saleziánov spolupracovníkov",
  "",
  "",
  "",
@@ -2963,6 +2980,15 @@ const char *text_MAR_04[POCET_JAZYKOV + 1] =
  "Sv. Kazimíra",
  "Szent Kázmér",
  };
+const char *text_MAR_04_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Boldog Meszlényi Zoltán püspök és vértanú",
+ };
 const char *text_MAR_07[POCET_JAZYKOV + 1] = 
 {"Sv. Perpetuy a Felicity, muèeníc",
  "Sv. Perpetuy a Felicity, muèednic",
@@ -2981,15 +3007,6 @@ const char *text_MAR_08[POCET_JAZYKOV + 1] =
  "Sv. Jana z Boha, øeholníka",
  "Istenes Szent János szerzetes",
  };
-const char *text_MAR_10_SK[POCET_JAZYKOV + 1] = 
-{"Vıroèie posviacky katedrálneho chrámu v Bratislave",
- "(v Èechách, na Moravì a na Slezsku není)",
- "",
- "",
- "",
- "(pro dominikány není)",
- "(nincs Magyarországon)",
- };
 const char *text_MAR_09[POCET_JAZYKOV + 1] = 
 {"Sv. Františky Rímskej, reho¾níèky",
  "Sv. Františky Øímské, øeholnice",
@@ -2998,6 +3015,15 @@ const char *text_MAR_09[POCET_JAZYKOV + 1] =
  "",
  "Sv. Františky Øímské, øeholnice",
  "Római Szent Franciska szerzetesnõ",
+ };
+const char *text_MAR_10_SK[POCET_JAZYKOV + 1] = 
+{"Vıroèie posviacky katedrálneho chrámu v Bratislave",
+ "(v Èechách, na Moravì a na Slezsku není)",
+ "",
+ "",
+ "",
+ "(pro dominikány není)",
+ "(nincs Magyarországon)",
  };
 const char *text_MAR_10_CZ[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",
@@ -3034,6 +3060,15 @@ const char *text_MAR_17[POCET_JAZYKOV + 1] =
  "",
  "Sv. Patrika, biskupa",
  "Szent Patrik püspök",
+ };
+const char *text_MAR_17_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "A Gyõri könnyezõ Szûz Mária",
  };
 const char *text_MAR_18[POCET_JAZYKOV + 1] = 
 {"Sv. Cyrila Jeruzalemského, biskupa a uèite¾a Cirkvi",
@@ -3137,6 +3172,15 @@ const char *text_APR_13[POCET_JAZYKOV + 1] =
  "Sv. Martina I., papee a muèedníka",
  "Szent I. Márton pápa és vértanú",
  };
+const char *text_APR_16[POCET_JAZYKOV + 1] = 
+{"Sv. Márie Bernadety Soubirousovej, panny",
+ "Sv. Marie Bernadetty Soubirous, panny",
+ "",
+ "S. Marii Bernadette Soubirous, virg.",
+ "",
+ "Sv. Marie Bernadetty Soubirous, panny",
+ "Soubirous szent Mária Bernadett szûz",
+ };
 const char *text_APR_20[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",
  "(v Èechách, na Moravì a ve Slezsku není)",
@@ -3181,6 +3225,15 @@ const char *text_APR_23[POCET_JAZYKOV + 1] =
  "",
  "Sv. Vojtìcha, biskupa a muèedníka",
  "Szent Adalbert (Béla) püspök és vértanú",
+ };
+const char *text_APR_23_HU[POCET_JAZYKOV + 1] = 
+{"Sv. Vojtecha, biskupa a muèeníka",
+ "Sv. Vojtìcha, biskupa a muèedníka",
+ "",
+ "S. Adalberti, ep. et mart.",
+ "",
+ "Sv. Vojtìcha, biskupa a muèedníka",
+ "Szent Adalbert (Béla) püspök és vértanú, az Esztergomi fõegyházmegye védõszentje",
  };
 const char *text_APR_23_OFM[POCET_JAZYKOV + 1] = 
 {"Bl. Egida z Assisi, reho¾níka, èlena 1. rádu",
@@ -3489,7 +3542,7 @@ const char *text_MAJ_14[POCET_JAZYKOV + 1] =
  "S. Matthiae, apostoli",
  "",
  "Sv. Matìje, apoštola",
- "(nincs Magyarországon)",
+ "Szent Mátyás apostol", // v HU sa slávi 24.2.
  };
 const char *text_MAJ_15_CZOP[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",
@@ -3789,8 +3842,13 @@ const char *text_DEN_VO_VELKONOCNEJ_OKTAVE[POCET_JAZYKOV + 1] =
  "",
  "",
  "%s velikonoèní",
- "hu_name",
+ "%s Húsvét nyolcadában",
  };
+
+const char *text_HU_VELKONOCNY_PONDELOK = "Húsvéthétfõ"; // pre HU špeciálny názov ve¾konoèného pondelka
+
+const char *text_HU_VELKY_TYZDEN_PREFIX = "Nagy"; // pre HU špeciálne názvy dní ve¾kného tıdòa (pondelok a streda)
+
 const char *text_NAJSVATEJSEJ_TROJICE[POCET_JAZYKOV + 1] = 
 {"Najsvätejšej Trojice",
  "Nejsvìtìjší Trojice",
@@ -6420,7 +6478,7 @@ const char *text_DEC_31[POCET_JAZYKOV + 1] =
 // --------------- 00 pohyblivé slávenia ---------------
 
 const char *text_ZELENY_STVRTOK[POCET_JAZYKOV + 1] = 
-{"Zelenı (ve¾kı) štvrtok - Pamiatka Pánovej veèere",
+{"Zelenı (ve¾kı) štvrtok – Pamiatka Pánovej veèere",
  "Zelenı ètvrtek - Památka Veèeøe Pánì",
  "",
  "",

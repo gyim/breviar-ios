@@ -543,6 +543,8 @@ extern const char *TEMPLAT[POCET_MODLITIEB + 1];
 #define PARAM_ZAKONCENIE_ON_JE              "ON_JE"
 // 2010-01-14, doplnenÈ: eöte jedno zakonËenie modlitby pre slovenËinu, kr·tke resp. dlhÈ
 #define PARAM_ZAKONCENIE_KTORY_JE           "KTORY_JE"
+// 2012-03-16, doplnenÈ: predslovy k zakonËeniam, ktorÈ sa pre fÈrie nemaj˙ zobraziù, ak sa sl·vi spomienka v privilegovan˝ch dÚoch
+#define PARAM_ZAKONCENIE_O_TO_TA_PROSIME    "O_TO_TA_PROSIME"
 
 // 2011-08-15: force pre jednotlivÈ Ëasti modlitby, funkcie _set_spolocna_cast()...
 #define FORCE_BRAT_ANTIFONY      1
@@ -894,6 +896,10 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_PECS_PATRON              72
 #define LOKAL_SLAV_SZOMBATHELYI_PATRON      73
 #define LOKAL_SLAV_SZEKESFEHERVAR_EGYH      74
+#define LOKAL_SLAV_EGER_FOEGYH              75
+#define LOKAL_SLAV_ESZTERGOM_EML            76
+#define LOKAL_SLAV_GYOR_EGYH                77
+#define LOKAL_SLAV_ESZTERGOM_FOEGYH         78
 
 // 2010-08-03: pridan˝ kalend·r
 #define KALENDAR_NEURCENY                   0
@@ -908,8 +914,9 @@ extern const char *nazov_slavenia_lokal[];
 #define KALENDAR_SK_SDB                     9
 #define KALENDAR_SK_OFM                    10
 #define KALENDAR_SK_OP                     11
+#define KALENDAR_SK_CM                     12
 
-#define POCET_KALENDAROV                   11
+#define POCET_KALENDAROV                   12
 
 // filenames for special calendars / n·zov s˙bora pre kalend·re
 extern const char *nazov_htm_kalendar[POCET_KALENDAROV + 1];
@@ -1531,6 +1538,7 @@ extern const char *text_ZAKONCENIE_ON_JE_dlhe; // len SK
 extern const char *text_ZAKONCENIE_ON_JE_kratke; // len SK
 extern const char *text_ZAKONCENIE_KTORY_JE_dlhe; // len SK
 extern const char *text_ZAKONCENIE_KTORY_JE_kratke; // len SK
+extern const char *text_ZAKONCENIE_O_TO_TA_PROSIME[POCET_JAZYKOV + 1];
 
 extern const char *text_PRO_OP[POCET_JAZYKOV + 1];
 
