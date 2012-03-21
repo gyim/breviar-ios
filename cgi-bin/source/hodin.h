@@ -2996,15 +2996,6 @@ const char *text_MAR_08[POCET_JAZYKOV + 1] =
  "Sv. Jana z Boha, øeholníka",
  "Istenes Szent János szerzetes",
  };
-const char *text_MAR_10_SK[POCET_JAZYKOV + 1] = 
-{"Výroèie posviacky katedrálneho chrámu v Bratislave",
- "(v Èechách, na Moravì a na Slezsku není)",
- "",
- "",
- "",
- "(pro dominikány není)",
- "(nincs Magyarországon)",
- };
 const char *text_MAR_09[POCET_JAZYKOV + 1] = 
 {"Sv. Františky Rímskej, reho¾níèky",
  "Sv. Františky Øímské, øeholnice",
@@ -3013,6 +3004,15 @@ const char *text_MAR_09[POCET_JAZYKOV + 1] =
  "",
  "Sv. Františky Øímské, øeholnice",
  "Római Szent Franciska szerzetesnõ",
+ };
+const char *text_MAR_10_SK[POCET_JAZYKOV + 1] = 
+{"Výroèie posviacky katedrálneho chrámu v Bratislave",
+ "(v Èechách, na Moravì a na Slezsku není)",
+ "",
+ "",
+ "",
+ "(pro dominikány není)",
+ "(nincs Magyarországon)",
  };
 const char *text_MAR_10_CZ[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",
