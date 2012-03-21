@@ -170,12 +170,14 @@ extern const char *text_FEB_22[POCET_JAZYKOV + 1];
 extern const char *text_FEB_23[POCET_JAZYKOV + 1];
 
 extern const char *text_MAR_04[POCET_JAZYKOV + 1];
+extern const char *text_MAR_04_HU[POCET_JAZYKOV + 1];
 extern const char *text_MAR_07[POCET_JAZYKOV + 1];
 extern const char *text_MAR_08[POCET_JAZYKOV + 1];
 extern const char *text_MAR_09[POCET_JAZYKOV + 1];
 extern const char *text_MAR_10_CZ[POCET_JAZYKOV + 1];
 extern const char *text_MAR_10_SK[POCET_JAZYKOV + 1];
 extern const char *text_MAR_17[POCET_JAZYKOV + 1];
+extern const char *text_MAR_17_HU[POCET_JAZYKOV + 1];
 extern const char *text_MAR_18[POCET_JAZYKOV + 1];
 extern const char *text_MAR_19[POCET_JAZYKOV + 1];
 extern const char *text_MAR_23[POCET_JAZYKOV + 1];

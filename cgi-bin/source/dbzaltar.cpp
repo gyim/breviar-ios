@@ -12294,7 +12294,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_popis_svaty_rch_mcd_pc_vesp();
 
 								modlitba = MODL_RANNE_CHVALY;
-								// _vlastna_cast_benediktus_spomprivileg;
+								// _vlastna_cast_benediktus_spomprivileg; // TODO: treba doplniù antifÛnu zo spoloËnej Ëasti (do vlastnej Ëasti) a odpozn·mkovaù tento kÛd, aby bolo spr·vne zobrazenÈ zakonËenie
 								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_VESPERY;
@@ -12426,7 +12426,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_popis_svaty_rch_mcd_pc_vesp();
 
 							modlitba = MODL_RANNE_CHVALY;
-							// _vlastna_cast_benediktus_spomprivileg;
+							// _vlastna_cast_benediktus_spomprivileg; // TODO: treba doplniù antifÛnu zo spoloËnej Ëasti (do vlastnej Ëasti) a odpozn·mkovaù tento kÛd, aby bolo spr·vne zobrazenÈ zakonËenie
 							_vlastna_cast_modlitba_spomprivileg;
 
 							modlitba = MODL_VESPERY;
@@ -12444,7 +12444,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_RANNE_CHVALY;
-							// 2010-05-14: antifÛna na benediktus/magnifikat: vlastn· sa berie iba na spomienku v pÙstnom obdobÌ
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
@@ -12452,7 +12451,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
-							// 2010-05-14: antifÛna na benediktus/magnifikat: vlastn· sa berie iba na spomienku v pÙstnom obdobÌ
 							_vlastna_cast_modlitba;
 						}// nie je_privileg
 						break;
@@ -12484,7 +12482,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_popis_svaty_rch_mcd_pc_vesp();
 
 								modlitba = MODL_RANNE_CHVALY;
-								// _vlastna_cast_benediktus_spomprivileg;
+								// _vlastna_cast_benediktus_spomprivileg; // TODO: treba doplniù antifÛnu zo spoloËnej Ëasti (do vlastnej Ëasti) a odpozn·mkovaù tento kÛd, aby bolo spr·vne zobrazenÈ zakonËenie
 								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_VESPERY;
@@ -12502,7 +12500,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_spolocna_cast(sc, poradie_svaty);
 
 								modlitba = MODL_RANNE_CHVALY;
-								// 2010-05-14: antifÛna na benediktus/magnifikat: vlastn· sa berie iba na spomienku v pÙstnom obdobÌ
 								_vlastna_cast_modlitba;
 
 								modlitba = MODL_POSV_CITANIE;
@@ -12510,7 +12507,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								_vlastna_cast_modlitba;
 
 								modlitba = MODL_VESPERY;
-								// 2010-05-14: antifÛna na benediktus/magnifikat: vlastn· sa berie iba na spomienku v pÙstnom obdobÌ
 								_vlastna_cast_modlitba;
 							}// nie je_privileg
 							break;
@@ -12656,8 +12652,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_spolocna_cast(sc, poradie_svaty);
 
 								modlitba = MODL_RANNE_CHVALY;
-								// 2010-05-14: antifÛna na benediktus/magnifikat: vlastn· sa berie iba na spomienku v pÙstnom obdobÌ
-								// 2010-07-06: doplnen· ant.
 								_vlastna_cast_benediktus;
 								_vlastna_cast_modlitba;
 
@@ -12666,8 +12660,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								_vlastna_cast_2citanie;
 
 								modlitba = MODL_VESPERY;
-								// 2010-05-14: antifÛna na benediktus/magnifikat: vlastn· sa berie iba na spomienku v pÙstnom obdobÌ
-								// 2010-07-06: doplnen· ant.
 								_vlastna_cast_magnifikat;
 								_vlastna_cast_modlitba;
 							}// nie je_privileg
@@ -12720,8 +12712,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_spolocna_cast(sc, poradie_svaty);
 
 								modlitba = MODL_RANNE_CHVALY;
-								// 2010-05-14: antifÛna na benediktus/magnifikat: vlastn· sa berie iba na spomienku v pÙstnom obdobÌ
-								// 2010-07-06: doplnen· ant.
 								_vlastna_cast_benediktus;
 								_vlastna_cast_modlitba;
 
@@ -12730,8 +12720,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								_vlastna_cast_2citanie;
 
 								modlitba = MODL_VESPERY;
-								// 2010-05-14: antifÛna na benediktus/magnifikat: vlastn· sa berie iba na spomienku v pÙstnom obdobÌ
-								// 2010-07-06: doplnen· ant.
 								_vlastna_cast_magnifikat;
 								_vlastna_cast_modlitba;
 							}// nie je_privileg
@@ -12883,7 +12871,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_popis_svaty_rch_mcd_pc_vesp();
 
 								modlitba = MODL_RANNE_CHVALY;
-								// _vlastna_cast_benediktus_spomprivileg;
+								// _vlastna_cast_benediktus_spomprivileg; // TODO: treba doplniù antifÛnu zo spoloËnej Ëasti (do vlastnej Ëasti) a odpozn·mkovaù tento kÛd, aby bolo spr·vne zobrazenÈ zakonËenie
 								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_VESPERY;
@@ -13008,8 +12996,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_spolocna_cast(sc, poradie_svaty);
 
 								modlitba = MODL_RANNE_CHVALY;
-								// 2010-05-14: antifÛna na benediktus/magnifikat: vlastn· sa berie iba na spomienku v pÙstnom obdobÌ
-								// 2010-07-06: doplnen· ant.
 								_vlastna_cast_benediktus;
 								_vlastna_cast_modlitba;
 
@@ -13018,8 +13004,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								_vlastna_cast_2citanie;
 
 								modlitba = MODL_VESPERY;
-								// 2010-05-14: antifÛna na benediktus/magnifikat: vlastn· sa berie iba na spomienku v pÙstnom obdobÌ
-								// 2010-07-06: doplnen· ant.
 								_vlastna_cast_magnifikat;
 								_vlastna_cast_modlitba;
 							}// nie je_privileg
@@ -13054,7 +13038,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_popis_svaty_rch_mcd_pc_vesp();
 
 								modlitba = MODL_RANNE_CHVALY;
-								// _vlastna_cast_benediktus_spomprivileg;
+								// _vlastna_cast_benediktus_spomprivileg; // TODO: treba doplniù antifÛnu zo spoloËnej Ëasti (do vlastnej Ëasti) a odpozn·mkovaù tento kÛd, aby bolo spr·vne zobrazenÈ zakonËenie
 								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_VESPERY;
@@ -13111,7 +13095,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_popis_svaty_rch_mcd_pc_vesp();
 
 								modlitba = MODL_RANNE_CHVALY;
-								// _vlastna_cast_benediktus_spomprivileg;
+								// _vlastna_cast_benediktus_spomprivileg; // TODO: treba doplniù antifÛnu zo spoloËnej Ëasti (do vlastnej Ëasti) a odpozn·mkovaù tento kÛd, aby bolo spr·vne zobrazenÈ zakonËenie
 								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_VESPERY;
@@ -13297,7 +13281,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 									set_popis_svaty_rch_mcd_pc_vesp();
 
 								modlitba = MODL_RANNE_CHVALY;
-								// _vlastna_cast_benediktus_spomprivileg;
+								// _vlastna_cast_benediktus_spomprivileg; // TODO: treba doplniù antifÛnu zo spoloËnej Ëasti (do vlastnej Ëasti) a odpozn·mkovaù tento kÛd, aby bolo spr·vne zobrazenÈ zakonËenie
 								_vlastna_cast_modlitba_spomprivileg;
 
 								modlitba = MODL_VESPERY;
@@ -13382,7 +13366,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_RANNE_CHVALY;
-							// 2010-05-14: antifÛna na benediktus/magnifikat: vlastn· sa berie iba na spomienku v pÙstnom obdobÌ
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
@@ -13392,7 +13375,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							_vlastna_cast_mcd_modlitba;
 
 							modlitba = MODL_VESPERY;
-							// 2010-05-14: antifÛna na benediktus/magnifikat: vlastn· sa berie iba na spomienku v pÙstnom obdobÌ
 							_vlastna_cast_modlitba;
 						}
 						_global_svaty1.typslav = SLAV_SVIATOK;
@@ -13533,6 +13515,50 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA;
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
+					if(_global_jazyk == JAZYK_HU){
+						if(poradie_svaty == 2){
+							// na spomienku v privilegovan˝ deÚ (spomienka v pÙste)
+							if(je_privileg){
+								if(query_type != PRM_DETAILY)
+									set_popis_svaty_rch_mcd_pc_vesp();
+
+								modlitba = MODL_RANNE_CHVALY;
+								_vlastna_cast_modlitba_spomprivileg;
+
+								modlitba = MODL_VESPERY;
+								_vlastna_cast_modlitba_spomprivileg;
+
+								modlitba = MODL_POSV_CITANIE;
+								_vlastna_cast_2citanie_spomprivileg;
+								_vlastna_cast_modlitba;
+
+							}// je_privileg
+							else{
+								// definovanie parametrov pre modlitbu
+								if(query_type != PRM_DETAILY)
+									set_spolocna_cast(sc, poradie_svaty);
+
+								modlitba = MODL_RANNE_CHVALY;
+								_vlastna_cast_modlitba;
+
+								modlitba = MODL_POSV_CITANIE;
+								_vlastna_cast_modlitba;
+								_vlastna_cast_2citanie;
+
+								modlitba = MODL_VESPERY;
+								_vlastna_cast_modlitba;
+							}// nie je_privileg
+							break;
+						}
+						pocet = 2;
+						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty2.smer = 12; // æubovoænÈ spomienky
+						mystrcpy(_global_svaty2.meno, text_MAR_04_HU[_global_jazyk], MENO_SVIATKU);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP, MODL_SPOL_CAST_MUCENIK);
+						_global_svaty2.farba = LIT_FARBA_CERVENA;
+						_global_svaty2.kalendar = KALENDAR_VSEOBECNY_HU;
+						break;
+					}// HU only
 					break;
 				case 7: // MES_MAR -- 07MAR
 					if(poradie_svaty == 1){
@@ -13840,6 +13866,38 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 					_global_svaty1.farba = LIT_FARBA_BIELA;
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
+					if(_global_jazyk == JAZYK_HU){
+						if(poradie_svaty == 2){
+							// na spomienku v privilegovan˝ deÚ (spomienka v pÙste)
+							if(je_privileg){
+								if(query_type != PRM_DETAILY)
+									set_popis_svaty_rch_mcd_pc_vesp();
+
+								modlitba = MODL_RANNE_CHVALY;
+								// _vlastna_cast_benediktus_spomprivileg; // TODO: treba doplniù antifÛnu zo spoloËnej Ëasti (do vlastnej Ëasti) a odpozn·mkovaù tento kÛd, aby bolo spr·vne zobrazenÈ zakonËenie
+								_vlastna_cast_modlitba_spomprivileg;
+
+								modlitba = MODL_VESPERY;
+								// _vlastna_cast_magnifikat_spomprivileg; // TODO: treba doplniù antifÛnu zo spoloËnej Ëasti (do vlastnej Ëasti) a odpozn·mkovaù tento kÛd, aby bolo spr·vne zobrazenÈ zakonËenie
+								_vlastna_cast_modlitba_spomprivileg;
+
+								modlitba = MODL_POSV_CITANIE;
+								_vlastna_cast_2citanie_spomprivileg;
+								_vlastna_cast_modlitba;
+
+							}// je_privileg
+							break;
+						}
+						pocet = 2;
+						_global_svaty2.typslav = SLAV_SPOMIENKA;
+						_global_svaty2.smer = 11; // miestne povinnÈ spomienky
+						_global_svaty2.typslav_lokal = LOKAL_SLAV_GYOR_EGYH;
+						mystrcpy(_global_svaty2.meno, text_MAR_17_HU[_global_jazyk], MENO_SVIATKU);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+						_global_svaty2.farba = LIT_FARBA_BIELA;
+						_global_svaty2.kalendar = KALENDAR_VSEOBECNY_HU;
+						break;
+					}// HU only
 					break;
 				case 18: // MES_MAR -- 18MAR
 					if(poradie_svaty == 1){

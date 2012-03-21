@@ -520,6 +520,7 @@ const char *nazov_slavenia_lokal[] =
 ,"Székesfehérvár: A székesegyházban; fõünnep"                                                                   // LOKAL_SLAV_SZEKESFEHERVAR_EGYH
 ,"Az Egri fõegyházmegyében: A fõegyházmegye védõszentje; ünnep"                                                 // LOKAL_SLAV_EGER_FOEGYH
 ,"Az Esztergomi fõegyházmegyében: emléknap"                                                                     // LOKAL_SLAV_ESZTERGOM_EML
+,"A Gyõri egyházmegyében"                                                                                       // LOKAL_SLAV_GYOR_EGYH
 };
 
 // names of liturgical colors
@@ -2978,6 +2979,15 @@ const char *text_MAR_04[POCET_JAZYKOV + 1] =
  "Sv. Kazimíra",
  "Szent Kázmér",
  };
+const char *text_MAR_04_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Boldog Meszlényi Zoltán püspök és vértanú",
+ };
 const char *text_MAR_07[POCET_JAZYKOV + 1] = 
 {"Sv. Perpetuy a Felicity, muèeníc",
  "Sv. Perpetuy a Felicity, muèednic",
@@ -3049,6 +3059,15 @@ const char *text_MAR_17[POCET_JAZYKOV + 1] =
  "",
  "Sv. Patrika, biskupa",
  "Szent Patrik püspök",
+ };
+const char *text_MAR_17_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "A Gyõri könnyezõ Szûz Mária",
  };
 const char *text_MAR_18[POCET_JAZYKOV + 1] = 
 {"Sv. Cyrila Jeruzalemského, biskupa a uèite¾a Cirkvi",

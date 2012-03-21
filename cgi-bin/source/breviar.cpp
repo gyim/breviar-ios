@@ -4674,7 +4674,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 		// treba pamatat na to, ze v poste sa vsetky spomienky stavaju lubovolnymi (c. 14 vseob. smernic)
 		if((_global_den.litobd == OBD_POSTNE_I) &&
 			(_global_svaty1.typslav == SLAV_SPOMIENKA)){
-			 _rozbor_dna_LOG("je postne obdobie, tak menim `spomienku' na `lubovolnu spomienku'\n");
+			 _rozbor_dna_LOG("je pôstne obdobie, tak mením `spomienku' na `¾ubovo¾nú spomienku' pre _global_svaty1\n");
 			 _global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 			 // 2006-01-20: doplnené, lebo nezobrazovalo tieto ¾ubovo¾né spomienky
 			 if(_global_svaty1.smer < 12){
@@ -4682,7 +4682,33 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 			 }
 		}
 		else{
-			_rozbor_dna_LOG("nie je pôstne obdobie, nie je potrebné meni spomienku na ¾ubovo¾nú spomienku...\n");
+			_rozbor_dna_LOG("nie je pôstne obdobie, nie je potrebné meni spomienku na ¾ubovo¾nú spomienku (_global_svaty1)...\n");
+		}
+		// 2012-03-21: doplnené: aj _global_svaty2 môže maž v sebe "spomienku" (miestnu), preto treba opravi aj toto
+		if((_global_den.litobd == OBD_POSTNE_I) && (_global_pocet_svatych > 1) &&
+			(_global_svaty2.typslav == SLAV_SPOMIENKA)){
+			 _rozbor_dna_LOG("je pôstne obdobie, tak mením `spomienku' na `¾ubovo¾nú spomienku' aj pre _global_svaty2\n");
+			 _global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
+			 // 2006-01-20: doplnené, lebo nezobrazovalo tieto ¾ubovo¾né spomienky
+			 if(_global_svaty2.smer < 12){
+				 _global_svaty2.smer = 12;
+			 }
+		}
+		else{
+			_rozbor_dna_LOG("nie je pôstne obdobie, nie je potrebné meni spomienku na ¾ubovo¾nú spomienku (_global_svaty2)...\n");
+		}
+		// 2012-03-21: doplnené pre istotu: aj _global_svaty3 môže maž v sebe "spomienku" (miestnu), preto treba opravi aj toto
+		if((_global_den.litobd == OBD_POSTNE_I) && (_global_pocet_svatych > 2) &&
+			(_global_svaty3.typslav == SLAV_SPOMIENKA)){
+			 _rozbor_dna_LOG("je pôstne obdobie, tak mením `spomienku' na `¾ubovo¾nú spomienku' aj pre _global_svaty3\n");
+			 _global_svaty3.typslav = SLAV_LUB_SPOMIENKA;
+			 // 2006-01-20: doplnené, lebo nezobrazovalo tieto ¾ubovo¾né spomienky
+			 if(_global_svaty3.smer < 12){
+				 _global_svaty3.smer = 12;
+			 }
+		}
+		else{
+			_rozbor_dna_LOG("nie je pôstne obdobie, nie je potrebné meni spomienku na ¾ubovo¾nú spomienku (_global_svaty3)...\n");
 		}
 
 		/* c. 12 v c. 59 vseob. smernic: "lubovolne spomienky, ktore sa mozu
