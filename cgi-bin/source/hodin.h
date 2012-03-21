@@ -3825,15 +3825,11 @@ const char *text_DEN_VO_VELKONOCNEJ_OKTAVE[POCET_JAZYKOV + 1] =
  "%s velikonoèní",
  "%s Húsvét nyolcadában",
  };
-const char *text_VELKONOCNY_PONDELOK[POCET_JAZYKOV + 1] = // pre HU špeciálny názov ve¾konoèného pondelka
-{"",
- "",
- "",
- "",
- "",
- "",
- "Húsvéthétfõ",
- };
+
+const char *text_HU_VELKONOCNY_PONDELOK = "Húsvéthétfõ"; // pre HU špeciálny názov ve¾konoèného pondelka
+
+const char *text_HU_VELKY_TYZDEN_PREFIX = "Nagy"; // pre HU špeciálne názvy dní ve¾kného týždòa (pondelok až streda)
+
 const char *text_NAJSVATEJSEJ_TROJICE[POCET_JAZYKOV + 1] = 
 {"Najsvätejšej Trojice",
  "Nejsvìtìjší Trojice",
@@ -6463,7 +6459,7 @@ const char *text_DEC_31[POCET_JAZYKOV + 1] =
 // --------------- 00 pohyblivé slávenia ---------------
 
 const char *text_ZELENY_STVRTOK[POCET_JAZYKOV + 1] = 
-{"Zelený (ve¾ký) štvrtok - Pamiatka Pánovej veèere",
+{"Zelený (ve¾ký) štvrtok – Pamiatka Pánovej veèere",
  "Zelený ètvrtek - Památka Veèeøe Pánì",
  "",
  "",

@@ -4411,7 +4411,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 						else if(_global_jazyk == JAZYK_HU){
 							if(_global_den.denvt == DEN_PONDELOK){
 								// ve¾konoèný pondelok ináè
-								sprintf(_global_den.meno, text_VELKONOCNY_PONDELOK[_global_jazyk]);
+								sprintf(_global_den.meno, text_HU_VELKONOCNY_PONDELOK);
 							}
 							else{
 								sprintf(_global_den.meno, text_DEN_VO_VELKONOCNEJ_OKTAVE[_global_jazyk], nazov_dna(_global_den.denvt));
@@ -5064,7 +5064,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		}// if (!cit); 2. pokus
 	}// if (!cit)
 #endif // LITURGICKE_CITANIA_ANDROID
-	Log("1:_local_den.meno == %s\n", _local_den.meno); /* 08/03/2000A.D. */
+	Log("1:_local_den.meno == %s\n", _local_den.meno);
 
 	/* 21/03/2000A.D.
 	 * celu tuto pasaz som zapoznamkoval, lebo to nema vyznam 
@@ -5084,7 +5084,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	}
 	 */
 
-	Log("2:_local_den.meno == %s\n", _local_den.meno); /* 08/03/2000A.D. */
+	Log("2:_local_den.meno == %s\n", _local_den.meno);
 
 	/* spomienka panny márie v sobotu */
 	/* este spomienka panny marie v sobotu, cl. 15 */
@@ -5106,20 +5106,27 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		_local_den = _global_pm_sobota;
 	}
 
-	Log("3:_local_den.meno == %s\n", _local_den.meno); /* 08/03/2000A.D. */
+	Log("3:_local_den.meno == %s\n", _local_den.meno);
 	
-	/* skontrolujeme este pondelok -- stvrtok velkeho tyzdna */
-	if((_local_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN) && (typ != EXPORT_DNA_VIAC_DNI)){
-		/* 2008-04-04: aj kompletórium pre zelený štvrtok má svoj vlastný názov, tak isto ako doteraz vešpery */
-		if(!((_local_den.denvt == DEN_NEDELA) || ((_local_den.denvt == DEN_STVRTOK) && ((modlitba == MODL_VESPERY) || (modlitba == MODL_KOMPLETORIUM))))){
-			mystrcpy(_local_den.meno, nazov_dna(_local_den.denvt), MENO_SVIATKU);
-			/* 2007-04-05: upravené pre viacero jazykov */
-			strcat(_local_den.meno, " ");
-			strcat(_local_den.meno, nazov_obdobia_v(_local_den.litobd));
+	// skontrolujeme ešte pondelok -- štvrtok vo ve¾kom týždni (nastavenie názvu aj pre export na viac dní)
+	if(_local_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN){
+		// 2008-04-04: aj kompletórium pre zelený štvrtok má svoj vlastný názov, tak isto ako doteraz vešpery
+		if(!((_local_den.denvt == DEN_NEDELA) || ((_local_den.denvt == DEN_STVRTOK) && ((typ != EXPORT_DNA_VIAC_DNI) && ((modlitba == MODL_VESPERY) || (modlitba == MODL_KOMPLETORIUM))) ))){
+			if(_global_jazyk == JAZYK_HU){
+				// 2012-03-21: pre HU sú aj dni pondelok až streda (štvrtok sa rieši inde) s vlastnými názvami
+				mystrcpy(_local_den.meno, text_HU_VELKY_TYZDEN_PREFIX, MENO_SVIATKU);
+				strcat(_local_den.meno, nazov_dna(_local_den.denvt));
+			}// HU only
+			else{
+				mystrcpy(_local_den.meno, nazov_dna(_local_den.denvt), MENO_SVIATKU);
+				// 2007-04-05: upravené pre viacero jazykov
+				strcat(_local_den.meno, " ");
+				strcat(_local_den.meno, nazov_obdobia_v(_local_den.litobd));
+			}
 		}
 	}
 
-	Log("4:_local_den.meno == %s\n", _local_den.meno); /* 08/03/2000A.D. */
+	Log("4:_local_den.meno == %s\n", _local_den.meno);
 	// --------------------------------------------------------------------
 	// teraz podla toho, co je v _local_den, vytvorime _global_string
 	Log("_local_den.smer < 5 -- ");
