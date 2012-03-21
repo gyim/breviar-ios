@@ -14467,6 +14467,55 @@ label_25_MAR:
 					_global_svaty1.farba = LIT_FARBA_CERVENA;
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
 					break;
+				case 16: // MES_APR -- 16APR
+					if(_global_jazyk == JAZYK_HU){
+						if(poradie_svaty == 1){
+							// na spomienku v privilegovan˝ deÚ (spomienka v pÙste)
+							if(je_privileg){
+								if(query_type != PRM_DETAILY)
+									set_popis_svaty_rch_mcd_pc_vesp();
+
+								modlitba = MODL_RANNE_CHVALY;
+								// _vlastna_cast_benediktus_spomprivileg; // TODO: treba doplniù antifÛnu zo spoloËnej Ëasti (do vlastnej Ëasti) a odpozn·mkovaù tento kÛd, aby bolo spr·vne zobrazenÈ zakonËenie
+								_vlastna_cast_modlitba_spomprivileg;
+
+								modlitba = MODL_VESPERY;
+								// _vlastna_cast_magnifikat_spomprivileg; // TODO: treba doplniù antifÛnu zo spoloËnej Ëasti (do vlastnej Ëasti) a odpozn·mkovaù tento kÛd, aby bolo spr·vne zobrazenÈ zakonËenie
+								_vlastna_cast_modlitba_spomprivileg;
+
+								modlitba = MODL_POSV_CITANIE;
+								_vlastna_cast_2citanie_spomprivileg;
+								_vlastna_cast_modlitba;
+
+							}// je_privileg
+							else{
+								// definovanie parametrov pre modlitbu
+								if(query_type != PRM_DETAILY)
+									set_spolocna_cast(sc, poradie_svaty);
+
+								modlitba = MODL_RANNE_CHVALY;
+								// _vlastna_cast_benediktus;
+								_vlastna_cast_modlitba;
+
+								modlitba = MODL_VESPERY;
+								// _vlastna_cast_magnifikat;
+								_vlastna_cast_modlitba;
+
+								modlitba = MODL_POSV_CITANIE;
+								_vlastna_cast_2citanie;
+								_vlastna_cast_modlitba;
+							}// nie je pÙst
+							break;
+						}
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 12; // æubovoænÈ spomienky
+						mystrcpy(_global_svaty1.meno, text_APR_16[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA);
+						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+						break;
+					}// HU only
+					break;
 				case 20: // MES_APR -- 20APR
 					if(_global_jazyk == JAZYK_CZ_OP){
 						if(poradie_svaty == 1){
@@ -14591,7 +14640,7 @@ label_25_MAR:
 					break;
 				case 23: // MES_APR -- 23APR
 					// 2007-04-23: vo vöeobecnom kalend·ri s˙ 23. aprÌla sv. Juraj a sv. Vojtech
-					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
+					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP) || (_global_jazyk == JAZYK_HU)){
 						if(poradie_svaty == 1){
 							// definovanie parametrov pre modlitbu
 							if(query_type != PRM_DETAILY)
@@ -14646,6 +14695,9 @@ label_25_MAR:
 						if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 							_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ;
 						}
+						else if(_global_jazyk == JAZYK_HU){
+							_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+						}
 						else{ // if(_global_jazyk == JAZYK_SK)...
 							_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK;
 						}
@@ -14679,7 +14731,7 @@ label_25_MAR:
 							_global_svaty2.farba = LIT_FARBA_BIELA;
 							_global_svaty2.kalendar = KALENDAR_SK_OFM;
 						}// kalend·r pre KALENDAR_SK_OFM
-					}// SK, CZ
+					}// SK, CZ, HU
 					else{ // _global_jazyk nie je slovenËina ani Ëeötina
 						if(poradie_svaty == 1){
 							// definovanie parametrov pre modlitbu
@@ -14733,6 +14785,54 @@ label_25_MAR:
 						_global_svaty2.farba = LIT_FARBA_CERVENA;
 						_global_svaty2.kalendar = KALENDAR_VSEOBECNY;
 					}
+					if(_global_jazyk == JAZYK_HU){
+						if(poradie_svaty == 2){
+							// definovanie parametrov pre modlitbu
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_PRVE_VESPERY;
+							_vlastna_cast_full(modlitba);
+
+							modlitba = MODL_PRVE_KOMPLETORIUM;
+							_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+
+							modlitba = MODL_INVITATORIUM;
+							_vlastna_cast_antifona_inv;
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_full(modlitba);
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_full(modlitba);
+
+							_vlastna_cast_mcd_ant_kcitresp_modl;
+
+							// ak je modlitba cez deÚ na sl·vnosù, tak by sa mali pouûiù ûalmy z doplnkovej psalmÛdie
+							if(_global_den.denvt != DEN_NEDELA) {
+								_set_zalmy_mcd_doplnkova_psalmodia();
+							}
+							else {
+								_set_zalmy_1nedele_mcd();
+							}
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_full(modlitba);
+
+							modlitba = MODL_KOMPLETORIUM;
+							_set_kompletorium_slavnost(modlitba, _global_den.litobd);
+
+							break;
+						}
+						pocet = 2;
+						_global_svaty2.typslav = SLAV_SLAVNOST;
+						_global_svaty2.smer = 4; // miestne sl·vnosti podæa miestneho kalend·ra | MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 // ToDo
+						_global_svaty2.typslav_lokal = LOKAL_SLAV_ESZTERGOM_FOEGYH;
+						mystrcpy(_global_svaty2.meno, text_APR_23_HU[_global_jazyk], MENO_SVIATKU);
+						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_KNAZ);
+						_global_svaty2.farba = LIT_FARBA_CERVENA;
+						_global_svaty2.kalendar = KALENDAR_VSEOBECNY_HU;
+					}// HU only
 					break;
 				case 24: // MES_APR -- 24APR
 					// 2007-04-23: vo vöeobecnom kalend·ri s˙ 23. aprÌla sv. Juraj a sv. Vojtech
@@ -14772,7 +14872,7 @@ label_25_MAR:
 						_global_svaty1.farba = LIT_FARBA_CERVENA;
 						_global_svaty1.kalendar = KALENDAR_SK_OFM;
 					}// kalend·r pre KALENDAR_SK_OFM
-					else if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
+					else if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP) || (_global_jazyk == JAZYK_HU)){
 						if(poradie_svaty == 1){
 							// definovanie parametrov pre modlitbu
 							if(query_type != PRM_DETAILY)
@@ -14815,6 +14915,9 @@ label_25_MAR:
 						if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 							_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ;
 						}
+						else if(_global_jazyk == JAZYK_HU){
+							_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+						}
 						else{ // if(_global_jazyk == JAZYK_SK)...
 							_global_svaty1.kalendar = KALENDAR_VSEOBECNY_SK;
 						}
@@ -14825,7 +14928,7 @@ label_25_MAR:
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 						_global_svaty2.farba = LIT_FARBA_CERVENA;
 						_global_svaty2.kalendar = KALENDAR_VSEOBECNY;
-					}
+					}// SK, CZ, HU
 					else{
 						if(poradie_svaty == 1){
 							// definovanie parametrov pre modlitbu

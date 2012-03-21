@@ -519,8 +519,9 @@ const char *nazov_slavenia_lokal[] =
 ,"Szombathely: Az egyházmegye védõszentje; fõünnep"                                                             // LOKAL_SLAV_SZOMBATHELYI_PATRON
 ,"Székesfehérvár: A székesegyházban; fõünnep"                                                                   // LOKAL_SLAV_SZEKESFEHERVAR_EGYH
 ,"Az Egri fõegyházmegyében: A fõegyházmegye védõszentje; ünnep"                                                 // LOKAL_SLAV_EGER_FOEGYH
-,"Az Esztergomi fõegyházmegyében: emléknap"                                                                     // LOKAL_SLAV_ESZTERGOM_EML
+,"Az Esztergomi fõegyházmegyében; emléknap"                                                                     // LOKAL_SLAV_ESZTERGOM_EML
 ,"A Gyõri egyházmegyében"                                                                                       // LOKAL_SLAV_GYOR_EGYH
+,"Az Esztergomi fõegyházmegyében"                                                                               // LOKAL_SLAV_ESZTERGOM_FOEGYH
 };
 
 // names of liturgical colors
@@ -3171,6 +3172,15 @@ const char *text_APR_13[POCET_JAZYKOV + 1] =
  "Sv. Martina I., papeže a muèedníka",
  "Szent I. Márton pápa és vértanú",
  };
+const char *text_APR_16[POCET_JAZYKOV + 1] = 
+{"Sv. Márie Bernadety Soubirousovej, panny",
+ "Sv. Marie Bernadetty Soubirous, panny",
+ "",
+ "S. Marii Bernadette Soubirous, virg.",
+ "",
+ "Sv. Marie Bernadetty Soubirous, panny",
+ "Soubirous szent Mária Bernadett szûz",
+ };
 const char *text_APR_20[POCET_JAZYKOV + 1] = 
 {"(na Slovensku nie je)",
  "(v Èechách, na Moravì a ve Slezsku není)",
@@ -3215,6 +3225,15 @@ const char *text_APR_23[POCET_JAZYKOV + 1] =
  "",
  "Sv. Vojtìcha, biskupa a muèedníka",
  "Szent Adalbert (Béla) püspök és vértanú",
+ };
+const char *text_APR_23_HU[POCET_JAZYKOV + 1] = 
+{"Sv. Vojtecha, biskupa a muèeníka",
+ "Sv. Vojtìcha, biskupa a muèedníka",
+ "",
+ "S. Adalberti, ep. et mart.",
+ "",
+ "Sv. Vojtìcha, biskupa a muèedníka",
+ "Szent Adalbert (Béla) püspök és vértanú, az Esztergomi fõegyházmegye védõszentje",
  };
 const char *text_APR_23_OFM[POCET_JAZYKOV + 1] = 
 {"Bl. Egida z Assisi, reho¾níka, èlena 1. rádu",
