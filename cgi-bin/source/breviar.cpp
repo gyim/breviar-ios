@@ -4408,6 +4408,15 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 						else if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 							sprintf(_global_den.meno, text_DEN_VO_VELKONOCNEJ_OKTAVE[_global_jazyk], nazov_Dna(_global_den.denvt));
 						}
+						else if(_global_jazyk == JAZYK_HU){
+							if(_global_den.denvt == DEN_PONDELOK){
+								// ve¾konoèný pondelok ináè
+								sprintf(_global_den.meno, text_VELKONOCNY_PONDELOK[_global_jazyk]);
+							}
+							else{
+								sprintf(_global_den.meno, text_DEN_VO_VELKONOCNEJ_OKTAVE[_global_jazyk], nazov_dna(_global_den.denvt));
+							}
+						}
 						else{ // default
 							sprintf(_global_den.meno, text_DEN_VO_VELKONOCNEJ_OKTAVE[_global_jazyk], nazov_dna(_global_den.denvt));
 						}

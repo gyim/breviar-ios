@@ -2490,7 +2490,7 @@ const char *text_JAN_23_SK[POCET_JAZYKOV + 1] =
  "",
  "(non est in Latina)",
  "",
- "hu_name",
+ "",
  "(nincs Magyarországon)",
  };
 const char *text_JAN_23_OP[POCET_JAZYKOV + 1] = 
@@ -3823,7 +3823,16 @@ const char *text_DEN_VO_VELKONOCNEJ_OKTAVE[POCET_JAZYKOV + 1] =
  "",
  "",
  "%s velikonoèní",
- "hu_name",
+ "%s Húsvét nyolcadában",
+ };
+const char *text_VELKONOCNY_PONDELOK[POCET_JAZYKOV + 1] = // pre HU špeciálny názov ve¾konoèného pondelka
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Húsvéthétfõ",
  };
 const char *text_NAJSVATEJSEJ_TROJICE[POCET_JAZYKOV + 1] = 
 {"Najsvätejšej Trojice",
