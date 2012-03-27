@@ -10166,8 +10166,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					// 2009-03-24: zmenené aj pre ostatné, pretože je to vo všeobecnom kalendári 
 					// 2011-01-11: dominikáni majú mnoho vecí naviac; v latinskom je samostatne len ant. pre ben+magn, 2. èítanie a modlitba
 					// 2011-03-16: aj sk-ofm majú povinnú spomienku
-					// 2012-02-06: aj sk-op majú povinnú spomienku
-					if((_global_jazyk == JAZYK_SK) && ((_global_kalendar == KALENDAR_SK_OFM) || (_global_kalendar == KALENDAR_SK_OP))){
+					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_OFM)){
 						if(poradie_svaty == 1){
 							file_name_vlastny_kalendar(_global_kalendar);
 							// definovanie parametrov pre modlitbu
@@ -10193,10 +10192,11 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						}
 						_global_svaty1.typslav = SLAV_SPOMIENKA;
 						_global_svaty1.smer = 10; // mieste povinné spomienky pod¾a miestneho kalendára; technicky 10, hoci pod¾a smerníc 11
+						_global_svaty1.kalendar = _global_kalendar;
 						mystrcpy(_global_svaty1.meno, text_JAN_03[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEBRAT); // ??
 						_global_svaty1.farba = LIT_FARBA_BIELA;
-						_global_svaty1.kalendar = _global_kalendar;
+						
 					}// kalendár pre KALENDAR_SK_OFM a KALENDAR_SK_OP
 					else{
 						if(poradie_svaty == 1){
