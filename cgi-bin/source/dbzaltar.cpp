@@ -10076,7 +10076,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 		// typ lokálneho slávenia - neurèené; pridané 2005-07-27
 		_global_svaty1.typslav_lokal = _global_svaty2.typslav_lokal = _global_svaty3.typslav_lokal = LOKAL_SLAV_NEURCENE;
 		// prik - nie je prikazany
-		_global_svaty1.prik = _global_svaty2.prik = _global_svaty3.prik = NEPRIKAZANY_SVIATOK;
+		_global_svaty1.prik = _global_svaty2.prik = _global_svaty3.prik = NIE_JE_PRIKAZANY_SVIATOK;
 		// meno - neurcene
 		mystrcpy(_global_svaty1.meno, STR_EMPTY, MENO_SVIATKU);
 		mystrcpy(_global_svaty2.meno, STR_EMPTY, MENO_SVIATKU);
@@ -10470,6 +10470,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						}
 						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 						_global_svaty1.smer = 12; // ¾ubovo¾né spomienky
+						_global_svaty1.prik = VOLNA_LUBOVOLNA_SPOMIENKA; // ¾ubovo¾ná spomienka uvedená kurzívou bez popisu
 						mystrcpy(_global_svaty1.meno, text_JAN_10_OP[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_REHOLNIK);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
@@ -10477,6 +10478,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						pocet = 2;
 						_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 						_global_svaty2.smer = 12; // ¾ubovo¾né spomienky
+						_global_svaty2.prik = VOLNA_LUBOVOLNA_SPOMIENKA; // ¾ubovo¾ná spomienka uvedená kurzívou bez popisu
 						mystrcpy(_global_svaty2.meno, text_JAN_10_2_OP[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA, MODL_SPOL_CAST_SV_ZENA_REHOLNIK);
 						_global_svaty2.farba = LIT_FARBA_BIELA;

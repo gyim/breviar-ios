@@ -687,7 +687,7 @@ struct dm{
 	short int typslav;    // typ slavenia (1--5): SLAV_...
 	short int typslav_lokal; // lokálny typ slavenia : LOKAL_SLAV_...
 	short int smer;       // poradove cislo z c.59 Vseobecnych smernic o liturgii hodin a kalendari
-	short int prik;		  // ci je to prikazany sviatok alebo nie: PRIKAZANY_SVIATOK resp. NEPRIKAZANY_SVIATOK
+	short int prik;		  // ci je to prikazany sviatok alebo nie: PRIKAZANY_SVIATOK resp. NIE_JE_PRIKAZANY_SVIATOK
 	int spolcast;		  // spolocna cast -- zakodovane data pre svatych o tom, z akej spolocnej casti sa ma modlit;
 						  // obsahuje max. 3 spolocne casti vo formate spolcast == a1 + a2 * MAX + a3 * MAX * MAX,
 						  // kde -- MAX je MAX_MODL_SPOL_CAST,
@@ -923,9 +923,10 @@ extern const char *nazov_htm_kalendar[POCET_KALENDAROV + 1];
 
 extern const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1];
 
-// prikazany / neprikazany sviatok
-#define PRIKAZANY_SVIATOK 1
-#define NEPRIKAZANY_SVIATOK 0
+// prikazany / neprikazany sviatok / ¾ubovo¾ná spomienka bez záväznosti (blahoslavení napr. pre SK_OP)
+#define PRIKAZANY_SVIATOK           0
+#define NIE_JE_PRIKAZANY_SVIATOK    1
+#define VOLNA_LUBOVOLNA_SPOMIENKA   2 // pre SK OP; v kalendári znaèené kurzívou (bez popisu "¾ubovo¾ná spomienka"); 2012-04-01
 
 // div, mod: delenie pre short int
 #define DIV	/
@@ -1390,7 +1391,7 @@ void analyzuj_rok(short int year);
 	a.typslav = SLAV_NEURCENE; \
 	a.typslav_lokal = LOKAL_SLAV_NEURCENE; \
 	a.smer = 99; \
-	a.prik = NEPRIKAZANY_SVIATOK; \
+	a.prik = NIE_JE_PRIKAZANY_SVIATOK; \
 	a.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA); \
 	mystrcpy(a.meno, STR_UNDEF, MENO_SVIATKU); \
 	a.farba = LIT_FARBA_NEURCENA;\

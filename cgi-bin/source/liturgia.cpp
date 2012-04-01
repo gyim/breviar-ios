@@ -1225,7 +1225,7 @@ _struct_dm por_den_mesiac_dm(short int poradie, short int rok){
 	result.litobd = OBD_CEZ_ROK; /* nemam neurcene... */
 	result.typslav = SLAV_NEURCENE;
 	result.smer = 14; /* neurcene */
-	result.prik = NEPRIKAZANY_SVIATOK;
+	result.prik = NIE_JE_PRIKAZANY_SVIATOK;
 	result.spolcast =
 		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	mystrcpy(result.meno, STR_EMPTY, MENO_SVIATKU);
@@ -1262,14 +1262,13 @@ void init_global_pm_sobota(void){
 	_global_pm_sobota.litrok = _global_den.litrok;
 	_global_pm_sobota.tyzden = _global_den.tyzden;
 	_global_pm_sobota.tyzzal = _global_den.tyzzal;
-	/* a teraz vlastne udaje */
+	// a teraz vlastne udaje
 	_global_pm_sobota.smer = 12; // ¾ubovo¾né spomienky
-	_global_pm_sobota.typslav = SLAV_LUB_SPOMIENKA; /* lubovolna spomienka */
-	_global_pm_sobota.typslav_lokal = LOKAL_SLAV_NEURCENE; /* nie je obmedzenie na lokalitu, pridané 2005-07-27 */
+	_global_pm_sobota.typslav = SLAV_LUB_SPOMIENKA;
+	_global_pm_sobota.typslav_lokal = LOKAL_SLAV_NEURCENE; // nie je obmedzenie na lokalitu, pridané 2005-07-27
 	mystrcpy(_global_pm_sobota.meno, text_SPOMIENKA_PM_V_SOBOTU[_global_jazyk], MENO_SVIATKU);
-	_global_pm_sobota.prik    = NEPRIKAZANY_SVIATOK; /* pridane 27/04/2000A.D. */
-	_global_pm_sobota.spolcast = /* pridane 27/04/2000A.D. */
-		_encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
+	_global_pm_sobota.prik    = NIE_JE_PRIKAZANY_SVIATOK;
+	_global_pm_sobota.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_pm_sobota.farba = LIT_FARBA_BIELA;
 	_global_pm_sobota.kalendar = KALENDAR_VSEOBECNY;
 }
@@ -1284,7 +1283,7 @@ void _dm_popolcova_streda(short int rok, short int _vn){
 	_global_result.litobd  = OBD_POSTNE_I;
 	_global_result.tyzden  = 0; // 4. tyzden zaltara
 	_global_result.smer    = 2;
-	_global_result.prik    = NEPRIKAZANY_SVIATOK;
+	_global_result.prik    = NIE_JE_PRIKAZANY_SVIATOK;
 	mystrcpy(_global_result.meno, text_POPOLCOVA_STREDA[_global_jazyk], MENO_SVIATKU);
 	_global_result.tyzzal  = 4; // 4. tyzden zaltara
 	_global_result.spolcast= _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
@@ -1337,7 +1336,7 @@ void _dm_prva_adventna_nedela(short int rok, short int p2){
 	_global_result.litobd  = OBD_ADVENTNE_I;
 	_global_result.tyzden  = 1; // 1. adventna nedela
 	_global_result.smer    = 2;
-	_global_result.prik    = NEPRIKAZANY_SVIATOK;
+	_global_result.prik    = NIE_JE_PRIKAZANY_SVIATOK;
 	mystrcpy(_global_result.meno, text_PRVA_ADVENTNA_NEDELA[_global_jazyk], MENO_SVIATKU);
 	_global_result.spolcast= _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.tyzzal  = 1;
@@ -1362,7 +1361,7 @@ void _dm_svatej_rodiny(short int rok){
 	_global_result.litobd  = OBD_OKTAVA_NARODENIA;
 	_global_result.smer    = 5;
 	_global_result.tyzden  = 1; // 1. tyzden vianocneho obdobia, oktava
-	_global_result.prik    = NEPRIKAZANY_SVIATOK;
+	_global_result.prik    = NIE_JE_PRIKAZANY_SVIATOK;
 	mystrcpy(_global_result.meno, text_NEDELA_SV_RODINY[_global_jazyk], MENO_SVIATKU);
 	_global_result.spolcast= _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
 	_global_result.tyzzal  = 1;
@@ -1388,7 +1387,7 @@ void _dm_krst_krista_pana(short int rok){
 	_global_result.smer    = 5;
 	mystrcpy(_global_result.meno, text_JAN_KRST[_global_jazyk], MENO_SVIATKU); // 2003-08-11 zmenena na mystrcpy
 	_global_result.spolcast= _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
-	_global_result.prik    = NEPRIKAZANY_SVIATOK;
+	_global_result.prik    = NIE_JE_PRIKAZANY_SVIATOK;
 	_global_result.tyzzal  = 1;
 	_global_result.farba = LIT_FARBA_BIELA;
 	_global_result.kalendar = KALENDAR_VSEOBECNY;
@@ -1404,7 +1403,7 @@ void _dm_velkonocna_nedela(short int rok, short int _vn){
 	mystrcpy(_global_result.meno, text_VELKONOCNA_NEDELA[_global_jazyk], MENO_SVIATKU);
 	strcat(_global_result.meno, text_NEDELA_PANOVHO_ZMRTVYCHVSTANIA[_global_jazyk]);
 	_global_result.spolcast= _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
-	_global_result.prik    = NEPRIKAZANY_SVIATOK;
+	_global_result.prik    = NIE_JE_PRIKAZANY_SVIATOK;
 	_global_result.tyzzal  = 1;
 	_global_result.farba = LIT_FARBA_BIELA;
 	_global_result.kalendar = KALENDAR_VSEOBECNY;

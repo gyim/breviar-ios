@@ -4110,18 +4110,17 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 	_global_den.denvr = poradie(datum.den, datum.mesiac, rok);
 	_global_den.denvt = den_v_tyzdni(datum.den, datum.mesiac, rok);
 
-	/* urËenie vöeobecnych "liturgick˝ch" z·leûitostÌ dÚa:
-	 *
-	 * litrok,
-	 * tyzzal	= 0;
-	 * tyzden	= 0; // neurceny; 01/03/2000A.D.
-	 * smer		= 14;
-	 * meno		= STR_EMPTY;
-	 * prik		= NEPRIKAZANY_SVIATOK;
-	 * typslav	= SLAV_NEURCENE;
-	 * farba	= LIT_FARBA_NEURCENA;
-	 * kalendar = KALENDAR_NEURCENY;
-	 */
+	// urËenie vöeobecnych "liturgick˝ch" z·leûitostÌ dÚa:
+	//
+	// litrok,
+	// tyzzal	= 0;
+	// tyzden	= 0;
+	// smer		= 14;
+	// meno		= STR_EMPTY;
+	// prik		= NIE_JE_PRIKAZANY_SVIATOK;
+	// typslav	= SLAV_NEURCENE;
+	// farba	= LIT_FARBA_NEURCENA;
+	// kalendar = KALENDAR_NEURCENY;
 	if(_global_den.denvr < PRVA_ADVENTNA_NEDELA){
 		_global_den.litrok = _global_r._POPOLCOVA_STREDA.litrok;
 		_rozbor_dna_LOG("pred prvou adventnou nedelou v roku\n");
@@ -4130,22 +4129,20 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 		_global_den.litrok = _global_r._SVATEJ_RODINY.litrok;
 		_rozbor_dna_LOG("po prvej adventnej nedeli v roku (vratane)\n");
 	}
-	_global_den.tyzzal = 0; /* neurceny */
-	_global_den.tyzden = 0; /* neurceny; 01/03/2000A.D. */
-	_global_den.smer = 14; /* neurceny */
-	_global_den.typslav = SLAV_NEURCENE; /* neurcene */
-	_global_den.prik = NEPRIKAZANY_SVIATOK; /* nie je prikazany sviatok */
-	_global_den.typslav_lokal = LOKAL_SLAV_NEURCENE; /* pridanÈ 2005-07-27 */
-	mystrcpy(_global_den.meno, STR_EMPTY, MENO_SVIATKU); /* neurcene; pokus o zmenu 2007-08-16 */
-	_global_den.spolcast = /* pridane 01/03/2000A.D. */
-		_encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
-	_global_den.farba = LIT_FARBA_NEURCENA; /* 2010-08-03/2006-08-19: pridanÈ */
+	_global_den.tyzzal = 0; // neurceny
+	_global_den.tyzden = 0; // neurceny
+	_global_den.smer = 14; // neurceny
+	_global_den.typslav = SLAV_NEURCENE; // neurcene
+	_global_den.prik = NIE_JE_PRIKAZANY_SVIATOK; // nie je prikazany sviatok
+	_global_den.typslav_lokal = LOKAL_SLAV_NEURCENE;
+	mystrcpy(_global_den.meno, STR_EMPTY, MENO_SVIATKU); // neurcene
+	_global_den.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
+	_global_den.farba = LIT_FARBA_NEURCENA; // 2010-08-03/2006-08-19: pridanÈ
 	_global_den.kalendar = KALENDAR_NEURCENY;
 
-	/* urËenie ostatn˝ch öpecifick˝ch "liturgick˝ch" z·leûitostÌ:
-	 *
-	 * tyzzal, litobd, tyzden, smer, typslav, prip. meno
-	 */
+	// urËenie ostatn˝ch öpecifick˝ch "liturgick˝ch" z·leûitostÌ:
+	//
+	// tyzzal, litobd, tyzden, smer, typslav, prip. meno
 	if(_global_den.denvr < VELKONOCNA_NEDELA){
 		// pred velkou nocou
 		_rozbor_dna_LOG("/* pred velkou nocou */\n");
@@ -5148,8 +5145,11 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	else
 		Log("nie\n");
 
-	// najprv nazov
-	if(typ != EXPORT_DNA_VIAC_DNI_TXT){
+	// najprv n·zov; ak ide o æubovoæn˙ spomienku na blahoslavenÈho (napr. SK OP), zobrazÌ sa n·zov kurzÌvou
+	if(_local_den.prik == VOLNA_LUBOVOLNA_SPOMIENKA){
+		mystrcpy(_global_string, "<"HTML_SPAN_BOLD_IT">", MAX_GLOBAL_STR);
+	}
+	else if(typ != EXPORT_DNA_VIAC_DNI_TXT){
 		mystrcpy(_global_string, "<"HTML_SPAN_BOLD">", MAX_GLOBAL_STR);
 	}
 
@@ -5365,8 +5365,8 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 
 	// 2006-09-06: z tohto miesta presunut· kontrola na Ëerven˙ farbu vyööie - if(farba == COLOR_RED)
 
-	// teraz typ slavenia
-	if(_local_den.typslav != SLAV_NEURCENE){
+	// teraz typ sl·venia; nevypisuje sa, ak ide o æubovoæn˙ spomienku na blahoslavenÈho (napr. SK OP), kedy sa zobrazÌ n·zov kurzÌvou
+	if((_local_den.typslav != SLAV_NEURCENE) && ((_local_den.prik != VOLNA_LUBOVOLNA_SPOMIENKA) /* || (typ != EXPORT_DNA_VIAC_DNI) */)){
 		// 2011-01-27: ˙prava (moûnosù zalomenia; Igor Gal·d)
 		if(typ != EXPORT_DNA_VIAC_DNI_TXT){
 #define TYPSLAV_NOVY_RIADOK
