@@ -6419,9 +6419,10 @@ label_24_DEC:
 			Log("OBD_POSTNE_II_VELKY_TYZDEN\n");
 // 2006-01-25: upravené pre posvätné èítanie
 // 2006-01-25: pre modlitbu cez deò (okrem nedele) je hymnus ako pre pôstne obdobie I.
+// 2012-04-02: pre Kvetnú nede¾u sa berie vlastný hymnus len pre jednu z hodiniek; zvolíme tú, pre ktorú sa neberie doplnková psalmódia
 #define _post2_hymnus {\
 	if(((den == DEN_STVRTOK) && (modlitba == MODL_VESPERY))\
-	|| ((den == DEN_NEDELA) && ((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)))){\
+	|| ((den == DEN_NEDELA) && (!((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE)) && ((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)))){\
 		sprintf(_anchor, "%s_%c%s%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), nazov_DN_asci[den], ANCHOR_HYMNUS);\
 	}\
 	else{\
