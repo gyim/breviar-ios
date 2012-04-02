@@ -19,6 +19,7 @@
 /*   2011-03-07a.D. | zadef. MIESTNE_SLAVENIE_LOKAL_SVATY1..3  */
 /*   2011-03-18a.D. | zadef. PODMIENKA_EXPORTOVAT_KALENDAR     */
 /*   2011-03-30a.D. | zadef. prilep_request_options            */
+/*   2012-04-02a.D. | presunuté dôležité defines z breviar.cpp */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -263,6 +264,38 @@ extern short int _global_opt_export_date_format;
 #define PODMIENKA_EXPORTOVAT_FONTSIZE ( (_global_font_size != FONT_SIZE_UNDEF) && (_global_font_size != FONT_SIZE_CSS) )
 
 #define PODMIENKA_EXPORTOVAT_FONT ( (_global_font != FONT_UNDEF) && (_global_font != FONT_CSS) && (_global_font != FONT_CHECKBOX) )
+
+//---------------------------------------------------------------------
+// definicie pre _rozbor_dna():
+//
+// obsahuju sviatky, ktore su bud pevne alebo pohyblive, v kazdom pripade su to dolezite "hranicne" dni medzi obdobiami
+//
+// 2011-05-03: predsunuté pred interpretParameter(), lebo sa tu používajú
+// 2012-04-02: presunuté do breviar.h, lebo sa používa aj v includeFile(), tam používame VELKONOCNA_NEDELA
+
+// 2006-08-01: pozor, koncovky sú pre každý jazyk odlišné
+#define koncovka_dna_asci(denvt) ((nazov_dna((denvt))[strlen(nazov_dna((denvt))) - 1] == 'a')? 'a': 'y')
+#define koncovka_dna(denvt) ((nazov_dna((denvt))[strlen(nazov_dna((denvt))) - 1] == 'a')? 'á': 'ý')
+#define KRST _global_r._KRST_KRISTA_PANA.denvr                          // nede¾a po 6. januári; v krajinách, kde sa Zjavenie Pána slávi v nede¾u, a ak táto pripadne na 7. alebo 8. januára, Krst Krista Pána sa slávi nasledujúci pondelok
+#define POPOLCOVA_STREDA  _global_r._POPOLCOVA_STREDA.denvr             // popolcová streda
+#define VELKONOCNA_NEDELA   _global_r._VELKONOCNA_NEDELA.denvr          // ve¾konoèná nede¾a
+#define KVETNA_NEDELA (VELKONOCNA_NEDELA - 7)                           // kvetná nede¾a
+#define ZELENY_STVRTOK   (VELKONOCNA_NEDELA - 3)                        // zelený štvrtok
+#define VELKY_PIATOK   (VELKONOCNA_NEDELA - 2)                          // ve¾ký piatok
+#define BIELA_SOBOTA   (VELKONOCNA_NEDELA - 1)                          // biela sobota
+#define VELKONOCNY_PONDELOK (VELKONOCNA_NEDELA + 1)                     // ve¾konoèný pondelok
+#define DRUHA_VELKONOCNA_NEDELA  (VELKONOCNA_NEDELA + 7)                // nede¾a vo ve¾konoènej oktáve
+#define NANEBOVSTUPENIE  _global_r._NANEBOVSTUPENIE_PANA.denvr          // nanebovstúpenie Pána (štvrtok, 40. deò po ve¾kej noci, alebo v krajinách, kde sa presúva na nasledujúcu nede¾u ("7. ve¾konoèná nede¾a")
+#define PRVA_ADVENTNA_NEDELA  _global_r._PRVA_ADVENTNA_NEDELA.denvr     // prvá adventná nede¾a
+#define ZOSLANIE_DUCHA_SV  _global_r._ZOSLANIE_DUCHA_SV.denvr           // zoslanie Ducha Svätého
+#define SV_RODINY  _global_r._SVATEJ_RODINY.denvr                       // sviatok svätej rodiny
+#define TROJICA (ZOSLANIE_DUCHA_SV + 7)                                 // prvá nede¾a po ZOSLANIE_DUCHA_SV: najsv. Trojice
+// #define TELAKRVI (ZOSLANIE_DUCHA_SV + 11)                               // štvrtok po Trojici: Kristovho tela a krvi (alebo: v krajinách, kde sa presúva na nede¾u)
+#define SRDCA (ZOSLANIE_DUCHA_SV + 19)                                  // piatok po druhej nedeli po ZOSLANIE_DUCHA_SV: najsv. srdca Ježišovho
+#define SRDPM (ZOSLANIE_DUCHA_SV + 20)                                  // sobota po druhej nedeli po ZOSLANIE_DUCHA_SV: nepoškvrneného srdca prebl. p. márie
+// 2006-08-22: kvôli ružovej farbe rúcha potrebujeme define aj pre 3. adventnú nede¾u a 4. pôstnu nede¾u
+#define TRETIA_ADVENTNA_NEDELA (PRVA_ADVENTNA_NEDELA + 14)              // tretia adventná nede¾a - dva týždne po prvej adventnej nedeli (PRVA_ADVENTNA_NEDELA)
+#define STVRTA_POSTNA_NEDELA (VELKONOCNA_NEDELA - 21)                   // štvrtá pôstna nede¾a - tri týždne pred VELKONOCNA_NEDELA
 
 #ifndef OS_linux
 // kedysi bolo void main; 2003-07-14, kvoli gcc version 3.2.2 20030222 (Red Hat Linux 3.2.2-5) christ-net.sk 

@@ -1374,6 +1374,7 @@ void _main_prazdny_formular(void){
 #define DetailLog emptyLog
 #define MAX_ZAKONCENIE 200
 #define EXPORT_REFERENCIA ((!vnutri_myslienky || je_myslienka) && (!vnutri_nadpisu || je_nadpis))
+#define je_velkonocna_nedela_posv_cit (((equals(paramname, PARAM_CITANIE1)) || (equals(paramname, PARAM_CITANIE2))) && (_global_den.denvr = VELKONOCNA_NEDELA) && (_global_modlitba == MODL_POSV_CITANIE))
 short int antifona_pocet = 0; // 2011-07-08: poèet antifón (ant1, ant2, ant3 pre psalmódiu a ant. na benediktus/magnifikat kvôli krížikom)
 char rest_krizik[MAX_BUFFER] = STR_EMPTY; // 2011-07-08: pre to, èo je za krížikom v antifóne
 char rest_zakoncenie[MAX_BUFFER] = STR_EMPTY;
@@ -1578,7 +1579,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 				else if(equals(strbuff, PARAM_ZAKONCENIE)){
 					if((vnutri_inkludovaneho == ANO) && (write == ANO)){
 						// Export("[INPUT:paramname=%s|fname=%s|modlparam=%s|READ:strbuff=%s|rest=%s]", paramname, fname, modlparam, strbuff, rest);
-						if((equals(paramname, PARAM_MODLITBA)) || (equals(paramname, PARAM_MODL_SPOMPRIVILEG))){
+						if((equals(paramname, PARAM_MODLITBA)) || (equals(paramname, PARAM_MODL_SPOMPRIVILEG)) || (je_velkonocna_nedela_posv_cit)){
 
 							// pre ranné chvály a vešpery, ak sa pridáva 'modlitba' pre spomienku v privilegované dni, tak zakonèenie sa dáva až pre PARAM_MODL_SPOMPRIVILEG
 							if((equals(paramname, PARAM_MODLITBA)) && (je_ant_modl_spomprivileg))
@@ -1600,10 +1601,10 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 						Export("%s:%s", strbuff, modlparam);
 #endif
 						*/
-						if((je_modlitba == ANO) && ((equals(paramname, PARAM_MODLITBA)) || (equals(paramname, PARAM_MODL_SPOMPRIVILEG)))){
+						if((je_modlitba == ANO) && ((equals(paramname, PARAM_MODLITBA)) || (equals(paramname, PARAM_MODL_SPOMPRIVILEG)) || (je_velkonocna_nedela_posv_cit))){
 							Export("%s--> ", (rest_zakoncenie == NULL) ? STR_EMPTY: rest_zakoncenie);
 							if(equals(rest_zakoncenie, PARAM_ZAKONCENIE_SKRZE) || equals(rest_zakoncenie, PARAM_ZAKONCENIE_SKRZE_MALE)){
-								if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
+								if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM) || (je_velkonocna_nedela_posv_cit)){
 									mystrcpy(zakoncenie, text_ZAKONCENIE_SKRZE_kratke[_global_jazyk], MAX_ZAKONCENIE);
 								}
 								else{
@@ -1611,7 +1612,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 								}
 							} // ZAKONCENIE_SKRZE
 							else if(equals(rest_zakoncenie, PARAM_ZAKONCENIE_LEBO_TY) || equals(rest_zakoncenie, PARAM_ZAKONCENIE_LEBO_TY_MALE)){
-								if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
+								if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM) || (je_velkonocna_nedela_posv_cit)){
 									mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_TY_kratke[_global_jazyk], MAX_ZAKONCENIE);
 								}
 								else{
@@ -1619,7 +1620,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 								}
 							} // ZAKONCENIE_LEBO_TY
 							else if(equals(rest_zakoncenie, PARAM_ZAKONCENIE_LEBO_ON) || equals(rest_zakoncenie, PARAM_ZAKONCENIE_LEBO_ON_MALE)){
-								if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
+								if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM) || (je_velkonocna_nedela_posv_cit)){
 									mystrcpy(zakoncenie, text_ZAKONCENIE_LEBO_ON_kratke[_global_jazyk], MAX_ZAKONCENIE);
 								}
 								else{
@@ -1627,7 +1628,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 								}
 							} // ZAKONCENIE_LEBO_ON
 							else if(equals(rest, PARAM_ZAKONCENIE_ON_JE) && _global_jazyk == JAZYK_SK){
-								if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
+								if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM) || (je_velkonocna_nedela_posv_cit)){
 									mystrcpy(zakoncenie, text_ZAKONCENIE_ON_JE_kratke, MAX_ZAKONCENIE);
 								}
 								else{
@@ -1635,7 +1636,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 								}
 							} // SK: ZAKONCENIE_ON_JE
 							else if(equals(rest, PARAM_ZAKONCENIE_KTORY_JE) && _global_jazyk == JAZYK_SK){
-								if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
+								if((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI) || (_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM) || (je_velkonocna_nedela_posv_cit)){
 									mystrcpy(zakoncenie, text_ZAKONCENIE_KTORY_JE_kratke, MAX_ZAKONCENIE);
 								}
 								else{
@@ -2129,38 +2130,10 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 }// includeFile()
 
 //---------------------------------------------------------------------
-/* definicie pre _rozbor_dna():
- *
- * obsahuju sviatky, ktore su bud pevne alebo pohyblive,
- * v kazdom pripade su to dolezite "hranicne" dni medzi obdobiami
- *
- * 2011-05-03: predsunuté pred interpretParameter(), lebo sa tu používajú
- *
- */
-
-// 2006-08-01: pozor, koncovky sú pre každý jazyk odlišné
-#define koncovka_dna_asci(denvt) ((nazov_dna((denvt))[strlen(nazov_dna((denvt))) - 1] == 'a')? 'a': 'y')
-#define koncovka_dna(denvt) ((nazov_dna((denvt))[strlen(nazov_dna((denvt))) - 1] == 'a')? 'á': 'ý')
-#define KRST _global_r._KRST_KRISTA_PANA.denvr                          // nede¾a po 6. januári; v krajinách, kde sa Zjavenie Pána slávi v nede¾u, a ak táto pripadne na 7. alebo 8. januára, Krst Krista Pána sa slávi nasledujúci pondelok
-#define POPOLCOVA_STREDA  _global_r._POPOLCOVA_STREDA.denvr             // popolcová streda
-#define VELKONOCNA_NEDELA   _global_r._VELKONOCNA_NEDELA.denvr          // ve¾konoèná nede¾a
-#define KVETNA_NEDELA (VELKONOCNA_NEDELA - 7)                           // kvetná nede¾a
-#define ZELENY_STVRTOK   (VELKONOCNA_NEDELA - 3)                        // zelený štvrtok
-#define VELKY_PIATOK   (VELKONOCNA_NEDELA - 2)                          // ve¾ký piatok
-#define BIELA_SOBOTA   (VELKONOCNA_NEDELA - 1)                          // biela sobota
-#define VELKONOCNY_PONDELOK (VELKONOCNA_NEDELA + 1)                     // ve¾konoèný pondelok
-#define DRUHA_VELKONOCNA_NEDELA  (VELKONOCNA_NEDELA + 7)                // nede¾a vo ve¾konoènej oktáve
-#define NANEBOVSTUPENIE  _global_r._NANEBOVSTUPENIE_PANA.denvr          // nanebovstúpenie Pána (štvrtok, 40. deò po ve¾kej noci, alebo v krajinách, kde sa presúva na nasledujúcu nede¾u ("7. ve¾konoèná nede¾a")
-#define PRVA_ADVENTNA_NEDELA  _global_r._PRVA_ADVENTNA_NEDELA.denvr     // prvá adventná nede¾a
-#define ZOSLANIE_DUCHA_SV  _global_r._ZOSLANIE_DUCHA_SV.denvr           // zoslanie Ducha Svätého
-#define SV_RODINY  _global_r._SVATEJ_RODINY.denvr                       // sviatok svätej rodiny
-#define TROJICA (ZOSLANIE_DUCHA_SV + 7)                                 // prvá nede¾a po ZOSLANIE_DUCHA_SV: najsv. Trojice
-// #define TELAKRVI (ZOSLANIE_DUCHA_SV + 11)                               // štvrtok po Trojici: Kristovho tela a krvi (alebo: v krajinách, kde sa presúva na nede¾u)
-#define SRDCA (ZOSLANIE_DUCHA_SV + 19)                                  // piatok po druhej nedeli po ZOSLANIE_DUCHA_SV: najsv. srdca Ježišovho
-#define SRDPM (ZOSLANIE_DUCHA_SV + 20)                                  // sobota po druhej nedeli po ZOSLANIE_DUCHA_SV: nepoškvrneného srdca prebl. p. márie
-// 2006-08-22: kvôli ružovej farbe rúcha potrebujeme define aj pre 3. adventnú nede¾u a 4. pôstnu nede¾u
-#define TRETIA_ADVENTNA_NEDELA (PRVA_ADVENTNA_NEDELA + 14)              // tretia adventná nede¾a - dva týždne po prvej adventnej nedeli (PRVA_ADVENTNA_NEDELA)
-#define STVRTA_POSTNA_NEDELA (VELKONOCNA_NEDELA - 21)                   // štvrtá pôstna nede¾a - tri týždne pred VELKONOCNA_NEDELA
+// definicie pre _rozbor_dna():
+// obsahuju sviatky, ktore su bud pevne alebo pohyblive, v kazdom pripade su to dolezite "hranicne" dni medzi obdobiami
+// 2011-05-03: predsunuté pred interpretParameter(), lebo sa tu používajú
+// 2012-04-02: presunuté do breviar.h, lebo sa používa aj v includeFile(), tam používame VELKONOCNA_NEDELA
 
 //---------------------------------------------------------------------
 /* interpretParameter():
