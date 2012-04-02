@@ -22491,8 +22491,8 @@ label_25_MAR:
 
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
-						if(_global_jazyk == JAZYK_CZ){
-							_vlastna_cast_2citanie; // 2006-08-09: nemá zatia¾ vlastné druhé èítanie (2008-09-26: pre èeský breviáø už má)
+						if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_SK)){
+							_vlastna_cast_2citanie; // 2006-08-09: nemá zatia¾ vlastné druhé èítanie | 2008-09-26: pre èeský breviáø už má | 2012-04-02: SK direktórium 2008 obsahovalo latinský text
 						}
 
 						modlitba = MODL_VESPERY;
