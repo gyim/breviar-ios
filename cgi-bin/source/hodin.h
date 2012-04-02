@@ -2660,7 +2660,7 @@ const char *text_FEB_03_2[POCET_JAZYKOV + 1] =
  "Szent Anszgár (Oszkár) püspök",
  };
 const char *text_FEB_03_1_OP[POCET_JAZYKOV + 1] = 
-{"Bl. Petra Z Ruff&iacute;a, kòaza a muèeníka",
+{"Bl. Petra z Ruff&iacute;a, kòaza a muèeníka",
  "",
  "",
  "",
@@ -3154,6 +3154,15 @@ const char *text_APR_07[POCET_JAZYKOV + 1] =
  "Sv. Jana Køtitele de la Salle, knìze",
  "De la Salle Szent János áldozópap",
  };
+const char *text_APR_10_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Antona Neyrota, kòaza a muèeníka",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_APR_11[POCET_JAZYKOV + 1] = 
 {"Sv. Stanislava, biskupa a muèeníka",
  "Sv. Stanislava, biskupa a muèedníka",
@@ -3172,6 +3181,24 @@ const char *text_APR_13[POCET_JAZYKOV + 1] =
  "Sv. Martina I., papeže a muèedníka",
  "Szent I. Márton pápa és vértanú",
  };
+const char *text_APR_13_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Margity z Citt&agrave; di Castello, panny",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_APR_14_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Petra Gonzáleza, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_APR_16[POCET_JAZYKOV + 1] = 
 {"Sv. Márie Bernadety Soubirousovej, panny",
  "Sv. Marie Bernadetty Soubirous, panny",
@@ -3181,14 +3208,50 @@ const char *text_APR_16[POCET_JAZYKOV + 1] =
  "Sv. Marie Bernadetty Soubirous, panny",
  "Soubirous szent Mária Bernadett szûz",
  };
-const char *text_APR_20[POCET_JAZYKOV + 1] = 
-{"(na Slovensku nie je)",
- "(v Èechách, na Moravì a ve Slezsku není)",
+const char *text_APR_17_1_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Kláry Gambacortovej, reho¾níèky",
  "",
- "la_",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_APR_17_2_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Márie Manciniovej, reho¾níèky",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_APR_19_1_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Isnarda z Chiampa, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_APR_19_2_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Sybiliny Biscossiovej, panny",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_APR_20_OP[POCET_JAZYKOV + 1] = 
+{"Sv. Agnesy z Montepulciana, panny",
+ "",
+ "",
+ "",
  "",
  "Sv. Anežky z Montepulciana, panny, mnišky",
- "hu_",
+ "",
  };
 const char *text_APR_21[POCET_JAZYKOV + 1] = 
 {"Sv. Anzelma, biskupa a uèite¾a Cirkvi",
@@ -3282,6 +3345,15 @@ const char *text_APR_25[POCET_JAZYKOV + 1] =
  };
 const char *text_APR_27_SJ[POCET_JAZYKOV + 1] = 
 {"Sv. Petra Kanízia, kòaza a uèite¾a Cirkvi",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_APR_27_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Hosanny Kotorskej, panny",
  "",
  "",
  "",
