@@ -489,6 +489,8 @@ char *_global_string2;
 char *_global_string_farba; /* 2006-08-19: doplnené */
 // 2011-10-04: pridané, pre titulok modlitby (už sa nepriliepa do _global_string)
 char _global_string_modlitba[SMALL];
+// 2012-04-03: pridané, pre podnadpis modlitby (napr. pre MCD: doplnková psalmódia)
+char _global_string_podnadpis[SMALL];
 
 // pridane 13/04/2000A.D.; deklarovane v liturgia.h
 short int _global_linky;
@@ -2743,6 +2745,12 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		Export("<!--nadpis:end");
 	}// PARAM_NADPIS
 
+	else if(equals(paramname, PARAM_PODNADPIS)){
+		Export("podnadpis:begin-->");
+		Export(_global_string_podnadpis);
+		Export("<!--podnadpis:end");
+	}// PARAM_PODNADPIS
+
 	else if(equals(paramname, PARAM_NAVIGACIA)){
 		if(aj_navigacia == ANO){
 #ifdef BEHAVIOUR_WEB
@@ -4900,6 +4908,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	mystrcpy(_global_string2, STR_EMPTY, MAX_GLOBAL_STR2); // inicializácia, upravená dåžka
 	mystrcpy(_global_string_farba, STR_EMPTY, MAX_GLOBAL_STR_FARBA);
 	mystrcpy(_global_string_modlitba, STR_EMPTY, SMALL);
+	mystrcpy(_global_string_podnadpis, STR_EMPTY, SMALL);
 
 	short int farba = COLOR_BLACK;
 	short int velkost = CASE_MALE;
@@ -5570,6 +5579,27 @@ void init_global_string_modlitba(short int modlitba){
 	_global_modlitba = _local_modlitba;
 	Log("-- init_global_string_modlitba(%d, %s) -- koniec\n", modlitba, nazov_modlitby(modlitba));
 }// init_global_string_modlitba()
+
+void init_global_string_podnadpis(short int modlitba){
+	// 2012-04-03: vytvorené
+	Log("-- init_global_string_podnadpis(%d, %s) -- zaèiatok\n", modlitba, nazov_modlitby(modlitba));
+	Log("pôvodná hodnota: %s\n", _global_string_podnadpis);
+	if(modlitba != _global_modlitba){
+		Export("<!-- modlitba == %d, _global_modlitba == %d -->\n", modlitba, _global_modlitba);
+	}
+	if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
+		if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE){
+			mystrcpy(_global_string_podnadpis, "<br>\n(", SMALL);
+			strcat(_global_string_podnadpis, str_doplnkova_psalmodia[_global_jazyk]);
+			strcat(_global_string_podnadpis, ")");
+		}// doplnková psalmódia
+		else{
+			mystrcpy(_global_string_podnadpis, STR_EMPTY, SMALL);
+		}// nie je doplnková psalmódia
+	}// MCD
+	Log("nová hodnota: %s\n", _global_string_podnadpis);
+	Log("-- init_global_string_podnadpis(%d, %s) -- koniec\n", modlitba, nazov_modlitby(modlitba));
+}// init_global_string_podnadpis()
 
 //---------------------------------------------------------------------
 /* _rozbor_dna_s_modlitbou()
@@ -8945,6 +8975,7 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 		*/
 	}// if((modlitba == MODL_PRVE_VESPERY) || (modlitba == MODL_PRVE_KOMPLETORIUM))
 	init_global_string_modlitba(modlitba);
+	init_global_string_podnadpis(modlitba);
 
 	// ak ma nasledujuci den prioritu pred dnesnym dnom
 	if((modlitba == MODL_VESPERY) || (modlitba == MODL_KOMPLETORIUM)){
@@ -9041,6 +9072,7 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 			// strcat(_global_string, pom);
 			*/
 			init_global_string_modlitba(modlitba);
+			init_global_string_podnadpis(modlitba);
 		}/* _global_den ma dvoje vespery/kompletorium, teda musime brat DRUHE */
 
 		else
@@ -9111,6 +9143,7 @@ LABEL_ZMENA:
 				// strcat(_global_string, pom);
 				*/
 				init_global_string_modlitba(modlitba);
+				init_global_string_podnadpis(modlitba);
 			}
 		}/* _local_den ma dvoje vespery/kompletorium, teda musime brat PRVE */
 	}/* vespery alebo kompletorium, zistovanie priority */
@@ -10795,6 +10828,7 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 		*/
 	}
 	init_global_string_modlitba(_global_modlitba);
+	init_global_string_podnadpis(_global_modlitba);
 
 	_export_heading_center(_global_string);
 
@@ -11458,6 +11492,7 @@ void _main_batch_mode(
 					if(_global_opt_append == YES){
 						mystrcpy(_global_string, STR_EMPTY, MAX_GLOBAL_STR); // inicializacia
 						mystrcpy(_global_string_modlitba, STR_EMPTY, SMALL);
+						mystrcpy(_global_string_podnadpis, STR_EMPTY, SMALL);
 						// 2008-11-29: rozlièný export
 						if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
 							sprintf(_global_string, FILENAME_EXPORT_DATE_SIMPLE"_"FILENAME_EXPORT_DATE_SIMPLE, r_from % 100, m_from + 1, d_from, r_to % 100, m_to + 1, d_to);

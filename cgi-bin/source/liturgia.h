@@ -440,6 +440,8 @@ extern const char *TEMPLAT[POCET_MODLITIEB + 1];
 #define PARAM_NAVIGACIA     "NAVIGACIA"
 // 2011-10-04: pridaný nadpis v modlitbe
 #define PARAM_NADPIS        "NADPIS"
+// 2012-04-03: pridaný podnadpis v modlitbe (napr. pre MCD: doplnková psalmódia)
+#define PARAM_PODNADPIS     "PODNADPIS"
 
 // dalsie parametre: specificke pre obdobie
 // Od nedele Pánovho zmàtvychvstania až do Druhej ve¾konoènej nedele vrátane, ako aj na druhé vešpery slávnosti Zoslania Ducha Svätého
@@ -1258,7 +1260,7 @@ extern char *_global_string;
 extern char *_global_string2; // obsahuje I, II, III, IV, V alebo pismeno roka
 extern char *_global_string_farba; // 2006-08-19: doplnené
 // 2011-10-04: pridané, pre titulok modlitby (už sa nepriliepa do _global_string)
-extern char _global_string_modlitba[SMALL];
+// extern char _global_string_modlitba[SMALL];
 
 extern char *_global_buf; // 2006-08-01: túto premennú tiež alokujeme
 extern char *_global_buf2; // 2006-08-01: túto premennú tiež alokujeme

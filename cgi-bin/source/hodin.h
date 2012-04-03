@@ -1303,14 +1303,14 @@ const char *html_text_Jednotlive_mesiace_roku[POCET_JAZYKOV + 1] = {
 };
 
 const char *str_doplnkova_psalmodia[POCET_JAZYKOV + 1] = 
-{"doplnková psalmódia", "žalmy z doplòovacího cyklu", "supplementary psalmody", "psalmodia complementaris", "", "doplnková psalmodie", "xxx" };
+{"doplnková psalmódia", "žalmy z doplòovacího cyklu", "supplementary psalmody", "psalmodia complementaris", "", "doplnková psalmodie", "kiegészítõ zsoltárok" };
 
 const char *str_modl_cez_den_zalmy_zo_dna[POCET_JAZYKOV + 1] = 
-	{"bežnej psalmódie", "bìžné psalmodie", "ordinary psalmody", "___", "", "bìžné psalmodie", "hu_ordinary-psalter"};
+	{"bežnej psalmódie", "bìžné psalmodie", "ordinary psalmody", "___", "", "bìžné psalmodie", "soros zsoltárösszeállítást"};
 #define		STR_MODL_CEZ_DEN_ZALMY_ZO_DNA 	str_modl_cez_den_zalmy_zo_dna[_global_jazyk]
 
 const char *str_modl_cez_den_doplnkova_psalmodia[POCET_JAZYKOV + 1] = 
-	{"doplnkovej psalmódie", "doplòovacího cyklu", "supplementary psalmody", "psalmodia complementaris", "", "doplòkové psalmodie", "hu_suppl.-psalter"};
+	{"doplnkovej psalmódie", "doplòovacího cyklu", "supplementary psalmody", "psalmodia complementaris", "", "doplòkové psalmodie", "kiegészítõ zsoltárok"};
 #define		STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA 	str_modl_cez_den_doplnkova_psalmodia[_global_jazyk]
 
 const char *str_modl_zalmy_zo_dna[POCET_JAZYKOV + 1] = 
