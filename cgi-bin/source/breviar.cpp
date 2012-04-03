@@ -14379,6 +14379,8 @@ int main(int argc, char **argv){
 				_main_LOG_to_Export("zisùujem font...\n");
 				_global_font = atofont(pom_FONT);
 				if(_global_font == FONT_UNDEF){
+					_global_font = FONT_CSS;
+					/*
 					// ToDo: urobiù krajöie, podæa default nastavenia v config (konfiguraËnom s˙bore); zatiaæ to tam nie je
 					if(_global_jazyk == JAZYK_CZ){
 						_global_font = FONT_CHECKBOX;
@@ -14386,6 +14388,7 @@ int main(int argc, char **argv){
 					else{
 						_global_font = FONT_CSS;
 					}// default
+					*/
 					_main_LOG_to_Export("\t(vzhæadom k neurËenÈmu fontu pouûÌvam default -- braù font z CSS)\n");
 				}
 				_main_LOG_to_Export("...font (%s) = %i, teda %s\n", pom_FONT, _global_font, nazov_fontu[_global_font]);
@@ -14566,8 +14569,15 @@ _main_SIMULACIA_QS:
 			_main_LOG_to_Export("zisùujem css...\n");
 			_global_css = atocss(pom_CSS);
 			if(_global_css == CSS_UNDEF){
-				_global_css = CSS_breviar_sk;
-				_main_LOG_to_Export("\t(vzhæadom k neurËenÈmu css pouûÌvam default)\n");
+				// 2012-04-03: doplnenÈ default CSS pre dan˝ jazyk
+				_global_css = default_css_jazyk[_global_jazyk];
+				if(_global_css == CSS_UNDEF){
+					_global_css = CSS_breviar_sk;
+					_main_LOG_to_Export("\t(vzhæadom k neurËenÈmu CSS pouûÌvam default)\n");
+				}
+				else{
+					_main_LOG_to_Export("\t(vzhæadom k neurËenÈmu CSS pouûÌvam default pre dan˝ jazyk)\n");
+				}
 			}
 			_main_LOG_to_Export("...css (%s) = %i, teda %s (%s)\n", pom_CSS, _global_css, nazov_css[_global_css], skratka_css[_global_css]);
 
@@ -14575,6 +14585,8 @@ _main_SIMULACIA_QS:
 			_main_LOG_to_Export("zisùujem font...\n");
 			_global_font = atofont(pom_FONT);
 			if(_global_font == FONT_UNDEF){
+				_global_font = FONT_CSS;
+				/*
 				// ToDo: urobiù krajöie, podæa default nastavenia v config (konfiguraËnom s˙bore); zatiaæ to tam nie je
 				if(_global_jazyk == JAZYK_CZ){
 					_global_font = FONT_CHECKBOX;
@@ -14582,6 +14594,7 @@ _main_SIMULACIA_QS:
 				else{
 					_global_font = FONT_CSS;
 				}// default
+				*/
 				_main_LOG_to_Export("\t(vzhæadom k neurËenÈmu fontu pouûÌvam default -- braù font z CSS)\n");
 			}
 			_main_LOG_to_Export("...font (%s) = %i, teda %s\n", pom_FONT, _global_font, nazov_fontu[_global_font]);

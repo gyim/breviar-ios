@@ -893,6 +893,10 @@ const char *skratka_css[POCET_CSS + 1] =
 	, "2003", "2005", "2007", "2008"
 	, "jmkcz", "kbs"};
 
+// 2012-04-03: Pridané kvôli jazykovým mutáciám -- default CSS pre daný jazyk
+const short int default_css_jazyk[POCET_JAZYKOV + 1] =
+{CSS_breviar_sk, CSS_ebreviar_cz, CSS_breviar_sk, CSS_breviar_sk, CSS_breviar_sk, CSS_breviar_cz_op, CSS_breviar_sk};
+
 // CSS obsahujuci invertovane farby
 const char *nazov_css_invert_colors = "breviar-invert-colors.css";
 
