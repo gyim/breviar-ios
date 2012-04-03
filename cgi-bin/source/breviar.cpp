@@ -12434,7 +12434,7 @@ short int getArgv(int argc, char **argv){
 					printf("\tProgram vytvara stranky (HTML vystup) pre Liturgiu hodin.\n");
 					// build pridany 2003-07-04
 					printf("\tBuild: %s\n", BUILD_DATE);
-					printf("\t(c)1999-2011 Juraj Vidéky <videky@breviar.sk>\n");
+					printf("\t(c)1999-2012 Juraj Vidéky <videky@breviar.sk>\n");
 					printf("\n");
 					printf("\npouzitie:\n");
 					printf("\tlh [prepinac [hodnota]...]\n");
@@ -14213,7 +14213,7 @@ int main(int argc, char **argv){
 	_main_LOG("\n");
 // #endif
 	
-	_main_LOG("-- log file programu pre Liturgiu hodín (c)1999-2011 Juraj Vidéky --\n");
+	_main_LOG("-- log file programu pre Liturgiu hodín (c)1999-2012 Juraj Vidéky --\n");
 
 	_main_LOG("inicializácia po¾a pom_MODL_OPT[]...\n");
 	for(i = 0; i < POCET_GLOBAL_OPT; i++){
@@ -14380,15 +14380,6 @@ int main(int argc, char **argv){
 				_global_font = atofont(pom_FONT);
 				if(_global_font == FONT_UNDEF){
 					_global_font = FONT_CSS;
-					/*
-					// ToDo: urobi krajšie, pod¾a default nastavenia v config (konfiguraènom súbore); zatia¾ to tam nie je
-					if(_global_jazyk == JAZYK_CZ){
-						_global_font = FONT_CHECKBOX;
-					}
-					else{
-						_global_font = FONT_CSS;
-					}// default
-					*/
 					_main_LOG_to_Export("\t(vzh¾adom k neurèenému fontu používam default -- bra font z CSS)\n");
 				}
 				_main_LOG_to_Export("...font (%s) = %i, teda %s\n", pom_FONT, _global_font, nazov_fontu[_global_font]);
@@ -14586,15 +14577,6 @@ _main_SIMULACIA_QS:
 			_global_font = atofont(pom_FONT);
 			if(_global_font == FONT_UNDEF){
 				_global_font = FONT_CSS;
-				/*
-				// ToDo: urobi krajšie, pod¾a default nastavenia v config (konfiguraènom súbore); zatia¾ to tam nie je
-				if(_global_jazyk == JAZYK_CZ){
-					_global_font = FONT_CHECKBOX;
-				}
-				else{
-					_global_font = FONT_CSS;
-				}// default
-				*/
 				_main_LOG_to_Export("\t(vzh¾adom k neurèenému fontu používam default -- bra font z CSS)\n");
 			}
 			_main_LOG_to_Export("...font (%s) = %i, teda %s\n", pom_FONT, _global_font, nazov_fontu[_global_font]);
