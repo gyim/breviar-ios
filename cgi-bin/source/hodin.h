@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* hodin.h                                                     */
-/* (c)1999-2011 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2012 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | definovane stringove kontanty                 */
 /* document history                                            */
@@ -893,6 +893,10 @@ const char *skratka_css[POCET_CSS + 1] =
 	, "2003", "2005", "2007", "2008"
 	, "jmkcz", "kbs"};
 
+// 2012-04-03: Pridané kvôli jazykovım mutáciám -- default CSS pre danı jazyk | mono do budúcnosti monos default nastavenia v config (konfiguraènom súbore)
+const short int default_css_jazyk[POCET_JAZYKOV + 1] =
+{CSS_breviar_sk, CSS_ebreviar_cz, CSS_breviar_sk, CSS_breviar_sk, CSS_breviar_sk, CSS_breviar_cz_op, CSS_breviar_sk};
+
 // CSS obsahujuci invertovane farby
 const char *nazov_css_invert_colors = "breviar-invert-colors.css";
 
@@ -1082,7 +1086,7 @@ const char *html_text_Breviar_dnes[POCET_JAZYKOV + 1] = {"Breviár dnes", "Breviá
 const char *html_text_Dnesne_modlitby[POCET_JAZYKOV + 1] = {"Dnešné modlitby", "Dnešní modlitby", "Today's prayers", "la_hodie", "", "Dnešní modlitby", "A mai nap imái"};
 const char *html_text_Prehlad_mesiaca[POCET_JAZYKOV + 1] = {"Preh¾ad mesiaca", "Pøehled mìsíce", "Current month", "la_", "", "Pøehled mìsíce", "A hónap áttekintése"};
 // 2011-03-18: pridané do "zoznam.htm" batch mode -- kalendáre a hlavnı nadpis
-const char *html_text_batch_mode_h1[POCET_JAZYKOV + 1] = {"Liturgia hodín – Predgenerované modlitby", "Liturgie hodin – Pøedgenerovány modlitby", "Liturgy of Hours – Pregenerated prayers", "la_", "", "Liturgie hodin – Pøedgenerovány modlitby", "Az Imaórák Liturgiája – Elõre generált imák"};
+const char *html_text_batch_mode_h1[POCET_JAZYKOV + 1] = {"Liturgia hodín – Predgenerované modlitby", "Liturgie hodin – Pøedgenerované modlitby", "Liturgy of Hours – Pregenerated prayers", "la_", "", "Liturgie hodin – Pøedgenerované modlitby", "Az Imaórák Liturgiája – Elõre generált imák"};
 const char *html_text_Kalendar[POCET_JAZYKOV + 1] = {"Kalendár", "Kalendáø", "Proprietary calendary", "Propria", "", "Kalendáø", "Naptár"};
 
 const char *html_text_Vysvetlivky[POCET_JAZYKOV + 1] = {"Vysvetlivky", "Vysvìtlivky", "Legenda", "Legenda", "", "Vysvìtlivky", "Jelmagyarázat"};
@@ -1303,14 +1307,14 @@ const char *html_text_Jednotlive_mesiace_roku[POCET_JAZYKOV + 1] = {
 };
 
 const char *str_doplnkova_psalmodia[POCET_JAZYKOV + 1] = 
-{"doplnková psalmódia", "almy z doplòovacího cyklu", "supplementary psalmody", "psalmodia complementaris", "", "doplnková psalmodie", "xxx" };
+{"doplnková psalmódia", "almy z doplòovacího cyklu", "supplementary psalmody", "psalmodia complementaris", "", "doplnková psalmodie", "kiegészítõ zsoltárok" };
 
 const char *str_modl_cez_den_zalmy_zo_dna[POCET_JAZYKOV + 1] = 
-	{"benej psalmódie", "bìné psalmodie", "ordinary psalmody", "___", "", "bìné psalmodie", "hu_ordinary-psalter"};
+	{"benej psalmódie", "bìné psalmodie", "ordinary psalmody", "___", "", "bìné psalmodie", "soros zsoltárösszeállítást"};
 #define		STR_MODL_CEZ_DEN_ZALMY_ZO_DNA 	str_modl_cez_den_zalmy_zo_dna[_global_jazyk]
 
 const char *str_modl_cez_den_doplnkova_psalmodia[POCET_JAZYKOV + 1] = 
-	{"doplnkovej psalmódie", "doplòovacího cyklu", "supplementary psalmody", "psalmodia complementaris", "", "doplòkové psalmodie", "hu_suppl.-psalter"};
+	{"doplnkovej psalmódie", "doplòovacího cyklu", "supplementary psalmody", "psalmodia complementaris", "", "doplòkové psalmodie", "kiegészítõ zsoltárok"};
 #define		STR_MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA 	str_modl_cez_den_doplnkova_psalmodia[_global_jazyk]
 
 const char *str_modl_zalmy_zo_dna[POCET_JAZYKOV + 1] = 
@@ -1899,7 +1903,7 @@ const char *html_text_option2_navigation[POCET_JAZYKOV + 1] =
  "",
  "",
  "zobrazit navigaci v textech modliteb", 
- "a  navigáció mutatása az imaszövegben", 
+ "a navigáció mutatása az imaszövegben", 
 };
 const char *html_text_option2_navigation_explain[POCET_JAZYKOV + 1] = 
 {"Èi sa majú zobrazova hypertextové odkazy na ostatné modlitby daného dòa, príp. predošlı/nasledovnı deò priamo v texte modlitby.", 
@@ -2660,7 +2664,7 @@ const char *text_FEB_03_2[POCET_JAZYKOV + 1] =
  "Szent Anszgár (Oszkár) püspök",
  };
 const char *text_FEB_03_1_OP[POCET_JAZYKOV + 1] = 
-{"Bl. Petra Z Ruff&iacute;a, kòaza a muèeníka",
+{"Bl. Petra z Ruff&iacute;a, kòaza a muèeníka",
  "",
  "",
  "",
@@ -3154,6 +3158,15 @@ const char *text_APR_07[POCET_JAZYKOV + 1] =
  "Sv. Jana Køtitele de la Salle, knìze",
  "De la Salle Szent János áldozópap",
  };
+const char *text_APR_10_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Antona Neyrota, kòaza a muèeníka",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_APR_11[POCET_JAZYKOV + 1] = 
 {"Sv. Stanislava, biskupa a muèeníka",
  "Sv. Stanislava, biskupa a muèedníka",
@@ -3172,6 +3185,24 @@ const char *text_APR_13[POCET_JAZYKOV + 1] =
  "Sv. Martina I., papee a muèedníka",
  "Szent I. Márton pápa és vértanú",
  };
+const char *text_APR_13_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Margity z Citt&agrave; di Castello, panny",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_APR_14_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Petra Gonzáleza, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_APR_16[POCET_JAZYKOV + 1] = 
 {"Sv. Márie Bernadety Soubirousovej, panny",
  "Sv. Marie Bernadetty Soubirous, panny",
@@ -3181,14 +3212,50 @@ const char *text_APR_16[POCET_JAZYKOV + 1] =
  "Sv. Marie Bernadetty Soubirous, panny",
  "Soubirous szent Mária Bernadett szûz",
  };
-const char *text_APR_20[POCET_JAZYKOV + 1] = 
-{"(na Slovensku nie je)",
- "(v Èechách, na Moravì a ve Slezsku není)",
+const char *text_APR_17_1_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Kláry Gambacortovej, reho¾níèky",
  "",
- "la_",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_APR_17_2_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Márie Manciniovej, reho¾níèky",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_APR_19_1_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Isnarda z Chiampa, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_APR_19_2_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Sybiliny Biscossiovej, panny",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_APR_20_OP[POCET_JAZYKOV + 1] = 
+{"Sv. Agnesy z Montepulciana, panny",
+ "",
+ "",
+ "",
  "",
  "Sv. Aneky z Montepulciana, panny, mnišky",
- "hu_",
+ "",
  };
 const char *text_APR_21[POCET_JAZYKOV + 1] = 
 {"Sv. Anzelma, biskupa a uèite¾a Cirkvi",
@@ -3282,6 +3349,15 @@ const char *text_APR_25[POCET_JAZYKOV + 1] =
  };
 const char *text_APR_27_SJ[POCET_JAZYKOV + 1] = 
 {"Sv. Petra Kanízia, kòaza a uèite¾a Cirkvi",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_APR_27_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Hosanny Kotorskej, panny",
  "",
  "",
  "",

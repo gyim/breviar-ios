@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* liturgia.h                                                  */
-/* (c)1999-2011 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2012 | Juraj Videky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne vecicky pre liturgiu hodin  */
 /* document history                                            */
@@ -440,6 +440,8 @@ extern const char *TEMPLAT[POCET_MODLITIEB + 1];
 #define PARAM_NAVIGACIA     "NAVIGACIA"
 // 2011-10-04: pridaný nadpis v modlitbe
 #define PARAM_NADPIS        "NADPIS"
+// 2012-04-03: pridaný podnadpis v modlitbe (napr. pre MCD: doplnková psalmódia)
+#define PARAM_PODNADPIS     "PODNADPIS"
 
 // dalsie parametre: specificke pre obdobie
 // Od nedele Pánovho zmàtvychvstania až do Druhej ve¾konoènej nedele vrátane, ako aj na druhé vešpery slávnosti Zoslania Ducha Svätého
@@ -687,7 +689,7 @@ struct dm{
 	short int typslav;    // typ slavenia (1--5): SLAV_...
 	short int typslav_lokal; // lokálny typ slavenia : LOKAL_SLAV_...
 	short int smer;       // poradove cislo z c.59 Vseobecnych smernic o liturgii hodin a kalendari
-	short int prik;		  // ci je to prikazany sviatok alebo nie: PRIKAZANY_SVIATOK resp. NEPRIKAZANY_SVIATOK
+	short int prik;		  // ci je to prikazany sviatok alebo nie: PRIKAZANY_SVIATOK resp. NIE_JE_PRIKAZANY_SVIATOK
 	int spolcast;		  // spolocna cast -- zakodovane data pre svatych o tom, z akej spolocnej casti sa ma modlit;
 						  // obsahuje max. 3 spolocne casti vo formate spolcast == a1 + a2 * MAX + a3 * MAX * MAX,
 						  // kde -- MAX je MAX_MODL_SPOL_CAST,
@@ -923,9 +925,10 @@ extern const char *nazov_htm_kalendar[POCET_KALENDAROV + 1];
 
 extern const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1];
 
-// prikazany / neprikazany sviatok
-#define PRIKAZANY_SVIATOK 1
-#define NEPRIKAZANY_SVIATOK 0
+// prikazany / neprikazany sviatok / ¾ubovo¾ná spomienka bez záväznosti (blahoslavení napr. pre SK_OP)
+#define PRIKAZANY_SVIATOK           0
+#define NIE_JE_PRIKAZANY_SVIATOK    1
+#define VOLNA_LUBOVOLNA_SPOMIENKA   2 // pre SK OP; v kalendári znaèené kurzívou (bez popisu "¾ubovo¾ná spomienka"); 2012-04-01
 
 // div, mod: delenie pre short int
 #define DIV	/
@@ -1106,58 +1109,58 @@ typedef struct lrok _struct_lrok;
 // globalna premenna, do ktorej sa ukladaju info o analyzovanom dni pouziva ju void nove_rozbor_dna() funkcia
 
 extern _struct_dm *_global_den_ptr;
-/*extern _struct_dm _global_den;*/
+// extern _struct_dm _global_den;
 #define _global_den (*_global_den_ptr)
 
 // globalna premenna, ktora obsahuje data o spomienke panny marie v sobotu
 
 extern _struct_dm *_global_pm_sobota_ptr;
-/*extern _struct_dm _global_pm_sobota;*/
+// extern _struct_dm _global_pm_sobota;
 #define _global_pm_sobota (*_global_pm_sobota_ptr)
 
 // globalne premenne, do ktorych sa ukladaju info o analyzovanom dni o sviatkoch svatych
 
 extern _struct_dm *_global_svaty1_ptr;
-/*extern _struct_dm _global_svaty1;*/
+// extern _struct_dm _global_svaty1;
 #define _global_svaty1 (*_global_svaty1_ptr)
 
 extern _struct_dm *_global_svaty2_ptr;
-/*extern _struct_dm _global_svaty2;*/ // v pripade, ze je viac lubovolnych spomienok
+// extern _struct_dm _global_svaty2; // v pripade, ze je viac lubovolnych spomienok
 #define _global_svaty2 (*_global_svaty2_ptr)
 
 extern _struct_dm *_global_svaty3_ptr;
-/*extern _struct_dm _global_svaty3;*/ // v pripade, ze je viac lubovolnych spomienok
+// extern _struct_dm _global_svaty3; // v pripade, ze je viac lubovolnych spomienok
 #define _global_svaty3 (*_global_svaty3_ptr)
 
 // globalne premenne obsahujuce data modlitbach
 
 extern _type_1vespery     *_global_modl_prve_vespery_ptr;
-/*extern _type_1vespery      _global_modl_prve_vespery;*/
+// extern _type_1vespery      _global_modl_prve_vespery;
 #define _global_modl_prve_vespery (*_global_modl_prve_vespery_ptr)
 
 extern _type_1kompletorium *_global_modl_1kompletorium_ptr;
-/*extern _type_1kompletorium _global_modl_prve_kompletorium;*/
+// extern _type_1kompletorium _global_modl_prve_kompletorium;
 #define _global_modl_prve_kompletorium (*_global_modl_1kompletorium_ptr)
 
 extern _type_invitatorium *_global_modl_invitatorium_ptr;
-/*extern _type_invitatorium  _global_modl_invitatorium;*/
+// extern _type_invitatorium  _global_modl_invitatorium;
 #define _global_modl_invitatorium (*_global_modl_invitatorium_ptr)
 
 extern _type_posv_citanie *_global_modl_posv_citanie_ptr;
 #define _global_modl_posv_citanie (*_global_modl_posv_citanie_ptr)
 
 extern _type_ranne_chvaly *_global_modl_ranne_chvaly_ptr;
-/*extern _type_ranne_chvaly  _global_modl_ranne_chvaly;*/
+// extern _type_ranne_chvaly  _global_modl_ranne_chvaly;
 #define _global_modl_ranne_chvaly (*_global_modl_ranne_chvaly_ptr)
 
 extern _type_cez_den_9     *_global_modl_cez_den_9_ptr;
-/*extern _type_cez_den_9     _global_modl_cez_den_9;*/
+// extern _type_cez_den_9     _global_modl_cez_den_9;
 #define _global_modl_cez_den_9 (*_global_modl_cez_den_9_ptr)
 extern _type_cez_den_12     *_global_modl_cez_den_12_ptr;
-/*extern _type_cez_den_12     _global_modl_cez_den_12;*/
+// extern _type_cez_den_12     _global_modl_cez_den_12;
 #define _global_modl_cez_den_12 (*_global_modl_cez_den_12_ptr)
 extern _type_cez_den_3     *_global_modl_cez_den_3_ptr;
-/*extern _type_cez_den_3     _global_modl_cez_den_3;*/
+// extern _type_cez_den_3     _global_modl_cez_den_3;
 #define _global_modl_cez_den_3 (*_global_modl_cez_den_3_ptr)
 
 // pridane 2003-08-13 pre lahsie pouzitie
@@ -1166,11 +1169,11 @@ extern _type_cez_den_3     *_global_modl_cez_den_3_ptr;
 #define _global_modl_popol    _global_modl_cez_den_3
 
 extern _type_vespery      *_global_modl_vespery_ptr;
-/*extern _type_vespery       _global_modl_vespery;*/
+// extern _type_vespery       _global_modl_vespery;
 #define _global_modl_vespery (*_global_modl_vespery_ptr)
 
 extern _type_kompletorium *_global_modl_kompletorium_ptr;
-/*extern _type_kompletorium _global_modl_kompletorium;*/
+// extern _type_kompletorium _global_modl_kompletorium;
 #define _global_modl_kompletorium (*_global_modl_kompletorium_ptr)
 
 // globalna premenna, ktora obsahuje MODL_...
@@ -1178,20 +1181,20 @@ extern short int _global_modlitba;
 
 // globalna premenna, do ktorej ukladaju funkcie vytvor_query_string_... linku tvaru PATH_CGI(SCRIPT_NAME) ++ "?param1=val&param2=val&..."
 extern char *_global_link_ptr;
-/*extern char _global_link[MAX_STR];*/
+// extern char _global_link[MAX_STR];
 #define _global_link _global_link_ptr
 
 extern char *_global_pom_str; // pomocny string pre velke pismena
-/*extern char _global_pom_str[MAX_STR];*/
+// extern char _global_pom_str[MAX_STR];
 
 // globalna premenna, do ktorej sa ukladaju info o jednotlivych vyznacnych liturgickych dni, pouzivaju void _dm_...() funkcie a void analyzuj_rok() funkcia
 extern _struct_dm *_global_result_ptr;
-/*extern _struct_dm _global_result;*/
+// extern _struct_dm _global_result;
 #define _global_result (*_global_result_ptr)
 
 // globalna premenna, do ktorej sa uklada info o liturgickom roku pouziva void analyzuj_rok() funkcia
 extern _struct_lrok *_global_r_ptr;
-/*extern _struct_lrok _global_r;*/
+// extern _struct_lrok _global_r;
 #define _global_r (*_global_r_ptr)
 
 // globalna premenna, do ktorej sviatky_svatych() uklada pocet sviatkov (de facto lubovolnych spomienok), ktore pripadaju na dany den
@@ -1257,7 +1260,7 @@ extern char *_global_string;
 extern char *_global_string2; // obsahuje I, II, III, IV, V alebo pismeno roka
 extern char *_global_string_farba; // 2006-08-19: doplnené
 // 2011-10-04: pridané, pre titulok modlitby (už sa nepriliepa do _global_string)
-extern char _global_string_modlitba[SMALL];
+// extern char _global_string_modlitba[SMALL];
 
 extern char *_global_buf; // 2006-08-01: túto premennú tiež alokujeme
 extern char *_global_buf2; // 2006-08-01: túto premennú tiež alokujeme
@@ -1390,7 +1393,7 @@ void analyzuj_rok(short int year);
 	a.typslav = SLAV_NEURCENE; \
 	a.typslav_lokal = LOKAL_SLAV_NEURCENE; \
 	a.smer = 99; \
-	a.prik = NEPRIKAZANY_SVIATOK; \
+	a.prik = NIE_JE_PRIKAZANY_SVIATOK; \
 	a.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA); \
 	mystrcpy(a.meno, STR_UNDEF, MENO_SVIATKU); \
 	a.farba = LIT_FARBA_NEURCENA;\
