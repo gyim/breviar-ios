@@ -30,3 +30,5 @@ cp $ROOT/ebreviar-cz.css "$1"/ebreviar-cz.css
 cp $ROOT/breviar-invert.css "$1"/breviar-invert.css
 cp $ROOT/breviar-invert-colors.css "$1"/breviar-invert-colors.css
 
+cp $ROOT/README "$1"/README
+
