@@ -1,0 +1,32 @@
+#!/bin/bash
+
+ROOT=`dirname $0`
+
+if [ "$1" == "" ]; then
+  echo "Usage: ./export <directory>"
+  echo "<directory> will be rebuilt!"
+  exit 1
+fi
+
+if [ ! -d "$1" ]; then
+  echo "$1 is not a directory"
+  exit 2
+fi
+
+rm -rf "$1"/*
+
+# install android source
+cp -dr $ROOT/android "$1"/android
+rm "$1"/android/build-assets "$1"/android/cleanup-assets
+
+# install upstream source
+mkdir "$1"/cgi-bin 
+cp -dr $ROOT/cgi-bin/source "$1"/cgi-bin/source
+
+# install config and CSSs
+cp $ROOT/cgi-bin/breviar-web.cfg "$1"/cgi-bin/breviar-web.cfg
+cp $ROOT/breviar.css "$1"/breviar.css
+cp $ROOT/ebreviar-cz.css "$1"/ebreviar-cz.css
+cp $ROOT/breviar-invert.css "$1"/breviar-invert.css
+cp $ROOT/breviar-invert-colors.css "$1"/breviar-invert-colors.css
+

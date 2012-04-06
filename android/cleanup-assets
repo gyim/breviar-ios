@@ -1,0 +1,22 @@
+#!/bin/bash
+
+ROOT=`dirname $0`
+
+# Setup symlinks for includes
+for inc in include include_cz include_hu; do
+  rm -f $ROOT/assets/$inc/*
+done
+
+# SK
+rm -f $ROOT/assets/docs/*
+
+# CZ
+rm -f $ROOT/assets/cz/ordinar/*
+
+# HU
+rm -f $ROOT/assets/hu/docs/*
+
+rm -f $ROOT/assets/katechezy.htm
+
+rm -f $ROOT/assets/breviar-web.cfg
+
