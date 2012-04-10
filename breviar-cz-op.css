@@ -20,8 +20,8 @@
 .smallcaps { font-variant: small-caps; }
 .xsmallcaps { font-variant: small-caps; font-size: 70%; }
 
-body, html, td { font-family: verdana,helvetica; 	font-size:0.95em; 	background-color: #ffd; }
-p, td { font-family: verdana, helvetica; color: #000000; font-style: normal; }
+body, html { font-family: verdana,helvetica; font-size:0.95em; background-color: #ffd; }
+p { font-family: verdana, helvetica; color: #000000; font-style: normal; }
 
 .duoraz { 
 	font-weight: bold; }
@@ -59,7 +59,7 @@ a.button {
 
 table { color: #505000; }
 tr.paragraph { text-indent: 3em; line-height: 120%; }
-td { font-family: inherit; font-size: 95%; color: #000000}
+td { font-family: inherit; font-size: 95%; color: #000000 }
 
 hr {	height: 0.2mm;
 	size: 1px;
