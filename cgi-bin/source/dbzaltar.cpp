@@ -6664,11 +6664,9 @@ label_24_DEC:
 				_post2_antifony;
 			}// nede¾a
 			else if(den == DEN_STVRTOK){
-				// 2012-04-10: èeská LH má pre ranné chvály odlišný úvod k prosbám
-				if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
-					modlitba = MODL_RANNE_CHVALY;
-					_vtroj_prosby;
-				}
+				// 2012-04-10: LH má pre ranné chvály odlišný úvod k prosbám
+				modlitba = MODL_RANNE_CHVALY;
+				_vtroj_prosby;
 				// 2006-01-27: pridaný popis k vešperám zeleného štvrtka
 				modlitba = MODL_VESPERY;
 				_vtroj_popis;
