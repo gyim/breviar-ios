@@ -6440,7 +6440,7 @@ const char *text_DEC_09[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Jana Didaka Cuauhtlatoatzina",
- "Szent Juan Diego Cuauhtlatoatzin, guadalupei látnok",
+ "Szent Juan Diego Cuauhtlatoatzin, Guadalupei látnok",
  };
 const char *text_DEC_11[POCET_JAZYKOV + 1] = 
 {"Sv. Damaza I., pápeža",
@@ -6458,7 +6458,7 @@ const char *text_DEC_12[POCET_JAZYKOV + 1] =
  "",
  "",
  "Panny Marie Guadalupské",
- "hu_",
+ "A Guadalupei Boldogságos Szûz Mária",
  };
 const char *text_DEC_13[POCET_JAZYKOV + 1] = 
 {"Sv. Lucie, panny a muèenice",
