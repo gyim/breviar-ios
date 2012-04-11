@@ -6574,6 +6574,11 @@ label_24_DEC:
 		set_LOG_litobd;\
 	}\
 }
+#define _vtroj_prosby {\
+	sprintf(_anchor, "%s_%c%s%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_PROSBY, nazov_DN_asci[den]);\
+	_set_prosby(modlitba, _file, _anchor);\
+	set_LOG_litobd;\
+}
 
 		// 2006-01-24: tu v skutoènosti zaèína POSTNE OBDOBIE II.
 
@@ -6659,11 +6664,14 @@ label_24_DEC:
 				_post2_antifony;
 			}// nede¾a
 			else if(den == DEN_STVRTOK){
+				// 2012-04-10: LH má pre ranné chvály odlišný úvod k prosbám
+				modlitba = MODL_RANNE_CHVALY;
+				_vtroj_prosby;
 				// 2006-01-27: pridaný popis k vešperám zeleného štvrtka
 				modlitba = MODL_VESPERY;
 				_vtroj_popis;
 				// 2007-12-05: kompletórium je z nedele po druhých vešperách; ale ako na slávnosti; 2008-04-04 presunuté vyššie
-			}// nie nedela ale zelený štvrtok
+			}// nie nede¾a, ale zelený štvrtok
 			break;
 // switch(litobd), case OBD_POSTNE_II -- end --------------------------------------------------
 
@@ -6710,11 +6718,6 @@ label_24_DEC:
 		_set_kresponz(modlitba, _file, _anchor);\
 		set_LOG_litobd;\
 	}\
-}
-#define _vtroj_prosby {\
-	sprintf(_anchor, "%s_%c%s%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_PROSBY, nazov_DN_asci[den]);\
-	_set_prosby(modlitba, _file, _anchor);\
-	set_LOG_litobd;\
 }
 #define _vtroj_benediktus {\
 	sprintf(_anchor, "%s_%c%s%d%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_BENEDIKTUS, tyzden, nazov_DN_asci[den]);\
