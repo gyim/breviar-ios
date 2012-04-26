@@ -1,0 +1,10 @@
+ståpec NVG = text pod¾a liturgického prekladu
+
+-- ak je text v (zátvorkách), znamená to, e ide o parafrázu (v LH uvedenú "porov."), teda nie preklad NVg Biblie.
+-- ak je uvedené ... na zaèiatku, tak preto, lebo v LH je odkaz na druhú èas verša (zvyèajne písm. b za èíslom verša).
+-- ak je uvedené ... na konci, tak preto, lebo v LH je odkaz na prvú èas verša (zvyèajne písm. a za èíslom verša).
+
+ståpec LH_ID = identifikátor(y) pre HTML texty z breviar.sk (anchor, t. j. kotvy)
+
+ståpec LC_ID = identifikátor ID z tabu¾ky LC
+
