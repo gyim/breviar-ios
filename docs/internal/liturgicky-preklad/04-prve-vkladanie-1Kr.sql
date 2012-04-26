@@ -29,16 +29,19 @@ go
 
 -- 99	1 Kr 11, 29-32; 12, 19
 update biblia set lc_id = 99 where spis = '1Kr' and vers = 1 and k = 11 and v between 29 and 32
-update biblia set lc_id = 99 where spis = '1Kr' and vers = 1 and k = 12 and v = 12
+update biblia set lc_id = 99 where spis = '1Kr' and vers = 1 and k = 12 and v = 19
 go
 update biblia set nvg = 'Jeroboam vyšiel z Jeruzalema a na ceste ho stretol prorok Ahiáš zo Sila, ktorı mal obleèenı novı pláš. Boli na poli len sami dvaja.' where spis = '1Kr' and vers = 1 and k = 11 and v = 29
 update biblia set nvg = 'Ahiáš vzal svoj novı pláš, èo mal na sebe, roztrhol ho na dvanás kusov ' where spis = '1Kr' and vers = 1 and k = 11 and v = 30
 update biblia set nvg = 'a vravel Jeroboamovi: "Vezmi si desa kusov, lebo toto hovorí Pán, Boh Izraela: H¾a, ja vytrhnem krá¾ovstvo z ruky Šalamúna a desa kmeòov dám tebe.' where spis = '1Kr' and vers = 1 and k = 11 and v = 31
 update biblia set nvg = 'Ale jeden kmeò mu zostane pre môjho sluobníka Dávida a pre mesto Jeruzalem, ktoré som si vyvolil zo všetkıch kmeòov Izraela.' where spis = '1Kr' and vers = 1 and k = 11 and v = 32
 
-update biblia set nvg = 'Tak Izrael odpadol od Dávidovho domu a do dnešného dòa.' where spis = '1Kr' and vers = 1 and k = 12 and v = 12
+update biblia set nvg = 'Tak Izrael odpadol od Dávidovho domu a do dnešného dòa.' where spis = '1Kr' and vers = 1 and k = 12 and v = 19
 go
-
+/*
+update biblia set lc_id = null where spis = '1Kr' and vers = 1 and k = 12 and v = 12
+update biblia set nvg = null where spis = '1Kr' and vers = 1 and k = 12 and v = 12
+*/
 -- POST1_rSTVCIT
 update biblia set lh_id = '_1SO9_CIT' where spis = '1Kr' and vers = 1 and k = 8 and v between 51 and 53
 go
@@ -103,4 +106,35 @@ update biblia set nvg = 'Mono si vôbec pomyslie, e Boh bude bıva na zemi? Ve
 update biblia set nvg = 'Ale zhliadni na modlitbu svojho sluobníka a_na jeho prosby, Pane, Boe môj; poèuj volanie a_modlitbu, ktorú ti dnes tvoj sluobník prednáša, ' where spis = '1Kr' and vers = 1 and k = 8 and v = 28
 update biblia set nvg = 'aby boli tvoje oèi v_noci i_vo dne otvorené nad tımto domom, nad miestom, o_ktorom si povedal: ‚Tam bude moje meno,‘ aby si vypoèul modlitbu, keï sa bude tvoj sluobník modli na tomto mieste: ' where spis = '1Kr' and vers = 1 and k = 8 and v = 29
 update biblia set nvg = 'aby si vypoèul prosbu svojho sluobníka a_svojho ¾udu Izraela, kedyko¾vek sa budú modli na tomto mieste. Ty vypoèuješ vo svojom príbytku v_nebi; a_keï vypoèuješ, budeš milostivı.“' where spis = '1Kr' and vers = 1 and k = 8 and v = 30
+go
+
+-- 100	1 Kr 11, 4-13
+update biblia set lc_id = 100 where spis = '1Kr' and vers = 1 and k = 11 and v between 4 and 13
+go
+update biblia set nvg = 'Keï Šalamún zostarel, eny mu skazili srdce a on chodil za cudzími bohmi. Jeho srdce u nepatrilo celé Pánovi, jeho Bohu, ako srdce jeho otca Dávida, ' where spis = '1Kr' and vers = 1 and k = 11 and v = 4
+update biblia set nvg = 'ale uctieval Aštartu, bohyòu Sidonèanov, a Molocha, modlu Amonèanov.' where spis = '1Kr' and vers = 1 and k = 11 and v = 5
+update biblia set nvg = 'Šalamún robil, èo sa Pánovi nepáèilo, a nebol úplne oddanı Pánovi, ako jeho otec Dávid.' where spis = '1Kr' and vers = 1 and k = 11 and v = 6
+update biblia set nvg = 'Šalamún postavil na vrchu, èo je vıchodne od Jeruzalema, svätyòu Kamošovi, modle Moabèanov, i Molochovi, modle Amonovıch synov.' where spis = '1Kr' and vers = 1 and k = 11 and v = 7
+update biblia set nvg = 'A takto robil všetkım svojim cudzineckım enám, ktoré prinášali svojim bohom tymian a krvavé obete.' where spis = '1Kr' and vers = 1 and k = 11 and v = 8
+update biblia set nvg = 'Preto sa Pán na Šalamúna rozhneval; preto, e sa jeho myse¾ odvrátila od Pána, Boha Izraela, ktorı sa mu dva razy zjavil ' where spis = '1Kr' and vers = 1 and k = 11 and v = 9
+update biblia set nvg = 'a zakázal mu chodi za cudzími bohmi, a on nezachoval, èo mu Pán prikázal.' where spis = '1Kr' and vers = 1 and k = 11 and v = 10
+update biblia set nvg = 'Preto Pán povedal Šalamúnovi: "Pretoe si toto robil a nezachoval si moju zmluvu a príkazy, ktoré som ti dal, rozdvojím tvoje krá¾ovstvo a vytrhnem ti ho a dám ho tvojmu sluhovi.' where spis = '1Kr' and vers = 1 and k = 11 and v = 11
+update biblia set nvg = 'Ale pre Dávida, tvojho otca, to neurobím za tvojho ivota; vytrhnem ho a z ruky tvojho syna.' where spis = '1Kr' and vers = 1 and k = 11 and v = 12
+update biblia set nvg = 'A pre Dávida, svojho sluobníka, a pre Jeruzalem, ktorı som si vyvolil, nevezmem ti celé krá¾ovstvo; jeden kmeò dám tvojmu synovi."' where spis = '1Kr' and vers = 1 and k = 11 and v = 13
+go
+
+-- 101	1 Kr 12, 26-32; 13, 33-34
+update biblia set lc_id = 101 where spis = '1Kr' and vers = 1 and k = 12 and v between 26 and 32
+update biblia set lc_id = 101 where spis = '1Kr' and vers = 1 and k = 13 and v between 33 and 34
+go
+
+update biblia set nvg = 'Jeroboam si povedal v srdci: "Teraz sa krá¾ovstvo vráti k Dávidovmu domu.' where spis = '1Kr' and vers = 1 and k = 12 and v = 26
+update biblia set nvg = 'Ak bude tento ¾ud chodieva do Jeruzalema a v Pánovom dome prináša obety, srdce tohoto ¾udu sa obráti k svojmu pánovi, judskému krá¾ovi Roboamovi, mòa zabijú a vrátia sa k judskému krá¾ovi Roboamovi."' where spis = '1Kr' and vers = 1 and k = 12 and v = 27
+update biblia set nvg = 'Krá¾ porozmıš¾al, urobil dvoje zlatıch teliec a povedal ¾udu: "Nechodievajte u do Jeruzalema! H¾a, tvoji bohovia, Izrael, ktorí a vyviedli z Egypta."', juv = '<p> pred v. 28' where spis = '1Kr' and vers = 1 and k = 12 and v = 28
+update biblia set nvg = 'Jedno postavil v Beteli a druhé dal do Danu.' where spis = '1Kr' and vers = 1 and k = 12 and v = 29
+update biblia set nvg = 'A bol z toho hriech, lebo ¾ud chodieval len za jednım a do Danu.' where spis = '1Kr' and vers = 1 and k = 12 and v = 30
+update biblia set nvg = 'Potom narobil svätıò na vıšinách a kòazov z obyèajného ¾udu, ktorí neboli zo synov Léviho.', juv = '<p> pred v. 31'  where spis = '1Kr' and vers = 1 and k = 12 and v = 31
+update biblia set nvg = 'Zaviedol aj sviatok v ôsmom mesiaci, v pätnásty deò mesiaca, podobnı sviatok, ako slávili v Judsku. A v Beteli vystúpil k oltáru a priniesol obetu te¾com, ktoré zhotovil. V Beteli ustanovil aj kòazov vıšin, ktoré porobil.' where spis = '1Kr' and vers = 1 and k = 12 and v = 32
+update biblia set nvg = 'Po tomto všetkom sa Jeroboam nevrátil zo svojej zlej cesty, ale znova ustanovoval kòazov vıšin z obyèajného ¾udu. Kadého, kto chcel, posvätil a stal sa kòazom vıšin.' where spis = '1Kr' and vers = 1 and k = 13 and v = 33
+update biblia set nvg = 'Tımto hrešil dom Jeroboama a bol znièenı a vyhubenı z povrchu zeme.' where spis = '1Kr' and vers = 1 and k = 13 and v = 34
 go

@@ -21,7 +21,8 @@ and v between 1 and 10
 -- and vers = 1
 
 select * from biblia
-where spis = '1Kr' and k = 8
+where spis = '1Kr' and k = 11
 -- and vers = 1
 
 select * from biblia where spis = '1Kr' and k = 2
+
