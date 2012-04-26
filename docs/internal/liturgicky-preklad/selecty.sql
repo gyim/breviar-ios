@@ -26,3 +26,4 @@ where spis = '1Kr' and k = 11
 
 select * from biblia where spis = '1Kr' and k = 2
 
+select * from biblia where spis = '1Kr' and k = 18

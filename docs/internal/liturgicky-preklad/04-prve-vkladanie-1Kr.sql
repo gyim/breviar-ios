@@ -133,8 +133,151 @@ update biblia set nvg = 'Ak bude tento ¾ud chodieva do Jeruzalema a v Pánovom d
 update biblia set nvg = 'Krá¾ porozmıš¾al, urobil dvoje zlatıch teliec a povedal ¾udu: "Nechodievajte u do Jeruzalema! H¾a, tvoji bohovia, Izrael, ktorí a vyviedli z Egypta."', juv = '<p> pred v. 28' where spis = '1Kr' and vers = 1 and k = 12 and v = 28
 update biblia set nvg = 'Jedno postavil v Beteli a druhé dal do Danu.' where spis = '1Kr' and vers = 1 and k = 12 and v = 29
 update biblia set nvg = 'A bol z toho hriech, lebo ¾ud chodieval len za jednım a do Danu.' where spis = '1Kr' and vers = 1 and k = 12 and v = 30
-update biblia set nvg = 'Potom narobil svätıò na vıšinách a kòazov z obyèajného ¾udu, ktorí neboli zo synov Léviho.', juv = '<p> pred v. 31'  where spis = '1Kr' and vers = 1 and k = 12 and v = 31
+update biblia set nvg = 'Potom narobil svätıò na vıšinách a kòazov z obyèajného ¾udu, ktorí neboli zo synov Léviho.', juv = '<p> pred v. 31' where spis = '1Kr' and vers = 1 and k = 12 and v = 31
 update biblia set nvg = 'Zaviedol aj sviatok v ôsmom mesiaci, v pätnásty deò mesiaca, podobnı sviatok, ako slávili v Judsku. A v Beteli vystúpil k oltáru a priniesol obetu te¾com, ktoré zhotovil. V Beteli ustanovil aj kòazov vıšin, ktoré porobil.' where spis = '1Kr' and vers = 1 and k = 12 and v = 32
 update biblia set nvg = 'Po tomto všetkom sa Jeroboam nevrátil zo svojej zlej cesty, ale znova ustanovoval kòazov vıšin z obyèajného ¾udu. Kadého, kto chcel, posvätil a stal sa kòazom vıšin.' where spis = '1Kr' and vers = 1 and k = 13 and v = 33
 update biblia set nvg = 'Tımto hrešil dom Jeroboama a bol znièenı a vyhubenı z povrchu zeme.' where spis = '1Kr' and vers = 1 and k = 13 and v = 34
+go
+
+-- OCR15NEc_CIT1
+-- 102	1 Kr 17, 1-6
+-- 105	1 Kr 17, 7-16
+-- 103	1 Kr 17, 10-16 // nepouité
+update biblia set lh_id = 'OCR15NEc_CIT1' where spis = '1Kr' and vers = 1 and k = 16 and v between 29 and 34
+update biblia set lh_id = 'OCR15NEc_CIT1' where spis = '1Kr' and vers = 1 and k = 17 and v between 1 and 16
+update biblia set lc_id = 102 where spis = '1Kr' and vers = 1 and k = 17 and v between 1 and 6
+update biblia set lc_id = 105 where spis = '1Kr' and vers = 1 and k = 17 and v between 7 and 16
+go
+
+update biblia set nvg = 'Amriho syn Achab zaèal kra¾ova nad Izraelom v_tridsiatom ôsmom roku judejského krá¾a Azu. A_Amriho syn Achab kra¾oval nad Izraelom v_Samárii dvadsadva rokov.' where spis = '1Kr' and vers = 1 and k = 16 and v = 29
+update biblia set nvg = 'Aj Amriho syn Achab robil, èo sa Pánovi nepáèi, ešte väèšmi ako všetci, èo boli pred ním.' where spis = '1Kr' and vers = 1 and k = 16 and v = 30
+update biblia set nvg = 'Nestaèilo mu, e chodil v_hriechoch Nabatovho syna Jeroboama, navyše si vzal za manelku Jezabel, dcéru sidonského krá¾a Etbála, chodil slúi Bálovi a_klaòal sa mu.' where spis = '1Kr' and vers = 1 and k = 16 and v = 31
+update biblia set nvg = 'Bálovi zaloil aj oltár v_Bálovom chráme, ktorı postavil v_Samárii.' where spis = '1Kr' and vers = 1 and k = 16 and v = 32
+update biblia set nvg = 'Achab zhotovil aj posvätnı ståp. A_tak Achab svojimi èinmi popudzoval Pána, Boha Izraela, viac ako všetci izraelskí králi, èo boli pred ním.' where spis = '1Kr' and vers = 1 and k = 16 and v = 33
+update biblia set nvg = 'V_jeho dòoch postavil Hiel z_Betelu Jericho. Jeho základy poloil za cenu svojho prvorodeného Abirama a_jeho brány postavil za cenu Seguba, svojho najmladšieho syna, pod¾a Pánovho slova, ktoré povedal prostredníctvom Nunovho syna Jozua.' where spis = '1Kr' and vers = 1 and k = 16 and v = 34
+update biblia set nvg = 'Tu povedal Tesban Eliáš, z_Tesby v_Galaáde, Achabovi: „Ako ije Pán, Boh Izraela, pred ktorého tvárou stojím: Nebude v_tıchto rokoch ani rosy, ani daïa, iba ak na moje slovo.“' where spis = '1Kr' and vers = 1 and k = 17 and v = 1
+
+update biblia set nvg = 'Vtedy mu zaznelo Pánovo slovo:', juv = '<p> pred v. 2' where spis = '1Kr' and vers = 1 and k = 17 and v = 2
+update biblia set nvg = '„Odíï odtia¾to, choï na vıchod a_skry sa pri potoku Karit, ktorı je vıchodne od Jordánu.' where spis = '1Kr' and vers = 1 and k = 17 and v = 3
+update biblia set nvg = 'Z_potoka budeš pi a_krkavcom som prikázal, aby a kàmili.“' where spis = '1Kr' and vers = 1 and k = 17 and v = 4
+update biblia set nvg = 'Odišiel teda a_urobil pod¾a Pánovho pokynu. Išiel a_usadil sa pri potoku Karit, ktorı je vıchodne od Jordánu.' where spis = '1Kr' and vers = 1 and k = 17 and v = 5
+update biblia set nvg = 'Krkavce mu prinášali chlieb a_mäso ráno a_podobne chlieb a_mäso veèer; a_pil z_potoka. ' where spis = '1Kr' and vers = 1 and k = 17 and v = 6
+update biblia set nvg = 'Po nejakom èase však potok vyschol, lebo v_krajine nepršalo.' where spis = '1Kr' and vers = 1 and k = 17 and v = 7
+
+update biblia set nvg = 'Vtedy mu zaznelo Pánovo slovo:', juv = '<p> pred v. 8' where spis = '1Kr' and vers = 1 and k = 17 and v = 8
+update biblia set nvg = '„Vstaò a_choï do Sidonskej Sarepty. A_tam ostaneš, lebo som tam istej vdove prikázal, aby a chovala.“' where spis = '1Kr' and vers = 1 and k = 17 and v = 9
+update biblia set nvg = 'Vstal teda a_šiel do Sarepty. Keï prišiel k_mestskej bráne, videl enu, vdovu, ako zbiera drevo. Zavolal na òu: „Prines mi v_dbáne trochu vody na pitie.“' where spis = '1Kr' and vers = 1 and k = 17 and v = 10
+update biblia set nvg = 'Ako mu išla vzia, zavolal za òou: „Dones mi, prosím, aj kúsok chleba!“' where spis = '1Kr' and vers = 1 and k = 17 and v = 11
+update biblia set nvg = 'Ona odpovedala: „Ako ije Pán, tvoj Boh, nemám chleba. Mám len za priehrštie múky v_hrnci a_trochu oleja v_krèahu. Práve zbieram zopár kúskov dreva a_idem nieèo pripravi sebe i_svojmu synovi. Keï to zjeme, môeme umrie.“' where spis = '1Kr' and vers = 1 and k = 17 and v = 12
+
+update biblia set nvg = 'Eliáš jej povedal: „Neboj sa! Choï a_urob, ako hovoríš. Lene najprv z_tej trochy múky urob malı podplamenník pre mòa a_dones mi ho. Sebe a_svojmu synovi urobíš potom.', juv = '<p> pred v. 13' where spis = '1Kr' and vers = 1 and k = 17 and v = 13
+update biblia set nvg = 'Lebo takto hovorí Pán, Boh Izraela: ‚Múky z_hrnca neubudne a_v_krèahu nebude chıba olej a do dòa, keï Pán zošle dáï na zem.‘“' where spis = '1Kr' and vers = 1 and k = 17 and v = 14
+update biblia set nvg = 'Ona odišla a_urobila, ako jej povedal Eliáš. A_jedla ona, on i_jej dom deò èo deò ' where spis = '1Kr' and vers = 1 and k = 17 and v = 15
+update biblia set nvg = 'a_múky z_hrnca neubúdalo a_v_krèahu nechıbal olej pod¾a slova, ktoré Pán povedal prostredníctvom Eliáša.' where spis = '1Kr' and vers = 1 and k = 17 and v = 16
+go
+
+-- 104	1 Kr 17, 17-24
+update biblia set lc_id = 104 where spis = '1Kr' and vers = 1 and k = 17 and v between 17 and 24
+go
+
+update biblia set nvg = '... Ochorel syn eny, panej domu. Choroba sa nato¾ko zhoršila, e napokon u ani nedıchal.' where spis = '1Kr' and vers = 1 and k = 17 and v = 17
+update biblia set nvg = 'Vtedy povedala Eliášovi: "Èo som ti urobila, mu Boí? Prišiel si mi pripomenú moje neprávosti a usmrti môjho syna?"' where spis = '1Kr' and vers = 1 and k = 17 and v = 18
+update biblia set nvg = 'Eliáš jej povedal: "Daj mi svojho syna!"' where spis = '1Kr' and vers = 1 and k = 17 and v = 19
+update biblia set nvg = 'Vzal jej ho z lona, odniesol do hornej izby, v ktorej bıval, uloil ho na svoje lôko ' where spis = '1Kr' and vers = 1 and k = 17 and v = 20
+update biblia set nvg = 'a takto volal k Pánovi: "Pane, môj Boe, chceš postihnú nešastím aj túto vdovu, u ktorej bıvam, e necháš umrie jej syna?"' where spis = '1Kr' and vers = 1 and k = 17 and v = 21
+update biblia set nvg = 'Potom sa tri razy vystrel na chlapca a vzıval Pána: "Pane, môj Boe, prosím a, nech sa vráti duša tohto chlapca do jeho tela!"' where spis = '1Kr' and vers = 1 and k = 17 and v = 22
+update biblia set nvg = 'Pán vyslyšal Eliášovu prosbu. Duša chlapca sa vrátila do jeho tela a oil.' where spis = '1Kr' and vers = 1 and k = 17 and v = 23
+update biblia set nvg = 'Eliáš vzal chlapca, zniesol ho z hornej izby dolu do prízemia a odovzdal ho matke so slovami: "Pozri, tvoj syn ije!"' where spis = '1Kr' and vers = 1 and k = 17 and v = 24
+update biblia set nvg = 'Tu ena povedala Eliášovi: "Teraz viem, e si mu Boí a e Pánovo slovo v tvojich ústach je pravdivé."' where spis = '1Kr' and vers = 1 and k = 17 and v = 25
+go
+
+-- OCR15POc_CIT1
+-- 106	1 Kr 18, 20-39
+update biblia set lh_id = 'OCR15POc_CIT1' where spis = '1Kr' and vers = 1 and k = 18 and v between 16 and 40
+update biblia set lc_id = 106 where spis = '1Kr' and vers = 1 and k = 18 and v between 20 and 39
+go
+
+update biblia set nvg = '... Achab išiel v_ústrety Eliášovi.' where spis = '1Kr' and vers = 1 and k = 18 and v = 16
+update biblia set nvg = 'Keï ho zbadal, povedal: „To si ty, èo poburuješ Izrael?“' where spis = '1Kr' and vers = 1 and k = 18 and v = 17
+update biblia set nvg = 'On odvetil: „Ja nepoburujem Izrael, ale ty a_dom tvojho otca, lebo ste opustili Pánove prikázania a_šiel si za bálmi.' where spis = '1Kr' and vers = 1 and k = 18 and v = 18
+update biblia set nvg = 'Teraz však pošli poslov a_zhromadi ku mne celı Izrael na vrch Karmel, aj štyristopädesiat Bálovıch prorokov a_štyristo prorokov Ašery, ktorí jedia z_Jezabelinho stola.“' where spis = '1Kr' and vers = 1 and k = 18 and v = 19
+
+update biblia set nvg = 'Achab poslal poslov ku všetkım synom Izraela a_zhromadil prorokov na vrchu Karmel.', juv = '<p> pred v. 20' where spis = '1Kr' and vers = 1 and k = 18 and v = 20
+update biblia set nvg = 'Tu predstúpil pred ¾ud Eliáš a_povedal: „Dokedy budete pokrivkáva na dve strany? Ak je Pán Bohom, tak ho nasledujte, ak Bál, nasledujte toho!“ A_¾ud mu neodpovedal ani slovo.' where spis = '1Kr' and vers = 1 and k = 18 and v = 21
+update biblia set nvg = 'Eliáš hovoril ¾udu ïalej: „Z_Pánovıch prorokov som zostal ja sám; Bálovıch prorokov je štyristopädesiat.' where spis = '1Kr' and vers = 1 and k = 18 and v = 22
+update biblia set nvg = 'Nech nám dajú dva bıky; oni nech si vyberú jedného bıka, nech ho rozsekajú a_pokladú na drevo, ale oheò nech nepodkladajú. Ja pripravím druhého bıka, poloím ho na drevo a_tie nepodloím oheò.' where spis = '1Kr' and vers = 1 and k = 18 and v = 23
+update biblia set nvg = 'Vzıvajte meno vášho boha a_ja budem vzıva meno Pánovo; a_Boh, ktorı odpovie ohòom, je pravı Boh.“ Nato všetok ¾ud odpovedal: „Vıbornı návrh.“' where spis = '1Kr' and vers = 1 and k = 18 and v = 24
+
+update biblia set nvg = 'Eliáš teda povedal Bálovım prorokom: „Vyberte si jedného bıka a_pripravte ho prví, lebo vás je ve¾a, a_vzıvajte meno svojho boha, ale oheò nepodkladajte.“', juv = '<p> pred v. 25' where spis = '1Kr' and vers = 1 and k = 18 and v = 25
+update biblia set nvg = 'Oni vzali bıka, ktorého im dal, pripravili ho a_od rána do poludnia vzıvali meno Bála: „Bál, vyslyš nás!“ No nik sa neozıval, nik neodpovedal; a_skákali okolo oltára, ktorı urobili.' where spis = '1Kr' and vers = 1 and k = 18 and v = 26
+update biblia set nvg = 'Na poludnie sa im Eliáš posmieval: „Kriète hlasnejšie, veï je bohom, ale je mono nieèím zaujatı, mono sa utiahol alebo odcestoval alebo hádam spí, nech sa zobudí.“' where spis = '1Kr' and vers = 1 and k = 18 and v = 27
+update biblia set nvg = 'Oni teda ve¾mi krièali a_pod¾a svojho zvyku si meèmi a_oštepmi robili zárezy, a boli zaliati krvou.' where spis = '1Kr' and vers = 1 and k = 18 and v = 28
+
+update biblia set nvg = 'Keï prešlo poludnie a_nadišiel èas, kedy sa prinášala obeta, stále ešte prorokovali, ale nik sa neozval, nik neodpovedal, nik si ich nevšímal.', juv = '<p> pred v. 29' where spis = '1Kr' and vers = 1 and k = 18 and v = 29
+update biblia set nvg = 'Vtedy Eliáš povedal ¾udu: „Poïte ku mne!“ Všetok ¾ud pristúpil k_nemu. A_on opravil Pánov zborenı oltár: ' where spis = '1Kr' and vers = 1 and k = 18 and v = 30
+update biblia set nvg = 'vzal dvanás kameòov pod¾a poètu kmeòov synov Jakuba, ktorému Pán kedysi povedal: „Tvoje meno bude Izrael,“ ' where spis = '1Kr' and vers = 1 and k = 18 and v = 31
+update biblia set nvg = 'a_z_kameòov postavil oltár v_Pánovom mene. Okolo oltára urobil jarok, do ktorého by sa dali zasia dve miery zrna, ' where spis = '1Kr' and vers = 1 and k = 18 and v = 32
+update biblia set nvg = 'a_naukladal dreva. Bıka rozsekal, poukladal na drevo ' where spis = '1Kr' and vers = 1 and k = 18 and v = 33
+update biblia set nvg = 'a_povedal: „Naplòte štyri vedrá vodou a_vylejte na obetu i_na drevo!“ Potom vravel: „Urobte to ešte raz!“ Keï to urobili druhı raz, povedal: „Urobte to ešte aj tretí raz!“ Spravili to aj tretí raz.' where spis = '1Kr' and vers = 1 and k = 18 and v = 34
+update biblia set nvg = 'A_voda tiekla okolo oltára, ba aj jarok sa naplnil vodou.' where spis = '1Kr' and vers = 1 and k = 18 and v = 35
+
+update biblia set nvg = 'Keï u bol èas obety, prorok Eliáš pristúpil a_povedal: „Pane, Boe Abraháma, Izáka a_Izraela, dnes uká, e ty si Boh v_Izraeli, e ja som tvoj sluha a_e som toto všetko urobil na tvoj príkaz.', juv = '<p> pred v. 36' where spis = '1Kr' and vers = 1 and k = 18 and v = 36
+update biblia set nvg = 'Vyslyš ma, Pane, vyslyš ma, nech tento ¾ud pozná, e ty, Pane, si Boh a_e ty si obrátil ich srdce!“' where spis = '1Kr' and vers = 1 and k = 18 and v = 37
+
+update biblia set nvg = 'Vtom spadol Pánov oheò a_strávil zápalnú obetu i_drevo, kamene a_zem, ba zlízal aj vodu, èo bola v_jarku.', juv = '<p> pred v. 38' where spis = '1Kr' and vers = 1 and k = 18 and v = 38
+update biblia set nvg = 'Keï to ¾ud videl, padol na tvár a_hovoril: „Len Pán je Boh! Len Pán je Boh!“' where spis = '1Kr' and vers = 1 and k = 18 and v = 39
+update biblia set nvg = 'A_Eliáš im povedal: „Pochytajte Bálovıch prorokov, nech ani jeden z_nich neujde!“ Keï ich pochytali, Eliáš ich zaviedol k_potoku Kison a_tam ich pobil.' where spis = '1Kr' and vers = 1 and k = 18 and v = 40
+go
+
+-- 107	1 Kr 18, 41-46
+update biblia set lc_id = 106 where spis = '1Kr' and vers = 1 and k = 18 and v between 41 and 46
+go
+
+update biblia set nvg = '[Potom] Eliáš povedal Achabovi: "Vystúp hore, jedz a pi, lebo poèu šum ve¾kého daïa."' where spis = '1Kr' and vers = 1 and k = 18 and v = 41
+update biblia set nvg = 'Achab vystúpil jes a pi a Eliáš vyšiel na vrchol Karmelu. Skrèil sa k zemi, tvár si vloil medzi kolená ' where spis = '1Kr' and vers = 1 and k = 18 and v = 42
+update biblia set nvg = 'a povedal svojmu sluhovi: "Choï hore a pozri sa smerom k moru!" On šiel a keï sa rozhliadol, povedal: "Nie je tam niè." Povedal mu: "Vrá sa sedem ráz!"' where spis = '1Kr' and vers = 1 and k = 18 and v = 43
+update biblia set nvg = 'Na siedmy raz povedal: "Vidím, ako od mora vystupuje malı obláèik ako muská dlaò." Nato mu povedal: "Choï a povedz Achabovi: Priahaj a choï dolu, aby a nezachytil dáï!"' where spis = '1Kr' and vers = 1 and k = 18 and v = 44
+update biblia set nvg = 'Medzitım sa nebo zatiahlo oblakmi, strhol sa vietor a spustil sa ve¾kı dáï. Achab sadol do voza a odišiel do Jezraela.' where spis = '1Kr' and vers = 1 and k = 18 and v = 45
+update biblia set nvg = 'Na Eliáša sa zniesla Pánova ruka, opásal si bedrá a utekal pred Achabom, a kım neprišiel do Jezraela.' where spis = '1Kr' and vers = 1 and k = 18 and v = 46
+go
+
+-- OCR15UTc_CIT1
+-- 108	1 Kr 19, 16b. 19-21 // nepouité
+-- 109	1 Kr 19, 19-21
+-- 110	1 Kr 19, 4-8 // nepouité
+-- 111	1 Kr 19, 4-9a. 11-15a // pouité do v. 14
+-- 112	1 Kr 19, 9a. 11-16 // pouité pre v. 15-16
+-- 199	1 Kr 19, 9a. 11-13a // nepouité
+update biblia set lh_id = 'OCR15UTc_CIT1' where spis = '1Kr' and vers = 1 and k = 19 and v between 1 and 21
+update biblia set lc_id = 111 where spis = '1Kr' and vers = 1 and k = 19 and v between 4 and 9
+update biblia set lc_id = 111 where spis = '1Kr' and vers = 1 and k = 19 and v between 11 and 14
+update biblia set lc_id = 112 where spis = '1Kr' and vers = 1 and k = 19 and v between 15 and 16
+update biblia set lc_id = 109 where spis = '1Kr' and vers = 1 and k = 19 and v between 19 and 21
+go
+
+update biblia set nvg = 'Achab rozpovedal Jezabel všetko, èo urobil Eliáš a_ako pobil všetkıch prorokov meèom.' where spis = '1Kr' and vers = 1 and k = 19 and v = 1
+update biblia set nvg = 'Jezabel poslala k_Eliášovi posla s_odkazom: „Nech mi bohovia urobia toto a_nech mi toto pridajú, ak zajtra o_tejto hodine neurobím s_tvojím ivotom, ako sa stalo so ivotom hociktorého z_nich.“' where spis = '1Kr' and vers = 1 and k = 19 and v = 2
+update biblia set nvg = 'Eliáš sa na¾akal, vstal a_odišiel, aby si zachránil ivot. Keï prišiel do judejskej Bersaby, nechal tam svojho sluhu ' where spis = '1Kr' and vers = 1 and k = 19 and v = 3
+update biblia set nvg = 'a_išiel deò cesty na púš. Keï zastal, sadol si pod borievku a_iadal si umrie. Hovoril: „U nevládzem, Pane! Vezmi si môj ivot, veï ja nie som lepší ako moji otcovia.“' where spis = '1Kr' and vers = 1 and k = 19 and v = 4
+update biblia set nvg = 'Hodil sa na zem a_usnul v_tieni borievky. Vtom sa ho dotkol anjel a_povedal mu: „Vstaò a_jedz!“' where spis = '1Kr' and vers = 1 and k = 19 and v = 5
+update biblia set nvg = 'Pozrel sa a_h¾a, pri hlave mal podpopolnı chlieb a_nádobu s_vodou. Najedol sa, napil sa a_znova zaspal.' where spis = '1Kr' and vers = 1 and k = 19 and v = 6
+update biblia set nvg = 'A_Pánov anjel prišiel druhı raz, dotkol sa ho a_povedal mu: „Vstaò a_jedz, lebo máš pred sebou ešte ve¾kú cestu.“' where spis = '1Kr' and vers = 1 and k = 19 and v = 7
+update biblia set nvg = 'Vstal teda, najedol sa, napil sa a_posilnenı tımto pokrmom šiel štyridsa dní a_štyridsa nocí a k_Boiemu vrchu Horeb.' where spis = '1Kr' and vers = 1 and k = 19 and v = 8
+
+update biblia set nvg = 'Keï ta prišiel, nocoval v_jaskyni. Tu ho oslovil Pán a_povedal mu: „Èo tu robíš, Eliáš?“', juv = '9a konèí: "Tu ho oslovil Pán"+v.11; jemne odlišnı slovosled v.9b: “Quid hic agis, Elia?”; v.13: “Quid agis hic, Elia?”; ' where spis = '1Kr' and vers = 1 and k = 19 and v = 9
+update biblia set nvg = 'On odpovedal: „Plnı som horlivosti za Pána, Boha zástupov; lebo synovia Izraela porušili tvoju zmluvu: zborili tvoje oltáre a_tvojich prorokov pozabíjali meèom. Len ja som ostal. Ale aj po mojom ivote sliedia a_chcú ma zabi.“', juv = 'NVg v.10=14' where spis = '1Kr' and vers = 1 and k = 19 and v = 10
+update biblia set nvg = 'A_povedal mu: „Vyjdi von a_postav sa na vrchu pred Pána!“ Práve prechádzal Pán. Dul silnı víchor, ktorı trhá vrchy, a_láme skaly pred Pánom. Ale Pán nebol vo víchre. Po víchre nastalo zemetrasenie. Ale Pán nebol v_zemetrasení.', juv = 'v. 11 (po 9a) porakèuje: "a_povedal mu"' where spis = '1Kr' and vers = 1 and k = 19 and v = 11
+update biblia set nvg = 'Po zemetrasení š¾ahal oheò. Ale Pán nebol v_ohni. A_po ohni nasledoval šum jemného vánku.' where spis = '1Kr' and vers = 1 and k = 19 and v = 12
+update biblia set nvg = 'Keï ho Eliáš poèul, plášom si zahalil tvár, vyšiel von a_zastal pri vchode do jaskyne. Vtom poèul hlas: „Èo tu robíš, Eliáš?“' where spis = '1Kr' and vers = 1 and k = 19 and v = 13
+update biblia set nvg = 'On odpovedal: „Plnı som horlivosti za Pána, Boha zástupov; lebo synovia Izraela porušili tvoju zmluvu: zborili tvoje oltáre a_tvojich prorokov pozabíjali meèom. Len ja som ostal. Ale aj po mojom ivote sliedia a_chcú ma zabi.“' where spis = '1Kr' and vers = 1 and k = 19 and v = 14
+
+update biblia set nvg = 'A_Pán mu povedal: „Choï, vrá sa tou istou cestou po púšti do Damasku. Keï ta dôjdeš, pomaeš Hazaela za krá¾a nad Sıriou, ' where spis = '1Kr' and vers = 1 and k = 19 and v = 15
+update biblia set nvg = 'Jehua, syna Namsiho, pomaeš za krá¾a nad Izraelom a_Elizea, Safatovho syna z_Abelmehuly, pomaeš za proroka namiesto seba.' where spis = '1Kr' and vers = 1 and k = 19 and v = 16
+update biblia set nvg = 'A_kto ujde pred Hazaelovım meèom, toho zabije Jehu, a_kto ujde pred meèom Jehuovım, zabije ho Elizeus.' where spis = '1Kr' and vers = 1 and k = 19 and v = 17
+update biblia set nvg = 'A_ponechám si v_Izraeli sedemtisíc tıch, ktorí nezohli kolená pred Bálom a_ktorıch ústa ho nepobozkali.“' where spis = '1Kr' and vers = 1 and k = 19 and v = 18
+
+update biblia set nvg = 'Keï odtia¾ odišiel, našiel Elizea, Safatovho syna, ora na dvanástich záprahoch volov; sám bol pri dvanástom. Eliáš prišiel k_nemu a_hodil naò svoj pláš.' where spis = '1Kr' and vers = 1 and k = 19 and v = 19
+update biblia set nvg = 'On hneï zanechal voly, beal za Eliášom a_povedal: „Dovo¾ mi, prosím, pobozka svojho otca a_matku, potom pôjdem za tebou.“ On mu odvetil: „Choï a_vrá sa; lebo vieš, èo som ti urobil.“' where spis = '1Kr' and vers = 1 and k = 19 and v = 20
+
+update biblia set nvg = 'Elizeus odišiel od neho, vzal záprah volov, zabil ich, na postroji uvaril mäso a_dal ¾uïom jes. Potom vstal, šiel za Eliášom a_posluhoval mu.' where spis = '1Kr' and vers = 1 and k = 19 and v = 21
 go

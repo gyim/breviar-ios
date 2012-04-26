@@ -1,6 +1,7 @@
 ståpec NVG = text pod¾a liturgického prekladu
 
 -- ak je text v (zátvorkách), znamená to, e ide o parafrázu (v LH uvedenú "porov."), teda nie preklad NVg Biblie.
+-- ak je text uvedenı v [zátvorách], znamená to, e ide o slovo, ktoré v lekcionári (LH) nie je, ale v biblickom texte zrejme je
 -- ak je uvedené ... na zaèiatku, tak preto, lebo v LH je odkaz na druhú èas verša (zvyèajne písm. b za èíslom verša).
 -- ak je uvedené ... na konci, tak preto, lebo v LH je odkaz na prvú èas verša (zvyèajne písm. a za èíslom verša).
 
