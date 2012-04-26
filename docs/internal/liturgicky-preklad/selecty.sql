@@ -18,12 +18,15 @@ select * from biblia
 where spis = '1Kr' and k = 11
 -- and vers = 1
 
-*/
-
 select -- top 100 
 * from lc
 where sur like '1Kr %'
 or sur like '1 Kr %'
 
 select * from biblia where spis = '1Kr' and k = 8
-
+*/
+select -- top 100 
+* from lc
+where sur like '2Kr %'
+or sur like '2 Kr %'
+order by 2
