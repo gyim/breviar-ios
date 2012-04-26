@@ -8,12 +8,6 @@ select distinct _0, spis from biblia order by 1
 select * from biblia
 where nvg is not null
 and isnull(vers, 0) != 1
-*/
-
-select -- top 100 
-* from lc
-where sur like '1Kr %'
-or sur like '1 Kr %'
 
 select * from biblia
 where spis = '1Kr' and k = 10
@@ -24,6 +18,12 @@ select * from biblia
 where spis = '1Kr' and k = 11
 -- and vers = 1
 
-select * from biblia where spis = '1Kr' and k = 2
+*/
 
-select * from biblia where spis = '1Kr' and k = 18
+select -- top 100 
+* from lc
+where sur like '1Kr %'
+or sur like '1 Kr %'
+
+select * from biblia where spis = '1Kr' and k = 8
+

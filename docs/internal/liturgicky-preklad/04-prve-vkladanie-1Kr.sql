@@ -15,9 +15,22 @@ go
 
 -- _2SO2_CIT
 update biblia set lh_id = '_2SO2_CIT' where spis = '1Kr' and vers = 1 and k = 2 and v between 2 and 3
-go
+/*
 update biblia set nvg = '... Buï silnı, buï mu ' where spis = '1Kr' and vers = 1 and k = 2 and v = 2
 update biblia set nvg = 'a_zachovávaj rozhodnutia Pána, svojho Boha, kráèaj po jeho cestách a_dodruj jeho zákony, príkazy, ustanovenia a_vıroky, aby sa ti darilo všetko, èo podnikneš.' where spis = '1Kr' and vers = 1 and k = 2 and v = 3
+*/
+-- 113	1 Kr 2, 1-4. 10-12
+update biblia set lc_id = 113 where spis = '1Kr' and vers = 1 and k = 2 and v between 1 and 4
+update biblia set lc_id = 113 where spis = '1Kr' and vers = 1 and k = 2 and v between 10 and 12
+go
+
+update biblia set nvg = 'Keï sa priblíil deò Dávidovej smrti, prikázal svojmu synovi Šalamúnovi: ' where spis = '1Kr' and vers = 1 and k = 2 and v = 1
+update biblia set nvg = '"Ja nastupujem cestu kadého pozemšana; ty buï silnı, buï mu ' where spis = '1Kr' and vers = 1 and k = 2 and v = 2
+update biblia set nvg = 'a zachovávaj rozhodnutia Pána, svojho Boha, kráèaj po jeho cestách a dodruj jeho zákony, príkazy, ustanovenia a vıroky, ako sú napísané v Mojišovom zákone, aby sa ti darilo všetko, èo podnikneš, a všade, kam sa obrátiš; ' where spis = '1Kr' and vers = 1 and k = 2 and v = 3
+update biblia set nvg = 'aby Pán potvrdil svoje slovo, ktoré povedal o mne: ''Ak si budú tvoji synovia dáva pozor na svoje cesty a budú verne celım srdcom i celou dušou kráèa predo mnou, nikdy nebude odstránenı tvoj potomok z trónu Izraela.''"' where spis = '1Kr' and vers = 1 and k = 2 and v = 4
+update biblia set nvg = 'Potom Dávid usnul so svojimi otcami a pochovali ho v Dávidovom meste.' where spis = '1Kr' and vers = 1 and k = 2 and v = 10
+update biblia set nvg = 'Dávid kra¾oval nad Izraelom štyridsa rokov: v Hebrone kra¾oval sedem rokov, v Jeruzaleme tridsatri rokov.' where spis = '1Kr' and vers = 1 and k = 2 and v = 11
+update biblia set nvg = 'Na trón svojho otca Dávida nastúpil Šalamún a ve¾mi sa upevnilo jeho krá¾ovstvo.' where spis = '1Kr' and vers = 1 and k = 2 and v = 12
 go
 
 -- _1SO9_CIT
@@ -84,19 +97,36 @@ update biblia set nvg = 'Dávid kra¾oval nad Izraelom štyridsa rokov: v_Hebrone 
 update biblia set nvg = 'Na trón svojho otca Dávida nastúpil Šalamún a_ve¾mi sa upevnilo jeho krá¾ovstvo.' where spis = '1Kr' and vers = 1 and k = 2 and v = 12
 go
 
--- VPCHR_ZVII_cCIT1
+-- VPCHR_ZVII_cCIT1 (1 Kr 8, 1-4. 10-13. 22-30)
+-- 119	1 Kr 8, 1-7. 9-13
+-- 120	1 Kr 8, 22-23. 27-30
+-- 121	1 Kr 8, 22-23. 27-30 // nepouité; okrem nadpisu == 120
+-- 122	1 Kr 8, 41-43
 update biblia set lh_id = 'VPCHR_ZVII_cCIT1' where spis = '1Kr' and vers = 1 and k = 8 and v between 1 and 4
 update biblia set lh_id = 'VPCHR_ZVII_cCIT1' where spis = '1Kr' and vers = 1 and k = 8 and v between 10 and 13
 update biblia set lh_id = 'VPCHR_ZVII_cCIT1' where spis = '1Kr' and vers = 1 and k = 8 and v between 22 and 30
+update biblia set lc_id = 119 where spis = '1Kr' and vers = 1 and k = 8 and v between 1 and 7
+update biblia set lc_id = 119 where spis = '1Kr' and vers = 1 and k = 8 and v between 9 and 13
+update biblia set lc_id = 120 where spis = '1Kr' and vers = 1 and k = 8 and v between 22 and 23
+update biblia set lc_id = 120 where spis = '1Kr' and vers = 1 and k = 8 and v between 27 and 30
+update biblia set lc_id = 122 where spis = '1Kr' and vers = 1 and k = 8 and v between 41 and 43
 go
 update biblia set nvg = 'Šalamún zhromadil v_Jeruzaleme starších Izraela – všetkıch náèelníkov kmeòov a_vodcov izraelskıch rodov –, aby preniesli archu Pánovej zmluvy z_Dávidovho mesta, teda zo Siona.' where spis = '1Kr' and vers = 1 and k = 8 and v = 1
 update biblia set nvg = 'A_v_mesiaci Etanim, to je siedmy mesiac, sa vo sviatok ku krá¾ovi Šalamúnovi zhromadil celı Izrael.' where spis = '1Kr' and vers = 1 and k = 8 and v = 2
 update biblia set nvg = 'Prišli všetci starší Izraela, kòazi vzali archu ' where spis = '1Kr' and vers = 1 and k = 8 and v = 3
 update biblia set nvg = 'a_vyniesli Pánovu archu, stan zhromadenia a_všetko posvätné náèinie, ktoré bolo v_stane; niesli to kòazi a_leviti.' where spis = '1Kr' and vers = 1 and k = 8 and v = 4
+
+update biblia set nvg = 'Krá¾ Šalamún a s ním celé izraelské zhromadenie, èo sa k nemu zišlo, obetovali pred archou nepredstavite¾né a nespoèetné mnostvo oviec a hovädzieho dobytka.' where spis = '1Kr' and vers = 1 and k = 8 and v = 5
+update biblia set nvg = 'Potom kòazi vniesli archu Pánovej zmluvy na jej miesto, do modlitebne chrámu, do ve¾svätyne, pod krídla cherubínov.' where spis = '1Kr' and vers = 1 and k = 8 and v = 6
+update biblia set nvg = 'Lebo cherubíni rozprestierali krídla nad miestom, kde bola archa, a zakrıvali archu a jej rde zhora.' where spis = '1Kr' and vers = 1 and k = 8 and v = 7
+
+update biblia set nvg = 'V arche nebolo niè iné, len dve kamenné tabule, ktoré do nej vloil Mojiš na Horebe, keï Pán uzavrel zmluvu so synmi Izraela pri ich vıchode z egyptskej krajiny.' where spis = '1Kr' and vers = 1 and k = 8 and v = 9
+
 update biblia set nvg = 'Keï kòazi vyšli zo svätyne, Pánov dom naplnil oblak ' where spis = '1Kr' and vers = 1 and k = 8 and v = 10
 update biblia set nvg = 'a_kòazi nemohli pre oblak zosta v_slube; lebo Pánov dom naplnila Pánova sláva.' where spis = '1Kr' and vers = 1 and k = 8 and v = 11
 update biblia set nvg = 'Vtedy Šalamún povedal: <p>„Pán povedal, e bude bıva v_oblaku.' where spis = '1Kr' and vers = 1 and k = 8 and v = 12
 update biblia set nvg = '<br>Ja som postavil dom, aby si v_òom bıval, <br>Najpevnejší trón pre teba naveky.“' where spis = '1Kr' and vers = 1 and k = 8 and v = 13
+
 update biblia set nvg = 'Šalamún si pred oèami celého izraelského spoloèenstva stal pred Pánov oltár, vystrel ruky k_nebu ' where spis = '1Kr' and vers = 1 and k = 8 and v = 22
 update biblia set nvg = 'a_povedal: „Pane, Boe Izraela, tebe niet podobného Boha ani hore na nebi, ani dolu na zemi, lebo ty zachovávaš zmluvu a_milosrdenstvo so svojimi sluobníkmi, ktorí celım svojím srdcom kráèajú pred tebou.' where spis = '1Kr' and vers = 1 and k = 8 and v = 23
 update biblia set nvg = 'Ty si zachoval svojmu sluobníkovi, môjmu otcovi Dávidovi, èo si mu pris¾úbil: ústami si hovoril a_rukami uskutoènil, ako dokazuje tento deò.' where spis = '1Kr' and vers = 1 and k = 8 and v = 24
@@ -106,6 +136,10 @@ update biblia set nvg = 'Mono si vôbec pomyslie, e Boh bude bıva na zemi? Ve
 update biblia set nvg = 'Ale zhliadni na modlitbu svojho sluobníka a_na jeho prosby, Pane, Boe môj; poèuj volanie a_modlitbu, ktorú ti dnes tvoj sluobník prednáša, ' where spis = '1Kr' and vers = 1 and k = 8 and v = 28
 update biblia set nvg = 'aby boli tvoje oèi v_noci i_vo dne otvorené nad tımto domom, nad miestom, o_ktorom si povedal: ‚Tam bude moje meno,‘ aby si vypoèul modlitbu, keï sa bude tvoj sluobník modli na tomto mieste: ' where spis = '1Kr' and vers = 1 and k = 8 and v = 29
 update biblia set nvg = 'aby si vypoèul prosbu svojho sluobníka a_svojho ¾udu Izraela, kedyko¾vek sa budú modli na tomto mieste. Ty vypoèuješ vo svojom príbytku v_nebi; a_keï vypoèuješ, budeš milostivı.“' where spis = '1Kr' and vers = 1 and k = 8 and v = 30
+
+update biblia set nvg = '(Šalamún sa takto modlil v chráme: ) "Aj keï príde cudzinec, ktorı nie je z tvojho ¾udu, Izraela, z ïalekej krajiny pre tvoje meno ' where spis = '1Kr' and vers = 1 and k = 8 and v = 41
+update biblia set nvg = '– lebo všade bude poèu o tvojom ve¾kom mene, o tvojej silnej ruke a o tvojom vystretom ramene –; keï teda príde a bude sa modli na tomto mieste, ' where spis = '1Kr' and vers = 1 and k = 8 and v = 42
+update biblia set nvg = 'ty ho vypoèuješ v nebi, na mieste, kde prebıvaš, a urobíš všetko, o èo a cudzinec bude prosi, aby všetky národy na zemi poznali tvoje meno a báli sa a ako tvoj ¾ud, Izrael, a aby vedeli, e tento dom, ktorı som postavil, je zasvätenı tvojmu menu."' where spis = '1Kr' and vers = 1 and k = 8 and v = 43
 go
 
 -- 100	1 Kr 11, 4-13
@@ -280,4 +314,107 @@ update biblia set nvg = 'Keï odtia¾ odišiel, našiel Elizea, Safatovho syna, ora
 update biblia set nvg = 'On hneï zanechal voly, beal za Eliášom a_povedal: „Dovo¾ mi, prosím, pobozka svojho otca a_matku, potom pôjdem za tebou.“ On mu odvetil: „Choï a_vrá sa; lebo vieš, èo som ti urobil.“' where spis = '1Kr' and vers = 1 and k = 19 and v = 20
 
 update biblia set nvg = 'Elizeus odišiel od neho, vzal záprah volov, zabil ich, na postroji uvaril mäso a_dal ¾uïom jes. Potom vstal, šiel za Eliášom a_posluhoval mu.' where spis = '1Kr' and vers = 1 and k = 19 and v = 21
+go
+
+-- OCR15STRc_CIT1
+-- 114	1 Kr 21, 1-16
+-- 115	1 Kr 21, 17-29
+update biblia set lh_id = 'OCR15STRc_CIT1' where spis = '1Kr' and vers = 1 and k = 21 and v between 1 and 21
+update biblia set lh_id = 'OCR15STRc_CIT1' where spis = '1Kr' and vers = 1 and k = 21 and v between 27 and 29
+update biblia set lc_id = 114 where spis = '1Kr' and vers = 1 and k = 21 and v between 1 and 16
+update biblia set lc_id = 115 where spis = '1Kr' and vers = 1 and k = 21 and v between 17 and 29
+go
+
+update biblia set nvg = '... Jezraelèan Nabot mal vinicu, ktorá bola v_Jezraeli pri paláci samarského krá¾a Achaba.' where spis = '1Kr' and vers = 1 and k = 21 and v = 1
+update biblia set nvg = 'Preto Achab povedal Nabotovi: „Daj mi svoju vinicu, urobím si z_nej zeleninovú záhradu, lebo je hneï ved¾a môjho domu. Dám ti za òu lepšiu vinicu alebo, ak ti bude lepšie vyhovova, dám ti za òu v_striebre, èo je hodna.“' where spis = '1Kr' and vers = 1 and k = 21 and v = 2
+update biblia set nvg = 'Nabot mu odpovedal: „Nech ma Pán chráni, aby som ti dal dedièstvo svojich otcov!“ ' where spis = '1Kr' and vers = 1 and k = 21 and v = 3
+
+update biblia set nvg = 'Achab prišiel domov mrzutı a_nahnevanı pre odpoveï, èo mu dal Jezraelèan Nabot, keï mu povedal: „Nedám ti dedièstvo svojich otcov.“ Hodil sa na lôko, tvárou sa obrátil k_stene a_nechcel jes.' where spis = '1Kr' and vers = 1 and k = 21 and v = 4
+update biblia set nvg = 'Prišla k_nemu jeho ena Jezabel a_pıtala sa ho: „Èo je s_tebou, e si takı zronenı na duchu a_nechceš jes?“' where spis = '1Kr' and vers = 1 and k = 21 and v = 5
+update biblia set nvg = 'On jej odvetil: „Pretoe som povedal Jezraelèanovi Nabotovi: Daj mi svoju vinicu za peniaze alebo ak chceš, dám ti za òu inú vinicu, a_on mi odvetil: ‚Nedám ti svoju vinicu.‘“' where spis = '1Kr' and vers = 1 and k = 21 and v = 6
+update biblia set nvg = 'Jeho ena Jezabel mu povedala: „Máš ty ale autoritu a_pekne vládneš nad Izraelom! Vstaò, jedz a_buï dobrej mysle, ja ti zadováim vinicu Jezraelèana Nabota.“' where spis = '1Kr' and vers = 1 and k = 21 and v = 7
+
+update biblia set nvg = 'V_Achabovom mene napísala list, zapeèatila ho jeho prsteòom a_poslala ho starším a_predstavenım, èo bıvali s_Nabotom v_jeho meste.' where spis = '1Kr' and vers = 1 and k = 21 and v = 8
+update biblia set nvg = 'V_liste písala toto: „Vyhláste pôst, Nabota posaïte na popredné miesto medzi ¾udom ' where spis = '1Kr' and vers = 1 and k = 21 and v = 9
+update biblia set nvg = 'a_postavte dvoch muov, Beliálovıch synov, nech mu svedèia do oèí: ‚Rúhal si sa Bohu a_krá¾ovi.‘ Potom ho vyveïte a_ukameòujte; nech zomrie.“' where spis = '1Kr' and vers = 1 and k = 21 and v = 10
+update biblia set nvg = 'A_jeho spoluobèania, starší a_predstavení, èo s_ním bıvali v_meste, urobili, ako im odkázala Jezabel, ako bolo napísané v_liste, ktorı im poslala.' where spis = '1Kr' and vers = 1 and k = 21 and v = 11
+update biblia set nvg = 'Vyhlásili pôst a_Nabota posadili na popredné miesto medzi ¾udom.' where spis = '1Kr' and vers = 1 and k = 21 and v = 12
+update biblia set nvg = 'Vošli dvaja muovia, Beliálovi synovia, posadili sa oproti nemu a_diabolsky proti nemu svedèili pred celım zhromadením: „Nabot sa rúhal Bohu a_krá¾ovi.“ Preto ho vyviedli za mesto a_ukameòovali.' where spis = '1Kr' and vers = 1 and k = 21 and v = 13
+update biblia set nvg = 'Potom poslali Jezabel odkaz: „Nabota ukameòovali; je màtvy.“' where spis = '1Kr' and vers = 1 and k = 21 and v = 14
+
+update biblia set nvg = 'Keï Jezabel poèula, e Nabota ukameòovali a_e je màtvy, povedala Achabovi: „Vstaò a_vezmi si vinicu Jezraelèana Nabota, ktorı ti ju nechcel da za peniaze, lebo Nabot neije, je màtvy.“' where spis = '1Kr' and vers = 1 and k = 21 and v = 15
+update biblia set nvg = 'Keï Achab poèul, e Nabot zomrel, zobral sa a_išiel do vinice Jezraelèana Nabota, aby ju zabral.' where spis = '1Kr' and vers = 1 and k = 21 and v = 16
+
+update biblia set nvg = 'Tu Pán oslovil Tesbana Eliáša:' where spis = '1Kr' and vers = 1 and k = 21 and v = 17
+update biblia set nvg = '„Zober sa a_choï v_ústrety izraelskému krá¾ovi Achabovi, ktorı je v_Samárii. Je práve v_Nabotovej vinici; vošiel do nej, aby ju zabral.' where spis = '1Kr' and vers = 1 and k = 21 and v = 18
+update biblia set nvg = 'Povieš mu: Toto hovorí Pán: Vradil si a_okrem toho si sa zmocnil dedièstva! A_potom dodaj: Toto hovorí Pán: Na mieste, kde psy lízali Nabotovu krv, budú líza aj tvoju.“' where spis = '1Kr' and vers = 1 and k = 21 and v = 19
+update biblia set nvg = 'Achab povedal Eliášovi: „Našiel si ma, nepriate¾?“ On odpovedal: „Našiel, lebo si sa zapredal a_urobil si, èo je zlé pred Pánovım poh¾adom.' where spis = '1Kr' and vers = 1 and k = 21 and v = 20
+update biblia set nvg = 'H¾a, ja privediem zlo na teba: zmetiem tvoje potomstvo a_vyhubím v_Izraeli z_Achaba všetko, èo je rodu muského: deti i_dospelıch.“ ' where spis = '1Kr' and vers = 1 and k = 21 and v = 21
+update biblia set nvg = 'S tvojím domom naloím, ako som naloil s domom Jeroboama, Nabatovho syna, a s domom Básu, Ahiášovho syna, pretoe si ma svojimi skutkami popudzoval k hnevu a k hriechu si zviedol Izrael.' where spis = '1Kr' and vers = 1 and k = 21 and v = 22
+update biblia set nvg = 'Ale aj o Jezabel Pán povedal: Psy budú ra Jezabel na jezraelskom poli.' where spis = '1Kr' and vers = 1 and k = 21 and v = 23
+update biblia set nvg = 'Kto z Achaba zomrie v meste, zoerú ho psy, a kto zomrie na poli, zoerie ho nebeské vtáctvo."' where spis = '1Kr' and vers = 1 and k = 21 and v = 24
+update biblia set nvg = 'Lebo naozaj nebolo nikoho, kto by sa bol tak zapredal robi zlo pred Pánovım poh¾adom ako Achab a zvádzala ho na to jeho ena Jezabel.' where spis = '1Kr' and vers = 1 and k = 21 and v = 25
+update biblia set nvg = 'Tak ve¾mi sa skazil, e chodil za modlami celkom tak, ako to robievali Amorejèania, ktorıch Pán vyhubil spred synov Izraela.' where spis = '1Kr' and vers = 1 and k = 21 and v = 26
+update biblia set nvg = 'Keï Achab poèul tieto slová, roztrhol si rúcho, na telo si opásal kajúci pás a_postil sa, spal vo vrecovine a_chodil sk¾úèenı.' where spis = '1Kr' and vers = 1 and k = 21 and v = 27
+update biblia set nvg = 'Vtedy Pán oslovil Tesbana Eliáša:' where spis = '1Kr' and vers = 1 and k = 21 and v = 28
+update biblia set nvg = '„Videl si, ako sa Achab predo mnou pokoril? Preto, e sa pokoril predo mnou, neprivediem nešastie za jeho ivota. Ale v_dòoch jeho syna privediem nešastie na jeho dom.“' where spis = '1Kr' and vers = 1 and k = 21 and v = 29
+go
+
+-- OCR15STVc_CIT1
+update biblia set lh_id = 'OCR15STVc_CIT1' where spis = '1Kr' and vers = 1 and k = 22 and v between 1 and 9
+update biblia set lh_id = 'OCR15STVc_CIT1' where spis = '1Kr' and vers = 1 and k = 22 and v between 15 and 23
+update biblia set lh_id = 'OCR15STVc_CIT1' where spis = '1Kr' and vers = 1 and k = 22 and v = 29
+update biblia set lh_id = 'OCR15STVc_CIT1' where spis = '1Kr' and vers = 1 and k = 22 and v between 34 and 38
+go
+
+update biblia set nvg = 'Prešli tri roky, èo nebola vojna medzi Sıriou a_Izraelom.' where spis = '1Kr' and vers = 1 and k = 22 and v = 1
+update biblia set nvg = 'V_treom roku šiel judejskı krá¾ Jozafat k_izraelskému krá¾ovi.' where spis = '1Kr' and vers = 1 and k = 22 and v = 2
+update biblia set nvg = 'Izraelskı krá¾ povedal svojim sluhom: „Neviete, e Ramot v_Galaáde je náš? A_my otá¾ame vzia si ho z_ruky sırskeho krá¾a.“' where spis = '1Kr' and vers = 1 and k = 22 and v = 3
+update biblia set nvg = 'I_opıtal sa Jozafata: „Pôjdeš so mnou bojova o_Ramot v_Galaáde?“ ' where spis = '1Kr' and vers = 1 and k = 22 and v = 4
+
+update biblia set nvg = 'Jozafat povedal izraelskému krá¾ovi: „Ja som ako ty; môj ¾ud a_tvoj ¾ud sú jedno a_moje kone ako tvoje kone.“ Ale Jozafat povedal izraelskému krá¾ovi: „Opıtaj sa dnes, prosím a, na Pánovo slovo.“' where spis = '1Kr' and vers = 1 and k = 22 and v = 5
+update biblia set nvg = 'Izraelskı krá¾ zhromadil teda asi štyristo muov, prorokov, a_povedal im: „Mám ís bojova o_Ramot v_Galaáde, alebo to necha tak?“ Oni odpovedali: „Choï! Pán ho dá do rúk krá¾a.“' where spis = '1Kr' and vers = 1 and k = 22 and v = 6
+update biblia set nvg = 'Jozafat povedal: „Nie je tu nejakı inı, Pánov prorok, aby sme sa opıtali cez neho?“' where spis = '1Kr' and vers = 1 and k = 22 and v = 7
+update biblia set nvg = 'Izraelskı krá¾ vravel Jozafatovi: „Zostal ešte jeden mu, prostredníctvom ktorého by sme sa mohli opıta Pána. Ale ja ho nenávidím, lebo mi neprorokuje dobro, ale zlo: je to Jemlov syn Micheáš.“' where spis = '1Kr' and vers = 1 and k = 22 and v = 8
+update biblia set nvg = 'Jozafat mu vravel: „Nehovor tak, krá¾!“ Izraelskı krá¾ si teda zavolal jedného dvorana a_povedal mu: „Rıchlo priveï Jemlovho syna Micheáša.“ ' where spis = '1Kr' and vers = 1 and k = 22 and v = 9
+
+update biblia set nvg = 'On prišiel ku krá¾ovi a_krá¾ mu povedal: „Micheáš, máme ís bojova o_Ramot v_Galaáde, alebo to necha tak?“ On mu odpovedal: „Choï, budeš ma úspech a_Pán ho vydá do rúk krá¾a.“' where spis = '1Kr' and vers = 1 and k = 22 and v = 15
+update biblia set nvg = 'Ale krá¾ mu povedal: „Opä a_opä a zaprisahávam, aby si mi nehovoril niè iné, iba pravdu v_Pánovom mene.“' where spis = '1Kr' and vers = 1 and k = 22 and v = 16
+update biblia set nvg = 'On vravel: <p>„Videl som celı Izrael <br>rozptılenı po vrchoch <br>ako ovce, ktoré nemajú pastiera. <p>A_Pán povedal: ‚Títo nemajú pána. Nech sa kadı vráti v_pokoji domov.‘“' where spis = '1Kr' and vers = 1 and k = 22 and v = 17
+update biblia set nvg = 'Izraelskı krá¾ povedal Jozafatovi: „Nehovoril som ti, e mi neprorokuje dobro, ale vdy iba zlo?“' where spis = '1Kr' and vers = 1 and k = 22 and v = 18
+
+update biblia set nvg = 'Ale on ešte dodal: „Preto poèuj Pánovo slovo: Videl som Pána sedie na jeho tróne a_všetko nebeské vojsko stá pri òom sprava i_z¾ava.' where spis = '1Kr' and vers = 1 and k = 22 and v = 19
+update biblia set nvg = 'A_Pán povedal: ‚Kto oklame Achaba, aby šiel a_padol v_Ramote v_Galaáde?‘ A_keï jeden hovoril tak, druhı onak, ' where spis = '1Kr' and vers = 1 and k = 22 and v = 20
+update biblia set nvg = 'vystúpil akısi duch, postavil sa pred Pána a_povedal: ‚Ja ho oklamem.‘ Pán sa ho spıtal: ‚Ako?‘' where spis = '1Kr' and vers = 1 and k = 22 and v = 21
+update biblia set nvg = 'On odpovedal: ‚Vyjdem a_budem livım duchom v_ústach všetkıch jeho prorokov.‘ Pán povedal: ‚Oklameš ho a_podarí sa ti to. Choï a_urob to!‘' where spis = '1Kr' and vers = 1 and k = 22 and v = 22
+update biblia set nvg = 'Tu Pán vloil livého ducha do úst všetkıch tvojich prorokov, èo sú tu. Teda Pán vyslovil proti tebe zlo.“' where spis = '1Kr' and vers = 1 and k = 22 and v = 23
+
+update biblia set nvg = 'Izraelskı krá¾ a_judejskı krá¾ Jozafat šli teda do Ramotu v_Galaáde.' where spis = '1Kr' and vers = 1 and k = 22 and v = 29
+
+update biblia set nvg = 'Tu akısi mu natiahol luk a_len tak vystrelil šíp a_zasiahol izraelského krá¾a medzi spony brnenia. On povedal svojmu pohonièovi: „Obrá a_vyvez ma z_tábora, lebo som ako ranenı.“' where spis = '1Kr' and vers = 1 and k = 22 and v = 34
+update biblia set nvg = 'No v_ten deò sa boj stupòoval a_izraelskı krá¾ stál na svojom voze oproti Sırèanom. Veèer však zomrel. Krv z_rany tiekla do voza.' where spis = '1Kr' and vers = 1 and k = 22 and v = 35
+update biblia set nvg = 'Pri západe slnka sa roz¾ahol po celom tábore krik: „Kadı nech sa vráti do svojho mesta, do svojej krajiny!“' where spis = '1Kr' and vers = 1 and k = 22 and v = 36
+
+update biblia set nvg = 'Krá¾ teda zomrel a_preniesli ho do Samárie. Krá¾a pochovali v_Samárii.' where spis = '1Kr' and vers = 1 and k = 22 and v = 37
+update biblia set nvg = 'A_keï v_samarijskom rybníku umıvali jeho voz, psy lízali jeho krv a_neviestky sa tam kúpali, pod¾a Pánovho slova, ktoré povedal.' where spis = '1Kr' and vers = 1 and k = 22 and v = 38
+go
+
+-- 116	1 Kr 3, 11-14 // pouitı len v. 14
+-- 117	1 Kr 3, 4-13
+-- 118	1 Kr 3, 5-6a. 7-12 // nepouité
+update biblia set lc_id = 116 where spis = '1Kr' and vers = 1 and k = 3 and v = 14
+update biblia set lc_id = 117 where spis = '1Kr' and vers = 1 and k = 3 and v between 4 and 13
+go
+
+update biblia set nvg = 'Krá¾ (Šalamún) išiel do Gabaonu obetova, lebo to bola najväèšia vıšina. Tisíc zápalnıch obetí obetoval Šalamún na tamojšom oltári.' where spis = '1Kr' and vers = 1 and k = 3 and v = 4
+update biblia set nvg = 'V Gabaone sa Šalamúnovi v noci vo sne zjavil Pán a povedal mu: "iadaj si, èo chceš, a dám ti."' where spis = '1Kr' and vers = 1 and k = 3 and v = 5
+update biblia set nvg = 'Šalamún povedal: "Ty si svojmu sluhovi môjmu otcovi Dávidovi preukázal ve¾kú priazeò, lebo verne a spravodlivo kráèal pred tebou, s úprimnım srdcom. Zachoval si mu svoju ve¾kú priazeò a dal si mu syna, ktorı sedí na jeho tróne, ako je to dnes.' where spis = '1Kr' and vers = 1 and k = 3 and v = 6
+update biblia set nvg = 'A teraz, Pane, Boe môj, ty si svojho sluobníka ustanovil za krá¾a namiesto môjho otca Dávida. Ale ja som ve¾mi mladı a neviem, ako si poèína.' where spis = '1Kr' and vers = 1 and k = 3 and v = 7
+update biblia set nvg = 'A tvoj sluobník je uprostred ¾udu, ktorı si si vyvolil, ¾udu nespoèetného, ktorého je to¾ko, e ho nemono spoèíta ani odhadnú.' where spis = '1Kr' and vers = 1 and k = 3 and v = 8
+update biblia set nvg = 'Daj teda svojmu sluobníkovi chápavé srdce, aby vedel spravova tvoj ¾ud a rozlišova medzi dobrım a zlım. Veï kto by ináè mohol spravova tento tvoj ¾ud, takı poèetnı?"' where spis = '1Kr' and vers = 1 and k = 3 and v = 9
+update biblia set nvg = 'Pánovi sa páèilo, e si Šalamún iadal práve toto.' where spis = '1Kr' and vers = 1 and k = 3 and v = 10
+update biblia set nvg = 'Preto mu Boh povedal: "Pretoe si si toto iadal a neprosil si o dlhı vek ani o bohatstvo ani o ivot svojich nepriate¾ov, ale si si iadal múdros, aby si rozlíšil právo, ' where spis = '1Kr' and vers = 1 and k = 3 and v = 11
+update biblia set nvg = 'h¾a, splním tvoju iados: dám ti srdce múdre a chápavé, také, e tebe podobného nebolo pred tebou a ani po tebe nebude.' where spis = '1Kr' and vers = 1 and k = 3 and v = 12
+update biblia set nvg = 'Ale dám ti aj to, èo si neiadal. Bohatstvo a slávu, e sa ti nijakı krá¾ nevyrovná po všetky dni tvojho ivota ' where spis = '1Kr' and vers = 1 and k = 3 and v = 13
+update biblia set nvg = 'a ak budeš kráèa po mojich cestách a budeš zachováva moje príkazy a ustanovenia, ako kráèal tvoj otec Dávid, dám ti aj dlhı ivot."' where spis = '1Kr' and vers = 1 and k = 3 and v = 14
 go
