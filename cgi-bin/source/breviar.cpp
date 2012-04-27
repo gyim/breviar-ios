@@ -1772,7 +1772,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							mystrcpy(pom, STR_EMPTY, MAX_STR);
 						}// !(_global_poradie_svaty > 0)
 						// teraz vytvorÌme reùazec s options
-						prilep_request_options(pom, pompom, NIE);
+						prilep_request_options(pom, pompom);
 						// export hyperlinku
 						// ToDo: hyperlink podæa toho, Ëi bolo volanÈ pre PRM_DNES => PRM_DATUM alebo pre PRM_LIT_OBD
 						// ToDo: prÌpadne v hyperlinku daù aj #z95 a do z95.htm doplniù <a name>...
@@ -5669,7 +5669,7 @@ short int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, short int rok, short
 	return SUCCESS;
 }// _rozbor_dna_s_modlitbou()
 
-// #define prilep_request_options(pom2, pom3, prvy_ampersand) v breviar.h
+// #define prilep_request_options(pom2, pom3) v breviar.h
 
 void _export_rozbor_dna_button_modlitba(short int typ, short int poradie_svateho, short int modl, char pom[MAX_STR], short int doplnkova_psalmodia, short int som_v_tabulke){
 	
@@ -5952,7 +5952,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 					mystrcpy(pom, FILE_NAME_CHYBA, MAX_STR);
 			}
 
-			prilep_request_options(pom, pom2, ANO); // prilep_request_options(pom2, pom3, prvy_ampersand)
+			prilep_request_options(pom, pom2); // prilep_request_options(pom2, pom3, prvy_ampersand)
 
 		}// if(_global_opt_batch_monthly == NIE)
 		else{
@@ -6404,7 +6404,7 @@ void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO 
 	mystrcpy(pom3, STR_EMPTY, MAX_STR);
 
 	if(_global_opt_batch_monthly == NIE){
-		prilep_request_options(pom2, pom3, ANO); // prilep_request_options(pom2, pom3, prvy_ampersand)
+		prilep_request_options(pom2, pom3);
 	}// if(_global_opt_batch_monthly == NIE)
 
 	if(query_type == PRM_LIT_OBD){
@@ -6837,7 +6837,7 @@ void _export_rozbor_dna_kalendar(short int typ){
 		char pom3[MAX_STR]; /* 2008-08-08: pridanÈ */
 		mystrcpy(pom3, STR_EMPTY, MAX_STR);
 
-		prilep_request_options(pom2, pom3, ANO); // prilep_request_options(pom2, pom3, prvy_ampersand)
+		prilep_request_options(pom2, pom3);
 
 		/* 2007-08-15: pokus o krajöie zobrazenie formou kalend·ra */
 #undef ZOZNAM_DNI_MESIACOV_OLD
@@ -7044,7 +7044,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	char pom3[MAX_STR];
 	mystrcpy(pom3, STR_EMPTY, MAX_STR);
 
-	prilep_request_options(pom2, pom3, NIE); // prilep_request_options(pom2, pom3, prvy_ampersand)
+	prilep_request_options(pom2, pom3); // prilep_request_options(pom2, pom3, prvy_ampersand)
 
 	// 2006-02-02: prevzat· Ëasù z _main_dnes
 
@@ -8630,7 +8630,7 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 	char pom3[MAX_STR]; // 2008-08-08: pridanÈ
 	mystrcpy(pom3, STR_EMPTY, MAX_STR);
 
-	prilep_request_options(pom2, pom3, ANO); // prilep_request_options(pom2, pom3, prvy_ampersand)
+	prilep_request_options(pom2, pom3);
 
 	// ˙vodn· navig·cia
 	if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_NAVIGATION) == BIT_OPT_2_NAVIGATION){
@@ -8806,7 +8806,7 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 	}
 	else{
 		Log("  %d bytes for `_local_modl_prve_vespery_ptr'\n", sizeof(_type_1vespery));
-		_INIT_TMODLITBA1(_local_modl_prve_vespery); /* pridana 2003-08-13 */
+		_INIT_TMODLITBA1(_local_modl_prve_vespery); // pridana 2003-08-13
 	}
 
 /* _local_modl_1kompletorium_ptr */
@@ -8825,7 +8825,7 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 	}
 	else{
 		Log("  %d bytes for `_local_modl_vespery_ptr'\n", sizeof(_type_vespery));
-		_INIT_TMODLITBA1(_local_modl_vespery); /* pridana 2003-08-13 */
+		_INIT_TMODLITBA1(_local_modl_vespery); // pridana 2003-08-13
 	}
 
 /* _local_modl_kompletorium_ptr */
@@ -9827,7 +9827,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 		Log("-- _main_rozbor_dna: keÔûe sme v _global_opt_batch_monthly == ANO a export_monthly_druh (%d) > 2, nebudeme exportovaù tabuæku...\n", export_monthly_druh);
 	}
 
-	prilep_request_options(pom2, pom3, ANO); // prilep_request_options(pom2, pom3, prvy_ampersand)
+	prilep_request_options(pom2, pom3);
 
 	// rozparsovanie parametrov den, mesiac, rok, svaty
 	Log("/* rozparsovanie parametrov den, mesiac, rok, svaty */\n");
@@ -10882,7 +10882,7 @@ void _main_analyza_roku(char *rok){
 	// Log("vol·m _rozparsuj_parametre_OPT z _main_analyza_roku()...\n");
 	// _rozparsuj_parametre_OPT();
 
-	prilep_request_options(pom2, pom3, ANO); // prilep_request_options(pom2, pom3, prvy_ampersand)
+	prilep_request_options(pom2, pom3);
 
 	sprintf(pom, (char *)html_text_Rok_x[_global_jazyk], year);
 	_export_heading_center(pom);
