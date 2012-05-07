@@ -1,0 +1,25 @@
+en dash 	&#8211; or &ndash;	pomlèka dlhá 		–
+em dash 	&#8212; or &mdash;	pomlèka extra dlhá 	—
+normálna -
+
+medzera (nezlomite¾ná z Wordu): hexa A0 ( )
+medzera obyèajná ASCII: hexa 20 ( )
+
+
+úvodzovky
+&#8216; or &lsquo;	‘
+&#8218; or &sbquo;	‚
+&#8220; or &ldquo;	“
+&#8222; or &bdquo;	„
+&#8224; or &dagger;	†
+HU koncové horné: 	”
+
+<!-- replace ´ -- ‘ not this ' neither this ’ nor this ` -->
+<!-- replace " -- „this“, not this” -->
+dlhá pomlèka –
+klasický spojovník -
+jednoduché úvodzovky spodné a vrchné: ‚‘
+
+èeský príp. latinský breviár používa aj tieto úvodzovky: »«
+
+volite¾né delenie slov: ­
