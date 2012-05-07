@@ -15910,8 +15910,9 @@ label_25_MAR:
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
 						// 2010-05-03: èeský breviáø má hymnus zo spol. èasti
-						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ_OP))
+						if(_global_jazyk != JAZYK_CZ){
 							_vlastna_cast_hymnus;
+						}
 						_vlastna_cast_2citanie;
 
 						_vlastna_cast_mcd_modlitba;
