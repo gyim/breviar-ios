@@ -16065,13 +16065,23 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_RANNE_CHVALY;
-							_vlastna_cast_full_okrem_antifon_a_prosieb(modlitba);
+							if(_global_jazyk == JAZYK_CZ_OP){
+								_vlastna_cast_hymnus;
+							}
+							_vlastna_cast_kcitanie;
+							_vlastna_cast_kresponz;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_hymnus;
 							_vlastna_cast_modlitba;
 							_vlastna_cast_2citanie;
 
 							modlitba = MODL_VESPERY;
+							if(_global_jazyk == JAZYK_CZ){
+								_vlastna_cast_hymnus;
+							}
 							_vlastna_cast_kcitanie;
 							_vlastna_cast_kresponz;
 							_vlastna_cast_magnifikat;
