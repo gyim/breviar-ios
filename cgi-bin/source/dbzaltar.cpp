@@ -17284,6 +17284,33 @@ label_25_MAR:
 					_global_svaty1.farba = LIT_FARBA_BIELA;
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
 					break;
+				case 23: // MES_MAY -- 23MAJ
+					if(_global_jazyk == JAZYK_HU){
+						if(poradie_svaty == 1){
+							// definovanie parametrov pre modlitbu
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 12; // æubovolnÈ spomienky podæa vöeobecnÈho kalend·ra -- Slovensko
+						mystrcpy(_global_svaty1.meno, text_MAJ_23_HU[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
+						_global_svaty1.farba = LIT_FARBA_CERVENA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+					}// HU only
+					break;
 				case 24: // MES_MAY -- 24MAJ
 					// 2009-03-24: doplnenÈ pre dominik·nov 
 					// 2010-05-24: doplnenÈ podæa toho, Ëo sa m· braù z vlastnej Ëasti
@@ -17342,11 +17369,46 @@ label_25_MAR:
 						}
 						_global_svaty1.typslav = SLAV_SLAVNOST;
 						_global_svaty1.smer = 4; // miestne sl·vnosti podæa miestneho kalend·ra | MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3
-						mystrcpy(_global_svaty1.meno, text_MAJ_24_SDB[_global_jazyk], MENO_SVIATKU);
+						mystrcpy(_global_svaty1.meno, text_MAJ_24[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_SK_SDB;
 					}// kalend·r pre KALENDAR_SK_SDB
+					// else
+					if(_global_jazyk == JAZYK_HU){
+						if(poradie_svaty == 1){
+
+							// definovanie parametrov pre modlitbu
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_INVITATORIUM;
+							_vlastna_cast_antifona_inv;
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_2citanie;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_SPOMIENKA;
+						_global_svaty1.smer = 10; // povinnÈ spomienky podæa vöeobecnÈho kalend·ra
+						mystrcpy(_global_svaty1.meno, text_MAJ_24[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
+						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+					}// HU only
 					// else
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_OFM)){
 
@@ -17556,6 +17618,37 @@ label_25_MAR:
 					}// kalend·r pre KALENDAR_SK_SDB
 					break;
 				case 30: // MES_MAY
+					if(_global_jazyk == JAZYK_HU){
+						if(poradie_svaty == 1){
+
+							// definovanie parametrov pre modlitbu
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_2citanie;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
+
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_hymnus;
+							_vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
+
+							break;
+						}
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 12; // æubovoænÈ spomienky
+						mystrcpy(_global_svaty1.meno, text_MAJ_30_HU[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ);
+						_global_svaty1.farba = LIT_FARBA_BIELA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+					}// HU only
 					// 2009-03-24: doplnenÈ pre dominik·nov aj Ëesk˝ brevi·¯
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
@@ -17619,7 +17712,7 @@ label_25_MAR:
 					}// czop only
 					break;
 				case 31: // MES_MAY -- 31MAJ
-					// na Slovensku sa sl·vi 2. j˙la
+					// na Slovensku (aj v MaÔarsku) sa sl·vi 2. j˙la
 					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 						if(poradie_svaty == 1){
 							// definovanie parametrov pre modlitbu
@@ -20452,7 +20545,7 @@ label_25_MAR:
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
-							// _vlastna_cast_2citanie;
+							_vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_VESPERY;

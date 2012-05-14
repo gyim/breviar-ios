@@ -3802,14 +3802,23 @@ const char *text_MAJ_22[POCET_JAZYKOV + 1] =
  "Sv. Rity z Cascie, øeholnice",
  "Szent Rita szerzetesnõ",
  };
+const char *text_MAJ_23_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Boldog Apor Vilmos püspök és vértanú",
+ };
 const char *text_MAJ_24_CZOP[POCET_JAZYKOV + 1] = 
 {"",
  "",
  "",
- "la_",
+ "",
  "",
  "Pøenesení ostatkù sv. Otce Dominika",
- "hu_",
+ "",
  };
 const char *text_MAJ_24_OFM[POCET_JAZYKOV + 1] = 
 {"Vıroèie posviacky Baziliky sv. Františka v Assisi",
@@ -3820,14 +3829,14 @@ const char *text_MAJ_24_OFM[POCET_JAZYKOV + 1] =
  "",
  "",
  };
-const char *text_MAJ_24_SDB[POCET_JAZYKOV + 1] = 
+const char *text_MAJ_24[POCET_JAZYKOV + 1] = 
 {"Panny Márie, Pomocnice kresanov, <br>hlavnej patrónky Inštitútu dcér Márie Pomocnice <br>a celej saleziánskej rodiny",
  "",
  "",
  "",
  "",
  "",
- "",
+ "Szûz Mária, a keresztények segítsége",
  };
 const char *text_MAJ_25_1[POCET_JAZYKOV + 1] = 
 {"Sv. Bédu Ctihodného, kòaza a uèite¾a Cirkvi",
@@ -3887,10 +3896,19 @@ const char *text_MAJ_30_CZ[POCET_JAZYKOV + 1] =
 {"",
  "Sv. Zdislavy",
  "",
- "(non est in Latina)",
+ "",
  "",
  "Sv. Zdislavy z Lemberka, matky rodiny, terciáøky, spolupatronky provincie",
  "",
+ };
+const char *text_MAJ_30_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Szent István király ereklyéinek átvitele",
  };
 const char *text_MAJ_31[POCET_JAZYKOV + 1] = 
 {"Navštívenie prebl. Panny Márie",
