@@ -902,6 +902,8 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_ESZTERGOM_EML            76
 #define LOKAL_SLAV_GYOR_EGYH                77
 #define LOKAL_SLAV_ESZTERGOM_FOEGYH         78
+#define LOKAL_SLAV_EGER_FOEGYH2             79
+#define LOKAL_SLAV_VESZPREM_FOEGYH_T        80
 
 // 2010-08-03: pridaný kalendár
 #define KALENDAR_NEURCENY                   0

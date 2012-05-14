@@ -522,6 +522,8 @@ const char *nazov_slavenia_lokal[] =
 ,"Az Esztergomi fõegyházmegyében; emléknap"                                                                     // LOKAL_SLAV_ESZTERGOM_EML
 ,"A Gyõri egyházmegyében"                                                                                       // LOKAL_SLAV_GYOR_EGYH
 ,"Az Esztergomi fõegyházmegyében"                                                                               // LOKAL_SLAV_ESZTERGOM_FOEGYH
+,"Az Egri fõegyházmegyében"                                                                                     // LOKAL_SLAV_EGER_FOEGYH2
+,"A Veszprém, a fõegyházmegye társvédõszentje; fõünnep"                                                         // LOKAL_SLAV_VESZPREM_FOEGYH_T
 };
 
 // names of liturgical colors
@@ -3449,6 +3451,15 @@ const char *text_MAJ_03[POCET_JAZYKOV + 1] =
  "Sv. Filipa a Jakuba, apoštolù",
  "Szent Fülöp és Szent Jakab apostol",
  };
+const char *text_MAJ_04_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Szent Flórián vértanú",
+ };
 const char *text_MAJ_04_SJ[POCET_JAZYKOV + 1] = 
 {"Bl. Jozefa Márie Rubia, kòaza",
  "",
@@ -3475,6 +3486,24 @@ const char *text_MAJ_06_SDB[POCET_JAZYKOV + 1] =
  "",
  "",
  "",
+ };
+const char *text_MAJ_07_HU_1[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Boldog Gizella királyné",
+ };
+const char *text_MAJ_07_HU_2[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Az Egri bazilika-fõszékesegyház",
  };
 const char *text_MAJ_08_CZ[POCET_JAZYKOV + 1] = 
 {"",
@@ -3537,7 +3566,7 @@ const char *text_MAJ_11_SK[POCET_JAZYKOV + 1] =
  "(non est in Latina)",
  "",
  "",
- "",
+ "Boldog Salkaházi Sára szûz és vértanú",
  };
 const char *text_MAJ_11_OFM[POCET_JAZYKOV + 1] = 
 {"Sv. Ignáca z Laconie, reho¾níka, èlena 1. rádu",
@@ -3753,7 +3782,7 @@ const char *text_MAJ_21[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Kryštofa Magallanese, knìze a druhù, muèedníkù",
- "Magallanes szent Krištof... (HU)",
+ "Magallán Szent Kristóf áldozópap és társai, mexikói vértanúk",
  };
 const char *text_MAJ_21_CZOP[POCET_JAZYKOV + 1] = 
 {"",
@@ -3771,7 +3800,7 @@ const char *text_MAJ_22[POCET_JAZYKOV + 1] =
  "la_",
  "",
  "Sv. Rity z Cascie, øeholnice",
- "Szent Rita özvegy",
+ "Szent Rita szerzetesnõ",
  };
 const char *text_MAJ_24_CZOP[POCET_JAZYKOV + 1] = 
 {"",
