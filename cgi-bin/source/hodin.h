@@ -3703,6 +3703,15 @@ const char *text_MAJ_17_OFM[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_MAJ_17_HU[POCET_JAZYKOV + 1] = 
+{"",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Boldog Scheffler János püspök és vértanú",
+ };
 const char *text_MAJ_18[POCET_JAZYKOV + 1] = 
 {"Sv. Jána I., pápeža a muèeníka",
  "Sv. Jana I., papeže a muèedníka",
