@@ -44,15 +44,15 @@ input.button, input.reset {
 
 /* << >> */
 input.button0, input.reset0 { 
-	background: #3366CC; /* #3399ff; */
-	color: #CCCCCC; 
-	border: solid 0px #CCCCCC; }
+	background: #C0C0C0; /* #3366CC; #3399ff; */
+	color: #404040;
+	border: solid 1px #A0A0A0; }
 
 /* dnes */
 input.button1, input.reset1 { 
-	background: #3366CC; /* #3399ff; */
-	color: #CCCCCC;
-	border: solid 0px #CCCCCC; }
+	background: #C0C0C0; /* #3366CC; #3399ff; */
+	color: #404040;
+	border: solid 1px #A0A0A0; }
 
 /* menej podstatné buttony */
 input.button2, input.reset2 { 

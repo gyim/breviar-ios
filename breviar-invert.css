@@ -90,27 +90,27 @@ input.button, input.reset {
 input.button0, input.reset0 { 
 	cursor: pointer;
 	margin-left: 0px!important;
-	background: #3366CC; /* #3399ff; */
+	background: #C0C0C0; /* #3366CC; #3399ff; */
 	font-family: inherit; 
 	font-size : 85%; 
 	font-style: normal;
 	text-decoration: none; 
-	color: #CCCCCC; 
-	border: solid 0px #CCCCCC; }
+	color: #404040;
+	border: solid 1px #A0A0A0; }
 
 /* dnes */
 input.button1, input.reset1 { 
 	cursor: pointer;
 	margin-left: 0px!important;
-	background: #3366CC; /* #3399ff; */
+	background: #C0C0C0; /* #3366CC; #3399ff; */
 	font-family: inherit; 
 	font-size : 85%; 
 	font-style: normal;
 	font-weight: bold;
 	font-variant: none;
 	text-decoration: none; 
-	color: #CCCCCC;
-	border: solid 0px #CCCCCC; }
+	color: #404040;
+	border: solid 1px #A0A0A0; }
 
 /* menej podstatné buttony */
 input.button2, input.reset2 { 
