@@ -512,7 +512,7 @@ short int _global_poradie_svaty = 0;
 
 short int _global_pocet_navigacia = 0; // 2011-07-03: poèet prejdených/spracovaných parametrov PARAM_NAVIGACIA
 
-short int _global_pocet_volani_interpretTemplate= 0; // 2012-04-19: poèet volaní _global_pocet_volani_interpretTemplate()
+short int _global_pocet_volani_interpretTemplate = 0; // 2012-04-19: poèet volaní _global_pocet_volani_interpretTemplate()
 //---------------------------------------------------------------------
 
 //---------------------------------------------------------------------
@@ -14125,6 +14125,7 @@ int main(int argc, char **argv){
     _global_font_size = 0;
 
 	_global_pocet_navigacia = 0;
+	_global_pocet_volani_interpretTemplate = 0;
 
     _global_pocet_zalmov_kompletorium = 0;
 
