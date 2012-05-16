@@ -16769,9 +16769,13 @@ label_25_MAR:
 							_vlastna_cast_2citanie;
 							if(_global_jazyk != JAZYK_HU){
 								_vlastna_cast_kresponz;
+								// 2008-06-10: èeská verzia má 1. èítanie zo spoloènej èasti
+								// 2012-05-16: vlastné prvé èítanie je len vtedy, ak sa slávi sviatok (vtedy sú aj antifóny a žalmy zo spoloènej èasti jedného muèeníka a je aj hymnus Te Deum)
+								/*
 								if(_global_jazyk == JAZYK_SK){
-									_vlastna_cast_1citanie; // 2008-06-10: èeská verzia má 1. èítanie zo spoloènej èasti
+									_vlastna_cast_1citanie;
 								}
+								*/
 							}
 
 							modlitba = MODL_VESPERY;
