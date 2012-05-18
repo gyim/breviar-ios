@@ -30,3 +30,13 @@ select -- top 100
 where sur like '2Kr %'
 or sur like '2 Kr %'
 order by 2
+/*
+select * from biblia where spis = '2Kr'
+and nvg is not null
+
+select distinct lc.id
+from lc left join biblia
+on lc.id = biblia.lc_id
+where sur like '2Kr %'
+or sur like '2 Kr %'
+*/
