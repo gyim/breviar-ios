@@ -16958,11 +16958,12 @@ label_25_MAR:
 							break;
 						}
 						_global_svaty1.typslav = SLAV_SPOMIENKA;
-						_global_svaty1.smer = 10; // povinné spomienky pod¾a všeobecného kalendára
+						_global_svaty1.smer = 11; // miestne povinné spomienky
 						mystrcpy(_global_svaty1.meno, text_MAJ_17_HU[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty1.farba = LIT_FARBA_CERVENA;
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_SZATMAR;
 						break;
 					}// HU only
 					break;
