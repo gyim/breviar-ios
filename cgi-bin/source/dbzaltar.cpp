@@ -12130,8 +12130,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
-							modlitba = MODL_INVITATORIUM;
-							_vlastna_cast_antifona_inv;
+							if(_global_jazyk == JAZYK_CZ_OP){
+								modlitba = MODL_INVITATORIUM;
+								_vlastna_cast_antifona_inv;
+							}
 
 							modlitba = MODL_RANNE_CHVALY;
 							_vlastna_cast_full_okrem_prosieb(modlitba);

@@ -2667,7 +2667,7 @@ const char *text_FEB_03_2[POCET_JAZYKOV + 1] =
  "Szent Anszgár (Oszkár) püspök",
  };
 const char *text_FEB_03_1_OP[POCET_JAZYKOV + 1] = 
-{"Bl. Petra z Ruff&iacute;a, kòaza a muèeníka",
+{"Bl. Petra z Ruff&igrave;a, kòaza a muèeníka",
  "",
  "",
  "",
