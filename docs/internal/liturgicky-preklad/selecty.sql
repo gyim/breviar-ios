@@ -24,9 +24,30 @@ where sur like '1Kr %'
 or sur like '1 Kr %'
 
 select * from biblia where spis = '1Kr' and k = 8
-*/
+
 select -- top 100 
 * from lc
 where sur like '2Kr %'
 or sur like '2 Kr %'
 order by 2
+
+select * from biblia where spis = '2Kr'
+and nvg is not null
+
+select distinct lc.id
+from lc left join biblia
+on lc.id = biblia.lc_id
+where sur like '2Kr %'
+or sur like '2 Kr %'
+*/
+
+select -- top 100 
+* from lc
+where sur like '2Krn %'
+or sur like '2 Krn %'
+order by 2
+
+/*
+select * from biblia where spis = '2Krn'
+and nvg is not null
+*/

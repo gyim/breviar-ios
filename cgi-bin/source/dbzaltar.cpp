@@ -1078,6 +1078,48 @@ void _set_2citanie_spomprivileg(short int modlitba, const char *file, const char
 	}// switch(modlitba)
 }
 
+// 2012-05-24: doplnené -- predåžené slávenie vigílií v rámci posvätných èítaní
+void _set_antifona_vig(short int modlitba, const char *file, const char *anchor){
+	switch(modlitba){
+		case MODL_POSV_CITANIE:
+			mystrcpy(_global_modl_posv_citanie.ant_chval.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_posv_citanie.ant_chval.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
+	}// switch(modlitba)
+}
+void _set_chvalospev1(short int modlitba, const char *file, const char *anchor){
+	switch(modlitba){
+		case MODL_POSV_CITANIE:
+			mystrcpy(_global_modl_posv_citanie.chval1.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_posv_citanie.chval1.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
+	}// switch(modlitba)
+}
+void _set_chvalospev2(short int modlitba, const char *file, const char *anchor){
+	switch(modlitba){
+		case MODL_POSV_CITANIE:
+			mystrcpy(_global_modl_posv_citanie.chval2.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_posv_citanie.chval2.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
+	}// switch(modlitba)
+}
+void _set_chvalospev3(short int modlitba, const char *file, const char *anchor){
+	switch(modlitba){
+		case MODL_POSV_CITANIE:
+			mystrcpy(_global_modl_posv_citanie.chval3.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_posv_citanie.chval3.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
+	}// switch(modlitba)
+}
+void _set_evanjelium(short int modlitba, const char *file, const char *anchor){
+	switch(modlitba){
+		case MODL_POSV_CITANIE:
+			mystrcpy(_global_modl_posv_citanie.evanjelium.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_posv_citanie.evanjelium.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
+	}// switch(modlitba)
+}
+
 //---------------------------------------------------------------------
 
 // files - nazvy suborov pre zaltar styroch tyzdnov
@@ -4090,6 +4132,17 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 				t = tyzden;
 
 			if(den == DEN_NEDELA){ // nede¾a: 1.-3. adventná nede¾a
+				// 2012-05-24: doplnené -- predåžené slávenie vigílií v rámci posvätných èítaní | modlitba = MODL_POSV_CITANIE;
+				sprintf(_anchor, "%s%c_%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_ANTIFONA_VIG);
+				_set_antifona_vig(modlitba, _file_pc, _anchor);
+				set_LOG_litobd_pc;
+				_set_chvalospev1(modlitba, "ch_iz40.htm", "CHVAL_IZ40V");
+				_set_chvalospev2(modlitba, "ch_iz42.htm", "CHVAL_IZ42V");
+				_set_chvalospev3(modlitba, "ch_iz49.htm", "CHVAL_IZ49");
+				sprintf(_anchor, "%s%d%c_%s", nazov_OBD[litobd], tyzden, pismenko_modlitby(modlitba), ANCHOR_EVANJELIUM);
+				_set_evanjelium(modlitba, _file_pc, _anchor);
+				set_LOG_litobd_pc;
+
 				// prvé vešpery
 				/* 2007-12-04: bola tu dlho táto poznámka: 
 				 *             "sem treba zadratovat, ze 16. decembra, 1. vespery, uz maju mnohe veci z OBD_ADVENTNE_II"
@@ -4476,6 +4529,18 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 			// avsak ostatne sa berie akoby z OBD_ADVENTNE_I, teda _file == nazov_obd_htm[OBD_ADVENTNE_I] |  _anchor == napr. ADV13NEr_ANT1 
 			// 2007-12-04: doplnené: antifóna na magnifikat pre prvé vešpery 16. decembra (napr. rok 2006) sa vezme z 3. adventnej nedele
 			if(den == DEN_NEDELA){
+
+				// 2012-05-24: doplnené -- predåžené slávenie vigílií v rámci posvätných èítaní | modlitba = MODL_POSV_CITANIE;
+				sprintf(_anchor, "%s%c_%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_ANTIFONA_VIG);
+				_set_antifona_vig(modlitba, _file_pc, _anchor);
+				set_LOG_litobd_pc;
+				_set_chvalospev1(modlitba, "ch_iz40.htm", "CHVAL_IZ40V");
+				_set_chvalospev2(modlitba, "ch_iz42.htm", "CHVAL_IZ42V");
+				_set_chvalospev3(modlitba, "ch_iz49.htm", "CHVAL_IZ49");
+				sprintf(_anchor, "%s%d%c_%s", nazov_OBD[litobd], tyzden, pismenko_modlitby(modlitba), ANCHOR_EVANJELIUM);
+				_set_evanjelium(modlitba, _file_pc, _anchor);
+				set_LOG_litobd_pc;
+
 				// prvé vešpery - presunuté len pre nede¾u, 2007-12-03
 				modlitba = MODL_PRVE_VESPERY;
 				// hymnus
@@ -12065,8 +12130,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
 
-							modlitba = MODL_INVITATORIUM;
-							_vlastna_cast_antifona_inv;
+							if(_global_jazyk == JAZYK_CZ_OP){
+								modlitba = MODL_INVITATORIUM;
+								_vlastna_cast_antifona_inv;
+							}
 
 							modlitba = MODL_RANNE_CHVALY;
 							_vlastna_cast_full_okrem_prosieb(modlitba);
@@ -16893,11 +16960,12 @@ label_25_MAR:
 							break;
 						}
 						_global_svaty1.typslav = SLAV_SPOMIENKA;
-						_global_svaty1.smer = 10; // povinné spomienky pod¾a všeobecného kalendára
+						_global_svaty1.smer = 11; // miestne povinné spomienky
 						mystrcpy(_global_svaty1.meno, text_MAJ_17_HU[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty1.farba = LIT_FARBA_CERVENA;
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
+						_global_svaty1.typslav_lokal = LOKAL_SLAV_SZATMAR;
 						break;
 					}// HU only
 					break;

@@ -524,6 +524,7 @@ const char *nazov_slavenia_lokal[] =
 ,"Az Esztergomi fõegyházmegyében"                                                                               // LOKAL_SLAV_ESZTERGOM_FOEGYH
 ,"Az Egri fõegyházmegyében"                                                                                     // LOKAL_SLAV_EGER_FOEGYH2
 ,"A Veszprém, a fõegyházmegye társvédõszentje; fõünnep"                                                         // LOKAL_SLAV_VESZPREM_FOEGYH_T
+,"A Szatmári egyházmegyében; emléknap"                                                                          // LOKAL_SLAV_SZATMAR
 };
 
 // names of liturgical colors
@@ -2666,7 +2667,7 @@ const char *text_FEB_03_2[POCET_JAZYKOV + 1] =
  "Szent Anszgár (Oszkár) püspök",
  };
 const char *text_FEB_03_1_OP[POCET_JAZYKOV + 1] = 
-{"Bl. Petra z Ruff&iacute;a, kòaza a muèeníka",
+{"Bl. Petra z Ruff&igrave;a, kòaza a muèeníka",
  "",
  "",
  "",
@@ -3866,12 +3867,12 @@ const char *text_MAJ_25_2[POCET_JAZYKOV + 1] =
  "Szent VII. Gergely pápa",
  };
 const char *text_MAJ_25_3[POCET_JAZYKOV + 1] = 
-{"Sv. Márie Magdalény de Pazzi, panny",
- "Sv. Marie Magdalény de Pazzi, panny",
+{"Sv. Márie Magdalény de’ Pazzi, panny",
+ "Sv. Marie Magdalény de’ Pazzi, panny",
  "",
- "S. Mariae Magdalenae de Pazzi, virg.",
+ "S. Mariae Magdalenae de’ Pazzi, virg.",
  "",
- "Sv. Marie Magdalény de Pazzi, panny",
+ "Sv. Marie Magdalény de’ Pazzi, panny",
  "Pazzi Szent Mária Magdolna Szûz",
  };
 const char *text_MAJ_26[POCET_JAZYKOV + 1] = 

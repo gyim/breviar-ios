@@ -84,6 +84,8 @@ short int su_inv_hymnus_kcit_kresp_benmagn_prosby_vlastne(short int m);
 #define ANCHOR_MODLITBA     "MODLITBA"
 #define ANCHOR_CITANIE1     "CIT1"
 #define ANCHOR_CITANIE2     "CIT2"
+#define ANCHOR_ANTIFONA_VIG "ANTV"
+#define ANCHOR_EVANJELIUM   "EV"
 
 // special identifiers
 #define SPOM_PM_SOBOTA "SPMVS"
