@@ -40,7 +40,8 @@ public class Breviar extends Activity {
     boolean initialized, clearHistory;
 
     void goHome() {
-      wv.loadUrl("http://localhost:" + S.port + "/" + scriptname + 
+      Log.v("breviar", "goHome");
+      wv.loadUrl("http://127.0.0.1:" + S.port + "/" + scriptname + 
                  "?qt=pdnes" + Html.fromHtml(S.getOpts()));
     }
 
@@ -48,7 +49,7 @@ public class Breviar extends Activity {
       S.setLanguage(language);
       // musime zahodit aj nastavenia, mozu byt ine. A zresetovalo by to aj jazyk spat.
       clearHistory = true;
-      wv.loadUrl("http://localhost:" + S.port + "/" + scriptname + "?qt=pdnes");
+      wv.loadUrl("http://127.0.0.1:" + S.port + "/" + scriptname + "?qt=pdnes");
       syncPreferences();
     }
 
