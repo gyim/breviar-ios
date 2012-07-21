@@ -68,6 +68,12 @@ public class Breviar extends Activity {
     {
       Log.v("breviar", "onCreate");
 
+      // Restore preferences
+      SharedPreferences settings = getSharedPreferences(prefname, 0);
+      language = settings.getString("language", "sk");
+      scale = settings.getInt("scale", 100);
+      String opts = settings.getString("params", "");
+
       // Initialize server very early, to avoid races
       try {
         S = new Server(this, scriptname, language, opts);
@@ -81,16 +87,12 @@ public class Breviar extends Activity {
       super.onCreate(savedInstanceState);
       requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-      // Restore preferences
-      SharedPreferences settings = getSharedPreferences(prefname, 0);
-      language = settings.getString("language", "sk");
-      scale = settings.getInt("scale", 100);
-      String opts = settings.getString("params", "");
-
       setContentView(R.layout.breviar);
 
       wv = (WebView)findViewById(R.id.wv);
+      wv.clearCache(true);
       wv.getSettings().setBuiltInZoomControls(true);
+      wv.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
       wv.setInitialScale(scale);
       initialized = false;
       Log.v("breviar", "setting scale = " + scale);
