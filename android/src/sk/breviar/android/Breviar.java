@@ -67,8 +67,18 @@ public class Breviar extends Activity {
     public void onCreate(Bundle savedInstanceState)
     {
       Log.v("breviar", "onCreate");
-      super.onCreate(savedInstanceState);
 
+      // Initialize server very early, to avoid races
+      try {
+        S = new Server(this, scriptname, language, opts);
+      } catch (IOException e) {
+        Log.v("breviar", "Can not initialize server!");
+        finish();
+        return;
+      }
+      S.start();
+
+      super.onCreate(savedInstanceState);
       requestWindowFeature(Window.FEATURE_NO_TITLE);
 
       // Restore preferences
@@ -77,16 +87,6 @@ public class Breviar extends Activity {
       scale = settings.getInt("scale", 100);
       String opts = settings.getString("params", "");
 
-//      if (S==null) {
-        try {
-          S = new Server(this, scriptname, language, opts);
-        } catch (IOException e) {
-          Log.v("breviar", "Can not initialize server!");
-          finish();
-          return;
-        }
-        S.start();
-//      }
       setContentView(R.layout.breviar);
 
       wv = (WebView)findViewById(R.id.wv);
@@ -131,7 +131,7 @@ public class Breviar extends Activity {
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
-          Log.v("breviar", "onPageStarted");
+          Log.v("breviar", "onPageStarted " + url);
           if (parent.initialized) parent.syncScale();
           parent.initialized = true;
           super.onPageStarted(view, url, favicon);
@@ -139,7 +139,7 @@ public class Breviar extends Activity {
 
         @Override
         public void onPageFinished(WebView view, String url) {
-          Log.v("breviar", "onPageFinished");
+          Log.v("breviar", "onPageFinished " + url);
           if (parent.clearHistory) view.clearHistory();
           parent.clearHistory = false;
           super.onPageFinished(view, url);
