@@ -7799,8 +7799,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<option>%s\n", nazov_modlitby(MODL_PRVE_VESPERY));
 	Export("<option>%s\n", nazov_modlitby(MODL_PRVE_KOMPLETORIUM));
 	Export("<option>%s\n", nazov_modlitby(MODL_INVITATORIUM));
-	Export("<option>%s\n", nazov_modlitby(MODL_POSV_CITANIE));
-	Export("<option selected>%s\n", nazov_modlitby(MODL_RANNE_CHVALY));
+	Export("<option selected>%s\n", nazov_modlitby(MODL_POSV_CITANIE));
+	Export("<option>%s\n", nazov_modlitby(MODL_RANNE_CHVALY));
 	Export("<option>%s\n", nazov_modlitby(MODL_PREDPOLUDNIM));
 	Export("<option>%s\n", nazov_modlitby(MODL_NAPOLUDNIE));
 	Export("<option>%s\n", nazov_modlitby(MODL_POPOLUDNI));
@@ -7872,8 +7872,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<option>%s\n", nazov_modlitby(MODL_PRVE_VESPERY));
 	Export("<option>%s\n", nazov_modlitby(MODL_PRVE_KOMPLETORIUM));
 	Export("<option>%s\n", nazov_modlitby(MODL_INVITATORIUM));
-	Export("<option selected>%s\n", nazov_modlitby(MODL_RANNE_CHVALY));
-	Export("<option>%s\n", nazov_modlitby(MODL_POSV_CITANIE));
+	Export("<option selected>%s\n", nazov_modlitby(MODL_POSV_CITANIE));
+	Export("<option>%s\n", nazov_modlitby(MODL_RANNE_CHVALY));
 	Export("<option>%s\n", nazov_modlitby(MODL_PREDPOLUDNIM));
 	Export("<option>%s\n", nazov_modlitby(MODL_NAPOLUDNIE));
 	Export("<option>%s\n", nazov_modlitby(MODL_POPOLUDNI));
@@ -8838,8 +8838,8 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 	// ToDo: zv·ûiù pre sl·vnosti zobraziù aj prvÈ veöpery s kompletÛriom...
 	Export("<select name=\"%s\">\n", STR_MODLITBA);
 	Export("<option>%s\n", nazov_modlitby(MODL_INVITATORIUM));
-	Export("<option>%s\n", nazov_modlitby(MODL_POSV_CITANIE));
-	Export("<option selected>%s\n", nazov_modlitby(MODL_RANNE_CHVALY));
+	Export("<option selected>%s\n", nazov_modlitby(MODL_POSV_CITANIE));
+	Export("<option>%s\n", nazov_modlitby(MODL_RANNE_CHVALY));
 	Export("<option>%s\n", nazov_modlitby(MODL_PREDPOLUDNIM));
 	Export("<option>%s\n", nazov_modlitby(MODL_NAPOLUDNIE));
 	Export("<option>%s\n", nazov_modlitby(MODL_POPOLUDNI));
