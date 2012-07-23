@@ -7157,11 +7157,11 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	prilep_request_options(pom2, pom3); // prilep_request_options(pom2, pom3, prvy_ampersand)
 
 #ifdef OS_Windows_Ruby
+	Export("<table align=\"center\"><tr>\n<td>\n");
 	// 2012-07-23, doplnenÈ pre Ruby
 	Export("\n<form action=\"%s?%s=%s%s\" method=\"post\">\n", uncgi_name, STR_QUERY_TYPE, STR_PRM_DNES, pom2);
 
 	Export("<!-- combobox pre v˝ber jazyka -->\n");
-	Export("<p align=\"center\">\n"); // option jazyk
 
 	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_jazyk_explain[_global_jazyk], html_text_jazyk[_global_jazyk]);
 	Export(" ");
@@ -7180,21 +7180,25 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	}
 	Export("</select>\n");
 
+	Export("<!-- button Nastaviù/Potvrdiù (jazyk)-->\n");
 	// button Nastaviù/Potvrdiù
 	Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
 	Export((char *)HTML_BUTTON_DNES_APPLY);
 	Export("\">");
 
-	Export("</p>\n"); // option jazyk
 	Export("</form>\n\n");
+	Export("</td>\n</tr>\n</table>\n");
 #endif
 
 	// 2006-02-02: prevzat· Ëasù z _main_dnes
 
 	// pokraËujem vypÌsanÌm formul·ra
-	Export("\n<form action=\"%s?%s\" method=\"post\">\n", uncgi_name, pom2);
+	// 2012-07-23: rozdelenie jednoho formu na dva; prv˝ pouûije PRM_DATUM podæa glob·lneho nastavenia
+	// pÙvodne tu bolo: Export("\n<form action=\"%s?%s\" method=\"post\">\n", uncgi_name, pom2);
+	Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n", script_name, STR_QUERY_TYPE, STR_PRM_DATUM, STR_DEN, _global_den.den, STR_MESIAC, _global_den.mesiac, STR_ROK, _global_den.rok, pom2);
 
 	// 2003-07-09, zmenene <center><table> na <table align="center">
+	Export("<!--TABLE:BEGIN(options)-->\n");
 	Export("\n<table align=\"center\">\n");
 
 /* ------------------------------------------- */
@@ -7562,8 +7566,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	 * 2011-04-11: button "vyËisti" aj tak nefunguje korektne; zapozn·mkovanÈ (Igor Gal·d)
 	 */
 	Export("<tr>\n<td align=\"center\">\n");
-	Export("<!-- riadok pre button Nastaviù/Potvrdiù -->\n");
-
+	Export("<!-- riadok pre button Nastaviù/Potvrdiù (options)-->\n");
 	// button Nastaviù/Potvrdiù
 	Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
 	Export((char *)HTML_BUTTON_DNES_APPLY);
@@ -7576,6 +7579,18 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("\">");
 */
 	Export("</td></tr>\n\n");
+
+	// 2012-07-23: rozdelenie jednoho formu na dva; prv˝ pouûije PRM_DATUM podæa glob·lneho nastavenia
+	Export("</form>\n");
+
+	Export("<!--TABLE:END(options)-->\n");
+	Export("</table>");
+
+	Export("<!--TABLE:BEGIN(choices)-->\n");
+	Export("\n<table align=\"center\">\n");
+
+	// 2012-07-23: rozdelenie jednoho formu na dva; prv˝ pouûije PRM_DATUM podæa glob·lneho nastavenia
+	Export("\n<form action=\"%s?%s\" method=\"post\">\n", uncgi_name, pom2);
 
 /* ------------------------------------------- */
 	Export("<tr>\n<td>\n");
@@ -7594,6 +7609,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 /* ------------------------------------------- */
 	Export("<tr>\n<td>\n");
+
+	Export("<!--TABLE:BEGIN(PRM_DATUM)-->\n");
 	Export("<table align=\"left\">\n<tr><td>\n");
 	// formular pre PRM_DATUM
 	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\" checked>",
@@ -7673,8 +7690,11 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	// 2011-01-31: chvÌæu tu bol v˝ber liturgickÈho kalend·ra (len pre SK), napr. SVD, SDB, SJ, CSsR; presunutÈ inde
 
-	Export("</tr></table>\n");
-	Export("</tr>\n\n"); // 2003-07-09, podozrivo tam bolo aj </td>
+	Export("</tr>\n");
+	Export("<!--TABLE:END(PRM_DATUM)-->\n");
+	Export("</table>\n");
+	Export("</td>\n");
+	Export("</tr>\n\n");
 
 #ifdef FORMULAR_PRE_PRM_SVIATOK
 /* ------------------------------------------- */
@@ -7686,7 +7706,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("</td><td>\n");
 	// sviatky --- [ToDo]
 	Export("</td></tr></table>\n");
-	Export("</tr>\n\n"); // 2003-07-09, podozrivo tam bolo aj </td>
+	Export("</td>\n");
+	Export("</tr>\n\n");
 #endif
 
 /* ------------------------------------------- */
@@ -7701,7 +7722,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	// pole WWW_ANALYZA_ROKU
 	Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ANALYZA_ROKU, dnes.tm_year);
 	Export("</td></tr></table>\n");
-	Export("</tr>\n\n"); // 2003-07-09, podozrivo tam bolo aj </td>
+	Export("</td>\n");
+	Export("</tr>\n\n");
 
 /* ------------------------------------------- */
 	Export("<tr>\n<td>\n");
@@ -7725,7 +7747,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	// pole WWW_ROK_ROKA
 	Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK_ROKA, dnes.tm_year);
 	Export("</td></tr></table>\n");
-	Export("</tr>\n\n"); // 2003-07-09, podozrivo tam bolo aj </td>
+	Export("</td>\n");
+	Export("</tr>\n\n");
 
 /* ------------------------------------------- */
 	Export("<tr>\n<td>\n");
@@ -7757,7 +7780,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	Export("\n");
 	Export("</td></tr></table>\n");
-	Export("</tr>\n\n"); // 2003-07-09, podozrivo tam bolo aj </td>
+	Export("</td>\n");
+	Export("</tr>\n\n");
 
 #define formular_PRM_LIT_OBD
 #ifdef formular_PRM_LIT_OBD
@@ -7829,6 +7853,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("\n</select>\n");
 
 	Export("</td></tr></table>\n");
+	Export("</td>\n");
 	Export("</tr>\n\n");
 #else
 /* ------------------------------------------- */
@@ -7875,27 +7900,33 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export((char *)html_text_v_tyzdni_zaltara[_global_jazyk]);
 
 	Export("</td></tr></table>\n");
-	Export("</tr>\n\n"); // 2003-07-09, podozrivo tam bolo aj </td>
+	Export("</td>\n");
+	Export("</tr>\n\n");
 #endif
 /* ------------------------------------------- */
-	Export("</table>\n");
 
-	/* predtym tu bolo <br>, ale kedze hore som dal <table align="center">, 
-	 * tak tu musi byt <center> kvoli buttonom; 2003-07-09
-	 */
-	Export("\n<center>\n");
+	// predtym tu bolo <br>, ale kedze hore som dal <table align="center">,  tak tu musi byt <center> kvoli buttonom; 2003-07-09
+	// 2012-07-23: upravenÈ, aby sa stalo s˙Ëasùou tabuæky s moûnosùami voæby
+	Export("<!-- riadok pre button Zobraziù/VyËistiù (choices)-->\n");
+	Export("<tr align=\"center\">\n<td>\n");
 	// button Zobraziù (GO!)
 	Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
 	Export((char *)HTML_BUTTON_DNES_SHOW);
 	Export("\">");
-
+/*
 	// button PÙvodnÈ hodnoty (CLEAR!)
 	Export(HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE"\n");
 	Export("<"HTML_FORM_INPUT_RESET2" value=\"");
 	Export((char *)HTML_BUTTON_DNES_DEFAULTS);
 	Export("\">");
+*/
+	Export("</td>\n");
+	Export("</tr>\n\n");
 
-	Export("</center>\n</form>\n\n");
+	Export("</form>\n\n");
+
+	Export("<!--TABLE:END(choices)-->\n");
+	Export("</table>\n");
 
 }// _export_main_formular()
 
@@ -8861,6 +8892,7 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 	Export((char *)html_text_detaily_explain[_global_jazyk]);
 	Export("</p>\n");
 
+	Export("<!-- button Zobraziù -->\n");
 	Export("<center>\n");
 	// button "Zobraz modlitbu"
 	Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
