@@ -17756,6 +17756,9 @@ label_25_MAR:
 
 							modlitba = MODL_RANNE_CHVALY;
 							_vlastna_cast_full_okrem_prosieb(modlitba);
+							if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
+								_vlastna_cast_kresponz_ve;
+							}
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_hymnus; // v èeskom breviári má vlastný hymnus; 2009-08-13
@@ -17764,7 +17767,10 @@ label_25_MAR:
 
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_full_okrem_prosieb(modlitba);
-
+							if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
+								_vlastna_cast_kresponz_ve;
+							}
+							
 							break;
 						}
 						_global_svaty1.typslav = SLAV_SPOMIENKA;
@@ -17784,6 +17790,9 @@ label_25_MAR:
 
 							modlitba = MODL_RANNE_CHVALY;
 							_vlastna_cast_full_okrem_prosieb(modlitba);
+							if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
+								_vlastna_cast_kresponz_ve;
+							}
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_hymnus;
@@ -17792,6 +17801,9 @@ label_25_MAR:
 
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_full_okrem_prosieb(modlitba);
+							if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
+								_vlastna_cast_kresponz_ve;
+							}
 
 							_vlastna_cast_mcd_modlitba;
 
@@ -17816,6 +17828,9 @@ label_25_MAR:
 
 							modlitba = MODL_RANNE_CHVALY;
 							_vlastna_cast_full_okrem_prosieb(modlitba);
+							if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
+								_vlastna_cast_kresponz_ve;
+							}
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_hymnus;
@@ -17824,6 +17839,9 @@ label_25_MAR:
 
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_full_okrem_prosieb(modlitba);
+							if((_global_den.litobd == OBD_VELKONOCNE_I) || (_global_den.litobd == OBD_VELKONOCNE_II)){
+								_vlastna_cast_kresponz_ve;
+							}
 
 							_vlastna_cast_mcd_modlitba;
 
