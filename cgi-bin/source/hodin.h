@@ -525,6 +525,7 @@ const char *nazov_slavenia_lokal[] =
 ,"Az Egri fõegyházmegyében"                                                                                     // LOKAL_SLAV_EGER_FOEGYH2
 ,"A Veszprém, a fõegyházmegye társvédõszentje; fõünnep"                                                         // LOKAL_SLAV_VESZPREM_FOEGYH_T
 ,"A Szatmári egyházmegyében; emléknap"                                                                          // LOKAL_SLAV_SZATMAR
+,"v ostatních èeských diecézích a v brnìnské diecézi: památka; <br>na Moravì mimo brnìnskou diecézi: nezávazná památka" // LOKAL_SLAV_CESKO_BRNO
 };
 
 // names of liturgical colors
