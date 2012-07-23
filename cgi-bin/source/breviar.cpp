@@ -7159,7 +7159,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 #ifdef OS_Windows_Ruby
 	Export("<table align=\"center\"><tr>\n<td>\n");
 	// 2012-07-23, doplnenÈ pre Ruby
-	Export("\n<form action=\"%s?%s=%s%s\" method=\"post\">\n", uncgi_name, STR_QUERY_TYPE, STR_PRM_DNES, pom2);
+	// ak by sa malo pouûiù "dnes": Export("\n<form action=\"%s?%s=%s%s\" method=\"post\">\n", uncgi_name, STR_QUERY_TYPE, STR_PRM_DNES, pom2);
+	Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n", script_name, STR_QUERY_TYPE, STR_PRM_DATUM, STR_DEN, _global_den.den, STR_MESIAC, _global_den.mesiac, STR_ROK, _global_den.rok, pom2);
 
 	Export("<!-- combobox pre v˝ber jazyka -->\n");
 
