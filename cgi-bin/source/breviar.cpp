@@ -1,7 +1,7 @@
 /***************************************************************************/
 /*                                                                         */
 /* breviar.cpp                                                             */
-/* (c)1998-2011 | Juraj Videky | videky@breviar.sk                         */
+/* (c)1999-2012 | Juraj Videky | videky@breviar.sk                         */
 /*                                                                         */
 /*                http://www.breviar.sk                                    */
 /*                                                                         */
@@ -4006,6 +4006,22 @@ short int atomes(char *mesiac){
 		}
 		i++;
 	}while(i < UNKNOWN_MESIAC);
+	// eöte jeden pokus pre ostatnÈ jazyky
+	int j = -1;
+	if(i == UNKNOWN_MESIAC){
+		do{
+			++j;
+			if((j != JAZYK_UNDEF) && (j != _global_jazyk)){
+				i = 0;
+				do{
+					if(equals(mesiac, nazov_mesiaca_jazyk[i][j])){
+						return i;
+					}
+					i++;
+				}while(i < UNKNOWN_MESIAC);
+			}
+		}while(j < POCET_JAZYKOV);
+	}
 	return UNKNOWN_MESIAC;
 }// atomes()
 
@@ -7140,9 +7156,42 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	prilep_request_options(pom2, pom3); // prilep_request_options(pom2, pom3, prvy_ampersand)
 
+#ifdef OS_Windows_Ruby
+	// 2012-07-23, doplnenÈ pre Ruby
+	Export("\n<form action=\"%s?%s=%s%s\" method=\"post\">\n", uncgi_name, STR_QUERY_TYPE, STR_PRM_DNES, pom2);
+
+	Export("<!-- combobox pre v˝ber jazyka -->\n");
+	Export("<p align=\"center\">\n"); // option jazyk
+
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_jazyk_explain[_global_jazyk], html_text_jazyk[_global_jazyk]);
+	Export(" ");
+	// drop-down list pre v˝ber jazyka
+	// pole WWW_JAZYK
+	Export("<select name=\"%s\" title=\"%s\">\n", STR_JAZYK, html_text_jazyk_explain[_global_jazyk]);
+
+	for(int i = 0; i <= POCET_JAZYKOV; i++){
+		if(i == JAZYK_EN)
+			continue;
+		if(i == JAZYK_LA)
+			continue;
+		if(i == JAZYK_UNDEF)
+			continue;
+		Export("<option%s>%s\n", (i != _global_jazyk)? STR_EMPTY: html_option_selected, nazov_jazyka[i]);
+	}
+	Export("</select>\n");
+
+	// button Nastaviù/Potvrdiù
+	Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
+	Export((char *)HTML_BUTTON_DNES_APPLY);
+	Export("\">");
+
+	Export("</p>\n"); // option jazyk
+	Export("</form>\n\n");
+#endif
+
 	// 2006-02-02: prevzat· Ëasù z _main_dnes
 
-	// pokracujem vypisanim formulara
+	// pokraËujem vypÌsanÌm formul·ra
 	Export("\n<form action=\"%s?%s\" method=\"post\">\n", uncgi_name, pom2);
 
 	// 2003-07-09, zmenene <center><table> na <table align="center">
@@ -7618,9 +7667,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export(HTML_NONBREAKING_SPACE);
 	Export((char *)html_text_alebo_pre[_global_jazyk]);
 	Export(" ");
-	Export("<a href=\"%s?%s=%s"HTML_AMPERSAND"%s\">\n",
-		script_name,
-		STR_QUERY_TYPE, STR_PRM_DNES, pom2); // 2006-08-01: pridan˝ jazyk; 2011-05-12: bolo nastavenÈ funkciou prilep_request_options()
+	Export("<a href=\"%s?%s=%s"HTML_AMPERSAND"%s\">\n", script_name, STR_QUERY_TYPE, STR_PRM_DNES, pom2); // 2006-08-01: pridan˝ jazyk; 2011-05-12: bolo nastavenÈ funkciou prilep_request_options()
 	Export((char *)html_text_dnesok[_global_jazyk]);
 	Export("</a></td>\n");
 
@@ -13224,9 +13271,9 @@ short int parseQueryString(void){
 	else
 		Log("query_string is NULL, something is wrong...\n");
 
-	/* get parameters */
+	// get parameters
 	i = 0;
-	while((strlen(query_string) > 0) && (i < MAX_VARIABLES)){ /* 2006-08-01: doplnen· podmienka, aby nepretieklo napÂÚanie premenn˝ch, ak je ich viac */
+	while((strlen(query_string) > 0) && (i < MAX_VARIABLES)){ // 2006-08-01: doplnen· podmienka, aby nepretieklo napÂÚanie premenn˝ch, ak je ich viac
 		mystrcpy(param[i].name, STR_EMPTY, MAX_NAME_CGI_UTILS);
 		mystrcpy(param[i].val, STR_EMPTY, MAX_VAL_CGI_UTILS);
 		splitword(param[i].val, query_string, '&');
@@ -13235,31 +13282,39 @@ short int parseQueryString(void){
 		Log("--- param[%d].name == %s, .val == %s\n", i, param[i].name, param[i].val);
 		i++;
 	}
-	pocet = i; /* od 0 po i - 1 */
+	pocet = i; // od 0 po i - 1
 	Log("pocet == %d\n", pocet);
 
-	/* 2006-08-01: doplnen· podmienka, aby nepretieklo napÂÚanie premenn˝ch, ak je ich viac */
+	// 2006-08-01: doplnen· podmienka, aby nepretieklo napÂÚanie premenn˝ch, ak je ich viac
 	if((strlen(query_string) > 0) && (pocet >= MAX_VARIABLES)){
 		hlavicka((char *)html_title[_global_jazyk]);
 		Export("Program nedok·ûe obsl˙ûiù viac parametrov (maximum: %d). OstatnÈ bud˙ ignorovanÈ.\n", MAX_VARIABLES);
 		ALERT;
 	}
 
-	/* 2006-07-12: pridanÈ kvÙli jazykov˝m mut·ci·m */
-	i = 0; /* param[0] by mal sÌce obsahovaù typ akcie, ale radöej kontrolujeme od 0 */
-	Log("pok˙öam sa zistiù jazyk...\n");
-	while((equalsi(pom_JAZYK, STR_EMPTY)) && (i < pocet)){
+	// 2006-07-12: pridanÈ kvÙli jazykov˝m mut·ci·m
+	// 2012-07-23: Pre POST query sa tam jazyk priliepa aj na zaËiatok (Ruby), aj sa ËÌta z form-ul·ra (t. j. pri v˝bere z qt=pdnes), preto ËÌtam "odzadu", "zozadu"
+	//             ak by sa neölo smerom "dolu" (t. j. k prvÈmu parametru od konca), nefungovalo by "override" z tabuæky "Voæby vybran˝ch detailov", ak uû v query stringu nejak· hodnota je
+	//             pÙvodn· pozn·mka pre while cyklus resp. inicializ·ciu i: param[0] by mal sÌce obsahovaù typ akcie, ale radöej kontrolujeme aj 0
+	i = pocet;
+	Log("pok˙öam sa zistiù jazyk (od poslednÈho parametra k prvÈmu, t. j. odzadu)...\n");
+	while((equalsi(pom_JAZYK, STR_EMPTY)) && (i > 0)){
+		--i;
 		Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
 		if(equals(param[i].name, STR_JAZYK)){
-			/* ide o parameter STR_JAZYK */
+			// ide o parameter STR_JAZYK
 			mystrcpy(pom_JAZYK, param[i].val, SMALL);
 			Log("jazyk zisten˝ (%s).\n", pom_JAZYK);
 		}
-		i++;
+	}
+	// 2012-07-23: doplnenÈ
+	if((i <= 0) && (equalsi(pom_JAZYK, STR_EMPTY))){
+		mystrcpy(pom_JAZYK, nazov_jazyka[JAZYK_SK], SMALL);
+		Log("jazyk zisten˝ (%s) (i <= 0).\n", pom_JAZYK);
 	}
 
 	// 2010-08-04: pridanÈ kvÙli jazykov˝m mut·ci·m -- kalend·r 
-	//             pÙdodn· pozn·mka pre while cyklus resp. inicializ·ciu i: param[0] by mal sÌce obsahovaù typ akcie, ale radöej kontrolujeme aj 0
+	//             pÙvodn· pozn·mka pre while cyklus resp. inicializ·ciu i: param[0] by mal sÌce obsahovaù typ akcie, ale radöej kontrolujeme aj 0
 	// 2010-10-11: Pre POST query sa tam kalend·r priliepa aj na zaËiatok, aj sa ËÌta z form-ul·ra (t. j. pri v˝bere z qt=pdnes), preto ËÌtam "odzadu", "zozadu"
 	//             ak by sa neölo smerom "dolu" (t. j. k prvÈmu parametru od konca), nefungovalo by "override" z tabuæky "Voæby vybran˝ch detailov", ak uû v query stringu nejak· hodnota je
 	// 2011-04-07: keÔûe poËet parametrov je "pocet", indexovanÈ s˙ 0 aû pocet - 1, a preto opravenÈ: najprv znÌûime --i;
@@ -13269,66 +13324,67 @@ short int parseQueryString(void){
 		--i;
 		Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
 		if(equals(param[i].name, STR_KALENDAR)){
-			/* ide o parameter STR_KALENDAR */
+			// ide o parameter STR_KALENDAR
 			mystrcpy(pom_KALENDAR, param[i].val, SMALL);
 			Log("kalend·r zisten˝ (%s).\n", pom_KALENDAR);
 		}
 	}
 
 	// 2008-08-08: pridanÈ kvÙli rÙznym css
-	i = 0; /* param[0] by mal sÌce obsahovaù typ akcie, ale radöej kontrolujeme od 0 */
+	i = 0; // param[0] by mal sÌce obsahovaù typ akcie, ale radöej kontrolujeme od 0
 	Log("pok˙öam sa zistiù css...\n");
 	while((equalsi(pom_CSS, STR_EMPTY)) && (i < pocet)){
 		Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
 		if(equals(param[i].name, STR_CSS)){
-			/* ide o parameter STR_CSS */
+			// ide o parameter STR_CSS
 			mystrcpy(pom_CSS, param[i].val, SMALL);
 			Log("css zistenÈ (%s).\n", pom_CSS);
 		}
 		i++;
 	}
+	// 2012-07-23: doplnenÈ (sn·Ô nebude robiù problÈmy)
+	if((i >= pocet) && (equalsi(pom_CSS, STR_EMPTY))){
+		mystrcpy(pom_CSS, nazov_css[CSS_breviar_sk], SMALL);
+		Log("css zistenÈ (%s) (i >= pocet).\n", pom_CSS);
+	}
 
-	/* 2011-05-05: pridanÈ kvÙli rÙznym fontom 
-	 * 2011-05-06: Pre POST query sa tam font priliepa aj na zaËiatok (rovnako ako kalend·r), aj sa ËÌta z form-ul·ra (t. j. pri v˝bere z qt=pdnes), 
-	 *             preto ËÌtam "odzadu", "zozadu" (rovnako ako kalend·r), ak by sa neölo smerom "dolu" (t. j. k prvÈmu parametru od konca), 
-	 *             nefungovalo by "override" z tabuæky "Voæby vybran˝ch detailov", ak uû v query stringu nejak· hodnota je
-	 */
+	// 2011-05-05: pridanÈ kvÙli rÙznym fontom 
+	// 2011-05-06: Pre POST query sa tam font priliepa aj na zaËiatok (rovnako ako kalend·r), aj sa ËÌta z form-ul·ra (t. j. pri v˝bere z qt=pdnes), 
+	//             preto ËÌtam "odzadu", "zozadu" (rovnako ako kalend·r), ak by sa neölo smerom "dolu" (t. j. k prvÈmu parametru od konca), 
+	//             nefungovalo by "override" z tabuæky "Voæby vybran˝ch detailov", ak uû v query stringu nejak· hodnota je
 	i = pocet;
 	Log("pok˙öam sa zistiù font (od poslednÈho parametra k prvÈmu, t. j. odzadu)...\n");
 	while((equalsi(pom_FONT, STR_EMPTY)) && (i > 0)){
 		--i;
 		Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
 		if(equals(param[i].name, STR_FONT_NAME)){
-			/* ide o parameter STR_FONT_NAME */
+			// ide o parameter STR_FONT_NAME
 			mystrcpy(pom_FONT, param[i].val, SMALL);
 			Log("font zisten˝ (%s).\n", pom_FONT);
 		}
 	}
 
-	/* 2011-05-13: pridanÈ kvÙli rÙznym veækostiam fontom 
-	 *             Pre POST query sa tam font priliepa aj na zaËiatok (rovnako ako kalend·r), aj sa ËÌta z form-ul·ra (t. j. pri v˝bere z qt=pdnes), 
-	 *             preto ËÌtam "odzadu", "zozadu" (rovnako ako kalend·r), ak by sa neölo smerom "dolu" (t. j. k prvÈmu parametru od konca), 
-	 *             nefungovalo by "override" z tabuæky "Voæby vybran˝ch detailov", ak uû v query stringu nejak· hodnota je
-	 */
+	// 2011-05-13: pridanÈ kvÙli rÙznym veækostiam fontom 
+	//             Pre POST query sa tam font priliepa aj na zaËiatok (rovnako ako kalend·r), aj sa ËÌta z form-ul·ra (t. j. pri v˝bere z qt=pdnes), 
+	//             preto ËÌtam "odzadu", "zozadu" (rovnako ako kalend·r), ak by sa neölo smerom "dolu" (t. j. k prvÈmu parametru od konca), 
+	//             nefungovalo by "override" z tabuæky "Voæby vybran˝ch detailov", ak uû v query stringu nejak· hodnota je
 	i = pocet;
 	Log("pok˙öam sa zistiù font size (od poslednÈho parametra k prvÈmu, t. j. odzadu)...\n");
 	while((equalsi(pom_FONT_SIZE, STR_EMPTY)) && (i > 0)){
 		--i;
 		Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
 		if(equals(param[i].name, STR_FONT_SIZE)){
-			/* ide o parameter STR_FONT_SIZE */
+			// ide o parameter STR_FONT_SIZE
 			mystrcpy(pom_FONT_SIZE, param[i].val, SMALL);
 			Log("font size zisten· (%s).\n", pom_FONT_SIZE);
 		}
 	}
 
-	/* 2006-08-01: pÙvodne sme predpokladali, ûe param[0] by mal obsahovaù typ akcie; 
-	 * odteraz ho hæad·me v celom zozname parametrov
-	 * 2011-01-25: doplnenÈ PRM_LIT_OBD
-	 */
+	// 2006-08-01: pÙvodne sme predpokladali, ûe param[0] by mal obsahovaù typ akcie; odteraz ho hæad·me v celom zozname parametrov
+	// 2011-01-25: doplnenÈ PRM_LIT_OBD
 	ok = NIE;
 	query_type = PRM_UNKNOWN;
-	i = 0; /* od param[0] */
+	i = 0; // od param[0]
 	Log("pok˙öam sa zistiù query type...\n");
 	while((ok != ANO) && (i < pocet)){
 		Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
@@ -13397,11 +13453,10 @@ short int parseQueryString(void){
 		return FAILURE;
 	}
 
-	/* 2011-01-26: premennÈ opt_1 aû opt7 sa ËÌtaj˙ vûdy; ak nie s˙ zadanÈ, nevadÌ
-	 *             doteraz sa ËÌtali len pre niektorÈ query_type: PRM_DNES, PRM_DETAILY, PRM_DATUM
-	 * 2011-01-26: doplnenÈ tieû force opt_0 aû opt_4
-	 * 2011-04-07: prerobenÈ na dve polia premenn˝ch
-	 */
+	// 2011-01-26: premennÈ opt_1 aû opt7 sa ËÌtaj˙ vûdy; ak nie s˙ zadanÈ, nevadÌ
+	//             doteraz sa ËÌtali len pre niektorÈ query_type: PRM_DNES, PRM_DETAILY, PRM_DATUM
+	// 2011-01-26: doplnenÈ tieû force opt_0 aû opt_4
+	// 2011-04-07: prerobenÈ na dve polia premenn˝ch
 	for(j = 0; j < POCET_GLOBAL_OPT; j++){
 		Log("j == %d...\n", j);
 		mystrcpy(local_str, STR_EMPTY, SMALL);
@@ -13606,9 +13661,9 @@ short int parseQueryString(void){
 			 * nieco dostane...
 			 */
 		case PRM_TXT: 
-			/* 2011-02-02: doplnenÈ */
+			// 2011-02-02: doplnenÈ
 		case PRM_DATUM:{
-		/* pripad, ze ide o datum */
+		// pripad, ze ide o datum
 
 		/* treba dodrzat presne poradie v query stringu;
 		 *   '()' znaci optional,
@@ -14349,9 +14404,9 @@ int main(int argc, char **argv){
 	}
 	_main_LOG("...done.\n");
 
-	/* pridanÈ 2005-08-01 */
+	// pridanÈ 2005-08-01
 
-	/* _global_buf */
+	// _global_buf
 	if((_global_buf = (char*) malloc(MAX_GLOBAL_STR)) == NULL){
 		Log("  Not enough memory to allocate buffer for `_global_buf'\n");
 		goto _main_end;
@@ -14361,7 +14416,7 @@ int main(int argc, char **argv){
 		mystrcpy(_global_buf, STR_EMPTY, MAX_GLOBAL_STR);
 	}
 
-	/* _global_buf2 */
+	// _global_buf2
 	if((_global_buf2 = (char*) malloc(MAX_GLOBAL_STR)) == NULL){
 		Log("  Not enough memory to allocate buffer for `_global_buf2'\n");
 		goto _main_end;
@@ -14395,16 +14450,15 @@ int main(int argc, char **argv){
 
 	ret = NO_RESULT;
 	switch(params){
-	/* v tomto switch() naplnime premennu query_type
-	 * a naviac (ak su) premenne pom_... */
+	// v tomto switch() naplnime premennu query_type a naviac (ak su) premenne pom_...
 		case SCRIPT_PARAM_FROM_FORM:{
 			_main_LOG_to_Export("params == SCRIPT_PARAM_FROM_FORM\n");
-			/* neboli zadane ziadne parametre, teda citam z formularu */
+			// neboli zadane ziadne parametre, teda citam z formulara
 			
 			query_type = getQueryTypeFrom_WWW();
-			/* zistili sme, aky je typ dotazu */
+			// zistili sme, aky je typ dotazu
 			if(query_type == PRM_NONE){
-				/* spusteny bez parametrov */
+				// spusteny bez parametrov
 				_main_LOG_to_Export("query_type == PRM_NONE\n");
 				_main_LOG_to_Export("spustam _main_prazdny_formular();\n");
 				_main_prazdny_formular();
@@ -14421,12 +14475,11 @@ int main(int argc, char **argv){
 		case SCRIPT_PARAM_FROM_ARGV:{
 			_main_LOG("params == SCRIPT_PARAM_FROM_ARGV\n");
 			_main_LOG("spustam getArgv();\n");
-			/* query_type sa nastavi priamo vovnutri */
+			// query_type sa nastavi priamo vovnutri
 			ret = getArgv(argc, argv);
-			if(ret == SUCCESS){ /* 13/03/2000A.D. -- aby mohlo exportovat do file_export */
-				/* 2006-07-12: pridanÈ parsovanie jazyka kvÙli jazykov˝m mut·ci·m 
-				 * 2009-08-05: predsunutÈ aj sem vyööie
-				 */
+			if(ret == SUCCESS){ // 13/03/2000A.D. -- aby mohlo exportovat do file_export
+				// 2006-07-12: pridanÈ parsovanie jazyka kvÙli jazykov˝m mut·ci·m 
+				// 2009-08-05: predsunutÈ aj sem vyööie
 				_main_LOG_to_Export("zisùujem jazyk (pom_JAZYK == %s)...\n", pom_JAZYK);
 				_global_jazyk = atojazyk(pom_JAZYK);
 				if(_global_jazyk == JAZYK_UNDEF){
@@ -14497,16 +14550,14 @@ int main(int argc, char **argv){
 			_main_LOG("spat po skonceni getArgv(); exporting to file `%s'...\n",
 				FILE_EXPORT);
 
-			/* 24/02/2000A.D. pridana simulacia QS */
+			// 24/02/2000A.D. pridana simulacia QS
 			if(query_type == PRM_SIMULACIA_QS){
 				Log("jumping to _main_SIMULACIA_QS (query_string == %s)...\n", query_string);
 				goto _main_SIMULACIA_QS;
 			}
 
-			/* initExport(); bola kedysi na zaciatku, avsak kvoli tomu, aby
-			 * bolo mozne menit (switch -e) nazov suboru, dalo sa to sem
-			 * 24/02/2000A.D. -- urobil som to presne tak, ako bolo kedysi
-			 */
+			// initExport(); bola kedysi na zaciatku, avsak kvoli tomu, aby bolo mozne menit (switch -e) nazov suboru, dalo sa to sem
+			// 24/02/2000A.D. -- urobil som to presne tak, ako bolo kedysi
 			/*
 			initExport();
 			hlavicka((char *)html_title[_global_jazyk]);
@@ -14514,15 +14565,10 @@ int main(int argc, char **argv){
 			break;
 		}
 		case SCRIPT_PARAM_FROM_QS:{
-			/* initExport(); bola kedysi na zaciatku, avsak kvoli tomu, aby
-			 * bolo mozne menit (switch -e) nazov suboru, dalo sa to sem
-			 * 24/02/2000A.D. -- urobil som to presne tak, ako bolo kedysi
-			 */
+			// initExport(); bola kedysi na zaciatku, avsak kvoli tomu, aby bolo mozne menit (switch -e) nazov suboru, dalo sa to sem
+			// 24/02/2000A.D. -- urobil som to presne tak, ako bolo kedysi
 			_main_LOG_to_Export("params == SCRIPT_PARAM_FROM_QS\n");
-			/* nasledujuca pasaz je tu preto, ze mozno bolo pouzite kombinovane
-			 * aj query string, aj formular (teda treba citat aj systemove
-			 * premenne WWW_...
-			 */
+			// nasledujuca pasaz je tu preto, ze mozno bolo pouzite kombinovane aj query string, aj formular (teda treba citat aj systemove premenne WWW_...)
 
 _main_SIMULACIA_QS:
 			_main_LOG_to_Export("---getting query type from query string (query_string == %s):\n", query_string);
@@ -14536,30 +14582,24 @@ _main_SIMULACIA_QS:
 			Log("2005-08-15, pomocn˝ v˝pis: query_type == %d\n", query_type);
 
 			_main_LOG_to_Export("---scanning for system variables WWW_...: started...\n");
-			/* historicka poznamka:                          (01/02/2000A.D.)
-			 * kedysi tu tato pasaz (podla casti `case SCRIPT_PARAM_FROM_FORM')
-			 * nebola, avsak pretoze to neumoznovalo `mixovane' dotazy
-			 * (ked je nieco v QS a navyse, uncgi.c vlozi (aj QS aj) ostatne veci
-			 *  z formulara do systemovych premennych WWW_...),
-			 * zmenili sme to tak, ze sa tu precitaju WWW_... a potom parsuje qs
-			 */
+			// historicka poznamka:                          (01/02/2000A.D.)
+			// kedysi tu tato pasaz (podla casti `case SCRIPT_PARAM_FROM_FORM') nebola, avsak pretoze to neumoznovalo `mixovane' dotazy
+			// (ked je nieco v QS a navyse, uncgi.c vlozi (aj QS aj) ostatne veci z formulara do systemovych premennych WWW_...),
+			// zmenili sme to tak, ze sa tu precitaju WWW_... a potom parsuje qs
 
-			/* 2005-03-28: Zmenene poradie. POST dotazy handlovane vyssie sposobom uncgi. */
+			// 2005-03-28: Zmenene poradie. POST dotazy handlovane vyssie sposobom uncgi.
 			_main_LOG_to_Export("spustam setForm();\n");
 			ret = setForm();
 			_main_LOG_to_Export("spat po skonceni setForm()\n");
 
 			// query_type = getQueryTypeFrom_WWW();
-			/* zistili sme, aky je typ dotazu podla formulara */
+			// zistili sme, aky je typ dotazu podla formulara
 			if((ret == SUCCESS) && (query_type != PRM_NONE) && (query_type != PRM_UNKNOWN)){
-				/* znamena to teda, ze existuje systemova premenna,
-				 * oznacujuca typ dotazu ==> treba nacitat z formulara resp.
-				 * systemovych premennych WWW_...
-				 */
+				// znamena to teda, ze existuje systemova premenna, oznacujuca typ dotazu ==> treba nacitat z formulara resp. systemovych premennych WWW_...
 				_main_LOG_to_Export("spustam getForm();\n");
 				ret = getForm();
 				_main_LOG_to_Export("params from system variables WWW_...:\n");
-				_main_LOG_to_Export_PARAMS; /* 2003-08-13, dane do #define */
+				_main_LOG_to_Export_PARAMS; // 2003-08-13, dane do #define
 				_main_LOG_to_Export("spat po skonceni getForm()\n");
 				_main_LOG_to_Export("2006-12-14: pom_MODLITBA == `%s'\n", pom_MODLITBA);
 			}
@@ -14583,12 +14623,12 @@ _main_SIMULACIA_QS:
 		case PRM_SVIATOK:		_main_LOG_to_Export("PRM_SVIATOK\n"); break;
 		case PRM_MESIAC_ROKA:	_main_LOG_to_Export("PRM_MESIAC_ROKA\n"); break;
 		case PRM_DNES:			_main_LOG_to_Export("PRM_DNES\n"); break;
-		/* pridane 2003-07-04, batch mode */
+		// pridane 2003-07-04, batch mode
 		case PRM_BATCH_MODE:	_main_LOG_to_Export("PRM_BATCH_MODE\n"); break;
 		default:				_main_LOG_to_Export("(sem by sa to nemalo dostaù)\n"); break;
 	}
 
-	_main_LOG_to_Export_PARAMS; /* 2003-08-13, dane do #define */
+	_main_LOG_to_Export_PARAMS; // 2003-08-13, dane do #define
 
 	if(query_type == PRM_MESIAC_ROKA){
 		mystrcpy(pom_DEN, STR_VSETKY_DNI, SMALL);
@@ -14608,7 +14648,7 @@ _main_SIMULACIA_QS:
 
 			// 2006-07-12: pridanÈ parsovanie jazyka kvÙli jazykov˝m mut·ci·m 
 			// 2009-08-05: predsunutÈ vyööie (aj tu sme to pre istotu ponechali)
-			_main_LOG_to_Export("zisùujem jazyk...\n");
+			_main_LOG_to_Export("zisùujem jazyk (pom_JAZYK == %s)...\n", pom_JAZYK);
 			_global_jazyk = atojazyk(pom_JAZYK);
 			if(_global_jazyk == JAZYK_UNDEF){
 				_global_jazyk = JAZYK_SK;
@@ -14940,4 +14980,4 @@ _main_end:
 	return 0; // 2003-07-14, kvoli gcc version 3.2.2 20030222 (Red Hat Linux 3.2.2-5) christ-net.sk
 }
 
-#endif /* __BREVIAR_CPP_ */
+#endif // __BREVIAR_CPP_
