@@ -43,11 +43,11 @@ or sur like '2 Kr %'
 
 select -- top 100 
 * from lc
-where sur like 'Ezd%'
-or sur like 'Ezd%'
+where sur like 'Tob%'
+-- or sur like 'Ezd%'
 order by 2
 
 /*
-select * from biblia where spis = 'Ezd'
+select * from biblia where spis = 'Tob'
 and nvg is not null
 */
