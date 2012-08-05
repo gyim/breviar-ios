@@ -8,6 +8,7 @@
     <uses-sdk android:targetSdkVersion="8"/>
     <application android:label="@string/app_name" android:icon="@drawable/icon">
         <activity android:name="Breviar"
+                  android:configChanges="orientation"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
