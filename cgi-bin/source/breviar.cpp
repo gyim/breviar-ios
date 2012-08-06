@@ -13340,11 +13340,6 @@ short int parseQueryString(void){
 			Log("jazyk zistený (%s).\n", pom_JAZYK);
 		}
 	}
-	// 2012-07-23: doplnené
-	if((i <= 0) && (equalsi(pom_JAZYK, STR_EMPTY))){
-		mystrcpy(pom_JAZYK, nazov_jazyka[JAZYK_SK], SMALL);
-		Log("jazyk zistený (%s) (i <= 0).\n", pom_JAZYK);
-	}
 
 	// 2010-08-04: pridané kvôli jazykovým mutáciám -- kalendár 
 	//             pôvodná poznámka pre while cyklus resp. inicializáciu i: param[0] by mal síce obsahova typ akcie, ale radšej kontrolujeme aj 0
@@ -14637,6 +14632,12 @@ _main_SIMULACIA_QS:
 				_main_LOG_to_Export("2006-12-14: pom_MODLITBA == `%s'\n", pom_MODLITBA);
 			}
 			_main_LOG_to_Export("---scanning for system variables WWW_...:finished.\n");
+
+			// 2012-07-23: doplnené; 2012-08-06(riso): Default jazyk chceme nastavit az po volani getForm, WWW_j sa pouziva na prepinanie jazyka v Androide.
+			if(equalsi(pom_JAZYK, STR_EMPTY)){
+				mystrcpy(pom_JAZYK, nazov_jazyka[JAZYK_SK], SMALL);
+				Log("default jazyk (%s).\n", pom_JAZYK);
+			}
 
 			break;
 		}
