@@ -915,6 +915,7 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_VESZPREM_FOEGYH_T        80
 #define LOKAL_SLAV_SZATMAR                  81
 #define LOKAL_SLAV_CESKO_BRNO               82
+#define LOKAL_SLAV_SVIATOK_OP_ZENY          83
 
 // 2010-08-03: pridaný kalendár
 #define KALENDAR_NEURCENY                   0
