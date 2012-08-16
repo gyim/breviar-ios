@@ -4250,6 +4250,15 @@ const char *text_JUN_02_OFM[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_JUN_02_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Sadoka, kòaza, a spoloèníkov, muèeníkov",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_JUN_03[POCET_JAZYKOV + 1] = 
 {"Sv. Karola Lwangu a spoloèníkov, muèeníkov",
  "Sv. Karla Lwangy a druhù, muèedníkù",
@@ -4259,14 +4268,14 @@ const char *text_JUN_03[POCET_JAZYKOV + 1] =
  "Sv. Karla Lwangy a druhù, muèedníkù",
  "Lwanga Szent Károly és társai, vértanúk",
  };
-const char *text_JUN_04_CZOP[POCET_JAZYKOV + 1] = 
-{"",
+const char *text_JUN_04_CZ[POCET_JAZYKOV + 1] = 
+{"Sv. Petra Veronského, kòaza a muèeníka",
  "",
  "",
- "la_",
+ "",
  "",
  "Sv. Petra Veronského, knìze a muèedníka",
- "hu_",
+ "",
  };
 const char *text_JUN_04_HU[POCET_JAZYKOV + 1] = 
 {"",
@@ -4313,14 +4322,14 @@ const char *text_JUN_08_OFM[POCET_JAZYKOV + 1] =
  "",
  "",
  };
-const char *text_JUN_08_CZOP[POCET_JAZYKOV + 1] = 
-{"",
+const char *text_JUN_08_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Diany a Cecílie, panien",
  "",
  "",
- "la_",
+ "",
  "",
  "Bl. Diany Andalo a Cecílie, panen, mnišek",
- "hu_",
+ "",
  };
 const char *text_JUN_09[POCET_JAZYKOV + 1] = 
 {"Sv. Efréma, diakona a uèite¾a Cirkvi",
@@ -4340,11 +4349,11 @@ const char *text_JUN_09_SJ[POCET_JAZYKOV + 1] =
  "",
  "",
  };
-const char *text_JUN_10_CZOP[POCET_JAZYKOV + 1] = 
-{"",
+const char *text_JUN_10_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Jána Dominiciho, biskupa",
  "",
  "",
- "la_",
+ "",
  "",
  "Bl. Jana Dominiciho, biskupa",
  "",
@@ -4360,6 +4369,15 @@ const char *text_JUN_11[POCET_JAZYKOV + 1] =
  };
 const char *text_JUN_12_SDB[POCET_JAZYKOV + 1] = 
 {"Bl. Františka K&#281;syho a spoloèníkov, muèeníkov", // Bl. Františka Kesyho a spoloèníkov, muèeníkov (small latin letter e with ogonek)
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_JUN_12_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Štefana Bandelliho, kòaza",
  "",
  "",
  "",
@@ -4484,6 +4502,15 @@ const char *text_JUN_17_OFM[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_JUN_18_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Hosanny z Mantovy, panny",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_JUN_19[POCET_JAZYKOV + 1] = 
 {"Sv. Romualda, opáta",
  "Sv. Romualda, opata",
@@ -4549,6 +4576,15 @@ const char *text_JUN_22_HU[POCET_JAZYKOV + 1] =
  };
 const char *text_JUN_23_SDB[POCET_JAZYKOV + 1] = 
 {"Sv. Jozefa Cafassa, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_JUN_23_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Inocenta V., pápeža",
  "",
  "",
  "",

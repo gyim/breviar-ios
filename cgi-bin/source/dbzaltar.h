@@ -263,14 +263,11 @@ extern const char *text_KVETNA_NEDELA[POCET_JAZYKOV + 1];
 extern const char *text_JUN_01[POCET_JAZYKOV + 1];
 extern const char *text_JUN_02[POCET_JAZYKOV + 1];
 extern const char *text_JUN_03[POCET_JAZYKOV + 1];
-extern const char *text_JUN_04_CZOP[POCET_JAZYKOV + 1];
 extern const char *text_JUN_04_HU[POCET_JAZYKOV + 1];
 extern const char *text_JUN_05[POCET_JAZYKOV + 1];
 extern const char *text_JUN_06[POCET_JAZYKOV + 1];
 extern const char *text_JUN_08_HU[POCET_JAZYKOV + 1];
-extern const char *text_JUN_08_CZOP[POCET_JAZYKOV + 1];
 extern const char *text_JUN_09[POCET_JAZYKOV + 1];
-extern const char *text_JUN_10_CZOP[POCET_JAZYKOV + 1];
 extern const char *text_JUN_11[POCET_JAZYKOV + 1];
 extern const char *text_JUN_13[POCET_JAZYKOV + 1];
 extern const char *text_JUN_14_HU[POCET_JAZYKOV + 1];
@@ -660,5 +657,12 @@ extern const char *text_MAJ_27_OP[POCET_JAZYKOV + 1];
 extern const char *text_MAJ_28_OP[POCET_JAZYKOV + 1];
 extern const char *text_MAJ_29_OP[POCET_JAZYKOV + 1];
 extern const char *text_MAJ_30_OP[POCET_JAZYKOV + 1];
+extern const char *text_JUN_02_OP[POCET_JAZYKOV + 1];
+extern const char *text_JUN_04_CZ[POCET_JAZYKOV + 1];
+extern const char *text_JUN_08_OP[POCET_JAZYKOV + 1];
+extern const char *text_JUN_10_OP[POCET_JAZYKOV + 1];
+extern const char *text_JUN_12_OP[POCET_JAZYKOV + 1];
+extern const char *text_JUN_18_OP[POCET_JAZYKOV + 1];
+extern const char *text_JUN_23_OP[POCET_JAZYKOV + 1];
 
 #endif // __DBZALTAR_H_
