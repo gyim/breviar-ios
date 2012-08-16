@@ -4721,6 +4721,24 @@ const char *text_JUL_04_CZ[POCET_JAZYKOV + 1] =
  "Sv. Prokopa, opata",
  "",
  };
+const char *text_JUL_04_1_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Kataríny Jarrigeovej, panny",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_JUL_04_2_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Petra Juraja Frassatiho, laika",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_JUL_05[POCET_JAZYKOV + 1] = 
 {"Sv. Cyrila a Metoda, slovanských vierozvestov, apoštolov",
  "Sv. Cyrila, mnicha, a Metodìje, biskupa, patronù Evropy, hlavních patronù Moravy",
@@ -4766,6 +4784,24 @@ const char *text_JUL_07_SDB[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_JUL_07_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Benedikta XI., pápeža",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_JUL_08_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Hadriána Fortescuea, otca rodiny a muèeníka",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_JUL_08_HU[POCET_JAZYKOV + 1] = 
 {"",
  "",
@@ -4784,8 +4820,8 @@ const char *text_JUL_09[POCET_JAZYKOV + 1] =
  "Sv. Augustina Žao Ronga, knìze a jeho druhù, muèedníkù",
  "Szent Zhao Rong Ágoston áldozópap és társai, kínai vértanúk",
  };
-const char *text_JUL_09_CZOP[POCET_JAZYKOV + 1] = 
-{"",
+const char *text_JUL_09_OP[POCET_JAZYKOV + 1] = 
+{"Sv. Jána Kolínskeho, kòaza, a spoloèníkov, muèeníkov",
  "",
  "",
  "",
@@ -4828,6 +4864,15 @@ const char *text_JUL_13[POCET_JAZYKOV + 1] =
  "",
  "Sv. Jindøicha",
  "Szent Henrik",
+ };
+const char *text_JUL_13_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Jakuba z Varazze, biskupa",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_JUL_14[POCET_JAZYKOV + 1] = 
 {"Sv. Kamila de Lellis, kòaza",
@@ -4910,14 +4955,14 @@ const char *text_JUL_17_CZ[POCET_JAZYKOV + 1] =
  "Bl. Èeslava a sv. Hyacinta, knìží",
  "",
  };
-const char *text_JUL_17_CZOP[POCET_JAZYKOV + 1] = 
-{"",
+const char *text_JUL_17_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Èeslava Po¾ského, kòaza",
  "",
  "",
- "la_",
+ "",
  "",
  "Bl. Èeslava z Polska, knìze",
- "hu_",
+ "",
  };
 const char *text_JUL_18_HU[POCET_JAZYKOV + 1] = 
 {"",
@@ -4927,6 +4972,15 @@ const char *text_JUL_18_HU[POCET_JAZYKOV + 1] =
  "",
  "",
  "Szent Hedvig királyné",
+ };
+const char *text_JUL_18_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Bartolomeja od Muèeníkov, biskupa",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_JUL_20[POCET_JAZYKOV + 1] = 
 {"Sv. Apolinára, biskupa a muèeníka",
@@ -4982,6 +5036,24 @@ const char *text_JUL_24_HU[POCET_JAZYKOV + 1] =
  "",
  "Árpád-házi szent Kinga szûz", // 2011-07-05: sv. Sarbela v HU majú 27. júla
  };
+const char *text_JUL_24_1_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Jany z Orvieta, panny",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_JUL_24_2_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Augustína z Biella, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_JUL_25[POCET_JAZYKOV + 1] = 
 {"Sv. Jakuba, apoštola",
  "Sv. Jakuba, apoštola",
@@ -5007,6 +5079,15 @@ const char *text_JUL_27[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Gorazda a druhù",
+ "",
+ };
+const char *text_JUL_27_OP[POCET_JAZYKOV + 1] = // SK OP: 28JUL
+{"Bl. Róberta Nuttera, kòaza a muèeníka",
+ "",
+ "",
+ "",
+ "",
+ "",
  "",
  };
 const char *text_JUL_29[POCET_JAZYKOV + 1] = 
