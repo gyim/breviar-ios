@@ -8163,8 +8163,8 @@ short int _spol_cast_je_panna(_struct_sc sc){
 	sprintf(_anchor, "%s%s", _anchor_head, ANCHOR_MODLITBA);\
 	_set_modlitba(modlitba, _file, _anchor);\
 	set_LOG_svsv;}
-// modlitba -- ina pre prve vespery ako rano i vecer dna
-#define _vlastna_cast_modlitba_prve_vesp {\
+// modlitba -- niekedy mÙûe byù in· napr. pre prvÈ veöpery (odliön· od modlitby pre rannÈ chv·ly a veöpery), niekedy odliön· pre rannÈ chv·ly a veöpery
+#define _vlastna_cast_modlitba_ina {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_MODLITBA);\
 	_set_modlitba(modlitba, _file, _anchor);\
 	set_LOG_svsv;}
@@ -8181,6 +8181,11 @@ short int _spol_cast_je_panna(_struct_sc sc){
 // modlitba -- na spomienku sv‰tca v pÙste
 #define _vlastna_cast_modlitba_spomprivileg {\
 	sprintf(_anchor, "%s%s", _anchor_head, ANCHOR_MODLITBA);\
+	_set_modlitba_spomprivileg(modlitba, _file, _anchor);\
+	set_LOG_svsv;}
+// modlitba -- na spomienku sv‰tca v pÙste (ak je odliön· modlitba pre rannÈ chv·ly a veöpery)
+#define _vlastna_cast_modlitba_spomprivileg_ina {\
+	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_MODLITBA);\
 	_set_modlitba_spomprivileg(modlitba, _file, _anchor);\
 	set_LOG_svsv;}
 // posv‰tnÈ ËÌtanie (2. hagiografickÈ ËÌtanie) -- na spomienku sv‰tca v pÙste
@@ -8335,7 +8340,7 @@ short int _spol_cast_je_panna(_struct_sc sc){
 #define _spolocna_cast_magnifikat		_vlastna_cast_magnifikat
 #define _spolocna_cast_prosby			_vlastna_cast_prosby
 #define _spolocna_cast_modlitba			_vlastna_cast_modlitba
-#define _spolocna_cast_modlitba_prve_vesp _vlastna_cast_modlitba_prve_vesp
+#define _spolocna_cast_modlitba_prve_vesp _vlastna_cast_modlitba_ina
 /* #define _spolocna_cast_antifony		_vlastna_cast_antifony*/
 // ... az na antifony...
 // 2009-11-10: upravenÈ pre modlitbu cez deÚ
@@ -10461,10 +10466,11 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_hymnus;
 							_vlastna_cast_2citanie;
-							_vlastna_cast_modlitba;
+							_vlastna_cast_modlitba; // alebo ako na rannÈ chv·ly
 
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_full_okrem_antifon_a_prosieb(modlitba);
+							_vlastna_cast_modlitba_ina; // alebo ako na veöpery
 
 							break;
 						}
@@ -10995,6 +11001,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							}
 							else{
 								_vlastna_cast_full_okrem_antifon_a_prosieb(modlitba);
+								// _vlastna_cast_modlitba_ina; // Alebo ako na veöpery.
 							}
 
 							modlitba = MODL_POSV_CITANIE;
@@ -11002,7 +11009,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 								_vlastna_cast_full(modlitba);
 							}
 							else{
-								_vlastna_cast_modlitba;
+								_vlastna_cast_modlitba; // Modlitba ako na rannÈ chv·ly alebo na veöpery.
 								_vlastna_cast_2citanie;
 							}
 
@@ -11012,6 +11019,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 							}
 							else{
 								_vlastna_cast_full_okrem_antifon_a_prosieb(modlitba);
+								_vlastna_cast_modlitba_ina; // Alebo ako na rannÈ chv·ly.
 							}
 
 							break;
@@ -13097,7 +13105,12 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 
 								modlitba = MODL_VESPERY;
 								_vlastna_cast_magnifikat_spomprivileg;
-								_vlastna_cast_modlitba_spomprivileg;
+								if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_OP)){
+									_vlastna_cast_modlitba_spomprivileg_ina;
+								}
+								else{
+									_vlastna_cast_modlitba_spomprivileg;
+								}
 
 								modlitba = MODL_POSV_CITANIE;
 								_vlastna_cast_2citanie_spomprivileg;
@@ -13119,7 +13132,12 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 
 								modlitba = MODL_VESPERY;
 								_vlastna_cast_magnifikat;
-								_vlastna_cast_modlitba;
+								if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_OP)){
+									_vlastna_cast_modlitba_ina;
+								}
+								else{
+									_vlastna_cast_modlitba;
+								}
 							}// nie je_privileg
 							break;
 						}
@@ -15600,6 +15618,7 @@ label_25_MAR:
 
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_full(modlitba);
+							_vlastna_cast_modlitba_ina; // Alebo ako na rannÈ chv·ly.
 							// 2012-04-02: doplnenÈ ûalmy, ktorÈ zatiaæ nikde inde nie s˙ v tomto radenÌ pouûitÈ
 							set_zalm(1, modlitba, "z31.htm", "ZALM31,20-25");
 							set_zalm(2, modlitba, "z84.htm", "ZALM84_OP");
@@ -19604,7 +19623,7 @@ label_25_MAR:
 
 						modlitba = MODL_PRVE_VESPERY;
 						_vlastna_cast_full(modlitba);
-						_vlastna_cast_modlitba_prve_vesp;
+						_vlastna_cast_modlitba_ina;
 						_set_zalmy_sviatok_sv_muzov(modlitba);
 
 						modlitba = MODL_INVITATORIUM;
@@ -19900,7 +19919,7 @@ label_25_MAR:
 
 						modlitba = MODL_PRVE_VESPERY;
 						_vlastna_cast_full(modlitba);
-						_vlastna_cast_modlitba_prve_vesp;
+						_vlastna_cast_modlitba_ina;
 						_set_zalmy_sviatok_apostolov(modlitba);
 
 						modlitba = MODL_PRVE_KOMPLETORIUM;
@@ -22542,7 +22561,7 @@ label_25_MAR:
 
 						modlitba = MODL_PRVE_VESPERY;
 						_vlastna_cast_full(modlitba);
-						_vlastna_cast_modlitba_prve_vesp;
+						_vlastna_cast_modlitba_ina;
 						_set_zalmy_sviatok_panien(modlitba);
 
 						modlitba = MODL_INVITATORIUM;
