@@ -4308,7 +4308,7 @@ const char *text_JUN_03[POCET_JAZYKOV + 1] =
  "Sv. Karla Lwangy a druhù, muèedníkù",
  "Lwanga Szent Károly és társai, vértanúk",
  };
-const char *text_JUN_04_CZ[POCET_JAZYKOV + 1] = 
+const char *text_JUN_04_OP[POCET_JAZYKOV + 1] = 
 {"Sv. Petra Veronského, kòaza a muèeníka",
  "",
  "",
