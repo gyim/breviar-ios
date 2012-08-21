@@ -5781,9 +5781,7 @@ short int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, short int rok, short
 	}
 	*/
 
-	/* nasledovna pasaz pridana 28/03/2000A.D. -- aby sme dobre kontrolovali, ci vobec mozeme
-	 * spustit generovanie modlitby
-	 */
+	// nasledovna pasaz pridana 28/03/2000A.D. -- aby sme dobre kontrolovali, ci vobec mozeme spustit generovanie modlitby
 	if((poradie_svateho == 4) && (_global_den.denvt != DEN_SOBOTA)){
 		hlavicka((char *)html_title[_global_jazyk]);
 		Export("NemÙûete poûadovaù t˙to modlitbu, pretoûe nie je sobota.\n");
@@ -5791,10 +5789,8 @@ short int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, short int rok, short
 		Log("(poradie_svateho == 4) && (_global_den.denvt != DEN_SOBOTA), so returning FAILURE...\n");
 		return FAILURE;
 	}
-	/* toto sa vypisovalo aj pre "detaily" (tlacidlo na webe), ked je MODL_NEURCENA,
-	 * preto som `modlitba >= MODL_VESPERY' upravil na `(modlitba == MODL_VESPERY) || (modlitba == MODL_KOMPLETORIUM)'
-	 * aby kontroloval len vespery a kompletorium.
-	 * 2003-07-01 */
+	// toto sa vypisovalo aj pre "detaily" (tlacidlo na webe), ked je MODL_NEURCENA, preto som `modlitba >= MODL_VESPERY' upravil na `(modlitba == MODL_VESPERY) || (modlitba == MODL_KOMPLETORIUM)'
+	// aby kontroloval len vespery a kompletorium. | 2003-07-01
 	else if((poradie_svateho == 4) && (_global_den.denvt == DEN_SOBOTA) && ((modlitba == MODL_VESPERY) || (modlitba == MODL_KOMPLETORIUM))){
 		hlavicka((char *)html_title[_global_jazyk]);
 		Export("NemÙûete poûadovaù t˙to modlitbu, pretoûe `Spomienka Panny M·rie v sobotu' nem· veöpery ani kompletÛrium.\n");
@@ -6040,7 +6036,7 @@ short int ma_na_vyber_spolocne_casti(short int poradie_svateho){
  * 2011-07-03: pridan˝ parameter, Ëi chce tlaËiù liturgick˙ farbu (pouûitie v navig·cii)
  *
  */
-void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short int den_zoznam /* = ANO */){
+void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short int den_zoznam, short int zobrazit_mcd){
 // 2005-03-21: Pridany dalsi typ exportu 
 // 2009-08-11: pre tento typ exportu berieme do ˙vahy parameter 'M'
 // 2011-10-03: predsunut· Ëasù, ktor· bola s˙Ëasùou #define BUTTONS
@@ -6317,51 +6313,80 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 			}
 		}
 
-		// modlitba cez deÚ (predpoludnÌm) -- button
-		i = MODL_PREDPOLUDNIM;
-		_export_rozbor_dna_button_modlitba(typ, poradie_svateho, i, pom, /* doplnkova_psalmodia */ ANO, som_v_tabulke);
+		// Export("<!-- zobrazit_mcd == %d | poradie_svateho == %d -->\n", zobrazit_mcd, poradie_svateho);
 
-		// oddelenie
-		if(som_v_tabulke == ANO){
+		// 2012-08-21: zobraziù buttony pre modlitbu cez deÚ len ak nejde o æubovoæn˙ spomienku (vtedy nemaj˙ v˝znam)
+		if((zobrazit_mcd == ANO) || (poradie_svateho == 0)){
+
+			// modlitba cez deÚ (predpoludnÌm) -- button
+			i = MODL_PREDPOLUDNIM;
+			_export_rozbor_dna_button_modlitba(typ, poradie_svateho, i, pom, /* doplnkova_psalmodia */ ANO, som_v_tabulke);
+
+			// oddelenie
+			if(som_v_tabulke == ANO){
+				if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTONY_USPORNE) == BIT_OPT_2_BUTTONY_USPORNE){
+					Export("</td>\n<td valign=\"middle\" align=\"center\">\n");
+				}
+				else{
+					Export("</td>\n<td valign=\"middle\">\n");
+				}
+			}
+
+			// modlitba cez deÚ (napoludnie) -- button
+			i = MODL_NAPOLUDNIE;
+			_export_rozbor_dna_button_modlitba(typ, poradie_svateho, i, pom, /* doplnkova_psalmodia */ ANO, som_v_tabulke);
+
+			// oddelenie
+			if(som_v_tabulke == ANO){
+				if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTONY_USPORNE) == BIT_OPT_2_BUTTONY_USPORNE){
+					Export("</td>\n<td valign=\"middle\" align=\"left\">\n");
+				}
+				else{
+					Export("</td>\n<td valign=\"middle\">\n");
+				}
+			}
+
+			// modlitba cez deÚ (popoludnÌ) -- button
+			i = MODL_POPOLUDNI;
+			_export_rozbor_dna_button_modlitba(typ, poradie_svateho, i, pom, /* doplnkova_psalmodia */ ANO, som_v_tabulke);
+
+			// oddelenie
+			if(som_v_tabulke == ANO){
+				if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTONY_USPORNE) == BIT_OPT_2_BUTTONY_USPORNE){
+					Export("</td>\n");
+					Export("</tr>\n");
+					Export("<!-- riadok -->\n");
+					Export("<tr>\n");
+					Export("<td align=\"right\">\n");
+				}
+				else{
+					Export("</td>\n<td valign=\"middle\">\n");
+				}
+			}
+
+		}// zobraziù buttony pre modlitbu cez deÚ
+		else{
+			// pre "ne˙spornÈ" zobrazenie treba kvÙli zarovnaniu doplniù pr·zdne 3 bunky tabuæky
 			if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTONY_USPORNE) == BIT_OPT_2_BUTTONY_USPORNE){
-				Export("</td>\n<td valign=\"middle\" align=\"center\">\n");
+				Export("<!-- nezobraziù mcd -->\n");
 			}
 			else{
-				Export("</td>\n<td valign=\"middle\">\n");
-			}
-		}
+				Export(HTML_NONBREAKING_SPACE);
 
-		// modlitba cez deÚ (napoludnie) -- button
-		i = MODL_NAPOLUDNIE;
-		_export_rozbor_dna_button_modlitba(typ, poradie_svateho, i, pom, /* doplnkova_psalmodia */ ANO, som_v_tabulke);
-
-		// oddelenie
-		if(som_v_tabulke == ANO){
-			if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTONY_USPORNE) == BIT_OPT_2_BUTTONY_USPORNE){
-				Export("</td>\n<td valign=\"middle\" align=\"left\">\n");
-			}
-			else{
-				Export("</td>\n<td valign=\"middle\">\n");
-			}
-		}
-
-		// modlitba cez deÚ (popoludnÌ) -- button
-		i = MODL_POPOLUDNI;
-		_export_rozbor_dna_button_modlitba(typ, poradie_svateho, i, pom, /* doplnkova_psalmodia */ ANO, som_v_tabulke);
-
-		// oddelenie
-		if(som_v_tabulke == ANO){
-			if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTONY_USPORNE) == BIT_OPT_2_BUTTONY_USPORNE){
 				Export("</td>\n");
-				Export("</tr>\n");
-				Export("<!-- riadok -->\n");
-				Export("<tr>\n");
-				Export("<td align=\"right\">\n");
+				Export("<td valign=\"middle\">\n");
+
+				Export(HTML_NONBREAKING_SPACE);
+
+				Export("</td>\n");
+				Export("<td valign=\"middle\">\n");
+
+				Export(HTML_NONBREAKING_SPACE);
+
+				Export("</td>\n");
+				Export("<td valign=\"middle\">\n");
 			}
-			else{
-				Export("</td>\n<td valign=\"middle\">\n");
-			}
-		}
+		}// NEzobraziù buttony pre modlitbu cez deÚ
 
 		// spomienka panny m·rie v sobotu nem· veöpery (ani kompletÛrium po nich)
 		// 2003-07-15: spr·vne odsadenÈ
@@ -6651,7 +6676,7 @@ void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO 
 					datum.den = 28;
 			}
 
-			// predoöl˝ rok -- button
+			// << predoöl˝ rok -- button
 			if(_global_opt_batch_monthly == NIE){
 				sprintf(pom, HTML_LINK_CALL1,
 					script_name,
@@ -6762,7 +6787,7 @@ void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO 
 		}
 		Log("str_month == %s\n", str_month);
 
-		// predoöl˝ deÚ -- button
+		// << predoöl˝ deÚ -- button
 		if(_global_opt_batch_monthly == NIE){
 			sprintf(pom, HTML_LINK_CALL1,
 				script_name,
@@ -6836,7 +6861,7 @@ void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO 
 		}
 		Log("str_month == %s\n", str_month);
 
-		// nasleduj˙ci deÚ -- button
+		// >> nasleduj˙ci deÚ -- button
 		if(_global_opt_batch_monthly == NIE){
 			sprintf(pom, HTML_LINK_CALL1,
 				script_name,
@@ -6892,7 +6917,7 @@ void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO 
 			else
 				datum.den = _global_den.den;
 
-			// nasledovn˝ mesiac -- button
+			// >> nasledovn˝ mesiac -- button
 			if(_global_opt_batch_monthly == NIE){
 				sprintf(pom, HTML_LINK_CALL1,
 					script_name,
@@ -8078,6 +8103,7 @@ void _export_rozbor_dna(short int typ){
 	char pom2[SMALL] = STR_EMPTY;
 	char pom3[SMALL] = STR_EMPTY;
 	short int som_v_tabulke = ANO; // 2009-08-26: Ëi sa pouûÌva tabuæka; beûne pre web ·no, pre export pre mobilnÈ zariadenia [export_monthly_druh >= 3] netreba tabuæku
+	short int aj_feria = NIE;
 
 	Log("-- _export_rozbor_dna(typ == %d): zaËiatok...\n", typ);
 
@@ -8230,29 +8256,29 @@ void _export_rozbor_dna(short int typ){
 			|| ((_global_den.smer > _global_svaty3.smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY3)
 			){
 			if(_global_den.smer > _global_svaty1.smer){
-				_export_rozbor_dna_buttons(typ, 1, ANO);
+				_export_rozbor_dna_buttons(typ, 1, ANO, ANO);
 			}
 			else if(_global_den.smer > _global_svaty2.smer){
-				_export_rozbor_dna_buttons(typ, 2, ANO);
+				_export_rozbor_dna_buttons(typ, 2, ANO, ANO);
 			}
 			else if(_global_den.smer > _global_svaty3.smer){
-				_export_rozbor_dna_buttons(typ, 3, ANO);
+				_export_rozbor_dna_buttons(typ, 3, ANO, ANO);
 			}
 		}
 		else{
-			_export_rozbor_dna_buttons(typ, 0, ANO);
+			_export_rozbor_dna_buttons(typ, 0, ANO, ANO);
 			// 2010-10-06: upravenÈ; v tejto vetve rozhodovania treba rieöiù to, ûe je splnen· z·kladn· podmienka (nedeæa alebo prik·zan˝ sviatok alebo smer < 5),
 			//             avöak nebola splnen· vyööie uveden· novo-upraven· podmienka o "prebitÌ" nedele napr. lok·lnou sl·vnosùou
 			if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
 				NEWLINE;
 				if(_global_den.smer > _global_svaty1.smer){
-					_export_rozbor_dna_buttons(typ, 1, ANO);
+					_export_rozbor_dna_buttons(typ, 1, ANO, ANO);
 				}
 				else if(_global_den.smer > _global_svaty2.smer){
-					_export_rozbor_dna_buttons(typ, 2, ANO);
+					_export_rozbor_dna_buttons(typ, 2, ANO, ANO);
 				}
 				else if(_global_den.smer > _global_svaty3.smer){
-					_export_rozbor_dna_buttons(typ, 3, ANO);
+					_export_rozbor_dna_buttons(typ, 3, ANO, ANO);
 				}
 			}
 		}
@@ -8271,33 +8297,37 @@ void _export_rozbor_dna(short int typ){
 			//             a eöte: "2010-05-21: odtiaæto presunutÈ potenci·lne vypisovanie (export) vöednÈho dÚa pred prvÈho sv‰tca, ak je æubovoæn· spomienka"
 			// 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3, aby sa zjednoduöila podmienka (platÌ len pre CZOP)
 			// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 aû 3
-			if(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY1) &&
-				(typ != EXPORT_DNA_VIAC_DNI)){
+			// 2012-08-21: cdoplnen· premenn· (kvÙli tomu, Ëi sa maj˙ pre sv‰tca 1 zobraziù buttons modlitba cez deÚ)
+			aj_feria = NIE;
+			if(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY1) && (typ != EXPORT_DNA_VIAC_DNI)){
 				// ak je to iba lubovolna spomienka, tak vsedny den
 				// 2010-05-21: NEWLINE; bolo pred; musÌme ho zaradiù za :)
-				_export_rozbor_dna_buttons(typ, 0, ANO);
+				aj_feria = ANO;
+			}
+			if(aj_feria == ANO){
+				_export_rozbor_dna_buttons(typ, 0, ANO, ANO);
 				NEWLINE;
 			}
 			// 2010-05-21: pÙvodne bolo: "sviatok, spomienka alebo æubovoæn· spomienka sv‰tÈho/sv‰t˝ch, ide prv ako vöedn˝ deÚ"; dnes ide prv len ak je to sviatok alebo spomienka 
 			// (a vlastne vtedy sa vöedn˝ deÚ vypisuje len pre lok·lne sviatky resp. spomienky) 
-			_export_rozbor_dna_buttons(typ, 1, ANO);
+			_export_rozbor_dna_buttons(typ, 1, ANO, !(aj_feria));
 			if(_global_pocet_svatych > 1){
 				NEWLINE;
-				_export_rozbor_dna_buttons(typ, 2, ANO);
+				_export_rozbor_dna_buttons(typ, 2, ANO, NIE);
 				if(_global_pocet_svatych > 2){
 					NEWLINE;
-					_export_rozbor_dna_buttons(typ, 3, ANO);
+					_export_rozbor_dna_buttons(typ, 3, ANO, NIE);
 				}
 			}
 		}// svaty ma prednost
 		else{
 		// prednost ma den
-			_export_rozbor_dna_buttons(typ, 0, ANO);
+			_export_rozbor_dna_buttons(typ, 0, ANO, ANO);
 		}
 	}// if(_global_pocet_svatych > 0)
 	else{
 		// obycajne dni, nie sviatok
-		_export_rozbor_dna_buttons(typ, 0, ANO);
+		_export_rozbor_dna_buttons(typ, 0, ANO, ANO);
 	}// if(equals(_global_den.meno, STR_EMPTY))
 
 	// este spomienka panny marie v sobotu, cl. 15
@@ -8311,7 +8341,7 @@ void _export_rozbor_dna(short int typ){
 			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY1) && (_global_pocet_svatych > 0))) &&
 		(typ != EXPORT_DNA_VIAC_DNI)){
 		NEWLINE;
-		_export_rozbor_dna_buttons(typ, 4, ANO);
+		_export_rozbor_dna_buttons(typ, 4, ANO, NIE);
 	}
 
 	if(typ == EXPORT_DNA_VIAC_DNI){
@@ -8890,7 +8920,7 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 		_export_rozbor_dna_buttons_dni(EXPORT_DNA_JEDEN_DEN, NIE);
 		// najprv dni, potom modlitby
 		Export("<table align=\"center\">\n<tr><td>\n");
-		_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN, _global_poradie_svaty, NIE);
+		_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN, _global_poradie_svaty, NIE, ANO);
 		Export("</td></tr>\n</table>\n");
 	}
 
@@ -8993,7 +9023,7 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 		Export("<!-- navig·cia koniec -->\n");
 
 		Export("<table align=\"center\">\n<tr><td>\n");
-		_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN, _global_poradie_svaty, NIE);
+		_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN, _global_poradie_svaty, NIE, ANO);
 		Export("</td></tr>\n</table>\n");
 		// najprv modlitby, potom dni
 		_export_rozbor_dna_buttons_dni(EXPORT_DNA_JEDEN_DEN, NIE);
@@ -9483,7 +9513,7 @@ void showAllPrayers(short int den, short int mesiac, short int rok, short int po
 		// najprv dni, potom modlitby
 		Export("<table align=\"center\">\n<tr><td>\n");
 		_global_linky = NIE;
-		_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN_LOCAL, _global_poradie_svaty, NIE);
+		_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN_LOCAL, _global_poradie_svaty, NIE, ANO);
 		_global_linky = _local_linky;
 		Export("</td></tr>\n</table>\n");
 	}
@@ -9540,7 +9570,7 @@ void showAllPrayers(short int den, short int mesiac, short int rok, short int po
 
 		Export("<table align=\"center\">\n<tr><td>\n");
 		_global_linky = NIE;
-		_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN_LOCAL, _global_poradie_svaty, NIE);
+		_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN_LOCAL, _global_poradie_svaty, NIE, ANO);
 		_global_linky = _local_linky;
 		Export("</td></tr>\n</table>\n");
 		// najprv modlitby, potom dni
