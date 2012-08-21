@@ -6315,7 +6315,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 
 		// Export("<!-- zobrazit_mcd == %d | poradie_svateho == %d -->\n", zobrazit_mcd, poradie_svateho);
 
-		// 2012-08-21: zobrazi buttony pre modlitbu cez deò len ak nejde o ¾ubovo¾nú spomienku (vtedy nemajú vıznam)
+		// 2012-08-21: zobrazi buttony pre modlitbu cez deò + kompletórium len ak nejde o ¾ubovo¾nú spomienku (vtedy nemajú vıznam)
 		if((zobrazit_mcd == ANO) || (poradie_svateho == 0)){
 
 			// modlitba cez deò (predpoludním) -- button
@@ -6364,7 +6364,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 				}
 			}
 
-		}// zobrazi buttony pre modlitbu cez deò
+		}// zobrazi buttony pre modlitbu cez deò + kompletórium
 		else{
 			// pre "neúsporné" zobrazenie treba kvôli zarovnaniu doplni prázdne 3 bunky tabu¾ky
 			if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTONY_USPORNE) == BIT_OPT_2_BUTTONY_USPORNE){
@@ -6386,7 +6386,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 				Export("</td>\n");
 				Export("<td valign=\"middle\">\n");
 			}
-		}// NEzobrazi buttony pre modlitbu cez deò
+		}// NEzobrazi buttony pre modlitbu cez deò + kompletórium
 
 		// spomienka panny márie v sobotu nemá vešpery (ani kompletórium po nich)
 		// 2003-07-15: správne odsadené
@@ -6406,9 +6406,15 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 				}
 			}
 
-			// kompletórium -- button
-			i = MODL_KOMPLETORIUM;
-			_export_rozbor_dna_button_modlitba(typ, poradie_svateho, i, pom, /* doplnkova_psalmodia */ NIE, som_v_tabulke);
+			// 2012-08-21: zobrazi buttony pre modlitbu cez deò + kompletórium len ak nejde o ¾ubovo¾nú spomienku (vtedy nemajú vıznam)
+			if((zobrazit_mcd == ANO) || (poradie_svateho == 0)){
+				// kompletórium -- button
+				i = MODL_KOMPLETORIUM;
+				_export_rozbor_dna_button_modlitba(typ, poradie_svateho, i, pom, /* doplnkova_psalmodia */ NIE, som_v_tabulke);
+			}// zobrazi buttony pre modlitbu cez deò + kompletórium
+			else{
+				Export("<!-- nezobrazi kompletórium -->\n");
+			}// NEzobrazi buttony pre modlitbu cez deò + kompletórium
 		}// if(poradie_svateho != 4) &&...
 		else{
 			// 2006-10-11: treba ešte jedno odsadenie, aby Detaily... boli pod sebou, ak ide napr. o sobotu
