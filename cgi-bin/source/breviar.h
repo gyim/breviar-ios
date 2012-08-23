@@ -50,6 +50,9 @@ extern short int query_type; // premenna obsahujuca PRM_..., deklarovana v mydef
 #define EXPORT_DNA_VIAC_DNI 2
 #define EXPORT_DNA_DNES 0
 
+#define EXPORT_TYP_WEB_MODE 0
+#define EXPORT_TYP_BATCH_MODE 1
+
 extern void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short int den_zoznam = ANO, short int zobrazit_mcd = ANO);
 extern void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes = ANO);
 
