@@ -8299,6 +8299,7 @@ void _export_rozbor_dna_zoznam(short int typ){
 	short int aj_feria = NIE;
 
 	Log("_export_rozbor_dna_zoznam(): zaèiatok...\n");
+	init_zoznam();
 
 	// pozor, hoci je nedela, predsa na nu mohlo pripadnut slavenie s vyssou prioritou
 	if((_global_den.denvt == DEN_NEDELA) ||
@@ -8433,6 +8434,13 @@ void _export_rozbor_dna_zoznam(short int typ){
 	Log("poèet == %d\n", pocet);
 	Log("_export_rozbor_dna_zoznam(): koniec.\n");
 }// _export_rozbor_dna_zoznam()
+
+void init_zoznam(void){
+	zoznam[0] = 0;
+	for(int i = 1; i < POCET_ZOZNAM; i++){
+		zoznam[i] = -1;
+	}
+}// init_zoznam()
 
 void Log_zoznam(void){
 	for(int i = 0; i < POCET_ZOZNAM; i++){
