@@ -8293,6 +8293,20 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int z
 #define POCET_ZOZNAM 6
 short int zoznam[POCET_ZOZNAM] = {0, -1, -1, -1, -1, -1}; // prvá hodnota, t. j. zoznam[0], urèuje poèet; ak je èíslo > 10, znamená to, že ide o * 10 kvôli informácii o tom, že sa neexportuje modlitba cez deò a kompletórium pre ¾ubovo¾né spomienky
 
+void init_zoznam(void){
+	zoznam[0] = 0;
+	for(int i = 1; i < POCET_ZOZNAM; i++){
+		zoznam[i] = -1;
+	}
+}// init_zoznam()
+
+void Log_zoznam(void){
+	for(int i = 0; i < POCET_ZOZNAM; i++){
+		Log("zoznam[%d] == %d\n", i, zoznam[i]);
+		// Export("zoznam[%d] == %d<br />\n", i, zoznam[i]);
+	}
+}// Log_zoznam()
+
 void _export_rozbor_dna_zoznam(short int typ){
 	short int pocet = 1; // poèet záznamov, ktoré sa exportujú (èi už riadky tabu¾ky alebo len zoznam)
 	short int poradie_svaty;
@@ -8434,20 +8448,6 @@ void _export_rozbor_dna_zoznam(short int typ){
 	Log("poèet == %d\n", pocet);
 	Log("_export_rozbor_dna_zoznam(): koniec.\n");
 }// _export_rozbor_dna_zoznam()
-
-void init_zoznam(void){
-	zoznam[0] = 0;
-	for(int i = 1; i < POCET_ZOZNAM; i++){
-		zoznam[i] = -1;
-	}
-}// init_zoznam()
-
-void Log_zoznam(void){
-	for(int i = 0; i < POCET_ZOZNAM; i++){
-		Log("zoznam[%d] == %d\n", i, zoznam[i]);
-		// Export("zoznam[%d] == %d<br />\n", i, zoznam[i]);
-	}
-}// Log_zoznam()
 
 void _export_rozbor_dna_interpretuj_zoznam(short int export_typ, short int typ, short int som_v_tabulke, char batch_command[MAX_STR], short int modlitba, short int d_from_m_from_r_from){
 	short int poradie_svaty;
