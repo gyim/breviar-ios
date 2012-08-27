@@ -6405,7 +6405,10 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 		// spomienka panny m·rie v sobotu nem· veöpery (ani kompletÛrium po nich)
 		// 2003-07-15: spr·vne odsadenÈ
 		// 2011-03-23: ak je (_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTON_PRVE_VESPERY) == BIT_OPT_2_BUTTON_PRVE_VESPERY, zobrazuj˙ sa prvÈ veöpery pre nedele a sl·vnosti priamo pre tie dni
-		if((poradie_svateho != 4) && !(((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTON_PRVE_VESPERY) == BIT_OPT_2_BUTTON_PRVE_VESPERY) && (_global_den.denvt == DEN_SOBOTA))){
+		// 2012-08-27: veöpery a kompletÛrium nem· zmysel zobrazovaù, ak ide o sobotu a Ôalöieho sv‰tÈho (pri viacer˝ch æubovoæn˝ch spomienkach)
+		if((poradie_svateho != 4) && !(((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTON_PRVE_VESPERY) == BIT_OPT_2_BUTTON_PRVE_VESPERY) && (_global_den.denvt == DEN_SOBOTA))
+			&& (((zobrazit_mcd == ANO) || (_global_den.denvt != DEN_SOBOTA)) || (poradie_svateho == 0))
+			){
 			// veöpery -- button
 			i = MODL_VESPERY;
 			_export_rozbor_dna_button_modlitba(typ, poradie_svateho, i, pom, /* doplnkova_psalmodia */ NIE, som_v_tabulke);
@@ -8210,10 +8213,13 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int z
 				fprintf(batch_export_file, "\n<p><b>%s</b><br>", nazov_modlitby(i));
 				export_month_nova_modlitba = 0;
 			}
-			if((a != 4) || (a == 4 && (i != MODL_VESPERY && i != MODL_KOMPLETORIUM))){ // 2006-01-31-TUTOLA; 2008-04-09 presunutÈ
+			// 2011-03-23: upravenÈ: negenerovaù veöpery pre soboty, ak je nastavenÈ (_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTON_PRVE_VESPERY) == BIT_OPT_2_BUTTON_PRVE_VESPERY
+			// 2012-08-27: veöpery a kompletÛrium nem· zmysel zobrazovaù, ak ide o sobotu a Ôalöieho sv‰tÈho (pri viacer˝ch æubovoæn˝ch spomienkach)
+			if((a != 4) || (a == 4 && (i != MODL_VESPERY && i != MODL_KOMPLETORIUM))
+				&& (((zobrazit_mcd == ANO) || (_global_den.denvt != DEN_SOBOTA)) || (a == 0))
+				){ // 2006-01-31-TUTOLA; 2008-04-09 presunutÈ
 				// 2011-03-14: nastavenie parametra o5 (_global_opt 5) pre modlitbu cez deÚ (beûn· alebo doplnkov· psalmÛdia) 
 				// 2011-03-16: upravenÈ tak, ûe je to len fakultatÌvne (ako odliön˝ s˙bor)
-				// 2011-03-23: upravenÈ: negenerovaù veöpery pre soboty, ak je nastavenÈ (_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTON_PRVE_VESPERY) == BIT_OPT_2_BUTTON_PRVE_VESPERY
 				// 2011-04-12: pouûÌva sa option 1 (jej upraven· hodnota _global_opt_casti_modlitby_orig)
 				// 2011-04-13: nemÙûeme porovn·vaù s _global_opt[1] (bola oËisten·), ale s _global_opt_casti_modlitby_orig (obsahuje pÙvodn˙ hodnotu)
 				if(((_global_opt_casti_modlitby_orig & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
@@ -8254,7 +8260,10 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int z
 
 			Log("/* generujem: %d `%s'... */\n", i, nazov_modlitby(i));
 			// 2011-03-23: upravenÈ: negenerovaù veöpery pre soboty, ak je nastavenÈ (_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTON_PRVE_VESPERY) == BIT_OPT_2_BUTTON_PRVE_VESPERY
-			if(((a != 4) || (a == 4 && (i != MODL_VESPERY && i != MODL_KOMPLETORIUM))) && !(((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTON_PRVE_VESPERY) == BIT_OPT_2_BUTTON_PRVE_VESPERY) && (_global_den.denvt == DEN_SOBOTA))){ // 2006-01-31-TUTOLA; 2008-04-09 presunutÈ
+			// 2012-08-27: veöpery a kompletÛrium nem· zmysel zobrazovaù, ak ide o sobotu a Ôalöieho sv‰tÈho (pri viacer˝ch æubovoæn˝ch spomienkach)
+			if(((a != 4) || (a == 4 && (i != MODL_VESPERY && i != MODL_KOMPLETORIUM))) && !(((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTON_PRVE_VESPERY) == BIT_OPT_2_BUTTON_PRVE_VESPERY) && (_global_den.denvt == DEN_SOBOTA))
+				&& (((zobrazit_mcd == ANO) || (_global_den.denvt != DEN_SOBOTA)) || (a == 0))
+				){ // 2006-01-31-TUTOLA; 2008-04-09 presunutÈ
 				if(_global_opt_append == YES){
 					fprintf(batch_file, "%s -0%d -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s\n", batch_command, 
 						_global_opt[OPT_0_SPECIALNE], _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[OPT_2_HTML_EXPORT], _global_opt[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_4_OFFLINE_EXPORT], 
