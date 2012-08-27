@@ -7520,7 +7520,7 @@ if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ)){
 			continue;
 		if((i == MODL_SPOL_CAST_ZA_ZOSNULYCH) || (i == MODL_SPOL_CAST_POSVIACKA_CHRAMU))
 			continue;
-		Export("<option>%s\n", nazov_spolc(i));
+		Export("<option%s>%s\n", (i != _global_opt[OPT_3_SPOLOCNA_CAST])? STR_EMPTY: html_option_selected, nazov_spolc(i));
 	}
 	Export("</select>\n");
 	Export("</td></tr>\n");
@@ -9004,7 +9004,7 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 
 		// najprv si rozkodujeme, co je v _global_den.spolcast
 		_struct_sc sc = _decode_spol_cast(_global_den.spolcast);
-		// pole WWW_MODL_OPT_3 // pokus: WWW_MODL_OPTF_3
+		// pole WWW_MODL_OPT_3 // 2012-08-27: zmenenÈ na WWW_MODL_OPTF_3
 		Export("<li>");
 		Export((char *)html_text_spol_casti_vziat_zo[_global_jazyk]);
 		Export(" \n");
@@ -9012,9 +9012,13 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 		if((sc.a1 != MODL_SPOL_CAST_NEURCENA) && (sc.a1 != MODL_SPOL_CAST_NEBRAT)){
 			Export("<option selected>%s\n", nazov_spolc(sc.a1));
 			if(sc.a2 != MODL_SPOL_CAST_NEURCENA){
-				Export("<option>%s\n", nazov_spolc(sc.a2));
+				// Export("<option>%s\n", nazov_spolc(sc.a2));
+				// 2012-08-27: prednastaviù podæa opt 3
+				Export("<option%s>%s\n", (sc.a2 != _global_opt[OPT_3_SPOLOCNA_CAST])? STR_EMPTY: html_option_selected, nazov_spolc(sc.a2));
 				if(sc.a3 != MODL_SPOL_CAST_NEURCENA){
-					Export("<option>%s\n", nazov_spolc(sc.a3));
+					// Export("<option>%s\n", nazov_spolc(sc.a3));
+					// 2012-08-27: prednastaviù podæa opt 3
+					Export("<option%s>%s\n", (sc.a3 != _global_opt[OPT_3_SPOLOCNA_CAST])? STR_EMPTY: html_option_selected, nazov_spolc(sc.a3));
 				}
 			}
 			if(je_mozne_spol_cast_nebrat(poradie_svaty)){
