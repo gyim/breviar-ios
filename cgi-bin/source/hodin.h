@@ -1836,7 +1836,7 @@ const char *html_text_option1_spolc_svaty[POCET_JAZYKOV + 1] =
 };
 
 const char *html_text_option1_spolc_svaty_explain[POCET_JAZYKOV + 1] = 
-{"Rubrika obsahujúca informáciu, z akej spoloènej èasti sa berú èasti zo spoloènej èasti k modlitbe svätého", 
+{"Rubrika obsahujúca informáciu, z akej spoloènej èasti sa berú èasti zo spoloènej èasti k modlitbe svätého.", 
  "", 
  "Displays communia info.", 
  "", 
