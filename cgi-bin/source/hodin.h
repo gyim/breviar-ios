@@ -1827,22 +1827,22 @@ const char *html_text_option1_skryt_popis_svaty_explain[POCET_JAZYKOV + 1] =
 
 const char *html_text_option1_spolc_svaty[POCET_JAZYKOV + 1] = 
 {"zobrazi, odkia¾ sa berú èasti zo spoloènej èasti k modlitbe svätého", 
- "", 
+ "zobrazit, odkud se berou spoleèné texty", 
  "display communia info", 
  "", 
  "", 
- "",
- ""
+ "zobrazit, odkud se berou spoleèné texty",
+ "megmutatni, honnan lettek véve a közös részek a szentek zsolozsmájához"
 };
 
 const char *html_text_option1_spolc_svaty_explain[POCET_JAZYKOV + 1] = 
 {"Rubrika obsahujúca informáciu, z akej spoloènej èasti sa berú èasti zo spoloènej èasti k modlitbe svätého.", 
- "", 
+ "Rubrika, která pro modlitby svatıch informuje, které spoleèné texty jsou uity.", 
  "Displays communia info.", 
  "", 
  "", 
- "",
- ""
+ "Rubrika, která pro modlitby svatıch informuje, které spoleèné texty jsou uity.",
+ "Rubrika, amely azt az információt tartalmazza, hogy melyik közös részbõl vannak véve a szentek zsolozsmájához tartozó közös részek."
 };
 
 const char *html_text_option1_vigilia[POCET_JAZYKOV + 1] = 
