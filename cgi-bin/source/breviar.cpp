@@ -1480,10 +1480,12 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 				if(equalsi(rest, modlparam)){
 #if defined(EXPORT_HTML_SPECIALS)
 					Export("[%s|%s:%s]", fname, strbuff, modlparam);
+/*
 #elif defined(EXPORT_HTML_FILENAME_ANCHOR)
 					Export("[%s|%s:%s]", fname, strbuff, modlparam);
 #elif defined(EXPORT_HTML_ANCHOR)
 					Export("%s:%s", strbuff, modlparam);
+*/
 #endif
 					if(equals(strbuff, INCLUDE_BEGIN)){
 						write = ANO;
@@ -1509,10 +1511,12 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 						}
 #if defined(EXPORT_HTML_SPECIALS)
 						Export("[%s:%s|rest_krizik=%s]", strbuff, modlparam, (rest_krizik == NULL) ? STR_EMPTY: rest_krizik);
+/*
 #elif defined(EXPORT_HTML_FILENAME_ANCHOR)
 						Export("[%s:%s]", strbuff, modlparam);
 #elif defined(EXPORT_HTML_ANCHOR)
 						Export("%s:%s", strbuff, modlparam);
+*/
 #endif
 						// 2011-07-08: krížik v texte includovaného žalmu/chválospevu
 						if((je_antifona == ANO) || (equals(paramname, PARAM_ZALM1) || equals(paramname, PARAM_ZALM2) || equals(paramname, PARAM_ZALM3) || equals(paramname, PARAM_RCHVALOSPEV) || equals(paramname, PARAM_VCHVALOSPEV))){
@@ -1570,15 +1574,15 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							if(rest != NULL && strlen(rest) > 0)
 								mystrcpy(rest_zakoncenie, rest, MAX_BUFFER);
 						}
-						/*
 #if defined(EXPORT_HTML_SPECIALS)
 						Export("[%s:%s|rest_zakoncenie=%s]", strbuff, modlparam, (rest_zakoncenie == NULL) ? STR_EMPTY: rest_zakoncenie);
+/*
 #elif defined(EXPORT_HTML_FILENAME_ANCHOR)
 						Export("[%s:%s]", strbuff, modlparam);
 #elif defined(EXPORT_HTML_ANCHOR)
 						Export("%s:%s", strbuff, modlparam);
+*/
 #endif
-						*/
 						if((je_modlitba == ANO) && ((equals(paramname, PARAM_MODLITBA)) || (equals(paramname, PARAM_MODL_SPOMPRIVILEG)) || (je_velkonocna_nedela_posv_cit))){
 							Export("%s--> ", (rest_zakoncenie == NULL) ? STR_EMPTY: rest_zakoncenie);
 							if(equals(rest_zakoncenie, PARAM_ZAKONCENIE_SKRZE) || equals(rest_zakoncenie, PARAM_ZAKONCENIE_SKRZE_MALE)){
@@ -1813,10 +1817,12 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 					if(equals(strbuff, PARAM_ZALOMENIE) && (vnutri_inkludovaneho == 1)){
 #if defined(EXPORT_HTML_SPECIALS)
 						Export("[%s:%s|rest=%s]", strbuff, modlparam, (rest == NULL) ? STR_EMPTY: rest);
+/*
 #elif defined(EXPORT_HTML_FILENAME_ANCHOR)
 						Export("[%s:%s]", strbuff, modlparam);
 #elif defined(EXPORT_HTML_ANCHOR)
 						Export("%s:%s", strbuff, modlparam);
+*/
 #endif
 						if((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_TEXT_WRAP) == BIT_OPT_2_TEXT_WRAP){
 							// MAX_BUFFER bol zvýšený, lebo strbuff bol v tomto prípade ve¾mi dlhý
