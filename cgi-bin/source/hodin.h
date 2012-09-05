@@ -1980,6 +1980,25 @@ const char *html_text_option2_navigation_explain[POCET_JAZYKOV + 1] =
  "Legyen-e hiperhivatkozás a nap többi imaórájára is,  illetve mutassa-e az elõzõ és következõ nap imaóráit is közvetlenül a szövegben.", 
 };
 
+const char *html_text_option2_moznosti[POCET_JAZYKOV + 1] = 
+{"zobrazi v textoch modlitieb rozlièné monosti",
+ "zobrazit v textech modliteb rozlièné volby", 
+ "xxx", 
+ "",
+ "",
+ "zobrazit v textech modliteb rozlièné volby", 
+ "xxx", 
+};
+const char *html_text_option2_moznosti_explain[POCET_JAZYKOV + 1] = 
+{"Èi sa majú zobrazova hypertextové odkazy na iné zobrazenie tej istej modlitby priamo v texte modlitby (napr. pre modlitbu cez deò na verziu s doplnkovou psalmódiou).", 
+ "Zda zobrazit hypertextové odkazy na jiné zobrazení modlitby daného dne pøímo v textu modlitby (napø. pro modlitbu uprostrìd dne verzi se almy z doplòujícího cyklu).", 
+ "xxx", 
+ "",
+ "", 
+ "Zda zobrazit hypertextové odkazy na jiné zobrazení modlitby daného dne pøímo v textu modlitby (napø. pro modlitbu uprostrìd dne verzi se almy z doplòujícího cyklu).", 
+ "xxx", 
+};
+
 const char *html_text_option2_textwrap[POCET_JAZYKOV + 1] = 
 {"zalamova dlhé riadky ako v tlaèenom vydaní (poetické èasti)",
  "zalomit dlouhé øádky poetickıch textù jako v tištìném vydání", 
