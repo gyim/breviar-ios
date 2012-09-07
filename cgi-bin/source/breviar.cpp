@@ -2167,6 +2167,8 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 	mystrcpy(pom, STR_EMPTY, MAX_STR);
 	char pompom[MAX_STR];
 	mystrcpy(pompom, STR_EMPTY, MAX_STR);
+	short int zobrazit = NIE;
+	_struct_sc sc;
 
 	Log("interpretParameter(%s): Dumping by %s\n", paramname, paramname);
 
@@ -2779,13 +2781,56 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 	else if(equals(paramname, PARAM_SPOL_CAST)){
 		Log("  _global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZOBRAZ_SPOL_CAST == %d: \n", _global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZOBRAZ_SPOL_CAST);
 		Log("  _global_den.typslav == %d (%s)...\n", _global_den.typslav, nazov_slavenia(_global_den.typslav));
-		// 2012-08-21: pre ¾ubovo¾né aj záväzné spomienky nemá význam | è. 236 VSLH: V modlitbe cez deò, èiže predpoludním, napoludnie a popoludní, a v kompletóriu sa neberie niè z ofícia o svätom, všetko je zo všedného dòa.
-		if((((_global_den.typslav != SLAV_LUB_SPOMIENKA) && (_global_den.typslav != SLAV_SPOMIENKA)) || ((_global_modlitba != MODL_PREDPOLUDNIM) && (_global_modlitba != MODL_NAPOLUDNIE) && (_global_modlitba != MODL_POPOLUDNI) && (_global_modlitba != MODL_KOMPLETORIUM) && (_global_modlitba != MODL_PRVE_KOMPLETORIUM) && (_global_modlitba != MODL_DRUHE_KOMPLETORIUM)))
-			&& ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZOBRAZ_SPOL_CAST) == BIT_OPT_1_ZOBRAZ_SPOL_CAST)){
+		zobrazit = ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZOBRAZ_SPOL_CAST) == BIT_OPT_1_ZOBRAZ_SPOL_CAST);
+		if(zobrazit == ANO){
+			// ïalšie rozhodovanie
+			// 2012-08-21: pre ¾ubovo¾né aj záväzné spomienky nemá význam | è. 236 VSLH: V modlitbe cez deò, èiže predpoludním, napoludnie a popoludní, a v kompletóriu sa neberie niè z ofícia o svätom, všetko je zo všedného dòa.
+			if(_global_poradie_svaty == 0){
+				zobrazit = (((_global_den.typslav != SLAV_LUB_SPOMIENKA) && (_global_den.typslav != SLAV_SPOMIENKA)) || ((_global_modlitba != MODL_PREDPOLUDNIM) && (_global_modlitba != MODL_NAPOLUDNIE) && (_global_modlitba != MODL_POPOLUDNI) && (_global_modlitba != MODL_KOMPLETORIUM) && (_global_modlitba != MODL_PRVE_KOMPLETORIUM) && (_global_modlitba != MODL_DRUHE_KOMPLETORIUM)));
+				// napokon rozkódujeme, èo je v _global_den.spolcast
+				sc = _decode_spol_cast(_global_den.spolcast);
+				zobrazit &= ((sc.a1 != MODL_SPOL_CAST_NEURCENA) && (sc.a1 != MODL_SPOL_CAST_NEBRAT));
+			}
+			// 2012-09-07: pre miestne sviatky má zmysel pre MCD (nie pre kompletórium)
+			else{
+				zobrazit &= ((_global_modlitba != MODL_KOMPLETORIUM) && (_global_modlitba != MODL_PRVE_KOMPLETORIUM) && (_global_modlitba != MODL_DRUHE_KOMPLETORIUM));
+				if(zobrazit == ANO){
+					if(_global_poradie_svaty == 1){
+						zobrazit = (((_global_svaty1.typslav != SLAV_LUB_SPOMIENKA) && (_global_svaty1.typslav != SLAV_SPOMIENKA)) || ((_global_modlitba != MODL_PREDPOLUDNIM) && (_global_modlitba != MODL_NAPOLUDNIE) && (_global_modlitba != MODL_POPOLUDNI) && (_global_modlitba != MODL_KOMPLETORIUM) && (_global_modlitba != MODL_PRVE_KOMPLETORIUM) && (_global_modlitba != MODL_DRUHE_KOMPLETORIUM)));
+						zobrazit |= (MIESTNE_SLAVENIE_LOKAL_SVATY1) && ((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI));
+						// napokon rozkódujeme, èo je v _global_svaty1.spolcast
+						sc = _decode_spol_cast(_global_svaty1.spolcast);
+						zobrazit &= ((sc.a1 != MODL_SPOL_CAST_NEURCENA) && (sc.a1 != MODL_SPOL_CAST_NEBRAT));
+					}
+					else if(_global_poradie_svaty == 2){
+						zobrazit = (((_global_svaty1.typslav != SLAV_LUB_SPOMIENKA) && (_global_svaty2.typslav != SLAV_SPOMIENKA)) || ((_global_modlitba != MODL_PREDPOLUDNIM) && (_global_modlitba != MODL_NAPOLUDNIE) && (_global_modlitba != MODL_POPOLUDNI) && (_global_modlitba != MODL_KOMPLETORIUM) && (_global_modlitba != MODL_PRVE_KOMPLETORIUM) && (_global_modlitba != MODL_DRUHE_KOMPLETORIUM)));
+						zobrazit |= (MIESTNE_SLAVENIE_LOKAL_SVATY2) && ((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI));
+						// napokon rozkódujeme, èo je v _global_svaty2.spolcast
+						sc = _decode_spol_cast(_global_svaty2.spolcast);
+						zobrazit &= ((sc.a1 != MODL_SPOL_CAST_NEURCENA) && (sc.a1 != MODL_SPOL_CAST_NEBRAT));
+					}
+					else if(_global_poradie_svaty == 3){
+						zobrazit = (((_global_svaty3.typslav != SLAV_LUB_SPOMIENKA) && (_global_svaty3.typslav != SLAV_SPOMIENKA)) || ((_global_modlitba != MODL_PREDPOLUDNIM) && (_global_modlitba != MODL_NAPOLUDNIE) && (_global_modlitba != MODL_POPOLUDNI) && (_global_modlitba != MODL_KOMPLETORIUM) && (_global_modlitba != MODL_PRVE_KOMPLETORIUM) && (_global_modlitba != MODL_DRUHE_KOMPLETORIUM)));
+						zobrazit |= (MIESTNE_SLAVENIE_LOKAL_SVATY3) && ((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI));
+						// napokon rozkódujeme, èo je v _global_svaty3.spolcast
+						sc = _decode_spol_cast(_global_svaty3.spolcast);
+						zobrazit &= ((sc.a1 != MODL_SPOL_CAST_NEURCENA) && (sc.a1 != MODL_SPOL_CAST_NEBRAT));
+					}
+					else if(_global_poradie_svaty == 4){
+						zobrazit = (((_global_pm_sobota.typslav != SLAV_LUB_SPOMIENKA) && (_global_pm_sobota.typslav != SLAV_SPOMIENKA)) || ((_global_modlitba != MODL_PREDPOLUDNIM) && (_global_modlitba != MODL_NAPOLUDNIE) && (_global_modlitba != MODL_POPOLUDNI) && (_global_modlitba != MODL_KOMPLETORIUM) && (_global_modlitba != MODL_PRVE_KOMPLETORIUM) && (_global_modlitba != MODL_DRUHE_KOMPLETORIUM)));
+						zobrazit |= (MIESTNE_SLAVENIE_LOKAL_SVATY3) && ((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI));
+						// napokon rozkódujeme, èo je v _global_pm_sobota.spolcast
+						sc = _decode_spol_cast(_global_pm_sobota.spolcast);
+						zobrazit &= ((sc.a1 != MODL_SPOL_CAST_NEURCENA) && (sc.a1 != MODL_SPOL_CAST_NEBRAT));
+					}
+				}// ináè nemá zmysel komplikované rozhodovanie (pre kompletórium)
+			}
+		}// ináè nemá zmysel komplikované rozhodovanie (ak nie je zvolený BIT_OPT_1_ZOBRAZ_SPOL_CAST)
+		if(zobrazit == ANO){
 			Log("including SPOL_CAST\n");
 			Export("spol_cast:begin-->");
 			if(!equals(_global_string_spol_cast, STR_EMPTY)){
-				Export("<"HTML_SPAN_RED_SMALL">%s %s %s.</span>\n", 
+				Export("<p><"HTML_SPAN_RED_SMALL">%s %s %s.</span>\n", 
 					(ret_sc == MODL_SPOL_CAST_ZA_ZOSNULYCH)? nazov_spolc_oficiumza_jazyk[_global_jazyk]: nazov_spolc_zospolc_jazyk[_global_jazyk], 
 					(ret_sc != MODL_SPOL_CAST_ZA_ZOSNULYCH)? ((ret_sc == MODL_SPOL_CAST_POSVIACKA_CHRAMU)? nazov_spolc_vyrocie_jazyk[_global_jazyk]: nazov_spolc_sviatky_jazyk[_global_jazyk]): STR_EMPTY,
 					_global_string_spol_cast);
@@ -8517,18 +8562,22 @@ void _export_rozbor_dna_zoznam(short int typ){
 			// 2010-05-21: pôvodne bolo: "sviatok, spomienka alebo ¾ubovo¾ná spomienka svätého/svätých, ide prv ako všedný deò"; dnes ide prv len ak je to sviatok alebo spomienka 
 			// (a vlastne vtedy sa všedný deò vypisuje len pre lokálne sviatky resp. spomienky) 
 			poradie_svaty = 1;
-			if(aj_feria){
+			if((aj_feria) && (!MIESTNE_SLAVENIE_LOKAL_SVATY1)){
 				poradie_svaty *= 10;
 			}
 			zoznam[pocet] = poradie_svaty;
 			if(_global_pocet_svatych > 1){
 				poradie_svaty = 2;
-				poradie_svaty *= 10;
+				if((!MIESTNE_SLAVENIE_LOKAL_SVATY2)){
+					poradie_svaty *= 10;
+				}
 				pocet++;
 				zoznam[pocet] = poradie_svaty;
 				if(_global_pocet_svatych > 2){
 					poradie_svaty = 3;
-					poradie_svaty *= 10;
+					if((!MIESTNE_SLAVENIE_LOKAL_SVATY3)){
+						poradie_svaty *= 10;
+					}
 					pocet++;
 					zoznam[pocet] = poradie_svaty;
 				}
