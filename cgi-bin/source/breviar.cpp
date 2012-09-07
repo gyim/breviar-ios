@@ -1953,6 +1953,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							}
 						}// INCLUDE_BEGIN
 						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
+							Export("--><br /><!--"); // 2012-09-07: doplnené, aby sa to podobalo na tie prosby, kde v LH je zvolanie opakované (napr. SCAP_rPROSBY)
 #if defined(EXPORT_HTML_SPECIALS)
 							Export("zvolanie(stop)");
 #endif
