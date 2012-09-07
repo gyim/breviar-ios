@@ -7626,9 +7626,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	//---------------------------------------------------------------------
 
 	// option 3: Ëasti modlitby zo spoloËnej Ëasti ... -- alternatÌva: doplniù pre kaûd˝ riadok modlitby
-#ifdef OS_Windows_Ruby
 	Export("<tr><td>\n");
-	// formular pre v˝ber preferovanej spoloËnej Ëasti
+	// formul·r pre v˝ber preferovanej spoloËnej Ëasti
 	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_spol_casti_vziat_zo_explain[_global_jazyk], html_text_spol_casti_vziat_zo[_global_jazyk]);
 	Export("\n");
 	Export("<select name=\"%s\" title=\"%s\">\n", STR_MODL_OPTF_3, html_text_spol_casti_vziat_zo_explain[_global_jazyk]);
@@ -7641,7 +7640,6 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	}
 	Export("</select>\n");
 	Export("</td></tr>\n");
-#endif
 
 	//---------------------------------------------------------------------
 
