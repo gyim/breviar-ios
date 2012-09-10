@@ -1761,54 +1761,64 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 #endif
 					}// upraviù odkaz na ûalm 95 na hyperlink -- PARAM_LINK_ZALM95_BEGIN
 					if(equals(strbuff, PARAM_LINK_ZALM95_END) && (vnutri_inkludovaneho == 1)){
-						z95buff[z95_index] = '\0';
+						Log("  _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI == %d: \n", _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI);
+						if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI) == BIT_OPT_2_ROZNE_MOZNOSTI){ // len ak je t·to moûnosù (zobrazovanie vöeliËoho) zvolen·
+							z95buff[z95_index] = '\0';
 #ifdef BEHAVIOUR_WEB
-						// najprv upravÌme o1
-						_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY]; // backup pÙvodnej hodnoty
-						// nastavenie parametra o1: prid·me bit pre alternatÌvnu psalmÛdiu
-						if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALM95) != BIT_OPT_1_ZALM95){
-							Log("Pre option 1 odstraÚujem bit pre û95, pomocn· premenn· to bude obsahovaù\n");
-							_global_opt[OPT_1_CASTI_MODLITBY] += BIT_OPT_1_ZALM95;
-							_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY] - BIT_OPT_1_ZALM95;
+							// najprv upravÌme o1
+							_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY]; // backup pÙvodnej hodnoty
+							// nastavenie parametra o1: prid·me bit pre alternatÌvnu psalmÛdiu
+							if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALM95) != BIT_OPT_1_ZALM95){
+								Log("Pre option 1 odstraÚujem bit pre û95 (pÙvodn˙ hodnotu som si zapam‰tal)\n");
+								_global_opt[OPT_1_CASTI_MODLITBY] += BIT_OPT_1_ZALM95;
+							}
+							else{
+								Log("Pre option 1 prid·vam bit pre û95 (pÙvodn˙ hodnotu som si zapam‰tal)\n");
+								_global_opt[OPT_1_CASTI_MODLITBY] -= BIT_OPT_1_ZALM95;
+							}
+							// prilepenie poradia sv‰tca
+							if(_global_poradie_svaty > 0){
+								sprintf(pom, HTML_AMPERSAND"%s=%d", STR_DALSI_SVATY, _global_poradie_svaty);
+							}// _global_poradie_svaty > 0
+							else{
+								mystrcpy(pom, STR_EMPTY, MAX_STR);
+							}// !(_global_poradie_svaty > 0)
+							// teraz vytvorÌme reùazec s options
+							prilep_request_options(pom, pompom);
+							// export hyperlinku
+							// ToDo: hyperlink podæa toho, Ëi bolo volanÈ pre PRM_DNES => PRM_DATUM alebo pre PRM_LIT_OBD
+							// ToDo: prÌpadne v hyperlinku daù aj #z95 a do z95.htm doplniù <a name>...
+							Export("<p>\n<"HTML_SPAN_RED_SMALL">\n<a href=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\"",
+								script_name,
+								STR_QUERY_TYPE, STR_PRM_DATUM,
+								STR_DEN, _global_den.den,
+								STR_MESIAC, _global_den.mesiac,
+								STR_ROK, _global_den.rok,
+								STR_MODLITBA, str_modlitby[_global_modlitba],
+								pom);
+							// napokon o1 vr·time sp‰ù
+							_global_opt[OPT_1_CASTI_MODLITBY] = _global_opt_casti_modlitby_orig; // restore pÙvodnej hodnoty
+							/*
+							// pre ûalm 95 by nemalo za referenciou nasledovaù niË; ak, tak to nevypisujeme
+							DetailLog("\trest     == %s\n", rest);
+							DetailLog("\tz95rest  == %s\n", z95rest);
+							if((z95rest != NULL) && !(equals(z95rest, STR_EMPTY))){
+								// Export("%s", z95rest);
+							}
+							*/
+							Export(" "HTML_CLASS_QUIET">"); // a.quiet { text-decoration:none; color: inherit; }
+#endif
+							Export("%s", z95buff);
+#ifdef BEHAVIOUR_WEB
+							Export("</a>");
+#endif
 						}
-						// prilepenie poradia sv‰tca
-						if(_global_poradie_svaty > 0){
-							sprintf(pom, HTML_AMPERSAND"%s=%d", STR_DALSI_SVATY, _global_poradie_svaty);
-						}// _global_poradie_svaty > 0
 						else{
-							mystrcpy(pom, STR_EMPTY, MAX_STR);
-						}// !(_global_poradie_svaty > 0)
-						// teraz vytvorÌme reùazec s options
-						prilep_request_options(pom, pompom);
-						// export hyperlinku
-						// ToDo: hyperlink podæa toho, Ëi bolo volanÈ pre PRM_DNES => PRM_DATUM alebo pre PRM_LIT_OBD
-						// ToDo: prÌpadne v hyperlinku daù aj #z95 a do z95.htm doplniù <a name>...
-						Export("<a href=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\"",
-							script_name,
-							STR_QUERY_TYPE, STR_PRM_DATUM,
-							STR_DEN, _global_den.den,
-							STR_MESIAC, _global_den.mesiac,
-							STR_ROK, _global_den.rok,
-							STR_MODLITBA, str_modlitby[_global_modlitba],
-							pom);
-						// napokon o1 vr·time sp‰ù
-						_global_opt[OPT_1_CASTI_MODLITBY] = _global_opt_casti_modlitby_orig; // restore pÙvodnej hodnoty
-						/*
-						// pre ûalm 95 by nemalo za referenciou nasledovaù niË; ak, tak to nevypisujeme
-						DetailLog("\trest     == %s\n", rest);
-						DetailLog("\tz95rest  == %s\n", z95rest);
-						if((z95rest != NULL) && !(equals(z95rest, STR_EMPTY))){
-							// Export("%s", z95rest);
+#if defined(EXPORT_HTML_SPECIALS)
+							Export("<!--%s-->", PARAM_LINK_ZALM95_BEGIN);
+#endif
 						}
-						*/
-						Export(" "HTML_CLASS_QUIET">"); // a.quiet { text-decoration:none; color: inherit; }
-#endif
-						Export("%s", z95buff);
-#ifdef BEHAVIOUR_WEB
-						Export("</a>");
-#endif
 						vnutri_z95 = NIE;
-
 						// prevzatÈ z Ëasti pre referencie: 2011-05-02: doplnenÈ kvÙli referenci·m, ktorÈ s˙ v r·mci myölienok, Ëo sa nemaj˙ zobrazovaù
 						write = ANO;
 						strcpy(z95rest, STR_EMPTY);
