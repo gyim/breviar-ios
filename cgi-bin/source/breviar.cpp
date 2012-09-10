@@ -2852,7 +2852,6 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		if((!((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.smer < 5))) // nie pre slávnosti
 			&& ((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI)) // len pre MCD
 			&& ((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI) == BIT_OPT_2_ROZNE_MOZNOSTI) // len ak je táto možnos (zobrazovanie všelièoho) zvolená
-			&& ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE) // má zmysel, len ak nebola doplnková psalmódia explicitne vyžiadaná // ToDo: možno prerobi tak, aby v takom prípade dávalo "psalmódia z bežného dòa"
 			){ 
 			Log("including DOPLNKOVA_PSALMODIA\n");
 			Export("doplnkova_psalmodia:begin-->");
@@ -2863,8 +2862,11 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE){
 				Log("Pre option 1 nastavujem bit pre 'doplnkovú psalmódiu'\n");
 				_global_opt[OPT_1_CASTI_MODLITBY] += BIT_OPT_1_MCD_ZALMY_INE;
-				// _global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY] - BIT_OPT_1_MCD_ZALMY_INE;
 			}// zmena: použitie doplnkovej psalmódie
+			else{
+				Log("Pre option 1 ruším bit pre 'doplnkovú psalmódiu'\n");
+				_global_opt[OPT_1_CASTI_MODLITBY] -= BIT_OPT_1_MCD_ZALMY_INE;
+			}
 			// prilepenie poradia svätca
 			if(_global_poradie_svaty > 0){
 				sprintf(pom, HTML_AMPERSAND"%s=%d", STR_DALSI_SVATY, _global_poradie_svaty);
@@ -2889,7 +2891,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			_global_opt[OPT_1_CASTI_MODLITBY] = _global_opt_casti_modlitby_orig; // restore pôvodnej hodnoty
 			Export(" "HTML_CLASS_QUIET">"); // a.quiet { text-decoration:none; color: inherit; }
 #endif
-			Export("(%s)", html_text_option1_mcd_zalmy_ine[_global_jazyk]);
+			Export("(%s)", ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE)? html_text_option1_mcd_zalmy_ine[_global_jazyk]: html_text_option1_mcd_zalmy_nie_ine[_global_jazyk]);
 #ifdef BEHAVIOUR_WEB
 			Export("</a>");
 			Export("</span>\n");
