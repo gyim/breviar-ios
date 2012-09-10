@@ -1990,16 +1990,16 @@ const char *html_text_option2_navigation_explain[POCET_JAZYKOV + 1] =
 };
 
 const char *html_text_option2_moznosti[POCET_JAZYKOV + 1] = 
-{"zobrazi v textoch modlitieb rozlièné monosti",
- "zobrazit v textech modliteb rozlièné volby", 
+{"zobrazi rozlièné monosti priamo v textoch modlitieb",
+ "zobrazit rozlièné volby v textech modliteb", 
  "display various options in prayers", 
  "",
  "",
- "zobrazit v textech modliteb rozlièné volby", 
+ "zobrazit rozlièné volby v textech modliteb", 
  "az imák szövegében megmutatni a különbözõ lehetõségeket", 
 };
 const char *html_text_option2_moznosti_explain[POCET_JAZYKOV + 1] = 
-{"Èi sa majú zobrazova hypertextové odkazy na iné zobrazenie tej istej modlitby priamo v texte modlitby (napr. pre modlitbu cez deò na verziu s doplnkovou psalmódiou).", 
+{"Èi sa majú zobrazova hypertextové odkazy na iné zobrazenie tej istej modlitby priamo v texte modlitby (napr. pre modlitbu cez deò na verziu s doplnkovou psalmódiou).", // Vtedy nie je potrebné, aby boli zobrazené prepínaèe na titulnej stránke.
  "Zda zobrazit hypertextové odkazy na jiné zobrazení modlitby daného dne pøímo v textu modlitby (napø. pro modlitbu uprostrìd dne verzi se almy z doplòujícího cyklu).", 
  "Whether various options should be displayed directly in the prayer's texts.", 
  "",
