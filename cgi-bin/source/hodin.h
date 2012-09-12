@@ -1755,7 +1755,7 @@ const char *html_text_option1_mcd_zalmy_nie_ine[POCET_JAZYKOV + 1] =
  "psalmodia from ordinary day",
  "",
  "pro modlitbu bìhem dne pouít psalmodii z bìného dne", 
- "NEM: a Napközi imaórában a kiegészítõ zsoltárokat vegyék"
+ "a Napközi imaórában az adott napi zsoltározást venni"
 };
 const char *html_text_option1_mcd_zalmy_ine[POCET_JAZYKOV + 1] = 
 {"pre modlitbu cez deò poui doplnkovú psalmódiu", 
