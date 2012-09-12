@@ -1764,7 +1764,7 @@ const char *html_text_option1_mcd_zalmy_ine[POCET_JAZYKOV + 1] =
  "psalmodia from ordinary day",
  "",
  "pro modlitbu bìhem dne použít doplòkovou psalmodii", 
- "a Napközi imaórában a kiegészítõ zsoltárokat vegyék"
+ "a Napközi imaórában a kiegészítõ zsoltárokat venni"
 };
 const char *html_text_option1_mcd_zalmy_ine_explain[POCET_JAZYKOV + 1] = 
 {"Pokia¾ sa niekto modlí viac modlitieb cez deò, v prvej vezme bežnú psalmódiu; v ostatných sa použije doplnková psalmódia. Zahàòa 3 série tzv. graduálnych žalmov (Ž 120 – 129).", 
