@@ -1750,12 +1750,12 @@ const char *html_text_option1_plne_resp_explain[POCET_JAZYKOV + 1] =
 
 const char *html_text_option_zobrazit[POCET_JAZYKOV + 1] = 
 {"zobraziù", 
- "uk·zat", 
+ "zobrazit", 
  "xxx", 
  "show",
  "",
- "uk·zat", 
- "venni"
+ "zobrazit", 
+ "megmutatni"
 };
 const char *html_text_option_skryt[POCET_JAZYKOV + 1] = 
 {"skryù", 
@@ -1764,7 +1764,7 @@ const char *html_text_option_skryt[POCET_JAZYKOV + 1] =
  "hide",
  "",
  "skr˝t", 
- "nem venni"
+ "elrejteni"
 };
 
 const char *html_text_option1_mcd_zalmy_nie_ine[POCET_JAZYKOV + 1] = 
