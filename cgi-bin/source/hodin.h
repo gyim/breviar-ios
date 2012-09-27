@@ -1748,6 +1748,25 @@ const char *html_text_option1_plne_resp_explain[POCET_JAZYKOV + 1] =
  "Az Imaórák Liturgiája az olvasmányos imaórák válaszos énekeinek teljes szövegét nem mutatja (a második ismétlõdõ rész nyomtatott kiadásban rövidített)."
 };
 
+const char *html_text_option_zobrazit[POCET_JAZYKOV + 1] = 
+{"zobrazi", 
+ "ukázat", 
+ "xxx", 
+ "show",
+ "",
+ "ukázat", 
+ "venni"
+};
+const char *html_text_option_skryt[POCET_JAZYKOV + 1] = 
+{"skry", 
+ "skrıt", 
+ "xxx", 
+ "hide",
+ "",
+ "skrıt", 
+ "nem venni"
+};
+
 const char *html_text_option1_mcd_zalmy_nie_ine[POCET_JAZYKOV + 1] = 
 {"pre modlitbu cez deò poui psalmódiu zo dòa", 
  "pro modlitbu bìhem dne pouít almy z bìného dne", 
