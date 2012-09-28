@@ -2854,86 +2854,43 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		}
 	}// PARAM_SPOL_CAST
 
-	else if(equals(paramname, PARAM_DOPLNKOVA_PSALMODIA)){
-		Log("  _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI == %d: \n", _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI);
-		Log("  _global_den.typslav == %d (%s)...\n", _global_den.typslav, nazov_slavenia(_global_den.typslav));
-		Log("  _global_den.smer == %d...\n", _global_den.smer);
-		// pre sl·vnosti nem· v˝znam | Ë. 134 VSLH: (...) Na modlitbu cez deÚ sl·vnostÌ, okrem t˝ch, o ktor˝ch sa uû hovorilo, a ak nepripadn˙ na nedeæu, ber˙ sa ûalmy z doplnkovÈho cyklu (gradu·lne).
-		if((!((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.smer < 5))) // nie pre sl·vnosti
-			&& ((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI)) // len pre MCD
-			&& ((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI) == BIT_OPT_2_ROZNE_MOZNOSTI) // len ak je t·to moûnosù (zobrazovanie vöeliËoho) zvolen·
-			){ 
-			Log("including DOPLNKOVA_PSALMODIA\n");
-			Export("doplnkova_psalmodia:begin-->");
-#ifdef BEHAVIOUR_WEB
-			// najprv upravÌme o1
-			_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY]; // backup pÙvodnej hodnoty
-			// nastavenie parametra o1: prid·me bit pre alternatÌvnu psalmÛdiu
-			if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE){
-				Log("Pre option 1 nastavujem bit pre 'doplnkov˙ psalmÛdiu'\n");
-				_global_opt[OPT_1_CASTI_MODLITBY] += BIT_OPT_1_MCD_ZALMY_INE;
-			}// zmena: pouûitie doplnkovej psalmÛdie
-			else{
-				Log("Pre option 1 ruöÌm bit pre 'doplnkov˙ psalmÛdiu'\n");
-				_global_opt[OPT_1_CASTI_MODLITBY] -= BIT_OPT_1_MCD_ZALMY_INE;
-			}
-			// prilepenie poradia sv‰tca
-			if(_global_poradie_svaty > 0){
-				sprintf(pom, HTML_AMPERSAND"%s=%d", STR_DALSI_SVATY, _global_poradie_svaty);
-			}// _global_poradie_svaty > 0
-			else{
-				mystrcpy(pom, STR_EMPTY, MAX_STR);
-			}// !(_global_poradie_svaty > 0)
-			// teraz vytvorÌme reùazec s options
-			prilep_request_options(pom, pompom);
-			// export hyperlinku
-			// ToDo: hyperlink podæa toho, Ëi bolo volanÈ pre PRM_DNES => PRM_DATUM alebo pre PRM_LIT_OBD
-			// ToDo: prÌpadne v hyperlinku daù aj #psalmodia
-			Export("<p>\n<"HTML_SPAN_RED_SMALL">\n<a href=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\"",
-				script_name,
-				STR_QUERY_TYPE, STR_PRM_DATUM,
-				STR_DEN, _global_den.den,
-				STR_MESIAC, _global_den.mesiac,
-				STR_ROK, _global_den.rok,
-				STR_MODLITBA, str_modlitby[_global_modlitba],
-				pom);
-			// napokon o1 vr·time sp‰ù
-			_global_opt[OPT_1_CASTI_MODLITBY] = _global_opt_casti_modlitby_orig; // restore pÙvodnej hodnoty
-			Export(" "HTML_CLASS_QUIET">"); // a.quiet { text-decoration:none; color: inherit; }
-#endif
-			Export("(%s)", ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE)? html_text_option1_mcd_zalmy_ine[_global_jazyk]: html_text_option1_mcd_zalmy_nie_ine[_global_jazyk]);
-#ifdef BEHAVIOUR_WEB
-			Export("</a>");
-			Export("</span>\n");
-#endif
-			Export("<!--doplnkova_psalmodia:end");
-		}
-		else{
-			Export("[skipping DOPLNKOVA_PSALMODIA]");
-			Log("skipping DOPLNKOVA_PSALMODIA\n");
-		}
-	}// PARAM_DOPLNKOVA_PSALMODIA
 
-	else if((equals(paramname, PARAM_CHVALOSPEV)) || (equals(paramname, PARAM_OTCENAS)) || (equals(paramname, PARAM_HYMNUS_TEDEUM))){
+	else if((equals(paramname, PARAM_CHVALOSPEV)) || (equals(paramname, PARAM_OTCENAS)) || (equals(paramname, PARAM_HYMNUS_TEDEUM)) || (equals(paramname, PARAM_DOPLNKOVA_PSALMODIA))){
 		Log("  _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI == %d: \n", _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI);
+
 		short int bit;
 		short int opt = OPT_1_CASTI_MODLITBY;
+
 		char popis_show[SMALL];
 		char popis_hide[SMALL];
 		mystrcpy(popis_show, html_text_option_zobrazit[_global_jazyk], SMALL);
 		mystrcpy(popis_hide, html_text_option_skryt[_global_jazyk], SMALL);
+
+		char specific_string[SMALL];
+		mystrcpy(specific_string, STR_EMPTY, SMALL);
+
 		short int podmienka = ((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI) == BIT_OPT_2_ROZNE_MOZNOSTI); // len ak je t·to moûnosù (zobrazovanie vöeliËoho) zvolen·
+		podmienka &= (_global_skip_in_prayer != ANO);
+
 		if(equals(paramname, PARAM_OTCENAS)){
 			bit = BIT_OPT_1_OTCENAS;
-			podmienka &= (_global_skip_in_prayer != ANO);
 		}
 		if(equals(paramname, PARAM_CHVALOSPEV)){
 			bit = BIT_OPT_1_CHVALOSPEVY;
-			podmienka &= (_global_skip_in_prayer != ANO);
 		}
 		if(equals(paramname, PARAM_HYMNUS_TEDEUM)){
 			bit = BIT_OPT_1_TEDEUM;
-			podmienka &= (_global_skip_in_prayer != ANO);
+		}
+		if(equals(paramname, PARAM_DOPLNKOVA_PSALMODIA)){
+			bit = BIT_OPT_1_MCD_ZALMY_INE;
+			Log("  _global_den.typslav == %d (%s)...\n", _global_den.typslav, nazov_slavenia(_global_den.typslav));
+			Log("  _global_den.smer == %d...\n", _global_den.smer);
+			// pre sl·vnosti nem· v˝znam | Ë. 134 VSLH: (...) Na modlitbu cez deÚ sl·vnostÌ, okrem t˝ch, o ktor˝ch sa uû hovorilo, a ak nepripadn˙ na nedeæu, ber˙ sa ûalmy z doplnkovÈho cyklu (gradu·lne).
+			podmienka &= (!((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.smer < 5))); // nie pre sl·vnosti
+			podmienka &= ((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI)); // len pre MCD
+			mystrcpy(specific_string, "<p>", SMALL);
+			mystrcpy(popis_show, html_text_option1_mcd_zalmy_ine[_global_jazyk], SMALL);
+			mystrcpy(popis_hide, html_text_option1_mcd_zalmy_nie_ine[_global_jazyk], SMALL);
 		}
 		// m· zmysel len pre rannÈ chv·ly, veöpery a kompletÛrium | iba vtedy, ak neskipujeme
 		if(podmienka){
@@ -2963,7 +2920,8 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			// export hyperlinku
 			// ToDo: hyperlink podæa toho, Ëi bolo volanÈ pre PRM_DNES => PRM_DATUM alebo pre PRM_LIT_OBD
 			// ToDo: prÌpadne v hyperlinku daù aj #psalmodia
-			Export("\n<"HTML_SPAN_RED_SMALL">\n<a href=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\"",
+			Export("%s\n<"HTML_SPAN_RED_SMALL">\n<a href=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\"",
+				specific_string,
 				script_name,
 				STR_QUERY_TYPE, STR_PRM_DATUM,
 				STR_DEN, _global_den.den,
@@ -2986,7 +2944,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			Export("[skipping %s]", paramname);
 			Log("skipping %s\n", paramname);
 		}
-	}// PARAM_CHVALOSPEV, PARAM_OTCENAS, PARAM_HYMNUS_TEDEUM
+	}// PARAM_CHVALOSPEV, PARAM_OTCENAS, PARAM_HYMNUS_TEDEUM, PARAM_DOPLNKOVA_PSALMODIA
 
 	else if(equals(paramname, PARAM_NAVIGACIA)){
 		if(aj_navigacia == ANO){
