@@ -1963,12 +1963,11 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							}
 						}// INCLUDE_BEGIN
 						else if(equals(strbuff, INCLUDE_END) && (vnutri_inkludovaneho == 1)){
-							Export("--><br /><!--"); // 2012-09-07: doplnenÈ, aby sa to podobalo na tie prosby, kde v LH je zvolanie opakovanÈ (napr. SCAP_rPROSBY)
 #if defined(EXPORT_HTML_SPECIALS)
 							Export("zvolanie(stop)");
 #endif
 							if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PROSBY_ZVOLANIE) == BIT_OPT_1_PROSBY_ZVOLANIE){
-								;
+								Export("--><br /><!--"); // 2012-09-07: doplnenÈ, aby sa to podobalo na tie prosby, kde v LH je zvolanie opakovanÈ (napr. SCAP_rPROSBY) | 2012-09-28: presunutÈ vypisovanie len ak sa zvolania opakuj˙
 							}
 							else{
 								write = ANO;
@@ -2855,7 +2854,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 	}// PARAM_SPOL_CAST
 
 
-	else if((equals(paramname, PARAM_CHVALOSPEV)) || (equals(paramname, PARAM_OTCENAS)) || (equals(paramname, PARAM_HYMNUS_TEDEUM)) || (equals(paramname, PARAM_DOPLNKOVA_PSALMODIA))){
+	else if((equals(paramname, PARAM_CHVALOSPEV)) || (equals(paramname, PARAM_OTCENAS)) || (equals(paramname, PARAM_HYMNUS_TEDEUM)) || (equals(paramname, PARAM_DOPLNKOVA_PSALMODIA)) || (equals(paramname, PARAM_ZVOLANIA))){
 		Log("  _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI == %d: \n", _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI);
 
 		short int bit;
@@ -2875,13 +2874,18 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		if(equals(paramname, PARAM_OTCENAS)){
 			bit = BIT_OPT_1_OTCENAS;
 		}
-		if(equals(paramname, PARAM_CHVALOSPEV)){
+		else if(equals(paramname, PARAM_CHVALOSPEV)){
 			bit = BIT_OPT_1_CHVALOSPEVY;
 		}
-		if(equals(paramname, PARAM_HYMNUS_TEDEUM)){
+		else if(equals(paramname, PARAM_HYMNUS_TEDEUM)){
 			bit = BIT_OPT_1_TEDEUM;
 		}
-		if(equals(paramname, PARAM_DOPLNKOVA_PSALMODIA)){
+		else if(equals(paramname, PARAM_ZVOLANIA)){
+			bit = BIT_OPT_1_PROSBY_ZVOLANIE;
+			mystrcpy(popis_show, html_text_option_zobrazit_zvolania[_global_jazyk], SMALL);
+			mystrcpy(popis_hide, html_text_option_skryt_zvolania[_global_jazyk], SMALL);
+		}
+		else if(equals(paramname, PARAM_DOPLNKOVA_PSALMODIA)){
 			bit = BIT_OPT_1_MCD_ZALMY_INE;
 			Log("  _global_den.typslav == %d (%s)...\n", _global_den.typslav, nazov_slavenia(_global_den.typslav));
 			Log("  _global_den.smer == %d...\n", _global_den.smer);
@@ -7443,7 +7447,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	prilep_request_options(pom2, pom3); // prilep_request_options(pom2, pom3, prvy_ampersand)
 
-#ifdef OS_Windows_Ruby
+#if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
 	Export("<table align=\"center\"><tr>\n<td>\n");
 	// 2012-07-23, doplnenÈ pre Ruby
 	// ak by sa malo pouûiù "dnes": Export("\n<form action=\"%s?%s=%s%s\" method=\"post\">\n", uncgi_name, STR_QUERY_TYPE, STR_PRM_DNES, pom2);
@@ -7661,11 +7665,13 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_zalm95_explain[_global_jazyk], html_text_option1_zalm95[_global_jazyk]);
 	}
 
-	// pole (checkbox) WWW_MODL_OPTF_1_PROSBY_ZVOLANIE
-	Export("<br>");
-	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_1_PROSBY_ZVOLANIE, NIE);
-	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_1_PROSBY_ZVOLANIE, ANO, html_text_option1_prosby_zvolanie_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PROSBY_ZVOLANIE) == BIT_OPT_1_PROSBY_ZVOLANIE)? html_option_checked: STR_EMPTY);
-	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_prosby_zvolanie_explain[_global_jazyk], html_text_option1_prosby_zvolanie[_global_jazyk]);
+	if((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI) != BIT_OPT_2_ROZNE_MOZNOSTI){ // len ak NIE JE t·to moûnosù (zobrazovanie vöeliËoho) zvolen·
+		// pole (checkbox) WWW_MODL_OPTF_1_PROSBY_ZVOLANIE
+		Export("<br>");
+		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_1_PROSBY_ZVOLANIE, NIE);
+		Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_1_PROSBY_ZVOLANIE, ANO, html_text_option1_prosby_zvolanie_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PROSBY_ZVOLANIE) == BIT_OPT_1_PROSBY_ZVOLANIE)? html_option_checked: STR_EMPTY);
+		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_prosby_zvolanie_explain[_global_jazyk], html_text_option1_prosby_zvolanie[_global_jazyk]);
+	}
 
 	// pole (checkbox) WWW_MODL_OPTF_1_VIGILIA
 	Export("<br>");

@@ -456,6 +456,7 @@ extern const char *TEMPLAT[POCET_MODLITIEB + 1];
 #define PARAM_CHVALOSPEV    "CHVALOSPEV"
 #define PARAM_HYMNUS_TEDEUM "HYMNUS_TEDEUM"
 #define PARAM_OTCENAS       "OTCENAS"
+#define PARAM_ZVOLANIA      "ZVOLANIA"
 
 // dalsie parametre: specificke pre obdobie
 // Od nedele Pánovho zmàtvychvstania až do Druhej ve¾konoènej nedele vrátane, ako aj na druhé vešpery slávnosti Zoslania Ducha Svätého
