@@ -7497,6 +7497,10 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 			continue;
 		if(i == JAZYK_UNDEF)
 			continue;
+#if defined(IO_ANDROID)
+		if(i == JAZYK_CZ_OP)
+			continue;
+#endif
 		Export("<option%s>%s\n", (i != _global_jazyk)? STR_EMPTY: html_option_selected, nazov_jazyka[i]);
 	}
 	Export("</select>\n");
