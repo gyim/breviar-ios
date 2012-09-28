@@ -5959,7 +5959,7 @@ const char *text_SEP_28_2[POCET_JAZYKOV + 1] =
  "",
  "",
  "(pro dominikány není - 26.9.)",
- "Ruiz Szent Lôrinc és társai, Fülöp-szigeteki vértanúk",
+ "Ruiz Szent Lõrinc és társai, Fülöp-szigeteki vértanúk",
  };
 const char *text_SEP_29[POCET_JAZYKOV + 1] = 
 {"Sv. Michala, Gabriela a Rafaela, archanjelov",
