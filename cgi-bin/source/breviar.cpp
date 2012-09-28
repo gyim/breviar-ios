@@ -1762,6 +1762,8 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 					}// upraviù odkaz na ûalm 95 na hyperlink -- PARAM_LINK_ZALM95_BEGIN
 					if(equals(strbuff, PARAM_LINK_ZALM95_END) && (vnutri_inkludovaneho == 1)){
 						Log("  _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI == %d: \n", _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI);
+						char specific_string[SMALL];
+						mystrcpy(specific_string, "<p>", SMALL);
 						if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI) == BIT_OPT_2_ROZNE_MOZNOSTI){ // len ak je t·to moûnosù (zobrazovanie vöeliËoho) zvolen·
 							z95buff[z95_index] = '\0';
 #ifdef BEHAVIOUR_WEB
@@ -1786,16 +1788,30 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							// teraz vytvorÌme reùazec s options
 							prilep_request_options(pom, pompom);
 							// export hyperlinku
-							// ToDo: hyperlink podæa toho, Ëi bolo volanÈ pre PRM_DNES => PRM_DATUM alebo pre PRM_LIT_OBD
 							// ToDo: prÌpadne v hyperlinku daù aj #z95 a do z95.htm doplniù <a name>...
-							Export("<p>\n<"HTML_SPAN_RED_SMALL">\n<a href=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\"",
-								script_name,
-								STR_QUERY_TYPE, STR_PRM_DATUM,
-								STR_DEN, _global_den.den,
-								STR_MESIAC, _global_den.mesiac,
-								STR_ROK, _global_den.rok,
-								STR_MODLITBA, str_modlitby[_global_modlitba],
-								pom);
+							if(query_type == PRM_DATUM){
+								Export("%s\n<"HTML_SPAN_RED_SMALL">\n<a href=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\"",
+									specific_string,
+									script_name,
+									STR_QUERY_TYPE, STR_PRM_DATUM,
+									STR_DEN, _global_den.den,
+									STR_MESIAC, _global_den.mesiac,
+									STR_ROK, _global_den.rok,
+									STR_MODLITBA, str_modlitby[_global_modlitba],
+									pom);
+							}
+							else if(query_type == PRM_LIT_OBD){
+								Export("%s\n<"HTML_SPAN_RED_SMALL">\n<a href=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%c"HTML_AMPERSAND"%s=%s%s\"",
+									specific_string,
+									script_name,
+									STR_QUERY_TYPE, STR_PRM_LIT_OBD,
+									STR_DEN_V_TYZDNI, _global_den.denvt,
+									STR_TYZDEN, _global_den.tyzden,
+									STR_LIT_OBD, _global_den.litobd,
+									STR_LIT_ROK, _global_den.litrok,
+									STR_MODLITBA, str_modlitby[_global_modlitba],
+									pom);
+							}
 							// napokon o1 vr·time sp‰ù
 							_global_opt[OPT_1_CASTI_MODLITBY] = _global_opt_casti_modlitby_orig; // restore pÙvodnej hodnoty
 							/*
@@ -1811,6 +1827,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							Export("%s", z95buff);
 #ifdef BEHAVIOUR_WEB
 							Export("</a>");
+							Export("</span>\n");
 #endif
 						}
 						else{
@@ -2853,7 +2870,6 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		}
 	}// PARAM_SPOL_CAST
 
-
 	else if((equals(paramname, PARAM_CHVALOSPEV)) || (equals(paramname, PARAM_OTCENAS)) || (equals(paramname, PARAM_HYMNUS_TEDEUM)) || (equals(paramname, PARAM_DOPLNKOVA_PSALMODIA)) || (equals(paramname, PARAM_ZVOLANIA))){
 		Log("  _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI == %d: \n", _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI);
 
@@ -2922,17 +2938,30 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			// teraz vytvorÌme reùazec s options
 			prilep_request_options(pom, pompom);
 			// export hyperlinku
-			// ToDo: hyperlink podæa toho, Ëi bolo volanÈ pre PRM_DNES => PRM_DATUM alebo pre PRM_LIT_OBD
 			// ToDo: prÌpadne v hyperlinku daù aj #psalmodia
-			Export("%s\n<"HTML_SPAN_RED_SMALL">\n<a href=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\"",
-				specific_string,
-				script_name,
-				STR_QUERY_TYPE, STR_PRM_DATUM,
-				STR_DEN, _global_den.den,
-				STR_MESIAC, _global_den.mesiac,
-				STR_ROK, _global_den.rok,
-				STR_MODLITBA, str_modlitby[_global_modlitba],
-				pom);
+			if(query_type == PRM_DATUM){
+				Export("%s\n<"HTML_SPAN_RED_SMALL">\n<a href=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\"",
+					specific_string,
+					script_name,
+					STR_QUERY_TYPE, STR_PRM_DATUM,
+					STR_DEN, _global_den.den,
+					STR_MESIAC, _global_den.mesiac,
+					STR_ROK, _global_den.rok,
+					STR_MODLITBA, str_modlitby[_global_modlitba],
+					pom);
+			}
+			else if(query_type == PRM_LIT_OBD){
+				Export("%s\n<"HTML_SPAN_RED_SMALL">\n<a href=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%c"HTML_AMPERSAND"%s=%s%s\"",
+					specific_string,
+					script_name,
+					STR_QUERY_TYPE, STR_PRM_LIT_OBD,
+					STR_DEN_V_TYZDNI, _global_den.denvt,
+					STR_TYZDEN, _global_den.tyzden,
+					STR_LIT_OBD, _global_den.litobd,
+					STR_LIT_ROK, _global_den.litrok,
+					STR_MODLITBA, str_modlitby[_global_modlitba],
+					pom);
+			}
 			// napokon o1 vr·time sp‰ù
 			_global_opt[opt] = _global_opt_casti_modlitby_orig; // restore pÙvodnej hodnoty
 			Export(" "HTML_CLASS_QUIET">"); // a.quiet { text-decoration:none; color: inherit; }
