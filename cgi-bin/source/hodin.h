@@ -1821,7 +1821,7 @@ const char *html_text_option_zobrazit_zvolania[POCET_JAZYKOV + 1] =
  "repeat invocation after each appeal",
  "",
  "zopakovat zvolání po kadé prosbì", 
- "megmutatni"
+ "megismételni a választ minden könyörgés után"
 };
 const char *html_text_option_skryt_zvolania[POCET_JAZYKOV + 1] = 
 {"skry zvolanie po kadej prosbe", 
@@ -1830,7 +1830,7 @@ const char *html_text_option_skryt_zvolania[POCET_JAZYKOV + 1] =
  "hide invocation after each appeal",
  "",
  "skrıt zvolání po kadé prosbì", 
- "elrejteni"
+ "elrejteni a választ minden könyörgés után"
 };
 
 const char *html_text_option1_prosby_zvolanie[POCET_JAZYKOV + 1] = 
