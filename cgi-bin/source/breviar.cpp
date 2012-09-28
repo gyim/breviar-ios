@@ -2914,23 +2914,42 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		}
 	}// PARAM_DOPLNKOVA_PSALMODIA
 
-	else if(equals(paramname, PARAM_CHVALOSPEV)){
+	else if((equals(paramname, PARAM_CHVALOSPEV)) || (equals(paramname, PARAM_OTCENAS)) || (equals(paramname, PARAM_HYMNUS_TEDEUM))){
 		Log("  _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI == %d: \n", _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI);
+		short int bit;
+		short int opt = OPT_1_CASTI_MODLITBY;
+		char popis_show[SMALL];
+		char popis_hide[SMALL];
+		mystrcpy(popis_show, html_text_option_zobrazit[_global_jazyk], SMALL);
+		mystrcpy(popis_hide, html_text_option_skryt[_global_jazyk], SMALL);
+		short int podmienka = ((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI) == BIT_OPT_2_ROZNE_MOZNOSTI); // len ak je t·to moûnosù (zobrazovanie vöeliËoho) zvolen·
+		if(equals(paramname, PARAM_OTCENAS)){
+			bit = BIT_OPT_1_OTCENAS;
+			podmienka &= (_global_skip_in_prayer != ANO);
+		}
+		if(equals(paramname, PARAM_CHVALOSPEV)){
+			bit = BIT_OPT_1_CHVALOSPEVY;
+			podmienka &= (_global_skip_in_prayer != ANO);
+		}
+		if(equals(paramname, PARAM_HYMNUS_TEDEUM)){
+			bit = BIT_OPT_1_TEDEUM;
+			podmienka &= (_global_skip_in_prayer != ANO);
+		}
 		// m· zmysel len pre rannÈ chv·ly, veöpery a kompletÛrium | iba vtedy, ak neskipujeme
-		if(((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI) == BIT_OPT_2_ROZNE_MOZNOSTI) && (_global_skip_in_prayer != ANO)){ // len ak je t·to moûnosù (zobrazovanie vöeliËoho) zvolen·
-			Log("including CHVALOSPEV\n");
-			Export("chvalospev:begin-->");
+		if(podmienka){
+			Log("including %s\n", paramname);
+			Export("%s:begin-->", paramname);
 #ifdef BEHAVIOUR_WEB
 			// najprv upravÌme o1
-			_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY]; // backup pÙvodnej hodnoty
+			_global_opt_casti_modlitby_orig = _global_opt[opt]; // backup pÙvodnej hodnoty
 			// nastavenie parametra o1: prid·me bit pre alternatÌvnu psalmÛdiu
-			if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_CHVALOSPEVY) != BIT_OPT_1_CHVALOSPEVY){
-				Log("Pre option 1 nastavujem bit pre 'chv·lospevy'\n");
-				_global_opt[OPT_1_CASTI_MODLITBY] += BIT_OPT_1_CHVALOSPEVY;
+			if((_global_opt[opt] & bit) != bit){
+				Log("Pre option %d nastavujem bit pre '%s'\n", opt, paramname);
+				_global_opt[opt] += bit;
 			}// zmena: pouûitie doplnkovej psalmÛdie
 			else{
-				Log("Pre option 1 ruöÌm bit pre 'chv·lospevy'\n");
-				_global_opt[OPT_1_CASTI_MODLITBY] -= BIT_OPT_1_CHVALOSPEVY;
+				Log("Pre option %d ruöÌm bit pre '%s'\n", opt, paramname);
+				_global_opt[opt] -= bit;
 			}
 			// prilepenie poradia sv‰tca
 			if(_global_poradie_svaty > 0){
@@ -2953,131 +2972,21 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 				STR_MODLITBA, str_modlitby[_global_modlitba],
 				pom);
 			// napokon o1 vr·time sp‰ù
-			_global_opt[OPT_1_CASTI_MODLITBY] = _global_opt_casti_modlitby_orig; // restore pÙvodnej hodnoty
+			_global_opt[opt] = _global_opt_casti_modlitby_orig; // restore pÙvodnej hodnoty
 			Export(" "HTML_CLASS_QUIET">"); // a.quiet { text-decoration:none; color: inherit; }
 #endif
-			Export("(%s)", ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_CHVALOSPEVY) != BIT_OPT_1_CHVALOSPEVY)? html_text_option_zobrazit[_global_jazyk]: html_text_option_skryt[_global_jazyk]);
+			Export("(%s)", ((_global_opt[opt] & bit) != bit)? popis_show: popis_hide);
 #ifdef BEHAVIOUR_WEB
 			Export("</a>");
 			Export("</span>\n");
 #endif
-			Export("<!--chvalospev:end");
+			Export("<!--%s:end", paramname);
 		}
 		else{
-			Export("[skipping CHVALOSPEV]");
-			Log("skipping CHVALOSPEV\n");
+			Export("[skipping %s]", paramname);
+			Log("skipping %s\n", paramname);
 		}
-	}// PARAM_CHVALOSPEV
-
-	else if(equals(paramname, PARAM_OTCENAS)){
-		Log("  _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI == %d: \n", _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI);
-		// m· zmysel len pre rannÈ chv·ly, veöpery a kompletÛrium | iba vtedy, ak neskipujeme
-		if(((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI) == BIT_OPT_2_ROZNE_MOZNOSTI) && (_global_skip_in_prayer != ANO)){ // len ak je t·to moûnosù (zobrazovanie vöeliËoho) zvolen·
-			Log("including OTCENAS\n");
-			Export("otcenas:begin-->");
-#ifdef BEHAVIOUR_WEB
-			// najprv upravÌme o1
-			_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY]; // backup pÙvodnej hodnoty
-			// nastavenie parametra o1: prid·me bit pre alternatÌvnu psalmÛdiu
-			if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_OTCENAS) != BIT_OPT_1_OTCENAS){
-				Log("Pre option 1 nastavujem bit pre 'otcenas'\n");
-				_global_opt[OPT_1_CASTI_MODLITBY] += BIT_OPT_1_OTCENAS;
-			}// zmena: pouûitie doplnkovej psalmÛdie
-			else{
-				Log("Pre option 1 ruöÌm bit pre 'otcenas'\n");
-				_global_opt[OPT_1_CASTI_MODLITBY] -= BIT_OPT_1_OTCENAS;
-			}
-			// prilepenie poradia sv‰tca
-			if(_global_poradie_svaty > 0){
-				sprintf(pom, HTML_AMPERSAND"%s=%d", STR_DALSI_SVATY, _global_poradie_svaty);
-			}// _global_poradie_svaty > 0
-			else{
-				mystrcpy(pom, STR_EMPTY, MAX_STR);
-			}// !(_global_poradie_svaty > 0)
-			// teraz vytvorÌme reùazec s options
-			prilep_request_options(pom, pompom);
-			// export hyperlinku
-			// ToDo: hyperlink podæa toho, Ëi bolo volanÈ pre PRM_DNES => PRM_DATUM alebo pre PRM_LIT_OBD
-			// ToDo: prÌpadne v hyperlinku daù aj #psalmodia
-			Export("\n<"HTML_SPAN_RED_SMALL">\n<a href=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\"",
-				script_name,
-				STR_QUERY_TYPE, STR_PRM_DATUM,
-				STR_DEN, _global_den.den,
-				STR_MESIAC, _global_den.mesiac,
-				STR_ROK, _global_den.rok,
-				STR_MODLITBA, str_modlitby[_global_modlitba],
-				pom);
-			// napokon o1 vr·time sp‰ù
-			_global_opt[OPT_1_CASTI_MODLITBY] = _global_opt_casti_modlitby_orig; // restore pÙvodnej hodnoty
-			Export(" "HTML_CLASS_QUIET">"); // a.quiet { text-decoration:none; color: inherit; }
-#endif
-			Export("(%s)", ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_OTCENAS) != BIT_OPT_1_OTCENAS)? html_text_option_zobrazit[_global_jazyk]: html_text_option_skryt[_global_jazyk]);
-#ifdef BEHAVIOUR_WEB
-			Export("</a>");
-			Export("</span>\n");
-#endif
-			Export("<!--otcenas:end");
-		}
-		else{
-			Export("[skipping OTCENAS]");
-			Log("skipping OTCENAS\n");
-		}
-	}// PARAM_OTCENAS
-
-	else if(equals(paramname, PARAM_HYMNUS_TEDEUM)){
-		Log("  _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI == %d: \n", _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI);
-		// m· zmysel len pre posv‰tanÈ ËÌtanie, a to iba vtedy, ak neskipujeme
-		if(((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI) == BIT_OPT_2_ROZNE_MOZNOSTI) && (_global_skip_in_prayer != ANO)){ // len ak je t·to moûnosù (zobrazovanie vöeliËoho) zvolen·
-			Log("including HYMNUS_TEDEUM\n");
-			Export("hymnus_tedeum:begin-->");
-#ifdef BEHAVIOUR_WEB
-			// najprv upravÌme o1
-			_global_opt_casti_modlitby_orig = _global_opt[OPT_1_CASTI_MODLITBY]; // backup pÙvodnej hodnoty
-			// nastavenie parametra o1: prid·me bit pre alternatÌvnu psalmÛdiu
-			if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_TEDEUM) != BIT_OPT_1_TEDEUM){
-				Log("Pre option 1 nastavujem bit pre 'hymnus_tedeum'\n");
-				_global_opt[OPT_1_CASTI_MODLITBY] += BIT_OPT_1_TEDEUM;
-			}// zmena: pouûitie doplnkovej psalmÛdie
-			else{
-				Log("Pre option 1 ruöÌm bit pre 'hymnus_tedeum'\n");
-				_global_opt[OPT_1_CASTI_MODLITBY] -= BIT_OPT_1_TEDEUM;
-			}
-			// prilepenie poradia sv‰tca
-			if(_global_poradie_svaty > 0){
-				sprintf(pom, HTML_AMPERSAND"%s=%d", STR_DALSI_SVATY, _global_poradie_svaty);
-			}// _global_poradie_svaty > 0
-			else{
-				mystrcpy(pom, STR_EMPTY, MAX_STR);
-			}// !(_global_poradie_svaty > 0)
-			// teraz vytvorÌme reùazec s options
-			prilep_request_options(pom, pompom);
-			// export hyperlinku
-			// ToDo: hyperlink podæa toho, Ëi bolo volanÈ pre PRM_DNES => PRM_DATUM alebo pre PRM_LIT_OBD
-			// ToDo: prÌpadne v hyperlinku daù aj #psalmodia
-			Export("\n<"HTML_SPAN_RED_SMALL">\n<a href=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\"",
-				script_name,
-				STR_QUERY_TYPE, STR_PRM_DATUM,
-				STR_DEN, _global_den.den,
-				STR_MESIAC, _global_den.mesiac,
-				STR_ROK, _global_den.rok,
-				STR_MODLITBA, str_modlitby[_global_modlitba],
-				pom);
-			// napokon o1 vr·time sp‰ù
-			_global_opt[OPT_1_CASTI_MODLITBY] = _global_opt_casti_modlitby_orig; // restore pÙvodnej hodnoty
-			Export(" "HTML_CLASS_QUIET">"); // a.quiet { text-decoration:none; color: inherit; }
-#endif
-			Export("(%s)", ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_TEDEUM) != BIT_OPT_1_TEDEUM)? html_text_option_zobrazit[_global_jazyk]: html_text_option_skryt[_global_jazyk]);
-#ifdef BEHAVIOUR_WEB
-			Export("</a>");
-			Export("</span>\n");
-#endif
-			Export("<!--hymnus_tedeum:end");
-		}
-		else{
-			Export("[skipping HYMNUS_TEDEUM]");
-			Log("skipping HYMNUS_TEDEUM\n");
-		}
-	}// PARAM_HYMNUS_TEDEUM
+	}// PARAM_CHVALOSPEV, PARAM_OTCENAS, PARAM_HYMNUS_TEDEUM
 
 	else if(equals(paramname, PARAM_NAVIGACIA)){
 		if(aj_navigacia == ANO){
