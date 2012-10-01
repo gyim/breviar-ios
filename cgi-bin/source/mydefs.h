@@ -677,12 +677,44 @@ extern short int query_type; // premenna obsahujuca PRM_...
 	#define STR_MODL_OPTF_2_NOCNY_REZIM "of2nr"
 #endif
 
-// nocny rezim - svetly text na tmavom pozadi
+// rÙzne moûnosti zobrazovaù priamo v texte modlitieb (najm‰ pre android)
 #define MODL_OPTF_2_ROZNE_MOZNOSTI 93
 #ifdef LONG_PARAM_NAMES
 	#define STR_MODL_OPTF_2_ROZNE_MOZNOSTI "MODL_OPTF_2_ROZNE_MOZNOSTI"
 #else
 	#define STR_MODL_OPTF_2_ROZNE_MOZNOSTI "of2rm"
+#endif
+
+// skryù navig·ciu -- BIT_OPT_2_HIDE_NAVIG_BUTTONS
+#define MODL_OPTF_2_HIDE_NAVIG_BUTTONS 94
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF_2_HIDE_NAVIG_BUTTONS "MODL_OPTF_2_HIDE_NAVIG_BUTTONS"
+#else
+	#define STR_MODL_OPTF_2_HIDE_NAVIG_BUTTONS "of2hnb"
+#endif
+
+// skryù kalend·r -- BIT_OPT_2_HIDE_KALENDAR
+#define MODL_OPTF_2_HIDE_KALENDAR 95
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF_2_HIDE_KALENDAR "MODL_OPTF_2_HIDE_KALENDAR"
+#else
+	#define STR_MODL_OPTF_2_HIDE_KALENDAR "of2hk"
+#endif
+
+// skryù options, prv· Ëasù -- BIT_OPT_2_HIDE_OPTIONS1
+#define MODL_OPTF_2_HIDE_OPTIONS1 96
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF_2_HIDE_OPTIONS1 "MODL_OPTF_2_HIDE_OPTIONS1"
+#else
+	#define STR_MODL_OPTF_2_HIDE_OPTIONS1 "of2ho1"
+#endif
+
+// skryù options, druh· Ëasù -- BIT_OPT_2_HIDE_OPTIONS2
+#define MODL_OPTF_2_HIDE_OPTIONS2 97
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF_2_HIDE_OPTIONS2 "MODL_OPTF_2_HIDE_OPTIONS2"
+#else
+	#define STR_MODL_OPTF_2_HIDE_OPTIONS2 "of2ho2"
 #endif
 
 // 2008-08-08: PridanÈ kvÙli rÙznym css

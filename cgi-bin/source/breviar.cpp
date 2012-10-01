@@ -1146,6 +1146,10 @@ short int setForm(void){
 				case 7: strcat(local_str, STR_MODL_OPTF_2_BUTTONY_USPORNE); break; // BIT_OPT_2_BUTTONY_USPORNE
 				case 8: strcat(local_str, STR_MODL_OPTF_2_NOCNY_REZIM); break; // BIT_OPT_2_NOCNY_REZIM
 				case 9: strcat(local_str, STR_MODL_OPTF_2_ROZNE_MOZNOSTI); break; // BIT_OPT_2_ROZNE_MOZNOSTI
+				case 10: strcat(local_str, STR_MODL_OPTF_2_HIDE_NAVIG_BUTTONS); break; // BIT_OPT_2_HIDE_NAVIG_BUTTONS
+				case 11: strcat(local_str, STR_MODL_OPTF_2_HIDE_KALENDAR); break; // BIT_OPT_2_HIDE_KALENDAR
+				case 12: strcat(local_str, STR_MODL_OPTF_2_HIDE_OPTIONS1); break; // BIT_OPT_2_HIDE_OPTIONS1
+				case 13: strcat(local_str, STR_MODL_OPTF_2_HIDE_OPTIONS2); break; // BIT_OPT_2_HIDE_OPTIONS2
 			}// switch(i)
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF_HTML_EXPORT[i]);
@@ -6844,6 +6848,49 @@ void _export_rozbor_dna_buttons_dni_dnes(short int typ, short int dnes_dnes, sho
  * 2011-07-03: pridan· moûnosù zmeniù default look (tlaËidlo "dnes" pre navig·ciu v modlitbe nebude maù popis "dnes" a inÈ zmeny pre navig·ciu)
  *	
  */
+void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO */){
+	// 2012-10-01: zobrazujeme, iba ak nie je explicitne vyûiadanÈ skr˝vanie
+	if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_NAVIG_BUTTONS) != BIT_OPT_2_HIDE_NAVIG_BUTTONS){
+		_export_rozbor_dna_buttons_dni_call(typ, dnes_dnes);
+	}
+	else{
+		// Export("\n<!--hide buttons-->\n");
+		char pom[MAX_STR] = STR_EMPTY;
+		char pom2[MAX_STR];
+		mystrcpy(pom2, STR_EMPTY, MAX_STR);
+		char pom3[MAX_STR];
+		mystrcpy(pom3, STR_EMPTY, MAX_STR);
+
+		prilep_request_options(pom2, pom3);
+
+		short int _global_opt_orig;
+		// najprv upravÌme o2
+		_global_opt_orig = _global_opt[OPT_2_HTML_EXPORT]; // backup pÙvodnej hodnoty
+		// nastavenie parametra o1: prid·me BIT_OPT_2_HIDE_NAVIG_BUTTONS pre alternatÌvnu psalmÛdiu
+		if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_NAVIG_BUTTONS) != BIT_OPT_2_HIDE_NAVIG_BUTTONS){
+			Log("Pre option %d nastavujem bit pre '%d'\n", OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_NAVIG_BUTTONS);
+			_global_opt[OPT_2_HTML_EXPORT] += BIT_OPT_2_HIDE_NAVIG_BUTTONS;
+		}// zmena: pouûitie doplnkovej psalmÛdie
+		else{
+			Log("Pre option %d ruöÌm bit pre '%d'\n", OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_NAVIG_BUTTONS);
+			_global_opt[OPT_2_HTML_EXPORT] -= BIT_OPT_2_HIDE_NAVIG_BUTTONS;
+		}
+
+		mystrcpy(pom2, STR_EMPTY, MAX_STR);
+		mystrcpy(pom3, STR_EMPTY, MAX_STR);
+		// teraz vytvorÌme reùazec s options
+		prilep_request_options(pom2, pom3);
+
+		sprintf(pom, HTML_LINK_CALL1, script_name, STR_QUERY_TYPE, STR_PRM_DATUM, STR_DEN, _global_den.den, STR_MESIAC, _global_den.mesiac, STR_ROK, _global_den.rok, pom2);
+
+		Export("<p align=\"center\">\n");
+		Export("<a href=\"%s\" "HTML_CLASS_QUIET">(%s %s)</a></span>", pom, html_text_option_zobrazit[_global_jazyk], html_text_navig_buttons[_global_jazyk]);
+		Export("</p>\n");
+
+		// napokon o2 vr·time sp‰ù
+		_global_opt[OPT_2_HTML_EXPORT] = _global_opt_orig; // restore pÙvodnej hodnoty
+	}
+}
 void _export_rozbor_dna_buttons_dni_orig(short int typ, short int dnes_dnes /* = ANO */){
 	Log("--- _export_rozbor_dna_buttons_dni_orig(typ == %d) -- begin\n", typ);
 #ifdef OS_Windows_Ruby
@@ -7252,6 +7299,8 @@ void _export_rozbor_dna_buttons_dni_compact(short int typ, short int dnes_dnes /
 	short int _orig_mesiac = _global_den.mesiac;
 	short int _orig_rok = _global_den.rok;
 
+	short int _global_opt_orig;
+
 	_struct_den_mesiac datum;
 
 	char pom[MAX_STR] = STR_EMPTY;
@@ -7497,7 +7546,49 @@ void _export_rozbor_dna_buttons_dni_compact(short int typ, short int dnes_dnes /
 				}
 			}
 
-			Export("<td> </td>");
+			// moûnosù skryù vöetky tlaËidl· (cel˝ komponent)
+
+			// obnovenie na "dnes"
+			datum.den = _global_den.den;
+			datum.mesiac = _global_den.mesiac;
+			_local_rok = _global_den.rok;
+
+			if(_global_opt_batch_monthly == NIE){
+
+				// najprv upravÌme o2
+				_global_opt_orig = _global_opt[OPT_2_HTML_EXPORT]; // backup pÙvodnej hodnoty
+				// nastavenie parametra o1: prid·me BIT_OPT_2_HIDE_NAVIG_BUTTONS pre alternatÌvnu psalmÛdiu
+				if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_NAVIG_BUTTONS) != BIT_OPT_2_HIDE_NAVIG_BUTTONS){
+					Log("Pre option %d nastavujem bit pre '%d'\n", OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_NAVIG_BUTTONS);
+					_global_opt[OPT_2_HTML_EXPORT] += BIT_OPT_2_HIDE_NAVIG_BUTTONS;
+				}// zmena: pouûitie doplnkovej psalmÛdie
+				else{
+					Log("Pre option %d ruöÌm bit pre '%d'\n", OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_NAVIG_BUTTONS);
+					_global_opt[OPT_2_HTML_EXPORT] -= BIT_OPT_2_HIDE_NAVIG_BUTTONS;
+				}
+
+				mystrcpy(pom2, STR_EMPTY, MAX_STR);
+				mystrcpy(pom3, STR_EMPTY, MAX_STR);
+				// teraz vytvorÌme reùazec s options
+				prilep_request_options(pom2, pom3);
+
+				sprintf(pom, HTML_LINK_CALL1, script_name, STR_QUERY_TYPE, STR_PRM_DATUM, STR_DEN, datum.den, STR_MESIAC, datum.mesiac, STR_ROK, _local_rok, pom2);
+
+				Export("<td align=\"center\">\n");
+				Export("<a href=\"%s\" "HTML_CLASS_QUIET">(%s)</a></span>", pom, html_text_option_skryt[_global_jazyk]);
+				Export("</td>\n");
+
+				// napokon o2 vr·time sp‰ù
+				_global_opt[OPT_2_HTML_EXPORT] = _global_opt_orig; // restore pÙvodnej hodnoty
+
+				mystrcpy(pom2, STR_EMPTY, MAX_STR);
+				mystrcpy(pom3, STR_EMPTY, MAX_STR);
+				// teraz vytvorÌme reùazec s options (revert)
+				prilep_request_options(pom2, pom3);
+			}// if(_global_opt_batch_monthly == NIE)
+			else{
+				mystrcpy(pom, STR_EMPTY, MAX_STR);
+			}
 
 			// ---------------------------------------------------
 			// >> nasledovn˝ mesiac
@@ -7663,21 +7754,91 @@ void _export_rozbor_dna_buttons_dni_compact(short int typ, short int dnes_dnes /
  *
  */
 void _export_rozbor_dna_kalendar(short int typ){
-	Log("--- _export_rozbor_dna_kalendar(typ == %d) -- begin\n", typ);
+	// 2012-10-01: zobrazujeme, iba ak nie je explicitne vyûiadanÈ skr˝vanie
+	if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_KALENDAR) != BIT_OPT_2_HIDE_KALENDAR){
+		_export_rozbor_dna_kalendar_orig(typ);
+	}
+	else{
+		// Export("\n<!--hide buttons-->\n");
+		char pom[MAX_STR] = STR_EMPTY;
+		char pom2[MAX_STR];
+		mystrcpy(pom2, STR_EMPTY, MAX_STR);
+		char pom3[MAX_STR];
+		mystrcpy(pom3, STR_EMPTY, MAX_STR);
+
+		short int _global_opt_orig;
+		// najprv upravÌme o2
+		_global_opt_orig = _global_opt[OPT_2_HTML_EXPORT]; // backup pÙvodnej hodnoty
+		// nastavenie parametra o1: prid·me BIT_OPT_2_HIDE_KALENDAR pre alternatÌvnu psalmÛdiu
+		if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_KALENDAR) != BIT_OPT_2_HIDE_KALENDAR){
+			Log("Pre option %d nastavujem bit pre '%d'\n", OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_KALENDAR);
+			_global_opt[OPT_2_HTML_EXPORT] += BIT_OPT_2_HIDE_KALENDAR;
+		}// zmena: pouûitie doplnkovej psalmÛdie
+		else{
+			Log("Pre option %d ruöÌm bit pre '%d'\n", OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_KALENDAR);
+			_global_opt[OPT_2_HTML_EXPORT] -= BIT_OPT_2_HIDE_KALENDAR;
+		}
+
+		// teraz vytvorÌme reùazec s options
+		prilep_request_options(pom2, pom3);
+
+		sprintf(pom, HTML_LINK_CALL1, script_name, STR_QUERY_TYPE, STR_PRM_DATUM, STR_DEN, _global_den.den, STR_MESIAC, _global_den.mesiac, STR_ROK, _global_den.rok, pom2);
+
+		Export("<p align=\"center\">\n");
+		Export("<a href=\"%s\" "HTML_CLASS_QUIET">(%s %s)</a></span>", pom, html_text_option_zobrazit[_global_jazyk], html_text_kalendar[_global_jazyk]);
+		Export("</p>\n");
+
+		// napokon o2 vr·time sp‰ù
+		_global_opt[OPT_2_HTML_EXPORT] = _global_opt_orig; // restore pÙvodnej hodnoty
+	}
+}// _export_rozbor_dna_kalendar()
+
+void _export_rozbor_dna_kalendar_orig(short int typ){
+	Log("--- _export_rozbor_dna_kalendar_orig(typ == %d) -- begin\n", typ);
 	Export("\n<!--kalendar-->\n");
 
 	if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_VIAC_DNI_TXT)){
-		Log("--- _export_rozbor_dna_kalendar(): idem tlacit kalendar...\n");
+		Log("--- _export_rozbor_dna_kalendar_orig(): idem tlacit kalendar...\n");
 		short int i, j, k;
 
-		char pom2[MAX_STR]; /* 2006-07-31: pridanÈ */
-		mystrcpy(pom2, STR_EMPTY, MAX_STR); /* 2006-07-31: pridanÈ */
-		char pom3[MAX_STR]; /* 2008-08-08: pridanÈ */
+		char pom[MAX_STR];
+		mystrcpy(pom, STR_EMPTY, MAX_STR);
+		char pom2[MAX_STR];
+		mystrcpy(pom2, STR_EMPTY, MAX_STR);
+		char pom3[MAX_STR];
 		mystrcpy(pom3, STR_EMPTY, MAX_STR);
 
+		short int _global_opt_orig;
+		// najprv upravÌme o2
+		_global_opt_orig = _global_opt[OPT_2_HTML_EXPORT]; // backup pÙvodnej hodnoty
+		// nastavenie parametra o1: prid·me BIT_OPT_2_HIDE_KALENDAR pre alternatÌvnu psalmÛdiu
+		if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_KALENDAR) != BIT_OPT_2_HIDE_KALENDAR){
+			Log("Pre option %d nastavujem bit pre '%d'\n", OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_KALENDAR);
+			_global_opt[OPT_2_HTML_EXPORT] += BIT_OPT_2_HIDE_KALENDAR;
+		}// zmena: pouûitie doplnkovej psalmÛdie
+		else{
+			Log("Pre option %d ruöÌm bit pre '%d'\n", OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_KALENDAR);
+			_global_opt[OPT_2_HTML_EXPORT] -= BIT_OPT_2_HIDE_KALENDAR;
+		}
+
+		// teraz vytvorÌme reùazec s options
 		prilep_request_options(pom2, pom3);
 
-		/* 2007-08-15: pokus o krajöie zobrazenie formou kalend·ra */
+		sprintf(pom, HTML_LINK_CALL1, script_name, STR_QUERY_TYPE, STR_PRM_DATUM, STR_DEN, _global_den.den, STR_MESIAC, _global_den.mesiac, STR_ROK, _global_den.rok, pom2);
+
+		Export("<p align=\"center\">\n");
+		Export("<a href=\"%s\" "HTML_CLASS_QUIET">(%s)</a></span>", pom, html_text_option_skryt[_global_jazyk]);
+		Export("</p>\n");
+
+		// napokon o2 vr·time sp‰ù
+		_global_opt[OPT_2_HTML_EXPORT] = _global_opt_orig; // restore pÙvodnej hodnoty
+
+		mystrcpy(pom2, STR_EMPTY, MAX_STR);
+		mystrcpy(pom3, STR_EMPTY, MAX_STR);
+		// teraz vytvorÌme reùazec s options
+		prilep_request_options(pom2, pom3);
+
+		// 2007-08-15: pokus o krajöie zobrazenie formou kalend·ra
 #undef ZOZNAM_DNI_MESIACOV_OLD
 #ifdef ZOZNAM_DNI_MESIACOV_OLD
 		/* zoznam cisel dni */
@@ -7845,8 +8006,8 @@ void _export_rozbor_dna_kalendar(short int typ){
 	}
 
 	Export("\n");
-	Log("--- _export_rozbor_dna_kalendar(typ == %d) -- end\n", typ);
-}// _export_rozbor_dna_kalendar()
+	Log("--- _export_rozbor_dna_kalendar_orig(typ == %d) -- end\n", typ);
+}// _export_rozbor_dna_kalendar_orig()
 
 //---------------------------------------------------------------------
 /*
@@ -13651,6 +13812,10 @@ short int getForm(void){
 			case 7: strcat(local_str, STR_MODL_OPTF_2_BUTTONY_USPORNE); break; // BIT_OPT_2_BUTTONY_USPORNE
 			case 8: strcat(local_str, STR_MODL_OPTF_2_NOCNY_REZIM); break; // BIT_OPT_2_NOCNY_REZIM
 			case 9: strcat(local_str, STR_MODL_OPTF_2_ROZNE_MOZNOSTI); break; // BIT_OPT_2_ROZNE_MOZNOSTI
+			case 10: strcat(local_str, STR_MODL_OPTF_2_HIDE_NAVIG_BUTTONS); break; // BIT_OPT_2_HIDE_NAVIG_BUTTONS
+			case 11: strcat(local_str, STR_MODL_OPTF_2_HIDE_KALENDAR); break; // BIT_OPT_2_HIDE_KALENDAR
+			case 12: strcat(local_str, STR_MODL_OPTF_2_HIDE_OPTIONS1); break; // BIT_OPT_2_HIDE_OPTIONS1
+			case 13: strcat(local_str, STR_MODL_OPTF_2_HIDE_OPTIONS2); break; // BIT_OPT_2_HIDE_OPTIONS2
 		}// switch(i)
 		ptr = getenv(local_str);
 		if(ptr != NULL){
@@ -14423,6 +14588,10 @@ short int parseQueryString(void){
 			case 7: strcat(local_str, STR_MODL_OPTF_2_BUTTONY_USPORNE); break; // BIT_OPT_2_BUTTONY_USPORNE
 			case 8: strcat(local_str, STR_MODL_OPTF_2_NOCNY_REZIM); break; // BIT_OPT_2_NOCNY_REZIM
 			case 9: strcat(local_str, STR_MODL_OPTF_2_ROZNE_MOZNOSTI); break; // BIT_OPT_2_ROZNE_MOZNOSTI
+			case 10: strcat(local_str, STR_MODL_OPTF_2_HIDE_NAVIG_BUTTONS); break; // BIT_OPT_2_HIDE_NAVIG_BUTTONS
+			case 11: strcat(local_str, STR_MODL_OPTF_2_HIDE_KALENDAR); break; // BIT_OPT_2_HIDE_KALENDAR
+			case 12: strcat(local_str, STR_MODL_OPTF_2_HIDE_OPTIONS1); break; // BIT_OPT_2_HIDE_OPTIONS1
+			case 13: strcat(local_str, STR_MODL_OPTF_2_HIDE_OPTIONS2); break; // BIT_OPT_2_HIDE_OPTIONS2
 		}// switch(j)
 		// premenn· WWW_MODL_OPT_2_... (nepovinn·), j = 0 aû POCET_OPT_2_HTML_EXPORT
 		i = 0; // param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0

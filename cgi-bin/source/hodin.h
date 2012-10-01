@@ -2008,6 +2008,15 @@ const char *html_text_option2_font_family_explain[POCET_JAZYKOV + 1] =
  "Válasszon talpas (Serif) vagy talp nélküli (Sans Serif) betût, kényelem szerint. A böngészõ ablakban mutatott betûtípus az alapértelmezett."
 };
 
+const char *html_text_navig_buttons[POCET_JAZYKOV + 1] = 
+{"navigáciu", 
+ "navigaci", 
+ "navigation buttons", 
+ "",
+ "",
+ "navigaci", 
+ "navigáció"
+};
 const char *html_text_option2_navigation[POCET_JAZYKOV + 1] = 
 {"zobrazi navigáciu v textoch modlitieb",
  "zobrazit navigaci v textech modliteb", 
@@ -2149,6 +2158,15 @@ const char *html_option_selected = " selected";
 // 2011-04-11: HTML option checked (pre checkboxy)
 const char *html_option_checked = " checked";
 
+const char *html_text_kalendar[POCET_JAZYKOV + 1] = 
+{"kalendár", 
+ "kalendáø", 
+ "calendar", 
+ "calendario",
+ "",
+ "kalendáø",
+ "naptárát"
+};
 // 2010-09-14: doplnené
 const char *html_text_kalendar_miestny[POCET_JAZYKOV + 1] = 
 {"kalendár Liturgie hodín poui: ", 
