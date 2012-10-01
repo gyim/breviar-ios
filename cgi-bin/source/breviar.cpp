@@ -7986,6 +7986,9 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	Export("<!--TABLE:BEGIN(PRM_DATUM)-->\n");
 	Export("<table align=\"left\">\n<tr><td>\n");
+
+#if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
+#else
 	// formular pre PRM_DATUM
 	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\" checked>",
 		STR_QUERY_TYPE, STR_PRM_DATUM);
@@ -8069,6 +8072,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("</table>\n");
 	Export("</td>\n");
 	Export("</tr>\n\n");
+#endif
 
 #ifdef FORMULAR_PRE_PRM_SVIATOK
 /* ------------------------------------------- */
@@ -8181,7 +8185,11 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<option>%s\n", nazov_modlitby(MODL_DRUHE_KOMPLETORIUM));
 	Export("</select>\n");
 
+#if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
+	Export(HTML_LINE_BREAK);
+#else
 	Export(HTML_NONBREAKING_SPACE);
+#endif
 	Export((char *)html_text_den[_global_jazyk]);
 	Export(HTML_NONBREAKING_SPACE);
 
@@ -8192,7 +8200,12 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	}
 	Export("\n</select>\n");
 
-	Export(", \n");
+	Export(",\n");
+#if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
+	Export(HTML_LINE_BREAK);
+#else
+	Export(HTML_SPACE);
+#endif
 	Export((char *)html_text_liturgicky_rok[_global_jazyk]);
 	Export(HTML_NONBREAKING_SPACE);
 
@@ -8217,7 +8230,12 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	if(_global_jazyk != JAZYK_LA){
 		Export((char *)html_text_tyzden[_global_jazyk]);
 	}
-	Export(", \n");
+	Export(",\n");
+#if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
+	Export(HTML_LINE_BREAK);
+#else
+	Export(HTML_SPACE);
+#endif
 
 	// pole WWW_LIT_OBD
 	Export("<select name=\"%s\">\n", STR_LIT_OBD);
@@ -8980,8 +8998,8 @@ void _export_rozbor_dna(short int typ){
 			Log("export_monthly_druh == %d [2011-04-13]\n", export_monthly_druh);
 
 			if(_global_linky == ANO){
-				Export("\n<!-- prázdny riadok ako oddelenie -->\n");
-				Export("<br />\n");
+				// Export("\n<!-- prázdny riadok ako oddelenie -->\n");
+				// Export("<br />\n");
 				Export("<!--nasleduje formulár-->\n");
 				_export_main_formular(_global_den.den, _global_den.mesiac, _global_den.rok, _global_den.denvt);
 			}// if(_global_linky == ANO)
