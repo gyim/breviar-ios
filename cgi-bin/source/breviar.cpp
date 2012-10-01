@@ -2877,6 +2877,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		|| (equals(paramname, PARAM_ZVOLANIA)) 
 		|| (equals(paramname, PARAM_POPIS)) 
 		|| (equals(paramname, PARAM_SLAVAOTCU))
+		|| (equals(paramname, PARAM_RESPONZ))
 		){
 		Log("  _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI == %d: \n", _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI);
 
@@ -2934,6 +2935,14 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			sprintf(popis_show, "%s %s", html_text_option_zobrazit[_global_jazyk], html_text_option1_slava_otcu[_global_jazyk]);
 			sprintf(popis_hide, "%s %s", html_text_option_skryt[_global_jazyk], html_text_option1_slava_otcu[_global_jazyk]);
 		}
+		else if(equals(paramname, PARAM_RESPONZ)){
+			bit = BIT_OPT_1_PLNE_RESP;
+			podmienka &= (_global_modlitba == MODL_POSV_CITANIE); // len pre posv. ËÌtanie // ToDo: Ëasom aj pre rannÈ chv·ly a veöpery (kr·tke resp.)
+			mystrcpy(specific_string, "<p>", SMALL);
+			sprintf(popis_show, "%s %s", html_text_option_zobrazit[_global_jazyk], html_text_option1_plne_resp[_global_jazyk]);
+			sprintf(popis_hide, "%s %s", html_text_option_skryt[_global_jazyk], html_text_option1_plne_resp[_global_jazyk]);
+		}
+
 		// m· zmysel len ak platÌ dan· podmienka
 		if(podmienka){
 			Log("including %s\n", paramname);
@@ -7672,11 +7681,13 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_tedeum_explain[_global_jazyk], html_text_option1_tedeum[_global_jazyk]);
 	}
 
-	// pole (checkbox) WWW_MODL_OPTF_1_PLNE_RESP
-	Export("<br>");
-	Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_1_PLNE_RESP, NIE);
-	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_1_PLNE_RESP, ANO, html_text_option1_plne_resp_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PLNE_RESP) == BIT_OPT_1_PLNE_RESP)? html_option_checked: STR_EMPTY);
-	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_plne_resp_explain[_global_jazyk], html_text_option1_plne_resp[_global_jazyk]);
+	if((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI) != BIT_OPT_2_ROZNE_MOZNOSTI){ // len ak NIE JE t·to moûnosù (zobrazovanie vöeliËoho) zvolen·
+		// pole (checkbox) WWW_MODL_OPTF_1_PLNE_RESP
+		Export("<br>");
+		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_1_PLNE_RESP, NIE);
+		Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_1_PLNE_RESP, ANO, html_text_option1_plne_resp_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PLNE_RESP) == BIT_OPT_1_PLNE_RESP)? html_option_checked: STR_EMPTY);
+		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_plne_resp_explain[_global_jazyk], html_text_option1_plne_resp[_global_jazyk]);
+	}
 
 	Export("</td></tr>\n");
 
