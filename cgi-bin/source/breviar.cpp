@@ -7318,13 +7318,13 @@ void _export_rozbor_dna_kalendar(short int typ){
 		Export("\n</span>\n"); // n·protivok span small
 #else
 
-		/* zoznam dnÌ vo forme kalend·rika */
-		Export("\n<table>\n");
+		// zoznam dnÌ vo forme kalend·rika
+		Export("\n<table align=\"center\">\n");
 
 		Export("<tr align=\"center\">\n<th colspan=\"7\">\n");
-		/* nadpis tabuæky v tvare: << mesiac rok >> */
+		// nadpis tabuæky v tvare: << mesiac rok >>
 
-		/* << predoöl˝ mesiac */
+		// << predoöl˝ mesiac
 		if((_global_den.mesiac - 1) == MES_JAN){
 			j = MES_DEC + 1;
 			k = _global_den.rok - 1;
@@ -7351,11 +7351,11 @@ void _export_rozbor_dna_kalendar(short int typ){
 		// rok
 		if(_global_opt_batch_monthly == NIE){
 			Vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, _global_den.rok, LINK_DEN_MESIAC, NIE);
-		}/* if(_global_opt_batch_monthly == NIE) */
+		}// if(_global_opt_batch_monthly == NIE)
 		else{
 			// 2009-08-12: pre batch mÛd export vytlaËÌme len rok bez linku
 			sprintf(_global_link, "%d", _global_den.rok);
-		}/* else if(_global_opt_batch_monthly == NIE) */
+		}// else if(_global_opt_batch_monthly == NIE)
 		Export("<"HTML_SPAN_BOLD">%s</span>", _global_link);
 
 		Export(HTML_NONBREAKING_SPACE); // oddelenie roka a >>
@@ -7431,10 +7431,9 @@ void _export_rozbor_dna_kalendar(short int typ){
 				Export("<td>"HTML_NONBREAKING_SPACE"<!--_(%s)_--></td>", (char *)nazov_Dn(k));
 			}
 		}
-//		if(som_v_tabulke == ANO){
-			Export("</tr>\n");
-			Export("</table>\n");
-//		}
+
+		Export("</tr>\n");
+		Export("</table>\n");
 #endif
 
 	}// if(typ)
@@ -7523,14 +7522,14 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	// 2006-02-02: prevzat· Ëasù z _main_dnes
 
+	// 2003-07-09, zmenene <center><table> na <table align="center">
+	Export("<!--TABLE:BEGIN(options)-->\n");
+	Export("\n<table align=\"center\">\n");
+
 	// pokraËujem vypÌsanÌm formul·ra
 	// 2012-07-23: rozdelenie jednoho formu na dva; prv˝ pouûije PRM_DATUM podæa glob·lneho nastavenia
 	// pÙvodne tu bolo: Export("\n<form action=\"%s?%s\" method=\"post\">\n", uncgi_name, pom2);
 	Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n", script_name, STR_QUERY_TYPE, STR_PRM_DATUM, STR_DEN, _global_den.den, STR_MESIAC, _global_den.mesiac, STR_ROK, _global_den.rok, pom2);
-
-	// 2003-07-09, zmenene <center><table> na <table align="center">
-	Export("<!--TABLE:BEGIN(options)-->\n");
-	Export("\n<table align=\"center\">\n");
 
 /* ------------------------------------------- */
 	Export("<tr>\n<td>\n");
@@ -7555,6 +7554,10 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		// formular pre v˝ber kalend·ra
 
 		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_kalendar_miestny_explain[_global_jazyk], html_text_kalendar_miestny[_global_jazyk]);
+		// 2012-10-01: doplnen˝ zlom riadka pre android
+#if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
+		Export("<br>");
+#endif
 	
 		// drop-down list pre v˝ber kalend·ra (propri·)
 		// pole WWW_KALENDAR
@@ -7730,6 +7733,10 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	// formul·r pre v˝ber preferovanej spoloËnej Ëasti
 	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_spol_casti_vziat_zo_explain[_global_jazyk], html_text_spol_casti_vziat_zo[_global_jazyk]);
 	Export("\n");
+	// 2012-10-01: doplnen˝ zlom riadka pre android
+#if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
+	Export("<br>");
+#endif
 	Export("<select name=\"%s\" title=\"%s\">\n", STR_MODL_OPTF_3, html_text_spol_casti_vziat_zo_explain[_global_jazyk]);
 	for(int i = 0; i < POCET_SPOL_CASTI; i++){
 		if((i == MODL_SPOL_CAST_NEURCENA) || (i == MODL_SPOL_CAST_NEBRAT))
@@ -8951,6 +8958,17 @@ void _export_rozbor_dna(short int typ){
 			}
 #endif
 
+			Export("\n<!--BEGIN: kalend·rik-->\n");
+			if((_global_opt_batch_monthly == ANO) && (export_monthly_druh > 2)){
+				// 2009-08-26: doplnenÈ; 2011-04-13: podmienka rozöÌren· vyööie ((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_VIAC_DNI_TXT))
+				Log("pre tento typ exportu sa kalend·rik negeneruje\n");
+			}
+			else{
+				_export_rozbor_dna_kalendar(typ);
+			}
+			Export("<!--END: kalend·rik-->\n");
+
+			Export("\n<!--BEGIN: veæk· tabuæka s kalend·rom a hlavn˝m formul·rom-->\n");
 			if(_global_linky == ANO){
 				// 2008-01-22: podæa Vladovho n·vrhu presunut˝ nadpis sem
 				Export("<center><p "HTML_CLASS_BOLD_IT">\n");
@@ -8961,23 +8979,13 @@ void _export_rozbor_dna(short int typ){
 			Log("_global_opt_batch_monthly == %d [2011-04-13]\n", _global_opt_batch_monthly);
 			Log("export_monthly_druh == %d [2011-04-13]\n", export_monthly_druh);
 
-			if((_global_opt_batch_monthly == ANO) && (export_monthly_druh > 2)){
-				// 2009-08-26: doplnenÈ; 2011-04-13: podmienka rozöÌren· vyööie ((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_VIAC_DNI_TXT))
-				Log("pre tento typ exportu sa kalend·rik negeneruje\n");
-			}
-			else{
-				Export("\n<!--BEGIN: veæk· tabuæka s kalend·rom a hlavn˝m formul·rom-->\n");
-				Export("<table align=\"center\">\n<tr>\n<td align=\"center\" valign=\"top\">\n");
-				_export_rozbor_dna_kalendar(typ); /* 2007-08-15 */
-			}
 			if(_global_linky == ANO){
-				Export("\n</td>\n<!-- pr·zdny stÂpec ako oddelenie -->\n");
-				Export("<td>"HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE"</td>\n");
-				Export("<!--nasleduje formul·r-->\n<td align=\"left\" valign=\"top\">\n");
+				Export("\n<!-- pr·zdny riadok ako oddelenie -->\n");
+				Export("<br />\n");
+				Export("<!--nasleduje formul·r-->\n");
 				_export_main_formular(_global_den.den, _global_den.mesiac, _global_den.rok, _global_den.denvt);
 			}// if(_global_linky == ANO)
 
-			Export("</td>\n<tr>\n</table>\n");
 			Export("<!--END: veæk· tabuæka s kalend·rom a hlavn˝m formul·rom-->\n");
 		}
 	}// (typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_TXT)
