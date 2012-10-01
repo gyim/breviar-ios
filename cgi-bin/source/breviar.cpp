@@ -2870,7 +2870,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		}
 	}// PARAM_SPOL_CAST
 
-	else if((equals(paramname, PARAM_CHVALOSPEV)) || (equals(paramname, PARAM_OTCENAS)) || (equals(paramname, PARAM_HYMNUS_TEDEUM)) || (equals(paramname, PARAM_DOPLNKOVA_PSALMODIA)) || (equals(paramname, PARAM_ZVOLANIA))){
+	else if((equals(paramname, PARAM_CHVALOSPEV)) || (equals(paramname, PARAM_OTCENAS)) || (equals(paramname, PARAM_TEDEUM)) || (equals(paramname, PARAM_DOPLNKOVA_PSALMODIA)) || (equals(paramname, PARAM_ZVOLANIA))){
 		Log("  _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI == %d: \n", _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI);
 
 		short int bit;
@@ -2884,6 +2884,9 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		char specific_string[SMALL];
 		mystrcpy(specific_string, STR_EMPTY, SMALL);
 
+		char anchor[SMALL];
+		mystrcpy(anchor, paramname, SMALL);
+
 		short int podmienka = ((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI) == BIT_OPT_2_ROZNE_MOZNOSTI); // len ak je t·to moûnosù (zobrazovanie vöeliËoho) zvolen·
 		podmienka &= (_global_skip_in_prayer != ANO);
 
@@ -2893,7 +2896,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		else if(equals(paramname, PARAM_CHVALOSPEV)){
 			bit = BIT_OPT_1_CHVALOSPEVY;
 		}
-		else if(equals(paramname, PARAM_HYMNUS_TEDEUM)){
+		else if(equals(paramname, PARAM_TEDEUM)){
 			bit = BIT_OPT_1_TEDEUM;
 		}
 		else if(equals(paramname, PARAM_ZVOLANIA)){
@@ -2937,6 +2940,9 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			}// !(_global_poradie_svaty > 0)
 			// teraz vytvorÌme reùazec s options
 			prilep_request_options(pom, pompom);
+			// napokon prilepÌme #anchor // 2012-10-01
+			sprintf(pompom, "#%s", anchor);
+			strcat(pom, pompom);
 			// export hyperlinku
 			// ToDo: prÌpadne v hyperlinku daù aj #psalmodia
 			if(query_type == PRM_DATUM){
@@ -2977,7 +2983,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			Export("[skipping %s]", paramname);
 			Log("skipping %s\n", paramname);
 		}
-	}// PARAM_CHVALOSPEV, PARAM_OTCENAS, PARAM_HYMNUS_TEDEUM, PARAM_DOPLNKOVA_PSALMODIA
+	}// PARAM_CHVALOSPEV, PARAM_OTCENAS, PARAM_TEDEUM, PARAM_DOPLNKOVA_PSALMODIA
 
 	else if(equals(paramname, PARAM_NAVIGACIA)){
 		if(aj_navigacia == ANO){
