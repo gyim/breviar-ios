@@ -54,7 +54,13 @@ extern short int query_type; // premenna obsahujuca PRM_..., deklarovana v mydef
 #define EXPORT_TYP_BATCH_MODE 1
 
 extern void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short int den_zoznam = ANO, short int zobrazit_mcd = ANO);
-extern void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes = ANO);
+#if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
+	#define _export_rozbor_dna_buttons_dni _export_rozbor_dna_buttons_dni_compact
+#else
+	#define _export_rozbor_dna_buttons_dni _export_rozbor_dna_buttons_dni_orig
+#endif
+extern void _export_rozbor_dna_buttons_dni_orig(short int typ, short int dnes_dnes = ANO);
+extern void _export_rozbor_dna_buttons_dni_compact(short int typ, short int dnes_dnes = ANO);
 
 extern short int _global_pocet_navigacia; // 2011-07-03: poèet prejdených/spracovaných parametrov PARAM_NAVIGACIA
 
