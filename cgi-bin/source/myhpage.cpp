@@ -227,7 +227,7 @@ void _hlavicka(char *title, FILE * expt, short int level, short int spec){
 			pismeno_modlitby = char_modlitby[_local_modlitba];
 		sprintf(ext, "%c", pismeno_modlitby);
 		strcat(ext, ".htm");
-		Export_to_file(expt, "<p>");
+		Export_to_file(expt, HTML_NEW_PARAGRAPH);
 		// << prev
 		mystrcpy(file_name_pom, FILE_EXPORT, MAX_STR);
 		ptr = strstr(file_name_pom, ext);
@@ -334,7 +334,7 @@ void _patka(FILE * expt){
 			pismeno_modlitby = char_modlitby[_local_modlitba];
 		sprintf(ext, "%c", pismeno_modlitby);
 		strcat(ext, ".htm");
-		Export_to_file(expt, "<p>");
+		Export_to_file(expt, HTML_NEW_PARAGRAPH);
 		// << prev
 		mystrcpy(file_name_pom, FILE_EXPORT, MAX_STR);
 		ptr = strstr(file_name_pom, ext);

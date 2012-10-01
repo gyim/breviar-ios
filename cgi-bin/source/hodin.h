@@ -1673,13 +1673,13 @@ const char *html_text_option1_slava_otcu_explain[POCET_JAZYKOV + 1] =
 };
 
 const char *html_text_option1_rubriky[POCET_JAZYKOV + 1] = 
-{"rubriky (napr. závereèné požehnanie)", 
- "rubriky (napø. závìreèné požehnání)", 
+{"rubriky" /*(napr. závereèné požehnanie)*/, 
+ "rubriky" /*(napø. závìreèné požehnání)*/, 
  "rubrics", 
  "",
  "",
- "rubriky (napø. závìreèné požehnání)", 
- "rubrikák (pl. záró áldás)"
+ "rubriky" /*(napø. závìreèné požehnání)*/, 
+ "rubrikák" /*(pl. záró áldás)*/
 };
 const char *html_text_option1_rubriky_explain[POCET_JAZYKOV + 1] = 
 {"Liturgia hodín zobrazuje èerveným písmom rozlièné zvyèajne vysvet¾ujúce pokyny k modlitbe (pod¾a Všeobecných smerníc o LH).", 
