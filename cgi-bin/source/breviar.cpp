@@ -6881,7 +6881,11 @@ void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO 
 		// teraz vytvorÌme reùazec s options
 		prilep_request_options(pom2, pom3);
 
-		sprintf(pom, HTML_LINK_CALL1, script_name, STR_QUERY_TYPE, STR_PRM_DATUM, STR_DEN, _global_den.den, STR_MESIAC, _global_den.mesiac, STR_ROK, _global_den.rok, pom2);
+		mystrcpy(pom3, STR_EMPTY, MAX_STR);
+		if(_global_modlitba != MODL_NEURCENA){
+			sprintf(pom3, HTML_LINK_CALL_PARAM, STR_MODLITBA, str_modlitby[_global_modlitba]);
+		}
+		sprintf(pom, HTML_LINK_CALL1"%s", script_name, STR_QUERY_TYPE, STR_PRM_DATUM, STR_DEN, _global_den.den, STR_MESIAC, _global_den.mesiac, STR_ROK, _global_den.rok, pom2, pom3);
 
 		Export("<p align=\"center\">\n");
 		Export("<a href=\"%s\" "HTML_CLASS_QUIET">(%s %s)</a></span>", pom, html_text_option_zobrazit[_global_jazyk], html_text_navig_buttons[_global_jazyk]);

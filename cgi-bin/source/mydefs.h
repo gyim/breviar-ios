@@ -832,6 +832,7 @@ extern short int query_type; // premenna obsahujuca PRM_...
 
 #define HTML_LINK_CALL1         "%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s"
 #define HTML_LINK_CALL2         "%s?%s=%s"HTML_AMPERSAND"%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s"
+#define HTML_LINK_CALL_PARAM    HTML_AMPERSAND"%s=%s"
 // 2011-01-26: pridané jednoduché šípky v¾avo/vpravo
 #define HTML_LEFT_ARROW_SINGLE	"&lsaquo;"
 #define HTML_RIGHT_ARROW_SINGLE	"&rsaquo;"
