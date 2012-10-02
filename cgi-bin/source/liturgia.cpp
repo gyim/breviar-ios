@@ -622,7 +622,7 @@ char *_vytvor_string_z_datumu(short int den, short int mesiac, short int rok, sh
 		}
 	}
 	else if(_global_jazyk == JAZYK_EN){
-		sprintf(pom, "%s", nazov_Mesiaca(mesiac - 1), strden);
+		sprintf(pom, "%s%s", nazov_Mesiaca(mesiac - 1), strden);
 		if(typ == LINK_DEN_MESIAC_ROK){
 			// pridame aj rok
 			strcat(_global_pom_str, pom);
