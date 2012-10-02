@@ -1654,13 +1654,13 @@ const char *html_text_option1_chvalospevy_explain[POCET_JAZYKOV + 1] =
 };
 
 const char *html_text_option1_slava_otcu[POCET_JAZYKOV + 1] = 
-{"Sláva Otcu (na konci almov a chválospevov)", 
- "Sláva Otci (na konci almù a kantik)", 
- "Gloria to the Father (at the end of psalms and canticles)", 
+{"Sláva Otcu [na konci almov a chválospevov]", 
+ "Sláva Otci [na konci almù a kantik]", 
+ "Gloria to the Father [at the end of psalms and canticles]", 
  "",
  "",
- "Sláva Otci (na konci almù a chvalozpìvù)", 
- "Dicsõség az Atyának ... (a zsoltárok és kantikumok végén)"
+ "Sláva Otci [na konci almù a chvalozpìvù]", 
+ "Dicsõség az Atyának ... [a zsoltárok és kantikumok végén]"
 };
 const char *html_text_option1_slava_otcu_explain[POCET_JAZYKOV + 1] = 
 {"Liturgia hodín štandardne Sláva Otcu na konci almov a chválospevov neuvádza.", 
@@ -1673,13 +1673,13 @@ const char *html_text_option1_slava_otcu_explain[POCET_JAZYKOV + 1] =
 };
 
 const char *html_text_option1_rubriky[POCET_JAZYKOV + 1] = 
-{"rubriky (napr. závereèné poehnanie)", 
- "rubriky (napø. závìreèné poehnání)", 
+{"rubriky" /*(napr. závereèné poehnanie)*/, 
+ "rubriky" /*(napø. závìreèné poehnání)*/, 
  "rubrics", 
  "",
  "",
- "rubriky (napø. závìreèné poehnání)", 
- "rubrikák (pl. záró áldás)"
+ "rubriky" /*(napø. závìreèné poehnání)*/, 
+ "rubrikák" /*(pl. záró áldás)*/
 };
 const char *html_text_option1_rubriky_explain[POCET_JAZYKOV + 1] = 
 {"Liturgia hodín zobrazuje èervenım písmom rozlièné zvyèajne vysvet¾ujúce pokyny k modlitbe (pod¾a Všeobecnıch smerníc o LH).", 
@@ -1893,18 +1893,18 @@ const char *html_text_option1_spolc_svaty_explain[POCET_JAZYKOV + 1] =
 };
 
 const char *html_text_option1_vigilia[POCET_JAZYKOV + 1] = 
-{"predåené slávenie vigílie pre posvätné èítanie (na nedele, slávnosti a sviatky)", 
- "prodlouené slavení vigilie pro modlitbu se ètením (pro nedìle, slavnosti a svátky)", 
- "celebrating of vigily for prayer with readings (for Sundays, solemnitas and festivus)", 
+{"predåené slávenie vigílie pre posvätné èítanie" /*(na nedele, slávnosti a sviatky)*/, 
+ "prodlouené slavení vigilie pro modlitbu se ètením" /*(pro nedìle, slavnosti a svátky)*/, 
+ "celebrating of vigily for prayer with readings" /*(for Sundays, solemnitas and festivus)*/, 
  "",
  "",
- "prodlouené slavení vigilie pro modlitbu se ètením (pro nedìle, slavnosti a svátky)", 
- "hosszabb vigíliás ünneplés Olvasmányos imaórával (vasárnap, fõünnep és ünnep elõtt)"
+ "prodlouené slavení vigilie pro modlitbu se ètením" /*(pro nedìle, slavnosti a svátky)*/, 
+ "hosszabb vigíliás ünneplés Olvasmányos imaórával" /*(vasárnap, fõünnep és ünnep elõtt)*/
 };
 const char *html_text_option1_vigilia_explain[POCET_JAZYKOV + 1] = 
 {"Tí, èo chcú pod¾a tradície predåi vigíliu nedele, slávnosti alebo sviatku, èo sa ve¾mi odporúèa, najprv recitujú posvätné èítanie; po oboch èítaniach, pred hymnom Te Deum, pridávajú sa chválospevy a evanjelium.", 
  "Ti, kteøí chtìjí podle tradice prodlouit vigilii nedìle, slavnosti nebo svátku, co se velmi doporuèuje, recitují nejprve ètení; po obou èteních, pøed hymnem Te Deum, se pøidávají chvalozpìvy a evangelium.", 
- "xxx", 
+ "For Sundays, solemnitas and festivus: celebrating of vigily for prayer with readings.", 
  "",
  "", 
  "Ti, kteøí chtìjí podle tradice prodlouit vigilii nedìle, slavnosti nebo svátku, co se velmi doporuèuje, recitují nejprve ètení; po obou èteních, pøed hymnem Te Deum, se pøidávají chvalozpìvy a evangelium.", 
@@ -2008,6 +2008,15 @@ const char *html_text_option2_font_family_explain[POCET_JAZYKOV + 1] =
  "Válasszon talpas (Serif) vagy talp nélküli (Sans Serif) betût, kényelem szerint. A böngészõ ablakban mutatott betûtípus az alapértelmezett."
 };
 
+const char *html_text_navig_buttons[POCET_JAZYKOV + 1] = 
+{"navigáciu", 
+ "navigaci", 
+ "navigation buttons", 
+ "",
+ "",
+ "navigaci", 
+ "navigáció"
+};
 const char *html_text_option2_navigation[POCET_JAZYKOV + 1] = 
 {"zobrazi navigáciu v textoch modlitieb",
  "zobrazit navigaci v textech modliteb", 
@@ -2149,6 +2158,15 @@ const char *html_option_selected = " selected";
 // 2011-04-11: HTML option checked (pre checkboxy)
 const char *html_option_checked = " checked";
 
+const char *html_text_kalendar[POCET_JAZYKOV + 1] = 
+{"kalendár", 
+ "kalendáø", 
+ "calendar", 
+ "calendario",
+ "",
+ "kalendáø",
+ "naptárát"
+};
 // 2010-09-14: doplnené
 const char *html_text_kalendar_miestny[POCET_JAZYKOV + 1] = 
 {"kalendár Liturgie hodín poui: ", 
