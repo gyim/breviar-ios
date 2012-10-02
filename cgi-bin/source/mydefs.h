@@ -819,6 +819,14 @@ extern short int query_type; // premenna obsahujuca PRM_...
 #define HTML_CLASS_LEVEL1   "class=\"level1\""
 #define HTML_CLASS_TT       "class=\"tt\""
 #define HTML_CLASS_BUTTON   "class=\"button\""
+#define HTML_CLASS_SMALL    "class=\"small\""
+
+#define HTML_ALIGN_CENTER   "align=\"center\""
+#define HTML_ALIGN_LEFT     "align=\"left\""
+#define HTML_ALIGN_RIGHT    "align=\"right\""
+#define HTML_VALIGN_MIDDLE  "valign=\"middle\""
+#define HTML_VALIGN_TOP     "valign=\"top\""
+#define HTML_VALIGN_BASE    "valign=\"baseline\""
 
 // pridane 2003-07-09, zmenene v cestach pre skript
 #define HTML_AMPERSAND          "&amp;"
