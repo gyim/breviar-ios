@@ -1116,12 +1116,41 @@ const char *html_text_Prehlad_mesiaca[POCET_JAZYKOV + 1] = {"Preh¾ad mesiaca", "
 const char *html_text_batch_mode_h1[POCET_JAZYKOV + 1] = {"Liturgia hodín – Predgenerované modlitby", "Liturgie hodin – Pøedgenerované modlitby", "Liturgy of Hours – Pregenerated prayers", "la_", "", "Liturgie hodin – Pøedgenerované modlitby", "Az Imaórák Liturgiája – Elõre generált imák"};
 const char *html_text_Kalendar[POCET_JAZYKOV + 1] = {"Kalendár", "Kalendáø", "Proprietary calendary", "Propria", "", "Kalendáø", "Naptár"};
 
-const char *html_text_Vysvetlivky[POCET_JAZYKOV + 1] = {"Vysvetlivky", "Vysvìtlivky", "Legenda", "Legenda", "", "Vysvìtlivky", "Jelmagyarázat"};
+const char *html_text_Vysvetlivky[POCET_JAZYKOV + 1] = 
+{"Vysvetlivky", 
+ "Vysvìtlivky", 
+ "Legenda", 
+ "Legenda", 
+ "", 
+ "Vysvìtlivky", 
+ "Jelmagyarázat"};
 
-const char *html_text_dalsie_moznosti[POCET_JAZYKOV + 1] = {"Výber ïalších možností", "Další možnosti výbìru ", "Choose from above (buttons) or from the following options: ", "", "", "Další možnosti výbìru", "További lehetõségek választása:"};
+const char *html_text_dalsie_moznosti[POCET_JAZYKOV + 1] = 
+{"Výber ïalších možností", 
+ "Další možnosti výbìru ", 
+ "Choose from above (buttons) or from the following options: ", 
+ "", 
+ "", 
+ "Další možnosti výbìru", 
+ "További lehetõségek választása:"};
 
-const char *html_text_dalsie_moznosti_1[POCET_JAZYKOV + 1] = {"Vo¾by vybraných detailov (ovplyvnia všetky zvolené modlitby):", "Volby pro vybrané detaily (ovlivní všechny modlitby):", "Choose from above (buttons) or from the following options: ", "", "", "Volby pro vybrané detaily (ovlivní všechny modlitby):", "Egyes részletek választása (befolyásolja az összes kiválasztott imaórát):"};
-const char *html_text_dalsie_moznosti_2[POCET_JAZYKOV + 1] = {"Vo¾by pre ïalšie zobrazenia:", "Volby pro další zobrazení:", "Choose from above (buttons) or from the following options: ", "", "", "Volby pro další zobrazení:", "Más megjelenítési lehetõségek:"};
+const char *html_text_dalsie_moznosti_1[POCET_JAZYKOV + 1] = 
+{"Vo¾by vybraných detailov" /*(ovplyvnia všetky zvolené modlitby)*/, 
+ "Volby pro vybrané detaily" /*(ovlivní všechny modlitby)*/, 
+ "Choose from above (buttons)" /* or from the following options*/, 
+ "", 
+ "", 
+ "Volby pro vybrané detaily" /*(ovlivní všechny modlitby)*/, 
+ "Egyes részletek választása" /*(befolyásolja az összes kiválasztott imaórát)*/};
+
+const char *html_text_dalsie_moznosti_2[POCET_JAZYKOV + 1] = 
+{"Vo¾by pre ïalšie zobrazenia", 
+ "Volby pro další zobrazení", 
+ "Choose from above (buttons) or from the following options", 
+ "", 
+ "", 
+ "Volby pro další zobrazení", 
+ "Más megjelenítési lehetõségek"};
 
 const char *html_text_prik_sviatky_atd[POCET_JAZYKOV + 1] = {"prikázané sviatky a slávnosti Pána v roku ", "zasvìcené svátky a slavnosti Pánì v roce ", "obligatory celebrations in year ", "", "", "zasvìcené svátky a slavnosti Pánì v roce", "kötelezõ ünnepek"};
 const char *html_text_lit_kalendar[POCET_JAZYKOV + 1] = {"liturgický kalendár pre", "liturgický kalendáø pro", "liturgical calendar for", "", "", "liturgický kalendáø pro", "liturgikus naptár"};
