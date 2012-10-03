@@ -1281,7 +1281,7 @@ extern short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];
 #define BIT_OPT_2_BUTTONY_USPORNE         128 // 1 = zobraziù buttony pre modlitby v ˙spornej podobe (tabuæka) kvÙli mobiln˝m zariadeniam
 #define BIT_OPT_2_NOCNY_REZIM             256 // 1 = zobraziù invertovane farby (biele na ciernom)
 #define BIT_OPT_2_ROZNE_MOZNOSTI          512 // 1 = zobraziù rozliËnÈ "hypertextovÈ odkazy" v modlitbe (napr. pre modlitbu cez deÚ moûnosù doplnkovej psalmÛdie)
-#define BIT_OPT_2_HIDE_NAVIG_BUTTONS     1024 // 1 = skryù navig·ciu (tlaËidl·) v modlitbe a pre "dnes"
+#define BIT_OPT_2_HIDE_NAVIG_BUTTONS     1024 // 1 = moûnosù zobraziù/skryù navig·ciu (tlaËidl·) v modlitbe a pre "dnes", ak je zvolen˝ 6. bit (BIT_OPT_2_NAVIGATION)
 #define BIT_OPT_2_HIDE_KALENDAR          2048 // 1 = skryù kalend·rik pre "dnes"
 #define BIT_OPT_2_HIDE_OPTIONS1          4096 // 1 = skryù html_text_dalsie_moznosti_1[] pre "dnes"
 #define BIT_OPT_2_HIDE_OPTIONS2          8192 // 1 = skryù html_text_dalsie_moznosti_2[] pre "dnes"
