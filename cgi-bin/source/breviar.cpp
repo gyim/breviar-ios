@@ -8028,6 +8028,12 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	prilep_request_options(pom2, pom3); // prilep_request_options(pom2, pom3, prvy_ampersand)
 
+	// 2012-10-03: before, after -- kvÙli (skryù), (zobraziù)
+	char before[SMALL] = STR_EMPTY;
+	sprintf(before, "<"HTML_SPAN_SMALL">");
+	char after[SMALL] = STR_EMPTY;
+	sprintf(after, "</span>");
+
 #if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
 	Export("<table "HTML_ALIGN_CENTER"><tr>\n<td>\n");
 	// 2012-07-23, doplnenÈ pre Ruby
@@ -8036,7 +8042,11 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	Export("<!-- combobox pre v˝ber jazyka -->\n");
 
-	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_jazyk_explain[_global_jazyk], html_text_jazyk[_global_jazyk]);
+// #if defined(IO_ANDROID)
+	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_jazyk_explain[_global_jazyk], html_text_jazyk_android);
+// #else
+//	Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_jazyk_explain[_global_jazyk], html_text_jazyk[_global_jazyk]);
+// #endif
 	Export(" ");
 	// drop-down list pre v˝ber jazyka
 	// pole WWW_JAZYK
@@ -8075,13 +8085,14 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	// pokraËujem vypÌsanÌm formul·ra
 	// 2012-07-23: rozdelenie jednoho formu na dva; prv˝ pouûije PRM_DATUM podæa glob·lneho nastavenia
-	// pÙvodne tu bolo: Export("\n<form action=\"%s?%s\" method=\"post\">\n", uncgi_name, pom2);
-	Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n", script_name, STR_QUERY_TYPE, STR_PRM_DATUM, STR_DEN, _global_den.den, STR_MESIAC, _global_den.mesiac, STR_ROK, _global_den.rok, pom2);
+	// 2012-10-03: najprv nadpis, aû potom (eventu·lne) export <form>
 
 /* ------------------------------------------- */
 	Export("<tr>\n<td>\n");
 	Export("<!-- heading -->\n");
-//	xxx
+
+	_export_link_show_hide(OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_OPTIONS1, /* opaËnÈ nastavenie kvÙli öpeci·lnej podmienke, defaulty */ (char *)html_text_option_zobrazit[_global_jazyk], (char *)html_text_option_skryt[_global_jazyk], STR_EMPTY, HTML_CLASS_QUIET, before, after, STR_EMPTY);
+
 	Export("<"HTML_SPAN_BOLD_IT">");
 	Export((char *)html_text_dalsie_moznosti_1[_global_jazyk]);
 	Export("</span>\n");
@@ -8089,6 +8100,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("</tr>\n\n");
 	if((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_OPTIONS1) != BIT_OPT_2_HIDE_OPTIONS1){ // len ak NIE JE moûnosù (skrytie options1) zvolen·
 
+		Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n", script_name, STR_QUERY_TYPE, STR_PRM_DATUM, STR_DEN, _global_den.den, STR_MESIAC, _global_den.mesiac, STR_ROK, _global_den.rok, pom2);
 		//---------------------------------------------------------------------
 
 		// 2011-01-31: sem presunut· moûnosù v˝beru liturgickÈho kalend·ra
@@ -8515,360 +8527,366 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<!--TABLE:BEGIN(choices)-->\n");
 	Export("\n<table "HTML_ALIGN_CENTER">\n");
 
-	// 2012-07-23: rozdelenie jednoho formu na dva; prv˝ pouûije PRM_DATUM podæa glob·lneho nastavenia
-	Export("\n<form action=\"%s?%s\" method=\"post\">\n", uncgi_name, pom2);
-
+/*
 	// -------------------------------------------
 	Export("<tr>\n<td>\n");
 	Export("<!-- pr·zdny riadok -->\n"HTML_NONBREAKING_SPACE"\n");
 	Export("</td>");
 	Export("</tr>\n\n");
-
+*/
 	// -------------------------------------------
 	Export("<tr>\n<td>\n");
 	Export("<!-- heading -->\n");
+
+	_export_link_show_hide(OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_OPTIONS2, /* opaËnÈ nastavenie kvÙli öpeci·lnej podmienke, defaulty */ (char *)html_text_option_zobrazit[_global_jazyk], (char *)html_text_option_skryt[_global_jazyk], STR_EMPTY, HTML_CLASS_QUIET, before, after, STR_EMPTY);
+
 	Export("<"HTML_SPAN_BOLD_IT">");
 	Export((char *)html_text_dalsie_moznosti_2[_global_jazyk]);
 	Export("</span>\n");
 	Export("</td>");
 	Export("</tr>\n\n");
+	if((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_OPTIONS2) != BIT_OPT_2_HIDE_OPTIONS2){ // len ak NIE JE moûnosù (skrytie options2) zvolen·
 
-/* ------------------------------------------- */
-	Export("<tr>\n<td>\n");
+		// 2012-07-23: rozdelenie jednoho formu na dva; prv˝ pouûije PRM_DATUM podæa glob·lneho nastavenia
+		// 2012-10-03: presunutÈ aû sem (po kontrole, Ëi sa vÙbec m· zobrazovaù)
+		Export("\n<form action=\"%s?%s\" method=\"post\">\n", uncgi_name, pom2);
 
-	Export("<!--TABLE:BEGIN(PRM_DATUM)-->\n");
-	Export("<table "HTML_ALIGN_LEFT">\n<tr><td>\n");
+	// -------------------------------------------
+		Export("<tr>\n<td>\n");
+
+		Export("<!--TABLE:BEGIN(PRM_DATUM)-->\n");
+		Export("<table "HTML_ALIGN_LEFT">\n<tr><td>\n");
 
 #if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
 #else
-	// formular pre PRM_DATUM
-	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\" checked>",
-		STR_QUERY_TYPE, STR_PRM_DATUM);
-	Export("</td>\n");
+		// formular pre PRM_DATUM
+		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\" checked>",
+			STR_QUERY_TYPE, STR_PRM_DATUM);
+		Export("</td>\n");
 	
-	Export("<td "HTML_ALIGN_LEFT">\n");
+		Export("<td "HTML_ALIGN_LEFT">\n");
 	
-	if(strlen(html_text_modlitby_pre_den[_global_jazyk]) > 0){
-		// Export(HTML_NONBREAKING_SPACE); // netreba, je to v tabuæke
-		Export((char *)html_text_modlitby_pre_den[_global_jazyk]);
-		Export(" \n");
-	}
-
-	if(format_datumu[_global_jazyk] == FORMAT_DATUMU_ROK_MESIAC_DEN){
-		// pole WWW_ROK
-		Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK, dnes.tm_year);
-
-		// pole WWW_MESIAC
-		Export("<select name=\"%s\">\n", STR_MESIAC);
-		for(month = 1; month < 13; month++){
-			Export("<option%s>%s\n", (month == dnes.tm_mon)? html_option_selected: STR_EMPTY, nazov_mesiaca(month - 1));
+		if(strlen(html_text_modlitby_pre_den[_global_jazyk]) > 0){
+			// Export(HTML_NONBREAKING_SPACE); // netreba, je to v tabuæke
+			Export((char *)html_text_modlitby_pre_den[_global_jazyk]);
+			Export(" \n");
 		}
-		Export("\n</select>\n");
 
-		// pole WWW_DEN
-		Export("<select name=\"%s\">\n", STR_DEN);
-		for(day = 1; day < 32; day++){
-			Export("<option%s>%d\n", (day == dnes.tm_mday)? html_option_selected: STR_EMPTY, day);
-		}
-		Export("\n</select>.\n");
+		if(format_datumu[_global_jazyk] == FORMAT_DATUMU_ROK_MESIAC_DEN){
+			// pole WWW_ROK
+			Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK, dnes.tm_year);
 
-	}// FORMAT_DATUMU_ROK_MESIAC_DEN
-	else if(format_datumu[_global_jazyk] == FORMAT_DATUMU_MESIAC_DEN_ROK){
-		// pole WWW_MESIAC
-		Export("<select name=\"%s\">\n", STR_MESIAC);
-		for(month = 1; month < 13; month++){
-			Export("<option%s>%s\n", (month == dnes.tm_mon)? html_option_selected: STR_EMPTY, nazov_mesiaca(month - 1));
-		}
-		Export("\n</select>\n");
+			// pole WWW_MESIAC
+			Export("<select name=\"%s\">\n", STR_MESIAC);
+			for(month = 1; month < 13; month++){
+				Export("<option%s>%s\n", (month == dnes.tm_mon)? html_option_selected: STR_EMPTY, nazov_mesiaca(month - 1));
+			}
+			Export("\n</select>\n");
 
-		// pole WWW_DEN
-		Export("<select name=\"%s\">\n", STR_DEN);
-		for(day = 1; day < 32; day++){
-			Export("<option%s>%d\n", (day == dnes.tm_mday)? html_option_selected: STR_EMPTY, day);
-		}
-		Export("\n</select>.\n");
+			// pole WWW_DEN
+			Export("<select name=\"%s\">\n", STR_DEN);
+			for(day = 1; day < 32; day++){
+				Export("<option%s>%d\n", (day == dnes.tm_mday)? html_option_selected: STR_EMPTY, day);
+			}
+			Export("\n</select>.\n");
 
-		// pole WWW_ROK
-		Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK, dnes.tm_year);
-	}// FORMAT_DATUMU_MESIAC_DEN_ROK
-	else{ // if(format_datumu[_global_jazyk] == FORMAT_DATUMU_DEN_MESIAC_ROK){
-		// pole WWW_DEN
-		Export("<select name=\"%s\">\n", STR_DEN);
-		for(day = 1; day < 32; day++){
-			Export("<option%s>%d\n", (day == dnes.tm_mday)? html_option_selected: STR_EMPTY, day);
-		}
-		Export("\n</select>.\n");
+		}// FORMAT_DATUMU_ROK_MESIAC_DEN
+		else if(format_datumu[_global_jazyk] == FORMAT_DATUMU_MESIAC_DEN_ROK){
+			// pole WWW_MESIAC
+			Export("<select name=\"%s\">\n", STR_MESIAC);
+			for(month = 1; month < 13; month++){
+				Export("<option%s>%s\n", (month == dnes.tm_mon)? html_option_selected: STR_EMPTY, nazov_mesiaca(month - 1));
+			}
+			Export("\n</select>\n");
 
-		// pole WWW_MESIAC
-		Export("<select name=\"%s\">\n", STR_MESIAC);
-		for(month = 1; month < 13; month++){
-			Export("<option%s>%s\n", (month == dnes.tm_mon)? html_option_selected: STR_EMPTY, nazov_mesiaca(month - 1));
-		}
-		Export("\n</select>\n");
+			// pole WWW_DEN
+			Export("<select name=\"%s\">\n", STR_DEN);
+			for(day = 1; day < 32; day++){
+				Export("<option%s>%d\n", (day == dnes.tm_mday)? html_option_selected: STR_EMPTY, day);
+			}
+			Export("\n</select>.\n");
 
-		// pole WWW_ROK
-		Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK, dnes.tm_year);
-	}// FORMAT_DATUMU_DEN_MESIAC_ROK
+			// pole WWW_ROK
+			Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK, dnes.tm_year);
+		}// FORMAT_DATUMU_MESIAC_DEN_ROK
+		else{ // if(format_datumu[_global_jazyk] == FORMAT_DATUMU_DEN_MESIAC_ROK){
+			// pole WWW_DEN
+			Export("<select name=\"%s\">\n", STR_DEN);
+			for(day = 1; day < 32; day++){
+				Export("<option%s>%d\n", (day == dnes.tm_mday)? html_option_selected: STR_EMPTY, day);
+			}
+			Export("\n</select>.\n");
 
-	Export(HTML_NONBREAKING_SPACE);
-	Export((char *)html_text_alebo_pre[_global_jazyk]);
-	Export(" ");
-	Export("<a href=\"%s?%s=%s"HTML_AMPERSAND"%s\">\n", script_name, STR_QUERY_TYPE, STR_PRM_DNES, pom2); // 2006-08-01: pridan˝ jazyk; 2011-05-12: bolo nastavenÈ funkciou prilep_request_options()
-	Export((char *)html_text_dnesok[_global_jazyk]);
-	Export("</a></td>\n");
+			// pole WWW_MESIAC
+			Export("<select name=\"%s\">\n", STR_MESIAC);
+			for(month = 1; month < 13; month++){
+				Export("<option%s>%s\n", (month == dnes.tm_mon)? html_option_selected: STR_EMPTY, nazov_mesiaca(month - 1));
+			}
+			Export("\n</select>\n");
 
-	// 2011-01-31: chvÌæu tu bol v˝ber liturgickÈho kalend·ra (len pre SK), napr. SVD, SDB, SJ, CSsR; presunutÈ inde
+			// pole WWW_ROK
+			Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK, dnes.tm_year);
+		}// FORMAT_DATUMU_DEN_MESIAC_ROK
 
-	Export("</tr>\n");
-	Export("<!--TABLE:END(PRM_DATUM)-->\n");
-	Export("</table>\n");
-	Export("</td>\n");
-	Export("</tr>\n\n");
+		Export(HTML_NONBREAKING_SPACE);
+		Export((char *)html_text_alebo_pre[_global_jazyk]);
+		Export(" ");
+		Export("<a href=\"%s?%s=%s"HTML_AMPERSAND"%s\">\n", script_name, STR_QUERY_TYPE, STR_PRM_DNES, pom2); // 2006-08-01: pridan˝ jazyk; 2011-05-12: bolo nastavenÈ funkciou prilep_request_options()
+		Export((char *)html_text_dnesok[_global_jazyk]);
+		Export("</a></td>\n");
+
+		// 2011-01-31: chvÌæu tu bol v˝ber liturgickÈho kalend·ra (len pre SK), napr. SVD, SDB, SJ, CSsR; presunutÈ inde
+
+		Export("</tr>\n");
+		Export("<!--TABLE:END(PRM_DATUM)-->\n");
+		Export("</table>\n");
+		Export("</td>\n");
+		Export("</tr>\n\n");
 #endif
 
 #ifdef FORMULAR_PRE_PRM_SVIATOK
-/* ------------------------------------------- */
-	Export("<tr>\n<td>\n");
-	Export("<table "HTML_ALIGN_LEFT">\n<tr><td>\n");
-	// formular pre PRM_SVIATOK
-	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">\n",
-		STR_QUERY_TYPE, STR_PRM_SVIATOK);
-	Export("</td><td>\n");
-	// sviatky --- [ToDo]
-	Export("</td></tr></table>\n");
-	Export("</td>\n");
-	Export("</tr>\n\n");
+	// -------------------------------------------
+		Export("<tr>\n<td>\n");
+		Export("<table "HTML_ALIGN_LEFT">\n<tr><td>\n");
+		// formular pre PRM_SVIATOK
+		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">\n",
+			STR_QUERY_TYPE, STR_PRM_SVIATOK);
+		Export("</td><td>\n");
+		// sviatky --- [ToDo]
+		Export("</td></tr></table>\n");
+		Export("</td>\n");
+		Export("</tr>\n\n");
 #endif
 
-/* ------------------------------------------- */
-	Export("<tr>\n<td>\n");
-	Export("<table "HTML_ALIGN_LEFT">\n<tr><td>\n");
-	// formular pre PRM_ANALYZA_ROKU
-	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">", STR_QUERY_TYPE, STR_PRM_ANALYZA_ROKU);
-	Export("</td><td>\n");
-	// Export(HTML_NONBREAKING_SPACE); // netreba, je to v tabuæke
-	Export((char *)html_text_prik_sviatky_atd[_global_jazyk]);
-	Export("\n");
-	// pole WWW_ANALYZA_ROKU
-	Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ANALYZA_ROKU, dnes.tm_year);
-	Export("</td></tr></table>\n");
-	Export("</td>\n");
-	Export("</tr>\n\n");
+	// -------------------------------------------
+		Export("<tr>\n<td>\n");
+		Export("<table "HTML_ALIGN_LEFT">\n<tr><td>\n");
+		// formular pre PRM_ANALYZA_ROKU
+		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">", STR_QUERY_TYPE, STR_PRM_ANALYZA_ROKU);
+		Export("</td><td>\n");
+		// Export(HTML_NONBREAKING_SPACE); // netreba, je to v tabuæke
+		Export((char *)html_text_prik_sviatky_atd[_global_jazyk]);
+		Export("\n");
+		// pole WWW_ANALYZA_ROKU
+		Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ANALYZA_ROKU, dnes.tm_year);
+		Export("</td></tr></table>\n");
+		Export("</td>\n");
+		Export("</tr>\n\n");
 
-/* ------------------------------------------- */
-	Export("<tr>\n<td>\n");
-	Export("<table "HTML_ALIGN_LEFT">\n<tr><td>\n");
-	// formular pre PRM_MESIAC_ROKA
-	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
-		STR_QUERY_TYPE, STR_PRM_MESIAC_ROKA);
-	Export("</td><td>\n");
-	// Export(HTML_NONBREAKING_SPACE); // netreba, je to v tabuæke
-	Export((char *)html_text_lit_kalendar[_global_jazyk]);
-	Export(" \n"); // 2003-07-16; povodne tu bolo "mesiac"
-	// pole WWW_MESIAC_ROKA
-	Export("<select name=\"%s\">\n", STR_MESIAC_ROKA);
-	for(month = 1; month < 13; month++){
-		Export("<option%s>%s\n", (month == dnes.tm_mon)? html_option_selected: STR_EMPTY, nazov_mesiaca(month - 1));
-	}
-	Export("\n</select>\n");
+	// -------------------------------------------
+		Export("<tr>\n<td>\n");
+		Export("<table "HTML_ALIGN_LEFT">\n<tr><td>\n");
+		// formular pre PRM_MESIAC_ROKA
+		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
+			STR_QUERY_TYPE, STR_PRM_MESIAC_ROKA);
+		Export("</td><td>\n");
+		// Export(HTML_NONBREAKING_SPACE); // netreba, je to v tabuæke
+		Export((char *)html_text_lit_kalendar[_global_jazyk]);
+		Export(" \n"); // 2003-07-16; povodne tu bolo "mesiac"
+		// pole WWW_MESIAC_ROKA
+		Export("<select name=\"%s\">\n", STR_MESIAC_ROKA);
+		for(month = 1; month < 13; month++){
+			Export("<option%s>%s\n", (month == dnes.tm_mon)? html_option_selected: STR_EMPTY, nazov_mesiaca(month - 1));
+		}
+		Export("\n</select>\n");
 
-	Export((char *)html_text_roku[_global_jazyk]);
-	Export(" \n"); // 2003-07-16; povodne tu bolo "v roku"
-	// pole WWW_ROK_ROKA
-	Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK_ROKA, dnes.tm_year);
-	Export("</td></tr></table>\n");
-	Export("</td>\n");
-	Export("</tr>\n\n");
+		Export((char *)html_text_roku[_global_jazyk]);
+		Export(" \n"); // 2003-07-16; povodne tu bolo "v roku"
+		// pole WWW_ROK_ROKA
+		Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK_ROKA, dnes.tm_year);
+		Export("</td></tr></table>\n");
+		Export("</td>\n");
+		Export("</tr>\n\n");
 
-/* ------------------------------------------- */
-	Export("<tr>\n<td>\n");
-	Export("<table "HTML_ALIGN_LEFT">\n<tr><td>\n");
-	// formular pre PRM_TABULKA
-	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
-		STR_QUERY_TYPE, STR_PRM_TABULKA);
-	Export("</td><td>\n");
-	// Export(HTML_NONBREAKING_SPACE); // netreba, je to v tabuæke
-	Export((char *)html_text_tabulka_pohyblive_od[_global_jazyk]);
-	Export(HTML_NONBREAKING_SPACE);
-	// pole WWW_ROK_FROM
-	Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK_FROM, dnes.tm_year - 12);
-	Export(HTML_NONBREAKING_SPACE);
-	Export((char *)html_text_do_roku[_global_jazyk]);
-	Export(HTML_NONBREAKING_SPACE);
-	Export("\n");
-	// pole WWW_ROK_TO
-	Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK_TO, dnes.tm_year + 12);
-	Export("</td></tr>\n<tr><td></td><td>");
-	// pole WWW_TABULKA_LINKY
-	Export(HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE); // 2011-01-26
-	Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\">\n", STR_TABULKA_LINKY, 1); // ked bude zaskrtnuty, tak vrati hodnotu 1
-	Export(HTML_NONBREAKING_SPACE);
+	// -------------------------------------------
+		Export("<tr>\n<td>\n");
+		Export("<table "HTML_ALIGN_LEFT">\n<tr><td>\n");
+		// formular pre PRM_TABULKA
+		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
+			STR_QUERY_TYPE, STR_PRM_TABULKA);
+		Export("</td><td>\n");
+		// Export(HTML_NONBREAKING_SPACE); // netreba, je to v tabuæke
+		Export((char *)html_text_tabulka_pohyblive_od[_global_jazyk]);
+		Export(HTML_NONBREAKING_SPACE);
+		// pole WWW_ROK_FROM
+		Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK_FROM, dnes.tm_year - 12);
+		Export(HTML_NONBREAKING_SPACE);
+		Export((char *)html_text_do_roku[_global_jazyk]);
+		Export(HTML_NONBREAKING_SPACE);
+		Export("\n");
+		// pole WWW_ROK_TO
+		Export("<"HTML_FORM_INPUT_TEXT_ROK" name=\"%s\" value=\"%d\" />\n", STR_ROK_TO, dnes.tm_year + 12);
+		Export("</td></tr>\n<tr><td></td><td>");
+		// pole WWW_TABULKA_LINKY
+		Export(HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE); // 2011-01-26
+		Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\">\n", STR_TABULKA_LINKY, 1); // ked bude zaskrtnuty, tak vrati hodnotu 1
+		Export(HTML_NONBREAKING_SPACE);
 
-	Export("<"HTML_SPAN_EXPLAIN">");
-	Export((char *)html_text_zobrazit_linky[_global_jazyk]);
-	Export("</span>");
+		Export("<"HTML_SPAN_EXPLAIN">");
+		Export((char *)html_text_zobrazit_linky[_global_jazyk]);
+		Export("</span>");
 
-	Export("\n");
-	Export("</td></tr></table>\n");
-	Export("</td>\n");
-	Export("</tr>\n\n");
+		Export("\n");
+		Export("</td></tr></table>\n");
+		Export("</td>\n");
+		Export("</tr>\n\n");
 
 #define formular_PRM_LIT_OBD
 #ifdef formular_PRM_LIT_OBD
-/* ------------------------------------------- */
-	Export("<tr>\n<td>\n");
-	Export("<table "HTML_ALIGN_LEFT">\n<tr><td "HTML_VALIGN_TOP">\n");
-	// 2011-01-25; formul·r nahr·dzaj˙ci "PRM_CEZ_ROK"
-	// formul·r pre PRM_LIT_OBD
-	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">", STR_QUERY_TYPE, STR_PRM_LIT_OBD);
-	Export("</td><td "HTML_ALIGN_LEFT">\n");
+	// -------------------------------------------
+		Export("<tr>\n<td>\n");
+		Export("<table "HTML_ALIGN_LEFT">\n<tr><td "HTML_VALIGN_TOP">\n");
+		// 2011-01-25; formul·r nahr·dzaj˙ci "PRM_CEZ_ROK"
+		// formul·r pre PRM_LIT_OBD
+		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">", STR_QUERY_TYPE, STR_PRM_LIT_OBD);
+		Export("</td><td "HTML_ALIGN_LEFT">\n");
 
-	// pole WWW_MODLITBA
-	Export("<select name=\"%s\">\n", STR_MODLITBA);
-	Export("<option>%s\n", nazov_modlitby(MODL_PRVE_VESPERY));
-	Export("<option>%s\n", nazov_modlitby(MODL_PRVE_KOMPLETORIUM));
-	Export("<option>%s\n", nazov_modlitby(MODL_INVITATORIUM));
-	Export("<option selected>%s\n", nazov_modlitby(MODL_POSV_CITANIE));
-	Export("<option>%s\n", nazov_modlitby(MODL_RANNE_CHVALY));
-	Export("<option>%s\n", nazov_modlitby(MODL_PREDPOLUDNIM));
-	Export("<option>%s\n", nazov_modlitby(MODL_NAPOLUDNIE));
-	Export("<option>%s\n", nazov_modlitby(MODL_POPOLUDNI));
-	Export("<option>%s\n", nazov_modlitby(MODL_DRUHE_VESPERY));
-	Export("<option>%s\n", nazov_modlitby(MODL_DRUHE_KOMPLETORIUM));
-	Export("</select>\n");
+		// pole WWW_MODLITBA
+		Export("<select name=\"%s\">\n", STR_MODLITBA);
+		Export("<option>%s\n", nazov_modlitby(MODL_PRVE_VESPERY));
+		Export("<option>%s\n", nazov_modlitby(MODL_PRVE_KOMPLETORIUM));
+		Export("<option>%s\n", nazov_modlitby(MODL_INVITATORIUM));
+		Export("<option selected>%s\n", nazov_modlitby(MODL_POSV_CITANIE));
+		Export("<option>%s\n", nazov_modlitby(MODL_RANNE_CHVALY));
+		Export("<option>%s\n", nazov_modlitby(MODL_PREDPOLUDNIM));
+		Export("<option>%s\n", nazov_modlitby(MODL_NAPOLUDNIE));
+		Export("<option>%s\n", nazov_modlitby(MODL_POPOLUDNI));
+		Export("<option>%s\n", nazov_modlitby(MODL_DRUHE_VESPERY));
+		Export("<option>%s\n", nazov_modlitby(MODL_DRUHE_KOMPLETORIUM));
+		Export("</select>\n");
 
 #if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
-	Export(HTML_LINE_BREAK);
+		Export(HTML_LINE_BREAK);
 #else
-	Export(HTML_NONBREAKING_SPACE);
+		Export(HTML_NONBREAKING_SPACE);
 #endif
-	Export((char *)html_text_den[_global_jazyk]);
-	Export(HTML_NONBREAKING_SPACE);
+		Export((char *)html_text_den[_global_jazyk]);
+		Export(HTML_NONBREAKING_SPACE);
 
-	// pole WWW_DEN_V_TYZDNI
-	Export("<select name=\"%s\">\n", STR_DEN_V_TYZDNI);
-	for(day = DEN_NEDELA; day <= DEN_SOBOTA; day++){
-		Export("<option%s>%s\n", (day == dnes.tm_wday)? html_option_selected: STR_EMPTY, nazov_dna(day));
-	}
-	Export("\n</select>\n");
+		// pole WWW_DEN_V_TYZDNI
+		Export("<select name=\"%s\">\n", STR_DEN_V_TYZDNI);
+		for(day = DEN_NEDELA; day <= DEN_SOBOTA; day++){
+			Export("<option%s>%s\n", (day == dnes.tm_wday)? html_option_selected: STR_EMPTY, nazov_dna(day));
+		}
+		Export("\n</select>\n");
 
-	Export(",\n");
+		Export(",\n");
 #if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
-	Export(HTML_LINE_BREAK);
+		Export(HTML_LINE_BREAK);
 #else
-	Export(HTML_SPACE);
+		Export(HTML_SPACE);
 #endif
-	Export((char *)html_text_liturgicky_rok[_global_jazyk]);
-	Export(HTML_NONBREAKING_SPACE);
+		Export((char *)html_text_liturgicky_rok[_global_jazyk]);
+		Export(HTML_NONBREAKING_SPACE);
 
-	// pole WWW_LIT_ROK
-	Export("<select name=\"%s\">\n", STR_LIT_ROK);
-	for(lo = 'A'; lo <= 'C'; lo++){
-		Export("<option%s>%c\n", (lo == _global_den.litrok)? html_option_selected: STR_EMPTY, lo);
-	}
-	Export("\n</select>\n");
-	Export(", <br>");
+		// pole WWW_LIT_ROK
+		Export("<select name=\"%s\">\n", STR_LIT_ROK);
+		for(lo = 'A'; lo <= 'C'; lo++){
+			Export("<option%s>%c\n", (lo == _global_den.litrok)? html_option_selected: STR_EMPTY, lo);
+		}
+		Export("\n</select>\n");
+		Export(", <br>");
 
-	// pole WWW_TYZDEN
-	if(_global_jazyk == JAZYK_LA){
-		Export((char *)html_text_tyzden[_global_jazyk]);
-	}
-	Export("<select name=\"%s\">\n", STR_TYZDEN);
-	for(day = 0; day <= POCET_NEDIEL_CEZ_ROK; day++){
-		Export("<option%s>%d\n", (day == _global_den.tyzden)? html_option_selected: STR_EMPTY, day);
-	}
-	Export("\n</select>"HTML_NONBREAKING_SPACE);
+		// pole WWW_TYZDEN
+		if(_global_jazyk == JAZYK_LA){
+			Export((char *)html_text_tyzden[_global_jazyk]);
+		}
+		Export("<select name=\"%s\">\n", STR_TYZDEN);
+		for(day = 0; day <= POCET_NEDIEL_CEZ_ROK; day++){
+			Export("<option%s>%d\n", (day == _global_den.tyzden)? html_option_selected: STR_EMPTY, day);
+		}
+		Export("\n</select>"HTML_NONBREAKING_SPACE);
 
-	if(_global_jazyk != JAZYK_LA){
-		Export((char *)html_text_tyzden[_global_jazyk]);
-	}
-	Export(",\n");
+		if(_global_jazyk != JAZYK_LA){
+			Export((char *)html_text_tyzden[_global_jazyk]);
+		}
+		Export(",\n");
 #if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
-	Export(HTML_LINE_BREAK);
+		Export(HTML_LINE_BREAK);
 #else
-	Export(HTML_SPACE);
+		Export(HTML_SPACE);
 #endif
 
-	// pole WWW_LIT_OBD
-	Export("<select name=\"%s\">\n", STR_LIT_OBD);
-	for(lo = 0; lo <= POCET_OBDOBI; lo++){
-		Export("<option%s>%s\n", (lo == _global_den.litobd)? html_option_selected: STR_EMPTY, nazov_obdobia_ext(lo));
-	}
-	Export("\n</select>\n");
+		// pole WWW_LIT_OBD
+		Export("<select name=\"%s\">\n", STR_LIT_OBD);
+		for(lo = 0; lo <= POCET_OBDOBI; lo++){
+			Export("<option%s>%s\n", (lo == _global_den.litobd)? html_option_selected: STR_EMPTY, nazov_obdobia_ext(lo));
+		}
+		Export("\n</select>\n");
 
-	Export("</td></tr></table>\n");
-	Export("</td>\n");
-	Export("</tr>\n\n");
+		Export("</td></tr></table>\n");
+		Export("</td>\n");
+		Export("</tr>\n\n");
 #else
-/* ------------------------------------------- */
-	Export("<tr>\n<td>\n");
-	Export("<table "HTML_ALIGN_LEFT">\n<tr><td>\n");
-	// 2003-07-16; tento formular bol povodne na 2. mieste
-	// formular pre PRM_CEZ_ROK
-	Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
-		STR_QUERY_TYPE, STR_PRM_CEZ_ROK);
-	Export("</td><td "HTML_ALIGN_LEFT">\n");
+	// -------------------------------------------
+		Export("<tr>\n<td>\n");
+		Export("<table "HTML_ALIGN_LEFT">\n<tr><td>\n");
+		// 2003-07-16; tento formular bol povodne na 2. mieste
+		// formular pre PRM_CEZ_ROK
+		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
+			STR_QUERY_TYPE, STR_PRM_CEZ_ROK);
+		Export("</td><td "HTML_ALIGN_LEFT">\n");
 
-	// 2003-07-16; povodne toto pole bolo na konci
-	// pole WWW_MODLITBA
-	Export("<select name=\"%s\">\n", STR_MODLITBA);
-	Export("<option>%s\n", nazov_modlitby(MODL_PRVE_VESPERY));
-	Export("<option>%s\n", nazov_modlitby(MODL_PRVE_KOMPLETORIUM));
-	Export("<option>%s\n", nazov_modlitby(MODL_INVITATORIUM));
-	Export("<option selected>%s\n", nazov_modlitby(MODL_POSV_CITANIE));
-	Export("<option>%s\n", nazov_modlitby(MODL_RANNE_CHVALY));
-	Export("<option>%s\n", nazov_modlitby(MODL_PREDPOLUDNIM));
-	Export("<option>%s\n", nazov_modlitby(MODL_NAPOLUDNIE));
-	Export("<option>%s\n", nazov_modlitby(MODL_POPOLUDNI));
-	Export("<option>%s\n", nazov_modlitby(MODL_DRUHE_VESPERY));
-	Export("<option>%s\n", nazov_modlitby(MODL_DRUHE_KOMPLETORIUM));
-	Export("</select>\n");
+		// 2003-07-16; povodne toto pole bolo na konci
+		// pole WWW_MODLITBA
+		Export("<select name=\"%s\">\n", STR_MODLITBA);
+		Export("<option>%s\n", nazov_modlitby(MODL_PRVE_VESPERY));
+		Export("<option>%s\n", nazov_modlitby(MODL_PRVE_KOMPLETORIUM));
+		Export("<option>%s\n", nazov_modlitby(MODL_INVITATORIUM));
+		Export("<option selected>%s\n", nazov_modlitby(MODL_POSV_CITANIE));
+		Export("<option>%s\n", nazov_modlitby(MODL_RANNE_CHVALY));
+		Export("<option>%s\n", nazov_modlitby(MODL_PREDPOLUDNIM));
+		Export("<option>%s\n", nazov_modlitby(MODL_NAPOLUDNIE));
+		Export("<option>%s\n", nazov_modlitby(MODL_POPOLUDNI));
+		Export("<option>%s\n", nazov_modlitby(MODL_DRUHE_VESPERY));
+		Export("<option>%s\n", nazov_modlitby(MODL_DRUHE_KOMPLETORIUM));
+		Export("</select>\n");
 
-	Export(HTML_NONBREAKING_SPACE);
-	Export((char *)html_text_pre_cezrocne_obd[_global_jazyk]);
-	Export(",<br>");
+		Export(HTML_NONBREAKING_SPACE);
+		Export((char *)html_text_pre_cezrocne_obd[_global_jazyk]);
+		Export(",<br>");
 
-	// pole WWW_DEN_V_TYZDNI
-	Export("<select name=\"%s\">\n", STR_DEN_V_TYZDNI);
-	for(day = DEN_NEDELA; day <= DEN_SOBOTA; day++){
-		Export("<option%s>%s\n", (day == dnes.tm_wday)? html_option_selected: STR_EMPTY, nazov_dna(day));
-	}
-	Export("\n</select> v\n");
+		// pole WWW_DEN_V_TYZDNI
+		Export("<select name=\"%s\">\n", STR_DEN_V_TYZDNI);
+		for(day = DEN_NEDELA; day <= DEN_SOBOTA; day++){
+			Export("<option%s>%s\n", (day == dnes.tm_wday)? html_option_selected: STR_EMPTY, nazov_dna(day));
+		}
+		Export("\n</select> v\n");
 
-	// pole WWW_TYZDEN
-	Export("<select name=\"%s\">\n", STR_TYZDEN);
-	for(day = 1; day < 5; day++){
-		Export("<option%s>%d\n", (day == _global_den.tyzzal)? html_option_selected: STR_EMPTY, day);
-	}
-	Export("\n</select> ");
-	Export((char *)html_text_v_tyzdni_zaltara[_global_jazyk]);
+		// pole WWW_TYZDEN
+		Export("<select name=\"%s\">\n", STR_TYZDEN);
+		for(day = 1; day < 5; day++){
+			Export("<option%s>%d\n", (day == _global_den.tyzzal)? html_option_selected: STR_EMPTY, day);
+		}
+		Export("\n</select> ");
+		Export((char *)html_text_v_tyzdni_zaltara[_global_jazyk]);
 
-	Export("</td></tr></table>\n");
-	Export("</td>\n");
-	Export("</tr>\n\n");
+		Export("</td></tr></table>\n");
+		Export("</td>\n");
+		Export("</tr>\n\n");
 #endif
-/* ------------------------------------------- */
+	// -------------------------------------------
 
-	// predtym tu bolo <br>, ale kedze hore som dal <table align="center">,  tak tu musi byt <center> kvoli buttonom; 2003-07-09
-	// 2012-07-23: upravenÈ, aby sa stalo s˙Ëasùou tabuæky s moûnosùami voæby
-	Export("<!-- riadok pre button Zobraziù/VyËistiù (choices)-->\n");
-	Export("<tr "HTML_ALIGN_CENTER">\n<td>\n");
-	// button Zobraziù (GO!)
-	Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
-	Export((char *)HTML_BUTTON_DNES_SHOW);
-	Export("\">");
-/*
-	// button PÙvodnÈ hodnoty (CLEAR!)
-	Export(HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE"\n");
-	Export("<"HTML_FORM_INPUT_RESET2" value=\"");
-	Export((char *)HTML_BUTTON_DNES_DEFAULTS);
-	Export("\">");
-*/
-	Export("</td>\n");
-	Export("</tr>\n\n");
+		// predtym tu bolo <br>, ale kedze hore som dal <table align="center">,  tak tu musi byt <center> kvoli buttonom; 2003-07-09
+		// 2012-07-23: upravenÈ, aby sa stalo s˙Ëasùou tabuæky s moûnosùami voæby
+		Export("<!-- riadok pre button Zobraziù/VyËistiù (choices)-->\n");
+		Export("<tr "HTML_ALIGN_CENTER">\n<td>\n");
+		// button Zobraziù (GO!)
+		Export("<"HTML_FORM_INPUT_SUBMIT" value=\"");
+		Export((char *)HTML_BUTTON_DNES_SHOW);
+		Export("\">");
+	/*
+		// button PÙvodnÈ hodnoty (CLEAR!)
+		Export(HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE""HTML_NONBREAKING_SPACE"\n");
+		Export("<"HTML_FORM_INPUT_RESET2" value=\"");
+		Export((char *)HTML_BUTTON_DNES_DEFAULTS);
+		Export("\">");
+	*/
+		Export("</td>\n");
+		Export("</tr>\n\n");
 
-	Export("</form>\n\n");
-
+		Export("</form>\n\n");
+	}
 	Export("<!--TABLE:END(choices)-->\n");
 	Export("</table>\n");
 
@@ -9544,13 +9562,15 @@ void _export_rozbor_dna(short int typ){
 			Export("<!--END: kalend·rik-->\n");
 
 			Export("\n<!--BEGIN: veæk· tabuæka s kalend·rom a hlavn˝m formul·rom-->\n");
+#if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
+#else
 			if(_global_linky == ANO){
 				// 2008-01-22: podæa Vladovho n·vrhu presunut˝ nadpis sem
-				Export("<center><p "HTML_CLASS_BOLD_IT">\n");
+				Export("<p "HTML_CLASS_BOLD_IT" "HTML_ALIGN_CENTER">\n");
 				Export((char *)html_text_dalsie_moznosti[_global_jazyk]); // 2006-08-02: jazykovÈ mut·cie; \n presunut˝ pred <table>; staröia pozn·mka: 2003-07-16; kedysi tu bolo "Chcem zobraziù"
-				Export("</p></center>\n");
+				Export("</p>\n");
 			}// if(_global_linky == ANO)
-
+#endif
 			Log("_global_opt_batch_monthly == %d [2011-04-13]\n", _global_opt_batch_monthly);
 			Log("export_monthly_druh == %d [2011-04-13]\n", export_monthly_druh);
 

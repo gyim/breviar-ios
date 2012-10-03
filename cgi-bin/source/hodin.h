@@ -1389,6 +1389,8 @@ const char *str_nie[POCET_JAZYKOV + 1] =
 	{"nie", "ne", "no", "non", "___", "ne", "nem"};
 #define		STR_NIE		str_nie[_global_jazyk]
 
+const char *html_text_jazyk_android = "SK / CZ / HU: ";
+
 const char *html_text_jazyk[POCET_JAZYKOV + 1] = 
 {"Liturgia hodín v jazyku:",
  "Liturgie hodin pro jazyk:",
