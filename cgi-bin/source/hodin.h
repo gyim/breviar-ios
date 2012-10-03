@@ -1656,13 +1656,13 @@ const char *html_text_option1_chvalospevy_explain[POCET_JAZYKOV + 1] =
 };
 
 const char *html_text_option1_slava_otcu[POCET_JAZYKOV + 1] = 
-{"Sláva Otcu [na konci žalmov a chválospevov]", 
- "Sláva Otci [na konci žalmù a kantik]", 
- "Gloria to the Father [at the end of psalms and canticles]", 
+{"Sláva Otcu" /*[na konci žalmov a chválospevov]*/, 
+ "Sláva Otci" /*[na konci žalmù a kantik]*/, 
+ "Gloria to the Father" /*at the end of psalms and canticles]*/, 
  "",
  "",
- "Sláva Otci [na konci žalmù a chvalozpìvù]", 
- "Dicsõség az Atyának ... [a zsoltárok és kantikumok végén]"
+ "Sláva Otci" /*[na konci žalmù a chvalozpìvù]*/, 
+ "Dicsõség az Atyának" /*[a zsoltárok és kantikumok végén]*/
 };
 const char *html_text_option1_slava_otcu_explain[POCET_JAZYKOV + 1] = 
 {"Liturgia hodín štandardne Sláva Otcu na konci žalmov a chválospevov neuvádza.", 
