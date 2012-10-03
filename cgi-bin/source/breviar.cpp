@@ -1325,6 +1325,7 @@ void _export_heading_center(const char *string){
 }// _export_heading_center()
 
 // 2012-10-03: vytvorenÈ; funkcia vyexportuje link pre (skryù) / (zobraziù) podæa rozliËn˝ch nastavenÌ
+// kvÙli nastaveniam, Ëo s˙ formulovanÈ "default = zobrazenÈ"; treba vûdy zv·ûiù spr·vne nastavenie vstupn˝ch parametrov!
 void _export_link_show_hide(short int opt, short int bit, char popis_show[SMALL], char popis_hide[SMALL], char html_span[SMALL], char html_class[SMALL], char specific_string_before[SMALL], char specific_string_after[SMALL], char anchor[SMALL]){
 	char pom[MAX_STR] = STR_EMPTY;
 	char pom2[MAX_STR];
@@ -1359,15 +1360,15 @@ void _export_link_show_hide(short int opt, short int bit, char popis_show[SMALL]
 	// teraz vytvorÌme reùazec s options
 	prilep_request_options(pom2, pom3);
 
-	// napokon prilepÌme #anchor // 2012-10-01
-	if(!equals(anchor, STR_EMPTY)){
-		sprintf(pom3, "#%s", anchor);
+	// prilepÌme modlitbu
+	if(_global_modlitba != MODL_NEURCENA){
+		sprintf(pom3, HTML_LINK_CALL_PARAM, STR_MODLITBA, str_modlitby[_global_modlitba]);
 		strcat(pom2, pom3);
 	}
 
-	mystrcpy(pom3, STR_EMPTY, MAX_STR);
-	if(_global_modlitba != MODL_NEURCENA){
-		sprintf(pom3, HTML_LINK_CALL_PARAM, STR_MODLITBA, str_modlitby[_global_modlitba]);
+	// napokon prilepÌme #anchor // 2012-10-01
+	if(!equals(anchor, STR_EMPTY)){
+		sprintf(pom3, "#%s", anchor);
 		strcat(pom2, pom3);
 	}
 
@@ -1405,7 +1406,7 @@ void _export_link_show_hide(short int opt, short int bit, char popis_show[SMALL]
 		Export("<%s>\n", html_span);
 	}
 	Export("<a href=\"%s\" %s>", pom, html_class);
-	Export("(%s)", ((_global_opt[opt] & bit) != bit)? popis_show: popis_hide);
+	Export("(%s)", ((_global_opt[opt] & bit) != bit)? popis_show: popis_hide); // podmienka je opaËne ako intuitÌvne kvÙli nastaveniam, Ëo s˙ formulovanÈ "default = zobrazenÈ"; treba vûdy zv·ûiù spr·vne nastavenie vstupn˝ch parametrov
 	Export("</a>");
 	if(!equals(html_span, STR_EMPTY)){
 		Export("</span>\n");
@@ -2284,7 +2285,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 	mystrcpy(path, include_dir, MAX_STR);
 	// 2004-03-17 // strcat(path, FILE_PATH); // prerobene 05/06/2000A.D.
 	// short int _local_skip_in_prayer = _global_skip_in_prayer; // 2011-04-07: zapam‰t·me si pÙvodn˝ stav
-	short int _global_opt_casti_modlitby_orig; // parameter o1 (_global_opt 1) pre modlitbu cez deÚ (doplnkov· psalmÛdia)
+	// short int _global_opt_casti_modlitby_orig; // parameter o1 (_global_opt 1) pre modlitbu cez deÚ (doplnkov· psalmÛdia)
 
 	char pom[MAX_STR];
 	mystrcpy(pom, STR_EMPTY, MAX_STR);
@@ -3050,7 +3051,13 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		if(podmienka){
 			Log("including %s\n", paramname);
 			Export("%s:begin-->", paramname);
-#ifdef BEHAVIOUR_WEB
+
+			char before[SMALL] = STR_EMPTY;
+			sprintf(before, "<p "HTML_ALIGN_CENTER" "HTML_CLASS_SMALL">");
+			char after[SMALL] = STR_EMPTY;
+			mystrcpy(after, "</p>", SMALL);
+			_export_link_show_hide(opt, bit, /* opaËnÈ nastavenie kvÙli öpeci·lnej podmienke, defaulty */ popis_hide, popis_show, HTML_SPAN_RED_SMALL, HTML_CLASS_QUIET, specific_string, STR_EMPTY, anchor);
+			/*
 			// najprv upravÌme o_opt
 			_global_opt_casti_modlitby_orig = _global_opt[opt]; // backup pÙvodnej hodnoty
 			// nastavenie parametra o_opt: prid·me bit pre nastavenie
@@ -3099,15 +3106,13 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 					pom);
 			}
 			Export(" "HTML_CLASS_QUIET">"); // a.quiet { text-decoration:none; color: inherit; }
-#endif
 			Export("(%s)", ((_global_opt[opt] & bit) != bit)? popis_show: popis_hide);
-#ifdef BEHAVIOUR_WEB
 			Export("</a>");
 			Export("</span>\n");
-#endif
+
 			// napokon o_opt vr·time sp‰ù
 			_global_opt[opt] = _global_opt_casti_modlitby_orig; // restore pÙvodnej hodnoty
-
+			*/
 			Export("<!--%s:end", paramname);
 		}
 		else{
@@ -8019,7 +8024,7 @@ void _export_rozbor_dna_kalendar_orig(short int typ){
 		// 2007-08-15: pokus o krajöie zobrazenie formou kalend·ra
 #undef ZOZNAM_DNI_MESIACOV_OLD
 #ifdef ZOZNAM_DNI_MESIACOV_OLD
-		// zoznam cisel dni
+		// zoznam ËÌsel dnÌ
 		Export("<"HTML_SPAN_SMALL">\n");
 
 		Vytvor_global_link(VSETKY_DNI, _global_den.mesiac, _global_den.rok, LINK_DEN_MESIAC, NIE);
@@ -8043,7 +8048,7 @@ void _export_rozbor_dna_kalendar_orig(short int typ){
 		}
 		Export("<br>");
 
-		/* teraz zoznam mesiacov */
+		// teraz zoznam mesiacov
 		Vytvor_global_link(VSETKY_DNI, VSETKY_MESIACE, _global_den.rok, LINK_DEN_MESIAC, NIE);
 		Export("<"HTML_SPAN_BOLD">%s:</span> ", _global_link);
 		for(i = 1; i <= 12; i++){
