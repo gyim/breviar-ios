@@ -3057,62 +3057,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			char after[SMALL] = STR_EMPTY;
 			mystrcpy(after, "</p>", SMALL);
 			_export_link_show_hide(opt, bit, /* opaËnÈ nastavenie kvÙli öpeci·lnej podmienke, defaulty */ popis_hide, popis_show, HTML_SPAN_RED_SMALL, HTML_CLASS_QUIET, specific_string, STR_EMPTY, anchor);
-			/*
-			// najprv upravÌme o_opt
-			_global_opt_casti_modlitby_orig = _global_opt[opt]; // backup pÙvodnej hodnoty
-			// nastavenie parametra o_opt: prid·me bit pre nastavenie
-			if((_global_opt[opt] & bit) != bit){
-				Log("Pre option %d nastavujem bit pre '%s'\n", opt, paramname);
-				_global_opt[opt] += bit;
-			}// zmena: pouûitie nastavenia
-			else{
-				Log("Pre option %d ruöÌm bit pre '%s'\n", opt, paramname);
-				_global_opt[opt] -= bit;
-			}// zmena: zruöenie nastavenia
-			// prilepenie poradia sv‰tca
-			if(_global_poradie_svaty > 0){
-				sprintf(pom, HTML_AMPERSAND"%s=%d", STR_DALSI_SVATY, _global_poradie_svaty);
-			}// _global_poradie_svaty > 0
-			else{
-				mystrcpy(pom, STR_EMPTY, MAX_STR);
-			}// !(_global_poradie_svaty > 0)
-			// teraz vytvorÌme reùazec s options
-			prilep_request_options(pom, pompom);
-			// napokon prilepÌme #anchor // 2012-10-01
-			sprintf(pompom, "#%s", anchor);
-			strcat(pom, pompom);
-			// export hyperlinku
-			if(query_type == PRM_DATUM){
-				Export("%s\n<"HTML_SPAN_RED_SMALL">\n<a href=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%s%s\"",
-					specific_string,
-					script_name,
-					STR_QUERY_TYPE, STR_PRM_DATUM,
-					STR_DEN, _global_den.den,
-					STR_MESIAC, _global_den.mesiac,
-					STR_ROK, _global_den.rok,
-					STR_MODLITBA, str_modlitby[_global_modlitba],
-					pom);
-			}
-			else if(query_type == PRM_LIT_OBD){
-				Export("%s\n<"HTML_SPAN_RED_SMALL">\n<a href=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%c"HTML_AMPERSAND"%s=%s%s\"",
-					specific_string,
-					script_name,
-					STR_QUERY_TYPE, STR_PRM_LIT_OBD,
-					STR_DEN_V_TYZDNI, _global_den.denvt,
-					STR_TYZDEN, _global_den.tyzden,
-					STR_LIT_OBD, _global_den.litobd,
-					STR_LIT_ROK, _global_den.litrok,
-					STR_MODLITBA, str_modlitby[_global_modlitba],
-					pom);
-			}
-			Export(" "HTML_CLASS_QUIET">"); // a.quiet { text-decoration:none; color: inherit; }
-			Export("(%s)", ((_global_opt[opt] & bit) != bit)? popis_show: popis_hide);
-			Export("</a>");
-			Export("</span>\n");
 
-			// napokon o_opt vr·time sp‰ù
-			_global_opt[opt] = _global_opt_casti_modlitby_orig; // restore pÙvodnej hodnoty
-			*/
 			Export("<!--%s:end", paramname);
 		}
 		else{
@@ -6935,45 +6880,6 @@ void _export_rozbor_dna_buttons_dni_dnes(short int typ, short int dnes_dnes, sho
 				sprintf(show, "%s %s", html_text_option_zobrazit[_global_jazyk], html_text_navig_buttons[_global_jazyk]);
 				sprintf(hide, "%s %s", html_text_option_skryt[_global_jazyk], html_text_navig_buttons[_global_jazyk]);
 				_export_link_show_hide(OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_NAVIG_BUTTONS, show, hide, HTML_SPAN_SMALL, HTML_CLASS_QUIET, STR_EMPTY, STR_EMPTY, STR_EMPTY);
-				/*
-				char pom[MAX_STR] = STR_EMPTY;
-				char pom2[MAX_STR];
-				mystrcpy(pom2, STR_EMPTY, MAX_STR);
-				char pom3[MAX_STR];
-				mystrcpy(pom3, STR_EMPTY, MAX_STR);
-
-				prilep_request_options(pom2, pom3);
-
-				short int _global_opt_orig;
-				// najprv upravÌme o2
-				_global_opt_orig = _global_opt[OPT_2_HTML_EXPORT]; // backup pÙvodnej hodnoty
-				// nastavenie parametra o1: prid·me BIT_OPT_2_HIDE_NAVIG_BUTTONS pre alternatÌvnu psalmÛdiu
-				if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_NAVIG_BUTTONS) != BIT_OPT_2_HIDE_NAVIG_BUTTONS){
-					Log("Pre option %d nastavujem bit pre '%d'\n", OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_NAVIG_BUTTONS);
-					_global_opt[OPT_2_HTML_EXPORT] += BIT_OPT_2_HIDE_NAVIG_BUTTONS;
-				}// zmena: pouûitie doplnkovej psalmÛdie
-				else{
-					Log("Pre option %d ruöÌm bit pre '%d'\n", OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_NAVIG_BUTTONS);
-					_global_opt[OPT_2_HTML_EXPORT] -= BIT_OPT_2_HIDE_NAVIG_BUTTONS;
-				}
-
-				mystrcpy(pom2, STR_EMPTY, MAX_STR);
-				mystrcpy(pom3, STR_EMPTY, MAX_STR);
-				// teraz vytvorÌme reùazec s options
-				prilep_request_options(pom2, pom3);
-
-				mystrcpy(pom3, STR_EMPTY, MAX_STR);
-				if(_global_modlitba != MODL_NEURCENA){
-					sprintf(pom3, HTML_LINK_CALL_PARAM, STR_MODLITBA, str_modlitby[_global_modlitba]);
-				}
-				sprintf(pom, HTML_LINK_CALL1"%s", script_name, STR_QUERY_TYPE, STR_PRM_DATUM, STR_DEN, _global_den.den, STR_MESIAC, _global_den.mesiac, STR_ROK, _global_den.rok, pom2, pom3);
-
-				Export("<"HTML_SPAN_SMALL">\n");
-				Export("<a href=\"%s\" "HTML_CLASS_QUIET">(%s %s)</a></span>", pom, html_text_option_skryt[_global_jazyk], html_text_navig_buttons[_global_jazyk]);
-
-				// napokon o2 vr·time sp‰ù
-				_global_opt[OPT_2_HTML_EXPORT] = _global_opt_orig; // restore pÙvodnej hodnoty
-				*/
 			}
 		}
 		Export("</form>\n");
@@ -7017,46 +6923,6 @@ void _export_rozbor_dna_buttons_dni(short int typ, short int dnes_dnes /* = ANO 
 		char after[SMALL] = STR_EMPTY;
 		mystrcpy(after, "</p>", SMALL);
 		_export_link_show_hide(OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_NAVIG_BUTTONS, show, hide, STR_EMPTY, HTML_CLASS_QUIET, before, after, STR_EMPTY);
-		/*
-		char pom[MAX_STR] = STR_EMPTY;
-		char pom2[MAX_STR];
-		mystrcpy(pom2, STR_EMPTY, MAX_STR);
-		char pom3[MAX_STR];
-		mystrcpy(pom3, STR_EMPTY, MAX_STR);
-
-		prilep_request_options(pom2, pom3);
-
-		short int _global_opt_orig;
-		// najprv upravÌme o2
-		_global_opt_orig = _global_opt[OPT_2_HTML_EXPORT]; // backup pÙvodnej hodnoty
-		// nastavenie parametra o1: prid·me BIT_OPT_2_HIDE_NAVIG_BUTTONS pre alternatÌvnu psalmÛdiu
-		if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_NAVIG_BUTTONS) != BIT_OPT_2_HIDE_NAVIG_BUTTONS){
-			Log("Pre option %d nastavujem bit pre '%d'\n", OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_NAVIG_BUTTONS);
-			_global_opt[OPT_2_HTML_EXPORT] += BIT_OPT_2_HIDE_NAVIG_BUTTONS;
-		}// zmena: pouûitie doplnkovej psalmÛdie
-		else{
-			Log("Pre option %d ruöÌm bit pre '%d'\n", OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_NAVIG_BUTTONS);
-			_global_opt[OPT_2_HTML_EXPORT] -= BIT_OPT_2_HIDE_NAVIG_BUTTONS;
-		}
-
-		mystrcpy(pom2, STR_EMPTY, MAX_STR);
-		mystrcpy(pom3, STR_EMPTY, MAX_STR);
-		// teraz vytvorÌme reùazec s options
-		prilep_request_options(pom2, pom3);
-
-		mystrcpy(pom3, STR_EMPTY, MAX_STR);
-		if(_global_modlitba != MODL_NEURCENA){
-			sprintf(pom3, HTML_LINK_CALL_PARAM, STR_MODLITBA, str_modlitby[_global_modlitba]);
-		}
-		sprintf(pom, HTML_LINK_CALL1"%s", script_name, STR_QUERY_TYPE, STR_PRM_DATUM, STR_DEN, _global_den.den, STR_MESIAC, _global_den.mesiac, STR_ROK, _global_den.rok, pom2, pom3);
-
-		Export("<p "HTML_ALIGN_CENTER" "HTML_CLASS_SMALL">\n");
-		Export("<a href=\"%s\" "HTML_CLASS_QUIET">(%s %s)</a></span>", pom, html_text_option_zobrazit[_global_jazyk], html_text_navig_buttons[_global_jazyk]);
-		Export("</p>\n");
-
-		// napokon o2 vr·time sp‰ù
-		_global_opt[OPT_2_HTML_EXPORT] = _global_opt_orig; // restore pÙvodnej hodnoty
-		*/
 	}
 }// _export_rozbor_dna_buttons_dni()
 
@@ -7931,38 +7797,6 @@ void _export_rozbor_dna_kalendar(short int typ){
 		char after[SMALL] = STR_EMPTY;
 		mystrcpy(after, "</p>", SMALL);
 		_export_link_show_hide(OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_KALENDAR, show, hide, STR_EMPTY, HTML_CLASS_QUIET, before, after, STR_EMPTY);
-		/*
-		char pom[MAX_STR] = STR_EMPTY;
-		char pom2[MAX_STR];
-		mystrcpy(pom2, STR_EMPTY, MAX_STR);
-		char pom3[MAX_STR];
-		mystrcpy(pom3, STR_EMPTY, MAX_STR);
-
-		short int _global_opt_orig;
-		// najprv upravÌme o2
-		_global_opt_orig = _global_opt[OPT_2_HTML_EXPORT]; // backup pÙvodnej hodnoty
-		// nastavenie parametra o1: prid·me BIT_OPT_2_HIDE_KALENDAR pre alternatÌvnu psalmÛdiu
-		if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_KALENDAR) != BIT_OPT_2_HIDE_KALENDAR){
-			Log("Pre option %d nastavujem bit pre '%d'\n", OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_KALENDAR);
-			_global_opt[OPT_2_HTML_EXPORT] += BIT_OPT_2_HIDE_KALENDAR;
-		}// zmena: pouûitie doplnkovej psalmÛdie
-		else{
-			Log("Pre option %d ruöÌm bit pre '%d'\n", OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_KALENDAR);
-			_global_opt[OPT_2_HTML_EXPORT] -= BIT_OPT_2_HIDE_KALENDAR;
-		}
-
-		// teraz vytvorÌme reùazec s options
-		prilep_request_options(pom2, pom3);
-
-		sprintf(pom, HTML_LINK_CALL1, script_name, STR_QUERY_TYPE, STR_PRM_DATUM, STR_DEN, _global_den.den, STR_MESIAC, _global_den.mesiac, STR_ROK, _global_den.rok, pom2);
-
-		Export("<p "HTML_ALIGN_CENTER" "HTML_CLASS_SMALL">\n");
-		Export("<a href=\"%s\" "HTML_CLASS_QUIET">(%s %s)</a></span>", pom, html_text_option_zobrazit[_global_jazyk], html_text_kalendar[_global_jazyk]);
-		Export("</p>\n");
-
-		// napokon o2 vr·time sp‰ù
-		_global_opt[OPT_2_HTML_EXPORT] = _global_opt_orig; // restore pÙvodnej hodnoty
-		*/
 	}
 }// _export_rozbor_dna_kalendar()
 
@@ -7979,39 +7813,6 @@ void _export_rozbor_dna_kalendar_orig(short int typ){
 		char after[SMALL] = STR_EMPTY;
 		mystrcpy(after, "</p>", SMALL);
 		_export_link_show_hide(OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_KALENDAR, (char *)html_text_option_zobrazit[_global_jazyk], (char *)html_text_option_skryt[_global_jazyk], STR_EMPTY, HTML_CLASS_QUIET, before, after, STR_EMPTY);
-		/*
-		char pom[MAX_STR];
-		mystrcpy(pom, STR_EMPTY, MAX_STR);
-		char pom2[MAX_STR];
-		mystrcpy(pom2, STR_EMPTY, MAX_STR);
-		char pom3[MAX_STR];
-		mystrcpy(pom3, STR_EMPTY, MAX_STR);
-
-		short int _global_opt_orig;
-		// najprv upravÌme o2
-		_global_opt_orig = _global_opt[OPT_2_HTML_EXPORT]; // backup pÙvodnej hodnoty
-		// nastavenie parametra o1: prid·me BIT_OPT_2_HIDE_KALENDAR pre alternatÌvnu psalmÛdiu
-		if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_KALENDAR) != BIT_OPT_2_HIDE_KALENDAR){
-			Log("Pre option %d nastavujem bit pre '%d'\n", OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_KALENDAR);
-			_global_opt[OPT_2_HTML_EXPORT] += BIT_OPT_2_HIDE_KALENDAR;
-		}// zmena: pouûitie doplnkovej psalmÛdie
-		else{
-			Log("Pre option %d ruöÌm bit pre '%d'\n", OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_KALENDAR);
-			_global_opt[OPT_2_HTML_EXPORT] -= BIT_OPT_2_HIDE_KALENDAR;
-		}
-
-		// teraz vytvorÌme reùazec s options
-		prilep_request_options(pom2, pom3);
-
-		sprintf(pom, HTML_LINK_CALL1, script_name, STR_QUERY_TYPE, STR_PRM_DATUM, STR_DEN, _global_den.den, STR_MESIAC, _global_den.mesiac, STR_ROK, _global_den.rok, pom2);
-
-		Export("<p "HTML_ALIGN_CENTER" "HTML_CLASS_SMALL">\n");
-		Export("<a href=\"%s\" "HTML_CLASS_QUIET">(%s)</a></span>", pom, html_text_option_skryt[_global_jazyk]);
-		Export("</p>\n");
-
-		// napokon o2 vr·time sp‰ù
-		_global_opt[OPT_2_HTML_EXPORT] = _global_opt_orig; // restore pÙvodnej hodnoty
-		*/
 
 		char pom2[MAX_STR];
 		mystrcpy(pom2, STR_EMPTY, MAX_STR);
