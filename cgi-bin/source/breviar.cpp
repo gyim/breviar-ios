@@ -8034,6 +8034,9 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	char after[SMALL] = STR_EMPTY;
 	sprintf(after, "</span>");
 
+	short int zobrazit_moznosti1 = ((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_OPTIONS1) != BIT_OPT_2_HIDE_OPTIONS1);
+	short int zobrazit_moznosti2 = ((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_OPTIONS2) != BIT_OPT_2_HIDE_OPTIONS2);
+
 #if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
 	Export("<table "HTML_ALIGN_CENTER"><tr>\n<td>\n");
 	// 2012-07-23, doplnenÈ pre Ruby
@@ -8085,7 +8088,10 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 	// pokraËujem vypÌsanÌm formul·ra
 	// 2012-07-23: rozdelenie jednoho formu na dva; prv˝ pouûije PRM_DATUM podæa glob·lneho nastavenia
-	// 2012-10-03: najprv nadpis, aû potom (eventu·lne) export <form>
+	// 2012-10-03: export <form> len ak platÌ: zobrazit_moznosti1
+	if(zobrazit_moznosti1){
+		Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n", script_name, STR_QUERY_TYPE, STR_PRM_DATUM, STR_DEN, _global_den.den, STR_MESIAC, _global_den.mesiac, STR_ROK, _global_den.rok, pom2);
+	}
 
 /* ------------------------------------------- */
 	Export("<tr>\n<td>\n");
@@ -8098,9 +8104,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("</span>\n");
 	Export("</td>");
 	Export("</tr>\n\n");
-	if((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_OPTIONS1) != BIT_OPT_2_HIDE_OPTIONS1){ // len ak NIE JE moûnosù (skrytie options1) zvolen·
+	if(zobrazit_moznosti1){ // len ak NIE JE moûnosù (skrytie options1) zvolen·
 
-		Export("<form action=\"%s?%s=%s"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d"HTML_AMPERSAND"%s=%d%s\" method=\"post\">\n", script_name, STR_QUERY_TYPE, STR_PRM_DATUM, STR_DEN, _global_den.den, STR_MESIAC, _global_den.mesiac, STR_ROK, _global_den.rok, pom2);
 		//---------------------------------------------------------------------
 
 		// 2011-01-31: sem presunut· moûnosù v˝beru liturgickÈho kalend·ra
@@ -8527,6 +8532,11 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("<!--TABLE:BEGIN(choices)-->\n");
 	Export("\n<table "HTML_ALIGN_CENTER">\n");
 
+	// 2012-10-03: export <form> len ak platÌ: zobrazit_moznosti1
+	if(zobrazit_moznosti2){
+		// 2012-07-23: rozdelenie jednoho formu na dva; prv˝ pouûije PRM_DATUM podæa glob·lneho nastavenia
+		Export("\n<form action=\"%s?%s\" method=\"post\">\n", uncgi_name, pom2);
+	}
 /*
 	// -------------------------------------------
 	Export("<tr>\n<td>\n");
@@ -8545,11 +8555,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("</span>\n");
 	Export("</td>");
 	Export("</tr>\n\n");
-	if((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_OPTIONS2) != BIT_OPT_2_HIDE_OPTIONS2){ // len ak NIE JE moûnosù (skrytie options2) zvolen·
-
-		// 2012-07-23: rozdelenie jednoho formu na dva; prv˝ pouûije PRM_DATUM podæa glob·lneho nastavenia
-		// 2012-10-03: presunutÈ aû sem (po kontrole, Ëi sa vÙbec m· zobrazovaù)
-		Export("\n<form action=\"%s?%s\" method=\"post\">\n", uncgi_name, pom2);
+	if(zobrazit_moznosti2){ // len ak NIE JE moûnosù (skrytie options2) zvolen·
 
 	// -------------------------------------------
 		Export("<tr>\n<td>\n");
