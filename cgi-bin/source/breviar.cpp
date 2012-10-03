@@ -8563,11 +8563,13 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<!--TABLE:BEGIN(PRM_DATUM)-->\n");
 		Export("<table "HTML_ALIGN_LEFT">\n<tr><td>\n");
 
+		short int radio_check_first = ANO;
+
 #if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
 #else
 		// formular pre PRM_DATUM
-		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\" checked>",
-			STR_QUERY_TYPE, STR_PRM_DATUM);
+		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\"%s>", STR_QUERY_TYPE, STR_PRM_DATUM, radio_check_first? html_option_checked: STR_EMPTY);
+		radio_check_first = NIE;
 		Export("</td>\n");
 	
 		Export("<td "HTML_ALIGN_LEFT">\n");
@@ -8655,8 +8657,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<tr>\n<td>\n");
 		Export("<table "HTML_ALIGN_LEFT">\n<tr><td>\n");
 		// formular pre PRM_SVIATOK
-		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">\n",
-			STR_QUERY_TYPE, STR_PRM_SVIATOK);
+		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\"%s>\n", STR_QUERY_TYPE, STR_PRM_SVIATOK, radio_check_first? html_option_checked: STR_EMPTY);
+		radio_check_first = NIE;
 		Export("</td><td>\n");
 		// sviatky --- [ToDo]
 		Export("</td></tr></table>\n");
@@ -8668,7 +8670,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<tr>\n<td>\n");
 		Export("<table "HTML_ALIGN_LEFT">\n<tr><td>\n");
 		// formular pre PRM_ANALYZA_ROKU
-		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">", STR_QUERY_TYPE, STR_PRM_ANALYZA_ROKU);
+		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\"%s>", STR_QUERY_TYPE, STR_PRM_ANALYZA_ROKU, radio_check_first? html_option_checked: STR_EMPTY);
+		radio_check_first = NIE;
 		Export("</td><td>\n");
 		// Export(HTML_NONBREAKING_SPACE); // netreba, je to v tabu¾ke
 		Export((char *)html_text_prik_sviatky_atd[_global_jazyk]);
@@ -8683,8 +8686,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<tr>\n<td>\n");
 		Export("<table "HTML_ALIGN_LEFT">\n<tr><td>\n");
 		// formular pre PRM_MESIAC_ROKA
-		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
-			STR_QUERY_TYPE, STR_PRM_MESIAC_ROKA);
+		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\"%s>", STR_QUERY_TYPE, STR_PRM_MESIAC_ROKA, radio_check_first? html_option_checked: STR_EMPTY);
+		radio_check_first = NIE;
 		Export("</td><td>\n");
 		// Export(HTML_NONBREAKING_SPACE); // netreba, je to v tabu¾ke
 		Export((char *)html_text_lit_kalendar[_global_jazyk]);
@@ -8708,8 +8711,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<tr>\n<td>\n");
 		Export("<table "HTML_ALIGN_LEFT">\n<tr><td>\n");
 		// formular pre PRM_TABULKA
-		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
-			STR_QUERY_TYPE, STR_PRM_TABULKA);
+		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\"%s>", STR_QUERY_TYPE, STR_PRM_TABULKA, radio_check_first? html_option_checked: STR_EMPTY);
+		radio_check_first = NIE;
 		Export("</td><td>\n");
 		// Export(HTML_NONBREAKING_SPACE); // netreba, je to v tabu¾ke
 		Export((char *)html_text_tabulka_pohyblive_od[_global_jazyk]);
@@ -8744,7 +8747,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<table "HTML_ALIGN_LEFT">\n<tr><td "HTML_VALIGN_TOP">\n");
 		// 2011-01-25; formulár nahrádzajúci "PRM_CEZ_ROK"
 		// formulár pre PRM_LIT_OBD
-		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">", STR_QUERY_TYPE, STR_PRM_LIT_OBD);
+		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\"%s>", STR_QUERY_TYPE, STR_PRM_LIT_OBD, radio_check_first? html_option_checked: STR_EMPTY);
+		radio_check_first = NIE;
 		Export("</td><td "HTML_ALIGN_LEFT">\n");
 
 		// pole WWW_MODLITBA
@@ -8829,8 +8833,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<table "HTML_ALIGN_LEFT">\n<tr><td>\n");
 		// 2003-07-16; tento formular bol povodne na 2. mieste
 		// formular pre PRM_CEZ_ROK
-		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\">",
-			STR_QUERY_TYPE, STR_PRM_CEZ_ROK);
+		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\"%s>", STR_QUERY_TYPE, STR_PRM_CEZ_ROK, radio_check_first? html_option_checked: STR_EMPTY);
+		radio_check_first = NIE;
 		Export("</td><td "HTML_ALIGN_LEFT">\n");
 
 		// 2003-07-16; povodne toto pole bolo na konci
