@@ -360,6 +360,8 @@ extern short int _global_opt_export_date_format;
 int main(int argc, char **argv);
 #endif // OS_linux
 
+int breviar_main(int argc, char **argv);
+
 #if (_MSC_VER >= 1400)       // VC8+ 2007-02-12 kvôli vc++ 2005 express edition
 	#pragma warning(disable : 4996)    // disable all deprecation warnings
 	#define putenv _putenv

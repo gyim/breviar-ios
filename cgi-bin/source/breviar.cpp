@@ -13339,6 +13339,7 @@ short int getArgv(int argc, char **argv){
 	 * 2011-04-13: upravenÈ (pridan· option 0 a odstr·nenÈ od ËÌsla 5 aû po 9)
 	 * 2011-05-06: upravenÈ (hodnota `F' ani `H' sa nepouûÌvali)
 	 *            `F' (font): moûnosù zvoliù font pre override CSS
+	 * 2012-09-07: 'H' (header) disables header and footer
 	 *
 	 */
 	mystrcpy(option_string, "?q::d::m::r::p::x::s::t::0::1::2::3::4::a::h::e::f::g::l::i::\?::b::n::o::k::j::c::u::M::I::H::F::S::", MAX_STR);
@@ -13404,7 +13405,7 @@ short int getArgv(int argc, char **argv){
 					Log("option %c with value `%s' -- binary executable name `%s' used for batch mode\n", c, optarg, optarg); break;
 				case 'i': // pridane 05/06/2000A.D., include_dir
 					if(optarg != NULL){
-						mystrcpy(include_dir, optarg, SMALL);
+						mystrcpy(include_dir, optarg, MAX_STR); // 2012-09-08: This string can be quite long on iOS
 					}
 					Log("option %c with value `%s' -- including files from `%s'\n", c, optarg, optarg /* 2004-03-17 zapoznamkovane FILE_PATH */); break;
 				case 'f': // tabulka - rok from; pre batch mode je to DEN DO
@@ -13551,6 +13552,11 @@ short int getArgv(int argc, char **argv){
 						mystrcpy(_global_export_navig_hore, DEFAULT_MONTH_EXPORT, SMALL);
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
+
+				case 'H':
+					_global_hlavicka_Export = 1;
+					_global_patka_Export = 1;
+					Log("option '%c'\n", c); break;
 
 				case '?':
 				case 'h':
@@ -15225,7 +15231,7 @@ void setConfigDefaults(short int jazyk){
 
 // kedysi bolo void main;
 // 2003-07-14, kvoli gcc version 3.2.2 20030222 (Red Hat Linux 3.2.2-5) christ-net.sk 
-int main(int argc, char **argv){
+int breviar_main(int argc, char **argv){
 	short int i;
 
 	// 2011-04-20: naplnenie _global_system
@@ -16002,5 +16008,19 @@ _main_end:
 	closeLog();
 	return 0; // 2003-07-14, kvoli gcc version 3.2.2 20030222 (Red Hat Linux 3.2.2-5) christ-net.sk
 }
+
+#ifndef SKIP_MAIN
+int main(int argc, char **argv) {
+	int ret = breviar_main(argc, argv);
+
+#ifdef EXPORT_TO_STRING
+	char *result = getExportedString();
+	int resultLength = strlen(result);
+	fwrite(result, resultLength, 1, stdout);
+#endif
+
+	return ret;
+}
+#endif
 
 #endif // __BREVIAR_CPP_

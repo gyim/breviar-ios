@@ -191,6 +191,7 @@ void _hlavicka(char *title, FILE * expt, short int level, short int spec){
         if (_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_NOCNY_REZIM) {
           _header_css(expt, level, nazov_css_invert_colors);
         }
+	Export_to_file(expt, "\t<meta name=\"viewport\" content=\"width=device-width, user-scalable=yes, initial-scale=1.0\" />\n");
 	Export_to_file(expt, "<title>%s</title>\n", title);
 	Export_to_file(expt, "</head>\n\n");
 	Log("</head>...\n");
