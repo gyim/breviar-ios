@@ -1,4 +1,6 @@
-# zbuildované binárky
+config.mk
+.depend
+*.o
 l.cgi
 l.cgi.gz
 *-l.cgi
@@ -67,3 +69,5 @@ android/assets/include_hu/*
 android/assets/katechezy.htm
 android/assets/breviar-web.cfg
 android/gen
+project.xcworkspace
+xcuserdata
