@@ -10499,14 +10499,14 @@ void rozbor_dna(short int den, short int mesiac, short int rok){
  * potom pre vsetky dni spusti _rozbor_dna();
  *
  */
-void rozbor_mesiaca(short int mesiac, short int rok, short int txt_export = 0){
+void rozbor_mesiaca(short int mesiac, short int rok, short int typ_exportu = EXPORT_DNA_VIAC_DNI){
 	Log("-- rozbor_mesiaca(%d/%d): zaèiatok\n", mesiac, rok);
 	_struct_den_mesiac datum;
 	datum.mesiac = mesiac;
 	short int som_v_tabulke = ANO; // 2009-08-26: èi sa používa tabu¾ka; bežne pre web áno, pre export pre mobilné zariadenia [export_monthly_druh >= 3] netreba tabu¾ku
 	short int typ;
 
-	if(txt_export == 0){
+	if(typ_exportu != EXPORT_DNA_VIAC_DNI_TXT){
 		if((_global_opt[OPT_4_OFFLINE_EXPORT] & BIT_OPT_4_MESIAC_RIADOK) != BIT_OPT_4_MESIAC_RIADOK){
 			Log("-- EXPORT_DNA_VIAC_DNI --\n");
 			typ = EXPORT_DNA_VIAC_DNI;
@@ -11486,12 +11486,12 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
 				Export(" == %d ", mi + 1);
 				Export("(%s)\n", nazov_mesiaca(m));
 #endif
-				rozbor_mesiaca(mi + 1, r, 1); // tam sa volá _rozbor_dna() a potom _export_rozbor_dna()
+				rozbor_mesiaca(mi + 1, r, EXPORT_DNA_VIAC_DNI_TXT); // tam sa volá _rozbor_dna() a potom _export_rozbor_dna()
 			}// for mi
 		}// if(m == VSETKY_MESIACE)
 		else{
 			if(d == VSETKY_DNI){
-				rozbor_mesiaca(m + 1, r, 1); // tam sa volá _rozbor_dna() a potom _export_rozbor_dna()
+				rozbor_mesiaca(m + 1, r, EXPORT_DNA_VIAC_DNI_TXT); // tam sa volá _rozbor_dna() a potom _export_rozbor_dna()
 			}
 			else{
 				_struct_den_mesiac datum;
