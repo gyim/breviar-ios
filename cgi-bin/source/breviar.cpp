@@ -9481,8 +9481,8 @@ void _export_rozbor_dna(short int typ){
 #endif
 
 #ifdef BUTTONY_PREDOSLY_NASLEDOVNY_ROK_MESIAC_DEN_HORE
-	_export_rozbor_dna_buttons_dni(typ);
-	if(typ != EXPORT_DNA_VIAC_DNI_TXT){
+	if((typ != EXPORT_DNA_VIAC_DNI_TXT) && (typ != EXPORT_DNA_XML)){
+		_export_rozbor_dna_buttons_dni(typ);
 		Export("<p></p>\n"); // 2011-01-27: doplnené oddelenie
 	}
 #endif
@@ -9670,7 +9670,7 @@ void _export_rozbor_dna(short int typ){
 			// 2011-01-27: tu bolo kedysi volanie _export_rozbor_dna_buttons_dni(typ); -- presunuté vyššie
 #ifndef BUTTONY_PREDOSLY_NASLEDOVNY_ROK_MESIAC_DEN_HORE
 			Export("<p></p>\n"); // 2011-01-26: doplnené oddelenie
-			if(typ != EXPORT_DNA_VIAC_DNI_TXT){
+			if((typ != EXPORT_DNA_VIAC_DNI_TXT) && (typ != EXPORT_DNA_XML)){
 				_export_rozbor_dna_buttons_dni(typ);
 			}
 #endif
