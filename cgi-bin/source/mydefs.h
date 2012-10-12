@@ -878,5 +878,21 @@ extern short int query_type; // premenna obsahujuca PRM_...
 #define FILENAME_EXPORT_MONTH_SIMPLE "%.2d%.2d"
 #define FILENAME_EXPORT_MONTH_FULL   "%.4d-%.2d"
 
+#define HTML_ISO_FORMAT "%04d-%02d-%02d"
+
+#define XML_CELEBRATION     "Celebration"
+#define XML_CELEBRATION_ID  "Id"
+#define XML_DATE_ISO        "DateISO"
+#define XML_DATE_DAY        "DateDay"
+#define XML_DATE_MONTH      "DateMonth"
+#define XML_DATE_YEAR       "DateYear"
+#define XML_STRING_TITLE    "StringTitle"
+#define XML_STRING_COMMUNIA "StringCommunia"
+#define XML_STRING_VOLUME   "StringVolume"
+
+// starting, closing element (XML, HTML)
+#define ELEM_BEGIN(elem)    "<"elem">"
+#define ELEM_END(elem)      "</"elem">"
+
 #endif /*__MYDEFS_H_*/
 

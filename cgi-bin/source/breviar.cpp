@@ -5492,8 +5492,9 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		velkost = CASE_VELKE;
 		Log("ano\n");
 	}
-	else
+	else{
 		Log("nie\n");
+	}
 
 	Log("_local_den.denvt == DEN_NEDELA || _local_den.prik == PRIKAZANY_SVIATOK -- ");
 	if((_local_den.denvt == DEN_NEDELA) ||
@@ -5502,8 +5503,9 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		farba = COLOR_RED;
 		Log("ano\n");
 	}
-	else
+	else{
 		Log("nie\n");
+	}
 
 	// najprv n·zov; ak ide o æubovoæn˙ spomienku na blahoslavenÈho (napr. SK OP), zobrazÌ sa n·zov kurzÌvou
 	if(_local_den.prik == VOLNA_LUBOVOLNA_SPOMIENKA){
@@ -6354,35 +6356,67 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 	short int _local_mesiac = _global_den.mesiac;
 	short int _local_rok = _global_den.rok;
 
+	if(typ == EXPORT_DNA_XML){
+		som_v_tabulke = NIE;
+		Export(ELEM_BEGIN(XML_CELEBRATION)"\n");
+		Export(ELEM_BEGIN(XML_DATE_ISO)""HTML_ISO_FORMAT""ELEM_END(XML_DATE_ISO)"\n", _local_rok, _local_mesiac, _local_den);
+		Export(ELEM_BEGIN(XML_DATE_DAY)"%d"ELEM_END(XML_DATE_DAY)"\n", _local_den);
+		Export(ELEM_BEGIN(XML_DATE_MONTH)"%d"ELEM_END(XML_DATE_MONTH)"\n", _local_mesiac);
+		Export(ELEM_BEGIN(XML_DATE_YEAR)"%d"ELEM_END(XML_DATE_YEAR)"\n", _local_rok);
+		Export(ELEM_BEGIN(XML_CELEBRATION_ID)"%d"ELEM_END(XML_CELEBRATION_ID)"\n", poradie_svateho);
+	}
+
 	// BEGIN: Ëasù podæa #define BUTTONS (len pre volania, kde bolo pouûitÈ BUTTONS, t. j. den_zoznam == ANO)
 	if(den_zoznam == ANO){
-		Export("\n<!-- BEGIN:_global_string -->");
+
+		if(typ == EXPORT_DNA_XML){
+			Export(ELEM_BEGIN(XML_STRING_TITLE));
+		}
+		else{
+			Export("\n<!-- BEGIN:_global_string -->");
+		}
 		init_global_string(typ, poradie_svateho, MODL_NEURCENA, /* aj_citanie */ ((den_zoznam == ANO) && ((typ == EXPORT_DNA_JEDEN_DEN) || (typ == EXPORT_DNA_JEDEN_DEN_LOCAL) || (typ == EXPORT_DNA_DNES)))? ANO: NIE);
 		if(typ == EXPORT_DNA_VIAC_DNI_TXT){
 			Export("\"");
 		}
 		Export("%s", _global_string);
+		if(typ == EXPORT_DNA_XML){
+			Export(ELEM_END(XML_STRING_TITLE)"\n");
+		}
+		else{
+			Export("<!-- END:_global_string -->\n");
+		}
+
 		if(typ == EXPORT_DNA_VIAC_DNI_TXT){
 			Export("\";");
 		}
 		if(typ != EXPORT_DNA_VIAC_DNI_TXT){
 			Log("  _global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZOBRAZ_SPOL_CAST == %d: \n", _global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZOBRAZ_SPOL_CAST);
-			Export("<!-- BEGIN:_global_string_spol_cast -->");
 			if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZOBRAZ_SPOL_CAST) == BIT_OPT_1_ZOBRAZ_SPOL_CAST){
 				ret_sc = init_global_string_spol_cast(MODL_SPOL_CAST_NULL, poradie_svateho);
 				Log("including SPOL_CAST\n");
 				if(!equals(_global_string_spol_cast, STR_EMPTY)){
 					Export("<br />");
+					if(typ == EXPORT_DNA_XML){
+						Export(ELEM_BEGIN(XML_STRING_COMMUNIA));
+					}
+					else{
+						Export("<!-- BEGIN:_global_string_spol_cast -->");
+					}
 					Export("<"HTML_SPAN_RED_SMALL">%s %s %s.</span>\n", 
 						(ret_sc == MODL_SPOL_CAST_ZA_ZOSNULYCH)? nazov_spolc_oficiumza_jazyk[_global_jazyk]: nazov_spolc_zospolc_jazyk[_global_jazyk], 
 						(ret_sc != MODL_SPOL_CAST_ZA_ZOSNULYCH)? ((ret_sc == MODL_SPOL_CAST_POSVIACKA_CHRAMU)? nazov_spolc_vyrocie_jazyk[_global_jazyk]: nazov_spolc_sviatky_jazyk[_global_jazyk]): STR_EMPTY,
 						_global_string_spol_cast);
-				}
-			}
-			Export("<!-- END:_global_string_spol_cast -->");
+					if(typ == EXPORT_DNA_XML){
+						Export(ELEM_END(XML_STRING_COMMUNIA)"\n");
+					}
+					else{
+						Export("<!-- END:_global_string_spol_cast -->");
+					}
+				}// if(!equals(_global_string_spol_cast, STR_EMPTY))
+			}// if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZOBRAZ_SPOL_CAST) == BIT_OPT_1_ZOBRAZ_SPOL_CAST)
 		}
-		Export("<!-- END:_global_string -->\n");
-	}
+	}// if(den_zoznam == ANO)
 	// END: Ëasù podæa #define BUTTONS
 
 	if(den_zoznam != ANO){
@@ -6404,7 +6438,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 		Log("-- _export_rozbor_dna_buttons(typ == %d): kvÙli typu nebudeme exportovaù tabuæku...\n", typ);
 	}
 
-	if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_VIAC_DNI_TXT)){
+	if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_VIAC_DNI_TXT) && (typ != EXPORT_DNA_XML)){
 		Log("--- _export_rozbor_dna_buttons(): idem tlaËiù buttony...\n");
 
 		Export("\n");
@@ -6823,6 +6857,9 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 		}// (typ == EXPORT_DNA_VIAC_DNI)
 	}
 
+	if(typ == EXPORT_DNA_XML){
+		Export(ELEM_END(XML_CELEBRATION)"\n");
+	}
 	// sp‰ù pÙvodnÈ nastavenia (pre den_zoznam != ANO boli zmenenÈ)
 	_global_den.den = _local_den;
 	_global_den.mesiac = _local_mesiac;
@@ -9343,7 +9380,7 @@ void _export_rozbor_dna_interpretuj_zoznam(short int export_typ, short int typ, 
 			execute_batch_command(poradie_svaty, batch_command, zobrazit_mcd, modlitba, d_from_m_from_r_from);
 		}
 		else if(export_typ == EXPORT_TYP_WEB_MODE){
-			if(i > 1){
+			if((i > 1) && (typ != EXPORT_DNA_XML)){
 				NEWLINE;
 			}
 			_export_rozbor_dna_buttons(typ, poradie_svaty, ANO, zobrazit_mcd);
@@ -9395,7 +9432,7 @@ void _export_rozbor_dna(short int typ){
 		som_v_tabulke = NIE;
 		Log("-- _export_rozbor_dna(typ == %d): keÔûe sme v _global_opt_batch_monthly == ANO a export_monthly_druh (%d) > 2, nebudeme exportovaù tabuæku...\n", typ, export_monthly_druh);
 	}
-	if(typ == EXPORT_DNA_VIAC_DNI_TXT){
+	if((typ == EXPORT_DNA_VIAC_DNI_TXT) || (typ == EXPORT_DNA_XML)){
 		som_v_tabulke = NIE;
 		Log("-- _export_rozbor_dna_buttons(typ == %d): kvÙli typu nebudeme exportovaù tabuæku...\n", typ);
 	}
@@ -9533,6 +9570,9 @@ void _export_rozbor_dna(short int typ){
 			Export("</div>");
 		}
 	}// (typ == EXPORT_DNA_VIAC_DNI)
+	else if(typ == EXPORT_DNA_XML){
+		Export(ELEM_BEGIN(XML_STRING_VOLUME)"%s"ELEM_END(XML_STRING_VOLUME)"\n", _global_string2);
+	}
 
 	if(som_v_tabulke == ANO){
 		Export("</td>\n</tr>\n");
@@ -9548,9 +9588,9 @@ void _export_rozbor_dna(short int typ){
 		Export("</table>\n");
 	}
 
-	if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_VIAC_DNI_TXT)){
+	if((typ != EXPORT_DNA_VIAC_DNI) && (typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_VIAC_DNI_TXT) && (typ != EXPORT_DNA_XML)){
 
-		if((_global_linky == ANO) || ((_global_opt_batch_monthly == ANO) && (export_monthly_druh >= 2))){ /* pridane 13/04/2000A.D.; upravenÈ 2009-08-12 */
+		if((_global_linky == ANO) || ((_global_opt_batch_monthly == ANO) && (export_monthly_druh >= 2))){ // pridane 13/04/2000A.D.; upravenÈ 2009-08-12
 
 			// 2007-08-15: vloûenÈ vypÌsanie kalend·ra a hlavnÈho formul·ra 
 			// 2011-01-27: tu bolo kedysi volanie _export_rozbor_dna_buttons_dni(typ); -- presunutÈ vyööie
@@ -10506,7 +10546,7 @@ void rozbor_mesiaca(short int mesiac, short int rok, short int typ_exportu = EXP
 	short int som_v_tabulke = ANO; // 2009-08-26: Ëi sa pouûÌva tabuæka; beûne pre web ·no, pre export pre mobilnÈ zariadenia [export_monthly_druh >= 3] netreba tabuæku
 	short int typ;
 
-	if(typ_exportu != EXPORT_DNA_VIAC_DNI_TXT){
+	if((typ_exportu != EXPORT_DNA_VIAC_DNI_TXT) && (typ_exportu != EXPORT_DNA_XML)){
 		if((_global_opt[OPT_4_OFFLINE_EXPORT] & BIT_OPT_4_MESIAC_RIADOK) != BIT_OPT_4_MESIAC_RIADOK){
 			Log("-- EXPORT_DNA_VIAC_DNI --\n");
 			typ = EXPORT_DNA_VIAC_DNI;
@@ -10517,15 +10557,14 @@ void rozbor_mesiaca(short int mesiac, short int rok, short int typ_exportu = EXP
 		}
 	}
 	else{
-		Log("-- EXPORT_DNA_VIAC_DNI_TXT --\n");
-		typ = EXPORT_DNA_VIAC_DNI_TXT;
+		typ = typ_exportu;
 	}
 
 	if(_global_opt_batch_monthly == ANO && export_monthly_druh > 2){
 		som_v_tabulke = NIE;
 		Log("-- rozbor_mesiaca: keÔûe sme v _global_opt_batch_monthly == ANO a export_monthly_druh (%d) > 2, nebudeme exportovaù tabuæku...\n", export_monthly_druh);
 	}
-	if(typ == EXPORT_DNA_VIAC_DNI_TXT){
+	if((typ == EXPORT_DNA_VIAC_DNI_TXT) || (typ == EXPORT_DNA_XML)){
 		som_v_tabulke = NIE;
 		Log("-- _export_rozbor_dna_buttons(typ == %d): kvÙli typu nebudeme exportovaù tabuæku...\n", typ);
 	}
@@ -11397,12 +11436,12 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 }// _main_rozbor_dna()
 
 // 2011-02-02: pridan· funkcia pre jednoduch˝ TXT export konkrÈtneho roka, mesiaca
-void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
+void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok, char *modlitba){
 	// na z·klade _main_rozbor_dna; textov˝ export len pre RKC
 	short int heading_written = 0;
 	char pom[MAX_STR];
-	Log("-- _main_rozbor_dna_txt(char *, char *, char *): begin (%s, %s, %s)\n", den, mesiac, rok);
-	short int d, m, mi, r;
+	Log("-- _main_rozbor_dna_txt(char *, char *, char *): begin (%s, %s, %s, %s)\n", den, mesiac, rok, modlitba);
+	short int d, m, mi, r, t;
 
 	char pom2[MAX_STR]; // 2006-08-01: pridanÈ kvÙli transferu ˙dajov o jazyku
 	mystrcpy(pom, STR_EMPTY, MAX_STR); // 2006-08-01: pridan· inicializ·cia
@@ -11418,6 +11457,9 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
 	Log("mes == `%s' (%d)\n", mesiac, m);
 	r = atoi(rok); // vrati 0 v pripade chyby; alebo int
 	Log("rok == `%s' (%d)\n", rok, r);
+	// rozparsovanie parametra modlitba -- pouûÌva sa pre typ exportu; default: EXPORT_DNA_VIAC_DNI_TXT
+	t = atoi(modlitba); // vrati 0 v pripade chyby; alebo int
+	Log("modlitba == `%s' (%d)\n", modlitba, t);
 
 	// kontrola ˙dajov
 	short int result = SUCCESS;
@@ -11441,6 +11483,10 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
 	}
 	else if(r == 0){
 		ExportUDAJE("rok = %s.\n", rok);
+	}
+	// modlitba -> typ exportu
+	if((t == 0) || (t > 6)){
+		t = EXPORT_DNA_VIAC_DNI_TXT;
 	}
 
 	// kontrola udajov ukoncena, podla nej pokracujeme dalej
@@ -11468,6 +11514,9 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
 			else{
 				Export((char *)html_text_den[_global_jazyk]);
 				Export(" %d.", d);
+				if((t != EXPORT_DNA_JEDEN_DEN) || (t != EXPORT_DNA_XML)){
+					t = EXPORT_DNA_JEDEN_DEN;
+				}
 			}
 			Export(" %s", nazov_mesiaca(m));
 			Export(" %d", r);
@@ -11476,7 +11525,9 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
 
 		Export("\n");
 
-		Export("<pre>");
+		if(t == EXPORT_DNA_VIAC_DNI_TXT){
+			Export("<pre>");
+		}
 		// teraz generujem jednotlivÈ mesiace so vöetk˝mi dÚami
 		if(m == VSETKY_MESIACE){
 			for(mi = MES_JAN; mi <= MES_DEC; mi++){
@@ -11486,12 +11537,12 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
 				Export(" == %d ", mi + 1);
 				Export("(%s)\n", nazov_mesiaca(m));
 #endif
-				rozbor_mesiaca(mi + 1, r, EXPORT_DNA_VIAC_DNI_TXT); // tam sa vol· _rozbor_dna() a potom _export_rozbor_dna()
+				rozbor_mesiaca(mi + 1, r, t); // tam sa vol· _rozbor_dna() a potom _export_rozbor_dna()
 			}// for mi
 		}// if(m == VSETKY_MESIACE)
 		else{
 			if(d == VSETKY_DNI){
-				rozbor_mesiaca(m + 1, r, EXPORT_DNA_VIAC_DNI_TXT); // tam sa vol· _rozbor_dna() a potom _export_rozbor_dna()
+				rozbor_mesiaca(m + 1, r, t); // tam sa vol· _rozbor_dna() a potom _export_rozbor_dna()
 			}
 			else{
 				_struct_den_mesiac datum;
@@ -11499,12 +11550,14 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
 				datum.mesiac = m + 1;
 				_rozbor_dna(datum, r);
 				Log("-- _main_rozbor_dna_txt(): nasleduje _export_rozbor_dna() pre deÚ %d...\n", datum.den);
-				_export_rozbor_dna(EXPORT_DNA_VIAC_DNI_TXT);
+				_export_rozbor_dna(t);
 				Log("-- _main_rozbor_dna_txt(): deÚ %d skonËil.\n", datum.den);
 			}
 		}
 		Export("\n");
-		Export("</pre>\n");
+		if(t == EXPORT_DNA_VIAC_DNI_TXT){
+			Export("</pre>\n");
+		}
 	}// m != UNKNOWN_MESIAC
 	else{// m == UNKNOWN_MESIAC
 		// nesmiem zabudnut, ze m je 0--11
@@ -15908,10 +15961,10 @@ _main_SIMULACIA_QS:
 					_main_rozbor_dna(pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA, pom_DALSI_SVATY);
 					_main_LOG_to_Export("spat po skonceni _main_rozbor_dna(%s, %s, %s, %s, %s);\n", pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA, pom_DALSI_SVATY);
 					break;
-				case PRM_TXT: // 2011-02-02: doplnenÈ; export do TXT pre RKC
-					_main_LOG_to_Export("spustam _main_rozbor_dna_txt(stringy: pom_DEN = %s, pom_MESIAC = %s, pom_ROK = %s);\n", pom_DEN, pom_MESIAC, pom_ROK);
-					_main_rozbor_dna_txt(pom_DEN, pom_MESIAC, pom_ROK);
-					_main_LOG_to_Export("spat po skonceni _main_rozbor_dna_txt(%s, %s, %s);\n", pom_DEN, pom_MESIAC, pom_ROK);
+				case PRM_TXT: // 2011-02-02: doplnenÈ; export do TXT pre RKC | 2012-10-12: doplnen˝ ÔalöÌ parameter (modlitba) pre spÙsob exportu
+					_main_LOG_to_Export("spustam _main_rozbor_dna_txt(stringy: pom_DEN = %s, pom_MESIAC = %s, pom_ROK = %s, pom_MODLITBA = %s);\n", pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA);
+					_main_rozbor_dna_txt(pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA);
+					_main_LOG_to_Export("spat po skonceni _main_rozbor_dna_txt(%s, %s, %s, %s);\n", pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA);
 					break;
 				case PRM_CEZ_ROK:
 					_main_LOG_to_Export("spustam _main_zaltar(%s, %s, %s);\n", pom_DEN_V_TYZDNI, pom_TYZDEN, pom_MODLITBA);
