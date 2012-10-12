@@ -5787,17 +5787,21 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			strcat(_global_string, pom);
 		}
 
-		// 2010-08-03: pridan˝ ako pozn·mka typ kalend·ra
-		if((_local_den.kalendar >= KALENDAR_NEURCENY) && (_local_den.kalendar <= POCET_KALENDAROV)){
-			sprintf(pom, "<!-- kalend·r: %s -->",
-				nazov_kalendara[_local_den.kalendar]);
-			Log("prid·vam ako pozn·mku typ kalend·ra: %s\n", pom);
-			strcat(_global_string, pom);
+#ifdef OS_Windows_Ruby
+		if(typ != EXPORT_DNA_XML){
+			// 2010-08-03: pridan˝ ako pozn·mka typ kalend·ra
+			if((_local_den.kalendar >= KALENDAR_NEURCENY) && (_local_den.kalendar <= POCET_KALENDAROV)){
+				sprintf(pom, "<!-- kalend·r: %s -->", nazov_kalendara[_local_den.kalendar]);
+				Log("prid·vam ako pozn·mku typ kalend·ra: %s\n", pom);
+				strcat(_global_string, pom);
+			}
+			else{
+				sprintf(pom, "<!-- kalend·r nie je urËen˝ spr·vne -->");
+				strcat(_global_string, pom);
+			}
 		}
-		else{
-			sprintf(pom, "<!-- kalend·r nie je urËen˝ spr·vne -->");
-			strcat(_global_string, pom);
-		}
+#endif
+
 		// 2011-10-03: odkaz na liturgickÈ ËÌtanie sa doplnÌ, iba ak je aj_citanie == ANO
 		if(((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_CITANIA) == BIT_OPT_0_CITANIA) && aj_citanie){
 #ifdef LITURGICKE_CITANIA_ANDROID
@@ -6340,7 +6344,9 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 // 2011-10-03: predsunut· Ëasù, ktor· bola s˙Ëasùou #define BUTTONS
 	Log("--- _export_rozbor_dna_buttons(typ == %d) -- begin\n", typ);
 #ifdef OS_Windows_Ruby
-	Export("\n<!--buttons:begin-->\n");
+	if(typ != EXPORT_DNA_XML){
+		Export("\n<!--buttons:begin-->\n");
+	}
 #endif
 	short int i = MODL_NEURCENA;
 	short int smer = SLAV_NEURCENE;
@@ -6358,7 +6364,6 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 
 	if(typ == EXPORT_DNA_XML){
 		som_v_tabulke = NIE;
-		Export(ELEM_BEGIN(XML_CELEBRATION)"\n");
 		Export(ELEM_BEGIN(XML_DATE_ISO)""HTML_ISO_FORMAT""ELEM_END(XML_DATE_ISO)"\n", _local_rok, _local_mesiac, _local_den);
 		Export(ELEM_BEGIN(XML_DATE_DAY)"%d"ELEM_END(XML_DATE_DAY)"\n", _local_den);
 		Export(ELEM_BEGIN(XML_DATE_MONTH)"%d"ELEM_END(XML_DATE_MONTH)"\n", _local_mesiac);
@@ -6857,15 +6862,14 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 		}// (typ == EXPORT_DNA_VIAC_DNI)
 	}
 
-	if(typ == EXPORT_DNA_XML){
-		Export(ELEM_END(XML_CELEBRATION)"\n");
-	}
 	// sp‰ù pÙvodnÈ nastavenia (pre den_zoznam != ANO boli zmenenÈ)
 	_global_den.den = _local_den;
 	_global_den.mesiac = _local_mesiac;
 	_global_den.rok = _local_rok;
 #ifdef OS_Windows_Ruby
-	Export("\n<!--buttons:end-->\n");
+	if(typ != EXPORT_DNA_XML){
+		Export("\n<!--buttons:end-->\n");
+	}
 #endif
 	Log("--- _export_rozbor_dna_buttons(typ == %d) -- end\n", typ); /* 2005-03-22: Pridane */
 }// _export_rozbor_dna_buttons()
@@ -9437,6 +9441,10 @@ void _export_rozbor_dna(short int typ){
 		Log("-- _export_rozbor_dna_buttons(typ == %d): kvÙli typu nebudeme exportovaù tabuæku...\n", typ);
 	}
 
+	if(typ == EXPORT_DNA_XML){
+		Export(ELEM_BEGIN(XML_CELEBRATION)"\n");
+	}
+
 	// EXPORT_DNA_VIAC_DNI: predpoklada, ze sme v tabulke, <table>
 	if(typ != EXPORT_DNA_VIAC_DNI && som_v_tabulke == ANO){
 		// 2009-08-26: pre export pre mobilnÈ zariadenia [export_monthly_druh >= 3] netreba tabuæku
@@ -9513,20 +9521,25 @@ void _export_rozbor_dna(short int typ){
 	if(som_v_tabulke == ANO){
 		Export("<td "HTML_ALIGN_RIGHT" "HTML_VALIGN_TOP">");
 	}
-	Export("%s%s%s", pom1, _global_link, pom2);
-	if(dvojbodka > 0)
-		Export("%c", dvojbodka);
-	if(som_v_tabulke == ANO)
-		Export("</td>");
-	else{
-		if((typ != EXPORT_DNA_JEDEN_DEN) && (typ != EXPORT_DNA_VIAC_DNI_TXT))
-			Export(HTML_NONBREAKING_SPACE);
+	if(typ != EXPORT_DNA_XML){
+		Export("%s%s%s", pom1, _global_link, pom2);
+		if(dvojbodka > 0)
+			Export("%c", dvojbodka);
 	}
-	Export("\n");
-
+	if(som_v_tabulke == ANO){
+		Export("</td>");
+		Export("\n");
+	}
+	else{
+		if((typ != EXPORT_DNA_JEDEN_DEN) && (typ != EXPORT_DNA_VIAC_DNI_TXT) && (typ != EXPORT_DNA_XML)){
+			Export(HTML_NONBREAKING_SPACE);
+			Export("\n");
+		}
+	}
+	
 	// druhy stlpec: nazov dna 
-	// 2005-03-21: Vypisujeme, iba ak typ != EXPORT_DNA_VIAC_DNI_SIMPLE
-	if(typ != EXPORT_DNA_VIAC_DNI_SIMPLE){
+	// 2005-03-21: Vypisujeme, iba ak typ != EXPORT_DNA_VIAC_DNI_SIMPLE  && (typ != EXPORT_DNA_XML) (2012-10-12)
+	if((typ != EXPORT_DNA_VIAC_DNI_SIMPLE) && (typ != EXPORT_DNA_XML)){
 		if(som_v_tabulke == ANO){
 			Export("<td "HTML_ALIGN_LEFT" "HTML_VALIGN_TOP">");
 		}
@@ -9535,14 +9548,15 @@ void _export_rozbor_dna(short int typ){
 			Export("%c", ciarka);
 		if(som_v_tabulke == ANO){
 			Export("</td>");
+			Export("\n");
 		}
 		else{
-			if((typ != EXPORT_DNA_JEDEN_DEN) && (typ != EXPORT_DNA_VIAC_DNI_TXT)){
+			if((typ != EXPORT_DNA_JEDEN_DEN) && (typ != EXPORT_DNA_VIAC_DNI_TXT) && (typ != EXPORT_DNA_XML)){
 				Export(HTML_NONBREAKING_SPACE);
+				Export("\n");
 			}
 		}
 	}
-	Export("\n");
 
 	// ÔalöÌ stÂpec: buttons (tlaËidl·), podæa typu v˝pisu
 	if(som_v_tabulke == ANO){
@@ -9578,7 +9592,7 @@ void _export_rozbor_dna(short int typ){
 		Export("</td>\n</tr>\n");
 	}
 	else{
-		if(typ != EXPORT_DNA_VIAC_DNI_TXT){
+		if((typ != EXPORT_DNA_VIAC_DNI_TXT) && (typ != EXPORT_DNA_XML)){
 			Export("<p>\n");
 		}
 	}
@@ -9637,6 +9651,11 @@ void _export_rozbor_dna(short int typ){
 	else{
 		Log("-- _export_rozbor_dna(): skip...\n");
 	}
+
+	if(typ == EXPORT_DNA_XML){
+		Export(ELEM_END(XML_CELEBRATION)"\n\n");
+	}
+
 	Log("-- _export_rozbor_dna(typ == %d): koniec.\n", typ);
 }// _export_rozbor_dna()
 
