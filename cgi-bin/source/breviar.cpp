@@ -5265,15 +5265,14 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok){
 #define CASE_MALE   4
 #define COLOR_RED   3
 #define COLOR_BLACK 2
+
+// lokalna premenna, do ktorej sa ukladaju info o analyzovanom dni pouziva ju void nove_rozbor_dna() funkcia
+// 2012-10-12: z funkcie init_global_string() som ju spravil glob·lnou kvÙli tomu, aby sme ju mohli pouûÌvaù v 
+_struct_dm _local_den;
+
 short int init_global_string(short int typ, short int poradie_svateho, short int modlitba, short int aj_citanie = NIE) {
-	/* lokalna premenna, do ktorej sa ukladaju info o analyzovanom dni
-	 * pouziva ju void nove_rozbor_dna() funkcia */
-	/* 2003-07-07: obavam sa, ze nove_rozbor_dna() je alebo
-	 * _rozbor_dna alebo _rozbor_dna_s_modlitbou...
-	 * lebo nic take neexistuje 
-	 * skoda, ze som neaktualizoval aj komentare. teraz je ten odkaz nezrozumitelny.
-	 */
-	_struct_dm _local_den;
+	// 2003-07-07: obavam sa, ze nove_rozbor_dna() je alebo _rozbor_dna alebo _rozbor_dna_s_modlitbou... lebo nic take neexistuje 
+	// skoda, ze som neaktualizoval aj komentare. teraz je ten odkaz nezrozumitelny.
 	_INIT_DM(_local_den); // 2003-08-07 pridana
 
 	char pom[MAX_STR], pom2[MAX_STR], pom3[SMALL]; // pom2 doplnenÈ 2011-02-02; pom3 doplnenÈ 2011-03-23
@@ -6043,6 +6042,38 @@ short int init_global_string_spol_cast(short int sc_jedna, short int poradie_sva
 	return ret_sc;
 }// init_global_string_spol_cast()
 
+void xml_export_spol_cast(short int poradie_svateho){
+	// 2012-10-12: vytvorenÈ podæa init_global_string_spol_cast()
+	Log("-- xml_export_spol_cast(%d) -- zaËiatok\n", poradie_svateho);
+	// rozkÛdujeme si, Ëo je v "_global_den".spolcast podæa poradie_svateho
+	_struct_sc sc = _decode_spol_cast(MODL_SPOL_CAST_NEURCENA);
+	// dalo by sa moûno pouûiù aj glob·lna premenn· _local_den; takto je to istejöie
+	switch(poradie_svateho){
+		case 0: sc = _decode_spol_cast(_global_den.spolcast);
+			break;
+		case 1: sc = _decode_spol_cast(_global_svaty1.spolcast);
+			break;
+		case 2: sc = _decode_spol_cast(_global_svaty2.spolcast);
+			break;
+		case 3: sc = _decode_spol_cast(_global_svaty3.spolcast);
+			break;
+		case 4: sc = _decode_spol_cast(_global_pm_sobota.spolcast);
+			break;
+	}
+
+	if((sc.a1 != MODL_SPOL_CAST_NEURCENA) && (sc.a1 != MODL_SPOL_CAST_NEBRAT)){
+		Export(ELEMID_BEGIN(XML_LIT_COMMUNIA)"%s"ELEM_END(XML_LIT_COMMUNIA)"\n", sc.a1, nazov_spolc(sc.a1));
+		if(sc.a2 != MODL_SPOL_CAST_NEURCENA){
+			Export(ELEMID_BEGIN(XML_LIT_COMMUNIA)"%s"ELEM_END(XML_LIT_COMMUNIA)"\n", sc.a2, nazov_spolc(sc.a2));
+			if(sc.a3 != MODL_SPOL_CAST_NEURCENA){
+				Export(ELEMID_BEGIN(XML_LIT_COMMUNIA)"%s"ELEM_END(XML_LIT_COMMUNIA)"\n", sc.a3, nazov_spolc(sc.a3));
+			}
+		}
+	}
+
+	Log("-- xml_export_spol_cast() -- koniec\n");
+}// xml_export_spol_cast()
+
 //---------------------------------------------------------------------
 /* _rozbor_dna_s_modlitbou()
  *
@@ -6358,17 +6389,14 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 
 	short int som_v_tabulke = ANO; // 2009-08-26: Ëi sa pouûÌva tabuæka; beûne pre web ·no, pre export pre mobilnÈ zariadenia [export_monthly_druh >= 3] netreba tabuæku
 
-	short int _local_den = _global_den.den;
-	short int _local_mesiac = _global_den.mesiac;
-	short int _local_rok = _global_den.rok;
+	short int _pom_den = _global_den.den;
+	short int _pom_mesiac = _global_den.mesiac;
+	short int _pom_rok = _global_den.rok;
 
+	// XML export -- zaËiatok danÈho sl·venia
 	if(typ == EXPORT_DNA_XML){
-		som_v_tabulke = NIE;
-		Export(ELEM_BEGIN(XML_DATE_ISO)""HTML_ISO_FORMAT""ELEM_END(XML_DATE_ISO)"\n", _local_rok, _local_mesiac, _local_den);
-		Export(ELEM_BEGIN(XML_DATE_DAY)"%d"ELEM_END(XML_DATE_DAY)"\n", _local_den);
-		Export(ELEM_BEGIN(XML_DATE_MONTH)"%d"ELEM_END(XML_DATE_MONTH)"\n", _local_mesiac);
-		Export(ELEM_BEGIN(XML_DATE_YEAR)"%d"ELEM_END(XML_DATE_YEAR)"\n", _local_rok);
-		Export(ELEM_BEGIN(XML_CELEBRATION_ID)"%d"ELEM_END(XML_CELEBRATION_ID)"\n", poradie_svateho);
+		Export(ELEMID_BEGIN(XML_CELEBRATION)"\n", poradie_svateho);
+		Export(ELEM_BEGIN(XML_CELEBRATION_ID)"%d"ELEM_END(XML_CELEBRATION_ID)"\n", poradie_svateho); // pre istotu duplikovanie :)
 	}
 
 	// BEGIN: Ëasù podæa #define BUTTONS (len pre volania, kde bolo pouûitÈ BUTTONS, t. j. den_zoznam == ANO)
@@ -6423,6 +6451,27 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 		}
 	}// if(den_zoznam == ANO)
 	// END: Ëasù podæa #define BUTTONS
+
+	if(typ == EXPORT_DNA_XML){
+		som_v_tabulke = NIE;
+		// Ôalöie vlastnosti z "_global_den"; pouûÌva sa glob·lne definovan· _struct_dm _local_den; nastaven· vo funkcii init_global_string()
+		Export(ELEM_BEGIN(XML_DAY_OF_YEAR)"%d"ELEM_END(XML_DAY_OF_YEAR)"\n", _local_den.denvr);
+		Export(ELEM_BEGIN(XML_DAY_OF_WEEK)"%d"ELEM_END(XML_DAY_OF_WEEK)"\n", _local_den.denvt);
+		Export(ELEM_BEGIN(XML_LIT_YEAR_LETTER)"%c"ELEM_END(XML_LIT_YEAR_LETTER)"\n", _local_den.litrok);
+		Export(ELEM_BEGIN(XML_LIT_WEEK)"%d"ELEM_END(XML_LIT_WEEK)"\n", _local_den.tyzden);
+		Export(ELEM_BEGIN(XML_LIT_WEEK_PSALT)"%d"ELEM_END(XML_LIT_WEEK_PSALT)"\n", _local_den.tyzzal);
+		Export(ELEMID_BEGIN(XML_LIT_SEASON)"%s"ELEM_END(XML_LIT_SEASON)"\n", _local_den.litobd, nazov_obdobia(_local_den.litobd));
+		Export(ELEMID_BEGIN(XML_LIT_TYPE)"%s"ELEM_END(XML_LIT_TYPE)"\n", _local_den.typslav, nazov_slavenia(_local_den.typslav));
+		Export(ELEM_BEGIN(XML_LIT_TYPE_LOCAL)"%s"ELEM_END(XML_LIT_TYPE_LOCAL)"\n", nazov_slavenia_lokal[_local_den.typslav_lokal]);
+		Export(ELEM_BEGIN(XML_LIT_LEVEL)"%d"ELEM_END(XML_LIT_LEVEL)"\n", _local_den.smer);
+		Export(ELEM_BEGIN(XML_LIT_REQUIRED)"%d"ELEM_END(XML_LIT_REQUIRED)"\n", _local_den.prik);
+		xml_export_spol_cast(poradie_svateho);
+		Export(ELEM_BEGIN(XML_LIT_NAME)"%s"ELEM_END(XML_LIT_NAME)"\n", _local_den.meno);
+		Export(ELEMID_BEGIN(XML_LIT_COLOR)"%s"ELEM_END(XML_LIT_COLOR)"\n", _local_den.farba, nazov_farby(_local_den.farba));
+		if(_global_jazyk == JAZYK_SK){
+			Export(ELEM_BEGIN(XML_LIT_CALENDAR)"%s"ELEM_END(XML_LIT_CALENDAR)"\n", nazov_kalendara[_local_den.kalendar]);
+		}
+	}
 
 	if(den_zoznam != ANO){
 		// 2011-07-05/2011-07-11: pre tlaËidl· predoölÈho a nasleduj˙ceho dÚa pre navig·ciu v modlitbe treba pouûiù in˝ d·tum ako _global_den, 
@@ -6863,14 +6912,20 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 	}
 
 	// sp‰ù pÙvodnÈ nastavenia (pre den_zoznam != ANO boli zmenenÈ)
-	_global_den.den = _local_den;
-	_global_den.mesiac = _local_mesiac;
-	_global_den.rok = _local_rok;
+	_global_den.den = _pom_den;
+	_global_den.mesiac = _pom_mesiac;
+	_global_den.rok = _pom_rok;
 #ifdef OS_Windows_Ruby
 	if(typ != EXPORT_DNA_XML){
 		Export("\n<!--buttons:end-->\n");
 	}
 #endif
+
+	// XML export -- koniec danÈho sl·venia
+	if(typ == EXPORT_DNA_XML){
+		Export(ELEM_END(XML_CELEBRATION)"\n");
+	}
+
 	Log("--- _export_rozbor_dna_buttons(typ == %d) -- end\n", typ); /* 2005-03-22: Pridane */
 }// _export_rozbor_dna_buttons()
 
@@ -9441,11 +9496,16 @@ void _export_rozbor_dna(short int typ){
 		Log("-- _export_rozbor_dna_buttons(typ == %d): kvÙli typu nebudeme exportovaù tabuæku...\n", typ);
 	}
 
+	// XML export -- zaËiatok pre dan˝ deÚ (d·tum)
 	if(typ == EXPORT_DNA_XML){
-		Export(ELEM_BEGIN(XML_CELEBRATION)"\n");
+		som_v_tabulke = NIE;
+		Export(ELEM_BEGIN(XML_DAY)"\n");
+		Export(ELEM_BEGIN(XML_DATE_ISO)""HTML_ISO_FORMAT""ELEM_END(XML_DATE_ISO)"\n", _global_den.rok, _global_den.mesiac, _global_den.den);
+		Export(ELEM_BEGIN(XML_DATE_DAY)"%d"ELEM_END(XML_DATE_DAY)"\n", _global_den.den);
+		Export(ELEM_BEGIN(XML_DATE_MONTH)"%d"ELEM_END(XML_DATE_MONTH)"\n", _global_den.mesiac);
+		Export(ELEM_BEGIN(XML_DATE_YEAR)"%d"ELEM_END(XML_DATE_YEAR)"\n", _global_den.rok);
 	}
 
-	// EXPORT_DNA_VIAC_DNI: predpoklada, ze sme v tabulke, <table>
 	if(typ != EXPORT_DNA_VIAC_DNI && som_v_tabulke == ANO){
 		// 2009-08-26: pre export pre mobilnÈ zariadenia [export_monthly_druh >= 3] netreba tabuæku
 		Export("\n<!-- tabuæka obsahuj˙ca jednotlivÈ sl·venia pre dan˝ d·tum s odkazmi na modlitby (buttons) -->\n"); // 2011-01-26: doplnen˝ popis
@@ -9652,8 +9712,9 @@ void _export_rozbor_dna(short int typ){
 		Log("-- _export_rozbor_dna(): skip...\n");
 	}
 
+	// XML export -- koniec pre dan˝ deÚ (d·tum)
 	if(typ == EXPORT_DNA_XML){
-		Export(ELEM_END(XML_CELEBRATION)"\n\n");
+		Export(ELEM_END(XML_DAY)"\n\n");
 	}
 
 	Log("-- _export_rozbor_dna(typ == %d): koniec.\n", typ);
@@ -9995,7 +10056,7 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 
 	// lokalne premenne, v ktorych sa pamata to, co vrati _rozbor_dna()
 	// lokalna premenna, do ktorej sa ukladaju info o analyzovanom dni pouziva ju void nove_rozbor_dna() funkcia
-	_struct_dm _local_den;
+	// _struct_dm _local_den; // 2012-10-12: uû je glob·lna
 	_INIT_DM(_local_den); // 2003-08-07 pridana
 
 	// lokalne premenne obsahujuce data modlitbach -- 23/02/2000A.D. | prerobene, aby sa alokovali dynamicky
