@@ -11462,12 +11462,20 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
 			Export(" %d", r);
 		}// if(m == VSETKY_MESIACE)
 		else{
-			Export((char *)html_text_mesiac[_global_jazyk]);
+			if(d == VSETKY_DNI){
+				Export((char *)html_text_mesiac[_global_jazyk]);
+			}
+			else{
+				Export((char *)html_text_den[_global_jazyk]);
+				Export(" %d.", d);
+			}
 			Export(" %s", nazov_mesiaca(m));
 			Export(" %d", r);
 		}// else (m != VSETKY_MESIACE)
 		Export("</h2>");
+
 		Export("\n");
+
 		Export("<pre>");
 		// teraz generujem jednotlivé mesiace so všetkými dòami
 		if(m == VSETKY_MESIACE){
@@ -11482,7 +11490,18 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
 			}// for mi
 		}// if(m == VSETKY_MESIACE)
 		else{
-			rozbor_mesiaca(m + 1, r, 1); // tam sa volá _rozbor_dna() a potom _export_rozbor_dna()
+			if(d == VSETKY_DNI){
+				rozbor_mesiaca(m + 1, r, 1); // tam sa volá _rozbor_dna() a potom _export_rozbor_dna()
+			}
+			else{
+				_struct_den_mesiac datum;
+				datum.den = d;
+				datum.mesiac = m + 1;
+				_rozbor_dna(datum, r);
+				Log("-- _main_rozbor_dna_txt(): nasleduje _export_rozbor_dna() pre deò %d...\n", datum.den);
+				_export_rozbor_dna(EXPORT_DNA_VIAC_DNI_TXT);
+				Log("-- _main_rozbor_dna_txt(): deò %d skonèil.\n", datum.den);
+			}
 		}
 		Export("\n");
 		Export("</pre>\n");
