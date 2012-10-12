@@ -10550,13 +10550,12 @@ void rozbor_mesiaca(short int mesiac, short int rok, short int txt_export = 0){
 		}
 		_rozbor_dna(datum, rok);
 		Log("-- rozbor_mesiaca: nasleduje _export_rozbor_dna() pre deò %d...\n", datum.den);
-		/* 2005-03-21: Pridany dalsi typ exportu; 2007-06-01 upravené, aby sa neriadilo opt_1, ale opt6 
-		 * 2011-02-02: pridanı ïalší typ exportu; EXPORT_DNA_VIAC_DNI_TXT
-		 * 2011-02-02: nastavenie typu exportu presunuté vyššie 
-		 */
+		// 2005-03-21: Pridany dalsi typ exportu; 2007-06-01 upravené, aby sa neriadilo opt_1, ale opt6 
+		// 2011-02-02: pridanı ïalší typ exportu; EXPORT_DNA_VIAC_DNI_TXT
+		// 2011-02-02: nastavenie typu exportu presunuté vyššie 
 		_export_rozbor_dna(typ);
 		Log("-- rozbor_mesiaca: deò %d skonèil.\n", datum.den);
-	}/* for datum.den */
+	}// for datum.den
 	if(som_v_tabulke == ANO){
 		Export("\n</table>\n\n");
 	}
@@ -11397,7 +11396,7 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 	Log("-- _main_rozbor_dna(char *, char *, char *, char *, char *): end\n");
 }// _main_rozbor_dna()
 
-// 2011-02-02: pridaná funkcia pre jednoduchı TXT export konkrétneho roka
+// 2011-02-02: pridaná funkcia pre jednoduchı TXT export konkrétneho roka, mesiaca
 void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
 	// na základe _main_rozbor_dna; textovı export len pre RKC
 	short int heading_written = 0;
@@ -11405,22 +11404,22 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
 	Log("-- _main_rozbor_dna_txt(char *, char *, char *): begin (%s, %s, %s)\n", den, mesiac, rok);
 	short int d, m, mi, r;
 
-	char pom2[MAX_STR]; /* 2006-08-01: pridané kvôli transferu údajov o jazyku */
-	mystrcpy(pom, STR_EMPTY, MAX_STR); /* 2006-08-01: pridaná inicializácia */
-	mystrcpy(pom2, STR_EMPTY, MAX_STR); /* 2006-08-01: pridané */
-	char pom3[MAX_STR]; /* 2008-08-08: pridané kvôli css */
+	char pom2[MAX_STR]; // 2006-08-01: pridané kvôli transferu údajov o jazyku
+	mystrcpy(pom, STR_EMPTY, MAX_STR); // 2006-08-01: pridaná inicializácia
+	mystrcpy(pom2, STR_EMPTY, MAX_STR); // 2006-08-01: pridané
+	char pom3[MAX_STR]; // 2008-08-08: pridané kvôli css
 	mystrcpy(pom3, STR_EMPTY, MAX_STR);
 
-	/* rozparsovanie parametrov den, mesiac, rok */
+	// rozparsovanie parametrov den, mesiac, rok
 	Log("/* rozparsovanie parametrov den, mesiac, rok */\n");
-	d = atoden(den); /* vrati VSETKY_DNI, resp. atoi(den) */
+	d = atoden(den); // vrati VSETKY_DNI, resp. atoi(den)
 	Log("den == `%s' (%d)\n", den, d);
-	m = atomes(mesiac); /* bude to 0--11, resp. VSETKY_MESIACE resp. UNKNOWN_MESIAC */
+	m = atomes(mesiac); // bude to 0--11, resp. VSETKY_MESIACE resp. UNKNOWN_MESIAC
 	Log("mes == `%s' (%d)\n", mesiac, m);
-	r = atoi(rok); /* vrati 0 v pripade chyby; alebo int */
+	r = atoi(rok); // vrati 0 v pripade chyby; alebo int
 	Log("rok == `%s' (%d)\n", rok, r);
 
-	/* kontrola udajov */
+	// kontrola údajov
 	short int result = SUCCESS;
 	// deò
 	if(equals(den, STR_EMPTY)){
@@ -11444,7 +11443,7 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
 		ExportUDAJE("rok = %s.\n", rok);
 	}
 
-	/* kontrola udajov ukoncena, podla nej pokracujeme dalej */
+	// kontrola udajov ukoncena, podla nej pokracujeme dalej
 	if(result == FAILURE){
 		hlavicka((char *)html_title[_global_jazyk]);
 		Log("/* teraz result == FAILURE */\n");
@@ -11461,16 +11460,16 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
 		if(m == VSETKY_MESIACE){
 			Export((char *)html_text_rok[_global_jazyk]);
 			Export(" %d", r);
-		}/* if(m == VSETKY_MESIACE) */
+		}// if(m == VSETKY_MESIACE)
 		else{
 			Export((char *)html_text_mesiac[_global_jazyk]);
 			Export(" %s", nazov_mesiaca(m));
 			Export(" %d", r);
-		}/* else (m != VSETKY_MESIACE) */
+		}// else (m != VSETKY_MESIACE)
 		Export("</h2>");
 		Export("\n");
 		Export("<pre>");
-		/* teraz generujem jednotlivé mesiace so všetkımi dòami */
+		// teraz generujem jednotlivé mesiace so všetkımi dòami
 		if(m == VSETKY_MESIACE){
 			for(mi = MES_JAN; mi <= MES_DEC; mi++){
 #ifdef NIELEN_PRE_PETA_ZIMENA
@@ -11479,22 +11478,22 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok){
 				Export(" == %d ", mi + 1);
 				Export("(%s)\n", nazov_mesiaca(m));
 #endif
-				rozbor_mesiaca(mi + 1, r, 1); /* tam sa volá _rozbor_dna() a potom _export_rozbor_dna() */
-			}/* for mi */
-		}/* if(m == VSETKY_MESIACE) */
+				rozbor_mesiaca(mi + 1, r, 1); // tam sa volá _rozbor_dna() a potom _export_rozbor_dna()
+			}// for mi
+		}// if(m == VSETKY_MESIACE)
 		else{
-			rozbor_mesiaca(m + 1, r, 1); /* tam sa volá _rozbor_dna() a potom _export_rozbor_dna() */
+			rozbor_mesiaca(m + 1, r, 1); // tam sa volá _rozbor_dna() a potom _export_rozbor_dna()
 		}
 		Export("\n");
 		Export("</pre>\n");
-	}/* m != UNKNOWN_MESIAC */
-	else{/* m == UNKNOWN_MESIAC */
-		/* nesmiem zabudnut, ze m je 0--11 */
+	}// m != UNKNOWN_MESIAC
+	else{// m == UNKNOWN_MESIAC
+		// nesmiem zabudnut, ze m je 0--11
 		Export("Èíslo mesiaca: nezadanı alebo nepodporovanı vstup.\n");
-	}/* m != VSETKY_MESIACE */
+	}// m != VSETKY_MESIACE
 
 	Log("-- _main_rozbor_dna_txt(char *, char *, char *): end\n");
-}/* _main_rozbor_dna_txt() */
+}// _main_rozbor_dna_txt()
 
 
 //---------------------------------------------------------------------
@@ -11521,28 +11520,27 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 
 	Log("-- _main_dnes(char *, char *): begin (%s, %s)\n", modlitba, poradie_svaty);
 
-	/* zisti denny cas */
-	/* 2009-05-22: pôvodne tu bolo: timer = time(NULL); 
-	 * Pavel Kuèera <teni@volny.cz> však poprosil, aby aj po polnoci ešte chví¾u bolo moné modli sa kompletórium
-	 * posunuté na pol tretiu: má to hlbokú logiku: pravdepodobne nik sa -- hoci aj po polnoci -- nemodlí ofícium z nasledovného dòa... 
-	 * invitatórium by malo by prvou rannou modlitbou po zobudení. 
-	 * myslím, e sú vınimoèné prípady, e ¾uda regulérne modliaci sa breviár vstávajú o jednej, o druhej v noci (èím zaène ich novı deò).
-	 */
+	// zisti denny cas
+	// 2009-05-22: pôvodne tu bolo: timer = time(NULL); 
+	// Pavel Kuèera <teni@volny.cz> však poprosil, aby aj po polnoci ešte chví¾u bolo moné modli sa kompletórium
+	// posunuté na pol tretiu: má to hlbokú logiku: pravdepodobne nik sa -- hoci aj po polnoci -- nemodlí ofícium z nasledovného dòa... 
+	// invitatórium by malo by prvou rannou modlitbou po zobudení. 
+	// myslím, e sú vınimoèné prípady, e ¾uda regulérne modliaci sa breviár vstávajú o jednej, o druhej v noci (èím zaène ich novı deò).
 	timer = time(NULL)-(time_t)(2.5*60*60);
 
-	/* konvertuje date/time na strukturu */
+	// konvertuje date/time na strukturu
 	dnes = *localtime(&timer);
 
-	/* upravenie time_check structure with the data */
+	// upravenie time_check structure with the data
 	dnes.tm_mon  = dnes.tm_mon + 1;
 	dnes.tm_year = dnes.tm_year + 1900;
 	dnes.tm_yday = dnes.tm_yday + 1;
-	/* juliansky datum */
+	// juliansky datum
 	jd_dnes = JD(dnes.tm_mday, dnes.tm_mon, dnes.tm_year);
 
-	/* dnes.tm_wday == 0--6 (0==sunday, nedela) */
+	// dnes.tm_wday == 0--6 (0==sunday, nedela)
 
-	/* dalej rozoberiem den a vypisem vysledok */
+	// dalej rozoberiem den a vypisem vysledok
 	_struct_den_mesiac datum;
 	datum.den = dnes.tm_mday;
 	datum.mesiac = dnes.tm_mon;
