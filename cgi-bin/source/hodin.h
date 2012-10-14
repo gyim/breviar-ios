@@ -399,7 +399,7 @@ const char *zvazok_OBD[POCET_OBDOBI + 1] =
 
 // the name of celebration
 const char *nazov_slavenia_jazyk[POCET_SLAVENI + 1][POCET_JAZYKOV + 1] =
-{{"___", "___", "___", "", ""}, 
+{{"féria", "férie", "feria", "feria", "férie", "féria"}, // zmenené z "___", 2012-10-12
  {"slávnos", "slavnost", "celebration", "sollemnitas", "","SLAVNOST", "fõünnep"},
  {"sviatok", "svátek", "", "festum", "","Svátek", "ünnep"},
  {"spomienka", "památka", "", "memoria", "","Památka", "emléknap"},
@@ -1797,7 +1797,7 @@ const char *html_text_option_skryt[POCET_JAZYKOV + 1] =
  "hide",
  "",
  "skrıt", 
- "elrejteni"
+ "elrejtés"
 };
 
 const char *html_text_option1_mcd_zalmy_nie_ine[POCET_JAZYKOV + 1] = 
