@@ -57,6 +57,7 @@ public class Util {
         s += ": " + box.getContext().getString(R.string.alarmOff);
       }
       box.setText(s);
+      box.setChecked(t.enabled);
     }
 
     int id, caption;

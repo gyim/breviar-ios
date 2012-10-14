@@ -51,6 +51,7 @@ public class Alarms extends FragmentActivity {
               f.show(getSupportFragmentManager(), Util.events[j].tag);
             } else {
               Util.events[j].updateBox(box, new Util.AlarmTime(0, 0, false));
+              Util.events[j].disable(box.getContext());
             }
           }
         });
