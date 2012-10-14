@@ -17,6 +17,11 @@
 <!--        android:icon="@drawable/panel"> //-->
     </item>
 
+    <item android:id="@+id/alarms"
+        android:title="@string/alarms">
+<!--        android:icon="@drawable/panel"> //-->
+    </item>
+
 </menu>
 
 

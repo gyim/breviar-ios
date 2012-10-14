@@ -6,6 +6,14 @@
     <string name="today">Dnes</string>
     <string name="pgup">Hore</string>
     <string name="pgdn">Ďalej</string>
+
+    <string name="alarms">Upozornenia</string>
+
+    <string name="inv">Invitatiórium</string>
+    <string name="rch">Ranné chvály</string>
+    <string name="vesp">Vešpery</string>
+    <string name="kompl">Kompletórium</string>
+
     <string name="news">
      Novinky vo verzii v1.7.20 - v1.7.24:\n
      - Aktualizácie zo stránky www.breviar.sk\n\n

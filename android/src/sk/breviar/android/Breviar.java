@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Intent;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.DialogInterface;
 import android.app.Dialog;
@@ -26,10 +25,11 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import java.io.IOException;
 import sk.breviar.android.Server;
+import sk.breviar.android.Util;
+import sk.breviar.android.Alarms;
 
 public class Breviar extends Activity {
     static String scriptname = "cgi-bin/l.cgi";
-    static final String prefname = "BreviarPrefs";
     static final int DIALOG_HU_BETA = 1;
     static final int DIALOG_NEWS = 2;
 
@@ -69,7 +69,7 @@ public class Breviar extends Activity {
       Log.v("breviar", "onCreate");
 
       // Restore preferences
-      SharedPreferences settings = getSharedPreferences(prefname, 0);
+      SharedPreferences settings = getSharedPreferences(Util.prefname, 0);
       language = settings.getString("language", "sk");
       scale = settings.getInt("scale", 100);
       String opts = settings.getString("params", "");
@@ -193,7 +193,7 @@ public class Breviar extends Activity {
     void syncPreferences() {
       // We need an Editor object to make preference changes.
       // All objects are from android.context.Context
-      SharedPreferences settings = getSharedPreferences(prefname, 0);
+      SharedPreferences settings = getSharedPreferences(Util.prefname, 0);
       SharedPreferences.Editor editor = settings.edit();
       editor.putString("language", language);
       editor.putInt("scale", scale);
@@ -206,7 +206,7 @@ public class Breviar extends Activity {
     }
 
     void markVersion() {
-      SharedPreferences settings = getSharedPreferences(prefname, 0);
+      SharedPreferences settings = getSharedPreferences(Util.prefname, 0);
       SharedPreferences.Editor editor = settings.edit();
       editor.putString("version", getResources().getString(R.string.version));
       editor.commit();
@@ -286,6 +286,9 @@ public class Breviar extends Activity {
           language = "hu";
           resetLanguage();
           showDialog(DIALOG_HU_BETA);
+          return true;
+        case R.id.alarms:
+          startActivity(new Intent("sk.breviar.android.ALARMS"));
           return true;
         default:
           return super.onOptionsItemSelected(item);

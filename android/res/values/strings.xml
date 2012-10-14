@@ -5,6 +5,15 @@
     <string name="lang_sk">SK</string>
     <string name="lang_cz">CZ</string>
     <string name="lang_hu">HU</string>
+
+    <string name="alarms">Alarms</string>
+    <string name="alarmOff">disabled</string>
+
+    <string name="inv">Invitatiorium</string>
+    <string name="rch">Lauds</string>
+    <string name="vesp">Vespers</string>
+    <string name="kompl">Compline</string>
+
     <string name="hu_beta_warning">
     Hungarian version is in beta - thus, many source texts are not yet
     available. Also some special cases for Hungarian liturgical calendar are
