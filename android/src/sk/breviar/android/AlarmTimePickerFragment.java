@@ -43,17 +43,21 @@ import sk.breviar.android.Util;
 public class AlarmTimePickerFragment extends DialogFragment 
     implements TimePickerDialog.OnTimeSetListener{
 
-  final Util.EventInfo event;
-  final CheckBox box;
+  int eventId() {
+    return Integer.parseInt(getTag().substring(6));
+  }
 
-  public AlarmTimePickerFragment(Util.EventInfo event_, CheckBox box_) {
-    event = event_;
-    box = box_;
+  Util.EventInfo event() {
+    return Util.events[eventId()];
+  }
+
+  CheckBox box() {
+    return (CheckBox)getActivity().findViewById(Util.events[eventId()].id);
   }
 
   @Override
   public Dialog onCreateDialog(Bundle savedInstanceState) {
-    Util.AlarmTime t = event.getTime(getActivity());
+    Util.AlarmTime t = event().getTime(getActivity());
     TimePickerDialog d = new TimePickerDialog(getActivity(), this,
         t.hour, t.minute, DateFormat.is24HourFormat(getActivity()));
 
@@ -78,7 +82,8 @@ public class AlarmTimePickerFragment extends DialogFragment
 
   public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
     // box.setChecked(true);
-    event.setTime(getActivity(), hourOfDay, minute);
-    event.updateBox(box, new Util.AlarmTime(minute, hourOfDay, true));
+    Util.EventInfo e = event();
+    e.setTime(getActivity(), hourOfDay, minute);
+    e.updateBox(box(), new Util.AlarmTime(minute, hourOfDay, true));
   }
 }

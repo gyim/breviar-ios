@@ -14,6 +14,11 @@
     <string name="vesp">Vespers</string>
     <string name="kompl">Compline</string>
 
+    <string name="inv_notify">Time for invitatiorium!</string>
+    <string name="rch_notify">Time for lauds!</string>
+    <string name="vesp_notify">Time for vespers!</string>
+    <string name="kompl_notify">Time for compline!</string>
+
     <string name="hu_beta_warning">
     Hungarian version is in beta - thus, many source texts are not yet
     available. Also some special cases for Hungarian liturgical calendar are

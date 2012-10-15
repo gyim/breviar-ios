@@ -47,8 +47,8 @@ public class Alarms extends FragmentActivity {
         box.setOnClickListener(new View.OnClickListener() {
           public void onClick(View v) {
             if (((CheckBox)v).isChecked()) {
-              AlarmTimePickerFragment f = new AlarmTimePickerFragment(Util.events[j], box);
-              f.show(getSupportFragmentManager(), Util.events[j].tag);
+              AlarmTimePickerFragment f = new AlarmTimePickerFragment();
+              f.show(getSupportFragmentManager(), "event-" + j);
             } else {
               Util.events[j].updateBox(box, new Util.AlarmTime(0, 0, false));
               Util.events[j].disable(box.getContext());

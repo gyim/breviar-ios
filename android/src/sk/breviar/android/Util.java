@@ -1,8 +1,16 @@
 package sk.breviar.android;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.CheckBox;
+
+import java.util.GregorianCalendar;
+
+import sk.breviar.android.AlarmReceiver;
 
 public class Util {
   static final String prefname = "BreviarPrefs";
@@ -18,9 +26,10 @@ public class Util {
   };
 
   static class EventInfo {
-    EventInfo(int id_, int cap_, String tag_, int hr, int min) {
+    EventInfo(int id_, String tag_, int cap_, int notify_, int hr, int min) {
       id = id_;
       caption = cap_;
+      notify_text = notify_;
       tag = tag_;
       defaultTime = new AlarmTime(min, hr, false);
     };
@@ -40,6 +49,7 @@ public class Util {
       editor.putInt(tag + "-hr", hour);
       editor.putBoolean(tag + "-e", true);
       editor.commit();
+      setAlarm(ctx);
     }
 
     void disable(Context ctx) {
@@ -47,6 +57,7 @@ public class Util {
       SharedPreferences.Editor editor = settings.edit();
       editor.putBoolean(tag + "-e", false);
       editor.commit();
+      setAlarm(ctx);
     }
 
     void updateBox(CheckBox box, AlarmTime t) {
@@ -60,15 +71,60 @@ public class Util {
       box.setChecked(t.enabled);
     }
 
-    int id, caption;
+    long nextTrigger(Context ctx) {
+      AlarmTime t = getTime(ctx);
+      if (!t.enabled) return Long.MAX_VALUE;
+
+      GregorianCalendar act = new GregorianCalendar();
+
+      // make sure we calculate time in future
+      act.add(GregorianCalendar.SECOND, 10);
+
+      GregorianCalendar out = (GregorianCalendar)act.clone();
+      out.set(GregorianCalendar.SECOND, 0);
+      out.set(GregorianCalendar.MINUTE, t.minute);
+      out.set(GregorianCalendar.HOUR_OF_DAY, t.hour);
+      if (out.before(act)) {
+        out.add(GregorianCalendar.DAY_OF_MONTH, 1);
+      }
+      return out.getTimeInMillis();
+    }
+
+    int id, caption, notify_text;
     String tag;
     AlarmTime defaultTime;
   };
 
+  static void setAlarm(Context ctx) {
+    long next = Long.MAX_VALUE;
+    int id = -1;
+    for (int i = 0; i < events.length; ++i) {
+      long t = events[i].nextTrigger(ctx);
+      if (t < next) {
+        next = t;
+        id = i;
+      }
+    }
+    
+    Intent intent = new Intent(ctx, AlarmReceiver.class);
+    intent.setAction("sk.breviar.android.NOTIFY");
+    intent.putExtra("id", id);
+
+    PendingIntent pi = PendingIntent.getBroadcast(ctx, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    AlarmManager am = (AlarmManager)ctx.getSystemService(Context.ALARM_SERVICE);
+    if (next == Long.MAX_VALUE) {
+      am.cancel(pi);
+    } else {
+      Log.v("breviar", "Current time " + java.lang.System.currentTimeMillis());
+      Log.v("breviar", "Setting notification to " + next + ", id = " + id);
+      am.set(AlarmManager.RTC_WAKEUP, next, pi);
+    }
+  }
+
   static final EventInfo events[] = {
-    new EventInfo(R.id.inv_check,   R.string.inv,   "alarm-inv",    8, 00),
-    new EventInfo(R.id.rch_check,   R.string.rch,   "alarm-rch",    9, 00),
-    new EventInfo(R.id.vesp_check,  R.string.vesp,  "alarm-vesp",  18, 00),
-    new EventInfo(R.id.kompl_check, R.string.kompl, "alarm-kompl", 22, 00)
+    new EventInfo(R.id.inv_check,   "alarm-inv",   R.string.inv,   R.string.inv_notify,    8, 00),
+    new EventInfo(R.id.rch_check,   "alarm-rch",   R.string.rch,   R.string.rch_notify,    9, 00),
+    new EventInfo(R.id.vesp_check,  "alarm-vesp",  R.string.vesp,  R.string.vesp_notify,  18, 00),
+    new EventInfo(R.id.kompl_check, "alarm-kompl", R.string.kompl, R.string.kompl_notify, 22, 00)
   };
 }
