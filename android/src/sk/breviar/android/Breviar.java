@@ -33,9 +33,11 @@ public class Breviar extends Activity {
     static final int DIALOG_HU_BETA = 1;
     static final int DIALOG_NEWS = 2;
 
+    // Server singleton
+    static Server S = null;
+
     WebView wv;
     int scale;
-    Server S = null;
     String language;
     boolean initialized, clearHistory;
 
@@ -43,6 +45,17 @@ public class Breviar extends Activity {
       Log.v("breviar", "goHome");
       wv.loadUrl("http://127.0.0.1:" + S.port + "/" + scriptname + 
                  "?qt=pdnes" + Html.fromHtml(S.getOpts()));
+    }
+
+    synchronized void initServer(String opts) {
+      try {
+        S = new Server(this, scriptname, language, opts);
+      } catch (IOException e) {
+        Log.v("breviar", "Can not initialize server!");
+        finish();
+        return;
+      }
+      S.start();
     }
 
     void resetLanguage() {
@@ -75,14 +88,7 @@ public class Breviar extends Activity {
       String opts = settings.getString("params", "");
 
       // Initialize server very early, to avoid races
-      try {
-        S = new Server(this, scriptname, language, opts);
-      } catch (IOException e) {
-        Log.v("breviar", "Can not initialize server!");
-        finish();
-        return;
-      }
-      S.start();
+      initServer(opts);
 
       super.onCreate(savedInstanceState);
       requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -179,7 +185,19 @@ public class Breviar extends Activity {
         markVersion();
       }
 
-      if (wv.restoreState(savedInstanceState) == null) goHome();
+      Intent I = getIntent();
+      int id = -1;
+      if (I.getAction().equals("sk.breviar.android.action.SHOW")) {
+        id = I.getIntExtra("id", -1);
+      }
+
+      if (id >=0 && id < Util.events.length) {
+        wv.loadUrl("http://127.0.0.1:" + S.port + "/" + scriptname + 
+                   "?qt=pdnes&p=" + Util.events[id].p + Html.fromHtml(S.getOpts()));
+      } else {
+        if (wv.restoreState(savedInstanceState) == null) goHome();
+      }
+
     }
 
     protected void onSaveInstanceState(Bundle outState) {
@@ -228,8 +246,6 @@ public class Breviar extends Activity {
     @Override
     public void onDestroy() {
       Log.v("breviar", "onDestroy");
-      if (S != null) S.stopServer();
-      S = null;
       super.onDestroy();
     }
 

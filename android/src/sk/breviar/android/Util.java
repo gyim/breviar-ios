@@ -26,11 +26,12 @@ public class Util {
   };
 
   static class EventInfo {
-    EventInfo(int id_, String tag_, int cap_, int notify_, int hr, int min) {
+    EventInfo(int id_, String tag_, String p_, int cap_, int notify_, int hr, int min) {
       id = id_;
       caption = cap_;
       notify_text = notify_;
       tag = tag_;
+      p = p_;
       defaultTime = new AlarmTime(min, hr, false);
     };
 
@@ -91,7 +92,7 @@ public class Util {
     }
 
     int id, caption, notify_text;
-    String tag;
+    String tag, p;
     AlarmTime defaultTime;
   };
 
@@ -122,9 +123,9 @@ public class Util {
   }
 
   static final EventInfo events[] = {
-    new EventInfo(R.id.inv_check,   "alarm-inv",   R.string.inv,   R.string.inv_notify,    8, 00),
-    new EventInfo(R.id.rch_check,   "alarm-rch",   R.string.rch,   R.string.rch_notify,    9, 00),
-    new EventInfo(R.id.vesp_check,  "alarm-vesp",  R.string.vesp,  R.string.vesp_notify,  18, 00),
-    new EventInfo(R.id.kompl_check, "alarm-kompl", R.string.kompl, R.string.kompl_notify, 22, 00)
+    new EventInfo(R.id.inv_check,   "alarm-inv",   "mi",   R.string.inv,   R.string.inv_notify,    8, 00),
+    new EventInfo(R.id.rch_check,   "alarm-rch",   "mrch", R.string.rch,   R.string.rch_notify,    9, 00),
+    new EventInfo(R.id.vesp_check,  "alarm-vesp",  "mv",   R.string.vesp,  R.string.vesp_notify,  18, 00),
+    new EventInfo(R.id.kompl_check, "alarm-kompl", "mk",   R.string.kompl, R.string.kompl_notify, 22, 00)
   };
 }
