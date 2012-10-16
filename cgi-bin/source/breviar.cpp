@@ -4410,14 +4410,14 @@ short int atofontsize(char *font){
 short int atomodlitba(char *modlitba){
 	short int p = MODL_NEURCENA;
 	// rozparsovanie parametra modlitba
-	Log("/* rozparsovanie parametra modlitba */\n");
+	Log("atomodlitba(%s): rozparsovanie parametra modlitba...\n", modlitba);
 	if(equals(modlitba, STR_EMPTY))
 		p = MODL_NEURCENA;
 	else if(equals(modlitba, STR_MODL_VSETKY))
 		p = MODL_VSETKY;
 	else if(equals(modlitba, STR_MODL_DETAILY))
 		p = MODL_DETAILY;
-	else if(equals(modlitba, STR_MODL_INVITATORIUM))
+	else if((equals(modlitba, STR_MODL_INVITATORIUM)) || (equals(modlitba, "0")))
 		p = MODL_INVITATORIUM;
 	else if(equals(modlitba, STR_MODL_RANNE_CHVALY))
 		p = MODL_RANNE_CHVALY;
@@ -4442,19 +4442,29 @@ short int atomodlitba(char *modlitba){
 		p = MODL_NEURCENA;
 	// este treba skontrolovat, ci nazov modlitby nie je string ...azov_modlitby[...]
 	if(p == MODL_NEURCENA){
-		// postupne porovnavame s troma konstantami, nazov_[modlitby|Modlitby|MODLITBY], a to pre konstanty MODL_INVITATORIUM -- MODL_VSETKY (vratane)
-		Log("/* druh˝ pokus urËenia modlitby podæa jazykovo z·visl˝ch reùazcov pre modlitba == `%s' */\n", modlitba);
-		for(int pom_i = MODL_INVITATORIUM; pom_i <= MODL_VSETKY; pom_i++){
-			Log("/* step: %d `%s'... */\n", pom_i, nazov_modlitby(pom_i));
-			if(equals(modlitba, nazov_modlitby(pom_i)) || 
-				equals(modlitba, nazov_Modlitby(pom_i)) || 
-				equals(modlitba, nazov_MODLITBY(pom_i))){
-				// ak je zhoda, potom prirad do p a ukonci `for'
-				p = pom_i;
-				break;
-			}
-		}// for pom_i
+		int pom_i = atoi(modlitba); 
+		// atoi() vracia hodnotu 0 (naöa hodnota MODL_INVITATORIUM) pre kaûd˝ reùazec, ktor˝ nie je konvertovateæn˝ na ËÌslo, 
+		// preto sme vyööie porovnali s "0" öpeci·lne a tu znaËÌ pom_i == 0 nie MODL_INVITATORIUM, ale chybu
+		Log("atomodlitba(): pokus urËenia modlitby konverziou reùazca `%s' na ËÌslo (%d)...\n", modlitba, pom_i);
+		if((pom_i < MODL_POSV_CITANIE) || (pom_i > MODL_VSETKY)){
+			// postupne porovnavame s troma konstantami, nazov_[modlitby|Modlitby|MODLITBY], a to pre konstanty MODL_INVITATORIUM -- MODL_VSETKY (vratane)
+			Log("atomodlitba(): pokus urËenia modlitby podæa jazykovo z·visl˝ch reùazcov pre modlitba == `%s'...\n", modlitba);
+			for(pom_i = MODL_INVITATORIUM; pom_i <= MODL_VSETKY; pom_i++){
+				Log("\tstep: %d `%s'...\n", pom_i, nazov_modlitby(pom_i));
+				if(equals(modlitba, nazov_modlitby(pom_i)) || 
+					equals(modlitba, nazov_Modlitby(pom_i)) || 
+					equals(modlitba, nazov_MODLITBY(pom_i))){
+					// ak je zhoda, potom prirad do p a ukonci `for'
+					p = pom_i;
+					break;
+				}
+			}// for pom_i
+		}
+		else{
+			p = pom_i;
+		}
 	}
+	Log("atomodlitba(): returning %d...\n", p);
 	return p;
 }// atomodlitba()
 
