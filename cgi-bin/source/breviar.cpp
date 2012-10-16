@@ -4527,6 +4527,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 	_global_den.rok = rok;
 	_global_den.denvr = poradie(datum.den, datum.mesiac, rok);
 	_global_den.denvt = den_v_tyzdni(datum.den, datum.mesiac, rok);
+	_rozbor_dna_LOG("denvr == %d, denvt == %d...\n", _global_den.denvr, _global_den.denvt);
 
 	// urËenie vöeobecnych "liturgick˝ch" z·leûitostÌ dÚa:
 	//
@@ -10188,7 +10189,7 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 			datum.mesiac = mesiac;
 		}
 		Log("spustam analyzu roka (rok %d)...\n", _local_rok);
-		analyzuj_rok(_local_rok); // vysledok da do _global_r
+		analyzuj_rok(_local_rok); // v˝sledok d· do _global_r
 		LOG_ciara;
 
 		// 2009-04-02: kvÙli öpecialite: 8.11.2008 na veöpery a kompletÛrium treba braù pre sviatok 9.11.
@@ -10233,7 +10234,7 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 	datum.mesiac = mesiac;
 	if(_local_rok != rok){
 		Log("spustam analyzu roka (rok %d)...\n", rok);
-		analyzuj_rok(rok); // vysledok da do _global_r
+		analyzuj_rok(rok); // v˝sledok d· do _global_r
 	}
 	Log("spustam analyzu tohto dna (%d. %s %d)...\n", datum.den, nazov_mesiaca(datum.mesiac - 1), rok);
 	ret = _rozbor_dna_s_modlitbou(datum, rok, modlitba, poradie_svaty);
@@ -10630,7 +10631,7 @@ void rozbor_dna(short int den, short int mesiac, short int rok){
 	datum.den = den;
 	datum.mesiac = mesiac;
 	Log("-- rozbor_dna(): sp˙öùam analyzuj_rok()...\n");
-	analyzuj_rok(rok); // vysledok da do _global_r
+	analyzuj_rok(rok); // v˝sledok d· do _global_r
 	Log("-- rozbor_dna(): analyzuj_rok() skonËila.\n");
 
 	Log("-- rozbor_dna(): sp˙öùam _rozbor_dna(s dvoma parametrami)...\n");
@@ -10687,7 +10688,7 @@ void rozbor_mesiaca(short int mesiac, short int rok, short int typ_exportu = EXP
 		Log("-- _export_rozbor_dna_buttons(typ == %d): kvÙli typu nebudeme exportovaù tabuæku...\n", typ);
 	}
 
-	analyzuj_rok(rok); // vysledok da do _global_r
+	analyzuj_rok(rok); // v˝sledok d· do _global_r
 	if(som_v_tabulke == ANO){
 		Export("\n"HTML_LINE_BREAK"<table>\n");
 	}
@@ -11603,6 +11604,9 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok, char *modlitba){
 				_struct_den_mesiac datum;
 				datum.den = d;
 				datum.mesiac = m + 1;
+				// najprv, kopÌruj˙c rozbor_dna(), musÌme predplniù ˙daje o roku...
+				analyzuj_rok(r); // v˝sledok d· do _global_r
+				// teraz rozbor samotnÈho dÚa...
 				_rozbor_dna(datum, r);
 				Log("-- _main_rozbor_dna_txt(): nasleduje _export_rozbor_dna() pre deÚ %d...\n", datum.den);
 				_export_rozbor_dna(t);
@@ -11671,7 +11675,7 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 	_struct_den_mesiac datum;
 	datum.den = dnes.tm_mday;
 	datum.mesiac = dnes.tm_mon;
-	analyzuj_rok(dnes.tm_year); // vysledok da do _global_r
+	analyzuj_rok(dnes.tm_year); // v˝sledok d· do _global_r
 
 	s = atoi(poradie_svaty); // ak je viac svatych, ktory z nich (1--3)
 	// 2009-03-27: doplnenÈ - nezn·my je konötanta; zmysel maj˙ len vstupy 1--3
@@ -12139,7 +12143,7 @@ void _main_analyza_roku(char *rok){
 	_export_heading_center(pom);
 
 	LOG("vchadzam do analyzuj_rok()...\n");
-	analyzuj_rok(year); // vysledok da do _global_r
+	analyzuj_rok(year); // v˝sledok d· do _global_r
 	LOG("analyzuj_rok() ukoncena.\n");
 
 	// zmenene <font color> na <span>, 2003-07-02
@@ -12388,7 +12392,7 @@ void _main_tabulka(char *rok_from, char *rok_to, char *tab_linky){
 
 	for(year = rfrom; year <= rto; year++){
 		LOG("-- _main_tabulka(): vchadzam do analyzuj_rok()...\n");
-		analyzuj_rok(year); // vysledok da do _global_r
+		analyzuj_rok(year); // v˝sledok d· do _global_r
 		LOG("-- _main_tabulka(): analyzuj_rok() ukoncena.\n");
 
 		Export("<tr>\n");
