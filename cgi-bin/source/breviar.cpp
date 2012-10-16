@@ -15421,6 +15421,8 @@ int breviar_main(int argc, char **argv){
     batch_month_file = NULL;
     index_pre_mesiac_otvoreny = NIE;
 
+	_INIT_DM(_local_den);
+
 	// koniec inicializacie globalnych premennych; teraz samotna main()
 
 #if defined(OS_linux)
@@ -15484,19 +15486,12 @@ int breviar_main(int argc, char **argv){
 
 	_main_LOG("sp˙öùam initExport();...\n");
 	initExport();
-	/* nasledovalo tu vypisanie headingu 1, teda funkcia hlavicka();
-	 * avsak to je teraz v kazdej funkcii _main_...
-	 * zabezpecene funkciou _export_heading(int, const char *);
-	 *
-//	hlavicka((char *)html_title[_global_jazyk]);
-	 *
-	 */
 
-	/* pre query_string musime alokovat pamat */
+	// pre query_string musime alokovat pamat
 	_main_LOG("/* pre query_string musime alokovat pamat */\n");
 	_main_LOG("now allocating memory...\n");
 
-	/* query_string */
+	// query_string
 	if((query_string = (char*) malloc(MAX_QUERY_STR)) == NULL){
 		_main_LOG("  Not enough memory to allocate buffer for `query_string'\n");
 		goto _main_end;
@@ -15626,7 +15621,7 @@ int breviar_main(int argc, char **argv){
 					Log("continuing to export in FILE_EXPORT (`%s')...\n", FILE_EXPORT);
 				}
 				else{
-					// 2010-02-15? pridanÈ: rozparsovanie parametra modlitba
+					// 2010-02-15, pridanÈ: rozparsovanie parametra modlitba
 					Log("volanie atomodlitba() z main()... [1]\n");
 					_global_modlitba = atomodlitba(pom_MODLITBA);
 					if(_global_opt_append == YES){
@@ -15638,37 +15633,27 @@ int breviar_main(int argc, char **argv){
 					if(initExport(file_export) == SUCCESS){
 						Log("initExport(`%s'): success\n", file_export);
 						_main_LOG_to_Export("_global_jazyk == %s\n", nazov_jazyka[_global_jazyk]);
-						hlavicka((char *)html_title[_global_jazyk]);
 					}
 					else{
 						Log("initExport(`%s'): failure, \n", file_export);
 						Log("continuing to export into DEFAULT_FILE_EXPORT (`%s')\n", DEFAULT_FILE_EXPORT);
 						initExport(DEFAULT_FILE_EXPORT);
 						_main_LOG_to_Export("_global_jazyk == %s\n", nazov_jazyka[_global_jazyk]);
-						hlavicka((char *)html_title[_global_jazyk]);
 					}
+					hlavicka((char *)html_title[_global_jazyk]);
 				}
 			}
-			_main_LOG("spat po skonceni getArgv(); exporting to file `%s'...\n",
-				FILE_EXPORT);
+			_main_LOG("spat po skonceni getArgv(); exporting to file `%s'...\n", FILE_EXPORT);
 
-			// 24/02/2000A.D. pridana simulacia QS
 			if(query_type == PRM_SIMULACIA_QS){
 				Log("jumping to _main_SIMULACIA_QS (query_string == %s)...\n", query_string);
 				goto _main_SIMULACIA_QS;
 			}
 
-			// initExport(); bola kedysi na zaciatku, avsak kvoli tomu, aby bolo mozne menit (switch -e) nazov suboru, dalo sa to sem
-			// 24/02/2000A.D. -- urobil som to presne tak, ako bolo kedysi
-			/*
-			initExport();
-			hlavicka((char *)html_title[_global_jazyk]);
-			*/
 			break;
 		}
 		case SCRIPT_PARAM_FROM_QS:{
-			// initExport(); bola kedysi na zaciatku, avsak kvoli tomu, aby bolo mozne menit (switch -e) nazov suboru, dalo sa to sem
-			// 24/02/2000A.D. -- urobil som to presne tak, ako bolo kedysi
+
 			_main_LOG_to_Export("params == SCRIPT_PARAM_FROM_QS\n");
 			// nasledujuca pasaz je tu preto, ze mozno bolo pouzite kombinovane aj query string, aj formular (teda treba citat aj systemove premenne WWW_...)
 
