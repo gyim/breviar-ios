@@ -49,6 +49,7 @@
 #include "mybuild.h" // 2011-07-11: pridané, kvôli BUILD_DATE
 
 short int bol_content_type_text_html = NIE;
+short int bol_content_type_text_xml = NIE;
 
 #ifndef __MYHPAGE_CPP_HTML_CONST
 #define __MYHPAGE_CPP_HTML_CONST
@@ -57,6 +58,8 @@ short int bol_content_type_text_html = NIE;
 const char *html_header_1 = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\n\t\"http://www.w3.org/TR/html4/loose.dtd\">\n<html>\n<head>\n\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=%s\">\n\t<meta name=\"Author\" content=\"Juraj Vidéky\">\n";
 const char *html_header_css = "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"";
 const char *html_footer_1 = STR_EMPTY; // "<p><center>______</center>"; // "<hr>";
+
+const char *xml_header = "<?xml version=\"1.0\" encoding=\"%s\"?>\n";
 
 #endif // __MYHPAGE_CPP_HTML_CONST
 
@@ -72,7 +75,8 @@ char *ptr;
 short int _local_modlitba;
 
 void myhpage_init_globals() {
-  bol_content_type_text_html = NIE;
+	bol_content_type_text_html = NIE;
+	bol_content_type_text_xml = NIE;
 }
 
 void _header_css(FILE* expt, short int level, const char* nazov_css_suboru) {
@@ -180,18 +184,18 @@ void _hlavicka(char *title, FILE * expt, short int level, short int spec){
 	// 2008-08-08: pridané dynamicky css-ko
 	// 2010-02-15: statické texty do konštánt
 	// 2011-05-18: charset sa nastaví pod¾a jazyka
-	Log("<head>...\n");
+	Log("element <head>...\n");
 	Export_to_file(expt, (char *)html_header_1, charset_jazyka[_global_jazyk]);
-        _header_css(expt, level, nazov_css_suboru);
-        if (_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_NOCNY_REZIM) {
-          _header_css(expt, level, nazov_css_invert_colors);
-        }
+    _header_css(expt, level, nazov_css_suboru);
+    if (_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_NOCNY_REZIM) {
+        _header_css(expt, level, nazov_css_invert_colors);
+    }
 	Export_to_file(expt, "\t<meta name=\"viewport\" content=\"width=device-width, user-scalable=yes, initial-scale=1.0\" />\n");
 	Export_to_file(expt, "<title>%s</title>\n", title);
 	Export_to_file(expt, "</head>\n\n");
-	Log("</head>...\n");
+	Log("element </head>...\n");
 
-	Log("<body>...\n");
+	Log("element <body>...\n");
 	// 2011-05-05: pridanie font-family 
 	// 2011-05-06: font sa nepridáva vždy
 	Export_to_file(expt, "<body");
@@ -271,6 +275,32 @@ void hlavicka(char *title, short int level, short int spec){
 }
 void hlavicka(char *title, FILE * expt, short int level, short int spec){
 	_hlavicka(title, expt, level, spec);
+}
+
+// exportuje hlavicku XML dokumentu
+
+void _xml_hlavicka(FILE * expt){
+	Log("_xml_hlavicka() -- zaèiatok...\n");
+	if(bol_content_type_text_xml == NIE){
+#if defined(OS_linux)
+		Export_to_file(expt, "Content-type: text/xml\n");
+		Export_to_file(expt, "\n");
+#elif defined(OS_Windows_Ruby)
+		Export_to_file(expt, "Content-type: text/xml\n");
+		Export_to_file(expt, "\n");
+#endif
+		bol_content_type_text_xml = ANO;
+	}
+	Export_to_file(expt, (char *)xml_header, charset_jazyka[_global_jazyk]);
+	Log("_xml_hlavicka() -- koniec.\n");
+	return;
+}// _xml_hlavicka()
+
+void xml_hlavicka(void){
+	_xml_hlavicka(NULL);
+}
+void xml_hlavicka(FILE * expt){
+	_xml_hlavicka(expt);
 }
 
 //const char *gpage[] = {"Generovaná stránka", "Stránky jsou generovány", "Generated page", "Generated"};

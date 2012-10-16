@@ -11548,35 +11548,39 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok, char *modlitba){
 
 	Log("/* teraz result == SUCCESS */\n");
 	if(m != UNKNOWN_MESIAC){
-		Export("<h2>");
-		Export((char *)html_text_txt_export[_global_jazyk]);
-		Export((char *)html_text_lit_kalendar[_global_jazyk]);
-		Export(" ");
-		if(m == VSETKY_MESIACE){
-			Export((char *)html_text_rok[_global_jazyk]);
-			Export(" %d", r);
-		}// if(m == VSETKY_MESIACE)
-		else{
-			if(d == VSETKY_DNI){
-				Export((char *)html_text_mesiac[_global_jazyk]);
-			}
+		// 2012-10-16: pre XML export sa hlavièka neexportuje
+		if(t != EXPORT_DNA_XML){
+			Export("<h2>");
+			Export((char *)html_text_txt_export[_global_jazyk]);
+			Export((char *)html_text_lit_kalendar[_global_jazyk]);
+			Export(" ");
+			if(m == VSETKY_MESIACE){
+				Export((char *)html_text_rok[_global_jazyk]);
+				Export(" %d", r);
+			}// if(m == VSETKY_MESIACE)
 			else{
-				Export((char *)html_text_den[_global_jazyk]);
-				Export(" %d.", d);
-				if((t != EXPORT_DNA_JEDEN_DEN) || (t != EXPORT_DNA_XML)){
-					t = EXPORT_DNA_JEDEN_DEN;
+				if(d == VSETKY_DNI){
+					Export((char *)html_text_mesiac[_global_jazyk]);
 				}
-			}
-			Export(" %s", nazov_mesiaca(m));
-			Export(" %d", r);
-		}// else (m != VSETKY_MESIACE)
-		Export("</h2>");
+				else{
+					Export((char *)html_text_den[_global_jazyk]);
+					Export(" %d.", d);
+					if((t != EXPORT_DNA_JEDEN_DEN) || (t != EXPORT_DNA_XML)){
+						t = EXPORT_DNA_JEDEN_DEN;
+					}
+				}
+				Export(" %s", nazov_mesiaca(m));
+				Export(" %d", r);
+			}// else (m != VSETKY_MESIACE)
+			Export("</h2>");
+		}
 
 		Export("\n");
 
 		if(t == EXPORT_DNA_VIAC_DNI_TXT){
 			Export("<pre>");
 		}
+
 		// teraz generujem jednotlivé mesiace so všetkými dòami
 		if(m == VSETKY_MESIACE){
 			for(mi = MES_JAN; mi <= MES_DEC; mi++){
@@ -12619,7 +12623,7 @@ void _main_batch_mode(
 					// 2011-08-02: doplnené vynulovanie
 					_global_hlavicka_Export = 0;
 					_global_patka_Export = 0;
-					myhpage_init_globals(); // bol_content_type_text_html = NIE;
+					myhpage_init_globals();
 					hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_html_file, -1 /* t.j. bez úprav linky */, _global_opt_batch_monthly /* element <body> špeciálne */);
 					// 2010-02-15: doplnené "zrýchlené vo¾by" 
 					// 2010-12-03: opravené, nako¾ko na niektorých mobilných zariadeniach JavaScript funkcie 
@@ -12790,7 +12794,7 @@ void _main_batch_mode(
 										// 2011-09-30: doplnené vynulovanie pod¾a vynulovania pred batch_html_file
 										_global_hlavicka_Export = 0;
 										_global_patka_Export = 0;
-										myhpage_init_globals(); // bol_content_type_text_html = NIE;
+										myhpage_init_globals();
 										hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_month_file, 1);
 										fprintf(batch_month_file, "\n");
 										// zaèiatok hlavièky
@@ -12885,7 +12889,7 @@ void _main_batch_mode(
 								// 2011-09-30: doplnené vynulovanie pod¾a vynulovania pred batch_html_file
 								_global_hlavicka_Export = 0;
 								_global_patka_Export = 0;
-								myhpage_init_globals(); // bol_content_type_text_html = NIE;
+								myhpage_init_globals();
 								hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_month_file, 1);
 								fprintf(batch_month_file, "\n");
 								fprintf(batch_month_file, "<center><h2>");
@@ -12950,7 +12954,7 @@ void _main_batch_mode(
 										// 2011-09-30: doplnené vynulovanie pod¾a vynulovania pred batch_html_file
 										_global_hlavicka_Export = 0;
 										_global_patka_Export = 0;
-										myhpage_init_globals(); // bol_content_type_text_html = NIE;
+										myhpage_init_globals();
 										hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_month_file, 1);
 										fprintf(batch_month_file, "\n");
 										fprintf(batch_month_file, "<center><h2>");
@@ -13020,7 +13024,7 @@ void _main_batch_mode(
 											// 2011-09-30: doplnené vynulovanie pod¾a vynulovania pred batch_html_file
 											_global_hlavicka_Export = 0;
 											_global_patka_Export = 0;
-											myhpage_init_globals(); // bol_content_type_text_html = NIE;
+											myhpage_init_globals();
 											hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_month_file, 1);
 											fprintf(batch_month_file, "\n");
 											fprintf(batch_month_file, "<center><h2>");
@@ -13089,7 +13093,7 @@ void _main_batch_mode(
 										// 2011-09-30: doplnené vynulovanie pod¾a vynulovania pred batch_html_file
 										_global_hlavicka_Export = 0;
 										_global_patka_Export = 0;
-										myhpage_init_globals(); // bol_content_type_text_html = NIE;
+										myhpage_init_globals();
 										hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_month_file, 1);
 										fprintf(batch_month_file, "\n");
 										fprintf(batch_month_file, "<center><h2>");
@@ -13157,7 +13161,7 @@ void _main_batch_mode(
 										// 2011-09-30: doplnené vynulovanie pod¾a vynulovania pred batch_html_file
 										_global_hlavicka_Export = 0;
 										_global_patka_Export = 0;
-										myhpage_init_globals(); // bol_content_type_text_html = NIE;
+										myhpage_init_globals();
 										hlavicka((char *)html_title_batch_mode[_global_jazyk], batch_month_file, 1);
 										fprintf(batch_month_file, "\n");
 										fprintf(batch_month_file, "<center><h2>");
@@ -15600,6 +15604,7 @@ int breviar_main(int argc, char **argv){
 						initExport(DEFAULT_FILE_EXPORT);
 						_main_LOG_to_Export("_global_jazyk == %s\n", nazov_jazyka[_global_jazyk]);
 					}
+					_main_LOG_to_Export("volám hlavicka(); ... [case SCRIPT_PARAM_FROM_ARGV]\n");
 					hlavicka((char *)html_title[_global_jazyk]);
 				}
 			}
@@ -15898,7 +15903,13 @@ _main_SIMULACIA_QS:
 
 			Log("export_monthly_druh == %d\n", export_monthly_druh);
 
-			hlavicka((char *)html_title[_global_jazyk]);
+			_main_LOG_to_Export("volám hlavicka(); ... [pred volaním _main_... funkcií v switch(query_type)...]\n");
+			if(query_type != PRM_TXT){
+				hlavicka((char *)html_title[_global_jazyk]);
+			}
+			else{
+				xml_hlavicka();
+			}
 
 			Log("export_monthly_druh == %d\n", export_monthly_druh);
 
