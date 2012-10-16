@@ -14,6 +14,11 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="sk.breviar.android.SHOW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="svpismo" />
+            </intent-filter>
         </activity>
         <activity android:name="Alarms"
                   android:configChanges="orientation">
