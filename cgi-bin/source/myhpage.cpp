@@ -477,8 +477,6 @@ void patka(FILE * expt){
 
 // exportuje patku XML dokumentu
 void _xml_patka(FILE * expt){
-	char mail_addr[MAX_MAIL_STR] = "";
-
 	Log("_xml_patka() -- zaèiatok...\n");
 
 	// aby sa pätka neexportovala viackrát
@@ -488,7 +486,6 @@ void _xml_patka(FILE * expt){
 
 	time_t t;
 	struct tm dnes;
-	int baserok = 1999;
 
 	time(&t);
 
