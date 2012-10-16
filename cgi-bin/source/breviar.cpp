@@ -1429,9 +1429,8 @@ void _export_link_show_hide(short int opt, short int bit, char popis_show[SMALL]
  *
  */
 void _main_prazdny_formular(void){
-	hlavicka((char *)html_title[_global_jazyk]);
-	Export("Programu neboli zadanÈ argumenty.\n");
 	ALERT;
+	Export("Programu neboli zadanÈ argumenty.\n");
 }// _main_prazdny_formular()
 
 //---------------------------------------------------------------------
@@ -4003,10 +4002,9 @@ void interpretTemplate(short int type, char *tempfile, short int aj_navigacia = 
 	Log("interpretTemplate(%s): Interpreting template %s\n", tempfile, tempfile);
 
 	if(ftemplate == NULL){
-		hlavicka((char *)html_title[_global_jazyk]);
+		ALERT;
 		Export((char *)html_error_template[_global_jazyk], tempfile);
 		Export("\n");
-		ALERT;
 		return;
 	}// chyba -- öablÛna sa nenaöla
 
@@ -4102,9 +4100,8 @@ void showPrayer(short int type, short int aj_navigacia = ANO){
 	Log("showPrayer(type %i, %s), _global_modlitba == %s\n", type, nazov_modlitby(type), nazov_modlitby(_global_modlitba));
 
 	if( ((type > MODL_PRVE_KOMPLETORIUM) || (type < MODL_INVITATORIUM)) || (type == MODL_NEURCENA) ){
-		hlavicka((char *)html_title[_global_jazyk]);
-		Export("Nezn·my typ modlitby.\n");
 		ALERT;
+		Export("Nezn·my typ modlitby.\n");
 		return;
 	}// nezn·my typ modlitby
 
@@ -4128,9 +4125,8 @@ void showPrayer(short int type, short int aj_navigacia = ANO){
 		}
 		else{
 			Log("_global_modlitba (%s) != type (%s), showPrayer()\n", _global_modlitba, type);
-			hlavicka((char *)html_title[_global_jazyk]);
-			Export("Nastala chyba programu (type != _global_modlitba).\n");
 			ALERT;
+			Export("Nastala chyba programu (type != _global_modlitba).\n");
 			return;
 		}// chyba
 	}// _global_modlitba != type
@@ -4212,7 +4208,6 @@ void vysvetlivky_tabulka(void){
 short int kontrola_den_mesiac_rok(short int den, short int mesiac, short int rok){
 	if((mesiac < 1) || (mesiac > 12)){
 		ExportKONTROLA("Tak˝to mesiac nepozn·m (%d).\n", mesiac);
-		//ALERT;
 		return FAILURE;
 	}
 	if(prestupny(rok))
@@ -4232,7 +4227,6 @@ short int kontrola_den_mesiac_rok(short int den, short int mesiac, short int rok
 			ExportKONTROLA("Mesiac %s m· %d dnÌ.\n",
 				nazov_mesiaca(mesiac - 1), pocet_dni[mesiac - 1]);
 		}
-		//ALERT;
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -5073,24 +5067,21 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 
 	// pridane 28/03/2000A.D.: ak chce vacsie cislo (poradie svateho) ako je v _global_pocet_svatych resp. ked nie je sobota a chce poradie svateho 4 (spomienka p. marie v sobotu)
 	if((_global_pocet_svatych == 0) && (_global_pocet_svatych < poradie_svaty) && (poradie_svaty != 4)){
-		hlavicka((char *)html_title[_global_jazyk]);
-		Export("V tento deÚ nie je sviatok ûiadneho sv‰tÈho, preto nemÙûete poûadovaù sv‰tÈho Ë. %d.", poradie_svaty);
-		ALERT;
 		_rozbor_dna_LOG("returning from _rozbor_dna(), because: (_global_pocet_svatych == 0) && (_global_pocet_svatych < poradie_svaty) && (poradie_svaty != 4)\n");
+		ALERT;
+		Export("V tento deÚ nie je sviatok ûiadneho sv‰tÈho, preto nemÙûete poûadovaù sv‰tÈho Ë. %d.", poradie_svaty);
 		return FAILURE;
 	}
 	else if((_global_pocet_svatych < poradie_svaty) && (poradie_svaty != 4)){
-		hlavicka((char *)html_title[_global_jazyk]);
-		Export("Nie je viac ako %d sviatkov sv‰t˝ch v tento deÚ, preto nemÙûete poûadovaù sv‰tÈho Ë. %d.", _global_pocet_svatych, poradie_svaty);
-		ALERT;
 		_rozbor_dna_LOG("returning from _rozbor_dna(), because: (_global_pocet_svatych < poradie_svaty) && (poradie_svaty != 4)\n");
+		ALERT;
+		Export("Nie je viac ako %d sviatkov sv‰t˝ch v tento deÚ, preto nemÙûete poûadovaù sv‰tÈho Ë. %d.", _global_pocet_svatych, poradie_svaty);
 		return FAILURE;
 	}
 	else if((_global_den.denvt != DEN_SOBOTA) && (poradie_svaty == 4)){
-		hlavicka((char *)html_title[_global_jazyk]);
-		Export("Tento deÚ je %s, a nie je sobota, takûe nemÙûete poûadovaù modlitbu `Spomienka Panny M·rie v sobotu'.\n", nazov_dna(_global_den.denvt));
-		ALERT;
 		_rozbor_dna_LOG("returning from _rozbor_dna(), because: (_global_den.denvt != DEN_SOBOTA) && (poradie_svaty == 4)\n");
+		ALERT;
+		Export("Tento deÚ je %s, a nie je sobota, takûe nemÙûete poûadovaù modlitbu `Spomienka Panny M·rie v sobotu'.\n", nazov_dna(_global_den.denvt));
 		return FAILURE;
 	}
 
@@ -5360,10 +5351,9 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		case 4:
 			// do _local_den priradim slavenie pm v sobotu v dalsom
 			if(_global_den.denvt != DEN_SOBOTA){
-            Export("Tento deÚ nie je sobota, preto nemÙûe maù `spomienku Panny M·rie v sobotu'!\n");
-				hlavicka((char *)html_title[_global_jazyk]);
 				Log("Tento den nie je sobota, preto nemoze mat spomienku P. Marie v sobotu!\n");
 				ALERT;
+	            Export("Tento deÚ nie je sobota, preto nemÙûe maù `spomienku Panny M·rie v sobotu'!\n");
 				return FAILURE;
 			}
 			else{
@@ -5391,12 +5381,11 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			}
 			else{
 				// sice chce svateho c. 2, ale mam len jedneho
-				hlavicka((char *)html_title[_global_jazyk]);
 				Log("-- Error: _global_svaty2 not assigned\n");
+				ALERT;
 				sprintf(pom, "Error: _global_svaty2 not assigned");
 				strcat(_global_string, pom);
 				Export("%s\n", _global_string);
-				ALERT;
 				return FAILURE;
 			}
 			break; // case 2:
@@ -5411,20 +5400,18 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			}
 			else{
 				// sice chce svateho c. 3, ale nemam troch
-				hlavicka((char *)html_title[_global_jazyk]);
 				Log("-- Error: _global_svaty3 not assigned\n");
+				ALERT;
 				sprintf(pom, "Error: _global_svaty3 not assigned");
 				strcat(_global_string, pom);
 				Export("%s\n", _global_string);
-				ALERT;
 				return FAILURE;
 			}
 			break; // case 3:
 		case 5:
-			hlavicka((char *)html_title[_global_jazyk]);
 			Log("-- Error: poradie_svateho == 5\n");
-			Export("Error: poradie_svateho == 5\n");
 			ALERT;
+			Export("Error: poradie_svateho == 5\n");
 			return FAILURE;
 			break;
 		case UNKNOWN_PORADIE_SVATEHO:
@@ -6167,26 +6154,23 @@ short int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, short int rok, short
 
 	// nasledovna pasaz pridana 28/03/2000A.D. -- aby sme dobre kontrolovali, ci vobec mozeme spustit generovanie modlitby
 	if((poradie_svateho == 4) && (_global_den.denvt != DEN_SOBOTA)){
-		hlavicka((char *)html_title[_global_jazyk]);
-		Export("NemÙûete poûadovaù t˙to modlitbu, pretoûe nie je sobota.\n");
-		ALERT;
 		Log("(poradie_svateho == 4) && (_global_den.denvt != DEN_SOBOTA), so returning FAILURE...\n");
+		ALERT;
+		Export("NemÙûete poûadovaù t˙to modlitbu, pretoûe nie je sobota.\n");
 		return FAILURE;
 	}
 	// toto sa vypisovalo aj pre "detaily" (tlacidlo na webe), ked je MODL_NEURCENA, preto som `modlitba >= MODL_VESPERY' upravil na `(modlitba == MODL_VESPERY) || (modlitba == MODL_KOMPLETORIUM)'
 	// aby kontroloval len vespery a kompletorium. | 2003-07-01
 	else if((poradie_svateho == 4) && (_global_den.denvt == DEN_SOBOTA) && ((modlitba == MODL_VESPERY) || (modlitba == MODL_KOMPLETORIUM))){
-		hlavicka((char *)html_title[_global_jazyk]);
-		Export("NemÙûete poûadovaù t˙to modlitbu, pretoûe `Spomienka Panny M·rie v sobotu' nem· veöpery ani kompletÛrium.\n");
-		ALERT;
 		Log("(poradie_svateho == 4) && (_global_den.denvt != DEN_SOBOTA), so returning FAILURE...\n");
+		ALERT;
+		Export("NemÙûete poûadovaù t˙to modlitbu, pretoûe `Spomienka Panny M·rie v sobotu' nem· veöpery ani kompletÛrium.\n");
 		return FAILURE;
 	}
 	else if((poradie_svateho != 4) && (_global_pocet_svatych < poradie_svateho)){
-		hlavicka((char *)html_title[_global_jazyk]);
-		Export("NemÙûete poûadovaù t˙to modlitbu, pretoûe na dan˝ deÚ je menej sv‰t˝ch.\n");
-		ALERT;
 		Log("(poradie_svateho != 4) && (_global_pocet_svatych < poradie_svateho), so returning FAILURE...\n");
+		ALERT;
+		Export("NemÙûete poûadovaù t˙to modlitbu, pretoûe na dan˝ deÚ je menej sv‰t˝ch.\n");
 		return FAILURE;
 	}
 
@@ -11146,7 +11130,6 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 
 	// kontrola ˙dajov ukonËen·, podæa nej pokraËujeme Ôalej
 	if(result == FAILURE){
-		hlavicka((char *)html_title[_global_jazyk]);
 		Log("/* teraz result == FAILURE */\n");
 		ALERT;
 		return;
@@ -11565,7 +11548,6 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok, char *modlitba){
 
 	// kontrola udajov ukoncena, podla nej pokracujeme dalej
 	if(result == FAILURE){
-		hlavicka((char *)html_title[_global_jazyk]);
 		Log("/* teraz result == FAILURE */\n");
 		ALERT;
 		return;
@@ -11805,7 +11787,7 @@ void _main_zaltar(char *den, char *tyzden, char *modlitba){
 	d = atodenvt(den);
 	t = atoi(tyzden);
 	if((d < 0) || (d > 6) || (t < 1) || (t > 4)){
-		hlavicka((char *)html_title[_global_jazyk]);
+		ALERT;
 		Export("NevhodnÈ ˙daje:<br>\n<ul>");
 		// den
 		if(equals(den, STR_EMPTY))
@@ -11818,7 +11800,6 @@ void _main_zaltar(char *den, char *tyzden, char *modlitba){
 		else if((t < 1) || (t > 4))
 			Export("<li>t˝ûdeÚ = <"HTML_SPAN_BOLD">%s</span></li>\n", tyzden);
 		Export("</ul>\n");
-		ALERT;
 		return;
 	}
 	p = MODL_NEURCENA;
@@ -11893,7 +11874,7 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 	// do bud˙cnosti treba rieöiù niektorÈ öpeciality, napr. adv. obd. II alebo vian. obd. II (dni urËenÈ d·tumom); triduum a pod.
 
 	if(lr > 'C' || lr < 'A'){
-		hlavicka((char *)html_title[_global_jazyk]);
+		ALERT;
 		Export("NevhodnÈ ˙daje:<br>\n<ul>");
 		// tyzden
 		if(equals(tyzden, STR_EMPTY)){
@@ -11903,11 +11884,10 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 			Export("<li>t˝ûdeÚ = <"HTML_SPAN_BOLD">%c</span></li>\n", lr);
 		}
 		Export("</ul>\n");
-		ALERT;
 		return FAILURE;
 	}
 	if(t > lit_obd_pocet_tyzdnov[lo]){
-		hlavicka((char *)html_title[_global_jazyk]);
+		ALERT;
 		Export("NevhodnÈ ˙daje:<br>\n<ul>");
 		// tyzden
 		if(equals(tyzden, STR_EMPTY)){
@@ -11917,12 +11897,11 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 			Export("<li>t˝ûdeÚ = <"HTML_SPAN_BOLD">%s</span></li>\n", tyzden);
 		}
 		Export("</ul>\n");
-		ALERT;
 		return FAILURE;
 	}
 	// pÙstne obdobie nezaËÌna nedeæou, ale popolcovou stredou; technicky ide o 0. t˝ûdeÚ pÙstneho obdobia
 	if((d < DEN_NEDELA) || (d > DEN_SOBOTA) || ((t < 0) || ((t == 0) && ((lo != OBD_POSTNE_I) && (d < DEN_STREDA)))) || (t > POCET_NEDIEL_CEZ_ROK)){
-		hlavicka((char *)html_title[_global_jazyk]);
+		ALERT;
 		Export("NevhodnÈ ˙daje:<br>\n<ul>");
 		// deÚ
 		if(equals(den, STR_EMPTY))
@@ -11935,7 +11914,6 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 		else if((t < 1) || (t > 4))
 			Export("<li>t˝ûdeÚ = <"HTML_SPAN_BOLD">%s</span></li>\n", tyzden);
 		Export("</ul>\n");
-		ALERT;
 		return FAILURE;
 	}
 	p = MODL_NEURCENA;
@@ -12123,9 +12101,8 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 void _main_sviatok(char *sviatok){
 	// [ToDo]
 	if(equals(sviatok, STR_EMPTY)){
-		hlavicka((char *)html_title[_global_jazyk]);
-		Export("NevhodnÈ ˙daje: ch˝ba ˙daj o sviatku");
 		ALERT;
+		Export("NevhodnÈ ˙daje: ch˝ba ˙daj o sviatku");
 		return;
 	}
 	// unfinished
@@ -12155,7 +12132,7 @@ void _main_analyza_roku(char *rok){
 #define ExportROK	Export(HTML_LINE_BREAK); Export
 	year = atoi(rok);
 	if(year <= 0){
-		hlavicka((char *)html_title[_global_jazyk]);
+		ALERT;
 		_export_heading("Anal˝za roku");
 		Export("Nevhodn˝ ˙daj: ");
 		if(equals(rok, STR_EMPTY))
@@ -12164,7 +12141,6 @@ void _main_analyza_roku(char *rok){
 			Export("nepozn·m rok <"HTML_SPAN_BOLD">0</span>.\n");
 		else
 			Export("chybnÈ ËÌslo (%s).\n", rok);
-		ALERT;
 		return;
 	}
 
@@ -12392,7 +12368,7 @@ void _main_tabulka(char *rok_from, char *rok_to, char *tab_linky){
 	rto = atoi(rok_to);
 	linky = atoi(tab_linky);
 	if((rfrom <= 0) || (rto <= 0) || (rfrom > rto)){
-		hlavicka((char *)html_title[_global_jazyk]);
+		ALERT;
 		_export_heading("Anal˝za rokov");
 		Export("Nevhodn˝ ˙daj: ");
 		if(equals(rok_from, STR_EMPTY))
@@ -12403,7 +12379,6 @@ void _main_tabulka(char *rok_from, char *rok_to, char *tab_linky){
 			Export("nepozn·m rok <"HTML_SPAN_BOLD">0</span>.\n");
 		else
 			Export("chybnÈ ËÌslo (%s, %s).\n", rok_from, rok_to);
-		ALERT;
 		return;
 	}
 
@@ -12654,7 +12629,6 @@ void _main_batch_mode(
 
 	// udaje su skontrolovane
 	if(result == FAILURE){
-		hlavicka((char *)html_title[_global_jazyk]);
 		Log("/* teraz result == FAILURE */\n");
 		ALERT;
 		return;
@@ -13497,11 +13471,10 @@ short int getArgv(int argc, char **argv){
 		// sem sa to nemalo dostat, pretoze najprv sme pouzili get_query_type()
 
 		// keby sa to sem vsak predsalen dostalo, dame sem nasledujucu pasaz, aby sme mohli exportovat, pretoze pred pouzitim getArgv nie je otvoreny fajl FILE_EXPORT
-		hlavicka((char *)html_title[_global_jazyk]);
+		DEBUG_GET_ARGV("Nezadane ziadne argumenty (argc == 1).\n");
+		ALERT;
 		Export("ObsluûnÈmu programu neboli zadanÈ ûiadne argumenty.\n");
 		Export("<p>getArgv();\n");
-		ALERT;
-		DEBUG_GET_ARGV("Nezadane ziadne argumenty (argc == 1).\n");
 		return FAILURE; // nie su argumenty
 	}
 	else{
@@ -14001,10 +13974,9 @@ short int getForm(void){
 		if(equals(pom_DEN, STR_EMPTY)){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_DEN));
 			if(ptr == NULL){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_DEN));
-				ALERT;
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_DEN));
+				ALERT;
+				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_DEN));
 				return FAILURE; // failure
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
@@ -14019,10 +13991,9 @@ short int getForm(void){
 		if(equals(pom_MESIAC, STR_EMPTY)){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_MESIAC));
 			if(ptr == NULL){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_MESIAC));
-				ALERT;
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_MESIAC));
+				ALERT;
+				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_MESIAC));
 				return FAILURE; // failure
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
@@ -14037,10 +14008,9 @@ short int getForm(void){
 		if(equals(pom_ROK, STR_EMPTY)){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_ROK));
 			if(ptr == NULL){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_ROK));
-				ALERT;
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_ROK));
+				ALERT;
+				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_ROK));
 				return FAILURE; // failure
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
@@ -14097,10 +14067,9 @@ short int getForm(void){
 		if(equals(pom_DEN_V_TYZDNI, STR_EMPTY)){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
 			if(ptr == NULL){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
-				ALERT;
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
+				ALERT;
+				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
 				return FAILURE; // failure
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
@@ -14115,10 +14084,9 @@ short int getForm(void){
 		if(equals(pom_TYZDEN, STR_EMPTY)){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_TYZDEN));
 			if(ptr == NULL){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_TYZDEN));
-				ALERT;
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_TYZDEN));
+				ALERT;
+				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_TYZDEN));
 				return FAILURE; // failure
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
@@ -14133,10 +14101,9 @@ short int getForm(void){
 		if(equals(pom_MODLITBA, STR_EMPTY)){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_MODLITBA));
 			if(ptr == NULL){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_MODLITBA));
-				ALERT;
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_MODLITBA));
+				ALERT;
+				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_MODLITBA));
 				return FAILURE; // failure
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
@@ -14156,10 +14123,9 @@ short int getForm(void){
 		if(equals(pom_DEN_V_TYZDNI, STR_EMPTY)){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
 			if(ptr == NULL){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
-				ALERT;
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
+				ALERT;
+				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
 				return FAILURE; // failure
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
@@ -14174,10 +14140,9 @@ short int getForm(void){
 		if(equals(pom_TYZDEN, STR_EMPTY)){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_TYZDEN));
 			if(ptr == NULL){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_TYZDEN));
-				ALERT;
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_TYZDEN));
+				ALERT;
+				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_TYZDEN));
 				return FAILURE; // failure
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
@@ -14192,10 +14157,9 @@ short int getForm(void){
 		if(equals(pom_MODLITBA, STR_EMPTY)){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_MODLITBA));
 			if(ptr == NULL){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_MODLITBA));
-				ALERT;
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_MODLITBA));
+				ALERT;
+				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_MODLITBA));
 				return FAILURE; // failure
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
@@ -14210,10 +14174,9 @@ short int getForm(void){
 		if(equals(pom_LIT_OBD, STR_EMPTY)){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_LIT_OBD));
 			if(ptr == NULL){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_LIT_OBD));
-				ALERT;
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_LIT_OBD));
+				ALERT;
+				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_LIT_OBD));
 				return FAILURE; // failure
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
@@ -14228,10 +14191,9 @@ short int getForm(void){
 		if(equals(pom_LIT_ROK, STR_EMPTY)){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_LIT_ROK));
 			if(ptr == NULL){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_LIT_ROK));
-				ALERT;
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_LIT_ROK));
+				ALERT;
+				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_LIT_ROK));
 				return FAILURE; // failure
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
@@ -14251,10 +14213,9 @@ short int getForm(void){
 		if(equals(pom_SVIATOK, STR_EMPTY)){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_NAZOV_SVIATOK));
 			if(ptr == NULL){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_NAZOV_SVIATOK));
-				ALERT;
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_NAZOV_SVIATOK));
+				ALERT;
+				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_NAZOV_SVIATOK));
 				return FAILURE; // failure
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
@@ -14274,10 +14235,9 @@ short int getForm(void){
 		if(equals(pom_ANALYZA_ROKU, STR_EMPTY)){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_ANALYZA_ROKU));
 			if(ptr == NULL){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_ANALYZA_ROKU));
-				ALERT;
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_ANALYZA_ROKU));
+				ALERT;
+				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_ANALYZA_ROKU));
 				return FAILURE; // failure
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
@@ -14303,10 +14263,9 @@ short int getForm(void){
 		if(equals(pom_MESIAC, STR_EMPTY)){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_MESIAC_ROKA));
 			if(ptr == NULL){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_MESIAC_ROKA));
-				ALERT;
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_MESIAC_ROKA));
+				ALERT;
+				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_MESIAC_ROKA));
 				return FAILURE; // failure
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
@@ -14321,10 +14280,9 @@ short int getForm(void){
 		if(equals(pom_ROK, STR_EMPTY)){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_ROK_ROKA));
 			if(ptr == NULL){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_ROK_ROKA));
-				ALERT;
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_ROK_ROKA));
+				ALERT;
+				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_ROK_ROKA));
 				return FAILURE; // failure
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
@@ -14344,10 +14302,9 @@ short int getForm(void){
 		if(equals(pom_ROK_FROM, STR_EMPTY)){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_ROK_FROM));
 			if(ptr == NULL){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_ROK_FROM));
-				ALERT;
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_ROK_FROM));
+				ALERT;
+				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_ROK_FROM));
 				return FAILURE; // failure
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
@@ -14363,10 +14320,9 @@ short int getForm(void){
 		if(equals(pom_ROK_TO, STR_EMPTY)){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_ROK_TO));
 			if(ptr == NULL){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_ROK_TO));
-				ALERT;
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_ROK_TO));
+				ALERT;
+				Export("Nebola vytvoren· systÈmov· premenn· %s.\n", ADD_WWW_PREFIX_(STR_ROK_TO));
 				return FAILURE; // failure
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
@@ -14451,9 +14407,8 @@ short int parseQueryString(void){
 
 	// 2006-08-01: doplnen· podmienka, aby nepretieklo napÂÚanie premenn˝ch, ak je ich viac
 	if((strlen(query_string) > 0) && (pocet >= MAX_VARIABLES)){
-		hlavicka((char *)html_title[_global_jazyk]);
-		Export("Program nedok·ûe obsl˙ûiù viac parametrov (maximum: %d). OstatnÈ bud˙ ignorovanÈ.\n", MAX_VARIABLES);
 		ALERT;
+		Export("Program nedok·ûe obsl˙ûiù viac parametrov (maximum: %d). OstatnÈ bud˙ ignorovanÈ.\n", MAX_VARIABLES);
 	}
 
 	// 2006-07-12: pridanÈ kvÙli jazykov˝m mut·ci·m
@@ -14602,13 +14557,12 @@ short int parseQueryString(void){
 	}// while
 
 	if(ok != ANO){
-		hlavicka((char *)html_title[_global_jazyk]);
+		ALERT;
 		// ani jeden z parametrov neobsahuje query type alebo obsahuje nezn·my qt
 		if(i >= pocet)
 			Export("Ch˝baj˙ci parameter pre query type.\n");
 		else // sÌce bol query type parameter, ale hodnota je chybn·
 			Export("Chybn˝ parameter: %s\n", param[i - 1].name);
-		ALERT;
 		return FAILURE;
 	}
 
@@ -14874,9 +14828,8 @@ short int parseQueryString(void){
 				i++;
 			}
 			if(equalsi(pom_DEN, STR_EMPTY)){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola zadan· premenn· %s.\n", STR_DEN);
 				ALERT;
+				Export("Nebola zadan· premenn· %s.\n", STR_DEN);
 				return FAILURE; // failure
 			}
 
@@ -14893,9 +14846,8 @@ short int parseQueryString(void){
 				i++;
 			}
 			if(equalsi(pom_MESIAC, STR_EMPTY)){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola zadan· premenn· %s.\n", STR_MESIAC);
 				ALERT;
+				Export("Nebola zadan· premenn· %s.\n", STR_MESIAC);
 				return FAILURE; // failure
 			}
 
@@ -14912,9 +14864,8 @@ short int parseQueryString(void){
 				i++;
 			}
 			if(equalsi(pom_ROK, STR_EMPTY)){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola zadan· premenn· %s.\n", STR_ROK);
 				ALERT;
+				Export("Nebola zadan· premenn· %s.\n", STR_ROK);
 				return FAILURE; // failure
 			}
 
@@ -14969,9 +14920,8 @@ short int parseQueryString(void){
 				i++;
 			}
 			if(equalsi(pom_DEN_V_TYZDNI, STR_EMPTY)){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola zadan· premenn· %s.\n", STR_DEN_V_TYZDNI);
 				ALERT;
+				Export("Nebola zadan· premenn· %s.\n", STR_DEN_V_TYZDNI);
 				return FAILURE; // failure
 			}
 
@@ -14988,9 +14938,8 @@ short int parseQueryString(void){
 				i++;
 			}
 			if(equalsi(pom_TYZDEN, STR_EMPTY)){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola zadan· premenn· %s.\n", STR_TYZDEN);
 				ALERT;
+				Export("Nebola zadan· premenn· %s.\n", STR_TYZDEN);
 				return FAILURE; // failure
 			}
 
@@ -15007,9 +14956,8 @@ short int parseQueryString(void){
 				i++;
 			}
 			if(equalsi(pom_MODLITBA, STR_EMPTY)){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola zadan· premenn· %s.\n", STR_MODLITBA);
 				ALERT;
+				Export("Nebola zadan· premenn· %s.\n", STR_MODLITBA);
 				return FAILURE; // failure
 			}
 
@@ -15032,9 +14980,8 @@ short int parseQueryString(void){
 				i++;
 			}
 			if(equalsi(pom_DEN_V_TYZDNI, STR_EMPTY)){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola zadan· premenn· %s.\n", STR_DEN_V_TYZDNI);
 				ALERT;
+				Export("Nebola zadan· premenn· %s.\n", STR_DEN_V_TYZDNI);
 				return FAILURE; // failure
 			}
 
@@ -15051,9 +14998,8 @@ short int parseQueryString(void){
 				i++;
 			}
 			if(equalsi(pom_TYZDEN, STR_EMPTY)){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola zadan· premenn· %s.\n", STR_TYZDEN);
 				ALERT;
+				Export("Nebola zadan· premenn· %s.\n", STR_TYZDEN);
 				return FAILURE; // failure
 			}
 
@@ -15070,9 +15016,8 @@ short int parseQueryString(void){
 				i++;
 			}
 			if(equalsi(pom_MODLITBA, STR_EMPTY)){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola zadan· premenn· %s.\n", STR_MODLITBA);
 				ALERT;
+				Export("Nebola zadan· premenn· %s.\n", STR_MODLITBA);
 				return FAILURE; // failure
 			}
 
@@ -15089,9 +15034,8 @@ short int parseQueryString(void){
 				i++;
 			}
 			if(equalsi(pom_LIT_OBD, STR_EMPTY)){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola zadan· premenn· %s.\n", STR_LIT_OBD);
 				ALERT;
+				Export("Nebola zadan· premenn· %s.\n", STR_LIT_OBD);
 				return FAILURE; // failure
 			}
 
@@ -15108,9 +15052,8 @@ short int parseQueryString(void){
 				i++;
 			}
 			if(equalsi(pom_LIT_ROK, STR_EMPTY)){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola zadan· premenn· %s.\n", STR_LIT_ROK);
 				ALERT;
+				Export("Nebola zadan· premenn· %s.\n", STR_LIT_ROK);
 				return FAILURE; // failure
 			}
 
@@ -15133,9 +15076,8 @@ short int parseQueryString(void){
 				i++;
 			}
 			if(equalsi(pom_SVIATOK, STR_EMPTY)){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola zadan· premenn· %s.\n", STR_NAZOV_SVIATOK);
 				ALERT;
+				Export("Nebola zadan· premenn· %s.\n", STR_NAZOV_SVIATOK);
 				return FAILURE; // failure
 			}
 
@@ -15158,9 +15100,8 @@ short int parseQueryString(void){
 				i++;
 			}
 			if(equalsi(pom_ANALYZA_ROKU, STR_EMPTY)){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola zadan· premenn· %s.\n", STR_ANALYZA_ROKU);
 				ALERT;
+				Export("Nebola zadan· premenn· %s.\n", STR_ANALYZA_ROKU);
 				return FAILURE; // failure
 			}
 
@@ -15183,9 +15124,8 @@ short int parseQueryString(void){
 				i++;
 			}
 			if(equalsi(pom_MESIAC, STR_EMPTY)){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola zadan· premenn· %s.\n", STR_MESIAC_ROKA);
 				ALERT;
+				Export("Nebola zadan· premenn· %s.\n", STR_MESIAC_ROKA);
 				return FAILURE; // failure
 			}
 
@@ -15202,9 +15142,8 @@ short int parseQueryString(void){
 				i++;
 			}
 			if(equalsi(pom_ROK, STR_EMPTY)){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola zadan· premenn· %s.\n", STR_ROK_ROKA);
 				ALERT;
+				Export("Nebola zadan· premenn· %s.\n", STR_ROK_ROKA);
 				return FAILURE; // failure
 			}
 
@@ -15227,9 +15166,8 @@ short int parseQueryString(void){
 				i++;
 			}
 			if(equalsi(pom_ROK_FROM, STR_EMPTY)){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola zadan· premenn· %s.\n", STR_ROK_FROM);
 				ALERT;
+				Export("Nebola zadan· premenn· %s.\n", STR_ROK_FROM);
 				return FAILURE; // failure
 			}
 
@@ -15246,9 +15184,8 @@ short int parseQueryString(void){
 				i++;
 			}
 			if(equalsi(pom_ROK_TO, STR_EMPTY)){
-				hlavicka((char *)html_title[_global_jazyk]);
-				Export("Nebola zadan· premenn· %s.\n", STR_ROK_TO);
 				ALERT;
+				Export("Nebola zadan· premenn· %s.\n", STR_ROK_TO);
 				return FAILURE; // failure
 			}
 
@@ -15502,10 +15439,8 @@ int breviar_main(int argc, char **argv){
 	initLog(FILE_LOG);
 
 	// 2005-03-29: Pridane kvoli debuggovaniu na obrazovku
-// #ifdef OS_linux
 	_main_LOG("Content-type: text/html\n");
 	_main_LOG("\n");
-// #endif
 	
 	_main_LOG("-- log file programu pre Liturgiu hodÌn (c)1999-2012 Juraj VidÈky --\n");
 
@@ -16105,10 +16040,9 @@ _main_SIMULACIA_QS:
 					Export("</ul>\n");
 					break;
 				default:
-					hlavicka((char *)html_title[_global_jazyk]);
+					ALERT;
 					Export("Intern· chyba programu.\n");
 					Export("<br>(switch(query_type); case == default)\n");
-					ALERT;
 					break;
 			}// switch(query_type)
 
@@ -16132,10 +16066,9 @@ _main_SIMULACIA_QS:
 		}
 	}// if(query_type != PRM_UNKNOWN)
 	else{
-		hlavicka((char *)html_title[_global_jazyk]);
+		ALERT;
 		Export("ObsluûnÈmu programu neboli zadanÈ vhodnÈ parametre.\n");
 		Export("<p>Nezn·my parameter: %s.\n", bad_param_str);
-		ALERT;
 	}
 
 	_main_LOG_to_Export("Deallocating memory...\n");
