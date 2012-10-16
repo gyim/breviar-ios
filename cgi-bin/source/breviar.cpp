@@ -11095,13 +11095,6 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 	_global_modlitba = p;
 	Log("modl == %s (%d, %s) -- priradene do _global_modlitba\n", modlitba, p, nazov_modlitby(p));
 
-	// rozparsovanie parametrov opt_0...opt_4, 2005-03-22; presunutÈ do define 2006-02-10;
-	// 2007-06-01: upravenÈ tak, aby sa v prÌpade nenastavenia dala hodnota GLOBAL_OPTION_NULL
-	// 2011-05-05: presunutÈ do main(); tu radöej iba zapozn·mkovanÈ
-
-	// Log("vol·m _rozparsuj_parametre_OPT z _main_rozbor_dna()...\n");
-	// _rozparsuj_parametre_OPT();
-
 	// option a (append), pridana 2003-07-08 - nastavi sa v getArgv();
 
 	// kontrola ˙dajov
@@ -11689,12 +11682,6 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 	_global_modlitba = p;
 	Log("modl == %s (%d, %s) -- priradene do _global_modlitba\n", modlitba, p, nazov_modlitby(p));
 
-	// rozparsovanie parametrov opt_0...opt_4; v define 2006-02-10 podæa _main_rozbor_dna 
-	// 2007-06-01: upravenÈ tak, aby sa v prÌpade nenastavenia dala hodnota GLOBAL_OPTION_NULL
-	// 2011-05-05: presunutÈ do main(); tu radöej iba zapozn·mkovanÈ
-	// Log("vol·m _rozparsuj_parametre_OPT z _main_dnes()...\n");
-	// _rozparsuj_parametre_OPT();
-
 	// vypis
 	Log("/* teraz vypisujem heading 1, datum %d. %s %d */\n", dnes.tm_mday, nazov_mesiaca(dnes.tm_mon - 1), dnes.tm_year);
 	// 2007-03-20: spÙsob v˝pisu d·tumu podæa jazyka 
@@ -11964,10 +11951,6 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 			_global_modlitba = MODL_KOMPLETORIUM;
 	}// nie je to nedela
 
-	// rozparsovanie parametrov opt_0...opt_4 | 2011-05-05: presunutÈ do main(); tu radöej iba zapozn·mkovanÈ
-	// Log("vol·m _rozparsuj_parametre_OPT z _main_liturgicke_obdobie()...\n");
-	// _rozparsuj_parametre_OPT();
-
 	// 2011-01-26: nastavenie niektor˝ch atrib˙tov pre _global_den
 	_global_den.denvt = d;
 	_global_den.litobd = lo;
@@ -12143,12 +12126,6 @@ void _main_analyza_roku(char *rok){
 			Export("chybnÈ ËÌslo (%s).\n", rok);
 		return;
 	}
-
-	/* rozparsovanie parametrov opt_0...opt_4 
-	 * 2011-05-05: presunutÈ do main(); tu radöej iba zapozn·mkovanÈ
-	 */
-	// Log("vol·m _rozparsuj_parametre_OPT z _main_analyza_roku()...\n");
-	// _rozparsuj_parametre_OPT();
 
 	prilep_request_options(pom2, pom3);
 
@@ -12382,11 +12359,6 @@ void _main_tabulka(char *rok_from, char *rok_to, char *tab_linky){
 		return;
 	}
 
-	// rozparsovanie parametrov opt_0...opt_4 
-	// 2011-05-05: presunutÈ do main(); tu radöej iba zapozn·mkovanÈ
-	// Log("vol·m _rozparsuj_parametre_OPT z _main_tabulka()...\n");
-	// _rozparsuj_parametre_OPT();
-
 	_export_heading_center((char *)html_text_datumy_pohyblivych_slaveni[_global_jazyk]);
 
 	Export("<center><table border CELLSPACING=1>\n");
@@ -12546,10 +12518,6 @@ void _main_batch_mode(
 	Log("mes_to == `%s' (%d)\n", mesiac_to, m_to);
 	r_to = atoi(rok_to); // vrati 0 v pripade chyby; alebo int
 	Log("rok_to == `%s' (%d)\n", rok_to, r_to);
-
-	// 2011-05-05: presunutÈ do main(); tu radöej iba zapozn·mkovanÈ
-	// Log("vol·m _rozparsuj_parametre_OPT z _main_batch_mode()...\n");
-	// _rozparsuj_parametre_OPT();
 
 	// option a (append), pridana 2003-07-08 - nastavi sa v getArgv();
 
@@ -15310,8 +15278,6 @@ void setConfigDefaults(short int jazyk){
 	Log("setConfigDefaults(%d) -- koniec.\n", jazyk);
 }// setConfigDefaults()
 
-// kedysi bolo void main;
-// 2003-07-14, kvoli gcc version 3.2.2 20030222 (Red Hat Linux 3.2.2-5) christ-net.sk 
 int breviar_main(int argc, char **argv){
 	short int i;
 
@@ -15525,25 +15491,19 @@ int breviar_main(int argc, char **argv){
 
 	_main_LOG("spustatm getSrciptParamFrom(argc == %d)...\n", argc);
 	params = getSrciptParamFrom(argc);
-	/* vysledok je, ze sa do params nacita bud
-	 * SCRIPT_PARAM_FROM_FORM alebo
-	 * SCRIPT_PARAM_FROM_QS alebo
-	 * SCRIPT_PARAM_FROM_ARGV;
-	 * ------------------------------ 01/02/2000A.D. ---
-	 *
-	 * ak vsak pouzivam aj query string, aj vysledky
-	 * z formulara, vysledok bude predsa SCRIPT_PARAM_FROM_QS, lebo
-	 * QS je neprazdny retazec; taku strategiu umoznuje uncgi.c:
-	 * ---
-	 * First, get the query string, wherever it is, and stick its
-	 * component parts into the environment.  Allow combination
-	 * GET and POST queries, even though that's a bit strange.
-	 * ---
-	 * takze v pripade, ze query string je neprazdny, treba
-	 * 1. zistit systemove premenne WWW_...
-	 * 2. zistit (a rozparsovat) QUERY_STRING
-	 *
-	 */
+	// vysledok je, ze sa do params nacita bud
+	// SCRIPT_PARAM_FROM_FORM alebo
+	// SCRIPT_PARAM_FROM_QS alebo
+	// SCRIPT_PARAM_FROM_ARGV;
+	// ------------------------------ 01/02/2000A.D. ---
+	//
+	// ak vsak pouzivam aj query string, aj vysledky z formulara, vysledok bude predsa SCRIPT_PARAM_FROM_QS, lebo QS je neprazdny retazec; 
+	// taku strategiu umoznuje uncgi.c:
+	//        First, get the query string, wherever it is, and stick its component parts into the environment.
+	//        Allow combination GET and POST queries, even though that's a bit strange.
+	// takze v pripade, ze query string je neprazdny, treba
+	// 1. zistit systemove premenne WWW_...
+	// 2. zistit (a rozparsovat) QUERY_STRING
 
 	ret = NO_RESULT;
 	switch(params){
@@ -15716,12 +15676,11 @@ _main_SIMULACIA_QS:
 		case PRM_SVIATOK:		_main_LOG_to_Export("PRM_SVIATOK\n"); break;
 		case PRM_MESIAC_ROKA:	_main_LOG_to_Export("PRM_MESIAC_ROKA\n"); break;
 		case PRM_DNES:			_main_LOG_to_Export("PRM_DNES\n"); break;
-		// pridane 2003-07-04, batch mode
 		case PRM_BATCH_MODE:	_main_LOG_to_Export("PRM_BATCH_MODE\n"); break;
 		default:				_main_LOG_to_Export("(sem by sa to nemalo dostaù)\n"); break;
 	}
 
-	_main_LOG_to_Export_PARAMS; // 2003-08-13, dane do #define
+	_main_LOG_to_Export_PARAMS;
 
 	if(query_type == PRM_MESIAC_ROKA){
 		mystrcpy(pom_DEN, STR_VSETKY_DNI, SMALL);
@@ -15731,11 +15690,10 @@ _main_SIMULACIA_QS:
 	if(query_type != PRM_UNKNOWN){
 
 		if(ret == SUCCESS){
-			// alokovanie pamate som sem premiestnil 24/02/2000A.D.
+
 			_main_LOG_to_Export("now allocating memory...\n");
 			if(_allocate_global_var() == FAILURE)
 				goto _main_end;
-			// inicializacia pridana do _allocate_global_var 2003-08-13
 
 			LOG_ciara;
 
@@ -15835,7 +15793,7 @@ _main_SIMULACIA_QS:
 			_main_LOG_to_Export("prv· kontrola include adres·ra (Ëi konËÌ oddeæovaËom `%c' [dÂûka %d])...\n", PATH_SEPARATOR, len);
 			if(include_dir[len] != (short int)PATH_SEPARATOR){
 				include_dir[len + 1] = PATH_SEPARATOR;
-				len++; // 2008-04-10: doplnenÈ
+				len++;
 				_main_LOG_to_Export("\tupravenÈ (pridanÈ na koniec reùazca): %s\n", include_dir);
 			}
 			else{
@@ -15932,7 +15890,7 @@ _main_SIMULACIA_QS:
 			Log("volanie atomodlitba() z main()... [2]\n");
 			_global_modlitba = atomodlitba(pom_MODLITBA);
 
-			// rozparsovanie parametrov opt_0...opt_4, 2005-03-22; presunutÈ do define 2006-02-10
+			// rozparsovanie parametrov opt...
 			// 2007-06-01: upravenÈ tak, aby sa v prÌpade nenastavenia dala hodnota GLOBAL_OPTION_NULL
 			// 2011-05-05: presunutÈ sem z jednotliv˝ch proced˙r: _main_rozbor_dna(), _main_dnes(), _main_liturgicke_obdobie(), _main_analyza_roku(), _main_tabulka(), _main_batch_mode()
 			Log("vol·m _rozparsuj_parametre_OPT z main()...\n");
@@ -16033,7 +15991,6 @@ _main_SIMULACIA_QS:
 
 			patka(); // 2011-07-01: doplnenÈ (eöte pred dealokovanie premenn˝ch)
 
-			// dealokovanie som sem presunul 24/02/2000A.D.
 			_deallocate_global_var();
 
 		}// if(ret == SUCCESS)
@@ -16068,7 +16025,7 @@ _main_end:
 	else
 		Log("closeExport(): success.\n");
 	closeLog();
-	return 0; // 2003-07-14, kvoli gcc version 3.2.2 20030222 (Red Hat Linux 3.2.2-5) christ-net.sk
+	return 0;
 }
 
 #ifndef SKIP_MAIN
