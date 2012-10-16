@@ -59,7 +59,7 @@ const char *html_header_1 = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Trans
 const char *html_header_css = "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"";
 const char *html_footer_1 = STR_EMPTY; // "<p><center>______</center>"; // "<hr>";
 
-const char *xml_header = "<?xml version=\"1.0\" encoding=\"%s\"?>\n";
+const char *xml_header = "<?xml version=\"1.0\" encoding=\"%s\"?>\n\n";
 
 #endif // __MYHPAGE_CPP_HTML_CONST
 
@@ -292,6 +292,7 @@ void _xml_hlavicka(FILE * expt){
 		bol_content_type_text_xml = ANO;
 	}
 	Export_to_file(expt, (char *)xml_header, charset_jazyka[_global_jazyk]);
+	Export_to_file(expt, ELEM_BEGIN(XML_MAIN)"\n");
 	Log("_xml_hlavicka() -- koniec.\n");
 	return;
 }// _xml_hlavicka()
@@ -317,15 +318,19 @@ const char *datum_template[POCET_JAZYKOV + 1] = {"%d. %s %d", "%d. %s %d", "%d. 
 const char *html_mail_label_long = "Juraj Vidéky";
 const char *html_mail_label_short = "J. V.";
 
+#define ROK 5
+
 // exportuje patku HTML dokumentu (vysledok query)
 void _patka(FILE * expt){
 	char mail_addr[MAX_MAIL_STR] = "";
 	Log("_patka() -- zaèiatok...\n");
 	_local_modlitba = _global_modlitba;
-	if((_local_modlitba == MODL_PRVE_VESPERY) || (_local_modlitba == MODL_DRUHE_VESPERY))
+	if((_local_modlitba == MODL_PRVE_VESPERY) || (_local_modlitba == MODL_DRUHE_VESPERY)){
 		_local_modlitba = MODL_VESPERY;
-	if((_local_modlitba == MODL_PRVE_KOMPLETORIUM) || (_local_modlitba == MODL_DRUHE_KOMPLETORIUM))
+	}
+	if((_local_modlitba == MODL_PRVE_KOMPLETORIUM) || (_local_modlitba == MODL_DRUHE_KOMPLETORIUM)){
 		_local_modlitba = MODL_KOMPLETORIUM;
+	}
 
 	// 2011-07-01: viackrát sa pri exporte modlitby do HTML exportovala pätka; pridaná kontrola
 	if(_global_patka_Export > 0)
@@ -335,7 +340,6 @@ void _patka(FILE * expt){
 	time_t t;
 	struct tm dnes;
 	int baserok = 1999;
-#define ROK 5
 	char rok[ROK];
 
 	time(&t);
@@ -469,6 +473,49 @@ void patka(void){
 }
 void patka(FILE * expt){
 	_patka(expt);
+}
+
+// exportuje patku XML dokumentu
+void _xml_patka(FILE * expt){
+	char mail_addr[MAX_MAIL_STR] = "";
+
+	Log("_xml_patka() -- zaèiatok...\n");
+
+	// aby sa pätka neexportovala viackrát
+	if(_global_patka_Export > 0)
+		return;
+	_global_patka_Export++;
+
+	time_t t;
+	struct tm dnes;
+	int baserok = 1999;
+
+	time(&t);
+
+	// konvertuje date/time na strukturu
+	dnes = *localtime(&t);
+	// upravenie time_check structure with the data
+	dnes.tm_year = dnes.tm_year + 1900;
+	dnes.tm_yday = dnes.tm_yday + 1;
+
+	Export_to_file(expt, ELEM_BEGIN(XML_INFO)"\n");
+	Export_to_file(expt, ELEM_BEGIN(XML_COPYRIGHT)"%s"ELEM_END(XML_COPYRIGHT)"\n", TEXT_COPYRIGHT);
+	Export_to_file(expt, ELEM_BEGIN(XML_ADDRESS)"%s"ELEM_END(XML_ADDRESS)"\n", TEXT_EMAIL);
+	Export_to_file(expt, ELEM_BEGIN(XML_GENERATED)""HTML_ISO_FORMAT""ELEM_END(XML_GENERATED)"\n", dnes.tm_year, dnes.tm_mon + 1, dnes.tm_mday);
+	Export_to_file(expt, ELEM_BEGIN(XML_BUILD_DATE)"%s"ELEM_END(XML_BUILD_DATE)"\n", BUILD_DATE);
+	Export_to_file(expt, ELEM_END(XML_INFO)"\n\n");
+
+	Export_to_file(expt, ELEM_END(XML_MAIN)"\n\n");
+
+	Log("_xml_patka() -- koniec.\n");
+	return;
+}// _xml_patka()
+
+void xml_patka(void){
+	_xml_patka(NULL);
+}
+void xml_patka(FILE * expt){
+	_xml_patka(expt);
 }
 
 #endif // __MYHPAGE_CPP_

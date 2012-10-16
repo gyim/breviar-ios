@@ -882,8 +882,15 @@ extern short int query_type; // premenna obsahujuca PRM_...
 #define FILENAME_EXPORT_MONTH_SIMPLE "%.2d%.2d"
 #define FILENAME_EXPORT_MONTH_FULL   "%.4d-%.2d"
 
-#define HTML_ISO_FORMAT "%04d-%02d-%02d"
+#define HTML_ISO_FORMAT      "%04d-%02d-%02d"
 
+#define TEXT_COPYRIGHT       "(c) 1999-2012 Juraj Vidéky"
+#define TEXT_EMAIL           "videky@breviar.sk"
+
+// main XML element
+#define XML_MAIN             "LHData"
+
+// element XML_DAY with sub-elements
 #define XML_DAY              "CalendarDay"
 #define XML_CELEBRATION      "Celebration"
 #define XML_CELEBRATION_ID   "Id"
@@ -908,6 +915,13 @@ extern short int query_type; // premenna obsahujuca PRM_...
 #define XML_LIT_NAME         "LiturgicalCelebrationName"
 #define XML_LIT_COLOR        "LiturgicalCelebrationColor"
 #define XML_LIT_CALENDAR     "LiturgicalCalendar"
+
+// element XML_INFO with sub-elements
+#define XML_INFO             "Info"
+#define XML_COPYRIGHT        "Copyright"
+#define XML_ADDRESS          "Address"
+#define XML_BUILD_DATE       "BuildDate"
+#define XML_GENERATED        "Generated"
 
 // starting, closing element (XML, HTML)
 #define ELEM_BEGIN(elem)     "<"elem">"

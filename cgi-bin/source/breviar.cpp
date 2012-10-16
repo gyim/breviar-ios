@@ -13652,12 +13652,12 @@ short int getArgv(int argc, char **argv){
 				case 'h':
 					// 2003-06-26 -- pridane -s (query string), -q psqs
 					printf("\n");
-					printf("lh - command-line verzia on-line breviara (http://www.breviar.sk)\n");
+					printf("lh - command-line verzia on-line breviara (http://breviar.sk)\n");
 					// pridane 2003-07-17
 					printf("\tProgram vytvara stranky (HTML vystup) pre Liturgiu hodin.\n");
 					// build pridany 2003-07-04
 					printf("\tBuild: %s\n", BUILD_DATE);
-					printf("\t(c)1999-2012 Juraj Vidéky <videky@breviar.sk>\n");
+					printf("\t"TEXT_COPYRIGHT" <"TEXT_EMAIL">\n");
 					printf("\n");
 					printf("\npouzitie:\n");
 					printf("\tlh [prepinac [hodnota]...]\n");
@@ -15415,7 +15415,7 @@ int breviar_main(int argc, char **argv){
 	_main_LOG("Content-type: text/html\n");
 	_main_LOG("\n");
 	
-	_main_LOG("-- log file programu pre Liturgiu hodín (c)1999-2012 Juraj Vidéky --\n");
+	_main_LOG("-- log file programu pre Liturgiu hodín "TEXT_COPYRIGHT" --\n");
 
 	_main_LOG("inicializácia po¾a pom_MODL_OPT[]...\n");
 	for(i = 0; i < POCET_GLOBAL_OPT; i++){
@@ -16000,7 +16000,13 @@ _main_SIMULACIA_QS:
 					break;
 			}// switch(query_type)
 
-			patka(); // 2011-07-01: doplnené (ešte pred dealokovanie premenných)
+			_main_LOG_to_Export("volám patka(); ... [po volaní _main_... funkcií v switch(query_type)...]\n");
+			if(query_type != PRM_TXT){
+				patka(); // 2011-07-01: doplnené (ešte pred dealokovanie premenných)
+			}
+			else{
+				xml_patka();
+			}
 
 			_deallocate_global_var();
 
@@ -16029,15 +16035,25 @@ _main_SIMULACIA_QS:
 	_main_LOG_to_Export("_global_buf\n"); free(_global_buf);
 	_main_LOG_to_Export("_global_buf2\n"); free(_global_buf2);
 	_main_LOG_to_Export("...done.\n");
+
 _main_end:
-	patka();
+
+	_main_LOG_to_Export("volám patka(); ... [_main_end:...]\n");
+	if(query_type != PRM_TXT){
+		patka();
+	}
+	else{
+		xml_patka();
+	}
+
 	if(closeExport() == EOF)
 		Log("closeExport(): error closing file (return == EOF)\n");
 	else
 		Log("closeExport(): success.\n");
 	closeLog();
+
 	return 0;
-}
+}// breviar_main()
 
 #ifndef SKIP_MAIN
 int main(int argc, char **argv) {

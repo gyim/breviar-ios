@@ -34,6 +34,9 @@ void xml_hlavicka(FILE * expt);
 // exportuje patku HTML dokumentu (vysledok query)
 void patka(void);
 void patka(FILE * expt);
+// exportuje patku XML dokumentu
+void xml_patka(void);
+void xml_patka(FILE * expt);
 
 void myhpage_init_globals();
 
