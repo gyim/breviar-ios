@@ -37,15 +37,15 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <time.h> /* kvoli time_t a time(); */
-#include "myconf.h" /* kvoli cfg_MAIL_ADDRESS_default a cfg_HTTP_ADDRESS_default; pridane 30/03/2000A.D. */
+#include <time.h> // kvoli time_t a time();
+#include "myconf.h" // kvoli cfg_MAIL_ADDRESS_default a cfg_HTTP_ADDRESS_default; pridane 30/03/2000A.D.
 #include "myhpage.h"
-#include "mydefs.h" /* kvoli #ifdef DEBUG; a tiez HTML_ - pridane 2003-07-02 */
+#include "mydefs.h" // kvoli #ifdef DEBUG; a tiez HTML_ - pridane 2003-07-02
 #include "myexpt.h"
-#include "mystring.h" /* kvoli mystrcpy, 2003-07-01 */
+#include "mystring.h" // kvoli mystrcpy, 2003-07-01
 #include "mylog.h"
-#include "breviar.h" /* 2006-07-31 kvÙli jazyku a css (2008-08-08) */
-#include "liturgia.h" /* 2006-07-31 kvÙli jazyku */
+#include "breviar.h" // 2006-07-31 kvÙli jazyku a css (2008-08-08)
+#include "liturgia.h" // 2006-07-31 kvÙli jazyku
 #include "mybuild.h" // 2011-07-11: pridanÈ, kvÙli BUILD_DATE
 
 short int bol_content_type_text_html = NIE;
@@ -58,7 +58,7 @@ const char *html_header_1 = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Trans
 const char *html_header_css = "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"";
 const char *html_footer_1 = STR_EMPTY; // "<p><center>______</center>"; // "<hr>";
 
-#endif /* __MYHPAGE_CPP_HTML_CONST */
+#endif // __MYHPAGE_CPP_HTML_CONST
 
 #define MAX_MAIL_LABEL 20
 #define MAX_EXT 5
@@ -79,7 +79,7 @@ void _header_css(FILE* expt, short int level, const char* nazov_css_suboru) {
 	Export_to_file(expt, html_header_css);
 #ifdef	EXPORT_CMDLINE_CSS
 	// pre command-line pouûitie (aj pre batch mÛd): "./breviar.css" resp. ".\breviar.css"
-	/* 2009-08-03: level oznaËuje poËet adres·rov, o ktorÈ je treba Ìsù "hore" (pre mesaËn˝ export) */
+	// 2009-08-03: level oznaËuje poËet adres·rov, o ktorÈ je treba Ìsù "hore" (pre mesaËn˝ export)
 	if(level == 0 && _global_opt_batch_monthly == ANO)
 		level = 1;
 	if(level < 0 || level > 5)
@@ -102,7 +102,7 @@ void _header_css(FILE* expt, short int level, const char* nazov_css_suboru) {
 	Export_to_file(expt, "%s\">\n", nazov_css_suboru); // n·zov css s˙boru
 }
 
-/* exportuje hlavicku HTML dokumentu, kam pojde vysledok query */
+// exportuje hlavicku HTML dokumentu, kam pojde vysledok query
 void _hlavicka(char *title, FILE * expt, short int level, short int spec){
 	Log("_hlavicka() -- zaËiatok...\n");
 
@@ -118,10 +118,8 @@ void _hlavicka(char *title, FILE * expt, short int level, short int spec){
 		return;
 	}
 	_global_hlavicka_Export++;
-	/* 
-	 * 2003-07-01, pridane pripadne citanie zo suboru
-	 * 2008-08-08: ËÌtanie zo s˙boru odstr·nenÈ
-	 */
+	// 2003-07-01, pridane pripadne citanie zo suboru
+	// 2008-08-08: ËÌtanie zo s˙boru odstr·nenÈ
 	const char *nazov_css_suboru;
 	if(_global_css == CSS_UNDEF){
 		nazov_css_suboru = nazov_css[CSS_breviar_sk];
@@ -131,11 +129,9 @@ void _hlavicka(char *title, FILE * expt, short int level, short int spec){
 	}// else
 	Log("nazov_css_suboru == %s...\n", nazov_css_suboru);
 
-	/*
-	 * 2011-05-05: nastavenie font-family
-	 *             zatiaæ len pevnÈ reùazce; Ëasom moûno bude premenn· pre n·zov fontu
-	 * 2011-05-06: doplnenÈ: najprv sa testuje nastavenie _global_font; n·sledne sa prÌpadne nastavia defaulty
-	 */
+	// 2011-05-05: nastavenie font-family
+	//             zatiaæ len pevnÈ reùazce; Ëasom moûno bude premenn· pre n·zov fontu
+	// 2011-05-06: doplnenÈ: najprv sa testuje nastavenie _global_font; n·sledne sa prÌpadne nastavia defaulty
 	if((_global_font == FONT_UNDEF) || (_global_font == FONT_CHECKBOX)){
 		Log("(_global_font == FONT_UNDEF) || (_global_font == FONT_CHECKBOX)...\n");
 		if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_FAMILY) == BIT_OPT_2_FONT_FAMILY){
@@ -146,7 +142,7 @@ void _hlavicka(char *title, FILE * expt, short int level, short int spec){
 			Log("NOT _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_FAMILY...\n");
 			mystrcpy(_global_css_font_family, DEFAULT_FONT_FAMILY_SERIF, SMALL);
 		}
-	}/* (_global_font == FONT_UNDEF)  || (_global_font == FONT_CHECKBOX) */
+	}// (_global_font == FONT_UNDEF)  || (_global_font == FONT_CHECKBOX)
 	else if(_global_font == FONT_CSS){
 		Log("_global_font == FONT_CSS...\n");
 		mystrcpy(_global_css_font_family, DEFAULT_FONT_FAMILY_INHERIT, SMALL);
@@ -180,11 +176,10 @@ void _hlavicka(char *title, FILE * expt, short int level, short int spec){
 		bol_content_type_text_html = ANO;
 	}
 	Log("creating header...\n");
-	/* 2003-07-15, zmenene na hlavicku pre css-ko; zrusene <style>
-	 * 2008-08-08: pridanÈ dynamicky css-ko
-	 * 2010-02-15: statickÈ texty do konöt·nt
-	 * 2011-05-18: charset sa nastavÌ podæa jazyka
-	 */
+	// 2003-07-15, zmenene na hlavicku pre css-ko; zrusene <style>
+	// 2008-08-08: pridanÈ dynamicky css-ko
+	// 2010-02-15: statickÈ texty do konöt·nt
+	// 2011-05-18: charset sa nastavÌ podæa jazyka
 	Log("<head>...\n");
 	Export_to_file(expt, (char *)html_header_1, charset_jazyka[_global_jazyk]);
         _header_css(expt, level, nazov_css_suboru);
@@ -197,9 +192,8 @@ void _hlavicka(char *title, FILE * expt, short int level, short int spec){
 	Log("</head>...\n");
 
 	Log("<body>...\n");
-	/* 2011-05-05: pridanie font-family 
-	 * 2011-05-06: font sa neprid·va vûdy
-	 */
+	// 2011-05-05: pridanie font-family 
+	// 2011-05-06: font sa neprid·va vûdy
 	Export_to_file(expt, "<body");
 	if((_global_font != FONT_CSS) || (_global_font_size != FONT_SIZE_CSS)){
 		Export_to_file(expt, " style=\"");
@@ -214,13 +208,13 @@ void _hlavicka(char *title, FILE * expt, short int level, short int spec){
 		}
 		Export_to_file(expt, "\"");
 	}
-	/* 2010-02-15: kvÙli öpeci·lnemu "zoznam.htm" */
+	// 2010-02-15: kvÙli öpeci·lnemu "zoznam.htm"
 	if(spec == 1){
 		Export_to_file(expt, " onLoad=\"fn_aktualne(0,0,0)\"");
 	}
 	Export_to_file(expt, ">\n");
 
-	/* 2010-02-15: doplnenÈ predoöl· a nasledovn· modlitba */
+	// 2010-02-15: doplnenÈ predoöl· a nasledovn· modlitba
 	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
 		Export_to_file(expt, "<center>\n");
 		pismeno_modlitby = CHAR_MODL_NEURCENA;
@@ -267,7 +261,7 @@ void _hlavicka(char *title, FILE * expt, short int level, short int spec){
 		}
 		Export_to_file(expt, "</p>");
 		Export_to_file(expt, "</center>\n");
-	}/* << predoöl· | ^ hore | nasledovn· >> */
+	}// << predoöl· | ^ hore | nasledovn· >>
 	Log("_hlavicka() -- koniec.\n");
 	return;
 }// _hlavicka()
@@ -279,7 +273,6 @@ void hlavicka(char *title, FILE * expt, short int level, short int spec){
 	_hlavicka(title, expt, level, spec);
 }
 
-/* 2008-01-23: upravenÈ */
 //const char *gpage[] = {"Generovan· str·nka", "Str·nky jsou generov·ny", "Generated page", "Generated"};
 const char *gpage[POCET_JAZYKOV + 1] = {"GenerovanÈ: ", "Generov·no: ", "Generated: ", "Generated: ", "Generated: ", "Generov·no: ", "Gener·lva: "};
 // GenerovanÈ + d·tum: "%d. %s %d, %02d:%02d:%02d" -- pÙvodne to bolo v z·tvork·ch
@@ -294,7 +287,7 @@ const char *datum_template[POCET_JAZYKOV + 1] = {"%d. %s %d", "%d. %s %d", "%d. 
 const char *html_mail_label_long = "Juraj VidÈky";
 const char *html_mail_label_short = "J. V.";
 
-/* exportuje patku HTML dokumentu (vysledok query) */
+// exportuje patku HTML dokumentu (vysledok query)
 void _patka(FILE * expt){
 	char mail_addr[MAX_MAIL_STR] = "";
 	Log("_patka() -- zaËiatok...\n");
@@ -304,7 +297,7 @@ void _patka(FILE * expt){
 	if((_local_modlitba == MODL_PRVE_KOMPLETORIUM) || (_local_modlitba == MODL_DRUHE_KOMPLETORIUM))
 		_local_modlitba = MODL_KOMPLETORIUM;
 
-	/* 2011-07-01: viackr·t sa pri exporte modlitby do HTML exportovala p‰tka; pridan· kontrola */
+	// 2011-07-01: viackr·t sa pri exporte modlitby do HTML exportovala p‰tka; pridan· kontrola
 	if(_global_patka_Export > 0)
 		return;
 	_global_patka_Export++;
@@ -317,9 +310,9 @@ void _patka(FILE * expt){
 
 	time(&t);
 
-	/* konvertuje date/time na strukturu */
+	// konvertuje date/time na strukturu
 	dnes = *localtime(&t);
-	/* upravenie time_check structure with the data */
+	// upravenie time_check structure with the data
 	dnes.tm_year = dnes.tm_year + 1900;
 	dnes.tm_yday = dnes.tm_yday + 1;
 	mystrcpy(rok, STR_EMPTY, ROK);
@@ -327,7 +320,7 @@ void _patka(FILE * expt){
 		sprintf(rok, "-%d", dnes.tm_year);
 	}
 
-	/* 2010-02-15: vloûenÈ "^ hore" podæa hlavicka(); doplnenÈ predoöl· a nasledovn· modlitba */
+	// 2010-02-15: vloûenÈ "^ hore" podæa hlavicka(); doplnenÈ predoöl· a nasledovn· modlitba
 	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
 		Export_to_file(expt, "<center>\n");
 		pismeno_modlitby = CHAR_MODL_NEURCENA;
@@ -374,7 +367,7 @@ void _patka(FILE * expt){
 		}
 		Export_to_file(expt, "</p>");
 		Export_to_file(expt, "</center>\n");
-	}/* << predoöl· | ^ hore | nasledovn· >> */
+	}// << predoöl· | ^ hore | nasledovn· >>
 
 	Export_to_file(expt, (char *)html_footer_1);
 
@@ -387,25 +380,24 @@ void _patka(FILE * expt){
 	}
 
 	Export("\n");
-	/* 2010-02-15: celÈ zapozn·mkovanÈ 
-	 * 2011-07-01: pre web sa exportuje
-	 */
+	// 2010-02-15: celÈ zapozn·mkovanÈ 
+	// 2011-07-01: pre web sa exportuje
 	Export_to_file(expt, "<"HTML_P_PATKA">\n");
 #ifdef BEHAVIOUR_WEB
 	if(_global_opt_batch_monthly == ANO && query_type != PRM_BATCH_MODE){
 		Export_to_file(expt, "%s\n", gpage[_global_jazyk]);
-		/* Export_to_file(expt, "(%s). ", ctime(&t) + 4); */
-		/* 2008-12-22: odvetvenÈ - pre commandline export (do s˙boru) sa netlaËÌ Ëasov· zloûka, kedy bolo HTML generovanÈ */
+		// Export_to_file(expt, "(%s). ", ctime(&t) + 4);
+		// 2008-12-22: odvetvenÈ - pre commandline export (do s˙boru) sa netlaËÌ Ëasov· zloûka, kedy bolo HTML generovanÈ
 #if defined(EXPORT_TO_FILE) && !defined(IO_ANDROID)
 		Export_to_file(expt, (char *)datum_template[_global_jazyk],
 			dnes.tm_mday,
-			nazov_mesiaca(dnes.tm_mon) /* nm[dnes.tm_mon] */,
+			nazov_mesiaca(dnes.tm_mon), // nm[dnes.tm_mon]
 			dnes.tm_year
 			);
 #else
 		Export_to_file(expt, (char *)datum_cas_template[_global_jazyk],
 			dnes.tm_mday,
-			nazov_mesiaca(dnes.tm_mon) /* nm[dnes.tm_mon] */,
+			nazov_mesiaca(dnes.tm_mon), // nm[dnes.tm_mon]
 			dnes.tm_year,
 			dnes.tm_hour,
 			dnes.tm_min
@@ -414,15 +406,15 @@ void _patka(FILE * expt){
 #endif
 		Export_to_file(expt, ". ");
 	}
-	/* nezabudni zmenit #define BUILD_DATE v mydefs.h (2003-07-15) */
+	// nezabudni zmenit #define BUILD_DATE v mydefs.h (2003-07-15)
 	Export_to_file(expt, (char *)build_template[_global_jazyk], BUILD_DATE);
 
-	/* zapoznamkovane, 2003-06-30 */
-	/* Export_to_file(expt, "KÛdovanie Windows-1250 (Central European).\n"); */
+	// zapoznamkovane, 2003-06-30
+	// Export_to_file(expt, "KÛdovanie Windows-1250 (Central European).\n");
 	Export_to_file(expt, "<br>\n");
 #endif
 
-	/* pridana stranka cfg_HTTP_ADDRESS_default, 12/04/2000A.D. */
+	// pridana stranka cfg_HTTP_ADDRESS_default, 12/04/2000A.D.
 	Export_to_file(expt, "<"HTML_LINK_NORMAL" href=\"%s\" target=\"_top\">%s</a>\n", cfg_HTTP_ADDRESS_default, cfg_HTTP_DISPLAY_ADDRESS_default);
 	if(_global_jazyk == JAZYK_HU){
 		Log("cfg_MAIL_ADDRESS_default_HU == %s\n", cfg_MAIL_ADDRESS_default_HU);
@@ -435,7 +427,7 @@ void _patka(FILE * expt){
 	Log("mail_addr == %s\n", mail_addr);
 	Export_to_file(expt, "&#169; %d%s <"HTML_LINK_NORMAL" href=\"mailto:%s\">%s</a>\n", baserok, rok, mail_addr, html_mail_label);
 
-	Export_to_file(expt, "</p>\n"); /* pridane kvoli tomu, ze cele to bude <p class="patka">, 2003-07-02 */
+	Export_to_file(expt, "</p>\n"); // pridane kvoli tomu, ze cele to bude <p class="patka">, 2003-07-02
 
 	Export_to_file(expt, "</body>\n</html>\n");
 	Log("_patka() -- koniec.\n");
@@ -449,4 +441,4 @@ void patka(FILE * expt){
 	_patka(expt);
 }
 
-#endif /* __MYHPAGE_CPP_ */
+#endif // __MYHPAGE_CPP_
