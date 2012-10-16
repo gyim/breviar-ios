@@ -210,22 +210,24 @@ extern short int query_type; // premenna obsahujuca PRM_...
 
 #define PRM_TXT 	20
 #ifdef LONG_PARAM_NAMES
-	#define STR_PRM_TXT "PRM_DATUM_TXT"
+	#define STR_PRM_TXT "PRM_TXT_EXPORT"
 #else
 	#define STR_PRM_TXT "ptxt"
 #endif
 
-/* nasleduju parametre z formularov pre vsetky typy dotazov,
- * kedysi bolo pre kazdy STR_... definovane WWW_STR_...,
- * teraz ADD_WWW_PREFIX_(STR_...) 
- * 
- * 2004-08-14, duurko
- * definicia ADD_WWW_PREFIX_(a) ("WWW_"##a) 
- * ktora bola OK na g++ (gcc version 2.95.4 20011002)
- * sposobovala problemy 
- * na g++ (gcc version 3.3.3 20040412)
- * preto zmenene na ADD_WWW_PREFIX_(a) ("WWW_"a)
- */
+#define PRM_XML 	19
+#ifdef LONG_PARAM_NAMES
+	#define STR_PRM_XML "PRM_XML_EXPORT"
+#else
+	#define STR_PRM_XML "pxml"
+#endif
+
+// nasleduju parametre z formularov pre vsetky typy dotazov,
+// kedysi bolo pre kazdy STR_... definovane WWW_STR_..., teraz ADD_WWW_PREFIX_(STR_...) 
+// 2004-08-14: 
+// definicia ADD_WWW_PREFIX_(a) ("WWW_"##a) ktora bola OK na g++ (gcc version 2.95.4 20011002)
+// sposobovala problemy na g++ (gcc version 3.3.3 20040412)
+// preto zmenene na ADD_WWW_PREFIX_(a) ("WWW_"a)
 #define WWW_PREFIX "WWW_"
 #define ADD_WWW_PREFIX_(a) ("WWW_"a)
 
