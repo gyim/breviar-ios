@@ -441,7 +441,7 @@ void _patka(FILE * expt){
 
 	// zapoznamkovane, 2003-06-30
 	// Export_to_file(expt, "Kódovanie Windows-1250 (Central European).\n");
-	Export_to_file(expt, "<br>\n");
+	Export_to_file(expt, HTML_LINE_BREAK"\n");
 #endif
 
 	// pridana stranka cfg_HTTP_ADDRESS_default, 12/04/2000A.D.
