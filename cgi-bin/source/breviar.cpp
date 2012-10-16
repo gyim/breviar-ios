@@ -4238,9 +4238,8 @@ short int kontrola_den_mesiac_rok(short int den, short int mesiac, short int rok
 	return SUCCESS;
 }// kontrola_den_mesiac_rok()
 
-/* popis: vr·ti ËÌslo liturgickÈho obdobia (0--6), ak sa lo == cezroËnÈ atÔ...
- *        inak vr·ti OBD_CEZ_ROK (cezroËnÈ obdobie)
- */
+// popis: vr·ti ËÌslo liturgickÈho obdobia (0--6), ak sa lo == cezroËnÈ atÔ...
+//        inak vr·ti OBD_CEZ_ROK (cezroËnÈ obdobie)
 short int atolitobd(char *lo){
 	short int i = 0;
 	Log("lo == '%s'\n", lo);
@@ -4259,9 +4258,8 @@ short int atolitobd(char *lo){
 	// return OBD_CEZ_ROK;
 }// atolitobd()
 
-/* popis: vrati cislo dna (0--6), ak sa den == pondelok...
- *			 inak vrati UNKNOWN_DEN
- */
+// popis: vr·ti ËÌslo dÚa (0--6), ak sa den == pondelok...
+//        inak vr·ti UNKNOWN_DEN
 short int atodenvt(char *den){
 	short int i = 0;
 	do{
@@ -4276,10 +4274,9 @@ short int atodenvt(char *den){
 	// return DEN_UNKNOWN;
 }// atodenvt()
 
-/* popis: vrati int (cislo dna 1--31), ak sa den == 1,2...
- *        alebo (ako den == STR_VSETKY_DNI) vrati VSETKY_DNI;
- *        v pripade inych udajov vrati 0
- */
+// popis: vr·ti int (ËÌslo dÚa 1--31), ak sa den == 1,2...
+//        alebo (ako den == STR_VSETKY_DNI) vr·ti VSETKY_DNI;
+//        v pripade in˝ch ˙dajov vr·ti 0
 short int atoden(char *den){
 	short int d;
 	if(equals(den, STR_VSETKY_DNI))
@@ -4288,12 +4285,11 @@ short int atoden(char *den){
 		d = atoi(den);
 		return ((d < 0) || (d > 31)) ? 0 : d;
 	}
-}/* atoden() */
+}// atoden()
 
-/* popis: vrati cislo mesiaca (0--11), ak sa den == januar...
- *        alebo vrati VSETKY_MESIACE,  ak den == STR_VSETKY_MESIACE;
- *        inak vrati UNKNOWN_MESIAC
- */
+// popis: vr·ti ËÌslo mesiaca (0--11), ak sa den == januar...
+//        alebo vr·ti VSETKY_MESIACE, ak den == STR_VSETKY_MESIACE;
+//        inak vr·ti UNKNOWN_MESIAC
 short int atomes(char *mesiac){
 	// sprintf(pom_MESIAC, "%d", cislo_mesiaca(pom_MESIAC));
 	if(equals(mesiac, STR_VSETKY_MESIACE))
@@ -4330,10 +4326,8 @@ short int atomes(char *mesiac){
 	return UNKNOWN_MESIAC;
 }// atomes()
 
-/* 2006-07-12: vytvorenÈ kvÙli jazykov˝m mut·ci·m
- * popis: vr·ti ËÌslo jazyka 
- *        inak vrati JAZYK_UNDEF
- */
+// popis: vr·ti ËÌslo jazyka 
+//        inak vr·ti JAZYK_UNDEF
 short int atojazyk(char *jazyk){
 	short int i = 0;
 	do{
@@ -4345,11 +4339,9 @@ short int atojazyk(char *jazyk){
 	return JAZYK_UNDEF;
 }// atojazyk()
 
-/* 2010-08-04: vytvorenÈ kvÙli jazykov˝m mut·ci·m -- kalend·r, napr. rehoæn˝
- * popis: vr·ti ËÌslo kalend·ra
- *        inak vrati KALENDAR_NEURCENY
- * 2010-10-11: doplnenÈ porovnanie aj s nazov_slavenia_lokal_kalendar[]
- */
+// popis: vr·ti ËÌslo kalend·ra, napr. rehoæn˝
+//        inak vr·ti KALENDAR_NEURCENY
+// 2010-10-11: doplnenÈ porovnanie aj s nazov_slavenia_lokal_kalendar[]
 short int atokalendar(char *kalendar){
 	short int i = 0;
 	do{
@@ -4361,10 +4353,8 @@ short int atokalendar(char *kalendar){
 	return KALENDAR_NEURCENY;
 }// atokalendar()
 
-/* 2008-08-08: vytvorenÈ kvÙli rÙznym css-k·m
- * popis: vr·ti ËÌslo css-ka
- *        inak vrati CSS_UNDEF
- */
+// popis: vr·ti ËÌslo css-ka
+//        inak vr·ti CSS_UNDEF
 short int atocss(char *css){
 	short int i = 0;
 	do{
@@ -4376,10 +4366,8 @@ short int atocss(char *css){
 	return CSS_UNDEF;
 }// atocss()
 
-/* 2011-05-06: vytvorenÈ kvÙli n·zvom fontov
- * popis: vr·ti ËÌslo fontu
- *        inak vrati FONT_UNDEF
- */
+// popis: vr·ti ËÌslo fontu
+//        inak vr·ti FONT_UNDEF
 short int atofont(char *font){
 	short int i = 0;
 	do{
@@ -4397,10 +4385,8 @@ short int atofont(char *font){
 	return FONT_UNDEF;
 }// atofont()
 
-/* 2011-05-13: vytvorenÈ kvÙli veækosti fontov
- * popis: vr·ti index veækosti fontu
- *        inak vrati FONT_SIZE_UNDEF
- */
+// popis: vr·ti index veækosti fontu
+//        inak vr·ti FONT_SIZE_UNDEF
 short int atofontsize(char *font){
 	short int i = 0;
 	do{
@@ -4414,6 +4400,63 @@ short int atofontsize(char *font){
 	}while(i <= POCET_FONT_SIZE);
 	return FONT_SIZE_UNDEF;
 }// atofontsize()
+
+// 2006-02-10: nov˝ define; pouûÌva premennÈ int i, p 
+// 2006-10-11: odpozn·mkovanÈ invitatÛrium a kompletÛrium
+// 2011-05-11: moûno by bolo osoûnÈ prerobiù öt˝lom funkcie atodenvt(), atoden(), atomes()... [ToDo] -> #define _parsuj_parameter_MODLITBA(modlitba, p) | 2012-10-16: hotovo
+// 2011-10-03: doplnenÈ MODL_VSETKY
+// popis: vr·ti ËÌslo modlitby
+//        inak vr·ti MODL_NEURCENA
+short int atomodlitba(char *modlitba){
+	short int p = MODL_NEURCENA;
+	// rozparsovanie parametra modlitba
+	Log("/* rozparsovanie parametra modlitba */\n");
+	if(equals(modlitba, STR_EMPTY))
+		p = MODL_NEURCENA;
+	else if(equals(modlitba, STR_MODL_VSETKY))
+		p = MODL_VSETKY;
+	else if(equals(modlitba, STR_MODL_DETAILY))
+		p = MODL_DETAILY;
+	else if(equals(modlitba, STR_MODL_INVITATORIUM))
+		p = MODL_INVITATORIUM;
+	else if(equals(modlitba, STR_MODL_RANNE_CHVALY))
+		p = MODL_RANNE_CHVALY;
+	else if(equals(modlitba, STR_MODL_POSV_CITANIE))
+		p = MODL_POSV_CITANIE;
+	else if(equals(modlitba, STR_MODL_PREDPOLUDNIM))
+		p = MODL_PREDPOLUDNIM;
+	else if(equals(modlitba, STR_MODL_NAPOLUDNIE))
+		p = MODL_NAPOLUDNIE;
+	else if(equals(modlitba, STR_MODL_POPOLUDNI))
+		p = MODL_POPOLUDNI;
+	else if(equals(modlitba, STR_MODL_VESPERY))
+		p = MODL_VESPERY;
+	else if(equals(modlitba, STR_MODL_KOMPLETORIUM))
+		p = MODL_KOMPLETORIUM;
+	// 2011-03-22 pridanÈ prvÈ veöpery a kompletÛrium po prv˝ch veöper·ch (experiment·lne)
+	else if(equals(modlitba, STR_MODL_PRVE_VESPERY))
+		p = MODL_PRVE_VESPERY;
+	else if(equals(modlitba, STR_MODL_PRVE_KOMPLETORIUM))
+		p = MODL_PRVE_KOMPLETORIUM;
+	else
+		p = MODL_NEURCENA;
+	// este treba skontrolovat, ci nazov modlitby nie je string ...azov_modlitby[...]
+	if(p == MODL_NEURCENA){
+		// postupne porovnavame s troma konstantami, nazov_[modlitby|Modlitby|MODLITBY], a to pre konstanty MODL_INVITATORIUM -- MODL_VSETKY (vratane)
+		Log("/* druh˝ pokus urËenia modlitby podæa jazykovo z·visl˝ch reùazcov pre modlitba == `%s' */\n", modlitba);
+		for(int pom_i = MODL_INVITATORIUM; pom_i <= MODL_VSETKY; pom_i++){
+			Log("/* step: %d `%s'... */\n", pom_i, nazov_modlitby(pom_i));
+			if(equals(modlitba, nazov_modlitby(pom_i)) || 
+				equals(modlitba, nazov_Modlitby(pom_i)) || 
+				equals(modlitba, nazov_MODLITBY(pom_i))){
+				// ak je zhoda, potom prirad do p a ukonci `for'
+				p = pom_i;
+				break;
+			}
+		}// for pom_i
+	}
+	return p;
+}// atomodlitba()
 
 //---------------------------------------------------------------------
 /* _rozbor_dna()
@@ -10682,66 +10725,6 @@ void rozbor_mesiaca(short int mesiac, short int rok, short int typ_exportu = EXP
 	Log("-- rozbor_mesiaca(%d/%d): koniec\n", mesiac, rok);
 }// rozbor_mesiaca();
 
-/* 2006-02-10: nov˝ define; pouûÌva premennÈ int i, p 
- * 2006-10-11: odpozn·mkovanÈ invitatÛrium a kompletÛrium
- * 2011-05-11: moûno by bolo osoûnÈ prerobiù öt˝lom funkcie atodenvt(), atoden(), atomes()... [ToDo]
- * 2011-10-03: doplnenÈ MODL_VSETKY
- */
-#define _parsuj_parameter_MODLITBA(modlitba, p) {\
-	/* rozparsovanie parametra modlitba */\
-	Log("/* rozparsovanie parametra modlitba */\n");\
-	if(equals(modlitba, STR_EMPTY))\
-		p = MODL_NEURCENA;\
-	else if(equals(modlitba, STR_MODL_VSETKY))\
-		p = MODL_VSETKY;\
-	else if(equals(modlitba, STR_MODL_DETAILY))\
-		p = MODL_DETAILY;\
-	else if(equals(modlitba, STR_MODL_INVITATORIUM))\
-		p = MODL_INVITATORIUM;\
-	else if(equals(modlitba, STR_MODL_RANNE_CHVALY))\
-		p = MODL_RANNE_CHVALY;\
-	/* 2003-08-11 pridana modlitba posvatneho citania */\
-	else if(equals(modlitba, STR_MODL_POSV_CITANIE))\
-		p = MODL_POSV_CITANIE;\
-	/* 2003-07-15 pridane modlitby cez den */\
-	else if(equals(modlitba, STR_MODL_PREDPOLUDNIM))\
-		p = MODL_PREDPOLUDNIM;\
-	else if(equals(modlitba, STR_MODL_NAPOLUDNIE))\
-		p = MODL_NAPOLUDNIE;\
-	else if(equals(modlitba, STR_MODL_POPOLUDNI))\
-		p = MODL_POPOLUDNI;\
-	else if(equals(modlitba, STR_MODL_VESPERY))\
-		p = MODL_VESPERY;\
-	else if(equals(modlitba, STR_MODL_KOMPLETORIUM))\
-		p = MODL_KOMPLETORIUM;\
-	/* 2011-03-22 pridanÈ prvÈ veöpery a kompletÛrium po prv˝ch veöper·ch (experiment·lne) */\
-	else if(equals(modlitba, STR_MODL_PRVE_VESPERY))\
-		p = MODL_PRVE_VESPERY;\
-	else if(equals(modlitba, STR_MODL_PRVE_KOMPLETORIUM))\
-		p = MODL_PRVE_KOMPLETORIUM;\
-	else\
-		p = MODL_NEURCENA;\
-	/* este treba skontrolovat, ci nazov modlitby nie je\
-	 * string ...azov_modlitby[...] */\
-	if(p == MODL_NEURCENA){\
-		/* postupne porovnavame s troma konstantami,\
-		 * nazov_[modlitby|Modlitby|MODLITBY],\
-		 * a to pre konstanty MODL_INVITATORIUM -- MODL_VSETKY (vratane)\
-		 */\
-		Log("/* druh˝ pokus urËenia modlitby podæa jazykovo z·visl˝ch reùazcov pre modlitba == `%s' */\n", modlitba);\
-		for(int pom_i = MODL_INVITATORIUM; pom_i <= MODL_VSETKY; pom_i++){\
-			Log("/* step: %d `%s'...\n */", pom_i, nazov_modlitby(pom_i));\
-			if(equals(modlitba, nazov_modlitby(pom_i)) || \
-				equals(modlitba, nazov_Modlitby(pom_i)) || \
-				equals(modlitba, nazov_MODLITBY(pom_i))){\
-				/* ak je zhoda, potom prirad do p a ukonci `for' */\
-				p = pom_i;\
-				break;\
-			}\
-		}\
-	}\
-}
-
 void log_pom_MODL_OPT(void){
 	short int i;
 	for(i = 0; i < POCET_GLOBAL_OPT; i++){
@@ -11112,8 +11095,8 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 	Log("sv == `%s' (upravenÈ na %d)\n", poradie_svaty, s);
 
 	// rozparsovanie parametra modlitba
-	Log("volanie _parsuj_parameter_MODLITBA() z _main_rozbor_dna()...\n");
-	_parsuj_parameter_MODLITBA(modlitba, p);
+	Log("volanie atomodlitba() z _main_rozbor_dna()...\n");
+	p = atomodlitba(modlitba);
 
 	_global_modlitba = p;
 	Log("modl == %s (%d, %s) -- priradene do _global_modlitba\n", modlitba, p, nazov_modlitby(p));
@@ -11708,8 +11691,8 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 	Log("sv == `%s' (upravenÈ na %d)\n", poradie_svaty, s);
 
 	// rozparsovanie parametra modlitba
-	Log("volanie _parsuj_parameter_MODLITBA() z _main_dnes()...\n");
-	_parsuj_parameter_MODLITBA(modlitba, p);
+	Log("volanie atomodlitba() z _main_dnes()...\n");
+	p = atomodlitba(modlitba);
 
 	_global_modlitba = p;
 	Log("modl == %s (%d, %s) -- priradene do _global_modlitba\n", modlitba, p, nazov_modlitby(p));
@@ -15699,8 +15682,8 @@ int breviar_main(int argc, char **argv){
 				}
 				else{
 					// 2010-02-15? pridanÈ: rozparsovanie parametra modlitba
-					Log("volanie _parsuj_parameter_MODLITBA() z main()... [1]\n");
-					_parsuj_parameter_MODLITBA(pom_MODLITBA, _global_modlitba);
+					Log("volanie atomodlitba() z main()... [1]\n");
+					_global_modlitba = atomodlitba(pom_MODLITBA);
 					if(_global_opt_append == YES){
 						// pridame na koniec nazvu suboru "+" aby to vedel initExport()
 						strcat(file_export, "+");
@@ -15753,7 +15736,7 @@ _main_SIMULACIA_QS:
 			ret = parseQueryString();
 			_main_LOG_to_Export("---parsing query string: finished.\n");
 
-			Log("2005-08-15, pomocn˝ v˝pis: query_type == %d\n", query_type);
+			_main_LOG_to_Export("---query_type == %d\n", query_type);
 
 			_main_LOG_to_Export("---scanning for system variables WWW_...: started...\n");
 			// historicka poznamka:                          (01/02/2000A.D.)
@@ -15787,7 +15770,7 @@ _main_SIMULACIA_QS:
 
 			break;
 		}
-	}
+	}// switch(params)
 
 	_main_LOG_to_Export("query_type == ");
 	switch(query_type){
@@ -16016,8 +15999,8 @@ _main_SIMULACIA_QS:
 
 			_main_LOG_to_Export("_global_jazyk == %s\n", nazov_jazyka[_global_jazyk]);
 			// 2010-02-15, pridanÈ: rozparsovanie parametra modlitba
-			Log("volanie _parsuj_parameter_MODLITBA() z main()... [2]\n");
-			_parsuj_parameter_MODLITBA(pom_MODLITBA, _global_modlitba);
+			Log("volanie atomodlitba() z main()... [2]\n");
+			_global_modlitba = atomodlitba(pom_MODLITBA);
 
 			// rozparsovanie parametrov opt_0...opt_4, 2005-03-22; presunutÈ do define 2006-02-10
 			// 2007-06-01: upravenÈ tak, aby sa v prÌpade nenastavenia dala hodnota GLOBAL_OPTION_NULL
