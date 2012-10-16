@@ -11489,11 +11489,12 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 }// _main_rozbor_dna()
 
 // 2011-02-02: pridaná funkcia pre jednoduchý TXT export konkrétneho roka, mesiaca
-void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok, char *modlitba){
-	// na základe _main_rozbor_dna; textový export len pre RKC
+// 2012-10-16: pridaný parameter typ (urèuje, èi ide o TXT alebo XML export)
+void _main_rozbor_dna_txt(short int typ, char *den, char *mesiac, char *rok){
+	// na základe _main_rozbor_dna; textový export len pre RKC; XML napr. pre iOS
 	short int heading_written = 0;
 	char pom[MAX_STR];
-	Log("-- _main_rozbor_dna_txt(char *, char *, char *): begin (%s, %s, %s, %s)\n", den, mesiac, rok, modlitba);
+	Log("-- _main_rozbor_dna_txt(short int, char *, char *, char *): begin (%d, %s, %s, %s)\n", typ, den, mesiac, rok);
 	short int d, m, mi, r, t;
 
 	char pom2[MAX_STR]; // 2006-08-01: pridané kvôli transferu údajov o jazyku
@@ -11510,9 +11511,6 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok, char *modlitba){
 	Log("mes == `%s' (%d)\n", mesiac, m);
 	r = atoi(rok); // vrati 0 v pripade chyby; alebo int
 	Log("rok == `%s' (%d)\n", rok, r);
-	// rozparsovanie parametra modlitba -- používa sa pre typ exportu; default: EXPORT_DNA_VIAC_DNI_TXT
-	t = atoi(modlitba); // vrati 0 v pripade chyby; alebo int
-	Log("modlitba == `%s' (%d)\n", modlitba, t);
 
 	// kontrola údajov
 	short int result = SUCCESS;
@@ -11538,8 +11536,11 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok, char *modlitba){
 		ExportUDAJE("rok = %s.\n", rok);
 	}
 	// modlitba -> typ exportu
-	if((t == 0) || (t > 6)){
+	if(typ == PRM_TXT){
 		t = EXPORT_DNA_VIAC_DNI_TXT;
+	}
+	else if(typ == PRM_XML){
+		t = EXPORT_DNA_XML;
 	}
 
 	// kontrola udajov ukoncena, podla nej pokracujeme dalej
@@ -11623,7 +11624,7 @@ void _main_rozbor_dna_txt(char *den, char *mesiac, char *rok, char *modlitba){
 		Export("Èíslo mesiaca: nezadaný alebo nepodporovaný vstup.\n");
 	}// m != VSETKY_MESIACE
 
-	Log("-- _main_rozbor_dna_txt(char *, char *, char *): end\n");
+	Log("-- _main_rozbor_dna_txt(short int, char *, char *, char *): end\n");
 }// _main_rozbor_dna_txt()
 
 
@@ -13943,7 +13944,7 @@ short int getForm(void){
 		}
 	}// for i
 
-	if((query_type == PRM_DATUM) || (query_type == PRM_DETAILY) || (query_type == PRM_TXT)){
+	if((query_type == PRM_DATUM) || (query_type == PRM_DETAILY) || (query_type == PRM_TXT) || (query_type == PRM_XML)){
 		// datum: treba nacitat den, mesiac a rok
 
 		// premenna WWW_DEN
@@ -14488,6 +14489,10 @@ short int parseQueryString(void){
 				// ide o parameter STR_PRM_TXT; pridané 2011-02-02
 				query_type = PRM_TXT;
 			}
+			else if(equals(param[i].val, STR_PRM_XML)){
+				// ide o parameter STR_PRM_XML; pridané 2012-10-16
+				query_type = PRM_XML;
+			}
 			else if(equals(param[i].val, STR_PRM_DETAILY)){
 				// ide o parameter STR_PRM_DETAILY
 				// pridany 09/02/2000A.D. ako alternativa k PRM_DATUM
@@ -14760,6 +14765,8 @@ short int parseQueryString(void){
 			 */
 		case PRM_TXT: 
 			// 2011-02-02: doplnené
+		case PRM_XML: 
+			// 2012-10-16: doplnené
 		case PRM_DATUM:{
 		// pripad, ze ide o datum
 
@@ -15677,6 +15684,7 @@ _main_SIMULACIA_QS:
 		case PRM_UNKNOWN:		_main_LOG_to_Export("PRM_UNKNOWN\n"); break;
 		case PRM_TABULKA:		_main_LOG_to_Export("PRM_TABULKA\n"); break;
 		case PRM_TXT:			_main_LOG_to_Export("PRM_TXT\n"); break;
+		case PRM_XML:			_main_LOG_to_Export("PRM_XML\n"); break;
 		case PRM_NONE:			_main_LOG_to_Export("PRM_NONE\n"); break;
 		case PRM_DATUM:			_main_LOG_to_Export("PRM_DATUM\n"); break;
 		case PRM_DETAILY:		_main_LOG_to_Export("PRM_DETAILY\n"); break;
@@ -15909,7 +15917,7 @@ _main_SIMULACIA_QS:
 			Log("export_monthly_druh == %d\n", export_monthly_druh);
 
 			_main_LOG_to_Export("volám hlavicka(); ... [pred volaním _main_... funkcií v switch(query_type)...]\n");
-			if(query_type != PRM_TXT){
+			if(query_type != PRM_XML){
 				hlavicka((char *)html_title[_global_jazyk]);
 			}
 			else{
@@ -15929,10 +15937,15 @@ _main_SIMULACIA_QS:
 					_main_rozbor_dna(pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA, pom_DALSI_SVATY);
 					_main_LOG_to_Export("spat po skonceni _main_rozbor_dna(%s, %s, %s, %s, %s);\n", pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA, pom_DALSI_SVATY);
 					break;
-				case PRM_TXT: // 2011-02-02: doplnené; export do TXT pre RKC | 2012-10-12: doplnený ïalší parameter (modlitba) pre spôsob exportu
-					_main_LOG_to_Export("spustam _main_rozbor_dna_txt(stringy: pom_DEN = %s, pom_MESIAC = %s, pom_ROK = %s, pom_MODLITBA = %s);\n", pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA);
-					_main_rozbor_dna_txt(pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA);
-					_main_LOG_to_Export("spat po skonceni _main_rozbor_dna_txt(%s, %s, %s, %s);\n", pom_DEN, pom_MESIAC, pom_ROK, pom_MODLITBA);
+				case PRM_TXT: // 2011-02-02: doplnené; export do TXT pre RKC
+					_main_LOG_to_Export("spustam _main_rozbor_dna_txt(typ == %d; stringy: pom_DEN = %s, pom_MESIAC = %s, pom_ROK = %s);\n", query_type, pom_DEN, pom_MESIAC, pom_ROK);
+					_main_rozbor_dna_txt(query_type, pom_DEN, pom_MESIAC, pom_ROK);
+					_main_LOG_to_Export("spat po skonceni _main_rozbor_dna_txt(%s, %s, %s, %s);\n", pom_DEN, pom_MESIAC, pom_ROK);
+					break;
+				case PRM_XML: // 2012-10-16: doplnené; XML export
+					_main_LOG_to_Export("spustam _main_rozbor_dna_txt(typ == %d; stringy: pom_DEN = %s, pom_MESIAC = %s, pom_ROK = %s);\n", query_type, pom_DEN, pom_MESIAC, pom_ROK);
+					_main_rozbor_dna_txt(query_type, pom_DEN, pom_MESIAC, pom_ROK);
+					_main_LOG_to_Export("spat po skonceni _main_rozbor_dna_txt(%s, %s, %s, %s);\n", pom_DEN, pom_MESIAC, pom_ROK);
 					break;
 				case PRM_CEZ_ROK:
 					_main_LOG_to_Export("spustam _main_zaltar(%s, %s, %s);\n", pom_DEN_V_TYZDNI, pom_TYZDEN, pom_MODLITBA);
@@ -16005,7 +16018,7 @@ _main_SIMULACIA_QS:
 			}// switch(query_type)
 
 			_main_LOG_to_Export("volám patka(); ... [po volaní _main_... funkcií v switch(query_type)...]\n");
-			if(query_type != PRM_TXT){
+			if(query_type != PRM_XML){
 				patka(); // 2011-07-01: doplnené (ešte pred dealokovanie premenných)
 			}
 			else{
@@ -16043,7 +16056,7 @@ _main_SIMULACIA_QS:
 _main_end:
 
 	_main_LOG_to_Export("volám patka(); ... [_main_end:...]\n");
-	if(query_type != PRM_TXT){
+	if(query_type != PRM_XML){
 		patka();
 	}
 	else{
