@@ -48,6 +48,7 @@ public class Breviar extends Activity {
     }
 
     synchronized void initServer(String opts) {
+      if (S != null) return;
       try {
         S = new Server(this, scriptname, language, opts);
       } catch (IOException e) {

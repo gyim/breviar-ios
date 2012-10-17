@@ -122,10 +122,15 @@ public class Util {
     }
   }
 
+  // FIXME: this needs to be consistent with liturgia.h. Automatically export that?
   static final EventInfo events[] = {
-    new EventInfo(R.id.inv_check,   "alarm-inv",   "mi",   R.string.inv,   R.string.inv_notify,    8, 00),
-    new EventInfo(R.id.rch_check,   "alarm-rch",   "mrch", R.string.rch,   R.string.rch_notify,    9, 00),
-    new EventInfo(R.id.vesp_check,  "alarm-vesp",  "mv",   R.string.vesp,  R.string.vesp_notify,  18, 00),
-    new EventInfo(R.id.kompl_check, "alarm-kompl", "mk",   R.string.kompl, R.string.kompl_notify, 22, 00)
+    new EventInfo(R.id.inv_check,   "alarm-inv",   "mi",    R.string.inv,   R.string.inv_notify,    8, 00),
+    new EventInfo(R.id.read_check,  "alarm-read",  "mpc",   R.string.read,  R.string.read_notify,  11, 00),
+    new EventInfo(R.id.rch_check,   "alarm-rch",   "mrch",  R.string.rch,   R.string.rch_notify,   10, 00),
+    new EventInfo(R.id.h9_check,    "alarm-9h",    "mpred", R.string.h9,    R.string.h9_notify,     9, 00),
+    new EventInfo(R.id.h12_check,   "alarm-12h",   "mna",   R.string.h12,   R.string.h12_notify,   12, 00),
+    new EventInfo(R.id.h15_check,   "alarm-15h",   "mpo",   R.string.h15,   R.string.h15_notify,   15, 00),
+    new EventInfo(R.id.vesp_check,  "alarm-vesp",  "mv",    R.string.vesp,  R.string.vesp_notify,  18, 00),
+    new EventInfo(R.id.kompl_check, "alarm-kompl", "mk",    R.string.kompl, R.string.kompl_notify, 22, 00)
   };
 }

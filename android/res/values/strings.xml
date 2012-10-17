@@ -6,18 +6,27 @@
     <string name="lang_cz">CZ</string>
     <string name="lang_hu">HU</string>
 
-    <string name="alarms">Alarms</string>
+    <string name="alarms">Notifications</string>
+    <string name="alarms_title">Notification settings:</string>
     <string name="alarmOff">disabled</string>
 
     <string name="inv">Invitatiorium</string>
     <string name="rch">Lauds</string>
     <string name="vesp">Vespers</string>
     <string name="kompl">Compline</string>
+    <string name="read">Readings</string>
+    <string name="h9">Terce</string>
+    <string name="h12">Sext</string>
+    <string name="h15">None</string>
 
-    <string name="inv_notify">Time for invitatiorium!</string>
-    <string name="rch_notify">Time for lauds!</string>
-    <string name="vesp_notify">Time for vespers!</string>
-    <string name="kompl_notify">Time for compline!</string>
+    <string name="inv_notify">Time for Invitatory!</string>
+    <string name="rch_notify">Time for Lauds!</string>
+    <string name="vesp_notify">Time for Vespers!</string>
+    <string name="kompl_notify">Time for Compline!</string>
+    <string name="read_notify">Time for Readings!</string>
+    <string name="h9_notify">Time for Terce!</string>
+    <string name="h12_notify">Time for Sext!</string>
+    <string name="h15_notify">Time for None!</string>
 
     <string name="hu_beta_warning">
     Hungarian version is in beta - thus, many source texts are not yet

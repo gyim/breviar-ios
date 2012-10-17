@@ -69,13 +69,13 @@ public class AlarmTimePickerFragment extends DialogFragment
 //            box.setChecked(true); // will be toggled to false
           }
         });
+        */
 
     d.setOnDismissListener(new TimePickerDialog.OnDismissListener() {
           public void onDismiss(DialogInterface dialog) {
-//            box.setChecked(!box.isChecked());
+            box().setChecked(!box().isChecked());
           }
         });
-        */
 
     return d;
   }
