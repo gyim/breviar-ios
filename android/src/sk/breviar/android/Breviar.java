@@ -23,10 +23,13 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+
 import java.io.IOException;
+
+import sk.breviar.android.Alarms;
+import sk.breviar.android.LangSelect;
 import sk.breviar.android.Server;
 import sk.breviar.android.Util;
-import sk.breviar.android.Alarms;
 
 public class Breviar extends Activity {
     static String scriptname = "cgi-bin/l.cgi";
@@ -261,9 +264,9 @@ public class Breviar extends Activity {
     @Override
     protected Dialog onCreateDialog(int id) {
       switch(id) {
-        case DIALOG_HU_BETA:
+        case DIALOG_NEWS:
           return new AlertDialog.Builder(this)
-                 .setMessage(R.string.hu_beta_warning)
+                 .setMessage(R.string.news)
                  .setCancelable(false)
                  .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
                      public void onClick(DialogInterface dialog, int id) {
@@ -271,9 +274,9 @@ public class Breviar extends Activity {
                      }
                  })
                  .create();
-        case DIALOG_NEWS:
+        case DIALOG_HU_BETA:
           return new AlertDialog.Builder(this)
-                 .setMessage(R.string.news)
+                 .setMessage(R.string.hu_beta_warning)
                  .setCancelable(false)
                  .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
                      public void onClick(DialogInterface dialog, int id) {
@@ -288,21 +291,21 @@ public class Breviar extends Activity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+      if (resultCode > 0) {
+        language = data.getStringExtra("lang", "sk");
+        resetLanguage();
+        if (language.equals("hu")) showDialog(DIALOG_HU_BETA);
+      }
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
       // Handle item selection
       switch (item.getItemId()) {
-        case R.id.lang_sk:
-          language = "sk";
-          resetLanguage();
-          return true;
-        case R.id.lang_cz:
-          language = "cz";
-          resetLanguage();
-          return true;
-        case R.id.lang_hu:
-          language = "hu";
-          resetLanguage();
-          showDialog(DIALOG_HU_BETA);
+        case R.id.lang_select:
+          Intent selectLang = new Intent(this, LangSelect.class);
+          startActivityForResult(selectLang, 0);
           return true;
         case R.id.alarms:
           startActivity(new Intent("sk.breviar.android.ALARMS"));
