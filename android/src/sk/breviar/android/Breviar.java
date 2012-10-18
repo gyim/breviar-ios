@@ -293,8 +293,9 @@ public class Breviar extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-      if (resultCode > 0) {
-        language = data.getStringExtra("lang", "sk");
+      if (resultCode == RESULT_OK) {
+        language = data.getStringExtra("lang");
+        if (language == null) language = "sk";
         resetLanguage();
         if (language.equals("hu")) showDialog(DIALOG_HU_BETA);
       }

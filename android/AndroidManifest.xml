@@ -28,6 +28,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name="LangSelect"
+                  android:configChanges="orientation"
+                  android:launchMode="singleTop">
+        </activity>
         <receiver android:name="AlarmReceiver" >
             <intent-filter>
               <action android:name="sk.breviar.android.NOTIFY"></action>

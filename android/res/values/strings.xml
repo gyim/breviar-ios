@@ -2,9 +2,11 @@
 <resources>
     <string name="version">v1.7.24</string>
 
-    <string name="lang_sk">SK</string>
-    <string name="lang_cz">CZ</string>
-    <string name="lang_hu">HU</string>
+    <string name="lang_select">Language</string>
+    <string name="lang_select_title">Select language:</string>
+    <string name="lang_cz">Czech</string>
+    <string name="lang_sk">Slovak</string>
+    <string name="lang_hu">Hungarian</string>
 
     <string name="alarms">Notifications</string>
     <string name="alarms_title">Notification settings:</string>
