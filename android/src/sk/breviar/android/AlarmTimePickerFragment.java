@@ -77,6 +77,12 @@ public class AlarmTimePickerFragment extends DialogFragment
           }
         });
 
+    d.setOnCancelListener(new TimePickerDialog.OnCancelListener() {
+          public void onCancel(DialogInterface dialog) {
+            box().setChecked(!box().isChecked());
+          }
+        });
+
     return d;
   }
 

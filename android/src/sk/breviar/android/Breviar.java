@@ -189,19 +189,20 @@ public class Breviar extends Activity {
         markVersion();
       }
 
-      Intent I = getIntent();
+      if (wv.restoreState(savedInstanceState) == null) goHome();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
       int id = -1;
-      if (I.getAction().equals("sk.breviar.android.action.SHOW")) {
-        id = I.getIntExtra("id", -1);
+      if (intent.getAction().equals("sk.breviar.android.action.SHOW")) {
+        id = intent.getIntExtra("id", -1);
       }
 
       if (id >=0 && id < Util.events.length) {
         wv.loadUrl("http://127.0.0.1:" + S.port + "/" + scriptname + 
                    "?qt=pdnes&p=" + Util.events[id].p + Html.fromHtml(S.getOpts()));
-      } else {
-        if (wv.restoreState(savedInstanceState) == null) goHome();
       }
-
     }
 
     protected void onSaveInstanceState(Bundle outState) {
