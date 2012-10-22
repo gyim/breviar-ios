@@ -9958,20 +9958,12 @@ void set_popis_svaty_rch_mcd_pc_vesp(short int poradie_svaty){
 	nazov_spolc(sc.a3), sc.a3); Log
 
 void set_spolocna_cast(_struct_sc sc, short int poradie_svaty, short int force = 0){
-	/* poradie_svaty je vstupom iba kvoli tomu, ze ak je 0 -> UNKNOWN_PORADIE_SVATEHO,
-	 * potom nas neznepokojuju vypisy typu Error: not assigned...
-	 *
-	 * 22/02/2000A.D.: ked nastavi vo formulari (detaily) zalmy zo `sviatku'
-	 * a spolocnu cast `nebrat', predsa sa nevyvolaju zalmy zo sviatku,
-	 * lebo sa nespusti _set_spolocna_cast(); 
-	 * [ToDo] -- mozno by bolo dobre oddelit nastavenie pre spolocnu cast a potom inde dat samotne zalmy...
-	 * 
-	 * 2009-09-18: doplnen˝ nepovinn˝ tretÌ parameter, ktor˝m sa daj˙ vyn˙tiù antifÛny zo spoloËnej Ëasti, aj ak je to len spomienka alebo æubovoæn· spomienka
-	 */
-	Log("set_spolocna_cast({%s, %s, %s}) -- begin\n",
-		nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3));
-	Log("          _global_opt[OPT_3_SPOLOCNA_CAST] == %s (%d)\n",
-		nazov_spolc(_global_opt[OPT_3_SPOLOCNA_CAST]), _global_opt[OPT_3_SPOLOCNA_CAST]);
+	// poradie_svaty je vstupom iba kvoli tomu, ze ak je 0 -> UNKNOWN_PORADIE_SVATEHO, potom nas neznepokojuju vypisy typu Error: not assigned...
+	// 22/02/2000A.D.: ked nastavi vo formulari (detaily) zalmy zo `sviatku' a spolocnu cast `nebrat', predsa sa nevyvolaju zalmy zo sviatku, lebo sa nespusti _set_spolocna_cast(); 
+	// [ToDo] -- mozno by bolo dobre oddelit nastavenie pre spolocnu cast a potom inde dat samotne zalmy...
+	// 2009-09-18: doplnen˝ nepovinn˝ tretÌ parameter, ktor˝m sa daj˙ vyn˙tiù antifÛny zo spoloËnej Ëasti, aj ak je to len spomienka alebo æubovoæn· spomienka
+	Log("set_spolocna_cast({%s, %s, %s}) -- begin\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3));
+	Log("_global_opt[OPT_3_SPOLOCNA_CAST] == %s (%d)\n", nazov_spolc(_global_opt[OPT_3_SPOLOCNA_CAST]), _global_opt[OPT_3_SPOLOCNA_CAST]);
 
 	// 2011-03-17: tu bolo nastavenie popisu pre danÈho sv‰tÈho; presunutÈ do samostatnej Ëasti, nakoæko sa to pouûÌva aj pre spomienky v pÙste, kde sa set_spolocna_cast) nevol·
 	Log("teraz nastavujem POPIS (pre danÈho sv‰tÈho) -- vol·m set_popis_svaty_rch_mcd_pc_vesp()...\n");
@@ -9999,7 +9991,9 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty, short int force =
 	else{
 		Log("	nie je sl·vnosù (kvÙli nastaveniu ûalmov pre modlitbu cez deÚ)...\n");
 	}
-	Log("	_global_opt[OPT_3_SPOLOCNA_CAST] == %d\n", _global_opt[OPT_3_SPOLOCNA_CAST]);
+
+	Log("sc == {%d, %d, %d} == {%s, %s, %s}\n", sc.a1, sc.a2, sc.a3, nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3));
+	Log("_global_opt[OPT_3_SPOLOCNA_CAST] == %s (%d)\n", nazov_spolc(_global_opt[OPT_3_SPOLOCNA_CAST]), _global_opt[OPT_3_SPOLOCNA_CAST]);
 
 	// podla _global_opt[OPT_3_SPOLOCNA_CAST] urcime, ktoru spolocnu cast dat
 	if(sc.a1 != MODL_SPOL_CAST_NEURCENA){
@@ -28491,9 +28485,11 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 	Log("teraz priradim do _global_den vsetko z _global_svaty%d...\n", poradie_svaty);
 	Log("    (tato cast bola povodne v sviatky_svatych s 3 vstupmi, ale teraz je tu)\n");
 	switch(poradie_svaty){
+		// case 0: vöetko je nastavenÈ v _global_den
 		case 1: _global_den = _global_svaty1; break;
 		case 2: _global_den = _global_svaty2; break;
 		case 3: _global_den = _global_svaty3; break;
+		// case 4: vöetko je nastavenÈ v _global_pm_sobota;
 		default: // sem by sa to nemalo dostat
 			Log("--Error: switch(poradie_svaty) nezabralo pre 1, 2, 3...\n"); break;
 	}// switch();
@@ -28512,10 +28508,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 	// ak opt_3 je MODL_SPOL_CAST_NEURCENA, tak ju urcime podla 1. spolocnej casti
 	if(_global_opt[OPT_3_SPOLOCNA_CAST] == MODL_SPOL_CAST_NEURCENA){
 		_global_opt[OPT_3_SPOLOCNA_CAST] = sc.a1;
-		Log("\tsetting _global_opt[OPT_3_SPOLOCNA_CAST] to sc.a1 == %d\n", sc.a1);
+		Log("setting _global_opt[OPT_3_SPOLOCNA_CAST] to sc.a1 == %d\n", sc.a1);
 	}
 	else {
-		Log("\tnie je potrebnÈ modifikovaù, lebo uû je nastaven· (hoci sc.a1 == %d)\n", sc.a1);
+		Log("nie je potrebnÈ modifikovaù, lebo uû je nastaven· (hoci sc.a1 == %d)\n", sc.a1);
 	}
 	ret = sviatky_svatych(den, mesiac, poradie_svaty);
 	Log("-- sviatky_svatych(%d, %d) -- spustene druhykrat, vysledok (pocet svatych) == %d\n", den, mesiac, ret);

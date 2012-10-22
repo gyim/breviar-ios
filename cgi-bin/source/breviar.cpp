@@ -5210,11 +5210,13 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 			// nasledovná úprava _global_opt[OPT_3_SPOLOCNA_CAST] presunutá sem z èasti, kedy "SVATY_VEDIE", aby sa aplikovala aj na druhú vetvu
 			// pridané 2006-02-06; upravujeme premennú _global_opt[OPT_3_SPOLOCNA_CAST] ak nebola nastavená MODL_SPOL_CAST_NEBRAT
 			// treba nastavi pod¾a toho, ktorı svätı je (môe by 1--3)  a zároveò bra do úvahy eventuálne prednastavenie od pouívate¾a
-			_rozbor_dna_LOG("\tPremenná _global_opt[OPT_3_SPOLOCNA_CAST] pred úpravou == %d (%s)...\n", 
-				_global_opt[OPT_3_SPOLOCNA_CAST], 
-				_global_opt[OPT_3_SPOLOCNA_CAST] <= MODL_SPOL_CAST_NEBRAT ? nazov_spolc(_global_opt[OPT_3_SPOLOCNA_CAST]) : STR_EMPTY);
+			// 2012-10-22: doplnenı case 0 vo switch-i, spôsobovalo problémy pre slávnosti, ktoré majú nastavenú spoloènú èas priamo v _global_den (napr. 15. septembra) | upozornil Vlado Kiš
+			_rozbor_dna_LOG("Premenná _global_opt[OPT_3_SPOLOCNA_CAST] pred úpravou == %d (%s)...(poradie_svaty == %d)\n", _global_opt[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_3_SPOLOCNA_CAST] <= MODL_SPOL_CAST_NEBRAT ? nazov_spolc(_global_opt[OPT_3_SPOLOCNA_CAST]) : STR_EMPTY, poradie_svaty);
 			if(_global_opt[OPT_3_SPOLOCNA_CAST] != MODL_SPOL_CAST_NEBRAT){
 				switch(poradie_svaty){
+					case 0:
+						sc = _decode_spol_cast(_global_den.spolcast);
+						break;
 					case 1:
 						sc = _decode_spol_cast(_global_svaty1.spolcast);
 						break;
@@ -10077,6 +10079,9 @@ short int je_mozne_spol_cast_nebrat(short int poradie_svaty){
 			break;
 		case 3: if((_global_svaty3.typslav == SLAV_SLAVNOST) || (_global_svaty3.typslav == SLAV_SVIATOK))
 					ret = FALSE;
+			break;
+		case 4:
+			// 2012-10-22: spomienka PM v sobotu je vdy ¾ubovo¾ná spomienka
 			break;
 	}// swicht(poradie_svaty)
 	if((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)){
