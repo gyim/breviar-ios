@@ -9875,15 +9875,15 @@ void _export_rozbor_dna(short int typ){
 			Export("<!--END: kalend·rik-->\n");
 
 			Export("\n<!--BEGIN: veæk· tabuæka s kalend·rom a hlavn˝m formul·rom-->\n");
-#if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
-#else
+/*
+			// 2012-10-22: ˙plne zapozn·mkovanÈ
 			if(_global_linky == ANO){
 				// 2008-01-22: podæa Vladovho n·vrhu presunut˝ nadpis sem
 				Export("<p "HTML_CLASS_BOLD_IT" "HTML_ALIGN_CENTER">\n");
 				Export((char *)html_text_dalsie_moznosti[_global_jazyk]); // 2006-08-02: jazykovÈ mut·cie; \n presunut˝ pred <table>; staröia pozn·mka: 2003-07-16; kedysi tu bolo "Chcem zobraziù"
 				Export("</p>\n");
 			}// if(_global_linky == ANO)
-#endif
+*/
 			Log("_global_opt_batch_monthly == %d [2011-04-13]\n", _global_opt_batch_monthly);
 			Log("export_monthly_druh == %d [2011-04-13]\n", export_monthly_druh);
 

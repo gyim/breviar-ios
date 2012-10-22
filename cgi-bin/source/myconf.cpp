@@ -302,11 +302,6 @@ void printConfig(void){
 	Log("\n");
 	Log("=== BEGIN:configuration (%s) ===\n", CONFIG_FILE);
 
-	// 2007-06-01: niekolko prvych parametrov: prevzate z breviar.cpp::main() | 2012-10-22: premenné per jazyk
-	// Log("cfg_HTTP_ADDRESS_default == `%s'\n", cfg_HTTP_ADDRESS_default);
-	// Log("cfg_HTTP_DISPLAY_ADDRESS_default == `%s'\n", cfg_HTTP_DISPLAY_ADDRESS_default); // 2007-05-24, JUV: pridane
-	// Log("cfg_MAIL_ADDRESS_default == `%s'\n", cfg_MAIL_ADDRESS_default);
-
 	// 2004-03-17 pridane cfg_INCLUDE_DIR_default
 	Log("cfg_INCLUDE_DIR_default == `%s'\n", cfg_INCLUDE_DIR_default);
 	// 2007-06-01: nasleduju nové parametre
