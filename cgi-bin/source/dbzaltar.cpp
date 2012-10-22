@@ -3878,31 +3878,22 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 		 *                 vsedne dni velkeho tyzdna od pondelka do stvrtka vcitane
 		 */
 
-	 /* najprv treba skontrolovat, ci nejde o nedelu, na ktoru pripadol 
-	  * sviatok Premenenia Pana (6. augusta)
-	  * resp. sviatok Povysenia sv. Kriza (14. septembra);
-	  * ak ano, tak nenastavuj nic, lebo
-	  * vsetko sa nastavilo vo funkcii sviatky_svatych()
-	  * 28/03/2000A.D.
-	  * rovnako tak slavnost vsetkych svatych (1. novembra) - bez ohladu na to, ci ide o nedelu,
-	  * 29/03/2000A.D.
-	  * 2003-06-30a.D.: rovnako tak pre slavnost sv. Petra a sv. Pavla (29. juna)
-	  * 2006-02-07: pravdupovediac, všetko sa nenastavilo (modlitba cez deò, almy) - musím to fixnú
-	  * 2007-07-17: vyzerá to tak, e asi je potrebné zbehnú aj v tıchto prípadoch nastavenia 
-	  *		kvôli modlitbe cez deò tak, ako to bolo len pre sviatok povıšenia sv. kría
-	  * 2008-02-27: doplnenı aj prípad, keï na nede¾u padne slávnos nanebovzatia PM (15. augusta)
-	  * 2008-07-03: nemusí to nutne by nede¾a; vtedy si to všetko slávnosti musia nastavi 
-	  *		samotné - bolo tu "(_global_den.denvt == DEN_NEDELA) && " - odstránené
-	  *		ponechané jedine pre modlitbu cez deò, ktorá v slávnosti padne mimo nedele
-	  * 2008-07-11: doplnená aj slávnos sv. cyrila a metoda (mono by bolo lepšie, ak by to bolo pod¾a stupòa (sviatok pána resp. slávnos svätca) v cezroènom období)
-	  * 2008-10-09: doplnená pre èeskı breviáø slávnos sv. václava
-	  * 2009-01-06: doplnená poznámka k Premeneniu Pána
-	  *
-	  * 2010-09-28: èas prevzatá do: init_global_string(), hoci tam sa pouije len pre smer == 5 (sviatky pána); slávnosti sa riešia samostatne
-      * 2011-06-30: cyril a metod odvetvenı pre SK a CZ only
-	  * 2011-07-22: doplnené pre HU: 20AUG
-	  * 2011-10-13: zapoznámkované 14SEP kvôli CZ // nespúšalo sa toti zaltar_zvazok(), a teda ani zaltar_kompletorium()
-	  */
+	// najprv treba skontrolovat, ci nejde o nedelu, na ktoru pripadol  sviatok Premenenia Pana (6. augusta) resp. sviatok Povysenia sv. Kriza (14. septembra);
+	// ak ano, tak nenastavuj nic, lebo vsetko sa nastavilo vo funkcii sviatky_svatych() | 28/03/2000A.D.
+	// rovnako tak slavnost vsetkych svatych (1. novembra) - bez ohladu na to, ci ide o nedelu, 29/03/2000A.D.
+	// 2003-06-30a.D.: rovnako tak pre slavnost sv. Petra a sv. Pavla (29. juna)
+	// 2006-02-07: pravdupovediac, všetko sa nenastavilo (modlitba cez deò, almy) - musím to fixnú
+	// 2007-07-17: vyzerá to tak, e asi je potrebné zbehnú aj v tıchto prípadoch nastavenia kvôli modlitbe cez deò tak, ako to bolo len pre sviatok povıšenia sv. kría
+	// 2008-02-27: doplnenı aj prípad, keï na nede¾u padne slávnos nanebovzatia PM (15. augusta)
+	// 2008-07-03: nemusí to nutne by nede¾a; vtedy si to všetko slávnosti musia nastavi samotné - bolo tu "(_global_den.denvt == DEN_NEDELA) && " - odstránené | ponechané jedine pre modlitbu cez deò, ktorá v slávnosti padne mimo nedele
+	// 2008-07-11: doplnená aj slávnos sv. cyrila a metoda (mono by bolo lepšie, ak by to bolo pod¾a stupòa (sviatok pána resp. slávnos svätca) v cezroènom období)
+	// 2008-10-09: doplnená pre èeskı breviáø slávnos sv. václava
+	// 2009-01-06: doplnená poznámka k Premeneniu Pána
+	// 2010-09-28: èas prevzatá do: init_global_string(), hoci tam sa pouije len pre smer == 5 (sviatky pána); slávnosti sa riešia samostatne
+    // 2011-06-30: cyril a metod odvetvenı pre SK a CZ only
+	// 2011-07-22: doplnené pre HU: 20AUG
+	// 2011-10-13: zapoznámkované 14SEP kvôli CZ // nespúšalo sa toti zaltar_zvazok(), a teda ani zaltar_kompletorium()
+	// 2012-10-22: odpoznámkované 14SEP -- napr. pre rok 2014 potom nedávalo prvé vešpery, ak padne na nede¾u!
 	Log("najprv treba skontrolova, èi nejde o deò [pôvodne nede¾u], na ktorú pripadol sviatok premenenia pána a podobné... (ak áno, nenastavuj niè)\n");
 	if(
 		((_global_den.den == 6) && (_global_den.mesiac - 1 == MES_AUG)) ||
@@ -3911,7 +3902,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 		((_global_den.den == 5) && (_global_den.mesiac - 1 == MES_JUL) && ((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
 		((_global_den.den == 20) && (_global_den.mesiac - 1 == MES_AUG) && (_global_jazyk == JAZYK_HU)) ||
 		((_global_den.den == 28) && (_global_den.mesiac - 1 == MES_SEP) && ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
-		((_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) ) ||
+		((_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) && (_global_jazyk != JAZYK_CZ) ) ||
 		((_global_den.den == 1) && (_global_den.mesiac - 1 == MES_NOV))
 		){
 			Log("premenenie pána || petra a pavla || povıšenie sv. kría || všetkıch svätıch || nanebovzatia PM...\n");

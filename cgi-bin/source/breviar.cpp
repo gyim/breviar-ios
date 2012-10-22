@@ -5419,12 +5419,12 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 			break;
 		case UNKNOWN_PORADIE_SVATEHO:
 		default:
-			/* 2010-09-28: odvetvené kvôli tım prípadom, keï na nede¾u padne sviatok pána, ale pouíva sa poradie_svaty == UNKNOWN_PORADIE_SVATEHO == 0 
-			 *             èas prevzatá z: liturgicke_obdobie(), zaèiatok funkcie; hoci tu sa pouije len pre smer == 5 (sviatky pána); slávnosti sa riešia samostatne
-			 * 2011-06-30: cyril a metod odvetvenı pre SK a CZ only
-			 * 2011-07-22: doplnené pre HU: 20AUG
-			 * 2011-10-13: zapoznámkované 14SEP kvôli CZ // nespúšalo sa toti zaltar_zvazok(), a teda ani zaltar_kompletorium()
-			 */
+			// 2010-09-28: odvetvené kvôli tım prípadom, keï na nede¾u padne sviatok pána, ale pouíva sa poradie_svaty == UNKNOWN_PORADIE_SVATEHO == 0 
+			//             èas prevzatá z: liturgicke_obdobie(), zaèiatok funkcie; hoci tu sa pouije len pre smer == 5 (sviatky pána); slávnosti sa riešia samostatne
+			// 2011-06-30: cyril a metod odvetvenı pre SK a CZ only
+			// 2011-07-22: doplnené pre HU: 20AUG
+			// 2011-10-13: zapoznámkované 14SEP kvôli CZ // nespúšalo sa toti zaltar_zvazok(), a teda ani zaltar_kompletorium()
+			// 2012-10-22: odpoznámkované 14SEP -- napr. pre rok 2014 potom nedávalo prvé vešpery, ak padne na nede¾u!
 			Log("_global_den.smer == %d\n", _global_den.smer);
 			Log("_global_svaty1.smer == %d\n", _global_svaty1.smer);
 			if((_global_svaty1.smer == 5) && (
@@ -5434,7 +5434,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 				((_global_den.den == 5) && (_global_den.mesiac - 1 == MES_JUL) && ((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
 				((_global_den.den == 20) && (_global_den.mesiac - 1 == MES_AUG) && (_global_jazyk == JAZYK_HU)) ||
 				((_global_den.den == 28) && (_global_den.mesiac - 1 == MES_SEP) && ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
-				((_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) ) ||
+				((_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) && (_global_jazyk != JAZYK_CZ) ) ||
 				((_global_den.den == 1) && (_global_den.mesiac - 1 == MES_NOV))
 				)){
 				// do _local_den priradim dane slavenie
