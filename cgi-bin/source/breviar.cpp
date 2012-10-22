@@ -5432,7 +5432,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 				((_global_den.den == 5) && (_global_den.mesiac - 1 == MES_JUL) && ((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
 				((_global_den.den == 20) && (_global_den.mesiac - 1 == MES_AUG) && (_global_jazyk == JAZYK_HU)) ||
 				((_global_den.den == 28) && (_global_den.mesiac - 1 == MES_SEP) && ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
-				// ((_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) ) ||
+				((_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) ) ||
 				((_global_den.den == 1) && (_global_den.mesiac - 1 == MES_NOV))
 				)){
 				// do _local_den priradim dane slavenie
@@ -11883,7 +11883,7 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 #else
 				(char *)HTML_COMMENT_BEGIN,
 #endif
-				(_global_linky == ANO)? cfg_HTTP_ADDRESS_default: MESSAGE_FOLDER,
+				(_global_linky == ANO)? cfg_http_address_default[_global_jazyk]: MESSAGE_FOLDER,
 				FILE_JULIANSKY_DATUM,
 				jd_dnes,
 #ifdef ZOBRAZ_JULIANSKY_DATUM
@@ -12313,7 +12313,7 @@ void _main_analyza_roku(char *rok){
 
 	// 13/04/2000A.D.: pridane rozhodovanie podla _global_linky
 	if(_global_linky == ANO)
-		mystrcpy(pom, cfg_HTTP_ADDRESS_default, MAX_STR);
+		mystrcpy(pom, cfg_http_address_default[_global_jazyk], MAX_STR);
 	else // _global_linky == NIE
 		mystrcpy(pom, MESSAGE_FOLDER, MAX_STR);
 
