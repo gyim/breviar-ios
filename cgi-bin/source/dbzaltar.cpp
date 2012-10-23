@@ -3878,31 +3878,22 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 		 *                 vsedne dni velkeho tyzdna od pondelka do stvrtka vcitane
 		 */
 
-	 /* najprv treba skontrolovat, ci nejde o nedelu, na ktoru pripadol 
-	  * sviatok Premenenia Pana (6. augusta)
-	  * resp. sviatok Povysenia sv. Kriza (14. septembra);
-	  * ak ano, tak nenastavuj nic, lebo
-	  * vsetko sa nastavilo vo funkcii sviatky_svatych()
-	  * 28/03/2000A.D.
-	  * rovnako tak slavnost vsetkych svatych (1. novembra) - bez ohladu na to, ci ide o nedelu,
-	  * 29/03/2000A.D.
-	  * 2003-06-30a.D.: rovnako tak pre slavnost sv. Petra a sv. Pavla (29. juna)
-	  * 2006-02-07: pravdupovediac, vöetko sa nenastavilo (modlitba cez deÚ, ûalmy) - musÌm to fixn˙ù
-	  * 2007-07-17: vyzer· to tak, ûe asi je potrebnÈ zbehn˙ù aj v t˝chto prÌpadoch nastavenia 
-	  *		kvÙli modlitbe cez deÚ tak, ako to bolo len pre sviatok pov˝öenia sv. krÌûa
-	  * 2008-02-27: doplnen˝ aj prÌpad, keÔ na nedeæu padne sl·vnosù nanebovzatia PM (15. augusta)
-	  * 2008-07-03: nemusÌ to nutne byù nedeæa; vtedy si to vöetko sl·vnosti musia nastaviù 
-	  *		samotnÈ - bolo tu "(_global_den.denvt == DEN_NEDELA) && " - odstr·nenÈ
-	  *		ponechanÈ jedine pre modlitbu cez deÚ, ktor· v sl·vnosti padne mimo nedele
-	  * 2008-07-11: doplnen· aj sl·vnosù sv. cyrila a metoda (moûno by bolo lepöie, ak by to bolo podæa stupÚa (sviatok p·na resp. sl·vnosù sv‰tca) v cezroËnom obdobÌ)
-	  * 2008-10-09: doplnen· pre Ëesk˝ brevi·¯ sl·vnosù sv. v·clava
-	  * 2009-01-06: doplnen· pozn·mka k Premeneniu P·na
-	  *
-	  * 2010-09-28: Ëasù prevzat· do: init_global_string(), hoci tam sa pouûije len pre smer == 5 (sviatky p·na); sl·vnosti sa rieöia samostatne
-      * 2011-06-30: cyril a metod odvetven˝ pre SK a CZ only
-	  * 2011-07-22: doplnenÈ pre HU: 20AUG
-	  * 2011-10-13: zapozn·mkovanÈ 14SEP kvÙli CZ // nesp˙öùalo sa totiû zaltar_zvazok(), a teda ani zaltar_kompletorium()
-	  */
+	// najprv treba skontrolovat, ci nejde o nedelu, na ktoru pripadol  sviatok Premenenia Pana (6. augusta) resp. sviatok Povysenia sv. Kriza (14. septembra);
+	// ak ano, tak nenastavuj nic, lebo vsetko sa nastavilo vo funkcii sviatky_svatych() | 28/03/2000A.D.
+	// rovnako tak slavnost vsetkych svatych (1. novembra) - bez ohladu na to, ci ide o nedelu, 29/03/2000A.D.
+	// 2003-06-30a.D.: rovnako tak pre slavnost sv. Petra a sv. Pavla (29. juna)
+	// 2006-02-07: pravdupovediac, vöetko sa nenastavilo (modlitba cez deÚ, ûalmy) - musÌm to fixn˙ù
+	// 2007-07-17: vyzer· to tak, ûe asi je potrebnÈ zbehn˙ù aj v t˝chto prÌpadoch nastavenia kvÙli modlitbe cez deÚ tak, ako to bolo len pre sviatok pov˝öenia sv. krÌûa
+	// 2008-02-27: doplnen˝ aj prÌpad, keÔ na nedeæu padne sl·vnosù nanebovzatia PM (15. augusta)
+	// 2008-07-03: nemusÌ to nutne byù nedeæa; vtedy si to vöetko sl·vnosti musia nastaviù samotnÈ - bolo tu "(_global_den.denvt == DEN_NEDELA) && " - odstr·nenÈ | ponechanÈ jedine pre modlitbu cez deÚ, ktor· v sl·vnosti padne mimo nedele
+	// 2008-07-11: doplnen· aj sl·vnosù sv. cyrila a metoda (moûno by bolo lepöie, ak by to bolo podæa stupÚa (sviatok p·na resp. sl·vnosù sv‰tca) v cezroËnom obdobÌ)
+	// 2008-10-09: doplnen· pre Ëesk˝ brevi·¯ sl·vnosù sv. v·clava
+	// 2009-01-06: doplnen· pozn·mka k Premeneniu P·na
+	// 2010-09-28: Ëasù prevzat· do: init_global_string(), hoci tam sa pouûije len pre smer == 5 (sviatky p·na); sl·vnosti sa rieöia samostatne
+    // 2011-06-30: cyril a metod odvetven˝ pre SK a CZ only
+	// 2011-07-22: doplnenÈ pre HU: 20AUG
+	// 2011-10-13: zapozn·mkovanÈ 14SEP kvÙli CZ // nesp˙öùalo sa totiû zaltar_zvazok(), a teda ani zaltar_kompletorium()
+	// 2012-10-22: odpozn·mkovanÈ 14SEP -- napr. pre rok 2014 potom ned·valo prvÈ veöpery, ak padne na nedeæu!
 	Log("najprv treba skontrolovaù, Ëi nejde o deÚ [pÙvodne nedeæu], na ktor˙ pripadol sviatok premenenia p·na a podobnÈ... (ak ·no, nenastavuj niË)\n");
 	if(
 		((_global_den.den == 6) && (_global_den.mesiac - 1 == MES_AUG)) ||
@@ -3911,7 +3902,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 		((_global_den.den == 5) && (_global_den.mesiac - 1 == MES_JUL) && ((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
 		((_global_den.den == 20) && (_global_den.mesiac - 1 == MES_AUG) && (_global_jazyk == JAZYK_HU)) ||
 		((_global_den.den == 28) && (_global_den.mesiac - 1 == MES_SEP) && ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
-		// ((_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) ) ||
+		((_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) && (_global_jazyk != JAZYK_CZ) ) ||
 		((_global_den.den == 1) && (_global_den.mesiac - 1 == MES_NOV))
 		){
 			Log("premenenie p·na || petra a pavla || pov˝öenie sv. krÌûa || vöetk˝ch sv‰t˝ch || nanebovzatia PM...\n");
@@ -7813,10 +7804,9 @@ label_24_DEC:
 				}
 				else{
 					// sice chce svateho c. 2, ale mam len jedneho
-					hlavicka((char *)html_title[_global_jazyk]);
 					Log("-- Error: _global_svaty2 not assigned\n");
-					Export("Error: _global_svaty2 not assigned\n");
 					ALERT;
+					Export("Error: _global_svaty2 not assigned\n");
 				}
 				break; // case 2:
 			case 3:
@@ -7828,17 +7818,15 @@ label_24_DEC:
 				}
 				else{
 					// sice chce svateho c. 3, ale nemam troch
-					hlavicka((char *)html_title[_global_jazyk]);
 					Log("-- Error: _global_svaty3 not assigned\n");
-					Export("Error: _global_svaty3 not assigned\n");
 					ALERT;
+					Export("Error: _global_svaty3 not assigned\n");
 				}
 				break; // case 3:
 			case 5:
-				hlavicka((char *)html_title[_global_jazyk]);
 				Log("-- Error: poradie_svateho == 5\n");
-				Export("Error: poradie_svateho == 5\n");
 				ALERT;
+				Export("Error: poradie_svateho == 5\n");
 				break;
 			case 0:
 				// [ToDo]: je smiesne, ze case 0 tu vobec je: ved toto je mrtvy kus kodu!
@@ -7850,10 +7838,9 @@ label_24_DEC:
 				}
 				else{
 					// sice chce obycajny den, ale nemoze byt
-					hlavicka((char *)html_title[_global_jazyk]);
 					Log("-- Error: _global_den not assigned\n");
-					Export("%s\n", "Error: _global_den not assigned");
 					ALERT;
+					Export("%s\n", "Error: _global_den not assigned");
 				}
 				break; // case 0:
 		}// switch(poradie_svateho)
@@ -9962,20 +9949,12 @@ void set_popis_svaty_rch_mcd_pc_vesp(short int poradie_svaty){
 	nazov_spolc(sc.a3), sc.a3); Log
 
 void set_spolocna_cast(_struct_sc sc, short int poradie_svaty, short int force = 0){
-	/* poradie_svaty je vstupom iba kvoli tomu, ze ak je 0 -> UNKNOWN_PORADIE_SVATEHO,
-	 * potom nas neznepokojuju vypisy typu Error: not assigned...
-	 *
-	 * 22/02/2000A.D.: ked nastavi vo formulari (detaily) zalmy zo `sviatku'
-	 * a spolocnu cast `nebrat', predsa sa nevyvolaju zalmy zo sviatku,
-	 * lebo sa nespusti _set_spolocna_cast(); 
-	 * [ToDo] -- mozno by bolo dobre oddelit nastavenie pre spolocnu cast a potom inde dat samotne zalmy...
-	 * 
-	 * 2009-09-18: doplnen˝ nepovinn˝ tretÌ parameter, ktor˝m sa daj˙ vyn˙tiù antifÛny zo spoloËnej Ëasti, aj ak je to len spomienka alebo æubovoæn· spomienka
-	 */
-	Log("set_spolocna_cast({%s, %s, %s}) -- begin\n",
-		nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3));
-	Log("          _global_opt[OPT_3_SPOLOCNA_CAST] == %s (%d)\n",
-		nazov_spolc(_global_opt[OPT_3_SPOLOCNA_CAST]), _global_opt[OPT_3_SPOLOCNA_CAST]);
+	// poradie_svaty je vstupom iba kvoli tomu, ze ak je 0 -> UNKNOWN_PORADIE_SVATEHO, potom nas neznepokojuju vypisy typu Error: not assigned...
+	// 22/02/2000A.D.: ked nastavi vo formulari (detaily) zalmy zo `sviatku' a spolocnu cast `nebrat', predsa sa nevyvolaju zalmy zo sviatku, lebo sa nespusti _set_spolocna_cast(); 
+	// [ToDo] -- mozno by bolo dobre oddelit nastavenie pre spolocnu cast a potom inde dat samotne zalmy...
+	// 2009-09-18: doplnen˝ nepovinn˝ tretÌ parameter, ktor˝m sa daj˙ vyn˙tiù antifÛny zo spoloËnej Ëasti, aj ak je to len spomienka alebo æubovoæn· spomienka
+	Log("set_spolocna_cast({%s, %s, %s}) -- begin\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3));
+	Log("_global_opt[OPT_3_SPOLOCNA_CAST] == %s (%d)\n", nazov_spolc(_global_opt[OPT_3_SPOLOCNA_CAST]), _global_opt[OPT_3_SPOLOCNA_CAST]);
 
 	// 2011-03-17: tu bolo nastavenie popisu pre danÈho sv‰tÈho; presunutÈ do samostatnej Ëasti, nakoæko sa to pouûÌva aj pre spomienky v pÙste, kde sa set_spolocna_cast) nevol·
 	Log("teraz nastavujem POPIS (pre danÈho sv‰tÈho) -- vol·m set_popis_svaty_rch_mcd_pc_vesp()...\n");
@@ -10003,7 +9982,9 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty, short int force =
 	else{
 		Log("	nie je sl·vnosù (kvÙli nastaveniu ûalmov pre modlitbu cez deÚ)...\n");
 	}
-	Log("	_global_opt[OPT_3_SPOLOCNA_CAST] == %d\n", _global_opt[OPT_3_SPOLOCNA_CAST]);
+
+	Log("sc == {%d, %d, %d} == {%s, %s, %s}\n", sc.a1, sc.a2, sc.a3, nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3));
+	Log("_global_opt[OPT_3_SPOLOCNA_CAST] == %s (%d)\n", nazov_spolc(_global_opt[OPT_3_SPOLOCNA_CAST]), _global_opt[OPT_3_SPOLOCNA_CAST]);
 
 	// podla _global_opt[OPT_3_SPOLOCNA_CAST] urcime, ktoru spolocnu cast dat
 	if(sc.a1 != MODL_SPOL_CAST_NEURCENA){
@@ -10031,10 +10012,9 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty, short int force =
 							}
 							else{
 							// sem by to nemalo prÌsù
-								hlavicka((char *)html_title[_global_jazyk]);
 								set_LOG_sc("-- Error: sc (a1, a2, a3) su sice urcene, ale _global_opt[OPT_3_SPOLOCNA_CAST] sa nerovna ani jednej z nich!\n");
-								Export("Error: _global_opt[OPT_3_SPOLOCNA_CAST] assigned incorectly (a1, a2, a3 -- ok)\n");
 								ALERT;
+								Export("Error: _global_opt[OPT_3_SPOLOCNA_CAST] assigned incorectly (a1, a2, a3 -- ok)\n");
 								return;
 							}
 						}
@@ -10047,10 +10027,9 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty, short int force =
 						else{
 						// sem by to nemalo prÌsù
 							if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO){
-								hlavicka((char *)html_title[_global_jazyk]);
 								set_LOG_sc("-- Error: sc (a1, a2) su sice urcene, ale _global_opt[OPT_3_SPOLOCNA_CAST] sa nerovna ani jednej z nich!\n");
-								Export("Error: _global_opt[OPT_3_SPOLOCNA_CAST] assigned incorectly (a1, a2 -- ok)\n");
 								ALERT;
+								Export("Error: _global_opt[OPT_3_SPOLOCNA_CAST] assigned incorectly (a1, a2 -- ok)\n");
 								return;
 							}
 						}
@@ -10065,10 +10044,9 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty, short int force =
 				else{
 				// sem by to nemalo prÌsù
 					if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO){
-						hlavicka((char *)html_title[_global_jazyk]);
 						set_LOG_sc("-- Error: sc (a1) je sice urcena, ale _global_opt[OPT_3_SPOLOCNA_CAST] sa jej nerovna!\n");
-						Export("Error: _global_opt[OPT_3_SPOLOCNA_CAST] assigned incorectly (a1 -- ok)\n");
 						ALERT;
+						Export("Error: _global_opt[OPT_3_SPOLOCNA_CAST] assigned incorectly (a1 -- ok)\n");
 						return;
 					}
 				}
@@ -10078,10 +10056,9 @@ void set_spolocna_cast(_struct_sc sc, short int poradie_svaty, short int force =
 	else{
 		// sem by to nemalo prÌsù
 		if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO){
-			hlavicka((char *)html_title[_global_jazyk]);
 			Log("-- Error: sc (a1) nie je urcene; _global_opt[OPT_3_SPOLOCNA_CAST] == %s\n", nazov_spolc(_global_opt[OPT_3_SPOLOCNA_CAST]));
-			Export("Error: a1 (member of sc) unassigned | _global_opt[OPT_3_SPOLOCNA_CAST] == %s\n", nazov_spolc(_global_opt[OPT_3_SPOLOCNA_CAST]));
 			ALERT;
+			Export("Error: a1 (member of sc) unassigned | _global_opt[OPT_3_SPOLOCNA_CAST] == %s\n", nazov_spolc(_global_opt[OPT_3_SPOLOCNA_CAST]));
 			return;
 		}
 	}
@@ -11948,7 +11925,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					break;
 				case 2: // MES_FEB -- 02FEB
 					// if(poradie_svaty == 1){
-					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
 					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 						// definovanie parametrov pre modlitbu
 						if((poradie_svaty == 1) &&
@@ -14105,7 +14081,6 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 				case 19: // MES_MAR -- 19MAR
 label_19_MAR:
 					// if(poradie_svaty == 1){
-					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
 					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 						// definovanie parametrov pre modlitbu
 						if((poradie_svaty == 1) &&
@@ -14234,7 +14209,6 @@ label_19_MAR:
 				case 25: // MES_MAR -- 25MAR
 label_25_MAR:
 					// if(poradie_svaty == 1){
-					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
 					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 						// definovanie parametrov pre modlitbu
 						if((poradie_svaty == 1) &&
@@ -19642,7 +19616,6 @@ label_25_MAR:
 					break;
 				case 24: // MES_JUN -- 24JUN
 					// if(poradie_svaty == 1){
-					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
 					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 						// definovanie parametrov pre modlitbu
 						if((poradie_svaty == 1) &&
@@ -19934,7 +19907,6 @@ label_25_MAR:
 					break;
 				case 29: // MES_JUN -- 29JUN
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_APOSTOL);
-					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
 					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 						// preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o slavnost, ktora ma takmer najvacsiu prioritu, a preto ma aj prve vespery - a vtedy by to normalne nefungovalo; nastavenie veci pre modlitbu by sa muselo diat v predoslom dni, co je neciste riesenie
 						// definovanie parametrov pre modlitbu
@@ -20353,7 +20325,6 @@ label_25_MAR:
 						}
 						if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 							// preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o slavnost, ktora ma takmer najvacsiu prioritu, a preto ma aj prve vespery - a vtedy by to normalne nefungovalo; nastavenie veci pre modlitbu by sa muselo diat v predoslom dni, co je neciste riesenie
-							// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
 							// definovanie parametrov pre modlitbu
 							sc = _decode_spol_cast(_global_svaty1.spolcast);
 							Log("Cyril a Metod: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
@@ -22177,7 +22148,6 @@ label_25_MAR:
 					break;
 				case 6: // MES_AUG -- 06AUG
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
-					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
 					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 						// preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o sviatok Pana, ktora ma velku prioritu, a preto ma aj - ak je nedela - prve vespery 
 						// definovanie parametrov pre modlitbu
@@ -22581,7 +22551,6 @@ label_25_MAR:
 					break;
 				case 15: // MES_AUG -- 15AUG
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_PANNA_MARIA);
-					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
 					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 						// preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o sviatok Pana, ktora ma velku prioritu, a preto ma aj - ak je nedela - prve vespery 
 						// definovanie parametrov pre modlitbu
@@ -22898,7 +22867,6 @@ label_25_MAR:
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_HU;
 						if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 							// preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o slavnost, ktora ma takmer najvacsiu prioritu, a preto ma aj prve vespery - a vtedy by to normalne nefungovalo; nastavenie veci pre modlitbu by sa muselo diat v predoslom dni, co je neciste riesenie
-							// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
 							// definovanie parametrov pre modlitbu
 							sc = _decode_spol_cast(_global_svaty1.spolcast);
 							Log("HU: Sv. Stefan: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
@@ -23848,7 +23816,6 @@ label_25_MAR:
 					break;
 				case 14: // MES_SEP -- 14SEP
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEBRAT);
-					// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
 					if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 						// preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o sviatok Pana, ktora ma velku prioritu, a preto ma aj - ak je nedela - prve vespery 
 						// definovanie parametrov pre modlitbu
@@ -24395,7 +24362,6 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_SEP_24_HU[_global_jazyk], MENO_SVIATKU);
 						if((poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || (poradie_svaty == 1)){
 							// preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o slavnost, ktora ma takmer najvacsiu prioritu, a preto ma aj prve vespery - a vtedy by to normalne nefungovalo; nastavenie veci pre modlitbu by sa muselo diat v predoslom dni, co je neciste riesenie
-							// 2009-03-27: zmena 0 na UNKNOWN_PORADIE_SVATEHO
 							// definovanie parametrov pre modlitbu
 							sc = _decode_spol_cast(_global_svaty1.spolcast);
 							Log("HU: GellÈrt: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
@@ -28510,9 +28476,11 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 	Log("teraz priradim do _global_den vsetko z _global_svaty%d...\n", poradie_svaty);
 	Log("    (tato cast bola povodne v sviatky_svatych s 3 vstupmi, ale teraz je tu)\n");
 	switch(poradie_svaty){
+		// case 0: vöetko je nastavenÈ v _global_den
 		case 1: _global_den = _global_svaty1; break;
 		case 2: _global_den = _global_svaty2; break;
 		case 3: _global_den = _global_svaty3; break;
+		// case 4: vöetko je nastavenÈ v _global_pm_sobota;
 		default: // sem by sa to nemalo dostat
 			Log("--Error: switch(poradie_svaty) nezabralo pre 1, 2, 3...\n"); break;
 	}// switch();
@@ -28531,10 +28499,10 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 	// ak opt_3 je MODL_SPOL_CAST_NEURCENA, tak ju urcime podla 1. spolocnej casti
 	if(_global_opt[OPT_3_SPOLOCNA_CAST] == MODL_SPOL_CAST_NEURCENA){
 		_global_opt[OPT_3_SPOLOCNA_CAST] = sc.a1;
-		Log("\tsetting _global_opt[OPT_3_SPOLOCNA_CAST] to sc.a1 == %d\n", sc.a1);
+		Log("setting _global_opt[OPT_3_SPOLOCNA_CAST] to sc.a1 == %d\n", sc.a1);
 	}
 	else {
-		Log("\tnie je potrebnÈ modifikovaù, lebo uû je nastaven· (hoci sc.a1 == %d)\n", sc.a1);
+		Log("nie je potrebnÈ modifikovaù, lebo uû je nastaven· (hoci sc.a1 == %d)\n", sc.a1);
 	}
 	ret = sviatky_svatych(den, mesiac, poradie_svaty);
 	Log("-- sviatky_svatych(%d, %d) -- spustene druhykrat, vysledok (pocet svatych) == %d\n", den, mesiac, ret);
