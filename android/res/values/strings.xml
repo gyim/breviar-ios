@@ -12,6 +12,9 @@
     <string name="alarms_title">Notification settings:</string>
     <string name="alarmOff">disabled</string>
 
+    <string name="fullscreenOn">Fullscreen</string>
+    <string name="fullscreenOff">No fullscreen</string>
+
     <string name="inv">Invitatiorium</string>
     <string name="rch">Lauds</string>
     <string name="vesp">Vespers</string>

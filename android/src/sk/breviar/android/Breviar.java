@@ -19,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -43,6 +44,7 @@ public class Breviar extends Activity {
     int scale;
     String language;
     boolean initialized, clearHistory;
+    boolean fullscreen = false;
 
     void goHome() {
       Log.v("breviar", "goHome");
@@ -323,12 +325,34 @@ public class Breviar extends Activity {
           Intent selectLang = new Intent(this, LangSelect.class);
           startActivityForResult(selectLang, 0);
           return true;
+        case R.id.fullscreen_toggle:
+          WindowManager.LayoutParams params = getWindow().getAttributes();
+          if (fullscreen) {
+            findViewById(R.id.navbar).setVisibility(View.VISIBLE);
+            params.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
+          } else {
+            findViewById(R.id.navbar).setVisibility(View.GONE);
+            params.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+          }
+          getWindow().setAttributes(params);
+          fullscreen = !fullscreen;
+          return true;
         case R.id.alarms:
           startActivity(new Intent("sk.breviar.android.ALARMS"));
           return true;
         default:
           return super.onOptionsItemSelected(item);
       }
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+      if (fullscreen) {
+        menu.findItem(R.id.fullscreen_toggle).setTitle(R.string.fullscreenOff);
+      } else {
+        menu.findItem(R.id.fullscreen_toggle).setTitle(R.string.fullscreenOn);
+      }
+      return super.onPrepareOptionsMenu(menu);
     }
 
     @Override

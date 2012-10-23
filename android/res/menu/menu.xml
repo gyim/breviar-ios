@@ -6,6 +6,10 @@
         android:title="@string/lang_select">
     </item>
 
+    <item android:id="@+id/fullscreen_toggle"
+        android:title="@string/fullscreenOn">
+    </item>
+
     <item android:id="@+id/alarms"
         android:title="@string/alarms">
 <!--        android:icon="@drawable/panel"> //-->
