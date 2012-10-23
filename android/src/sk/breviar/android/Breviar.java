@@ -195,6 +195,8 @@ public class Breviar extends Activity {
         id = intent.getIntExtra("id", -1);
       }
 
+      Log.v("breviar", "onCreate: intent id = " + id);
+
       if (id >=0 && id < Util.events.length) {
         wv.loadUrl("http://127.0.0.1:" + S.port + "/" + scriptname + 
                    "?qt=pdnes&p=" + Util.events[id].p + Html.fromHtml(S.getOpts()));
@@ -209,6 +211,7 @@ public class Breviar extends Activity {
       if (intent.getAction().equals("sk.breviar.android.action.SHOW")) {
         id = intent.getIntExtra("id", -1);
       }
+      Log.v("breviar", "onNewIntent: id = " + id);
 
       if (id >=0 && id < Util.events.length) {
         wv.loadUrl("http://127.0.0.1:" + S.port + "/" + scriptname + 

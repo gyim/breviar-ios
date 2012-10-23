@@ -11,13 +11,6 @@ import android.content.Intent;
 import android.util.Log;
 
 import sk.breviar.android.Util;
-/*
-import android.content.ComponentName;
-import android.os.Bundle;
-import android.telephony.SmsMessage;
-
-import sk.ksp.riso.whereiam.replySms;
-*/
 
 public class AlarmReceiver extends BroadcastReceiver {
   @Override

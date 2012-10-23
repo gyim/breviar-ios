@@ -1,33 +1,5 @@
 package sk.breviar.android;
 
-/*
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.Intent;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.DialogInterface;
-import android.app.Dialog;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.net.Uri;
-import android.text.Html;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.Window;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Button;
-import java.io.IOException;
-import sk.breviar.android.Server;
-*/
-
 import android.support.v4.app.DialogFragment;
 
 import android.app.Dialog;
@@ -35,6 +7,7 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TimePicker;
 
@@ -71,6 +44,14 @@ public class AlarmTimePickerFragment extends DialogFragment
         });
         */
 
+    Button b;
+    b = d.getButton(DialogInterface.BUTTON_NEGATIVE);
+    if (b != null) b.setEnabled(false);
+
+    b = d.getButton(DialogInterface.BUTTON_NEUTRAL);
+    if (b != null) b.setEnabled(false);
+
+    /*
     d.setOnDismissListener(new TimePickerDialog.OnDismissListener() {
           public void onDismiss(DialogInterface dialog) {
             box().setChecked(!box().isChecked());
@@ -82,6 +63,7 @@ public class AlarmTimePickerFragment extends DialogFragment
             box().setChecked(!box().isChecked());
           }
         });
+    */
 
     return d;
   }

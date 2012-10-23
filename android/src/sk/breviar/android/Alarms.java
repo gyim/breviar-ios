@@ -1,30 +1,5 @@
 package sk.breviar.android;
 
-/*
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.Intent;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.DialogInterface;
-import android.app.Dialog;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.net.Uri;
-import android.text.Html;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.Window;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import java.io.IOException;
-import sk.breviar.android.Server;
-*/
-
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
