@@ -11,6 +11,9 @@
     <string name="alarms_title">Nastavenie upozornení:</string>
     <string name="alarmOff">nepripomínať</string>
 
+    <string name="fullscreenOn">Celá obrazovka</string>
+    <string name="fullscreenOff">Zobraz navigáciu</string>
+
     <string name="inv">Invitatórium</string>
     <string name="rch">Ranné chvály</string>
     <string name="vesp">Vešpery</string>
