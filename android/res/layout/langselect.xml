@@ -30,4 +30,8 @@
     <Button android:id="@+id/lang_sk" android:text="@string/lang_sk" 
         android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="1"/>
 
+    <CheckBox android:id="@+id/override_locale_check" android:text="@string/override_locale" 
+        android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="1"/>
+  
+
 </LinearLayout>
