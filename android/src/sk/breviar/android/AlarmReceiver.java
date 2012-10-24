@@ -22,11 +22,10 @@ public class AlarmReceiver extends BroadcastReceiver {
       if (id != -1) {
         PendingIntent pi = PendingIntent.getActivity(ctx, 0, 
           new Intent("sk.breviar.android.action.SHOW")
-              .putExtra("id", id), 0);
+              .putExtra("id", id), PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationManager notificator =
             (NotificationManager)ctx.getSystemService(ctx.NOTIFICATION_SERVICE);
-        notificator.cancel(1);
         notificator.notify(1, 
           new NotificationCompat.Builder(ctx)
             .setContentTitle(ctx.getString(Util.events[id].notify_text))

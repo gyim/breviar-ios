@@ -100,7 +100,6 @@ public class Breviar extends Activity {
       super.onCreate(savedInstanceState);
       requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-      updateFullscreen();
       setContentView(R.layout.breviar);
 
       wv = (WebView)findViewById(R.id.wv);
@@ -207,6 +206,7 @@ public class Breviar extends Activity {
       } else {
         if (wv.restoreState(savedInstanceState) == null) goHome();
       }
+      updateFullscreen();
     }
 
     @Override
