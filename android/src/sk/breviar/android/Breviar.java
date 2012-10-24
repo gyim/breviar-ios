@@ -91,6 +91,7 @@ public class Breviar extends Activity {
       SharedPreferences settings = getSharedPreferences(Util.prefname, 0);
       language = settings.getString("language", "sk");
       scale = settings.getInt("scale", 100);
+      fullscreen = settings.getBoolean("fullscreen", false);
       String opts = settings.getString("params", "");
 
       // Initialize server very early, to avoid races
@@ -99,6 +100,7 @@ public class Breviar extends Activity {
       super.onCreate(savedInstanceState);
       requestWindowFeature(Window.FEATURE_NO_TITLE);
 
+      updateFullscreen();
       setContentView(R.layout.breviar);
 
       wv = (WebView)findViewById(R.id.wv);
@@ -236,6 +238,7 @@ public class Breviar extends Activity {
       SharedPreferences.Editor editor = settings.edit();
       editor.putString("language", language);
       editor.putInt("scale", scale);
+      editor.putBoolean("fullscreen", fullscreen);
       if (S != null) {
         editor.putString("params", S.getOpts());
       }
@@ -317,6 +320,18 @@ public class Breviar extends Activity {
       }
     }
 
+    void updateFullscreen() {
+      WindowManager.LayoutParams params = getWindow().getAttributes();
+      if (fullscreen) {
+        findViewById(R.id.navbar).setVisibility(View.GONE);
+        params.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+      } else {
+        findViewById(R.id.navbar).setVisibility(View.VISIBLE);
+        params.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
+      }
+      getWindow().setAttributes(params);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
       // Handle item selection
@@ -326,16 +341,9 @@ public class Breviar extends Activity {
           startActivityForResult(selectLang, 0);
           return true;
         case R.id.fullscreen_toggle:
-          WindowManager.LayoutParams params = getWindow().getAttributes();
-          if (fullscreen) {
-            findViewById(R.id.navbar).setVisibility(View.VISIBLE);
-            params.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
-          } else {
-            findViewById(R.id.navbar).setVisibility(View.GONE);
-            params.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-          }
-          getWindow().setAttributes(params);
           fullscreen = !fullscreen;
+          updateFullscreen();
+          syncPreferences();
           return true;
         case R.id.alarms:
           startActivity(new Intent("sk.breviar.android.ALARMS"));
