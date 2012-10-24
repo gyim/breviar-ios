@@ -24,7 +24,10 @@ public class AlarmReceiver extends BroadcastReceiver {
           new Intent("sk.breviar.android.action.SHOW")
               .putExtra("id", id), 0);
 
-        ((NotificationManager)ctx.getSystemService(ctx.NOTIFICATION_SERVICE)).notify(1, 
+        NotificationManager notificator =
+            (NotificationManager)ctx.getSystemService(ctx.NOTIFICATION_SERVICE);
+        notificator.cancel(1);
+        notificator.notify(1, 
           new NotificationCompat.Builder(ctx)
             .setContentTitle(ctx.getString(Util.events[id].notify_text))
             .setSmallIcon(R.drawable.icon)
