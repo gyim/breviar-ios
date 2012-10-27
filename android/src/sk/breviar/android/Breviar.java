@@ -68,9 +68,14 @@ public class Breviar extends Activity {
 
     void resetLanguage() {
       S.setLanguage(language);
-      // musime zahodit aj nastavenia, mozu byt ine. A zresetovalo by to aj jazyk spat.
       clearHistory = true;
-      wv.loadUrl("http://127.0.0.1:" + S.port + "/" + scriptname + "?qt=pdnes");
+      // povodne sme zahadzovali cele nastavenia:
+      // wv.loadUrl("http://127.0.0.1:" + S.port + "/" + scriptname + "?qt=pdnes");
+      // namiesto toho sa snazime z nich iba dat prec co je nekompatibilne. Toto je prvy pokus.
+      wv.loadUrl("http://127.0.0.1:" + S.port + "/" + scriptname +
+                 "?qt=pdnes" + Html.fromHtml(S.getOpts()
+                     .replaceAll("&amp;c=[^&]*&amp;", "&amp;")
+                     .replaceAll("&amp;j=[^&]*&amp;", "&amp;")));
       syncPreferences();
     }
 
