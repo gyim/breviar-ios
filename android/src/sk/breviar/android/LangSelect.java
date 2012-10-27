@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+
+import sk.breviar.android.BreviarApp;
 
 public class LangSelect extends Activity {
 
@@ -37,5 +40,15 @@ public class LangSelect extends Activity {
           activity.finish();
         }
       });
+
+      CheckBox override_check = (CheckBox)findViewById(R.id.override_locale_check);
+
+      override_check.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          BreviarApp.setOverrideLocale(getApplicationContext(), ((CheckBox)v).isChecked());
+        }
+      });
+
+      override_check.setChecked(BreviarApp.getOverrideLocale(getApplicationContext()));
     }
 }

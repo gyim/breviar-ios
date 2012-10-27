@@ -46,6 +46,8 @@ public class Breviar extends Activity {
     boolean initialized, clearHistory;
     boolean fullscreen = false;
 
+    int appEventId = -1;
+
     void goHome() {
       Log.v("breviar", "goHome");
       wv.loadUrl("http://127.0.0.1:" + S.port + "/" + scriptname + 
@@ -86,6 +88,8 @@ public class Breviar extends Activity {
     public void onCreate(Bundle savedInstanceState)
     {
       Log.v("breviar", "onCreate");
+
+      appEventId = BreviarApp.getEventId();
 
       // Restore preferences
       SharedPreferences settings = getSharedPreferences(Util.prefname, 0);
@@ -207,6 +211,15 @@ public class Breviar extends Activity {
         if (wv.restoreState(savedInstanceState) == null) goHome();
       }
       updateFullscreen();
+    }
+
+    @Override
+    protected void onResume() {
+      if (appEventId < BreviarApp.getEventId()) {
+        appEventId = BreviarApp.getEventId();
+        recreate();
+      }
+      super.onResume();
     }
 
     @Override

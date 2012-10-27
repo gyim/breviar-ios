@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import sk.breviar.android.BreviarApp;
 import sk.breviar.android.Util;
 
 public class AlarmReceiver extends BroadcastReceiver {
@@ -20,6 +21,7 @@ public class AlarmReceiver extends BroadcastReceiver {
       int id = in.getIntExtra("id", -1);
       Log.v("breviar", "notification id " + id);
       if (id != -1) {
+        BreviarApp.initLocale(ctx);
         PendingIntent pi = PendingIntent.getActivity(ctx, 0, 
           new Intent("sk.breviar.android.action.SHOW")
               .putExtra("id", id), PendingIntent.FLAG_UPDATE_CURRENT);

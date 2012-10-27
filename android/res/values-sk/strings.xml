@@ -7,6 +7,13 @@
     <string name="pgup">Hore</string>
     <string name="pgdn">Ďalej</string>
 
+    <string name="lang_select">Jazyk</string>
+    <string name="lang_select_title">Výber jazyka:</string>
+    <string name="lang_cz">Čeština</string>
+    <string name="lang_sk">Slovenčina</string>
+    <string name="lang_hu">Maďarčina</string>
+    <string name="override_locale">Použiť tento jazyk aj v ovládacích prvkoch</string>
+
     <string name="alarms">Upozornenia</string>
     <string name="alarms_title">Nastavenie upozornení:</string>
     <string name="alarmOff">nepripomínať</string>

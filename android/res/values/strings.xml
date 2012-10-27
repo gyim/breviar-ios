@@ -7,6 +7,7 @@
     <string name="lang_cz">Czech</string>
     <string name="lang_sk">Slovak</string>
     <string name="lang_hu">Hungarian</string>
+    <string name="override_locale">Override system-wide language settings</string>
 
     <string name="alarms">Notifications</string>
     <string name="alarms_title">Notification settings:</string>
