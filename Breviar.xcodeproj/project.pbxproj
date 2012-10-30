@@ -22,7 +22,7 @@
 		7061B0A515FA8E1A00A83E0A /* BRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0A415FA8E1A00A83E0A /* BRViewController.m */; };
 		7061B0B115FAA18C00A83E0A /* BRPrayerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0B015FAA18C00A83E0A /* BRPrayerListViewController.m */; };
 		7061B0B515FAA34100A83E0A /* BRPrayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0B415FAA34100A83E0A /* BRPrayerViewController.m */; };
-		7061B0B815FAA3C500A83E0A /* BRPrayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0B715FAA3C500A83E0A /* BRPrayer.mm */; };
+		7061B0B815FAA3C500A83E0A /* BRPrayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0B715FAA3C500A83E0A /* BRPrayer.m */; };
 		7061B0D315FB929300A83E0A /* breviar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0BD15FB929300A83E0A /* breviar.cpp */; };
 		7061B0D415FB929300A83E0A /* cgiutils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0BF15FB929300A83E0A /* cgiutils.cpp */; };
 		7061B0D515FB929300A83E0A /* citania.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0C115FB929300A83E0A /* citania.cpp */; };
@@ -36,6 +36,9 @@
 		7061B0DD15FB929300A83E0A /* mylog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0D115FB929300A83E0A /* mylog.cpp */; };
 		7061B0E015FB932000A83E0A /* mystring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0DE15FB932000A83E0A /* mystring.cpp */; };
 		70AAAA4E15FBFBE4008D314D /* BRSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AAAA4D15FBFBE4008D314D /* BRSettings.m */; };
+		70E01273162F54BA00601CA3 /* BRDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E01272162F54BA00601CA3 /* BRDay.m */; };
+		70E01277162F553000601CA3 /* BRCelebration.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E01276162F553000601CA3 /* BRCelebration.m */; };
+		70E0127A162F56E500601CA3 /* BRCGIQuery.mm in Sources */ = {isa = PBXBuildFile; fileRef = 70E01279162F56E500601CA3 /* BRCGIQuery.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,7 +69,7 @@
 		7061B0B315FAA34100A83E0A /* BRPrayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRPrayerViewController.h; sourceTree = "<group>"; };
 		7061B0B415FAA34100A83E0A /* BRPrayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRPrayerViewController.m; sourceTree = "<group>"; };
 		7061B0B615FAA3C500A83E0A /* BRPrayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRPrayer.h; sourceTree = "<group>"; };
-		7061B0B715FAA3C500A83E0A /* BRPrayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BRPrayer.mm; sourceTree = "<group>"; };
+		7061B0B715FAA3C500A83E0A /* BRPrayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRPrayer.m; sourceTree = "<group>"; };
 		7061B0BD15FB929300A83E0A /* breviar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = breviar.cpp; path = "../../cgi-bin/source/breviar.cpp"; sourceTree = "<group>"; };
 		7061B0BE15FB929300A83E0A /* breviar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = breviar.h; path = "../../cgi-bin/source/breviar.h"; sourceTree = "<group>"; };
 		7061B0BF15FB929300A83E0A /* cgiutils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cgiutils.cpp; path = "../../cgi-bin/source/cgiutils.cpp"; sourceTree = "<group>"; };
@@ -93,6 +96,12 @@
 		7061B0DF15FB932000A83E0A /* mystring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mystring.h; path = "../../cgi-bin/source/mystring.h"; sourceTree = "<group>"; };
 		70AAAA4C15FBFBE4008D314D /* BRSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettings.h; sourceTree = "<group>"; };
 		70AAAA4D15FBFBE4008D314D /* BRSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRSettings.m; sourceTree = "<group>"; };
+		70E01271162F54BA00601CA3 /* BRDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDay.h; sourceTree = "<group>"; };
+		70E01272162F54BA00601CA3 /* BRDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDay.m; sourceTree = "<group>"; };
+		70E01275162F553000601CA3 /* BRCelebration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCelebration.h; sourceTree = "<group>"; };
+		70E01276162F553000601CA3 /* BRCelebration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRCelebration.m; sourceTree = "<group>"; };
+		70E01278162F56E500601CA3 /* BRCGIQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCGIQuery.h; sourceTree = "<group>"; };
+		70E01279162F56E500601CA3 /* BRCGIQuery.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BRCGIQuery.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,7 +186,13 @@
 			children = (
 				7061B0BC15FB923300A83E0A /* cgi */,
 				7061B0B615FAA3C500A83E0A /* BRPrayer.h */,
-				7061B0B715FAA3C500A83E0A /* BRPrayer.mm */,
+				7061B0B715FAA3C500A83E0A /* BRPrayer.m */,
+				70E01271162F54BA00601CA3 /* BRDay.h */,
+				70E01272162F54BA00601CA3 /* BRDay.m */,
+				70E01275162F553000601CA3 /* BRCelebration.h */,
+				70E01276162F553000601CA3 /* BRCelebration.m */,
+				70E01278162F56E500601CA3 /* BRCGIQuery.h */,
+				70E01279162F56E500601CA3 /* BRCGIQuery.mm */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -327,7 +342,7 @@
 				7061B0A515FA8E1A00A83E0A /* BRViewController.m in Sources */,
 				7061B0B115FAA18C00A83E0A /* BRPrayerListViewController.m in Sources */,
 				7061B0B515FAA34100A83E0A /* BRPrayerViewController.m in Sources */,
-				7061B0B815FAA3C500A83E0A /* BRPrayer.mm in Sources */,
+				7061B0B815FAA3C500A83E0A /* BRPrayer.m in Sources */,
 				7061B0D315FB929300A83E0A /* breviar.cpp in Sources */,
 				7061B0D415FB929300A83E0A /* cgiutils.cpp in Sources */,
 				7061B0D515FB929300A83E0A /* citania.cpp in Sources */,
@@ -345,6 +360,9 @@
 				7054369415FBF1D1005854DC /* BRFontPickerViewController.m in Sources */,
 				70AAAA4E15FBFBE4008D314D /* BRSettings.m in Sources */,
 				7034597D15FCE84D000A1711 /* BRFontHelper.m in Sources */,
+				70E01273162F54BA00601CA3 /* BRDay.m in Sources */,
+				70E01277162F553000601CA3 /* BRCelebration.m in Sources */,
+				70E0127A162F56E500601CA3 /* BRCGIQuery.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

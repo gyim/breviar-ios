@@ -8,6 +8,7 @@
 
 #import "BRPrayerListViewController.h"
 #import "BRPrayerViewController.h"
+#import "BRDay.h"
 
 static NSString *prayerSegues[] = {
 	[BRInvitatory]         = @"ShowInvitatory",
@@ -71,9 +72,19 @@ static NSString *prayerSegues[] = {
 	int i;
 	for (i=0; prayerSegues[i]; i++) {
 		if ([segueId isEqualToString:prayerSegues[i]]) {
-			BRPrayerType prayerType = (BRPrayerType)i;
 			BRPrayerViewController *destController = segue.destinationViewController;
-			destController.prayer = [BRPrayer prayerWithType:prayerType date:self.date];
+			
+			// Get celebration ID
+			BRDay *day = [BRDay dayWithDate:self.date];
+			NSInteger celebrationId = 0;
+			BRCelebration *celebration = [day.celebrations objectAtIndex:0];
+			if (celebration) {
+				celebrationId = celebration.celebrationId;
+			}
+			
+			// Get prayer data
+			BRPrayerType prayerType = (BRPrayerType)i;
+			destController.prayer = [BRPrayer prayerWithType:prayerType celebration:0 date:self.date];
 			return;
 		}
 	}

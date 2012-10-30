@@ -25,5 +25,5 @@ typedef enum {
 @property(strong) NSString *title;
 @property(strong) NSString *body;
 
-+ (BRPrayer *)prayerWithType:(BRPrayerType)prayerType date:(NSDate *)date;
++ (BRPrayer *)prayerWithType:(BRPrayerType)prayerType celebration:(NSInteger)celebrationId date:(NSDate *)date;
 @end
