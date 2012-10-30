@@ -7,8 +7,7 @@
 //
 
 #import "BRPrayer.h"
-#include "breviar.h"
-#include "myexpt.h"
+#include "BRCGIQuery.h"
 
 @implementation BRPrayer
 @synthesize prayerType;
@@ -37,34 +36,23 @@ static NSString *prayerQueryIds[] = {
 	[BRCompline]           = @"mk"
 };
 
-+ (BRPrayer *)prayerWithType:(BRPrayerType)prayerType date:(NSDate *)date {
++ (BRPrayer *)prayerWithType:(BRPrayerType)prayerType celebration:(NSInteger)celebrationId date:(NSDate *)date {
 	BRPrayer *prayer = [[BRPrayer alloc] init];
 	prayer.title = prayerTitles[prayerType];
 	
 	// Get date components
 	NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:date];
 	
-	// Generate body
-	NSString *queryString = [NSString stringWithFormat:@"-sqt=pdt&d=%d&m=%d&r=%d&p=%@&ds=1&j=hu&o0=60&o2=152",
-							 components.day,
-							 components.month,
-							 components.year,
-							 prayerQueryIds[prayerType]];
-	
-	NSString *includeString = [NSString stringWithFormat:@"-i%@",
-							   [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"html/include"]];
-	
-	int argc = 5;
-	const char *argv[] = {
-		"l.cgi",
-		"-qpdt",
-		"-H",
-		queryString.UTF8String,
-		includeString.UTF8String
-	};
-	breviar_main(argc, (char **)argv);
-	
-	prayer.body = [NSString stringWithCString:getExportedString() encoding:NSWindowsCP1250StringEncoding];
+	prayer.body = [BRCGIQuery queryWithArgs:@{
+				   @"qt": @"pdt",
+				   @"d": [NSNumber numberWithInteger:components.day],
+				   @"m": [NSNumber numberWithInteger:components.month],
+				   @"r": [NSNumber numberWithInteger:components.year],
+				   @"p": prayerQueryIds[prayerType],
+				   @"ds": [NSNumber numberWithInteger:celebrationId],
+				   @"o0": @"60",
+				   @"o2": @"152",
+				   }];
 	
 	return prayer;
 }
