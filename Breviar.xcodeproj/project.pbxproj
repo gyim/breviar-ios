@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7034597D15FCE84D000A1711 /* BRFontHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7034597C15FCE84D000A1711 /* BRFontHelper.m */; };
+		7042905716408A5E00663A7D /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042905316408A1100663A7D /* libxml2.dylib */; };
+		7042905816408A6300663A7D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042905516408A1600663A7D /* libz.dylib */; };
 		7054368D15FBDD69005854DC /* BRDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054368C15FBDD69005854DC /* BRDatePickerViewController.m */; };
 		7054369115FBF1B1005854DC /* BRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054369015FBF1B1005854DC /* BRSettingsViewController.m */; };
 		7054369415FBF1D1005854DC /* BRFontPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054369315FBF1D0005854DC /* BRFontPickerViewController.m */; };
@@ -41,9 +43,36 @@
 		70E0127A162F56E500601CA3 /* BRCGIQuery.mm in Sources */ = {isa = PBXBuildFile; fileRef = 70E01279162F56E500601CA3 /* BRCGIQuery.mm */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7042904D1640887200663A7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 704290441640887100663A7D /* RaptureXML.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0DEB8EB41467EC9B00024989;
+			remoteInfo = RaptureXML;
+		};
+		7042904F1640887200663A7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 704290441640887100663A7D /* RaptureXML.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0252B2DD142ADFC60018B75D;
+			remoteInfo = RaptureXMLTests;
+		};
+		704290511640890500663A7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 704290441640887100663A7D /* RaptureXML.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 0DEB8EB31467EC9B00024989;
+			remoteInfo = RaptureXML;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		7034597B15FCE84D000A1711 /* BRFontHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRFontHelper.h; sourceTree = "<group>"; };
 		7034597C15FCE84D000A1711 /* BRFontHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRFontHelper.m; sourceTree = "<group>"; };
+		704290441640887100663A7D /* RaptureXML.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RaptureXML.xcodeproj; path = RaptureXML/RaptureXML.xcodeproj; sourceTree = "<group>"; };
+		7042905316408A1100663A7D /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		7042905516408A1600663A7D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		7054368B15FBDD69005854DC /* BRDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDatePickerViewController.h; sourceTree = "<group>"; };
 		7054368C15FBDD69005854DC /* BRDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDatePickerViewController.m; sourceTree = "<group>"; };
 		7054368F15FBF1B1005854DC /* BRSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettingsViewController.h; sourceTree = "<group>"; };
@@ -109,6 +138,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7042905816408A6300663A7D /* libz.dylib in Frameworks */,
+				7042905716408A5E00663A7D /* libxml2.dylib in Frameworks */,
 				7061B08C15FA8E1A00A83E0A /* UIKit.framework in Frameworks */,
 				7061B08E15FA8E1A00A83E0A /* Foundation.framework in Frameworks */,
 				7061B09015FA8E1A00A83E0A /* CoreGraphics.framework in Frameworks */,
@@ -129,10 +160,30 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
+		704290421640886000663A7D /* Thirdparty */ = {
+			isa = PBXGroup;
+			children = (
+				704290441640887100663A7D /* RaptureXML.xcodeproj */,
+			);
+			name = Thirdparty;
+			sourceTree = "<group>";
+		};
+		704290451640887100663A7D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7042904E1640887200663A7D /* libRaptureXML.a */,
+				704290501640887200663A7D /* RaptureXMLTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		7061B07C15FA8E1A00A83E0A = {
 			isa = PBXGroup;
 			children = (
+				7042905516408A1600663A7D /* libz.dylib */,
+				7042905316408A1100663A7D /* libxml2.dylib */,
 				7061B09115FA8E1A00A83E0A /* Breviar */,
+				704290421640886000663A7D /* Thirdparty */,
 				7061B08A15FA8E1A00A83E0A /* Frameworks */,
 				7061B08815FA8E1A00A83E0A /* Products */,
 			);
@@ -271,6 +322,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				704290521640890500663A7D /* PBXTargetDependency */,
 			);
 			name = Breviar;
 			productName = Breviar;
@@ -296,12 +348,35 @@
 			mainGroup = 7061B07C15FA8E1A00A83E0A;
 			productRefGroup = 7061B08815FA8E1A00A83E0A /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 704290451640887100663A7D /* Products */;
+					ProjectRef = 704290441640887100663A7D /* RaptureXML.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				7061B08615FA8E1A00A83E0A /* Breviar */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		7042904E1640887200663A7D /* libRaptureXML.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRaptureXML.a;
+			remoteRef = 7042904D1640887200663A7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		704290501640887200663A7D /* RaptureXMLTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RaptureXMLTests.octest;
+			remoteRef = 7042904F1640887200663A7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7061B08515FA8E1A00A83E0A /* Resources */ = {
@@ -368,6 +443,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		704290521640890500663A7D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RaptureXML;
+			targetProxy = 704290511640890500663A7D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		7061B09415FA8E1A00A83E0A /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -406,6 +489,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -421,9 +505,11 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = RaptureXML;
 			};
 			name = Debug;
 		};
@@ -437,6 +523,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MODEL_SELECTED_IN_MAKEFILE,
@@ -447,10 +534,12 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = RaptureXML;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
