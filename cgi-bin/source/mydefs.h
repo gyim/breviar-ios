@@ -210,22 +210,24 @@ extern short int query_type; // premenna obsahujuca PRM_...
 
 #define PRM_TXT 	20
 #ifdef LONG_PARAM_NAMES
-	#define STR_PRM_TXT "PRM_DATUM_TXT"
+	#define STR_PRM_TXT "PRM_TXT_EXPORT"
 #else
 	#define STR_PRM_TXT "ptxt"
 #endif
 
-/* nasleduju parametre z formularov pre vsetky typy dotazov,
- * kedysi bolo pre kazdy STR_... definovane WWW_STR_...,
- * teraz ADD_WWW_PREFIX_(STR_...) 
- * 
- * 2004-08-14, duurko
- * definicia ADD_WWW_PREFIX_(a) ("WWW_"##a) 
- * ktora bola OK na g++ (gcc version 2.95.4 20011002)
- * sposobovala problemy 
- * na g++ (gcc version 3.3.3 20040412)
- * preto zmenene na ADD_WWW_PREFIX_(a) ("WWW_"a)
- */
+#define PRM_XML 	19
+#ifdef LONG_PARAM_NAMES
+	#define STR_PRM_XML "PRM_XML_EXPORT"
+#else
+	#define STR_PRM_XML "pxml"
+#endif
+
+// nasleduju parametre z formularov pre vsetky typy dotazov,
+// kedysi bolo pre kazdy STR_... definovane WWW_STR_..., teraz ADD_WWW_PREFIX_(STR_...) 
+// 2004-08-14: 
+// definicia ADD_WWW_PREFIX_(a) ("WWW_"##a) ktora bola OK na g++ (gcc version 2.95.4 20011002)
+// sposobovala problemy na g++ (gcc version 3.3.3 20040412)
+// preto zmenene na ADD_WWW_PREFIX_(a) ("WWW_"a)
 #define WWW_PREFIX "WWW_"
 #define ADD_WWW_PREFIX_(a) ("WWW_"a)
 
@@ -765,7 +767,11 @@ extern short int query_type; // premenna obsahujuca PRM_...
 	#define STR_QUERY_TYPE "qt"
 #endif
 
-#define ALERT	Export("<p>Ak probl&eacute;my pretrv&aacute;vaj&uacute;, kontaktujte pros&iacute;m <a href=\"mailto:%s\">autora str&aacute;nky</a>.</p>\n", cfg_MAIL_ADDRESS_default)
+// 2012-10-16: upraven˝ tento define tak, ûe vûdy musÌ byù pred volanÌm funkcie Export(); doÚho dovn˙tra som dal volanie hlaviËky
+#define ALERT	{\
+	hlavicka((char *)html_title[_global_jazyk]);\
+	Export("<p>Ak probl&eacute;my pretrv&aacute;vaj&uacute;, kontaktujte pros&iacute;m <a href=\"mailto:%s\">autora str&aacute;nky</a>.</p>\n", cfg_mail_address_default[_global_jazyk]);\
+	}
 
 // HTML stringy - casti stringov sustredene na tomto mieste; pridane 2003-07-02; rozöÌrenÈ 2011-01-27
 #define HTML_FORM_INPUT_SUBMIT   "input type=\"submit\" class=\"button\""
@@ -878,5 +884,105 @@ extern short int query_type; // premenna obsahujuca PRM_...
 #define FILENAME_EXPORT_MONTH_SIMPLE "%.2d%.2d"
 #define FILENAME_EXPORT_MONTH_FULL   "%.4d-%.2d"
 
-#endif /*__MYDEFS_H_*/
+#define HTML_ISO_FORMAT      "%04d-%02d-%02d"
+
+#define TEXT_COPYRIGHT       "(c) 1999-2012 Juraj VidÈky"
+#define TEXT_EMAIL           "videky@breviar.sk"
+
+// main XML element
+#define XML_MAIN             "LHData"
+
+// element XML_DAY with sub-elements
+#define XML_DAY              "CalendarDay"
+#define XML_CELEBRATION      "Celebration"
+#define XML_CELEBRATION_ID   "Id"
+#define XML_DATE_ISO         "DateISO"
+#define XML_DATE_DAY         "DateDay"
+#define XML_DATE_MONTH       "DateMonth"
+#define XML_DATE_YEAR        "DateYear"
+#define XML_STRING_TITLE     "StringTitle"
+#define XML_STRING_COMMUNIA  "StringCommunia"
+#define XML_STRING_VOLUME    "StringVolume"
+#define XML_DAY_OF_YEAR      "DayOfYear"
+#define XML_DAY_OF_WEEK      "DayOfWeek"
+#define XML_LIT_YEAR_LETTER  "LiturgicalYearLetter"
+#define XML_LIT_SEASON       "LiturgicalSeason"
+#define XML_LIT_WEEK         "LiturgicalWeek"
+#define XML_LIT_WEEK_PSALT   "LiturgicalWeekOfPsalter"
+#define XML_LIT_TYPE         "LiturgicalCelebrationType"
+#define XML_LIT_TYPE_LOCAL   "LiturgicalCelebrationTypeLocal"
+#define XML_LIT_LEVEL        "LiturgicalCelebrationLevel"
+#define XML_LIT_REQUIRED     "LiturgicalCelebrationRequired"
+#define XML_LIT_COMMUNIA     "LiturgicalCelebrationCommunia"
+#define XML_LIT_NAME         "LiturgicalCelebrationName"
+#define XML_LIT_COLOR        "LiturgicalCelebrationColor"
+#define XML_LIT_CALENDAR     "LiturgicalCalendar"
+
+// element XML_INFO with sub-elements
+#define XML_INFO             "Info"
+#define XML_COPYRIGHT        "Copyright"
+#define XML_ADDRESS          "Address"
+#define XML_BUILD_DATE       "BuildDate"
+#define XML_GENERATED        "Generated"
+
+// element XML_OPTIONS with sub-elements
+#define XML_OPTIONS          "Options"
+
+// POCET_GLOBAL_OPT
+#define XML_OPT_0_SPECIALNE                     "Opt0Special"
+#define XML_OPT_1_CASTI_MODLITBY                "Opt1PrayerPortions"
+#define XML_OPT_2_HTML_EXPORT                   "Opt2Export"
+#define XML_OPT_3_SPOLOCNA_CAST                 "Opt3Communia"
+#define XML_OPT_4_OFFLINE_EXPORT                "Opt4OfflineExport"
+
+// POCET_OPT_0_SPECIALNE
+#define XML_BIT_OPT_0_VERSE                     "BitOpt0VerseNumbers"
+#define XML_BIT_OPT_0_REFERENCIE                "BitOpt0References"
+#define XML_BIT_OPT_0_CITANIA                   "BitOpt0Readings"
+#define XML_BIT_OPT_0_ZJAVENIE_PANA_NEDELA      "BitOpt0EpiphanyOnSunday"
+#define XML_BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA   "BitOpt0AssumptionOnSunday"
+#define XML_BIT_OPT_0_TELAKRVI_NEDELA           "BitOpt0CorpusChristiOnSunday"
+
+// POCET_OPT_1_CASTI_MODLITBY
+#define XML_BIT_OPT_1_TEDEUM                    "BitOpt1TeDeum"
+#define XML_BIT_OPT_1_RUBRIKY                   "BitOpt1Rubrics"
+#define XML_BIT_OPT_1_CHVALOSPEVY               "BitOpt1Canticles"
+#define XML_BIT_OPT_1_SLAVA_OTCU                "BitOpt1GloryPrayer"
+#define XML_BIT_OPT_1_OTCENAS                   "BitOpt1OurFatherPrayer"
+#define XML_BIT_OPT_1_MCD_ZALMY_INE             "BitOpt1SupplPsalmodyDuringDay"
+#define XML_BIT_OPT_1_PC_VIGILIA                "BitOpt1VigilAfterReadings"
+#define XML_BIT_OPT_1_SPOMIENKA_SPOL_CAST       "BitOpt1MemoriesTakeFromCommunia"
+#define XML_BIT_OPT_1_PLNE_RESP                 "BitOpt1FullResponses"
+#define XML_BIT_OPT_1_ZALM95                    "BitOpt1InvitatoryUsePsalm95"
+#define XML_BIT_OPT_1_PROSBY_ZVOLANIE           "BitOpt1Repeat"
+#define XML_BIT_OPT_1_SKRY_POPIS                "BitOpt1HideDescription"
+#define XML_BIT_OPT_1_ZOBRAZ_SPOL_CAST          "BitOpt1ShowCommuniaDescription"
+
+// POCET_OPT_2_HTML_EXPORT
+#define XML_BIT_OPT_2_ISO_DATUM                 "BitOpt2ISOFormat"
+#define XML_BIT_OPT_2_BUTTON_PRVE_VESPERY       "BitOpt2FirstVespersButton"
+#define XML_BIT_OPT_2_FONT_FAMILY               "BitOpt2FontFamily"
+#define XML_BIT_OPT_2_FONT_NAME_CHOOSER         "BitOpt2FontNameChooser"
+#define XML_BIT_OPT_2_FONT_SIZE_CHOOSER         "BitOpt2FontSizeChooser"
+#define XML_BIT_OPT_2_NAVIGATION                "BitOpt2Navigation"
+#define XML_BIT_OPT_2_TEXT_WRAP                 "BitOpt2TextWrap"
+#define XML_BIT_OPT_2_BUTTONY_USPORNE           "BitOpt2ButtonsCondensed"
+#define XML_BIT_OPT_2_NOCNY_REZIM               "BitOpt2NightMode"
+#define XML_BIT_OPT_2_ROZNE_MOZNOSTI            "BitOpt2OptionsWithinPrayer"
+#define XML_BIT_OPT_2_HIDE_NAVIG_BUTTONS        "BitOpt2HideNavigationButtons"
+#define XML_BIT_OPT_2_HIDE_KALENDAR             "BitOpt2HideCalendar"
+#define XML_BIT_OPT_2_HIDE_OPTIONS1             "BitOpt2HideOptionsPart1"
+#define XML_BIT_OPT_2_HIDE_OPTIONS2             "BitOpt2HideOptionsPart2"
+
+// POCET_OPT_4_OFFLINE_EXPORT
+#define XML_BIT_OPT_4_MESIAC_RIADOK             "BitOpt4MonthAtLine"
+
+// starting, closing element (XML, HTML)
+#define ELEM_BEGIN(elem)     "<"elem">"
+#define ELEM_END(elem)       "</"elem">"
+
+#define ELEMID_BEGIN(elem)   "<"elem" Id=\"%d\">"
+#define ELEMVAL_BEGIN(elem)  "<"elem" Value=\"%d\">"
+
+#endif // __MYDEFS_H_
 

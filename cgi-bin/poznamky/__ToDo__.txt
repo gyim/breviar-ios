@@ -139,8 +139,12 @@ _________________________________________________________________________
 2012-09-24, JUV:
 
 -- 13. september 2014: keÔûe 14. 9. padne na nedeæu, pov˝öenie sv. krÌûa m· maù prvÈ veöpery!!!
+	-- 2012-10-22, JUV
+	-- bolo spÙsobenÈ divn˝m zapozn·mkovanÌm (na 2 miestach) tohto kÛdu: (_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP)
+	-- doplnenÈ: && (_global_jazyk != JAZYK_CZ) (t. j. ponechanÈ divnÈ spr·vanie pre CZ)...
 
 -- 14. september 2012 / Error: _global_opt[OPT_3_SPOLOCNA_CAST] assigned incorectly (a1 -- ok) | SEDEMBOLESTNEJ PANNY M¡RIE, PATR”NKY SLOVENSKA / sl·vnosù
+	-- hotovo (2012-10-22, JUV); chyba bola v _rozbor_dna(), kde switch(poradie_svaty) neobsahoval aj case 0
 
 _________________________________________________________________________
 
