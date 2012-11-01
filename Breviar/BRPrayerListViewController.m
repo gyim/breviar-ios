@@ -10,18 +10,6 @@
 #import "BRPrayerViewController.h"
 #import "BRDataSource.h"
 
-static NSString *prayerSegues[] = {
-    [BRInvitatory]         = @"ShowInvitatory",
-    [BROfficeOfReadings]   = @"ShowOfficeOfReadings",
-    [BRMorningPrayer]      = @"ShowMorningPrayer",
-    [BRMidMorningPrayer]   = @"ShowMidMorningPrayer",
-    [BRMiddayPrayer]       = @"ShowMiddayPrayer",
-    [BRMidAfternoonPrayer] = @"ShowMidAfternoonPrayer",
-    [BREveningPrayer]      = @"ShowEveningPrayer",
-    [BRCompline]           = @"ShowCompline",
-    nil
-};
-
 @interface BRPrayerListViewController ()
 
 @end
