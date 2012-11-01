@@ -13,5 +13,6 @@
 @property NSInteger celebrationId;
 @property(strong) NSString *title;
 @property(strong) NSString *subtitle;
+@property(strong) NSArray *prayers;
 
 @end

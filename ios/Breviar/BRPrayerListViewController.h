@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "BRDatePickerViewController.h"
+#import "BRDay.h"
 
 @interface BRPrayerListViewController : UITableViewController <BRDatePickerDelegate>
 @property(strong) NSDate *date;
-@property(strong) IBOutlet UILabel *dateLabel;
+@property(strong) BRDay *day;
+@property NSInteger celebrationIndex;
+
+- (void)loadDataForDate:(NSDate *)date;
 @end

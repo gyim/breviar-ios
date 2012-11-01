@@ -11,6 +11,7 @@
 		7042905716408A5E00663A7D /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042905316408A1100663A7D /* libxml2.dylib */; };
 		7042905816408A6300663A7D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042905516408A1600663A7D /* libz.dylib */; };
 		7042905916408BF600663A7D /* libRaptureXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042904E1640887200663A7D /* libRaptureXML.a */; };
+		7042905C1641F91C00663A7D /* BRDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7042905B1641F91B00663A7D /* BRDataSource.m */; };
 		7054368D15FBDD69005854DC /* BRDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054368C15FBDD69005854DC /* BRDatePickerViewController.m */; };
 		7054369115FBF1B1005854DC /* BRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054369015FBF1B1005854DC /* BRSettingsViewController.m */; };
 		7054369415FBF1D1005854DC /* BRFontPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054369315FBF1D0005854DC /* BRFontPickerViewController.m */; };
@@ -74,6 +75,8 @@
 		704290441640887100663A7D /* RaptureXML.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RaptureXML.xcodeproj; path = RaptureXML/RaptureXML.xcodeproj; sourceTree = "<group>"; };
 		7042905316408A1100663A7D /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		7042905516408A1600663A7D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		7042905A1641F91B00663A7D /* BRDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDataSource.h; sourceTree = "<group>"; };
+		7042905B1641F91B00663A7D /* BRDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDataSource.m; sourceTree = "<group>"; };
 		7054368B15FBDD69005854DC /* BRDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDatePickerViewController.h; sourceTree = "<group>"; };
 		7054368C15FBDD69005854DC /* BRDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDatePickerViewController.m; sourceTree = "<group>"; };
 		7054368F15FBF1B1005854DC /* BRSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettingsViewController.h; sourceTree = "<group>"; };
@@ -238,12 +241,14 @@
 			isa = PBXGroup;
 			children = (
 				7061B0BC15FB923300A83E0A /* cgi */,
-				7061B0B615FAA3C500A83E0A /* BRPrayer.h */,
-				7061B0B715FAA3C500A83E0A /* BRPrayer.m */,
+				7042905A1641F91B00663A7D /* BRDataSource.h */,
+				7042905B1641F91B00663A7D /* BRDataSource.m */,
 				70E01271162F54BA00601CA3 /* BRDay.h */,
 				70E01272162F54BA00601CA3 /* BRDay.m */,
 				70E01275162F553000601CA3 /* BRCelebration.h */,
 				70E01276162F553000601CA3 /* BRCelebration.m */,
+				7061B0B615FAA3C500A83E0A /* BRPrayer.h */,
+				7061B0B715FAA3C500A83E0A /* BRPrayer.m */,
 				70E01278162F56E500601CA3 /* BRCGIQuery.h */,
 				70E01279162F56E500601CA3 /* BRCGIQuery.mm */,
 			);
@@ -440,6 +445,7 @@
 				70E01273162F54BA00601CA3 /* BRDay.m in Sources */,
 				70E01277162F553000601CA3 /* BRCelebration.m in Sources */,
 				70E0127A162F56E500601CA3 /* BRCGIQuery.mm in Sources */,
+				7042905C1641F91C00663A7D /* BRDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
