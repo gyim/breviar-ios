@@ -8,13 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "BRCelebration.h"
-#import "BRPrayer.h"
 
 @interface BRDay : NSObject
 
 @property(strong) NSDate *date;
 @property(strong) NSArray *celebrations;
-
-+(BRDay *)dayWithDate:(NSDate *)date;
 
 @end
