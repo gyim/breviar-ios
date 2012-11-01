@@ -7,12 +7,15 @@
 //
 
 #import "BRAppDelegate.h"
+#import "BRDataSource.h"
 
 @implementation BRAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+	// Initialize data source
+	BRDataSource *dataSource = [BRDataSource instance];
+	dataSource.language = @"hu"; // TODO: get from build flags
     return YES;
 }
 							

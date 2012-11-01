@@ -36,25 +36,26 @@ static NSString *prayerQueryIds[] = {
 	[BRCompline]           = @"mk"
 };
 
-+ (BRPrayer *)prayerWithType:(BRPrayerType)prayerType celebration:(NSInteger)celebrationId date:(NSDate *)date {
-	BRPrayer *prayer = [[BRPrayer alloc] init];
-	prayer.title = prayerTitles[prayerType];
-	
-	// Get date components
-	NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:date];
-	
-	prayer.body = [BRCGIQuery queryWithArgs:@{
-				   @"qt": @"pdt",
-				   @"d": [NSNumber numberWithInteger:components.day],
-				   @"m": [NSNumber numberWithInteger:components.month],
-				   @"r": [NSNumber numberWithInteger:components.year],
-				   @"p": prayerQueryIds[prayerType],
-				   @"ds": [NSNumber numberWithInteger:celebrationId],
-				   @"o0": @"60",
-				   @"o2": @"152",
-				   }];
-	
-	return prayer;
+- (NSString *)title {
+	return prayerTitles[self.prayerType];
+}
+
+- (NSString *)body {
+	if (!body) {
+		NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:self.date];
+		
+		body = [BRCGIQuery queryWithArgs:@{
+				@"qt": @"pdt",
+				@"d": [NSNumber numberWithInteger:components.day],
+				@"m": [NSNumber numberWithInteger:components.month],
+				@"r": [NSNumber numberWithInteger:components.year],
+				@"p": prayerQueryIds[self.prayerType],
+				@"ds": [NSNumber numberWithInteger:self.celebrationId],
+				@"o0": @"60",
+				@"o2": @"152",
+				}];
+	}
+	return body;
 }
 
 @end
