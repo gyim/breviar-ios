@@ -6647,7 +6647,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 		som_v_tabulke = NIE;
 		// ïalšie vlastnosti z "_global_den"; používa sa globálne definovaná _struct_dm _local_den; nastavená vo funkcii init_global_string()
 		Export(ELEM_BEGIN(XML_DAY_OF_YEAR)"%d"ELEM_END(XML_DAY_OF_YEAR)"\n", _local_den.denvr);
-		Export(ELEM_BEGIN(XML_DAY_OF_WEEK)"%d"ELEM_END(XML_DAY_OF_WEEK)"\n", _local_den.denvt);
+		Export(ELEMID_BEGIN(XML_DAY_OF_WEEK)"%s"ELEM_END(XML_DAY_OF_WEEK)"\n", _local_den.denvt, nazov_dna(_local_den.denvt));
 		Export(ELEM_BEGIN(XML_LIT_YEAR_LETTER)"%c"ELEM_END(XML_LIT_YEAR_LETTER)"\n", _local_den.litrok);
 		Export(ELEM_BEGIN(XML_LIT_WEEK)"%d"ELEM_END(XML_LIT_WEEK)"\n", _local_den.tyzden);
 		Export(ELEM_BEGIN(XML_LIT_WEEK_PSALT)"%d"ELEM_END(XML_LIT_WEEK_PSALT)"\n", _local_den.tyzzal);
