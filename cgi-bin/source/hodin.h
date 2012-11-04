@@ -399,7 +399,7 @@ const char *zvazok_OBD[POCET_OBDOBI + 1] =
 
 // the name of celebration
 const char *nazov_slavenia_jazyk[POCET_SLAVENI + 1][POCET_JAZYKOV + 1] =
-{{"féria", "férie", "feria", "feria", "férie", "féria"}, // zmenené z "___", 2012-10-12
+{{"féria", "férie", "feria", "feria", "férie", "féria", "féria"}, // zmenené z "___", 2012-10-12
  {"slávnos", "slavnost", "celebration", "sollemnitas", "","SLAVNOST", "fõünnep"},
  {"sviatok", "svátek", "", "festum", "","Svátek", "ünnep"},
  {"spomienka", "památka", "", "memoria", "","Památka", "emléknap"},
@@ -6298,6 +6298,15 @@ const char *text_OKT_19_2[POCET_JAZYKOV + 1] =
  "Sv. Pavla od Køíe, knìze",
  "Keresztes Szent Pál áldozópap",
  };
+const char *text_OKT_21_CZ[POCET_JAZYKOV + 1] = 
+{"",
+ "Bl. Karla Rakouského",
+ "",
+ "",
+ "",
+ "Bl. Karla Rakouského",
+ "",
+ };
 const char *text_OKT_22_CZOP[POCET_JAZYKOV + 1] = 
 {"",
  "",
@@ -6307,13 +6316,13 @@ const char *text_OKT_22_CZOP[POCET_JAZYKOV + 1] =
  "Vıroèí posvìcení klášterního kostela",
  "hu_",
  };
-const char *text_OKT_22_HU[POCET_JAZYKOV + 1] = 
+const char *text_OKT_22[POCET_JAZYKOV + 1] = 
 {"",
+ "Bl. Jana Pavla II., papee",
  "",
  "",
  "",
- "",
- "",
+ "Bl. Jana Pavla II., papee",
  "Boldog II. János Pál pápa",
  };
 const char *text_OKT_23[POCET_JAZYKOV + 1] = 
