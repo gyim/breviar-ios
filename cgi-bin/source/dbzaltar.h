@@ -435,9 +435,6 @@ extern const char *text_NOV_02[POCET_JAZYKOV + 1];
 extern const char *text_NOV_03[POCET_JAZYKOV + 1];
 extern const char *text_NOV_04[POCET_JAZYKOV + 1];
 extern const char *text_NOV_05_SK[POCET_JAZYKOV + 1];
-extern const char *text_NOV_06_CZOP[POCET_JAZYKOV + 1];
-extern const char *text_NOV_07_CZOP[POCET_JAZYKOV + 1];
-extern const char *text_NOV_08_CZOP[POCET_JAZYKOV + 1];
 extern const char *text_NOV_09[POCET_JAZYKOV + 1];
 extern const char *text_NOV_10[POCET_JAZYKOV + 1];
 extern const char *text_NOV_11[POCET_JAZYKOV + 1];
@@ -675,5 +672,15 @@ extern const char *text_JUL_18_OP[POCET_JAZYKOV + 1];
 extern const char *text_JUL_24_1_OP[POCET_JAZYKOV + 1];
 extern const char *text_JUL_24_2_OP[POCET_JAZYKOV + 1];
 extern const char *text_JUL_27_OP[POCET_JAZYKOV + 1];
+
+extern const char *text_NOV_05_OP[POCET_JAZYKOV + 1];
+extern const char *text_NOV_06_OP[POCET_JAZYKOV + 1];
+extern const char *text_NOV_07_OP[POCET_JAZYKOV + 1];
+extern const char *text_NOV_08_OP[POCET_JAZYKOV + 1];
+extern const char *text_NOV_14_1_OP[POCET_JAZYKOV + 1];
+extern const char *text_NOV_14_2_OP[POCET_JAZYKOV + 1];
+extern const char *text_NOV_19_OP[POCET_JAZYKOV + 1];
+extern const char *text_NOV_24_OP[POCET_JAZYKOV + 1];
+extern const char *text_NOV_27_OP[POCET_JAZYKOV + 1];
 
 #endif // __DBZALTAR_H_

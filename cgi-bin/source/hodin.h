@@ -6553,32 +6553,41 @@ const char *text_NOV_05_SDB[POCET_JAZYKOV + 1] =
  "",
  "",
  };
-const char *text_NOV_06_CZOP[POCET_JAZYKOV + 1] = 
-{"",
+const char *text_NOV_05_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Šimona Ballacchiho, reho¾níka",
  "",
  "",
- "la_",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_NOV_06_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Alfonza de Navarrete, kòaza, a spoloèníkov, muèeníkov",
+ "",
+ "",
+ "",
  "",
  "Sv. Alfonse Navarrety, knìze a druhù, japonských muèedníkù",
- "hu_",
+ "",
  };
-const char *text_NOV_07_CZOP[POCET_JAZYKOV + 1] = 
-{"",
+const char *text_NOV_07_OP[POCET_JAZYKOV + 1] = 
+{"Všetkých svätých Rehole kazate¾ov",
  "",
  "",
- "la_",
+ "",
  "",
  "Všech svatých Øádu bratøí kazatelù",
- "hu_",
+ "",
  };
-const char *text_NOV_08_CZOP[POCET_JAZYKOV + 1] = 
-{"",
+const char *text_NOV_08_OP[POCET_JAZYKOV + 1] = 
+{"Spomienka na všetkých zosnulých bratov a sestry Rehole kazate¾ov",
  "",
  "",
- "la_",
+ "",
  "",
  "Všech zemøelých bratøí a sester Øádu bratøí kazatelù",
- "hu_",
+ "",
  };
 const char *text_NOV_09[POCET_JAZYKOV + 1] = 
 {"Výroèie posviacky Lateránskej baziliky",
@@ -6661,6 +6670,24 @@ const char *text_NOV_14_SJ[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_NOV_14_1_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Jána Licciu, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_NOV_14_2_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Lucie z Narni, panny",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_NOV_15[POCET_JAZYKOV + 1] = 
 {"Sv. Alberta Ve¾kého, biskupa a uèite¾a Cirkvi",
  "Sv. Alberta Velikého, biskupa a uèitele církve",
@@ -6723,6 +6750,15 @@ const char *text_NOV_18[POCET_JAZYKOV + 1] =
  "",
  "Posvìcení øímských bazilik svatých apoštolù Petra a Pavla",
  "Szent Péter- és Szent Pál-bazilikák felszentelése",
+ };
+const char *text_NOV_19_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Jakuba Benfattiho, biskupa",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_NOV_20_SK[POCET_JAZYKOV + 1] = 
 {"Výroèie posviacky katedrálneho chrámu v Nitre",
@@ -6787,6 +6823,15 @@ const char *text_NOV_24[POCET_JAZYKOV + 1] =
  "Sv. Ignáce Delgada, biskupa, Vincence Liema, knìze, "HTML_LINE_BREAK"Dominika An-Khama, otce rodiny, a druhù, vietnamských muèedníkù",
  "Dung-Lac Szent András áldozópap és társai vértanúk",
  };
+const char *text_NOV_24_OP[POCET_JAZYKOV + 1] = 
+{"Sv. Ignáca Klementa Delgadu, biskupa, "HTML_LINE_BREAK"Vincenta Le Quang Liem a Pace, kòaza, "HTML_LINE_BREAK"Dominika Pham Trong (An) Khama, laika, "HTML_LINE_BREAK"a spoloèníkov, muèeníkov",
+ "Sv. Ignáce Delgada, biskupa, Vincence Liema, knìze, "HTML_LINE_BREAK"Dominika An-Khama, otce rodiny, a druhù, vietnamských muèedníkù",
+ "",
+ "",
+ "",
+ "Sv. Ignáce Delgada, biskupa, Vincence Liema, knìze, "HTML_LINE_BREAK"Dominika An-Khama, otce rodiny, a druhù, vietnamských muèedníkù",
+ "",
+ };
 const char *text_NOV_25[POCET_JAZYKOV + 1] = 
 {"Sv. Kataríny Alexandrijskej, panny a muèenice",
  "Sv. Kateøiny Alexandrijské, panny a muèednice",
@@ -6816,6 +6861,15 @@ const char *text_NOV_25_SDB[POCET_JAZYKOV + 1] =
  };
 const char *text_NOV_26_SJ[POCET_JAZYKOV + 1] = 
 {"Sv. Jána Berchmansa, reho¾níka",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_NOV_27_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Margity Savojskej, matky rodiny a reho¾níèky",
  "",
  "",
  "",
