@@ -2202,7 +2202,7 @@ const char *html_text_kalendar[POCET_JAZYKOV + 1] =
  "calendario",
  "",
  "kalendáø",
- "naptárát"
+ "a naptárat"
 };
 // 2010-09-14: doplnené
 const char *html_text_kalendar_miestny[POCET_JAZYKOV + 1] = 
