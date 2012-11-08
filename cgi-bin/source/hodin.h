@@ -1870,6 +1870,25 @@ const char *html_text_option_skryt_zvolania[POCET_JAZYKOV + 1] =
  "elrejteni a választ minden könyörgés után"
 };
 
+const char *html_text_option_zobrazit_kratsie_prosby[POCET_JAZYKOV + 1] = 
+{"poui kratšie prosby z dodatku", 
+ "zobrazit kratší prosby z dodatku", 
+ "xxx", 
+ "use shorten prayers",
+ "",
+ "zobrazit kratší prosby z dodatku", 
+ "hu_"
+};
+const char *html_text_option_skryt_kratsie_prosby[POCET_JAZYKOV + 1] = 
+{"nepoui kratšie prosby z dodatku", 
+ "nezobrazit kratší prosby z dodatku", 
+ "xxx", 
+ "do not use shorten prayers",
+ "",
+ "nezobrazit kratší prosby z dodatku", 
+ "hu_"
+};
+
 const char *html_text_option1_prosby_zvolanie[POCET_JAZYKOV + 1] = 
 {"zvolanie v prosbách opakova po kadej prosbe", 
  "zvolání v prosbách zopakovat po kadé prosbì", 
@@ -1927,6 +1946,26 @@ const char *html_text_option1_spolc_svaty_explain[POCET_JAZYKOV + 1] =
  "", 
  "Rubrika, která pro modlitby svatıch informuje, které spoleèné texty jsou uity.",
  "Rubrika, amely azt az információt tartalmazza, hogy melyik közös részbõl vannak véve a szentek zsolozsmájához tartozó közös részek."
+};
+
+const char *html_text_option1_vesp_kratsie_prosby[POCET_JAZYKOV + 1] = 
+{"pre vešpery poui kratšie prosby z dodatku", 
+ "pro nešpory vzít kratší prosby z dodatku", 
+ "use shorten prayers for vespers", 
+ "", 
+ "", 
+ "pro veèerní chvály vzít kratší prosby z dodatku", 
+ "hu_"
+};
+
+const char *html_text_option1_vesp_kratsie_prosby_explain[POCET_JAZYKOV + 1] = 
+{"Pre vešpery poui kratšie prosby z dodatku namiesto tıch, ktoré sú urèené pre vešpery daného dòa.", 
+ "Pro nešpory vzít kratší prosby z dodatku místo urèenıch pro danı den.", 
+ "Use shorten prayers for vespers instead of those prescribed for the day.", 
+ "", 
+ "", 
+ "Pro veèerní chvály vzít kratší prosby z dodatku místo urèenıch pro danı den.",
+ "hu_"
 };
 
 const char *html_text_option1_vigilia[POCET_JAZYKOV + 1] = 

@@ -1535,6 +1535,31 @@ void set_prosby(short int den, short int tyzzal, short int modlitba){
 	set_LOG_zaltar;
 }
 
+// 2012-11-08: nastavenie prosieb pre veöpery z dodatku
+void _set_prosby_dodatok(short int den, short int force_prve_vespery){
+	Log("_set_prosby_dodatok(den == %d, %s%s) -- begin\n", den, nazov_dna(den), (force_prve_vespery == ANO)? " force": "");
+
+	char file[SMALL]; // nazov s˙boru
+	char anchor[SMALL];
+	short int modlitba;
+
+	mystrcpy(file, FILE_DODATOK_PROSBY, MAX_STR_AF_FILE);
+	modlitba = MODL_VESPERY;
+
+	sprintf(anchor, "%s%c_%s", nazov_DN_asci[den], pismenko_modlitby(modlitba), ANCHOR_PROSBY);
+	_set_prosby(modlitba, file, anchor);
+	Log("_set_prosby_dodatok(): %s: s˙bor `%s', kotva `%s'\n", nazov_modlitby(modlitba), file, anchor);
+
+	if((den == DEN_NEDELA) || (force_prve_vespery == ANO)){
+		den = (den == DEN_NEDELA)? DEN_SOBOTA: den - 1;
+		sprintf(anchor, "%s%c_%s", nazov_DN_asci[den], pismenko_modlitby(modlitba), ANCHOR_PROSBY);
+		_set_prosby(MODL_PRVE_VESPERY, file, anchor);
+		Log("_set_prosby_dodatok(): %s: s˙bor `%s', kotva `%s'\n", nazov_modlitby(modlitba), file, anchor);
+	}
+
+	Log("_set_prosby_dodatok() -- end\n");
+}// _set_prosby_dodatok()
+
 void set_modlitba(short int den, short int tyzzal, short int modlitba, short int ktore = 2){
 	// pridanÈ Ëasti pre kompletÛrium, 2006-10-24 
 	// 2011-04-28: doplnenÈ pre veækonoËn˙ okt·vu (parameter "ktore")
@@ -7976,6 +8001,12 @@ label_24_DEC:
 
 	}// spomienka panny m·rie v sobotu
 
+	// 2012-11-08: pre veöpery, ak je zvolen· t·to moûnosù, treba nastaviù kratöie prosby z dodatku (moûno ich pouûiù v ktor˝koævek deÚ v roku)
+	if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_VESP_KRATSIE_PROSBY) == BIT_OPT_1_VESP_KRATSIE_PROSBY){
+		Log("pre veöpery nastavujem kratöie prosby z dodatku -- moûno ich pouûiù v ktor˝koævek deÚ v roku (je zvolen· t·to moûnosù)\n");
+		_set_prosby_dodatok(_global_den.denvt);
+	}
+
 	Log("do _global_den nastavujem _local_den...\n");
 	_global_den = _local_den;
 #ifdef DETAIL_LOG_GLOBAL_DEN
@@ -7983,8 +8014,7 @@ label_24_DEC:
 	Log(_global_den);
 #endif
 	// koniec casti podla dnes.cpp::init_global_string();
-	Log("-- liturgicke_obdobie(%d, %d, %d, %d: svaty: %d) -- koniec\n",
-		litobd, tyzden, den, tyzzal, poradie_svateho);
+	Log("-- liturgicke_obdobie(%d, %d, %d, %d: svaty: %d) -- koniec\n", litobd, tyzden, den, tyzzal, poradie_svateho);
 }// liturgicke_obdobie();
 
 // ---------------------------------------------------------------------

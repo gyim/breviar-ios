@@ -29,7 +29,6 @@
 #include <string.h>
 #include "myhpage.h" // kvôli hlavicka()
 
-// aby sa dala pouzivat v zaltar();
 short int sviatky_svatych(short int, short int);
 short int sviatky_svatych(short int, short int, short int);
 short int sviatky_svatych(short int, short int, short int, short int); // spustam druhykrat
@@ -37,6 +36,7 @@ short int sviatky_svatych(short int, short int, short int, short int); // spusta
 extern const char *html_title[POCET_JAZYKOV + 1];
 
 void set_popis_dummy(void);
+void _set_prosby_dodatok(short int den, short int force_prve_vespery = NIE);
 
 /* zaltar();
  *
@@ -128,6 +128,8 @@ short int su_inv_hymnus_kcit_kresp_benmagn_prosby_vlastne(short int m);
 
 #define ANCHOR_DOPLNKOVA_PSALMODIA "PSCOM"
 #define FILE_DOPLNKOVA_PSALMODIA "pscom.htm"
+
+#define FILE_DODATOK_PROSBY "dodprosby.htm"
 
 #define ANCHOR_CSSR_TITUL "TITUL"
 
