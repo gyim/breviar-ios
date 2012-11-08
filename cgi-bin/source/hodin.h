@@ -6898,6 +6898,15 @@ const char *text_DEC_01_SJ[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_DEC_01_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Jána Vercellského, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_DEC_01_CZ[POCET_JAZYKOV + 1] = 
 {"",
  "Sv. Edmunda Kampiána, knìze a muèedníka",
@@ -7024,6 +7033,15 @@ const char *text_DEC_14[POCET_JAZYKOV + 1] =
  "Sv. Jana od Køíže, knìze a uèitele Církve",
  "Keresztes Szent János áldozópap és egyháztanító",
  };
+const char *text_DEC_16_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Šebastiána Maggiho, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_DEC_21[POCET_JAZYKOV + 1] = 
 {"Sv. Petra Kanízia, kòaza a uèite¾a Cirkvi",
  "Sv. Petra Kanisia, knìze a uèitele církve",
@@ -7040,6 +7058,15 @@ const char *text_DEC_22_CZ[POCET_JAZYKOV + 1] =
  "",
  "",
  "Výroèí posvìcení katedrály Sv. Mikuláše",
+ "",
+ };
+const char *text_DEC_22_OP[POCET_JAZYKOV + 1] = 
+{"Výroèie potvrdenia Rehole kazate¾ov (1216)",
+ "",
+ "",
+ "",
+ "",
+ "",
  "",
  };
 const char *text_DEC_23[POCET_JAZYKOV + 1] = 
