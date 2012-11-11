@@ -19,11 +19,14 @@ typedef enum {
 	BRCompline
 } BRPrayerType;
 
-@interface BRPrayer : NSObject
+@interface BRPrayer : NSObject {
+	NSString *body;
+}
 
 @property BRPrayerType prayerType;
-@property(strong) NSString *title;
-@property(strong) NSString *body;
+@property(strong) NSDate *date;
+@property NSInteger celebrationId;
+@property(readonly) NSString *title;
+@property(readonly) NSString *body;
 
-+ (BRPrayer *)prayerWithType:(BRPrayerType)prayerType date:(NSDate *)date;
 @end
