@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		7034597D15FCE84D000A1711 /* BRFontHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7034597C15FCE84D000A1711 /* BRFontHelper.m */; };
+		7042905716408A5E00663A7D /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042905316408A1100663A7D /* libxml2.dylib */; };
+		7042905816408A6300663A7D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042905516408A1600663A7D /* libz.dylib */; };
+		7042905916408BF600663A7D /* libRaptureXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042904E1640887200663A7D /* libRaptureXML.a */; };
+		7042905C1641F91C00663A7D /* BRDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7042905B1641F91B00663A7D /* BRDataSource.m */; };
 		7054368D15FBDD69005854DC /* BRDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054368C15FBDD69005854DC /* BRDatePickerViewController.m */; };
 		7054369115FBF1B1005854DC /* BRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054369015FBF1B1005854DC /* BRSettingsViewController.m */; };
 		7054369415FBF1D1005854DC /* BRFontPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054369315FBF1D0005854DC /* BRFontPickerViewController.m */; };
@@ -22,7 +26,7 @@
 		7061B0A515FA8E1A00A83E0A /* BRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0A415FA8E1A00A83E0A /* BRViewController.m */; };
 		7061B0B115FAA18C00A83E0A /* BRPrayerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0B015FAA18C00A83E0A /* BRPrayerListViewController.m */; };
 		7061B0B515FAA34100A83E0A /* BRPrayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0B415FAA34100A83E0A /* BRPrayerViewController.m */; };
-		7061B0B815FAA3C500A83E0A /* BRPrayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0B715FAA3C500A83E0A /* BRPrayer.mm */; };
+		7061B0B815FAA3C500A83E0A /* BRPrayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0B715FAA3C500A83E0A /* BRPrayer.m */; };
 		7061B0D315FB929300A83E0A /* breviar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0BD15FB929300A83E0A /* breviar.cpp */; };
 		7061B0D415FB929300A83E0A /* cgiutils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0BF15FB929300A83E0A /* cgiutils.cpp */; };
 		7061B0D515FB929300A83E0A /* citania.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0C115FB929300A83E0A /* citania.cpp */; };
@@ -36,11 +40,43 @@
 		7061B0DD15FB929300A83E0A /* mylog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0D115FB929300A83E0A /* mylog.cpp */; };
 		7061B0E015FB932000A83E0A /* mystring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0DE15FB932000A83E0A /* mystring.cpp */; };
 		70AAAA4E15FBFBE4008D314D /* BRSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AAAA4D15FBFBE4008D314D /* BRSettings.m */; };
+		70E01273162F54BA00601CA3 /* BRDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E01272162F54BA00601CA3 /* BRDay.m */; };
+		70E01277162F553000601CA3 /* BRCelebration.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E01276162F553000601CA3 /* BRCelebration.m */; };
+		70E0127A162F56E500601CA3 /* BRCGIQuery.mm in Sources */ = {isa = PBXBuildFile; fileRef = 70E01279162F56E500601CA3 /* BRCGIQuery.mm */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7042904D1640887200663A7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 704290441640887100663A7D /* RaptureXML.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0DEB8EB41467EC9B00024989;
+			remoteInfo = RaptureXML;
+		};
+		7042904F1640887200663A7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 704290441640887100663A7D /* RaptureXML.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0252B2DD142ADFC60018B75D;
+			remoteInfo = RaptureXMLTests;
+		};
+		704290511640890500663A7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 704290441640887100663A7D /* RaptureXML.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 0DEB8EB31467EC9B00024989;
+			remoteInfo = RaptureXML;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		7034597B15FCE84D000A1711 /* BRFontHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRFontHelper.h; sourceTree = "<group>"; };
 		7034597C15FCE84D000A1711 /* BRFontHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRFontHelper.m; sourceTree = "<group>"; };
+		704290441640887100663A7D /* RaptureXML.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RaptureXML.xcodeproj; path = RaptureXML/RaptureXML.xcodeproj; sourceTree = "<group>"; };
+		7042905316408A1100663A7D /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		7042905516408A1600663A7D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		7042905A1641F91B00663A7D /* BRDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDataSource.h; sourceTree = "<group>"; };
+		7042905B1641F91B00663A7D /* BRDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDataSource.m; sourceTree = "<group>"; };
 		7054368B15FBDD69005854DC /* BRDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDatePickerViewController.h; sourceTree = "<group>"; };
 		7054368C15FBDD69005854DC /* BRDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDatePickerViewController.m; sourceTree = "<group>"; };
 		7054368F15FBF1B1005854DC /* BRSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettingsViewController.h; sourceTree = "<group>"; };
@@ -66,7 +102,7 @@
 		7061B0B315FAA34100A83E0A /* BRPrayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRPrayerViewController.h; sourceTree = "<group>"; };
 		7061B0B415FAA34100A83E0A /* BRPrayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRPrayerViewController.m; sourceTree = "<group>"; };
 		7061B0B615FAA3C500A83E0A /* BRPrayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRPrayer.h; sourceTree = "<group>"; };
-		7061B0B715FAA3C500A83E0A /* BRPrayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BRPrayer.mm; sourceTree = "<group>"; };
+		7061B0B715FAA3C500A83E0A /* BRPrayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRPrayer.m; sourceTree = "<group>"; };
 		7061B0BD15FB929300A83E0A /* breviar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = breviar.cpp; path = "../../cgi-bin/source/breviar.cpp"; sourceTree = "<group>"; };
 		7061B0BE15FB929300A83E0A /* breviar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = breviar.h; path = "../../cgi-bin/source/breviar.h"; sourceTree = "<group>"; };
 		7061B0BF15FB929300A83E0A /* cgiutils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cgiutils.cpp; path = "../../cgi-bin/source/cgiutils.cpp"; sourceTree = "<group>"; };
@@ -93,6 +129,12 @@
 		7061B0DF15FB932000A83E0A /* mystring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mystring.h; path = "../../cgi-bin/source/mystring.h"; sourceTree = "<group>"; };
 		70AAAA4C15FBFBE4008D314D /* BRSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettings.h; sourceTree = "<group>"; };
 		70AAAA4D15FBFBE4008D314D /* BRSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRSettings.m; sourceTree = "<group>"; };
+		70E01271162F54BA00601CA3 /* BRDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDay.h; sourceTree = "<group>"; };
+		70E01272162F54BA00601CA3 /* BRDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDay.m; sourceTree = "<group>"; };
+		70E01275162F553000601CA3 /* BRCelebration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCelebration.h; sourceTree = "<group>"; };
+		70E01276162F553000601CA3 /* BRCelebration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRCelebration.m; sourceTree = "<group>"; };
+		70E01278162F56E500601CA3 /* BRCGIQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCGIQuery.h; sourceTree = "<group>"; };
+		70E01279162F56E500601CA3 /* BRCGIQuery.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BRCGIQuery.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +142,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7042905916408BF600663A7D /* libRaptureXML.a in Frameworks */,
+				7042905816408A6300663A7D /* libz.dylib in Frameworks */,
+				7042905716408A5E00663A7D /* libxml2.dylib in Frameworks */,
 				7061B08C15FA8E1A00A83E0A /* UIKit.framework in Frameworks */,
 				7061B08E15FA8E1A00A83E0A /* Foundation.framework in Frameworks */,
 				7061B09015FA8E1A00A83E0A /* CoreGraphics.framework in Frameworks */,
@@ -120,10 +165,30 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
+		704290421640886000663A7D /* Thirdparty */ = {
+			isa = PBXGroup;
+			children = (
+				704290441640887100663A7D /* RaptureXML.xcodeproj */,
+			);
+			name = Thirdparty;
+			sourceTree = "<group>";
+		};
+		704290451640887100663A7D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7042904E1640887200663A7D /* libRaptureXML.a */,
+				704290501640887200663A7D /* RaptureXMLTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		7061B07C15FA8E1A00A83E0A = {
 			isa = PBXGroup;
 			children = (
+				7042905516408A1600663A7D /* libz.dylib */,
+				7042905316408A1100663A7D /* libxml2.dylib */,
 				7061B09115FA8E1A00A83E0A /* Breviar */,
+				704290421640886000663A7D /* Thirdparty */,
 				7061B08A15FA8E1A00A83E0A /* Frameworks */,
 				7061B08815FA8E1A00A83E0A /* Products */,
 			);
@@ -176,8 +241,16 @@
 			isa = PBXGroup;
 			children = (
 				7061B0BC15FB923300A83E0A /* cgi */,
+				7042905A1641F91B00663A7D /* BRDataSource.h */,
+				7042905B1641F91B00663A7D /* BRDataSource.m */,
+				70E01271162F54BA00601CA3 /* BRDay.h */,
+				70E01272162F54BA00601CA3 /* BRDay.m */,
+				70E01275162F553000601CA3 /* BRCelebration.h */,
+				70E01276162F553000601CA3 /* BRCelebration.m */,
 				7061B0B615FAA3C500A83E0A /* BRPrayer.h */,
-				7061B0B715FAA3C500A83E0A /* BRPrayer.mm */,
+				7061B0B715FAA3C500A83E0A /* BRPrayer.m */,
+				70E01278162F56E500601CA3 /* BRCGIQuery.h */,
+				70E01279162F56E500601CA3 /* BRCGIQuery.mm */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -256,6 +329,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				704290521640890500663A7D /* PBXTargetDependency */,
 			);
 			name = Breviar;
 			productName = Breviar;
@@ -281,12 +355,35 @@
 			mainGroup = 7061B07C15FA8E1A00A83E0A;
 			productRefGroup = 7061B08815FA8E1A00A83E0A /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 704290451640887100663A7D /* Products */;
+					ProjectRef = 704290441640887100663A7D /* RaptureXML.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				7061B08615FA8E1A00A83E0A /* Breviar */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		7042904E1640887200663A7D /* libRaptureXML.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRaptureXML.a;
+			remoteRef = 7042904D1640887200663A7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		704290501640887200663A7D /* RaptureXMLTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RaptureXMLTests.octest;
+			remoteRef = 7042904F1640887200663A7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7061B08515FA8E1A00A83E0A /* Resources */ = {
@@ -327,7 +424,7 @@
 				7061B0A515FA8E1A00A83E0A /* BRViewController.m in Sources */,
 				7061B0B115FAA18C00A83E0A /* BRPrayerListViewController.m in Sources */,
 				7061B0B515FAA34100A83E0A /* BRPrayerViewController.m in Sources */,
-				7061B0B815FAA3C500A83E0A /* BRPrayer.mm in Sources */,
+				7061B0B815FAA3C500A83E0A /* BRPrayer.m in Sources */,
 				7061B0D315FB929300A83E0A /* breviar.cpp in Sources */,
 				7061B0D415FB929300A83E0A /* cgiutils.cpp in Sources */,
 				7061B0D515FB929300A83E0A /* citania.cpp in Sources */,
@@ -345,10 +442,22 @@
 				7054369415FBF1D1005854DC /* BRFontPickerViewController.m in Sources */,
 				70AAAA4E15FBFBE4008D314D /* BRSettings.m in Sources */,
 				7034597D15FCE84D000A1711 /* BRFontHelper.m in Sources */,
+				70E01273162F54BA00601CA3 /* BRDay.m in Sources */,
+				70E01277162F553000601CA3 /* BRCelebration.m in Sources */,
+				70E0127A162F56E500601CA3 /* BRCGIQuery.mm in Sources */,
+				7042905C1641F91C00663A7D /* BRDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		704290521640890500663A7D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RaptureXML;
+			targetProxy = 704290511640890500663A7D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7061B09415FA8E1A00A83E0A /* InfoPlist.strings */ = {
@@ -388,6 +497,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -403,9 +513,11 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = RaptureXML;
 			};
 			name = Debug;
 		};
@@ -419,6 +531,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MODEL_SELECTED_IN_MAKEFILE,
@@ -429,10 +542,12 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = RaptureXML;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
