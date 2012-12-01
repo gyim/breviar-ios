@@ -10,6 +10,7 @@ import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -222,7 +223,7 @@ public class Breviar extends Activity {
     protected void onResume() {
       if (appEventId < BreviarApp.getEventId()) {
         appEventId = BreviarApp.getEventId();
-        recreate();
+        if (Build.VERSION.SDK_INT >= 11) recreate();
       }
       super.onResume();
     }
