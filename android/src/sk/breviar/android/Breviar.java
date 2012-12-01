@@ -398,4 +398,15 @@ public class Breviar extends Activity {
       }
       return super.onKeyDown(keyCode, event);
     }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+      if ((keyCode == KeyEvent.KEYCODE_VOLUME_UP) && BreviarApp.getVolButtons(this)) {
+        return true;
+      }
+      if ((keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) && BreviarApp.getVolButtons(this)) {
+        return true;
+      }
+      return super.onKeyUp(keyCode, event);
+    }
 }
