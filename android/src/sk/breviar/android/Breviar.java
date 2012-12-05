@@ -214,9 +214,35 @@ public class Breviar extends Activity {
         wv.loadUrl("http://127.0.0.1:" + S.port + "/" + scriptname + 
                    "?qt=pdnes&p=" + Util.events[id].p + Html.fromHtml(S.getOpts()));
       } else {
-        if (wv.restoreState(savedInstanceState) == null) goHome();
+        if (savedInstanceState == null) {
+          goHome();
+        } else {
+          Log.v("breviar", "onCreate: savedInstanceState != null");
+          String url = savedInstanceState.getString("wv-url");
+          Log.v("breviar", "onCreate: saved url: " + url);
+          if (url == null) {
+            goHome();
+          } else {
+            url = url.replaceFirst("http://[^/]*/", "http://127.0.0.1:" + S.port + "/");
+            Log.v("breviar", "onCreate: loading url: " + url);
+            wv.loadUrl(url);
+          }
+          /*
+          if (wv.restoreState(savedInstanceState) == null) {
+            Log.v("breviar", "onCreate: restore failed");
+            goHome();
+          } else {
+            Log.v("breviar", "onCreate: webview state restored, reloading.");
+            wv.reload();
+            Log.v("breviar", "onCreate: webview reloaded. Current url: " + wv.getUrl());
+          }
+          */
+        }
       }
+
+      Log.v("breviar", "onCreate: Updating fullscreen");
       updateFullscreen();
+      Log.v("breviar", "onCreate: done");
     }
 
     @Override
@@ -245,7 +271,12 @@ public class Breviar extends Activity {
     protected void onSaveInstanceState(Bundle outState) {
       Log.v("breviar", "onSaveInstanceState");
       syncScale();
-      wv.saveState(outState);
+      //wv.saveState(outState);
+      String url = wv.getUrl();
+      if (url != null) {
+        outState.putString("wv-url", url);
+      }
+      Log.v("breviar", "onSaveInstanceState: saved url: " + url);
       syncPreferences();
       super.onSaveInstanceState(outState);
     }
