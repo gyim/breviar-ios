@@ -1,4 +1,56 @@
-breviar.exe -qpbm -d1 -m8 -r2012 -f31 -g12 -p2012 -brobSK.bat -jsk -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M2 -00 -132 -2128
+2012-12-06: SK pregenerované
+	-- všetky pevné súèasti modlitieb (Sláva Otcu; chválospevy Benediktus, Magnifikat, Nunk dimittis, Te Deum; rubriky; zakonèenia modlitieb; dlhé responzóriá v posv. èítaniach; opakovanie zvolaní v prosbách), doplnková psalmódia ("(alt)" tlaèidlo)
+		breviar.exe -qpbm -d1 -m12 -r2012 -f31 -g12 -p2013 -brobSK.bat -jsk -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M2 -00 -11471 -2128
+		-- 2013-full.rar
+
+	-- žiadne pevné súèasti modlitieb (Sláva Otcu; chválospevy Benediktus, Magnifikat, Nunk dimittis, Te Deum; rubriky; zakonèenia modlitieb; dlhé responzóriá v posv. èítaniach; opakovanie zvolaní v prosbách), doplnková psalmódia ("(alt)" tlaèidlo)
+		breviar.exe -qpbm -d1 -m12 -r2012 -f31 -g12 -p2013 -brobSK.bat -jsk -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M2 -00 -132 -2128
+		-- 2013-short.rar
+
+	-- ve¾ké písmo + všetky pevné súèasti modlitieb (Sláva Otcu; chválospevy Benediktus, Magnifikat, Nunk dimittis, Te Deum; rubriky; zakonèenia modlitieb; dlhé responzóriá v posv. èítaniach; opakovanie zvolaní v prosbách), doplnková psalmódia ("(alt)" tlaèidlo)
+		breviar.exe -qpbm -d1 -m12 -r2012 -f31 -g12 -p2013 -brobSK.bat -jsk -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M2 -00 -11471 -2128 -Sxx-large
+		-- 2013-xfull.rar
+
+	-- ve¾ké písmo + žiadne pevné súèasti modlitieb (Sláva Otcu; chválospevy Benediktus, Magnifikat, Nunk dimittis, Te Deum; rubriky; zakonèenia modlitieb; dlhé responzóriá v posv. èítaniach; opakovanie zvolaní v prosbách), doplnková psalmódia ("(alt)" tlaèidlo)
+		breviar.exe -qpbm -d1 -m12 -r2012 -f31 -g12 -p2013 -brobSK.bat -jsk -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M2 -00 -132 -2128 -Sxx-large
+		-- 2013-xshort.rar
+
+	-- bez buttonov + všetky pevné súèasti modlitieb (Sláva Otcu; chválospevy Benediktus, Magnifikat, Nunk dimittis, Te Deum; rubriky; zakonèenia modlitieb; dlhé responzóriá v posv. èítaniach; opakovanie zvolaní v prosbách), doplnková psalmódia ("(alt)" tlaèidlo)
+		breviar.exe -qpbm -d1 -m12 -r2012 -f31 -g12 -p2013 -brobSK.bat -jsk -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M3 -00 -11471 -2128
+		-- 2013-plain.rar
+
+	-- bez buttonov + ve¾ké písmo + všetky pevné súèasti modlitieb (Sláva Otcu; chválospevy Benediktus, Magnifikat, Nunk dimittis, Te Deum; rubriky; zakonèenia modlitieb; dlhé responzóriá v posv. èítaniach; opakovanie zvolaní v prosbách), doplnková psalmódia ("(alt)" tlaèidlo)
+		breviar.exe -qpbm -d1 -m12 -r2012 -f31 -g12 -p2013 -brobSK.bat -jsk -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M3 -00 -11471 -2128 -Sxx-large
+		-- 2013-xplain.rar
+
+	CZ predgenerovanie
+	-- všetky pevné súèasti modlitieb (Sláva Otcu; chválospevy Benediktus, Magnifikat, Nunk dimittis, Te Deum; rubriky; zakonèenia modlitieb), doplnková psalmódia ("(alt)" tlaèidlo)
+		breviar.exe -qpbm -d1 -m12 -r2012 -f31 -g12 -p2013 -brobCZ.bat -jcz -nbreviar.exe -i..\..\breviar.sk\include_cz\ -usimple -M2 -00 -11471 -2128
+		-- 2013-cz-full.rar
+
+	-- žiadne pevné súèasti modlitieb (Sláva Otcu; chválospevy Benediktus, Magnifikat, Nunk dimittis, Te Deum; rubriky; zakonèenia modlitieb), doplnková psalmódia ("(alt)" tlaèidlo)
+		breviar.exe -qpbm -d1 -m12 -r2012 -f31 -g12 -p2013 -brobCZ.bat -jcz -nbreviar.exe -i..\..\breviar.sk\include_cz\ -usimple -M2 -00 -132 -2128
+		-- 2013-cz-short.rar
+
+	-- ve¾ké písmo + všetky pevné súèasti modlitieb (Sláva Otcu; chválospevy Benediktus, Magnifikat, Nunk dimittis, Te Deum; rubriky; zakonèenia modlitieb), doplnková psalmódia ("(alt)" tlaèidlo)
+		breviar.exe -qpbm -d1 -m12 -r2012 -f31 -g12 -p2013 -brobCZ.bat -jcz -nbreviar.exe -i..\..\breviar.sk\include_cz\ -usimple -M2 -00 -11471 -2128 -Sxx-large
+		-- 2013-cz-xfull.rar
+
+	-- ve¾ké písmo + žiadne pevné súèasti modlitieb (Sláva Otcu; chválospevy Benediktus, Magnifikat, Nunk dimittis, Te Deum; rubriky; zakonèenia modlitieb), doplnková psalmódia ("(alt)" tlaèidlo)
+		breviar.exe -qpbm -d1 -m12 -r2012 -f31 -g12 -p2013 -brobCZ.bat -jcz -nbreviar.exe -i..\..\breviar.sk\include_cz\ -usimple -M2 -00 -132 -2128 -Sxx-large
+		-- 2013-cz-xshort.rar
+
+	-- bez buttonov + všetky pevné súèasti modlitieb (Sláva Otcu; chválospevy Benediktus, Magnifikat, Nunk dimittis, Te Deum; rubriky; zakonèenia modlitieb), doplnková psalmódia ("(alt)" tlaèidlo)
+		breviar.exe -qpbm -d1 -m12 -r2012 -f31 -g12 -p2013 -brobCZ.bat -jcz -nbreviar.exe -i..\..\breviar.sk\include_cz\ -usimple -M3 -00 -11471 -2128
+		-- 2013-cz-plain.rar
+
+	-- bez buttonov + ve¾ké písmo + všetky pevné súèasti modlitieb (Sláva Otcu; chválospevy Benediktus, Magnifikat, Nunk dimittis, Te Deum; rubriky; zakonèenia modlitieb; dlhé responzóriá v posv. èítaniach; opakovanie zvolaní v prosbách), doplnková psalmódia ("(alt)" tlaèidlo)
+		breviar.exe -qpbm -d1 -m12 -r2012 -f31 -g12 -p2013 -brobCZ.bat -jcz -nbreviar.exe -i..\..\breviar.sk\include_cz\ -usimple -M3 -00 -11471 -2128 -Sxx-large
+		-- 2013-cz-xplain.rar
+
+
+2012-08-23: nejaký pokus
+	-- breviar.exe -qpbm -d1 -m8 -r2012 -f31 -g12 -p2012 -brobSK.bat -jsk -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M2 -00 -132 -2128
 
 2011-12-08: SK pregenerované opätovne (chýbalo <form action="111201_0i.htm" method="post"> -- method post) všetky okrem tých plain (bez buttonov)
 

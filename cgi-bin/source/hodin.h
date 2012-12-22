@@ -1578,7 +1578,7 @@ const char *html_text_option0_referencie[POCET_JAZYKOV + 1] =
  "Bible references",
  "",
  "biblické odkazy",
- "hu_bible references"
+ "hu_bible references to kereszteny.hu"
 };
 
 const char *html_text_option0_referencie_explain[POCET_JAZYKOV + 1] = 
@@ -1588,7 +1588,7 @@ const char *html_text_option0_referencie_explain[POCET_JAZYKOV + 1] =
  "",
  "", 
  "", 
- ""
+ "hu_bible references to kereszteny.hu"
 };
 
 const char *html_text_option0_citania[POCET_JAZYKOV + 1] = 
@@ -4289,8 +4289,8 @@ const char *text_VELKONOCNA_NEDELA[POCET_JAZYKOV + 1] =
  "Nedìle Zmrtvýchvstání Pánì",
  "Húsvétvasárnap",
  };
-const char *text_NEDELA_PANOVHO_ZMRTVYCHVSTANIA[POCET_JAZYKOV + 1] = 
-{" &mdash; Nede¾a Pánovho zmàtvychvstania",
+const char *text_NEDELA_PANOVHO_ZMRTVYCHVSTANIA[POCET_JAZYKOV + 1] = // 2012-12-13: XML nepodporuje &mdash; -- použitý èíselný kód &#8212; http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references
+{" &#8212; Nede¾a Pánovho zmàtvychvstania",
  "",
  "",
  "",
@@ -7016,7 +7016,7 @@ const char *text_DEC_07[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Ambrože, biskupa a uèitele Církve",
- "Szent Ambrus püspök és egháztanító",
+ "Szent Ambrus püspök és egyháztanító",
  };
 const char *text_DEC_08[POCET_JAZYKOV + 1] = 
 {"Nepoškvrnené poèatie Panny Márie",
