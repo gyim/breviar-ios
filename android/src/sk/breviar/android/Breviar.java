@@ -78,6 +78,8 @@ public class Breviar extends Activity {
                      .replaceAll("&amp;c=[^&]*&amp;", "&amp;")
                      .replaceAll("&amp;j=[^&]*&amp;", "&amp;")));
       syncPreferences();
+      BreviarApp.initLocale(this);
+      recreateIfNeeded();
     }
 
     public boolean tryOpenBible(String url) {
@@ -114,8 +116,9 @@ public class Breviar extends Activity {
 
       wv = (WebView)findViewById(R.id.wv);
       wv.clearCache(true);
-      wv.getSettings().setBuiltInZoomControls(true);
       wv.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+      wv.getSettings().setBuiltInZoomControls(true);
+      wv.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
       wv.setInitialScale(scale);
       initialized = false;
       Log.v("breviar", "setting scale = " + scale);
@@ -227,16 +230,6 @@ public class Breviar extends Activity {
             Log.v("breviar", "onCreate: loading url: " + url);
             wv.loadUrl(url);
           }
-          /*
-          if (wv.restoreState(savedInstanceState) == null) {
-            Log.v("breviar", "onCreate: restore failed");
-            goHome();
-          } else {
-            Log.v("breviar", "onCreate: webview state restored, reloading.");
-            wv.reload();
-            Log.v("breviar", "onCreate: webview reloaded. Current url: " + wv.getUrl());
-          }
-          */
         }
       }
 
@@ -245,12 +238,14 @@ public class Breviar extends Activity {
       Log.v("breviar", "onCreate: done");
     }
 
+    void recreateIfNeeded() {
+      appEventId = BreviarApp.getEventId();
+      if (Build.VERSION.SDK_INT >= 11) recreate();
+    }
+
     @Override
     protected void onResume() {
-      if (appEventId < BreviarApp.getEventId()) {
-        appEventId = BreviarApp.getEventId();
-        if (Build.VERSION.SDK_INT >= 11) recreate();
-      }
+      if (appEventId < BreviarApp.getEventId()) recreateIfNeeded();
       super.onResume();
     }
 
