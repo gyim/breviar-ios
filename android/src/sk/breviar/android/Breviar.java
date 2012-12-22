@@ -118,7 +118,9 @@ public class Breviar extends Activity {
       wv.clearCache(true);
       wv.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
       wv.getSettings().setBuiltInZoomControls(true);
-      wv.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+      wv.getSettings().setSupportZoom(true);
+      wv.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+      wv.getSettings().setUseWideViewPort(false);
       wv.setInitialScale(scale);
       initialized = false;
       Log.v("breviar", "setting scale = " + scale);
@@ -145,8 +147,11 @@ public class Breviar extends Activity {
 
           Log.v("breviar", "sync in overrideurlloading");
           parent.syncScale();
+          /*
           view.loadUrl(url);
           return true;
+          */
+          return false;
         }
 
         @Override
