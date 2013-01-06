@@ -59,7 +59,7 @@
 		case 0:
 			return self.day.celebrations.count + 1;
 		case 1:
-			return 8;
+			return 1;
 		case 2:
 			return 1;
 	}
@@ -92,12 +92,8 @@
 		}
 	}
 	else if (indexPath.section == 1) {
-		// Prayer cell
-		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PrayerCell"];
-		
-		BRCelebration *celebration = [self.day.celebrations objectAtIndex:self.celebrationIndex];
-		BRPrayer *prayer = [celebration.prayers objectAtIndex:indexPath.row];
-		cell.textLabel.text = prayer.title;
+		// Prayer list cell
+		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PrayerListCell"];
 		
 		return cell;
 	}
@@ -106,6 +102,15 @@
 		return [tableView dequeueReusableCellWithIdentifier:@"SettingsCell"];
 	}
 	return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section == 1) {
+		return 168;
+	}
+	else {
+		return 44;
+	}
 }
 
 #pragma mark -
@@ -130,16 +135,17 @@
 {
 	NSString *segueId = segue.identifier;
 	
-	if ([segueId isEqualToString:@"ShowPrayer"]) {
-		BRPrayerViewController *destController = segue.destinationViewController;
-		NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-		BRCelebration *celebration = [self.day.celebrations objectAtIndex:self.celebrationIndex];
-		destController.prayer = [celebration.prayers objectAtIndex:indexPath.row];
-	}
-	else if ([segueId isEqualToString:@"ShowDatePicker"]) {
+	if ([segueId isEqualToString:@"ShowDatePicker"]) {
 		BRDatePickerViewController *destController = segue.destinationViewController;
 		destController.initialDate = self.date;
 		destController.datePickerDelegate = self;
+	}
+	else if ([[segueId substringToIndex:11] isEqualToString:@"ShowPrayer."]) {
+		BRPrayerViewController *destController = segue.destinationViewController;
+		NSString *prayerQueryId = [segueId substringFromIndex:11];
+		BRPrayerType prayerType = [BRPrayer prayerTypeFromQueryId:prayerQueryId];
+		BRCelebration *celebration = [self.day.celebrations objectAtIndex:self.celebrationIndex];
+		destController.prayer = [celebration.prayers objectAtIndex:prayerType];
 	}
 }
 
