@@ -58,4 +58,14 @@ static NSString *prayerQueryIds[] = {
 	return body;
 }
 
++ (BRPrayerType)prayerTypeFromQueryId:(NSString *)queryId {
+	int i;
+	for (i=BRInvitatory; i<=BRCompline; i++) {
+		if ([prayerQueryIds[i] isEqualToString:queryId]) {
+			return (BRPrayerType)i;
+		}
+	}
+	return BRInvitatory;
+}
+
 @end
