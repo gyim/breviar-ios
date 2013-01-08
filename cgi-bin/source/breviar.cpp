@@ -15562,10 +15562,13 @@ short int parseQueryString(void){
 	}\
 }
 
+short int counter_setConfigDefaults = 0;
+
 // 2011-04-13: vytvorené kvôli tomu, e config súbor nemusí obsahova hodnoty pre všetky options
 void setConfigDefaults(short int jazyk){
 	short int sk_default, o;
-	Log("setConfigDefaults(%d) -- zaèiatok...\n", jazyk);
+	counter_setConfigDefaults++;
+	Log("setConfigDefaults(%d) -- zaèiatok (%d. volanie)...\n", jazyk, counter_setConfigDefaults);
 	// 2011-04-13: ak sú niektoré options GLOBAL_OPTION_NULL, je potrebné ich na nieèo nastavi
 	for(o = 0; o < POCET_GLOBAL_OPT; o++){
 		if(jazyk != JAZYK_SK)
@@ -15577,7 +15580,7 @@ void setConfigDefaults(short int jazyk){
 			Log("keïe cfg_option_default[%d][%d] bolo GLOBAL_OPTION_NULL, nastavujem pod¾a program defaults na %d...\n", o, jazyk, cfg_option_default[o][jazyk]);
 		}
 	}// for o
-	Log("setConfigDefaults(%d) -- koniec.\n", jazyk);
+	Log("setConfigDefaults(%d) -- koniec (%d. volanie).\n", jazyk, counter_setConfigDefaults);
 }// setConfigDefaults()
 
 int breviar_main(int argc, char **argv){
@@ -15600,6 +15603,7 @@ int breviar_main(int argc, char **argv){
 	_global_opt[OPT_3_SPOLOCNA_CAST] = MODL_SPOL_CAST_NEURCENA;
 	_global_opt[OPT_4_OFFLINE_EXPORT] = NIE;
 	_global_opt[OPT_2_HTML_EXPORT] = GLOBAL_OPTION_NULL;
+	counter_setConfigDefaults = 0;
 
 	_global_opt_append = NIE;
 	_global_opt_tedeum = NIE;
@@ -15830,7 +15834,7 @@ int breviar_main(int argc, char **argv){
 				_main_LOG_to_Export("spat po skonceni getForm()\n");
 			}
 			break;
-		}
+		}// SCRIPT_PARAM_FROM_FORM
 		case SCRIPT_PARAM_FROM_ARGV:{
 			_main_LOG("params == SCRIPT_PARAM_FROM_ARGV\n");
 			_main_LOG("spustam getArgv();\n");
@@ -15849,6 +15853,10 @@ int breviar_main(int argc, char **argv){
 
 				_main_LOG_to_Export("spúšam setConfigDefaults()...\n");
 				setConfigDefaults(_global_jazyk); // 2011-04-13: doplnené
+
+				// 2013-01-08: sem presunuté volanie _rozparsuj_parametre_OPT(); kvôli tomu, e volanie hlavièky potrebuje u nastavené napr. o2 (batch mód, èi poui noènı reim)
+				Log("volám _rozparsuj_parametre_OPT()...\n");
+				_rozparsuj_parametre_OPT();
 
 				// 2010-08-04: pridané parsovanie jazyka kvôli jazykovım mutáciám -- kalendár, napr. reho¾nı (dané aj niše, ako jazyk)
 				_main_LOG_to_Export("zisujem kalendár (pom_KALENDAR == %s)...\n", pom_KALENDAR);
@@ -15914,7 +15922,7 @@ int breviar_main(int argc, char **argv){
 			}
 
 			break;
-		}
+		}// SCRIPT_PARAM_FROM_ARGV
 		case SCRIPT_PARAM_FROM_QS:{
 
 			_main_LOG_to_Export("params == SCRIPT_PARAM_FROM_QS\n");
@@ -15962,7 +15970,7 @@ _main_SIMULACIA_QS:
 			}
 
 			break;
-		}
+		}// SCRIPT_PARAM_FROM_QS
 	}// switch(params)
 
 	_main_LOG_to_Export("query_type == ");
@@ -16013,6 +16021,9 @@ _main_SIMULACIA_QS:
 
 			_main_LOG_to_Export("spúšam setConfigDefaults()...\n");
 			setConfigDefaults(_global_jazyk); // 2011-04-13: doplnené
+			// 2013-01-08: sem presunuté volanie _rozparsuj_parametre_OPT(); kvôli tomu, e volanie hlavièky potrebuje u nastavené napr. o2 (batch mód, èi poui noènı reim)
+			Log("volám _rozparsuj_parametre_OPT()...\n");
+			_rozparsuj_parametre_OPT();
 
 			// 2010-08-04: pridané parsovanie jazyka kvôli jazykovım mutáciám -- kalendár, napr. reho¾nı (dané aj vyššie, ako jazyk)
 			_main_LOG_to_Export("zisujem kalendár (pom_KALENDAR == %s)...\n", pom_KALENDAR);
@@ -16197,6 +16208,7 @@ _main_SIMULACIA_QS:
 			// rozparsovanie parametrov opt...
 			// 2007-06-01: upravené tak, aby sa v prípade nenastavenia dala hodnota GLOBAL_OPTION_NULL
 			// 2011-05-05: presunuté sem z jednotlivıch procedúr: _main_rozbor_dna(), _main_dnes(), _main_liturgicke_obdobie(), _main_analyza_roku(), _main_tabulka(), _main_batch_mode()
+			// 2013-01-08: tu sa nachádzalo volanie _rozparsuj_parametre_OPT(); ktoré som presunul vyššie kvôli tomu, e volanie hlavièky potrebuje u nastavené napr. o2 (batch mód, èi poui noènı reim)
 			Log("volám _rozparsuj_parametre_OPT z main()...\n");
 			_rozparsuj_parametre_OPT();
 
