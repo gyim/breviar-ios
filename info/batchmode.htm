@@ -37,7 +37,7 @@ ho popisujeme na tomto mieste osobitne.
 <li><span class="parameter">f</span> | Deò <a href="#datumy">koncového</a> dátumu (hodnoty: <span class="value">1</span>-<span class="value">31</span>)</li>
 <li><span class="parameter">g</span> | Mesiac <a href="#datumy">koncového</a> dátumu (hodnoty: <span class="value">1</span>-<span class="value">12</span>)</li>
 <li><span class="parameter">p</span> | Rok <a href="#datumy">koncového</a> dátumu (napr. <span class="value">2000</span>).
-<br>Malo by pritom plati: poèiatoènı dátum &lt;= koncovı dátum.</li>
+<br/>Malo by pritom plati: poèiatoènı dátum &lt;= koncovı dátum.</li>
 <li><span class="parameter">b</span> | Názov vısledného skriptu (napr. <span class="tt">rob.bat</span>). <a href="#output">Vısledky jeho spustenia</a> sú popísané nišie.</li>
 <li><span class="parameter">n</span> | Názov pouitého command-line príkazu online breviára 
 (napr. <span class="tt">breviar.exe</span> pre DOS).
@@ -69,7 +69,7 @@ bude skript, ktorého meno špecifikoval parameter <span class="parameter">b</span
 <li><span class="parameter">yy/yyyy</span> | rok</li>
 <li><span class="parameter">mm</span> | mesiac (napr. <span class="value">05</span> pre máj)</li>
 <li><span class="parameter">dd</span> | deò (napr. <span class="value">07</span>)
-<br>Pre parameter -u1 je dátum uvedenı v súlade s normou ISO 8601; v opaènom prípade (-u0) obsahuje len posledné dvojèíslie roka (pre rok 2009 teda napr. len 09).
+<br/>Pre parameter -u1 je dátum uvedenı v súlade s normou ISO 8601; v opaènom prípade (-u0) obsahuje len posledné dvojèíslie roka (pre rok 2009 teda napr. len 09).
 </li>
 <li><span class="parameter">x</span> | poradie svätého (<span class="value">0</span> 
 a <span class="value">4</span>). <span class="value">0</span> zväèša znamená všednı deò alebo slávnos 
@@ -95,7 +95,7 @@ jednotlivıch èastí mena súboru je nasledujúci:
 <li><span class="parameter">YYYY</span> | rok <a href="#datumy">koncového</a> dátumu</li>
 <li><span class="parameter">MM</span> | mesiac <a href="#datumy">koncového</a> dátumu</li>
 <li><span class="parameter">DD</span> | deò <a href="#datumy">koncového</a> dátumu
-<br>Dátumy sú uvedené v súlade s normou ISO 8601.
+<br/>Dátumy sú uvedené v súlade s normou ISO 8601.
 </li>
 </ul>
 <p>Ak dostane program nesprávne parametre (zahàòa i prípady nesprávnych hodnôt parametrov 
@@ -106,21 +106,21 @@ Naviac, command line verzia vypíše chybové hlásenie na stderr.
 <p>Ako sa vraví, príklad môe všetky pochybnosti razom odstráni alebo naopak, podnieti ïalšie otázky.
 Za oboma úèelmi sú uvedené nasledujúce príkady pouitia batch módu.
 <ul class="level1">
-<li><span class="tt">breviar.exe -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.bat -nbreviar.exe -ic:\breviar\</span><br>
+<li><span class="tt">breviar.exe -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.bat -nbreviar.exe -ic:\breviar\</span><br/>
 <span class="explain">Program vygeneruje skript <span class="tt">rob.bat</span>, ktorı vytvorí 
 modlitby od 7. mája 2000 do 3. apríla 2001. 
 Pritom <span class="tt">include</span> adresár sa nachádza v adresári <span class="tt">c:\breviar\</span>
 a meno programu je <span class="tt">breviar.exe</span>. (Pouitie v DOSe/Windows.)
 </span>
 </li>
-<li><span class="tt">breviar.exe -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.bat -nbreviar.exe -ic:\breviar\ -a1 -u1</span><br>
+<li><span class="tt">breviar.exe -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.bat -nbreviar.exe -ic:\breviar\ -a1 -u1</span><br/>
 <span class="explain">Program vygeneruje skript <span class="tt">rob.bat</span>, ktorı vytvorí modlitby od 7. mája 2000 do 3. apríla 2001. 
 Po spustení skriptu budú všetky modlitby vytvorené do jednoho súboru s menom
 <span class="tt">2000-05-07_2001-04-03.htm</span>.
 Pritom <span class="tt">include</span> adresár sa nachádza v adresári <span class="tt">c:\breviar\</span> a meno programu je <span class="tt">breviar.exe</span>. (Pouitie v DOSe/Windows.)
 </span>
 </li>
-<li><span class="tt">breviar -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.sh -nbreviar -i~/breviar/</span><br>
+<li><span class="tt">breviar -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.sh -nbreviar -i~/breviar/</span><br/>
 <span class="explain">
 Program vygeneruje skript <span class="tt">rob.sh</span> (mono bude potrebnı <span class="tt">chmod</span> na nastavenie práv), ktorı vytvorí modlitby od 7. mája 2000 do 3. apríla 2001. 
 Pritom <span class="tt">include</span> adresár sa nachádza v adresári <span class="tt">~/breviar/</span> a meno programu je <span class="tt">breviar</span>. (Pouitie v UNIXe.)
@@ -131,8 +131,8 @@ Ak sa vyskytnú nejaké nezrovnalosti alebo nefunkènosti, prosím <a href="mailto:v
 <p><hr>
 <p class="patka">
 Autor programovej èasti © 1999-2013 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
-<br>Všetky práva vyhradené.
-<br>Posledná aktualizácia: 2008-12-18<br>
+<br/>Všetky práva vyhradené.
+<br/>Posledná aktualizácia: 2008-12-18<br/>
 © 1999-2013 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
 </p>
 </body>

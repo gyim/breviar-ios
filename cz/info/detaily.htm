@@ -65,40 +65,40 @@ pro daný den a výsledek zobrazí. Vzpomínaná funkce<tt>rozbor_dne()</tt>
 je jednou z klíèových funkcí aplikace, proto se jí budeme vìnovat trošku podrobnìji.
 <ul class="level1">
 <li>1. fáze: <b>Všeobecná liturgická data</b>
-<br>Tato fáze zaøadí daný den (podle data, pøesnìji poøadového èísla 
+<br/>Tato fáze zaøadí daný den (podle data, pøesnìji poøadového èísla 
 dne v roce) do liturgického období, tedy podle mezníkù <a href="#medznik">uvedených 
 výše</a> urèí, o jaké liturgické období jde. Program pøitom internì používá následující konstanty: 
 <ul class="level0">
 <li>
 <tt>/* liturgicke obdobia */</tt>
-<br><tt>//OBD_ADVENTNE</tt>
-<br><tt>#define OBD_ADVENTNE_I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><tt>//OBD_ADVENTNE</tt>
+<br/><tt>#define OBD_ADVENTNE_I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 1 /* do 16. decembra */</tt>
-<br><tt>#define OBD_ADVENTNE_II&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><tt>#define OBD_ADVENTNE_II&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 2 /* po 16. decembri */</tt>
-<br><tt>//OBD_VIANOCNE</tt>
-<br><tt>#define OBD_VIANOCNE_I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><tt>//OBD_VIANOCNE</tt>
+<br/><tt>#define OBD_VIANOCNE_I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 3 /* do slavnosti zjavenia pana */</tt>
-<br><tt>#define OBD_VIANOCNE_II&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><tt>#define OBD_VIANOCNE_II&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 4 /* po slavnosti zjavenia pana */</tt>
-<br><tt>//OBD_CEZ_ROK</tt>
-<br><tt>#define OBD_CEZ_ROK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><tt>//OBD_CEZ_ROK</tt>
+<br/><tt>#define OBD_CEZ_ROK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 5</tt>
-<br><tt>//OBD_POSTNE</tt>
-<br><tt>#define OBD_POSTNE_I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><tt>//OBD_POSTNE</tt>
+<br/><tt>#define OBD_POSTNE_I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 6 /* do soboty v piatom tyzdni */</tt>
-<br><tt>#define OBD_POSTNE_II_VELKY_TYZDEN 7 /* velky tyzden */</tt>
-<br><tt>//OBD_VELKONOCNE</tt>
-<br><tt>#define OBD_VELKONOCNE_TROJDNIE&nbsp;&nbsp;&nbsp; 8 /* umucenia
+<br/><tt>#define OBD_POSTNE_II_VELKY_TYZDEN 7 /* velky tyzden */</tt>
+<br/><tt>//OBD_VELKONOCNE</tt>
+<br/><tt>#define OBD_VELKONOCNE_TROJDNIE&nbsp;&nbsp;&nbsp; 8 /* umucenia
 a zmrtvychvstania Pana */</tt>
-<br><tt>#define OBD_VELKONOCNE_I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><tt>#define OBD_VELKONOCNE_I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 9 /* do nanebovstupenia pana */</tt>
-<br><tt>#define OBD_VELKONOCNE_II&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><tt>#define OBD_VELKONOCNE_II&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 10 /* po nanebovstupeni pana */</tt>
-<br><tt>/* nasleduju specialne pod-obdobia */</tt>
-<br><tt>#define OBD_VELKONOCNA_OKTAVA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0 /*
+<br/><tt>/* nasleduju specialne pod-obdobia */</tt>
+<br/><tt>#define OBD_VELKONOCNA_OKTAVA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0 /*
 velkonocna nedela -- 2. velk. ne */</tt>
-<br><tt>#define OBD_OKTAVA_NARODENIA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 11 /*
+<br/><tt>#define OBD_OKTAVA_NARODENIA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 11 /*
 narodenie Pana -- 1. jan. */</tt>
 </li>
 </ul>
@@ -108,25 +108,25 @@ Dále se urèí poøadové týdny: týden daného období, týden žaltáøe. Urèí
 se i pøípadné oslavy, které pøipadnou na hranièní dny mezi dobami (mezníky). 
 </li>
 <li>2. fáze: <b>Liturgická data pro svátky svatých</b>
-<br>Tato fáze pro daný den (bez ohledu na pøedešlé liturgické zaèlenìní)
+<br/>Tato fáze pro daný den (bez ohledu na pøedešlé liturgické zaèlenìní)
 zjistí poèet svátkù svatých (bereme totiž v úvahu, že v daný den mùže
 být víc libovolných památek) a pro každý z nich vytvoøí datovou strukturu,
 která obsahuje zejména název oslavy, typ oslavy a podstrukturu s daty,
 která urèují, odkud se má brát spoleèná èást slavení. Pøíklad uvádí
 èásteèné nastavení datových struktur pro datum 24. dubna:
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; _global_svaty1.typslav = SLAV_LUB_SPOMIENKA;</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; _global_svaty1.smer = 12; /* lubovolne
+<br/><tt>&nbsp;&nbsp;&nbsp;&nbsp; _global_svaty1.typslav = SLAV_LUB_SPOMIENKA;</tt>
+<br/><tt>&nbsp;&nbsp;&nbsp;&nbsp; _global_svaty1.smer = 12; /* lubovolne
 spomienky podla vseobecneho kalendara */</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; strcpy(_global_svaty1.meno, "Sv. Juraja,
+<br/><tt>&nbsp;&nbsp;&nbsp;&nbsp; strcpy(_global_svaty1.meno, "Sv. Juraja,
 muèeníka");</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; _global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; pocet = 2;</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; _global_svaty2.typslav = SLAV_LUB_SPOMIENKA;</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; _global_svaty2.smer = 12; /* lubovolne
+<br/><tt>&nbsp;&nbsp;&nbsp;&nbsp; _global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);</tt>
+<br/><tt>&nbsp;&nbsp;&nbsp;&nbsp; pocet = 2;</tt>
+<br/><tt>&nbsp;&nbsp;&nbsp;&nbsp; _global_svaty2.typslav = SLAV_LUB_SPOMIENKA;</tt>
+<br/><tt>&nbsp;&nbsp;&nbsp;&nbsp; _global_svaty2.smer = 12; /* lubovolne
 spomienky podla vseobecneho kalendara */</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; strcpy(_global_svaty2.meno, "Sv. Fidéla
+<br/><tt>&nbsp;&nbsp;&nbsp;&nbsp; strcpy(_global_svaty2.meno, "Sv. Fidéla
 zo Sigmaringenu, kòaza a muèeníka");</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; _global_svaty2.spolcast =</tt>
+<br/><tt>&nbsp;&nbsp;&nbsp;&nbsp; _global_svaty2.spolcast =</tt>
 <ul class="level0">
 <li>
 <tt>&nbsp;&nbsp;&nbsp;&nbsp; _encode_spol_cast(MODL_SPOL_CAST_MUCENIK,
@@ -137,7 +137,7 @@ Pøipomínáme, že v této fázi jsou všechny oslavy, které jsou v breviáøi zaøazené
 v èásti <i>Vlastní texty pro svátky svatých</i>.
 </li>
 <li>3. fáze: <b>Porovnání</b>
-<br>Ze všech oslav, pøicházejících v úvahu, se upøednostní ta oslava, která má v 
+<br/>Ze všech oslav, pøicházejících v úvahu, se upøednostní ta oslava, která má v 
 <a href="../docs/smer_lrk.htm#tabulka">tabulce liturgických dní</a> vyšší stupeò. Jde-li o sobotu v liturgickém
 mezidobí, bere se v úvahu i sobotní památka Panny Marie.
 </li>
@@ -195,12 +195,12 @@ Pro generování tabulky pohyblivých oslav vypadá postup programu následovnì:
 </ul>
 Podobnì se generuje i analýza roku, kde se navíc generují i tlaèítka
 pro následující a pøedchozí rok.
-<br>
+<br/>
 <hr>
 <p class="patka">
 Autor programové èásti © 1999-2013 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
-<br>Pomoc pøi pøekladu do èeštiny: Gorazd
-<br>Všechna práva vyhrazena.
+<br/>Pomoc pøi pøekladu do èeštiny: Gorazd
+<br/>Všechna práva vyhrazena.
 </p>
 </body>
 </html>

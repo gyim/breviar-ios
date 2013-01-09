@@ -30,7 +30,7 @@
 <li><span class="parameter">f</span> | Den <a href="#datumy">koneèného</a> data (hodnoty: <span class="value">1</span>-<span class="value">31</span>)</li>
 <li><span class="parameter">g</span> | Mìsíc <a href="#datumy">koneèného</a> data (hodnoty: <span class="value">1</span>-<span class="value">12</span>)</li>
 <li><span class="parameter">p</span> | Rok <a href="#datumy">koneèného</a> data (napø. <span class="value">2000</span>).
-<br>Mìlo by pøitom platit: poèáteèní datum &lt;= koneèné datum.</li>
+<br/>Mìlo by pøitom platit: poèáteèní datum &lt;= koneèné datum.</li>
 <li><span class="parameter">b</span> | Název výsledného skriptu (napø. <span class="tt">delej.bat</span>). <a href="#output">Výsledky jeho spuštìní</a> jsou popsané níže.</li>
 <li><span class="parameter">n</span> | Název použitého command-line pøíkazu online breviáøe (napø. <span class="tt">breviar.exe</span> pro DOS).
 Tento název bude použitý ve výsledném skriptu.</li>
@@ -52,7 +52,7 @@ Tento název bude použitý ve výsledném skriptu.</li>
 <li><span class="parameter">yyyy</span> | rok</li>
 <li><span class="parameter">mm</span> | mìsíc (napø. <span class="value">05</span> pro kvìten)</li>
 <li><span class="parameter">dd</span> | den (napø. <span class="value">07</span>)
-<br>Datum je uvedeno v souladu s normou ISO 8601.
+<br/>Datum je uvedeno v souladu s normou ISO 8601.
 </li>
 <li><span class="parameter">x</span> | poøadí svìtce (<span class="value">0</span> až <span class="value">4</span>). <span class="value">0</span> vìtšinou znamená všední den, nebo slavnost s nejvyšší prioritou. 
 	<span class="value">4</span> znamená nezávaznou sobotní památku Panny Marie, <span class="value">1</span> až <span class="value">3</span> znamenají vìtšinou svátky svatých.</li>
@@ -67,7 +67,7 @@ Tento název bude použitý ve výsledném skriptu.</li>
 <li><span class="parameter">YYYY</span> | rok <a href="#datumy">koneèného</a> data</li>
 <li><span class="parameter">MM</span> | mìsíc <a href="#datumy">koneèného</a> data</li>
 <li><span class="parameter">DD</span> | den <a href="#datumy">koneèného</a> data
-<br>Data jsou uvedena v souladu s normou ISO 8601.
+<br/>Data jsou uvedena v souladu s normou ISO 8601.
 </li>
 </ul>
 <p>Pokud program dostane nesprávné paramety (tzn. i pøípady nesprávných hodnot parametrù, nebo další chybìjící parametry závislé na jiných parametrech), export obsahuje chybné hlášení. Navíc command line verze vypíše chybné hlášení na stderr.
@@ -75,20 +75,20 @@ Tento název bude použitý ve výsledném skriptu.</li>
 <h4 class="blue">Pøíklady</h4>
 <p>Jak známo, pøíklad mùže všechny pochybnosti rázem odstranit, nebo naopak podnítit další otázky. Z obou dùvodù jsou uvedeny následující pøíklady použití batch modu.
 <ul class="level1">
-<li><span class="tt">breviar.exe -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -bdelej.bat -nbreviar.exe -ic:\breviar\</span><br>
+<li><span class="tt">breviar.exe -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -bdelej.bat -nbreviar.exe -ic:\breviar\</span><br/>
 <span class="explain">Program vygeneruje skript <span class="tt">delej.bat</span>, který vytvoøí modlitby od 7. kvìtna 2000 do 3. dubna 2001. 
 Pøitom <span class="tt">include</span> adresáø se nachází v adresáøi <span class="tt">c:\breviar\</span>
 a název programu je <span class="tt">breviar.exe</span>. (Použití v DOSu/Windows.)
 </span>
 </li>
-<li><span class="tt">breviar.exe -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -bdelej.bat -nbreviar.exe -ic:\breviar\ -a1</span><br>
+<li><span class="tt">breviar.exe -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -bdelej.bat -nbreviar.exe -ic:\breviar\ -a1</span><br/>
 <span class="explain">Program vygeneruje skript <span class="tt">delej.bat</span>, který vytvoøí modlitby od 7. kvìtna 2000 do 3. dubna 2001. 
 Po spuštìní skriptu budou všechny modlitby zaøazeny do jednoho souboru s názvem <span class="tt">2000-05-07_2001-04-03.htm</span>.
 Pøitom <span class="tt">include</span> adresáø se nachází v adresáøi <span class="tt">c:\breviar\</span>
 a jméno programu je <span class="tt">breviar.exe</span>. (Použitie v DOSe/Windows.)
 </span>
 </li>
-<li><span class="tt">breviar -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.sh -nbreviar -i~/breviar/</span><br>
+<li><span class="tt">breviar -qpbm -d7 -m5 -r2000 -f3 -g4 -p2001 -brob.sh -nbreviar -i~/breviar/</span><br/>
 <span class="explain">
 Program vygeneruje skript <span class="tt">rob.sh</span> (možná bude potøebný <span class="tt">chmod</span>
  na nastavení práv), který vytvoøí modlitby od 7. kvìtna 2000 do 3. dubna 2001. 
@@ -102,8 +102,8 @@ Pokud se vyskytnou nìjaké nesrovnalosti, nebo nefunkènosti, prosím
 <p><hr>
 <p class="patka">
 Autor programové èásti © 1999-2009 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
-<br>Pomoc pøi pøekladu do èeštiny: Gorazd
-<br>Všechna práva vyhrazena.
+<br/>Pomoc pøi pøekladu do èeštiny: Gorazd
+<br/>Všechna práva vyhrazena.
 </p>
 </body>
 </html>
