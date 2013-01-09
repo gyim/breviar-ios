@@ -1578,7 +1578,7 @@ const char *html_text_option0_referencie[POCET_JAZYKOV + 1] =
  "Bible references",
  "",
  "biblické odkazy",
- "hu_bible references to kereszteny.hu"
+ "Bibliai hivatkozások a kereszteny.hu oldalon"
 };
 
 const char *html_text_option0_referencie_explain[POCET_JAZYKOV + 1] = 
@@ -1588,7 +1588,7 @@ const char *html_text_option0_referencie_explain[POCET_JAZYKOV + 1] =
  "",
  "", 
  "", 
- "hu_bible references to kereszteny.hu"
+ "Az imák szövegében minden bibliai utalás (például Jn 3, 16) aktív linkként a kereszteny.hu katolikus bibliafordításának megfellõ részére mutat. (A Szent István Társulat fordítását használjuk.)"
 };
 
 const char *html_text_option0_citania[POCET_JAZYKOV + 1] = 
