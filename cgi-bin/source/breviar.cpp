@@ -213,7 +213,7 @@
 /*                  - tlaèidlo "Detaily" netreba, ZOBRAZ_BUTTON_DETAILY    */
 /*   2011-04-13a.D. | úprava konfiguraèného súboru, dokonèenie zlúèenia    */
 /*                    options, rozdelenie force options na bit-komponenty  */
-/*                  - v exporte zrušené \n v sekvencii <br>\n (kvôli IE)   */
+/*                  - v exporte zrušené \n v sekvencii <br />\n (kvôli IE) */
 /*                  - úprava vo funkcii stuffenv()                         */
 /*   2011-04-20a.D. | zobrazenie _global_opt 2 vo formulári, naèítanie     */
 /*   2011-04-29a.D. | doplnené Sláva Otcu "špeciálne" kvôli chválospevu    */
@@ -9209,7 +9209,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 #endif
 	// -------------------------------------------
 
-		// predtym tu bolo <br>, ale kedze hore som dal <table align="center">,  tak tu musi byt <center> kvoli buttonom; 2003-07-09
+		// predtym tu bolo <br />, ale kedze hore som dal <table align="center">,  tak tu musi byt <center> kvoli buttonom; 2003-07-09
 		// 2012-07-23: upravené, aby sa stalo súèasou tabu¾ky s monosami vo¾by
 		Export("<!-- riadok pre button Zobrazi/Vyèisti (choices)-->\n");
 		Export("<tr "HTML_ALIGN_CENTER">\n<td>\n");
@@ -12123,7 +12123,7 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 
 	if(lr > 'C' || lr < 'A'){
 		ALERT;
-		Export("Nevhodné údaje:"HTML_LINE_BREAK"<br>\n<ul>");
+		Export("Nevhodné údaje:"HTML_LINE_BREAK"<br />\n<ul>");
 		// tyzden
 		if(equals(tyzden, STR_EMPTY)){
 			Export("<li>takı liturgickı rok nemono iada</li>\n");
