@@ -7168,7 +7168,6 @@ void _export_rozbor_dna_buttons_dni_dnes(short int typ, short int dnes_dnes, sho
 #ifdef OS_Windows_Ruby
 	Export("\n<!--buttons/dni/dnes:begin-->\n");
 #endif
-	char pom[MAX_STR] = STR_EMPTY;
 	char action[MAX_STR];
 	mystrcpy(action, STR_EMPTY, MAX_STR);
 
