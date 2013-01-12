@@ -20,7 +20,7 @@
 	(na tlaèidlá alebo odkazy) „prekladá“ aplikácii, ktorá následne vytvorí vıstup, pošle ho spä prehliadaèu, ktorı vıstup zobrazí presne tak isto ako na internete.
 <p>Súbory na stiahnutie: 
 <ul>
-	<li>„balíèek programu a textov“ (<a href="2012-01-04-breviar.sk.zip">zip</a>, <a href="2012-01-04-breviar.sk.7z">7zip</a>, <a href="2012-01-04-breviar.sk.rar">rar</a>)</li>
+	<li>„balíèek programu a textov“ (<a href="2012-01-04-breviar.sk.zip">zip</a>, <a href="2012-01-04-breviar.sk.7z">7zip</a>)</li>
 	<li><a href="rubyinstaller-1.9.2-p0.exe">webserver</a> (Ruby Windows Installer z 
 		<a target="_blank" href="http://www.ruby-lang.org/en/downloads/">http://www.ruby-lang.org/en/downloads/</a>,
 		<a target="_blank" href="http://rubyinstaller.org/downloads/">http://rubyinstaller.org/downloads/</a>;
@@ -30,26 +30,26 @@
 </p>
 <h4 class="blue">Postup inštalácie</h4>
 <ol class="level1">
-<li>Stiahnite si oba súbory („balíèek programu a textov“ [<a href="2012-01-04-breviar.sk.zip">zip</a>, <a href="2012-01-04-breviar.sk.7z">7zip</a> alebo <a href="2012-01-04-breviar.sk.rar">rar</a>] a <a href="rubyinstaller-1.9.2-p0.exe">webserver</a>) na disk („Save as“, „Uloi ako...“). 
+<li>Stiahnite si oba súbory („balíèek programu a textov“ [<a href="2012-01-04-breviar.sk.zip">zip</a> alebo <a href="2012-01-04-breviar.sk.7z">7zip</a>] a <a href="rubyinstaller-1.9.2-p0.exe">webserver</a>) na disk („Save as“, „Uloi ako...“). 
 	Najskôr budeme inštalova webserver, následne samotnı program.</li>
 <li><span class="it">Inštalácia webservera</span>: Spustite súbor <span class="tt">rubyinstaller-1.9.2-p0.exe</span>. Riaïte sa inštalaènımi inštrukciami (sú v anglickom jazyku; v podstate staèí odklikáva tlaèidlo <span class="blue">Next</span> príp. <span class="blue">I Agree</span>
 	a <span class="blue">Finish</span>). Do jedného adresára (napr. <span class="tt">c:\Ruby192</span>) je nainštalovanı interpréter programovacieho jazyka Ruby. Ten následne spúša lokálny
 	webserver.</li>
-<li><span class="it">Inštalácia aplikácie</span>: Rozba¾te (napr. pomocou programov <a href="#7zip">7Zip</a>, WinZip, WinArj, WinRAR, PowerArchiver) „balíèek programu a textov“ (<span class="tt">2012-01-04-breviar.sk.zip</span>, <span class="tt">2012-01-04-breviar.sk.7z</span> resp. <span class="tt">2012-01-04-breviar.sk.rar</span>) do nejakého adresára na vašom disku
+<li><span class="it">Inštalácia aplikácie</span>: Rozba¾te (napr. pomocou programov <a href="#7zip">7Zip</a>, WinZip, WinArj, PowerArchiver, 7zip) „balíèek programu a textov“ (<span class="tt">2012-01-04-breviar.sk.zip</span> resp. <span class="tt">2012-01-04-breviar.sk.7z</span>) do nejakého adresára na vašom disku
 	(pre ïalšie úvahy predpokladáme, e je to <span class="tt">c:\breviar</span>).
-<br><b>Upozornenie:</b> Názov adresára NESMIE obsahova diakritiku!</li>
+<br/><b>Upozornenie:</b> Názov adresára NESMIE obsahova diakritiku!</li>
 <li>Tım je inštalácia ukonèená.</li>
 </ol>
 <h4 class="blue">Pouívanie aplikácie</h4>
 <ol>
 	<li>Pred kadım pouitím aplikácie je potrebné spusti webserver, a to spustením skriptu <span class="tt">spusti.server.bat</span> (nachádza sa v&nbsp;kmeòovom adresári
 		aplikácie, teda v našom príklade <span class="tt">c:\breviar</span>). Prípadne postaèí dvojklikom otvori jeden zo súborov <span class="tt">server.rb</span> resp. <span class="tt">server.rbw</span> (nachádzajú sa tamtie).
-		<br>Malo by sa otvori okno príkazového riadka, v ktorom by mali by pribline nasledujúce riadky:
+		<br/>Malo by sa otvori okno príkazového riadka, v ktorom by mali by pribline nasledujúce riadky:
 		<blockquote>
-			<p class="explain">c:\breviar>ruby.exe server.rb<br>
-			[2010-11-29 12:12:16] INFO WEBrick 1.3.1<br>
-			[2010-11-29 12:12:16] INFO ruby 1.9.2 (2010-08-18) [i386-mingw32]<br>
-			[2010-11-29 12:12:16] INFO WEBrick::HTTPServer#start: pid=2000 port=2000<br>
+			<p class="explain">c:\breviar>ruby.exe server.rb<br/>
+			[2010-11-29 12:12:16] INFO WEBrick 1.3.1<br/>
+			[2010-11-29 12:12:16] INFO ruby 1.9.2 (2010-08-18) [i386-mingw32]<br/>
+			[2010-11-29 12:12:16] INFO WEBrick::HTTPServer#start: pid=2000 port=2000<br/>
 		</blockquote>
 		O konfigurácii pozri <a href="#config"> nišie</a>.
 	</li>
@@ -76,24 +76,23 @@
 
 <a name="7zip"></a>
 <p>Pouitı program na kompresiu: 7zip; môete si ho stiahnu napr. tu: <a href="http://www.7-zip.org/">http://www.7-zip.org/</a> (je vo¾ne stiahnute¾nı).
-<br>Okrem toho pouívam legálny (zakúpenı) softvér <a href="http://www.rarlab.com/">WinRar</a>.
 
 <p>Ak máte akéko¾vek pripomienky, vylepšenia, nápady alebo postrehy, pošlite ich, prosím, <a href="mailto:videky@breviar.sk">mailom</a>.</p>
 
 <hr>
 <center>OAMDG
-<br><a href="../info/copyright.htm">Copyrights detailed</a>
-<br>Partial source text copyright © <!-- Slovenská liturgická komisia; Spolok svätého Vojtecha. --> Liturgická komisia Konferencie biskupov Slovenska (LK KBS). | HTML © 1999-2012 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
-<br>Un-CGI 1.10 Copyright 1994 © Steven Grimm. | cgiutils 1.1 Copyright 1995-1996 © William E. Weinman.
-<br>Partial source code copyright 1999 © Miroslav Murgaš. | Partial source code copyright 2007 © Marek Eliáš.
-<br>Partial source code copyright, android version 2011-2012 © Richard Královiè.
-<br>Ruby support 2005-2010 © Jozef Fülöp. | Ruby language © <a target="_blank" href="http://www.ruby-lang.org/en/">http://www.ruby-lang.org/en/</a>
-<br>git support 2011 © Jozef Fülöp.
-<br>Copyright 1999-2012 © Juraj Vidéky. All rights reserved.</center>
+<br/><a href="../info/copyright.htm">Copyrights detailed</a>
+<br/>Partial source text copyright © <!-- Slovenská liturgická komisia; Spolok svätého Vojtecha. --> Liturgická komisia Konferencie biskupov Slovenska (LK KBS). | HTML © 1999-2013 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
+<br/>Un-CGI 1.10 Copyright 1994 © Steven Grimm. | cgiutils 1.1 Copyright 1995-1996 © William E. Weinman.
+<br/>Partial source code copyright 1999 © Miroslav Murgaš. | Partial source code copyright 2007 © Marek Eliáš.
+<br/>Partial source code copyright, android version 2011-2013 © Richard Královiè.
+<br/>Ruby support 2005-2010 © Jozef Fülöp. | Ruby language © <a target="_blank" href="http://www.ruby-lang.org/en/">http://www.ruby-lang.org/en/</a>
+<br/>git support 2011 © Jozef Fülöp.
+<br/>Copyright 1999-2013 © Juraj Vidéky. All rights reserved.</center>
 <hr>
 <p class="patka">
-Posledná aktualizácia: 2012-08-21<br>
-© 1999-2012 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
+Posledná aktualizácia: 2012-08-21<br/>
+© 1999-2013 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
 </p>
 </body>
 </html>

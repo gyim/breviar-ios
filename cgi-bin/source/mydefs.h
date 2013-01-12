@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* mydefs.h                                                    */
-/* (c)1999-2012 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2013 | Juraj VidÈky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne define'y                    */
 /* document history                                            */
@@ -50,7 +50,7 @@
 /***************************************************************/
 /*                                                             */
 /* mybase.h                                                    */
-/* (c)1999-2012 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2013 | Juraj VidÈky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne vecicky                     */
 /* document history                                            */
@@ -573,6 +573,14 @@ extern short int query_type; // premenna obsahujuca PRM_...
 	#define STR_MODL_OPTF_1_ZOBRAZ_SPOL_CAST "of1zspc"
 #endif
 
+// pouûiù (pre ktor˝koævek deÚ v roku) kratöie prosby k veöper·m
+#define MODL_OPTF_1_VESP_KRATSIE_PROSBY 98
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF_1_VESP_KRATSIE_PROSBY "MODL_OPTF_1_VESP_KRATSIE_PROSBY"
+#else
+	#define STR_MODL_OPTF_1_VESP_KRATSIE_PROSBY "of1vkp"
+#endif
+
 // ûalmy zo sviatku
 #define MODL_OPTF_1_SPOMIENKA_SPOL_CAST 79
 #ifdef LONG_PARAM_NAMES
@@ -789,13 +797,17 @@ extern short int query_type; // premenna obsahujuca PRM_...
 #define HTML_FORM_INPUT_RESET2   "input type=\"reset\" class=\"reset2\""
 #define HTML_FORM_INPUT_HIDDEN   "input type=\"hidden\""
 
+// #define HTML_FORM_METHOD_GET  "<form action=\"%s\">\n"
+#define HTML_FORM_METHOD_GET     "<form action=\"%s\" method=\"get\">\n"
+#define HTML_FORM_METHOD_POST    "<form action=\"%s\" method=\"post\">\n"
+
 #define HTML_LINK_RED    "a class=\"red\""
 #define HTML_LINK_NORMAL "a"
 
 #define HTML_NONBREAKING_SPACE "&nbsp;"
 #define HTML_SPACE " "
 #define HTML_VERTICAL_BAR "|"
-#define HTML_LINE_BREAK "<br />"
+#define HTML_LINE_BREAK "<br/>"
 #define HTML_NEW_PARAGRAPH "<p>"
 
 #define HTML_SPAN_NORMAL    "span class=\"normal\""
@@ -886,7 +898,7 @@ extern short int query_type; // premenna obsahujuca PRM_...
 
 #define HTML_ISO_FORMAT      "%04d-%02d-%02d"
 
-#define TEXT_COPYRIGHT       "(c) 1999-2012 Juraj VidÈky"
+#define TEXT_COPYRIGHT       "(c) 1999-2013 Juraj VidÈky"
 #define TEXT_EMAIL           "videky@breviar.sk"
 
 // main XML element
@@ -957,6 +969,7 @@ extern short int query_type; // premenna obsahujuca PRM_...
 #define XML_BIT_OPT_1_PROSBY_ZVOLANIE           "BitOpt1Repeat"
 #define XML_BIT_OPT_1_SKRY_POPIS                "BitOpt1HideDescription"
 #define XML_BIT_OPT_1_ZOBRAZ_SPOL_CAST          "BitOpt1ShowCommuniaDescription"
+#define XML_BIT_OPT_1_VESP_KRATSIE_PROSBY       "BitOpt1UseVespShortenPrayers"
 
 // POCET_OPT_2_HTML_EXPORT
 #define XML_BIT_OPT_2_ISO_DATUM                 "BitOpt2ISOFormat"
@@ -982,7 +995,8 @@ extern short int query_type; // premenna obsahujuca PRM_...
 #define ELEM_END(elem)       "</"elem">"
 
 #define ELEMID_BEGIN(elem)   "<"elem" Id=\"%d\">"
-#define ELEMVAL_BEGIN(elem)  "<"elem" Value=\"%d\">"
+#define ELEMVAL_BEGIN(elem)  "<"elem" Value=\"%d\" Name=\"%s\" ForceName=\"%s\">"
+#define ELEMOPT_BEGIN(elem)  "<"elem" Id=\"%d\" ForceName=\"%s\">" // Id napr. BIT_OPT_0_VERSE; Name napr. STR_MODL_OPTF_0_VERSE
 
 #endif // __MYDEFS_H_
 

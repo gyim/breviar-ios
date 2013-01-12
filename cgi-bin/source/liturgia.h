@@ -1,7 +1,7 @@
 /***************************************************************/
 /*                                                             */
 /* liturgia.h                                                  */
-/* (c)1999-2012 | Juraj Videky | videky@breviar.sk             */
+/* (c)1999-2013 | Juraj VidÈky | videky@breviar.sk             */
 /*                                                             */
 /* description | obsahuje zakladne vecicky pre liturgiu hodin  */
 /* document history                                            */
@@ -462,6 +462,8 @@ extern const char *TEMPLAT[POCET_MODLITIEB + 1];
 #define PARAM_ZVOLANIA      "ZVOLANIA"
 #define PARAM_SLAVAOTCU	    "SLAVAOTCU"
 #define PARAM_RESPONZ       "RESPONZ" // PARAM_PLNE_RESP je uû obsadenÈ...
+#define PARAM_KRATSIE_PROSBY "KRATSIE-PROSBY" // 2012-11-15: _ sa menilo na &nbsp; preto som zmenil na -
+#define PARAM_ZALM95        "ZALM95" // 2012-11-23: kvÙli <a name...>
 
 // dalsie parametre: specificke pre obdobie
 // Od nedele P·novho zm‡tvychvstania aû do Druhej veækonoËnej nedele vr·tane, ako aj na druhÈ veöpery sl·vnosti Zoslania Ducha Sv‰tÈho
@@ -1135,8 +1137,7 @@ typedef struct lrok _struct_lrok;
 //---------------------------------------------------------------------
 // globalne premenne -- su definovane v dnes.cpp (18/02/2000A.D.)
 
-// globalna premenna, do ktorej sa ukladaju info o analyzovanom dni pouziva ju void nove_rozbor_dna() funkcia
-
+// globalna premenna, do ktorej sa ukladaju info o analyzovanom dni
 extern _struct_dm *_global_den_ptr;
 // extern _struct_dm _global_den;
 #define _global_den (*_global_den_ptr)
@@ -1249,7 +1250,7 @@ extern short int _global_opt_specialne[POCET_OPT_0_SPECIALNE];
 #define BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA  16 // Ëi sa Nanebovst˙penie P·na sl·vi v nedeæu (1) alebo nie (teda vo ötvrtok, na 40.-ty deÚ po VeækonoËnej nedeli; hodnota 0 == default)
 #define BIT_OPT_0_TELAKRVI_NEDELA          32 // Ëi sa Najsv. Kristovho tela a krvi sl·vi v nedeæu (1) alebo nie (teda vo ötvrtok, 11.-ty deÚ po ZoslanÌ Ducha Sv.; hodnota 0 == default)
 
-#define POCET_OPT_1_CASTI_MODLITBY         13 // jednotlivÈ komponenty option 1 -- bity pre force option 1
+#define POCET_OPT_1_CASTI_MODLITBY         14 // jednotlivÈ komponenty option 1 -- bity pre force option 1
 extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
 // 2011-04-11: ˙prava v˝znamu (a interpret·cie) option 1 == OPT_1_CASTI_MODLITBY (zobraziù/nezobraziù najm‰ pevnÈ/nemennÈ s˙Ëasti modlitieb, ale aj inÈ, Ëo s˙/nie s˙ v LH)
 // 2011-10-10: ˙prava niektor˝ch bitov, posunutie popisu na koniec
@@ -1266,6 +1267,7 @@ extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
 #define BIT_OPT_1_PROSBY_ZVOLANIE        1024 // 1 = zvolanie v prosb·ch zobraziù (opakovaù) po kaûdej prosbe
 #define BIT_OPT_1_SKRY_POPIS             2048
 #define BIT_OPT_1_ZOBRAZ_SPOL_CAST       4096
+#define BIT_OPT_1_VESP_KRATSIE_PROSBY    8192 // 1 = pouûiù (pre ktor˝koævek deÚ v roku) kratöie prosby k veöper·m
 
 #define POCET_OPT_2_HTML_EXPORT            14 // jednotlivÈ komponenty option 2 -- bity pre force option 2
 extern short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];

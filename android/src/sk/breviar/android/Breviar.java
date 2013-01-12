@@ -10,6 +10,7 @@ import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -77,6 +78,8 @@ public class Breviar extends Activity {
                      .replaceAll("&amp;c=[^&]*&amp;", "&amp;")
                      .replaceAll("&amp;j=[^&]*&amp;", "&amp;")));
       syncPreferences();
+      BreviarApp.initLocale(this);
+      recreateIfNeeded();
     }
 
     public boolean tryOpenBible(String url) {
@@ -113,8 +116,11 @@ public class Breviar extends Activity {
 
       wv = (WebView)findViewById(R.id.wv);
       wv.clearCache(true);
-      wv.getSettings().setBuiltInZoomControls(true);
       wv.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+      wv.getSettings().setBuiltInZoomControls(true);
+      wv.getSettings().setSupportZoom(true);
+      wv.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+      wv.getSettings().setUseWideViewPort(false);
       wv.setInitialScale(scale);
       initialized = false;
       Log.v("breviar", "setting scale = " + scale);
@@ -141,8 +147,11 @@ public class Breviar extends Activity {
 
           Log.v("breviar", "sync in overrideurlloading");
           parent.syncScale();
+          /*
           view.loadUrl(url);
           return true;
+          */
+          return false;
         }
 
         @Override
@@ -213,17 +222,35 @@ public class Breviar extends Activity {
         wv.loadUrl("http://127.0.0.1:" + S.port + "/" + scriptname + 
                    "?qt=pdnes&p=" + Util.events[id].p + Html.fromHtml(S.getOpts()));
       } else {
-        if (wv.restoreState(savedInstanceState) == null) goHome();
+        if (savedInstanceState == null) {
+          goHome();
+        } else {
+          Log.v("breviar", "onCreate: savedInstanceState != null");
+          String url = savedInstanceState.getString("wv-url");
+          Log.v("breviar", "onCreate: saved url: " + url);
+          if (url == null) {
+            goHome();
+          } else {
+            url = url.replaceFirst("http://[^/]*/", "http://127.0.0.1:" + S.port + "/");
+            Log.v("breviar", "onCreate: loading url: " + url);
+            wv.loadUrl(url);
+          }
+        }
       }
+
+      Log.v("breviar", "onCreate: Updating fullscreen");
       updateFullscreen();
+      Log.v("breviar", "onCreate: done");
+    }
+
+    void recreateIfNeeded() {
+      appEventId = BreviarApp.getEventId();
+      if (Build.VERSION.SDK_INT >= 11) recreate();
     }
 
     @Override
     protected void onResume() {
-      if (appEventId < BreviarApp.getEventId()) {
-        appEventId = BreviarApp.getEventId();
-        recreate();
-      }
+      if (appEventId < BreviarApp.getEventId()) recreateIfNeeded();
       super.onResume();
     }
 
@@ -244,7 +271,12 @@ public class Breviar extends Activity {
     protected void onSaveInstanceState(Bundle outState) {
       Log.v("breviar", "onSaveInstanceState");
       syncScale();
-      wv.saveState(outState);
+      //wv.saveState(outState);
+      String url = wv.getUrl();
+      if (url != null) {
+        outState.putString("wv-url", url);
+      }
+      Log.v("breviar", "onSaveInstanceState: saved url: " + url);
       syncPreferences();
       super.onSaveInstanceState(outState);
     }
@@ -387,6 +419,25 @@ public class Breviar extends Activity {
         wv.goBack();
         return true;
       }
+      if ((keyCode == KeyEvent.KEYCODE_VOLUME_UP) && BreviarApp.getVolButtons(this)) {
+        wv.pageUp(false);
+        return true;
+      }
+      if ((keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) && BreviarApp.getVolButtons(this)) {
+        wv.pageDown(false);
+        return true;
+      }
       return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+      if ((keyCode == KeyEvent.KEYCODE_VOLUME_UP) && BreviarApp.getVolButtons(this)) {
+        return true;
+      }
+      if ((keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) && BreviarApp.getVolButtons(this)) {
+        return true;
+      }
+      return super.onKeyUp(keyCode, event);
     }
 }
