@@ -36,6 +36,8 @@ static BRDataSource *_instance;
                @"j": @"hu",
                }];
     
+    //NSLog(@"%@", dayData);
+    
     // Find XML header
     NSRange r = [dayData rangeOfString:@"<?xml"];
     if (r.location != NSNotFound) {
@@ -59,6 +61,10 @@ static BRDataSource *_instance;
                 celebration.title = value;
             else
                 celebration.subtitle = value;
+        }];
+        
+        [celebrationXml iterate:@"LiturgicalCelebrationColor" usingBlock:^(RXMLElement *colorXml) {
+            celebration.liturgicalColor = (BRLiturgicalColor)[colorXml attributeAsInt:@"Id"];
         }];
         
         // Create prayer objects

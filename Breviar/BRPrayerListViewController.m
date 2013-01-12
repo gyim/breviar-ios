@@ -9,6 +9,20 @@
 #import "BRPrayerListViewController.h"
 #import "BRPrayerViewController.h"
 #import "BRDataSource.h"
+#import "BRCelebrationCell.h"
+
+static NSString *liturgicalColorImages[] = {
+    [BRColorUnknown]       = @"",
+    [BRColorRed]           = @"bullet_red.png",
+    [BRColorWhite]         = @"bullet_white.png",
+    [BRColorGreen]         = @"bullet_green.png",
+    [BRColorViolet]        = @"bullet_violet.png",
+    [BRColorRose]          = @"bullet_rose.png",
+    [BRColorBlack]         = @"bullet_black.png",
+    [BRColorVioletOrBlack] = @"bullet_violet_or_black.png",
+    [BRColorVioletOrWhite] = @"bullet_violet_or_white.png",
+    [BRColorRoseOrViolet]  = @"bullet_rose_or_violet.png"
+};
 
 @interface BRPrayerListViewController ()
 
@@ -81,11 +95,12 @@
         }
         else {
             // Celebration cell
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CelebrationCell"];
+            BRCelebrationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CelebrationCell"];
             
             BRCelebration *celebration = [self.day.celebrations objectAtIndex:indexPath.row-1];
-            cell.textLabel.text = celebration.title;
-            cell.detailTextLabel.text = celebration.subtitle;
+            cell.celebrationNameLabel.text = celebration.title;
+            cell.celebrationDescriptionLabel.text = celebration.subtitle;
+            cell.liturgicalColorView.image = [UIImage imageNamed:liturgicalColorImages[celebration.liturgicalColor]];
             cell.accessoryType = (self.celebrationIndex == indexPath.row-1 ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone);
             
             return cell;
