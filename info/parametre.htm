@@ -67,8 +67,7 @@ ho popisujeme na <a href="batchmode.htm">osobitnom mieste</a>.
 	</ul>
 </li>
 <li><span class="parameter">t</span> | Tıdeò altára (hodnoty: <span class="value">1</span>-<span class="value">4</span>) pre <span class="parameter">pcr</span></li>
-<li><span class="parameter">ds</span> (pre command line: <span class="parameter">x</span>) | "poradie svätého" (hodnoty: <span class="value">1</span>-<span class="value">3</span>, niekedy je toti viacero svätcov na jeden deò, 
-a v takom prípade je moné voli ktorúko¾vek ¾ubovo¾nú spomienku, resp. <span class="value">4</span> pre spomienku Panny Márie v sobotu)</li> 
+<li><span class="parameter">ds</span> (pre command line: <span class="parameter">x</span>) | "poradie svätého" (hodnoty: <span class="value">1</span>-<span class="value">3</span>, niekedy je toti viacero svätcov na jeden deò, a v takom prípade je moné voli ktorúko¾vek ¾ubovo¾nú spomienku, resp. <span class="value">4</span> pre spomienku Panny Márie v sobotu)</li> 
 <li><span class="parameter">o0</span> (pre command line: <span class="parameter">0</span>) | monos 0 (option 0), špeciálne èasti modlitieb
 	<ul class="level2">
 	<li>1. bit (1): èíslovanie (èísla) veršov v almoch, chválospevoch a biblickıch èítaniach </li>
@@ -94,6 +93,7 @@ a v takom prípade je moné voli ktorúko¾vek ¾ubovo¾nú spomienku, resp. <span cl
 	<li>11. bit (1024): zvolanie v prosbách zobrazi (opakova) po kadej prosbe</li>
 	<li>12. bit (2048): skry popis (napr. ivotopis svätca)</li>
 	<li>13. bit (4096): monos zobrazi informáciu o spoloènej èasti</li>
+	<li>14. bit (8192): poui (pre ktorıko¾vek deò v roku) kratšie prosby k vešperám z dodatku</li>
 	</ul>
 </li>
 <li><span class="parameter">o2</span> (pre command line: <span class="parameter">2</span>) | monos 2 (option 2), HTML export
@@ -126,14 +126,14 @@ a v takom prípade je moné voli ktorúko¾vek ¾ubovo¾nú spomienku, resp. <span cl
 <li><span class="parameter">a</span> (len pre command line) | Monos, èi v prípade existencie súboru pre export do tohto súboru pridáva (teda neprepísa ho – append; default: nie – èie prepísa)</li>
 <li><span class="parameter">j</span> | Jazyk pre odlišné jazykové mutácie (default: sk; ostatné podporované monosti: cz, c2)</li>
 <li><span class="parameter">c</span> | Názov css súboru, ktorı sa má poui pri generovaní modlitieb (CSS musí pritom spåòa isté štandardy)</li>
+<li><span class="parameter">u</span> (len pre command line) | spôsob zapisovania dátumu pre súbory v batch móde | hodnoty: <span class="value">0</span> (simple) alebo <span class="value">1</span> (full)</li>
 <li><span class="parameter">k</span> (len pre slovenskú verziu) | Kalendár reho¾nej rodiny (saleziáni: <span class="parameter">sdb</span>, redemptoristi: <span class="parameter">cssr</span>, ...)</li>
 <li><span class="parameter">M</span> (len pre command line) | Monosti offline HTML exportu (pouite hodnoty: <span class="value">2</span> alebo <span class="value">3</span>)</li>
-<li><span class="parameter">u</span> (len pre command line) | spôsob zapisovania dátumu pre súbory v batch móde | hodnoty: <span class="value">0</span> (simple) alebo <span class="value">1</span> (full)</li>
 </ul>
 
-<p>Ak dostane program nesprávne parametre (zahàòa i prípady nesprávnych hodnôt parametrov 
-alebo ïalšie chıbajúce parametre závisiace od inıch parametrov), export obsahuje chybové hlásenie.
-Naviac, command line verzia vypíše chybové hlásenie na stderr.
+<p>Pre parametre urèujúce monosti majú nasledujúce hodnoty: <span class="value">bitová-hodnota</span> * <span class="value">1</span> – áno, <span class="value">0</span> – nie (jednotlivé bitové komponenty pre danú option sa sèítajú).
+
+<p>Ak dostane program nesprávne parametre (zahàòa i prípady nesprávnych hodnôt parametrov alebo ïalšie chıbajúce parametre závisiace od inıch parametrov), export obsahuje chybové hlásenie. Naviac, command line verzia vypíše chybové hlásenie na stderr.
 
 <a name="howto"></a>
 <h4 class="blue">Ako zisti nastavenie jednotlivıch parametrov</h4>
@@ -155,7 +155,7 @@ Naviac, command line verzia vypíše chybové hlásenie na stderr.
 
 <a name="example"></a>
 <h4 class="blue">Príklady</h4>
-<p>Ako sa vraví, príklad môe všetky pochybnosti razom odstráni alebo naopak, podnieti ïalšie otázky. Za oboma úèelmi sú uvedené nasledujúce príkady pouitia command-line programu.
+<p>Ako sa vraví, príklad môe všetky pochybnosti razom odstráni alebo naopak, podnieti ïalšie otázky. Za oboma úèelmi sú uvedené nasledujúce príkady pouitia command-line programu (novšie príklady pre <a href="batchmode.htm">batch mód</a>).
 
 <ul class="level1">
 
@@ -185,11 +185,14 @@ Ak súbor <span class="tt">moja.htm</span> existuje, neprepíše sa, ale program pr
 </li>
 
 </ul>
+
+<p>Ak sa vyskytnú nejaké nezrovnalosti alebo nefunkènosti, prosím <a href="mailto:videky@breviar.sk">píšte</a>. Command-line verzia je viac-menej experiment. Ïakujem.
+
 <hr>
 <p class="patka">
 Autor programovej èasti © 1999-2013 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
 <br/>Všetky práva vyhradené.
-<br/>Posledná aktualizácia: 2013-01-21<br/>
+<br/>Posledná aktualizácia: 2013-01-22<br/>
 © 1999-2013 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
 </p>
 </body>
