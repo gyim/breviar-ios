@@ -1,4 +1,7 @@
-2013-01-21: SK generované per SDB
+2013-01-22: SK generované na linuxe
+	./l.cgi -qpbm -d1 -m1 -r2013 -f31 -g12 -p2013 -brobSK-sdb.sh -ksdb -jsk -n./l.cgi -i../../include/ -usimple -M2 -00 -15535 -2120
+
+2013-01-21: SK generované pre SDB
 	-- niektoré pevné súèasti modlitieb (chválospevy Benediktus, Magnifikat, Nunk dimittis, Te Deum; rubriky; zakonèenia modlitieb; dlhé responzóriá v posv. èítaniach; opakovanie zvolaní v prosbách), doplnková psalmódia ("(alt)" tlaèidlo); neberú sa èasti zo spol. èastí na spomienky
 		breviar.exe -qpbm -d1 -m1 -r2013 -f31 -g12 -p2013 -brobSK-sdb.bat  -ksdb -jsk -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M2 -00 -15535 -2120
 		-- 2013-sk-sdb

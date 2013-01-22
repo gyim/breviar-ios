@@ -147,15 +147,19 @@ Tento spôsob pouitia sa znaène líši od ostatnıch, preto ho popisujeme na tomto 
 <ul class="level1">
 
 <li><span class="tt">breviar.exe -qpbm -d1 -m1 -r2013 -f31 -g12 -p2013 -brobSK.bat -jsk -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M2 -00 -15191 -2224</span><br/>
-<span class="explain">Program vytvorí súbor <span class="tt">robSK.bat</span> a jednotlivé podadresáre pre celı rok 2013, ide o „šikovnú verziu“ (pozrite nastavenia option 1 = 5191 a option 2 = 224) z download sekcie webstránok. Všimnite si pouitie parametra M (hodnota 2) a u (hodnota simple). Potom staèí spusti tento súbor <span class="tt">robSK.bat</span>, ktorı behom nieko¾kıch minút predgeneruje všetky modlitby na rok 2013 (vrátane stránok obsahujúcich informácie o jednotlivıch dòoch a mesiacoch).
+<span class="explain">Program vytvorí súbor <span class="tt">robSK.bat</span> a jednotlivé podadresáre pre celı rok 2013, ide o „šikovnú verziu“ (pozrite nastavenia option 1 = 5191 a option 2 = 224) z download sekcie webstránok. Všimnite si pouitie parametra M (hodnota 2) a u (hodnota simple). Potom staèí spusti tento súbor <span class="tt">robSK.bat</span>, ktorı behom nieko¾kıch minút predgeneruje všetky modlitby na rok 2013 (vrátane stránok obsahujúcich informácie o jednotlivıch dòoch a mesiacoch). (Pouitie v DOSe/Windows.)
 </li>
 	
 <li><span class="tt">breviar.exe -qpbm -d1 -m1 -r2013 -f31 -g12 -p2013 -brobCZ.bat -jcz -nbreviar.exe -i..\..\breviar.sk\include_cz\ -usimple -M2 -00 -15191 -2224</span><br/>
-<span class="explain">Program vytvorí súbor <span class="tt">robCZ.bat</span> a jednotlivé podadresáre pre celı rok 2013, ide o „šikovnú verziu“ pre èeskú LH (j = cz) z download sekcie webstránok. Potom staèí spusti tento súbor <span class="tt">robCZ.bat</span>, ktorı behom nieko¾kıch minút predgeneruje všetky modlitby na rok 2013.
+<span class="explain">Program vytvorí súbor <span class="tt">robCZ.bat</span> a jednotlivé podadresáre pre celı rok 2013, ide o „šikovnú verziu“ pre èeskú LH (j = cz) z download sekcie webstránok. Potom staèí spusti tento súbor <span class="tt">robCZ.bat</span>, ktorı behom nieko¾kıch minút predgeneruje všetky modlitby na rok 2013. (Pouitie v DOSe/Windows.)
 </li>
 
 <li><span class="tt">breviar.exe -qpbm -d1 -m1 -r2013 -f31 -g12 -p2013 -brobSK-sdb.bat  -ksdb -jsk -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M2 -00 -113727 -2120</span><br/>
-<span class="explain">Program vytvorí súbor <span class="tt">robSK.bat</span> a jednotlivé podadresáre pre celı rok 2013, verzia pre saleziánsku rodinu pod¾a poiadaviek ich nastavení.
+<span class="explain">Program vytvorí súbor <span class="tt">robSK-sdb.bat</span> a jednotlivé podadresáre pre celı rok 2013, verzia pre saleziánsku rodinu pod¾a poiadaviek ich nastavení. (Pouitie v DOSe/Windows.)
+</li>
+
+<li><span class="tt">./l.cgi -qpbm -d1 -m1 -r2013 -f31 -g12 -p2013 -brobSK-sdb.sh -ksdb -jsk -n./l.cgi -i../../include/ -usimple -M2 -00 -15535 -2120</span><br/>
+<span class="explain">Program vytvorí súbor <span class="tt">robSK-sdb.sh</span> a jednotlivé podadresáre pre celı rok 2013, verzia pre saleziánsku rodinu pod¾a poiadaviek ich nastavení. Pre spustenie je treba prida práva pre tento súbor (<tt>chmod 755 robSK-sdb.sh</tt>) a spusti ho takto: <tt>./robSK-sdb.sh</tt>. (Pouitie v UNIXe.)
 </li>
 
 </ul>
