@@ -14089,9 +14089,9 @@ short int getArgv(int argc, char **argv){
 			// 2012-12-12: nie pre append (netreba vytv·raù adres·re [mkdir] ani po nich chodiù [cd])
 			if(_global_opt_append != YES){
 				// musÌme upraviù n·zov executable, lebo budeme meniù adres·r v _main_batch_mode()
-				mystrcpy(pom_name_binary_executable, "..\\", MAX_STR);
+				mystrcpy(pom_name_binary_executable, ".."STR_PATH_SEPARATOR, MAX_STR);
 				// musÌme upraviù n·zov adres·ra s include, lebo budeme meniù adres·r v _main_batch_mode()
-				mystrcpy(pom_include_dir, "..\\", MAX_STR);
+				mystrcpy(pom_include_dir, ".."STR_PATH_SEPARATOR, MAX_STR);
 			}
 			strcat(pom_name_binary_executable, name_binary_executable);
 			mystrcpy(name_binary_executable, pom_name_binary_executable, MAX_STR);
