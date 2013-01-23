@@ -192,11 +192,11 @@ const char *nazov_spolc_jazyk[POCET_SPOL_CASTI + 1][POCET_JAZYKOV + 1] =
 
 const char *nazov_bit_opt_1_spomienka_spol_cast_jazyk[POCET_JAZYKOV + 1] =
 {"bola zvolená monos niektoré èasti pri slávení spomienky vzia zo dòa pod¾a Všeobecnıch smerníc, è. 235 písm. b", 
- "byla zvolena monost vzít pøi slavení památky nìkteré èasti ze dne podle Všeobecnıch smìrnic, è. 235 písm. b", 
+ "byla zvolena monost vzít pøi slavení památky nìkteré èasti ze dne podle Všeobecnıch pokynù k denní modlitbì církve, è. 235 písm. b", 
  "", 
  "", 
  "", 
- "", 
+ "byla zvolena monost vzít pøi slavení památky nìkteré èasti ze dne podle Všeobecnıch pokynù k denní modlitbì Církve, è. 235 písm. b", 
  ""};
 
 // filenames - same for all languages (based on Slovak)
@@ -1726,11 +1726,11 @@ const char *html_text_option1_rubriky[POCET_JAZYKOV + 1] =
 };
 const char *html_text_option1_rubriky_explain[POCET_JAZYKOV + 1] = 
 {"Liturgia hodín zobrazuje èervenım písmom rozlièné zvyèajne vysvet¾ujúce pokyny k modlitbe (pod¾a Všeobecnıch smerníc o LH).", 
- "Liturgie hodin uvádí èervenım písmem rozlièné pokyny k modlitbì (èasto podle Všeobecnıch smìrnic).", 
+ "Liturgie hodin uvádí èervenım písmem rozlièné pokyny k modlitbì (èasto podle Všeobecnıch pokynù k denní modlitbì církve).", 
  "", 
  "",
  "", 
- "Liturgie hodin uvádí èervenım písmem rozlièné pokyny k modlitbì (èasto podle Všeobecnıch smìrnic).", 
+ "Liturgie hodin uvádí èervenım písmem rozlièné pokyny k modlitbì (èasto podle Všeobecnıch pokynù k denní modlitbì Církve).", 
  "Az imaórák liturgiája piros betûvel különbözõ többnyire magyarázó vagy az imaórát (az „Általános rendelkezések Az imaórák liturgiájáról“ szerint) szabályozó szövegeket jelenít meg. Alaphelyzetben nem mutatja."
 };
 
