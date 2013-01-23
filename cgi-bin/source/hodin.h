@@ -191,7 +191,13 @@ const char *nazov_spolc_jazyk[POCET_SPOL_CASTI + 1][POCET_JAZYKOV + 1] =
 #define		nazov_spolc(a)	nazov_spolc_jazyk[a][_global_jazyk]
 
 const char *nazov_bit_opt_1_spomienka_spol_cast_jazyk[POCET_JAZYKOV + 1] =
-{"bola zvolená monos niektoré èasti pri slávení spomienky vzia zo dòa pod¾a Všeobecnıch smerníc, è. 235 písm. b", "", "", "", "", "", ""};
+{"bola zvolená monos niektoré èasti pri slávení spomienky vzia zo dòa pod¾a Všeobecnıch smerníc, è. 235 písm. b", 
+ "byla zvolena monost vzít pøi slavení památky nìkteré èasti ze dne podle Všeobecnıch smìrnic, è. 235 písm. b", 
+ "", 
+ "", 
+ "", 
+ "", 
+ ""};
 
 // filenames - same for all languages (based on Slovak)
 const char *nazov_spolc_htm[POCET_SPOL_CASTI + 1] =
