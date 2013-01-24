@@ -2967,10 +2967,19 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			Log("including SPOL_CAST\n");
 			Export("spol_cast:begin-->");
 			if(!equals(_global_string_spol_cast, STR_EMPTY)){
-				Export("<p><"HTML_SPAN_RED_SMALL">%s %s %s.</span>\n", 
-					(ret_sc == MODL_SPOL_CAST_ZA_ZOSNULYCH)? nazov_spolc_oficiumza_jazyk[_global_jazyk]: nazov_spolc_zospolc_jazyk[_global_jazyk], 
-					(ret_sc != MODL_SPOL_CAST_ZA_ZOSNULYCH)? ((ret_sc == MODL_SPOL_CAST_POSVIACKA_CHRAMU)? nazov_spolc_vyrocie_jazyk[_global_jazyk]: nazov_spolc_sviatky_jazyk[_global_jazyk]): STR_EMPTY,
-					_global_string_spol_cast);
+				// pre HU in˝ slovosled
+				if(_global_jazyk == JAZYK_HU){
+					Export("<p><"HTML_SPAN_RED_SMALL">%s %s %s.</span>\n", 
+						(ret_sc != MODL_SPOL_CAST_ZA_ZOSNULYCH)? ((ret_sc == MODL_SPOL_CAST_POSVIACKA_CHRAMU)? nazov_spolc_vyrocie_jazyk[_global_jazyk]: nazov_spolc_sviatky_jazyk[_global_jazyk]): STR_EMPTY,
+						_global_string_spol_cast,
+						(ret_sc == MODL_SPOL_CAST_ZA_ZOSNULYCH)? nazov_spolc_oficiumza_jazyk[_global_jazyk]: nazov_spolc_zospolc_jazyk[_global_jazyk]);
+				}
+				else{
+					Export("<p><"HTML_SPAN_RED_SMALL">%s %s %s.</span>\n", 
+						(ret_sc == MODL_SPOL_CAST_ZA_ZOSNULYCH)? nazov_spolc_oficiumza_jazyk[_global_jazyk]: nazov_spolc_zospolc_jazyk[_global_jazyk], 
+						(ret_sc != MODL_SPOL_CAST_ZA_ZOSNULYCH)? ((ret_sc == MODL_SPOL_CAST_POSVIACKA_CHRAMU)? nazov_spolc_vyrocie_jazyk[_global_jazyk]: nazov_spolc_sviatky_jazyk[_global_jazyk]): STR_EMPTY,
+						_global_string_spol_cast);
+				}
 			}
 			Export("<!--spol_cast:end");
 		}
@@ -6100,7 +6109,14 @@ short int init_global_string_spol_cast(short int sc_jedna, short int poradie_sva
 		}
 	}
 	else if((sc_jedna != MODL_SPOL_CAST_NEURCENA) && (sc_jedna != MODL_SPOL_CAST_NEBRAT)){
-		sprintf(_global_string_spol_cast, "%s", nazov_spolc(sc_jedna));
+		sprintf(_global_string_spol_cast, STR_EMPTY);
+
+		// pre HU na koniec reùazca
+		if(_global_jazyk != JAZYK_HU){
+			sprintf(_global_string_spol_cast, "%s", nazov_spolc(sc_jedna));
+		}
+		
+		// text o VSLH Ë. 235 b
 		if((_global_den.smer > 9) && ((_global_den.typslav == SLAV_SPOMIENKA) || (_global_den.typslav == SLAV_LUB_SPOMIENKA))){
 			if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SPOMIENKA_SPOL_CAST) != BIT_OPT_1_SPOMIENKA_SPOL_CAST){
 				strcat(_global_string_spol_cast, " (");
@@ -6108,6 +6124,12 @@ short int init_global_string_spol_cast(short int sc_jedna, short int poradie_sva
 				strcat(_global_string_spol_cast, ")");
 			}// nebraù Ëasti zo spol. Ëasti
 		}// ide nanajv˝ö o spomienku (ak je to sl·venie s vyööÌm stupÚom, nem· zmysel voæba BIT_OPT_1_SPOMIENKA_SPOL_CAST)
+
+		// pre HU na koniec reùazca
+		if(_global_jazyk == JAZYK_HU){
+			strcat(_global_string_spol_cast, " ");
+			strcat(_global_string_spol_cast, nazov_spolc(sc_jedna));
+		}
 	}
 	else{
 		mystrcpy(_global_string_spol_cast, STR_EMPTY, SMALL);
