@@ -139,22 +139,22 @@ const char *nazov_MODLITBY_jazyk[POCET_MODLITIEB + 1][POCET_JAZYKOV + 1] =
 
 // the prefix for common parts of celebration
 const char *nazov_spolc_zospolc_jazyk[POCET_JAZYKOV + 1] =
-{"Zo spoloènej èasti", "Spoleèné texty", "", "", "", "", ""};
+{"Zo spoloènej èasti", "Spoleèné texty", "", "", "", "Spoleèné texty", "közös zsolozsmája"};
 
 const char *nazov_spolc_oficiumza_jazyk[POCET_JAZYKOV + 1] =
-{"Ofícium za", "Spoleèné texty", "", "", "", "", ""};
+{"Ofícium za", "Spoleèné texty", "", "", "", "Spoleèné texty", "közös zsolozsmája"};
 
 // the --CELEBRATION-- for common parts of celebration
 const char *nazov_spolc_sviatky_jazyk[POCET_JAZYKOV + 1] =
-{"na sviatky", "", "", "", "", "", ""};
+{"na sviatky", "na svátky", "", "", "", "na svátky", ""};
 
 // the --ANNIVERSARY-- for common parts of celebration
 const char *nazov_spolc_vyrocie_jazyk[POCET_JAZYKOV + 1] =
-{"na vıroèie", "", "", "", "", "", ""};
+{"na vıroèie", "na vıroèí", "", "", "", "na vıroèí", ""};
 
 // the --OR-- (alternative) for common parts of celebration
 const char *nazov_spolc_alebo_jazyk[POCET_JAZYKOV + 1] =
-{"<br/>alebo", "<br/>nebo", "<br/>or", "", "", "<br/>nebo", ""};
+{"<br/>alebo", "<br/>nebo", "<br/>or", "", "", "<br/>nebo", "<br/>vagy"};
 
 // the names of the common texts (e.g.: for bishops, for saint men, for apostles...)
 const char *nazov_spolc_jazyk[POCET_SPOL_CASTI + 1][POCET_JAZYKOV + 1] =
@@ -191,7 +191,14 @@ const char *nazov_spolc_jazyk[POCET_SPOL_CASTI + 1][POCET_JAZYKOV + 1] =
 #define		nazov_spolc(a)	nazov_spolc_jazyk[a][_global_jazyk]
 
 const char *nazov_bit_opt_1_spomienka_spol_cast_jazyk[POCET_JAZYKOV + 1] =
-{"bola zvolená monos niektoré èasti pri slávení spomienky vzia zo dòa pod¾a Všeobecnıch smerníc, è. 235 písm. b", "", "", "", "", "", ""};
+{"bola zvolená monos niektoré èasti pri slávení spomienky vzia zo dòa pod¾a Všeobecnıch smerníc, è. 235 písm. b", 
+ "byla zvolena monost vzít pøi slavení památky nìkteré èasti ze dne podle Všeobecnıch pokynù k denní modlitbì církve, è. 235 písm. b", 
+ "", 
+ "", 
+ "", 
+ "byla zvolena monost vzít pøi slavení památky nìkteré èasti ze dne podle Všeobecnıch pokynù k denní modlitbì Církve, è. 235 písm. b", 
+ "az a lehetõség volt választva, hogy az emléknapoknál bizonyos részek vehetõk a soros köznapról; Általános Rendelkezések az Imaórák Liturgiájáról, 235 b"
+};
 
 // filenames - same for all languages (based on Slovak)
 const char *nazov_spolc_htm[POCET_SPOL_CASTI + 1] =
@@ -1720,11 +1727,11 @@ const char *html_text_option1_rubriky[POCET_JAZYKOV + 1] =
 };
 const char *html_text_option1_rubriky_explain[POCET_JAZYKOV + 1] = 
 {"Liturgia hodín zobrazuje èervenım písmom rozlièné zvyèajne vysvet¾ujúce pokyny k modlitbe (pod¾a Všeobecnıch smerníc o LH).", 
- "Liturgie hodin uvádí èervenım písmem rozlièné pokyny k modlitbì (èasto podle Všeobecnıch smìrnic).", 
+ "Liturgie hodin uvádí èervenım písmem rozlièné pokyny k modlitbì (èasto podle Všeobecnıch pokynù k denní modlitbì církve).", 
  "", 
  "",
  "", 
- "Liturgie hodin uvádí èervenım písmem rozlièné pokyny k modlitbì (èasto podle Všeobecnıch smìrnic).", 
+ "Liturgie hodin uvádí èervenım písmem rozlièné pokyny k modlitbì (èasto podle Všeobecnıch pokynù k denní modlitbì Církve).", 
  "Az imaórák liturgiája piros betûvel különbözõ többnyire magyarázó vagy az imaórát (az „Általános rendelkezések Az imaórák liturgiájáról“ szerint) szabályozó szövegeket jelenít meg. Alaphelyzetben nem mutatja."
 };
 

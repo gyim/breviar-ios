@@ -9,6 +9,20 @@
 #import "BRPrayerListViewController.h"
 #import "BRPrayerViewController.h"
 #import "BRDataSource.h"
+#import "BRCelebrationCell.h"
+
+static NSString *liturgicalColorImages[] = {
+	[BRColorUnknown]       = @"",
+	[BRColorRed]           = @"bullet_red.png",
+	[BRColorWhite]         = @"bullet_white.png",
+	[BRColorGreen]         = @"bullet_green.png",
+	[BRColorViolet]        = @"bullet_violet.png",
+	[BRColorRose]          = @"bullet_rose.png",
+	[BRColorBlack]         = @"bullet_black.png",
+	[BRColorVioletOrBlack] = @"bullet_violet_or_black.png",
+	[BRColorVioletOrWhite] = @"bullet_violet_or_white.png",
+	[BRColorRoseOrViolet]  = @"bullet_rose_or_violet.png"
+};
 
 @interface BRPrayerListViewController ()
 
@@ -59,7 +73,7 @@
 		case 0:
 			return self.day.celebrations.count + 1;
 		case 1:
-			return 8;
+			return 1;
 		case 2:
 			return 1;
 	}
@@ -81,23 +95,20 @@
 		}
 		else {
 			// Celebration cell
-			UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CelebrationCell"];
+			BRCelebrationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CelebrationCell"];
 			
 			BRCelebration *celebration = [self.day.celebrations objectAtIndex:indexPath.row-1];
-			cell.textLabel.text = celebration.title;
-			cell.detailTextLabel.text = celebration.subtitle;
+			cell.celebrationNameLabel.text = celebration.title;
+			cell.celebrationDescriptionLabel.text = celebration.subtitle;
+			cell.liturgicalColorView.image = [UIImage imageNamed:liturgicalColorImages[celebration.liturgicalColor]];
 			cell.accessoryType = (self.celebrationIndex == indexPath.row-1 ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone);
 			
 			return cell;
 		}
 	}
 	else if (indexPath.section == 1) {
-		// Prayer cell
-		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PrayerCell"];
-		
-		BRCelebration *celebration = [self.day.celebrations objectAtIndex:self.celebrationIndex];
-		BRPrayer *prayer = [celebration.prayers objectAtIndex:indexPath.row];
-		cell.textLabel.text = prayer.title;
+		// Prayer list cell
+		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PrayerListCell"];
 		
 		return cell;
 	}
@@ -106,6 +117,15 @@
 		return [tableView dequeueReusableCellWithIdentifier:@"SettingsCell"];
 	}
 	return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section == 1) {
+		return 168;
+	}
+	else {
+		return 44;
+	}
 }
 
 #pragma mark -
@@ -130,16 +150,17 @@
 {
 	NSString *segueId = segue.identifier;
 	
-	if ([segueId isEqualToString:@"ShowPrayer"]) {
-		BRPrayerViewController *destController = segue.destinationViewController;
-		NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-		BRCelebration *celebration = [self.day.celebrations objectAtIndex:self.celebrationIndex];
-		destController.prayer = [celebration.prayers objectAtIndex:indexPath.row];
-	}
-	else if ([segueId isEqualToString:@"ShowDatePicker"]) {
+	if ([segueId isEqualToString:@"ShowDatePicker"]) {
 		BRDatePickerViewController *destController = segue.destinationViewController;
 		destController.initialDate = self.date;
 		destController.datePickerDelegate = self;
+	}
+	else if ([[segueId substringToIndex:11] isEqualToString:@"ShowPrayer."]) {
+		BRPrayerViewController *destController = segue.destinationViewController;
+		NSString *prayerQueryId = [segueId substringFromIndex:11];
+		BRPrayerType prayerType = [BRPrayer prayerTypeFromQueryId:prayerQueryId];
+		BRCelebration *celebration = [self.day.celebrations objectAtIndex:self.celebrationIndex];
+		destController.prayer = [celebration.prayers objectAtIndex:prayerType];
 	}
 }
 

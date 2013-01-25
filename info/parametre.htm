@@ -40,9 +40,10 @@ ho popisujeme na <a href="batchmode.htm">osobitnom mieste</a>.
 	<li><span class="value">pdet</span> | Detaily dòa</li>
 	<li><span class="value">par</span> | Prikázané sviatky a slávnosti Pána</li>
 	<li><span class="value">ptab</span> | Tabu¾ka dátumov pohyblivıch slávení</li>
-	<li><span class="value">pcr</span> | Cezroèné obdobie</li>
+	<li><span class="value">plo</span> | Liturgické obdobie (napr. zadáte Adventné obdobie; 2. tıdeò; streda)</li>
 	<li><span class="value">pmr</span> | Liturgickı kalendár</li>
 	<li><span class="value">pbm</span> | Tzv. <a href="batchmode.htm">batch mode (dávkové spracovanie)</a>.</li>
+	<li><span class="value">pxml</span> | XML export liturgického kalendára pre danı deò/mesiac a export jednotlivıch options parametrov (zatia¾ experimentálne)</li>
 	</ul>
 </li>
 <li><span class="parameter">d</span> | Deò dátumu (pre <span class="parameter">pdt</span>, <span class="parameter">pdnes</span>, hodnoty: <span class="value">1</span>-<span class="value">31</span>, <span class="value">*</span> znamená "všetky dni")</li>
@@ -61,28 +62,63 @@ ho popisujeme na <a href="batchmode.htm">osobitnom mieste</a>.
 	<li><span class="value">mpo</span> | modlitba popoludní</li>
 	<li><span class="value">mv</span> | vešpery</li>
 	<li><span class="value">mk</span> | kompletórium</li>
+	<li><span class="value">mpv</span> | prvé vešpery (len pre niektoré dni/slávenia)</li>
+	<li><span class="value">mpk</span> | kompletórium po prvıch vešperách (len pre niektoré dni/slávenia)</li>
 	</ul>
 </li>
 <li><span class="parameter">t</span> | Tıdeò altára (hodnoty: <span class="value">1</span>-<span class="value">4</span>) pre <span class="parameter">pcr</span></li>
-<li><span class="parameter">ds</span> (pre command line: <span class="parameter">x</span>) | "poradie svätého" (hodnoty: <span class="value">1</span>-<span class="value">3</span>, niekedy je toti viacero svätcov na jeden deò, 
-a v takom prípade je moné voli ktorúko¾vek ¾ubovo¾nú spomienku, resp. <span class="value">4</span> pre spomienku Panny Márie v sobotu)</li> 
-<li><span class="parameter">o1</span> (pre command line: <span class="parameter">1</span>) | monos 1 (option 1)
+<li><span class="parameter">ds</span> (pre command line: <span class="parameter">x</span>) | "poradie svätého" (hodnoty: <span class="value">1</span>-<span class="value">3</span>, niekedy je toti viacero svätcov na jeden deò, a v takom prípade je moné voli ktorúko¾vek ¾ubovo¾nú spomienku, resp. <span class="value">4</span> pre spomienku Panny Márie v sobotu)</li> 
+<li><span class="parameter">o0</span> (pre command line: <span class="parameter">0</span>) | monos 0 (option 0), špeciálne èasti modlitieb
 	<ul class="level2">
-	<li>Pre generovanie textu modlity: Monos, èi zobrazi nemenné súèasti modlitby (default: nie) </li>
-	<li>Pri generovaní liturgického kalendára pre jednotlivı mesiac alebo celı rok: Monos, èi vypisova všetky typy slávení (ak ich je viac) do 1 riadka (default: nie) </li>
+	<li>1. bit (1): èíslovanie (èísla) veršov v almoch, chválospevoch a biblickıch èítaniach </li>
+	<li>2. bit (2): biblické referencie na dkc.kbs.sk</li>
+	<li>3. bit (4): liturgické èítania (odkaz na lc.kbs.sk)</li>
+	<li>4. bit (8): èi sa slávi Zjavenie Pána 6.1. (0 = default) alebo v nede¾u medzi 2. a 8. januárom (1)</li>
+	<li>5. bit (16): èi sa slávi Nanebovstúpenie Pána vo štvrtok (40. deò po Ve¾kej noci, 0 = default) alebo sa prenáša na nasledujúcu nede¾u (1)</li>
+	<li>6. bit (32): èi sa Najsv. Kristovho Tela a Krvi slávi vo štvrtok, 11.-ty deò po Zoslaní Ducha Sv. (0 == default) alebo v nasledujúcu nede¾u (1)</li>
 	</ul>
 </li>
-<li><span class="parameter">o2</span> (pre command line: <span class="parameter">2</span>) | monos 2 (option 2)
+<li><span class="parameter">o1</span> (pre command line: <span class="parameter">1</span>) | monos 1 (option 1), pevné súèasti modlitieb: 0 = nie; 1 = áno
 	<ul class="level2">
-	<li>Pre generovanie textu modlity: Monos, èi bra almy zo dòa (default: nie) alebo z vlastnej/spoloènej èasti slávenia </li>
-	<li>Pri generovaní liturgického kalendára pre jednotlivı mesiac alebo celı rok: Monos, èi vypisova dátum pre deò iba ako èíslo (default: áno) alebo celı dátum pod¾a normy ISO-8601 (napr. 2005-03-22) </li>
+	<li>1. bit (1): Te Deum</li>
+	<li>2. bit (2): rubriky</li>
+	<li>3. bit (4): evanjeliové chválospevy (Benedictus, Magnifikat, Nunc dimittis)</li>
+	<li>4. bit (8): Sláva Otcu</li>
+	<li>5. bit (16): Otèenáš</li>
+	<li>6. bit (32): doplnková psalmódia pre modlitbu cez deò</li>
+	<li>7. bit (64): vigílie pre nedele, slávnosti a sviatky (posvätné èítanie)</li>
+	<li>8. bit (128): bra na spomienky èasti zo spoloènıch èastí</li>
+	<li>9. bit (256): zobrazi plné znenie responzórií (v posvätnıch èítaniach)</li>
+	<li>10. bit (512): poui v modlitbe alm 95 miesto almov 24, 67, 100 (ak sa pouili v invitatóriu)</li>
+	<li>11. bit (1024): zvolanie v prosbách zobrazi (opakova) po kadej prosbe</li>
+	<li>12. bit (2048): skry popis (napr. ivotopis svätca)</li>
+	<li>13. bit (4096): monos zobrazi informáciu o spoloènej èasti</li>
+	<li>14. bit (8192): poui (pre ktorıko¾vek deò v roku) kratšie prosby k vešperám z dodatku</li>
 	</ul>
 </li>
-<li><span class="parameter">o3</span> (pre command line: <span class="parameter">3</span>) | Ak je monos vıberu viacerıch spoloènıch èastí, tento parameter urèuje, ktorú spoloènú èas bra</li>
-<li><span class="parameter">o4</span> (pre command line: <span class="parameter">4</span>) | Monos, èi zobrazi popis k modlitbe z vlastnej èasti (zväèša struènı ivotopis svätca dòa; default: áno)</li>
-<li><span class="parameter">o5</span> (pre command line: <span class="parameter">5</span>) | Monos, èi bra almy k modlitbe cez deò z benej alebo doplnkovej psalmódie (default: nie)</li>
-<li><span class="parameter">o6</span> (pre command line: <span class="parameter">6</span>) | Monos, èi [pre zobrazenie mesiacov] zobrazova všetko do jednoho riadka (default: nie)</li>
-<li><span class="parameter">o7</span> (pre command line: <span class="parameter">7</span>) | Monos, èi [pre zobrazenie mesiacov] zobrazova dátum v ISO-8601 štandarde (default: nie)</li>
+<li><span class="parameter">o2</span> (pre command line: <span class="parameter">2</span>) | monos 2 (option 2), HTML export
+	<ul class="level2">
+	<li>1. bit (1): formát dátumu v ISO 8601 formáte (napr. "2011-04-13") alebo iba deò (napr. "13")</li>
+	<li>2. bit (2): zobrazi pre nedele a vybrané slávenia monos priamo v danı deò zvoli prvé vešpery</li>
+	<li>3. bit (4): poui bezpätkové písmo (Sans Serif) alebo pätkové (Serif)</li>
+	<li>4. bit (8): zobrazi monos vıberu písma (drop-down list)</li>
+	<li>5. bit (16): zobrazi monos vıberu ve¾kosti písma (drop-down list)</li>
+	<li>6. bit (32): zobrazi navigáciu v textoch modlitieb (tlaèidlá pre jednotlivé modlitby)</li>
+	<li>7. bit (64): zalamova dlhé riadky ako v tlaèenom vydaní (poetické èasti)</li>
+	<li>8. bit (128): zobrazi buttony pre modlitby v úspornej podobe (tabu¾ka) kvôli mobilnım zariadeniam</li>
+	<li>9. bit (256): noènı reim (tmavé pozadie, svetlı text)</li>
+	<li>10. bit (512): zobrazi rozlièné monosti priamo v textoch modlitieb (skryjú sa na úvodnej stránke, budú formou hypertextovıch odkazov priamo v textoch modlitieb)</li>
+	<li>11. bit (1024): monos zobrazi/skry navigáciu (tlaèidlá) v modlitbe a pre "dnes", ak je zvolenı 6. bit</li>
+	<li>12. bit (2048): skry kalendárik pre "dnes"</li>
+	<li>13. bit (4096): skry "ïalšie monosti 1" pre "dnes" (na titulnej stránke; nemá vplyv na command-line HTML offline vygenerované texty)</li>
+	<li>14. bit (8192): skry "ïalšie monosti 2" pre "dnes" (na titulnej stránke; nemá vplyv na command-line HTML offline vygenerované texty)</li>
+	</ul>
+</li>
+<li><span class="parameter">o4</span> (pre command line: <span class="parameter">4</span>) | monos 4 (option 4), HTML export ïalšie
+	<ul class="level2">
+	<li>1. bit (1): mesiac jednoducho (default: nie jednoducho, ale HTML pekne pre web) alebo pekne "zloito"</li>
+	</ul>
+</li>
 <li><span class="parameter">rfrom</span> (pre command line: <span class="parameter">f</span>) | Rok, poènúc ktorım sú roky zobrazené v tabu¾ke pohyblivıch slávení (pre <span class="parameter">ptab</span>)</li>
 <li><span class="parameter">rto</span> (pre command line: <span class="parameter">g</span>) | Rok, do ktorého sú zobrazené roky v tabu¾ke pohyblivıch slávení (pre <span class="parameter">ptab</span>)</li>
 <li><span class="parameter">l</span> (len pre command line) | Monos, èi zobrazova hypertextové linky (default: nie)</li>
@@ -90,37 +126,77 @@ a v takom prípade je moné voli ktorúko¾vek ¾ubovo¾nú spomienku, resp. <span cl
 <li><span class="parameter">a</span> (len pre command line) | Monos, èi v prípade existencie súboru pre export do tohto súboru pridáva (teda neprepísa ho – append; default: nie – èie prepísa)</li>
 <li><span class="parameter">j</span> | Jazyk pre odlišné jazykové mutácie (default: sk; ostatné podporované monosti: cz, c2)</li>
 <li><span class="parameter">c</span> | Názov css súboru, ktorı sa má poui pri generovaní modlitieb (CSS musí pritom spåòa isté štandardy)</li>
+<li><span class="parameter">u</span> (len pre command line) | spôsob zapisovania dátumu pre súbory v batch móde | hodnoty: <span class="value">0</span> (simple) alebo <span class="value">1</span> (full)</li>
+<li><span class="parameter">k</span> (len pre slovenskú verziu) | Kalendár reho¾nej rodiny (saleziáni: <span class="parameter">sdb</span>, redemptoristi: <span class="parameter">cssr</span>, ...)</li>
+<li><span class="parameter">M</span> (len pre command line) | Monosti offline HTML exportu (pouite hodnoty: <span class="value">2</span> alebo <span class="value">3</span>)</li>
 </ul>
-<p>Pre parametre urèujúce monosti majú nasledujúce hodnoty: 
-<span class="value">1</span> – áno, <span class="value">0</span> – nie.
-<p>Ak dostane program nesprávne parametre (zahàòa i prípady nesprávnych hodnôt parametrov 
-alebo ïalšie chıbajúce parametre závisiace od inıch parametrov), export obsahuje chybové hlásenie.
-Naviac, command line verzia vypíše chybové hlásenie na stderr.
+
+<p>Pre parametre urèujúce monosti majú nasledujúce hodnoty: <span class="value">bitová-hodnota</span> * <span class="value">1</span> – áno, <span class="value">0</span> – nie (jednotlivé bitové komponenty pre danú option sa sèítajú).
+
+<p>Ak dostane program nesprávne parametre (zahàòa i prípady nesprávnych hodnôt parametrov alebo ïalšie chıbajúce parametre závisiace od inıch parametrov), export obsahuje chybové hlásenie. Naviac, command line verzia vypíše chybové hlásenie na stderr.
+
+<a name="howto"></a>
+<h4 class="blue">Ako zisti nastavenie jednotlivıch parametrov</h4>
+<p>Spôsob, ako zisti parametre pod¾a vašich nastavení v prehliadaèi, najmä teda pre bitové poloky (option 1 a 5). Postupujte takto:
+<ol>
+	<li>Otvorte si <a href="/cgi-bin/l.cgi?qt=pdnes" target="_blank">úvodnú stránku v samostatnom okne/záloke prehliadaèa</a> tak, 
+		aby ste videli v riadku s internetovou adresou (URL, „address bar“) odkaz zakonèenı takto: <span class="tt">/cgi-bin/l.cgi?qt=pdnes</span>
+		(<a href="/cgi-bin/l.cgi?qt=pdnes" target="_blank">otvori v novom okne/záloke prehliadaèa</a>).</li>
+	<li>Ponastavujte jednotlivé nastavenia (v èasti <span class="boldit">Vo¾by vybranıch detailov</span>).</li>
+	<li>Stlaète tlaèidlo <b>Potrdi</b>.</li>
+	<li>Stlaète tlaèidlo <b>dnes</b> (nachádza sa navrchu stránky, bezprostredne pod hlavnım nadpisom, ktorı zodpovedá aktuálnemu dátumu).</li>
+	<li>Všimnite si, e odkaz v riadku s internetovou adresou (URL, „address bar“) sa zmenil; je dlhší.
+		Vyzerá napríklad takto: <span class="tt">http://breviar.sk/cgi-bin/l.cgi?qt=pdnes&f=Cambria&s=medium&o0=3&o1=0</span> (niekedy môe by ešte dlhší). 
+		To, èo obsahuje, sú všetky vami zvolené nastavenia presne tak, ako ste ich zadali. 
+		Tento odkaz si ulote medzi „ob¾úbené adresy“. Pouívajte ho namiesto štandardného odkazu „Verzia stránok pre mobilné zariadenia (bez rámcov) (napr. pre mobilné telefóny, PDA a pod.)“ z hlavnej stránky internetovej Liturgie hodín.</li>
+</ol>
+<p>Príklad: <span class="tt">http://breviar.sk/cgi-bin/l.cgi?qt=pdnes&o0=3&o1=4160&o2=760</span>
+<p>Odtia¾ vidno, e parameter pre option 0 má hodnotu 3, pre option 1 je hodnota 4160 a pre option 2 hodnotu 760.
+
 <a name="example"></a>
 <h4 class="blue">Príklady</h4>
-<p>Ako sa vraví, príklad môe všetky pochybnosti razom odstráni alebo naopak, podnieti ïalšie otázky.
-Za oboma úèelmi sú uvedené nasledujúce príkady pouitia command-line programu.
+<p>Ako sa vraví, príklad môe všetky pochybnosti razom odstráni alebo naopak, podnieti ïalšie otázky. Za oboma úèelmi sú uvedené nasledujúce príkady pouitia command-line programu (novšie príklady pre <a href="batchmode.htm">batch mód</a>).
+
 <ul class="level1">
-<li><span class="tt">breviar.exe -qpdt -d30 -m4 -r2002 -pmrch -ic:\breviar\ -emoja.htm -a1</span><br/>
-<span class="explain">Program vygeneruje do súboru <span class="tt">moja.htm</span>
-modlitbu rannıch chvál na 30. apríla 2002. 
-Ak súbor <span class="tt">moja.htm</span> existuje, neprepíše sa, ale program pridá modlitbu
-na jeho koniec (append).
-Pritom <span class="tt">include</span> adresár sa nachádza v adresári <span class="tt">c:\breviar\</span>
-(meno programu je <span class="tt">breviar.exe</span>). (Pouitie v DOSe/Windows.)
-</span>
+
+<li><span class="tt">breviar.exe -qpbm -d1 -m1 -r2013 -f31 -g12 -p2013 -brobSK.bat -jsk -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M2 -00 -15191 -2224</span><br/>
+<span class="explain">Program vytvorí súbor <span class="tt">robSK.bat</span> a jednotlivé podadresáre pre celı rok 2013, ide o „šikovnú verziu“ (pozrite nastavenia option 1 = 5191 a option 2 = 224) z download sekcie webstránok. Všimnite si pouitie parametra M (hodnota 2) a u (hodnota simple). Potom staèí spusti tento súbor <span class="tt">robSK.bat</span>, ktorı behom nieko¾kıch minút predgeneruje všetky modlitby na rok 2013 (vrátane stránok obsahujúcich informácie o jednotlivıch dòoch a mesiacoch). (Pouitie v DOSe/Windows.)
 </li>
-<li><span class="tt">breviar.exe -qpsqs -s"qt=pdt&amp;d=12&amp;m=7&amp;r=2003"</span><br/>
-<span class="explain">Program vygeneruje do default súboru (<span class="tt">export.htm</span>) rozbor dòa 12. júla 2003. 
-Pritom parametre sú dané simuláciou query stringu.
-</span>
+	
+<li><span class="tt">breviar.exe -qpbm -d1 -m1 -r2013 -f31 -g12 -p2013 -brobCZ.bat -jcz -nbreviar.exe -i..\..\breviar.sk\include_cz\ -usimple -M2 -00 -15191 -2224</span><br/>
+<span class="explain">Program vytvorí súbor <span class="tt">robCZ.bat</span> a jednotlivé podadresáre pre celı rok 2013, ide o „šikovnú verziu“ pre èeskú LH (j = cz) z download sekcie webstránok. Potom staèí spusti tento súbor <span class="tt">robCZ.bat</span>, ktorı behom nieko¾kıch minút predgeneruje všetky modlitby na rok 2013. (Pouitie v DOSe/Windows.)
 </li>
+
+<li><span class="tt">breviar.exe -qpbm -d1 -m1 -r2013 -f31 -g12 -p2013 -brobSK-sdb.bat  -ksdb -jsk -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M2 -00 -113727 -2120</span><br/>
+<span class="explain">Program vytvorí súbor <span class="tt">robSK.bat</span> a jednotlivé podadresáre pre celı rok 2013, verzia pre saleziánsku rodinu pod¾a poiadaviek ich nastavení. (Pouitie v DOSe/Windows.)
+</li>
+
+<li><span class="tt">./l.cgi -qpbm -d1 -m1 -r2013 -f31 -g12 -p2013 -brobSK-sdb.sh -ksdb -jsk -n./l.cgi -i../../include/ -usimple -M2 -00 -15535 -2120</span><br/>
+<span class="explain">Program vytvorí súbor <span class="tt">robSK-sdb.sh</span> a jednotlivé podadresáre pre celı rok 2013, verzia pre saleziánsku rodinu pod¾a poiadaviek ich nastavení. Pre spustenie je treba prida práva pre tento súbor (<tt>chmod 755 robSK-sdb.sh</tt>) a spusti ho takto: <tt>./robSK-sdb.sh</tt>. (Pouitie v UNIXe.)
+</li>
+
 </ul>
+<p>Staršie príklady:
+<ul class="level1">
+
+<li><span class="tt">breviar.exe -qpdt -d30 -m4 -r2002 -pmrch -ic:\breviar\ -emoja.htm -a1</span><br/>
+<span class="explain">Program vygeneruje do súboru <span class="tt">moja.htm</span> modlitbu rannıch chvál na 30. apríla 2002. 
+Ak súbor <span class="tt">moja.htm</span> existuje, neprepíše sa, ale program pridá modlitbu na jeho koniec (append). Pritom <span class="tt">include</span> adresár sa nachádza v adresári <span class="tt">c:\breviar\</span> (meno programu je <span class="tt">breviar.exe</span>). (Pouitie v DOSe/Windows.)</span>
+</li>
+
+<li><span class="tt">breviar.exe -qpsqs -s"qt=pdt&amp;d=12&amp;m=7&amp;r=2003"</span><br/>
+<span class="explain">Program vygeneruje do default súboru (<span class="tt">export.htm</span>) rozbor dòa 12. júla 2003. Pritom parametre sú dané simuláciou query stringu.</span>
+</li>
+
+</ul>
+
+<p>Ak sa vyskytnú nejaké nezrovnalosti alebo nefunkènosti, prosím <a href="mailto:videky@breviar.sk">píšte</a>. Command-line verzia je viac-menej experiment. Ïakujem.
+
 <hr>
 <p class="patka">
 Autor programovej èasti © 1999-2013 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
 <br/>Všetky práva vyhradené.
-<br/>Posledná aktualizácia: 2008-12-18<br/>
+<br/>Posledná aktualizácia: 2013-01-22<br/>
 © 1999-2013 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
 </p>
 </body>
