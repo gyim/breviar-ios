@@ -25,11 +25,15 @@ static BRSettings *_instance;
         self.defaultOptions = [NSSet setWithObjects:
                                // Enable all prayer parts by default
                                @"of1c", @"of1s", @"of1r", @"of1o", @"of1t", @"of1pr",
+                               // Prayer text details
+                               @"of0cit",
                                nil];
         
         self.allOptions = [NSSet setWithObjects:
                            // Enabled prayer parts
                            @"of1c", @"of1s", @"of1r", @"of1o", @"of1t", @"of1pr",
+                           // Prayer text details
+                           @"of0v", @"of0cit",
                            nil];
     }
     return self;
