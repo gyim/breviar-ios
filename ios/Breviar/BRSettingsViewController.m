@@ -16,12 +16,14 @@
 #define BIG_HEIGHT					66
 #define NORMAL_HEIGHT_CHAR_LIMIT	25
 
-#define NUM_SECTIONS				2
+#define NUM_SECTIONS				3
 
 #define SECT_APPEARANCE				0
 #define SECT_PRAYER_PARTS			1
+#define SECT_PRAYER_TEXT			2
 
 #define NUM_PRAYER_PARTS			6
+#define NUM_PRAYER_TEXT				2
 
 static NSString *prayerPartTitles[] = {
 	@"Evangéliumi kantikumok",
@@ -36,6 +38,16 @@ static NSString *prayerPartTitles[] = {
 static NSString *prayerPartOpts[] = {
 	@"of1c", @"of1s", @"of1r", @"of1o", @"of1t", @"of1pr",
 	nil
+};
+
+static NSString *prayerTextTitles[] = {
+	@"A versek száma",
+	@"Liturgikus olvasmányok",
+	nil
+};
+
+static NSString *prayerTextOpts[] = {
+	@"of0v", @"of0cit", nil
 };
 
 @interface BRSettingsViewController ()
@@ -99,6 +111,8 @@ static NSString *prayerPartOpts[] = {
 			return 1;
 		case SECT_PRAYER_PARTS:
 			return NUM_PRAYER_PARTS;
+		case SECT_PRAYER_TEXT:
+			return NUM_PRAYER_TEXT;
 		default:
 			return 0;
 	}
@@ -108,9 +122,11 @@ static NSString *prayerPartOpts[] = {
 {
 	switch (section) {
 		case SECT_APPEARANCE:
-			return @"Appearance";
+			return @"Megjelenés";
 		case SECT_PRAYER_PARTS:
-			return @"Show prayer parts";
+			return @"Állandó részek megjelenítése";
+		case SECT_PRAYER_TEXT:
+			return @"Imaóra szövege";
 		default:
 			return nil;
 	}
@@ -121,6 +137,11 @@ static NSString *prayerPartOpts[] = {
 		case SECT_PRAYER_PARTS:
 		{
 			NSString *optionId = prayerPartOpts[indexPath.row];
+			return ([self.longOpts containsObject:optionId] ? BIG_HEIGHT : NORMAL_HEIGHT);
+		}
+		case SECT_PRAYER_TEXT:
+		{
+			NSString *optionId = prayerTextOpts[indexPath.row];
 			return ([self.longOpts containsObject:optionId] ? BIG_HEIGHT : NORMAL_HEIGHT);
 		}
 		default:
@@ -153,6 +174,17 @@ static NSString *prayerPartOpts[] = {
 		cell.optionId = optionId;
 		cell.label.text = prayerPartTitles[indexPath.row];
 		cell.switcher.on = [settings boolOption:prayerPartOpts[indexPath.row]];
+		
+		return cell;
+	}
+	else if (indexPath.section == SECT_PRAYER_TEXT) {
+		NSString *optionId = prayerTextOpts[indexPath.row];
+		NSString *cellIdentifier = ([self.longOpts containsObject:optionId] ? @"LongBoolCell" : @"BoolCell");
+		BRBoolSettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+		
+		cell.optionId = optionId;
+		cell.label.text = prayerTextTitles[indexPath.row];
+		cell.switcher.on = [settings boolOption:prayerTextOpts[indexPath.row]];
 		
 		return cell;
 	}
