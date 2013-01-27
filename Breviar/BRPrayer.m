@@ -8,6 +8,7 @@
 
 #import "BRPrayer.h"
 #include "BRCGIQuery.h"
+#include "BRSettings.h"
 
 @implementation BRPrayer
 @synthesize prayerType;
@@ -44,16 +45,20 @@ static NSString *prayerQueryIds[] = {
 	if (!body) {
 		NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:self.date];
 		
-		body = [BRCGIQuery queryWithArgs:@{
-				@"qt": @"pdt",
-				@"d": [NSNumber numberWithInteger:components.day],
-				@"m": [NSNumber numberWithInteger:components.month],
-				@"r": [NSNumber numberWithInteger:components.year],
-				@"p": prayerQueryIds[self.prayerType],
-				@"ds": [NSNumber numberWithInteger:self.celebrationId],
-				@"o0": @"60",
-				@"o2": @"152",
-				}];
+		NSMutableDictionary *queryOptions = [NSMutableDictionary dictionary];
+		[queryOptions addEntriesFromDictionary:[BRSettings instance].prayerQueryOptions];
+		[queryOptions addEntriesFromDictionary:@{
+			 @"qt": @"pdt",
+			 @"d": [NSNumber numberWithInteger:components.day],
+			 @"m": [NSNumber numberWithInteger:components.month],
+			 @"r": [NSNumber numberWithInteger:components.year],
+			 @"p": prayerQueryIds[self.prayerType],
+			 @"ds": [NSNumber numberWithInteger:self.celebrationId],
+			 @"o0": @"60",
+			 @"o2": @"152",
+		 }];
+		
+		body = [BRCGIQuery queryWithArgs:queryOptions];
 	}
 	return body;
 }
