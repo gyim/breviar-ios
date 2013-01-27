@@ -50,6 +50,8 @@
 		70C962D116A1E1C900A399B9 /* bullet_violet_or_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 70C962C816A1E1C900A399B9 /* bullet_violet_or_white.png */; };
 		70C962D216A1E1C900A399B9 /* bullet_violet.png in Resources */ = {isa = PBXBuildFile; fileRef = 70C962C916A1E1C900A399B9 /* bullet_violet.png */; };
 		70C962D316A1E1C900A399B9 /* bullet_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 70C962CA16A1E1C900A399B9 /* bullet_white.png */; };
+		70C962D616B45C3E00A399B9 /* BRFontSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C962D516B45C3E00A399B9 /* BRFontSettingsCell.m */; };
+		70C962D916B5425200A399B9 /* BRBoolSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C962D816B5425200A399B9 /* BRBoolSettingsCell.m */; };
 		70E01273162F54BA00601CA3 /* BRDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E01272162F54BA00601CA3 /* BRDay.m */; };
 		70E01277162F553000601CA3 /* BRCelebration.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E01276162F553000601CA3 /* BRCelebration.m */; };
 		70E0127A162F56E500601CA3 /* BRCGIQuery.mm in Sources */ = {isa = PBXBuildFile; fileRef = 70E01279162F56E500601CA3 /* BRCGIQuery.mm */; };
@@ -150,6 +152,10 @@
 		70C962C816A1E1C900A399B9 /* bullet_violet_or_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bullet_violet_or_white.png; path = Resources/bullet_violet_or_white.png; sourceTree = "<group>"; };
 		70C962C916A1E1C900A399B9 /* bullet_violet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bullet_violet.png; path = Resources/bullet_violet.png; sourceTree = "<group>"; };
 		70C962CA16A1E1C900A399B9 /* bullet_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bullet_white.png; path = Resources/bullet_white.png; sourceTree = "<group>"; };
+		70C962D416B45C3E00A399B9 /* BRFontSettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRFontSettingsCell.h; sourceTree = "<group>"; };
+		70C962D516B45C3E00A399B9 /* BRFontSettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRFontSettingsCell.m; sourceTree = "<group>"; };
+		70C962D716B5425200A399B9 /* BRBoolSettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRBoolSettingsCell.h; sourceTree = "<group>"; };
+		70C962D816B5425200A399B9 /* BRBoolSettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRBoolSettingsCell.m; sourceTree = "<group>"; };
 		70E01271162F54BA00601CA3 /* BRDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDay.h; sourceTree = "<group>"; };
 		70E01272162F54BA00601CA3 /* BRDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDay.m; sourceTree = "<group>"; };
 		70E01275162F553000601CA3 /* BRCelebration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCelebration.h; sourceTree = "<group>"; };
@@ -303,6 +309,10 @@
 				7061B0A015FA8E1A00A83E0A /* MainStoryboard_iPad.storyboard */,
 				70C962BE16A1DFC800A399B9 /* BRCelebrationCell.h */,
 				70C962BF16A1DFC800A399B9 /* BRCelebrationCell.m */,
+				70C962D716B5425200A399B9 /* BRBoolSettingsCell.h */,
+				70C962D816B5425200A399B9 /* BRBoolSettingsCell.m */,
+				70C962D416B45C3E00A399B9 /* BRFontSettingsCell.h */,
+				70C962D516B45C3E00A399B9 /* BRFontSettingsCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -496,6 +506,8 @@
 				70E0127A162F56E500601CA3 /* BRCGIQuery.mm in Sources */,
 				7042905C1641F91C00663A7D /* BRDataSource.m in Sources */,
 				70C962C016A1DFC800A399B9 /* BRCelebrationCell.m in Sources */,
+				70C962D616B45C3E00A399B9 /* BRFontSettingsCell.m in Sources */,
+				70C962D916B5425200A399B9 /* BRBoolSettingsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
