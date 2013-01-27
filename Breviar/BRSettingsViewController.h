@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BRFontPickerViewController.h"
 
-@interface BRSettingsViewController : UITableViewController <BRFontPickerDelegate>
+@interface BRSettingsViewController : UITableViewController <BRFontPickerDelegate, UITableViewDelegate, UITableViewDataSource>
 
-@property(strong) IBOutlet UILabel *prayerFontLabel;
-
+@property(strong) NSSet *longOpts;
 @end

@@ -8,6 +8,7 @@
 
 #import "BRDataSource.h"
 #import "BRCGIQuery.h"
+#import "BRSettings.h"
 #import "RaptureXML/RXMLElement.h"
 
 static BRDataSource *_instance;
@@ -25,16 +26,21 @@ static BRDataSource *_instance;
     BRDay *day = [[BRDay alloc] init];
     day.date = date;
     
-    // Get XML data for the day
+    NSMutableDictionary *queryOptions = [NSMutableDictionary dictionary];
+    
+    // Add query options for date
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:date];
     NSString *dayData;
-    dayData = [BRCGIQuery queryWithArgs:@{
-               @"qt": @"pxml",
-               @"d": [NSNumber numberWithInteger:components.day],
-               @"m": [NSNumber numberWithInteger:components.month],
-               @"r": [NSNumber numberWithInteger:components.year],
-               @"j": @"hu",
-               }];
+    [queryOptions addEntriesFromDictionary:@{
+         @"qt": @"pxml",
+         @"d": [NSNumber numberWithInteger:components.day],
+         @"m": [NSNumber numberWithInteger:components.month],
+         @"r": [NSNumber numberWithInteger:components.year],
+         @"j": @"hu",
+     }];
+    
+    // Get XML data for the day
+    dayData = [BRCGIQuery queryWithArgs:queryOptions];
     
     //NSLog(@"%@", dayData);
     
