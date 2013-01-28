@@ -9144,9 +9144,8 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<table "HTML_ALIGN_LEFT">\n<tr><td "HTML_VALIGN_TOP">\n");
 		// 2011-01-25; formul·r nahr·dzaj˙ci "PRM_CEZ_ROK"
 		// formul·r pre PRM_LIT_OBD
-#if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
+		// 2013-01-28: default pre druh˙ Ëasù moûnostÌ
 		radio_checked = ANO;
-#endif
 		Export("<"HTML_FORM_INPUT_RADIO" name=\"%s\" value=\"%s\"%s>", STR_QUERY_TYPE, STR_PRM_LIT_OBD, radio_checked? html_option_checked: STR_EMPTY);
 		radio_checked = NIE;
 		Export("</td><td "HTML_ALIGN_LEFT">\n");
