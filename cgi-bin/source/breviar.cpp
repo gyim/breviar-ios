@@ -12228,8 +12228,11 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 		if(equals(tyzden, STR_EMPTY)){
 			Export("<li>takı tıdeò nemono iada</li>\n");
 		}
-		else if((t < 1) || (t > 4)){
-			Export("<li>tıdeò = <"HTML_SPAN_BOLD">%s</span></li>\n", tyzden);
+		else if(t > lit_obd_pocet_tyzdnov[lo]){
+			Export("<li>tıdeò = <"HTML_SPAN_BOLD">%s</span>; takı tıdeò nemono iada pre dané liturgické obdobie: %s</li>\n", tyzden, nazov_obdobia_ext(lo));
+		}
+		else {
+			Export("<li>chyba: tıdeò %s nemono iada</li>\n", tyzden);
 		}
 		Export("</ul>\n");
 		return FAILURE;
@@ -12239,15 +12242,24 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 		ALERT;
 		Export("Nevhodné údaje:"HTML_LINE_BREAK"\n<ul>");
 		// deò
-		if(equals(den, STR_EMPTY))
+		if(equals(den, STR_EMPTY)){
 			Export("<li>chıba údaj o dni</li>\n");
-		else if(d == DEN_UNKNOWN)
+		}
+		else if(d == DEN_UNKNOWN){
+			Export("<li>deò = <"HTML_SPAN_BOLD">%s</span> (neznámy)</li>\n", den);
+		}
+		else{
 			Export("<li>deò = <"HTML_SPAN_BOLD">%s</span></li>\n", den);
+		}
 		// tyzden
 		if(equals(tyzden, STR_EMPTY))
 			Export("<li>chıba údaj o tıdni</li>\n");
-		else if((t < 1) || (t > 4))
+		else if((t < 0) || ((t == 0) && ((lo != OBD_POSTNE_I) && (d < DEN_STREDA)))){
 			Export("<li>tıdeò = <"HTML_SPAN_BOLD">%s</span></li>\n", tyzden);
+		}
+		else{
+			Export("<li>tıdeò = <"HTML_SPAN_BOLD">%s</span></li>\n", tyzden);
+		}
 		Export("</ul>\n");
 		return FAILURE;
 	}
@@ -14086,10 +14098,9 @@ short int getArgv(int argc, char **argv){
 					printf("breviar -qpbm -d1 -m1 -r2000 -f2 -g2 -p2000 -ba.bat -nbrev.exe -ic:\\breviar\\\n");
 					printf("breviar.exe -qpbm -d1 -m8 -r2009 -f30 -g9 -p2009 -11 -brob.bat -jsk -nbreviar.exe -i..\\..\\www.breviar.sk\\include\\ -ufull -M3\n");
 					printf("\nviac informacii:\n");
-					printf("\thttp://www.breviar.sk - hlavna stranka\n");
-					printf("\thttp://breviar.christ-net.sk - alternativna lokacia stranok (mirror)\n");
-					printf("\thttp://www.breviar.sk/info/parametre.htm - o parametroch\n");
-					printf("\thttp://www.breviar.sk/info/batchmode.htm - o davkovom mode (batch mode)\n");
+					printf("\thttp://breviar.sk - hlavna stranka\n");
+					printf("\thttp://breviar.sk/info/parametre.htm - o parametroch\n");
+					printf("\thttp://breviar.sk/info/batchmode.htm - o davkovom mode (batch mode)\n");
 
 					Log("option %c (without value)\n", c, optarg);
 					break;
