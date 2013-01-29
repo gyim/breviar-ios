@@ -155,6 +155,10 @@ extern const short int format_datumu[POCET_JAZYKOV + 1];
 #define FONT_SIZE_X_LARGE 	7
 #define FONT_SIZE_XX_LARGE	8
 
+// 2013-01-29: alternatÌvy pre niektorÈ Ëasti modlitby
+#define BIT_ALT_HYMNUS     1
+#define BIT_ALT_ANTCHVAL   2
+
 // nasledovne 2 definovane 2003-08-13; zmenene 2004-04-28 (12->16)
 #define MAX_STR_AF_FILE   16
 #define MAX_STR_AF_ANCHOR 23
@@ -182,6 +186,7 @@ typedef struct _anchor_and_file _struct_anchor_and_file;
 // prosby ostavaju pre posvatne citania nedefinovane
 
 struct tmodlitba1{
+	short int alternativy; // bitovÈ komponenty hovoria, ktorÈ Ëasti mÙûu maù alternatÌvy
 	_struct_anchor_and_file popis     ;
 	_struct_anchor_and_file hymnus    ;
 	_struct_anchor_and_file antifona1 ;
@@ -204,6 +209,7 @@ typedef struct tmodlitba1 _type_1vespery;
 // typedef struct tmodlitba1 _type_posv_citanie;
 
 struct tmodlitba2{
+	short int alternativy; // bitovÈ komponenty hovoria, ktorÈ Ëasti mÙûu maù alternatÌvy
 	_struct_anchor_and_file popis     ;
 	_struct_anchor_and_file hymnus    ;
 	_struct_anchor_and_file antifona1 ;
@@ -225,6 +231,7 @@ typedef struct tmodlitba2 _type_cez_den_na;
 typedef struct tmodlitba2 _type_cez_den_po;
 
 struct tmodlitba3{
+	short int alternativy; // bitovÈ komponenty hovoria, ktorÈ Ëasti mÙûu maù alternatÌvy
 	short int pocet_zalmov            ; // pridanÈ 2006-10-18; niekedy s˙ aû 2 ûalmy
 	_struct_anchor_and_file popis     ; // pridanÈ 2006-10-11; zruöenÈ antifona2, zalm2 a modlitba
 	_struct_anchor_and_file hymnus    ;
@@ -248,6 +255,7 @@ typedef struct tmodlitba4 _type_invitatorium;
 
 // 2011-03-25: pre posv‰tnÈ ËÌtanie kvÙli sl·veniu vigÌliÌ nov˝ typ
 struct tmodlitba5{
+	short int alternativy; // bitovÈ komponenty hovoria, ktorÈ Ëasti mÙûu maù alternatÌvy
 	_struct_anchor_and_file popis     ;
 	_struct_anchor_and_file hymnus    ;
 	_struct_anchor_and_file antifona1 ;
@@ -463,6 +471,8 @@ extern const char *TEMPLAT[POCET_MODLITIEB + 1];
 #define PARAM_KRATSIE_PROSBY "KRATSIE-PROSBY" // 2012-11-15: _ sa menilo na &nbsp; preto som zmenil na -
 #define PARAM_ZALM95        "ZALM95" // 2012-11-23: kvÙli <a name...>
 #define PARAM_VIGILIA       "VIGILIA"
+
+#define PARAM_ALT_HYMNUS    "ALT-HYMNUS"
 
 // dalsie parametre: specificke pre obdobie
 // Od nedele P·novho zm‡tvychvstania aû do Druhej veækonoËnej nedele vr·tane, ako aj na druhÈ veöpery sl·vnosti Zoslania Ducha Sv‰tÈho
@@ -1452,6 +1462,7 @@ void analyzuj_rok(short int year);
 
 // 2010-05-21: rozöÌrenÈ kvÙli spomienkam a æubovoæn˝m spomienkam v pÙstnom obdobÌ (zobrazenie po modlitbe dÚa pÙstnej fÈrie)
 #define _INIT_TMODLITBA1(a) {\
+	a.alternativy = 0; \
 	_INIT_ANCHOR_AND_FILE(a.popis); \
 	_INIT_ANCHOR_AND_FILE(a.hymnus); \
 	_INIT_ANCHOR_AND_FILE(a.antifona1); \
@@ -1470,6 +1481,7 @@ void analyzuj_rok(short int year);
 };
 
 #define _INIT_TMODLITBA2(a) {\
+	a.alternativy = 0; \
 	_INIT_ANCHOR_AND_FILE(a.popis); \
 	_INIT_ANCHOR_AND_FILE(a.hymnus); \
 	_INIT_ANCHOR_AND_FILE(a.antifona1); \
@@ -1485,6 +1497,7 @@ void analyzuj_rok(short int year);
 
 // 2006-10-11 doplnenÈ
 #define _INIT_TMODLITBA3(a) {\
+	a.alternativy = 0; \
 	a.pocet_zalmov = 1;\
 	_INIT_ANCHOR_AND_FILE(a.popis); \
 	_INIT_ANCHOR_AND_FILE(a.hymnus); \
@@ -1506,6 +1519,7 @@ void analyzuj_rok(short int year);
 
 // 2011-03-25: doplnenÈ pre posv‰tnÈ ËÌtanie
 #define _INIT_TMODLITBA5(a) {\
+	a.alternativy = 0; \
 	_INIT_ANCHOR_AND_FILE(a.popis); \
 	_INIT_ANCHOR_AND_FILE(a.hymnus); \
 	_INIT_ANCHOR_AND_FILE(a.antifona1); \

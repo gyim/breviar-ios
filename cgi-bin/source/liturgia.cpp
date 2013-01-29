@@ -1492,6 +1492,7 @@ void Log(_struct_dm g){
 // 2010-05-21: rozšírené kvôli spomienkam a ¾ubovo¾ným spomienkam v pôstnom období (zobrazenie po modlitbe dòa pôstnej férie)
 void Log(struct tmodlitba1 t){
 	Log_struktura_tm1("struktura tmodlitba1:\n");
+	Log_struktura_tm1("   alternativy = %d\n", t.alternativy);
 	Log_struktura_tm1("   popis             file `%s', anchor `%s'\n", t.popis.file, t.popis.anchor);
 	Log_struktura_tm1("   hymnus            file `%s', anchor `%s'\n", t.hymnus.file, t.hymnus.anchor);
 	Log_struktura_tm1("   antifona1         file `%s', anchor `%s'\n", t.antifona1.file, t.antifona1.anchor);
@@ -1511,6 +1512,7 @@ void Log(struct tmodlitba1 t){
 
 void Log(struct tmodlitba2 t){
 	Log_struktura_tm2("struktura tmodlitba2:\n");
+	Log_struktura_tm2("   alternativy = %d\n", t.alternativy);
 	Log_struktura_tm2("   popis        file `%s', anchor `%s'\n", t.popis.file, t.popis.anchor);
 	Log_struktura_tm2("   hymnus       file `%s', anchor `%s'\n", t.hymnus.file, t.hymnus.anchor);
 	Log_struktura_tm2("   antifona1    file `%s', anchor `%s'\n", t.antifona1.file, t.antifona1.anchor);
@@ -1527,6 +1529,7 @@ void Log(struct tmodlitba2 t){
 // 2006-10-11 doplnené
 void Log(struct tmodlitba3 t){
 	Log_struktura_tm3("struktura tmodlitba3:\n");
+	Log_struktura_tm3("   alternativy = %d\n", t.alternativy);
 	Log_struktura_tm3("   pocet_zalmov = %d\n", t.pocet_zalmov);
 	Log_struktura_tm3("   popis        file `%s', anchor `%s'\n", t.popis.file, t.popis.anchor);
 	Log_struktura_tm3("   hymnus       file `%s', anchor `%s'\n", t.hymnus.file, t.hymnus.anchor);
@@ -1550,6 +1553,7 @@ void Log(struct tmodlitba4 t){
 // 2011-03-25: pridané pre posvätné èítanie kvôli vigíliám
 void Log(struct tmodlitba5 t){
 	Log_struktura_tm5("struktura tmodlitba5:\n");
+	Log_struktura_tm5("   alternativy = %d\n", t.alternativy);
 	Log_struktura_tm5("   popis             file `%s', anchor `%s'\n", t.popis.file, t.popis.anchor);
 	Log_struktura_tm5("   hymnus            file `%s', anchor `%s'\n", t.hymnus.file, t.hymnus.anchor);
 	Log_struktura_tm5("   antifona1         file `%s', anchor `%s'\n", t.antifona1.file, t.antifona1.anchor);

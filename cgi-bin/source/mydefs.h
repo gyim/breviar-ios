@@ -748,6 +748,23 @@ extern short int query_type; // premenna obsahujuca PRM_...
 	#define STR_MODL_OPTF_2_ALTERNATIVES "of2a"
 #endif
 
+// pre force option 5 jednotlivé bit-komponenty (parciálne vo¾by)
+
+#define MODL_OPTF_5_HYMNUS_KOMPL 101
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF_5_HYMNUS_KOMPL "STR_MODL_OPTF_5_HYMNUS_KOMPL"
+#else
+	#define STR_MODL_OPTF_5_HYMNUS_KOMPL "of5hk"
+#endif
+
+#define MODL_OPTF_5_HYMNUS_PC 102
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF_5_HYMNUS_PC "STR_MODL_OPTF_5_HYMNUS_PC"
+#else
+	#define STR_MODL_OPTF_5_HYMNUS_PC "of5hpc"
+#endif
+
+
 // 2008-08-08: Pridané kvôli rôznym css
 #define CSS 40
 #ifdef LONG_PARAM_NAMES

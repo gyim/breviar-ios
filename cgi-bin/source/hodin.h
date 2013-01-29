@@ -2220,6 +2220,47 @@ const char *html_text_option2_alternatives_explain[POCET_JAZYKOV + 1] =
  "Megmutatja ...",
 };
 
+const char *html_text_option5_KomplHymnusA[POCET_JAZYKOV + 1] = 
+{"hymnus Na sklonku dòa",
+ "hymnus A",
+ "hymnus A", 
+ "",
+ "",
+ "hymnus A",
+ "hymnus A", 
+};
+
+const char *html_text_option5_KomplHymnusB[POCET_JAZYKOV + 1] = 
+{"hymnus Kriste, ty svetlo",
+ "hymnus B",
+ "hymnus B", 
+ "",
+ "",
+ "hymnus B",
+ "hymnus B", 
+};
+
+const char *html_text_option5_PCHymnusI[POCET_JAZYKOV + 1] = 
+{"hymnus I. Ak je posvätné èítanie v_noci alebo vèasráno",
+ "hymnus I.",
+ "hymnus I.",
+ "",
+ "",
+ "hymnus I.",
+ "hymnus I.",
+};
+
+const char *html_text_option5_PCHymnusII[POCET_JAZYKOV + 1] = 
+{"hymnus II. Ak je posvätné èítanie cez deò",
+ "hymnus II.",
+ "hymnus II.",
+ "",
+ "",
+ "hymnus II.",
+ "hymnus II.",
+};
+
+
 // 2011-05-06: doplnené
 const char *html_text_font_name[POCET_JAZYKOV + 1] = 
 {"alebo použi písmo", 
