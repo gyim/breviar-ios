@@ -288,6 +288,10 @@ void readConfig(void)
 				Log("Pre option %d nastavujem bit pre '%d'\n", OPT_2_HTML_EXPORT, BIT_OPT_2_HIDE_OPTIONS2);
 				cfg_option_default[OPT_2_HTML_EXPORT][j] += BIT_OPT_2_HIDE_OPTIONS2;
 			}
+			if((cfg_option_default[OPT_2_HTML_EXPORT][j] & BIT_OPT_2_ALTERNATIVES) != BIT_OPT_2_ALTERNATIVES){
+				Log("Pre option %d nastavujem bit pre '%d'\n", OPT_2_HTML_EXPORT, BIT_OPT_2_ALTERNATIVES);
+				cfg_option_default[OPT_2_HTML_EXPORT][j] += BIT_OPT_2_ALTERNATIVES;
+			}
 		}
 		else{
 			Log("=== Jazyk `%s' (%s): option je %d\n", skratka_jazyka[j], nazov_jazyka[j], GLOBAL_OPTION_NULL);

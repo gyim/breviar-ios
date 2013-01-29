@@ -587,7 +587,7 @@ extern short int query_type; // premenna obsahujuca PRM_...
 #endif
 
 // pouûiù (pre ktor˝koævek deÚ v roku) kratöie prosby k veöper·m
-#define MODL_OPTF_1_VESP_KRATSIE_PROSBY 98
+#define MODL_OPTF_1_VESP_KRATSIE_PROSBY 99
 #ifdef LONG_PARAM_NAMES
 	#define STR_MODL_OPTF_1_VESP_KRATSIE_PROSBY "MODL_OPTF_1_VESP_KRATSIE_PROSBY"
 #else
@@ -738,6 +738,14 @@ extern short int query_type; // premenna obsahujuca PRM_...
 	#define STR_MODL_OPTF_2_HIDE_OPTIONS2 "MODL_OPTF_2_HIDE_OPTIONS2"
 #else
 	#define STR_MODL_OPTF_2_HIDE_OPTIONS2 "of2ho2"
+#endif
+
+// zobrazovaù jednu alternatÌvu -- BIT_OPT_2_ALTERNATIVES
+#define MODL_OPTF_2_ALTERNATIVES 98
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF_2_ALTERNATIVES "MODL_OPTF_2_ALTERNATIVES"
+#else
+	#define STR_MODL_OPTF_2_ALTERNATIVES "of2a"
 #endif
 
 // 2008-08-08: PridanÈ kvÙli rÙznym css
@@ -999,6 +1007,7 @@ extern short int query_type; // premenna obsahujuca PRM_...
 #define XML_BIT_OPT_2_HIDE_KALENDAR             "BitOpt2HideCalendar"
 #define XML_BIT_OPT_2_HIDE_OPTIONS1             "BitOpt2HideOptionsPart1"
 #define XML_BIT_OPT_2_HIDE_OPTIONS2             "BitOpt2HideOptionsPart2"
+#define XML_BIT_OPT_2_ALTERNATIVES              "BitOpt2Alternatives"
 
 // POCET_OPT_4_OFFLINE_EXPORT
 #define XML_BIT_OPT_4_MESIAC_RIADOK             "BitOpt4MonthAtLine"

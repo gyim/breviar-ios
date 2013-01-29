@@ -1269,7 +1269,7 @@ extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
 #define BIT_OPT_1_ZOBRAZ_SPOL_CAST       4096
 #define BIT_OPT_1_VESP_KRATSIE_PROSBY    8192 // 1 = pouûiù (pre ktor˝koævek deÚ v roku) kratöie prosby k veöper·m
 
-#define POCET_OPT_2_HTML_EXPORT            14 // jednotlivÈ komponenty option 2 -- bity pre force option 2
+#define POCET_OPT_2_HTML_EXPORT            15 // jednotlivÈ komponenty option 2 -- bity pre force option 2
 extern short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];
 // 2011-04-12: ˙prava v˝znamu (a interpret·cie) option 2 (rozliËnÈ prepÌnaËe pre [online aj offline] export, napr. tlaËidl·, zobrazenie d·tumov a podobne)
 // 2012-10-01: doplnenÈ Ôalöie komponenty najm‰ pre vzhæad ˙vodnej obrazovky
@@ -1287,6 +1287,7 @@ extern short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];
 #define BIT_OPT_2_HIDE_KALENDAR          2048 // 1 = skryù kalend·rik pre "dnes"
 #define BIT_OPT_2_HIDE_OPTIONS1          4096 // 1 = skryù html_text_dalsie_moznosti_1[] pre "dnes"
 #define BIT_OPT_2_HIDE_OPTIONS2          8192 // 1 = skryù html_text_dalsie_moznosti_2[] pre "dnes"
+#define BIT_OPT_2_ALTERNATIVES          16384 // 1 = uk·zaù iba jednu alternatÌvu (0 = ako doteraz; buÔ systÈm vyberie, alebo uk·ûe vöetky moûnosti)
 
 #define POCET_OPT_4_OFFLINE_EXPORT          1 // jednotlivÈ komponenty option 4 -- bity pre force option 4
 extern short int _global_opt_offline_export[POCET_OPT_4_OFFLINE_EXPORT];
