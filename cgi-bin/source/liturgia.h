@@ -63,6 +63,7 @@
 /*   2011-04-13a.D. | reùazcovÈ funkcie equals() presunutÈ     */
 /*   2011-05-11a.D. | vytvorenÈ: _vytvor_string_z_datumu()     */
 /*   2011-10-07a.D. | vymenenÈ konötanty RCH <-> posv.ËÌt.     */
+/*   2013-01-29a.D. | option 5 pre alternatÌvy v textoch       */
 /*                                                             */
 /*                                                             */
 /***************************************************************/
@@ -1234,6 +1235,7 @@ extern short int _global_pocet_svatych;
 #define OPT_2_HTML_EXPORT          2
 #define OPT_3_SPOLOCNA_CAST        3
 #define OPT_4_OFFLINE_EXPORT       4
+#define OPT_5_ALTERNATIVES         5
 
 // glob·lna premenn· -- pole -- obsahuj˙ca options; pÙvodne to boli glob·lne premennÈ _global_opt 1..9 atÔ., obsahuj˙ pom_MODL_OPT...
 extern short int _global_opt[POCET_GLOBAL_OPT];
@@ -1290,6 +1292,11 @@ extern short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];
 extern short int _global_opt_offline_export[POCET_OPT_4_OFFLINE_EXPORT];
 // 2011-04-08: ˙prava v˝znamu (a interpret·cie) option 4 (rozliËnÈ prepÌnaËe pre offline export, napr. aj batch mÛd)
 #define BIT_OPT_4_MESIAC_RIADOK             1
+
+#define POCET_OPT_5_ALTERNATIVES            2 // jednotlivÈ komponenty option 5 -- bity pre force option 5
+extern short int _global_opt_alternatives[POCET_OPT_5_ALTERNATIVES];
+#define BIT_OPT_5_HYMNUS_KOMPL              1 // hymnus na kompletÛrium (CezroËnÈ obdobie, A/B)
+#define BIT_OPT_5_HYMNUS_PC                 2 // hymnus pre posv‰tnÈ ËÌtanie (CezroËnÈ obdobie, I./II.)
 
 // globalna premenna, co obsahuje string vypisany na obsazovku
 extern char *_global_string;

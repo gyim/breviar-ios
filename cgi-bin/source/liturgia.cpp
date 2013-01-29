@@ -560,6 +560,7 @@ void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR] /*, short i
 				case OPT_2_HTML_EXPORT:		strcat(local_str, STR_MODL_OPT_2); break;
 				case OPT_3_SPOLOCNA_CAST:	strcat(local_str, STR_MODL_OPT_3); break;
 				case OPT_4_OFFLINE_EXPORT:	strcat(local_str, STR_MODL_OPT_4); break;
+				case OPT_5_ALTERNATIVES:	strcat(local_str, STR_MODL_OPT_5); break;
 			}// switch(i)
 			sprintf(pom3, HTML_AMPERSAND"%s=%d", local_str, _global_opt[i]);
 			strcat(pom2, pom3);

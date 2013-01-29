@@ -444,11 +444,12 @@ short int _global_pocet_svatych;
 short int _global_opt[POCET_GLOBAL_OPT];
 // glob·lna premenn· -- pole -- obsahuj˙ca force options; pÙvodne to boli glob·lne premennÈ _global_optf 1..9 atÔ., obsahuj˙ pom_MODL_OPTF...
 short int _global_optf[POCET_GLOBAL_OPT];
-// glob·lne premennÈ -- polia -- obsahuj˙ce jednotlivÈ bity pre force option 0, 1, 2, 4
+// glob·lne premennÈ -- polia -- obsahuj˙ce jednotlivÈ bity pre force option 0, 1, 2, 4, 5
 short int _global_opt_specialne[POCET_OPT_0_SPECIALNE];
 short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];      
 short int _global_opt_html_export[POCET_OPT_2_HTML_EXPORT];
 short int _global_opt_offline_export[POCET_OPT_4_OFFLINE_EXPORT];
+short int _global_opt_alternatives[POCET_OPT_5_ALTERNATIVES];
 
 // pridane 2003-07-08, append parameter
 short int _global_opt_append = NIE;
@@ -562,6 +563,7 @@ char pom_MODL_OPTF_SPECIALNE[POCET_OPT_0_SPECIALNE][SMALL];
 char pom_MODL_OPTF_CASTI_MODLITBY[POCET_OPT_1_CASTI_MODLITBY][SMALL];
 char pom_MODL_OPTF_HTML_EXPORT[POCET_OPT_2_HTML_EXPORT][SMALL];
 char pom_MODL_OPTF_OFFLINE_EXPORT[POCET_OPT_4_OFFLINE_EXPORT][SMALL];
+char pom_MODL_OPTF_ALTERNATIVES[POCET_OPT_5_ALTERNATIVES][SMALL];
 
 // append pridany 2003-07-08, bude v _global_opt_append
 char pom_MODL_OPT_APPEND  [SMALL] = STR_EMPTY;
@@ -1048,6 +1050,7 @@ short int setForm(void){
 				case OPT_2_HTML_EXPORT:		strcat(local_str, STR_MODL_OPT_2); break;
 				case OPT_3_SPOLOCNA_CAST:	strcat(local_str, STR_MODL_OPT_3); break;
 				case OPT_4_OFFLINE_EXPORT:	strcat(local_str, STR_MODL_OPT_4); break;
+				case OPT_5_ALTERNATIVES:	strcat(local_str, STR_MODL_OPT_5); break;
 			}// switch(i)
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPT[i]);
@@ -1068,6 +1071,7 @@ short int setForm(void){
 				case OPT_2_HTML_EXPORT:		strcat(local_str, STR_MODL_OPTF_2); break;
 				case OPT_3_SPOLOCNA_CAST:	strcat(local_str, STR_MODL_OPTF_3); break;
 				case OPT_4_OFFLINE_EXPORT:	strcat(local_str, STR_MODL_OPTF_4); break;
+				case OPT_5_ALTERNATIVES:	strcat(local_str, STR_MODL_OPTF_5); break;
 			}// switch(i)
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF[i]);
@@ -14234,6 +14238,7 @@ short int getForm(void){
 			case OPT_2_HTML_EXPORT:		strcat(local_str, STR_MODL_OPT_2); break;
 			case OPT_3_SPOLOCNA_CAST:	strcat(local_str, STR_MODL_OPT_3); break;
 			case OPT_4_OFFLINE_EXPORT:	strcat(local_str, STR_MODL_OPT_4); break;
+			case OPT_5_ALTERNATIVES:	strcat(local_str, STR_MODL_OPT_5); break;
 		}// switch(i)
 		ptr = getenv(local_str);
 		if(ptr != NULL){
@@ -14252,6 +14257,7 @@ short int getForm(void){
 			case OPT_2_HTML_EXPORT:		strcat(local_str, STR_MODL_OPTF_2); break;
 			case OPT_3_SPOLOCNA_CAST:	strcat(local_str, STR_MODL_OPTF_3); break;
 			case OPT_4_OFFLINE_EXPORT:	strcat(local_str, STR_MODL_OPTF_4); break;
+			case OPT_5_ALTERNATIVES:	strcat(local_str, STR_MODL_OPTF_5); break;
 		}// switch(i)
 		ptr = getenv(local_str);
 		if(ptr != NULL){
@@ -14948,11 +14954,12 @@ short int parseQueryString(void){
 		Log("j == %d...\n", j);
 		mystrcpy(local_str, STR_EMPTY, SMALL);
 		switch(j){
-			case 0: strcat(local_str, STR_MODL_OPT_0); break;
-			case 1: strcat(local_str, STR_MODL_OPT_1); break;
-			case 2: strcat(local_str, STR_MODL_OPT_2); break;
-			case 3: strcat(local_str, STR_MODL_OPT_3); break;
-			case 4: strcat(local_str, STR_MODL_OPT_4); break;
+			case OPT_0_SPECIALNE:		strcat(local_str, STR_MODL_OPT_0); break;
+			case OPT_1_CASTI_MODLITBY:	strcat(local_str, STR_MODL_OPT_1); break;
+			case OPT_2_HTML_EXPORT:		strcat(local_str, STR_MODL_OPT_2); break;
+			case OPT_3_SPOLOCNA_CAST:	strcat(local_str, STR_MODL_OPT_3); break;
+			case OPT_4_OFFLINE_EXPORT:	strcat(local_str, STR_MODL_OPT_4); break;
+			case OPT_5_ALTERNATIVES:	strcat(local_str, STR_MODL_OPT_5); break;
 		}// switch(j)
 		// premenn· MODL_OPTj (nepovinn·), j = 0 aû POCET_GLOBAL_OPT - 1
 		i = 0; // param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0
@@ -14979,11 +14986,12 @@ short int parseQueryString(void){
 */
 		mystrcpy(local_str, STR_EMPTY, SMALL);
 		switch(j){
-			case 0: strcat(local_str, STR_MODL_OPTF_0); break;
-			case 1: strcat(local_str, STR_MODL_OPTF_1); break;
-			case 2: strcat(local_str, STR_MODL_OPTF_2); break;
-			case 3: strcat(local_str, STR_MODL_OPTF_3); break;
-			case 4: strcat(local_str, STR_MODL_OPTF_4); break;
+			case OPT_0_SPECIALNE:		strcat(local_str, STR_MODL_OPTF_0); break;
+			case OPT_1_CASTI_MODLITBY:	strcat(local_str, STR_MODL_OPTF_1); break;
+			case OPT_2_HTML_EXPORT:		strcat(local_str, STR_MODL_OPTF_2); break;
+			case OPT_3_SPOLOCNA_CAST:	strcat(local_str, STR_MODL_OPTF_3); break;
+			case OPT_4_OFFLINE_EXPORT:	strcat(local_str, STR_MODL_OPTF_4); break;
+			case OPT_5_ALTERNATIVES:	strcat(local_str, STR_MODL_OPTF_5); break;
 		}// switch(j)
 		// premenn· MODL_OPTFj (nepovinn·), j = 0 aû 9
 		i = 0; // param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0
@@ -15673,20 +15681,20 @@ short int counter_setConfigDefaults = 0;
 
 // 2011-04-13: vytvorenÈ kvÙli tomu, ûe config s˙bor nemusÌ obsahovaù hodnoty pre vöetky options
 void setConfigDefaults(short int jazyk){
-	short int sk_default, o;
+	short int sk_default, i;
 	counter_setConfigDefaults++;
 	Log("setConfigDefaults(%d) -- zaËiatok (%d. volanie)...\n", jazyk, counter_setConfigDefaults);
 	// 2011-04-13: ak s˙ niektorÈ options GLOBAL_OPTION_NULL, je potrebnÈ ich na nieËo nastaviù
-	for(o = 0; o < POCET_GLOBAL_OPT; o++){
+	for(i = 0; i < POCET_GLOBAL_OPT; i++){
 		if(jazyk != JAZYK_SK)
-			sk_default = cfg_option_default[o][JAZYK_SK];
+			sk_default = cfg_option_default[i][JAZYK_SK];
 		else
 			sk_default = GLOBAL_OPTION_NULL;
-		if(cfg_option_default[o][jazyk] == GLOBAL_OPTION_NULL){
-			cfg_option_default[o][jazyk] = (sk_default == GLOBAL_OPTION_NULL)? cfg_option_default_PROG[o]: sk_default;
-			Log("keÔûe cfg_option_default[%d][%d] bolo GLOBAL_OPTION_NULL, nastavujem podæa program defaults na %d...\n", o, jazyk, cfg_option_default[o][jazyk]);
+		if(cfg_option_default[i][jazyk] == GLOBAL_OPTION_NULL){
+			cfg_option_default[i][jazyk] = (sk_default == GLOBAL_OPTION_NULL)? cfg_option_default_PROG[i]: sk_default;
+			Log("keÔûe cfg_option_default[%d][%d] bolo GLOBAL_OPTION_NULL, nastavujem podæa program defaults na %d...\n", i, jazyk, cfg_option_default[i][jazyk]);
 		}
-	}// for o
+	}// for i
 	Log("setConfigDefaults(%d) -- koniec (%d. volanie).\n", jazyk, counter_setConfigDefaults);
 }// setConfigDefaults()
 

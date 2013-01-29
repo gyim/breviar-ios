@@ -396,8 +396,15 @@ extern short int query_type; // premenna obsahujuca PRM_...
 	#define STR_MODL_OPT_4 "o4"
 #endif
 
+#define MODL_OPT_5 35
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPT_5 "MODL_OPT_5"
+#else
+	#define STR_MODL_OPT_5 "o5"
+#endif
+
 // append pridany 2003-07-08, bude v _global_opt_append; nemal by byt pouzity na webe
-#define MODL_OPT_APPEND 35
+#define MODL_OPT_APPEND 36
 #ifdef LONG_PARAM_NAMES
 	#define STR_MODL_OPT_APPEND "MODL_OPT_APPEND"
 #else
@@ -446,6 +453,13 @@ extern short int query_type; // premenna obsahujuca PRM_...
 	#define STR_MODL_OPTF_4 "MODL_OPTF_4"
 #else
 	#define STR_MODL_OPTF_4 "of4"
+#endif
+
+#define MODL_OPTF_5 55
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF_5 "MODL_OPTF_5"
+#else
+	#define STR_MODL_OPTF_5 "of5"
 #endif
 
 // pre force option 0 jednotlivé bit-komponenty (parciálne vo¾by)
