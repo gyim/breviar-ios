@@ -764,6 +764,27 @@ extern short int query_type; // premenna obsahujuca PRM_...
 	#define STR_MODL_OPTF_5_HYMNUS_PC "of5hpc"
 #endif
 
+#define MODL_OPTF_5_HYMNUS_MCD_PREDPOL 103
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF_5_HYMNUS_MCD_PREDPOL "STR_MODL_OPTF_5_HYMNUS_MCD_PREDPOL"
+#else
+	#define STR_MODL_OPTF_5_HYMNUS_MCD_PREDPOL "of5hpred"
+#endif
+
+#define MODL_OPTF_5_HYMNUS_MCD_NAPOL 104
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF_5_HYMNUS_MCD_NAPOL "STR_MODL_OPTF_5_HYMNUS_MCD_NAPOL"
+#else
+	#define STR_MODL_OPTF_5_HYMNUS_MCD_NAPOL "of5hna"
+#endif
+
+#define MODL_OPTF_5_HYMNUS_MCD_POPOL 105
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF_5_HYMNUS_MCD_POPOL "STR_MODL_OPTF_5_HYMNUS_MCD_POPOL"
+#else
+	#define STR_MODL_OPTF_5_HYMNUS_MCD_POPOL "of5hpo"
+#endif
+
 
 // 2008-08-08: Pridané kvôli rôznym css
 #define CSS 40
@@ -1032,6 +1053,9 @@ extern short int query_type; // premenna obsahujuca PRM_...
 // POCET_OPT_5_ALTERNATIVES
 #define XML_BIT_OPT_5_HYMNUS_KOMPL              "BitOpt5HymnCompl"
 #define XML_BIT_OPT_5_HYMNUS_PC                 "BitOpt5HymnRead"
+#define XML_BIT_OPT_5_HYMNUS_MCD_PREDPOL        "BitOpt5Hymn9h"
+#define XML_BIT_OPT_5_HYMNUS_MCD_NAPOL          "BitOpt5Hymn12h"
+#define XML_BIT_OPT_5_HYMNUS_MCD_POPOL          "BitOpt5Hymn15h"
 
 // starting, closing element (XML, HTML)
 #define ELEM_BEGIN(elem)     "<"elem">"

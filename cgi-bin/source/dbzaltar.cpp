@@ -1285,6 +1285,7 @@ void anchor_name_zaltar_alt(short int den, short int tyzzal, short int modlitba,
 void set_hymnus(short int den, short int tyzzal, short int modlitba){
 	Log("set_hymnus(): zaèiatok\n");
 	short int ktory; // 0 alebo 1
+	short int bit;
 	// 2006-10-13: pridané èasti pre kompletórium
 	// 2006-12-04: hymnus pre kompletórium je v èeskej verzii pre kadı deò inı
 	// 2008-12-16: toto však neplatí pre èeskı dominikánskı breviáø
@@ -1317,7 +1318,7 @@ void set_hymnus(short int den, short int tyzzal, short int modlitba){
 			}
 			// 2013-01-30: pôvodne chceli èeskí dominikáni, aby sa hymnus striedal po tıdòoch:
 			// ktory = (tyzzal) % 2;
-			// preto to bola ešte jedna podmienka; keïe je monos to vybera, 
+			// preto to bola ešte jedna podmienka; keïe je monos to vybera, bolo zrušené
 			else{
 				Log("set_hymnus(): kompletórium...\n");
 				// 2013-01-29: pôvodne tu bol náhodnı vıber (pod¾a (den + tyzzal) % 2); upravené, ak si èlovek sám volí alternatívy
@@ -1341,18 +1342,31 @@ void set_hymnus(short int den, short int tyzzal, short int modlitba){
 		// 2003-08-15: pridana modlitba cez den, ma hymny rovnake pre cele obdobie cez rok 
 		// 2008-04-08: pre mcd v èeskom breviári je pre cezroèné obdobie moné bra buï hymnus zo altára,
 		//             alebo pre 1./3. (1) resp. 2./4. (2) tıdeò altára z "vlastnej èasti" pre 
+		switch(modlitba){
+			case MODL_PREDPOLUDNIM: bit = BIT_OPT_5_HYMNUS_MCD_PREDPOL; break;
+			case MODL_NAPOLUDNIE:   bit = BIT_OPT_5_HYMNUS_MCD_NAPOL; break;
+			case MODL_POPOLUDNI:    bit = BIT_OPT_5_HYMNUS_MCD_POPOL; break;
+		}// switch(modlitba)
 		file_name_litobd(OBD_CEZ_ROK);
 		if(_global_jazyk == JAZYK_CZ){
-			sprintf(_anchor, "%c_%s_%d_%s", 
-				pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (2 - (tyzzal % 2)), nazov_DN_asci[den]);
+			sprintf(_anchor, "%c_%s_%d_%s", pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (2 - (tyzzal % 2)), nazov_DN_asci[den]);
 		}
-		else if(_global_jazyk != JAZYK_CZ_OP){
-			sprintf(_anchor, "%c_%s_%d", 
-				pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (den + tyzzal) % 2);
-		}
-		else /* if(_global_jazyk == JAZYK_CZ_OP) */{
-			sprintf(_anchor, "%c_%s_%d", 
-				pismenko_modlitby(modlitba), ANCHOR_HYMNUS, (tyzzal) % 2);
+		// 2013-01-30: pôvodne chceli èeskí dominikáni, aby sa hymnus striedal po tıdòoch:
+		// ktory = (tyzzal) % 2;
+		// preto to bola ešte jedna podmienka; keïe je monos to vybera, bolo zrušené
+		else{
+			Log("set_hymnus(): modlitba cez deò...\n");
+			// 2013-01-29: pôvodne tu bol náhodnı vıber (pod¾a (den + tyzzal) % 2); upravené, ak si èlovek sám volí alternatívy
+			if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ALTERNATIVES) == BIT_OPT_2_ALTERNATIVES){
+				// pod¾a nastavenia _global_opt[OPT_5_ALTERNATIVES]
+				ktory = ((_global_opt[OPT_5_ALTERNATIVES] & bit) == bit)? 1: 0;
+				Log("2013-01-29: som tu (%d)...\n", ktory);
+			}
+			else{
+				// náhodnı vıber | ktory = (den + tyzzal) % 2;
+				ktory = 2; // obidva!
+			}
+			sprintf(_anchor, "%c_%s_%d", pismenko_modlitby(modlitba), ANCHOR_HYMNUS, ktory);
 		}
 		_set_hymnus(modlitba, _file, _anchor);
 		set_LOG_zaltar;
@@ -5850,6 +5864,9 @@ label_24_DEC:
 			// 2013-01-29: nastavenie monosti alternatívnych hymnov pre posv. èítanie a kompletórium
 			if(_global_jazyk != JAZYK_CZ){
 				_set_hymnus_alternativy(MODL_KOMPLETORIUM);
+				_set_hymnus_alternativy(MODL_PREDPOLUDNIM);
+				_set_hymnus_alternativy(MODL_NAPOLUDNIE);
+				_set_hymnus_alternativy(MODL_POPOLUDNI);
 				_set_hymnus_alternativy(MODL_POSV_CITANIE);
 			}
 

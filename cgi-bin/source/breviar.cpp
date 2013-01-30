@@ -1173,6 +1173,9 @@ short int setForm(void){
 			switch(i){
 				case 0: strcat(local_str, STR_MODL_OPTF_5_HYMNUS_KOMPL); break; // BIT_OPT_5_HYMNUS_KOMPL
 				case 1: strcat(local_str, STR_MODL_OPTF_5_HYMNUS_PC); break; // BIT_OPT_5_HYMNUS_PC
+				case 2: strcat(local_str, STR_MODL_OPTF_5_HYMNUS_MCD_PREDPOL); break; // BIT_OPT_5_HYMNUS_MCD_PREDPOL
+				case 3: strcat(local_str, STR_MODL_OPTF_5_HYMNUS_MCD_NAPOL); break; // BIT_OPT_5_HYMNUS_MCD_NAPOL
+				case 4: strcat(local_str, STR_MODL_OPTF_5_HYMNUS_MCD_POPOL); break; // BIT_OPT_5_HYMNUS_MCD_POPOL
 			}// switch(i)
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF_ALTERNATIVES[i]);
@@ -3151,6 +3154,21 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 				bit = BIT_OPT_5_HYMNUS_PC;
 				sprintf(popis_show, "%s %s", html_text_option_zobrazit[_global_jazyk], html_text_option5_PCHymnusII[_global_jazyk]);
 				sprintf(popis_hide, "%s %s", html_text_option_zobrazit[_global_jazyk], html_text_option5_PCHymnusI[_global_jazyk]);
+			}
+			else if(_global_modlitba == MODL_PREDPOLUDNIM){
+				bit = BIT_OPT_5_HYMNUS_MCD_PREDPOL;
+				sprintf(popis_show, "%s %s", html_text_option_zobrazit[_global_jazyk], html_text_option5_MCDPredHymnus2[_global_jazyk]);
+				sprintf(popis_hide, "%s %s", html_text_option_zobrazit[_global_jazyk], html_text_option5_MCDPredHymnus1[_global_jazyk]);
+			}
+			else if(_global_modlitba == MODL_NAPOLUDNIE){
+				bit = BIT_OPT_5_HYMNUS_MCD_NAPOL;
+				sprintf(popis_show, "%s %s", html_text_option_zobrazit[_global_jazyk], html_text_option5_MCDNaHymnus2[_global_jazyk]);
+				sprintf(popis_hide, "%s %s", html_text_option_zobrazit[_global_jazyk], html_text_option5_MCDNaHymnus1[_global_jazyk]);
+			}
+			else if(_global_modlitba == MODL_POPOLUDNI){
+				bit = BIT_OPT_5_HYMNUS_MCD_POPOL;
+				sprintf(popis_show, "%s %s", html_text_option_zobrazit[_global_jazyk], html_text_option5_MCDPoHymnus2[_global_jazyk]);
+				sprintf(popis_hide, "%s %s", html_text_option_zobrazit[_global_jazyk], html_text_option5_MCDPoHymnus1[_global_jazyk]);
 			}
 			else{
 				podmienka = NIE;
@@ -14450,6 +14468,9 @@ short int getForm(void){
 		switch(i){
 			case 0: strcat(local_str, STR_MODL_OPTF_5_HYMNUS_KOMPL); break; // BIT_OPT_5_HYMNUS_KOMPL
 			case 1: strcat(local_str, STR_MODL_OPTF_5_HYMNUS_PC); break; // BIT_OPT_5_HYMNUS_PC
+			case 2: strcat(local_str, STR_MODL_OPTF_5_HYMNUS_MCD_PREDPOL); break; // BIT_OPT_5_HYMNUS_MCD_PREDPOL
+			case 3: strcat(local_str, STR_MODL_OPTF_5_HYMNUS_MCD_NAPOL); break; // BIT_OPT_5_HYMNUS_MCD_NAPOL
+			case 4: strcat(local_str, STR_MODL_OPTF_5_HYMNUS_MCD_POPOL); break; // BIT_OPT_5_HYMNUS_MCD_POPOL
 		}// switch(i)
 		ptr = getenv(local_str);
 		if(ptr != NULL){
@@ -15241,6 +15262,9 @@ short int parseQueryString(void){
 		switch(j){
 			case 0: strcat(local_str, STR_MODL_OPTF_5_HYMNUS_KOMPL); break; // BIT_OPT_5_HYMNUS_KOMPL
 			case 1: strcat(local_str, STR_MODL_OPTF_5_HYMNUS_PC); break; // BIT_OPT_5_HYMNUS_PC
+			case 2: strcat(local_str, STR_MODL_OPTF_5_HYMNUS_MCD_PREDPOL); break; // BIT_OPT_5_HYMNUS_MCD_PREDPOL
+			case 3: strcat(local_str, STR_MODL_OPTF_5_HYMNUS_MCD_NAPOL); break; // BIT_OPT_5_HYMNUS_MCD_NAPOL
+			case 4: strcat(local_str, STR_MODL_OPTF_5_HYMNUS_MCD_POPOL); break; // BIT_OPT_5_HYMNUS_MCD_POPOL
 		}// switch(j)
 		// premenn· WWW_MODL_OPTF_5_... (nepovinn·), j = 0 aû POCET_OPT_5_ALTERNATIVES
 		i = 0; // param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme od 0

@@ -2218,6 +2218,66 @@ const char *html_text_option5_PCHymnusII[POCET_JAZYKOV + 1] =
  "hymnus II.",
 };
 
+const char *html_text_option5_MCDPredHymnus1[POCET_JAZYKOV + 1] = 
+{"hymnus Príï, Duchu Svätý",
+ "hymnus 1",
+ "hymnus 1",
+ "",
+ "",
+ "hymnus 1",
+ "hymnus 1",
+};
+
+const char *html_text_option5_MCDPredHymnus2[POCET_JAZYKOV + 1] = 
+{"hymnus Deviata je už hodina",
+ "hymnus 2",
+ "hymnus 2",
+ "",
+ "",
+ "hymnus 2",
+ "hymnus 2",
+};
+
+const char *html_text_option5_MCDNaHymnus1[POCET_JAZYKOV + 1] = 
+{"hymnus Mocný Vládca, verný Bože",
+ "hymnus 1",
+ "hymnus 1",
+ "",
+ "",
+ "hymnus 1",
+ "hymnus 1",
+};
+
+const char *html_text_option5_MCDNaHymnus2[POCET_JAZYKOV + 1] = 
+{"hymnus Na nebi slnko vrcholí",
+ "hymnus 2",
+ "hymnus 2",
+ "",
+ "",
+ "hymnus 2",
+ "hymnus 2",
+};
+
+const char *html_text_option5_MCDPoHymnus1[POCET_JAZYKOV + 1] = 
+{"hymnus Celý svet v pohyb uvádzaš",
+ "hymnus 1",
+ "hymnus 1",
+ "",
+ "",
+ "hymnus 1",
+ "hymnus 1",
+};
+
+const char *html_text_option5_MCDPoHymnus2[POCET_JAZYKOV + 1] = 
+{"hymnus Z Božej milosti tretí raz",
+ "hymnus 2",
+ "hymnus 2",
+ "",
+ "",
+ "hymnus 2",
+ "hymnus 2",
+};
+
 
 // 2011-05-06: doplnené
 const char *html_text_font_name[POCET_JAZYKOV + 1] = 
