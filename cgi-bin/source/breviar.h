@@ -304,6 +304,10 @@ extern short int _global_opt_export_date_format;
 ))
 
 #define je_alternativa ( \
+(_global_modlitba == MODL_PRVE_KOMPLETORIUM && ((_global_modl_prve_kompletorium.alternativy & BIT_ALT_HYMNUS) == BIT_ALT_HYMNUS)) \
+||  \
+(_global_modlitba == MODL_DRUHE_KOMPLETORIUM && ((_global_modl_kompletorium.alternativy & BIT_ALT_HYMNUS) == BIT_ALT_HYMNUS)) \
+||  \
 (_global_modlitba == MODL_KOMPLETORIUM && ((_global_modl_kompletorium.alternativy & BIT_ALT_HYMNUS) == BIT_ALT_HYMNUS)) \
 ||  \
 (_global_modlitba == MODL_POSV_CITANIE && ((_global_modl_posv_citanie.alternativy & BIT_ALT_HYMNUS) == BIT_ALT_HYMNUS)) \

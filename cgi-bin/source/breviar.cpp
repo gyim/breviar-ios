@@ -3139,6 +3139,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		}
 		else if(equals(paramname, PARAM_ALT_HYMNUS)){
 			opt = OPT_5_ALTERNATIVES;
+			podmienka &= ((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ALTERNATIVES) == BIT_OPT_2_ALTERNATIVES); // len ak je t·to moûnosù (zobrazovanie alternatÌvy) zvolen·
 			podmienka &= (je_alternativa);
 			mystrcpy(specific_string, HTML_NEW_PARAGRAPH, SMALL);
 			if(_global_modlitba == MODL_KOMPLETORIUM){
@@ -8751,13 +8752,13 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 				Export(HTML_LINE_BREAK);
 				Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_5_HYMNUS_KOMPL, NIE);
 				Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_5_HYMNUS_KOMPL, ANO, STR_EMPTY, ((_global_optf[OPT_5_ALTERNATIVES] & BIT_OPT_5_HYMNUS_KOMPL) == BIT_OPT_5_HYMNUS_KOMPL)? html_option_checked: STR_EMPTY);
-				Export("<"HTML_SPAN_TOOLTIP">%s/%s</span>", STR_EMPTY, html_text_option5_KomplHymnusA[_global_jazyk], html_text_option5_KomplHymnusB[_global_jazyk]);
+				Export("<"HTML_SPAN_TOOLTIP">%s "HTML_SLASH" %s</span>", STR_EMPTY, html_text_option5_KomplHymnusA[_global_jazyk], html_text_option5_KomplHymnusB[_global_jazyk]);
 
 				// pole (checkbox) WWW_MODL_OPTF_5_HYMNUS_PC
 				Export(HTML_LINE_BREAK);
 				Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_5_HYMNUS_PC, NIE);
 				Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_5_HYMNUS_PC, ANO, STR_EMPTY, ((_global_optf[OPT_5_ALTERNATIVES] & BIT_OPT_5_HYMNUS_PC) == BIT_OPT_5_HYMNUS_PC)? html_option_checked: STR_EMPTY);
-				Export("<"HTML_SPAN_TOOLTIP">%s/"HTML_LINE_BREAK"%s</span>", STR_EMPTY, html_text_option5_PCHymnusI[_global_jazyk], html_text_option5_PCHymnusII[_global_jazyk]);
+				Export("<"HTML_SPAN_TOOLTIP">%s "HTML_SLASH" "HTML_LINE_BREAK""HTML_NONBREAKING_SPACE_LOOONG"%s</span>", STR_EMPTY, html_text_option5_PCHymnusI[_global_jazyk], html_text_option5_PCHymnusII[_global_jazyk]);
 			}
 		}
 
@@ -8864,7 +8865,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		// drop-down list pre v˝ber n·zvu pÌsma, len ak je nastaven· OPT_2_HTML_EXPORT.BIT_OPT_2_FONT_NAME_CHOOSER
 		if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_NAME_CHOOSER) == BIT_OPT_2_FONT_NAME_CHOOSER){
 			Export(HTML_LINE_BREAK);
-			Export("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+			Export(HTML_NONBREAKING_SPACE_LOOONG);
 			Export("<"HTML_SPAN_TOOLTIP">%s</span>\n", html_text_font_name_explain[_global_jazyk], html_text_font_name[_global_jazyk]);
 
 			// pole WWW_FONT_NAME
@@ -8889,7 +8890,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		// drop-down list pre v˝ber veækosti pÌsma WWW_MODL_OPTF_2_FONT_SIZE, len ak je nastaven· OPT_2_HTML_EXPORT.BIT_OPT_2_FONT_NAME_CHOOSER
 		if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_FONT_SIZE_CHOOSER) == BIT_OPT_2_FONT_SIZE_CHOOSER){
 			Export(HTML_LINE_BREAK);
-			Export("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+			Export(HTML_NONBREAKING_SPACE_LOOONG);
 			Export("<"HTML_SPAN_TOOLTIP">%s</span>\n", html_text_font_size_explain[_global_jazyk], html_text_font_size[_global_jazyk]);
 
 			// pole WWW_FONT_SIZE

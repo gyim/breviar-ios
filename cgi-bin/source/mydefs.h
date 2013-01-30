@@ -847,6 +847,8 @@ extern short int query_type; // premenna obsahujuca PRM_...
 #define HTML_VERTICAL_BAR "|"
 #define HTML_LINE_BREAK "<br/>"
 #define HTML_NEW_PARAGRAPH "<p>"
+#define HTML_SLASH "/"
+#define HTML_NONBREAKING_SPACE_LOOONG "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 
 #define HTML_SPAN_NORMAL    "span class=\"normal\""
 #define HTML_SPAN_ITALIC    "span class=\"it\""
@@ -984,6 +986,7 @@ extern short int query_type; // premenna obsahujuca PRM_...
 #define XML_OPT_2_HTML_EXPORT                   "Opt2Export"
 #define XML_OPT_3_SPOLOCNA_CAST                 "Opt3Communia"
 #define XML_OPT_4_OFFLINE_EXPORT                "Opt4OfflineExport"
+#define XML_OPT_5_ALTERNATIVES                  "Opt5Alternatives"
 
 // POCET_OPT_0_SPECIALNE
 #define XML_BIT_OPT_0_VERSE                     "BitOpt0VerseNumbers"
@@ -1026,8 +1029,9 @@ extern short int query_type; // premenna obsahujuca PRM_...
 #define XML_BIT_OPT_2_HIDE_OPTIONS2             "BitOpt2HideOptionsPart2"
 #define XML_BIT_OPT_2_ALTERNATIVES              "BitOpt2Alternatives"
 
-// POCET_OPT_4_OFFLINE_EXPORT
-#define XML_BIT_OPT_4_MESIAC_RIADOK             "BitOpt4MonthAtLine"
+// POCET_OPT_5_ALTERNATIVES
+#define XML_BIT_OPT_5_HYMNUS_KOMPL              "BitOpt5HymnCompl"
+#define XML_BIT_OPT_5_HYMNUS_PC                 "BitOpt5HymnRead"
 
 // starting, closing element (XML, HTML)
 #define ELEM_BEGIN(elem)     "<"elem">"
