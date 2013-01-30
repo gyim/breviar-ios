@@ -8766,17 +8766,52 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 			Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_vigilia_explain[_global_jazyk], html_text_option1_vigilia[_global_jazyk]);
 
 			if(_global_jazyk != JAZYK_CZ){
-				// pole (checkbox) WWW_MODL_OPTF_5_HYMNUS_KOMPL
+
 				Export(HTML_LINE_BREAK);
-				Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_5_HYMNUS_KOMPL, NIE);
-				Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_5_HYMNUS_KOMPL, ANO, STR_EMPTY, ((_global_optf[OPT_5_ALTERNATIVES] & BIT_OPT_5_HYMNUS_KOMPL) == BIT_OPT_5_HYMNUS_KOMPL)? html_option_checked: STR_EMPTY);
-				Export("<"HTML_SPAN_TOOLTIP">%s "HTML_SLASH" %s</span>", STR_EMPTY, html_text_option5_KomplHymnusA[_global_jazyk], html_text_option5_KomplHymnusB[_global_jazyk]);
+				Export("<"HTML_SPAN_BOLD_TOOLTIP">%s</span>", nazov_modlitby(MODL_POSV_CITANIE), nazov_modlitby(MODL_POSV_CITANIE));
 
 				// pole (checkbox) WWW_MODL_OPTF_5_HYMNUS_PC
 				Export(HTML_LINE_BREAK);
 				Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_5_HYMNUS_PC, NIE);
 				Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_5_HYMNUS_PC, ANO, STR_EMPTY, ((_global_optf[OPT_5_ALTERNATIVES] & BIT_OPT_5_HYMNUS_PC) == BIT_OPT_5_HYMNUS_PC)? html_option_checked: STR_EMPTY);
-				Export("<"HTML_SPAN_TOOLTIP">%s "HTML_SLASH" "HTML_LINE_BREAK""HTML_NONBREAKING_SPACE_LOOONG"%s</span>", STR_EMPTY, html_text_option5_PCHymnusI[_global_jazyk], html_text_option5_PCHymnusII[_global_jazyk]);
+				Export("<"HTML_SPAN_TOOLTIP">%s%s%s</span>", STR_EMPTY, html_text_option5_PCHymnusI[_global_jazyk], HTML_LINE_BREAK_SPACE_LOONG, html_text_option5_PCHymnusII[_global_jazyk]);
+
+				Export(HTML_LINE_BREAK);
+				Export("<"HTML_SPAN_BOLD_TOOLTIP">%s</span>", nazov_modlitby(MODL_PREDPOLUDNIM), nazov_modlitby(MODL_PREDPOLUDNIM));
+
+				// pole (checkbox) WWW_MODL_OPTF_5_HYMNUS_MCD_PREDPOL
+				Export(HTML_LINE_BREAK);
+				Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_5_HYMNUS_MCD_PREDPOL, NIE);
+				Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_5_HYMNUS_MCD_PREDPOL, ANO, STR_EMPTY, ((_global_optf[OPT_5_ALTERNATIVES] & BIT_OPT_5_HYMNUS_MCD_PREDPOL) == BIT_OPT_5_HYMNUS_MCD_PREDPOL)? html_option_checked: STR_EMPTY);
+				Export("<"HTML_SPAN_TOOLTIP">%s%s%s</span>", STR_EMPTY, html_text_option5_MCDPredHymnus1[_global_jazyk], HTML_LINE_BREAK_SPACE_LOONG, html_text_option5_MCDPredHymnus2[_global_jazyk]);
+
+				Export(HTML_LINE_BREAK);
+				Export("<"HTML_SPAN_BOLD_TOOLTIP">%s</span>", nazov_modlitby(MODL_NAPOLUDNIE), nazov_modlitby(MODL_NAPOLUDNIE));
+
+				// pole (checkbox) WWW_MODL_OPTF_5_HYMNUS_MCD_NAPOL
+				Export(HTML_LINE_BREAK);
+				Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_5_HYMNUS_MCD_NAPOL, NIE);
+				Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_5_HYMNUS_MCD_NAPOL, ANO, STR_EMPTY, ((_global_optf[OPT_5_ALTERNATIVES] & BIT_OPT_5_HYMNUS_MCD_NAPOL) == BIT_OPT_5_HYMNUS_MCD_NAPOL)? html_option_checked: STR_EMPTY);
+				Export("<"HTML_SPAN_TOOLTIP">%s%s%s</span>", STR_EMPTY, html_text_option5_MCDNaHymnus1[_global_jazyk], HTML_LINE_BREAK_SPACE_LOONG, html_text_option5_MCDNaHymnus2[_global_jazyk]);
+
+				Export(HTML_LINE_BREAK);
+				Export("<"HTML_SPAN_BOLD_TOOLTIP">%s</span>", nazov_modlitby(MODL_POPOLUDNI), nazov_modlitby(MODL_POPOLUDNI));
+
+				// pole (checkbox) WWW_MODL_OPTF_5_HYMNUS_MCD_POPOL
+				Export(HTML_LINE_BREAK);
+				Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_5_HYMNUS_MCD_POPOL, NIE);
+				Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_5_HYMNUS_MCD_POPOL, ANO, STR_EMPTY, ((_global_optf[OPT_5_ALTERNATIVES] & BIT_OPT_5_HYMNUS_MCD_POPOL) == BIT_OPT_5_HYMNUS_MCD_POPOL)? html_option_checked: STR_EMPTY);
+				Export("<"HTML_SPAN_TOOLTIP">%s%s%s</span>", STR_EMPTY, html_text_option5_MCDPoHymnus1[_global_jazyk], HTML_LINE_BREAK_SPACE_LOONG, html_text_option5_MCDPoHymnus2[_global_jazyk]);
+
+				Export(HTML_LINE_BREAK);
+				Export("<"HTML_SPAN_BOLD_TOOLTIP">%s</span>", nazov_modlitby(MODL_KOMPLETORIUM), nazov_modlitby(MODL_KOMPLETORIUM));
+
+				// pole (checkbox) WWW_MODL_OPTF_5_HYMNUS_KOMPL
+				Export(HTML_LINE_BREAK);
+				Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_5_HYMNUS_KOMPL, NIE);
+				Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_5_HYMNUS_KOMPL, ANO, STR_EMPTY, ((_global_optf[OPT_5_ALTERNATIVES] & BIT_OPT_5_HYMNUS_KOMPL) == BIT_OPT_5_HYMNUS_KOMPL)? html_option_checked: STR_EMPTY);
+				Export("<"HTML_SPAN_TOOLTIP">%s%s%s</span>", STR_EMPTY, html_text_option5_KomplHymnusA[_global_jazyk], HTML_LINE_BREAK_SPACE_LOONG, html_text_option5_KomplHymnusB[_global_jazyk]);
+
 			}
 		}
 

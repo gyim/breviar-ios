@@ -870,6 +870,7 @@ extern short int query_type; // premenna obsahujuca PRM_...
 #define HTML_NEW_PARAGRAPH "<p>"
 #define HTML_SLASH "/"
 #define HTML_NONBREAKING_SPACE_LOOONG "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+#define HTML_LINE_BREAK_SPACE_LOONG ((_global_jazyk != JAZYK_CZ)?(HTML_NONBREAKING_SPACE""HTML_SLASH""HTML_NONBREAKING_SPACE""HTML_LINE_BREAK""HTML_NONBREAKING_SPACE_LOOONG):(HTML_NONBREAKING_SPACE""HTML_SLASH""HTML_NONBREAKING_SPACE))
 
 #define HTML_SPAN_NORMAL    "span class=\"normal\""
 #define HTML_SPAN_ITALIC    "span class=\"it\""
@@ -889,6 +890,7 @@ extern short int query_type; // premenna obsahujuca PRM_...
 
 #define HTML_SPAN_TOOLTIP   "span title=\"%s\"" // obsahuje %s
 #define HTML_SPAN_BOLD_TOOLTIP   "span class=\"bold\" title=\"%s\"" // obsahuje %s
+#define HTML_SPAN_NORMAL_TOOLTIP   "span class=\"normal\" title=\"%s\"" // obsahuje %s
 
 #define HTML_SUP_RED        "sup class=\"red\""
 

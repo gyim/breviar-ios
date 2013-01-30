@@ -2179,103 +2179,103 @@ const char *html_text_option2_alternatives_explain[POCET_JAZYKOV + 1] =
 };
 
 const char *html_text_option5_KomplHymnusA[POCET_JAZYKOV + 1] = 
-{"hymnus A [Na sklonku dòa]",
- "hymnus A",
+{"hymnus A: Na sklonku dòa a úprimne",
+ "hymnus A: Na sklonku dne tì upøímnì",
  "hymnus A", 
  "",
  "",
- "hymnus A",
- "hymnus A", 
+ "hymnus A: Na sklonku dne tì upøímnì",
+ "himnusz A: Immár a nap leáldozott", 
 };
 
 const char *html_text_option5_KomplHymnusB[POCET_JAZYKOV + 1] = 
-{"hymnus B [Kriste, ty svetlo]",
- "hymnus B",
+{"hymnus B: Kriste, ty svetlo a náš deò",
+ "hymnus B: Ty, Kriste, svìtlo, jasnı dni",
  "hymnus B", 
  "",
  "",
- "hymnus B",
- "hymnus B", 
+ "hymnus B: Ty, Kriste, svìtlo, jasnı dni",
+ "himnusz B: Krisztus, tündöklõ nappalunk", 
 };
 
 const char *html_text_option5_PCHymnusI[POCET_JAZYKOV + 1] = 
-{"hymnus I. [ak je posvätné èítanie v noci alebo vèasráno]",
- "hymnus I.",
+{"hymnus I. [Ak je posvätné èítanie v noci alebo vèasráno]",
+ "hymnus I. [V noci a èasnì ráno]",
  "hymnus I.",
  "",
  "",
- "hymnus I.",
- "hymnus I.",
+ "hymnus I. [V noci a èasnì ráno]",
+ "himnusz I. [Amikor az imaórát éjszaka vagy kora hajnalban mondják]",
 };
 
 const char *html_text_option5_PCHymnusII[POCET_JAZYKOV + 1] = 
-{"hymnus II. [ak je posvätné èítanie cez deò]",
- "hymnus II.",
+{"hymnus II. [Ak je posvätné èítanie cez deò]",
+ "hymnus II. [Bìhem dne]",
  "hymnus II.",
  "",
  "",
- "hymnus II.",
- "hymnus II.",
+ "hymnus II. [Bìhem dne]",
+ "himnusz II. [Amikor az imaórát a nap nem reggeli órájában végzik]",
 };
 
 const char *html_text_option5_MCDPredHymnus1[POCET_JAZYKOV + 1] = 
 {"hymnus Príï, Duchu Svätı",
- "hymnus 1",
+ "hymnus K nám, Duchu Svatı, nyní spìj",
  "hymnus 1",
  "",
  "",
- "hymnus 1",
- "hymnus 1",
+ "hymnus K nám, Duchu Svatı, nyní spìj",
+ "himnusz Most jöjj, Szentlélek, szállj közénk",
 };
 
 const char *html_text_option5_MCDPredHymnus2[POCET_JAZYKOV + 1] = 
 {"hymnus Deviata je u hodina",
- "hymnus 2",
+ "hymnus Je tøetí denní hodina",
  "hymnus 2",
  "",
  "",
- "hymnus 2",
- "hymnus 2",
+ "hymnus Je tøetí denní hodina",
+ "himnusz Idõk rendjét megtartva most",
 };
 
 const char *html_text_option5_MCDNaHymnus1[POCET_JAZYKOV + 1] = 
 {"hymnus Mocnı Vládca, vernı Boe",
- "hymnus 1",
+ "hymnus Jsi mocnı Vládce, vìrnı Bùh",
  "hymnus 1",
  "",
  "",
- "hymnus 1",
- "hymnus 1",
+ "hymnus Jsi mocnı Vládce, vìrnı Bùh",
+ "himnusz Urunk, felséges Istenünk",
 };
 
 const char *html_text_option5_MCDNaHymnus2[POCET_JAZYKOV + 1] = 
 {"hymnus Na nebi slnko vrcholí",
- "hymnus 2",
+ "hymnus Teï Pánu chvály zpívejme",
  "hymnus 2",
  "",
  "",
- "hymnus 2",
- "hymnus 2",
+ "hymnus Teï Pánu chvály zpívejme",
+ "himnusz Dicsérjük dallal az Urat",
 };
 
 const char *html_text_option5_MCDPoHymnus1[POCET_JAZYKOV + 1] = 
 {"hymnus Celı svet v pohyb uvádzaš",
- "hymnus 1",
+ "hymnus Svìt celı v pohyb uvádíš",
  "hymnus 1",
  "",
  "",
- "hymnus 1",
- "hymnus 1",
+ "hymnus Svìt celı v pohyb uvádíš",
+ "himnusz Világfenntartó Istenünk",
 };
 
 const char *html_text_option5_MCDPoHymnus2[POCET_JAZYKOV + 1] = 
 {"hymnus Z Boej milosti tretí raz",
- "hymnus 2",
+ "hymnus Hodina tøetí z poledne",
  "hymnus 2",
  "",
  "",
- "hymnus 2",
- "hymnus 2",
+ "hymnus Hodina tøetí z poledne",
+ "himnusz Háromszor három óra már",
 };
 
 
