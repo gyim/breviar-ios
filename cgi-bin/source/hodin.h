@@ -2166,7 +2166,7 @@ const char *html_text_option2_alternatives[POCET_JAZYKOV + 1] =
  "",
  "",
  "alternativy",
- "hu_alternatívy", 
+ "alternatívák", 
 };
 const char *html_text_option2_alternatives_explain[POCET_JAZYKOV + 1] = 
 {"Zobrazí v texte modlitieb iba jednu monos, napr. hymnus pre kompletórium (dá sa prepína).",
