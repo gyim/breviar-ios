@@ -1280,7 +1280,10 @@ void set_hymnus(short int den, short int tyzzal, short int modlitba){
 			){ // 2008-12-20: predpísanı v 1., 3. a 5. tıdni "Na sklonku dòa", pre 2. a 4. tıdeò hymnus "Kriste, ty svetlo"
 				ktory = (tyzzal + 1) % 2;
 			}
-			else if(_global_jazyk != JAZYK_CZ_OP){
+			// 2013-01-30: pôvodne chceli èeskí dominikáni, aby sa hymnus striedal po tıdòoch:
+			// ktory = (tyzzal) % 2;
+			// preto to bola ešte jedna podmienka; keïe je monos to vybera, 
+			else{
 				Log("set_hymnus(): kompletórium...\n");
 				// 2013-01-29: pôvodne tu bol náhodnı vıber (pod¾a (den + tyzzal) % 2); upravené, ak si èlovek sám volí alternatívy
 				if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ALTERNATIVES) == BIT_OPT_2_ALTERNATIVES){
@@ -1292,10 +1295,6 @@ void set_hymnus(short int den, short int tyzzal, short int modlitba){
 					// náhodnı vıber | ktory = (den + tyzzal) % 2;
 					ktory = 2; // obidva!
 				}
-			}
-			else{
-				// (_global_jazyk == JAZYK_CZ_OP)
-				ktory = (tyzzal) % 2;
 			}
 			sprintf(_anchor, "%c_%s_%d", pismenko_modlitby(modlitba), ANCHOR_HYMNUS, ktory);
 		}
