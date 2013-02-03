@@ -10662,16 +10662,7 @@ void rozbor_dna_s_modlitbou(short int den, short int mesiac, short int rok, shor
 		Log("spustam analyzu roka (rok %d)...\n", _local_rok);
 		analyzuj_rok(_local_rok); // vısledok dá do _global_r
 		LOG_ciara;
-/*
-		// 2009-04-02: kvôli špecialite: 8.11.2008 na vešpery a kompletórium treba bra pre sviatok 9.11.
-		// 2012-11-20: nejakı ve¾kı hack...
-		short int denvt_dalsi_den = den_v_tyzdni(datum.den, datum.mesiac, _local_rok);
-		if((datum.den == 9) && (datum.mesiac == MES_NOV + 1) && (denvt_dalsi_den == DEN_NEDELA)){
-			Log("úprava kvôli rozliènım sláveniam [9. november, ktorı padne na nede¾u]: svaty_dalsi_den = 1...\n");
-			svaty_dalsi_den = 1;
-		}
-		// 2013-02-03: vyriešené systémovo, zmenou v _rozbor_dna(); podmienka aj pre (_global_svaty1.smer == 5)
-*/
+
 		Log("spustam analyzu nasledujuceho dna (%d. %s %d), poradie_svaty == %d...\n", datum.den, nazov_mesiaca(datum.mesiac - 1), _local_rok, svaty_dalsi_den);
 		ret = _rozbor_dna_s_modlitbou(datum, _local_rok, modlitba, svaty_dalsi_den);
 		if(ret == FAILURE){
