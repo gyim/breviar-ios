@@ -12325,9 +12325,8 @@ void _main_zaltar(char *den, char *tyzden, char *modlitba){
 		}
 	}
 	if(p == MODL_NEURCENA){
-		/* 2005-08-15: KvÙli simul·cii porovn·vame aj s konötantami STR_MODL_... 
-		 * 2006-10-11: pridanÈ invitatÛrium a kompletÛrium
-		 */
+		// 2005-08-15: KvÙli simul·cii porovn·vame aj s konötantami STR_MODL_... 
+		// 2006-10-11: pridanÈ invitatÛrium a kompletÛrium
 		if(equals(modlitba, STR_MODL_RANNE_CHVALY))
 			p = MODL_RANNE_CHVALY;
 		else if(equals(modlitba, STR_MODL_POSV_CITANIE))
@@ -12341,9 +12340,9 @@ void _main_zaltar(char *den, char *tyzden, char *modlitba){
 		else if(equals(modlitba, STR_MODL_POPOLUDNI))
 			p = MODL_POPOLUDNI;
 		else if(equals(modlitba, STR_MODL_INVITATORIUM))
-			p = MODL_KOMPLETORIUM;
+			p = MODL_INVITATORIUM;
 		else if(equals(modlitba, STR_MODL_KOMPLETORIUM))
-			p = MODL_POPOLUDNI;
+			p = MODL_KOMPLETORIUM;
 	}
 	if(p == MODL_NEURCENA){
 		Export("NevhodnÈ ˙daje: nie je urËen· modlitba.\n");
@@ -12385,6 +12384,7 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 	d = atodenvt(den);
 	t = atoi(tyzden);
 	tz = ((t + 3) MOD 4) + 1;
+	Log("lr == %c, lo == %d, d == %d, t == %d, tz == %d...\n", lr, lo, d, t, tz);
 
 	// do bud˙cnosti treba rieöiù niektorÈ öpeciality, napr. adv. obd. II alebo vian. obd. II (dni urËenÈ d·tumom); triduum a pod.
 
@@ -12443,6 +12443,8 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 		Export("</ul>\n");
 		return FAILURE;
 	}
+
+	Log("nastavenie p (modlitba == %s)...\n", modlitba);
 	p = MODL_NEURCENA;
 	for(i = MODL_INVITATORIUM; i <= MODL_DRUHE_KOMPLETORIUM; i++){
 		if(equals(modlitba, nazov_modlitby(i))){
@@ -12450,6 +12452,7 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 			continue; // exit from loop
 		}
 	}
+	Log("1:p == %d (%s)...\n", p, nazov_modlitby(p));
 	if(p == MODL_NEURCENA){
 		/* 2005-08-15: KvÙli simul·cii porovn·vame aj s konötantami STR_MODL_... 
 		 * 2006-10-11: pridanÈ invitatÛrium a kompletÛrium
@@ -12467,29 +12470,50 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 		else if(equals(modlitba, STR_MODL_POPOLUDNI))
 			p = MODL_POPOLUDNI;
 		else if(equals(modlitba, STR_MODL_INVITATORIUM))
-			p = MODL_KOMPLETORIUM;
+			p = MODL_INVITATORIUM;
 		else if(equals(modlitba, STR_MODL_KOMPLETORIUM))
-			p = MODL_POPOLUDNI;
+			p = MODL_KOMPLETORIUM;
 		else if(equals(modlitba, STR_MODL_VSETKY))
 			p = MODL_VSETKY;
 	}
+	Log("2:p == %d (%s)...\n", p, nazov_modlitby(p));
 	if(p == MODL_NEURCENA){
 		Export("NevhodnÈ ˙daje: nie je urËen· modlitba.\n");
 		return FAILURE;
 	}
+
+	Log("nastavenie do _global_modlitba I. ...\n");
 	_global_modlitba = p;
 	// vstupom pre showPrayer() je iba zakladny typ modlitby; zvysna informacia (ci ide o prve/druhe vespery/kompl.) sa uchova v premennej _global_modlitba
-	if((p == MODL_PRVE_VESPERY) || (p == MODL_DRUHE_VESPERY))
+	if((p == MODL_PRVE_VESPERY) || (p == MODL_DRUHE_VESPERY)){
 		p = MODL_VESPERY;
-	if((p == MODL_PRVE_KOMPLETORIUM) || (p == MODL_DRUHE_KOMPLETORIUM))
+	}
+	if((p == MODL_PRVE_KOMPLETORIUM) || (p == MODL_DRUHE_KOMPLETORIUM)){
 		p = MODL_KOMPLETORIUM;
-	// ked nejde o nedelu, nema zmysel rozlisovat prve/druhe vespery/kompl.
+	}
+
+	// ak je to sobota a poûaduj˙ sa veöpery alebo kompletÛrium, zmeÚ nastavenia na nedeæu, prvÈ veöpery resp. prvÈ kompletÛrium (2013-02-03)
+	if((d == DEN_SOBOTA) && ((p == MODL_VESPERY) || (p == MODL_KOMPLETORIUM))){
+		Log("ak je to sobota a poûaduj˙ sa veöpery alebo kompletÛrium, zmeÚ nastavenia na nedeæu, prvÈ veöpery resp. prvÈ kompletÛrium...\n");
+		d = DEN_NEDELA;
+		p = (p == MODL_VESPERY)? MODL_PRVE_VESPERY: MODL_PRVE_KOMPLETORIUM;
+		Log("nastavenie do _global_modlitba II. ...\n");
+		_global_modlitba = p;
+	}
+
+	// ked nejde o nedelu, nema zmysel rozlisovat prve/druhe vespery/kompl. | ToDo: sl·vnosti, sviatky P·na
 	if(d != DEN_NEDELA){
-		if(p == MODL_VESPERY)
+		if(p == MODL_VESPERY){
+			Log("nastavenie do _global_modlitba III. ...\n");
 			_global_modlitba = MODL_VESPERY;
-		if(p == MODL_KOMPLETORIUM)
+		}
+		if(p == MODL_KOMPLETORIUM){
+			Log("nastavenie do _global_modlitba IV. ...\n");
 			_global_modlitba = MODL_KOMPLETORIUM;
+		}
 	}// nie je to nedela
+
+	Log("p == %d (%s); _global_modlitba == %d (%s)...\n", p, nazov_modlitby(p), _global_modlitba, nazov_modlitby(_global_modlitba));
 
 	// 2011-01-26: nastavenie niektor˝ch atrib˙tov pre _global_den
 	_global_den.denvt = d;
@@ -12499,6 +12523,7 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 	_global_den.litrok = lr; // default: litrok  = (char)('A' + nedelny_cyklus(den, mesiac, rok));
 	mystrcpy(_global_den.meno, STR_EMPTY, MENO_SVIATKU);
 	// öpeci·lne nastavenie hodnoty smer
+	Log("öpeci·lne nastavenie hodnoty smer... switch(%d | %s):\n", lo, nazov_obdobia_ext(lo));
 	switch(lo){
 		case OBD_VELKONOCNE_TROJDNIE:
 			_global_den.smer = 1; // trojdnie
@@ -12581,7 +12606,7 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 			break;
 	}// switch(lo)
 
-	// treba nejako hack-ovaù a nastaviù aj tieto: _global_den.den pre adv2 a vian1 (25, 26 atd.) | devr pre öpeciality cezroËnÈho
+	// treba nejako hack-ovaù a nastaviù aj tieto: _global_den.den pre adv2 a vian1 (25, 26 atd.) | denvr pre öpeciality cezroËnÈho
 	liturgicke_obdobie(lo, t, d, tz, poradie_svateho);
 
 	// 2011-01-26: skopÌrovanÈ podæa funkcie _rozbor_dna_s_modlitbou(); uklad· heading do stringu _global_string
@@ -13816,14 +13841,10 @@ void write(void){
 }
 
 //---------------------------------------------------------------------
-/* popis: zisti, ktory z parametrov je pouzity; ostatne sa zisti z WWW_...
- * vracia: on error, returns PRM_NONE or PRM_UNKNOWN
- *         on success, returns PRM_DATUM, PRM_SVIATOK or PRM_CEZ_ROK
- *                     (09/02/2000A.D.: pridane PRM_DETAILY)
- *                     2011-01-25: pridane PRM_LIT_OBD
- *
- *         return values #define'd in mydefs.h
- */
+// popis: zisti, ktory z parametrov je pouzity; ostatne sa zisti z WWW_...
+// vracia: on error, returns PRM_NONE or PRM_UNKNOWN
+//         on success, returns PRM_DATUM, PRM_SVIATOK or PRM_CEZ_ROK | (09/02/2000A.D.: pridane PRM_DETAILY) | 2011-01-25: pridane PRM_LIT_OBD
+// return values #define'd in mydefs.h
 short int getQueryTypeFrom_QS(char *qs){
 	Log("getQueryTypeFrom_QS() -- begin\n");
 	Log("  qs == %s\n", qs);

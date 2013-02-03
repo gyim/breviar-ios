@@ -3996,8 +3996,7 @@ void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short
 	short int modlitba, t, tyzden_pom, litobd_pom;
 	char _anchor_vlastne_slavenie[SMALL];
 
-	Log("-- liturgicke_obdobie(%d, %d, %d, %d: svaty: %d) -- zaciatok\n",
-		litobd, tyzden, den, tyzzal, poradie_svateho);
+	Log("-- liturgicke_obdobie(%d, %d, %d, %d: svaty: %d) -- zaèiatok\n", litobd, tyzden, den, tyzzal, poradie_svateho);
 
 	/* if((_global_den.smer > 5) || (_global_den.smer == 2)) */
 		/* najprv spustime zaltar(); */
