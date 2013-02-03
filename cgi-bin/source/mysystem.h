@@ -51,7 +51,7 @@
 #define MODEL_DEBUG_linux
 #else
 // Modely pre ostré použitie -- for release
-//#define MODEL_linux
+#define MODEL_linux
 #endif // _DEBUG
 
 #endif // linux
@@ -80,7 +80,7 @@
 #define MODEL_DEBUG_linux_commandline
 #else
 // Modely pre ostré použitie -- for release
-//#define MODEL_linux_commandline
+#define MODEL_linux_commandline
 #endif // _DEBUG
 
 #endif // linux
