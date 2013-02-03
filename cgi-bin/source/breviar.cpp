@@ -12401,48 +12401,6 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 		Export("</ul>\n");
 		return FAILURE;
 	}
-	if(t > lit_obd_pocet_tyzdnov[lo]){
-		ALERT;
-		Export("Nevhodné údaje:"HTML_LINE_BREAK"\n<ul>");
-		// tyzden
-		if(equals(tyzden, STR_EMPTY)){
-			Export("<li>takı tıdeò nemono iada</li>\n");
-		}
-		else if(t > lit_obd_pocet_tyzdnov[lo]){
-			Export("<li>tıdeò = <"HTML_SPAN_BOLD">%s</span>; takı tıdeò nemono iada pre dané liturgické obdobie: %s</li>\n", tyzden, nazov_obdobia_ext(lo));
-		}
-		else {
-			Export("<li>chyba: tıdeò %s nemono iada</li>\n", tyzden);
-		}
-		Export("</ul>\n");
-		return FAILURE;
-	}
-	// pôstne obdobie nezaèína nede¾ou, ale popolcovou stredou; technicky ide o 0. tıdeò pôstneho obdobia
-	if((d < DEN_NEDELA) || (d > DEN_SOBOTA) || ((t < 0) || ((t == 0) && ((lo != OBD_POSTNE_I) && (d < DEN_STREDA)))) || (t > POCET_NEDIEL_CEZ_ROK)){
-		ALERT;
-		Export("Nevhodné údaje:"HTML_LINE_BREAK"\n<ul>");
-		// deò
-		if(equals(den, STR_EMPTY)){
-			Export("<li>chıba údaj o dni</li>\n");
-		}
-		else if(d == DEN_UNKNOWN){
-			Export("<li>deò = <"HTML_SPAN_BOLD">%s</span> (neznámy)</li>\n", den);
-		}
-		else{
-			Export("<li>deò = <"HTML_SPAN_BOLD">%s</span></li>\n", den);
-		}
-		// tyzden
-		if(equals(tyzden, STR_EMPTY))
-			Export("<li>chıba údaj o tıdni</li>\n");
-		else if((t < 0) || ((t == 0) && ((lo != OBD_POSTNE_I) && (d < DEN_STREDA)))){
-			Export("<li>tıdeò = <"HTML_SPAN_BOLD">%s</span></li>\n", tyzden);
-		}
-		else{
-			Export("<li>tıdeò = <"HTML_SPAN_BOLD">%s</span></li>\n", tyzden);
-		}
-		Export("</ul>\n");
-		return FAILURE;
-	}
 
 	Log("nastavenie p (modlitba == %s)...\n", modlitba);
 	p = MODL_NEURCENA;
@@ -12454,9 +12412,8 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 	}
 	Log("1:p == %d (%s)...\n", p, nazov_modlitby(p));
 	if(p == MODL_NEURCENA){
-		/* 2005-08-15: Kvôli simulácii porovnávame aj s konštantami STR_MODL_... 
-		 * 2006-10-11: pridané invitatórium a kompletórium
-		 */
+		// 2005-08-15: Kvôli simulácii porovnávame aj s konštantami STR_MODL_... 
+		// 2006-10-11: pridané invitatórium a kompletórium | 2013-02-03: opravená fatálna copy-paste chyba
 		if(equals(modlitba, STR_MODL_RANNE_CHVALY))
 			p = MODL_RANNE_CHVALY;
 		else if(equals(modlitba, STR_MODL_POSV_CITANIE))
@@ -12499,6 +12456,8 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 		p = (p == MODL_VESPERY)? MODL_PRVE_VESPERY: MODL_PRVE_KOMPLETORIUM;
 		Log("nastavenie do _global_modlitba II. ...\n");
 		_global_modlitba = p;
+		t += 1;
+		tz = ((t + 3) MOD 4) + 1;
 	}
 
 	// ked nejde o nedelu, nema zmysel rozlisovat prve/druhe vespery/kompl. | ToDo: slávnosti, sviatky Pána
@@ -12514,6 +12473,52 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 	}// nie je to nedela
 
 	Log("p == %d (%s); _global_modlitba == %d (%s)...\n", p, nazov_modlitby(p), _global_modlitba, nazov_modlitby(_global_modlitba));
+
+	// kontrola, èi tıdeò daného liturgického obdobia neprekraèuje poèet tıdòov daného obdobia | 2013-02-03: presunutá sem
+	Log("kontrola, èi tıdeò daného liturgického obdobia neprekraèuje poèet tıdòov daného obdobia...\n");
+	if(t > lit_obd_pocet_tyzdnov[lo]){
+		ALERT;
+		Export("Nevhodné údaje:"HTML_LINE_BREAK"\n<ul>");
+		// tyzden
+		if(equals(tyzden, STR_EMPTY)){
+			Export("<li>takı tıdeò nemono iada</li>\n");
+		}
+		else if(t > lit_obd_pocet_tyzdnov[lo]){
+			Export("<li>tıdeò = <"HTML_SPAN_BOLD">%s</span>; takı tıdeò nemono iada pre dané liturgické obdobie: %s</li>\n", tyzden, nazov_obdobia_ext(lo));
+		}
+		else {
+			Export("<li>chyba: tıdeò %s nemono iada</li>\n", tyzden);
+		}
+		Export("</ul>\n");
+		return FAILURE;
+	}
+
+	// pôstne obdobie nezaèína nede¾ou, ale popolcovou stredou; technicky ide o 0. tıdeò pôstneho obdobia
+	if((d < DEN_NEDELA) || (d > DEN_SOBOTA) || ((t < 0) || ((t == 0) && ((lo != OBD_POSTNE_I) && (d < DEN_STREDA)))) || (t > POCET_NEDIEL_CEZ_ROK)){
+		ALERT;
+		Export("Nevhodné údaje:"HTML_LINE_BREAK"\n<ul>");
+		// deò
+		if(equals(den, STR_EMPTY)){
+			Export("<li>chıba údaj o dni</li>\n");
+		}
+		else if(d == DEN_UNKNOWN){
+			Export("<li>deò = <"HTML_SPAN_BOLD">%s</span> (neznámy)</li>\n", den);
+		}
+		else{
+			Export("<li>deò = <"HTML_SPAN_BOLD">%s</span></li>\n", den);
+		}
+		// tyzden
+		if(equals(tyzden, STR_EMPTY))
+			Export("<li>chıba údaj o tıdni</li>\n");
+		else if((t < 0) || ((t == 0) && ((lo != OBD_POSTNE_I) && (d < DEN_STREDA)))){
+			Export("<li>tıdeò = <"HTML_SPAN_BOLD">%s</span></li>\n", tyzden);
+		}
+		else{
+			Export("<li>tıdeò = <"HTML_SPAN_BOLD">%s</span></li>\n", tyzden);
+		}
+		Export("</ul>\n");
+		return FAILURE;
+	}
 
 	// 2011-01-26: nastavenie niektorıch atribútov pre _global_den
 	_global_den.denvt = d;
