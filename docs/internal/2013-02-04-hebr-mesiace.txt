@@ -1,0 +1,10 @@
+abib/Abib: OCR2SOc_CIT1 vs. POST1_cCIT1_3STV
+	mesiac "abib" sa na tomto mieste píše s malım zaèiatoènım písmenom (LH, zv. III, str. 66 bis). LH, zv. II, str. 218, má uvedené "Abib" s ve¾kım písmenom; 
+	zjednotil som, lebo všade sa pouívajú ve¾ké písmená; aj LA LH má jednotne (ve¾kım písmenom; vol. III, p. 83 bis; vol. II, 204)
+	avšak v slovenèine je úzus písa názvy mesiacov malım písmenom -- do budúcnosti navrhujem všade poui malé zaèiatoèné písmená
+
+Nisan: OCR29POc_CIT1
+
+Kasleu: OCR31POc_CIT1, OCR31STVc_CIT1 bis
+
+Adar: OCR29POc_CIT1 bis
