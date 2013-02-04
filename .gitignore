@@ -16,6 +16,7 @@ download/*.rar
 download/*.7z
 download/ebook/
 download/epub/
+download/kindle/
 download/20*/*
 stats/*
 .gitignore~
