@@ -1,3 +1,10 @@
+2013-02-05: CZ a HU plain
+	-- plain (bez buttonov), obsahovo: handy
+		breviar.exe -qpbm -d1 -m1 -r2013 -f31 -g12 -p2013 -brobHU.bat -jhu -nbreviar.exe -i..\..\breviar.sk\include_hu\ -usimple -M3 -00 -15191 -2224
+		-- 2013-hu-plain
+		breviar.exe -qpbm -d1 -m1 -r2013 -f31 -g12 -p2013 -brobCZ.bat -jcz -nbreviar.exe -i..\..\breviar.sk\include_cz\ -usimple -M3 -00 -15191 -2224
+		-- 2013-cz-plain
+
 2013-01-29: SK príklad pre liturgické obdobie
 	breviar.exe -s"qt=plo&dvt=0&t=4&p=mrch&lo=5&lr=A" -00 -15191 -2224 -i..\..\breviar.sk\include\
 
