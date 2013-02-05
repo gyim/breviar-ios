@@ -1749,6 +1749,9 @@ void set_popis(short int modlitba, char *file, char *anchor){
 
 void set_popis_dummy(void){
 	Log("  teraz nastavujem POPIS (dummy)...\n");
+	// 2013-02-05: lokálne premenné, aby neprepísali už prípadne nastavené globálne premenné -- použitie funkcie napr. v sviatky_svatych()
+	char _file[SMALL];
+	char _anchor[SMALL];
 	mystrcpy(_file, STR_UNDEF, MAX_STR_AF_FILE);
 	mystrcpy(_anchor, STR_UNDEF, MAX_STR_AF_ANCHOR);
 	set_popis(MODL_RANNE_CHVALY, _file, _anchor); 
