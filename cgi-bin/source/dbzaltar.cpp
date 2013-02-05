@@ -17064,14 +17064,22 @@ label_25_MAR:
 							// definovanie parametrov pre modlitbu
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
+
+							// nemá popis; 2013-02-05: doplnené
+							if(_global_jazyk != JAZYK_HU){
+								set_popis_dummy();
+							}
+
 							modlitba = MODL_RANNE_CHVALY;
 							// _vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
+
 							modlitba = MODL_POSV_CITANIE;
-							if(_global_jazyk == JAZYK_SK){
+							if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU)){
 								_vlastna_cast_2citanie;
 							}
 							_vlastna_cast_modlitba;
+
 							modlitba = MODL_VESPERY;
 							// _vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
@@ -17917,7 +17925,7 @@ label_25_MAR:
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_modlitba;
-							if(_global_jazyk == JAZYK_SK){
+							if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU)){
 								_vlastna_cast_2citanie; // 2011-02-09: doplnený pracovný preklad
 							}
 
