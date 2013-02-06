@@ -12,6 +12,7 @@ rm -f $ROOT/assets/docs/*
 
 # CZ
 rm -f $ROOT/assets/cz/ordinar/*
+rm -f $ROOT/assets/cz/docs/*
 
 # HU
 rm -f $ROOT/assets/hu/docs/*
