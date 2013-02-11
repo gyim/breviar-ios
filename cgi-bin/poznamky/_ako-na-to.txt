@@ -1,3 +1,6 @@
+2013-02-11: CZ ukážka generovania celého mesiaca
+	breviar.exe -qpbm -d1 -m2 -r2013 -f28 -g2 -p2013 -a1 -brobCZ.bat -jcz -nbreviar.exe -i..\..\breviar.sk\include_cz\ -00 -15191 -2224
+
 2013-02-05: CZ a HU plain
 	-- plain (bez buttonov), obsahovo: handy
 		breviar.exe -qpbm -d1 -m1 -r2013 -f31 -g12 -p2013 -brobHU.bat -jhu -nbreviar.exe -i..\..\breviar.sk\include_hu\ -usimple -M3 -00 -15191 -2224
