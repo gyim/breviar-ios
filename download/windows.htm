@@ -8,31 +8,51 @@
 </head>
 
 <body>
-<!-- 2012-01-04-breviar.sk | rubyinstaller-1.9.2-p0.exe -->
+<!-- 2012-01-04-breviar.sk | rubyinstaller-1.9.3-p362.exe -->
 <center>
 <h2>Download | Windows</h2>
-^ <a href="index.htm">Download</a> | <a href="cmdline.htm">command-line (Windows/DOS)</a> &gt;&gt; | <a href="src.htm">zdrojové kódy</a> &gt;&gt;
+^ <a href="main.htm">Download</a> | <a href="cmdline.htm">command-line (Windows/DOS)</a> &gt;&gt; | <a href="src.htm">zdrojové kódy</a> &gt;&gt;
 </center>
-<p>V tejto èasti si môete stiahnu aplikáciu pod OS Windows 95/98/NT/2000/XP/Vista, 
-	ktorá generuje stránky v podobe HTML priamo zobrazite¾nıch vo vašom prehliadaèi (Internet Explorer, Netscape, Mozilla, Firefox a pod.), ako na tıchto stránkach, 
-	a to bez potreby pripojenia k internetu.
+<p>V tejto èasti si môete stiahnu aplikáciu pod OS Windows (95/98/NT/2000/XP/Vista/7/8), 
+	ktorá generuje stránky v podobe HTML priamo zobrazite¾nıch vo vašom prehliadaèi (Internet Explorer, Google Chrome, Mozilla Firefox a pod.), ako na tıchto stránkach, 
+	a to <b>bez potreby pripojenia k internetu</b>.
 <p>Pracuje na inom princípe ako klasické okienkové aplikácie. Princíp spoèíva v tom, e na Vašom lokálnom poèítaèi beí lokálny webserver. Ten kliknutia na stránky
 	(na tlaèidlá alebo odkazy) „prekladá“ aplikácii, ktorá následne vytvorí vıstup, pošle ho spä prehliadaèu, ktorı vıstup zobrazí presne tak isto ako na internete.
 <p>Súbory na stiahnutie: 
 <ul>
-	<li>„balíèek programu a textov“ (<a href="2012-01-04-breviar.sk.zip">zip</a>, <a href="2012-01-04-breviar.sk.7z">7zip</a>)</li>
-	<li><a href="rubyinstaller-1.9.2-p0.exe">webserver</a> (Ruby Windows Installer z 
+	<li>„balíèek programu a textov“ (<a href="2012-01-04-breviar.sk.zip">zip</a> alebo <a href="2012-01-04-breviar.sk.7z">7zip</a>)</li>
+	<li><a href="rubyinstaller-1.9.3-p362.exe">webserver</a> (Ruby Windows Installer z 
 		<a target="_blank" href="http://www.ruby-lang.org/en/downloads/">http://www.ruby-lang.org/en/downloads/</a>,
 		<a target="_blank" href="http://rubyinstaller.org/downloads/">http://rubyinstaller.org/downloads/</a>;
 		viac o Ruby: 
 		<a target="_blank" href="http://rubyforge.org/">http://rubyforge.org/</a>)</li>
 </ul>
 </p>
-<h4 class="blue">Postup inštalácie</h4>
+
+<h4 class="blue">Zjednodušenı postup inštalácie a spúšania na PC</h4>
+
+<p class="bold">Inštalácia</p>
 <ol class="level1">
-<li>Stiahnite si oba súbory („balíèek programu a textov“ [<a href="2012-01-04-breviar.sk.zip">zip</a> alebo <a href="2012-01-04-breviar.sk.7z">7zip</a>] a <a href="rubyinstaller-1.9.2-p0.exe">webserver</a>) na disk („Save as“, „Uloi ako...“). 
+<li>Najprv pusti súbor <span class="tt">rubyinstaller-1.9.3-p362.exe</span>. (-> Next -> Accept -> Vybra adresár, napr. C:\Program Files\Ruby193, ïalej nezaškrtáva iadne ponuky -> Finish)</li>
+<li>Spakovanı súbor (<span class="tt">2012-01-04-breviar.sk.zip</span> resp. <span class="tt">2012-01-04-breviar.sk.7z</span>) treba rozbali napr. do <tt>C:\breviar</tt></li>
+<li>Z adresára <tt>C:\breviar\breviar.sk</tt> urobi na plochu zástupcu (shortcut) súboru <tt>spusti.server.bat</tt>, kde ho premenujeme napr. na "BREVIAR" (u bez prípony .bat, tie môeme tomuto odkazu zmeni ikonu - napr. nieèo z ponuky Windows, alebo priamo ikonu <tt>C:\breviar\breviar.sk\breviar.ico</tt>).</li>
+<li>Spusti prehliadaè, napr. Mozilla Firefox èi Google Chrome a v Nástroje/Monosti nastavi domovskú stránku na <tt>http://localhost:2000/default.htm</tt>, aby sa naèítavali priamo modiltby na príslušnı deò.
+	<br/>Alebo staèí, keï si stránku <tt>http://localhost:2000/default.htm</tt> zapamätáte do ob¾úbenıch (Favorites).</li>
+</ol>
+
+<p class="bold">Spúšanie</p>
+<ol class="level1">
+<li>Vdy najprv spusti odkaz/ikonu z plochy "BREVIAR" (nabehnú jeho 4 riadky, detaily v podrobnejšom popise nišie), necha spustenı a poèas modlenia nevypína. (Staèí minimalizova, aby vás neotravovalo toto okno.)</li>
+<li>Spusti prehliadaè, napr. Mozilla Firefox èi Google Chrome, a stránka nabehne na príslušnı deò.
+	<br/>Alebo ak nemáte stránku nastavenú ako predvolenú (Home/default), ale máte ju zapamätanú, staèí si ju nájs v ob¾úbenıch (Favorites).</li>
+</ol>
+
+<h4 class="blue">Podrobnı popis postupu inštalácie a pouívania</h4>
+<p class="bold">Inštalácia</p>
+<ol class="level1">
+<li>Stiahnite si oba súbory („balíèek programu a textov“ [<a href="2012-01-04-breviar.sk.zip">zip</a> alebo <a href="2012-01-04-breviar.sk.7z">7zip</a>] a <a href="rubyinstaller-1.9.3-p362.exe">webserver</a>) na disk („Save as“, „Uloi ako...“). 
 	Najskôr budeme inštalova webserver, následne samotnı program.</li>
-<li><span class="it">Inštalácia webservera</span>: Spustite súbor <span class="tt">rubyinstaller-1.9.2-p0.exe</span>. Riaïte sa inštalaènımi inštrukciami (sú v anglickom jazyku; v podstate staèí odklikáva tlaèidlo <span class="blue">Next</span> príp. <span class="blue">I Agree</span>
+<li><span class="it">Inštalácia webservera</span>: Spustite súbor <span class="tt">rubyinstaller-1.9.3-p362.exe</span>. Riaïte sa inštalaènımi inštrukciami (sú v anglickom jazyku; v podstate staèí odklikáva tlaèidlo <span class="blue">Next</span> príp. <span class="blue">I Agree</span>
 	a <span class="blue">Finish</span>). Do jedného adresára (napr. <span class="tt">c:\Ruby192</span>) je nainštalovanı interpréter programovacieho jazyka Ruby. Ten následne spúša lokálny
 	webserver.</li>
 <li><span class="it">Inštalácia aplikácie</span>: Rozba¾te (napr. pomocou programov <a href="#7zip">7Zip</a>, WinZip, WinArj, PowerArchiver, 7zip) „balíèek programu a textov“ (<span class="tt">2012-01-04-breviar.sk.zip</span> resp. <span class="tt">2012-01-04-breviar.sk.7z</span>) do nejakého adresára na vašom disku
@@ -40,7 +60,7 @@
 <br/><b>Upozornenie:</b> Názov adresára NESMIE obsahova diakritiku!</li>
 <li>Tım je inštalácia ukonèená.</li>
 </ol>
-<h4 class="blue">Pouívanie aplikácie</h4>
+<p class="bold">Pouívanie aplikácie</p>
 <ol>
 	<li>Pred kadım pouitím aplikácie je potrebné spusti webserver, a to spustením skriptu <span class="tt">spusti.server.bat</span> (nachádza sa v&nbsp;kmeòovom adresári
 		aplikácie, teda v našom príklade <span class="tt">c:\breviar</span>). Prípadne postaèí dvojklikom otvori jeden zo súborov <span class="tt">server.rb</span> resp. <span class="tt">server.rbw</span> (nachádzajú sa tamtie).
@@ -59,14 +79,14 @@
 		jednotlivé akcie, ktoré lokálny webserver vykonáva (volania aplikácie).</li>
 </ol>
 <a name="config"></a>
-<h4 class="blue">Konfigurácia (nastavenie) webservera</h4>
+<p class="bold">Konfigurácia (nastavenie) webservera</p>
 <ol>
 	<li>Súbor: <span class="tt">server.rb</span> resp. <span class="tt">server.rbw</span>
 	<li>V podstate jedinım zaujímavım riadkom je ten, v ktorom nastavujete port pre váš webserver: <span class="blue">Port => 2000</span>. Ak chcete zmeni hodnotu, upravte súbor server.rb v akomko¾vcek
 		textovom editore a ulote. Váš lokálny webserver bude ma potom adresu <span class="tt">http://localhost:port/</span>, kde <span class="tt">port</span> je èíslo portu, uvedené v konfiguraènom súbore.
 	</li>
 </ol>
-<h4 class="blue">Konfigurácia (nastavenie) ciest</h4>
+<p class="bold">Konfigurácia (nastavenie) ciest</p>
 <ol>
 	<li>Súbor: <span class="tt">spusti.server.bat</span>
 	<li>Tento súbor obsahuje jedinı riadok: <span class="blue">"C:\Program Files\Ruby192\bin\ruby.exe" server.rb</span>. 
@@ -75,9 +95,11 @@
 </ol>
 
 <a name="7zip"></a>
-<p>Pouitı program na kompresiu: 7zip; môete si ho stiahnu napr. tu: <a href="http://www.7-zip.org/">http://www.7-zip.org/</a> (je vo¾ne stiahnute¾nı).
+<p>Pouitı program na kompresiu: 7zip; môete si ho stiahnu napr. tu: <a href="http://www.7-zip.org/">http://www.7-zip.org/</a> (je vo¾ne stiahnute¾nı).</p>
 
 <p>Ak máte akéko¾vek pripomienky, vylepšenia, nápady alebo postrehy, pošlite ich, prosím, <a href="mailto:videky@breviar.sk">mailom</a>.</p>
+
+<p>Ïakujem Michalovi Š. za pomoc pri zjednodušenom postupe inštalácie a pouívania.</p>
 
 <hr>
 <center>OAMDG
@@ -85,13 +107,13 @@
 <br/>Partial source text copyright © <!-- Slovenská liturgická komisia; Spolok svätého Vojtecha. --> Liturgická komisia Konferencie biskupov Slovenska (LK KBS). | HTML © 1999-2013 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
 <br/>Un-CGI 1.10 Copyright 1994 © Steven Grimm. | cgiutils 1.1 Copyright 1995-1996 © William E. Weinman.
 <br/>Partial source code copyright 1999 © Miroslav Murgaš. | Partial source code copyright 2007 © Marek Eliáš.
-<br/>Partial source code copyright, android version 2011-2013 © Richard Královiè.
+<br/>Partial source code copyright, android version 2011-2013 © <a href="mailto:ri.kralovic@gmail.com">Richard Královiè</a>.
 <br/>Ruby support 2005-2010 © Jozef Fülöp. | Ruby language © <a target="_blank" href="http://www.ruby-lang.org/en/">http://www.ruby-lang.org/en/</a>
 <br/>git support 2011 © Jozef Fülöp.
 <br/>Copyright 1999-2013 © Juraj Vidéky. All rights reserved.</center>
 <hr>
 <p class="patka">
-Posledná aktualizácia: 2012-08-21<br/>
+Posledná aktualizácia: 2013-02-06<br/>
 © 1999-2013 <a href="mailto:videky@breviar.sk">Juraj Vidéky</a>
 </p>
 </body>

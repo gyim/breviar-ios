@@ -551,6 +551,20 @@ void _set_popis(short int modlitba, const char *file, const char *anchor){
 	}// switch(modlitba)
 }
 
+void _set_mcd_doplnkova_psalmodia_alternativy(short int modlitba){
+	switch(modlitba){
+		case MODL_CEZ_DEN_9:
+			_global_modl_cez_den_9.alternativy += ((_global_modl_cez_den_9.alternativy & BIT_ALT_LEN_DOPLNKOVA_PSALMODIA) != BIT_ALT_LEN_DOPLNKOVA_PSALMODIA)? BIT_ALT_LEN_DOPLNKOVA_PSALMODIA : 0;
+			break;
+		case MODL_CEZ_DEN_12:
+			_global_modl_cez_den_12.alternativy += ((_global_modl_cez_den_12.alternativy & BIT_ALT_LEN_DOPLNKOVA_PSALMODIA) != BIT_ALT_LEN_DOPLNKOVA_PSALMODIA)? BIT_ALT_LEN_DOPLNKOVA_PSALMODIA : 0;
+			break;
+		case MODL_CEZ_DEN_3:
+			_global_modl_cez_den_3.alternativy += ((_global_modl_cez_den_3.alternativy & BIT_ALT_LEN_DOPLNKOVA_PSALMODIA) != BIT_ALT_LEN_DOPLNKOVA_PSALMODIA)? BIT_ALT_LEN_DOPLNKOVA_PSALMODIA : 0;
+			break;
+	}// switch(modlitba)
+}// _set_mcd_doplnkova_psalmodia_alternativy()
+
 void _set_hymnus_alternativy(short int modlitba){
 	switch(modlitba){
 		case MODL_PRVE_KOMPLETORIUM:
@@ -1749,6 +1763,9 @@ void set_popis(short int modlitba, char *file, char *anchor){
 
 void set_popis_dummy(void){
 	Log("  teraz nastavujem POPIS (dummy)...\n");
+	// 2013-02-05: lok·lne premennÈ, aby neprepÌsali uû prÌpadne nastavenÈ glob·lne premennÈ -- pouûitie funkcie napr. v sviatky_svatych()
+	char _file[SMALL];
+	char _anchor[SMALL];
 	mystrcpy(_file, STR_UNDEF, MAX_STR_AF_FILE);
 	mystrcpy(_anchor, STR_UNDEF, MAX_STR_AF_ANCHOR);
 	set_popis(MODL_RANNE_CHVALY, _file, _anchor); 
@@ -1851,20 +1868,39 @@ void set_kresponz_kompletorium_obd(short int den, short int tyzzal, short int mo
 
 // nasledovnÈ funkcie pouûÌvame pre öpeci·lne nastavenia (ktorÈ sa Ëasto pouûÌvaj˙), 2007-12-06
 
-void _set_zalmy_mcd_doplnkova_psalmodia(void){
-	Log("_set_zalmy_mcd_doplnkova_psalmodia() -- begin\n");
-	// modlitba predpoludnim, 1. seria doplnkovej psalmodie
-	set_zalm(1, MODL_PREDPOLUDNIM, "z120.htm", "ZALM120");
-	set_zalm(2, MODL_PREDPOLUDNIM, "z121.htm", "ZALM121");
-	set_zalm(3, MODL_PREDPOLUDNIM, "z122.htm", "ZALM122");
-	// modlitba napoludnie, 2. seria doplnkovej psalmodie
-	set_zalm(1, MODL_NAPOLUDNIE, "z123.htm", "ZALM123");
-	set_zalm(2, MODL_NAPOLUDNIE, "z124.htm", "ZALM124");
-	set_zalm(3, MODL_NAPOLUDNIE, "z125.htm", "ZALM125");
-	// modlitba popoludni, 3. seria doplnkovej psalmodie
-	set_zalm(1, MODL_POPOLUDNI, "z126.htm", "ZALM126");
-	set_zalm(2, MODL_POPOLUDNI, "z127.htm", "ZALM127");
-	set_zalm(3, MODL_POPOLUDNI, "z128.htm", "ZALM128");
+void _set_zalmy_mcd_doplnkova_psalmodia(short int je_predpisana_povinne = ANO){
+	// 2013-02-13: rozöÌrenÈ o default vstupn˝ parameter, ktor˝ hovorÌ, Ëi je doplnkov· psalmÛdia predpÌsan· pre danÈ sl·venie (napr. pre sl·vnosù), alebo nie (teda NIE == bola zvolen· ako alternatÌva k psalmÛdii z beûnÈho dÚa)
+	Log("_set_zalmy_mcd_doplnkova_psalmodia(je_predpisana_povinne == %d) -- begin\n", je_predpisana_povinne);
+	short int modlitba;
+	modlitba = MODL_PREDPOLUDNIM;
+	// ak sa berie len doplnkov· psalmÛdia (t. j. ak je predpÌsan·), nem· zmysel daù moûnosù vziaù ûalmy z doplnkovej psalmÛdie
+	if(je_predpisana_povinne == ANO){
+		_set_mcd_doplnkova_psalmodia_alternativy(modlitba);
+	}
+	// modlitba predpoludnim, 1. sÈria doplnkovej psalmÛdie
+	set_zalm(1, modlitba, "z120.htm", "ZALM120");
+	set_zalm(2, modlitba, "z121.htm", "ZALM121");
+	set_zalm(3, modlitba, "z122.htm", "ZALM122");
+
+	modlitba = MODL_NAPOLUDNIE;
+	// ak sa berie len doplnkov· psalmÛdia (t. j. ak je predpÌsan·), nem· zmysel daù moûnosù vziaù ûalmy z doplnkovej psalmÛdie
+	if(je_predpisana_povinne == ANO){
+		_set_mcd_doplnkova_psalmodia_alternativy(modlitba);
+	}
+	// modlitba napoludnie, 2. sÈria doplnkovej psalmÛdie
+	set_zalm(1, modlitba, "z123.htm", "ZALM123");
+	set_zalm(2, modlitba, "z124.htm", "ZALM124");
+	set_zalm(3, modlitba, "z125.htm", "ZALM125");
+
+	modlitba = MODL_POPOLUDNI;
+	// ak sa berie len doplnkov· psalmÛdia (t. j. ak je predpÌsan·), nem· zmysel daù moûnosù vziaù ûalmy z doplnkovej psalmÛdie
+	if(je_predpisana_povinne == ANO){
+		_set_mcd_doplnkova_psalmodia_alternativy(modlitba);
+	}
+	// modlitba popoludni, 3. sÈria doplnkovej psalmÛdie
+	set_zalm(1, modlitba, "z126.htm", "ZALM126");
+	set_zalm(2, modlitba, "z127.htm", "ZALM127");
+	set_zalm(3, modlitba, "z128.htm", "ZALM128");
 	Log("_set_zalmy_mcd_doplnkova_psalmodia() -- end\n");
 	// antifÛny nastavuje funkcia _set_antifony_mcd_doplnkova_psalmodia() -- ale len pre cezroËnÈ obdobie; pre vlastnÈ sa pouûÌva define _vlastna_cast_mcd_ant_kcitresp_modl;
 }// _set_zalmy_mcd_doplnkova_psalmodia()
@@ -2861,7 +2897,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 	// 2011-09-06: nastavenie ûalm 95 ako alternatÌvy k û 24, 67, 100 pre rannÈ chv·ly resp. veöpery sa robÌ na inom mieste
 	if((_global_opt[1] & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE){
 		Log("-- ·no, beriem doplnkov˙ psalmÛdiu.\n");
-		_set_zalmy_mcd_doplnkova_psalmodia();
+		_set_zalmy_mcd_doplnkova_psalmodia(NIE);
 		// 2006-01-24: vyÚatÈ do samostatnej funkcie
 		if(_global_den.litobd == OBD_CEZ_ROK){
 			_set_antifony_mcd_doplnkova_psalmodia();
@@ -3180,7 +3216,13 @@ void _set_zalmy_posviacka_chramu(short int modlitba){
 		set_zalm(3, modlitba, "z87.htm", "ZALM87");
 	}
 	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
-		_set_zalmy_mcd_doplnkova_psalmodia();
+		// 2013-02-13: doplnenÈ: zrejme treba rieöiù, ak by padol tento sviatok na nedeæu
+		if(_global_den.denvt == DEN_NEDELA){
+			_set_zalmy_1nedele_mcd(); // alebo ponechaù z prÌsluönej nedele (t. j. nemeniù)? -- ako je to v set_spolocna_cast()...
+		} // DEN_NEDELA
+		else{
+			_set_zalmy_mcd_doplnkova_psalmodia();
+		}
 	}
 	Log("_set_zalmy_posviacka_chramu(%s) -- end\n", nazov_modlitby(modlitba));
 }
@@ -3374,6 +3416,7 @@ void _set_zalmy_srdca(short int modlitba){
 		_set_zalmy_1nedele_rch();
 	}
 	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
+		// 2013-02-13: pozn·mka: zrejme netreba rieöiù, ak by padol tento sviatok na nedeæu
 		_set_zalmy_mcd_doplnkova_psalmodia();
 	}
 	Log("_set_zalmy_srdca(%s) -- end\n", nazov_modlitby(modlitba));
@@ -5529,11 +5572,7 @@ label_24_DEC:
 
 
 				// modlitba cez deÚ
-				modlitba = MODL_PREDPOLUDNIM;
-				_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
-				_sv_rodiny_kresponz(_anchor_vlastne_slavenie);
-				_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
-				// 2011-04-06: hoci s˙ vo vlastnej Ëasti uvedenÈ aj antifÛny pre modlitbu cez deÚ, s˙ rovnakÈ ako pre vianoËnÈ obdobie, preto netreba nastavovaù
+
 				// ak je modlitba cez deÚ na sl·vnosù, tak by sa mali pouûiù ûalmy z doplnkovej psalmÛdie
 				if(_global_den.denvt != DEN_NEDELA) {
 					_set_zalmy_mcd_doplnkova_psalmodia();
@@ -5541,32 +5580,24 @@ label_24_DEC:
 				else {
 					_set_zalmy_1nedele_mcd();
 				}
+
+				modlitba = MODL_PREDPOLUDNIM;
+				_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
+				_sv_rodiny_kresponz(_anchor_vlastne_slavenie);
+				_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
+				// 2011-04-06: hoci s˙ vo vlastnej Ëasti uvedenÈ aj antifÛny pre modlitbu cez deÚ, s˙ rovnakÈ ako pre vianoËnÈ obdobie, preto netreba nastavovaù
 
 				modlitba = MODL_NAPOLUDNIE;
 				_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
 				_sv_rodiny_kresponz(_anchor_vlastne_slavenie);
 				_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
 				// 2011-04-06: hoci s˙ vo vlastnej Ëasti uvedenÈ aj antifÛny pre modlitbu cez deÚ, s˙ rovnakÈ ako pre vianoËnÈ obdobie, preto netreba nastavovaù
-				// ak je modlitba cez deÚ na sl·vnosù, tak by sa mali pouûiù ûalmy z doplnkovej psalmÛdie
-				if(_global_den.denvt != DEN_NEDELA) {
-					_set_zalmy_mcd_doplnkova_psalmodia();
-				}
-				else {
-					_set_zalmy_1nedele_mcd();
-				}
 
 				modlitba = MODL_POPOLUDNI;
 				_vlastne_slavenie_kcitanie(_anchor_vlastne_slavenie);
 				_sv_rodiny_kresponz(_anchor_vlastne_slavenie);
 				_vlastne_slavenie_modlitba(_anchor_vlastne_slavenie);
 				// 2011-04-06: hoci s˙ vo vlastnej Ëasti uvedenÈ aj antifÛny pre modlitbu cez deÚ, s˙ rovnakÈ ako pre vianoËnÈ obdobie, preto netreba nastavovaù
-				// ak je modlitba cez deÚ na sl·vnosù, tak by sa mali pouûiù ûalmy z doplnkovej psalmÛdie
-				if(_global_den.denvt != DEN_NEDELA) {
-					_set_zalmy_mcd_doplnkova_psalmodia();
-				}
-				else {
-					_set_zalmy_1nedele_mcd();
-				}
 
 			}// _global_den.denvr == _global_r._SVATEJ_RODINY.denvr
 			break;
@@ -6371,11 +6402,11 @@ label_24_DEC:
 				// Log(_global_modl_posv_citanie);
 
 				if(_global_den.denvr == (_global_r._ZOSLANIE_DUCHA_SV.denvr + 19)){ // 2008-05-08: v breviar.cpp sa pouûÌva define SRDCA
-					// najsv. srdca jezisovho
+					// Najsv. srdca Jeûiöovho
 					mystrcpy(_file, FILE_SRDCA, MAX_STR_AF_FILE);
 					mystrcpy(_anchor, ANCHOR_SRDCA, MAX_STR_AF_ANCHOR);
 					mystrcpy(_anchor_vlastne_slavenie, ANCHOR_SRDCA, MAX_STR_AF_ANCHOR);
-					Log("  ide o slavnost najsv. srdca jezisovho: _file = `%s', _anchor = %s...\n", _file, _anchor);
+					Log("  ide o sl·vnosù Najsv. srdca Jeûiöovho: _file = `%s', _anchor = %s...\n", _file, _anchor);
 
 					// kompletÛrium
 					modlitba = MODL_PRVE_KOMPLETORIUM;
@@ -13144,6 +13175,50 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 					}
 					break;
 				case 15: // MES_FEB -- 15FEB
+					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
+						// 2013-02-05: doplnenÈ pre »esko
+						if(poradie_svaty == 1){
+							// na spomienku v privilegovan˝ deÚ (spomienka v pÙste)
+							if(je_privileg){
+								if(query_type != PRM_DETAILY)
+									set_popis_svaty_rch_mcd_pc_vesp(poradie_svaty);
+
+								modlitba = MODL_RANNE_CHVALY;
+								// _vlastna_cast_benediktus_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
+
+								modlitba = MODL_VESPERY;
+								// _vlastna_cast_magnifikat_spomprivileg;
+								_vlastna_cast_modlitba_spomprivileg;
+
+								modlitba = MODL_POSV_CITANIE;
+								_vlastna_cast_2citanie_spomprivileg;
+								_vlastna_cast_modlitba;
+
+							}// je_privileg
+							else{
+								// definovanie parametrov pre modlitbu
+								if(query_type != PRM_DETAILY)
+									set_spolocna_cast(sc, poradie_svaty);
+								modlitba = MODL_RANNE_CHVALY;
+								_vlastna_cast_modlitba;
+
+								modlitba = MODL_POSV_CITANIE;
+								_vlastna_cast_modlitba;
+								_vlastna_cast_2citanie;
+
+								modlitba = MODL_VESPERY;
+								_vlastna_cast_modlitba;
+							}// nie je_privileg
+							break;
+						}
+						_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
+						_global_svaty1.smer = 12; // æubovoænÈ spomienky
+						mystrcpy(_global_svaty1.meno, text_FEB_15_CZ[_global_jazyk], MENO_SVIATKU);
+						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
+						_global_svaty1.farba = LIT_FARBA_CERVENA;
+						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ;
+					}
 					if((_global_jazyk == JAZYK_SK) && (_global_kalendar == KALENDAR_SK_SJ)){
 						if(poradie_svaty == 1){
 
@@ -17061,14 +17136,22 @@ label_25_MAR:
 							// definovanie parametrov pre modlitbu
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
+
+							// nem· popis; 2013-02-05: doplnenÈ
+							if(_global_jazyk != JAZYK_HU){
+								set_popis_dummy();
+							}
+
 							modlitba = MODL_RANNE_CHVALY;
 							// _vlastna_cast_benediktus;
 							_vlastna_cast_modlitba;
+
 							modlitba = MODL_POSV_CITANIE;
-							if(_global_jazyk == JAZYK_SK){
+							if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU)){
 								_vlastna_cast_2citanie;
 							}
 							_vlastna_cast_modlitba;
+
 							modlitba = MODL_VESPERY;
 							// _vlastna_cast_magnifikat;
 							_vlastna_cast_modlitba;
@@ -17914,7 +17997,7 @@ label_25_MAR:
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_modlitba;
-							if(_global_jazyk == JAZYK_SK){
+							if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU)){
 								_vlastna_cast_2citanie; // 2011-02-09: doplnen˝ pracovn˝ preklad
 							}
 
