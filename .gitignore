@@ -63,6 +63,7 @@ android/libs/armeabi
 android/obj
 android/assets/cz/ordinar/*
 android/assets/docs/*
+android/assets/cz/docs/*
 android/assets/hu/docs/*
 android/assets/include/*
 android/assets/include_cz/*
