@@ -5,7 +5,7 @@ ROOT=`dirname $0`
 # Setup symlinks for includes
 for inc in include include_cz include_hu; do
   rm -f $ROOT/assets/$inc
-  mkdir $RIIT/assets/$inc
+  mkdir $ROOT/assets/$inc
   for i in ../$ROOT/$inc/*; do
     ln -s "../../../$inc/`basename $i`" $ROOT/assets/$inc/"`basename "$i" | sed 's/^_/x/'`"
   done
