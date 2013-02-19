@@ -3107,11 +3107,11 @@ const char *text_FEB_08_1[POCET_JAZYKOV + 1] =
  };
 const char *text_FEB_08_2[POCET_JAZYKOV + 1] = 
 {"Sv. Jozefíny Bakhita, panny",
- "Sv. Josefíny Bakhity, panny",
+ "Sv. Josefiny Bakhity, panny",
  "",
  "",
  "",
- "Sv. Josefíny Bakhity, panny",
+ "Sv. Josefiny Bakhity, panny",
  "Bakhita Szent Jozefina szûz",
  };
 const char *text_FEB_09_SDB[POCET_JAZYKOV + 1] = 

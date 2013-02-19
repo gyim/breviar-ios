@@ -17147,9 +17147,7 @@ label_25_MAR:
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_POSV_CITANIE;
-							if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_HU)){
-								_vlastna_cast_2citanie;
-							}
+							_vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_VESPERY;
