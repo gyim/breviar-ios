@@ -2162,7 +2162,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							Export("zvolanie(stop)");
 #endif
 							if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PROSBY_ZVOLANIE) == BIT_OPT_1_PROSBY_ZVOLANIE){
-								Export("--><br/><!--"); // 2012-09-07: doplnenÈ, aby sa to podobalo na tie prosby, kde v LH je zvolanie opakovanÈ (napr. SCAP_rPROSBY) | 2012-09-28: presunutÈ vypisovanie len ak sa zvolania opakuj˙
+								Export("-->"HTML_LINE_BREAK"<!--"); // 2012-09-07: doplnenÈ, aby sa to podobalo na tie prosby, kde v LH je zvolanie opakovanÈ (napr. SCAP_rPROSBY) | 2012-09-28: presunutÈ vypisovanie len ak sa zvolania opakuj˙
 							}
 							else{
 								write = ANO;
@@ -3102,7 +3102,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			Log("  _global_den.smer == %d...\n", _global_den.smer);
 			// pre sl·vnosti nem· v˝znam | Ë. 134 VSLH: (...) Na modlitbu cez deÚ sl·vnostÌ, okrem t˝ch, o ktor˝ch sa uû hovorilo, a ak nepripadn˙ na nedeæu, ber˙ sa ûalmy z doplnkovÈho cyklu (gradu·lne).
 			// OLD: podmienka &= (!((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.smer < 5))); // nie pre sl·vnosti
-			// nem· v˝znam jedine vtedy, ak je predpÌsan· doplnov· psalmÛdia; nastavuje sa vo funkcii _set_zalmy_mcd_doplnkova_psalmodia() funkciou _set_mcd_doplnkova_psalmodia_alternativy()
+			// nem· v˝znam jedine vtedy, ak je predpÌsan· doplnov· psalmÛdia; nastavuje sa vo funkcii _set_zalmy_mcd_doplnkova_psalmodia() funkciou _set_mcd_len_doplnkova_psalmodia()
 			podmienka &= (!(je_len_doplnkova_psalmodia(_global_modlitba))); // nem· zmysel jedine vtedy, ak je predpÌsan· doplnkov· psalmÛdia
 			podmienka &= ((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI)); // len pre MCD
 			mystrcpy(specific_string, HTML_NEW_PARAGRAPH, SMALL);
@@ -5927,9 +5927,9 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		if(typ != EXPORT_DNA_VIAC_DNI_TXT){
 #define TYPSLAV_NOVY_RIADOK
 #if defined(TYPSLAV_NOVY_RIADOK_CIARKA)
-			sprintf(pom, ", <br/>");
+			sprintf(pom, ", "HTML_LINE_BREAK);
 #elif defined(TYPSLAV_NOVY_RIADOK)
-			sprintf(pom, " <br/>");
+			sprintf(pom, " "HTML_LINE_BREAK);
 #else
 			sprintf(pom, ", ");
 #endif
@@ -6644,7 +6644,7 @@ void _export_rozbor_dna_button_modlitba(short int typ, short int poradie_svateho
 #ifndef BEHAVIOUR_WEB
 	if(orig_doplnkova_psalmodia == MODL_CEZ_DEN_DOPLNKOVA_PSALMODIA){
 		doplnkova_psalmodia = orig_doplnkova_psalmodia;
-		if((_global_opt[1] & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE){
+		if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE){
 			// BEGIN: opakuje sa pÙvodnÈ INIT_POM()
 			if(typ == EXPORT_DNA_JEDEN_DEN_LOCAL){
 				sprintf(pom, "#m-%c", char_modlitby[modl]);
@@ -8608,9 +8608,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		// 2011-09-26: predsunut· pred vöetky ostatnÈ options (Igor Gal·d)
 		if(_global_jazyk == JAZYK_SK){
 
-//			Export("<tr>\n<td>\n");
-//			Export("<!-- tabuæka pre v˝ber kalend·ra (propri·) -->\n");
-//			Export("<table "HTML_ALIGN_LEFT">\n"); // table option kalendar
+			Export("<!-- v˝ber kalend·ra (propri·) -->\n");
 
 			Export("<tr><td>\n");
 			// formular pre v˝ber kalend·ra
@@ -8620,13 +8618,14 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 #if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
 			Export(HTML_LINE_BREAK);
 #endif
-	
+
 			// drop-down list pre v˝ber kalend·ra (propri·)
 			// pole WWW_KALENDAR
 			Export("<select name=\"%s\" title=\"%s\">\n", STR_KALENDAR, html_text_kalendar_miestny_explain[_global_jazyk]);
 
+			// upraven· podmienka, lebo uû je veæa vlastn˝ch kalend·rov
 			Export("<option%s>%s\n", 
-				((_global_kalendar == KALENDAR_SK_CSSR) || (_global_kalendar == KALENDAR_SK_SVD) || (_global_kalendar == KALENDAR_SK_SJ))? STR_EMPTY: html_option_selected,
+				((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK))? html_option_selected: STR_EMPTY,
 				nazov_slavenia_lokal_kalendar[KALENDAR_VSEOBECNY_SK] /* nazov_kalendara[KALENDAR_VSEOBECNY_SK][_global_jazyk] */); // ToDo -- pre viacerÈ jazyky
 			Export("<option%s>%s\n", 
 				(_global_kalendar == KALENDAR_SK_CSSR)? html_option_selected: STR_EMPTY,
@@ -8634,22 +8633,19 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 			Export("<option%s>%s\n", 
 				(_global_kalendar == KALENDAR_SK_SVD)? html_option_selected: STR_EMPTY,
 				nazov_slavenia_lokal_kalendar[KALENDAR_SK_SVD] /* nazov_kalendara[KALENDAR_SK_SVD] */);
-			// 2010-12-17: odvetvenÈ, aby sa to nedostalo na web (tam OS_linux); 2011-03-16: pridanÌ frantiök·ni (OFM); 2011-03-21: OFM pre verejnosù (hoci nekompletnÈ)
-#ifdef OS_Windows_Ruby
-			Export("<option%s>%s\n", 
-				(_global_kalendar == KALENDAR_SK_SJ)? html_option_selected: STR_EMPTY,
-				nazov_slavenia_lokal_kalendar[KALENDAR_SK_SJ]);
-#endif
 			Export("<option%s>%s\n", 
 				(_global_kalendar == KALENDAR_SK_OFM)? html_option_selected: STR_EMPTY,
 				nazov_slavenia_lokal_kalendar[KALENDAR_SK_OFM]);
 			Export("<option%s>%s\n", 
 				(_global_kalendar == KALENDAR_SK_SDB)? html_option_selected: STR_EMPTY,
 				nazov_slavenia_lokal_kalendar[KALENDAR_SK_SDB]);
-#ifdef OS_Windows_Ruby
 			Export("<option%s>%s\n", 
 				(_global_kalendar == KALENDAR_SK_OP)? html_option_selected: STR_EMPTY,
 				nazov_slavenia_lokal_kalendar[KALENDAR_SK_OP]);
+#ifdef OS_Windows_Ruby
+			Export("<option%s>%s\n", 
+				(_global_kalendar == KALENDAR_SK_SJ)? html_option_selected: STR_EMPTY,
+				nazov_slavenia_lokal_kalendar[KALENDAR_SK_SJ]);
 			Export("<option%s>%s\n", 
 				(_global_kalendar == KALENDAR_SK_CM)? html_option_selected: STR_EMPTY,
 				nazov_slavenia_lokal_kalendar[KALENDAR_SK_CM]);
@@ -8658,8 +8654,6 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 			Export("</td></tr>\n");
 
-//			Export("</table>\n"); // table option kalendar
-//			Export("</td></tr>\n\n");
 		}// if(_global_jazyk == JAZYK_SK)
 
 		// 2013-01-29: predsunutÈ sem...
@@ -9613,7 +9607,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int z
 				// 2011-03-14: nastavenie parametra o5 (_global_opt 5) pre modlitbu cez deÚ (beûn· alebo doplnkov· psalmÛdia) 
 				// 2011-03-16: upravenÈ tak, ûe je to len fakultatÌvne (ako odliön˝ s˙bor)
 				// 2011-04-12: pouûÌva sa option 1 (jej upraven· hodnota _global_opt_casti_modlitby_orig)
-				// 2011-04-13: nemÙûeme porovn·vaù s _global_opt[1] (bola oËisten·), ale s _global_opt_casti_modlitby_orig (obsahuje pÙvodn˙ hodnotu)
+				// 2011-04-13: nemÙûeme porovn·vaù s _global_opt[OPT_1_CASTI_MODLITBY] (bola oËisten·), ale s _global_opt_casti_modlitby_orig (obsahuje pÙvodn˙ hodnotu)
 				// 2012-12-12: oprava pre append batch mÛd; export_fname_pattern
 				if(((_global_opt_casti_modlitby_orig & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
 					if(_global_opt_append == YES){
@@ -9682,7 +9676,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int z
 					// 2011-03-14: nastavenie parametra o5 (_global_opt 5) pre modlitbu cez deÚ (beûn· alebo doplnkov· psalmÛdia) 
 					// 2011-03-16: upravenÈ tak, ûe je to len fakultatÌvne (ako odliön˝ s˙bor)
 					// 2011-04-12: pouûÌva sa option 1 (jej upraven· hodnota _global_opt_casti_modlitby_orig)
-					// 2011-04-13: nemÙûeme porovn·vaù s _global_opt[1] (bola oËisten·), ale s _global_opt_casti_modlitby_orig (obsahuje pÙvodn˙ hodnotu)
+					// 2011-04-13: nemÙûeme porovn·vaù s _global_opt[OPT_1_CASTI_MODLITBY] (bola oËisten·), ale s _global_opt_casti_modlitby_orig (obsahuje pÙvodn˙ hodnotu)
 					if(((_global_opt_casti_modlitby_orig & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI))){
 						Log("3:parameter_M == `%s'...\n", parameter_M);
 						fprintf(batch_file, "%s%d%cd.htm -0%d -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s%s\n", batch_command, a, char_modlitby[i], 
@@ -9757,7 +9751,7 @@ void init_zoznam(void){
 void Log_zoznam(void){
 	for(int i = 0; i < POCET_ZOZNAM; i++){
 		Log("zoznam[%d] == %d\n", i, zoznam[i]);
-		// Export("zoznam[%d] == %d<br/>\n", i, zoznam[i]);
+		// Export("zoznam[%d] == %d"HTML_LINE_BREAK"\n", i, zoznam[i]);
 	}
 }// Log_zoznam()
 
@@ -12397,7 +12391,7 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 
 	if(lr > 'C' || lr < 'A'){
 		ALERT;
-		Export("NevhodnÈ ˙daje:"HTML_LINE_BREAK"<br/>\n<ul>");
+		Export("NevhodnÈ ˙daje:"HTML_LINE_BREAK"\n<ul>");
 		// tyzden
 		if(equals(tyzden, STR_EMPTY)){
 			Export("<li>tak˝ liturgick˝ rok nemoûno ûiadaù</li>\n");
