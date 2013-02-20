@@ -6356,6 +6356,15 @@ const char *text_OKT_03_SJ[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_OKT_03_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Dominika Spadaforu, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_OKT_04[POCET_JAZYKOV + 1] = 
 {"Sv. Františka Assiského",
  "Sv. Františka z Assisi",
@@ -6364,6 +6373,15 @@ const char *text_OKT_04[POCET_JAZYKOV + 1] =
  "",
  "Sv. Františka z Assisi, jáhna",
  "Assisi Szent Ferenc",
+ };
+const char *text_OKT_04_OP[POCET_JAZYKOV + 1] = 
+{"Sv. Františka Assiského, diakona",
+ "",
+ "",
+ "",
+ "",
+ "Sv. Františka z Assisi, jáhna",
+ "",
  };
 const char *text_OKT_05_SDB[POCET_JAZYKOV + 1] = 
 {"Bl. Alberta Marvelliho",
@@ -6392,14 +6410,14 @@ const char *text_OKT_05_HU[POCET_JAZYKOV + 1] =
  "",
  "Veszprém: A bazilika-fõszékesegyház felszentelése",
  };
-const char *text_OKT_05_CZOP[POCET_JAZYKOV + 1] = 
-{"",
+const char *text_OKT_05_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Rajmunda z Kapuy, kòaza",
  "",
  "",
- "la_",
+ "",
  "",
  "Bl. Rajmunda delle Vigne neboli z Kapuy, knìze",
- "hu_",
+ "",
  };
 const char *text_OKT_06[POCET_JAZYKOV + 1] = 
 {"Sv. Bruna, kòaza",
@@ -6412,6 +6430,15 @@ const char *text_OKT_06[POCET_JAZYKOV + 1] =
  };
 const char *text_OKT_06_SJ[POCET_JAZYKOV + 1] = 
 {"Bl. Diega Alojza de san Vitores, kòaza a muèeníka",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_OKT_06_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Bartolomeja Longu, laika",
  "",
  "",
  "",
@@ -6437,6 +6464,24 @@ const char *text_OKT_08_HU[POCET_JAZYKOV + 1] =
  "",
  "Szûz Mária, Magyarok nagyaszszonya, Magyarország fõpátronája",
  };
+const char *text_OKT_08_1_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Ambróza Sansedoniho, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_OKT_08_2_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Matúša Carreriho, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_OKT_09_1[POCET_JAZYKOV + 1] = 
 {"Sv. Dionýzia, biskupa, a spoloèníkov, muèeníka",
  "Sv. Dionýsia, biskupa, a druhù, muèedníkù",
@@ -6455,14 +6500,14 @@ const char *text_OKT_09_2[POCET_JAZYKOV + 1] =
  "Sv. Jana Leonardiho, knìze",
  "Leonardi Szent János áldozópap",
  };
-const char *text_OKT_09_CZOP[POCET_JAZYKOV + 1] = 
-{"",
+const char *text_OKT_09_OP[POCET_JAZYKOV + 1] = 
+{"Sv. ¼udovíta Bertrána, kòaza",
  "",
  "",
- "la_",
+ "",
  "",
  "Sv. Ludvíka Bertrána, knìze",
- "hu_",
+ "",
  };
 const char *text_OKT_11[POCET_JAZYKOV + 1] = 
 {"Bl. Jána XXIII., pápeža",
@@ -6473,6 +6518,15 @@ const char *text_OKT_11[POCET_JAZYKOV + 1] =
  "",
  "Boldog XXIII. János pápa",
  };
+const char *text_OKT_11_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Jakuba z Ulmu, reho¾níka",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_OKT_12_CZ[POCET_JAZYKOV + 1] = 
 {"",
  "Sv. Radima, biskupa",
@@ -6482,14 +6536,23 @@ const char *text_OKT_12_CZ[POCET_JAZYKOV + 1] =
  "Sv. Radima, biskupa",
  "",
  };
+const char *text_OKT_13_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Magdalény Panatieriovej, panny",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_OKT_13_SDB[POCET_JAZYKOV + 1] = 
 {"Bl. Alexandry Márie da Costovej",
  "",
  "",
- "la_",
  "",
  "",
- "hu_",
+ "",
+ "",
  };
 const char *text_OKT_14[POCET_JAZYKOV + 1] = 
 {"Sv. Kalixta I., pápeža a muèeníka",
@@ -6502,6 +6565,15 @@ const char *text_OKT_14[POCET_JAZYKOV + 1] =
  };
 const char *text_OKT_14_SJ[POCET_JAZYKOV + 1] = 
 {"Sv. Jána Ogilvieho, kòaza a muèeníka",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_OKT_14_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Márie Poussepinovej, panny",
  "",
  "",
  "",
@@ -6572,6 +6644,15 @@ const char *text_OKT_19_1[POCET_JAZYKOV + 1] =
  "Sv. Jana de Brébeuf a Izáka Joguese, knìží, a druhù, muèedníkù",
  "De Brébeuf Szent János és Jogues Szent Izsák áldozópap és társaik vértanúk",
  };
+const char *text_OKT_19_2[POCET_JAZYKOV + 1] = 
+{"Sv. Pavla z Kríža, kòaza",
+ "Sv. Pavla od Køíže, knìze",
+ "",
+ "",
+ "",
+ "Sv. Pavla od Køíže, knìze",
+ "Keresztes Szent Pál áldozópap",
+ };
 const char *text_OKT_19_SJ[POCET_JAZYKOV + 1] = 
 {"Sv. Jána de Brébeuf, Izáka Joguesa, kòazov, a spoloèníkov, muèeníkov",
  "",
@@ -6581,14 +6662,14 @@ const char *text_OKT_19_SJ[POCET_JAZYKOV + 1] =
  "",
  "",
  };
-const char *text_OKT_19_2[POCET_JAZYKOV + 1] = 
-{"Sv. Pavla z Kríža, kòaza",
- "Sv. Pavla od Køíže, knìze",
+const char *text_OKT_19_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Agnesy Galandovej de Langeac, panny",
  "",
  "",
  "",
- "Sv. Pavla od Køíže, knìze",
- "Keresztes Szent Pál áldozópap",
+ "",
+ "",
+ "",
  };
 const char *text_OKT_21_CZ[POCET_JAZYKOV + 1] = 
 {"",
@@ -6599,14 +6680,23 @@ const char *text_OKT_21_CZ[POCET_JAZYKOV + 1] =
  "Bl. Karla Rakouského",
  "",
  };
-const char *text_OKT_22_CZOP[POCET_JAZYKOV + 1] = 
-{"",
+const char *text_OKT_21_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Petra z Citt&agrave; di Castello, kòaza",
  "",
  "",
- "la_",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_OKT_22_OP[POCET_JAZYKOV + 1] = 
+{"Výroèie posviacky konventného kostola,"HTML_LINE_BREAK"ktorého deò posviacky nie je známy",
+ "",
+ "",
+ "",
  "",
  "Výroèí posvìcení klášterního kostela",
- "hu_",
+ "",
  };
 const char *text_OKT_22[POCET_JAZYKOV + 1] = 
 {"",
@@ -6666,10 +6756,19 @@ const char *text_OKT_25_SDB[POCET_JAZYKOV + 1] =
 {"Výroèie posviacky vlastného chrámu (keï sa nepozná dátum posviacky)",
  "",
  "",
- "la_",
  "",
  "",
- "hu_",
+ "",
+ "",
+ };
+const char *text_OKT_25_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Petra Geremiu, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_OKT_25_HU[POCET_JAZYKOV + 1] = 
 {"",
@@ -6689,8 +6788,26 @@ const char *text_OKT_26[POCET_JAZYKOV + 1] =
  "Výroèí posvìcení chrámu, jejichž den dedikace není známý",
  "A saját templom felszentelése "HTML_LINE_BREAK"(amennyiben annak napja nem ismeretes)", // A felszentelt templomokban: A saját templom felszentelése
  };
+const char *text_OKT_26_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Damiána z Finale, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_OKT_27_SK[POCET_JAZYKOV + 1] = 
 {"Výroèie posviacky katedrálneho chrámu v Rožòave",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_OKT_27_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Bartolomeja z Vicenze, biskupa",
  "",
  "",
  "",
@@ -6727,6 +6844,24 @@ const char *text_OKT_29_CZ[POCET_JAZYKOV + 1] =
  };
 const char *text_OKT_30_SJ[POCET_JAZYKOV + 1] = 
 {"Bl. Dominika Collinsa, muèeníka",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_OKT_30_1_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Benvenuty Boianiovej, panny",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_OKT_30_2_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Terenca Alberta O’Brien, biskupa, a bl. Petra Higginsa, kòaza, muèeníkov",
  "",
  "",
  "",
