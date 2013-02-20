@@ -154,7 +154,7 @@ const char *nazov_spolc_vyrocie_jazyk[POCET_JAZYKOV + 1] =
 
 // the --OR-- (alternative) for common parts of celebration
 const char *nazov_spolc_alebo_jazyk[POCET_JAZYKOV + 1] =
-{"<br/>alebo", "<br/>nebo", "<br/>or", "", "", "<br/>nebo", "<br/>vagy"};
+{HTML_LINE_BREAK"alebo", HTML_LINE_BREAK"nebo", HTML_LINE_BREAK"or", "", "", HTML_LINE_BREAK"nebo", HTML_LINE_BREAK"vagy"};
 
 // the names of the common texts (e.g.: for bishops, for saint men, for apostles...)
 const char *nazov_spolc_jazyk[POCET_SPOL_CASTI + 1][POCET_JAZYKOV + 1] =
@@ -5903,6 +5903,24 @@ const char *text_AUG_31_HU[POCET_JAZYKOV + 1] =
 
 // --------------- 09 september ---------------
 
+const char *text_SEP_02_1_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Gualu z Bergama, biskupa",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_SEP_02_2_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Ingridy zo Skänninge, reho¾níèky",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_SEP_03[POCET_JAZYKOV + 1] = 
 {"Sv. Gregora Ve¾kého, pápeža a uèite¾a Cirkvi",
  "Sv. Øehoøe Velikého, papeže a uèitele církve",
@@ -5911,6 +5929,15 @@ const char *text_SEP_03[POCET_JAZYKOV + 1] =
  "",
  "Sv. Øehoøe Velikého, papeže a uèitele Církve",
  "Nagy Szent Gergely pápa és egyháztanító",
+ };
+const char *text_SEP_04_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Kataríny z Racconigi, panny",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_SEP_05[POCET_JAZYKOV + 1] = 
 {"",
@@ -5923,6 +5950,24 @@ const char *text_SEP_05[POCET_JAZYKOV + 1] =
  };
 const char *text_SEP_06_SK[POCET_JAZYKOV + 1] = 
 {"Výroèie posviacky katedrálneho chrámu v Košiciach",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_SEP_06_1_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Bertranda z Garrigue, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_SEP_06_2_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Michala (Jána Františka) Czartoryského, kòaza,"HTML_LINE_BREAK"a bl. Júlie (Stanislavy) Rodziñskej, panny a reho¾níèky,"HTML_LINE_BREAK"muèeníkov",
  "",
  "",
  "",
@@ -6074,14 +6119,14 @@ const char *text_SEP_17_SJ[POCET_JAZYKOV + 1] =
  "",
  "",
  };
-const char *text_SEP_18_CZOP[POCET_JAZYKOV + 1] = 
-{"",
+const char *text_SEP_18_OP[POCET_JAZYKOV + 1] = 
+{"Sv. Jána Macíasa, reho¾níka",
  "",
  "",
- "la_",
+ "",
  "",
  "Sv. Jana Maciase, øeholníka",
- "hu_",
+ "",
  };
 const char *text_SEP_19[POCET_JAZYKOV + 1] = 
 {"Sv. Januára, biskupa a muèeníka",
@@ -6128,6 +6173,24 @@ const char *text_SEP_22[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_SEP_22_1_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Františka de Posadas, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_SEP_22_2_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Hyacinta Serrana Lópeza, kòaza, a spoloèníkov, muèeníkov",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_SEP_22_SDB[POCET_JAZYKOV + 1] = 
 {"Bl. Jozefa Calasanza a Enrica Saiz Aparicio, kòazov, "HTML_LINE_BREAK"a 93 spoloèníkov, muèeníkov",
  "",
@@ -6155,6 +6218,15 @@ const char *text_SEP_24_SK[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_SEP_24_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Dalmáca Monera, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_SEP_24_HU[POCET_JAZYKOV + 1] = 
 {"",
  "",
@@ -6163,6 +6235,15 @@ const char *text_SEP_24_HU[POCET_JAZYKOV + 1] =
  "",
  "",
  "Szent Gellért püspök és vértanú",
+ };
+const char *text_SEP_25_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Dalmáca Monera, kòaza",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_SEP_26[POCET_JAZYKOV + 1] = 
 {"Sv. Kozmu a Damiána, muèeníkov",
@@ -6182,14 +6263,14 @@ const char *text_SEP_26_CSSR[POCET_JAZYKOV + 1] =
  "",
  "hu_",
  };
-const char *text_SEP_26_CZOP[POCET_JAZYKOV + 1] = 
-{"",
+const char *text_SEP_26_OP[POCET_JAZYKOV + 1] = 
+{"Bl. Vavrinca z Ripafratta, kòaza",
  "",
  "",
- "la_",
  "",
- "Sv. Dominika Ibanìze z Erquicia, Jakuba Kyušei Tomonagy, knìží, "HTML_LINE_BREAK"Vavøince Ruize, otce rodiny, a druhù, japonských muèedníkù",
- "hu_",
+ "",
+ "",
+ "",
  };
 const char *text_SEP_27[POCET_JAZYKOV + 1] = 
 {"Sv. Vincenta de Paul, kòaza",
@@ -6215,8 +6296,17 @@ const char *text_SEP_28_2[POCET_JAZYKOV + 1] =
  "",
  "",
  "",
- "(pro dominikány není - 26.9.)",
+ "",
  "Ruiz Szent Lõrinc és társai, Fülöp-szigeteki vértanúk",
+ };
+const char *text_SEP_28_OP[POCET_JAZYKOV + 1] = 
+{"Sv. Vavrinca Ruiza z Manily, laika, a spoloèníkov, muèeníkov",
+ "",
+ "",
+ "",
+ "",
+ "Sv. Dominika Ibanìze z Erquicia, Jakuba Kyušei Tomonagy, knìží,"HTML_LINE_BREAK"Vavøince Ruize, otce rodiny, a druhù, japonských muèedníkù", // CZOP kvôli sv. Václavovi slávia 26SEP
+ "",
  };
 const char *text_SEP_29[POCET_JAZYKOV + 1] = 
 {"Sv. Michala, Gabriela a Rafaela, archanjelov",

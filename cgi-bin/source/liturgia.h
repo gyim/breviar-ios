@@ -82,11 +82,6 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-// 2009-03-24: rozšírené kvôli text_SEP_26_CZOP[]; 
-// 2009-03-24: rozšírené kvôli text_PRO_OP[] 
-// 2010-12-07: rozšírené kvôli text_JAN_19_SJ[]; (plus 34)
-// 2011-01-31: rozšírené kvôli text_JAN_31_SDB[]; 
-// 2011-02-02: rozšírené kvôli text_FEB_04_SJ[];
 #define MENO_SVIATKU 250
 
 // 2006-07-11: Pridané kvôli jazykovým mutáciám 
