@@ -13223,7 +13223,7 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 						_global_svaty1.farba = LIT_FARBA_BIELA;
 						_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
 					}// SK only
-					else if(_global_jazyk == JAZYK_HU){
+					if(_global_jazyk == JAZYK_HU){
 						if(poradie_svaty == 1){
 							// definovanie parametrov pre modlitbu
 							if(query_type != PRM_DETAILY)
@@ -25961,7 +25961,7 @@ label_25_MAR:
 
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_full(modlitba);
-							_vlastna_cast_modlitba_ina(modlitba); // Alebo ako na ranné chvály.
+							_vlastna_cast_modlitba_ina; // Alebo ako na ranné chvály.
 
 							_vlastna_cast_mcd_ant_kcitresp_modl;
 
@@ -26265,11 +26265,11 @@ label_25_MAR:
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_full(modlitba);
-							_vlastna_cast_modlitba_ina(modlitba); // Alebo ako na ranné chvály.
+							_vlastna_cast_modlitba_ina; // Alebo ako na ranné chvály.
 
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_full(modlitba);
-							_vlastna_cast_modlitba_ina(modlitba); // Alebo ako na ranné chvály.
+							_vlastna_cast_modlitba_ina; // Alebo ako na ranné chvály.
 
 							_vlastna_cast_mcd_ant_kcitresp_modl;
 
