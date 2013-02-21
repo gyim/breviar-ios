@@ -3176,7 +3176,7 @@ const char *text_FEB_14[POCET_JAZYKOV + 1] =
  "Ss. Cyrilli, monachi, et Methodii, ep.",
  "",
  "",
- "Szent Cirill szerzetes és Szent Metód püspök,"HTML_LINE_BREAK"Európa társ védõszentjei",
+ "Szent Cirill szerzetes és Szent Metód püspök,"HTML_LINE_BREAK"Európa társvédõszentjei",
  };
 const char *text_FEB_15_SJ[POCET_JAZYKOV + 1] = 
 {"Sv. Klaudia La Colombi&egrave;ra, kòaza",
