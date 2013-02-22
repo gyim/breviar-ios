@@ -1965,7 +1965,7 @@ const char *html_text_option1_vigilia_explain[POCET_JAZYKOV + 1] =
 const char *html_text_option1_spomienka_spolcast[POCET_JAZYKOV + 1] = 
 {"na spomienky poui èasti zo spoloènıch èastí", 
  "na památky pouít èásti ze spoleènıch èástí", 
- "take parts from celebration (commmons)", 
+ "take parts from celebration -- commmons", 
  "", 
  "", 
  "na památky pouít èásti ze spoleènıch èástí", 
@@ -1980,6 +1980,16 @@ const char *html_text_option1_spomienka_spolcast_explain[POCET_JAZYKOV + 1] =
  "", 
  "",
  "Kiválasztani, hogy az imádságra hívás antifónája, himnusz, rövid olvasmány, a Benedictus és a Magnifikat antifónája és a fohászok a közös részbõl legyenek véve (egyébként a köznapról) a 235 b) általános rendelkezés szerint."
+};
+
+const char *html_text_option1_spomienka_spolcast_NIE[POCET_JAZYKOV + 1] = 
+{"na spomienky poui èasti zo dòa, nie zo spoloènıch èastí", 
+ "na památky pouít èásti z bìného dne, ne ze spoleènıch èástí", 
+ "take parts from feria -- not commmons", 
+ "", 
+ "", 
+ "na památky pouít èásti z bìného dne, ne ze spoleènıch èástí", 
+ "hu_emléknapon a jelzett részeket a közös részbõl venni"
 };
 
 const char *html_text_option2_html_export[POCET_JAZYKOV + 1] = 
