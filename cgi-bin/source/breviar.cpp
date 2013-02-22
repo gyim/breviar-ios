@@ -2318,6 +2318,13 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 	Log("--includeFile(): end\n");
 }// includeFile()
 
+void _export_rozbor_dna_navig_top_bottom(char *target, const char *text){
+	Export("\n<!--p-navigation-->\n");
+	Export("<p "HTML_ALIGN_CENTER" "HTML_CLASS_SMALL">");
+	Export("<a href=\"#%s\""HTML_CLASS_QUIET">%s</a>", target, text);
+	Export("</p>");
+}// _export_rozbor_dna_navig_top_bottom()
+
 //---------------------------------------------------------------------
 // definicie pre _rozbor_dna():
 // obsahuju sviatky, ktore su bud pevne alebo pohyblive, v kazdom pripade su to dolezite "hranicne" dni medzi obdobiami
@@ -3056,6 +3063,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		|| (equals(paramname, PARAM_KRATSIE_PROSBY))
 		|| (equals(paramname, PARAM_VIGILIA)) 
 		|| (equals(paramname, PARAM_ALT_HYMNUS)) 
+		|| (equals(paramname, PARAM_SPOL_CAST_SPOM)) 
 		){
 		Log("  _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI == %d: \n", _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI);
 
@@ -3134,6 +3142,14 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			sprintf(popis_show, "%s %s", html_text_option_zobrazit[_global_jazyk], html_text_option1_rubriky[_global_jazyk]);
 			sprintf(popis_hide, "%s %s", html_text_option_skryt[_global_jazyk], html_text_option1_rubriky[_global_jazyk]);
 		}
+		else if(equals(paramname, PARAM_SPOL_CAST_SPOM)){
+			// 2013-02-22: doplnen· moûnosù pre spomienky a æubovoænÈ spomienky prepÌnaù, Ëi braù Ëasti zo spol. Ëasti alebo zo dÚa
+			bit = BIT_OPT_1_SPOMIENKA_SPOL_CAST;
+			podmienka &= ((_global_den.typslav == SLAV_SPOMIENKA) || (_global_den.typslav == SLAV_LUB_SPOMIENKA));
+			mystrcpy(specific_string, HTML_LINE_BREAK, SMALL);
+			sprintf(popis_show, "%s", html_text_option1_spomienka_spolcast[_global_jazyk]);
+			sprintf(popis_hide, "%s", html_text_option1_spomienka_spolcast_NIE[_global_jazyk]);
+		}
 		else if(equals(paramname, PARAM_VIGILIA)){
 			bit = BIT_OPT_1_PC_VIGILIA;
 			podmienka &= (je_vigilia); // 2013-01-25: doplnenÈ -- predÂûenÈ sl·venie vigÌliÌ v r·mci posv‰tn˝ch ËÌtanÌ (prepÌnanie)
@@ -3205,17 +3221,25 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 				Export("navig·cia:begin-->\n");
 				Export("<!-- navig·cia %d -->\n", _global_pocet_navigacia);
 				if((_global_pocet_navigacia <= 1) && (_global_pocet_volani_interpretTemplate < 2)){
+					_export_rozbor_dna_navig_top_bottom(HTML_BOTTOM, html_text_bottom[_global_jazyk]);
+
 					_export_rozbor_dna_buttons_dni(EXPORT_DNA_JEDEN_DEN, NIE);
+					
 					// najprv dni, potom modlitby
-					Export("<table "HTML_ALIGN_CENTER">\n<tr><td>\n");
-					_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN, _global_poradie_svaty, NIE);
-					Export("</td></tr>\n</table>");
-				}// if((_global_pocet_navigacia <= 1) && (_global_pocet_volani_interpretTemplate < 2))
-				else{
+					
 					Export("<table "HTML_ALIGN_CENTER">\n<tr><td>\n");
 					_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN, _global_poradie_svaty, NIE);
 					Export("</td></tr>\n</table>\n");
+				}// if((_global_pocet_navigacia <= 1) && (_global_pocet_volani_interpretTemplate < 2))
+				else{
+					_export_rozbor_dna_navig_top_bottom(HTML_TOP, html_text_top[_global_jazyk]);
+
+					Export("<table "HTML_ALIGN_CENTER">\n<tr><td>\n");
+					_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN, _global_poradie_svaty, NIE);
+					Export("</td></tr>\n</table>\n");
+					
 					// najprv modlitby, potom dni
+					
 					_export_rozbor_dna_buttons_dni(EXPORT_DNA_JEDEN_DEN, NIE);
 				}// _global_pocet_navigacia > 1 || (_global_pocet_volani_interpretTemplate >= 2)
 				Export("<!--navig·cia:end");
@@ -4465,11 +4489,11 @@ short int atojazyk(char *jazyk){
 
 // popis: vr·ti ËÌslo kalend·ra, napr. rehoæn˝
 //        inak vr·ti KALENDAR_NEURCENY
-// 2010-10-11: doplnenÈ porovnanie aj s nazov_slavenia_lokal_kalendar[]
+// 2010-10-11: doplnenÈ porovnanie aj s nazov_kalendara_long[]
 short int atokalendar(char *kalendar){
 	short int i = 0;
 	do{
-		if(equalsi(kalendar, skratka_kalendara[i]) || equalsi(kalendar, nazov_kalendara[i]) || equalsi(kalendar, nazov_slavenia_lokal_kalendar[i])){
+		if(equalsi(kalendar, skratka_kalendara[i]) || equalsi(kalendar, nazov_kalendara_short[i]) || equalsi(kalendar, nazov_kalendara_long[i])){
 			return i;
 		}
 		i++;
@@ -5964,7 +5988,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	 * 2011-02-02: odvetvenÈ len pre exporty inÈ ako EXPORT_DNA_VIAC_DNI_TXT
 	 */
 	if(typ != EXPORT_DNA_VIAC_DNI_TXT){
-		sprintf(popisok_kalendar, nazov_slavenia_lokal_kalendar[_local_den.kalendar]);
+		sprintf(popisok_kalendar, nazov_kalendara_long[_local_den.kalendar]);
 		mystrcpy(popisok_lokal, STR_EMPTY, MAX_STR);
 		// teraz lokaliz·cia slavenia resp. pozn·mku o lok·lnom kalend·ri, 2005-07-27: pridanÈ; 2010-10-11: rozöÌrenÈ
 		if(_local_den.typslav_lokal != LOKAL_SLAV_NEURCENE) {
@@ -5985,7 +6009,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		if(typ != EXPORT_DNA_XML){
 			// 2010-08-03: pridan˝ ako pozn·mka typ kalend·ra
 			if((_local_den.kalendar >= KALENDAR_NEURCENY) && (_local_den.kalendar <= POCET_KALENDAROV)){
-				sprintf(pom, "<!-- kalend·r: %s -->", nazov_kalendara[_local_den.kalendar]);
+				sprintf(pom, "<!-- kalend·r: %s -->", nazov_kalendara_short[_local_den.kalendar]);
 				Log("prid·vam ako pozn·mku typ kalend·ra: %s\n", pom);
 				strcat(_global_string, pom);
 			}
@@ -6871,7 +6895,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 		Export(ELEM_BEGIN(XML_LIT_NAME)"%s"ELEM_END(XML_LIT_NAME)"\n", _local_den.meno);
 		Export(ELEMID_BEGIN(XML_LIT_COLOR)"%s"ELEM_END(XML_LIT_COLOR)"\n", _local_den.farba, nazov_farby(_local_den.farba));
 		if(_global_jazyk == JAZYK_SK){
-			Export(ELEM_BEGIN(XML_LIT_CALENDAR)"%s"ELEM_END(XML_LIT_CALENDAR)"\n", nazov_kalendara[_local_den.kalendar]);
+			Export(ELEM_BEGIN(XML_LIT_CALENDAR)"%s"ELEM_END(XML_LIT_CALENDAR)"\n", nazov_kalendara_short[_local_den.kalendar]);
 		}
 	}
 
@@ -8606,7 +8630,13 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 		// 2011-01-31: sem presunut· moûnosù v˝beru liturgickÈho kalend·ra
 		// 2011-09-26: predsunut· pred vöetky ostatnÈ options (Igor Gal·d)
-		if(_global_jazyk == JAZYK_SK){
+		if((_global_jazyk == JAZYK_SK) || 
+#if defined(OS_Windows_Ruby) 
+			(_global_jazyk == JAZYK_CZ)
+#else
+			NIE
+#endif
+			){
 
 			Export("<!-- v˝ber kalend·ra (propri·) -->\n");
 
@@ -8623,38 +8653,47 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 			// pole WWW_KALENDAR
 			Export("<select name=\"%s\" title=\"%s\">\n", STR_KALENDAR, html_text_kalendar_miestny_explain[_global_jazyk]);
 
-			// upraven· podmienka, lebo uû je veæa vlastn˝ch kalend·rov
-			Export("<option%s>%s\n", 
-				((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK))? html_option_selected: STR_EMPTY,
-				nazov_slavenia_lokal_kalendar[KALENDAR_VSEOBECNY_SK] /* nazov_kalendara[KALENDAR_VSEOBECNY_SK][_global_jazyk] */); // ToDo -- pre viacerÈ jazyky
-			Export("<option%s>%s\n", 
-				(_global_kalendar == KALENDAR_SK_CSSR)? html_option_selected: STR_EMPTY,
-				nazov_slavenia_lokal_kalendar[KALENDAR_SK_CSSR] /* nazov_kalendara[KALENDAR_SK_CSSR] */);
-			Export("<option%s>%s\n", 
-				(_global_kalendar == KALENDAR_SK_SVD)? html_option_selected: STR_EMPTY,
-				nazov_slavenia_lokal_kalendar[KALENDAR_SK_SVD] /* nazov_kalendara[KALENDAR_SK_SVD] */);
-			Export("<option%s>%s\n", 
-				(_global_kalendar == KALENDAR_SK_OFM)? html_option_selected: STR_EMPTY,
-				nazov_slavenia_lokal_kalendar[KALENDAR_SK_OFM]);
-			Export("<option%s>%s\n", 
-				(_global_kalendar == KALENDAR_SK_SDB)? html_option_selected: STR_EMPTY,
-				nazov_slavenia_lokal_kalendar[KALENDAR_SK_SDB]);
-			Export("<option%s>%s\n", 
-				(_global_kalendar == KALENDAR_SK_OP)? html_option_selected: STR_EMPTY,
-				nazov_slavenia_lokal_kalendar[KALENDAR_SK_OP]);
+			if(_global_jazyk == JAZYK_SK){
+				Export("<option%s>%s\n", 
+					((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_SK))? html_option_selected: STR_EMPTY,
+					nazov_kalendara_long[KALENDAR_VSEOBECNY_SK]);
+				Export("<option%s>%s\n", 
+					(_global_kalendar == KALENDAR_SK_CSSR)? html_option_selected: STR_EMPTY,
+					nazov_kalendara_long[KALENDAR_SK_CSSR]);
+				Export("<option%s>%s\n", 
+					(_global_kalendar == KALENDAR_SK_SVD)? html_option_selected: STR_EMPTY,
+					nazov_kalendara_long[KALENDAR_SK_SVD]);
+				Export("<option%s>%s\n", 
+					(_global_kalendar == KALENDAR_SK_OFM)? html_option_selected: STR_EMPTY,
+					nazov_kalendara_long[KALENDAR_SK_OFM]);
+				Export("<option%s>%s\n", 
+					(_global_kalendar == KALENDAR_SK_SDB)? html_option_selected: STR_EMPTY,
+					nazov_kalendara_long[KALENDAR_SK_SDB]);
+				Export("<option%s>%s\n", 
+					(_global_kalendar == KALENDAR_SK_OP)? html_option_selected: STR_EMPTY,
+					nazov_kalendara_long[KALENDAR_SK_OP]);
 #ifdef OS_Windows_Ruby
-			Export("<option%s>%s\n", 
-				(_global_kalendar == KALENDAR_SK_SJ)? html_option_selected: STR_EMPTY,
-				nazov_slavenia_lokal_kalendar[KALENDAR_SK_SJ]);
-			Export("<option%s>%s\n", 
-				(_global_kalendar == KALENDAR_SK_CM)? html_option_selected: STR_EMPTY,
-				nazov_slavenia_lokal_kalendar[KALENDAR_SK_CM]);
+				Export("<option%s>%s\n", 
+					(_global_kalendar == KALENDAR_SK_SJ)? html_option_selected: STR_EMPTY,
+					nazov_kalendara_long[KALENDAR_SK_SJ]);
+				Export("<option%s>%s\n", 
+					(_global_kalendar == KALENDAR_SK_CM)? html_option_selected: STR_EMPTY,
+					nazov_kalendara_long[KALENDAR_SK_CM]);
 #endif
+			}// SK
+			else if(_global_jazyk == JAZYK_CZ){
+				Export("<option%s>%s\n", 
+					((_global_kalendar == KALENDAR_NEURCENY) || (_global_kalendar == KALENDAR_VSEOBECNY) || (_global_kalendar == KALENDAR_VSEOBECNY_CZ))? html_option_selected: STR_EMPTY,
+					nazov_kalendara_long[KALENDAR_VSEOBECNY_CZ]);
+				Export("<option%s>%s\n", 
+					(_global_kalendar == KALENDAR_CZ_OPRAEM)? html_option_selected: STR_EMPTY,
+					nazov_kalendara_long[KALENDAR_CZ_OPRAEM]);
+			}// CZ
 			Export("</select>\n");
 
 			Export("</td></tr>\n");
 
-		}// if(_global_jazyk == JAZYK_SK)
+		}// if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ))
 
 		// 2013-01-29: predsunutÈ sem...
 		Export("<tr>\n<td>\n");
@@ -8736,12 +8775,6 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		// option 1: Ôalöie bity ovplyvÚuj˙ce vygenerovan˙ modlitbu (pouûÌvame force opt_1)...
 		Export("<"HTML_SPAN_BOLD_TOOLTIP">%s</span>", html_text_option1_dalsie_prepinace_explain[_global_jazyk], html_text_option1_dalsie_prepinace[_global_jazyk]);
 
-		// pole (checkbox) WWW_MODL_OPTF_1_SPOMIENKA_SPOL_CAST
-		Export(HTML_LINE_BREAK);
-		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_1_SPOMIENKA_SPOL_CAST, NIE);
-		Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_1_SPOMIENKA_SPOL_CAST, ANO, html_text_option1_spomienka_spolcast_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SPOMIENKA_SPOL_CAST) == BIT_OPT_1_SPOMIENKA_SPOL_CAST)? html_option_checked: STR_EMPTY);
-		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_spomienka_spolcast_explain[_global_jazyk], html_text_option1_spomienka_spolcast[_global_jazyk]);
-
 		// pole (checkbox) WWW_MODL_OPTF_1_ZOBRAZ_SPOL_CAST
 		Export(HTML_LINE_BREAK);
 		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_1_ZOBRAZ_SPOL_CAST, NIE);
@@ -8749,6 +8782,12 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_spolc_svaty_explain[_global_jazyk], html_text_option1_spolc_svaty[_global_jazyk]);
 
 		if((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI) != BIT_OPT_2_ROZNE_MOZNOSTI){ // len ak NIE JE t·to moûnosù (zobrazovanie vöeliËoho) zvolen·
+
+			// pole (checkbox) WWW_MODL_OPTF_1_SPOMIENKA_SPOL_CAST
+			Export(HTML_LINE_BREAK);
+			Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_1_SPOMIENKA_SPOL_CAST, NIE);
+			Export("<"HTML_FORM_INPUT_CHECKBOX" name=\"%s\" value=\"%d\" title=\"%s\"%s>\n", STR_MODL_OPTF_1_SPOMIENKA_SPOL_CAST, ANO, html_text_option1_spomienka_spolcast_explain[_global_jazyk], ((_global_optf[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SPOMIENKA_SPOL_CAST) == BIT_OPT_1_SPOMIENKA_SPOL_CAST)? html_option_checked: STR_EMPTY);
+			Export("<"HTML_SPAN_TOOLTIP">%s</span>", html_text_option1_spomienka_spolcast_explain[_global_jazyk], html_text_option1_spomienka_spolcast[_global_jazyk]);
 
 			// pole (checkbox) WWW_MODL_OPTF_1_SKRY_POPIS
 			Export(HTML_LINE_BREAK);
@@ -13201,7 +13240,7 @@ void _main_batch_mode(
 						fprintf(batch_html_file, "<center><h1>%s</h1></center>\n", (char *)html_text_batch_mode_h1[_global_jazyk]);
 						if((_global_jazyk == JAZYK_SK) && ((_global_kalendar != KALENDAR_NEURCENY) && (_global_kalendar != KALENDAR_VSEOBECNY) && (_global_kalendar != KALENDAR_VSEOBECNY_SK))){
 							fprintf(batch_html_file, "<p "HTML_ALIGN_CENTER">%s: \n", (char *)html_text_Kalendar[_global_jazyk]);
-							fprintf(batch_html_file, "<"HTML_SPAN_RED">%s</span>\n", (char *)nazov_slavenia_lokal_kalendar[_global_kalendar]);
+							fprintf(batch_html_file, "<"HTML_SPAN_RED">%s</span>\n", (char *)nazov_kalendara_long[_global_kalendar]);
 							fprintf(batch_html_file, "</p>\n");
 						}
 						fprintf(batch_html_file, "<center><h2>%s</h2></center>\n", (char *)html_text_Breviar_dnes[_global_jazyk]);
@@ -16234,7 +16273,7 @@ int breviar_main(int argc, char **argv){
 					_global_kalendar = KALENDAR_VSEOBECNY;
 					_main_LOG_to_Export("\t(vzhæadom k neurËenÈmu kalend·ru pouûÌvam default -- vöeobecn˝ kalend·r)\n");
 				}
-				_main_LOG_to_Export("...kalend·r (%s) = %i, teda %s (%s)\n", pom_KALENDAR, _global_kalendar, nazov_kalendara[_global_kalendar], skratka_kalendara[_global_kalendar]);
+				_main_LOG_to_Export("...kalend·r (%s) = %i, teda %s (%s)\n", pom_KALENDAR, _global_kalendar, nazov_kalendara_short[_global_kalendar], skratka_kalendara[_global_kalendar]);
 
 				// 2011-05-06: PridanÈ naËÌtanie n·zvu fontu kvÙli rÙznym fontom
 				_main_LOG_to_Export("zisùujem font...\n");
@@ -16401,7 +16440,7 @@ _main_SIMULACIA_QS:
 				_global_kalendar = KALENDAR_VSEOBECNY;
 				_main_LOG_to_Export("\t(vzhæadom k neurËenÈmu kalend·ru pouûÌvam default -- vöeobecn˝ kalend·r)\n");
 			}
-			_main_LOG_to_Export("...kalend·r (%s) = %i, teda %s (%s)\n", pom_KALENDAR, _global_kalendar, nazov_kalendara[_global_kalendar], skratka_kalendara[_global_kalendar]);
+			_main_LOG_to_Export("...kalend·r (%s) = %i, teda %s (%s)\n", pom_KALENDAR, _global_kalendar, nazov_kalendara_short[_global_kalendar], skratka_kalendara[_global_kalendar]);
 
 			// 2008-08-08: PridanÈ naËÌtanie css kvÙli rÙznym css
 			_main_LOG_to_Export("zisùujem css...\n");

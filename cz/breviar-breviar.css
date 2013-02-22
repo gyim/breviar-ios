@@ -1,9 +1,9 @@
 /* apply to all elements */ { font-family: Cambria, Verdana, Tahoma, Georgia, Sans-Serif; font-size: 100%; }
 .red { color: #ff0000; }
-.blue { color: #0066ff; }
+.blue { color: #0099ff; }
 .redsmall { color: #ff0000; font-size: 80%; }
 .redbold { color: #ff0000; font-weight: bold; }
-.bluebold { color: #0066ff; font-weight: bold; }
+.bluebold { color: #0099ff; font-weight: bold; }
 .bold { font-weight: bold; }
 .boldit { font-weight: bold; font-style: italic; }
 .it { font-style: italic; }
