@@ -58,7 +58,7 @@
 /*                    öpecifik·ciu, o ak˝ kalend·r ide:        */
 /*                    vöeobecn˝ danej cirkevnej provincie      */
 /*                    alebo nejak˝ rehoæn˝ a pod.              */
-/*   2010-10-11a.D. | pridanÈ nazov_slavenia_lokal_kalendar[]  */
+/*   2010-10-11a.D. | pridanÈ nazov_kalendara_long[]           */
 /*   2011-01-25a.D. | premenovanÈ niektorÈ HTML s˙bory         */
 /*   2011-04-13a.D. | reùazcovÈ funkcie equals() presunutÈ     */
 /*   2011-05-11a.D. | vytvorenÈ: _vytvor_string_z_datumu()     */
@@ -82,11 +82,6 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-// 2009-03-24: rozöÌrenÈ kvÙli text_SEP_26_CZOP[]; 
-// 2009-03-24: rozöÌrenÈ kvÙli text_PRO_OP[] 
-// 2010-12-07: rozöÌrenÈ kvÙli text_JAN_19_SJ[]; (plus 34)
-// 2011-01-31: rozöÌrenÈ kvÙli text_JAN_31_SDB[]; 
-// 2011-02-02: rozöÌrenÈ kvÙli text_FEB_04_SJ[];
 #define MENO_SVIATKU 250
 
 // 2006-07-11: PridanÈ kvÙli jazykov˝m mut·ci·m 
@@ -472,6 +467,7 @@ extern const char *TEMPLAT[POCET_MODLITIEB + 1];
 #define PARAM_KRATSIE_PROSBY "KRATSIE-PROSBY" // 2012-11-15: _ sa menilo na &nbsp; preto som zmenil na -
 #define PARAM_ZALM95        "ZALM95" // 2012-11-23: kvÙli <a name...>
 #define PARAM_VIGILIA       "VIGILIA"
+#define PARAM_SPOL_CAST_SPOM "SPOL-CAST-SPOM"
 
 #define PARAM_ALT_HYMNUS    "ALT-HYMNUS"
 
@@ -943,6 +939,7 @@ extern const char *nazov_slavenia_lokal[];
 #define LOKAL_SLAV_SZATMAR                  81
 #define LOKAL_SLAV_CESKO_BRNO               82
 #define LOKAL_SLAV_SVIATOK_OP_ZENY          83
+#define LOKAL_SLAV_ZILINA                   84
 
 // 2010-08-03: pridan˝ kalend·r
 #define KALENDAR_NEURCENY                   0
@@ -958,13 +955,14 @@ extern const char *nazov_slavenia_lokal[];
 #define KALENDAR_SK_OFM                    10
 #define KALENDAR_SK_OP                     11
 #define KALENDAR_SK_CM                     12
+#define KALENDAR_CZ_OPRAEM                 13
 
-#define POCET_KALENDAROV                   12
+#define POCET_KALENDAROV                   13
 
 // filenames for special calendars / n·zov s˙bora pre kalend·re
 extern const char *nazov_htm_kalendar[POCET_KALENDAROV + 1];
 
-extern const char *nazov_slavenia_lokal_kalendar[POCET_KALENDAROV + 1];
+extern const char *nazov_kalendara_long[POCET_KALENDAROV + 1];
 
 // prikazany / neprikazany sviatok / æubovoæn· spomienka bez z·v‰znosti (blahoslavenÌ napr. pre SK_OP)
 #define PRIKAZANY_SVIATOK           0
@@ -1343,7 +1341,7 @@ extern const char *nazov_jazyka[POCET_JAZYKOV + 1];
 extern const char *skratka_jazyka[POCET_JAZYKOV + 1];
 extern const char *postfix_jazyka[POCET_JAZYKOV + 1];
 
-extern const char *nazov_kalendara[POCET_KALENDAROV + 1];
+extern const char *nazov_kalendara_short[POCET_KALENDAROV + 1];
 extern const char *skratka_kalendara[POCET_KALENDAROV + 1];
 
 extern const char *nazov_css[POCET_CSS + 1];
