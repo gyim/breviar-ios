@@ -2293,7 +2293,7 @@ const char *html_text_option5_MCDPoHymnus2[POCET_JAZYKOV + 1] =
 };
 
 
-// 2011-05-06: doplnené
+// 2011-05-06
 const char *html_text_font_name[POCET_JAZYKOV + 1] = 
 {"alebo poui písmo", 
  "nebo pouij písmo", 
@@ -2313,7 +2313,7 @@ const char *html_text_font_name_explain[POCET_JAZYKOV + 1] =
  "Ha nem választunk betûtípust, akkor a böngészõ ablakban látható az alapértelmezett (talpas vagy talpatlan az elõzõ kiválasztás szerint)."
 };
 
-// 2011-05-13: doplnené
+// 2011-05-13
 const char *html_text_font_size[POCET_JAZYKOV + 1] = 
 {"ve¾kos písma", 
  "velikost písma", 
@@ -2348,7 +2348,7 @@ const char *html_text_kalendar[POCET_JAZYKOV + 1] =
  "kalendáø",
  "a naptárat"
 };
-// 2010-09-14: doplnené
+// 2010-09-14
 const char *html_text_kalendar_miestny[POCET_JAZYKOV + 1] = 
 {"kalendár Liturgie hodín: ",
  "kalendáø Liturgie hodin: ",
@@ -2378,7 +2378,7 @@ const char *html_text_detaily_explain[POCET_JAZYKOV + 1] =
  "A többi beállítási lehetõség a fõoldalon található. <p>Amennyiben valamelyik kiválasztott paraméter nem mûködik, figyelmen kívül kell hagyni (vagyis tetszõlegesen állíthatók)."
 };
 
-// 2010-06-04: doplnenı text pre popis do invitatória
+// 2010-06-04: text pre popis do invitatória
 const char *html_text_inv_slavaotcu[POCET_JAZYKOV + 1] = 
 {"<p>&nbsp;&nbsp;&nbsp; <"HTML_SPAN_RED_SMALL">Nasleduje</span> <span class=\"small\">Sláva Otcu</span> <"HTML_SPAN_RED_SMALL">a opakuje sa antifóna.</span>", 
  "<p>&nbsp;&nbsp;&nbsp; <"HTML_SPAN_RED_SMALL">Následuje</span> <span class=\"small\">Sláva Otci</span> <"HTML_SPAN_RED_SMALL">a opakuje se antifona.</span>", 
@@ -2389,7 +2389,11 @@ const char *html_text_inv_slavaotcu[POCET_JAZYKOV + 1] =
  "<p>&nbsp;&nbsp;&nbsp; <"HTML_SPAN_RED_SMALL">Következik a</span> <span class=\"small\">Dicsõség az Atyának</span> <"HTML_SPAN_RED_SMALL">és megismételjük az antifónát.</span>", 
 };
 
-// 2009-08-04, doplnené: pre batch mód
+// 2013-02-22: page navigation (top, bottom)
+const char *html_text_top[POCET_JAZYKOV + 1] = {"&uarr; navrch", "&uarr; nahoru", "&uarr; top", "", "", "&uarr; nahoru", "&uarr; felfelé"};
+const char *html_text_bottom[POCET_JAZYKOV + 1] = {"&darr; naspodok", "&darr; dolù", "&darr; bottom", "", "", "&darr; dolù", "&darr; hu_bottom"};
+
+// 2009-08-04: pre batch mód
 const char *html_text_batch_Zoznam1[POCET_JAZYKOV + 1] = {"Zoznam modlitieb", "Seznam modliteb", "List of prayers", "", "", "Seznam modliteb", "Az imák jegyzéke"};
 const char *html_text_batch_Zoznam1m[POCET_JAZYKOV + 1] = {"Zoznam modlitieb po mesiacoch", "Seznam modliteb dle mìsícù", "List of prayers by months", "", "", "Seznam modliteb dle mìsícù", "Az imák jegyzéke hónapok szerint"};
 const char *html_text_batch_obdobie1m[POCET_JAZYKOV + 1] = {"("/*obdobie */"od %d. %s %d do %d. %s %d)", "(pro období od %d. %s %d do %d. %s %d)", "(%d. %s %d -- %d. %s %d)", "(%d. %s %d -- %d. %s %d)", "(%d. %s %d -- %d. %s %d)", "(pro období od %d. %s %d do %d. %s %d)", "hu_(%d. %s %d -- %d. %s %d)"};
@@ -2398,7 +2402,7 @@ const char *html_text_batch_Back[POCET_JAZYKOV + 1] = {"^ hore", "^ nahoru", "^ 
 const char *html_text_batch_Prev[POCET_JAZYKOV + 1] = {"&lt;&lt;", "&lt;&lt;", "&lt;&lt;", "&lt;&lt;", "&lt;&lt;", "&lt;&lt;", "&lt;&lt;"};
 const char *html_text_batch_Next[POCET_JAZYKOV + 1] = {"&gt;&gt;", "&gt;&gt;", "&gt;&gt;", "&gt;&gt;", "&gt;&gt;", "&gt;&gt;", "&gt;&gt;"};
 
-// 2009-04-08, doplnené: zakonèenie modlitby trojaké, krátke resp. dlhé
+// 2009-04-08: zakonèenie modlitby trojaké, krátke resp. dlhé
 const char *text_ZAKONCENIE_SKRZE_dlhe[POCET_JAZYKOV + 1] = 
 {"Skrze nášho Pána Jeiša Krista, tvojho Syna, ktorı je Boh a_s_tebou ije a_kra¾uje v_jednote s_Duchom Svätım po všetky veky vekov.",
  "Skrze tvého Syna Jeíše Krista, našeho Pána, nebo on s_tebou v_jednotì Ducha svatého ije a_kraluje po všechny vìky vìkù.",
@@ -2453,7 +2457,7 @@ const char *text_ZAKONCENIE_LEBO_TY_kratke[POCET_JAZYKOV + 1] =
  "Nebo ty iješ a kraluješ na vìky vìkù.",
  "Aki élsz és uralkodol mindörökkön-örökké.",
  };
-// 2010-06-07: pridané len pre SK (POST1_MODLITBA5NE)
+// 2010-06-07: len pre SK (POST1_MODLITBA5NE)
 const char *text_ZAKONCENIE_ON_JE_dlhe = "On je Boh a_s_tebou ije a_kra¾uje v_jednote s_Duchom Svätım po všetky veky vekov.";
 const char *text_ZAKONCENIE_ON_JE_kratke = "On ije a_kra¾uje na veky vekov.";
 /* 2011-01-14: pridané len pre SK 
@@ -2477,7 +2481,7 @@ const char *text_ZAKONCENIE_O_TO_TA_PROSIME[POCET_JAZYKOV + 1] =
  };
 
 
-// 2009-05-15, doplnené: pre dominikánov
+// 2009-05-15: pre dominikánov
 const char *text_PRO_OP[POCET_JAZYKOV + 1] = 
 {"Pre dominikánov (CZ_OP): ",
 "Pro dominikány (OP CZ): ",
@@ -2485,7 +2489,7 @@ const char *text_PRO_OP[POCET_JAZYKOV + 1] =
  "",
  "",
  "Pro OP CZ: ",
- "hu_",
+ "",
  };
 
 // nasledujú názvy liturgickıch dní -- follow the names of special liturgical celebrations

@@ -2318,6 +2318,13 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 	Log("--includeFile(): end\n");
 }// includeFile()
 
+void _export_rozbor_dna_navig_top_bottom(char *target, const char *text){
+	Export("\n<!--p-navigation-->\n");
+	Export("<p "HTML_ALIGN_CENTER" "HTML_CLASS_SMALL">");
+	Export("<a href=\"#%s\""HTML_CLASS_QUIET">%s</a>", target, text);
+	Export("</p>");
+}// _export_rozbor_dna_navig_top_bottom()
+
 //---------------------------------------------------------------------
 // definicie pre _rozbor_dna():
 // obsahuju sviatky, ktore su bud pevne alebo pohyblive, v kazdom pripade su to dolezite "hranicne" dni medzi obdobiami
@@ -3214,17 +3221,25 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 				Export("navigácia:begin-->\n");
 				Export("<!-- navigácia %d -->\n", _global_pocet_navigacia);
 				if((_global_pocet_navigacia <= 1) && (_global_pocet_volani_interpretTemplate < 2)){
+					_export_rozbor_dna_navig_top_bottom(HTML_BOTTOM, html_text_bottom[_global_jazyk]);
+
 					_export_rozbor_dna_buttons_dni(EXPORT_DNA_JEDEN_DEN, NIE);
+					
 					// najprv dni, potom modlitby
-					Export("<table "HTML_ALIGN_CENTER">\n<tr><td>\n");
-					_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN, _global_poradie_svaty, NIE);
-					Export("</td></tr>\n</table>");
-				}// if((_global_pocet_navigacia <= 1) && (_global_pocet_volani_interpretTemplate < 2))
-				else{
+					
 					Export("<table "HTML_ALIGN_CENTER">\n<tr><td>\n");
 					_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN, _global_poradie_svaty, NIE);
 					Export("</td></tr>\n</table>\n");
+				}// if((_global_pocet_navigacia <= 1) && (_global_pocet_volani_interpretTemplate < 2))
+				else{
+					_export_rozbor_dna_navig_top_bottom(HTML_TOP, html_text_top[_global_jazyk]);
+
+					Export("<table "HTML_ALIGN_CENTER">\n<tr><td>\n");
+					_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN, _global_poradie_svaty, NIE);
+					Export("</td></tr>\n</table>\n");
+					
 					// najprv modlitby, potom dni
+					
 					_export_rozbor_dna_buttons_dni(EXPORT_DNA_JEDEN_DEN, NIE);
 				}// _global_pocet_navigacia > 1 || (_global_pocet_volani_interpretTemplate >= 2)
 				Export("<!--navigácia:end");
