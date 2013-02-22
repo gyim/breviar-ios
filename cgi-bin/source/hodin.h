@@ -452,7 +452,7 @@ const char *nazov_kalendara_long[POCET_KALENDAROV + 1] =
 {""
 ,""
 ,"všeobecnı [pre Slovensko]"
-,"obecní [pro ÈR]"
+,"obecní [pro Èechy a Moravu]"
 ,""
 ,"pre Kongregáciu najsv. Vykupite¾a — redemptoristov (CSsR)" // bol ve¾mi dlhı combo-box, keï bolo: "pre Kongregáciu najsvätejšieho Vykupite¾a — redemptoristov (CSsR)"
 ,""
@@ -464,7 +464,7 @@ const char *nazov_kalendara_long[POCET_KALENDAROV + 1] =
 ,"pre františkánsku rodinu"
 ,"pre Reho¾u kazate¾ov — dominikánov (OP)"
 ,"pre Misijnú spoloènos sv. Vincenta de Paul — lazaristov (CM)"
-,"pro premonstráty (OPraem)"
+,"s vlastními texty Premonstrátského øádu (OPraem)" // "pro premonstráty (OPraem)"
 };
 
 // special "local" or "partial" characteristics of various celebrations - each in one language; no need to translate; special strings will be added
@@ -1053,8 +1053,8 @@ const char *html_button_kompletorium_nunkdim[POCET_JAZYKOV + 1] = {"Kompletórium
 // doplnené, 2009-05-21
 const char *html_title[POCET_JAZYKOV + 1] = {"Liturgia hodín", "Liturgie hodin", "Liturgy of Hours", "Liturgia horarum", "", "Liturgie hodin", "Az Imaórák Liturgiája"};
 // 2009-08-04: upravené pre batch mód
-// const char *html_title_batch_mode[POCET_JAZYKOV + 1] = {"Batch mód", "Dávkovı reim", "Batch mode", "la_", "", "Dávkovı reim", "hu_"};
-const char *html_title_batch_mode[POCET_JAZYKOV + 1] = {"Liturgia hodín - statické texty", "Liturgie hodin - statické texty", "Liturgy of Hours - static texts", "la_", "", "Liturgie hodin - statické texty", "Az Imaórák Liturgiája - hu_"};
+// const char *html_title_batch_mode[POCET_JAZYKOV + 1] = {"Batch mód", "Dávkovı reim", "Batch mode", "la_", "", "Dávkovı reim", "Kötegelt mód"};
+const char *html_title_batch_mode[POCET_JAZYKOV + 1] = {"Liturgia hodín - statické texty", "Liturgie hodin - statické texty", "Liturgy of Hours - static texts", "la_", "", "Liturgie hodin - statické texty", "Az Imaórák Liturgiája - állandó szövegek"};
 
 // doplnené, 2011-05-16
 const char *html_error_template[POCET_JAZYKOV + 1] = {"Šablóna pre modlitbu sa nenašla. Zrejme neexistuje súbor `%s'.", "Šablona pro modlitbu se nenašla. Patrnì neexistuje soubor `%s'.", "Template for prayer not found. File `%s' does not exist.", "Template for prayer not found. File `%s' does not exist.", "", "Šablona pro modlitbu se nenašla. Patrnì neexistuje soubor `%s'.", "Template for prayer not found. File `%s' does not exist."};
@@ -1476,16 +1476,7 @@ const char *html_text_zalmy_brat_zo_okrem_mcd[POCET_JAZYKOV + 1] =
  "", 
  "", 
  " (kromì modlitby bìhem dne)\n",
- "hu_"
-};
-const char *html_text_zalmy_brat_zo_explain[POCET_JAZYKOV + 1] = 
-{"V závislosti od typu svätenia sa berú alebo neberú na sviatok svätca/svätice almy a chválospevy z vlastnej èasti (na ranné chvály z nedele 1. tıdòa altára); je moné tieto almy vyiada.", 
- "V závislosti na typu slavení svátku svìtce/svìtice se berou nebo neberou almy a kantika z vlastní èásti (na ranní chvály z nedìle 1. tıdne altáøe); je mono tyto almy vyádat.", 
- "xxx", 
- "",
- "", 
- "V závislosti na typu slavení svátku svìtce/svìtice se berou nebo neberou almy a kantika z vlastní èásti (na ranní chvály z nedìle 1. tıdne altáøe); je mono tyto almy vyádat.",
- "hu_"
+ " (a Napközi imát kivéve)"
 };
 
 const char *html_text_spol_casti_vziat_zo[POCET_JAZYKOV + 1] = 
@@ -1499,7 +1490,7 @@ const char *html_text_spol_casti_vziat_zo[POCET_JAZYKOV + 1] =
 const char *html_text_spol_casti_vziat_zo_explain[POCET_JAZYKOV + 1] = 
 {"Na sviatok svätca/svätice sa pod¾a liturgickıch pravidiel berú èasti, ktoré sa nenachádzajú vo vlastnej èasti altára, zo spoloènej èasti sviatku, niekedy je monos vybra si z viacerıch spoloènıch èastí; naviac je monos modli sa tieto èasti zo všedného dòa.", 
  "Na svátek ke cti svìtce/svìtice se podle liturgickıch pravidel berou èásti, které se nenachází ve vlastních textech, ze spoleènıch textù, nìkdy je moné vybrat si z více spoleènıch textù; navíc je monost modlit se tyto èásti ze všedního dne.", 
- "xxx", 
+ "", 
  "",
  "",
  "O svátku ke cti svìtce/svìtice se podle liturgickıch pravidel berou èásti, které se nenachází ve vlastních textech, ze spoleènıch textù, nìkdy je moné vybrat si z více spoleènıch textù; navíc je monost modlit se tyto èásti ze všedního dne.",
@@ -1989,7 +1980,7 @@ const char *html_text_option1_spomienka_spolcast_NIE[POCET_JAZYKOV + 1] =
  "", 
  "", 
  "na památky pouít èásti z bìného dne, ne ze spoleènıch èástí", 
- "hu_emléknapon a jelzett részeket a közös részbõl venni"
+ "emléknapon a jelzett részeket az adott napról venni, nem a közös részbõl"
 };
 
 const char *html_text_option2_html_export[POCET_JAZYKOV + 1] = 
@@ -2364,8 +2355,8 @@ const char *html_text_kalendar_miestny_explain[POCET_JAZYKOV + 1] =
  "", 
  "",
  "", 
- "", 
- "hu_"
+ "", // not applicable for CZOP
+ "Lehetséges a helyi naptárt választani, szerzetesrendét, kongregációét, intézményét..."
 };
 
 const char *html_text_detaily_explain[POCET_JAZYKOV + 1] = 
@@ -2390,13 +2381,13 @@ const char *html_text_inv_slavaotcu[POCET_JAZYKOV + 1] =
 };
 
 // 2013-02-22: page navigation (top, bottom)
-const char *html_text_top[POCET_JAZYKOV + 1] = {"&uarr; navrch", "&uarr; nahoru", "&uarr; top", "", "", "&uarr; nahoru", "&uarr; felfelé"};
-const char *html_text_bottom[POCET_JAZYKOV + 1] = {"&darr; naspodok", "&darr; dolù", "&darr; bottom", "", "", "&darr; dolù", "&darr; hu_bottom"};
+const char *html_text_top[POCET_JAZYKOV + 1] = {"&uarr; navrch", "&uarr; nahoru", "&uarr; top", "", "", "&uarr; nahoru", "&uarr; fent"}; // HU: felfelé
+const char *html_text_bottom[POCET_JAZYKOV + 1] = {"&darr; naspodok", "&darr; dolù", "&darr; bottom", "", "", "&darr; dolù", "&darr; lent"}; // HU: lefelé
 
 // 2009-08-04: pre batch mód
 const char *html_text_batch_Zoznam1[POCET_JAZYKOV + 1] = {"Zoznam modlitieb", "Seznam modliteb", "List of prayers", "", "", "Seznam modliteb", "Az imák jegyzéke"};
 const char *html_text_batch_Zoznam1m[POCET_JAZYKOV + 1] = {"Zoznam modlitieb po mesiacoch", "Seznam modliteb dle mìsícù", "List of prayers by months", "", "", "Seznam modliteb dle mìsícù", "Az imák jegyzéke hónapok szerint"};
-const char *html_text_batch_obdobie1m[POCET_JAZYKOV + 1] = {"("/*obdobie */"od %d. %s %d do %d. %s %d)", "(pro období od %d. %s %d do %d. %s %d)", "(%d. %s %d -- %d. %s %d)", "(%d. %s %d -- %d. %s %d)", "(%d. %s %d -- %d. %s %d)", "(pro období od %d. %s %d do %d. %s %d)", "hu_(%d. %s %d -- %d. %s %d)"};
+const char *html_text_batch_obdobie1m[POCET_JAZYKOV + 1] = {"("/*obdobie */"od %d. %s %d do %d. %s %d)", "(pro období od %d. %s %d do %d. %s %d)", "(%d. %s %d -- %d. %s %d)", "(%d. %s %d -- %d. %s %d)", "(%d. %s %d -- %d. %s %d)", "(pro období od %d. %s %d do %d. %s %d)", "(%d. %s %d -- %d. %s %d)"};
 const char *html_text_batch_Zoznam2[POCET_JAZYKOV + 1] = {/* Zoznam modlitieb pre */"%s %d", "%s %d", "%s %d", "%s %d", "%s %d", "%s %d", "%s %d"};
 const char *html_text_batch_Back[POCET_JAZYKOV + 1] = {"^ hore", "^ nahoru", "^ up", "", "", "^ nahoru", "^ felfelé"};
 const char *html_text_batch_Prev[POCET_JAZYKOV + 1] = {"&lt;&lt;", "&lt;&lt;", "&lt;&lt;", "&lt;&lt;", "&lt;&lt;", "&lt;&lt;", "&lt;&lt;"};
@@ -2753,12 +2744,12 @@ const char *text_JAN_19_OP[POCET_JAZYKOV + 1] =
  };
 const char *text_JAN_19_SJ[POCET_JAZYKOV + 1] = 
 {"Bl. Jakuba Sal&egrave;sa a Viliama Saultemouchea, Ignáca de Azevedo a spoloèníkov, "HTML_LINE_BREAK"Jakuba Bonnauda a spoloèníkov, muèeníkov",
- "cz_",
  "",
- "la_",
  "",
- "czop_",
- "hu_",
+ "",
+ "",
+ "_",
+ "",
  };
 const char *text_JAN_20_1[POCET_JAZYKOV + 1] = 
 {"Sv. Fabiána, pápea a muèeníka",
@@ -3154,10 +3145,10 @@ const char *text_FEB_09_SDB[POCET_JAZYKOV + 1] =
 {"Bl. Euzébie Palominovej Yenes, panny",
  "",
  "",
- "la_",
  "",
  "",
- "hu_",
+ "",
+ "",
  };
 const char *text_FEB_10[POCET_JAZYKOV + 1] = 
 {"Sv. Školastiky, panny",
@@ -3307,10 +3298,10 @@ const char *text_FEB_25_SDB[POCET_JAZYKOV + 1] =
 {"Sv. Alojza Versigliu, biskupa, a Kalixta Caravaria, kòaza, "HTML_LINE_BREAK"prvıch saleziánskych muèeníkov",
  "",
  "",
- "la_",
  "",
  "",
- "hu_",
+ "",
+ "",
  };
 
 // --------------- 00 pohyblivé slávenia ---------------
@@ -6294,10 +6285,10 @@ const char *text_SEP_26_CSSR[POCET_JAZYKOV + 1] =
 {"Bl. Gašpara Stanggassingera, kòaza",
  "",
  "",
- "la_",
  "",
  "",
- "hu_",
+ "",
+ "",
  };
 const char *text_SEP_26_OP[POCET_JAZYKOV + 1] = 
 {"Bl. Vavrinca z Ripafratta, kòaza",
@@ -6423,10 +6414,10 @@ const char *text_OKT_05_SDB[POCET_JAZYKOV + 1] =
 {"Bl. Alberta Marvelliho",
  "",
  "",
- "la_",
  "",
  "",
- "hu_",
+ "",
+ "",
  };
 const char *text_OKT_05_CSSR[POCET_JAZYKOV + 1] = 
 {"Bl. Františka Xaverského Seelosa, kòaza",
@@ -6774,10 +6765,10 @@ const char *text_OKT_24_SDB[POCET_JAZYKOV + 1] =
 {"Bl. Alojza Guanellu, kòaza",
  "",
  "",
- "la_",
  "",
  "",
- "hu_",
+ "",
+ "",
  };
 const char *text_OKT_24_HU[POCET_JAZYKOV + 1] = 
 {"",
@@ -6873,10 +6864,10 @@ const char *text_OKT_29_SDB[POCET_JAZYKOV + 1] =
 {"Bl. Michala Ruu, kòaza",
  "",
  "",
- "la_",
  "",
  "",
- "hu_",
+ "",
+ "",
  };
 const char *text_OKT_29_CZ[POCET_JAZYKOV + 1] = 
 {"",
