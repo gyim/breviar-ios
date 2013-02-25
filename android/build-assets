@@ -53,6 +53,8 @@ fi
 rm -f $ROOT/assets/katechezy.htm
 cp $ROOT/../katechezy.htm $ROOT/assets/katechezy.htm
 
+rm -f $ROOT/assets/breviar-web.cfg
+ln -s $ROOT/../../cgi-bin/breviar-web.cfg $ROOT/assets/breviar-web.cfg
 
 pushd $ROOT/assets
 patch -p0 --merge <../assets.diff
