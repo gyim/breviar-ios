@@ -3221,7 +3221,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 				Export("navigácia:begin-->\n");
 				Export("<!-- navigácia %d -->\n", _global_pocet_navigacia);
 				if((_global_pocet_navigacia <= 1) && (_global_pocet_volani_interpretTemplate < 2)){
-					_export_rozbor_dna_navig_top_bottom(HTML_BOTTOM, html_text_bottom[_global_jazyk]);
+					_export_rozbor_dna_navig_top_bottom((char *)HTML_BOTTOM, html_text_bottom[_global_jazyk]);
 
 					_export_rozbor_dna_buttons_dni(EXPORT_DNA_JEDEN_DEN, NIE);
 					
@@ -3232,7 +3232,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 					Export("</td></tr>\n</table>\n");
 				}// if((_global_pocet_navigacia <= 1) && (_global_pocet_volani_interpretTemplate < 2))
 				else{
-					_export_rozbor_dna_navig_top_bottom(HTML_TOP, html_text_top[_global_jazyk]);
+					_export_rozbor_dna_navig_top_bottom((char *)HTML_TOP, html_text_top[_global_jazyk]);
 
 					Export("<table "HTML_ALIGN_CENTER">\n<tr><td>\n");
 					_export_rozbor_dna_buttons(EXPORT_DNA_JEDEN_DEN, _global_poradie_svaty, NIE);
