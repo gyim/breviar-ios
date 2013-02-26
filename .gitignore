@@ -68,7 +68,10 @@ android/assets/include/*
 android/assets/include_cz/*
 android/assets/include_hu/*
 android/assets/katechezy.htm
+android/libs/mips/*
+android/libs/x86/*
 android/assets/breviar-web.cfg
+android/assets/breviar-android.cfg
 android/gen
 project.xcworkspace
 xcuserdata
