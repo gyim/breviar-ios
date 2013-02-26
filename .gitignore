@@ -73,5 +73,8 @@ android/libs/x86/*
 android/assets/breviar-web.cfg
 android/assets/breviar-android.cfg
 android/gen
+android/local.properties
+android/ant.properties
+android/libs/android-support-v4.jar
 project.xcworkspace
 xcuserdata
