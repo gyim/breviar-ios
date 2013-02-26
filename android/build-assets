@@ -5,7 +5,7 @@ ROOT=`dirname $0`
 # Setup symlinks for includes
 for inc in include include_cz include_hu; do
   rm -r -f $ROOT/assets/$inc
-  mkdir $ROOT/assets/$inc
+  mkdir -p $ROOT/assets/$inc
   for i in ../$ROOT/$inc/*; do
     ln -s "../../../$inc/`basename $i`" $ROOT/assets/$inc/"`basename "$i" | sed 's/^_/x/'`"
   done
@@ -25,7 +25,7 @@ for i in kat-2001-03-28.htm ord-inv.htm ord-k3.htm ord-km.htm ord-vesp.htm \
 done
 
 # CZ
-rm -f $ROOT/assets/cz/ordinar/*
+rm -f $ROOT/assets/cz/docs/*
 mkdir -p $ROOT/assets/cz/docs
 rm -f $ROOT/assets/cz/docs/*
 for i in full_ordinar.htm ord-k0.htm ord-k2.htm ord-k4.htm ord-k6.htm \
@@ -36,8 +36,8 @@ done
 
 
 # HU
-rm -r -f $ROOT/assets/hu/docs
-mkdir $ROOT/assets/hu/docs
+rm -f $ROOT/assets/hu/docs/*
+mkdir -p $ROOT/assets/hu/docs
 for i in ord-k1.htm ord-k4.htm ord-km.htm ord-rch.htm ukonkaj.htm \
          ord-inv.htm ord-k2.htm ord-k5.htm ord-komp.htm ord-vesp.htm uvodmp.htm \
          ord-k0.htm ord-k3.htm ord-k6.htm ord-pc.htm; do
