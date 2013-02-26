@@ -61,7 +61,6 @@ ASPNETDB.MDF
 aspnetdb_log.ldf
 android/libs/armeabi
 android/obj
-android/assets/cz/ordinar/*
 android/assets/docs/*
 android/assets/cz/docs/*
 android/assets/hu/docs/*
