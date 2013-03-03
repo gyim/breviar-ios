@@ -92,7 +92,7 @@ out.write("""
 </table>
 
 <p>
-Links: <a href="../..">all nightlies</a>, <a href="../../releases">all releases</a>,
+Links: <a href="../..">all nightlies</a>, <a href="../../../releases">all releases</a>,
 <a href="..">this nightly</a>
 
 <h2>Screenshots</h2>
