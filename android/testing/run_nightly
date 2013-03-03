@@ -1,4 +1,19 @@
 #!/bin/bash
+
+start_emulator() {
+  avd=$1
+  pidfile=/tmp/$avd.pid
+  /sbin/start-stop-daemon -S -m -p $pidfile -b -x `which emulator` \
+    -- -avd $avd -no-window -wipe-data
+  sleep 240
+}
+
+stop_emulator() {
+  avd=$1
+  pidfile=/tmp/$avd.pid
+  /sbin/start-stop-daemon -K -p $pidfile
+}
+
 (
 
 echo "Running nightlies."
@@ -7,7 +22,7 @@ LOCK=/tmp/breviar-nightlies.lck
 ROOT=/home/build/testing
 (
   flock -n 9 || (echo "Unable to get lock!"; exit 1)
-  pushd ..
+  pushd .. >/dev/null
 
   COMMIT=`git branch -v --no-abbrev | egrep "^. master" | sed "s/. master *//;s/ .*//"`
   DATE=`date +%F`
@@ -20,8 +35,14 @@ ROOT=/home/build/testing
   sudo /usr/local/bin/build-access.sh
 
   echo "Git fetch and merge."
-  git fetch --all >>$LOG 2>&1
-  git merge origin/master >>$LOG 2>&1
+  if ( git fetch --all && git merge origin/master ) >>$LOG 2>&1; then 
+    echo "Git merge successful."
+  else 
+    echo "Git mergefailed! Log follows:"
+    echo
+    cat $LOG
+    exit 0
+  fi
 
   echo "Build."
   rm -rf bin
@@ -29,13 +50,27 @@ ROOT=/home/build/testing
     echo "Build finished successfully."
   else
     echo "Build failed! Log follows:"
+    echo
     cat $LOG
     exit 0
   fi
 
   cp bin/Breviar-release.apk $ROOT/$DATE/breviar.apk
+  echo "Nightly package is at: kralovic.org:$ROOT/$DATE/breviar.apk"
+  echo "Or: http://kralovic.org/~riso/testing/$DATE/breviar.apk"
 
-  popd
+  export ANDROID_SDK_HOME=/home/build/
+  start_emulator galaxy_nexus_4.2
+
+  echo "Running tests."
+  TEST_LOG=$ROOT/$DATE/test_log
+  mkdir -p $TEST_LOG
+  monkeyrunner testing/run_tests.py $TEST_LOG
+
+  stop_emulator galaxy_nexus_4.2
+
+  echo "Test results are available at http://kralovic.org/~riso/testing/$DATE/test_log/index.html"
+  popd >/dev/null
 ) 9>$LOCK
 
 rm -f $LOCK
