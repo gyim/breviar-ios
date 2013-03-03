@@ -1,0 +1,42 @@
+#!/bin/bash
+(
+
+echo "Running nightlies."
+
+LOCK=/tmp/breviar-nightlies.lck
+ROOT=/home/build/testing
+(
+  flock -n 9 || (echo "Unable to get lock!"; exit 1)
+  pushd ..
+
+  COMMIT=`git branch -v --no-abbrev | egrep "^. master" | sed "s/. master *//;s/ .*//"`
+  DATE=`date +%F`
+
+  rm -rf $ROOT/$DATE
+  mkdir -p $ROOT/$DATE
+  echo $COMMIT >$ROOT/$DATE/commit
+  LOG=$ROOT/$DATE/log
+  
+  sudo /usr/local/bin/build-access.sh
+
+  echo "Git fetch and merge."
+  git fetch --all >>$LOG 2>&1
+  git merge origin/master >>$LOG 2>&1
+
+  echo "Build."
+  rm -rf bin
+  if (./build-assets && ndk-build && ant debug && ant release) >>$LOG 2>&1; then 
+    echo "Build finished successfully."
+  else
+    echo "Build failed! Log follows:"
+    cat $LOG
+    exit 0
+  fi
+
+  cp bin/Breviar-release.apk $ROOT/$DATE/breviar.apk
+
+  popd
+) 9>$LOCK
+
+rm -f $LOCK
+) | mail -s "Breviar nightly" riso@ksp.sk
