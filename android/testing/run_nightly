@@ -74,4 +74,4 @@ ROOT=/home/build/testing
 ) 9>$LOCK
 
 rm -f $LOCK
-) | mail -s "Breviar nightly" riso@ksp.sk
+) | mail -s "Breviar nightly" android@breviar.sk
