@@ -6,6 +6,7 @@ start_emulator() {
   /sbin/start-stop-daemon -S -m -p $pidfile -b -x `which emulator` \
     -- -avd $avd -no-window -wipe-data
   sleep 240
+  adb push testing/orng /data/orng
 }
 
 stop_emulator() {
@@ -26,6 +27,7 @@ ROOT=/home/build/testing
 
   COMMIT=`git branch -v --no-abbrev | egrep "^. master" | sed "s/. master *//;s/ .*//"`
   DATE=`date +%F`
+  VERSION=`cat AndroidManifest.xml | grep "android:versionName" | sed "s/.*versionName=\"//;s/\".*//"`
 
   rm -rf $ROOT/$DATE
   mkdir -p $ROOT/$DATE
@@ -65,7 +67,7 @@ ROOT=/home/build/testing
   echo "Running tests."
   TEST_LOG=$ROOT/$DATE/test_log
   mkdir -p $TEST_LOG
-  monkeyrunner testing/run_tests.py $TEST_LOG
+  monkeyrunner testing/run_tests.py $TEST_LOG $DATE $COMMIT $VERSION
 
   stop_emulator galaxy_nexus_4.2
 
