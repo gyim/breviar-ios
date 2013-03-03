@@ -31,7 +31,7 @@ runComponent = package + '/' + activity
 device.wake()
 
 #set fixed date
-os.system("adb shell 'date 1362343193'")
+os.system("adb shell 'date 1362343193' >/dev/null 2>/dev/null")
 
 print "Starting activity"
 device.startActivity(component=runComponent)
@@ -92,7 +92,8 @@ out.write("""
 </table>
 
 <p>
-Links: <a href="../..">all nightlies</a>, <a href="../../releases">all releases</a>
+Links: <a href="../..">all nightlies</a>, <a href="../../releases">all releases</a>,
+<a href="..">this nightly</a>
 
 <h2>Screenshots</h2>
 
