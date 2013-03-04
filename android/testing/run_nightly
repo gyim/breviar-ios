@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. /etc/profile
+
 start_emulator() {
   avd=$1
   pidfile=/tmp/$avd.pid
