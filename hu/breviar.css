@@ -61,7 +61,7 @@ input.button, input.reset {
 	font-size : 90%; 
 	text-decoration:none; 
 	color: #000000; 
-	border: solid 1px #226500; }
+	border: solid 0px #226500; }
 
 input.text { border-style: solid; background: white; }
 
