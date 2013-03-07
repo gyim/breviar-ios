@@ -1,3 +1,8 @@
+2013-03-07: SK generované pre OP
+	-- niektoré pevné súèasti modlitieb (chválospevy Benediktus, Magnifikat, Nunk dimittis, Te Deum; rubriky; zakonèenia modlitieb; dlhé responzóriá v posv. èítaniach; opakovanie zvolaní v prosbách), doplnková psalmódia ("(alt)" tlaèidlo); neberú sa èasti zo spol. èastí na spomienky
+		breviar.exe -qpbm -d1 -m1 -r2013 -f31 -g12 -p2013 -brobSK-op.bat  -kop -jsk -nbreviar.exe -i..\..\breviar.sk\include\ -usimple -M2 -00 -15535 -2120
+		-- 2013-sk-op
+
 2013-02-11: CZ ukážka generovania celého mesiaca
 	breviar.exe -qpbm -d1 -m2 -r2013 -f28 -g2 -p2013 -a1 -brobCZ.bat -jcz -nbreviar.exe -i..\..\breviar.sk\include_cz\ -00 -15191 -2224
 
