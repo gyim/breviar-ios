@@ -1257,6 +1257,8 @@ extern short int _global_pocet_svatych;
 
 // globálna premenná -- pole -- obsahujúca options; pôvodne to boli globálne premenné _global_opt 1..9 atï., obsahujú pom_MODL_OPT...
 extern short int _global_opt[POCET_GLOBAL_OPT];
+// globálna premenná -- pole -- obsahujúca force options; pôvodne to boli globálne premenné _global_optf 1..9 atï., obsahujú pom_MODL_OPTF...
+extern short int _global_optf[POCET_GLOBAL_OPT];
 
 #define POCET_OPT_0_SPECIALNE               6 // jednotlivé komponenty option 0 -- bity pre force option 0
 extern short int _global_opt_specialne[POCET_OPT_0_SPECIALNE];
@@ -1389,7 +1391,7 @@ char *_vytvor_string_z_datumu(short int den, short int mesiac, short int rok, sh
 // 2011-05-11: doplnenı novı parameter align -- èi zarovna jednociferné dátumy (èíslovka dòa) medzerou z¾ava
 void _vytvor_global_link(short int den, short int mesiac, short int rok, short int _case, short int typ, short int align);
 
-void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR]);
+void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int aj_force = NIE);
 
 short int prestupny(short int);
 short int pocet_dni_v_roku(short int);

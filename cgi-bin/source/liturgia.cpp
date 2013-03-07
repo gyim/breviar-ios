@@ -484,17 +484,10 @@ char *convert_nonbreaking_spaces(const char *input){
 	return (_global_pom_str);
 }// convert_nonbreaking_spaces()
 
-void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR] /*, short int prvy_ampersand = ANO */){
+void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int aj_force /* default = NIE */){
 	short int i;
 	Log("prilep_request_options() -- zaËiatok...\n");
-/*
-	// 2012-04-27: prv˝ ampersand sa prilepuje vûdy; nevadÌ, ak je naviac; doteraz "NIE" moûnosù bola pouûit· len 1x; opravenÈ kvÙli chybe pre jazyk (prejavila sa pri tvorbe URL pre PARAM_LINK_ZALM95_END pre in˝ jazyk ako SK)
-	if(prvy_ampersand == ANO){
-		sprintf(pom3, HTML_AMPERSAND);
-		strcat(pom2, pom3);
-		Log("\tPrilepil som prv˝ ampersand; pom2 == `%s'\n", pom2);
-	}
-*/
+
 	// 2006-07-31: pridanÈ odovzdanie parametra pre jazyk
 	if(_global_jazyk != JAZYK_SK){
 		sprintf(pom3, HTML_AMPERSAND"%s=%s", STR_JAZYK, skratka_jazyka[_global_jazyk]);
@@ -566,7 +559,31 @@ void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR] /*, short i
 			strcat(pom2, pom3);
 			Log("\tPrilepil som aj opt %d: `%s'\n", i, pom3);
 		}
-	}
+	}// for i
+
+	if(aj_force == ANO){
+		Log("prilepujem aj force options...\n");
+		for(i = 0; i < POCET_GLOBAL_OPT; i++){
+			Log("i == %d...\n", i);
+			local_opt_default = CFG_OPTION_DEFAULT(i);
+			Log("_global_opt[%d] == %d; _global_optf[%d] == %d; CFG_OPTION_DEFAULT(%d) == %d;\n", i, _global_opt[i], i, _global_optf[i], i, local_opt_default);
+			if((_global_opt[i] != _global_optf[i]) && (_global_opt[i] != local_opt_default)){
+				strcpy(local_str, STR_EMPTY);
+				switch(i){
+					case OPT_0_SPECIALNE:		strcat(local_str, STR_MODL_OPTF_0); break;
+					case OPT_1_CASTI_MODLITBY:	strcat(local_str, STR_MODL_OPTF_1); break;
+					case OPT_2_HTML_EXPORT:		strcat(local_str, STR_MODL_OPTF_2); break;
+					case OPT_3_SPOLOCNA_CAST:	strcat(local_str, STR_MODL_OPTF_3); break;
+					case OPT_4_OFFLINE_EXPORT:	strcat(local_str, STR_MODL_OPTF_4); break;
+					case OPT_5_ALTERNATIVES:	strcat(local_str, STR_MODL_OPTF_5); break;
+				}// switch(i)
+				sprintf(pom3, HTML_AMPERSAND"%s=%d", local_str, _global_optf[i]);
+				strcat(pom2, pom3);
+				Log("\tPrilepil som aj optf %d: `%s'\n", i, pom3);
+			}
+		}// for i
+	}// aj_force
+
 	Log("prilep_request_options() -- koniec.\n");
 }// prilep_request_options();
 
