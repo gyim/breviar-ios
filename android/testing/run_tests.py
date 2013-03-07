@@ -10,10 +10,9 @@ def stable_snapshot(file):
   stableImage = False 
   while not stableImage: 
       result = device.takeSnapshot() 
-      MonkeyRunner.sleep(1) 
+      MonkeyRunner.sleep(5)
       result2 = device.takeSnapshot() 
       stableImage = result2.sameAs(result, 0.5) 
-  #MonkeyRunner.sleep(shortSleepInterval) 
   result2.writeToFile(file,'png') 
 
 if len(sys.argv) < 5:
