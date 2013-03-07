@@ -1391,7 +1391,10 @@ char *_vytvor_string_z_datumu(short int den, short int mesiac, short int rok, sh
 // 2011-05-11: doplnen˝ nov˝ parameter align -- Ëi zarovnaù jednocifernÈ d·tumy (ËÌslovka dÚa) medzerou zæava
 void _vytvor_global_link(short int den, short int mesiac, short int rok, short int _case, short int typ, short int align);
 
-void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int aj_force = NIE);
+#define PRILEP_REQUEST_OPTIONS_DEFAULT   0
+#define PRILEP_REQUEST_OPTIONS_AJ_FORCE  1
+#define PRILEP_REQUEST_OPTIONS_LEN_FORCE 2
+void prilep_request_options(char pom2 [MAX_STR], char pom3 [MAX_STR], short int force_opt = PRILEP_REQUEST_OPTIONS_DEFAULT); // 2013-03-07: pokus; pravdepodobne PRILEP_REQUEST_OPTIONS_LEN_FORCE je neuûitoËnÈ a PRILEP_REQUEST_OPTIONS_AJ_FORCE moûno trocha riskantnÈ...
 
 short int prestupny(short int);
 short int pocet_dni_v_roku(short int);

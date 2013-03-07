@@ -1387,13 +1387,16 @@ void _export_link_show_hide(short int opt, short int bit, char popis_show[SMALL]
 	}// !(_global_poradie_svaty > 0)
 
 	// teraz vytvorÌme reùazec s options
+	prilep_request_options(pom2, pom3);
+/*	
+	// 2013-03-07: pokus o opravu; napokon vyrieöenÈ elegantnejöie: doplnenie niektor˝ch skryt˝ch (hidden) checkboxov; ˙prava vo funkcii _rozparsuj_parametre_OPT()
 	if((opt == OPT_2_HTML_EXPORT) && ((bit == BIT_OPT_2_HIDE_OPTIONS1) || (bit == BIT_OPT_2_HIDE_OPTIONS2))){
-		prilep_request_options(pom2, pom3, ANO); // aj force
+		prilep_request_options(pom2, pom3, PRILEP_REQUEST_OPTIONS_AJ_FORCE); // aj force
 	}
 	else{
 		prilep_request_options(pom2, pom3);
 	}
-
+*/
 	// prilepÌme modlitbu
 	if(_global_modlitba != MODL_NEURCENA){
 		sprintf(pom3, HTML_LINK_CALL_PARAM, STR_MODLITBA, str_modlitby[_global_modlitba]);
@@ -8717,6 +8720,11 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 		//---------------------------------------------------------------------
 
+		// 2013-03-07: doplnenÈ zobrazenie neviditeæn˝ch checkboxov, aby sa po submite zmenen˝ch nastavenÌ neresetovalo skrytie/zobrazenie kalend·ra, navig·cie a Ëasti "œalöie zobrazenia"
+		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_2_HIDE_NAVIG_BUTTONS, ((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_NAVIG_BUTTONS) == BIT_OPT_2_HIDE_NAVIG_BUTTONS)? ANO: NIE);
+		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_2_HIDE_KALENDAR, ((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_KALENDAR) == BIT_OPT_2_HIDE_KALENDAR)? ANO: NIE);
+		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_2_HIDE_OPTIONS2, ((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_OPTIONS2) == BIT_OPT_2_HIDE_OPTIONS2)? ANO: NIE);
+
 		// 2011-01-31: sem presunut· moûnosù v˝beru liturgickÈho kalend·ra
 		// 2011-09-26: predsunut· pred vöetky ostatnÈ options (Igor Gal·d)
 		if((_global_jazyk == JAZYK_SK) || 
@@ -9277,7 +9285,12 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 	Export("</tr>\n\n");
 	if(zobrazit_moznosti2){ // len ak NIE JE moûnosù (skrytie options2) zvolen·
 
-	// -------------------------------------------
+		// 2013-03-07: doplnenÈ zobrazenie neviditeæn˝ch checkboxov
+		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_2_HIDE_NAVIG_BUTTONS, ((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_NAVIG_BUTTONS) == BIT_OPT_2_HIDE_NAVIG_BUTTONS)? ANO: NIE);
+		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_2_HIDE_KALENDAR, ((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_KALENDAR) == BIT_OPT_2_HIDE_KALENDAR)? ANO: NIE);
+		Export("<"HTML_FORM_INPUT_HIDDEN" name=\"%s\" value=\"%d\">\n", STR_MODL_OPTF_2_HIDE_OPTIONS1, ((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_HIDE_OPTIONS1) == BIT_OPT_2_HIDE_OPTIONS1)? ANO: NIE);
+
+		// -------------------------------------------
 		Export("<tr>\n<td>\n");
 
 		Export("<!--TABLE:BEGIN(PRM_DATUM)-->\n");
@@ -11378,6 +11391,7 @@ void _rozparsuj_parametre_OPT(void){
 	// rozparsovanie option parametrov
 	short int i, opt_2_fn /* font name chooser */, opt_2_fs /* font size chooser */;
 	short int aspon_jedna_nenulova;
+	short int bit_value;
 	Log("_rozparsuj_parametre_OPT() -- zaËiatok...\n");
 
 	Log("options...\n");
@@ -11453,6 +11467,7 @@ void _rozparsuj_parametre_OPT(void){
 
 	// force options
 	Log("force options...\n");
+	// postupne prech·dzam jednotlivÈ bitovÈ komponenty force a vysklad·vam z nich celkov˙ jednu hodnotu; ak dan· bitov· hodnota nie je naplnen·, pouûijem hodnotu z ne-force option-bitovÈho komponentu
 
 	// option force 0
 	/*
@@ -11477,8 +11492,15 @@ void _rozparsuj_parametre_OPT(void){
 		_global_optf[OPT_0_SPECIALNE] = 0;
 		/* nastavenie _global_optf[OPT_0_SPECIALNE] podæa jednotliv˝ch bit-komponentov, ktorÈ s˙ nastavenÈ v _global_opt_specialne[] */
 		for(i = 0; i < POCET_OPT_0_SPECIALNE; i++){
+			bit_value = (int)pow(2.0, i);
+			Log("option %d, i == %d; bit_value == %d...\n", OPT_2_HTML_EXPORT, i, bit_value);
 			if(_global_opt_specialne[i] != GLOBAL_OPTION_NULL){
-				_global_optf[OPT_0_SPECIALNE] += (int)pow(2.0, i) * _global_opt_specialne[i];
+				_global_optf[OPT_0_SPECIALNE] += bit_value * _global_opt_specialne[i];
+			}
+			else if((_global_opt[OPT_0_SPECIALNE] & bit_value) == bit_value){
+				// in·Ë pouûi nastavenie z _global_opt (nie force)
+				Log("pouûijem nastavenie z _global_opt[%d] (nie force)...\n", OPT_0_SPECIALNE);
+				_global_optf[OPT_0_SPECIALNE] += bit_value;
 			}
 		}// for i
 		Log("optf[%d] vyskladan· == %d\n", OPT_0_SPECIALNE, _global_optf[OPT_0_SPECIALNE]);
@@ -11508,8 +11530,15 @@ void _rozparsuj_parametre_OPT(void){
 		_global_optf[OPT_1_CASTI_MODLITBY] = 0;
 		/* nastavenie _global_optf[OPT_1_CASTI_MODLITBY] podæa jednotliv˝ch bit-komponentov, ktorÈ s˙ nastavenÈ v _global_opt_casti_modlitby[] */
 		for(i = 0; i < POCET_OPT_1_CASTI_MODLITBY; i++){
+			bit_value = (int)pow(2.0, i);
+			Log("option %d, i == %d; bit_value == %d...\n", OPT_1_CASTI_MODLITBY, i, bit_value);
 			if(_global_opt_casti_modlitby[i] != GLOBAL_OPTION_NULL){
-				_global_optf[OPT_1_CASTI_MODLITBY] += (int)pow(2.0, i) * _global_opt_casti_modlitby[i];
+				_global_optf[OPT_1_CASTI_MODLITBY] += bit_value * _global_opt_casti_modlitby[i];
+			}
+			else if((_global_opt[OPT_1_CASTI_MODLITBY] & bit_value) == bit_value){
+				// in·Ë pouûi nastavenie z _global_opt (nie force)
+				Log("pouûijem nastavenie z _global_opt[%d] (nie force)...\n", OPT_1_CASTI_MODLITBY);
+				_global_optf[OPT_1_CASTI_MODLITBY] += bit_value;
 			}
 		}// for i
 		Log("optf[%d] vyskladan· == %d\n", OPT_1_CASTI_MODLITBY, _global_optf[OPT_1_CASTI_MODLITBY]);
@@ -11539,8 +11568,15 @@ void _rozparsuj_parametre_OPT(void){
 		_global_optf[OPT_2_HTML_EXPORT] = 0;
 		// nastavenie _global_optf[OPT_2_HTML_EXPORT] podæa jednotliv˝ch bit-komponentov, ktorÈ s˙ nastavenÈ v _global_opt_html_export[]
 		for(i = 0; i < POCET_OPT_2_HTML_EXPORT; i++){
+			bit_value = (int)pow(2.0, i);
+			Log("option %d, i == %d; bit_value == %d...\n", OPT_2_HTML_EXPORT, i, bit_value);
 			if(_global_opt_html_export[i] != GLOBAL_OPTION_NULL){
-				_global_optf[OPT_2_HTML_EXPORT] += (int)pow(2.0, i) * _global_opt_html_export[i];
+				_global_optf[OPT_2_HTML_EXPORT] += bit_value * _global_opt_html_export[i];
+			}
+			else if((_global_opt[OPT_2_HTML_EXPORT] & bit_value) == bit_value){
+				// in·Ë pouûi nastavenie z _global_opt (nie force)
+				Log("pouûijem nastavenie z _global_opt[%d] (nie force)...\n", OPT_2_HTML_EXPORT);
+				_global_optf[OPT_2_HTML_EXPORT] += bit_value;
 			}
 		}// for i
 		Log("optf[%d] vyskladan· == %d\n", OPT_2_HTML_EXPORT, _global_optf[OPT_2_HTML_EXPORT]);
@@ -11594,8 +11630,15 @@ void _rozparsuj_parametre_OPT(void){
 		_global_optf[OPT_4_OFFLINE_EXPORT] = 0;
 		// nastavenie _global_optf[OPT_4_OFFLINE_EXPORT] podæa jednotliv˝ch bit-komponentov, ktorÈ s˙ nastavenÈ v _global_opt_offline_export[]
 		for(i = 0; i < POCET_OPT_4_OFFLINE_EXPORT; i++){
+			bit_value = (int)pow(2.0, i);
+			Log("option %d, i == %d; bit_value == %d...\n", OPT_4_OFFLINE_EXPORT, i, bit_value);
 			if(_global_opt_offline_export[i] != GLOBAL_OPTION_NULL){
 				_global_optf[OPT_4_OFFLINE_EXPORT] += (int)pow(2.0, i) * _global_opt_offline_export[i];
+			}
+			else if((_global_opt[OPT_4_OFFLINE_EXPORT] & bit_value) == bit_value){
+				// in·Ë pouûi nastavenie z _global_opt (nie force)
+				Log("pouûijem nastavenie z _global_opt[%d] (nie force)...\n", OPT_4_OFFLINE_EXPORT);
+				_global_optf[OPT_4_OFFLINE_EXPORT] += bit_value;
 			}
 		}// for i
 		Log("optf[%d] vyskladan· == %d\n", OPT_4_OFFLINE_EXPORT, _global_optf[OPT_4_OFFLINE_EXPORT]);
@@ -11620,8 +11663,15 @@ void _rozparsuj_parametre_OPT(void){
 		_global_optf[OPT_5_ALTERNATIVES] = 0;
 		// nastavenie _global_optf[OPT_5_ALTERNATIVES] podæa jednotliv˝ch bit-komponentov, ktorÈ s˙ nastavenÈ v _global_opt_alternatives[]
 		for(i = 0; i < POCET_OPT_5_ALTERNATIVES; i++){
+			bit_value = (int)pow(2.0, i);
+			Log("option %d, i == %d; bit_value == %d...\n", OPT_5_ALTERNATIVES, i, bit_value);
 			if(_global_opt_alternatives[i] != GLOBAL_OPTION_NULL){
 				_global_optf[OPT_5_ALTERNATIVES] += (int)pow(2.0, i) * _global_opt_alternatives[i];
+			}
+			else if((_global_opt[OPT_5_ALTERNATIVES] & bit_value) == bit_value){
+				// in·Ë pouûi nastavenie z _global_opt (nie force)
+				Log("pouûijem nastavenie z _global_opt[%d] (nie force)...\n", OPT_5_ALTERNATIVES);
+				_global_optf[OPT_5_ALTERNATIVES] += bit_value;
 			}
 		}// for i
 		Log("optf[%d] vyskladan· == %d\n", OPT_5_ALTERNATIVES, _global_optf[OPT_5_ALTERNATIVES]);
