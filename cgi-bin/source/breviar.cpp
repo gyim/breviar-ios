@@ -11385,13 +11385,52 @@ void log_pom_MODL_OPTF(void){
 	}
 }// log_pom_MODL_OPTF()
 
+void _rozparsuj_parametre_OPT_force(short int option_opt, char pom_MODL_OPTF_opt[MAX_POCET_OPT][SMALL], short int _global_option_opt[MAX_POCET_OPT]){
+	short int i;
+	short int aspon_jedna_nenulova;
+	short int bit_value;
+	Log("_rozparsuj_parametre_OPT() -- zaèiatok...\n");
+	// option_opt force j (0, 1, 2, 4, 5)
+	// option_opt force j -- jednotlivé komponenty
+	_global_optf[option_opt] = GLOBAL_OPTION_NULL;
+	aspon_jedna_nenulova = NIE;
+	for(i = 0; i < pocet_opt[option_opt]; i++){
+		if((pom_MODL_OPTF_opt[i] == NULL) || (strlen(pom_MODL_OPTF_opt[i]) < 1)){
+			_global_option_opt[i] = GLOBAL_OPTION_NULL;
+		}
+		else{
+			_global_option_opt[i] = atoi(pom_MODL_OPTF_opt[i]);
+			aspon_jedna_nenulova = ANO;
+		}
+		Log("optf[%d][%d] == `%s' (%d)\n", option_opt, i, pom_MODL_OPTF_opt[i], _global_option_opt[i]);
+	}// for i
+	if(aspon_jedna_nenulova == ANO){
+		_global_optf[option_opt] = 0;
+		// nastavenie _global_optf[option_opt] pod¾a jednotlivých bit-komponentov, ktoré sú nastavené v _global_option_opt[]
+		for(i = 0; i < pocet_opt[option_opt]; i++){
+			bit_value = (int)pow(2.0, i);
+			Log("option_opt %d, i == %d; bit_value == %d...\n", option_opt, i, bit_value);
+			if(_global_option_opt[i] != GLOBAL_OPTION_NULL){
+				_global_optf[option_opt] += bit_value * _global_option_opt[i];
+			}
+			else if((_global_opt[option_opt] & bit_value) == bit_value){
+				// ináè použi nastavenie z _global_opt (nie force)
+				Log("použijem nastavenie z _global_opt[%d] (nie force)...\n", option_opt);
+				_global_optf[option_opt] += bit_value;
+			}
+		}// for i
+		Log("optf[%d] vyskladaná == %d\n", option_opt, _global_optf[option_opt]);
+	}
+	Log("optf %d == `%s' (%d)\n", option_opt, pom_MODL_OPTF[option_opt], _global_optf[option_opt]);
+}
+
 // 2006-02-10: nový define; používa premennú int i 
 // 2011-04-11: prerobené na funkciu
 void _rozparsuj_parametre_OPT(void){
 	// rozparsovanie option parametrov
 	short int i, opt_2_fn /* font name chooser */, opt_2_fs /* font size chooser */;
-	short int aspon_jedna_nenulova;
-	short int bit_value;
+//	short int aspon_jedna_nenulova;
+//	short int bit_value;
 	Log("_rozparsuj_parametre_OPT() -- zaèiatok...\n");
 
 	Log("options...\n");
@@ -11470,11 +11509,8 @@ void _rozparsuj_parametre_OPT(void){
 	// postupne prechádzam jednotlivé bitové komponenty force a vyskladávam z nich celkovú jednu hodnotu; ak daná bitová hodnota nie je naplnená, použijem hodnotu z ne-force option-bitového komponentu
 
 	// option force 0
-	/*
-	i = atoi(pom_MODL_OPTF[OPT_0_SPECIALNE]);
-	_global_optf[OPT_0_SPECIALNE] = i;
-	Log("optf %d == `%s' (%d)\n", OPT_0_SPECIALNE, pom_MODL_OPTF[OPT_0_SPECIALNE], _global_optf[OPT_0_SPECIALNE]);
-	*/
+	_rozparsuj_parametre_OPT_force(OPT_0_SPECIALNE, pom_MODL_OPTF_SPECIALNE, _global_opt_specialne);
+/*
 	// option force 0 -- jednotlivé komponenty
 	_global_optf[OPT_0_SPECIALNE] = GLOBAL_OPTION_NULL;
 	aspon_jedna_nenulova = NIE;
@@ -11490,10 +11526,10 @@ void _rozparsuj_parametre_OPT(void){
 	}// for i
 	if(aspon_jedna_nenulova == ANO){
 		_global_optf[OPT_0_SPECIALNE] = 0;
-		/* nastavenie _global_optf[OPT_0_SPECIALNE] pod¾a jednotlivých bit-komponentov, ktoré sú nastavené v _global_opt_specialne[] */
+		// nastavenie _global_optf[OPT_0_SPECIALNE] pod¾a jednotlivých bit-komponentov, ktoré sú nastavené v _global_opt_specialne[]
 		for(i = 0; i < POCET_OPT_0_SPECIALNE; i++){
 			bit_value = (int)pow(2.0, i);
-			Log("option %d, i == %d; bit_value == %d...\n", OPT_2_HTML_EXPORT, i, bit_value);
+			Log("option %d, i == %d; bit_value == %d...\n", OPT_0_SPECIALNE, i, bit_value);
 			if(_global_opt_specialne[i] != GLOBAL_OPTION_NULL){
 				_global_optf[OPT_0_SPECIALNE] += bit_value * _global_opt_specialne[i];
 			}
@@ -11506,13 +11542,11 @@ void _rozparsuj_parametre_OPT(void){
 		Log("optf[%d] vyskladaná == %d\n", OPT_0_SPECIALNE, _global_optf[OPT_0_SPECIALNE]);
 	}
 	Log("optf %d == `%s' (%d)\n", OPT_0_SPECIALNE, pom_MODL_OPTF[OPT_0_SPECIALNE], _global_optf[OPT_0_SPECIALNE]);
+*/
 
 	// option force 1
-	/*
-	i = atoi(pom_MODL_OPTF[OPT_1_CASTI_MODLITBY]);
-	_global_optf[OPT_1_CASTI_MODLITBY] = i;
-	Log("optf %d == `%s' (%d)\n", OPT_1_CASTI_MODLITBY, pom_MODL_OPTF[OPT_1_CASTI_MODLITBY], _global_optf[OPT_1_CASTI_MODLITBY]);
-	*/
+	_rozparsuj_parametre_OPT_force(OPT_1_CASTI_MODLITBY, pom_MODL_OPTF_CASTI_MODLITBY, _global_opt_casti_modlitby);
+/*
 	// option force 1 -- jednotlivé komponenty
 	_global_optf[OPT_1_CASTI_MODLITBY] = GLOBAL_OPTION_NULL;
 	aspon_jedna_nenulova = NIE;
@@ -11528,7 +11562,7 @@ void _rozparsuj_parametre_OPT(void){
 	}// for i
 	if(aspon_jedna_nenulova == ANO){
 		_global_optf[OPT_1_CASTI_MODLITBY] = 0;
-		/* nastavenie _global_optf[OPT_1_CASTI_MODLITBY] pod¾a jednotlivých bit-komponentov, ktoré sú nastavené v _global_opt_casti_modlitby[] */
+		// nastavenie _global_optf[OPT_1_CASTI_MODLITBY] pod¾a jednotlivých bit-komponentov, ktoré sú nastavené v _global_opt_casti_modlitby[]
 		for(i = 0; i < POCET_OPT_1_CASTI_MODLITBY; i++){
 			bit_value = (int)pow(2.0, i);
 			Log("option %d, i == %d; bit_value == %d...\n", OPT_1_CASTI_MODLITBY, i, bit_value);
@@ -11544,13 +11578,10 @@ void _rozparsuj_parametre_OPT(void){
 		Log("optf[%d] vyskladaná == %d\n", OPT_1_CASTI_MODLITBY, _global_optf[OPT_1_CASTI_MODLITBY]);
 	}
 	Log("optf %d == `%s' (%d)\n", OPT_1_CASTI_MODLITBY, pom_MODL_OPTF[OPT_1_CASTI_MODLITBY], _global_optf[OPT_1_CASTI_MODLITBY]);
-
+*/
 	// option force 2
-	/*
-	i = atoi(pom_MODL_OPTF[OPT_2_HTML_EXPORT]);
-	_global_optf[OPT_2_HTML_EXPORT] = i;
-	Log("optf %d == `%s' (%d)\n", OPT_2_HTML_EXPORT, pom_MODL_OPTF[OPT_2_HTML_EXPORT], _global_optf[OPT_2_HTML_EXPORT]);
-	*/
+	_rozparsuj_parametre_OPT_force(OPT_2_HTML_EXPORT, pom_MODL_OPTF_HTML_EXPORT, _global_opt_html_export);
+/*
 	// option force 2 -- jednotlivé komponenty
 	_global_optf[OPT_2_HTML_EXPORT] = GLOBAL_OPTION_NULL;
 	aspon_jedna_nenulova = NIE;
@@ -11582,6 +11613,7 @@ void _rozparsuj_parametre_OPT(void){
 		Log("optf[%d] vyskladaná == %d\n", OPT_2_HTML_EXPORT, _global_optf[OPT_2_HTML_EXPORT]);
 	}
 	Log("optf %d == `%s' (%d)\n", OPT_2_HTML_EXPORT, pom_MODL_OPTF[OPT_2_HTML_EXPORT], _global_optf[OPT_2_HTML_EXPORT]);
+*/
 
 	// option force 3
 	i = atoi(pom_MODL_OPTF[OPT_3_SPOLOCNA_CAST]);
@@ -11608,11 +11640,8 @@ void _rozparsuj_parametre_OPT(void){
 	Log("optf %d == `%s' (%d)\n", OPT_3_SPOLOCNA_CAST, pom_MODL_OPTF[OPT_3_SPOLOCNA_CAST], _global_optf[OPT_3_SPOLOCNA_CAST]);
 
 	// option force 4
-	/*
-	i = atoi(pom_MODL_OPTF[OPT_4_OFFLINE_EXPORT]);
-	_global_optf[OPT_4_OFFLINE_EXPORT] = i;
-	Log("optf %d == `%s' (%d)\n", OPT_4_OFFLINE_EXPORT, pom_MODL_OPTF[OPT_4_OFFLINE_EXPORT], _global_optf[OPT_4_OFFLINE_EXPORT]);
-	*/
+	_rozparsuj_parametre_OPT_force(OPT_4_OFFLINE_EXPORT, pom_MODL_OPTF_OFFLINE_EXPORT, _global_opt_offline_export);
+/*
 	// option force 4 -- jednotlivé komponenty
 	_global_optf[OPT_4_OFFLINE_EXPORT] = GLOBAL_OPTION_NULL;
 	aspon_jedna_nenulova = NIE;
@@ -11644,8 +11673,11 @@ void _rozparsuj_parametre_OPT(void){
 		Log("optf[%d] vyskladaná == %d\n", OPT_4_OFFLINE_EXPORT, _global_optf[OPT_4_OFFLINE_EXPORT]);
 	}
 	Log("optf %d == `%s' (%d)\n", OPT_4_OFFLINE_EXPORT, pom_MODL_OPTF[OPT_4_OFFLINE_EXPORT], _global_optf[OPT_4_OFFLINE_EXPORT]);
+*/
 
 	// option force 5
+	_rozparsuj_parametre_OPT_force(OPT_5_ALTERNATIVES, pom_MODL_OPTF_ALTERNATIVES, _global_opt_alternatives);
+/*
 	// option force 5 -- jednotlivé komponenty
 	_global_optf[OPT_5_ALTERNATIVES] = GLOBAL_OPTION_NULL;
 	aspon_jedna_nenulova = NIE;
@@ -11677,6 +11709,7 @@ void _rozparsuj_parametre_OPT(void){
 		Log("optf[%d] vyskladaná == %d\n", OPT_5_ALTERNATIVES, _global_optf[OPT_5_ALTERNATIVES]);
 	}
 	Log("optf %d == `%s' (%d)\n", OPT_5_ALTERNATIVES, pom_MODL_OPTF[OPT_5_ALTERNATIVES], _global_optf[OPT_5_ALTERNATIVES]);
+*/
 
 	// 2007-06-01: nasledovná pasáž kontroluje, èi niektoré z options nie sú GLOBAL_OPTION_NULL a zároveò prípadne nastaví na default pod¾a jazyka
 	// 2011-01-26: doplnené opt_0 až opt_4 force (okrem opt_3); default sa nastavuje pod¾a "ne-force" verzií

@@ -1324,6 +1324,10 @@ extern short int _global_opt_alternatives[POCET_OPT_5_ALTERNATIVES];
 #define BIT_OPT_5_DOPLNK_PSALM_122_129     32 // pre modlitbu cez deÚ v doplnkovej psalmÛdii namiesto ûalmu 122 moûno braù ûalm 129
 #define BIT_OPT_5_DOPLNK_PSALM_127_131     64 // pre modlitbu cez deÚ v doplnkovej psalmÛdii namiesto ûalmu 127 moûno braù ûalm 131
 
+#define MAX_POCET_OPT                      16 // malo by to byù aspoÚ maximum z POCET_OPT_0_... aû POCET_OPT_5_...
+
+const short int pocet_opt[POCET_GLOBAL_OPT] = {POCET_OPT_0_SPECIALNE, POCET_OPT_1_CASTI_MODLITBY, POCET_OPT_2_HTML_EXPORT, 0 /* option 3 nem· bitovÈ komponenty */, POCET_OPT_4_OFFLINE_EXPORT, POCET_OPT_5_ALTERNATIVES};
+
 // globalna premenna, co obsahuje string vypisany na obsazovku
 extern char *_global_string;
 extern char *_global_string2; // obsahuje I, II, III, IV, V alebo pismeno roka
