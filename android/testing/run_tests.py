@@ -101,10 +101,11 @@ time.sleep(5)
 device.press('KEYCODE_VOLUME_DOWN', MonkeyDevice.DOWN_AND_UP)
 time.sleep(1)
 device.press('KEYCODE_VOLUME_DOWN', MonkeyDevice.DOWN_AND_UP)
-orangutan_click(43, 262)
+time.sleep(1)
+orangutan_click(55, 682)
 stable_snapshot(root_dir + '/start-cz-3.png')
 
-orangutan_click(406, 540)
+orangutan_click(406, 960)
 stable_snapshot(root_dir + '/start-cz-day.png')
 
 device.removePackage('sk.breviar.android')
