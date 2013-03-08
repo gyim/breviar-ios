@@ -66,6 +66,10 @@ orangutan_click(300, 300)
 
 stable_snapshot(root_dir + '/start-hu.png')
 
+#acknowledge warning
+orangutan_click(325, 830)
+stable_snapshot(root_dir + '/start-hu-2.png')
+
 # Switch to Czech
 device.press('KEYCODE_MENU', MonkeyDevice.DOWN_AND_UP)
 time.sleep(1)
@@ -140,7 +144,9 @@ Links: <a href="../..">all nightlies</a>, <a href="../../../releases">all releas
   <img valign=center height=600 src="start-cz-day.png">
 <p> Vespers, CZ: <img valign=center height=600 src="vespers-cz.png">
 <p> Vespers, CZ, scorll: <img valign=center height=600 src="vespers-cz-vol-scroll.png">
-<p> Main screen, HU: <img valign=center height=600 src="start-hu.png">
+<p> Main screen, HU: 
+  <img valign=center height=600 src="start-hu.png">,
+  <img valign=center height=600 src="start-hu-2.png">
 
 <h2>Make release</h2>
 <p>
