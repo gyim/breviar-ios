@@ -107,6 +107,8 @@ stable_snapshot(root_dir + '/start-cz-day.png')
 
 device.removePackage('sk.breviar.android')
 
+os.system("adb logcat -d >\"%s\"" % (root_dir + '/android_log.txt'));
+
 date_str = sys.argv[2]
 commit_id = sys.argv[3]
 version = sys.argv[4]
@@ -125,6 +127,7 @@ out.write("""
 <tr> <td>Version:</td><td>%s</td> </tr>
 <tr> <td>Ran on:</td><td>%s</td> </tr>
 <tr> <td>Apk:</td><td><a href="../breviar.apk">breviar.apk</a></td> </tr>
+<tr> <td>Android log:</td><td><a href="android_log.txt">android_log.txt</a></td> </tr>
 </table>
 
 <p>
