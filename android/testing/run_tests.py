@@ -66,9 +66,9 @@ orangutan_click(300, 300)
 
 stable_snapshot(root_dir + '/start-hu.png')
 
-#acknowledge warning
-orangutan_click(325, 830)
-stable_snapshot(root_dir + '/start-hu-2.png')
+#acknowledge warning - not any more
+#orangutan_click(325, 830)
+#stable_snapshot(root_dir + '/start-hu-2.png')
 
 # Switch to Czech
 device.press('KEYCODE_MENU', MonkeyDevice.DOWN_AND_UP)
