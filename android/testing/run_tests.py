@@ -97,7 +97,9 @@ stable_snapshot(root_dir + '/start-cz-2.png')
 orangutan_click(268, 727)
 
 # Day mode
+time.sleep(5)
 device.press('KEYCODE_VOLUME_DOWN', MonkeyDevice.DOWN_AND_UP)
+time.sleep(1)
 device.press('KEYCODE_VOLUME_DOWN', MonkeyDevice.DOWN_AND_UP)
 orangutan_click(43, 262)
 stable_snapshot(root_dir + '/start-cz-3.png')
@@ -148,8 +150,7 @@ Links: <a href="../..">all nightlies</a>, <a href="../../../releases">all releas
 <p> Vespers, CZ: <img valign=center height=600 src="vespers-cz.png">
 <p> Vespers, CZ, scorll: <img valign=center height=600 src="vespers-cz-vol-scroll.png">
 <p> Main screen, HU: 
-  <img valign=center height=600 src="start-hu.png">,
-  <img valign=center height=600 src="start-hu-2.png">
+  <img valign=center height=600 src="start-hu.png">
 
 <h2>Make release</h2>
 <p>

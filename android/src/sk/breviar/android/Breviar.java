@@ -83,7 +83,9 @@ public class Breviar extends Activity {
       wv.loadUrl("http://127.0.0.1:" + S.port + "/" + scriptname +
                  "?qt=pdnes" + Html.fromHtml(S.getOpts()
                      .replaceAll("&amp;c=[^&]*&amp;", "&amp;")
-                     .replaceAll("&amp;j=[^&]*&amp;", "&amp;")));
+                     .replaceAll("&amp;c=[^&]*$", "")
+                     .replaceAll("&amp;j=[^&]*&amp;", "&amp;")
+                     .replaceAll("&amp;j=[^&]*$", "")));
       syncPreferences();
       BreviarApp.initLocale(this);
       recreateIfNeeded();
