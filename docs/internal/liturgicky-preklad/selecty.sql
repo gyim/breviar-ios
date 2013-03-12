@@ -43,7 +43,7 @@ or sur like '2 Kr %'
 
 select -- top 100 
 * from lc
-where sur like 'Tob%'
+where sur like 'Ex%'
 -- or sur like 'Ezd%'
 order by 2
 
