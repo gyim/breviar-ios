@@ -3120,6 +3120,15 @@ const char *text_FEB_04_OFM[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_FEB_04_OPRAEM[POCET_JAZYKOV + 1] = 
+{"",
+ "Sv. Bedøicha, opata z premonstrátského øádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_FEB_05[POCET_JAZYKOV + 1] = 
 {"Sv. Agaty, panny a muèenice",
  "Sv. Agáty, panny a muèednice",
@@ -3219,6 +3228,15 @@ const char *text_FEB_10[POCET_JAZYKOV + 1] =
  "Sv. Scholastiky, panny",
  "Szent Skolasztika szûz",
  };
+const char *text_FEB_10_OPRAEM[POCET_JAZYKOV + 1] = 
+{"",
+ "Bl. Huga, opata z premonstrátského øádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_FEB_11[POCET_JAZYKOV + 1] = 
 {"Prebl. Panny Márie Lurdskej",
  "Panny Marie Lurdské",
@@ -3290,6 +3308,15 @@ const char *text_FEB_17[POCET_JAZYKOV + 1] =
  "",
  "Sv. Alexia a druhù, øeholníkù",
  "A szervita rend hét szent alapítója",
+ };
+const char *text_FEB_17_OPRAEM[POCET_JAZYKOV + 1] = 
+{"",
+ "Sv. Evermoda, biskupa z premonstrátského øádu",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_FEB_18_OP[POCET_JAZYKOV + 1] = 
 {"Bl. Jána (Angelika) z Fiesole, kòaza",
@@ -3750,6 +3777,15 @@ const char *text_APR_24_OFM[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_APR_24_OPRAEM[POCET_JAZYKOV + 1] = 
+{"",
+ "Obrácení našeho otce svatého Augustina, biskupa a uèitele církve",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_APR_25[POCET_JAZYKOV + 1] = 
 {"Sv. Marka, evanjelistu",
  "Sv. Marka, evangelisty",
@@ -3758,6 +3794,15 @@ const char *text_APR_25[POCET_JAZYKOV + 1] =
  "",
  "Sv. Marka, evangelisty",
  "Szent Márk evangelista",
+ };
+const char *text_APR_26_OPRAEM[POCET_JAZYKOV + 1] = 
+{"",
+ "Sv. Ludolfa, biskupa a muèedníka z premonstrátského øádu",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_APR_27_SJ[POCET_JAZYKOV + 1] = 
 {"Sv. Petra Kanízia, kòaza a uèite¾a Cirkvi",
