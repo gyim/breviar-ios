@@ -558,6 +558,7 @@ const char *nazov_slavenia_lokal[] =
 ,"v ostatních èeských diecézích a v brnìnské diecézi: památka; "HTML_LINE_BREAK"na Moravì mimo brnìnskou diecézi: nezávazná památka" // LOKAL_SLAV_CESKO_BRNO
 ,"sviatok hlavnej patrónky "HTML_LINE_BREAK"(slovenskej) Kongregácie sestier dominikánok bl. Imeldy"            // LOKAL_SLAV_SVIATOK_OP_ZENY
 ,"len v Žilinskej diecéze"                                                                                      // LOKAL_SLAV_ZILINA
+,"na Strahovì: svátek, Nová Øíše: památka"                                                                      // LOKAL_SLAV_OPRAEM_SVIATOK_STRAHOV
 };
 
 // names of liturgical colors
@@ -3897,6 +3898,15 @@ const char *text_MAJ_02[POCET_JAZYKOV + 1] =
  "Sv. Atanáše, biskupa a uèitele Církve",
  "Szent Atanáz püspök és egyháztanító",
  };
+const char *text_MAJ_02_OPRAEM[POCET_JAZYKOV + 1] = 
+{"",
+ "Pøenesení sv. Norberta, našeho otce", // iba na Stahove
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_MAJ_03[POCET_JAZYKOV + 1] = 
 {"Sv. Filipa a Jakuba, apoštolov",
  "Sv. Filipa a Jakuba, apoštolù",
@@ -4365,6 +4375,15 @@ const char *text_MAJ_24_OP[POCET_JAZYKOV + 1] =
  "Pøenesení ostatkù sv. Otce Dominika",
  "",
  };
+const char *text_MAJ_24_OPRAEM[POCET_JAZYKOV + 1] = 
+{"",
+ "Sv. Heømana Josefa, knìze z premonstrátského øádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_MAJ_24_OFM[POCET_JAZYKOV + 1] = 
 {"Výroèie posviacky Baziliky sv. Františka v Assisi",
  "",
@@ -4736,6 +4755,15 @@ const char *text_JUN_06[POCET_JAZYKOV + 1] =
  "Sv. Norberta, biskupa",
  "Szent Norbert püspök",
  };
+const char *text_JUN_06_OPRAEM[POCET_JAZYKOV + 1] = 
+{"",
+ "Našeho otce sv. Norberta, biskupa a zakladatele premonstrátského øádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_JUN_08_HU[POCET_JAZYKOV + 1] = 
 {"",
  "",
@@ -4910,6 +4938,15 @@ const char *text_JUN_16_OFM[POCET_JAZYKOV + 1] =
 const char *text_JUN_16_2_OFM[POCET_JAZYKOV + 1] = 
 {"Bl. Aniceta Koplina, kòaza, a spoloèníkov, muèeníkov, èlenov 1. rádu",
  "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_JUN_16_OPRAEM[POCET_JAZYKOV + 1] = 
+{"",
+ "Sv. Isfrída, biskupa z premonstrátského øádu",
  "",
  "",
  "",
