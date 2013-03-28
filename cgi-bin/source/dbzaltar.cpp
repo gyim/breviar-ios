@@ -4006,14 +4006,14 @@ void _set_zalmy_opraem_pc_1_8_21(short int modlitba){
 }
 
 // 2013-03-27: doplnené pre OPRAEM (02MAJ)
-void _set_zalmy_opraem_pc_1_8_23(short int modlitba){
-	Log("_set_zalmy_opraem_pc_1_8_23(%s) -- begin\n", nazov_modlitby(modlitba));
+void _set_zalmy_opraem_pc_1_8_24(short int modlitba){
+	Log("_set_zalmy_opraem_pc_1_8_24(%s) -- begin\n", nazov_modlitby(modlitba));
 	if(modlitba == MODL_POSV_CITANIE){
 		set_zalm(1, modlitba, "z1.htm", "ZALM1");
 		set_zalm(2, modlitba, "z8.htm", "ZALM8");
-		set_zalm(3, modlitba, "z23.htm", "ZALM23");
+		set_zalm(3, modlitba, "z24.htm", "ZALM24");
 	}
-	Log("_set_zalmy_opraem_pc_1_8_23(%s) -- end\n", nazov_modlitby(modlitba));
+	Log("_set_zalmy_opraem_pc_1_8_24(%s) -- end\n", nazov_modlitby(modlitba));
 }
 
 // 2011-03-17: doplnené pre OFM, 24APR; pod¾a _set_zalmy_sviatok_muc();
@@ -16928,7 +16928,7 @@ label_25_MAR:
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_full(modlitba);
-							_set_zalmy_opraem_pc_1_8_23(modlitba);
+							_set_zalmy_opraem_pc_1_8_24(modlitba);
 
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_modlitba;
@@ -19672,7 +19672,7 @@ label_25_MAR:
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_full(modlitba);
-							_set_zalmy_opraem_pc_1_8_23(modlitba);
+							_set_zalmy_opraem_pc_1_8_24(modlitba);
 
 							_vlastna_cast_mcd_ant_kcitresp_modl;
 
