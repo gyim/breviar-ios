@@ -78,8 +78,9 @@ short int su_inv_hymnus_kcit_kresp_benmagn_prosby_vlastne(short int m);
 #define ANCHOR_ANTIFONA3V   "ANT3V"
 #define ANCHOR_KCITANIE     "CIT"
 #define ANCHOR_KRESPONZ     "RESP"
-#define ANCHOR_MAGNIFIKAT   "MAGNIFIKAT" // antifona na magnifikat
-#define ANCHOR_BENEDIKTUS   "BENEDIKTUS" // antifona na benediktus
+#define ANCHOR_MAGNIFIKAT   "MAGNIFIKAT" // antifóna na Magnifikat
+#define ANCHOR_BENEDIKTUS   "BENEDIKTUS" // antifóna na Benediktus
+#define ANCHOR_NUNC_DIMITTIS "NUNCDIMITTIS" // antifóna na Nunc dimittis
 #define ANCHOR_PROSBY       "PROSBY"
 #define ANCHOR_MODLITBA     "MODLITBA"
 #define ANCHOR_CITANIE1     "CIT1"

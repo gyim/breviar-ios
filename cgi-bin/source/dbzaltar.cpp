@@ -1082,10 +1082,13 @@ void _set_kresponz(short int modlitba, const char *file, const char *anchor){
 	}// switch(modlitba)
 }
 
-// pri posvatnom citani plati magn/ben pre 2. citanie
+// pri posvätnom èítaní platí magn/ben pre 2. èítanie
 #define _set_citanie2 _set_benediktus
 
 #define _set_magnifikat _set_benediktus
+// pre kompletórium platí magn/ben pre ant. na Nunc dimittis
+#define _set_nunc_dimittis _set_benediktus
+
 void _set_benediktus(short int modlitba, const char *file, const char *anchor){
 	switch(modlitba){
 		case MODL_RANNE_CHVALY:
@@ -1104,8 +1107,16 @@ void _set_benediktus(short int modlitba, const char *file, const char *anchor){
 			mystrcpy(_global_modl_posv_citanie.citanie2.file, file, MAX_STR_AF_FILE);
 			mystrcpy(_global_modl_posv_citanie.citanie2.anchor, anchor, MAX_STR_AF_ANCHOR);
 			break;
+		case MODL_KOMPLETORIUM:
+			mystrcpy(_global_modl_kompletorium.nunc_dimittis.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_kompletorium.nunc_dimittis.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
+		case MODL_PRVE_KOMPLETORIUM:
+			mystrcpy(_global_modl_prve_kompletorium.nunc_dimittis.file, file, MAX_STR_AF_FILE);
+			mystrcpy(_global_modl_prve_kompletorium.nunc_dimittis.anchor, anchor, MAX_STR_AF_ANCHOR);
+			break;
 	}// switch(modlitba)
-}
+}// _set_benediktus()
 
 void _set_prosby(short int modlitba, const char *file, const char *anchor){
 	switch(modlitba){
@@ -1816,6 +1827,15 @@ void set_magnifikat(short int den, short int tyzzal, short int modlitba){
 	set_LOG_zaltar;
 }// set_magnifikat();
 
+void set_nunc_dimittis(short int modlitba){
+	file_name_zapamataj();
+	file_name_kompletorium(OBD_CEZ_ROK);
+	sprintf(_anchor, "_%c_%s", pismenko_modlitby(modlitba), ANCHOR_NUNC_DIMITTIS);
+	_set_nunc_dimittis(modlitba, _file, _anchor);
+	set_LOG_zaltar;
+	file_name_obnov();
+}// set_nunc_dimittis();
+
 void set_popis(short int modlitba, char *file, char *anchor){
 	_set_popis(modlitba, file, anchor);
 	// 2007-09-27: kvôli debugovaniu pod Ruby zrušené komentáre vo výpisoch
@@ -2180,7 +2200,7 @@ void _set_kompletorium_slavnost_oktava(short int modlitba, short int litobd, sho
 	} \
 }
 
-// 2009-01-06: vytvorené vyòatím èastí pre kompletórium z zaltar_zvazok(); premenné tyzzal ani zvazok nepotrebujeme7
+// 2009-01-06: vytvorené vyòatím èastí pre kompletórium z zaltar_zvazok(); premenné tyzzal ani zvazok nepotrebujeme
 // 2010-08-03: potrebujeme premennú tyzzal
 void zaltar_kompletorium(short int den, short int obdobie, short int specialne, short int tyzzal){
 	Log("-- zaltar_kompletorium(%d, %d, %d, %d) -- zaèiatok\n", den, obdobie, specialne, tyzzal);
@@ -2211,6 +2231,9 @@ void zaltar_kompletorium(short int den, short int obdobie, short int specialne, 
 		set_kcitanie(den, 1 /* tyzzal */, MODL_PRVE_KOMPLETORIUM);
 		set_kresponz(den, 1 /* tyzzal */, MODL_KOMPLETORIUM);
 		set_kresponz(den, 1 /* tyzzal */, MODL_PRVE_KOMPLETORIUM);
+		// 2013-04-03: doplnená ant. na Nunc dimittis (doteraz bola napevno)
+		set_nunc_dimittis(MODL_KOMPLETORIUM);
+		set_nunc_dimittis(MODL_PRVE_KOMPLETORIUM);
 		set_modlitba(den, 1 /* tyzzal */, MODL_KOMPLETORIUM);
 		set_modlitba(den, 1 /* tyzzal */, MODL_PRVE_KOMPLETORIUM);
 	}
