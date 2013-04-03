@@ -8602,6 +8602,7 @@ short int _spol_cast_je_panna(_struct_sc sc){
 		_set_hymnus(modlitba, _file, _anchor);\
 	}\
 	set_LOG_svsv;}
+
 // antifÛny
 // kedysi tam pred celym blokom bolo if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALMY_ZO_SVIATKU) == BIT_OPT_1_ZALMY_ZO_SVIATKU) 
 // 2005-07-27: pre sviatky sv‰t˝ch posv‰tnÈ ËÌtania maj˙ antifÛny tam, kde ËÌtania
@@ -8641,62 +8642,79 @@ short int _spol_cast_je_panna(_struct_sc sc){
 	else{_set_antifona3(modlitba, _file, _anchor);}\
 	set_LOG_svsv;}
 
-// kratke citanie
+// kr·tke ËÌtanie
 #define _vlastna_cast_kcitanie {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_KCITANIE);\
 	_set_kcitanie(modlitba, _file, _anchor);\
 	set_LOG_svsv;}
-// kratke responzorium
+
+// kr·tke responzÛrium
 #define _vlastna_cast_kresponz {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_KRESPONZ);\
 	if(modlitba == MODL_POSV_CITANIE){_set_kresponz(modlitba, _file_pc, _anchor);}\
 	else{_set_kresponz(modlitba, _file, _anchor);}\
 	set_LOG_svsv;}
-// bedediktus
+
+// benediktus
 #define _vlastna_cast_benediktus {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_BENEDIKTUS);\
 	_set_benediktus(modlitba, _file, _anchor);\
 	set_LOG_svsv;}
+
 // magnifikat
 #define _vlastna_cast_magnifikat {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_MAGNIFIKAT);\
 	_set_magnifikat(modlitba, _file, _anchor);\
 	set_LOG_svsv;}
+
+// nunc dimittis
+#define _vlastna_cast_nunc_dimittis {\
+	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_NUNC_DIMITTIS);\
+	_set_nunc_dimittis(modlitba, _file, _anchor);\
+	set_LOG_svsv;}
+
 // prosby
 #define _vlastna_cast_prosby {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_PROSBY);\
 	_set_prosby(modlitba, _file, _anchor);\
 	set_LOG_svsv;}
+
 // modlitba -- rovnaka rano i vecer
 #define _vlastna_cast_modlitba {\
 	sprintf(_anchor, "%s%s", _anchor_head, ANCHOR_MODLITBA);\
 	_set_modlitba(modlitba, _file, _anchor);\
 	set_LOG_svsv;}
+
 // modlitba -- niekedy mÙûe byù in· napr. pre prvÈ veöpery (odliön· od modlitby pre rannÈ chv·ly a veöpery), niekedy odliön· pre rannÈ chv·ly a veöpery
 #define _vlastna_cast_modlitba_ina {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_MODLITBA);\
 	_set_modlitba(modlitba, _file, _anchor);\
 	set_LOG_svsv;}
-// bedediktus -- na spomienku sv‰tca v pÙste
+
+// benediktus -- na spomienku sv‰tca v pÙste
 #define _vlastna_cast_benediktus_spomprivileg {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_BENEDIKTUS);\
 	_set_ant_spomprivileg(modlitba, _file, _anchor);\
 	set_LOG_svsv;}
+
 // magnifikat -- na spomienku sv‰tca v pÙste
 #define _vlastna_cast_magnifikat_spomprivileg {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_MAGNIFIKAT);\
 	_set_ant_spomprivileg(modlitba, _file, _anchor);\
 	set_LOG_svsv;}
+
 // modlitba -- na spomienku sv‰tca v pÙste
 #define _vlastna_cast_modlitba_spomprivileg {\
 	sprintf(_anchor, "%s%s", _anchor_head, ANCHOR_MODLITBA);\
 	_set_modlitba_spomprivileg(modlitba, _file, _anchor);\
 	set_LOG_svsv;}
+
 // modlitba -- na spomienku sv‰tca v pÙste (ak je odliön· modlitba pre rannÈ chv·ly a veöpery)
 #define _vlastna_cast_modlitba_spomprivileg_ina {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_MODLITBA);\
 	_set_modlitba_spomprivileg(modlitba, _file, _anchor);\
 	set_LOG_svsv;}
+
 // posv‰tnÈ ËÌtanie (2. hagiografickÈ ËÌtanie) -- na spomienku sv‰tca v pÙste
 #define _vlastna_cast_2citanie_spomprivileg {\
 	sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(modlitba), ANCHOR_CITANIE2);\
@@ -31145,6 +31163,17 @@ label_8_DEC:
 							_vlastna_cast_magnifikat;
 
 						}// kalend·r pre KALENDAR_SK_OP
+
+						if((_global_jazyk == JAZYK_CZ) && (_global_kalendar == KALENDAR_CZ_OPRAEM)){
+							file_name_vlastny_kalendar(_global_kalendar);
+
+							modlitba = MODL_PRVE_KOMPLETORIUM;
+							_vlastna_cast_nunc_dimittis;
+
+							modlitba = MODL_KOMPLETORIUM;
+							_vlastna_cast_nunc_dimittis;
+
+						}// kalend·r pre KALENDAR_CZ_OPRAEM
 
 						if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 					}
