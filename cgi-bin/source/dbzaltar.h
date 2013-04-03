@@ -746,5 +746,7 @@ extern const char *text_OKT_10_OPRAEM[POCET_JAZYKOV + 1];
 extern const char *text_OKT_13_OPRAEM[POCET_JAZYKOV + 1];
 extern const char *text_OKT_20_OPRAEM[POCET_JAZYKOV + 1];
 extern const char *text_OKT_26_OPRAEM[POCET_JAZYKOV + 1];
+extern const char *text_NOV_08_OPRAEM[POCET_JAZYKOV + 1];
+extern const char *text_NOV_14_OPRAEM[POCET_JAZYKOV + 1];
 
 #endif // __DBZALTAR_H_
