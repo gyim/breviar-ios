@@ -1489,7 +1489,7 @@ void set_hymnus(short int den, short int tyzzal, short int modlitba){
 		}
 	}
 	Log("set_hymnus(): koniec\n");
-}
+}// set_hymnus();
 
 #define _set_antifony_velk_pc(den, tyzzal, modlitba) {\
 		/* 1. antifona */\
@@ -1866,6 +1866,7 @@ void set_popis_dummy(void){
 
 // 2007-12-05: pridaná funkcia kvôli kompletóriu napr. v pôstnom období
 void set_hymnus_kompletorium_obd(short int den, short int tyzzal, short int modlitba, short int litobd){
+	Log("set_hymnus_kompletorium_obd(): zaèiatok\n");
 	// hymnusy sú rovnaké v pôstnom období ako pre cezroèné obdobie; hymnus pre ve¾konoèné obdobie je jediný, odlišný
 	short int pom_litobd = litobd;
 	file_name_zapamataj();
@@ -1898,6 +1899,7 @@ void set_hymnus_kompletorium_obd(short int den, short int tyzzal, short int modl
 	_set_hymnus(modlitba, _file, _anchor);
 	set_LOG_zaltar;
 	file_name_obnov();
+	Log("set_hymnus_kompletorium_obd(): koniec.\n");
 }// set_hymnus_kompletorium_obd()
 
 // 2007-12-06: odlišné pre ve¾konoèné obdobie:
