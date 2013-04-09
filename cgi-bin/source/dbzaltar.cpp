@@ -22569,13 +22569,7 @@ label_25_MAR:
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
 						_vlastna_cast_2citanie;
-						_vlastna_cast_hymnus_ako_na_vespery;
-						// hymnus ako na vešpery
-						/*
-						sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(MODL_VESPERY), ANCHOR_HYMNUS);
-						_set_hymnus(modlitba, _file, _anchor);
-						set_LOG_svsv;
-						*/
+						_vlastna_cast_hymnus_ako_na_vespery; // hymnus ako na vešpery -- musí by poslednı pre danú modlitbu
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_hymnus;
@@ -22793,13 +22787,7 @@ label_25_MAR:
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
 						_vlastna_cast_2citanie;
-						_vlastna_cast_hymnus_ako_na_vespery;
-						// hymnus ako na vešpery
-						/*
-						sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(MODL_VESPERY), ANCHOR_HYMNUS);
-						_set_hymnus(modlitba, _file, _anchor);
-						set_LOG_svsv;
-						*/
+						_vlastna_cast_hymnus_ako_na_vespery; // hymnus ako na vešpery -- musí by poslednı pre danú modlitbu
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_full_okrem_antifon_a_prosieb(modlitba);
@@ -22927,13 +22915,7 @@ label_25_MAR:
 						modlitba = MODL_POSV_CITANIE;
 						_vlastna_cast_modlitba;
 						_vlastna_cast_2citanie;
-						_vlastna_cast_hymnus_ako_na_vespery;
-						// hymnus ako na vešpery
-						/*
-						sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(MODL_VESPERY), ANCHOR_HYMNUS);
-						_set_hymnus(modlitba, _file, _anchor);
-						set_LOG_svsv;
-						*/
+						_vlastna_cast_hymnus_ako_na_vespery; // hymnus ako na vešpery -- musí by poslednı pre danú modlitbu
 
 						modlitba = MODL_VESPERY;
 						_vlastna_cast_hymnus;
@@ -23713,13 +23695,7 @@ label_25_MAR:
 						_vlastna_cast_1citanie;
 						_vlastna_cast_2citanie;
 						if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ_OP)){ // v slovenskom breviári má vlastnı hymnus, v èeskom nie; 2008-09-09
-							_vlastna_cast_hymnus_ako_na_vespery;
-							// hymnus ako na vešpery
-							/*
-							sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(MODL_VESPERY), ANCHOR_HYMNUS);
-							_set_hymnus(modlitba, _file, _anchor);
-							set_LOG_svsv;
-							*/
+							_vlastna_cast_hymnus_ako_na_vespery; // hymnus ako na vešpery -- musí by poslednı pre danú modlitbu
 						}
 
 						_vlastna_cast_mcd_kcitresp_modl; // modlitba cez deò, doplnené 2011-08-10
@@ -24992,13 +24968,7 @@ label_25_MAR:
 						_vlastna_cast_modlitba;
 						_vlastna_cast_2citanie;
 						if(_global_jazyk == JAZYK_SK){ // 2009-03-19: odvetvené len pre Slovensko
-							_vlastna_cast_hymnus_ako_na_vespery;
-							// hymnus ako na vešpery
-							/*
-							sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(MODL_VESPERY), ANCHOR_HYMNUS);
-							_set_hymnus(modlitba, _file, _anchor);
-							set_LOG_svsv;
-							*/
+							_vlastna_cast_hymnus_ako_na_vespery; // hymnus ako na vešpery -- musí by poslednı pre danú modlitbu
 						}
 
 						modlitba = MODL_VESPERY;
@@ -25412,13 +25382,7 @@ label_25_MAR:
 							_vlastna_cast_hymnus;
 						}
 						else{
-							_vlastna_cast_hymnus_ako_na_vespery;
-							// hymnus ako na vešpery
-							/*
-							sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(MODL_VESPERY), ANCHOR_HYMNUS);
-							_set_hymnus(modlitba, _file, _anchor);
-							set_LOG_svsv;
-							*/
+							_vlastna_cast_hymnus_ako_na_vespery; // hymnus ako na vešpery -- musí by poslednı pre danú modlitbu
 						}
 
 						_vlastna_cast_mcd_ant_kcitresp_modl;
@@ -29779,13 +29743,7 @@ label_25_MAR:
 						_vlastna_cast_modlitba;
 						_vlastna_cast_2citanie;
 						if(_global_jazyk == JAZYK_SK){ // 2008-11-29: odvetvené len pre Slovensko
-							_vlastna_cast_hymnus_ako_na_vespery;
-							// hymnus ako na vešpery
-							/*
-							sprintf(_anchor, "%s%c%s", _anchor_head, pismenko_modlitby(MODL_VESPERY), ANCHOR_HYMNUS);
-							_set_hymnus(modlitba, _file, _anchor);
-							set_LOG_svsv;
-							*/
+							_vlastna_cast_hymnus_ako_na_vespery; // hymnus ako na vešpery -- musí by poslednı pre danú modlitbu
 						}
 
 						modlitba = MODL_VESPERY;
