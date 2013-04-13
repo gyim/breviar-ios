@@ -2,6 +2,7 @@
 "appearance"	= "Megjelenés";
 "common_parts"	= "Állandó részek megjelenítése";
 "prayer_text"	= "Imaóra szövege";
+"calendar"		= "Liturgikus naptár";
 "other"			= "Egyéb";
 
 // Prayer parts settings
@@ -15,6 +16,11 @@
 // Prayer text settings
 "of0v"		= "Versek száma";
 "of0cit"	= "Liturgikus olvasmányok";
+
+// Liturgic calendar settings
+"of0zjvne"	= "Urunk megjelenése (Vízkereszt) megünneplése vasárnap, január 2. és 8. között";
+"of0nanne"	= "Urunk mennybemenetelét vasárnap ünnepelni";
+"of0tkne"	= "Krisztus Szent Teste és Vére ünnepe vasárnapra téve";
 
 // Other settings
 "of1zspc"	= "Közös részek helyének mutatása a szentek zsolozsmájában";
