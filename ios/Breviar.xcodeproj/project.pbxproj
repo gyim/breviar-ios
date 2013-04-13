@@ -12,6 +12,7 @@
 		7042905816408A6300663A7D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042905516408A1600663A7D /* libz.dylib */; };
 		7042905916408BF600663A7D /* libRaptureXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042904E1640887200663A7D /* libRaptureXML.a */; };
 		7042905C1641F91C00663A7D /* BRDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7042905B1641F91B00663A7D /* BRDataSource.m */; };
+		70493A621719D4CF00232631 /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70493A601719D4CF00232631 /* Settings.strings */; };
 		7054368D15FBDD69005854DC /* BRDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054368C15FBDD69005854DC /* BRDatePickerViewController.m */; };
 		7054369115FBF1B1005854DC /* BRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054369015FBF1B1005854DC /* BRSettingsViewController.m */; };
 		7054369415FBF1D1005854DC /* BRFontPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054369315FBF1D0005854DC /* BRFontPickerViewController.m */; };
@@ -89,6 +90,7 @@
 		7042905516408A1600663A7D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		7042905A1641F91B00663A7D /* BRDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDataSource.h; sourceTree = "<group>"; };
 		7042905B1641F91B00663A7D /* BRDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDataSource.m; sourceTree = "<group>"; };
+		70493A611719D4CF00232631 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Settings.strings; sourceTree = "<group>"; };
 		7054368B15FBDD69005854DC /* BRDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDatePickerViewController.h; sourceTree = "<group>"; };
 		7054368C15FBDD69005854DC /* BRDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDatePickerViewController.m; sourceTree = "<group>"; };
 		7054368F15FBF1B1005854DC /* BRSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettingsViewController.h; sourceTree = "<group>"; };
@@ -209,6 +211,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		70493A5D1719D38100232631 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				7061B09415FA8E1A00A83E0A /* InfoPlist.strings */,
+				70493A601719D4CF00232631 /* Settings.strings */,
+				7061B09D15FA8E1A00A83E0A /* MainStoryboard_iPhone.storyboard */,
+				7061B0A015FA8E1A00A83E0A /* MainStoryboard_iPad.storyboard */,
+			);
+			name = en.lproj;
+			sourceTree = "<group>";
+		};
 		7061B07C15FA8E1A00A83E0A = {
 			isa = PBXGroup;
 			children = (
@@ -257,7 +270,6 @@
 			isa = PBXGroup;
 			children = (
 				7061B09315FA8E1A00A83E0A /* Breviar-Info.plist */,
-				7061B09415FA8E1A00A83E0A /* InfoPlist.strings */,
 				7061B09715FA8E1A00A83E0A /* main.m */,
 				7061B09915FA8E1A00A83E0A /* Breviar-Prefix.pch */,
 			);
@@ -304,9 +316,8 @@
 		7061B0BB15FAA3EE00A83E0A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				70493A5D1719D38100232631 /* en.lproj */,
 				70C962C116A1E1A400A399B9 /* Resources */,
-				7061B09D15FA8E1A00A83E0A /* MainStoryboard_iPhone.storyboard */,
-				7061B0A015FA8E1A00A83E0A /* MainStoryboard_iPad.storyboard */,
 				70C962BE16A1DFC800A399B9 /* BRCelebrationCell.h */,
 				70C962BF16A1DFC800A399B9 /* BRCelebrationCell.m */,
 				70C962D716B5425200A399B9 /* BRBoolSettingsCell.h */,
@@ -452,6 +463,7 @@
 				70C962D116A1E1C900A399B9 /* bullet_violet_or_white.png in Resources */,
 				70C962D216A1E1C900A399B9 /* bullet_violet.png in Resources */,
 				70C962D316A1E1C900A399B9 /* bullet_white.png in Resources */,
+				70493A621719D4CF00232631 /* Settings.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,6 +534,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		70493A601719D4CF00232631 /* Settings.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				70493A611719D4CF00232631 /* en */,
+			);
+			name = Settings.strings;
+			sourceTree = "<group>";
+		};
 		7061B09415FA8E1A00A83E0A /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -554,7 +574,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -588,7 +608,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
