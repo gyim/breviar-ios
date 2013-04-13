@@ -12,9 +12,9 @@
 #import "BRBoolSettingsCell.h"
 #import "BRSettings.h"
 
-#define NORMAL_HEIGHT               44
-#define PIXELS_PER_LINE             22
-#define MAX_CHARS_PER_LINE          25
+#define CELL_NORMAL_HEIGHT          44
+#define CELL_LABEL_WIDTH            192
+#define CELL_LABEL_MARGIN           24
 
 #define SECT_APPEARANCE             0
 #define SECT_PRAYER_PARTS           1
@@ -93,17 +93,19 @@
     NSString *sectionId = [self.sections objectAtIndex:indexPath.section];
     
     if ([sectionId isEqualToString:@"appearance"]) {
-        return NORMAL_HEIGHT;
+        return CELL_NORMAL_HEIGHT;
     }
     else {
         NSArray *opts = [self.optsForSections objectForKey:sectionId];
         NSString *optId = [opts objectAtIndex:indexPath.row];
         NSString *optTitle = [[NSBundle mainBundle] localizedStringForKey:optId value:@"" table:@"Settings"];
-
-        return NORMAL_HEIGHT + (optTitle.length / MAX_CHARS_PER_LINE) * PIXELS_PER_LINE;
+        
+        UIFont *font = [UIFont systemFontOfSize:[UIFont labelFontSize]];
+        CGSize size = [optTitle sizeWithFont:font constrainedToSize:CGSizeMake(CELL_LABEL_WIDTH, CGFLOAT_MAX)];
+        return size.height + CELL_LABEL_MARGIN;
     }
     
-    return NORMAL_HEIGHT;
+    return CELL_NORMAL_HEIGHT;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
