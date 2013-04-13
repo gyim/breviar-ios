@@ -13,42 +13,13 @@
 #import "BRSettings.h"
 
 #define NORMAL_HEIGHT               44
-#define BIG_HEIGHT                  66
-#define NORMAL_HEIGHT_CHAR_LIMIT    25
-
-#define NUM_SECTIONS                3
+#define PIXELS_PER_LINE             22
+#define MAX_CHARS_PER_LINE          25
 
 #define SECT_APPEARANCE             0
 #define SECT_PRAYER_PARTS           1
 #define SECT_PRAYER_TEXT            2
-
-#define NUM_PRAYER_PARTS            6
-#define NUM_PRAYER_TEXT             2
-
-static NSString *prayerPartTitles[] = {
-    @"Evangéliumi kantikumok",
-    @"Dicsőség az Atyának",
-    @"Rubrikák",
-    @"Miatyánk",
-    @"Téged, Isten, dicsérünk... himnusz",
-    @"A válaszos énekek teljes szövege",
-    nil
-};
-
-static NSString *prayerPartOpts[] = {
-    @"of1c", @"of1s", @"of1r", @"of1o", @"of1t", @"of1pr",
-    nil
-};
-
-static NSString *prayerTextTitles[] = {
-    @"A versek száma",
-    @"Liturgikus olvasmányok",
-    nil
-};
-
-static NSString *prayerTextOpts[] = {
-    @"of0v", @"of0cit", nil
-};
+#define SECT_OTHER                  3
 
 @interface BRSettingsViewController ()
 
@@ -60,23 +31,20 @@ static NSString *prayerTextOpts[] = {
 {
     self = [super initWithStyle:style];
     if (self) {
-        // custom initialization
     }
     return self;
 }
 
 - (void)viewDidLoad
 {
-    // Fill set of long options
-    NSMutableSet *opts = [NSMutableSet set];
-    for (int i=0; prayerPartOpts[i]; i++) {
-        if (prayerPartTitles[i].length > NORMAL_HEIGHT_CHAR_LIMIT) {
-            [opts addObject:prayerPartOpts[i]];
-        }
-    }
-    self.longOpts = opts;
-    
     [super viewDidLoad];
+
+    self.sections = @[@"appearance", @"common_parts", @"prayer_text", @"other"];
+    self.optsForSections = @{
+        @"common_parts": @[@"of1c", @"of1s", @"of1r", @"of1o", @"of1t", @"of1pr"],
+        @"prayer_text": @[@"of0v", @"of0cit"],
+        @"other": @[@"of1zspc", @"of1spspc", @"of1sp", @"of1dps", @"of1z95", @"of1prz", @"of1vkp", @"of1v", @"of2a"],
+    };
 }
 
 - (void)viewDidUnload
@@ -88,7 +56,6 @@ static NSString *prayerTextOpts[] = {
 {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
-    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -101,52 +68,41 @@ static NSString *prayerTextOpts[] = {
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return NUM_SECTIONS;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    switch (section) {
-        case SECT_APPEARANCE:
-            return 1;
-        case SECT_PRAYER_PARTS:
-            return NUM_PRAYER_PARTS;
-        case SECT_PRAYER_TEXT:
-            return NUM_PRAYER_TEXT;
-        default:
-            return 0;
-    }
+    return self.sections.count;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    switch (section) {
-        case SECT_APPEARANCE:
-            return @"Megjelenés";
-        case SECT_PRAYER_PARTS:
-            return @"Állandó részek megjelenítése";
-        case SECT_PRAYER_TEXT:
-            return @"Imaóra szövege";
-        default:
-            return nil;
+    NSString *sectionId = [self.sections objectAtIndex:section];
+    return [[NSBundle mainBundle] localizedStringForKey:sectionId value:@"" table:@"Settings"];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSString *sectionId = [self.sections objectAtIndex:section];
+    if ([sectionId isEqualToString:@"appearance"]) {
+        return 1;
+    }
+    else {
+        return [[self.optsForSections objectForKey:sectionId] count];
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.section) {
-        case SECT_PRAYER_PARTS:
-        {
-            NSString *optionId = prayerPartOpts[indexPath.row];
-            return ([self.longOpts containsObject:optionId] ? BIG_HEIGHT : NORMAL_HEIGHT);
-        }
-        case SECT_PRAYER_TEXT:
-        {
-            NSString *optionId = prayerTextOpts[indexPath.row];
-            return ([self.longOpts containsObject:optionId] ? BIG_HEIGHT : NORMAL_HEIGHT);
-        }
-        default:
-            return NORMAL_HEIGHT;
+    NSString *sectionId = [self.sections objectAtIndex:indexPath.section];
+    
+    if ([sectionId isEqualToString:@"appearance"]) {
+        return NORMAL_HEIGHT;
     }
+    else {
+        NSArray *opts = [self.optsForSections objectForKey:sectionId];
+        NSString *optId = [opts objectAtIndex:indexPath.row];
+        NSString *optTitle = [[NSBundle mainBundle] localizedStringForKey:optId value:@"" table:@"Settings"];
+
+        return NORMAL_HEIGHT + (optTitle.length / MAX_CHARS_PER_LINE) * PIXELS_PER_LINE;
+    }
+    
+    return NORMAL_HEIGHT;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -166,25 +122,17 @@ static NSString *prayerTextOpts[] = {
         
         return cell;
     }
-    else if (indexPath.section == SECT_PRAYER_PARTS) {
-        NSString *optionId = prayerPartOpts[indexPath.row];
-        NSString *cellIdentifier = ([self.longOpts containsObject:optionId] ? @"LongBoolCell" : @"BoolCell");
-        BRBoolSettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        
-        cell.optionId = optionId;
-        cell.label.text = prayerPartTitles[indexPath.row];
-        cell.switcher.on = [settings boolOption:prayerPartOpts[indexPath.row]];
-        
-        return cell;
-    }
-    else if (indexPath.section == SECT_PRAYER_TEXT) {
-        NSString *optionId = prayerTextOpts[indexPath.row];
-        NSString *cellIdentifier = ([self.longOpts containsObject:optionId] ? @"LongBoolCell" : @"BoolCell");
-        BRBoolSettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        
-        cell.optionId = optionId;
-        cell.label.text = prayerTextTitles[indexPath.row];
-        cell.switcher.on = [settings boolOption:prayerTextOpts[indexPath.row]];
+    else {
+        // Boolean option
+        NSString *sectionId = [self.sections objectAtIndex:indexPath.section];
+        NSArray *opts = [self.optsForSections objectForKey:sectionId];
+        NSString *optId = [opts objectAtIndex:indexPath.row];
+        NSString *optTitle = [[NSBundle mainBundle] localizedStringForKey:optId value:@"" table:@"Settings"];
+
+        BRBoolSettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BoolCell"];
+        cell.optionId = optId;
+        cell.label.text = optTitle;
+        cell.switcher.on = [settings boolOption:optId];
         
         return cell;
     }

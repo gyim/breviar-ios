@@ -27,6 +27,8 @@ static BRSettings *_instance;
                                @"of1c", @"of1s", @"of1r", @"of1o", @"of1t", @"of1pr",
                                // Prayer text details
                                @"of0cit",
+                               // Other options
+                               @"of1spspc", @"of1prz",
                                nil];
         
         self.allOptions = [NSSet setWithObjects:
@@ -34,6 +36,9 @@ static BRSettings *_instance;
                            @"of1c", @"of1s", @"of1r", @"of1o", @"of1t", @"of1pr",
                            // Prayer text details
                            @"of0v", @"of0cit",
+                           // Other options
+                           @"of1zspc", @"of1spspc", @"of1sp", @"of1dps", @"of1z95",
+                           @"of1prz", @"of1vkp", @"of1v", @"of2a",
                            nil];
     }
     return self;
@@ -41,7 +46,7 @@ static BRSettings *_instance;
 
 - (NSString *)prayerFontFamily {
     NSString *value = [[NSUserDefaults standardUserDefaults] stringForKey:@"PrayerFontFamily"];
-    return value ? value : @"Baskerville";
+    return value ? value : @"Helvetica";
 }
 
 - (void)setPrayerFontFamily:(NSString *)prayerFontFamily {
@@ -50,7 +55,7 @@ static BRSettings *_instance;
 
 - (NSInteger)prayerFontSize {
     NSInteger value = [[NSUserDefaults standardUserDefaults] integerForKey:@"PrayerFontSize"];
-    return value ? value : 18;
+    return value ? value : 14;
 }
 
 - (void)setPrayerFontSize:(NSInteger)prayerFontSize {

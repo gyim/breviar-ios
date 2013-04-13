@@ -1,0 +1,28 @@
+// Sections
+"appearance"	= "Megjelenés";
+"common_parts"	= "Állandó részek megjelenítése";
+"prayer_text"	= "Imaóra szövege";
+"other"			= "Egyéb";
+
+// Prayer parts settings
+"of1c"		= "Evangéliumi kantikumok";
+"of1s"		= "Dicsőség az Atyának";
+"of1r"		= "Rubrikák";
+"of1o"		= "Miatyánk";
+"of1t"		= "Téged, Isten, dicsérünk... himnusz";
+"of1pr"		= "A válaszos énekek teljes szövege";
+
+// Prayer text settings
+"of0v"		= "Versek száma";
+"of0cit"	= "Liturgikus olvasmányok";
+
+// Other settings
+"of1zspc"	= "Közös részek helyének mutatása a szentek zsolozsmájában";
+"of1spspc"	= "Emléknapokon a jelzett részeket a közös részből venni";
+"of1sp"		= "Szent életrajzok, jegyzetek elrejtése";
+"of1dps"	= "Kiegészítő zsoltárok használata a Napközi imaórában";
+"of1z95"	= "A 23., 66. illetve a 99. zsoltár helyett legyen a 94.";
+"of1prz"	= "Minden fohász után ismételni a választ";
+"of1vkp"	= "Esti dicséretre használja a rövidebb közbenjáró fohászokat a függelékből";
+"of1v"		= "Hosszabb vigíliás ünneplés Olvasmányos imaórával";
+"of2a"		= "Alternatívák mutatása";
