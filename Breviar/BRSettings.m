@@ -7,6 +7,7 @@
 //
 
 #import "BRSettings.h"
+#import "BRFontHelper.h"
 
 static BRSettings *_instance;
 
@@ -27,6 +28,8 @@ static BRSettings *_instance;
                                @"of1c", @"of1s", @"of1r", @"of1o", @"of1t", @"of1pr",
                                // Prayer text details
                                @"of0cit",
+                               // Liturgic calendar settings
+                               @"of0zjvne", @"of0nanne", @"of0tkne",
                                // Other options
                                @"of1spspc", @"of1prz",
                                nil];
@@ -36,6 +39,8 @@ static BRSettings *_instance;
                            @"of1c", @"of1s", @"of1r", @"of1o", @"of1t", @"of1pr",
                            // Prayer text details
                            @"of0v", @"of0cit",
+                           // Liturgic calendar settings
+                           @"of0zjvne", @"of0nanne", @"of0tkne",
                            // Other options
                            @"of1zspc", @"of1spspc", @"of1sp", @"of1dps", @"of1z95",
                            @"of1prz", @"of1vkp", @"of1v", @"of2a",
@@ -46,7 +51,7 @@ static BRSettings *_instance;
 
 - (NSString *)prayerFontFamily {
     NSString *value = [[NSUserDefaults standardUserDefaults] stringForKey:@"PrayerFontFamily"];
-    return value ? value : @"Helvetica";
+    return value ? value : [[BRFontHelper instance].availableFonts objectAtIndex:0];
 }
 
 - (void)setPrayerFontFamily:(NSString *)prayerFontFamily {

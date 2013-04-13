@@ -39,10 +39,11 @@
 {
     [super viewDidLoad];
 
-    self.sections = @[@"appearance", @"common_parts", @"prayer_text", @"other"];
+    self.sections = @[@"appearance", @"common_parts", @"prayer_text", @"calendar", @"other"];
     self.optsForSections = @{
         @"common_parts": @[@"of1c", @"of1s", @"of1r", @"of1o", @"of1t", @"of1pr"],
         @"prayer_text": @[@"of0v", @"of0cit"],
+        @"calendar": @[@"of0zjvne", @"of0nanne", @"of0tkne"],
         @"other": @[@"of1zspc", @"of1spspc", @"of1sp", @"of1dps", @"of1z95", @"of1prz", @"of1vkp", @"of1v", @"of2a"],
     };
 }
