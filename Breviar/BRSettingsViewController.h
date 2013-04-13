@@ -11,5 +11,7 @@
 
 @interface BRSettingsViewController : UITableViewController <BRFontPickerDelegate, UITableViewDelegate, UITableViewDataSource>
 
-@property(strong) NSSet *longOpts;
+@property(strong) NSArray *sections;
+@property(strong) NSDictionary *optsForSections;
+
 @end
