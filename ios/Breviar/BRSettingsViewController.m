@@ -11,6 +11,7 @@
 #import "BRFontSettingsCell.h"
 #import "BRBoolSettingsCell.h"
 #import "BRSettings.h"
+#import "BRUtil.h"
 
 #define CELL_NORMAL_HEIGHT			44
 #define CELL_LABEL_WIDTH			192
@@ -68,7 +69,7 @@
 {
 	NSDictionary *sectionObj = [[BRSettings instance].sections objectAtIndex:section];
 	NSString *sectionId = [sectionObj objectForKey:@"id"];
-	return [[NSBundle mainBundle] localizedStringForKey:sectionId value:@"" table:@"Settings"];
+	return BREVIAR_STR(sectionId);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -88,7 +89,7 @@
 		// Boolean option
 		NSArray *opts = [section objectForKey:@"items"];
 		NSString *optId = [[opts objectAtIndex:indexPath.row] objectForKey:@"id"];
-		NSString *optTitle = [[NSBundle mainBundle] localizedStringForKey:optId value:@"" table:@"Settings"];
+		NSString *optTitle = BREVIAR_STR(optId);
 		
 		UIFont *font = [UIFont systemFontOfSize:[UIFont labelFontSize]];
 		CGSize size = [optTitle sizeWithFont:font constrainedToSize:CGSizeMake(CELL_LABEL_WIDTH, CGFLOAT_MAX)];
@@ -124,11 +125,9 @@
 	}
 	else if ([optionType isEqualToString:@"bool"]) {
 		// Boolean option
-		NSString *optionTitle = [[NSBundle mainBundle] localizedStringForKey:optionId value:@"" table:@"Settings"];
-
 		BRBoolSettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BoolCell"];
 		cell.optionId = optionId;
-		cell.label.text = optionTitle;
+		cell.label.text = BREVIAR_STR(optionId);
 		cell.switcher.on = [settings boolForOption:optionId];
 		
 		return cell;

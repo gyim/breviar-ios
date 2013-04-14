@@ -1,4 +1,14 @@
-// Sections
+// Prayer titles
+"mi"		= "Invitatory";
+"mpc"		= "Office of Readings";
+"mrch"		= "Morning Prayer";
+"mpred"		= "Mid-Morning Prayer";
+"mna"		= "Midday Prayer";
+"mpo"		= "Mid-Afternoon Prayer";
+"mv"		= "Evening Prayer";
+"mk"		= "Compline";
+
+// Sections in Settings screen
 "appearance"	= "Megjelenés";
 "common_parts"	= "Állandó részek megjelenítése";
 "prayer_text"	= "Imaóra szövege";
