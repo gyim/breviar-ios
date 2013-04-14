@@ -46,6 +46,8 @@
 		707A64AD171A1FEC0065F98E /* Breviar.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64AA171A1FEC0065F98E /* Breviar.strings */; };
 		707A64B3171AA5BF0065F98E /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 707A64B2171AA5BF0065F98E /* Settings.plist */; };
 		707A64B7171AD8030065F98E /* BRStringOptionPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 707A64B6171AD8020065F98E /* BRStringOptionPickerViewController.m */; };
+		707A64C1171B12790065F98E /* Breviar.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64BB171B12790065F98E /* Breviar.strings */; };
+		707A64C2171B12790065F98E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64BD171B12790065F98E /* InfoPlist.strings */; };
 		70AAAA4E15FBFBE4008D314D /* BRSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AAAA4D15FBFBE4008D314D /* BRSettings.m */; };
 		70C962C016A1DFC800A399B9 /* BRCelebrationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C962BF16A1DFC800A399B9 /* BRCelebrationCell.m */; };
 		70C962CB16A1E1C900A399B9 /* bullet_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 70C962C216A1E1C900A399B9 /* bullet_black.png */; };
@@ -158,6 +160,10 @@
 		707A64B4171AD44C0065F98E /* BRUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRUtil.h; sourceTree = "<group>"; };
 		707A64B5171AD8020065F98E /* BRStringOptionPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRStringOptionPickerViewController.h; sourceTree = "<group>"; };
 		707A64B6171AD8020065F98E /* BRStringOptionPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRStringOptionPickerViewController.m; sourceTree = "<group>"; };
+		707A64BC171B12790065F98E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = Breviar.strings; sourceTree = "<group>"; };
+		707A64BE171B12790065F98E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = InfoPlist.strings; sourceTree = "<group>"; };
+		707A64C6171B12AC0065F98E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
+		707A64C7171B12AD0065F98E /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = cs; path = cs.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		70AAAA4C15FBFBE4008D314D /* BRSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettings.h; sourceTree = "<group>"; };
 		70AAAA4D15FBFBE4008D314D /* BRSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRSettings.m; sourceTree = "<group>"; };
 		70C962BE16A1DFC800A399B9 /* BRCelebrationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCelebrationCell.h; sourceTree = "<group>"; };
@@ -327,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				707A6496171A1BCD0065F98E /* Base.lproj */,
+				707A64BA171B12790065F98E /* cs.lproj */,
 				70493A5D1719D38100232631 /* en.lproj */,
 				707A64A0171A1F380065F98E /* hu.lproj */,
 				707A64A7171A1FDF0065F98E /* sk.lproj */,
@@ -400,6 +407,15 @@
 			name = sk.lproj;
 			sourceTree = "<group>";
 		};
+		707A64BA171B12790065F98E /* cs.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				707A64BB171B12790065F98E /* Breviar.strings */,
+				707A64BD171B12790065F98E /* InfoPlist.strings */,
+			);
+			path = cs.lproj;
+			sourceTree = "<group>";
+		};
 		70C962C116A1E1A400A399B9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -456,6 +472,7 @@
 				Base,
 				hu,
 				sk,
+				cs,
 			);
 			mainGroup = 7061B07C15FA8E1A00A83E0A;
 			productRefGroup = 7061B08815FA8E1A00A83E0A /* Products */;
@@ -513,6 +530,8 @@
 				707A64AC171A1FEC0065F98E /* InfoPlist.strings in Resources */,
 				707A64AD171A1FEC0065F98E /* Breviar.strings in Resources */,
 				707A64B3171AA5BF0065F98E /* Settings.plist in Resources */,
+				707A64C1171B12790065F98E /* Breviar.strings in Resources */,
+				707A64C2171B12790065F98E /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -607,6 +626,7 @@
 				707A649F171A1E850065F98E /* en */,
 				707A64AF171A205D0065F98E /* hu */,
 				707A64B1171A20600065F98E /* sk */,
+				707A64C6171B12AC0065F98E /* cs */,
 			);
 			name = MainStoryboard_iPhone.storyboard;
 			sourceTree = "<group>";
@@ -615,6 +635,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				707A6498171A1C180065F98E /* Base */,
+				707A64C7171B12AD0065F98E /* cs */,
 			);
 			name = MainStoryboard_iPad.storyboard;
 			sourceTree = "<group>";
@@ -649,6 +670,22 @@
 				707A64AB171A1FEC0065F98E /* sk */,
 			);
 			name = Breviar.strings;
+			sourceTree = "<group>";
+		};
+		707A64BB171B12790065F98E /* Breviar.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				707A64BC171B12790065F98E /* cs */,
+			);
+			name = Breviar.strings;
+			sourceTree = "<group>";
+		};
+		707A64BD171B12790065F98E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				707A64BE171B12790065F98E /* cs */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
