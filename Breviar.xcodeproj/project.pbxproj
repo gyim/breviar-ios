@@ -530,7 +530,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rm -rf \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nmkdir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\ncp -r ../include ../include_hu \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"";
+			shellScript = "rm -rf \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nmkdir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nfor dir in include include_hu include_cz include_la; do\n    cp -r ../$dir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\ndone";
 		};
 /* End PBXShellScriptBuildPhase section */
 
