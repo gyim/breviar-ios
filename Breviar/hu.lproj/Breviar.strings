@@ -15,6 +15,12 @@
 "calendar"		= "Liturgikus naptár";
 "other"			= "Egyéb";
 
+// Appearance settings
+"j"			= "Zsolozsma nyelve";
+"cz"		= "Cseh";
+"hu"		= "Magyar";
+"sk"		= "Szlovák";
+
 // Prayer parts settings
 "of1c"		= "Evangéliumi kantikumok";
 "of1s"		= "Dicsőség az Atyának";

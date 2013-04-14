@@ -42,7 +42,7 @@ static NSString *liturgicalColorImages[] = {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self loadDataForDate:[NSDate date]];
+    self.date = [NSDate date];
 }
 
 - (void)viewDidUnload
@@ -53,6 +53,13 @@ static NSString *liturgicalColorImages[] = {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    // Load celebrations for date
+    self.day = [[BRDataSource instance] dayForDate:self.date];
+    if (self.celebrationIndex > self.day.celebrations.count - 1) {
+        self.celebrationIndex = 0;
+    }
+    
     [self.tableView reloadData];
 }
 
@@ -166,18 +173,9 @@ static NSString *liturgicalColorImages[] = {
 
 - (void)datePicker:(BRDatePickerViewController *)datePicker pickedDate:(NSDate *)date
 {
-    [self loadDataForDate:date];
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-#pragma mark -
-#pragma mark Data handling
-
-- (void)loadDataForDate:(NSDate *)date
-{
     self.date = date;
-    self.day = [[BRDataSource instance] dayForDate:date];
     self.celebrationIndex = 0;
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end
