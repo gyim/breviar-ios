@@ -9,6 +9,8 @@
 #import "BRSettings.h"
 #import "BRFontHelper.h"
 
+#define LANG_OPTION @"j"
+
 static BRSettings *_instance;
 
 @implementation BRSettings
@@ -24,6 +26,9 @@ static BRSettings *_instance;
 - (id)init {
 	if (self = [super init]) {
 		NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+		NSString *lang = [userDefaults stringForKey:LANG_OPTION];
+		
+		// Load settings from Settings.plist and fill default values
 		NSDictionary *settingsDescriptor = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"]];
 		
 		self.sections = [settingsDescriptor objectForKey:@"sections"];
@@ -35,13 +40,24 @@ static BRSettings *_instance;
 				NSObject *defaultValue = [option objectForKey:@"default"];
 				
 				[options setObject:option forKey:optionId];
-				if (![userDefaults objectForKey:optionId]) {
+				if (defaultValue != nil && ![userDefaults objectForKey:optionId]) {
 					[userDefaults setObject:defaultValue forKey:optionId];
 				}
 			}
 		}
 		
 		self.options = options;
+		
+		// Set default language by locale
+		// (the block above already set a language, but we may override it)
+		if (lang == nil) {
+			NSLocale *locale = [NSLocale currentLocale];
+			NSString *langCode = [locale objectForKey:NSLocaleLanguageCode];
+			NSArray *supportedLangs = [self stringOptionsForOption:LANG_OPTION];
+			if ([supportedLangs containsObject:langCode]) {
+				[self setString:langCode forOption:LANG_OPTION];
+			}
+		}
 	}
 	return self;
 }
@@ -103,6 +119,19 @@ static BRSettings *_instance;
 		}
 	}
 	return queryOptions;
+}
+
+- (NSString *)stringForOption:(NSString *)optionId {
+	return [[NSUserDefaults standardUserDefaults] stringForKey:optionId];
+}
+
+- (void)setString:(NSString *)value forOption:(NSString *)optionId {
+	[[NSUserDefaults standardUserDefaults] setObject:value forKey:optionId];
+}
+
+- (NSArray *)stringOptionsForOption:(NSString *)optionId {
+	NSDictionary *option = [self.options objectForKey:optionId];
+	return [option objectForKey:@"options"];
 }
 
 @end

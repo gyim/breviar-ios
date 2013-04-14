@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "BRFontPickerViewController.h"
+#import "BRStringOptionPickerViewController.h"
 
-@interface BRSettingsViewController : UITableViewController <BRFontPickerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface BRSettingsViewController : UITableViewController <BRFontPickerDelegate, BRStringOptionPickerDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property(strong) NSString *currentOptionId;
 

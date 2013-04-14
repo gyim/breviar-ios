@@ -15,12 +15,15 @@
 +(NSString *)queryWithArgs:(NSDictionary *)args {
 	NSMutableString *queryString = [[NSMutableString alloc] init];
 	
-	// TODO: choose language based on config
-	[queryString appendString:@"-sj=hu"];
-	
 	// Generate query string
+	int i=0;
 	for (NSString *key in args) {
-		[queryString appendFormat:@"&%@=%@", key, [args objectForKey:key]];
+		if (i++ == 0) {
+			[queryString appendFormat:@"-s%@=%@", key, [args objectForKey:key]];
+		}
+		else {
+			[queryString appendFormat:@"&%@=%@", key, [args objectForKey:key]];
+		}
 	}
 
 	// Include directory

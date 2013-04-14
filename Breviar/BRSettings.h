@@ -27,4 +27,8 @@
 - (UIFont *)fontForOption:(NSString *)optionId;
 - (void)setFont:(UIFont *)value forOption:(NSString *)optionId;
 
+- (NSString *)stringForOption:(NSString *)optionId;
+- (void)setString:(NSString *)value forOption:(NSString *)optionId;
+- (NSArray *)stringOptionsForOption:(NSString *)optionId;
+
 @end
