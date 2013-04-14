@@ -10,42 +10,43 @@
 
 // Sections in Settings screen
 "appearance"	= "Appearance";
-"common_parts"	= "Common parts";
+"common_parts"	= "Non-changeable parts";
 "prayer_text"	= "Prayer text";
-"calendar"		= "Liturgic calendar";
+"calendar"		= "Liturgical calendar";
 "other"			= "Other";
 
 // Appearance settings
 "j"			= "Breviary language";
-"cz"		= "Czech";
-"hu"		= "Hungarian";
-"la"		= "Latin";
-"sk"		= "Slovak";
+"cz"		= "Čeština";
+"en"		= "English";
+"hu"		= "Magyarul";
+"la"		= "Lingua latina";
+"sk"		= "Slovenčina";
 
 // Prayer parts settings
-"of1c"		= "Evangéliumi kantikumok";
-"of1s"		= "Dicsőség az Atyának";
-"of1r"		= "Rubrikák";
-"of1o"		= "Miatyánk";
-"of1t"		= "Téged, Isten, dicsérünk... himnusz";
-"of1pr"		= "A válaszos énekek teljes szövege";
+"of1c"		= "Gospel canticles";
+"of1s"		= "Gloria to the Father";
+"of1r"		= "Rubrics";
+"of1o"		= "Lord's Prayer (Our Father)";
+"of1t"		= "Te Deum hymn";
+"of1pr"		= "Complete responsory texts";
 
 // Prayer text settings
-"of0v"		= "Versek száma";
-"of0cit"	= "Liturgikus olvasmányok";
+"of0v"		= "Verse numbers";
+"of0cit"	= "Liturgical readings";
 
 // Liturgic calendar settings
-"of0zjvne"	= "Urunk megjelenése (Vízkereszt) megünneplése vasárnap, január 2. és 8. között";
-"of0nanne"	= "Urunk mennybemenetelét vasárnap ünnepelni";
-"of0tkne"	= "Krisztus Szent Teste és Vére ünnepe vasárnapra téve";
+"of0zjvne"	= "Celebrate Epiphany on Sunday, between January 2 and 8";
+"of0nanne"	= "Celebrate Ascension of Jesus on Sunday";
+"of0tkne"	= "Celebrate Corpus Christi on Sunday";
 
 // Other settings
-"of1zspc"	= "Közös részek helyének mutatása a szentek zsolozsmájában";
-"of1spspc"	= "Emléknapokon a jelzett részeket a közös részből venni";
-"of1sp"		= "Szent életrajzok, jegyzetek elrejtése";
-"of1dps"	= "Kiegészítő zsoltárok használata a Napközi imaórában";
-"of1z95"	= "A 23., 66. illetve a 99. zsoltár helyett legyen a 94.";
-"of1prz"	= "Minden fohász után ismételni a választ";
-"of1vkp"	= "Esti dicséretre használja a rövidebb közbenjáró fohászokat a függelékből";
-"of1v"		= "Hosszabb vigíliás ünneplés Olvasmányos imaórával";
+"of1zspc"	= "Display the source of communia texts in the breviary of saints";
+"of1spspc"	= "Take parts from celebration (commmons)";
+"of1sp"		= "Do not display description for prayer for the saints";
+"of1dps"	= "Psalmodia from ordinary day";
+"of1z95"	= "Psalm 95 instead of psalms 24, 67 and 100";
+"of1prz"	= "Repeat invocation after each appeal";
+"of1vkp"	= "Use shorter prayers for vespers";
+"of1v"		= "Celebrating of vigily for prayer with readings";
 "of2a"		= "Alternatívák mutatása";
