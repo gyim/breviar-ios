@@ -51,11 +51,30 @@ static BRSettings *_instance;
         // Set default language by locale
         // (the block above already set a language, but we may override it)
         if (lang == nil) {
+            NSArray *supportedLanguages = [self stringOptionsForOption:LANG_OPTION];
             NSLocale *locale = [NSLocale currentLocale];
-            NSString *langCode = [locale objectForKey:NSLocaleLanguageCode];
-            NSArray *supportedLangs = [self stringOptionsForOption:LANG_OPTION];
-            if ([supportedLangs containsObject:langCode]) {
-                [self setString:langCode forOption:LANG_OPTION];
+            
+            NSString *preferredLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
+            NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
+            NSString *countryCode = [[locale objectForKey:NSLocaleCountryCode] lowercaseString];
+            
+            // Workaround for Czecz language code
+            if ([preferredLanguage isEqualToString:@"cs"]) {
+                preferredLanguage = @"cz";
+            }
+            if ([languageCode isEqualToString:@"cs"]) {
+                languageCode = @"cz";
+            }
+            
+            // Choose language
+            if ([supportedLanguages containsObject:preferredLanguage]) {
+                [self setString:preferredLanguage forOption:LANG_OPTION];
+            }
+            else if ([supportedLanguages containsObject:languageCode]) {
+                [self setString:languageCode forOption:LANG_OPTION];
+            }
+            else if ([supportedLanguages containsObject:countryCode]) {
+                [self setString:countryCode forOption:LANG_OPTION];
             }
         }
     }
