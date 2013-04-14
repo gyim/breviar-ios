@@ -1,9 +1,19 @@
-// Sections
-"appearance"	= "Megjelenés";
-"common_parts"	= "Állandó részek megjelenítése";
-"prayer_text"	= "Imaóra szövege";
-"calendar"		= "Liturgikus naptár";
-"other"			= "Egyéb";
+// Prayer titles
+"mi"		= "Invitatory";
+"mpc"		= "Office of Readings";
+"mrch"		= "Morning Prayer";
+"mpred"		= "Mid-Morning Prayer";
+"mna"		= "Midday Prayer";
+"mpo"		= "Mid-Afternoon Prayer";
+"mv"		= "Evening Prayer";
+"mk"		= "Compline";
+
+// Sections in Settings screen
+"appearance"	= "Appearance";
+"common_parts"	= "Common parts";
+"prayer_text"	= "Prayer text";
+"calendar"		= "Liturgic calendar";
+"other"			= "Other";
 
 // Prayer parts settings
 "of1c"		= "Evangéliumi kantikumok";

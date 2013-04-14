@@ -7,24 +7,14 @@
 //
 
 #import "BRPrayer.h"
-#include "BRCGIQuery.h"
-#include "BRSettings.h"
+#import "BRCGIQuery.h"
+#import "BRSettings.h"
+#import "BRUtil.h"
 
 @implementation BRPrayer
 @synthesize prayerType;
 @synthesize title;
 @synthesize body;
-
-static NSString *prayerTitles[] = {
-    [BRInvitatory]         = @"Invitatory",
-    [BROfficeOfReadings]   = @"Office of Readings",
-    [BRMorningPrayer]      = @"Morning Prayer",
-    [BRMidMorningPrayer]   = @"Mid-Morning Prayer",
-    [BRMiddayPrayer]       = @"Midday Prayer",
-    [BRMidAfternoonPrayer] = @"Mid-Afternoon Prayer",
-    [BREveningPrayer]      = @"Evening Prayer",
-    [BRCompline]           = @"Compline"
-};
 
 static NSString *prayerQueryIds[] = {
     [BRInvitatory]         = @"mi",
@@ -38,7 +28,7 @@ static NSString *prayerQueryIds[] = {
 };
 
 - (NSString *)title {
-    return prayerTitles[self.prayerType];
+    return BREVIAR_STR(prayerQueryIds[self.prayerType]);
 }
 
 - (NSString *)body {
