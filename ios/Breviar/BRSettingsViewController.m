@@ -10,6 +10,7 @@
 #import "BRFontHelper.h"
 #import "BRFontSettingsCell.h"
 #import "BRBoolSettingsCell.h"
+#import "BRStringOptionPickerViewController.h"
 #import "BRSettings.h"
 #import "BRUtil.h"
 
@@ -60,6 +61,18 @@
 #pragma mark -
 #pragma mark Settings table
 
+- (NSDictionary *)sectionForIndexPath:(NSIndexPath *)indexPath {
+	NSDictionary *section = [[BRSettings instance].sections objectAtIndex:indexPath.section];
+	return section;
+}
+
+- (NSDictionary *)optionForIndexPath:(NSIndexPath *)indexPath {
+	NSDictionary *section = [[BRSettings instance].sections objectAtIndex:indexPath.section];
+	NSArray *options = [section objectForKey:@"items"];
+	NSDictionary *option = [options objectAtIndex:indexPath.row];
+	return option;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 	return [BRSettings instance].sections.count;
@@ -80,9 +93,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSDictionary *section = [[BRSettings instance].sections objectAtIndex:indexPath.section];
-	NSArray *options = [section objectForKey:@"items"];
-	NSDictionary *option = [options objectAtIndex:indexPath.row];
+	NSDictionary *section = [self sectionForIndexPath:indexPath];
+	NSDictionary *option = [self optionForIndexPath:indexPath];
 	NSString *optionType = [option objectForKey:@"type"];
 	
 	if ([optionType isEqualToString:@"bool"]) {
@@ -103,9 +115,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	BRSettings *settings = [BRSettings instance];
-	NSDictionary *section = [settings.sections objectAtIndex:indexPath.section];
-	NSArray *options = [section objectForKey:@"items"];
-	NSDictionary *option = [options objectAtIndex:indexPath.row];
+	NSDictionary *option = [self optionForIndexPath:indexPath];
 	NSString *optionType = [option objectForKey:@"type"];
 	NSString *optionId = [option objectForKey:@"id"];
 	
@@ -113,12 +123,12 @@
 		BRFontSettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FontCell"];
 
 		// Update font cell
-		NSString *fontFamily = settings.prayerFontFamily;
-		NSString *fontName = [[BRFontHelper instance] fontNameForFamily:fontFamily];
-		NSInteger fontSize = settings.prayerFontSize;
+		UIFont *font = [settings fontForOption:optionId];
+		NSString *fontName = [[BRFontHelper instance] fontNameForFamily:font.fontName];
+		NSInteger fontSize = font.pointSize;
 		
 		cell.optionId = optionId;
-		cell.fontLabel.font = [UIFont fontWithName:fontFamily size:fontSize];
+		cell.fontLabel.font = font;
 		cell.fontLabel.text = [NSString stringWithFormat:@"%@, %dpx", fontName, fontSize];
 		
 		return cell;
@@ -129,6 +139,14 @@
 		cell.optionId = optionId;
 		cell.label.text = BREVIAR_STR(optionId);
 		cell.switcher.on = [settings boolForOption:optionId];
+		
+		return cell;
+	}
+	else if ([optionType isEqualToString:@"stringOption"]) {
+		// String option
+		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StringOptionCell"];
+		cell.textLabel.text = BREVIAR_STR(optionId);
+		cell.detailTextLabel.text = BREVIAR_STR([settings stringForOption:optionId]);
 		
 		return cell;
 	}
@@ -143,21 +161,32 @@
 {
 	NSString *segueId = segue.identifier;
 	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+	NSDictionary *option = [self optionForIndexPath:indexPath];
+	self.currentOptionId = [option objectForKey:@"id"];
 	
 	if ([segueId isEqualToString:@"ShowFontPicker"]) {
-		BRFontSettingsCell *cell = (BRFontSettingsCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-		self.currentOptionId = cell.optionId;
-		
 		BRFontPickerViewController *fontPicker = segue.destinationViewController;
 		fontPicker.fontFamily = [BRSettings instance].prayerFontFamily;
 		fontPicker.fontSize = [BRSettings instance].prayerFontSize;
 		fontPicker.delegate = self;
+	}
+	else if ([segueId isEqualToString:@"ShowStringOptions"]) {
+		BRStringOptionPickerViewController *picker = segue.destinationViewController;
+		picker.title = BREVIAR_STR(self.currentOptionId);
+		picker.options = [option objectForKey:@"options"];
+		picker.currentValue = [[BRSettings instance] stringForOption:self.currentOptionId];
+		picker.delegate = self;
 	}
 }
 
 - (void)fontPicker:(BRFontPickerViewController *)fontPicker didPickFont:(UIFont *)font
 {
 	[[BRSettings instance] setFont:font forOption:self.currentOptionId];
+}
+
+- (void)stringOptionPicker:(BRStringOptionPickerViewController *)picker didPickOption:(NSString *)value
+{
+	[[BRSettings instance] setString:value forOption:self.currentOptionId];
 }
 
 @end

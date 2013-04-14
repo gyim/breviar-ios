@@ -24,6 +24,20 @@
 						<integer>14</integer>
 					</dict>
 				</dict>
+				<dict>
+					<key>id</key>
+					<string>j</string>
+					<key>type</key>
+					<string>stringOption</string>
+					<key>default</key>
+					<string>sk</string>
+					<key>options</key>
+					<array>
+						<string>cz</string>
+						<string>hu</string>
+						<string>sk</string>
+					</array>
+				</dict>
 			</array>
 		</dict>
 		<dict>

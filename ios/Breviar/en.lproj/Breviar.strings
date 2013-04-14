@@ -15,6 +15,12 @@
 "calendar"		= "Liturgic calendar";
 "other"			= "Other";
 
+// Appearance settings
+"j"			= "Breviary language";
+"cz"		= "Czech";
+"hu"		= "Hungarian";
+"sk"		= "Slovak";
+
 // Prayer parts settings
 "of1c"		= "Evangéliumi kantikumok";
 "of1s"		= "Dicsőség az Atyának";

@@ -45,6 +45,7 @@
 		707A64AC171A1FEC0065F98E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64A8171A1FEC0065F98E /* InfoPlist.strings */; };
 		707A64AD171A1FEC0065F98E /* Breviar.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64AA171A1FEC0065F98E /* Breviar.strings */; };
 		707A64B3171AA5BF0065F98E /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 707A64B2171AA5BF0065F98E /* Settings.plist */; };
+		707A64B7171AD8030065F98E /* BRStringOptionPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 707A64B6171AD8020065F98E /* BRStringOptionPickerViewController.m */; };
 		70AAAA4E15FBFBE4008D314D /* BRSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AAAA4D15FBFBE4008D314D /* BRSettings.m */; };
 		70C962C016A1DFC800A399B9 /* BRCelebrationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C962BF16A1DFC800A399B9 /* BRCelebrationCell.m */; };
 		70C962CB16A1E1C900A399B9 /* bullet_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 70C962C216A1E1C900A399B9 /* bullet_black.png */; };
@@ -155,6 +156,8 @@
 		707A64B1171A20600065F98E /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
 		707A64B2171AA5BF0065F98E /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		707A64B4171AD44C0065F98E /* BRUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRUtil.h; sourceTree = "<group>"; };
+		707A64B5171AD8020065F98E /* BRStringOptionPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRStringOptionPickerViewController.h; sourceTree = "<group>"; };
+		707A64B6171AD8020065F98E /* BRStringOptionPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRStringOptionPickerViewController.m; sourceTree = "<group>"; };
 		70AAAA4C15FBFBE4008D314D /* BRSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettings.h; sourceTree = "<group>"; };
 		70AAAA4D15FBFBE4008D314D /* BRSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRSettings.m; sourceTree = "<group>"; };
 		70C962BE16A1DFC800A399B9 /* BRCelebrationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCelebrationCell.h; sourceTree = "<group>"; };
@@ -314,6 +317,8 @@
 				7054369015FBF1B1005854DC /* BRSettingsViewController.m */,
 				7054369215FBF1D0005854DC /* BRFontPickerViewController.h */,
 				7054369315FBF1D0005854DC /* BRFontPickerViewController.m */,
+				707A64B5171AD8020065F98E /* BRStringOptionPickerViewController.h */,
+				707A64B6171AD8020065F98E /* BRStringOptionPickerViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -564,6 +569,7 @@
 				70C962C016A1DFC800A399B9 /* BRCelebrationCell.m in Sources */,
 				70C962D616B45C3E00A399B9 /* BRFontSettingsCell.m in Sources */,
 				70C962D916B5425200A399B9 /* BRBoolSettingsCell.m in Sources */,
+				707A64B7171AD8030065F98E /* BRStringOptionPickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
