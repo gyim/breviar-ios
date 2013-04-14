@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface BRSettings : NSObject
 
-@property(strong) NSSet *defaultOptions;
-@property(strong) NSSet *allOptions;
+@property(strong) NSArray *sections;
+@property(strong) NSDictionary *options;
+
 @property(readonly) NSDictionary *prayerQueryOptions;
 
 @property NSString *prayerFontFamily;
@@ -19,7 +21,10 @@
 
 + (BRSettings *)instance;
 
-- (BOOL)boolOption:(NSString *)optionId;
-- (void)setBoolOption:(NSString *)optionId value:(BOOL)value;
+- (BOOL)boolForOption:(NSString *)optionId;
+- (void)setBool:(BOOL)value forOption:(NSString *)optionId;
+
+- (UIFont *)fontForOption:(NSString *)optionId;
+- (void)setFont:(UIFont *)value forOption:(NSString *)optionId;
 
 @end

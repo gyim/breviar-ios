@@ -38,14 +38,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    self.sections = @[@"appearance", @"common_parts", @"prayer_text", @"calendar", @"other"];
-    self.optsForSections = @{
-        @"common_parts": @[@"of1c", @"of1s", @"of1r", @"of1o", @"of1t", @"of1pr"],
-        @"prayer_text": @[@"of0v", @"of0cit"],
-        @"calendar": @[@"of0zjvne", @"of0nanne", @"of0tkne"],
-        @"other": @[@"of1zspc", @"of1spspc", @"of1sp", @"of1dps", @"of1z95", @"of1prz", @"of1vkp", @"of1v", @"of2a"],
-    };
 }
 
 - (void)viewDidUnload
@@ -69,50 +61,54 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.sections.count;
+    return [BRSettings instance].sections.count;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    NSString *sectionId = [self.sections objectAtIndex:section];
+    NSDictionary *sectionObj = [[BRSettings instance].sections objectAtIndex:section];
+    NSString *sectionId = [sectionObj objectForKey:@"id"];
     return [[NSBundle mainBundle] localizedStringForKey:sectionId value:@"" table:@"Settings"];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSString *sectionId = [self.sections objectAtIndex:section];
-    if ([sectionId isEqualToString:@"appearance"]) {
-        return 1;
-    }
-    else {
-        return [[self.optsForSections objectForKey:sectionId] count];
-    }
+    NSDictionary *sectionObj = [[BRSettings instance].sections objectAtIndex:section];
+    NSArray *sectionItems = [sectionObj objectForKey:@"items"];
+    return sectionItems.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *sectionId = [self.sections objectAtIndex:indexPath.section];
+    NSDictionary *section = [[BRSettings instance].sections objectAtIndex:indexPath.section];
+    NSArray *options = [section objectForKey:@"items"];
+    NSDictionary *option = [options objectAtIndex:indexPath.row];
+    NSString *optionType = [option objectForKey:@"type"];
     
-    if ([sectionId isEqualToString:@"appearance"]) {
-        return CELL_NORMAL_HEIGHT;
-    }
-    else {
-        NSArray *opts = [self.optsForSections objectForKey:sectionId];
-        NSString *optId = [opts objectAtIndex:indexPath.row];
+    if ([optionType isEqualToString:@"bool"]) {
+        // Boolean option
+        NSArray *opts = [section objectForKey:@"items"];
+        NSString *optId = [[opts objectAtIndex:indexPath.row] objectForKey:@"id"];
         NSString *optTitle = [[NSBundle mainBundle] localizedStringForKey:optId value:@"" table:@"Settings"];
         
         UIFont *font = [UIFont systemFontOfSize:[UIFont labelFontSize]];
         CGSize size = [optTitle sizeWithFont:font constrainedToSize:CGSizeMake(CELL_LABEL_WIDTH, CGFLOAT_MAX)];
         return size.height + CELL_LABEL_MARGIN;
     }
-    
-    return CELL_NORMAL_HEIGHT;
+    else {
+        return CELL_NORMAL_HEIGHT;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BRSettings *settings = [BRSettings instance];
+    NSDictionary *section = [settings.sections objectAtIndex:indexPath.section];
+    NSArray *options = [section objectForKey:@"items"];
+    NSDictionary *option = [options objectAtIndex:indexPath.row];
+    NSString *optionType = [option objectForKey:@"type"];
+    NSString *optionId = [option objectForKey:@"id"];
     
-    if (indexPath.section == SECT_APPEARANCE && indexPath.row == 0) {
+    if ([optionType isEqualToString:@"font"]) {
         BRFontSettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FontCell"];
 
         // Update font cell
@@ -120,22 +116,20 @@
         NSString *fontName = [[BRFontHelper instance] fontNameForFamily:fontFamily];
         NSInteger fontSize = settings.prayerFontSize;
         
+        cell.optionId = optionId;
         cell.fontLabel.font = [UIFont fontWithName:fontFamily size:fontSize];
         cell.fontLabel.text = [NSString stringWithFormat:@"%@, %dpx", fontName, fontSize];
         
         return cell;
     }
-    else {
+    else if ([optionType isEqualToString:@"bool"]) {
         // Boolean option
-        NSString *sectionId = [self.sections objectAtIndex:indexPath.section];
-        NSArray *opts = [self.optsForSections objectForKey:sectionId];
-        NSString *optId = [opts objectAtIndex:indexPath.row];
-        NSString *optTitle = [[NSBundle mainBundle] localizedStringForKey:optId value:@"" table:@"Settings"];
+        NSString *optionTitle = [[NSBundle mainBundle] localizedStringForKey:optionId value:@"" table:@"Settings"];
 
         BRBoolSettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BoolCell"];
-        cell.optionId = optId;
-        cell.label.text = optTitle;
-        cell.switcher.on = [settings boolOption:optId];
+        cell.optionId = optionId;
+        cell.label.text = optionTitle;
+        cell.switcher.on = [settings boolForOption:optionId];
         
         return cell;
     }
@@ -149,8 +143,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSString *segueId = segue.identifier;
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     
     if ([segueId isEqualToString:@"ShowFontPicker"]) {
+        BRFontSettingsCell *cell = (BRFontSettingsCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+        self.currentOptionId = cell.optionId;
+        
         BRFontPickerViewController *fontPicker = segue.destinationViewController;
         fontPicker.fontFamily = [BRSettings instance].prayerFontFamily;
         fontPicker.fontSize = [BRSettings instance].prayerFontSize;
@@ -158,10 +156,9 @@
     }
 }
 
-- (void)fontPicker:(BRFontPickerViewController *)fontPicker didPickFont:(NSString *)fontFamily size:(NSInteger)fontSize
+- (void)fontPicker:(BRFontPickerViewController *)fontPicker didPickFont:(UIFont *)font
 {
-    [BRSettings instance].prayerFontFamily = fontFamily;
-    [BRSettings instance].prayerFontSize = fontSize;
+    [[BRSettings instance] setFont:font forOption:self.currentOptionId];
 }
 
 @end

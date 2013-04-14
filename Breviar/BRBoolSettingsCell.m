@@ -27,7 +27,7 @@
 
 - (IBAction)switcherChanged:(id)sender
 {
-    [[BRSettings instance] setBoolOption:self.optionId value:self.switcher.on];
+    [[BRSettings instance] setBool:self.switcher.on forOption:self.optionId];
 }
 
 @end
