@@ -1,4 +1,14 @@
-// Sections
+// Prayer titles
+"mi"		= "Imádságra hívás";
+"mpc"		= "Olvasmányos imaóra";
+"mrch"		= "Reggeli dicséret";
+"mpred"		= "Délelőtt";
+"mna"		= "Délben";
+"mpo"		= "Délután";
+"mv"		= "Esti dicséret";
+"mk"		= "Befejező imaóra";
+
+// Sections in Settings screen
 "appearance"	= "Megjelenés";
 "common_parts"	= "Állandó részek megjelenítése";
 "prayer_text"	= "Imaóra szövege";

@@ -12,7 +12,7 @@
 		7042905816408A6300663A7D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042905516408A1600663A7D /* libz.dylib */; };
 		7042905916408BF600663A7D /* libRaptureXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042904E1640887200663A7D /* libRaptureXML.a */; };
 		7042905C1641F91C00663A7D /* BRDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7042905B1641F91B00663A7D /* BRDataSource.m */; };
-		70493A621719D4CF00232631 /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70493A601719D4CF00232631 /* Settings.strings */; };
+		70493A621719D4CF00232631 /* Breviar.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70493A601719D4CF00232631 /* Breviar.strings */; };
 		7054368D15FBDD69005854DC /* BRDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054368C15FBDD69005854DC /* BRDatePickerViewController.m */; };
 		7054369115FBF1B1005854DC /* BRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054369015FBF1B1005854DC /* BRSettingsViewController.m */; };
 		7054369415FBF1D1005854DC /* BRFontPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054369315FBF1D0005854DC /* BRFontPickerViewController.m */; };
@@ -41,9 +41,9 @@
 		7061B0E015FB932000A83E0A /* mystring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0DE15FB932000A83E0A /* mystring.cpp */; };
 		707A6499171A1C180065F98E /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 707A6497171A1C180065F98E /* MainStoryboard_iPad.storyboard */; };
 		707A64A5171A1F650065F98E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64A1171A1F650065F98E /* InfoPlist.strings */; };
-		707A64A6171A1F650065F98E /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64A3171A1F650065F98E /* Settings.strings */; };
+		707A64A6171A1F650065F98E /* Breviar.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64A3171A1F650065F98E /* Breviar.strings */; };
 		707A64AC171A1FEC0065F98E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64A8171A1FEC0065F98E /* InfoPlist.strings */; };
-		707A64AD171A1FEC0065F98E /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64AA171A1FEC0065F98E /* Settings.strings */; };
+		707A64AD171A1FEC0065F98E /* Breviar.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64AA171A1FEC0065F98E /* Breviar.strings */; };
 		707A64B3171AA5BF0065F98E /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 707A64B2171AA5BF0065F98E /* Settings.plist */; };
 		70AAAA4E15FBFBE4008D314D /* BRSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AAAA4D15FBFBE4008D314D /* BRSettings.m */; };
 		70C962C016A1DFC800A399B9 /* BRCelebrationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C962BF16A1DFC800A399B9 /* BRCelebrationCell.m */; };
@@ -95,7 +95,7 @@
 		7042905516408A1600663A7D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		7042905A1641F91B00663A7D /* BRDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDataSource.h; sourceTree = "<group>"; };
 		7042905B1641F91B00663A7D /* BRDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDataSource.m; sourceTree = "<group>"; };
-		70493A611719D4CF00232631 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Settings.strings; sourceTree = "<group>"; };
+		70493A611719D4CF00232631 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Breviar.strings; sourceTree = "<group>"; };
 		7054368B15FBDD69005854DC /* BRDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDatePickerViewController.h; sourceTree = "<group>"; };
 		7054368C15FBDD69005854DC /* BRDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDatePickerViewController.m; sourceTree = "<group>"; };
 		7054368F15FBF1B1005854DC /* BRSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettingsViewController.h; sourceTree = "<group>"; };
@@ -148,12 +148,13 @@
 		707A6498171A1C180065F98E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		707A649F171A1E850065F98E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
 		707A64A2171A1F650065F98E /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		707A64A4171A1F650065F98E /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Settings.strings; sourceTree = "<group>"; };
+		707A64A4171A1F650065F98E /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Breviar.strings; sourceTree = "<group>"; };
 		707A64A9171A1FEC0065F98E /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		707A64AB171A1FEC0065F98E /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/Settings.strings; sourceTree = "<group>"; };
+		707A64AB171A1FEC0065F98E /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/Breviar.strings; sourceTree = "<group>"; };
 		707A64AF171A205D0065F98E /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
 		707A64B1171A20600065F98E /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
 		707A64B2171AA5BF0065F98E /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
+		707A64B4171AD44C0065F98E /* BRUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRUtil.h; sourceTree = "<group>"; };
 		70AAAA4C15FBFBE4008D314D /* BRSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettings.h; sourceTree = "<group>"; };
 		70AAAA4D15FBFBE4008D314D /* BRSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRSettings.m; sourceTree = "<group>"; };
 		70C962BE16A1DFC800A399B9 /* BRCelebrationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCelebrationCell.h; sourceTree = "<group>"; };
@@ -217,7 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				7061B09415FA8E1A00A83E0A /* InfoPlist.strings */,
-				70493A601719D4CF00232631 /* Settings.strings */,
+				70493A601719D4CF00232631 /* Breviar.strings */,
 			);
 			name = en.lproj;
 			sourceTree = "<group>";
@@ -331,6 +332,7 @@
 				70C962D816B5425200A399B9 /* BRBoolSettingsCell.m */,
 				70C962D416B45C3E00A399B9 /* BRFontSettingsCell.h */,
 				70C962D516B45C3E00A399B9 /* BRFontSettingsCell.m */,
+				707A64B4171AD44C0065F98E /* BRUtil.h */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -379,7 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				707A64A1171A1F650065F98E /* InfoPlist.strings */,
-				707A64A3171A1F650065F98E /* Settings.strings */,
+				707A64A3171A1F650065F98E /* Breviar.strings */,
 			);
 			name = hu.lproj;
 			sourceTree = "<group>";
@@ -388,7 +390,7 @@
 			isa = PBXGroup;
 			children = (
 				707A64A8171A1FEC0065F98E /* InfoPlist.strings */,
-				707A64AA171A1FEC0065F98E /* Settings.strings */,
+				707A64AA171A1FEC0065F98E /* Breviar.strings */,
 			);
 			name = sk.lproj;
 			sourceTree = "<group>";
@@ -499,12 +501,12 @@
 				70C962D116A1E1C900A399B9 /* bullet_violet_or_white.png in Resources */,
 				70C962D216A1E1C900A399B9 /* bullet_violet.png in Resources */,
 				70C962D316A1E1C900A399B9 /* bullet_white.png in Resources */,
-				70493A621719D4CF00232631 /* Settings.strings in Resources */,
+				70493A621719D4CF00232631 /* Breviar.strings in Resources */,
 				707A6499171A1C180065F98E /* MainStoryboard_iPad.storyboard in Resources */,
 				707A64A5171A1F650065F98E /* InfoPlist.strings in Resources */,
-				707A64A6171A1F650065F98E /* Settings.strings in Resources */,
+				707A64A6171A1F650065F98E /* Breviar.strings in Resources */,
 				707A64AC171A1FEC0065F98E /* InfoPlist.strings in Resources */,
-				707A64AD171A1FEC0065F98E /* Settings.strings in Resources */,
+				707A64AD171A1FEC0065F98E /* Breviar.strings in Resources */,
 				707A64B3171AA5BF0065F98E /* Settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -576,12 +578,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		70493A601719D4CF00232631 /* Settings.strings */ = {
+		70493A601719D4CF00232631 /* Breviar.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				70493A611719D4CF00232631 /* en */,
 			);
-			name = Settings.strings;
+			name = Breviar.strings;
 			sourceTree = "<group>";
 		};
 		7061B09415FA8E1A00A83E0A /* InfoPlist.strings */ = {
@@ -619,12 +621,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		707A64A3171A1F650065F98E /* Settings.strings */ = {
+		707A64A3171A1F650065F98E /* Breviar.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				707A64A4171A1F650065F98E /* hu */,
 			);
-			name = Settings.strings;
+			name = Breviar.strings;
 			sourceTree = "<group>";
 		};
 		707A64A8171A1FEC0065F98E /* InfoPlist.strings */ = {
@@ -635,12 +637,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		707A64AA171A1FEC0065F98E /* Settings.strings */ = {
+		707A64AA171A1FEC0065F98E /* Breviar.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				707A64AB171A1FEC0065F98E /* sk */,
 			);
-			name = Settings.strings;
+			name = Breviar.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
