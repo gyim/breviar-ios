@@ -1,51 +1,52 @@
 // Prayer titles
-"mi"		= "Invitatory";
-"mpc"		= "Office of Readings";
-"mrch"		= "Morning Prayer";
-"mpred"		= "Mid-Morning Prayer";
-"mna"		= "Midday Prayer";
-"mpo"		= "Mid-Afternoon Prayer";
-"mv"		= "Evening Prayer";
-"mk"		= "Compline";
+"mi"		= "Invitatórium";
+"mpc"		= "Posvätné čítanie";
+"mrch"		= "Ranné chvály";
+"mpred"		= "Modlitba predpoludním";
+"mna"		= "Modlitba napoludnie";
+"mpo"		= "Modlitba popoludní";
+"mv"		= "Vešpery";
+"mk"		= "Kompletórium";
 
 // Sections in Settings screen
-"appearance"	= "Megjelenés";
-"common_parts"	= "Állandó részek megjelenítése";
-"prayer_text"	= "Imaóra szövege";
-"calendar"		= "Liturgikus naptár";
-"other"			= "Egyéb";
+"appearance"	= "Vzhľad";
+"common_parts"	= "Zobraziť nasledovné súčasti modlitby?";
+"prayer_text"	= "V texte modlitieb zobraziť";
+"calendar"		= "Nastavenia pre liturgický kalendár";
+"other"			= "Ďalšie možnosti pre výsledné modlitby";
 
 // Appearance settings
 "j"			= "Breviary language";
-"cz"		= "Czech";
-"hu"		= "Hungarian";
-"la"		= "Latin";
-"sk"		= "Slovak";
+"cz"		= "Čeština";
+"en"		= "English";
+"hu"		= "Magyarul";
+"la"		= "Lingua latina";
+"sk"		= "Slovenčina";
 
 // Prayer parts settings
-"of1c"		= "Evangéliumi kantikumok";
-"of1s"		= "Dicsőség az Atyának";
-"of1r"		= "Rubrikák";
-"of1o"		= "Miatyánk";
-"of1t"		= "Téged, Isten, dicsérünk... himnusz";
-"of1pr"		= "A válaszos énekek teljes szövege";
+"of1c"		= "Evanjeliové chválospevy";
+"of1s"		= "Sláva Otcu";
+"of1r"		= "Rubriky";
+"of1o"		= "Modlitba Pána (Otčenáš)";
+"of1t"		= "Hymnus Te Deum";
+"of1pr"		= "Plné znenie responzórií pre posvätné čítania";
 
 // Prayer text settings
-"of0v"		= "Versek száma";
-"of0cit"	= "Liturgikus olvasmányok";
+"of0v"		= "Číslovanie (čísla) veršov";
+"of0cit"	= "Liturgické čítania";
 
 // Liturgic calendar settings
-"of0zjvne"	= "Urunk megjelenése (Vízkereszt) megünneplése vasárnap, január 2. és 8. között";
-"of0nanne"	= "Urunk mennybemenetelét vasárnap ünnepelni";
-"of0tkne"	= "Krisztus Szent Teste és Vére ünnepe vasárnapra téve";
+"of0zjvne"	= "Zjavenie Pána sláviť v nedeľu medzi 2. a 8. januárom";
+"of0nanne"	= "Nanebovstúpenie Pána sláviť v nedeľu";
+"of0tkne"	= "Najsv. Kristovho tela a krvi sláviť v nedeľu";
 
 // Other settings
-"of1zspc"	= "Közös részek helyének mutatása a szentek zsolozsmájában";
-"of1spspc"	= "Emléknapokon a jelzett részeket a közös részből venni";
-"of1sp"		= "Szent életrajzok, jegyzetek elrejtése";
-"of1dps"	= "Kiegészítő zsoltárok használata a Napközi imaórában";
-"of1z95"	= "A 23., 66. illetve a 99. zsoltár helyett legyen a 94.";
-"of1prz"	= "Minden fohász után ismételni a választ";
-"of1vkp"	= "Esti dicséretre használja a rövidebb közbenjáró fohászokat a függelékből";
-"of1v"		= "Hosszabb vigíliás ünneplés Olvasmányos imaórával";
-"of2a"		= "Alternatívák mutatása";
+"of1zspc"	= "Zobraziť, odkiaľ sa berú časti zo spoločnej časti k modlitbe svätého";
+"of1spspc"	= "Na spomienky použiť časti zo spoločných častí";
+"of1sp"		= "Nezobraziť popis k modlitbe svätého";
+"of1dps"	= "Pre modlitbu cez deň použiť doplnkovú psalmódiu";
+"of1z95"	= "Namiesto žalmov 24, 67 resp. 100 použiť žalm 95";
+"of1prz"	= "Opakovať zvolanie po každej prosbe";
+"of1vkp"	= "Pre vešpery použiť kratšie prosby z dodatku";
+"of1v"		= "Predĺžené slávenie vigílie pre posvätné čítanie";
+"of2a"		= "Alternatívy";

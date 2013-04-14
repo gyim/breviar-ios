@@ -48,6 +48,8 @@
 		707A64B7171AD8030065F98E /* BRStringOptionPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 707A64B6171AD8020065F98E /* BRStringOptionPickerViewController.m */; };
 		707A64C1171B12790065F98E /* Breviar.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64BB171B12790065F98E /* Breviar.strings */; };
 		707A64C2171B12790065F98E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64BD171B12790065F98E /* InfoPlist.strings */; };
+		707A64CA171B6F320065F98E /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 707A64C8171B6F320065F98E /* Icon.png */; };
+		707A64CB171B6F320065F98E /* Icon@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 707A64C9171B6F320065F98E /* Icon@2.png */; };
 		70AAAA4E15FBFBE4008D314D /* BRSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AAAA4D15FBFBE4008D314D /* BRSettings.m */; };
 		70C962C016A1DFC800A399B9 /* BRCelebrationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C962BF16A1DFC800A399B9 /* BRCelebrationCell.m */; };
 		70C962CB16A1E1C900A399B9 /* bullet_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 70C962C216A1E1C900A399B9 /* bullet_black.png */; };
@@ -164,6 +166,8 @@
 		707A64BE171B12790065F98E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = InfoPlist.strings; sourceTree = "<group>"; };
 		707A64C6171B12AC0065F98E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
 		707A64C7171B12AD0065F98E /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = cs; path = cs.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		707A64C8171B6F320065F98E /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		707A64C9171B6F320065F98E /* Icon@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2.png"; sourceTree = "<group>"; };
 		70AAAA4C15FBFBE4008D314D /* BRSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettings.h; sourceTree = "<group>"; };
 		70AAAA4D15FBFBE4008D314D /* BRSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRSettings.m; sourceTree = "<group>"; };
 		70C962BE16A1DFC800A399B9 /* BRCelebrationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCelebrationCell.h; sourceTree = "<group>"; };
@@ -281,6 +285,8 @@
 				7061B09315FA8E1A00A83E0A /* Breviar-Info.plist */,
 				7061B09715FA8E1A00A83E0A /* main.m */,
 				7061B09915FA8E1A00A83E0A /* Breviar-Prefix.pch */,
+				707A64C8171B6F320065F98E /* Icon.png */,
+				707A64C9171B6F320065F98E /* Icon@2.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -532,6 +538,8 @@
 				707A64B3171AA5BF0065F98E /* Settings.plist in Resources */,
 				707A64C1171B12790065F98E /* Breviar.strings in Resources */,
 				707A64C2171B12790065F98E /* InfoPlist.strings in Resources */,
+				707A64CA171B6F320065F98E /* Icon.png in Resources */,
+				707A64CB171B6F320065F98E /* Icon@2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

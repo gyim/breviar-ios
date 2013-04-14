@@ -30,7 +30,7 @@
 					<key>type</key>
 					<string>stringOption</string>
 					<key>default</key>
-					<string>sk</string>
+					<string>la</string>
 					<key>options</key>
 					<array>
 						<string>cz</string>
