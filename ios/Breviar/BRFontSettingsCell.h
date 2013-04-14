@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface BRFontSettingsCell : UITableViewCell
+@property(strong) NSString *optionId;
 @property(weak,nonatomic) IBOutlet UILabel *fontLabel;
 @end
