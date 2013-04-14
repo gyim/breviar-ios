@@ -44,6 +44,7 @@
 		707A64A6171A1F650065F98E /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64A3171A1F650065F98E /* Settings.strings */; };
 		707A64AC171A1FEC0065F98E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64A8171A1FEC0065F98E /* InfoPlist.strings */; };
 		707A64AD171A1FEC0065F98E /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64AA171A1FEC0065F98E /* Settings.strings */; };
+		707A64B3171AA5BF0065F98E /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 707A64B2171AA5BF0065F98E /* Settings.plist */; };
 		70AAAA4E15FBFBE4008D314D /* BRSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AAAA4D15FBFBE4008D314D /* BRSettings.m */; };
 		70C962C016A1DFC800A399B9 /* BRCelebrationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C962BF16A1DFC800A399B9 /* BRCelebrationCell.m */; };
 		70C962CB16A1E1C900A399B9 /* bullet_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 70C962C216A1E1C900A399B9 /* bullet_black.png */; };
@@ -152,6 +153,7 @@
 		707A64AB171A1FEC0065F98E /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/Settings.strings; sourceTree = "<group>"; };
 		707A64AF171A205D0065F98E /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
 		707A64B1171A20600065F98E /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
+		707A64B2171AA5BF0065F98E /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		70AAAA4C15FBFBE4008D314D /* BRSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettings.h; sourceTree = "<group>"; };
 		70AAAA4D15FBFBE4008D314D /* BRSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRSettings.m; sourceTree = "<group>"; };
 		70C962BE16A1DFC800A399B9 /* BRCelebrationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCelebrationCell.h; sourceTree = "<group>"; };
@@ -194,17 +196,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7034597915FCE81A000A1711 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				70AAAA4C15FBFBE4008D314D /* BRSettings.h */,
-				70AAAA4D15FBFBE4008D314D /* BRSettings.m */,
-				7034597B15FCE84D000A1711 /* BRFontHelper.h */,
-				7034597C15FCE84D000A1711 /* BRFontHelper.m */,
-			);
-			name = Utilities;
-			sourceTree = "<group>";
-		};
 		704290421640886000663A7D /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,7 +258,6 @@
 				7061B0B915FAA3D200A83E0A /* Model */,
 				7061B0BB15FAA3EE00A83E0A /* View */,
 				7061B0BA15FAA3DA00A83E0A /* Controller */,
-				7034597915FCE81A000A1711 /* Utilities */,
 				7061B09A15FA8E1A00A83E0A /* BRAppDelegate.h */,
 				7061B09B15FA8E1A00A83E0A /* BRAppDelegate.m */,
 				7061B09215FA8E1A00A83E0A /* Supporting Files */,
@@ -291,14 +281,19 @@
 				7061B0BC15FB923300A83E0A /* cgi */,
 				7042905A1641F91B00663A7D /* BRDataSource.h */,
 				7042905B1641F91B00663A7D /* BRDataSource.m */,
-				70E01271162F54BA00601CA3 /* BRDay.h */,
-				70E01272162F54BA00601CA3 /* BRDay.m */,
 				70E01275162F553000601CA3 /* BRCelebration.h */,
 				70E01276162F553000601CA3 /* BRCelebration.m */,
+				70E01271162F54BA00601CA3 /* BRDay.h */,
+				70E01272162F54BA00601CA3 /* BRDay.m */,
+				7034597B15FCE84D000A1711 /* BRFontHelper.h */,
+				7034597C15FCE84D000A1711 /* BRFontHelper.m */,
 				7061B0B615FAA3C500A83E0A /* BRPrayer.h */,
 				7061B0B715FAA3C500A83E0A /* BRPrayer.m */,
+				70AAAA4C15FBFBE4008D314D /* BRSettings.h */,
+				70AAAA4D15FBFBE4008D314D /* BRSettings.m */,
 				70E01278162F56E500601CA3 /* BRCGIQuery.h */,
 				70E01279162F56E500601CA3 /* BRCGIQuery.mm */,
+				707A64B2171AA5BF0065F98E /* Settings.plist */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -510,6 +505,7 @@
 				707A64A6171A1F650065F98E /* Settings.strings in Resources */,
 				707A64AC171A1FEC0065F98E /* InfoPlist.strings in Resources */,
 				707A64AD171A1FEC0065F98E /* Settings.strings in Resources */,
+				707A64B3171AA5BF0065F98E /* Settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

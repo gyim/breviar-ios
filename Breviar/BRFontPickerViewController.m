@@ -116,7 +116,9 @@ static CGFloat componentSizes[] = {
 	else if (component == BRFontSizeComponent) {
 		self.fontSize = [[fontHelper.availableSizes objectAtIndex:row] intValue];
 	}
-	[self.delegate fontPicker:self didPickFont:self.fontFamily size:self.fontSize];
+	
+	UIFont *font = [UIFont fontWithName:self.fontFamily size:self.fontSize];
+	[self.delegate fontPicker:self didPickFont:font];
 	[self updatePreview];
 }
 
