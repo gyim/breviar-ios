@@ -12,6 +12,7 @@
 		7042905816408A6300663A7D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042905516408A1600663A7D /* libz.dylib */; };
 		7042905916408BF600663A7D /* libRaptureXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042904E1640887200663A7D /* libRaptureXML.a */; };
 		7042905C1641F91C00663A7D /* BRDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7042905B1641F91B00663A7D /* BRDataSource.m */; };
+		70493A621719D4CF00232631 /* Breviar.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70493A601719D4CF00232631 /* Breviar.strings */; };
 		7054368D15FBDD69005854DC /* BRDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054368C15FBDD69005854DC /* BRDatePickerViewController.m */; };
 		7054369115FBF1B1005854DC /* BRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054369015FBF1B1005854DC /* BRSettingsViewController.m */; };
 		7054369415FBF1D1005854DC /* BRFontPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054369315FBF1D0005854DC /* BRFontPickerViewController.m */; };
@@ -22,7 +23,6 @@
 		7061B09815FA8E1A00A83E0A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B09715FA8E1A00A83E0A /* main.m */; };
 		7061B09C15FA8E1A00A83E0A /* BRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B09B15FA8E1A00A83E0A /* BRAppDelegate.m */; };
 		7061B09F15FA8E1A00A83E0A /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7061B09D15FA8E1A00A83E0A /* MainStoryboard_iPhone.storyboard */; };
-		7061B0A215FA8E1A00A83E0A /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7061B0A015FA8E1A00A83E0A /* MainStoryboard_iPad.storyboard */; };
 		7061B0A515FA8E1A00A83E0A /* BRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0A415FA8E1A00A83E0A /* BRViewController.m */; };
 		7061B0B115FAA18C00A83E0A /* BRPrayerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0B015FAA18C00A83E0A /* BRPrayerListViewController.m */; };
 		7061B0B515FAA34100A83E0A /* BRPrayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0B415FAA34100A83E0A /* BRPrayerViewController.m */; };
@@ -39,6 +39,17 @@
 		7061B0DC15FB929300A83E0A /* myhpage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0CF15FB929300A83E0A /* myhpage.cpp */; };
 		7061B0DD15FB929300A83E0A /* mylog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0D115FB929300A83E0A /* mylog.cpp */; };
 		7061B0E015FB932000A83E0A /* mystring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0DE15FB932000A83E0A /* mystring.cpp */; };
+		707A6499171A1C180065F98E /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 707A6497171A1C180065F98E /* MainStoryboard_iPad.storyboard */; };
+		707A64A5171A1F650065F98E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64A1171A1F650065F98E /* InfoPlist.strings */; };
+		707A64A6171A1F650065F98E /* Breviar.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64A3171A1F650065F98E /* Breviar.strings */; };
+		707A64AC171A1FEC0065F98E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64A8171A1FEC0065F98E /* InfoPlist.strings */; };
+		707A64AD171A1FEC0065F98E /* Breviar.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64AA171A1FEC0065F98E /* Breviar.strings */; };
+		707A64B3171AA5BF0065F98E /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 707A64B2171AA5BF0065F98E /* Settings.plist */; };
+		707A64B7171AD8030065F98E /* BRStringOptionPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 707A64B6171AD8020065F98E /* BRStringOptionPickerViewController.m */; };
+		707A64C1171B12790065F98E /* Breviar.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64BB171B12790065F98E /* Breviar.strings */; };
+		707A64C2171B12790065F98E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64BD171B12790065F98E /* InfoPlist.strings */; };
+		707A64CA171B6F320065F98E /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 707A64C8171B6F320065F98E /* Icon.png */; };
+		707A64CB171B6F320065F98E /* Icon@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 707A64C9171B6F320065F98E /* Icon@2.png */; };
 		70AAAA4E15FBFBE4008D314D /* BRSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AAAA4D15FBFBE4008D314D /* BRSettings.m */; };
 		70C962C016A1DFC800A399B9 /* BRCelebrationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C962BF16A1DFC800A399B9 /* BRCelebrationCell.m */; };
 		70C962CB16A1E1C900A399B9 /* bullet_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 70C962C216A1E1C900A399B9 /* bullet_black.png */; };
@@ -50,6 +61,8 @@
 		70C962D116A1E1C900A399B9 /* bullet_violet_or_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 70C962C816A1E1C900A399B9 /* bullet_violet_or_white.png */; };
 		70C962D216A1E1C900A399B9 /* bullet_violet.png in Resources */ = {isa = PBXBuildFile; fileRef = 70C962C916A1E1C900A399B9 /* bullet_violet.png */; };
 		70C962D316A1E1C900A399B9 /* bullet_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 70C962CA16A1E1C900A399B9 /* bullet_white.png */; };
+		70C962D616B45C3E00A399B9 /* BRFontSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C962D516B45C3E00A399B9 /* BRFontSettingsCell.m */; };
+		70C962D916B5425200A399B9 /* BRBoolSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C962D816B5425200A399B9 /* BRBoolSettingsCell.m */; };
 		70E01273162F54BA00601CA3 /* BRDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E01272162F54BA00601CA3 /* BRDay.m */; };
 		70E01277162F553000601CA3 /* BRCelebration.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E01276162F553000601CA3 /* BRCelebration.m */; };
 		70E0127A162F56E500601CA3 /* BRCGIQuery.mm in Sources */ = {isa = PBXBuildFile; fileRef = 70E01279162F56E500601CA3 /* BRCGIQuery.mm */; };
@@ -87,6 +100,7 @@
 		7042905516408A1600663A7D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		7042905A1641F91B00663A7D /* BRDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDataSource.h; sourceTree = "<group>"; };
 		7042905B1641F91B00663A7D /* BRDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDataSource.m; sourceTree = "<group>"; };
+		70493A611719D4CF00232631 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Breviar.strings; sourceTree = "<group>"; };
 		7054368B15FBDD69005854DC /* BRDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDatePickerViewController.h; sourceTree = "<group>"; };
 		7054368C15FBDD69005854DC /* BRDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDatePickerViewController.m; sourceTree = "<group>"; };
 		7054368F15FBF1B1005854DC /* BRSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettingsViewController.h; sourceTree = "<group>"; };
@@ -103,8 +117,6 @@
 		7061B09915FA8E1A00A83E0A /* Breviar-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Breviar-Prefix.pch"; sourceTree = "<group>"; };
 		7061B09A15FA8E1A00A83E0A /* BRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRAppDelegate.h; sourceTree = "<group>"; };
 		7061B09B15FA8E1A00A83E0A /* BRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BRAppDelegate.m; sourceTree = "<group>"; };
-		7061B09E15FA8E1A00A83E0A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		7061B0A115FA8E1A00A83E0A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		7061B0A315FA8E1A00A83E0A /* BRViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRViewController.h; sourceTree = "<group>"; };
 		7061B0A415FA8E1A00A83E0A /* BRViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BRViewController.m; sourceTree = "<group>"; };
 		7061B0AF15FAA18C00A83E0A /* BRPrayerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRPrayerListViewController.h; sourceTree = "<group>"; };
@@ -137,6 +149,25 @@
 		7061B0D215FB929300A83E0A /* mylog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mylog.h; path = "../../cgi-bin/source/mylog.h"; sourceTree = "<group>"; };
 		7061B0DE15FB932000A83E0A /* mystring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mystring.cpp; path = "../../cgi-bin/source/mystring.cpp"; sourceTree = "<group>"; };
 		7061B0DF15FB932000A83E0A /* mystring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mystring.h; path = "../../cgi-bin/source/mystring.h"; sourceTree = "<group>"; };
+		707A6495171A1B9E0065F98E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		707A6498171A1C180065F98E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		707A649F171A1E850065F98E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
+		707A64A2171A1F650065F98E /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		707A64A4171A1F650065F98E /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Breviar.strings; sourceTree = "<group>"; };
+		707A64A9171A1FEC0065F98E /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		707A64AB171A1FEC0065F98E /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/Breviar.strings; sourceTree = "<group>"; };
+		707A64AF171A205D0065F98E /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
+		707A64B1171A20600065F98E /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
+		707A64B2171AA5BF0065F98E /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
+		707A64B4171AD44C0065F98E /* BRUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRUtil.h; sourceTree = "<group>"; };
+		707A64B5171AD8020065F98E /* BRStringOptionPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRStringOptionPickerViewController.h; sourceTree = "<group>"; };
+		707A64B6171AD8020065F98E /* BRStringOptionPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRStringOptionPickerViewController.m; sourceTree = "<group>"; };
+		707A64BC171B12790065F98E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = Breviar.strings; sourceTree = "<group>"; };
+		707A64BE171B12790065F98E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = InfoPlist.strings; sourceTree = "<group>"; };
+		707A64C6171B12AC0065F98E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
+		707A64C7171B12AD0065F98E /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = cs; path = cs.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		707A64C8171B6F320065F98E /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		707A64C9171B6F320065F98E /* Icon@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2.png"; sourceTree = "<group>"; };
 		70AAAA4C15FBFBE4008D314D /* BRSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettings.h; sourceTree = "<group>"; };
 		70AAAA4D15FBFBE4008D314D /* BRSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRSettings.m; sourceTree = "<group>"; };
 		70C962BE16A1DFC800A399B9 /* BRCelebrationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCelebrationCell.h; sourceTree = "<group>"; };
@@ -150,6 +181,10 @@
 		70C962C816A1E1C900A399B9 /* bullet_violet_or_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bullet_violet_or_white.png; path = Resources/bullet_violet_or_white.png; sourceTree = "<group>"; };
 		70C962C916A1E1C900A399B9 /* bullet_violet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bullet_violet.png; path = Resources/bullet_violet.png; sourceTree = "<group>"; };
 		70C962CA16A1E1C900A399B9 /* bullet_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bullet_white.png; path = Resources/bullet_white.png; sourceTree = "<group>"; };
+		70C962D416B45C3E00A399B9 /* BRFontSettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRFontSettingsCell.h; sourceTree = "<group>"; };
+		70C962D516B45C3E00A399B9 /* BRFontSettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRFontSettingsCell.m; sourceTree = "<group>"; };
+		70C962D716B5425200A399B9 /* BRBoolSettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRBoolSettingsCell.h; sourceTree = "<group>"; };
+		70C962D816B5425200A399B9 /* BRBoolSettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRBoolSettingsCell.m; sourceTree = "<group>"; };
 		70E01271162F54BA00601CA3 /* BRDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDay.h; sourceTree = "<group>"; };
 		70E01272162F54BA00601CA3 /* BRDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDay.m; sourceTree = "<group>"; };
 		70E01275162F553000601CA3 /* BRCelebration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCelebration.h; sourceTree = "<group>"; };
@@ -175,17 +210,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7034597915FCE81A000A1711 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				70AAAA4C15FBFBE4008D314D /* BRSettings.h */,
-				70AAAA4D15FBFBE4008D314D /* BRSettings.m */,
-				7034597B15FCE84D000A1711 /* BRFontHelper.h */,
-				7034597C15FCE84D000A1711 /* BRFontHelper.m */,
-			);
-			name = Utilities;
-			sourceTree = "<group>";
-		};
 		704290421640886000663A7D /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,11 +227,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		70493A5D1719D38100232631 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				7061B09415FA8E1A00A83E0A /* InfoPlist.strings */,
+				70493A601719D4CF00232631 /* Breviar.strings */,
+			);
+			name = en.lproj;
+			sourceTree = "<group>";
+		};
 		7061B07C15FA8E1A00A83E0A = {
 			isa = PBXGroup;
 			children = (
-				7042905516408A1600663A7D /* libz.dylib */,
-				7042905316408A1100663A7D /* libxml2.dylib */,
 				7061B09115FA8E1A00A83E0A /* Breviar */,
 				704290421640886000663A7D /* Thirdparty */,
 				7061B08A15FA8E1A00A83E0A /* Frameworks */,
@@ -229,6 +260,8 @@
 				7061B08B15FA8E1A00A83E0A /* UIKit.framework */,
 				7061B08D15FA8E1A00A83E0A /* Foundation.framework */,
 				7061B08F15FA8E1A00A83E0A /* CoreGraphics.framework */,
+				7042905516408A1600663A7D /* libz.dylib */,
+				7042905316408A1100663A7D /* libxml2.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -239,7 +272,6 @@
 				7061B0B915FAA3D200A83E0A /* Model */,
 				7061B0BB15FAA3EE00A83E0A /* View */,
 				7061B0BA15FAA3DA00A83E0A /* Controller */,
-				7034597915FCE81A000A1711 /* Utilities */,
 				7061B09A15FA8E1A00A83E0A /* BRAppDelegate.h */,
 				7061B09B15FA8E1A00A83E0A /* BRAppDelegate.m */,
 				7061B09215FA8E1A00A83E0A /* Supporting Files */,
@@ -251,9 +283,10 @@
 			isa = PBXGroup;
 			children = (
 				7061B09315FA8E1A00A83E0A /* Breviar-Info.plist */,
-				7061B09415FA8E1A00A83E0A /* InfoPlist.strings */,
 				7061B09715FA8E1A00A83E0A /* main.m */,
 				7061B09915FA8E1A00A83E0A /* Breviar-Prefix.pch */,
+				707A64C8171B6F320065F98E /* Icon.png */,
+				707A64C9171B6F320065F98E /* Icon@2.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -264,14 +297,19 @@
 				7061B0BC15FB923300A83E0A /* cgi */,
 				7042905A1641F91B00663A7D /* BRDataSource.h */,
 				7042905B1641F91B00663A7D /* BRDataSource.m */,
-				70E01271162F54BA00601CA3 /* BRDay.h */,
-				70E01272162F54BA00601CA3 /* BRDay.m */,
 				70E01275162F553000601CA3 /* BRCelebration.h */,
 				70E01276162F553000601CA3 /* BRCelebration.m */,
+				70E01271162F54BA00601CA3 /* BRDay.h */,
+				70E01272162F54BA00601CA3 /* BRDay.m */,
+				7034597B15FCE84D000A1711 /* BRFontHelper.h */,
+				7034597C15FCE84D000A1711 /* BRFontHelper.m */,
 				7061B0B615FAA3C500A83E0A /* BRPrayer.h */,
 				7061B0B715FAA3C500A83E0A /* BRPrayer.m */,
+				70AAAA4C15FBFBE4008D314D /* BRSettings.h */,
+				70AAAA4D15FBFBE4008D314D /* BRSettings.m */,
 				70E01278162F56E500601CA3 /* BRCGIQuery.h */,
 				70E01279162F56E500601CA3 /* BRCGIQuery.mm */,
+				707A64B2171AA5BF0065F98E /* Settings.plist */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -291,6 +329,8 @@
 				7054369015FBF1B1005854DC /* BRSettingsViewController.m */,
 				7054369215FBF1D0005854DC /* BRFontPickerViewController.h */,
 				7054369315FBF1D0005854DC /* BRFontPickerViewController.m */,
+				707A64B5171AD8020065F98E /* BRStringOptionPickerViewController.h */,
+				707A64B6171AD8020065F98E /* BRStringOptionPickerViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -298,11 +338,19 @@
 		7061B0BB15FAA3EE00A83E0A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				707A6496171A1BCD0065F98E /* Base.lproj */,
+				707A64BA171B12790065F98E /* cs.lproj */,
+				70493A5D1719D38100232631 /* en.lproj */,
+				707A64A0171A1F380065F98E /* hu.lproj */,
+				707A64A7171A1FDF0065F98E /* sk.lproj */,
 				70C962C116A1E1A400A399B9 /* Resources */,
-				7061B09D15FA8E1A00A83E0A /* MainStoryboard_iPhone.storyboard */,
-				7061B0A015FA8E1A00A83E0A /* MainStoryboard_iPad.storyboard */,
 				70C962BE16A1DFC800A399B9 /* BRCelebrationCell.h */,
 				70C962BF16A1DFC800A399B9 /* BRCelebrationCell.m */,
+				70C962D716B5425200A399B9 /* BRBoolSettingsCell.h */,
+				70C962D816B5425200A399B9 /* BRBoolSettingsCell.m */,
+				70C962D416B45C3E00A399B9 /* BRFontSettingsCell.h */,
+				70C962D516B45C3E00A399B9 /* BRFontSettingsCell.m */,
+				707A64B4171AD44C0065F98E /* BRUtil.h */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -336,6 +384,42 @@
 				7061B0D215FB929300A83E0A /* mylog.h */,
 			);
 			name = cgi;
+			sourceTree = "<group>";
+		};
+		707A6496171A1BCD0065F98E /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				7061B09D15FA8E1A00A83E0A /* MainStoryboard_iPhone.storyboard */,
+				707A6497171A1C180065F98E /* MainStoryboard_iPad.storyboard */,
+			);
+			name = Base.lproj;
+			sourceTree = "<group>";
+		};
+		707A64A0171A1F380065F98E /* hu.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				707A64A1171A1F650065F98E /* InfoPlist.strings */,
+				707A64A3171A1F650065F98E /* Breviar.strings */,
+			);
+			name = hu.lproj;
+			sourceTree = "<group>";
+		};
+		707A64A7171A1FDF0065F98E /* sk.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				707A64A8171A1FEC0065F98E /* InfoPlist.strings */,
+				707A64AA171A1FEC0065F98E /* Breviar.strings */,
+			);
+			name = sk.lproj;
+			sourceTree = "<group>";
+		};
+		707A64BA171B12790065F98E /* cs.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				707A64BB171B12790065F98E /* Breviar.strings */,
+				707A64BD171B12790065F98E /* InfoPlist.strings */,
+			);
+			path = cs.lproj;
 			sourceTree = "<group>";
 		};
 		70C962C116A1E1A400A399B9 /* Resources */ = {
@@ -391,6 +475,10 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
+				hu,
+				sk,
+				cs,
 			);
 			mainGroup = 7061B07C15FA8E1A00A83E0A;
 			productRefGroup = 7061B08815FA8E1A00A83E0A /* Products */;
@@ -432,7 +520,6 @@
 			files = (
 				7061B09615FA8E1A00A83E0A /* InfoPlist.strings in Resources */,
 				7061B09F15FA8E1A00A83E0A /* MainStoryboard_iPhone.storyboard in Resources */,
-				7061B0A215FA8E1A00A83E0A /* MainStoryboard_iPad.storyboard in Resources */,
 				70C962CB16A1E1C900A399B9 /* bullet_black.png in Resources */,
 				70C962CC16A1E1C900A399B9 /* bullet_green.png in Resources */,
 				70C962CD16A1E1C900A399B9 /* bullet_red.png in Resources */,
@@ -442,6 +529,17 @@
 				70C962D116A1E1C900A399B9 /* bullet_violet_or_white.png in Resources */,
 				70C962D216A1E1C900A399B9 /* bullet_violet.png in Resources */,
 				70C962D316A1E1C900A399B9 /* bullet_white.png in Resources */,
+				70493A621719D4CF00232631 /* Breviar.strings in Resources */,
+				707A6499171A1C180065F98E /* MainStoryboard_iPad.storyboard in Resources */,
+				707A64A5171A1F650065F98E /* InfoPlist.strings in Resources */,
+				707A64A6171A1F650065F98E /* Breviar.strings in Resources */,
+				707A64AC171A1FEC0065F98E /* InfoPlist.strings in Resources */,
+				707A64AD171A1FEC0065F98E /* Breviar.strings in Resources */,
+				707A64B3171AA5BF0065F98E /* Settings.plist in Resources */,
+				707A64C1171B12790065F98E /* Breviar.strings in Resources */,
+				707A64C2171B12790065F98E /* InfoPlist.strings in Resources */,
+				707A64CA171B6F320065F98E /* Icon.png in Resources */,
+				707A64CB171B6F320065F98E /* Icon@2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,7 +557,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rm -rf \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nmkdir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\ncp -r ../include ../include_hu \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"";
+			shellScript = "rm -rf \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nmkdir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nfor dir in include include_hu include_cz include_la; do\n    cp -r ../$dir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\ndone";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -496,6 +594,9 @@
 				70E0127A162F56E500601CA3 /* BRCGIQuery.mm in Sources */,
 				7042905C1641F91C00663A7D /* BRDataSource.m in Sources */,
 				70C962C016A1DFC800A399B9 /* BRCelebrationCell.m in Sources */,
+				70C962D616B45C3E00A399B9 /* BRFontSettingsCell.m in Sources */,
+				70C962D916B5425200A399B9 /* BRBoolSettingsCell.m in Sources */,
+				707A64B7171AD8030065F98E /* BRStringOptionPickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,6 +611,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		70493A601719D4CF00232631 /* Breviar.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				70493A611719D4CF00232631 /* en */,
+			);
+			name = Breviar.strings;
+			sourceTree = "<group>";
+		};
 		7061B09415FA8E1A00A83E0A /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -521,17 +630,70 @@
 		7061B09D15FA8E1A00A83E0A /* MainStoryboard_iPhone.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7061B09E15FA8E1A00A83E0A /* en */,
+				707A6495171A1B9E0065F98E /* Base */,
+				707A649F171A1E850065F98E /* en */,
+				707A64AF171A205D0065F98E /* hu */,
+				707A64B1171A20600065F98E /* sk */,
+				707A64C6171B12AC0065F98E /* cs */,
 			);
 			name = MainStoryboard_iPhone.storyboard;
 			sourceTree = "<group>";
 		};
-		7061B0A015FA8E1A00A83E0A /* MainStoryboard_iPad.storyboard */ = {
+		707A6497171A1C180065F98E /* MainStoryboard_iPad.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7061B0A115FA8E1A00A83E0A /* en */,
+				707A6498171A1C180065F98E /* Base */,
+				707A64C7171B12AD0065F98E /* cs */,
 			);
 			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		707A64A1171A1F650065F98E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				707A64A2171A1F650065F98E /* hu */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		707A64A3171A1F650065F98E /* Breviar.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				707A64A4171A1F650065F98E /* hu */,
+			);
+			name = Breviar.strings;
+			sourceTree = "<group>";
+		};
+		707A64A8171A1FEC0065F98E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				707A64A9171A1FEC0065F98E /* sk */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		707A64AA171A1FEC0065F98E /* Breviar.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				707A64AB171A1FEC0065F98E /* sk */,
+			);
+			name = Breviar.strings;
+			sourceTree = "<group>";
+		};
+		707A64BB171B12790065F98E /* Breviar.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				707A64BC171B12790065F98E /* cs */,
+			);
+			name = Breviar.strings;
+			sourceTree = "<group>";
+		};
+		707A64BD171B12790065F98E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				707A64BE171B12790065F98E /* cs */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -542,7 +704,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -564,7 +726,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = RaptureXML;
@@ -576,7 +738,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -593,7 +755,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
