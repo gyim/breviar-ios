@@ -1,0 +1,52 @@
+// Prayer titles
+"mi"		= "Invitatory";
+"mpc"		= "Office of Readings";
+"mrch"		= "Morning Prayer";
+"mpred"		= "Mid-Morning Prayer";
+"mna"		= "Midday Prayer";
+"mpo"		= "Mid-Afternoon Prayer";
+"mv"		= "Evening Prayer";
+"mk"		= "Compline";
+
+// Sections in Settings screen
+"appearance"	= "Appearance";
+"common_parts"	= "Non-changeable parts";
+"prayer_text"	= "Prayer text";
+"calendar"		= "Liturgical calendar";
+"other"			= "Other";
+
+// Appearance settings
+"j"			= "Breviary language";
+"cz"		= "Čeština";
+"en"		= "English";
+"hu"		= "Magyarul";
+"la"		= "Lingua latina";
+"sk"		= "Slovenčina";
+
+// Prayer parts settings
+"of1c"		= "Gospel canticles";
+"of1s"		= "Gloria to the Father";
+"of1r"		= "Rubrics";
+"of1o"		= "Lord's Prayer (Our Father)";
+"of1t"		= "Te Deum hymn";
+"of1pr"		= "Complete responsory texts";
+
+// Prayer text settings
+"of0v"		= "Verse numbers";
+"of0cit"	= "Liturgical readings";
+
+// Liturgic calendar settings
+"of0zjvne"	= "Celebrate Epiphany on Sunday, between January 2 and 8";
+"of0nanne"	= "Celebrate Ascension of Jesus on Sunday";
+"of0tkne"	= "Celebrate Corpus Christi on Sunday";
+
+// Other settings
+"of1zspc"	= "Display the source of communia texts in the breviary of saints";
+"of1spspc"	= "Take parts from celebration (commmons)";
+"of1sp"		= "Do not display description for prayer for the saints";
+"of1dps"	= "Psalmodia from ordinary day";
+"of1z95"	= "Psalm 95 instead of psalms 24, 67 and 100";
+"of1prz"	= "Repeat invocation after each appeal";
+"of1vkp"	= "Use shorter prayers for vespers";
+"of1v"		= "Celebrating of vigily for prayer with readings";
+"of2a"		= "Alternatívák mutatása";

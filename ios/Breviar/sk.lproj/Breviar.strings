@@ -1,0 +1,52 @@
+// Prayer titles
+"mi"		= "Invitatórium";
+"mpc"		= "Posvätné čítanie";
+"mrch"		= "Ranné chvály";
+"mpred"		= "Modlitba predpoludním";
+"mna"		= "Modlitba napoludnie";
+"mpo"		= "Modlitba popoludní";
+"mv"		= "Vešpery";
+"mk"		= "Kompletórium";
+
+// Sections in Settings screen
+"appearance"	= "Vzhľad";
+"common_parts"	= "Zobraziť nasledovné súčasti modlitby?";
+"prayer_text"	= "V texte modlitieb zobraziť";
+"calendar"		= "Nastavenia pre liturgický kalendár";
+"other"			= "Ďalšie možnosti pre výsledné modlitby";
+
+// Appearance settings
+"j"			= "Breviary language";
+"cz"		= "Čeština";
+"en"		= "English";
+"hu"		= "Magyarul";
+"la"		= "Lingua latina";
+"sk"		= "Slovenčina";
+
+// Prayer parts settings
+"of1c"		= "Evanjeliové chválospevy";
+"of1s"		= "Sláva Otcu";
+"of1r"		= "Rubriky";
+"of1o"		= "Modlitba Pána (Otčenáš)";
+"of1t"		= "Hymnus Te Deum";
+"of1pr"		= "Plné znenie responzórií pre posvätné čítania";
+
+// Prayer text settings
+"of0v"		= "Číslovanie (čísla) veršov";
+"of0cit"	= "Liturgické čítania";
+
+// Liturgic calendar settings
+"of0zjvne"	= "Zjavenie Pána sláviť v nedeľu medzi 2. a 8. januárom";
+"of0nanne"	= "Nanebovstúpenie Pána sláviť v nedeľu";
+"of0tkne"	= "Najsv. Kristovho tela a krvi sláviť v nedeľu";
+
+// Other settings
+"of1zspc"	= "Zobraziť, odkiaľ sa berú časti zo spoločnej časti k modlitbe svätého";
+"of1spspc"	= "Na spomienky použiť časti zo spoločných častí";
+"of1sp"		= "Nezobraziť popis k modlitbe svätého";
+"of1dps"	= "Pre modlitbu cez deň použiť doplnkovú psalmódiu";
+"of1z95"	= "Namiesto žalmov 24, 67 resp. 100 použiť žalm 95";
+"of1prz"	= "Opakovať zvolanie po každej prosbe";
+"of1vkp"	= "Pre vešpery použiť kratšie prosby z dodatku";
+"of1v"		= "Predĺžené slávenie vigílie pre posvätné čítanie";
+"of2a"		= "Alternatívy";
