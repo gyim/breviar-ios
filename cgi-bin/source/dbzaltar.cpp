@@ -1385,14 +1385,15 @@ void set_hymnus_kompletorium_obd(short int den, short int tyzzal, short int modl
 	short int pom_litobd = litobd;
 	file_name_zapamataj();
 	// veækonoËnÈ obdobie m· jeden hymnus (rovnak˝): "Jeûiöu, Vykupiteæ n·ö"
-	if((litobd == OBD_VELKONOCNE_II) || (litobd == OBD_VELKONOCNA_OKTAVA) || (litobd == OBD_VELKONOCNE_TROJDNIE)){
+	if((litobd == OBD_VELKONOCNE_I) || (litobd == OBD_VELKONOCNE_II) || (litobd == OBD_VELKONOCNA_OKTAVA) || ((litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvr == VELKONOCNA_NEDELA))){ // pre celÈ trojdnie sa berie nedeænÈ kompletÛrium, preto sa treba sp˝taù priamo na VELKONOCNA_NEDELA
 		pom_litobd = OBD_VELKONOCNE_I;
-	}
-	else if(litobd == OBD_POSTNE_I){
-		pom_litobd = OBD_CEZ_ROK;
 	}
 	else if((litobd == OBD_POSTNE_II_VELKY_TYZDEN) && (den != DEN_STVRTOK) && (_global_jazyk == JAZYK_CZ)){
 		// 2009-04-07: pre Ëesk˝ brevi·¯ sa nepouûÌvaj˙ vo veækom t˝ûdni inÈ hymny; pre zelen˝ ötrvtok je samostatn˝ hymnus
+		pom_litobd = OBD_CEZ_ROK;
+	}
+	else{
+		// default
 		pom_litobd = OBD_CEZ_ROK;
 	}
 	file_name_kompletorium(pom_litobd);
