@@ -1551,20 +1551,40 @@ void set_hymnus(short int den, short int tyzzal, short int modlitba){
 // 2007-12-06: odliönÈ pre veækonoËnÈ obdobie:
 // Vo VeækonoËnom obdobÌ: PsalmÛdia m· jedin˙ antifÛnu: Aleluja, aleluja, aleluja.
 // 2008-03-30: reöpektovan· rovnak· antifÛna pre veækonoËnÈ obdobie
-void set_antifony_kompletorium_obd(short int den, short int tyzzal, short int modlitba, short int litobd){
+// 2009-01-05: keÔûe pre kompletÛrium je potrebnÈ niekedy nastaviù pre modlitbu "kompletÛrium" antifÛny
+// z modlitby "prvÈ kompletÛrium" - pozri _set_kompletorium_slavnost_oktava() - pouûÌvame na to parameter "zvazok"
+// ak zvazok == 9, znamen· to öpeci·lny prÌpad, ûe modlitba == MODL_KOMPLETORIUM, ale do stringu treba daù pismenko_modlitby(MODL_PRVE_KOMPLETORIUM)
+// 2013-04-25: funkcia (aj pozn·mka z 2009-01-05) podæa set_antifony()
+void set_antifony_kompletorium_obd(short int den, short int tyzzal, short int modlitba, short int litobd, short int zvazok){
 	// rovnakÈ responzÛrium pre vöetky Ëasti veækonoËnÈho obdobia
 	if((_global_den.typslav == SLAV_SLAVNOST) && ((den != DEN_NEDELA) && (den != DEN_SOBOTA))){
 		den = DEN_UNKNOWN; // 2008-05-08: ide o sl·vnosù mimo nedieæ
 	}
+	short int pom_litobd = litobd;
 	file_name_zapamataj();
-	file_name_kompletorium((litobd == OBD_VELKONOCNA_OKTAVA || litobd == OBD_VELKONOCNE_II)? OBD_VELKONOCNE_I : litobd);
-	sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], pismenko_modlitby(modlitba), 
-		((litobd == OBD_VELKONOCNA_OKTAVA) || (litobd == OBD_VELKONOCNE_II) || (litobd == OBD_VELKONOCNE_I)) ? ANCHOR_ANTIFONY : ANCHOR_ANTIFONA1);
+	if((litobd == OBD_VELKONOCNE_I) || (litobd == OBD_VELKONOCNE_II) || (litobd == OBD_VELKONOCNA_OKTAVA) || ((litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvr == VELKONOCNA_NEDELA))){ // pre celÈ trojdnie sa berie nedeænÈ kompletÛrium, preto sa treba sp˝taù priamo na VELKONOCNA_NEDELA
+		pom_litobd = OBD_VELKONOCNE_I;
+	}
+	else{
+		// default
+		pom_litobd = OBD_CEZ_ROK;
+	}
+	// file_name_kompletorium((litobd == OBD_VELKONOCNA_OKTAVA || litobd == OBD_VELKONOCNE_II)? OBD_VELKONOCNE_I : litobd);
+	file_name_kompletorium(pom_litobd);
+
+	// antifÛna 1
+	sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], (zvazok == 9)? pismenko_modlitby(MODL_PRVE_KOMPLETORIUM) : pismenko_modlitby(modlitba), 
+		(pom_litobd == OBD_VELKONOCNE_I) ? ANCHOR_ANTIFONY : ANCHOR_ANTIFONA1);
 	_set_antifona1(modlitba, _file, _anchor);
 	set_LOG_zaltar;
-	if((_global_modl_kompletorium.pocet_zalmov == 2) || (_global_modl_prve_kompletorium.pocet_zalmov == 2)){
-		sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], pismenko_modlitby(modlitba),
-			((litobd == OBD_VELKONOCNA_OKTAVA) || (litobd == OBD_VELKONOCNE_II) || (litobd == OBD_VELKONOCNE_I)) ? ANCHOR_ANTIFONY : ANCHOR_ANTIFONA2);
+
+	// antifÛna 2
+	if( 
+		((modlitba == MODL_KOMPLETORIUM) && (_global_modl_kompletorium.pocet_zalmov == 2))
+	||	((modlitba == MODL_PRVE_KOMPLETORIUM) && (_global_modl_prve_kompletorium.pocet_zalmov == 2))
+	){
+		sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], (zvazok == 9)? pismenko_modlitby(MODL_PRVE_KOMPLETORIUM) : pismenko_modlitby(modlitba), 
+			(pom_litobd == OBD_VELKONOCNE_I) ? ANCHOR_ANTIFONY : ANCHOR_ANTIFONA2);
 		_set_antifona2(modlitba, _file, _anchor);
 		set_LOG_zaltar;
 	}
@@ -1572,25 +1592,16 @@ void set_antifony_kompletorium_obd(short int den, short int tyzzal, short int mo
 }// set_antifony_kompletorium_obd()
 
 void set_antifony(short int den, short int tyzzal, short int zvazok, short int modlitba){
-	/* 2006-01-24: pÙvodn· podmienka zosilnen·, keÔûe pre obyËajnÈ dni veækonoËnÈho 
-	 * obdobia (2.-7. t˝ûdeÚ) moûno braù antifÛny pre posv‰tnÈ ËÌtania z cezroËnÈho obdobia
-	 * 
-	 * 2006-01-24: taktieû pridan˝ ÔalöÌ parameter; pre niektorÈ dni v II. zv‰zku s˙ 
-	 * inÈ ûalmy aj antifÛny
-	 * 
-	 * 2006-02-09: podmienka zmenen·: 
-	 * aj pre nedeænÈ posv. ËÌtanie s˙ antifÛny v file_name_litobd_pc(OBD_CEZ_ROK);
-	 * 
-	 * 2009-01-05: keÔûe pre kompletÛrium je potrebnÈ niekedy nastaviù pre modlitbu "kompletÛrium" antifÛny
-	 * z modlitby "prvÈ kompletÛrium" - pozri _set_kompletorium_slavnost_oktava() - pouûÌvame na to parameter "zvazok"
-	 * ak zvazok == 9, znamen· to öpeci·lny prÌpad, ûe modlitba == MODL_KOMPLETORIUM, ale do stringu treba daù pismenko_modlitby(MODL_PRVE_KOMPLETORIUM)
-	 * 
-	 */
+	// 2006-01-24: pÙvodn· podmienka zosilnen·, keÔûe pre obyËajnÈ dni veækonoËnÈho obdobia (2.-7. t˝ûdeÚ) moûno braù antifÛny pre posv‰tnÈ ËÌtania z cezroËnÈho obdobia
+	// 2006-01-24: taktieû pridan˝ ÔalöÌ parameter; pre niektorÈ dni v II. zv‰zku s˙ inÈ ûalmy aj antifÛny
+	// 2006-02-09: podmienka zmenen·: aj pre nedeænÈ posv. ËÌtanie s˙ antifÛny v file_name_litobd_pc(OBD_CEZ_ROK);
 	short int povodny_tyzzal;
 	povodny_tyzzal = tyzzal; // 2006-01-24: uloûÌme pÙvodn˙ hodnotu
 
 	// pridanÈ Ëasti pre kompletÛrium, 2006-10-24; nepotrebujeme ûiadne ostatnÈ kroky
 	if((modlitba == MODL_KOMPLETORIUM) || (modlitba == MODL_PRVE_KOMPLETORIUM)){
+		set_antifony_kompletorium_obd(den, tyzzal, modlitba, _global_den.litobd, zvazok);
+		/*
 		file_name_zapamataj();
 		file_name_kompletorium(OBD_CEZ_ROK);
 		sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], (zvazok == 9)? pismenko_modlitby(MODL_PRVE_KOMPLETORIUM) : pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1);
@@ -1605,6 +1616,7 @@ void set_antifony(short int den, short int tyzzal, short int zvazok, short int m
 			set_LOG_zaltar;
 		}
 		file_name_obnov();
+		*/
 	}
 	else if(
 			((_global_den.litobd == OBD_VELKONOCNE_I) ||
@@ -7285,7 +7297,7 @@ label_24_DEC:
 				_set_kompletorium_nedela(modlitba);
 			}
 			set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
-			set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd);
+			set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd, zvazok_breviara[litobd]);
 			if((den != DEN_PIATOK) && (den != DEN_SOBOTA)){
 				// 2009-04-17: pre veæk˝ piatok aj bielu sobotu je hymnus ako vo veækom t˝ûdni, teda "Kriste, ty svetlo a n·ö deÚ" [doplnenÈ: biela sobota]
 				set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
@@ -7612,7 +7624,7 @@ label_24_DEC:
 			modlitba = MODL_KOMPLETORIUM;
 			set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
 			set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
-			set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd);
+			set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd, zvazok_breviara[litobd]);
 
 			if(_global_den.denvr == _global_r._NANEBOVSTUPENIE_PANA.denvr){
 				// nanebovstupenie sice ma rovnake kotvy, ale v inom s˙bore
@@ -7627,13 +7639,13 @@ label_24_DEC:
 				modlitba = MODL_PRVE_KOMPLETORIUM;
 				_set_kompletorium_slavnost(modlitba, litobd);
 				set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
-				set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd);
+				set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd, zvazok_breviara[litobd]);
 				set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
 
 				modlitba = MODL_KOMPLETORIUM;
 				_set_kompletorium_slavnost(modlitba, litobd);
 				set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
-				set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd);
+				set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd, zvazok_breviara[litobd]);
 				set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
 
 				den = DEN_NEDELA;
@@ -7796,7 +7808,7 @@ label_24_DEC:
 					modlitba = MODL_PRVE_KOMPLETORIUM;
 					set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd); // 2008-04-21: doplnenÈ
 					set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
-					set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd);
+					set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd, zvazok_breviara[litobd]);
 
 					// prvÈ veöpery
 					modlitba = MODL_PRVE_VESPERY;
@@ -7920,7 +7932,7 @@ label_24_DEC:
 			modlitba = MODL_KOMPLETORIUM;
 			set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
 			set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
-			set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd);
+			set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd, zvazok_breviara[litobd]);
 
 			// invitatÛrium
 			modlitba = MODL_INVITATORIUM;
@@ -7978,7 +7990,7 @@ label_24_DEC:
 					modlitba = MODL_PRVE_KOMPLETORIUM;
 					set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
 					set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
-					set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd);
+					set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd, zvazok_breviara[litobd]);
 
 					// zoslanie ducha sv.
 					mystrcpy(_file, FILE_ZOSLANIE_DUCHA_SV, MAX_STR_AF_FILE);
@@ -8080,7 +8092,7 @@ label_24_DEC:
 					modlitba = MODL_PRVE_KOMPLETORIUM;
 					set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
 					set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
-					set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd);
+					set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd, zvazok_breviara[litobd]);
 
 					// prvÈ veöpery
 					modlitba = MODL_PRVE_VESPERY;
@@ -8149,7 +8161,7 @@ label_24_DEC:
 			 */
 			set_hymnus_kompletorium_obd(DEN_NEDELA, tyzzal, modlitba, litobd); // 2011-04-28: den nastaven˝ na DEN_NEDELA; kvÙli JAZYK_CZ -- v okt·ve sa berie nedeæn˝ hymnus
 			set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
-			set_antifony_kompletorium_obd(DEN_NEDELA, tyzzal, modlitba, litobd); // keÔûe sa berie nedeænÈ kompletÛrium; beztak je to pre kaûd˝ deÚ Aleluja, Aleluja, Aleluja
+			set_antifony_kompletorium_obd(DEN_NEDELA, tyzzal, modlitba, litobd, zvazok_breviara[litobd]); // keÔûe sa berie nedeænÈ kompletÛrium; beztak je to pre kaûd˝ deÚ Aleluja, Aleluja, Aleluja
 
 			// teda najprv nastavime vlastne ant. na benediktus/magnifikat a modlitbu
 			// rannÈ chv·ly
@@ -8178,7 +8190,7 @@ label_24_DEC:
 				modlitba = MODL_PRVE_KOMPLETORIUM;
 				set_hymnus_kompletorium_obd(den, tyzzal, modlitba, litobd);
 				set_kresponz_kompletorium_obd(den, tyzzal, modlitba, litobd);
-				set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd);
+				set_antifony_kompletorium_obd(den, tyzzal, modlitba, litobd, zvazok_breviara[litobd]);
 				
 				// prvÈ veöpery
 				modlitba = MODL_PRVE_VESPERY;
