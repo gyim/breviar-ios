@@ -1601,22 +1601,6 @@ void set_antifony(short int den, short int tyzzal, short int zvazok, short int m
 	// pridané èasti pre kompletórium, 2006-10-24; nepotrebujeme žiadne ostatné kroky
 	if((modlitba == MODL_KOMPLETORIUM) || (modlitba == MODL_PRVE_KOMPLETORIUM)){
 		set_antifony_kompletorium_obd(den, tyzzal, modlitba, _global_den.litobd, zvazok);
-		/*
-		file_name_zapamataj();
-		file_name_kompletorium(OBD_CEZ_ROK);
-		sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], (zvazok == 9)? pismenko_modlitby(MODL_PRVE_KOMPLETORIUM) : pismenko_modlitby(modlitba), ANCHOR_ANTIFONA1);
-		_set_antifona1(modlitba, _file, _anchor);
-		set_LOG_zaltar;
-		if( 
-			((modlitba == MODL_KOMPLETORIUM) && (_global_modl_kompletorium.pocet_zalmov == 2))
-		||	((modlitba == MODL_PRVE_KOMPLETORIUM) && (_global_modl_prve_kompletorium.pocet_zalmov == 2))
-		){
-			sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], (zvazok == 9)? pismenko_modlitby(MODL_PRVE_KOMPLETORIUM) : pismenko_modlitby(modlitba), ANCHOR_ANTIFONA2);
-			_set_antifona2(modlitba, _file, _anchor);
-			set_LOG_zaltar;
-		}
-		file_name_obnov();
-		*/
 	}
 	else if(
 			((_global_den.litobd == OBD_VELKONOCNE_I) ||
@@ -1806,14 +1790,6 @@ void set_kresponz(short int den, short int tyzzal, short int modlitba){
 	// pridané èasti pre kompletórium, 2006-10-24
 	if((modlitba == MODL_KOMPLETORIUM) || (modlitba == MODL_PRVE_KOMPLETORIUM)){
 		set_kresponz_kompletorium_obd(den, tyzzal, modlitba, _global_den.litobd);
-		/*
-		file_name_zapamataj();
-		file_name_kompletorium(OBD_CEZ_ROK);
-		sprintf(_anchor, "_%c_%s", pismenko_modlitby(modlitba), ANCHOR_KRESPONZ);
-		_set_kresponz(modlitba, _file, _anchor);
-		set_LOG_zaltar;
-		file_name_obnov();
-		*/
 	}
 	else
 	// 2005-03-26: Pridane odvetvenie pre posvatne citania
