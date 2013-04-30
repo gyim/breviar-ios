@@ -7427,6 +7427,7 @@ label_24_DEC:
 // 2009-05-15: kvôli chybe v set_hymnus() sa v premennej _global_den.den vdy nachádzala 0, a teda vdy bol pouitı pre vešpery nede¾nı hymnus;
 //             opravené tak, e sa u neberie do úvahy ani modlitba, len dátum; pre kadı n-tı deò sa vezmú nede¾né hymnusy
 //             pôvodná súèas podmienky: || (((_global_den.den + modlitba) MOD 3) == 0)
+// 2013-04-29: prerobenie -- vylúèenie náhodného vıberu :) [BIT_OPT_5_HYMNUS_VN_PC, BIT_OPT_5_HYMNUS_VN_RCH, BIT_OPT_5_HYMNUS_VN_VESP]
 #define _velk1_hymnus {\
 	if(((den == DEN_NEDELA) || (((_global_den.den) MOD 5) == 0) )\
 		&& ((modlitba != MODL_PREDPOLUDNIM) && (modlitba != MODL_NAPOLUDNIE) && (modlitba != MODL_POPOLUDNI))\
@@ -16588,7 +16589,6 @@ label_25_MAR:
 
 							modlitba = MODL_POSV_CITANIE;
 							_vlastna_cast_hymnus;
-							_vlastna_cast_kresponz;
 							_vlastna_cast_modlitba;
 							_vlastna_cast_2citanie;
 
