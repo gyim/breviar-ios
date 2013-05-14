@@ -1673,7 +1673,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 				// 2013-02-26: doplnkov· psalmÛdia, alternatÌvne ûalmy
 				else if((equals(strbuff, PARAM_DOPLNK_PSALM_122_129)) || (equals(strbuff, PARAM_DOPLNK_PSALM_127_131)) || (equals(strbuff, PARAM_DOPLNK_PSALM_126_129))){
 					if((vnutri_inkludovaneho == ANO) && (write == ANO)){
-						Log("  _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI == %d: (doplnkov· psalmÛdia, alternatÌvne ûalmy)\n", _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI);
+						Log("(if((equals(strbuff, PARAM_DOPLNK_PSALM_...)): _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI == %d: (doplnkov· psalmÛdia, alternatÌvne ûalmy)\n", _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI);
 
 						short int bit;
 						short int opt = OPT_5_ALTERNATIVES;
@@ -1952,7 +1952,7 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 #endif
 					}// upraviù odkaz na ûalm 95 na hyperlink -- PARAM_LINK_ZALM95_BEGIN
 					if(equals(strbuff, PARAM_LINK_ZALM95_END) && (vnutri_inkludovaneho == 1)){
-						Log("  _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI == %d: \n", _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI);
+						Log("(if(equals(strbuff, PARAM_LINK_ZALM95_END)): _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI == %d: \n", _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI);
 						char specific_string[SMALL];
 						mystrcpy(specific_string, HTML_NEW_PARAGRAPH, SMALL);
 						if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI) == BIT_OPT_2_ROZNE_MOZNOSTI){ // len ak je t·to moûnosù (zobrazovanie vöeliËoho) zvolen·
@@ -3071,7 +3071,7 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		|| (equals(paramname, PARAM_ALT_HYMNUS)) 
 		|| (equals(paramname, PARAM_SPOL_CAST_SPOM)) 
 		){
-		Log("  _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI == %d: \n", _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI);
+		Log("(if((equals(paramname == %s)): _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI == %d: \n", paramname, _global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI);
 
 		short int bit;
 		short int opt = OPT_1_CASTI_MODLITBY; // pozor, pre niektorÈ je to OPT_5_ALTERNATIVES
@@ -3166,8 +3166,11 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 		else if(equals(paramname, PARAM_ALT_HYMNUS)){
 			opt = OPT_5_ALTERNATIVES;
 			podmienka &= ((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ALTERNATIVES) == BIT_OPT_2_ALTERNATIVES); // len ak je t·to moûnosù (zobrazovanie alternatÌvy) zvolen·
-			podmienka &= ((je_alternativa_hymnus_ocr) || (je_alternativa_hymnus_vn));
+			Log("podmienka == %d pred kontrolou je_alternativa_hymnus...\n", podmienka);
+			podmienka &= ((je_alternativa_hymnus_ocr) || ((je_alternativa_hymnus_vn) && (_global_den.litobd == OBD_VELKONOCNE_I))); // (je_alternativa_hymnus_ocr) platÌ napr. pre kompletÛrium aj pre inÈ obdobia?...
 			mystrcpy(specific_string, HTML_NEW_PARAGRAPH, SMALL);
+
+			Log("podmienka == %d pred kontrolou _global_modlitba == %s...\n", podmienka, nazov_modlitby(_global_modlitba));
 
 			// 2013-05-14: doplnen· kontrola na prvÈ resp. druhÈ nedeænÈ kompletÛrium, aby hymnus bolo v CezroËnom obdobÌ moûno voliù aj pre nedele
 			if((_global_modlitba == MODL_KOMPLETORIUM) || (_global_modlitba == MODL_PRVE_KOMPLETORIUM) || (_global_modlitba == MODL_DRUHE_KOMPLETORIUM)){
