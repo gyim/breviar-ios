@@ -2229,62 +2229,62 @@ const char *html_text_option5_PCHymnusII[POCET_JAZYKOV + 1] =
 
 const char *html_text_option5_PCHymnusVNnedela[POCET_JAZYKOV + 1] = 
 {"hymnus Toto je pravı Boí deò",
- "hymnus NE",
+ "hymnus nedìlní",
  "hymnus NE",
  "",
  "",
- "hymnus NE",
- "himnusz NE",
+ "hymnus nedìlní",
+ "himnusz Urunknak áldott napja ez",
 };
 
 const char *html_text_option5_PCHymnusVNferia[POCET_JAZYKOV + 1] = 
 {"hymnus Nech z vıšin neba rados znie",
- "hymnus férie",
+ "hymnus z férie",
  "hymnus férie",
  "",
  "",
- "hymnus férie",
- "himnusz férie",
+ "hymnus z férie",
+ "himnusz Örvendj, ég, messzi csillagok",
 };
 
 const char *html_text_option5_RChHymnusVNnedela[POCET_JAZYKOV + 1] = 
 {"hymnus Bronie sa zora na nebi",
- "hymnus NE",
+ "hymnus nedìlní",
  "hymnus NE",
  "",
  "",
- "hymnus NE",
- "himnusz NE",
+ "hymnus nedìlní",
+ "himnusz Rózsálló hajnalfény ragyog",
 };
 
 const char *html_text_option5_RChHymnusVNferia[POCET_JAZYKOV + 1] = 
 {"hymnus Nech novım Jeruzalemom",
- "hymnus férie",
+ "hymnus z férie",
  "hymnus férie",
  "",
  "",
- "hymnus férie",
- "himnusz férie",
+ "hymnus z férie",
+ "himnusz Az új Sionnak kórusa",
 };
 
 const char *html_text_option5_VespHymnusVNnedela[POCET_JAZYKOV + 1] = 
 {"hymnus Pri Baránkovej veèeri",
- "hymnus NE",
+ "hymnus nedìlní",
  "hymnus NE",
  "",
  "",
- "hymnus NE",
- "himnusz NE",
+ "hymnus nedìlní",
+ "himnusz Ím, vár a Bárány asztala",
 };
 
 const char *html_text_option5_VespHymnusVNferia[POCET_JAZYKOV + 1] = 
 {"hymnus Krá¾ vekov, Pane, Boí Syn",
- "hymnus férie",
+ "hymnus z férie",
  "hymnus férie",
  "",
  "",
- "hymnus férie",
- "himnusz férie",
+ "hymnus z férie",
+ "himnusz Örök Királyunk, szent Urunk",
 };
 
 const char *html_text_option5_MCDPredHymnus1[POCET_JAZYKOV + 1] = 
