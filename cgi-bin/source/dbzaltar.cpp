@@ -4330,6 +4330,65 @@ void _set_zalmy_sviatok_muc_ofm(short int modlitba){
 	set_LOG_litobd;\
 }
 
+// zabezpecime nahodnost pri hymne vo feriu, kedy sa "podla lubovole" mozre brat nie nedelny hymnus
+// ((_global_den.den MOD 3) == 0)
+// 2006-01-27: pridan· modlitba posv‰tnÈ ËÌtanie 
+// 2006-02-08: pre modlitbu cez deÚ nem· nedeæa odliön˝ hymnus, preto "podæa æubovÙle" nie pre modlitbu cez deÚ
+// 2006-02-09: skorektnenÈ: rovnocenn˝ test: nie je MCD a (nedeæa alebo MOD 3); MOD aj vzhæadom k modlitbe
+// 2009-05-15: kvÙli chybe v set_hymnus() sa v premennej _global_den.den vûdy nach·dzala 0, a teda vûdy bol pouûit˝ pre veöpery nedeæn˝ hymnus;
+//             opravenÈ tak, ûe sa uû neberie do ˙vahy ani modlitba, len d·tum; pre kaûd˝ n-t˝ deÚ sa vezm˙ nedeænÈ hymnusy
+//             pÙvodn· s˙Ëasù podmienky: || (((_global_den.den + modlitba) MOD 3) == 0)
+// 2013-04-29: prerobenie -- vyl˙Ëenie n·hodnÈho v˝beru :) [BIT_OPT_5_HYMNUS_VN_PC, BIT_OPT_5_HYMNUS_VN_RCH, BIT_OPT_5_HYMNUS_VN_VESP]
+// 2013-05-14: doplnenie alternatÌv hymnov podæa nastavenia
+void _velk1_hymnus(short int den, short int modlitba, short int litobd){
+	Log("_velk1_hymnus(): zaËiatok\n");
+	short int ktory; // 0 alebo 1
+	short int bit;
+
+	switch(modlitba){
+		case MODL_POSV_CITANIE: bit = BIT_OPT_5_HYMNUS_VN_PC; break;
+		case MODL_RANNE_CHVALY: bit = BIT_OPT_5_HYMNUS_VN_RCH; break;
+		case MODL_VESPERY:      bit = BIT_OPT_5_HYMNUS_VN_VESP; break;
+	}// switch(modlitba)
+
+	if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI) || (_global_jazyk == JAZYK_CZ)){
+		ktory = 0;
+	}
+	else if(den == DEN_NEDELA){
+		ktory = 1;
+	}
+	else if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ALTERNATIVES) == BIT_OPT_2_ALTERNATIVES){
+		// podæa nastavenia _global_opt[OPT_5_ALTERNATIVES]
+		ktory = ((_global_opt[OPT_5_ALTERNATIVES] & bit) == bit)? 1: 0;
+		Log("2013-01-29: som tu (%d)...\n", ktory);
+	}
+	else{
+		// pÙvodne bol n·hodn˝ v˝ber
+		ktory = 2; // obidva!
+	}
+
+	switch(ktory){
+		case 0:
+			sprintf(_anchor, "%s_%c%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS);
+			break;
+		case 1:
+			sprintf(_anchor, "%s_%c%s%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS, nazov_DN_asci[DEN_NEDELA]);
+			break;
+		case 2:
+			sprintf(_anchor, "%s_%c%s%d", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS, ktory);
+			break;
+	}// switch(ktory)
+	
+	if(modlitba == MODL_POSV_CITANIE){
+		_set_hymnus(modlitba, _file_pc, _anchor);
+		set_LOG_litobd_pc;
+	}
+	else{
+		_set_hymnus(modlitba, _file, _anchor);
+		set_LOG_litobd;
+	}
+}// _velk1_hymnus()
+
 void liturgicke_obdobie(short int litobd, short int tyzden, short int den, short int tyzzal, short int poradie_svateho){
 	short int modlitba, t, tyzden_pom, litobd_pom;
 	char _anchor_vlastne_slavenie[SMALL];
@@ -7550,47 +7609,6 @@ label_24_DEC:
 // switch(litobd), case OBD_VELKONOCNE_I -- begin ---------------------------------------------
 		case OBD_VELKONOCNE_I: // do nanebovstupenia pana
 			Log("OBD_VELKONOCNE_I\n");
-// zabezpecime nahodnost pri hymne vo feriu, kedy sa "podla lubovole" mozre brat nie nedelny hymnus
-// ((_global_den.den MOD 3) == 0)
-// 2006-01-27: pridan· modlitba posv‰tnÈ ËÌtanie 
-// 2006-02-08: pre modlitbu cez deÚ nem· nedeæa odliön˝ hymnus, preto "podæa æubovÙle" nie pre modlitbu cez deÚ
-// 2006-02-09: skorektnenÈ: rovnocenn˝ test: nie je MCD a (nedeæa alebo MOD 3); MOD aj vzhæadom k modlitbe
-// 2009-05-15: kvÙli chybe v set_hymnus() sa v premennej _global_den.den vûdy nach·dzala 0, a teda vûdy bol pouûit˝ pre veöpery nedeæn˝ hymnus;
-//             opravenÈ tak, ûe sa uû neberie do ˙vahy ani modlitba, len d·tum; pre kaûd˝ n-t˝ deÚ sa vezm˙ nedeænÈ hymnusy
-//             pÙvodn· s˙Ëasù podmienky: || (((_global_den.den + modlitba) MOD 3) == 0)
-// 2013-04-29: prerobenie -- vyl˙Ëenie n·hodnÈho v˝beru :) [BIT_OPT_5_HYMNUS_VN_PC, BIT_OPT_5_HYMNUS_VN_RCH, BIT_OPT_5_HYMNUS_VN_VESP]
-// 2013-05-14: doplnenie alternatÌv hymnov podæa nastavenia
-#define _velk1_hymnus {\
-	if(((den == DEN_NEDELA) || \
-			(\
-				((_global_jazyk != JAZYK_CZ) && ((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ALTERNATIVES) == BIT_OPT_2_ALTERNATIVES)) \
-				&& ( \
-					( ((_global_opt[OPT_5_ALTERNATIVES] & BIT_OPT_5_HYMNUS_VN_PC) == BIT_OPT_5_HYMNUS_VN_PC) && (modlitba == MODL_POSV_CITANIE) ) || \
-					( ((_global_opt[OPT_5_ALTERNATIVES] & BIT_OPT_5_HYMNUS_VN_RCH) == BIT_OPT_5_HYMNUS_VN_RCH) && (modlitba == MODL_RANNE_CHVALY) ) || \
-					( ((_global_opt[OPT_5_ALTERNATIVES] & BIT_OPT_5_HYMNUS_VN_VESP) == BIT_OPT_5_HYMNUS_VN_VESP) && (modlitba == MODL_VESPERY) ) \
-				) \
-			) || \
-			(\
-				((_global_jazyk != JAZYK_CZ) && ((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ALTERNATIVES) != BIT_OPT_2_ALTERNATIVES)) \
-				&& (((_global_den.den) MOD 5) == 0) \
-			)\
-		)\
-		&& ((modlitba != MODL_PREDPOLUDNIM) && (modlitba != MODL_NAPOLUDNIE) && (modlitba != MODL_POPOLUDNI))\
-	){\
-		sprintf(_anchor, "%s_%c%s%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS, nazov_DN_asci[DEN_NEDELA]);\
-	}\
-	else{\
-		sprintf(_anchor, "%s_%c%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS);\
-	}\
-	if(modlitba == MODL_POSV_CITANIE){\
-		_set_hymnus(modlitba, _file_pc, _anchor);\
-		set_LOG_litobd_pc;\
-	}\
-	else{\
-		_set_hymnus(modlitba, _file, _anchor);\
-		set_LOG_litobd;\
-	}\
-}
 
 #define _velk1_kcitanie {\
 	sprintf(_anchor, "%s_%c%s%s", nazov_OBD[OBD_VELKONOCNE_I], pismenko_modlitby(modlitba), nazov_DN_asci[den], ANCHOR_KCITANIE);\
@@ -7792,7 +7810,7 @@ label_24_DEC:
 
 				// rannÈ chv·ly
 				modlitba = MODL_RANNE_CHVALY;
-				_velk1_hymnus;
+				_velk1_hymnus(den, modlitba, litobd);
 				_velk1_kcitanie;
 				_velk1_kresponz;
 				_velk1_benediktus;
@@ -7801,7 +7819,7 @@ label_24_DEC:
 
 				// veöpery
 				modlitba = MODL_VESPERY;
-				_velk1_hymnus;
+				_velk1_hymnus(den, modlitba, litobd);
 				_velk1_kcitanie;
 				_velk1_kresponz;
 				_velk1_magnifikat;
@@ -7828,7 +7846,7 @@ label_24_DEC:
 				set_LOG_litobd_pc;
 
 				modlitba = MODL_PRVE_VESPERY;
-				_velk1_hymnus;
+				_velk1_hymnus(den, modlitba, litobd);
 				_velk1_kcitanie;
 				_velk1_kresponz;
 				_velk1_magnifikat;
@@ -7844,7 +7862,7 @@ label_24_DEC:
 				// 2006-02-09: nasp‰ù pre posv. ËÌtanie a modlitbu cez deÚ
 				den = DEN_STVRTOK;
 				modlitba = MODL_POSV_CITANIE;
-				_velk1_hymnus;
+				_velk1_hymnus(den, modlitba, litobd);
 				_velk1_ne_antifony;
 				_velk1_citanie1;
 				_velk1_citanie2;
@@ -7853,19 +7871,19 @@ label_24_DEC:
 
 				// modlitba cez deÚ
 				modlitba = MODL_PREDPOLUDNIM;
-				_velk1_hymnus;
+				_velk1_hymnus(den, modlitba, litobd);
 				_velk1_mcd_antifony;
 				_velk1_kresponz;
 				_velk1_kcitanie;
 				_velk1_modlitba;
 				modlitba = MODL_NAPOLUDNIE;
-				_velk1_hymnus;
+				_velk1_hymnus(den, modlitba, litobd);
 				_velk1_mcd_antifony;
 				_velk1_kresponz;
 				_velk1_kcitanie;
 				_velk1_modlitba;
 				modlitba = MODL_POPOLUDNI;
-				_velk1_hymnus;
+				_velk1_hymnus(den, modlitba, litobd);
 				_velk1_mcd_antifony;
 				_velk1_kresponz;
 				_velk1_kcitanie;
@@ -7879,7 +7897,7 @@ label_24_DEC:
 
 				// rannÈ chv·ly
 				modlitba = MODL_RANNE_CHVALY;
-				_velk1_hymnus;
+				_velk1_hymnus(den, modlitba, litobd);
 				_velk1_kcitanie;
 				_velk1_kresponz;
 				_velk1_benediktus;
@@ -7888,7 +7906,7 @@ label_24_DEC:
 
 				// veöpery
 				modlitba = MODL_VESPERY;
-				_velk1_hymnus;
+				_velk1_hymnus(den, modlitba, litobd);
 				_velk1_kcitanie;
 				_velk1_kresponz;
 				_velk1_magnifikat;
@@ -7897,26 +7915,26 @@ label_24_DEC:
 
 				// 2006-01-27: modlitba cez deÚ a posv‰tnÈ ËÌtania
 				modlitba = MODL_POSV_CITANIE;
-				_velk1_hymnus;
+				_velk1_hymnus(den, modlitba, litobd);
 				_velk1_citanie1;
 				_velk1_citanie2;
 				_velk1_kresponz;
 				_velk1_modlitba;
 
 				modlitba = MODL_PREDPOLUDNIM;
-				_velk1_hymnus;
+				_velk1_hymnus(den, modlitba, litobd);
 				_velk1_mcd_antifony;
 				_velk1_kresponz;
 				_velk1_kcitanie;
 				_velk1_modlitba;
 				modlitba = MODL_NAPOLUDNIE;
-				_velk1_hymnus;
+				_velk1_hymnus(den, modlitba, litobd);
 				_velk1_mcd_antifony;
 				_velk1_kresponz;
 				_velk1_kcitanie;
 				_velk1_modlitba;
 				modlitba = MODL_POPOLUDNI;
-				_velk1_hymnus;
+				_velk1_hymnus(den, modlitba, litobd);
 				_velk1_mcd_antifony;
 				_velk1_kresponz;
 				_velk1_kcitanie;
@@ -7941,7 +7959,7 @@ label_24_DEC:
 
 					// prvÈ veöpery
 					modlitba = MODL_PRVE_VESPERY;
-					_velk1_hymnus;
+					_velk1_hymnus(den, modlitba, litobd);
 					_velk1_kcitanie;
 					_velk1_kresponz;
 					_velk1_magnifikat;
@@ -8094,19 +8112,19 @@ label_24_DEC:
 			_velk2_modlitba;
 
 			modlitba = MODL_PREDPOLUDNIM;
-			_velk1_hymnus;
+			_velk1_hymnus(den, modlitba, litobd);
 			_velk1_mcd_antifony;
 			_velk1_kresponz;
 			_velk2_kcitanie;
 			_velk2_modlitba;
 			modlitba = MODL_NAPOLUDNIE;
-			_velk1_hymnus;
+			_velk1_hymnus(den, modlitba, litobd);
 			_velk1_mcd_antifony;
 			_velk1_kresponz;
 			_velk2_kcitanie;
 			_velk2_modlitba;
 			modlitba = MODL_POPOLUDNI;
-			_velk1_hymnus;
+			_velk1_hymnus(den, modlitba, litobd);
 			_velk1_mcd_antifony;
 			_velk1_kresponz;
 			_velk2_kcitanie;
