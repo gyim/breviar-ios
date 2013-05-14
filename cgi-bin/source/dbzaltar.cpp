@@ -4354,19 +4354,22 @@ void _velk1_hymnus(short int den, short int modlitba, short int litobd){
 	if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI) || (_global_jazyk == JAZYK_CZ)){
 		ktory = 0;
 	}
-	else if(den == DEN_NEDELA){
+	else if((den == DEN_NEDELA) || (_global_den.denvr == NANEBOVSTUPENIE)){
 		ktory = 1;
 	}
 	else if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_ALTERNATIVES) == BIT_OPT_2_ALTERNATIVES){
 		// pod¾a nastavenia _global_opt[OPT_5_ALTERNATIVES]
 		ktory = ((_global_opt[OPT_5_ALTERNATIVES] & bit) == bit)? 1: 0;
-		Log("2013-01-29: som tu (%d)...\n", ktory);
+		Log("2013-05-14: som tu (%d)...\n", ktory);
 	}
 	else{
 		// pôvodne bol náhodný výber
 		ktory = 2; // obidva!
 	}
 
+	// upravené kotvy, aby bolo použite¾né zjednodušene toto:
+	sprintf(_anchor, "%s_%c%s%d", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS, ktory);
+	/*
 	switch(ktory){
 		case 0:
 			sprintf(_anchor, "%s_%c%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS);
@@ -4378,7 +4381,8 @@ void _velk1_hymnus(short int den, short int modlitba, short int litobd){
 			sprintf(_anchor, "%s_%c%s%d", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS, ktory);
 			break;
 	}// switch(ktory)
-	
+	*/
+
 	if(modlitba == MODL_POSV_CITANIE){
 		_set_hymnus(modlitba, _file_pc, _anchor);
 		set_LOG_litobd_pc;
@@ -7759,7 +7763,7 @@ label_24_DEC:
 		// 2006-01-24: tu v skutoènosti zaèína VE¼KONOÈNÉ OBDOBIE I.
 
 			// 2013-05-14: nastavenie možnosti alternatívnych hymnov pre ranné chvály, posv. èítanie a vešpery -- pre férie
-			if((_global_den.denvt != DEN_NEDELA) && (_global_jazyk != JAZYK_CZ)){
+			if((_global_den.denvt != DEN_NEDELA) && (_global_den.denvr != NANEBOVSTUPENIE) && (_global_jazyk != JAZYK_CZ)){
 				_set_hymnus_alternativy(MODL_POSV_CITANIE, litobd);
 				_set_hymnus_alternativy(MODL_RANNE_CHVALY, litobd);
 				_set_hymnus_alternativy(MODL_VESPERY, litobd);
