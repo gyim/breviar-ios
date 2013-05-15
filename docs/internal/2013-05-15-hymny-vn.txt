@@ -1,0 +1,43 @@
+Vèera (2013-05-14) som nasadzoval zmenu pre ve¾konoèné obdobie I. (do Nanebovstúpenia) -- monos vybra si hymnus pod¾a ¾ubovôle vo férie po Ve¾konoènej oktáve (alebo nede¾nı -- teda ten, ktorı je pre nedele a Oktávu, alebo feriálny) pre posvätné èítanie, ranné chvály a vešpery.
+
+Ide o analógiu tomu, ako sa hymnus dá voli pre posvätné èítanie v Cezroènom období (I. resp. II. pod¾a toho, kedy sa táto modlitba modlí), alebo pre kompletórium (pod¾a ¾ubovôle v Cezroènom období hymnus A resp. B).
+
+Funkènos závisí od nastavenia tıchto dvoch parametrov/prepínaèov:
+
+-- zobrazi rozlièné monosti priamo v textoch modlitieb (v ïalšom iba "rozlièné_monosti"): Èi sa priamo v texte modlitby majú zobrazova všelijaké monosti (uvedené sú èervenım písmom ako rubriky, text vdy v gu¾atıch zátvorkách, je klikate¾nı, teda ide o hypertextovı odkaz).
+
+-- alternatívy: Èi sa majú ponúka viaceré alternatívy.
+
+V podstate sú tieto 4 kombinácie (prvé dve sú rovnaké; uvádzam aj hypertextovı odkaz na príklad 15. apríla 2013 na úvodnú stránku s nastaveniami, aby bolo vidno rozdiely; staèí potom kliknú na tlaèidlo "Posv. èít." a zobrazi modlitbu):
+
+1. "alternatívy" NIE, "rozlièné_monosti" ÁNO/NIE: Text modlitby neobsahuje iadne hypertextové odkazy. Obsahuje -- ak je táto monos uvedená v LH -- uvedené všetky hymny, teda oba hymny z dvojice. Napr. pre ve¾konoèné obdobie I., pondelok, 3. tıdeò, pre posv. èítanie obsahuje hymnus "Toto je pravı Boí deò", potom rubriku "Alebo pod¾a ¾ubovôle vo férie po Ve¾konoènej oktáve:" a hymnus "Nech z vıšin neba rados znie". (Monos s oboma NIE je predvolená pre breviar.sk.)
+
+http://breviar.sk/cgi-bin/l.cgi?qt=pdt&d=15&m=4&r=2013&o1=64&o2=11000&o3=1&o5=256
+http://breviar.sk/cgi-bin/l.cgi?qt=pdt&d=15&m=4&r=2013&o1=64&o2=10488&o3=1&o5=256
+
+2. "alternatívy" ÁNO, "rozlièné_monosti" ÁNO: Text modlitby obsahuje hypertextové odkazy s uvedením druhej monosti (staèí prekliknú). Obsahuje uvedenú vdy jednu monos, pod¾a nastavení (keïe je zvolené "rozlièné_monosti" ÁNO, v nastaveniach sú tieto poloky skryté, pretoe ich mono prepína v samotnej modlitbe). Napr. pre ve¾konoèné obdobie I., pondelok, 3. tıdeò, pre posv. èítanie obsahuje najprv klikate¾nı rubrikovı odkaz "(zobrazi hymnus Toto je pravı Boí deò)" a potom hymnus "Nech z vıšin neba rados znie". Resp. po prekliknutí na odkaz je situácia presne opaèná: modlitba v rámci sekcie HYMNUS obsahuje najprv klikate¾nı rubrikovı odkaz "(zobrazi hymnus Nech z vıšin neba rados znie)" a potom hymnus "Toto je pravı Boí deò". (Toto je prednastavená monos pre aplikáciu na Android.)
+
+http://breviar.sk/cgi-bin/l.cgi?qt=pdt&d=15&m=4&r=2013&o1=64&o2=27384&o3=1&o5=256
+
+3. "alternatívy" ÁNO, "rozlièné_monosti" NIE: Text modlitby neobsahuje iadne hypertextové odkazy. Obsahuje uvedenú vdy jednu monos, pod¾a nastavení (keïe je zvolené "rozlièné_monosti" NIE, v nastaveniach sú zobrazené poloky pre jednotlivé hymnusy). Táto monos je vhodná pri príprave tlaèenıch textov s presne zadanımi hymnusmi.
+
+http://breviar.sk/cgi-bin/l.cgi?qt=pdt&d=15&m=4&r=2013&o1=64&o2=26872&o3=1&o5=256
+
+
+Takto isto sa správajú všetky hymnusy, ktoré je moné voli:
+
+-- modlitba predpoludním: hymnus Príï, Duchu Svätı / hymnus Deviata je u hodina 
+-- modlitba napoludnie: hymnus Mocnı Vládca, vernı Boe / hymnus Na nebi slnko vrcholí 
+-- modlitba popoludní: hymnus Celı svet v pohyb uvádzaš / hymnus Z Boej milosti tretí raz 
+-- kompletórium: hymnus A: Na sklonku dòa a úprimne / hymnus B: Kriste, ty svetlo a náš deò 
+-- posvätné èítanie (ve¾konoèné obdobie): hymnus Toto je pravı Boí deò / hymnus Nech z vıšin neba rados znie 
+-- ranné chvály (ve¾konoèné obdobie): hymnus Bronie sa zora na nebi / hymnus Nech novım Jeruzalemom 
+-- vešpery (ve¾konoèné obdobie): hymnus Pri Baránkovej veèeri / hymnus Krá¾ vekov, Pane, Boí Syn
+
+Ve¾mi podobne sa správa aj monos vo¾by niektorıch almov v doplnkovej psalmódii, ak ide o slávenie zo spoloènej èasti, kde sa vınimoène uvádzajú tieto alternatívy (kvôli tomu, e uvedené almy z doplnkovej psalmódie sú pouité inde v psalmódii spoloènej èasti). Jedinı rozdiel je ten, e nie je moné ma zobrazené oba almy ako alternatívu (bod 1 vyššie, prípady, kedy "alternatívy" sú NIE). Je to technické obmedzenie. Ide o tieto monosti:
+
+-- namiesto almu 122 bra alm 129 
+-- namiesto almu 126 bra alm 129 
+-- namiesto almu 127 bra alm 131 
+
+Ako hovorí Martin Mojiš, poznámka pre znalcov: V altári je nieko¾ko málo dní, kedy sa na vešpery resp. inú modlitbu berú almy, èo sa pouívajú aj v doplnkovej psalmódii. Vtedy LH uvádza, e na ostatné 2 hodinky sa berú almy z doplnkovej psalmódie tıch dvoch sérií, ktoré neobsahujú almy, èo budú pouité v altári. Presnejšie, ide o tıchto 7 dní zo altára -- uvádzam v zátvorke èíslo almu/almov, èo sa kryje/kryjú s doplnkovou psalmódiou, a modlitbu, ktorá v danom dni tento alm/almy obsahuje: 4. tıdeò, pondelok (MCD: 120); 2. tıdeò, piatok (V: 121); 3. tıdeò, sobota (V: 122); 3. tıdeò, pondelok (V: 123; 124); 3. tıdeò, utorok (V: 125); 3. tıdeò, streda (V: 126; 127); 4. tıdeò, štvrtok (MCD: 128; 129). Tak pre tıchto 7 dní zo altára zatia¾ NEMÁM naprogramované obmedzenie, aby sa nedala poui príslušná séria doplnkovej psalmódie, ktorú LH v rubrike neuvádza (teda tá, ktorá sa kryje s niektorım zo almov altára daného dòa).
