@@ -3446,9 +3446,9 @@ void _set_zalmy_posviacka_chramu(short int modlitba){
 		else{
 			_set_zalmy_mcd_doplnkova_psalmodia();
 		}
+		_set_mcd_doplnkova_psalmodia_z122_129(MODL_PREDPOLUDNIM);
+		_set_zalmy_mcd_doplnkova_psalmodia(!je_len_doplnkova_psalmodia(modlitba)); // toto je potrebné z technického dôvodu, pretoe doplnková psalmódia bola nastavená ešte pri nastavovaní altára (pred vlastnımi èasami svätıch)
 	}
-	_set_mcd_doplnkova_psalmodia_z122_129(MODL_PREDPOLUDNIM);
-	_set_zalmy_mcd_doplnkova_psalmodia(!je_len_doplnkova_psalmodia(modlitba)); // toto je potrebné z technického dôvodu, pretoe doplnková psalmódia bola nastavená ešte pri nastavovaní altára (pred vlastnımi èasami svätıch)
 	Log("_set_zalmy_posviacka_chramu(%s) -- end\n", nazov_modlitby(modlitba));
 }// _set_zalmy_posviacka_chramu()
 
@@ -3749,8 +3749,10 @@ void _set_zalmy_sviatok_apostolov(short int modlitba){
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
 	}
-	_set_mcd_doplnkova_psalmodia_z126_129(MODL_POPOLUDNI);
-	_set_zalmy_mcd_doplnkova_psalmodia(!je_len_doplnkova_psalmodia(modlitba)); // toto je potrebné z technického dôvodu, pretoe doplnková psalmódia bola nastavená ešte pri nastavovaní altára (pred vlastnımi èasami svätıch)
+	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
+		_set_mcd_doplnkova_psalmodia_z126_129(MODL_POPOLUDNI);
+		_set_zalmy_mcd_doplnkova_psalmodia(!je_len_doplnkova_psalmodia(modlitba)); // toto je potrebné z technického dôvodu, pretoe doplnková psalmódia bola nastavená ešte pri nastavovaní altára (pred vlastnımi èasami svätıch)
+	}
 	Log("_set_zalmy_sviatok_apostolov(%s) -- end\n", nazov_modlitby(modlitba));
 }// _set_zalmy_sviatok_apostolov()
 
@@ -3794,9 +3796,11 @@ void _set_zalmy_sviatok_panien(short int modlitba){
 		set_zalm(2, modlitba, "z45.htm", "ZALM45_I");
 		set_zalm(3, modlitba, "z45.htm", "ZALM45_II");
 	}
-	_set_mcd_doplnkova_psalmodia_z122_129(MODL_PREDPOLUDNIM);
-	_set_mcd_doplnkova_psalmodia_z127_131(MODL_POPOLUDNI);
-	_set_zalmy_mcd_doplnkova_psalmodia(!je_len_doplnkova_psalmodia(modlitba)); // toto je potrebné z technického dôvodu, pretoe doplnková psalmódia bola nastavená ešte pri nastavovaní altára (pred vlastnımi èasami svätıch)
+	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
+		_set_mcd_doplnkova_psalmodia_z122_129(MODL_PREDPOLUDNIM);
+		_set_mcd_doplnkova_psalmodia_z127_131(MODL_POPOLUDNI);
+		_set_zalmy_mcd_doplnkova_psalmodia(!je_len_doplnkova_psalmodia(modlitba)); // toto je potrebné z technického dôvodu, pretoe doplnková psalmódia bola nastavená ešte pri nastavovaní altára (pred vlastnımi èasami svätıch)
+	}
 	Log("_set_zalmy_sviatok_panien(%s) -- end [pouíva sa aj pre sviatky svätıch ien]\n", nazov_modlitby(modlitba));
 }// _set_zalmy_sviatok_panien()
 
@@ -12367,14 +12371,21 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 
 							_vlastna_cast_mcd_modlitba;
 
+							_set_mcd_doplnkova_psalmodia_z127_131(MODL_POPOLUDNI);
+
+							modlitba = MODL_PREDPOLUDNIM;
+							_set_zalmy_mcd_doplnkova_psalmodia(!je_len_doplnkova_psalmodia(modlitba)); // toto je potrebné z technického dôvodu, pretoe doplnková psalmódia bola nastavená ešte pri nastavovaní altára (pred vlastnımi èasami svätıch)
+							modlitba = MODL_NAPOLUDNIE;
+							_set_zalmy_mcd_doplnkova_psalmodia(!je_len_doplnkova_psalmodia(modlitba)); // toto je potrebné z technického dôvodu, pretoe doplnková psalmódia bola nastavená ešte pri nastavovaní altára (pred vlastnımi èasami svätıch)
+							modlitba = MODL_POPOLUDNI;
+							_set_zalmy_mcd_doplnkova_psalmodia(!je_len_doplnkova_psalmodia(modlitba)); // toto je potrebné z technického dôvodu, pretoe doplnková psalmódia bola nastavená ešte pri nastavovaní altára (pred vlastnımi èasami svätıch)
+
 							modlitba = MODL_VESPERY;
 							// 2012-02-06: doplnené almy, ktoré zatia¾ nikde inde nie sú v tomto radení pouité
 							set_zalm(1, modlitba, "z127.htm", "ZALM127");
 							set_zalm(2, modlitba, "z111.htm", "ZALM111");
 							set_zalm(3, modlitba, "ch_kol1.htm", "CHVAL_KOL1");
 							_vlastna_cast_full(modlitba);
-							_set_mcd_doplnkova_psalmodia_z127_131(MODL_POPOLUDNI);
-							_set_zalmy_mcd_doplnkova_psalmodia(!je_len_doplnkova_psalmodia(modlitba)); // toto je potrebné z technického dôvodu, pretoe doplnková psalmódia bola nastavená ešte pri nastavovaní altára (pred vlastnımi èasami svätıch)
 
 							break;
 						}
