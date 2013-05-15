@@ -4351,7 +4351,11 @@ void _velk1_hymnus(short int den, short int modlitba, short int litobd){
 		case MODL_VESPERY:      bit = BIT_OPT_5_HYMNUS_VN_VESP; break;
 	}// switch(modlitba)
 
-	if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI) || (_global_jazyk == JAZYK_CZ)){
+	if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && (litobd = OBD_VELKONOCNE_II)){
+		// pre vn2.htm sa používa len pre modlitbu cez deò
+		ktory = -1;
+	}
+	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI) || (_global_jazyk == JAZYK_CZ)){
 		ktory = 0;
 	}
 	else if((den == DEN_NEDELA) || (_global_den.denvr == NANEBOVSTUPENIE)){
@@ -4367,21 +4371,13 @@ void _velk1_hymnus(short int den, short int modlitba, short int litobd){
 		ktory = 2; // obidva!
 	}
 
-	// upravené kotvy, aby bolo použite¾né zjednodušene toto:
-	sprintf(_anchor, "%s_%c%s%d", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS, ktory);
-	/*
-	switch(ktory){
-		case 0:
-			sprintf(_anchor, "%s_%c%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS);
-			break;
-		case 1:
-			sprintf(_anchor, "%s_%c%s%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS, nazov_DN_asci[DEN_NEDELA]);
-			break;
-		case 2:
-			sprintf(_anchor, "%s_%c%s%d", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS, ktory);
-			break;
-	}// switch(ktory)
-	*/
+	if(ktory < 0){
+		sprintf(_anchor, "%s_%c%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS);
+	}
+	else{
+		// upravené kotvy, aby bolo použite¾né zjednodušene toto:
+		sprintf(_anchor, "%s_%c%s%d", nazov_OBD[litobd], pismenko_modlitby(modlitba), ANCHOR_HYMNUS, ktory);
+	}
 
 	if(modlitba == MODL_POSV_CITANIE){
 		_set_hymnus(modlitba, _file_pc, _anchor);
