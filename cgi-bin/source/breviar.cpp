@@ -4413,12 +4413,13 @@ short int atolitobd(char *lo){
 	short int i = 0;
 	Log("lo == '%s'\n", lo);
 	do{
+		// Log("nazov_obdobia_ext(%d) == %s...\n", i, nazov_obdobia_ext(i));
 		if(equals(lo, nazov_obdobia_ext(i))){
 			Log("atolitobd: returning %d\n", i);
 			return i;
 		}
 		i++;
-	}while(i < POCET_OBDOBI);
+	}while(i <= POCET_OBDOBI);
 	// 2011-05-11: ak sa nenašlo obdobie porovnaním s reazcom, skúsim prekonvertova na èíslo
 	i = atoi(lo);
 	i = ((i < OBD_ADVENTNE_I) || (i > OBD_VELKONOCNE_II)) ? OBD_CEZ_ROK : i;
@@ -4490,7 +4491,7 @@ short int atomes(char *mesiac){
 					i++;
 				}while(i < UNKNOWN_MESIAC);
 			}
-		}while(j < POCET_JAZYKOV);
+		}while(j <= POCET_JAZYKOV);
 	}
 	return UNKNOWN_MESIAC;
 }// atomes()
@@ -12538,18 +12539,16 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 
 	// kontrola, èi tıdeò daného liturgického obdobia neprekraèuje poèet tıdòov daného obdobia | 2013-02-03: presunutá sem
 	Log("kontrola, èi tıdeò daného liturgického obdobia neprekraèuje poèet tıdòov daného obdobia...\n");
-	if(t > lit_obd_pocet_tyzdnov[lo]){
+	// 2013-05-17: pre OBD_VELKONOCNE_II je tıdeò 6 resp. 7, preto treba samostatne kontrolova, ale neupravova premennú t
+	if(((lo != OBD_VELKONOCNE_II) && (t > lit_obd_pocet_tyzdnov[lo])) || ((lo == OBD_VELKONOCNE_II) && (t - 5 > lit_obd_pocet_tyzdnov[lo]))){
 		ALERT;
 		Export("Nevhodné údaje:"HTML_LINE_BREAK"\n<ul>");
 		// tyzden
 		if(equals(tyzden, STR_EMPTY)){
 			Export("<li>takı tıdeò nemono iada</li>\n");
 		}
-		else if(t > lit_obd_pocet_tyzdnov[lo]){
+		else{
 			Export("<li>tıdeò = <"HTML_SPAN_BOLD">%s</span>; takı tıdeò nemono iada pre dané liturgické obdobie: %s</li>\n", tyzden, nazov_obdobia_ext(lo));
-		}
-		else {
-			Export("<li>chyba: tıdeò %s nemono iada</li>\n", tyzden);
 		}
 		Export("</ul>\n");
 		return FAILURE;
