@@ -177,6 +177,7 @@ go
 -- POST1_cCIT1_1STR 	10, 21 -- 11, 10
 update biblia set lh_id = 'POST1_cCIT1_1STR' where spis = 'Ex' and vers = 1 and k = 10 and v between 21 and 29
 update biblia set lh_id = 'POST1_cCIT1_1STR' where spis = 'Ex' and vers = 1 and k = 11 and v between 1 and 10
+update biblia set lc_id = 409 where spis = 'Ex' and vers = 1 and k = 11 and v = 10
 go
 
 update biblia set nvg = 'Pán povedal Mojišovi: „Vystri ruku k_nebu a_nad celou egyptskou krajinou bude taká hustá tma, e ju bude mono nahmata.“ ' where spis = 'Ex' and vers = 1 and k = 10 and v = 21
@@ -198,4 +199,312 @@ update biblia set nvg = 'Ale u_nikoho zo synov Izraela nezaštekne pes proti èlov
 update biblia set nvg = 'Potom prídu všetci títo tvoji sluobníci ku mne, poklonia sa mi a_budú hovori: ‚Odíï ty i_všetok ¾ud, èo ide za tebou.‘ Potom odídem.“ A_odišiel od faraóna ve¾mi nahnevanı. ' where spis = 'Ex' and vers = 1 and k = 11 and v = 8
 update biblia set nvg = 'Ale Pán povedal Mojišovi: „Faraón vás nepoèúvne, aby sa stalo v_egyptskej krajine mnoho znamení.“ ' where spis = 'Ex' and vers = 1 and k = 11 and v = 9
 update biblia set nvg = 'Mojiš a_Áron robili pred faraónom mnohé zázraky, ale Pán zatvrdzoval faraónovo srdce a_on neprepustil synov Izraela zo svojej krajiny.' where spis = 'Ex' and vers = 1 and k = 11 and v = 10
+go
+
+-- POST1_cCIT1_1STV	12, 1-20
+-- 409	Ex 11, 10 - 12, 14
+-- 410	Ex 12, 1-8. 11-14
+update biblia set lh_id = 'POST1_cCIT1_1STV' where spis = 'Ex' and vers = 1 and k = 12 and v between 1 and 20
+update biblia set lc_id = 409 where spis = 'Ex' and vers = 1 and k = 12 and v between 1 and 14
+go
+
+update biblia set nvg = 'Pán povedal Mojišovi a_Áronovi v_Egypte: ' where spis = 'Ex' and vers = 1 and k = 12 and v = 1
+update biblia set nvg = '„Tento mesiac bude pre vás zaèiatoènım mesiacom, prvım mesiacom v_roku. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 2
+update biblia set nvg = 'Celej izraelskej pospolitosti povedzte: V_desiaty deò tohto mesiaca nech si kadı zaobstará baránka pre svoju rodinu, baránka pre kadı dom. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 3
+update biblia set nvg = 'Ak je rodina menšia a_nevládala by zjes baránka, nech sa spojí so susedom, èo bıva jeho domu najblišie, pod¾a poètu osôb, ko¾ko staèí na zjedenie baránka. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 4
+update biblia set nvg = 'Baránok musí by bezchybnı, jednoroènı samèek; môete ho vybra z_oviec alebo kozliat. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 5
+update biblia set nvg = 'Budete ho opatrova do štrnásteho dòa tohto mesiaca; v_predveèer ho celá izraelská pospolitos obetuje. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 6
+update biblia set nvg = 'Vezmú z_jeho krvi a_namaú òou oboje verají a_vrchnı prah dverí na domoch, v_ktorıch ho budú jes. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 7
+update biblia set nvg = 'A_v_tú noc budú jes mäso upeèené na ohni a_nekvasenı chlieb s_horkımi zelinami. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 8
+update biblia set nvg = 'Niè nesmiete z_neho jes surové ani uvarené vo vode, teda len na ohni upeèené. Zjete aj hlavu, nohy a_vnútornosti. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 9
+update biblia set nvg = 'Niè z_neho nesmie zosta do rána; keby z_neho nieèo zostalo, spálite to na ohni. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 10
+update biblia set nvg = 'A_budete ho jes takto: Bedrá budete ma opásané, sandále na nohách a_palicu v_ruke. Budete jes rıchlo, lebo je Pánova Pascha (èie Pánov prechod).' where spis = 'Ex' and vers = 1 and k = 12 and v = 11
+update biblia set nvg = 'V_tú noc prejdem egyptskou krajinou a_usmrtím všetko prvorodené v_Egypte; èlovekom poènúc a po dobytok. A_nad všetkımi bohmi Egypta vykonám súd. Ja som Pán. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 12
+update biblia set nvg = 'Krv na vašich domoch bude znamením, e v_nich bıvate. Uvidím krv a_obídem vás; nezastihne vás nijaká pohroma, keï budem bi Egypt. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 13
+update biblia set nvg = 'Tento deò bude pre vás pamätnı a_budete ho slávi ako sviatok Pána; z_pokolenia na pokolenie ho budete slávi po všetky veky.' where spis = 'Ex' and vers = 1 and k = 12 and v = 14
+update biblia set nvg = 'Sedem dní budete jes nekvasené chleby: u v_prvı deò nebude kvas vo vašich domoch, lebo kadı, kto by od prvého dòa a po siedmy deò jedol nieèo kysnuté, bude vyhladenı z_Izraela.' where spis = 'Ex' and vers = 1 and k = 12 and v = 15
+update biblia set nvg = 'Prvı deò bude svätı a_slávnostnı a_siedmy deò takisto slávnostnı a_posvätnı. V_tieto dni nebudete kona nijakú prácu okrem toho, èo je potrebné na prípravu jedla.' where spis = 'Ex' and vers = 1 and k = 12 and v = 16
+update biblia set nvg = 'Budete zachováva sviatok Nekvasenıch chlebov, lebo práve v_ten deò som vyviedol vaše voje z_egyptskej krajiny. Tento deò budete zachováva z_pokolenia na pokolenie ako veèné ustanovenie. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 17
+update biblia set nvg = 'Od veèera štrnásteho dòa v_prvom mesiaci budete jes nekvasené chleby a do veèera dvadsiateho prvého dòa v_tom istom mesiaci.' where spis = 'Ex' and vers = 1 and k = 12 and v = 18
+update biblia set nvg = 'Za sedem dní sa nenájde kvas vo vašich domoch. Kto by jedol nieèo kysnuté, bude vyhladenı z_izraelskej pospolitosti, cudzinec tak ako domorodec. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 19
+update biblia set nvg = 'Nebudete jes niè kysnuté; vo všetkıch svojich príbytkoch budete jes nekvasené chleby.“' where spis = 'Ex' and vers = 1 and k = 12 and v = 20
+go
+
+-- POST1_cCIT1_1PI	12, 21-36
+update biblia set lh_id = 'POST1_cCIT1_1PI' where spis = 'Ex' and vers = 1 and k = 12 and v between 21 and 36
+go
+
+update biblia set nvg = 'Mojiš zvolal všetkıch starších zo synov Izraela a_povedal im: „Choïte, vezmite zviera pod¾a svojich rodín a_zabite ve¾konoèného baránka. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 21
+update biblia set nvg = 'Do krvi v_miske namoète zväzok yzopu a_pomate òou vrchnı prah dverí a_oboje verají. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 22
+update biblia set nvg = 'Nech nik z vás a do rána nevychádza z_dverí svojho domu, lebo Pán bude prechádza a_bi Egypanov. Ale keï uvidí krv na vrchnom prahu a_na oboch verajach, prejde popri dverách a_nedovolí zhubcovi vojs do vašich domov a_nièi. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 23
+update biblia set nvg = 'Tento rozkaz zachovávajte ako ustanovenie pre seba i_pre svojich synov naveky.' where spis = 'Ex' and vers = 1 and k = 12 and v = 24
+update biblia set nvg = 'Aj keï prídete do krajiny, ktorú vám dá Pán, ako to pris¾úbil, budete kona tieto obrady. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 25
+update biblia set nvg = 'A_keï sa vás vaši synovia spıtajú: ‚Èo znamená tento obrad?‘, ' where spis = 'Ex' and vers = 1 and k = 12 and v = 26
+update biblia set nvg = 'poviete im: ‚To je obetovanie ve¾konoèného baránka Pánovi, ako vtedy, keï prešiel popri domoch synov Izraela v_Egypte, keï bil Egypanov a_keï naše domy ušetril.‘“ Tu ¾ud padol na kolená a_klaòal sa. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 27
+update biblia set nvg = 'Potom synovia Izraela išli a_urobili, ako Pán prikázal Mojišovi a_Áronovi.' where spis = 'Ex' and vers = 1 and k = 12 and v = 28
+update biblia set nvg = 'A_o_polnoci Pán pobil všetko prvorodené v_egyptskej krajine od faraónovho prvorodeného, ktorı sedel na jeho tróne, a po prvorodeného zajatca, ktorı bol v_alári, aj všetko prvorodené z_dobytka. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 29
+update biblia set nvg = 'A_faraón vstal za noci i_všetci jeho sluobníci a_celı Egypt a_v_Egypte nastal ve¾kı nárek, lebo nebolo domu, kde by neleal màtvy. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 30
+update biblia set nvg = 'Ešte v_noci zavolal faraón Mojiša a_Árona a_povedal: „Zoberte sa a_odíïte z_môjho ¾udu, vy aj synovia Izraela. Choïte a_prineste obetu Pánovi, ako ste hovorili. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 31
+update biblia set nvg = 'Vezmite si ovce i_dobytok, ako ste iadali; odíïte a_poehnajte ma.“ ' where spis = 'Ex' and vers = 1 and k = 12 and v = 32
+update biblia set nvg = 'Aj Egypania súrili ¾ud, aby rıchlo odišiel z_krajiny, lebo vraveli: „Všetci pomrieme.“' where spis = 'Ex' and vers = 1 and k = 12 and v = 33
+update biblia set nvg = '¼ud teda vzal zamiesené cesto prv, ako vykyslo; diee zabalil do plášov a_vyloil si ich na plecia. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 34
+update biblia set nvg = 'Synovia Izraela urobili, ako im rozkázal Mojiš, a_vyiadali si od Egypanov strieborné a_zlaté predmety a_mnoho šatstva. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 35
+update biblia set nvg = 'Pán vzbudil u_Egypanov priazeò voèi ¾udu a_urobili im po vôli, a_tak olúpili Egypanov.' where spis = 'Ex' and vers = 1 and k = 12 and v = 36
+go
+
+-- POST1_cCIT1_1SO	12, 37-49; 13, 11-16
+-- 411	Ex 12, 37-42
+update biblia set lh_id = 'POST1_cCIT1_1SO' where spis = 'Ex' and vers = 1 and k = 12 and v between 37 and 49
+update biblia set lh_id = 'POST1_cCIT1_1SO' where spis = 'Ex' and vers = 1 and k = 13 and v between 11 and 16
+update biblia set lc_id = 411 where spis = 'Ex' and vers = 1 and k = 12 and v between 37 and 42
+go
+
+update biblia set nvg = 'Izraeliti sa pohli z_Ramesesa do Sukotu; okolo šesstotisíc pešo idúcich muov, okrem detí. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 37
+update biblia set nvg = 'A_s_nimi šlo nespoèetné mnostvo iného ¾udu a_obrovské stáda oviec a_dobytka. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 38
+update biblia set nvg = 'Z_cesta, ktoré si vzali z_Egypta, napiekli nekvasené podpopolné chleby; cesto nemohlo vykysnú, lebo ich z_Egypta hnali a_nedovolili im ani na chví¾ku sa zdra a_pripravi si jedlo na cestu.' where spis = 'Ex' and vers = 1 and k = 12 and v = 39
+update biblia set nvg = 'Synovia Izraela bıvali v_Egypte štyristotridsa rokov. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 40
+update biblia set nvg = 'Po štyristotridsiatich rokoch práve v_ten deò vyšli Pánove voje z_egyptskej krajiny. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 41
+update biblia set nvg = 'Bola to noc bdenia, zasvätená Pánovi, keï ich vyviedol z_Egypta. Túto noc majú slávi na Pánovu poèes všetci Izraeliti z_pokolenia na pokolenie.' where spis = 'Ex' and vers = 1 and k = 12 and v = 42
+update biblia set nvg = 'Pán povedal Mojišovi a_Áronovi: „Toto je ustanovenie o_ve¾konoènom baránkovi: Nebude z_neho jes nijakı cudzinec. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 43
+update biblia set nvg = 'Kadı otrok kúpenı za peniaze bude obrezanı, a_tak bude jes. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 44
+update biblia set nvg = 'Prisahovalec a_nádenník nebudú z_neho jes. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 45
+update biblia set nvg = 'Musí sa zjes v_tom istom dome a_niè z_jeho mäsa nevynesiete z_domu von a_nezlomíte mu ani kos. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 46
+update biblia set nvg = 'Toto bude robi celá pospolitos synov Izraela. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 47
+update biblia set nvg = 'Ale keby chcel nejakı cudzinec prís do vašej obce a_slávi Pánovu ve¾konoènú veèeru, najprv nech sa dá so všetkımi príslušníkmi muského rodu obreza a_potom ju bude riadne slávi a_bude ako domorodec. Ale ak by niekto nebol obrezanı, nesmie z_nej jes. ' where spis = 'Ex' and vers = 1 and k = 12 and v = 48
+update biblia set nvg = 'Ten istı zákon bude plati pre domorodca i_pre prisahovalca, ktorı sa zdruje medzi vami.' where spis = 'Ex' and vers = 1 and k = 12 and v = 49
+go
+update biblia set nvg = 'Keï a Pán vovedie do krajiny Kanaánèanov, ako prisahal tebe i_tvojim otcom, a_dá ti ju, ' where spis = 'Ex' and vers = 1 and k = 13 and v = 11
+update biblia set nvg = 'oddelíš Pánovi všetko, èo otvára lono matky, aj prvorodené z_tvojho dobytka; všetko, èo budeš ma muského rodu, zasvätíš Pánovi. ' where spis = 'Ex' and vers = 1 and k = 13 and v = 12
+update biblia set nvg = 'Prvorodené os¾a vymeníš ovcou. Ak ho nevykúpiš, zabiješ ho. Ale kadého prvorodeného èloveka zo svojich synov vykúpiš peniazmi.' where spis = 'Ex' and vers = 1 and k = 13 and v = 13
+update biblia set nvg = 'Keï sa a v_budúcnosti tvoj syn opıta: ‚Èo to znamená?‘, odpovieš mu: ‚Pán nás vyviedol silnou rukou z_Egypta, z_domu otroctva. ' where spis = 'Ex' and vers = 1 and k = 13 and v = 14
+update biblia set nvg = 'Lebo keï sa faraón zatvrdil a_nechcel nás prepusti, Pán pobil všetko prvorodené v_egyptskej krajine, od prvorodeného z_èloveka a po prvorodené z_dobytka. Preto obetujem Pánovi všetko muského rodu, èo otvára lono matky, a_vykupujem všetkıch svojich prvorodenıch synov.‘ ' where spis = 'Ex' and vers = 1 and k = 13 and v = 15
+update biblia set nvg = 'A_to bude ako znamenie na tvojej ruke a_ako pamätnı prívesok medzi tvojimi oèami; lebo Pán nás silnou rukou vyviedol z_Egypta.“' where spis = 'Ex' and vers = 1 and k = 13 and v = 16
+go
+
+-- POST1_cCIT1_2NE	13, 17 — 14, 9
+-- 414	Ex 14, 5-18
+update biblia set lh_id = 'POST1_cCIT1_2NE' where spis = 'Ex' and vers = 1 and k = 13 and v between 17 and 22
+update biblia set lh_id = 'POST1_cCIT1_2NE' where spis = 'Ex' and vers = 1 and k = 14 and v between 1 and 9
+update biblia set lc_id = 414 where spis = 'Ex' and vers = 1 and k = 14 and v between 5 and 18
+go
+
+update biblia set nvg = 'Keï faraón prepustil ¾ud, Boh ich neviedol po ceste cez filištínsku krajinu, ktorá je blišie, v_obave, aby ¾ud neo¾utoval, keby videl, e sa proti nemu zaèínajú vies vojny, a_nevrátil sa do Egypta. ' where spis = 'Ex' and vers = 1 and k = 13 and v = 17
+update biblia set nvg = 'Ale viedol ho ok¾ukou po ceste cez púš popri Èervenom mori. Synovia Izraela vyšli z_Egypta ozbrojení. ' where spis = 'Ex' and vers = 1 and k = 13 and v = 18
+update biblia set nvg = 'Mojiš vzal so sebou aj Jozefove kosti, lebo on synov Izraela zaprisahal: „Boh vás navštívi; vezmite odtia¾to moje kosti so sebou.“' where spis = 'Ex' and vers = 1 and k = 13 and v = 19
+update biblia set nvg = 'Vyšli zo Sukotu a_utáborili sa v_Etame, na okraji púšte.' where spis = 'Ex' and vers = 1 and k = 13 and v = 20
+update biblia set nvg = 'Pán šiel pred nimi a_ukazoval im cestu: cez deò v_oblaènom ståpe a_v_noci v_ståpe ohnivom, aby ich viedol na ceste vo dne i_v_noci. ' where spis = 'Ex' and vers = 1 and k = 13 and v = 21
+update biblia set nvg = 'Oblaènı ståp nikdy nechıbal pred ¾udom cez deò ani ohnivı ståp v_noci.' where spis = 'Ex' and vers = 1 and k = 13 and v = 22
+go
+update biblia set nvg = 'Pán povedal Mojišovi: ' where spis = 'Ex' and vers = 1 and k = 14 and v = 1
+update biblia set nvg = '„Povedz synom Izraela, nech sa obrátia a_utáboria pred Pihahirotom medzi Magdolom a_morom oproti Beelsefonu; naproti nemu sa utáboríte pri mori. ' where spis = 'Ex' and vers = 1 and k = 14 and v = 2
+update biblia set nvg = 'Faraón bude hovori o_synoch Izraela: ‚Blúdia po krajine, zovrela ich púš.‘ Znova zatvrdím jeho srdce a_bude ich prenasledova. ' where spis = 'Ex' and vers = 1 and k = 14 and v = 3
+update biblia set nvg = 'A_ja ukáem na faraónovi a_na všetkom jeho vojsku svoju slávu a_Egypania poznajú, e ja som Pán.“ A_urobili tak.' where spis = 'Ex' and vers = 1 and k = 14 and v = 4
+update biblia set nvg = 'Egyptskému krá¾ovi oznámili, e ¾ud utiekol; faraón a_jeho sluobníci zmenili svoj postoj k_¾udu a_vraveli: „Èo sme to urobili, e sme prepustili Izrael zo svojich sluieb?!“ ' where spis = 'Ex' and vers = 1 and k = 14 and v = 5
+update biblia set nvg = 'Faraón dal zapriahnu do voza a_vzal so sebou všetok svoj ¾ud: ' where spis = 'Ex' and vers = 1 and k = 14 and v = 6
+update biblia set nvg = 'vzal so sebou šessto vybranıch vozov a_všetky ostatné vozy v_Egypte a_na kadom voze boli bojovníci. ' where spis = 'Ex' and vers = 1 and k = 14 and v = 7
+update biblia set nvg = 'Pán zatvrdil srdce egyptského krá¾a faraóna a_on prenasledoval synov Izraela; no oni odchádzali so zdvihnutou rukou. ' where spis = 'Ex' and vers = 1 and k = 14 and v = 8
+update biblia set nvg = 'Egypania sa hnali za nimi a_dostihli ich, keï táborili pri mori. Faraónove kone a_vozy, jazda a_vojsko boli pri Pihahirote naproti Beelsefonu.' where spis = 'Ex' and vers = 1 and k = 14 and v = 9
+go
+
+-- POST1_cCIT1_2PO	14, 10-31
+-- 414	Ex 14, 5-18
+-- 412	Ex 14, 15 - 15, 1a
+-- 413	Ex 14, 21 - 15, 1a
+update biblia set lh_id = 'POST1_cCIT1_2PO' where spis = 'Ex' and vers = 1 and k = 14 and v between 10 and 31
+update biblia set lc_id = 412 where spis = 'Ex' and vers = 1 and k = 14 and v between 15 and 31
+update biblia set lc_id = 412 where spis = 'Ex' and vers = 1 and k = 15 and v = 1
+go
+
+update biblia set nvg = 'Keï sa faraón priblioval, Izraeliti zdvihli oèi a_videli za sebou Egypanov. Pochytil ich ve¾kı strach a_volali k_Pánovi. ' where spis = 'Ex' and vers = 1 and k = 14 and v = 10
+update biblia set nvg = 'A_Mojišovi povedali: „Nebolo v_Egypte dos hrobov? Vyviedol si nás sem, aby sme zomreli na púšti! Èo si to urobil? Preèo si nás vyviedol z_Egypta? ' where spis = 'Ex' and vers = 1 and k = 14 and v = 11
+update biblia set nvg = 'A_nehovorili sme ti to, nevraveli sme ti v_Egypte: Nechaj nás, budeme slúi Egypanom? Veï bolo ove¾a lepšie slúi Egypanom, ako zomrie na púšti.“ ' where spis = 'Ex' and vers = 1 and k = 14 and v = 12
+update biblia set nvg = 'Mojiš povedal ¾udu: „Nebojte sa! Stojte pevne a_pozerajte, ako vás dnes Pán zachráni. Egypanov, ktorıch teraz vidíte, u nikdy viac vidie nebudete. ' where spis = 'Ex' and vers = 1 and k = 14 and v = 13
+update biblia set nvg = 'Pán bude za vás bojova a_vy budete mlèa.“' where spis = 'Ex' and vers = 1 and k = 14 and v = 14
+update biblia set nvg = 'A_Pán povedal Mojišovi: „Èo voláš ku mne? Povedz Izraelitom, aby sa pohli. ' where spis = 'Ex' and vers = 1 and k = 14 and v = 15
+update biblia set nvg = 'Ty zdvihni svoju palicu a_vystri ruku nad more a_rozde¾ ho, aby Izraeliti mohli prejs stredom mora ako po súši. ' where spis = 'Ex' and vers = 1 and k = 14 and v = 16
+update biblia set nvg = 'Ja zatvrdím srdce Egypanov a_budú sa hna za nimi; a_na faraónovi, na celom jeho vojsku, na jeho vozoch a_jazde ukáem svoju slávu. ' where spis = 'Ex' and vers = 1 and k = 14 and v = 17
+update biblia set nvg = 'Egypania spoznajú, e ja som Pán, keï ukáem svoju slávu na faraónovi i_na jeho vozoch a_jazde.“' where spis = 'Ex' and vers = 1 and k = 14 and v = 18
+update biblia set nvg = 'Tu sa Boí anjel, èo šiel pred izraelskım táborom, zdvihol a_išiel za ním. A_s_ním aj oblaènı ståp zmenil svoje doterajšie miesto — prešiel spredu zaò. ' where spis = 'Ex' and vers = 1 and k = 14 and v = 19
+update biblia set nvg = 'Postavil sa medzi egyptskı tábor a_izraelskı tábor. Oblak bol pre jednıch temnı, druhım osvet¾oval noc, a_tak sa celú noc nemohli jedni k_druhım priblíi.' where spis = 'Ex' and vers = 1 and k = 14 and v = 20
+update biblia set nvg = 'Mojiš vystrel ruku nad more a_Pán ho celú noc prudkım horúcim vetrom rozháòal a_vysúšal. Voda sa rozdelila ' where spis = 'Ex' and vers = 1 and k = 14 and v = 21
+update biblia set nvg = 'a_Izraeliti šli stredom mora po suchu, kım voda bola ako múr po ich pravici a_¾avici. ' where spis = 'Ex' and vers = 1 and k = 14 and v = 22
+update biblia set nvg = 'Egypania ich prenasledovali. Všetky faraónove kone, vozy a_jazdci sa pustili za nimi doprostred mora. ' where spis = 'Ex' and vers = 1 and k = 14 and v = 23
+update biblia set nvg = 'Ale v_èase rannej stráe sa Pán pozrel z_ohnivého a_oblaèného ståpa na Egypanov a_ich vojsko uviedol do zmätku. ' where spis = 'Ex' and vers = 1 and k = 14 and v = 24
+update biblia set nvg = 'Hamoval kolesá na ich vozoch, take mohli len ako napredova. Preto Egypania hovorili: „Utekajme pred Izraelitmi, lebo Pán za nich bojuje proti nám.“' where spis = 'Ex' and vers = 1 and k = 14 and v = 25
+update biblia set nvg = 'A_Pán povedal Mojišovi: „Vystri ruku nad more, aby sa vody vrátili na Egypanov, na ich vozy a_na ich jazdcov.“ ' where spis = 'Ex' and vers = 1 and k = 14 and v = 26
+update biblia set nvg = 'Mojiš vystrel ruku nad more a_ono sa nad ránom vrátilo na svoje pôvodné miesto. Vody sa valili oproti utekajúcim Egypanom a_Pán ich prikryl vlnami uprostred mora. ' where spis = 'Ex' and vers = 1 and k = 14 and v = 27
+update biblia set nvg = 'Vody sa vrátili a_pokryli vozy i_jazdcov celého faraónovho vojska, ktoré sa pustilo za Izraelitmi do mora. Ani jeden z_nich neostal. ' where spis = 'Ex' and vers = 1 and k = 14 and v = 28
+update biblia set nvg = 'No Izraeliti prešli stredom mora po suchu a_voda bola ako múr po ich pravici a_¾avici.' where spis = 'Ex' and vers = 1 and k = 14 and v = 29
+update biblia set nvg = 'Takto Pán v_ten deò vyslobodil Izrael z_rúk Egypanov. Videli màtvych Egypanov na morskom brehu ' where spis = 'Ex' and vers = 1 and k = 14 and v = 30
+update biblia set nvg = 'i_mocnú ruku, ktorú Pán zdvihol proti nim. ¼ud sa bál a_uverili Pánovi i_jeho sluobníkovi Mojišovi.' where spis = 'Ex' and vers = 1 and k = 14 and v = 31
+go
+
+-- CHVAL_EX15	Ex 15, 1-4a. 8-13. 17-18
+-- 415	Ex 15, 1-2. 3-4. 5-6
+-- 416	Ex 15, 1b-2. 3-4. 5-6. 17-18
+-- 417	Ex 15, 8-9. 10+12. 17
+update biblia set lh_id = 'CHVAL_EX15' where spis = 'Ex' and vers = 1 and k = 15 and v between 1 and 4
+update biblia set lc_id = 416 where spis = 'Ex' and vers = 1 and k = 15 and v between 1 and 6
+update biblia set lh_id = 'CHVAL_EX15' where spis = 'Ex' and vers = 1 and k = 15 and v between 8 and 13
+update biblia set lc_id = 417 where spis = 'Ex' and vers = 1 and k = 15 and v between 8 and 10
+update biblia set lc_id = 417 where spis = 'Ex' and vers = 1 and k = 15 and v = 12
+update biblia set lh_id = 'CHVAL_EX15' where spis = 'Ex' and vers = 1 and k = 15 and v between 17 and 18
+update biblia set lc_id = 416 where spis = 'Ex' and vers = 1 and k = 15 and v between 17 and 18
+go
+
+update biblia set nvg = 'Vtedy Mojiš a synovia Izraela zaspievali Pánovi túto pieseò: / Spievajme Pánovi, / lebo sa preslávil: / koòa i_jazdca zmietol do mora.' where spis = 'Ex' and vers = 1 and k = 15 and v = 1
+update biblia set nvg = 'Pán je moja sila a_moja udatnos, / on ma zachránil. / On je môj Boh, chcem ho velebi; / Boh môjho otca, budem ho chváli.' where spis = 'Ex' and vers = 1 and k = 15 and v = 2
+update biblia set nvg = 'Pán je ako bojovník; / <span class="smallcaps">Pán</span> je jeho meno.' where spis = 'Ex' and vers = 1 and k = 15 and v = 3
+update biblia set nvg = 'Faraónove vozy a_jeho vojsko zmietol do mora; jeho najlepší bojovníci utonuli v Èervenom mori.' where spis = 'Ex' and vers = 1 and k = 15 and v = 4
+update biblia set nvg = 'Vlny ich pokryli; / sa kameò klesli do hlbín.' where spis = 'Ex' and vers = 1 and k = 15 and v = 5
+update biblia set nvg = 'Tvoja pravica, Pane, vyniká mocou, / tvoja pravica, Pane, zasiahla nepriate¾a.' where spis = 'Ex' and vers = 1 and k = 15 and v = 6
+update biblia set nvg = 'Pod dychom tvojho rozhorèenia sa nahromadili vody; / pohyblivé vlny ako hrádza postáli, / hlbiny stuhli uprostred mora.' where spis = 'Ex' and vers = 1 and k = 15 and v = 8
+update biblia set nvg = 'Nepriate¾ si povedal: „Budem ich prenasledova, chytím ich; / rozdelím koris a_moja duša sa nasıti. / Vytasím svoj meè, / moja ruka ich pozabíja!“' where spis = 'Ex' and vers = 1 and k = 15 and v = 9
+update biblia set nvg = 'Zavial tvoj vietor a_prikrylo ich more; / utonuli sa olovo v_mohutnıch vodách.' where spis = 'Ex' and vers = 1 and k = 15 and v = 10
+update biblia set nvg = 'Kto sa ti, Pane, spomedzi bohov vyrovná? / Kto sa ti vo velebe a_svätosti podobá? / Ty hroznı a_chvályhodnı, ty robíš zázraky.' where spis = 'Ex' and vers = 1 and k = 15 and v = 11
+update biblia set nvg = 'Vystrel si svoju ruku a_pohltila ich zem. ' where spis = 'Ex' and vers = 1 and k = 15 and v = 12
+update biblia set nvg = 'Vo svojom milosrdenstve si viedol ¾ud, ktorı si vykúpil, / svojou silou si ho niesol / k_svojmu svätému príbytku.' where spis = 'Ex' and vers = 1 and k = 15 and v = 13
+update biblia set nvg = 'Vovedieš ich a_zasadíš na vrchu svojho dedièstva, / v_svojom bezpeènom príbytku, ktorı si ty, Pane, urobil; / vo svätyni, ktorej základy kládli tvoje ruky, Pane.' where spis = 'Ex' and vers = 1 and k = 15 and v = 17
+update biblia set nvg = 'Pán bude kra¾ova naveky a_navdy.' where spis = 'Ex' and vers = 1 and k = 15 and v = 18
+go
+
+-- POST1_cCIT1_2UT	16, 1-18. 35
+-- 418	Ex 16, 1-5. 9-15
+-- 419	Ex 16, 2-4. 12-15
+update biblia set lh_id = 'POST1_cCIT1_2UT' where spis = 'Ex' and vers = 1 and k = 16 and v between 1 and 18
+update biblia set lh_id = 'POST1_cCIT1_2UT' where spis = 'Ex' and vers = 1 and k = 16 and v = 35
+update biblia set lc_id = 418 where spis = 'Ex' and vers = 1 and k = 16 and v between 1 and 5
+update biblia set lc_id = 418 where spis = 'Ex' and vers = 1 and k = 16 and v between 9 and 15
+go
+
+update biblia set nvg = 'Celá izraelská pospolitos sa pohla z_Elimu a_v_pätnásty deò druhého mesiaca po vıchode z_Egypta prišla na púšt Sin, ktorá je medzi Elimom a_Sinajom.' where spis = 'Ex' and vers = 1 and k = 16 and v = 1
+update biblia set nvg = 'A_celá izraelská pospolitos šomrala na púšti proti Mojišovi a_Áronovi. ' where spis = 'Ex' and vers = 1 and k = 16 and v = 2
+update biblia set nvg = 'Synovia Izraela im vraveli: „Bár by sme boli pomreli Pánovou rukou v_egyptskej krajine, keï sme sedávali pri hrncoch mäsa a_chleba sme sa mohli najes dosıta. Preèo ste nás vyviedli na túto púš? Aby ste celú pospolitos umorili hladom?“' where spis = 'Ex' and vers = 1 and k = 16 and v = 3
+update biblia set nvg = 'Pán povedal Mojišovi: „H¾a, ja vám zošlem chlieb z_neba ako dáï. ¼ud nech potom vyjde a_nech si nazbiera, ko¾ko bude potrebova na kadı deò. Tak ho vyskúšam, èi hodlá kráèa pod¾a môjho zákona, alebo nie. ' where spis = 'Ex' and vers = 1 and k = 16 and v = 4
+update biblia set nvg = 'V_šiesty deò nech odloia z_toho, èo donesú: bude toho dva razy to¾ko, ako nazbierajú v_iné dni.“' where spis = 'Ex' and vers = 1 and k = 16 and v = 5
+update biblia set nvg = 'Mojiš a_Áron povedali všetkım synom Izraela: „Veèer spoznáte, / e vás Pán vyviedol / z_egyptskej krajiny;' where spis = 'Ex' and vers = 1 and k = 16 and v = 6
+update biblia set nvg = 'a_ráno uvidíte / Pánovu slávu. // Lebo poèul vaše šomranie proti Pánovi. A_èo sme my, e proti nám repcete?“' where spis = 'Ex' and vers = 1 and k = 16 and v = 7
+update biblia set nvg = 'A_Mojiš pokraèoval: „Pán vám dá / veèer jes mäso / a_ráno chlieb dosıta, / lebo poèul vaše šomranie, ako ste proti nemu reptali. A_èo sme my? Nie proti nám šomrete, ale proti Pánovi.“' where spis = 'Ex' and vers = 1 and k = 16 and v = 8
+update biblia set nvg = 'Mojiš povedal Áronovi: „Povedz celej izraelskej pospolitosti: Predstúpte pred Pána, lebo poèul vaše šomranie.“ ' where spis = 'Ex' and vers = 1 and k = 16 and v = 9
+update biblia set nvg = 'Keï to Áron povedal celému zhromadeniu Izraelovıch synov, obrátili sa k_púšti a_vtom sa v_oblaku zjavila Pánova veleba. ' where spis = 'Ex' and vers = 1 and k = 16 and v = 10
+update biblia set nvg = 'Pán povedal Mojišovi: ' where spis = 'Ex' and vers = 1 and k = 16 and v = 11
+update biblia set nvg = '„Poèul som šomranie synov Izraela. Povedz im: Veèer budete jes mäso a_ráno sa nasıtite chlebom. A_poznáte, e ja som Pán, váš Boh.“' where spis = 'Ex' and vers = 1 and k = 16 and v = 12
+update biblia set nvg = 'Keï nastal veèer, prileteli prepelice a_pokryli tábor. Ráno zasa napadala okolo tábora rosa. ' where spis = 'Ex' and vers = 1 and k = 16 and v = 13
+update biblia set nvg = 'Keï pokryla povrch púšte, na zemi sa zjavilo èosi drobné, zrnité ako srieò. ' where spis = 'Ex' and vers = 1 and k = 16 and v = 14
+update biblia set nvg = 'Keï to synovia Izraela videli, vzájomne sa vypytovali: „Manhu?“ (èo znamená: „Èo je to?“). Lebo nevedeli, èo to je. Mojiš im povedal: „To je chlieb, ktorı vám dáva jes Pán. ' where spis = 'Ex' and vers = 1 and k = 16 and v = 15
+update biblia set nvg = 'Toto je to, èo prikázal Pán: ‚Nech si z_toho kadı nazbiera, ko¾ko potrebuje na jedenie, gomor na kadú hlavu; budete teda zbiera pod¾a poètu osôb, ktoré bıvajú vo vašom stane.‘“ ' where spis = 'Ex' and vers = 1 and k = 16 and v = 16
+update biblia set nvg = 'A_synovia Izraela urobili tak. Jeden nazbieral viac, druhı menej. ' where spis = 'Ex' and vers = 1 and k = 16 and v = 17
+update biblia set nvg = 'Potom to merali po gomori; a_ten, èo nazbieral viacej, nemal viac, ani menej ten, kto menej nazbieral, ale kadı nazbieral to¾ko, ko¾ko mohol zjes.' where spis = 'Ex' and vers = 1 and k = 16 and v = 18
+update biblia set nvg = 'Synovia Izraela jedli mannu štyridsa rokov, a kım neprišli do obıvate¾nej krajiny; tımto pokrmom sa ivili, kım sa nedotkli hraníc kanaánskej krajiny.' where spis = 'Ex' and vers = 1 and k = 16 and v = 35
+go
+
+-- POST1_cCIT1_2STR	17, 1-16
+-- 420	Ex 17, 1-7
+-- 421	Ex 17, 3-7
+-- 422	Ex 17, 8-13
+update biblia set lh_id = 'POST1_cCIT1_2STR' where spis = 'Ex' and vers = 1 and k = 17 and v between 1 and 16
+update biblia set lc_id = 420 where spis = 'Ex' and vers = 1 and k = 17 and v between 1 and 7
+update biblia set lc_id = 422 where spis = 'Ex' and vers = 1 and k = 17 and v between 8 and 13
+go
+
+update biblia set nvg = 'Celá pospolitos Izraelovıch synov odišla z_púšte Sin, pod¾a Boieho rozkazu prešli ïalšími úsekmi a_utáborili sa v_Rafidim. Tam nebola pitná voda pre ¾ud. ' where spis = 'Ex' and vers = 1 and k = 17 and v = 1
+update biblia set nvg = 'Preto ¾ud doliehal na Mojiša a_vravel: „Daj nám vodu na pitie!“ Mojiš im odvetil: „Preèo sa so mnou vadíte a_preèo pokúšate Pána?“ ' where spis = 'Ex' and vers = 1 and k = 17 and v = 2
+update biblia set nvg = 'Ale vody nebolo a_smädnı ¾ud reptal proti Mojišovi: „Naèo si nás len vyviedol z_Egypta? Aby si nás, naše deti a_náš dobytok umoril smädom?“' where spis = 'Ex' and vers = 1 and k = 17 and v = 3
+update biblia set nvg = 'Mojiš volal k_Pánovi: „Èo si poènem s_tımto ¾udom? Málo chıba a_ukameòuje ma.“ ' where spis = 'Ex' and vers = 1 and k = 17 and v = 4
+update biblia set nvg = 'Pán povedal Mojišovi: „Kráèaj pred ¾udom, zober so sebou nieko¾ko starších z_Izraela. Do ruky si vezmi palicu, ktorou si udieral rieku, a_choï! ' where spis = 'Ex' and vers = 1 and k = 17 and v = 5
+update biblia set nvg = 'H¾a, ja budem stá pred tebou na skale Horebu; udrieš na skalu, vytryskne z_nej voda a_¾ud sa napije.“ Mojiš tak urobil pred oèami starších Izraela ' where spis = 'Ex' and vers = 1 and k = 17 and v = 6
+update biblia set nvg = 'a_nazval to miesto Massa a_Meríba pre hádku synov Izraela a_preto, e pokúšali Pána, keï vraveli: „Je Pán medzi nami, alebo nie?“' where spis = 'Ex' and vers = 1 and k = 17 and v = 7
+update biblia set nvg = 'Tu prišiel Amalek a_v_Rafidim bojoval s_Izraelom. ' where spis = 'Ex' and vers = 1 and k = 17 and v = 8
+update biblia set nvg = 'Mojiš povedal Jozuemu: „Vyber nám muov a_choï, bojuj s_Amalekom. Ja budem zajtra stá na temene pahorku s_Boou palicou v_ruke.“' where spis = 'Ex' and vers = 1 and k = 17 and v = 9
+update biblia set nvg = 'Jozue urobil, ako mu povedal Mojiš, a_bojoval s_Amalekom. Mojiš, Áron a_Hur vystúpili na vrchol pahorku. ' where spis = 'Ex' and vers = 1 and k = 17 and v = 10
+update biblia set nvg = 'Kım mal Mojiš zdvihnuté ruky, víazil Izrael, ale keï ich spustil, víazil Amalek. ' where spis = 'Ex' and vers = 1 and k = 17 and v = 11
+update biblia set nvg = 'Lene Mojišovi ruky oaeli. Vzali teda kameò, podloili mu ho a_sadol si naò. Áron s_Hurom mu z_oboch strán ruky podopierali, a_tak mu ruky neochabli a do západu slnka.' where spis = 'Ex' and vers = 1 and k = 17 and v = 12
+update biblia set nvg = 'Jozue porazil Amaleka a_jeho ¾ud ostrím meèa. ' where spis = 'Ex' and vers = 1 and k = 17 and v = 13
+update biblia set nvg = 'A_Pán povedal Mojišovi: „Zapíš to na pamiatku do knihy a_povedz to Jozuemu, lebo vyhladím pamiatku na Amaleka pod nebom.“ ' where spis = 'Ex' and vers = 1 and k = 17 and v = 14
+update biblia set nvg = 'Mojiš postavil oltár a_dal mu meno <!-- Jahve --> <span class="smallcaps">Pán</span> Nissi (Pán je moja zástava), lebo ' where spis = 'Ex' and vers = 1 and k = 17 and v = 15
+update biblia set nvg = 'povedal: „Pretoe sa zdvihla ruka proti Pánovmu trónu, / Pán bude bojova proti Amalekovi / z_pokolenia na pokolenie.“ ' where spis = 'Ex' and vers = 1 and k = 17 and v = 16
+go
+
+-- POST1_cCIT1_2STV	18, 13-27
+update biblia set lh_id = 'POST1_cCIT1_2STV' where spis = 'Ex' and vers = 1 and k = 18 and v between 13 and 27
+go
+
+update biblia set nvg = 'Mojiš zasadol súdi ¾ud, ktorı stál pri Mojišovi od rána a do veèera. ' where spis = 'Ex' and vers = 1 and k = 18 and v = 13
+update biblia set nvg = 'Keï to videl jeho tes, èie èo všetko robí pre ¾ud, povedal: „Èo to všetko robíš pre ¾ud? Preèo zasadáš sám a_všetok ¾ud èaká od rána do veèera?“' where spis = 'Ex' and vers = 1 and k = 18 and v = 14
+update biblia set nvg = 'Mojiš mu odpovedal: „¼ud prichádza ku mne a_pıta si Boie rozhodnutie. ' where spis = 'Ex' and vers = 1 and k = 18 and v = 15
+update biblia set nvg = 'Keï sa dostanú do sporu, prichádzajú ku mne, aby som ich rozsúdil a_oznámil im Boie ustanovenia a_zákony.“' where spis = 'Ex' and vers = 1 and k = 18 and v = 16
+update biblia set nvg = 'Ale on odvetil: „Nerobíš to dobre. ' where spis = 'Ex' and vers = 1 and k = 18 and v = 17
+update biblia set nvg = 'Vyèerpávaš sa aj ty, aj tento ¾ud, èo je s_tebou. Táto úloha je nad tvoje sily, sám ju nezvládneš. ' where spis = 'Ex' and vers = 1 and k = 18 and v = 18
+update biblia set nvg = 'Poèúvaj moje slová a_moje rady a_Boh bude s_tebou: Ty zastupuj ¾ud pred Bohom a_prednášaj záleitosti Bohu ' where spis = 'Ex' and vers = 1 and k = 18 and v = 19
+update biblia set nvg = 'a_oznamuj ¾udu ustanovenia, zákony a_cestu, po ktorej majú kráèa, aj skutky, ktoré majú kona. ' where spis = 'Ex' and vers = 1 and k = 18 and v = 20
+update biblia set nvg = 'A_spomedzi všetkého ¾udu si vyhliadni schopnıch, bohabojnıch, nestrannıch muov, ktorí nenávidia úplatok, a_ustanov z_nich tisícnikov, stotníkov, pädesiatnikov a_desiatnikov; ' where spis = 'Ex' and vers = 1 and k = 18 and v = 21
+update biblia set nvg = 'a_oni nech súdia ¾ud v_kadom èase. Keï bude nieèo väèšie, nech to prednesú tebe a_oni budú rozhodova len o_menších veciach; bude ti ¾ahšie, keï sa podelíš s_inımi o_bremeno. ' where spis = 'Ex' and vers = 1 and k = 18 and v = 22
+update biblia set nvg = 'Ak to urobíš, splníš Boí rozkaz, jeho prikázania ti budú znesite¾né a_všetok tento ¾ud sa vráti v_pokoji na svoje miesta.“' where spis = 'Ex' and vers = 1 and k = 18 and v = 23
+update biblia set nvg = 'Keï to Mojiš poèul, urobil všetko, èo mu poradil. ' where spis = 'Ex' and vers = 1 and k = 18 and v = 24
+update biblia set nvg = 'Vybral z_celého Izraela schopnıch muov, ustanovil ich za predstavenıch ¾udu, za tisícnikov, stotníkov, pädesiatnikov a_desiatnikov, ' where spis = 'Ex' and vers = 1 and k = 18 and v = 25
+update biblia set nvg = 'a_oni súdili ¾ud v_kadom èase. Keï bolo nieèo ašie, predniesli to jemu, oni rozhodovali len ¾ahšie veci.' where spis = 'Ex' and vers = 1 and k = 18 and v = 26
+update biblia set nvg = 'Potom svojho tesa prepustil a_on sa vrátil do svojej krajiny.' where spis = 'Ex' and vers = 1 and k = 18 and v = 27
+go
+
+-- POST1_cCIT1_2PI	19, 1-19; 20, 18-21
+-- 423	Ex 19, 1-2. 9-11. 16-20b
+-- 424	Ex 19, 2-6a
+-- 425	Ex 19, 3-8a. 16-20b
+update biblia set lh_id = 'POST1_cCIT1_2PI' where spis = 'Ex' and vers = 1 and k = 19 and v between 1 and 19
+update biblia set lc_id = 423 where spis = 'Ex' and vers = 1 and k = 19 and v between 1 and 2
+update biblia set lc_id = 425 where spis = 'Ex' and vers = 1 and k = 19 and v between 3 and 8
+update biblia set lc_id = 423 where spis = 'Ex' and vers = 1 and k = 19 and v between 16 and 20
+go
+
+update biblia set nvg = 'V_treom mesiaci po odchode Izraela z_egyptskej krajiny v_ten istı deò prišli na púš Sinaj. ' where spis = 'Ex' and vers = 1 and k = 19 and v = 1
+update biblia set nvg = 'Keï odišli z_Rafidim, prišli na Sinajskú púš a_tam sa utáborili; tam na úpätí vrchu si Izrael postavil stany.' where spis = 'Ex' and vers = 1 and k = 19 and v = 2
+update biblia set nvg = 'Mojiš vystúpil k_Bohu. Pán ho zavolal z_vrchu a_povedal: „Toto povieš domu Jakuba / a_oznámiš synom Izraela: ' where spis = 'Ex' and vers = 1 and k = 19 and v = 3
+update biblia set nvg = 'Sami ste videli, èo som urobil Egypanom, / ako som vás niesol na orlích krídlach / a_priviedol k_sebe.' where spis = 'Ex' and vers = 1 and k = 19 and v = 4
+update biblia set nvg = 'Ak teda budete poèúva môj hlas / a_zachováva moju zmluvu, / budete mojím vlastníctvom medzi všetkımi národmi; / lebo moja je celá zem.' where spis = 'Ex' and vers = 1 and k = 19 and v = 5
+update biblia set nvg = 'Budete mi krá¾ovstvom kòazov / a_svätım národom. // Toto sú slová, ktoré povieš synom Izraela.“' where spis = 'Ex' and vers = 1 and k = 19 and v = 6
+update biblia set nvg = 'Mojiš šiel, zvolal starších ¾udu a_predniesol im všetko, èo mu Pán nariadil poveda. ' where spis = 'Ex' and vers = 1 and k = 19 and v = 7
+update biblia set nvg = 'A_všetok ¾ud naraz odpovedal: „Splníme všetko, èo Pán povedal.“ Keï potom Mojiš predniesol slová ¾udu Pánovi, ' where spis = 'Ex' and vers = 1 and k = 19 and v = 8
+update biblia set nvg = 'Pán mu povedal: „Ja prídem k_tebe v_hustom mraku, aby ma ¾ud poèul, keï sa budem s_tebou rozpráva, a_aby vdy veril aj tebe.“ Mojiš oznámil Pánovi všetko, èo hovoril ¾ud, ' where spis = 'Ex' and vers = 1 and k = 19 and v = 9
+update biblia set nvg = 'a_Pán mu povedal: „Choï k_¾udu a_posvä ich dnes a_zajtra; nech si vyperú šaty ' where spis = 'Ex' and vers = 1 and k = 19 and v = 10
+update biblia set nvg = 'a_pripravia sa na tretí deò. Na tretí deò zostúpi Pán pred oèami všetkého ¾udu na vrch Sinaj. ' where spis = 'Ex' and vers = 1 and k = 19 and v = 11
+update biblia set nvg = '¼udu urèi dookola hranice a_povedz: Neopováte sa vystúpi na vrch alebo èo len dotknú sa jeho hraníc. Kadı, kto by sa dotkol vrchu, musí zomrie. ' where spis = 'Ex' and vers = 1 and k = 19 and v = 12
+update biblia set nvg = 'Ruka sa ho nedotkne, ale treba ho ukameòova alebo prebodnú oštepom; èi to bude zviera alebo èlovek, neostane naive. Keï zaznie po¾nica, vtedy nech vystúpia na vrch.“' where spis = 'Ex' and vers = 1 and k = 19 and v = 13
+update biblia set nvg = 'Mojiš zostúpil z_vrchu k_¾udu a_posvätil ho. A_keï si vyprali šaty, ' where spis = 'Ex' and vers = 1 and k = 19 and v = 14
+update biblia set nvg = 'povedal im: „Buïte pripravení na tretí deò; nepribliujte sa k_svojim manelkám.“' where spis = 'Ex' and vers = 1 and k = 19 and v = 15
+update biblia set nvg = 'Na tretí deò za rána zaèalo hrmie a_blıska sa; vrch zahalil èierny mrak a_zaznieval mohutnı zvuk po¾nice. Všetok ¾ud v_tábore sa chvel od strachu. ' where spis = 'Ex' and vers = 1 and k = 19 and v = 16
+update biblia set nvg = 'Keï ich Mojiš vyviedol z_tábora v_ústrety Bohu, na úpätí vrchu zastali. ' where spis = 'Ex' and vers = 1 and k = 19 and v = 17
+update biblia set nvg = 'Vrch Sinaj bol celı zahalenı v_dyme, lebo Pán zostúpil naò v_ohni. Vystupoval z_neho dym ako z_pece a_celı vrch sa silno otriasal. ' where spis = 'Ex' and vers = 1 and k = 19 and v = 18
+update biblia set nvg = 'Zvuk po¾nice bol èoraz silnejší. Mojiš hovoril a_Boh mu odpovedal v_hrmení.' where spis = 'Ex' and vers = 1 and k = 19 and v = 19
+update biblia set nvg = 'Pán zostúpil na vrch Sinaj, na konèiar vrchu, a Mojiša povolal na konèiar.' where spis = 'Ex' and vers = 1 and k = 19 and v = 20
+go
+update biblia set nvg = 'Všetok ¾ud pozoroval hrmenie, blesky, zvuk po¾nice a_dymiaci vrch. Prestrašení a_zachvátení hrôzou zostali stá obïaleè ' where spis = 'Ex' and vers = 1 and k = 20 and v = 18
+update biblia set nvg = 'a_povedali Mojišovi: „Hovor s_nami ty a_budeme poèúva; nech s_nami nehovorí Boh, aby sme nezomreli.“ ' where spis = 'Ex' and vers = 1 and k = 20 and v = 19
+update biblia set nvg = 'Mojiš vravel ¾udu: „Nebojte sa, lebo Boh vás prišiel skúša, aby ste mali pred ním bázeò a_aby ste nehrešili.“ ' where spis = 'Ex' and vers = 1 and k = 20 and v = 20
+update biblia set nvg = '¼ud zostal stá obïaleè, ale Mojiš sa priblíil k_mraku, v_ktorom bol Boh.' where spis = 'Ex' and vers = 1 and k = 20 and v = 21
+go
+
+-- POST1_cCIT1_2SO	20, 1-17
+-- 427	Ex 20, 1-17
+-- 428	Ex 20, 1-17
+-- 429	Ex 20, 1-3. 7-8. 12-17
+update biblia set lh_id = 'POST1_cCIT1_2SO' where spis = 'Ex' and vers = 1 and k = 20 and v between 1 and 17
+update biblia set lc_id = 427 where spis = 'Ex' and vers = 1 and k = 20 and v between 1 and 17
+go
+update biblia set nvg = 'Boh povedal všetky tieto slová:' where spis = 'Ex' and vers = 1 and k = 20 and v = 1
+update biblia set nvg = '„Ja som Pán, tvoj Boh, ktorı a vyviedol z_egyptskej krajiny, z_domu otroctva.' where spis = 'Ex' and vers = 1 and k = 20 and v = 2
+update biblia set nvg = 'Nebudeš ma inıch bohov okrem mòa.' where spis = 'Ex' and vers = 1 and k = 20 and v = 3
+update biblia set nvg = 'Neurobíš si modlu ani nijakú podobu toho, èo je hore na nebi, dole na zemi alebo vo vodách pod zemou. ' where spis = 'Ex' and vers = 1 and k = 20 and v = 4
+update biblia set nvg = 'Nebudeš sa im klaòa ani ich uctieva. Lebo ja som Pán, tvoj Boh, Boh iarlivı, ktorı trestá neprávosti otcov na deoch do tretieho a_štvrtého pokolenia u_tıch, èo ma nenávidia, ' where spis = 'Ex' and vers = 1 and k = 20 and v = 5
+update biblia set nvg = 'ale tım, èo ma milujú a_zachovávajú moje prikázania, preukazujem priazeò a do tisíceho pokolenia.' where spis = 'Ex' and vers = 1 and k = 20 and v = 6
+update biblia set nvg = 'Nevyslovíš meno Pána, svojho Boha, nadarmo. Lebo Pán nenechá bez trestu toho, kto by zneuctil meno Pána, svojho Boha.' where spis = 'Ex' and vers = 1 and k = 20 and v = 7
+update biblia set nvg = 'Pamätaj na sobotnı deò a_zasvä ho. ' where spis = 'Ex' and vers = 1 and k = 20 and v = 8
+update biblia set nvg = 'Šes dní budeš pracova a_tvori všetky svoje diela, ' where spis = 'Ex' and vers = 1 and k = 20 and v = 9
+update biblia set nvg = 'ale siedmy deò je sobota Pána, tvojho Boha. V_ten deò nebudeš kona nijakú prácu ani ty, ani tvoj syn alebo tvoja dcéra, ani tvoj sluha alebo tvoja slúka, ani tvoj dobytok, ani prišelec, èo bıva v_tvojich bránach. ' where spis = 'Ex' and vers = 1 and k = 20 and v = 10
+update biblia set nvg = 'Lebo Pán za šes dní utvoril nebo i_zem, more a_všetko, èo je v_nich a_na siedmy deò odpoèíval. Preto Pán sobotu poehnal a_vyhlásil ju za svätú.' where spis = 'Ex' and vers = 1 and k = 20 and v = 11
+update biblia set nvg = 'Cti svojho otca a_svoju matku, aby si dlho il v_krajine, ktorú ti dá Pán, tvoj Boh.' where spis = 'Ex' and vers = 1 and k = 20 and v = 12
+update biblia set nvg = 'Nezabiješ.' where spis = 'Ex' and vers = 1 and k = 20 and v = 13
+update biblia set nvg = 'Nescudzoloíš.' where spis = 'Ex' and vers = 1 and k = 20 and v = 14
+update biblia set nvg = 'Nepokradneš.' where spis = 'Ex' and vers = 1 and k = 20 and v = 15
+update biblia set nvg = 'Nebudeš krivo svedèi proti svojmu blínemu.' where spis = 'Ex' and vers = 1 and k = 20 and v = 16
+update biblia set nvg = 'Nebudeš iadostivo túi po dome svojho blíneho. / Nebudeš túi po jeho manelke, ani po jeho sluhovi, ani po slúke, ani po volovi, ani po oslovi, ani po nièom, èo mu patrí.“' where spis = 'Ex' and vers = 1 and k = 20 and v = 17
 go
