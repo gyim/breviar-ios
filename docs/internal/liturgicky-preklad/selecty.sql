@@ -47,7 +47,11 @@ where sur like 'Ex%'
 -- or sur like 'Ezd%'
 order by 2
 
+select * from biblia where spis = 'Ex'
+and nvg is not null
+
 /*
 select * from biblia where spis = 'Tob'
 and nvg is not null
 */
+
