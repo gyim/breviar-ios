@@ -41,13 +41,33 @@ where sur like '2Kr %'
 or sur like '2 Kr %'
 */
 
+/*
 select -- top 100 
 * from lc
 where sur like 'Ex%'
 -- or sur like 'Ezd%'
 order by 2
 
-/*
+select * from biblia where spis = 'Ex'
+and nvg is not null
+
 select * from biblia where spis = 'Tob'
 and nvg is not null
+
+
+select -- top 100 
+* from lc
+where sur like 'Lv%'
+order by 2
+
+select * from biblia where spis = 'Lv'
+and nvg is not null
 */
+
+select -- top 100 
+* from lc
+where sur like 'Nm%'
+order by 2
+
+select * from biblia where spis = 'Nm'
+and nvg is not null

@@ -281,6 +281,21 @@ update biblia set nvg = 'Lebo keï sa faraón zatvrdil a_nechcel nás prepusti, Pá
 update biblia set nvg = 'A_to bude ako znamenie na tvojej ruke a_ako pamätnı prívesok medzi tvojimi oèami; lebo Pán nás silnou rukou vyviedol z_Egypta.“' where spis = 'Ex' and vers = 1 and k = 13 and v = 16
 go
 
+-- 02FEB_cCIT1	13, 1-3a. 11-16
+update biblia set lh_id = '02FEB_cCIT1' where spis = 'Ex' and vers = 1 and k = 13 and v between 1 and 3
+update biblia set lh_id = '02FEB_cCIT1' where spis = 'Ex' and vers = 1 and k = 13 and v between 11 and 16
+go
+update biblia set nvg = 'Pán povedal Mojišovi: ' where spis = 'Ex' and vers = 1 and k = 13 and v = 1
+update biblia set nvg = '„Zasvä mi všetko prvorodené, èo u_synov Izraela otvára lono matky, tak z_¾udí, ako aj z_dobytka; lebo to všetko je moje.“' where spis = 'Ex' and vers = 1 and k = 13 and v = 2
+update biblia set nvg = 'A_Mojiš povedal ¾udu: [...]' where spis = 'Ex' and vers = 1 and k = 13 and v = 3
+update biblia set nvg = '„Keï a Pán vovedie do krajiny Kanaánèanov, ako prisahal tebe i_tvojim otcom, a_dá ti ju, ' where spis = 'Ex' and vers = 1 and k = 13 and v = 11
+update biblia set nvg = 'oddelíš Pánovi všetko, èo otvára lono matky, aj prvorodené z_tvojho dobytka; všetko, èo budeš ma muského rodu, zasvätíš Pánovi. ' where spis = 'Ex' and vers = 1 and k = 13 and v = 12
+update biblia set nvg = 'Prvorodené os¾a vymeníš ovcou. Ak ho nevykúpiš, zabiješ ho. Ale kadého prvorodeného èloveka zo svojich synov vykúpiš peniazmi.' where spis = 'Ex' and vers = 1 and k = 13 and v = 13
+update biblia set nvg = 'Keï sa a v_budúcnosti tvoj syn opıta: ‚Èo to znamená?‘, odpovieš mu: ‚Pán nás vyviedol silnou rukou z_Egypta, z_domu otroctva. ' where spis = 'Ex' and vers = 1 and k = 13 and v = 14
+update biblia set nvg = 'Lebo keï sa faraón zatvrdil a_nechcel nás prepusti, Pán pobil všetko prvorodené v_egyptskej krajine, od prvorodeného z_èloveka a po prvorodené z_dobytka. Preto obetujem Pánovi všetko muského rodu, èo otvára lono matky, a_vykupujem všetkıch svojich prvorodenıch synov.‘ ' where spis = 'Ex' and vers = 1 and k = 13 and v = 15
+update biblia set nvg = 'A_to bude ako znamenie na tvojej ruke a_ako pamätnı prívesok medzi tvojimi oèami; lebo Pán nás silnou rukou vyviedol z_Egypta.“' where spis = 'Ex' and vers = 1 and k = 13 and v = 16
+go
+
 -- POST1_cCIT1_2NE	13, 17 — 14, 9
 -- 414	Ex 14, 5-18
 update biblia set lh_id = 'POST1_cCIT1_2NE' where spis = 'Ex' and vers = 1 and k = 13 and v between 17 and 22
@@ -538,7 +553,9 @@ update biblia set nvg = 'Nebudeš prijíma úplatky, lebo ony zaslepia aj múdrych 
 update biblia set nvg = 'Cudzinca nebudeš utláèa; veï poznáte ivot cudzincov, lebo aj vy ste boli cudzincami v_egyptskej krajine.' where spis = 'Ex' and vers = 1 and k = 23 and v = 9
 go
 
+-- 02OKT_rCIT	Ex 23, 20-21
 -- 431	Ex 23, 20-23a
+update biblia set lh_id = '02OKT_rCIT' where spis = 'Ex' and vers = 1 and k = 23 and v between 20 and 21
 update biblia set lc_id = 431 where spis = 'Ex' and vers = 1 and k = 23 and v between 20 and 23
 go
 update biblia set nvg = 'Toto hovorí Pán: "Pošlem pred tebou anjela, aby a chránil na ceste a priviedol a na miesto, ktoré som pripravil.' where spis = 'Ex' and vers = 1 and k = 23 and v = 20
@@ -619,11 +636,13 @@ update biblia set nvg = 'Pán mu odpovedal: "Zo svojej knihy vytriem toho, kto sa
 update biblia set nvg = 'Ty len choï a veï tento ¾ud ta, kam som ti prikázal; môj anjel pôjde pred tebou. Keï príde deò navštívenia, potrestám ich aj za tento hriech."' where spis = 'Ex' and vers = 1 and k = 32 and v = 34
 go
 
+-- OCR2STVc_CIT1	33, 17
 -- POST1_cCIT1_3STR	33, 7-11. 18-23; 34, 5-9. 29-35
 -- 441	Ex 33, 7-11; 34, 5b-9. 28
 -- 442	Ex 34, 29-35
 -- 443	Ex 34, 4b-6. 8-9
 update biblia set lh_id = 'POST1_cCIT1_3STR' where spis = 'Ex' and vers = 1 and k = 33 and v between 7 and 11
+update biblia set lh_id = 'OCR2STVc_CIT1' where spis = 'Ex' and vers = 1 and k = 33 and v = 17
 update biblia set lh_id = 'POST1_cCIT1_3STR' where spis = 'Ex' and vers = 1 and k = 33 and v between 18 and 23
 update biblia set lc_id = 441 where spis = 'Ex' and vers = 1 and k = 33 and v between 7 and 11
 update biblia set lh_id = 'POST1_cCIT1_3STR' where spis = 'Ex' and vers = 1 and k = 34 and v between 5 and 9
@@ -638,6 +657,9 @@ update biblia set nvg = 'A_keï šiel k_stánku Mojiš, všetok ¾ud vstal; kadı sa 
 update biblia set nvg = 'A_len èo vošiel do stánku, zostúpil oblaènı ståp; ostal stá pri vchode a_Pán sa rozprával s_Mojišom. ' where spis = 'Ex' and vers = 1 and k = 33 and v = 9
 update biblia set nvg = 'Všetci videli, ako pri vchode do stánku stojí oblaènı ståp. / Stáli a_klaòali sa pri vchode do svojich stanov. ' where spis = 'Ex' and vers = 1 and k = 33 and v = 10
 update biblia set nvg = 'A_Pán sa rozprával s_Mojišom z_tváre do tváre, ako sa èlovek rozpráva so svojím priate¾om. Keï sa potom vrátil do tábora, jeho sluobník mladík Jozue, Nunov syn, neodchádzal zo stánku. ' where spis = 'Ex' and vers = 1 and k = 33 and v = 11
+
+update biblia set nvg = 'Pán povedal Mojišovi: [...] Našiel si milos v_mojich oèiach a_poznám a zo všetkıch najlepšie.' where spis = 'Ex' and vers = 1 and k = 33 and v = 17
+
 update biblia set nvg = '[...] „Uká mi svoju slávu.“ ' where spis = 'Ex' and vers = 1 and k = 33 and v = 18
 update biblia set nvg = 'On odpovedal: „Ukáem ti všetku dobrotu a_vyslovím pred tebou meno Pána. Z¾utujem sa, nad kım budem chcie, a_láskavı budem, ku komu budem chcie.“ ' where spis = 'Ex' and vers = 1 and k = 33 and v = 19
 update biblia set nvg = 'Ale vravel: „Nebudeš môc vidie moju tvár, lebo èlovek ma nemôe vidie a_osta naive.“ ' where spis = 'Ex' and vers = 1 and k = 33 and v = 20
