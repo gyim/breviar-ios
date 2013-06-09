@@ -62,7 +62,6 @@ order by 2
 
 select * from biblia where spis = 'Lv'
 and nvg is not null
-*/
 
 select -- top 100 
 * from lc
@@ -70,4 +69,12 @@ where sur like 'Nm%'
 order by 2
 
 select * from biblia where spis = 'Nm'
+and nvg is not null
+*/
+
+select * from lc
+where sur like 'Sir%'
+order by 2
+
+select * from biblia where spis = 'Sir'
 and nvg is not null
