@@ -375,6 +375,19 @@ update biblia set nvg = 'Daj odmenu tım, èo sa spoliehajú na teba, / aby sa ukáz
 update biblia set nvg = 'pre blahovô¾u voèi svojmu ¾udu / a_veï nás na cestu spravodlivosti, / nech vedia všetci, èo ijú na zemi, / e ty si Boh vekov.' where spis = 'Sir' and vers = 1 and k = 36 and v = 19
 go
 
+-- SCUC_OCR_cCIT1	39, 1b-14
+update biblia set lh_id = 'CHVAL_SIR36VG' where spis = 'Sir' and vers = 1 and k = 39 and v between 1 and 14
+go
+
+update biblia set nvg = 'Múdry èlovek / preskúma múdros všetkıch predkov / a_bude sa zapodieva vırokmi prorokov.' where spis = 'Sir' and vers = 1 and k = 39 and v = 1
+update biblia set nvg = 'Bude ma na mysli, / èo rozprávali slávni muovia, / a_pochopí dôvtip obraznej reèi.' where spis = 'Sir' and vers = 1 and k = 39 and v = 2
+update biblia set nvg = 'Bude skúma a_bude sa zaobera / tajomstvami podobenstiev.' where spis = 'Sir' and vers = 1 and k = 39 and v = 3
+update biblia set nvg = 'Bude kona slubu u_ve¾moov; / ba zjaví sa aj pred knieatami.' where spis = 'Sir' and vers = 1 and k = 39 and v = 4
+update biblia set nvg = 'Bude chodi po krajine inıch národov / a_zistí, èo je v_¾uïoch dobré a_èo zlé.' where spis = 'Sir' and vers = 1 and k = 39 and v = 5
+update biblia set nvg = 'U na úsvite pozdvihuje svoje srdce / k_Pánovi, ktorı ho stvoril, / a_modlí sa pred tvárou Najvyššieho.' where spis = 'Sir' and vers = 1 and k = 39 and v = 6
+update biblia set nvg = 'Otvorí svoje ústa na modlitbu / a_bude odprosova za svoje preèiny.' where spis = 'Sir' and vers = 1 and k = 39 and v = 7
+go
+
 -- 1647	Sir 39, 8-14
 update biblia set lc_id = 1647 where spis = 'Sir' and vers = 1 and k = 39 and v between 8 and 14
 go
@@ -399,3 +412,117 @@ update biblia set nvg = 'Vzdávajte hold jeho menu, / oslavujte a vychva¾ujte ho 
 update biblia set nvg = '„Všetky Pánove diela sú velmi dobré."' where spis = 'Sir' and vers = 1 and k = 39 and v = 21
 go
 
+-- 1649	Sir 42, 15-26
+-- OCR1STVc_CIT1	42, 15 – 43, 13
+update biblia set lh_id = 'OCR1STVc_CIT1' where spis = 'Sir' and vers = 1 and k = 42 and v between 15 and 26
+update biblia set lc_id = 1649 where spis = 'Sir' and vers = 1 and k = 42 and v between 15 and 26
+update biblia set lh_id = 'OCR1STVc_CIT1' where spis = 'Sir' and vers = 1 and k = 43 and v between 1 and 13
+go
+
+update biblia set nvg = 'Chcem spomína na Pánovo dielo, / rozhlasova budem, èo som videl. / Na Pánovo slovo vznikli jeho diela; / on ich stvoril pod¾a svojho rozhodnutia.' where spis = 'Sir' and vers = 1 and k = 42 and v = 15
+update biblia set nvg = 'iarivé slnko pozerá na všetko, / Pánovo dielo je plné jeho slávy.' where spis = 'Sir' and vers = 1 and k = 42 and v = 16
+update biblia set nvg = 'Pánovi svätí nie sú schopní vyrozpráva / všetky jeho obdivuhodné èiny. / Pán upevnil svoje voje,  / aby pevne stáli na jeho slávu.' where spis = 'Sir' and vers = 1 and k = 42 and v = 17
+update biblia set nvg = 'On skúma priepasti aj ¾udské srdce, / vidí jasne do ich zákutí.' where spis = 'Sir' and vers = 1 and k = 42 and v = 18
+update biblia set nvg = 'Pán pozná všetko, èo mono pozna, / vidí do znamení èias; / oznamuje, èo pominulo, aj to, èo prichádza, / a_odha¾uje stopy, èo vedú k_veciam tajomnım.' where spis = 'Sir' and vers = 1 and k = 42 and v = 19
+update biblia set nvg = 'Jeho pozornosti neunikne jediná myšlienka / a_nijaká reè sa pred ním neskryje.' where spis = 'Sir' and vers = 1 and k = 42 and v = 20
+update biblia set nvg = 'Usporiadal divy svojej múdrosti; / len on je pred vekmi a_bude naveky. / Nemono k_nemu niè prida, ' where spis = 'Sir' and vers = 1 and k = 42 and v = 21
+update biblia set nvg = 'ani z_neho ubra, / nepotrebuje radu od nikoho.' where spis = 'Sir' and vers = 1 and k = 42 and v = 22
+update biblia set nvg = 'Aké vzácne sú všetky jeho diela! / Sú ako iskra na poh¾ad.' where spis = 'Sir' and vers = 1 and k = 42 and v = 23
+update biblia set nvg = 'Všetko to ije a_ostáva naveky / a_všetko ho nevyhnutne poslúcha.' where spis = 'Sir' and vers = 1 and k = 42 and v = 24
+update biblia set nvg = 'Všetko je podvojné: jedno proti druhému; / niè neurobil nedostatoèné.' where spis = 'Sir' and vers = 1 and k = 42 and v = 25
+update biblia set nvg = 'Jedno potvrdzuje hodnotu druhého; / a_kto sa vie nasıti poh¾adom na jeho krásu?' where spis = 'Sir' and vers = 1 and k = 42 and v = 26
+go
+update biblia set nvg = 'Pıchou vıšin je èistá obloha, / krása neba je vo videní slávy.' where spis = 'Sir' and vers = 1 and k = 43 and v = 1
+update biblia set nvg = 'Slnko, keï sa ukáe na svojej ceste, hlása: / Obdivuhodné teleso, dielo Najvyššieho!' where spis = 'Sir' and vers = 1 and k = 43 and v = 2
+update biblia set nvg = 'Napoludnie vysušuje zem; / kto vydrí jeho pá¾avu? / Trojnásobne rozdúchava pec na diela horúèavy.' where spis = 'Sir' and vers = 1 and k = 43 and v = 3
+update biblia set nvg = 'Slnko vypa¾uje vrchy, vydychuje ohnivé pary / a_svojimi iarivımi lúèmi oslepuje oèi.' where spis = 'Sir' and vers = 1 and k = 43 and v = 4
+update biblia set nvg = 'Ve¾kı je Pán, ktorı ho stvoril, / veï na jeho slovo sa ponáh¾a svojou cestou.' where spis = 'Sir' and vers = 1 and k = 43 and v = 5
+update biblia set nvg = 'Aj mesiac dodriava svoj èas; / ukazuje obdobia a_oznaèuje vek.' where spis = 'Sir' and vers = 1 and k = 43 and v = 6
+update biblia set nvg = 'Mesiac je znamením pre sviatoènı deò, / je svetlom, ktoré sa po splne zmenšuje.' where spis = 'Sir' and vers = 1 and k = 43 and v = 7
+update biblia set nvg = 'Pod¾a neho je pomenovanı mesiac, / obdivuhodne rastie a do splnu.' where spis = 'Sir' and vers = 1 and k = 43 and v = 8
+update biblia set nvg = 'Je telesom tábora na vısostiach, / keï slávnostne iari na nebeskej oblohe.' where spis = 'Sir' and vers = 1 and k = 43 and v = 9
+update biblia set nvg = 'Krásou neba je hviezdna ozdoba, / osvecuje svet na Pánovıch vısostiach.' where spis = 'Sir' and vers = 1 and k = 43 and v = 10
+update biblia set nvg = 'Na slová Svätého rozostavia sa pod¾a príkazu / a_neunavia sa na svojich stráach.' where spis = 'Sir' and vers = 1 and k = 43 and v = 11
+update biblia set nvg = 'Pozri na dúhu a_zvelebuj toho, èo ju urobil, / je prekrásna vo svojej nádhere.' where spis = 'Sir' and vers = 1 and k = 43 and v = 12
+update biblia set nvg = 'Obopína nebo oblúkom slávy, / ruky Najvyššieho ho napäli.' where spis = 'Sir' and vers = 1 and k = 43 and v = 13
+go
+
+-- OCR1PIc_CIT1	43, 14-37
+update biblia set lh_id = 'OCR1STVc_CIT1' where spis = 'Sir' and vers = 1 and k = 43 and v between 14 and 37
+go
+
+update biblia set nvg = 'Boh svojím príkazom urıch¾uje sneh / a_metá blesky svojho súdu.' where spis = 'Sir' and vers = 1 and k = 43 and v = 14
+update biblia set nvg = 'A_tak sa otvárajú zásobárne / a_vylietajú oblaky ako vtáky.' where spis = 'Sir' and vers = 1 and k = 43 and v = 15
+update biblia set nvg = 'Svojou ve¾kou mocou zahusuje mraky / a_drobia sa na ¾adovcové krúpy. / Dunenie jeho hromu otriasa zemou.' where spis = 'Sir' and vers = 1 and k = 43 and v = 16
+update biblia set nvg = 'Pred jeho tvárou zachvejú sa vrchy. / Z_jeho vôle zaveje junı vietor,' where spis = 'Sir' and vers = 1 and k = 43 and v = 17
+update biblia set nvg = 'víchrica od severu a_veterná smrš.' where spis = 'Sir' and vers = 1 and k = 43 and v = 18
+update biblia set nvg = 'Rozsıpa sneh, ako keï vtáky zlietajú a_sadajú, / a_padá, ako keï sa spúšajú kobylky.' where spis = 'Sir' and vers = 1 and k = 43 and v = 19
+update biblia set nvg = 'Oko obdivuje jeho bielu krásu / a_srdce sa chveje, keï ho vidí pada.' where spis = 'Sir' and vers = 1 and k = 43 and v = 20
+update biblia set nvg = 'Sype na zem inova ako so¾ / a_keï zmrzne, je ako hroty na tàní.' where spis = 'Sir' and vers = 1 and k = 43 and v = 21
+update biblia set nvg = 'Zaveje studenı severák / a_na vode mráz vytvorí kryštály; / spoèinie na kadej stojatej vode / a_voda sa odeje sa pancierom.' where spis = 'Sir' and vers = 1 and k = 43 and v = 22
+update biblia set nvg = 'Strávi vrchy a_vypáli púš, / ako oheò znièí všetku zeleò.' where spis = 'Sir' and vers = 1 and k = 43 and v = 23
+update biblia set nvg = 'Neèakanı oblak je liekom na všetko / a_rosa padnutá po horúèave osviei.' where spis = 'Sir' and vers = 1 and k = 43 and v = 24
+update biblia set nvg = 'Boh svojou myšlienkou utíšil morské hlbiny / a_zasadil do nich ostrovy.' where spis = 'Sir' and vers = 1 and k = 43 and v = 25
+update biblia set nvg = 'Tí, èo sa plavia po mori, rozprávajú o_tom, / aké je nebezpeèné, / a_èudujeme sa, keï to poèujeme na vlastné uši.' where spis = 'Sir' and vers = 1 and k = 43 and v = 26
+update biblia set nvg = 'Sú tam skvelé a_obdivuhodné diela, / rozlièné druhy zverov / a všemonıch zvierat aj obludné tvory.' where spis = 'Sir' and vers = 1 and k = 43 and v = 27
+update biblia set nvg = 'Vïaka jemu šastne napreduje jeho posol / a_všetko sa upravuje pod¾a jeho slova.' where spis = 'Sir' and vers = 1 and k = 43 and v = 28
+update biblia set nvg = 'Ve¾a by sme ešte mohli hovori, / ale chıbajú nám slová; / jednım slovom: „On je všetko.“' where spis = 'Sir' and vers = 1 and k = 43 and v = 29
+update biblia set nvg = 'Kde vezmeme silu oslávi ho? / Veï on je Ve¾kı a_prevyšuje všetky svoje diela.' where spis = 'Sir' and vers = 1 and k = 43 and v = 30
+update biblia set nvg = 'Pán je hroznı a_nesmierne ve¾kı / a_jeho moc je obdivuhodná.' where spis = 'Sir' and vers = 1 and k = 43 and v = 31
+update biblia set nvg = 'Oslavujte a_velebte Pána, ko¾ko len vládzete; / on bude aj tak väèší, / jeho veleba je obdivuhodná.' where spis = 'Sir' and vers = 1 and k = 43 and v = 32
+update biblia set nvg = '(tento verš Neovulgáta vynecháva)' where spis = 'Sir' and vers = 1 and k = 43 and v = 33
+update biblia set nvg = 'Keï ho velebíte, pozbierajte všetky svoje sily / a_neochabujte, / lebo nikdy ho nebudete dostatoène chváli.' where spis = 'Sir' and vers = 1 and k = 43 and v = 34
+update biblia set nvg = 'Ktoe ho videl a_môe to opísa?! / A_kto ho zvelebí ako treba?!' where spis = 'Sir' and vers = 1 and k = 43 and v = 35
+update biblia set nvg = 'Mnohé ešte väèšie veci ne tieto sú ukryté, / lebo iba málo z_jeho diel vidíme.' where spis = 'Sir' and vers = 1 and k = 43 and v = 36
+update biblia set nvg = 'Ale Pán vytvoril všetko / a_nábonım ¾uïom dal múdros.' where spis = 'Sir' and vers = 1 and k = 43 and v = 37
+go
+
+-- OCR1SOc_CIT1	44, 1b-2. 16 – 45, 6
+-- 1650	Sir 44, 1. 10-15
+-- 1651	Sir 44, 1. 9-13
+-- 1652	Sir 44, 1bc. 4-7. 11-15
+update biblia set lh_id = 'OCR1SOc_CIT1' where spis = 'Sir' and vers = 1 and k = 44 and v between 1 and 2
+update biblia set lh_id = 'OCR1SOc_CIT1' where spis = 'Sir' and vers = 1 and k = 44 and v between 16 and 27
+update biblia set lh_id = 'OCR1SOc_CIT1' where spis = 'Sir' and vers = 1 and k = 45 and v between 1 and 6
+update biblia set lc_id = 1650 where spis = 'Sir' and vers = 1 and k = 44 and v = 1
+update biblia set lc_id = 1652 where spis = 'Sir' and vers = 1 and k = 44 and v between 4 and 7
+update biblia set lc_id = 1651 where spis = 'Sir' and vers = 1 and k = 44 and v = 9
+update biblia set lc_id = 1650 where spis = 'Sir' and vers = 1 and k = 44 and v between 10 and 15
+go
+
+update biblia set nvg = 'Chváli nám treba slávnych muov, / našich otcov, ako nasledovali po sebe.' where spis = 'Sir' and vers = 1 and k = 44 and v = 1
+update biblia set nvg = 'Pán ukázal ve¾kú slávu, / svoju vznešenos od vekov.' where spis = 'Sir' and vers = 1 and k = 44 and v = 2
+go
+update biblia set nvg = 'Pre svoju rozvahu stali sa vodcami ¾udu a pre svoju zbehlos v písmach viedli národy. ' where spis = 'Sir' and vers = 1 and k = 44 and v = 4
+update biblia set nvg = 'V ich vırokoch sú slová múdrosti; zostavovali piesne a nápevy, písali a prednášali básne. ' where spis = 'Sir' and vers = 1 and k = 44 and v = 5
+update biblia set nvg = 'Boli bohatí a obdarení silou; usilovali sa o krásny ivot a pokojne ili vo svojich rodinách. ' where spis = 'Sir' and vers = 1 and k = 44 and v = 6
+update biblia set nvg = 'Všetci dosiahli slávu u svojich súèasníkov, u za ich ivota ich chválili.' where spis = 'Sir' and vers = 1 and k = 44 and v = 7
+go
+update biblia set nvg = 'Sú aj takí, na ktorıch sa nespomína: zapadli, akoby ani neboli ili. Sú, akoby sa ani neboli narodili, a podobne aj ich potomstvo. ' where spis = 'Sir' and vers = 1 and k = 44 and v = 9
+update biblia set nvg = 'No oni boli milosrdní muovia a nikdy sa nezabudne na ich dobré skutky. ' where spis = 'Sir' and vers = 1 and k = 44 and v = 10
+update biblia set nvg = 'Zostávajú vo svojom potomstve, ' where spis = 'Sir' and vers = 1 and k = 44 and v = 11
+update biblia set nvg = 'posvätné dedièstvo sú ich vnukovia; ' where spis = 'Sir' and vers = 1 and k = 44 and v = 12
+update biblia set nvg = 'lebo ich potomstvo zostalo verné zmluve a vïaka im - aj ich synovia. Ich potomstvo zostane naveky a ich sláva nezanikne nikdy.' where spis = 'Sir' and vers = 1 and k = 44 and v = 13
+update biblia set nvg = 'Ich telá odpoèívajú v pokoji a ich meno ije z pokolenia na pokolenie. ' where spis = 'Sir' and vers = 1 and k = 44 and v = 14
+update biblia set nvg = 'O ich múdrosti rozprávajú národy a zhromadenı ¾ud ich ospevuje.' where spis = 'Sir' and vers = 1 and k = 44 and v = 15
+go
+update biblia set nvg = 'Henoch sa páèil Bohu a_bol prenesenı do raja, / aby dal národom príklad pokánia.' where spis = 'Sir' and vers = 1 and k = 44 and v = 16
+update biblia set nvg = 'Ukázalo sa, e Noe bol dokonale spravodlivı / a_v_èase hnevu stal sa zmierením.' where spis = 'Sir' and vers = 1 and k = 44 and v = 17
+update biblia set nvg = 'Kvôli nemu bol zachránenı zvyšok na zemi, / keï nastala potopa.' where spis = 'Sir' and vers = 1 and k = 44 and v = 18
+update biblia set nvg = 'Bola s_ním uzavretá veèná zmluva, / aby u nijaké telo nemohlo by znièené potopou.' where spis = 'Sir' and vers = 1 and k = 44 and v = 19
+update biblia set nvg = 'Abrahám bol ve¾kı otec mnohıch národov / a_ani škvrny sa na jeho sláve nenašlo; / zachoval zákon Najvyššieho / a_uzavrel zmluvu s_ním.' where spis = 'Sir' and vers = 1 and k = 44 and v = 20
+update biblia set nvg = 'Túto zmluvu potvrdil na vlastnom tele / a_v_skúške sa ukázal vernım.' where spis = 'Sir' and vers = 1 and k = 44 and v = 21
+update biblia set nvg = 'Preto mu pris¾úbil s_prísahou, / e v_jeho potomstve poehná národy / a_dá mu narás ako kopcu zeme' where spis = 'Sir' and vers = 1 and k = 44 and v = 22
+update biblia set nvg = 'a_jeho potomstvo ako hviezdy povıši / a_dá im dedièstvo od mora a k_moru / a_od Rieky a na kraj zeme.' where spis = 'Sir' and vers = 1 and k = 44 and v = 23
+update biblia set nvg = 'Aj s_Izákom si takisto poèínal / pre jeho otca Abraháma.' where spis = 'Sir' and vers = 1 and k = 44 and v = 24
+update biblia set nvg = 'Pán mu dal poehnanie pre všetky národy / a_potvrdil zmluvu nad Jakubovou hlavou.' where spis = 'Sir' and vers = 1 and k = 44 and v = 25
+update biblia set nvg = 'Priznal mu jeho poehnania / a_dal mu dedièstvo / a_rozdelil jeho podiel medzi dvanás kmeòov.' where spis = 'Sir' and vers = 1 and k = 44 and v = 26
+update biblia set nvg = 'Z_neho vyviedol milosrdného èloveka, / ktorı našiel milos v_oèiach všetkıch ¾udí' where spis = 'Sir' and vers = 1 and k = 44 and v = 27
+go
+update biblia set nvg = 'a_bol milı Bohu aj ¾uïom: / Mojiša, ktorého pamiatka je poehnaná.' where spis = 'Sir' and vers = 1 and k = 45 and v = 1
+update biblia set nvg = 'V_sláve ho pripodobnil svätım, / urobil ho ve¾kım na postrach nepriate¾om / a_na jeho slovo urıchlil znamenia.' where spis = 'Sir' and vers = 1 and k = 45 and v = 2
+update biblia set nvg = 'Oslávil ho pred oèami krá¾ov / a_dal mu moc nad svojím ¾udom / a_ukázal mu svoju slávu.' where spis = 'Sir' and vers = 1 and k = 45 and v = 3
+update biblia set nvg = 'Pre jeho vernos a_tichos ho posvätil / a_vyvolil ho spomedzi všetkıch ¾udí.' where spis = 'Sir' and vers = 1 and k = 45 and v = 4
+update biblia set nvg = 'Dal mu poèu svoj hlas / a_zaviedol ho do oblaku.' where spis = 'Sir' and vers = 1 and k = 45 and v = 5
+update biblia set nvg = 'Do rúk mu dal prikázania / a_zákon ivota a_múdrosti, / aby poúèal Jakuba / o_svojej zmluve / a_Izraela o_svojich nariadeniach.' where spis = 'Sir' and vers = 1 and k = 45 and v = 6
+go
