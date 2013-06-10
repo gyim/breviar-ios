@@ -526,3 +526,124 @@ update biblia set nvg = 'Pre jeho vernos a_tichos ho posvätil / a_vyvolil ho s
 update biblia set nvg = 'Dal mu poèu svoj hlas / a_zaviedol ho do oblaku.' where spis = 'Sir' and vers = 1 and k = 45 and v = 5
 update biblia set nvg = 'Do rúk mu dal prikázania / a_zákon ivota a_múdrosti, / aby poúèal Jakuba / o_svojej zmluve / a_Izraela o_svojich nariadeniach.' where spis = 'Sir' and vers = 1 and k = 45 and v = 6
 go
+
+-- OCR10NEc_CIT1	46, 1-12
+update biblia set lh_id = 'OCR1SOc_CIT1' where spis = 'Sir' and vers = 1 and k = 46 and v between 1 and 12
+go
+
+update biblia set nvg = 'Nunov syn Jozue, hrdina v_boji, / Mojišov zástupca v_prorockom úrade, / bol pod¾a svojho mena' where spis = 'Sir' and vers = 1 and k = 46 and v = 1
+update biblia set nvg = 'najväèším záchrancom Boích vyvolenıch; / potrestal vzbúrenıch nepriate¾ov,  / aby Izrael urobil dedièom.' where spis = 'Sir' and vers = 1 and k = 46 and v = 2
+update biblia set nvg = 'Akú slávu získal, keï zdvihol svoje ruky / a_zamával meèom proti mestu!' where spis = 'Sir' and vers = 1 and k = 46 and v = 3
+update biblia set nvg = 'Kto sa mu postavil na odpor? / Veï on viedol Pánove boje.' where spis = 'Sir' and vers = 1 and k = 46 and v = 4
+update biblia set nvg = 'Èi nezastalo na jeho pokyn slnko / a_nebol jeden deò ako dva?' where spis = 'Sir' and vers = 1 and k = 46 and v = 5
+update biblia set nvg = 'Vzıval mocného Najvyššieho,  / keï bojoval proti nepriate¾om zovšadia¾; / i_vypoèul ho ve¾kı Pán / v_kameòoch krupobitia ve¾mi ve¾kej sily.' where spis = 'Sir' and vers = 1 and k = 46 and v = 6
+update biblia set nvg = 'Zaútoèil na nepriate¾skı národ / a_znièil protivníkov na svahu,' where spis = 'Sir' and vers = 1 and k = 46 and v = 7
+update biblia set nvg = 'aby národy poznali silu jeho zbraní / a_e vedú vojnu proti Bohu: / veï išiel za chrbtom Mocného.' where spis = 'Sir' and vers = 1 and k = 46 and v = 8
+update biblia set nvg = 'U za Mojišovıch dní dokázal svoju útrpnos / on i_Jefonov syn Kaleb, / keï sa postavili proti zhromadeniu, / aby odvrátili národ od hriechu / a_umlèali zlostné šomranie.' where spis = 'Sir' and vers = 1 and k = 46 and v = 9
+update biblia set nvg = 'Preto boli oni dvaja zachránení / z_poètu šesstotisíc peších muov, / aby ich voviedli do dedièstva, / do krajiny, ktorá oplıva mliekom a_medom.' where spis = 'Sir' and vers = 1 and k = 46 and v = 10
+update biblia set nvg = 'A_Pán dal iba Kalebovi udatnos, / ktorá mu zostala a do staroby, / aby vystúpil na najvyššie miesto krajiny; / a_jeho potomstvo dostalo dedièstvo,' where spis = 'Sir' and vers = 1 and k = 46 and v = 11
+update biblia set nvg = 'aby všetci synovia Izraela videli, / e je dobre poslúcha Pána.' where spis = 'Sir' and vers = 1 and k = 46 and v = 12
+go
+
+-- 1653	Sir 47, 2-13
+update biblia set lc_id = 1650 where spis = 'Sir' and vers = 1 and k = 47 and v between 2 and 13
+go
+
+update biblia set nvg = 'Ako odde¾ujú tuk od obetného mäsa, tak bol oddelenı Dávid od synov Izraela.' where spis = 'Sir' and vers = 1 and k = 47 and v = 2
+update biblia set nvg = 'S levmi sa hrával ako s baránkami a s medveïmi zaobchádzal, akoby to boli oveèky. ' where spis = 'Sir' and vers = 1 and k = 47 and v = 3
+update biblia set nvg = 'Azda neporazil obra vo svojej mladosti a nezachránil národ od potupy? ' where spis = 'Sir' and vers = 1 and k = 47 and v = 4
+update biblia set nvg = 'Rukou prak roztoèil a zrazil spupného Goliáša. ' where spis = 'Sir' and vers = 1 and k = 47 and v = 5
+update biblia set nvg = 'Lebo vzıval Pána, Najvyššieho; a on dal silu jeho pravici, aby porazil udatného bojovníka a upevnil moc svojho národa. ' where spis = 'Sir' and vers = 1 and k = 47 and v = 6
+update biblia set nvg = 'Na jeho slávu spievali o desiatich tisícoch, chválili ho pre Pánovo poehnanie, veniec slávy mu ponúkli.' where spis = 'Sir' and vers = 1 and k = 47 and v = 7
+update biblia set nvg = 'Lebo pokoril nepriate¾ov zo všetkıch strán, poníil filištínskych protivníkov a zlomil ich moc a po dnešnı deò.' where spis = 'Sir' and vers = 1 and k = 47 and v = 8
+update biblia set nvg = 'Pri kadom svojom diele vzdával chválu Svätému a Vznešenému oslavnou reèou. ' where spis = 'Sir' and vers = 1 and k = 47 and v = 9
+update biblia set nvg = 'Pána chválil celım svojím srdcom a miloval Boha, svojho stvorite¾a.' where spis = 'Sir' and vers = 1 and k = 47 and v = 10
+update biblia set nvg = 'Ustanovil spevákov pri oltári a zloil pre nich ¾úbe melódie. ' where spis = 'Sir' and vers = 1 and k = 47 and v = 11
+update biblia set nvg = 'Dodal lesku slávnostiam a skrášlil všetky sviatky poèas roka tım, e chválili sväté meno Pána a od skorého rána sa ozıvala svätyòa.' where spis = 'Sir' and vers = 1 and k = 47 and v = 12
+update biblia set nvg = 'Pán ho oèistil od hriechov a naveky povıšil jeho moc. Dal mu dedièné krá¾ovstvo a slávny prestol v Izraeli.' where spis = 'Sir' and vers = 1 and k = 47 and v = 13
+go
+
+-- OCR14SOc_CIT1	47, 14-31
+update biblia set lh_id = 'OCR14SOc_CIT1' where spis = 'Sir' and vers = 1 and k = 47 and v between 14 and 31
+go
+
+update biblia set nvg = 'Po Dávidovi vystúpil múdry syn / a_jeho zásluhou bıval v_bezpeèí.' where spis = 'Sir' and vers = 1 and k = 47 and v = 14
+update biblia set nvg = 'Šalamún vládol v_pokojnıch dòoch. / Boh mu daroval pokoj zo všetkıch strán, / aby postavil dom jeho menu / a_pripravil trvalú svätyòu. / Akı si bol vzdelanı vo svojej mladosti' where spis = 'Sir' and vers = 1 and k = 47 and v = 15
+update biblia set nvg = 'a_naplnenı ako rieka múdrosou! / Tvoj duch pokryl zem' where spis = 'Sir' and vers = 1 and k = 47 and v = 16
+update biblia set nvg = 'a_naplnil si ju tajomnımi prirovnaniami. / Tvoje meno sa roznieslo na ïaleké ostrovy / a_bol si milovanı pre svoj pokoj.' where spis = 'Sir' and vers = 1 and k = 47 and v = 17
+update biblia set nvg = 'V_piesòach a_prísloviach, / v_prirovnaniach a_vysvetleniach / obdivovali a národy.' where spis = 'Sir' and vers = 1 and k = 47 and v = 18
+update biblia set nvg = 'V_mene Pána, Boha, / ktorı sa volá Bohom Izraela,' where spis = 'Sir' and vers = 1 and k = 47 and v = 19
+update biblia set nvg = 'nazbieral si zlata ako mosadze / a_striebra si nazhromadil ako olova.' where spis = 'Sir' and vers = 1 and k = 47 and v = 20
+update biblia set nvg = 'Ale svoje bedrá si dal enám / a_tvoje telo sa dostalo do jarma.' where spis = 'Sir' and vers = 1 and k = 47 and v = 21
+update biblia set nvg = 'Poškvrnil si svoju slávu / a_znesvätil svoje potomstvo, / privolal si hnev na svoje deti / a_spôsobil ve¾ké nariekanie pre svoju pochabos.' where spis = 'Sir' and vers = 1 and k = 47 and v = 22
+update biblia set nvg = 'A sa krá¾ovstvo rozdelilo vo dvoje / a_z_Efraima zaèala odbojná vláda.' where spis = 'Sir' and vers = 1 and k = 47 and v = 23
+update biblia set nvg = 'Ale Boh sa nezriekne svojho milosrdenstva, / ani neporuší a_neodvolá svoje slová, / nevyhubí od koreòa potomkov svojho vyvoleneného / a_neznièí potomstvo toho, kto miluje Pána. ' where spis = 'Sir' and vers = 1 and k = 47 and v = 24
+update biblia set nvg = 'Jakubovi teda ponechal zvyšok / a_Dávidovi koreò z_neho.' where spis = 'Sir' and vers = 1 and k = 47 and v = 25
+update biblia set nvg = 'Šalamún odišiel k_svojim otcom' where spis = 'Sir' and vers = 1 and k = 47 and v = 26
+update biblia set nvg = 'a_zanechal po sebe zo svojho potomstva / hlúpos národa ' where spis = 'Sir' and vers = 1 and k = 47 and v = 27
+update biblia set nvg = 'zbavenú rozvánosti, / Roboama, ktorı svojimi rozhodnutiami / rozvrátil národ,' where spis = 'Sir' and vers = 1 and k = 47 and v = 28
+update biblia set nvg = 'i_Nabatovho syna Jeroboama, / ktorı zviedol na hriech Izrael / a_Efraimu otvoril cestu hriechu. / A_ich hriechy sa ve¾mi mnoili;' where spis = 'Sir' and vers = 1 and k = 47 and v = 29
+update biblia set nvg = 'tak, e ich vyhnal z_ich krajiny.' where spis = 'Sir' and vers = 1 and k = 47 and v = 30
+update biblia set nvg = 'Dopúšali sa všetkıch neprávostí, / a kım na nich pomsta neprišla.' where spis = 'Sir' and vers = 1 and k = 47 and v = 31
+go
+
+-- 1654	Sir 48, 1-15
+-- 1655	Sir 48, 1-4. 9-11
+update biblia set lc_id = 1654 where spis = 'Sir' and vers = 1 and k = 48 and v between 1 and 15
+go
+
+update biblia set nvg = 'Vystúpil Eliáš, prorok ako oheò, a jeho slovo horelo ako fak¾a. ' where spis = 'Sir' and vers = 1 and k = 48 and v = 1
+update biblia set nvg = 'Priviedol na nich hlad a v svojej horlivosti zmenšil ich poèet. ' where spis = 'Sir' and vers = 1 and k = 48 and v = 2
+update biblia set nvg = 'Pánovım slovom zatvoril nebo a tri razy zvolal oheò z neba.' where spis = 'Sir' and vers = 1 and k = 48 and v = 3
+update biblia set nvg = 'Akı slávny si, Eliáš, svojimi zázrakmi! Kto sa môe chváli, e sa ti podobá? ' where spis = 'Sir' and vers = 1 and k = 48 and v = 4
+update biblia set nvg = 'Ty si màtveho zobudil zo smrti, Pánovım slovom z ríše zosnulıch. ' where spis = 'Sir' and vers = 1 and k = 48 and v = 5
+update biblia set nvg = 'Ty si vrhol krá¾ov do záhuby a oslavovanıch muov si zhodil z ich lóe; hravo si zlomil ich moc.' where spis = 'Sir' and vers = 1 and k = 48 and v = 6
+update biblia set nvg = 'Na Sinaji si poèúval vıpovede a na Horebe vıroky trestu. ' where spis = 'Sir' and vers = 1 and k = 48 and v = 7
+update biblia set nvg = 'Ty si pomazal krá¾ov na odplatu a ustanovil prorokov za svojich zástupcov.' where spis = 'Sir' and vers = 1 and k = 48 and v = 8
+update biblia set nvg = 'Ty si bol vzatı v ohnivej víchrici, na voze s ohnivımi koòmi. ' where spis = 'Sir' and vers = 1 and k = 48 and v = 9
+update biblia set nvg = 'Je napísané o tebe, e si urèenı pre budúce èasy mierni Pánov hnev prv, ne vzplanie, obráti srdce otca k synovi a obnovi Jakubove kmene.' where spis = 'Sir' and vers = 1 and k = 48 and v = 10
+update biblia set nvg = 'Blaení, èo a videli a èo zosnuli ako tvoji priatelia! ' where spis = 'Sir' and vers = 1 and k = 48 and v = 11
+update biblia set nvg = 'Lebo aj my, kım sme tu, ijeme, ale po smrti nebudeme ma také slávne meno.' where spis = 'Sir' and vers = 1 and k = 48 and v = 12
+update biblia set nvg = 'Keï Eliáša zakryla víchrica, jeho duch naplnil Elizea. On sa celı ivot netriasol pred mocnárom a silou ho nik nezdolal.' where spis = 'Sir' and vers = 1 and k = 48 and v = 13
+update biblia set nvg = 'Niè mu nebolo nemoné: jeho telo prorokovalo aj po smrti. ' where spis = 'Sir' and vers = 1 and k = 48 and v = 14
+update biblia set nvg = 'Za svojho ivota konal divy a aj po smrti robil zázraky.' where spis = 'Sir' and vers = 1 and k = 48 and v = 15
+go
+
+-- 1657	Sir 51, 1-12
+-- 1658	Sir 51, 17-27
+-- SCJM_ZVI_cCIT1/SCJM_ZVII_cCIT1	51, 1-17
+update biblia set lh_id = 'SCJM_ZVI_cCIT1' where spis = 'Sir' and vers = 1 and k = 51 and v between 1 and 17
+update biblia set lc_id = 1657 where spis = 'Sir' and vers = 1 and k = 51 and v between 1 and 12
+update biblia set lc_id = 1658 where spis = 'Sir' and vers = 1 and k = 51 and v between 17 and 27
+go
+
+update biblia set nvg = 'Oslavova a budem, Pane, Krá¾, / zvelebova a budem, Boe, moja spása.' where spis = 'Sir' and vers = 1 and k = 51 and v = 1
+update biblia set nvg = 'Oslavova budem tvoje meno, / lebo si moja pomoc a_ochrana;' where spis = 'Sir' and vers = 1 and k = 51 and v = 2
+update biblia set nvg = 'moje telo si vyslobodil zo záhuby, / z_osídel zlostného jazyka / a_od perí, èo falošne vedia hovori; / a_pred protivníkmi si mi pomohol. ' where spis = 'Sir' and vers = 1 and k = 51 and v = 3
+update biblia set nvg = 'Vyslobodil si ma / pre svoje ve¾ké milosrdenstvo a_pre svoje meno / z_osídel hotovıch ma pohlti,' where spis = 'Sir' and vers = 1 and k = 51 and v = 4
+update biblia set nvg = 'z_rúk, ktoré mi èíhali na ivot, / a_z_hrozného súenia, èo ma zvieralo;' where spis = 'Sir' and vers = 1 and k = 51 and v = 5
+update biblia set nvg = 'od dusivého ohòa, èo ma u obk¾úèil, / a_sprostred ohòa, kde som nezhorel, ' where spis = 'Sir' and vers = 1 and k = 51 and v = 6
+update biblia set nvg = 'z_håbky útrob podsvetia, / od poškvrneného jazyka, od falošnıch reèí / a_od šípov nespravodlivého jazyka. ' where spis = 'Sir' and vers = 1 and k = 51 and v = 7
+update biblia set nvg = 'Moja duša sa priblíila / a k_smrti ' where spis = 'Sir' and vers = 1 and k = 51 and v = 8
+update biblia set nvg = 'a_môj ivot / bol ve¾mi blízko priepasti podsvetia.' where spis = 'Sir' and vers = 1 and k = 51 and v = 9
+update biblia set nvg = 'Obk¾úèili ma zovšadia¾ / a_nebolo nikoho, kto by pomohol. / Ohliadal som sa po ¾udskej pomoci, ale márne. ' where spis = 'Sir' and vers = 1 and k = 51 and v = 10
+update biblia set nvg = 'A_spomenul som si na tvoje milosrdenstvo, Pane, / na všetko, èo si od veènosti spôsobil. ' where spis = 'Sir' and vers = 1 and k = 51 and v = 11
+update biblia set nvg = 'Lebo ty, Pane, zachraòuješ tıch, èo sa teba dria, / a_vyslobodzuješ ich z_rúk zloèincov. ' where spis = 'Sir' and vers = 1 and k = 51 and v = 12
+update biblia set nvg = 'Pozdvihol som zo zeme svoju pokornú modlitbu /a_prosil som, aby ma minula smr.' where spis = 'Sir' and vers = 1 and k = 51 and v = 13
+update biblia set nvg = 'Vzıval som Pána: „Ty si môj otec, / neopúšaj ma v_deò môjho súenia, / keï som bezmocnı v_èase namyslencov. ' where spis = 'Sir' and vers = 1 and k = 51 and v = 14
+update biblia set nvg = 'Neprestajne budem chváli tvoje meno, / oslavova ho budem svojím vyznaním.“ / Vypoèul si moju modlitbu,' where spis = 'Sir' and vers = 1 and k = 51 and v = 15
+update biblia set nvg = 'vyslobodil si ma zo záhuby / a_zachránil si ma v_èase nešastia.' where spis = 'Sir' and vers = 1 and k = 51 and v = 16
+update biblia set nvg = 'Preto a budem oslavova, budem a chváli / a_velebi meno Pánovo. ' where spis = 'Sir' and vers = 1 and k = 51 and v = 17
+go
+
+update biblia set nvg = 'Kım som bol ešte mladı, prv, ako som blúdil, verejne som v modlitbe prosil o múdros. ' where spis = 'Sir' and vers = 1 and k = 51 and v = 18
+update biblia set nvg = 'Pred samım chrámom som o òu vrúcne prosil a budem ju h¾ada a do posledného dychu. Ona mi vykvitla ako skoré hrozno, ' where spis = 'Sir' and vers = 1 and k = 51 and v = 19
+update biblia set nvg = 'moje srdce v nej nachádza potechu. Moja noha vykroèila na priamu cestu, vyh¾adávam ju od svojej mladosti. ' where spis = 'Sir' and vers = 1 and k = 51 and v = 20
+update biblia set nvg = 'Len trochu som napol sluch a poèul som ju; ' where spis = 'Sir' and vers = 1 and k = 51 and v = 21
+update biblia set nvg = 'našiel som mnoho múdrosti a ve¾kı pokrok som v nej urobil.' where spis = 'Sir' and vers = 1 and k = 51 and v = 22
+update biblia set nvg = 'Oslavova budem toho, èo mi dáva múdros. ' where spis = 'Sir' and vers = 1 and k = 51 and v = 23
+update biblia set nvg = 'Rozhodol som sa, e budem i pod¾a nej. Usiloval som sa o dobro a zahanbenı nebudem.' where spis = 'Sir' and vers = 1 and k = 51 and v = 24
+update biblia set nvg = 'Moja duša o òu zápasila: starostlivo som zachovával zákon. ' where spis = 'Sir' and vers = 1 and k = 51 and v = 25
+update biblia set nvg = 'Ruky som vystieral k vıšinám a pochopil som jej hlboké tajomstvá.' where spis = 'Sir' and vers = 1 and k = 51 and v = 26
+update biblia set nvg = 'Upriamil som na òu svoju dušu a našiel som ju v èistote.' where spis = 'Sir' and vers = 1 and k = 51 and v = 27
+go
