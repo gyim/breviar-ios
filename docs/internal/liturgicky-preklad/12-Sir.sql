@@ -161,10 +161,19 @@ update biblia set nvg = 'Zlá hodina dáva zabudnú na ve¾kú rozkoš / a_koniec èlo
 update biblia set nvg = 'Pred smrou nevychva¾uj nikoho, / lebo èloveka mono spozna pri jeho konci.' where spis = 'Sir' and vers = 1 and k = 11 and v = 30
 go
 
+-- CHVAL_SIR14VG	Sir 14, 22; 15, 3. 4. 6b -- ToDo do LH!!!
+update biblia set lh_id = 'CHVAL_SIR14VG' where spis = 'Sir' and vers = 1 and k = 14 and v = 22
+go
+
+update biblia set nvg = 'Blahoslavenı èlovek, ktorı zotrváva v múdrosti / a rozjíma o jej spravodlivosti / a v duchu premıš¾a o Boej prezieravosti.' where spis = 'Sir' and vers = 1 and k = 14 and v = 22
+go
+
 -- 1630	Sir 15, 1-6
 -- 1631	Sir 15, 16-21
 update biblia set lc_id = 1630 where spis = 'Sir' and vers = 1 and k = 15 and v between 1 and 6
 update biblia set lc_id = 1631 where spis = 'Sir' and vers = 1 and k = 15 and v between 16 and 21
+update biblia set lh_id = 'CHVAL_SIR39VG' where spis = 'Sir' and vers = 1 and k = 15 and v between 3 and 4
+update biblia set lh_id = 'CHVAL_SIR39VG' where spis = 'Sir' and vers = 1 and k = 15 and v = 6
 go
 
 update biblia set nvg = 'Kto sa bojí Boha, bude kona správne, a kto ije pod¾a zákona, dosiahne múdros. ' where spis = 'Sir' and vers = 1 and k = 15 and v = 1
@@ -257,3 +266,136 @@ update biblia set nvg = 'Tí, èo ma vysvet¾ujú, budú ma veènı ivot.“' where spi
 update biblia set nvg = 'Toto všetko je kniha zmluvy Najvyššieho,' where spis = 'Sir' and vers = 1 and k = 24 and v = 32
 update biblia set nvg = 'Zákon, ktorı nám odovzdal Mojiš / za dedièstvo Jakubovmu domu.' where spis = 'Sir' and vers = 1 and k = 24 and v = 33
 go
+
+-- 1638	Sir 26, 1-4. 16-21
+update biblia set lc_id = 1638 where spis = 'Sir' and vers = 1 and k = 26 and v between 1 and 4
+update biblia set lc_id = 1638 where spis = 'Sir' and vers = 1 and k = 26 and v between 16 and 21
+go
+
+update biblia set nvg = 'Mu dobrej eny je blaenı: poèet dní jeho ivota sa zdvojnásobí. ' where spis = 'Sir' and vers = 1 and k = 26 and v = 1
+update biblia set nvg = 'Statoèná ena oblauje mua a on v pokoji preíva roky svojho ivota. ' where spis = 'Sir' and vers = 1 and k = 26 and v = 2
+update biblia set nvg = 'Dobrá ena je dobrı dediènı podiel, mu ju dostane za dobré skutky ako podiel tıch, èo sa boja Boha. ' where spis = 'Sir' and vers = 1 and k = 26 and v = 3
+update biblia set nvg = 'Èi je bohatı, èi chudobnı, má pokojné srdce; ich poh¾ad je vdy radostnı. ' where spis = 'Sir' and vers = 1 and k = 26 and v = 4
+update biblia set nvg = 'Pôvab úprimnej eny potešuje mua a jej rozvaha ho posilòuje. ' where spis = 'Sir' and vers = 1 and k = 26 and v = 16
+update biblia set nvg = 'Citlivá a mlèanlivá ena je dar od Boha; ' where spis = 'Sir' and vers = 1 and k = 26 and v = 17
+update biblia set nvg = 'niè nevyvái dobre vychovanú enu. ' where spis = 'Sir' and vers = 1 and k = 26 and v = 18
+update biblia set nvg = 'Svätá a cudná ena je pôvab nad pôvab, ' where spis = 'Sir' and vers = 1 and k = 26 and v = 19
+update biblia set nvg = 'neocenite¾ná je jemná duša. ' where spis = 'Sir' and vers = 1 and k = 26 and v = 20
+update biblia set nvg = 'Ako slnko, èo vychádza svetu na Boej oblohe, tak je krása dobrej eny ozdobou jej domu. ' where spis = 'Sir' and vers = 1 and k = 26 and v = 21
+go
+
+-- 1640	Sir 27, 5-8
+-- 1639	Sir 27, 33 - 28, 9
+update biblia set lc_id = 1638 where spis = 'Sir' and vers = 1 and k = 27 and v between 5 and 8
+update biblia set lc_id = 1639 where spis = 'Sir' and vers = 1 and k = 27 and v = 33
+update biblia set lc_id = 1639 where spis = 'Sir' and vers = 1 and k = 28 and v between 1 and 9
+go
+
+update biblia set nvg = 'Ako pri osievaní ostanú na site smeti, tak je to aj s èlovekom: len èo zaène rozpráva, hneï vidno jeho nedostatky.' where spis = 'Sir' and vers = 1 and k = 27 and v = 5
+update biblia set nvg = 'V peci sa skúšajú vırobky hrnèiara a spravodlivos èloveka v skúške súenia.' where spis = 'Sir' and vers = 1 and k = 27 and v = 6
+update biblia set nvg = 'Ovocie ukáe, ako ošetrovali strom, a slovo odhalí, ako zmıš¾a srdce èloveka.' where spis = 'Sir' and vers = 1 and k = 27 and v = 7
+update biblia set nvg = 'Nechvá¾ nikoho, kım neprehovorí, lebo reè je skúšobnım kameòom pre ¾udí.' where spis = 'Sir' and vers = 1 and k = 27 and v = 8
+go
+update biblia set nvg = 'Hnev a nenávis obidvoje je odporné, len hriešnik sa ich pridàa.' where spis = 'Sir' and vers = 1 and k = 27 and v = 33
+go
+update biblia set nvg = 'Kto sa chce pomsti, zakúsi pomstu od Pána, ktorı si zachová jeho hriechy v pamäti.' where spis = 'Sir' and vers = 1 and k = 28 and v = 1
+update biblia set nvg = 'Odpus krivdu svojmu blínemu; potom sa aj tebe, keï budeš prosi, odpustia hriechy.' where spis = 'Sir' and vers = 1 and k = 28 and v = 2
+update biblia set nvg = 'Ak èlovek prechováva hnev proti blínemu, ako môe iada uzdravenie od Boha?' where spis = 'Sir' and vers = 1 and k = 28 and v = 3
+update biblia set nvg = 'Nemá súcit s èlovekom sebe podobnım, a odprosuje za svoje hriechy? ' where spis = 'Sir' and vers = 1 and k = 28 and v = 4
+update biblia set nvg = 'Prechováva v sebe hnev, hoci sám je iba smrte¾nım èlovekom; a iada odpustenie od Boha? Kto potom bude prosi za jeho hriechy?' where spis = 'Sir' and vers = 1 and k = 28 and v = 5
+update biblia set nvg = 'Pamätaj na svoj koniec a zanechaj nenávis. ' where spis = 'Sir' and vers = 1 and k = 28 and v = 6
+update biblia set nvg = 'Mysli na rozklad a smr a ostaò vernı prikázaniam.' where spis = 'Sir' and vers = 1 and k = 28 and v = 7
+update biblia set nvg = 'Pamätaj na prikázania a neprechovávaj hnev voèi blínemu! ' where spis = 'Sir' and vers = 1 and k = 28 and v = 8
+update biblia set nvg = 'Spomeò si na zmluvu s Najvyšším a povznes sa nad uráku.' where spis = 'Sir' and vers = 1 and k = 28 and v = 9
+go
+
+-- CHVAL_SIR31VG	Sir 31, 8-11 -- ToDo do LH!!!
+update biblia set lh_id = 'CHVAL_SIR31VG' where spis = 'Sir' and vers = 1 and k = 31 and v between 8 and 11
+go
+
+update biblia set nvg = 'Blahoslavenı je boháè, na ktorom niet škvrny, / ktorı sa nezháòa za zlatom / a neskladá svoju nádej do peòazí a pokladov.' where spis = 'Sir' and vers = 1 and k = 31 and v = 8
+update biblia set nvg = 'Kto je to, a budeme ho chváli? / Lebo urobil obdivuhodné veci uprostred svojho ¾udu.' where spis = 'Sir' and vers = 1 and k = 31 and v = 9
+update biblia set nvg = 'Kto sa takto osvedèil a je dokonalı? / Tomu patrí veèná sláva. / Kto mohol pochybi, a nepochybil, / spácha zlo, a neurobil to? ' where spis = 'Sir' and vers = 1 and k = 31 and v = 10
+update biblia set nvg = 'A tak je jeho bohatstvo upevnené v Pánovi / a o jeho dobrıch skutkoch bude hovori celé zhromadenie svätıch.' where spis = 'Sir' and vers = 1 and k = 31 and v = 11
+go
+
+-- 1644	Sir 35, 1-15
+-- 1645	Sir 35, 15b-17. 20-21
+update biblia set lc_id = 1644 where spis = 'Sir' and vers = 1 and k = 28 and v between 1 and 15
+update biblia set lc_id = 1645 where spis = 'Sir' and vers = 1 and k = 28 and v between 16 and 17
+update biblia set lc_id = 1645 where spis = 'Sir' and vers = 1 and k = 28 and v between 20 and 21
+go
+
+update biblia set nvg = 'Kto zachováva zákon, prináša tım mnohé obety. ' where spis = 'Sir' and vers = 1 and k = 28 and v = 1
+update biblia set nvg = 'Dba na prikázania je spasite¾ná obeta.' where spis = 'Sir' and vers = 1 and k = 28 and v = 2
+update biblia set nvg = '(???)' where spis = 'Sir' and vers = 1 and k = 28 and v = 3
+update biblia set nvg = 'Kto preukazuje lásku, akoby jemnú múku obetoval, a kto dáva almunu, prináša obetu chvály. ' where spis = 'Sir' and vers = 1 and k = 28 and v = 4
+update biblia set nvg = 'Pánovi sa páèi, keï niekto zanechá neprávos, a kto odstúpi od nespravodlivosti, uzmieruje ho za hriechy.' where spis = 'Sir' and vers = 1 and k = 28 and v = 5
+update biblia set nvg = 'Neukazuj sa pred Pánom s prázdnymi rukami; ' where spis = 'Sir' and vers = 1 and k = 28 and v = 6
+update biblia set nvg = 'toto všetko treba robi, lebo to prikazuje Boh. ' where spis = 'Sir' and vers = 1 and k = 28 and v = 7
+update biblia set nvg = 'Obeta spravodlivého je ako tuk na oltári a jej príjemná vôòa vystupuje pred tvár Najvyššieho. ' where spis = 'Sir' and vers = 1 and k = 28 and v = 8
+update biblia set nvg = 'Obeta spravodlivého je príjemná, Pán na òu nikdy nezabudne.' where spis = 'Sir' and vers = 1 and k = 28 and v = 9
+update biblia set nvg = 'S radostnım okom oslavuj Boha a neuberaj mu z prvotín svojich rúk. ' where spis = 'Sir' and vers = 1 and k = 28 and v = 10
+update biblia set nvg = 'Keï prinášaš svoj dar, maj vdy veselú tvár a s plesaním mu zasväcuj svoje desiatky.' where spis = 'Sir' and vers = 1 and k = 28 and v = 11
+update biblia set nvg = 'Dávaj Najvyššiemu, ako on dáva tebe, s prívetivım okom prinášaj dielo svojich rúk; ' where spis = 'Sir' and vers = 1 and k = 28 and v = 12
+update biblia set nvg = 'lebo Pán je odplatite¾ a on ti vráti sedemnásobne.' where spis = 'Sir' and vers = 1 and k = 28 and v = 13
+update biblia set nvg = 'Neprinášaj podlé veci na obetu, lebo on ich neprijme; ' where spis = 'Sir' and vers = 1 and k = 28 and v = 14
+update biblia set nvg = 'a nespoliehaj sa na nespravodlivé obety, lebo Pán je sudca a pred ním sláva osoby niè neznamená.' where spis = 'Sir' and vers = 1 and k = 28 and v = 15
+go
+update biblia set nvg = 'Nedáva prednos nikomu pred chudobnım, vypoèuje modlitbu ukrivdeného.' where spis = 'Sir' and vers = 1 and k = 28 and v = 16
+update biblia set nvg = 'Neopovrhne prosbami siroty ani vdovou, keï vylieva svoj bô¾.' where spis = 'Sir' and vers = 1 and k = 28 and v = 17
+update biblia set nvg = 'Kto sa korí Bohu, bude láskavo prijatı a jeho prosba vystúpi k oblakom.' where spis = 'Sir' and vers = 1 and k = 28 and v = 20
+update biblia set nvg = 'Modlitba pokorného prenikne oblaky a nebude spokojná, kım ta nedôjde. Nevzdiali sa, kım Najvyšší nezhliadne a spravodlivı sudca nevynesie rozsudok.' where spis = 'Sir' and vers = 1 and k = 28 and v = 21
+go
+
+-- 1646	Sir 36, 1-2a. 5-6. 13-19
+-- CHVAL_SIR36	Sir 36, 1-7. 13-16
+-- CHVAL_SIR36VG	Sir 36, 14-19
+update biblia set lh_id = 'CHVAL_SIR36' where spis = 'Sir' and vers = 1 and k = 36 and v between 1 and 7
+update biblia set lh_id = 'CHVAL_SIR36' where spis = 'Sir' and vers = 1 and k = 36 and v between 13 and 16
+update biblia set lh_id = 'CHVAL_SIR36VG' where spis = 'Sir' and vers = 1 and k = 36 and v between 17 and 19
+update biblia set lc_id = 1646 where spis = 'Sir' and vers = 1 and k = 36 and v between 1 and 2
+update biblia set lc_id = 1646 where spis = 'Sir' and vers = 1 and k = 36 and v between 5 and 6
+update biblia set lc_id = 1646 where spis = 'Sir' and vers = 1 and k = 36 and v between 13 and 19
+go
+
+update biblia set nvg = 'Zmiluj sa nad nami, Boe vesmíru, / a_pohliadni na nás, / uká nám svetlo svojho milosrdenstva' where spis = 'Sir' and vers = 1 and k = 36 and v = 1
+update biblia set nvg = 'a_naplò bázòou voèi sebe všetky národy, / ktoré a neh¾adajú, / aby poznali, e okrem teba niet Boha, / a_ohlasovali tvoje ve¾ké skutky.' where spis = 'Sir' and vers = 1 and k = 36 and v = 2
+update biblia set nvg = 'Zdvihni svoju ruku na cudzie národy, / nech vidia tvoju moc.' where spis = 'Sir' and vers = 1 and k = 36 and v = 3
+update biblia set nvg = 'Ako si pred ich oèami na nás ukázal, e si svätı, / tak pred našimi oèami uká na nich, / e si ve¾kı.' where spis = 'Sir' and vers = 1 and k = 36 and v = 4
+update biblia set nvg = 'Nech poznajú, ako sme my poznali, / e niet Boha okrem teba, Pane.' where spis = 'Sir' and vers = 1 and k = 36 and v = 5
+update biblia set nvg = 'Obnov znamenia a_zopakuj zázraky, ' where spis = 'Sir' and vers = 1 and k = 36 and v = 6
+update biblia set nvg = 'presláv svoju ruku a_uká svoje pravé rameno.' where spis = 'Sir' and vers = 1 and k = 36 and v = 7
+update biblia set nvg = 'Zhromadi všetky Jakubove kmene / a_budú tvojím dedièstvom ako na poèiatku.' where spis = 'Sir' and vers = 1 and k = 36 and v = 13
+update biblia set nvg = 'Zmiluj sa nad svojím ¾udom, / ktorı nosí tvoje meno, / nad Izraelom, / s_ktorım si zaobchádzal ako s_prvorodenım.' where spis = 'Sir' and vers = 1 and k = 36 and v = 14
+update biblia set nvg = 'Zmiluj sa nad svojím svätım mestom, / nad Jeruzalemom, miestom tvojho spoèinutia.' where spis = 'Sir' and vers = 1 and k = 36 and v = 15
+update biblia set nvg = 'Naplò Sion svojou velebou / a_svojou slávou tvoj chrám.' where spis = 'Sir' and vers = 1 and k = 36 and v = 16
+update biblia set nvg = 'Vydaj svedectvo tım, / ktorí sú prvotinami tvojho stvorenia, / a_splò všetko, / èo v_tvojom mene predpovedali.' where spis = 'Sir' and vers = 1 and k = 36 and v = 17
+update biblia set nvg = 'Daj odmenu tım, èo sa spoliehajú na teba, / aby sa ukázalo, / e tvoji proroci sú hodnoverní. Vyslyš modlitby svojich sluobníkov' where spis = 'Sir' and vers = 1 and k = 36 and v = 18
+update biblia set nvg = 'pre blahovô¾u voèi svojmu ¾udu / a_veï nás na cestu spravodlivosti, / nech vedia všetci, èo ijú na zemi, / e ty si Boh vekov.' where spis = 'Sir' and vers = 1 and k = 36 and v = 19
+go
+
+-- 1647	Sir 39, 8-14
+update biblia set lc_id = 1647 where spis = 'Sir' and vers = 1 and k = 39 and v between 8 and 14
+go
+
+update biblia set nvg = 'Ak bude chcie zvrchovanı Pán, naplní ho duchom rozumu ' where spis = 'Sir' and vers = 1 and k = 39 and v = 8
+update biblia set nvg = 'a on bude ako lejak chrli slová Boej múdrosti a modlitbou bude zvelebova Pána. ' where spis = 'Sir' and vers = 1 and k = 39 and v = 9
+update biblia set nvg = 'Bude správne usudzova a i a uvaova o jeho tajomstvách.' where spis = 'Sir' and vers = 1 and k = 39 and v = 10
+update biblia set nvg = 'Bude zjavova vıchovnú silu jeho náuky a chváli sa bude zákonom Pánovej zmluvy. ' where spis = 'Sir' and vers = 1 and k = 39 and v = 11
+update biblia set nvg = 'Mnohí budú chváli jeho múdros a nikdy sa na òu nezabudne. ' where spis = 'Sir' and vers = 1 and k = 39 and v = 12
+update biblia set nvg = 'Spomienka na neho nezanikne a jeho meno budú vyh¾adáva z pokolenia na pokolenie.' where spis = 'Sir' and vers = 1 and k = 39 and v = 13
+update biblia set nvg = 'O jeho múdrosti budú rozpráva národy a jeho chválu bude hlása zhromadenı ¾ud.' where spis = 'Sir' and vers = 1 and k = 39 and v = 14
+go
+
+-- CHVAL_SIR39VG	Sir 39, 17-21 -- ToDo do LH!!!
+update biblia set lh_id = 'CHVAL_SIR39VG' where spis = 'Sir' and vers = 1 and k = 39 and v between 17 and 21
+go
+
+update biblia set nvg = 'Vypoèujte ma, náboní synovia, / a vaše telo bude kvitnú ako rua zasadená pri potoku.' where spis = 'Sir' and vers = 1 and k = 39 and v = 17
+update biblia set nvg = 'Vydávajte lúbeznú vôòu ako jemné kadidlo, ' where spis = 'Sir' and vers = 1 and k = 39 and v = 18
+update biblia set nvg = 'prekvitajte ako ¾alia. / Rozozvuète svoj hlas a spievajte chválospev / a velebte Pána za všetky jeho diela.' where spis = 'Sir' and vers = 1 and k = 39 and v = 19
+update biblia set nvg = 'Vzdávajte hold jeho menu, / oslavujte a vychva¾ujte ho / spevom svojich perí a citarami. / Zvelebujte ho a hovorte:' where spis = 'Sir' and vers = 1 and k = 39 and v = 20
+update biblia set nvg = '„Všetky Pánove diela sú velmi dobré."' where spis = 'Sir' and vers = 1 and k = 39 and v = 21
+go
+
