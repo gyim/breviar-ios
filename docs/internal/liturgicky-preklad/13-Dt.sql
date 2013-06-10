@@ -100,3 +100,129 @@ go
 -- OCR2STRc_CIT1	7, 6-14; 8, 1-6
 -- 364	Dt 7, 6-11
 -- 365	Dt 8, 2-3. 14b-16a
+update biblia set lh_id = 'OCR2STRc_CIT1' where spis = 'Dt' and vers = 1 and k = 7 and v between 6 and 14
+update biblia set lc_id = 364 where spis = 'Dt' and vers = 1 and k = 7 and v between 6 and 11
+update biblia set lh_id = 'OCR2STRc_CIT1' where spis = 'Dt' and vers = 1 and k = 8 and v between 1 and 6
+update biblia set lc_id = 365 where spis = 'Dt' and vers = 1 and k = 8 and v between 2 and 3
+update biblia set lc_id = 365 where spis = 'Dt' and vers = 1 and k = 8 and v between 14 and 16
+go
+
+update biblia set nvg = '„Ty si ¾ud zasvätenı Pánovi, svojmu Bohu. Teba si Pán, tvoj Boh, vyvolil zo všetkıch národov, èo sú na zemi, aby si bol jeho vlastnım ¾udom. ' where spis = 'Dt' and vers = 1 and k = 7 and v = 6
+update biblia set nvg = 'Pán sa k_vám pripútal a_vyvolil si vás nie preto, e by ste boli poètom prevıšili iné národy – veï ste najmenší zo všetkıch národov –, ' where spis = 'Dt' and vers = 1 and k = 7 and v = 7
+update biblia set nvg = 'ale preto, e vás Pán miluje a_zachováva prísahu, ktorou sa zaviazal vašim otcom. Preto vás vyviedol mocnou rukou a_vykúpil a z_domu otroctva, z_ruky faraóna, egyptského krá¾a. ' where spis = 'Dt' and vers = 1 and k = 7 and v = 8
+update biblia set nvg = 'Vedz teda, e Pán, tvoj Boh, je jedinı Boh, vernı Boh, ktorı zachováva zmluvu a_milosrdenstvo do tisíceho pokolenia voèi tım, èo ho milujú a_zachovávajú jeho prikázania, ' where spis = 'Dt' and vers = 1 and k = 7 and v = 9
+update biblia set nvg = 'a_tım, èo ho nenávidia, odpláca hneï a_znièí ich, nebude odklada; ihneï im vráti, èo si zasluhujú. ' where spis = 'Dt' and vers = 1 and k = 7 and v = 10
+update biblia set nvg = 'Preto zachovávaj prikázania, nariadenia a_ustanovenia, ktoré ti ja dnes dávam, aby si ich plnil.' where spis = 'Dt' and vers = 1 and k = 7 and v = 11
+update biblia set nvg = 'Ak budete poèúva tieto ustanovenia a_budete ich zachováva a_plni, aj Pán, tvoj Boh, zachová voèi tebe zmluvu a_milosrdenstvo, ktoré prisahal tvojim otcom, ' where spis = 'Dt' and vers = 1 and k = 7 and v = 12
+update biblia set nvg = 'bude a milova a_poehnáva, rozmnoí a a_poehná plod tvojho ivota a_plod tvojej zeme, tvoje obilie, hrozno a_olej aj mláïatá dobytka a_prírastok tvojich oviec v_krajine, o_ktorej prisahal tvojim otcom, e ju dá tebe. ' where spis = 'Dt' and vers = 1 and k = 7 and v = 13
+update biblia set nvg = 'Budeš poehnanı nad všetky národy. Nebude u_teba neplodného ani v_jednom pohlaví, ani u_¾udí, ani v_tvojich stádach.' where spis = 'Dt' and vers = 1 and k = 7 and v = 14
+go
+update biblia set nvg = 'Dávaj ve¾kı pozor, aby si zachoval kadé prikázanie, ktoré ti ja dnes dávam, aby ste mohli i, aby ste sa rozmnoili, vošli a_zaujali krajinu, o_ktorej Pán prisahal vašim otcom. ' where spis = 'Dt' and vers = 1 and k = 8 and v = 1
+update biblia set nvg = 'A_spomínaj si na celú cestu, ktorou a Pán, tvoj Boh, tıchto štyridsa rokov viedol po púšti, aby a pokoril a_vyskúšal, aby sa ukázalo, èo je v_tvojom srdci, èi budeš zachováva jeho prikázania alebo nie. ' where spis = 'Dt' and vers = 1 and k = 8 and v = 2
+update biblia set nvg = 'Pokoril a, nechal a hladova a_potom ti dal za pokrm mannu, ktorú si nepoznal ani ty, ani tvoji otcovia, aby ti ukázal, e nielen z_chleba ije èlovek, ale z_kadého slova, ktoré vychádza z_Pánovıch úst. ' where spis = 'Dt' and vers = 1 and k = 8 and v = 3
+update biblia set nvg = 'Poèas tıchto štyridsiatich rokov sa odev, ktorı si si obliekal, nezodral a_noha ti neopuchla. ' where spis = 'Dt' and vers = 1 and k = 8 and v = 4
+update biblia set nvg = 'Uvá teda vo svojom srdci, e ako èlovek vychováva svojho syna, tak vychováva teba Pán, tvoj Boh, ' where spis = 'Dt' and vers = 1 and k = 8 and v = 5
+update biblia set nvg = 'aby si zachovával nariadenia Pána, svojho Boha, aby si kráèal po jeho cestách a_bál sa ho.' where spis = 'Dt' and vers = 1 and k = 8 and v = 6
+go
+update biblia set nvg = '(...) Nezabudni teda na Pána, svojho Boha, ktorı a vyviedol z egyptskej krajiny, z domu otroctva, ' where spis = 'Dt' and vers = 1 and k = 8 and v = 14
+update biblia set nvg = 'a viedol a cez ve¾kú a hroznú púš, kde boli ohnivé hady a škorpióny, po vyprahnutej zemi bez vody, ktorı pre teba z najtvrdšej skaly vyviedol vodu ' where spis = 'Dt' and vers = 1 and k = 8 and v = 15
+update biblia set nvg = 'a sıtil a na púšti mannou, ktorú nepoznali tvoji otcovia. (...)“' where spis = 'Dt' and vers = 1 and k = 8 and v = 16
+go
+
+-- OCR2STVc_CIT1	9, 7-21. 25-29
+update biblia set lh_id = 'OCR2STVc_CIT1' where spis = 'Dt' and vers = 1 and k = 9 and v between 7 and 21
+update biblia set lh_id = 'OCR2STVc_CIT1' where spis = 'Dt' and vers = 1 and k = 9 and v between 25 and 29
+go
+
+update biblia set nvg = '„Pamätaj a_nezabudni, ako si na púšti provokoval k_hnevu Pána, svojho Boha; odo dòa, keï si vyšiel z_Egypta, a po toto miesto ste odporovali Pánovi. ' where spis = 'Dt' and vers = 1 and k = 9 and v = 7
+update biblia set nvg = 'Lebo aj na Horebe ste ho provokovali a_on vás v_hneve chcel vyhubi. ' where spis = 'Dt' and vers = 1 and k = 9 and v = 8
+update biblia set nvg = 'Keï som vystúpil na vrch, aby som prevzal kamenné tabule, tabule zmluvy, ktorú s_vami uzavrel Pán, zostal som na vrchu štyridsa dní a_nocí, chlieb som nejedol a_vodu nepil. ' where spis = 'Dt' and vers = 1 and k = 9 and v = 9
+update biblia set nvg = 'A_Pán mi dal dve kamenné tabule popísané Boím prstom a_obsahujúce všetky slová, ktoré vám povedal na vrchu z_ohòa, keï sa zišiel ¾ud na zhromadení. ' where spis = 'Dt' and vers = 1 and k = 9 and v = 10
+update biblia set nvg = 'A_keï prešlo štyridsa dní a_to¾ko nocí, Pán mi dal dve kamenné tabule, tabule zmluvy, ' where spis = 'Dt' and vers = 1 and k = 9 and v = 11
+update biblia set nvg = 'a_povedal mi: ‚Vstaò a_rıchlo odtia¾to zostúp, lebo tvoj ¾ud, ktorı si vyviedol z_Egypta, zhrešil: rıchlo opustili cestu, ktorú som im prikázal, a_urobili si liatu modlu.‘ ' where spis = 'Dt' and vers = 1 and k = 9 and v = 12
+update biblia set nvg = 'Potom mi Pán povedal: ‚Vidím, e je to ¾ud tvrdošijnı. ' where spis = 'Dt' and vers = 1 and k = 9 and v = 13
+update biblia set nvg = 'Nechaj ma, nech ich znièím a_ich meno vymaem pod nebom a_z_teba urobím národ silnejší a_väèší, ako je tento.‘' where spis = 'Dt' and vers = 1 and k = 9 and v = 14
+update biblia set nvg = 'A_keï som pri návrate zostupoval z_horiaceho vrchu, oboma rukami som dral dve tabule zmluvy ' where spis = 'Dt' and vers = 1 and k = 9 and v = 15
+update biblia set nvg = 'a_videl som, e ste zhrešili proti Pánovi, svojmu Bohu, e ste si urobili liate te¾a a_rıchlo opustili jeho cestu, ktorú vám Pán prikázal, ' where spis = 'Dt' and vers = 1 and k = 9 and v = 16
+update biblia set nvg = 'chytil som obe tabule, hodil som ich z_rúk a_rozbil som ich pred vašimi oèami. ' where spis = 'Dt' and vers = 1 and k = 9 and v = 17
+update biblia set nvg = 'Potom som sa vrhol pred Pána ako predtım, štyridsa dní a_nocí som nejedol chlieb a_nepil vodu pre všetky vaše hriechy, ktorıch ste sa dopustili proti Pánovi a_provokovali ste ho k_hnevu. ' where spis = 'Dt' and vers = 1 and k = 9 and v = 18
+update biblia set nvg = 'Z¾akol som sa jeho rozhorèenia a_hnevu, ktorım zahorel proti vám a_chcel vás znièi. A_Pán ma vyslyšal aj tentoraz. ' where spis = 'Dt' and vers = 1 and k = 9 and v = 19
+update biblia set nvg = 'Ve¾mi sa nahneval aj na Árona a_chcel ho zahubi. Aj zaòho som vtedy prosil. ' where spis = 'Dt' and vers = 1 and k = 9 and v = 20
+update biblia set nvg = 'A_váš hriech, ktorı ste urobili, èie te¾a, som chytil a_spálil v_ohni. Rozbil som ho na kúsky, úplne na prach som ho rozdrvil a_hodil som ho do potoka, èo steká z_vrchu.' where spis = 'Dt' and vers = 1 and k = 9 and v = 21
+update biblia set nvg = 'A_leal som pred Pánom štyridsa dní a_nocí a_celı èas som ho úpenlivo prosil, aby vás neznièil, ako hrozil. ' where spis = 'Dt' and vers = 1 and k = 9 and v = 25
+update biblia set nvg = 'Modlil som sa takto: Pane, Boe, nezahub svoj ¾ud a_svoje dedièstvo, ktoré si vykúpil vo svojej ve¾kosti a_mocnou rukou vyviedol z_Egypta. ' where spis = 'Dt' and vers = 1 and k = 9 and v = 26
+update biblia set nvg = 'Spomeò si na svojich sluobníkov Abraháma, Izáka a_Jakuba. Neh¾aï na tvrdos, bezbonos a_hriech tohto <!-- tohoto --> ¾udu, ' where spis = 'Dt' and vers = 1 and k = 9 and v = 27
+update biblia set nvg = 'aby nepovedali obyvatelia krajiny, z_ktorej si nás vyviedol: ‚Pán ich nemohol vovies do krajiny, ktorú im pris¾úbil, a_nenávidel ich. Preto ich vyviedol, aby ich pozabíjal na púšti.‘ ' where spis = 'Dt' and vers = 1 and k = 9 and v = 28
+update biblia set nvg = 'Veï predsa oni sú tvojím ¾udom a_tvojím dedièstvom, ktoré si vyviedol svojou ve¾kou silou a_svojím vystretım ramenom.“' where spis = 'Dt' and vers = 1 and k = 9 and v = 29
+go
+
+-- OCR2PIc_CIT1	10, 12 – 11, 9. 26-28
+-- 341	Dt 10, 12-22
+-- 342	Dt 10, 8-9
+-- 343	Dt 11, 18. 26-28. 32
+update biblia set lc_id = 341 where spis = 'Dt' and vers = 1 and k = 10 and v between 8 and 9
+update biblia set lh_id = 'OCR2PIc_CIT1' where spis = 'Dt' and vers = 1 and k = 10 and v between 12 and 22
+update biblia set lc_id = 341 where spis = 'Dt' and vers = 1 and k = 10 and v between 12 and 22
+update biblia set lh_id = 'OCR2PIc_CIT1' where spis = 'Dt' and vers = 1 and k = 11 and v between 1 and 9
+update biblia set lc_id = 343 where spis = 'Dt' and vers = 1 and k = 11 and v = 18
+update biblia set lc_id = 343 where spis = 'Dt' and vers = 1 and k = 11 and v between 26 and 28
+update biblia set lc_id = 343 where spis = 'Dt' and vers = 1 and k = 11 and v = 32
+go
+
+update biblia set nvg = '(Mojiš povedal ¾udu:) "V tom èase si Pán vybral kmeò Léviho, aby nosieval archu Pánovej zmluvy, aby stál v jeho slube a aby v jeho mene ehnal. Tak to robí dodnes.' where spis = 'Dt' and vers = 1 and k = 10 and v = 8
+update biblia set nvg = 'Preto kmeò Léviho nemal podiel ani dedièstvo so svojimi bratmi, lebo sám Pán je jeho dedièstvo, ako mu bol pris¾úbil Pán, tvoj Boh."' where spis = 'Dt' and vers = 1 and k = 10 and v = 9
+go
+update biblia set nvg = '„A_teraz, Izrael, èo iada od teba Pán, tvoj Boh? Len to, aby si sa bál Pána, svojho Boha, a_kráèal po jeho cestách, aby si ho miloval a_slúil Pánovi, svojmu Bohu, celım svojím srdcom a_celou svojou dušou, ' where spis = 'Dt' and vers = 1 and k = 10 and v = 12
+update biblia set nvg = 'aby si zachovával Pánove nariadenia a_príkazy, ktoré ti ja dnes predkladám, aby ti dobre bolo. ' where spis = 'Dt' and vers = 1 and k = 10 and v = 13
+update biblia set nvg = 'Veï Pánovi, tvojmu Bohu, patrí nebo i_nebesia nebies, zem aj všetko, èo je na nej. ' where spis = 'Dt' and vers = 1 and k = 10 and v = 14
+update biblia set nvg = 'A_predsa Pán prilipol k_tvojim otcom, miloval ich a_vyvolil si ich potomstvo, teda vás, zo všetkıch národov, ako to dnes vidno.' where spis = 'Dt' and vers = 1 and k = 10 and v = 15
+update biblia set nvg = 'Obrete teda predkoku svojho srdca a_nebuïte u viac tvrdošijní. ' where spis = 'Dt' and vers = 1 and k = 10 and v = 16
+update biblia set nvg = 'Lebo len Pán, váš Boh, je Boh bohov a_Pán pánov, ve¾kı, mocnı a_hroznı Boh, ktorı neh¾adí na osobu a_dary neprijíma; ' where spis = 'Dt' and vers = 1 and k = 10 and v = 17
+update biblia set nvg = 'vymáha právo sirote a_vdove, miluje cudzinca a_dáva mu jedlo i_šaty. ' where spis = 'Dt' and vers = 1 and k = 10 and v = 18
+update biblia set nvg = 'Preto milujte aj cudzincov, veï sami ste boli cudzincami v_egyptskej krajine. ' where spis = 'Dt' and vers = 1 and k = 10 and v = 19
+update biblia set nvg = 'Boj sa Pána, svojho Boha, slú mu, prilipni k_nemu a_len v_jeho mene prisahaj. ' where spis = 'Dt' and vers = 1 and k = 10 and v = 20
+update biblia set nvg = 'On je tvoja chvála a_tvoj Boh, ktorı kvôli tebe urobil tie ve¾ké a_hrozné veci, èo si videl na vlastné oèi. ' where spis = 'Dt' and vers = 1 and k = 10 and v = 21
+update biblia set nvg = 'Sedemdesiat bolo tvojich predkov, keï zostúpili do Egypta, a_pozri, teraz a Pán, tvoj Boh, rozmnoil ako hviezdy na nebi.' where spis = 'Dt' and vers = 1 and k = 10 and v = 22
+go
+update biblia set nvg = 'A_preto miluj Pána, svojho Boha, a_v_kadom èase zachovávaj jeho pokyny a_nariadenia, ustanovenia a_prikázania. ' where spis = 'Dt' and vers = 1 and k = 11 and v = 1
+update biblia set nvg = 'Poznajte dnes, èo nepoznajú vaši synovia, lebo nevideli vıchovu Pána, vášho Boha, jeho ve¾ké skutky, silnú ruku a_vystreté rameno, ' where spis = 'Dt' and vers = 1 and k = 11 and v = 2
+update biblia set nvg = 'znamenia a_èiny, èo urobil v_Egypte krá¾ovi faraónovi a_celej jeho krajine, ' where spis = 'Dt' and vers = 1 and k = 11 and v = 3
+update biblia set nvg = 'všetkému egyptskému vojsku i_koòom a_vozom; ako ich prikryli vody Èerveného mora, keï vás prenasledovali, a_Pán ich znièil a po tento deò. ' where spis = 'Dt' and vers = 1 and k = 11 and v = 4
+update biblia set nvg = 'A_èo urobil vám na púšti, kım ste neprišli na toto miesto, ' where spis = 'Dt' and vers = 1 and k = 11 and v = 5
+update biblia set nvg = 'a_Dátanovi a_Ábironovi, synom Eliaba, ktorı bol Rubenovım synom, ako zem otvorila svoj paerák a_pohltila ich aj s_ich rodinami, stanmi a_s_celım majetkom, ktorı mali uprostred Izraela. ' where spis = 'Dt' and vers = 1 and k = 11 and v = 6
+update biblia set nvg = 'Vaše oèi videli všetky ve¾ké Pánove èiny, ktoré urobil, ' where spis = 'Dt' and vers = 1 and k = 11 and v = 7
+update biblia set nvg = 'aby ste zachovávali všetky prikázania, ktoré vám ja dnes dávam, aby ste boli silní a_mohli vojs a_zauja krajinu, do ktorej vstupujete, ' where spis = 'Dt' and vers = 1 and k = 11 and v = 8
+update biblia set nvg = 'a_aby ste v_nej dlho ili. Veï Pán pod prísahou s¾úbil vašim otcom a_ich potomstvu krajinu, ktorá oplıva mliekom a_medom.' where spis = 'Dt' and vers = 1 and k = 11 and v = 9
+go
+update biblia set nvg = 'Ulote si tieto moje slová do srdca a do duše, priviate si ich ako znamenie na ruku a pripevnite si ich ako znaky medzi oèami.' where spis = 'Dt' and vers = 1 and k = 11 and v = 18
+go
+update biblia set nvg = 'Pozrite, dnes vám predkladám poehnanie a_kliatbu: ' where spis = 'Dt' and vers = 1 and k = 11 and v = 26
+update biblia set nvg = 'poehnanie, ak budete poslúcha príkazy Pána, svojho Boha, ktoré vám ja dnes dávam; ' where spis = 'Dt' and vers = 1 and k = 11 and v = 27
+update biblia set nvg = 'kliatbu, ak nebudete poslúcha príkazy Pána, svojho Boha, a_odboèíte z_cesty, ktorú vám ja teraz prikazujem, a_pôjdete za cudzími bohmi, ktorıch nepoznáte.' where spis = 'Dt' and vers = 1 and k = 11 and v = 28
+go
+update biblia set nvg = 'Usilujte sa teda plni všetky prikázania a ustanovenia, ktoré vám ja dnes predkladám.“' where spis = 'Dt' and vers = 1 and k = 11 and v = 32
+go
+
+-- OCR2SOc_CIT1	16, 1-17
+update biblia set lh_id = 'OCR2SOc_CIT1' where spis = 'Dt' and vers = 1 and k = 16 and v between 1 and 17
+go
+
+update biblia set nvg = '„Dávaj pozor na mesiac Abib, aby si slávil Ve¾kú noc Pánovi, svojmu Bohu, lebo v_mesiaci Abib vyviedol a Pán, tvoj Boh, v_noci z_Egypta. ' where spis = 'Dt' and vers = 1 and k = 16 and v = 1
+update biblia set nvg = 'Budeš obetova Pánovi, svojmu Bohu, ve¾konoèného baránka z_oviec a_dobytka na mieste, ktoré si vyvolí Pán, tvoj Boh, aby tam prebıvalo jeho meno. ' where spis = 'Dt' and vers = 1 and k = 16 and v = 2
+update biblia set nvg = 'Nebudeš s_ním jes kysnutı chlieb. Sedem dní budeš jes bez kvasu chlieb trápenia, lebo narıchlo si vyšiel z_Egypta, aby si po všetky dni svojho ivota pamätal na deò svojho vıchodu z_Egypta. ' where spis = 'Dt' and vers = 1 and k = 16 and v = 3
+update biblia set nvg = 'Sedem dní nebude vidno kvas na celom tvojom území. A_z_mäsa, z_toho, ktoré sa obetuje veèer, nezostane niè do rána prvého dòa. ' where spis = 'Dt' and vers = 1 and k = 16 and v = 4
+update biblia set nvg = 'Ve¾konoèného baránka nesmieš obetova v_hociktorom svojom meste, ktoré ti dá Pán, tvoj Boh, ' where spis = 'Dt' and vers = 1 and k = 16 and v = 5
+update biblia set nvg = 'ale iba na mieste, ktoré si vyvolí Pán, tvoj Boh, aby tam prebıvalo jeho meno, budeš obetova ve¾konoèného baránka veèer pri západe slnka, vtedy, keï si vyšiel z_Egypta. ' where spis = 'Dt' and vers = 1 and k = 16 and v = 6
+update biblia set nvg = 'Upeèieš a_zješ ho na mieste, ktoré si vyvolí Pán, tvoj Boh, a_ráno vstaneš a_pôjdeš do svojich stanov. ' where spis = 'Dt' and vers = 1 and k = 16 and v = 7
+update biblia set nvg = 'Šes dní budeš jes nekvasenı chlieb aj na siedmy deò, lebo je slávnostné zhromadenie na poèes Pána, tvojho Boha; 	nebudeš pracova.' where spis = 'Dt' and vers = 1 and k = 16 and v = 8
+update biblia set nvg = 'Sedem tıdòov budeš poèíta odo dòa, keï priloíš kosák k_obiliu, ' where spis = 'Dt' and vers = 1 and k = 16 and v = 9
+update biblia set nvg = 'a_budeš slávi sviatok Tıdòov na poèes Pána, svojho Boha, ako dobrovo¾nú obetu svojej ruky, ktorú prinesieš pod¾a poehnania Pána, svojho Boha. ' where spis = 'Dt' and vers = 1 and k = 16 and v = 10
+update biblia set nvg = 'A_budeš hodova pred Pánom, svojím Bohom, ty, tvoj syn i_tvoja dcéra, tvoj sluha i_tvoja slúka aj levita, èo bıva v_tvojich bránach, cudzinec, sirota aj vdova, èo sa zdrujú s_tebou na mieste, ktoré si vyvolí Pán, tvoj Boh, aby tam prebıvalo jeho meno. ' where spis = 'Dt' and vers = 1 and k = 16 and v = 11
+update biblia set nvg = 'Budeš si pamäta, e si bol otrokom v_Egypte, a_budeš zachováva a_plni tieto nariadenia.' where spis = 'Dt' and vers = 1 and k = 16 and v = 12
+update biblia set nvg = 'Aj slávnos Stánkov budeš slávi sedem dní, keï zoberieš svoju úrodu z_humna a_z_lisu. ' where spis = 'Dt' and vers = 1 and k = 16 and v = 13
+update biblia set nvg = 'A_budeš hodova na svoj sviatok ty i_tvoj syn a_dcéra, tvoj sluha a_slúka, aj levita a_cudzinec, sirota a_vdova, èo bıvajú v_tvojich bránach. ' where spis = 'Dt' and vers = 1 and k = 16 and v = 14
+update biblia set nvg = 'Sedem dní budeš slávi sviatky Pánovi, svojmu Bohu, na mieste, ktoré si vyvolí Pán. Lebo Pán, tvoj Boh, ti poehná celú tvoju úrodu a_kadé dielo tvojich rúk a_ty sa budeš iba radova.' where spis = 'Dt' and vers = 1 and k = 16 and v = 15
+update biblia set nvg = 'Trikrát do roka sa všetko z_teba, èo je muského rodu, ukáe pred tvárou Pána, tvojho Boha, na mieste, ktoré si vyvolí: na slávnos Nekvasenıch chlebov, na slávnos Tıdòov a_na slávnos Stánkov. A_neukáe sa pred Pánom naprázdno, ' where spis = 'Dt' and vers = 1 and k = 16 and v = 16
+update biblia set nvg = 'ale kadı prinesie obetu pod¾a toho, èo bude ma pod¾a poehnania Pána, tvojho Boha, ktoré ti dá.“' where spis = 'Dt' and vers = 1 and k = 16 and v = 17
+go
+
