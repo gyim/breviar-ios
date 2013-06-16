@@ -2,6 +2,7 @@
 #psalm p.verse-first { padding-left: 3.0em; text-indent: -3.0em; margin:0; font-weight: bold; -webkit-margin-before: 0em; -webkit-margin-after: 0em; }
 #psalm p.verse-cont { padding-left: 3.0em; text-indent: -1.5em; margin:0; font-weight: bold; -webkit-margin-before: 0em; -webkit-margin-after: 0em; }
 #psalm p.verse-last { padding-left: 3.0em; padding-bottom: 1em; text-indent: -1.5em; margin:0; font-weight: bold; -webkit-margin-before: 0em; -webkit-margin-after: 0em; }
+#psalm sup { vertical-align: baseline; font-size: 0.7em; position: relative; top: -0.4em; color:red; font-weight: normal; }
 
 p.verse-last:after { content:" —"; color:red; font-weight: normal; }
 
@@ -183,4 +184,5 @@ sup {
 	font-size: 0.7em;
 	position: relative;
 	top: -0.4em;
+	color:red; 
 }
