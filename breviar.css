@@ -3,7 +3,7 @@
 #psalm p.verse-cont { padding-left: 3.0em; text-indent: -1.5em; margin:0; font-weight: bold; -webkit-margin-before: 0em; -webkit-margin-after: 0em; }
 #psalm p.verse-last { padding-left: 3.0em; padding-bottom: 1em; text-indent: -1.5em; margin:0; font-weight: bold; -webkit-margin-before: 0em; -webkit-margin-after: 0em; }
 
-p.verse-last:after { content:" —"; color:red; }
+p.verse-last:after { content:" —"; color:red; font-weight: normal; }
 
 /* new 2013.05.24 */
 #psalm p.verse {padding-left: 1.5em; text-indent: -1.5em; -webkit-margin-before: 0em; -webkit-margin-after: 0em;}
