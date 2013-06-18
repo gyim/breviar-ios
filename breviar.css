@@ -3,9 +3,9 @@
 #psalm p.verse-cont { padding-left: 3.0em; text-indent: -1.5em; margin:0; font-weight: bold; -webkit-margin-before: 0em; -webkit-margin-after: 0em; }
 #psalm p.verse-last { padding-left: 3.0em; padding-bottom: 1em; text-indent: -1.5em; margin:0; font-weight: bold; -webkit-margin-before: 0em; -webkit-margin-after: 0em; }
 #psalm p.verse-first { padding-top: 1em; padding-left: 3.0em; text-indent: -3.0em; margin:0; font-weight: bold; -webkit-margin-before: 0em; -webkit-margin-after: 0em; }
-#psalm sup { vertical-align: baseline; font-size: 0.7em; position: relative; top: -0.4em; color:red; font-weight: normal; }
+#psalm sup { vertical-align: baseline; font-size: 0.7em; position: relative; top: -0.4em; color: #ff0000; font-weight: normal; }
 
-p.verse-last:after { content:" —"; color:red; font-weight: normal; }
+p.verse-last:after { content:" —"; color: #ff0000; font-weight: normal; }
 
 /* new 2013.05.24 */
 #psalm p.verse {padding-left: 1.5em; text-indent: -1.5em; -webkit-margin-before: 0em; -webkit-margin-after: 0em;}
@@ -17,15 +17,15 @@ p.verse-last:after { content:" —"; color:red; font-weight: normal; }
 
 
 /* new 2013.04.18 */
-#psalm .psalm-title {text-align: center; font-weight: bold; color: red; font-size: larger}
-#psalm .psalm-subtitle {text-align: center; color: red;}
+#psalm .psalm-title {text-align: center; font-weight: bold; color: #ff0000; font-size: larger}
+#psalm .psalm-subtitle {text-align: center; color: #ff0000; }
 
 /* new 2013.04.02 */
 #week-day .day-title {font-weight: bold; font-size: larger; text-align: center;}
 .evening-praise > .title, .daytime-praise > .title, .morning-praise > .title, .ending-praise > .title, .invit-praise > .title, .reading-praise > .title {text-align: center; /*font-weight: bold;*/ margin-top: 20px;} 
 #week-day .title {font-weight: bold; margin-top: 16px;}
 #week-day br {clear: both; display: block; height: 1px;}
-div.biblereference {color: red; text-align: right;}
+div.biblereference {color: #ff0000; text-align: right;}
 .daytime-praise .time {text-align: center; margin-top: 10px; text-decoration: underline}
 /* replace 2013.02.17 */ 
 .indent {width: 20px; display:inline; float: left; height: 1em}
@@ -185,5 +185,5 @@ sup {
 	font-size: 0.7em;
 	position: relative;
 	top: -0.4em;
-	color:red; 
+	color: #ff0000; 
 }
