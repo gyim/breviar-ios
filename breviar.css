@@ -5,7 +5,7 @@
 #psalm p.verse-first { padding-top: 1em; padding-left: 3.0em; text-indent: -3.0em; margin:0; font-weight: bold; -webkit-margin-before: 0em; -webkit-margin-after: 0em; }
 #psalm sup { vertical-align: baseline; font-size: 0.7em; position: relative; top: -0.4em; color: #ff0000; font-weight: normal; }
 
-p.verse-last:after { content:" —"; color: #ff0000; font-weight: normal; }
+p.verse-last:after { content:"&nbsp;—"; color: #ff0000; font-weight: normal; }
 
 /* new 2013.05.24 */
 #psalm p.verse {padding-left: 1.5em; text-indent: -1.5em; -webkit-margin-before: 0em; -webkit-margin-after: 0em;}
