@@ -4,7 +4,7 @@
 
 /* new 2013-06.16 / updated 2013-06-19 */
 #psalm p { font-weight: normal; }
-#psalm p.verse { text-indent: -2.4em; padding-left: 3.0em; margin:0; -webkit-margin-before: 0em; -webkit-margin-after: 0em; font-weight: bold; }
+#psalm p.verse { text-indent: -2.4em; padding-left: 2.4em; margin:0; -webkit-margin-before: 0em; -webkit-margin-after: 0em; font-weight: bold; }
 #psalm p.start { }
 #psalm p.cont { text-indent: -1.2em; }
 #psalm p.last { text-indent: -1.2em; padding-bottom: 1em; }
