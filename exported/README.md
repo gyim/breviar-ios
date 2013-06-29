@@ -1,0 +1,1 @@
+This is the folder for the .epub, .mobi, .zip files genereated by ../zip.php and ../ebook.php

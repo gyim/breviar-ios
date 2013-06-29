@@ -192,11 +192,11 @@ const char *nazov_spolc_jazyk[POCET_SPOL_CASTI + 1][POCET_JAZYKOV + 1] =
 
 const char *nazov_bit_opt_1_spomienka_spol_cast_jazyk[POCET_JAZYKOV + 1] =
 {"bola zvolená monos niektoré èasti pri slávení spomienky vzia zo dòa pod¾a Všeobecnıch smerníc, è. 235 písm. b", 
- "byla zvolena monost vzít pøi slavení památky nìkteré èasti ze dne podle Všeobecnıch pokynù k denní modlitbì církve, è. 235 písm. b", 
+ "byla zvolena monost vzít pøi slavení památky nìkteré èásti ze dne podle Všeobecnıch pokynù k denní modlitbì církve, è. 235 písm. b", 
  "", 
  "", 
  "", 
- "byla zvolena monost vzít pøi slavení památky nìkteré èasti ze dne podle Všeobecnıch pokynù k denní modlitbì Církve, è. 235 písm. b", 
+ "byla zvolena monost vzít pøi slavení památky nìkteré èásti ze dne podle Všeobecnıch pokynù k denní modlitbì Církve, è. 235 písm. b", 
  "az a lehetõség volt választva, hogy az emléknapoknál bizonyos részek vehetõk a soros köznapról; Általános Rendelkezések az Imaórák Liturgiájáról, 235 b"
 };
 
@@ -528,9 +528,9 @@ const char *nazov_slavenia_lokal[] =
 ,"Húsvét 2. vasárnapja — Az Isteni Irgalmasság vasárnapja"                                                      // LOKAL_SLAV_DRUHA_VELK_NEDELA_HU
 ,"A Szombathelyi egyházmegyében"                                                                                // LOKAL_SLAV_SZOMBATHELYI_EGYH
 ,"Pozsonyi fõegyházmegye és a Nagyszombati egyházmegye fõpátronusa"                                             // LOKAL_SLAV_POZS_NAGYSZ_PATRON
-,"A Szeged-Csanádi egyházmegye északi részében: az egyházmegye védõszentje; fõünnep"                            // LOKAL_SLAV_SZEGED_CSAN_PATRON
+,"A Szeged-Csanádi egyházmegye északi részében: az egyházmegye védõszentje; fõünnep"                            // LOKAL_SLAV_SZEGED_CSAN_PATRON // 2013-06-27: ??? neviem, odkia¾ sa to tu vzalo
 ,"A Pécsi egyházmegyében"                                                                                       // LOKAL_SLAV_PECSI_EGYH
-,"A Pécsi egyházmegyében: az egyházmegye védõszentje; ünnep"                                                    // LOKAL_SLAV_PECSI_EGYH_PATRON
+,"A Pécsi egyházmegyében: az egyházmegye védõszentje; fõünnep"                                                  // LOKAL_SLAV_PECSI_EGYH_PATRON
 ,"A Szeged-Csanádi egyházmegye északi részében; ünnep"                                                          // LOKAL_SLAV_SZEGED_CSAN_EGYH
 ,"A Veszprémi egyházmegyében: Szent Anna, az egyházmegye védõszentje; ünnep"                                    // LOKAL_SLAV_VESZPREMI_EGYH_PATRON
 ,"A gyõri és székesfehérvári egyházmegyében: az egyházmegye védõszentje"                                        // LOKAL_SLAV_GYORI_SZEKESFEH_EGYH
@@ -564,6 +564,7 @@ const char *nazov_slavenia_lokal[] =
 ,"jen kanonie Strahov a Nová Øíše"                                                                              // LOKAL_SLAV_OPRAEM_STRAHOV_NOVA_RISE
 ,"jen kanonie eliv"                                                                                            // LOKAL_SLAV_OPRAEM_ZELIV
 ,"jen kanonie Strahov"                                                                                          // LOKAL_SLAV_OPRAEM_STRAHOV
+,"Debrecen-Nyíregyháza és Kaposvár: "HTML_LINE_BREAK"Az egyházmegye védõszentje; fõünnep"                       // LOKAL_SLAV_SZ_LASZLO
 };
 
 // names of liturgical colors
@@ -1548,7 +1549,7 @@ const char *html_text_option0_referencie[POCET_JAZYKOV + 1] =
  "Bible references",
  "",
  "biblické odkazy",
- "Bibliai hivatkozások a kereszteny.hu oldalon"
+ "Bibliai hivatkozások a szentiras.hu oldalon"
 };
 
 const char *html_text_option0_referencie_explain[POCET_JAZYKOV + 1] = 
@@ -1558,7 +1559,7 @@ const char *html_text_option0_referencie_explain[POCET_JAZYKOV + 1] =
  "",
  "", 
  "", 
- "Az imák szövegében minden bibliai utalás (például Jn 3, 16) aktív linkként a kereszteny.hu katolikus bibliafordításának megfellõ részére mutat. (A Szent István Társulat fordítását használjuk.)"
+ "Az imák szövegében minden bibliai utalás (például Jn 3, 16) aktív linkként a szentiras.hu katolikus bibliafordításának megfellõ részére mutat. (A Szent István Társulat fordítását használjuk.)"
 };
 
 const char *html_text_option0_citania[POCET_JAZYKOV + 1] = 
@@ -2227,6 +2228,66 @@ const char *html_text_option5_PCHymnusII[POCET_JAZYKOV + 1] =
  "himnusz II. [Amikor az imaórát a nap nem reggeli órájában végzik]",
 };
 
+const char *html_text_option5_PCHymnusVNnedela[POCET_JAZYKOV + 1] = 
+{"hymnus Toto je pravı Boí deò",
+ "hymnus nedìlní",
+ "hymnus NE",
+ "",
+ "",
+ "hymnus nedìlní",
+ "himnusz Urunknak áldott napja ez",
+};
+
+const char *html_text_option5_PCHymnusVNferia[POCET_JAZYKOV + 1] = 
+{"hymnus Nech z vıšin neba rados znie",
+ "hymnus z férie",
+ "hymnus férie",
+ "",
+ "",
+ "hymnus z férie",
+ "himnusz Örvendj, ég, messzi csillagok",
+};
+
+const char *html_text_option5_RChHymnusVNnedela[POCET_JAZYKOV + 1] = 
+{"hymnus Bronie sa zora na nebi",
+ "hymnus nedìlní",
+ "hymnus NE",
+ "",
+ "",
+ "hymnus nedìlní",
+ "himnusz Rózsálló hajnalfény ragyog",
+};
+
+const char *html_text_option5_RChHymnusVNferia[POCET_JAZYKOV + 1] = 
+{"hymnus Nech novım Jeruzalemom",
+ "hymnus z férie",
+ "hymnus férie",
+ "",
+ "",
+ "hymnus z férie",
+ "himnusz Az új Sionnak kórusa",
+};
+
+const char *html_text_option5_VespHymnusVNnedela[POCET_JAZYKOV + 1] = 
+{"hymnus Pri Baránkovej veèeri",
+ "hymnus nedìlní",
+ "hymnus NE",
+ "",
+ "",
+ "hymnus nedìlní",
+ "himnusz Ím, vár a Bárány asztala",
+};
+
+const char *html_text_option5_VespHymnusVNferia[POCET_JAZYKOV + 1] = 
+{"hymnus Krá¾ vekov, Pane, Boí Syn",
+ "hymnus z férie",
+ "hymnus férie",
+ "",
+ "",
+ "hymnus z férie",
+ "himnusz Örök Királyunk, szent Urunk",
+};
+
 const char *html_text_option5_MCDPredHymnus1[POCET_JAZYKOV + 1] = 
 {"hymnus Príï, Duchu Svätı",
  "hymnus K nám, Duchu Svatı, nyní spìj",
@@ -2297,6 +2358,16 @@ const char *html_text_option5_DPsalmZ122_129[POCET_JAZYKOV + 1] =
  "a 121. helyett vehetõ a 128. zsoltár",
 };
 
+const char *html_text_option5_DPsalmZ126_129[POCET_JAZYKOV + 1] = 
+{"namiesto almu 126 bra alm 129",
+ "místo almu 126 vzít alm 129",
+ "",
+ "",
+ "",
+ "místo almu 126 vzít alm 129",
+ "a 125. helyett vehetõ a 128. zsoltár",
+};
+
 const char *html_text_option5_DPsalmZ127_131[POCET_JAZYKOV + 1] = 
 {"namiesto almu 127 bra alm 131",
  "místo almu 127 vzít alm 131",
@@ -2317,6 +2388,16 @@ const char *html_text_option5_DPsalmZ122_NORMAL[POCET_JAZYKOV + 1] =
  "hu_take 121. zsoltár from kiegészítõ zsoltároknál",
 };
 
+const char *html_text_option5_DPsalmZ126_NORMAL[POCET_JAZYKOV + 1] = 
+{"bra alm 126 z doplnkovej psalmódie",
+ "vzít alm 126 z doplòovacího cyklu",
+ "",
+ "",
+ "",
+ "vzít alm 126 z doplòovacího cyklu",
+ "hu_take 125. zsoltár from kiegészítõ zsoltároknál",
+};
+
 const char *html_text_option5_DPsalmZ127_NORMAL[POCET_JAZYKOV + 1] = 
 {"bra alm 127 z doplnkovej psalmódie",
  "vzít alm 127 z doplòovacího cyklu",
@@ -2335,6 +2416,16 @@ const char *html_text_option5_DPsalmZ122_129_explain[POCET_JAZYKOV + 1] =
  "",
  "Pro doplòovací cyklus almù místo almu 122 (121) vzít alm 129 (128).",
  "A kiegészítõ zsoltároknál a 121. helyett vehetõ a 128. zsoltár.",
+};
+
+const char *html_text_option5_DPsalmZ126_129_explain[POCET_JAZYKOV + 1] = 
+{"V doplnkovej psalmódii namiesto almu 126 mono bra alm 129.",
+ "Pro doplòovací cyklus almù místo almu 126 (125) vzít alm 129 (128).",
+ "",
+ "",
+ "",
+ "Pro doplòovací cyklus almù místo almu 126 (125) vzít alm 129 (128).",
+ "A kiegészítõ zsoltároknál a 125. helyett vehetõ a 128. zsoltár.",
 };
 
 const char *html_text_option5_DPsalmZ127_131_explain[POCET_JAZYKOV + 1] = 
@@ -3134,7 +3225,7 @@ const char *text_FEB_04_OPRAEM[POCET_JAZYKOV + 1] =
  "",
  };
 const char *text_FEB_05[POCET_JAZYKOV + 1] = 
-{"Sv. Agaty, panny a muèenice",
+{"Sv. Agáty, panny a muèenice", // direktóriá uvádzajú Agáta s dlhım "á"; LH s krátkym "a" Agata
  "Sv. Agáty, panny a muèednice",
  "",
  "S. Agathae, virg. et mart.",

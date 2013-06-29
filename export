@@ -25,7 +25,7 @@ cp -dr $ROOT/cgi-bin/source "$1"/cgi-bin/source
 
 # install config and CSSs
 cp $ROOT/cgi-bin/breviar-web.cfg "$1"/cgi-bin/breviar-web.cfg
-cp $ROOT/cgi-bin/breviar-android "$1"/cgi-bin/breviar-android.cfg
+cp $ROOT/cgi-bin/breviar-android.cfg "$1"/cgi-bin/breviar-android.cfg
 cp $ROOT/breviar.css "$1"/breviar.css
 cp $ROOT/ebreviar-cz.css "$1"/ebreviar-cz.css
 cp $ROOT/breviar-invert.css "$1"/breviar-invert.css
