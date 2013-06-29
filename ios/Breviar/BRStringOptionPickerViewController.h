@@ -17,6 +17,7 @@
 @interface BRStringOptionPickerViewController : UITableViewController
 
 @property(weak) NSObject<BRStringOptionPickerDelegate> *delegate;
+@property(strong) NSString *optionId;
 @property(strong) NSArray *options;
 @property(strong) NSString *currentValue;
 
