@@ -17,11 +17,11 @@
 
 // Appearance settings
 "j"			= "Zsolozsma nyelve";
-"cz"		= "Čeština";
-"en"		= "English";
-"hu"		= "Magyarul";
-"la"		= "Lingua latina";
-"sk"		= "Slovenčina";
+"j.cz"		= "Čeština";
+"j.en"		= "English";
+"j.hu"		= "Magyarul";
+"j.la"		= "Lingua latina";
+"j.sk"		= "Slovenčina";
 
 // Prayer parts settings
 "of1c"		= "Evangéliumi kantikumok";
@@ -41,6 +41,34 @@
 "of0tkne"	= "Krisztus Szent Teste és Vére megünneplése vasárnap";
 
 // Other settings
+"of3"		= "Közös részből";
+"of3.0"		= "lelkipásztorok - papok";
+"of3.1"		= "lelkipásztorok - püspökök";
+"of3.2"		= "pásztorok - pápa";
+"of3.3"		= "egyháztanítók";
+"of3.4"		= "apostolok";
+"of3.5"		= "vértanú";
+"of3.6"		= "vértanúk";
+"of3.7"		= "Szűz Mária";
+"of3.8"		= "szerzetes";
+"of3.9"		= "szent férfiak";
+"of3.10"	= "szűz";
+"of3.11"	= "apáca";
+"of3.12"	= "szent asszonyok";
+"of3.13"	= "több lelkipásztor";
+"of3.14"	= "vértanú";
+"of3.15"	= "egyháztanító férfiak";
+"of3.16"	= "egyháztanító asszonyok";
+"of3.17"	= "jótékonykodó asszonyok";
+"of3.18"	= "jótékonykodó férfiak";
+"of3.19"	= "több szent asszony";
+"of3.20"	= "több szent férfi";
+"of3.21"	= "szüzek";
+"of3.22"	= "templomszentelés";
+"of3.23"	= "halottakért";
+"of3.24"	= "házas szent asszonyok";
+"of3.25"	= "házas szent férfiak";
+
 "of1zspc"	= "Közös részek helyének mutatása a szentek zsolozsmájában";
 "of1spspc"	= "Emléknapon a jelzett részeket a közös részből venni";
 "of1sp"		= "Szent életrajzok, jegyzetek elrejtése";

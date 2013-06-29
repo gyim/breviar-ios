@@ -145,8 +145,9 @@
     else if ([optionType isEqualToString:@"stringOption"]) {
         // String option
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StringOptionCell"];
+        NSString *valueId = [NSString stringWithFormat:@"%@.%@", optionId, [settings stringForOption:optionId]];
         cell.textLabel.text = BREVIAR_STR(optionId);
-        cell.detailTextLabel.text = BREVIAR_STR([settings stringForOption:optionId]);
+        cell.detailTextLabel.text = BREVIAR_STR(valueId);
         
         return cell;
     }
@@ -173,6 +174,7 @@
     else if ([segueId isEqualToString:@"ShowStringOptions"]) {
         BRStringOptionPickerViewController *picker = segue.destinationViewController;
         picker.title = BREVIAR_STR(self.currentOptionId);
+        picker.optionId = [option objectForKey:@"id"];
         picker.options = [option objectForKey:@"options"];
         picker.currentValue = [[BRSettings instance] stringForOption:self.currentOptionId];
         picker.delegate = self;

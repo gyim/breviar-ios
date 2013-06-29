@@ -45,7 +45,8 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SelectableStringCell" forIndexPath:indexPath];
     NSString *value = [self.options objectAtIndex:indexPath.row];
-    cell.textLabel.text = BREVIAR_STR(value);
+    NSString *valueId = [NSString stringWithFormat:@"%@.%@", self.optionId, value];
+    cell.textLabel.text = BREVIAR_STR(valueId);
     cell.accessoryType = ([value isEqualToString:self.currentValue] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone);
     
     return cell;
