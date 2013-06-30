@@ -426,8 +426,14 @@ update biblia set nvg = 'a poloila to pred Saula a jeho sluobníkov. Keï sa naj
 go
 
 -- OCR13POc_CIT1	1 Sam 31, 1-4; 2 Sam 1, 1-16
+-- 262	2 Sam 1, 1-4. 11-12. 17. 19. 23-27
 update biblia set lh_id = 'OCR13POc_CIT1' where spis = '1Sam' and vers = 1 and k = 31 and v between 1 and 4
 update biblia set lh_id = 'OCR13POc_CIT1' where spis = '2Sam' and vers = 1 and k = 1 and v between 1 and 16
+update biblia set lc_id = 262 where spis = '2Sam' and vers = 1 and k = 1 and v between 1 and 4
+update biblia set lc_id = 262 where spis = '2Sam' and vers = 1 and k = 1 and v between 11 and 12
+update biblia set lc_id = 262 where spis = '2Sam' and vers = 1 and k = 1 and v = 17
+update biblia set lc_id = 262 where spis = '2Sam' and vers = 1 and k = 1 and v = 19
+update biblia set lc_id = 262 where spis = '2Sam' and vers = 1 and k = 1 and v between 23 and 27
 go
 
 update biblia set nvg = 'Filištínci bojovali proti Izraelu a izraelskí mui utekali pred Filištíncami a popadali pobití na vrchu Gelboe. ' where spis = '1Sam' and vers = 1 and k = 31 and v = 1
@@ -454,3 +460,210 @@ update biblia set nvg = 'A Dávid zavolal jedného z_mládencov a rozkázal: „Choï a
 update biblia set nvg = 'A Dávid mu povedal: „Tvoja krv na tvoju hlavu, veï tvoje ústa svedèili proti tebe, keï si povedal: ‚Ja som zabil Pánovho pomazaného.‘“' where spis = '2Sam' and vers = 1 and k = 1 and v = 16
 go
 
+update biblia set nvg = 'A Dávid zaspieval alospev nad Saulom a jeho synom Jonatanom: ' where spis = '2Sam' and vers = 1 and k = 1 and v = 17
+update biblia set nvg = '"Izrael, tvoj vıkvet leí pobitı na tvojich vàškoch. Ako len padli hrdinovia!' where spis = '2Sam' and vers = 1 and k = 1 and v = 19
+update biblia set nvg = 'Saul a Jonatan, milí a š¾achetní v ivote, nerozišli sa ani pri smrti. Rıchlejší boli ne orly a udatnejší nad levov.' where spis = '2Sam' and vers = 1 and k = 1 and v = 23
+update biblia set nvg = 'Dcéry Izraela, plaète za Saulom, veï vás skvostne do purpuru obliekal, na šat vám pripínal zlaté ozdoby.' where spis = '2Sam' and vers = 1 and k = 1 and v = 24
+update biblia set nvg = 'Ako len padli hrdinovia uprostred boja! / Jonatan na tvojich kopcoch je zabitı. ' where spis = '2Sam' and vers = 1 and k = 1 and v = 25
+update biblia set nvg = 'Krušne mi pre teba, brat môj Jonatan, ve¾mi si mi bol milı. Tvoja láska bıvala mi vzácnejšia ako láska ien.' where spis = '2Sam' and vers = 1 and k = 1 and v = 26
+update biblia set nvg = 'Ako len padli hrdinovia a zlomili sa bojové zbrane!"' where spis = '2Sam' and vers = 1 and k = 1 and v = 27
+go
+
+-- OCR13UTc_CIT1	2, 1-11; 3, 1-5
+update biblia set lh_id = 'OCR13UTc_CIT1' where spis = '2Sam' and vers = 1 and k = 2 and v between 1 and 11
+update biblia set lh_id = 'OCR13UTc_CIT1' where spis = '2Sam' and vers = 1 and k = 3 and v between 1 and 5
+go
+
+update biblia set nvg = 'Dávid sa pıtal Pána: „Mám vystúpi do niektorého judejského mesta?“ Pán mu povedal: „Vystúp.“ Dávid vravel: „Kam mám vystúpi?“ Odpovedal mu: „Do Hebronu.“ ' where spis = '2Sam' and vers = 1 and k = 2 and v = 1
+update biblia set nvg = 'Dávid ta teda vystúpil aj obe jeho eny, Jezraelèanka Achinoam i_ena Nabala Karmelského Abigail. ' where spis = '2Sam' and vers = 1 and k = 2 and v = 2
+update biblia set nvg = 'Ale Dávid priviedol aj muov, èo boli s_ním, kadého s_jeho rodinou, a usadili sa v_hebronskıch mestách. ' where spis = '2Sam' and vers = 1 and k = 2 and v = 3
+update biblia set nvg = 'Tu prišli judejskí mui a pomazali tam Dávida za krá¾a nad Júdovım domom. // Keï Dávidovi oznámili, e mui z_Jabesa v_Galaáde pochovali Saula, ' where spis = '2Sam' and vers = 1 and k = 2 and v = 4
+update biblia set nvg = 'poslal Dávid k_muom do Jabesa v_Galaáde poslov s_odkazom: „Nech vás poehná Pán, keï ste svojmu pánovi Saulovi preukázali to milosrdenstvo, e ste ho pochovali. ' where spis = '2Sam' and vers = 1 and k = 2 and v = 5
+update biblia set nvg = 'Nech teraz Pán preukáe milosrdenstvo a vernos vám. Ale aj ja sa vám odplatím dobrım za to, e ste to urobili. ' where spis = '2Sam' and vers = 1 and k = 2 and v = 6
+update biblia set nvg = 'Teraz však nech vám spevnejú ruky a buïte statoèní. Váš pán Saul zomrel, no Júdov dom pomazal mòa za svojho krá¾a.“' where spis = '2Sam' and vers = 1 and k = 2 and v = 7
+update biblia set nvg = 'Ale velite¾ Saulovho vojska Nerov syn Abner vzal Saulovho syna Isbála, zaviedol ho do Mahanaimu ' where spis = '2Sam' and vers = 1 and k = 2 and v = 8
+update biblia set nvg = 'a ustanovil ho za krá¾a nad Galaádom, Aserom, Jezraelom, Efraimom, Benjamínom a nad celım Izraelom. ' where spis = '2Sam' and vers = 1 and k = 2 and v = 9
+update biblia set nvg = 'Saulov syn Isbál mal štyridsa rokov, keï zaèal kra¾ova nad Izraelom, a kra¾oval dva roky. Za Dávidom šiel iba Júdov dom. ' where spis = '2Sam' and vers = 1 and k = 2 and v = 10
+update biblia set nvg = 'A poèet dní, ktoré Dávid strávil v_Hebrone ako krá¾ nad Júdovım domom, bol sedem rokov a šes mesiacov.' where spis = '2Sam' and vers = 1 and k = 2 and v = 11
+go
+update biblia set nvg = 'A tak nastal dlhı zápas medzi Saulovım domom a Dávidovım domom: Dávid stále silnel, ale Saulov dom zo dòa na deò upadal.' where spis = '2Sam' and vers = 1 and k = 3 and v = 1
+update biblia set nvg = 'Dávidovi sa v_Hebrone narodili aj synovia. Jeho prvorodenı bol Amnon z_Jezraelèanky Achinoam, ' where spis = '2Sam' and vers = 1 and k = 3 and v = 2
+update biblia set nvg = 'po òom bol Cheleab zo eny Nabala Karmelského Abigail, potom tretí Absolón, syn Maachy, dcéry gesurského krá¾a Tolmaja, ' where spis = '2Sam' and vers = 1 and k = 3 and v = 3
+update biblia set nvg = 'štvrtı Adoniáš, syn Haggit, piaty Safatia, syn Abital, ' where spis = '2Sam' and vers = 1 and k = 3 and v = 4
+update biblia set nvg = 'a šiesty Jetraam, z_Dávidovej eny Egly. Títo sa Dávidovi narodili v_Hebrone.' where spis = '2Sam' and vers = 1 and k = 3 and v = 5
+go
+
+-- OCR13STRc_CIT1	4, 2 – 5, 7
+-- 269	2 Sam 5, 1-3
+-- 270	2 Sam 5, 1-7. 10
+update biblia set lh_id = 'OCR13STRc_CIT1' where spis = '2Sam' and vers = 1 and k = 4 and v between 2 and 12
+update biblia set lh_id = 'OCR13STRc_CIT1' where spis = '2Sam' and vers = 1 and k = 5 and v between 1 and 7
+update biblia set lc_id = 270 where spis = '2Sam' and vers = 1 and k = 5 and v between 1 and 7
+update biblia set lc_id = 270 where spis = '2Sam' and vers = 1 and k = 5 and v = 10
+go
+
+update biblia set nvg = 'Saulov syn mal dvoch muov, velite¾ov èiat, jeden sa volal Baana a druhı sa volal Rechab. Boli to synovia Berotèana Remmona z_Benjamínovıch synov; aj Berot sa toti poèíta k_Benjamínovi. ' where spis = '2Sam' and vers = 1 and k = 4 and v = 2
+update biblia set nvg = 'Lebo Berotèania kedysi ušli do Gettaimu a ostali tam ako cudzinci a dodnes.' where spis = '2Sam' and vers = 1 and k = 4 and v = 3
+update biblia set nvg = 'Saulov syn Jonatan mal syna, ktorı mal chromé nohy. Bol päroènı, keï z_Jezraelu prišla správa o_Saulovi a Jonatanovi. Jeho pestúnka ho vtedy vzala a dala sa na útek. Pri úteku sa tak náhlila, e jej spadol a ochromel. Volal sa Meribbál.' where spis = '2Sam' and vers = 1 and k = 4 and v = 4
+update biblia set nvg = 'Prišli synovia Berotèana Remmona Rechab a Baana a vošli za horúceho dòa do Isbálovho domu, keï spal cez poludnie na svojom lôku. Aj vrátnièka domu zaspala pri èistení pšenice, ' where spis = '2Sam' and vers = 1 and k = 4 and v = 5
+update biblia set nvg = 'a tak sa dostali a do domu. Rechab a jeho brat Baana mu prebodli slabiny a utiekli. ' where spis = '2Sam' and vers = 1 and k = 4 and v = 6
+update biblia set nvg = 'Keï toti vošli do domu, on spal na svojom lôku v_spálni; preklali ho a zabili. Vzali jeho hlavu a išli celú noc cestou do Araby.' where spis = '2Sam' and vers = 1 and k = 4 and v = 7
+update biblia set nvg = 'Isbálovu hlavu doniesli Dávidovi do Hebronu a povedali krá¾ovi: „Pozri, hlava Isbála, syna tvojho nepriate¾a Saula, ktorı ti èíhal na ivot. Dnes Pán doprial krá¾ovi, môjmu pánovi, pomstu nad Saulom a nad jeho potomstvom.“ ' where spis = '2Sam' and vers = 1 and k = 4 and v = 8
+update biblia set nvg = 'Ale Dávid povedal synom Berotèana Remmona Rechabovi a jeho bratovi Baanovi: „Ako ije Pán, ktorı ma vytrhol zo všetkıch úzkostí, ' where spis = '2Sam' and vers = 1 and k = 4 and v = 9
+update biblia set nvg = 'toho, èo mi oznámil: ‚Saul zomrel‘ a nazdával sa, e prináša dobrú zves, v_Sikelegu som chytil a zabil, hoci som mu mal da za zves odmenu; ' where spis = '2Sam' and vers = 1 and k = 4 and v = 10
+update biblia set nvg = 'nemám tım skôr teraz, keï bezboní ¾udia zavradili nevinného mua v_jeho dome na jeho lôku, vyadova zodpovednos za jeho krv z_vašich rúk a odprata vás zo zeme?“ ' where spis = '2Sam' and vers = 1 and k = 4 and v = 11
+update biblia set nvg = 'A Dávid rozkázal mládencom a zabili ich; poodtínali im ruky i_nohy a povešali ich pri rybníku v_Hebrone. Isbálovu hlavu vzali a pochovali v_Abnerovom hrobe v_Hebrone.' where spis = '2Sam' and vers = 1 and k = 4 and v = 12
+go
+update biblia set nvg = 'Všetky izraelské kmene prišli k_Dávidovi do Hebronu a hovorili: „Pozri, sme tvoja kos a tvoje telo. ' where spis = '2Sam' and vers = 1 and k = 5 and v = 1
+update biblia set nvg = 'A u vtedy, keï bol naším krá¾om Saul, ty si viedol Izrael do boja a z_boja. A Pán ti povedal: ‚Ty budeš pás môj ¾ud Izrael, ty budeš vodcom Izraela.‘“ ' where spis = '2Sam' and vers = 1 and k = 5 and v = 2
+update biblia set nvg = 'Prišli aj všetci starší Izraela ku krá¾ovi do Hebronu a krá¾ Dávid s_nimi uzavrel zmluvu pred Pánom v_Hebrone a oni pomazali Dávida za krá¾a nad Izraelom. ' where spis = '2Sam' and vers = 1 and k = 5 and v = 3
+update biblia set nvg = 'Tridsa rokov mal Dávid, keï zaèal kra¾ova, a kra¾oval štyridsa rokov: ' where spis = '2Sam' and vers = 1 and k = 5 and v = 4
+update biblia set nvg = 'v_Hebrone nad Júdom kra¾oval sedem rokov a šes mesiacov; v_Jeruzaleme kra¾oval tridsatri rokov nad celım Izraelom a Júdom.' where spis = '2Sam' and vers = 1 and k = 5 and v = 5
+update biblia set nvg = 'Krá¾ a všetci mui, èo s_ním boli, tiahli do Jeruzalema proti Jebuzejcom, ktorí obıvali krajinu. Oni povedali Dávidovi: „Sem nevkroèíš; slepí a ku¾haví a zaenú.“ To znamenalo: „Dávid sem nevkroèí.“ ' where spis = '2Sam' and vers = 1 and k = 5 and v = 6
+update biblia set nvg = 'Ale Dávid zaujal pevnos Sion a ona je Dávidovım mestom.' where spis = '2Sam' and vers = 1 and k = 5 and v = 7
+go
+update biblia set nvg = 'Dávid bol stále mocnejší a Pán, Boh zástupov, bol s ním.' where spis = '2Sam' and vers = 1 and k = 5 and v = 10
+go
+
+-- OCR13STVc_CIT1	6, 1-23
+-- 271	2 Sam 6, 12b-15. 17-19
+update biblia set lh_id = 'OCR13STVc_CIT1' where spis = '2Sam' and vers = 1 and k = 6 and v between 1 and 23
+update biblia set lc_id = 271 where spis = '2Sam' and vers = 1 and k = 6 and v between 12 and 15
+update biblia set lc_id = 271 where spis = '2Sam' and vers = 1 and k = 6 and v between 17 and 19
+go
+
+update biblia set nvg = 'Dávid znova zhromadil všetkıch tridsatisíc vybranıch z_Izraela. ' where spis = '2Sam' and vers = 1 and k = 6 and v = 1
+update biblia set nvg = 'Dávid vstal a odišiel i_všetok ¾ud, èo bol s_ním, do judejskej Baaly, aby odtia¾ priniesli Boiu archu, nad ktorou sa vzıva meno Pána zástupov, ktorı tróni nad òou na cheruboch. ' where spis = '2Sam' and vers = 1 and k = 6 and v = 2
+update biblia set nvg = 'Boiu archu naloili na novı voz a vzali ju z_Abinadabovho domu, ktorı bol na vàšku. Abinadabovi synovia Oza a Ahio viedli voz: ' where spis = '2Sam' and vers = 1 and k = 6 and v = 3
+update biblia set nvg = 'Oza kráèal ved¾a archy, Ahio šiel pred òou. ' where spis = '2Sam' and vers = 1 and k = 6 and v = 4
+update biblia set nvg = 'Dávid a celı Izrael z_celej sily spievali pred Pánom a hrali na citarách, harfách, bubnoch, hrkálkach a cimbaloch. ' where spis = '2Sam' and vers = 1 and k = 6 and v = 5
+update biblia set nvg = 'Ale keï prišli k_Nachonovmu humnu, Oza vystrel ruku k_Boej arche a zachytil ju, lebo voly sa rozjarili a trhli. ' where spis = '2Sam' and vers = 1 and k = 6 and v = 6
+update biblia set nvg = 'A Pán vzplanul hnevom proti Ozovi a zabil ho pre opoválivos. Zomrel tam pri Boej arche. ' where spis = '2Sam' and vers = 1 and k = 6 and v = 7
+update biblia set nvg = 'Dávid zosmutnel, e Pán tak ve¾mi zasiahol Ozu; a to miesto sa volá Faresoza (èie zasiahnutie Ozu) a do dnešného dòa. ' where spis = '2Sam' and vers = 1 and k = 6 and v = 8
+update biblia set nvg = 'Dávid sa zaèal bá v_ten deò Pána a hovoril: „Ako príde Pánova archa ku mne?“ ' where spis = '2Sam' and vers = 1 and k = 6 and v = 9
+update biblia set nvg = 'A nechcel obráti Pánovu archu k_sebe, do Dávidovho mesta, ale obrátil ju do domu Gettejèana Obededoma. ' where spis = '2Sam' and vers = 1 and k = 6 and v = 10
+update biblia set nvg = 'A tak bıvala Pánova archa v_dome Gettejèana Obededoma tri mesiace a Pán poehnal Obededoma i_celı jeho dom.' where spis = '2Sam' and vers = 1 and k = 6 and v = 11
+update biblia set nvg = 'Tu oznámili krá¾ovi Dávidovi: „Pán poehnal pre Boiu archu Obededoma i_všetko, èo má.“ Dávid teda šiel a s_radosou priniesol Boiu archu z_domu Obededoma do Dávidovho mesta. ' where spis = '2Sam' and vers = 1 and k = 6 and v = 12
+update biblia set nvg = 'Keï tí, èo niesli Pánovu archu, urobili šes krokov, obetoval bıèka a vykàmené te¾a; ' where spis = '2Sam' and vers = 1 and k = 6 and v = 13
+update biblia set nvg = 'a Dávid z_celej sily tancoval pred Pánom, opásanı plátenım efódom. ' where spis = '2Sam' and vers = 1 and k = 6 and v = 14
+update biblia set nvg = 'Dávid a celı dom Izraela sprevádzali Pánovu archu s_jasotom a trúbením po¾nice. ' where spis = '2Sam' and vers = 1 and k = 6 and v = 15
+update biblia set nvg = 'Keï Pánova archa vchádzala do Dávidovho mesta, Saulova dcéra Michol pozerala z_okna a videla krá¾a Dávida, ako poskakuje a tancuje pred Pánom, a opovrhla ním vo svojom srdci.' where spis = '2Sam' and vers = 1 and k = 6 and v = 16
+update biblia set nvg = 'Pánovu archu doniesli a poloili ju na jej miesto uprostred stánku, ktorı pre òu postavil Dávid. Potom Dávid priniesol Pánovi zápalné a pokojné obety. ' where spis = '2Sam' and vers = 1 and k = 6 and v = 17
+update biblia set nvg = 'A keï dokonèil zápalné a pokojné obety, poehnal ¾ud v_mene Pána zástupov ' where spis = '2Sam' and vers = 1 and k = 6 and v = 18
+update biblia set nvg = 'a všetkému izraelskému ¾udu, muom i_enám, dal po jednom bochni chleba, po jednom dat¾ovom a po jednom hroznovom koláèi. A ¾ud sa rozišiel, kadı do svojho domu.' where spis = '2Sam' and vers = 1 and k = 6 and v = 19
+update biblia set nvg = 'Aj Dávid sa vrátil, aby poehnal svoj dom. Dávidovi vyšla v_ústrety Saulova dcéra Michol a povedala: „Akı slávny bol dnes krá¾ Izraela, keï sa obnaoval pred slúkami svojich sluhov, ako sa odha¾uje iba nejakı šašo.“ ' where spis = '2Sam' and vers = 1 and k = 6 and v = 20
+update biblia set nvg = 'Dávid povedal Michol: „Tancujem pred Pánom. Nech je zvelebenı Pán, ktorı si ma vyvolil pred tvojím otcom a pred celım jeho domom, aby ma ustanovil za vodcu Pánovho ¾udu, Izraela. ' where spis = '2Sam' and vers = 1 and k = 6 and v = 21
+update biblia set nvg = 'A budem šanti pred Pánom, nech mnou pohàdajú ešte viac ako doteraz a budem nízky vo vlastnıch oèiach, ale u_slúok, o_ktorıch si hovorila, budem o_to slávnejší.“ ' where spis = '2Sam' and vers = 1 and k = 6 and v = 22
+update biblia set nvg = 'A Saulovej dcére Michol sa nenarodil syn a do jej smrti.' where spis = '2Sam' and vers = 1 and k = 6 and v = 23
+go
+
+-- OCR13PIc_CIT1	7, 1-25
+-- 272	2 Sam 7, 1-5. 8b-11. 16
+-- 273	2 Sam 7, 1-5. 8b-12. 14a. 16
+-- 274	2 Sam 7, 1-5. 8b-12. 14a. 16
+-- 275	2 Sam 7, 18-19. 24-29
+-- 276	2 Sam 7, 4-17
+-- 277	2 Sam 7, 4-5a. 12-14a. 16
+update biblia set lh_id = 'OCR13PIc_CIT1' where spis = '2Sam' and vers = 1 and k = 7 and v between 1 and 25
+update biblia set lc_id = 273 where spis = '2Sam' and vers = 1 and k = 7 and v between 1 and 5
+update biblia set lc_id = 276 where spis = '2Sam' and vers = 1 and k = 7 and v between 6 and 17
+update biblia set lc_id = 275 where spis = '2Sam' and vers = 1 and k = 7 and v between 18 and 19
+update biblia set lc_id = 275 where spis = '2Sam' and vers = 1 and k = 7 and v between 24 and 29
+go
+
+update biblia set nvg = 'Keï u krá¾ bıval vo svojom paláci a Pán mu poprial pokoj od všetkıch okolitıch nepriate¾ov, ' where spis = '2Sam' and vers = 1 and k = 7 and v = 1
+update biblia set nvg = 'povedal prorokovi Nátanovi: „Pozri, ja bıvam v_dome z_cédrov, a Boia archa stojí pod stanmi.“ ' where spis = '2Sam' and vers = 1 and k = 7 and v = 2
+update biblia set nvg = 'Nátan odpovedal krá¾ovi: „Choï a rob všetko, èo ti vnuká srdce, Pán je s_tebou.“' where spis = '2Sam' and vers = 1 and k = 7 and v = 3
+update biblia set nvg = 'V_tú noc zaznelo Pánovo slovo Nátanovi: ' where spis = '2Sam' and vers = 1 and k = 7 and v = 4
+update biblia set nvg = '„Choï a povedz môjmu sluobníkovi Dávidovi: Toto hovorí Pán: Ty mi chceš postavi dom, v_ktorom mám bıva? ' where spis = '2Sam' and vers = 1 and k = 7 and v = 5
+update biblia set nvg = 'Nikdy som nebıval v_dome odo dòa, keï som vyviedol synov Izraela z_Egypta, a dodnes, ale putoval som v_šiatrovom stánku. ' where spis = '2Sam' and vers = 1 and k = 7 and v = 6
+update biblia set nvg = 'A keï som putoval po všetkıch miestach so všetkımi synmi Izraela, vari som povedal niektorému sudcovi Izraela, ktorému som prikázal vies môj ¾ud, Izrael: Preèo ste mi nepostavili cédrovı dom? ' where spis = '2Sam' and vers = 1 and k = 7 and v = 7
+update biblia set nvg = 'Preto teraz povieš môjmu sluobníkovi Dávidovi: Toto hovorí Pán zástupov: Ja som a vzal z_pastvín od oviec, aby si bol vodcom môjho ¾udu, Izraela; ' where spis = '2Sam' and vers = 1 and k = 7 and v = 8
+update biblia set nvg = 'a bol som s_tebou pri všetkom, èo si podnikal. Pred tvojimi oèami som vyhubil všetkıch tvojich nepriate¾ov a zaistil som ti také meno, aké majú len najväèší na zemi. ' where spis = '2Sam' and vers = 1 and k = 7 and v = 9
+update biblia set nvg = 'Svojmu ¾udu, Izraelovi, urèím miesto a zasadím ho tam. Tam bude bıva a nebude sa bá a ani zlosynovia ho u nebudú utláèa ako kedysi, ' where spis = '2Sam' and vers = 1 and k = 7 and v = 10
+update biblia set nvg = 'v_dòoch, keï som ustanovoval sudcov nad svojím ¾udom, Izraelom. Oslobodím a od všetkıch tvojich nepriate¾ov a darujem ti pokoj. Pán ti oznamuje, e ti sám vybuduje dom, ' where spis = '2Sam' and vers = 1 and k = 7 and v = 11
+update biblia set nvg = 'a a sa tvoje dni dovàšia a ty sa uloíš na odpoèinok k_svojim otcom, ustanovím po tebe potomka, ktorı bude pochádza z_tvojich útrob, a upevním jeho krá¾ovstvo. ' where spis = '2Sam' and vers = 1 and k = 7 and v = 12
+update biblia set nvg = 'On postaví dom môjmu menu a ja upevním jeho krá¾ovskı trón naveky. ' where spis = '2Sam' and vers = 1 and k = 7 and v = 13
+update biblia set nvg = 'Ja mu budem otcom a on mi bude synom. Ak bude robi zlo, budem ho tresta palicou mua a údermi synov èloveka. ' where spis = '2Sam' and vers = 1 and k = 7 and v = 14
+update biblia set nvg = 'Ale svoju milos mu neodnímem, ako som ju odòal Saulovi, ktorého som odstránil spred teba. ' where spis = '2Sam' and vers = 1 and k = 7 and v = 15
+update biblia set nvg = 'Tvoj dom a tvoje krá¾ovstvo budú trva predo mnou naveky, tvoj trón bude upevnenı navdy.“' where spis = '2Sam' and vers = 1 and k = 7 and v = 16
+update biblia set nvg = 'A Nátan hovoril Dávidovi celkom pod¾a tıchto slov a pod¾a tohto videnia.' where spis = '2Sam' and vers = 1 and k = 7 and v = 17
+update biblia set nvg = 'Krá¾ Dávid vošiel, sadol si pred Pána a hovoril: „Kto som ja, Pane, Boe, a èo je môj dom, e si ma priviedol a sem? ' where spis = '2Sam' and vers = 1 and k = 7 and v = 18
+update biblia set nvg = 'Ale aj toto sa ti zdalo málo, Pane, Boe, nu hovoríš o_dome svojho sluhu aj do budúcnosti. A to je zákon pre èloveka, Pane, Boe. ' where spis = '2Sam' and vers = 1 and k = 7 and v = 19
+update biblia set nvg = 'Èi ti môe ešte viac poveda Dávid? Veï ty poznáš svojho sluhu, Pane, Boe. ' where spis = '2Sam' and vers = 1 and k = 7 and v = 20
+update biblia set nvg = 'Pre svoje slovo a pod¾a svojho srdca si urobil všetky tieto ve¾ké veci a oznámil si ich svojmu sluhovi. ' where spis = '2Sam' and vers = 1 and k = 7 and v = 21
+update biblia set nvg = 'Preto si ve¾kı, Pane, Boe, lebo niet podobného tebe, ani niet Boha okrem teba pod¾a toho všetkého, èo sme na vlastné uši poèuli. ' where spis = '2Sam' and vers = 1 and k = 7 and v = 22
+update biblia set nvg = 'Kto je ako tvoj ¾ud Izrael, jedinı národ na zemi, ktorı si šiel Boh vykúpi za svoj ¾ud, aby sebe získal meno a pre nich urobil ve¾ké a hrozné veci: e si vyhnal pred svojím ¾udom, ktorı si si vykúpil z_Egypta, národy a ich bohov? ' where spis = '2Sam' and vers = 1 and k = 7 and v = 23
+update biblia set nvg = 'Upevnil si svoj národ, Izrael, ako svoj národ naveky a ty, Pane, stal si sa jeho Bohom. ' where spis = '2Sam' and vers = 1 and k = 7 and v = 24
+update biblia set nvg = 'A teraz, Pane, Boe, naveky potvrdzuj slovo, ktoré si povedal o_svojom sluhovi a o_jeho dome, a urob, ako si povedal!' where spis = '2Sam' and vers = 1 and k = 7 and v = 25
+update biblia set nvg = 'Tak bude naveky oslávené tvoje meno a bude sa hovori: ‚Pán zástupov je Bohom Izraela.‘ A dom tvojho sluhu Dávida bude pevnı pred tebou. ' where spis = '2Sam' and vers = 1 and k = 7 and v = 26
+update biblia set nvg = 'Lebo ty, Pane zástupov, Boe Izraela, zjavil si svojmu sluhovi: ‚Vybudujem ti dom.‘ Preto sa tvoj sluha odváil modli sa k tebe túto modlitbu. ' where spis = '2Sam' and vers = 1 and k = 7 and v = 27
+update biblia set nvg = 'A teraz, Pane, Boe, ty si Boh a tvoje slová sú pravdivé.' where spis = '2Sam' and vers = 1 and k = 7 and v = 28
+update biblia set nvg = 'Keï si teda s¾úbil svojmu sluhovi tieto dobrá, zaèni poehnáva dom svojho sluhu, aby trval pred tebou veène, lebo ty, Pane, Boe, si hovoril; a dom tvojho sluhu bude poehnanı tvojím veènım poehnaním.“' where spis = '2Sam' and vers = 1 and k = 7 and v = 29
+go
+-- ‚‘
+
+-- OCR13SOc_CIT1	11, 1-17. 26-27
+-- 263	2 Sam 11, 1-4a. 5-10a. 13-17
+update biblia set lh_id = 'OCR13SOc_CIT1' where spis = '2Sam' and vers = 1 and k = 11 and v between 1 and 17
+update biblia set lh_id = 'OCR13SOc_CIT1' where spis = '2Sam' and vers = 1 and k = 11 and v between 26 and 27
+update biblia set lc_id = 263 where spis = '2Sam' and vers = 1 and k = 11 and v between 1 and 10
+update biblia set lc_id = 263 where spis = '2Sam' and vers = 1 and k = 11 and v between 13 and 17
+go
+
+update biblia set nvg = 'Po roku, v_èase, keï králi tiahnu do boja, poslal Dávid Joaba a s_ním svojich sluhov i_celı Izrael; spustošili Amonèanov a obliehali Rabu. Dávid však ostal v_Jeruzaleme.' where spis = '2Sam' and vers = 1 and k = 11 and v = 1
+update biblia set nvg = 'V_istı veèer vstal Dávid zo svojho lôka a prechádzal sa na streche krá¾ovského domu. Zo strechy videl enu, ako sa kúpe. ena bola ve¾mi pekná. ' where spis = '2Sam' and vers = 1 and k = 11 and v = 2
+update biblia set nvg = 'Krá¾ poslal zisti, kto je tá ena; a oznámili mu, e je to Betsabe, Eliamova dcéra, ena Hetejèana Uriáša. ' where spis = '2Sam' and vers = 1 and k = 11 and v = 3
+update biblia set nvg = 'Dávid poslal poslov a dal si ju privies. Keï prišla k_nemu, spal s_òou; práve sa oèistila od svojej neèistoty. Potom sa vrátila domov ' where spis = '2Sam' and vers = 1 and k = 11 and v = 4
+update biblia set nvg = 'a pretoe poèala, poslala Dávidovi odkaz: „Poèala som.“' where spis = '2Sam' and vers = 1 and k = 11 and v = 5
+update biblia set nvg = 'Dávid odkázal Joabovi: „Pošli ku mne Hetejèana Uriáša!“ A Joab poslal Uriáša k_Dávidovi. ' where spis = '2Sam' and vers = 1 and k = 11 and v = 6
+update biblia set nvg = 'Keï k_nemu Uriáš došiel, Dávid sa vypytoval, ako sa má Joab a mustvo a ako pokraèuje vojna. ' where spis = '2Sam' and vers = 1 and k = 11 and v = 7
+update biblia set nvg = 'Potom Dávid povedal Uriášovi: „Choï do svojho domu a umy si nohy.“ Uriáš vyšiel z_krá¾ovského domu a poslali za ním krá¾ovské jedlo. ' where spis = '2Sam' and vers = 1 and k = 11 and v = 8
+update biblia set nvg = 'Ale Uriáš spal pri bráne krá¾ovského domu s_ostatnımi sluhami svojho pána a nešiel do svojho domu.' where spis = '2Sam' and vers = 1 and k = 11 and v = 9
+update biblia set nvg = 'Dávidovi oznámili: „Uriáš nešiel do svojho domu.“ Dávid povedal Uriášovi: „Èi si neprišiel z_cesty? Preèo si nešiel do svojho domu?“ ' where spis = '2Sam' and vers = 1 and k = 11 and v = 10
+update biblia set nvg = 'Uriáš odpovedal Dávidovi: „Archa, Izrael a Júda bıvajú v_stanoch, môj pán Joab a sluhovia môjho pána táboria na poli a ja mám vojs do svojho domu jes, pi a spa so svojou enou? Ako iješ a ako ije tvoja duša, takú vec neurobím.“ ' where spis = '2Sam' and vers = 1 and k = 11 and v = 11
+update biblia set nvg = 'Dávid povedal Uriášovi: „Zostaò tu aj dnes a zajtra a prepustím.“ Uriáš zostal v_ten deò aj na druhı deò v_Jeruzaleme. ' where spis = '2Sam' and vers = 1 and k = 11 and v = 12
+update biblia set nvg = 'Dávid ho pozval, aby s_ním jedol a pil, a opil ho. Ale on veèer šiel spa na svoje lôko so sluhami svojho pána, a do svojho domu nešiel.' where spis = '2Sam' and vers = 1 and k = 11 and v = 13
+update biblia set nvg = 'Ráno Dávid napísal Joabovi list a poslal ho po Uriášovi. ' where spis = '2Sam' and vers = 1 and k = 11 and v = 14
+update biblia set nvg = 'V_liste písal: „Postavte Uriáša do prvého šíku, kde sa najtuhšie bojuje, a potom sa od neho stiahnite, nech ho zasiahnu a nech zomrie.“ ' where spis = '2Sam' and vers = 1 and k = 11 and v = 15
+update biblia set nvg = 'A keï Joab obliehal mesto, postavil Uriáša na miesto, o_ktorom vedel, e sú tam najsilnejší chlapi. ' where spis = '2Sam' and vers = 1 and k = 11 and v = 16
+update biblia set nvg = 'Mui z_mesta vyrazili a bojovali s_Joabom. A niektorí z_¾udu, z_Dávidovıch sluhov, padli a zomrel aj Hetejèan Uriáš. ' where spis = '2Sam' and vers = 1 and k = 11 and v = 17
+update biblia set nvg = 'Keï Uriášova manelka poèula, e jej mu Uriáš zomrel, oplakávala ho. ' where spis = '2Sam' and vers = 1 and k = 11 and v = 26
+update biblia set nvg = 'Keï prešiel èas smútku, Dávid poslal po òu a voviedol ju do svojho domu. Stala sa jeho enou a porodila mu syna. Ale Pánovi sa nepáèilo, èo urobil Dávid.' where spis = '2Sam' and vers = 1 and k = 11 and v = 27
+go
+
+-- OCR14NEc_CIT1	12, 1-25
+-- 264	2 Sam 12, 1-7a. 10-17
+-- 265	2 Sam 12, 7-10. 13
+update biblia set lh_id = 'OCR14NEc_CIT1' where spis = '2Sam' and vers = 1 and k = 12 and v between 1 and 25
+update biblia set lc_id = 264 where spis = '2Sam' and vers = 1 and k = 12 and v between 1 and 6
+update biblia set lc_id = 265 where spis = '2Sam' and vers = 1 and k = 12 and v between 7 and 9
+update biblia set lc_id = 264 where spis = '2Sam' and vers = 1 and k = 12 and v between 10 and 17
+go
+
+update biblia set nvg = 'Pán poslal Nátana k_Dávidovi. Nátan k_nemu šiel a povedal mu: „V_ktoromsi meste boli dvaja mui, jeden bohatı a druhı chudobnı. ' where spis = '2Sam' and vers = 1 and k = 12 and v = 1
+update biblia set nvg = 'Bohatı mal ve¾ké mnostvo oviec a dobytka. ' where spis = '2Sam' and vers = 1 and k = 12 and v = 2
+update biblia set nvg = 'Chudobnı zas nemal celkom niè, len jednu malú oveèku, ktorú si kúpil a ivil. Rástla u_neho spolu s_jeho demi. Jedla z_jeho chleba, pila z_jeho pohára a spala v_jeho lone: bola mu ako dcéra. ' where spis = '2Sam' and vers = 1 and k = 12 and v = 3
+update biblia set nvg = 'A keï k_boháèovi prišiel akısi pocestnı, bolo mu ¾úto vzia zo svojich oviec a zo svojho dobytka na pohostenie pocestného, èo k_nemu prišiel. Vzal chudákovu oveèku a pripravil z_nej pokrm pre èloveka, èo k_nemu došiel.“ ' where spis = '2Sam' and vers = 1 and k = 12 and v = 4
+update biblia set nvg = 'Dávid sa náramne rozhneval na toho èloveka a povedal Nátanovi: „Ako ije Pán, mu, èo to urobil, je synom smrti. ' where spis = '2Sam' and vers = 1 and k = 12 and v = 5
+update biblia set nvg = 'A oveèku vynahradí štvornásobne, pretoe to urobil a nemal z¾utovanie.“' where spis = '2Sam' and vers = 1 and k = 12 and v = 6
+update biblia set nvg = 'Tu Nátan povedal Dávidovi: „Ty si ten mu. Toto hovorí Pán, Boh Izraela: Ja som a pomazal za krá¾a nad Izraelom, ja som a vytrhol zo Saulovej ruky. ' where spis = '2Sam' and vers = 1 and k = 12 and v = 7
+update biblia set nvg = 'Dal som ti dom tvojho pána a eny tvojho pána do tvojho lona. Dal som ti dom Izraela i_Júdu a ak je to málo, pridám ti ešte ove¾a viac. ' where spis = '2Sam' and vers = 1 and k = 12 and v = 8
+update biblia set nvg = 'Preèo si teda pohrdol Pánovım slovom a urobil si, èo sa mu nepáèi? Hetejèana Uriáša si zabil meèom a jeho manelku si si vzal za enu; zavradil si ho meèom Ammonovıch synov. ' where spis = '2Sam' and vers = 1 and k = 12 and v = 9
+update biblia set nvg = 'Preto u nikdy neodstúpi meè od tvojho domu, lebo si mnou opovrhol a vzal si si manelku Hetejèana Uriáša za enu. ' where spis = '2Sam' and vers = 1 and k = 12 and v = 10
+update biblia set nvg = 'Preto hovorí Pán: Ja z_tvojho vlastného domu vyvolám na teba nešastie; pred tvojimi oèami ti vezmem eny a dám ich tvojmu blínemu a on bude za bieleho dòa spa s_tvojimi enami. ' where spis = '2Sam' and vers = 1 and k = 12 and v = 11
+update biblia set nvg = 'Ty si konal potajomky, ja toto urobím pred oèami celého Izraela za jasného dòa.“' where spis = '2Sam' and vers = 1 and k = 12 and v = 12
+update biblia set nvg = 'Dávid povedal Nátanovi: „Zhrešil som proti Pánovi.“ Nátan riekol Dávidovi: „Aj Pán ti odpustil hriech; nezomrieš. ' where spis = '2Sam' and vers = 1 and k = 12 and v = 13
+update biblia set nvg = 'Ale pretoe si tımto zavinil rúhanie Pánovıch nepriate¾ov, syn, ktorı sa ti narodí, zomrie.“ ' where spis = '2Sam' and vers = 1 and k = 12 and v = 14
+update biblia set nvg = 'A Nátan sa vrátil domov. // Pán udrel diea, ktoré Dávidovi porodila Uriášova ena, a ono ako ochorelo. ' where spis = '2Sam' and vers = 1 and k = 12 and v = 15
+update biblia set nvg = 'Dávid prosil Pána za diea, prísne sa postil a keï prišiel domov, celú noc leal na zemi. ' where spis = '2Sam' and vers = 1 and k = 12 and v = 16
+update biblia set nvg = 'Prišli k_nemu starší jeho domu a nútili ho vsta zo zeme, ale on nechcel, ani s_nimi nejedol. ' where spis = '2Sam' and vers = 1 and k = 12 and v = 17
+update biblia set nvg = 'Na siedmy deò diea zomrelo. A Dávidovi sluobníci báli sa oznámi mu, e diea zomrelo, lebo vraveli: „Keï diea ešte ilo, prehovárali sme ho a nepoèúval nás. Ako mu teraz povieme: ‚Chlapec zomrel‘? Vykoná daèo horšie.“ ' where spis = '2Sam' and vers = 1 and k = 12 and v = 18
+update biblia set nvg = 'Ale keï Dávid videl, ako si jeho sluobníci pošuškávajú, pochopil, e diea zomrelo, a opıtal sa svojich sluobníkov: „Zomrel chlapec?“ Oni mu odpovedali: „Zomrel.“' where spis = '2Sam' and vers = 1 and k = 12 and v = 19
+update biblia set nvg = 'Tu Dávid vstal zo zeme, umyl sa a pomazal sa, prezliekol si odev, šiel do Pánovho domu a klaòal sa. Potom sa vrátil domov, iadal, aby mu priniesli chlieb, a jedol. ' where spis = '2Sam' and vers = 1 and k = 12 and v = 20
+update biblia set nvg = 'Jeho sluobníci mu povedali: „Èo to robíš? Kım diea ešte ilo, postil si sa a plakal si preò. Keï však chlapec zomrel, vstal si a ješ chlieb.“ ' where spis = '2Sam' and vers = 1 and k = 12 and v = 21
+update biblia set nvg = 'On vravel: „Kım diea ešte ilo, postil som sa a plakal som preò. Hovoril som si: Ktovie, èi sa Pán nezmiluje nado mnou a diea bude i? ' where spis = '2Sam' and vers = 1 and k = 12 and v = 22
+update biblia set nvg = 'Teraz však, keï zomrelo, naèo by som sa postil? Vari ho ešte môem privola spä? Skôr ja odídem za ním, ono sa u ku mne nevráti.“' where spis = '2Sam' and vers = 1 and k = 12 and v = 23
+update biblia set nvg = 'Potom Dávid potešoval svoju enu Betsabe. Vošiel k_nej, spal s_òou, ona porodila syna a dal mu meno Šalamún. A Pán ho miloval. ' where spis = '2Sam' and vers = 1 and k = 12 and v = 24
+update biblia set nvg = 'I_odovzdal ho do rúk proroka Nátana a on mu dal kvôli Pánovi meno Jedidia (to jest Pánov miláèik).' where spis = '2Sam' and vers = 1 and k = 12 and v = 25
+go

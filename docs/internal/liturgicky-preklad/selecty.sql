@@ -98,11 +98,19 @@ order by 2
 
 select * from biblia where spis = 'Sdc'
 and nvg is not null
-*/
+
 select * from lc
 where sur like '1Sam%'
 or sur like '1 Sam%'
 order by 2
 
 select * from biblia where spis = '1Sam'
+and nvg is not null
+*/
+select * from lc
+where sur like '2Sam%'
+or sur like '2 Sam%'
+order by 2
+
+select * from biblia where spis = '2Sam'
 and nvg is not null
