@@ -180,3 +180,61 @@ go
 
 -- OCR11PIc_CIT1	13, 1-25
 -- 1621	Sdc 13, 2-7. 24-25a
+update biblia set lh_id = 'OCR11PIc_CIT1' where spis = 'Sdc' and vers = 1 and k = 13 and v between 1 and 25
+update biblia set lc_id = 1621 where spis = 'Sdc' and vers = 1 and k = 13 and v between 2 and 7
+update biblia set lc_id = 1621 where spis = 'Sdc' and vers = 1 and k = 13 and v between 24 and 25
+go
+
+update biblia set nvg = 'Synovia Izraela znova robili, èo sa Pánovi nepáèi, a on ich vydal na štyridsa rokov do rúk Filištíncov. ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 1
+update biblia set nvg = 'Bol istı mu zo Saray, z_kmeòa Dan, volal sa Manue. Jeho manelka bola neplodná. ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 2
+update biblia set nvg = 'Zjavil sa jej Pánov anjel a povedal: „H¾a, si neplodná a bez detí; no poèneš a porodíš syna. ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 3
+update biblia set nvg = 'Dávaj teda pozor: nepi víno ani inı opojnı nápoj a nejedz niè neèisté. ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 4
+update biblia set nvg = 'Lebo poèneš a porodíš syna, ktorého hlavy sa britva nedotkne: chlapec bude u od materského lona zasvätenı Bohu a on zaène vyslobodzova Izraela z_ruky Filištíncov.“' where spis = 'Sdc' and vers = 1 and k = 13 and v = 5
+update biblia set nvg = 'Ona prišla k_svojmu manelovi a povedala mu: „Prišiel ku mne Boí mu, vyzeral ako Boí anjel a vzbudzoval hrôzu. Nepıtala som sa ho, odkia¾ je, a ani on mi neprezradil svoje meno. ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 6
+update biblia set nvg = 'Povedal mi: ‚H¾a, poèneš a porodíš syna. Dávaj pozor: nepi víno ani inı opojnı nápoj a nejedz niè neèisté. Lebo chlapec bude u od materského lona zasvätenı Bohu a do dòa svojej smrti.‘“' where spis = 'Sdc' and vers = 1 and k = 13 and v = 7
+update biblia set nvg = 'Nato sa Manue modlil k_Pánovi: „Prosím, Pane, nech príde ešte raz Boí mu, ktorého si poslal, a nech nás pouèí, èo máme robi s_chlapcom, ktorı sa má narodi.“ ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 8
+update biblia set nvg = 'Boh vypoèul Manueho modlitbu a opä prišiel Boí anjel k_ene, keï sedela na poli. Jej manel Manue nebol s_òou. ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 9
+update biblia set nvg = 'Rıchlo teda beala za svojím muom a zvestovala mu: „H¾a, zjavil sa mi mu, èo prišiel ku mne v_onen deò.“ ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 10
+update biblia set nvg = 'Manue vstal, šiel za svojou enou a keï prišiel k_muovi, povedal mu: „To si ty, èo si sa rozprával so enou?“ ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 11
+update biblia set nvg = 'On odpovedal: „Ja som to.“ Manue mu povedal: „Na èo máme dáva pozor a èo robi s_chlapcom, keï sa splní tvoje slovo?“ ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 12
+update biblia set nvg = 'Pánov anjel Manuemu odpovedal: „Nech sa chráni všetkého, èo som povedal tvojej ene. ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 13
+update biblia set nvg = 'Nech nepoíva niè, èo pochádza z_vinièa, nech nepije víno ani inı opojnı nápoj, nech neje niè neèisté a nech zachováva, èo som jej prikázal.“' where spis = 'Sdc' and vers = 1 and k = 13 and v = 14
+update biblia set nvg = 'Manue povedal Pánovmu anjelovi: „Dovo¾, prosím, aby sme a zdrali a pripravili ti koz¾a.“ ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 15
+update biblia set nvg = 'Pánov anjel mu odpovedal: „Keby si ma aj zdral, nebudem jes tvoj chlieb. Ale ak chceš prinies zápalnú obetu, obetuj ju Pánovi.“ Manue toti nevedel, e je to Pánov anjel. ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 16
+update biblia set nvg = 'Povedal mu: „Ako sa voláš, aby sme si a mohli ucti, keï sa splní tvoje slovo?“ ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 17
+update biblia set nvg = 'On mu odpovedal: „Preèo sa pıtaš na moje meno? Ono je zázraèné.“ ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 18
+update biblia set nvg = 'Tu Manue vzal koz¾a a obetnı dar z_obilia, poloil to na skalu a obetoval Pánovi, ktorı koná zázraky. A on i_jeho ena sa prizerali. ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 19
+update biblia set nvg = 'Keï potom vystúpil plameò z_oltára do neba, v_plameni vystúpil aj Pánov anjel. Keï to uvidel Manue a jeho manelka, padli tvárou na zem; ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 20
+update biblia set nvg = 'a viac sa im Pánov anjel nezjavil. Manue hneï pochopil, e to bol Pánov anjel ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 21
+update biblia set nvg = 'a povedal svojej manelke: „Urèite zomrieme, lebo sme videli Boha.“ ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 22
+update biblia set nvg = 'ena mu vravela: „Keby nás Pán chcel zabi, nebol by prijal z_našich rúk zápalnú a pokrmovú obetu, ani by nám nebol bıval toto všetko ukázal a také veci povedal.“ ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 23
+update biblia set nvg = 'I porodila syna a dala mu meno Samson. Chlapec rástol a Pán ho poehnával. ' where spis = 'Sdc' and vers = 1 and k = 13 and v = 24
+update biblia set nvg = 'Pánov duch zaèal v_òom pôsobi v_Machane-Dan (Danovom tábore) medzi Saraou a Estaolom.' where spis = 'Sdc' and vers = 1 and k = 13 and v = 25
+go
+
+-- OCR11SOc_CIT1	16, 4-6. 16-31
+update biblia set lh_id = 'OCR11SOc_CIT1' where spis = 'Sdc' and vers = 1 and k = 16 and v between 4 and 6
+update biblia set lh_id = 'OCR11SOc_CIT1' where spis = 'Sdc' and vers = 1 and k = 16 and v between 16 and 31
+go
+
+update biblia set nvg = 'Potom sa Samson za¾úbil do eny, ktorá bıvala v_údolí Sorek a volala sa Dalila.' where spis = 'Sdc' and vers = 1 and k = 16 and v = 4
+update biblia set nvg = 'Prišli k_nej filištínske knieatá a povedali: „Oklam ho a vyzveï od neho, v_èom má takú silu a ako by sme ho mohli premôc a spútaného pokori. Ak to urobíš, dáme ti kadı tisícsto šeklov striebra.“' where spis = 'Sdc' and vers = 1 and k = 16 and v = 5
+update biblia set nvg = 'Dalila teda povedala Samsonovi: „Povedz mi, prosím, v_èom je tvoja ve¾ká sila a èím a mono zviaza a pokori?“' where spis = 'Sdc' and vers = 1 and k = 16 and v = 6
+go
+update biblia set nvg = 'A keï ho len unúvala a stále naò mnoho dní naliehala, ochabol na duchu a bol unavenı a na smr. ' where spis = 'Sdc' and vers = 1 and k = 16 and v = 16
+update biblia set nvg = 'Vtedy jej otvoril celé svoje srdce a povedal jej: „Nikdy sa britva nedotkla mojej hlavy, lebo som nazarej zasvätenı Bohu od lona svojej matky. Ak bude moja hlava oholená, opustí ma moja sila, oslabnem a budem ako ostatní ¾udia.“' where spis = 'Sdc' and vers = 1 and k = 16 and v = 17
+update biblia set nvg = 'Keï videla, e jej vyznal celú svoju dušu, poslala filištínskym knieatám odkaz: „Príïte sem ešte raz, lebo teraz mi otvoril celé svoje srdce.“ Oni vzali peniaze, ktoré s¾úbili, a išli. ' where spis = 'Sdc' and vers = 1 and k = 16 and v = 18
+update biblia set nvg = 'Ona ho uspala na svojich kolenách, zavolala holièa, dala mu oholi jeho sedem vrkoèov a zaèala ho pokorova, lebo hneï ho opustila jeho sila. ' where spis = 'Sdc' and vers = 1 and k = 16 and v = 19
+update biblia set nvg = 'Zvolala: „Filištínci idú na teba, Samson!“ On sa prebral zo spánku a povedal si v_duchu: „Vyviaznem z_toho ako doteraz a strasiem ich zo seba.“ Nevedel, e Pán od neho odstúpil. ' where spis = 'Sdc' and vers = 1 and k = 16 and v = 20
+update biblia set nvg = 'Keï sa ho Filištínci zmocnili, hneï mu vylúpili oèi, spútaného dvoma kovovımi reazami odviedli ho do Gazy a zatvoreného vo väzení donútili mlie.' where spis = 'Sdc' and vers = 1 and k = 16 and v = 21
+update biblia set nvg = 'Ale vlasy mu po oholení zaèali znovu rás. ' where spis = 'Sdc' and vers = 1 and k = 16 and v = 22
+update biblia set nvg = 'A filištínske knieatá sa zišli, aby priniesli ve¾kolepé obety svojmu bohu Dagonovi a hodovali, lebo hovorili: // „Náš boh nám vydal do rúk / nášho nepriate¾a Samsona.“' where spis = 'Sdc' and vers = 1 and k = 16 and v = 23
+update biblia set nvg = 'Aj ¾ud, keï to videl, vychva¾oval svojho boha a hovoril to isté: // „Náš boh nám vydal do rúk / nášho nepriate¾a, / èo pustošil našu krajinu / a mnoho našich zahubil.“' where spis = 'Sdc' and vers = 1 and k = 16 and v = 24
+update biblia set nvg = 'A keï u boli rozjarení, iadali zavola Samsona, aby ich zabával. Priviedli ho z_väzenia a on ich zabával. Postavili ho medzi dva ståpy. ' where spis = 'Sdc' and vers = 1 and k = 16 and v = 25
+update biblia set nvg = 'Tu povedal chlapcovi, ktorı ho dral za ruku: „Pus ma, nech nahmatám ståpy, na ktorıch stojí dom, nech sa o_ne opriem a trochu si odpoèiniem.“ ' where spis = 'Sdc' and vers = 1 and k = 16 and v = 26
+update biblia set nvg = 'A dom bol plnı muov i_ien. Boli tam aj všetky filištínske knieatá a zo strechy sa dívalo asi tritisíc obojeho pohlavia, ako ich Samson zabáva. ' where spis = 'Sdc' and vers = 1 and k = 16 and v = 27
+update biblia set nvg = 'On však zavolal na Pána: „Pane, Boe, spomeò si na mòa! Vrá mi, Boe, ešte tentoraz pôvodnú silu, aby som sa vypomstil na Filištíncoch aspoò za jedno z_mojich dvoch oèí!“ ' where spis = 'Sdc' and vers = 1 and k = 16 and v = 28
+update biblia set nvg = 'A nahmatal oba prostredné ståpy, na ktorıch dom spoèíval, oprel sa do jedného z_nich pravou, do druhého ¾avou rukou ' where spis = 'Sdc' and vers = 1 and k = 16 and v = 29
+update biblia set nvg = 'a povedal: „Nech zomriem s_Filištíncami!“ Mocne ståpmi zatriasol a dom padol na všetky knieatá i_na ostatnıch, èo tam boli. A ove¾a viacerıch zabil, keï zomieral, ako zabil predtım za svojho ivota. ' where spis = 'Sdc' and vers = 1 and k = 16 and v = 30
+update biblia set nvg = 'Tu prišli jeho bratia a celé príbuzenstvo, vzali jeho telo a pochovali ho v_dome jeho otca Manueho medzi Saraou a Estaolom. Súdil Izrael dvadsa rokov. ' where spis = 'Sdc' and vers = 1 and k = 16 and v = 31
+go
