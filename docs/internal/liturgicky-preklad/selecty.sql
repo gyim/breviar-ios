@@ -77,12 +77,18 @@ order by 2
 
 select * from biblia where spis = 'Sir'
 and nvg is not null
-*/
 
 select * from lc
 where sur like 'Dt%'
 order by 2
 
 select * from biblia where spis = 'Dt'
+and nvg is not null
+*/
+select * from lc
+where sur like 'Joz%'
+order by 2
+
+select * from biblia where spis = 'Joz'
 and nvg is not null
 
