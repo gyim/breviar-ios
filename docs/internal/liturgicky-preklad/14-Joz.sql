@@ -55,14 +55,14 @@ go
 -- OCR10STRc_CIT1	3, 1-17; 4, 14-19; 5, 10-12
 -- 931	Joz 3, 7-10a. 11. 13-17
 -- 932	Joz 5, 9a. 10-12
-update biblia set lh_id = 'OCR10UTc_CIT1' where spis = 'Joz' and vers = 1 and k = 3 and v between 1 and 17
+update biblia set lh_id = 'OCR10STRc_CIT1' where spis = 'Joz' and vers = 1 and k = 3 and v between 1 and 17
 update biblia set lc_id = 931 where spis = 'Joz' and vers = 1 and k = 3 and v between 7 and 10
 update biblia set lc_id = 931 where spis = 'Joz' and vers = 1 and k = 3 and v = 11
 update biblia set lc_id = 931 where spis = 'Joz' and vers = 1 and k = 3 and v between 13 and 17
 go
-update biblia set lh_id = 'OCR10UTc_CIT1' where spis = 'Joz' and vers = 1 and k = 4 and v between 14 and 19
+update biblia set lh_id = 'OCR10STRc_CIT1' where spis = 'Joz' and vers = 1 and k = 4 and v between 14 and 19
 go
-update biblia set lh_id = 'OCR10UTc_CIT1' where spis = 'Joz' and vers = 1 and k = 5 and v between 10 and 12
+update biblia set lh_id = 'OCR10STRc_CIT1' where spis = 'Joz' and vers = 1 and k = 5 and v between 10 and 12
 update biblia set lc_id = 932 where spis = 'Joz' and vers = 1 and k = 5 and v between 9 and 12
 go
 
@@ -98,8 +98,8 @@ update biblia set nvg = 'Na druhý deò, ako jedli z_úrody zeme, prestala manna a 
 go
 
 -- OCR10STVc_CIT1	5, 13 – 6, 21
-update biblia set lh_id = 'OCR10UTc_CIT1' where spis = 'Joz' and vers = 1 and k = 5 and v between 13 and 16
-update biblia set lh_id = 'OCR10UTc_CIT1' where spis = 'Joz' and vers = 1 and k = 6 and v between 1 and 21
+update biblia set lh_id = 'OCR10STVc_CIT1' where spis = 'Joz' and vers = 1 and k = 5 and v between 13 and 16
+update biblia set lh_id = 'OCR10STVc_CIT1' where spis = 'Joz' and vers = 1 and k = 6 and v between 1 and 21
 go
 
 update biblia set nvg = 'Keï bol Jozue na poli mesta Jericha, zdvihol oèi a videl, že oproti nemu stojí akýsi muž a drží vytasený meè. Podišiel k_nemu a povedal: „Patríš k_nám alebo k_nepriate¾om?“ ' where spis = 'Joz' and vers = 1 and k = 5 and v = 13
@@ -131,8 +131,8 @@ update biblia set nvg = 'A pozabíjali všetko, èo v_òom bolo: od muža až po ženu 
 go
 
 -- OCR10PIc_CIT1	10, 1-14; 11, 15-17
-update biblia set lh_id = 'OCR10UTc_CIT1' where spis = 'Joz' and vers = 1 and k = 10 and v between 1 and 14
-update biblia set lh_id = 'OCR10UTc_CIT1' where spis = 'Joz' and vers = 1 and k = 11 and v between 15 and 17
+update biblia set lh_id = 'OCR10PIc_CIT1' where spis = 'Joz' and vers = 1 and k = 10 and v between 1 and 14
+update biblia set lh_id = 'OCR10PIc_CIT1' where spis = 'Joz' and vers = 1 and k = 11 and v between 15 and 17
 go
 
 update biblia set nvg = 'Keï jeruzalemský krá¾ Adonizedek poèul, že Jozue zaujal Haj a znièil ho – ako urobil s_Jerichom a jeho krá¾om, tak urobil aj s_Hajom a jeho krá¾om – a že Gabaonèania uzavreli s_Izraelom mier a zostali medzi nimi, ' where spis = 'Joz' and vers = 1 and k = 10 and v = 1
@@ -159,8 +159,8 @@ go
 -- 928	Joz 24, 1-13
 -- 929	Joz 24, 1-2a. 15-17. 18b
 -- 930	Joz 24, 14-29
-update biblia set lh_id = 'OCR10UTc_CIT1' where spis = 'Joz' and vers = 1 and k = 24 and v between 1 and 7
-update biblia set lh_id = 'OCR10UTc_CIT1' where spis = 'Joz' and vers = 1 and k = 24 and v between 13 and 28
+update biblia set lh_id = 'OCR10SOc_CIT1' where spis = 'Joz' and vers = 1 and k = 24 and v between 1 and 7
+update biblia set lh_id = 'OCR10SOc_CIT1' where spis = 'Joz' and vers = 1 and k = 24 and v between 13 and 28
 update biblia set lc_id = 928 where spis = 'Joz' and vers = 1 and k = 24 and v between 1 and 13
 update biblia set lc_id = 930 where spis = 'Joz' and vers = 1 and k = 24 and v between 14 and 29
 go
