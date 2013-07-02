@@ -348,7 +348,6 @@ go
 update biblia set lc_id = 542 where spis = 'Gn' and vers = 1 and k = 18 and v between 1 and 15
 update biblia set lc_id = 543 where spis = 'Gn' and vers = 1 and k = 18 and v between 16 and 33
 go
--- ‚‘
 
 update biblia set nvg = 'Abrahámovi sa zjavil Pán pri duboch Mambreho, keï sedel za najväèšej horúèavy dòa pri vchode do svojho stanu. ' where spis = 'Gn' and vers = 1 and k = 18 and v = 1
 update biblia set nvg = 'Keï zdvihol oèi, zbadal neïaleko stá troch muov. Len èo ich zazrel, utekal im od vchodu do stanu v ústrety, poklonil sa a po zem ' where spis = 'Gn' and vers = 1 and k = 18 and v = 2
@@ -455,3 +454,232 @@ update biblia set nvg = 'A pretoe si poslúchol môj hlas, v_tvojom potomstve bud
 update biblia set nvg = 'Potom sa Abrahám vrátil k svojim sluhom a všetci spolu sa pobrali do Bersaby. A Abrahám ostal bıva v Bersabe.' where spis = 'Gn' and vers = 1 and k = 22 and v = 19
 go
 
+-- 555	Gn 23, 1-4. 19; 24, 1-8. 62-67
+update biblia set lc_id = 555 where spis = 'Gn' and vers = 1 and k = 23 and v between 1 and 4
+update biblia set lc_id = 555 where spis = 'Gn' and vers = 1 and k = 23 and v = 19
+update biblia set lc_id = 555 where spis = 'Gn' and vers = 1 and k = 24 and v between 1 and 8
+update biblia set lc_id = 555 where spis = 'Gn' and vers = 1 and k = 24 and v between 62 and 67
+go
+
+update biblia set nvg = 'Sára sa doila stodvadsasedem rokov ' where spis = 'Gn' and vers = 1 and k = 23 and v = 1
+update biblia set nvg = 'a zomrela v Kariatarbé, èo je Hebron, v krajine Kanaán. Abrahám išiel smúti za òou a oplakáva ju.' where spis = 'Gn' and vers = 1 and k = 23 and v = 2
+update biblia set nvg = 'Potom prerušil pohrebnı obrad a povedal Hetejcom: ' where spis = 'Gn' and vers = 1 and k = 23 and v = 3
+update biblia set nvg = '"Som u vás len cudzinec a hos. Dajte mi u vás miesto na dediènú hrobku, kde by som mohol pochova svoju màtvu."' where spis = 'Gn' and vers = 1 and k = 23 and v = 4
+go
+update biblia set nvg = 'Potom Abrahám pochoval svoju enu Sáru v jaskyni na pozemku Makpela oproti Mambre, èo je Hebron, v krajine Kanaán. ' where spis = 'Gn' and vers = 1 and k = 23 and v = 19
+go
+update biblia set nvg = 'Abrahám bol u starec vysokého veku a Pán ho vo všetkom poehnával.' where spis = 'Gn' and vers = 1 and k = 24 and v = 1
+update biblia set nvg = 'Tu Abrahám povedal najstaršiemu sluhovi svojho domu, ktorı spravoval celı jeho majetok: "Polo svoju ruku pod moje bedrá ' where spis = 'Gn' and vers = 1 and k = 24 and v = 2
+update biblia set nvg = 'a zaprisahám a na Pána, Boha neba i zeme, e môjmu synovi nevezmeš enu z dcér Kanaáncov, medzi ktorımi bıvam, ' where spis = 'Gn' and vers = 1 and k = 24 and v = 3
+update biblia set nvg = 'ale pôjdeš do mojej vlasti, k mojim príbuznım a tam vyberieš enu pre môjho syna Izáka."' where spis = 'Gn' and vers = 1 and k = 24 and v = 4
+update biblia set nvg = 'Sluha odvetil: "A ak ena nebude chcie ís so mnou do tejto krajiny, mám tvojho syna zavies naspä do krajiny, z ktorej si vyšiel?"' where spis = 'Gn' and vers = 1 and k = 24 and v = 5
+update biblia set nvg = 'Abrahám mu povedal: "Neopová sa; nikdy ta nesmieš zavies môjho syna! ' where spis = 'Gn' and vers = 1 and k = 24 and v = 6
+update biblia set nvg = 'Pán, Boh nebies, ktorı ma vyviedol z domu môjho otca a z môjho rodného kraja, ktorı so mnou hovoril a prisahal mi: ‚Túto zem dám tvojmu potomstvu,‘ pošle pred tebou svojho anjela, aby si tam vybral enu môjmu synovi. ' where spis = 'Gn' and vers = 1 and k = 24 and v = 7
+update biblia set nvg = 'A keby ena nechcela ís s tebou, táto prísaha a neviae. Len môjho syna ta nevoï!"' where spis = 'Gn' and vers = 1 and k = 24 and v = 8
+go
+update biblia set nvg = 'Izák prišiel od studne Lachajroi a bıval v Negebe. ' where spis = 'Gn' and vers = 1 and k = 24 and v = 62
+update biblia set nvg = 'Na sklonku dòa vyšiel Izák do po¾a iali. Keï zdvihol oèi, videl prichádza avy.' where spis = 'Gn' and vers = 1 and k = 24 and v = 63
+update biblia set nvg = 'Aj Rebeka zdvihla oèi a zbadala Izáka. Zosadla z avy ' where spis = 'Gn' and vers = 1 and k = 24 and v = 64
+update biblia set nvg = 'a opıtala sa sluhu: "Kto je tamten èlovek, èo nám ide oproti po poli?" On jej odpovedal: "To je môj pán." Rıchlo vzala závoj a zahalila sa.' where spis = 'Gn' and vers = 1 and k = 24 and v = 65
+update biblia set nvg = 'Sluha potom porozprával Izákovi všetko, èo vykonal, ' where spis = 'Gn' and vers = 1 and k = 24 and v = 66
+update biblia set nvg = 'a Izák ju voviedol do stanu svojej matky Sáry. Vzal si Rebeku za enu a tak ju miloval, e sa uspokojil nad smrou svojej matky.' where spis = 'Gn' and vers = 1 and k = 24 and v = 67
+go
+
+-- 556	Gn 27, 1-5. 15-29
+update biblia set lc_id = 556 where spis = 'Gn' and vers = 1 and k = 27 and v between 1 and 5
+update biblia set lc_id = 556 where spis = 'Gn' and vers = 1 and k = 27 and v between 15 and 29
+go
+
+update biblia set nvg = 'Izák zostarel a oèi mu tak zoslabli, e nevidel. Zavolal si svojho staršieho syna Ezaua a povedal mu: "Syn môj." On odvetil: "Tu som."' where spis = 'Gn' and vers = 1 and k = 27 and v = 1
+update biblia set nvg = 'Otec mu povedal: "Vidíš, u som starı a neviem, kedy zomriem. ' where spis = 'Gn' and vers = 1 and k = 27 and v = 2
+update biblia set nvg = 'Vezmi si zbraò, tulec a luk, a vyjdi na pole. Keï nieèo ulovíš, ' where spis = 'Gn' and vers = 1 and k = 27 and v = 3
+update biblia set nvg = 'priprav mi z toho pokrm, veï vieš, akı mám rád, a prines mi ho. Zajem si a poehnám a prv, ako zomriem."' where spis = 'Gn' and vers = 1 and k = 27 and v = 4
+update biblia set nvg = 'Ale Rebeka poèula, èo Izák hovoril svojmu synovi Ezauovi. Ezau odišiel na pole, aby nieèo ulovil a priniesol, ' where spis = 'Gn' and vers = 1 and k = 27 and v = 5
+go
+update biblia set nvg = 'a Rebeka obliekla Jakuba do najlepších Ezauovıch šiat, èo mala v dome pri ruke, ' where spis = 'Gn' and vers = 1 and k = 27 and v = 15
+update biblia set nvg = 'a koz¾acími kokami mu ovinula ruky a holı krk. ' where spis = 'Gn' and vers = 1 and k = 27 and v = 16
+update biblia set nvg = 'Potom dala svojmu synovi Jakubovi do rúk chutné jedlo a chlieb, èo pripravila.' where spis = 'Gn' and vers = 1 and k = 27 and v = 17
+update biblia set nvg = 'On išiel k otcovi a povedal: "Otèe môj." // Ten odvetil: "Poèúvam. Kto si, syn môj?"' where spis = 'Gn' and vers = 1 and k = 27 and v = 18
+update biblia set nvg = 'A Jakub povedal svojmu otcovi: "Ja som Ezau, tvoj prvorodenı. Urobil som, ako si mi rozkázal. Poï, sadni si, jedz, èo som ulovil, a poehnaj ma."' where spis = 'Gn' and vers = 1 and k = 27 and v = 19
+update biblia set nvg = 'Ale Izák sa opıtal svojho syna: "Ako si mohol tak rıchlo nieèo nájs, syn môj?" On odvetil: "Pán, tvoj Boh, chcel, aby som na to natrafil."' where spis = 'Gn' and vers = 1 and k = 27 and v = 20
+update biblia set nvg = 'Izák povedal Jakubovi: "Pristúp blišie, nech sa a dotknem, syn môj, a zistím, èi si ty môj syn Ezau alebo nie." ' where spis = 'Gn' and vers = 1 and k = 27 and v = 21
+update biblia set nvg = 'On pristúpil k otcovi a keï ho Izák ohmatal, povedal: "Hlas, hlas je síce Jakubov, ale ruky, ruky sú Ezauove."' where spis = 'Gn' and vers = 1 and k = 27 and v = 22
+update biblia set nvg = 'Nepoznal ho, lebo mal ruky chlpaté ako jeho starší syn. Preto ho poehnal. ' where spis = 'Gn' and vers = 1 and k = 27 and v = 23
+update biblia set nvg = 'A znova sa ho spıtal: "Naozaj si to ty, môj syn Ezau?" on odpovedal: "Áno, ja som to."' where spis = 'Gn' and vers = 1 and k = 27 and v = 24
+update biblia set nvg = 'Izák povedal: "Prines mi to. Budem jes z tvojho úlovku, syn môj, a poehnám a." Podal mu to a on jedol. A podal mu aj víno. Jeho otec Izák si upil ' where spis = 'Gn' and vers = 1 and k = 27 and v = 25
+update biblia set nvg = 'a povedal mu: "Poï ku mne, syn môj, a pobozkaj ma!"' where spis = 'Gn' and vers = 1 and k = 27 and v = 26
+update biblia set nvg = 'Podišiel k nemu a pobozkal ho. Izák zacítil vôòu jeho šiat a ehnal ho, hovoriac: "H¾a, vôòa môjho syna je ako vôòa úrodného po¾a, ktoré poehnal Pán.' where spis = 'Gn' and vers = 1 and k = 27 and v = 27
+update biblia set nvg = 'Nech ti Boh dá nebeskú rosu, írnos zeme a hojnos zrna i muštu.' where spis = 'Gn' and vers = 1 and k = 27 and v = 28
+update biblia set nvg = 'Nech ti slúia ¾udia a nech sa sklonia pred tebou národy. Buï pánom nad svojimi bratmi a nech sa pred tebou skláòajú synovia tvojej matky. Nech je prekliaty, kto a bude preklína, a poehnanı, kto a bude ehna."' where spis = 'Gn' and vers = 1 and k = 27 and v = 29
+go
+
+-- 557	Gn 28, 10-22a
+update biblia set lc_id = 557 where spis = 'Gn' and vers = 1 and k = 28 and v between 10 and 22
+go
+
+update biblia set nvg = 'Jakub odišiel z Bersaby a putoval do Charranu. ' where spis = 'Gn' and vers = 1 and k = 28 and v = 10
+update biblia set nvg = 'Keï došiel na isté miesto a rozhodol sa tam po západe slnka prenocova, vzal jeden z kameòov, èo tam leali, poloil si ho pod hlavu a zaspal na tom mieste.' where spis = 'Gn' and vers = 1 and k = 28 and v = 11
+update biblia set nvg = 'Vo sne videl rebrík postavenı na zemi, ktorého vrchol sa dotıkal neba, videl Boích anjelov, ako po òom vystupujú a zostupujú, ' where spis = 'Gn' and vers = 1 and k = 28 and v = 12
+update biblia set nvg = 'a Pána, ako sa opiera o rebrík a hovorí mu: "Ja som Pán, Boh tvojho otca Abraháma a Boh Izáka. Zem, na ktorej spíš, dám tebe a tvojmu potomstvu. ' where spis = 'Gn' and vers = 1 and k = 28 and v = 13
+update biblia set nvg = 'Tvojho potomstva bude ako prachu na zemi; rozšíriš sa na západ a na vıchod, na sever a na juh; v tebe a v tvojom potomstve budú poehnané všetky pokolenia zeme.' where spis = 'Gn' and vers = 1 and k = 28 and v = 14
+update biblia set nvg = 'Ja som s tebou a budem a chráni všade, kam pôjdeš, a privediem a spä do tejto krajiny; neopustím a, kım nesplním, èo som ti s¾úbil."' where spis = 'Gn' and vers = 1 and k = 28 and v = 15
+update biblia set nvg = 'Keï sa Jakub prebudil zo sna, povedal: "Skutoène, Pán je na tomto mieste a ja som o tom nevedel." ' where spis = 'Gn' and vers = 1 and k = 28 and v = 16
+update biblia set nvg = 'A s chvením hovoril: "Aké hrozné je toto miesto! Tu je naozaj dom Boí a brána do neba." ' where spis = 'Gn' and vers = 1 and k = 28 and v = 17
+update biblia set nvg = 'Keï Jakub ráno vstal, vzal kameò, èo mal poloenı pod hlavou, postavil ho ako pamätnı ståp a vylial naò olej. ' where spis = 'Gn' and vers = 1 and k = 28 and v = 18
+update biblia set nvg = 'A toto miesto nazval Betel. Predtım sa mesto volalo Luza.' where spis = 'Gn' and vers = 1 and k = 28 and v = 19
+update biblia set nvg = 'A Jakub urobil s¾ub: "Ak bude Boh so mnou, ak ma bude chráni na ceste, po ktorej idem, ak mi dá chlieb na jedenie a šaty na zaodiatie, ' where spis = 'Gn' and vers = 1 and k = 28 and v = 20
+update biblia set nvg = 'keï sa šastne vrátim do domu svojho otca, Pán bude mojím Bohom ' where spis = 'Gn' and vers = 1 and k = 28 and v = 21
+update biblia set nvg = 'a tento kameò, ktorı som postavil ako pomník, bude Boím domom. [...]"' where spis = 'Gn' and vers = 1 and k = 28 and v = 22
+go
+
+-- 563	Gn 32, 22-32
+-- NVg èísluje 22-32; Vg/SSV 23-33
+update biblia set lc_id = 563 where spis = 'Gn' and vers = 1 and k = 32 and v between /* 22 and 32 */ 23 and 33
+go
+
+update biblia set nvg = '(NVg 22)Jakub vstal za noci, vzal so sebou svoje dve eny, obe slúky i jedenás svojich synov a prešiel cez brod Jabok. ' where spis = 'Gn' and vers = 1 and k = 32 and v = 23
+update biblia set nvg = '(NVg 23)Vzal ich a previedol ich i všetko, èo mu patrilo, cez potok ' where spis = 'Gn' and vers = 1 and k = 32 and v = 24
+update biblia set nvg = '(NVg 24)a ostal sám. Tu s ním a do rána zápasil nejakı mu. ' where spis = 'Gn' and vers = 1 and k = 32 and v = 25
+update biblia set nvg = '(NVg 25)Keï onen videl, e ho nemôe zdola, dotkol sa mu bedrového kåbu a Jakubovi sa bedrovı kåb pri zápase s ním vykåboval. ' where spis = 'Gn' and vers = 1 and k = 32 and v = 26
+update biblia set nvg = '(NVg 26)Neznámy povedal: "Pus ma, lebo u vychodí zora." On odvetil: "Nepustím a, kım ma nepoehnáš."' where spis = 'Gn' and vers = 1 and k = 32 and v = 27
+update biblia set nvg = '(NVg 27)Ten mu povedal: "Ako sa voláš?" On odpovedal: "Jakub." ' where spis = 'Gn' and vers = 1 and k = 32 and v = 28
+update biblia set nvg = '(NVg 28)A tamten povedal: "Nebudeš sa u vola Jakub, ale Izrael, lebo si zápasil s Bohom i s ¾uïmi a zvíazil si!"' where spis = 'Gn' and vers = 1 and k = 32 and v = 29
+update biblia set nvg = '(NVg 29)Jakub sa ho pıtal: "Povedz mi svoje meno." Onen mu odpovedal: "Preèo chceš vedie moje meno?" A poehnal ho tam.' where spis = 'Gn' and vers = 1 and k = 32 and v = 30
+update biblia set nvg = '(NVg 30)Jakub nazval to miesto Fanuel, lebo si povedal: "Videl som Boha z tváre do tváre a ostal som naive."' where spis = 'Gn' and vers = 1 and k = 32 and v = 31
+update biblia set nvg = '(NVg 31)Keï prešiel Fanuel, vyšlo slnko a on kríval pre svoje bedro. ' where spis = 'Gn' and vers = 1 and k = 32 and v = 32
+update biblia set nvg = '(NVg 32)Preto Izraeliti a dodnes nejedia š¾achy bedrového kåbu, lebo onen sa dotkol š¾achy Jakubovho bedrového kåbu.' where spis = 'Gn' and vers = 1 and k = 32 and v = 33
+go
+
+-- 564	Gn 37, 3-4. 12-13a. 17b-28
+update biblia set lc_id = 564 where spis = 'Gn' and vers = 1 and k = 37 and v between 3 and 4
+update biblia set lc_id = 564 where spis = 'Gn' and vers = 1 and k = 37 and v between 12 and 13
+update biblia set lc_id = 564 where spis = 'Gn' and vers = 1 and k = 37 and v between 17 and 28
+go
+
+update biblia set nvg = 'Izrael miloval Jozefa viac ako všetkıch svojich synov, lebo sa mu narodil v starobe, a dal mu urobi dlhú tuniku. ' where spis = 'Gn' and vers = 1 and k = 37 and v = 3
+update biblia set nvg = 'Keï jeho bratia videli, e ho má otec radšej ako všetkıch ostatnıch synov, zaèali ho nenávidie a nevedeli sa s ním prívetivo rozpráva.' where spis = 'Gn' and vers = 1 and k = 37 and v = 4
+update biblia set nvg = 'Raz jeho bratia pásli ovce svojho otca pri Sicheme. ' where spis = 'Gn' and vers = 1 and k = 37 and v = 12
+update biblia set nvg = 'A Izrael povedal Jozefovi: "Tvoji bratia pasú ovce pri Sicheme, poï, pošlem a za nimi." [...]' where spis = 'Gn' and vers = 1 and k = 37 and v = 13
+update biblia set nvg = '[...] A Jozef išiel za svojimi bratmi a našiel ich v Dotaine.' where spis = 'Gn' and vers = 1 and k = 37 and v = 17
+update biblia set nvg = 'Oni ho zïaleka zbadali a prv ne k nim prišiel, sa dohodli, e ho zabijú. ' where spis = 'Gn' and vers = 1 and k = 37 and v = 18
+update biblia set nvg = 'Medzi sebou hovorili: "H¾a, snár prichádza; ' where spis = 'Gn' and vers = 1 and k = 37 and v = 19
+update biblia set nvg = 'poïte, zabijeme ho a hodíme do niektorej cisterny. A povieme, e ho zorala divá zver. Potom sa ukáe, èo mu pomôu jeho sny."' where spis = 'Gn' and vers = 1 and k = 37 and v = 20
+update biblia set nvg = 'Keï to poèul Ruben, usiloval sa vyslobodi ho z ich rúk a vravel: "Neberme mu ivot." ' where spis = 'Gn' and vers = 1 and k = 37 and v = 21
+update biblia set nvg = 'A ïalej im hovoril: "Neprelievajte krv. Hoïte ho do cisterny tu na pustatine a nepoškvròujte si ruky." To povedal preto, e ho chcel vyslobodi z ich rúk a vráti jeho otcovi.' where spis = 'Gn' and vers = 1 and k = 37 and v = 22
+update biblia set nvg = 'A len èo Jozef došiel k svojim bratom, zobliekli mu jeho dlhú tuniku ' where spis = 'Gn' and vers = 1 and k = 37 and v = 23
+update biblia set nvg = 'a hodili ho do cisterny, v ktorej nebolo vody.' where spis = 'Gn' and vers = 1 and k = 37 and v = 24
+update biblia set nvg = 'Potom si posadali a jedli chlieb. A keï zdvihli oèi, videli prichádza karavánu Izmaelitov z Galaádu. Ich avy niesli balzam, mastixovú ivicu a ladánum do Egypta. ' where spis = 'Gn' and vers = 1 and k = 37 and v = 25
+update biblia set nvg = 'Tu povedal Júda svojim bratom: "Èo by sme mali z toho, keby sme zabili svojho brata a zatajili jeho krv? ' where spis = 'Gn' and vers = 1 and k = 37 and v = 26
+update biblia set nvg = 'Bude lepšie preda ho Izmaelitom a nepoškvrni si ruky. Veï je to náš brat a naše telo." A bratia s ním súhlasili.' where spis = 'Gn' and vers = 1 and k = 37 and v = 27
+update biblia set nvg = 'A keï madiánski kupci prechádzali okolo, vytiahli Jozefa z cisterny a predali ho za dvadsa striebornıch Izmaelitom. A tí ho odviedli do Egypta.' where spis = 'Gn' and vers = 1 and k = 37 and v = 28
+go
+
+-- 566	Gn 41, 55-57; 42, 5-7a. 17-24a
+update biblia set lc_id = 566 where spis = 'Gn' and vers = 1 and k = 41 and v between 55 and 57
+go
+update biblia set lc_id = 566 where spis = 'Gn' and vers = 1 and k = 42 and v between 5 and 7
+update biblia set lc_id = 566 where spis = 'Gn' and vers = 1 and k = 42 and v between 17 and 24
+go
+
+update biblia set nvg = 'Egyptská krajina zaèala hladova a ¾ud volal k faraónovi o chlieb. On im povedal: "Choïte k Jozefovi a urobte všetko, èo vám povie." ' where spis = 'Gn' and vers = 1 and k = 41 and v = 55
+update biblia set nvg = 'Hlad do¾ahol na celú egyptskú krajinu; Jozef otvoril všetky sıpky a predával Egypanom obilie, lebo ich moril hlad. ' where spis = 'Gn' and vers = 1 and k = 41 and v = 56
+update biblia set nvg = 'A k Jozefovi do Egypta prichádzali aj všetky okolité krajiny kupova obilie, lebo núdza zachvátila celı svet.' where spis = 'Gn' and vers = 1 and k = 41 and v = 57
+go
+update biblia set nvg = 'S tımi, èo putovali do Egypta nakúpi obilie, prišli aj Izraelovi synovia, lebo aj v Kanaáne bol hlad. ' where spis = 'Gn' and vers = 1 and k = 42 and v = 5
+update biblia set nvg = 'A Jozef bol vladárom v egyptskej krajine, na jeho pokyn sa predávalo ¾uïom obilie. // Keï teda k nemu prišli jeho bratia a poklonili sa a po zem, ' where spis = 'Gn' and vers = 1 and k = 42 and v = 6
+update biblia set nvg = 'on ich poznal; ale rozprával sa s nimi prísnejšie ako s cudzími [...]' where spis = 'Gn' and vers = 1 and k = 42 and v = 7
+go
+update biblia set nvg = 'a dal ich na tri dni do väzenia. ' where spis = 'Gn' and vers = 1 and k = 42 and v = 17
+update biblia set nvg = '(Na tretí deò ich z väzenia vyviedol) a povedal: "Ak chcete i, urobte, èo som povedal; lebo ja sa bojím Boha. ' where spis = 'Gn' and vers = 1 and k = 42 and v = 18
+update biblia set nvg = 'Ak ste úprimní, jeden váš brat ostane vo väzení. Vy choïte, zaneste domov obilie, èo ste kúpili, ' where spis = 'Gn' and vers = 1 and k = 42 and v = 19
+update biblia set nvg = 'a priveïte ku mne vášho najmladšieho brata, aby sa dokázalo, e sú vaše reèi pravdivé, aby ste neprišli o ivot." // Oni urobili, ako povedal, ' where spis = 'Gn' and vers = 1 and k = 42 and v = 20
+update biblia set nvg = 'a medzi sebou si vraveli: "Právom takto trpíme, lebo sme sa previnili proti nášmu bratovi: videli sme úzkos jeho duše, keï nás úpenlivo prosil, a nepoèúvali sme. Preto na nás do¾ahlo toto trápenie."' where spis = 'Gn' and vers = 1 and k = 42 and v = 21
+update biblia set nvg = 'A Ruben hovoril: "Nevravel som vám: Neprehrešte sa proti chlapcovi? A nepoèúvali ste ma. Teraz sa od nás poaduje jeho krv."' where spis = 'Gn' and vers = 1 and k = 42 and v = 22
+update biblia set nvg = 'No nevedeli, e Jozef im rozumie, lebo sa s nimi rozprával prostredníctvom tlmoèníka. ' where spis = 'Gn' and vers = 1 and k = 42 and v = 23
+update biblia set nvg = 'Na chví¾ku sa od nich odvrátil a plakal. [...]' where spis = 'Gn' and vers = 1 and k = 42 and v = 24
+go
+
+-- 567	Gn 44, 18-21. 23b-29; 45, 1-5
+update biblia set lc_id = 567 where spis = 'Gn' and vers = 1 and k = 44 and v between 18 and 21
+update biblia set lc_id = 567 where spis = 'Gn' and vers = 1 and k = 44 and v between 24 and 29 -- v. 23b je len naznaèenı
+go
+update biblia set lc_id = 567 where spis = 'Gn' and vers = 1 and k = 45 and v between 1 and 5
+go
+
+update biblia set nvg = 'Júda pristúpil blišie k Jozefovi a dôverne vravel: "Prosím, pane môj, dovo¾, aby ti tvoj sluha povedal nieko¾ko slov, a nehnevaj sa na svojho sluhu; veï ty si ako faraón!' where spis = 'Gn' and vers = 1 and k = 44 and v = 18
+update biblia set nvg = 'Môj pán sa prvı raz pıtal svojich sluhov: ‚Máte ešte otca alebo brata?‘ ' where spis = 'Gn' and vers = 1 and k = 44 and v = 19
+update biblia set nvg = 'A my sme vtedy odpovedali môjmu pánovi: ‚Máme staruèkého otca a malého brata, ktorı sa mu narodil v starobe. Jeho brat po matke je u màtvy, a tak mu ostal len on po svojej matke; preto ho otec nene miluje.‘' where spis = 'Gn' and vers = 1 and k = 44 and v = 20
+update biblia set nvg = 'A ty si svojím sluhom rozkázal: ‚Priveïte ho ku mne, aby som ho videl na vlastné oèi. Ak nepríde s vami váš najmladší brat, neukazujte sa mi na oèi!‘' where spis = 'Gn' and vers = 1 and k = 44 and v = 21
+go
+update biblia set nvg = 'Keï sme potom došli k tvojmu sluhovi, nášmu otcovi, rozpovedali sme mu všetko, èo povedal môj pán.' where spis = 'Gn' and vers = 1 and k = 44 and v = 24
+update biblia set nvg = 'A náš otec vravel: ‚Choïte znova a kúpte trochu pšenice.‘' where spis = 'Gn' and vers = 1 and k = 44 and v = 25
+update biblia set nvg = 'My sme mu odvrávali: ‚Nemôeme ís. Ak pôjde s nami náš najmladší brat, pôjdeme aj my; lebo bez neho sa nesmieme ukáza na oèi tomu muovi.‘' where spis = 'Gn' and vers = 1 and k = 44 and v = 26
+update biblia set nvg = 'Na to nám tvoj sluha, náš otec, povedal: ‚Vy viete, e moja ena mi porodila len dvoch. ' where spis = 'Gn' and vers = 1 and k = 44 and v = 27
+update biblia set nvg = 'Jeden odo mòa odišiel a ja som povedal: Divá zver ho zorala! A doteraz ho niet. ' where spis = 'Gn' and vers = 1 and k = 44 and v = 28
+update biblia set nvg = 'Ak vezmete odo mòa aj tohoto a nieèo sa mu na ceste stane, privediete moje šediny bô¾om do hrobu.‘"' where spis = 'Gn' and vers = 1 and k = 44 and v = 29
+go
+update biblia set nvg = 'Jozef u nebol ïalej schopnı ovláda sa pred tımi, èo stáli okolo, a zvolal: "Vyjdite von všetci!" A tak nebol nik pri òom, keï sa dal pozna svojim bratom. ' where spis = 'Gn' and vers = 1 and k = 45 and v = 1
+update biblia set nvg = 'Dal sa do hlasitého plaèu, e ho poèuli aj Egypania a celı faraónov dom.' where spis = 'Gn' and vers = 1 and k = 45 and v = 2
+update biblia set nvg = 'Potom Jozef povedal svojim bratom: "Ja som Jozef! ije ešte môj otec?" Ale bratia sa tak pre¾akli, e mu nemohli odpoveda. ' where spis = 'Gn' and vers = 1 and k = 45 and v = 3
+update biblia set nvg = 'On sa im v¾údne prihováral: "No, poïte ku mne." // A keï pristúpili blišie, povedal: "Ja som Jozef, váš brat, ktorého ste predali do Egypta. ' where spis = 'Gn' and vers = 1 and k = 45 and v = 4
+update biblia set nvg = 'No netrápte sa a nesuujte, e ste ma predali do tejto krajiny, lebo to ma Boh poslal pred vami do Egypta na vašu záchranu."' where spis = 'Gn' and vers = 1 and k = 45 and v = 5
+go
+
+-- 568	Gn 46, 1-7. 28-30
+update biblia set lc_id = 568 where spis = 'Gn' and vers = 1 and k = 46 and v between 1 and 7
+update biblia set lc_id = 568 where spis = 'Gn' and vers = 1 and k = 46 and v between 28 and 30
+go
+
+update biblia set nvg = 'Izrael sa vydal na cestu so všetkım, èo mal. Keï došiel do Bersaby a priniesol Bohu svojho otca Izáka krvavú obetu, ' where spis = 'Gn' and vers = 1 and k = 46 and v = 1
+update biblia set nvg = 'poèul, ako ho Boh v noènom videní volá: "Jakub, Jakub!" On odpovedal: "Tu som!"' where spis = 'Gn' and vers = 1 and k = 46 and v = 2
+update biblia set nvg = 'Hovoril mu: "Ja som Boh, Boh tvojho otca. Neboj sa zostúpi do Egypta, lebo tam z teba urobím ve¾kı národ. ' where spis = 'Gn' and vers = 1 and k = 46 and v = 3
+update biblia set nvg = 'Ja ta pôjdem s tebou a ja a odtia¾ privediem spä; a Jozef ti vlastnou rukou zatlaèí oèi."' where spis = 'Gn' and vers = 1 and k = 46 and v = 4
+update biblia set nvg = 'Jakub sa teda pohol z Bersaby. Jeho synovia naloili jeho i svoje deti a eny na vozy, èo poslal faraón na prevezenie starca, ' where spis = 'Gn' and vers = 1 and k = 46 and v = 5
+update biblia set nvg = 'a vzali so sebou všetko, èo mali v krajine Kanaán. Tak prišli do Egypta Jakub a všetci jeho potomci: ' where spis = 'Gn' and vers = 1 and k = 46 and v = 6
+update biblia set nvg = 'jeho synovia a vnuci, dcéry a celé jeho potomstvo. ' where spis = 'Gn' and vers = 1 and k = 46 and v = 7
+go
+update biblia set nvg = 'Jakub poslal Júdu napred k Jozefovi, aby mu oznámil, e sa stretnú v Gessene. Keï prišli do kraja Gessen, ' where spis = 'Gn' and vers = 1 and k = 46 and v = 28
+update biblia set nvg = 'Jozef dal zapriahnu do svojho voza a išiel do Gessenu naproti svojmu otcovi. Keï ho uvidel, hodil sa mu okolo krku a dlho plakal v jeho objatí.' where spis = 'Gn' and vers = 1 and k = 46 and v = 29
+update biblia set nvg = 'Tu Izrael povedal Jozefovi: "Teraz u spokojne zomriem, lebo som videl tvoju tvár a viem, e ma preiješ."' where spis = 'Gn' and vers = 1 and k = 46 and v = 30
+go
+
+-- 569	Gn 49, 1-2. 8-10
+update biblia set lc_id = 569 where spis = 'Gn' and vers = 1 and k = 49 and v between 1 and 2
+update biblia set lc_id = 569 where spis = 'Gn' and vers = 1 and k = 49 and v between 8 and 10
+go
+
+update biblia set nvg = 'Jakub zavolal svojich synov a povedal im: "Zhromadite sa a oznámim vám, èo vás èaká v ïalekej budúcnosti: ' where spis = 'Gn' and vers = 1 and k = 49 and v = 1
+update biblia set nvg = 'Zhromadite sa a poèúvajte, Jakubovi synovia, poèujte Izraela, svojho otca!' where spis = 'Gn' and vers = 1 and k = 49 and v = 2
+go
+update biblia set nvg = 'Júda, teba budú chváli tvoji bratia, tvoja ruka bude na šiji tvojich nepriate¾ov, tebe sa budú klaòa synovia tvojho otca. ' where spis = 'Gn' and vers = 1 and k = 49 and v = 8
+update biblia set nvg = 'Mladım levom si Júda, od koristi vstávaš, syn môj; líha si a odpoèíva ako lev a ako levica: kto sa ho odvái vyruši?' where spis = 'Gn' and vers = 1 and k = 49 and v = 9
+update biblia set nvg = 'Nebude odòaté ezlo od Júdu ani vladárska berla od jeho nôh, kım nepríde ten, komu patrí, ktorého budú poslúcha národy."' where spis = 'Gn' and vers = 1 and k = 49 and v = 10
+go
+
+-- 570	Gn 49, 29-32; 50, 15-26
+-- verš 32 nie je explicitne v texte; zato je tam v. 33
+update biblia set lc_id = 570 where spis = 'Gn' and vers = 1 and k = 49 and v between 29 and 33
+go
+update biblia set lc_id = 570 where spis = 'Gn' and vers = 1 and k = 50 and v between 15 and 26
+go
+
+update biblia set nvg = 'Jakub prikázal svojim synom: "Ja sa pripojím k svojmu ¾udu; pochovajte ma s mojimi otcami v jaskyni Makpela, èo je na pozemku Hetejca Efrona ' where spis = 'Gn' and vers = 1 and k = 49 and v = 29
+update biblia set nvg = 'oproti Mambre v krajine Kanaán, ktorú kúpil Abrahám aj s pozemkom od Hetejca Efrona na dedièné pohrebisko.' where spis = 'Gn' and vers = 1 and k = 49 and v = 30
+update biblia set nvg = 'Tam pochovali jeho enu Sáru, tam je pochovanı Izák so svojou manelkou Rebekou a tam leí pochovaná aj Lia."' where spis = 'Gn' and vers = 1 and k = 49 and v = 31
+update biblia set nvg = '(NVg tento verš vynecháva)' where spis = 'Gn' and vers = 1 and k = 49 and v = 32
+update biblia set nvg = '(NVg 32)Keï skonèil túto reè, ktorou poúèal svojich synov, vyloil si nohy na lôko a zomrel; a tak sa pripojil k svojmu ¾udu.' where spis = 'Gn' and vers = 1 and k = 49 and v = 33
+go
+update biblia set nvg = 'Keï Jakub zomrel, Jozefovi bratia sa báli a vraveli si: "Len aby si nespomenul na príkorie, ktoré musel znies, a aby sa nám nepomstil za všetko zlo, èo sme mu vykonali!"' where spis = 'Gn' and vers = 1 and k = 50 and v = 15
+update biblia set nvg = 'Preto mu odkázali: "Tvoj otec nám prikázal skôr, ako zomrel, aby sme ti jeho slovami povedali: ' where spis = 'Gn' and vers = 1 and k = 50 and v = 16
+update biblia set nvg = '‚Prosím a, zabudni na zloèin svojich bratov, na ich hriech a nehanebnos, ktorej sa na tebe dopustili.‘ Aj my a prosíme, aby si nám odpustil tento nehanebnı èin; veï my uctievame Boha tvojho otca." Keï mu to hovorili, Jozef plakal.' where spis = 'Gn' and vers = 1 and k = 50 and v = 17
+update biblia set nvg = 'Potom išli za ním sami bratia, sklonili sa pred ním a vraveli: "Sme tvoji sluhovia."' where spis = 'Gn' and vers = 1 and k = 50 and v = 18
+update biblia set nvg = 'Ale on im povedal: "Nebojte sa! Môeme sa vari vzoprie Boej vôli? ' where spis = 'Gn' and vers = 1 and k = 50 and v = 19
+update biblia set nvg = 'Vy ste osnovali proti mne zlo, ale Boh to obrátil na dobré. Povıšil ma, ako vidíte, a tak zachránil mnoho ¾udu. ' where spis = 'Gn' and vers = 1 and k = 50 and v = 20
+update biblia set nvg = 'Nebojte sa u! Ja vás budem ivi, aj vaše deti." // Tešil ich a milo a v¾údne sa im prihováral.' where spis = 'Gn' and vers = 1 and k = 50 and v = 21
+update biblia set nvg = 'Tak bıval Jozef i celı dom jeho otca v Egypte. il stodesa rokov ' where spis = 'Gn' and vers = 1 and k = 50 and v = 22
+update biblia set nvg = 'a videl Efraimovıch synov a do tretieho pokolenia; aj synovia Machira, syna Manasseho, sa narodili na Jozefovıch kolenách.' where spis = 'Gn' and vers = 1 and k = 50 and v = 23
+update biblia set nvg = 'Po tom všetkom povedal Jozef svojim bratom: "Po mojej smrti sa vás Boh ujme a vyvedie vás z tejto krajiny do krajiny, o ktorej prisahal Abrahámovi, Izákovi a Jakubovi."' where spis = 'Gn' and vers = 1 and k = 50 and v = 24
+update biblia set nvg = 'A keï ich zaprisahal a povedal: "Boh vás navštívi; odneste z tohto miesta moje kosti so sebou," ' where spis = 'Gn' and vers = 1 and k = 50 and v = 25
+update biblia set nvg = 'zomrel stodesa roènı. Zabalzamovali ho a uloili do rakvy v Egypte.' where spis = 'Gn' and vers = 1 and k = 50 and v = 26
+go
+-- ‚‘
