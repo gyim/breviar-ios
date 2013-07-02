@@ -1,4 +1,15 @@
 /*
+
+-- 2013-07-02: priebeh
+select _0, spis, count(1) as versov -- * 
+from biblia where 1=1 -- spis = '2Sam'
+and nvg is not null
+group by _0, spis
+order by _0
+
+
+
+
 select top 100 * from biblia where vers = 1
 and spis = 'jn'
 and k > 18
@@ -106,11 +117,19 @@ order by 2
 
 select * from biblia where spis = '1Sam'
 and nvg is not null
-*/
+
 select * from lc
 where sur like '2Sam%'
 or sur like '2 Sam%'
 order by 2
 
 select * from biblia where spis = '2Sam'
+and nvg is not null
+*/
+
+select * from lc
+where sur like 'Gn%'
+order by 2
+
+select * from biblia where spis = 'Gn'
 and nvg is not null
