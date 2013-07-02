@@ -83,11 +83,33 @@ update biblia set nvg = '(NVg 4,8a) Povedal: „Pamätaj na dni svojej slabosti, ke
 update biblia set nvg = '(NVg 4,8a) Ale ty vzıvaj Pána a prihovor sa za nás u_krá¾a a vysloboï nás zo smrti.“' where spis = 'Est' and vers = 1 and k = 15 and v = 3
 go
 
+-- 406	Est 4, 17b-g. l
+update biblia set lc_id = 406 where spis = 'Est' and vers = 1 and k = 13 and v between 8 and 17
+go
+
+update biblia set nvg = 'Mardochej hovoril: "Zvelebenı si, Boe Abraháma, Boe Izáka a Boe Jakuba, ' where spis = 'Est' and vers = 1 and k = 13 and v = 8
+update biblia set nvg = 'Pane, Pane, všemohúci krá¾. Všetko podlieha tvojej moci a niet nikoho, kto by sa mohol vzoprie tvojej vôli, ak sa rozhodneš zachráni Izrael.' where spis = 'Est' and vers = 1 and k = 13 and v = 9
+update biblia set nvg = 'Veï ty si stvoril nebo a zem i všetky tie zázraky, èo sú na nebesiach. ' where spis = 'Est' and vers = 1 and k = 13 and v = 10
+update biblia set nvg = 'Ty si Pán všetkého, niet nikoho, kto by odolal tvojej velebnosti.' where spis = 'Est' and vers = 1 and k = 13 and v = 11
+update biblia set nvg = 'Pane, ty vieš, ' where spis = 'Est' and vers = 1 and k = 13 and v = 12
+update biblia set nvg = 'e by som sa pre záchranu Izraela s radosou poklonil a k š¾apajam Amana. ' where spis = 'Est' and vers = 1 and k = 13 and v = 13
+update biblia set nvg = 'No neurobil som to, aby som èlovekovi nevzdal väèšiu poctu ako svojmu Bohu.' where spis = 'Est' and vers = 1 and k = 13 and v = 14
+update biblia set nvg = 'A nebudem sa klaòa nikomu inému okrem teba, Pane, môj Boe.' where spis = 'Est' and vers = 1 and k = 13 and v = 15
+update biblia set nvg = 'Vypoèuj moju úpenlivú prosbu a buï milostivı svojmu dediènému podielu. ' where spis = 'Est' and vers = 1 and k = 13 and v = 16
+update biblia set nvg = 'Náš zármutok obrá na rados, aby sme ili a chválili tvoje meno, Pane; a nezatváraj ústa, ktoré ti spievajú na chválu."' where spis = 'Est' and vers = 1 and k = 13 and v = 17
+go
+
 -- OCR29STRc_CIT1	4, 17m-kk
 update biblia set lh_id = 'OCR29STRc_CIT1' where spis = 'Est' and vers = 1 and k = 13 and v = 18 -- verš 17m je v preklade SSV oznaèenı ako 13,18
 go
 
 update biblia set nvg = '(NVg 4,17m)Celı Izrael zo všetkıch síl volal k_Pánovi, lebo im hrozila istá smr.' where spis = 'Est' and vers = 1 and k = 13 and v = 18
+go
+
+-- 407	Est 4, 17n. p-r. aa-bb. gg-hh
+update biblia set lc_id = 407 where spis = 'Est' and vers = 1 and k = 14 and v = 1
+update biblia set lc_id = 407 where spis = 'Est' and vers = 1 and k = 14 and v between 3 and 4
+update biblia set lc_id = 407 where spis = 'Est' and vers = 1 and k = 14 and v between 12 and 14
 go
 
 update biblia set lh_id = 'OCR29STRc_CIT1' where spis = 'Est' and vers = 1 and k = 14 and v between 1 and 19
@@ -118,8 +140,26 @@ update biblia set nvg = '(NVg 4,17hh)Ale nás vysloboï z_rúk našich nepriate¾ov, 
 update biblia set nvg = '(NVg 4,17ii)A tıch, Boe, èo sa postavia na tvoju stranu, / urob príkladom. // (NVg 4,17kk)Uká sa, Pane, zjav sa, Pane!“' where spis = 'Est' and vers = 1 and k = 14 and v = 19
 go
 
--- 406	Est 4, 17b-g. l
--- 407	Est 4, 17n. p-r. aa-bb. gg-hh
-update biblia set lc_id = 406 where spis = 'Est' and vers = 1 and k = 4 and v between xxx and yyy
+-- OCR29STVc_CIT1	5, 1-5; 7, 1-10
+update biblia set lh_id = 'OCR29STVc_CIT1' where spis = 'Est' and vers = 1 and k = 5 and v between 1 and 5
+update biblia set lh_id = 'OCR29STVc_CIT1' where spis = 'Est' and vers = 1 and k = 7 and v between 1 and 10
+go
+
+update biblia set nvg = 'Na tretí deò sa Ester obliekla do krá¾ovského rúcha a postavila sa na nádvorí krá¾ovského domu, ktoré bolo vnútri oproti krá¾ovmu palácu. Krá¾ sedel na svojom tróne v_sále paláca naproti vchodu do domu. ' where spis = 'Est' and vers = 1 and k = 5 and v = 1
+update biblia set nvg = 'Keï tam videl stá krá¾ovnú Ester, zapáèila sa jeho oèiam a vystrel k_nej zlaté ezlo, ktoré dral v_ruke. Ona pristúpila a dotkla sa konca jeho ezla.' where spis = 'Est' and vers = 1 and k = 5 and v = 2
+update biblia set nvg = 'Krá¾ jej povedal: „Èo chceš, krá¾ovná Ester? Aké máš elanie? Aj keby si si iadala polovicu krá¾ovstva, dostaneš ju.“ ' where spis = 'Est' and vers = 1 and k = 5 and v = 3
+update biblia set nvg = 'Ona odpovedala: „Ak to krá¾ uzná za vhodné, prosím, aby si dnes prišiel ku mne a Aman s_tebou na hostinu, ktorú som pripravila.“ ' where spis = 'Est' and vers = 1 and k = 5 and v = 4
+update biblia set nvg = 'A krá¾ vzápätí povedal: „Zavolajte rıchlo Amana, aby sa splnilo Esterino slovo.“' where spis = 'Est' and vers = 1 and k = 5 and v = 5
+go
+update biblia set nvg = 'A tak prišli krá¾ i_Aman pi s_krá¾ovnou. ' where spis = 'Est' and vers = 1 and k = 7 and v = 1
+update biblia set nvg = 'A krá¾ jej aj na druhı deò povedal, keï ho rozohrialo víno: „Aké máš elanie, Ester, aby si to dostala? Èo chceš, aby sa stalo? Aj keby si si iadala polovicu krá¾ovstva, dostaneš ju.“ ' where spis = 'Est' and vers = 1 and k = 7 and v = 2
+update biblia set nvg = 'Ona mu povedala: „Ak som našla milos v_tvojich oèiach, krá¾, a ak uznáš za dobré, daruj mi môj ivot, za ktorı prosím, a môj národ, za ktorı sa prihováram. ' where spis = 'Est' and vers = 1 and k = 7 and v = 3
+update biblia set nvg = 'Lebo sme predaní, ja i_môj ¾ud, aby sme boli znièení, vyvradení, aby sme zanikli. Keby nás predali za otrokov a otrokyne, mlèala by som, lebo takéto utrpenie by nebolo hodné toho, aby som rušila krá¾a.“ ' where spis = 'Est' and vers = 1 and k = 7 and v = 4
+update biblia set nvg = 'Krá¾ Asuer odpovedal: „Kto to je a kde je, e sa odvauje robi nieèo také?“ ' where spis = 'Est' and vers = 1 and k = 7 and v = 5
+update biblia set nvg = 'Ester povedala: „Náš protivník a nepriate¾ je tento zloduch Aman.“ Keï to on poèul, zmeravel tam pred krá¾om a krá¾ovnou.' where spis = 'Est' and vers = 1 and k = 7 and v = 6
+update biblia set nvg = 'Tu krá¾ vstal nahnevanı a šiel z_miestnosti, kde bola hostina, do záhrady pri paláci. Aj Aman vstal, aby poprosil krá¾ovnú Ester za svoj ivot, lebo vedel, e krá¾ sa rozhodol urobi mu to najhoršie. ' where spis = 'Est' and vers = 1 and k = 7 and v = 7
+update biblia set nvg = 'Keï sa ten vrátil zo záhrady a vošiel do miestnosti, kde bola hostina, našiel Amana zvaleného na lôku, na ktorom leala Ester, a povedal: „Ešte aj krá¾ovnú chce znásilni v_mojej prítomnosti v_mojom dome?“ Ešte to krá¾ ani nestihol vyslovi a u mu zahalili tvár. ' where spis = 'Est' and vers = 1 and k = 7 and v = 8
+update biblia set nvg = 'A Harbona, jeden z_eunuchov, èo slúili krá¾ovi, povedal: „Aj šibenica, èo pripravil Mardochejovi, ktorı hovoril v_krá¾ovom záujme, stojí v_Amanovom dome, vysoká pädesiat lakov.“ Krá¾ mu povedal: „Obeste na òu jeho!“ ' where spis = 'Est' and vers = 1 and k = 7 and v = 9
+update biblia set nvg = 'A tak Amana obesili na šibenici, ktorú pripravil Mardochejovi. A krá¾ov hnev sa utíšil.' where spis = 'Est' and vers = 1 and k = 7 and v = 10
 go
 
