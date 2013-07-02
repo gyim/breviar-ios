@@ -153,7 +153,7 @@ update biblia set nvg = 'A keï prešlo sedem dní, privalili sa na zem vody potopy
 go
 
 -- 572	Gn 8, 6-13. 20-22
-update biblia set lc_id = 572 where spis = 'Gn' and vers = 1 and k = 8 and v between 6 and 13 -- je tam aj verš 14 pod¾a SSV
+update biblia set lc_id = 572 where spis = 'Gn' and vers = 1 and k = 8 and v between 6 and 13 -- je tam aj verš 14 pod¾a SSV; NVg má v. 13
 update biblia set lc_id = 572 where spis = 'Gn' and vers = 1 and k = 8 and v between 20 and 22
 go
 
@@ -164,8 +164,8 @@ update biblia set nvg = 'Ale keï nenašla miesto, kde by spoèinula jej noha, vrát
 update biblia set nvg = 'Èakal ešte sedem dní a znova vypustil z korába holubicu. ' where spis = 'Gn' and vers = 1 and k = 8 and v = 10
 update biblia set nvg = 'A ona k nemu priletela a v podveèer a v zobáku priniesla olivovú ratoles so zelenımi listami. ' where spis = 'Gn' and vers = 1 and k = 8 and v = 11
 update biblia set nvg = 'Tu Noe poznal, e vody zo zeme zmizli. Èakal ešte ïalších sedem dní a vypustil holubicu, ktorá sa u k nemu nevrátila.' where spis = 'Gn' and vers = 1 and k = 8 and v = 12
-update biblia set nvg = 'V šesstoprvom roku, v prvom mesiaci, v prvı deò mesiaca, vody na zemi vyschli. ' where spis = 'Gn' and vers = 1 and k = 8 and v = 13
-update biblia set nvg = 'Noe otvoril strechu korába, pozrel sa von a videl, e povrch zeme je suchı.' where spis = 'Gn' and vers = 1 and k = 8 and v = 14
+update biblia set nvg = 'V šesstoprvom roku, v prvom mesiaci, v prvı deò mesiaca, vody na zemi vyschli. Noe otvoril strechu korába, pozrel sa von a videl, e povrch zeme je suchı.' where spis = 'Gn' and vers = 1 and k = 8 and v = 13
+-- update biblia set nvg = null where spis = 'Gn' and vers = 1 and k = 8 and v = 14
 go
 update biblia set nvg = 'Potom postavil oltár Pánovi, vzal zo všetkého èistého dobytka a z èistıch vtákov a priniesol zápalnú obetu na oltári.' where spis = 'Gn' and vers = 1 and k = 8 and v = 20
 update biblia set nvg = 'Pán zavoòal príjemnú vôòu a povedal si: "U nikdy neprek¾ajem zem pre èloveka, lebo zmıš¾anie ¾udského srdca je od mladosti náklonné na zlé. Preto u nikdy nevyhubím všetky ivé bytosti, ako som to urobil.' where spis = 'Gn' and vers = 1 and k = 8 and v = 21
@@ -175,7 +175,7 @@ go
 -- 573	Gn 9, 1-13
 -- 574	Gn 9, 8-15
 update biblia set lc_id = 573 where spis = 'Gn' and vers = 1 and k = 9 and v between 1 and 13
-update biblia set lc_id = 574 where spis = 'Gn' and vers = 1 and k = 9 and v between 14 and 13
+update biblia set lc_id = 574 where spis = 'Gn' and vers = 1 and k = 9 and v between 14 and 15
 go
 
 update biblia set nvg = 'Boh poehnal Noema a jeho synov a povedal im: "Vzrastajte, mnote sa a naplòte zem! ' where spis = 'Gn' and vers = 1 and k = 9 and v = 1
@@ -197,3 +197,261 @@ go
 
 -- 526	Gn 11, 1-9
 -- 527	Gn 11, 1-9
+update biblia set lc_id = 527 where spis = 'Gn' and vers = 1 and k = 11 and v between 1 and 9
+go
+
+update biblia set nvg = 'Na celej zemi bol jeden jazyk a rovnaká reè.' where spis = 'Gn' and vers = 1 and k = 11 and v = 1
+update biblia set nvg = 'Keï sa ¾udia pohli z vıchodu, našli rovinu v krajine Sennaar a usadili sa na nej.' where spis = 'Gn' and vers = 1 and k = 11 and v = 2
+update biblia set nvg = 'Povedali si: "Poïte, narobíme tehál a vypálime ich v ohni." Tehlu pouívali namiesto kameòa a namiesto malty asfalt. ' where spis = 'Gn' and vers = 1 and k = 11 and v = 3
+update biblia set nvg = 'Potom povedali: "Poïte, postavíme si mesto a veu, ktorej vrchol bude siaha do neba. A urobíme si meno, aby sme sa nerozptılili po celej zemi."' where spis = 'Gn' and vers = 1 and k = 11 and v = 4
+update biblia set nvg = 'Pán však zostúpil, aby sa podíval na mesto a veu, ktorú stavali ¾udia, ' where spis = 'Gn' and vers = 1 and k = 11 and v = 5
+update biblia set nvg = 'a povedal: "H¾a, sú jeden národ a všetci hovoria jednım jazykom. Toto je zaèiatok ich èinov a u im nebude ako urobi, èo si zaumienili. ' where spis = 'Gn' and vers = 1 and k = 11 and v = 6
+update biblia set nvg = 'Poïte, zostúpime a pomätieme tam ich reè, aby nik nerozumel reèi druhého."' where spis = 'Gn' and vers = 1 and k = 11 and v = 7
+update biblia set nvg = 'Tak ich Pán odtia¾ rozptılil po celej zemi a mesto prestali stava. ' where spis = 'Gn' and vers = 1 and k = 11 and v = 8
+update biblia set nvg = 'Preto sa ono volá Bábel. Lebo tam bola pomätená reè celej zeme a Pán ich odtia¾ rozptılil po celej zemi.' where spis = 'Gn' and vers = 1 and k = 11 and v = 9
+go
+
+-- 528	Gn 12, 1-4a
+-- 529	Gn 12, 1-4a
+-- 530	Gn 12, 1-7
+-- 531	Gn 12, 1-9
+update biblia set lc_id = 531 where spis = 'Gn' and vers = 1 and k = 12 and v between 1 and 9
+go
+
+update biblia set nvg = 'Pán povedal Abramovi: "Odíï zo svojej krajiny, od svojich príbuznıch a z domu svojho otca do krajiny, ktorú ti ukáem.' where spis = 'Gn' and vers = 1 and k = 12 and v = 1
+update biblia set nvg = 'Urobím z teba ve¾kı národ a poehnám a, oslávim tvoje meno a budeš poehnaním. ' where spis = 'Gn' and vers = 1 and k = 12 and v = 2
+update biblia set nvg = 'Poehnám tıch, èo a budú ehna, a prek¾ajem tıch, èo a budú preklína. V tebe budú poehnané všetky pokolenia zeme."' where spis = 'Gn' and vers = 1 and k = 12 and v = 3
+update biblia set nvg = 'A Abram odišiel, ako mu rozkázal Pán. // Išiel s ním aj Lot. Abram mal sedemdesiatpä rokov, keï odišiel z Charranu. ' where spis = 'Gn' and vers = 1 and k = 12 and v = 4
+update biblia set nvg = 'Vzal svoju enu Sarai a svojho synovca Lota i celı majetok, èo nadobudli, aj sluobníctvo, ktoré získali v Charrane. Pohli sa a išli do krajiny Kanaán.' where spis = 'Gn' and vers = 1 and k = 12 and v = 5
+update biblia set nvg = 'Keï došli do krajiny Kanaán, Abram prešiel krajinou a k miestu Sichem, a k dubu Moreho. Vtedy bıvali v krajine Kanaánèania.' where spis = 'Gn' and vers = 1 and k = 12 and v = 6
+update biblia set nvg = 'Abramovi sa zjavil Pán a povedal mu: "Túto krajinu dám tvojmu potomstvu." A on tam Pánovi, ktorı sa mu zjavil, postavil oltár.' where spis = 'Gn' and vers = 1 and k = 12 and v = 7
+update biblia set nvg = 'Odtia¾ odišiel k vrchu, ktorı bol vıchodne od Betelu, a tam postavil svoj stan. Na západe mal Betel, na vıchode Hai. Aj tam postavil Pánovi oltár a vzıval Pánovo meno. ' where spis = 'Gn' and vers = 1 and k = 12 and v = 8
+update biblia set nvg = 'A Abram postupoval zo stanoviša na stanovište a k Negebu.' where spis = 'Gn' and vers = 1 and k = 12 and v = 9
+go
+
+-- 532	Gn 13, 2. 5-18
+update biblia set lc_id = 532 where spis = 'Gn' and vers = 1 and k = 13 and v = 1
+update biblia set lc_id = 532 where spis = 'Gn' and vers = 1 and k = 13 and v between 5 and 18
+go
+
+update biblia set nvg = 'Abram bol ve¾mi bohatı: mal stáda, striebro a zlato. ' where spis = 'Gn' and vers = 1 and k = 13 and v = 1
+update biblia set nvg = 'Ale aj Lot, ktorı šiel s Abramom, mal stáda oviec, dobytok a stany. ' where spis = 'Gn' and vers = 1 and k = 13 and v = 5
+update biblia set nvg = 'Nestaèila im krajina, ak mali bıva vedno; mali to¾ko majetku, e nemohli zosta spolu.' where spis = 'Gn' and vers = 1 and k = 13 and v = 6
+update biblia set nvg = 'Medzi pastiermi Abramovıch stád a pastiermi Lotovıch stád vznikol spor. A v krajine bıvali vtedy Kanaánèania a Ferezejèania.' where spis = 'Gn' and vers = 1 and k = 13 and v = 7
+update biblia set nvg = 'Preto povedal Abram Lotovi: "Nech nie sú rozbroje medzi mnou a tebou, medzi mojimi pastiermi a tvojimi pastiermi; sme predsa bratia! ' where spis = 'Gn' and vers = 1 and k = 13 and v = 8
+update biblia set nvg = 'Nie je pred tebou celá krajina? Preto, prosím, odlúè sa odo mòa. Keï pôjdeš na¾avo, ja pôjdem napravo; keï si vyvolíš pravú stranu, ja sa poberiem na ¾avú."' where spis = 'Gn' and vers = 1 and k = 13 and v = 9
+update biblia set nvg = 'Lot zdvihol oèi a videl, e celé okolie Jordána a po Segor je zavlaené ako Pánova záhrada a ako Egypt; bolo to predtım, ako Pán znièil Sodomu a Gomoru. ' where spis = 'Gn' and vers = 1 and k = 13 and v = 10
+update biblia set nvg = 'Preto si Lot vybral krajinu okolo Jordána a odtiahol na vıchod. Takto sa bratia oddelili jeden od druhého. ' where spis = 'Gn' and vers = 1 and k = 13 and v = 11
+update biblia set nvg = 'Abram bıval v krajine Kanaán, Lot sa zdroval v mestách okolo Jordána a prenášal svoje stany a po Sodomu.' where spis = 'Gn' and vers = 1 and k = 13 and v = 12
+update biblia set nvg = 'No Sodomèania boli zlí a ve¾mi hrešili proti Pánovi.' where spis = 'Gn' and vers = 1 and k = 13 and v = 13
+update biblia set nvg = 'Pán povedal Abramovi, keï sa Lot od neho odlúèil: "Zdvihni oèi a z miesta, na ktorom si, pozri na sever a na juh, na vıchod i na západ: ' where spis = 'Gn' and vers = 1 and k = 13 and v = 14
+update biblia set nvg = 'celú krajinu, ktorú vidíš, dám tebe a tvojmu potomstvu naveky.' where spis = 'Gn' and vers = 1 and k = 13 and v = 15
+update biblia set nvg = 'Rozmnoím tvoje potomstvo a bude ho ako prachu na zemi; ak môe niekto spoèíta prach na zemi, bude môc aj tvoje potomstvo spoèíta. ' where spis = 'Gn' and vers = 1 and k = 13 and v = 16
+update biblia set nvg = 'Vstaò a prejdi krajinu po dåke a po šírke, lebo ju dám tebe."' where spis = 'Gn' and vers = 1 and k = 13 and v = 17
+update biblia set nvg = 'Abram vzal svoj stan a odišiel bıva k dubom Mambreho, ktoré sú v Hebrone, a postavil tam oltár Pánovi.' where spis = 'Gn' and vers = 1 and k = 13 and v = 18
+go
+
+-- 533	Gn 14, 18-20
+update biblia set lc_id = 533 where spis = 'Gn' and vers = 1 and k = 14 and v between 18 and 20
+go
+
+update biblia set nvg = 'Melchizedech, krá¾ Salema, priniesol chlieb a víno. Bol toti kòazom najvyššieho Boha. ' where spis = 'Gn' and vers = 1 and k = 14 and v = 18
+update biblia set nvg = 'Poehnal Abrama slovami: "Nech Abrama poehná najvyšší Boh, ktorı stvoril nebo i zem. ' where spis = 'Gn' and vers = 1 and k = 14 and v = 19
+update biblia set nvg = 'Nech je zvelebenı najvyšší Boh, ktorı ti vydal do rúk tvojich nepriate¾ov." // Abram mu potom dal desiatok zo všetkého.' where spis = 'Gn' and vers = 1 and k = 14 and v = 20
+go
+
+-- 534	Gn 15, 1-12. 17-18
+-- 535	Gn 15, 1-6; 21, 1-3
+-- 536	Gn 15, 5-12. 17-18
+update biblia set lc_id = 534 where spis = 'Gn' and vers = 1 and k = 15 and v between 1 and 12
+update biblia set lc_id = 534 where spis = 'Gn' and vers = 1 and k = 15 and v between 17 and 18
+update biblia set lc_id = 535 where spis = 'Gn' and vers = 1 and k = 21 and v between 1 and 3
+go
+
+update biblia set nvg = 'Pán povedal Abramovi vo videní: "Neboj sa, Abram! Ja som tvoj ochranca a tvoja odmena bude nesmierna." ' where spis = 'Gn' and vers = 1 and k = 15 and v = 1
+update biblia set nvg = 'Abram povedal: "Pane, Boe, èoe mi dáš? Odchádzam bezdetnı a dedièom môjho domu bude damaskı Eliezer." ' where spis = 'Gn' and vers = 1 and k = 15 and v = 2
+update biblia set nvg = 'A Abram dodal: "Veï si mi nedal potomka a môj domáci sluha bude mojím dedièom."' where spis = 'Gn' and vers = 1 and k = 15 and v = 3
+update biblia set nvg = 'Ale Pán mu povedal: "Ten nebude tvojím dedièom. Tvojím dedièom bude ten, èo vzíde z tvojho lona."' where spis = 'Gn' and vers = 1 and k = 15 and v = 4
+update biblia set nvg = 'Vyviedol ho von a povedal mu: "Pozri na nebo a spoèítaj hviezdy, ak môeš." A uistil ho: "Také bude tvoje potomstvo." ' where spis = 'Gn' and vers = 1 and k = 15 and v = 5
+update biblia set nvg = 'On uveril Pánovi a to sa mu poèítalo za spravodlivos.' where spis = 'Gn' and vers = 1 and k = 15 and v = 6
+update biblia set nvg = 'Potom mu povedal: "Ja som Pán, ja som a vyviedol z Uru Chaldejcov, aby som ti dal do vlastníctva túto krajinu."' where spis = 'Gn' and vers = 1 and k = 15 and v = 7
+update biblia set nvg = 'On sa opıtal: "Pane, Boe, pod¾a èoho spoznám, e ju budem vlastni?"' where spis = 'Gn' and vers = 1 and k = 15 and v = 8
+update biblia set nvg = 'Pán odpovedal: "Prines mi trojroènú jalovicu, trojroènú kozu a trojroèného barana, hrdlièku a holubicu."' where spis = 'Gn' and vers = 1 and k = 15 and v = 9
+update biblia set nvg = 'On vzal všetky tieto zvieratá, rozpolil ich a obe polovice poloil vzájomne oproti sebe; vtáky však nerozpolil. ' where spis = 'Gn' and vers = 1 and k = 15 and v = 10
+update biblia set nvg = 'Na màtve telá zlietali dravé vtáky a Abram ich odháòal.' where spis = 'Gn' and vers = 1 and k = 15 and v = 11
+update biblia set nvg = 'Keï zapadalo slnko, na Abrama do¾ahol tvrdı spánok a prenikla ho ve¾ká, príšerná hrôza.' where spis = 'Gn' and vers = 1 and k = 15 and v = 12
+go
+update biblia set nvg = 'Keï u slnko zapadlo a nastala hustá tma, zjavila sa dymiaca pec a ohnivá pochodeò, ktorá prechádzala pomedzi rozpolené zvieratá.' where spis = 'Gn' and vers = 1 and k = 15 and v = 17
+update biblia set nvg = 'V ten deò Pán uzavrel s Abramom zmluvu slovami: "Tvojmu potomstvu dám túto krajinu od Egyptskej rieky a po ve¾kú rieku, Eufrat."' where spis = 'Gn' and vers = 1 and k = 15 and v = 18
+go
+
+update biblia set nvg = 'Pán navštívil Sáru, ako pris¾úbil, a splnil Sáre, èo povedal. ' where spis = 'Gn' and vers = 1 and k = 21 and v = 1
+update biblia set nvg = 'I poèala a porodila Abrahámovi syna v jeho starobe, v èase, ktorı mu predpovedal Boh. ' where spis = 'Gn' and vers = 1 and k = 21 and v = 2
+update biblia set nvg = 'A Abrahám dal svojmu synovi, ktorého mu porodila Sára, meno Izák.' where spis = 'Gn' and vers = 1 and k = 21 and v = 3
+go
+
+-- 537	Gn 16, 1-12. 15-16
+-- 538	Gn 16, 6b-12. 15-16
+update biblia set lc_id = 537 where spis = 'Gn' and vers = 1 and k = 16 and v between 1 and 12
+update biblia set lc_id = 537 where spis = 'Gn' and vers = 1 and k = 16 and v between 15 and 16
+go
+
+update biblia set nvg = 'Abramova ena Sarai neporodila Abramovi diea. Mala však slúku Egypanku menom Agar. ' where spis = 'Gn' and vers = 1 and k = 16 and v = 1
+update biblia set nvg = 'I povedala svojmu manelovi: "Pozri, Pán ma uzavrel, nemôem porodi. Vojdi k mojej slúke. Azda aspoò z nej dostanem synov." On pristal na jej prosbu ' where spis = 'Gn' and vers = 1 and k = 16 and v = 2
+update biblia set nvg = 'a ona po desiatich rokoch, ako zaèali bıva v krajine Kanaán, vzala svoju slúku Egypanku Agar a dala ju svojmu muovi za enu. ' where spis = 'Gn' and vers = 1 and k = 16 and v = 3
+update biblia set nvg = 'On k nej vošiel a keï spozorovala, e poèala, opovrlivo h¾adela na svoju paniu.' where spis = 'Gn' and vers = 1 and k = 16 and v = 4
+update biblia set nvg = 'Sarai povedala Abramovi: "Ubliuješ mi. Ja som dala svoju slúku do tvojho lona a ona, keï vidí, e poèala, mnou opovrhuje. Nech Pán súdi medzi mnou a tebou." ' where spis = 'Gn' and vers = 1 and k = 16 and v = 5
+update biblia set nvg = 'Abram jej odvetil: "Veï je tvoja slúka v tvojej moci. Urob s òou, ako sa ti páèi." A Sarai k nej bola tvrdá, a od nej ušla.' where spis = 'Gn' and vers = 1 and k = 16 and v = 6
+update biblia set nvg = 'Keï ju našiel Pánov anjel na púšti pri prameni na ceste do Suru, ' where spis = 'Gn' and vers = 1 and k = 16 and v = 7
+update biblia set nvg = 'povedal jej: "Agar, Saraina slúka, odkia¾ ideš a kam sa uberáš?" Ona odpovedala: "Utekám od svojej panej Sarai."' where spis = 'Gn' and vers = 1 and k = 16 and v = 8
+update biblia set nvg = 'Pánov anjel jej povedal: "Vrá sa k svojej panej a buï jej poddaná." ' where spis = 'Gn' and vers = 1 and k = 16 and v = 9
+update biblia set nvg = 'A Pánov anjel jej vravel ïalej: "Tak rozmnoím tvoje potomstvo, e ho pre mnostvo nebude mono spoèíta." ' where spis = 'Gn' and vers = 1 and k = 16 and v = 10
+update biblia set nvg = 'A ešte jej Pánov anjel hovoril: "H¾a, poèala si a porodíš syna; nazveš ho menom Izmael, lebo Pán poèul o tvojom trápení. ' where spis = 'Gn' and vers = 1 and k = 16 and v = 11
+update biblia set nvg = 'Bude to èlovek ako divı osol, jeho ruka bude proti všetkım a ruky všetkıch budú proti nemu a svoje stany postaví popri svojich bratoch."' where spis = 'Gn' and vers = 1 and k = 16 and v = 12
+update biblia set nvg = 'Agar porodila Abramovi syna a on dal svojmu synovi, ktorého porodila Agar, meno Izmael. ' where spis = 'Gn' and vers = 1 and k = 16 and v = 15
+update biblia set nvg = 'Osemdesiatšes rokov mal Abram, keï mu Agar porodila Izmaela.' where spis = 'Gn' and vers = 1 and k = 16 and v = 16
+go
+
+-- 539	Gn 17, 1. 4-5. 9-10. 15-22
+-- 540	Gn 17, 3-9
+update biblia set lc_id = 539 where spis = 'Gn' and vers = 1 and k = 17 and v = 1
+update biblia set lc_id = 540 where spis = 'Gn' and vers = 1 and k = 17 and v between 3 and 9
+update biblia set lc_id = 539 where spis = 'Gn' and vers = 1 and k = 17 and v = 10
+update biblia set lc_id = 539 where spis = 'Gn' and vers = 1 and k = 17 and v between 15 and 22
+go
+
+update biblia set nvg = 'Keï mal Abram devädesiatdevä rokov, zjavil sa mu Pán a povedal mu: "Ja som Boh, všemohúci, kráèaj predo mnou a buï dokonalı. ' where spis = 'Gn' and vers = 1 and k = 17 and v = 1
+update biblia set nvg = 'Abram padol na tvár ' where spis = 'Gn' and vers = 1 and k = 17 and v = 3
+update biblia set nvg = 'a Boh mu povedal: "H¾a, moja zmluva s tebou. Budeš otcom mnohıch národov ' where spis = 'Gn' and vers = 1 and k = 17 and v = 4
+update biblia set nvg = 'a u sa nebudeš vola Abram; budeš sa vola Abrahám, lebo a urobím otcom mnohıch národov.' where spis = 'Gn' and vers = 1 and k = 17 and v = 5
+update biblia set nvg = 'Dám sa ti rozrás prenáramne, urobím z teba národy, aj králi z teba vzídu.' where spis = 'Gn' and vers = 1 and k = 17 and v = 6
+update biblia set nvg = 'A uzavriem zmluvu medzi mnou a tebou i medzi tvojím potomstvom po tebe vo všetkıch pokoleniach, zmluvu veènú, e budem Bohom tvojím i tvojho potomstva po tebe.' where spis = 'Gn' and vers = 1 and k = 17 and v = 7
+update biblia set nvg = 'Tebe a tvojmu potomstvu po tebe dám krajinu, v ktorej si ako cudzinec; celú zem Kanaán do veèného vlastníctva a budem ich Bohom."' where spis = 'Gn' and vers = 1 and k = 17 and v = 8
+update biblia set nvg = 'Potom Boh povedal Abrahámovi: "Ale aj ty zachováš moju zmluvu, aj tvoje potomstvo po tebe vo všetkıch pokoleniach."' where spis = 'Gn' and vers = 1 and k = 17 and v = 9
+update biblia set nvg = 'A toto je moja zmluva medzi mnou a vami i tvojím potomstvom po tebe, ktorú budete zachováva: Obrezané bude všetko, èo je medzi vami rodu muského."' where spis = 'Gn' and vers = 1 and k = 17 and v = 10
+go
+update biblia set nvg = 'Potom Boh povedal Abrahámovi: "Svoju manelku Sarai u nebudeš vola Sarai, lebo bude ma meno Sára. ' where spis = 'Gn' and vers = 1 and k = 17 and v = 15
+update biblia set nvg = 'Ja ju poehnám a dám ti aj z nej syna. Poehnám ju a budú z nej pochádza národy; aj králi národov z nej budú pochádza."' where spis = 'Gn' and vers = 1 and k = 17 and v = 16
+update biblia set nvg = 'Abrahám padol na tvár a smial sa; povedal si v srdci: "Vari sa môe storoènému narodi syn? A devädesiatroèná Sára porodí?" ' where spis = 'Gn' and vers = 1 and k = 17 and v = 17
+update biblia set nvg = 'A povedal Bohu: "Keby aspoò Izmael il pred tvojou tvárou."' where spis = 'Gn' and vers = 1 and k = 17 and v = 18
+update biblia set nvg = 'Ale Pán opakoval: "Tvoja ena Sára ti porodí syna a dáš mu meno Izák a ja s ním uzavriem zmluvu: veènú zmluvu s ním a s jeho potomstvom. ' where spis = 'Gn' and vers = 1 and k = 17 and v = 19
+update biblia set nvg = 'A vypoèul som a, aj èo sa tıka Izmaela: poehnám ho, dám mu plodnos a rozmnoím ho náramne. Dvanás knieat sa z neho narodí a urobím z neho ve¾kı národ. ' where spis = 'Gn' and vers = 1 and k = 17 and v = 20
+update biblia set nvg = 'Ale svoju zmluvu uzavriem s Izákom, ktorého ti porodí Sára o takomto èase na budúci rok." ' where spis = 'Gn' and vers = 1 and k = 17 and v = 21
+update biblia set nvg = 'Keï sa s ním Boh prestal rozpráva, odišiel od Abraháma.' where spis = 'Gn' and vers = 1 and k = 17 and v = 22
+go
+
+-- SSV preklad nemá verš Gn 18, 33, len verš 32, preto to dávame spoloène do v. 32
+-- 541	Gn 18, 1-10a
+-- 542	Gn 18, 1-15
+-- 543	Gn 18, 16-33
+-- 544	Gn 18, 20-32
+update biblia set lc_id = 542 where spis = 'Gn' and vers = 1 and k = 18 and v between 1 and 15
+update biblia set lc_id = 543 where spis = 'Gn' and vers = 1 and k = 18 and v between 16 and 33
+go
+-- ‚‘
+
+update biblia set nvg = 'Abrahámovi sa zjavil Pán pri duboch Mambreho, keï sedel za najväèšej horúèavy dòa pri vchode do svojho stanu. ' where spis = 'Gn' and vers = 1 and k = 18 and v = 1
+update biblia set nvg = 'Keï zdvihol oèi, zbadal neïaleko stá troch muov. Len èo ich zazrel, utekal im od vchodu do stanu v ústrety, poklonil sa a po zem ' where spis = 'Gn' and vers = 1 and k = 18 and v = 2
+update biblia set nvg = 'a povedal: "Pane, ak som našiel priazeò v tvojich oèiach, neobíï svojho sluobníka. ' where spis = 'Gn' and vers = 1 and k = 18 and v = 3
+update biblia set nvg = 'Prinesú trochu vody, umyjete si nohy a odpoèiniete si pod stromom. ' where spis = 'Gn' and vers = 1 and k = 18 and v = 4
+update biblia set nvg = 'Donesiem kúsok chleba a posilníte sa; potom môete ís ïalej. Veï preto ste zaboèili k svojmu sluobníkovi." Oni odpovedali: "Urob, ako vravíš!"' where spis = 'Gn' and vers = 1 and k = 18 and v = 5
+update biblia set nvg = 'Abrahám sa poponáh¾al do stanu k Sáre a povedal: "Rıchlo zamies tri miery múky a napeè podplamenníky!"' where spis = 'Gn' and vers = 1 and k = 18 and v = 6
+update biblia set nvg = 'Sám beal k stádu, vybral pekné mladé te¾a, dal ho sluhovi a ten sa ponáh¾al pripravi ho. ' where spis = 'Gn' and vers = 1 and k = 18 and v = 7
+update biblia set nvg = 'Potom vzal maslo, mlieko a pripravené te¾a a predloil im to. Sám stál pri nich pod stromom; a oni jedli.' where spis = 'Gn' and vers = 1 and k = 18 and v = 8
+update biblia set nvg = 'Potom sa ho pıtali: "Kde je tvoja ena Sára?" On odpovedal: "Tu, v stane."' where spis = 'Gn' and vers = 1 and k = 18 and v = 9
+update biblia set nvg = 'A Pán mu povedal: "O rok o takomto èase sa vrátim k tebe a tvoja manelka Sára bude ma syna." Keï to Sára poèula, smiala sa pri vchode do stanu, ktorı bol za ním. ' where spis = 'Gn' and vers = 1 and k = 18 and v = 10
+update biblia set nvg = 'Veï obaja boli starci, vo vysokom veku, a Sáre u dávno prestalo, èo mávajú eny. ' where spis = 'Gn' and vers = 1 and k = 18 and v = 11
+update biblia set nvg = 'Preto sa potajomky zasmiala a myslela si: "Teraz, keï som u stará, mám myslie na rozkoš? Aj môj pán je u starec."' where spis = 'Gn' and vers = 1 and k = 18 and v = 12
+update biblia set nvg = 'Pán povedal Abrahámovi: "Preèo sa Sára smeje a myslí si: ‚Èi môem naozaj porodi, takáto starena?‘ ' where spis = 'Gn' and vers = 1 and k = 18 and v = 13
+update biblia set nvg = 'Vari je Pánovi nieèo nemoné? O rok o takomto èase sa vrátim k tebe a Sára bude ma syna."' where spis = 'Gn' and vers = 1 and k = 18 and v = 14
+update biblia set nvg = 'Sára zapierala: "Nesmiala som sa," lebo sa bála. Ale Pán povedal: "Nie. Smiala si sa."' where spis = 'Gn' and vers = 1 and k = 18 and v = 15
+update biblia set nvg = 'Muovia sa z údolia Mambreho pobrali a zamierili k Sodome. Abrahám išiel s nimi odprevadi ich.' where spis = 'Gn' and vers = 1 and k = 18 and v = 16
+update biblia set nvg = 'A Pán povedal: "Môem pred Abrahámom taji, èo chcem urobi?! ' where spis = 'Gn' and vers = 1 and k = 18 and v = 17
+update biblia set nvg = 'Veï z neho má by ve¾kı a mocnı národ a v òom majú by poehnané všetky národy zeme. ' where spis = 'Gn' and vers = 1 and k = 18 and v = 18
+update biblia set nvg = 'Lebo jeho som si vyvolil, aby svojim synom a svojmu domu po sebe prikázal zachováva Pánovu cestu a kona pod¾a spravodlivosti a práva, aby Pán mohol splni na Abrahámovi všetko, èo mu s¾úbil."' where spis = 'Gn' and vers = 1 and k = 18 and v = 19
+update biblia set nvg = 'Preto Pán povedal: "aloba na Sodomu a Gomoru je ve¾ká a ich hriech je ve¾mi akı. ' where spis = 'Gn' and vers = 1 and k = 18 and v = 20
+update biblia set nvg = 'Zostúpim a pozriem sa, èi naozaj robia tak, ako znie aloba, èo došla ku mne, a èi nie. Chcem to vedie."' where spis = 'Gn' and vers = 1 and k = 18 and v = 21
+update biblia set nvg = 'Mui sa odtia¾ obrátili a išli do Sodomy, kım Abrahám stále ešte stál pred Pánom.' where spis = 'Gn' and vers = 1 and k = 18 and v = 22
+update biblia set nvg = 'Pristúpil blišie a povedal: "Chceš naozaj zahubi spravodlivého s bezbonım? ' where spis = 'Gn' and vers = 1 and k = 18 and v = 23
+update biblia set nvg = 'A keby bolo v meste pädesiat spravodlivıch, zahubil by si ich a neodpustil by si mestu kvôli pädesiatim spravodlivım, èo sú v òom?' where spis = 'Gn' and vers = 1 and k = 18 and v = 24
+update biblia set nvg = 'Nech je ïaleko od teba urobi nieèo také: spravodlivého usmrti s bezbonım. Spravodlivı by bol na tom rovnako ako bezbonı. To nech je ïaleko od teba. Vari ten, èo súdi celú zem, nebude kona spravodlivo?"' where spis = 'Gn' and vers = 1 and k = 18 and v = 25
+update biblia set nvg = 'Pán mu povedal: "Ak v meste Sodome nájdem pädesiat spravodlivıch, odpustím kvôli nim celému mestu."' where spis = 'Gn' and vers = 1 and k = 18 and v = 26
+update biblia set nvg = 'Abrahám povedal: "Opováil som sa rozpráva so svojím Pánom, hoci som len prach a popol. ' where spis = 'Gn' and vers = 1 and k = 18 and v = 27
+update biblia set nvg = 'Èo ak bude spravodlivıch o pä menej ako pädesiat? Znièíš kvôli piatim celé mesto?" // "Neznièím," odpovedal, "ak ich tam nájdem štyridsapä."' where spis = 'Gn' and vers = 1 and k = 18 and v = 28
+update biblia set nvg = 'Abrahám mu znova povedal: "A èo ak sa ich tam nájde len štyridsa?" Odpovedal: "Kvôli štyridsiatim ich neznièím."' where spis = 'Gn' and vers = 1 and k = 18 and v = 29
+update biblia set nvg = '"Nehnevaj sa, prosím, Pán môj," pokraèoval ïalej, "e ešte hovorím: A ak sa ich tam nájde len tridsa?" Odpovedal: "Neurobím to, ak ich tam nájdem tridsa."' where spis = 'Gn' and vers = 1 and k = 18 and v = 30
+update biblia set nvg = 'Abrahám povedal: "Opováil som sa rozpráva so svojím Pánom: Èo ak sa ich tam nájde dvadsa?" Pán odpovedal: "Nezahubím ich kvôli dvadsiatim."' where spis = 'Gn' and vers = 1 and k = 18 and v = 31
+update biblia set nvg = '"Prosím, nech sa nehnevá môj Pán," pokraèoval, "e ešte raz prehovorím: A èo ak sa ich tam nájde len desa?" Odpovedal: "Kvôli desiatim ich nezahubím." // (NVg: v. 33) Keï sa Pán prestal rozpráva s Abrahámom, odišiel a Abrahám sa vrátil na svoje miesto.' where spis = 'Gn' and vers = 1 and k = 18 and v = 32
+go
+
+-- 545	Gn 19, 15-29
+update biblia set lc_id = 545 where spis = 'Gn' and vers = 1 and k = 19 and v between 15 and 29
+go
+
+update biblia set nvg = '[...] Anjeli naliehali na Lota: "Vstaò, vezmi svoju enu a obe dcéry, ktoré tu máš, aby si nezahynul v zloèinnom meste." ' where spis = 'Gn' and vers = 1 and k = 19 and v = 15
+update biblia set nvg = 'A keï váhal, chytili ho mui za ruku i jeho enu a obe dcéry, lebo Pán ho chcel zachráni, vyviedli ho von a nechali ho za mestom.' where spis = 'Gn' and vers = 1 and k = 19 and v = 16
+update biblia set nvg = 'Tam anjel povedal: "Zachráò sa, ide ti o ivot. Neobzeraj sa a nezastavuj sa nikde v tomto okolí. H¾adaj útoèište v horách, aby si nezahynul."' where spis = 'Gn' and vers = 1 and k = 19 and v = 17
+update biblia set nvg = 'Lot im povedal: "Prosím, nie, Pane. ' where spis = 'Gn' and vers = 1 and k = 19 and v = 18
+update biblia set nvg = 'Tvoj sluha našiel milos pred tebou a ve¾ké je tvoje milosrdenstvo, ktoré si mi preukázal, keï si mi zachránil ivot. Ale do hôr ujs nevládzem, zachytí ma pohroma a umriem. ' where spis = 'Gn' and vers = 1 and k = 19 and v = 19
+update biblia set nvg = 'Pozri, tu neïaleko je malé mesto, tam môem ujs, v òom sa zachránim. ' where spis = 'Gn' and vers = 1 and k = 19 and v = 20
+update biblia set nvg = 'Èi nie je malé? A ja ostanem naive." // On mu povedal: "Nu dobre, aj túto tvoju prosbu vyslyším a mesto, za ktoré sa prihováraš, neznièím. ' where spis = 'Gn' and vers = 1 and k = 19 and v = 21
+update biblia set nvg = 'Utekaj a skry sa tam, lebo nemôem niè robi, kım ta nedôjdeš." Preto sa to mesto volá Segor.' where spis = 'Gn' and vers = 1 and k = 19 and v = 22
+update biblia set nvg = 'Nad krajinu vyšlo slnko, keï Lot došiel do Segoru. ' where spis = 'Gn' and vers = 1 and k = 19 and v = 23
+update biblia set nvg = 'Vtedy Pán spustil na Sodomu a Gomoru síru a oheò z neba od Pána ' where spis = 'Gn' and vers = 1 and k = 19 and v = 24
+update biblia set nvg = 'a znièil obe mestá i celı okolitı kraj; všetkıch obyvate¾ov miest a všetky po¾né rastliny. ' where spis = 'Gn' and vers = 1 and k = 19 and v = 25
+update biblia set nvg = 'Jeho ena sa obzrela za seba a premenila sa na so¾nı ståp.' where spis = 'Gn' and vers = 1 and k = 19 and v = 26
+update biblia set nvg = 'Keï Abrahám ráno vstal, išiel na miesto, kde predtım stál s Pánom, ' where spis = 'Gn' and vers = 1 and k = 19 and v = 27
+update biblia set nvg = 'pozrel sa na Sodomu a Gomoru a na celı kraj okolo a videl vystupova zo zeme eravı popol a dym ako z pece. ' where spis = 'Gn' and vers = 1 and k = 19 and v = 28
+update biblia set nvg = 'Keï Boh nièil mestá a okolie tohoto kraja, spomenul si na Abraháma a Lota zachránil zo skazy miest, v ktorıch bıval.' where spis = 'Gn' and vers = 1 and k = 19 and v = 29
+go
+
+-- 550	Gn 21, 5. 8-20
+update biblia set lc_id = 550 where spis = 'Gn' and vers = 1 and k = 21 and v = 1
+update biblia set lc_id = 550 where spis = 'Gn' and vers = 1 and k = 21 and v between 8 and 20
+go
+
+update biblia set nvg = 'Keï mal Abrahám sto rokov, narodil sa mu syn Izák.' where spis = 'Gn' and vers = 1 and k = 21 and v = 1
+update biblia set nvg = 'Chlapec vyrástol a odstavili ho. V deò odstavenia urobil Abrahám ve¾kú hostinu.' where spis = 'Gn' and vers = 1 and k = 21 and v = 8
+update biblia set nvg = 'A keï Sára videla, ako syn Egypanky Agar šantí s jej synom Izákom, ' where spis = 'Gn' and vers = 1 and k = 21 and v = 9
+update biblia set nvg = 'povedala Abrahámovi: "Vyeò slúku i jej syna, lebo syn slúky nesmie dedi s mojím synom Izákom!" ' where spis = 'Gn' and vers = 1 and k = 21 and v = 10
+update biblia set nvg = 'Abraháma sa to ve¾mi dotklo, veï to bol jeho syn.' where spis = 'Gn' and vers = 1 and k = 21 and v = 11
+update biblia set nvg = 'Ale Boh mu povedal: "Netráp sa kvôli chlapcovi a svojej slúke. Poèúvni všetko, èo ti povedala Sára, lebo pod¾a Izáka sa bude vola tvoje potomstvo. ' where spis = 'Gn' and vers = 1 and k = 21 and v = 12
+update biblia set nvg = 'Ale aj zo syna slúky urobím ve¾kı národ, pretoe je tvojím potomkom."' where spis = 'Gn' and vers = 1 and k = 21 and v = 13
+update biblia set nvg = 'Abrahám teda skoro ráno vstal, vzal chlieb a mech s vodou, naloil to Agar na chrbát, dal jej chlapca a prepustil ju. Ona odišla a blúdila po púšti Bersabe. ' where spis = 'Gn' and vers = 1 and k = 21 and v = 14
+update biblia set nvg = 'A keï sa minula voda z mecha, poloila chlapca pod ker, ' where spis = 'Gn' and vers = 1 and k = 21 and v = 15
+update biblia set nvg = 'poodišla a sadla si opodia¾, asi akoby šípom dostrelil, lebo si vravela: "Nemôem h¾adie, ako diea zomiera." Tak sedela obïaleè a nahlas plakala.' where spis = 'Gn' and vers = 1 and k = 21 and v = 16
+update biblia set nvg = 'Ale Boh poèul hlas chlapca a boí anjel zavolal z neba na Agar: "Èo ti je, Agar? Neboj sa, Boh poèul hlas chlapca z miesta, kde je. ' where spis = 'Gn' and vers = 1 and k = 21 and v = 17
+update biblia set nvg = 'Vstaò, vezmi chlapca a staraj sa oò, lebo z neho urobím ve¾kı národ."' where spis = 'Gn' and vers = 1 and k = 21 and v = 18
+update biblia set nvg = 'Boh jej otvoril oèi a zbadala prameò vody. Išla, naplnila si mech a napojila chlapca.' where spis = 'Gn' and vers = 1 and k = 21 and v = 19
+update biblia set nvg = 'Boh bol s ním; a keï vyrástol, bıval na púšti a stal sa z neho mladı lukostrelec.' where spis = 'Gn' and vers = 1 and k = 21 and v = 20
+go
+
+-- 551	Gn 22, 1-18
+-- 552	Gn 22, 1-19
+-- 553	Gn 22, 1-2. 9a. 10-13. 15-18
+-- 554	Gn 22, 1-2. 9a. 10-13. 15-18
+update biblia set lc_id = 552 where spis = 'Gn' and vers = 1 and k = 22 and v between 1 and 19
+update biblia set lh_id = 'VTROJ_cCIT2_NE' where spis = 'Gn' and vers = 1 and k = 22 and v between 1 and 18
+go
+
+update biblia set nvg = 'Boh skúšal Abraháma a povedal mu: „Abrahám!“ On odpovedal: „Tu som.“' where spis = 'Gn' and vers = 1 and k = 22 and v = 1
+update biblia set nvg = 'Boh hovoril: „Vezmi svojho jediného syna Izáka, ktorého miluješ, choï do krajiny Moria a obetuj ho tam ako zápalnú obetu na vrchu, ktorı ti ukáem.“' where spis = 'Gn' and vers = 1 and k = 22 and v = 2
+update biblia set nvg = 'Abrahám vstal ešte za noci, osedlal osla, vzal so sebou dvoch sluhov a svojho syna Izáka, naštiepal dreva na zápalnú obetu a vybral sa na miesto, ktoré mu Boh oznaèil. ' where spis = 'Gn' and vers = 1 and k = 22 and v = 3
+update biblia set nvg = 'Keï na tretí deò Abrahám zdvihol oèi, zïaleka uzrel to miesto ' where spis = 'Gn' and vers = 1 and k = 22 and v = 4
+update biblia set nvg = 'a povedal svojim sluhom: „Èakajte tu s_oslom. Ja a chlapec pôjdeme a ta, pokloníme sa a vrátime sa k_vám.“' where spis = 'Gn' and vers = 1 and k = 22 and v = 5
+update biblia set nvg = 'Potom Abrahám vzal drevo na zápalnú obetu a naloil ho na svojho syna Izáka. Sám niesol v_rukách oheò a nô. Ako išli sami dvaja, ' where spis = 'Gn' and vers = 1 and k = 22 and v = 6
+update biblia set nvg = 'vravel Izák svojmu otcovi Abrahámovi: „Otèe!“ On mu odpovedal: „Èo chceš, syn môj?“ „Pozri,“ hovorí Izák, „oheò a drevo je tu, a baránok na zápalnú obetu je kde?“ ' where spis = 'Gn' and vers = 1 and k = 22 and v = 7
+update biblia set nvg = 'Abrahám odvetil: „Boh si zaobstará baránka na obetu, syn môj.“ A vedno šli ïalej.' where spis = 'Gn' and vers = 1 and k = 22 and v = 8
+update biblia set nvg = 'Keï došli na miesto, ktoré mu ukázal Boh, Abrahám postavil oltár, poukladal naò drevo, zviazal svojho syna Izáka a poloil ho na oltár, na drevo. ' where spis = 'Gn' and vers = 1 and k = 22 and v = 9
+update biblia set nvg = 'Potom Abrahám vystrel ruku, vzal nô a chcel obetova svojho syna.' where spis = 'Gn' and vers = 1 and k = 22 and v = 10
+update biblia set nvg = 'Ale vtom naò zavolal anjel Pána z_neba: „Abrahám, Abrahám!“ // On odpovedal: „Tu som.“' where spis = 'Gn' and vers = 1 and k = 22 and v = 11
+update biblia set nvg = 'Anjel mu povedal: „Nevzahuj ruku na chlapca a neublí mu! Teraz viem, e sa bojíš Boha, veï si mi neodoprel svojho jediného syna.“' where spis = 'Gn' and vers = 1 and k = 22 and v = 12
+update biblia set nvg = 'Abrahám zdvihol oèi a uzrel barana zachyteného rohami v_kroví. Vzal ho a obetoval namiesto svojho syna ako zápalnú obetu.' where spis = 'Gn' and vers = 1 and k = 22 and v = 13
+update biblia set nvg = 'A toto miesto nazval „Pán sa stará“; a tak sa a podnes hovorí: „Na vrchu Pán sa stará“.' where spis = 'Gn' and vers = 1 and k = 22 and v = 14
+update biblia set nvg = 'Anjel Pána znova zavolal z_neba na Abraháma: ' where spis = 'Gn' and vers = 1 and k = 22 and v = 15
+update biblia set nvg = '„Na seba samého prisahám – takı je vırok Pána –: Pretoe si toto urobil a neodoprel si mi svojho jediného syna, ' where spis = 'Gn' and vers = 1 and k = 22 and v = 16
+update biblia set nvg = 'poehnám a a rozmnoím tvoje potomstvo ako hviezdy na nebi a ako piesok na brehu mora a tvoje potomstvo sa zmocní brán svojich nepriate¾ov. ' where spis = 'Gn' and vers = 1 and k = 22 and v = 17
+update biblia set nvg = 'A pretoe si poslúchol môj hlas, v_tvojom potomstve budú poehnané všetky národy zeme.“' where spis = 'Gn' and vers = 1 and k = 22 and v = 18
+update biblia set nvg = 'Potom sa Abrahám vrátil k svojim sluhom a všetci spolu sa pobrali do Bersaby. A Abrahám ostal bıva v Bersabe.' where spis = 'Gn' and vers = 1 and k = 22 and v = 19
+go
+
