@@ -132,10 +132,17 @@ order by 2
 
 select * from biblia where spis = 'Gn'
 and nvg is not null
-*/
+
 select * from lc
 where sur like 'Jdt%'
 order by 2
 
 select * from biblia where spis = 'Jdt'
+and nvg is not null
+*/
+select * from lc
+where sur like 'Est%'
+order by 2
+
+select * from biblia where spis = 'Est'
 and nvg is not null
