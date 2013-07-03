@@ -426,6 +426,7 @@ update biblia set nvg = 'a poloila to pred Saula a jeho sluobníkov. Keï sa naj
 go
 
 -- OCR13POc_CIT1	1 Sam 31, 1-4; 2 Sam 1, 1-16
+-- OCR13POc_CIT1 resp. 	2 Sam 1, 21
 -- 262	2 Sam 1, 1-4. 11-12. 17. 19. 23-27
 update biblia set lh_id = 'OCR13POc_CIT1' where spis = '1Sam' and vers = 1 and k = 31 and v between 1 and 4
 update biblia set lh_id = 'OCR13POc_CIT1' where spis = '2Sam' and vers = 1 and k = 1 and v between 1 and 16
@@ -433,6 +434,8 @@ update biblia set lc_id = 262 where spis = '2Sam' and vers = 1 and k = 1 and v b
 update biblia set lc_id = 262 where spis = '2Sam' and vers = 1 and k = 1 and v between 11 and 12
 update biblia set lc_id = 262 where spis = '2Sam' and vers = 1 and k = 1 and v = 17
 update biblia set lc_id = 262 where spis = '2Sam' and vers = 1 and k = 1 and v = 19
+update biblia set lh_id = 'OCR13POc_CIT1 resp.' where spis = '2Sam' and vers = 1 and k = 1 and v = 21
+
 update biblia set lc_id = 262 where spis = '2Sam' and vers = 1 and k = 1 and v between 23 and 27
 go
 
@@ -462,6 +465,7 @@ go
 
 update biblia set nvg = 'A Dávid zaspieval alospev nad Saulom a jeho synom Jonatanom: ' where spis = '2Sam' and vers = 1 and k = 1 and v = 17
 update biblia set nvg = '"Izrael, tvoj vıkvet leí pobitı na tvojich vàškoch. Ako len padli hrdinovia!' where spis = '2Sam' and vers = 1 and k = 1 and v = 19
+update biblia set nvg = 'Vrchy Gelboe, nech na vás nepadá ani rosa, ani dáï; nech Pán navštívi všetky vrchy okolo neho, ale Gelboe nech obíde.' where spis = '2Sam' and vers = 1 and k = 1 and v = 21
 update biblia set nvg = 'Saul a Jonatan, milí a š¾achetní v ivote, nerozišli sa ani pri smrti. Rıchlejší boli ne orly a udatnejší nad levov.' where spis = '2Sam' and vers = 1 and k = 1 and v = 23
 update biblia set nvg = 'Dcéry Izraela, plaète za Saulom, veï vás skvostne do purpuru obliekal, na šat vám pripínal zlaté ozdoby.' where spis = '2Sam' and vers = 1 and k = 1 and v = 24
 update biblia set nvg = 'Ako len padli hrdinovia uprostred boja! / Jonatan na tvojich kopcoch je zabitı. ' where spis = '2Sam' and vers = 1 and k = 1 and v = 25
@@ -667,3 +671,110 @@ update biblia set nvg = 'Teraz však, keï zomrelo, naèo by som sa postil? Vari ho
 update biblia set nvg = 'Potom Dávid potešoval svoju enu Betsabe. Vošiel k_nej, spal s_òou, ona porodila syna a dal mu meno Šalamún. A Pán ho miloval. ' where spis = '2Sam' and vers = 1 and k = 12 and v = 24
 update biblia set nvg = 'I_odovzdal ho do rúk proroka Nátana a on mu dal kvôli Pánovi meno Jedidia (to jest Pánov miláèik).' where spis = '2Sam' and vers = 1 and k = 12 and v = 25
 go
+
+-- OCR14POc_CIT1	15, 7-14. 24-30; 16, 5-13
+-- 266	2 Sam 15, 13-14. 30; 16, 5-13a
+update biblia set lh_id = 'OCR14POc_CIT1' where spis = '2Sam' and vers = 1 and k = 15 and v between 7 and 14
+update biblia set lh_id = 'OCR14POc_CIT1' where spis = '2Sam' and vers = 1 and k = 15 and v between 24 and 30
+update biblia set lh_id = 'OCR14POc_CIT1' where spis = '2Sam' and vers = 1 and k = 16 and v between 5 and 13
+update biblia set lc_id = 266 where spis = '2Sam' and vers = 1 and k = 15 and v between 13 and 14
+update biblia set lc_id = 266 where spis = '2Sam' and vers = 1 and k = 15 and v = 30
+update biblia set lc_id = 266 where spis = '2Sam' and vers = 1 and k = 16 and v between 5 and 13
+go
+
+update biblia set nvg = '[...] Absolón povedal krá¾ovi: „Chcel by som ís, prosím, do Hebronu a splni s¾uby, ktoré som urobil Pánovi. ' where spis = '2Sam' and vers = 1 and k = 15 and v = 7
+update biblia set nvg = 'Lebo tvoj sluobník urobil s¾ub, keï bol v_Gesure v_Sırii: Ak ma Pán privedie spä do Jeruzalema, prinesiem Pánovi obetu.“ ' where spis = '2Sam' and vers = 1 and k = 15 and v = 8
+update biblia set nvg = 'Krá¾ mu povedal: „Choï v_pokoji.“ On vstal a odišiel do Hebronu.' where spis = '2Sam' and vers = 1 and k = 15 and v = 9
+update biblia set nvg = 'Ale Absolón poslal vyzvedaèov do všetkıch kmeòov Izraela s_odkazom: „Len èo zaèujete zvuk po¾nice, zvolajte: ‚Absolón sa stal krá¾om v_Hebrone!‘“ ' where spis = '2Sam' and vers = 1 and k = 15 and v = 10
+update biblia set nvg = 'S_Absolónom šlo z_Jeruzalema dvesto muov, ktorí boli pozvaní; išli s_úprimnım srdcom a vôbec niè netušili. ' where spis = '2Sam' and vers = 1 and k = 15 and v = 11
+update biblia set nvg = 'Kım Absolón prinášal obety, dal zavola aj Dávidovho poradcu Gilonèana Achitofela z_jeho mesta Gilo. A bolo to ve¾ké sprisahanie, lebo okolo Absolóna sa zbiehalo èoraz viac ¾udu.' where spis = '2Sam' and vers = 1 and k = 15 and v = 12
+update biblia set nvg = 'K_Dávidovi prišiel posol so správou: „Všetci Izraeliti sa celım srdcom pridali k_Absolónovi.“ ' where spis = '2Sam' and vers = 1 and k = 15 and v = 13
+update biblia set nvg = 'Dávid povedal svojim sluhom, èo boli s_ním v_Jeruzaleme: „Poïte, utekajme; neostáva nám niè iné iba ujs pred Absolónom. Poponáh¾ajte sa, nech nás neprekvapí a neprepadne, nech nás neuvrhne do nešastia a mesto nevyhubí ostrím meèa.“' where spis = '2Sam' and vers = 1 and k = 15 and v = 14
+update biblia set nvg = 'Prišiel aj Sadok a všetci leviti s_ním niesli archu Boej zmluvy. Boiu archu poloili a kım všetok ¾ud nevyšiel z_mesta, Abiatar priniesol obetu. ' where spis = '2Sam' and vers = 1 and k = 15 and v = 24
+update biblia set nvg = 'Tu krá¾ povedal Sadokovi: „Zanes Boiu archu spä do mesta. Ak nájdem milos v_Pánovıch oèiach, privedie ma naspä a ukáe mi ju aj svoj príbytok. ' where spis = '2Sam' and vers = 1 and k = 15 and v = 25
+update biblia set nvg = 'Ale ak povie: ‚Nepáèiš sa mi,‘ som pripravenı; nech urobí, èo sa jemu páèi.“ ' where spis = '2Sam' and vers = 1 and k = 15 and v = 26
+update biblia set nvg = 'A ešte povedal krá¾ kòazovi Sadokovi: „Vidíš? Vrá sa v_pokoji do mesta. A tvoj syn Achimaas a Abiatarov syn Jonatan, dvaja vaši synovia, nech idú s_vami. ' where spis = '2Sam' and vers = 1 and k = 15 and v = 27
+update biblia set nvg = 'Ja sa budem zdriava pri brodoch na púšti, kım mi od vás nedôjde nejakı odkaz.“ ' where spis = '2Sam' and vers = 1 and k = 15 and v = 28
+update biblia set nvg = 'Sadok a Abiatar zaniesli teda Boiu archu do Jeruzalema a ostali tam.' where spis = '2Sam' and vers = 1 and k = 15 and v = 29
+update biblia set nvg = 'Dávid potom vystupoval na Olivovú horu a plakal. Hlavu mal zahalenú a išiel bosı; aj všetok ¾ud, èo bol s_ním, mal zahalenú hlavu, kráèal nahor a plakal.' where spis = '2Sam' and vers = 1 and k = 15 and v = 30
+go
+update biblia set nvg = 'Keï krá¾ Dávid došiel a k_Bahurim, práve stadia¾ vychádzal mu zo Saulovho príbuzenstva, Gérov syn menom Semei. Išiel opodia¾, preklínal ' where spis = '2Sam' and vers = 1 and k = 16 and v = 5
+update biblia set nvg = 'a hádzal kamene do Dávida a do sluhov krá¾a Dávida, kım všetok ¾ud a všetci udatní mui kráèali po pravej i_¾avej strane krá¾a. ' where spis = '2Sam' and vers = 1 and k = 16 and v = 6
+update biblia set nvg = 'A Semei takto preklínal krá¾a: „Utekaj, utekaj, krvavı mu, Beliálov mu. ' where spis = '2Sam' and vers = 1 and k = 16 and v = 7
+update biblia set nvg = 'Pán na teba uvalil všetku krv Saulovho domu, lebo si uchvátil jeho krá¾ovstvo a Pán dal krá¾ovstvo do ruky tvojho syna Absolóna. Teraz sa na teba valí nešastie, lebo si krvilaènı èlovek.“ ' where spis = '2Sam' and vers = 1 and k = 16 and v = 8
+update biblia set nvg = 'Abisai, syn Sarvie, vravel krá¾ovi: „Preèo tento zdochnutı pes preklína môjho pána a krá¾a? Idem a zrazím mu hlavu.“ ' where spis = '2Sam' and vers = 1 and k = 16 and v = 9
+update biblia set nvg = 'Ale krá¾ povedal: „Èo môem ja alebo vy, synovia Sarvie? Ak preklína a ak mu Pán rozkázal preklína Dávida, kto sa opovái poveda: ‚Preèo to robíš?‘“ ' where spis = '2Sam' and vers = 1 and k = 16 and v = 10
+update biblia set nvg = 'A krá¾ povedal Abisaimu a všetkım svojim sluhom: „H¾a, môj syn, ktorı vyšiel z_mojich útrob, èíha mi na ivot. O_ko¾ko viac môe toto robi tento Benjamínec?! Nechajte ho, nech zloreèí, ako mu prikázal Pán. ' where spis = '2Sam' and vers = 1 and k = 16 and v = 11
+update biblia set nvg = 'Mono Pán zhliadne na moje súenie a dá mi dobré za toto dnešné preklínanie.“ ' where spis = '2Sam' and vers = 1 and k = 16 and v = 12
+update biblia set nvg = 'A Dávid i_jeho sluhovia pokraèovali v_ceste. Ale Semei šiel opodia¾ po úboèí vrchu, preklínal, hádzal doò kamene a metal zem.' where spis = '2Sam' and vers = 1 and k = 16 and v = 13
+go
+
+-- OCR14UTc_CIT1	18, 6-17. 24 – 19, 5
+-- 267	2 Sam 18, 9-10. 14b. 24-25a. 30 - 19, 3
+update biblia set lh_id = 'OCR14UTc_CIT1' where spis = '2Sam' and vers = 1 and k = 18 and v between 6 and 17
+update biblia set lh_id = 'OCR14UTc_CIT1' where spis = '2Sam' and vers = 1 and k = 18 and v between 24 and 32
+update biblia set lc_id = 267 where spis = '2Sam' and vers = 1 and k = 18 and v between 9 and 10
+update biblia set lc_id = 267 where spis = '2Sam' and vers = 1 and k = 18 and v = 14
+update biblia set lc_id = 267 where spis = '2Sam' and vers = 1 and k = 18 and v between 24 and 25
+update biblia set lh_id = 'OCR14UTc_CIT1' where spis = '2Sam' and vers = 1 and k = 19 and v between 1 and 5
+update biblia set lc_id = 267 where spis = '2Sam' and vers = 1 and k = 19 and v between 1 and 3
+go
+
+update biblia set nvg = '¼ud vytiahol do po¾a proti Izraelu a strhol sa v_efraimskom lese boj. ' where spis = '2Sam' and vers = 1 and k = 18 and v = 6
+update biblia set nvg = 'Dávidovo vojsko tam porazilo izraelskı ¾ud, a bola to tam ve¾ká pohroma. V_ten deò padlo dvadsatisíc ¾udí. Boj sa tam rozšíril po celej krajine. ' where spis = '2Sam' and vers = 1 and k = 18 and v = 7
+update biblia set nvg = 'A ove¾a viac bolo tıch, ktorıch z_¾udu pohltil les, ako tıch, ktorıch v_ten deò pohltil meè.' where spis = '2Sam' and vers = 1 and k = 18 and v = 8
+update biblia set nvg = 'Absolón sa neèakane zjavil pred oèami Dávidovıch sluhov; sedel na mulici. Keï mulica vošla pod ve¾kı košatı dub, zachytil sa hlavou na dube a ostal visie medzi nebom a zemou; mulica, na ktorej sedel, prešla. ' where spis = '2Sam' and vers = 1 and k = 18 and v = 9
+update biblia set nvg = 'Ktosi to videl a oznámil Joabovi: „Videl som Absolóna visie na dube.“' where spis = '2Sam' and vers = 1 and k = 18 and v = 10
+update biblia set nvg = 'Joab povedal muovi, èo mu to oznámil: „Keï si ho videl, preèo si ho nepribodol k_zemi? A ja by som ti bol dal desa šeklov striebra a jeden opasok.“ ' where spis = '2Sam' and vers = 1 and k = 18 and v = 11
+update biblia set nvg = 'On odpovedal Joabovi: „Ani keby si mi dal na ruku tisíc striebornıch, nevystrel by som ruku na krá¾ovho syna. Veï sme poèuli, keï krá¾ prikazoval tebe, Abisaimu a Etaimu: ‚Dávajte mi všetci pozor na chlapca Absolóna!‘ ' where spis = '2Sam' and vers = 1 and k = 18 and v = 12
+update biblia set nvg = 'A keby som to aj bol neverne urobil proti svojej duši, pred krá¾om sa to nedá utaji a ty by si sa bol postavil proti mne.“ ' where spis = '2Sam' and vers = 1 and k = 18 and v = 13
+update biblia set nvg = 'Joab povedal: „Nebudem sa tu s_tebou takto bavi.“ Vzal do ruky tri kopije a vrazil ich Absolónovi do srdca, keï sa ešte metal zavesenı na dube. ' where spis = '2Sam' and vers = 1 and k = 18 and v = 14
+update biblia set nvg = 'Tu pribehlo desa mladíkov, Joabovıch zbrojnošov, a dobili ho.' where spis = '2Sam' and vers = 1 and k = 18 and v = 15
+update biblia set nvg = 'Potom Joab zatrúbil na po¾nicu a ¾ud prestal prenasledova utekajúcich Izraelitov, lebo Joab ¾ud zadral. ' where spis = '2Sam' and vers = 1 and k = 18 and v = 16
+update biblia set nvg = 'Absolóna vzali a hodili ho v_lese do ve¾kej jamy a navàšili na neho ve¾mi ve¾kú hromadu kameòov. A celı Izrael utiekol do svojich stanov.' where spis = '2Sam' and vers = 1 and k = 18 and v = 17
+go
+update biblia set nvg = 'Dávid sedel medzi dvoma bránami. Pozorovate¾, èo vyšiel na terasu brány na hradbách, dvihol oèi a videl, e beí osamelı èlovek; ' where spis = '2Sam' and vers = 1 and k = 18 and v = 24
+update biblia set nvg = 'zakrièal a oznámil to krá¾ovi. Krá¾ povedal: „Ak je sám, je dobrá zves v_jeho ústach.“ Kım sa ten rıchlo priblioval, ' where spis = '2Sam' and vers = 1 and k = 18 and v = 25
+update biblia set nvg = 'pozorovate¾ videl bea iného èloveka a pozorovate¾ zakrièal strácovi brány: „Vidím èloveka a beí sám.“ Krá¾ povedal: „Aj ten nesie dobrú zves.“ ' where spis = '2Sam' and vers = 1 and k = 18 and v = 26
+update biblia set nvg = 'Pozorovate¾ hovoril: „Zdá sa mi, e ten prvı beí, ako beí Sadokov syn Achimaas.“ Krá¾ vravel: „Je to dobrı mu a prichádza s_dobrou zvesou.“' where spis = '2Sam' and vers = 1 and k = 18 and v = 27
+update biblia set nvg = 'Vtom Achimaas zavolal na krá¾a: „Pokoj!“ Poklonil sa krá¾ovi a tvárou po zem a povedal: „Nech je zvelebenı Pán, tvoj Boh, ktorı zovrel ¾udí, èo zdvihli svoje ruky proti môjmu pánovi a krá¾ovi.“ ' where spis = '2Sam' and vers = 1 and k = 18 and v = 28
+update biblia set nvg = 'Krá¾ sa spıtal: „Má sa mladík Absolón dobre?“ Achimaas odpovedal: „Videl som ve¾kı zmätok, keï Joab poslal krá¾ovho sluhu a mòa, tvojho sluhu, ale neviem, èo to bolo.“ ' where spis = '2Sam' and vers = 1 and k = 18 and v = 29
+update biblia set nvg = 'Krá¾ mu povedal: „Odstúp a staò si tamto.“ On odstúpil a stál. ' where spis = '2Sam' and vers = 1 and k = 18 and v = 30
+update biblia set nvg = 'Vtom sa zjavil Etiópèan a keï prišiel, povedal: „Dobrú zves prinášam, pane, môj krá¾; dnes ti Pán prisúdil právo a vyslobodil a z_rúk všetkıch, èo povstali proti tebe.“ ' where spis = '2Sam' and vers = 1 and k = 18 and v = 31
+update biblia set nvg = 'Ale krá¾ sa opıtal Etiópèana: „Má sa mladík Absolón dobre?“ Etiópèan mu odvetil: „Nech pochodia ako ten mladík nepriatelia môjho pána a krá¾a a všetci, èo zloèinne povstali proti nemu.“' where spis = '2Sam' and vers = 1 and k = 18 and v = 32
+go
+update biblia set nvg = 'Krá¾ sa zachvel, vystúpil do siene nad bránou a plakal. Chodil a hovoril: „Syn môj Absolón, syn môj, syn môj Absolón! Radšej som mohol ja zomrie namiesto teba! Absolón, syn môj, syn môj!“' where spis = '2Sam' and vers = 1 and k = 19 and v = 1
+update biblia set nvg = 'Joabovi oznámili, e krá¾ plaèe a iali za svojím synom. ' where spis = '2Sam' and vers = 1 and k = 19 and v = 2
+update biblia set nvg = 'A tak sa v_ten deò víazstvo zmenilo na smútok v_celom národe, lebo ¾ud poèul v_ten deò hovori: „Krá¾ iali za svojím synom.“ ' where spis = '2Sam' and vers = 1 and k = 19 and v = 3
+update biblia set nvg = 'V_ten deò vošiel ¾ud do mesta kradmo. Tak, ako sa vracia zahanbenı ¾ud, keï uteká z_boja. ' where spis = '2Sam' and vers = 1 and k = 19 and v = 4
+update biblia set nvg = 'A krá¾ si zahalil tvár a krièal ve¾kım hlasom: „Syn môj Absolón, Absolón, syn môj, syn môj!“' where spis = '2Sam' and vers = 1 and k = 19 and v = 5
+go
+
+-- OCR14STRc_CIT1	24, 1-4. 10-18. 24b-25
+-- 268	2 Sam 24, 2. 9-17
+update biblia set lh_id = 'OCR14STRc_CIT1' where spis = '2Sam' and vers = 1 and k = 24 and v between 1 and 4
+update biblia set lh_id = 'OCR14STRc_CIT1' where spis = '2Sam' and vers = 1 and k = 24 and v between 10 and 18
+update biblia set lh_id = 'OCR14STRc_CIT1' where spis = '2Sam' and vers = 1 and k = 24 and v between 24 and 25
+update biblia set lc_id = 268 where spis = '2Sam' and vers = 1 and k = 24 and v = 2
+update biblia set lc_id = 268 where spis = '2Sam' and vers = 1 and k = 24 and v between 9 and 17
+go
+
+update biblia set nvg = 'Znovu vzplanul Pánov hnev proti Izraelu. A podnietil proti nim Dávida: „Choï a spoèítaj Izrael i_Júdu.“ ' where spis = '2Sam' and vers = 1 and k = 24 and v = 1
+update biblia set nvg = 'Krá¾ povedal Joabovi a velite¾om svojho vojska, èo boli s_ním: „Choïte po všetkıch kmeòoch Izraela od Danu a po Bersabe a spoèítajte ¾ud; chcem pozna jeho poèet.“ ' where spis = '2Sam' and vers = 1 and k = 24 and v = 2
+update biblia set nvg = 'Joab povedal krá¾ovi: „Nech Pán, tvoj Boh, pridá k_¾udu stokrát to¾ko, ko¾ko ho je teraz pred oèami môjho pána a krá¾a. Ale èo chce môj pán a krá¾ dosiahnu takouto vecou?“ ' where spis = '2Sam' and vers = 1 and k = 24 and v = 3
+update biblia set nvg = 'Ale krá¾ovo slovo bolo silnejšie ako Joab a velitelia vojska. A tak Joab a velitelia vojakov vyšli od krá¾a spoèíta izraelskı ¾ud.' where spis = '2Sam' and vers = 1 and k = 24 and v = 4
+go
+update biblia set nvg = 'Ale keï bol ¾ud spoèítanı, rozbúšilo sa Dávidovi srdce a povedal Pánovi: „Ve¾mi som zhrešil tımto skutkom. Ale teraz, prosím, Pane, odpus neprávos svojho sluhu, lebo som konal ve¾mi hlúpo.“ ' where spis = '2Sam' and vers = 1 and k = 24 and v = 10
+update biblia set nvg = 'Keï Dávid ráno vstal, Pán prehovoril k_prorokovi Gadovi, Dávidovmu vidcovi: ' where spis = '2Sam' and vers = 1 and k = 24 and v = 11
+update biblia set nvg = '„Choï a povedz Dávidovi: Toto hovorí Pán: Tri monosti ti dávam na vo¾bu; vyber si, èo chceš, èo mám na teba dopusti.“ ' where spis = '2Sam' and vers = 1 and k = 24 and v = 12
+update biblia set nvg = 'Gad išiel k_Dávidovi a oznámil mu: „Buï bude v_tvojej krajine tri roky hlad, alebo budeš tri mesiace uteka pred svojimi nepriate¾mi a oni a budú prenasledova, alebo bude tri dni mor v_tvojej krajine. Dobre si to rozmysli a povedz, èo mám odpoveda tomu, ktorı ma poslal.“ ' where spis = '2Sam' and vers = 1 and k = 24 and v = 13
+update biblia set nvg = 'Dávid povedal Gadovi: „Ve¾mi úzko mi je, ale lepšie padnú do ruky Pána – lebo on je ve¾mi milosrdnı –, ako padnú do rúk èloveka!“' where spis = '2Sam' and vers = 1 and k = 24 and v = 14
+update biblia set nvg = 'Dávid si vybral mor; bola práve atva. Pán dopustil mor na Izraela od rána a do urèeného èasu. Od Danu po Bersabe zomrelo z_¾udu sedemdesiattisíc muov. ' where spis = '2Sam' and vers = 1 and k = 24 and v = 15
+update biblia set nvg = 'Keï anjel vystrel ruku nad Jeruzalem, aby ho znièil, Pána pohlo utrpenie a povedal anjelovi, ktorı hubil ¾ud: „Dos u; zadr svoju ruku!“ // Pánov anjel bol práve pri humne Jebuzejèana Areunu. ' where spis = '2Sam' and vers = 1 and k = 24 and v = 16
+update biblia set nvg = 'Keï Dávid videl anjela, èo zabíjal ¾ud, povedal Pánovi: „Ja som zhrešil, ja som sa dopustil zloèinu. Ale tieto oveèky èoe urobili? Prosím, nech sa tvoja ruka obráti proti mne a proti domu môjho otca.“' where spis = '2Sam' and vers = 1 and k = 24 and v = 17
+update biblia set nvg = 'V_ten deò prišiel k_Dávidovi Gad a povedal mu: „Choï hore a postav Pánovi na humne Jebuzejèana Areunu oltár.“ ' where spis = '2Sam' and vers = 1 and k = 24 and v = 18
+go
+update biblia set nvg = '[...] Dávid teda kúpil humno i_voly za pädesiat šeklov striebra. ' where spis = '2Sam' and vers = 1 and k = 24 and v = 24
+update biblia set nvg = 'Potom tam Dávid postavil Pánovi oltár a priniesol zápalné i_pokojné obety. // A Pán sa dal uprosi za krajinu a rana bola od Izraela odvrátená. ' where spis = '2Sam' and vers = 1 and k = 24 and v = 25
+go
+
