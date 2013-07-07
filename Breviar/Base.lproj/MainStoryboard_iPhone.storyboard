@@ -276,6 +276,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Breviar" id="iKT-jq-jdv"/>
+                    <connections>
+                        <outlet property="tableView" destination="1Ta-iU-6rs" id="hbf-90-rQQ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GhQ-Vo-lB5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -674,8 +677,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="fontLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
-        <class className="BRPrayerListViewController" superclassName="UITableViewController">
+        <class className="BRPrayerListViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BRPrayerListViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
         </class>
         <class className="BRPrayerViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BRPrayerViewController.h"/>

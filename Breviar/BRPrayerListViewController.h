@@ -10,10 +10,16 @@
 #import "BRDatePickerViewController.h"
 #import "BRDay.h"
 
-@interface BRPrayerListViewController : UITableViewController <BRDatePickerDelegate>
+@interface BRPrayerListViewController : UIViewController <BRDatePickerDelegate, UITableViewDataSource, UITableViewDelegate>
+
+@property(weak) IBOutlet UITableView *tableView;
+@property(weak) IBOutlet UIButton *showDatePickerButton;
+
+@property(strong) UIPopoverController *datePickerPopover;
 
 @property(strong) NSDate *date;
 @property(strong) BRDay *day;
+@property(strong) NSArray *sections;
 @property NSInteger celebrationIndex;
 
 @end

@@ -30,5 +30,6 @@ typedef enum {
 @property(readonly) NSString *body;
 
 + (BRPrayerType)prayerTypeFromQueryId:(NSString *)queryId;
++ (NSString *)queryIdFromPrayerType:(BRPrayerType)prayerType;
 
 @end
