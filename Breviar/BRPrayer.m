@@ -63,4 +63,8 @@ static NSString *prayerQueryIds[] = {
     return BRInvitatory;
 }
 
++ (NSString *)queryIdFromPrayerType:(BRPrayerType)prayerType {
+    return prayerQueryIds[prayerType];
+}
+
 @end
