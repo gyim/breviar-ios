@@ -186,6 +186,13 @@ static NSString *liturgicalColorImages[] = {
 			self.datePickerPopover = [(UIStoryboardPopoverSegue *)segue popoverController];
 		}
 	}
+	else if ([segueId isEqualToString:@"ShowPrayer"]) {
+		BRPrayerViewController *destController = segue.destinationViewController;
+		NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+		BRPrayerType prayerType = (BRPrayerType)indexPath.row;
+		BRCelebration *celebration = [self.day.celebrations objectAtIndex:self.celebrationIndex];
+		destController.prayer = [celebration.prayers objectAtIndex:prayerType];
+	}
 	else if ([[segueId substringToIndex:11] isEqualToString:@"ShowPrayer."]) {
 		BRPrayerViewController *destController = segue.destinationViewController;
 		NSString *prayerQueryId = [segueId substringFromIndex:11];
