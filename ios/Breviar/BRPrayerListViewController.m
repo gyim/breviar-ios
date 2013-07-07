@@ -10,6 +10,7 @@
 #import "BRPrayerViewController.h"
 #import "BRDataSource.h"
 #import "BRCelebrationCell.h"
+#import "BRUtil.h"
 
 static NSString *liturgicalColorImages[] = {
 	[BRColorUnknown]       = @"",
@@ -30,19 +31,16 @@ static NSString *liturgicalColorImages[] = {
 
 @implementation BRPrayerListViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	self.date = [NSDate date];
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+		self.sections = @[@"Date", @"PrayerListCell", @"Settings"];
+	}
+	else {
+		self.sections = @[@"Date", @"PrayerList"];
+	}
 }
 
 - (void)viewDidUnload
@@ -69,26 +67,30 @@ static NSString *liturgicalColorImages[] = {
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 3;
+	return self.sections.count;
 }
 
 #pragma mark -
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	switch (section) {
-		case 0:
-			return self.day.celebrations.count + 1;
-		case 1:
-			return 1;
-		case 2:
-			return 1;
+	NSString *sectionType = [self.sections objectAtIndex:section];
+	
+	if ([sectionType isEqualToString:@"Date"]) {
+		return self.day.celebrations.count + 1;
 	}
-	return 0;
+	else if ([sectionType isEqualToString:@"PrayerList"]) {
+		return 8;
+	}
+	else {
+		return 1;
+	}
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 0) {
+	NSString *sectionType = [self.sections objectAtIndex:indexPath.section];
+	
+	if ([sectionType isEqualToString:@"Date"]) {
 		if (indexPath.row == 0) {
 			// Date cell
 			UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DateCell"];
@@ -113,21 +115,30 @@ static NSString *liturgicalColorImages[] = {
 			return cell;
 		}
 	}
-	else if (indexPath.section == 1) {
+	else if ([sectionType isEqualToString:@"PrayerListCell"]) {
 		// Prayer list cell
 		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PrayerListCell"];
 		
 		return cell;
 	}
-	else if (indexPath.section == 2) {
+	else if ([sectionType isEqualToString:@"PrayerList"]) {
+		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PrayerCell"];
+		
+		cell.textLabel.text = BREVIAR_STR([BRPrayer queryIdFromPrayerType:(BRPrayerType)indexPath.row]);
+		return cell;
+	}
+	else if ([sectionType isEqualToString:@"Settings"]) {
 		// Settings cell
 		return [tableView dequeueReusableCellWithIdentifier:@"SettingsCell"];
 	}
+	
 	return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 1) {
+	NSString *sectionType = [self.sections objectAtIndex:indexPath.section];
+	
+	if ([sectionType isEqualToString:@"PrayerListCell"]) {
 		return 168;
 	}
 	else {
@@ -139,14 +150,23 @@ static NSString *liturgicalColorImages[] = {
 #pragma mark UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 0 && indexPath.row > 0) {
-		// Select celebration
-		NSIndexPath *oldIndexPath = [NSIndexPath indexPathForRow:self.celebrationIndex+1 inSection:indexPath.section];
-		[self.tableView cellForRowAtIndexPath:oldIndexPath].accessoryType = UITableViewCellAccessoryNone;
-		[self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
-		
-		self.celebrationIndex = indexPath.row-1;
-		[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+	NSString *sectionType = [self.sections objectAtIndex:indexPath.section];
+	
+	if ([sectionType isEqualToString:@"Date"]) {
+		if (indexPath.row == 0 && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+			// Show date picker.
+			// NOTE: This is a hack for iPad: Storybord cannot show popovers for dynamic cells, so we show it for a hidden button.
+			[self performSegueWithIdentifier:@"ShowDatePicker" sender:self.showDatePickerButton];
+		}
+		else if (indexPath.row > 0) {
+			// Select celebration
+			NSIndexPath *oldIndexPath = [NSIndexPath indexPathForRow:self.celebrationIndex+1 inSection:indexPath.section];
+			[self.tableView cellForRowAtIndexPath:oldIndexPath].accessoryType = UITableViewCellAccessoryNone;
+			[self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+			
+			self.celebrationIndex = indexPath.row-1;
+			[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+		}
 	}
 }
 
@@ -161,6 +181,10 @@ static NSString *liturgicalColorImages[] = {
 		BRDatePickerViewController *destController = segue.destinationViewController;
 		destController.initialDate = self.date;
 		destController.datePickerDelegate = self;
+		
+		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+			self.datePickerPopover = [(UIStoryboardPopoverSegue *)segue popoverController];
+		}
 	}
 	else if ([[segueId substringToIndex:11] isEqualToString:@"ShowPrayer."]) {
 		BRPrayerViewController *destController = segue.destinationViewController;
@@ -175,7 +199,15 @@ static NSString *liturgicalColorImages[] = {
 {
 	self.date = date;
 	self.celebrationIndex = 0;
-	[self dismissModalViewControllerAnimated:YES];
+	
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+		[self dismissViewControllerAnimated:YES completion:nil];
+	}
+	else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		[self.datePickerPopover dismissPopoverAnimated:YES];
+		[self.tableView reloadData];
+		self.datePickerPopover = nil;
+	}
 }
 
 @end
