@@ -23,4 +23,6 @@
 @property NSInteger fontSize;
 @property(weak) NSObject<BRFontPickerDelegate> *delegate;
 
+- (IBAction)donePressed:(id)sender;
+
 @end
