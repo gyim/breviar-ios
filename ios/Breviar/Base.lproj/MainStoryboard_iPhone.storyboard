@@ -537,7 +537,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="4wb-6O-CFZ" kind="push" identifier="ShowStringOptions" id="jy2-bF-WVX"/>
+                                    <segue destination="K7X-6Y-Jx7" kind="push" identifier="ShowStringOptions" id="esx-zg-rtU"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -552,44 +552,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bTK-bJ-Hdg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1044" y="466"/>
-        </scene>
-        <!--String Option Picker View Controller-->
-        <scene sceneID="YjO-U6-YUd">
-            <objects>
-                <tableViewController id="4wb-6O-CFZ" customClass="BRStringOptionPickerViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vgZ-lW-r9r">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="SelectableStringCell" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SelectableStringCell" textLabel="gQ2-f3-F7b" style="IBUITableViewCellStyleDefault" id="DqW-Tw-Rhm">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQ2-f3-F7b">
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="4wb-6O-CFZ" id="yfs-Yt-4Fi"/>
-                            <outlet property="delegate" destination="4wb-6O-CFZ" id="bj5-RL-z3W"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="4Ni-VK-dC7"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kAq-Um-llM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1479" y="1048"/>
         </scene>
         <!--Font Picker View Controller - Choose Font-->
         <scene sceneID="s9Z-hg-R4k">
@@ -634,6 +596,57 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="118-rh-AFO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1479" y="466"/>
+        </scene>
+        <!--String Option Picker View Controller-->
+        <scene sceneID="dpL-4O-Mjw">
+            <objects>
+                <viewController id="K7X-6Y-Jx7" customClass="BRStringOptionPickerViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yw6-Mu-vRE">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="VrO-um-lcI">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="SelectableStringCell" textLabel="BeL-xX-ApU" style="IBUITableViewCellStyleDefault" id="Nat-fb-3mq">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BeL-xX-ApU">
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="K7X-6Y-Jx7" id="EaT-av-Zt0"/>
+                                    <outlet property="delegate" destination="K7X-6Y-Jx7" id="XCr-qd-x8L"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VrO-um-lcI" firstAttribute="top" secondItem="yw6-Mu-vRE" secondAttribute="top" type="default" id="Q9Y-6a-RL6"/>
+                            <constraint firstItem="VrO-um-lcI" firstAttribute="trailing" secondItem="yw6-Mu-vRE" secondAttribute="trailing" type="default" id="XAF-Sx-MOd"/>
+                            <constraint firstItem="VrO-um-lcI" firstAttribute="leading" secondItem="yw6-Mu-vRE" secondAttribute="leading" type="default" id="cYH-6p-KaQ"/>
+                            <constraint firstItem="VrO-um-lcI" firstAttribute="bottom" secondItem="yw6-Mu-vRE" secondAttribute="bottom" type="default" id="chf-Gk-3E1"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="yUt-KI-61y"/>
+                    <connections>
+                        <outlet property="tableView" destination="VrO-um-lcI" id="32b-Sp-9dG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="roZ-o7-rbh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1477" y="1044"/>
         </scene>
     </scenes>
     <classes>
@@ -693,8 +706,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="BRSettingsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BRSettingsViewController.h"/>
         </class>
-        <class className="BRStringOptionPickerViewController" superclassName="UITableViewController">
+        <class className="BRStringOptionPickerViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BRStringOptionPickerViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>

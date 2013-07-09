@@ -136,4 +136,12 @@ static CGFloat componentSizes[] = {
 	[self.webView loadHTMLString:html baseURL:[NSURL URLWithString:@"http://breviar.sk"]];
 }
 
+#pragma mark -
+#pragma mark Actions
+
+- (IBAction)donePressed:(id)sender
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end
