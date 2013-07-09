@@ -97,8 +97,8 @@
     NSDictionary *option = [self optionForIndexPath:indexPath];
     NSString *optionType = [option objectForKey:@"type"];
     
-    if ([optionType isEqualToString:@"bool"]) {
-        // Boolean option
+    if ([optionType isEqualToString:@"bool"] && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        // Boolean option for iPhone
         NSArray *opts = [section objectForKey:@"items"];
         NSString *optId = [[opts objectAtIndex:indexPath.row] objectForKey:@"id"];
         NSString *optTitle = BREVIAR_STR(optId);
@@ -165,6 +165,8 @@
     NSDictionary *option = [self optionForIndexPath:indexPath];
     self.currentOptionId = [option objectForKey:@"id"];
     
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if ([segueId isEqualToString:@"ShowFontPicker"]) {
         BRFontPickerViewController *fontPicker = segue.destinationViewController;
         fontPicker.fontFamily = [BRSettings instance].prayerFontFamily;
@@ -184,11 +186,13 @@
 - (void)fontPicker:(BRFontPickerViewController *)fontPicker didPickFont:(UIFont *)font
 {
     [[BRSettings instance] setFont:font forOption:self.currentOptionId];
+    [self.tableView reloadData];
 }
 
 - (void)stringOptionPicker:(BRStringOptionPickerViewController *)picker didPickOption:(NSString *)value
 {
     [[BRSettings instance] setString:value forOption:self.currentOptionId];
+    [self.tableView reloadData];
 }
 
 @end
