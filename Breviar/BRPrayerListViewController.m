@@ -205,6 +205,7 @@ static NSString *liturgicalColorImages[] = {
 - (void)datePicker:(BRDatePickerViewController *)datePicker pickedDate:(NSDate *)date
 {
 	self.date = date;
+	self.day = [[BRDataSource instance] dayForDate:self.date];
 	self.celebrationIndex = 0;
 	
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
