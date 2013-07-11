@@ -15,18 +15,10 @@
 
 @implementation BRStringOptionPickerViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (void)viewWillAppear:(BOOL)animated
 {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+	[super viewWillAppear:animated];
+	self.navigationBar.topItem.title = self.title;
 }
 
 #pragma mark - Table view data source
@@ -45,7 +37,8 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SelectableStringCell" forIndexPath:indexPath];
 	NSString *value = [self.options objectAtIndex:indexPath.row];
-	cell.textLabel.text = BREVIAR_STR(value);
+	NSString *valueId = [NSString stringWithFormat:@"%@.%@", self.optionId, value];
+	cell.textLabel.text = BREVIAR_STR(valueId);
 	cell.accessoryType = ([value isEqualToString:self.currentValue] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone);
     
     return cell;
@@ -70,6 +63,11 @@
 	[self.delegate stringOptionPicker:self didPickOption:self.currentValue];
 
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (IBAction)doneButtonPressed:(id)sender
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

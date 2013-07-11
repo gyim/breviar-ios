@@ -95,6 +95,10 @@
 /* Begin PBXFileReference section */
 		7034597B15FCE84D000A1711 /* BRFontHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRFontHelper.h; sourceTree = "<group>"; };
 		7034597C15FCE84D000A1711 /* BRFontHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRFontHelper.m; sourceTree = "<group>"; };
+		70424419178CBD8200EF5461 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard_iPad.strings; sourceTree = "<group>"; };
+		7042441B178CBD8400EF5461 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/MainStoryboard_iPad.strings; sourceTree = "<group>"; };
+		7042441D178CBD8600EF5461 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MainStoryboard_iPad.strings; sourceTree = "<group>"; };
+		7042441E178CBDAD00EF5461 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MainStoryboard_iPad.strings; sourceTree = "<group>"; };
 		704290441640887100663A7D /* RaptureXML.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RaptureXML.xcodeproj; path = RaptureXML/RaptureXML.xcodeproj; sourceTree = "<group>"; };
 		7042905316408A1100663A7D /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		7042905516408A1600663A7D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -165,7 +169,6 @@
 		707A64BC171B12790065F98E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = Breviar.strings; sourceTree = "<group>"; };
 		707A64BE171B12790065F98E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = InfoPlist.strings; sourceTree = "<group>"; };
 		707A64C6171B12AC0065F98E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
-		707A64C7171B12AD0065F98E /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = cs; path = cs.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		707A64C8171B6F320065F98E /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		707A64C9171B6F320065F98E /* Icon@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2.png"; sourceTree = "<group>"; };
 		70AAAA4C15FBFBE4008D314D /* BRSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettings.h; sourceTree = "<group>"; };
@@ -643,7 +646,10 @@
 			isa = PBXVariantGroup;
 			children = (
 				707A6498171A1C180065F98E /* Base */,
-				707A64C7171B12AD0065F98E /* cs */,
+				70424419178CBD8200EF5461 /* en */,
+				7042441B178CBD8400EF5461 /* hu */,
+				7042441D178CBD8600EF5461 /* sk */,
+				7042441E178CBDAD00EF5461 /* cs */,
 			);
 			name = MainStoryboard_iPad.storyboard;
 			sourceTree = "<group>";
