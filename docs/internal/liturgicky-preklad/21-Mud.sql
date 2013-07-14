@@ -48,7 +48,7 @@ go
 update biblia set nvg = '„Zmocnime sa spravodlivého chudáka, / nešetrime vdovu / a neberme oh¾ad na šediny starca vysokého veku.' where spis = 'Mud' and vers = 1 and k = 2 and v = 10
 update biblia set nvg = 'Naša sila nech je zákonom spravodlivosti, / lebo èo je slabé, je neuitoèné.' where spis = 'Mud' and vers = 1 and k = 2 and v = 11
 update biblia set nvg = 'Èíhajme teda na spravodlivého, lebo nám je na archu. / Stavia sa proti nášmu správaniu, / vyèíta nám prestupovanie zákona, / aluje, e sme zradili svoju vıchovu.' where spis = 'Mud' and vers = 1 and k = 2 and v = 12
-update biblia set nvg = 'Chvastá sa, e pozná Boha, / a Boím synom sa nazıva.<!-- JUV: tu malé "s" -->' where spis = 'Mud' and vers = 1 and k = 2 and v = 13
+update biblia set nvg = 'Chvastá sa, e pozná Boha, / a Boím synom sa nazıva.' where spis = 'Mud' and vers = 1 and k = 2 and v = 13
 update biblia set nvg = 'Obalúva naše zmıš¾anie, / u aj poh¾ad na neho je nám na archu.' where spis = 'Mud' and vers = 1 and k = 2 and v = 14
 update biblia set nvg = 'Lebo jeho ivot je nepodobnı ostatnım / a odlišné sú jeho chodníky.' where spis = 'Mud' and vers = 1 and k = 2 and v = 15
 update biblia set nvg = 'Pokladá nás za spotvorenıch / a boèí od našich ciest ako od neèistoty; / blahoslaví údel spravodlivıch / a chváli sa, e Boh mu je otcom.' where spis = 'Mud' and vers = 1 and k = 2 and v = 16
@@ -208,7 +208,7 @@ update biblia set nvg = 'Sila Múdrosti siaha od jedného konca k_druhému / a všet
 update biblia set nvg = 'Miloval som ju a vyh¾adával od svojej mladosti / a usiloval som sa dosta ju za nevestu, / lebo som sa zamiloval do jej krásy.' where spis = 'Mud' and vers = 1 and k = 8 and v = 2
 update biblia set nvg = 'Rozhlasuje svoju uš¾achtilos, pretoe má spoloèenstvo s_Bohom, / ale aj Pán všetkého ju miluje.' where spis = 'Mud' and vers = 1 and k = 8 and v = 3
 update biblia set nvg = 'Veï je uèite¾kou Boieho uèenia / a vyberá jeho diela.' where spis = 'Mud' and vers = 1 and k = 8 and v = 4
-update biblia set nvg = 'Ak je bohatstvo <!-- iadúce --> iaduce dobro v_ivote, / èo je bohatšie ako múdros, / ktorá všetko tvorí?' where spis = 'Mud' and vers = 1 and k = 8 and v = 5
+update biblia set nvg = 'Ak je bohatstvo iaduce dobro v_ivote, / èo je bohatšie ako múdros, / ktorá všetko tvorí?' where spis = 'Mud' and vers = 1 and k = 8 and v = 5
 update biblia set nvg = 'Ale ak u rozumnos tvorí, / kto z_toho, èo je, je väèším umelcom ako ona?' where spis = 'Mud' and vers = 1 and k = 8 and v = 6
 update biblia set nvg = 'A keï niekto miluje spravodlivos, / vısledkom jej námah sú ènosti: / veï ona uèí striedmosti a opatrnosti, / spravodlivosti a odvahe, / od ktorıch nie je niè uitoènejšie v_ivote èloveka.' where spis = 'Mud' and vers = 1 and k = 8 and v = 7
 update biblia set nvg = 'A keï niekto túi ma bohaté znalosti, / ona pozná minulos a odha¾uje budúcnos, / pozná slovné zvraty a riešenie hádaniek, / pozná znamenia a úkazy, skôr, ako sa stanú, / aj chvíle a èasy priaznivé.' where spis = 'Mud' and vers = 1 and k = 8 and v = 8
