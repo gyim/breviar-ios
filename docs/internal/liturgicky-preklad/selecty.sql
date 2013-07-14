@@ -206,10 +206,17 @@ order by 2
 
 select * from biblia where spis = 'Job'
 and nvg is not null
-*/
+
 select * from lc
 where sur like 'Prís%'
 order by 2
 
 select * from biblia where spis = 'Pris'
+and nvg is not null
+*/
+select * from lc
+where sur like 'Kaz%'
+order by 2
+
+select * from biblia where spis = 'Kaz'
 and nvg is not null
