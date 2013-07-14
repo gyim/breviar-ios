@@ -158,5 +158,5 @@ select * from lc
 where sur like 'Múd%'
 order by 2
 
-select * from biblia where spis = 'Múd'
+select * from biblia where spis = 'Mud' -- 'Múd'
 and nvg is not null
