@@ -1,14 +1,46 @@
 /*
 
 -- 2013-07-02: priebeh
-select _0, spis, count(1) as versov -- * 
+select _0, spis, count(1) as versov
 from biblia where 1=1 -- spis = '2Sam'
+and vers = 1
 and nvg is not null
 group by _0, spis
 order by _0
 
+-- 2013-07-14: všetky verše
+select biblia._0, biblia.spis, count(1) as versov_all
+from biblia 
+where 1=1
+and vers = 1
+group by biblia._0, biblia.spis
+order by biblia._0
 
+-- štatistika
+---------------------------------------------------------------------------------------
 
+select _0, spis, sum(versov) as NVg, sum(versov_all) as vsetky, sum(versov) / cast(sum(versov_all) as float)* 100.0 as percento
+from
+(
+select _0, spis, count(1) as versov, 0 as versov_all
+from biblia 
+where 1=1
+and vers = 1
+and nvg is not null
+group by _0, spis
+
+union all
+
+select biblia._0, biblia.spis, 0 as versov, count(1) as versov_all
+from biblia 
+where 1=1
+and vers = 1
+group by biblia._0, biblia.spis
+) a
+group by _0, spis
+order by _0
+
+---------------------------------------------------------------------------------------
 
 select top 100 * from biblia where vers = 1
 and spis = 'jn'
