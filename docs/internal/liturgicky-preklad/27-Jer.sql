@@ -67,9 +67,13 @@ go
 
 -- OCR21STVc_CIT1	3, 1-5. 19 – 4, 4
 -- 750	Jer 3, 14-17
+-- 14FEB_cCIT2 resp.	Jer 3, 15
+-- POST1_2PICIT	Jer 3, 12. 14a
 update biblia set lh_id = 'OCR21STVc_CIT1' where spis = 'Jer' and vers = 1 and k = 3 and v between 1 and 5
 update biblia set lh_id = 'OCR21STVc_CIT1' where spis = 'Jer' and vers = 1 and k = 3 and v between 19 and 25
 update biblia set lh_id = 'OCR21STVc_CIT1' where spis = 'Jer' and vers = 1 and k = 4 and v between 1 and 4
+update biblia set lh_id = '14FEB_cCIT2 resp.' where spis = 'Jer' and vers = 1 and k = 3 and v = 15
+update biblia set lh_id = 'POST1_2PICIT' where spis = 'Jer' and vers = 1 and k = 3 and v = 12
 go
 update biblia set lc_id = 750 where spis = 'Jer' and vers = 1 and k = 3 and v between 14 and 17
 go
@@ -79,6 +83,8 @@ update biblia set nvg = 'Zdvihni svoje oèi na hole a pozri, / kde si sa nedala p
 update biblia set nvg = 'Preto boli zadrané zráky / a neskorı dáï nebol. // Ale ty si mala èelo ako neviestka, / nechcela si sa èervena.' where spis = 'Jer' and vers = 1 and k = 3 and v = 3
 update biblia set nvg = 'A nevoláš teraz na mòa: ‚Otèe môj, / ty si vodca mojej mladosti!' where spis = 'Jer' and vers = 1 and k = 3 and v = 4
 update biblia set nvg = 'Vari sa bude naveky hneva / a vytrvá a do konca?‘ / Tak si hovorila / a páchala si zlo tvrdošijne.' where spis = 'Jer' and vers = 1 and k = 3 and v = 5
+go
+update biblia set nvg = '(... Vráte sa, hovorí Pán, a ja neodvrátim od vás svoju tvár; veï som milosrdnı, nebudem sa hneva naveky. ...)' where spis = 'Jer' and vers = 1 and k = 3 and v = 12
 go
 update biblia set nvg = 'Vráte sa, odpadlí synovia, hovorí Pán, veï ja som váš Pán; vezmem vás, jedného z kadého mesta a dvoch z kadého príbuzenstva, a zavediem vás na Sion. ' where spis = 'Jer' and vers = 1 and k = 3 and v = 14
 update biblia set nvg = 'A dám vám pastierov pod¾a môjho srdca, ktorí vás budú pás rozumne a múdro.' where spis = 'Jer' and vers = 1 and k = 3 and v = 15
@@ -127,6 +133,12 @@ update biblia set nvg = 'Lebo toto hovorí Pán: / „Celá zem bude spustošená, / a 
 update biblia set nvg = 'Zem bude nad tım trúchli / a nebesia budú iali zhora, / lebo som prehovoril, / rozhodol som sa a ne¾utujem to, / ani neodstúpim od toho.“' where spis = 'Jer' and vers = 1 and k = 4 and v = 28
 go
 
+-- _2SO3_CIT	Jer 6, 16
+update biblia set lh_id = '_2SO3_CIT' where spis = 'Jer' and vers = 1 and k = 6 and v = 16
+go
+update biblia set nvg = 'Postojte na cestách a zamyslite sa. Skúmajte staré chodníky, h¾adajte dobrú cestu, kráèajte po nej a nájdete osvieenie pre svoje duše.' where spis = 'Jer' and vers = 1 and k = 6 and v = 16
+go
+
 -- OCR21SOc_CIT1	7, 1-20
 -- 760	Jer 7, 1-11
 -- 761	Jer 7, 23-28
@@ -163,6 +175,12 @@ update biblia set nvg = 'odo dòa, èo ich otcovia vyšli z Egypta a podnes. A pos
 update biblia set nvg = 'no nepoèúvali ma, nenaklonili si ucho, zatvrdili si šiju a robili horšie ako ich otcovia.' where spis = 'Jer' and vers = 1 and k = 7 and v = 26
 update biblia set nvg = 'A ak im aj povieš všetky tieto veci, nebudú a poèúva. Ak na nich zavoláš, neozvú sa ti. ' where spis = 'Jer' and vers = 1 and k = 7 and v = 27
 update biblia set nvg = 'Povieš im teda: Toto je národ, ktorı nepoèúva hlas Pána, svojho Boha, a neprijíma napomenutie. Zhynula vernos, zmizla im z úst.' where spis = 'Jer' and vers = 1 and k = 7 and v = 28
+go
+
+-- OCR20POc_CIT2 resp.	Jer 10, 24
+update biblia set lh_id = 'OCR20POc_CIT2 resp.' where spis = 'Jer' and vers = 1 and k = 10 and v = 24
+go
+update biblia set nvg = 'Trestaj ma, Pane, milosrdne, nie v_svojom rozhorèení, aby si ma neznièil.' where spis = 'Jer' and vers = 1 and k = 10 and v = 24
 go
 
 -- OCR22NEc_CIT1	11, 18-20; 12, 1-13
@@ -209,6 +227,18 @@ update biblia set nvg = 'Ten skazenı ¾ud bude ako tento opasok, èo u nie je na 
 update biblia set nvg = 'Veï ako opasok prilieha k bedrám mua, tak som ja vinul k sebe celı dom Izraela a celı dom Júdu - hovorí Pán -, aby boli mojím ¾udom, mojou slávou, chválou a ozdobou; ale oni nepoèúvali."' where spis = 'Jer' and vers = 1 and k = 13 and v = 11
 go
 
+-- OCR21STVc_CIT1 resp.	Jer 14, 7
+update biblia set lh_id = 'OCR21STVc_CIT1 resp.' where spis = 'Jer' and vers = 1 and k = 14 and v = 7
+go
+update biblia set nvg = 'Ak naše neprávosti svedèia proti nám, Pane, konaj pre svoje meno, lebo je ve¾a našich vzbúr, zhrešili sme proti tebe.' where spis = 'Jer' and vers = 1 and k = 14 and v = 7
+go
+
+-- _PIk_CIT	Jer 14, 9
+update biblia set lh_id = '_PIk_CIT' where spis = 'Jer' and vers = 1 and k = 14 and v = 9
+go
+update biblia set nvg = 'Pane, ty si uprostred nás a tvoje meno sa vzıva nad nami. Neopúšaj nás, Pane, Boe náš.' where spis = 'Jer' and vers = 1 and k = 14 and v = 9
+go
+
 -- CHVAL_JER14/CHVAL_JER14VG	Jer 14, 17-21
 -- 734	Jer 14, 17-22
 update biblia set lh_id = 'CHVAL_JER14' where spis = 'Jer' and vers = 1 and k = 14 and v between 17 and 21
@@ -224,7 +254,12 @@ update biblia set nvg = 'Nevystavuj nás potupe pre svoje meno,_* / nenechaj hano
 update biblia set nvg = 'Vari dáva niektorá pohanská modla dáï? Alebo nebesia dávajú vodu samy od seba? / A nie ty, Pane, náš Boh, v ktorého dúfame? Veï ty si toto všetko urobil.' where spis = 'Jer' and vers = 1 and k = 14 and v = 22
 go
 
+-- _2POr_CIT	Jer 15, 16
+-- 02MAJ_cCIT2 resp.	Jer 15, 19. 20
 -- 735	Jer 15, 10. 16-21
+update biblia set lh_id = '_2POr_CIT' where spis = 'Jer' and vers = 1 and k = 15 and v = 16
+update biblia set lh_id = '02MAJ_cCIT2 resp.' where spis = 'Jer' and vers = 1 and k = 15 and v between 19 and 20
+go
 update biblia set lc_id = 735 where spis = 'Jer' and vers = 1 and k = 15 and v = 10
 update biblia set lc_id = 735 where spis = 'Jer' and vers = 1 and k = 15 and v between 16 and 21
 go
@@ -238,8 +273,13 @@ update biblia set nvg = 'Dám a tomuto ¾udu ako pevnı múr kovovı; budú proti teb
 update biblia set nvg = 'Vyslobodím a z ruky zlıch ¾udí a vykúpim a z moci násilníkov."' where spis = 'Jer' and vers = 1 and k = 15 and v = 21
 go
 
+-- _1UT9_CIT	Jer 17, 7-8
+-- _1SO2_CIT	Jer 17, 9-10
 -- 737	Jer 17, 5-8
 -- 736	Jer 17, 5-10
+update biblia set lh_id = '_1UT9_CIT' where spis = 'Jer' and vers = 1 and k = 17 and v between 7 and 8
+update biblia set lh_id = '_1SO2_CIT' where spis = 'Jer' and vers = 1 and k = 17 and v between 9 and 10
+go
 update biblia set lc_id = 736 where spis = 'Jer' and vers = 1 and k = 17 and v between 5 and 10
 go
 
@@ -253,6 +293,9 @@ go
 
 -- 738	Jer 18, 1-6
 -- 739	Jer 18, 18-20
+-- POST1_2POCIT5	Jer 18, 20b
+update biblia set lh_id = 'POST1_2POCIT5' where spis = 'Jer' and vers = 1 and k = 18 and v = 20
+go
 update biblia set lc_id = 738 where spis = 'Jer' and vers = 1 and k = 18 and v between 1 and 6
 update biblia set lc_id = 739 where spis = 'Jer' and vers = 1 and k = 18 and v between 18 and 20
 go
@@ -321,8 +364,25 @@ update biblia set nvg = 'lebo ma neusmrtil v_lone, / aby sa mi moja matka stala 
 update biblia set nvg = 'Preèo som vyšiel z_lona? / Aby som videl námahu a boles / a v_hanbe trávil svoje dni?' where spis = 'Jer' and vers = 1 and k = 20 and v = 18
 go
 
+-- _3UT9_CIT	Jer 22, 3
+update biblia set lh_id = '_3UT9_CIT' where spis = 'Jer' and vers = 1 and k = 22 and v = 3
+go
+update biblia set nvg = 'Konajte právo a spravodlivos; vysloboïte utláèaného z_ruky utláèate¾a a netrápte cudzinca, sirotu a vdovu, ani ich zloèinne neutláèajte a nevinnú krv neprelievajte.' where spis = 'Jer' and vers = 1 and k = 22 and v = 3
+go
+
+-- OZZ_cCIT2 resp.	Jer 22, 10
+update biblia set lh_id = 'OZZ_cCIT2 resp.' where spis = 'Jer' and vers = 1 and k = 22 and v = 10
+go
+update biblia set nvg = 'Neoplakávajte màtveho, ani nad ním zúfalo nenariekajte. [...]' where spis = 'Jer' and vers = 1 and k = 22 and v = 10
+go
+
+-- ADV1UT9_CIT/ADV2209_CIT	Jer 23, 5
+-- ADV1UT2_CIT/ADV2202_CIT	Jer 23, 6
 -- 745	Jer 23, 1-6
 -- 746	Jer 23, 5-8
+update biblia set lh_id = 'ADV1UT9_CIT' where spis = 'Jer' and vers = 1 and k = 23 and v = 5
+update biblia set lh_id = 'ADV1UT2_CIT' where spis = 'Jer' and vers = 1 and k = 23 and v = 6
+go
 update biblia set lc_id = 745 where spis = 'Jer' and vers = 1 and k = 23 and v between 1 and 6
 update biblia set lc_id = 746 where spis = 'Jer' and vers = 1 and k = 23 and v between 7 and 8
 go
@@ -390,6 +450,7 @@ update biblia set nvg = 'Preto Pán hovorí: Vyeniem a zo sveta; tohto roku zomr
 update biblia set nvg = 'A v siedmom mesiaci toho roku prorok Hananiáš zomrel.' where spis = 'Jer' and vers = 1 and k = 28 and v = 17
 go
 
+-- ADV1PI9_CIT/ADV2239_CIT	Jer 29, 11. 13
 -- OCR22STVc_CIT1	29, 1-14
 update biblia set lh_id = 'OCR22STVc_CIT1' where spis = 'Jer' and vers = 1 and k = 29 and v between 1 and 14
 go
@@ -411,6 +472,8 @@ update biblia set nvg = 'Dám sa vám nájs, hovorí Pán, privediem vás naspä zo z
 go
 
 -- 751	Jer 30, 1-2. 12-15. 18-22
+-- ADV1PI2_CIT/ADV2232_CIT	Jer 30, 18
+-- ADV1PIr_CIT/ADV223r_CIT	Jer 30, 21-22
 -- OCR22PIc_CIT1	30, 18 – 31, 9
 update biblia set lh_id = 'OCR22PIc_CIT1' where spis = 'Jer' and vers = 1 and k = 30 and v between 18 and 24
 go
@@ -489,12 +552,93 @@ update biblia set nvg = 'Takáto bude zmluva, ktorú po tıch dòoch uzavriem s_domo
 update biblia set nvg = 'Nik nebude poúèa svojho blíneho ani brat brata slovami: ‚Poznaj Pána!‘, lebo ma budú pozna všetci, malí i_ve¾kí, hovorí Pán. Odpustím im ich neprávos a na ich hriech si u nespomeniem.“' where spis = 'Jer' and vers = 1 and k = 31 and v = 34
 go
 
+-- SRDCA_2CIT/_2PO2_CIT	Jer 32, 40
+update biblia set lh_id = '_2PO2_CIT' where spis = 'Jer' and vers = 1 and k = 32 and v = 40
+go
+update biblia set nvg = 'Uzavriem s_nimi veènú zmluvu a neprestanem im dobre robi; vloím im do srdca bázeò predo mnou, aby neodstúpili odo mòa.' where spis = 'Jer' and vers = 1 and k = 32 and v = 40
+go
+
+-- ADV11STVc_CIT1	Jer 33, 15. 16
 -- 758	Jer 33, 14-16
+update biblia set lh_id = 'ADV11STVc_CIT1' where spis = 'Jer' and vers = 1 and k = 33 and v between 15 and 16
+go
 update biblia set lc_id = 752 where spis = 'Jer' and vers = 1 and k = 33 and v between 14 and 16
 go
 
 update biblia set nvg = 'H¾a, blíia sa dni, - hovorí Pán-, keï splním prís¾ub spásy, ktorı som dal Izraelovmu a Júdovmu domu.' where spis = 'Jer' and vers = 1 and k = 33 and v = 14
 update biblia set nvg = 'V tıch dòoch a v tom èase vyklíèi z Dávida spravodlivı vıhonok, ktorı bude kona právo a spravodlivos na zemi. ' where spis = 'Jer' and vers = 1 and k = 33 and v = 15
 update biblia set nvg = 'V tıch dòoch Júda dosiahne spásu a Jeruzalem istotu a budú ho vola: Pán - naša spravodlivos.' where spis = 'Jer' and vers = 1 and k = 33 and v = 16
+go
+
+-- OCR23NEc_CIT1	37, 21; 38, 14-28
+-- 759	Jer 38, 4-6. 8-10
+update biblia set lh_id = 'OCR23NEc_CIT1' where spis = 'Jer' and vers = 1 and k = 37 and v = 21
+update biblia set lh_id = 'OCR23NEc_CIT1' where spis = 'Jer' and vers = 1 and k = 38 and v between 14 and 28
+go
+update biblia set lc_id = 759 where spis = 'Jer' and vers = 1 and k = 38 and v between 4 and 6
+update biblia set lc_id = 759 where spis = 'Jer' and vers = 1 and k = 38 and v between 8 and 10
+go
+
+update biblia set nvg = 'Krá¾ Sedekiáš nariadil, aby Jeremiáša odviedli do nádvoria väznice a dávali mu z_Pekárskej ulice denne bochník chleba, kım sa neminie všetok chlieb v_meste. A Jeremiáš ostal na nádvorí väznice.' where spis = 'Jer' and vers = 1 and k = 37 and v = 21
+go
+
+update biblia set nvg = 'Knieatá povedali krá¾ovi: "Treba zabi Jeremiáša, lebo sa takımito reèami usiluje oslabi ruky bojovníkov, ktorí zostali v tomto meste, aj ruky všetkého ¾udu. Tento èlovek neh¾adá pokoj tohoto ¾udu, ale nešastie."' where spis = 'Jer' and vers = 1 and k = 38 and v = 4
+update biblia set nvg = 'Krá¾ Sedekiáš odpovedal: "Veï ho máte v rukách! A ani krá¾ niè nezmôe proti vám."' where spis = 'Jer' and vers = 1 and k = 38 and v = 5
+update biblia set nvg = 'Vzali teda Jeremiáša a hodili ho do cisterny krá¾ovho syna Malchiáša, ktorá bola v stránom nádvorí; povrazmi spustili Jeremiáša do cisterny, v ktorej nebola voda, ale bahno, a Jeremiáš zapadol do bahna.' where spis = 'Jer' and vers = 1 and k = 38 and v = 6
+go
+update biblia set nvg = 'Tu Abdelmelech vyšiel z krá¾ovského paláca a povedal krá¾ovi: ' where spis = 'Jer' and vers = 1 and k = 38 and v = 8
+update biblia set nvg = '"Pán môj, krá¾, zlé bolo všetko, èo urobili títo muovia prorokovi Jeremiášovi, keï ho hodili do cisterny, aby tam umrel hladom, lebo v meste u niet chleba." ' where spis = 'Jer' and vers = 1 and k = 38 and v = 9
+update biblia set nvg = 'Nato krá¾ rozkázal Etiópèanovi Abdelmelechovi: "Vezmi si odtia¾to tridsa muov a vytiahni proroka Jeremiáša z cisterny skôr, ako zomrie!"' where spis = 'Jer' and vers = 1 and k = 38 and v = 10
+go
+
+update biblia set nvg = 'Tu krá¾ Sedekiáš poslal a vzal si proroka Jeremiáša k_tretiemu vchodu do Pánovho domu. A krá¾ povedal Jeremiášovi: „Na nieèo sa a opıtam. Nezataj niè predo mnou.“ ' where spis = 'Jer' and vers = 1 and k = 38 and v = 14
+update biblia set nvg = 'Jeremiáš odpovedal Sedekiášovi: „A keï ti to oznámim, nezabiješ ma? A keï ti dám radu, nebudeš ma poèúva.“ ' where spis = 'Jer' and vers = 1 and k = 38 and v = 15
+update biblia set nvg = 'Krá¾ Sedekiáš sa teda potajomky Jeremiášovi zaprisahal: „Ako ije Pán, ktorı nám daroval tento ivot, nezabijem a a nevydám a do rúk tamtıch muov, èo ti èíhajú na ivot.“ ' where spis = 'Jer' and vers = 1 and k = 38 and v = 16
+update biblia set nvg = 'Tu Jeremiáš povedal Sedekiášovi: „Toto hovorí Pán zástupov, Boh Izraela: Ak dobrovo¾ne vyjdeš ku knieatám babylonského krá¾a, budeš i a toto mesto nebude vypálené ohòom; zachrániš sa aj ty, aj tvoj dom. ' where spis = 'Jer' and vers = 1 and k = 38 and v = 17
+update biblia set nvg = 'Ale ak nevyjdeš ku knieatám babylonského krá¾a, Chaldejci dostanú toto mesto do rúk, vypália ho a ty neunikneš ich rukám.“ ' where spis = 'Jer' and vers = 1 and k = 38 and v = 18
+update biblia set nvg = 'Krá¾ Sedekiáš povedal Jeremiášovi: „Bojím sa Judejcov, ktorí prebehli k_Chaldejcom, aby ma nevydali do ich rúk a neurobili si zo mòa posmech.“ ' where spis = 'Jer' and vers = 1 and k = 38 and v = 19
+update biblia set nvg = 'Ale Jeremiáš mu povedal: „Nevydajú a. Poèúvaj, prosím, Pánovo slovo, ktoré ti ja hovorím, a bude ti dobre, budeš i. ' where spis = 'Jer' and vers = 1 and k = 38 and v = 20
+update biblia set nvg = 'Ale ak nebudeš chcie vyjs, toto je slovo, ktoré mi zjavil Pán: ' where spis = 'Jer' and vers = 1 and k = 38 and v = 21
+update biblia set nvg = 'Všetky eny, ktoré zostanú v_dome judejského krá¾a, vyvedú ku knieatám babylonského krá¾a a ony povedia: // ‚Podviedli a a premohli a / tvoji dôverní priatelia; / tvoje nohy uviazli v_bahne / a oni odstúpili od teba.‘' where spis = 'Jer' and vers = 1 and k = 38 and v = 22
+update biblia set nvg = 'A všetky tvoje eny i_tvojich synov vyvedú k_Chaldejcom a neunikneš ich rukám, ale dolapí a ruka babylonského krá¾a; a toto mesto vypáli ohòom.“' where spis = 'Jer' and vers = 1 and k = 38 and v = 23
+update biblia set nvg = 'Vtedy Sedekiáš povedal Jeremiášovi: „Nech sa nik nedozvie tieto slová a nezomrieš. ' where spis = 'Jer' and vers = 1 and k = 38 and v = 24
+update biblia set nvg = 'Ale ak by sa knieatá dopoèuli, e som s_tebou hovoril a prišli by za tebou a povedali by ti: ‚Povedz nám, èo si hovoril s_krá¾om, niè nám nezatajuj a nezabijeme a; a èo s_tebou hovoril krá¾?‘, ' where spis = 'Jer' and vers = 1 and k = 38 and v = 25
+update biblia set nvg = 'povieš im: ‚Predloil som krá¾ovi svoju prosbu, aby ma nedal zavies spä do Jonatanovho domu, aby som tam nezomrel.‘“ ' where spis = 'Jer' and vers = 1 and k = 38 and v = 26
+update biblia set nvg = 'A prišli za Jeremiášom všetky knieatá a vypytovali sa ho a on im povedal všetko tak, ako mu prikázal krá¾. I_odišli od neho, lebo nebolo niè poèu. ' where spis = 'Jer' and vers = 1 and k = 38 and v = 27
+update biblia set nvg = 'A Jeremiáš zostal na nádvorí väznice a do dòa, keï bol dobytı Jeruzalem.' where spis = 'Jer' and vers = 1 and k = 38 and v = 28
+go
+
+-- OCR23POc_CIT1	42, 1-16; 43, 4-7
+update biblia set lh_id = 'OCR23POc_CIT1' where spis = 'Jer' and vers = 1 and k = 42 and v between 1 and 16
+update biblia set lh_id = 'OCR23POc_CIT1' where spis = 'Jer' and vers = 1 and k = 43 and v between 4 and 7
+go
+
+update biblia set nvg = 'Prišli všetci vodcovia bojovníkov, Kareho syn Johanan a Ozaiášov syn Jezaniáš i_všetok ¾ud, od malého a po ve¾kého, ' where spis = 'Jer' and vers = 1 and k = 42 and v = 1
+update biblia set nvg = 'a povedali prorokovi Jeremiášovi: „Vypoèuj našu prosbu a modli sa za nás k_Pánovi, svojmu Bohu, za celı tento zvyšok, lebo nás zostalo tak málo z_mnohıch, ako nás vidíš na vlastné oèi. ' where spis = 'Jer' and vers = 1 and k = 42 and v = 2
+update biblia set nvg = 'A nech nám Pán, tvoj Boh, oznámi cestu, po ktorej máme ís, i_to, èo máme robi.“ ' where spis = 'Jer' and vers = 1 and k = 42 and v = 3
+update biblia set nvg = 'Prorok Jeremiáš im povedal: „Vypoèujem a budem sa modli k_Pánovi, vášmu Bohu, pod¾a vašich slov. A oznámim vám kadé slovo, ktoré pre vás odpovie, nezamlèím vám niè.“ ' where spis = 'Jer' and vers = 1 and k = 42 and v = 4
+update biblia set nvg = 'Oni povedali Jeremiášovi: „Nech je Pán pravdivı a vernı svedok medzi nami, ak neurobíme pod¾a kadého slova, s_ktorım a Pán, tvoj Boh, pošle k_nám. ' where spis = 'Jer' and vers = 1 and k = 42 and v = 5
+update biblia set nvg = 'Èi to bude dobré alebo zlé, poslúchneme hlas Pána, nášho Boha, ku ktorému a posielame, aby nám dobre bolo, keï poèúvneme hlas Pána, nášho Boha.“' where spis = 'Jer' and vers = 1 and k = 42 and v = 6
+update biblia set nvg = 'Keï uplynulo desa dní, zaznelo Jeremiášovi Pánovo slovo ' where spis = 'Jer' and vers = 1 and k = 42 and v = 7
+update biblia set nvg = 'a on zavolal Kareho syna Johanana, všetkıch vodcov bojovníkov, ktorí boli s_ním, i_všetok ¾ud, od najmenšieho a po ve¾kého, ' where spis = 'Jer' and vers = 1 and k = 42 and v = 8
+update biblia set nvg = 'a povedal im: „Toto hovorí Pán, Boh Izraela, ku ktorému ste ma poslali, aby som mu predloil vaše prosby: ' where spis = 'Jer' and vers = 1 and k = 42 and v = 9
+update biblia set nvg = 'Ak pokojne zostanete v_tejto krajine, vybudujem vás a nezrúcam, zasadím vás a nevytrhnem, lebo u ¾utujem zlo, ktoré som vám urobil. ' where spis = 'Jer' and vers = 1 and k = 42 and v = 10
+update biblia set nvg = 'Nebojte sa babylonského krá¾a, ktorého sa tak hrozíte. Nebojte sa ho, hovorí Pán, lebo s_vami som ja, aby som vás zachránil a vytrhol z_jeho rúk. ' where spis = 'Jer' and vers = 1 and k = 42 and v = 11
+update biblia set nvg = 'Dám vám, e nájdete milos, a on sa z¾utuje nad vami a dovolí vám bıva vo vašej krajine.' where spis = 'Jer' and vers = 1 and k = 42 and v = 12
+update biblia set nvg = 'Ale ak si poviete: ‚Nebudeme bıva v_tejto krajine‘ a nebudete poèúva hlas Pána, svojho Boha, ' where spis = 'Jer' and vers = 1 and k = 42 and v = 13
+update biblia set nvg = 'a poviete: ‚Nie, pôjdeme do egyptskej krajiny, kde nebudeme vidie vojnu, ani poèu zvuk po¾nice, ani trpie hladom, a tam budeme bıva,‘ ' where spis = 'Jer' and vers = 1 and k = 42 and v = 14
+update biblia set nvg = 'potom poèujte, Júdov zvyšok, Pánovo slovo. Toto hovorí Pán zástupov, Boh Izraela: Ak ste sa rozhodli ís do Egypta a pôjdete ta ako cudzinci, ' where spis = 'Jer' and vers = 1 and k = 42 and v = 15
+update biblia set nvg = 'meè, ktorého sa bojíte, zasiahne vás v_egyptskej krajine a hlad, ktorého sa obávate, do¾ahne na vás v_Egypte a tam zomriete.“' where spis = 'Jer' and vers = 1 and k = 42 and v = 16
+go
+update biblia set nvg = 'Ale Kareho syn Johanan, všetci vodcovia bojovníkov a všetok ¾ud nepoèúvli Pánov hlas, aby zostali v_judejskej krajine, ' where spis = 'Jer' and vers = 1 and k = 43 and v = 4
+update biblia set nvg = 'le Kareho syn Johanan a všetci vodcovia bojovníkov vzali celı zvyšok Júdu — tıch, èo sa vrátili zo všetkıch národov, medzi ktoré boli predtım rozptılení, aby bıvali v_judejskej krajine ako cudzinci — ' where spis = 'Jer' and vers = 1 and k = 43 and v = 5
+update biblia set nvg = 'muov, eny, deti, krá¾ove dcéry a kadého, koho nechal velite¾ telesnej stráe Nabuzardan s_Godoliášom, synom Ahikama, syna Safana, aj proroka Jeremiáša a Neriášovho syna Barucha, ' where spis = 'Jer' and vers = 1 and k = 43 and v = 6
+update biblia set nvg = 'a išli do egyptskej krajiny, lebo neposlúchli Pánov hlas. Došli a do Tafnisu.' where spis = 'Jer' and vers = 1 and k = 43 and v = 7
+go
+
+-- VN1_cCIT1_4SO resp.	Jer 51, 45
+update biblia set lh_id = 'VN1_cCIT1_4SO resp.' where spis = 'Jer' and vers = 1 and k = 51 and v = 45
+go
+update biblia set nvg = 'Vyjdite z_Babylonu, ¾ud môj, nech si kadı zachráni ivot pred Pánovım planúcim hnevom.' where spis = 'Jer' and vers = 1 and k = 51 and v = 45
 go
 
