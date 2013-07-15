@@ -229,10 +229,17 @@ order by 2
 
 select * from biblia where spis = 'Pies'
 and nvg is not null
-*/
+
 select * from lc
 where sur like 'Jer%'
 order by 2
 
 select * from biblia where spis = 'Jer'
+and nvg is not null
+*/
+select * from lc
+where sur like 'Nár%'
+order by 2
+
+select * from biblia where spis = 'Nar'
 and nvg is not null
