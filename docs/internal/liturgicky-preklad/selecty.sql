@@ -1,21 +1,5 @@
 /*
 
--- 2013-07-02: priebeh
-select _0, spis, count(1) as versov
-from biblia where 1=1 -- spis = '2Sam'
-and vers = 1
-and nvg is not null
-group by _0, spis
-order by _0
-
--- 2013-07-14: všetky verše
-select biblia._0, biblia.spis, count(1) as versov_all
-from biblia 
-where 1=1
-and vers = 1
-group by biblia._0, biblia.spis
-order by biblia._0
-
 -- štatistika
 ---------------------------------------------------------------------------------------
 
@@ -39,6 +23,24 @@ group by biblia._0, biblia.spis
 ) a
 group by _0, spis 
 order by _0
+
+---------------------------------------------------------------------------------------
+
+-- 2013-07-02: priebeh
+select _0, spis, count(1) as versov
+from biblia where 1=1 -- spis = '2Sam'
+and vers = 1
+and nvg is not null
+group by _0, spis
+order by _0
+
+-- 2013-07-14: všetky verše
+select biblia._0, biblia.spis, count(1) as versov_all
+from biblia 
+where 1=1
+and vers = 1
+group by biblia._0, biblia.spis
+order by biblia._0
 
 ---------------------------------------------------------------------------------------
 
