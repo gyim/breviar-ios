@@ -243,6 +243,13 @@ order by 2
 
 select * from biblia where spis = 'Nar'
 and nvg is not null
+
+select * from lc
+where sur like 'Hab%'
+order by 2
+
+select * from biblia where spis = 'Hab'
+and nvg is not null
 */
 select * from lc
 where sur like 'Hab%'
