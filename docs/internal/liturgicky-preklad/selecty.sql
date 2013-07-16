@@ -1,21 +1,5 @@
 /*
 
--- 2013-07-02: priebeh
-select _0, spis, count(1) as versov
-from biblia where 1=1 -- spis = '2Sam'
-and vers = 1
-and nvg is not null
-group by _0, spis
-order by _0
-
--- 2013-07-14: všetky verše
-select biblia._0, biblia.spis, count(1) as versov_all
-from biblia 
-where 1=1
-and vers = 1
-group by biblia._0, biblia.spis
-order by biblia._0
-
 -- štatistika
 ---------------------------------------------------------------------------------------
 
@@ -39,6 +23,24 @@ group by biblia._0, biblia.spis
 ) a
 group by _0, spis 
 order by _0
+
+---------------------------------------------------------------------------------------
+
+-- 2013-07-02: priebeh
+select _0, spis, count(1) as versov
+from biblia where 1=1 -- spis = '2Sam'
+and vers = 1
+and nvg is not null
+group by _0, spis
+order by _0
+
+-- 2013-07-14: všetky verše
+select biblia._0, biblia.spis, count(1) as versov_all
+from biblia 
+where 1=1
+and vers = 1
+group by biblia._0, biblia.spis
+order by biblia._0
 
 ---------------------------------------------------------------------------------------
 
@@ -220,10 +222,45 @@ order by 2
 
 select * from biblia where spis = 'Kaz'
 and nvg is not null
-*/
+
 select * from lc
 where sur like 'Pies%'
 order by 2
 
 select * from biblia where spis = 'Pies'
+and nvg is not null
+
+select * from lc
+where sur like 'Jer%'
+order by 2
+
+select * from biblia where spis = 'Jer'
+and nvg is not null
+
+select * from lc
+where sur like 'Nár%'
+order by 2
+
+select * from biblia where spis = 'Nar'
+and nvg is not null
+
+select * from lc
+where sur like 'Hab%'
+order by 2
+
+select * from biblia where spis = 'Hab'
+and nvg is not null
+
+select * from lc
+where sur like 'Sof%'
+order by 2
+
+select * from biblia where spis = 'Sof'
+and nvg is not null
+*/
+select * from lc
+where sur like 'Nah%'
+order by 2
+
+select * from biblia where spis = 'Nah'
 and nvg is not null
