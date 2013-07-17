@@ -257,10 +257,46 @@ order by 2
 
 select * from biblia where spis = 'Sof'
 and nvg is not null
-*/
+
 select * from lc
 where sur like 'Nah%'
 order by 2
 
 select * from biblia where spis = 'Nah'
 and nvg is not null
+
+select * from lc
+where sur like 'Joel%'
+order by 2
+
+select * from biblia where spis = 'Joel'
+and nvg is not null
+
+select * from lc
+where sur like 'Am%'
+order by 2
+
+select * from biblia where spis = 'Am'
+and nvg is not null
+
+select * from lc
+where sur like 'Oz%'
+order by 2
+
+select * from biblia where spis = 'Oz'
+and nvg is not null
+
+select * from lc
+where sur like 'Abd%'
+order by 2
+
+select * from biblia where spis = 'Abd'
+and nvg is not null
+*/
+select * from lc
+where sur like 'Jon%'
+order by 2
+
+select * from biblia where spis = 'Jon'
+and nvg is not null
+
