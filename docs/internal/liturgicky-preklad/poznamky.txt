@@ -5,7 +5,11 @@ ståpec NVG = text pod¾a liturgického prekladu
 -- ak je uvedené ... na zaèiatku, tak preto, lebo v LH je odkaz na druhú èas verša (zvyèajne písm. b za èíslom verša).
 -- ak je uvedené ... na konci, tak preto, lebo v LH je odkaz na prvú èas verša (zvyèajne písm. a za èíslom verša).
 
--- ak je vynechávka z textu Biblie v lekcionári, tak je to uvedené takto: [...]
+-- ak je vynechávka z textu Biblie v lekcionári/LH, tak je to uvedené takto: [...]
+
+-- ak je uvedené (NVg xxx), kde xxx je èíslo verša/kapitoly a verša, znamená to, e Neovulgáta èísluje ináè ako Vulgáta (= SSV preklad Biblie)
+
+-- "/" vo verši znamená zalomenie poetickej pasáe; "//" znamená <p>, novı odstavec, ktorı je vo vnútri verša
 
 ståpec LH_ID = identifikátor(y) pre HTML texty z breviar.sk (anchor, t. j. kotvy)
 
