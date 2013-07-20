@@ -34,7 +34,7 @@ go
 -- 1756	Tob 12, 1. 5-15. 20
 -- 1757	Tob 12, 6-13 // nepouité
 -- 02JUL_2CIT 	Tob 12, 6b -- Dobroreète Bohu a_zvelebujte ho pred všetkım, èo ije, za dobrá, ktoré nám preukázal; dobroreète mu a_ospevujte ho.
--- POST1_cCIT2_3UT resp.
+-- POST1_cCIT2_3UT resp.	Tob 12, 8. 9
 -- 29SEP_3CIT	Tob 12, 15a. 18a. 20
 update biblia set lc_id = 1756 where spis = 'Tob' and vers = 1 and k = 12 and v = 1
 update biblia set lc_id = 1756 where spis = 'Tob' and vers = 1 and k = 12 and v between 5 and 15
@@ -54,7 +54,7 @@ update biblia set nvg = 'Almuna vyslobodzuje zo smrti a oèisuje od kadého hri
 update biblia set nvg = 'Ale tí, èo páchajú hriech a neprávos, sú nepriate¾mi vlastného ivota.' where spis = 'Tob' and vers = 1 and k = 12 and v = 10
 update biblia set nvg = 'Poviem vám teda pravdu a niè pred vami nezamlèím. U som vám prezradil: Krá¾ovo tajomstvo je dobre ukrıva, ale Boie skutky je èestné zjavova.' where spis = 'Tob' and vers = 1 and k = 12 and v = 11
 update biblia set nvg = 'Keï si sa modlil ty a Sára, ja som prednášal slová vašej modlitby pred jasnos Pánovej tváre. A keï si pochovával màtvych, takisto. ' where spis = 'Tob' and vers = 1 and k = 12 and v = 12
-update biblia set nvg = 'A pretoe si neváhal vsta a zanecha jedlo a šiel si pochova màtveho, bol som poslanı k tebe skúša a. ' where spis = 'Tob' and vers = 1 and k = 12 and v = 12
+update biblia set nvg = 'A pretoe si neváhal vsta a zanecha jedlo a šiel si pochova màtveho, bol som poslanı k tebe skúša a. ' where spis = 'Tob' and vers = 1 and k = 12 and v = 13
 update biblia set nvg = 'A Boh ma znova poslal, aby som uzdravil teba i Sáru, tvoju nevestu.' where spis = 'Tob' and vers = 1 and k = 12 and v = 14
 update biblia set nvg = 'Ja som Rafael, jeden zo siedmich svätıch anjelov, èo sme pri Pánovi a predstupujeme pred Pánovu velebu.' where spis = 'Tob' and vers = 1 and k = 12 and v = 15
 update biblia set nvg = 'A teraz velebte Pána na zemi a oslavujte Boha. Ja vystupujem k tomu, ktorı ma poslal. A vy toto všetko, èo sa vám prihodilo, napíšte." A vystúpil.' where spis = 'Tob' and vers = 1 and k = 12 and v = 20
@@ -75,7 +75,7 @@ update biblia set lh_id = 'CHVAL_TOB13,8-11' where spis = 'Tob' and vers = 1 and
 update biblia set lh_id = 'CHVAL_TOB13,8-11' where spis = 'Tob' and vers = 1 and k = 13 and v = 13
 update biblia set lh_id = 'CHVAL_TOB13,8-11' where spis = 'Tob' and vers = 1 and k = 13 and v between 14 and 16
 -- update biblia set lh_id = 'OCR34SOc_CIT2 resp.' where spis = 'Tob' and vers = 1 and k = 13 and v = 11
-update biblia set lh_id = 'OCR34SOc_CIT2 resp.' where spis = 'Tob' and vers = 1 and k = 13 and v between 17 and 18 -- aj POST1_cCIT2_3UT
+-- update biblia set lh_id = 'OCR34SOc_CIT2 resp.' where spis = 'Tob' and vers = 1 and k = 13 and v between 17 and 18
 go
 
 update biblia set nvg = 'Nech je zvelebenı Boh, ktorı ije naveky, / i_jeho krá¾ovstvo; / pretoe on trestá aj sa zmilúva, / on zvrhne a na dno podsvetia / a svojou velebnosou vyvádza zo záhuby; / a niet nikoho, / kto by jeho ruke unikol.' where spis = 'Tob' and vers = 1 and k = 13 and v = 2
@@ -114,7 +114,7 @@ go
 
 -- 1761	Tob 3, 1-11a. 16-17a
 update biblia set lc_id = 1761 where spis = 'Tob' and vers = 1 and k = 3 and v between 1 and 11
-update biblia set lh_id = 'OCR29UTc_CIT1 resp. (Vg)' where spis = 'Tob' and vers = 1 and k = 3 and v = 13 -- Veï ty sa rozhneváš, ale aj z¾utuješ, a_všetky hriechy ¾udí odpúšaš v_súení. ???
+-- update biblia set lh_id = 'OCR29UTc_CIT1 resp. (Vg)' where spis = 'Tob' and vers = 1 and k = 3 and v = 13 -- Veï ty sa rozhneváš, ale aj z¾utuješ, a_všetky hriechy ¾udí odpúšaš v_súení. ???
 update biblia set lc_id = 1761 where spis = 'Tob' and vers = 1 and k = 3 and v between 16 and 17
 go
 update biblia set nvg = 'S rozialenou dušou som vzdychal a plakal. A vzlykavo som sa zaèal modli: ' where spis = 'Tob' and vers = 1 and k = 3 and v = 1
@@ -169,10 +169,15 @@ update biblia set nvg = 'Pod¾a toho, ko¾ko budeš ma, dávaj almunu: Ak budeš ma
 go
 
 -- _1STRr_CIT	Porov. Tob 4, 15a. 16ab. 19a -- odlišné verše ako LA LH
+update biblia set lh_id = '_1STRr_CIT' where spis = 'Tob' and vers = 1 and k = 4 and v = 14
 update biblia set lh_id = '_1STRr_CIT' where spis = 'Tob' and vers = 1 and k = 4 and v = 15
 update biblia set lh_id = '_1STRr_CIT' where spis = 'Tob' and vers = 1 and k = 4 and v = 16
 update biblia set lh_id = '_1STRr_CIT' where spis = 'Tob' and vers = 1 and k = 4 and v = 19
 go
--- ToDo: Daj pozor na to, èo robíš, buï rozumnı vo všetkıch svojich reèiach. Èo sa nepáèi tebe, nerob inému. O_svoj chlieb sa de¾ s_hladnım a_o_svoje šaty s_nahım. Z_toho, èoho máš hojnos, daj núdznym. Dobroreè Bohu v_kadom èase a_pros ho, aby riadil tvoje kroky a_usmeròoval tvoje zámery.
 
+update biblia set nvg = '[...] (NVg 4,15) Daj pozor na to, èo robíš, buï rozumnı vo všetkıch svojich reèiach. [...]' where spis = 'Tob' and vers = 1 and k = 4 and v = 14
+update biblia set nvg = 'Èo sa nepáèi tebe, nerob inému. [...]' where spis = 'Tob' and vers = 1 and k = 4 and v = 15
+update biblia set nvg = 'O_svoj chlieb sa de¾ s_hladnım a_o_svoje šaty s_nahım. Z_toho, èoho máš hojnos, daj núdznym. [...]' where spis = 'Tob' and vers = 1 and k = 4 and v = 16
+update biblia set nvg = 'Dobroreè Bohu v_kadom èase a_pros ho, aby riadil tvoje kroky a_usmeròoval tvoje zámery. [...]' where spis = 'Tob' and vers = 1 and k = 4 and v = 19
 go
+

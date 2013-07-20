@@ -457,10 +457,10 @@ go
 -- OCR9PIc_CIT1	40, 1-14; 42, 1-6
 -- OCR9SOc_CIT1	42, 7-16
 -- 915	Jób 42, 1-3. 5-6. 12-16
--- NVg má posledný verš 42,16; Vg ho rozdelila na dva (v. 16 = NVg 16a; v. 17 = NVg 16b)
+-- NVg má posledný verš 42,16; Vg ho rozdelila na dva (v. 16 = NVg 16a; v. 17 = NVg 16b); preto ukladáme info o lh_id aj pre v. 17
 update biblia set lh_id = 'OCR9PIc_CIT1' where spis = 'Job' and vers = 1 and k = 40 and v between 1 and 14
 update biblia set lh_id = 'OCR9PIc_CIT1' where spis = 'Job' and vers = 1 and k = 42 and v between 1 and 6
-update biblia set lh_id = 'OCR9SOc_CIT1' where spis = 'Job' and vers = 1 and k = 42 and v between 7 and 16
+update biblia set lh_id = 'OCR9SOc_CIT1' where spis = 'Job' and vers = 1 and k = 42 and v between 7 and 17 -- 16
 go
 update biblia set lc_id = 915 where spis = 'Job' and vers = 1 and k = 42 and v between 1 and 3
 update biblia set lc_id = 915 where spis = 'Job' and vers = 1 and k = 42 and v between 5 and 6
