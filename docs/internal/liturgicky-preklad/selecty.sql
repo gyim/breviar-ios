@@ -300,10 +300,16 @@ order by 2
 select * from biblia where spis = 'Jon'
 and nvg is not null
 
-*/
 select * from lc
 where sur like 'Mich%'
 order by 2
 
 select * from biblia where spis = 'Mich'
+and nvg is not null
+*/
+select * from lc
+where sur like 'Iz%'
+order by 2
+
+select * from biblia where spis = 'Iz'
 and nvg is not null
