@@ -21,9 +21,9 @@ update biblia set nvg = 'a_Mojžiš ho zabil; vzal krv, namoèeným prstom sa dotkol
 update biblia set nvg = 'Tuk, èo bol na vnútornostiach, lalok peèene a_obe oblièky s_ich tukom spálil na oltári. ' where spis = 'Lv' and vers = 1 and k = 8 and v = 16
 update biblia set nvg = 'Ale býèka, kožu, mäso a_trus spálil mimo tábora, ako Pán prikázal Mojžišovi.' where spis = 'Lv' and vers = 1 and k = 8 and v = 17
 go
-update biblia set nvg = 'Potom Áron zdvihol ruky smerom k_¾udu a_požehnal ho. Tak zakonèil obetu za hriech, zápalnú a_pokojnú obetu, a_zostúpil dolu. ' where spis = 'Lv' and vers = 1 and k = 8 and v = 22
-update biblia set nvg = 'Mojžiš a_Áron vošli do stánku stretnutia a_keï potom vyšli, požehnali ¾ud. Vtom sa zjavila všetkému ¾udu Pánova veleba: ' where spis = 'Lv' and vers = 1 and k = 8 and v = 23
-update biblia set nvg = 'vyš¾ahol oheò od Pána a_strávil zápalnú obetu i_tuk, èo boli na oltári. Keï to zástupy videli, jasali a_vrhali sa na tvár. ' where spis = 'Lv' and vers = 1 and k = 8 and v = 24
+update biblia set nvg = 'Potom Áron zdvihol ruky smerom k_¾udu a_požehnal ho. Tak zakonèil obetu za hriech, zápalnú a_pokojnú obetu, a_zostúpil dolu. ' where spis = 'Lv' and vers = 1 and k = 9 and v = 22
+update biblia set nvg = 'Mojžiš a_Áron vošli do stánku stretnutia a_keï potom vyšli, požehnali ¾ud. Vtom sa zjavila všetkému ¾udu Pánova veleba: ' where spis = 'Lv' and vers = 1 and k = 9 and v = 23
+update biblia set nvg = 'vyš¾ahol oheò od Pána a_strávil zápalnú obetu i_tuk, èo boli na oltári. Keï to zástupy videli, jasali a_vrhali sa na tvár. ' where spis = 'Lv' and vers = 1 and k = 9 and v = 24
 go
 
 -- 1162	Lv 13, 1-2. 45-46

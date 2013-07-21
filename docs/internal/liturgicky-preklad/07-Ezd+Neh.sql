@@ -19,7 +19,7 @@ update biblia set nvg = 'Ba vydávam rozkaz, ako máte pomáha idovskım starším, 
 update biblia set nvg = '... Toto nariadenie som vydal ja, Dárius, a chcem, aby sa prísne dodriavalo."' where spis = 'Ezd' and vers = 1 and k = 6 and v = 12
 update biblia set nvg = 'A idovskí starší úspešne pokraèovali v stavbe pod¾a predpovede proroka Aggea i Addovho syna Zachariáša, a stavbu z rozkazu Boha Izraela a z rozkazu perzskıch krá¾ov Kıra, Dária a Artaxerxa dokonèili. ' where spis = 'Ezd' and vers = 1 and k = 6 and v = 14
 update biblia set nvg = 'Tento Boí dom dohotovili v tretí deò mesiaca Adar v šiestom roku panovania krá¾a Dária.' where spis = 'Ezd' and vers = 1 and k = 6 and v = 15
-update biblia set nvg = 'Potom Izraeliti, kòazi, leviti a ostatní, èo prišli zo zajatia, natešení slávili posviacku tohto Boieho domu. ', juv = 'tohoto -> tohto' where spis = 'Ezd' and vers = 1 and k = 6 and v = 15
+update biblia set nvg = 'Potom Izraeliti, kòazi, leviti a ostatní, èo prišli zo zajatia, natešení slávili posviacku tohto Boieho domu. ', juv = 'tohoto -> tohto' where spis = 'Ezd' and vers = 1 and k = 6 and v = 16
 update biblia set nvg = 'Pri posviacke tohoto Boieho domu obetovali sto bıkov, dvesto baranov, štyristo jahniat a dvanás capov na obetu za hriech za celı Izrael, pod¾a poètu izraelskıch kmeòov. ' where spis = 'Ezd' and vers = 1 and k = 6 and v = 17
 update biblia set nvg = 'Potom ustanovili kòazov pod¾a ich tried i levitov pod¾a ich zadelenia do Boej sluby v Jeruzaleme, ako to predpisuje Mojišova kniha. ' where spis = 'Ezd' and vers = 1 and k = 6 and v = 18
 update biblia set nvg = 'Synovia Izraela, èo prišli zo zajatia, slávili štrnásteho dòa v prvom mesiaci Ve¾kú noc. ' where spis = 'Ezd' and vers = 1 and k = 6 and v = 19

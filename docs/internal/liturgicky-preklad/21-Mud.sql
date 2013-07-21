@@ -339,8 +339,8 @@ update biblia set nvg = 'Lebo keï si trestal protivníkov, nás si povolal k sebe 
 update biblia set nvg = 'Veï spravodliví synovia dobrıch v skrytosti priniesli svoju obetu a jednomyse¾ne prijali Boí zákon, e svätí majú rovnako znáša dobrı i zlı údel, a vopred zaspievali chválospevy otcov.' where spis = 'Mud' and vers = 1 and k = 18 and v = 9
 go
 update biblia set nvg = 'Keï všade vládlo hlboké ticho a noc v svojom behu prešla polovicu cesty, ' where spis = 'Mud' and vers = 1 and k = 18 and v = 14
-update biblia set nvg = 'tvoje všemohúce slovo zoskoèilo z neba, z krá¾ovského trónu, ako tvrdı bojovník doprostred zeme odsúdenej na skazu. ' where spis = 'Mud' and vers = 1 and k = 18 and v = 5
-update biblia set nvg = 'Nieslo tvoj nezvratnı rozkaz ako ostrı meè, zastalo a všetko naplnilo smrou; stálo na zemi a siahalo a po nebo.' where spis = 'Mud' and vers = 1 and k = 18 and v = 6
+update biblia set nvg = 'tvoje všemohúce slovo zoskoèilo z neba, z krá¾ovského trónu, ako tvrdı bojovník doprostred zeme odsúdenej na skazu. ' where spis = 'Mud' and vers = 1 and k = 18 and v = 15
+update biblia set nvg = 'Nieslo tvoj nezvratnı rozkaz ako ostrı meè, zastalo a všetko naplnilo smrou; stálo na zemi a siahalo a po nebo.' where spis = 'Mud' and vers = 1 and k = 18 and v = 16
 go
 update biblia set nvg = 'Všetko tvorstvo sa znova od základu pretvorilo a poslúchalo tvoje príkazy, aby sa tvoje deti zachránili od škody.' where spis = 'Mud' and vers = 1 and k = 19 and v = 6
 update biblia set nvg = 'Ich tábor zahalil oblak, kde bola predtım voda, vynorila sa suchá zem: z Èerveného mora nehatená cesta, zelená pai z prúdu dravého. ' where spis = 'Mud' and vers = 1 and k = 19 and v = 7

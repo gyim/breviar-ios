@@ -85,7 +85,7 @@ update biblia set lh_id = 'POST1_cCIT1_4STV' where spis = 'Nm' and vers = 1 and 
 go
 update biblia set lc_id = 1523 where spis = 'Nm' and vers = 1 and k = 14 and v = 1
 update biblia set lh_id = 'POST1_cCIT1_4PI' where spis = 'Nm' and vers = 1 and k = 14 and v between 1 and 25
-update biblia set lc_id = 1523 where spis = 'Nm' and vers = 1 and k = 14 and v between 26 and 29
+update biblia set lc_id = 1523 where spis = 'Nm' and vers = 1 and k = 14 and v between 26 and 30 -- hoci je uvedené len po v. 29, predsa je tam aj NVg v. 30
 update biblia set lc_id = 1523 where spis = 'Nm' and vers = 1 and k = 14 and v between 34 and 35
 go
 

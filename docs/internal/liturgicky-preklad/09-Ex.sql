@@ -67,7 +67,7 @@ go
 update biblia set lc_id = 435 where spis = 'Ex' and vers = 1 and k = 3 and v between 1 and 8
 update biblia set lc_id = 434 where spis = 'Ex' and vers = 1 and k = 3 and v between 9 and 12
 update biblia set lc_id = 436 where spis = 'Ex' and vers = 1 and k = 3 and v between 13 and 20
-update biblia set lh_id = 'POST1_cCIT1_0PI' where spis = 'Ex' and vers = 1 and k = 3 and v between 1 and 22
+update biblia set lh_id = 'POST1_cCIT1_0SO' where spis = 'Ex' and vers = 1 and k = 3 and v between 1 and 20
 go
 
 update biblia set nvg = 'Mojiš pásol ovce svojho tesa, madiánskeho kòaza Jetra. Keï raz hnal stádo za púš, došiel k_Boiemu vrchu Horeb. ' where spis = 'Ex' and vers = 1 and k = 3 and v = 1
@@ -143,6 +143,7 @@ go
 
 -- POST1_cCIT1_1UT 	6, 29 -- 7, 25
 update biblia set lh_id = 'POST1_cCIT1_1UT' where spis = 'Ex' and vers = 1 and k = 6 and v between 29 and 30
+update biblia set lh_id = 'POST1_cCIT1_1UT' where spis = 'Ex' and vers = 1 and k = 7 and v between 1 and 25
 go
 
 update biblia set nvg = 'Pán povedal Mojišovi: „Ja som Pán; povedz faraónovi, egyptskému krá¾ovi, všetko, èo ja hovorím tebe.“ ' where spis = 'Ex' and vers = 1 and k = 6 and v = 29
@@ -466,6 +467,8 @@ go
 -- 424	Ex 19, 2-6a
 -- 425	Ex 19, 3-8a. 16-20b
 update biblia set lh_id = 'POST1_cCIT1_2PI' where spis = 'Ex' and vers = 1 and k = 19 and v between 1 and 19
+update biblia set lh_id = 'POST1_cCIT1_2PI' where spis = 'Ex' and vers = 1 and k = 20 and v between 18 and 21
+go
 update biblia set lc_id = 423 where spis = 'Ex' and vers = 1 and k = 19 and v between 1 and 2
 update biblia set lc_id = 425 where spis = 'Ex' and vers = 1 and k = 19 and v between 3 and 8
 update biblia set lc_id = 423 where spis = 'Ex' and vers = 1 and k = 19 and v between 16 and 20
@@ -533,7 +536,8 @@ go
 
 update biblia set nvg = 'Kto obetuje bohom mimo jediného Pána, bude zabitı.' where spis = 'Ex' and vers = 1 and k = 22 and v = 19
 update biblia set nvg = 'Cudzinca nebudeš utláèa ani suova, veï aj vy ste boli cudzincami v_egyptskej krajine.' where spis = 'Ex' and vers = 1 and k = 22 and v = 20
-update biblia set nvg = 'Vdove a_sirote neublíite! {v}22{/v}Ak ich budete trápi, budú vola ku mne a_ja budem poèu ich nárek; ' where spis = 'Ex' and vers = 1 and k = 22 and v = 22
+update biblia set nvg = 'Vdove a_sirote neublíite! ' where spis = 'Ex' and vers = 1 and k = 22 and v = 21
+update biblia set nvg = 'Ak ich budete trápi, budú vola ku mne a_ja budem poèu ich nárek; ' where spis = 'Ex' and vers = 1 and k = 22 and v = 22
 update biblia set nvg = 'vzplanie môj hnev a_pobijem vás meèom a_vaše eny budú vdovami a_vaše deti sirotami.' where spis = 'Ex' and vers = 1 and k = 22 and v = 23
 update biblia set nvg = 'Ak poièiaš peniaze niekomu z_môjho ¾udu, chudákovi, ktorı bıva s_tebou, nesprávaj sa k_nemu ako verite¾; neiadajte od neho úroky.' where spis = 'Ex' and vers = 1 and k = 22 and v = 24
 update biblia set nvg = 'Ak vezmeš od svojho blíneho pláš do zálohy, vrá mu ho do západu slnka.' where spis = 'Ex' and vers = 1 and k = 22 and v = 25
@@ -666,6 +670,9 @@ update biblia set nvg = 'Ale vravel: „Nebudeš môc vidie moju tvár, lebo èlovek
 update biblia set nvg = 'A_ešte hovoril: „Pozri, pri mne je miesto, staneš si na skalu. ' where spis = 'Ex' and vers = 1 and k = 33 and v = 21
 update biblia set nvg = 'Keï bude prechádza moja sláva, postavím a do skalnej trhliny a_budem a kry svojou pravicou, kım neprejde. ' where spis = 'Ex' and vers = 1 and k = 33 and v = 22
 update biblia set nvg = 'Potom odtiahnem svoju ruku a_uvidíš ma zozadu, ale moju tvár vidie nemôeš.“' where spis = 'Ex' and vers = 1 and k = 33 and v = 23
+
+update biblia set nvg = 'Mojiš [...] vèasráno vstal a vystúpil na vrch Sinaj, ako mu prikázal Pán; v rukách mal dve kamenné tabule.' where spis = 'Ex' and vers = 1 and k = 34 and v = 4
+go
 update biblia set nvg = 'Keï Pán zostúpil v_oblaku, Mojiš zostal stá s_ním a_vyslovil Pánovo meno. ' where spis = 'Ex' and vers = 1 and k = 34 and v = 5
 update biblia set nvg = 'Pán prešiel popred neho a_volal: „Pán, Pán, Boh je milosrdnı a_láskavı, zhovievavı, ve¾mi milostivı a_vernı, ' where spis = 'Ex' and vers = 1 and k = 34 and v = 6
 update biblia set nvg = 'on preukazuje priazeò tisícom, odpúša neprávos, zloèiny a_hriechy, ale niè nenechá nepotrestané: on trestá neprávos otcov na deoch a_vnukoch do tretieho a_štvrtého pokolenia.“ ' where spis = 'Ex' and vers = 1 and k = 34 and v = 7

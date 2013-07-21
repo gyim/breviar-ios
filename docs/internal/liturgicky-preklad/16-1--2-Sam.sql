@@ -393,7 +393,7 @@ update biblia set nvg = 'Saul odpovedal: „Zhrešil som. Vrá sa, syn môj Dávid! U
 update biblia set nvg = 'Dávid povedal: „Tu je krá¾ova kopija. Nech príde sem jeden zo sluhov a nech ju vezme. ' where spis = '1Sam' and vers = 1 and k = 26 and v = 22
 update biblia set nvg = 'Ale Pán odplatí kadému pod¾a jeho spravodlivosti a vernosti. Pán a dnes vydal do mojej ruky, ale nechcel som zdvihnú ruku na Pánovho pomazaného. ' where spis = '1Sam' and vers = 1 and k = 26 and v = 23
 update biblia set nvg = 'A akı ve¾kı bol dnes tvoj ivot v_mojich oèiach, takı ve¾kı nech je môj ivot v_oèiach Pánovıch a nech ma vyslobodí z_kadej úzkosti.“' where spis = '1Sam' and vers = 1 and k = 26 and v = 24
-update biblia set nvg = 'Saul odpovedal Dávidovi: „Buï poehnanı, syn môj Dávid. Èo budeš robi, urobíš, a èo budeš chcie, dokáeš.“ Dávid odišiel svojou cestou a Saul sa vrátil na svoje miesto.' where spis = '1Sam' and vers = 1 and k = 26 and v = 5
+update biblia set nvg = 'Saul odpovedal Dávidovi: „Buï poehnanı, syn môj Dávid. Èo budeš robi, urobíš, a èo budeš chcie, dokáeš.“ Dávid odišiel svojou cestou a Saul sa vrátil na svoje miesto.' where spis = '1Sam' and vers = 1 and k = 26 and v = 25
 go
 
 -- OCR13NEc_CIT1	28, 3-25
@@ -764,6 +764,7 @@ update biblia set nvg = 'Krá¾ povedal Joabovi a velite¾om svojho vojska, èo boli
 update biblia set nvg = 'Joab povedal krá¾ovi: „Nech Pán, tvoj Boh, pridá k_¾udu stokrát to¾ko, ko¾ko ho je teraz pred oèami môjho pána a krá¾a. Ale èo chce môj pán a krá¾ dosiahnu takouto vecou?“ ' where spis = '2Sam' and vers = 1 and k = 24 and v = 3
 update biblia set nvg = 'Ale krá¾ovo slovo bolo silnejšie ako Joab a velitelia vojska. A tak Joab a velitelia vojakov vyšli od krá¾a spoèíta izraelskı ¾ud.' where spis = '2Sam' and vers = 1 and k = 24 and v = 4
 go
+update biblia set nvg = 'A Joab odovzdal krá¾ovi vısledky sèítania ¾udu; v Izraeli napoèítali osemstotisíc bojaschopnıch muov, ktorí narábajú meèom, a u Júdu pästotisíc bojovníkov.' where spis = '2Sam' and vers = 1 and k = 24 and v = 9
 update biblia set nvg = 'Ale keï bol ¾ud spoèítanı, rozbúšilo sa Dávidovi srdce a povedal Pánovi: „Ve¾mi som zhrešil tımto skutkom. Ale teraz, prosím, Pane, odpus neprávos svojho sluhu, lebo som konal ve¾mi hlúpo.“ ' where spis = '2Sam' and vers = 1 and k = 24 and v = 10
 update biblia set nvg = 'Keï Dávid ráno vstal, Pán prehovoril k_prorokovi Gadovi, Dávidovmu vidcovi: ' where spis = '2Sam' and vers = 1 and k = 24 and v = 11
 update biblia set nvg = '„Choï a povedz Dávidovi: Toto hovorí Pán: Tri monosti ti dávam na vo¾bu; vyber si, èo chceš, èo mám na teba dopusti.“ ' where spis = '2Sam' and vers = 1 and k = 24 and v = 12
