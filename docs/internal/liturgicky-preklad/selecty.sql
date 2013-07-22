@@ -313,10 +313,17 @@ order by 2
 
 select * from biblia where spis = 'Iz'
 and nvg is not null
-*/
+
 select * from lc
 where sur like 'Ez%'
 order by 2
 
 select * from biblia where spis = 'Ez'
+and nvg is not null
+*/
+select * from lc
+where sur like 'Ag%'
+order by 2
+
+select * from biblia where spis = 'Ag'
 and nvg is not null
