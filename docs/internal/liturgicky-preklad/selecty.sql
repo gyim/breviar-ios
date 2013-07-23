@@ -313,10 +313,52 @@ order by 2
 
 select * from biblia where spis = 'Iz'
 and nvg is not null
-*/
+
 select * from lc
 where sur like 'Ez%'
 order by 2
 
 select * from biblia where spis = 'Ez'
+and nvg is not null
+
+select * from lc
+where sur like 'Ag%'
+order by 2
+
+select * from biblia where spis = 'Ag'
+and nvg is not null
+
+select * from lc
+where sur like 'Za%'
+order by 2
+
+select * from biblia where spis = 'Zach'
+and nvg is not null
+
+select * from lc
+where sur like 'Ma%'
+order by 2
+
+select * from biblia where spis = 'Mal'
+and nvg is not null
+
+select * from lc
+where sur like 'Da%'
+order by 2
+
+select * from biblia where spis = 'Dan'
+and nvg is not null
+*/
+select * from lc
+where sur like '1%Ma%'
+order by 2
+
+select * from biblia where spis like '1Ma%'
+and nvg is not null
+
+select * from lc
+where sur like '2%Ma%'
+order by 2
+
+select * from biblia where spis like '2Ma%'
 and nvg is not null
