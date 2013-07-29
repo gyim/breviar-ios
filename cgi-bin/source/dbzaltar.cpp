@@ -26534,28 +26534,10 @@ label_25_MAR:
 						// A SZEGED-CSAN¡DI EGYH¡ZMEGY…BEN: SZENT GELL…RT P‹SP÷K …S V…RTAN⁄, A SZEGED-CSAN¡DI EGYH¡ZMEGYE V…D’SZENTJE
 
 						// 2013-07-29, oprava: nie je sl·vnosù vo vöeobecnom maÔarskom kalend·ri, ale len sviatok | upozornila Julianna BlahÛ
-						if(/* (poradie_svaty == UNKNOWN_PORADIE_SVATEHO) || */ (poradie_svaty == 1)){
-							// preto 0 -> UNKNOWN_PORADIE_SVATEHO, ze aj ked nie je svaty urceny, ide o slavnost, ktora ma takmer najvacsiu prioritu, a preto ma aj prve vespery - a vtedy by to normalne nefungovalo; nastavenie veci pre modlitbu by sa muselo diat v predoslom dni, co je neciste riesenie
-							// definovanie parametrov pre modlitbu
-							/*
-							sc = _decode_spol_cast(_global_svaty1.spolcast);
-							Log("HU: GellÈrt: sc: {%s, %s, %s}, svaty == %d\n\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3), poradie_svaty);
-							*/
+						if(poradie_svaty == 1){
 							if(query_type != PRM_DETAILY)
 								set_spolocna_cast(sc, poradie_svaty);
-							/*
-							modlitba = MODL_PRVE_KOMPLETORIUM;
-							if(den != DEN_NEDELA){
-								_set_kompletorium_slavnost(modlitba, _global_svaty1.litobd);
-							}
-							else{
-								_set_kompletorium_nedela(modlitba);
-							}
 
-							modlitba = MODL_PRVE_VESPERY;
-							_vlastna_cast_full(modlitba);
-							_set_zalmy_sviatok_muc(modlitba);
-							*/
 							modlitba = MODL_INVITATORIUM;
 							_vlastna_cast_antifona_inv;
 
@@ -26568,28 +26550,10 @@ label_25_MAR:
 							_set_zalmy_sviatok_muc(modlitba);
 
 							_vlastna_cast_mcd_ant_kcitresp_modl;
-							/*
-							// 2013-07-29, oprava: nie je sl·vnosù vo vöeobecnom maÔarskom kalend·ri, ale len sviatok
-							if(_global_den.denvt != DEN_NEDELA) {
-								_set_zalmy_mcd_doplnkova_psalmodia();
-							}
-							else {
-								_set_zalmy_1nedele_mcd();
-							}
-							*/
+
 							modlitba = MODL_VESPERY;
 							_vlastna_cast_full(modlitba);
 							_set_zalmy_sviatok_muc(modlitba);
-							/*
-							modlitba = MODL_KOMPLETORIUM;
-							if(den != DEN_NEDELA){
-								_set_kompletorium_slavnost(modlitba, _global_svaty1.litobd);
-							}
-							else{
-								_set_kompletorium_nedela(modlitba);
-							}
-							*/
-							// if(poradie_svaty != UNKNOWN_PORADIE_SVATEHO) break;
 						}
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK, MODL_SPOL_CAST_DUCH_PAST_BISKUP);
 						_global_svaty1.farba = LIT_FARBA_CERVENA;
