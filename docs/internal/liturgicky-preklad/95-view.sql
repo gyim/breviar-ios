@@ -22,6 +22,7 @@ group by biblia._0, biblia.spis
 group by _0, spis 
 -- order by _0
 );
+go
 
 create view stat_lc
 as
@@ -48,6 +49,7 @@ group by biblia._0, biblia.spis
 group by _0, spis 
 -- order by _0
 );
+go
 
 create view stat_lh
 as
