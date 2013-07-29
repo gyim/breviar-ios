@@ -320,15 +320,15 @@ update biblia set nvg = 'e a vyvıši nad všetky národy, ktoré stvoril na svoju 
 go
 
 -- OCR3STRc_CIT1	29, 1-5. 9-28 (Vg aj DKC èísluje: 2-6. 10-29)
-/
+/*
 update biblia set lh_id = 'OCR3STRc_CIT1' where spis = 'Dt' and vers = 1 and k = 29 and v between 1 and 5
 update biblia set lh_id = 'OCR3STRc_CIT1' where spis = 'Dt' and vers = 1 and k = 29 and v between 9 and 28
-/
+*/
 update biblia set lh_id = 'OCR3STRc_CIT1' where spis = 'Dt' and vers = 1 and k = 29 and v between 2 and 6
 update biblia set lh_id = 'OCR3STRc_CIT1' where spis = 'Dt' and vers = 1 and k = 29 and v between 10 and 29
 go
 
-update biblia set nvg = '(NVg 29,1)Mojiš zvolal celı Izrael a_povedal im: / „Videli ste všetko, èo urobil Pán pred vašimi oèami v_egyptskej krajine faraónovi, všetkım jeho sluobníkom a_celej jeho krajine, ' where spis = 'Dt' and vers = 1 and k = 29 and v = 2 / NVg 1 /
+update biblia set nvg = '(NVg 29,1)Mojiš zvolal celı Izrael a_povedal im: / „Videli ste všetko, èo urobil Pán pred vašimi oèami v_egyptskej krajine faraónovi, všetkım jeho sluobníkom a_celej jeho krajine, ' where spis = 'Dt' and vers = 1 and k = 29 and v = 2 /* NVg 1 */
 update biblia set nvg = 'tie ve¾ké skúšky, ktoré videli tvoje oèi, znamenia a_ve¾ké zázraky. ' where spis = 'Dt' and vers = 1 and k = 29 and v = 3
 update biblia set nvg = 'Ale Pán vám nedal srdce, aby chápalo, oèi, aby videli, a_uši, aby poèuli, a po tento deò. ' where spis = 'Dt' and vers = 1 and k = 29 and v = 4
 update biblia set nvg = 'Vodil som vás štyridsa rokov po púšti. Váš odev sa nezodral, ani obuv sa ti na nohách nerozpadla zo staroby. ' where spis = 'Dt' and vers = 1 and k = 29 and v = 5
@@ -353,7 +353,7 @@ update biblia set nvg = 'A_odpovedia: ‚Preto, e opustili zmluvu Pána, Boha svoj
 update biblia set nvg = 'a_slúili cudzím bohom, klaòali sa tım, ktorıch nepoznali a_ktorım nepatrili. ' where spis = 'Dt' and vers = 1 and k = 29 and v = 26
 update biblia set nvg = 'Preto Pán hnevom zahorel proti tej krajine a_priviedol na òu všetky kliatby, èo sú napísané v_tejto knihe, ' where spis = 'Dt' and vers = 1 and k = 29 and v = 27
 update biblia set nvg = 'vyhnal ich vo ve¾kom hneve, rozhorèení a_nevôli z_ich krajiny a_zahnal ich do cudzej krajiny, ako to dnes vidno.‘' where spis = 'Dt' and vers = 1 and k = 29 and v = 28
-update biblia set nvg = '(NVg 29,28)Skryté veci patria Pánovi, nášmu Bohu, zjavné zasa nám a_našim synom a naveky, aby sme plnili všetky slová tohto zákona.“' where spis = 'Dt' and vers = 1 and k = 29 and v = 29 / NVg 28 /
+update biblia set nvg = '(NVg 29,28)Skryté veci patria Pánovi, nášmu Bohu, zjavné zasa nám a_našim synom a naveky, aby sme plnili všetky slová tohto zákona.“' where spis = 'Dt' and vers = 1 and k = 29 and v = 29 /* NVg 28 */
 go
 
 -- OCR3STVc_CIT1	30, 1-20
