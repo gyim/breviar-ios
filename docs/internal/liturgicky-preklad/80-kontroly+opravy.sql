@@ -13,7 +13,8 @@ and nvg is null
 and (lc_id is not null or lh_id is not null)
 
 -- update biblia set lh_id = null where spis = 'Tob' and vers = 1 and k = 3 and v = 13
--- update biblia set lh_id = null where id in (2419, 2420) -- Ex xx,21-22
+-- update biblia set lh_id = null where id in (2419, 2420) -- Ex 3,21-22
+-- update biblia set lh_id = 'POST1_cCIT1_0SO' where spis = 'Ex' and vers = 1 and k = 3 and v between 1 and 20
 -- update biblia set nvg = 'Vdove a_sirote neublÌûite! ' where spis = 'Ex' and vers = 1 and k = 22 and v = 21
 -- update biblia set nvg = 'Ak ich budete tr·più, bud˙ volaù ku mne a_ja budem poËuù ich n·rek; ' where spis = 'Ex' and vers = 1 and k = 22 and v = 22
 -- update biblia set nvg = 'Mojûiö [...] vËasr·no vstal a vyst˙pil na vrch Sinaj, ako mu prik·zal P·n; v ruk·ch mal dve kamennÈ tabule.' where spis = 'Ex' and vers = 1 and k = 34 and v = 4
@@ -37,6 +38,7 @@ and (lc_id is not null or lh_id is not null)
 -- update biblia set nvg = 'Tr·va uschne, kvet odpadne,_* / ale slovo n·öho Boha trv· naveky.' where spis = 'Iz' and vers = 1 and k = 40 and v = 8
 -- update biblia set nvg = 'Vyst˙p na vysok˝ vrch, ty, Ëo hl·saö radostn˙ zvesù Sionu! Zodvihni mocne svoj hlas, ty, Ëo hl·saö radostn˙ zvesù Jeruzalemu! Zodvihni, neboj sa, povedz judejsk˝m mest·m: Hæa, v·ö Boh! ' where spis = 'Iz' and vers = 1 and k = 40 and v = 9
 -- update biblia set nvg = null where spis = 'Mud' and vers = 1 and k = 18 and v = 5
+-- update biblia set nvg = 'O tej noci naöi otcovia uû vopred vedeli, aby s istotou poznali, ak˝m prÌsæubom uverili, a boli dobrej mysle. ' where spis = 'Mud' and vers = 1 and k = 18 and v = 6
 -- update biblia set nvg = 'tvoje vöemoh˙ce slovo zoskoËilo z neba, z kr·æovskÈho trÛnu, ako tvrd˝ bojovnÌk doprostred zeme ods˙denej na skazu. ' where spis = 'Mud' and vers = 1 and k = 18 and v = 15
 -- update biblia set nvg = 'Nieslo tvoj nezvratn˝ rozkaz ako ostr˝ meË, zastalo a vöetko naplnilo smrùou; st·lo na zemi a siahalo aû po nebo.' where spis = 'Mud' and vers = 1 and k = 18 and v = 16
 -- update biblia set lh_id = null where spis = 'Tob' and vers = 1 and k = 13 and v between 17 and 18
@@ -48,6 +50,7 @@ and (lc_id is not null or lh_id is not null)
 -- update biblia set nvg = 'A Joab odovzdal kr·æovi v˝sledky sËÌtania æudu; v Izraeli napoËÌtali osemstotisÌc bojaschopn˝ch muûov, ktorÌ nar·baj˙ meËom, a u J˙du p‰ùstotisÌc bojovnÌkov.' where spis = '2Sam' and vers = 1 and k = 24 and v = 9
 -- update biblia set nvg = 'Tento BoûÌ dom dohotovili v tretÌ deÚ mesiaca Adar v öiestom roku panovania kr·æa D·ria.' where spis = 'Ezd' and vers = 1 and k = 6 and v = 15
 -- update biblia set nvg = 'Potom Izraeliti, kÚazi, leviti a ostatnÌ, Ëo priöli zo zajatia, nateöenÌ sl·vili posviacku tohto Boûieho domu. ', juv = 'tohoto -> tohto' where spis = 'Ezd' and vers = 1 and k = 6 and v = 16
+-- update biblia set lc_id = null where lc_id in (934,937) and spis = 'Pris'-- ma to byt 'Kaz'
 
 -- update biblia set nvg = null, lc_id = null, lh_id = null where spis = 'Dt' and k in (4, 6) -- 4. a 6. kapitola Dt treba nanovo
 -- + potom treba spustiù nanovo celÈ Dt radöej
