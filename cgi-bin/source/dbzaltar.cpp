@@ -28268,7 +28268,7 @@ label_25_MAR:
 						if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){
 							// 2006-09-19: odvetvené len pre Èesko
 							// 2008-11-29: pridané czop - dominikánský breviáø
-							_global_svaty2.typslav_lokal = LOKAL_SLAV_SLEZSKO_SVATEK;
+							_global_svaty2.typslav_lokal = LOKAL_SLAV_OSTRAVA_OPAVA_SLAVNOST;
 						}
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_ZENA_SKUTKYMIL, MODL_SPOL_CAST_SV_ZENA_REHOLNIK, MODL_SPOL_CAST_SV_ZENA_MANZ);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
