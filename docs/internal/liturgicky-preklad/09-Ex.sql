@@ -370,7 +370,7 @@ go
 
 update biblia set nvg = 'Vtedy Mojiš a synovia Izraela zaspievali Pánovi túto pieseò: / Spievajme Pánovi, / lebo sa preslávil: / koòa i_jazdca zmietol do mora.' where spis = 'Ex' and vers = 1 and k = 15 and v = 1
 update biblia set nvg = 'Pán je moja sila a_moja udatnos, / on ma zachránil. / On je môj Boh, chcem ho velebi; / Boh môjho otca, budem ho chváli.' where spis = 'Ex' and vers = 1 and k = 15 and v = 2
-update biblia set nvg = 'Pán je ako bojovník; / <span class="smallcaps">Pán</span> je jeho meno.' where spis = 'Ex' and vers = 1 and k = 15 and v = 3
+update biblia set nvg = 'Pán je ako bojovník; / PÁN je jeho meno.' where spis = 'Ex' and vers = 1 and k = 15 and v = 3
 update biblia set nvg = 'Faraónove vozy a_jeho vojsko zmietol do mora; jeho najlepší bojovníci utonuli v Èervenom mori.' where spis = 'Ex' and vers = 1 and k = 15 and v = 4
 update biblia set nvg = 'Vlny ich pokryli; / sa kameò klesli do hlbín.' where spis = 'Ex' and vers = 1 and k = 15 and v = 5
 update biblia set nvg = 'Tvoja pravica, Pane, vyniká mocou, / tvoja pravica, Pane, zasiahla nepriate¾a.' where spis = 'Ex' and vers = 1 and k = 15 and v = 6
@@ -437,7 +437,7 @@ update biblia set nvg = 'Kım mal Mojiš zdvihnuté ruky, víazil Izrael, ale keï 
 update biblia set nvg = 'Lene Mojišovi ruky oaeli. Vzali teda kameò, podloili mu ho a_sadol si naò. Áron s_Hurom mu z_oboch strán ruky podopierali, a_tak mu ruky neochabli a do západu slnka.' where spis = 'Ex' and vers = 1 and k = 17 and v = 12
 update biblia set nvg = 'Jozue porazil Amaleka a_jeho ¾ud ostrím meèa. ' where spis = 'Ex' and vers = 1 and k = 17 and v = 13
 update biblia set nvg = 'A_Pán povedal Mojišovi: „Zapíš to na pamiatku do knihy a_povedz to Jozuemu, lebo vyhladím pamiatku na Amaleka pod nebom.“ ' where spis = 'Ex' and vers = 1 and k = 17 and v = 14
-update biblia set nvg = 'Mojiš postavil oltár a_dal mu meno <!-- Jahve --> <span class="smallcaps">Pán</span> Nissi (Pán je moja zástava), lebo ' where spis = 'Ex' and vers = 1 and k = 17 and v = 15
+update biblia set nvg = 'Mojiš postavil oltár a_dal mu meno PÁN Nissi (Pán je moja zástava), lebo ' where spis = 'Ex' and vers = 1 and k = 17 and v = 15
 update biblia set nvg = 'povedal: „Pretoe sa zdvihla ruka proti Pánovmu trónu, / Pán bude bojova proti Amalekovi / z_pokolenia na pokolenie.“ ' where spis = 'Ex' and vers = 1 and k = 17 and v = 16
 go
 

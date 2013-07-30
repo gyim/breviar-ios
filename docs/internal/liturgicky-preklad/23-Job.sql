@@ -184,7 +184,7 @@ update biblia set nvg = 'Opovrhnutou fak¾ou je pod¾a mienky tıch, èo si ijú bez
 update biblia set nvg = 'Stany lupièov sú pokojné / a bezpeèné pre tıch, èo popudzujú Boha, / pre tıch, èo chcú dra Boha vo svojej ruke.' where spis = 'Job' and vers = 1 and k = 12 and v = 6
 update biblia set nvg = 'No len sa opıtaj zvierat a pouèia a / alebo nebeskıch vtákov a povedia ti to.' where spis = 'Job' and vers = 1 and k = 12 and v = 7
 update biblia set nvg = 'Hovor zemi a pouèí a, / aj morské ryby budú hovori.' where spis = 'Job' and vers = 1 and k = 12 and v = 8
-update biblia set nvg = 'Kto nevie z_tohto <!-- tohoto --> všetkého, / e to urobila Pánova ruka?' where spis = 'Job' and vers = 1 and k = 12 and v = 9
+update biblia set nvg = 'Kto nevie z_tohto všetkého, / e to urobila Pánova ruka?' where spis = 'Job' and vers = 1 and k = 12 and v = 9
 update biblia set nvg = 'V_jeho ruke je dych všetkého, èo ije, / i_duch kadého ¾udského tela.' where spis = 'Job' and vers = 1 and k = 12 and v = 10
 update biblia set nvg = 'Èi ucho nerozlišuje slová / a podnebie nevychutnáva jedlo?' where spis = 'Job' and vers = 1 and k = 12 and v = 11
 update biblia set nvg = 'U_starcov je múdros / a u_tıch, èo dlho ijú, rozumnos.' where spis = 'Job' and vers = 1 and k = 12 and v = 12
@@ -397,7 +397,7 @@ update biblia set nvg = 'Ale povedal si mi do uší, / poèul som hlas tvojich slov
 update biblia set nvg = '‚Ja som èistı a bez viny; / som nepoškvrnenı a neprávosti na mne niet,' where spis = 'Job' and vers = 1 and k = 33 and v = 9
 update biblia set nvg = 'ale h¾adá proti mne zámienky, / a preto si myslí, e som jeho nepriate¾.' where spis = 'Job' and vers = 1 and k = 33 and v = 10
 update biblia set nvg = 'Vloil moje nohy do klady, / dáva pozor na všetky moje chodníky.‘' where spis = 'Job' and vers = 1 and k = 33 and v = 11
-update biblia set nvg = 'Toto je teda, v_èom nie si spravodlivı; <!--{ZALOMENIE:<br/>&nbsp;&nbsp;&nbsp;&nbsp; }-->poviem ti to, / lebo Boh je väèší ako èlovek.' where spis = 'Job' and vers = 1 and k = 33 and v = 12
+update biblia set nvg = 'Toto je teda, v_èom nie si spravodlivı; poviem ti to, / lebo Boh je väèší ako èlovek.' where spis = 'Job' and vers = 1 and k = 33 and v = 12
 update biblia set nvg = 'Preèo sa s_ním prieš, / e ti neodpovedal na všetky slová?' where spis = 'Job' and vers = 1 and k = 33 and v = 13
 update biblia set nvg = 'Boh raz hovorí / a druhı raz to isté neopakuje.' where spis = 'Job' and vers = 1 and k = 33 and v = 14
 update biblia set nvg = 'Vo sne, v_noènom videní, / keï dolieha tvrdı spánok na ¾udí / a spia na lôku,' where spis = 'Job' and vers = 1 and k = 33 and v = 15

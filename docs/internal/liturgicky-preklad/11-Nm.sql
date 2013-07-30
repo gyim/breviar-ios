@@ -127,12 +127,12 @@ update biblia set nvg = 'Ale celé zhromadenie krièalo a_chcelo ich ukameòova. 
 update biblia set nvg = 'a_Pán povedal Mojišovi: „Dokedy ma bude tento ¾ud znevaova? Dokedy mi nebudú veri napriek všetkım znameniam, ktoré som pred nimi urobil? ' where spis = 'Nm' and vers = 1 and k = 14 and v = 11
 update biblia set nvg = 'Budem ho bi morom a_vyhubím ho a_z_teba urobím ve¾kı národ, mocnejší ako je tento.“' where spis = 'Nm' and vers = 1 and k = 14 and v = 12
 update biblia set nvg = 'Ale Mojiš povedal Pánovi: „Poèujú to Egypania, spomedzi ktorıch si vyviedol tento ¾ud svojou mocou, ' where spis = 'Nm' and vers = 1 and k = 14 and v = 13
-update biblia set nvg = 'a_budú rozpráva obyvate¾om tejto krajiny, ako poèuli, e ty, Pane, si uprostred tohto <!-- tohoto --> ¾udu a_zjavuješ sa z_tváre do tváre, e ich kryje tvoj oblak a_ideš pred nimi cez deò v_oblaènom ståpe a_v_noci v_ståpe ohnivom. ' where spis = 'Nm' and vers = 1 and k = 14 and v = 14
+update biblia set nvg = 'a_budú rozpráva obyvate¾om tejto krajiny, ako poèuli, e ty, Pane, si uprostred tohto ¾udu a_zjavuješ sa z_tváre do tváre, e ich kryje tvoj oblak a_ideš pred nimi cez deò v_oblaènom ståpe a_v_noci v_ståpe ohnivom. ' where spis = 'Nm' and vers = 1 and k = 14 and v = 14
 update biblia set nvg = 'Ak tento ¾ud do jedného usmrtíš, povedia národy, ktoré poèuli zves o_tebe: ' where spis = 'Nm' and vers = 1 and k = 14 and v = 15
 update biblia set nvg = '‚Pán nemohol tento ¾ud vovies do krajiny, o_ktorej prisahal, preto ich pobil na púšti!‘' where spis = 'Nm' and vers = 1 and k = 14 and v = 16
 update biblia set nvg = 'Nech sa teda prejaví Pánova moc, ako si prisahal: ' where spis = 'Nm' and vers = 1 and k = 14 and v = 17
 update biblia set nvg = '‚Pán je zhovievavı a_ve¾mi milosrdnı, on odpúša neprávos a_zloèiny, ale nikoho nenechá bez trestu: ty stíhaš hriechy otcov na deoch do tretieho a_štvrtého pokolenia.‘ ' where spis = 'Nm' and vers = 1 and k = 14 and v = 18
-update biblia set nvg = 'Odpus, prosím, hriech tohto <!-- tohoto --> ¾udu pre svoje ve¾ké milosrdenstvo, ako si bol tomuto ¾udu milostivı od Egypta a po toto miesto.“' where spis = 'Nm' and vers = 1 and k = 14 and v = 19
+update biblia set nvg = 'Odpus, prosím, hriech tohto ¾udu pre svoje ve¾ké milosrdenstvo, ako si bol tomuto ¾udu milostivı od Egypta a po toto miesto.“' where spis = 'Nm' and vers = 1 and k = 14 and v = 19
 update biblia set nvg = 'Pán odvetil: „Odpustil som, ako si povedal. ' where spis = 'Nm' and vers = 1 and k = 14 and v = 20
 update biblia set nvg = 'Ako ijem, Pánova sláva naplní celú zem. ' where spis = 'Nm' and vers = 1 and k = 14 and v = 21
 update biblia set nvg = 'Ale nik z_¾udí, ktorí videli moju velebu a_znamenia, èo som urobil v_Egypte a_na púšti, a_u desa ráz ma pokúšali a_nepoèúvali môj hlas, ' where spis = 'Nm' and vers = 1 and k = 14 and v = 22

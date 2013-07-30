@@ -51,6 +51,19 @@ and (lc_id is not null or lh_id is not null)
 -- update biblia set nvg = 'Tento Boí dom dohotovili v tretí deò mesiaca Adar v šiestom roku panovania krá¾a Dária.' where spis = 'Ezd' and vers = 1 and k = 6 and v = 15
 -- update biblia set nvg = 'Potom Izraeliti, kòazi, leviti a ostatní, èo prišli zo zajatia, natešení slávili posviacku tohto Boieho domu. ', juv = 'tohoto -> tohto' where spis = 'Ezd' and vers = 1 and k = 6 and v = 16
 -- update biblia set lc_id = null where lc_id in (934,937) and spis = 'Pris'-- ma to byt 'Kaz'
+-- update biblia set nvg = 'Pozdvihol som zo zeme svoju pokornú modlitbu / a_prosil som, aby ma minula smr.' where spis = 'Sir' and vers = 1 and k = 51 and v = 13
+-- update biblia set nvg = 'v_kadom ¾ude a_v_kadom národe / som mala prvenstvo' where spis = 'Sir' and vers = 1 and k = 24 and v = 10
+-- update biblia set nvg = 'Toto je teda, v_èom nie si spravodlivı; poviem ti to, / lebo Boh je väèší ako èlovek.' where spis = 'Job' and vers = 1 and k = 33 and v = 12
+-- update biblia set nvg = 'Èujte, národy, slovo Pánovo,_* / ohlasujte ho na ostrovoch v_dia¾avách / a hovorte: „Zhromadí Izraela ten, èo ho rozptılil,_* / bude ho strái ako pastier svoje stádo.“' where spis = 'Jer' and vers = 1 and k = 31 and v = 10
+-- update biblia set nvg = 'Pán je ako bojovník; / PÁN je jeho meno.' where spis = 'Ex' and vers = 1 and k = 15 and v = 3
+-- update biblia set nvg = 'Mojiš postavil oltár a_dal mu meno PÁN Nissi (Pán je moja zástava), lebo ' where spis = 'Ex' and vers = 1 and k = 17 and v = 15
+-- update biblia set nvg = 'a_budú rozpráva obyvate¾om tejto krajiny, ako poèuli, e ty, Pane, si uprostred tohto ¾udu a_zjavuješ sa z_tváre do tváre, e ich kryje tvoj oblak a_ideš pred nimi cez deò v_oblaènom ståpe a_v_noci v_ståpe ohnivom. ' where spis = 'Nm' and vers = 1 and k = 14 and v = 14
+-- update biblia set nvg = 'Odpus, prosím, hriech tohto ¾udu pre svoje ve¾ké milosrdenstvo, ako si bol tomuto ¾udu milostivı od Egypta a po toto miesto.“' where spis = 'Nm' and vers = 1 and k = 14 and v = 19
+-- update biblia set nvg = '„Levitskí kòazi, celı Léviho kmeò, nebudú ma podiel ani dedièstvo s_ostatnım Izraelom. Budú i z_obiet Pánovi a_z_jeho dedièstva. ' where spis = 'Dt' and vers = 1 and k = 18 and v = 1
+-- update biblia set nvg = 'Vtedy Šalamún povedal: // „Pán povedal, e bude bıva v_oblaku. / ' where spis = '1Kr' and vers = 1 and k = 8 and v = 12
+-- update biblia set nvg = 'Ja som postavil dom, aby si v_òom bıval, / najpevnejší trón pre teba naveky.“' where spis = '1Kr' and vers = 1 and k = 8 and v = 13
+-- update biblia set nvg = 'On vravel: // „Videl som celı Izrael / rozptılenı po vrchoch / ako ovce, ktoré nemajú pastiera. // A_Pán povedal: ‚Títo nemajú pána. Nech sa kadı vráti v_pokoji domov.‘“' where spis = '1Kr' and vers = 1 and k = 22 and v = 17
+-- update biblia set nvg = 'Kto nevie z_tohto všetkého, / e to urobila Pánova ruka?' where spis = 'Job' and vers = 1 and k = 12 and v = 9
 
 -- update biblia set nvg = null, lc_id = null, lh_id = null where spis = 'Dt' and k in (4, 6) -- 4. a 6. kapitola Dt treba nanovo
 -- + potom treba spusti nanovo celé Dt radšej

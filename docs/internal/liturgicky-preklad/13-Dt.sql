@@ -232,7 +232,7 @@ update biblia set lh_id = 'OCR3NEc_CIT1' where spis = 'Dt' and vers = 1 and k = 
 update biblia set lc_id = 344 where spis = 'Dt' and vers = 1 and k = 18 and v between 15 and 20
 go
 
-update biblia set nvg = '„Levitskí kòazi, celı Léviho kmeò, nebudú ma podiel ani dedièstvo s_ostatnım Izraelom. Budú i z_obiet <!-- obetí; lat. sacrificiis Domini --> Pánovi a_z_jeho dedièstva. ' where spis = 'Dt' and vers = 1 and k = 18 and v = 1
+update biblia set nvg = '„Levitskí kòazi, celı Léviho kmeò, nebudú ma podiel ani dedièstvo s_ostatnım Izraelom. Budú i z_obiet Pánovi a_z_jeho dedièstva. ' where spis = 'Dt' and vers = 1 and k = 18 and v = 1
 update biblia set nvg = 'Nebudú ma dedièstvo medzi svojimi bratmi, lebo sám Pán je ich dedièstvom, ako im povedal.' where spis = 'Dt' and vers = 1 and k = 18 and v = 2
 update biblia set nvg = 'Toto bude patri kòazom od ¾udu, od tıch, èo prinášajú obety, èi u obetujú bıka èi ovcu: kòazovi dajú prednú lopatku, obe èe¾uste a_alúdok, ' where spis = 'Dt' and vers = 1 and k = 18 and v = 3
 update biblia set nvg = 'prvotiny svojho obilia, vína, oleja a_vlny zo strihania oviec. ' where spis = 'Dt' and vers = 1 and k = 18 and v = 4

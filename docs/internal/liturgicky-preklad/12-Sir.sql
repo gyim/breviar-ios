@@ -241,7 +241,7 @@ update biblia set nvg = 'Chcela som, aby na nebi vyšlo / nezapadajúce svetlo; / 
 update biblia set nvg = 'Bıvam na vısostiach / a_svoj trón mám na oblaènom ståpe.' where spis = 'Sir' and vers = 1 and k = 24 and v = 7
 update biblia set nvg = 'Okruh neba som obišla sama / a_prechádzala som sa v_hlbinách priepasti.' where spis = 'Sir' and vers = 1 and k = 24 and v = 8
 update biblia set nvg = 'Zastala som na morskıch vlnách / a na kadom mieste zeme,' where spis = 'Sir' and vers = 1 and k = 24 and v = 9
-update biblia set nvg = 'v_kadom ¾ude a_v_kadom národe/ som mala prvenstvo' where spis = 'Sir' and vers = 1 and k = 24 and v = 10
+update biblia set nvg = 'v_kadom ¾ude a_v_kadom národe / som mala prvenstvo' where spis = 'Sir' and vers = 1 and k = 24 and v = 10
 update biblia set nvg = 'a_ovládla som srdcia vznešenıch i_nízkych. / Uprostred tohto všetkého / som h¾adala odpoèinok: / na ktorom mieste sa mám usadi?' where spis = 'Sir' and vers = 1 and k = 24 and v = 11
 update biblia set nvg = 'Vtedy mi Stvorite¾ vesmíru rozkázal, / ten, èo ma stvoril, daroval pokoj môjmu stánku' where spis = 'Sir' and vers = 1 and k = 24 and v = 12
 update biblia set nvg = 'a_povedal mi: ‚V_Jakubovi prebıvaj, / v_Izraeli maj svoje dedièstvo / a_medzi mojimi vyvolenımi zapus korene.‘' where spis = 'Sir' and vers = 1 and k = 24 and v = 13
@@ -629,7 +629,7 @@ update biblia set nvg = 'a_môj ivot / bol ve¾mi blízko priepasti podsvetia.' wh
 update biblia set nvg = 'Obk¾úèili ma zovšadia¾ / a_nebolo nikoho, kto by pomohol. / Ohliadal som sa po ¾udskej pomoci, ale márne. ' where spis = 'Sir' and vers = 1 and k = 51 and v = 10
 update biblia set nvg = 'A_spomenul som si na tvoje milosrdenstvo, Pane, / na všetko, èo si od veènosti spôsobil. ' where spis = 'Sir' and vers = 1 and k = 51 and v = 11
 update biblia set nvg = 'Lebo ty, Pane, zachraòuješ tıch, èo sa teba dria, / a_vyslobodzuješ ich z_rúk zloèincov. ' where spis = 'Sir' and vers = 1 and k = 51 and v = 12
-update biblia set nvg = 'Pozdvihol som zo zeme svoju pokornú modlitbu /a_prosil som, aby ma minula smr.' where spis = 'Sir' and vers = 1 and k = 51 and v = 13
+update biblia set nvg = 'Pozdvihol som zo zeme svoju pokornú modlitbu / a_prosil som, aby ma minula smr.' where spis = 'Sir' and vers = 1 and k = 51 and v = 13
 update biblia set nvg = 'Vzıval som Pána: „Ty si môj otec, / neopúšaj ma v_deò môjho súenia, / keï som bezmocnı v_èase namyslencov. ' where spis = 'Sir' and vers = 1 and k = 51 and v = 14
 update biblia set nvg = 'Neprestajne budem chváli tvoje meno, / oslavova ho budem svojím vyznaním.“ / Vypoèul si moju modlitbu,' where spis = 'Sir' and vers = 1 and k = 51 and v = 15
 update biblia set nvg = 'vyslobodil si ma zo záhuby / a_zachránil si ma v_èase nešastia.' where spis = 'Sir' and vers = 1 and k = 51 and v = 16
