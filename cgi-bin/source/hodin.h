@@ -5038,6 +5038,15 @@ const char *text_JUN_16_2_OFM[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_JUN_16_CZ[POCET_JAZYKOV + 1] = 
+{"",
+ "Bl. Marie Antoníny Kratochvílové, muèednice",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_JUN_16_OPRAEM[POCET_JAZYKOV + 1] = 
 {"",
  "Sv. Isfrída, biskupa z premonstrátského øádu",
