@@ -64,6 +64,7 @@ and (lc_id is not null or lh_id is not null)
 -- update biblia set nvg = 'Ja som postavil dom, aby si v_òom bıval, / najpevnejší trón pre teba naveky.“' where spis = '1Kr' and vers = 1 and k = 8 and v = 13
 -- update biblia set nvg = 'On vravel: // „Videl som celı Izrael / rozptılenı po vrchoch / ako ovce, ktoré nemajú pastiera. // A_Pán povedal: ‚Títo nemajú pána. Nech sa kadı vráti v_pokoji domov.‘“' where spis = '1Kr' and vers = 1 and k = 22 and v = 17
 -- update biblia set nvg = 'Kto nevie z_tohto všetkého, / e to urobila Pánova ruka?' where spis = 'Job' and vers = 1 and k = 12 and v = 9
+-- update biblia set lc_id = null where spis = 'Nm' and vers = 1 and k = 13 and v in (1, 25) and lc_id = 1523
 
 -- update biblia set nvg = null, lc_id = null, lh_id = null where spis = 'Dt' and k in (4, 6) -- 4. a 6. kapitola Dt treba nanovo
 -- + potom treba spusti nanovo celé Dt radšej
