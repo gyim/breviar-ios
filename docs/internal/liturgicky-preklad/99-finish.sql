@@ -8,6 +8,3 @@ go
 exec sp_rename 'dbo.biblia.v', '_2', 'COLUMN'
 go
 
--- ToDo: doplniù ËÌsla veröov (<var>...</var>) a veröe obaliù do <span>...</span>
--- prÌpadne " / " zmeniù na <br/>; "//" na <p>
-

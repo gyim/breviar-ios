@@ -124,8 +124,8 @@ update biblia set nvg = 'V arche nebolo niè iné, len dve kamenné tabule, ktoré d
 
 update biblia set nvg = 'Keï kòazi vyšli zo svätyne, Pánov dom naplnil oblak ' where spis = '1Kr' and vers = 1 and k = 8 and v = 10
 update biblia set nvg = 'a_kòazi nemohli pre oblak zosta v_slube; lebo Pánov dom naplnila Pánova sláva.' where spis = '1Kr' and vers = 1 and k = 8 and v = 11
-update biblia set nvg = 'Vtedy Šalamún povedal: <p>„Pán povedal, e bude bıva v_oblaku.' where spis = '1Kr' and vers = 1 and k = 8 and v = 12
-update biblia set nvg = '<br>Ja som postavil dom, aby si v_òom bıval, <br>Najpevnejší trón pre teba naveky.“' where spis = '1Kr' and vers = 1 and k = 8 and v = 13
+update biblia set nvg = 'Vtedy Šalamún povedal: // „Pán povedal, e bude bıva v_oblaku. / ' where spis = '1Kr' and vers = 1 and k = 8 and v = 12
+update biblia set nvg = 'Ja som postavil dom, aby si v_òom bıval, / najpevnejší trón pre teba naveky.“' where spis = '1Kr' and vers = 1 and k = 8 and v = 13
 
 update biblia set nvg = 'Šalamún si pred oèami celého izraelského spoloèenstva stal pred Pánov oltár, vystrel ruky k_nebu ' where spis = '1Kr' and vers = 1 and k = 8 and v = 22
 update biblia set nvg = 'a_povedal: „Pane, Boe Izraela, tebe niet podobného Boha ani hore na nebi, ani dolu na zemi, lebo ty zachovávaš zmluvu a_milosrdenstvo so svojimi sluobníkmi, ktorí celım svojím srdcom kráèajú pred tebou.' where spis = '1Kr' and vers = 1 and k = 8 and v = 23
@@ -380,7 +380,7 @@ update biblia set nvg = 'Jozafat mu vravel: „Nehovor tak, krá¾!“ Izraelskı krá¾ 
 
 update biblia set nvg = 'On prišiel ku krá¾ovi a_krá¾ mu povedal: „Micheáš, máme ís bojova o_Ramot v_Galaáde, alebo to necha tak?“ On mu odpovedal: „Choï, budeš ma úspech a_Pán ho vydá do rúk krá¾a.“' where spis = '1Kr' and vers = 1 and k = 22 and v = 15
 update biblia set nvg = 'Ale krá¾ mu povedal: „Opä a_opä a zaprisahávam, aby si mi nehovoril niè iné, iba pravdu v_Pánovom mene.“' where spis = '1Kr' and vers = 1 and k = 22 and v = 16
-update biblia set nvg = 'On vravel: <p>„Videl som celı Izrael <br>rozptılenı po vrchoch <br>ako ovce, ktoré nemajú pastiera. <p>A_Pán povedal: ‚Títo nemajú pána. Nech sa kadı vráti v_pokoji domov.‘“' where spis = '1Kr' and vers = 1 and k = 22 and v = 17
+update biblia set nvg = 'On vravel: // „Videl som celı Izrael / rozptılenı po vrchoch / ako ovce, ktoré nemajú pastiera. // A_Pán povedal: ‚Títo nemajú pána. Nech sa kadı vráti v_pokoji domov.‘“' where spis = '1Kr' and vers = 1 and k = 22 and v = 17
 update biblia set nvg = 'Izraelskı krá¾ povedal Jozafatovi: „Nehovoril som ti, e mi neprorokuje dobro, ale vdy iba zlo?“' where spis = '1Kr' and vers = 1 and k = 22 and v = 18
 
 update biblia set nvg = 'Ale on ešte dodal: „Preto poèuj Pánovo slovo: Videl som Pána sedie na jeho tróne a_všetko nebeské vojsko stá pri òom sprava i_z¾ava.' where spis = '1Kr' and vers = 1 and k = 22 and v = 19
