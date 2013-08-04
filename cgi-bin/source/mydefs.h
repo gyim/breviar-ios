@@ -92,6 +92,8 @@
 //* EOF of former file mybase.h                                 *
 //***************************************************************
 
+#define MAX_POCET_SVATY 3
+
 // Nazvy programov, suborov, skriptov...
 #define SCRIPT_NAME          "l.cgi"
 #define SCRIPT_PATH(a)       "cgi-bin/"a

@@ -75,25 +75,17 @@ extern short int index_pre_mesiac_otvoreny;
 
 // globalna premenna, do ktorej sa ukladaju info o analyzovanom dni
 extern _struct_dm *_global_den_ptr;
-// _struct_dm _global_den;
 #define _global_den (*_global_den_ptr)
 
 // globalne premenne, do ktorych sa ukladaju info o analyzovanom dni o sviatkoch svatych
-extern _struct_dm *_global_svaty1_ptr;
-// _struct_dm _global_svaty1;
-#define _global_svaty1 (*_global_svaty1_ptr)
-
-extern _struct_dm *_global_svaty2_ptr;
-// _struct_dm _global_svaty2; // v pripade, ze je viac lubovolnych spomienok
-#define _global_svaty2 (*_global_svaty2_ptr)
-
-extern _struct_dm *_global_svaty3_ptr;
-// _struct_dm _global_svaty3; // v pripade, ze je viac lubovolnych spomienok
-#define _global_svaty3 (*_global_svaty3_ptr)
+extern _struct_dm *(_global_svaty_ptr[MAX_POCET_SVATY]); // an array of '_struct_dm' pointers
+#define _global_svaty(i) (*(_global_svaty_ptr[i - 1]))
+#define _global_svaty1 (*_global_svaty_ptr[0])
+#define _global_svaty2 (*_global_svaty_ptr[1])
+#define _global_svaty3 (*_global_svaty_ptr[2])
 
 // globalna premenna, ktora obsahuje data o spomienke panny marie v sobotu
 extern _struct_dm *_global_pm_sobota_ptr;
-// _struct_dm _global_pm_sobota;
 #define _global_pm_sobota (*_global_pm_sobota_ptr)
 
 // globalne premenne obsahujuce data modlitbach
