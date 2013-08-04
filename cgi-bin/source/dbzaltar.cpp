@@ -164,11 +164,11 @@
 /*   2011-01-11a.D. | opravené (pod¾a latinského) 3.1. (najsv. mena ježiš) pre iné ako czop     */
 /*   2011-01-25a.D. | súbory chválospevov (ranné chvály a vešpery) premenované: prefix "ch_";   */
 /*                    taktiež premenované šablóny (templáty) modlitieb; prefix "m_"             */
-/*   2011-02-02a.D. | použité MIESTNE_SLAVENIE_CZOP_SVATY1 až 3 (zjednodušenie podmienok, CZOP) */
+/*   2011-02-02a.D. | použité MIESTNE_SLAVENIE_CZOP_SVATY(i) (zjednodušenie podmienok, CZOP)    */
 /*   2011-02-02a.D. | dokonèený liturgický kalendár pre SDB a SJ, úpravy: úroveò slávení a pod. */
 /*   2011-02-18a.D. | opravy pre ant. benediktus+magnifikat pre spomienky v II. a III. zväzku   */
-/*   2011-03-07a.D. | MIESTNE_SLAVENIE_CZOP_SVATY1 až 3 použité aj pre iné (slovenské)          */
-/*                    lokálne slávenia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 až 3                   */
+/*   2011-03-07a.D. | MIESTNE_SLAVENIE_CZOP_SVATY(i) použité aj pre iné (slovenské)             */
+/*                    lokálne slávenia ako MIESTNE_SLAVENIE_LOKAL_SVATY(i)                      */
 /*   2011-03-14a.D. | na ostatné hodiny modlitby cez deò sa berie doplnková psalmódia (upravené)*/
 /*   2011-04-06a.D. | nastavenie antifón z doplnkovej psalmódie: funkcia                        */
 /*                    _set_antifony_mcd_doplnkova_psalmodia(void)                               */
@@ -8497,77 +8497,41 @@ label_24_DEC:
 	// najprv priradime do _local_den to, co tam ma byt
 	if(poradie_svateho > 0){
 		// sviatky (spomienky, ls) svatych
-		switch(poradie_svateho){
-			case PORADIE_PM_SOBOTA:
-				// do _local_den priradim slavenie pm v sobotu v dalsom
-				_local_den = _global_pm_sobota;
-				// ale predsalen aspon _local_den = _global_pm_sobota; urobim tu
-				break; // case PORADIE_PM_SOBOTA:
-			case 1:
+		if(poradie_svateho = PORADIE_PM_SOBOTA){
+			// do _local_den priradim slavenie pm v sobotu v dalsom
+			_local_den = _global_pm_sobota;
+			// ale predsalen aspon _local_den = _global_pm_sobota; urobim tu
+		}// poradie_svateho = PORADIE_PM_SOBOTA
+		else if(poradie_svateho < PORADIE_PM_SOBOTA){
+			if(_global_pocet_svatych > poradie_svateho - 1){
 				// do _local_den priradim dane slavenie
-				_local_den = _global_svaty1;
-				Log("spustam druhykrat sviatky_svatych(), tentokrat pre %d. svateho\n", poradie_svateho);
-				sviatky_svatych(_local_den.den, _local_den.mesiac, poradie_svateho, 2);
-				break; // case 1:
-			case 2:
-				if(_global_pocet_svatych > 1){
-					// do _local_den priradim dane slavenie
-					_local_den = _global_svaty2;
-					Log("spustam druhykrat sviatky_svatych(), tentokrat pre %d. svateho\n", poradie_svateho);
-					sviatky_svatych(_local_den.den, _local_den.mesiac, poradie_svateho, 2);
-				}
-				else{
-					// sice chce svateho c. 2, ale mam len jedneho
-					Log("-- Error: _global_svaty2 not assigned\n");
-					ALERT;
-					Export("Error: _global_svaty2 not assigned\n");
-				}
-				break; // case 2:
-			case 3:
-				if(_global_pocet_svatych > 2){
-					// teraz do _local_den priradim dane slavenie
-					_local_den = _global_svaty3;
-					Log("spustam druhykrat sviatky_svatych(), tentokrat pre %d. svateho\n", poradie_svateho);
-					sviatky_svatych(_local_den.den, _local_den.mesiac, poradie_svateho, 2);
-				}
-				else{
-					// sice chce svateho c. 3, ale nemam troch
-					Log("-- Error: _global_svaty3 not assigned\n");
-					ALERT;
-					Export("Error: _global_svaty3 not assigned\n");
-				}
-				break; // case 3:
-			case 5:
-				Log("-- Error: poradie_svateho == 5\n");
+				_local_den = _global_svaty(poradie_svateho);
+				Log("spúšam druhýkrát sviatky_svatych(), tentokrát pre %d. svätého\n", poradie_svateho);
+				sviatky_svatych(_local_den.den, _local_den.mesiac, poradie_svateho, 2 /* druhýkrát */);
+			}
+			else{
+				// sice chce svateho c. 'poradie_svateho', ale máme ich menej
+				Log("-- Error: _global_svaty(%d) not assigned (liturgicke_obdobie)\n", poradie_svateho);
 				ALERT;
-				Export("Error: poradie_svateho == 5\n");
-				break;
-			case 0:
-				// [ToDo]: je smiesne, ze case 0 tu vobec je: ved toto je mrtvy kus kodu!
-				// bezny den
-				if(_global_svaty1.smer >= 12){
-					// ak je to iba lubovolna spomienka, tak vsedny den
-					obyc = ANO;
-					_local_den = _global_den;
-				}
-				else{
-					// sice chce obycajny den, ale nemoze byt
-					Log("-- Error: _global_den not assigned\n");
-					ALERT;
-					Export("%s\n", "Error: _global_den not assigned");
-				}
-				break; // case 0:
-		}// switch(poradie_svateho)
+				Export("Error: _global_svaty(%d) not assigned (liturgicke_obdobie)\n", poradie_svateho);
+			}
+		}// poradie_svateho < PORADIE_PM_SOBOTA
+		else{
+			Log("-- Error: poradie_svateho == %d (max.: %d)\n", poradie_svateho, PORADIE_PM_SOBOTA);
+			ALERT;
+			Export("Error: poradie_svateho == %d (max.: %d)\n", poradie_svateho, PORADIE_PM_SOBOTA);
+		}// poradie_svateho > PORADIE_PM_SOBOTA
 	}// if(poradie_svateho > 0)
+	// v ïalších èastiach 'else' platí, že poradie_svateho == 0 (UNKNOWN_PORADIE_SVATEHO)
 	// 2009-03-19: ak poradie_svateho bolo UNKNOWN_PORADIE_SVATEHO, znamená to, že sa chcelo volanie možno pre nasledovný deò;
 	// problém sv. Jozefa - antifóny pre kompletórium nastavené pri prvom spustení volania "sviatky svätých" prekrylo nastavenie z liturgického obdobia...
 	else if((poradie_svateho == UNKNOWN_PORADIE_SVATEHO) && (_global_pocet_svatych > 0)
 		&& (_global_den.smer >= _global_svaty1.smer) && (_global_svaty1.typslav == SLAV_SLAVNOST)
 		// a neplatí, že ide o lokálnu slávnos: tá nesmie prebi všedný deò
 		// 2010-10-06: upravené; nesmie ís o lokálnu slávnos (smer == 4) lebo nemá prebíja "globálnu" v danom kalendári [napr. czop pre 22.10.]
-		// 2011-02-02: zadefinované MIESTNE_SLAVENIE_CZOP_SVATY1 až 3, aby sa zjednodušila podmienka (platí len pre CZOP)
-		// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 až 3 použité aj pre iné lokálne slávenia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 až 3
-		&& !MIESTNE_SLAVENIE_LOKAL_SVATY1){
+		// 2011-02-02: zadefinované MIESTNE_SLAVENIE_CZOP_SVATY(i), aby sa zjednodušila podmienka (platí len pre CZOP)
+		// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY(i) použité aj pre iné lokálne slávenia ako MIESTNE_SLAVENIE_LOKAL_SVATY(i)
+		&& !MIESTNE_SLAVENIE_LOKAL_SVATY(1)){
 		// bolo to volanie pre nasledujúci deò, treba ošetri napr. kompletórium po prvých vešperách, aby sa nepriradilo zo žaltára
 		Log("poradie_svateho == UNKNOWN_PORADIE_SVATEHO...\n");
 		Log("_global_pocet_svatych == %d\n", _global_pocet_svatych);
@@ -8584,7 +8548,7 @@ label_24_DEC:
 		_local_den = _global_svaty1;
 		poradie_svateho = 1;
 		Log("spustam druhykrat sviatky_svatych(), tentokrat pre %d. svateho\n", poradie_svateho);
-		sviatky_svatych(_local_den.den, _local_den.mesiac, poradie_svateho, 2);
+		sviatky_svatych(_local_den.den, _local_den.mesiac, poradie_svateho, 2 /* druhýkrát */);
 		Log("po druhom spustení sviatky_svatych(), pre %d. svätého (nastavené natvrdo)\n", poradie_svateho);
 		// pravedpodobne nie je potrebný clean-up: poradie_svateho = UNKNOWN_PORADIE_SVATEHO;
 	}
@@ -8593,14 +8557,12 @@ label_24_DEC:
 		// _local_den ostava _global_den
 		_local_den = _global_den;
 	}
-	else if((poradie_svateho > 0) && (_global_pocet_svatych > 0)){
-		// 2009-03-19: nechápem, preèo je to tu; sem sa to predsa nedostane, pretože kontrola na (poradie_svateho > 0) je vyššie
-	}// if(_global_pocet_svatych > 0)
 	else{
 		// obyèajný deò
 		obyc = ANO;
 		_local_den = _global_den;
 	}
+
 	// ešte spomienka panny márie v sobotu, cl. 15
 	// najprv sa spytame tej soboty, ci nahodou nie je spomienka neposkvrneneho srdca panny marie; ak je, tak uprednostnime tuto
 	// 2006-02-02: pridané posv. èítania a upravené; keïže smer == 11 používame pre lokálne povinné spomienky, upravili sme kontrolu z 12 na 11
@@ -8609,7 +8571,7 @@ label_24_DEC:
 		Log("/* pri spusteni liturgicke_obdobie(); spomienka neposkvrneneho srdca panny marie */\n");
 		Log("spustam druhykrat sviatky_svatych(), tentokrat pre %d. svateho\n", poradie_svateho);
 		_local_den = _global_den;
-		sviatky_svatych(_local_den.den, _local_den.mesiac, poradie_svateho, 2);
+		sviatky_svatych(_local_den.den, _local_den.mesiac, poradie_svateho, 2 /* druhýkrát */);
 	}
 
 	// spomienka panny márie v sobotu
@@ -8617,10 +8579,10 @@ label_24_DEC:
 		(_global_den.denvt == DEN_SOBOTA) &&
 		((_global_den.denvr != (_global_r._ZOSLANIE_DUCHA_SV.denvr + 20))) &&
 		(
-			// 2011-02-02: zadefinované MIESTNE_SLAVENIE_CZOP_SVATY1 až 3, aby sa zjednodušila podmienka (platí len pre CZOP)
-			// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 až 3 použité aj pre iné lokálne slávenia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 až 3
+			// 2011-02-02: zadefinované MIESTNE_SLAVENIE_CZOP_SVATY(i), aby sa zjednodušila podmienka (platí len pre CZOP)
+			// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY(i) použité aj pre iné lokálne slávenia ako MIESTNE_SLAVENIE_LOKAL_SVATY(i)
 			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
-			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY1) && (_global_pocet_svatych > 0))) &&
+			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY(1)) && (_global_pocet_svatych > 0))) &&
 		(poradie_svateho == PORADIE_PM_SOBOTA)){
 		// teraz do _global_den priradim dane slavenie
 		_local_den = _global_pm_sobota;

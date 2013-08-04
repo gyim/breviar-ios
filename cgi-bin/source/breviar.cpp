@@ -174,13 +174,13 @@
 /*                    pridanie VYPISOVAT_PREDCHADZAJUCI_NASLEDUJUCI_BUTTON */
 /*                  - dorobenÈ force "opt_1" (_global_optf 1 )             */
 /*   2011-01-27a.D. | BUTTONY_PREDOSLY_NASLEDOVNY_ROK_MESIAC_DEN_HORE      */
-/*   2011-02-02a.D. | pouûitÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3            */
+/*   2011-02-02a.D. | pouûitÈ MIESTNE_SLAVENIE_CZOP_SVATY(i)               */
 /*   2011-02-02a.D. | dokonËen˝ liturgick˝ kalend·r pre SDB a SJ, ˙pravy   */
 /*   2011-02-02a.D. | zaËiatok PRM_TXT -- export LK pre RKC (Peùo Zimen)   */
 /*                  - eöte: 1. doladiù export &nbsp; a <p> HTML tagov      */
 /*                          2. nejako popracovaù na "zlepenÌ" pre 1 deÚ    */
-/*   2011-03-07a.D. | MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ */
-/*                    lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1..3*/
+/*   2011-03-07a.D. | MIESTNE_SLAVENIE_CZOP_SVATY(i) pouûitÈ aj pre inÈ    */
+/*                    lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY(i) */
 /*   2011-03-14a.D. | batch mÛd: nastavenie parametra o5 (_global_opt 5)   */
 /*                    pre modlitbu cez deÚ (beûn·/doplnkov· psalmÛdia)     */
 /*   2011-03-16a.D. | liturgick˝ kalend·r pre OFM (zaËiatok)               */
@@ -3014,30 +3014,16 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			else{
 				zobrazit &= ((_global_modlitba != MODL_KOMPLETORIUM) && (_global_modlitba != MODL_PRVE_KOMPLETORIUM) && (_global_modlitba != MODL_DRUHE_KOMPLETORIUM));
 				if(zobrazit == ANO){
-					if(_global_poradie_svaty == 1){
-						zobrazit = (((_global_svaty1.typslav != SLAV_LUB_SPOMIENKA) && (_global_svaty1.typslav != SLAV_SPOMIENKA)) || ((_global_modlitba != MODL_PREDPOLUDNIM) && (_global_modlitba != MODL_NAPOLUDNIE) && (_global_modlitba != MODL_POPOLUDNI) && (_global_modlitba != MODL_KOMPLETORIUM) && (_global_modlitba != MODL_PRVE_KOMPLETORIUM) && (_global_modlitba != MODL_DRUHE_KOMPLETORIUM)));
-						zobrazit |= (MIESTNE_SLAVENIE_LOKAL_SVATY1) && ((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI));
-						// napokon rozkÛdujeme, Ëo je v _global_svaty1.spolcast
-						sc = _decode_spol_cast(_global_svaty1.spolcast);
-						zobrazit &= ((sc.a1 != MODL_SPOL_CAST_NEURCENA) && (sc.a1 != MODL_SPOL_CAST_NEBRAT));
-					}
-					else if(_global_poradie_svaty == 2){
-						zobrazit = (((_global_svaty1.typslav != SLAV_LUB_SPOMIENKA) && (_global_svaty2.typslav != SLAV_SPOMIENKA)) || ((_global_modlitba != MODL_PREDPOLUDNIM) && (_global_modlitba != MODL_NAPOLUDNIE) && (_global_modlitba != MODL_POPOLUDNI) && (_global_modlitba != MODL_KOMPLETORIUM) && (_global_modlitba != MODL_PRVE_KOMPLETORIUM) && (_global_modlitba != MODL_DRUHE_KOMPLETORIUM)));
-						zobrazit |= (MIESTNE_SLAVENIE_LOKAL_SVATY2) && ((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI));
-						// napokon rozkÛdujeme, Ëo je v _global_svaty2.spolcast
-						sc = _decode_spol_cast(_global_svaty2.spolcast);
-						zobrazit &= ((sc.a1 != MODL_SPOL_CAST_NEURCENA) && (sc.a1 != MODL_SPOL_CAST_NEBRAT));
-					}
-					else if(_global_poradie_svaty == 3){
-						zobrazit = (((_global_svaty3.typslav != SLAV_LUB_SPOMIENKA) && (_global_svaty3.typslav != SLAV_SPOMIENKA)) || ((_global_modlitba != MODL_PREDPOLUDNIM) && (_global_modlitba != MODL_NAPOLUDNIE) && (_global_modlitba != MODL_POPOLUDNI) && (_global_modlitba != MODL_KOMPLETORIUM) && (_global_modlitba != MODL_PRVE_KOMPLETORIUM) && (_global_modlitba != MODL_DRUHE_KOMPLETORIUM)));
-						zobrazit |= (MIESTNE_SLAVENIE_LOKAL_SVATY3) && ((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI));
-						// napokon rozkÛdujeme, Ëo je v _global_svaty3.spolcast
-						sc = _decode_spol_cast(_global_svaty3.spolcast);
+					if((_global_poradie_svaty > 0) && (_global_poradie_svaty < PORADIE_PM_SOBOTA)){
+						zobrazit = (((_global_svaty(_global_poradie_svaty).typslav != SLAV_LUB_SPOMIENKA) && (_global_svaty(_global_poradie_svaty).typslav != SLAV_SPOMIENKA)) || ((_global_modlitba != MODL_PREDPOLUDNIM) && (_global_modlitba != MODL_NAPOLUDNIE) && (_global_modlitba != MODL_POPOLUDNI) && (_global_modlitba != MODL_KOMPLETORIUM) && (_global_modlitba != MODL_PRVE_KOMPLETORIUM) && (_global_modlitba != MODL_DRUHE_KOMPLETORIUM)));
+						zobrazit |= (MIESTNE_SLAVENIE_LOKAL_SVATY(_global_poradie_svaty)) && ((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI));
+						// napokon rozkÛdujeme, Ëo je v _global_svaty(_global_poradie_svaty).spolcast
+						sc = _decode_spol_cast(_global_svaty(_global_poradie_svaty).spolcast);
 						zobrazit &= ((sc.a1 != MODL_SPOL_CAST_NEURCENA) && (sc.a1 != MODL_SPOL_CAST_NEBRAT));
 					}
 					else if(_global_poradie_svaty == PORADIE_PM_SOBOTA){
 						zobrazit = (((_global_pm_sobota.typslav != SLAV_LUB_SPOMIENKA) && (_global_pm_sobota.typslav != SLAV_SPOMIENKA)) || ((_global_modlitba != MODL_PREDPOLUDNIM) && (_global_modlitba != MODL_NAPOLUDNIE) && (_global_modlitba != MODL_POPOLUDNI) && (_global_modlitba != MODL_KOMPLETORIUM) && (_global_modlitba != MODL_PRVE_KOMPLETORIUM) && (_global_modlitba != MODL_DRUHE_KOMPLETORIUM)));
-						zobrazit |= (MIESTNE_SLAVENIE_LOKAL_SVATY3) && ((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI));
+						// zobrazit |= (MIESTNE_SLAVENIE_LOKAL_SVATY(_global_poradie_svaty)) && ((_global_modlitba == MODL_PREDPOLUDNIM) || (_global_modlitba == MODL_NAPOLUDNIE) || (_global_modlitba == MODL_POPOLUDNI));
 						// napokon rozkÛdujeme, Ëo je v _global_pm_sobota.spolcast
 						sc = _decode_spol_cast(_global_pm_sobota.spolcast);
 						zobrazit &= ((sc.a1 != MODL_SPOL_CAST_NEURCENA) && (sc.a1 != MODL_SPOL_CAST_NEBRAT));
@@ -5301,24 +5287,26 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 			_rozbor_dna_LOG("nie je pÙstne obdobie, nie je potrebnÈ meniù spomienku na æubovoæn˙ spomienku (_global_svaty3)...\n");
 		}
 
+		short int podmienka_svaty_vedie = NIE;
 		Log("_global_den.smer == %d...\n", _global_den.smer);
-		Log("_global_svaty1.smer == %d...\n", _global_svaty1.smer);
-		Log("_global_svaty2.smer == %d...\n", _global_svaty2.smer);
-		Log("_global_svaty3.smer == %d...\n", _global_svaty3.smer);
+		for(short int i = 0; i < MAX_POCET_SVATY; i++){
+			Log("_global_svaty(%d).smer == %d...\n", i + 1, _global_svaty(i + 1).smer);
+			// 2013-08-04: pridan· kontrola podmienky 'podmienka_svaty_vedie'
+			if((_global_den.smer > _global_svaty(i + 1).smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY(i + 1)){
+				podmienka_svaty_vedie = ANO;
+			}
+		}
 
 		// c. 12 v c. 59 vseob. smernic: "lubovolne spomienky, ktore sa mozu slavit aj v dnoch uvedenych pod c. 9 [...] tak isto v omsi a oficiu
 		// na sposob lubovolnych spomienok mozno slavit tie povinne spomienky, ktore obcas pripadnu na vsedne dni v poste." ...
 		if(((_global_den.smer == 9) &&
-			 (_global_svaty1.typslav == SLAV_LUB_SPOMIENKA)) ||
-
-		// ... alebo c. 60: "ak na jeden den pripadnu viacere slavenia, uprednostni sa to, ktore ma v tabulke liturgickych dni vyssi stupen [t.j. .smer].
-		// 2010-07-28: doplnenÈ alternatÌvne porovnanie aj s _global_svaty2.smer (kvÙli dominik·nskej sl·vnosti 8.8.) 
-		// 2010-10-06: upravenÈ; nesmie Ìsù o lok·lnu sl·vnosù (smer == 4) lebo nem· prebÌjaù "glob·lnu" v danom kalend·ri [napr. czop pre 22.10.]
-		// 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3, aby sa zjednoduöila podmienka (platÌ len pre CZOP)
-		// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 aû 3
-			((_global_den.smer > _global_svaty1.smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY1)
-			|| ((_global_den.smer > _global_svaty2.smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY2)
-			|| ((_global_den.smer > _global_svaty3.smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY3)
+			 (_global_svaty1.typslav == SLAV_LUB_SPOMIENKA)) || (podmienka_svaty_vedie == ANO)
+			// ... alebo c. 60: "ak na jeden den pripadnu viacere slavenia, uprednostni sa to, ktore ma v tabulke liturgickych dni vyssi stupen [t.j. .smer].
+			// 2010-07-28: doplnenÈ alternatÌvne porovnanie aj s _global_svaty2.smer (kvÙli dominik·nskej sl·vnosti 8.8.) 
+			// 2010-10-06: upravenÈ; nesmie Ìsù o lok·lnu sl·vnosù (smer == 4) lebo nem· prebÌjaù "glob·lnu" v danom kalend·ri [napr. czop pre 22.10.]
+			// 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY(i), aby sa zjednoduöila podmienka (platÌ len pre CZOP)
+			// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY(i) pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY(i)
+			// 2013-08-04: kontroluje sa dynamicky, vyööie
 		){
 
 			// ked bola nasledovna pasaz zapoznamkovana, tak vsetko (bez modlitby) slo v poriadku; neslo generovanie modlitby ok;
@@ -5346,9 +5334,9 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 						)
 						// a neplatÌ, ûe ide o lok·lnu sl·vnosù: t· nesmie prebiù vöedn˝ deÚ
 						// 2010-10-06: upravenÈ; nesmie Ìsù o lok·lnu sl·vnosù (smer == 4) lebo nem· prebÌjaù "glob·lnu" v danom kalend·ri [napr. czop pre 22.10.]
-						// 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3, aby sa zjednoduöila podmienka (platÌ len pre CZOP)
-						// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 aû 3
-						&& !MIESTNE_SLAVENIE_LOKAL_SVATY1
+						// 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY(i), aby sa zjednoduöila podmienka (platÌ len pre CZOP)
+						// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY(i) pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY(i)
+						&& !MIESTNE_SLAVENIE_LOKAL_SVATY(1)
 					) // slavnosti
 				)
 				){ // 15/03/2000A.D. -- modifikovane; POKUS 2006-12-08: vyÚat· podmienka (_global_modlitba != MODL_NEURCENA) &&  nepomohla, len pokazila
@@ -5357,10 +5345,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				// 2006-02-06: pre viacero æubovoæn˝ch spomienok treba byù obozretnejöÌ
 				_rozbor_dna_LOG("\tporadie_svaty == %d\n", poradie_svaty);
 				_rozbor_dna_LOG("\t_global_svaty1.smer == %d, _global_den.denvt == %d (%s), _global_den.litobd == %d (%s)...\n", _global_svaty1.smer, _global_den.denvt, nazov_dna(_global_den.denvt), _global_den.litobd, nazov_obdobia_ext(_global_den.litobd));
-				_rozbor_dna_LOG("menim, lebo `%s' ma prednost...\n", 
-					poradie_svaty == 1 ? _global_svaty1.meno :
-					(poradie_svaty == 2 ? _global_svaty2.meno : 
-					(poradie_svaty == 3 ? _global_svaty3.meno : "spomienka PM v sobotu (prÌp. nieËo inÈ)")));
+				_rozbor_dna_LOG("menim, lebo svaty `%d' ma prednost...\n", poradie_svaty);
 
 				Log("do _global_den priraÔujem _global_svaty1... (`%s')\n", _global_svaty1.meno);
 				mystrcpy(_global_den.meno, _global_svaty1.meno, MENO_SVIATKU); // priradenie n·zvu dÚa
@@ -5395,17 +5380,6 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 					case 0:
 						sc = _decode_spol_cast(_global_den.spolcast);
 						break;
-						/*
-					case 1:
-						sc = _decode_spol_cast(_global_svaty1.spolcast);
-						break;
-					case 2:
-						sc = _decode_spol_cast(_global_svaty2.spolcast);
-						break;
-					case 3:
-						sc = _decode_spol_cast(_global_svaty3.spolcast);
-						break;
-						*/
 					case PORADIE_PM_SOBOTA:
 						sc.a1 = MODL_SPOL_CAST_PANNA_MARIA; // 2006-02-06: spomienka PM v sobotu
 						break;
@@ -5530,108 +5504,80 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 
 	Log("poradie_svateho == %d\n", poradie_svateho);
 	// sviatky (spomienky, ls) svatych
-	switch(poradie_svateho){
-		case PORADIE_PM_SOBOTA:
-			// do _local_den priradim slavenie pm v sobotu v dalsom
-			if(_global_den.denvt != DEN_SOBOTA){
-				Log("Tento den nie je sobota, preto nemoze mat spomienku P. Marie v sobotu!\n");
-				ALERT;
-	            Export("Tento deÚ nie je sobota, preto nemÙûe maù `spomienku Panny M·rie v sobotu'!\n");
-				return FAILURE;
-			}
-			else{
-				// do _local_den priradim dane slavenie
-				_local_den = _global_pm_sobota;
-				Log("priradujem _local_den = _global_pm_sobota;\n");
-			}
-			break; // case PORADIE_PM_SOBOTA:
-		case 1:
-			// do _local_den priradim dane slavenie
-			_local_den = _global_svaty1;
-#ifdef LITURGICKE_CITANIA_ANDROID
-			cit = najdiCitanie(getCode(&_global_svaty1));
-#endif // LITURGICKE_CITANIA_ANDROID
-			Log("priradujem _local_den = _global_svaty1;\n");
-			break; // case 1:
-		case 2:
-			if(_global_pocet_svatych > 1){
-				// do _local_den priradim dane slavenie
-				_local_den = _global_svaty2;
-#ifdef LITURGICKE_CITANIA_ANDROID
-				cit = najdiCitanie(getCode(&_global_svaty2));
-#endif // LITURGICKE_CITANIA_ANDROID
-				Log("priradujem _local_den = _global_svaty2;\n");
-			}
-			else{
-				// sice chce svateho c. 2, ale mam len jedneho
-				Log("-- Error: _global_svaty2 not assigned\n");
-				ALERT;
-				sprintf(pom, "Error: _global_svaty2 not assigned");
-				strcat(_global_string, pom);
-				Export("%s\n", _global_string);
-				return FAILURE;
-			}
-			break; // case 2:
-		case 3:
-			if(_global_pocet_svatych > 2){
-				// teraz do _local_den priradim dane slavenie
-				_local_den = _global_svaty3;
-#ifdef LITURGICKE_CITANIA_ANDROID
-				cit = najdiCitanie(getCode(&_global_svaty3));
-#endif // LITURGICKE_CITANIA_ANDROID
-				Log("priradujem _local_den = _global_svaty3;\n");
-			}
-			else{
-				// sice chce svateho c. 3, ale nemam troch
-				Log("-- Error: _global_svaty3 not assigned\n");
-				ALERT;
-				sprintf(pom, "Error: _global_svaty3 not assigned");
-				strcat(_global_string, pom);
-				Export("%s\n", _global_string);
-				return FAILURE;
-			}
-			break; // case 3:
-		case 5:
-			Log("-- Error: poradie_svateho == 5\n");
+
+	if(poradie_svateho == PORADIE_PM_SOBOTA){
+		// do _local_den priradim slavenie pm v sobotu v dalsom
+		if(_global_den.denvt != DEN_SOBOTA){
+			Log("Tento den nie je sobota, preto nemoze mat spomienku P. Marie v sobotu!\n");
 			ALERT;
-			Export("Error: poradie_svateho == 5\n");
+	        Export("Tento deÚ nie je sobota, preto nemÙûe maù `spomienku Panny M·rie v sobotu'!\n");
 			return FAILURE;
-			break;
-		case UNKNOWN_PORADIE_SVATEHO:
-		default:
-			// 2010-09-28: odvetvenÈ kvÙli t˝m prÌpadom, keÔ na nedeæu padne sviatok p·na, ale pouûÌva sa poradie_svaty == UNKNOWN_PORADIE_SVATEHO == 0 
-			//             Ëasù prevzat· z: liturgicke_obdobie(), zaËiatok funkcie; hoci tu sa pouûije len pre smer == 5 (sviatky p·na); sl·vnosti sa rieöia samostatne
-			// 2011-06-30: cyril a metod odvetven˝ pre SK a CZ only
-			// 2011-07-22: doplnenÈ pre HU: 20AUG
-			// 2011-10-13: zapozn·mkovanÈ 14SEP kvÙli CZ // nesp˙öùalo sa totiû zaltar_zvazok(), a teda ani zaltar_kompletorium()
-			// 2012-10-22: odpozn·mkovanÈ 14SEP -- napr. pre rok 2014 potom ned·valo prvÈ veöpery, ak padne na nedeæu!
-			Log("_global_den.smer == %d\n", _global_den.smer);
-			Log("_global_svaty1.smer == %d\n", _global_svaty1.smer);
-			if((_global_svaty1.smer == 5) && (
-				((_global_den.den == 6) && (_global_den.mesiac - 1 == MES_AUG)) ||
-				((_global_den.den == 15) && (_global_den.mesiac - 1 == MES_AUG)) ||
-				((_global_den.den == 29) && (_global_den.mesiac - 1 == MES_JUN)) ||
-				((_global_den.den == 5) && (_global_den.mesiac - 1 == MES_JUL) && ((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
-				((_global_den.den == 20) && (_global_den.mesiac - 1 == MES_AUG) && (_global_jazyk == JAZYK_HU)) ||
-				((_global_den.den == 28) && (_global_den.mesiac - 1 == MES_SEP) && ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
-				((_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) && (_global_jazyk != JAZYK_CZ) ) ||
-				((_global_den.den == 1) && (_global_den.mesiac - 1 == MES_NOV))
-				)){
-				// do _local_den priradim dane slavenie
-				_local_den = _global_svaty1;
+		}
+		else{
+			// do _local_den priradim dane slavenie
+			_local_den = _global_pm_sobota;
+			Log("priradujem _local_den = _global_pm_sobota;\n");
+		}
+	}// poradie_svateho == PORADIE_PM_SOBOTA
+	else if((poradie_svateho > 0) && (poradie_svateho < PORADIE_PM_SOBOTA)){
+		if(_global_pocet_svatych > poradie_svateho - 1){
+			// do _local_den priradim dane slavenie
+			_local_den = _global_svaty(poradie_svateho);
 #ifdef LITURGICKE_CITANIA_ANDROID
-				cit = najdiCitanie(getCode(&_global_svaty1));
+			cit = najdiCitanie(getCode(&_global_svaty(poradie_svateho)));
 #endif // LITURGICKE_CITANIA_ANDROID
-				Log("priradujem _local_den = _global_svaty1;\n");
-			}
-			else{
-				// bezny den
-				Log("/* bezny den */\n");
-				obyc = ANO;
-				_local_den = _global_den;
-			}
-			break; // case 0:
-	}// switch(poradie_svateho)
+			Log("priradujem _local_den = _global_svaty(%d);\n", poradie_svateho);
+		}
+		else{
+			// sice chce svateho c. 'poradie_svateho', ale m·me ich menej
+			Log("-- Error: _global_svaty(%d) not assigned (init_global_string)\n", poradie_svateho);
+			ALERT;
+			sprintf(pom, "Error: _global_svaty(%d) not assigned (init_global_string)", poradie_svateho);
+			strcat(_global_string, pom);
+			Export("%s\n", _global_string);
+			return FAILURE;
+		}
+	}// poradie_svateho = 1, 2, 3... aû MAX_POCET_SVATY
+	else if(poradie_svateho > PORADIE_PM_SOBOTA){
+		Log("-- Error: poradie_svateho == %d (max.: %d)\n", poradie_svateho, PORADIE_PM_SOBOTA);
+		ALERT;
+		Export("Error: poradie_svateho == %d (max.: %d)\n", poradie_svateho, PORADIE_PM_SOBOTA);
+		return FAILURE;
+	}// poradie_svateho > PORADIE_PM_SOBOTA
+	else{
+		// poradie_svateho == UNKNOWN_PORADIE_SVATEHO
+		// 2010-09-28: odvetvenÈ kvÙli t˝m prÌpadom, keÔ na nedeæu padne sviatok p·na, ale pouûÌva sa poradie_svaty == UNKNOWN_PORADIE_SVATEHO == 0 
+		//             Ëasù prevzat· z: liturgicke_obdobie(), zaËiatok funkcie; hoci tu sa pouûije len pre smer == 5 (sviatky p·na); sl·vnosti sa rieöia samostatne
+		// 2011-06-30: cyril a metod odvetven˝ pre SK a CZ only
+		// 2011-07-22: doplnenÈ pre HU: 20AUG
+		// 2011-10-13: zapozn·mkovanÈ 14SEP kvÙli CZ // nesp˙öùalo sa totiû zaltar_zvazok(), a teda ani zaltar_kompletorium()
+		// 2012-10-22: odpozn·mkovanÈ 14SEP -- napr. pre rok 2014 potom ned·valo prvÈ veöpery, ak padne na nedeæu!
+		Log("_global_den.smer == %d\n", _global_den.smer);
+		Log("_global_svaty1.smer == %d\n", _global_svaty1.smer);
+		if((_global_svaty1.smer == 5) && (
+			((_global_den.den == 6) && (_global_den.mesiac - 1 == MES_AUG)) ||
+			((_global_den.den == 15) && (_global_den.mesiac - 1 == MES_AUG)) ||
+			((_global_den.den == 29) && (_global_den.mesiac - 1 == MES_JUN)) ||
+			((_global_den.den == 5) && (_global_den.mesiac - 1 == MES_JUL) && ((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
+			((_global_den.den == 20) && (_global_den.mesiac - 1 == MES_AUG) && (_global_jazyk == JAZYK_HU)) ||
+			((_global_den.den == 28) && (_global_den.mesiac - 1 == MES_SEP) && ((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP))) ||
+			((_global_den.den == 14) && (_global_den.mesiac - 1 == MES_SEP) && (_global_jazyk != JAZYK_CZ) ) ||
+			((_global_den.den == 1) && (_global_den.mesiac - 1 == MES_NOV))
+			)){
+			// do _local_den priradim dane slavenie
+			_local_den = _global_svaty(1);
+#ifdef LITURGICKE_CITANIA_ANDROID
+			cit = najdiCitanie(getCode(&_global_svaty(1)));
+#endif // LITURGICKE_CITANIA_ANDROID
+			Log("priradujem _local_den = _global_svaty(1);\n");
+		}
+		else{
+			// bezny den
+			Log("/* bezny den */\n");
+			obyc = ANO;
+			_local_den = _global_den;
+		}
+	}// poradie_svateho == UNKNOWN_PORADIE_SVATEHO
 
 	int ma_nazov = 0;
 #ifdef LITURGICKE_CITANIA_ANDROID
@@ -5643,45 +5589,26 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		}// if (!cit); 2. pokus
 	}// if (!cit)
 #endif // LITURGICKE_CITANIA_ANDROID
+
 	Log("1:_local_den.meno == %s\n", _local_den.meno);
-
-	/* 21/03/2000A.D.
-	 * celu tuto pasaz som zapoznamkoval, lebo to nema vyznam 
-	 * v pripade, ze su korektne nastavene veci do _global_den :-)
-	 * sami si prioritu .smer ocekuju.
-	 * naopak, tato pasaz skodila: pre 29. jun 2008, 24. jun 2001, 5. jul 1998 apod.
-	if((_global_den.denvt == DEN_NEDELA) ||
-		(_global_den.prik == PRIKAZANY_SVIATOK)){
-		Log("// _local_den ostava _global_den, lebo nedela || prikazany sviatok \n");
-		_local_den = _global_den;
-	}
-	 * 23/03/2000A.D.
-	 * mohli by tu pre istotu byt nasledujuce riadky (v pripade, ze nieco zlyha v _rozbor_dna()):
-	if(_global_den.smer < 5){
-		Log("// _local_den ostava _global_den, lebo slavnost (smer == %d) \n", _global_den.smer);
-		_local_den = _global_den;
-	}
-	 */
-
-	Log("2:_local_den.meno == %s\n", _local_den.meno);
 
 	// spomienka panny m·rie v sobotu
 	// este spomienka panny marie v sobotu, cl. 15
 	// 2006-02-02: pridanÈ posv. ËÌtania a upravenÈ; keÔûe smer == 11 pouûÌvame pre lok·lne povinnÈ spomienky, upravili sme kontrolu z 12 na 11
 	// 2009-11-26: porovn·vame klasicky, resp. öpeci·lne pre body 4, 8, 11 [Miestne sl·vnosti, Miestne sviatky, Miestne povinnÈ spomienky] pred touto ˙pravou tu bola kontrola (_global_svaty1.smer >= 11)
-	// 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3, aby sa zjednoduöila podmienka (platÌ len pre CZOP)
-	// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 aû 3
+	// 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY(i), aby sa zjednoduöila podmienka (platÌ len pre CZOP)
+	// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY(i) pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY(i)
 	if((_global_den.litobd == OBD_CEZ_ROK) &&
 		(_global_den.denvt == DEN_SOBOTA) &&
 		(
 			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
-			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY1) && (_global_pocet_svatych > 0))) &&
+			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY(1)) && (_global_pocet_svatych > 0))) &&
 		(poradie_svateho == PORADIE_PM_SOBOTA)){
 		// teraz do _global_den priradim dane slavenie
 		_local_den = _global_pm_sobota;
 	}
 
-	Log("3:_local_den.meno == %s\n", _local_den.meno);
+	Log("2:_local_den.meno == %s\n", _local_den.meno);
 	
 	// skontrolujeme eöte pondelok -- ötvrtok vo veækom t˝ûdni (nastavenie n·zvu aj pre export na viac dnÌ)
 	if(_local_den.litobd == OBD_POSTNE_II_VELKY_TYZDEN){
@@ -5701,7 +5628,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		}
 	}
 
-	Log("4:_local_den.meno == %s\n", _local_den.meno);
+	Log("3:_local_den.meno == %s\n", _local_den.meno);
 	// --------------------------------------------------------------------
 	// teraz podla toho, co je v _local_den, vytvorime _global_string
 	Log("_local_den.smer < 5 -- ");
@@ -5737,7 +5664,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 		// zmenene <font color> na <span>, 2003-07-02
 		strcat(_global_string, "<"HTML_SPAN_RED">");
 	}
-	Log("5:_local_den.meno == %s\n", _local_den.meno);
+	Log("4:_local_den.meno == %s\n", _local_den.meno);
 
 	if(equals(_local_den.meno, STR_EMPTY)){
 		Log("sl·venie nem· vlastn˝ n·zov...\n");
@@ -6254,14 +6181,6 @@ short int init_global_string_spol_cast(short int sc_jedna, short int poradie_sva
 		switch(poradie_svateho){
 			case 0: sc = _decode_spol_cast(_global_den.spolcast);
 				break;
-				/*
-			case 1: sc = _decode_spol_cast(_global_svaty1.spolcast);
-				break;
-			case 2: sc = _decode_spol_cast(_global_svaty2.spolcast);
-				break;
-			case 3: sc = _decode_spol_cast(_global_svaty3.spolcast);
-				break;
-				*/
 			case PORADIE_PM_SOBOTA: sc = _decode_spol_cast(_global_pm_sobota.spolcast);
 				break;
 			default:
@@ -6307,14 +6226,6 @@ void xml_export_spol_cast(short int poradie_svateho){
 		case 0: 
 			sc = _decode_spol_cast(_global_den.spolcast);
 			break;
-			/*
-		case 1: sc = _decode_spol_cast(_global_svaty1.spolcast);
-			break;
-		case 2: sc = _decode_spol_cast(_global_svaty2.spolcast);
-			break;
-		case 3: sc = _decode_spol_cast(_global_svaty3.spolcast);
-			break;
-			*/
 		case PORADIE_PM_SOBOTA: 
 			sc = _decode_spol_cast(_global_pm_sobota.spolcast);
 			break;
@@ -6556,16 +6467,6 @@ short int _rozbor_dna_s_modlitbou(_struct_den_mesiac datum, short int rok, short
 		return FAILURE;
 	}
 	Log("_rozbor_dna() skoncila.\n");
-
-	/*
-	 * 2009-03-19: zapozun·mkoval som toto nastavenie, pretoûe konötantu som definoval do liturgia.h, 
-	 * nech sa presne vie, ûe je to kvÙli volaniu nasleduj˙ceho dÚa
-	if(poradie_svateho == UNKNOWN_PORADIE_SVATEHO){
-		// kedze neviem poradie svateho, lebo robim nasledujuci den, priradim 0
-		Log("// kedze neviem poradie svateho, lebo robim nasledujuci den, priradim 0\n");
-		poradie_svateho = 0;
-	}
-	*/
 
 	// nasledovna pasaz pridana 28/03/2000A.D. -- aby sme dobre kontrolovali, ci vobec mozeme spustit generovanie modlitby
 	if((poradie_svateho == PORADIE_PM_SOBOTA) && (_global_den.denvt != DEN_SOBOTA)){
@@ -9989,11 +9890,22 @@ void Log_zoznam(void){
 
 void _export_rozbor_dna_zoznam(short int typ){
 	short int pocet = 1; // poËet z·znamov, ktorÈ sa exportuj˙ (Ëi uû riadky tabuæky alebo len zoznam)
-	short int poradie_svaty;
+	short int poradie_svaty, poradie_svaty_vedie;
 	short int aj_feria = NIE;
 
 	Log("_export_rozbor_dna_zoznam(): zaËiatok...\n");
 	init_zoznam();
+
+	short int podmienka_svaty_vedie = NIE;
+	Log("_global_den.smer == %d...\n", _global_den.smer);
+	for(short int i = 0; i < MAX_POCET_SVATY; i++){
+		Log("_global_svaty(%d).smer == %d...\n", i + 1, _global_svaty(i + 1).smer);
+		// 2013-08-04: pridan· kontrola podmienky 'podmienka_svaty_vedie'
+		if((_global_den.smer > _global_svaty(i + 1).smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY(i + 1)){
+			podmienka_svaty_vedie = ANO;
+			poradie_svaty_vedie = i + 1; // vyberie posledn˝!!!
+		}
+	}
 
 	// pozor, hoci je nedela, predsa na nu mohlo pripadnut slavenie s vyssou prioritou
 	if((_global_den.denvt == DEN_NEDELA) ||
@@ -10009,21 +9921,10 @@ void _export_rozbor_dna_zoznam(short int typ){
 		// 2010-07-28: doplnenÈ alternatÌvne porovnanie aj s _global_svaty2.smer (kvÙli dominik·nskej sl·vnosti 8.8.)
 		// 2010-10-06: upravenÈ; nesmie Ìsù o lok·lnu sl·vnosù (smer == 4) lebo nem· prebÌjaù "glob·lnu" v danom kalend·ri [napr. czop pre 22.10.]
 		//             pÙvodne tu bolo: if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
-		// 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3, aby sa zjednoduöila podmienka (platÌ len pre CZOP)
-		// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 aû 3
-		if(((_global_den.smer > _global_svaty1.smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY1)
-			|| ((_global_den.smer > _global_svaty2.smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY2)
-			|| ((_global_den.smer > _global_svaty3.smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY3)
-			){
-			if(_global_den.smer > _global_svaty1.smer){
-				poradie_svaty = 1;
-			}
-			else if(_global_den.smer > _global_svaty2.smer){
-				poradie_svaty = 2;
-			}
-			else if(_global_den.smer > _global_svaty3.smer){
-				poradie_svaty = 3;
-			}
+		// 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY(i), aby sa zjednoduöila podmienka (platÌ len pre CZOP)
+		// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY(i) pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY(i)
+		if(podmienka_svaty_vedie){
+			poradie_svaty = poradie_svaty_vedie;
 			zoznam[pocet] = poradie_svaty;
 		}
 		else{
@@ -10033,15 +9934,7 @@ void _export_rozbor_dna_zoznam(short int typ){
 			//             avöak nebola splnen· vyööie uveden· novo-upraven· podmienka o "prebitÌ" nedele napr. lok·lnou sl·vnosùou
 			if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
 				pocet = 2;
-				if(_global_den.smer > _global_svaty1.smer){
-					poradie_svaty = 1;
-				}
-				else if(_global_den.smer > _global_svaty2.smer){
-					poradie_svaty = 2;
-				}
-				else if(_global_den.smer > _global_svaty3.smer){
-					poradie_svaty = 3;
-				}
+				poradie_svaty = poradie_svaty_vedie;
 				zoznam[pocet] = poradie_svaty;
 			}
 		}
@@ -10061,11 +9954,11 @@ void _export_rozbor_dna_zoznam(short int typ){
 			// 2010-05-24: zjednotenÈ; bolo odvetvenÈ "if(_global_den.smer > _global_svaty1.smer)"; 
 			//             else vetva mala napÌsanÈ: "æubovoæn· spomienka sv‰tÈho/sv‰t˝ch, priËom vöedn˝ deÚ m· vyööiu prioritu sl·venia"
 			//             a eöte: "2010-05-21: odtiaæto presunutÈ potenci·lne vypisovanie (export) vöednÈho dÚa pred prvÈho sv‰tca, ak je æubovoæn· spomienka"
-			// 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3, aby sa zjednoduöila podmienka (platÌ len pre CZOP)
-			// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 aû 3
+			// 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY(i), aby sa zjednoduöila podmienka (platÌ len pre CZOP)
+			// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY(i) pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY(i)
 			// 2012-08-21: cdoplnen· premenn· (kvÙli tomu, Ëi sa maj˙ pre sv‰tca 1 zobraziù buttons modlitba cez deÚ)
 			aj_feria = NIE;
-			if(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY1) && (typ != EXPORT_DNA_VIAC_DNI)){
+			if(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY(1)) && (typ != EXPORT_DNA_VIAC_DNI)){
 				// ak je to iba lubovolna spomienka, tak vsedny den
 				// 2010-05-21: NEWLINE; bolo pred; musÌme ho zaradiù za :)
 				aj_feria = ANO;
@@ -10078,22 +9971,18 @@ void _export_rozbor_dna_zoznam(short int typ){
 			}
 			// 2010-05-21: pÙvodne bolo: "sviatok, spomienka alebo æubovoæn· spomienka sv‰tÈho/sv‰t˝ch, ide prv ako vöedn˝ deÚ"; dnes ide prv len ak je to sviatok alebo spomienka 
 			// (a vlastne vtedy sa vöedn˝ deÚ vypisuje len pre lok·lne sviatky resp. spomienky) 
-			poradie_svaty = 1;
-			if((aj_feria) && (!MIESTNE_SLAVENIE_LOKAL_SVATY1)){
-				poradie_svaty *= 10;
-			}
-			zoznam[pocet] = poradie_svaty;
-			if(_global_pocet_svatych > 1){
-				poradie_svaty = 2;
-				if((!MIESTNE_SLAVENIE_LOKAL_SVATY2)){
-					poradie_svaty *= 10;
-				}
-				pocet++;
-				zoznam[pocet] = poradie_svaty;
-				if(_global_pocet_svatych > 2){
-					poradie_svaty = 3;
-					if((!MIESTNE_SLAVENIE_LOKAL_SVATY3)){
-						poradie_svaty *= 10;
+			for(short int i = 0; i < MAX_POCET_SVATY; i++){
+				if(_global_pocet_svatych > i){
+					poradie_svaty = i + 1;
+					if(poradie_svaty == 1){
+						if((aj_feria) && (!MIESTNE_SLAVENIE_LOKAL_SVATY(poradie_svaty))){
+							poradie_svaty *= 10;
+						}
+					}
+					else{
+						if((!MIESTNE_SLAVENIE_LOKAL_SVATY(poradie_svaty))){
+							poradie_svaty *= 10;
+						}
 					}
 					pocet++;
 					zoznam[pocet] = poradie_svaty;
@@ -10117,12 +10006,12 @@ void _export_rozbor_dna_zoznam(short int typ){
 		(_global_den.denvt == DEN_SOBOTA) &&
 		(
 			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
-			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY1) && (_global_pocet_svatych > 0))) &&
+			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY(1)) && (_global_pocet_svatych > 0))) &&
 		(typ != EXPORT_DNA_VIAC_DNI)){
 		// 2005-08-22: pÙvodne sa tu porovn·valo s 12, ale aj pre 11 (lok·lne sl·venia) by mal systÈm pon˙knuù (v sobotu) spomienku p. m·rie - keÔ je to napr. v inej diecÈze 
 		// 2006-02-02: pridanÈ posv. ËÌtania a upravenÈ; keÔûe smer == 11 pouûÌvame pre lok·lne povinnÈ spomienky, upravili sme kontrolu z 12 na 11
-		// 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3, aby sa zjednoduöila podmienka (platÌ len pre CZOP)
-		// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 aû 3 pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 aû 3
+		// 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY(i), aby sa zjednoduöila podmienka (platÌ len pre CZOP)
+		// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY(i) pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY(i)
 		poradie_svaty = PORADIE_PM_SOBOTA;
 		poradie_svaty *= 10;
 		pocet++;
@@ -10685,12 +10574,12 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 	Export("<option>%s\n", nazov_modlitby(MODL_PREDPOLUDNIM));
 	Export("<option>%s\n", nazov_modlitby(MODL_NAPOLUDNIE));
 	Export("<option>%s\n", nazov_modlitby(MODL_POPOLUDNI));
-	// spomienka P. Marie v sobotu nema vespery ani kompletÛrium
+	// spomienka P. M·rie v sobotu nem· veöpery ani kompletÛrium
 	if(poradie_svaty != PORADIE_PM_SOBOTA){
 		Export("<option>%s\n", nazov_modlitby(MODL_VESPERY));
-		Export("<option>%s\n", nazov_modlitby(MODL_KOMPLETORIUM)); // invitatÛrium a kompletÛrium pridanÈ 2006-10-13
+		Export("<option>%s\n", nazov_modlitby(MODL_KOMPLETORIUM));
 	}
-	Export("<option>%s\n", nazov_modlitby(MODL_VSETKY)); // vöetky modlitby: pridanÈ 2011-10-04
+	Export("<option>%s\n", nazov_modlitby(MODL_VSETKY));
 	Export("</select>\n");
 	Export("</li>\n");
 
@@ -10727,7 +10616,7 @@ void showDetails(short int den, short int mesiac, short int rok, short int porad
 		Export((char *)html_text_spol_casti_vziat_zo_explain[_global_jazyk]);
 		Export("</span>");
 		Export("</li>\n");
-	}// if(poradie svateho in 1, 2, 3)
+	}// if(poradie svateho == 1, 2, 3... aû MAX_POCET_SVATY)
 
 	Export("</ul>\n");
 
@@ -11699,8 +11588,8 @@ void _main_rozbor_dna(char *den, char *mesiac, char *rok, char *modlitba, char *
 	Log("mes == `%s' (%d)\n", mesiac, m);
 	r = atoi(rok); // vrati 0 v pripade chyby; alebo int
 	Log("rok == `%s' (%d)\n", rok, r);
-	s = atoi(poradie_svaty); // ak je viac svatych, ktory z nich (1--3)
-	// 2009-03-27: doplnenÈ - nezn·my je konötanta; zmysel maj˙ len vstupy 1--3
+	s = atoi(poradie_svaty); // ak je viac svatych, ktory z nich (1--MAX_POCET_SVATY)
+	// 2009-03-27: doplnenÈ - nezn·my je konötanta; zmysel maj˙ len vstupy 1--MAX_POCET_SVATY
 	if(s < 1){
 		s = UNKNOWN_PORADIE_SVATEHO;
 	}
@@ -12331,8 +12220,8 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 	datum.mesiac = dnes.tm_mon;
 	analyzuj_rok(dnes.tm_year); // v˝sledok d· do _global_r
 
-	s = atoi(poradie_svaty); // ak je viac svatych, ktory z nich (1--3)
-	// 2009-03-27: doplnenÈ - nezn·my je konötanta; zmysel maj˙ len vstupy 1--3
+	s = atoi(poradie_svaty); // ak je viac svatych, ktory z nich (1--MAX_POCET_SVATY)
+	// 2009-03-27: doplnenÈ - nezn·my je konötanta; zmysel maj˙ len vstupy 1--MAX_POCET_SVATY
 	if(s < 1){
 		s = UNKNOWN_PORADIE_SVATEHO;
 	}
