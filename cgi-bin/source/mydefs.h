@@ -93,6 +93,7 @@
 //***************************************************************
 
 #define MAX_POCET_SVATY 3
+#define PORADIE_PM_SOBOTA  (MAX_POCET_SVATY + 1)
 
 // Nazvy programov, suborov, skriptov...
 #define SCRIPT_NAME          "l.cgi"

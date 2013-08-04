@@ -8498,11 +8498,11 @@ label_24_DEC:
 	if(poradie_svateho > 0){
 		// sviatky (spomienky, ls) svatych
 		switch(poradie_svateho){
-			case 4:
+			case PORADIE_PM_SOBOTA:
 				// do _local_den priradim slavenie pm v sobotu v dalsom
 				_local_den = _global_pm_sobota;
 				// ale predsalen aspon _local_den = _global_pm_sobota; urobim tu
-				break; // case 4:
+				break; // case PORADIE_PM_SOBOTA:
 			case 1:
 				// do _local_den priradim dane slavenie
 				_local_den = _global_svaty1;
@@ -8621,7 +8621,7 @@ label_24_DEC:
 			// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY1 až 3 použité aj pre iné lokálne slávenia ako MIESTNE_SLAVENIE_LOKAL_SVATY1 až 3
 			((_global_den.smer >= 11) && (_global_pocet_svatych == 0)) ||
 			(((_global_svaty1.smer >= 12) || MIESTNE_SLAVENIE_LOKAL_SVATY1) && (_global_pocet_svatych > 0))) &&
-		(poradie_svateho == 4)){
+		(poradie_svateho == PORADIE_PM_SOBOTA)){
 		// teraz do _global_den priradim dane slavenie
 		_local_den = _global_pm_sobota;
 		mystrcpy(_file, FILE_SPOM_PM_SOBOTA, MAX_STR_AF_FILE);
@@ -32081,25 +32081,16 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 		return 5;
 	}
 
-	Log("_global_svaty[1,2,3] som nemenil, lebo poradie_svaty == %d\n", poradie_svaty);
-	Log("teraz priradim do _global_den vsetko z _global_svaty%d...\n", poradie_svaty);
+	Log("_global_svaty[1...%d] som nemenil, lebo poradie_svaty == %d\n", MAX_POCET_SVATY, poradie_svaty);
+	Log("teraz priradim do _global_den vsetko z _global_svaty(%d)...\n", poradie_svaty);
 	Log("    (tato cast bola povodne v sviatky_svatych s 3 vstupmi, ale teraz je tu)\n");
-	switch(poradie_svaty){
-		// case 0: všetko je nastavené v _global_den
-		case 1: _global_den = _global_svaty1; break;
-		case 2: _global_den = _global_svaty2; break;
-		case 3: _global_den = _global_svaty3; break;
-		// case 4: všetko je nastavené v _global_pm_sobota;
-		default: // sem by sa to nemalo dostat
-			Log("--Error: switch(poradie_svaty) nezabralo pre 1, 2, 3...\n"); break;
-	}// switch();
+	if((poradie_svaty > 0) && (poradie_svaty < PORADIE_PM_SOBOTA)){
+		// 0: všetko je nastavené v _global_den
+		_global_den = _global_svaty(1);
+		// PORADIE_PM_SOBOTA: všetko je nastavené v _global_pm_sobota;
+	}
 	Log("takze _global_den teraz:\n");
 	Log(_global_den);
-	/*
-	LOG_ciara_sv; Log("_global_svaty1: \n"); Log(_global_svaty1);
-	LOG_ciara_sv; Log("_global_svaty2: \n"); Log(_global_svaty2);
-	LOG_ciara_sv; Log("_global_svaty3: \n"); Log(_global_svaty3);
-	*/
 
 	// az teraz, ked je v _global_den (pri druhom volani fcie) spravna hodnota z _global_svaty[1,2,3], mozem urobit toto priradenie do sc
 	_struct_sc sc = _decode_spol_cast(_global_den.spolcast);
