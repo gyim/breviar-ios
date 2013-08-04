@@ -882,6 +882,7 @@ extern short int query_type; // premenna obsahujuca PRM_...
 // 2012-10-16: upravenı tento define tak, e vdy musí by pred volaním funkcie Export(); doòho dovnútra som dal volanie hlavièky
 // Export("<p>Ak probl&eacute;my pretrv&aacute;vaj&uacute;, kontaktujte pros&iacute;m <a href=\"mailto:%s\">autora str&aacute;nky</a>.</p>\n", cfg_mail_address_default[_global_jazyk]);
 #define ALERT	{\
+	Log("ALERT\n");\
 	hlavicka((char *)html_title[_global_jazyk]);\
 	char pom2[MAX_STR];\
 	mystrcpy(pom2, STR_EMPTY, MAX_STR);\

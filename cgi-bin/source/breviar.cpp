@@ -14387,6 +14387,8 @@ short int getForm(void){
 	char *ptr;
 	short int i = 0;
 	char local_str[SMALL] = STR_EMPTY;
+	short int ret; // návratová hodnota
+	char errmsg[SMALL] = STR_EMPTY;
 
 	Log("getForm() -- begin\n");
 	//DEBUG_GET_FORM("argc == %d\n", argc);
@@ -14581,9 +14583,11 @@ short int getForm(void){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_DEN));
 			if(ptr == NULL){
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_DEN));
-				ALERT;
-				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_DEN));
-				return FAILURE; // failure
+				// 2013-08-04: samotné vypísanie nieèoho presunuté do hlavnej funkcie
+				sprintf(errmsg, "Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_DEN));
+				strcat(bad_param_str, errmsg);
+				ret = FAILURE;
+				goto END_getForm;
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
 				mystrcpy(pom_DEN, ptr, SMALL);
@@ -14598,9 +14602,11 @@ short int getForm(void){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_MESIAC));
 			if(ptr == NULL){
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_MESIAC));
-				ALERT;
-				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_MESIAC));
-				return FAILURE; // failure
+				// 2013-08-04: samotné vypísanie nieèoho presunuté do hlavnej funkcie
+				sprintf(errmsg, "Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_MESIAC));
+				strcat(bad_param_str, errmsg);
+				ret = FAILURE;
+				goto END_getForm;
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
 				mystrcpy(pom_MESIAC, ptr, SMALL);
@@ -14615,9 +14621,11 @@ short int getForm(void){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_ROK));
 			if(ptr == NULL){
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_ROK));
-				ALERT;
-				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_ROK));
-				return FAILURE; // failure
+				// 2013-08-04: samotné vypísanie nieèoho presunuté do hlavnej funkcie
+				sprintf(errmsg, "Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_ROK));
+				strcat(bad_param_str, errmsg);
+				ret = FAILURE;
+				goto END_getForm;
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
 				mystrcpy(pom_ROK, ptr, SMALL);
@@ -14668,9 +14676,11 @@ short int getForm(void){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
 			if(ptr == NULL){
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
-				ALERT;
-				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
-				return FAILURE; // failure
+				// 2013-08-04: samotné vypísanie nieèoho presunuté do hlavnej funkcie
+				sprintf(errmsg, "Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
+				strcat(bad_param_str, errmsg);
+				ret = FAILURE;
+				goto END_getForm;
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
 				mystrcpy(pom_DEN_V_TYZDNI, ptr, SMALL);
@@ -14685,9 +14695,11 @@ short int getForm(void){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_TYZDEN));
 			if(ptr == NULL){
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_TYZDEN));
-				ALERT;
-				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_TYZDEN));
-				return FAILURE; // failure
+				// 2013-08-04: samotné vypísanie nieèoho presunuté do hlavnej funkcie
+				sprintf(errmsg, "Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_TYZDEN));
+				strcat(bad_param_str, errmsg);
+				ret = FAILURE;
+				goto END_getForm;
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
 				mystrcpy(pom_TYZDEN, ptr, SMALL);
@@ -14702,9 +14714,11 @@ short int getForm(void){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_MODLITBA));
 			if(ptr == NULL){
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_MODLITBA));
-				ALERT;
-				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_MODLITBA));
-				return FAILURE; // failure
+				// 2013-08-04: samotné vypísanie nieèoho presunuté do hlavnej funkcie
+				sprintf(errmsg, "Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_MODLITBA));
+				strcat(bad_param_str, errmsg);
+				ret = FAILURE;
+				goto END_getForm;
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
 				mystrcpy(pom_MODLITBA, ptr, SMALL);
@@ -14724,9 +14738,11 @@ short int getForm(void){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
 			if(ptr == NULL){
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
-				ALERT;
-				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
-				return FAILURE; // failure
+				// 2013-08-04: samotné vypísanie nieèoho presunuté do hlavnej funkcie
+				sprintf(errmsg, "Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_DEN_V_TYZDNI));
+				strcat(bad_param_str, errmsg);
+				ret = FAILURE;
+				goto END_getForm;
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
 				mystrcpy(pom_DEN_V_TYZDNI, ptr, SMALL);
@@ -14741,9 +14757,11 @@ short int getForm(void){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_TYZDEN));
 			if(ptr == NULL){
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_TYZDEN));
-				ALERT;
-				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_TYZDEN));
-				return FAILURE; // failure
+				// 2013-08-04: samotné vypísanie nieèoho presunuté do hlavnej funkcie
+				sprintf(errmsg, "Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_TYZDEN));
+				strcat(bad_param_str, errmsg);
+				ret = FAILURE;
+				goto END_getForm;
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
 				mystrcpy(pom_TYZDEN, ptr, SMALL);
@@ -14758,9 +14776,11 @@ short int getForm(void){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_MODLITBA));
 			if(ptr == NULL){
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_MODLITBA));
-				ALERT;
-				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_MODLITBA));
-				return FAILURE; // failure
+				// 2013-08-04: samotné vypísanie nieèoho presunuté do hlavnej funkcie
+				sprintf(errmsg, "Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_MODLITBA));
+				strcat(bad_param_str, errmsg);
+				ret = FAILURE;
+				goto END_getForm;
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
 				mystrcpy(pom_MODLITBA, ptr, SMALL);
@@ -14775,9 +14795,11 @@ short int getForm(void){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_LIT_OBD));
 			if(ptr == NULL){
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_LIT_OBD));
-				ALERT;
-				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_LIT_OBD));
-				return FAILURE; // failure
+				// 2013-08-04: samotné vypísanie nieèoho presunuté do hlavnej funkcie
+				sprintf(errmsg, "Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_LIT_OBD));
+				strcat(bad_param_str, errmsg);
+				ret = FAILURE;
+				goto END_getForm;
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
 				mystrcpy(pom_LIT_OBD, ptr, SMALL);
@@ -14792,9 +14814,11 @@ short int getForm(void){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_LIT_ROK));
 			if(ptr == NULL){
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_LIT_ROK));
-				ALERT;
-				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_LIT_ROK));
-				return FAILURE; // failure
+				// 2013-08-04: samotné vypísanie nieèoho presunuté do hlavnej funkcie
+				sprintf(errmsg, "Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_LIT_ROK));
+				strcat(bad_param_str, errmsg);
+				ret = FAILURE;
+				goto END_getForm;
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
 				mystrcpy(pom_LIT_ROK, ptr, SMALL);
@@ -14814,9 +14838,11 @@ short int getForm(void){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_NAZOV_SVIATOK));
 			if(ptr == NULL){
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_NAZOV_SVIATOK));
-				ALERT;
-				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_NAZOV_SVIATOK));
-				return FAILURE; // failure
+				// 2013-08-04: samotné vypísanie nieèoho presunuté do hlavnej funkcie
+				sprintf(errmsg, "Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_NAZOV_SVIATOK));
+				strcat(bad_param_str, errmsg);
+				ret = FAILURE;
+				goto END_getForm;
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
 				mystrcpy(pom_SVIATOK, ptr, SMALL);
@@ -14836,9 +14862,11 @@ short int getForm(void){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_ANALYZA_ROKU));
 			if(ptr == NULL){
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_ANALYZA_ROKU));
-				ALERT;
-				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_ANALYZA_ROKU));
-				return FAILURE; // failure
+				// 2013-08-04: samotné vypísanie nieèoho presunuté do hlavnej funkcie
+				sprintf(errmsg, "Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_ANALYZA_ROKU));
+				strcat(bad_param_str, errmsg);
+				ret = FAILURE;
+				goto END_getForm;
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
 				mystrcpy(pom_ANALYZA_ROKU, ptr, SMALL);
@@ -14861,9 +14889,11 @@ short int getForm(void){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_MESIAC_ROKA));
 			if(ptr == NULL){
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_MESIAC_ROKA));
-				ALERT;
-				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_MESIAC_ROKA));
-				return FAILURE; // failure
+				// 2013-08-04: samotné vypísanie nieèoho presunuté do hlavnej funkcie
+				sprintf(errmsg, "Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_MESIAC_ROKA));
+				strcat(bad_param_str, errmsg);
+				ret = FAILURE;
+				goto END_getForm;
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
 				mystrcpy(pom_MESIAC, ptr, SMALL);
@@ -14878,9 +14908,11 @@ short int getForm(void){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_ROK_ROKA));
 			if(ptr == NULL){
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_ROK_ROKA));
-				ALERT;
-				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_ROK_ROKA));
-				return FAILURE; // failure
+				// 2013-08-04: samotné vypísanie nieèoho presunuté do hlavnej funkcie
+				sprintf(errmsg, "Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_ROK_ROKA));
+				strcat(bad_param_str, errmsg);
+				ret = FAILURE;
+				goto END_getForm;
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
 				mystrcpy(pom_ROK, ptr, SMALL);
@@ -14900,9 +14932,11 @@ short int getForm(void){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_ROK_FROM));
 			if(ptr == NULL){
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_ROK_FROM));
-				ALERT;
-				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_ROK_FROM));
-				return FAILURE; // failure
+				// 2013-08-04: samotné vypísanie nieèoho presunuté do hlavnej funkcie
+				sprintf(errmsg, "Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_ROK_FROM));
+				strcat(bad_param_str, errmsg);
+				ret = FAILURE;
+				goto END_getForm;
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
 				mystrcpy(pom_ROK_FROM, ptr, SMALL);
@@ -14918,9 +14952,11 @@ short int getForm(void){
 			ptr = getenv(ADD_WWW_PREFIX_(STR_ROK_TO));
 			if(ptr == NULL){
 				DEBUG_GET_FORM("%s neexistuje.\n", ADD_WWW_PREFIX_(STR_ROK_TO));
-				ALERT;
-				Export("Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_ROK_TO));
-				return FAILURE; // failure
+				// 2013-08-04: samotné vypísanie nieèoho presunuté do hlavnej funkcie
+				sprintf(errmsg, "Nebola vytvorená systémová premenná %s.\n", ADD_WWW_PREFIX_(STR_ROK_TO));
+				strcat(bad_param_str, errmsg);
+				ret = FAILURE;
+				goto END_getForm;
 			}
 			if(strcmp(ptr, STR_EMPTY) != 0)
 				mystrcpy(pom_ROK_TO, ptr, SMALL);
@@ -14945,10 +14981,17 @@ short int getForm(void){
 	else{
 		Log("getForm() -- end, returning FAILURE (neznamy typ dotazu qt)\n");
 		// neznamy typ dotazu
-		return FAILURE;
+		// 2013-08-04: samotné vypísanie nieèoho presunuté do hlavnej funkcie
+		sprintf(errmsg, "Neznámy typ dotazu (qt).\n");
+		strcat(bad_param_str, errmsg);
+		ret = FAILURE;
+		goto END_getForm;
 	}
-	Log("getForm() -- end, returning SUCCESS\n");
-	return SUCCESS;
+	ret = SUCCESS;
+
+END_getForm:
+	Log("getForm() -- end, returning %d.\n", ret);
+	return ret;
 }// getForm();
 
 //---------------------------------------------------------------------
