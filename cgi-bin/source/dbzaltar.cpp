@@ -23610,6 +23610,11 @@ label_25_MAR:
 						  (query_type != PRM_DETAILY))
 							set_spolocna_cast(sc, poradie_svaty);
 
+						// nemá popis
+						if((_global_jazyk != JAZYK_CZ) || (_global_jazyk != JAZYK_CZ_OP)){
+							set_popis_dummy();
+						}
+
 						modlitba = MODL_PRVE_VESPERY;
 						_vlastna_cast_full(modlitba);
 						_set_zalmy_premenenie(modlitba);
