@@ -5248,52 +5248,33 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 	if(_global_pocet_svatych > 0){
 
 		// treba pamatat na to, ze v poste sa vsetky spomienky stavaju lubovolnymi (c. 14 vseob. smernic)
-		if((_global_den.litobd == OBD_POSTNE_I) &&
-			(_global_svaty1.typslav == SLAV_SPOMIENKA)){
-			 _rozbor_dna_LOG("je pÙstne obdobie, tak menÌm `spomienku' na `æubovoæn˙ spomienku' pre _global_svaty1\n");
-			 _global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
-			 // 2006-01-20: doplnenÈ, lebo nezobrazovalo tieto æubovoænÈ spomienky
-			 if(_global_svaty1.smer < 12){
-				 _global_svaty1.smer = 12;
-			 }
-		}
-		else{
-			_rozbor_dna_LOG("nie je pÙstne obdobie, nie je potrebnÈ meniù spomienku na æubovoæn˙ spomienku (_global_svaty1)...\n");
-		}
-		// 2012-03-21: doplnenÈ: aj _global_svaty2 mÙûe maû v sebe "spomienku" (miestnu), preto treba opraviù aj toto
-		if((_global_den.litobd == OBD_POSTNE_I) && (_global_pocet_svatych > 1) &&
-			(_global_svaty2.typslav == SLAV_SPOMIENKA)){
-			 _rozbor_dna_LOG("je pÙstne obdobie, tak menÌm `spomienku' na `æubovoæn˙ spomienku' aj pre _global_svaty2\n");
-			 _global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
-			 // 2006-01-20: doplnenÈ, lebo nezobrazovalo tieto æubovoænÈ spomienky
-			 if(_global_svaty2.smer < 12){
-				 _global_svaty2.smer = 12;
-			 }
-		}
-		else{
-			_rozbor_dna_LOG("nie je pÙstne obdobie, nie je potrebnÈ meniù spomienku na æubovoæn˙ spomienku (_global_svaty2)...\n");
-		}
-		// 2012-03-21: doplnenÈ pre istotu: aj _global_svaty3 mÙûe maû v sebe "spomienku" (miestnu), preto treba opraviù aj toto
-		if((_global_den.litobd == OBD_POSTNE_I) && (_global_pocet_svatych > 2) &&
-			(_global_svaty3.typslav == SLAV_SPOMIENKA)){
-			 _rozbor_dna_LOG("je pÙstne obdobie, tak menÌm `spomienku' na `æubovoæn˙ spomienku' aj pre _global_svaty3\n");
-			 _global_svaty3.typslav = SLAV_LUB_SPOMIENKA;
-			 // 2006-01-20: doplnenÈ, lebo nezobrazovalo tieto æubovoænÈ spomienky
-			 if(_global_svaty3.smer < 12){
-				 _global_svaty3.smer = 12;
-			 }
-		}
-		else{
-			_rozbor_dna_LOG("nie je pÙstne obdobie, nie je potrebnÈ meniù spomienku na æubovoæn˙ spomienku (_global_svaty3)...\n");
+		// 2012-03-21: doplnenÈ: aj _global_svaty2/3 mÙûe maû v sebe "spomienku" (miestnu), preto treba opraviù aj toto
+		for(short int i = 0; i < MAX_POCET_SVATY; i++){
+			if((_global_den.litobd == OBD_POSTNE_I) && (_global_pocet_svatych > i) &&
+				(_global_svaty(i + 1).typslav == SLAV_SPOMIENKA)){
+				 _rozbor_dna_LOG("je pÙstne obdobie, tak menÌm `spomienku' na `æubovoæn˙ spomienku' aj pre _global_svaty(%d)\n", i + 1);
+				 _global_svaty(i + 1).typslav = SLAV_LUB_SPOMIENKA;
+				 // 2006-01-20: doplnenÈ, lebo nezobrazovalo tieto æubovoænÈ spomienky
+				 if(_global_svaty(i + 1).smer < 12){
+					 _global_svaty(i + 1).smer = 12;
+				 }
+			}
+			else{
+				_rozbor_dna_LOG("nie je pÙstne obdobie, nie je potrebnÈ meniù spomienku na æubovoæn˙ spomienku (_global_svaty(%d))...\n", i + 1);
+			}
 		}
 
 		short int podmienka_svaty_vedie = NIE;
+		short int podmienka_svaty_vedie_pom = NIE;
 		Log("_global_den.smer == %d...\n", _global_den.smer);
 		for(short int i = 0; i < MAX_POCET_SVATY; i++){
 			Log("_global_svaty(%d).smer == %d...\n", i + 1, _global_svaty(i + 1).smer);
 			// 2013-08-04: pridan· kontrola podmienky 'podmienka_svaty_vedie'
 			if((_global_den.smer > _global_svaty(i + 1).smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY(i + 1)){
 				podmienka_svaty_vedie = ANO;
+			}
+			if(_global_den.smer > _global_svaty(i + 1).smer){
+				podmienka_svaty_vedie_pom = ANO;
 			}
 		}
 
@@ -5361,7 +5342,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 			// neuprednostnujeme svatych pred dnom
 			_rozbor_dna_LOG("neuprednostÚujeme sv‰t˝ch pred dÚom (alternatÌva k SVATY_VEDIE)\n");
 			// 2010-10-06: upravenÈ; v tejto vetve rozhodovania treba rieöiù to, ûe nebola splnen· vyööie uveden· novo-upraven· podmienka o "prebitÌ" nedele napr. lok·lnou sl·vnosùou
-			if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
+			if(podmienka_svaty_vedie_pom == ANO){
 				_rozbor_dna_LOG("HOCI neuprednostÚujeme sv‰t˝ch pred dÚom (alternatÌva k SVATY_VEDIE), keÔûe je tu lok·lna sl·vnosù, ponech·vame nastavenÈ _global_pocet_svatych == %d\n", _global_pocet_svatych);
 			}
 			else{
@@ -5413,12 +5394,7 @@ short int _rozbor_dna(_struct_den_mesiac datum, short int rok, short int poradie
 				else{
 					_rozbor_dna_LOG("\tHmmm, pre sv‰tca nie je nastaven· spoloËn· Ëasù, nech·vam _global_opt[OPT_3_SPOLOCNA_CAST] tak ako je...\n");
 				}
-				/* pÙvodne - nespr·vne - som sem dnes, 2006-02-06, dal:
-					* _global_opt[OPT_3_SPOLOCNA_CAST] = 
-					*	poradie_svaty == 1 ? (_decode_spol_cast(_global_svaty1.spolcast)).a1 :
-					*	(poradie_svaty == 2 ? (_decode_spol_cast(_global_svaty2.spolcast)).a1 : 
-					*	(poradie_svaty == 3 ? (_decode_spol_cast(_global_svaty3.spolcast)).a1 : MODL_SPOL_CAST_PANNA_MARIA));
-					*/
+
 				_rozbor_dna_LOG("\tNastavil som _global_opt[OPT_3_SPOLOCNA_CAST] == %d (%s)...\n", 
 					_global_opt[OPT_3_SPOLOCNA_CAST], 
 					_global_opt[OPT_3_SPOLOCNA_CAST] <= MODL_SPOL_CAST_NEBRAT ? nazov_spolc(_global_opt[OPT_3_SPOLOCNA_CAST]) : STR_EMPTY);
@@ -6960,14 +6936,11 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 		// 2011-03-22: doplnenÈ "prvÈ veöpery"; mÙûu byù pre smer < 5 ale nie pre vöetky dni, preto t·to podmienka... | odvetvenÈ len ak je _global_opt 8 == ANO
 		// 2013-04-05: ToDo: dorieöiù pre vöelijakÈ öpeci·lne "konflikty", napr. 8. aprÌl 2013 (presunut· sl·vnosù Zvestovania P·na na pondelok po VeækonoËnej okt·ve) -- m· maù prvÈ veöpery? a pod.77
 		if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTON_PRVE_VESPERY) == BIT_OPT_2_BUTTON_PRVE_VESPERY){
-			// if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
 			smer = _global_den.smer;
-			smer = (smer > _global_svaty1.smer) ? _global_svaty1.smer : smer;
-			if(poradie_svateho == 2){
-				smer = (smer > _global_svaty2.smer) ? _global_svaty2.smer : smer;
-			}
-			if(poradie_svateho == 3){
-				smer = (smer > _global_svaty3.smer) ? _global_svaty3.smer : smer;
+			for(short int ii = 0; ii < MAX_POCET_SVATY; ii++){
+				if(poradie_svateho == ii + 1){
+					smer = (smer > _global_svaty(poradie_svateho).smer) ? _global_svaty(poradie_svateho).smer : smer;
+				}
 			}
 			if(
 			((smer < 5) ||
@@ -9897,6 +9870,7 @@ void _export_rozbor_dna_zoznam(short int typ){
 	init_zoznam();
 
 	short int podmienka_svaty_vedie = NIE;
+	short int podmienka_svaty_vedie_pom = NIE;
 	Log("_global_den.smer == %d...\n", _global_den.smer);
 	for(short int i = 0; i < MAX_POCET_SVATY; i++){
 		Log("_global_svaty(%d).smer == %d...\n", i + 1, _global_svaty(i + 1).smer);
@@ -9904,6 +9878,9 @@ void _export_rozbor_dna_zoznam(short int typ){
 		if((_global_den.smer > _global_svaty(i + 1).smer) && !MIESTNE_SLAVENIE_LOKAL_SVATY(i + 1)){
 			podmienka_svaty_vedie = ANO;
 			poradie_svaty_vedie = i + 1; // vyberie posledn˝!!!
+		}
+		if(_global_den.smer > _global_svaty(i + 1).smer){
+			podmienka_svaty_vedie_pom = ANO;
 		}
 	}
 
@@ -9920,10 +9897,9 @@ void _export_rozbor_dna_zoznam(short int typ){
 		// 2006-12-07: sl·vnosti sv‰t˝ch (k fixn˝m d·tumom: napr. 8.12., 29.6., 5.7., 15.8.), ktorÈ nepripadn˙ na nedeæu, neboli spr·vne zobrazovanÈ
 		// 2010-07-28: doplnenÈ alternatÌvne porovnanie aj s _global_svaty2.smer (kvÙli dominik·nskej sl·vnosti 8.8.)
 		// 2010-10-06: upravenÈ; nesmie Ìsù o lok·lnu sl·vnosù (smer == 4) lebo nem· prebÌjaù "glob·lnu" v danom kalend·ri [napr. czop pre 22.10.]
-		//             pÙvodne tu bolo: if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
 		// 2011-02-02: zadefinovanÈ MIESTNE_SLAVENIE_CZOP_SVATY(i), aby sa zjednoduöila podmienka (platÌ len pre CZOP)
 		// 2011-03-07: MIESTNE_SLAVENIE_CZOP_SVATY(i) pouûitÈ aj pre inÈ lok·lne sl·venia ako MIESTNE_SLAVENIE_LOKAL_SVATY(i)
-		if(podmienka_svaty_vedie){
+		if(podmienka_svaty_vedie == ANO){
 			poradie_svaty = poradie_svaty_vedie;
 			zoznam[pocet] = poradie_svaty;
 		}
@@ -9932,7 +9908,7 @@ void _export_rozbor_dna_zoznam(short int typ){
 			zoznam[pocet] = poradie_svaty;
 			// 2010-10-06: upravenÈ; v tejto vetve rozhodovania treba rieöiù to, ûe je splnen· z·kladn· podmienka (nedeæa alebo prik·zan˝ sviatok alebo smer < 5),
 			//             avöak nebola splnen· vyööie uveden· novo-upraven· podmienka o "prebitÌ" nedele napr. lok·lnou sl·vnosùou
-			if((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)){
+			if(podmienka_svaty_vedie_pom == ANO){
 				pocet = 2;
 				poradie_svaty = poradie_svaty_vedie;
 				zoznam[pocet] = poradie_svaty;
@@ -9942,7 +9918,7 @@ void _export_rozbor_dna_zoznam(short int typ){
 	else if(_global_pocet_svatych > 0){
 		// sviatky (spomienky, ls) svatych
 		// 2010-07-28: doplnenÈ alternatÌvne porovnanie aj s _global_svaty2.smer (kvÙli dominik·nskej sl·vnosti 8.8.)
-		if(((_global_den.smer > _global_svaty1.smer) || (_global_den.smer > _global_svaty2.smer) || (_global_den.smer > _global_svaty3.smer)) ||
+		if((podmienka_svaty_vedie_pom == ANO) ||
 			((_global_den.smer == 9) && (_global_svaty1.smer == 12))){
 		// svaty
 			// 2009-01-05: Vlado K. ma upozornil, ûe ak je smer sv‰t˝ == 12, ale deÚ je 9 (bod 59. smernÌc o LH a kalend·ri, Ë. 12), bolo by lepöie pon˙knuù najprv deÚ a aû potom ostatnÈ sl·venia 

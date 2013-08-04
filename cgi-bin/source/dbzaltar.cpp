@@ -227,20 +227,14 @@ short int su_zalmy_vlastne(short int m){
 	short int ret;
 	ret = FALSE;
 	if(!((m == MODL_PREDPOLUDNIM) || (m == MODL_NAPOLUDNIE) || (m == MODL_POPOLUDNI))){
-		switch(_global_poradie_svaty){
-			case 0: if((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK))
-						ret = TRUE;
-				break;
-			case 1: if((_global_svaty1.typslav == SLAV_SLAVNOST) || (_global_svaty1.typslav == SLAV_SVIATOK))
-						ret = TRUE;
-				break;
-			case 2: if((_global_svaty2.typslav == SLAV_SLAVNOST) || (_global_svaty2.typslav == SLAV_SVIATOK))
-						ret = TRUE;
-				break;
-			case 3: if((_global_svaty3.typslav == SLAV_SLAVNOST) || (_global_svaty3.typslav == SLAV_SVIATOK))
-						ret = TRUE;
-				break;
-		}// swicht(_global_poradie_svaty)
+		if(_global_poradie_svaty == 0){
+			if((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK))
+				ret = TRUE;
+		}
+		else if(_global_poradie_svaty != PORADIE_PM_SOBOTA){
+			if((_global_svaty(_global_poradie_svaty).typslav == SLAV_SLAVNOST) || (_global_svaty(_global_poradie_svaty).typslav == SLAV_SVIATOK))
+				ret = TRUE;
+		}
 		if(_global_den.denvt == DEN_NEDELA){
 			ret = TRUE;
 		}// DEN_NEDELA
@@ -260,20 +254,14 @@ short int su_zalmy_prve_vespery_vlastne(short int m){
 	short int ret;
 	ret = FALSE;
 	if((m == MODL_PRVE_VESPERY) || (m == MODL_VESPERY)){
-		switch(_global_poradie_svaty){
-			case 0: if(_global_den.typslav == SLAV_SLAVNOST)
-						ret = TRUE;
-				break;
-			case 1: if(_global_svaty1.typslav == SLAV_SLAVNOST)
-						ret = TRUE;
-				break;
-			case 2: if(_global_svaty2.typslav == SLAV_SLAVNOST)
-						ret = TRUE;
-				break;
-			case 3: if(_global_svaty3.typslav == SLAV_SLAVNOST)
-						ret = TRUE;
-				break;
-		}// swicht(_global_poradie_svaty)
+		if(_global_poradie_svaty == 0){
+			if(_global_den.typslav == SLAV_SLAVNOST)
+				ret = TRUE;
+		}
+		else if(_global_poradie_svaty != PORADIE_PM_SOBOTA){
+			if(_global_svaty(_global_poradie_svaty).typslav == SLAV_SLAVNOST)
+				ret = TRUE;
+		}
 		if(_global_den.denvt == DEN_NEDELA){
 			ret = TRUE;
 		}// DEN_NEDELA
@@ -294,20 +282,14 @@ short int su_inv_hymnus_kcit_kresp_benmagn_prosby_vlastne(short int m){
 	short int ret;
 	ret = FALSE;
 	if(!((m == MODL_PREDPOLUDNIM) || (m == MODL_NAPOLUDNIE) || (m == MODL_POPOLUDNI))){
-		switch(_global_poradie_svaty){
-			case 0: if((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (((_global_den.typslav == SLAV_SPOMIENKA) || (_global_den.typslav == SLAV_LUB_SPOMIENKA)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SPOMIENKA_SPOL_CAST) == BIT_OPT_1_SPOMIENKA_SPOL_CAST)))
-						ret = TRUE;
-				break;
-			case 1: if((_global_svaty1.typslav == SLAV_SLAVNOST) || (_global_svaty1.typslav == SLAV_SVIATOK) || (((_global_svaty1.typslav == SLAV_SPOMIENKA) || (_global_svaty1.typslav == SLAV_LUB_SPOMIENKA)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SPOMIENKA_SPOL_CAST) == BIT_OPT_1_SPOMIENKA_SPOL_CAST)))
-						ret = TRUE;
-				break;
-			case 2: if((_global_svaty2.typslav == SLAV_SLAVNOST) || (_global_svaty2.typslav == SLAV_SVIATOK) || (((_global_svaty2.typslav == SLAV_SPOMIENKA) || (_global_svaty2.typslav == SLAV_LUB_SPOMIENKA)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SPOMIENKA_SPOL_CAST) == BIT_OPT_1_SPOMIENKA_SPOL_CAST)))
-						ret = TRUE;
-				break;
-			case 3: if((_global_svaty3.typslav == SLAV_SLAVNOST) || (_global_svaty3.typslav == SLAV_SVIATOK) || (((_global_svaty3.typslav == SLAV_SPOMIENKA) || (_global_svaty3.typslav == SLAV_LUB_SPOMIENKA)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SPOMIENKA_SPOL_CAST) == BIT_OPT_1_SPOMIENKA_SPOL_CAST)))
-						ret = TRUE;
-				break;
-		}// swicht(_global_poradie_svaty)
+		if(_global_poradie_svaty == 0){
+			if((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK) || (((_global_den.typslav == SLAV_SPOMIENKA) || (_global_den.typslav == SLAV_LUB_SPOMIENKA)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SPOMIENKA_SPOL_CAST) == BIT_OPT_1_SPOMIENKA_SPOL_CAST)))
+				ret = TRUE;
+		}
+		else if(_global_poradie_svaty != PORADIE_PM_SOBOTA){
+			if((_global_svaty(_global_poradie_svaty).typslav == SLAV_SLAVNOST) || (_global_svaty(_global_poradie_svaty).typslav == SLAV_SVIATOK) || (((_global_svaty(_global_poradie_svaty).typslav == SLAV_SPOMIENKA) || (_global_svaty(_global_poradie_svaty).typslav == SLAV_LUB_SPOMIENKA)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SPOMIENKA_SPOL_CAST) == BIT_OPT_1_SPOMIENKA_SPOL_CAST)))
+				ret = TRUE;
+		}
 	}// nie mcd
 	// pre 2.11. sa vlastný hymnus berie aj pre modlitbu cez deò
 	if((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)){
@@ -324,20 +306,14 @@ short int je_1cit_vlastne(short int m){
 	short int ret;
 	ret = FALSE;
 	if(m == MODL_POSV_CITANIE){
-		switch(_global_poradie_svaty){
-			case 0: if((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK))
-						ret = TRUE;
-				break;
-			case 1: if((_global_svaty1.typslav == SLAV_SLAVNOST) || (_global_svaty1.typslav == SLAV_SVIATOK))
-						ret = TRUE;
-				break;
-			case 2: if((_global_svaty2.typslav == SLAV_SLAVNOST) || (_global_svaty2.typslav == SLAV_SVIATOK))
-						ret = TRUE;
-				break;
-			case 3: if((_global_svaty3.typslav == SLAV_SLAVNOST) || (_global_svaty3.typslav == SLAV_SVIATOK))
-						ret = TRUE;
-				break;
-		}// swicht(_global_poradie_svaty)
+		if(_global_poradie_svaty == 0){
+			if((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK))
+				ret = TRUE;
+		}
+		else if(_global_poradie_svaty != PORADIE_PM_SOBOTA){
+			if((_global_svaty(_global_poradie_svaty).typslav == SLAV_SLAVNOST) || (_global_svaty(_global_poradie_svaty).typslav == SLAV_SVIATOK))
+				ret = TRUE;
+		}
 		if((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)){
 			ret = TRUE;
 		}// NOV02 == 02NOV
@@ -354,35 +330,23 @@ short int su_antifony_vlastne(short int m){
 	Log("su_antifony_vlastne(%d): ", m);
 	short int ret;
 	ret = FALSE;
-	switch(_global_poradie_svaty){
-		case 0: if(_global_den.typslav == SLAV_SLAVNOST)
-					ret = TRUE;
-			break;
-		case 1: if(_global_svaty1.typslav == SLAV_SLAVNOST)
-					ret = TRUE;
-			break;
-		case 2: if(_global_svaty2.typslav == SLAV_SLAVNOST)
-					ret = TRUE;
-			break;
-		case 3: if(_global_svaty3.typslav == SLAV_SLAVNOST)
-					ret = TRUE;
-			break;
-	}// swicht(_global_poradie_svaty)
+	if(_global_poradie_svaty == 0){
+		if(_global_den.typslav == SLAV_SLAVNOST)
+			ret = TRUE;
+	}
+	else if(_global_poradie_svaty != PORADIE_PM_SOBOTA){
+		if(_global_svaty(_global_poradie_svaty).typslav == SLAV_SLAVNOST)
+			ret = TRUE;
+	}
 	if((m == MODL_RANNE_CHVALY) || (m == MODL_POSV_CITANIE) || (m == MODL_VESPERY)){
-		switch(_global_poradie_svaty){
-			case 0: if((_global_den.typslav == SLAV_SVIATOK) /* || ((_global_den.typslav == SLAV_SPOMIENKA) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALMY_ZO_SVIATKU) == BIT_OPT_1_ZALMY_ZO_SVIATKU)) */)
-						ret = TRUE;
-				break;
-			case 1: if((_global_svaty1.typslav == SLAV_SVIATOK) /* || ((_global_svaty1.typslav == SLAV_SPOMIENKA) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALMY_ZO_SVIATKU) == BIT_OPT_1_ZALMY_ZO_SVIATKU)) */)
-						ret = TRUE;
-				break;
-			case 2: if((_global_svaty2.typslav == SLAV_SVIATOK) /* || ((_global_svaty2.typslav == SLAV_SPOMIENKA) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALMY_ZO_SVIATKU) == BIT_OPT_1_ZALMY_ZO_SVIATKU)) */)
-						ret = TRUE;
-				break;
-			case 3: if((_global_svaty3.typslav == SLAV_SVIATOK) /* || ((_global_svaty3.typslav == SLAV_SPOMIENKA) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALMY_ZO_SVIATKU) == BIT_OPT_1_ZALMY_ZO_SVIATKU)) */)
-						ret = TRUE;
-				break;
-		}// swicht(_global_poradie_svaty)
+		if(_global_poradie_svaty == 0){
+			if((_global_den.typslav == SLAV_SVIATOK) /* || ((_global_den.typslav == SLAV_SPOMIENKA) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALMY_ZO_SVIATKU) == BIT_OPT_1_ZALMY_ZO_SVIATKU)) */)
+				ret = TRUE;
+		}
+		else if(_global_poradie_svaty != PORADIE_PM_SOBOTA){
+			if((_global_svaty(_global_poradie_svaty).typslav == SLAV_SVIATOK) /* || ((_global_svaty(_global_poradie_svaty).typslav == SLAV_SPOMIENKA) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_ZALMY_ZO_SVIATKU) == BIT_OPT_1_ZALMY_ZO_SVIATKU)) */)
+				ret = TRUE;
+		}
 	}// rch, pc, v
 	// pre 2.11. sa vlastné antifóny berú aj pre modlitbu cez deò
 	if((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)){
@@ -404,20 +368,14 @@ short int su_kcit_kresp_modlitba_mcd_vlastne(short int m){
 	short int ret;
 	ret = FALSE;
 	if((m == MODL_PREDPOLUDNIM) || (m == MODL_NAPOLUDNIE) || (m == MODL_POPOLUDNI)){
-		switch(_global_poradie_svaty){
-			case 0: if((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK))
-						ret = TRUE;
-				break;
-			case 1: if((_global_svaty1.typslav == SLAV_SLAVNOST) || (_global_svaty1.typslav == SLAV_SVIATOK))
-						ret = TRUE;
-				break;
-			case 2: if((_global_svaty2.typslav == SLAV_SLAVNOST) || (_global_svaty2.typslav == SLAV_SVIATOK))
-						ret = TRUE;
-				break;
-			case 3: if((_global_svaty3.typslav == SLAV_SLAVNOST) || (_global_svaty3.typslav == SLAV_SVIATOK))
-						ret = TRUE;
-				break;
-		}// swicht(_global_poradie_svaty)
+		if(_global_poradie_svaty == 0){
+			if((_global_den.typslav == SLAV_SLAVNOST) || (_global_den.typslav == SLAV_SVIATOK))
+				ret = TRUE;
+		}
+		else if(_global_poradie_svaty != PORADIE_PM_SOBOTA){
+			if((_global_svaty(_global_poradie_svaty).typslav == SLAV_SLAVNOST) || (_global_svaty(_global_poradie_svaty).typslav == SLAV_SVIATOK))
+				ret = TRUE;
+		}
 	}// mcd
 	// pre 2.11. sa pre modlitbu cez deò berú vlastné èasti
 	if((_global_den.den == 2) && (_global_den.mesiac - 1 == MES_NOV)){
@@ -9103,9 +9061,9 @@ short int _spol_cast_je_panna(_struct_sc sc){
 	Log("_global_poradie_svaty = %d\n", _global_poradie_svaty);\
 	Log("force = %d\n", force);\
 	Log("_global_den.typslav = %d\n", _global_den.typslav);\
-	Log("_global_svaty1.typslav = %d\n", _global_svaty1.typslav);\
-	Log("_global_svaty2.typslav = %d\n", _global_svaty2.typslav);\
-	Log("_global_svaty3.typslav = %d\n", _global_svaty3.typslav);\
+	for(short int i = 0; i < MAX_POCET_SVATY; i++){\
+		Log("_global_svaty(%d).typslav = %d\n", i + 1, _global_svaty(i + 1).typslav);\
+	}\
 	if(!((modl == MODL_PREDPOLUDNIM) || (modl == MODL_NAPOLUDNIE) || (modl == MODL_POPOLUDNI))){\
 		_spolocna_cast_hymnus(modl, _global_den.litobd);\
 	}\
@@ -10868,44 +10826,43 @@ short int sviatky_svatych(short int den, short int mesiac, short int poradie_sva
 	Log("-- sviatky_svatych(%d, %d) -- zaciatok\n", den, mesiac);
 
 	// nasledujuca pasaz v pripade, ze poradie_svaty nie je dane (t.j. nie je 1, 2 alebo 3) vycisti udaje; to je vtedy, ked je tato funkcia volana po prvykrat
-	if((poradie_svaty < 1) || (poradie_svaty > 3)){ // napr. aj UNKNOWN_PORADIE_SVATEHO
-		// deò
-		_global_svaty1.den = _global_svaty2.den = _global_svaty3.den = den;
-		// mesiac
-		_global_svaty1.mesiac = _global_svaty2.mesiac = _global_svaty3.mesiac = mesiac;
-		// rok
-		_global_svaty1.rok = _global_svaty2.rok = _global_svaty3.rok = _global_den.rok;
-		// denvt
-		_global_svaty1.denvt = _global_svaty2.denvt = _global_svaty3.denvt = _global_den.denvt;
-		// denvr
-		_global_svaty1.denvr = _global_svaty2.denvr = _global_svaty3.denvr = _global_den.denvr;
-		// smer
-		_global_svaty1.smer = _global_svaty2.smer = _global_svaty3.smer = _global_den.smer;
-		// litobd
-		_global_svaty1.litobd = _global_svaty2.litobd = _global_svaty3.litobd = _global_den.litobd;
-		// litrok
-		_global_svaty1.litrok = _global_svaty2.litrok = _global_svaty3.litrok = _global_den.litrok;
-		// tyzden
-		_global_svaty1.tyzden = _global_svaty2.tyzden = _global_svaty3.tyzden = _global_den.tyzden;
-		// tyzzal
-		_global_svaty1.tyzzal = _global_svaty2.tyzzal = _global_svaty3.tyzzal = _global_den.tyzzal;
-		// typslav - neurcena
-		_global_svaty1.typslav = _global_svaty2.typslav = _global_svaty3.typslav = SLAV_NEURCENE;
-		// typ lokálneho slávenia - neurèené; pridané 2005-07-27
-		_global_svaty1.typslav_lokal = _global_svaty2.typslav_lokal = _global_svaty3.typslav_lokal = LOKAL_SLAV_NEURCENE;
-		// prik - nie je prikazany
-		_global_svaty1.prik = _global_svaty2.prik = _global_svaty3.prik = NIE_JE_PRIKAZANY_SVIATOK;
-		// meno - neurcene
-		mystrcpy(_global_svaty1.meno, STR_EMPTY, MENO_SVIATKU);
-		mystrcpy(_global_svaty2.meno, STR_EMPTY, MENO_SVIATKU);
-		mystrcpy(_global_svaty3.meno, STR_EMPTY, MENO_SVIATKU);
-		// spolcast - neurcena
-		_global_svaty1.spolcast = _global_svaty2.spolcast = _global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
-		Log("nastavil som _global_svaty[1,2,3] na default (bud neurcene alebo z _global_den)\n");
-		_global_svaty1.farba = _global_svaty2.farba = _global_svaty3.farba = LIT_FARBA_NEURCENA;
-		_global_svaty1.kalendar = KALENDAR_NEURCENY;
-		_global_svaty2.kalendar = KALENDAR_NEURCENY;
-		_global_svaty3.kalendar = KALENDAR_NEURCENY;
+	if((poradie_svaty < 1) || (poradie_svaty > MAX_POCET_SVATY)){ // napr. aj UNKNOWN_PORADIE_SVATEHO
+		for(short int i = 0; i < MAX_POCET_SVATY; i++){
+			short int p = i + 1;
+			// deò
+			_global_svaty(p).den = den;
+			// mesiac
+			_global_svaty(p).mesiac = mesiac;
+			// rok
+			_global_svaty(p).rok = _global_den.rok;
+			// denvt
+			_global_svaty(p).denvt = _global_den.denvt;
+			// denvr
+			_global_svaty(p).denvr = _global_den.denvr;
+			// smer
+			_global_svaty(p).smer = _global_den.smer;
+			// litobd
+			_global_svaty(p).litobd = _global_den.litobd;
+			// litrok
+			_global_svaty(p).litrok = _global_den.litrok;
+			// tyzden
+			_global_svaty(p).tyzden = _global_den.tyzden;
+			// tyzzal
+			_global_svaty(p).tyzzal = _global_den.tyzzal;
+			// typslav - neurcena
+			_global_svaty(p).typslav = SLAV_NEURCENE;
+			// typ lokálneho slávenia - neurèené; pridané 2005-07-27
+			_global_svaty(p).typslav_lokal = LOKAL_SLAV_NEURCENE;
+			// prik - nie je prikazany
+			_global_svaty(p).prik = NIE_JE_PRIKAZANY_SVIATOK;
+			// meno - neurcene
+			mystrcpy(_global_svaty(p).meno, STR_EMPTY, MENO_SVIATKU);
+			// spolcast - neurcena
+			_global_svaty(p).spolcast = _encode_spol_cast(MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA, MODL_SPOL_CAST_NEURCENA);
+			Log("nastavil som _global_svaty(%d) na default (bud neurcene alebo z _global_den)\n", p);
+			_global_svaty(p).farba = LIT_FARBA_NEURCENA;
+			_global_svaty(p).kalendar = KALENDAR_NEURCENY;
+		}
 	}
 	else{
 		// povodne tu bola pasaz, ktora podla poradie_svaty nastavila do _global_den = _global_svaty[1,2,3], tato pasaz je teraz na zaciatku sviatky_svatych() so styrmi vstupmi/argumentami
@@ -32002,22 +31959,12 @@ label_8_DEC:
 		Log("slávenie je urèené, poèet == %d\n", pocet);
 		Log("\tštruktúra sc == ({%s, %s, %s})\n", nazov_spolc(sc.a1), nazov_spolc(sc.a2), nazov_spolc(sc.a3));
 
-		Log(_global_svaty1);
-		_global_svaty1.den = den;
-		_global_svaty1.mesiac = mesiac;
-		Log("  %d. %d: %s (typslav = %d) [smer = %d]\n", _global_svaty1.den, _global_svaty1.mesiac, _global_svaty1.meno, _global_svaty1.typslav, _global_svaty1.smer);
-		// mozno je druha lubovolna spomienka
-		if(pocet > 1){
-			Log(_global_svaty2);
-			_global_svaty2.den = den;
-			_global_svaty2.mesiac = mesiac;
-			Log("  %d. %d: %s (typslav = %d) [smer = %d]\n", _global_svaty2.den, _global_svaty2.mesiac, _global_svaty2.meno, _global_svaty2.typslav, _global_svaty2.smer);
-			// este dalsi
-			if(pocet > 2){
-				Log(_global_svaty3);
-				_global_svaty3.den = den;
-				_global_svaty3.mesiac = mesiac;
-				Log("  %d. %d: %s (typslav = %d) [smer = %d]\n", _global_svaty3.den, _global_svaty3.mesiac, _global_svaty3.meno, _global_svaty3.typslav, _global_svaty3.smer);
+		for(short int i = 0; i < MAX_POCET_SVATY; i++){
+			if(pocet > i){
+				Log(_global_svaty(i + 1));
+				_global_svaty(i + 1).den = den;
+				_global_svaty(i + 1).mesiac = mesiac;
+				Log("  %d. %d: %s (typslav = %d) [smer = %d]\n", _global_svaty(i + 1).den, _global_svaty(i + 1).mesiac, _global_svaty(i + 1).meno, _global_svaty(i + 1).typslav, _global_svaty(i + 1).smer);
 			}
 		}
 	}
