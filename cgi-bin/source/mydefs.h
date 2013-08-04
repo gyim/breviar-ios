@@ -92,7 +92,7 @@
 //* EOF of former file mybase.h                                 *
 //***************************************************************
 
-#define MAX_POCET_SVATY 3
+#define MAX_POCET_SVATY 5
 #define PORADIE_PM_SOBOTA  (MAX_POCET_SVATY + 1)
 
 // Nazvy programov, suborov, skriptov...
