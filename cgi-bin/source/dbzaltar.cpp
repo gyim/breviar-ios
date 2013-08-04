@@ -8497,7 +8497,7 @@ label_24_DEC:
 	// najprv priradime do _local_den to, co tam ma byt
 	if(poradie_svateho > 0){
 		// sviatky (spomienky, ls) svatych
-		if(poradie_svateho = PORADIE_PM_SOBOTA){
+		if(poradie_svateho == PORADIE_PM_SOBOTA){
 			// do _local_den priradim slavenie pm v sobotu v dalsom
 			_local_den = _global_pm_sobota;
 			// ale predsalen aspon _local_den = _global_pm_sobota; urobim tu
