@@ -24857,35 +24857,46 @@ label_25_MAR:
 						break;
 					}
 					// 2006-09-11: pridané
-					else if((_global_jazyk == JAZYK_CZ) && (poradie_svaty == 3)){
-						// definovanie parametrov pre modlitbu
-						if(query_type != PRM_DETAILY)
-							set_spolocna_cast(sc, poradie_svaty);
+					else if(_global_jazyk == JAZYK_CZ){
+						if(poradie_svaty == 3){
+							// definovanie parametrov pre modlitbu
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
 
-						modlitba = MODL_RANNE_CHVALY;
-						_vlastna_cast_benediktus;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_RANNE_CHVALY;
+							_vlastna_cast_benediktus;
+							_vlastna_cast_modlitba;
 
-						modlitba = MODL_POSV_CITANIE;
-						_vlastna_cast_modlitba;
-						_vlastna_cast_2citanie;
+							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_modlitba;
+							_vlastna_cast_2citanie;
 
-						modlitba = MODL_VESPERY;
-						_vlastna_cast_magnifikat;
-						_vlastna_cast_modlitba;
+							modlitba = MODL_VESPERY;
+							_vlastna_cast_magnifikat;
+							_vlastna_cast_modlitba;
 
-						break;
-					}
+							break;
+						}
+						else if(poradie_svaty == 4){
+							// definovanie parametrov pre modlitbu
+							if(query_type != PRM_DETAILY)
+								set_spolocna_cast(sc, poradie_svaty);
+
+							break;
+						}
+					}// CZ
 					_global_svaty1.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty1.smer = 12; // ¾ubovo¾né spomienky
 					mystrcpy(_global_svaty1.meno, text_AUG_25_1[_global_jazyk], MENO_SVIATKU);
 					_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_SV_MUZ_VYCH, MODL_SPOL_CAST_DUCH_PAST_KNAZ);
 					_global_svaty1.farba = LIT_FARBA_BIELA;
 					_global_svaty1.kalendar = KALENDAR_VSEOBECNY;
-					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)) // 2010-08-03: pridané aj CZOP
-						pocet = 3;
-					else
+					if((_global_jazyk == JAZYK_CZ) || (_global_jazyk == JAZYK_CZ_OP)){ // 2010-08-03: pridané aj CZOP
+						pocet = 4;
+					}
+					else{
 						pocet = 2;
+					}
 					_global_svaty2.typslav = SLAV_LUB_SPOMIENKA;
 					_global_svaty2.smer = 12; // ¾ubovo¾né spomienky
 					mystrcpy(_global_svaty2.meno, text_AUG_25_2[_global_jazyk], MENO_SVIATKU);
@@ -24900,6 +24911,14 @@ label_25_MAR:
 						_global_svaty3.spolcast = _encode_spol_cast(MODL_SPOL_CAST_VIAC_MUCENIKOV);
 						_global_svaty3.farba = LIT_FARBA_CERVENA;
 						_global_svaty3.kalendar = KALENDAR_VSEOBECNY_CZ;
+
+						_global_svaty4.typslav = SLAV_SPOMIENKA;
+						_global_svaty4.smer = 11; // miestne povinné spomienky
+						_global_svaty4.typslav_lokal = LOKAL_SLAV_OSTRAVA_OPAVA;
+						mystrcpy(_global_svaty4.meno, text_AUG_25_2_CZ[_global_jazyk], MENO_SVIATKU);
+						_global_svaty4.spolcast = _encode_spol_cast(MODL_SPOL_CAST_MUCENIK);
+						_global_svaty4.farba = LIT_FARBA_CERVENA;
+						_global_svaty4.kalendar = KALENDAR_VSEOBECNY_CZ;
 					}
 
 					if(_global_jazyk == JAZYK_HU){
