@@ -23621,16 +23621,8 @@ label_25_MAR:
 						modlitba = MODL_INVITATORIUM;
 						_vlastna_cast_antifona_inv;
 
+						// 2013-08-06: ûalmy s˙ z beûnÈho dÚa (LH, zv. IV, str. 1306)
 						_vlastna_cast_mcd_ant_kcitresp_modl;
-
-						// 2008-06-30: prevzatÈ podæa 15. augusta
-						// 2006-02-04: ak je modlitba cez deÚ na sl·vnosù, tak by sa mali pouûiù ûalmy z doplnkovej psalmÛdie
-						if(_global_den.denvt != DEN_NEDELA) {
-							_set_zalmy_mcd_doplnkova_psalmodia();
-						}
-						else {
-							_set_zalmy_1nedele_mcd();
-						}
 
 						modlitba = MODL_RANNE_CHVALY;
 						_vlastna_cast_full(modlitba);
