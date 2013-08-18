@@ -625,6 +625,16 @@ extern const char *text_AUG_18_2_OFM[POCET_JAZYKOV + 1];
 extern const char *text_AUG_19_OFM[POCET_JAZYKOV + 1];
 extern const char *text_AUG_23_OFM[POCET_JAZYKOV + 1];
 extern const char *text_AUG_25_OFM[POCET_JAZYKOV + 1];
+extern const char *text_SEP_02_1_OFM[POCET_JAZYKOV + 1];
+extern const char *text_SEP_02_2_OFM[POCET_JAZYKOV + 1];
+extern const char *text_SEP_04_OFM[POCET_JAZYKOV + 1];
+extern const char *text_SEP_17_OFM[POCET_JAZYKOV + 1];
+extern const char *text_SEP_18_OFM[POCET_JAZYKOV + 1];
+extern const char *text_SEP_19_OFM[POCET_JAZYKOV + 1];
+extern const char *text_SEP_22_OFM[POCET_JAZYKOV + 1];
+extern const char *text_SEP_23_OFM[POCET_JAZYKOV + 1];
+extern const char *text_SEP_26_OFM[POCET_JAZYKOV + 1];
+extern const char *text_SEP_28_OFM[POCET_JAZYKOV + 1];
 
 // --------------- OP propriá ---------------
 extern const char *text_JAN_10_1_OP[POCET_JAZYKOV + 1];

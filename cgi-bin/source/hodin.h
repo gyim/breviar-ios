@@ -6440,6 +6440,24 @@ const char *text_SEP_02_2_OP[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_SEP_02_1_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. Jána Františka Burtého, kòaza a muèeníka,"HTML_LINE_BREAK"èlena 1. rádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_SEP_02_2_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. Apolinára z Posatu, kòaza, èlena 1. rádu,"HTML_LINE_BREAK"a spoloèníkov, muèeníkov",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_SEP_03[POCET_JAZYKOV + 1] = 
 {"Sv. Gregora Ve¾kého, pápeža a uèite¾a Cirkvi",
  "Sv. Øehoøe Velikého, papeže a uèitele církve",
@@ -6451,6 +6469,15 @@ const char *text_SEP_03[POCET_JAZYKOV + 1] =
  };
 const char *text_SEP_04_OP[POCET_JAZYKOV + 1] = 
 {"Bl. Kataríny z Racconigi, panny",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_SEP_04_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Ruženy z Viterba, panny, èlenky 3. rádu",
  "",
  "",
  "",
@@ -6656,6 +6683,24 @@ const char *text_SEP_17_SJ[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_SEP_17_OFM[POCET_JAZYKOV + 1] = 
+{"Stigmatizácia nášho otca sv. Františka",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_SEP_18_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Jozefa Kupertínskeho, kòaza, èlena 1. rádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_SEP_18_OP[POCET_JAZYKOV + 1] = 
 {"Sv. Jána Macíasa, reho¾níka",
  "",
@@ -6673,6 +6718,15 @@ const char *text_SEP_19[POCET_JAZYKOV + 1] =
  "",
  "Sv. Januária, biskupa a muèedníka",
  "Szent Januáriusz püspök és vértanú",
+ };
+const char *text_SEP_19_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Františka Márie z Camporossa,"HTML_LINE_BREAK"reho¾níka, èlena 1. rádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_SEP_20[POCET_JAZYKOV + 1] = 
 {"Sv. Andreja Kim Taegona, kòaza,"HTML_LINE_BREAK"a sv. Pavla Chong Hasanga a spoloèníkov, muèeníkov",
@@ -6728,6 +6782,15 @@ const char *text_SEP_22_2_OP[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_SEP_22_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Ignáca zo Santhie, kòaza, èlena 1. rádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_SEP_22_SDB[POCET_JAZYKOV + 1] = 
 {"Bl. Jozefa Calasanza a Enrica Saiz Aparicio, kòazov, "HTML_LINE_BREAK"a 93 spoloèníkov, muèeníkov",
  "",
@@ -6739,6 +6802,15 @@ const char *text_SEP_22_SDB[POCET_JAZYKOV + 1] =
  };
 const char *text_SEP_23[POCET_JAZYKOV + 1] = 
 {"Sv. Pia z Pietrelèiny, kòaza",
+ "Sv. Pia z Pietrelciny, knìze",
+ "",
+ "",
+ "",
+ "Sv. Pia z Pietrelciny, knìze",
+ "Pietrelcinai Szent Pio áldozópap",
+ };
+const char *text_SEP_23_OFM[POCET_JAZYKOV + 1] = 
+{"Sv. Pia z Pietrelciny, kòaza, èlena 1. rádu",
  "Sv. Pia z Pietrelciny, knìze",
  "",
  "",
@@ -6809,6 +6881,15 @@ const char *text_SEP_26_OP[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_SEP_26_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. Aurélia z Vinalesy, kòaza, a spoloèníkov,"HTML_LINE_BREAK"muèeníkov, èlenov 1. rádu",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_SEP_27[POCET_JAZYKOV + 1] = 
 {"Sv. Vincenta de Paul, kòaza",
  "Sv. Vincence z Paula, knìze",
@@ -6824,7 +6905,7 @@ const char *text_SEP_28[POCET_JAZYKOV + 1] =
  "",
  "",
  "",
- "Sv. Václava, muèedníka, hlavního patrona èeského národa, hlavního patrona provincie",
+ "Sv. Václava, muèedníka, hlavního patrona èeského národa,"HTML_LINE_BREAK"hlavního patrona provincie",
  "Szent Vencel vértanú",
  };
 const char *text_SEP_28_2[POCET_JAZYKOV + 1] = 
@@ -6843,6 +6924,15 @@ const char *text_SEP_28_OP[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Dominika Ibanìze z Erquicia, Jakuba Kyušei Tomonagy, knìží,"HTML_LINE_BREAK"Vavøince Ruize, otce rodiny, a druhù, japonských muèedníkù", // CZOP kvôli sv. Václavovi slávia 26SEP
+ "",
+ };
+const char *text_SEP_28_OFM[POCET_JAZYKOV + 1] = 
+{"Bl. Inocenta z Berza, kòaza, èlena 1. rádu",
+ "",
+ "",
+ "",
+ "",
+ "",
  "",
  };
 const char *text_SEP_29[POCET_JAZYKOV + 1] = 
