@@ -2321,10 +2321,10 @@ void _set_zalmy_pc_145(short int modlitba){
 }
 
 // 2013-08-22: vytvorenÈ, prevzatÈ Ëasti z zaltar_zvazok() pre MCD
-void set_zalmy_mcd_zaltar(short int den, short int tyzzal, short int modlitba){
-	Log("set_zalmy_mcd_zaltar(%d, %d, %d) -- begin\n", den, tyzzal, modlitba);
+void _set_zalmy_mcd_zaltar(short int den, short int tyzzal, short int modlitba){
+	Log("_set_zalmy_mcd_zaltar(%d [%s], %d. t˝ûdeÚ ûalt·ra, %d [%s]) -- begin\n", den, nazov_dna(den), tyzzal, modlitba, nazov_modlitby(modlitba));
 
-	Log("nastavujem ûalmy pre MCD (pre jednotliv˝ t˝ûdeÚ ûalt·ra)...\n");
+	Log("nastavujem ûalmy pre MCD (pre jednotliv˝ t˝ûdeÚ ûalt·ra a konkrÈtnu modlitbu (hodinku) z modlitby cez deÚ)...\n");
 	switch(tyzzal){
 		case 1: // 1. t˝ûdeÚ ûalt·ra -- zaËiatok
 			switch(den){
@@ -2363,6 +2363,7 @@ void set_zalmy_mcd_zaltar(short int den, short int tyzzal, short int modlitba){
 					set_zalm(3, modlitba, "z34.htm", "ZALM34_II");
 					break;
 			}// 1. t˝ûdeÚ ûalt·ra -- koniec
+			break;
 		case 2: // 2. t˝ûdeÚ ûalt·ra -- zaËiatok
 			switch(den){
 				case DEN_NEDELA: // 2
@@ -2399,6 +2400,7 @@ void set_zalmy_mcd_zaltar(short int den, short int tyzzal, short int modlitba){
 					set_zalm(3, modlitba, "z64.htm", "ZALM64");
 					break;
 			}// 2. t˝ûdeÚ ûalt·ra -- koniec
+			break;
 		case 3: // 3. t˝ûdeÚ ûalt·ra -- zaËiatok
 			switch(den){
 				case DEN_NEDELA: // 3
@@ -2435,6 +2437,7 @@ void set_zalmy_mcd_zaltar(short int den, short int tyzzal, short int modlitba){
 					set_zalm(3, modlitba, "z34.htm", "ZALM34_II");
 					break;
 			}// 3. t˝ûdeÚ ûalt·ra -- koniec
+			break;
 		case 4: // 4. t˝ûdeÚ ûalt·ra -- zaËiatok
 			switch(den){
 				case DEN_NEDELA: // 4
@@ -2471,9 +2474,24 @@ void set_zalmy_mcd_zaltar(short int den, short int tyzzal, short int modlitba){
 					set_zalm(3, modlitba, "z45.htm", "ZALM45_II");
 					break;
 			}// 4. t˝ûdeÚ ûalt·ra -- koniec
+			break;
 	}// switch(tyzzal)
 
-	Log("set_zalmy_mcd_zaltar(%d, %d, %d) -- end\n", den, tyzzal, modlitba);
+	Log("_set_zalmy_mcd_zaltar(%d, %d, %d) -- end\n", den, tyzzal, modlitba);
+}// _set_zalmy_mcd_zaltar()
+
+// 2013-08-22: vytvorenÈ, podæa novÈho prepÌnaËa BIT_OPT_1_MCD_ZALTAR_TRI sa nastavuje psalmÛdia zo dÚa pre vöetky tri hodinky, alebo sa nastavuje podæa BIT_OPT_1_MCD_ZALTAR_TRI
+void set_zalmy_mcd_zaltar(short int den, short int tyzzal){
+	Log("set_zalmy_mcd_zaltar(%d, %d) -- begin\n", den, tyzzal);
+	if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALTAR_TRI) == BIT_OPT_1_MCD_ZALTAR_TRI){
+		_set_zalmy_mcd_zaltar(den, tyzzal, MODL_PREDPOLUDNIM);
+		_set_zalmy_mcd_zaltar(den, TYZZAL_PREDCHADZAJUCI(tyzzal), MODL_NAPOLUDNIE);
+		_set_zalmy_mcd_zaltar(den, TYZZAL_NASLEDUJUCI(tyzzal), MODL_POPOLUDNI);
+	}
+	else{
+		_set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+	}
+	Log("set_zalmy_mcd_zaltar(%d, %d) -- end\n", den, tyzzal);
 }// set_zalmy_mcd_zaltar()
 
 void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int specialne){
@@ -2616,7 +2634,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_1krn29.htm", "CHVAL_1KRN29");
 					set_zalm(3, MODL_RANNE_CHVALY, "z29.htm", "ZALM29");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z11.htm", "ZALM11");
 					set_zalm(2, MODL_VESPERY, "z15.htm", "ZALM15");
@@ -2638,7 +2656,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_tob13.htm", "CHVAL_TOB13,2-8");
 					set_zalm(3, MODL_RANNE_CHVALY, "z33.htm", "ZALM33");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z20.htm", "ZALM20");
 					set_zalm(2, MODL_VESPERY, "z21.htm", "ZALM21");
@@ -2654,7 +2672,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_jdt16.htm", "CHVAL_JDT16");
 					set_zalm(3, MODL_RANNE_CHVALY, "z47.htm", "ZALM47");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z27.htm", "ZALM27_I");
 					set_zalm(2, MODL_VESPERY, "z27.htm", "ZALM27_II");
@@ -2670,7 +2688,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_jer31.htm", "CHVAL_JER31");
 					set_zalm(3, MODL_RANNE_CHVALY, "z48.htm", "ZALM48");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z30.htm", "ZALM30");
 					set_zalm(2, MODL_VESPERY, "z32.htm", "ZALM32");
@@ -2691,7 +2709,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 						set_zalm(3, MODL_RANNE_CHVALY, "z100.htm", "ZALM100");
 					}
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z41.htm", "ZALM41");
 					set_zalm(2, MODL_VESPERY, "z46.htm", "ZALM46");
@@ -2707,7 +2725,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_ex15.htm", "CHVAL_EX15");
 					set_zalm(3, MODL_RANNE_CHVALY, "z117.htm", "ZALM117");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// posv‰tnÈ ËÌtanie
 					if(je_odlisny_zaltar){
 						set_zalm(1, MODL_POSV_CITANIE, "z105.htm", "ZALM105_I");
@@ -2750,7 +2768,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_sir36.htm", "CHVAL_SIR36");
 					set_zalm(3, MODL_RANNE_CHVALY, "z19.htm", "ZALM19,2-7");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z45.htm", "ZALM45_I");
 					set_zalm(2, MODL_VESPERY, "z45.htm", "ZALM45_II");
@@ -2766,7 +2784,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz38.htm", "CHVAL_IZ38");
 					set_zalm(3, MODL_RANNE_CHVALY, "z65.htm", "ZALM65");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z49.htm", "ZALM49_I");
 					set_zalm(2, MODL_VESPERY, "z49.htm", "ZALM49_II");
@@ -2782,7 +2800,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_1sam2.htm", "CHVAL_1SAM2");
 					set_zalm(3, MODL_RANNE_CHVALY, "z97.htm", "ZALM97");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z62.htm", "ZALM62");
 					// 2011-09-06: moûnosù zvoliù ûalm 95
@@ -2804,7 +2822,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz12.htm", "CHVAL_IZ12");
 					set_zalm(3, MODL_RANNE_CHVALY, "z81.htm", "ZALM81");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z72.htm", "ZALM72_I");
 					set_zalm(2, MODL_VESPERY, "z72.htm", "ZALM72_II");
@@ -2819,7 +2837,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_hab3.htm", "CHVAL_HAB3");
 					set_zalm(3, MODL_RANNE_CHVALY, "z147.htm", "ZALM147,12-20");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z116.htm", "ZALM116,1-9");
 					set_zalm(2, MODL_VESPERY, "z121.htm", "ZALM121");
@@ -2835,7 +2853,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_dt32.htm", "CHVAL_DT32");
 					set_zalm(3, MODL_RANNE_CHVALY, "z8.htm", "ZALM8");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// posv‰tnÈ ËÌtanie
 					if(je_odlisny_zaltar){
 						set_zalm(1, MODL_POSV_CITANIE, "z106.htm", "ZALM106_I");
@@ -2878,7 +2896,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz2.htm", "CHVAL_IZ2");
 					set_zalm(3, MODL_RANNE_CHVALY, "z96.htm", "ZALM96");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z123.htm", "ZALM123");
 					set_zalm(2, MODL_VESPERY, "z124.htm", "ZALM124");
@@ -2900,7 +2918,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 						set_zalm(3, MODL_RANNE_CHVALY, "z67.htm", "ZALM67");
 					}
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z125.htm", "ZALM125");
 					set_zalm(2, MODL_VESPERY, "z131.htm", "ZALM131");
@@ -2916,7 +2934,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz33.htm", "CHVAL_IZ33");
 					set_zalm(3, MODL_RANNE_CHVALY, "z98.htm", "ZALM98");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z126.htm", "ZALM126");
 					set_zalm(2, MODL_VESPERY, "z127.htm", "ZALM127");
@@ -2932,7 +2950,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz40.htm", "CHVAL_IZ40");
 					set_zalm(3, MODL_RANNE_CHVALY, "z99.htm", "ZALM99");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z132.htm", "ZALM132_I");
 					set_zalm(2, MODL_VESPERY, "z132.htm", "ZALM132_II");
@@ -2953,7 +2971,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 						set_zalm(3, MODL_RANNE_CHVALY, "z100.htm", "ZALM100");
 					}
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z135.htm", "ZALM135_I");
 					set_zalm(2, MODL_VESPERY, "z135.htm", "ZALM135_II");
@@ -2969,7 +2987,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_mud9.htm", "CHVAL_MUD9");
 					set_zalm(3, MODL_RANNE_CHVALY, "z117.htm", "ZALM117");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// posv‰tnÈ ËÌtanie
 					set_zalm(1, MODL_POSV_CITANIE, "z107.htm", "ZALM107_I");
 					set_zalm(2, MODL_POSV_CITANIE, "z107.htm", "ZALM107_II");
@@ -3007,7 +3025,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz42.htm", "CHVAL_IZ42");
 					set_zalm(3, MODL_RANNE_CHVALY, "z135.htm", "ZALM135,1-12");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z136.htm", "ZALM136_I");
 					set_zalm(2, MODL_VESPERY, "z136.htm", "ZALM136_II"); // inak je 136 cleneny pre sobotu 2. tyzdna, posvatne citanie
@@ -3023,7 +3041,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_dan3_26.htm", "CHVAL_DAN3,26");
 					set_zalm(3, MODL_RANNE_CHVALY, "z144.htm", "ZALM144,1-10");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z137.htm", "ZALM137");
 					set_zalm(2, MODL_VESPERY, "z138.htm", "ZALM138");
@@ -3039,7 +3057,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz61.htm", "CHVAL_IZ61");
 					set_zalm(3, MODL_RANNE_CHVALY, "z146.htm", "ZALM146");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z139.htm", "ZALM139_I");
 					set_zalm(2, MODL_VESPERY, "z139.htm", "ZALM139_II");
@@ -3055,7 +3073,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_iz66.htm", "CHVAL_IZ66");
 					set_zalm(3, MODL_RANNE_CHVALY, "z147.htm", "ZALM147,1-11");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z144.htm", "ZALM144_I");
 					set_zalm(2, MODL_VESPERY, "z144.htm", "ZALM144_II");
@@ -3070,7 +3088,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_tob13.htm", "CHVAL_TOB13,8-11");
 					set_zalm(3, MODL_RANNE_CHVALY, "z147.htm", "ZALM147,12-20");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// veöpery
 					set_zalm(1, MODL_VESPERY, "z145.htm", "ZALM145_I");
 					set_zalm(2, MODL_VESPERY, "z145.htm", "ZALM145_II");
@@ -3093,7 +3111,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 					set_zalm(2, MODL_RANNE_CHVALY, "ch_ez36.htm", "CHVAL_EZ36");
 					set_zalm(3, MODL_RANNE_CHVALY, "z8.htm", "ZALM8");
 				// modlitba cez deÚ
-					set_zalmy_mcd_zaltar(den, tyzzal, MODL_CEZ_DEN_VSETKY);
+					set_zalmy_mcd_zaltar(den, tyzzal);
 				// posv‰tnÈ ËÌtanie
 					if(je_odlisny_zaltar){
 						set_zalm(1, MODL_POSV_CITANIE, "z78.htm", "ZALM78_IV");

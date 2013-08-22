@@ -597,6 +597,15 @@ extern short int query_type; // premenna obsahujuca PRM_...
 	#define STR_MODL_OPTF_1_VESP_KRATSIE_PROSBY "of1vkp"
 #endif
 
+// psalmódia pre modlitbu cez deò z troch týždòov žaltára (aktuálny, predchádzajúci, nasledujúci)
+#define MODL_OPTF_1_MCD_ZALTAR_TRI 112
+#ifdef LONG_PARAM_NAMES
+	#define STR_MODL_OPTF_1_MCD_ZALTAR_TRI "MODL_OPTF_1_MCD_ZALTAR_TRI"
+#else
+	#define STR_MODL_OPTF_1_MCD_ZALTAR_TRI "of1ps3"
+#endif
+
+
 // žalmy zo sviatku
 #define MODL_OPTF_1_SPOMIENKA_SPOL_CAST 79
 #ifdef LONG_PARAM_NAMES
@@ -1087,6 +1096,7 @@ extern short int query_type; // premenna obsahujuca PRM_...
 #define XML_BIT_OPT_1_SKRY_POPIS                "BitOpt1HideDescription"
 #define XML_BIT_OPT_1_ZOBRAZ_SPOL_CAST          "BitOpt1ShowCommuniaDescription"
 #define XML_BIT_OPT_1_VESP_KRATSIE_PROSBY       "BitOpt1UseVespShortenPrayers"
+#define XML_BIT_OPT_1_MCD_ZALTAR_TRI            "BitOpt1PsalmsDuringDayPsalt3Weeks"
 
 // POCET_OPT_2_HTML_EXPORT
 #define XML_BIT_OPT_2_ISO_DATUM                 "BitOpt2ISOFormat"
