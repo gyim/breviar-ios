@@ -2347,7 +2347,6 @@ void _set_zalmy_mcd_zaltar(short int den, short int tyzzal, short int modlitba){
 					set_zalm(3, modlitba, "z17.htm", "ZALM17_II");
 					break;
 				case DEN_STVRTOK: // 1
-					break;
 					set_zalm(1, modlitba, "z119.htm", "ZALM119_GIMEL");
 					set_zalm(2, modlitba, "z25.htm", "ZALM25_I");
 					set_zalm(3, modlitba, "z25.htm", "ZALM25_II");
