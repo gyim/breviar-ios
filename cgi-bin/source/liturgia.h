@@ -1290,7 +1290,7 @@ extern short int _global_opt_casti_modlitby[POCET_OPT_1_CASTI_MODLITBY];
 #define BIT_OPT_1_CHVALOSPEVY               4
 #define BIT_OPT_1_SLAVA_OTCU                8
 #define BIT_OPT_1_OTCENAS                  16
-#define BIT_OPT_1_MCD_ZALMY_INE            32 // pouûÌva sa pre modlitbu cez deÚ -- 1 = alternatÌvna, doplnkov· psalmÛdia
+#define BIT_OPT_1_MCD_DOPLNKOVA            32 // pouûÌva sa pre modlitbu cez deÚ -- 1 = alternatÌvna, doplnkov· psalmÛdia
 #define BIT_OPT_1_PC_VIGILIA               64
 #define BIT_OPT_1_SPOMIENKA_SPOL_CAST     128 // pri sl·venÌ spomienky moûno podæa vöeobecn˝ch smernÌc, Ë. 235 b), vziaù niektorÈ Ëasti alebo zo spoloËnej Ëasti (1), alebo zo dÚa (0)
 #define BIT_OPT_1_PLNE_RESP               256

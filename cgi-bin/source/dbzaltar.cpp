@@ -3114,14 +3114,14 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 
 	Log("napokon idem pre modlitbu cez deÚ skontrolovaù, Ëi netreba braù doplnkov˙ psalmÛdiu...\n");
 	// 2011-09-06: nastavenie ûalm 95 ako alternatÌvy k û 24, 67, 100 pre rannÈ chv·ly resp. veöpery sa robÌ na inom mieste
-	if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE){
+	if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) == BIT_OPT_1_MCD_DOPLNKOVA){
 		Log("-- ·no, beriem doplnkov˙ psalmÛdiu.\n");
 		_set_zalmy_mcd_doplnkova_psalmodia(NIE);
 		// 2006-01-24: vyÚatÈ do samostatnej funkcie
 		if(_global_den.litobd == OBD_CEZ_ROK){
 			_set_antifony_mcd_doplnkova_psalmodia();
 		}// pre cezroËnÈ obdobie nastavÌme aj antifÛny
-	}// (_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE
+	}// (_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) == BIT_OPT_1_MCD_DOPLNKOVA
 	else{
 		// 2006-02-07: doplnenÈ
 		Log("-- nie, doplnkov˙ psalmÛdiu neberiem.\n");
@@ -3152,7 +3152,7 @@ void _set_zalmy_velky_piatok(short int modlitba){
 		set_zalm(2, modlitba, "z22.htm", "ZALM22_CELY");
 		set_zalm(3, modlitba, "z38.htm", "ZALM38_CELY");
 	}
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) != BIT_OPT_1_MCD_DOPLNKOVA)){
 		// 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia
 		set_zalm(1, modlitba, "z40.htm", "ZALM40");
 		set_zalm(2, modlitba, "z54.htm", "ZALM54");
@@ -3185,7 +3185,7 @@ void _set_zalmy_biela_sobota(short int modlitba){
 		}
 	}
 	// 2006-01-26: doplnenÈ ûalmy pre modlitbu cez deÚ
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) != BIT_OPT_1_MCD_DOPLNKOVA)){
 		// 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia
 		set_zalm(1, modlitba, "z27.htm", "ZALM27");
 		set_zalm(2, modlitba, "z30.htm", "ZALM30");
@@ -3214,7 +3214,7 @@ void _set_zalmy_za_zosnulych(short int modlitba){
 		set_zalm(2, modlitba, "z40.htm", "ZALM40_II");
 		set_zalm(3, modlitba, "z42.htm", "ZALM42");
 	}
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) != BIT_OPT_1_MCD_DOPLNKOVA)){
 		// 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia
 		set_zalm(1, modlitba, "z70.htm", "ZALM70");
 		set_zalm(2, modlitba, "z85.htm", "ZALM85");
@@ -3329,7 +3329,7 @@ void _set_zalmy_velkonocna_nedela(short int modlitba){
 	else if(modlitba == MODL_POSV_CITANIE){
 		_set_zalmy_1nedele_pc();
 	}
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) != BIT_OPT_1_MCD_DOPLNKOVA)){
 		// 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia
 		_set_zalmy_1nedele_mcd();
 	}
@@ -3356,7 +3356,7 @@ void _set_zalmy_nanebovstupenie(short int modlitba){
 		set_zalm(2, modlitba, "z68.htm", "ZALM68_II");
 		set_zalm(3, modlitba, "z68.htm", "ZALM68_III");
 	}
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) != BIT_OPT_1_MCD_DOPLNKOVA)){
 		// 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia
 		set_zalm(1, modlitba, "z8.htm", "ZALM8");
 		set_zalm(2, modlitba, "z19.htm", "ZALM19_I");
@@ -3385,7 +3385,7 @@ void _set_zalmy_zoslanie_ducha_sv(short int modlitba){
 		set_zalm(2, modlitba, "z104.htm", "ZALM104_II");
 		set_zalm(3, modlitba, "z104.htm", "ZALM104_III");
 	}
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) != BIT_OPT_1_MCD_DOPLNKOVA)){
 		// 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia
 		_set_zalmy_1nedele_mcd();
 	}
@@ -3412,7 +3412,7 @@ void _set_zalmy_najsv_trojice(short int modlitba){
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
 	}
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) != BIT_OPT_1_MCD_DOPLNKOVA)){
 		// 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia
 		_set_zalmy_1nedele_mcd();
 	}
@@ -3439,7 +3439,7 @@ void _set_zalmy_krista_krala(short int modlitba){
 	else if(modlitba == MODL_RANNE_CHVALY){
 		_set_zalmy_1nedele_rch();
 	}
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) != BIT_OPT_1_MCD_DOPLNKOVA)){
 		// 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia
 		_set_zalmy_1nedele_mcd();
 	}
@@ -3528,7 +3528,7 @@ void _set_zalmy_narodenie(short int modlitba){
 		set_zalm(2, modlitba, "z19.htm", "ZALM19,2-7");
 		set_zalm(3, modlitba, "z45.htm", "ZALM45");
 	}
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) != BIT_OPT_1_MCD_DOPLNKOVA)){
 		// 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia
 		set_zalm(1, modlitba, "z19.htm", "ZALM19,8-15");
 		set_zalm(2, modlitba, "z47.htm", "ZALM47");
@@ -3554,7 +3554,7 @@ void _set_zalmy_zjv(short int modlitba){
 		set_zalm(2, modlitba, "z96.htm", "ZALM96");
 		set_zalm(3, modlitba, "z97.htm", "ZALM97");
 	}
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) != BIT_OPT_1_MCD_DOPLNKOVA)){
 		// 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia
 		set_zalm(1, modlitba, "z47.htm", "ZALM47");
 		set_zalm(2, modlitba, "z86.htm", "ZALM86,1-10");
@@ -3759,7 +3759,7 @@ void _set_zalmy_sviatok_krstu(short int modlitba){
 		set_zalm(3, modlitba, "z66.htm", "ZALM66_II");
 	}
 	// 2007-01-11: pre mcd ûalmy z nedele 2. t˝ûdÚa (7.1.) alebo z nedele 3. t˝ûdÚa podæa roka
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) != BIT_OPT_1_MCD_DOPLNKOVA)){
 		// 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia
 		if(_global_den.denvr == 7){
 			// ak je to 7.1.
@@ -3992,7 +3992,7 @@ void _set_zalmy_op_dominik(short int modlitba){
 		set_zalm(3, modlitba, "z145.htm", "ZALM145,1-9");
 	}
 	else if((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)){
-		if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE){
+		if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) != BIT_OPT_1_MCD_DOPLNKOVA){
 			set_zalm(1, modlitba, "z34.htm", "ZALM34_I");
 			set_zalm(2, modlitba, "z34.htm", "ZALM34_II");
 			set_zalm(3, modlitba, "z19.htm", "ZALM19,8-15");
@@ -4212,7 +4212,7 @@ void _set_zalmy_velk_oktava(short int den, short int modlitba){
 				break;
 		}// switch(den)
 	}
-	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE)){
+	else if(((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)) && ((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) != BIT_OPT_1_MCD_DOPLNKOVA)){
 		// 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia
 		// modlitba cez deÚ
 		switch(den){
@@ -7196,7 +7196,7 @@ label_24_DEC:
 // 2012-04-02: pre Kvetn˙ nedeæu sa berie vlastn˝ hymnus len pre jednu z hodiniek; zvolÌme t˙, pre ktor˙ sa neberie doplnkov· psalmÛdia
 #define _post2_hymnus {\
 	if(((den == DEN_STVRTOK) && (modlitba == MODL_VESPERY))\
-	|| ((den == DEN_NEDELA) && (!((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE)) && ((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)))){\
+	|| ((den == DEN_NEDELA) && (!((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) == BIT_OPT_1_MCD_DOPLNKOVA)) && ((modlitba == MODL_PREDPOLUDNIM) || (modlitba == MODL_NAPOLUDNIE) || (modlitba == MODL_POPOLUDNI)))){\
 		sprintf(_anchor, "%s_%c%s%s", nazov_OBD[litobd], pismenko_modlitby(modlitba), nazov_DN_asci[den], ANCHOR_HYMNUS);\
 	}\
 	else{\
@@ -7640,7 +7640,7 @@ label_24_DEC:
 				_set_zalmy_velkonocna_nedela(modlitba);
 				// 2006-01-27: pridan˝ popis k posv. ËÌtaniu veækonoËnej nedele
 				_vtroj_popis;
-				if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE){
+				if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) != BIT_OPT_1_MCD_DOPLNKOVA){
 					// 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia (realizovanÈ aj v _set_zalmy_velkonocna_nedela()...)
 					modlitba = MODL_PREDPOLUDNIM;
 					_set_zalmy_velkonocna_nedela(modlitba);
@@ -7668,7 +7668,7 @@ label_24_DEC:
 				_set_evanjelium(modlitba, _file_pc, _anchor);
 				set_LOG_litobd_pc;
 
-				if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE){
+				if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) != BIT_OPT_1_MCD_DOPLNKOVA){
 					// 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia (realizovanÈ aj v _set_zalmy_biela_sobota()...)
 					modlitba = MODL_PREDPOLUDNIM;
 					_set_zalmy_biela_sobota(modlitba);
@@ -7695,7 +7695,7 @@ label_24_DEC:
 				_set_evanjelium(modlitba, _file_pc, _anchor);
 				set_LOG_litobd_pc;
 
-				if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) != BIT_OPT_1_MCD_ZALMY_INE){
+				if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) != BIT_OPT_1_MCD_DOPLNKOVA){
 					// 2011-03-14: opravenÈ; na ostatnÈ hodiny sa berie doplnkov· psalmÛdia (realizovanÈ aj v _set_zalmy_velky_piatok()...)
 					modlitba = MODL_PREDPOLUDNIM;
 					_set_zalmy_velky_piatok(modlitba);
@@ -9187,7 +9187,7 @@ short int _spol_cast_je_panna(_struct_sc sc){
 	}\
 	if((modl == MODL_PREDPOLUDNIM) || (modl == MODL_NAPOLUDNIE) || (modl == MODL_POPOLUDNI)){\
 		Log("idem sk˙siù zohæadniù _set_zalmy_mcd_doplnkova_psalmodia_alternativy(%s)\n", nazov_modlitby(modl));\
-		if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_ZALMY_INE) == BIT_OPT_1_MCD_ZALMY_INE){\
+		if((_global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_MCD_DOPLNKOVA) == BIT_OPT_1_MCD_DOPLNKOVA){\
 			_set_zalmy_mcd_doplnkova_psalmodia_alternativy(modlitba);\
 		}\
 		if(su_kcit_kresp_modlitba_mcd_vlastne(modl)){\
