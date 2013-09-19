@@ -683,8 +683,8 @@ char *_vytvor_string_z_datumu(short int den, short int mesiac, short int rok, sh
  *
  */
 void _vytvor_global_link(short int den, short int mesiac, short int rok, short int _case, short int typ, short int align){
-	Log("_vytvor_global_link(orig): volám s hodnotou html_class == nullptr...\n");
-	_vytvor_global_link(den, mesiac, rok, _case, typ, align, nullptr);
+	Log("_vytvor_global_link(orig): volám s hodnotou html_class == NULL...\n");
+	_vytvor_global_link(den, mesiac, rok, _case, typ, align, NULL);
 	Log("_vytvor_global_link(orig): koniec.\n");
 }
 
@@ -706,7 +706,7 @@ void _vytvor_global_link(short int den, short int mesiac, short int rok, short i
 		mystrcpy(_global_link, "<"HTML_LINK_RED" href=\"", MAX_GLOBAL_LINK);
 	}
 	else{ // inak normalny a href, toto tu bolo predtym; 2003-07-02
-		if(html_class != nullptr && html_class != NULL){
+		if((html_class != NULL) && (strlen(html_class) > 0)){
 			sprintf(_global_link, "<"HTML_LINK_CLASS_B"%s"HTML_LINK_CLASS_E" href=\"", html_class);
 		}
 		else{
