@@ -8397,14 +8397,14 @@ void _export_rozbor_dna_kalendar_orig(short int typ){
 			}
 			else{
 				if(((i + _global_den.denvt - _global_den.den) MOD 7) == 0){
-					vytvor_global_link_class(i, _global_den.mesiac, _global_den.rok, LINK_DEN, NIE, HTML_CLASS_NAME_CALENDAR_SUNDAY);
+					vytvor_global_link_class(i, _global_den.mesiac, _global_den.rok, LINK_DEN, NIE, (char *)HTML_CLASS_NAME_CALENDAR_SUNDAY);
 					Export("</tr>\n");
 					Export("<tr><!--(ïalší riadok)-->\n");
 					// nede¾a
 					Export("<td "HTML_ALIGN_RIGHT">%s</td> ", _global_link);
 				}
 				else{
-					vytvor_global_link_class(i, _global_den.mesiac, _global_den.rok, LINK_DEN, NIE, HTML_CLASS_NAME_CALENDAR_DAY);
+					vytvor_global_link_class(i, _global_den.mesiac, _global_den.rok, LINK_DEN, NIE, (char *)HTML_CLASS_NAME_CALENDAR_DAY);
 					Export("<td "HTML_ALIGN_RIGHT">%s</td> ", _global_link);
 				}
 			}
