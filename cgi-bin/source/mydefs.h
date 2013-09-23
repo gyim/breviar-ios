@@ -898,7 +898,7 @@ extern short int query_type; // premenna obsahujuca PRM_...
 	char pom3[MAX_STR];\
 	mystrcpy(pom3, STR_EMPTY, MAX_STR);\
 	prilep_request_options(pom2, pom3);\
-	_export_rozbor_dna_buttons_dni_dnes(EXPORT_DNA_DNES, 2 /* dnes_dnes */, NIE /* som_v_tabulke */, pom2, NIE /* zobraz_odkaz_na_skrytie */);\
+	_export_rozbor_dna_buttons_dni_dnes(2 /* dnes_dnes */, NIE /* som_v_tabulke */, pom2, NIE /* zobraz_odkaz_na_skrytie */);\
 	}
 
 // HTML stringy - casti stringov sustredene na tomto mieste; pridane 2003-07-02; rozšírené 2011-01-27

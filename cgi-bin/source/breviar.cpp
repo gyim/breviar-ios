@@ -6702,7 +6702,7 @@ void _export_rozbor_dna_button_modlitba(short int typ, short int poradie_svateho
 #endif
 }// _export_rozbor_dna_button_modlitba();
 
-void _export_rozbor_dna_button_modlitba2(short int modl, char pom[MAX_STR], short int som_v_tabulke){
+void _export_rozbor_dna_button_modlitba2(short int modl, char pom[MAX_STR]){
 	char action[MAX_STR];
 	mystrcpy(action, STR_EMPTY, MAX_STR);
 	if((query_type == PRM_LIT_OBD) && (modl == MODL_VSETKY)){
@@ -7235,7 +7235,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 		// button 'Všetky modlitby...'
 		i = MODL_VSETKY;
 		if(_global_linky == ANO){
-			_export_rozbor_dna_button_modlitba2(i, pom, som_v_tabulke);
+			_export_rozbor_dna_button_modlitba2(i, pom);
 		}
 #endif
 
@@ -7259,7 +7259,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 			// button 'Detaily...'
 			i = MODL_DETAILY;
 			if(_global_linky == ANO){
-				_export_rozbor_dna_button_modlitba2(i, pom, som_v_tabulke);
+				_export_rozbor_dna_button_modlitba2(i, pom);
 			}// ak nie zobrazovat linky na internet (2009-08-11: teda napr. pre batch mód), tlacidlo `Detaily...' je zbytocne
 		}// ma_na_vyber_spolocne_casti(poradie_svateho)
 		else{
@@ -7307,7 +7307,7 @@ void _export_rozbor_dna_buttons(short int typ, short int poradie_svateho, short 
 	Log("--- _export_rozbor_dna_buttons(typ == %d) -- end\n", typ);
 }// _export_rozbor_dna_buttons()
 
-void _export_rozbor_dna_buttons_dni_dnes(short int typ, short int dnes_dnes, short int som_v_tabulke, char pom2[MAX_STR], short int zobraz_odkaz_na_skrytie){
+void _export_rozbor_dna_buttons_dni_dnes(short int dnes_dnes, short int som_v_tabulke, char pom2[MAX_STR], short int zobraz_odkaz_na_skrytie){
 #ifdef OS_Windows_Ruby
 	Export("\n<!--buttons/dni/dnes:begin-->\n");
 #endif
@@ -7432,14 +7432,14 @@ void _export_rozbor_dna_buttons_dni_orig(short int typ, short int dnes_dnes /* =
 
 	if(query_type == PRM_LIT_OBD){
 		Log("pre query_type == PRM_LIT_OBD sa dni netlaèia (nemám nastavený dátum), iba 'dnes'...\n");
-		_export_rozbor_dna_buttons_dni_dnes(typ, ANO /* dnes_dnes */, NIE /* som_v_tabulke */, pom2, ANO /* zobraz_odkaz_na_skrytie */);
+		_export_rozbor_dna_buttons_dni_dnes(ANO /* dnes_dnes */, NIE /* som_v_tabulke */, pom2, ANO /* zobraz_odkaz_na_skrytie */);
 		return;
 	}// query_type == PRM_LIT_OBD
 
 	if((_global_pocet_navigacia <= 1) && (_global_pocet_volani_interpretTemplate < 2)){
 		// najprv dnes, potom ostatné
 		if((query_type == PRM_DATUM) && (_global_modlitba != MODL_NEURCENA)){
-			_export_rozbor_dna_buttons_dni_dnes(typ, ANO /* dnes_dnes */, NIE /* som_v_tabulke */, pom2, ANO /* zobraz_odkaz_na_skrytie */);
+			_export_rozbor_dna_buttons_dni_dnes(ANO /* dnes_dnes */, NIE /* som_v_tabulke */, pom2, ANO /* zobraz_odkaz_na_skrytie */);
 		}
 	}// if((_global_pocet_navigacia <= 1) && (_global_pocet_volani_interpretTemplate < 2))
 
@@ -7628,7 +7628,7 @@ void _export_rozbor_dna_buttons_dni_orig(short int typ, short int dnes_dnes /* =
 
 		// 2007-03-19: Dorobené tlaèidlo pre dnešok
 		// 2011-10-07: presunuté do samostatnej funkcie
-		_export_rozbor_dna_buttons_dni_dnes(typ, dnes_dnes, som_v_tabulke, pom2, NIE);
+		_export_rozbor_dna_buttons_dni_dnes(dnes_dnes, som_v_tabulke, pom2, NIE);
 
 		// vypoèítanie nasledujúceho dòa
 		zmena_mesiaca = NIE;
@@ -7792,7 +7792,7 @@ void _export_rozbor_dna_buttons_dni_orig(short int typ, short int dnes_dnes /* =
 	if((_global_pocet_navigacia > 1) || (_global_pocet_volani_interpretTemplate >= 2)){
 		// najprv ostatné, potom dnes
 		if((query_type == PRM_DATUM) && (_global_modlitba != MODL_NEURCENA)){
-			_export_rozbor_dna_buttons_dni_dnes(typ, ANO /* dnes_dnes */, NIE /* som_v_tabulke */, pom2, ANO /* zobraz_odkaz_na_skrytie */);
+			_export_rozbor_dna_buttons_dni_dnes(ANO /* dnes_dnes */, NIE /* som_v_tabulke */, pom2, ANO /* zobraz_odkaz_na_skrytie */);
 		}
 	}// if((_global_pocet_navigacia > 1) || (_global_pocet_volani_interpretTemplate >= 2))
 
@@ -7835,14 +7835,14 @@ void _export_rozbor_dna_buttons_dni_compact(short int typ, short int dnes_dnes /
 
 	if(query_type == PRM_LIT_OBD){
 		Log("pre query_type == PRM_LIT_OBD sa dni netlaèia (nemám nastavený dátum), iba 'dnes'...\n");
-		_export_rozbor_dna_buttons_dni_dnes(typ, ANO /* dnes_dnes */, NIE /* som_v_tabulke */, pom2, ANO /* zobraz_odkaz_na_skrytie */);
+		_export_rozbor_dna_buttons_dni_dnes(ANO /* dnes_dnes */, NIE /* som_v_tabulke */, pom2, ANO /* zobraz_odkaz_na_skrytie */);
 		return;
 	}// query_type == PRM_LIT_OBD
 
 	if((_global_pocet_navigacia <= 1) && (_global_pocet_volani_interpretTemplate < 2)){
 		// najprv dnes, potom ostatné
 		if((query_type == PRM_DATUM) && (_global_modlitba != MODL_NEURCENA)){
-			_export_rozbor_dna_buttons_dni_dnes(typ, ANO /* dnes_dnes */, NIE /* som_v_tabulke */, pom2, ANO /* zobraz_odkaz_na_skrytie */);
+			_export_rozbor_dna_buttons_dni_dnes(ANO /* dnes_dnes */, NIE /* som_v_tabulke */, pom2, ANO /* zobraz_odkaz_na_skrytie */);
 		}
 	}// if((_global_pocet_navigacia <= 1) && (_global_pocet_volani_interpretTemplate < 2))
 
@@ -7952,7 +7952,7 @@ void _export_rozbor_dna_buttons_dni_compact(short int typ, short int dnes_dnes /
 		// ---------------------------------------------------
 		// 2007-03-19: Dorobené tlaèidlo pre dnešok
 		// 2011-10-07: presunuté do samostatnej funkcie
-		_export_rozbor_dna_buttons_dni_dnes(typ, dnes_dnes, som_v_tabulke, pom2, NIE);
+		_export_rozbor_dna_buttons_dni_dnes(dnes_dnes, som_v_tabulke, pom2, NIE);
 
 		// ---------------------------------------------------
 		// vypoèítanie nasledujúceho dòa
@@ -8248,7 +8248,7 @@ void _export_rozbor_dna_buttons_dni_compact(short int typ, short int dnes_dnes /
 	if((_global_pocet_navigacia > 1) || (_global_pocet_volani_interpretTemplate >= 2)){
 		// najprv ostatné, potom dnes
 		if((query_type == PRM_DATUM) && (_global_modlitba != MODL_NEURCENA)){
-			_export_rozbor_dna_buttons_dni_dnes(typ, ANO /* dnes_dnes */, NIE /* som_v_tabulke */, pom2, ANO /* zobraz_odkaz_na_skrytie */);
+			_export_rozbor_dna_buttons_dni_dnes(ANO /* dnes_dnes */, NIE /* som_v_tabulke */, pom2, ANO /* zobraz_odkaz_na_skrytie */);
 		}
 	}// if((_global_pocet_navigacia > 1) || (_global_pocet_volani_interpretTemplate >= 2))
 
