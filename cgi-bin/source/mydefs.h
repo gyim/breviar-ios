@@ -65,6 +65,8 @@
 /***************************************************************/
 #include <stdio.h>
 
+#define Q_UNUSED(arg) (void)arg;
+
 #define SMALL 80
 #define VERY_SMALL 8
 
