@@ -78,6 +78,13 @@
 	padding-bottom: 1em; 
 }
 
+.preces p.vel { 
+	color: #FF3333; 
+	font-style: normal; 
+	font-weight: normal; 
+	margin: 0; 
+}
+
 /* 2013-09-02 #psalm changed to class .psalm */
 .psalm .psalm-name { 
 	color: #FF3333; 
@@ -218,6 +225,7 @@ div.biblereference {
 
 .rednormal { 
 	color: #FF3333; 
+	font-style: normal; 
 	font-weight: normal; 
 }
 
