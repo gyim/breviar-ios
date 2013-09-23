@@ -2316,7 +2316,9 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 				}
 				// DetailLog("%c", c);
 			}
-			else ; //skip
+			else{
+				; //skip
+			}
 		}// if(!isbuff)
 		else{
 			strbuff[buff_index++] = (char)c;
@@ -3892,16 +3894,18 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			includeFile(type, paramname, path, _global_modl_posv_citanie.citanie1.anchor);
 			Log("interpretParameter(): equals(paramname, PARAM_CITANIE1), po spustení includeFile().\n");
 		}
-		else // ostatné modlitby 1. èítanie nemajú
-		;
+		else{
+			; // ostatné modlitby 1. èítanie nemajú
+		}
 	}// PARAM_CITANIE1
 	else if(equals(paramname, PARAM_CITANIE2)){
 		if(type == MODL_POSV_CITANIE){
 			strcat(path, _global_modl_posv_citanie.citanie2.file);
 			includeFile(type, paramname, path, _global_modl_posv_citanie.citanie2.anchor);
 		}
-		else // ostatné modlitby 2. èítanie nemajú
-		;
+		else{
+			; // ostatné modlitby 2. èítanie nemajú
+		}
 	}// PARAM_CITANIE2
 	else if(equals(paramname, PARAM_MAGNIFIKAT)){
 		// ak _global_skip_in_prayer je ANO, tak preskoc Magnifikat
@@ -3915,8 +3919,9 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 				includeFile(type, paramname, path, _global_modl_prve_vespery.magnifikat.anchor);
 			}
 		}
-		else // ostatné modlitby nemajú veèerný chválospev
-		;
+		else{
+			; // ostatné modlitby nemajú veèerný chválospev
+		}
 	}// PARAM_MAGNIFIKAT
 	else if(equals(paramname, PARAM_ANTVCHVAL)){
 		antifona_pocet++;
@@ -3928,8 +3933,9 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			strcat(path, _global_modl_prve_vespery.antifona3.file);
 			includeFile(type, paramname, path, _global_modl_prve_vespery.antifona3.anchor);
 		}
-		else // ostatné modlitby nemajú veèerný chválospev
-		;
+		else{
+			; // ostatné modlitby nemajú veèerný chválospev
+		}
 	}// PARAM_ANTVCHVAL
 	else if(equals(paramname, PARAM_VCHVALOSPEV)){
 		if(type == MODL_VESPERY){
@@ -3940,8 +3946,9 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			strcat(path, _global_modl_prve_vespery.zalm3.file);
 			includeFile(type, paramname, path, _global_modl_prve_vespery.zalm3.anchor);
 		}
-		else // ostatné modlitby nemajú veèerný chválospev
-		;
+		else{
+			; // ostatné modlitby nemajú veèerný chválospev
+		}
 	}// PARAM_VCHVALOSPEV
 	else if(equals(paramname, PARAM_BENEDIKTUS)){
 		// ak _global_skip_in_prayer je ANO, tak preskoc Benediktus
@@ -3949,8 +3956,9 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			strcat(path, _global_modl_ranne_chvaly.benediktus.file);
 			includeFile(type, paramname, path, _global_modl_ranne_chvaly.benediktus.anchor);
 		}
-		else // ostatné modlitby nemajú ranný chválospev
-		;
+		else{
+			; // ostatné modlitby nemajú ranný chválospev
+		}
 	}// PARAM_BENEDIKTUS
 	else if(equals(paramname, PARAM_ANTRCHVAL)){
 		antifona_pocet++;
@@ -3958,16 +3966,18 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 			strcat(path, _global_modl_ranne_chvaly.antifona2.file);
 			includeFile(type, paramname, path, _global_modl_ranne_chvaly.antifona2.anchor);
 		}
-		else // ostatné modlitby nemajú ranný chválospev
-		;
+		else{
+			; // ostatné modlitby nemajú ranný chválospev
+		}
 	}// PARAM_ANTRCHVAL
 	else if(equals(paramname, PARAM_RCHVALOSPEV)){
 		if(type == MODL_RANNE_CHVALY){
 			strcat(path, _global_modl_ranne_chvaly.zalm2.file);
 			includeFile(type, paramname, path, _global_modl_ranne_chvaly.zalm2.anchor);
 		}
-		else // ostatné modlitby nemajú ranný chválospev
-		;
+		else{
+			; // ostatné modlitby nemajú ranný chválospev
+		}
 	}// PARAM_RCHVALOSPEV
 	else if(equals(paramname, PARAM_NUNC_DIMITTIS)){
 		if(((type == MODL_KOMPLETORIUM) || (type == MODL_PRVE_KOMPLETORIUM)) && (_global_skip_in_prayer != ANO)){
@@ -3980,8 +3990,9 @@ void interpretParameter(short int type, char *paramname, short int aj_navigacia 
 				includeFile(type, paramname, path, _global_modl_prve_kompletorium.nunc_dimittis.anchor);
 			}
 		}
-		else // ostatné modlitby nemajú Nunc dimittis
-		;
+		else{
+			; // ostatné modlitby nemajú Nunc dimittis
+		}
 	}// PARAM_NUNC_DIMITTIS
 	else if(equals(paramname, PARAM_PROSBY)){
 		switch(type){
