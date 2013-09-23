@@ -8302,7 +8302,7 @@ void _export_rozbor_dna_kalendar_orig(short int typ){
 		// teraz vytvorÌme reùazec s options
 		prilep_request_options(pom2, pom3);
 
-		Export("\n<div class=\"kalendar\">\n");
+		Export("\n<div "HTML_CLASS_CALENDAR">\n");
 		// zoznam dnÌ vo forme kalend·rika
 		Export("\n<table "HTML_ALIGN_CENTER">\n");
 

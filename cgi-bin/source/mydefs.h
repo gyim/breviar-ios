@@ -952,6 +952,7 @@ extern short int query_type; // premenna obsahujuca PRM_...
 #define HTML_SPAN_SMALLCAPS "span class=\"smallcaps\""
 #define HTML_SPAN_XS_CAPS   "span class=\"xsmallcaps\""
 
+#define HTML_CLASS_CALENDAR "class=\"calendar\""
 #define HTML_CALENDAR_HEADING "span class=\"calendar heading\""
 #define HTML_CALENDAR_DAYS   "span class=\"calendar day_name\""
 #define HTML_CALENDAR_TODAY_SUNDAY   "span class=\"calendar today bold\""
