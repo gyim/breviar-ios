@@ -9682,7 +9682,7 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int z
 	// 2009-08-04: iný export
 	if(export_monthly_druh >= 1 && modlitba != MODL_NEURCENA){
 		i = modlitba;
-		Log("/* generujem len modlitbu %d `%s'...*/\n", i, nazov_modlitby(i));
+		Log("/* generujem len modlitbu i == %d `%s' (export_monthly_druh >= 1)...*/\n", i, nazov_modlitby(i));
 
 		// 2013-07-29: generovanie názvu súboru s písmenkom modlitby (default) alebo s ID modlitby
 		if((_global_opt[OPT_4_OFFLINE_EXPORT] & BIT_OPT_4_FNAME_MODL_ID) != BIT_OPT_4_FNAME_MODL_ID){
@@ -9691,6 +9691,9 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int z
 		else{
 			sprintf(export_fname_modl_str, "%d", i);
 		}
+		Log("export_fname_modl_str == %s...\n", export_fname_modl_str);
+
+		Log("a == %d, i == %d, zobrazit_mcd == %d...\n", a, i, zobrazit_mcd);
 
 		// 2012-08-23: generova modlitbu cez deò + kompletórium len ak nejde o ¾ubovo¾nú spomienku (vtedy nemajú význam)
 		if(!((zobrazit_mcd == ANO) || (a == 0)) && ((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI) || (i == MODL_KOMPLETORIUM) || (i == MODL_PRVE_KOMPLETORIUM) || (i == MODL_DRUHE_KOMPLETORIUM))){
@@ -9705,9 +9708,15 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int z
 			// 2011-03-23: upravené: negenerova vešpery pre soboty, ak je nastavené (_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTON_PRVE_VESPERY) == BIT_OPT_2_BUTTON_PRVE_VESPERY
 			// 2012-08-27: vešpery a kompletórium nemá zmysel zobrazova, ak ide o sobotu a ïalšieho svätého (pri viacerých ¾ubovo¾ných spomienkach)
 			// 2013-06-27: pridané zátvorky okolo prvej podmienky, aby && v druhom riadku viazalo sa na obe "||" možnosti s "a"-èkom | breviar.cpp:9804: warning: suggest parentheses around '&&' within '||'
+			// 2013-09-30: namiesto prostej podmienky B:(zobrazit_mcd == ANO) použitá podmienená implikácia A => B (A:modlitba cez deò) vo forme (non A) OR B
 			if(((a != PORADIE_PM_SOBOTA) || (a == PORADIE_PM_SOBOTA && (i != MODL_VESPERY && i != MODL_KOMPLETORIUM)))
-				&& (((zobrazit_mcd == ANO) || (_global_den.denvt != DEN_SOBOTA)) || (a == 0))
-				){ // 2006-01-31-TUTOLA; 2008-04-09 presunuté
+				&& !(((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTON_PRVE_VESPERY) == BIT_OPT_2_BUTTON_PRVE_VESPERY) && (nie_su_vespery))
+				&& (
+					(/*non A*/ !((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI)) || /*B*/(zobrazit_mcd == ANO))
+					|| (_global_den.denvt != DEN_SOBOTA) 
+					|| (a == 0)
+				)
+			){ // 2006-01-31-TUTOLA; 2008-04-09 presunuté
 				// 2011-03-14: nastavenie parametra o5 (_global_opt 5) pre modlitbu cez deò (bežná alebo doplnková psalmódia) 
 				// 2011-03-16: upravené tak, že je to len fakultatívne (ako odlišný súbor)
 				// 2011-04-12: používa sa option 1 (jej upravená hodnota _global_opt_casti_modlitby_orig)
@@ -9754,6 +9763,9 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int z
 						fprintf(batch_export_file, "<a href=\""FILENAME_EXPORT_DATE_FULL"_%d%s.htm\">%d%s</a>%s | ", _global_den.rok, _global_den.mesiac, _global_den.den, a, export_fname_modl_str /* char_modlitby[i] */, _global_den.den, /* char */ poradie_svateho, export_doplnkova_psalmodia);
 				}// if(export_monthly_druh == 1)
 			}
+			else{
+				Log("niè sa nedeje.\n");
+			}
 		}// generova modlitbu
 	}
 	else{
@@ -9778,9 +9790,15 @@ void execute_batch_command(short int a, char batch_command[MAX_STR], short int z
 			// 2011-03-23: upravené: negenerova vešpery pre soboty, ak je nastavené (_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTON_PRVE_VESPERY) == BIT_OPT_2_BUTTON_PRVE_VESPERY
 			// 2012-08-27: vešpery a kompletórium nemá zmysel zobrazova, ak ide o sobotu a ïalšieho svätého (pri viacerých ¾ubovo¾ných spomienkach)
 			// 2013-04-05: zavedené "nie_su_vespery" kvôli Bielej (ve¾kej) sobote
-			if(((a != PORADIE_PM_SOBOTA) || (a == PORADIE_PM_SOBOTA && (i != MODL_VESPERY && i != MODL_KOMPLETORIUM))) && !(((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTON_PRVE_VESPERY) == BIT_OPT_2_BUTTON_PRVE_VESPERY) && (nie_su_vespery))
-				&& (((zobrazit_mcd == ANO) || (_global_den.denvt != DEN_SOBOTA)) || (a == 0))
-				){ // 2006-01-31-TUTOLA; 2008-04-09 presunuté
+			// 2013-09-30: namiesto prostej podmienky B:(zobrazit_mcd == ANO) použitá podmienená implikácia A => B (A:modlitba cez deò) vo forme (non A) OR B
+			if(((a != PORADIE_PM_SOBOTA) || (a == PORADIE_PM_SOBOTA && (i != MODL_VESPERY && i != MODL_KOMPLETORIUM))) 
+				&& !(((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTON_PRVE_VESPERY) == BIT_OPT_2_BUTTON_PRVE_VESPERY) && (nie_su_vespery))
+				&& (
+					(/*non A*/ !((i == MODL_PREDPOLUDNIM) || (i == MODL_NAPOLUDNIE) || (i == MODL_POPOLUDNI)) || /*B*/(zobrazit_mcd == ANO))
+					|| (_global_den.denvt != DEN_SOBOTA) 
+					|| (a == 0)
+				)
+			){ // 2006-01-31-TUTOLA; 2008-04-09 presunuté
 				if(_global_opt_append == YES){
 					fprintf(batch_file, "%s -0%d -1%d -2%d -3%d -4%d -x%d -p%s -j%s%s\n", batch_command, 
 						_global_opt[OPT_0_SPECIALNE], _global_opt[OPT_1_CASTI_MODLITBY], _global_opt[OPT_2_HTML_EXPORT], _global_opt[OPT_3_SPOLOCNA_CAST], _global_opt[OPT_4_OFFLINE_EXPORT], 
@@ -10048,13 +10066,15 @@ void _export_rozbor_dna_interpretuj_zoznam(short int export_typ, short int typ, 
 	short int poradie_svaty;
 	short int zobrazit_mcd = ANO;
 	short int pocet = zoznam[0];
-	Log("_export_rozbor_dna_interpretuj_zoznam(): zaèiatok...\n");
+	Log("_export_rozbor_dna_interpretuj_zoznam(): zaèiatok (pocet == %d)...\n", pocet);
 	if(pocet > POCET_ZOZNAM - 1){
 		pocet = POCET_ZOZNAM - 1;
 	}
 	for(int i = 1; i <= pocet; i++){
 		poradie_svaty = zoznam[i];
 		zobrazit_mcd = ANO;
+
+		Log("i == %d, poradie_svaty == zoznam[i] == %d...\n", i, poradie_svaty);
 
 		if(poradie_svaty < 0)
 			continue;
@@ -10440,6 +10460,7 @@ void _export_rozbor_dna_mesiaca_batch(short int d, short int m, short int r){
 
 	// reazec pre deò a pre názov súboru
 	if(d != VSETKY_DNI){
+		LOG_ciara;
 		Log("deò d == %d...\n", d);
 		sprintf(str_den, "%d", d);
 		if(_global_opt_export_date_format == EXPORT_DATE_SIMPLE)
