@@ -14182,7 +14182,7 @@ short int getArgv(int argc, char **argv){
 						mystrcpy(file_export, optarg, SMALL);
 					}
 					Log("option %c with value `%s'\n", c, optarg); break;
-			// zmenene: povodne tu boli pri kazdom parametri aj '1' -- '5'; teraz: vyhodene case '1' -- '5', ktorezto '1' -- '4' su pre options, vid dalej
+				// zmenene: povodne tu boli pri kazdom parametri aj '1' -- '5'; teraz: vyhodene case '1' -- '5', ktorezto '1' -- '4' su pre options, vid dalej
 				case 's': // debuggovanie, query string
 					if(optarg != NULL){
 						Log("--copying `%s' to query_string...", optarg);
@@ -14395,6 +14395,13 @@ short int getArgv(int argc, char **argv){
 			Log("query_type != PRM_SIMULACIA_QS, so running getQueryTypeFrom_QS(%s)...\n", pom_QUERY_TYPE);
 			query_type = getQueryTypeFrom_QS(pom_QUERY_TYPE);
 		}
+
+		// 2013-09-30: ak je query type OK, tak vymaûeme chybov˝ oznam
+		if(query_type != PRM_UNKNOWN){
+			Log("query_type OK, ËistÌm bad_param_str...\n");
+			mystrcpy(bad_param_str, STR_EMPTY, MAX_STR);
+		}
+
 		// 2009-08-02: pri exportovanÌ do adres·rov po mesiacoch je potrebnÈ upraviù name_binary_executable resp. include_dir 
 		// 2009-08-03: ale len v batch mÛde (teda nie pre jednotliv˙ generovan˙ modlitbu) -- preto presunutÈ aû sem, za zistenie query_type
 		if(query_type == PRM_BATCH_MODE && _global_opt_batch_monthly == ANO){
@@ -14417,8 +14424,7 @@ short int getArgv(int argc, char **argv){
 	Log("deallocating memory for option_string...\n");
 	free(option_string);
 
-	Log("-- getArgv(): end, query_type == %d, query_string == %s\n",
-		query_type, query_string);
+	Log("-- getArgv(): end, query_type == %d, query_string == %s, bad_param_str == %s\n", query_type, query_string, bad_param_str);
 
 	return SUCCESS;
 }// getArgv();
@@ -16313,7 +16319,7 @@ int breviar_main(int argc, char **argv){
 			}
 			else{
 				_main_LOG_to_Export("spustam getForm();\n");
-				ret = getForm();
+				ret_pom = ret = getForm();
 				_main_LOG_to_Export("spat po skonceni getForm()\n");
 			}
 			break;
@@ -16322,7 +16328,7 @@ int breviar_main(int argc, char **argv){
 			_main_LOG("params == SCRIPT_PARAM_FROM_ARGV\n");
 			_main_LOG("spustam getArgv();\n");
 			// query_type sa nastavi priamo vovnutri
-			ret = getArgv(argc, argv);
+			ret_pom = ret = getArgv(argc, argv);
 			if(ret == SUCCESS){ // 13/03/2000A.D. -- aby mohlo exportovat do file_export
 				// 2006-07-12: pridanÈ parsovanie jazyka kvÙli jazykov˝m mut·ci·m 
 				// 2009-08-05: predsunutÈ aj sem vyööie
@@ -16549,7 +16555,7 @@ _main_SIMULACIA_QS:
 
 	if(ret_pom != SUCCESS){
 		ALERT;
-		Export("Neboli zadanÈ vhodnÈ parametre.\n");
+		Export("Neboli zadanÈ vhodnÈ parametre (1).\n");
 		Export("<p>Chyba: %s\n", bad_param_str);
 	}
 
@@ -16821,9 +16827,9 @@ _main_SIMULACIA_QS:
 		}
 	}// if(query_type != PRM_UNKNOWN)
 	else{
-		if(ret_pom == SUCCESS){
+		if(ret_pom != SUCCESS){
 			ALERT;
-			Export("Neboli zadanÈ vhodnÈ parametre.\n");
+			Export("Neboli zadanÈ vhodnÈ parametre (2).\n");
 			Export("<p>Chyba: %s\n", bad_param_str);
 		}
 		// else: netreba vypisovaù, lebo sa vypÌsalo uû vyööie
