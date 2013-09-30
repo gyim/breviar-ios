@@ -1,3 +1,12 @@
+2013-09-30: CZ generované (treba skopírova aj "ebreviar-cz.css")
+	-- niektoré pevné súèasti modlitieb (chválospevy Benediktus, Magnifikat, Nunk dimittis, Te Deum; rubriky; zakonèenia modlitieb; dlhé responzóriá v posv. èítaniach; opakovanie zvolaní v prosbách), doplnková psalmódia ("(alt)" tlaèidlo); neberú sa èasti zo spol. èastí na spomienky
+	-- skúmanie, preèo neboli dogenerované spomienky PM v sobotu
+		breviar.exe -qpbm -d1 -m10 -r2013 -f31 -g12 -p2013 -brobCZ.bat -jcz -nbreviar.exe -i..\..\breviar.sk\include_cz\ -usimple -M2 -00 -15191 -2224
+		-- 2013-cz-handy-fixed
+	-- CZOP pre p. Liškutina
+		breviar.exe -qpbm -d1 -m10 -r2013 -f31 -g12 -p2013 -brobCZOP.bat -jc2 -nbreviar.exe -i..\..\breviar.sk\include_czop\ -usimple -M2 -00 -15191 -2224
+		-- 2013-czop-handy-fixed
+
 2013-07-29: CZ ukáka generovania mesiaca s názvami súborov, kde modlitba je èíslovaná (pod¾a poradia)
 	breviar.exe -qpbm -d1 -m8 -r2013 -f31 -g8 -p2013 -brobCZ.bat -jcz -nbreviar.exe -i..\..\breviar.sk\include_cz\ -usimple -M2 -00 -15191 -2224 -42
 
