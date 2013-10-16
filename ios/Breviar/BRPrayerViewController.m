@@ -52,6 +52,8 @@
 		 @"<!DOCTYPE html>\n"
 		 "<html><head>\n"
 		 "	<meta http-equiv='Content-Type' content='text/html; charset=windows-1250'>\n"
+		 "	<link rel='stylesheet' type='text/css' href='html/breviar.css'>\n"
+		 "	<link rel='stylesheet' type='text/css' href='breviar-ios.css'>\n"
 		 "</head>\n"
 		 "<body style='font: %dpx %@'>%@</body>\n"
 		 "</html>",
@@ -59,7 +61,8 @@
 		 settings.prayerFontFamily,
 		 self.prayer.body];
 	
-	[self.webView loadHTMLString:body baseURL:[NSURL URLWithString:@"http://breviar.sk"]];
+	NSURL *baseURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+	[self.webView loadHTMLString:body baseURL:baseURL];
 }
 
 @end
