@@ -12,7 +12,7 @@
 "6e2-LU-4fh.text" = "Label";
 
 /* Class = "IBUIBarButtonItem"; title = "Done"; ObjectID = "A4r-s2-3MT"; */
-"A4r-s2-3MT.title" = "Hotový";
+"A4r-s2-3MT.title" = "Hotovo";
 
 /* Class = "IBUIButton"; normalTitle = "Invitatory"; ObjectID = "SNQ-T1-lFZ"; */
 "SNQ-T1-lFZ.normalTitle" = "Inv.";
