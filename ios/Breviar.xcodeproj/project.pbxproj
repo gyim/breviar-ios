@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7004AD6B180208C40049BBAE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7004AD6A180208C40049BBAE /* Default-568h@2x.png */; };
+		703200E8180F2E9000675F09 /* breviar-ios.css in Resources */ = {isa = PBXBuildFile; fileRef = 703200E7180F2E9000675F09 /* breviar-ios.css */; };
 		7034597D15FCE84D000A1711 /* BRFontHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7034597C15FCE84D000A1711 /* BRFontHelper.m */; };
 		7042905716408A5E00663A7D /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042905316408A1100663A7D /* libxml2.dylib */; };
 		7042905816408A6300663A7D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042905516408A1600663A7D /* libz.dylib */; };
@@ -95,6 +96,7 @@
 
 /* Begin PBXFileReference section */
 		7004AD6A180208C40049BBAE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		703200E7180F2E9000675F09 /* breviar-ios.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "breviar-ios.css"; sourceTree = "<group>"; };
 		7034597B15FCE84D000A1711 /* BRFontHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRFontHelper.h; sourceTree = "<group>"; };
 		7034597C15FCE84D000A1711 /* BRFontHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRFontHelper.m; sourceTree = "<group>"; };
 		70424419178CBD8200EF5461 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard_iPad.strings; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				7061B09915FA8E1A00A83E0A /* Breviar-Prefix.pch */,
 				707A64C8171B6F320065F98E /* Icon.png */,
 				707A64C9171B6F320065F98E /* Icon@2.png */,
+				703200E7180F2E9000675F09 /* breviar-ios.css */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				707A64CA171B6F320065F98E /* Icon.png in Resources */,
 				707A64CB171B6F320065F98E /* Icon@2.png in Resources */,
 				7004AD6B180208C40049BBAE /* Default-568h@2x.png in Resources */,
+				703200E8180F2E9000675F09 /* breviar-ios.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,7 +568,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rm -rf \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nmkdir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nfor dir in include include_hu include_cz include_la; do\n    cp -r ../$dir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\ndone";
+			shellScript = "rm -rf \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nmkdir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nfor dir in include include_hu include_cz include_la; do\n    cp -r ../$dir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\ndone\ncp ../breviar.css \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
