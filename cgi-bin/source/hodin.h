@@ -7487,7 +7487,7 @@ const char *text_OKT_22_OP[POCET_JAZYKOV + 1] =
  "",
  };
 const char *text_OKT_22[POCET_JAZYKOV + 1] = 
-{"",
+{"Bl. Jána Pavla II., pápeža",
  "Bl. Jana Pavla II., papeže",
  "",
  "",

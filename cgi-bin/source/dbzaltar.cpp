@@ -29756,7 +29756,9 @@ label_25_MAR:
 						}
 					}// czop only, kalend·r pre KALENDAR_SK_OP
 
-					if(_global_jazyk == JAZYK_CZ){
+					// ToDo: dorieöiù pre SK OP
+
+					if((_global_jazyk == JAZYK_SK) || (_global_jazyk == JAZYK_CZ)){
 						if(poradie_svaty == 1){
 							// definovanie parametrov pre modlitbu
 							if(query_type != PRM_DETAILY)
@@ -29779,8 +29781,7 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_OKT_22[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
-						_global_svaty1.kalendar = KALENDAR_VSEOBECNY_CZ;
-					}// CZ only
+					}// CZ, SK only
 
 					if(_global_jazyk == JAZYK_HU){
 						if(poradie_svaty == 1){
@@ -29820,7 +29821,6 @@ label_25_MAR:
 						mystrcpy(_global_svaty2.meno, text_OKT_22[_global_jazyk], MENO_SVIATKU);
 						_global_svaty2.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 						_global_svaty2.farba = LIT_FARBA_BIELA;
-						_global_svaty2.kalendar = KALENDAR_VSEOBECNY_HU;
 					}// HU only
 					break;
 				case 23: // MES_OCT -- 23OKT
