@@ -570,6 +570,7 @@ const char *nazov_slavenia_lokal[] =
 ,"pre OFS: sviatok"                                                                                             // LOKAL_SLAV_SVIATOK_OFS
 ,"pre OFMConv., OFMCap: spomienka"                                                                              // LOKAL_SLAV_SPOMIENKA_OFMCONV_OFMCAP
 ,"pre OSC: sl·vnosù"                                                                                            // LOKAL_SLAV_SPOMIENKA_OSC
+,"pre Slovensko zatiaæ nedovolenÈ sl·venie"                                                                     // LOKAL_SLAV_NEDOVOLENE
 };
 
 // names of liturgical colors

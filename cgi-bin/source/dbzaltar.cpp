@@ -29781,6 +29781,9 @@ label_25_MAR:
 						mystrcpy(_global_svaty1.meno, text_OKT_22[_global_jazyk], MENO_SVIATKU);
 						_global_svaty1.spolcast = _encode_spol_cast(MODL_SPOL_CAST_DUCH_PAST_PAPEZ);
 						_global_svaty1.farba = LIT_FARBA_BIELA;
+						if(_global_jazyk == JAZYK_SK){
+							_global_svaty1.typslav_lokal = LOKAL_SLAV_NEDOVOLENE;
+						}
 					}// CZ, SK only
 
 					if(_global_jazyk == JAZYK_HU){
