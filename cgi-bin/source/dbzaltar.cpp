@@ -29660,6 +29660,7 @@ label_25_MAR:
 								set_spolocna_cast(sc, poradie_svaty);
 
 							modlitba = MODL_POSV_CITANIE;
+							_vlastna_cast_2citanie;
 							_vlastna_cast_modlitba;
 
 							modlitba = MODL_RANNE_CHVALY;
