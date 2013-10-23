@@ -908,7 +908,7 @@ const char *poradie_SLOVOM_jazyk[POCET_TYZDNOV + 1][POCET_JAZYKOV + 1] =
 // the names of languages
 // 2006-07-11: Pridané kvôli jazykovým mutáciám
 const char *nazov_jazyka[POCET_JAZYKOV + 1] =
-{"slovenèina", "èeština", "English", "lingua latina", "(neurèený)", "èeština (dominikáni)", "magyarul"};
+{"slovenèina", "èeština", "English", "lingua latina", "(neurèený)", "èeština-dominikáni", "magyar"};
 
 // language codes; internal usage for HTTP requests
 const char *skratka_jazyka[POCET_JAZYKOV + 1] =
