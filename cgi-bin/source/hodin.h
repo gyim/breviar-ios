@@ -1378,6 +1378,16 @@ const char *str_nie[POCET_JAZYKOV + 1] =
 const char *html_text_jazyk_android = "SK/CZ/HU:";
 
 const char *html_text_jazyk[POCET_JAZYKOV + 1] = 
+{"Jazyk:",
+ "Jazyk:",
+ "Language:",
+ "Lingua:",
+ "",
+ "Jazyk:",
+ "Nyelv:"
+};
+
+const char *html_text_jazyk_long[POCET_JAZYKOV + 1] = 
 {"Liturgia hodín v jazyku:",
  "Liturgie hodin pro jazyk:",
  "Liturgy of hours in language:",
