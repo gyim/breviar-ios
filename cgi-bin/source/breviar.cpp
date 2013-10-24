@@ -4485,6 +4485,10 @@ short int atolitobd(char *lo){
 			Log("atolitobd: returning %d\n", i);
 			return i;
 		}
+		if(equals(lo, nazov_obdobia_short(i))){
+			Log("atolitobd: returning %d\n", i);
+			return i;
+		}
 		i++;
 	}while(i <= POCET_OBDOBI);
 	// 2011-05-11: ak sa nenašlo obdobie porovnaním s reazcom, skúsim prekonvertova na èíslo
@@ -4689,6 +4693,7 @@ short int atomodlitba(char *modlitba){
 			for(pom_i = MODL_INVITATORIUM; pom_i <= MODL_VSETKY; pom_i++){
 				Log("\tstep: %d `%s'...\n", pom_i, nazov_modlitby(pom_i));
 				if(equals(modlitba, nazov_modlitby(pom_i)) || 
+					equals(modlitba, nazov_modlitby_short(pom_i)) || 
 					equals(modlitba, nazov_Modlitby(pom_i)) || 
 					equals(modlitba, nazov_MODLITBY(pom_i))){
 					// ak je zhoda, potom prirad do p a ukonci `for'
@@ -9440,16 +9445,16 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 		// pole WWW_MODLITBA
 		Export("<select name=\"%s\">\n", STR_MODLITBA);
-		Export("<option>%s\n", nazov_modlitby(MODL_PRVE_VESPERY));
-		Export("<option>%s\n", nazov_modlitby(MODL_PRVE_KOMPLETORIUM));
-		Export("<option>%s\n", nazov_modlitby(MODL_INVITATORIUM));
-		Export("<option selected>%s\n", nazov_modlitby(MODL_POSV_CITANIE));
-		Export("<option>%s\n", nazov_modlitby(MODL_RANNE_CHVALY));
-		Export("<option>%s\n", nazov_modlitby(MODL_PREDPOLUDNIM));
-		Export("<option>%s\n", nazov_modlitby(MODL_NAPOLUDNIE));
-		Export("<option>%s\n", nazov_modlitby(MODL_POPOLUDNI));
-		Export("<option>%s\n", nazov_modlitby(MODL_DRUHE_VESPERY));
-		Export("<option>%s\n", nazov_modlitby(MODL_DRUHE_KOMPLETORIUM));
+		Export("<option>%s\n", nazov_modlitby_short(MODL_PRVE_VESPERY));
+		Export("<option>%s\n", nazov_modlitby_short(MODL_PRVE_KOMPLETORIUM));
+		Export("<option>%s\n", nazov_modlitby_short(MODL_INVITATORIUM));
+		Export("<option selected>%s\n", nazov_modlitby_short(MODL_POSV_CITANIE));
+		Export("<option>%s\n", nazov_modlitby_short(MODL_RANNE_CHVALY));
+		Export("<option>%s\n", nazov_modlitby_short(MODL_PREDPOLUDNIM));
+		Export("<option>%s\n", nazov_modlitby_short(MODL_NAPOLUDNIE));
+		Export("<option>%s\n", nazov_modlitby_short(MODL_POPOLUDNI));
+		Export("<option>%s\n", nazov_modlitby_short(MODL_DRUHE_VESPERY));
+		Export("<option>%s\n", nazov_modlitby_short(MODL_DRUHE_KOMPLETORIUM));
 		Export("</select>\n");
 
 #if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
@@ -9507,7 +9512,7 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 		// pole WWW_LIT_OBD
 		Export("<select name=\"%s\">\n", STR_LIT_OBD);
 		for(lo = 0; lo <= POCET_OBDOBI; lo++){
-			Export("<option%s>%s\n", (lo == _global_den.litobd)? html_option_selected: STR_EMPTY, nazov_obdobia_ext(lo));
+			Export("<option%s>%s\n", (lo == _global_den.litobd)? html_option_selected: STR_EMPTY, nazov_obdobia_short(lo));
 		}
 		Export("\n</select>\n");
 
