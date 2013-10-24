@@ -4658,7 +4658,7 @@ short int atomodlitba(char *modlitba){
 		p = MODL_VSETKY;
 	else if(equals(modlitba, STR_MODL_DETAILY))
 		p = MODL_DETAILY;
-	else if((equals(modlitba, STR_MODL_INVITATORIUM)) || (equals(modlitba, STR_VALUE_ZERO)))
+	else if(equals(modlitba, STR_MODL_INVITATORIUM))
 		p = MODL_INVITATORIUM;
 	else if(equals(modlitba, STR_MODL_RANNE_CHVALY))
 		p = MODL_RANNE_CHVALY;
@@ -12413,7 +12413,7 @@ void _main_dnes(char *modlitba, char *poradie_svaty){
 //---------------------------------------------------------------------
 // _main_zaltar()
 void _main_zaltar(char *den, char *tyzden, char *modlitba){
-	short int d, t, p, i;
+	short int d, t, p;
 	d = atodenvt(den);
 	t = atoi(tyzden);
 	if((d < 0) || (d > 6) || (t < 1) || (t > 4)){
@@ -12432,35 +12432,9 @@ void _main_zaltar(char *den, char *tyzden, char *modlitba){
 		Export("</ul>\n");
 		return;
 	}
-	p = MODL_NEURCENA;
-	for(i = MODL_INVITATORIUM; i <= MODL_DRUHE_KOMPLETORIUM; i++){
-		if(equals(modlitba, nazov_modlitby(i))){
-			p = i;
-			continue; // exit from loop
-		}
-	}
-	if(p == MODL_NEURCENA){
-		// 2005-08-15: Kvôli simulácii porovnávame aj s konštantami STR_MODL_... 
-		// 2006-10-11: pridané invitatórium a kompletórium
-		if(equals(modlitba, STR_MODL_RANNE_CHVALY))
-			p = MODL_RANNE_CHVALY;
-		else if(equals(modlitba, STR_MODL_POSV_CITANIE))
-			p = MODL_POSV_CITANIE;
-		else if(equals(modlitba, STR_MODL_VESPERY))
-			p = MODL_VESPERY;
-		else if(equals(modlitba, STR_MODL_PREDPOLUDNIM))
-			p = MODL_PREDPOLUDNIM;
-		else if(equals(modlitba, STR_MODL_NAPOLUDNIE))
-			p = MODL_NAPOLUDNIE;
-		else if(equals(modlitba, STR_MODL_POPOLUDNI))
-			p = MODL_POPOLUDNI;
-		else if(equals(modlitba, STR_MODL_INVITATORIUM))
-			p = MODL_INVITATORIUM;
-		else if(equals(modlitba, STR_MODL_KOMPLETORIUM))
-			p = MODL_KOMPLETORIUM;
-	}
-	if(p == MODL_NEURCENA){
-		Export("Nevhodné údaje: nie je urèená modlitba.\n");
+	p = atomodlitba(modlitba);
+	if((p == MODL_NEURCENA) || (p < MODL_INVITATORIUM) || (p > MODL_DRUHE_KOMPLETORIUM)){
+		Export("Nevhodné údaje: nie je urèená modlitba (%s).\n", modlitba);
 		return;
 	}
 	_global_modlitba = p;
@@ -12489,7 +12463,7 @@ void _main_zaltar(char *den, char *tyzden, char *modlitba){
 //---------------------------------------------------------------------
 // _main_liturgicke_obdobie() pod¾a _main_zaltar()
 short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char *litobd, char *litrok){
-	short int d, t, p, i, lo, tz, poradie_svateho = 0, ret;
+	short int d, t, p, lo, tz, poradie_svateho = 0, ret;
 	char lr;
 	// char pom[MAX_STR];
 	Log("_main_liturgicke_obdobie(): zaèiatok...\n");
@@ -12518,39 +12492,9 @@ short int _main_liturgicke_obdobie(char *den, char *tyzden, char *modlitba, char
 	}
 
 	Log("nastavenie p (modlitba == %s)...\n", modlitba);
-	p = MODL_NEURCENA;
-	for(i = MODL_INVITATORIUM; i <= MODL_DRUHE_KOMPLETORIUM; i++){
-		if(equals(modlitba, nazov_modlitby(i))){
-			p = i;
-			continue; // exit from loop
-		}
-	}
-	Log("1:p == %d (%s)...\n", p, nazov_modlitby(p));
-	if(p == MODL_NEURCENA){
-		// 2005-08-15: Kvôli simulácii porovnávame aj s konštantami STR_MODL_... 
-		// 2006-10-11: pridané invitatórium a kompletórium | 2013-02-03: opravená fatálna copy-paste chyba
-		if(equals(modlitba, STR_MODL_RANNE_CHVALY))
-			p = MODL_RANNE_CHVALY;
-		else if(equals(modlitba, STR_MODL_POSV_CITANIE))
-			p = MODL_POSV_CITANIE;
-		else if(equals(modlitba, STR_MODL_VESPERY))
-			p = MODL_VESPERY;
-		else if(equals(modlitba, STR_MODL_PREDPOLUDNIM))
-			p = MODL_PREDPOLUDNIM;
-		else if(equals(modlitba, STR_MODL_NAPOLUDNIE))
-			p = MODL_NAPOLUDNIE;
-		else if(equals(modlitba, STR_MODL_POPOLUDNI))
-			p = MODL_POPOLUDNI;
-		else if(equals(modlitba, STR_MODL_INVITATORIUM))
-			p = MODL_INVITATORIUM;
-		else if(equals(modlitba, STR_MODL_KOMPLETORIUM))
-			p = MODL_KOMPLETORIUM;
-		else if(equals(modlitba, STR_MODL_VSETKY))
-			p = MODL_VSETKY;
-	}
-	Log("2:p == %d (%s)...\n", p, nazov_modlitby(p));
-	if(p == MODL_NEURCENA){
-		Export("Nevhodné údaje: nie je urèená modlitba.\n");
+	p = atomodlitba(modlitba);
+	if((p == MODL_NEURCENA) || (p < MODL_INVITATORIUM) || (p > MODL_DRUHE_KOMPLETORIUM)){
+		Export("Nevhodné údaje: nie je urèená modlitba (%s).\n", modlitba);
 		return FAILURE;
 	}
 
