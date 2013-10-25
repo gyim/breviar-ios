@@ -6096,9 +6096,7 @@ short int init_global_string(short int typ, short int poradie_svateho, short int
 	}
 	else if(_local_den.denvt == DEN_NEDELA){
 		// 13/03/2000A.D. -- pridane, aby aj nedele mali tyzden zaltara
-		sprintf(_global_string2, "%c, %s", 
-			_local_den.litrok, 
-			rimskymi_tyzden_zaltara[tyzden_zaltara(_global_den.tyzden)]);
+		sprintf(_global_string2, "%c, %s", _local_den.litrok, rimskymi_tyzden_zaltara[tyzden_zaltara(_global_den.tyzden)]);
 	}
 	else{
 		mystrcpy(_global_string2, "V", MAX_GLOBAL_STR2);
