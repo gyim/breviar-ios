@@ -1469,7 +1469,7 @@ void set_hymnus_kompletorium_obd(short int den, short int tyzzal, short int modl
 // nasledovnÈ funkcie pouûÌvanÈ pre ûalt·r (cezroËnÈ obdobie); 2007-12-06
 
 void set_hymnus(short int den, short int tyzzal, short int modlitba){
-	Log("set_hymnus(): zaËiatok\n");
+	Log("set_hymnus(%d, %d, %d): zaËiatok\n", den, tyzzal, modlitba);
 	short int ktory; // 0 alebo 1
 	short int bit;
 	
@@ -1577,6 +1577,17 @@ void set_antifony_kompletorium_obd(short int den, short int modlitba, short int 
 	if((_global_den.typslav == SLAV_SLAVNOST) && ((den != DEN_NEDELA) && (den != DEN_SOBOTA))){
 		den = DEN_UNKNOWN; // 2008-05-08: ide o sl·vnosù mimo nedieæ
 	}
+
+	short int force_prve_nedelne_kompletorium = NIE;
+	if((den == DEN_SOBOTA) && (modlitba == MODL_KOMPLETORIUM)){
+		force_prve_nedelne_kompletorium = ANO;
+	}
+	short int den_pom = den;
+	if(den == DEN_SOBOTA){
+		den_pom = DEN_NEDELA;
+		zvazok = 9;
+	}
+
 	short int pom_litobd = litobd;
 	file_name_zapamataj();
 	if((litobd == OBD_VELKONOCNE_I) || (litobd == OBD_VELKONOCNE_II) || (litobd == OBD_VELKONOCNA_OKTAVA) || ((litobd == OBD_VELKONOCNE_TROJDNIE) && (_global_den.denvr == VELKONOCNA_NEDELA))){ // pre celÈ trojdnie sa berie nedeænÈ kompletÛrium, preto sa treba sp˝taù priamo na VELKONOCNA_NEDELA
@@ -1590,7 +1601,7 @@ void set_antifony_kompletorium_obd(short int den, short int modlitba, short int 
 	file_name_kompletorium(pom_litobd);
 
 	// antifÛna 1
-	sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], (zvazok == 9)? pismenko_modlitby(MODL_PRVE_KOMPLETORIUM) : pismenko_modlitby(modlitba), 
+	sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den_pom], (zvazok == 9)? pismenko_modlitby(MODL_PRVE_KOMPLETORIUM) : pismenko_modlitby(modlitba), 
 		(pom_litobd == OBD_VELKONOCNE_I) ? ANCHOR_ANTIFONY : ANCHOR_ANTIFONA1);
 	_set_antifona1(modlitba, _file, _anchor);
 	set_LOG_zaltar;
@@ -1599,8 +1610,9 @@ void set_antifony_kompletorium_obd(short int den, short int modlitba, short int 
 	if( 
 		((modlitba == MODL_KOMPLETORIUM) && (_global_modl_kompletorium.pocet_zalmov == 2))
 	||	((modlitba == MODL_PRVE_KOMPLETORIUM) && (_global_modl_prve_kompletorium.pocet_zalmov == 2))
+	||	(force_prve_nedelne_kompletorium == ANO)
 	){
-		sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den], (zvazok == 9)? pismenko_modlitby(MODL_PRVE_KOMPLETORIUM) : pismenko_modlitby(modlitba), 
+		sprintf(_anchor, "_%s%c_%s", nazov_DN_asci[den_pom], (zvazok == 9)? pismenko_modlitby(MODL_PRVE_KOMPLETORIUM) : pismenko_modlitby(modlitba), 
 			(pom_litobd == OBD_VELKONOCNE_I) ? ANCHOR_ANTIFONY : ANCHOR_ANTIFONA2);
 		_set_antifona2(modlitba, _file, _anchor);
 		set_LOG_zaltar;
@@ -1635,10 +1647,14 @@ void set_antifony(short int den, short int tyzzal, short int zvazok, short int m
 		set_LOG_zaltar;
 		// antifona na vecerny hymnus je rovnaka pre prvy a treti, resp. druhy a stvrty tyzden zaltara
 		if((modlitba == MODL_VESPERY) || (modlitba == MODL_PRVE_VESPERY)){
-			if(tyzzal == 3)
+			if(tyzzal == 3){
 				tyzzal = 1;
-			else if(tyzzal == 4)
-				tyzzal = 2;
+			}
+			else{
+				if(tyzzal == 4){
+					tyzzal = 2;
+				}
+			}
 		}
 		file_name_zaltar(den, tyzzal);
 		anchor_name_zaltar(den, tyzzal, modlitba, ANCHOR_ANTIFONA3V);
@@ -2250,10 +2266,37 @@ void _set_kompletorium_slavnost_oktava(short int modlitba, short int litobd, sho
 	} \
 }
 
+void zaltar_kompletorium_okrem_zalmov(short int den, short int obdobie, short int specialne, short int tyzzal, short int modlitba){
+	Log("-- zaltar_kompletorium_okrem_zalmov(%d, %d, %d, %d, %d) -- zaËiatok\n", den, obdobie, specialne, tyzzal, modlitba);
+	// 2013-10-25: vyÚatÈ z funckie zaltar_kompletorium()
+	short int den_pom = den;
+	short int ktore = 2;
+	if(den == DEN_SOBOTA){
+		den_pom = DEN_NEDELA;
+		ktore = 1; /* (den == DEN_SOBOTA)? 1: 2 */
+	}
+	// 2010-08-03: pridan· premenn· tyzzal
+	set_hymnus(den, tyzzal, modlitba); // set_hymnus() v skutoËnosti vol· pre kompletÛrium funkciu set_hymnus_kompletorium_obd()
+	// 2006-10-13: pridanÈ Ôalöie Ëasti pre kompletÛrium
+	set_antifony(den, 1 /* tyzzal */, 1 /* zvazok */, modlitba);
+	set_kcitanie(den_pom, 1 /* tyzzal */, modlitba, ktore);
+	set_kresponz(den, 1 /* tyzzal */, modlitba);
+	// 2013-04-03: doplnen· ant. na Nunc dimittis (doteraz bola napevno)
+	set_nunc_dimittis(modlitba);
+	set_modlitba(den_pom, 1 /* tyzzal */, modlitba, ktore);
+
+	Log("-- zaltar_kompletorium_okrem_zalmov(%d, %d, %d, %d, %d) -- koniec\n", den, obdobie, specialne, tyzzal, modlitba);
+}// zaltar_kompletorium_okrem_zalmov()
+
 // 2009-01-06: vytvorenÈ vyÚatÌm ËastÌ pre kompletÛrium z zaltar_zvazok(); premennÈ tyzzal ani zvazok nepotrebujeme
 // 2010-08-03: potrebujeme premenn˙ tyzzal
 void zaltar_kompletorium(short int den, short int obdobie, short int specialne, short int tyzzal){
 	Log("-- zaltar_kompletorium(%d, %d, %d, %d) -- zaËiatok\n", den, obdobie, specialne, tyzzal);
+
+	if(den == DEN_SOBOTA){
+		Log("keÔûe je sobota, budeme nastavovaù kompletÛrium po prv˝ch nedeæn˝ch veöper·ch...\n");
+	}
+
 	Log("nastavujem poËet ûalmov pre kompletÛrium v z·vislosti od dÚa v t˝ûdni (%d - %s)...\n", den, nazov_dna(den));
 	// 2006-10-17: DoplnenÈ kvÙli rÙznemu poËtu ûalmov pre kompletÛrium; upravenÈ 2006-10-18
 	if(den == DEN_STREDA){
@@ -2263,29 +2306,20 @@ void zaltar_kompletorium(short int den, short int obdobie, short int specialne, 
 		_global_modl_prve_kompletorium.pocet_zalmov = 2;
 		_global_modl_kompletorium.pocet_zalmov = 1;
 	}
+	else if(den == DEN_SOBOTA){
+		_global_modl_kompletorium.pocet_zalmov = 2;
+	}
 	else{
 		_global_modl_kompletorium.pocet_zalmov = 1;
 	}
 	Log("_global_modl_kompletorium.pocet_zalmov == %d; _global_modl_prve_kompletorium.pocet_zalmov == %d...\n", _global_modl_kompletorium.pocet_zalmov, _global_modl_prve_kompletorium.pocet_zalmov);
 
 	if(specialne == ZALTAR_VSETKO){
-		Log("ZALTAR_VSETKO -- takûe nastavujem vöetko zo ûalt·ra...\n");
-		// 2006-10-13: pridanÈ Ëasti pre kompletÛrium
-		// 2010-08-03: pridan· premenn· tyzzal
-		set_hymnus(den, tyzzal, MODL_KOMPLETORIUM); // set_hymnus() v skutoËnosti vol· pre kompletÛrium funkciu set_hymnus_kompletorium_obd()
-		set_hymnus(den, tyzzal, MODL_PRVE_KOMPLETORIUM); // set_hymnus() v skutoËnosti vol· pre kompletÛrium funkciu set_hymnus_kompletorium_obd()
-		// 2006-10-13: pridanÈ Ôalöie Ëasti pre kompletÛrium
-		set_antifony(den, 1 /* tyzzal */, 1 /* zvazok */, MODL_KOMPLETORIUM);
-		set_antifony(den, 1 /* tyzzal */, 1 /* zvazok */, MODL_PRVE_KOMPLETORIUM);
-		set_kcitanie(den, 1 /* tyzzal */, MODL_KOMPLETORIUM);
-		set_kcitanie(den, 1 /* tyzzal */, MODL_PRVE_KOMPLETORIUM);
-		set_kresponz(den, 1 /* tyzzal */, MODL_KOMPLETORIUM);
-		set_kresponz(den, 1 /* tyzzal */, MODL_PRVE_KOMPLETORIUM);
-		// 2013-04-03: doplnen· ant. na Nunc dimittis (doteraz bola napevno)
-		set_nunc_dimittis(MODL_KOMPLETORIUM);
-		set_nunc_dimittis(MODL_PRVE_KOMPLETORIUM);
-		set_modlitba(den, 1 /* tyzzal */, MODL_KOMPLETORIUM);
-		set_modlitba(den, 1 /* tyzzal */, MODL_PRVE_KOMPLETORIUM);
+		Log("ZALTAR_VSETKO -- takûe nastavujem vöetko zo ûalt·ra... (zaltar_kompletorium)\n");
+		if(den == DEN_NEDELA){
+			zaltar_kompletorium_okrem_zalmov(den, obdobie, specialne, tyzzal, MODL_PRVE_KOMPLETORIUM);
+		}
+		zaltar_kompletorium_okrem_zalmov(den, obdobie, specialne, tyzzal, MODL_KOMPLETORIUM);
 	}
 	else{
 		Log("nebolo ZALTAR_VSETKO ani ZALTAR_IBA_ZALMY_HYMNUS_MCD -- takûe nastavujem len ûalmy...\n");
@@ -2314,6 +2348,8 @@ void zaltar_kompletorium(short int den, short int obdobie, short int specialne, 
 			set_zalm(1, MODL_KOMPLETORIUM, "z88.htm", "ZALM88");
 			break;
 		case DEN_SOBOTA:
+			set_zalm(1, MODL_KOMPLETORIUM, "z4.htm", "ZALM4");
+			set_zalm(2, MODL_KOMPLETORIUM, "z134.htm", "ZALM134");
 			break;
 	}// switch(den)
 	Log("-- zaltar_kompletorium(%d, %d, %d, %d) -- koniec\n", den, obdobie, specialne, tyzzal);
@@ -2521,7 +2557,7 @@ void zaltar_zvazok(short int den, short int tyzzal, short int obdobie, short int
 	zaltar_kompletorium(den, obdobie, specialne, tyzzal);
 
 	if(specialne == ZALTAR_VSETKO){
-		Log("ZALTAR_VSETKO -- takûe nastavujem vöetko zo ûalt·ra...\n");
+		Log("ZALTAR_VSETKO -- takûe nastavujem vöetko zo ûalt·ra... (zaltar_zvazok)\n");
 		// cast vseobecna pre vsetky 4 tyzdne zaltara upravena 2003-08-13. veci dane do dvoch makier
 
 		// 2009-01-06: Ëasti pre kompletÛrium (pridanÈ 2006-10-13) presunutÈ do zaltar_kompletorium()
