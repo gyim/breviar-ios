@@ -22,6 +22,7 @@ rm "$1"/android/build-assets "$1"/android/cleanup-assets
 # install upstream source
 mkdir "$1"/cgi-bin 
 cp -dr $ROOT/cgi-bin/source "$1"/cgi-bin/source
+cp -dr $ROOT/ios "$1"/ios
 
 # install config and CSSs
 cp $ROOT/cgi-bin/breviar-web.cfg "$1"/cgi-bin/breviar-web.cfg
