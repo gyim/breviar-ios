@@ -27,11 +27,11 @@ p { font-family: verdana, helvetica; color: #000000; font-style: normal; }
 	font-weight: bold; }
 
 p.patka { 
-	font-size: 80%; 
+	font-size: 70%; 
 	text-align: center; 
 	text-indent: 0em;  
-	margin-top: -1mm; 
-	letter-spacing: 0mm }
+	letter-spacing: 0mm 
+}
 
 /* inherit nefunguje v IE 7 */
 a.quiet { text-decoration:none; color: inherit; }

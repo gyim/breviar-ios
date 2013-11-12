@@ -29,11 +29,11 @@ p { font-family: Cambria, Verdana, Tahoma, Georgia, Sans-Serif; color: #000000; 
 	font-weight: bold; }
 
 p.patka { 
-	font-size: 80%; 
+	font-size: 70%; 
 	text-align: center; 
 	text-indent: 0em;  
-	margin-top: -1mm; 
-	letter-spacing: 0mm }
+	letter-spacing: 0mm 
+}
 
 a { font-family: Cambria, Verdana, Tahoma, Georgia, Sans-Serif; color: #000000; text-decoration: underline; }
 a:hover { color: white; background-color: #663300; text-decoration:none; }
