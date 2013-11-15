@@ -31499,6 +31499,9 @@ label_25_MAR:
 							}
 
 							modlitba = MODL_POSV_CITANIE;
+							if(_global_jazyk == JAZYK_CZ){
+								_vlastna_cast_hymnus(modlitba, _global_den.litobd);
+							}
 							_vlastna_cast_modlitba;
 							_vlastna_cast_1citanie;
 							_vlastna_cast_2citanie;
