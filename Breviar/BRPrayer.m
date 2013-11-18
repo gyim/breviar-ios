@@ -45,7 +45,9 @@ static NSString *prayerQueryIds[] = {
 			 @"p": prayerQueryIds[self.prayerType],
 			 @"ds": [NSNumber numberWithInteger:self.celebrationId],
 			 @"o0": @"60",
+			 @"o1": @"0",
 			 @"o2": @"152",
+			 @"o4": @"0"
 		 }];
 		
 		body = [BRCGIQuery queryWithArgs:queryOptions];
