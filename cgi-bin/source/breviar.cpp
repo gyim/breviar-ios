@@ -4326,7 +4326,7 @@ void showPrayer(short int type, short int aj_navigacia = ANO){
 
 	// log force options parametrov
 	for(i = 0; i < POCET_GLOBAL_OPT; i++){
-		Log("showPrayer: opt %d == `%s' (%d)\n", i, pom_MODL_OPTF[i], _global_optf[i]);
+		Log("showPrayer: optF %d == `%s' (%d)\n", i, pom_MODL_OPTF[i], _global_optf[i]);
 	}// Log pom_MODL_OPTF[i]
 
 	// force options parametre
@@ -4341,6 +4341,11 @@ void showPrayer(short int type, short int aj_navigacia = ANO){
 	Log("option 0 == %d, èo znamená: \n", _global_opt[OPT_0_SPECIALNE]);
 	Log("\t BIT_OPT_0_VERSE == %d (áno == %d)\n", _global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_VERSE, BIT_OPT_0_VERSE);
 	Log("\t BIT_OPT_0_REFERENCIE == %d (áno == %d)\n", _global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_REFERENCIE, BIT_OPT_0_REFERENCIE);
+
+	// 2013-11-26: log option 1
+	Log("option 1 == %d, èo znamená: \n", _global_opt[OPT_1_CASTI_MODLITBY]);
+	Log("\t BIT_OPT_1_PROSBY_ZVOLANIE == %d (áno == %d)\n", _global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_PROSBY_ZVOLANIE, BIT_OPT_1_PROSBY_ZVOLANIE);
+	Log("\t BIT_OPT_1_SLAVA_OTCU == %d (áno == %d)\n", _global_opt[OPT_1_CASTI_MODLITBY] & BIT_OPT_1_SLAVA_OTCU, BIT_OPT_1_SLAVA_OTCU);
 
 	// samotne vypisanie, o aku modlitbu ide
 	Log("showPrayer(type %i, %s), _global_modlitba == %s\n", type, nazov_modlitby(type), nazov_modlitby(_global_modlitba));
@@ -15348,7 +15353,7 @@ short int parseQueryString(void){
 		// premenná WWW_MODL_OPTF_0_... (nepovinná), j = 0 až POCET_OPT_0_SPECIALNE
 		i = 0; // param[0] by mal síce obsahova query type, ale radšej kontrolujeme od 0
 		Log("pokúšam sa zisti hodnotu parametra %s... parseQueryString(), force, bit-komponenty 0\n", local_str);
-		while((equalsi(pom_MODL_OPTF[j], STR_EMPTY)) && (i < pocet)){
+		while((equalsi(pom_MODL_OPTF_SPECIALNE[j], STR_EMPTY)) && (i < pocet)){
 			// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
 			if(equals(param[i].name, local_str)){
 				// ide o parameter STR_MODL_OPTFj
@@ -15387,7 +15392,7 @@ short int parseQueryString(void){
 		// premenná WWW_MODL_OPTF_1_... (nepovinná), j = 0 až POCET_OPT_1_CASTI_MODLITBY
 		i = 0; // param[0] by mal síce obsahova query type, ale radšej kontrolujeme od 0
 		Log("pokúšam sa zisti hodnotu parametra %s... parseQueryString(), force, bit-komponenty 1\n", local_str);
-		while((equalsi(pom_MODL_OPTF[j], STR_EMPTY)) && (i < pocet)){
+		while((equalsi(pom_MODL_OPTF_CASTI_MODLITBY[j], STR_EMPTY)) && (i < pocet)){
 			// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
 			if(equals(param[i].name, local_str)){
 				// ide o parameter STR_MODL_OPTFj
@@ -15426,7 +15431,7 @@ short int parseQueryString(void){
 		// premenná WWW_MODL_OPT_2_... (nepovinná), j = 0 až POCET_OPT_2_HTML_EXPORT
 		i = 0; // param[0] by mal síce obsahova query type, ale radšej kontrolujeme od 0
 		Log("pokúšam sa zisti hodnotu parametra %s... parseQueryString(), force, bit-komponenty 2\n", local_str);
-		while((equalsi(pom_MODL_OPTF[j], STR_EMPTY)) && (i < pocet)){
+		while((equalsi(pom_MODL_OPTF_HTML_EXPORT[j], STR_EMPTY)) && (i < pocet)){
 			// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
 			if(equals(param[i].name, local_str)){
 				// ide o parameter STR_MODL_OPTFj
@@ -15461,7 +15466,7 @@ short int parseQueryString(void){
 		// premenná WWW_MODL_OPTF_5_... (nepovinná), j = 0 až POCET_OPT_5_ALTERNATIVES
 		i = 0; // param[0] by mal síce obsahova query type, ale radšej kontrolujeme od 0
 		Log("pokúšam sa zisti hodnotu parametra %s... parseQueryString(), force, bit-komponenty 5\n", local_str);
-		while((equalsi(pom_MODL_OPTF[j], STR_EMPTY)) && (i < pocet)){
+		while((equalsi(pom_MODL_OPTF_ALTERNATIVES[j], STR_EMPTY)) && (i < pocet)){
 			// Log("...parameter %i (meno: %s, hodnota: %s)\n", i, param[i].name, param[i].val);
 			if(equals(param[i].name, local_str)){
 				// ide o parameter STR_MODL_OPTFj
