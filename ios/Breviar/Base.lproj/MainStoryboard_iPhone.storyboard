@@ -383,7 +383,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <!--Prayer View Controller - Prayer-->
         <scene sceneID="mNQ-Uh-QpY">
             <objects>
-                <viewController id="N9h-r0-k8T" customClass="BRPrayerViewController" sceneMemberID="viewController">
+                <viewController wantsFullScreenLayout="YES" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="N9h-r0-k8T" customClass="BRPrayerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xeY-7i-kwU"/>
                         <viewControllerLayoutGuide type="bottom" id="3c4-n7-hqg"/>
