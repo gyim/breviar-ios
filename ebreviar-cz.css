@@ -335,7 +335,10 @@ body, html {
 	color: #1a1a1a;
 	font-family: Sans-Serif, Candara, Verdana, Tahoma, Helvetica, Arial;
 	font-weight: normal; 
+<<<<<<< HEAD
 	-webkit-text-size-adjust: none; /* Prevent font scaling in landscape */
+=======
+>>>>>>> parent of 4da197c... webkit font sizing fix
 }
 
 p { 
