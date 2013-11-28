@@ -1908,7 +1908,7 @@ const char *html_text_option1_mcd_zalmy_tri[POCET_JAZYKOV + 1] =
 {"pre modlitbu cez deò poui psalmódiu z troch tıdòov altára (aktuálny, predchádzajúci, nasledujúci)", 
  "pro modlitbu uprostøed dne pouít almy z tøí tıdnù ze altáøe (aktuální, pøedchozí, následující)", 
  "", 
- "",
+ "for prayer during the day use psalmody from three weeks of psalter (current, previous, next)",
  "",
  "pro modlitbu uprostøed dne pouít psalmodii z tøí tıdnù ze altáøe (aktuální, pøedchozí, následující)", 
  "a Napközi imaórában a három heti (aktuális, elõzõ, következõ) zsoltározást alkalmazni"
