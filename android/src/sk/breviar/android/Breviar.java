@@ -184,11 +184,11 @@ public class Breviar extends Activity {
             view.postDelayed(new Runnable() {
               @Override
               public void run() {
-                final_view.evaluateJavaScript(
+                final_view.evaluateJavascript(
                     "$(\"#contentRoot\").width(window.innerWidth);", null);
                 scaleChangedRunning = false;
               }
-            }, 50);
+            }, 100);
           }
           super.onScaleChanged(view, oldSc, newSc);
         }
