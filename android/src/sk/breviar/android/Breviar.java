@@ -129,7 +129,12 @@ public class Breviar extends Activity {
       wv.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
       wv.getSettings().setBuiltInZoomControls(true);
       wv.getSettings().setSupportZoom(true);
-      wv.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+      // TODO(riso): replace constants by symbolic values after sdk upgrade
+      if (Build.VERSION.SDK_INT < 19) {  // pre-KitKat
+        wv.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+      } else {
+        wv.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+      }
       wv.getSettings().setUseWideViewPort(false);
       wv.setInitialScale(scale);
       initialized = false;
@@ -137,6 +142,8 @@ public class Breviar extends Activity {
 
       final Breviar parent = this;
       wv.setWebViewClient(new WebViewClient() {
+        boolean scaleChangedRunning = false;
+
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
           if (url.startsWith("mailto:")) {
@@ -168,7 +175,21 @@ public class Breviar extends Activity {
         public void onScaleChanged(WebView view, float oldSc, float newSc) {
           parent.scale = (int)(newSc*100);
           Log.v("breviar", "onScaleChanged: setting scale = " + scale);
-          view.setInitialScale(parent.scale);
+          if (Build.VERSION.SDK_INT < 19) {  // pre-KitKat
+            view.setInitialScale(parent.scale);
+          } else {
+            if (scaleChangedRunning) return;
+            scaleChangedRunning = true;
+            final WebView final_view = view;
+            view.postDelayed(new Runnable() {
+              @Override
+              public void run() {
+                final_view.evaluateJavaScript(
+                    "$(\"#contentRoot\").width(window.innerWidth);", null);
+                scaleChangedRunning = false;
+              }
+            }, 50);
+          }
           super.onScaleChanged(view, oldSc, newSc);
         }
 
