@@ -129,11 +129,12 @@ public class Breviar extends Activity {
       wv.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
       wv.getSettings().setBuiltInZoomControls(true);
       wv.getSettings().setSupportZoom(true);
+      wv.getSettings().setJavaScriptEnabled(true);
       // TODO(riso): replace constants by symbolic values after sdk upgrade
       if (Build.VERSION.SDK_INT < 19) {  // pre-KitKat
         wv.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
       } else {
-        wv.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+        wv.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING);
       }
       wv.getSettings().setUseWideViewPort(false);
       wv.setInitialScale(scale);
@@ -184,8 +185,7 @@ public class Breviar extends Activity {
             view.postDelayed(new Runnable() {
               @Override
               public void run() {
-                final_view.evaluateJavascript(
-                    "$(\"#contentRoot\").width(window.innerWidth);", null);
+                final_view.evaluateJavascript("document.getElementById('contentRoot').style.width = window.innerWidth;", null);
                 scaleChangedRunning = false;
               }
             }, 100);
