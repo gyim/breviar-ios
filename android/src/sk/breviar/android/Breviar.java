@@ -142,8 +142,6 @@ public class Breviar extends Activity {
 
       final Breviar parent = this;
       wv.setWebViewClient(new WebViewClient() {
-        boolean scaleChangedRunning = false;
-
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
           if (url.startsWith("mailto:")) {
@@ -177,18 +175,6 @@ public class Breviar extends Activity {
           Log.v("breviar", "onScaleChanged: setting scale = " + scale);
           if (Build.VERSION.SDK_INT < 19) {  // pre-KitKat
             view.setInitialScale(parent.scale);
-          } else {
-            if (scaleChangedRunning) return;
-            scaleChangedRunning = true;
-            final WebView final_view = view;
-            view.postDelayed(new Runnable() {
-              @Override
-              public void run() {
-                final_view.evaluateJavascript(
-                    "$(\"#contentRoot\").width(window.innerWidth);", null);
-                scaleChangedRunning = false;
-              }
-            }, 100);
           }
           super.onScaleChanged(view, oldSc, newSc);
         }
