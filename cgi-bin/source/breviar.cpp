@@ -1035,6 +1035,7 @@ short int setForm(void){
 				case 3: strcat(local_str, STR_MODL_OPTF_0_ZJAV_NED); break; // BIT_OPT_0_ZJAVENIE_PANA_NEDELA
 				case 4: strcat(local_str, STR_MODL_OPTF_0_NAN_NED); break; // BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA
 				case 5: strcat(local_str, STR_MODL_OPTF_0_TK_NED); break; // BIT_OPT_0_TELAKRVI_NEDELA
+				case 6: strcat(local_str, STR_MODL_OPTF_0_FONT_NORMAL); break; // BIT_OPT_0_FONT_NORMAL
 			}// switch(i)
 			strcat(local_str, "=");
 			strcat(local_str, pom_MODL_OPTF_SPECIALNE[i]);
@@ -6353,6 +6354,9 @@ void xml_export_options(void){
 						case 5: 
 							Export(ELEMOPT_BEGIN(XML_BIT_OPT_0_TELAKRVI_NEDELA)"%d"ELEM_END(XML_BIT_OPT_0_TELAKRVI_NEDELA)"\n", BIT_OPT_0_TELAKRVI_NEDELA, STR_MODL_OPTF_0_TK_NED, html_text_option0_tk_ne[_global_jazyk], ((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_TELAKRVI_NEDELA) == BIT_OPT_0_TELAKRVI_NEDELA));
 							break; // BIT_OPT_0_TELAKRVI_NEDELA
+						case 6: 
+							Export(ELEMOPT_BEGIN(XML_BIT_OPT_0_FONT_NORMAL)"%d"ELEM_END(XML_BIT_OPT_0_FONT_NORMAL)"\n", BIT_OPT_0_FONT_NORMAL, STR_MODL_OPTF_0_FONT_NORMAL, html_text_option0_font_normal[_global_jazyk], ((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_FONT_NORMAL) == BIT_OPT_0_FONT_NORMAL));
+							break; // BIT_OPT_0_FONT_NORMAL
 					}// switch(j)
 				}// for j
 				Export(ELEM_END(XML_OPT_0_SPECIALNE)"\n");
@@ -8828,21 +8832,21 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 			_export_main_formular_checkbox(OPT_2_HTML_EXPORT, BIT_OPT_2_ALTERNATIVES, STR_MODL_OPTF_2_ALTERNATIVES, html_text_option2_alternatives[_global_jazyk], html_text_option2_alternatives_explain[_global_jazyk]);
 		}
 
+		Export(HTML_CRLF_LINE_BREAK);
+		Export("<"HTML_SPAN_BOLD_TOOLTIP">%s</span>", str_doplnkova_psalmodia[_global_jazyk], str_doplnkova_psalmodia[_global_jazyk]);
+
+		// pole (checkbox) WWW_/STR_MODL_OPTF_5_DOPLNK_PSALM_122_129
+		_export_main_formular_checkbox(OPT_5_ALTERNATIVES, BIT_OPT_5_DOPLNK_PSALM_122_129, STR_MODL_OPTF_5_DOPLNK_PSALM_122_129, html_text_option5_DPsalmZ122_129[_global_jazyk], html_text_option5_DPsalmZ122_129_explain[_global_jazyk]);
+
+		// pole (checkbox) WWW_/STR_MODL_OPTF_5_DOPLNK_PSALM_126_129
+		_export_main_formular_checkbox(OPT_5_ALTERNATIVES, BIT_OPT_5_DOPLNK_PSALM_126_129, STR_MODL_OPTF_5_DOPLNK_PSALM_126_129, html_text_option5_DPsalmZ126_129[_global_jazyk], html_text_option5_DPsalmZ126_129_explain[_global_jazyk]);
+
+		// pole (checkbox) WWW_/STR_MODL_OPTF_5_DOPLNK_PSALM_127_131
+		_export_main_formular_checkbox(OPT_5_ALTERNATIVES, BIT_OPT_5_DOPLNK_PSALM_127_131, STR_MODL_OPTF_5_DOPLNK_PSALM_127_131, html_text_option5_DPsalmZ127_131[_global_jazyk], html_text_option5_DPsalmZ127_131_explain[_global_jazyk]);
+
 		if((_global_optf[OPT_2_HTML_EXPORT] & BIT_OPT_2_ROZNE_MOZNOSTI) != BIT_OPT_2_ROZNE_MOZNOSTI){ // len ak NIE JE t·to moûnosù (zobrazovanie vöeliËoho) zvolen·
 
 			if(_global_jazyk != JAZYK_CZ){
-
-				Export(HTML_CRLF_LINE_BREAK);
-				Export("<"HTML_SPAN_BOLD_TOOLTIP">%s</span>", str_doplnkova_psalmodia[_global_jazyk], str_doplnkova_psalmodia[_global_jazyk]);
-
-				// pole (checkbox) WWW_/STR_MODL_OPTF_5_DOPLNK_PSALM_122_129
-				_export_main_formular_checkbox(OPT_5_ALTERNATIVES, BIT_OPT_5_DOPLNK_PSALM_122_129, STR_MODL_OPTF_5_DOPLNK_PSALM_122_129, html_text_option5_DPsalmZ122_129[_global_jazyk], html_text_option5_DPsalmZ122_129_explain[_global_jazyk]);
-
-				// pole (checkbox) WWW_/STR_MODL_OPTF_5_DOPLNK_PSALM_126_129
-				_export_main_formular_checkbox(OPT_5_ALTERNATIVES, BIT_OPT_5_DOPLNK_PSALM_126_129, STR_MODL_OPTF_5_DOPLNK_PSALM_126_129, html_text_option5_DPsalmZ126_129[_global_jazyk], html_text_option5_DPsalmZ126_129_explain[_global_jazyk]);
-
-				// pole (checkbox) WWW_/STR_MODL_OPTF_5_DOPLNK_PSALM_127_131
-				_export_main_formular_checkbox(OPT_5_ALTERNATIVES, BIT_OPT_5_DOPLNK_PSALM_127_131, STR_MODL_OPTF_5_DOPLNK_PSALM_127_131, html_text_option5_DPsalmZ127_131[_global_jazyk], html_text_option5_DPsalmZ127_131_explain[_global_jazyk]);
 
 				// posv‰tnÈ ËÌtanie
 				Export(HTML_CRLF_LINE_BREAK);
@@ -9069,6 +9073,9 @@ void _export_main_formular(short int den, short int mesiac, short int rok, short
 
 		// pole (checkbox) WWW_/STR_MODL_OPTF_2_NOCNY_REZIM
 		_export_main_formular_checkbox(OPT_2_HTML_EXPORT, BIT_OPT_2_NOCNY_REZIM, STR_MODL_OPTF_2_NOCNY_REZIM, html_text_option2_nocny_rezim[_global_jazyk], html_text_option2_nocny_rezim_explain[_global_jazyk]);
+
+		// pole (checkbox) WWW_/STR_MODL_OPTF_0_FONT_NORMAL
+		_export_main_formular_checkbox(OPT_0_SPECIALNE, BIT_OPT_0_FONT_NORMAL, STR_MODL_OPTF_0_FONT_NORMAL, html_text_option0_font_normal[_global_jazyk], html_text_option0_font_normal_explain[_global_jazyk]);
 
 		Export("</td></tr>\n");
 
@@ -14472,6 +14479,7 @@ short int getForm(void){
 			case 3: strcat(local_str, STR_MODL_OPTF_0_ZJAV_NED); break; // BIT_OPT_0_ZJAVENIE_PANA_NEDELA
 			case 4: strcat(local_str, STR_MODL_OPTF_0_NAN_NED); break; // BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA
 			case 5: strcat(local_str, STR_MODL_OPTF_0_TK_NED); break; // BIT_OPT_0_TELAKRVI_NEDELA
+			case 6: strcat(local_str, STR_MODL_OPTF_0_FONT_NORMAL); break; // BIT_OPT_0_FONT_NORMAL
 		}// switch(i)
 		ptr = getenv(local_str);
 		if(ptr != NULL){
@@ -15259,6 +15267,7 @@ short int parseQueryString(void){
 			case 3: strcat(local_str, STR_MODL_OPTF_0_ZJAV_NED); break; // BIT_OPT_0_ZJAVENIE_PANA_NEDELA
 			case 4: strcat(local_str, STR_MODL_OPTF_0_NAN_NED); break; // BIT_OPT_0_NANEBOVSTUPNENIE_NEDELA
 			case 5: strcat(local_str, STR_MODL_OPTF_0_TK_NED); break; // BIT_OPT_0_TELAKRVI_NEDELA
+			case 6: strcat(local_str, STR_MODL_OPTF_0_FONT_NORMAL); break; // BIT_OPT_0_FONT_NORMAL
 		}// switch(j)
 		// premenn· WWW_MODL_OPTF_0_... (nepovinn·), j = 0 aû POCET_OPT_0_SPECIALNE
 		i = pocet; // backwards; param[0] by mal sÌce obsahovaù query type, ale radöej kontrolujeme aû po 0
