@@ -143,8 +143,6 @@ public class Breviar extends Activity {
 
       final Breviar parent = this;
       wv.setWebViewClient(new WebViewClient() {
-        boolean scaleChangedRunning = false;
-
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
           if (url.startsWith("mailto:")) {
