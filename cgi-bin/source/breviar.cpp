@@ -8326,6 +8326,17 @@ void _export_rozbor_dna_buttons_dni_compact(short int typ, short int dnes_dnes /
 	Log("--- _export_rozbor_dna_buttons_dni_compact(typ == %d) -- end\n", typ);
 }// _export_rozbor_dna_buttons_dni_compact()
 
+// 2013-12-02: enable to display date-navigation buttons in compact mode also for online web
+void _export_rozbor_dna_buttons_dni_call(short int typ, short int dnes_dnes /* = ANO */){
+	if((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_BUTTONY_USPORNE) == BIT_OPT_2_BUTTONY_USPORNE){
+		//bolo: #if defined(OS_Windows_Ruby) || defined(IO_ANDROID)
+		_export_rozbor_dna_buttons_dni_compact(typ, dnes_dnes);
+	}
+	else{
+		_export_rozbor_dna_buttons_dni_orig(typ, dnes_dnes);
+	}
+}// _export_rozbor_dna_buttons_dni_call()
+
 //---------------------------------------------------------------------
 // _export_rozbor_dna_kalendar(int, int)
 //
