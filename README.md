@@ -4,11 +4,12 @@ Getting started
 This repository contains only the iOS sources, so in order to get started you
 have to fetch the rest of the files from various places.
 
-First, create a directory for the Breviar project and clone this repository:
+First, create a directory for the Breviar project and clone the `ios` branch
+of this repository:
 
     mkdir Liturgia-hodin-online
     cd Liturgia-hodin-online
-    git clone https://github.com/gyim/Liturgia-hodin-online.git ios
+    git clone https://github.com/gyim/Liturgia-hodin-online.git ios -b ios
 
 The ios/ folder will contain only the iOS sources, but with a good git history.
 Clone and link the rest of the sources from here:
