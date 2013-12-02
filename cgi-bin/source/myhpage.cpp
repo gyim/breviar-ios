@@ -55,7 +55,12 @@ short int bol_content_type_text_xml = NIE;
 #define __MYHPAGE_CPP_HTML_CONST
 
 // obsahuje %s
-const char *html_header_1 = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\n\t\"http://www.w3.org/TR/html4/loose.dtd\">\n<html>\n<head>\n\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=%s\">\n\t<meta name=\"Author\" content=\"Juraj Vidéky\">\n";
+const char *html_header_1 =
+// Android KitKat nevie javascriptom zalamovat text, ak je specifikovany tento doctype.
+#ifndef MODEL_android
+    "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\n\t\"http://www.w3.org/TR/html4/loose.dtd\">\n"
+#endif
+    "<html>\n<head>\n\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=%s\">\n\t<meta name=\"Author\" content=\"Juraj Vidéky\">\n";
 const char *html_header_css = "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"";
 const char *html_footer_1 = STR_EMPTY; // "<p><center>______</center>"; // "<hr>";
 
@@ -187,6 +192,9 @@ void _hlavicka(char *title, FILE * expt, short int level, short int spec){
     _header_css(expt, level, nazov_css_suboru);
     if ((_global_opt[OPT_2_HTML_EXPORT] & BIT_OPT_2_NOCNY_REZIM) == BIT_OPT_2_NOCNY_REZIM) {
         _header_css(expt, level, nazov_css_invert_colors);
+    }
+    if ((_global_opt[OPT_0_SPECIALNE] & BIT_OPT_0_FONT_NORMAL) == BIT_OPT_0_FONT_NORMAL) {
+        _header_css(expt, level, nazov_css_normal_font_weight);
     }
 	Export_to_file(expt, "\t<meta name=\"viewport\" content=\"width=device-width, user-scalable=yes, initial-scale=1.0\" />\n");
 	Export_to_file(expt, "<title>%s</title>\n", title);

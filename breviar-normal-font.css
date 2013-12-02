@@ -1,0 +1,144 @@
+/* 2013-11-03 class .respons for responsories */
+.respons p { 
+	font-weight: normal; 
+}
+
+.respons p.respR, p.respV, p.respO, p.respF { 
+	font-weight: normal; 
+}
+
+/* for SK & LA, R/V is used; for CZ, O/V is used; for HU, V/F is used */
+.respons p.respR:before { 
+	color: #ff0000; 
+	content: 'R. '; 
+	font-weight: normal; 
+}
+
+.respons p.respV:before { 
+	color: #ff0000; 
+	content: 'V. '; 
+	font-weight: normal; 
+}
+
+.respons p.respO:before { 
+	color: #ff0000; 
+	content: 'O. '; 
+	font-weight: normal; 
+}
+
+.respons p.respF:before { 
+	color: #ff0000; 
+	content: 'F. '; 
+	font-weight: normal; 
+}
+
+/* 2013-10-21 */
+div.hymn, div.responsory, div.readings {
+    font-weight: normal;
+}
+
+/* 2013-09-19 class for calendar */
+.calendar.heading { 
+	font-weight: normal; 
+}
+
+.preces p.partR, p.partV, p.intro { 
+	font-weight: normal; 
+}
+
+/* 2013-09-02 #psalm changed to class .psalm; instead of black color used #1a1a1a; */
+/* new 2013-06-19 */
+.psalm .psalm-name { 
+	font-weight: normal; 
+}
+
+/* new 2013-06.16 / updated 2013-06-19 and 2013-06-24 */
+.psalm p { 
+	font-weight: normal; 
+}
+
+.psalm p.verse { 
+	font-weight: normal; 
+}
+
+.antiphon { 
+	font-weight: normal; 
+}
+
+/* new 2013-04-18 */
+/* updated 2013-10-21 font-size:larger; -> font-size:normal; */
+.psalm .psalm-title { 
+	font-weight: normal; 
+}
+
+/* new 2013-04-02 */
+#week-day .day-title { 
+	font-weight: normal; 
+}
+
+#week-day .title { 
+	font-weight: normal; 
+}
+
+.redbold { 
+	font-weight: normal; 
+}
+
+.bluebold { 
+	font-weight: normal; 
+}
+
+.bold { 
+	font-weight: normal; 
+}
+
+.boldit { 
+	font-weight: normal; 
+}
+
+.parameter { 
+	font-weight: normal; 
+}
+
+.value { 
+	font-weight: normal; 
+}
+
+.duoraz { 
+	font-weight: normal; 
+}
+
+/* dnes */
+input.button1, input.reset1 { 
+	font-weight: normal;
+}
+
+/* apply to all elements */
+b { 
+	font-weight: normal !important; 
+}
+
+strong { 
+	font-weight: normal !important; 
+}
+
+body { 
+	font-weight: normal !important; 
+}
+
+h1 { 
+	font-weight: normal;
+}
+
+h2 { 
+	font-weight: normal;
+}
+
+h3 { 
+	font-weight: normal;
+}
+
+h4 { 
+	font-weight: normal;
+}
+
