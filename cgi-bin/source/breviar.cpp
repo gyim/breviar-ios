@@ -1660,7 +1660,13 @@ void includeFile(short int type, const char *paramname, const char *fname, const
 							}
 							if(write_krizik == ANO){
 								Export("-->");
-								Export(" <font color=\"#FF0000\">†</font> ");
+								if(je_antifona == ANO){
+									Export(HTML_NONBREAKING_SPACE); // pre krížik na zaèiatku žalmu/chválospevu medzeru netreba
+								}
+								Export("<"HTML_SPAN_RED">"HTML_CROSS"</span>");
+								if(je_antifona != ANO){
+									Export(HTML_NONBREAKING_SPACE); // pre krížik na konci chválospevu medzeru netreba
+								}
 								Export("<!--");
 							}
 						}
