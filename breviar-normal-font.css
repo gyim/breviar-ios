@@ -109,7 +109,7 @@ div.hymn, div.responsory, div.readings {
 }
 
 /* dnes */
-input.button1, input.reset1 { 
+input.button1, input.reset1, .button1 { 
 	font-weight: normal;
 }
 
