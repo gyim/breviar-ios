@@ -615,6 +615,9 @@ const char *nazov_slavenia_lokal[] =
 ,"pre Slovensko zatia¾ nedovolené slávenie"                                                                     // LOKAL_SLAV_NEDOVOLENE
 ,"Katonai Ordinariátus: "HTML_LINE_BREAK"Az Ordinariátus védõszentje; fõünnep"                                  // LOKAL_SLAV_KATONAI_ORDINARIAT
 ,"Debrecen-Nyíregyháza: "HTML_LINE_BREAK"A székesegyház felszentelése; fõünnep"                                 // LOKAL_SLAV_DEBR_NYIREGY
+,"jen kanonie Doksany"                                                                                          // LOKAL_SLAV_OPRAEM_DOKSANY
+,"jen kanonie Doksany a Želiv"                                                                                  // LOKAL_SLAV_OPRAEM_DOKSANY_ZELIV
+,"jen kanonie Teplá"                                                                                            // LOKAL_SLAV_OPRAEM_TEPLA
 };
 
 // names of liturgical colors
@@ -3586,6 +3589,15 @@ const char *text_FEB_17_OPRAEM[POCET_JAZYKOV + 1] =
  "",
  "",
  };
+const char *text_FEB_18_OPRAEM[POCET_JAZYKOV + 1] = 
+{"",
+ "Sv. sedmi zakladatelù øádu servitù",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_FEB_18_OP[POCET_JAZYKOV + 1] = 
 {"Bl. Jána (Angelika) z Fiesole, kòaza",
  "",
@@ -4047,7 +4059,7 @@ const char *text_APR_24_OFM[POCET_JAZYKOV + 1] =
  };
 const char *text_APR_24_OPRAEM[POCET_JAZYKOV + 1] = 
 {"",
- "Obrácení našeho otce svatého Augustina, biskupa a uèitele církve",
+ "Obrácení našeho otce svatého Augustina, "HTML_LINE_BREAK"biskupa a uèitele církve",
  "",
  "",
  "",
@@ -5400,6 +5412,15 @@ const char *text_JUN_29[POCET_JAZYKOV + 1] =
  "Sv. Petra a Pavla, apoštolù",
  "Szent Péter és Szent Pál apostolok",
  };
+const char *text_JUN_29_OPRAEM[POCET_JAZYKOV + 1] = 
+{"Sv. Petra a Pavla, apoštolov",
+ "Sv. Petra a Pavla, apoštolù, titulární slavnost opatského kostela",
+ "",
+ "",
+ "",
+ "Sv. Petra a Pavla, apoštolù",
+ "Szent Péter és Szent Pál apostolok",
+ };
 const char *text_JUN_30[POCET_JAZYKOV + 1] = 
 {"Prvých svätých muèeníkov Cirkvi v Ríme",
  "Svatých prvomuèedníkù øímských",
@@ -6282,6 +6303,15 @@ const char *text_AUG_16[POCET_JAZYKOV + 1] =
  "Sv. Štìpána Uherského",
  "Szent István király, Magyarország fõvédõszentje",
  };
+const char *text_AUG_16_OPRAEM[POCET_JAZYKOV + 1] = 
+{"",
+ "Sv. Rocha",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
 const char *text_AUG_17_OP[POCET_JAZYKOV + 1] = 
 {"Sv. Hyacinta Po¾ského, kòaza",
  "",
@@ -6398,6 +6428,15 @@ const char *text_AUG_21[POCET_JAZYKOV + 1] =
  "",
  "Sv. Pia X., papeže",
  "Szent X. Piusz pápa",
+ };
+const char *text_OPATSKY_KOSTOL_OPRAEM[POCET_JAZYKOV + 1] = 
+{"",
+ "Výroèí posvìcení opatského kostela",
+ "",
+ "",
+ "",
+ "",
+ "",
  };
 const char *text_AUG_22[POCET_JAZYKOV + 1] = 
 {"Panny Márie Krá¾ovnej", // pod¾a Direktória 2012, str. 183, tam nie je 'Prebl.'
@@ -6744,15 +6783,6 @@ const char *text_SEP_10_CZ[POCET_JAZYKOV + 1] =
  "Bl. Karla Spinoly, knìze a muèedníka",
  "",
  };
-const char *text_SEP_11_OPRAEM[POCET_JAZYKOV + 1] = 
-{"",
- "Výroèí posvìcení opatského kostela",
- "",
- "",
- "",
- "",
- "",
- };
 const char *text_SEP_12[POCET_JAZYKOV + 1] = 
 {"Najsv. mena Panny Márie", // pod¾a Direktória 2012, str. 192; pôvodne bolo: 'Mena prebl. Panny Márie'
  "Jména Panny Marie",
@@ -6868,6 +6898,15 @@ const char *text_SEP_18_OP[POCET_JAZYKOV + 1] =
  "",
  "",
  "Sv. Jana Maciase, øeholníka",
+ "",
+ };
+const char *text_SEP_18_OPRAEM[POCET_JAZYKOV + 1] = 
+{"",
+ "Výroèí posvìcení kostela",
+ "",
+ "",
+ "",
+ "",
  "",
  };
 const char *text_SEP_19[POCET_JAZYKOV + 1] = 
@@ -7251,15 +7290,6 @@ const char *text_OKT_07[POCET_JAZYKOV + 1] =
  "Panny Marie Rùžencové",
  "Rózsafüzér Királynõje",
  };
-const char *text_OKT_07_OPRAEM[POCET_JAZYKOV + 1] = 
-{"",
- "Výroèí posvìcení opatského kostela",
- "",
- "",
- "",
- "",
- "",
- };
 const char *text_OKT_08_HU[POCET_JAZYKOV + 1] = 
 {"",
  "",
@@ -7569,6 +7599,15 @@ const char *text_OKT_21_CZ[POCET_JAZYKOV + 1] =
 const char *text_OKT_21_OP[POCET_JAZYKOV + 1] = 
 {"Bl. Petra z Citt&agrave; di Castello, kòaza",
  "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ };
+const char *text_OKT_21_OPRAEM[POCET_JAZYKOV + 1] = 
+{"",
+ "Sv. Voršíly a jejich družek, muèednic",
  "",
  "",
  "",
