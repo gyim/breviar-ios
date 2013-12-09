@@ -975,19 +975,16 @@ const short int format_datumu[POCET_JAZYKOV + 1] = {
 
 // filename of CSS file; the number of CSS does not directly correspond to the number of languages
 // 2006-08-08: Pridané kvôli rôznym css
+// 2013-12-09: Always use "breviar.css" plus override eventually
 const char *nazov_css[POCET_CSS + 1] =
-{"(css neurèené)", "breviar.css", "breviar-invert.css", "breviar-kbd.css", "ebreviar-cz.css", "breviar-cz-op.css"
-	, "breviar-2003-07-16.css", "breviar-2005-10-13.css", "breviar-2007-08-10.css", "breviar-2008-05-07.css"
-	, "breviar-jm-krize-cz.css", "breviar-kbs.css"};
+{"(css neurèené)", "breviar.css", "breviar-invert-colors.css", "breviar-kbd.css", "ebreviar-cz.css"};
 
 const char *skratka_css[POCET_CSS + 1] =
-{"__", "def", "invert", "kbd", "cz", "czop"
-	, "2003", "2005", "2007", "2008"
-	, "jmkcz", "kbs"};
+{"__", "def", "invert", "kbd", "cz"};
 
 // 2012-04-03: Pridané kvôli jazykovım mutáciám -- default CSS pre danı jazyk | mono do budúcnosti monos default nastavenia v config (konfiguraènom súbore)
 const short int default_css_jazyk[POCET_JAZYKOV + 1] =
-{CSS_breviar_sk, CSS_ebreviar_cz, CSS_breviar_sk, CSS_breviar_sk, CSS_breviar_sk, CSS_breviar_cz_op, CSS_breviar_sk};
+{CSS_breviar_sk, CSS_ebreviar_cz, CSS_breviar_sk, CSS_breviar_sk, CSS_breviar_sk, CSS_ebreviar_cz, CSS_breviar_sk};
 
 // CSS obsahujuci invertovane farby
 const char *nazov_css_invert_colors = "breviar-invert-colors.css";
