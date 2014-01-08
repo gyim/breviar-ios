@@ -29,6 +29,8 @@
 {
     [super viewDidLoad];
     
+    self.webView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
+    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideNavbar:)];
     tapGesture.delegate = self;
     [self.view addGestureRecognizer:tapGesture];
