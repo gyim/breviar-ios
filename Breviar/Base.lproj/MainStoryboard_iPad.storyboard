@@ -169,7 +169,18 @@
                             <constraint firstItem="MHa-Vp-95o" firstAttribute="top" secondItem="jLg-il-aIp" secondAttribute="top" id="mAP-xX-ClH"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Breviar" id="hUW-c4-5zz"/>
+                    <navigationItem key="navigationItem" title="Breviar" id="hUW-c4-5zz">
+                        <barButtonItem key="leftBarButtonItem" image="back.png" id="528-iT-3hI">
+                            <connections>
+                                <action selector="prevDayPressed:" destination="4mt-0l-VY2" id="XaY-al-yRB"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="forward.png" id="bvP-nj-TRh">
+                            <connections>
+                                <action selector="nextDayPressed:" destination="4mt-0l-VY2" id="YXj-fz-QMJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="showDatePickerButton" destination="wcZ-nN-lqr" id="u9D-BV-cBk"/>
                         <outlet property="tableView" destination="MHa-Vp-95o" id="cES-Nj-m6F"/>
@@ -201,11 +212,13 @@
                                             <action selector="yesterdayPressed:" destination="guc-mA-daw" id="ljM-yW-cCU"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="eHk-1k-ADj"/>
                                     <barButtonItem title="Today" id="WAd-SK-urD">
                                         <connections>
                                             <action selector="todayPressed:" destination="guc-mA-daw" id="eYE-Zx-Wzz"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="2P7-hP-l03"/>
                                     <barButtonItem title="Tomorrow" id="MTG-23-kSl">
                                         <connections>
                                             <action selector="tomorrowPressed:" destination="guc-mA-daw" id="pbW-8i-gvi"/>
@@ -548,6 +561,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <point key="canvasLocation" x="1518" y="1034"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="back.png" width="13" height="22"/>
+        <image name="forward.png" width="13" height="22"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
