@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		544E694C187D285E0070DEC0 /* BRUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 544E694B187D285E0070DEC0 /* BRUI.m */; };
+		544E6951187D2A850070DEC0 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 544E6950187D2A850070DEC0 /* UIColor+HexColor.m */; };
 		703200E8180F2E9000675F09 /* breviar-ios.css in Resources */ = {isa = PBXBuildFile; fileRef = 703200E7180F2E9000675F09 /* breviar-ios.css */; };
 		7034597D15FCE84D000A1711 /* BRFontHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7034597C15FCE84D000A1711 /* BRFontHelper.m */; };
 		7042905716408A5E00663A7D /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042905316408A1100663A7D /* libxml2.dylib */; };
@@ -128,6 +130,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		544E694A187D285E0070DEC0 /* BRUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRUI.h; sourceTree = "<group>"; };
+		544E694B187D285E0070DEC0 /* BRUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRUI.m; sourceTree = "<group>"; };
+		544E694F187D2A850070DEC0 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
+		544E6950187D2A850070DEC0 /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColor.m"; sourceTree = "<group>"; };
 		703200E7180F2E9000675F09 /* breviar-ios.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "breviar-ios.css"; sourceTree = "<group>"; };
 		7034597B15FCE84D000A1711 /* BRFontHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRFontHelper.h; sourceTree = "<group>"; };
 		7034597C15FCE84D000A1711 /* BRFontHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRFontHelper.m; sourceTree = "<group>"; };
@@ -433,6 +439,10 @@
 				70C962D416B45C3E00A399B9 /* BRFontSettingsCell.h */,
 				70C962D516B45C3E00A399B9 /* BRFontSettingsCell.m */,
 				707A64B4171AD44C0065F98E /* BRUtil.h */,
+				544E694A187D285E0070DEC0 /* BRUI.h */,
+				544E694B187D285E0070DEC0 /* BRUI.m */,
+				544E694F187D2A850070DEC0 /* UIColor+HexColor.h */,
+				544E6950187D2A850070DEC0 /* UIColor+HexColor.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -755,8 +765,10 @@
 				7061B0DB15FB929300A83E0A /* mygetopt.cpp in Sources */,
 				7061B0DC15FB929300A83E0A /* myhpage.cpp in Sources */,
 				7061B0DD15FB929300A83E0A /* mylog.cpp in Sources */,
+				544E6951187D2A850070DEC0 /* UIColor+HexColor.m in Sources */,
 				7061B0E015FB932000A83E0A /* mystring.cpp in Sources */,
 				7054368D15FBDD69005854DC /* BRDatePickerViewController.m in Sources */,
+				544E694C187D285E0070DEC0 /* BRUI.m in Sources */,
 				7054369115FBF1B1005854DC /* BRSettingsViewController.m in Sources */,
 				7054369415FBF1D1005854DC /* BRFontPickerViewController.m in Sources */,
 				70AAAA4E15FBFBE4008D314D /* BRSettings.m in Sources */,
