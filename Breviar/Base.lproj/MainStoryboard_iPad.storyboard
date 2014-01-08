@@ -113,7 +113,7 @@
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Prayer title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1jN-1h-D9b">
                                                     <rect key="frame" x="15" y="0.0" width="718" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
@@ -199,11 +199,11 @@
                         <viewControllerLayoutGuide type="bottom" id="d0X-ru-44p"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0vY-lS-qoL">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="260"/>
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="260"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t71-GC-e5L">
-                                <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="500" height="44"/>
                                 <items>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="cM8-mx-F1x"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="SVi-da-QPA"/>
@@ -233,7 +233,7 @@
                                 </items>
                             </toolbar>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Tyy-5R-U06">
-                                <rect key="frame" x="0.0" y="44" width="540" height="216"/>
+                                <rect key="frame" x="0.0" y="44" width="500" height="216"/>
                                 <date key="date" timeIntervalSinceReferenceDate="394900974.80100101">
                                     <!--2013-07-07 14:42:54 +0000-->
                                 </date>
@@ -335,7 +335,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" preferredMaxLayoutWidth="574" translatesAutoresizingMaskIntoConstraints="NO" id="oJp-gx-Wn6">
-                                            <rect key="frame" x="55" y="12" width="574" height="21"/>
+                                            <rect key="frame" x="15" y="11" width="574" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="574" id="fMQ-fF-TSP"/>
                                             </constraints>
@@ -344,18 +344,20 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kAA-px-Rs5">
-                                            <rect key="frame" x="637" y="7" width="51" height="31"/>
+                                            <rect key="frame" x="700" y="6" width="51" height="31"/>
                                             <connections>
                                                 <action selector="switcherChanged:" destination="m1T-a5-qCu" eventType="valueChanged" id="lVJ-W3-274"/>
                                             </connections>
                                         </switch>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="kAA-px-Rs5" secondAttribute="trailing" constant="19" id="ymh-jy-6qd"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <constraints>
-                                    <constraint firstItem="oJp-gx-Wn6" firstAttribute="leading" secondItem="m1T-a5-qCu" secondAttribute="leading" constant="55" id="I8J-EF-x2k"/>
+                                    <constraint firstItem="oJp-gx-Wn6" firstAttribute="leading" secondItem="m1T-a5-qCu" secondAttribute="leading" constant="15" id="I8J-EF-x2k"/>
                                     <constraint firstItem="kAA-px-Rs5" firstAttribute="centerY" secondItem="m1T-a5-qCu" secondAttribute="centerY" id="j33-t1-Jtd"/>
                                     <constraint firstItem="oJp-gx-Wn6" firstAttribute="centerY" secondItem="kAA-px-Rs5" secondAttribute="centerY" id="mFs-A3-TE6"/>
-                                    <constraint firstItem="kAA-px-Rs5" firstAttribute="leading" secondItem="oJp-gx-Wn6" secondAttribute="trailing" constant="8" symbolic="YES" id="yV1-c8-rmZ"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="label" destination="oJp-gx-Wn6" id="15F-fp-N3m"/>
@@ -370,16 +372,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Font" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="P7i-g4-jho">
-                                            <rect key="frame" x="15" y="11" width="36" height="21"/>
+                                            <rect key="frame" x="15" y="11" width="35" height="21"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Helvetica, 15pt" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2ji-vr-1kP">
-                                            <rect key="frame" x="617" y="11" width="116" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Helvetica, 15pt" textAlignment="right" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" id="2ji-vr-1kP">
+                                            <rect key="frame" x="662" y="18" width="71" height="12"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                             <color key="textColor" red="0.21960784310000001" green="0.3294117647" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
@@ -398,8 +400,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tbv-dZ-u9g">
-                                            <rect key="frame" x="15" y="11" width="34" height="21"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <rect key="frame" x="15" y="11" width="33" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
