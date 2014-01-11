@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="r6Z-rP-I8n">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5037.2" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="r6Z-rP-I8n">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -328,33 +328,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="wSu-HC-5DA">
-                                <rect key="frame" x="0.0" y="159" width="320" height="162"/>
-                                <date key="date" timeIntervalSinceReferenceDate="368827153.48445898">
-                                    <!--2012-09-08 19:59:13 +0000-->
-                                </date>
-                                <timeZone key="timeZone" name="America/Los_Angeles">
-                                    <data key="data">
-VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
-y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
-5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
-8n/BkPNvwKD0X6OQ9U+ioPY/hZD3L4Sg+CiiEPkPZqD6CIQQ+viDIPvoZhD82GUg/chIEP64RyD/qCoQ
-AJgpIAGIDBACeAsgA3EokARhJ6AFUQqQBkEJoAcw7JAHjUOgCRDOkAmtvyAK8LCQC+CvoAzZzRANwJGg
-DrmvEA+priAQmZEQEYmQIBJ5cxATaXIgFFlVEBVJVCAWOTcQFyk2IBgiU5AZCRggGgI1kBryNKAb4heQ
-HNIWoB3B+ZAesfigH6HbkCB2KyAhgb2QIlYNICNq2hAkNe8gJUq8ECYV0SAnKp4QJ/7toCkKgBAp3s+g
-KupiECu+saAs036QLZ6ToC6zYJAvfnWgMJNCkDFnkiAycySQM0d0IDRTBpA1J1YgNjLokDcHOCA4HAUQ
-OOcaIDn75xA6xvwgO9vJEDywGKA9u6sQPo/6oD+bjRBAb9ygQYSpkEJPvqBDZIuQRC+goEVEbZBF89Mg
-Ry2KEEfTtSBJDWwQSbOXIErtThBLnLOgTNZqkE18laBOtkyQT1x3oFCWLpBRPFmgUnYQkFMcO6BUVfKQ
-VPwdoFY11JBW5TogWB7xEFjFHCBZ/tMQWqT+IFvetRBchOAgXb6XEF5kwiBfnnkQYE3eoGGHlZBiLcCg
-Y2d3kGQNoqBlR1mQZe2EoGcnO5BnzWagaQcdkGmtSKBq5v+Qa5ZlIGzQHBBtdkcgbq/+EG9WKSBwj+AQ
-cTYLIHJvwhBzFe0gdE+kEHT/CaB2OMCQdt7roHgYopB4vs2gefiEkHqer6B72GaQfH6RoH24SJB+XnOg
-f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</data>
-                                </timeZone>
-                            </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U5N-Eu-vrn">
                                 <rect key="frame" x="30" y="341" width="67" height="30"/>
                                 <state key="normal" title="Yesterday">
@@ -389,16 +362,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" red="0.98823535442352295" green="0.98823535442352295" blue="0.87450987100601196" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstItem="Fs1-yM-hk6" firstAttribute="top" relation="greaterThanOrEqual" secondItem="lU9-My-Hu7" secondAttribute="bottom" constant="20" id="3TX-3b-lhe"/>
-                            <constraint firstItem="lU9-My-Hu7" firstAttribute="top" secondItem="wSu-HC-5DA" secondAttribute="bottom" constant="20" id="CIn-2c-yY0"/>
                             <constraint firstAttribute="trailing" secondItem="lU9-My-Hu7" secondAttribute="trailing" constant="112" id="ERT-IE-RWw"/>
-                            <constraint firstAttribute="trailing" secondItem="wSu-HC-5DA" secondAttribute="trailing" id="LUo-d6-61A"/>
-                            <constraint firstItem="wSu-HC-5DA" firstAttribute="centerY" secondItem="5Jf-Hd-xf3" secondAttribute="centerY" priority="989" id="MUd-cc-UvT"/>
                             <constraint firstItem="U5N-Eu-vrn" firstAttribute="baseline" secondItem="lU9-My-Hu7" secondAttribute="baseline" id="Riy-kD-ctb"/>
                             <constraint firstAttribute="trailing" secondItem="j1v-Yf-cVL" secondAttribute="trailing" constant="30" id="UNZ-xA-eHI"/>
-                            <constraint firstItem="wSu-HC-5DA" firstAttribute="leading" secondItem="5Jf-Hd-xf3" secondAttribute="leading" id="aWW-r9-CjL"/>
                             <constraint firstAttribute="centerX" secondItem="lU9-My-Hu7" secondAttribute="centerX" id="ag1-0p-uim"/>
                             <constraint firstItem="lU9-My-Hu7" firstAttribute="baseline" secondItem="j1v-Yf-cVL" secondAttribute="baseline" id="b2g-AX-SzV"/>
-                            <constraint firstAttribute="centerX" secondItem="wSu-HC-5DA" secondAttribute="centerX" id="rvu-lD-ZLC"/>
+                            <constraint firstItem="lU9-My-Hu7" firstAttribute="top" secondItem="5Jf-Hd-xf3" secondAttribute="top" constant="341" id="eU5-uT-IUd"/>
                             <constraint firstItem="U5N-Eu-vrn" firstAttribute="leading" secondItem="5Jf-Hd-xf3" secondAttribute="leading" constant="30" id="zPR-Ta-gE0"/>
                         </constraints>
                     </view>
@@ -412,7 +381,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="datePicker" destination="wSu-HC-5DA" id="Pxh-hC-RG9"/>
+                        <outlet property="todayButton" destination="lU9-My-Hu7" id="utM-4J-3s9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WaM-MI-5ab" userLabel="First Responder" sceneMemberID="firstResponder"/>
