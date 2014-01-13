@@ -256,7 +256,7 @@
         <!--Prayer View Controller-->
         <scene sceneID="Ifw-SK-IaU">
             <objects>
-                <viewController id="Y9R-gy-DOg" customClass="BRPrayerViewController" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="Y9R-gy-DOg" customClass="BRPrayerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="w9B-vL-OvV"/>
                         <viewControllerLayoutGuide type="bottom" id="Jni-Ie-6zm"/>

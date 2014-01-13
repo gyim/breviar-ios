@@ -11,6 +11,7 @@
 @interface BRDatePickerViewController ()
 
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (strong, nonatomic) IBOutlet UIView *datePickerPlaceholder;
 @property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *toolbarCenteringItem;
 @property (strong, nonatomic) IBOutlet UIButton *todayButton;
@@ -52,19 +53,18 @@
         self.datePicker = [[UIDatePicker alloc] init];
         self.datePicker.datePickerMode = UIDatePickerModeDate;
         
-        CGRect rect = self.datePicker.frame;
         
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-            rect.origin.y = self.todayButton.frame.origin.y - rect.size.height - 20;
-            self.datePicker.frame = rect;
-        } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            rect.size.width = self.view.frame.size.width;
-            rect.origin.y = self.toolbar.frame.size.height;
+            [self.datePickerPlaceholder addSubview:self.datePicker];
         }
         
-        self.datePicker.frame = rect;
-        
-        [self.view addSubview:self.datePicker];
+        else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            CGRect rect = self.datePicker.frame;
+            rect.size.width = self.view.frame.size.width;
+            rect.origin.y = self.toolbar.frame.size.height;
+            self.datePicker.frame = rect;
+            [self.view addSubview:self.datePicker];
+        }
     }
 
     self.datePicker.date = self.initialDate;
