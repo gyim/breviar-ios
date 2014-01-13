@@ -69,26 +69,32 @@
                                                         <constraint firstAttribute="width" constant="12" id="RYf-oZ-VvW"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YIP-Ci-AGt">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Title" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="610" translatesAutoresizingMaskIntoConstraints="NO" id="YIP-Ci-AGt">
                                                     <rect key="frame" x="73" y="2" width="610" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="610" id="Qib-LH-nkb"/>
-                                                        <constraint firstAttribute="height" constant="21" id="xYx-yE-hZx"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0IS-UP-ic4">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Subtitle" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="610" translatesAutoresizingMaskIntoConstraints="NO" id="0IS-UP-ic4">
                                                     <rect key="frame" x="73" y="20" width="610" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="1GA-0C-6zq"/>
+                                                        <constraint firstAttribute="height" constant="21" id="g5O-5f-SVR"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="0IS-UP-ic4" secondAttribute="bottom" constant="2" id="3Lo-Rm-2we"/>
+                                                <constraint firstItem="0IS-UP-ic4" firstAttribute="top" secondItem="YIP-Ci-AGt" secondAttribute="bottom" constant="-3" id="52D-6D-1r1"/>
+                                                <constraint firstItem="YIP-Ci-AGt" firstAttribute="top" secondItem="9kN-CE-OMi" secondAttribute="top" constant="2" id="Pd9-O9-ZVE"/>
+                                                <constraint firstAttribute="trailing" secondItem="YIP-Ci-AGt" secondAttribute="trailing" constant="46" id="SB7-vb-nMT"/>
+                                                <constraint firstItem="YIP-Ci-AGt" firstAttribute="trailing" secondItem="0IS-UP-ic4" secondAttribute="trailing" id="c8A-6w-AMI"/>
+                                                <constraint firstAttribute="trailing" secondItem="0IS-UP-ic4" secondAttribute="trailing" constant="46" id="kiF-2r-ipw"/>
+                                                <constraint firstAttribute="centerY" secondItem="lak-o6-CMW" secondAttribute="centerY" constant="-0.5" id="mbK-F9-eeI"/>
+                                                <constraint firstItem="lak-o6-CMW" firstAttribute="leading" secondItem="9kN-CE-OMi" secondAttribute="leading" constant="53" id="wp3-8f-TYS"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <constraints>
                                             <constraint firstItem="0IS-UP-ic4" firstAttribute="leading" secondItem="lak-o6-CMW" secondAttribute="trailing" constant="8" symbolic="YES" id="5ZE-sx-fem"/>

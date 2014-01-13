@@ -171,6 +171,21 @@ static NSString *liturgicalColorImages[] = {
     if ([sectionType isEqualToString:@"PrayerListCell"]) {
         return 125;
     }
+    else if ([sectionType isEqualToString:@"Date"]) {
+        BRCelebrationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CelebrationCell"];
+        cell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(tableView.bounds), CGRectGetHeight(cell.bounds));
+        
+        BRCelebration *celebration = [self.day.celebrations objectAtIndex:indexPath.row];
+        cell.celebrationNameLabel.text = celebration.title;
+        cell.celebrationDescriptionLabel.text = celebration.subtitle;
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+
+        [cell.contentView setNeedsLayout];
+        [cell.contentView layoutIfNeeded];
+        
+        CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        return height + 2;
+    }
     else {
         return 44;
     }
