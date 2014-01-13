@@ -56,8 +56,11 @@
     if ([settings boolForOption:@"of0fn"]) {
         [extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-normal-font.css'>"];
     }
+    // Night mode
     if ([settings boolForOption:@"of2nr"]) {
         [extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-invert-colors.css'>"];
+        self.view.backgroundColor = [UIColor colorWithHex:0x333333];
+        self.webView.scrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     }
     
     NSString *body =
