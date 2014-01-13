@@ -272,7 +272,7 @@ static NSString *liturgicalColorImages[] = {
         BRCelebration *celebration = [self.day.celebrations objectAtIndex:self.celebrationIndex];
         destController.prayer = [celebration.prayers objectAtIndex:prayerType];
     }
-    else if ([[segueId substringToIndex:11] isEqualToString:@"ShowPrayer."]) {
+    else if (segueId.length > 11 && [[segueId substringToIndex:11] isEqualToString:@"ShowPrayer."]) {
         BRPrayerViewController *destController = segue.destinationViewController;
         NSString *prayerQueryId = [segueId substringFromIndex:11];
         BRPrayerType prayerType = [BRPrayer prayerTypeFromQueryId:prayerQueryId];
