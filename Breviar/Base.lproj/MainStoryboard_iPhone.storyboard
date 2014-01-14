@@ -335,16 +335,17 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vht-Vp-kLk">
-                                <rect key="frame" x="0.0" y="65" width="320" height="216"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vht-Vp-kLk" userLabel="Date Picker Placeholder">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="216" id="76o-Wn-S9z"/>
+                                    <constraint firstAttribute="width" constant="320" id="9P6-fB-1gM"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OmQ-3h-nKd">
-                                <rect key="frame" x="0.0" y="311" width="320" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OmQ-3h-nKd" userLabel="Buttons View">
+                                <rect key="frame" x="0.0" y="226" width="320" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U5N-Eu-vrn">
@@ -391,21 +392,18 @@
                                     <constraint firstItem="U5N-Eu-vrn" firstAttribute="leading" secondItem="OmQ-3h-nKd" secondAttribute="leading" constant="10" id="aQZ-UG-jTX"/>
                                     <constraint firstAttribute="height" constant="30" id="sCT-aF-uvA"/>
                                     <constraint firstItem="lU9-My-Hu7" firstAttribute="baseline" secondItem="U5N-Eu-vrn" secondAttribute="baseline" id="stZ-ng-rEP"/>
-                                    <constraint firstItem="j1v-Yf-cVL" firstAttribute="leading" secondItem="lU9-My-Hu7" secondAttribute="trailing" id="uY5-hk-TFA"/>
                                     <constraint firstAttribute="trailing" secondItem="j1v-Yf-cVL" secondAttribute="trailing" constant="10" id="v1k-rO-Jrv"/>
                                     <constraint firstItem="lU9-My-Hu7" firstAttribute="baseline" secondItem="j1v-Yf-cVL" secondAttribute="baseline" id="zOu-IK-rTJ"/>
-                                    <constraint firstItem="lU9-My-Hu7" firstAttribute="leading" secondItem="U5N-Eu-vrn" secondAttribute="trailing" id="zaH-Mq-J6X"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.98823535442352295" green="0.98823535442352295" blue="0.87450987100601196" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
-                            <constraint firstItem="Vht-Vp-kLk" firstAttribute="leading" secondItem="5Jf-Hd-xf3" secondAttribute="leading" id="EIv-za-On3"/>
-                            <constraint firstItem="Vht-Vp-kLk" firstAttribute="trailing" secondItem="OmQ-3h-nKd" secondAttribute="trailing" id="FXR-Yv-hCO"/>
-                            <constraint firstItem="OmQ-3h-nKd" firstAttribute="top" secondItem="Vht-Vp-kLk" secondAttribute="bottom" constant="30" id="QMU-Pg-XAe"/>
-                            <constraint firstItem="Vht-Vp-kLk" firstAttribute="leading" secondItem="OmQ-3h-nKd" secondAttribute="leading" id="YvS-Wb-Eta"/>
-                            <constraint firstAttribute="trailing" secondItem="Vht-Vp-kLk" secondAttribute="trailing" id="jPf-LU-qr5"/>
-                            <constraint firstItem="Vht-Vp-kLk" firstAttribute="top" secondItem="5Jf-Hd-xf3" secondAttribute="top" constant="65" id="uAy-X5-QMq"/>
+                            <constraint firstAttribute="centerX" secondItem="Vht-Vp-kLk" secondAttribute="centerX" id="SFF-1c-EpO"/>
+                            <constraint firstItem="Vht-Vp-kLk" firstAttribute="top" secondItem="5Jf-Hd-xf3" secondAttribute="top" id="aJh-1x-DYY"/>
+                            <constraint firstAttribute="trailing" secondItem="OmQ-3h-nKd" secondAttribute="trailing" id="f5b-Be-UdF"/>
+                            <constraint firstItem="OmQ-3h-nKd" firstAttribute="top" secondItem="Vht-Vp-kLk" secondAttribute="bottom" constant="10" id="jwW-dJ-uQS"/>
+                            <constraint firstItem="OmQ-3h-nKd" firstAttribute="leading" secondItem="5Jf-Hd-xf3" secondAttribute="leading" id="u1B-ex-O72"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
