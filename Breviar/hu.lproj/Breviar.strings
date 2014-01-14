@@ -28,6 +28,8 @@
 "of0fn"		= "Normál betűtípus használata (félkövér helyett)";
 "of2tw"		= "Hosszú sorok tördelése, mint a nyomtatott kiadásban (versrészek)";
 
+"prayersAsCells" = "Nagy imaválasztó gombok";
+
 // Prayer parts settings
 "of1c"		= "Evangéliumi kantikumok";
 "of1s"		= "Dicsőség az Atyának";
