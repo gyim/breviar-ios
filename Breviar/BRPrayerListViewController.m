@@ -40,7 +40,7 @@ static NSString *liturgicalColorImages[] = {
         self.sections = @[@"Date", @"PrayerListCell", @"Settings"];
     }
     else {
-        self.sections = @[@"Date", @"PrayerList"];
+        self.sections = @[@"Date", @"PrayerList", @"Settings"];
     }
 }
 
@@ -159,7 +159,8 @@ static NSString *liturgicalColorImages[] = {
     }
     else if ([sectionType isEqualToString:@"Settings"]) {
         // Settings cell
-        return [tableView dequeueReusableCellWithIdentifier:@"SettingsCell"];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingsCell"];
+        return cell;
     }
     
     return nil;
