@@ -19,7 +19,6 @@
 
 @property(strong) NSDate *date;
 @property(strong) BRDay *day;
-@property(strong) NSArray *sections;
 @property NSInteger celebrationIndex;
 
 - (IBAction)prevDayPressed:(id)sender;

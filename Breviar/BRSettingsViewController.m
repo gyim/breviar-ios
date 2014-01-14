@@ -176,7 +176,9 @@
             NSString *visibility = [item objectForKey:@"visibility"];
             BOOL visible;
             
-            if (visibility) {
+            if ([visibility isEqualToString:@"iPhoneOnly"]) {
+                visible = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
+            } else if (visibility) {
                 NSPredicate *predicate = [NSPredicate predicateWithFormat:visibility];
                 visible = [predicate evaluateWithObject:settings];
             } else {

@@ -11,6 +11,7 @@
 #import "BRDataSource.h"
 #import "BRCelebrationCell.h"
 #import "BRUtil.h"
+#import "BRSettings.h"
 
 static NSString *liturgicalColorImages[] = {
     [BRColorUnknown]       = @"",
@@ -35,13 +36,6 @@ static NSString *liturgicalColorImages[] = {
 {
     [super viewDidLoad];
     self.date = [NSDate date];
-    
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        self.sections = @[@"Date", @"PrayerListCell", @"Settings"];
-    }
-    else {
-        self.sections = @[@"Date", @"PrayerList"];
-    }
 }
 
 - (void)viewDidUnload
@@ -116,6 +110,18 @@ static NSString *liturgicalColorImages[] = {
 #pragma mark -
 #pragma mark UITableViewDataSource
 
+- (NSArray *)sections {
+    BRSettings *settings = [BRSettings instance];
+    BOOL prayersAsCells = [settings boolForOption:@"prayersAsCells"];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone && !prayersAsCells) {
+        return @[@"Date", @"PrayerListCell", @"Settings"];
+    }
+    else {
+        return @[@"Date", @"PrayerList", @"Settings"];
+    }
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSString *sectionType = [self.sections objectAtIndex:section];
     
@@ -159,7 +165,8 @@ static NSString *liturgicalColorImages[] = {
     }
     else if ([sectionType isEqualToString:@"Settings"]) {
         // Settings cell
-        return [tableView dequeueReusableCellWithIdentifier:@"SettingsCell"];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingsCell"];
+        return cell;
     }
     
     return nil;
