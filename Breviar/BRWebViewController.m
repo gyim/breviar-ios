@@ -27,6 +27,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Using shared web view
+    self.webView.frame = self.view.bounds;
+    self.webView.hidden = YES;
+    self.webView.delegate = self;
+    [self.webView removeFromSuperview];
+    [self.view addSubview:self.webView];
     self.webView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
 }
 
@@ -46,6 +53,7 @@
         self.webView.scrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     } else {
         self.view.backgroundColor = [UIColor colorWithHex:0xFBFCD7];
+        self.webView.scrollView.indicatorStyle = UIScrollViewIndicatorStyleDefault;
     }
     
     NSString *body =
@@ -66,6 +74,10 @@
     
     NSURL *baseURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
     [self.webView loadHTMLString:body baseURL:baseURL];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    webView.hidden = NO;
 }
 
 @end

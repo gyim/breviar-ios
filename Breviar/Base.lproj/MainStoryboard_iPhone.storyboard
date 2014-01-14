@@ -447,7 +447,7 @@
         <!--Prayer View Controller - Prayer-->
         <scene sceneID="mNQ-Uh-QpY">
             <objects>
-                <viewController wantsFullScreenLayout="YES" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="N9h-r0-k8T" customClass="BRPrayerViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PrayerViewController" wantsFullScreenLayout="YES" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="N9h-r0-k8T" customClass="BRPrayerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xeY-7i-kwU"/>
                         <viewControllerLayoutGuide type="bottom" id="3c4-n7-hqg"/>
@@ -455,24 +455,9 @@
                     <view key="view" contentMode="scaleToFill" id="i4k-ux-YSh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <webView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gLk-eY-qd7">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
                         <color key="backgroundColor" red="0.98431372549019602" green="0.9882352941176471" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="gLk-eY-qd7" firstAttribute="leading" secondItem="i4k-ux-YSh" secondAttribute="leading" id="BZP-5V-3hc"/>
-                            <constraint firstItem="gLk-eY-qd7" firstAttribute="top" secondItem="i4k-ux-YSh" secondAttribute="top" id="Pu3-ec-ENp"/>
-                            <constraint firstItem="3c4-n7-hqg" firstAttribute="top" secondItem="gLk-eY-qd7" secondAttribute="bottom" id="Svn-Eb-XOH"/>
-                            <constraint firstAttribute="trailing" secondItem="gLk-eY-qd7" secondAttribute="trailing" id="a9H-4y-hKQ"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Prayer" id="TrN-Fa-K2y"/>
-                    <connections>
-                        <outlet property="webView" destination="gLk-eY-qd7" id="wUN-V6-LA5"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="65y-Xh-ELZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -489,25 +474,9 @@
                     <view key="view" contentMode="scaleToFill" id="otg-xN-i7m">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <webView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Wq-fd-7c7">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
                         <color key="backgroundColor" red="0.98431372549999996" green="0.98823529409999999" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="7Wq-fd-7c7" firstAttribute="top" secondItem="otg-xN-i7m" secondAttribute="top" id="OQe-DU-BFA"/>
-                            <constraint firstItem="7Wq-fd-7c7" firstAttribute="leading" secondItem="otg-xN-i7m" secondAttribute="leading" id="SB3-2C-6dM"/>
-                            <constraint firstItem="Nq7-xi-fXm" firstAttribute="top" secondItem="7Wq-fd-7c7" secondAttribute="bottom" id="hrK-Aa-uPY"/>
-                            <constraint firstAttribute="trailing" secondItem="7Wq-fd-7c7" secondAttribute="trailing" id="pxB-hA-FaF"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="About" id="Cgn-4S-ezi"/>
-                    <connections>
-                        <outlet property="webView" destination="7Wq-fd-7c7" id="jEW-Rl-b4T"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Prl-4u-l2m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

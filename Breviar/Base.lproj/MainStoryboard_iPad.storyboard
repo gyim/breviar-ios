@@ -289,24 +289,9 @@
                     <view key="view" contentMode="scaleToFill" id="0aT-Rq-kre">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <webView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LBs-SU-PKO">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
                         <color key="backgroundColor" red="0.98431372549019602" green="0.9882352941176471" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="LBs-SU-PKO" firstAttribute="leading" secondItem="0aT-Rq-kre" secondAttribute="leading" id="L4y-tF-UP3"/>
-                            <constraint firstItem="LBs-SU-PKO" firstAttribute="top" secondItem="0aT-Rq-kre" secondAttribute="top" id="Ndu-W4-NzS"/>
-                            <constraint firstItem="LBs-SU-PKO" firstAttribute="bottom" secondItem="0aT-Rq-kre" secondAttribute="bottom" id="wo8-mL-dMo"/>
-                            <constraint firstItem="LBs-SU-PKO" firstAttribute="trailing" secondItem="0aT-Rq-kre" secondAttribute="trailing" id="xFz-5u-2NY"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="yHJ-Uc-1HI"/>
-                    <connections>
-                        <outlet property="webView" destination="LBs-SU-PKO" id="vw6-J4-kwL"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fmg-Ci-gjD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -568,25 +553,9 @@
                     <view key="view" contentMode="scaleToFill" id="59g-fg-82l">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <webView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k08-mt-ElE">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
                         <color key="backgroundColor" red="0.98823535442352295" green="0.98823535442352295" blue="0.87450987100601196" alpha="1" colorSpace="deviceRGB"/>
-                        <constraints>
-                            <constraint firstItem="k08-mt-ElE" firstAttribute="top" secondItem="59g-fg-82l" secondAttribute="top" id="a4K-ti-4Qk"/>
-                            <constraint firstAttribute="trailing" secondItem="k08-mt-ElE" secondAttribute="trailing" id="lPC-fp-wQ2"/>
-                            <constraint firstItem="k08-mt-ElE" firstAttribute="leading" secondItem="59g-fg-82l" secondAttribute="leading" id="loT-Oi-WWt"/>
-                            <constraint firstAttribute="bottom" secondItem="k08-mt-ElE" secondAttribute="bottom" id="q1u-PK-b4Z"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="About" id="N6p-nX-hUB"/>
-                    <connections>
-                        <outlet property="webView" destination="k08-mt-ElE" id="lbY-M0-hLD"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pym-qF-pcG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

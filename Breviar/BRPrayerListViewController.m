@@ -8,6 +8,7 @@
 
 #import "BRPrayerListViewController.h"
 #import "BRPrayerViewController.h"
+#import "BRAboutViewController.h"
 #import "BRDataSource.h"
 #import "BRCelebrationCell.h"
 #import "BRUtil.h"
@@ -28,6 +29,8 @@ static NSString *liturgicalColorImages[] = {
 
 @interface BRPrayerListViewController ()
 
+@property (nonatomic, strong) UIWebView *sharedWebView;
+
 @end
 
 @implementation BRPrayerListViewController
@@ -36,6 +39,12 @@ static NSString *liturgicalColorImages[] = {
 {
     [super viewDidLoad];
     self.date = [NSDate date];
+    
+    // Prepare reusable web view
+    self.sharedWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    self.sharedWebView.backgroundColor = [UIColor clearColor];
+    self.sharedWebView.opaque = NO;
+    [self.view addSubview:self.sharedWebView];
 }
 
 - (void)viewDidUnload
@@ -49,18 +58,18 @@ static NSString *liturgicalColorImages[] = {
     
     // Load celebrations for date (if not already loaded for the very same date, e.g. when going back from prayer VC)
     if (!self.day) {
-        [self loadSelectedDate];
+        [self loadSelectedDateAndReloadTable:YES resetCelebrationIndex:YES];
     }
-    
-    if (self.tableView.indexPathForSelectedRow) {
+    // Deselect row when returning from subcontroller to give the user a sense of context
+    else if (self.tableView.indexPathForSelectedRow) {
         [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
     }
 }
 
-- (void)loadSelectedDate {
+- (void)loadSelectedDateAndReloadTable:(BOOL)reload resetCelebrationIndex:(BOOL)resetCelebration {
     self.day = [[BRDataSource instance] dayForDate:self.date];
     
-    if (self.celebrationIndex > self.day.celebrations.count - 1) {
+    if (self.celebrationIndex > self.day.celebrations.count - 1 || resetCelebration) {
         self.celebrationIndex = 0;
     }
     
@@ -68,7 +77,9 @@ static NSString *liturgicalColorImages[] = {
     [self updateTitleView];
     
     // Update data
-    [self.tableView reloadData];
+    if (reload) {
+        [self.tableView reloadData];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -240,10 +251,7 @@ static NSString *liturgicalColorImages[] = {
     [components setDay:dayDiff];
     
     self.date = [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:self.date options:0];
-    self.day = [[BRDataSource instance] dayForDate:self.date];
-    self.celebrationIndex = 0;
-    
-    [self updateTitleView];
+    [self loadSelectedDateAndReloadTable:NO resetCelebrationIndex:YES];
     
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.sections.count)];
     [self.tableView reloadSections:indexSet withRowAnimation:(dayDiff > 0 ? UITableViewRowAnimationLeft : UITableViewRowAnimationRight)];
@@ -297,12 +305,16 @@ static NSString *liturgicalColorImages[] = {
         BRCelebration *celebration = [self.day.celebrations objectAtIndex:self.celebrationIndex];
         destController.prayer = [celebration.prayers objectAtIndex:prayerType];
     }
+    
+    if ([segue.destinationViewController isKindOfClass:[BRWebViewController class]]) {
+        BRWebViewController *destController = segue.destinationViewController;
+        destController.webView = self.sharedWebView;
+    }
 }
 
 - (void)datePicker:(BRDatePickerViewController *)datePicker pickedDate:(NSDate *)date
 {
     self.date = date;
-    self.celebrationIndex = 0;
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -312,7 +324,7 @@ static NSString *liturgicalColorImages[] = {
         self.datePickerPopover = nil;
     }
     
-    [self loadSelectedDate];
+    [self loadSelectedDateAndReloadTable:YES resetCelebrationIndex:YES];
 }
 
 @end
