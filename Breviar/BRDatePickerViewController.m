@@ -55,6 +55,7 @@
         
         
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+            self.datePicker.frame = self.datePickerPlaceholder.bounds;
             [self.datePickerPlaceholder addSubview:self.datePicker];
         }
         
