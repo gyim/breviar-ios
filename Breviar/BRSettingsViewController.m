@@ -13,6 +13,7 @@
 #import "BRStringOptionPickerViewController.h"
 #import "BRSettings.h"
 #import "BRUtil.h"
+#import "BRPrayerListViewController.h"
 
 #define CELL_NORMAL_HEIGHT          44
 #define CELL_LABEL_WIDTH            192
@@ -52,6 +53,14 @@
     [super viewWillAppear:animated];
     [self calculateVisibleOptions];
     [self.tableView reloadData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    // Going back to BRPrayerListViewController? Reload the whole table because
+    if ([self.navigationController.topViewController isKindOfClass:[BRPrayerListViewController class]]) {
+        BRPrayerListViewController *parent = (BRPrayerListViewController *)self.navigationController.topViewController;
+        [parent loadSelectedDate];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

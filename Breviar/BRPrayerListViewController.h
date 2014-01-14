@@ -21,6 +21,8 @@
 @property(strong) BRDay *day;
 @property NSInteger celebrationIndex;
 
+- (void)loadSelectedDate;
+
 - (IBAction)prevDayPressed:(id)sender;
 - (IBAction)nextDayPressed:(id)sender;
 

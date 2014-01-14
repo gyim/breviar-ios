@@ -47,8 +47,19 @@ static NSString *liturgicalColorImages[] = {
 {
     [super viewWillAppear:animated];
     
-    // Load celebrations for date
+    // Load celebrations for date (if not already loaded for the very same date, e.g. when going back from prayer VC)
+    if (!self.day) {
+        [self loadSelectedDate];
+    }
+    
+    if (self.tableView.indexPathForSelectedRow) {
+        [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+    }
+}
+
+- (void)loadSelectedDate {
     self.day = [[BRDataSource instance] dayForDate:self.date];
+    
     if (self.celebrationIndex > self.day.celebrations.count - 1) {
         self.celebrationIndex = 0;
     }
@@ -291,18 +302,17 @@ static NSString *liturgicalColorImages[] = {
 - (void)datePicker:(BRDatePickerViewController *)datePicker pickedDate:(NSDate *)date
 {
     self.date = date;
-    self.day = [[BRDataSource instance] dayForDate:self.date];
     self.celebrationIndex = 0;
-    
+
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [self.datePickerPopover dismissPopoverAnimated:YES];
-        [self updateTitleView];
-        [self.tableView reloadData];
         self.datePickerPopover = nil;
     }
+    
+    [self loadSelectedDate];
 }
 
 @end
