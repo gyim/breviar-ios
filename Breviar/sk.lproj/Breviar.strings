@@ -104,3 +104,6 @@
 "of2id"			= "Zobraziť dátum v ISO 8601 formáte";
 "of2btnu"		= "Tlačidlá pre modlitby zobraziť úsporne";
 "of2nav"		= "Zobraziť navigáciu v textoch modlitieb";
+
+// Other
+"today"         = "Dnes";

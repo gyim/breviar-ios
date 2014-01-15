@@ -104,3 +104,6 @@
 "of2id"			= "Date format in ISO 8601";
 "of2btnu"		= "Tight prayer buttons";
 "of2nav"		= "Display navigation buttons in prayers";
+
+// Other
+"today"         = "Today";
