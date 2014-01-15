@@ -353,6 +353,10 @@ static NSString *liturgicalColorImages[] = {
         
         destController.webView = self.sharedWebView;
     }
+    else if ([segueId isEqualToString:@"ShowAbout"]) {
+        BRAboutViewController *destController = segue.destinationViewController;
+        destController.webView = self.sharedWebView;
+    }
 }
 
 - (void)datePicker:(BRDatePickerViewController *)datePicker pickedDate:(NSDate *)date
