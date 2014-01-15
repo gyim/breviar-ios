@@ -14,7 +14,6 @@
 @end
 
 @implementation BRPrayerViewController
-@synthesize prayer;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

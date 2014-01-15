@@ -29,6 +29,14 @@ static NSString *liturgicalColorImages[] = {
 
 @interface BRPrayerListViewController ()
 
+@property (weak) IBOutlet UITableView *tableView;
+@property (weak) IBOutlet UIButton *showDatePickerButton; // Unused?
+@property (strong) UIPopoverController *datePickerPopover;
+
+@property (strong) NSDate *date;
+@property (strong) BRDay *day;
+@property NSInteger celebrationIndex;
+
 @property (nonatomic, strong) UIWebView *sharedWebView;
 
 @end

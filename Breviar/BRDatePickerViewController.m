@@ -20,10 +20,6 @@
 
 @implementation BRDatePickerViewController
 
-@synthesize datePicker;
-@synthesize datePickerDelegate;
-@synthesize initialDate;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

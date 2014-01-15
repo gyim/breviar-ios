@@ -26,6 +26,10 @@
 
 @interface BRSettingsViewController ()
 
+@property(strong) NSString *currentOptionId;
+@property(strong) NSDictionary *visibleOptionIndexPaths;
+@property(strong) NSArray *visibleOptionsPerSection;
+
 @end
 
 @implementation BRSettingsViewController
