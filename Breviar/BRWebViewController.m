@@ -28,13 +28,14 @@
 {
     [super viewDidLoad];
     
-    // Using shared web view
+    // Use shared web view. Hide it now, and show it using animation once the content is loaded
     self.webView.frame = self.view.bounds;
-    self.webView.hidden = YES;
+    self.webView.alpha = 0;
     self.webView.delegate = self;
+    self.webView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
+    
     [self.webView removeFromSuperview];
     [self.view addSubview:self.webView];
-    self.webView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -77,7 +78,9 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    webView.hidden = NO;
+    [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationCurveEaseInOut animations:^{
+        self.webView.alpha = 1;
+    } completion:nil];
 }
 
 @end
