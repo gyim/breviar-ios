@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		540203C81886718800972730 /* BRPrayerGeneratorOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 540203C71886718800972730 /* BRPrayerGeneratorOperation.m */; };
 		544E694C187D285E0070DEC0 /* BRUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 544E694B187D285E0070DEC0 /* BRUI.m */; };
 		544E6951187D2A850070DEC0 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 544E6950187D2A850070DEC0 /* UIColor+HexColor.m */; };
 		703200E8180F2E9000675F09 /* breviar-ios.css in Resources */ = {isa = PBXBuildFile; fileRef = 703200E7180F2E9000675F09 /* breviar-ios.css */; };
@@ -133,8 +132,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		540203C61886718800972730 /* BRPrayerGeneratorOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRPrayerGeneratorOperation.h; sourceTree = "<group>"; };
-		540203C71886718800972730 /* BRPrayerGeneratorOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRPrayerGeneratorOperation.m; sourceTree = "<group>"; };
 		544E694A187D285E0070DEC0 /* BRUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRUI.h; sourceTree = "<group>"; };
 		544E694B187D285E0070DEC0 /* BRUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRUI.m; sourceTree = "<group>"; };
 		544E694F187D2A850070DEC0 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
@@ -406,8 +403,6 @@
 				70AAAA4D15FBFBE4008D314D /* BRSettings.m */,
 				70E01278162F56E500601CA3 /* BRCGIQuery.h */,
 				70E01279162F56E500601CA3 /* BRCGIQuery.mm */,
-				540203C61886718800972730 /* BRPrayerGeneratorOperation.h */,
-				540203C71886718800972730 /* BRPrayerGeneratorOperation.m */,
 				707A64B2171AA5BF0065F98E /* Settings.plist */,
 			);
 			name = Model;
@@ -793,7 +788,6 @@
 				70E01273162F54BA00601CA3 /* BRDay.m in Sources */,
 				70E01277162F553000601CA3 /* BRCelebration.m in Sources */,
 				70E0127A162F56E500601CA3 /* BRCGIQuery.mm in Sources */,
-				540203C81886718800972730 /* BRPrayerGeneratorOperation.m in Sources */,
 				7042905C1641F91C00663A7D /* BRDataSource.m in Sources */,
 				70C962C016A1DFC800A399B9 /* BRCelebrationCell.m in Sources */,
 				70C962D616B45C3E00A399B9 /* BRFontSettingsCell.m in Sources */,

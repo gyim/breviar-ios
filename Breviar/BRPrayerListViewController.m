@@ -13,7 +13,6 @@
 #import "BRCelebrationCell.h"
 #import "BRUtil.h"
 #import "BRSettings.h"
-#import "BRPrayerGeneratorOperation.h"
 
 static NSString *liturgicalColorImages[] = {
     [BRColorUnknown]       = @"",
@@ -40,7 +39,7 @@ static NSString *liturgicalColorImages[] = {
 @property (strong) BRDay *day;
 @property NSInteger celebrationIndex;
 
-@property (strong) NSOperationQueue *operationQueue;
+@property (strong) dispatch_queue_t preloadQueue;
 
 @end
 
@@ -50,9 +49,7 @@ static NSString *liturgicalColorImages[] = {
 {
     [super viewDidLoad];
     
-    self.operationQueue = [[NSOperationQueue alloc] init];
-    self.operationQueue.name = @"Prayer Generator Queue";
-    self.operationQueue.maxConcurrentOperationCount = 1;
+    self.preloadQueue = dispatch_queue_create("Prayer Generator Queue", DISPATCH_QUEUE_SERIAL);
 
     self.date = [NSDate date];
     
@@ -102,32 +99,14 @@ static NSString *liturgicalColorImages[] = {
 }
 
 - (void)loadSelectedDateAndReloadTable:(BOOL)reload resetCelebrationIndex:(BOOL)resetCelebration {
-    NSDateComponents *newDateComponents = [[NSCalendar currentCalendar] components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:self.date];
-    NSDateComponents *oldDateComponents;
-    
-    if (self.day) {
-      oldDateComponents = [[NSCalendar currentCalendar] components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:self.day.date];
-    }
-    
-    if (
-        !self.day ||
-        !oldDateComponents ||
-        newDateComponents.year != oldDateComponents.year ||
-        newDateComponents.month != oldDateComponents.month ||
-        newDateComponents.day != oldDateComponents.day
-    ) {
-        [self.operationQueue cancelAllOperations];
-        
-        @synchronized (self.day) {
-            self.day = [[BRDataSource instance] dayForDate:self.date];
-        }
-        
-        BRPrayerGeneratorOperation *operation = [[BRPrayerGeneratorOperation alloc] initWithDay:self.day];
-        [self.operationQueue addOperation:operation];
+    if (!self.day || ![[self dayComponentsForDate:self.day.date] isEqual:[self dayComponentsForDate:self.date]]) {
+        self.day = [[BRDataSource instance] dayForDate:self.date];
         
         if (self.celebrationIndex > self.day.celebrations.count - 1) {
             self.celebrationIndex = 0;
         }
+        
+        [self preloadPrayers];
     }
 
     if (resetCelebration) {
@@ -143,6 +122,23 @@ static NSString *liturgicalColorImages[] = {
     }
 }
 
+- (NSDateComponents *)dayComponentsForDate:(NSDate *)date {
+    NSCalendarUnit dayUnit = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    return [[NSCalendar currentCalendar] components:dayUnit fromDate:date];
+}
+
+- (void)preloadPrayers {
+    BRDay *day = self.day;
+    dispatch_async(self.preloadQueue, ^{
+        for (BRCelebration *celebration in day.celebrations) {
+            for (BRPrayer *prayer in celebration.prayers) {
+                if (day == self.day) {
+                    [prayer body];
+                }
+            }
+        }
+    });
+}
 
 #pragma mark -
 #pragma mark UITableViewDataSource
@@ -341,27 +337,21 @@ static NSString *liturgicalColorImages[] = {
         }
     }
     else if ([segueId isEqualToString:@"ShowPrayer"] || (segueId.length > 11 && [[segueId substringToIndex:11] isEqualToString:@"ShowPrayer."])) {
-        // Stop generating all prayers - maybe our prayer is already generated;
-        // otherwise it'll be generated on demand
-        [self.operationQueue cancelAllOperations];
+        BRPrayerViewController *destController = segue.destinationViewController;
+        BRPrayerType prayerType;
         
-        @synchronized (self.day) {
-            BRPrayerViewController *destController = segue.destinationViewController;
-            BRPrayerType prayerType;
-            
-            if ([segueId isEqualToString:@"ShowPrayer"]) {
-                NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-                prayerType = (BRPrayerType)indexPath.row;
-            } else { // ShowPrayer.*
-                NSString *prayerQueryId = [segueId substringFromIndex:11];
-                prayerType = [BRPrayer prayerTypeFromQueryId:prayerQueryId];
-            }
-            
-            BRCelebration *celebration = [self.day.celebrations objectAtIndex:self.celebrationIndex];
-            destController.prayer = celebration.prayers[prayerType];
-            
-            destController.webView = self.sharedWebView;
+        if ([segueId isEqualToString:@"ShowPrayer"]) {
+            NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+            prayerType = (BRPrayerType)indexPath.row;
+        } else { // ShowPrayer.*
+            NSString *prayerQueryId = [segueId substringFromIndex:11];
+            prayerType = [BRPrayer prayerTypeFromQueryId:prayerQueryId];
         }
+        
+        BRCelebration *celebration = [self.day.celebrations objectAtIndex:self.celebrationIndex];
+        destController.prayer = celebration.prayers[prayerType];
+        
+        destController.webView = self.sharedWebView;
     }
 }
 
