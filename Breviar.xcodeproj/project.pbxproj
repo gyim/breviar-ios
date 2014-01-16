@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		542622721887AFA500CA7AC4 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 542622711887AFA500CA7AC4 /* libGoogleAnalyticsServices.a */; };
+		542622761887AFC700CA7AC4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 542622751887AFC700CA7AC4 /* CoreData.framework */; };
+		542622781887AFD700CA7AC4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 542622771887AFD700CA7AC4 /* SystemConfiguration.framework */; };
+		5426227A1887B17500CA7AC4 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 542622791887B17500CA7AC4 /* AdSupport.framework */; };
 		544E694C187D285E0070DEC0 /* BRUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 544E694B187D285E0070DEC0 /* BRUI.m */; };
 		544E6951187D2A850070DEC0 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 544E6950187D2A850070DEC0 /* UIColor+HexColor.m */; };
 		703200E8180F2E9000675F09 /* breviar-ios.css in Resources */ = {isa = PBXBuildFile; fileRef = 703200E7180F2E9000675F09 /* breviar-ios.css */; };
@@ -132,6 +136,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5426226B1887AFA500CA7AC4 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		5426226C1887AFA500CA7AC4 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		5426226D1887AFA500CA7AC4 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		5426226E1887AFA500CA7AC4 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		5426226F1887AFA500CA7AC4 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		542622701887AFA500CA7AC4 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		542622711887AFA500CA7AC4 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		542622751887AFC700CA7AC4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		542622771887AFD700CA7AC4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		542622791887B17500CA7AC4 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		544E694A187D285E0070DEC0 /* BRUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRUI.h; sourceTree = "<group>"; };
 		544E694B187D285E0070DEC0 /* BRUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRUI.m; sourceTree = "<group>"; };
 		544E694F187D2A850070DEC0 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
@@ -291,9 +305,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5426227A1887B17500CA7AC4 /* AdSupport.framework in Frameworks */,
+				542622781887AFD700CA7AC4 /* SystemConfiguration.framework in Frameworks */,
+				542622761887AFC700CA7AC4 /* CoreData.framework in Frameworks */,
 				7042905916408BF600663A7D /* libRaptureXML.a in Frameworks */,
 				7042905816408A6300663A7D /* libz.dylib in Frameworks */,
 				7042905716408A5E00663A7D /* libxml2.dylib in Frameworks */,
+				542622721887AFA500CA7AC4 /* libGoogleAnalyticsServices.a in Frameworks */,
 				7061B08C15FA8E1A00A83E0A /* UIKit.framework in Frameworks */,
 				7061B08E15FA8E1A00A83E0A /* Foundation.framework in Frameworks */,
 				7061B09015FA8E1A00A83E0A /* CoreGraphics.framework in Frameworks */,
@@ -303,9 +321,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5426226A1887AFA500CA7AC4 /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				5426226B1887AFA500CA7AC4 /* GAI.h */,
+				5426226C1887AFA500CA7AC4 /* GAIDictionaryBuilder.h */,
+				5426226D1887AFA500CA7AC4 /* GAIFields.h */,
+				5426226E1887AFA500CA7AC4 /* GAILogger.h */,
+				5426226F1887AFA500CA7AC4 /* GAITrackedViewController.h */,
+				542622701887AFA500CA7AC4 /* GAITracker.h */,
+				542622711887AFA500CA7AC4 /* libGoogleAnalyticsServices.a */,
+			);
+			path = GoogleAnalytics;
+			sourceTree = "<group>";
+		};
 		704290421640886000663A7D /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				5426226A1887AFA500CA7AC4 /* GoogleAnalytics */,
 				704290441640887100663A7D /* RaptureXML.xcodeproj */,
 			);
 			name = Thirdparty;
@@ -350,6 +383,9 @@
 		7061B08A15FA8E1A00A83E0A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				542622791887B17500CA7AC4 /* AdSupport.framework */,
+				542622771887AFD700CA7AC4 /* SystemConfiguration.framework */,
+				542622751887AFC700CA7AC4 /* CoreData.framework */,
 				7061B08B15FA8E1A00A83E0A /* UIKit.framework */,
 				7061B08D15FA8E1A00A83E0A /* Foundation.framework */,
 				7061B08F15FA8E1A00A83E0A /* CoreGraphics.framework */,
@@ -1013,6 +1049,10 @@
 				GCC_PREFIX_HEADER = "Breviar/Breviar-Prefix.pch";
 				INFOPLIST_FILE = "Breviar/Breviar-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoogleAnalytics",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1028,6 +1068,10 @@
 				GCC_PREFIX_HEADER = "Breviar/Breviar-Prefix.pch";
 				INFOPLIST_FILE = "Breviar/Breviar-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoogleAnalytics",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
