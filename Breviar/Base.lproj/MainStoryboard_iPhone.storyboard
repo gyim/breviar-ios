@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="r6Z-rP-I8n">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5037.2" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="r6Z-rP-I8n">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -367,7 +367,9 @@
                                         <rect key="frame" x="10" y="0.0" width="100" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="bX1-qr-6Xz"/>
+                                            <constraint firstAttribute="height" constant="30" id="eJ6-oM-m9a"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <state key="normal" title="Yesterday">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -379,7 +381,9 @@
                                         <rect key="frame" x="110" y="0.0" width="100" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="EoT-Lf-LHc"/>
+                                            <constraint firstAttribute="height" constant="30" id="Kh4-zK-H2A"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <state key="normal" title="Today">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -390,8 +394,10 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j1v-Yf-cVL">
                                         <rect key="frame" x="210" y="0.0" width="100" height="30"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="LrG-Hk-vO3"/>
                                             <constraint firstAttribute="width" constant="100" id="YLg-zK-JzN"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <state key="normal" title="Tomorrow">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -402,12 +408,12 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="lU9-My-Hu7" firstAttribute="leading" secondItem="U5N-Eu-vrn" secondAttribute="trailing" id="4LU-EY-8q7"/>
+                                    <constraint firstItem="j1v-Yf-cVL" firstAttribute="leading" secondItem="lU9-My-Hu7" secondAttribute="trailing" id="Kci-il-XoA"/>
                                     <constraint firstItem="lU9-My-Hu7" firstAttribute="top" secondItem="OmQ-3h-nKd" secondAttribute="top" id="MEb-Sn-MPK"/>
                                     <constraint firstItem="lU9-My-Hu7" firstAttribute="centerX" secondItem="OmQ-3h-nKd" secondAttribute="centerX" id="Zgs-yd-YOQ"/>
-                                    <constraint firstItem="U5N-Eu-vrn" firstAttribute="leading" secondItem="OmQ-3h-nKd" secondAttribute="leading" constant="10" id="aQZ-UG-jTX"/>
                                     <constraint firstAttribute="height" constant="30" id="sCT-aF-uvA"/>
                                     <constraint firstItem="lU9-My-Hu7" firstAttribute="baseline" secondItem="U5N-Eu-vrn" secondAttribute="baseline" id="stZ-ng-rEP"/>
-                                    <constraint firstAttribute="trailing" secondItem="j1v-Yf-cVL" secondAttribute="trailing" constant="10" id="v1k-rO-Jrv"/>
                                     <constraint firstItem="lU9-My-Hu7" firstAttribute="baseline" secondItem="j1v-Yf-cVL" secondAttribute="baseline" id="zOu-IK-rTJ"/>
                                 </constraints>
                             </view>
