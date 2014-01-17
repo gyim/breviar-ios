@@ -63,7 +63,7 @@
     // Going back to BRPrayerListViewController? Reload the whole table because
     if ([self.navigationController.topViewController isKindOfClass:[BRPrayerListViewController class]]) {
         BRPrayerListViewController *parent = (BRPrayerListViewController *)self.navigationController.topViewController;
-        [parent loadSelectedDateAndReloadTable:YES resetCelebrationIndex:NO];
+        [parent loadSelectedDateAndReloadTable:YES resetCelebrationIndex:NO forcePrayerRegeneration:YES];
     }
 }
 

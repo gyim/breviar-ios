@@ -71,7 +71,7 @@ static NSString *liturgicalColorImages[] = {
     
     // Load celebrations for date (if not already loaded for the very same date, e.g. when going back from prayer VC)
     if (!self.day) {
-        [self loadSelectedDateAndReloadTable:YES resetCelebrationIndex:YES];
+        [self loadSelectedDateAndReloadTable:YES resetCelebrationIndex:YES forcePrayerRegeneration:NO];
     }
     // Deselect row when returning from subcontroller to give the user a sense of context
     else if (self.tableView.indexPathForSelectedRow) {
@@ -98,8 +98,9 @@ static NSString *liturgicalColorImages[] = {
     }
 }
 
-- (void)loadSelectedDateAndReloadTable:(BOOL)reload resetCelebrationIndex:(BOOL)resetCelebration {
-    if (!self.day || ![[self dayComponentsForDate:self.day.date] isEqual:[self dayComponentsForDate:self.date]]) {
+- (void)loadSelectedDateAndReloadTable:(BOOL)reload resetCelebrationIndex:(BOOL)resetCelebration forcePrayerRegeneration:(BOOL)regenerate {
+    
+    if (regenerate || !self.day || ![[self dayComponentsForDate:self.day.date] isEqual:[self dayComponentsForDate:self.date]]) {
         self.day = [[BRDataSource instance] dayForDate:self.date];
         
         if (self.celebrationIndex > self.day.celebrations.count - 1) {
@@ -298,7 +299,7 @@ static NSString *liturgicalColorImages[] = {
     [components setDay:dayDiff];
     
     self.date = [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:self.date options:0];
-    [self loadSelectedDateAndReloadTable:NO resetCelebrationIndex:YES];
+    [self loadSelectedDateAndReloadTable:NO resetCelebrationIndex:YES forcePrayerRegeneration:NO];
     
     // Animate only the celebrations section
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 1)];
@@ -374,7 +375,7 @@ static NSString *liturgicalColorImages[] = {
         self.datePickerPopover = nil;
     }
     
-    [self loadSelectedDateAndReloadTable:YES resetCelebrationIndex:YES];
+    [self loadSelectedDateAndReloadTable:YES resetCelebrationIndex:YES forcePrayerRegeneration:NO];
 }
 
 @end
