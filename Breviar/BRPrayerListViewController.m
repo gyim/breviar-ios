@@ -58,6 +58,11 @@ static NSString *liturgicalColorImages[] = {
     self.sharedWebView.backgroundColor = [UIColor clearColor];
     self.sharedWebView.opaque = NO;
     [self.view addSubview:self.sharedWebView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillEnterForeground:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
 }
 
 - (void)viewDidUnload
@@ -79,6 +84,12 @@ static NSString *liturgicalColorImages[] = {
         if (self.tableView.indexPathForSelectedRow) {
             [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
         }
+    }
+}
+
+- (void)applicationWillEnterForeground:(NSNotification *)notification {
+    if (self.day && self.navigationController.topViewController == self) {
+        [self updateTitleView];
     }
 }
 
