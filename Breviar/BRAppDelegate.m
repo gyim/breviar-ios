@@ -8,6 +8,7 @@
 
 #import "BRAppDelegate.h"
 #import "BRDataSource.h"
+#import "BRPrayerListViewController.h"
 
 @implementation BRAppDelegate
 
@@ -61,6 +62,10 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    if ([navigationController.topViewController isKindOfClass:[BRPrayerListViewController class]]) {
+        [navigationController.topViewController viewWillAppear:YES];
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

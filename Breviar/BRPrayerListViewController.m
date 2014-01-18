@@ -72,10 +72,13 @@ static NSString *liturgicalColorImages[] = {
     // Load celebrations for date (if not already loaded for the very same date, e.g. when going back from prayer VC)
     if (!self.day) {
         [self loadSelectedDateAndReloadTable:YES resetCelebrationIndex:YES forcePrayerRegeneration:NO];
-    }
-    // Deselect row when returning from subcontroller to give the user a sense of context
-    else if (self.tableView.indexPathForSelectedRow) {
-        [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+    } else {
+        [self updateTitleView];
+        
+        // Deselect row when returning from subcontroller to give the user a sense of context
+        if (self.tableView.indexPathForSelectedRow) {
+            [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+        }
     }
 }
 
@@ -246,8 +249,10 @@ static NSString *liturgicalColorImages[] = {
 
 - (void)updateTitleView
 {
-    self.navigationItem.title = [self getDateLabel];
-    self.navigationItem.titleView = [self getTitleView];
+    if (![self.navigationItem.title isEqualToString:[self getDateLabel]]) {
+        self.navigationItem.title = [self getDateLabel];
+        self.navigationItem.titleView = [self getTitleView];
+    }
 }
 
 - (UIView *)getTitleView
