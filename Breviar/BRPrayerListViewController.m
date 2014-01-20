@@ -34,6 +34,8 @@ static NSString *liturgicalColorImages[] = {
 @property (nonatomic, strong) UIPopoverController *datePickerPopover;
 
 @property (nonatomic, strong) UIWebView *sharedWebView;
+@property (nonatomic, strong) BRCelebrationCell *celebrationCellPortrait;
+@property (nonatomic, strong) BRCelebrationCell *celebrationCellLanscape;
 
 @property (strong) NSDate *date;
 @property (strong) BRDay *day;
@@ -93,9 +95,9 @@ static NSString *liturgicalColorImages[] = {
     }
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Data Source, Loader, etc.
@@ -176,12 +178,16 @@ static NSString *liturgicalColorImages[] = {
     }
 }
 
+- (NSString *)celebrationCellType {
+    return UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ? @"CelebrationCellPortrait" : @"CelebrationCellLandscape";
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *sectionType = [self.sections objectAtIndex:indexPath.section];
     
     if ([sectionType isEqualToString:@"Date"]) {
         // Celebration cell
-        BRCelebrationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CelebrationCell"];
+        BRCelebrationCell *cell = [tableView dequeueReusableCellWithIdentifier:[self celebrationCellType]];
         
         BRCelebration *celebration = [self.day.celebrations objectAtIndex:indexPath.row];
         cell.celebrationNameLabel.text = celebration.title;
@@ -219,7 +225,7 @@ static NSString *liturgicalColorImages[] = {
         return 125;
     }
     else if ([sectionType isEqualToString:@"Date"]) {
-        BRCelebrationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CelebrationCell"];
+        BRCelebrationCell *cell = [tableView dequeueReusableCellWithIdentifier:[self celebrationCellType]];
         cell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(tableView.bounds), CGRectGetHeight(cell.bounds));
         
         BRCelebration *celebration = [self.day.celebrations objectAtIndex:indexPath.row];
