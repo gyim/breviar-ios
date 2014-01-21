@@ -51,6 +51,10 @@ static NSString *prayerNames[] = {
     return prayerNames[self.prayerType];
 }
 
+- (NSString *)queryId {
+    return prayerQueryIds[self.prayerType];
+}
+
 - (NSString *)body {
     if (!self.cachedBody) {
         self.cachedBody = [self generateBody];

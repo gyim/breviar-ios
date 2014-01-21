@@ -28,6 +28,7 @@ typedef enum {
 @property NSInteger celebrationId;
 @property(readonly) NSString *title;
 @property(readonly) NSString *prayerName;
+@property(readonly) NSString *queryId;
 @property(readonly) NSString *body;
 
 + (BRPrayerType)prayerTypeFromQueryId:(NSString *)queryId;
