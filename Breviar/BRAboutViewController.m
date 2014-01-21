@@ -17,14 +17,25 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    BRSettings *settings = [BRSettings instance];
+    // Get current language (based on UI language)
+    NSArray *availableLanguages = @[@"sk", @"cs", @"hu", @"en"];
+    NSString *lang = @"en";
+    for (NSString *l in [NSLocale preferredLanguages]) {
+        if ([availableLanguages containsObject:l]) {
+            lang = l;
+            break;
+        }
+    }
     
-    NSString *lang = [settings stringForOption:@"j"];
+    // Determine about.htm location
     NSDictionary *langDirs = @{@"sk": @"html/include",
-                               @"cz": @"html/include_cz",
-                               @"hu": @"html/include_hu"};
+                               @"cs": @"html/include_cz",
+                               @"hu": @"html/include_hu",
+                               @"en": @"html"};
     
     NSString *filename = [[NSBundle mainBundle] pathForResource:@"about" ofType:@"htm" inDirectory:[langDirs objectForKey:lang]];
+    
+    // Show content
     NSString *aboutContent = [NSString stringWithContentsOfFile:filename encoding:NSWindowsCP1250StringEncoding error:nil];
     self.htmlContent = [NSString stringWithFormat:@"<div id='about'>%@</div>", aboutContent];
     [super viewWillAppear:animated];
