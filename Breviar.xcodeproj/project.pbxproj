@@ -677,6 +677,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7061B0A815FA8E1A00A83E0A /* Build configuration list for PBXNativeTarget "Breviar" */;
 			buildPhases = (
+				709994D3188F2ACC00729A21 /* ShellScript */,
 				7061B08315FA8E1A00A83E0A /* Sources */,
 				7061B08415FA8E1A00A83E0A /* Frameworks */,
 				7061B08515FA8E1A00A83E0A /* Resources */,
@@ -831,7 +832,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rm -rf \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nmkdir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nfor dir in include include_hu include_cz; do\n    cp -r ../$dir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\ndone\ncp ../breviar.css ../breviar-normal-font.css ../breviar-invert-colors.css ../about.htm \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"";
+			shellScript = "rm -rf \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nmkdir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nfor dir in include include_hu include_cz; do\n    cp -r ../$dir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\ndone\ncp ../breviar.css ../breviar-normal-font.css ../breviar-invert-colors.css ../about.htm \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\n\n./buildno.sh";
+		};
+		709994D3188F2ACC00729A21 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+				Breviar/config.build.h,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = ./buildno.sh;
 		};
 /* End PBXShellScriptBuildPhase section */
 

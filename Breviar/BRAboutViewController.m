@@ -8,6 +8,7 @@
 
 #import "BRAboutViewController.h"
 #import "BRSettings.h"
+#import "config.build.h"
 #import "GAI.h"
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
@@ -38,9 +39,13 @@
     
     NSString *filename = [[NSBundle mainBundle] pathForResource:@"about" ofType:@"htm" inDirectory:[langDirs objectForKey:lang]];
     
-    // Show content
+    // Load content
     NSString *aboutContent = [NSString stringWithContentsOfFile:filename encoding:NSWindowsCP1250StringEncoding error:nil];
-    self.htmlContent = [NSString stringWithFormat:@"<div id='about'>%@</div>", aboutContent];
+    NSString *version = [NSString stringWithFormat:@"%@ (%@)", [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"], BUILD_NUMBER];
+    NSString *html = [aboutContent stringByReplacingOccurrencesOfString:@"<!--{VERSION}-->" withString:version];
+    
+    // Show content
+    self.htmlContent = [NSString stringWithFormat:@"<div id='about'>%@</div>", html];
     [super viewWillAppear:animated];
     
     // Track page
