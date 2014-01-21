@@ -8,6 +8,9 @@
 
 #import "BRAboutViewController.h"
 #import "BRSettings.h"
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
 
 @interface BRAboutViewController ()
 
@@ -39,6 +42,11 @@
     NSString *aboutContent = [NSString stringWithContentsOfFile:filename encoding:NSWindowsCP1250StringEncoding error:nil];
     self.htmlContent = [NSString stringWithFormat:@"<div id='about'>%@</div>", aboutContent];
     [super viewWillAppear:animated];
+    
+    // Track page
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"About"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 @end
