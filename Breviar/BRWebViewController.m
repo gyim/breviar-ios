@@ -68,10 +68,10 @@
      "  <link rel='stylesheet' type='text/css' href='breviar-ios.css'>\n"
      "  %@\n"
      "</head>\n"
-     "<body style='padding-top: 64px; font: %dpx %@'>%@</body>\n"
+     "<body style='padding-top: 64px; font: %ldpx %@'>%@</body>\n"
      "</html>",
      extraStylesheets,
-     settings.prayerFontSize,
+     (long)settings.prayerFontSize,
      settings.prayerFontFamily,
      self.htmlContent];
     
