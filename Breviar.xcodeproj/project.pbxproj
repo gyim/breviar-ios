@@ -1181,7 +1181,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleAnalytics",
-					"/Users/akos/opensource/Breviar/breviar-ios/TestFlight",
+					"$(PROJECT_DIR)/TestFlight",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1201,7 +1201,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleAnalytics",
-					"/Users/akos/opensource/Breviar/breviar-ios/TestFlight",
+					"$(PROJECT_DIR)/TestFlight",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
