@@ -39,18 +39,6 @@
 		7061B0B115FAA18C00A83E0A /* BRPrayerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0B015FAA18C00A83E0A /* BRPrayerListViewController.m */; };
 		7061B0B515FAA34100A83E0A /* BRPrayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0B415FAA34100A83E0A /* BRPrayerViewController.m */; };
 		7061B0B815FAA3C500A83E0A /* BRPrayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0B715FAA3C500A83E0A /* BRPrayer.m */; };
-		7061B0D315FB929300A83E0A /* breviar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0BD15FB929300A83E0A /* breviar.cpp */; };
-		7061B0D415FB929300A83E0A /* cgiutils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0BF15FB929300A83E0A /* cgiutils.cpp */; };
-		7061B0D515FB929300A83E0A /* citania.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0C115FB929300A83E0A /* citania.cpp */; };
-		7061B0D615FB929300A83E0A /* dbzaltar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0C315FB929300A83E0A /* dbzaltar.cpp */; };
-		7061B0D715FB929300A83E0A /* liturgia.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0C515FB929300A83E0A /* liturgia.cpp */; };
-		7061B0D815FB929300A83E0A /* myconf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0C715FB929300A83E0A /* myconf.cpp */; };
-		7061B0D915FB929300A83E0A /* mydefs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0C915FB929300A83E0A /* mydefs.cpp */; };
-		7061B0DA15FB929300A83E0A /* myexpt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0CB15FB929300A83E0A /* myexpt.cpp */; };
-		7061B0DB15FB929300A83E0A /* mygetopt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0CD15FB929300A83E0A /* mygetopt.cpp */; };
-		7061B0DC15FB929300A83E0A /* myhpage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0CF15FB929300A83E0A /* myhpage.cpp */; };
-		7061B0DD15FB929300A83E0A /* mylog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0D115FB929300A83E0A /* mylog.cpp */; };
-		7061B0E015FB932000A83E0A /* mystring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0DE15FB932000A83E0A /* mystring.cpp */; };
 		707A6499171A1C180065F98E /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 707A6497171A1C180065F98E /* MainStoryboard_iPad.storyboard */; };
 		707A64A5171A1F650065F98E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64A1171A1F650065F98E /* InfoPlist.strings */; };
 		707A64A6171A1F650065F98E /* Breviar.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64A3171A1F650065F98E /* Breviar.strings */; };
@@ -110,6 +98,18 @@
 		70E01273162F54BA00601CA3 /* BRDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E01272162F54BA00601CA3 /* BRDay.m */; };
 		70E01277162F553000601CA3 /* BRCelebration.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E01276162F553000601CA3 /* BRCelebration.m */; };
 		70E0127A162F56E500601CA3 /* BRCGIQuery.mm in Sources */ = {isa = PBXBuildFile; fileRef = 70E01279162F56E500601CA3 /* BRCGIQuery.mm */; };
+		70EB052518B1282300F88662 /* breviar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB050418B1282300F88662 /* breviar.cpp */; };
+		70EB052618B1282300F88662 /* cgiutils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB050618B1282300F88662 /* cgiutils.cpp */; };
+		70EB052A18B1282300F88662 /* citania.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB050B18B1282300F88662 /* citania.cpp */; };
+		70EB052B18B1282300F88662 /* dbzaltar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB050D18B1282300F88662 /* dbzaltar.cpp */; };
+		70EB052D18B1282300F88662 /* liturgia.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB051118B1282300F88662 /* liturgia.cpp */; };
+		70EB052F18B1282300F88662 /* myconf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB051518B1282300F88662 /* myconf.cpp */; };
+		70EB053018B1282300F88662 /* mydefs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB051718B1282300F88662 /* mydefs.cpp */; };
+		70EB053118B1282300F88662 /* myexpt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB051918B1282300F88662 /* myexpt.cpp */; };
+		70EB053218B1282300F88662 /* mygetopt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB051B18B1282300F88662 /* mygetopt.cpp */; };
+		70EB053318B1282300F88662 /* myhpage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB051D18B1282300F88662 /* myhpage.cpp */; };
+		70EB053418B1282300F88662 /* mylog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB051F18B1282300F88662 /* mylog.cpp */; };
+		70EB053518B1282300F88662 /* mystring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB052118B1282300F88662 /* mystring.cpp */; };
 		70F329D2187CA1D90097FF40 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 70F329D4187CA1D90097FF40 /* Default-Landscape.png */; };
 		70F329DB187CA23C0097FF40 /* Default-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70F329DD187CA23C0097FF40 /* Default-Landscape@2x.png */; };
 /* End PBXBuildFile section */
@@ -215,30 +215,6 @@
 		7061B0B415FAA34100A83E0A /* BRPrayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRPrayerViewController.m; sourceTree = "<group>"; };
 		7061B0B615FAA3C500A83E0A /* BRPrayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRPrayer.h; sourceTree = "<group>"; };
 		7061B0B715FAA3C500A83E0A /* BRPrayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRPrayer.m; sourceTree = "<group>"; };
-		7061B0BD15FB929300A83E0A /* breviar.cpp */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.cpp.cpp; name = breviar.cpp; path = "../../cgi-bin/source/breviar.cpp"; sourceTree = "<group>"; };
-		7061B0BE15FB929300A83E0A /* breviar.h */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.c.h; name = breviar.h; path = "../../cgi-bin/source/breviar.h"; sourceTree = "<group>"; };
-		7061B0BF15FB929300A83E0A /* cgiutils.cpp */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.cpp.cpp; name = cgiutils.cpp; path = "../../cgi-bin/source/cgiutils.cpp"; sourceTree = "<group>"; };
-		7061B0C015FB929300A83E0A /* cgiutils.h */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.c.h; name = cgiutils.h; path = "../../cgi-bin/source/cgiutils.h"; sourceTree = "<group>"; };
-		7061B0C115FB929300A83E0A /* citania.cpp */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.cpp.cpp; name = citania.cpp; path = "../../cgi-bin/source/citania.cpp"; sourceTree = "<group>"; };
-		7061B0C215FB929300A83E0A /* citania.h */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.c.h; name = citania.h; path = "../../cgi-bin/source/citania.h"; sourceTree = "<group>"; };
-		7061B0C315FB929300A83E0A /* dbzaltar.cpp */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.cpp.cpp; name = dbzaltar.cpp; path = "../../cgi-bin/source/dbzaltar.cpp"; sourceTree = "<group>"; };
-		7061B0C415FB929300A83E0A /* dbzaltar.h */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.c.h; name = dbzaltar.h; path = "../../cgi-bin/source/dbzaltar.h"; sourceTree = "<group>"; };
-		7061B0C515FB929300A83E0A /* liturgia.cpp */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.cpp.cpp; name = liturgia.cpp; path = "../../cgi-bin/source/liturgia.cpp"; sourceTree = "<group>"; };
-		7061B0C615FB929300A83E0A /* liturgia.h */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.c.h; name = liturgia.h; path = "../../cgi-bin/source/liturgia.h"; sourceTree = "<group>"; };
-		7061B0C715FB929300A83E0A /* myconf.cpp */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.cpp.cpp; name = myconf.cpp; path = "../../cgi-bin/source/myconf.cpp"; sourceTree = "<group>"; };
-		7061B0C815FB929300A83E0A /* myconf.h */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.c.h; name = myconf.h; path = "../../cgi-bin/source/myconf.h"; sourceTree = "<group>"; };
-		7061B0C915FB929300A83E0A /* mydefs.cpp */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.cpp.cpp; name = mydefs.cpp; path = "../../cgi-bin/source/mydefs.cpp"; sourceTree = "<group>"; };
-		7061B0CA15FB929300A83E0A /* mydefs.h */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.c.h; name = mydefs.h; path = "../../cgi-bin/source/mydefs.h"; sourceTree = "<group>"; };
-		7061B0CB15FB929300A83E0A /* myexpt.cpp */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.cpp.cpp; name = myexpt.cpp; path = "../../cgi-bin/source/myexpt.cpp"; sourceTree = "<group>"; };
-		7061B0CC15FB929300A83E0A /* myexpt.h */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.c.h; name = myexpt.h; path = "../../cgi-bin/source/myexpt.h"; sourceTree = "<group>"; };
-		7061B0CD15FB929300A83E0A /* mygetopt.cpp */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.cpp.cpp; name = mygetopt.cpp; path = "../../cgi-bin/source/mygetopt.cpp"; sourceTree = "<group>"; };
-		7061B0CE15FB929300A83E0A /* mygetopt.h */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.c.h; name = mygetopt.h; path = "../../cgi-bin/source/mygetopt.h"; sourceTree = "<group>"; };
-		7061B0CF15FB929300A83E0A /* myhpage.cpp */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.cpp.cpp; name = myhpage.cpp; path = "../../cgi-bin/source/myhpage.cpp"; sourceTree = "<group>"; };
-		7061B0D015FB929300A83E0A /* myhpage.h */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.c.h; name = myhpage.h; path = "../../cgi-bin/source/myhpage.h"; sourceTree = "<group>"; };
-		7061B0D115FB929300A83E0A /* mylog.cpp */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.cpp.cpp; name = mylog.cpp; path = "../../cgi-bin/source/mylog.cpp"; sourceTree = "<group>"; };
-		7061B0D215FB929300A83E0A /* mylog.h */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.c.h; name = mylog.h; path = "../../cgi-bin/source/mylog.h"; sourceTree = "<group>"; };
-		7061B0DE15FB932000A83E0A /* mystring.cpp */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.cpp.cpp; name = mystring.cpp; path = "../../cgi-bin/source/mystring.cpp"; sourceTree = "<group>"; };
-		7061B0DF15FB932000A83E0A /* mystring.h */ = {isa = PBXFileReference; fileEncoding = 15; lastKnownFileType = sourcecode.c.h; name = mystring.h; path = "../../cgi-bin/source/mystring.h"; sourceTree = "<group>"; };
 		707A6495171A1B9E0065F98E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		707A6498171A1C180065F98E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		707A649F171A1E850065F98E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
@@ -317,6 +293,34 @@
 		70E01276162F553000601CA3 /* BRCelebration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRCelebration.m; sourceTree = "<group>"; };
 		70E01278162F56E500601CA3 /* BRCGIQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCGIQuery.h; sourceTree = "<group>"; };
 		70E01279162F56E500601CA3 /* BRCGIQuery.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BRCGIQuery.mm; sourceTree = "<group>"; };
+		70EB050418B1282300F88662 /* breviar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = breviar.cpp; path = "breviar-cgi/cgi-bin/source/breviar.cpp"; sourceTree = SOURCE_ROOT; };
+		70EB050518B1282300F88662 /* breviar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = breviar.h; path = "breviar-cgi/cgi-bin/source/breviar.h"; sourceTree = SOURCE_ROOT; };
+		70EB050618B1282300F88662 /* cgiutils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cgiutils.cpp; path = "breviar-cgi/cgi-bin/source/cgiutils.cpp"; sourceTree = SOURCE_ROOT; };
+		70EB050718B1282300F88662 /* cgiutils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cgiutils.h; path = "breviar-cgi/cgi-bin/source/cgiutils.h"; sourceTree = SOURCE_ROOT; };
+		70EB050B18B1282300F88662 /* citania.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = citania.cpp; path = "breviar-cgi/cgi-bin/source/citania.cpp"; sourceTree = SOURCE_ROOT; };
+		70EB050C18B1282300F88662 /* citania.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = citania.h; path = "breviar-cgi/cgi-bin/source/citania.h"; sourceTree = SOURCE_ROOT; };
+		70EB050D18B1282300F88662 /* dbzaltar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dbzaltar.cpp; path = "breviar-cgi/cgi-bin/source/dbzaltar.cpp"; sourceTree = SOURCE_ROOT; };
+		70EB050E18B1282300F88662 /* dbzaltar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dbzaltar.h; path = "breviar-cgi/cgi-bin/source/dbzaltar.h"; sourceTree = SOURCE_ROOT; };
+		70EB050F18B1282300F88662 /* hodin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hodin.h; path = "breviar-cgi/cgi-bin/source/hodin.h"; sourceTree = SOURCE_ROOT; };
+		70EB051118B1282300F88662 /* liturgia.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = liturgia.cpp; path = "breviar-cgi/cgi-bin/source/liturgia.cpp"; sourceTree = SOURCE_ROOT; };
+		70EB051218B1282300F88662 /* liturgia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = liturgia.h; path = "breviar-cgi/cgi-bin/source/liturgia.h"; sourceTree = SOURCE_ROOT; };
+		70EB051418B1282300F88662 /* mybuild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mybuild.h; path = "breviar-cgi/cgi-bin/source/mybuild.h"; sourceTree = SOURCE_ROOT; };
+		70EB051518B1282300F88662 /* myconf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = myconf.cpp; path = "breviar-cgi/cgi-bin/source/myconf.cpp"; sourceTree = SOURCE_ROOT; };
+		70EB051618B1282300F88662 /* myconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = myconf.h; path = "breviar-cgi/cgi-bin/source/myconf.h"; sourceTree = SOURCE_ROOT; };
+		70EB051718B1282300F88662 /* mydefs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mydefs.cpp; path = "breviar-cgi/cgi-bin/source/mydefs.cpp"; sourceTree = SOURCE_ROOT; };
+		70EB051818B1282300F88662 /* mydefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mydefs.h; path = "breviar-cgi/cgi-bin/source/mydefs.h"; sourceTree = SOURCE_ROOT; };
+		70EB051918B1282300F88662 /* myexpt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = myexpt.cpp; path = "breviar-cgi/cgi-bin/source/myexpt.cpp"; sourceTree = SOURCE_ROOT; };
+		70EB051A18B1282300F88662 /* myexpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = myexpt.h; path = "breviar-cgi/cgi-bin/source/myexpt.h"; sourceTree = SOURCE_ROOT; };
+		70EB051B18B1282300F88662 /* mygetopt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mygetopt.cpp; path = "breviar-cgi/cgi-bin/source/mygetopt.cpp"; sourceTree = SOURCE_ROOT; };
+		70EB051C18B1282300F88662 /* mygetopt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mygetopt.h; path = "breviar-cgi/cgi-bin/source/mygetopt.h"; sourceTree = SOURCE_ROOT; };
+		70EB051D18B1282300F88662 /* myhpage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = myhpage.cpp; path = "breviar-cgi/cgi-bin/source/myhpage.cpp"; sourceTree = SOURCE_ROOT; };
+		70EB051E18B1282300F88662 /* myhpage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = myhpage.h; path = "breviar-cgi/cgi-bin/source/myhpage.h"; sourceTree = SOURCE_ROOT; };
+		70EB051F18B1282300F88662 /* mylog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mylog.cpp; path = "breviar-cgi/cgi-bin/source/mylog.cpp"; sourceTree = SOURCE_ROOT; };
+		70EB052018B1282300F88662 /* mylog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mylog.h; path = "breviar-cgi/cgi-bin/source/mylog.h"; sourceTree = SOURCE_ROOT; };
+		70EB052118B1282300F88662 /* mystring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mystring.cpp; path = "breviar-cgi/cgi-bin/source/mystring.cpp"; sourceTree = SOURCE_ROOT; };
+		70EB052218B1282300F88662 /* mystring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mystring.h; path = "breviar-cgi/cgi-bin/source/mystring.h"; sourceTree = SOURCE_ROOT; };
+		70EB052318B1282300F88662 /* mysysdef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mysysdef.h; path = "breviar-cgi/cgi-bin/source/mysysdef.h"; sourceTree = SOURCE_ROOT; };
+		70EB052418B1282300F88662 /* mysystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mysystem.h; path = "breviar-cgi/cgi-bin/source/mysystem.h"; sourceTree = SOURCE_ROOT; };
 		70F329D3187CA1D90097FF40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = "Base.lproj/Default-Landscape.png"; sourceTree = "<group>"; };
 		70F329D7187CA1EF0097FF40 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Default-Landscape.png"; sourceTree = "<group>"; };
 		70F329D8187CA1F00097FF40 /* hu */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hu; path = "hu.lproj/Default-Landscape.png"; sourceTree = "<group>"; };
@@ -527,30 +531,34 @@
 		7061B0BC15FB923300A83E0A /* cgi */ = {
 			isa = PBXGroup;
 			children = (
-				7061B0DE15FB932000A83E0A /* mystring.cpp */,
-				7061B0DF15FB932000A83E0A /* mystring.h */,
-				7061B0BD15FB929300A83E0A /* breviar.cpp */,
-				7061B0BE15FB929300A83E0A /* breviar.h */,
-				7061B0BF15FB929300A83E0A /* cgiutils.cpp */,
-				7061B0C015FB929300A83E0A /* cgiutils.h */,
-				7061B0C115FB929300A83E0A /* citania.cpp */,
-				7061B0C215FB929300A83E0A /* citania.h */,
-				7061B0C315FB929300A83E0A /* dbzaltar.cpp */,
-				7061B0C415FB929300A83E0A /* dbzaltar.h */,
-				7061B0C515FB929300A83E0A /* liturgia.cpp */,
-				7061B0C615FB929300A83E0A /* liturgia.h */,
-				7061B0C715FB929300A83E0A /* myconf.cpp */,
-				7061B0C815FB929300A83E0A /* myconf.h */,
-				7061B0C915FB929300A83E0A /* mydefs.cpp */,
-				7061B0CA15FB929300A83E0A /* mydefs.h */,
-				7061B0CB15FB929300A83E0A /* myexpt.cpp */,
-				7061B0CC15FB929300A83E0A /* myexpt.h */,
-				7061B0CD15FB929300A83E0A /* mygetopt.cpp */,
-				7061B0CE15FB929300A83E0A /* mygetopt.h */,
-				7061B0CF15FB929300A83E0A /* myhpage.cpp */,
-				7061B0D015FB929300A83E0A /* myhpage.h */,
-				7061B0D115FB929300A83E0A /* mylog.cpp */,
-				7061B0D215FB929300A83E0A /* mylog.h */,
+				70EB050418B1282300F88662 /* breviar.cpp */,
+				70EB050518B1282300F88662 /* breviar.h */,
+				70EB050618B1282300F88662 /* cgiutils.cpp */,
+				70EB050718B1282300F88662 /* cgiutils.h */,
+				70EB050B18B1282300F88662 /* citania.cpp */,
+				70EB050C18B1282300F88662 /* citania.h */,
+				70EB050D18B1282300F88662 /* dbzaltar.cpp */,
+				70EB050E18B1282300F88662 /* dbzaltar.h */,
+				70EB050F18B1282300F88662 /* hodin.h */,
+				70EB051118B1282300F88662 /* liturgia.cpp */,
+				70EB051218B1282300F88662 /* liturgia.h */,
+				70EB051418B1282300F88662 /* mybuild.h */,
+				70EB051518B1282300F88662 /* myconf.cpp */,
+				70EB051618B1282300F88662 /* myconf.h */,
+				70EB051718B1282300F88662 /* mydefs.cpp */,
+				70EB051818B1282300F88662 /* mydefs.h */,
+				70EB051918B1282300F88662 /* myexpt.cpp */,
+				70EB051A18B1282300F88662 /* myexpt.h */,
+				70EB051B18B1282300F88662 /* mygetopt.cpp */,
+				70EB051C18B1282300F88662 /* mygetopt.h */,
+				70EB051D18B1282300F88662 /* myhpage.cpp */,
+				70EB051E18B1282300F88662 /* myhpage.h */,
+				70EB051F18B1282300F88662 /* mylog.cpp */,
+				70EB052018B1282300F88662 /* mylog.h */,
+				70EB052118B1282300F88662 /* mystring.cpp */,
+				70EB052218B1282300F88662 /* mystring.h */,
+				70EB052318B1282300F88662 /* mysysdef.h */,
+				70EB052418B1282300F88662 /* mysystem.h */,
 			);
 			name = cgi;
 			sourceTree = "<group>";
@@ -832,7 +840,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "# Copy HTML sources\nrm -rf \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nmkdir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\n\nfor dir in $BREVIAR_INCLUDE_DIRS; do\ncp -r ../$dir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\ndone\n\n# Copy other files\ncp ../breviar.css ../breviar-normal-font.css ../breviar-invert-colors.css ../about.htm \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\n\n# Git build number\n./buildno.sh";
+			shellScript = "# Copy HTML sources\nrm -rf \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nmkdir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\n\nfor dir in $BREVIAR_INCLUDE_DIRS; do\ncp -r breviar-cgi/$dir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\ndone\n\n# Copy other files\ncp breviar-cgi/breviar.css breviar-cgi/breviar-normal-font.css breviar-cgi/breviar-invert-colors.css breviar-cgi/about.htm \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\n\n# Git build number\n./buildno.sh";
 		};
 		709994D3188F2ACC00729A21 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -858,36 +866,36 @@
 				7061B09815FA8E1A00A83E0A /* main.m in Sources */,
 				7061B09C15FA8E1A00A83E0A /* BRAppDelegate.m in Sources */,
 				7061B0A515FA8E1A00A83E0A /* BRViewController.m in Sources */,
+				70EB052D18B1282300F88662 /* liturgia.cpp in Sources */,
 				7061B0B115FAA18C00A83E0A /* BRPrayerListViewController.m in Sources */,
+				70EB053518B1282300F88662 /* mystring.cpp in Sources */,
 				7061B0B515FAA34100A83E0A /* BRPrayerViewController.m in Sources */,
 				70CAFAA418849462000410AC /* BRWebViewController.m in Sources */,
+				70EB053318B1282300F88662 /* myhpage.cpp in Sources */,
 				7061B0B815FAA3C500A83E0A /* BRPrayer.m in Sources */,
-				7061B0D315FB929300A83E0A /* breviar.cpp in Sources */,
-				7061B0D415FB929300A83E0A /* cgiutils.cpp in Sources */,
-				7061B0D515FB929300A83E0A /* citania.cpp in Sources */,
-				7061B0D615FB929300A83E0A /* dbzaltar.cpp in Sources */,
-				7061B0D715FB929300A83E0A /* liturgia.cpp in Sources */,
-				7061B0D815FB929300A83E0A /* myconf.cpp in Sources */,
-				7061B0D915FB929300A83E0A /* mydefs.cpp in Sources */,
-				7061B0DA15FB929300A83E0A /* myexpt.cpp in Sources */,
-				7061B0DB15FB929300A83E0A /* mygetopt.cpp in Sources */,
-				7061B0DC15FB929300A83E0A /* myhpage.cpp in Sources */,
-				7061B0DD15FB929300A83E0A /* mylog.cpp in Sources */,
+				70EB052518B1282300F88662 /* breviar.cpp in Sources */,
 				70CAFAA9188499F3000410AC /* BRAboutViewController.m in Sources */,
+				70EB053218B1282300F88662 /* mygetopt.cpp in Sources */,
 				544E6951187D2A850070DEC0 /* UIColor+HexColor.m in Sources */,
-				7061B0E015FB932000A83E0A /* mystring.cpp in Sources */,
+				70EB052618B1282300F88662 /* cgiutils.cpp in Sources */,
 				7054368D15FBDD69005854DC /* BRDatePickerViewController.m in Sources */,
 				544E694C187D285E0070DEC0 /* BRUI.m in Sources */,
 				7054369115FBF1B1005854DC /* BRSettingsViewController.m in Sources */,
+				70EB053118B1282300F88662 /* myexpt.cpp in Sources */,
+				70EB053418B1282300F88662 /* mylog.cpp in Sources */,
 				7054369415FBF1D1005854DC /* BRFontPickerViewController.m in Sources */,
 				70AAAA4E15FBFBE4008D314D /* BRSettings.m in Sources */,
+				70EB052A18B1282300F88662 /* citania.cpp in Sources */,
 				7034597D15FCE84D000A1711 /* BRFontHelper.m in Sources */,
 				70E01273162F54BA00601CA3 /* BRDay.m in Sources */,
 				70E01277162F553000601CA3 /* BRCelebration.m in Sources */,
+				70EB052B18B1282300F88662 /* dbzaltar.cpp in Sources */,
 				70E0127A162F56E500601CA3 /* BRCGIQuery.mm in Sources */,
+				70EB052F18B1282300F88662 /* myconf.cpp in Sources */,
 				7042905C1641F91C00663A7D /* BRDataSource.m in Sources */,
 				70C962C016A1DFC800A399B9 /* BRCelebrationCell.m in Sources */,
 				70C962D616B45C3E00A399B9 /* BRFontSettingsCell.m in Sources */,
+				70EB053018B1282300F88662 /* mydefs.cpp in Sources */,
 				70C962D916B5425200A399B9 /* BRBoolSettingsCell.m in Sources */,
 				707A64B7171AD8030065F98E /* BRStringOptionPickerViewController.m in Sources */,
 			);
@@ -1269,7 +1277,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleAnalytics",
-					"/Users/akos/opensource/Breviar/breviar-ios/TestFlight",
+					"$(PROJECT_DIR)/TestFlight",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1341,7 +1349,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleAnalytics",
-					"/Users/akos/opensource/Breviar/breviar-ios/TestFlight",
+					"$(PROJECT_DIR)/TestFlight",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1413,7 +1421,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleAnalytics",
-					"/Users/akos/opensource/Breviar/breviar-ios/TestFlight",
+					"$(PROJECT_DIR)/TestFlight",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1485,7 +1493,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleAnalytics",
-					"/Users/akos/opensource/Breviar/breviar-ios/TestFlight",
+					"$(PROJECT_DIR)/TestFlight",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1553,7 +1561,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleAnalytics",
-					"/Users/akos/opensource/Breviar/breviar-ios/TestFlight",
+					"$(PROJECT_DIR)/TestFlight",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1621,7 +1629,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleAnalytics",
-					"/Users/akos/opensource/Breviar/breviar-ios/TestFlight",
+					"$(PROJECT_DIR)/TestFlight",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
