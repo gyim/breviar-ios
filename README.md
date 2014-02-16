@@ -1,30 +1,41 @@
+Liturgy of the Hours for iOS
+============================
+
+This project contains the iOS app for
+[Liturgia-hodin-online](https://github.com/breviar-sk/Liturgia-hodin-online)
+created by [Juraj Vidéky](https://github.com/breviar-sk/).
+
+The application is available for the following languages:
+
+- Slovak (web version: [http://breviar.sk](http://breviar.sk))
+- Czech (web version: [http://ebreviar.cz](http://ebreviar.cz))
+- Hungarian (web version: [http://zsolozsma.katolikus.hu](http://zsolozsma.katolikus.hu))
+
 Getting started
 ===============
 
 This repository contains only the iOS sources, so in order to get started you
 have to fetch the rest of the files from various places.
 
-First, create a directory for the Breviar project and clone the `ios` branch
-of this repository:
+First, clone this repository:
 
-    mkdir Liturgia-hodin-online
-    cd Liturgia-hodin-online
-    git clone https://github.com/gyim/Liturgia-hodin-online.git ios -b ios
+    git clone https://github.com/gyim/breviar-ios.git
 
-The ios/ folder will contain only the iOS sources, but with a good git history.
-Clone and link the rest of the sources from here:
+This project uses the sources of the web version as a submodule. However, this
+repository is not public, only some parts of it (unless you join the core
+team). To obtain the public sources you have to do the following:
 
-    git clone https://github.com/breviar-sk/Liturgia-hodin-online.git exported-sources
-    ln -s exported-sources/cgi-bin exported-sources/*.css .
-
-Fetch the texts from the breviar.sk website:
-
+    # Fetch the public sources
+    cd breviar-ios
+    git clone https://github.com/breviar-sk/Liturgia-hodin-online.git breviar-cgi
+    
+    # Fetch the text from the websites:
+    cd breviar-cgi
     wget -r http://breviar.sk/include -nd -P include
     wget -r http://breviar.sk/include_cz -nd -P include_cz
     wget -r http://breviar.sk/include_hu -nd -P include_hu
 
 Finally, clone the RaptureXML submodule for iOS:
 
-    cd ios
-    git submodule update --init
-
+    cd ..
+    git submodule update --init RaptureXML
