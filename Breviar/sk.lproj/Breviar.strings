@@ -10,7 +10,7 @@
 
 // Sections in Settings screen
 "appearance"	= "Vzhľad";
-"common_parts"	= "Zobraziť nasledovné súčasti modlitby?";
+"common_parts"	= "Zobraziť tieto súčasti modlitby?";
 "prayer_text"	= "V texte modlitieb zobraziť";
 "calendar"		= "Nastavenia pre liturgický kalendár";
 "other"			= "Ďalšie možnosti pre výsledné modlitby";
