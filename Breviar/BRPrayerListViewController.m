@@ -11,6 +11,7 @@
 #import "BRAboutViewController.h"
 #import "BRDataSource.h"
 #import "BRCelebrationCell.h"
+#import "BRWebView.h"
 #import "BRUtil.h"
 #import "BRSettings.h"
 
@@ -37,7 +38,7 @@ static NSString *liturgicalColorImages[] = {
 @property (nonatomic, weak) IBOutlet UIButton *showDatePickerButton; // Unused?
 @property (nonatomic, strong) UIPopoverController *datePickerPopover;
 
-@property (nonatomic, strong) UIWebView *sharedWebView;
+@property (nonatomic, strong) BRWebView *sharedWebView;
 @property (nonatomic, strong) BRCelebrationCell *celebrationCellPortrait;
 @property (nonatomic, strong) BRCelebrationCell *celebrationCellLanscape;
 
@@ -61,7 +62,7 @@ static NSString *liturgicalColorImages[] = {
     self.date = [NSDate date];
     
     // Prepare reusable web view
-    self.sharedWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    self.sharedWebView = [[BRWebView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     self.sharedWebView.backgroundColor = [UIColor clearColor];
     self.sharedWebView.opaque = NO;
     [self.view addSubview:self.sharedWebView];
