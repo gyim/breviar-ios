@@ -24,6 +24,7 @@
 		7042905816408A6300663A7D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042905516408A1600663A7D /* libz.dylib */; };
 		7042905916408BF600663A7D /* libRaptureXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042904E1640887200663A7D /* libRaptureXML.a */; };
 		7042905C1641F91C00663A7D /* BRDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7042905B1641F91B00663A7D /* BRDataSource.m */; };
+		7045E8E118B97ADE00495926 /* BRWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7045E8E018B97ADD00495926 /* BRWebView.m */; };
 		70493A621719D4CF00232631 /* Breviar.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70493A601719D4CF00232631 /* Breviar.strings */; };
 		7054368D15FBDD69005854DC /* BRDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054368C15FBDD69005854DC /* BRDatePickerViewController.m */; };
 		7054369115FBF1B1005854DC /* BRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7054369015FBF1B1005854DC /* BRSettingsViewController.m */; };
@@ -190,6 +191,8 @@
 		7042905516408A1600663A7D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		7042905A1641F91B00663A7D /* BRDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDataSource.h; sourceTree = "<group>"; };
 		7042905B1641F91B00663A7D /* BRDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDataSource.m; sourceTree = "<group>"; };
+		7045E8DF18B97ADD00495926 /* BRWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRWebView.h; sourceTree = "<group>"; };
+		7045E8E018B97ADD00495926 /* BRWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRWebView.m; sourceTree = "<group>"; };
 		70493A611719D4CF00232631 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Breviar.strings; sourceTree = "<group>"; };
 		7054368B15FBDD69005854DC /* BRDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDatePickerViewController.h; sourceTree = "<group>"; };
 		7054368C15FBDD69005854DC /* BRDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDatePickerViewController.m; sourceTree = "<group>"; };
@@ -522,6 +525,8 @@
 				707A64B4171AD44C0065F98E /* BRUtil.h */,
 				544E694A187D285E0070DEC0 /* BRUI.h */,
 				544E694B187D285E0070DEC0 /* BRUI.m */,
+				7045E8DF18B97ADD00495926 /* BRWebView.h */,
+				7045E8E018B97ADD00495926 /* BRWebView.m */,
 				544E694F187D2A850070DEC0 /* UIColor+HexColor.h */,
 				544E6950187D2A850070DEC0 /* UIColor+HexColor.m */,
 			);
@@ -894,6 +899,7 @@
 				70EB052F18B1282300F88662 /* myconf.cpp in Sources */,
 				7042905C1641F91C00663A7D /* BRDataSource.m in Sources */,
 				70C962C016A1DFC800A399B9 /* BRCelebrationCell.m in Sources */,
+				7045E8E118B97ADE00495926 /* BRWebView.m in Sources */,
 				70C962D616B45C3E00A399B9 /* BRFontSettingsCell.m in Sources */,
 				70EB053018B1282300F88662 /* mydefs.cpp in Sources */,
 				70C962D916B5425200A399B9 /* BRBoolSettingsCell.m in Sources */,
