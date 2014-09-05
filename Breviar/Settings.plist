@@ -400,6 +400,16 @@
 				</dict>
 				<dict>
 					<key>id</key>
+					<string>of5h1v</string>
+					<key>type</key>
+					<string>bool</string>
+					<key>default</key>
+					<false/>
+					<key>visibility</key>
+					<string>of2a == TRUE &amp;&amp; j != &quot;cz&quot;</string>
+				</dict>
+				<dict>
+					<key>id</key>
 					<string>of5hk</string>
 					<key>type</key>
 					<string>bool</string>
