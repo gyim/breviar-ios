@@ -96,6 +96,7 @@
 		70D7A51A183AD44E0011BCE8 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D7A518183AD44E0011BCE8 /* back@2x.png */; };
 		70D7A51D183AD4CA0011BCE8 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D7A51B183AD4C90011BCE8 /* forward.png */; };
 		70D7A51E183AD4CA0011BCE8 /* forward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D7A51C183AD4C90011BCE8 /* forward@2x.png */; };
+		70DCD74119DCA852002D5175 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70DCD74019DCA852002D5175 /* Launch Screen.xib */; };
 		70E01273162F54BA00601CA3 /* BRDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E01272162F54BA00601CA3 /* BRDay.m */; };
 		70E01277162F553000601CA3 /* BRCelebration.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E01276162F553000601CA3 /* BRCelebration.m */; };
 		70E0127A162F56E500601CA3 /* BRCGIQuery.mm in Sources */ = {isa = PBXBuildFile; fileRef = 70E01279162F56E500601CA3 /* BRCGIQuery.mm */; };
@@ -290,6 +291,7 @@
 		70D7A518183AD44E0011BCE8 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back@2x.png"; path = "Resources/back@2x.png"; sourceTree = "<group>"; };
 		70D7A51B183AD4C90011BCE8 /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = forward.png; path = Resources/forward.png; sourceTree = "<group>"; };
 		70D7A51C183AD4C90011BCE8 /* forward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "forward@2x.png"; path = "Resources/forward@2x.png"; sourceTree = "<group>"; };
+		70DCD74019DCA852002D5175 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		70E01271162F54BA00601CA3 /* BRDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDay.h; sourceTree = "<group>"; };
 		70E01272162F54BA00601CA3 /* BRDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDay.m; sourceTree = "<group>"; };
 		70E01275162F553000601CA3 /* BRCelebration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCelebration.h; sourceTree = "<group>"; };
@@ -452,6 +454,7 @@
 				709BE1D5185673A400B6190E /* App Icon */,
 				709BE1F8185673E300B6190E /* Splash Screen */,
 				7061B09315FA8E1A00A83E0A /* Breviar-Info.plist */,
+				70DCD74019DCA852002D5175 /* Launch Screen.xib */,
 				7061B09715FA8E1A00A83E0A /* main.m */,
 				7061B09915FA8E1A00A83E0A /* Breviar-Prefix.pch */,
 				703200E7180F2E9000675F09 /* breviar-ios.css */,
@@ -798,6 +801,7 @@
 				70CAFA99187CBC1C000410AC /* bullet_rose_or_violet@2x.png in Resources */,
 				709BE1EE185673B100B6190E /* Icon-Small-40@2x.png in Resources */,
 				70CAFA9A187CBC1C000410AC /* bullet_rose@2x.png in Resources */,
+				70DCD74119DCA852002D5175 /* Launch Screen.xib in Resources */,
 				542622A41887D10500CA7AC4 /* Default@2x.png in Resources */,
 				70C962D116A1E1C900A399B9 /* bullet_violet_or_white.png in Resources */,
 				709BE1F3185673B100B6190E /* Icon.png in Resources */,
