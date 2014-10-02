@@ -116,5 +116,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UILaunchStoryboardName</key>
+	<string>Launch Screen</string>
 </dict>
 </plist>

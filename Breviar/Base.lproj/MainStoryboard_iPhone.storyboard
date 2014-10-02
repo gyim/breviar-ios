@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="r6Z-rP-I8n">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="r6Z-rP-I8n">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -10,7 +11,6 @@
                 <navigationController definesPresentationContext="YES" id="r6Z-rP-I8n" sceneMemberID="viewController">
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="DPJ-DU-INE">
-                        <rect key="frame" x="0.0" y="-44" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="G4M-Ek-aQp">
@@ -25,7 +25,7 @@
             </objects>
             <point key="canvasLocation" x="226" y="-147"/>
         </scene>
-        <!--Prayer List View Controller - Breviar-->
+        <!--Breviar-->
         <scene sceneID="sjG-de-gOC">
             <objects>
                 <tableViewController id="jRd-ik-NDq" customClass="BRPrayerListViewController" sceneMemberID="viewController">
@@ -80,7 +80,7 @@
                                                 <constraint firstAttribute="width" constant="12" id="nmo-af-qxE"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Title" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="RwJ-Ld-TgD">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Title" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="RwJ-Ld-TgD">
                                             <rect key="frame" x="38" y="4" width="246" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="246" id="XEu-DB-PMP"/>
@@ -89,7 +89,7 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="AjE-41-0Op">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Subtitle" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="AjE-41-0Op">
                                             <rect key="frame" x="38" y="22" width="246" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -127,7 +127,7 @@
                                                 <constraint firstAttribute="height" constant="12" id="a0r-sL-lIo"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Title" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="403" translatesAutoresizingMaskIntoConstraints="NO" id="Ogs-VC-8Pe">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Title" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="403" translatesAutoresizingMaskIntoConstraints="NO" id="Ogs-VC-8Pe">
                                             <rect key="frame" x="38" y="4" width="403" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="403" id="v5v-37-vaO"/>
@@ -136,7 +136,7 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="ExV-Hu-f2W">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Subtitle" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="ExV-Hu-f2W">
                                             <rect key="frame" x="38" y="22" width="246" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -372,7 +372,6 @@
             <objects>
                 <navigationController definesPresentationContext="YES" id="j7k-zU-Do3" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="NIr-BO-3cc">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ZUg-Vo-Fbr">
@@ -387,7 +386,7 @@
             </objects>
             <point key="canvasLocation" x="335" y="-771"/>
         </scene>
-        <!--Date Picker View Controller - Choose Date-->
+        <!--Choose Date-->
         <scene sceneID="Y5h-HN-H2c">
             <objects>
                 <viewController id="zZg-Vr-cVP" customClass="BRDatePickerViewController" sceneMemberID="viewController">
@@ -401,7 +400,6 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vht-Vp-kLk" userLabel="Date Picker Placeholder">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="216" id="76o-Wn-S9z"/>
@@ -410,7 +408,6 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OmQ-3h-nKd" userLabel="Buttons View">
                                 <rect key="frame" x="0.0" y="226" width="320" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U5N-Eu-vrn">
                                         <rect key="frame" x="10" y="0.0" width="100" height="30"/>
@@ -494,7 +491,7 @@
             </objects>
             <point key="canvasLocation" x="1044" y="-771"/>
         </scene>
-        <!--Prayer View Controller - Prayer-->
+        <!--Prayer-->
         <scene sceneID="mNQ-Uh-QpY">
             <objects>
                 <viewController storyboardIdentifier="PrayerViewController" wantsFullScreenLayout="YES" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="N9h-r0-k8T" customClass="BRPrayerViewController" sceneMemberID="viewController">
@@ -513,7 +510,7 @@
             </objects>
             <point key="canvasLocation" x="1254" y="-147"/>
         </scene>
-        <!--About View Controller - About-->
+        <!--About-->
         <scene sceneID="A4q-20-4Ak">
             <objects>
                 <viewController wantsFullScreenLayout="YES" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="i6S-7u-Fb7" customClass="BRAboutViewController" sceneMemberID="viewController">
@@ -532,7 +529,7 @@
             </objects>
             <point key="canvasLocation" x="676" y="1044"/>
         </scene>
-        <!--Settings View Controller - Settings-->
+        <!--Settings-->
         <scene sceneID="LeQ-kL-Ved">
             <objects>
                 <tableViewController id="WVI-Ol-vwe" customClass="BRSettingsViewController" sceneMemberID="viewController">
@@ -612,7 +609,7 @@
                                     <outlet property="switcher" destination="3tn-c4-FQX" id="5oe-WG-NpQ"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="BoolCellLandscape" id="pn5-Gx-R4r" customClass="BRBoolSettingsCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="BoolCellLandscape" id="pn5-Gx-R4r" customClass="BRBoolSettingsCell">
                                 <rect key="frame" x="0.0" y="143" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pn5-Gx-R4r" id="bet-x9-OhC">
@@ -692,7 +689,7 @@
             </objects>
             <point key="canvasLocation" x="1044" y="466"/>
         </scene>
-        <!--Font Picker View Controller - Choose Font-->
+        <!--Choose Font-->
         <scene sceneID="s9Z-hg-R4k">
             <objects>
                 <viewController id="0gF-M4-g7h" customClass="BRFontPickerViewController" sceneMemberID="viewController">
@@ -706,7 +703,6 @@
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FQJ-Tn-2fB">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="162" id="Nax-Cy-Oa3"/>
                                 </constraints>
@@ -805,7 +801,6 @@
         <image name="back.png" width="13" height="22"/>
         <image name="forward.png" width="13" height="22"/>
     </resources>
-    <color key="tintColor" red="0.57254904508590698" green="0.19215688109397888" blue="0.16862745583057404" alpha="1" colorSpace="deviceRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
@@ -814,4 +809,5 @@
     <inferredMetricsTieBreakers>
         <segue reference="sbP-Ge-Hd8"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.57254904508590698" green="0.19215688109397888" blue="0.16862745583057404" alpha="1" colorSpace="deviceRGB"/>
 </document>

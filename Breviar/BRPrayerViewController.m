@@ -54,6 +54,9 @@
     self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideNavbar:)];
     self.tapGesture.delegate = self;
     [self.view addGestureRecognizer:self.tapGesture];
+    
+    // Disable automatic screen lock
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -65,6 +68,10 @@
         [self.view removeGestureRecognizer:self.tapGesture];
         self.tapGesture = nil;
     }
+    
+    // Re-enable automatic screen lock
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
+
 }
 
 - (void)showHideNavbar:(id)sender
