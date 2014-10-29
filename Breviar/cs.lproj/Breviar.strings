@@ -27,6 +27,7 @@
 "of2nr"		= "Noční režim (tmavé pozadí)";
 "of0fn"		= "Všude použít obyčejné písmo (ne tučné)";
 "of2tw"		= "Zalomit dlouhé řádky poetických textů jako v tištěném vydání";
+"of0bf"		= "Pro slepé/hlasový výstup (jen text, který se čte)";
 
 "prayersAsCells" = "Velká tlačítka modliteb";
 
