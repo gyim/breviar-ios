@@ -96,7 +96,7 @@ static NSString *liturgicalColorImages[] = {
 }
 
 - (void)applicationWillEnterForeground:(NSNotification *)notification {
-    if (self.day && self.navigationController.topViewController == self) {
+    if (self.day) {
         [self updateTitleView];
     }
 }
