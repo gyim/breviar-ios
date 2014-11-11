@@ -8,6 +8,9 @@
 "mv"		= "Esti dicséret";
 "mk"		= "Befejező imaóra";
 
+// Prayer subpage titles
+"ma"        = "Mária antifónák";
+
 // Sections in Settings screen
 "appearance"	= "Megjelenés";
 "common_parts"	= "Állandó részek megjelenítése";
