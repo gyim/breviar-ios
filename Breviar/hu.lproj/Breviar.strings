@@ -44,6 +44,7 @@
 "of0cit"	= "Liturgikus olvasmányok";
 
 // Liturgic calendar settings
+"k"			= "Az imaórák liturgiája naptárát használják";
 "of0zjvne"	= "Urunk megjelenése (Vízkereszt) megünneplése vasárnap, január 2. és 8. között";
 "of0nanne"	= "Urunk mennybemenetelét vasárnap ünnepelni";
 "of0tkne"	= "Krisztus Szent Teste és Vére megünneplése vasárnap";
