@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="r6Z-rP-I8n">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B23" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="r6Z-rP-I8n">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -66,7 +67,7 @@
                                     <segue destination="j7k-zU-Do3" kind="modal" identifier="ShowDatePicker" id="Tqn-7r-VqD"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="CelebrationCellPortrait" editingAccessoryType="checkmark" rowHeight="44" id="lRr-Pj-phQ" customClass="BRCelebrationCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="CelebrationCell" editingAccessoryType="checkmark" rowHeight="44" id="lRr-Pj-phQ" customClass="BRCelebrationCell">
                                 <rect key="frame" x="0.0" y="99" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lRr-Pj-phQ" id="naO-gi-53t">
@@ -80,17 +81,16 @@
                                                 <constraint firstAttribute="width" constant="12" id="nmo-af-qxE"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Title" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="RwJ-Ld-TgD">
-                                            <rect key="frame" x="38" y="4" width="246" height="20"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="246" id="XEu-DB-PMP"/>
-                                            </constraints>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" text="Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="RwJ-Ld-TgD">
+                                            <rect key="frame" x="38" y="4" width="246" height="19.5"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Subtitle" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="AjE-41-0Op">
-                                            <rect key="frame" x="38" y="22" width="246" height="17"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="900" text="Subtitle" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="AjE-41-0Op">
+                                            <rect key="frame" x="38" y="21" width="246" height="18.5"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -102,8 +102,9 @@
                                         <constraint firstAttribute="bottom" secondItem="AjE-41-0Op" secondAttribute="bottom" constant="4" id="Gcu-8c-JnC"/>
                                         <constraint firstItem="RwJ-Ld-TgD" firstAttribute="leading" secondItem="naO-gi-53t" secondAttribute="leading" constant="38" id="HR3-V1-9UD"/>
                                         <constraint firstAttribute="centerY" secondItem="D3b-Y8-H5X" secondAttribute="centerY" constant="-0.5" id="Zij-eu-FTu"/>
-                                        <constraint firstItem="AjE-41-0Op" firstAttribute="leading" secondItem="naO-gi-53t" secondAttribute="leading" constant="38" id="eXu-uO-D3s"/>
-                                        <constraint firstItem="RwJ-Ld-TgD" firstAttribute="width" secondItem="AjE-41-0Op" secondAttribute="width" id="nO3-tm-FHJ"/>
+                                        <constraint firstItem="AjE-41-0Op" firstAttribute="leading" secondItem="RwJ-Ld-TgD" secondAttribute="leading" id="e8B-ya-jnM"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="RwJ-Ld-TgD" secondAttribute="trailing" constant="-11" id="lyH-C7-SxC"/>
+                                        <constraint firstItem="AjE-41-0Op" firstAttribute="trailing" secondItem="RwJ-Ld-TgD" secondAttribute="trailing" id="s7G-JV-9w3"/>
                                         <constraint firstItem="AjE-41-0Op" firstAttribute="top" secondItem="RwJ-Ld-TgD" secondAttribute="bottom" constant="-2" id="xbo-0T-MgT"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -111,53 +112,6 @@
                                     <outlet property="celebrationDescriptionLabel" destination="AjE-41-0Op" id="Sly-7e-bj2"/>
                                     <outlet property="celebrationNameLabel" destination="RwJ-Ld-TgD" id="Ajs-nI-NPk"/>
                                     <outlet property="liturgicalColorView" destination="D3b-Y8-H5X" id="DUJ-MO-OWc"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="CelebrationCellLandscape" editingAccessoryType="checkmark" rowHeight="44" id="peW-aJ-2hP" customClass="BRCelebrationCell">
-                                <rect key="frame" x="0.0" y="143" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="peW-aJ-2hP" id="oOs-8e-Lfh">
-                                    <rect key="frame" x="0.0" y="0.0" width="281" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="aCH-D8-kRK">
-                                            <rect key="frame" x="18" y="16" width="12" height="12"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="12" id="F77-Zv-koM"/>
-                                                <constraint firstAttribute="height" constant="12" id="a0r-sL-lIo"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Title" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="403" translatesAutoresizingMaskIntoConstraints="NO" id="Ogs-VC-8Pe">
-                                            <rect key="frame" x="38" y="4" width="403" height="20"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="403" id="v5v-37-vaO"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Subtitle" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="ExV-Hu-f2W">
-                                            <rect key="frame" x="38" y="22" width="246" height="17"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="ExV-Hu-f2W" firstAttribute="leading" secondItem="oOs-8e-Lfh" secondAttribute="leading" constant="38" id="6sP-wW-mR4"/>
-                                        <constraint firstItem="Ogs-VC-8Pe" firstAttribute="top" secondItem="oOs-8e-Lfh" secondAttribute="top" constant="4" id="Dra-gF-f18"/>
-                                        <constraint firstItem="ExV-Hu-f2W" firstAttribute="top" secondItem="Ogs-VC-8Pe" secondAttribute="bottom" constant="-2" id="NW9-FE-7eo"/>
-                                        <constraint firstAttribute="bottom" secondItem="ExV-Hu-f2W" secondAttribute="bottom" constant="4" id="YNr-PB-jnL"/>
-                                        <constraint firstItem="aCH-D8-kRK" firstAttribute="leading" secondItem="oOs-8e-Lfh" secondAttribute="leading" constant="18" id="ZoP-pH-uBF"/>
-                                        <constraint firstAttribute="centerY" secondItem="aCH-D8-kRK" secondAttribute="centerY" constant="-0.5" id="mNI-MW-p8A"/>
-                                        <constraint firstItem="Ogs-VC-8Pe" firstAttribute="width" secondItem="ExV-Hu-f2W" secondAttribute="width" constant="157" id="qMo-QR-g98"/>
-                                        <constraint firstItem="Ogs-VC-8Pe" firstAttribute="leading" secondItem="oOs-8e-Lfh" secondAttribute="leading" constant="38" id="rt7-mU-zIf"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="celebrationDescriptionLabel" destination="ExV-Hu-f2W" id="Vwr-4A-cQi"/>
-                                    <outlet property="celebrationNameLabel" destination="Ogs-VC-8Pe" id="Qrg-iJ-KdD"/>
-                                    <outlet property="liturgicalColorView" destination="aCH-D8-kRK" id="Z13-lM-ssk"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PrayerListCell" rowHeight="125" id="q8Y-R5-hvj">

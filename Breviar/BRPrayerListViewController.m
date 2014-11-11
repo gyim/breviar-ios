@@ -32,6 +32,8 @@ static NSString *liturgicalColorImages[] = {
     [BRColorRoseOrViolet]  = @"bullet_rose_or_violet.png"
 };
 
+static NSString *kCelebrationCellIdentifier = @"CelebrationCell";
+
 @interface BRPrayerListViewController ()
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -39,8 +41,6 @@ static NSString *liturgicalColorImages[] = {
 @property (nonatomic, strong) UIPopoverController *datePickerPopover;
 
 @property (nonatomic, strong) BRWebView *sharedWebView;
-@property (nonatomic, strong) BRCelebrationCell *celebrationCellPortrait;
-@property (nonatomic, strong) BRCelebrationCell *celebrationCellLanscape;
 
 @property (strong) NSDate *date;
 @property (strong) BRDay *day;
@@ -103,7 +103,6 @@ static NSString *liturgicalColorImages[] = {
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    [self.tableView reloadData];
 }
 
 #pragma mark - Data Source, Loader, etc.
@@ -184,22 +183,21 @@ static NSString *liturgicalColorImages[] = {
     }
 }
 
-- (NSString *)celebrationCellType {
-    return UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ? @"CelebrationCellPortrait" : @"CelebrationCellLandscape";
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *sectionType = [self.sections objectAtIndex:indexPath.section];
     
     if ([sectionType isEqualToString:@"Date"]) {
         // Celebration cell
-        BRCelebrationCell *cell = [tableView dequeueReusableCellWithIdentifier:[self celebrationCellType]];
+        BRCelebrationCell *cell = [tableView dequeueReusableCellWithIdentifier:kCelebrationCellIdentifier];
         
         BRCelebration *celebration = [self.day.celebrations objectAtIndex:indexPath.row];
         cell.celebrationNameLabel.text = celebration.title;
         cell.celebrationDescriptionLabel.text = celebration.subtitle;
         cell.liturgicalColorView.image = [UIImage imageNamed:liturgicalColorImages[celebration.liturgicalColor]];
-        cell.accessoryType = (self.celebrationIndex == indexPath.row ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone);
+        cell.checked = self.celebrationIndex == indexPath.row;
+
+        [cell setNeedsUpdateConstraints];
+        [cell updateConstraintsIfNeeded];
         
         return cell;
     }
@@ -231,16 +229,25 @@ static NSString *liturgicalColorImages[] = {
         return 125;
     }
     else if ([sectionType isEqualToString:@"Date"]) {
-        BRCelebrationCell *cell = [tableView dequeueReusableCellWithIdentifier:[self celebrationCellType]];
-        cell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(tableView.bounds), CGRectGetHeight(cell.bounds));
+        // For the whole autolayout table cells solution, please check http://stackoverflow.com/a/18746930
+        static BRCelebrationCell *cell = nil;
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            cell = [tableView dequeueReusableCellWithIdentifier:kCelebrationCellIdentifier];
+        });
         
         BRCelebration *celebration = [self.day.celebrations objectAtIndex:indexPath.row];
         cell.celebrationNameLabel.text = celebration.title;
         cell.celebrationDescriptionLabel.text = celebration.subtitle;
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
 
-        [cell.contentView setNeedsLayout];
-        [cell.contentView layoutIfNeeded];
+        [cell setNeedsUpdateConstraints];
+        [cell updateConstraintsIfNeeded];
+        
+        cell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(tableView.bounds), CGRectGetHeight(cell.bounds));
+        
+        [cell setNeedsLayout];
+        [cell layoutIfNeeded];
         
         CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
         return height + 2;
@@ -256,11 +263,14 @@ static NSString *liturgicalColorImages[] = {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *sectionType = [self.sections objectAtIndex:indexPath.section];
     
+    // Select celebration
     if ([sectionType isEqualToString:@"Date"]) {
-        // Select celebration
         NSIndexPath *oldIndexPath = [NSIndexPath indexPathForRow:self.celebrationIndex inSection:indexPath.section];
-        [self.tableView cellForRowAtIndexPath:oldIndexPath].accessoryType = UITableViewCellAccessoryNone;
-        [self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+        BRCelebrationCell *oldCell = (BRCelebrationCell *)[self.tableView cellForRowAtIndexPath:oldIndexPath];
+        oldCell.checked = NO;
+        
+        BRCelebrationCell *newCell = (BRCelebrationCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+        newCell.checked = YES;
         
         self.celebrationIndex = indexPath.row;
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
