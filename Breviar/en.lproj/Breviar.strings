@@ -8,6 +8,9 @@
 "mv"		= "Evening Prayer";
 "mk"		= "Compline";
 
+// Prayer subpage titles
+"ma"        = "Mary Antiphones";
+
 // Sections in Settings screen
 "appearance"	= "Appearance";
 "common_parts"	= "Non-changeable parts";

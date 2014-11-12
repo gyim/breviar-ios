@@ -12,4 +12,5 @@
 
 @interface BRPrayerViewController : BRWebViewController <UIGestureRecognizerDelegate>
 @property(strong) BRPrayer *prayer;
+@property(strong) BRWebViewController *subpageController;
 @end

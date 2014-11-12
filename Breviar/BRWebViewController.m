@@ -27,7 +27,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self setupSharedWebView];
+}
+
+- (void) setupSharedWebView
+{
     // Use shared web view. Hide it now, and show it using animation once the content is loaded
     self.webView.alpha = 0;
     self.webView.delegate = self;
@@ -35,6 +39,8 @@
     
     [self.webView removeFromSuperview];
     [self.view addSubview:self.webView];
+    
+    self.oldHtmlSource = @"";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -43,12 +49,30 @@
     self.webView.frame = self.view.bounds;
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
+    [self updateWebViewContent];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.webView.alpha = 1;
+    } completion:nil];
+    [webView stringByEvaluatingJavaScriptFromString:@"window.ontouchend=function() {window.location='callback:tap'};"];
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    // Allow requests to local files only
+    return request.URL.isFileURL;
+}
+
+- (void)updateWebViewContent
+{
     BRSettings *settings = [BRSettings instance];
     
     NSMutableString *extraStylesheets = [[NSMutableString alloc] init];
     if ([settings boolForOption:@"of0fn"]) {
         [extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-normal-font.css'>"];
     }
+    
     // Night mode
     if ([settings boolForOption:@"of2nr"]) {
         [extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-invert-colors.css'>"];
@@ -89,17 +113,6 @@
         [self.webView loadHTMLString:htmlSource baseURL:baseURL];
         self.oldHtmlSource = htmlSource;
     }
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.webView.alpha = 1;
-    } completion:nil];
-}
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    // Allow requests to local files only
-    return request.URL.isFileURL;
 }
 
 @end
