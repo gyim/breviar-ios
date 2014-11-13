@@ -6,8 +6,3 @@ body, html {
 a {
 	border-bottom: none;
 }
-
-/* Hide the link for Mary antiphones in Compline */
-#prayer-mk .ending {
-	display: none;
-}

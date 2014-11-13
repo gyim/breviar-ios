@@ -13,4 +13,7 @@
 @interface BRWebViewController : UIViewController <UIWebViewDelegate>
 @property(strong) IBOutlet BRWebView *webView;
 @property(strong) NSString *htmlContent;
+
+- (void)setupSharedWebView;
+- (void)updateWebViewContent;
 @end

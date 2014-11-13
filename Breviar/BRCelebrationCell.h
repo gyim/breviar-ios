@@ -12,4 +12,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *celebrationNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *celebrationDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *liturgicalColorView;
+@property (assign, nonatomic) BOOL checked;
 @end

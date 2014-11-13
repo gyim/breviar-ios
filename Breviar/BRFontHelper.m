@@ -49,9 +49,9 @@ static BRFontHelper *_instance;
                           nil];
         
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            self.availableSizes = @[ @(14), @(16), @(18), @(20), @(22), @(24), @(26), @(28), @(30), @(32) ];
+            self.availableSizes = @[ @(14), @(16), @(18), @(20), @(22), @(24), @(26), @(28), @(30), @(32), @(34) ];
         } else {
-            self.availableSizes = @[ @(14), @(16), @(18), @(20), @(22) ];
+            self.availableSizes = @[ @(14), @(16), @(18), @(20), @(22), @(24), @(26), @(28), @(30) ];
         }
     }
     return self;
