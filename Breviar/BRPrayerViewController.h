@@ -10,7 +10,6 @@
 #import "BRWebViewController.h"
 #import "BRPrayer.h"
 
-@interface BRPrayerViewController : BRWebViewController <UIGestureRecognizerDelegate>
+@interface BRPrayerViewController : BRWebViewController
 @property(strong) BRPrayer *prayer;
-@property(strong) BRWebViewController *subpageController;
 @end
