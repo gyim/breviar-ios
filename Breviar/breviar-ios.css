@@ -6,3 +6,8 @@ body, html {
 a {
 	border-bottom: none;
 }
+
+/* Hide navigation controls */
+div.navigation {
+    display: none;
+}
