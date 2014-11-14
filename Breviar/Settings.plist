@@ -73,6 +73,14 @@
 				</dict>
 				<dict>
 					<key>id</key>
+					<string>of0bf</string>
+					<key>type</key>
+					<string>bool</string>
+					<key>default</key>
+					<true/>
+				</dict>
+				<dict>
+					<key>id</key>
 					<string>of2id</string>
 					<key>type</key>
 					<string>bool</string>
