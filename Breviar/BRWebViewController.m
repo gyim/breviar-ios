@@ -8,9 +8,12 @@
 
 #import "BRWebViewController.h"
 #import "BRSettings.h"
+#import "BRCGIQuery.h"
+#import "BRUtil.h"
 
 @interface BRWebViewController ()
 @property(strong) NSString *oldHtmlSource;
+@property(strong) UITapGestureRecognizer *tapGesture;
 @end
 
 @implementation BRWebViewController
@@ -28,6 +31,7 @@
 {
     [super viewDidLoad];
     [self setupSharedWebView];
+    self.navbarToggleEnabled = YES;
 }
 
 - (void) setupSharedWebView
@@ -46,10 +50,77 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    // If we are coming from a subpage, move its shared webview here
+    if (self.subpageController) {
+        self.webView = self.subpageController.webView;
+        [self setupSharedWebView];
+    }
+    
     self.webView.frame = self.view.bounds;
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     [self updateWebViewContent];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if (self.navbarToggleEnabled) {
+        // Add gesture recognizer
+        self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideNavbar:)];
+        self.tapGesture.delegate = self;
+        [self.view addGestureRecognizer:self.tapGesture];
+    }
+    
+    // Disable automatic screen lock
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    // Remove gesture recognizer
+    if (self.tapGesture) {
+        [self.view removeGestureRecognizer:self.tapGesture];
+        self.tapGesture = nil;
+    }
+    
+    // Re-enable automatic screen lock
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
+}
+
+- (void)showHideNavbar:(id)sender
+{
+    // On small scrolling events UIKit
+    if (self.webView.scrollingInProgress || [self.webView hadRecentScrolling]) {
+        return;
+    }
+    
+    BOOL navbarHidden = [UIApplication sharedApplication].isStatusBarHidden;
+    
+    if (navbarHidden) {
+        self.navigationController.navigationBarHidden = NO;
+        self.navigationController.navigationBar.alpha = 0;
+    }
+    
+    [UIView animateWithDuration:UINavigationControllerHideShowBarDuration
+                     animations:^{
+                         [[UIApplication sharedApplication] setStatusBarHidden:!navbarHidden withAnimation:UIStatusBarAnimationFade];
+                         self.navigationController.navigationBar.alpha = navbarHidden ? 1.0 : 0.0;
+                     }
+                     completion:^(BOOL finished) {
+                         if (finished && !navbarHidden) {
+                             self.navigationController.navigationBarHidden = YES;
+                         }
+                     }
+     ];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
@@ -59,9 +130,47 @@
     [webView stringByEvaluatingJavaScriptFromString:@"window.ontouchend=function() {window.location='callback:tap'};"];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ShowSubpage"]) {
+        NSURL *url = sender;
+        
+        // Parse URL
+        NSArray *argList = [url.query componentsSeparatedByString:@"&"];
+        NSMutableDictionary *args = [[NSMutableDictionary alloc] init];
+        for (NSString *kv in argList) {
+            NSArray *kvParts = [kv componentsSeparatedByString:@"="];
+            NSString *k = [kvParts objectAtIndex:0];
+            NSString *v = [kvParts objectAtIndex:1];
+            [args setObject:v forKey:k];
+        }
+        
+        // Run query and show result
+        NSString *body = [BRCGIQuery queryWithArgs:args];
+        self.subpageController = segue.destinationViewController;
+        self.subpageController.webView = self.webView;
+        self.subpageController.htmlContent = [NSString stringWithFormat:@"<div id=\"prayer-custom\">%@</div>", body];
+        
+        // Set subpage title
+        NSString *subpageTitleKey = [args objectForKey:@"st"];
+        self.subpageController.title = subpageTitleKey ? BREVIAR_STR(subpageTitleKey) : self.navigationController.title;
+        
+        [UIApplication sharedApplication].statusBarHidden = NO;
+        self.navigationController.navigationBarHidden = NO;
+        self.navigationController.navigationBar.alpha = 1.0;
+    }
+}
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    // Allow requests to local files only
-    return request.URL.isFileURL;
+    if ([request.URL.absoluteString containsString:@".cgi?"]) {
+        NSLog(@"%@", request.URL.absoluteString);
+        [self performSegueWithIdentifier:@"ShowSubpage" sender:request.URL];
+        return NO;
+    }
+    else {
+        // Allow requests to local files only
+        return request.URL.isFileURL;
+    }
 }
 
 - (void)updateWebViewContent

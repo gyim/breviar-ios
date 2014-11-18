@@ -21,6 +21,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    self.navbarToggleEnabled = NO;
+    
     // Determine about.htm location
     BRSettings *settings = [BRSettings instance];
     

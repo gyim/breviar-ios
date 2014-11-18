@@ -10,9 +10,11 @@
 #import "BRViewController.h"
 #import "BRWebView.h"
 
-@interface BRWebViewController : UIViewController <UIWebViewDelegate>
+@interface BRWebViewController : UIViewController <UIWebViewDelegate,UIGestureRecognizerDelegate>
 @property(strong) IBOutlet BRWebView *webView;
 @property(strong) NSString *htmlContent;
+@property(strong) BRWebViewController *subpageController;
+@property BOOL navbarToggleEnabled;
 
 - (void)setupSharedWebView;
 - (void)updateWebViewContent;
