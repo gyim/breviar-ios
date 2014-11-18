@@ -202,21 +202,60 @@
 					<string>j == &quot;cz&quot; || j == &quot;sk&quot;</string>
 					<key>options</key>
 					<array>
-						<string>sk</string>
-						<string>cz</string>
-						<string>czop</string>
-						<string>cssr</string>
-						<string>hu</string>
-						<string>svd</string>
-						<string>sj</string>
-						<string>sdb</string>
-						<string>ofm</string>
-						<string>op</string>
-						<string>cm</string>
-						<string>opraem</string>
-						<string>ofmcap</string>
-						<string>czcssr</string>
-						<string>czsdb</string>
+						<dict>
+							<key>value</key>
+							<string>cz</string>
+							<key>visibility</key>
+							<string>j == &quot;cz&quot;</string>
+						</dict>
+						<dict>
+							<key>value</key>
+							<string>opraem</string>
+							<key>visibility</key>
+							<string>j == &quot;cz&quot;</string>
+						</dict>
+						<dict>
+							<key>value</key>
+							<string>ofmcap</string>
+							<key>visibility</key>
+							<string>j == &quot;cz&quot;</string>
+						</dict>
+						<dict>
+							<key>value</key>
+							<string>sk</string>
+							<key>visibility</key>
+							<string>j == &quot;sk&quot;</string>
+						</dict>
+						<dict>
+							<key>value</key>
+							<string>cssr</string>
+							<key>visibility</key>
+							<string>j == &quot;sk&quot;</string>
+						</dict>
+						<dict>
+							<key>value</key>
+							<string>svd</string>
+							<key>visibility</key>
+							<string>j == &quot;sk&quot;</string>
+						</dict>
+						<dict>
+							<key>value</key>
+							<string>sdb</string>
+							<key>visibility</key>
+							<string>j == &quot;sk&quot;</string>
+						</dict>
+						<dict>
+							<key>value</key>
+							<string>ofm</string>
+							<key>visibility</key>
+							<string>j == &quot;sk&quot;</string>
+						</dict>
+						<dict>
+							<key>value</key>
+							<string>op</string>
+							<key>visibility</key>
+							<string>j == &quot;sk&quot;</string>
+						</dict>
 					</array>
 				</dict>
 				<dict>
