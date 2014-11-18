@@ -200,18 +200,8 @@
         rowId = 0;
         for (NSDictionary *item in [section objectForKey:@"items"]) {
             NSString *visibility = [item objectForKey:@"visibility"];
-            BOOL visible;
             
-            if ([visibility isEqualToString:@"iPhoneOnly"]) {
-                visible = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
-            } else if (visibility) {
-                NSPredicate *predicate = [NSPredicate predicateWithFormat:visibility];
-                visible = [predicate evaluateWithObject:settings];
-            } else {
-                visible = YES;
-            }
-
-            if (visible) {
+            if ([settings evaluatePredicate:visibility]) {
                 [items addObject:item];
                 NSIndexPath *indexPath = [NSIndexPath indexPathForItem:rowId inSection:sectionId];
                 [visibleOptionIndexPaths setObject:indexPath forKey:[item objectForKey:@"id"]];

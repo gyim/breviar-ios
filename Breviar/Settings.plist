@@ -32,19 +32,22 @@
 					<string>font</string>
 					<key>inPrayerQuery</key>
 					<false/>
-					<key>default-iPhone</key>
+					<key>defaultCond</key>
 					<dict>
-						<key>family</key>
-						<string>Palatino-Roman</string>
-						<key>size</key>
-						<integer>16</integer>
-					</dict>
-					<key>default-iPad</key>
-					<dict>
-						<key>family</key>
-						<string>Palatino-Roman</string>
-						<key>size</key>
-						<integer>18</integer>
+						<key>iPhone</key>
+						<dict>
+							<key>family</key>
+							<string>Palatino-Roman</string>
+							<key>size</key>
+							<integer>16</integer>
+						</dict>
+						<key>iPad</key>
+						<dict>
+							<key>family</key>
+							<string>Palatino-Roman</string>
+							<key>size</key>
+							<integer>18</integer>
+						</dict>
 					</dict>
 				</dict>
 				<dict>
@@ -117,7 +120,7 @@
 					<key>default</key>
 					<false/>
 					<key>visibility</key>
-					<string>iPhoneOnly</string>
+					<string>iPhone</string>
 				</dict>
 			</array>
 		</dict>
@@ -186,8 +189,17 @@
 					<string>k</string>
 					<key>type</key>
 					<string>stringOption</string>
-					<key>default</key>
-					<string>sk</string>
+					<key>defaultCond</key>
+					<dict>
+						<key>j == &quot;cz&quot;</key>
+						<string>cz</string>
+						<key>j == &quot;hu&quot;</key>
+						<string>hu</string>
+						<key>j == &quot;sk&quot;</key>
+						<string>sk</string>
+					</dict>
+					<key>visibility</key>
+					<string>j == &quot;cz&quot; || j == &quot;sk&quot;</string>
 					<key>options</key>
 					<array>
 						<string>sk</string>
