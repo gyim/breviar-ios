@@ -183,6 +183,32 @@
 			<array>
 				<dict>
 					<key>id</key>
+					<string>k</string>
+					<key>type</key>
+					<string>stringOption</string>
+					<key>default</key>
+					<string>sk</string>
+					<key>options</key>
+					<array>
+						<string>sk</string>
+						<string>cz</string>
+						<string>czop</string>
+						<string>cssr</string>
+						<string>hu</string>
+						<string>svd</string>
+						<string>sj</string>
+						<string>sdb</string>
+						<string>ofm</string>
+						<string>op</string>
+						<string>cm</string>
+						<string>opraem</string>
+						<string>ofmcap</string>
+						<string>czcssr</string>
+						<string>czsdb</string>
+					</array>
+				</dict>
+				<dict>
+					<key>id</key>
 					<string>of0v</string>
 					<key>type</key>
 					<string>bool</string>

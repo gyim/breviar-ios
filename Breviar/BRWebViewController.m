@@ -163,7 +163,6 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if ([request.URL.absoluteString containsString:@".cgi?"]) {
-        NSLog(@"%@", request.URL.absoluteString);
         [self performSegueWithIdentifier:@"ShowSubpage" sender:request.URL];
         return NO;
     }
