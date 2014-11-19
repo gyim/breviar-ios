@@ -11,6 +11,7 @@
 
 @interface BRWebView : UIWebView {
     struct timeval lastScrollingTime;
+    struct timeval lastLinkClickTime;
 }
 
 @property(assign) BOOL scrollingInProgress;

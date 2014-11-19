@@ -14,6 +14,7 @@
 @interface BRWebViewController ()
 @property(strong) NSString *oldHtmlSource;
 @property(strong) UITapGestureRecognizer *tapGesture;
+@property(assign) struct timeval lastClickTime;
 @end
 
 @implementation BRWebViewController
@@ -94,7 +95,7 @@
 - (void)showHideNavbar:(id)sender
 {
     // On small scrolling events UIKit
-    if (self.webView.scrollingInProgress || [self.webView hadRecentScrolling]) {
+    if (self.webView.scrollingInProgress || [self.webView hadRecentScrolling] || self.hadRecentLinkClick) {
         return;
     }
     
@@ -127,7 +128,6 @@
     [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.webView.alpha = 1;
     } completion:nil];
-    [webView stringByEvaluatingJavaScriptFromString:@"window.ontouchend=function() {window.location='callback:tap'};"];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -165,11 +165,23 @@
     if ([request.URL.absoluteString containsString:@".cgi?"]) {
         [self performSegueWithIdentifier:@"ShowSubpage" sender:request.URL];
         return NO;
+    } else if ([request.URL.absoluteString containsString:@"event://linkTouchStart"]) {
+        struct timeval t;
+        gettimeofday(&t, NULL);
+        self.lastClickTime = t;
+        return NO;
     }
     else {
         // Allow requests to local files only
         return request.URL.isFileURL;
     }
+}
+
+- (BOOL)hadRecentLinkClick
+{
+    struct timeval t;
+    gettimeofday(&t, NULL);
+    return (t.tv_sec - self.lastClickTime.tv_sec)*1000 + (t.tv_usec-self.lastClickTime.tv_usec)/1000 < 500;
 }
 
 - (void)updateWebViewContent
@@ -206,9 +218,12 @@
      "  <meta http-equiv='Content-Type' content='text/html; charset=windows-1250'>\n"
      "  <link rel='stylesheet' type='text/css' href='html/breviar.css'>\n"
      "  <link rel='stylesheet' type='text/css' href='breviar-ios.css'>\n"
+     "  <script type='text/javascript' src='breviar-ios.js'></script>\n"
      "  %@\n"
      "</head>\n"
-     "<body style='padding: %@; font: %ldpx %@;'>%@</body>\n"
+     "<body style='padding: %@; font: %ldpx %@;'>%@\n"
+     "<script type='text/javascript'>pageReady()</script>\n"
+     "</body>\n"
      "</html>",
      extraStylesheets,
      padding,

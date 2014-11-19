@@ -69,6 +69,7 @@
 		709BE1F6185673B100B6190E /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 709BE1E5185673B100B6190E /* iTunesArtwork */; };
 		709BE1F7185673B100B6190E /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 709BE1E6185673B100B6190E /* iTunesArtwork@2x */; };
 		70AAAA4E15FBFBE4008D314D /* BRSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AAAA4D15FBFBE4008D314D /* BRSettings.m */; };
+		70C5844B1A1C139D009732D7 /* breviar-ios.js in Resources */ = {isa = PBXBuildFile; fileRef = 70C5844A1A1C139D009732D7 /* breviar-ios.js */; };
 		70C962C016A1DFC800A399B9 /* BRCelebrationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C962BF16A1DFC800A399B9 /* BRCelebrationCell.m */; };
 		70C962CB16A1E1C900A399B9 /* bullet_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 70C962C216A1E1C900A399B9 /* bullet_black.png */; };
 		70C962CC16A1E1C900A399B9 /* bullet_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 70C962C316A1E1C900A399B9 /* bullet_green.png */; };
@@ -258,6 +259,7 @@
 		709BE1E6185673B100B6190E /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		70AAAA4C15FBFBE4008D314D /* BRSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettings.h; sourceTree = "<group>"; };
 		70AAAA4D15FBFBE4008D314D /* BRSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRSettings.m; sourceTree = "<group>"; };
+		70C5844A1A1C139D009732D7 /* breviar-ios.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "breviar-ios.js"; sourceTree = "<group>"; };
 		70C962BE16A1DFC800A399B9 /* BRCelebrationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCelebrationCell.h; sourceTree = "<group>"; };
 		70C962BF16A1DFC800A399B9 /* BRCelebrationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRCelebrationCell.m; sourceTree = "<group>"; };
 		70C962C216A1E1C900A399B9 /* bullet_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bullet_black.png; path = Resources/bullet_black.png; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 				7061B09715FA8E1A00A83E0A /* main.m */,
 				7061B09915FA8E1A00A83E0A /* Breviar-Prefix.pch */,
 				703200E7180F2E9000675F09 /* breviar-ios.css */,
+				70C5844A1A1C139D009732D7 /* breviar-ios.js */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -810,6 +813,7 @@
 				70C962D316A1E1C900A399B9 /* bullet_white.png in Resources */,
 				70D7A51E183AD4CA0011BCE8 /* forward@2x.png in Resources */,
 				70D7A519183AD44E0011BCE8 /* back.png in Resources */,
+				70C5844B1A1C139D009732D7 /* breviar-ios.js in Resources */,
 				709BE1EB185673B100B6190E /* Icon-76.png in Resources */,
 				70493A621719D4CF00232631 /* Breviar.strings in Resources */,
 				707A6499171A1C180065F98E /* MainStoryboard_iPad.storyboard in Resources */,
