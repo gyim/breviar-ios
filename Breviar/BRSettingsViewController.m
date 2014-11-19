@@ -200,18 +200,8 @@
         rowId = 0;
         for (NSDictionary *item in [section objectForKey:@"items"]) {
             NSString *visibility = [item objectForKey:@"visibility"];
-            BOOL visible;
             
-            if ([visibility isEqualToString:@"iPhoneOnly"]) {
-                visible = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
-            } else if (visibility) {
-                NSPredicate *predicate = [NSPredicate predicateWithFormat:visibility];
-                visible = [predicate evaluateWithObject:settings];
-            } else {
-                visible = YES;
-            }
-
-            if (visible) {
+            if ([settings evaluatePredicate:visibility]) {
                 [items addObject:item];
                 NSIndexPath *indexPath = [NSIndexPath indexPathForItem:rowId inSection:sectionId];
                 [visibleOptionIndexPaths setObject:indexPath forKey:[item objectForKey:@"id"]];
@@ -286,10 +276,26 @@
         fontPicker.delegate = self;
     }
     else if ([segueId isEqualToString:@"ShowStringOptions"]) {
+        BRSettings *settings = [BRSettings instance];
+        
+        // Filter visible options
+        NSMutableArray *stringOptions = [[NSMutableArray alloc] init];
+        for (id o in [option objectForKey:@"options"]) {
+            if ([o isKindOfClass:[NSString class]]) {
+                [stringOptions addObject:o];
+            } else if ([o isKindOfClass:[NSDictionary class]]) {
+                NSString *visibility = [o objectForKey:@"visibility"];
+                NSString *value = [o objectForKey:@"value"];
+                if ([settings evaluatePredicate:visibility] && value) {
+                    [stringOptions addObject:value];
+                }
+            }
+        }
+        
         BRStringOptionPickerViewController *picker = segue.destinationViewController;
         picker.title = BREVIAR_STR(self.currentOptionId);
         picker.optionId = [option objectForKey:@"id"];
-        picker.options = [option objectForKey:@"options"];
+        picker.options = stringOptions;
         picker.currentValue = [[BRSettings instance] stringForOption:self.currentOptionId];
         picker.delegate = self;
     }

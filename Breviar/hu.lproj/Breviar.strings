@@ -47,7 +47,23 @@
 "of0cit"	= "Liturgikus olvasmányok";
 
 // Liturgic calendar settings
-"k"			= "Az imaórák liturgiája naptárát használják";
+"k"         = "Liturgikus naptár";
+"k.sk"      = "všeobecný [pre Slovensko]";
+"k.cz"      = "obecný [pro Čechy a Moravu]";
+"k.czop"    = "CZ OP"; // not used
+"k.cssr"    = "pre Kongregáciu najsv. Vykupiteľa — redemptoristov (CSsR)";
+"k.hu"      = "általános [Magyarország]";
+"k.svd"     = "pre Spoločnosť Božieho Slova — verbistov (SVD)";
+"k.sj"      = "pre Spoločnosť Ježišovu — jezuitov (SJ)";
+"k.sdb"     = "pre saleziánsku rodinu — SDB, FMA, ASC";
+"k.ofm"     = "pre františkánsku rodinu";
+"k.op"      = "pre Rehoľu kazateľov — dominikánov (OP)";
+"k.cm"      = "pre Misijnú spoločnosť sv. Vincenta de Paul — lazaristov (CM)";
+"k.opraem"  = "s vlastními texty premonstrátského řádu (OPraem)";
+"k.ofmcap"  = "s vlastními kapucínskými texty (OFMCap)";
+"k.czcssr"  = "s vlastními texty Kongregace nejsv. Vykupitele — redemptoristů (CSsR)";
+"k.czsdb"   = "s vlastními texty pro salesiánskou rodinu";
+
 "of0zjvne"	= "Urunk megjelenése (Vízkereszt) megünneplése vasárnap, január 2. és 8. között";
 "of0nanne"	= "Urunk mennybemenetelét vasárnap ünnepelni";
 "of0tkne"	= "Krisztus Szent Teste és Vére megünneplése vasárnap";

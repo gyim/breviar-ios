@@ -31,4 +31,6 @@
 - (void)setString:(NSString *)value forOption:(NSString *)optionId;
 - (NSArray *)stringOptionsForOption:(NSString *)optionId;
 
+- (BOOL)evaluatePredicate:(NSString *)predicate;
+
 @end
