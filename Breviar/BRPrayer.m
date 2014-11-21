@@ -11,16 +11,6 @@
 #import "BRSettings.h"
 #import "BRUtil.h"
 
-@interface BRPrayer ()
-@property(strong) NSString *cachedBody;
-@end
-
-@implementation BRPrayer
-
-@synthesize prayerType;
-@synthesize title;
-@synthesize body;
-
 static NSString *prayerQueryIds[] = {
     [BRInvitatory]         = @"mi",
     [BROfficeOfReadings]   = @"mpc",
@@ -43,6 +33,12 @@ static NSString *prayerNames[] = {
     [BRCompline]           = @"Compline"
 };
 
+@implementation BRPrayer
+
+@synthesize
+    body = _body,
+    bodyForSpeechSynthesis = _bodyForSpeechSynthesis;
+
 - (NSString *)title {
     return BREVIAR_STR(prayerQueryIds[self.prayerType]);
 }
@@ -56,13 +52,22 @@ static NSString *prayerNames[] = {
 }
 
 - (NSString *)body {
-    if (!self.cachedBody) {
-        self.cachedBody = [self generateBody];
+    if (!_body) {
+        _body = [self generateBodyWithOverwritingOptions:nil];
     }
-    return self.cachedBody;
+    return _body;
 }
 
-- (NSString *)generateBody {
+- (NSString *)bodyForSpeechSynthesis
+{
+    if (!_bodyForSpeechSynthesis) {
+        NSDictionary *blindFriendlyOptions = @{ @"of0bf": @YES };
+        _bodyForSpeechSynthesis = [self generateBodyWithOverwritingOptions:blindFriendlyOptions];
+    }
+    return _bodyForSpeechSynthesis;
+}
+
+- (NSString *)generateBodyWithOverwritingOptions:(NSDictionary *)overwritingOptions {
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:self.date];
     
     NSMutableDictionary *queryOptions = [NSMutableDictionary dictionary];
@@ -81,6 +86,9 @@ static NSString *prayerNames[] = {
                                              @"o4": @"0",
                                              @"o5": @"0"
                                              }];
+    if (overwritingOptions) {
+        [queryOptions addEntriesFromDictionary:overwritingOptions];
+    }
     
     return [BRCGIQuery queryWithArgs:queryOptions];
 }

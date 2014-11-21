@@ -43,7 +43,7 @@
     self.webView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
     
     [self.webView removeFromSuperview];
-    [self.view addSubview:self.webView];
+    [self.view insertSubview:self.webView atIndex:0];
     
     self.oldHtmlSource = @"";
 }
@@ -82,6 +82,13 @@
     [UIApplication sharedApplication].idleTimerDisabled = YES;
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    
+    [self.navigationController setToolbarHidden:YES animated:animated];
+}
+
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
@@ -104,23 +111,16 @@
     }
     
     BOOL navbarHidden = [UIApplication sharedApplication].isStatusBarHidden;
-    
-    if (navbarHidden) {
-        self.navigationController.navigationBarHidden = NO;
-        self.navigationController.navigationBar.alpha = 0;
-    }
+    BOOL shouldShowNavigationBar = navbarHidden;
+    BOOL shouldShowToolBar = navbarHidden && self.toolbarItems.count > 0;
     
     [UIView animateWithDuration:UINavigationControllerHideShowBarDuration
                      animations:^{
-                         [[UIApplication sharedApplication] setStatusBarHidden:!navbarHidden withAnimation:UIStatusBarAnimationFade];
-                         self.navigationController.navigationBar.alpha = navbarHidden ? 1.0 : 0.0;
+                         [[UIApplication sharedApplication] setStatusBarHidden:!shouldShowNavigationBar withAnimation:UIStatusBarAnimationSlide];
+                         [self.navigationController setNavigationBarHidden:!shouldShowNavigationBar animated:YES];
+                         [self.navigationController setToolbarHidden:!shouldShowToolBar animated:YES];
                      }
-                     completion:^(BOOL finished) {
-                         if (finished && !navbarHidden) {
-                             self.navigationController.navigationBarHidden = YES;
-                         }
-                     }
-     ];
+                     completion:nil];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
@@ -162,6 +162,8 @@
         [UIApplication sharedApplication].statusBarHidden = NO;
         self.navigationController.navigationBarHidden = NO;
         self.navigationController.navigationBar.alpha = 1.0;
+        self.navigationController.toolbarHidden = NO;
+        self.navigationController.toolbar.alpha = 1.0;
     }
 }
 
@@ -193,6 +195,8 @@
     BRSettings *settings = [BRSettings instance];
     
     NSMutableString *extraStylesheets = [[NSMutableString alloc] init];
+    
+    // Normal font instead of bold
     if ([settings boolForOption:@"of0fn"]) {
         [extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-normal-font.css'>"];
     }
@@ -207,13 +211,20 @@
         self.webView.scrollView.indicatorStyle = UIScrollViewIndicatorStyleDefault;
     }
     
-    // Padding for iPad
-    NSString *padding;
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        padding = @"64px 50px 0px 50px";
-    } else {
-        padding = @"64px 0px 0px 0px";
+    // Blind-friendly
+    if ([settings boolForOption:@"of0bf"]) {
+        [extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-blind-friendly.css'>"];
     }
+    
+    // Padding for iPad
+    NSString *paddingTop = @"64px";
+    NSString *paddingBottom = self.toolbarItems.count > 0 ? @"44px" : @"0px";
+    NSString *paddingSides = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? @"50px" : @"0px";
+    NSString *padding = [NSString stringWithFormat:@"%@ %@ %@ %@",
+                         paddingTop,
+                         paddingSides,
+                         paddingBottom,
+                         paddingSides];
     
     NSString *htmlSource =
     [NSString stringWithFormat:

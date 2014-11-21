@@ -129,3 +129,9 @@
 
 // Other
 "today"         = "Today";
+
+// Text to speech
+"tts.read"      = "Read";
+"tts.pause"     = "Pause";
+"tts.continue"  = "Continue";
+"tts.loading"   = "Loading...";

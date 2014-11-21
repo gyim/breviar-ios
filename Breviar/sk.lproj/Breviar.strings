@@ -129,3 +129,10 @@
 
 // Other
 "today"         = "Dnes";
+
+// Text to speech
+"tts.read"      = "Prečítať";
+"tts.pause"     = "Pauza";
+"tts.continue"  = "Pokračovať";
+"tts.loading"   = "Načívatam...";
+

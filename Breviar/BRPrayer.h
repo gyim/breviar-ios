@@ -19,9 +19,7 @@ typedef enum {
     BRCompline
 } BRPrayerType;
 
-@interface BRPrayer : NSObject {
-    NSString *body;
-}
+@interface BRPrayer : NSObject
 
 @property BRPrayerType prayerType;
 @property(strong) NSDate *date;
@@ -30,6 +28,7 @@ typedef enum {
 @property(readonly) NSString *prayerName;
 @property(readonly) NSString *queryId;
 @property(readonly) NSString *body;
+@property(readonly) NSString *bodyForSpeechSynthesis;
 
 + (BRPrayerType)prayerTypeFromQueryId:(NSString *)queryId;
 + (NSString *)queryIdFromPrayerType:(BRPrayerType)prayerType;
