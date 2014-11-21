@@ -52,7 +52,7 @@ static BRDataSource *_instance;
     dayData = [dayData stringByAppendingString:@"</LHData>"]; // HACK
     
     // Parse XML data
-    RXMLElement *xml = [RXMLElement elementFromXMLString:dayData encoding:NSWindowsCP1250StringEncoding];
+    RXMLElement *xml = [RXMLElement elementFromXMLString:dayData encoding:NSUTF8StringEncoding];
     NSMutableArray *celebrations = [NSMutableArray array];
     
     // Get celebrations
