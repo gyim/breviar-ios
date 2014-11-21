@@ -38,25 +38,14 @@ static BRSettings *_instance;
         for (NSDictionary *section in self.sections) {
             for (NSDictionary *option in [section objectForKey:@"items"]) {
                 NSString *optionId = [option objectForKey:@"id"];
-                
-                NSObject *defaultValue = [option objectForKey:@"default"];
-                if (!defaultValue) {
-                    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-                        defaultValue = [option objectForKey:@"default-iPhone"];
-                    }
-                    else {
-                        defaultValue = [option objectForKey:@"default-iPad"];
-                    }
-                }
-                
                 [options setObject:option forKey:optionId];
+
+                NSObject *defaultValue = [option objectForKey:@"default"];
                 if (defaultValue != nil && ![userDefaults objectForKey:optionId]) {
                     [userDefaults setObject:defaultValue forKey:optionId];
                 }
             }
         }
-        
-        self.options = options;
         
         // Set default language by locale
         // (the block above already set a language, but we may override it)
@@ -96,6 +85,31 @@ static BRSettings *_instance;
             }
 #endif
         }
+        
+        // Set the conditional defaults after all other settings are loaded
+        for (NSDictionary *section in self.sections) {
+            for (NSDictionary *option in [section objectForKey:@"items"]) {
+                NSString *optionId = [option objectForKey:@"id"];
+                
+                if ([option objectForKey:@"defaultCond"]) {
+                    NSDictionary *predicates = [option objectForKey:@"defaultCond"];
+                    NSObject *defaultValue = nil;
+                    
+                    for (NSString *predicate in predicates) {
+                        if ([self evaluatePredicate:predicate]) {
+                            defaultValue = [predicates objectForKey:predicate];
+                            break;
+                        }
+                    }
+
+                    if (defaultValue != nil && ![userDefaults objectForKey:optionId]) {
+                        [userDefaults setObject:defaultValue forKey:optionId];
+                    }
+                }
+            }
+        }
+        
+        self.options = options;
         
         [userDefaults synchronize];
     }
@@ -182,6 +196,19 @@ static BRSettings *_instance;
 
 - (id)valueForKey:(NSString *)key {
     return [[NSUserDefaults standardUserDefaults] valueForKey:key];
+}
+
+- (BOOL)evaluatePredicate:(NSString *)predicate {
+    if (predicate == nil) {
+        return YES;
+    } else if ([predicate isEqualToString:@"iPhone"]) {
+        return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
+    } else if ([predicate isEqualToString:@"iPad"]) {
+        return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
+    } else {
+        NSPredicate *pred = [NSPredicate predicateWithFormat:predicate];
+        return [pred evaluateWithObject:self];
+    }
 }
 
 @end
