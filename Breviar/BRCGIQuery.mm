@@ -48,7 +48,7 @@
 	@synchronized ([BRCGIQuery class]) {
 		breviar_main(argc, (char **)argv);
 
-		NSString *prayerBody = [NSString stringWithCString:getExportedString() encoding:NSWindowsCP1250StringEncoding];
+		NSString *prayerBody = [NSString stringWithCString:getExportedString() encoding:NSUTF8StringEncoding];
 		[result appendString:prayerBody];
 	}
 	return result;

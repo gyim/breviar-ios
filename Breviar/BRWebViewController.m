@@ -215,7 +215,7 @@
     [NSString stringWithFormat:
      @"<!DOCTYPE html>\n"
      "<html><head>\n"
-     "  <meta http-equiv='Content-Type' content='text/html; charset=windows-1250'>\n"
+     "  <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\n"
      "  <link rel='stylesheet' type='text/css' href='html/breviar.css'>\n"
      "  <link rel='stylesheet' type='text/css' href='breviar-ios.css'>\n"
      "  <script type='text/javascript' src='breviar-ios.js'></script>\n"
