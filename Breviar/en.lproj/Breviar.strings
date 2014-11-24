@@ -129,6 +129,8 @@
 
 // Other
 "today"         = "Today";
+"mode.night"    = "Night mode";
+"mode.day"      = "Day mode";
 
 // Text to speech
 "tts.read"      = "Read";

@@ -17,6 +17,7 @@
 
 @interface BRPrayerViewController ()
 
+@property (strong, nonatomic) UIBarButtonItem *nightModeButton;
 @property (strong, nonatomic) UIBarButtonItem *speakButton;
 @property (strong, nonatomic) AVSpeechSynthesizer *speechSynthesizer;
 
@@ -30,8 +31,15 @@
     
     self.speakButton = [[UIBarButtonItem alloc] initWithTitle:BREVIAR_STR(@"tts.read") style:UIBarButtonItemStylePlain target:self action:@selector(speak)];
     
+    self.nightModeButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(nightModeButtonPressed)];
+    [self updateNightModeButtonTitle];
+    
     self.navigationController.toolbarHidden = NO;
-    self.toolbarItems = @[ self.speakButton ];
+    self.toolbarItems = @[
+        self.speakButton,
+        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+        self.nightModeButton
+    ];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -62,6 +70,21 @@
 {
     self.htmlContent = [NSString stringWithFormat:@"<div id=\"prayer-%@\">%@</div>", prayerId, body];
     [self updateWebViewContent];
+}
+
+- (void)nightModeButtonPressed
+{
+    BOOL nightMode = [[BRSettings instance] boolForOption:@"of2nr"];
+    [[BRSettings instance] setBool:!nightMode forOption:@"of2nr"];
+    [self updateNightModeButtonTitle];
+    // TODO: check if discarding the cache is required or not
+    [self showHtmlBody:self.prayer.body forPrayer:self.prayer.queryId];
+}
+
+- (void)updateNightModeButtonTitle
+{
+    BOOL nightMode = [[BRSettings instance] boolForOption:@"of2nr"];
+    self.nightModeButton.title = nightMode ? BREVIAR_STR(@"mode.day") : BREVIAR_STR(@"mode.night");
 }
 
 - (void)speak
@@ -105,7 +128,7 @@
     [super webViewDidFinishLoad:webView];
     
     // An instance of AVSpeechSynthesizer must be initialized before loading content in web view
-    if (self.speechSynthesizer) {
+    if (self.speechSynthesizer && !self.speechSynthesizer.speaking) {
         NSString *webViewString = [self.webView stringByEvaluatingJavaScriptFromString:@"(function (){ return document.body.innerText; })();"];
         
         NSString *selectedLanguage = [[BRSettings instance] stringForOption:@"j"];

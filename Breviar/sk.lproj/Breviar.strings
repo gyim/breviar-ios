@@ -129,6 +129,8 @@
 
 // Other
 "today"         = "Dnes";
+"mode.night"    = "Nočný režim";
+"mode.day"      = "Denný režim";
 
 // Text to speech
 "tts.read"      = "Prečítať";
