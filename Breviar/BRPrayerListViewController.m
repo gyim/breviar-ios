@@ -19,19 +19,6 @@
 #import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"
 
-static NSString *liturgicalColorImages[] = {
-    [BRColorUnknown]       = @"",
-    [BRColorRed]           = @"bullet_red.png",
-    [BRColorWhite]         = @"bullet_white.png",
-    [BRColorGreen]         = @"bullet_green.png",
-    [BRColorViolet]        = @"bullet_violet.png",
-    [BRColorRose]          = @"bullet_rose.png",
-    [BRColorBlack]         = @"bullet_black.png",
-    [BRColorVioletOrBlack] = @"bullet_violet_or_black.png",
-    [BRColorVioletOrWhite] = @"bullet_violet_or_white.png",
-    [BRColorRoseOrViolet]  = @"bullet_rose_or_violet.png"
-};
-
 static NSString *kCelebrationCellIdentifier = @"CelebrationCell";
 
 @interface BRPrayerListViewController ()
@@ -191,9 +178,7 @@ static NSString *kCelebrationCellIdentifier = @"CelebrationCell";
         BRCelebrationCell *cell = [tableView dequeueReusableCellWithIdentifier:kCelebrationCellIdentifier];
         
         BRCelebration *celebration = [self.day.celebrations objectAtIndex:indexPath.row];
-        cell.celebrationNameLabel.text = celebration.title;
-        cell.celebrationDescriptionLabel.text = celebration.subtitle;
-        cell.liturgicalColorView.image = [UIImage imageNamed:liturgicalColorImages[celebration.liturgicalColor]];
+        cell.celebration = celebration;
         cell.checked = self.celebrationIndex == indexPath.row;
 
         [cell setNeedsUpdateConstraints];
@@ -237,8 +222,7 @@ static NSString *kCelebrationCellIdentifier = @"CelebrationCell";
         });
         
         BRCelebration *celebration = [self.day.celebrations objectAtIndex:indexPath.row];
-        cell.celebrationNameLabel.text = celebration.title;
-        cell.celebrationDescriptionLabel.text = celebration.subtitle;
+        cell.celebration = celebration;
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
 
         [cell setNeedsUpdateConstraints];
