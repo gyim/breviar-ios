@@ -12,21 +12,19 @@
 #import "BRUtil.h"
 
 @interface BRWebViewController ()
+
+@property(strong) BRWebViewController *subpageController;
 @property(strong) NSString *oldHtmlSource;
 @property(strong) UITapGestureRecognizer *tapGesture;
 @property(assign) struct timeval lastClickTime;
+
 @end
+
 
 @implementation BRWebViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+
+#pragma mark - Lifetime & Navigation
 
 - (void)viewDidLoad
 {
@@ -35,7 +33,7 @@
     self.navbarToggleEnabled = YES;
 }
 
-- (void) setupSharedWebView
+- (void)setupSharedWebView
 {
     // Use shared web view. Hide it now, and show it using animation once the content is loaded
     self.webView.alpha = 0;
@@ -59,6 +57,8 @@
     
     self.webView.frame = self.view.bounds;
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
+    [self setContentInsetsWithNavigationBarVisible:YES toolbarVisible:(self.toolbarItems.count > 0)];
     
     struct timeval t;
     gettimeofday(&t, NULL);
@@ -103,37 +103,6 @@
     [UIApplication sharedApplication].idleTimerDisabled = NO;
 }
 
-- (void)showHideNavbar:(id)sender
-{
-    // On small scrolling events UIKit
-    if (self.webView.scrollingInProgress || [self.webView hadRecentScrolling] || self.hadRecentLinkClick) {
-        return;
-    }
-    
-    BOOL navbarHidden = [UIApplication sharedApplication].isStatusBarHidden;
-    BOOL shouldShowNavigationBar = navbarHidden;
-    BOOL shouldShowToolBar = navbarHidden && self.toolbarItems.count > 0;
-    
-    [UIView animateWithDuration:UINavigationControllerHideShowBarDuration
-                     animations:^{
-                         [[UIApplication sharedApplication] setStatusBarHidden:!shouldShowNavigationBar withAnimation:UIStatusBarAnimationSlide];
-                         [self.navigationController setNavigationBarHidden:!shouldShowNavigationBar animated:YES];
-                         [self.navigationController setToolbarHidden:!shouldShowToolBar animated:YES];
-                     }
-                     completion:nil];
-}
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
-    return YES;
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.webView.alpha = 1;
-    } completion:nil];
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"ShowSubpage"]) {
@@ -167,6 +136,66 @@
     }
 }
 
+
+#pragma mark - Navigation Bar & Toolbar
+
+- (void)showHideNavbar:(id)sender
+{
+    // On small scrolling events UIKit
+    if (self.webView.scrollingInProgress || [self.webView hadRecentScrolling] || self.hadRecentLinkClick) {
+        return;
+    }
+    
+    BOOL navbarHidden = [UIApplication sharedApplication].isStatusBarHidden;
+    BOOL shouldShowNavigationBar = navbarHidden;
+    BOOL shouldShowToolBar = navbarHidden && self.toolbarItems.count > 0;
+
+    [UIView animateWithDuration:UINavigationControllerHideShowBarDuration
+                     animations:^{
+                         [[UIApplication sharedApplication] setStatusBarHidden:!shouldShowNavigationBar withAnimation:UIStatusBarAnimationSlide];
+                         [self.navigationController setNavigationBarHidden:!shouldShowNavigationBar animated:YES];
+                         [self.navigationController setToolbarHidden:!shouldShowToolBar animated:YES];
+                         
+                         // If we're near the top (haven't scrolled too much) and we're about to show the nav bar, scroll down a bit so that the top content is not hidden by nav bar (without scrolling)
+                         CGPoint scrollOffset = self.webView.scrollView.contentOffset;
+                         if (shouldShowNavigationBar && scrollOffset.y < 30) {
+                             scrollOffset.y = -64;
+                             self.webView.scrollView.contentOffset = scrollOffset;
+                         }
+                         
+                         [self setContentInsetsWithNavigationBarVisible:shouldShowNavigationBar toolbarVisible:shouldShowToolBar];
+                     }
+                     completion:nil];
+}
+
+- (void)setContentInsetsWithNavigationBarVisible:(BOOL)navigationBarVisible toolbarVisible:(BOOL)toolbarVisible
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(navigationBarVisible ? 64 : 0, 0, toolbarVisible ? 44 : 0, 0);
+    self.webView.scrollView.contentInset = contentInsets;
+    self.webView.scrollView.scrollIndicatorInsets = contentInsets;
+}
+
+- (BOOL)hadRecentLinkClick
+{
+    struct timeval t;
+    gettimeofday(&t, NULL);
+    return (t.tv_sec - self.lastClickTime.tv_sec)*1000 + (t.tv_usec-self.lastClickTime.tv_usec)/1000 < 500;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
+
+#pragma mark - UIWebViewDelegate & Content Loading
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.webView.alpha = 1;
+    } completion:nil];
+}
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if ([request.URL.absoluteString containsString:@".cgi?"]) {
         [self performSegueWithIdentifier:@"ShowSubpage" sender:request.URL];
@@ -181,13 +210,6 @@
         // Allow requests to local files only
         return request.URL.isFileURL;
     }
-}
-
-- (BOOL)hadRecentLinkClick
-{
-    struct timeval t;
-    gettimeofday(&t, NULL);
-    return (t.tv_sec - self.lastClickTime.tv_sec)*1000 + (t.tv_usec-self.lastClickTime.tv_usec)/1000 < 500;
 }
 
 - (void)updateWebViewContent
@@ -217,8 +239,8 @@
     }
     
     // Padding for iPad
-    NSString *paddingTop = @"64px";
-    NSString *paddingBottom = self.toolbarItems.count > 0 ? @"44px" : @"0px";
+    NSString *paddingTop = @"0px";
+    NSString *paddingBottom = @"0px";
     NSString *paddingSides = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? @"50px" : @"0px";
     NSString *padding = [NSString stringWithFormat:@"%@ %@ %@ %@",
                          paddingTop,
