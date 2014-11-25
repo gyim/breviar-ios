@@ -78,6 +78,8 @@
 
 - (void)nightModeButtonPressed
 {
+    self.prayer.scrollOffset = self.webView.scrollView.contentOffset.y;
+    
     BOOL nightMode = [[BRSettings instance] boolForOption:@"of2nr"];
     [[BRSettings instance] setBool:!nightMode forOption:@"of2nr"];
     [self updateNightModeButtonTitle];

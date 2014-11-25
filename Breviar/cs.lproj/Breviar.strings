@@ -130,3 +130,6 @@
 
 // Other
 "today"         = "Dnes";
+"mode.night"    = "Noční režim";
+"mode.day"      = "Denní režim";
+
