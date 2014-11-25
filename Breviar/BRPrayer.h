@@ -29,6 +29,7 @@ typedef enum {
 @property(readonly) NSString *queryId;
 @property(readonly) NSString *body;
 @property(readonly) NSString *bodyForSpeechSynthesis;
+@property(assign) CGFloat scrollOffset;
 
 + (BRPrayerType)prayerTypeFromQueryId:(NSString *)queryId;
 + (NSString *)queryIdFromPrayerType:(BRPrayerType)prayerType;

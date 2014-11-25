@@ -63,6 +63,8 @@
 {
     [super viewWillDisappear:animated];
     
+    self.prayer.scrollOffset = self.webView.scrollView.contentOffset.y;
+    
     if (self.speechSynthesizer.speaking) {
         [self.speechSynthesizer stopSpeakingAtBoundary:AVSpeechBoundaryWord];
     }
@@ -128,6 +130,10 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [super webViewDidFinishLoad:webView];
+    
+    if (self.prayer.scrollOffset) {
+        self.webView.scrollView.contentOffset = CGPointMake(0, self.prayer.scrollOffset);
+    }
     
     // An instance of AVSpeechSynthesizer must be initialized before loading content in web view
     if (self.speechSynthesizer && !self.speechSynthesizer.speaking) {
