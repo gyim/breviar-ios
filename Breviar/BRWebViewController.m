@@ -167,11 +167,9 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if ([request.URL.absoluteString containsString:@".cgi?"]) {
-        NSLog(@"link clicked");
         [self performSegueWithIdentifier:@"ShowSubpage" sender:request.URL];
         return NO;
     } else if ([request.URL.absoluteString containsString:@"event://linkTouchStart"]) {
-        NSLog(@"link touch start");
         struct timeval t;
         gettimeofday(&t, NULL);
         self.lastClickTime = t;
