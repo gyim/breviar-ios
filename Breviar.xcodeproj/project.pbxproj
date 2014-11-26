@@ -613,8 +613,8 @@
 		707A64BA171B12790065F98E /* cs.lproj */ = {
 			isa = PBXGroup;
 			children = (
-				707A64BB171B12790065F98E /* Breviar.strings */,
 				707A64BD171B12790065F98E /* InfoPlist.strings */,
+				707A64BB171B12790065F98E /* Breviar.strings */,
 			);
 			path = cs.lproj;
 			sourceTree = "<group>";

@@ -132,3 +132,8 @@
 "mode.night"    = "Éjszakai mód";
 "mode.day"      = "Nappali mód";
 
+// Text to speech
+"tts.read"      = "Felolvasás";
+"tts.pause"     = "Szünet";
+"tts.continue"  = "Folytatás";
+"tts.loading"   = "Betöltés...";
