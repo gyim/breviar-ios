@@ -273,6 +273,13 @@
         [self.webView loadHTMLString:htmlSource baseURL:baseURL];
         self.oldHtmlSource = htmlSource;
     }
+    
+    // Call the delegate method even if we don't reload the content
+    else {
+        if ([self.webView.delegate respondsToSelector:@selector(webViewDidFinishLoad:)]) {
+            [self.webView.delegate webViewDidFinishLoad:self.webView];
+        }
+    }
 }
 
 @end
