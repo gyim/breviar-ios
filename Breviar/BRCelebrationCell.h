@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class BRCelebration;
+
 @interface BRCelebrationCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *celebrationNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *celebrationDescriptionLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *liturgicalColorView;
+
+@property (strong, nonatomic) BRCelebration *celebration;
 @property (assign, nonatomic) BOOL checked;
+
 @end

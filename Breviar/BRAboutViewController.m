@@ -34,7 +34,7 @@
     NSString *filename = [[NSBundle mainBundle] pathForResource:@"about" ofType:@"htm" inDirectory:[langDirs objectForKey:lang]];
     
     // Load content
-    NSString *aboutContent = [NSString stringWithContentsOfFile:filename encoding:NSWindowsCP1250StringEncoding error:nil];
+    NSString *aboutContent = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:nil];
     NSString *version = [NSString stringWithFormat:@"%@ (%@)", [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"], BUILD_NUMBER];
     NSString *html = [aboutContent stringByReplacingOccurrencesOfString:@"<!--{VERSION}-->" withString:version];
     

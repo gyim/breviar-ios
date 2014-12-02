@@ -18,6 +18,8 @@
 		542622A61887D10500CA7AC4 /* Default-Portrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 542622A01887D10500CA7AC4 /* Default-Portrait@2x.png */; };
 		544E694C187D285E0070DEC0 /* BRUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 544E694B187D285E0070DEC0 /* BRUI.m */; };
 		544E6951187D2A850070DEC0 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 544E6950187D2A850070DEC0 /* UIColor+HexColor.m */; };
+		54EA63801A1FA9E10027F889 /* utf8-utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54EA637F1A1FA9E10027F889 /* utf8-utils.cpp */; };
+		54EA63851A1FD8C40027F889 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54EA63841A1FD8C40027F889 /* AVFoundation.framework */; };
 		703200E8180F2E9000675F09 /* breviar-ios.css in Resources */ = {isa = PBXBuildFile; fileRef = 703200E7180F2E9000675F09 /* breviar-ios.css */; };
 		7034597D15FCE84D000A1711 /* BRFontHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7034597C15FCE84D000A1711 /* BRFontHelper.m */; };
 		7042905716408A5E00663A7D /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042905316408A1100663A7D /* libxml2.dylib */; };
@@ -181,6 +183,9 @@
 		544E694B187D285E0070DEC0 /* BRUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRUI.m; sourceTree = "<group>"; };
 		544E694F187D2A850070DEC0 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
 		544E6950187D2A850070DEC0 /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColor.m"; sourceTree = "<group>"; };
+		54EA637F1A1FA9E10027F889 /* utf8-utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "utf8-utils.cpp"; path = "breviar-cgi/cgi-bin/source/utf8-utils.cpp"; sourceTree = SOURCE_ROOT; };
+		54EA63831A1FA9EA0027F889 /* utf8-utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "utf8-utils.h"; path = "breviar-cgi/cgi-bin/source/utf8-utils.h"; sourceTree = SOURCE_ROOT; };
+		54EA63841A1FD8C40027F889 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		703200E7180F2E9000675F09 /* breviar-ios.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "breviar-ios.css"; sourceTree = "<group>"; };
 		7034597B15FCE84D000A1711 /* BRFontHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRFontHelper.h; sourceTree = "<group>"; };
 		7034597C15FCE84D000A1711 /* BRFontHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRFontHelper.m; sourceTree = "<group>"; };
@@ -345,6 +350,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54EA63851A1FD8C40027F889 /* AVFoundation.framework in Frameworks */,
 				5426227A1887B17500CA7AC4 /* AdSupport.framework in Frameworks */,
 				542622781887AFD700CA7AC4 /* SystemConfiguration.framework in Frameworks */,
 				709994CF188F206E00729A21 /* libTestFlight.a in Frameworks */,
@@ -425,6 +431,7 @@
 		7061B08A15FA8E1A00A83E0A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				54EA63841A1FD8C40027F889 /* AVFoundation.framework */,
 				542622791887B17500CA7AC4 /* AdSupport.framework */,
 				542622771887AFD700CA7AC4 /* SystemConfiguration.framework */,
 				542622751887AFC700CA7AC4 /* CoreData.framework */,
@@ -570,6 +577,8 @@
 				70EB052218B1282300F88662 /* mystring.h */,
 				70EB052318B1282300F88662 /* mysysdef.h */,
 				70EB052418B1282300F88662 /* mysystem.h */,
+				54EA637F1A1FA9E10027F889 /* utf8-utils.cpp */,
+				54EA63831A1FA9EA0027F889 /* utf8-utils.h */,
 			);
 			name = cgi;
 			sourceTree = "<group>";
@@ -604,8 +613,8 @@
 		707A64BA171B12790065F98E /* cs.lproj */ = {
 			isa = PBXGroup;
 			children = (
-				707A64BB171B12790065F98E /* Breviar.strings */,
 				707A64BD171B12790065F98E /* InfoPlist.strings */,
+				707A64BB171B12790065F98E /* Breviar.strings */,
 			);
 			path = cs.lproj;
 			sourceTree = "<group>";
@@ -853,7 +862,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "# Copy HTML sources\nrm -rf \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nmkdir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\n\nfor dir in $BREVIAR_INCLUDE_DIRS; do\ncp -r breviar-cgi/$dir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\ndone\n\n# Copy other files\ncp breviar-cgi/breviar.css breviar-cgi/breviar-normal-font.css breviar-cgi/breviar-invert-colors.css breviar-cgi/about.htm \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\n\n# Git build number\n./buildno.sh";
+			shellScript = "# Copy HTML sources\nrm -rf \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nmkdir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\n\nfor dir in $BREVIAR_INCLUDE_DIRS; do\ncp -r breviar-cgi/$dir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\ndone\n\n# Copy other files\ncp breviar-cgi/breviar.css breviar-cgi/breviar-normal-font.css breviar-cgi/breviar-invert-colors.css breviar-cgi/breviar-blind-friendly.css breviar-cgi/about.htm \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\n\n# Git build number\n./buildno.sh";
 		};
 		709994D3188F2ACC00729A21 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -903,6 +912,7 @@
 				70E01273162F54BA00601CA3 /* BRDay.m in Sources */,
 				70E01277162F553000601CA3 /* BRCelebration.m in Sources */,
 				70EB052B18B1282300F88662 /* dbzaltar.cpp in Sources */,
+				54EA63801A1FA9E10027F889 /* utf8-utils.cpp in Sources */,
 				70E0127A162F56E500601CA3 /* BRCGIQuery.mm in Sources */,
 				70EB052F18B1282300F88662 /* myconf.cpp in Sources */,
 				7042905C1641F91C00663A7D /* BRDataSource.m in Sources */,

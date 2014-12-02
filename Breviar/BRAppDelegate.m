@@ -29,8 +29,13 @@
     if ([UINavigationBar instancesRespondToSelector:@selector(barTintColor)]) {
         [UINavigationBar appearance].barTintColor = [UIColor colorWithHex:0x833a39];
     }
+    if ([UIToolbar instancesRespondToSelector:@selector(barTintColor)]) {
+        [UIToolbar appearance].barTintColor = [UIColor colorWithHex:0x833a39];
+    }
     [UINavigationBar appearance].tintColor = [UIColor whiteColor];
     [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    [UIToolbar appearance].tintColor = [UIColor whiteColor];
+    [UIToolbar appearance].translucent = NO;
     
     // Initialize data source
     BRDataSource *dataSource = [BRDataSource instance];

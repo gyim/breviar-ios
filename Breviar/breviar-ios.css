@@ -2,9 +2,9 @@ body, html {
 	background-color: #FBFCD7;
 }
 
-/* Do not underline links */
 a {
-	border-bottom: none;
+    text-decoration: underline;
+    border-bottom: none;
 }
 
 /* Hide navigation controls */
