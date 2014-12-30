@@ -56,6 +56,7 @@ Juraj Vidéky</string>
                 <constraint firstAttribute="trailing" secondItem="7qq-ar-WJG" secondAttribute="trailing" constant="20" id="hl1-7N-ohi"/>
                 <constraint firstAttribute="centerX" secondItem="w6C-hd-t40" secondAttribute="centerX" id="k2H-qZ-Vr5"/>
             </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
             <point key="canvasLocation" x="512.5" y="253"/>
