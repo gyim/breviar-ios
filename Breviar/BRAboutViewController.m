@@ -34,10 +34,8 @@
     NSString *filename = [[NSBundle mainBundle] pathForResource:@"about" ofType:@"htm" inDirectory:[langDirs objectForKey:lang]];
     NSString *html = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:nil];
     
-    // TODO: Hotfixes for HTML bugs - should be removed once the HTML source files are fixed
-    html = [html stringByReplacingOccurrencesOfString:@"http:\"//" withString:@""];
-    html = [html stringByReplacingOccurrencesOfString:@"http://" withString:@""];
-    html = [html stringByReplacingOccurrencesOfString:@"mailto:\"<!" withString:@"mailto:<!"];
+    // We want to insert full links including protocol, so we first need to remove unnecessary protocols from the templated HTML files
+    html = [html stringByReplacingOccurrencesOfString:@"href=\"http://" withString:@"href=\""];
     
     // Replace all placeholders like <!--{KEY}--> with proper values
     NSString *version = [NSString stringWithFormat:@"%@ (%@)", [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"], BUILD_NUMBER];
