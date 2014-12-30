@@ -59,7 +59,7 @@
 		70C962D916B5425200A399B9 /* BRBoolSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C962D816B5425200A399B9 /* BRBoolSettingsCell.m */; };
 		70CAFAA418849462000410AC /* BRWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CAFAA318849462000410AC /* BRWebViewController.m */; };
 		70CAFAA9188499F3000410AC /* BRAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CAFAA8188499F3000410AC /* BRAboutViewController.m */; };
-		70DCD74119DCA852002D5175 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70DCD74019DCA852002D5175 /* Launch Screen.xib */; };
+		70DCD74119DCA852002D5175 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70DCD74019DCA852002D5175 /* LaunchScreen.xib */; };
 		70E01273162F54BA00601CA3 /* BRDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E01272162F54BA00601CA3 /* BRDay.m */; };
 		70E01277162F553000601CA3 /* BRCelebration.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E01276162F553000601CA3 /* BRCelebration.m */; };
 		70E0127A162F56E500601CA3 /* BRCGIQuery.mm in Sources */ = {isa = PBXBuildFile; fileRef = 70E01279162F56E500601CA3 /* BRCGIQuery.mm */; };
@@ -196,7 +196,7 @@
 		70CAFAA7188499F3000410AC /* BRAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRAboutViewController.h; sourceTree = "<group>"; };
 		70CAFAA8188499F3000410AC /* BRAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRAboutViewController.m; sourceTree = "<group>"; };
 		70CAFAAB1884A74C000410AC /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
-		70DCD74019DCA852002D5175 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		70DCD74019DCA852002D5175 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		70E01271162F54BA00601CA3 /* BRDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDay.h; sourceTree = "<group>"; };
 		70E01272162F54BA00601CA3 /* BRDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDay.m; sourceTree = "<group>"; };
 		70E01275162F553000601CA3 /* BRCelebration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCelebration.h; sourceTree = "<group>"; };
@@ -352,7 +352,7 @@
 				709BE1D5185673A400B6190E /* App Icon */,
 				709BE1F8185673E300B6190E /* Splash Screen */,
 				7061B09315FA8E1A00A83E0A /* Breviar-Info.plist */,
-				70DCD74019DCA852002D5175 /* Launch Screen.xib */,
+				70DCD74019DCA852002D5175 /* LaunchScreen.xib */,
 				7061B09715FA8E1A00A83E0A /* main.m */,
 				7061B09915FA8E1A00A83E0A /* Breviar-Prefix.pch */,
 				703200E7180F2E9000675F09 /* breviar-ios.css */,
@@ -625,7 +625,7 @@
 				709994D1188F206F00729A21 /* release_notes.md in Resources */,
 				7061B09615FA8E1A00A83E0A /* InfoPlist.strings in Resources */,
 				7061B09F15FA8E1A00A83E0A /* MainStoryboard_iPhone.storyboard in Resources */,
-				70DCD74119DCA852002D5175 /* Launch Screen.xib in Resources */,
+				70DCD74119DCA852002D5175 /* LaunchScreen.xib in Resources */,
 				70C5844B1A1C139D009732D7 /* breviar-ios.js in Resources */,
 				70493A621719D4CF00232631 /* Breviar.strings in Resources */,
 				707A6499171A1C180065F98E /* MainStoryboard_iPad.storyboard in Resources */,
