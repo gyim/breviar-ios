@@ -197,10 +197,10 @@
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    if ([request.URL.absoluteString containsString:@".cgi?"]) {
+    if ([request.URL.absoluteString rangeOfString:@".cgi?"].location != NSNotFound) {
         [self performSegueWithIdentifier:@"ShowSubpage" sender:request.URL];
         return NO;
-    } else if ([request.URL.absoluteString containsString:@"event://linkTouchStart"]) {
+    } else if ([request.URL.absoluteString rangeOfString:@"event://linkTouchStart"].location != NSNotFound) {
         struct timeval t;
         gettimeofday(&t, NULL);
         self.lastClickTime = t;
