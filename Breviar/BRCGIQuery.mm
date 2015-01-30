@@ -16,6 +16,15 @@
 +(NSString *)queryWithArgs:(NSDictionary *)args {
 	NSMutableString *queryString = [[NSMutableString alloc] init];
 	NSMutableString *result = [[NSMutableString alloc] init];
+    
+    // Fix for Common Parts: transpose parameter value by +1
+    if (args[@"of3"] && [args[@"of3"] isKindOfClass:[NSString class]]) {
+        NSString *of3Value = args[@"of3"];
+
+        NSMutableDictionary *mutableArgs = [NSMutableDictionary dictionaryWithDictionary:args];
+        mutableArgs[@"of3"] = [NSString stringWithFormat:@"%d", [of3Value intValue] + 1];
+        args = [NSDictionary dictionaryWithDictionary:mutableArgs];
+    }
 	
 	// Generate query string
 	int i=0;

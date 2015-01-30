@@ -35,6 +35,7 @@
     [self updateNightModeButtonTitle];
     
     self.navigationController.toolbarHidden = NO;
+    self.navigationController.toolbar.translucent = NO;
     self.toolbarItems = @[
         self.speakButton,
         [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],

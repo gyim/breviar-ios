@@ -35,7 +35,6 @@
     [UINavigationBar appearance].tintColor = [UIColor whiteColor];
     [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     [UIToolbar appearance].tintColor = [UIColor whiteColor];
-    [UIToolbar appearance].translucent = NO;
     
     // Initialize data source
     BRDataSource *dataSource = [BRDataSource instance];

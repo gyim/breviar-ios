@@ -32,11 +32,36 @@
                                @"hu": @"html/include_hu"};
     
     NSString *filename = [[NSBundle mainBundle] pathForResource:@"about" ofType:@"htm" inDirectory:[langDirs objectForKey:lang]];
+    NSString *html = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:nil];
     
-    // Load content
-    NSString *aboutContent = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:nil];
+    // We want to insert full links including protocol, so we first need to remove unnecessary protocols from the templated HTML files
+    html = [html stringByReplacingOccurrencesOfString:@"href=\"http://" withString:@"href=\""];
+    
+    // Replace all placeholders like <!--{KEY}--> with proper values
     NSString *version = [NSString stringWithFormat:@"%@ (%@)", [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"], BUILD_NUMBER];
-    NSString *html = [aboutContent stringByReplacingOccurrencesOfString:@"<!--{VERSION}-->" withString:version];
+    NSString *appName = [NSString stringWithFormat:@"%@ (iOS)", [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"]];
+    NSDictionary *sites = @{
+        @"sk": @"http://breviar.sk",
+        @"cz": @"http://www.ebreviar.cz/",
+        @"hu": @"http://breviar.sk/hu",
+    };
+
+    NSDictionary *replacements = @{
+        @"VERSION": version,
+        @"PROJECT_URL": sites[lang],
+        @"E_MAIL": @"apple@breviar.sk",
+        @"APP_NAME": appName,
+        @"PROJECT_SOURCE_STORAGE": @"GitHub",
+        @"PROJECT_SOURCE_URL": @"https://github.com/gyim/breviar-ios",
+        @"SPECIAL_CREDITS": @"",
+        @"PLATFORM_ANDROID": @"",
+        @"PLATFORM_IOS": @"iOS App",
+    };
+    for (NSString *key in replacements) {
+        NSString *placeholder = [NSString stringWithFormat:@"<!--{%@}-->", key];
+        NSString *value = replacements[key];
+        html = [html stringByReplacingOccurrencesOfString:placeholder withString:value];
+    }
     
     // Show content
     self.htmlContent = [NSString stringWithFormat:@"<div id='about'>%@</div>", html];
@@ -46,6 +71,15 @@
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:@"About"];
     [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+        [[UIApplication sharedApplication] openURL:request.URL];
+        return NO;
+    } else {
+        return [super webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
+    }
 }
 
 @end
