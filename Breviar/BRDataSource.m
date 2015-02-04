@@ -37,6 +37,7 @@ static BRDataSource *_instance;
          @"m": [NSNumber numberWithInteger:components.month],
          @"r": [NSNumber numberWithInteger:components.year],
          @"j": [[BRSettings instance] stringForOption:@"j"],
+         @"k": [[BRSettings instance] stringForOption:@"k"],
      }];
     
     // Get XML data for the day
