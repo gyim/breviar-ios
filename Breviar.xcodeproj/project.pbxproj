@@ -11,7 +11,6 @@
 		542622721887AFA500CA7AC4 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 542622711887AFA500CA7AC4 /* libGoogleAnalyticsServices.a */; };
 		542622761887AFC700CA7AC4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 542622751887AFC700CA7AC4 /* CoreData.framework */; };
 		542622781887AFD700CA7AC4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 542622771887AFD700CA7AC4 /* SystemConfiguration.framework */; };
-		5426227A1887B17500CA7AC4 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 542622791887B17500CA7AC4 /* AdSupport.framework */; };
 		544E694C187D285E0070DEC0 /* BRUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 544E694B187D285E0070DEC0 /* BRUI.m */; };
 		544E6951187D2A850070DEC0 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 544E6950187D2A850070DEC0 /* UIColor+HexColor.m */; };
 		54EA63801A1FA9E10027F889 /* utf8-utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54EA637F1A1FA9E10027F889 /* utf8-utils.cpp */; };
@@ -109,7 +108,6 @@
 		542622711887AFA500CA7AC4 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		542622751887AFC700CA7AC4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		542622771887AFD700CA7AC4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		542622791887B17500CA7AC4 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		544E694A187D285E0070DEC0 /* BRUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRUI.h; sourceTree = "<group>"; };
 		544E694B187D285E0070DEC0 /* BRUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRUI.m; sourceTree = "<group>"; };
 		544E694F187D2A850070DEC0 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
@@ -230,7 +228,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				54EA63851A1FD8C40027F889 /* AVFoundation.framework in Frameworks */,
-				5426227A1887B17500CA7AC4 /* AdSupport.framework in Frameworks */,
 				542622781887AFD700CA7AC4 /* SystemConfiguration.framework in Frameworks */,
 				542622761887AFC700CA7AC4 /* CoreData.framework in Frameworks */,
 				7042905916408BF600663A7D /* libRaptureXML.a in Frameworks */,
@@ -309,7 +306,6 @@
 			isa = PBXGroup;
 			children = (
 				54EA63841A1FD8C40027F889 /* AVFoundation.framework */,
-				542622791887B17500CA7AC4 /* AdSupport.framework */,
 				542622771887AFD700CA7AC4 /* SystemConfiguration.framework */,
 				542622751887AFC700CA7AC4 /* CoreData.framework */,
 				7061B08B15FA8E1A00A83E0A /* UIKit.framework */,
