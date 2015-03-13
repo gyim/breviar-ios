@@ -38,7 +38,7 @@
     html = [html stringByReplacingOccurrencesOfString:@"href=\"http://" withString:@"href=\""];
     
     // Replace all placeholders like <!--{KEY}--> with proper values
-    NSString *version = [NSString stringWithFormat:@"%@ (%@)", [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"], BUILD_NUMBER];
+    NSString *version = [NSString stringWithFormat:@"%@ (%@)", [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"], BUILD_NUMBER];
     NSString *appName = [NSString stringWithFormat:@"%@ (iOS)", [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"]];
     NSDictionary *sites = @{
         @"sk": @"http://breviar.sk",
