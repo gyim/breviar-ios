@@ -445,6 +445,16 @@
 				</dict>
 				<dict>
 					<key>id</key>
+					<string>of5czh</string>
+					<key>type</key>
+					<string>bool</string>
+					<key>default</key>
+					<true/>
+					<key>visibility</key>
+					<string>of2a == TRUE &amp;&amp; j == &quot;cz&quot;</string>
+				</dict>
+				<dict>
+					<key>id</key>
 					<string>of5hpc</string>
 					<key>type</key>
 					<string>bool</string>

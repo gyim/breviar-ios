@@ -121,6 +121,8 @@
 "of5vnpc"		= "Posvätné čítanie (veľkonočné obdobie): hymnus Toto je pravý Boží deň / hymnus Nech z výšin neba radosť znie";
 "of5vnhrch"		= "Ranné chvály (veľkonočné obdobie): hymnus Bronie sa zora na nebi / hymnus Nech novým Jeruzalemom";
 "of5vnv"		= "Vešpery (veľkonočné obdobie): hymnus Pri Baránkovej večeri / hymnus Kráľ vekov, Pane, Boží Syn";
+// CZ only
+"of5czh"		= "CZ: Hymny z breviáře / k volnému výběru";
 
 // Not shown (hidden) options
 "of2id"			= "Zobraziť dátum v ISO 8601 formáte";

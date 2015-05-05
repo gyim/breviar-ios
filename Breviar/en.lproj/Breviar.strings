@@ -121,6 +121,8 @@
 "of5vnpc"		= "Readings in Easter: Sunday's hymn / Ferial hymn";
 "of5vnhrch"		= "Laudes in Easter: Sunday's hymn / Ferial hymn";
 "of5vnv"		= "Vespers in Easter: Sunday's hymn / Ferial hymn";
+// CZ only
+"of5czh"		= "CZ: Hymny z breviáře / k volnému výběru";
 
 // Not shown (hidden) options
 "of2id"			= "Date format in ISO 8601";
