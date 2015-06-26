@@ -112,6 +112,7 @@
 "of5ps29"		= "A 121. helyett vehető a 128. zsoltár";
 "of5ps69"		= "A 125. helyett vehető a 128. zsoltár";
 "of5ps71"		= "A 126. helyett vehető a 130. zsoltár";
+"of5psps"		= "Hamvazószerdán vegye a zsoltározást: a 4. zsoltáros hét szerdájáról / a 3. zsoltáros hét péntekjéről";
 "of5hpc"		= "Olvasmányos imaóra (évközi idő): himnusz I. [Amikor az imaórát éjszaka vagy kora hajnalban mondják] / himnusz II. [Amikor az imaórát a nap nem reggeli órájában végzik]";
 "of5hpred"		= "Délelőtt: himnusz Most jöjj, Szentlélek, szállj közénk / himnusz Idők rendjét megtartva most";
 "of5hna"		= "Délben: himnusz Urunk, felséges Istenünk / himnusz Dicsérjük dallal az Urat";
@@ -121,6 +122,8 @@
 "of5vnpc"		= "Olvasmányos imaóra (húsvéti idő): himnusz Urunknak áldott napja ez / himnusz Örvendj, ég, messzi csillagok";
 "of5vnhrch"		= "Reggeli dicséret (húsvéti idő): himnusz Rózsálló hajnalfény ragyog / himnusz Az új Sionnak kórusa";
 "of5vnv"		= "Esti dicséret (húsvéti idő): himnusz Ím, vár a Bárány asztala / himnusz Örök Királyunk, szent Urunk";
+// CZ only
+"of5czh"		= "CZ: Hymny z breviáře / k volnému výběru";
 
 // Not shown (hidden) options
 "of2id"			= "A dátum ISO 8601 formátumban";
