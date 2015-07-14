@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#define BR_MIN_FONT_SIZE 12
+#define BR_MAX_FONT_SIZE 30
+
 @interface BRSettings : NSObject
 
 @property(strong) NSArray *sections;

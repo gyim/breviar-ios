@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="iM2-Px-Z2W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="iM2-Px-Z2W">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -286,8 +286,37 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.98431372549019602" green="0.9882352941176471" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem image="speaker_off" id="lKD-Y1-lg7">
+                            <connections>
+                                <action selector="toggleSpeaker:" destination="Y9R-gy-DOg" id="WWE-Fe-O9W"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="deG-TR-cQc"/>
+                        <barButtonItem image="font_smaller" id="nv0-dZ-pkW">
+                            <connections>
+                                <action selector="decreaseFontSize:" destination="Y9R-gy-DOg" id="XPa-wn-Cxe"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem image="font_larger" id="CDn-j1-DxT">
+                            <connections>
+                                <action selector="increaseFontSize:" destination="Y9R-gy-DOg" id="TxC-Yj-2Ea"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="10b-H4-MwJ"/>
+                        <barButtonItem image="night_mode_off" id="pCR-4T-ve6">
+                            <connections>
+                                <action selector="toggleNightMode:" destination="Y9R-gy-DOg" id="OBM-f8-Ehx"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="yHJ-Uc-1HI"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
+                        <outlet property="decreaseFontItem" destination="nv0-dZ-pkW" id="w7C-4e-3Pu"/>
+                        <outlet property="increaseFontItem" destination="CDn-j1-DxT" id="ClO-aQ-0ga"/>
+                        <outlet property="nightModeItem" destination="pCR-4T-ve6" id="Pg8-7K-4TE"/>
+                        <outlet property="speakItem" destination="lKD-Y1-lg7" id="53K-FB-8Np"/>
                         <segue destination="HDK-cS-iWi" kind="push" identifier="ShowSubpage" id="V2N-G1-4X9"/>
                     </connections>
                 </viewController>
@@ -622,7 +651,11 @@
     </scenes>
     <resources>
         <image name="back.png" width="13" height="22"/>
+        <image name="font_larger" width="22" height="22"/>
+        <image name="font_smaller" width="22" height="22"/>
         <image name="forward.png" width="13" height="22"/>
+        <image name="night_mode_off" width="22" height="22"/>
+        <image name="speaker_off" width="22" height="22"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
