@@ -17,8 +17,6 @@
 
 @interface BRPrayerViewController ()
 
-@property (strong, nonatomic) UIBarButtonItem *nightModeButton;
-@property (strong, nonatomic) UIBarButtonItem *speakButton;
 @property (strong, nonatomic) AVSpeechSynthesizer *speechSynthesizer;
 
 @end
@@ -28,19 +26,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.speakButton = [[UIBarButtonItem alloc] initWithTitle:BREVIAR_STR(@"tts.read") style:UIBarButtonItemStylePlain target:self action:@selector(speak)];
-    
-    self.nightModeButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(nightModeButtonPressed)];
-    [self updateNightModeButtonTitle];
-    
-    self.navigationController.toolbarHidden = NO;
-    self.navigationController.toolbar.translucent = NO;
-    self.toolbarItems = @[
-        self.speakButton,
-        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-        self.nightModeButton
-    ];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -52,6 +37,8 @@
     self.navigationItem.title = self.prayer.title;
     
     [self.navigationController setToolbarHidden:NO animated:animated];
+    [self updateNightModeButtonTitle];
+    [self updateFontItems];
 
     self.speechSynthesizer = nil;
 
@@ -77,39 +64,37 @@
     self.htmlContent = [NSString stringWithFormat:@"<div id=\"prayer-%@\">%@</div>", prayerId, body];
 }
 
-- (void)nightModeButtonPressed
+- (IBAction)toggleNightMode:(id)sender
 {
-    self.prayer.scrollOffset = self.webView.scrollView.contentOffset.y;
-    
     BOOL nightMode = [[BRSettings instance] boolForOption:@"of2nr"];
     [[BRSettings instance] setBool:!nightMode forOption:@"of2nr"];
     [self updateNightModeButtonTitle];
-    // TODO: check if discarding the cache is required or not
-    [self setHtmlBody:self.prayer.body forPrayer:self.prayer.queryId];
-    [self updateWebViewContent];
+    [self refreshPrayer];
 }
 
 - (void)updateNightModeButtonTitle
 {
     BOOL nightMode = [[BRSettings instance] boolForOption:@"of2nr"];
-    self.nightModeButton.title = nightMode ? BREVIAR_STR(@"mode.day") : BREVIAR_STR(@"mode.night");
+    self.nightModeItem.image = nightMode ? [UIImage imageNamed:@"night_mode_on"] : [UIImage imageNamed:@"night_mode_off"];
 }
 
-- (void)speak
+- (IBAction)toggleSpeaker:(id)sender
 {
     if (self.speechSynthesizer.paused) {
-        self.speakButton.title = BREVIAR_STR(@"tts.pause");
         [self.speechSynthesizer continueSpeaking];
+        
+        self.speakItem.image = [UIImage imageNamed:@"speaker_on"];
     }
     
     else if (self.speechSynthesizer.speaking) {
-        self.speakButton.title = BREVIAR_STR(@"tts.continue");
         [self.speechSynthesizer pauseSpeakingAtBoundary:AVSpeechBoundaryWord];
+
+        self.speakItem.image = [UIImage imageNamed:@"speaker_off"];
     }
     
     else {
-        self.speakButton.title = BREVIAR_STR(@"tts.loading");
-        self.speakButton.enabled = NO;
+        self.speakItem.enabled = NO;
+        self.speakItem.image = [UIImage imageNamed:@"speaker_on"];
         
         BOOL oldValue = [[BRSettings instance] boolForOption:@"of0bf"];
         if (oldValue == NO) {
@@ -165,9 +150,40 @@
         
         [self.speechSynthesizer speakUtterance:utterance];
         
-        self.speakButton.title = BREVIAR_STR(@"tts.pause");
-        self.speakButton.enabled = YES;
+        self.speakItem.enabled = YES;
     }
+}
+
+- (IBAction)increaseFontSize:(id)sender
+{
+    [self modifyFontSize:+2];
+}
+
+- (IBAction)decreaseFontSize:(id)sender
+{
+    [self modifyFontSize:-2];
+}
+
+- (void)modifyFontSize:(NSInteger)sizeDiff
+{
+    BRSettings *settings = [BRSettings instance];
+    settings.prayerFontSize += sizeDiff;
+    [self refreshPrayer];
+    [self updateFontItems];
+}
+
+- (void)updateFontItems
+{
+    BRSettings *settings = [BRSettings instance];
+    self.increaseFontItem.enabled = (settings.prayerFontSize < BR_MAX_FONT_SIZE);
+    self.decreaseFontItem.enabled = (settings.prayerFontSize > BR_MIN_FONT_SIZE);
+}
+
+- (void)refreshPrayer
+{
+    self.prayer.scrollOffset = self.webView.scrollView.contentOffset.y;
+    [self setHtmlBody:self.prayer.body forPrayer:self.prayer.queryId];
+    [self updateWebViewContent];
 }
 
 @end

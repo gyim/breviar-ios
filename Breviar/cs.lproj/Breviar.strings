@@ -132,11 +132,3 @@
 
 // Other
 "today"         = "Dnes";
-"mode.night"    = "Noční režim";
-"mode.day"      = "Denní režim";
-
-// Text to speech
-"tts.read"      = "Přečíst";
-"tts.pause"     = "Pauza";
-"tts.continue"  = "Pokračovat";
-"tts.loading"   = "Načítám...";

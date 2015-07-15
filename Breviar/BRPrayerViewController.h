@@ -12,4 +12,13 @@
 
 @interface BRPrayerViewController : BRWebViewController
 @property(strong) BRPrayer *prayer;
+@property(weak) IBOutlet UIBarButtonItem *speakItem;
+@property(weak) IBOutlet UIBarButtonItem *nightModeItem;
+@property(weak) IBOutlet UIBarButtonItem *increaseFontItem;
+@property(weak) IBOutlet UIBarButtonItem *decreaseFontItem;
+
+- (IBAction)toggleSpeaker:(id)sender;
+- (IBAction)toggleNightMode:(id)sender;
+- (IBAction)increaseFontSize:(id)sender;
+- (IBAction)decreaseFontSize:(id)sender;
 @end

@@ -112,7 +112,7 @@
 "of5ps29"		= "A 121. helyett vehető a 128. zsoltár";
 "of5ps69"		= "A 125. helyett vehető a 128. zsoltár";
 "of5ps71"		= "A 126. helyett vehető a 130. zsoltár";
-"of5psps"		= "Hamvazószerdán vegye a zsoltározást: a 4. zsoltáros hét szerdájáról / a 3. zsoltáros hét péntekjéről";
+"of5psps"		= "Hamvazószerdán vegye a zsoltárokat a 4. zsoltáros hét szerdájáról / a 3. zsoltáros hét péntekjéről";
 "of5hpc"		= "Olvasmányos imaóra (évközi idő): himnusz I. [Amikor az imaórát éjszaka vagy kora hajnalban mondják] / himnusz II. [Amikor az imaórát a nap nem reggeli órájában végzik]";
 "of5hpred"		= "Délelőtt: himnusz Most jöjj, Szentlélek, szállj közénk / himnusz Idők rendjét megtartva most";
 "of5hna"		= "Délben: himnusz Urunk, felséges Istenünk / himnusz Dicsérjük dallal az Urat";
@@ -132,11 +132,3 @@
 
 // Other
 "today"         = "Ma";
-"mode.night"    = "Éjszakai mód";
-"mode.day"      = "Nappali mód";
-
-// Text to speech
-"tts.read"      = "Felolvasás";
-"tts.pause"     = "Szünet";
-"tts.continue"  = "Folytatás";
-"tts.loading"   = "Betöltés...";
