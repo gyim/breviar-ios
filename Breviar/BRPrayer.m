@@ -19,7 +19,8 @@ static NSString *prayerQueryIds[] = {
     [BRMiddayPrayer]       = @"mna",
     [BRMidAfternoonPrayer] = @"mpo",
     [BREveningPrayer]      = @"mv",
-    [BRCompline]           = @"mk"
+    [BRCompline]           = @"mk",
+    [BRStaticText]         = @"st",
 };
 
 static NSString *prayerNames[] = {
@@ -30,7 +31,8 @@ static NSString *prayerNames[] = {
     [BRMiddayPrayer]       = @"Sexta",
     [BRMidAfternoonPrayer] = @"Nona",
     [BREveningPrayer]      = @"Vespers",
-    [BRCompline]           = @"Compline"
+    [BRCompline]           = @"Compline",
+    [BRStaticText]         = @"Static Text",
 };
 
 @implementation BRPrayer
@@ -40,7 +42,11 @@ static NSString *prayerNames[] = {
     bodyForSpeechSynthesis = _bodyForSpeechSynthesis;
 
 - (NSString *)title {
-    return BREVIAR_STR(prayerQueryIds[self.prayerType]);
+    if (self.prayerType == BRStaticText) {
+        return BREVIAR_STR(self.staticTextId);
+    } else {
+        return BREVIAR_STR(prayerQueryIds[self.prayerType]);
+    }
 }
 
 - (NSString *)prayerName {
@@ -68,24 +74,38 @@ static NSString *prayerNames[] = {
 }
 
 - (NSString *)generateBodyWithOverwritingOptions:(NSDictionary *)overwritingOptions {
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:self.date];
-    
     NSMutableDictionary *queryOptions = [NSMutableDictionary dictionary];
     [queryOptions addEntriesFromDictionary:[BRSettings instance].prayerQueryOptions];
-    [queryOptions addEntriesFromDictionary:@{
-                                             @"qt": @"pdt",
-                                             @"d": [NSNumber numberWithInteger:components.day],
-                                             @"m": [NSNumber numberWithInteger:components.month],
-                                             @"r": [NSNumber numberWithInteger:components.year],
-                                             @"p": prayerQueryIds[self.prayerType],
-                                             @"ds": [NSNumber numberWithInteger:self.celebrationId],
-                                             @"o0": @"65",
-                                             @"o1": @"5440",
-                                             @"o2": @"16384",
-                                             @"o3": @"0",
-                                             @"o4": @"0",
-                                             @"o5": @"0"
-                                             }];
+    
+    if (self.prayerType == BRStaticText) {
+        [queryOptions addEntriesFromDictionary:@{
+                                                 @"qt": @"pst",
+                                                 @"st": self.staticTextId,
+                                                 @"o0": @"64",
+                                                 @"o1": @"5376",
+                                                 @"o2": @"16512",
+                                                 @"o3": @"1",
+                                                 @"o4": @"0",
+                                                 @"o5": @"8194"
+                                                 }];
+    } else {
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:self.date];
+        
+        [queryOptions addEntriesFromDictionary:@{
+                                                 @"qt": @"pdt",
+                                                 @"d": [NSNumber numberWithInteger:components.day],
+                                                 @"m": [NSNumber numberWithInteger:components.month],
+                                                 @"r": [NSNumber numberWithInteger:components.year],
+                                                 @"p": prayerQueryIds[self.prayerType],
+                                                 @"ds": [NSNumber numberWithInteger:self.celebrationId],
+                                                 @"o0": @"65",
+                                                 @"o1": @"5440",
+                                                 @"o2": @"16384",
+                                                 @"o3": @"0",
+                                                 @"o4": @"0",
+                                                 @"o5": @"0"
+                                                 }];
+    }
     if (overwritingOptions) {
         [queryOptions addEntriesFromDictionary:overwritingOptions];
     }
@@ -105,6 +125,13 @@ static NSString *prayerNames[] = {
 
 + (NSString *)queryIdFromPrayerType:(BRPrayerType)prayerType {
     return prayerQueryIds[prayerType];
+}
+
++ (BRPrayer *)prayerForStaticTextId:(NSString *)staticTextId {
+    BRPrayer *prayer = [[BRPrayer alloc] init];
+    prayer.prayerType = BRStaticText;
+    prayer.staticTextId = staticTextId;
+    return prayer;
 }
 
 @end

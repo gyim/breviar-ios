@@ -17,5 +17,6 @@
 @property BOOL navbarToggleEnabled;
 
 - (void)updateWebViewContent;
+- (void)setupSharedWebView;
 
 @end
