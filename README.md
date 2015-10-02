@@ -7,9 +7,9 @@ created by [Juraj Vidéky](https://github.com/breviar-sk/).
 
 The application is available for the following languages:
 
-- Slovak (web version: [http://breviar.sk](http://breviar.sk))
-- Czech (web version: [http://ebreviar.cz](http://ebreviar.cz))
-- Hungarian (web version: [http://zsolozsma.katolikus.hu](http://zsolozsma.katolikus.hu))
+- [Slovak](https://itunes.apple.com/us/app/breviar/id818787573?mt=8) (web version: [http://breviar.sk](http://breviar.sk))
+- [Czech](https://itunes.apple.com/us/app/breviar/id818790371?mt=8) (web version: [http://ebreviar.cz](http://ebreviar.cz))
+- [Hungarian](https://itunes.apple.com/us/app/zsolozsma/id818769806?mt=8) (web version: [http://zsolozsma.katolikus.hu](http://zsolozsma.katolikus.hu))
 
 Getting started
 ===============
