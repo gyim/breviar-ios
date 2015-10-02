@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5419B71D1A52A0E2008B5697 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5419B71C1A52A0E2008B5697 /* Images.xcassets */; };
-		542622721887AFA500CA7AC4 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 542622711887AFA500CA7AC4 /* libGoogleAnalyticsServices.a */; };
 		542622761887AFC700CA7AC4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 542622751887AFC700CA7AC4 /* CoreData.framework */; };
 		542622781887AFD700CA7AC4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 542622771887AFD700CA7AC4 /* SystemConfiguration.framework */; };
 		544E694C187D285E0070DEC0 /* BRUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 544E694B187D285E0070DEC0 /* BRUI.m */; };
@@ -17,9 +16,6 @@
 		54EA63851A1FD8C40027F889 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54EA63841A1FD8C40027F889 /* AVFoundation.framework */; };
 		703200E8180F2E9000675F09 /* breviar-ios.css in Resources */ = {isa = PBXBuildFile; fileRef = 703200E7180F2E9000675F09 /* breviar-ios.css */; };
 		7034597D15FCE84D000A1711 /* BRFontHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7034597C15FCE84D000A1711 /* BRFontHelper.m */; };
-		7042905716408A5E00663A7D /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042905316408A1100663A7D /* libxml2.dylib */; };
-		7042905816408A6300663A7D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042905516408A1600663A7D /* libz.dylib */; };
-		7042905916408BF600663A7D /* libRaptureXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7042904E1640887200663A7D /* libRaptureXML.a */; };
 		7042905C1641F91C00663A7D /* BRDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7042905B1641F91B00663A7D /* BRDataSource.m */; };
 		7045E8E118B97ADE00495926 /* BRWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7045E8E018B97ADD00495926 /* BRWebView.m */; };
 		70493A621719D4CF00232631 /* Breviar.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70493A601719D4CF00232631 /* Breviar.strings */; };
@@ -71,41 +67,15 @@
 		70EB053318B1282300F88662 /* myhpage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB051D18B1282300F88662 /* myhpage.cpp */; };
 		70EB053418B1282300F88662 /* mylog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB051F18B1282300F88662 /* mylog.cpp */; };
 		70EB053518B1282300F88662 /* mystring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB052118B1282300F88662 /* mystring.cpp */; };
+		721A0A0D7F6850632F9BD9CD /* Pods_Breviar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE179371A7903716D6F6929 /* Pods_Breviar.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		7042904D1640887200663A7D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 704290441640887100663A7D /* RaptureXML.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0DEB8EB41467EC9B00024989;
-			remoteInfo = RaptureXML;
-		};
-		7042904F1640887200663A7D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 704290441640887100663A7D /* RaptureXML.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0252B2DD142ADFC60018B75D;
-			remoteInfo = RaptureXMLTests;
-		};
-		704290511640890500663A7D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 704290441640887100663A7D /* RaptureXML.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 0DEB8EB31467EC9B00024989;
-			remoteInfo = RaptureXML;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		2E2C545C2D8B98F4D35AABED /* Pods-Breviar.release-hu.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.release-hu.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.release-hu.xcconfig"; sourceTree = "<group>"; };
+		2FDE224D37CAFDBC37B6FEB1 /* Pods-Breviar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.debug.xcconfig"; sourceTree = "<group>"; };
+		351F52DFADB17FCA51F07781 /* Pods-Breviar.release-sk.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.release-sk.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.release-sk.xcconfig"; sourceTree = "<group>"; };
+		41828A822CBA42EAA93024E5 /* Pods-Breviar.debug-cs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.debug-cs.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.debug-cs.xcconfig"; sourceTree = "<group>"; };
 		5419B71C1A52A0E2008B5697 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		5426226B1887AFA500CA7AC4 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
-		5426226C1887AFA500CA7AC4 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
-		5426226D1887AFA500CA7AC4 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
-		5426226E1887AFA500CA7AC4 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
-		5426226F1887AFA500CA7AC4 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
-		542622701887AFA500CA7AC4 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
-		542622711887AFA500CA7AC4 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		542622751887AFC700CA7AC4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		542622771887AFD700CA7AC4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		544E694A187D285E0070DEC0 /* BRUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRUI.h; sourceTree = "<group>"; };
@@ -115,6 +85,7 @@
 		54EA637F1A1FA9E10027F889 /* utf8-utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "utf8-utils.cpp"; path = "breviar-cgi/cgi-bin/source/utf8-utils.cpp"; sourceTree = SOURCE_ROOT; };
 		54EA63831A1FA9EA0027F889 /* utf8-utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "utf8-utils.h"; path = "breviar-cgi/cgi-bin/source/utf8-utils.h"; sourceTree = SOURCE_ROOT; };
 		54EA63841A1FD8C40027F889 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		5510CB766FA0A4BAC5CC3011 /* Pods-Breviar.release-cs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.release-cs.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.release-cs.xcconfig"; sourceTree = "<group>"; };
 		703200E7180F2E9000675F09 /* breviar-ios.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "breviar-ios.css"; sourceTree = "<group>"; };
 		7034597B15FCE84D000A1711 /* BRFontHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRFontHelper.h; sourceTree = "<group>"; };
 		7034597C15FCE84D000A1711 /* BRFontHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRFontHelper.m; sourceTree = "<group>"; };
@@ -122,9 +93,6 @@
 		7042441B178CBD8400EF5461 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/MainStoryboard_iPad.strings; sourceTree = "<group>"; };
 		7042441D178CBD8600EF5461 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MainStoryboard_iPad.strings; sourceTree = "<group>"; };
 		7042441E178CBDAD00EF5461 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MainStoryboard_iPad.strings; sourceTree = "<group>"; };
-		704290441640887100663A7D /* RaptureXML.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RaptureXML.xcodeproj; path = RaptureXML/RaptureXML.xcodeproj; sourceTree = "<group>"; };
-		7042905316408A1100663A7D /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
-		7042905516408A1600663A7D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		7042905A1641F91B00663A7D /* BRDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDataSource.h; sourceTree = "<group>"; };
 		7042905B1641F91B00663A7D /* BRDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDataSource.m; sourceTree = "<group>"; };
 		7045E8DF18B97ADD00495926 /* BRWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRWebView.h; sourceTree = "<group>"; };
@@ -173,6 +141,7 @@
 		709BE1E6185673B100B6190E /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		70AAAA4C15FBFBE4008D314D /* BRSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettings.h; sourceTree = "<group>"; };
 		70AAAA4D15FBFBE4008D314D /* BRSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRSettings.m; sourceTree = "<group>"; };
+		70C34E87B20A183583891D86 /* Pods-Breviar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.release.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.release.xcconfig"; sourceTree = "<group>"; };
 		70C5844A1A1C139D009732D7 /* breviar-ios.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "breviar-ios.js"; sourceTree = "<group>"; };
 		70C962BE16A1DFC800A399B9 /* BRCelebrationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCelebrationCell.h; sourceTree = "<group>"; };
 		70C962BF16A1DFC800A399B9 /* BRCelebrationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRCelebrationCell.m; sourceTree = "<group>"; };
@@ -220,6 +189,9 @@
 		70EB052218B1282300F88662 /* mystring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mystring.h; path = "breviar-cgi/cgi-bin/source/mystring.h"; sourceTree = SOURCE_ROOT; };
 		70EB052318B1282300F88662 /* mysysdef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mysysdef.h; path = "breviar-cgi/cgi-bin/source/mysysdef.h"; sourceTree = SOURCE_ROOT; };
 		70EB052418B1282300F88662 /* mysystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mysystem.h; path = "breviar-cgi/cgi-bin/source/mysystem.h"; sourceTree = SOURCE_ROOT; };
+		947B4D2730896CE8C8C50D2F /* Pods-Breviar.debug-hu.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.debug-hu.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.debug-hu.xcconfig"; sourceTree = "<group>"; };
+		DEE179371A7903716D6F6929 /* Pods_Breviar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Breviar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECD00A6C92CEEC50DC236683 /* Pods-Breviar.debug-sk.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.debug-sk.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.debug-sk.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,49 +202,29 @@
 				54EA63851A1FD8C40027F889 /* AVFoundation.framework in Frameworks */,
 				542622781887AFD700CA7AC4 /* SystemConfiguration.framework in Frameworks */,
 				542622761887AFC700CA7AC4 /* CoreData.framework in Frameworks */,
-				7042905916408BF600663A7D /* libRaptureXML.a in Frameworks */,
-				7042905816408A6300663A7D /* libz.dylib in Frameworks */,
-				7042905716408A5E00663A7D /* libxml2.dylib in Frameworks */,
-				542622721887AFA500CA7AC4 /* libGoogleAnalyticsServices.a in Frameworks */,
 				7061B08C15FA8E1A00A83E0A /* UIKit.framework in Frameworks */,
 				7061B08E15FA8E1A00A83E0A /* Foundation.framework in Frameworks */,
 				7061B09015FA8E1A00A83E0A /* CoreGraphics.framework in Frameworks */,
+				721A0A0D7F6850632F9BD9CD /* Pods_Breviar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5426226A1887AFA500CA7AC4 /* GoogleAnalytics */ = {
+		52058FAA25FB56C6DB168844 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5426226B1887AFA500CA7AC4 /* GAI.h */,
-				5426226C1887AFA500CA7AC4 /* GAIDictionaryBuilder.h */,
-				5426226D1887AFA500CA7AC4 /* GAIFields.h */,
-				5426226E1887AFA500CA7AC4 /* GAILogger.h */,
-				5426226F1887AFA500CA7AC4 /* GAITrackedViewController.h */,
-				542622701887AFA500CA7AC4 /* GAITracker.h */,
-				542622711887AFA500CA7AC4 /* libGoogleAnalyticsServices.a */,
+				2FDE224D37CAFDBC37B6FEB1 /* Pods-Breviar.debug.xcconfig */,
+				41828A822CBA42EAA93024E5 /* Pods-Breviar.debug-cs.xcconfig */,
+				ECD00A6C92CEEC50DC236683 /* Pods-Breviar.debug-sk.xcconfig */,
+				947B4D2730896CE8C8C50D2F /* Pods-Breviar.debug-hu.xcconfig */,
+				70C34E87B20A183583891D86 /* Pods-Breviar.release.xcconfig */,
+				5510CB766FA0A4BAC5CC3011 /* Pods-Breviar.release-cs.xcconfig */,
+				351F52DFADB17FCA51F07781 /* Pods-Breviar.release-sk.xcconfig */,
+				2E2C545C2D8B98F4D35AABED /* Pods-Breviar.release-hu.xcconfig */,
 			);
-			path = GoogleAnalytics;
-			sourceTree = "<group>";
-		};
-		704290421640886000663A7D /* Thirdparty */ = {
-			isa = PBXGroup;
-			children = (
-				5426226A1887AFA500CA7AC4 /* GoogleAnalytics */,
-				704290441640887100663A7D /* RaptureXML.xcodeproj */,
-			);
-			name = Thirdparty;
-			sourceTree = "<group>";
-		};
-		704290451640887100663A7D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				7042904E1640887200663A7D /* libRaptureXML.a */,
-				704290501640887200663A7D /* RaptureXMLTests.octest */,
-			);
-			name = Products;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		70493A5D1719D38100232631 /* en.lproj */ = {
@@ -288,9 +240,9 @@
 			isa = PBXGroup;
 			children = (
 				7061B09115FA8E1A00A83E0A /* Breviar */,
-				704290421640886000663A7D /* Thirdparty */,
 				7061B08A15FA8E1A00A83E0A /* Frameworks */,
 				7061B08815FA8E1A00A83E0A /* Products */,
+				52058FAA25FB56C6DB168844 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -311,8 +263,7 @@
 				7061B08B15FA8E1A00A83E0A /* UIKit.framework */,
 				7061B08D15FA8E1A00A83E0A /* Foundation.framework */,
 				7061B08F15FA8E1A00A83E0A /* CoreGraphics.framework */,
-				7042905516408A1600663A7D /* libz.dylib */,
-				7042905316408A1100663A7D /* libxml2.dylib */,
+				DEE179371A7903716D6F6929 /* Pods_Breviar.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -515,16 +466,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7061B0A815FA8E1A00A83E0A /* Build configuration list for PBXNativeTarget "Breviar" */;
 			buildPhases = (
+				6D326AF1E6D95BD0C936938A /* Check Pods Manifest.lock */,
 				709994D3188F2ACC00729A21 /* ShellScript */,
 				7061B08315FA8E1A00A83E0A /* Sources */,
 				7061B08415FA8E1A00A83E0A /* Frameworks */,
 				7061B08515FA8E1A00A83E0A /* Resources */,
 				7054368615FBABA5005854DC /* ShellScript */,
+				E02AB79E235858B40968E8B4 /* Embed Pods Frameworks */,
+				7229BD1696D9B934CF7C2601 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				704290521640890500663A7D /* PBXTargetDependency */,
 			);
 			name = Breviar;
 			productName = Breviar;
@@ -538,7 +491,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = BR;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0700;
 				TargetAttributes = {
 					7061B08615FA8E1A00A83E0A = {
 						DevelopmentTeam = 3K775ZSA59;
@@ -559,35 +512,12 @@
 			mainGroup = 7061B07C15FA8E1A00A83E0A;
 			productRefGroup = 7061B08815FA8E1A00A83E0A /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 704290451640887100663A7D /* Products */;
-					ProjectRef = 704290441640887100663A7D /* RaptureXML.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				7061B08615FA8E1A00A83E0A /* Breviar */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		7042904E1640887200663A7D /* libRaptureXML.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRaptureXML.a;
-			remoteRef = 7042904D1640887200663A7D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		704290501640887200663A7D /* RaptureXMLTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = RaptureXMLTests.octest;
-			remoteRef = 7042904F1640887200663A7D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7061B08515FA8E1A00A83E0A /* Resources */ = {
@@ -617,6 +547,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6D326AF1E6D95BD0C936938A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		7054368615FBABA5005854DC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -643,6 +588,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = ./buildno.sh;
+		};
+		7229BD1696D9B934CF7C2601 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Breviar/Pods-Breviar-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E02AB79E235858B40968E8B4 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Breviar/Pods-Breviar-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -692,14 +667,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		704290521640890500663A7D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = RaptureXML;
-			targetProxy = 704290511640890500663A7D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		70493A601719D4CF00232631 /* Breviar.strings */ = {
@@ -810,11 +777,14 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				EXCLUDED_SOURCE_FILE_NAMES = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -831,14 +801,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				UI_LANG = en;
-				USER_HEADER_SEARCH_PATHS = RaptureXML;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -859,10 +829,12 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXCLUDED_SOURCE_FILE_NAMES = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MODEL_SELECTED_IN_MAKEFILE,
 					MODEL_linux_strexport,
@@ -875,20 +847,21 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				UI_LANG = en;
-				USER_HEADER_SEARCH_PATHS = RaptureXML;
+				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		7061B0A915FA8E1A00A83E0A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2FDE224D37CAFDBC37B6FEB1 /* Pods-Breviar.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -898,10 +871,8 @@
 				GCC_PREFIX_HEADER = "Breviar/Breviar-Prefix.pch";
 				INFOPLIST_FILE = "Breviar/Breviar-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/GoogleAnalytics",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "${APP_BUNDLE_ID}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -910,6 +881,7 @@
 		};
 		7061B0AA15FA8E1A00A83E0A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 70C34E87B20A183583891D86 /* Pods-Breviar.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -919,10 +891,8 @@
 				GCC_PREFIX_HEADER = "Breviar/Breviar-Prefix.pch";
 				INFOPLIST_FILE = "Breviar/Breviar-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/GoogleAnalytics",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "${APP_BUNDLE_ID}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -946,6 +916,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXCLUDED_SOURCE_FILE_NAMES = (
 					"en.lproj/*",
@@ -954,6 +925,7 @@
 				);
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MODEL_SELECTED_IN_MAKEFILE,
 					MODEL_linux_strexport,
@@ -967,20 +939,21 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				UI_LANG = hu;
-				USER_HEADER_SEARCH_PATHS = RaptureXML;
+				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Release-hu";
 		};
 		706C1F1718A1A56900434CEF /* Release-hu */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2E2C545C2D8B98F4D35AABED /* Pods-Breviar.release-hu.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -990,10 +963,8 @@
 				GCC_PREFIX_HEADER = "Breviar/Breviar-Prefix.pch";
 				INFOPLIST_FILE = "Breviar/Breviar-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/GoogleAnalytics",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "${APP_BUNDLE_ID}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1017,7 +988,9 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				EXCLUDED_SOURCE_FILE_NAMES = (
 					"en.lproj/*",
 					"sk.lproj/*",
@@ -1026,6 +999,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1043,19 +1017,20 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				UI_LANG = hu;
-				USER_HEADER_SEARCH_PATHS = RaptureXML;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = "Debug-hu";
 		};
 		706C1F1918A82EF100434CEF /* Debug-hu */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 947B4D2730896CE8C8C50D2F /* Pods-Breviar.debug-hu.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1065,10 +1040,8 @@
 				GCC_PREFIX_HEADER = "Breviar/Breviar-Prefix.pch";
 				INFOPLIST_FILE = "Breviar/Breviar-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/GoogleAnalytics",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "${APP_BUNDLE_ID}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1092,7 +1065,9 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				EXCLUDED_SOURCE_FILE_NAMES = (
 					"en.lproj/*",
 					"hu.lproj/*",
@@ -1101,6 +1076,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1118,19 +1094,20 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				UI_LANG = sk;
-				USER_HEADER_SEARCH_PATHS = RaptureXML;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = "Debug-sk";
 		};
 		70CD8BF518A83CED00A22590 /* Debug-sk */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ECD00A6C92CEEC50DC236683 /* Pods-Breviar.debug-sk.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1140,10 +1117,8 @@
 				GCC_PREFIX_HEADER = "Breviar/Breviar-Prefix.pch";
 				INFOPLIST_FILE = "Breviar/Breviar-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/GoogleAnalytics",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "${APP_BUNDLE_ID}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1167,7 +1142,9 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				EXCLUDED_SOURCE_FILE_NAMES = (
 					"en.lproj/*",
 					"sk.lproj/*",
@@ -1176,6 +1153,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1193,19 +1171,20 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				UI_LANG = cs;
-				USER_HEADER_SEARCH_PATHS = RaptureXML;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = "Debug-cs";
 		};
 		70CD8BF718A83CF400A22590 /* Debug-cs */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41828A822CBA42EAA93024E5 /* Pods-Breviar.debug-cs.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1215,10 +1194,8 @@
 				GCC_PREFIX_HEADER = "Breviar/Breviar-Prefix.pch";
 				INFOPLIST_FILE = "Breviar/Breviar-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/GoogleAnalytics",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "${APP_BUNDLE_ID}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1242,6 +1219,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXCLUDED_SOURCE_FILE_NAMES = (
 					"en.lproj/*",
@@ -1250,6 +1228,7 @@
 				);
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MODEL_SELECTED_IN_MAKEFILE,
 					MODEL_linux_strexport,
@@ -1263,20 +1242,21 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				UI_LANG = sk;
-				USER_HEADER_SEARCH_PATHS = RaptureXML;
+				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Release-sk";
 		};
 		70CD8BF918A83D1100A22590 /* Release-sk */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 351F52DFADB17FCA51F07781 /* Pods-Breviar.release-sk.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1286,10 +1266,8 @@
 				GCC_PREFIX_HEADER = "Breviar/Breviar-Prefix.pch";
 				INFOPLIST_FILE = "Breviar/Breviar-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/GoogleAnalytics",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "${APP_BUNDLE_ID}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1313,6 +1291,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXCLUDED_SOURCE_FILE_NAMES = (
 					"en.lproj/*",
@@ -1321,6 +1300,7 @@
 				);
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MODEL_SELECTED_IN_MAKEFILE,
 					MODEL_linux_strexport,
@@ -1334,20 +1314,21 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				UI_LANG = cs;
-				USER_HEADER_SEARCH_PATHS = RaptureXML;
+				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Release-cs";
 		};
 		70CD8BFB18A83D1800A22590 /* Release-cs */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5510CB766FA0A4BAC5CC3011 /* Pods-Breviar.release-cs.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1357,10 +1338,8 @@
 				GCC_PREFIX_HEADER = "Breviar/Breviar-Prefix.pch";
 				INFOPLIST_FILE = "Breviar/Breviar-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/GoogleAnalytics",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "${APP_BUNDLE_ID}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

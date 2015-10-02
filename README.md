@@ -35,7 +35,7 @@ team). To obtain the public sources you have to do the following:
     wget -r http://breviar.sk/include_cz -nd -P include_cz
     wget -r http://breviar.sk/include_hu -nd -P include_hu
 
-Finally, clone the RaptureXML submodule for iOS:
+Finally, install the third-party dependencies with CocoaPods:
 
     cd ..
-    git submodule update --init RaptureXML
+    pod install
