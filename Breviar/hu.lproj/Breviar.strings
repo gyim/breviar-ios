@@ -34,6 +34,13 @@
 
 "prayersAsCells" = "Nagy imaválasztó gombok";
 
+"speechRate"            = "Felolvasás sebessége";
+"speechRate.verySlow"   = "Nagyon lassú";
+"speechRate.slow"       = "Lassú";
+"speechRate.normal"     = "Normál";
+"speechRate.fast"       = "Gyors";
+"speechRate.veryFast"   = "Nagyon gyors";
+
 // Prayer parts settings
 "of1c"		= "Evangéliumi kantikumok";
 "of1s"		= "Dicsőség az Atyának";

@@ -152,11 +152,23 @@
         if (!voiceCode) {
             voiceCode = @"sk-SK";
         }
-        AVSpeechSynthesisVoice *voice = [AVSpeechSynthesisVoice voiceWithLanguage:voiceCode];
         
+        AVSpeechSynthesisVoice *voice = [AVSpeechSynthesisVoice voiceWithLanguage:voiceCode];
         AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:webViewString];
-        utterance.rate = AVSpeechUtteranceDefaultSpeechRate / 3;
         utterance.voice = voice;
+        
+        NSString *speechRate = [[BRSettings instance] stringForOption:@"speechRate"];
+        if ([speechRate isEqualToString:@"verySlow"]) {
+            utterance.rate = AVSpeechUtteranceDefaultSpeechRate / 3;
+        } else if ([speechRate isEqualToString:@"slow"]) {
+            utterance.rate = AVSpeechUtteranceDefaultSpeechRate / 1.5;
+        } else if ([speechRate isEqualToString:@"fast"]) {
+            utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 1.2;
+        } else if ([speechRate isEqualToString:@"veryFast"]) {
+            utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 1.5;
+        } else {
+            utterance.rate = AVSpeechUtteranceDefaultSpeechRate;
+        }
         
         [self.speechSynthesizer speakUtterance:utterance];
         

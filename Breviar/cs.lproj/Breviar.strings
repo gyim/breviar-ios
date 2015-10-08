@@ -34,6 +34,13 @@
 
 "prayersAsCells" = "Velká tlačítka modliteb";
 
+"speechRate"            = "Výrok rychlost";
+"speechRate.verySlow"   = "Velmi pomalý";
+"speechRate.slow"       = "Pomalu";
+"speechRate.normal"     = "Normální";
+"speechRate.fast"       = "Rychle";
+"speechRate.veryFast"   = "Velmi rychle";
+
 // Prayer parts settings
 "of1c"		= "Evangelijní kantika";
 "of1s"		= "Sláva Otci";
