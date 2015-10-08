@@ -159,15 +159,15 @@
         
         NSString *speechRate = [[BRSettings instance] stringForOption:@"speechRate"];
         if ([speechRate isEqualToString:@"verySlow"]) {
-            utterance.rate = AVSpeechUtteranceDefaultSpeechRate / 3;
+            utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 3 + AVSpeechUtteranceMaximumSpeechRate * 1) / 4;
         } else if ([speechRate isEqualToString:@"slow"]) {
-            utterance.rate = AVSpeechUtteranceDefaultSpeechRate / 1.5;
+            utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 2 + AVSpeechUtteranceMaximumSpeechRate * 1) / 3;
         } else if ([speechRate isEqualToString:@"fast"]) {
-            utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 1.2;
+            utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 3 + AVSpeechUtteranceMaximumSpeechRate * 4) / 7;
         } else if ([speechRate isEqualToString:@"veryFast"]) {
-            utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 1.5;
+            utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 1 + AVSpeechUtteranceMaximumSpeechRate * 3) / 4;
         } else {
-            utterance.rate = AVSpeechUtteranceDefaultSpeechRate;
+            utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 1 + AVSpeechUtteranceMaximumSpeechRate * 1) / 2;
         }
         
         [self.speechSynthesizer speakUtterance:utterance];
