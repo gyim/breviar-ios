@@ -60,6 +60,7 @@
     [super viewWillDisappear:animated];
     
     self.prayer.scrollOffset = self.webView.scrollView.contentOffset.y;
+    self.prayer.scrollHeight = self.webView.scrollView.contentSize.height;
     
     if (self.speechSynthesizer.speaking) {
         [self.speechSynthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
@@ -130,9 +131,11 @@
 {
     [super webViewDidFinishLoad:webView];
     
-    if (self.prayer.scrollOffset) {
-        CGFloat maxOffset = self.webView.scrollView.contentSize.height - self.webView.frame.size.height;
-        self.webView.scrollView.contentOffset = CGPointMake(0, MIN(self.prayer.scrollOffset, maxOffset));
+    if (self.prayer.scrollOffset > 0 && self.prayer.scrollHeight > 0) {
+        CGFloat height = self.webView.scrollView.contentSize.height;
+        CGFloat maxOffset = height - self.webView.frame.size.height;
+        CGFloat scrollOffset = self.prayer.scrollOffset * height / self.prayer.scrollHeight;
+        self.webView.scrollView.contentOffset = CGPointMake(0, MIN(scrollOffset, maxOffset));
     }
     
     // An instance of AVSpeechSynthesizer must be initialized before loading content in web view
@@ -189,6 +192,7 @@
 - (void)refreshPrayer
 {
     self.prayer.scrollOffset = self.webView.scrollView.contentOffset.y;
+    self.prayer.scrollHeight = self.webView.scrollView.contentSize.height;
     [self setHtmlBody:self.prayer.body forPrayer:self.prayer.queryId];
     [self updateWebViewContent];
 }
