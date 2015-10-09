@@ -34,10 +34,10 @@
 
 "prayersAsCells" = "Veľké tlačidlá modlitieb";
 
-"speechRate"            = "Výpoveď rýchlosť";
-"speechRate.verySlow"   = "Veľmi pomalý";
+"speechRate"            = "Rýchlosť čítania (hlasový výstup)";
+"speechRate.verySlow"   = "Veľmi pomaly";
 "speechRate.slow"       = "Pomaly";
-"speechRate.normal"     = "Normálny";
+"speechRate.normal"     = "Normálne";
 "speechRate.fast"       = "Rýchlo";
 "speechRate.veryFast"   = "Veľmi rýchlo";
 
