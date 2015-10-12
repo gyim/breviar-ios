@@ -89,6 +89,8 @@
 					<string>stringOption</string>
 					<key>default</key>
 					<string>normal</string>
+					<key>inPrayerQuery</key>
+					<false/>
 					<key>options</key>
 					<array>
 						<string>verySlow</string>
@@ -137,6 +139,8 @@
 					<false/>
 					<key>visibility</key>
 					<string>iPhone</string>
+					<key>inPrayerQuery</key>
+					<false/>
 				</dict>
 			</array>
 		</dict>
