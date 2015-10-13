@@ -34,6 +34,13 @@
 
 "prayersAsCells" = "Large prayer buttons";
 
+"speechRate"            = "Speech rate";
+"speechRate.verySlow"   = "Very slow";
+"speechRate.slow"       = "Slow";
+"speechRate.normal"     = "Normal";
+"speechRate.fast"       = "Fast";
+"speechRate.veryFast"   = "Very fast";
+
 // Prayer parts settings
 "of1c"		= "Gospel canticles";
 "of1s"		= "Glory to the Father";

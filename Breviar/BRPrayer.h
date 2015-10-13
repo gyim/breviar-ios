@@ -16,7 +16,8 @@ typedef enum {
     BRMiddayPrayer,
     BRMidAfternoonPrayer,
     BREveningPrayer,
-    BRCompline
+    BRCompline,
+    BRStaticText
 } BRPrayerType;
 
 @interface BRPrayer : NSObject
@@ -30,8 +31,11 @@ typedef enum {
 @property(readonly) NSString *body;
 @property(readonly) NSString *bodyForSpeechSynthesis;
 @property(assign) CGFloat scrollOffset;
+@property(assign) CGFloat scrollHeight;
+@property(strong) NSString *staticTextId;
 
 + (BRPrayerType)prayerTypeFromQueryId:(NSString *)queryId;
 + (NSString *)queryIdFromPrayerType:(BRPrayerType)prayerType;
++ (BRPrayer *)prayerForStaticTextId:(NSString *)staticTextId;
 
 @end

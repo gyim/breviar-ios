@@ -34,6 +34,13 @@
 
 "prayersAsCells" = "Veľké tlačidlá modlitieb";
 
+"speechRate"            = "Rýchlosť čítania (hlasový výstup)";
+"speechRate.verySlow"   = "Veľmi pomaly";
+"speechRate.slow"       = "Pomaly";
+"speechRate.normal"     = "Normálne";
+"speechRate.fast"       = "Rýchlo";
+"speechRate.veryFast"   = "Veľmi rýchlo";
+
 // Prayer parts settings
 "of1c"		= "Evanjeliové chválospevy";
 "of1s"		= "Sláva Otcu";

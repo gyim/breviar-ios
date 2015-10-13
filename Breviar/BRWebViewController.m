@@ -13,7 +13,6 @@
 
 @interface BRWebViewController ()
 
-@property(strong) BRWebViewController *subpageController;
 @property(strong) NSString *oldHtmlSource;
 @property(strong) UITapGestureRecognizer *tapGesture;
 @property(assign) struct timeval lastClickTime;
@@ -48,12 +47,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    // If we are coming from a subpage, move its shared webview here
-    if (self.subpageController) {
-        self.webView = self.subpageController.webView;
-        [self setupSharedWebView];
-    }
     
     self.webView.frame = self.view.bounds;
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -102,40 +95,6 @@
     // Re-enable automatic screen lock
     [UIApplication sharedApplication].idleTimerDisabled = NO;
 }
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"ShowSubpage"]) {
-        NSURL *url = sender;
-        
-        // Parse URL
-        NSArray *argList = [url.query componentsSeparatedByString:@"&"];
-        NSMutableDictionary *args = [[NSMutableDictionary alloc] init];
-        for (NSString *kv in argList) {
-            NSArray *kvParts = [kv componentsSeparatedByString:@"="];
-            NSString *k = [kvParts objectAtIndex:0];
-            NSString *v = [kvParts objectAtIndex:1];
-            [args setObject:v forKey:k];
-        }
-        
-        // Run query and show result
-        NSString *body = [BRCGIQuery queryWithArgs:args];
-        self.subpageController = segue.destinationViewController;
-        self.subpageController.webView = self.webView;
-        self.subpageController.htmlContent = [NSString stringWithFormat:@"<div id=\"prayer-custom\">%@</div>", body];
-        
-        // Set subpage title
-        NSString *subpageTitleKey = [args objectForKey:@"st"];
-        self.subpageController.title = subpageTitleKey ? BREVIAR_STR(subpageTitleKey) : self.navigationController.title;
-        
-        [UIApplication sharedApplication].statusBarHidden = NO;
-        self.navigationController.navigationBarHidden = NO;
-        self.navigationController.navigationBar.alpha = 1.0;
-        self.navigationController.toolbarHidden = NO;
-        self.navigationController.toolbar.alpha = 1.0;
-    }
-}
-
 
 #pragma mark - Navigation Bar & Toolbar
 
@@ -197,10 +156,7 @@
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    if ([request.URL.absoluteString rangeOfString:@".cgi?"].location != NSNotFound) {
-        [self performSegueWithIdentifier:@"ShowSubpage" sender:request.URL];
-        return NO;
-    } else if ([request.URL.absoluteString rangeOfString:@"event://linkTouchStart"].location != NSNotFound) {
+    if ([request.URL.absoluteString rangeOfString:@"event://linkTouchStart"].location != NSNotFound) {
         struct timeval t;
         gettimeofday(&t, NULL);
         self.lastClickTime = t;

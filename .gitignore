@@ -1,3 +1,4 @@
-project.xcworkspace
+*.xcworkspace
 xcuserdata
 config.build.h
+Pods
