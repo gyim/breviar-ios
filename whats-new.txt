@@ -1,0 +1,60 @@
+________________________________________________________________________
+What's New in Version 1.2
+
+SK
+- možnosť meniť veľkosť písma priamo z modlitby
+- nastavenie rýchlosti čítania (hlasový výstup)
+- pridaná spodná lišta pre mariánske antifóny
+- aktualizácie, vylepšenia a opravy v textoch a generovaní modlitieb
+
+CZ
+- možnost měnit velikost písma přímo z modlitby
+- nastavení rychlosti čtení (hlasový výstup)
+- přidaná spodní lišta pro mariánské antifony
+- aktualizace, vylepšení a opravy v textech a generování modliteb
+
+HU
+- Added button to change font size on prayer screen
+- Added option to change speech rate
+- Added toolbar to Mary antiphones
+- Improved Breviary texts
+________________________________________________________________________
+What's New in Version 1.1
+
+SK
+- hlasový výstup priamo z modlitby
+- prepínanie denný/nočný režim priamo z modlitby
+- možnosť voľby liturgického kalendára
+- oprava: mariánske antifóny pre kompletórium
+- oprava: tam, kde to rubriky umožňujú, možnosť zvoliť spoločnú časť pre modlitbu svätca
+- podpora pre iPhone 6 / 6 Plus
+- počas modlitby sa zariadenie neuspí (ostáva aktívne)
+- väčší výber veľkostí písma
+- zapamätanie pozície v modlitbe
+- aktualizácie, vylepšenia a opravy v textoch a generovaní modlitieb
+
+CZ
+- hlasový výstup přímo z modlitby
+- přepínání denní/noční režim přímo z modlitby
+- možnost volby liturgického kalendáře
+- oprava: mariánské antifony pro kompletář
+- oprava: tam, kde to rubriky umožňují, možnost volby společných textů pro modlitbu ke cti světce
+- podpora pro iPhone 6 / 6 Plus
+- po dobu modlitby zařízení zůstává aktivní
+- větší výběr velikostí písma
+- zapamatování pozice v modlitbě
+- aktualizace, vylepšení a opravy v textech a generování modliteb
+
+HU
+- Imaszövegek felolvasása
+- Éjjeli / nappali mód választása az ima képernyőn
+- Liturgikus naptár kiválasztása
+- Javítás: Mária-antifónák mutatása a Befejező imaórában
+- Javítás: közös részek kiválasztása nem működött
+- iPhone 6 / iPhone 6 Plus támogatás
+- Ima alatt nem zárolódik a képernyő automatikusan
+- Több betűméret támogatása
+- Ima pozíció megjegyzése képernyőváltáskor
+- Frissítések és javítások az imák szövegében
+________________________________________________________________________
+
