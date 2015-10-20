@@ -14,10 +14,10 @@ CZ
 - aktualizace, vylepšení a opravy v textech a generování modliteb
 
 HU
-- Added button to change font size on prayer screen
-- Added option to change speech rate
-- Added toolbar to Mary antiphones
-- Improved Breviary texts
+- a betűméret közvetlenül az ima képernyőről is állítható
+- beállítható a felolvasás sebessége
+- toolbar a Mária-antifóna képernyőn
+- frissített és javított imaszövegek
 ________________________________________________________________________
 What's New in Version 1.1
 
