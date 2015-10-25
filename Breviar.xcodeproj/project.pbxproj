@@ -67,7 +67,7 @@
 		70EB053318B1282300F88662 /* myhpage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB051D18B1282300F88662 /* myhpage.cpp */; };
 		70EB053418B1282300F88662 /* mylog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB051F18B1282300F88662 /* mylog.cpp */; };
 		70EB053518B1282300F88662 /* mystring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB052118B1282300F88662 /* mystring.cpp */; };
-		721A0A0D7F6850632F9BD9CD /* Pods_Breviar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE179371A7903716D6F6929 /* Pods_Breviar.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		77F1568EA14BC9216343C7F8 /* libPods-Breviar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E93F958CA178A31362171401 /* libPods-Breviar.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -190,7 +190,7 @@
 		70EB052318B1282300F88662 /* mysysdef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mysysdef.h; path = "breviar-cgi/cgi-bin/source/mysysdef.h"; sourceTree = SOURCE_ROOT; };
 		70EB052418B1282300F88662 /* mysystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mysystem.h; path = "breviar-cgi/cgi-bin/source/mysystem.h"; sourceTree = SOURCE_ROOT; };
 		947B4D2730896CE8C8C50D2F /* Pods-Breviar.debug-hu.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.debug-hu.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.debug-hu.xcconfig"; sourceTree = "<group>"; };
-		DEE179371A7903716D6F6929 /* Pods_Breviar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Breviar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E93F958CA178A31362171401 /* libPods-Breviar.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Breviar.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECD00A6C92CEEC50DC236683 /* Pods-Breviar.debug-sk.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.debug-sk.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.debug-sk.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -205,7 +205,7 @@
 				7061B08C15FA8E1A00A83E0A /* UIKit.framework in Frameworks */,
 				7061B08E15FA8E1A00A83E0A /* Foundation.framework in Frameworks */,
 				7061B09015FA8E1A00A83E0A /* CoreGraphics.framework in Frameworks */,
-				721A0A0D7F6850632F9BD9CD /* Pods_Breviar.framework in Frameworks */,
+				77F1568EA14BC9216343C7F8 /* libPods-Breviar.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,7 +263,7 @@
 				7061B08B15FA8E1A00A83E0A /* UIKit.framework */,
 				7061B08D15FA8E1A00A83E0A /* Foundation.framework */,
 				7061B08F15FA8E1A00A83E0A /* CoreGraphics.framework */,
-				DEE179371A7903716D6F6929 /* Pods_Breviar.framework */,
+				E93F958CA178A31362171401 /* libPods-Breviar.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -472,7 +472,6 @@
 				7061B08415FA8E1A00A83E0A /* Frameworks */,
 				7061B08515FA8E1A00A83E0A /* Resources */,
 				7054368615FBABA5005854DC /* ShellScript */,
-				E02AB79E235858B40968E8B4 /* Embed Pods Frameworks */,
 				7229BD1696D9B934CF7C2601 /* Copy Pods Resources */,
 			);
 			buildRules = (
@@ -602,21 +601,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Breviar/Pods-Breviar-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E02AB79E235858B40968E8B4 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Breviar/Pods-Breviar-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -802,7 +786,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -848,7 +832,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -940,7 +924,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -1018,7 +1002,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -1095,7 +1079,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -1172,7 +1156,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -1243,7 +1227,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -1315,7 +1299,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;

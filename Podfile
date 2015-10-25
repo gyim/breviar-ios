@@ -2,7 +2,6 @@
 # platform :ios, '6.0'
 
 platform :ios, '7.0'
-use_frameworks!
 
 target 'Breviar' do
   pod 'RaptureXML', '~> 1.0.1'
