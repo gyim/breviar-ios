@@ -5,18 +5,21 @@ SK
 - možnosť meniť veľkosť písma priamo z modlitby
 - nastavenie rýchlosti čítania (hlasový výstup)
 - pridaná spodná lišta pre mariánske antifóny
+- možnosť zobraziť plné znenie responzórií po krátkych čítaniach v ranných chválach a vešperách
 - aktualizácie, vylepšenia a opravy v textoch a generovaní modlitieb
 
 CZ
 - možnost měnit velikost písma přímo z modlitby
 - nastavení rychlosti čtení (hlasový výstup)
 - přidaná spodní lišta pro mariánské antifony
+- možnost zobrazit plné znění krátkých zpěvů po krátkych čteních v ranních chválách a nešporách
 - aktualizace, vylepšení a opravy v textech a generování modliteb
 
 HU
 - a betűméret közvetlenül az ima képernyőről is állítható
 - beállítható a felolvasás sebessége
 - toolbar a Mária-antifóna képernyőn
+- option to display full text of short responsories after short readings in morning & evening prayers
 - frissített és javított imaszövegek
 ________________________________________________________________________
 What's New in Version 1.1
