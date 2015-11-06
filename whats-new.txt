@@ -19,7 +19,7 @@ HU
 - a betűméret közvetlenül az ima képernyőről is állítható
 - beállítható a felolvasás sebessége
 - toolbar a Mária-antifóna képernyőn
-- option to display full text of short responsories after short readings in morning & evening prayers
+- új opció: rövid válaszos énekek teljes szövegének mutatása (a reggeli/esti dicséret rövid olvasmánya után)
 - frissített és javított imaszövegek
 ________________________________________________________________________
 What's New in Version 1.1
