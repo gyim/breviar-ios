@@ -394,6 +394,8 @@
 					<string>0</string>
 					<key>options</key>
 					<array>
+						<string>22</string>
+						<string>23</string>
 						<string>0</string>
 						<string>1</string>
 						<string>2</string>
@@ -416,6 +418,8 @@
 						<string>19</string>
 						<string>20</string>
 						<string>21</string>
+						<string>24</string>
+						<string>25</string>
 					</array>
 				</dict>
 			</array>
