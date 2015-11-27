@@ -32,7 +32,8 @@
     [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     [UIToolbar appearance].tintColor = [UIColor whiteColor];
     
-    if ([[UIToolbar appearance] respondsToSelector:@selector(setTranslucent:)]) {
+    if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
+        // Setting translucency crashes iOS 7
         [[UIToolbar appearance] setTranslucent:NO];
     }
     
