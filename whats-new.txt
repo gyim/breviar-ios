@@ -1,4 +1,16 @@
 ________________________________________________________________________
+What's New in Version 1.2.1
+
+SK
+- oprava pádu na iOS 7
+
+CZ
+- oprava pádu na iOS 7
+
+HU
+- iOS 7 inkompatibilitás javítása
+
+________________________________________________________________________
 What's New in Version 1.2
 
 SK
