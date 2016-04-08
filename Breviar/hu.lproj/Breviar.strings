@@ -53,6 +53,7 @@
 // Prayer text settings
 "of0v"		= "Versek száma";
 "of0cit"	= "Liturgikus olvasmányok";
+"of0zft"	= "Zsoltárok kihagyott részeit";
 
 // Liturgic calendar settings
 "k" 		= "Liturgikus naptár";

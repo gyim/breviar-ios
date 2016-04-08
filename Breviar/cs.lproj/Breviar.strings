@@ -53,6 +53,7 @@
 // Prayer text settings
 "of0v"		= "Číslování veršů";
 "of0cit"	= "Liturgická čtení";
+"of0zft"	= "Vynechávky ze žalmů";
 
 // Liturgic calendar settings
 "k" 		= "Liturgický kalendář";
