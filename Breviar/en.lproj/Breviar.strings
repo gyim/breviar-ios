@@ -52,6 +52,7 @@
 
 // Prayer text settings
 "of0v"		= "Verse numbers";
+"of0r"		= "Bible references";
 "of0cit"	= "Liturgical readings";
 "of0zft"	= "Psalms omissions";
 

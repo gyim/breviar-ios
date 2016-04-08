@@ -52,6 +52,7 @@
 
 // Prayer text settings
 "of0v"		= "Číslování veršů";
+"of0r"		= "Biblické odkazy";
 "of0cit"	= "Liturgická čtení";
 "of0zft"	= "Vynechávky ze žalmů";
 

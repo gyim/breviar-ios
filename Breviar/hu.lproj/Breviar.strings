@@ -52,6 +52,7 @@
 
 // Prayer text settings
 "of0v"		= "Versek száma";
+"of0r"		= "Bibliai hivatkozások";
 "of0cit"	= "Liturgikus olvasmányok";
 "of0zft"	= "Zsoltárok kihagyott részeit";
 
