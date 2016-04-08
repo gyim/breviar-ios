@@ -334,6 +334,16 @@
 				</dict>
 				<dict>
 					<key>id</key>
+					<string>of0ff</string>
+					<key>type</key>
+					<string>bool</string>
+					<key>default</key>
+					<false/>
+					<key>visibility</key>
+					<string>j != &quot;hu&quot;</string>
+				</dict>
+				<dict>
+					<key>id</key>
 					<string>of0cit</string>
 					<key>type</key>
 					<string>bool</string>

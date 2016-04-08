@@ -53,6 +53,7 @@
 // Prayer text settings
 "of0v"		= "Číslovanie (čísla) veršov";
 "of0r"		= "Biblické odkazy";
+"of0ff"		= "Poznámky pod čiarou";
 "of0cit"	= "Liturgické čítania";
 "of0zft"	= "Vynechané pasáže zo žalmov";
 
