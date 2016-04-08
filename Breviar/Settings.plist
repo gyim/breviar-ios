@@ -197,6 +197,14 @@
 					<key>default</key>
 					<true/>
 				</dict>
+				<dict>
+					<key>id</key>
+					<string>of1zm</string>
+					<key>type</key>
+					<string>bool</string>
+					<key>default</key>
+					<true/>
+				</dict>
 			</array>
 		</dict>
 		<dict>
