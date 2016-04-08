@@ -218,15 +218,25 @@
 						<key>j == &quot;sk&quot;</key>
 						<string>sk</string>
 					</dict>
-					<key>visibility</key>
-					<string>j == &quot;cz&quot; || j == &quot;sk&quot;</string>
 					<key>options</key>
 					<array>
+						<dict>
+							<key>value</key>
+							<string>sk</string>
+							<key>visibility</key>
+							<string>j == &quot;sk&quot;</string>
+						</dict>
 						<dict>
 							<key>value</key>
 							<string>cz</string>
 							<key>visibility</key>
 							<string>j == &quot;cz&quot;</string>
+						</dict>
+						<dict>
+							<key>value</key>
+							<string>hu</string>
+							<key>visibility</key>
+							<string>j == &quot;hu&quot;</string>
 						</dict>
 						<dict>
 							<key>value</key>
@@ -242,9 +252,9 @@
 						</dict>
 						<dict>
 							<key>value</key>
-							<string>sk</string>
+							<string>czsdb</string>
 							<key>visibility</key>
-							<string>j == &quot;sk&quot;</string>
+							<string>j == &quot;cz&quot;</string>
 						</dict>
 						<dict>
 							<key>value</key>
@@ -275,6 +285,24 @@
 							<string>op</string>
 							<key>visibility</key>
 							<string>j == &quot;sk&quot;</string>
+						</dict>
+						<dict>
+							<key>value</key>
+							<string>ocd</string>
+							<key>visibility</key>
+							<string>j == &quot;sk&quot;</string>
+						</dict>
+						<dict>
+							<key>value</key>
+							<string>huofm</string>
+							<key>visibility</key>
+							<string>j == &quot;hu&quot;</string>
+						</dict>
+						<dict>
+							<key>value</key>
+							<string>husvd</string>
+							<key>visibility</key>
+							<string>j == &quot;hu&quot;</string>
 						</dict>
 					</array>
 				</dict>

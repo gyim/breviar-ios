@@ -54,22 +54,25 @@
 "of0cit"	= "Liturgical readings";
 
 // Liturgic calendar settings
-"k"         = "Liturgical calendar";
-"k.sk"      = "všeobecný [pre Slovensko]";
-"k.cz"      = "obecný [pro Čechy a Moravu]";
-"k.czop"    = "CZ OP"; // not used
-"k.cssr"    = "pre redemptoristov (CSsR)";
-"k.hu"      = "általános [Magyarország]";
-"k.svd"     = "pre verbistov (SVD)";
-"k.sj"      = "pre jezuitov (SJ)";
-"k.sdb"     = "pre saleziánsku rodinu (SDB, FMA, ASC)";
-"k.ofm"     = "pre františkánsku rodinu";
-"k.op"      = "pre dominikánov (OP)";
-"k.cm"      = "pre lazaristov (CM)";
-"k.opraem"  = "pro premonstráty (OPraem)";
-"k.ofmcap"  = "pro kapucíny (OFMCap)";
-"k.czcssr"  = "pro redemptoristy (CSsR)";
-"k.czsdb"   = "pro salesiánskou rodinu";
+"k" 		= "Liturgical calendar";
+"k.sk" 		= "všeobecný [pre Slovensko]";
+"k.cz" 		= "obecný [pro Čechy a Moravu]";
+"k.czop" 	= "dominikánský"; // not used
+"k.cssr" 	= "pre redemptoristov (CSsR)";
+"k.hu" 		= "általános [Magyarország]";
+"k.svd" 	= "pre verbistov (SVD)";
+"k.sj" 		= "pre jezuitov (SJ)";
+"k.sdb" 	= "pre saleziánsku rodinu (SDB, FMA, ASC)";
+"k.ofm" 	= "pre františkánsku rodinu";
+"k.op" 		= "pre dominikánov (OP)";
+"k.cm" 		= "pre lazaristov (CM)";
+"k.opraem" 	= "pro premonstráty (OPraem)";
+"k.ofmcap" 	= "pro kapucíny (OFMCap)";
+"k.czcssr" 	= "pro redemptoristy (CSsR)";
+"k.czsdb" 	= "pro salesiánskou rodinu";
+"k.huofm" 	= "ferences szentek és ünnepek zsolozsmája";
+"k.ocd" 	= "pre karmelitánov (OCD)";
+"k.husvd" 	= "verbitás zsolozsmája";
 
 "of0zjvne"	= "Celebrate Epiphany on Sunday, between January 2 and 8";
 "of0nanne"	= "Celebrate Ascension of Jesus on Sunday";
