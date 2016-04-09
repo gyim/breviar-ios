@@ -48,28 +48,35 @@
 "of1o"		= "Lord's Prayer (Our Father)";
 "of1t"		= "Te Deum hymn";
 "of1pr"		= "Full responsory texts";
+"of1zm"		= "Conclusion";
 
 // Prayer text settings
 "of0v"		= "Verse numbers";
+"of0r"		= "Bible references";
+"of0ff"		= "Footnotes";
 "of0cit"	= "Liturgical readings";
+"of0zft"	= "Psalms omissions";
 
 // Liturgic calendar settings
-"k"         = "Liturgical calendar";
-"k.sk"      = "všeobecný [pre Slovensko]";
-"k.cz"      = "obecný [pro Čechy a Moravu]";
-"k.czop"    = "CZ OP"; // not used
-"k.cssr"    = "pre redemptoristov (CSsR)";
-"k.hu"      = "általános [Magyarország]";
-"k.svd"     = "pre verbistov (SVD)";
-"k.sj"      = "pre jezuitov (SJ)";
-"k.sdb"     = "pre saleziánsku rodinu (SDB, FMA, ASC)";
-"k.ofm"     = "pre františkánsku rodinu";
-"k.op"      = "pre dominikánov (OP)";
-"k.cm"      = "pre lazaristov (CM)";
-"k.opraem"  = "pro premonstráty (OPraem)";
-"k.ofmcap"  = "pro kapucíny (OFMCap)";
-"k.czcssr"  = "pro redemptoristy (CSsR)";
-"k.czsdb"   = "pro salesiánskou rodinu";
+"k" 		= "Liturgical calendar";
+"k.sk" 		= "všeobecný [pre Slovensko]";
+"k.cz" 		= "obecný [pro Čechy a Moravu]";
+"k.czop" 	= "dominikánský"; // not used
+"k.cssr" 	= "pre redemptoristov (CSsR)";
+"k.hu" 		= "általános [Magyarország]";
+"k.svd" 	= "pre verbistov (SVD)";
+"k.sj" 		= "pre jezuitov (SJ)";
+"k.sdb" 	= "pre saleziánsku rodinu (SDB, FMA, ASC)";
+"k.ofm" 	= "pre františkánsku rodinu";
+"k.op" 		= "pre dominikánov (OP)";
+"k.cm" 		= "pre lazaristov (CM)";
+"k.opraem" 	= "pro premonstráty (OPraem)";
+"k.ofmcap" 	= "pro kapucíny (OFMCap)";
+"k.czcssr" 	= "pro redemptoristy (CSsR)";
+"k.czsdb" 	= "pro salesiánskou rodinu";
+"k.huofm" 	= "ferences szentek és ünnepek zsolozsmája";
+"k.ocd" 	= "pre bosých karmelitánov (OCD)";
+"k.husvd" 	= "verbitás zsolozsmája";
 
 "of0zjvne"	= "Celebrate Epiphany on Sunday, between January 2 and 8";
 "of0nanne"	= "Celebrate Ascension of Jesus on Sunday";
@@ -117,10 +124,12 @@
 
 // Alternatives
 "of2a"			= "Alternatives";
+"of5zkd" 		= "Conclusion when priest or diacon is present (morning & evening prayer)";
 "of5ps29"		= "Instead of psalm 122 use 129";
 "of5ps69"		= "Instead of psalm 126 use 129";
 "of5ps71"		= "Instead of psalm 127 use 131";
 "of5psps"		= "Psalmody for Ash Wednesday: from Wednesday, 4th week of Psalter / from Friday, 3rd week of Psalter";
+"of5ofps60" 	= "Officium Defunctorum, morning prayer: instead of psalm 146 use psalm 150"
 "of5hpc"		= "For readings: hymn I. [during the night and early in the morning] / hymn II. [during the day]";
 "of5hpred"		= "9h: Hymn I / II";
 "of5hna"		= "12h: Hymn I / II";

@@ -48,28 +48,35 @@
 "of1o"		= "Az Úr imádsága (Miatyánk)";
 "of1t"		= "Téged, Isten, dicsérünk... himnusz";
 "of1pr"		= "A válaszos énekek teljes szövege";
+"of1zm"		= "Befejezést";
 
 // Prayer text settings
 "of0v"		= "Versek száma";
+"of0r"		= "Bibliai hivatkozások";
+"of0ff"		= "Lábjegyzetek";
 "of0cit"	= "Liturgikus olvasmányok";
+"of0zft"	= "Zsoltárok kihagyott részeit";
 
 // Liturgic calendar settings
-"k"         = "Liturgikus naptár";
-"k.sk"      = "všeobecný [pre Slovensko]";
-"k.cz"      = "obecný [pro Čechy a Moravu]";
-"k.czop"    = "CZ OP"; // not used
-"k.cssr"    = "pre redemptoristov (CSsR)";
-"k.hu"      = "általános [Magyarország]";
-"k.svd"     = "pre verbistov (SVD)";
-"k.sj"      = "pre jezuitov (SJ)";
-"k.sdb"     = "pre saleziánsku rodinu (SDB, FMA, ASC)";
-"k.ofm"     = "pre františkánsku rodinu";
-"k.op"      = "pre dominikánov (OP)";
-"k.cm"      = "pre lazaristov (CM)";
-"k.opraem"  = "pro premonstráty (OPraem)";
-"k.ofmcap"  = "pro kapucíny (OFMCap)";
-"k.czcssr"  = "pro redemptoristy (CSsR)";
-"k.czsdb"   = "pro salesiánskou rodinu";
+"k" 		= "Liturgikus naptár";
+"k.sk" 		= "všeobecný [pre Slovensko]";
+"k.cz" 		= "obecný [pro Čechy a Moravu]";
+"k.czop" 	= "dominikánský"; // not used
+"k.cssr" 	= "pre redemptoristov (CSsR)";
+"k.hu" 		= "általános [Magyarország]";
+"k.svd" 	= "pre verbistov (SVD)";
+"k.sj" 		= "pre jezuitov (SJ)";
+"k.sdb" 	= "pre saleziánsku rodinu (SDB, FMA, ASC)";
+"k.ofm" 	= "pre františkánsku rodinu";
+"k.op" 		= "pre dominikánov (OP)";
+"k.cm" 		= "pre lazaristov (CM)";
+"k.opraem" 	= "pro premonstráty (OPraem)";
+"k.ofmcap" 	= "pro kapucíny (OFMCap)";
+"k.czcssr" 	= "pro redemptoristy (CSsR)";
+"k.czsdb" 	= "pro salesiánskou rodinu";
+"k.huofm" 	= "ferences szentek és ünnepek zsolozsmája";
+"k.ocd" 	= "pre bosých karmelitánov (OCD)";
+"k.husvd" 	= "verbitás zsolozsmája";
 
 "of0zjvne"	= "Urunk megjelenése (Vízkereszt) megünneplése vasárnap, január 2. és 8. között";
 "of0nanne"	= "Urunk mennybemenetelét vasárnap ünnepelni";
@@ -117,10 +124,12 @@
 
 // Alternatives
 "of2a"			= "Alternatívák mutatása";
+"of5zkd" 		= "Ezután, ha pap vagy diakónus vezeti (reggeli és esti dicséret)";
 "of5ps29"		= "A 121. helyett vehető a 128. zsoltár";
 "of5ps69"		= "A 125. helyett vehető a 128. zsoltár";
 "of5ps71"		= "A 126. helyett vehető a 130. zsoltár";
 "of5psps"		= "Hamvazószerdán vegye a zsoltárokat a 4. zsoltáros hét szerdájáról / a 3. zsoltáros hét péntekjéről";
+"of5ofps60" 	= "Közös zsolozsmája halottakért, reggeli dicséret: a 145. helyett vehető a 150. zsoltár"
 "of5hpc"		= "Olvasmányos imaóra (évközi idő): himnusz I. [Amikor az imaórát éjszaka vagy kora hajnalban mondják] / himnusz II. [Amikor az imaórát a nap nem reggeli órájában végzik]";
 "of5hpred"		= "Délelőtt: himnusz Most jöjj, Szentlélek, szállj közénk / himnusz Idők rendjét megtartva most";
 "of5hna"		= "Délben: himnusz Urunk, felséges Istenünk / himnusz Dicsérjük dallal az Urat";

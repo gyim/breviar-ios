@@ -48,28 +48,35 @@
 "of1o"		= "Modlitba Pána (Otčenáš)";
 "of1t"		= "Hymnus Te Deum";
 "of1pr"		= "Plné znenie responzórií";
+"of1zm"		= "Zakončenie";
 
 // Prayer text settings
 "of0v"		= "Číslovanie (čísla) veršov";
+"of0r"		= "Biblické odkazy";
+"of0ff"		= "Poznámky pod čiarou";
 "of0cit"	= "Liturgické čítania";
+"of0zft"	= "Vynechané pasáže zo žalmov";
 
 // Liturgic calendar settings
-"k"         = "Kalendár Liturgie hodín";
-"k.sk"      = "všeobecný [pre Slovensko]";
-"k.cz"      = "obecný [pro Čechy a Moravu]";
-"k.czop"    = "CZ OP"; // not used
-"k.cssr"    = "pre redemptoristov (CSsR)";
-"k.hu"      = "általános [Magyarország]";
-"k.svd"     = "pre verbistov (SVD)";
-"k.sj"      = "pre jezuitov (SJ)";
-"k.sdb"     = "pre saleziánsku rodinu (SDB, FMA, ASC)";
-"k.ofm"     = "pre františkánsku rodinu";
-"k.op"      = "pre dominikánov (OP)";
-"k.cm"      = "pre lazaristov (CM)";
-"k.opraem"  = "pro premonstráty (OPraem)";
-"k.ofmcap"  = "pro kapucíny (OFMCap)";
-"k.czcssr"  = "pro redemptoristy (CSsR)";
-"k.czsdb"   = "pro salesiánskou rodinu";
+"k" 		= "Kalendár Liturgie hodín";
+"k.sk" 		= "všeobecný [pre Slovensko]";
+"k.cz" 		= "obecný [pro Čechy a Moravu]";
+"k.czop" 	= "dominikánský"; // not used
+"k.cssr" 	= "pre redemptoristov (CSsR)";
+"k.hu" 		= "általános [Magyarország]";
+"k.svd" 	= "pre verbistov (SVD)";
+"k.sj" 		= "pre jezuitov (SJ)";
+"k.sdb" 	= "pre saleziánsku rodinu (SDB, FMA, ASC)";
+"k.ofm" 	= "pre františkánsku rodinu";
+"k.op" 		= "pre dominikánov (OP)";
+"k.cm" 		= "pre lazaristov (CM)";
+"k.opraem" 	= "pro premonstráty (OPraem)";
+"k.ofmcap" 	= "pro kapucíny (OFMCap)";
+"k.czcssr" 	= "pro redemptoristy (CSsR)";
+"k.czsdb" 	= "pro salesiánskou rodinu";
+"k.huofm" 	= "ferences szentek és ünnepek zsolozsmája";
+"k.ocd" 	= "pre bosých karmelitánov (OCD)";
+"k.husvd" 	= "verbitás zsolozsmája";
 
 "of0zjvne"	= "Zjavenie Pána sláviť v nedeľu medzi 2. a 8. januárom";
 "of0nanne"	= "Nanebovstúpenie Pána sláviť v nedeľu";
@@ -117,10 +124,12 @@
 
 // Alternatives
 "of2a"			= "Alternatívy";
+"of5zkd" 		= "Záver, ak predsedá kňaz alebo diakon (ranné chvály, vešpery)";
 "of5ps29"		= "Namiesto žalmu 122 brať žalm 129";
 "of5ps69"		= "Namiesto žalmu 126 brať žalm 129";
 "of5ps71"		= "Namiesto žalmu 127 brať žalm 131";
 "of5psps"		= "Psalmódia pre Popolcovú stredu: zo stredy 4. týždňa žaltára / z piatka 3. týždňa žaltára";
+"of5ofps60" 	= "Ofícium za zosnulých, ranné chvály: namiesto žalmu 146 brať žalm 150"
 "of5hpc"		= "Posvätné čítanie (cezročné obdobie): hymnus I. [Ak je posvätné čítanie v noci alebo včasráno] / hymnus II. [Ak je posvätné čítanie cez deň]";
 "of5hpred"		= "Modlitba predpoludním: hymnus Príď, Duchu Svätý / hymnus Deviata je už hodina";
 "of5hna"		= "Modlitba napoludnie: hymnus Mocný Vládca, verný Bože / hymnus Na nebi slnko vrcholí";
