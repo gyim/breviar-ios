@@ -10,6 +10,7 @@
 		5419B71D1A52A0E2008B5697 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5419B71C1A52A0E2008B5697 /* Images.xcassets */; };
 		542622761887AFC700CA7AC4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 542622751887AFC700CA7AC4 /* CoreData.framework */; };
 		542622781887AFD700CA7AC4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 542622771887AFD700CA7AC4 /* SystemConfiguration.framework */; };
+		542F0ECB1CE9DD39001F6BE9 /* kalendar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 542F0ECA1CE9DD39001F6BE9 /* kalendar.cpp */; };
 		544E694C187D285E0070DEC0 /* BRUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 544E694B187D285E0070DEC0 /* BRUI.m */; };
 		544E6951187D2A850070DEC0 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 544E6950187D2A850070DEC0 /* UIColor+HexColor.m */; };
 		54EA63801A1FA9E10027F889 /* utf8-utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54EA637F1A1FA9E10027F889 /* utf8-utils.cpp */; };
@@ -78,6 +79,7 @@
 		5419B71C1A52A0E2008B5697 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		542622751887AFC700CA7AC4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		542622771887AFD700CA7AC4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		542F0ECA1CE9DD39001F6BE9 /* kalendar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kalendar.cpp; path = "breviar-cgi/cgi-bin/source/kalendar.cpp"; sourceTree = SOURCE_ROOT; };
 		544E694A187D285E0070DEC0 /* BRUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRUI.h; sourceTree = "<group>"; };
 		544E694B187D285E0070DEC0 /* BRUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRUI.m; sourceTree = "<group>"; };
 		544E694F187D2A850070DEC0 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 				70EB050D18B1282300F88662 /* dbzaltar.cpp */,
 				70EB050E18B1282300F88662 /* dbzaltar.h */,
 				70EB050F18B1282300F88662 /* hodin.h */,
+				542F0ECA1CE9DD39001F6BE9 /* kalendar.cpp */,
 				70EB051118B1282300F88662 /* liturgia.cpp */,
 				70EB051218B1282300F88662 /* liturgia.h */,
 				70EB051418B1282300F88662 /* mybuild.h */,
@@ -647,6 +650,7 @@
 				70EB053018B1282300F88662 /* mydefs.cpp in Sources */,
 				70C962D916B5425200A399B9 /* BRBoolSettingsCell.m in Sources */,
 				707A64B7171AD8030065F98E /* BRStringOptionPickerViewController.m in Sources */,
+				542F0ECB1CE9DD39001F6BE9 /* kalendar.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
