@@ -52,7 +52,7 @@
     // Google Analytics
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:[NSString stringWithFormat:@"Prayer/%@", self.prayer.prayerName]];
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
