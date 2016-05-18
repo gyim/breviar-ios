@@ -38,7 +38,8 @@
     self.webView.alpha = 0;
     self.webView.delegate = self;
     self.webView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
-    
+    self.webView.dataDetectorTypes = UIDataDetectorTypeNone;
+
     [self.webView removeFromSuperview];
     [self.view insertSubview:self.webView atIndex:0];
     
