@@ -56,7 +56,7 @@
 		70E01273162F54BA00601CA3 /* BRDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E01272162F54BA00601CA3 /* BRDay.m */; };
 		70E01277162F553000601CA3 /* BRCelebration.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E01276162F553000601CA3 /* BRCelebration.m */; };
 		70E0127A162F56E500601CA3 /* BRCGIQuery.mm in Sources */ = {isa = PBXBuildFile; fileRef = 70E01279162F56E500601CA3 /* BRCGIQuery.mm */; };
-		70EB052518B1282300F88662 /* breviar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB050418B1282300F88662 /* breviar.cpp */; settings = {COMPILER_FLAGS = "-Wno-shorten-64-to-32 -Wno-tautological-compare"; }; };
+		70EB052518B1282300F88662 /* breviar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB050418B1282300F88662 /* breviar.cpp */; };
 		70EB052618B1282300F88662 /* cgiutils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB050618B1282300F88662 /* cgiutils.cpp */; };
 		70EB052A18B1282300F88662 /* citania.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB050B18B1282300F88662 /* citania.cpp */; };
 		70EB052B18B1282300F88662 /* dbzaltar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB050D18B1282300F88662 /* dbzaltar.cpp */; };
@@ -67,7 +67,7 @@
 		70EB053218B1282300F88662 /* mygetopt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB051B18B1282300F88662 /* mygetopt.cpp */; };
 		70EB053318B1282300F88662 /* myhpage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB051D18B1282300F88662 /* myhpage.cpp */; };
 		70EB053418B1282300F88662 /* mylog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB051F18B1282300F88662 /* mylog.cpp */; };
-		70EB053518B1282300F88662 /* mystring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB052118B1282300F88662 /* mystring.cpp */; settings = {COMPILER_FLAGS = "-Wno-shorten-64-to-32"; }; };
+		70EB053518B1282300F88662 /* mystring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB052118B1282300F88662 /* mystring.cpp */; };
 		77F1568EA14BC9216343C7F8 /* libPods-Breviar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E93F958CA178A31362171401 /* libPods-Breviar.a */; };
 /* End PBXBuildFile section */
 
