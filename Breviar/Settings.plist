@@ -308,6 +308,12 @@
 						</dict>
 						<dict>
 							<key>value</key>
+							<string>sj</string>
+							<key>visibility</key>
+							<string>j == &quot;sk&quot;</string>
+						</dict>
+						<dict>
+							<key>value</key>
 							<string>huofm</string>
 							<key>visibility</key>
 							<string>j == &quot;hu&quot;</string>
