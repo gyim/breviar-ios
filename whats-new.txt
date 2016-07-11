@@ -3,25 +3,25 @@ What's New in Version 1.3
 
 SK
 - Doplnenie partikulárneho kalendára slovenských rímskokatolíckych diecéz (od 1. júna 2016)
-- Kalendár a vlastné texty pre bosých karmelitánov (OCD)
-- Doplnené zakončenia do modlitieb
+- Kalendár a vlastné texty pre bosých karmelitánov (OCD), vincentínsku rodinu (CM) a jezuitov (SJ)
+- Doplnené zakončenia (záverečné požehnania) do modlitieb
 - Ofícium za zosnulých, ranné chvály, možnosť vziať žalm 146 alebo 150
 - Popolcová streda, ranné chvály, možnosť vziať psalmódiu zo stredy 4. týždňa žaltára resp. z piatka 3. týždňa žaltára
 - Možnosť zobraziť kompletné texty žalmov (vrátane vynechávok)
 - Aktualizácie, vylepšenia a opravy v textoch a generovaní modlitieb
 
 CZ
-- Kalendář a vlastní texty pro salesiánskou rodinu
+- Kalendář a vlastní texty pro salesiánskou rodinu (SDB)
 - Možnost zobrazit/skrýt plné znění krátkych zpěvů (v ranních chválách a nešporách)
 - Možnost použít hymny k volnému výběru
-- Doplněné zakončení do modliteb
+- Doplněné zakončení (závereční požehnání) do modliteb
 - Společné texty za zemřelé, ranní chvály, možnost vzít žalm 146 nebo 150
 - Popeleční středa, ranní chvály, žalmy ze středy 4. týdne žaltáře nebo z pátku 3. týdne žaltáře
 - Možnost zobrazit poznámky pod čarou ke druhým čtením (zatím pro mezidobí, advent a vánoce)
 - Aktualizace, vylepšení a opravy v textech a generování modliteb
 
 HU
-- Ferences és verbitás szentek és ünnepek zsolozsmája
+- Ferences és verbitás szentek és ünnepek zsolozsmája (OFM)
 - Hozzáadott befejezést imákat
 - Zsolozsma a meghaltakért: a reggeli dicséretben lehetséges a 146. vagy a 150. zsoltárt venni
 - Hamvazószerdán vegye a zsoltározást: a 4. zsoltáros hét szerdájáról vagy a 3. zsoltáros hét péntekjéről
