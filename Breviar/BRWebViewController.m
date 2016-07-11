@@ -175,11 +175,6 @@
     
     NSMutableString *extraStylesheets = [[NSMutableString alloc] init];
     
-    // Normal font instead of bold
-    if ([settings boolForOption:@"of0fn"]) {
-        [extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-normal-font.css'>"];
-    }
-    
     // Night mode
     if ([settings boolForOption:@"of2nr"]) {
         [extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-invert-colors.css'>"];
@@ -190,9 +185,25 @@
         self.webView.scrollView.indicatorStyle = UIScrollViewIndicatorStyleDefault;
     }
     
+    // Normal font instead of bold
+    if ([settings boolForOption:@"of0fn"]) {
+        [extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-normal-font.css'>"];
+    }
+    
     // Blind-friendly
     if ([settings boolForOption:@"of0bf"]) {
         [extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-blind-friendly.css'>"];
+    }
+    
+    // Background override (beamer/AMOLED)
+    if ([settings boolForOption:@"of2bo"]) {
+		if ([settings boolForOption:@"of2nr"]) {
+			[extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-background-ov-invert.css'>"];
+			// self.view.backgroundColor = [UIColor colorWithHex:0x191919]; // ToDo: please change this color or delete this line
+		} else {
+			[extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-background-override.css'>"];
+			// self.view.backgroundColor = [UIColor colorWithHex:0xFBFCD7]; // ToDo: please change this color or delete this line
+		}
     }
     
     // Padding for iPad

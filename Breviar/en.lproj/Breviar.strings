@@ -28,6 +28,7 @@
 "j.sk"		= "Slovenčina";
 
 "of2nr"		= "Night mode";
+"of2bo"		= "White/black background color (beamer/AMOLED display)";
 "of0fn"		= "Force normal font (no bold)";
 "of2tw"		= "Verse layout as in printed edition";
 "of0bf"		= "Blind-friendly version (only text to be read)";

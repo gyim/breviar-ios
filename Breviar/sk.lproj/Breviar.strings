@@ -28,6 +28,7 @@
 "j.sk"		= "Slovenčina";
 
 "of2nr"		= "Nočný režim (tmavé pozadie)";
+"of2bo"		= "Biela/čierna farba pozadia (projektor/AMOLED displej)";
 "of0fn"		= "Všade použiť normálne písmo (nie tučné)";
 "of2tw"		= "Zalamovať dlhé riadky ako v tlačenom vydaní (poetické časti)";
 "of0bf"		= "Pre nevidiacich/hlasový výstup (len text, ktorý sa číta)";

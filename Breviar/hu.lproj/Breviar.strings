@@ -28,6 +28,7 @@
 "j.sk"		= "Slovenčina";
 
 "of2nr"		= "Éjszakai mód";
+"of2bo"		= "Fehér/fekete háttér (vetítő/AMOLED kijelző)";
 "of0fn"		= "Normál betűtípus használata (félkövér helyett)";
 "of2tw"		= "Hosszú sorok tördelése, mint a nyomtatott kiadásban (versrészek)";
 "of0bf"		= "Gyengénlátóknak szóló változat (csak az imaszöveg felolvasása)";
