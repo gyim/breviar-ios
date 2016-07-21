@@ -21,10 +21,10 @@ CZ
 - Aktualizace, vylepšení a opravy v textech a generování modliteb
 
 HU
-- Ferences (OFM) és verbitás (SVD) szentek és ünnepek zsolozsmája
-- Hozzáadott befejezést imákat
-- Zsolozsma a meghaltakért: a reggeli dicséretben lehetséges a 146. vagy a 150. zsoltárt venni
-- Hamvazószerdán vegye a zsoltározást: a 4. zsoltáros hét szerdájáról vagy a 3. zsoltáros hét péntekjéről
+- Ferences (OFM) és verbita (SVD) szentek és ünnepek zsolozsmája
+- Új befejező imaórák
+- Zsolozsma a meghaltakért: a reggeli dicséretben lehetséges a 146. vagy a 150. zsoltárt választani
+- Hamvazószerdán vegye a zsoltárokat a 4. zsoltáros hét szerdájáról vagy a 3. zsoltáros hét péntekjéről
 - Frissített és javított imaszövegek
 ________________________________________________________________________
 What's New in Version 1.2.1
