@@ -11,6 +11,7 @@
 #import "BRPrayer.h"
 
 @interface BRPrayerViewController : BRWebViewController
+
 @property(strong) BRPrayer *prayer;
 @property(weak) IBOutlet UIBarButtonItem *speakItem;
 @property(weak) IBOutlet UIBarButtonItem *nightModeItem;

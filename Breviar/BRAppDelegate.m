@@ -10,6 +10,7 @@
 #import "BRDataSource.h"
 #import "BRPrayerListViewController.h"
 #import "BRSettings.h"
+#import <AVFoundation/AVFoundation.h>
 
 @implementation BRAppDelegate
 
@@ -44,6 +45,10 @@
     // Initialize WebKit
     UIWebView *webView = [[UIWebView alloc] init];
     [webView loadHTMLString:@"(empty)" baseURL:nil];
+    
+    // Initialize AVSession
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     
     return YES;
 }

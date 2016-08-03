@@ -14,6 +14,7 @@
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
 #import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface BRPrayerViewController ()
 
@@ -53,6 +54,15 @@
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:[NSString stringWithFormat:@"Prayer/%@", self.prayer.prayerName]];
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    
+    // Start audio session
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setActive:YES error:nil];
+    
+    MPRemoteCommandCenter *commandCenter = [MPRemoteCommandCenter sharedCommandCenter];
+    [commandCenter.playCommand addTarget:self action:@selector(playSpeaker:)];
+    [commandCenter.pauseCommand addTarget:self action:@selector(pauseSpeaker:)];
+    [commandCenter.togglePlayPauseCommand addTarget:self action:@selector(toggleSpeaker:)];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -65,6 +75,20 @@
     if (self.speechSynthesizer.speaking) {
         [self.speechSynthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
     }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    // Stop audio session
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setActive:NO error:nil];
+    
+    MPRemoteCommandCenter *commandCenter = [MPRemoteCommandCenter sharedCommandCenter];
+    [commandCenter.playCommand removeTarget:self];
+    [commandCenter.pauseCommand removeTarget:self];
+    [commandCenter.togglePlayPauseCommand removeTarget:self];
+
+    [super viewDidDisappear:animated];
 }
 
 - (void)setHtmlBody:(NSString *)body forPrayer:(NSString *)prayerId
@@ -86,20 +110,11 @@
     self.nightModeItem.image = nightMode ? [UIImage imageNamed:@"night_mode_on"] : [UIImage imageNamed:@"night_mode_off"];
 }
 
-- (IBAction)toggleSpeaker:(id)sender
+- (IBAction)playSpeaker:(id)sender
 {
     if (self.speechSynthesizer.paused) {
         [self.speechSynthesizer continueSpeaking];
-        
-        self.speakItem.image = [UIImage imageNamed:@"speaker_on"];
     }
-    
-    else if (self.speechSynthesizer.speaking) {
-        [self.speechSynthesizer pauseSpeakingAtBoundary:AVSpeechBoundaryWord];
-
-        self.speakItem.image = [UIImage imageNamed:@"speaker_off"];
-    }
-    
     else {
         self.speakItem.enabled = NO;
         self.speakItem.image = [UIImage imageNamed:@"speaker_on"];
@@ -109,7 +124,7 @@
             // We're setting the blind-friendly option to YES because updateWebViewContent adds CSS tags based on this global singleton; an ugly hack, for which I appologize :) (Oto Kominak)
             [[BRSettings instance] setBool:YES forOption:@"of0bf"];
         }
-
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             NSString *body = self.prayer.bodyForSpeechSynthesis;
             
@@ -117,7 +132,7 @@
                 self.speechSynthesizer = [[AVSpeechSynthesizer alloc] init];
                 [self setHtmlBody:body forPrayer:self.prayer.queryId];
                 [self updateWebViewContent];
-
+                
                 if (oldValue == NO) {
                     // Setting it back - and the hack's done.
                     [[BRSettings instance] setBool:NO forOption:@"of0bf"];
@@ -125,6 +140,25 @@
             });
         });
     }
+    
+    self.speakItem.image = [UIImage imageNamed:@"speaker_on"];
+}
+
+- (IBAction)pauseSpeaker:(id)sender
+{
+    [self.speechSynthesizer pauseSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+    self.speakItem.image = [UIImage imageNamed:@"speaker_off"];
+}
+
+- (IBAction)toggleSpeaker:(id)sender
+{
+    if (self.speechSynthesizer.speaking) {
+        [self pauseSpeaker:sender];
+    }
+    else {
+        [self playSpeaker:sender];
+    }
+    
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView

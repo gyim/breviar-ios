@@ -34,6 +34,7 @@
 		7061B0B115FAA18C00A83E0A /* BRPrayerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0B015FAA18C00A83E0A /* BRPrayerListViewController.m */; };
 		7061B0B515FAA34100A83E0A /* BRPrayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0B415FAA34100A83E0A /* BRPrayerViewController.m */; };
 		7061B0B815FAA3C500A83E0A /* BRPrayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0B715FAA3C500A83E0A /* BRPrayer.m */; };
+		7071D9EF1D528DFD00E572BA /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7071D9EE1D528DFD00E572BA /* MediaPlayer.framework */; };
 		707A6499171A1C180065F98E /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 707A6497171A1C180065F98E /* MainStoryboard_iPad.storyboard */; };
 		707A64A5171A1F650065F98E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64A1171A1F650065F98E /* InfoPlist.strings */; };
 		707A64A6171A1F650065F98E /* Breviar.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64A3171A1F650065F98E /* Breviar.strings */; };
@@ -124,6 +125,7 @@
 		7061B0B415FAA34100A83E0A /* BRPrayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRPrayerViewController.m; sourceTree = "<group>"; };
 		7061B0B615FAA3C500A83E0A /* BRPrayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRPrayer.h; sourceTree = "<group>"; };
 		7061B0B715FAA3C500A83E0A /* BRPrayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRPrayer.m; sourceTree = "<group>"; };
+		7071D9EE1D528DFD00E572BA /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		707A6495171A1B9E0065F98E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		707A6498171A1C180065F98E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		707A649F171A1E850065F98E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7071D9EF1D528DFD00E572BA /* MediaPlayer.framework in Frameworks */,
 				54EA63851A1FD8C40027F889 /* AVFoundation.framework in Frameworks */,
 				542622781887AFD700CA7AC4 /* SystemConfiguration.framework in Frameworks */,
 				542622761887AFC700CA7AC4 /* CoreData.framework in Frameworks */,
@@ -259,6 +262,7 @@
 		7061B08A15FA8E1A00A83E0A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7071D9EE1D528DFD00E572BA /* MediaPlayer.framework */,
 				54EA63841A1FD8C40027F889 /* AVFoundation.framework */,
 				542622771887AFD700CA7AC4 /* SystemConfiguration.framework */,
 				542622751887AFC700CA7AC4 /* CoreData.framework */,
