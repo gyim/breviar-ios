@@ -69,14 +69,13 @@
 		70EB053318B1282300F88662 /* myhpage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB051D18B1282300F88662 /* myhpage.cpp */; };
 		70EB053418B1282300F88662 /* mylog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB051F18B1282300F88662 /* mylog.cpp */; };
 		70EB053518B1282300F88662 /* mystring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB052118B1282300F88662 /* mystring.cpp */; };
-		77F1568EA14BC9216343C7F8 /* libPods-Breviar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E93F958CA178A31362171401 /* libPods-Breviar.a */; };
+		B603C2ACA2EBC82B58116F9B /* libPods-Breviar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DE9EC395D4EB1243856A95B /* libPods-Breviar.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2E2C545C2D8B98F4D35AABED /* Pods-Breviar.release-hu.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.release-hu.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.release-hu.xcconfig"; sourceTree = "<group>"; };
-		2FDE224D37CAFDBC37B6FEB1 /* Pods-Breviar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.debug.xcconfig"; sourceTree = "<group>"; };
-		351F52DFADB17FCA51F07781 /* Pods-Breviar.release-sk.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.release-sk.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.release-sk.xcconfig"; sourceTree = "<group>"; };
-		41828A822CBA42EAA93024E5 /* Pods-Breviar.debug-cs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.debug-cs.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.debug-cs.xcconfig"; sourceTree = "<group>"; };
+		020764DCBC572CA03F2E9BB6 /* Pods-Breviar.release-sk.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.release-sk.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.release-sk.xcconfig"; sourceTree = "<group>"; };
+		037182994C7C0B2BF52D40F1 /* Pods-Breviar.release-hu.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.release-hu.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.release-hu.xcconfig"; sourceTree = "<group>"; };
+		2DE9EC395D4EB1243856A95B /* libPods-Breviar.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Breviar.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5419B71C1A52A0E2008B5697 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		542622751887AFC700CA7AC4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		542622771887AFD700CA7AC4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -88,7 +87,8 @@
 		54EA637F1A1FA9E10027F889 /* utf8-utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "utf8-utils.cpp"; path = "breviar-cgi/cgi-bin/source/utf8-utils.cpp"; sourceTree = SOURCE_ROOT; };
 		54EA63831A1FA9EA0027F889 /* utf8-utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "utf8-utils.h"; path = "breviar-cgi/cgi-bin/source/utf8-utils.h"; sourceTree = SOURCE_ROOT; };
 		54EA63841A1FD8C40027F889 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		5510CB766FA0A4BAC5CC3011 /* Pods-Breviar.release-cs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.release-cs.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.release-cs.xcconfig"; sourceTree = "<group>"; };
+		591F4510AA89C85D2BDC670A /* Pods-Breviar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.release.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.release.xcconfig"; sourceTree = "<group>"; };
+		5C36009082A22B4B54350DAD /* Pods-Breviar.debug-cs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.debug-cs.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.debug-cs.xcconfig"; sourceTree = "<group>"; };
 		703200E7180F2E9000675F09 /* breviar-ios.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "breviar-ios.css"; sourceTree = "<group>"; };
 		7034597B15FCE84D000A1711 /* BRFontHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRFontHelper.h; sourceTree = "<group>"; };
 		7034597C15FCE84D000A1711 /* BRFontHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRFontHelper.m; sourceTree = "<group>"; };
@@ -145,7 +145,6 @@
 		709BE1E6185673B100B6190E /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		70AAAA4C15FBFBE4008D314D /* BRSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettings.h; sourceTree = "<group>"; };
 		70AAAA4D15FBFBE4008D314D /* BRSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRSettings.m; sourceTree = "<group>"; };
-		70C34E87B20A183583891D86 /* Pods-Breviar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.release.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.release.xcconfig"; sourceTree = "<group>"; };
 		70C5844A1A1C139D009732D7 /* breviar-ios.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "breviar-ios.js"; sourceTree = "<group>"; };
 		70C962BE16A1DFC800A399B9 /* BRCelebrationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCelebrationCell.h; sourceTree = "<group>"; };
 		70C962BF16A1DFC800A399B9 /* BRCelebrationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRCelebrationCell.m; sourceTree = "<group>"; };
@@ -193,9 +192,10 @@
 		70EB052218B1282300F88662 /* mystring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mystring.h; path = "breviar-cgi/cgi-bin/source/mystring.h"; sourceTree = SOURCE_ROOT; };
 		70EB052318B1282300F88662 /* mysysdef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mysysdef.h; path = "breviar-cgi/cgi-bin/source/mysysdef.h"; sourceTree = SOURCE_ROOT; };
 		70EB052418B1282300F88662 /* mysystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mysystem.h; path = "breviar-cgi/cgi-bin/source/mysystem.h"; sourceTree = SOURCE_ROOT; };
-		947B4D2730896CE8C8C50D2F /* Pods-Breviar.debug-hu.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.debug-hu.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.debug-hu.xcconfig"; sourceTree = "<group>"; };
-		E93F958CA178A31362171401 /* libPods-Breviar.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Breviar.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		ECD00A6C92CEEC50DC236683 /* Pods-Breviar.debug-sk.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.debug-sk.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.debug-sk.xcconfig"; sourceTree = "<group>"; };
+		ACBEEEA96702192BA34D0161 /* Pods-Breviar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.debug.xcconfig"; sourceTree = "<group>"; };
+		C9DF9C59A3E9199AD535BC2E /* Pods-Breviar.release-cs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.release-cs.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.release-cs.xcconfig"; sourceTree = "<group>"; };
+		E180EC2FB02637491DFCA3CE /* Pods-Breviar.debug-hu.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.debug-hu.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.debug-hu.xcconfig"; sourceTree = "<group>"; };
+		E18236F11A2D22A84EC0C565 /* Pods-Breviar.debug-sk.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.debug-sk.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.debug-sk.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,24 +210,24 @@
 				7061B08C15FA8E1A00A83E0A /* UIKit.framework in Frameworks */,
 				7061B08E15FA8E1A00A83E0A /* Foundation.framework in Frameworks */,
 				7061B09015FA8E1A00A83E0A /* CoreGraphics.framework in Frameworks */,
-				77F1568EA14BC9216343C7F8 /* libPods-Breviar.a in Frameworks */,
+				B603C2ACA2EBC82B58116F9B /* libPods-Breviar.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		52058FAA25FB56C6DB168844 /* Pods */ = {
+		028FF38A60B809546A43D7DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2FDE224D37CAFDBC37B6FEB1 /* Pods-Breviar.debug.xcconfig */,
-				41828A822CBA42EAA93024E5 /* Pods-Breviar.debug-cs.xcconfig */,
-				ECD00A6C92CEEC50DC236683 /* Pods-Breviar.debug-sk.xcconfig */,
-				947B4D2730896CE8C8C50D2F /* Pods-Breviar.debug-hu.xcconfig */,
-				70C34E87B20A183583891D86 /* Pods-Breviar.release.xcconfig */,
-				5510CB766FA0A4BAC5CC3011 /* Pods-Breviar.release-cs.xcconfig */,
-				351F52DFADB17FCA51F07781 /* Pods-Breviar.release-sk.xcconfig */,
-				2E2C545C2D8B98F4D35AABED /* Pods-Breviar.release-hu.xcconfig */,
+				ACBEEEA96702192BA34D0161 /* Pods-Breviar.debug.xcconfig */,
+				5C36009082A22B4B54350DAD /* Pods-Breviar.debug-cs.xcconfig */,
+				E18236F11A2D22A84EC0C565 /* Pods-Breviar.debug-sk.xcconfig */,
+				E180EC2FB02637491DFCA3CE /* Pods-Breviar.debug-hu.xcconfig */,
+				591F4510AA89C85D2BDC670A /* Pods-Breviar.release.xcconfig */,
+				C9DF9C59A3E9199AD535BC2E /* Pods-Breviar.release-cs.xcconfig */,
+				020764DCBC572CA03F2E9BB6 /* Pods-Breviar.release-sk.xcconfig */,
+				037182994C7C0B2BF52D40F1 /* Pods-Breviar.release-hu.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -247,7 +247,7 @@
 				7061B09115FA8E1A00A83E0A /* Breviar */,
 				7061B08A15FA8E1A00A83E0A /* Frameworks */,
 				7061B08815FA8E1A00A83E0A /* Products */,
-				52058FAA25FB56C6DB168844 /* Pods */,
+				028FF38A60B809546A43D7DB /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -269,7 +269,7 @@
 				7061B08B15FA8E1A00A83E0A /* UIKit.framework */,
 				7061B08D15FA8E1A00A83E0A /* Foundation.framework */,
 				7061B08F15FA8E1A00A83E0A /* CoreGraphics.framework */,
-				E93F958CA178A31362171401 /* libPods-Breviar.a */,
+				2DE9EC395D4EB1243856A95B /* libPods-Breviar.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -412,6 +412,7 @@
 				54EA63831A1FA9EA0027F889 /* utf8-utils.h */,
 			);
 			name = cgi;
+			path = "../breviar-cgi/source";
 			sourceTree = "<group>";
 		};
 		707A6496171A1BCD0065F98E /* Base.lproj */ = {
@@ -473,13 +474,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7061B0A815FA8E1A00A83E0A /* Build configuration list for PBXNativeTarget "Breviar" */;
 			buildPhases = (
-				6D326AF1E6D95BD0C936938A /* Check Pods Manifest.lock */,
+				C10874AD5A6FBE682CF65A09 /* [CP] Check Pods Manifest.lock */,
 				709994D3188F2ACC00729A21 /* ShellScript */,
 				7061B08315FA8E1A00A83E0A /* Sources */,
 				7061B08415FA8E1A00A83E0A /* Frameworks */,
 				7061B08515FA8E1A00A83E0A /* Resources */,
 				7054368615FBABA5005854DC /* ShellScript */,
-				7229BD1696D9B934CF7C2601 /* Copy Pods Resources */,
+				720E2919EE5EA57C9B9116D8 /* [CP] Embed Pods Frameworks */,
+				ACD59C39424A310E6970D1AC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -553,21 +555,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6D326AF1E6D95BD0C936938A /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 		7054368615FBABA5005854DC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -595,19 +582,52 @@
 			shellPath = /bin/sh;
 			shellScript = ./buildno.sh;
 		};
-		7229BD1696D9B934CF7C2601 /* Copy Pods Resources */ = {
+		720E2919EE5EA57C9B9116D8 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Breviar/Pods-Breviar-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ACD59C39424A310E6970D1AC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Breviar/Pods-Breviar-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C10874AD5A6FBE682CF65A09 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Breviar-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -853,7 +873,7 @@
 		};
 		7061B0A915FA8E1A00A83E0A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2FDE224D37CAFDBC37B6FEB1 /* Pods-Breviar.debug.xcconfig */;
+			baseConfigurationReference = ACBEEEA96702192BA34D0161 /* Pods-Breviar.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -873,7 +893,7 @@
 		};
 		7061B0AA15FA8E1A00A83E0A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 70C34E87B20A183583891D86 /* Pods-Breviar.release.xcconfig */;
+			baseConfigurationReference = 591F4510AA89C85D2BDC670A /* Pods-Breviar.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -945,7 +965,7 @@
 		};
 		706C1F1718A1A56900434CEF /* Release-hu */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2E2C545C2D8B98F4D35AABED /* Pods-Breviar.release-hu.xcconfig */;
+			baseConfigurationReference = 037182994C7C0B2BF52D40F1 /* Pods-Breviar.release-hu.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1022,7 +1042,7 @@
 		};
 		706C1F1918A82EF100434CEF /* Debug-hu */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 947B4D2730896CE8C8C50D2F /* Pods-Breviar.debug-hu.xcconfig */;
+			baseConfigurationReference = E180EC2FB02637491DFCA3CE /* Pods-Breviar.debug-hu.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1099,7 +1119,7 @@
 		};
 		70CD8BF518A83CED00A22590 /* Debug-sk */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ECD00A6C92CEEC50DC236683 /* Pods-Breviar.debug-sk.xcconfig */;
+			baseConfigurationReference = E18236F11A2D22A84EC0C565 /* Pods-Breviar.debug-sk.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1176,7 +1196,7 @@
 		};
 		70CD8BF718A83CF400A22590 /* Debug-cs */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 41828A822CBA42EAA93024E5 /* Pods-Breviar.debug-cs.xcconfig */;
+			baseConfigurationReference = 5C36009082A22B4B54350DAD /* Pods-Breviar.debug-cs.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1248,7 +1268,7 @@
 		};
 		70CD8BF918A83D1100A22590 /* Release-sk */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 351F52DFADB17FCA51F07781 /* Pods-Breviar.release-sk.xcconfig */;
+			baseConfigurationReference = 020764DCBC572CA03F2E9BB6 /* Pods-Breviar.release-sk.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1320,7 +1340,7 @@
 		};
 		70CD8BFB18A83D1800A22590 /* Release-cs */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5510CB766FA0A4BAC5CC3011 /* Pods-Breviar.release-cs.xcconfig */;
+			baseConfigurationReference = C9DF9C59A3E9199AD535BC2E /* Pods-Breviar.release-cs.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
