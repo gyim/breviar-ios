@@ -27,8 +27,9 @@
 - (BOOL)boolForOption:(NSString *)optionId;
 - (void)setBool:(BOOL)value forOption:(NSString *)optionId;
 
-- (UIFont *)fontForOption:(NSString *)optionId;
-- (void)setFont:(UIFont *)value forOption:(NSString *)optionId;
+- (NSString *)fontFamilyForOption:(NSString *)optionId;
+- (NSInteger)fontSizeForOption:(NSString *)optionId;
+- (void)setFontFamily:(NSString *)familyName size:(NSInteger)size forOption:(NSString *)optionId;
 
 - (NSString *)stringForOption:(NSString *)optionId;
 - (void)setString:(NSString *)value forOption:(NSString *)optionId;

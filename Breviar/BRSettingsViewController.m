@@ -150,9 +150,17 @@
         BRFontSettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FontCell"];
 
         // Update font cell
-        UIFont *font = [settings fontForOption:optionId];
-        NSString *fontName = [[BRFontHelper instance] fontNameForFamily:font.fontName];
-        NSInteger fontSize = font.pointSize;
+        NSString *fontFamily = [settings fontFamilyForOption:optionId];
+        NSString *fontName = [[BRFontHelper instance] fontNameForFamily:fontFamily];
+        NSInteger fontSize = [settings fontSizeForOption:optionId];
+        
+        UIFont *font;
+        if ([fontFamily isEqualToString:@"-apple-system"]) {
+            font = [UIFont systemFontOfSize:fontSize];
+        }
+        else {
+            font = [UIFont fontWithName:fontFamily size:fontSize];
+        }
         
         cell.optionId = optionId;
         cell.fontLabel.font = font;
@@ -301,16 +309,18 @@
     }
 }
 
-- (void)fontPicker:(BRFontPickerViewController *)fontPicker didPickFont:(UIFont *)font
+- (void)fontPicker:(BRFontPickerViewController *)fontPicker didPickFontFamily:(NSString *)familyName size:(NSInteger)size
 {
-    [[BRSettings instance] setFont:font forOption:self.currentOptionId];
+    [[BRSettings instance] setFontFamily:familyName size:size forOption:self.currentOptionId];
     [self.tableView reloadData];
+    
+    NSString *fontDescription = [NSString stringWithFormat:@"%@, %ldpt", familyName, (long)size];
 
     // Track changes in GA
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Settings"
                                                           action:@"SetFont"
-                                                           label:[font description]
+                                                           label:fontDescription
                                                            value:nil] build]];
 }
 
