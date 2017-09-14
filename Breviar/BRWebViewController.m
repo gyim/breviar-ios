@@ -130,9 +130,14 @@
 
 - (void)setContentInsetsWithNavigationBarVisible:(BOOL)navigationBarVisible toolbarVisible:(BOOL)toolbarVisible
 {
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(navigationBarVisible ? 64 : 0, 0, toolbarVisible ? 44 : 0, 0);
-    self.webView.scrollView.contentInset = contentInsets;
-    self.webView.scrollView.scrollIndicatorInsets = contentInsets;
+    if (@available(iOS 11, *)) {
+        // No need to adjust insets in iOS 11+
+    }
+    else {
+        UIEdgeInsets contentInsets = UIEdgeInsetsMake(navigationBarVisible ? 64 : 0, 0, toolbarVisible ? 44 : 0, 0);
+        self.webView.scrollView.contentInset = contentInsets;
+        self.webView.scrollView.scrollIndicatorInsets = contentInsets;
+    }
 }
 
 - (BOOL)hadRecentLinkClick
