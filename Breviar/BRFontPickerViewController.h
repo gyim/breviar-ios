@@ -12,7 +12,7 @@
 @class BRFontPickerViewController;
 
 @protocol BRFontPickerDelegate <NSObject>
-- (void)fontPicker:(BRFontPickerViewController *)fontPicker didPickFont:(UIFont *)font;
+- (void)fontPicker:(BRFontPickerViewController *)fontPicker didPickFontFamily:(NSString *)familyName size:(NSInteger)size;
 @end
 
 @interface BRFontPickerViewController : BRViewController <UIPickerViewDataSource, UIPickerViewDelegate>

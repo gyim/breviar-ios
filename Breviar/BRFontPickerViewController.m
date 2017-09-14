@@ -114,8 +114,7 @@ static CGFloat componentSizes[] = {
         self.fontSize = [[fontHelper.availableSizes objectAtIndex:row] intValue];
     }
     
-    UIFont *font = [UIFont fontWithName:self.fontFamily size:self.fontSize];
-    [self.delegate fontPicker:self didPickFont:font];
+    [self.delegate fontPicker:self didPickFontFamily:self.fontFamily size:self.fontSize];
     [self updatePreview];
 }
 
@@ -126,7 +125,7 @@ static CGFloat componentSizes[] = {
     NSString *html = [NSString stringWithFormat:
                       @"<!DOCTYPE html>\n"
                       "<html><body>"
-                      "<body style='font: %ldpx %@; -webkit-text-size-adjust: none;'>"
+                      "<body style='font-size: %ldpx; font-family: %@; -webkit-text-size-adjust: none;'>"
                       "<p>Te Deum laudamus:<br>te Dominum confitemur.<br>Te aeternum Patrem<br>omnis terra veneratur.<br>Tibi omnes Angeli; tibi caeli et universae Potestates;<br>Tibi Cherubim et Seraphim<br>incessabili voce proclamant:<br>Sanctus, Sanctus, Sanctus, Dominus Deus Sabaoth.</p>"
                       "</body></html>",
                       (long)self.fontSize, self.fontFamily];

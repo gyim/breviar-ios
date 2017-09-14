@@ -151,17 +151,20 @@ static BRSettings *_instance;
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (UIFont *)fontForOption:(NSString *)optionId {
+- (NSString *)fontFamilyForOption:(NSString *)optionId {
     NSDictionary *fontData = [[NSUserDefaults standardUserDefaults] dictionaryForKey:optionId];
-    UIFont *font = [UIFont fontWithName:[fontData objectForKey:@"family"]
-                                   size:[[fontData objectForKey:@"size"] floatValue]];
-    return font;
+    return [fontData objectForKey:@"family"];
 }
 
-- (void)setFont:(UIFont *)value forOption:(NSString *)optionId {
+- (NSInteger)fontSizeForOption:(NSString *)optionId {
+    NSDictionary *fontData = [[NSUserDefaults standardUserDefaults] dictionaryForKey:optionId];
+    return [[fontData objectForKey:@"size"] integerValue];
+}
+
+- (void)setFontFamily:(NSString *)familyName size:(NSInteger)size forOption:(NSString *)optionId {
     NSDictionary *fontData = @{
-        @"family": value.fontName,
-        @"size":[NSNumber numberWithInteger:value.pointSize]
+        @"family": familyName,
+        @"size": @(size)
     };
     [[NSUserDefaults standardUserDefaults] setObject:fontData forKey:optionId];
     [[NSUserDefaults standardUserDefaults] synchronize];
