@@ -1,4 +1,30 @@
 ________________________________________________________________________
+What's New in Version 1.4
+
+SK
+- Poznámky v texte a pod čiarou pre druhé čítania (posvätné čítanie).
+- Sobotná spomienka Panny Márie sa neponúka pri kolízii s iným mariánskym sviatkom.
+- Názvy liturgických období uvádzané s veľkým začiatočným písmenom.
+- Opravy v liturgickom kalendári a textoch (všeobecné, CSsR, OCD, OFM).
+- Nočný režim upraví aj farbu lišty.
+- Podpora pre iOS 11.
+- Aktualizácie, vylepšenia a opravy v textoch a generovaní modlitieb.
+
+CZ
+- Poznámky pod čarou ke druhým čtením (modlitba se čtením).
+- Sobotní památka Panny Marie se nenabízí při střetu s jiným mariánským svátkem.
+- Kalendář a vlastní texty pro františkány (OFM).
+- Opravy v liturgickém kalendáři a textech (všeobecné, OFMCap).
+- Noční režim upraví aj barvu lišty.
+- Podpora pro iOS 11.
+- Aktualizace, vylepšení a opravy v textech a generování modliteb.
+
+HU
+- Szűz Mária szombati emléknapja nincs a kínálatban más Szűz Mária emléknapkor ill. ünnepnapkor.
+- Az éjszakai üzemmód megváltoztatja a szalag színét.
+- Az iOS 11 támogatása.
+- Frissítések, javítások és javítások a szövegekben és az imádság generálásában.
+________________________________________________________________________
 What's New in Version 1.3
 
 SK
