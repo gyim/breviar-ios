@@ -20,10 +20,10 @@ CZ
 - Aktualizace, vylepšení a opravy v textech a generování modliteb.
 
 HU
-- Szűz Mária szombati emléknapja nincs a kínálatban más Szűz Mária emléknapkor ill. ünnepnapkor.
-- Az éjszakai üzemmód megváltoztatja a szalag színét.
-- Az iOS 11 támogatása.
-- Frissítések, javítások és javítások a szövegekben és az imádság generálásában.
+- Sötét fejléc éjszakai üzemmódban.
+- Szűz Mária szombati emléknapja opció eltüntetése más Szűz Mária emléknapkor ill. ünnepnapkor.
+- iOS 11 támogatás.
+- Frissítések és javítások az imaszövegek generálásában.
 ________________________________________________________________________
 What's New in Version 1.3
 
