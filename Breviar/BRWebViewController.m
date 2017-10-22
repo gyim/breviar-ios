@@ -10,6 +10,7 @@
 #import "BRSettings.h"
 #import "BRCGIQuery.h"
 #import "BRUtil.h"
+#import <sys/time.h>
 
 @interface BRWebViewController ()
 
