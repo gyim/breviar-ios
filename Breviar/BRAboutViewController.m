@@ -37,28 +37,28 @@
     // We want to insert full links including protocol, so we first need to remove unnecessary protocols from the templated HTML files
     html = [html stringByReplacingOccurrencesOfString:@"href=\"http://" withString:@"href=\""];
     
-    // Replace all placeholders like <!--{KEY}--> with proper values
+    // Replace all placeholders like [KEY] with proper values
     NSString *version = [NSString stringWithFormat:@"%@ (%@)", [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"], BUILD_NUMBER];
     NSString *appName = [NSString stringWithFormat:@"%@ (iOS)", [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"]];
     NSDictionary *sites = @{
         @"sk": @"http://breviar.sk",
-        @"cz": @"http://www.ebreviar.cz/",
+        @"cz": @"http://breviar.cz",
         @"hu": @"http://breviar.sk/hu",
     };
 
     NSDictionary *replacements = @{
         @"VERSION": version,
-        @"PROJECT_URL": sites[lang],
-        @"E_MAIL": @"apple@breviar.sk",
-        @"APP_NAME": appName,
-        @"PROJECT_SOURCE_STORAGE": @"GitHub",
-        @"PROJECT_SOURCE_URL": @"https://github.com/gyim/breviar-ios",
-        @"SPECIAL_CREDITS": @"",
-        @"PLATFORM_ANDROID": @"",
-        @"PLATFORM_IOS": @"iOS App",
+        @"PROJECT-URL": sites[lang],
+        @"E-MAIL": @"apple@breviar.sk",
+        @"APP-NAME": appName,
+        @"PROJECT-SOURCE-STORAGE": @"GitHub",
+        @"PROJECT-SOURCE-URL": @"https://github.com/gyim/breviar-ios",
+        @"SPECIAL-CREDITS": @"",
+        @"PLATFORM-ANDROID": @"",
+        @"PLATFORM-IOS": @"iOS App",
     };
     for (NSString *key in replacements) {
-        NSString *placeholder = [NSString stringWithFormat:@"<!--{%@}-->", key];
+        NSString *placeholder = [NSString stringWithFormat:@"[%@]", key];
         NSString *value = replacements[key];
         html = [html stringByReplacingOccurrencesOfString:placeholder withString:value];
     }
