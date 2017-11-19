@@ -208,18 +208,6 @@
         [extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-blind-friendly.css'>"];
     }
     
-    // Background override (beamer/AMOLED)
-    if ([settings boolForOption:@"of2bo"]) {
-		if ([settings boolForOption:@"of2nr"]) {
-			[extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-background-ov-invert.css'>"];
-            self.view.backgroundColor = [UIColor blackColor];
-            toolbarColor = [UIColor blackColor];
-		} else {
-			[extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-background-override.css'>"];
-            self.view.backgroundColor = [UIColor whiteColor];
-		}
-    }
-    
     self.navigationController.navigationBar.barTintColor = toolbarColor;
     self.navigationController.toolbar.barTintColor = toolbarColor;
     
