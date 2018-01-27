@@ -260,6 +260,12 @@
 						</dict>
 						<dict>
 							<key>value</key>
+							<string>czofm</string>
+							<key>visibility</key>
+							<string>j == &quot;cz&quot;</string>
+						</dict>
+						<dict>
+							<key>value</key>
 							<string>czsdb</string>
 							<key>visibility</key>
 							<string>j == &quot;cz&quot;</string>
