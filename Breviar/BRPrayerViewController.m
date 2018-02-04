@@ -10,6 +10,7 @@
 #import "BRSettings.h"
 #import "BRCGIQuery.h"
 #import "BRUtil.h"
+#import "mydefs.h"
 #import "GAI.h"
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
@@ -248,7 +249,10 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    if ([request.URL.absoluteString rangeOfString:@".cgi?"].location != NSNotFound) {
+    NSString *cgiName = [NSString stringWithUTF8String:SCRIPT_NAME];
+    NSString *appName = [[[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleNameKey] stringByAppendingString:@".app"];
+    
+    if ([request.URL.lastPathComponent isEqualToString:cgiName]) {
         // Parse URL
         NSArray *argList = [request.URL.query componentsSeparatedByString:@"&"];
         NSMutableDictionary *args = [[NSMutableDictionary alloc] init];
@@ -258,14 +262,14 @@
             NSString *v = [kvParts objectAtIndex:1];
             [args setObject:v forKey:k];
         }
-        
+
         // Parse static text query
         NSString *staticTextId = [args objectForKey:@"st"];
         if (!staticTextId) {
             return NO;
         }
         BRPrayer *prayer = [BRPrayer prayerForStaticTextId:staticTextId];
-        
+
         // Push subpage
         self.subpageController = [self.storyboard instantiateViewControllerWithIdentifier:@"PrayerViewController"];
         self.subpageController.webView = self.webView;
@@ -278,7 +282,12 @@
         self.navigationController.toolbar.alpha = 1.0;
 
         [self.navigationController pushViewController:self.subpageController animated:YES];
-        
+
+        return NO;
+    }
+    else if ([request.URL.lastPathComponent isEqualToString:appName] && request.URL.query == nil && request.URL.fragment.length > 0 && navigationType == UIWebViewNavigationTypeLinkClicked) {
+        NSString *javascript = [NSString stringWithFormat:@"document.getElementsByTagName(\"a\").namedItem(\"%@\").scrollIntoView();", request.URL.fragment];
+        [webView stringByEvaluatingJavaScriptFromString:javascript];
         return NO;
     }
     else {

@@ -7,12 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <sys/time.h>
 
-@interface BRWebView : UIWebView {
-    struct timeval lastScrollingTime;
-    struct timeval lastLinkClickTime;
-}
+@interface BRWebView : UIWebView
 
 @property(assign) BOOL scrollingInProgress;
 

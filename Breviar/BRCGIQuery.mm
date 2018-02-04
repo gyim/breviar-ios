@@ -47,7 +47,7 @@
 	
 	int argc = 5;
 	const char *argv[] = {
-		"l.cgi",
+		SCRIPT_NAME,
 		"-qpdt",
 		"-H",
 		queryString.UTF8String,
