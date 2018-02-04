@@ -55,7 +55,7 @@
 	};
 	
 	@synchronized ([BRCGIQuery class]) {
-		breviar_main(argc, (char **)argv);
+		breviar_main(argc, (const char **)argv);
 
 		NSString *prayerBody = [NSString stringWithCString:getExportedString() encoding:NSUTF8StringEncoding];
 		[result appendString:prayerBody];
