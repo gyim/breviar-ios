@@ -214,6 +214,14 @@
 			<array>
 				<dict>
 					<key>id</key>
+					<string>of2rm</string>
+					<key>type</key>
+					<string>bool</string>
+					<key>default</key>
+					<true/>
+				</dict>
+				<dict>
+					<key>id</key>
 					<string>k</string>
 					<key>type</key>
 					<string>stringOption</string>

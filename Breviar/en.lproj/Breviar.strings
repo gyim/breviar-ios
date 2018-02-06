@@ -27,6 +27,7 @@
 "j.la"		= "Lingua latina";
 "j.sk"		= "Slovenčina";
 
+"of2rm"		= "Display various options in prayers";
 "of2nr"		= "Night mode";
 "of0fn"		= "Force normal font (no bold)";
 "of2tw"		= "Verse layout as in printed edition";
