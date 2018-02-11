@@ -562,6 +562,16 @@
 				</dict>
 				<dict>
 					<key>id</key>
+					<string>of5pa34h</string>
+					<key>type</key>
+					<string>bool</string>
+					<key>default</key>
+					<false/>
+					<key>visibility</key>
+					<string>of2a == TRUE</string>
+				</dict>
+				<dict>
+					<key>id</key>
 					<string>of5psps</string>
 					<key>type</key>
 					<string>bool</string>
