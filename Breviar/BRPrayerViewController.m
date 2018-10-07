@@ -265,23 +265,32 @@
 
         // Parse static text query
         NSString *staticTextId = [args objectForKey:@"st"];
-        if (!staticTextId) {
-            return NO;
+        if (staticTextId) {
+            // Open static text in subpage
+            BRPrayer *prayer = [BRPrayer prayerForStaticTextId:staticTextId];
+
+            self.subpageController = [self.storyboard instantiateViewControllerWithIdentifier:@"PrayerViewController"];
+            self.subpageController.webView = self.webView;
+            self.subpageController.prayer = prayer;
+
+            [UIApplication sharedApplication].statusBarHidden = NO;
+            self.navigationController.navigationBarHidden = NO;
+            self.navigationController.navigationBar.alpha = 1.0;
+            self.navigationController.toolbarHidden = NO;
+            self.navigationController.toolbar.alpha = 1.0;
+
+            [self.navigationController pushViewController:self.subpageController animated:YES];
+        } else {
+            // Replace current prayer text
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                self.prayer.extraOpts = args;
+                [self.prayer refreshText];
+
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self refreshPrayer];
+                });
+            });
         }
-        BRPrayer *prayer = [BRPrayer prayerForStaticTextId:staticTextId];
-
-        // Push subpage
-        self.subpageController = [self.storyboard instantiateViewControllerWithIdentifier:@"PrayerViewController"];
-        self.subpageController.webView = self.webView;
-        self.subpageController.prayer = prayer;
-
-        [UIApplication sharedApplication].statusBarHidden = NO;
-        self.navigationController.navigationBarHidden = NO;
-        self.navigationController.navigationBar.alpha = 1.0;
-        self.navigationController.toolbarHidden = NO;
-        self.navigationController.toolbar.alpha = 1.0;
-
-        [self.navigationController pushViewController:self.subpageController animated:YES];
 
         return NO;
     }

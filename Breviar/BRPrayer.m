@@ -39,7 +39,8 @@ static NSString *prayerNames[] = {
 
 @synthesize
     body = _body,
-    bodyForSpeechSynthesis = _bodyForSpeechSynthesis;
+    bodyForSpeechSynthesis = _bodyForSpeechSynthesis,
+    extraOpts = _extraOpts;
 
 - (NSString *)title {
     if (self.prayerType == BRStaticText) {
@@ -73,11 +74,17 @@ static NSString *prayerNames[] = {
     return _bodyForSpeechSynthesis;
 }
 
+- (void)refreshText;
+{
+    _body = nil;
+    [self body];
+}
+
 - (NSString *)generateBodyWithOverwritingOptions:(NSDictionary *)overwritingOptions {
     NSMutableDictionary *queryOptions = [NSMutableDictionary dictionary];
-    [queryOptions addEntriesFromDictionary:[BRSettings instance].prayerQueryOptions];
     
     if (self.prayerType == BRStaticText) {
+        [queryOptions addEntriesFromDictionary:[BRSettings instance].prayerQueryOptions];
         [queryOptions addEntriesFromDictionary:@{
                                                  @"qt": @"pst",
                                                  @"st": self.staticTextId,
@@ -88,9 +95,12 @@ static NSString *prayerNames[] = {
                                                  @"o4": @"0",
                                                  @"o5": @"8194"
                                                  }];
+    } else if ([_extraOpts count]) {
+        [queryOptions addEntriesFromDictionary:_extraOpts];
     } else {
         NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:self.date];
         
+        [queryOptions addEntriesFromDictionary:[BRSettings instance].prayerQueryOptions];
         [queryOptions addEntriesFromDictionary:@{
                                                  @"qt": @"pdt",
                                                  @"d": [NSNumber numberWithInteger:components.day],
@@ -109,7 +119,7 @@ static NSString *prayerNames[] = {
     if (overwritingOptions) {
         [queryOptions addEntriesFromDictionary:overwritingOptions];
     }
-    
+
     return [BRCGIQuery queryWithArgs:queryOptions];
 }
 

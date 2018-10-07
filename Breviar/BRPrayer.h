@@ -33,9 +33,11 @@ typedef enum {
 @property(assign) CGFloat scrollOffset;
 @property(assign) CGFloat scrollHeight;
 @property(strong) NSString *staticTextId;
+@property(strong) NSDictionary *extraOpts;
 
 + (BRPrayerType)prayerTypeFromQueryId:(NSString *)queryId;
 + (NSString *)queryIdFromPrayerType:(BRPrayerType)prayerType;
 + (BRPrayer *)prayerForStaticTextId:(NSString *)staticTextId;
+- (void)refreshText;
 
 @end
