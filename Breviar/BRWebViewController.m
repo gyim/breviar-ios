@@ -17,6 +17,7 @@
 @property(strong) NSString *oldHtmlSource;
 @property(strong) UITapGestureRecognizer *tapGesture;
 @property(assign) struct timeval lastClickTime;
+@property(strong) NSTimer *idleTimerReenableTimer;
 
 @end
 
@@ -73,8 +74,11 @@
         [self.view addGestureRecognizer:self.tapGesture];
     }
     
-    // Disable automatic screen lock
+    // Disable automatic screen lock for 30 minutes. This should be enough for most prayers.
     [UIApplication sharedApplication].idleTimerDisabled = YES;
+    self.idleTimerReenableTimer = [NSTimer scheduledTimerWithTimeInterval:1800 repeats:NO block:^(NSTimer *timer) {
+        [UIApplication sharedApplication].idleTimerDisabled = NO;
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -96,6 +100,8 @@
     
     // Re-enable automatic screen lock
     [UIApplication sharedApplication].idleTimerDisabled = NO;
+    [self.idleTimerReenableTimer invalidate];
+    self.idleTimerReenableTimer = nil;
 }
 
 - (void)willMoveToParentViewController:(UIViewController *)parent
