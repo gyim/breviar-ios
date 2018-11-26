@@ -86,13 +86,13 @@
 
 // Other settings
 "of3"		= "Közös részből";
-"of3.0"		= "lelkipásztorok - papok";
-"of3.1"		= "lelkipásztorok - püspökök";
-"of3.2"		= "pásztorok - pápa";
+"of3.0"		= "lelkipásztorok – papok";
+"of3.1"		= "lelkipásztorok – püspökök";
+"of3.2"		= "lelkipásztorok – pápa";
 "of3.3"		= "egyháztanítók";
 "of3.4"		= "apostolok";
-"of3.5"		= "vértanú";
-"of3.6"		= "vértanúk";
+"of3.5"		= "vértanú férfi";
+"of3.6"		= "több vértanú";
 "of3.7"		= "Szűz Mária";
 "of3.8"		= "szerzetes";
 "of3.9"		= "szent férfiak";
@@ -100,14 +100,14 @@
 "of3.11"	= "apáca";
 "of3.12"	= "szent asszonyok";
 "of3.13"	= "több lelkipásztor";
-"of3.14"	= "vértanú";
-"of3.15"	= "nevelők férfiak";
-"of3.16"	= "nevelők asszonyok";
+"of3.14"	= "vértanú nő";
+"of3.15"	= "nevelő asszonyok";
+"of3.16"	= "nevelő férfiak";
 "of3.17"	= "jótékonykodó asszonyok";
 "of3.18"	= "jótékonykodó férfiak";
 "of3.19"	= "több szent asszony";
 "of3.20"	= "több szent férfi";
-"of3.21"	= "több szüzek";
+"of3.21"	= "több szűz";
 "of3.22"	= "templomszentelés";
 "of3.23"	= "halottakért";
 "of3.24"	= "házas szent asszonyok";
