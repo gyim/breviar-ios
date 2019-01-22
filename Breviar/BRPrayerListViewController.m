@@ -15,10 +15,6 @@
 #import "BRUtil.h"
 #import "BRSettings.h"
 
-#import "GAI.h"
-#import "GAIDictionaryBuilder.h"
-#import "GAIFields.h"
-
 static NSString *kCelebrationCellIdentifier = @"CelebrationCell";
 
 @interface BRPrayerListViewController ()
@@ -43,7 +39,6 @@ static NSString *kCelebrationCellIdentifier = @"CelebrationCell";
 {
     [super viewDidLoad];
     
-    self.screenName = @"MainScreen";
     self.preloadQueue = dispatch_queue_create("Prayer Generator Queue", DISPATCH_QUEUE_SERIAL);
 
     self.date = [NSDate date];
@@ -314,12 +309,6 @@ static NSString *kCelebrationCellIdentifier = @"CelebrationCell";
 
 - (void)showDatePicker:(id)sender
 {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"MainScreen"
-                                                          action:@"PickDate"
-                                                           label:nil
-                                                           value:nil] build]];
-    
     [self performSegueWithIdentifier:@"ShowDatePicker" sender:self];
 }
 
@@ -338,23 +327,11 @@ static NSString *kCelebrationCellIdentifier = @"CelebrationCell";
 
 - (IBAction)prevDayPressed:(id)sender
 {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"MainScreen"
-                                                          action:@"JumpDate"
-                                                           label:@"Yesterday"
-                                                           value:nil] build]];
-    
     [self jumpDate:-1];
 }
 
 - (IBAction)nextDayPressed:(id)sender
 {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"MainScreen"
-                                                          action:@"JumpDate"
-                                                           label:@"Tomorrow"
-                                                           value:nil] build]];
-    
     [self jumpDate:1];
 }
 

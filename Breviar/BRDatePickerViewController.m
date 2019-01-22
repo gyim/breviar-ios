@@ -32,7 +32,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.screenName = @"DataPicker";
 }
 
 - (void)viewDidUnload

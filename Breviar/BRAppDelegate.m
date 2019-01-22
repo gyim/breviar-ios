@@ -16,12 +16,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Initialize Google Analytics
-    [GAI sharedInstance].trackUncaughtExceptions = YES;
-    [GAI sharedInstance].dispatchInterval = 20;
-    // [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
-    __unused id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-47206216-1"];
-    
     // Initialize UI
     if ([UINavigationBar instancesRespondToSelector:@selector(barTintColor)]) {
         [UINavigationBar appearance].barTintColor = [UIColor colorWithHex:0x833a39];

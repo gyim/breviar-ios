@@ -40,7 +40,6 @@ static CGFloat componentSizes[] = {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.screenName = @"FontPicker";
 }
 
 - (void)viewDidUnload

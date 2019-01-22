@@ -11,9 +11,6 @@
 #import "BRCGIQuery.h"
 #import "BRUtil.h"
 #import "mydefs.h"
-#import "GAI.h"
-#import "GAIFields.h"
-#import "GAIDictionaryBuilder.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 
@@ -51,11 +48,6 @@
 
     self.speechSynthesizer = nil;
 
-    // Google Analytics
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName value:[NSString stringWithFormat:@"Prayer/%@", self.prayer.prayerName]];
-    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
-    
     // Start audio session
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setActive:YES error:nil];

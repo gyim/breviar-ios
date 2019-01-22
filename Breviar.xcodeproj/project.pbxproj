@@ -480,8 +480,6 @@
 				7061B08415FA8E1A00A83E0A /* Frameworks */,
 				7061B08515FA8E1A00A83E0A /* Resources */,
 				7054368615FBABA5005854DC /* ShellScript */,
-				720E2919EE5EA57C9B9116D8 /* [CP] Embed Pods Frameworks */,
-				ACD59C39424A310E6970D1AC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -581,36 +579,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = ./buildno.sh;
-		};
-		720E2919EE5EA57C9B9116D8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Breviar/Pods-Breviar-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		ACD59C39424A310E6970D1AC /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Breviar/Pods-Breviar-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		C10874AD5A6FBE682CF65A09 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
