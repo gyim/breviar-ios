@@ -299,8 +299,6 @@
 {
     [[BRSettings instance] setFontFamily:familyName size:size forOption:self.currentOptionId];
     [self.tableView reloadData];
-    
-    NSString *fontDescription = [NSString stringWithFormat:@"%@, %ldpt", familyName, (long)size];
 }
 
 - (void)stringOptionPicker:(BRStringOptionPickerViewController *)picker didPickOption:(NSString *)value
