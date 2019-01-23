@@ -1,12 +1,3 @@
-body, html {
-	background-color: #FBFCD7;
-}
-
-a {
-    text-decoration: underline;
-    border-bottom: none;
-}
-
 /* Hide navigation controls */
 div.navigation {
     display: none;
