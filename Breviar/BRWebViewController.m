@@ -201,7 +201,7 @@
         self.webView.scrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
         toolbarColor = [UIColor colorWithHex:0x191919];
     } else {
-        self.view.backgroundColor = [UIColor colorWithHex:0xFBFCD7];
+        self.view.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
         self.webView.scrollView.indicatorStyle = UIScrollViewIndicatorStyleDefault;
     }
     
