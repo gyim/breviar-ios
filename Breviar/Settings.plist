@@ -338,6 +338,12 @@
 							<key>visibility</key>
 							<string>j == &quot;hu&quot;</string>
 						</dict>
+						<dict>
+							<key>value</key>
+							<string>csa</string>
+							<key>visibility</key>
+							<string>j == &quot;sk&quot;</string>
+						</dict>
 					</array>
 				</dict>
 				<dict>
