@@ -30,10 +30,10 @@ CZ
 
 HU
 – Lehetséges az emléknapokat és az ünnepeket magasabb fokon ünnepelni (ünnepek/főünnepek).
-– Új ünneplés: Szűz Mária az Egyház anyja emléknap.
+– Új ünnep: Szűz Mária, az Egyház anyja emléknapja.
 – Imádságra hívás: csak egy zsoltár jelenik meg (amikor alternatívák vannak).
-– Új beállítási lehetőség: Himuszok az évközi idő, 34. hét.
-– A befejező imaóra Karácsony és Húsvét Nyolcadában: Lehetséges az 1. és a 2. Vasárnapi befejező imaórát választani.
+– Új beállítási lehetőség: Évközi idő 34. hetében vehető himnusz.
+– A befejező imaóra Karácsony és Húsvét Nyolcadában: Lehetséges az 1. és a 2. vasárnapi befejező imaórát választani.
 – Imaszövegek felolvasása: keresse meg az értesítési sávot, és zárja be a képernyőt.
 – Frissítések és javítások az imaszövegek generálásában.
 
