@@ -386,7 +386,7 @@
 					<key>default</key>
 					<false/>
 					<key>visibility</key>
-					<string>j == &quot;sk&quot;</string>
+					<string>j != &quot;hu&quot;</string>
 				</dict>
 			</array>
 		</dict>
