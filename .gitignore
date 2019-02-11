@@ -3,3 +3,10 @@ xcuserdata
 config.build.h
 Pods
 build/*
+
+# Bundle / Gem / Ruby stuff
+Vendor/bundle
+Gemfile
+Gemfile.lock
+.bundle
+

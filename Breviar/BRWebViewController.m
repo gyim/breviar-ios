@@ -76,9 +76,11 @@
     
     // Disable automatic screen lock for 30 minutes. This should be enough for most prayers.
     [UIApplication sharedApplication].idleTimerDisabled = YES;
-    self.idleTimerReenableTimer = [NSTimer scheduledTimerWithTimeInterval:1800 repeats:NO block:^(NSTimer *timer) {
-        [UIApplication sharedApplication].idleTimerDisabled = NO;
-    }];
+    if (@available(iOS 10, *)) {
+        self.idleTimerReenableTimer = [NSTimer scheduledTimerWithTimeInterval:1800 repeats:NO block:^(NSTimer *timer) {
+            [UIApplication sharedApplication].idleTimerDisabled = NO;
+        }];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
