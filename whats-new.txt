@@ -1,4 +1,16 @@
 ________________________________________________________________________
+What's New in Version 1.5.1
+
+SK
+– Oprava pádu aplikácie pod iOS 9.
+
+CZ
+– Oprava pádu aplikace pod iOS 9.
+
+HU
+– Fix crash on iOS 9.
+
+________________________________________________________________________
 What's New in Version 1.5
 
 SK
