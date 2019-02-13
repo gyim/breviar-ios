@@ -8,7 +8,7 @@ CZ
 – Oprava pádu aplikace pod iOS 9.
 
 HU
-– Fix crash on iOS 9.
+– Alkalmazás összeomlás javítása iOS 9 alatt.
 
 ________________________________________________________________________
 What's New in Version 1.5
