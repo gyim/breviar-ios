@@ -53,9 +53,18 @@
     [session setActive:YES error:nil];
     
     MPRemoteCommandCenter *commandCenter = [MPRemoteCommandCenter sharedCommandCenter];
-    [commandCenter.playCommand addTarget:self action:@selector(playSpeaker:)];
-    [commandCenter.pauseCommand addTarget:self action:@selector(pauseSpeaker:)];
-    [commandCenter.togglePlayPauseCommand addTarget:self action:@selector(toggleSpeaker:)];
+    [commandCenter.playCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
+        [self playSpeaker:self];
+        return MPRemoteCommandHandlerStatusSuccess;
+    }];
+    [commandCenter.pauseCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
+        [self pauseSpeaker:self];
+        return MPRemoteCommandHandlerStatusSuccess;
+    }];
+    [commandCenter.togglePlayPauseCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
+        [self toggleSpeaker:self];
+        return MPRemoteCommandHandlerStatusSuccess;
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
