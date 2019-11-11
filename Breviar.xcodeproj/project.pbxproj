@@ -29,13 +29,12 @@
 		7061B09615FA8E1A00A83E0A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7061B09415FA8E1A00A83E0A /* InfoPlist.strings */; };
 		7061B09815FA8E1A00A83E0A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B09715FA8E1A00A83E0A /* main.m */; };
 		7061B09C15FA8E1A00A83E0A /* BRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B09B15FA8E1A00A83E0A /* BRAppDelegate.m */; };
-		7061B09F15FA8E1A00A83E0A /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7061B09D15FA8E1A00A83E0A /* MainStoryboard_iPhone.storyboard */; };
+		7061B09F15FA8E1A00A83E0A /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7061B09D15FA8E1A00A83E0A /* MainStoryboard.storyboard */; };
 		7061B0A515FA8E1A00A83E0A /* BRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0A415FA8E1A00A83E0A /* BRViewController.m */; };
 		7061B0B115FAA18C00A83E0A /* BRPrayerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0B015FAA18C00A83E0A /* BRPrayerListViewController.m */; };
 		7061B0B515FAA34100A83E0A /* BRPrayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0B415FAA34100A83E0A /* BRPrayerViewController.m */; };
 		7061B0B815FAA3C500A83E0A /* BRPrayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7061B0B715FAA3C500A83E0A /* BRPrayer.m */; };
 		7071D9EF1D528DFD00E572BA /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7071D9EE1D528DFD00E572BA /* MediaPlayer.framework */; };
-		707A6499171A1C180065F98E /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 707A6497171A1C180065F98E /* MainStoryboard_iPad.storyboard */; };
 		707A64A5171A1F650065F98E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64A1171A1F650065F98E /* InfoPlist.strings */; };
 		707A64A6171A1F650065F98E /* Breviar.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64A3171A1F650065F98E /* Breviar.strings */; };
 		707A64AC171A1FEC0065F98E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707A64A8171A1FEC0065F98E /* InfoPlist.strings */; };
@@ -92,10 +91,6 @@
 		703200E7180F2E9000675F09 /* breviar-ios.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "breviar-ios.css"; sourceTree = "<group>"; };
 		7034597B15FCE84D000A1711 /* BRFontHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRFontHelper.h; sourceTree = "<group>"; };
 		7034597C15FCE84D000A1711 /* BRFontHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRFontHelper.m; sourceTree = "<group>"; };
-		70424419178CBD8200EF5461 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard_iPad.strings; sourceTree = "<group>"; };
-		7042441B178CBD8400EF5461 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/MainStoryboard_iPad.strings; sourceTree = "<group>"; };
-		7042441D178CBD8600EF5461 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MainStoryboard_iPad.strings; sourceTree = "<group>"; };
-		7042441E178CBDAD00EF5461 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MainStoryboard_iPad.strings; sourceTree = "<group>"; };
 		7042905A1641F91B00663A7D /* BRDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDataSource.h; sourceTree = "<group>"; };
 		7042905B1641F91B00663A7D /* BRDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDataSource.m; sourceTree = "<group>"; };
 		7045E8DF18B97ADD00495926 /* BRWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRWebView.h; sourceTree = "<group>"; };
@@ -126,21 +121,20 @@
 		7061B0B615FAA3C500A83E0A /* BRPrayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRPrayer.h; sourceTree = "<group>"; };
 		7061B0B715FAA3C500A83E0A /* BRPrayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRPrayer.m; sourceTree = "<group>"; };
 		7071D9EE1D528DFD00E572BA /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		707A6495171A1B9E0065F98E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		707A6498171A1C180065F98E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		707A649F171A1E850065F98E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
+		707A6495171A1B9E0065F98E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		707A649F171A1E850065F98E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		707A64A2171A1F650065F98E /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		707A64A4171A1F650065F98E /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Breviar.strings; sourceTree = "<group>"; };
 		707A64A9171A1FEC0065F98E /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		707A64AB171A1FEC0065F98E /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/Breviar.strings; sourceTree = "<group>"; };
-		707A64B1171A20600065F98E /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
+		707A64B1171A20600065F98E /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		707A64B2171AA5BF0065F98E /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		707A64B4171AD44C0065F98E /* BRUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRUtil.h; sourceTree = "<group>"; };
 		707A64B5171AD8020065F98E /* BRStringOptionPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRStringOptionPickerViewController.h; sourceTree = "<group>"; };
 		707A64B6171AD8020065F98E /* BRStringOptionPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRStringOptionPickerViewController.m; sourceTree = "<group>"; };
 		707A64BC171B12790065F98E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = Breviar.strings; sourceTree = "<group>"; };
 		707A64BE171B12790065F98E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = InfoPlist.strings; sourceTree = "<group>"; };
-		707A64C6171B12AC0065F98E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
+		707A64C6171B12AC0065F98E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		709BE1E5185673B100B6190E /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		709BE1E6185673B100B6190E /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		70AAAA4C15FBFBE4008D314D /* BRSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettings.h; sourceTree = "<group>"; };
@@ -156,7 +150,7 @@
 		70CAFAA318849462000410AC /* BRWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRWebViewController.m; sourceTree = "<group>"; };
 		70CAFAA7188499F3000410AC /* BRAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRAboutViewController.h; sourceTree = "<group>"; };
 		70CAFAA8188499F3000410AC /* BRAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRAboutViewController.m; sourceTree = "<group>"; };
-		70CAFAAB1884A74C000410AC /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/MainStoryboard_iPhone.strings; sourceTree = "<group>"; };
+		70CAFAAB1884A74C000410AC /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		70DCD74019DCA852002D5175 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		70E01271162F54BA00601CA3 /* BRDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDay.h; sourceTree = "<group>"; };
 		70E01272162F54BA00601CA3 /* BRDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDay.m; sourceTree = "<group>"; };
@@ -418,8 +412,7 @@
 		707A6496171A1BCD0065F98E /* Base.lproj */ = {
 			isa = PBXGroup;
 			children = (
-				7061B09D15FA8E1A00A83E0A /* MainStoryboard_iPhone.storyboard */,
-				707A6497171A1C180065F98E /* MainStoryboard_iPad.storyboard */,
+				7061B09D15FA8E1A00A83E0A /* MainStoryboard.storyboard */,
 			);
 			name = Base.lproj;
 			sourceTree = "<group>";
@@ -509,6 +502,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				hu,
@@ -531,11 +525,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7061B09615FA8E1A00A83E0A /* InfoPlist.strings in Resources */,
-				7061B09F15FA8E1A00A83E0A /* MainStoryboard_iPhone.storyboard in Resources */,
+				7061B09F15FA8E1A00A83E0A /* MainStoryboard.storyboard in Resources */,
 				70DCD74119DCA852002D5175 /* LaunchScreen.xib in Resources */,
 				70C5844B1A1C139D009732D7 /* breviar-ios.js in Resources */,
 				70493A621719D4CF00232631 /* Breviar.strings in Resources */,
-				707A6499171A1C180065F98E /* MainStoryboard_iPad.storyboard in Resources */,
 				707A64A5171A1F650065F98E /* InfoPlist.strings in Resources */,
 				709BE1F7185673B100B6190E /* iTunesArtwork@2x in Resources */,
 				707A64A6171A1F650065F98E /* Breviar.strings in Resources */,
@@ -665,7 +658,7 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		7061B09D15FA8E1A00A83E0A /* MainStoryboard_iPhone.storyboard */ = {
+		7061B09D15FA8E1A00A83E0A /* MainStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				707A6495171A1B9E0065F98E /* Base */,
@@ -674,19 +667,7 @@
 				707A64C6171B12AC0065F98E /* cs */,
 				70CAFAAB1884A74C000410AC /* hu */,
 			);
-			name = MainStoryboard_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		707A6497171A1C180065F98E /* MainStoryboard_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				707A6498171A1C180065F98E /* Base */,
-				70424419178CBD8200EF5461 /* en */,
-				7042441B178CBD8400EF5461 /* hu */,
-				7042441D178CBD8600EF5461 /* sk */,
-				7042441E178CBDAD00EF5461 /* cs */,
-			);
-			name = MainStoryboard_iPad.storyboard;
+			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 		707A64A1171A1F650065F98E /* InfoPlist.strings */ = {

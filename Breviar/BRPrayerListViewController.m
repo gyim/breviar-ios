@@ -20,8 +20,6 @@ static NSString *kCelebrationCellIdentifier = @"CelebrationCell";
 @interface BRPrayerListViewController ()
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) IBOutlet UIButton *showDatePickerButton; // Unused?
-@property (nonatomic, strong) UIPopoverController *datePickerPopover;
 
 @property (nonatomic, strong) BRWebView *sharedWebView;
 
@@ -343,21 +341,14 @@ static NSString *kCelebrationCellIdentifier = @"CelebrationCell";
     NSString *segueId = segue.identifier;
     
     if ([segueId isEqualToString:@"ShowDatePicker"]) {
-        BRDatePickerViewController *destController;
-        
-        if ([segue.destinationViewController isKindOfClass:[BRDatePickerViewController class]]) {
-            destController = segue.destinationViewController;
-        } else {
-            UINavigationController *navController = segue.destinationViewController;
-            destController = [navController.viewControllers objectAtIndex:0];
-        }
-        
+        UINavigationController *navController = segue.destinationViewController;
+        BRDatePickerViewController *destController = [navController.viewControllers objectAtIndex:0];
         destController.initialDate = self.date;
         destController.datePickerDelegate = self;
         
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            self.datePickerPopover = [(UIStoryboardPopoverSegue *)segue popoverController];
-        }
+        UIPopoverPresentationController *popController = [destController popoverPresentationController];
+        popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+        popController.sourceView = self.navigationItem.titleView;
     }
     else if ([segueId isEqualToString:@"ShowPrayer"] || (segueId.length > 11 && [[segueId substringToIndex:11] isEqualToString:@"ShowPrayer."])) {
         BRPrayerViewController *destController = segue.destinationViewController;
@@ -386,14 +377,7 @@ static NSString *kCelebrationCellIdentifier = @"CelebrationCell";
 {
     self.date = date;
 
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-    else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        [self.datePickerPopover dismissPopoverAnimated:YES];
-        self.datePickerPopover = nil;
-    }
-    
+    [self dismissViewControllerAnimated:YES completion:nil];
     [self loadSelectedDateAndReloadTable:YES resetCelebrationIndex:YES forcePrayerRegeneration:NO];
 }
 
