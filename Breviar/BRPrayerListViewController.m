@@ -51,8 +51,6 @@ static NSString *kCelebrationCellIdentifier = @"CelebrationCell";
                                              selector:@selector(applicationWillEnterForeground:)
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:nil];
-    
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHex:0x833a39];
 }
 
 - (void)viewDidUnload

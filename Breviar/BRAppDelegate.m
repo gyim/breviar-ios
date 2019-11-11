@@ -16,22 +16,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Initialize UI
-    if ([UINavigationBar instancesRespondToSelector:@selector(barTintColor)]) {
-        [UINavigationBar appearance].barTintColor = [UIColor colorWithHex:0x833a39];
-    }
-    if ([UIToolbar instancesRespondToSelector:@selector(barTintColor)]) {
-        [UIToolbar appearance].barTintColor = [UIColor colorWithHex:0x833a39];
-    }
-    [UINavigationBar appearance].tintColor = [UIColor whiteColor];
-    [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    [UIToolbar appearance].tintColor = [UIColor whiteColor];
-    
-    if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
-        // Setting translucency crashes iOS 7
-        [[UIToolbar appearance] setTranslucent:NO];
-    }
-    
     // Initialize data source
     BRDataSource *dataSource = [BRDataSource instance];
     dataSource.language = @"hu"; // TODO: get from build flags

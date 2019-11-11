@@ -109,7 +109,6 @@
 - (void)willMoveToParentViewController:(UIViewController *)parent
 {
     [super willMoveToParentViewController:parent];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHex:0x833a39];
 }
 
 #pragma mark - Navigation Bar & Toolbar
@@ -194,16 +193,12 @@
     BRSettings *settings = [BRSettings instance];
     
     NSMutableString *extraStylesheets = [[NSMutableString alloc] init];
-    UIColor *toolbarColor = [UIColor colorWithHex:0x833a39];
     
     // Night mode
     if ([settings boolForOption:@"of2nr"]) {
         [extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-invert-colors.css'>"];
-        self.view.backgroundColor = [UIColor colorWithHex:0x191919];
         self.webView.scrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-        toolbarColor = [UIColor colorWithHex:0x191919];
     } else {
-        self.view.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
         self.webView.scrollView.indicatorStyle = UIScrollViewIndicatorStyleDefault;
     }
     
@@ -216,9 +211,6 @@
     if ([settings boolForOption:@"of0bf"]) {
         [extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-blind-friendly.css'>"];
     }
-    
-    self.navigationController.navigationBar.barTintColor = toolbarColor;
-    self.navigationController.toolbar.barTintColor = toolbarColor;
     
     // Padding for iPad
     NSString *paddingTop = @"0px";
