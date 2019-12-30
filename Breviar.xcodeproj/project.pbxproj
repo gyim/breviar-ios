@@ -11,8 +11,6 @@
 		542622761887AFC700CA7AC4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 542622751887AFC700CA7AC4 /* CoreData.framework */; };
 		542622781887AFD700CA7AC4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 542622771887AFD700CA7AC4 /* SystemConfiguration.framework */; };
 		542F0ECB1CE9DD39001F6BE9 /* kalendar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 542F0ECA1CE9DD39001F6BE9 /* kalendar.cpp */; };
-		544E694C187D285E0070DEC0 /* BRUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 544E694B187D285E0070DEC0 /* BRUI.m */; };
-		544E6951187D2A850070DEC0 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 544E6950187D2A850070DEC0 /* UIColor+HexColor.m */; };
 		54EA63801A1FA9E10027F889 /* utf8-utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54EA637F1A1FA9E10027F889 /* utf8-utils.cpp */; };
 		54EA63851A1FD8C40027F889 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54EA63841A1FD8C40027F889 /* AVFoundation.framework */; };
 		703200E8180F2E9000675F09 /* breviar-ios.css in Resources */ = {isa = PBXBuildFile; fileRef = 703200E7180F2E9000675F09 /* breviar-ios.css */; };
@@ -79,10 +77,6 @@
 		542622751887AFC700CA7AC4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		542622771887AFD700CA7AC4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		542F0ECA1CE9DD39001F6BE9 /* kalendar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = kalendar.cpp; sourceTree = "<group>"; };
-		544E694A187D285E0070DEC0 /* BRUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRUI.h; sourceTree = "<group>"; };
-		544E694B187D285E0070DEC0 /* BRUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRUI.m; sourceTree = "<group>"; };
-		544E694F187D2A850070DEC0 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
-		544E6950187D2A850070DEC0 /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColor.m"; sourceTree = "<group>"; };
 		54EA637F1A1FA9E10027F889 /* utf8-utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "utf8-utils.cpp"; sourceTree = "<group>"; };
 		54EA63831A1FA9EA0027F889 /* utf8-utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "utf8-utils.h"; sourceTree = "<group>"; };
 		54EA63841A1FD8C40027F889 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -360,12 +354,8 @@
 				70C962D416B45C3E00A399B9 /* BRFontSettingsCell.h */,
 				70C962D516B45C3E00A399B9 /* BRFontSettingsCell.m */,
 				707A64B4171AD44C0065F98E /* BRUtil.h */,
-				544E694A187D285E0070DEC0 /* BRUI.h */,
-				544E694B187D285E0070DEC0 /* BRUI.m */,
 				7045E8DF18B97ADD00495926 /* BRWebView.h */,
 				7045E8E018B97ADD00495926 /* BRWebView.m */,
-				544E694F187D2A850070DEC0 /* UIColor+HexColor.h */,
-				544E6950187D2A850070DEC0 /* UIColor+HexColor.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -611,10 +601,8 @@
 				70EB052518B1282300F88662 /* breviar.cpp in Sources */,
 				70CAFAA9188499F3000410AC /* BRAboutViewController.m in Sources */,
 				70EB053218B1282300F88662 /* mygetopt.cpp in Sources */,
-				544E6951187D2A850070DEC0 /* UIColor+HexColor.m in Sources */,
 				70EB052618B1282300F88662 /* cgiutils.cpp in Sources */,
 				7054368D15FBDD69005854DC /* BRDatePickerViewController.m in Sources */,
-				544E694C187D285E0070DEC0 /* BRUI.m in Sources */,
 				7054369115FBF1B1005854DC /* BRSettingsViewController.m in Sources */,
 				70EB053118B1282300F88662 /* myexpt.cpp in Sources */,
 				70EB053418B1282300F88662 /* mylog.cpp in Sources */,
