@@ -16,8 +16,6 @@
 #import "BRPrayerListViewController.h"
 
 #define CELL_NORMAL_HEIGHT          44
-#define CELL_LABEL_WIDTH            192
-#define CELL_LABEL_MARGIN           24
 
 #define SECT_APPEARANCE             0
 #define SECT_PRAYER_PARTS           1
@@ -105,11 +103,6 @@
     return sectionItems.count;
 }
 
-- (NSString *)boolCellType
-{
-    return UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ? @"BoolCellPortrait" : @"BoolCellLandscape";
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *option = [self optionForIndexPath:indexPath];
     NSString *optionType = [option objectForKey:@"type"];
@@ -119,7 +112,7 @@
         NSString *optId = [option objectForKey:@"id"];
         NSString *optTitle = BREVIAR_STR(optId);
         
-        BRBoolSettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:[self boolCellType]];
+        BRBoolSettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BoolCell"];
         cell.label.text = optTitle;
         [cell.contentView setNeedsLayout];
         [cell.contentView layoutIfNeeded];
@@ -163,7 +156,7 @@
     }
     else if ([optionType isEqualToString:@"bool"]) {
         // Boolean option
-        BRBoolSettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:[self boolCellType]];
+        BRBoolSettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BoolCell"];
         cell.optionId = optionId;
         cell.label.text = BREVIAR_STR(optionId);
         cell.switcher.on = [settings boolForOption:optionId];
