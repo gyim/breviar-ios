@@ -125,7 +125,7 @@ static NSString *kCelebrationCellIdentifier = @"CelebrationCell";
 }
 
 - (NSDateComponents *)dayComponentsForDate:(NSDate *)date {
-    NSCalendarUnit dayUnit = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    NSCalendarUnit dayUnit = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
     return [[NSCalendar currentCalendar] components:dayUnit fromDate:date];
 }
 
@@ -277,8 +277,8 @@ static NSString *kCelebrationCellIdentifier = @"CelebrationCell";
 - (NSString *)getDateLabel
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSInteger currentDay = [calendar ordinalityOfUnit:NSDayCalendarUnit inUnit:NSEraCalendarUnit forDate:[NSDate date]];
-    NSInteger selectedDay = [calendar ordinalityOfUnit:NSDayCalendarUnit inUnit:NSEraCalendarUnit forDate:self.date];
+    NSInteger currentDay = [calendar ordinalityOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitEra forDate:[NSDate date]];
+    NSInteger selectedDay = [calendar ordinalityOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitEra forDate:self.date];
     
     NSInteger dayDiff = ABS(currentDay - selectedDay);
     

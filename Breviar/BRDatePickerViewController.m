@@ -93,7 +93,7 @@
     NSDateComponents *comps = [[NSDateComponents alloc] init];
     comps.day = 1;
     
-    NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDate *tomorrow = [cal dateByAddingComponents:comps toDate:now options:0];
     
     [self.datePicker setDate:tomorrow animated:YES];
@@ -106,7 +106,7 @@
     NSDateComponents *comps = [[NSDateComponents alloc] init];
     comps.day = -1;
     
-    NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDate *yesterday = [cal dateByAddingComponents:comps toDate:now options:0];
     
     [self.datePicker setDate:yesterday animated:YES];

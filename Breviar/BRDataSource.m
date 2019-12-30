@@ -29,7 +29,7 @@ static BRDataSource *_instance;
     NSMutableDictionary *queryOptions = [NSMutableDictionary dictionary];
     
     // Add query options for date
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:date];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
     NSString *dayData;
     [queryOptions addEntriesFromDictionary:@{
          @"qt": @"pxml",

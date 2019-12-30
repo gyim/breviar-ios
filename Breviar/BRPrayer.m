@@ -98,7 +98,7 @@ static NSString *prayerNames[] = {
     } else if ([_extraOpts count]) {
         [queryOptions addEntriesFromDictionary:_extraOpts];
     } else {
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:self.date];
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:self.date];
         
         [queryOptions addEntriesFromDictionary:[BRSettings instance].prayerQueryOptions];
         [queryOptions addEntriesFromDictionary:@{
