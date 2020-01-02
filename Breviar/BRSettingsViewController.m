@@ -43,11 +43,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = CELL_NORMAL_HEIGHT;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -63,12 +60,6 @@
         BRPrayerListViewController *parent = (BRPrayerListViewController *)self.navigationController.topViewController;
         [parent loadSelectedDateAndReloadTable:YES resetCelebrationIndex:NO forcePrayerRegeneration:YES];
     }
-}
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    [self.tableView reloadData];
 }
 
 #pragma mark -
@@ -101,28 +92,6 @@
 {
     NSArray *sectionItems = [self.visibleOptionsPerSection objectAtIndex:section];
     return sectionItems.count;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *option = [self optionForIndexPath:indexPath];
-    NSString *optionType = [option objectForKey:@"type"];
-    
-    if ([optionType isEqualToString:@"bool"]) {
-        // Boolean option for iPhone
-        NSString *optId = [option objectForKey:@"id"];
-        NSString *optTitle = BREVIAR_STR(optId);
-        
-        BRBoolSettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BoolCell"];
-        cell.label.text = optTitle;
-        [cell.contentView setNeedsLayout];
-        [cell.contentView layoutIfNeeded];
-        
-        CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-        return height + 2;
-    }
-    else {
-        return CELL_NORMAL_HEIGHT;
-    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
