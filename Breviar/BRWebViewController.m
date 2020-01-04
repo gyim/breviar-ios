@@ -195,7 +195,20 @@
     NSMutableString *extraStylesheets = [[NSMutableString alloc] init];
     
     // Night mode
-    if ([settings boolForOption:@"of2nr"]) {
+    NSString *colorScheme = [settings stringForOption:@"colorScheme"];
+    int nightMode = 0;
+    if ([colorScheme isEqualToString:@"dark"]) {
+        nightMode = 1;
+    } else if ([colorScheme isEqualToString:@"light"]) {
+        nightMode = 0;
+    } else {
+        // Automatic dark/light mode
+        if (@available(iOS 12.0, *)) {
+            nightMode = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark);
+        }
+    }
+
+    if (nightMode) {
         [extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-invert-colors.css'>"];
         self.webView.scrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     } else {

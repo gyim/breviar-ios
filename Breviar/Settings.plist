@@ -52,11 +52,19 @@
 				</dict>
 				<dict>
 					<key>id</key>
-					<string>of2nr</string>
+					<string>colorScheme</string>
 					<key>type</key>
-					<string>bool</string>
+					<string>stringOption</string>
 					<key>default</key>
+					<string>auto</string>
+					<key>inPrayerQuery</key>
 					<false/>
+					<key>options</key>
+					<array>
+						<string>auto</string>
+						<string>light</string>
+						<string>dark</string>
+					</array>
 				</dict>
 				<dict>
 					<key>id</key>

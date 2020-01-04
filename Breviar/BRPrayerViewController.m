@@ -93,6 +93,17 @@
     [super viewDidDisappear:animated];
 }
 
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [super traitCollectionDidChange: previousTraitCollection];
+    if (@available(iOS 12.0, *)) {
+        if (previousTraitCollection.userInterfaceStyle != self.traitCollection.userInterfaceStyle) {
+            [self updateNightModeButtonTitle];
+            [self refreshPrayer];
+        }
+    }
+}
+
 - (void)setHtmlBody:(NSString *)body forPrayer:(NSString *)prayerId
 {
     self.htmlContent = [NSString stringWithFormat:@"<div id=\"prayer-%@\">%@</div>", prayerId, body];
@@ -100,15 +111,40 @@
 
 - (IBAction)toggleNightMode:(id)sender
 {
-    BOOL nightMode = [[BRSettings instance] boolForOption:@"of2nr"];
-    [[BRSettings instance] setBool:!nightMode forOption:@"of2nr"];
+    BOOL isDarkMode = NO;
+    if (@available(iOS 12.0, *)) {
+        isDarkMode = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark);
+    }
+
+    // Toggle between automatic color scheme and dark/light, based on current color scheme
+    NSString *colorScheme = [[BRSettings instance] stringForOption:@"colorScheme"];
+    if (!colorScheme || [colorScheme isEqualToString:@"auto"]) {
+        colorScheme = isDarkMode ? @"light" : @"dark";
+    } else if ([colorScheme isEqualToString:@"dark"]) {
+        colorScheme = isDarkMode ? @"light" : @"auto";
+    } else {
+        colorScheme = isDarkMode ? @"auto" : @"dark";
+    }
+
+    [[BRSettings instance] setString:colorScheme forOption:@"colorScheme"];
     [self updateNightModeButtonTitle];
     [self refreshPrayer];
 }
 
 - (void)updateNightModeButtonTitle
 {
-    BOOL nightMode = [[BRSettings instance] boolForOption:@"of2nr"];
+    BOOL nightMode = NO;
+    if (@available(iOS 12.0, *)) {
+        nightMode = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark);
+    }
+
+    NSString *colorScheme = [[BRSettings instance] stringForOption:@"colorScheme"];
+    if ([colorScheme isEqualToString:@"light"]) {
+        nightMode = NO;
+    } else if ([colorScheme isEqualToString:@"dark"]) {
+        nightMode = YES;
+    }
+
     self.nightModeItem.image = nightMode ? [UIImage imageNamed:@"night_mode_on"] : [UIImage imageNamed:@"night_mode_off"];
 }
 

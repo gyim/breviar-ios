@@ -35,6 +35,11 @@
 
 "prayersAsCells" = "Nagy imaválasztó gombok";
 
+"colorScheme" = "Színséma";
+"colorScheme.auto" = "Automatikus";
+"colorScheme.light" = "Világos";
+"colorScheme.dark" = "Sötét";
+
 "speechRate"            = "Felolvasás sebessége";
 "speechRate.verySlow"   = "Nagyon lassú";
 "speechRate.slow"       = "Lassú";

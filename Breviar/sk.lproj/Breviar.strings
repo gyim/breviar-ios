@@ -35,6 +35,11 @@
 
 "prayersAsCells" = "Veľké tlačidlá modlitieb";
 
+"colorScheme" = "Farebná schéma";
+"colorScheme.auto" = "Automatický";
+"colorScheme.light" = "Svetlý";
+"colorScheme.dark" = "Tmavý";
+
 "speechRate"            = "Rýchlosť čítania (hlasový výstup)";
 "speechRate.verySlow"   = "Veľmi pomaly";
 "speechRate.slow"       = "Pomaly";

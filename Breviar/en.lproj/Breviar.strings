@@ -35,6 +35,11 @@
 
 "prayersAsCells" = "Large prayer buttons";
 
+"colorScheme" = "Color Scheme";
+"colorScheme.auto" = "Automatic";
+"colorScheme.light" = "Light";
+"colorScheme.dark" = "Dark";
+
 "speechRate"            = "Speech rate";
 "speechRate.verySlow"   = "Very slow";
 "speechRate.slow"       = "Slow";
