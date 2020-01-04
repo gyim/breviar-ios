@@ -65,6 +65,16 @@ static CGFloat componentSizes[] = {
     [self updatePreview];
 }
 
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [super traitCollectionDidChange: previousTraitCollection];
+    if (@available(iOS 12.0, *)) {
+        if (previousTraitCollection.userInterfaceStyle != self.traitCollection.userInterfaceStyle) {
+            [self updatePreview];
+        }
+    }
+}
+
 #pragma mark -
 #pragma mark UIPickerViewDataSource
 
@@ -121,12 +131,23 @@ static CGFloat componentSizes[] = {
 #pragma mark Preview
 
 - (void)updatePreview {
+    NSString *bgColor = @"white";
+    NSString *fgColor = @"black";
+    
+    if (@available(iOS 12.0, *)) {
+        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+            bgColor = @"black";
+            fgColor = @"white";
+        }
+    }
+    
     NSString *html = [NSString stringWithFormat:
                       @"<!DOCTYPE html>\n"
                       "<html><body>"
-                      "<body style='font-size: %ldpx; font-family: %@; -webkit-text-size-adjust: none;'>"
+                      "<body style='background: %@; color: %@; font-size: %ldpx; font-family: %@; -webkit-text-size-adjust: none;'>"
                       "<p>Te Deum laudamus:<br>te Dominum confitemur.<br>Te aeternum Patrem<br>omnis terra veneratur.<br>Tibi omnes Angeli; tibi caeli et universae Potestates;<br>Tibi Cherubim et Seraphim<br>incessabili voce proclamant:<br>Sanctus, Sanctus, Sanctus, Dominus Deus Sabaoth.</p>"
                       "</body></html>",
+                      bgColor, fgColor,
                       (long)self.fontSize, self.fontFamily];
     [self.webView loadHTMLString:html baseURL:[NSURL URLWithString:@"http://breviar.sk"]];
 }
