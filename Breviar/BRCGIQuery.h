@@ -10,6 +10,7 @@
 
 @interface BRCGIQuery : NSObject
 
-+(NSString *)queryWithArgs:(NSDictionary *)args;
++(NSString *)localQueryWithArgs:(NSDictionary *)args;
++(NSURLSessionTask *)remoteQueryWithArgs:(NSDictionary *)args completionHandler:(void (^)(NSString *result, NSError *error))completionHandler;
 
 @end

@@ -11,11 +11,12 @@
 #include "breviar.h"
 #include "myexpt.h"
 
+#define REMOTE_CGI_URL @"https://lh.kbs.sk/cgi-bin/l.cgi"
+
 @implementation BRCGIQuery
 
-+(NSString *)queryWithArgs:(NSDictionary *)args {
-	NSMutableString *queryString = [[NSMutableString alloc] init];
-	NSMutableString *result = [[NSMutableString alloc] init];
++(NSString *)queryStringForArgs:(NSDictionary *)args {
+    NSMutableString *queryString = [[NSMutableString alloc] init];
     
     // Fix for Common Parts: transpose parameter value by +1
     if (args[@"of3"] && [args[@"of3"] isKindOfClass:[NSString class]]) {
@@ -25,21 +26,26 @@
         mutableArgs[@"of3"] = [NSString stringWithFormat:@"%d", [of3Value intValue] + 1];
         args = [NSDictionary dictionaryWithDictionary:mutableArgs];
     }
-	
-	// Generate query string
-	int i=0;
-	for (NSString *key in args) {
+    
+    // Generate query string
+    int i=0;
+    for (NSString *key in args) {
 #if DEBUG_SETTINGS
-		[result appendFormat:@"%@=%@<br>", key, [args objectForKey:key]];
+        NSLog(@"%@=%@", key, [args objectForKey:key]);
 #endif
-		
-		if (i++ == 0) {
-			[queryString appendFormat:@"-s%@=%@", key, [args objectForKey:key]];
-		}
-		else {
-			[queryString appendFormat:@"&%@=%@", key, [args objectForKey:key]];
-		}
-	}
+        
+        if (i++ == 0) {
+            [queryString appendFormat:@"%@=%@", key, [args objectForKey:key]];
+        }
+        else {
+            [queryString appendFormat:@"&%@=%@", key, [args objectForKey:key]];
+        }
+    }
+    return queryString;
+}
+
++(NSString *)localQueryWithArgs:(NSDictionary *)args {
+    NSString *queryString = [BRCGIQuery queryStringForArgs:args];
 
 	// Include directory
 	NSString *includeString = [NSString stringWithFormat:@"-i%@",
@@ -50,17 +56,30 @@
 		SCRIPT_NAME,
 		"-qpdt",
 		"-H",
-		queryString.UTF8String,
+		[NSString stringWithFormat:@"-s%@", queryString].UTF8String,
 		includeString.UTF8String
 	};
 	
 	@synchronized ([BRCGIQuery class]) {
 		breviar_main(argc, (const char **)argv);
-
-		NSString *prayerBody = [NSString stringWithCString:getExportedString() encoding:NSUTF8StringEncoding];
-		[result appendString:prayerBody];
+		return [NSString stringWithCString:getExportedString() encoding:NSUTF8StringEncoding];
 	}
-	return result;
+}
+
++(NSURLSessionTask *)remoteQueryWithArgs:(NSDictionary *)args completionHandler:(void (^)(NSString *result, NSError *error))completionHandler {
+    NSString *queryString = [BRCGIQuery queryStringForArgs:args];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", REMOTE_CGI_URL, queryString]];
+    
+    NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            completionHandler(nil, error);
+        } else {
+            NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            completionHandler(result, nil);
+        }
+    }];
+    [task resume];
+    return task;
 }
 
 @end

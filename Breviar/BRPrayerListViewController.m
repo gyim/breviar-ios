@@ -135,7 +135,8 @@ static NSString *kCelebrationCellIdentifier = @"CelebrationCell";
         for (BRCelebration *celebration in day.celebrations) {
             for (BRPrayer *prayer in celebration.prayers) {
                 if (day == self.day) {
-                    [prayer body];
+                    [prayer fetchBodyFromServer];
+                    [prayer fetchSpeechSynthesisBodyFromServer];
                 }
             }
         }

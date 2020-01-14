@@ -59,19 +59,52 @@ static NSString *prayerNames[] = {
 }
 
 - (NSString *)body {
-    if (!_body) {
-        _body = [self generateBodyWithOverwritingOptions:nil];
+    @synchronized (self) {
+        if (!_body) {
+            NSDictionary *queryOptions = [self getQueryOptions:nil];
+            _body = [BRCGIQuery localQueryWithArgs:queryOptions];
+        }
+        return _body;
     }
-    return _body;
 }
 
 - (NSString *)bodyForSpeechSynthesis
 {
-    if (!_bodyForSpeechSynthesis) {
-        NSDictionary *blindFriendlyOptions = @{ @"of0bf": @YES };
-        _bodyForSpeechSynthesis = [self generateBodyWithOverwritingOptions:blindFriendlyOptions];
+    @synchronized (self) {
+        if (!_bodyForSpeechSynthesis) {
+            NSDictionary *queryOptions = [self getQueryOptions:@{ @"of0bf": @YES }];
+            _bodyForSpeechSynthesis = [BRCGIQuery localQueryWithArgs:queryOptions];
+        }
+        return _bodyForSpeechSynthesis;
     }
-    return _bodyForSpeechSynthesis;
+}
+
+- (void)fetchBodyFromServer {
+    NSDictionary *queryOptions = [self getQueryOptions:nil];
+    [BRCGIQuery remoteQueryWithArgs:queryOptions completionHandler:^(NSString *result, NSError *error) {
+        if (result) {
+            @synchronized (self) {
+                _body = result;
+            }
+        } else {
+            NSLog(@"Error getting prayer body: %@", error);
+            [self body];
+        }
+    }];
+}
+
+- (void)fetchSpeechSynthesisBodyFromServer {
+    NSDictionary *queryOptions = [self getQueryOptions:@{ @"of0bf": @YES }];
+    [BRCGIQuery remoteQueryWithArgs:queryOptions completionHandler:^(NSString *result, NSError *error) {
+        if (result) {
+            @synchronized (self) {
+                _bodyForSpeechSynthesis = result;
+            }
+        } else {
+            NSLog(@"Error getting prayer body: %@", error);
+            [self bodyForSpeechSynthesis];
+        }
+    }];
 }
 
 - (void)refreshText;
@@ -80,7 +113,7 @@ static NSString *prayerNames[] = {
     [self body];
 }
 
-- (NSString *)generateBodyWithOverwritingOptions:(NSDictionary *)overwritingOptions {
+- (NSDictionary *)getQueryOptions:(NSDictionary *)overwritingOptions {
     NSMutableDictionary *queryOptions = [NSMutableDictionary dictionary];
     
     if (self.prayerType == BRStaticText) {
@@ -119,8 +152,7 @@ static NSString *prayerNames[] = {
     if (overwritingOptions) {
         [queryOptions addEntriesFromDictionary:overwritingOptions];
     }
-
-    return [BRCGIQuery queryWithArgs:queryOptions];
+    return queryOptions;
 }
 
 + (BRPrayerType)prayerTypeFromQueryId:(NSString *)queryId {

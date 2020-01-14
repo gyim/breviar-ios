@@ -39,5 +39,7 @@ typedef enum {
 + (NSString *)queryIdFromPrayerType:(BRPrayerType)prayerType;
 + (BRPrayer *)prayerForStaticTextId:(NSString *)staticTextId;
 - (void)refreshText;
+- (void)fetchBodyFromServer;
+- (void)fetchSpeechSynthesisBodyFromServer;
 
 @end

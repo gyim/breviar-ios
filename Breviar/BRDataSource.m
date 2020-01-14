@@ -41,7 +41,7 @@ static BRDataSource *_instance;
      }];
     
     // Get XML data for the day
-    dayData = [BRCGIQuery queryWithArgs:queryOptions];
+    dayData = [BRCGIQuery localQueryWithArgs:queryOptions];
     
     //NSLog(@"%@", dayData);
     
