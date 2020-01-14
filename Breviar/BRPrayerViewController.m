@@ -218,6 +218,7 @@
         NSDictionary *voiceCodes = @{
             @"sk": @"sk-SK",
             @"cz": @"cs-CZ",
+            @"c2": @"cs-CZ",
             @"hu": @"hu-HU",
         };
         NSString *voiceCode = voiceCodes[selectedLanguage];

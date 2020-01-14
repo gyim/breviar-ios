@@ -65,7 +65,7 @@ static BRSettings *_instance;
             NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
             NSString *countryCode = [[locale objectForKey:NSLocaleCountryCode] lowercaseString];
             
-            // Workaround for Czecz language code
+            // Workaround for Czech language code
             if ([preferredLanguage isEqualToString:@"cs"]) {
                 preferredLanguage = @"cz";
             }

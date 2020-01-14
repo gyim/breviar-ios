@@ -22,6 +22,7 @@
 // Appearance settings
 "j"			= "Breviary language";
 "j.cz"		= "Čeština";
+"j.c2"		= "Čeština/dominikáni";
 "j.en"		= "English";
 "j.hu"		= "Magyarul";
 "j.la"		= "Lingua latina";

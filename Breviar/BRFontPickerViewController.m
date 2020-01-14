@@ -149,7 +149,7 @@ static CGFloat componentSizes[] = {
                       "</body></html>",
                       bgColor, fgColor,
                       (long)self.fontSize, self.fontFamily];
-    [self.webView loadHTMLString:html baseURL:[NSURL URLWithString:@"http://breviar.sk"]];
+    [self.webView loadHTMLString:html baseURL:[NSURL URLWithString:@"https://breviar.sk"]];
 }
 
 #pragma mark -

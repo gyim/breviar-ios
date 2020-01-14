@@ -1,11 +1,11 @@
 // Prayer titles
-"mi"		= "Uvedení do první modlitby dne";
+"mi"		= "Pozvání k modlitbě";
 "mpc"		= "Modlitba se čtením";
 "mrch"		= "Ranní chvály";
-"mpred"		= "Modlitba dopoledne";
-"mna"		= "Modlitba v poledne";
-"mpo"		= "Modlitba odpoledne";
-"mv"		= "Nešpory";
+"mpred"		= "Tercie";
+"mna"		= "Sexta";
+"mpo"		= "Nona";
+"mv"		= "Večerní chvály";
 "mk"		= "Kompletář";
 
 // Prayer subpage titles
@@ -93,65 +93,63 @@
 
 // Other settings
 "of3"		= "Části modlitby ze společných textů";
-"of3.0"		= "o duchovních pastýřích (o kněžích)";
-"of3.1"		= "o duchovních pastýřích (o biskupech)";
-"of3.2"		= "o duchovních pastýřích (o papeži)";
-"of3.3"		= "o učitelích církve";
-"of3.4"		= "o apoštolech";
-"of3.5"		= "o jednom mučedníkovi";
-"of3.6"		= "o více mučednících";
-"of3.7"		= "o Panně Marii";
-"of3.8"		= "o svatých mužích (o řeholnících)";
-"of3.9"		= "o svatých mužích";
-"of3.10"	= "o pannách";
-"of3.11"	= "o svatých ženách (o řeholnicích)";
-"of3.12"	= "o svatých ženách";
-"of3.13"	= "o duchovních pastýřích";
-"of3.14"	= "o jedné mučednici";
-"of3.15"	= "o svatých ženách (o vychovatelkách)";
-"of3.16"	= "o svatých mužích (o vychovatelích)";
-"of3.17"	= "o svatých ženách (které vynikaly milosrdnými skutky)";
-"of3.18"	= "o svatých mužích (kteří vynikali milosrdnými skutky)";
-"of3.19"	= "o svatých ženách (o více ženách)";
-"of3.20"	= "o svatých mužích (o více mužích)";
-"of3.21"	= "o pannách (o více pannách)";
-"of3.22"	= "o posvěcení kostela";
-"of3.23"	= "za zemřelé";
-"of3.24"	= "o svatých ženách (které žily v manželství)";
-"of3.25"	= "o svatých mužích (kterí žili v manželství)";
+"of3.0"		= "O duchovních pastýřích – o kněžích";
+"of3.1"		= "O duchovních pastýřích – o biskupech";
+"of3.2"		= "O duchovních pastýřích – o papeži";
+"of3.3"		= "O učitelích církve";
+"of3.4"		= "O apoštolech";
+"of3.5"		= "O mučedníkovi";
+"of3.6"		= "O více mučednících";
+"of3.7"		= "O Panně Marii";
+"of3.8"		= "O svatých mužích – o řeholnících";
+"of3.9"		= "O svatých mužích";
+"of3.10"	= "O pannách";
+"of3.11"	= "O svatých ženách – o řeholnicích";
+"of3.12"	= "O svatých ženách";
+"of3.13"	= "O více duchovních pastýřích";
+"of3.14"	= "O mučednici";
+"of3.15"	= "O svatých ženách – o vychovatelkách";
+"of3.16"	= "O svatých mužích – o vychovatelích";
+"of3.17"	= "O svatých ženách – o ženě, která vynikala milosrdnými skutky";
+"of3.18"	= "O svatých mužích – o muži, který vynikal milosrdnými skutky";
+"of3.19"	= "O svatých ženách – o více ženách";
+"of3.20"	= "O svatých mužích – o více mužích";
+"of3.21"	= "O pannách – o více pannách";
+"of3.22"	= "Posvěcení kostela";
+"of3.23"	= "Za zemřelé";
+"of3.24"	= "O svatých ženách – o ženě, která žila v manželství";
+"of3.25"	= "O svatých mužích – o muži, který žil v manželství";
 "of3.26"	= "nepoužít";
 
 "of1zspc"	= "Zobrazit, odkud se berou společné texty";
 "of1spspc"	= "Na památky použít části ze společných textů";
 "of1sp"		= "Nezobrazit popis při modlitbě ke cti světce";
-"of1dps"	= "Pro modlitbu uprostřed dne použít žalmy z doplňovacího cyklu";
-"of1ps3"	= "Pro modlitbu uprostřed dne použít žalmy z tří týdnů ze žaltáře (aktuální, předchozí, následující)";
+"of1dps"	= "Pro modlitbu během dne použít žalmy z doplňovacího cyklu";
+"of1ps3"	= "Pro modlitbu během dne použít žalmy z tří týdnů ze žaltáře (aktuální, předchozí, následující)";
 "of1z95"	= "Místo žalmů 24, 67 resp. 100 použít žalm 95";
 "of1prz"	= "Zopakovat zvolání po každé prosbě";
-"of1vkp"	= "Pro nešpory použít kratší prosby z dodatku";
+"of1vkp"	= "Pro večerní chvály použít kratší prosby z dodatku";
 "of1v"		= "Prodloužené slavení vigilie pro modlitbu se čtením";
 
 // Alternatives
 "of2a"			= "Alternativy";
-"of5zkd" 		= "Závěr, předsedá-li kněz nebo jáhen (ranní chvály, nešpory)";
+"of5zkd" 		= "Závěr, předsedá-li kněz nebo jáhen (ranním večerní chvály)";
 "of5ps29"		= "Místo žalmu 122 vzít žalm 129";
 "of5ps69"		= "Místo žalmu 126 vzít žalm 129";
 "of5ps71"		= "Místo žalmu 127 vzít žalm 131";
 "of5pa34h"		= "Vlastní hymny pro 34. týden mezidobí";
 "of5psps"		= "Žalmy pro Popeleční středu: ze středy 4. týdne žaltáře / z pátku 3. týdne žaltáře";
 "of5ofps60" 	= "Společné texty za zemřelé, ranní chvály: místo žalmu 146 vzít žalm 150";
-"of5czh"		= "Hymny z breviáře / k volnému výběru";
-
-// for CZ the following should not be displayed
+"of5czh"		= "Hymny z breviáře / k volnému výběru"; // CZ only
 "of5hpc"		= "Modlitba se čtením (mezidobí): hymnus I. [V noci a časně ráno] / hymnus II. [Během dne]";
-"of5hpred"		= "Modlitba dopoledne: hymnus K nám, Duchu Svatý, nyní spěj / hymnus Je třetí denní hodina";
-"of5hna"		= "Modlitba v poledne: hymnus Jsi mocný Vládce, věrný Bůh / hymnus Teď Pánu chvály zpívejme";
-"of5hpo"		= "Modlitba odpoledne: hymnus Svět celý v pohyb uvádíš / hymnus Hodina třetí z poledne";
-"of5h1v"			= "První nešpory (mezidobí): hymnus pro první večerní chvály / hymnus pro čtení [během dne]";
+"of5hpred"		= "Tercie: hymnus K nám, Duchu Svatý, nyní spěj / hymnus Je třetí denní hodina";
+"of5hna"		= "Sexta: hymnus Jsi mocný Vládce, věrný Bůh / hymnus Teď Pánu chvály zpívejme";
+"of5hpo"		= "Nona: hymnus Svět celý v pohyb uvádíš / hymnus Hodina třetí z poledne";
+"of5h1v"			= "První večerní chvály (mezidobí): hymnus pro první večerní chvály / hymnus pro čtení [během dne]";
 "of5hk"			= "Kompletář: hymnus A: Na sklonku dne tě upřímně / hymnus B: Ty, Kriste, světlo, jasný dni";
 "of5vnpc"		= "Modlitba se čtením (doba velikonoční): hymnus nedělní / hymnus z férie";
 "of5vnhrch"		= "Ranní chvály (doba velikonoční): hymnus hymnus nedělní / hymnus z férie";
-"of5vnv"		= "Nešpory (doba velikonoční): hymnus hymnus nedělní / hymnus z férie";
+"of5vnv"		= "Večerní chvály (doba velikonoční): hymnus hymnus nedělní / hymnus z férie";
 
 // Not shown (hidden) options
 "of2id"			= "Zobrazit datum v ISO 8601 formátu";

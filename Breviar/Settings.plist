@@ -23,6 +23,7 @@
 						<string>cz</string>
 						<string>hu</string>
 						<string>sk</string>
+						<string>c2</string>
 					</array>
 				</dict>
 				<dict>
@@ -255,6 +256,12 @@
 							<string>cz</string>
 							<key>visibility</key>
 							<string>j == &quot;cz&quot;</string>
+						</dict>
+						<dict>
+							<key>value</key>
+							<string>c2</string>
+							<key>visibility</key>
+							<string>j == &quot;c2&quot;</string>
 						</dict>
 						<dict>
 							<key>value</key>

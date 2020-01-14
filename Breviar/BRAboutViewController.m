@@ -26,6 +26,7 @@
     NSString *lang = [settings stringForOption:@"j"];
     NSDictionary *langDirs = @{@"sk": @"html/include",
                                @"cz": @"html/include_cz",
+                               @"c2": @"html/include_czop",
                                @"hu": @"html/include_hu"};
     
     NSString *filename = [[NSBundle mainBundle] pathForResource:@"about" ofType:@"htm" inDirectory:[langDirs objectForKey:lang]];
@@ -38,9 +39,10 @@
     NSString *version = [NSString stringWithFormat:@"%@ (%@)", [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"], BUILD_NUMBER];
     NSString *appName = [NSString stringWithFormat:@"%@ (iOS)", [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"]];
     NSDictionary *sites = @{
-        @"sk": @"http://breviar.sk",
+        @"sk": @"https://breviar.sk",
         @"cz": @"http://breviar.cz",
-        @"hu": @"http://breviar.sk/hu",
+        @"c2": @"https://breviar.sk/czop",
+        @"hu": @"https://breviar.sk/hu",
     };
 
     NSDictionary *replacements = @{
