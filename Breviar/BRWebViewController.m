@@ -18,6 +18,7 @@
 @property(strong) UITapGestureRecognizer *tapGesture;
 @property(assign) struct timeval lastClickTime;
 @property(strong) NSTimer *idleTimerReenableTimer;
+@property(assign) BOOL fullScreenMode;
 
 @end
 
@@ -32,6 +33,7 @@
     [super viewDidLoad];
     [self setupSharedWebView];
     self.navbarToggleEnabled = YES;
+    self.fullScreenMode = NO;
 }
 
 - (void)setupSharedWebView
@@ -120,26 +122,30 @@
         return;
     }
     
-    BOOL navbarHidden = [UIApplication sharedApplication].isStatusBarHidden;
-    BOOL shouldShowNavigationBar = navbarHidden;
-    BOOL shouldShowToolBar = navbarHidden && self.toolbarItems.count > 0;
+    self.fullScreenMode = !self.fullScreenMode;
+    BOOL shouldShowToolBar = self.fullScreenMode && self.toolbarItems.count > 0;
 
     [UIView animateWithDuration:UINavigationControllerHideShowBarDuration
                      animations:^{
-                         [[UIApplication sharedApplication] setStatusBarHidden:!shouldShowNavigationBar withAnimation:UIStatusBarAnimationSlide];
-                         [self.navigationController setNavigationBarHidden:!shouldShowNavigationBar animated:YES];
-                         [self.navigationController setToolbarHidden:!shouldShowToolBar animated:YES];
+                         [self setNeedsStatusBarAppearanceUpdate];
+                         [self.navigationController setNavigationBarHidden:self.fullScreenMode animated:YES];
+                         [self.navigationController setToolbarHidden:shouldShowToolBar animated:YES];
                          
                          // If we're near the top (haven't scrolled too much) and we're about to show the nav bar, scroll down a bit so that the top content is not hidden by nav bar (without scrolling)
                          CGPoint scrollOffset = self.webView.scrollView.contentOffset;
-                         if (shouldShowNavigationBar && scrollOffset.y < 30) {
-                             scrollOffset.y = -64;
+                         if (!self.fullScreenMode && scrollOffset.y < self.view.safeAreaInsets.top) {
+                             scrollOffset.y = -self.view.safeAreaInsets.top;
                              self.webView.scrollView.contentOffset = scrollOffset;
                          }
                          
-                         [self setContentInsetsWithNavigationBarVisible:shouldShowNavigationBar toolbarVisible:shouldShowToolBar];
+                         [self setContentInsetsWithNavigationBarVisible:!self.fullScreenMode toolbarVisible:shouldShowToolBar];
                      }
                      completion:nil];
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return self.fullScreenMode;
 }
 
 - (void)setContentInsetsWithNavigationBarVisible:(BOOL)navigationBarVisible toolbarVisible:(BOOL)toolbarVisible
