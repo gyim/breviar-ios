@@ -28,6 +28,21 @@
 				</dict>
 				<dict>
 					<key>id</key>
+					<string>j</string>
+					<key>type</key>
+					<string>stringOption</string>
+					<key>default</key>
+					<string>sk</string>
+					<key>visibility</key>
+					<string>multiLang == FALSE &amp;&amp; (j == &quot;cz&quot; || j == &quot;c2&quot;)</string>
+					<key>options</key>
+					<array>
+						<string>cz</string>
+						<string>c2</string>
+					</array>
+				</dict>
+				<dict>
+					<key>id</key>
 					<string>prayerFont</string>
 					<key>type</key>
 					<string>font</string>
