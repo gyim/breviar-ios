@@ -359,6 +359,12 @@
 							<key>visibility</key>
 							<string>j == &quot;sk&quot;</string>
 						</dict>
+						<dict>
+							<key>value</key>
+							<string>osu</string>
+							<key>visibility</key>
+							<string>j == &quot;sk&quot;</string>
+						</dict>
 					</array>
 				</dict>
 				<dict>
