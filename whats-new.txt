@@ -1,4 +1,23 @@
 ________________________________________________________________________
+What's New in Version 1.6
+
+SK
+– Tmavý režim.
+– Nové slávenia: Sv. Pavla VI., pápeža; Prebl. Panny Márie Loretánskej.
+– Doplnenie textov pre saleziánsku rodinu (SDB).
+– Kalendár a propriá pre uršulínky Rímskej únie (OSU).
+
+CZ
+– Tmavý režim.
+– Český dominikánský breviář (jako samostatní jazyk v Nastavení).
+– Nové slavení: Sv. Pavla VI., papeže; Panny Marie z Loreta.
+– Změna terminologie „Duch svatý“ na „Duch Svatý“ (požadavek ČBK).
+
+HU
+– Sötét mód.
+– A Loretói Boldogságos Szűz Mária.
+
+________________________________________________________________________
 What's New in Version 1.5.1
 
 SK
