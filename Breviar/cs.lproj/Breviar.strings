@@ -69,6 +69,7 @@
 "k.sk" 		= "všeobecný [pre Slovensko]";
 "k.cz" 		= "obecný [pro Čechy a Moravu]";
 "k.czop" 	= "dominikánský"; // not used
+"k.c2" 	= "dominikánský";
 "k.cssr" 	= "pre redemptoristov (CSsR)";
 "k.hu" 		= "általános [Magyarország]";
 "k.svd" 	= "pre verbistov (SVD)";
