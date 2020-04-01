@@ -7,16 +7,21 @@ SK
 – Doplnenie textov pre saleziánsku rodinu (SDB).
 – Kalendár a propriá pre uršulínky Rímskej únie (OSU).
 – Zmeny v kalendári pre pre bosých karmelitánov (OCD).
+– Doplnenie herbejských písmen do záhlaví pre žalm 119.
 
 CZ
 – Tmavý režim.
 – Český dominikánský breviář (jako samostatní jazyk v Nastavení).
 – Nové slavení: Sv. Pavla VI., papeže; Panny Marie z Loreta.
 – Změna terminologie „Duch svatý“ na „Duch Svatý“ (požadavek ČBK).
+– Vyčištění číslování žalmů; odkazy na žalmy podle NVg+MT.
 
 HU
 – Sötét mód.
 – A Loretói Boldogságos Szűz Mária.
+– Kettős számozás a zsoltároknál (az első szám a Neovulgáta számozását jelöli, a második a Vulgáta és a Septuaginta számozását követi).
+– Versszámok hozzáadása a Zsoltárokhoz és a Kantikumokhoz.
+– Az olvasmányos imaóra hosszabb ünneplése a kiválasztott ünnepeken.
 
 ________________________________________________________________________
 What's New in Version 1.5.1
