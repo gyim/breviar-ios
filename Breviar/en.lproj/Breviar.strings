@@ -63,6 +63,7 @@
 "of0ff"		= "Footnotes/Endnotes";
 "of0cit"	= "Mass readings";
 "of0zft"	= "Psalms omissions";
+"of0ic"	= "Special texts (elisions) in italics";
 
 // Liturgic calendar settings
 "k" 		= "Liturgical calendar";

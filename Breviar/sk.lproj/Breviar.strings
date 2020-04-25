@@ -63,6 +63,7 @@
 "of0ff"		= "Poznámky pod čiarou/v texte";
 "of0cit"	= "Čítania v omši";
 "of0zft"	= "Vynechané pasáže zo žalmov";
+"of0ic"	= "Niektoré texty (elízie) kurzívou";
 
 // Liturgic calendar settings
 "k" 		= "Kalendár Liturgie hodín";

@@ -63,6 +63,7 @@
 "of0ff"		= "Lábjegyzetek";
 "of0cit"	= "Liturgikus olvasmányok";
 "of0zft"	= "Zsoltárok kihagyott részeit";
+"of0ic"	= "Néhány szöveg (elizálva) dőlt betűvel";
 
 // Liturgic calendar settings
 "k" 		= "Liturgikus naptár";
