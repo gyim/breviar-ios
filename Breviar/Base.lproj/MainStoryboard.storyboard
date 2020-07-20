@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="r6Z-rP-I8n">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="r6Z-rP-I8n">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment version="4352" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -348,9 +348,6 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" name="BRTint"/>
                         <textAttributes key="titleTextAttributes">
-                            <color key="textColor" name="BRMenuItem"/>
-                        </textAttributes>
-                        <textAttributes key="largeTitleTextAttributes">
                             <color key="textColor" name="BRMenuItem"/>
                         </textAttributes>
                     </navigationBar>
@@ -771,6 +768,10 @@
             <point key="canvasLocation" x="2961" y="984"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Q6E-KU-FB2"/>
+    </inferredMetricsTieBreakers>
+    <color key="tintColor" name="BRTint"/>
     <resources>
         <image name="back" width="13" height="21.5"/>
         <image name="font_larger" width="22" height="22"/>
@@ -787,15 +788,8 @@
         <namedColor name="BRMenuItem">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="BRMenuItem">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="BRTint">
             <color red="0.51399999856948853" green="0.22800000011920929" blue="0.22400000691413879" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="Q6E-KU-FB2"/>
-    </inferredMetricsTieBreakers>
-    <color key="tintColor" name="BRTint"/>
 </document>
