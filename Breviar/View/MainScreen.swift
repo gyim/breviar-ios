@@ -8,36 +8,52 @@
 import SwiftUI
 
 struct MainScreen: View {
+    @StateObject var state: BreviarState
+    
     var body: some View {
-        let dataSource = TestDataSource()
-        let day = dataSource.getLiturgicalDay(date: Date.init())
-        
         NavigationView{
-            CelebrationList(celebrations:day.celebrations, selectedCelebration: day.celebrations[0].id)
-                .navigationTitle("Today")
+            List{
+                Section() {
+                    ForEach(state.day.celebrations) { celebration in
+                        CelebrationRow(celebration: celebration, checked: (state.selectedCelebration == celebration.id))
+                            .onTapGesture {
+                                state.selectedCelebration = celebration.id
+                            }
+                    }
+                }
+                
+                Section(header: Text("Prayers")) {
+                    PrayerLink(label: "Invitatory", icon: "sparkles")
+                    PrayerLink(label: "Office of Readings", icon: "text.book.closed")
+                    PrayerLink(label: "Morning Prayer", icon: "sunrise")
+                    PrayerLink(label: "Mid-Morning Prayer", icon: "sun.min")
+                    PrayerLink(label: "Midday Prayer", icon: "sun.max.fill")
+                    PrayerLink(label: "Mid-Afternoon Prayer", icon: "sun.min.fill")
+                    PrayerLink(label: "Evening Prayer", icon: "sunset.fill")
+                    PrayerLink(label: "Compline", icon: "moon.stars.fill")
+                }
+            }
+            .navigationTitle("Today")
+            .navigationBarItems(
+                leading: Button(action: {}, label: {Label("Choose Date", systemImage: "calendar")})
+            )
+            .toolbar {
+                HStack{
+                    Button(action: {}, label: {Label("Previous Day", systemImage: "chevron.left")})
+                        .padding()
+                    Spacer()
+                        .frame(width: 6.0)
+                    Button(action: {}, label: {Label("Next Day", systemImage: "chevron.right")})
+                }
+            }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
 struct MainScreen_Previews: PreviewProvider {
     static var previews: some View {
-        MainScreen()
-    }
-}
-
-struct CelebrationList : View {
-    var celebrations: [Celebration]
-    @State var selectedCelebration: String
-    
-    var body: some View {
-        List(celebrations, id: \.id) { celebration in
-            CelebrationRow(celebration: celebration, checked: (celebration.id == selectedCelebration))
-                .onTapGesture {
-                    withAnimation {
-                        selectedCelebration = celebration.id
-                    }
-                }
-        }
+        MainScreen(state: BreviarState(dataSource: TestDataSource()))
     }
 }
 
@@ -99,9 +115,21 @@ struct CelebrationRow : View {
             
             if checked {
                 Image(systemName: "checkmark").resizable().frame(width: 20, height: 20)
+                    .foregroundColor(.blue)
                     .padding(5)
             }
         }
     }
 }
 
+struct PrayerLink: View {
+    var label: String
+    var icon: String
+    
+    var body: some View {
+        NavigationLink(
+            destination: Text(label)) {
+            Label(label, systemImage: icon)
+        }
+    }
+}

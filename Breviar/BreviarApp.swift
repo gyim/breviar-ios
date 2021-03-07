@@ -11,7 +11,7 @@ import SwiftUI
 struct BreviarApp: App {
     var body: some Scene {
         WindowGroup {
-            MainScreen()
+            MainScreen(state: BreviarState(dataSource: TestDataSource()))
         }
     }
 }
