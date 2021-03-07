@@ -17,7 +17,9 @@ struct MainScreen: View {
                     ForEach(state.day.celebrations) { celebration in
                         CelebrationRow(celebration: celebration, checked: (state.selectedCelebration == celebration.id))
                             .onTapGesture {
-                                state.selectedCelebration = celebration.id
+                                withAnimation {
+                                    state.selectedCelebration = celebration.id
+                                }
                             }
                     }
                 }
@@ -35,7 +37,7 @@ struct MainScreen: View {
             }
             .navigationTitle("Today")
             .navigationBarItems(
-                leading: Button(action: {}, label: {Label("Choose Date", systemImage: "calendar")})
+                leading: Button(action: {}, label: {Label("", systemImage: "calendar")})
             )
             .toolbar {
                 HStack{
@@ -113,11 +115,10 @@ struct CelebrationRow : View {
             .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 0))
             .overlay(CelebrationColorView(color: celebration.liturgicalColor, width: 10))
             
-            if checked {
-                Image(systemName: "checkmark").resizable().frame(width: 20, height: 20)
-                    .foregroundColor(.blue)
-                    .padding(5)
-            }
+            Image(systemName: "checkmark").resizable().frame(width: 20, height: 20)
+                .foregroundColor(.blue)
+                .padding(5)
+                .opacity(checked ? 1 : 0)
         }
     }
 }
