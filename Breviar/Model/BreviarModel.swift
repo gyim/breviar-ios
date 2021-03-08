@@ -81,16 +81,43 @@ struct Prayer {
     let body: String
 }
 
-class BreviarState : ObservableObject {
+class BreviarModel : ObservableObject {
     private var dataSource: BreviarDataSource
-    @Published var day: LiturgicalDay
-    @Published var selectedCelebration: String
+    @Published var dayState: LoadingState<LiturgicalDay> = .idle
+    @Published var celebrationIndex: Int = 0
     
     init(dataSource: BreviarDataSource) {
-        let day = dataSource.getLiturgicalDay(date: Date.init())
-        
         self.dataSource = dataSource
-        self.day = day
-        self.selectedCelebration = day.celebrations[0].id
     }
+    
+    func load() -> BreviarModel {
+        switch self.dayState {
+        case .idle:
+            self.loadDate(Date.init())
+        default:
+            break
+        }
+        return self
+    }
+    
+    func loadDate(_ date: Date) {
+        let now = Date.init()
+        self.dayState = .loading
+        self.celebrationIndex = 0
+        
+        self.dataSource.getLiturgicalDay(date: now) { (day, error) in
+            if error == nil {
+                self.dayState = .loaded(day!)
+            } else {
+                self.dayState = .failed(error!)
+            }
+        }
+    }
+}
+
+enum LoadingState<Value> {
+    case idle
+    case loading
+    case failed(Error)
+    case loaded(Value)
 }

@@ -10,8 +10,11 @@ import SwiftUI
 @main
 struct BreviarApp: App {
     var body: some Scene {
+        let dataSource = TestDataSource()
+        let model = BreviarModel(dataSource: dataSource)
+        
         WindowGroup {
-            MainScreen(state: BreviarState(dataSource: TestDataSource()))
+            MainScreen().environmentObject(model.load())
         }
     }
 }

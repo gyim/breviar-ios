@@ -8,12 +8,12 @@
 import Foundation
 
 protocol BreviarDataSource {
-    func getLiturgicalDay(date: Date) -> LiturgicalDay
+    func getLiturgicalDay(date: Date, handler: (LiturgicalDay?, Error?) -> Void)
 }
 
 class TestDataSource : BreviarDataSource {
-    func getLiturgicalDay(date: Date) -> LiturgicalDay {
-        return LiturgicalDay(date: date, celebrations: [
+    func getLiturgicalDay(date: Date, handler: (LiturgicalDay?, Error?) -> Void) {
+        let day = LiturgicalDay(date: date, celebrations: [
             Celebration(id: "1", title: "Red celebration", subtitle: "This is a celebration with red color for day: \(date.description)", liturgicalColor: LiturgicalColor.red),
             Celebration(id: "2", title: "White celebration", subtitle: "This is a celebration with white color", liturgicalColor: LiturgicalColor.white),
             Celebration(id: "3", title: "Green celebration", subtitle: "This is a celebration with green color", liturgicalColor: LiturgicalColor.green),
@@ -24,5 +24,6 @@ class TestDataSource : BreviarDataSource {
             Celebration(id: "8", title: "Violet or White celebration", subtitle: "This is a celebration with violet or white color", liturgicalColor: LiturgicalColor.violetOrWhite),
             Celebration(id: "9", title: "Rose or Violet celebration", subtitle: "This is a celebration with rose or violet color", liturgicalColor: LiturgicalColor.roseOrViolet),
         ])
+        handler(day, nil)
     }
 }

@@ -8,33 +8,11 @@
 import SwiftUI
 
 struct MainScreen: View {
-    @StateObject var state: BreviarState
+    @EnvironmentObject var model: BreviarModel
     
     var body: some View {
         NavigationView{
-            List{
-                Section() {
-                    ForEach(state.day.celebrations) { celebration in
-                        CelebrationRow(celebration: celebration, checked: (state.selectedCelebration == celebration.id))
-                            .onTapGesture {
-                                withAnimation {
-                                    state.selectedCelebration = celebration.id
-                                }
-                            }
-                    }
-                }
-                
-                Section(header: Text("Prayers")) {
-                    PrayerLink(label: "Invitatory", icon: "sparkles")
-                    PrayerLink(label: "Office of Readings", icon: "text.book.closed")
-                    PrayerLink(label: "Morning Prayer", icon: "sunrise")
-                    PrayerLink(label: "Mid-Morning Prayer", icon: "sun.min")
-                    PrayerLink(label: "Midday Prayer", icon: "sun.max.fill")
-                    PrayerLink(label: "Mid-Afternoon Prayer", icon: "sun.min.fill")
-                    PrayerLink(label: "Evening Prayer", icon: "sunset.fill")
-                    PrayerLink(label: "Compline", icon: "moon.stars.fill")
-                }
-            }
+            MainScreenContent()
             .navigationTitle("Today")
             .navigationBarItems(
                 leading: Button(action: {}, label: {Label("", systemImage: "calendar")})
@@ -53,9 +31,41 @@ struct MainScreen: View {
     }
 }
 
-struct MainScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        MainScreen(state: BreviarState(dataSource: TestDataSource()))
+struct MainScreenContent: View {
+    @EnvironmentObject var model: BreviarModel
+    
+    var body: some View {
+        switch model.dayState {
+        case .idle, .loading:
+            Text("Loading...")
+        case .failed(let error):
+            Text(error.localizedDescription)
+        case .loaded(let day):
+            List{
+                Section() {
+                    ForEach(0..<day.celebrations.count) { i in
+                        let celebration = day.celebrations[i]
+                        CelebrationRow(celebration: celebration, checked: (model.celebrationIndex == i))
+                            .onTapGesture {
+                                withAnimation {
+                                    model.celebrationIndex = i
+                                }
+                            }
+                    }
+                }
+
+                Section(header: Text("Prayers")) {
+                    PrayerLink(label: "Invitatory", icon: "sparkles")
+                    PrayerLink(label: "Office of Readings", icon: "text.book.closed")
+                    PrayerLink(label: "Morning Prayer", icon: "sunrise")
+                    PrayerLink(label: "Mid-Morning Prayer", icon: "sun.min")
+                    PrayerLink(label: "Midday Prayer", icon: "sun.max.fill")
+                    PrayerLink(label: "Mid-Afternoon Prayer", icon: "sun.min.fill")
+                    PrayerLink(label: "Evening Prayer", icon: "sunset.fill")
+                    PrayerLink(label: "Compline", icon: "moon.stars.fill")
+                }
+            }
+        }
     }
 }
 
@@ -132,5 +142,12 @@ struct PrayerLink: View {
             destination: Text(label)) {
             Label(label, systemImage: icon)
         }
+    }
+}
+
+struct MainScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        let model = BreviarModel(dataSource: TestDataSource())
+        MainScreen().environmentObject(model.load())
     }
 }
