@@ -14,15 +14,15 @@ enum Language : String {
 }
 
 struct LiturgicalDay {
-    let date: Date
-    let celebrations: [Celebration]
+    var date: Date
+    var celebrations: [Celebration]
 }
 
 struct Celebration : Hashable, Identifiable {
-    let id: String
-    let title: String
-    let subtitle: String
-    let liturgicalColor: LiturgicalColor
+    var id: String
+    var title: String
+    var subtitle: String
+    var liturgicalColor: LiturgicalColor
 }
 
 enum LiturgicalColor : String {
@@ -59,6 +59,21 @@ enum LiturgicalColor : String {
             return .violet
         default:
             return self
+        }
+    }
+    
+    static func colorFromId(colorId: Int) -> LiturgicalColor? {
+        switch colorId {
+        case 1: return .red;
+        case 2: return .white;
+        case 3: return .green;
+        case 4: return .violet;
+        case 5: return .rose;
+        case 6: return .black;
+        case 7: return .violetOrBlack;
+        case 8: return .violetOrWhite;
+        case 9: return .roseOrViolet;
+        default: return nil
         }
     }
 }
