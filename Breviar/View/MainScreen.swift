@@ -10,34 +10,59 @@ import SwiftUI
 struct MainScreen: View {
     @EnvironmentObject var model: BreviarModel
     
+    func getTitle(date: Date) -> String {
+        let currentDay = Calendar.current.ordinality(of: .day, in: .era, for: Date())
+        let selectedDay = Calendar.current.ordinality(of: .day, in: .era, for: date)
+        if currentDay == nil || selectedDay == nil {
+            return "N/A"
+        }
+        let dayDiff = abs(currentDay! - selectedDay!)
+        
+        if dayDiff < 3 {
+            let fmt = DateFormatter()
+            fmt.dateFormat = "EEEE"
+            let dayName = fmt.string(from: date).capitalized
+            
+            if dayDiff == 0 {
+                return "\(dayName) (Today)"
+            } else {
+                return dayName
+            }
+        } else {
+            let fmt = DateFormatter()
+            fmt.dateStyle = .long
+            return fmt.string(from: date)
+        }
+    }
+    
     var body: some View {
         NavigationView{
             MainScreenContent()
-            .navigationTitle("Today")
-            .navigationBarItems(
-                leading: Button(action: {}, label: {Label("", systemImage: "calendar")})
-            )
-            .toolbar {
-                HStack{
-                    Button(
-                        action: {
-                            withAnimation {
-                                model.loadDateByAdding(days: -1)
-                            }
-                        },
-                        label: {Label("Previous Day",systemImage: "chevron.left")})
-                        .padding()
-                    Spacer()
-                        .frame(width: 6.0)
-                    Button(
-                        action: {
-                            withAnimation {
-                                model.loadDateByAdding(days: 1)
-                            }
-                        },
-                        label: {Label("Next Day", systemImage: "chevron.right")})
+                .navigationTitle(getTitle(date: model.date))
+                .navigationBarItems(
+                    leading: Button(action: {}, label: {Label("", systemImage: "calendar")})
+                )
+                .toolbar {
+                    HStack{
+                        Button(
+                            action: {
+                                withAnimation {
+                                    model.loadDateByAdding(days: -1)
+                                }
+                            },
+                            label: {Label("Previous Day",systemImage: "chevron.left")})
+                            .padding()
+                        Spacer()
+                            .frame(width: 6.0)
+                        Button(
+                            action: {
+                                withAnimation {
+                                    model.loadDateByAdding(days: 1)
+                                }
+                            },
+                            label: {Label("Next Day", systemImage: "chevron.right")})
+                    }
                 }
-            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
