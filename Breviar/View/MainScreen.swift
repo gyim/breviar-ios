@@ -55,12 +55,11 @@ struct MainScreenContent: View {
         case .loaded(let day):
             List{
                 Section() {
-                    ForEach(0..<day.celebrations.count) { i in
-                        let celebration = day.celebrations[i]
-                        CelebrationRow(celebration: celebration, checked: (model.celebrationIndex == i))
+                    ForEach(day.celebrations) { celebration in
+                        CelebrationRow(celebration: celebration, checked: (model.selectedCelebration == celebration.id))
                             .onTapGesture {
                                 withAnimation {
-                                    model.celebrationIndex = i
+                                    model.selectedCelebration = celebration.id
                                 }
                             }
                     }

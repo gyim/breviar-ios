@@ -98,17 +98,19 @@ struct Prayer {
 
 class BreviarModel : ObservableObject {
     private var dataSource: BreviarDataSource
+    @Published var date: Date
     @Published var dayState: LoadingState<LiturgicalDay> = .idle
-    @Published var celebrationIndex: Int = 0
+    @Published var selectedCelebration: String = ""
     
     init(dataSource: BreviarDataSource) {
         self.dataSource = dataSource
+        self.date = Date()
     }
     
     func load() -> BreviarModel {
         switch self.dayState {
         case .idle:
-            self.loadDate(Date.init())
+            self.loadDate(Date())
         default:
             break
         }
@@ -116,12 +118,18 @@ class BreviarModel : ObservableObject {
     }
     
     func loadDate(_ date: Date) {
+        self.date = date
         self.dayState = .loading
-        self.celebrationIndex = 0
+        self.selectedCelebration = ""
         
         self.dataSource.getLiturgicalDay(date: date) { (day, error) in
             if error == nil {
-                self.dayState = .loaded(day!)
+                if let day = day {
+                    self.dayState = .loaded(day)
+                    if day.celebrations.count > 0 {
+                        self.selectedCelebration = day.celebrations[0].id
+                    }
+                }
             } else {
                 self.dayState = .failed(error!)
             }
@@ -130,8 +138,12 @@ class BreviarModel : ObservableObject {
     
     func loadDateByAdding(days: Int) {
         switch self.dayState {
-        case .loaded(let day):
-            if let newDate = Calendar.current.date(byAdding: .day, value: days, to: day.date) {
+        case .idle:
+            fallthrough
+        case .failed(_):
+            fallthrough
+        case .loaded(_):
+            if let newDate = Calendar.current.date(byAdding: .day, value: days, to: self.date) {
                 self.loadDate(newDate)
             }
         default:

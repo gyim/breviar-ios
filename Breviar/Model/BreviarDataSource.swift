@@ -73,7 +73,7 @@ class LiturgicalDayParser : NSObject, XMLParserDelegate {
         let p = (path[path.count-2], path[path.count-1], elementName)
 
         switch p {
-        case ("LHData", "Celebration", "DateISO"):
+        case ("LHData", "CalendarDay", "DateISO"):
             let f = DateFormatter()
             f.dateFormat = "yyyy-MM-dd"
             if let date = f.date(from: self.parsedText) {
