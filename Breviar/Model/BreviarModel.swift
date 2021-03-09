@@ -116,16 +116,26 @@ class BreviarModel : ObservableObject {
     }
     
     func loadDate(_ date: Date) {
-        let now = Date.init()
         self.dayState = .loading
         self.celebrationIndex = 0
         
-        self.dataSource.getLiturgicalDay(date: now) { (day, error) in
+        self.dataSource.getLiturgicalDay(date: date) { (day, error) in
             if error == nil {
                 self.dayState = .loaded(day!)
             } else {
                 self.dayState = .failed(error!)
             }
+        }
+    }
+    
+    func loadDateByAdding(days: Int) {
+        switch self.dayState {
+        case .loaded(let day):
+            if let newDate = Calendar.current.date(byAdding: .day, value: days, to: day.date) {
+                self.loadDate(newDate)
+            }
+        default:
+            break
         }
     }
 }

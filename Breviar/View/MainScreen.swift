@@ -19,11 +19,23 @@ struct MainScreen: View {
             )
             .toolbar {
                 HStack{
-                    Button(action: {}, label: {Label("Previous Day", systemImage: "chevron.left")})
+                    Button(
+                        action: {
+                            withAnimation {
+                                model.loadDateByAdding(days: -1)
+                            }
+                        },
+                        label: {Label("Previous Day",systemImage: "chevron.left")})
                         .padding()
                     Spacer()
                         .frame(width: 6.0)
-                    Button(action: {}, label: {Label("Next Day", systemImage: "chevron.right")})
+                    Button(
+                        action: {
+                            withAnimation {
+                                model.loadDateByAdding(days: 1)
+                            }
+                        },
+                        label: {Label("Next Day", systemImage: "chevron.right")})
                 }
             }
         }
