@@ -42,7 +42,7 @@ class TestDataSource : BreviarDataSource {
                     id: "\(c)",
                     title: "Day \(d) celebration \(c)",
                     subtitle: "This is a test celebration.",
-                    liturgicalColor: LiturgicalColor.colorFromId(colorId: (d+c) % 9 + 1)!
+                    liturgicalColor: LiturgicalColor(rawValue: (d+c) % 9 + 1)!
                 ))
             }
             
@@ -81,7 +81,7 @@ class LiturgicalDayParser : NSObject, XMLParserDelegate {
             if path.count > 0 && path[path.count-1] == "Celebration" {
                 if let cs = attributeDict["Id"],
                    let ci = Int(cs),
-                   let color = LiturgicalColor.colorFromId(colorId: ci) {
+                   let color = LiturgicalColor(rawValue: ci) {
                     self.celebration.liturgicalColor = color
                 }
             }

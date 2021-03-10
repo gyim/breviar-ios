@@ -13,96 +13,6 @@ enum Language : String {
     case slovak = "sk"
 }
 
-struct LiturgicalDay : Identifiable {
-    var id: String
-    var date: Date
-    var celebrations: [Celebration]
-    
-    init(date: Date, celebrations: [Celebration]) {
-        self.id = UUID().description
-        self.date = date
-        self.celebrations = celebrations
-    }
-}
-
-struct Celebration : Hashable, Identifiable {
-    var id: String
-    var title: String
-    var subtitle: String
-    var liturgicalColor: LiturgicalColor
-}
-
-enum LiturgicalColor : String {
-    case red
-    case white
-    case green
-    case violet
-    case rose
-    case black
-    case violetOrBlack
-    case violetOrWhite
-    case roseOrViolet
-    
-    func firstColor() -> LiturgicalColor {
-        switch self {
-        case .violetOrBlack:
-            return .violet
-        case .violetOrWhite:
-            return .violet
-        case .roseOrViolet:
-            return .rose
-        default:
-            return self
-        }
-    }
-    
-    func secondColor() -> LiturgicalColor {
-        switch self {
-        case .violetOrBlack:
-            return .black
-        case .violetOrWhite:
-            return .white
-        case .roseOrViolet:
-            return .violet
-        default:
-            return self
-        }
-    }
-    
-    static func colorFromId(colorId: Int) -> LiturgicalColor? {
-        switch colorId {
-        case 1: return .red;
-        case 2: return .white;
-        case 3: return .green;
-        case 4: return .violet;
-        case 5: return .rose;
-        case 6: return .black;
-        case 7: return .violetOrBlack;
-        case 8: return .violetOrWhite;
-        case 9: return .roseOrViolet;
-        default: return nil
-        }
-    }
-}
-
-enum PrayerType {
-    case invitatory
-    case officeOfReadings
-    case morningPrayer
-    case midMorningPrayer
-    case midDayPrayer
-    case midAfternoonPrayer
-    case eveningPrayer
-    case compline
-}
-
-struct Prayer {
-    let date: Date
-    let type: PrayerType
-    let celebration: Celebration
-    let body: String
-}
-
 func getMonthForDay(_ day: Date) -> Date {
     let calendar = Calendar.current
     var comps = DateComponents()
@@ -203,3 +113,4 @@ enum LoadingState<Value> {
     case failed(Error)
     case loaded(Value)
 }
+
