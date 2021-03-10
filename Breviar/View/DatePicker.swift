@@ -100,10 +100,7 @@ struct DatePickerList: View {
                     ForEach(day.celebrations) { celebration in
                         CelebrationRow(celebration: celebration, checked: false)
                             .onTapGesture {
-                                model.day = day.day
-                                model.dayState = .loaded(day)
-                                model.selectedCelebration = celebration.id
-                                model.datePickerShown = false
+                                model.jumpTo(day: day, celebration: celebration)
                             }
                     }
                 }

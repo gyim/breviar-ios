@@ -92,6 +92,13 @@ class BreviarModel : ObservableObject {
             }
         }
     }
+    
+    func jumpTo(day: LiturgicalDay, celebration: Celebration) {
+        self.day = day.day
+        self.dayState = .loaded(day)
+        self.selectedCelebration = celebration.id
+        self.datePickerShown = false
+    }
 }
 
 enum LoadingState<Value> {
