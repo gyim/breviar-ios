@@ -47,8 +47,15 @@ class TestDataSource : BreviarDataSource {
     }
 }
 
+enum DataSourceError : String, Error {
+    case networkError = "Network error"
+    case serverError = "Remote server returned an invalid response"
+    case parseError = "Error parsing server response"
+}
+
 class LiturgicalDayParser : NSObject, XMLParserDelegate {
     var parser: XMLParser
+    var days: [LiturgicalDay]
     var day: LiturgicalDay
     var celebration: Celebration
     var path: [String] = []
@@ -57,6 +64,7 @@ class LiturgicalDayParser : NSObject, XMLParserDelegate {
     
     init(data: Data) {
         self.parser = XMLParser(data: data)
+        self.days = []
         self.day = LiturgicalDay(day: Day(fromDate: Date.init()), celebrations: [])
         self.celebration = Celebration(id: "", title: "", subtitle: "", liturgicalColor: .green)
     }
@@ -66,13 +74,15 @@ class LiturgicalDayParser : NSObject, XMLParserDelegate {
         self.parsedText = ""
         
         switch elementName {
+        case "CalendarDay":
+            self.day = LiturgicalDay(day: Day(fromDate: Date.init()), celebrations: [])
         case "Celebration":
             self.celebration = Celebration(id: "", title: "", subtitle: "", liturgicalColor: .green)
             if let celebrationId = attributeDict["Id"] {
                 self.celebration.id = celebrationId
             }
         case "LiturgicalCelebrationColor":
-            if path.count > 0 && path[path.count-1] == "Celebration" {
+            if path.count > 1 && path[path.count-2] == "Celebration" {
                 if let cs = attributeDict["Id"],
                    let ci = Int(cs),
                    let color = LiturgicalColor(rawValue: ci) {
@@ -85,20 +95,19 @@ class LiturgicalDayParser : NSObject, XMLParserDelegate {
     }
     
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+        let p = path.suffix(3)
         _ = path.popLast()
-        if path.count < 2 {
-            return
-        }
-        let p = (path[path.count-2], path[path.count-1], elementName)
 
         switch p {
-        case ("LHData", "CalendarDay", "DateISO"):
+        case ["LHData", "CalendarDay"]:
+            self.days.append(self.day)
+        case ["LHData", "CalendarDay", "DateISO"]:
             let f = DateFormatter()
             f.dateFormat = "yyyy-MM-dd"
             if let date = f.date(from: self.parsedText) {
                 self.day.day = Day(fromDate: date)
             }
-        case ("Celebration", "StringTitle", "span"):
+        case ["Celebration", "StringTitle", "span"]:
             if self.celebration.title == "" {
                 self.celebration.title = self.parsedText
             } else {
@@ -121,12 +130,16 @@ class LiturgicalDayParser : NSObject, XMLParserDelegate {
         self.parseError = parseError
     }
     
-    func parse() -> (LiturgicalDay?, Error?) {
+    func parse() -> ([LiturgicalDay], Error?) {
         self.parser.delegate = self
         if self.parser.parse() {
-            return (self.day, nil)
+            if self.days.count > 0 {
+                return (self.days, nil)
+            } else {
+                return ([], DataSourceError.parseError)
+            }
         } else {
-            return (nil, self.parseError)
+            return ([], DataSourceError.parseError)
         }
     }
 }
@@ -145,7 +158,7 @@ class RemoteDataSource : BreviarDataSource {
         let task = URLSession.shared.dataTask(with: urlcomps.url!) { (data, response, error) in
             if error != nil {
                 DispatchQueue.main.async {
-                    handler(nil, error)
+                    handler(nil, DataSourceError.networkError)
                 }
                 return
             }
@@ -153,7 +166,7 @@ class RemoteDataSource : BreviarDataSource {
             if let resp = response as? HTTPURLResponse {
                 if !(200...299).contains(resp.statusCode) {
                     DispatchQueue.main.async {
-                        handler(nil, URLError(URLError.Code(rawValue: resp.statusCode)))
+                        handler(nil, DataSourceError.serverError)
                     }
                     return
                 }
@@ -162,14 +175,49 @@ class RemoteDataSource : BreviarDataSource {
             // Parse XML response
             guard let data = data else { return }
             let parser = LiturgicalDayParser(data: data)
-            let (day, error) = parser.parse()
+            let (days, error) = parser.parse()
             DispatchQueue.main.async {
-                handler(day, error)
+                handler(days[0], error)
             }
         }
         task.resume()
     }
     
     func getLiturgicalMonth(month: Month, handler: @escaping (LiturgicalMonth?, Error?) -> Void) {
+        let urlString = "https://lh.kbs.sk/cgi-bin/l.cgi?qt=pxml&d=*&m=\(month.month)&r=\(month.year)&j=hu&k=hu"
+        
+        print("Getting liturgical month from URL: \(urlString)")
+        guard let urlcomps = URLComponents(string: urlString) else {
+            print("Cannot parse URL: \(urlString)")
+            return
+        }
+
+        // Query XML
+        let task = URLSession.shared.dataTask(with: urlcomps.url!) { (data, response, error) in
+            if error != nil {
+                DispatchQueue.main.async {
+                    handler(nil, DataSourceError.networkError)
+                }
+                return
+            }
+            
+            if let resp = response as? HTTPURLResponse {
+                if !(200...299).contains(resp.statusCode) {
+                    DispatchQueue.main.async {
+                        handler(nil, DataSourceError.serverError)
+                    }
+                    return
+                }
+            }
+            
+            // Parse XML response
+            guard let data = data else { return }
+            let parser = LiturgicalDayParser(data: data)
+            let (days, error) = parser.parse()
+            DispatchQueue.main.async {
+                handler(LiturgicalMonth(month: month, days: days), error)
+            }
+        }
+        task.resume()
     }
 }

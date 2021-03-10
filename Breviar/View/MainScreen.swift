@@ -40,7 +40,13 @@ struct MainScreen: View {
             MainScreenContent()
                 .navigationTitle(getTitle(date: model.day.date))
                 .navigationBarItems(
-                    leading: Button(action: {}, label: {Label("", systemImage: "calendar")})
+                    leading: Button(
+                        action: {
+                            withAnimation {
+                                model.datePickerShown = true
+                            }
+                        },
+                        label: {Label("", systemImage: "calendar")})
                 )
                 .toolbar {
                     HStack{
@@ -62,6 +68,9 @@ struct MainScreen: View {
                             },
                             label: {Label("Next Day", systemImage: "chevron.right")})
                     }
+                }
+                .sheet(isPresented: $model.datePickerShown) {
+                    DatePicker().environmentObject(model)
                 }
         }
         .navigationViewStyle(StackNavigationViewStyle())

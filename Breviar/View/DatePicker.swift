@@ -20,6 +20,36 @@ struct DatePicker: View {
         NavigationView {
             DatePickerContent()
                 .navigationTitle(getTitle(month: model.month.date))
+                .navigationBarItems(
+                    leading: Button(
+                        action: {
+                            withAnimation {
+                                model.datePickerShown = false
+                            }
+                        },
+                        label: { Text("Cancel") })
+                )
+                .toolbar {
+                    HStack{
+                        Button(
+                            action: {
+                                withAnimation {
+                                    model.loadMonth(model.month.monthByAdding(months: -1))
+                                }
+                            },
+                            label: {Label("Previous Day",systemImage: "chevron.left")})
+                            .padding()
+                        Spacer()
+                            .frame(width: 6.0)
+                        Button(
+                            action: {
+                                withAnimation {
+                                    model.loadMonth(model.month.monthByAdding(months: 1))
+                                }
+                            },
+                            label: {Label("Next Day", systemImage: "chevron.right")})
+                    }
+                }
         }
     }
 }
@@ -34,14 +64,13 @@ struct DatePickerContent: View {
         case .failed(let error):
             Text(error.localizedDescription)
         case .loaded(let month):
-            List {
-                DatePickerList(days: month.days)
-            }
+            DatePickerList(days: month.days)
         }
     }
 }
 
 struct DatePickerList: View {
+    @EnvironmentObject var model: BreviarModel
     var days: [LiturgicalDay]
     
     func getDayFormatter() -> DateFormatter {
@@ -58,6 +87,12 @@ struct DatePickerList: View {
                 Section(header: Text(fmt.string(from: day.day.date))) {
                     ForEach(day.celebrations) { celebration in
                         CelebrationRow(celebration: celebration, checked: false)
+                            .onTapGesture {
+                                model.day = day.day
+                                model.dayState = .loaded(day)
+                                model.selectedCelebration = celebration.id
+                                model.datePickerShown = false
+                            }
                     }
                 }
             }
