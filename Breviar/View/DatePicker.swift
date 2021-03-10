@@ -81,10 +81,22 @@ struct DatePickerList: View {
     
     var body: some View {
         let fmt = getDayFormatter()
+        let today = Day.init(fromDate: Date())
         
         List {
             ForEach(days) { day in
-                Section(header: Text(fmt.string(from: day.day.date))) {
+                if day.day.weekday == .sunday && day != days[0] {
+                    Divider()
+                }
+                Section(
+                    header: HStack {
+                        Text(fmt.string(from: day.day.date))
+                        if day.day == today {
+                            Spacer()
+                            Text("Today")
+                        }
+                    }
+                ) {
                     ForEach(day.celebrations) { celebration in
                         CelebrationRow(celebration: celebration, checked: false)
                             .onTapGesture {
