@@ -38,7 +38,7 @@ struct MainScreen: View {
     var body: some View {
         NavigationView{
             MainScreenContent()
-                .navigationTitle(getTitle(date: model.date))
+                .navigationTitle(getTitle(date: model.day.date))
                 .navigationBarItems(
                     leading: Button(action: {}, label: {Label("", systemImage: "calendar")})
                 )
@@ -47,7 +47,7 @@ struct MainScreen: View {
                         Button(
                             action: {
                                 withAnimation {
-                                    model.loadDayByAdding(days: -1)
+                                    model.loadDay(model.day.dayByAdding(days: -1))
                                 }
                             },
                             label: {Label("Previous Day",systemImage: "chevron.left")})
@@ -57,7 +57,7 @@ struct MainScreen: View {
                         Button(
                             action: {
                                 withAnimation {
-                                    model.loadDayByAdding(days: 1)
+                                    model.loadDay(model.day.dayByAdding(days: 1))
                                 }
                             },
                             label: {Label("Next Day", systemImage: "chevron.right")})

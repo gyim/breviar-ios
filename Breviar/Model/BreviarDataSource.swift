@@ -8,14 +8,14 @@
 import Foundation
 
 protocol BreviarDataSource {
-    func getDay(date: Date, handler: @escaping (LiturgicalDay?, Error?) -> Void)
-    func getMonth(date: Date, handler: @escaping ([LiturgicalDay], Error?) -> Void)
+    func getLiturgicalDay(day: Day, handler: @escaping (LiturgicalDay?, Error?) -> Void)
+    func getLiturgicalMonth(month: Month, handler: @escaping (LiturgicalMonth?, Error?) -> Void)
 }
 
 class TestDataSource : BreviarDataSource {
-    func getDay(date: Date, handler: (LiturgicalDay?, Error?) -> Void) {
-        let day = LiturgicalDay(date: date, celebrations: [
-            Celebration(id: "1", title: "Red celebration", subtitle: "This is a celebration with red color for day: \(date.description)", liturgicalColor: LiturgicalColor.red),
+    func getLiturgicalDay(day: Day, handler: (LiturgicalDay?, Error?) -> Void) {
+        let day = LiturgicalDay(day: day, celebrations: [
+            Celebration(id: "1", title: "Red celebration", subtitle: "This is a celebration with red color for day: \(day.date.description)", liturgicalColor: LiturgicalColor.red),
             Celebration(id: "2", title: "White celebration", subtitle: "This is a celebration with white color", liturgicalColor: LiturgicalColor.white),
             Celebration(id: "3", title: "Green celebration", subtitle: "This is a celebration with green color", liturgicalColor: LiturgicalColor.green),
             Celebration(id: "4", title: "Violet celebration", subtitle: "This is a celebration with violet color", liturgicalColor: LiturgicalColor.violet),
@@ -28,15 +28,10 @@ class TestDataSource : BreviarDataSource {
         handler(day, nil)
     }
     
-    func getMonth(date: Date, handler: @escaping ([LiturgicalDay], Error?) -> Void) {
+    func getLiturgicalMonth(month: Month, handler: @escaping (LiturgicalMonth?, Error?) -> Void) {
         var days : [LiturgicalDay] = []
-        var comps = DateComponents()
-        comps.year = 2021
-        comps.month = 1
-        for d in 1...3 {
-            comps.day = d
-            let date = Calendar.current.date(from: comps)!
-            var day = LiturgicalDay(date: date, celebrations: [])
+        for d in 1...10 {
+            var day = LiturgicalDay(day: Day(year: month.year, month: month.month, day: d), celebrations: [])
             for c in 1...(d % 3) {
                 day.celebrations.append(Celebration(
                     id: "\(c)",
@@ -48,8 +43,7 @@ class TestDataSource : BreviarDataSource {
             
             days.append(day)
         }
-        
-        handler(days, nil)
+        handler(LiturgicalMonth(month: month, days: days), nil)
     }
 }
 
@@ -63,7 +57,7 @@ class LiturgicalDayParser : NSObject, XMLParserDelegate {
     
     init(data: Data) {
         self.parser = XMLParser(data: data)
-        self.day = LiturgicalDay(date: Date.init(), celebrations: [])
+        self.day = LiturgicalDay(day: Day(fromDate: Date.init()), celebrations: [])
         self.celebration = Celebration(id: "", title: "", subtitle: "", liturgicalColor: .green)
     }
     
@@ -102,7 +96,7 @@ class LiturgicalDayParser : NSObject, XMLParserDelegate {
             let f = DateFormatter()
             f.dateFormat = "yyyy-MM-dd"
             if let date = f.date(from: self.parsedText) {
-                self.day.date = date
+                self.day.day = Day(fromDate: date)
             }
         case ("Celebration", "StringTitle", "span"):
             if self.celebration.title == "" {
@@ -138,12 +132,8 @@ class LiturgicalDayParser : NSObject, XMLParserDelegate {
 }
 
 class RemoteDataSource : BreviarDataSource {
-    func getDay(date: Date, handler: @escaping (LiturgicalDay?, Error?) -> Void) {
-        let calendar = Calendar.current
-        let year = calendar.component(.year, from: date)
-        let month = calendar.component(.month, from: date)
-        let day = calendar.component(.day, from: date)
-        let urlString = "https://lh.kbs.sk/cgi-bin/l.cgi?qt=pxml&d=\(day)&m=\(month)&r=\(year)&j=hu&k=hu"
+    func getLiturgicalDay(day: Day, handler: @escaping (LiturgicalDay?, Error?) -> Void) {
+        let urlString = "https://lh.kbs.sk/cgi-bin/l.cgi?qt=pxml&d=\(day.day)&m=\(day.month)&r=\(day.year)&j=hu&k=hu"
         
         print("Getting liturgical day from URL: \(urlString)")
         guard let urlcomps = URLComponents(string: urlString) else {
@@ -180,6 +170,6 @@ class RemoteDataSource : BreviarDataSource {
         task.resume()
     }
     
-    func getMonth(date: Date, handler: @escaping ([LiturgicalDay], Error?) -> Void) {
+    func getLiturgicalMonth(month: Month, handler: @escaping (LiturgicalMonth?, Error?) -> Void) {
     }
 }

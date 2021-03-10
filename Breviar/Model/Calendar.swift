@@ -9,15 +9,25 @@ import Foundation
 
 var calendar = Calendar(identifier: .gregorian)
 
-struct Day {
+struct Day : Hashable, Identifiable {
     var year: Int
     var month: Int
     var day: Int
+    
+    init(year: Int, month: Int, day: Int) {
+        self.year = year
+        self.month = month
+        self.day = day
+    }
     
     init(fromDate date: Date) {
         self.year = calendar.component(.year, from: date)
         self.month = calendar.component(.month, from: date)
         self.day = calendar.component(.day, from: date)
+    }
+    
+    var id : String {
+        return "\(year)-\(month)-\(day)"
     }
     
     var date: Date {
@@ -42,9 +52,18 @@ struct Month {
     var year: Int
     var month: Int
     
+    init(year: Int, month: Int, day: Int) {
+        self.year = year
+        self.month = month
+    }
+    
     init(fromDate date: Date) {
         self.year = calendar.component(.year, from: date)
         self.month = calendar.component(.month, from: date)
+    }
+    
+    var id : String {
+        return "\(year)-\(month)"
     }
     
     var date: Date {
@@ -63,15 +82,21 @@ struct Month {
     }
 }
 
-struct LiturgicalDay : Identifiable {
-    var id: String
-    var date: Date
+struct LiturgicalDay : Hashable, Identifiable {
+    var day: Day
     var celebrations: [Celebration]
+
+    var id : String {
+        return day.id
+    }
+}
+
+struct LiturgicalMonth: Identifiable {
+    var month: Month
+    var days: [LiturgicalDay]
     
-    init(date: Date, celebrations: [Celebration]) {
-        self.id = UUID().description
-        self.date = date
-        self.celebrations = celebrations
+    var id : String {
+        return month.id
     }
 }
 

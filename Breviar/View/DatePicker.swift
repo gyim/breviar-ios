@@ -19,7 +19,7 @@ struct DatePicker: View {
     var body: some View {
         NavigationView {
             DatePickerContent()
-                .navigationTitle(getTitle(month: model.month))
+                .navigationTitle(getTitle(month: model.month.date))
         }
     }
 }
@@ -33,9 +33,9 @@ struct DatePickerContent: View {
             Text("Loading...")
         case .failed(let error):
             Text(error.localizedDescription)
-        case .loaded(let days):
+        case .loaded(let month):
             List {
-                DatePickerList(days: days)
+                DatePickerList(days: month.days)
             }
         }
     }
@@ -55,7 +55,7 @@ struct DatePickerList: View {
         
         List {
             ForEach(days) { day in
-                Section(header: Text(fmt.string(from: day.date))) {
+                Section(header: Text(fmt.string(from: day.day.date))) {
                     ForEach(day.celebrations) { celebration in
                         CelebrationRow(celebration: celebration, checked: false)
                     }
@@ -69,13 +69,13 @@ struct DatePicker_Previews: PreviewProvider {
     static var previews: some View {
         let days = [
             LiturgicalDay(
-                date: dateFrom(year: 2021, month: 1, day: 1),
+                day: Day(year: 2021, month: 1, day: 1),
                 celebrations: [
                     Celebration(id: "0", title: "Red celebration", subtitle: "Celebration 1", liturgicalColor: .red),
                 ]
             ),
             LiturgicalDay(
-                date: dateFrom(year: 2021, month: 1, day: 2),
+                day: Day(year: 2021, month: 1, day: 2),
                 celebrations: [
                     Celebration(id: "0", title: "Green celebration", subtitle: "Celebration 1", liturgicalColor: .green),
                     Celebration(id: "1", title: "White celebration", subtitle: "Celebration 2", liturgicalColor: .white),
