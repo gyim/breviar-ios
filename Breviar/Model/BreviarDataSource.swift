@@ -8,11 +8,12 @@
 import Foundation
 
 protocol BreviarDataSource {
-    func getLiturgicalDay(date: Date, handler: @escaping (LiturgicalDay?, Error?) -> Void)
+    func getDay(date: Date, handler: @escaping (LiturgicalDay?, Error?) -> Void)
+    func getMonth(date: Date, handler: @escaping ([LiturgicalDay], Error?) -> Void)
 }
 
 class TestDataSource : BreviarDataSource {
-    func getLiturgicalDay(date: Date, handler: (LiturgicalDay?, Error?) -> Void) {
+    func getDay(date: Date, handler: (LiturgicalDay?, Error?) -> Void) {
         let day = LiturgicalDay(date: date, celebrations: [
             Celebration(id: "1", title: "Red celebration", subtitle: "This is a celebration with red color for day: \(date.description)", liturgicalColor: LiturgicalColor.red),
             Celebration(id: "2", title: "White celebration", subtitle: "This is a celebration with white color", liturgicalColor: LiturgicalColor.white),
@@ -25,6 +26,30 @@ class TestDataSource : BreviarDataSource {
             Celebration(id: "9", title: "Rose or Violet celebration", subtitle: "This is a celebration with rose or violet color", liturgicalColor: LiturgicalColor.roseOrViolet),
         ])
         handler(day, nil)
+    }
+    
+    func getMonth(date: Date, handler: @escaping ([LiturgicalDay], Error?) -> Void) {
+        var days : [LiturgicalDay] = []
+        var comps = DateComponents()
+        comps.year = 2021
+        comps.month = 1
+        for d in 1...3 {
+            comps.day = d
+            let date = Calendar.current.date(from: comps)!
+            var day = LiturgicalDay(date: date, celebrations: [])
+            for c in 1...(d % 3) {
+                day.celebrations.append(Celebration(
+                    id: "\(c)",
+                    title: "Day \(d) celebration \(c)",
+                    subtitle: "This is a test celebration.",
+                    liturgicalColor: LiturgicalColor.colorFromId(colorId: (d+c) % 9 + 1)!
+                ))
+            }
+            
+            days.append(day)
+        }
+        
+        handler(days, nil)
     }
 }
 
@@ -113,7 +138,7 @@ class LiturgicalDayParser : NSObject, XMLParserDelegate {
 }
 
 class RemoteDataSource : BreviarDataSource {
-    func getLiturgicalDay(date: Date, handler: @escaping (LiturgicalDay?, Error?) -> Void) {
+    func getDay(date: Date, handler: @escaping (LiturgicalDay?, Error?) -> Void) {
         let calendar = Calendar.current
         let year = calendar.component(.year, from: date)
         let month = calendar.component(.month, from: date)
@@ -153,6 +178,8 @@ class RemoteDataSource : BreviarDataSource {
             }
         }
         task.resume()
-
+    }
+    
+    func getMonth(date: Date, handler: @escaping ([LiturgicalDay], Error?) -> Void) {
     }
 }

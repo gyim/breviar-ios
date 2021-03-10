@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		709A26AD25F8287A0040AE84 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A26AC25F8287A0040AE84 /* Constants.swift */; };
+		709A26B125F82C250040AE84 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A26B025F82C250040AE84 /* DatePicker.swift */; };
 		70A99DBA25B3965300B558CE /* BreviarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A99DB925B3965300B558CE /* BreviarApp.swift */; };
 		70A99DBE25B3965500B558CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A99DBD25B3965500B558CE /* Assets.xcassets */; };
 		70A99DC125B3965600B558CE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A99DC025B3965600B558CE /* Preview Assets.xcassets */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		709A26AC25F8287A0040AE84 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		709A26B025F82C250040AE84 /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
 		70A99DB625B3965300B558CE /* Breviar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breviar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70A99DB925B3965300B558CE /* BreviarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreviarApp.swift; sourceTree = "<group>"; };
 		70A99DBD25B3965500B558CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -86,7 +90,9 @@
 		70B109A325F387EE0044F613 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				709A26AC25F8287A0040AE84 /* Constants.swift */,
 				70C6A53425F412360043056D /* MainScreen.swift */,
+				709A26B025F82C250040AE84 /* DatePicker.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -160,10 +166,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				709A26AD25F8287A0040AE84 /* Constants.swift in Sources */,
 				70C6A53525F412360043056D /* MainScreen.swift in Sources */,
 				70B109A125F3853B0044F613 /* BreviarDataSource.swift in Sources */,
 				70A99DCB25B477CB00B558CE /* BreviarModel.swift in Sources */,
 				70A99DBA25B3965300B558CE /* BreviarApp.swift in Sources */,
+				709A26B125F82C250040AE84 /* DatePicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

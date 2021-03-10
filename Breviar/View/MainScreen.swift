@@ -47,7 +47,7 @@ struct MainScreen: View {
                         Button(
                             action: {
                                 withAnimation {
-                                    model.loadDateByAdding(days: -1)
+                                    model.loadDayByAdding(days: -1)
                                 }
                             },
                             label: {Label("Previous Day",systemImage: "chevron.left")})
@@ -57,7 +57,7 @@ struct MainScreen: View {
                         Button(
                             action: {
                                 withAnimation {
-                                    model.loadDateByAdding(days: 1)
+                                    model.loadDayByAdding(days: 1)
                                 }
                             },
                             label: {Label("Next Day", systemImage: "chevron.right")})
@@ -123,20 +123,12 @@ struct CelebrationColorView : View {
     var body: some View {
         VStack(spacing: 0){
             CelebrationColorShape(color: color, width: width)
-                .foregroundColor(uiColors[color.firstColor()])
+                .foregroundColor(uiLiturgicalColors[color.firstColor()])
             CelebrationColorShape(color: color, width: width)
-                .foregroundColor(uiColors[color.secondColor()])
+                .foregroundColor(uiLiturgicalColors[color.secondColor()])
         }
     }
     
-    let uiColors: [LiturgicalColor: Color] = [
-        .red: Color(.sRGB, red: 0xed/255, green: 0x2f/255, blue: 0x29/255, opacity: 1),
-        .white: Color(.sRGB, red: 0xe0/255, green: 0xe0/255, blue: 0xe0/255, opacity: 1),
-        .green: Color(.sRGB, red: 0x6f/255, green: 0xcf/255, blue: 0x85/255, opacity: 1),
-        .violet: Color(.sRGB, red: 0x96/255, green: 0x24/255, blue: 0xc7/255, opacity: 1),
-        .rose: Color(.sRGB, red: 0xff/255, green: 0x8b/255, blue: 0xed/255, opacity: 1),
-        .black: Color(.sRGB, red: 0x4e/255, green: 0x4e/255, blue: 0x4e/255, opacity: 1),
-    ]
 }
 
 struct CelebrationRow : View {
