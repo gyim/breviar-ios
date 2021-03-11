@@ -91,9 +91,13 @@ struct DatePickerList: View {
                 Section(
                     header: HStack {
                         Text(fmt.string(from: day.day.date))
+                            .font(.caption)
+                            .fontWeight(.light)
                         if day.day == today {
                             Spacer()
                             Text("Today")
+                                .font(.caption)
+                                .fontWeight(.bold)
                         }
                     }
                 ) {
