@@ -48,9 +48,8 @@ class TestDataSource : BreviarDataSource {
 }
 
 enum DataSourceError : String, Error {
-    case networkError = "Network error"
-    case serverError = "Remote server returned an invalid response"
     case parseError = "Error parsing server response"
+    case emptyResponse = "Empty response from server"
 }
 
 class LiturgicalDayParser : NSObject, XMLParserDelegate {
@@ -154,7 +153,7 @@ class LiturgicalDayParser : NSObject, XMLParserDelegate {
             if self.days.count > 0 {
                 return (self.days, nil)
             } else {
-                return ([], DataSourceError.parseError)
+                return ([], DataSourceError.emptyResponse)
             }
         } else {
             return ([], DataSourceError.parseError)
@@ -162,80 +161,68 @@ class LiturgicalDayParser : NSObject, XMLParserDelegate {
     }
 }
 
-class RemoteDataSource : BreviarDataSource {
+class CGIDataSource : BreviarDataSource {
+    var cgiClient: CGIClient
+    
+    init() {
+        self.cgiClient = RemoteCGIClient()
+    }
+    
     func getLiturgicalDay(day: Day, handler: @escaping (LiturgicalDay?, Error?) -> Void) {
-        let urlString = "https://lh.kbs.sk/cgi-bin/l.cgi?qt=pxml&d=\(day.day)&m=\(day.month)&r=\(day.year)&j=hu&k=hu"
+        let args = [
+            "qt": "pxml",
+            "d": day.day.description,
+            "m": day.month.description,
+            "r": day.year.description,
+            "j": "hu",
+            "k": "hu",
+        ]
         
-        print("Getting liturgical day from URL: \(urlString)")
-        guard let urlcomps = URLComponents(string: urlString) else {
-            print("Cannot parse URL: \(urlString)")
-            return
-        }
-
-        // Query XML
-        let task = URLSession.shared.dataTask(with: urlcomps.url!) { (data, response, error) in
-            if error != nil {
+        self.cgiClient.makeRequest(args) { data, error in
+            if let data = data {
+                let parser = LiturgicalDayParser(data: data)
+                let (days, error) = parser.parse()
                 DispatchQueue.main.async {
-                    handler(nil, DataSourceError.networkError)
-                }
-                return
-            }
-            
-            if let resp = response as? HTTPURLResponse {
-                if !(200...299).contains(resp.statusCode) {
-                    DispatchQueue.main.async {
-                        handler(nil, DataSourceError.serverError)
+                    if error == nil {
+                        handler(days[0], nil )
+                    } else {
+                        handler(nil, error)
                     }
-                    return
                 }
-            }
-            
-            // Parse XML response
-            guard let data = data else { return }
-            let parser = LiturgicalDayParser(data: data)
-            let (days, error) = parser.parse()
-            DispatchQueue.main.async {
-                handler(days[0], error)
+            } else {
+                DispatchQueue.main.async {
+                    handler(nil, error)
+                }
             }
         }
-        task.resume()
     }
     
     func getLiturgicalMonth(month: Month, handler: @escaping (LiturgicalMonth?, Error?) -> Void) {
-        let urlString = "https://lh.kbs.sk/cgi-bin/l.cgi?qt=pxml&d=*&m=\(month.month)&r=\(month.year)&j=hu&k=hu"
-        
-        print("Getting liturgical month from URL: \(urlString)")
-        guard let urlcomps = URLComponents(string: urlString) else {
-            print("Cannot parse URL: \(urlString)")
-            return
-        }
+        let args = [
+            "qt": "pxml",
+            "d": "*",
+            "m": month.month.description,
+            "r": month.year.description,
+            "j": "hu",
+            "k": "hu",
+        ]
 
-        // Query XML
-        let task = URLSession.shared.dataTask(with: urlcomps.url!) { (data, response, error) in
-            if error != nil {
+        self.cgiClient.makeRequest(args) { data, error in
+            if let data = data {
+                let parser = LiturgicalDayParser(data: data)
+                let (days, error) = parser.parse()
                 DispatchQueue.main.async {
-                    handler(nil, DataSourceError.networkError)
-                }
-                return
-            }
-            
-            if let resp = response as? HTTPURLResponse {
-                if !(200...299).contains(resp.statusCode) {
-                    DispatchQueue.main.async {
-                        handler(nil, DataSourceError.serverError)
+                    if error == nil {
+                        handler(LiturgicalMonth(month: month, days: days), nil )
+                    } else {
+                        handler(nil, error)
                     }
-                    return
                 }
-            }
-            
-            // Parse XML response
-            guard let data = data else { return }
-            let parser = LiturgicalDayParser(data: data)
-            let (days, error) = parser.parse()
-            DispatchQueue.main.async {
-                handler(LiturgicalMonth(month: month, days: days), error)
+            } else {
+                DispatchQueue.main.async {
+                    handler(nil, error)
+                }
             }
         }
-        task.resume()
     }
 }

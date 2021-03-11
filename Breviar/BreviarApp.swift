@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct BreviarApp: App {
     var body: some Scene {
-        let dataSource = RemoteDataSource()
+        let dataSource = CGIDataSource()
         let model = BreviarModel(dataSource: dataSource)
         
         WindowGroup {
