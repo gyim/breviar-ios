@@ -10,18 +10,14 @@ import SwiftUI
 struct MainScreen: View {
     @EnvironmentObject var model: BreviarModel
     
-    func getTitle(date: Date) -> String {
-        let currentDay = Calendar.current.ordinality(of: .day, in: .era, for: Date())
-        let selectedDay = Calendar.current.ordinality(of: .day, in: .era, for: date)
-        if currentDay == nil || selectedDay == nil {
-            return "N/A"
-        }
-        let dayDiff = abs(currentDay! - selectedDay!)
+    func getTitle(day: Day) -> String {
+        let today = Day(fromDate: Date())
+        let dayDiff = abs(today.daysSinceEpoch - day.daysSinceEpoch)
         
         if dayDiff < 3 {
             let fmt = DateFormatter()
             fmt.dateFormat = "EEEE"
-            let dayName = fmt.string(from: date).capitalized
+            let dayName = fmt.string(from: day.date).capitalized
             
             if dayDiff == 0 {
                 return "\(dayName) (Today)"
@@ -31,14 +27,14 @@ struct MainScreen: View {
         } else {
             let fmt = DateFormatter()
             fmt.dateStyle = .long
-            return fmt.string(from: date)
+            return fmt.string(from: day.date)
         }
     }
     
     var body: some View {
         NavigationView{
             MainScreenContent()
-                .navigationTitle(getTitle(date: model.day.date))
+                .navigationTitle(getTitle(day: model.day))
                 .navigationBarItems(
                     leading: Button(
                         action: {
