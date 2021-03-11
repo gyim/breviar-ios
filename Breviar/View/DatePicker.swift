@@ -122,7 +122,7 @@ struct DatePicker_Previews: PreviewProvider {
                 day: Day(year: 2021, month: 1, day: 2),
                 celebrations: [
                     Celebration(id: "0", title: "Green celebration", subtitle: "Celebration 1", liturgicalColor: .green),
-                    Celebration(id: "1", title: "White celebration", subtitle: "Celebration 2", liturgicalColor: .white),
+                    Celebration(id: "1", title: "White celebration", subtitle: "", liturgicalColor: .white),
                 ]
             ),
         ]

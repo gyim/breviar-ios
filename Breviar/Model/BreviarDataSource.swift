@@ -61,6 +61,7 @@ class LiturgicalDayParser : NSObject, XMLParserDelegate {
     var path: [String] = []
     var parseError: Error? = nil
     var parsedText: String = ""
+    var afterNewline: Bool = false
     
     init(data: Data) {
         self.parser = XMLParser(data: data)
@@ -71,7 +72,14 @@ class LiturgicalDayParser : NSObject, XMLParserDelegate {
     
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         path.append(elementName)
-        self.parsedText = ""
+        if elementName.lowercased() == "br" {
+            // A <BR/> can occur in main celebrations like Eastern Sunday. We want to insert a single newline (we need to trim whitespaces at the next line)
+            self.parsedText += "\n"
+            self.afterNewline = true
+        } else {
+            self.parsedText = ""
+            self.afterNewline = false
+        }
         
         switch elementName {
         case "CalendarDay":
@@ -123,7 +131,17 @@ class LiturgicalDayParser : NSObject, XMLParserDelegate {
     }
     
     func parser(_ parser: XMLParser, foundCharacters s: String) {
-        self.parsedText += s
+        if self.afterNewline {
+            // If a <BR/> occurs, we remove the normal white spaces in the next string
+            var trimmedString = s
+            while trimmedString.hasPrefix("\n") || trimmedString.hasPrefix(" ") || trimmedString.hasPrefix("\t") {
+                trimmedString.removeFirst()
+            }
+            self.parsedText += trimmedString
+            self.afterNewline = false
+        } else {
+            self.parsedText += s
+        }
     }
     
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {

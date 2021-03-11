@@ -148,15 +148,20 @@ struct CelebrationRow : View {
         HStack{
             VStack{
                 HStack{
-                    Text(celebration.title)
-                        .bold()
+                    if celebration.subtitle == "" {
+                        Text(celebration.title).bold().padding(.vertical, 10)
+                    } else {
+                        Text(celebration.title).bold()
+                    }
                     Spacer()
                 }
-                HStack{
-                    Text(celebration.subtitle)
-                        .font(.system(size: 14))
-                        .foregroundColor(.secondary)
-                    Spacer()
+                if celebration.subtitle != "" {
+                    HStack{
+                        Text(celebration.subtitle)
+                            .font(.system(size: 14))
+                            .foregroundColor(.secondary)
+                        Spacer()
+                    }
                 }
             }
             .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 0))
