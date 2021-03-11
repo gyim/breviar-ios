@@ -27,7 +27,7 @@ struct DatePicker: View {
                                 model.datePickerShown = false
                             }
                         },
-                        label: { Text("Cancel") })
+                        label: { Text("Back") })
                 )
                 .toolbar {
                     HStack{
