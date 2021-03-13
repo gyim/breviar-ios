@@ -1,0 +1,3 @@
+[submodule "breviar-cgi"]
+	path = breviar-cgi
+	url = ssh://kralovic.org/home/juraj/breviar

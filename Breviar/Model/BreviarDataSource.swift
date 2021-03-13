@@ -10,6 +10,7 @@ import Foundation
 protocol BreviarDataSource {
     func getLiturgicalDay(day: Day, handler: @escaping (LiturgicalDay?, Error?) -> Void)
     func getLiturgicalMonth(month: Month, handler: @escaping (LiturgicalMonth?, Error?) -> Void)
+    func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, handler: @escaping (String?, Error?) -> Void)
 }
 
 class TestDataSource : BreviarDataSource {
@@ -44,6 +45,10 @@ class TestDataSource : BreviarDataSource {
             days.append(day)
         }
         handler(LiturgicalMonth(month: month, days: days), nil)
+    }
+    
+    func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, handler: @escaping (String?, Error?) -> Void) {
+        handler("<b>Hello world</b>", nil)
     }
 }
 
@@ -217,6 +222,39 @@ class CGIDataSource : BreviarDataSource {
                     } else {
                         handler(nil, error)
                     }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    handler(nil, error)
+                }
+            }
+        }
+    }
+    
+    func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, handler: @escaping (String?, Error?) -> Void) {
+        let d = day.day
+        let args = [
+            "qt": "pdt",
+            "d": d.day.description,
+            "m": d.month.description,
+            "r": d.year.description,
+            "p": prayerType.rawValue.description,
+            "ds": celebration.id,
+            "o0": "65",
+            "o1": "5440",
+            "o2": "16384",
+            "o3": "0",
+            "o4": "0",
+            "o5": "0",
+            "j": "hu",
+            "k": "hu",
+        ]
+        
+        self.cgiClient.makeRequest(args) { data, error in
+            if let data = data {
+                let response = String(data: data, encoding: .utf8)
+                DispatchQueue.main.async {
+                    handler(response, nil)
                 }
             } else {
                 DispatchQueue.main.async {

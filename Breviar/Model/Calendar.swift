@@ -159,15 +159,15 @@ enum LiturgicalColor : Int {
     }
 }
 
-enum PrayerType {
-    case invitatory
-    case officeOfReadings
-    case morningPrayer
-    case midMorningPrayer
-    case midDayPrayer
-    case midAfternoonPrayer
-    case eveningPrayer
-    case compline
+enum PrayerType: String {
+    case invitatory = "mi"
+    case officeOfReadings = "mpc"
+    case morningPrayer = "mrch"
+    case midMorningPrayer = "mpred"
+    case midDayPrayer = "mna"
+    case midAfternoonPrayer = "mpo"
+    case eveningPrayer = "mv"
+    case compline = "mk"
 }
 
 struct Prayer {

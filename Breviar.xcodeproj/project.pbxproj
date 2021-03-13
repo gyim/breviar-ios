@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7079D1BB25FAD1AB00EFF6B2 /* PrayerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7079D1BA25FAD1AB00EFF6B2 /* PrayerScreen.swift */; };
 		7079D1BE25FAD8DD00EFF6B2 /* CGIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7079D1BD25FAD8DD00EFF6B2 /* CGIClient.swift */; };
 		709A26AD25F8287A0040AE84 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A26AC25F8287A0040AE84 /* Constants.swift */; };
 		709A26B125F82C250040AE84 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A26B025F82C250040AE84 /* DatePicker.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7079D1BA25FAD1AB00EFF6B2 /* PrayerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerScreen.swift; sourceTree = "<group>"; };
 		7079D1BD25FAD8DD00EFF6B2 /* CGIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGIClient.swift; sourceTree = "<group>"; };
 		709A26AC25F8287A0040AE84 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		709A26B025F82C250040AE84 /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				709A26AC25F8287A0040AE84 /* Constants.swift */,
 				70C6A53425F412360043056D /* MainScreen.swift */,
 				709A26B025F82C250040AE84 /* DatePicker.swift */,
+				7079D1BA25FAD1AB00EFF6B2 /* PrayerScreen.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -172,6 +175,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7079D1BB25FAD1AB00EFF6B2 /* PrayerScreen.swift in Sources */,
 				7079D1BE25FAD8DD00EFF6B2 /* CGIClient.swift in Sources */,
 				709A26AD25F8287A0040AE84 /* Constants.swift in Sources */,
 				70C6A53525F412360043056D /* MainScreen.swift in Sources */,
@@ -309,6 +313,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Breviar/Preview Content\"";
+				DEVELOPMENT_TEAM = 3K775ZSA59;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Breviar/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -330,6 +335,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Breviar/Preview Content\"";
+				DEVELOPMENT_TEAM = 3K775ZSA59;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Breviar/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

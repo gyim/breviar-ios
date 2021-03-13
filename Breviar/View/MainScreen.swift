@@ -96,14 +96,14 @@ struct MainScreenContent: View {
                 }
 
                 Section(header: Text("Prayers")) {
-                    PrayerLink(label: "Invitatory", icon: "sparkles")
-                    PrayerLink(label: "Office of Readings", icon: "text.book.closed")
-                    PrayerLink(label: "Morning Prayer", icon: "sunrise")
-                    PrayerLink(label: "Mid-Morning Prayer", icon: "sun.min")
-                    PrayerLink(label: "Midday Prayer", icon: "sun.max.fill")
-                    PrayerLink(label: "Mid-Afternoon Prayer", icon: "sun.min.fill")
-                    PrayerLink(label: "Evening Prayer", icon: "sunset.fill")
-                    PrayerLink(label: "Compline", icon: "moon.stars.fill")
+                    PrayerLink(prayerType: .invitatory)
+                    PrayerLink(prayerType: .officeOfReadings)
+                    PrayerLink(prayerType: .morningPrayer)
+                    PrayerLink(prayerType: .midMorningPrayer)
+                    PrayerLink(prayerType: .midDayPrayer)
+                    PrayerLink(prayerType: .midAfternoonPrayer)
+                    PrayerLink(prayerType: .eveningPrayer)
+                    PrayerLink(prayerType: .compline)
                 }
             }
         }
@@ -172,14 +172,41 @@ struct CelebrationRow : View {
 }
 
 struct PrayerLink: View {
-    var label: String
-    var icon: String
+    @EnvironmentObject var model: BreviarModel
+    var prayerType: PrayerType
+    
+    let prayerNames: [PrayerType: String] = [
+        .invitatory: "Invitatory",
+        .officeOfReadings: "Office of Readings",
+        .morningPrayer: "Morning Prayer",
+        .midMorningPrayer: "Mid-Morning Prayer",
+        .midDayPrayer: "Midday Prayer",
+        .midAfternoonPrayer: "Mid-Afternoon Prayer",
+        .eveningPrayer: "Evening Prayer",
+        .compline: "Compline",
+    ]
+    
+    let prayerIcons: [PrayerType: String] = [
+        .invitatory: "sparkles",
+        .officeOfReadings: "text.book.closed",
+        .morningPrayer: "sunrise",
+        .midMorningPrayer: "sun.min",
+        .midDayPrayer: "sun.max.fill",
+        .midAfternoonPrayer: "sun.min.fill",
+        .eveningPrayer: "sunset.fill",
+        .compline: "moon.stars.fill",
+    ]
     
     var body: some View {
         NavigationLink(
-            destination: Text(label)) {
-            Label(label, systemImage: icon)
-        }
+            destination:
+                PrayerScreen(content: model.prayerState).navigationTitle(prayerNames[prayerType]!)
+                .onAppear {
+                    if let (day, celebration) = model.getCurrentCelebration() {
+                        model.loadPrayer(prayerType, day: day, celebration: celebration)
+                    }
+                },
+            label: { Label(prayerNames[prayerType]!, systemImage: prayerIcons[prayerType]!) })
     }
 }
 
