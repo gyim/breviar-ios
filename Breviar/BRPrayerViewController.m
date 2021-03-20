@@ -167,7 +167,11 @@
             // We're setting the blind-friendly option to YES because updateWebViewContent adds CSS tags based on this global singleton; an ugly hack, for which I appologize :) (Oto Kominak)
             [[BRSettings instance] setBool:YES forOption:@"of0bf"];
         }
-        
+        BOOL oldValue2 = [[BRSettings instance] boolForOption:@"of2rm"];
+        if (oldValue2 == YES) {
+            [[BRSettings instance] setBool:NO forOption:@"of2rm"];
+        }
+
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             NSString *body = self.prayer.bodyForSpeechSynthesis;
             
@@ -186,6 +190,9 @@
                     // Setting it back - and the hack's done.
                     [[BRSettings instance] setBool:NO forOption:@"of0bf"];
                 }
+                if (oldValue2 == YES) {
+                    [[BRSettings instance] setBool:YES forOption:@"of2rm"];
+                }
             });
         });
     }
@@ -197,6 +204,9 @@
 {
     [self.speechSynthesizer pauseSpeakingAtBoundary:AVSpeechBoundaryImmediate];
     self.speakItem.image = [UIImage imageNamed:@"speaker_off"];
+
+    [self setHtmlBody:self.prayer.body forPrayer:self.prayer.queryId];
+    [self updateWebViewContent];
 }
 
 - (IBAction)toggleSpeaker:(id)sender
