@@ -10,6 +10,7 @@
 #import "BRDataSource.h"
 #import "BRPrayerListViewController.h"
 #import "BRSettings.h"
+#import <WebKit/WebKit.h>
 #import <AVFoundation/AVFoundation.h>
 
 @implementation BRAppDelegate
@@ -21,7 +22,7 @@
     dataSource.language = @"hu"; // TODO: get from build flags
     
     // Initialize WebKit
-    UIWebView *webView = [[UIWebView alloc] init];
+    WKWebView *webView = [[WKWebView alloc] init];
     [webView loadHTMLString:@"(empty)" baseURL:nil];
     
     // Initialize AVSession

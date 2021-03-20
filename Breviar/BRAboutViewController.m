@@ -69,7 +69,7 @@
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     if (navigationAction.navigationType == WKNavigationTypeLinkActivated) {
-        [[UIApplication sharedApplication] openURL:navigationAction.request.URL];
+        [[UIApplication sharedApplication] openURL:navigationAction.request.URL options:nil completionHandler:nil];
         decisionHandler(WKNavigationActionPolicyCancel);
     } else {
         [super webView:webView decidePolicyForNavigationAction:navigationAction decisionHandler:decisionHandler];

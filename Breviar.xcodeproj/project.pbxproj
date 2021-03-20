@@ -493,10 +493,9 @@
 			};
 			buildConfigurationList = 7061B08115FA8E1A00A83E0A /* Build configuration list for PBXProject "Breviar" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 				hu,
