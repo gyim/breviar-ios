@@ -253,6 +253,7 @@
      "  <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\n"
      "  <link rel='stylesheet' type='text/css' href='html/breviar.css'>\n"
      "  <script type='text/javascript' src='breviar-ios.js'></script>\n"
+     "  <meta name='viewport' content='width=device-width, initial-scale=1'>\n"
      "  %@\n"
      "</head>\n"
      "<body style='padding: %@; font: %ldpx %@;'>%@\n"
