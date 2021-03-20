@@ -170,6 +170,7 @@
                 self.speechSynthesizer = [[AVSpeechSynthesizer alloc] init];
                 [self setHtmlBody:body forPrayer:self.prayer.queryId];
                 [self updateWebViewContent];
+                [self startSpeech];
                 
                 if (oldValue == NO) {
                     // Setting it back - and the hack's done.
@@ -190,7 +191,7 @@
 
 - (IBAction)toggleSpeaker:(id)sender
 {
-    if (self.speechSynthesizer.speaking) {
+    if (self.speechSynthesizer.speaking && !self.speechSynthesizer.paused) {
         [self pauseSpeaker:sender];
     }
     else {
@@ -209,7 +210,10 @@
         CGFloat scrollOffset = self.prayer.scrollOffset * height / self.prayer.scrollHeight;
         self.webView.scrollView.contentOffset = CGPointMake(0, MIN(scrollOffset, maxOffset));
     }
-    
+}
+
+- (void)startSpeech
+{
     // An instance of AVSpeechSynthesizer must be initialized before loading content in web view
     if (self.speechSynthesizer && !self.speechSynthesizer.speaking) {
         [self.webView evaluateJavaScript:@"(function (){ return document.body.innerText; })();" completionHandler:^(id _Nullable result, NSError * _Nullable error) {
