@@ -17,15 +17,19 @@
 
 @implementation BRWebView
 
+- (id) initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    self.scrollView.delegate = self;
+    return self;
+}
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    [super scrollViewWillBeginDragging:scrollView];
     self.scrollingInProgress = YES;
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    [super scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
     self.scrollingInProgress = NO;
     gettimeofday(&_lastScrollingTime, NULL);
 }

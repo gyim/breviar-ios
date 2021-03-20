@@ -199,9 +199,9 @@
     
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
-    [super webViewDidFinishLoad:webView];
+    [super webView:webView didFinishNavigation:navigation];
     
     if (self.prayer.scrollOffset > 0 && self.prayer.scrollHeight > 0) {
         CGFloat height = self.webView.scrollView.contentSize.height;
@@ -212,40 +212,46 @@
     
     // An instance of AVSpeechSynthesizer must be initialized before loading content in web view
     if (self.speechSynthesizer && !self.speechSynthesizer.speaking) {
-        NSString *webViewString = [self.webView stringByEvaluatingJavaScriptFromString:@"(function (){ return document.body.innerText; })();"];
-        
-        NSString *selectedLanguage = [[BRSettings instance] stringForOption:@"j"];
-        NSDictionary *voiceCodes = @{
-            @"sk": @"sk-SK",
-            @"cz": @"cs-CZ",
-            @"c2": @"cs-CZ",
-            @"hu": @"hu-HU",
-        };
-        NSString *voiceCode = voiceCodes[selectedLanguage];
-        if (!voiceCode) {
-            voiceCode = @"sk-SK";
-        }
-        
-        AVSpeechSynthesisVoice *voice = [AVSpeechSynthesisVoice voiceWithLanguage:voiceCode];
-        AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:webViewString];
-        utterance.voice = voice;
-        
-        NSString *speechRate = [[BRSettings instance] stringForOption:@"speechRate"];
-        if ([speechRate isEqualToString:@"verySlow"]) {
-            utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 3 + AVSpeechUtteranceMaximumSpeechRate * 1) / 4;
-        } else if ([speechRate isEqualToString:@"slow"]) {
-            utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 2 + AVSpeechUtteranceMaximumSpeechRate * 1) / 3;
-        } else if ([speechRate isEqualToString:@"fast"]) {
-            utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 3 + AVSpeechUtteranceMaximumSpeechRate * 4) / 7;
-        } else if ([speechRate isEqualToString:@"veryFast"]) {
-            utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 1 + AVSpeechUtteranceMaximumSpeechRate * 3) / 4;
-        } else {
-            utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 1 + AVSpeechUtteranceMaximumSpeechRate * 1) / 2;
-        }
-        
-        [self.speechSynthesizer speakUtterance:utterance];
-        
-        self.speakItem.enabled = YES;
+        [self.webView evaluateJavaScript:@"(function (){ return document.body.innerText; })();" completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+            if (error != nil || result == nil) {
+                NSLog(@"Could not evaluate JavaScript. Error: %@", error);
+                return;
+            }
+            NSString *webViewString = (NSString *)result;
+            
+            NSString *selectedLanguage = [[BRSettings instance] stringForOption:@"j"];
+            NSDictionary *voiceCodes = @{
+                @"sk": @"sk-SK",
+                @"cz": @"cs-CZ",
+                @"c2": @"cs-CZ",
+                @"hu": @"hu-HU",
+            };
+            NSString *voiceCode = voiceCodes[selectedLanguage];
+            if (!voiceCode) {
+                voiceCode = @"sk-SK";
+            }
+            
+            AVSpeechSynthesisVoice *voice = [AVSpeechSynthesisVoice voiceWithLanguage:voiceCode];
+            AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:webViewString];
+            utterance.voice = voice;
+            
+            NSString *speechRate = [[BRSettings instance] stringForOption:@"speechRate"];
+            if ([speechRate isEqualToString:@"verySlow"]) {
+                utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 3 + AVSpeechUtteranceMaximumSpeechRate * 1) / 4;
+            } else if ([speechRate isEqualToString:@"slow"]) {
+                utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 2 + AVSpeechUtteranceMaximumSpeechRate * 1) / 3;
+            } else if ([speechRate isEqualToString:@"fast"]) {
+                utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 3 + AVSpeechUtteranceMaximumSpeechRate * 4) / 7;
+            } else if ([speechRate isEqualToString:@"veryFast"]) {
+                utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 1 + AVSpeechUtteranceMaximumSpeechRate * 3) / 4;
+            } else {
+                utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 1 + AVSpeechUtteranceMaximumSpeechRate * 1) / 2;
+            }
+            
+            [self.speechSynthesizer speakUtterance:utterance];
+            
+            self.speakItem.enabled = YES;
+        }];
     }
 }
 
@@ -285,8 +291,8 @@
 #pragma mark -
 #pragma mark Handling subpages
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    NSURLRequest *request = navigationAction.request;
     NSString *cgiName = [NSString stringWithUTF8String:SCRIPT_NAME];
     NSString *appName = [[[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleNameKey] stringByAppendingString:@".app"];
     
@@ -330,15 +336,19 @@
             });
         }
 
-        return NO;
+        decisionHandler(WKNavigationActionPolicyCancel);
     }
-    else if ([request.URL.lastPathComponent isEqualToString:appName] && request.URL.query == nil && request.URL.fragment.length > 0 && navigationType == UIWebViewNavigationTypeLinkClicked) {
+    else if ([request.URL.lastPathComponent isEqualToString:appName] && request.URL.query == nil && request.URL.fragment.length > 0 && navigationAction.navigationType == WKNavigationTypeLinkActivated) {
         NSString *javascript = [NSString stringWithFormat:@"document.getElementsByTagName(\"a\").namedItem(\"%@\").scrollIntoView();", request.URL.fragment];
-        [webView stringByEvaluatingJavaScriptFromString:javascript];
-        return NO;
+        [webView evaluateJavaScript:javascript completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+            if (result == nil || error != nil) {
+                NSLog(@"Cannot evaluate JavaScript: %@", error);
+            }
+            decisionHandler(WKNavigationActionPolicyCancel);
+        }];
     }
     else {
-        return [super webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
+        [super webView:webView decidePolicyForNavigationAction:navigationAction decisionHandler:decisionHandler];
     }
 }
 

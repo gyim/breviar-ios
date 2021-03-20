@@ -10,7 +10,7 @@
 #import "BRViewController.h"
 #import "BRWebView.h"
 
-@interface BRWebViewController : UIViewController <UIWebViewDelegate,UIGestureRecognizerDelegate>
+@interface BRWebViewController : UIViewController <WKNavigationDelegate,UIGestureRecognizerDelegate>
 
 @property(strong) IBOutlet BRWebView *webView;
 @property(strong) NSString *htmlContent;

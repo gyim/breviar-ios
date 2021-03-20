@@ -40,9 +40,9 @@
 {
     // Use shared web view. Hide it now, and show it using animation once the content is loaded
     self.webView.alpha = 0;
-    self.webView.delegate = self;
+    self.webView.navigationDelegate = self;
     self.webView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
-    self.webView.dataDetectorTypes = UIDataDetectorTypeNone;
+    self.webView.configuration.dataDetectorTypes = WKDataDetectorTypeNone;
 
     [self.webView removeFromSuperview];
     [self.view insertSubview:self.webView atIndex:0];
@@ -173,24 +173,29 @@
 }
 
 
-#pragma mark - UIWebViewDelegate & Content Loading
+#pragma mark - WKNavigationDelegate & Content Loading
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.webView.alpha = 1;
     } completion:nil];
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    if ([request.URL.absoluteString rangeOfString:@"event://linkTouchStart"].location != NSNotFound) {
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    
+    if ([navigationAction.request.URL.absoluteString rangeOfString:@"event://linkTouchStart"].location != NSNotFound) {
         struct timeval t;
         gettimeofday(&t, NULL);
         self.lastClickTime = t;
-        return NO;
+        decisionHandler(WKNavigationActionPolicyCancel);
     }
     else {
         // Allow requests to local files only
-        return request.URL.isFileURL;
+        if (navigationAction.request.URL.isFileURL) {
+            decisionHandler(WKNavigationActionPolicyAllow);
+        } else {
+            decisionHandler(WKNavigationActionPolicyCancel);
+        }
     }
 }
 
@@ -268,8 +273,8 @@
     
     // Call the delegate method even if we don't reload the content
     else {
-        if ([self.webView.delegate respondsToSelector:@selector(webViewDidFinishLoad:)]) {
-            [self.webView.delegate webViewDidFinishLoad:self.webView];
+        if ([self.webView.navigationDelegate respondsToSelector:@selector(webView:didFinishNavigation:)]) {
+            [self.webView.navigationDelegate webView:self.webView didFinishNavigation:nil];
         }
     }
 }

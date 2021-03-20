@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
-@interface BRWebView : UIWebView
+@interface BRWebView : WKWebView <UIScrollViewDelegate>
 
 @property(assign) BOOL scrollingInProgress;
 
