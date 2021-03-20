@@ -267,8 +267,7 @@
     
     NSString *htmlSource =
     [NSString stringWithFormat:
-     @"<!DOCTYPE html>\n"
-     "<html><head>\n"
+     @"<head>\n"
      "  <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\n"
      "  <link rel='stylesheet' type='text/css' href='html/breviar.css'>\n"
      "  <script type='text/javascript' src='breviar-ios.js'></script>\n"
@@ -277,8 +276,7 @@
      "</head>\n"
      "<body style='padding: %@; font: %ldpx %@;'>%@\n"
      "<script type='text/javascript'>pageReady()</script>\n"
-     "</body>\n"
-     "</html>",
+     "</body>",
      extraStylesheets,
      padding,
      (long)settings.prayerFontSize,
@@ -286,16 +284,18 @@
      self.htmlContent];
     
     if (![htmlSource isEqual:self.oldHtmlSource]) {
-        NSURL *baseURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
-        [self.webView loadHTMLString:htmlSource baseURL:baseURL];
-        self.oldHtmlSource = htmlSource;
-    }
-    
-    // Call the delegate method even if we don't reload the content
-    else {
-        if ([self.webView.navigationDelegate respondsToSelector:@selector(webView:didFinishNavigation:)]) {
-            [self.webView.navigationDelegate webView:self.webView didFinishNavigation:nil];
+        if (self.oldHtmlSource.length == 0) {
+            NSURL *baseURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+            [self.webView loadHTMLString:htmlSource baseURL:baseURL];
+        } else {
+            NSString *js = [NSString stringWithFormat:@"document.documentElement.innerHTML = `%@`; pageReady();", [htmlSource stringByReplacingOccurrencesOfString:@"`" withString:@"'"]];
+            [self.webView evaluateJavaScript:js completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+                if (error != nil) {
+                    NSLog(@"Failed to update web view: %@", error);
+                }
+            }];
         }
+        self.oldHtmlSource = htmlSource;
     }
 }
 
