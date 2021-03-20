@@ -18,5 +18,7 @@
 
 - (void)updateWebViewContent;
 - (void)setupSharedWebView;
+- (void)registerLinkClick;
+- (void)showHideNavbar:(id)sender;
 
 @end

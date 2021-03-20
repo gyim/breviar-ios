@@ -295,7 +295,8 @@
     NSURLRequest *request = navigationAction.request;
     NSString *cgiName = [NSString stringWithUTF8String:SCRIPT_NAME];
     NSString *appName = [[[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleNameKey] stringByAppendingString:@".app"];
-    
+    [self registerLinkClick];
+
     if ([request.URL.lastPathComponent isEqualToString:cgiName]) {
         // Parse URL
         NSArray *argList = [request.URL.query componentsSeparatedByString:@"&"];

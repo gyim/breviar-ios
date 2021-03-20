@@ -18,6 +18,7 @@
 @property(strong) UITapGestureRecognizer *tapGesture;
 @property(assign) struct timeval lastClickTime;
 @property(strong) NSTimer *idleTimerReenableTimer;
+@property(strong) NSTimer *showHideNavbarTimer;
 @property(assign) BOOL fullScreenMode;
 
 @end
@@ -71,7 +72,7 @@
     
     if (self.navbarToggleEnabled) {
         // Add gesture recognizer
-        self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideNavbar:)];
+        self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideNavBarAfterDelay:)];
         self.tapGesture.delegate = self;
         [self.view addGestureRecognizer:self.tapGesture];
     }
@@ -106,6 +107,10 @@
     [UIApplication sharedApplication].idleTimerDisabled = NO;
     [self.idleTimerReenableTimer invalidate];
     self.idleTimerReenableTimer = nil;
+    
+    // Cancel show/hide navbar timer
+    [self.showHideNavbarTimer invalidate];
+    self.showHideNavbarTimer = nil;
 }
 
 - (void)willMoveToParentViewController:(UIViewController *)parent
@@ -143,6 +148,13 @@
                      completion:nil];
 }
 
+- (void)showHideNavBarAfterDelay:(id)sender
+{
+    self.showHideNavbarTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:NO block:^(NSTimer * _Nonnull timer) {
+        [self showHideNavbar:sender];
+    }];
+}
+
 - (BOOL)prefersStatusBarHidden
 {
     return self.fullScreenMode;
@@ -165,6 +177,13 @@
     struct timeval t;
     gettimeofday(&t, NULL);
     return (t.tv_sec - self.lastClickTime.tv_sec)*1000 + (t.tv_usec-self.lastClickTime.tv_usec)/1000 < 500;
+}
+
+- (void)registerLinkClick
+{
+    struct timeval t;
+    gettimeofday(&t, NULL);
+    self.lastClickTime = t;
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer

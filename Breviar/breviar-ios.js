@@ -10,6 +10,6 @@ function pageReady() {
     var links = document.getElementsByTagName('a');
     for (var i=0; i<links.length; i++) {
         var link = links[i];
-        link.ontouchstart = fireEvent('linkTouchStart');
+        link.href = "event://linkTouchStart/" + link.href.split("://")[1];
     }
 }
