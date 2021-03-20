@@ -53,11 +53,6 @@ static NSString *kCelebrationCellIdentifier = @"CelebrationCell";
                                                object:nil];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -79,10 +74,6 @@ static NSString *kCelebrationCellIdentifier = @"CelebrationCell";
     if (self.day) {
         [self updateTitleView];
     }
-}
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 }
 
 #pragma mark - Data Source, Loader, etc.

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 #import "BRViewController.h"
 
 @class BRFontPickerViewController;

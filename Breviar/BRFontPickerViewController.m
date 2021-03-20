@@ -21,7 +21,7 @@ static CGFloat componentSizes[] = {
 
 @interface BRFontPickerViewController ()
 
-@property(strong) IBOutlet UIWebView *webView;
+@property(strong) IBOutlet WKWebView *webView;
 @property(strong) IBOutlet UIPickerView *pickerView;
 
 @end
@@ -40,12 +40,6 @@ static CGFloat componentSizes[] = {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -143,7 +137,7 @@ static CGFloat componentSizes[] = {
     
     NSString *html = [NSString stringWithFormat:
                       @"<!DOCTYPE html>\n"
-                      "<html><body>"
+                      "<html><head><meta name='viewport' content='width=device-width, initial-scale=1'></head>"
                       "<body style='background: %@; color: %@; font-size: %ldpx; font-family: %@; -webkit-text-size-adjust: none;'>"
                       "<p>Te Deum laudamus:<br>te Dominum confitemur.<br>Te aeternum Patrem<br>omnis terra veneratur.<br>Tibi omnes Angeli; tibi caeli et universae Potestates;<br>Tibi Cherubim et Seraphim<br>incessabili voce proclamant:<br>Sanctus, Sanctus, Sanctus, Dominus Deus Sabaoth.</p>"
                       "</body></html>",
