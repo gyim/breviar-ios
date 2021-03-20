@@ -51,7 +51,9 @@
     // Start audio session
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setActive:YES error:nil];
-    
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+
     MPRemoteCommandCenter *commandCenter = [MPRemoteCommandCenter sharedCommandCenter];
     [commandCenter.playCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
         [self playSpeaker:self];
@@ -89,6 +91,9 @@
     [commandCenter.playCommand removeTarget:self];
     [commandCenter.pauseCommand removeTarget:self];
     [commandCenter.togglePlayPauseCommand removeTarget:self];
+    
+    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
+    [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:nil];
 
     [super viewDidDisappear:animated];
 }
@@ -172,6 +177,11 @@
                 [self updateWebViewContent];
                 [self startSpeech];
                 
+                [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:@{
+                    MPMediaItemPropertyArtist: [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"],
+                    MPMediaItemPropertyTitle: self.prayer.title,
+                }];
+
                 if (oldValue == NO) {
                     // Setting it back - and the hack's done.
                     [[BRSettings instance] setBool:NO forOption:@"of0bf"];
