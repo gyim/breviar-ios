@@ -89,6 +89,7 @@
 "k.csa" 	= "pre kanonisky Notre Dame (CSA)";
 "k.osu" 	= "pre uršulínky (OSU)";
 "k.husj" 	= "jezsuiták zsolozsmája (SJ)";
+"k.czocd" 	= "pro bosé karmelitány (OCD)";
 
 "of0zjvne"	= "Urunk megjelenése (Vízkereszt) megünneplése vasárnap, január 2. és 8. között";
 "of0nanne"	= "Urunk mennybemenetelét vasárnap ünnepelni";
@@ -142,6 +143,7 @@
 "of5ps71"		= "A 126. helyett vehető a 130. zsoltár";
 "of5pa34h"		= "Évközi idő 34. hetében vehető himnusz ";
 "of5psps"		= "Hamvazószerdán vegye a zsoltárokat a 4. zsoltáros hét szerdájáról / a 3. zsoltáros hét péntekjéről";
+"of5zsps"		= "Nagycsütörtök vegye a zsoltárokat a 2. zsoltáros hét csütörtökjáról / a 3. zsoltáros hét péntekjéről";
 "of5ofps60" 	= "Közös zsolozsma halottakért, reggeli dicséret: a 145. helyett vehető a 150. zsoltár";
 "of5hpc"		= "Olvasmányos imaóra (évközi idő): himnusz I. [Amikor az imaórát éjszaka vagy kora hajnalban mondják] / himnusz II. [Amikor az imaórát a nap nem reggeli órájában végzik]";
 "of5hpred"		= "Délelőtt: himnusz Most jöjj, Szentlélek, szállj közénk / himnusz Idők rendjét megtartva most";

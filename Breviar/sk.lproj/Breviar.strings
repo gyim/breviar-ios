@@ -89,6 +89,7 @@
 "k.csa" 	= "pre kanonisky Notre Dame (CSA)";
 "k.osu" 	= "pre uršulínky (OSU)";
 "k.husj" 	= "jezsuiták zsolozsmája (SJ)";
+"k.czocd" 	= "pro bosé karmelitány (OCD)";
 
 "of0zjvne"	= "Zjavenie Pána sláviť v nedeľu medzi 2. a 8. januárom";
 "of0nanne"	= "Nanebovstúpenie Pána sláviť v nedeľu";
@@ -141,7 +142,8 @@
 "of5ps69"		= "Namiesto žalmu 126 brať žalm 129";
 "of5ps71"		= "Namiesto žalmu 127 brať žalm 131";
 "of5pa34h"		= "Vlastné hymny pre 34. týždeň Cezročného obdobia";
-"of5psps"		= "Psalmódia pre Popolcovú stredu: zo stredy 4. týždňa žaltára / z piatka 3. týždňa žaltára";
+"of5psps"		= "Psalmódia pre Popolcovú stredu (ranné chvály): zo stredy 4. týždňa žaltára / z piatka 3. týždňa žaltára";
+"of5zsps"		= "Psalmódia pre Zelený štvrtok (posvätné čítanie): zo štvrtka 2. týždňa žaltára / z piatka 3. týždňa žaltára";
 "of5ofps60" 	= "Ofícium za zosnulých, ranné chvály: namiesto žalmu 146 brať žalm 150";
 "of5hpc"		= "Posvätné čítanie (cezročné obdobie): hymnus I. [Ak je posvätné čítanie v noci alebo včasráno] / hymnus II. [Ak je posvätné čítanie cez deň]";
 "of5hpred"		= "Modlitba predpoludním: hymnus Príď, Duchu Svätý / hymnus Deviata je už hodina";
