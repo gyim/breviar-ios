@@ -5,7 +5,7 @@ DEPENDENCIES:
   - RaptureXML (~> 1.0.1)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - RaptureXML
 
 SPEC CHECKSUMS:
@@ -13,4 +13,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: df83dad4733ace780cd3606a4485735d7ff8dfd5
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.10.0
