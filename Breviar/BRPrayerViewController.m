@@ -18,6 +18,7 @@
 
 @property (strong, nonatomic) BRPrayerViewController *subpageController;
 @property (strong, nonatomic) AVSpeechSynthesizer *speechSynthesizer;
+@property (strong) NSString *speechBody;
 
 @end
 
@@ -79,6 +80,8 @@
     if (self.speechSynthesizer.speaking) {
         [self.speechSynthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
     }
+    self.speechBody = nil;
+    self.speechSynthesizer = nil;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -156,6 +159,8 @@
 - (IBAction)playSpeaker:(id)sender
 {
     if (self.speechSynthesizer.paused) {
+        [self setHtmlBody:self.speechBody forPrayer:self.prayer.queryId];
+        [self updateWebViewContent:TRUE];
         [self.speechSynthesizer continueSpeaking];
     }
     else {
@@ -177,8 +182,9 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.speechSynthesizer = [[AVSpeechSynthesizer alloc] init];
+                self.speechBody = body;
                 [self setHtmlBody:body forPrayer:self.prayer.queryId];
-                [self updateWebViewContent];
+                [self updateWebViewContent:TRUE];
                 [self startSpeech];
                 
                 [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:@{
@@ -206,7 +212,7 @@
     self.speakItem.image = [UIImage imageNamed:@"speaker_off"];
 
     [self setHtmlBody:self.prayer.body forPrayer:self.prayer.queryId];
-    [self updateWebViewContent];
+    [self updateWebViewContent:FALSE];
 }
 
 - (IBAction)toggleSpeaker:(id)sender
@@ -309,7 +315,7 @@
     self.prayer.scrollOffset = self.webView.scrollView.contentOffset.y;
     self.prayer.scrollHeight = self.webView.scrollView.contentSize.height;
     [self setHtmlBody:self.prayer.body forPrayer:self.prayer.queryId];
-    [self updateWebViewContent];
+    [self updateWebViewContent:FALSE];
 }
 
 #pragma mark -
