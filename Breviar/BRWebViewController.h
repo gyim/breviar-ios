@@ -16,7 +16,7 @@
 @property(strong) NSString *htmlContent;
 @property BOOL navbarToggleEnabled;
 
-- (void)updateWebViewContent:(BOOL)forSpeech;
+- (void)updateWebViewContent;
 - (void)setupSharedWebView;
 - (void)registerLinkClick;
 - (void)showHideNavbar:(id)sender;

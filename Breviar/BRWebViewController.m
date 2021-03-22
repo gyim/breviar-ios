@@ -63,7 +63,7 @@
     gettimeofday(&t, NULL);
     self.lastClickTime = t;
     
-    [self updateWebViewContent:FALSE];
+    [self updateWebViewContent];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -218,7 +218,7 @@
     }
 }
 
-- (void)updateWebViewContent:(BOOL)forSpeech
+- (void)updateWebViewContent
 {
     BRSettings *settings = [BRSettings instance];
     
@@ -251,11 +251,8 @@
     }
     
     // Blind-friendly
-    if ([settings boolForOption:@"of0bf"] || forSpeech) {
+    if ([settings boolForOption:@"of0bf"]) {
         [extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-blind-friendly.css'>"];
-    }
-    if (forSpeech) {
-        [extraStylesheets appendString:@"<link rel='stylesheet' type='text/css' href='html/breviar-voice-output.css'>"];
     }
 
     // Padding for iPad

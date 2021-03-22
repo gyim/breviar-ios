@@ -67,6 +67,7 @@
 		70EB053318B1282300F88662 /* myhpage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB051D18B1282300F88662 /* myhpage.cpp */; };
 		70EB053418B1282300F88662 /* mylog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB051F18B1282300F88662 /* mylog.cpp */; };
 		70EB053518B1282300F88662 /* mystring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70EB052118B1282300F88662 /* mystring.cpp */; };
+		70F9159E260948510022EE50 /* BRSpeechController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F9159D260948510022EE50 /* BRSpeechController.m */; };
 		B603C2ACA2EBC82B58116F9B /* libPods-Breviar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DE9EC395D4EB1243856A95B /* libPods-Breviar.a */; };
 /* End PBXBuildFile section */
 
@@ -182,6 +183,8 @@
 		70EB052218B1282300F88662 /* mystring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mystring.h; sourceTree = "<group>"; };
 		70EB052318B1282300F88662 /* mysysdef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mysysdef.h; sourceTree = "<group>"; };
 		70EB052418B1282300F88662 /* mysystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mysystem.h; sourceTree = "<group>"; };
+		70F9159D260948510022EE50 /* BRSpeechController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BRSpeechController.m; sourceTree = "<group>"; };
+		70F915A0260948640022EE50 /* BRSpeechController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRSpeechController.h; sourceTree = "<group>"; };
 		ACBEEEA96702192BA34D0161 /* Pods-Breviar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.debug.xcconfig"; sourceTree = "<group>"; };
 		C9DF9C59A3E9199AD535BC2E /* Pods-Breviar.release-cs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.release-cs.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.release-cs.xcconfig"; sourceTree = "<group>"; };
 		E180EC2FB02637491DFCA3CE /* Pods-Breviar.debug-hu.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breviar.debug-hu.xcconfig"; path = "Pods/Target Support Files/Pods-Breviar/Pods-Breviar.debug-hu.xcconfig"; sourceTree = "<group>"; };
@@ -333,6 +336,8 @@
 				7054369015FBF1B1005854DC /* BRSettingsViewController.m */,
 				7054369215FBF1D0005854DC /* BRFontPickerViewController.h */,
 				7054369315FBF1D0005854DC /* BRFontPickerViewController.m */,
+				70F915A0260948640022EE50 /* BRSpeechController.h */,
+				70F9159D260948510022EE50 /* BRSpeechController.m */,
 				707A64B5171AD8020065F98E /* BRStringOptionPickerViewController.h */,
 				707A64B6171AD8020065F98E /* BRStringOptionPickerViewController.m */,
 				70CAFAA218849462000410AC /* BRWebViewController.h */,
@@ -621,6 +626,7 @@
 				70EB052F18B1282300F88662 /* myconf.cpp in Sources */,
 				7042905C1641F91C00663A7D /* BRDataSource.m in Sources */,
 				70C962C016A1DFC800A399B9 /* BRCelebrationCell.m in Sources */,
+				70F9159E260948510022EE50 /* BRSpeechController.m in Sources */,
 				7045E8E118B97ADE00495926 /* BRWebView.m in Sources */,
 				70C962D616B45C3E00A399B9 /* BRFontSettingsCell.m in Sources */,
 				70EB053018B1282300F88662 /* mydefs.cpp in Sources */,

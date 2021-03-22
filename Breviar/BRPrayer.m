@@ -68,7 +68,10 @@ static NSString *prayerNames[] = {
 - (NSString *)bodyForSpeechSynthesis
 {
     if (!_bodyForSpeechSynthesis) {
-        NSDictionary *blindFriendlyOptions = @{ @"of0bf": @YES };
+        NSDictionary *blindFriendlyOptions = @{
+            @"of0bf": @YES,
+            @"of2rm": @NO,
+        };
         _bodyForSpeechSynthesis = [self generateBodyWithOverwritingOptions:blindFriendlyOptions];
     }
     return _bodyForSpeechSynthesis;
@@ -113,7 +116,8 @@ static NSString *prayerNames[] = {
                                                  @"o2": @"16384",
                                                  @"o3": @"0",
                                                  @"o4": @"0",
-                                                 @"o5": @"0"
+                                                 @"o5": @"0",
+                                                 @"o6": @"0"
                                                  }];
     }
     if (overwritingOptions) {

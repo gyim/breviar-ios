@@ -17,8 +17,7 @@
 @interface BRPrayerViewController ()
 
 @property (strong, nonatomic) BRPrayerViewController *subpageController;
-@property (strong, nonatomic) AVSpeechSynthesizer *speechSynthesizer;
-@property (strong) NSString *speechBody;
+@property (strong, nonatomic) BRSpeechController *speechController;
 
 @end
 
@@ -27,6 +26,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.speechController = [[BRSpeechController alloc] init];
+    self.speechController.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -47,27 +48,8 @@
     [self updateNightModeButtonTitle];
     [self updateFontItems];
 
-    self.speechSynthesizer = nil;
-
-    // Start audio session
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    [session setActive:YES error:nil];
-    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
-    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-
-    MPRemoteCommandCenter *commandCenter = [MPRemoteCommandCenter sharedCommandCenter];
-    [commandCenter.playCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
-        [self playSpeaker:self];
-        return MPRemoteCommandHandlerStatusSuccess;
-    }];
-    [commandCenter.pauseCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
-        [self pauseSpeaker:self];
-        return MPRemoteCommandHandlerStatusSuccess;
-    }];
-    [commandCenter.togglePlayPauseCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
-        [self toggleSpeaker:self];
-        return MPRemoteCommandHandlerStatusSuccess;
-    }];
+    [self.speechController beginSession:self.prayer];
+    self.speakItem.image = [UIImage imageNamed:@"speaker_off"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -77,27 +59,11 @@
     self.prayer.scrollOffset = self.webView.scrollView.contentOffset.y;
     self.prayer.scrollHeight = self.webView.scrollView.contentSize.height;
     
-    if (self.speechSynthesizer.speaking) {
-        [self.speechSynthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
-    }
-    self.speechBody = nil;
-    self.speechSynthesizer = nil;
+    [self.speechController endSession];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    // Stop audio session
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    [session setActive:NO error:nil];
-    
-    MPRemoteCommandCenter *commandCenter = [MPRemoteCommandCenter sharedCommandCenter];
-    [commandCenter.playCommand removeTarget:self];
-    [commandCenter.pauseCommand removeTarget:self];
-    [commandCenter.togglePlayPauseCommand removeTarget:self];
-    
-    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
-    [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:nil];
-
     [super viewDidDisappear:animated];
 }
 
@@ -158,72 +124,17 @@
 
 - (IBAction)playSpeaker:(id)sender
 {
-    if (self.speechSynthesizer.paused) {
-        [self setHtmlBody:self.speechBody forPrayer:self.prayer.queryId];
-        [self updateWebViewContent:TRUE];
-        [self.speechSynthesizer continueSpeaking];
-    }
-    else {
-        self.speakItem.enabled = NO;
-        self.speakItem.image = [UIImage imageNamed:@"speaker_on"];
-        
-        BOOL oldValue = [[BRSettings instance] boolForOption:@"of0bf"];
-        if (oldValue == NO) {
-            // We're setting the blind-friendly option to YES because updateWebViewContent adds CSS tags based on this global singleton; an ugly hack, for which I appologize :) (Oto Kominak)
-            [[BRSettings instance] setBool:YES forOption:@"of0bf"];
-        }
-        BOOL oldValue2 = [[BRSettings instance] boolForOption:@"of2rm"];
-        if (oldValue2 == YES) {
-            [[BRSettings instance] setBool:NO forOption:@"of2rm"];
-        }
-
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            NSString *body = self.prayer.bodyForSpeechSynthesis;
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.speechSynthesizer = [[AVSpeechSynthesizer alloc] init];
-                self.speechBody = body;
-                [self setHtmlBody:body forPrayer:self.prayer.queryId];
-                [self updateWebViewContent:TRUE];
-                [self startSpeech];
-                
-                [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:@{
-                    MPMediaItemPropertyArtist: [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"],
-                    MPMediaItemPropertyTitle: self.prayer.title,
-                }];
-
-                if (oldValue == NO) {
-                    // Setting it back - and the hack's done.
-                    [[BRSettings instance] setBool:NO forOption:@"of0bf"];
-                }
-                if (oldValue2 == YES) {
-                    [[BRSettings instance] setBool:YES forOption:@"of2rm"];
-                }
-            });
-        });
-    }
-    
-    self.speakItem.image = [UIImage imageNamed:@"speaker_on"];
+    [self.speechController startPlayback];
 }
 
 - (IBAction)pauseSpeaker:(id)sender
 {
-    [self.speechSynthesizer pauseSpeakingAtBoundary:AVSpeechBoundaryImmediate];
-    self.speakItem.image = [UIImage imageNamed:@"speaker_off"];
-
-    [self setHtmlBody:self.prayer.body forPrayer:self.prayer.queryId];
-    [self updateWebViewContent:FALSE];
+    [self.speechController pausePlayback];
 }
 
 - (IBAction)toggleSpeaker:(id)sender
 {
-    if (self.speechSynthesizer.speaking && !self.speechSynthesizer.paused) {
-        [self pauseSpeaker:sender];
-    }
-    else {
-        [self playSpeaker:sender];
-    }
-    
+    [self.speechController togglePlayback];
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
@@ -235,53 +146,6 @@
         CGFloat maxOffset = height - self.webView.frame.size.height;
         CGFloat scrollOffset = self.prayer.scrollOffset * height / self.prayer.scrollHeight;
         self.webView.scrollView.contentOffset = CGPointMake(0, MIN(scrollOffset, maxOffset));
-    }
-}
-
-- (void)startSpeech
-{
-    // An instance of AVSpeechSynthesizer must be initialized before loading content in web view
-    if (self.speechSynthesizer && !self.speechSynthesizer.speaking) {
-        [self.webView evaluateJavaScript:@"(function (){ return document.body.innerText; })();" completionHandler:^(id _Nullable result, NSError * _Nullable error) {
-            if (error != nil || result == nil) {
-                NSLog(@"Could not evaluate JavaScript. Error: %@", error);
-                return;
-            }
-            NSString *webViewString = (NSString *)result;
-            
-            NSString *selectedLanguage = [[BRSettings instance] stringForOption:@"j"];
-            NSDictionary *voiceCodes = @{
-                @"sk": @"sk-SK",
-                @"cz": @"cs-CZ",
-                @"c2": @"cs-CZ",
-                @"hu": @"hu-HU",
-            };
-            NSString *voiceCode = voiceCodes[selectedLanguage];
-            if (!voiceCode) {
-                voiceCode = @"sk-SK";
-            }
-            
-            AVSpeechSynthesisVoice *voice = [AVSpeechSynthesisVoice voiceWithLanguage:voiceCode];
-            AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:webViewString];
-            utterance.voice = voice;
-            
-            NSString *speechRate = [[BRSettings instance] stringForOption:@"speechRate"];
-            if ([speechRate isEqualToString:@"verySlow"]) {
-                utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 3 + AVSpeechUtteranceMaximumSpeechRate * 1) / 4;
-            } else if ([speechRate isEqualToString:@"slow"]) {
-                utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 2 + AVSpeechUtteranceMaximumSpeechRate * 1) / 3;
-            } else if ([speechRate isEqualToString:@"fast"]) {
-                utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 3 + AVSpeechUtteranceMaximumSpeechRate * 4) / 7;
-            } else if ([speechRate isEqualToString:@"veryFast"]) {
-                utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 1 + AVSpeechUtteranceMaximumSpeechRate * 3) / 4;
-            } else {
-                utterance.rate = (AVSpeechUtteranceMinimumSpeechRate * 1 + AVSpeechUtteranceMaximumSpeechRate * 1) / 2;
-            }
-            
-            [self.speechSynthesizer speakUtterance:utterance];
-            
-            self.speakItem.enabled = YES;
-        }];
     }
 }
 
@@ -315,7 +179,24 @@
     self.prayer.scrollOffset = self.webView.scrollView.contentOffset.y;
     self.prayer.scrollHeight = self.webView.scrollView.contentSize.height;
     [self setHtmlBody:self.prayer.body forPrayer:self.prayer.queryId];
-    [self updateWebViewContent:FALSE];
+    [self updateWebViewContent];
+    [self.speechController resetText];
+}
+
+#pragma mark -
+#pragma mark BRSpeechControllerDelegate
+
+- (void)speechStateChanged:(BRSpeechState)speechState {
+    NSLog(@"speechStateChanged: %d", speechState);
+    switch (speechState) {
+        case BRSpeechDisabled:
+        case BRSpeechPaused:
+            self.speakItem.image = [UIImage imageNamed:@"speaker_off"];
+            break;
+        case BRSpeechStarting:
+        case BRSpeechPlaying:
+            self.speakItem.image = [UIImage imageNamed:@"speaker_on"];
+    }
 }
 
 #pragma mark -

@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BRWebViewController.h"
+#import "BRSpeechController.h"
 #import "BRPrayer.h"
 
-@interface BRPrayerViewController : BRWebViewController
+@interface BRPrayerViewController : BRWebViewController<BRSpeechControllerDelegate>
 
 @property(strong) BRPrayer *prayer;
 @property(weak) IBOutlet UIBarButtonItem *speakItem;
