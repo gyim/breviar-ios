@@ -80,6 +80,7 @@ static NSString *prayerNames[] = {
 - (void)refreshText;
 {
     _body = nil;
+    _bodyForSpeechSynthesis = nil;
     [self body];
 }
 
