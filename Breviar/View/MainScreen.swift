@@ -200,7 +200,7 @@ struct PrayerLink: View {
     var body: some View {
         NavigationLink(
             destination:
-                PrayerScreen(content: model.prayerState).navigationTitle(prayerNames[prayerType]!)
+                PrayerScreen(prayerName: prayerNames[prayerType]!, content: model.prayerState)
                 .onAppear {
                     if let (day, celebration) = model.getCurrentCelebration() {
                         model.loadPrayer(prayerType, day: day, celebration: celebration)
