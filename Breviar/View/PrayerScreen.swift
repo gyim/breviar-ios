@@ -8,22 +8,86 @@
 import SwiftUI
 import WebKit
 
+// MARK: Prayer Screen Controller
+
+class PrayerScreenController: UIViewController, UIPopoverPresentationControllerDelegate {
+    var webView: WKWebView?
+    var textOptionsPopoverDismissed: (() -> Void)?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Configure web view
+        self.webView = WKWebView()
+        self.view = self.webView
+        self.webView?.loadHTMLString("Hello World", baseURL: nil)
+    }
+    
+    func showTextOptions(show: Bool, dismissed: @escaping () -> Void) {
+        if show && self.presentedViewController == nil {
+            // Find navigation item that triggered the popover
+            guard let navItems = self.navigationController?.navigationBar.items else {
+                print("No navigation items")
+                return
+            }
+            if navItems.count < 1 {
+                print("No navigation items")
+                return
+            }
+            let navItem = navItems[navItems.count-1]
+            
+            // Create popover
+            let popover = UIHostingController(rootView: TextOptionsView())
+            popover.preferredContentSize = popover.sizeThatFits(in:CGSize(width:300, height:300))
+            popover.modalPresentationStyle = .popover
+            popover.popoverPresentationController?.barButtonItem = navItem.rightBarButtonItem
+            popover.popoverPresentationController?.delegate = self
+            self.textOptionsPopoverDismissed = dismissed
+            self.present(popover, animated: true)
+        }
+    }
+    
+    @objc func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none // Force popover style on iPhone
+    }
+    
+    @objc func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        if let dismissed = self.textOptionsPopoverDismissed {
+            dismissed()
+            self.textOptionsPopoverDismissed = nil
+        }
+    }
+}
+
+struct PrayerScreenControllerRepresentable: UIViewControllerRepresentable {
+    var content: LoadingState<String> = .idle
+    @Binding var textOptionsShown: Bool
+    
+    func makeUIViewController(context: Context) -> some UIViewController {
+        return PrayerScreenController()
+    }
+    
+    func updateUIViewController(_ c: UIViewControllerType, context: Context) {
+        guard let controller = c as? PrayerScreenController else { return }
+        controller.showTextOptions(show: textOptionsShown) {
+            textOptionsShown = false
+        }
+    }
+}
+
 struct PrayerScreen: View {
-    @State var isPopoverPresented = false
+    @State var textOptionsShown = false
     var prayerName: String
     var content: LoadingState<String> = .idle
     
     var body: some View {
-        PrayerScreenContent(content: content)
+        PrayerScreenControllerRepresentable(content:content, textOptionsShown: $textOptionsShown)
             .navigationTitle(prayerName)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: {
                 Button(action: {
-                    isPopoverPresented.toggle()
+                    textOptionsShown = true
                 }, label: {Label("", systemImage:"textformat.size")})
-                .popover(isPresented: $isPopoverPresented) {
-                    TextOptionsView()
-                }
             })
     }
 }
@@ -59,6 +123,8 @@ struct WebView : UIViewRepresentable {
     }
 }
 
+// MARK:- Text Options Popup
+
 struct TextOptionsView : View {
     
     var body: some View {
@@ -66,9 +132,7 @@ struct TextOptionsView : View {
             TextSizeView()
             Divider()
             ColorSchemeChooserView()
-            Divider()
-            PlaybackView()
-        }.frame(width: 300, height: 300, alignment: .center)
+        }.frame(width: 300, height: 180, alignment: .center)
     }
 }
 
@@ -159,6 +223,8 @@ struct ColorSchemeButton : View {
     }
 }
 
+// MARK:- Playback View
+
 struct PlaybackView: View {
     @State var active = false
     
@@ -181,14 +247,23 @@ struct PrayerScreen_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView {
-                PrayerScreen(prayerName: "Morning Prayer", content: .loaded("<b>Hello world</b>"))
+                NavigationLink("Load Prayer Screen", destination: PrayerScreen(prayerName: "Morning Prayer", content: .loaded("<b>Hello world</b>")))
+                .navigationTitle("Today")
             }.navigationViewStyle(StackNavigationViewStyle())
             
             TextOptionsView()
                 .preferredColorScheme(.light)
-                .previewLayout(.fixed(width: 300.0, height: 300.0))
+                .previewLayout(.fixed(width: 300.0, height: 180.0))
             
             TextOptionsView()
+                .preferredColorScheme(.dark)
+                .previewLayout(.fixed(width: 300.0, height: 180.0))
+
+            PlaybackView()
+                .preferredColorScheme(.light)
+                .previewLayout(.fixed(width: 300.0, height: 300.0))
+            
+            PlaybackView()
                 .preferredColorScheme(.dark)
                 .previewLayout(.fixed(width: 300.0, height: 300.0))
         }
