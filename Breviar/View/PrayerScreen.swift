@@ -50,6 +50,14 @@ struct PrayerScreenControllerRepresentable: UIViewControllerRepresentable {
                 controller.present(popover, animated: true)
             }
         }
+        
+        func applyTextOptions(controller: UIViewController) {
+            let textOptions = self.parent.textOptions
+            let window = UIApplication.shared.windows[0]
+            window.overrideUserInterfaceStyle = textOptions.colorScheme.uikitColorScheme
+        }
+        
+        // UIViewControllerRepresentable methods
 
         @objc func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
             return .none // Force popover style on iPhone
@@ -73,6 +81,7 @@ struct PrayerScreenControllerRepresentable: UIViewControllerRepresentable {
     
     func updateUIViewController(_ controller: UIViewControllerType, context: Context) {
         context.coordinator.showTextOptions(controller: controller, show: textOptionsShown)
+        context.coordinator.applyTextOptions(controller: controller)
     }
 }
 
@@ -144,6 +153,14 @@ enum ColorScheme {
     case automatic
     case light
     case dark
+    
+    var uikitColorScheme : UIUserInterfaceStyle {
+        switch self {
+        case .automatic: return .unspecified
+        case .light: return .light
+        case .dark: return .dark
+        }
+    }
 }
 
 struct ColorSchemeChooserView : View {
