@@ -13,6 +13,7 @@ import WebKit
 class PrayerScreenController: UIViewController, UIPopoverPresentationControllerDelegate {
     var webView: WKWebView?
     var textOptionsPopoverDismissed: (() -> Void)?
+    @StateObject var textOptions = TextOptions() // TODO: use external state
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,7 @@ class PrayerScreenController: UIViewController, UIPopoverPresentationControllerD
             let navItem = navItems[navItems.count-1]
             
             // Create popover
-            let popover = UIHostingController(rootView: TextOptionsView())
+            let popover = UIHostingController(rootView: TextOptionsView(textOptions: textOptions))
             popover.preferredContentSize = popover.sizeThatFits(in:CGSize(width:300, height:300))
             popover.modalPresentationStyle = .popover
             popover.popoverPresentationController?.barButtonItem = navItem.rightBarButtonItem
@@ -61,6 +62,7 @@ class PrayerScreenController: UIViewController, UIPopoverPresentationControllerD
 
 struct PrayerScreenControllerRepresentable: UIViewControllerRepresentable {
     var prayer: Prayer
+    @ObservedObject var textOptions: TextOptions
     @Binding var textOptionsShown: Bool
     
     func makeUIViewController(context: Context) -> some UIViewController {
@@ -69,6 +71,7 @@ struct PrayerScreenControllerRepresentable: UIViewControllerRepresentable {
     
     func updateUIViewController(_ c: UIViewControllerType, context: Context) {
         guard let controller = c as? PrayerScreenController else { return }
+
         controller.showTextOptions(show: textOptionsShown) {
             textOptionsShown = false
         }
@@ -77,10 +80,11 @@ struct PrayerScreenControllerRepresentable: UIViewControllerRepresentable {
 
 struct PrayerScreen: View {
     @State var textOptionsShown = false
+    @StateObject var textOptions = TextOptions()
     var prayer: Prayer
     
     var body: some View {
-        PrayerScreenControllerRepresentable(prayer:prayer, textOptionsShown: $textOptionsShown)
+        PrayerScreenControllerRepresentable(prayer:prayer, textOptions: textOptions, textOptionsShown: $textOptionsShown)
             .navigationTitle(prayer.name)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: {
@@ -109,19 +113,25 @@ struct WebView : UIViewRepresentable {
 
 // MARK:- Text Options Popup
 
+class TextOptions: ObservableObject {
+    @Published var fontSize = 5.0
+    @Published var colorScheme = ColorScheme.automatic
+}
+
 struct TextOptionsView : View {
+    @ObservedObject var textOptions: TextOptions
     
     var body: some View {
         VStack {
-            TextSizeView()
+            TextSizeView(fontSize: $textOptions.fontSize)
             Divider()
-            ColorSchemeChooserView()
+            ColorSchemeChooserView(colorScheme: $textOptions.colorScheme)
         }.frame(width: 300, height: 180, alignment: .center)
     }
 }
 
 struct TextSizeView : View {
-    @State var fontSize = 5.0
+    @Binding var fontSize: Double
 
     var body: some View {
         HStack {
@@ -139,7 +149,7 @@ enum ColorScheme {
 }
 
 struct ColorSchemeChooserView : View {
-    @State var colorScheme = ColorScheme.automatic
+    @Binding var colorScheme: ColorScheme
     
     var body: some View {
         HStack {
@@ -228,23 +238,31 @@ struct PlaybackView: View {
 }
 
 struct PrayerScreen_Previews: PreviewProvider {
+    struct TextOptionsViewContainer: View {
+        @StateObject var textOptions = TextOptions()
+        
+        var body: some View {
+            TextOptionsView(textOptions: textOptions)
+        }
+    }
+    
     static var previews: some View {
         Group {
-            TextOptionsView()
+            TextOptionsViewContainer()
                 .preferredColorScheme(.light)
                 .previewLayout(.fixed(width: 300.0, height: 180.0))
             
-            TextOptionsView()
+            TextOptionsViewContainer()
                 .preferredColorScheme(.dark)
                 .previewLayout(.fixed(width: 300.0, height: 180.0))
 
             PlaybackView()
                 .preferredColorScheme(.light)
-                .previewLayout(.fixed(width: 300.0, height: 300.0))
+                .previewLayout(.sizeThatFits)
             
             PlaybackView()
                 .preferredColorScheme(.dark)
-                .previewLayout(.fixed(width: 300.0, height: 300.0))
+                .previewLayout(.sizeThatFits)
         }
     }
 }
