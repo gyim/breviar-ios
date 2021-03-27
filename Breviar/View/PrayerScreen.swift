@@ -91,21 +91,6 @@ struct PrayerScreen: View {
     }
 }
 
-struct PrayerScreenContent: View {
-    var content: LoadingState<String> = .idle
-    
-    var body: some View {
-        switch content {
-        case .idle, .loading:
-            Text("Loading...")
-        case .loaded(let text):
-            WebView(text: text)
-        case .failed(let error):
-            Text(error.localizedDescription)
-        }
-    }
-}
-
 class PrayerView : WKWebView {
 }
 

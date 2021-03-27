@@ -80,12 +80,7 @@ struct MainScreenContent: View {
     @EnvironmentObject var model: CalendarModel
     
     var body: some View {
-        switch model.dayState {
-        case .idle, .loading:
-            Text("Loading...")
-        case .failed(let error):
-            Text(error.localizedDescription)
-        case .loaded(let day):
+        LoadingView(value: model.dayState) { day in
             List{
                 Section() {
                     ForEach(day.celebrations) { celebration in

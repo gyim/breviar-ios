@@ -60,12 +60,7 @@ struct DatePickerContent: View {
     var onDaySelected: () -> Void
 
     var body: some View {
-        switch model.monthState {
-        case .idle, .loading:
-            Text("Loading...")
-        case .failed(let error):
-            Text(error.localizedDescription)
-        case .loaded(let month):
+        LoadingView(value: model.monthState) { month in
             DatePickerList(days: month.days, onDaySelected: onDaySelected)
         }
     }
