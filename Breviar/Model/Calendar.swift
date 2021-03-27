@@ -168,11 +168,31 @@ enum PrayerType: String {
     case midAfternoonPrayer = "mpo"
     case eveningPrayer = "mv"
     case compline = "mk"
+    
+    var name: String {
+        switch self {
+        case .invitatory: return "Invitatory"
+        case .officeOfReadings: return "Office of Readings"
+        case .morningPrayer: return "Morning Prayer"
+        case .midMorningPrayer: return "Mid-Morning Prayer"
+        case .midDayPrayer: return "Midday Prayer"
+        case .midAfternoonPrayer: return "Mid-Afternoon Prayer"
+        case .eveningPrayer: return "Evening Prayer"
+        case .compline: return "Compline"
+        }
+    }
 }
 
-struct Prayer {
-    let date: Date
-    let type: PrayerType
+struct Prayer: Identifiable {
+    let day: Day
     let celebration: Celebration
-    let body: String
+    let type: PrayerType
+    
+    var id : String {
+        return "\(day.year)-\(day.month)-\(day.day)/\(celebration.id)/\(type)"
+    }
+    
+    var name: String {
+        return self.type.name
+    }
 }

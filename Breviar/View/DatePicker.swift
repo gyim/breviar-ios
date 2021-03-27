@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct DatePicker: View {
-    @EnvironmentObject var model: BreviarModel
-    
+    @EnvironmentObject var model: CalendarModel
+    var onDaySelected: () -> Void
+
     func getTitle(month: Date) -> String {
         let fmt = DateFormatter()
         fmt.dateFormat = "yyyy MMMM"
@@ -18,13 +19,13 @@ struct DatePicker: View {
     
     var body: some View {
         NavigationView {
-            DatePickerContent()
+            DatePickerContent(onDaySelected: onDaySelected)
                 .navigationTitle(getTitle(month: model.month.date))
                 .navigationBarItems(
                     leading: Button(
                         action: {
                             withAnimation {
-                                model.datePickerShown = false
+                                onDaySelected()
                             }
                         },
                         label: { Text("Back") })
@@ -55,8 +56,9 @@ struct DatePicker: View {
 }
 
 struct DatePickerContent: View {
-    @EnvironmentObject var model: BreviarModel
-    
+    @EnvironmentObject var model: CalendarModel
+    var onDaySelected: () -> Void
+
     var body: some View {
         switch model.monthState {
         case .idle, .loading:
@@ -64,14 +66,15 @@ struct DatePickerContent: View {
         case .failed(let error):
             Text(error.localizedDescription)
         case .loaded(let month):
-            DatePickerList(days: month.days)
+            DatePickerList(days: month.days, onDaySelected: onDaySelected)
         }
     }
 }
 
 struct DatePickerList: View {
-    @EnvironmentObject var model: BreviarModel
+    @EnvironmentObject var model: CalendarModel
     var days: [LiturgicalDay]
+    var onDaySelected: () -> Void
     
     func getDayFormatter() -> DateFormatter {
         let fmt = DateFormatter()
@@ -105,6 +108,7 @@ struct DatePickerList: View {
                         CelebrationRow(celebration: celebration, checked: false)
                             .onTapGesture {
                                 model.jumpTo(day: day, celebration: celebration)
+                                onDaySelected()
                             }
                     }
                 }
@@ -132,7 +136,7 @@ struct DatePicker_Previews: PreviewProvider {
         ]
         
         NavigationView {
-            DatePickerList(days: days)
+            DatePickerList(days: days) { }
                 .navigationTitle("2021 January")
         }
     }

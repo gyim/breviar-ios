@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct MainScreen: View {
-    @EnvironmentObject var model: BreviarModel
+    @EnvironmentObject var model: CalendarModel
+    @State var datePickerShown = false
     
     func getTitle(day: Day) -> String {
         let today = Day(fromDate: Date())
@@ -39,7 +40,7 @@ struct MainScreen: View {
                     leading: Button(
                         action: {
                             withAnimation {
-                                model.datePickerShown = true
+                                datePickerShown = true
                             }
                         },
                         label: {Label("", systemImage: "calendar")})
@@ -65,8 +66,10 @@ struct MainScreen: View {
                             label: {Label("Next Day", systemImage: "chevron.right")})
                     }
                 }
-                .sheet(isPresented: $model.datePickerShown) {
-                    DatePicker().environmentObject(model)
+                .sheet(isPresented: $datePickerShown) {
+                    DatePicker() {
+                        datePickerShown = false
+                    }.environmentObject(model)
                 }
         }
         .navigationViewStyle(StackNavigationViewStyle())
@@ -74,7 +77,7 @@ struct MainScreen: View {
 }
 
 struct MainScreenContent: View {
-    @EnvironmentObject var model: BreviarModel
+    @EnvironmentObject var model: CalendarModel
     
     var body: some View {
         switch model.dayState {
@@ -96,14 +99,9 @@ struct MainScreenContent: View {
                 }
 
                 Section(header: Text("Prayers")) {
-                    PrayerLink(prayerType: .invitatory)
-                    PrayerLink(prayerType: .officeOfReadings)
-                    PrayerLink(prayerType: .morningPrayer)
-                    PrayerLink(prayerType: .midMorningPrayer)
-                    PrayerLink(prayerType: .midDayPrayer)
-                    PrayerLink(prayerType: .midAfternoonPrayer)
-                    PrayerLink(prayerType: .eveningPrayer)
-                    PrayerLink(prayerType: .compline)
+                    ForEach(model.getPrayersForSelectedCelebration()) { prayer in
+                        PrayerLink(prayer: prayer)
+                    }
                 }
             }
         }
@@ -172,19 +170,7 @@ struct CelebrationRow : View {
 }
 
 struct PrayerLink: View {
-    @EnvironmentObject var model: BreviarModel
-    var prayerType: PrayerType
-    
-    let prayerNames: [PrayerType: String] = [
-        .invitatory: "Invitatory",
-        .officeOfReadings: "Office of Readings",
-        .morningPrayer: "Morning Prayer",
-        .midMorningPrayer: "Mid-Morning Prayer",
-        .midDayPrayer: "Midday Prayer",
-        .midAfternoonPrayer: "Mid-Afternoon Prayer",
-        .eveningPrayer: "Evening Prayer",
-        .compline: "Compline",
-    ]
+    var prayer: Prayer
     
     let prayerIcons: [PrayerType: String] = [
         .invitatory: "sparkles",
@@ -199,20 +185,14 @@ struct PrayerLink: View {
     
     var body: some View {
         NavigationLink(
-            destination:
-                PrayerScreen(prayerName: prayerNames[prayerType]!, content: model.prayerState)
-                .onAppear {
-                    if let (day, celebration) = model.getCurrentCelebration() {
-                        model.loadPrayer(prayerType, day: day, celebration: celebration)
-                    }
-                },
-            label: { Label(prayerNames[prayerType]!, systemImage: prayerIcons[prayerType]!) })
+            destination: PrayerScreen(prayer: prayer),
+            label: { Label(prayer.name, systemImage: prayerIcons[prayer.type]!) })
     }
 }
 
 struct MainScreen_Previews: PreviewProvider {
     static var previews: some View {
-        let model = BreviarModel(dataSource: TestDataSource())
+        let model = CalendarModel(dataSource: TestDataSource())
         MainScreen().environmentObject(model.load())
     }
 }

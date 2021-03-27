@@ -60,7 +60,7 @@ class PrayerScreenController: UIViewController, UIPopoverPresentationControllerD
 }
 
 struct PrayerScreenControllerRepresentable: UIViewControllerRepresentable {
-    var content: LoadingState<String> = .idle
+    var prayer: Prayer
     @Binding var textOptionsShown: Bool
     
     func makeUIViewController(context: Context) -> some UIViewController {
@@ -77,12 +77,11 @@ struct PrayerScreenControllerRepresentable: UIViewControllerRepresentable {
 
 struct PrayerScreen: View {
     @State var textOptionsShown = false
-    var prayerName: String
-    var content: LoadingState<String> = .idle
+    var prayer: Prayer
     
     var body: some View {
-        PrayerScreenControllerRepresentable(content:content, textOptionsShown: $textOptionsShown)
-            .navigationTitle(prayerName)
+        PrayerScreenControllerRepresentable(prayer:prayer, textOptionsShown: $textOptionsShown)
+            .navigationTitle(prayer.name)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: {
                 Button(action: {
@@ -246,11 +245,6 @@ struct PlaybackView: View {
 struct PrayerScreen_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            NavigationView {
-                NavigationLink("Load Prayer Screen", destination: PrayerScreen(prayerName: "Morning Prayer", content: .loaded("<b>Hello world</b>")))
-                .navigationTitle("Today")
-            }.navigationViewStyle(StackNavigationViewStyle())
-            
             TextOptionsView()
                 .preferredColorScheme(.light)
                 .previewLayout(.fixed(width: 300.0, height: 180.0))

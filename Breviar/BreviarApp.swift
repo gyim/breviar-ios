@@ -11,7 +11,7 @@ import SwiftUI
 struct BreviarApp: App {
     var body: some Scene {
         let dataSource = CGIDataSource()
-        let model = BreviarModel(dataSource: dataSource)
+        let model = CalendarModel(dataSource: dataSource)
         
         WindowGroup {
             MainScreen().environmentObject(model.load())

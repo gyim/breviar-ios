@@ -31,7 +31,7 @@ func dateFrom(year: Int, month: Int, day: Int) -> Date {
     return calendar.date(from: comps)!
 }
 
-class BreviarModel : ObservableObject {
+class CalendarModel : ObservableObject {
     private var dataSource: BreviarDataSource
     @Published var day: Day
     @Published var dayState: LoadingState<LiturgicalDay> = .idle
@@ -39,9 +39,6 @@ class BreviarModel : ObservableObject {
     
     @Published var month: Month
     @Published var monthState: LoadingState<LiturgicalMonth> = .idle
-    @Published var datePickerShown: Bool = false
-    
-    @Published var prayerState: LoadingState<String> = .idle
     
     init(dataSource: BreviarDataSource) {
         let now = Date()
@@ -50,7 +47,7 @@ class BreviarModel : ObservableObject {
         self.month = Month(fromDate: now)
     }
     
-    func load() -> BreviarModel {
+    func load() -> CalendarModel {
         switch self.dayState {
         case .idle:
             self.loadDay(self.day)
@@ -95,22 +92,10 @@ class BreviarModel : ObservableObject {
         }
     }
     
-    func loadPrayer(_ prayerType: PrayerType, day: LiturgicalDay, celebration: Celebration) {
-        self.prayerState = .loading
-        self.dataSource.getPrayerText(day: day, celebration: celebration, prayerType: prayerType) { (prayerText, error) in
-            if let prayerText = prayerText {
-                self.prayerState = .loaded(prayerText)
-            } else {
-                self.prayerState = .failed(error!)
-            }
-        }
-    }
-    
     func jumpTo(day: LiturgicalDay, celebration: Celebration) {
         self.day = day.day
         self.dayState = .loaded(day)
         self.selectedCelebration = celebration.id
-        self.datePickerShown = false
     }
     
     func getCurrentCelebration() -> (LiturgicalDay, Celebration)? {
@@ -124,6 +109,23 @@ class BreviarModel : ObservableObject {
             return nil
         default:
             return nil
+        }
+    }
+    
+    func getPrayersForSelectedCelebration() -> [Prayer] {
+        if let (day, celebration) = getCurrentCelebration() {
+            return [
+                Prayer(day: day.day, celebration: celebration, type: .invitatory),
+                Prayer(day: day.day, celebration: celebration, type: .officeOfReadings),
+                Prayer(day: day.day, celebration: celebration, type: .morningPrayer),
+                Prayer(day: day.day, celebration: celebration, type: .midMorningPrayer),
+                Prayer(day: day.day, celebration: celebration, type: .midDayPrayer),
+                Prayer(day: day.day, celebration: celebration, type: .midAfternoonPrayer),
+                Prayer(day: day.day, celebration: celebration, type: .eveningPrayer),
+                Prayer(day: day.day, celebration: celebration, type: .compline),
+            ]
+        } else {
+            return []
         }
     }
 }
