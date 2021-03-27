@@ -10,71 +10,69 @@ import WebKit
 
 // MARK: Prayer Screen Controller
 
-class PrayerScreenController: UIViewController, UIPopoverPresentationControllerDelegate {
-    var webView: WKWebView?
-    var textOptionsPopoverDismissed: (() -> Void)?
-    @StateObject var textOptions = TextOptions() // TODO: use external state
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Configure web view
-        self.webView = WKWebView()
-        self.view = self.webView
-        self.webView?.loadHTMLString("Hello World", baseURL: nil)
-    }
-    
-    func showTextOptions(show: Bool, dismissed: @escaping () -> Void) {
-        if show && self.presentedViewController == nil {
-            // Find navigation item that triggered the popover
-            guard let navItems = self.navigationController?.navigationBar.items else {
-                print("No navigation items")
-                return
-            }
-            if navItems.count < 1 {
-                print("No navigation items")
-                return
-            }
-            let navItem = navItems[navItems.count-1]
-            
-            // Create popover
-            let popover = UIHostingController(rootView: TextOptionsView(textOptions: textOptions))
-            popover.preferredContentSize = popover.sizeThatFits(in:CGSize(width:300, height:300))
-            popover.modalPresentationStyle = .popover
-            popover.popoverPresentationController?.barButtonItem = navItem.rightBarButtonItem
-            popover.popoverPresentationController?.delegate = self
-            self.textOptionsPopoverDismissed = dismissed
-            self.present(popover, animated: true)
-        }
-    }
-    
-    @objc func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        return .none // Force popover style on iPhone
-    }
-    
-    @objc func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
-        if let dismissed = self.textOptionsPopoverDismissed {
-            dismissed()
-            self.textOptionsPopoverDismissed = nil
-        }
-    }
-}
-
 struct PrayerScreenControllerRepresentable: UIViewControllerRepresentable {
-    var prayer: Prayer
+    var prayer: Prayer    
     @ObservedObject var textOptions: TextOptions
     @Binding var textOptionsShown: Bool
-    
-    func makeUIViewController(context: Context) -> some UIViewController {
-        return PrayerScreenController()
+
+    class Coordinator: NSObject, UIPopoverPresentationControllerDelegate {
+        var parent: PrayerScreenControllerRepresentable
+        var webView: WKWebView
+        var textOptionsPopoverShown = false
+        
+        init(_ parent: PrayerScreenControllerRepresentable) {
+            self.parent = parent
+            self.webView = WKWebView()
+            self.webView.loadHTMLString("Hello World", baseURL: nil)
+        }
+        
+        func showTextOptions(controller: UIViewController, show: Bool) {
+            if show && !textOptionsPopoverShown {
+                textOptionsPopoverShown = true
+                
+                // Calculate source rectangle
+                //
+                // NOTE: it would be easier to set popover.popoverPresentationController?.barButtonItem,
+                // but then the popover moves away when its data is changed. This is probably a SwiftUI bug.
+                let window = UIApplication.shared.windows[0]
+                let sourceView = controller.navigationController!.navigationBar
+                let r = sourceView.bounds
+                let w = r.height // button width = navbar height
+                let sourceRect = CGRect(x: r.origin.x + r.width - w - window.safeAreaInsets.right, y: r.origin.y, width: w, height: r.height)
+                
+                // Create popover
+                let popover = UIHostingController(rootView: TextOptionsView(textOptions: self.parent.textOptions))
+                popover.preferredContentSize = popover.sizeThatFits(in:CGSize(width:300, height:300))
+                popover.modalPresentationStyle = .popover
+                popover.popoverPresentationController?.sourceView = sourceView
+                popover.popoverPresentationController?.sourceRect = sourceRect
+                popover.popoverPresentationController?.delegate = self
+                controller.present(popover, animated: true)
+            }
+        }
+
+        @objc func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+            return .none // Force popover style on iPhone
+        }
+        
+        @objc func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+            self.textOptionsPopoverShown = false
+            self.parent.textOptionsShown = false
+        }
     }
     
-    func updateUIViewController(_ c: UIViewControllerType, context: Context) {
-        guard let controller = c as? PrayerScreenController else { return }
-
-        controller.showTextOptions(show: textOptionsShown) {
-            textOptionsShown = false
-        }
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(self)
+    }
+    
+    func makeUIViewController(context: Context) -> some UIViewController {
+        let controller = UIViewController()
+        controller.view = context.coordinator.webView
+        return controller
+    }
+    
+    func updateUIViewController(_ controller: UIViewControllerType, context: Context) {
+        context.coordinator.showTextOptions(controller: controller, show: textOptionsShown)
     }
 }
 
