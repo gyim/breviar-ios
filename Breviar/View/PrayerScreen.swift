@@ -10,95 +10,24 @@ import WebKit
 
 // MARK: Prayer Screen Controller
 
-struct PrayerScreenControllerRepresentable: UIViewControllerRepresentable {
-    var prayer: Prayer    
-    @ObservedObject var textOptions: TextOptions
-    @Binding var textOptionsShown: Bool
-
-    class Coordinator: NSObject, UIPopoverPresentationControllerDelegate {
-        var parent: PrayerScreenControllerRepresentable
-        var webView: WKWebView
-        var textOptionsPopoverShown = false
-        
-        init(_ parent: PrayerScreenControllerRepresentable) {
-            self.parent = parent
-            self.webView = WKWebView()
-            self.webView.loadHTMLString("Hello World", baseURL: nil)
-        }
-        
-        func showTextOptions(controller: UIViewController, show: Bool) {
-            if show && !textOptionsPopoverShown {
-                textOptionsPopoverShown = true
-                
-                // Calculate source rectangle
-                //
-                // NOTE: it would be easier to set popover.popoverPresentationController?.barButtonItem,
-                // but then the popover moves away when its data is changed. This is probably a SwiftUI bug.
-                let window = UIApplication.shared.windows[0]
-                let sourceView = controller.navigationController!.navigationBar
-                let r = sourceView.bounds
-                let w = r.height // button width = navbar height
-                let sourceRect = CGRect(x: r.origin.x + r.width - w - window.safeAreaInsets.right, y: r.origin.y, width: w, height: r.height)
-                
-                // Create popover
-                let popover = UIHostingController(rootView: TextOptionsView(textOptions: self.parent.textOptions))
-                popover.preferredContentSize = popover.sizeThatFits(in:CGSize(width:300, height:300))
-                popover.modalPresentationStyle = .popover
-                popover.popoverPresentationController?.sourceView = sourceView
-                popover.popoverPresentationController?.sourceRect = sourceRect
-                popover.popoverPresentationController?.delegate = self
-                controller.present(popover, animated: true)
-            }
-        }
-        
-        func applyTextOptions(controller: UIViewController) {
-            let textOptions = self.parent.textOptions
-            let window = UIApplication.shared.windows[0]
-            window.overrideUserInterfaceStyle = textOptions.colorScheme.uikitColorScheme
-        }
-        
-        // UIViewControllerRepresentable methods
-
-        @objc func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-            return .none // Force popover style on iPhone
-        }
-        
-        @objc func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
-            self.textOptionsPopoverShown = false
-            self.parent.textOptionsShown = false
-        }
-    }
-    
-    func makeCoordinator() -> Coordinator {
-        return Coordinator(self)
-    }
-    
-    func makeUIViewController(context: Context) -> some UIViewController {
-        let controller = UIViewController()
-        controller.view = context.coordinator.webView
-        return controller
-    }
-    
-    func updateUIViewController(_ controller: UIViewControllerType, context: Context) {
-        context.coordinator.showTextOptions(controller: controller, show: textOptionsShown)
-        context.coordinator.applyTextOptions(controller: controller)
-    }
-}
-
 struct PrayerScreen: View {
     @State var textOptionsShown = false
     @StateObject var textOptions = TextOptions()
     var prayer: Prayer
     
     var body: some View {
-        PrayerScreenControllerRepresentable(prayer:prayer, textOptions: textOptions, textOptionsShown: $textOptionsShown)
-            .navigationTitle(prayer.name)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar(content: {
-                Button(action: {
-                    textOptionsShown = true
-                }, label: {Label("", systemImage:"textformat.size")})
+        InlinePopoverPresenter( popover: { TextOptionsView(textOptions: textOptions) }, isPresented: $textOptionsShown) {
+            LoadingView(value: .loaded("Hello World"), loadedBody: { s in
+                Text(s)
             })
+        }
+        .navigationTitle(prayer.name)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar(content: {
+            Button(action: {
+                textOptionsShown = true
+            }, label: {Label("", systemImage:"textformat.size")})
+        })
     }
 }
 
