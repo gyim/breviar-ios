@@ -1,53 +1,11 @@
 //
-//  PrayerScreen.swift
+//  TextOptions.swift
 //  Breviar
 //
-//  Created by Akos Gyimesi on 2021. 03. 11..
+//  Created by Akos Gyimesi on 2021. 03. 28..
 //
 
 import SwiftUI
-import WebKit
-
-// MARK: Prayer Screen Controller
-
-struct PrayerScreen: View {
-    @State var textOptionsShown = false
-    @StateObject var textOptions = TextOptions()
-    var prayer: Prayer
-    
-    var body: some View {
-        InlinePopoverPresenter( popover: { TextOptionsView(textOptions: textOptions) }, isPresented: $textOptionsShown) {
-            LoadingView(value: .loaded("Hello World"), loadedBody: { s in
-                Text(s)
-            })
-        }
-        .navigationTitle(prayer.name)
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar(content: {
-            Button(action: {
-                textOptionsShown = true
-            }, label: {Label("", systemImage:"textformat.size")})
-        })
-    }
-}
-
-class PrayerView : WKWebView {
-}
-
-struct WebView : UIViewRepresentable {
-    var text: String
-    
-    func makeUIView(context: Context) -> WKWebView {
-        return PrayerView()
-    }
-    
-    func updateUIView(_ uiView: WKWebView, context: Context) {
-        let baseURL = URL(string: "https://lh.kbs.sk/cgi-bin")
-        uiView.loadHTMLString(text, baseURL: baseURL)
-    }
-}
-
-// MARK:- Text Options Popup
 
 class TextOptions: ObservableObject {
     @Published var fontSize = 5.0
@@ -161,27 +119,7 @@ struct ColorSchemeButton : View {
     }
 }
 
-// MARK:- Playback View
-
-struct PlaybackView: View {
-    @State var active = false
-    
-    var body: some View {
-        HStack {
-            Button(action: {}, label: {
-                Image(systemName: "backward.fill").resizable().frame(width: 30, height: 30, alignment: .center)
-            }).disabled(!active).frame(maxWidth:.infinity).padding()
-            Button(action: {active.toggle()}, label: {
-                Image(systemName: active ? "pause.fill" : "play.fill").resizable().frame(width: 30, height: 30, alignment: .center)
-            }).frame(maxWidth:.infinity).padding()
-            Button(action: {}, label: {
-                Image(systemName: "forward.fill").resizable().frame(width: 30, height: 30, alignment: .center)
-            }).disabled(!active).frame(maxWidth:.infinity).padding()
-        }.padding()
-    }
-}
-
-struct PrayerScreen_Previews: PreviewProvider {
+struct TextOptions_Previews: PreviewProvider {
     struct TextOptionsViewContainer: View {
         @StateObject var textOptions = TextOptions()
         
@@ -199,14 +137,6 @@ struct PrayerScreen_Previews: PreviewProvider {
             TextOptionsViewContainer()
                 .preferredColorScheme(.dark)
                 .previewLayout(.fixed(width: 300.0, height: 180.0))
-
-            PlaybackView()
-                .preferredColorScheme(.light)
-                .previewLayout(.sizeThatFits)
-            
-            PlaybackView()
-                .preferredColorScheme(.dark)
-                .previewLayout(.sizeThatFits)
         }
     }
 }
