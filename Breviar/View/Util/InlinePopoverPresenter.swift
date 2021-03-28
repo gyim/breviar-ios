@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+// InlinePopoverPresenter provides a workaround for a SwiftUI limitation: as of writing,
+// it cannot show inline popovers on small screens (iPhones).
+// This UIViewControllerRepresentable creates an UIViewController that configures popovers properly.
 struct InlinePopoverPresenter<Popover:View, Content:View>: UIViewControllerRepresentable {
     var popover: () -> Popover
     @Binding var isPresented: Bool
@@ -24,7 +27,8 @@ struct InlinePopoverPresenter<Popover:View, Content:View>: UIViewControllerRepre
             if show && !popoverShown {
                 popoverShown = true
                 
-                // Calculate source rectangle
+                // Calculate source rectangle (navbar button in top right corner)
+                // (TODO: make this a parameter to the view)
                 //
                 // NOTE: it would be easier to set popover.popoverPresentationController?.barButtonItem,
                 // but then the popover moves away when its data is changed. This is probably a SwiftUI bug.
