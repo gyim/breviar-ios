@@ -31,7 +31,7 @@ func dateFrom(year: Int, month: Int, day: Int) -> Date {
     return calendar.date(from: comps)!
 }
 
-class CalendarModel : ObservableObject {
+class BreviarModel : ObservableObject {
     private var dataSource: BreviarDataSource
     @Published var day: Day
     @Published var dayState: LoadingState<LiturgicalDay> = .idle
@@ -47,7 +47,7 @@ class CalendarModel : ObservableObject {
         self.month = Month(fromDate: now)
     }
     
-    func load() -> CalendarModel {
+    func load() -> BreviarModel {
         switch self.dayState {
         case .idle:
             self.loadDay(self.day)
@@ -56,6 +56,14 @@ class CalendarModel : ObservableObject {
             break
         }
         return self
+    }
+    
+    static func cgiModel() -> BreviarModel {
+        return BreviarModel(dataSource: CGIDataSource()).load()
+    }
+    
+    static func testModel() -> BreviarModel {
+        return BreviarModel(dataSource: TestDataSource()).load()
     }
     
     func loadDay(_ day: Day) {

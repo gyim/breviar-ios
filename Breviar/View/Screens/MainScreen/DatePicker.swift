@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DatePicker: View {
-    @EnvironmentObject var model: CalendarModel
+    @EnvironmentObject var model: BreviarModel
     var onDaySelected: () -> Void
 
     func getTitle(month: Date) -> String {
@@ -56,7 +56,7 @@ struct DatePicker: View {
 }
 
 struct DatePickerContent: View {
-    @EnvironmentObject var model: CalendarModel
+    @EnvironmentObject var model: BreviarModel
     var onDaySelected: () -> Void
 
     var body: some View {
@@ -67,7 +67,7 @@ struct DatePickerContent: View {
 }
 
 struct DatePickerList: View {
-    @EnvironmentObject var model: CalendarModel
+    @EnvironmentObject var model: BreviarModel
     var days: [LiturgicalDay]
     var onDaySelected: () -> Void
     

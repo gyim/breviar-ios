@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainScreen: View {
-    @EnvironmentObject var model: CalendarModel
+    @EnvironmentObject var model: BreviarModel
     @State var datePickerShown = false
     
     func getTitle(day: Day) -> String {
@@ -77,7 +77,7 @@ struct MainScreen: View {
 }
 
 struct MainScreenContent: View {
-    @EnvironmentObject var model: CalendarModel
+    @EnvironmentObject var model: BreviarModel
     
     var body: some View {
         LoadingView(value: model.dayState) { day in
@@ -187,7 +187,6 @@ struct PrayerLink: View {
 
 struct MainScreen_Previews: PreviewProvider {
     static var previews: some View {
-        let model = CalendarModel(dataSource: TestDataSource())
-        MainScreen().environmentObject(model.load())
+        MainScreen().environmentObject(BreviarModel.testModel())
     }
 }
