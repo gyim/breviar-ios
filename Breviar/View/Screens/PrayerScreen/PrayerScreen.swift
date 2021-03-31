@@ -10,9 +10,9 @@ import WebKit
 
 struct PrayerScreen: View {
     @State var textOptionsShown = false
-    @StateObject var textOptions = TextOptions()
     var prayer: Prayer
-    
+    @Binding var textOptions: TextOptions
+
     var body: some View {
         InlinePopoverPresenter( popover: { TextOptionsView(textOptions: textOptions) }, isPresented: $textOptionsShown) {
             LoadingView(value: .loaded("Hello World"), loadedBody: { s in

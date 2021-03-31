@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-class TextOptions: ObservableObject {
-    @Published var fontSize = 5.0
-    @Published var colorScheme = ColorScheme.automatic
-}
-
 struct TextOptionsView : View {
     @ObservedObject var textOptions: TextOptions
     

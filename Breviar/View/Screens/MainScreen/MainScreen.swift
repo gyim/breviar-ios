@@ -165,6 +165,7 @@ struct CelebrationRow : View {
 }
 
 struct PrayerLink: View {
+    @EnvironmentObject var model: BreviarModel
     var prayer: Prayer
     
     let prayerIcons: [PrayerType: String] = [
@@ -180,7 +181,7 @@ struct PrayerLink: View {
     
     var body: some View {
         NavigationLink(
-            destination: PrayerScreen(prayer: prayer),
+            destination: PrayerScreen(prayer: prayer, textOptions: $model.textOptions),
             label: { Label(prayer.name, systemImage: prayerIcons[prayer.type]!) })
     }
 }

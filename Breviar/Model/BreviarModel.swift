@@ -40,11 +40,14 @@ class BreviarModel : ObservableObject {
     @Published var month: Month
     @Published var monthState: LoadingState<LiturgicalMonth> = .idle
     
+    @Published var textOptions: TextOptions
+    
     init(dataSource: BreviarDataSource) {
         let now = Date()
         self.dataSource = dataSource
         self.day = Day(fromDate: now)
         self.month = Month(fromDate: now)
+        self.textOptions = TextOptions()
     }
     
     func load() -> BreviarModel {
@@ -145,3 +148,7 @@ enum LoadingState<Value> {
     case loaded(Value)
 }
 
+class TextOptions: ObservableObject {
+    @Published var fontSize = 5.0
+    @Published var colorScheme = ColorScheme.automatic
+}
