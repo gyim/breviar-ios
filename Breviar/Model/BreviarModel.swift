@@ -5,7 +5,7 @@
 //  Created by Akos Gyimesi on 2021. 01. 17..
 //
 
-import Foundation
+import SwiftUI
 
 enum Language : String {
     case czech = "cz"
@@ -150,5 +150,19 @@ enum LoadingState<Value> {
 
 class TextOptions: ObservableObject {
     @Published var fontSize = 5.0
-    @Published var colorScheme = ColorScheme.automatic
+    @Published var colorScheme = ColorScheme.automatic {
+        // SwiftUI workaround: there is no reliable way to set color scheme to .unspecified, so we use UIKit instead
+        didSet {
+            let window = UIApplication.shared.windows.first
+            
+            switch colorScheme {
+            case .automatic:
+                window?.overrideUserInterfaceStyle = .unspecified
+            case .light:
+                window?.overrideUserInterfaceStyle = .light
+            case .dark:
+                window?.overrideUserInterfaceStyle = .dark
+            }
+        }
+    }
 }
