@@ -41,18 +41,29 @@ struct PrayerView : UIViewRepresentable {
     class Coordinator {
         var webView: WKWebView = WKWebView()
         var prevText: String = ""
+        var prevFontSize: Double = 100.0
         
-        func setPrayerText(text: String, fontSize: Double, colorScheme: ColorScheme) {
+        func setPrayerText(text: String, fontSize: Double) {
             if text != prevText {
                 prevText = text
+                prevFontSize = fontSize
                 
-                let modifiedText = getModifiedHTML(text)
+                let modifiedText = getModifiedText(text: text, fontSize: fontSize)
                 let baseURL = URL(string: "https://lh.kbs.sk/cgi-bin")
                 self.webView.loadHTMLString(modifiedText, baseURL: baseURL)
             }
+            if fontSize != prevFontSize {
+                prevFontSize = fontSize
+                
+                self.webView.evaluateJavaScript("setFontSize(\(fontSize))") { (_, error) in
+                    if error != nil {
+                        print("Error setting font size: \(error.debugDescription)")
+                    }
+                }
+            }
         }
         
-        func getModifiedHTML(_ text: String) -> String {
+        func getModifiedText(text: String, fontSize: Double) -> String {
             let body = getBody(text)
             return """
                 <head>
@@ -63,8 +74,16 @@ struct PrayerView : UIViewRepresentable {
                         @import url("/breviar-normal-font.css") screen;
                         @import url("/breviar-invert-colors.css") screen and (prefers-color-scheme: dark);
                     </style>
+                    <script type="text/javascript">
+                        function setFontSize(fontSize) {
+                            document.body.style.webkitTextSizeAdjust = `${fontSize}%`;
+                        }
+                        function initPrayer() {
+                            setFontSize(\(fontSize));
+                        }
+                    </script>
                 </head>
-                <body>\(body)</body>
+                <body onload="initPrayer()">\(body)</body>
             """
         }
         
@@ -97,6 +116,6 @@ struct PrayerView : UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: WKWebView, context: Context) {
-        context.coordinator.setPrayerText(text: text, fontSize: textOptions.fontSize, colorScheme: textOptions.colorScheme)
+        context.coordinator.setPrayerText(text: text, fontSize: textOptions.fontSize)
     }
 }

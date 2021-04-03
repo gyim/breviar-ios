@@ -25,7 +25,7 @@ struct TextSizeView : View {
     var body: some View {
         HStack {
             Image(systemName: "textformat.size.smaller").padding()
-            Slider(value: $fontSize, in: 1...10, step: 1.0)
+            Slider(value: $fontSize, in: 60...140, step: 10)
             Image(systemName: "textformat.size.larger").padding()
         }
     }

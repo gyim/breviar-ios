@@ -164,7 +164,7 @@ enum LoadingState<Value> {
 }
 
 class TextOptions: ObservableObject {
-    @Published var fontSize = 5.0
+    @Published var fontSize = 100.0
     @Published var colorScheme = ColorScheme.automatic {
         // SwiftUI workaround: there is no reliable way to set color scheme to .unspecified, so we use UIKit instead
         didSet {
