@@ -9,16 +9,22 @@ import SwiftUI
 import WebKit
 
 struct PrayerScreen: View {
+    @EnvironmentObject var model: BreviarModel
     @State var textOptionsShown = false
     var prayer: Prayer
+    var prayerText: LoadingState<String>
     @Binding var textOptions: TextOptions
 
     var body: some View {
+        /*
         InlinePopoverPresenter( popover: { TextOptionsView(textOptions: textOptions) }, isPresented: $textOptionsShown) {
-            LoadingView(value: .loaded("Hello World"), loadedBody: { s in
-                Text(s)
+            LoadingView(value: prayerText, loadedBody: { text in
+                PrayerView(text: text)
             })
-        }
+        }*/
+        LoadingView(value: prayerText, loadedBody: { text in
+            PrayerView(text: text)
+        })
         .navigationTitle(prayer.name)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(content: {
@@ -26,17 +32,17 @@ struct PrayerScreen: View {
                 textOptionsShown = true
             }, label: {Label("", systemImage:"textformat.size")})
         })
+        .onAppear() {
+            model.loadPrayer(prayer)
+        }
     }
 }
 
-class PrayerView : WKWebView {
-}
-
-struct WebView : UIViewRepresentable {
+struct PrayerView : UIViewRepresentable {
     var text: String
     
     func makeUIView(context: Context) -> WKWebView {
-        return PrayerView()
+        return WKWebView()
     }
     
     func updateUIView(_ uiView: WKWebView, context: Context) {

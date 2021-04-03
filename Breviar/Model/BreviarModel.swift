@@ -40,6 +40,7 @@ class BreviarModel : ObservableObject {
     @Published var month: Month
     @Published var monthState: LoadingState<LiturgicalMonth> = .idle
     
+    @Published var prayerText: LoadingState<String> = .idle
     @Published var textOptions: TextOptions
     
     init(dataSource: BreviarDataSource) {
@@ -73,6 +74,7 @@ class BreviarModel : ObservableObject {
         self.day = day
         self.dayState = .loading
         self.selectedCelebration = ""
+        self.prayerText = .idle
         
         self.dataSource.getLiturgicalDay(day: day) { (liturgicalDay, error) in
             if error == nil {
@@ -107,6 +109,7 @@ class BreviarModel : ObservableObject {
         self.day = day.day
         self.dayState = .loaded(day)
         self.selectedCelebration = celebration.id
+        self.prayerText = .idle
     }
     
     func getCurrentCelebration() -> (LiturgicalDay, Celebration)? {
@@ -137,6 +140,18 @@ class BreviarModel : ObservableObject {
             ]
         } else {
             return []
+        }
+    }
+    
+    func loadPrayer(_ prayer: Prayer) {
+        if let (day, celebration) = self.getCurrentCelebration() {
+            self.dataSource.getPrayerText(day: day, celebration: celebration, prayerType: prayer.type) { (text, error) in
+                if error == nil {
+                    self.prayerText = .loaded(text!)
+                } else {
+                    self.prayerText = .failed(error!)
+                }
+            }
         }
     }
 }
