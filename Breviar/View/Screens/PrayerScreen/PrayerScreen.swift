@@ -18,7 +18,7 @@ struct PrayerScreen: View {
     var body: some View {
         InlinePopoverPresenter( popover: { TextOptionsView(textOptions: textOptions) }, isPresented: $textOptionsShown) {
             LoadingView(value: prayerText, loadedBody: { text in
-                PrayerView(text: text)
+                PrayerView(text: text, textOptions: textOptions)
             })
         }
         .navigationTitle(prayer.name)
@@ -36,30 +36,60 @@ struct PrayerScreen: View {
 
 struct PrayerView : UIViewRepresentable {
     var text: String
+    var textOptions: TextOptions
     
     class Coordinator {
-        var parent: PrayerView
+        var webView: WKWebView = WKWebView()
+        var prevText: String = ""
         
-        var webView: WKWebView
-        var prevText: String
-        
-        init(_ parent: PrayerView) {
-            self.parent = parent
-            self.webView = WKWebView()
-            self.prevText = ""
-        }
-        
-        func setPrayerText(text: String) {
+        func setPrayerText(text: String, fontSize: Double, colorScheme: ColorScheme) {
             if text != prevText {
                 prevText = text
+                
+                let modifiedText = getModifiedHTML(text)
                 let baseURL = URL(string: "https://lh.kbs.sk/cgi-bin")
-                self.webView.loadHTMLString(text, baseURL: baseURL)
+                self.webView.loadHTMLString(modifiedText, baseURL: baseURL)
             }
+        }
+        
+        func getModifiedHTML(_ text: String) -> String {
+            let body = getBody(text)
+            return """
+                <head>
+                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0" />
+                    <link rel="stylesheet" type="text/css" href="/breviar.css" />
+                    <style type="text/css">
+                        @import url("/breviar-normal-font.css") screen;
+                        @import url("/breviar-invert-colors.css") screen and (prefers-color-scheme: dark);
+                    </style>
+                </head>
+                <body>\(body)</body>
+            """
+        }
+        
+        func getBody(_ html: String) -> String {
+            // Find body start
+            var body: String.SubSequence = html[html.startIndex...]
+            if let r = html.range(of: "<body") {
+                let b = html[r.upperBound...]
+                if let r = b.range(of:">") {
+                    body = b[r.upperBound...].dropFirst()
+                }
+            }
+            
+            // Find body end
+            if let r = body.range(of: "</body") {
+                body = body[body.startIndex..<r.lowerBound]
+            }
+            
+            // Replace ` characters with '
+            return String(body.replacingOccurrences(of: "`", with: "'"))
         }
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(self)
+        return Coordinator()
     }
     
     func makeUIView(context: Context) -> WKWebView {
@@ -67,6 +97,6 @@ struct PrayerView : UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: WKWebView, context: Context) {
-        context.coordinator.setPrayerText(text: text)
+        context.coordinator.setPrayerText(text: text, fontSize: textOptions.fontSize, colorScheme: textOptions.colorScheme)
     }
 }
