@@ -69,7 +69,9 @@ struct InlinePopoverPresenter<Popover:View, Content:View>: UIViewControllerRepre
         return UIHostingController(rootView: content())
     }
     
-    func updateUIViewController(_ controller: UIViewControllerType, context: Context) {
+    func updateUIViewController(_ c: UIViewControllerType, context: Context) {
+        guard let controller = c as? UIHostingController<Content> else { return }
         context.coordinator.showPopover(controller: controller, show: isPresented)
+        controller.rootView = content()
     }
 }
