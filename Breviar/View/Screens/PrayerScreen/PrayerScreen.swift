@@ -43,6 +43,21 @@ struct PrayerView : UIViewRepresentable {
         var prevText: String = ""
         var prevFontSize: Double = 100.0
         
+        init() {
+            // This view is not updated if TextOptions is changed in the popover, so we rely on NotificationCenter instead
+            NotificationCenter.default.addObserver(self, selector: #selector(onTextOptionsChanged(_:)), name: TextOptions.notificationName, object: nil)
+        }
+        
+        deinit {
+            NotificationCenter.default.removeObserver(self)
+        }
+        
+        @objc func onTextOptionsChanged(_ notification: Notification) {
+            if let textOptions = notification.object as? TextOptions {
+                setPrayerText(text: prevText, fontSize: textOptions.fontSize)
+            }
+        }
+        
         func setPrayerText(text: String, fontSize: Double) {
             if text != prevText {
                 prevText = text

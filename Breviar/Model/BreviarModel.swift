@@ -164,7 +164,14 @@ enum LoadingState<Value> {
 }
 
 class TextOptions: ObservableObject {
-    @Published var fontSize = 100.0
+    static let notificationName = NSNotification.Name.init(rawValue: "BreviarTextOptionsChanged")
+    
+    @Published var fontSize = 100.0 {
+        didSet {
+            NotificationCenter.default.post(name: TextOptions.notificationName, object: self)
+        }
+    }
+    
     @Published var colorScheme = ColorScheme.automatic {
         // SwiftUI workaround: there is no reliable way to set color scheme to .unspecified, so we use UIKit instead
         didSet {
