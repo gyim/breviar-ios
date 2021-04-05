@@ -14,15 +14,27 @@ struct PrayerScreen: View {
     var prayer: Prayer
     var prayerText: LoadingState<String>
     @Binding var textOptions: TextOptions
+    @State var navbarHidden = false
 
     var body: some View {
         InlinePopoverPresenter( popover: { TextOptionsView(textOptions: textOptions) }, isPresented: $textOptionsShown) {
             LoadingView(value: prayerText, loadedBody: { text in
-                PrayerView(text: text, textOptions: textOptions)
-            })
+                NavigationBarToggler(navigationBarHidden: $navbarHidden) {
+                    PrayerView(text: text, textOptions: textOptions)
+                        .ignoresSafeArea()
+                        .onTapGesture() {
+                            withAnimation {
+                                navbarHidden.toggle()
+                            }
+                        }
+                }.ignoresSafeArea()
+            }).ignoresSafeArea()
         }
+        .ignoresSafeArea()
         .navigationTitle(prayer.name)
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarHidden(navbarHidden)
+        .statusBar(hidden: navbarHidden)
         .toolbar(content: {
             Button(action: {
                 textOptionsShown = true
@@ -38,14 +50,30 @@ struct PrayerView : UIViewRepresentable {
     var text: String
     var textOptions: TextOptions
     
+    class PrayerWebView : WKWebView {
+        override var safeAreaInsets: UIEdgeInsets {
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        }
+    }
+    
     class Coordinator {
-        var webView: WKWebView = WKWebView()
+        var webView: WKWebView = PrayerWebView()
         var prevText: String = ""
         var prevFontSize: Double = 100.0
+        var topPadding: CGFloat = 0
+        var bottomPadding: CGFloat = 0
         
         init() {
             // This view is not updated if TextOptions is changed in the popover, so we rely on NotificationCenter instead
             NotificationCenter.default.addObserver(self, selector: #selector(onTextOptionsChanged(_:)), name: TextOptions.notificationName, object: nil)
+            
+            // Top padding: safe area inset (notch + statusbar) + navbar height
+            topPadding += 50.0 // navbar height
+            bottomPadding = 0.0
+            if let safeAreaInsets = UIApplication.shared.windows[0].rootViewController?.view.safeAreaInsets {
+                topPadding += safeAreaInsets.top
+                bottomPadding += safeAreaInsets.bottom
+            }
         }
         
         deinit {
@@ -88,6 +116,7 @@ struct PrayerView : UIViewRepresentable {
                     <style type="text/css">
                         @import url("/breviar-normal-font.css") screen;
                         @import url("/breviar-invert-colors.css") screen and (prefers-color-scheme: dark);
+                        body { padding: \(topPadding)px 0 \(bottomPadding)px; }
                     </style>
                     <script type="text/javascript">
                         function setFontSize(fontSize) {
