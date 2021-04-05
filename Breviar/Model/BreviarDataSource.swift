@@ -209,6 +209,7 @@ class CGIDataSource : BreviarDataSource {
             "o5": "0",
             "j": "hu",
             "k": "hu",
+            "of2rm": "1", // TODO: put it into the o2 flag
         ]
         
         self.cgiClient.makeRequest(args) { data, error in

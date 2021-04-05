@@ -15,15 +15,19 @@ struct PrayerScreen: View {
     var prayerText: LoadingState<String>
     @Binding var textOptions: TextOptions
     @State var navbarHidden = false
-
+    
     var body: some View {
         InlinePopoverPresenter( popover: { TextOptionsView(textOptions: textOptions) }, isPresented: $textOptionsShown) {
             LoadingView(value: prayerText, loadedBody: { text in
                 NavigationBarToggler(navigationBarHidden: $navbarHidden) {
                     PrayerView(text: text, textOptions: textOptions)
+                        .onLinkActivated() { url in
+                            model.handlePrayerLink(url)
+                        }
                         .ignoresSafeArea()
                         .onTapGesture() {
                             withAnimation {
+                                print("onTapGesture")
                                 navbarHidden.toggle()
                             }
                         }
@@ -49,6 +53,7 @@ struct PrayerScreen: View {
 struct PrayerView : UIViewRepresentable {
     var text: String
     var textOptions: TextOptions
+    var linkHandler: ((URL) -> ())?
     
     class PrayerWebView : WKWebView {
         override var safeAreaInsets: UIEdgeInsets {
@@ -56,24 +61,31 @@ struct PrayerView : UIViewRepresentable {
         }
     }
     
-    class Coordinator {
+    class Coordinator : NSObject, WKNavigationDelegate {
+        var parent: PrayerView
         var webView: WKWebView = PrayerWebView()
         var prevText: String = ""
         var prevFontSize: Double = 100.0
         var topPadding: CGFloat = 0
         var bottomPadding: CGFloat = 0
         
-        init() {
+        init(parent: PrayerView) {
+            self.parent = parent
+            super.init()
+            
             // This view is not updated if TextOptions is changed in the popover, so we rely on NotificationCenter instead
             NotificationCenter.default.addObserver(self, selector: #selector(onTextOptionsChanged(_:)), name: TextOptions.notificationName, object: nil)
             
             // Top padding: safe area inset (notch + statusbar) + navbar height
-            topPadding += 50.0 // navbar height
+            topPadding = 50.0 // navbar height
             bottomPadding = 0.0
             if let safeAreaInsets = UIApplication.shared.windows[0].rootViewController?.view.safeAreaInsets {
                 topPadding += safeAreaInsets.top
                 bottomPadding += safeAreaInsets.bottom
             }
+            
+            // Setup web view
+            webView.navigationDelegate = self
         }
         
         deinit {
@@ -149,10 +161,24 @@ struct PrayerView : UIViewRepresentable {
             // Replace ` characters with '
             return String(body.replacingOccurrences(of: "`", with: "'"))
         }
+        
+        @objc func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+            switch navigationAction.navigationType {
+            case .linkActivated:
+                if let url = navigationAction.request.url {
+                    if let linkHandler = self.parent.linkHandler {
+                        linkHandler(url)
+                    }
+                }
+                decisionHandler(WKNavigationActionPolicy.cancel)
+            default:
+                decisionHandler(WKNavigationActionPolicy.allow)
+            }
+        }
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator()
+        return Coordinator(parent: self)
     }
     
     func makeUIView(context: Context) -> WKWebView {
@@ -161,5 +187,9 @@ struct PrayerView : UIViewRepresentable {
     
     func updateUIView(_ uiView: WKWebView, context: Context) {
         context.coordinator.setPrayerText(text: text, fontSize: textOptions.fontSize)
+    }
+    
+    func onLinkActivated(_ handler: @escaping (_ url: URL) -> ()) -> PrayerView {
+        return PrayerView(text: text, textOptions: textOptions, linkHandler: handler)
     }
 }

@@ -154,6 +154,10 @@ class BreviarModel : ObservableObject {
             }
         }
     }
+    
+    func handlePrayerLink(_ url: URL) {
+        print("handlePrayerLink: \(url)")
+    }
 }
 
 enum LoadingState<Value> {
