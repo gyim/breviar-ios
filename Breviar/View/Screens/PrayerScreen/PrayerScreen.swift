@@ -21,16 +21,15 @@ struct PrayerScreen: View {
             LoadingView(value: prayerText, loadedBody: { text in
                 NavigationBarToggler(navigationBarHidden: $navbarHidden) {
                     PrayerView(text: text, textOptions: textOptions)
-                        .onLinkActivated() { url in
-                            model.handlePrayerLink(url)
-                        }
-                        .ignoresSafeArea()
-                        .onTapGesture() {
+                        .onTapEvent() {
                             withAnimation {
-                                print("onTapGesture")
                                 navbarHidden.toggle()
                             }
                         }
+                        .onLinkEvent() { url in
+                            model.handlePrayerLink(url)
+                        }
+                        .ignoresSafeArea()
                 }.ignoresSafeArea()
             }).ignoresSafeArea()
         }
@@ -53,6 +52,7 @@ struct PrayerScreen: View {
 struct PrayerView : UIViewRepresentable {
     var text: String
     var textOptions: TextOptions
+    var tapHandler: (() -> ())?
     var linkHandler: ((URL) -> ())?
     
     class PrayerWebView : WKWebView {
@@ -61,9 +61,9 @@ struct PrayerView : UIViewRepresentable {
         }
     }
     
-    class Coordinator : NSObject, WKNavigationDelegate {
+    class Coordinator : NSObject, WKScriptMessageHandler {
         var parent: PrayerView
-        var webView: WKWebView = PrayerWebView()
+        var webView = PrayerWebView()
         var prevText: String = ""
         var prevFontSize: Double = 100.0
         var topPadding: CGFloat = 0
@@ -85,7 +85,12 @@ struct PrayerView : UIViewRepresentable {
             }
             
             // Setup web view
-            webView.navigationDelegate = self
+            let contentController = WKUserContentController()
+            contentController.add(self, name: "onTapEvent")
+            contentController.add(self, name: "onLinkEvent")
+            let webViewConfig = WKWebViewConfiguration()
+            webViewConfig.userContentController = contentController
+            webView = PrayerWebView(frame: CGRect(), configuration: webViewConfig)
         }
         
         deinit {
@@ -134,7 +139,23 @@ struct PrayerView : UIViewRepresentable {
                         function setFontSize(fontSize) {
                             document.body.style.webkitTextSizeAdjust = `${fontSize}%`;
                         }
+                        function setupTapGesture() {
+                            document.body.onclick = function() {
+                                window.webkit.messageHandlers.onTapEvent.postMessage({});
+                            }
+                        }
+                        function setupLinks() {
+                            for (let link of document.getElementsByTagName('a')) {
+                                link.onclick = function(e) {
+                                    window.webkit.messageHandlers.onLinkEvent.postMessage(link.href);
+                                    e.stopPropagation();
+                                    return false;
+                                }
+                            }
+                        }
                         function initPrayer() {
+                            setupTapGesture();
+                            setupLinks();
                             setFontSize(\(fontSize));
                         }
                     </script>
@@ -162,17 +183,18 @@ struct PrayerView : UIViewRepresentable {
             return String(body.replacingOccurrences(of: "`", with: "'"))
         }
         
-        @objc func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-            switch navigationAction.navigationType {
-            case .linkActivated:
-                if let url = navigationAction.request.url {
-                    if let linkHandler = self.parent.linkHandler {
-                        linkHandler(url)
-                    }
+        func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+            switch message.name {
+            case "onTapEvent":
+                if let handler = parent.tapHandler {
+                    handler()
                 }
-                decisionHandler(WKNavigationActionPolicy.cancel)
+            case "onLinkEvent":
+                if let handler = parent.linkHandler, let u = message.body as? String, let url = URL(string:u) {
+                    handler(url)
+                }
             default:
-                decisionHandler(WKNavigationActionPolicy.allow)
+                break
             }
         }
     }
@@ -188,8 +210,12 @@ struct PrayerView : UIViewRepresentable {
     func updateUIView(_ uiView: WKWebView, context: Context) {
         context.coordinator.setPrayerText(text: text, fontSize: textOptions.fontSize)
     }
-    
-    func onLinkActivated(_ handler: @escaping (_ url: URL) -> ()) -> PrayerView {
-        return PrayerView(text: text, textOptions: textOptions, linkHandler: handler)
+
+    func onTapEvent(_ newHandler: @escaping () -> ()) -> PrayerView {
+        return PrayerView(text: text, textOptions: textOptions, tapHandler: newHandler, linkHandler: linkHandler)
+    }
+
+    func onLinkEvent(_ newHandler: @escaping (_ url: URL) -> ()) -> PrayerView {
+        return PrayerView(text: text, textOptions: textOptions, tapHandler: tapHandler, linkHandler: newHandler)
     }
 }
