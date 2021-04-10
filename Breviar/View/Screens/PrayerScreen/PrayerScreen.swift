@@ -94,6 +94,7 @@ struct PrayerView : UIViewRepresentable {
             let webViewConfig = WKWebViewConfiguration()
             webViewConfig.userContentController = contentController
             webView = PrayerWebView(frame: CGRect(), configuration: webViewConfig)
+            webView.allowsLinkPreview = false
         }
         
         deinit {
@@ -194,6 +195,7 @@ struct PrayerView : UIViewRepresentable {
             return String(body.replacingOccurrences(of: "`", with: "'").replacingOccurrences(of: "$", with: "_"))
         }
         
+        // WKScriptMessageHandler
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
             switch message.name {
             case "onTapEvent":
