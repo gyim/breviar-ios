@@ -12,7 +12,7 @@ struct PrayerScreen: View {
     @EnvironmentObject var model: BreviarModel
     @State var textOptionsShown = false
     var prayer: Prayer
-    var prayerText: LoadingState<String>
+    @Binding var prayerText: LoadingState<String>
     @Binding var textOptions: TextOptions
     @State var navbarHidden = false
     
@@ -27,7 +27,7 @@ struct PrayerScreen: View {
                             }
                         }
                         .onLinkEvent() { url in
-                            model.handlePrayerLink(url)
+                            model.handlePrayerLink(prayer: prayer, url: url)
                         }
                         .ignoresSafeArea()
                 }.ignoresSafeArea()
@@ -45,6 +45,9 @@ struct PrayerScreen: View {
         })
         .onAppear() {
             model.loadPrayer(prayer)
+        }
+        .onDisappear() {
+            model.unloadPrayer()
         }
     }
 }
@@ -105,12 +108,20 @@ struct PrayerView : UIViewRepresentable {
         
         func setPrayerText(text: String, fontSize: Double) {
             if text != prevText {
+                let modifiedText = getModifiedText(text: text, fontSize: fontSize)
+                if prevText == "" {
+                    let baseURL = URL(string: "https://lh.kbs.sk/cgi-bin")
+                    self.webView.loadHTMLString(modifiedText, baseURL: baseURL)
+                } else {
+                    self.webView.evaluateJavaScript("document.documentElement.innerHTML = `\(modifiedText)`; initPrayer();") { (_, error) in
+                        if error != nil {
+                            print("Error reloading document: \(error.debugDescription)")
+                        }
+                    }
+                }
+                
                 prevText = text
                 prevFontSize = fontSize
-                
-                let modifiedText = getModifiedText(text: text, fontSize: fontSize)
-                let baseURL = URL(string: "https://lh.kbs.sk/cgi-bin")
-                self.webView.loadHTMLString(modifiedText, baseURL: baseURL)
             }
             if fontSize != prevFontSize {
                 prevFontSize = fontSize
@@ -137,7 +148,7 @@ struct PrayerView : UIViewRepresentable {
                     </style>
                     <script type="text/javascript">
                         function setFontSize(fontSize) {
-                            document.body.style.webkitTextSizeAdjust = `${fontSize}%`;
+                            document.body.style.webkitTextSizeAdjust = fontSize + '%';
                         }
                         function setupTapGesture() {
                             document.body.onclick = function() {
@@ -179,8 +190,8 @@ struct PrayerView : UIViewRepresentable {
                 body = body[body.startIndex..<r.lowerBound]
             }
             
-            // Replace ` characters with '
-            return String(body.replacingOccurrences(of: "`", with: "'"))
+            // Make sure that body can be put into JS template expression
+            return String(body.replacingOccurrences(of: "`", with: "'").replacingOccurrences(of: "$", with: "_"))
         }
         
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {

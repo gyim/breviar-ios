@@ -181,7 +181,7 @@ struct PrayerLink: View {
     
     var body: some View {
         NavigationLink(
-            destination: PrayerScreen(prayer: prayer, prayerText: model.prayerText, textOptions: $model.textOptions),
+            destination: PrayerScreen(prayer: prayer, prayerText: $model.prayerText, textOptions: $model.textOptions),
             label: { Label(prayer.name, systemImage: prayerIcons[prayer.type]!) })
     }
 }

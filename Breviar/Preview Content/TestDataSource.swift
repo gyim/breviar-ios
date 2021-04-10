@@ -41,7 +41,11 @@ class TestDataSource : BreviarDataSource {
         handler(LiturgicalMonth(month: month, days: days), nil)
     }
     
-    func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, handler: @escaping (String?, Error?) -> Void) {
+    func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], handler: @escaping (String?, Error?) -> Void) {
         handler("<b>Hello world</b>", nil)
+    }
+    
+    func parsePrayerLink(url: URL) -> BreviarLink {
+        return .unknownLink
     }
 }

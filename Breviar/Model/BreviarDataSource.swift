@@ -10,12 +10,18 @@ import Foundation
 protocol BreviarDataSource {
     func getLiturgicalDay(day: Day, handler: @escaping (LiturgicalDay?, Error?) -> Void)
     func getLiturgicalMonth(month: Month, handler: @escaping (LiturgicalMonth?, Error?) -> Void)
-    func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, handler: @escaping (String?, Error?) -> Void)
+    func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], handler: @escaping (String?, Error?) -> Void)
+    func parsePrayerLink(url: URL) -> BreviarLink
 }
 
 enum DataSourceError : String, Error {
     case parseError = "Error parsing server response"
     case emptyResponse = "Empty response from server"
+}
+
+enum BreviarLink {
+    case unknownLink
+    case prayerTextLink([String: String])
 }
 
 class LiturgicalDayParser : NSObject, XMLParserDelegate {
@@ -192,9 +198,9 @@ class CGIDataSource : BreviarDataSource {
         }
     }
     
-    func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, handler: @escaping (String?, Error?) -> Void) {
+    func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], handler: @escaping (String?, Error?) -> Void) {
         let d = day.day
-        let args = [
+        var args = [
             "qt": "pdt",
             "d": d.day.description,
             "m": d.month.description,
@@ -211,6 +217,9 @@ class CGIDataSource : BreviarDataSource {
             "k": "hu",
             "of2rm": "1", // TODO: put it into the o2 flag
         ]
+        for (k, v) in opts {
+            args[k] = v
+        }
         
         self.cgiClient.makeRequest(args) { data, error in
             if let data = data {
@@ -224,5 +233,23 @@ class CGIDataSource : BreviarDataSource {
                 }
             }
         }
+    }
+    
+    func parsePrayerLink(url: URL) -> BreviarLink {
+        let s = url.absoluteString
+        if !s.contains("l.cgi?") {
+            return .unknownLink
+        }
+        guard let query = url.query else { return .unknownLink }
+        
+        var opts: [String: String] = [:]
+        for kv in query.split(separator: "&") {
+            let arg = kv.split(separator: "=", maxSplits: 2, omittingEmptySubsequences: false)
+            if arg.count == 2 {
+                opts[String(arg[0])] = String(arg[1])
+            }
+        }
+        
+        return .prayerTextLink(opts)
     }
 }

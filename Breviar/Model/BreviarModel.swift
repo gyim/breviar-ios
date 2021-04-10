@@ -143,9 +143,9 @@ class BreviarModel : ObservableObject {
         }
     }
     
-    func loadPrayer(_ prayer: Prayer) {
+    func loadPrayer(_ prayer: Prayer, opts: [String: String] = [:]) {
         if let (day, celebration) = self.getCurrentCelebration() {
-            self.dataSource.getPrayerText(day: day, celebration: celebration, prayerType: prayer.type) { (text, error) in
+            self.dataSource.getPrayerText(day: day, celebration: celebration, prayerType: prayer.type, opts: opts) { (text, error) in
                 if error == nil {
                     self.prayerText = .loaded(text!)
                 } else {
@@ -155,8 +155,18 @@ class BreviarModel : ObservableObject {
         }
     }
     
-    func handlePrayerLink(_ url: URL) {
-        print("handlePrayerLink: \(url)")
+    func handlePrayerLink(prayer: Prayer, url: URL) {
+        let parsedLink = self.dataSource.parsePrayerLink(url: url)
+        switch parsedLink {
+        case .prayerTextLink(let opts):
+            self.loadPrayer(prayer, opts: opts)
+        default:
+            break
+        }
+    }
+    
+    func unloadPrayer() {
+        self.prayerText = .idle
     }
 }
 
