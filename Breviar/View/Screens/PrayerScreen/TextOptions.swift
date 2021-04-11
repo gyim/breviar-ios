@@ -24,12 +24,16 @@ struct TextOptionsView : View {
             VStack {
                 TextSizeView(fontSize: $textOptions.fontSize)
                 Divider()
-                FontChooserLabel(fontName: textOptions.fontName)
-                    .onTapGesture {
+                Button(
+                    action: {
                         withAnimation {
                             fontChooserShown = true
                         }
+                    },
+                    label: {
+                        FontChooserLabel(fontName: textOptions.fontName)
                     }
+                )
                 Divider()
                 ColorSchemeChooserView(colorScheme: $textOptions.colorScheme)
             }
@@ -56,7 +60,7 @@ struct FontChooserLabel : View {
     
     var body: some View {
         HStack(alignment: .center) {
-            Text("Font")
+            Text("Font").foregroundColor(.primary)
             Spacer()
             FontLabel(font: fontName)
             Image(systemName: "chevron.right").foregroundColor(.accentColor)
@@ -88,18 +92,22 @@ struct FontChooserList : View {
             
             List {
                 ForEach(fontNames) { font in
-                    HStack {
-                        FontLabel(font: font)
-                        Spacer()
-                        if font.name == selectedFont.name {
-                            Image(systemName: "checkmark").foregroundColor(.accentColor)
+                    Button(
+                        action: {
+                            withAnimation {
+                                selectedFont = font
+                            }
+                        },
+                        label: {
+                            HStack {
+                                FontLabel(font: font)
+                                Spacer()
+                                if font.name == selectedFont.name {
+                                    Image(systemName: "checkmark").foregroundColor(.accentColor)
+                                }
+                            }
                         }
-                    }
-                    .onTapGesture {
-                        withAnimation {
-                            selectedFont = font
-                        }
-                    }
+                    )
                 }
             }.padding(.top, -10.0)
 
@@ -112,7 +120,7 @@ struct FontLabel : View {
     var font: FontName
     
     var body : some View {
-        Text(font.name).font(.custom(font.systemName, size: 16.0))
+        Text(font.name).font(.custom(font.systemName, size: 16.0)).foregroundColor(.primary)
     }
 }
 
