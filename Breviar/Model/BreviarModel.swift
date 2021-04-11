@@ -180,6 +180,12 @@ enum LoadingState<Value> {
 class TextOptions: ObservableObject {
     static let notificationName = NSNotification.Name.init(rawValue: "BreviarTextOptionsChanged")
     
+    @Published var fontName = fontNames[0] {
+        didSet {
+            NotificationCenter.default.post(name: TextOptions.notificationName, object: self)
+        }
+    }
+    
     @Published var fontSize = 100.0 {
         didSet {
             NotificationCenter.default.post(name: TextOptions.notificationName, object: self)
@@ -202,3 +208,26 @@ class TextOptions: ObservableObject {
         }
     }
 }
+
+struct FontName : Identifiable {
+    var name: String
+    var systemName: String
+    
+    var id : String {
+        return name
+    }
+}
+
+let fontNames = [
+    FontName(name: "Georgia", systemName: "Georgia"),
+    FontName(name: "Helvetica", systemName: "HelveticaNeue"),
+    FontName(name: "Helvetica Light", systemName: "HelveticaNeue-Light"),
+    FontName(name: "Times", systemName: "TimesNewRomanPSMT"),
+    FontName(name: "Baskerville", systemName: "Baskerville"),
+    FontName(name: "Didot", systemName: "Didot"),
+    FontName(name: "Gill Sans", systemName: "GillSans"),
+    FontName(name: "Hoefler Text", systemName: "HoeflerText-Regular"),
+    FontName(name: "Palatino", systemName: "Palatino-Roman"),
+    FontName(name: "Trebuchet MS", systemName: "TrebuchetMS"),
+    FontName(name: "Verdana", systemName: "Verdana"),
+]

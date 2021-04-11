@@ -9,13 +9,33 @@ import SwiftUI
 
 struct TextOptionsView : View {
     @ObservedObject var textOptions: TextOptions
+    @State var fontChooserShown = false
     
     var body: some View {
-        VStack {
-            TextSizeView(fontSize: $textOptions.fontSize)
-            Divider()
-            ColorSchemeChooserView(colorScheme: $textOptions.colorScheme)
-        }.frame(width: 300, height: 180, alignment: .center)
+        let fontChooserTransition : AnyTransition = fontChooserShown ?
+            .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)) :
+            .asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .trailing))
+        
+        if fontChooserShown {
+            FontChooserList(shown: $fontChooserShown, selectedFont: $textOptions.fontName)
+                .transition(fontChooserTransition)
+        }
+        else {
+            VStack {
+                TextSizeView(fontSize: $textOptions.fontSize)
+                Divider()
+                FontChooserLabel(fontName: textOptions.fontName)
+                    .onTapGesture {
+                        withAnimation {
+                            fontChooserShown = true
+                        }
+                    }
+                Divider()
+                ColorSchemeChooserView(colorScheme: $textOptions.colorScheme)
+            }
+            .frame(width: 300, height: 230, alignment: .center)
+            .transition(fontChooserTransition)
+        }
     }
 }
 
@@ -28,6 +48,71 @@ struct TextSizeView : View {
             Slider(value: $fontSize, in: 60...140, step: 10)
             Image(systemName: "textformat.size.larger").padding()
         }
+    }
+}
+
+struct FontChooserLabel : View {
+    var fontName: FontName
+    
+    var body: some View {
+        HStack(alignment: .center) {
+            Text("Font")
+            Spacer()
+            FontLabel(font: fontName)
+            Image(systemName: "chevron.right").foregroundColor(.accentColor)
+        }
+        .padding(.horizontal)
+        .padding(.top, 5.0)
+    }
+}
+
+struct FontChooserList : View {
+    @Binding var shown: Bool
+    @Binding var selectedFont: FontName
+    
+    var body: some View {
+        VStack() {
+            HStack {
+                HStack {
+                    Image(systemName: "chevron.left").foregroundColor(.accentColor)
+                    Text("Text Options").foregroundColor(.accentColor)
+                }.onTapGesture {
+                    withAnimation {
+                        shown = false
+                    }
+                }
+                Spacer()
+            }
+            .padding(10.0)
+            Divider().padding(.top, -7.0)
+            
+            List {
+                ForEach(fontNames) { font in
+                    HStack {
+                        FontLabel(font: font)
+                        Spacer()
+                        if font.name == selectedFont.name {
+                            Image(systemName: "checkmark").foregroundColor(.accentColor)
+                        }
+                    }
+                    .onTapGesture {
+                        withAnimation {
+                            selectedFont = font
+                        }
+                    }
+                }
+            }.padding(.top, -10.0)
+
+            Spacer()
+        }
+    }
+}
+
+struct FontLabel : View {
+    var font: FontName
+    
+    var body : some View {
+        Text(font.name).font(.custom(font.systemName, size: 16.0))
     }
 }
 
@@ -127,11 +212,14 @@ struct TextOptions_Previews: PreviewProvider {
         Group {
             TextOptionsViewContainer()
                 .preferredColorScheme(.light)
-                .previewLayout(.fixed(width: 300.0, height: 180.0))
+                .previewLayout(.fixed(width: 300.0, height: 230.0))
+            
+            FontChooserList(shown:.constant(true), selectedFont: .constant(fontNames[0]))
+                .previewLayout(.fixed(width: 300.0, height: 230.0))
             
             TextOptionsViewContainer()
                 .preferredColorScheme(.dark)
-                .previewLayout(.fixed(width: 300.0, height: 180.0))
+                .previewLayout(.fixed(width: 300.0, height: 230.0))
         }
     }
 }

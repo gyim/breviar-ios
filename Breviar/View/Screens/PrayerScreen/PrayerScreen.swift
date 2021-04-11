@@ -68,6 +68,7 @@ struct PrayerView : UIViewRepresentable {
         var parent: PrayerView
         var webView = PrayerWebView()
         var prevText: String = ""
+        var prevFontName: String = fontNames[0].systemName
         var prevFontSize: Double = 100.0
         var topPadding: CGFloat = 0
         var bottomPadding: CGFloat = 0
@@ -103,13 +104,13 @@ struct PrayerView : UIViewRepresentable {
         
         @objc func onTextOptionsChanged(_ notification: Notification) {
             if let textOptions = notification.object as? TextOptions {
-                setPrayerText(text: prevText, fontSize: textOptions.fontSize)
+                setPrayerText(text: prevText, fontName: textOptions.fontName.systemName, fontSize: textOptions.fontSize)
             }
         }
         
-        func setPrayerText(text: String, fontSize: Double) {
+        func setPrayerText(text: String, fontName: String, fontSize: Double) {
             if text != prevText {
-                let modifiedText = getModifiedText(text: text, fontSize: fontSize)
+                let modifiedText = getModifiedText(text: text, fontName: fontName, fontSize: fontSize)
                 if prevText == "" {
                     let baseURL = URL(string: "https://lh.kbs.sk/cgi-bin")
                     self.webView.loadHTMLString(modifiedText, baseURL: baseURL)
@@ -124,10 +125,11 @@ struct PrayerView : UIViewRepresentable {
                 prevText = text
                 prevFontSize = fontSize
             }
-            if fontSize != prevFontSize {
+            if fontName != prevFontName || fontSize != prevFontSize {
+                prevFontName = fontName
                 prevFontSize = fontSize
                 
-                self.webView.evaluateJavaScript("setFontSize(\(fontSize))") { (_, error) in
+                self.webView.evaluateJavaScript("setFont('\(fontName)', \(fontSize))") { (_, error) in
                     if error != nil {
                         print("Error setting font size: \(error.debugDescription)")
                     }
@@ -135,7 +137,7 @@ struct PrayerView : UIViewRepresentable {
             }
         }
         
-        func getModifiedText(text: String, fontSize: Double) -> String {
+        func getModifiedText(text: String, fontName: String, fontSize: Double) -> String {
             let body = getBody(text)
             return """
                 <head>
@@ -148,7 +150,8 @@ struct PrayerView : UIViewRepresentable {
                         body { padding: \(topPadding)px 0 \(bottomPadding)px; }
                     </style>
                     <script type="text/javascript">
-                        function setFontSize(fontSize) {
+                        function setFont(fontName, fontSize) {
+                            document.body.style.fontFamily = fontName;
                             document.body.style.webkitTextSizeAdjust = fontSize + '%';
                         }
                         function setupTapGesture() {
@@ -168,7 +171,7 @@ struct PrayerView : UIViewRepresentable {
                         function initPrayer() {
                             setupTapGesture();
                             setupLinks();
-                            setFontSize(\(fontSize));
+                            setFont('\(fontName)', \(fontSize));
                         }
                     </script>
                 </head>
@@ -221,7 +224,7 @@ struct PrayerView : UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: WKWebView, context: Context) {
-        context.coordinator.setPrayerText(text: text, fontSize: textOptions.fontSize)
+        context.coordinator.setPrayerText(text: text, fontName: textOptions.fontName.systemName, fontSize: textOptions.fontSize)
     }
 
     func onTapEvent(_ newHandler: @escaping () -> ()) -> PrayerView {
