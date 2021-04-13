@@ -96,6 +96,7 @@ struct PrayerView : UIViewRepresentable {
             webViewConfig.userContentController = contentController
             webView = PrayerWebView(frame: CGRect(), configuration: webViewConfig)
             webView.allowsLinkPreview = false
+            webView.isOpaque = false
         }
         
         deinit {
