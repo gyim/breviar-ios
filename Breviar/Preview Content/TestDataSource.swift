@@ -48,4 +48,22 @@ class TestDataSource : BreviarDataSource {
     func parsePrayerLink(url: URL) -> BreviarLink {
         return .unknownLink
     }
+    
+    func getSettingsEntries(handler: @escaping ([SettingsEntry]?, Error?) -> Void) {
+        let entries: [SettingsEntry] = [
+            SettingsEntry(name: "o0", label: "Flag Set", type: .flagSet, defaultValue: 0, options: [
+                SettingsEntryOption(label: "First flag", value: 1),
+                SettingsEntryOption(label: "Second flag", value: 2),
+                SettingsEntryOption(label: "Third flag", value: 4),
+                SettingsEntryOption(label: "Fourth flag", value: 8),
+            ]),
+            SettingsEntry(name: "o1", label: "String Choice", type: .stringChoice, defaultValue: 0, options: [
+                SettingsEntryOption(label: "First flag", value: 1),
+                SettingsEntryOption(label: "Second flag", value: 2),
+                SettingsEntryOption(label: "Third flag", value: 4),
+                SettingsEntryOption(label: "Fourth flag", value: 8),
+            ]),
+        ]
+        handler(entries, nil)
+    }
 }

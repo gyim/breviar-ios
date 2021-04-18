@@ -12,6 +12,7 @@ protocol BreviarDataSource {
     func getLiturgicalMonth(month: Month, handler: @escaping (LiturgicalMonth?, Error?) -> Void)
     func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], handler: @escaping (String?, Error?) -> Void)
     func parsePrayerLink(url: URL) -> BreviarLink
+    func getSettingsEntries(handler: @escaping ([SettingsEntry]?, Error?) -> Void)
 }
 
 enum DataSourceError : String, Error {
@@ -133,6 +134,91 @@ class LiturgicalDayParser : NSObject, XMLParserDelegate {
     }
 }
 
+class SettingsParser : NSObject, XMLParserDelegate {
+    var parser: XMLParser
+    var path: [String] = []
+    
+    // Settings entries
+    let entryTags = ["Opt0Special", "Opt1PrayerPortions", "Opt2Export", "Opt3Communia", "Opt5Alternatives"]
+    let skipEntryLabels = ["hu_text"]
+    var entry: SettingsEntry?
+    var entries: [SettingsEntry] = []
+    
+    // Communia options
+    let communiaEntryName = "o3"
+    let communiaOptionsListTag = "LiturgicalCelebrationCommuniaValues"
+    let communiaOptionTag = "LiturgicalCelebrationCommunia"
+    var communiaOptions: [SettingsEntryOption] = []
+    var communiaOption: SettingsEntryOption = SettingsEntryOption(label: "", value: 0)
+    
+    init(data: Data) {
+        self.parser = XMLParser(data: data)
+    }
+    
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes: [String : String] = [:]) {
+        let parent = self.path.count > 0 ? self.path[self.path.count - 1] : ""
+        self.path.append(elementName)
+
+        if parent == "Options" && entryTags.contains(elementName) {
+            // Parse settings entries (options are in this tag, execpt for communia)
+            guard let name = attributes["Name"] else { return }
+            guard let label = attributes["Text"] else { return }
+            guard let defaultValueS = attributes["Value"], let defaultValue = Int(defaultValueS) else { return }
+            let type: SettingsEntryType = name == communiaEntryName ? .stringChoice : .flagSet
+            self.entry = SettingsEntry(name: name, label: label, type: type, defaultValue: defaultValue, options: [])
+        } else if self.entry != nil {
+            // Parse settings entry options (flags only)
+            guard let label = attributes["Text"] else { return }
+            guard let valueS = attributes["Id"], let value = Int(valueS) else { return }
+            if skipEntryLabels.contains(label) { return }
+            self.entry?.options.append(SettingsEntryOption(label: label, value: value))
+        } else if elementName == communiaOptionTag {
+            guard let valueS = attributes["Id"], let value = Int(valueS) else { return }
+            self.communiaOption = SettingsEntryOption(label: "", value: value)
+        }
+    }
+
+    func parser(_ parser: XMLParser, foundCharacters s: String) {
+        let elementName = self.path.count > 0 ? self.path[self.path.count-1] : ""
+        if elementName == communiaOptionTag {
+            self.communiaOption.label += s
+            print("### option \(communiaOption.value): \(communiaOption.label)")
+        }
+    }
+
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+        _ = self.path.popLast()
+        let parent = self.path.count > 0 ? self.path[self.path.count - 1] : ""
+        
+        if parent == "Options", let entry = self.entry {
+            self.entries.append(entry)
+            self.entry = nil
+        } else if elementName == communiaOptionTag {
+            self.communiaOptions.append(self.communiaOption)
+            self.communiaOption = SettingsEntryOption(label: "", value: 0)
+        } else if elementName == communiaOptionsListTag {
+            // Update options in already existing entry
+            for i in (0..<entries.count) {
+                if entries[i].name == communiaEntryName {
+                    entries[i].options = communiaOptions
+                }
+            }
+        }
+    }
+    
+    func parse() -> ([SettingsEntry]?, Error?) {
+        self.parser.delegate = self
+        if !self.parser.parse() {
+            if let error = self.parser.parserError {
+                print("Error parsing settings XML: \(error)")
+                return (nil, error)
+            }
+        }
+        
+        return (self.entries, nil)
+    }
+}
+
 class CGIDataSource : BreviarDataSource {
     var cgiClient: CGIClient
     
@@ -251,5 +337,31 @@ class CGIDataSource : BreviarDataSource {
         }
         
         return .prayerTextLink(opts)
+    }
+    
+    func getSettingsEntries(handler: @escaping ([SettingsEntry]?, Error?) -> Void) {
+        let args = [
+            "qt": "pxml",
+            "j": "hu",
+            "k": "hu",
+        ]
+        
+        self.cgiClient.makeRequest(args) { data, error in
+            if let data = data {
+                let parser = SettingsParser(data: data)
+                let (entries, error) = parser.parse()
+                DispatchQueue.main.async {
+                    if error == nil {
+                        handler(entries, nil )
+                    } else {
+                        handler(nil, error)
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    handler(nil, error)
+                }
+            }
+        }
     }
 }
