@@ -71,15 +71,23 @@ enum SettingsEntryType {
     case stringChoice
 }
 
-struct SettingsEntry {
+struct SettingsEntry: Identifiable {
     var name: String
     var label: String
     var type: SettingsEntryType
     var defaultValue: Int
     var options: [SettingsEntryOption]
+    
+    var id: String {
+        return name
+    }
 }
 
-struct SettingsEntryOption {
+struct SettingsEntryOption: Identifiable {
     var label: String
     var value: Int
+    
+    var id: String {
+        return String(value)
+    }
 }

@@ -140,7 +140,7 @@ class SettingsParser : NSObject, XMLParserDelegate {
     
     // Settings entries
     let entryTags = ["Opt0Special", "Opt1PrayerPortions", "Opt2Export", "Opt3Communia", "Opt5Alternatives"]
-    let skipEntryLabels = ["hu_text"]
+    let skipEntryLabels = ["hu_text", "", "/"]
     var entry: SettingsEntry?
     var entries: [SettingsEntry] = []
     
@@ -165,13 +165,13 @@ class SettingsParser : NSObject, XMLParserDelegate {
             guard let label = attributes["Text"] else { return }
             guard let defaultValueS = attributes["Value"], let defaultValue = Int(defaultValueS) else { return }
             let type: SettingsEntryType = name == communiaEntryName ? .stringChoice : .flagSet
-            self.entry = SettingsEntry(name: name, label: label, type: type, defaultValue: defaultValue, options: [])
+            self.entry = SettingsEntry(name: name, label: normalizeLabel(label), type: type, defaultValue: defaultValue, options: [])
         } else if self.entry != nil {
             // Parse settings entry options (flags only)
             guard let label = attributes["Text"] else { return }
             guard let valueS = attributes["Id"], let value = Int(valueS) else { return }
             if skipEntryLabels.contains(label) { return }
-            self.entry?.options.append(SettingsEntryOption(label: label, value: value))
+            self.entry?.options.append(SettingsEntryOption(label: normalizeLabel(label), value: value))
         } else if elementName == communiaOptionTag {
             guard let valueS = attributes["Id"], let value = Int(valueS) else { return }
             self.communiaOption = SettingsEntryOption(label: "", value: value)
@@ -182,7 +182,6 @@ class SettingsParser : NSObject, XMLParserDelegate {
         let elementName = self.path.count > 0 ? self.path[self.path.count-1] : ""
         if elementName == communiaOptionTag {
             self.communiaOption.label += s
-            print("### option \(communiaOption.value): \(communiaOption.label)")
         }
     }
 
@@ -194,7 +193,10 @@ class SettingsParser : NSObject, XMLParserDelegate {
             self.entries.append(entry)
             self.entry = nil
         } else if elementName == communiaOptionTag {
-            self.communiaOptions.append(self.communiaOption)
+            self.communiaOption.label = normalizeLabel(self.communiaOption.label)
+            if self.communiaOption.label != "" {
+                self.communiaOptions.append(self.communiaOption)
+            }
             self.communiaOption = SettingsEntryOption(label: "", value: 0)
         } else if elementName == communiaOptionsListTag {
             // Update options in already existing entry
@@ -216,6 +218,14 @@ class SettingsParser : NSObject, XMLParserDelegate {
         }
         
         return (self.entries, nil)
+    }
+    
+    func normalizeLabel(_ inputString: String) -> String {
+        var s = inputString
+        s = s.prefix(1).capitalized + s.dropFirst() // Capitalize first word
+        s = s.trimmingCharacters(in: .whitespaces)
+        s = s.trimmingCharacters(in: CharacterSet(charactersIn: ":"))
+        return s
     }
 }
 

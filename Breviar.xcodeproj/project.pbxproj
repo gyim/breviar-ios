@@ -21,6 +21,7 @@
 		70A99DCB25B477CB00B558CE /* BreviarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A99DCA25B477CB00B558CE /* BreviarModel.swift */; };
 		70B109A125F3853B0044F613 /* BreviarDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B109A025F3853B0044F613 /* BreviarDataSource.swift */; };
 		70BD024F262A3900007FB5C0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BD024E262A3900007FB5C0 /* Settings.swift */; };
+		70BD0254262CDC48007FB5C0 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BD0253262CDC48007FB5C0 /* SettingsScreen.swift */; };
 		70BD424226106A8A00BB386E /* InlinePopoverPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BD424126106A8A00BB386E /* InlinePopoverPresenter.swift */; };
 		70BD424B26107D7400BB386E /* TextOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BD424A26107D7400BB386E /* TextOptions.swift */; };
 		70BD424E26107E1800BB386E /* Playback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BD424D26107E1800BB386E /* Playback.swift */; };
@@ -44,6 +45,7 @@
 		70A99DCA25B477CB00B558CE /* BreviarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreviarModel.swift; sourceTree = "<group>"; };
 		70B109A025F3853B0044F613 /* BreviarDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreviarDataSource.swift; sourceTree = "<group>"; };
 		70BD024E262A3900007FB5C0 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		70BD0253262CDC48007FB5C0 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		70BD424126106A8A00BB386E /* InlinePopoverPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlinePopoverPresenter.swift; sourceTree = "<group>"; };
 		70BD424A26107D7400BB386E /* TextOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOptions.swift; sourceTree = "<group>"; };
 		70BD424D26107E1800BB386E /* Playback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playback.swift; sourceTree = "<group>"; };
@@ -120,11 +122,20 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		70BD0256262CDC4E007FB5C0 /* SettingsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				70BD0253262CDC48007FB5C0 /* SettingsScreen.swift */,
+			);
+			path = SettingsScreen;
+			sourceTree = "<group>";
+		};
 		70BD424526106CE900BB386E /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				70BD424826107D3D00BB386E /* MainScreen */,
 				70BD424926107D5200BB386E /* PrayerScreen */,
+				70BD0256262CDC4E007FB5C0 /* SettingsScreen */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -239,6 +250,7 @@
 				70BD424E26107E1800BB386E /* Playback.swift in Sources */,
 				709A26B925F8DA8A0040AE84 /* Calendar.swift in Sources */,
 				70BD024F262A3900007FB5C0 /* Settings.swift in Sources */,
+				70BD0254262CDC48007FB5C0 /* SettingsScreen.swift in Sources */,
 				70B109A125F3853B0044F613 /* BreviarDataSource.swift in Sources */,
 				702E14F5260B239000E9D3AC /* TestDataSource.swift in Sources */,
 				70A99DCB25B477CB00B558CE /* BreviarModel.swift in Sources */,

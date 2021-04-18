@@ -98,6 +98,10 @@ struct MainScreenContent: View {
                         PrayerLink(prayer: prayer)
                     }
                 }
+                
+                Section(header: Text("Settings")) {
+                    NavigationLink(destination: SettingsScreen(), label: { Label("Settings", systemImage: "gearshape.fill") })
+                }
             }
         }
     }
@@ -157,7 +161,7 @@ struct CelebrationRow : View {
             .overlay(CelebrationColorView(color: celebration.liturgicalColor, width: 10))
             
             Image(systemName: "checkmark").resizable().frame(width: 20, height: 20)
-                .foregroundColor(.blue)
+                .foregroundColor(.accentColor)
                 .padding(5)
                 .opacity(checked ? 1 : 0)
         }
