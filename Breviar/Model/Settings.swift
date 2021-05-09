@@ -81,6 +81,33 @@ struct SettingsEntry: Identifiable {
     var id: String {
         return name
     }
+    
+    func getUserSettings() -> Int {
+        if let v = UserDefaults.standard.object(forKey: self.name), let vi = v as? Int {
+            return vi
+        } else {
+            switch type {
+            case .flagSet:
+                return self.defaultValue
+            case .stringChoice:
+                // Set either default value or first option value
+                var v = self.defaultValue
+                if self.options.count > 0 {
+                    v = self.options[0].value
+                    for option in self.options {
+                        if option.value == self.defaultValue {
+                            v = self.defaultValue
+                        }
+                    }
+                }
+                return v
+            }
+        }
+    }
+    
+    func setUserSettings(_ value: Int) {
+        UserDefaults.standard.set(value, forKey: self.name)
+    }
 }
 
 struct SettingsEntryOption: Identifiable {
@@ -102,26 +129,18 @@ class FlagSetOptionState : ObservableObject {
         self.entry = entry
         self.option = option
         
-        self.value = (FlagSetOptionState.userDefaultState(entry: entry) & option.value != 0)
+        self.value = (entry.getUserSettings() & option.value != 0)
     }
     
     @Published var value: Bool {
         didSet {
-            var v = FlagSetOptionState.userDefaultState(entry: entry)
+            var v = self.entry.getUserSettings()
             if value {
                 v |= option.value
             } else {
                 v &= ~option.value
             }
-            UserDefaults.standard.set(v, forKey: entry.name)
-        }
-    }
-    
-    static private func userDefaultState(entry: SettingsEntry) -> Int {
-        if let v = UserDefaults.standard.object(forKey: entry.name), let vi = v as? Int {
-            return vi
-        } else {
-            return entry.defaultValue
+            self.entry.setUserSettings(v)
         }
     }
 }
@@ -131,22 +150,12 @@ class StringChoiceState : ObservableObject {
     
     init(entry: SettingsEntry) {
         self.entry = entry
-        if let v = UserDefaults.standard.object(forKey: entry.name), let vi = v as? Int {
-            self.value = vi
-        } else {
-            // Set either entry.defaultValue or first option value
-            self.value = entry.options[0].value
-            for option in entry.options {
-                if option.value == entry.defaultValue {
-                    self.value = entry.defaultValue
-                }
-            }
-        }
+        self.value = entry.getUserSettings()
     }
     
     @Published var value: Int {
         didSet {
-            UserDefaults.standard.set(value, forKey: entry.name)
+            self.entry.setUserSettings(value)
         }
     }
 }
