@@ -169,9 +169,19 @@ class BreviarModel : ObservableObject {
         let parsedLink = self.dataSource.parsePrayerLink(url: url)
         switch parsedLink {
         case .prayerTextLink(let opts):
-            self.loadPrayer(prayer, opts: opts)
+            self.savePrayerOptions(opts)
+            self.loadPrayer(prayer)
         default:
             break
+        }
+    }
+    
+    func savePrayerOptions(_ opts: [String: String]) {
+        for optName in ["o0", "o1", "o3", "o4", "o5"] {
+            if let optVal = opts[optName], let optInt = Int(optVal) {
+                print("Saving option: \(optName)=\(optInt)")
+                UserDefaults.standard.setValue(optInt, forKey: optName)
+            }
         }
     }
     
