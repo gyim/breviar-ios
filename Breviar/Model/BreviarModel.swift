@@ -178,9 +178,14 @@ class BreviarModel : ObservableObject {
     
     func savePrayerOptions(_ opts: [String: String]) {
         for optName in ["o0", "o1", "o3", "o4", "o5"] {
+            guard let entry = getSettingsEntry(name: optName) else { continue }
             if let optVal = opts[optName], let optInt = Int(optVal) {
                 print("Saving option: \(optName)=\(optInt)")
-                UserDefaults.standard.setValue(optInt, forKey: optName)
+                entry.setUserSettings(optInt)
+            } else {
+                let defaultValue = entry.normalizedDefaultValue()
+                print("Reverting option: \(optName)=\(defaultValue)")
+                entry.setUserSettings(defaultValue)
             }
         }
     }
@@ -203,6 +208,21 @@ class BreviarModel : ObservableObject {
             }
         }
     }
+
+    func getSettingsEntry(name: String) -> SettingsEntry? {
+        switch self.settingsEntries {
+        case .loaded(let entries):
+            for entry in entries {
+                if entry.name == name {
+                    return entry
+                }
+            }
+            return nil
+        default:
+            return nil
+        }
+    }
+    
 }
 
 enum LoadingState<Value> {

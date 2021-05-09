@@ -86,27 +86,31 @@ struct SettingsEntry: Identifiable {
         if let v = UserDefaults.standard.object(forKey: self.name), let vi = v as? Int {
             return vi
         } else {
-            switch type {
-            case .flagSet:
-                return self.defaultValue
-            case .stringChoice:
-                // Set either default value or first option value
-                var v = self.defaultValue
-                if self.options.count > 0 {
-                    v = self.options[0].value
-                    for option in self.options {
-                        if option.value == self.defaultValue {
-                            v = self.defaultValue
-                        }
-                    }
-                }
-                return v
-            }
+            return self.normalizedDefaultValue()
         }
     }
     
     func setUserSettings(_ value: Int) {
         UserDefaults.standard.set(value, forKey: self.name)
+    }
+    
+    func normalizedDefaultValue() -> Int {
+        switch type {
+        case .flagSet:
+            return self.defaultValue
+        case .stringChoice:
+            // Set either default value or first option value
+            var v = self.defaultValue
+            if self.options.count > 0 {
+                v = self.options[0].value
+                for option in self.options {
+                    if option.value == self.defaultValue {
+                        v = self.defaultValue
+                    }
+                }
+            }
+            return v
+        }
     }
 }
 
