@@ -144,6 +144,9 @@ class SettingsParser : NSObject, XMLParserDelegate {
     var entry: SettingsEntry?
     var entries: [SettingsEntry] = []
     
+    // Display options
+    let displayOptionsName = "o2"
+    
     // Communia options
     let communiaEntryName = "o3"
     let communiaOptionsListTag = "LiturgicalCelebrationCommuniaValues"
@@ -190,7 +193,9 @@ class SettingsParser : NSObject, XMLParserDelegate {
         let parent = self.path.count > 0 ? self.path[self.path.count - 1] : ""
         
         if parent == "Options", let entry = self.entry {
-            self.entries.append(entry)
+            if entry.name != displayOptionsName {
+                self.entries.append(entry)
+            }
             self.entry = nil
         } else if elementName == communiaOptionTag {
             self.communiaOption.label = normalizeLabel(self.communiaOption.label)
@@ -303,12 +308,12 @@ class CGIDataSource : BreviarDataSource {
             "r": d.year.description,
             "p": prayerType.rawValue.description,
             "ds": celebration.id,
-            "o0": "65",
-            "o1": "5440",
-            "o2": "16384",
-            "o3": "0",
-            "o4": "0",
-            "o5": "0",
+            "o0": String(UserDefaults.standard.integer(forKey: "o0")),
+            "o1": String(UserDefaults.standard.integer(forKey: "o1")),
+            "o2": "16896", // Override display settings
+            "o3": String(UserDefaults.standard.integer(forKey: "o3")),
+            "o4": String(UserDefaults.standard.integer(forKey: "o4")),
+            "o5": String(UserDefaults.standard.integer(forKey: "o5")),
             "j": "hu",
             "k": "hu",
             "of2rm": "1", // TODO: put it into the o2 flag

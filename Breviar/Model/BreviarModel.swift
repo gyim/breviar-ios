@@ -182,6 +182,11 @@ class BreviarModel : ObservableObject {
     func loadSettingsEntries() {
         self.dataSource.getSettingsEntries { (entries, error) in
             if error == nil {
+                // Save entries to UserDefaults
+                for entry in entries! {
+                    entry.setUserSettings(entry.getUserSettings())
+                }
+                
                 self.settingsEntries = .loaded(entries!)
             } else {
                 self.settingsEntries = .failed(error!)
