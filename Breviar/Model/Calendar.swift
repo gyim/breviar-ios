@@ -171,14 +171,14 @@ enum PrayerType: String {
     
     var name: String {
         switch self {
-        case .invitatory: return "Invitatory"
-        case .officeOfReadings: return "Office of Readings"
-        case .morningPrayer: return "Morning Prayer"
-        case .midMorningPrayer: return "Mid-Morning Prayer"
-        case .midDayPrayer: return "Midday Prayer"
-        case .midAfternoonPrayer: return "Mid-Afternoon Prayer"
-        case .eveningPrayer: return "Evening Prayer"
-        case .compline: return "Compline"
+        case .invitatory: return S.invitatory.S
+        case .officeOfReadings: return S.officeOfReadings.S
+        case .morningPrayer: return S.morningPrayer.S
+        case .midMorningPrayer: return S.midMorningPrayer.S
+        case .midDayPrayer: return S.midDayPrayer.S
+        case .midAfternoonPrayer: return S.midAfternoonPrayer.S
+        case .eveningPrayer: return S.eveningPrayer.S
+        case .compline: return S.compline.S
         }
     }
 }

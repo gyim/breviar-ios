@@ -16,17 +16,17 @@ struct MainScreen: View {
         let dayDiff = abs(today.daysSinceEpoch - day.daysSinceEpoch)
         
         if dayDiff < 3 {
-            let fmt = DateFormatter()
-            fmt.dateFormat = "EEEE"
+            let fmt = currentLanguage.dateFormatter(format: "EEEE")
             let dayName = fmt.string(from: day.date).capitalized
             
             if dayDiff == 0 {
-                return "\(dayName) (Today)"
+                return "\(dayName) (\(S.today.S))"
             } else {
                 return dayName
             }
         } else {
             let fmt = DateFormatter()
+            fmt.locale = currentLanguage.locale
             fmt.dateStyle = .long
             return fmt.string(from: day.date)
         }
@@ -53,7 +53,7 @@ struct MainScreen: View {
                                     model.loadDay(model.day.dayByAdding(days: -1))
                                 }
                             },
-                            label: {Label("Previous Day",systemImage: "chevron.left")})
+                            label: {Label(S.previousDay.S,systemImage: "chevron.left")})
                             .padding()
                         Spacer()
                             .frame(width: 6.0)
@@ -63,7 +63,7 @@ struct MainScreen: View {
                                     model.loadDay(model.day.dayByAdding(days: 1))
                                 }
                             },
-                            label: {Label("Next Day", systemImage: "chevron.right")})
+                            label: {Label(S.nextDay.S, systemImage: "chevron.right")})
                     }
                 }
                 .sheet(isPresented: $datePickerShown) {
@@ -93,14 +93,14 @@ struct MainScreenContent: View {
                     }
                 }
 
-                Section(header: Text("Prayers")) {
+                Section(header: Text(S.prayers.S)) {
                     ForEach(model.getPrayersForSelectedCelebration()) { prayer in
                         PrayerLink(prayer: prayer)
                     }
                 }
                 
-                Section(header: Text("Settings")) {
-                    NavigationLink(destination: SettingsScreen(), label: { Label("Settings", systemImage: "gearshape.fill") })
+                Section(header: Text(S.settings.S)) {
+                    NavigationLink(destination: SettingsScreen(), label: { Label(S.settings.S, systemImage: "gearshape.fill") })
                 }
             }
         }

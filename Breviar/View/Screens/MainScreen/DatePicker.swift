@@ -12,8 +12,7 @@ struct DatePicker: View {
     var onDaySelected: () -> Void
 
     func getTitle(month: Date) -> String {
-        let fmt = DateFormatter()
-        fmt.dateFormat = "yyyy MMMM"
+        let fmt = currentLanguage.dateFormatter(format: "yyyy MMMM")
         return fmt.string(from: month)
     }
     
@@ -28,7 +27,7 @@ struct DatePicker: View {
                                 onDaySelected()
                             }
                         },
-                        label: { Text("Back") })
+                        label: { Text(S.back.S) })
                 )
                 .toolbar {
                     HStack{
@@ -38,7 +37,7 @@ struct DatePicker: View {
                                     model.loadMonth(model.month.monthByAdding(months: -1))
                                 }
                             },
-                            label: {Label("Previous Day",systemImage: "chevron.left")})
+                            label: {Label(S.previousMonth.S ,systemImage: "chevron.left")})
                             .padding()
                         Spacer()
                             .frame(width: 6.0)
@@ -48,7 +47,7 @@ struct DatePicker: View {
                                     model.loadMonth(model.month.monthByAdding(months: 1))
                                 }
                             },
-                            label: {Label("Next Day", systemImage: "chevron.right")})
+                            label: {Label(S.nextMonth.S, systemImage: "chevron.right")})
                     }
                 }
         }
@@ -71,14 +70,8 @@ struct DatePickerList: View {
     var days: [LiturgicalDay]
     var onDaySelected: () -> Void
     
-    func getDayFormatter() -> DateFormatter {
-        let fmt = DateFormatter()
-        fmt.dateFormat = "MMMM dd (EE)"
-        return fmt
-    }
-    
     var body: some View {
-        let fmt = getDayFormatter()
+        let fmt = currentLanguage.dateFormatter(format: "MMMM dd (EE)")
         let today = Day.init(fromDate: Date())
         
         List {
@@ -93,7 +86,7 @@ struct DatePickerList: View {
                             .fontWeight(.light)
                         if day.day == today {
                             Spacer()
-                            Text("Today")
+                            Text(S.today.S)
                                 .font(.caption)
                                 .fontWeight(.bold)
                         }

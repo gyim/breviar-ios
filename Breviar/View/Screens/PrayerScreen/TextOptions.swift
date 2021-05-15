@@ -60,7 +60,7 @@ struct FontChooserLabel : View {
     
     var body: some View {
         HStack(alignment: .center) {
-            Text("Font").foregroundColor(.primary)
+            Text(S.font.S).foregroundColor(.primary)
             Spacer()
             FontLabel(font: fontName)
             Image(systemName: "chevron.right").foregroundColor(.accentColor)
@@ -79,7 +79,7 @@ struct FontChooserList : View {
             HStack {
                 HStack {
                     Image(systemName: "chevron.left").foregroundColor(.accentColor)
-                    Text("Text Options").foregroundColor(.accentColor)
+                    Text(S.textOptions.S).foregroundColor(.accentColor)
                 }.onTapGesture {
                     withAnimation {
                         shown = false
@@ -196,11 +196,11 @@ struct ColorSchemeButton : View {
         
         switch colorScheme {
         case .automatic:
-            text = Text("Automatic")
+            text = Text(S.automatic.S)
         case .light:
-            text = Text("Light")
+            text = Text(S.light.S)
         case .dark:
-            text = Text("Dark")
+            text = Text(S.dark.S)
         }
         
         return text

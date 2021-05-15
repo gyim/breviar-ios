@@ -16,7 +16,7 @@ struct LoadingView<T, Content: View> : View {
             switch(value) {
             case .idle, .loading:
                 ProgressView().progressViewStyle(CircularProgressViewStyle())
-                Text("Loading...").padding()
+                Text(S.loading.S).padding()
             case .failed(let error):
                 Image(systemName: "exclamationmark.triangle")
                     .resizable()

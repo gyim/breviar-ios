@@ -23,7 +23,7 @@ struct SettingsScreen : View {
                 }
             }
         }
-        .navigationTitle("Settings")
+        .navigationTitle(S.settings.S)
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -140,7 +140,7 @@ struct SettingsScreen_Previews: PreviewProvider {
             NavigationView {
                 SettingsScreen()
                     .environmentObject(BreviarModel.testModel())
-                    .navigationTitle("Settings")
+                    .navigationTitle(S.settings.S)
                     .navigationBarTitleDisplayMode(.inline)
             }
         }

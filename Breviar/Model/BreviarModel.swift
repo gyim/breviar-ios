@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-enum Language : String {
-    case czech = "cz"
-    case hungarian = "hu"
-    case slovak = "sk"
-}
-
 func getMonthForDay(_ day: Date) -> Date {
     let calendar = Calendar.current
     var comps = DateComponents()

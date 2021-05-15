@@ -15,9 +15,18 @@ protocol BreviarDataSource {
     func getSettingsEntries(handler: @escaping ([SettingsEntry]?, Error?) -> Void)
 }
 
-enum DataSourceError : String, Error {
-    case parseError = "Error parsing server response"
-    case emptyResponse = "Empty response from server"
+enum DataSourceError: Error {
+    case parseError
+    case emptyResponse
+    
+    var localizedDescription : String {
+        switch self {
+        case .parseError:
+            return S.errParseError.S
+        case .emptyResponse:
+            return S.errEmptyResponse.S
+        }
+    }
 }
 
 enum BreviarLink {
@@ -82,8 +91,7 @@ class LiturgicalDayParser : NSObject, XMLParserDelegate {
         case ["LHData", "CalendarDay"]:
             self.days.append(self.day)
         case ["LHData", "CalendarDay", "DateISO"]:
-            let f = DateFormatter()
-            f.dateFormat = "yyyy-MM-dd"
+            let f = currentLanguage.dateFormatter(format: "yyyy-MM-dd")
             if let date = f.date(from: self.parsedText) {
                 self.day.day = Day(fromDate: date)
             }
@@ -140,7 +148,7 @@ class SettingsParser : NSObject, XMLParserDelegate {
     
     // Settings entries
     let entryTags = ["Opt0Special", "Opt1PrayerPortions", "Opt2Export", "Opt3Communia", "Opt5Alternatives"]
-    let skipEntryLabels = ["hu_text", "", "/"]
+    let skipEntryLabels = ["hu_text", "sk_text", "cz_text", "", "/"]
     var entry: SettingsEntry?
     var entries: [SettingsEntry] = []
     
