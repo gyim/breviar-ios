@@ -40,6 +40,15 @@ struct S {
     static let light = LS(sk: "Svetelný", cz: "Světlý", hu: "Világos")
     static let dark = LS(sk: "Tmavý", cz: "Tmavý", hu: "Sötét")
     
+    // Setup Wizard
+    static let liturgicalCalendar = LS(sk: "Liturgický kalendár", cz: "Liturgický kalendář", hu: "Liturgikus naptár")
+    static let networkSettings = LS(sk: "Nastavenia siete", cz: "Nastavení sítě", hu: "Hálózati beállítások")
+    static let downloadLatestTexts = LS(sk: "Stiahnite si najnovšie texty", cz: "Stáhněte si nejnovější texty", hu: "Friss szövegek letöltése")
+    static let always = LS(sk: "Vždy", cz: "Vždy", hu: "Mindig")
+    static let onlyOnWifi = LS(sk: "Iba v sieti Wi-Fi", cz: "Pouze v síti Wi-Fi", hu: "Csak Wi-Fi hálózaton")
+    static let never = LS(sk: "Nikdy", cz: "Nikdy", hu: "Soha")
+    static let done = LS(sk: "Hotový", cz: "Hotový", hu: "Kész")
+    
     // Errors
     static let errParseError = LS(sk: "Chyba při analýze odpovědi serveru", cz: "Chyba pri analýze odpovede servera", hu: "Hiba történt a szerver válaszának feldolgozása során")
     static let errEmptyResponse = LS(sk: "Prázdna odpoveď servera", cz: "Prázdná odpověď serveru", hu: "Üres szerver válasz")

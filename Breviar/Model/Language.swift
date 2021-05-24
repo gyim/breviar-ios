@@ -39,10 +39,10 @@ struct LS {
     var hu: String
     
     var S : String {
-        return forLanguage(l: currentLanguage)
+        return forLanguage(currentLanguage)
     }
     
-    func forLanguage(l: Language) -> String {
+    func forLanguage(_ l: Language) -> String {
         switch l {
         case .slovak:
             return self.sk
@@ -51,5 +51,10 @@ struct LS {
         case .hungarian:
             return self.hu
         }
+    }
+    
+    func forLanguageCode(_ l: String) -> String {
+        let lang = Language(rawValue: l)!
+        return self.forLanguage(lang)
     }
 }

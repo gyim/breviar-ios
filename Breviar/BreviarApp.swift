@@ -10,6 +10,8 @@ import WebKit
 
 @main
 struct BreviarApp: App {
+    @ObservedObject var ds = DataSourceOptionsStore()
+    
     var body: some Scene {
         WindowGroup {
             MainScreen().environmentObject(BreviarModel.cgiModel())
@@ -17,6 +19,9 @@ struct BreviarApp: App {
                     // Load an empty WKWebView so that it is faster to load on prayer screen
                     _ = WKWebView()
                 }
+                .fullScreenCover(isPresented: $ds.uninitialized, content: {
+                    DataSourceOptionsWizard().environmentObject(ds)
+                })
         }
     }
 }

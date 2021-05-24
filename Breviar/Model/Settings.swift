@@ -7,6 +7,68 @@
 
 import SwiftUI
 
+// MARK: - Data source options
+
+enum DataSourceType: String {
+    case alwaysCGI = "alwaysCGI"
+    case alwaysNetwork = "alwaysNetwork"
+    case networkOnWifi = "networkOnWifi"
+}
+
+struct DataSourceOptions {
+    var dataSourceType: DataSourceType
+    var language: Language
+    var calendar: String
+    
+    static var savedOptions: DataSourceOptions? {
+        let userDefaults = UserDefaults.standard
+        
+        if let languageS = userDefaults.string(forKey: "j"),
+           let language = Language(rawValue: languageS),
+           let calendar = userDefaults.string(forKey: "k"),
+           let dataSourceTypeS = userDefaults.string(forKey: "ds"),
+           let dataSourceType = DataSourceType(rawValue: dataSourceTypeS) {
+            return DataSourceOptions(dataSourceType: dataSourceType, language: language, calendar: calendar)
+        } else {
+            return nil
+        }
+    }
+    
+    func save() {
+        let userDefaults = UserDefaults.standard
+        
+        userDefaults.setValue(language.rawValue, forKey: "j")
+        userDefaults.setValue(calendar, forKey: "k")
+        userDefaults.setValue(dataSourceType.rawValue, forKey: "ds")
+    }
+}
+
+class DataSourceOptionsStore: ObservableObject {
+    @Published var uninitialized: Bool
+    
+    @Published var dataSourceOptions: DataSourceOptions? {
+        didSet {
+            if let dso = dataSourceOptions {
+                dso.save()
+                uninitialized = false
+            } else {
+                uninitialized = true
+            }
+        }
+    }
+
+    init() {
+        if let dso = DataSourceOptions.savedOptions {
+            dataSourceOptions = dso
+            uninitialized = false
+        } else {
+            dataSourceOptions = nil
+            uninitialized = true
+        }
+    }
+    
+}
+
 // MARK: - Text options
 
 class TextOptions: ObservableObject {
