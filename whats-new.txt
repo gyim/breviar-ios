@@ -91,7 +91,7 @@ CZ
 – Poznámky pod čarou ke druhým čtením (modlitba se čtením).
 – Sobotní památka Panny Marie se nenabízí při střetu s jiným mariánským svátkem.
 – Kalendář a vlastní texty pro františkány (OFM).
-– Opravy v liturgickém kalendáři a textech (všeobecné, OFMCap).
+– Opravy v liturgickém kalendáři a textech (všeobecné, OFMCap.).
 – Noční režim upraví aj barvu lišty.
 – Podpora pro iOS 11.
 – Aktualizace, vylepšení a opravy v textech a generování modliteb.
