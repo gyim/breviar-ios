@@ -53,3 +53,34 @@ struct S {
     static let errParseError = LS(sk: "Chyba při analýze odpovědi serveru", cz: "Chyba pri analýze odpovede servera", hu: "Hiba történt a szerver válaszának feldolgozása során")
     static let errEmptyResponse = LS(sk: "Prázdna odpoveď servera", cz: "Prázdná odpověď serveru", hu: "Üres szerver válasz")
 }
+
+let CalendarNames: [String: String] = [
+    // Czech
+    "cz": "obecný [pro Čechy a Moravu]",
+    "czop": "dominikánský (OP)",
+    "opraem": "s vlastními texty premonstrátského řádu (OPraem)",
+    "ofmcap": "s vlastními kapucínskými texty (OFMCap.)",
+    "czsdb": "s vlastními texty pro salesiánskou rodinu",
+    "czofm": "s vlastními františkánskými texty (OFM)",
+    "czsj": "s vlastními texty jezuitského řádu (SJ)",
+    "czocd": "s vlastními texty bosých karmelitánů (OCD)",
+
+    // Hungarian
+    "hu": "általános [Magyarország]",
+    "huofm": "ferences szentek és ünnepek zsolozsmája",
+    "husvd": "verbiták zsolozsmája",
+    "husj": "jezsuiták zsolozsmája (SJ)",
+
+    // Slovak
+    "sk": "všeobecný [pre Slovensko]",
+    "cssr": "pre Kongregáciu najsv. Vykupiteľa — redemptoristov (CSsR)",
+    "svd": "pre Spoločnosť Božieho Slova — verbistov (SVD)",
+    "ofm": "pre františkánsku rodinu",
+    "sdb": "pre saleziánsku rodinu — SDB, FMA, VDB",
+    "op": "pre Rehoľu kazateľov — dominikánov (OP)",
+    "sj": "pre Spoločnosť Ježišovu — jezuitov (SJ)",
+    "cm": "pre Misijnú spoločnosť sv. Vincenta de Paul — lazaristov (CM)",
+    "ocd": "pre bosých karmelitánov (OCD)",
+    "csa": "pre kanonisky sv. Augustína Notre Dame (CSA)",
+    "osu": "pre uršulínky Rímskej únie (OSU)",
+]

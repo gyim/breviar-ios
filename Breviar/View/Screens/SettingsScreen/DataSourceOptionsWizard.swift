@@ -47,36 +47,36 @@ struct CalendarChooserScreen: View {
         switch language {
         case "cz":
             List {
-                CalendarLink(language: "cz", calendar: "cz", label: "obecný [pro Čechy a Moravu]")
-                CalendarLink(language: "czop", calendar: "czop", label: "dominikánský (OP)")
-                CalendarLink(language: "cz", calendar: "opraem", label: "s vlastními texty premonstrátského řádu (OPraem)")
-                CalendarLink(language: "cz", calendar: "ofmcap", label: "s vlastními kapucínskými texty (OFMCap.)")
-                CalendarLink(language: "cz", calendar: "czsdb", label: "s vlastními texty pro salesiánskou rodinu")
-                CalendarLink(language: "cz", calendar: "czofm", label: "s vlastními františkánskými texty (OFM)")
-                CalendarLink(language: "cz", calendar: "czsj", label: "s vlastními texty jezuitského řádu (SJ)")
-                CalendarLink(language: "cz", calendar: "czocd", label: "s vlastními texty bosých karmelitánů (OCD)")
+                CalendarLink(language: "cz", calendar: "cz")
+                CalendarLink(language: "czop", calendar: "czop")
+                CalendarLink(language: "cz", calendar: "opraem")
+                CalendarLink(language: "cz", calendar: "ofmcap")
+                CalendarLink(language: "cz", calendar: "czsdb")
+                CalendarLink(language: "cz", calendar: "czofm")
+                CalendarLink(language: "cz", calendar: "czsj")
+                CalendarLink(language: "cz", calendar: "czocd")
             }.navigationTitle(S.liturgicalCalendar.forLanguage(.czech))
         case "hu":
             List {
-                CalendarLink(language: "hu", calendar: "hu", label: "általános [Magyarország]")
-                CalendarLink(language: "hu", calendar: "huofm", label: "ferences szentek és ünnepek zsolozsmája")
-                CalendarLink(language: "hu", calendar: "husvd", label: "verbiták zsolozsmája")
-                CalendarLink(language: "hu", calendar: "husj", label: "jezsuiták zsolozsmája (SJ)")
+                CalendarLink(language: "hu", calendar: "hu")
+                CalendarLink(language: "hu", calendar: "huofm")
+                CalendarLink(language: "hu", calendar: "husvd")
+                CalendarLink(language: "hu", calendar: "husj")
             }.navigationTitle(S.liturgicalCalendar.forLanguage(.hungarian))
         case "sk":
             List {
                 ForEach([
-                    CalendarLink(language: "sk", calendar: "sk", label: "všeobecný [pre Slovensko]"),
-                    CalendarLink(language: "sk", calendar: "cssr", label: "pre Kongregáciu najsv. Vykupiteľa — redemptoristov (CSsR)"),
-                    CalendarLink(language: "sk", calendar: "svd", label: "pre Spoločnosť Božieho Slova — verbistov (SVD)"),
-                    CalendarLink(language: "sk", calendar: "ofm", label: "pre františkánsku rodinu"),
-                    CalendarLink(language: "sk", calendar: "sdb", label: "pre saleziánsku rodinu — SDB, FMA, VDB"),
-                    CalendarLink(language: "sk", calendar: "op", label: "pre Rehoľu kazateľov — dominikánov (OP)"),
-                    CalendarLink(language: "sk", calendar: "sj", label: "pre Spoločnosť Ježišovu — jezuitov (SJ)"),
-                    CalendarLink(language: "sk", calendar: "cm", label: "pre Misijnú spoločnosť sv. Vincenta de Paul — lazaristov (CM)"),
-                    CalendarLink(language: "sk", calendar: "ocd", label: "pre bosých karmelitánov (OCD)"),
-                    CalendarLink(language: "sk", calendar: "csa", label: "pre kanonisky sv. Augustína Notre Dame (CSA)"),
-                    CalendarLink(language: "sk", calendar: "osu", label: "pre uršulínky Rímskej únie (OSU)")
+                    CalendarLink(language: "sk", calendar: "sk"),
+                    CalendarLink(language: "sk", calendar: "cssr"),
+                    CalendarLink(language: "sk", calendar: "svd"),
+                    CalendarLink(language: "sk", calendar: "ofm"),
+                    CalendarLink(language: "sk", calendar: "sdb"),
+                    CalendarLink(language: "sk", calendar: "op"),
+                    CalendarLink(language: "sk", calendar: "sj"),
+                    CalendarLink(language: "sk", calendar: "cm"),
+                    CalendarLink(language: "sk", calendar: "ocd"),
+                    CalendarLink(language: "sk", calendar: "csa"),
+                    CalendarLink(language: "sk", calendar: "osu"),
                 ]) { e in e}
             }.navigationTitle(S.liturgicalCalendar.forLanguage(.slovak))
         default:
@@ -88,9 +88,9 @@ struct CalendarChooserScreen: View {
 struct CalendarLink: View, Identifiable {
     var language: String
     var calendar: String
-    var label: String
     
     var body: some View {
+        let label = CalendarNames[calendar]!
         NavigationLink(
             destination: NetworkSettingsScreen(language: language, calendar: calendar),
             label: {

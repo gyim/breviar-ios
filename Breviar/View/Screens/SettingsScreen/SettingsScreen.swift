@@ -13,6 +13,13 @@ struct SettingsScreen : View {
     var body: some View {
         LoadingView(value: model.settingsEntries) { entries in
             List {
+                if let calendar = model.dataSourceOptions?.calendar,
+                   let calendarName = CalendarNames[calendar] {
+                    SettingsStringLabel(name: S.liturgicalCalendar.S, value: calendarName)
+                        .onTapGesture {
+                            model.dataSourceOptionsNeeded = true
+                        }
+                }
                 ForEach(entries) { entry in
                     switch entry.type {
                     case .flagSet:
@@ -53,15 +60,7 @@ struct SettingsStringChoiceLabel : View {
     @Binding var value: Int
 
     var body: some View {
-        HStack {
-            Text(entry.label)
-                .layoutPriority(1)
-            Spacer()
-            Text(self.labelForValue(self.value))
-                .lineLimit(1)
-                .layoutPriority(0.2)
-                .foregroundColor(.accentColor)
-        }
+        SettingsStringLabel(name: entry.label, value: self.labelForValue(self.value))
     }
     
     func labelForValue(_ v: Int) -> String {
@@ -73,6 +72,24 @@ struct SettingsStringChoiceLabel : View {
         return ""
     }
 }
+
+struct SettingsStringLabel : View {
+    var name: String
+    var value: String
+
+    var body: some View {
+        HStack {
+            Text(name)
+                .layoutPriority(1)
+            Spacer()
+            Text(value)
+                .lineLimit(1)
+                .layoutPriority(0.2)
+                .foregroundColor(.accentColor)
+        }
+    }
+}
+
 
 struct SettingsStringChoiceView : View {
     var entry: SettingsEntry
