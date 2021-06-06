@@ -27,6 +27,9 @@ func dateFrom(year: Int, month: Int, day: Int) -> Date {
 
 class BreviarModel : ObservableObject {
     private var dataSource: BreviarDataSource
+    @Published var dataSourceOptions: DataSourceOptions?
+    @Published var dataSourceOptionsNeeded: Bool
+    
     @Published var day: Day
     @Published var dayState: LoadingState<LiturgicalDay> = .idle
     @Published var selectedCelebration: String = ""
@@ -45,6 +48,24 @@ class BreviarModel : ObservableObject {
         self.day = Day(fromDate: now)
         self.month = Month(fromDate: now)
         self.textOptions = TextOptions()
+        
+        let dataSourceOptions = DataSourceOptions.savedOptions
+        self.dataSourceOptions = dataSourceOptions
+        self.dataSourceOptionsNeeded = dataSourceOptions == nil
+    }
+    
+    func setDataSourceOptions(_ options: DataSourceOptions) {
+        options.save()
+        self.dataSourceOptions = options
+        self.dataSourceOptionsNeeded = false
+        self.reload()
+    }
+    
+    func reload() {
+        self.dayState = .idle
+        self.monthState = .idle
+        self.settingsEntries = .idle
+        _ = self.load()
     }
     
     func load() -> BreviarModel {

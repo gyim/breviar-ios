@@ -10,17 +10,17 @@ import WebKit
 
 @main
 struct BreviarApp: App {
-    @ObservedObject var ds = DataSourceOptionsStore()
+    @ObservedObject var model = BreviarModel.cgiModel()
     
     var body: some Scene {
         WindowGroup {
-            MainScreen().environmentObject(BreviarModel.cgiModel())
+            MainScreen().environmentObject(model)
                 .onAppear() {
                     // Load an empty WKWebView so that it is faster to load on prayer screen
                     _ = WKWebView()
                 }
-                .fullScreenCover(isPresented: $ds.uninitialized, content: {
-                    DataSourceOptionsWizard().environmentObject(ds)
+                .fullScreenCover(isPresented: $model.dataSourceOptionsNeeded, content: {
+                    DataSourceOptionsWizard().environmentObject(model)
                 })
         }
     }

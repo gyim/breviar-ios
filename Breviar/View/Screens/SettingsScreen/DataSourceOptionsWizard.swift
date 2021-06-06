@@ -107,7 +107,7 @@ struct NetworkSettingsScreen: View {
     var language: String
     var calendar: String
     @State var dataSourceType: DataSourceType = .alwaysNetwork
-    @EnvironmentObject var optionStore: DataSourceOptionsStore
+    @EnvironmentObject var model: BreviarModel
     
     var body: some View {
         List {
@@ -123,7 +123,8 @@ struct NetworkSettingsScreen: View {
         .navigationTitle(S.networkSettings.forLanguageCode(language))
         .toolbar(content: {
             Button(S.done.forLanguageCode(language)) {
-                optionStore.dataSourceOptions = DataSourceOptions(dataSourceType: dataSourceType, language: Language(rawValue: language)!, calendar: calendar)
+                let options = DataSourceOptions(dataSourceType: dataSourceType, language: Language(rawValue: language)!, calendar: calendar)
+                model.setDataSourceOptions(options)
             }
         })
     }
@@ -160,7 +161,7 @@ struct NetworkSettingsScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             NetworkSettingsScreen(language: "hu", calendar: "hu")
-                .environmentObject(DataSourceOptionsStore())
+                .environmentObject(BreviarModel.testModel())
         }
     }
 }

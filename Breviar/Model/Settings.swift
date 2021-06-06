@@ -43,32 +43,6 @@ struct DataSourceOptions {
     }
 }
 
-class DataSourceOptionsStore: ObservableObject {
-    @Published var uninitialized: Bool
-    
-    @Published var dataSourceOptions: DataSourceOptions? {
-        didSet {
-            if let dso = dataSourceOptions {
-                dso.save()
-                uninitialized = false
-            } else {
-                uninitialized = true
-            }
-        }
-    }
-
-    init() {
-        if let dso = DataSourceOptions.savedOptions {
-            dataSourceOptions = dso
-            uninitialized = false
-        } else {
-            dataSourceOptions = nil
-            uninitialized = true
-        }
-    }
-    
-}
-
 // MARK: - Text options
 
 class TextOptions: ObservableObject {
