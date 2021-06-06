@@ -58,6 +58,7 @@ class BreviarModel : ObservableObject {
         options.save()
         self.dataSourceOptions = options
         self.dataSourceOptionsNeeded = false
+        currentLanguage = options.language
         self.reload()
     }
     

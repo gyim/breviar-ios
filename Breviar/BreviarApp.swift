@@ -16,6 +16,11 @@ struct BreviarApp: App {
         WindowGroup {
             MainScreen().environmentObject(model)
                 .onAppear() {
+                    // Set UI language
+                    if let options = model.dataSourceOptions {
+                        currentLanguage = options.language
+                    }
+                    
                     // Load an empty WKWebView so that it is faster to load on prayer screen
                     _ = WKWebView()
                 }
