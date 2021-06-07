@@ -8,6 +8,9 @@
 import Foundation
 
 class TestDataSource : BreviarDataSource {
+    func setOptions(_ options: DataSourceOptions) {
+    }
+    
     func getLiturgicalDay(day: Day, handler: (LiturgicalDay?, Error?) -> Void) {
         let day = LiturgicalDay(day: day, celebrations: [
             Celebration(id: "1", title: "Red celebration", subtitle: "This is a celebration with red color for day: \(day.date.description)", liturgicalColor: LiturgicalColor.red),

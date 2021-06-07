@@ -8,6 +8,7 @@
 import Foundation
 
 protocol BreviarDataSource {
+    func setOptions(_ options: DataSourceOptions)
     func getLiturgicalDay(day: Day, handler: @escaping (LiturgicalDay?, Error?) -> Void)
     func getLiturgicalMonth(month: Month, handler: @escaping (LiturgicalMonth?, Error?) -> Void)
     func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], handler: @escaping (String?, Error?) -> Void)
@@ -244,9 +245,15 @@ class SettingsParser : NSObject, XMLParserDelegate {
 
 class CGIDataSource : BreviarDataSource {
     var cgiClient: CGIClient
+    var options: DataSourceOptions? = nil
     
     init() {
         self.cgiClient = RemoteCGIClient()
+        self.options = DataSourceOptions.savedOptions
+    }
+    
+    func setOptions(_ options: DataSourceOptions) {
+        self.options = options
     }
     
     func getLiturgicalDay(day: Day, handler: @escaping (LiturgicalDay?, Error?) -> Void) {
@@ -255,8 +262,8 @@ class CGIDataSource : BreviarDataSource {
             "d": day.day.description,
             "m": day.month.description,
             "r": day.year.description,
-            "j": "hu",
-            "k": "hu",
+            "j": self.options?.language.rawValue ?? "",
+            "k": self.options?.calendar ?? "",
         ]
         
         self.cgiClient.makeRequest(args) { data, error in
@@ -284,8 +291,8 @@ class CGIDataSource : BreviarDataSource {
             "d": "*",
             "m": month.month.description,
             "r": month.year.description,
-            "j": "hu",
-            "k": "hu",
+            "j": self.options?.language.rawValue ?? "",
+            "k": self.options?.calendar ?? "",
         ]
 
         self.cgiClient.makeRequest(args) { data, error in
@@ -322,9 +329,8 @@ class CGIDataSource : BreviarDataSource {
             "o3": String(UserDefaults.standard.integer(forKey: "o3")),
             "o4": String(UserDefaults.standard.integer(forKey: "o4")),
             "o5": String(UserDefaults.standard.integer(forKey: "o5")),
-            "j": "hu",
-            "k": "hu",
-            "of2rm": "1", // TODO: put it into the o2 flag
+            "j": self.options?.language.rawValue ?? "",
+            "k": self.options?.calendar ?? "",
         ]
         for (k, v) in opts {
             args[k] = v
@@ -365,8 +371,8 @@ class CGIDataSource : BreviarDataSource {
     func getSettingsEntries(handler: @escaping ([SettingsEntry]?, Error?) -> Void) {
         let args = [
             "qt": "pxml",
-            "j": "hu",
-            "k": "hu",
+            "j": self.options?.language.rawValue ?? "",
+            "k": self.options?.calendar ?? "",
         ]
         
         self.cgiClient.makeRequest(args) { data, error in
