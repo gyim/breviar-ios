@@ -51,12 +51,14 @@ class TextOptions: ObservableObject {
     @Published var fontName = fontNames[0] {
         didSet {
             NotificationCenter.default.post(name: TextOptions.notificationName, object: self)
+            UserDefaults.standard.setValue(fontName.systemName, forKey: "textOptions.fontName")
         }
     }
     
     @Published var fontSize = 100.0 {
         didSet {
             NotificationCenter.default.post(name: TextOptions.notificationName, object: self)
+            UserDefaults.standard.setValue(fontSize, forKey: "textOptions.fontSize")
         }
     }
     
@@ -64,15 +66,30 @@ class TextOptions: ObservableObject {
         // SwiftUI workaround: there is no reliable way to set color scheme to .unspecified, so we use UIKit instead
         didSet {
             let window = UIApplication.shared.windows.first
-            
-            switch colorScheme {
-            case .automatic:
-                window?.overrideUserInterfaceStyle = .unspecified
-            case .light:
-                window?.overrideUserInterfaceStyle = .light
-            case .dark:
-                window?.overrideUserInterfaceStyle = .dark
+            window?.overrideUserInterfaceStyle = colorScheme.uikitColorScheme
+            UserDefaults.standard.setValue(colorScheme.rawValue, forKey: "colorScheme")
+        }
+    }
+    
+    init() {
+        let userDefaults = UserDefaults.standard
+        
+        if let fontSystemName = userDefaults.string(forKey: "textOptions.fontName") {
+            for fontName in fontNames {
+                if fontName.systemName == fontSystemName {
+                    self.fontName = fontName
+                }
             }
+        }
+        
+        let fontSize = userDefaults.double(forKey: "textOptions.fontSize")
+        if fontSize > 0 {
+            self.fontSize = fontSize
+        }
+        
+        if let colorSchemeName = userDefaults.string(forKey: "colorScheme"),
+           let colorScheme = ColorScheme(rawValue: colorSchemeName) {
+            self.colorScheme = colorScheme
         }
     }
 }

@@ -124,10 +124,10 @@ struct FontLabel : View {
     }
 }
 
-enum ColorScheme {
-    case automatic
-    case light
-    case dark
+enum ColorScheme: String {
+    case automatic = "automatic"
+    case light = "light"
+    case dark = "dark"
     
     var uikitColorScheme : UIUserInterfaceStyle {
         switch self {

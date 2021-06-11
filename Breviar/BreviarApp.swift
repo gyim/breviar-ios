@@ -21,6 +21,10 @@ struct BreviarApp: App {
                         currentLanguage = options.language
                     }
                     
+                    // Set color scheme
+                    let window = UIApplication.shared.windows.first
+                    window?.overrideUserInterfaceStyle = model.textOptions.colorScheme.uikitColorScheme
+                    
                     // Load an empty WKWebView so that it is faster to load on prayer screen
                     _ = WKWebView()
                 }
