@@ -9,10 +9,27 @@ import SwiftUI
 
 // MARK: - Data source options
 
+enum DataSourceWizardState {
+    case chooseLanguage
+    case chooseCalendar
+    case chooseDataSourceType
+}
+
 enum DataSourceType: String {
     case alwaysCGI = "alwaysCGI"
     case alwaysNetwork = "alwaysNetwork"
     case networkOnWifi = "networkOnWifi"
+    
+    var localizedDescription: String {
+        switch self {
+        case .alwaysCGI:
+            return S.never.S
+        case .alwaysNetwork:
+            return S.always.S
+        case .networkOnWifi:
+            return S.onlyOnWifi.S
+        }
+    }
 }
 
 struct DataSourceOptions {

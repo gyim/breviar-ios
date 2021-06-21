@@ -13,25 +13,70 @@ struct SettingsScreen : View {
     var body: some View {
         LoadingView(value: model.settingsEntries) { entries in
             List {
-                if let calendar = model.dataSourceOptions?.calendar,
-                   let calendarName = CalendarNames[calendar] {
-                    SettingsStringLabel(name: S.liturgicalCalendar.S, value: calendarName)
-                        .onTapGesture {
-                            model.dataSourceOptionsNeeded = true
-                        }
-                }
-                ForEach(entries) { entry in
-                    switch entry.type {
-                    case .flagSet:
-                        NavigationLink(entry.label, destination: SettingsFlagSetView(entry: entry))
-                    case .stringChoice:
-                        SettingsStringChoiceListEntry(entry: entry)
-                    }
-                }
+                GeneralSettingsView()
+                LiturgicalTextSettingsView(entries: entries)
             }
+            .listStyle(GroupedListStyle())
         }
         .navigationTitle(S.settings.S)
         .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+// MARK: - General settings
+
+struct GeneralSettingsView : View {
+    @EnvironmentObject var model: BreviarModel
+    
+    var body: some View {
+        Section(header: Text(S.generalSettings.S)) {
+            if let dataSourceOptions = model.dataSourceOptions {
+                // Language
+                if let languageName = LanguageNames[dataSourceOptions.language] {
+                    SettingsStringLabel(name: S.language.S, value: languageName)
+                        .onTapGesture {
+                            model.dataSourceOptionsWizardStage = .chooseLanguage
+                            model.dataSourceOptionsNeeded = true
+                        }
+                }
+                
+                // Liturgical calendar
+                if let calendarName = CalendarNames[dataSourceOptions.calendar] {
+                    SettingsStringLabel(name: S.liturgicalCalendar.S, value: calendarName)
+                        .onTapGesture {
+                            model.dataSourceOptionsWizardStage = .chooseCalendar
+                            model.dataSourceOptionsNeeded = true
+                        }
+                }
+                
+                // Download latest texts
+                SettingsStringLabel(name: S.downloadLatestTexts.S, value: dataSourceOptions.dataSourceType.localizedDescription)
+                    .onTapGesture {
+                        model.dataSourceOptionsWizardStage = .chooseDataSourceType
+                        model.dataSourceOptionsNeeded = true
+                    }
+            }
+        }
+    }
+}
+
+// MARK: - Liturgical text settings
+
+struct LiturgicalTextSettingsView : View {
+    @EnvironmentObject var model: BreviarModel
+    var entries: [SettingsEntry]
+    
+    var body: some View {
+        Section(header: Text(S.liturgicalTexts.S)) {
+            ForEach(entries) { entry in
+                switch entry.type {
+                case .flagSet:
+                    NavigationLink(entry.label, destination: SettingsFlagSetView(entry: entry))
+                case .stringChoice:
+                    SettingsStringChoiceListEntry(entry: entry)
+                }
+            }
+        }
     }
 }
 

@@ -40,6 +40,11 @@ struct S {
     static let light = LS(sk: "Svetelný", cz: "Světlý", hu: "Világos")
     static let dark = LS(sk: "Tmavý", cz: "Tmavý", hu: "Sötét")
     
+    // Settings
+    static let generalSettings = LS(sk: "Všeobecné nastavenia", cz: "Obecné nastavení", hu: "Általános beállítások")
+    static let liturgicalTexts = LS(sk: "Liturgické texty", cz: "Liturgické texty", hu: "Liturgikus szövegek")
+    static let language = LS(sk: "Jazyk", cz: "Jazyk", hu: "Nyelv")
+    
     // Setup Wizard
     static let liturgicalCalendar = LS(sk: "Liturgický kalendár", cz: "Liturgický kalendář", hu: "Liturgikus naptár")
     static let networkSettings = LS(sk: "Nastavenia siete", cz: "Nastavení sítě", hu: "Hálózati beállítások")
@@ -53,6 +58,12 @@ struct S {
     static let errParseError = LS(sk: "Chyba při analýze odpovědi serveru", cz: "Chyba pri analýze odpovede servera", hu: "Hiba történt a szerver válaszának feldolgozása során")
     static let errEmptyResponse = LS(sk: "Prázdna odpoveď servera", cz: "Prázdná odpověď serveru", hu: "Üres szerver válasz")
 }
+
+let LanguageNames: [Language: String] = [
+    .czech: "Čeština",
+    .hungarian: "Magyar",
+    .slovak: "Slovenčina",
+]
 
 let CalendarNames: [String: String] = [
     // Czech

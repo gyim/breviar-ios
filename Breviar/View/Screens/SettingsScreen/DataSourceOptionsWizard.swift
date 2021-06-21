@@ -8,9 +8,18 @@
 import SwiftUI
 
 struct DataSourceOptionsWizard: View {
+    @EnvironmentObject var model: BreviarModel
+    
     var body: some View {
         NavigationView {
-            LanguageChooserScreen()
+            switch model.dataSourceOptionsWizardStage {
+            case .chooseLanguage:
+                LanguageChooserScreen()
+            case .chooseCalendar:
+                CalendarChooserScreen(language: model.dataSourceOptions!.language.rawValue)
+            case .chooseDataSourceType:
+                NetworkSettingsScreen(language: model.dataSourceOptions!.language.rawValue, calendar: model.dataSourceOptions!.calendar)
+            }
         }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
