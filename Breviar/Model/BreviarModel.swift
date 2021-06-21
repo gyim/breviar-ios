@@ -95,7 +95,11 @@ class BreviarModel : ObservableObject {
     }
     
     static func testModel() -> BreviarModel {
+        #if DEBUG
         return BreviarModel(dataSource: TestDataSource()).load()
+        #else
+        return cgiModel()
+        #endif
     }
     
     func loadDay(_ day: Day) {
