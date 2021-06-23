@@ -7,6 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		701328362683D76200A991FE /* kalendar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 701328152683D76100A991FE /* kalendar.cpp */; };
+		701328372683D76200A991FE /* myhpage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7013281F2683D76100A991FE /* myhpage.cpp */; };
+		701328382683D76200A991FE /* cgiutils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 701328202683D76100A991FE /* cgiutils.cpp */; };
+		701328392683D76200A991FE /* myexpt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 701328212683D76100A991FE /* myexpt.cpp */; };
+		7013283A2683D76200A991FE /* mydefs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 701328232683D76100A991FE /* mydefs.cpp */; };
+		7013283B2683D76200A991FE /* myconf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 701328252683D76100A991FE /* myconf.cpp */; };
+		7013283C2683D76200A991FE /* liturgia.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 701328262683D76100A991FE /* liturgia.cpp */; };
+		7013283D2683D76200A991FE /* mylog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 701328282683D76100A991FE /* mylog.cpp */; };
+		7013283E2683D76200A991FE /* mystring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7013282B2683D76100A991FE /* mystring.cpp */; };
+		7013283F2683D76200A991FE /* citania.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7013282E2683D76100A991FE /* citania.cpp */; };
+		701328402683D76200A991FE /* breviar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7013282F2683D76100A991FE /* breviar.cpp */; };
+		701328412683D76200A991FE /* utf8-utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 701328312683D76200A991FE /* utf8-utils.cpp */; };
+		701328422683D76200A991FE /* mygetopt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 701328322683D76200A991FE /* mygetopt.cpp */; };
+		701328432683D76200A991FE /* dbzaltar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 701328342683D76200A991FE /* dbzaltar.cpp */; };
+		701328492683D89D00A991FE /* BRCGIQuery.mm in Sources */ = {isa = PBXBuildFile; fileRef = 701328482683D89D00A991FE /* BRCGIQuery.mm */; };
 		702E14F5260B239000E9D3AC /* TestDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702E14F4260B239000E9D3AC /* TestDataSource.swift */; };
 		70651592260FA36D0030DC73 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70651591260FA36C0030DC73 /* LoadingView.swift */; };
 		7074060E261B7BBC00F71D59 /* NavigationBarToggler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7074060D261B7BBC00F71D59 /* NavigationBarToggler.swift */; };
@@ -32,6 +47,42 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		701328142683D76100A991FE /* Breviar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Breviar-Bridging-Header.h"; sourceTree = "<group>"; };
+		701328152683D76100A991FE /* kalendar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kalendar.cpp; path = "breviar-cgi/source/kalendar.cpp"; sourceTree = SOURCE_ROOT; };
+		701328162683D76100A991FE /* mysystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mysystem.h; path = "breviar-cgi/source/mysystem.h"; sourceTree = SOURCE_ROOT; };
+		701328172683D76100A991FE /* dbzaltar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dbzaltar.h; path = "breviar-cgi/source/dbzaltar.h"; sourceTree = SOURCE_ROOT; };
+		701328182683D76100A991FE /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = "breviar-cgi/source/common.h"; sourceTree = SOURCE_ROOT; };
+		701328192683D76100A991FE /* mystring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mystring.h; path = "breviar-cgi/source/mystring.h"; sourceTree = SOURCE_ROOT; };
+		7013281A2683D76100A991FE /* bible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bible.h; path = "breviar-cgi/source/bible.h"; sourceTree = SOURCE_ROOT; };
+		7013281B2683D76100A991FE /* mylog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mylog.h; path = "breviar-cgi/source/mylog.h"; sourceTree = SOURCE_ROOT; };
+		7013281C2683D76100A991FE /* mybuild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mybuild.h; path = "breviar-cgi/source/mybuild.h"; sourceTree = SOURCE_ROOT; };
+		7013281D2683D76100A991FE /* myconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = myconf.h; path = "breviar-cgi/source/myconf.h"; sourceTree = SOURCE_ROOT; };
+		7013281E2683D76100A991FE /* mygetopt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mygetopt.h; path = "breviar-cgi/source/mygetopt.h"; sourceTree = SOURCE_ROOT; };
+		7013281F2683D76100A991FE /* myhpage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = myhpage.cpp; path = "breviar-cgi/source/myhpage.cpp"; sourceTree = SOURCE_ROOT; };
+		701328202683D76100A991FE /* cgiutils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cgiutils.cpp; path = "breviar-cgi/source/cgiutils.cpp"; sourceTree = SOURCE_ROOT; };
+		701328212683D76100A991FE /* myexpt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = myexpt.cpp; path = "breviar-cgi/source/myexpt.cpp"; sourceTree = SOURCE_ROOT; };
+		701328222683D76100A991FE /* myhpage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = myhpage.h; path = "breviar-cgi/source/myhpage.h"; sourceTree = SOURCE_ROOT; };
+		701328232683D76100A991FE /* mydefs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mydefs.cpp; path = "breviar-cgi/source/mydefs.cpp"; sourceTree = SOURCE_ROOT; };
+		701328242683D76100A991FE /* citania.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = citania.h; path = "breviar-cgi/source/citania.h"; sourceTree = SOURCE_ROOT; };
+		701328252683D76100A991FE /* myconf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = myconf.cpp; path = "breviar-cgi/source/myconf.cpp"; sourceTree = SOURCE_ROOT; };
+		701328262683D76100A991FE /* liturgia.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = liturgia.cpp; path = "breviar-cgi/source/liturgia.cpp"; sourceTree = SOURCE_ROOT; };
+		701328272683D76100A991FE /* liturgia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = liturgia.h; path = "breviar-cgi/source/liturgia.h"; sourceTree = SOURCE_ROOT; };
+		701328282683D76100A991FE /* mylog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mylog.cpp; path = "breviar-cgi/source/mylog.cpp"; sourceTree = SOURCE_ROOT; };
+		701328292683D76100A991FE /* mysysdef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mysysdef.h; path = "breviar-cgi/source/mysysdef.h"; sourceTree = SOURCE_ROOT; };
+		7013282A2683D76100A991FE /* utf8-utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "utf8-utils.h"; path = "breviar-cgi/source/utf8-utils.h"; sourceTree = SOURCE_ROOT; };
+		7013282B2683D76100A991FE /* mystring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mystring.cpp; path = "breviar-cgi/source/mystring.cpp"; sourceTree = SOURCE_ROOT; };
+		7013282C2683D76100A991FE /* myexpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = myexpt.h; path = "breviar-cgi/source/myexpt.h"; sourceTree = SOURCE_ROOT; };
+		7013282D2683D76100A991FE /* mydefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mydefs.h; path = "breviar-cgi/source/mydefs.h"; sourceTree = SOURCE_ROOT; };
+		7013282E2683D76100A991FE /* citania.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = citania.cpp; path = "breviar-cgi/source/citania.cpp"; sourceTree = SOURCE_ROOT; };
+		7013282F2683D76100A991FE /* breviar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = breviar.cpp; path = "breviar-cgi/source/breviar.cpp"; sourceTree = SOURCE_ROOT; };
+		701328302683D76200A991FE /* cgiutils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cgiutils.h; path = "breviar-cgi/source/cgiutils.h"; sourceTree = SOURCE_ROOT; };
+		701328312683D76200A991FE /* utf8-utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "utf8-utils.cpp"; path = "breviar-cgi/source/utf8-utils.cpp"; sourceTree = SOURCE_ROOT; };
+		701328322683D76200A991FE /* mygetopt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mygetopt.cpp; path = "breviar-cgi/source/mygetopt.cpp"; sourceTree = SOURCE_ROOT; };
+		701328332683D76200A991FE /* breviar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = breviar.h; path = "breviar-cgi/source/breviar.h"; sourceTree = SOURCE_ROOT; };
+		701328342683D76200A991FE /* dbzaltar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dbzaltar.cpp; path = "breviar-cgi/source/dbzaltar.cpp"; sourceTree = SOURCE_ROOT; };
+		701328352683D76200A991FE /* hodin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hodin.h; path = "breviar-cgi/source/hodin.h"; sourceTree = SOURCE_ROOT; };
+		701328472683D89D00A991FE /* BRCGIQuery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRCGIQuery.h; sourceTree = "<group>"; };
+		701328482683D89D00A991FE /* BRCGIQuery.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BRCGIQuery.mm; sourceTree = "<group>"; };
 		702E14F4260B239000E9D3AC /* TestDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataSource.swift; sourceTree = "<group>"; };
 		70651591260FA36C0030DC73 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7074060D261B7BBC00F71D59 /* NavigationBarToggler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarToggler.swift; sourceTree = "<group>"; };
@@ -69,6 +120,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		701328132683D6DC00A991FE /* cgi */ = {
+			isa = PBXGroup;
+			children = (
+				7013281A2683D76100A991FE /* bible.h */,
+				7013282F2683D76100A991FE /* breviar.cpp */,
+				701328332683D76200A991FE /* breviar.h */,
+				701328202683D76100A991FE /* cgiutils.cpp */,
+				701328302683D76200A991FE /* cgiutils.h */,
+				7013282E2683D76100A991FE /* citania.cpp */,
+				701328242683D76100A991FE /* citania.h */,
+				701328182683D76100A991FE /* common.h */,
+				701328342683D76200A991FE /* dbzaltar.cpp */,
+				701328172683D76100A991FE /* dbzaltar.h */,
+				701328352683D76200A991FE /* hodin.h */,
+				701328152683D76100A991FE /* kalendar.cpp */,
+				701328262683D76100A991FE /* liturgia.cpp */,
+				701328272683D76100A991FE /* liturgia.h */,
+				7013281C2683D76100A991FE /* mybuild.h */,
+				701328252683D76100A991FE /* myconf.cpp */,
+				7013281D2683D76100A991FE /* myconf.h */,
+				701328232683D76100A991FE /* mydefs.cpp */,
+				7013282D2683D76100A991FE /* mydefs.h */,
+				701328212683D76100A991FE /* myexpt.cpp */,
+				7013282C2683D76100A991FE /* myexpt.h */,
+				701328322683D76200A991FE /* mygetopt.cpp */,
+				7013281E2683D76100A991FE /* mygetopt.h */,
+				7013281F2683D76100A991FE /* myhpage.cpp */,
+				701328222683D76100A991FE /* myhpage.h */,
+				701328282683D76100A991FE /* mylog.cpp */,
+				7013281B2683D76100A991FE /* mylog.h */,
+				7013282B2683D76100A991FE /* mystring.cpp */,
+				701328192683D76100A991FE /* mystring.h */,
+				701328292683D76100A991FE /* mysysdef.h */,
+				701328162683D76100A991FE /* mysystem.h */,
+				701328312683D76200A991FE /* utf8-utils.cpp */,
+				7013282A2683D76100A991FE /* utf8-utils.h */,
+			);
+			name = cgi;
+			sourceTree = "<group>";
+		};
 		70A99DAD25B3965200B558CE = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +201,9 @@
 		70B1099F25F385180044F613 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				701328132683D6DC00A991FE /* cgi */,
+				701328472683D89D00A991FE /* BRCGIQuery.h */,
+				701328482683D89D00A991FE /* BRCGIQuery.mm */,
 				70B109A025F3853B0044F613 /* BreviarDataSource.swift */,
 				70A99DCA25B477CB00B558CE /* BreviarModel.swift */,
 				709A26B825F8DA8A0040AE84 /* Calendar.swift */,
@@ -117,6 +211,7 @@
 				70A39C7226489344008E0AE1 /* Language.swift */,
 				70BD024E262A3900007FB5C0 /* Settings.swift */,
 				70A39C7026488BA8008E0AE1 /* Strings.swift */,
+				701328142683D76100A991FE /* Breviar-Bridging-Header.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -189,6 +284,7 @@
 				70A99DB225B3965200B558CE /* Sources */,
 				70A99DB325B3965200B558CE /* Frameworks */,
 				70A99DB425B3965200B558CE /* Resources */,
+				7013284B2683DBB900A991FE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -210,6 +306,7 @@
 				TargetAttributes = {
 					70A99DB525B3965200B558CE = {
 						CreatedOnToolsVersion = 12.3;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -243,6 +340,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7013284B2683DBB900A991FE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Copy HTML sources\nrm -rf \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nmkdir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\n\nfor dir in include include_cz include_czop include_hu; do\ncp -r breviar-cgi/$dir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\ndone\n\n# Copy other files\ncp breviar-cgi/breviar.css breviar-cgi/breviar-normal-font.css breviar-cgi/breviar-invert-colors.css breviar-cgi/breviar-voice-output.css breviar-cgi/about.htm \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		70A99DB225B3965200B558CE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -251,23 +368,38 @@
 				70C561CA2659ADA2001AF7D3 /* DataSourceOptionsWizard.swift in Sources */,
 				7079D1BB25FAD1AB00EFF6B2 /* PrayerScreen.swift in Sources */,
 				7079D1BE25FAD8DD00EFF6B2 /* CGIClient.swift in Sources */,
+				701328432683D76200A991FE /* dbzaltar.cpp in Sources */,
 				709A26AD25F8287A0040AE84 /* Constants.swift in Sources */,
+				701328412683D76200A991FE /* utf8-utils.cpp in Sources */,
 				70651592260FA36D0030DC73 /* LoadingView.swift in Sources */,
 				7074060E261B7BBC00F71D59 /* NavigationBarToggler.swift in Sources */,
+				701328382683D76200A991FE /* cgiutils.cpp in Sources */,
 				70A39C7326489344008E0AE1 /* Language.swift in Sources */,
 				70BD424226106A8A00BB386E /* InlinePopoverPresenter.swift in Sources */,
+				701328402683D76200A991FE /* breviar.cpp in Sources */,
 				70BD424B26107D7400BB386E /* TextOptions.swift in Sources */,
+				701328372683D76200A991FE /* myhpage.cpp in Sources */,
+				7013283B2683D76200A991FE /* myconf.cpp in Sources */,
 				70C6A53525F412360043056D /* MainScreen.swift in Sources */,
+				7013283C2683D76200A991FE /* liturgia.cpp in Sources */,
 				70BD424E26107E1800BB386E /* Playback.swift in Sources */,
 				709A26B925F8DA8A0040AE84 /* Calendar.swift in Sources */,
 				70A39C7126488BA8008E0AE1 /* Strings.swift in Sources */,
 				70BD024F262A3900007FB5C0 /* Settings.swift in Sources */,
 				70BD0254262CDC48007FB5C0 /* SettingsScreen.swift in Sources */,
 				70B109A125F3853B0044F613 /* BreviarDataSource.swift in Sources */,
+				701328392683D76200A991FE /* myexpt.cpp in Sources */,
+				701328492683D89D00A991FE /* BRCGIQuery.mm in Sources */,
+				7013283E2683D76200A991FE /* mystring.cpp in Sources */,
+				7013283A2683D76200A991FE /* mydefs.cpp in Sources */,
+				7013283D2683D76200A991FE /* mylog.cpp in Sources */,
 				702E14F5260B239000E9D3AC /* TestDataSource.swift in Sources */,
+				7013283F2683D76200A991FE /* citania.cpp in Sources */,
 				70A99DCB25B477CB00B558CE /* BreviarModel.swift in Sources */,
+				701328422683D76200A991FE /* mygetopt.cpp in Sources */,
 				70A99DBA25B3965300B558CE /* BreviarApp.swift in Sources */,
 				709A26B125F82C250040AE84 /* DatePicker.swift in Sources */,
+				701328362683D76200A991FE /* kalendar.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +449,9 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
+					MODEL_SELECTED_IN_MAKEFILE,
+					MODEL_linux_strexport,
+					SKIP_MAIN,
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -374,6 +509,11 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MODEL_SELECTED_IN_MAKEFILE,
+					MODEL_linux_strexport,
+					SKIP_MAIN,
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -395,6 +535,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Breviar/Preview Content\"";
 				DEVELOPMENT_TEAM = 3K775ZSA59;
@@ -407,6 +548,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = sk.breviar.Breviar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Breviar/Model/Breviar-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -417,6 +560,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Breviar/Preview Content\"";
 				DEVELOPMENT_TEAM = 3K775ZSA59;
@@ -429,6 +573,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = sk.breviar.Breviar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Breviar/Model/Breviar-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

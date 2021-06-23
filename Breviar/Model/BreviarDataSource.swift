@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Network
 
 protocol BreviarDataSource {
     func setOptions(_ options: DataSourceOptions)
@@ -244,12 +245,37 @@ class SettingsParser : NSObject, XMLParserDelegate {
 }
 
 class CGIDataSource : BreviarDataSource {
-    var cgiClient: CGIClient
+    var remoteCGIClient: CGIClient = RemoteCGIClient()
+    var localCGIClient: CGIClient = LocalCGIClient()
     var options: DataSourceOptions? = nil
+    var pathMonitor: NWPathMonitor
+    var onWifi: Bool = false
     
     init() {
-        self.cgiClient = RemoteCGIClient()
         self.options = DataSourceOptions.savedOptions
+
+        self.pathMonitor = NWPathMonitor()
+        self.pathMonitor.start(queue: .global(qos: .background))
+        self.pathMonitor.pathUpdateHandler = { path in
+            self.onWifi = (path.status == .satisfied && !path.usesInterfaceType(.cellular));
+        }
+    }
+    
+    deinit {
+        self.pathMonitor.cancel()
+    }
+    
+    var cgiClient: CGIClient {
+        switch self.options?.dataSourceType {
+        case .alwaysCGI:
+            return self.localCGIClient
+        case .alwaysNetwork:
+            return self.remoteCGIClient
+        case .networkOnWifi:
+            return self.onWifi ? self.remoteCGIClient : self.localCGIClient
+        default:
+            return self.localCGIClient
+        }
     }
     
     func setOptions(_ options: DataSourceOptions) {

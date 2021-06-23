@@ -24,7 +24,7 @@ class CGIClient {
         
         for item in request {
             if req == "" {
-                req += "?\(item.key)=\(item.value)"
+                req += "\(item.key)=\(item.value)"
             } else {
                 req += "&\(item.key)=\(item.value)"
             }
@@ -37,7 +37,7 @@ class CGIClient {
 class RemoteCGIClient : CGIClient {
     override func makeRequest(_ request: [String : String], handler: @escaping (Data?, Error?) -> Void) {
         // Generate URL
-        let urlString = "https://lh.kbs.sk/cgi-bin/l.cgi" + getRequestString(request)
+        let urlString = "https://lh.kbs.sk/cgi-bin/l.cgi?" + getRequestString(request)
         
         guard let urlcomps = URLComponents(string: urlString) else {
             print("Cannot parse URL: \(urlString)")
@@ -46,7 +46,7 @@ class RemoteCGIClient : CGIClient {
         }
 
         // Make HTTP query
-        print("Making CGI query: \(urlString)")
+        print("Making remote CGI query: \(urlString)")
         
         let task = URLSession.shared.dataTask(with: urlcomps.url!) { (data, response, error) in
             if error != nil {
@@ -68,5 +68,19 @@ class RemoteCGIClient : CGIClient {
             }
         }
         task.resume()
+    }
+}
+
+class LocalCGIClient : CGIClient {
+    var queue = DispatchQueue(label: "breviar-cgi")
+    
+    override func makeRequest(_ request: [String : String], handler: @escaping (Data?, Error?) -> Void) {
+        let requestString = getRequestString(request)
+        print("Making local query: \(requestString)")
+        
+        self.queue.async {
+            let result = BRCGIQuery.query(withArgs: requestString)
+            handler(result, nil)
+        }
     }
 }
