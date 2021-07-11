@@ -35,6 +35,15 @@ class CGIClient {
 }
 
 class RemoteCGIClient : CGIClient {
+    var sessionConfig: URLSessionConfiguration
+    var session: URLSession
+
+    override init() {
+        self.sessionConfig = URLSessionConfiguration.ephemeral
+        self.sessionConfig.timeoutIntervalForResource = 5.0
+        self.session = URLSession(configuration: self.sessionConfig)
+    }
+    
     override func makeRequest(_ request: [String : String], handler: @escaping (Data?, Error?) -> Void) {
         // Generate URL
         let urlString = "https://lh.kbs.sk/cgi-bin/l.cgi?" + getRequestString(request)
@@ -48,7 +57,7 @@ class RemoteCGIClient : CGIClient {
         // Make HTTP query
         print("Making remote CGI query: \(urlString)")
         
-        let task = URLSession.shared.dataTask(with: urlcomps.url!) { (data, response, error) in
+        let task = self.session.dataTask(with: urlcomps.url!) { (data, response, error) in
             if error != nil {
                 handler(nil, CGIError.networkError)
                 return
