@@ -282,13 +282,21 @@ class CGIDataSource : BreviarDataSource {
         self.options = options
     }
     
+    var cgiLanguageCode: String {
+        if self.options?.calendar == "czop" {
+            return "czop"
+        } else {
+            return self.options?.language.rawValue ?? ""
+        }
+    }
+    
     func getLiturgicalDay(day: Day, handler: @escaping (LiturgicalDay?, Error?) -> Void) {
         let args = [
             "qt": "pxml",
             "d": day.day.description,
             "m": day.month.description,
             "r": day.year.description,
-            "j": self.options?.language.rawValue ?? "",
+            "j": self.cgiLanguageCode,
             "k": self.options?.calendar ?? "",
         ]
         
@@ -317,7 +325,7 @@ class CGIDataSource : BreviarDataSource {
             "d": "*",
             "m": month.month.description,
             "r": month.year.description,
-            "j": self.options?.language.rawValue ?? "",
+            "j": self.cgiLanguageCode,
             "k": self.options?.calendar ?? "",
         ]
 
@@ -355,7 +363,7 @@ class CGIDataSource : BreviarDataSource {
             "o3": String(UserDefaults.standard.integer(forKey: "o3")),
             "o4": String(UserDefaults.standard.integer(forKey: "o4")),
             "o5": String(UserDefaults.standard.integer(forKey: "o5")),
-            "j": self.options?.language.rawValue ?? "",
+            "j": self.cgiLanguageCode,
             "k": self.options?.calendar ?? "",
         ]
         for (k, v) in opts {
@@ -397,7 +405,7 @@ class CGIDataSource : BreviarDataSource {
     func getSettingsEntries(handler: @escaping ([SettingsEntry]?, Error?) -> Void) {
         let args = [
             "qt": "pxml",
-            "j": self.options?.language.rawValue ?? "",
+            "j": self.cgiLanguageCode,
             "k": self.options?.calendar ?? "",
         ]
         

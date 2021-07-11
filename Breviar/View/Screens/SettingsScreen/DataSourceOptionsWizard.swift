@@ -57,7 +57,7 @@ struct CalendarChooserScreen: View {
         case "cz":
             List {
                 CalendarLink(language: "cz", calendar: "cz")
-                CalendarLink(language: "czop", calendar: "czop")
+                CalendarLink(language: "cz", calendar: "czop")
                 CalendarLink(language: "cz", calendar: "opraem")
                 CalendarLink(language: "cz", calendar: "ofmcap")
                 CalendarLink(language: "cz", calendar: "czsdb")

@@ -13,7 +13,7 @@ enum Language : String {
     case czech = "cz"
     case hungarian = "hu"
     case slovak = "sk"
-    
+
     var locale: Locale {
         switch self {
         case .czech:
