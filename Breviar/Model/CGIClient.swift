@@ -41,7 +41,21 @@ class RemoteCGIClient : CGIClient {
     override init() {
         self.sessionConfig = URLSessionConfiguration.ephemeral
         self.sessionConfig.timeoutIntervalForResource = 5.0
+        self.sessionConfig.waitsForConnectivity = false
+        self.sessionConfig.allowsCellularAccess = true
         self.session = URLSession(configuration: self.sessionConfig)
+    }
+    
+    var allowsCellularAccess: Bool {
+        get {
+            return self.sessionConfig.allowsCellularAccess
+        }
+        set(newValue) {
+            if self.sessionConfig.allowsCellularAccess != newValue {
+                self.sessionConfig.allowsCellularAccess = newValue
+                self.session = URLSession(configuration: self.sessionConfig)
+            }
+        }
     }
     
     override func makeRequest(_ request: [String : String], handler: @escaping (Data?, Error?) -> Void) {

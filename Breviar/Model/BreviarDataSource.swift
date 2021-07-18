@@ -245,7 +245,7 @@ class SettingsParser : NSObject, XMLParserDelegate {
 }
 
 class CGIDataSource : BreviarDataSource {
-    var remoteCGIClient: CGIClient = RemoteCGIClient()
+    var remoteCGIClient: RemoteCGIClient = RemoteCGIClient()
     var localCGIClient: CGIClient = LocalCGIClient()
     var options: DataSourceOptions? = nil
     var pathMonitor: NWPathMonitor
@@ -253,6 +253,7 @@ class CGIDataSource : BreviarDataSource {
     
     init() {
         self.options = DataSourceOptions.savedOptions
+        self.remoteCGIClient.allowsCellularAccess = (options?.dataSourceType == .alwaysNetwork)
 
         self.pathMonitor = NWPathMonitor()
         self.pathMonitor.start(queue: .global(qos: .background))
@@ -280,6 +281,7 @@ class CGIDataSource : BreviarDataSource {
     
     func setOptions(_ options: DataSourceOptions) {
         self.options = options
+        self.remoteCGIClient.allowsCellularAccess = (options.dataSourceType == .alwaysNetwork)
     }
     
     var cgiLanguageCode: String {
