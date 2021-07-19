@@ -17,18 +17,45 @@ struct LoadingView<T, Content: View> : View {
             case .idle, .loading:
                 ProgressView().progressViewStyle(CircularProgressViewStyle())
                 Text(S.loading.S).padding()
-            case .failed(let error):
-                Image(systemName: "exclamationmark.triangle")
-                    .resizable()
-                    .frame(width: 50, height: 50, alignment: .center)
-                    .foregroundColor(.red)
-                Text(error.localizedDescription)
-                    .multilineTextAlignment(.center)
-                    .padding()
+            case .failed(let error, let retry):
+                VStack {
+                    Image(systemName: "exclamationmark.triangle")
+                        .resizable()
+                        .frame(width: 80, height: 80, alignment: .center)
+                        .foregroundColor(.red)
+                    Text(error.localizedDescription)
+                        .font(.headline)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                    HStack {
+                        RetryButton(label: S.retryFromServer.S, action: retry, forceLocal: false)
+                        RetryButton(label: S.retryLocally.S, action: retry, forceLocal: true)
+                    }
+                }.padding()
             case .loaded(let body):
                 loadedBody(body)
             }
         }
+    }
+}
+
+struct RetryButton: View {
+    var label: String
+    var action: (_ forceLocal: Bool) -> Void
+    var forceLocal: Bool
+
+    var body: some View {
+        Button(action: {
+            action(forceLocal)
+        }, label: {
+            Text(label)
+                .multilineTextAlignment(.center)
+                .foregroundColor(.white)
+        })
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background(Color.blue)
+        .cornerRadius(10.0)
     }
 }
 
@@ -38,8 +65,8 @@ struct LoadingView_Previews: PreviewProvider {
             LoadingView(value: .loading) {(s: String) in Text(s) }
                 .previewLayout(.fixed(width: 300.0, height: 200.0))
 
-            LoadingView(value: .failed(DataSourceError.emptyResponse)) {(s: String) in Text(s) }
-                .previewLayout(.fixed(width: 300.0, height: 200.0))
+            LoadingView(value: .failed(DataSourceError.emptyResponse, {forceLocal in print("Retry: \(forceLocal)")})) {(s: String) in Text(s) }
+                .previewLayout(.fixed(width: 300.0, height: 400.0))
                 .preferredColorScheme(.dark)
 
             LoadingView(value: .loaded("This is the content.")) {(s: String) in Text(s) }

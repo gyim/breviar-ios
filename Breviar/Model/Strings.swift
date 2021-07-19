@@ -8,8 +8,10 @@
 import Foundation
 
 struct S {
-    // Common strings
-    static let loading = LS(sk: "", cz: "", hu: "Betöltés...")
+    // Loading screen
+    static let loading = LS(sk: "Načítava", cz: "Načítání", hu: "Betöltés...")
+    static let retryFromServer = LS(sk: "Skúste to znova zo servera", cz: "Opakujte akci ze serveru", hu: "Újrapróbálás szerverről")
+    static let retryLocally = LS(sk: "Skúste to miestne", cz: "Zkuste to znovu místně", hu: "Újrapróbálás helyben")
     
     // Prayers
     static let invitatory = LS(sk: "Invitatórium", cz: "Uvedení do první modlitby dne", hu: "Imádságra hívás")

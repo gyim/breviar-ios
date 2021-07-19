@@ -108,6 +108,11 @@ class BreviarModel : ObservableObject {
         self.selectedCelebration = ""
         self.prayerText = .idle
         
+        let retry: (Bool) -> Void = { forceLocal in
+            self.dayState = .loading
+            self.loadDay(day, forceLocal: forceLocal)
+        }
+        
         self.dataSource.getLiturgicalDay(day: day, forceLocal: forceLocal) { (liturgicalDay, error) in
             if error == nil {
                 if let liturgicalDay = liturgicalDay {
@@ -117,7 +122,7 @@ class BreviarModel : ObservableObject {
                     }
                 }
             } else {
-                self.dayState = .failed(error!)
+                self.dayState = .failed(error!, retry)
             }
         }
     }
@@ -125,14 +130,19 @@ class BreviarModel : ObservableObject {
     func loadMonth(_ month: Month, forceLocal: Bool = false) {
         self.month = month
         self.monthState = .loading
-        
+
+        let retry: (Bool) -> Void = { forceLocal in
+            self.monthState = .loading
+            self.loadMonth(month, forceLocal: forceLocal)
+        }
+
         self.dataSource.getLiturgicalMonth(month: month, forceLocal: forceLocal) { (liturgicalMonth, error) in
             if error == nil {
                 if let liturgicalMonth = liturgicalMonth {
                     self.monthState = .loaded(liturgicalMonth)
                 }
             } else {
-                self.monthState = .failed(error!)
+                self.monthState = .failed(error!, retry)
             }
         }
     }
@@ -176,12 +186,17 @@ class BreviarModel : ObservableObject {
     }
     
     func loadPrayer(_ prayer: Prayer, opts: [String: String] = [:], forceLocal: Bool = false) {
+        let retry: (Bool) -> Void = { forceLocal in
+            self.prayerText = .loading
+            self.loadPrayer(prayer, opts: opts, forceLocal: forceLocal)
+        }
+
         if let (day, celebration) = self.getCurrentCelebration() {
             self.dataSource.getPrayerText(day: day, celebration: celebration, prayerType: prayer.type, opts: opts, forceLocal: forceLocal) { (text, error) in
                 if error == nil {
                     self.prayerText = .loaded(text!)
                 } else {
-                    self.prayerText = .failed(error!)
+                    self.prayerText = .failed(error!, retry)
                 }
             }
         }
@@ -217,6 +232,11 @@ class BreviarModel : ObservableObject {
     }
     
     func loadSettingsEntries(forceLocal: Bool = false) {
+        let retry: (Bool) -> Void = { forceLocal in
+            self.settingsEntries = .loading
+            self.loadSettingsEntries(forceLocal: forceLocal)
+        }
+
         self.dataSource.getSettingsEntries(forceLocal: forceLocal) { (entries, error) in
             if error == nil {
                 // Save entries to UserDefaults
@@ -226,7 +246,7 @@ class BreviarModel : ObservableObject {
                 
                 self.settingsEntries = .loaded(entries!)
             } else {
-                self.settingsEntries = .failed(error!)
+                self.settingsEntries = .failed(error!, retry)
             }
         }
     }
@@ -250,6 +270,6 @@ class BreviarModel : ObservableObject {
 enum LoadingState<Value> {
     case idle
     case loading
-    case failed(Error)
+    case failed(Error, (_ forceLocal: Bool) -> Void)
     case loaded(Value)
 }
