@@ -17,11 +17,11 @@ protocol BreviarDataSource {
     func getSettingsEntries(forceLocal: Bool, handler: @escaping ([SettingsEntry]?, Error?) -> Void)
 }
 
-enum DataSourceError: Error {
+enum DataSourceError: LocalizedError {
     case parseError
     case emptyResponse
     
-    var localizedDescription : String {
+    public var errorDescription: String? {
         switch self {
         case .parseError:
             return S.errParseError.S

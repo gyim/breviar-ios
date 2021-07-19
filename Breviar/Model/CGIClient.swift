@@ -7,11 +7,24 @@
 
 import Foundation
 
-enum CGIError : String, Error {
-    case networkError = "Network error"
-    case serverError = "Remote server returned an invalid response"
-    case emptyResponse = "Empty response from server"
-    case internalError = "Internal error"
+enum CGIError : LocalizedError {
+    case networkError
+    case serverError
+    case emptyResponse
+    case internalError
+    
+    public var errorDescription: String? {
+        switch self {
+        case .networkError:
+            return S.errNetworkError.S
+        case .serverError:
+            return S.errServerError.S
+        case .emptyResponse:
+            return S.errEmptyResponse.S
+        case .internalError:
+            return S.errInternalError.S
+        }
+    }
 }
 
 class CGIClient {
