@@ -11,7 +11,7 @@ class TestDataSource : BreviarDataSource {
     func setOptions(_ options: DataSourceOptions) {
     }
     
-    func getLiturgicalDay(day: Day, handler: (LiturgicalDay?, Error?) -> Void) {
+    func getLiturgicalDay(day: Day, forceLocal: Bool, handler: (LiturgicalDay?, Error?) -> Void) {
         let day = LiturgicalDay(day: day, celebrations: [
             Celebration(id: "1", title: "Red celebration", subtitle: "This is a celebration with red color for day: \(day.date.description)", liturgicalColor: LiturgicalColor.red),
             Celebration(id: "2", title: "White celebration", subtitle: "This is a celebration with white color", liturgicalColor: LiturgicalColor.white),
@@ -26,7 +26,7 @@ class TestDataSource : BreviarDataSource {
         handler(day, nil)
     }
     
-    func getLiturgicalMonth(month: Month, handler: @escaping (LiturgicalMonth?, Error?) -> Void) {
+    func getLiturgicalMonth(month: Month, forceLocal: Bool, handler: @escaping (LiturgicalMonth?, Error?) -> Void) {
         var days : [LiturgicalDay] = []
         for d in 1...10 {
             var day = LiturgicalDay(day: Day(year: month.year, month: month.month, day: d), celebrations: [])
@@ -44,7 +44,7 @@ class TestDataSource : BreviarDataSource {
         handler(LiturgicalMonth(month: month, days: days), nil)
     }
     
-    func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], handler: @escaping (String?, Error?) -> Void) {
+    func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], forceLocal: Bool, handler: @escaping (String?, Error?) -> Void) {
         handler("<b>Hello world</b>", nil)
     }
     
@@ -52,7 +52,7 @@ class TestDataSource : BreviarDataSource {
         return .unknownLink
     }
     
-    func getSettingsEntries(handler: @escaping ([SettingsEntry]?, Error?) -> Void) {
+    func getSettingsEntries(forceLocal: Bool, handler: @escaping ([SettingsEntry]?, Error?) -> Void) {
         let entries: [SettingsEntry] = [
             SettingsEntry(name: "o0", label: "Flag Set", type: .flagSet, defaultValue: 0, options: [
                 SettingsEntryOption(label: "First flag", value: 1),

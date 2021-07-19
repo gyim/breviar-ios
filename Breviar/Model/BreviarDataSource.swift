@@ -10,11 +10,11 @@ import Network
 
 protocol BreviarDataSource {
     func setOptions(_ options: DataSourceOptions)
-    func getLiturgicalDay(day: Day, handler: @escaping (LiturgicalDay?, Error?) -> Void)
-    func getLiturgicalMonth(month: Month, handler: @escaping (LiturgicalMonth?, Error?) -> Void)
-    func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], handler: @escaping (String?, Error?) -> Void)
+    func getLiturgicalDay(day: Day, forceLocal: Bool, handler: @escaping (LiturgicalDay?, Error?) -> Void)
+    func getLiturgicalMonth(month: Month, forceLocal: Bool, handler: @escaping (LiturgicalMonth?, Error?) -> Void)
+    func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], forceLocal: Bool, handler: @escaping (String?, Error?) -> Void)
     func parsePrayerLink(url: URL) -> BreviarLink
-    func getSettingsEntries(handler: @escaping ([SettingsEntry]?, Error?) -> Void)
+    func getSettingsEntries(forceLocal: Bool, handler: @escaping ([SettingsEntry]?, Error?) -> Void)
 }
 
 enum DataSourceError: Error {
@@ -266,7 +266,11 @@ class CGIDataSource : BreviarDataSource {
         self.pathMonitor.cancel()
     }
     
-    var cgiClient: CGIClient {
+    func cgiClient(forceLocal: Bool) -> CGIClient {
+        if forceLocal {
+            return self.localCGIClient
+        }
+        
         switch self.options?.dataSourceType {
         case .alwaysCGI:
             return self.localCGIClient
@@ -292,7 +296,7 @@ class CGIDataSource : BreviarDataSource {
         }
     }
     
-    func getLiturgicalDay(day: Day, handler: @escaping (LiturgicalDay?, Error?) -> Void) {
+    func getLiturgicalDay(day: Day, forceLocal: Bool, handler: @escaping (LiturgicalDay?, Error?) -> Void) {
         let args = [
             "qt": "pxml",
             "d": day.day.description,
@@ -302,7 +306,7 @@ class CGIDataSource : BreviarDataSource {
             "k": self.options?.calendar ?? "",
         ]
         
-        self.cgiClient.makeRequest(args) { data, error in
+        self.cgiClient(forceLocal: forceLocal).makeRequest(args) { data, error in
             if let data = data {
                 let parser = LiturgicalDayParser(data: data)
                 let (days, error) = parser.parse()
@@ -321,7 +325,7 @@ class CGIDataSource : BreviarDataSource {
         }
     }
     
-    func getLiturgicalMonth(month: Month, handler: @escaping (LiturgicalMonth?, Error?) -> Void) {
+    func getLiturgicalMonth(month: Month, forceLocal: Bool, handler: @escaping (LiturgicalMonth?, Error?) -> Void) {
         let args = [
             "qt": "pxml",
             "d": "*",
@@ -331,7 +335,7 @@ class CGIDataSource : BreviarDataSource {
             "k": self.options?.calendar ?? "",
         ]
 
-        self.cgiClient.makeRequest(args) { data, error in
+        self.cgiClient(forceLocal: forceLocal).makeRequest(args) { data, error in
             if let data = data {
                 let parser = LiturgicalDayParser(data: data)
                 let (days, error) = parser.parse()
@@ -350,7 +354,7 @@ class CGIDataSource : BreviarDataSource {
         }
     }
     
-    func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], handler: @escaping (String?, Error?) -> Void) {
+    func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], forceLocal: Bool, handler: @escaping (String?, Error?) -> Void) {
         let d = day.day
         var args = [
             "qt": "pdt",
@@ -372,7 +376,7 @@ class CGIDataSource : BreviarDataSource {
             args[k] = v
         }
         
-        self.cgiClient.makeRequest(args) { data, error in
+        self.cgiClient(forceLocal: forceLocal).makeRequest(args) { data, error in
             if let data = data {
                 let response = String(data: data, encoding: .utf8)
                 DispatchQueue.main.async {
@@ -404,14 +408,14 @@ class CGIDataSource : BreviarDataSource {
         return .prayerTextLink(opts)
     }
     
-    func getSettingsEntries(handler: @escaping ([SettingsEntry]?, Error?) -> Void) {
+    func getSettingsEntries(forceLocal: Bool, handler: @escaping ([SettingsEntry]?, Error?) -> Void) {
         let args = [
             "qt": "pxml",
             "j": self.cgiLanguageCode,
             "k": self.options?.calendar ?? "",
         ]
         
-        self.cgiClient.makeRequest(args) { data, error in
+        self.cgiClient(forceLocal: forceLocal).makeRequest(args) { data, error in
             if let data = data {
                 let parser = SettingsParser(data: data)
                 let (entries, error) = parser.parse()

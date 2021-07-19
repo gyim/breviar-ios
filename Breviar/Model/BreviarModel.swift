@@ -102,13 +102,13 @@ class BreviarModel : ObservableObject {
         #endif
     }
     
-    func loadDay(_ day: Day) {
+    func loadDay(_ day: Day, forceLocal: Bool = false) {
         self.day = day
         self.dayState = .loading
         self.selectedCelebration = ""
         self.prayerText = .idle
         
-        self.dataSource.getLiturgicalDay(day: day) { (liturgicalDay, error) in
+        self.dataSource.getLiturgicalDay(day: day, forceLocal: forceLocal) { (liturgicalDay, error) in
             if error == nil {
                 if let liturgicalDay = liturgicalDay {
                     self.dayState = .loaded(liturgicalDay)
@@ -122,11 +122,11 @@ class BreviarModel : ObservableObject {
         }
     }
     
-    func loadMonth(_ month: Month) {
+    func loadMonth(_ month: Month, forceLocal: Bool = false) {
         self.month = month
         self.monthState = .loading
         
-        self.dataSource.getLiturgicalMonth(month: month) { (liturgicalMonth, error) in
+        self.dataSource.getLiturgicalMonth(month: month, forceLocal: forceLocal) { (liturgicalMonth, error) in
             if error == nil {
                 if let liturgicalMonth = liturgicalMonth {
                     self.monthState = .loaded(liturgicalMonth)
@@ -175,9 +175,9 @@ class BreviarModel : ObservableObject {
         }
     }
     
-    func loadPrayer(_ prayer: Prayer, opts: [String: String] = [:]) {
+    func loadPrayer(_ prayer: Prayer, opts: [String: String] = [:], forceLocal: Bool = false) {
         if let (day, celebration) = self.getCurrentCelebration() {
-            self.dataSource.getPrayerText(day: day, celebration: celebration, prayerType: prayer.type, opts: opts) { (text, error) in
+            self.dataSource.getPrayerText(day: day, celebration: celebration, prayerType: prayer.type, opts: opts, forceLocal: forceLocal) { (text, error) in
                 if error == nil {
                     self.prayerText = .loaded(text!)
                 } else {
@@ -216,8 +216,8 @@ class BreviarModel : ObservableObject {
         self.prayerText = .idle
     }
     
-    func loadSettingsEntries() {
-        self.dataSource.getSettingsEntries { (entries, error) in
+    func loadSettingsEntries(forceLocal: Bool = false) {
+        self.dataSource.getSettingsEntries(forceLocal: forceLocal) { (entries, error) in
             if error == nil {
                 // Save entries to UserDefaults
                 for entry in entries! {
