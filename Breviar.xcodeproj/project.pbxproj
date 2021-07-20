@@ -546,7 +546,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = sk.breviar.Breviar;
+				PRODUCT_BUNDLE_IDENTIFIER = "sk.breviar.breviar-sk";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Breviar/Model/Breviar-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -571,7 +571,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = sk.breviar.Breviar;
+				PRODUCT_BUNDLE_IDENTIFIER = "sk.breviar.breviar-sk";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Breviar/Model/Breviar-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
