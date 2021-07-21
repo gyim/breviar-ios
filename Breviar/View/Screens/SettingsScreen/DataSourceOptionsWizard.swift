@@ -31,7 +31,7 @@ struct LanguageChooserScreen: View {
             LanguageLink(name: "🇭🇺 Magyar", code: "hu")
             LanguageLink(name: "🇸🇰 Slovenčina", code: "sk")
         }
-        .navigationTitle("Jazyk / Nyelv")
+        .navigationTitle("Choose Language")
     }
 }
 
