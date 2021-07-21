@@ -37,7 +37,7 @@ struct TextOptionsView : View {
                 Divider()
                 ColorSchemeChooserView(colorScheme: $textOptions.colorScheme)
             }
-            .frame(width: 300, height: 230, alignment: .center)
+            .frame(width: 300, height: 210, alignment: .center)
             .transition(fontChooserTransition)
         }
     }
@@ -203,7 +203,7 @@ struct ColorSchemeButton : View {
             text = Text(S.dark.S)
         }
         
-        return text
+        return text.font(.system(size: 14.0))
     }
 }
 
@@ -220,14 +220,14 @@ struct TextOptions_Previews: PreviewProvider {
         Group {
             TextOptionsViewContainer()
                 .preferredColorScheme(.light)
-                .previewLayout(.fixed(width: 300.0, height: 230.0))
+                .previewLayout(.fixed(width: 300.0, height: 210.0))
             
             FontChooserList(shown:.constant(true), selectedFont: .constant(fontNames[0]))
-                .previewLayout(.fixed(width: 300.0, height: 230.0))
+                .previewLayout(.fixed(width: 300.0, height: 210.0))
             
             TextOptionsViewContainer()
                 .preferredColorScheme(.dark)
-                .previewLayout(.fixed(width: 300.0, height: 230.0))
+                .previewLayout(.fixed(width: 300.0, height: 210.0))
         }
     }
 }
