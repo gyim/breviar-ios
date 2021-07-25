@@ -34,13 +34,21 @@ struct DatePicker: View {
                         Button(
                             action: {
                                 withAnimation {
+                                    model.loadMonth(Month(fromDate: Date()))
+                                    model.loadDay(Day(fromDate: Date()))
+                                    onDaySelected()
+                                }
+                            },
+                            label: {Text(S.today.S)})
+                            .padding()
+                        Button(
+                            action: {
+                                withAnimation {
                                     model.loadMonth(model.month.monthByAdding(months: -1))
                                 }
                             },
                             label: {Label(S.previousMonth.S ,systemImage: "chevron.left")})
-                            .padding()
-                        Spacer()
-                            .frame(width: 6.0)
+                        Spacer(minLength: 20.0)
                         Button(
                             action: {
                                 withAnimation {

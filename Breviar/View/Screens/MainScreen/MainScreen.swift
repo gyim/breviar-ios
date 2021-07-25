@@ -47,6 +47,16 @@ struct MainScreen: View {
                 )
                 .toolbar {
                     HStack{
+                        if model.day != Day(fromDate: Date()) {
+                            Button(
+                                action: {
+                                    withAnimation {
+                                        model.loadDay(Day(fromDate: Date()))
+                                    }
+                                },
+                                label: {Text(S.today.S)})
+                                .padding()
+                        }
                         Button(
                             action: {
                                 withAnimation {
@@ -54,9 +64,7 @@ struct MainScreen: View {
                                 }
                             },
                             label: {Label(S.previousDay.S,systemImage: "chevron.left")})
-                            .padding()
-                        Spacer()
-                            .frame(width: 6.0)
+                        Spacer(minLength: 20.0)
                         Button(
                             action: {
                                 withAnimation {
