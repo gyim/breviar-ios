@@ -70,6 +70,7 @@ struct DatePickerContent: View {
         LoadingView(value: model.monthState) { month in
             DatePickerList(days: month.days, onDaySelected: onDaySelected)
         }
+        .id(model.month.id)
     }
 }
 

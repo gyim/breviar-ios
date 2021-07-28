@@ -189,7 +189,7 @@ struct Prayer: Identifiable {
     let type: PrayerType
     
     var id : String {
-        return "\(day.year)-\(day.month)-\(day.day)/\(celebration.id)/\(type)"
+        return "\(type)"
     }
     
     var name: String {
