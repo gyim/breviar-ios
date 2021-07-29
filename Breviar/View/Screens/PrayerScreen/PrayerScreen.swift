@@ -17,7 +17,7 @@ struct PrayerScreen: View {
     @State var navbarHidden = false
     
     var body: some View {
-        InlinePopoverPresenter( popover: { TextOptionsView(textOptions: textOptions) }, isPresented: $textOptionsShown) {
+        InlinePopoverPresenter( popover: { TextOptionsView(textOptions: textOptions, prayer: prayer) }, isPresented: $textOptionsShown) {
             LoadingView(value: prayerText, loadedBody: { text in
                 NavigationBarToggler(navigationBarHidden: $navbarHidden) {
                     PrayerView(text: text, textOptions: textOptions)

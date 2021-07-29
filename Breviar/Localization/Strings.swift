@@ -41,6 +41,7 @@ struct S {
     static let automatic = LS(sk: "Automaticky", cz: "Automatický", hu: "Automatikus")
     static let light = LS(sk: "Svetelný", cz: "Světlý", hu: "Világos")
     static let dark = LS(sk: "Tmavý", cz: "Tmavý", hu: "Sötét")
+    static let startPlayback = LS(sk: "Čítanie textu", cz: "Čtení textu", hu: "Szöveg felolvasása")
     
     // Settings
     static let generalSettings = LS(sk: "Všeobecné nastavenia", cz: "Obecné nastavení", hu: "Általános beállítások")

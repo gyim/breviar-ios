@@ -7,8 +7,12 @@
 
 import SwiftUI
 
+let textOptionsWidth = CGFloat(300.0)
+let textOptionsHeight = CGFloat(280.0)
+
 struct TextOptionsView : View {
     @ObservedObject var textOptions: TextOptions
+    var prayer: Prayer?
     @State var fontChooserShown = false
     
     var body: some View {
@@ -36,8 +40,10 @@ struct TextOptionsView : View {
                 )
                 Divider()
                 ColorSchemeChooserView(colorScheme: $textOptions.colorScheme)
+                Divider()
+                StartPlaybackButton(prayer: prayer)
             }
-            .frame(width: 300, height: 210, alignment: .center)
+            .frame(width: textOptionsWidth, height: textOptionsHeight, alignment: .center)
             .transition(fontChooserTransition)
         }
     }
@@ -207,12 +213,32 @@ struct ColorSchemeButton : View {
     }
 }
 
+struct StartPlaybackButton : View {
+    @State var playbackSheetShown = false
+    var prayer: Prayer?
+
+    var body: some View {
+        Button(
+            action: {
+                playbackSheetShown = true
+            },
+            label: {
+                Label(S.startPlayback.S, systemImage: "play.fill")
+                    .frame(maxWidth: .infinity)
+                    .padding(8.0)
+            }
+        ).sheet(isPresented: $playbackSheetShown, content: {
+            PlaybackScreen(playbackSheetShown: $playbackSheetShown, prayer: prayer)
+        })
+    }
+}
+
 struct TextOptions_Previews: PreviewProvider {
     struct TextOptionsViewContainer: View {
         @StateObject var textOptions = TextOptions()
         
         var body: some View {
-            TextOptionsView(textOptions: textOptions)
+            TextOptionsView(textOptions: textOptions, prayer: nil)
         }
     }
     
@@ -220,14 +246,14 @@ struct TextOptions_Previews: PreviewProvider {
         Group {
             TextOptionsViewContainer()
                 .preferredColorScheme(.light)
-                .previewLayout(.fixed(width: 300.0, height: 210.0))
+                .previewLayout(.fixed(width: textOptionsWidth, height: textOptionsHeight))
             
             FontChooserList(shown:.constant(true), selectedFont: .constant(fontNames[0]))
-                .previewLayout(.fixed(width: 300.0, height: 210.0))
+                .previewLayout(.fixed(width: textOptionsWidth, height: textOptionsHeight))
             
             TextOptionsViewContainer()
                 .preferredColorScheme(.dark)
-                .previewLayout(.fixed(width: 300.0, height: 210.0))
+                .previewLayout(.fixed(width: textOptionsWidth, height: textOptionsHeight))
         }
     }
 }
