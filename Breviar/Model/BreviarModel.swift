@@ -39,6 +39,7 @@ class BreviarModel : ObservableObject {
     @Published var monthState: LoadingState<LiturgicalMonth> = .idle
     
     @Published var prayerText: LoadingState<String> = .idle
+    @Published var ttsPrayerText: LoadingState<String> = .idle
     
     @Published var settingsEntries: LoadingState<[SettingsEntry]> = .idle
     @Published var textOptions: TextOptions
@@ -202,6 +203,23 @@ class BreviarModel : ObservableObject {
         }
     }
     
+    func loadTTSPrayer(_ prayer: Prayer, opts: [String: String] = [:], forceLocal: Bool = false) {
+        let retry: (Bool) -> Void = { forceLocal in
+            self.ttsPrayerText = .loading
+            self.loadTTSPrayer(prayer, opts: opts, forceLocal: forceLocal)
+        }
+
+        if let (day, celebration) = self.getCurrentCelebration() {
+            self.dataSource.getTTSPrayerText(day: day, celebration: celebration, prayerType: prayer.type, opts: opts, forceLocal: forceLocal) { (text, error) in
+                if error == nil {
+                    self.ttsPrayerText = .loaded(text!)
+                } else {
+                    self.ttsPrayerText = .failed(error!, retry)
+                }
+            }
+        }
+    }
+    
     func handlePrayerLink(prayer: Prayer, url: URL) {
         let parsedLink = self.dataSource.parsePrayerLink(url: url)
         switch parsedLink {
@@ -229,6 +247,7 @@ class BreviarModel : ObservableObject {
     
     func unloadPrayer() {
         self.prayerText = .idle
+        self.ttsPrayerText = .idle
     }
     
     func loadSettingsEntries(forceLocal: Bool = false) {

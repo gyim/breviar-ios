@@ -17,7 +17,7 @@ struct PrayerScreen: View {
     @State var navbarHidden = false
     
     var body: some View {
-        InlinePopoverPresenter( popover: { TextOptionsView(textOptions: textOptions, prayer: prayer) }, isPresented: $textOptionsShown) {
+        InlinePopoverPresenter( popover: { TextOptionsView(textOptions: textOptions, prayer: prayer).environmentObject(model) }, isPresented: $textOptionsShown) {
             LoadingView(value: prayerText, loadedBody: { text in
                 NavigationBarToggler(navigationBarHidden: $navbarHidden) {
                     PrayerView(text: text, textOptions: textOptions)
@@ -113,7 +113,7 @@ struct PrayerView : UIViewRepresentable {
             if text != prevText {
                 let modifiedText = getModifiedText(text: text, fontName: fontName, fontSize: fontSize)
                 if prevText == "" {
-                    let baseURL = URL(string: "https://lh.kbs.sk/cgi-bin")
+                    let baseURL = URL(fileURLWithPath: Bundle.main.bundlePath)
                     self.webView.loadHTMLString(modifiedText, baseURL: baseURL)
                 } else {
                     self.webView.evaluateJavaScript("document.documentElement.innerHTML = `\(modifiedText)`; initPrayer();") { (_, error) in
@@ -139,15 +139,14 @@ struct PrayerView : UIViewRepresentable {
         }
         
         func getModifiedText(text: String, fontName: String, fontSize: Double) -> String {
-            let body = getBody(text)
             return """
                 <head>
                     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
                     <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0" />
-                    <link rel="stylesheet" type="text/css" href="/breviar.css" />
+                    <link rel="stylesheet" type="text/css" href="html/breviar.css" />
                     <style type="text/css">
-                        @import url("/breviar-normal-font.css") screen;
-                        @import url("/breviar-invert-colors.css") screen and (prefers-color-scheme: dark);
+                        @import url("html/breviar-normal-font.css") screen;
+                        @import url("html/breviar-invert-colors.css") screen and (prefers-color-scheme: dark);
                         body { padding: \(topPadding)px 0 \(bottomPadding)px; }
                     </style>
                     <script type="text/javascript">
@@ -176,27 +175,8 @@ struct PrayerView : UIViewRepresentable {
                         }
                     </script>
                 </head>
-                <body onload="initPrayer()">\(body)</body>
+                <body onload="initPrayer()">\(text)</body>
             """
-        }
-        
-        func getBody(_ html: String) -> String {
-            // Find body start
-            var body: String.SubSequence = html[html.startIndex...]
-            if let r = html.range(of: "<body") {
-                let b = html[r.upperBound...]
-                if let r = b.range(of:">") {
-                    body = b[r.upperBound...].dropFirst()
-                }
-            }
-            
-            // Find body end
-            if let r = body.range(of: "</body") {
-                body = body[body.startIndex..<r.lowerBound]
-            }
-            
-            // Make sure that body can be put into JS template expression
-            return String(body.replacingOccurrences(of: "`", with: "'").replacingOccurrences(of: "$", with: "_"))
         }
         
         // WKScriptMessageHandler

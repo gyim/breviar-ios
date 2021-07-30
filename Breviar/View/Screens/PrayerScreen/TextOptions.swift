@@ -214,6 +214,7 @@ struct ColorSchemeButton : View {
 }
 
 struct StartPlaybackButton : View {
+    @EnvironmentObject var model: BreviarModel
     @State var playbackSheetShown = false
     var prayer: Prayer?
 
@@ -229,6 +230,7 @@ struct StartPlaybackButton : View {
             }
         ).sheet(isPresented: $playbackSheetShown, content: {
             PlaybackScreen(playbackSheetShown: $playbackSheetShown, prayer: prayer)
+                .environmentObject(model)
         })
     }
 }

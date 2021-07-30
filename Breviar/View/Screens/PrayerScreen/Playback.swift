@@ -8,18 +8,9 @@
 import SwiftUI
 import AVFoundation
 import MediaPlayer
+import WebKit
 
 let playbackControlSize = CGFloat(40.0)
-let playbackText = """
-    In the beginning God created the heavens and the earth.
-    The earth was without form and void, and darkness was upon the face of the deep;
-    and the Spirit of God was moving over the face of the waters.
-
-    And God said, “Let there be light”; and there was light.
-    And God saw that the light was good; and God separated the light from the darkness.
-    God called the light Day, and the darkness he called Night.
-    And there was evening and there was morning, one day.
-"""
 
 enum PlaybackState {
     case stopped
@@ -27,23 +18,25 @@ enum PlaybackState {
     case paused
 }
 
-class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
+class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegate, WKNavigationDelegate {
     var speechSynthesizer: AVSpeechSynthesizer?
     
     var playCommandHandler: Any?
     var pauseCommandHandler: Any?
     var togglePlayPauseCommandHandler: Any?
+    var webView: WKWebView = WKWebView()
     
+    @Published var language: String = "en-US"
     @Published var title: String = ""
     @Published var subtitle: String = ""
+    @Published var htmlBody: String = ""
+    var ttsText: String? = nil
     
     @Published var playbackState: PlaybackState = .stopped {
         willSet {
             switch newValue {
             case .stopped:
-                if playbackState != .stopped {
-                    endSession()
-                }
+                endSession()
             case .playing:
                 if playbackState == .stopped {
                     beginSession()
@@ -96,6 +89,8 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
     }
     
     private func endSession() {
+        ttsText = nil
+        
         if playbackState == .stopped {
             return
         }
@@ -132,23 +127,61 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
     private func startPlayback() {
         switch playbackState {
         case .stopped:
-            let voice = AVSpeechSynthesisVoice(language: "en-US")
-            let utterance = AVSpeechUtterance(string: playbackText)
-            utterance.voice = voice
-            utterance.rate = AVSpeechUtteranceDefaultSpeechRate
-            
-            self.speechSynthesizer = AVSpeechSynthesizer()
-            MPNowPlayingInfoCenter.default().nowPlayingInfo = [
-                MPMediaItemPropertyTitle: title,
-                MPMediaItemPropertyArtist: subtitle,
-            ]
-            self.speechSynthesizer?.delegate = self
-            self.speechSynthesizer?.speak(utterance)
+            if let ttsText = self.ttsText {
+                startSpeech(ttsText)
+            } else {
+                extractText()
+            }
         case .playing:
             break
         case .paused:
             speechSynthesizer?.continueSpeaking()
         }
+    }
+    
+    private func extractText() {
+        let html = """
+            <!DOCTYPE html>
+            <head>
+                <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+                <link rel='stylesheet' type='text/css' href='html/breviar.css'>
+                <link rel='stylesheet' type='text/css' href='html/breviar-voice-output.css'>
+            </head>\n"
+                <body>\(self.htmlBody)</body>
+            </html>
+        """
+        let baseURL = URL(fileURLWithPath: Bundle.main.bundlePath)
+        self.webView.navigationDelegate = self
+        self.webView.loadHTMLString(html, baseURL: baseURL)
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.webView.evaluateJavaScript("(function (){ return document.body.innerText; })();") { result, error in
+            guard let res = result else { print("WebKit error: \(error.debugDescription)"); return }
+            guard let ttsText = res as? String else { print("WebKit returned invalid object: \(res)"); return }
+            
+            DispatchQueue.main.async {
+                self.ttsText = ttsText
+                if self.playbackState == .playing {
+                    self.startSpeech(ttsText)
+                }
+            }
+        }
+    }
+    
+    private func startSpeech(_ text: String) {
+        let voice = AVSpeechSynthesisVoice(language: self.language)
+        let utterance = AVSpeechUtterance(string: text)
+        utterance.voice = voice
+        utterance.rate = AVSpeechUtteranceDefaultSpeechRate
+        
+        self.speechSynthesizer = AVSpeechSynthesizer()
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+            MPMediaItemPropertyTitle: title,
+            MPMediaItemPropertyArtist: subtitle,
+        ]
+        self.speechSynthesizer?.delegate = self
+        self.speechSynthesizer?.speak(utterance)
     }
     
     private func pausePlayback() {
@@ -167,24 +200,32 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
 
 struct PlaybackScreen: View {
     @Binding var playbackSheetShown: Bool
+    @EnvironmentObject var model: BreviarModel
     var prayer: Prayer?
     
     @StateObject var playbackController: PlaybackController = PlaybackController()
 
     var body: some View {
         NavigationView {
-            PlaybackView(playbackState: $playbackController.playbackState, prayer: prayer)
-                .navigationBarItems(
-                    leading: Button(
-                        action: { playbackSheetShown = false },
-                        label: { Text(S.back.S) }
+            LoadingView(value: model.ttsPrayerText) { htmlBody in
+                PlaybackView(playbackState: $playbackController.playbackState, prayer: prayer)
+                    .navigationBarItems(
+                        leading: Button(
+                            action: { playbackSheetShown = false },
+                            label: { Text(S.back.S) }
+                        )
                     )
-                )
+                    .onAppear() {
+                        playbackController.language = model.dataSourceOptions?.language.locale.identifier ?? "en-US"
+                        playbackController.title = prayer?.name ?? "Prayer Name"
+                        playbackController.subtitle = prayer?.celebration.title ?? "Celebration Title"
+                        playbackController.htmlBody = htmlBody
+                        playbackController.playbackState = .playing
+                    }
+            }
         }
         .onAppear() {
-            playbackController.title = prayer?.name ?? "Prayer Name"
-            playbackController.subtitle = prayer?.celebration.title ?? "Celebration Title"
-            playbackController.playbackState = .playing
+            model.loadTTSPrayer(prayer!)
         }
         .onDisappear() {
             playbackController.playbackState = .stopped

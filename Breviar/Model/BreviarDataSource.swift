@@ -13,6 +13,7 @@ protocol BreviarDataSource {
     func getLiturgicalDay(day: Day, forceLocal: Bool, handler: @escaping (LiturgicalDay?, Error?) -> Void)
     func getLiturgicalMonth(month: Month, forceLocal: Bool, handler: @escaping (LiturgicalMonth?, Error?) -> Void)
     func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], forceLocal: Bool, handler: @escaping (String?, Error?) -> Void)
+    func getTTSPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], forceLocal: Bool, handler: @escaping (String?, Error?) -> Void)
     func parsePrayerLink(url: URL) -> BreviarLink
     func getSettingsEntries(forceLocal: Bool, handler: @escaping ([SettingsEntry]?, Error?) -> Void)
 }
@@ -378,9 +379,15 @@ class CGIDataSource : BreviarDataSource {
         
         self.cgiClient(forceLocal: forceLocal).makeRequest(args) { data, error in
             if let data = data {
-                let response = String(data: data, encoding: .utf8)
-                DispatchQueue.main.async {
-                    handler(response, nil)
+                if let response = String(data: data, encoding: .utf8) {
+                    DispatchQueue.main.async {
+                        handler(self.getHTMLBody(response), nil)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        print("Cannot parse UTF-8 string from server")
+                        handler(nil, DataSourceError.parseError)
+                    }
                 }
             } else {
                 DispatchQueue.main.async {
@@ -388,6 +395,32 @@ class CGIDataSource : BreviarDataSource {
                 }
             }
         }
+    }
+    
+    func getTTSPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], forceLocal: Bool, handler: @escaping (String?, Error?) -> Void) {
+        var ttsOpts = opts
+        ttsOpts["of0bf"] = "1"
+        ttsOpts["of2rm"] = "0"
+        getPrayerText(day: day, celebration: celebration, prayerType: prayerType, opts: ttsOpts, forceLocal: forceLocal, handler: handler)
+    }
+    
+    private func getHTMLBody(_ html: String) -> String {
+        // Find body start
+        var body: String.SubSequence = html[html.startIndex...]
+        if let r = html.range(of: "<body") {
+            let b = html[r.upperBound...]
+            if let r = b.range(of:">") {
+                body = b[r.upperBound...].dropFirst()
+            }
+        }
+        
+        // Find body end
+        if let r = body.range(of: "</body") {
+            body = body[body.startIndex..<r.lowerBound]
+        }
+        
+        // Make sure that body can be put into JS template expression
+        return String(body.replacingOccurrences(of: "`", with: "'").replacingOccurrences(of: "$", with: "_"))
     }
     
     func parsePrayerLink(url: URL) -> BreviarLink {
