@@ -313,7 +313,7 @@ struct PlaybackControlsView: View {
                         .resizable()
                         .frame(width: playbackControlSize, height: playbackControlSize, alignment: .center)
                 })
-                .disabled(playbackState != .playing)
+                .disabled(true)
                 .frame(maxWidth:.infinity).padding()
             
             Button(
@@ -339,7 +339,7 @@ struct PlaybackControlsView: View {
                         .resizable()
                         .frame(width: playbackControlSize, height: playbackControlSize, alignment: .center)
                 })
-                .disabled(playbackState != .playing)
+                .disabled(true)
                 .frame(maxWidth:.infinity).padding()
         }.padding()
     }
