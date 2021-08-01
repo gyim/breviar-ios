@@ -31,6 +31,14 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
     @Published var subtitle: String = ""
     @Published var htmlBody: String = ""
     var ttsText: String? = nil
+    var utterances: [AVSpeechUtterance] = []
+    
+    override init() {
+        let storedPlaybackSpeed = UserDefaults.standard.float(forKey: "speechRate")
+        if storedPlaybackSpeed > 0 {
+            playbackSpeed = storedPlaybackSpeed
+        }
+    }
     
     @Published var playbackState: PlaybackState = .stopped {
         willSet {
@@ -54,7 +62,13 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
             }
         }
     }
-    
+
+    @Published var playbackSpeed: Float = 1.0 {
+        didSet {
+            UserDefaults.standard.setValue(playbackSpeed, forKey: "speechRate")
+        }
+    }
+
     private func beginSession() {
         if playbackState != .stopped {
             return
@@ -171,17 +185,32 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
     
     private func startSpeech(_ text: String) {
         let voice = AVSpeechSynthesisVoice(language: self.language)
-        let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = voice
-        utterance.rate = AVSpeechUtteranceDefaultSpeechRate
-        
         self.speechSynthesizer = AVSpeechSynthesizer()
         MPNowPlayingInfoCenter.default().nowPlayingInfo = [
             MPMediaItemPropertyTitle: title,
             MPMediaItemPropertyArtist: subtitle,
         ]
         self.speechSynthesizer?.delegate = self
-        self.speechSynthesizer?.speak(utterance)
+
+        utterances = []
+        for l in text.components(separatedBy: .newlines) {
+            let line = l.trimmingCharacters(in: .whitespaces)
+            if line.count == 0 || line == "\"" {
+                continue
+            }
+            
+            let utterance = AVSpeechUtterance(string: line)
+            utterance.voice = voice
+            utterance.rate = playbackSpeed * AVSpeechUtteranceDefaultSpeechRate
+            
+            utterances.append(utterance)
+            self.speechSynthesizer?.speak(utterance)
+        }
+        
+        if utterances.count > 0 {
+            utterances.reverse()
+            _ = utterances.popLast()
+        }
     }
     
     private func pausePlayback() {
@@ -194,7 +223,9 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        self.playbackState = .stopped
+        if let nextUtterance = utterances.popLast() {
+            nextUtterance.rate = playbackSpeed * AVSpeechUtteranceDefaultSpeechRate
+        }
     }
 }
 
@@ -208,7 +239,7 @@ struct PlaybackScreen: View {
     var body: some View {
         NavigationView {
             LoadingView(value: model.ttsPrayerText) { htmlBody in
-                PlaybackView(playbackState: $playbackController.playbackState, prayer: prayer)
+                PlaybackView(playbackState: $playbackController.playbackState, playbackSpeed: $playbackController.playbackSpeed, prayer: prayer)
                     .navigationBarItems(
                         leading: Button(
                             action: { playbackSheetShown = false },
@@ -235,12 +266,14 @@ struct PlaybackScreen: View {
 
 struct PlaybackView: View {
     @Binding var playbackState: PlaybackState
+    @Binding var playbackSpeed: Float
     var prayer: Prayer?
     
     var body: some View {
         VStack {
             PlaybackTitleView(prayer: prayer)
             PlaybackControlsView(playbackState: $playbackState)
+            PlaybackSpeedView(playbackSpeed: $playbackSpeed)
         }
     }
 }
@@ -312,6 +345,22 @@ struct PlaybackControlsView: View {
     }
 }
 
+struct PlaybackSpeedView : View {
+    @Binding var playbackSpeed: Float
+
+    var body: some View {
+        let minValue = AVSpeechUtteranceMinimumSpeechRate / AVSpeechUtteranceDefaultSpeechRate
+        let maxValue = AVSpeechUtteranceMaximumSpeechRate / AVSpeechUtteranceDefaultSpeechRate
+        
+        HStack {
+            Text("0.5×").frame(minWidth: 50).padding()
+            Slider(value: $playbackSpeed, in: minValue...maxValue) { changed in }
+            Text("2×").frame(minWidth: 50).padding()
+        }
+        
+    }
+}
+
 struct Playback_Previews: PreviewProvider {
     struct TextOptionsViewContainer: View {
         @StateObject var textOptions = TextOptions()
@@ -323,11 +372,11 @@ struct Playback_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            PlaybackView(playbackState: .constant(.paused), prayer: nil)
+            PlaybackView(playbackState: .constant(.paused), playbackSpeed: .constant(1.0), prayer: nil)
                 .preferredColorScheme(.light)
                 .previewLayout(.sizeThatFits)
             
-            PlaybackView(playbackState: .constant(.playing), prayer: nil)
+            PlaybackView(playbackState: .constant(.playing), playbackSpeed: .constant(1.0), prayer: nil)
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
         }
