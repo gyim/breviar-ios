@@ -33,6 +33,7 @@ struct MainScreen: View {
     }
     
     var body: some View {
+        let today = Day(fromDate: Date())
         NavigationView{
             MainScreenContent()
                 .navigationTitle(getTitle(day: model.day))
@@ -47,16 +48,19 @@ struct MainScreen: View {
                 )
                 .toolbar {
                     HStack{
-                        if model.day != Day(fromDate: Date()) {
-                            Button(
-                                action: {
-                                    withAnimation {
-                                        model.loadDay(Day(fromDate: Date()))
-                                    }
-                                },
-                                label: {Text(S.today.S)})
-                                .padding()
-                        }
+                        // Today button
+                        Button(
+                            action: {
+                                withAnimation {
+                                    model.loadDay(today)
+                                }
+                            },
+                            label: {Text(S.today.S)})
+                            .disabled(model.day == today)
+                            .opacity(model.day == today ? 0 : 1)
+                            .padding()
+                        
+                        // Left button
                         Button(
                             action: {
                                 withAnimation {
@@ -64,7 +68,10 @@ struct MainScreen: View {
                                 }
                             },
                             label: {Label(S.previousDay.S,systemImage: "chevron.left")})
-                        Spacer(minLength: 20.0)
+                        
+                        Spacer(minLength: 20).fixedSize()
+                        
+                        // Right button
                         Button(
                             action: {
                                 withAnimation {
