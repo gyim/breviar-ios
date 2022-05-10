@@ -121,23 +121,11 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
             return .success
         }
         previousTrackCommandHandler = commandCenter.previousTrackCommand.addTarget() { event in
-            if let playbackProgress = self.playbackProgress {
-                if playbackProgress.section > 0 && playbackProgress.line <= 1 {
-                    self.playbackProgress = PlaybackProgress(section: playbackProgress.section - 1, numSections: playbackProgress.numSections, line: 0)
-                } else {
-                    self.playbackProgress = PlaybackProgress(section: playbackProgress.section, numSections: playbackProgress.numSections, line: 0)
-                }
-            }
+            self.prevSection()
             return .success
         }
         nextTrackCommandHandler = commandCenter.nextTrackCommand.addTarget() { event in
-            if let playbackProgress = self.playbackProgress {
-                if playbackProgress.section < playbackProgress.numSections - 1 {
-                    self.playbackProgress = PlaybackProgress(section: playbackProgress.section + 1, numSections: playbackProgress.numSections, line: 0)
-                } else {
-                    self.playbackState = .stopped
-                }
-            }
+            self.nextSection()
             return .success
         }
     }
@@ -287,6 +275,26 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
         }
     }
     
+    func prevSection() {
+        if let playbackProgress = self.playbackProgress {
+            if playbackProgress.section > 0 && playbackProgress.line <= 1 {
+                self.playbackProgress = PlaybackProgress(section: playbackProgress.section - 1, numSections: playbackProgress.numSections, line: 0)
+            } else {
+                self.playbackProgress = PlaybackProgress(section: playbackProgress.section, numSections: playbackProgress.numSections, line: 0)
+            }
+        }
+    }
+    
+    func nextSection() {
+        if let playbackProgress = self.playbackProgress {
+            if playbackProgress.section < playbackProgress.numSections - 1 {
+                self.playbackProgress = PlaybackProgress(section: playbackProgress.section + 1, numSections: playbackProgress.numSections, line: 0)
+            } else {
+                self.playbackState = .stopped
+            }
+        }
+    }
+    
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         if let nextUtterance = utterances.popLast(), let playbackProgress = self.playbackProgress {
             self.playbackProgress = PlaybackProgress(section: playbackProgress.section, numSections: playbackProgress.numSections, line: playbackProgress.line + 1)
@@ -309,7 +317,7 @@ struct PlaybackScreen: View {
     var body: some View {
         NavigationView {
             LoadingView(value: model.ttsPrayerText) { htmlBody in
-                PlaybackView(playbackState: $playbackController.playbackState, playbackProgress: $playbackController.playbackProgress, playbackSpeed: $playbackController.playbackSpeed, prayer: prayer)
+                PlaybackView(playbackController: playbackController, prayer: prayer)
                     .navigationBarItems(
                         leading: Button(
                             action: { playbackSheetShown = false },
@@ -335,16 +343,19 @@ struct PlaybackScreen: View {
 }
 
 struct PlaybackView: View {
-    @Binding var playbackState: PlaybackState
-    @Binding var playbackProgress: PlaybackProgress?
-    @Binding var playbackSpeed: Float
+    @ObservedObject var playbackController: PlaybackController
     var prayer: Prayer?
     
     var body: some View {
         VStack {
             PlaybackTitleView(prayer: prayer)
-            PlaybackControlsView(playbackState: $playbackState, playbackProgress: $playbackProgress)
-            PlaybackSpeedView(playbackSpeed: $playbackSpeed)
+            PlaybackControlsView(
+                playbackState: $playbackController.playbackState,
+                playbackProgress: $playbackController.playbackProgress,
+                onPrevSection: playbackController.prevSection,
+                onNextSection: playbackController.nextSection
+            )
+            PlaybackSpeedView(playbackSpeed: $playbackController.playbackSpeed)
         }
     }
 }
@@ -373,19 +384,13 @@ struct PlaybackTitleView: View {
 struct PlaybackControlsView: View {
     @Binding var playbackState: PlaybackState
     @Binding var playbackProgress: PlaybackProgress?
-    
+    var onPrevSection: () -> Void
+    var onNextSection: () -> Void
+
     var body: some View {
         HStack {
             Button(
-                action: {
-                    if let playbackProgress = self.playbackProgress {
-                        if playbackProgress.section > 0 && playbackProgress.line <= 1 {
-                            self.playbackProgress = PlaybackProgress(section: playbackProgress.section - 1, numSections: playbackProgress.numSections, line: 0)
-                        } else {
-                            self.playbackProgress = PlaybackProgress(section: playbackProgress.section, numSections: playbackProgress.numSections, line: 0)
-                        }
-                    }
-                },
+                action: onPrevSection,
                 label: {
                     Image(systemName: "backward.fill")
                         .resizable()
@@ -410,15 +415,7 @@ struct PlaybackControlsView: View {
                 .frame(maxWidth:.infinity).padding()
 
             Button(
-                action: {
-                    if let playbackProgress = self.playbackProgress {
-                        if playbackProgress.section < playbackProgress.numSections - 1 {
-                            self.playbackProgress = PlaybackProgress(section: playbackProgress.section + 1, numSections: playbackProgress.numSections, line: 0)
-                        } else {
-                            self.playbackState = .stopped
-                        }
-                    }
-                },
+                action: onNextSection,
                 label: {
                     Image(systemName: "forward.fill")
                         .resizable()
@@ -456,12 +453,14 @@ struct Playback_Previews: PreviewProvider {
     }
     
     static var previews: some View {
+        let playbackController = PlaybackController()
+        
         Group {
-            PlaybackView(playbackState: .constant(.paused), playbackProgress: .constant(PlaybackProgress(section: 0, numSections: 1, line: 0)), playbackSpeed: .constant(1.0), prayer: nil)
+            PlaybackView(playbackController: playbackController, prayer: nil)
                 .preferredColorScheme(.light)
                 .previewLayout(.sizeThatFits)
             
-            PlaybackView(playbackState: .constant(.playing), playbackProgress: .constant(PlaybackProgress(section: 0, numSections: 1, line: 0)), playbackSpeed: .constant(1.0), prayer: nil)
+            PlaybackView(playbackController: playbackController, prayer: nil)
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
         }
