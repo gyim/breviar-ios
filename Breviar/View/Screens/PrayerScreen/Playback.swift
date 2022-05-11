@@ -22,6 +22,16 @@ struct PlaybackProgress {
     let section: Int
     let numSections: Int
     let line: Int
+    let numLines: Int
+    let characters: Int
+    let numCharacters: Int
+    
+    func percentage() -> Double {
+        let charPoints = Double(characters) / Double(numCharacters)
+        let linePoints = (Double(line) + charPoints) / Double(numLines)
+        let sectPoints = (Double(section) + linePoints) / Double(numSections)
+        return min(sectPoints * 100, 100.0)
+    }
 }
 
 class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegate, WKNavigationDelegate {
@@ -247,26 +257,42 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
         print("Starting TTS section \(sectionIndex) interruptPlayback: \(interruptPlayback)")
         let text = self.ttsSections[sectionIndex]
         let voice = AVSpeechSynthesisVoice(language: self.language)
-        self.playbackProgress = PlaybackProgress(section: sectionIndex, numSections: self.ttsSections.count, line: 0)
         
         if interruptPlayback {
             self.speechSynthesizer?.stopSpeaking(at: AVSpeechBoundary.immediate)
         }
-
-        utterances = []
-        var lineNum = 0
+        
+        // Get non-empty lines
+        var lines: [String] = []
         for l in text.components(separatedBy: .newlines) {
             let line = l.trimmingCharacters(in: .whitespaces)
             if line.count == 0 || line == "\"" {
                 continue
             }
-            
+            lines.append(line)
+        }
+
+        // Create utterance for each line
+        utterances = []
+        var lineNum = 0
+        for line in lines {
             let utterance = AVSpeechUtterance(string: line)
             utterance.voice = voice
             utterance.rate = playbackSpeed * AVSpeechUtteranceDefaultSpeechRate
-            progressForUtterance[utterance] = PlaybackProgress(section: sectionIndex, numSections: self.ttsSections.count, line: lineNum)
+            let progress = PlaybackProgress(
+                section: sectionIndex,
+                numSections: self.ttsSections.count,
+                line: lineNum,
+                numLines: lines.count,
+                characters: 0,
+                numCharacters: line.count
+            )
+            if lineNum == 0 {
+                self.playbackProgress = progress
+            }
             
             utterances.append(utterance)
+            self.progressForUtterance[utterance] = progress
             self.speechSynthesizer?.speak(utterance)
             lineNum += 1
         }
@@ -298,14 +324,19 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
-        if let playbackProgress = self.playbackProgress,
-           let newProgress = self.progressForUtterance[utterance],
-           playbackProgress.section != newProgress.section || playbackProgress.line != newProgress.line {
-            print("TTS playback progress: section \(newProgress.section)/\(newProgress.numSections) line \(newProgress.line)")
-            self.playbackProgress = newProgress
+        if let playbackProgress = self.playbackProgress, let newProgress = self.progressForUtterance[utterance] {
+            self.playbackProgress = PlaybackProgress(
+                section: newProgress.section,
+                numSections: newProgress.numSections,
+                line: newProgress.line,
+                numLines: newProgress.numLines,
+                characters: characterRange.upperBound,
+                numCharacters: utterance.speechString.count
+            )
             if playbackProgress.section != newProgress.section {
                 self.sectionStartDate = Date()
             }
+            //print("Playback progress: \(newProgress.percentage())")
         }
     }
     
@@ -365,6 +396,7 @@ struct PlaybackView: View {
     var body: some View {
         VStack {
             PlaybackTitleView(prayer: prayer)
+            PlaybackProgressView(playbackProgress: playbackController.playbackProgress)
             PlaybackControlsView(
                 playbackState: $playbackController.playbackState,
                 playbackProgress: $playbackController.playbackProgress,
@@ -394,6 +426,18 @@ struct PlaybackTitleView: View {
                 .multilineTextAlignment(.center)
                 .padding(.vertical)
         }.padding()
+    }
+}
+
+struct PlaybackProgressView: View {
+    var playbackProgress: PlaybackProgress?
+
+    var body: some View {
+        if let progress = playbackProgress {
+            ProgressView(value: progress.percentage(), total: 100.0)
+        } else {
+            ProgressView(value: 0, total: 100.0)
+        }
     }
 }
 
