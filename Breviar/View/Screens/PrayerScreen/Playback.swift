@@ -41,6 +41,8 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
     
     var ttsSections: [String] = []
     var utterances: [AVSpeechUtterance] = []
+    var progressForUtterance: [AVSpeechUtterance: PlaybackProgress] = [:]
+    var sectionStartDate: Date?
     
     override init() {
         let storedPlaybackSpeed = UserDefaults.standard.float(forKey: "speechRate")
@@ -78,17 +80,8 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
         }
     }
     
-    @Published var playbackProgress: PlaybackProgress? = nil {
-        willSet {
-            if let newProgress = newValue {
-                print("Playing TTS section \(newProgress.section) of \(newProgress.numSections), line \(newProgress.line)")
-                if self.playbackProgress == nil || newProgress.line == 0 {
-                    startSection(newProgress.section)
-                }
-            }
-        }
-    }
-
+    @Published var playbackProgress: PlaybackProgress? = nil
+    
     private func beginSession() {
         if playbackState != .stopped {
             return
@@ -128,6 +121,7 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
             self.nextSection()
             return .success
         }
+        progressForUtterance = [:]
     }
     
     private func endSession() {
@@ -236,7 +230,7 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
         ]
         self.speechSynthesizer?.delegate = self
         if self.ttsSections.count > 0 {
-            self.playbackProgress = PlaybackProgress(section: 0, numSections: self.ttsSections.count, line: 0)
+            self.startSection(0)
         }
     }
     
@@ -249,12 +243,18 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
         }
     }
     
-    private func startSection(_ sectionIndex: Int) {
+    private func startSection(_ sectionIndex: Int, interruptPlayback: Bool = false) {
+        print("Starting TTS section \(sectionIndex) interruptPlayback: \(interruptPlayback)")
         let text = self.ttsSections[sectionIndex]
         let voice = AVSpeechSynthesisVoice(language: self.language)
-        self.speechSynthesizer?.stopSpeaking(at: AVSpeechBoundary.immediate)
+        self.playbackProgress = PlaybackProgress(section: sectionIndex, numSections: self.ttsSections.count, line: 0)
+        
+        if interruptPlayback {
+            self.speechSynthesizer?.stopSpeaking(at: AVSpeechBoundary.immediate)
+        }
 
         utterances = []
+        var lineNum = 0
         for l in text.components(separatedBy: .newlines) {
             let line = l.trimmingCharacters(in: .whitespaces)
             if line.count == 0 || line == "\"" {
@@ -264,9 +264,11 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
             let utterance = AVSpeechUtterance(string: line)
             utterance.voice = voice
             utterance.rate = playbackSpeed * AVSpeechUtteranceDefaultSpeechRate
+            progressForUtterance[utterance] = PlaybackProgress(section: sectionIndex, numSections: self.ttsSections.count, line: lineNum)
             
             utterances.append(utterance)
             self.speechSynthesizer?.speak(utterance)
+            lineNum += 1
         }
         
         if utterances.count > 0 {
@@ -276,11 +278,11 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
     }
     
     func prevSection() {
-        if let playbackProgress = self.playbackProgress {
-            if playbackProgress.section > 0 && playbackProgress.line <= 1 {
-                self.playbackProgress = PlaybackProgress(section: playbackProgress.section - 1, numSections: playbackProgress.numSections, line: 0)
+        if let playbackProgress = self.playbackProgress, let sectionStartDate = self.sectionStartDate {
+            if playbackProgress.section > 0 && sectionStartDate.timeIntervalSinceNow > -2 {
+                self.startSection(playbackProgress.section - 1, interruptPlayback: true)
             } else {
-                self.playbackProgress = PlaybackProgress(section: playbackProgress.section, numSections: playbackProgress.numSections, line: 0)
+                self.startSection(playbackProgress.section, interruptPlayback: true)
             }
         }
     }
@@ -288,20 +290,34 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
     func nextSection() {
         if let playbackProgress = self.playbackProgress {
             if playbackProgress.section < playbackProgress.numSections - 1 {
-                self.playbackProgress = PlaybackProgress(section: playbackProgress.section + 1, numSections: playbackProgress.numSections, line: 0)
+                self.startSection(playbackProgress.section + 1, interruptPlayback: true)
             } else {
                 self.playbackState = .stopped
             }
         }
     }
     
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
+        if let playbackProgress = self.playbackProgress,
+           let newProgress = self.progressForUtterance[utterance],
+           playbackProgress.section != newProgress.section || playbackProgress.line != newProgress.line {
+            print("TTS playback progress: section \(newProgress.section)/\(newProgress.numSections) line \(newProgress.line)")
+            self.playbackProgress = newProgress
+            if playbackProgress.section != newProgress.section {
+                self.sectionStartDate = Date()
+            }
+        }
+    }
+    
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        if let nextUtterance = utterances.popLast(), let playbackProgress = self.playbackProgress {
-            self.playbackProgress = PlaybackProgress(section: playbackProgress.section, numSections: playbackProgress.numSections, line: playbackProgress.line + 1)
+        //print("Finished playing TTS section \(playbackProgress?.section ?? -1) line \(playbackProgress?.line ?? -1)")
+        if let nextUtterance = utterances.popLast() {
             nextUtterance.rate = playbackSpeed * AVSpeechUtteranceDefaultSpeechRate
         } else {
             if let playbackProgress = self.playbackProgress, playbackProgress.section < playbackProgress.numSections - 1 {
-                self.playbackProgress = PlaybackProgress(section: playbackProgress.section + 1, numSections: playbackProgress.numSections, line: 0)
+                self.startSection(playbackProgress.section + 1)
+            } else {
+                self.playbackState = .stopped
             }
         }
     }
