@@ -16,6 +16,7 @@ protocol BreviarDataSource {
     func getTTSPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], forceLocal: Bool, handler: @escaping (String?, Error?) -> Void)
     func parsePrayerLink(url: URL) -> BreviarLink
     func getSettingsEntries(forceLocal: Bool, handler: @escaping ([SettingsEntry]?, Error?) -> Void)
+    func getAboutPage(handler: @escaping (String?, Error?) -> Void)
 }
 
 enum DataSourceError: LocalizedError {
@@ -463,6 +464,21 @@ class CGIDataSource : BreviarDataSource {
                 DispatchQueue.main.async {
                     handler(nil, error)
                 }
+            }
+        }
+    }
+    
+    func getAboutPage(handler: @escaping (String?, Error?) -> Void) {
+        let args = [
+            "qt": "pst",
+            "st": "i",
+            "p": "0",
+            "j": self.cgiLanguageCode,
+        ]
+        self.cgiClient(forceLocal: true).makeRequest(args) { data, error in
+            let response = String(data: data!, encoding: .utf8)
+            DispatchQueue.main.async {
+                handler(self.getHTMLBody(response!), nil)
             }
         }
     }

@@ -114,7 +114,15 @@ struct MainScreenContent: View {
                     }
                 }
                 
-                Section(header: Text(S.settings.S)) {
+                Section(
+                    header: Text(S.settings.S),
+                    footer: HStack{
+                        Spacer()
+                        NavigationLink(S.aboutBreviary.S, destination: AboutScreen())
+                            .multilineTextAlignment(.center)
+                        Spacer()
+                    }
+                ) {
                     NavigationLink(destination: SettingsScreen(), label: { Label(S.settings.S, systemImage: "gearshape.fill") })
                 }
             }

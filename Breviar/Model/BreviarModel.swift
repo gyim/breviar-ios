@@ -41,6 +41,8 @@ class BreviarModel : ObservableObject {
     @Published var prayerText: LoadingState<String> = .idle
     @Published var ttsPrayerText: LoadingState<String> = .idle
     
+    @Published var aboutPage: LoadingState<String> = .idle
+    
     @Published var settingsEntries: LoadingState<[SettingsEntry]> = .idle
     @Published var textOptions: TextOptions
     
@@ -69,6 +71,7 @@ class BreviarModel : ObservableObject {
         self.dayState = .idle
         self.monthState = .idle
         self.settingsEntries = .idle
+        self.aboutPage = .idle
         _ = self.load()
     }
     
@@ -217,6 +220,22 @@ class BreviarModel : ObservableObject {
                     self.ttsPrayerText = .failed(error!, retry)
                 }
             }
+        }
+    }
+    
+    func loadAboutPage() {
+        self.dataSource.getAboutPage { text, error in
+            let txt = text!
+                .replacingOccurrences(of: "[VERSION]", with: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String)
+                .replacingOccurrences(of: "[PROJECT-URL]", with: S.webURL.S)
+                .replacingOccurrences(of: "[E-MAIL]", with: "apple@breviar.sk")
+                .replacingOccurrences(of: "[APP-NAME]", with: S.appName.S)
+                .replacingOccurrences(of: "[PROJECT-SOURCE-STORAGE]", with: "GitHub")
+                .replacingOccurrences(of: "[PROJECT-SOURCE-URL]", with: "https://github.com/gyim/breviar-ios")
+                .replacingOccurrences(of: "[SPECIAL-CREDITS]", with: "")
+                .replacingOccurrences(of: "[PLATFORM-ANDROID]", with: "Android")
+                .replacingOccurrences(of: "[PLATFORM-IOS]", with: "iOS")
+            self.aboutPage = .loaded(txt)
         }
     }
     

@@ -216,3 +216,23 @@ struct PrayerView : UIViewRepresentable {
         return PrayerView(text: text, textOptions: textOptions, tapHandler: tapHandler, linkHandler: newHandler)
     }
 }
+
+struct AboutScreen: View {
+    @EnvironmentObject var model: BreviarModel
+    
+    var body: some View {
+        LoadingView(value: model.aboutPage) { text in
+            PrayerView(text: text, textOptions: model.textOptions)
+                .onLinkEvent() { url in
+                    UIApplication.shared.open(url)
+                }
+        }
+        .navigationTitle(S.aboutBreviary.S)
+        .navigationBarTitleDisplayMode(.inline)
+        .ignoresSafeArea()
+        .onAppear() {
+            model.loadAboutPage()
+        }
+    }
+    
+}

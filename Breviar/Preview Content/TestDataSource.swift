@@ -73,4 +73,8 @@ class TestDataSource : BreviarDataSource {
         ]
         handler(entries, nil)
     }
+    
+    func getAboutPage(handler: @escaping (String?, Error?) -> Void) {
+        handler("About Breviarium", nil)
+    }
 }

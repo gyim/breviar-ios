@@ -48,6 +48,11 @@ struct S {
     static let liturgicalTexts = LS(sk: "Liturgické texty", cz: "Liturgické texty", hu: "Liturgikus szövegek")
     static let language = LS(sk: "Jazyk", cz: "Jazyk", hu: "Nyelv")
     
+    // About
+    static let aboutBreviary = LS(sk: "O aplikácii Breviára", cz: "O aplikaci Breviáře", hu: "A Zsolozsma alkalmazásról")
+    static let webURL = LS(sk: "https://breviar.sk", cz: "https://breviar.cz", hu: "https://zsolozsma.katolikus.hu")
+    static let appName = LS(sk: "Breviár", cz: "Breviář", hu: "Zsolozsma")
+    
     // Setup Wizard
     static let liturgicalCalendar = LS(sk: "Liturgický kalendár", cz: "Liturgický kalendář", hu: "Liturgikus naptár")
     static let networkSettings = LS(sk: "Nastavenia siete", cz: "Nastavení sítě", hu: "Hálózati beállítások")
