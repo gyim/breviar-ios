@@ -20,17 +20,19 @@ enum PlaybackState {
 
 struct PlaybackProgress {
     let section: Int
-    let numSections: Int
-    let line: Int
-    let numLines: Int
-    let characters: Int
-    let numCharacters: Int
+    
+    let sectionOffset: Int
+    let sectionChars: Int
+    
+    let docOffset: Int
+    let docChars: Int
     
     func percentage() -> Double {
-        let charPoints = Double(characters) / Double(numCharacters)
-        let linePoints = (Double(line) + charPoints) / Double(numLines)
-        let sectPoints = (Double(section) + linePoints) / Double(numSections)
-        return min(sectPoints * 100, 100.0)
+        if docChars > 0 {
+            return 100 * Double(docOffset) / Double(docChars)
+        } else {
+            return 0
+        }
     }
 }
 
@@ -222,60 +224,59 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
         }
     }
     
-    private func startSection(_ sectionIndex: Int, interruptPlayback: Bool = false) {
-        print("Starting TTS section \(sectionIndex) interruptPlayback: \(interruptPlayback)")
+    private func startSection(_ sectionIndex: Int) {
         let voice = AVSpeechSynthesisVoice(language: self.language)
-        let section = self.doc.sections[sectionIndex]
+        self.speechSynthesizer?.stopSpeaking(at: AVSpeechBoundary.immediate)
         
-        if interruptPlayback {
-            self.speechSynthesizer?.stopSpeaking(at: AVSpeechBoundary.immediate)
-        }
-        
-        // Create utterance for each line
-        utterances = []
+        var sectionOffset = 0
         var lineNum = 0
-        for line in section.lines {
-            let utterance = AVSpeechUtterance(string: line.text)
-            utterance.voice = voice
-            utterance.rate = playbackSpeed * AVSpeechUtteranceDefaultSpeechRate
-            let progress = PlaybackProgress(
-                section: sectionIndex,
-                numSections: self.doc.sections.count,
-                line: lineNum,
-                numLines: section.lines.count,
-                characters: 0,
-                numCharacters: line.text.count
-            )
-            if lineNum == 0 {
-                self.playbackProgress = progress
+        let totalChars = self.doc.numChars()
+        var utterances: [AVSpeechUtterance] = []
+        for i in 0..<self.doc.sections.count {
+            let section = self.doc.sections[i]
+            
+            if i >= sectionIndex {
+                var sectionChars = 0
+                
+                for line in section.lines {
+                    let utterance = AVSpeechUtterance(string: line.text)
+                    utterance.voice = voice
+                    utterance.rate = playbackSpeed * AVSpeechUtteranceDefaultSpeechRate
+                    let progress = PlaybackProgress(section: i, sectionOffset: sectionOffset, sectionChars: sectionChars, docOffset: sectionOffset + sectionChars, docChars: totalChars)
+                    if lineNum == 0 {
+                        self.playbackProgress = progress
+                    }
+                    
+                    utterances.append(utterance)
+                    self.progressForUtterance[utterance] = progress
+                    self.speechSynthesizer?.speak(utterance)
+                    sectionChars += line.text.count
+                    lineNum += 1
+                }
             }
             
-            utterances.append(utterance)
-            self.progressForUtterance[utterance] = progress
-            self.speechSynthesizer?.speak(utterance)
-            lineNum += 1
+            sectionOffset += section.numChars()
         }
         
-        if utterances.count > 0 {
-            utterances.reverse()
-            _ = utterances.popLast()
-        }
+        self.sectionStartDate = Date()
+        self.utterances = utterances.reversed()
     }
     
     func prevSection() {
         if let playbackProgress = self.playbackProgress, let sectionStartDate = self.sectionStartDate {
-            if playbackProgress.section > 0 && sectionStartDate.timeIntervalSinceNow > -2 {
-                self.startSection(playbackProgress.section - 1, interruptPlayback: true)
+            let sectionElapsed = sectionStartDate.timeIntervalSinceNow
+            if playbackProgress.section > 0 && sectionElapsed > -2 {
+                self.startSection(playbackProgress.section - 1)
             } else {
-                self.startSection(playbackProgress.section, interruptPlayback: true)
+                self.startSection(playbackProgress.section)
             }
         }
     }
     
     func nextSection() {
         if let playbackProgress = self.playbackProgress {
-            if playbackProgress.section < playbackProgress.numSections - 1 {
-                self.startSection(playbackProgress.section + 1, interruptPlayback: true)
+            if playbackProgress.section < self.doc.sections.count - 1 {
+                self.startSection(playbackProgress.section + 1)
             } else {
                 self.playbackState = .stopped
             }
@@ -286,29 +287,23 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
         if let playbackProgress = self.playbackProgress, let newProgress = self.progressForUtterance[utterance] {
             self.playbackProgress = PlaybackProgress(
                 section: newProgress.section,
-                numSections: newProgress.numSections,
-                line: newProgress.line,
-                numLines: newProgress.numLines,
-                characters: characterRange.upperBound,
-                numCharacters: utterance.speechString.count
+                sectionOffset: newProgress.sectionOffset,
+                sectionChars: newProgress.sectionChars + characterRange.lowerBound,
+                docOffset: newProgress.docOffset + characterRange.lowerBound,
+                docChars: newProgress.docChars
             )
             if playbackProgress.section != newProgress.section {
                 self.sectionStartDate = Date()
             }
-            //print("Playback progress: \(newProgress.percentage())")
+            //print("Playback progress: \(self.playbackProgress!)")
         }
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        //print("Finished playing TTS section \(playbackProgress?.section ?? -1) line \(playbackProgress?.line ?? -1)")
         if let nextUtterance = utterances.popLast() {
             nextUtterance.rate = playbackSpeed * AVSpeechUtteranceDefaultSpeechRate
         } else {
-            if let playbackProgress = self.playbackProgress, playbackProgress.section < playbackProgress.numSections - 1 {
-                self.startSection(playbackProgress.section + 1)
-            } else {
-                self.playbackState = .stopped
-            }
+            self.playbackState = .stopped
         }
     }
 }
