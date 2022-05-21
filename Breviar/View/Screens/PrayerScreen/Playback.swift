@@ -34,22 +34,22 @@ struct PlaybackProgress {
     }
 }
 
-class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegate, WKNavigationDelegate {
+class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     var speechSynthesizer: AVSpeechSynthesizer?
-    
+    var ttsParser: TTSParser = TTSParser()
+
     var playCommandHandler: Any?
     var pauseCommandHandler: Any?
     var togglePlayPauseCommandHandler: Any?
     var previousTrackCommandHandler: Any?
     var nextTrackCommandHandler: Any?
-    var webView: WKWebView = WKWebView()
     
     @Published var language: String = "en-US"
     @Published var title: String = ""
     @Published var subtitle: String = ""
     @Published var htmlBody: String = ""
     
-    var ttsSections: [String] = []
+    var doc: TTSDocument = TTSDocument(sections: [])
     var utterances: [AVSpeechUtterance] = []
     var progressForUtterance: [AVSpeechUtterance: PlaybackProgress] = [:]
     var sectionStartDate: Date?
@@ -135,7 +135,7 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
     }
     
     private func endSession() {
-        self.ttsSections = []
+        self.doc = TTSDocument(sections: [])
         self.playbackProgress = nil
         
         if playbackState == .stopped {
@@ -180,55 +180,24 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
     private func startPlayback() {
         switch playbackState {
         case .stopped:
-            if self.ttsSections != [] {
+            if self.doc.sections.count > 0 {
                 startSpeech()
             } else {
-                extractText()
+                self.ttsParser.parseHTML(self.htmlBody) { doc, error in
+                    if let doc = doc {
+                        self.doc = doc
+                        if self.doc.sections.count > 0 {
+                            self.startSpeech()
+                        }
+                    } else {
+                        print(error!)
+                    }
+                }
             }
         case .playing:
             break
         case .paused:
             speechSynthesizer?.continueSpeaking()
-        }
-    }
-    
-    private func extractText() {
-        let html = """
-            <!DOCTYPE html>
-            <head>
-                <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
-                <link rel='stylesheet' type='text/css' href='html/breviar.css'>
-                <link rel='stylesheet' type='text/css' href='html/breviar-voice-output.css'>
-            </head>\n"
-                <body>\(self.htmlBody)</body>
-            </html>
-        """
-        let baseURL = URL(fileURLWithPath: Bundle.main.bundlePath)
-        self.webView.navigationDelegate = self
-        self.webView.loadHTMLString(html, baseURL: baseURL)
-    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        let getSpeechTextJS = """
-            (function() {
-                let tts_sections = document.getElementsByClassName('tts_section');
-                for (let section of tts_sections) {
-                    section.parentNode.insertBefore(document.createTextNode("\\n####\\n"), section);
-                }
-                return document.body.innerText;
-            })()
-        """
-        self.webView.evaluateJavaScript(getSpeechTextJS) { result, error in
-            guard let res = result else { print("WebKit error: \(error.debugDescription)"); return }
-            guard let ttsText = res as? String else { print("WebKit returned invalid object: \(res)"); return }
-            let sections = ttsText.components(separatedBy: "\n####\n")
-            
-            DispatchQueue.main.async {
-                if self.playbackState == .playing {
-                    self.ttsSections = sections
-                    self.startSpeech()
-                }
-            }
         }
     }
     
@@ -239,7 +208,7 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
             MPMediaItemPropertyArtist: subtitle,
         ]
         self.speechSynthesizer?.delegate = self
-        if self.ttsSections.count > 0 {
+        if self.doc.sections.count > 0 {
             self.startSection(0)
         }
     }
@@ -255,37 +224,27 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
     
     private func startSection(_ sectionIndex: Int, interruptPlayback: Bool = false) {
         print("Starting TTS section \(sectionIndex) interruptPlayback: \(interruptPlayback)")
-        let text = self.ttsSections[sectionIndex]
         let voice = AVSpeechSynthesisVoice(language: self.language)
+        let section = self.doc.sections[sectionIndex]
         
         if interruptPlayback {
             self.speechSynthesizer?.stopSpeaking(at: AVSpeechBoundary.immediate)
         }
         
-        // Get non-empty lines
-        var lines: [String] = []
-        for l in text.components(separatedBy: .newlines) {
-            let line = l.trimmingCharacters(in: .whitespaces)
-            if line.count == 0 || line == "\"" {
-                continue
-            }
-            lines.append(line)
-        }
-
         // Create utterance for each line
         utterances = []
         var lineNum = 0
-        for line in lines {
-            let utterance = AVSpeechUtterance(string: line)
+        for line in section.lines {
+            let utterance = AVSpeechUtterance(string: line.text)
             utterance.voice = voice
             utterance.rate = playbackSpeed * AVSpeechUtteranceDefaultSpeechRate
             let progress = PlaybackProgress(
                 section: sectionIndex,
-                numSections: self.ttsSections.count,
+                numSections: self.doc.sections.count,
                 line: lineNum,
-                numLines: lines.count,
+                numLines: section.lines.count,
                 characters: 0,
-                numCharacters: line.count
+                numCharacters: line.text.count
             )
             if lineNum == 0 {
                 self.playbackProgress = progress

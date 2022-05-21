@@ -30,6 +30,7 @@
 		709A26AD25F8287A0040AE84 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A26AC25F8287A0040AE84 /* Constants.swift */; };
 		709A26B125F82C250040AE84 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A26B025F82C250040AE84 /* DatePicker.swift */; };
 		709A26B925F8DA8A0040AE84 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A26B825F8DA8A0040AE84 /* Calendar.swift */; };
+		709E3FAE28398BB800296AE0 /* TTSParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709E3FAD28398BB800296AE0 /* TTSParser.swift */; };
 		70A39C7126488BA8008E0AE1 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A39C7026488BA8008E0AE1 /* Strings.swift */; };
 		70A39C7326489344008E0AE1 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A39C7226489344008E0AE1 /* Language.swift */; };
 		70A99DBA25B3965300B558CE /* BreviarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A99DB925B3965300B558CE /* BreviarApp.swift */; };
@@ -93,6 +94,7 @@
 		709A26AC25F8287A0040AE84 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		709A26B025F82C250040AE84 /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
 		709A26B825F8DA8A0040AE84 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		709E3FAD28398BB800296AE0 /* TTSParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTSParser.swift; sourceTree = "<group>"; };
 		70A39C7026488BA8008E0AE1 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		70A39C7226489344008E0AE1 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		70A99DB625B3965300B558CE /* Breviar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breviar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,6 +224,7 @@
 				70A39C7226489344008E0AE1 /* Language.swift */,
 				70BD024E262A3900007FB5C0 /* Settings.swift */,
 				701328142683D76100A991FE /* Breviar-Bridging-Header.h */,
+				709E3FAD28398BB800296AE0 /* TTSParser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				701328402683D76200A991FE /* breviar.cpp in Sources */,
 				70BD424B26107D7400BB386E /* TextOptions.swift in Sources */,
 				701328372683D76200A991FE /* myhpage.cpp in Sources */,
+				709E3FAE28398BB800296AE0 /* TTSParser.swift in Sources */,
 				7013283B2683D76200A991FE /* myconf.cpp in Sources */,
 				70C6A53525F412360043056D /* MainScreen.swift in Sources */,
 				7013283C2683D76200A991FE /* liturgia.cpp in Sources */,
