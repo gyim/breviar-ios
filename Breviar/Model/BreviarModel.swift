@@ -233,7 +233,7 @@ class BreviarModel : ObservableObject {
                 .replacingOccurrences(of: "[PROJECT-SOURCE-STORAGE]", with: "GitHub")
                 .replacingOccurrences(of: "[PROJECT-SOURCE-URL]", with: "https://github.com/gyim/breviar-ios")
                 .replacingOccurrences(of: "[SPECIAL-CREDITS]", with: "")
-                .replacingOccurrences(of: "[PLATFORM-ANDROID]", with: "Android")
+                .replacingOccurrences(of: "[PLATFORM-ANDROID]", with: "")
                 .replacingOccurrences(of: "[PLATFORM-IOS]", with: "iOS")
             self.aboutPage = .loaded(txt)
         }
