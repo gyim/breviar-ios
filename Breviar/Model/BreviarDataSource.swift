@@ -292,7 +292,7 @@ class CGIDataSource : BreviarDataSource {
     
     var cgiLanguageCode: String {
         if self.options?.calendar == "czop" {
-            return "czop"
+            return "c2"
         } else {
             return self.options?.language.rawValue ?? ""
         }
