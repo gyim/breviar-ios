@@ -63,13 +63,13 @@ class TestDataSource : BreviarDataSource {
                 SettingsEntryOption(label: "Second flag", value: 2),
                 SettingsEntryOption(label: "Third flag", value: 4),
                 SettingsEntryOption(label: "Fourth flag", value: 8),
-            ]),
+            ], visible: true),
             SettingsEntry(name: "o1", label: "String Choice", type: .stringChoice, defaultValue: 0, options: [
                 SettingsEntryOption(label: "First flag with long description", value: 1),
                 SettingsEntryOption(label: "Second flag", value: 2),
                 SettingsEntryOption(label: "Third flag", value: 3),
                 SettingsEntryOption(label: "Fourth flag", value: 4),
-            ]),
+            ], visible: true),
         ]
         handler(entries, nil)
     }

@@ -147,6 +147,7 @@ struct SettingsEntry: Identifiable {
     var type: SettingsEntryType
     var defaultValue: Int
     var options: [SettingsEntryOption]
+    var visible: Bool
     
     var id: String {
         return name

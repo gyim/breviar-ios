@@ -69,11 +69,13 @@ struct LiturgicalTextSettingsView : View {
     var body: some View {
         Section(header: Text(S.liturgicalTexts.S)) {
             ForEach(entries) { entry in
-                switch entry.type {
-                case .flagSet:
-                    NavigationLink(entry.label, destination: SettingsFlagSetView(entry: entry))
-                case .stringChoice:
-                    SettingsStringChoiceListEntry(entry: entry)
+                if entry.visible {
+                    switch entry.type {
+                    case .flagSet:
+                        NavigationLink(entry.label, destination: SettingsFlagSetView(entry: entry))
+                    case .stringChoice:
+                        SettingsStringChoiceListEntry(entry: entry)
+                    }
                 }
             }
         }

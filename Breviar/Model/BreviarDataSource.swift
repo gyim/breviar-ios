@@ -151,7 +151,8 @@ class SettingsParser : NSObject, XMLParserDelegate {
     var path: [String] = []
     
     // Settings entries
-    let entryTags = ["Opt0Special", "Opt1PrayerPortions", "Opt2Export", "Opt3Communia", "Opt5Alternatives"]
+    let entryTags = ["Opt0Special", "Opt1PrayerPortions", "Opt2Export", "Opt3Communia", "Opt5Alternatives", "Opt6AlternativesMultivalue"]
+    let hiddenEntryTags = ["Opt6AlternativesMultivalue"]
     let skipEntryLabels = ["hu_text", "sk_text", "cz_text", "", "/"]
     var entry: SettingsEntry?
     var entries: [SettingsEntry] = []
@@ -180,7 +181,7 @@ class SettingsParser : NSObject, XMLParserDelegate {
             guard let label = attributes["Text"] else { return }
             guard let defaultValueS = attributes["Value"], let defaultValue = Int(defaultValueS) else { return }
             let type: SettingsEntryType = name == communiaEntryName ? .stringChoice : .flagSet
-            self.entry = SettingsEntry(name: name, label: normalizeLabel(label), type: type, defaultValue: defaultValue, options: [])
+            self.entry = SettingsEntry(name: name, label: normalizeLabel(label), type: type, defaultValue: defaultValue, options: [], visible: !hiddenEntryTags.contains(elementName))
         } else if self.entry != nil {
             // Parse settings entry options (flags only)
             guard let label = attributes["Text"] else { return }
@@ -371,6 +372,7 @@ class CGIDataSource : BreviarDataSource {
             "o3": String(UserDefaults.standard.integer(forKey: "o3")),
             "o4": String(UserDefaults.standard.integer(forKey: "o4")),
             "o5": String(UserDefaults.standard.integer(forKey: "o5")),
+            "o6": String(UserDefaults.standard.integer(forKey: "o6")),
             "j": self.cgiLanguageCode,
             "k": self.options?.calendar ?? "",
         ]
