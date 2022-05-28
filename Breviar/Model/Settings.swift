@@ -165,6 +165,10 @@ struct SettingsEntry: Identifiable {
         UserDefaults.standard.set(value, forKey: self.name)
     }
     
+    func clearUserSettings() {
+        UserDefaults.standard.removeObject(forKey: self.name)
+    }
+    
     func normalizedDefaultValue() -> Int {
         switch type {
         case .flagSet:

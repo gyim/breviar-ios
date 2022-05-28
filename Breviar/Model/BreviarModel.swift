@@ -64,6 +64,7 @@ class BreviarModel : ObservableObject {
         self.dataSourceOptionsNeeded = false
         self.dataSource.setOptions(options)
         currentLanguage = options.language
+        self.clearCalendarSettings()
         self.reload()
     }
     
@@ -261,6 +262,13 @@ class BreviarModel : ObservableObject {
                 print("Reverting option: \(optName)=\(defaultValue)")
                 entry.setUserSettings(defaultValue)
             }
+        }
+    }
+    
+    func clearCalendarSettings() {
+        for optName in ["o0", "o1", "o3", "o4", "o5", "o6"] {
+            guard let entry = getSettingsEntry(name: optName) else { continue }
+            entry.clearUserSettings()
         }
     }
     
