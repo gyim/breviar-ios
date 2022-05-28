@@ -116,7 +116,7 @@ struct PrayerView : UIViewRepresentable {
                     let baseURL = URL(fileURLWithPath: Bundle.main.bundlePath)
                     self.webView.loadHTMLString(modifiedText, baseURL: baseURL)
                 } else {
-                    self.webView.evaluateJavaScript("document.documentElement.innerHTML = `\(modifiedText)`; initPrayer();") { (_, error) in
+                    self.webView.evaluateJavaScript("document.documentElement.innerHTML = `\(modifiedText)`; initPrayer(); setFont('\(fontName)', \(fontSize));") { (_, error) in
                         if error != nil {
                             print("Error reloading document: \(error.debugDescription)")
                         }
