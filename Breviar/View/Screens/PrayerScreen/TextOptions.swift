@@ -8,7 +8,7 @@
 import SwiftUI
 
 let textOptionsWidth = CGFloat(300.0)
-let textOptionsHeight = CGFloat(280.0)
+let textOptionsHeight = CGFloat(200.0)
 
 struct TextOptionsView : View {
     @ObservedObject var textOptions: TextOptions
@@ -40,8 +40,6 @@ struct TextOptionsView : View {
                 )
                 Divider()
                 ColorSchemeChooserView(colorScheme: $textOptions.colorScheme)
-                Divider()
-                StartPlaybackButton(prayer: prayer)
             }
             .frame(width: textOptionsWidth, height: textOptionsHeight, alignment: .center)
             .transition(fontChooserTransition)
@@ -210,28 +208,6 @@ struct ColorSchemeButton : View {
         }
         
         return text.font(.system(size: 14.0))
-    }
-}
-
-struct StartPlaybackButton : View {
-    @EnvironmentObject var model: BreviarModel
-    @State var playbackSheetShown = false
-    var prayer: Prayer?
-
-    var body: some View {
-        Button(
-            action: {
-                playbackSheetShown = true
-            },
-            label: {
-                Label(S.startPlayback.S, systemImage: "play.fill")
-                    .frame(maxWidth: .infinity)
-                    .padding(8.0)
-            }
-        ).sheet(isPresented: $playbackSheetShown, content: {
-            PlaybackScreen(playbackSheetShown: $playbackSheetShown, prayer: prayer)
-                .environmentObject(model)
-        })
     }
 }
 

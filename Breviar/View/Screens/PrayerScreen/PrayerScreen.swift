@@ -11,6 +11,7 @@ import WebKit
 struct PrayerScreen: View {
     @EnvironmentObject var model: BreviarModel
     @State var textOptionsShown = false
+    @State var playbackSheetShown = false
     var prayer: Prayer
     @Binding var prayerText: LoadingState<String>
     @Binding var textOptions: TextOptions
@@ -39,9 +40,19 @@ struct PrayerScreen: View {
         .navigationBarHidden(navbarHidden)
         .statusBar(hidden: navbarHidden)
         .toolbar(content: {
-            Button(action: {
-                textOptionsShown = true
-            }, label: {Label("", systemImage:"textformat.size")})
+            HStack {
+                Button(action: {
+                    playbackSheetShown = true
+                }, label: {Label("", systemImage:"play.fill")})
+                
+                Button(action: {
+                    textOptionsShown = true
+                }, label: {Label("", systemImage:"textformat.size")})
+            }
+        })
+        .sheet(isPresented: $playbackSheetShown, content: {
+            PlaybackScreen(playbackSheetShown: $playbackSheetShown, prayer: prayer)
+                .environmentObject(model)
         })
         .onAppear() {
             model.loadPrayer(prayer)
