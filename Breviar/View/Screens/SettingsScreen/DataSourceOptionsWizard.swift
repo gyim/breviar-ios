@@ -64,6 +64,7 @@ struct CalendarChooserScreen: View {
                 CalendarLink(language: "cz", calendar: "czofm")
                 CalendarLink(language: "cz", calendar: "czsj")
                 CalendarLink(language: "cz", calendar: "czocd")
+                CalendarLink(language: "cz", calendar: "czofmconv")
             }.navigationTitle(S.liturgicalCalendar.forLanguage(.czech))
         case "hu":
             List {
@@ -86,6 +87,7 @@ struct CalendarChooserScreen: View {
                     CalendarLink(language: "sk", calendar: "ocd"),
                     CalendarLink(language: "sk", calendar: "csa"),
                     CalendarLink(language: "sk", calendar: "osu"),
+                    CalendarLink(language: "sk", calendar: "skopraem"),
                 ]) { e in e}
             }.navigationTitle(S.liturgicalCalendar.forLanguage(.slovak))
         default:

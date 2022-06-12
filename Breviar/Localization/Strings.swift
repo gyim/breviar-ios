@@ -86,6 +86,7 @@ let CalendarNames: [String: String] = [
     "czofm": "s vlastními františkánskými texty (OFM)",
     "czsj": "s vlastními texty jezuitského řádu (SJ)",
     "czocd": "s vlastními texty bosých karmelitánů (OCD)",
+    "czofmconv": "s vlastními minoritskými texty (OFMConv.)",
 
     // Hungarian
     "hu": "általános [Magyarország]",
@@ -105,4 +106,5 @@ let CalendarNames: [String: String] = [
     "ocd": "pre bosých karmelitánov (OCD)",
     "csa": "pre kanonisky sv. Augustína Notre Dame (CSA)",
     "osu": "pre uršulínky Rímskej únie (OSU)",
+    "skopraem": "pre premonštrátov (OPraem)",
 ]
