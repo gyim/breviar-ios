@@ -13,6 +13,7 @@ enum Language : String {
     case czech = "cz"
     case hungarian = "hu"
     case slovak = "sk"
+    case latin = "la"
 
     var locale: Locale {
         switch self {
@@ -22,6 +23,8 @@ enum Language : String {
             return Locale(identifier: "hu_HU")
         case .slovak:
             return Locale(identifier: "sk_SK")
+        case .latin:
+            return Locale(identifier: "en_US")
         }
     }
     
@@ -37,6 +40,7 @@ struct LS {
     var sk: String
     var cz: String
     var hu: String
+    var la: String
     
     var S : String {
         return forLanguage(currentLanguage)
@@ -50,6 +54,8 @@ struct LS {
             return self.cz
         case .hungarian:
             return self.hu
+        case .latin:
+            return self.la
         }
     }
     

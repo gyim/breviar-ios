@@ -30,6 +30,7 @@ struct LanguageChooserScreen: View {
             LanguageLink(name: "🇨🇿 Čeština", code: "cz")
             LanguageLink(name: "🇭🇺 Magyar", code: "hu")
             LanguageLink(name: "🇸🇰 Slovenčina", code: "sk")
+            LanguageLink(name: "✝️ Latin", code: "la")
         }
         .navigationTitle("Choose Language")
     }
@@ -90,6 +91,10 @@ struct CalendarChooserScreen: View {
                     CalendarLink(language: "sk", calendar: "skopraem"),
                 ]) { e in e}
             }.navigationTitle(S.liturgicalCalendar.forLanguage(.slovak))
+        case "la":
+            List {
+                CalendarLink(language: "la", calendar: "la")
+            }
         default:
             Text("Nothing here")
         }
