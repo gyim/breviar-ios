@@ -40,14 +40,16 @@ struct PrayerScreen: View {
         .navigationBarHidden(navbarHidden)
         .statusBar(hidden: navbarHidden)
         .toolbar(content: {
-            HStack {
-                Button(action: {
-                    playbackSheetShown = true
-                }, label: {Label("", systemImage:"play.fill")})
-                
-                Button(action: {
-                    textOptionsShown = true
-                }, label: {Label("", systemImage:"textformat.size")})
+            if model.dataSourceOptions?.language != .latin {
+                HStack {
+                    Button(action: {
+                        playbackSheetShown = true
+                    }, label: {Label("", systemImage:"play.fill")})
+                    
+                    Button(action: {
+                        textOptionsShown = true
+                    }, label: {Label("", systemImage:"textformat.size")})
+                }
             }
         })
         .sheet(isPresented: $playbackSheetShown, content: {

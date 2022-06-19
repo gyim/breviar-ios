@@ -94,7 +94,7 @@ struct CalendarChooserScreen: View {
         case "la":
             List {
                 CalendarLink(language: "la", calendar: "la")
-            }
+            }.navigationTitle(S.liturgicalCalendar.forLanguage(.latin))
         default:
             Text("Nothing here")
         }
