@@ -108,6 +108,7 @@ struct PrayerView : UIViewRepresentable {
             webView = PrayerWebView(frame: CGRect(), configuration: webViewConfig)
             webView.allowsLinkPreview = false
             webView.isOpaque = false
+            webView.configuration.defaultWebpagePreferences.preferredContentMode = .mobile
         }
         
         deinit {
