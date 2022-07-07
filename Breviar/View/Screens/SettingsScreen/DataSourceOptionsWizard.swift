@@ -26,12 +26,17 @@ struct DataSourceOptionsWizard: View {
 
 struct LanguageChooserScreen: View {
     var body: some View {
-        List {
-            LanguageLink(name: "🇨🇿 Čeština", code: "cz")
-            LanguageLink(name: "🇭🇺 Magyar", code: "hu")
-            LanguageLink(name: "🇸🇰 Slovenčina", code: "sk")
+        VStack {
+            Image("PlaybackIcon")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+
+            List {
+                LanguageLink(name: "🇨🇿 Breviář", code: "cz")
+                LanguageLink(name: "🇭🇺 Zsolozsma", code: "hu")
+                LanguageLink(name: "🇸🇰 Breviár", code: "sk")
+            }
         }
-        .navigationTitle("Choose Language")
     }
 }
 
