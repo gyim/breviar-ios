@@ -1,4 +1,40 @@
 ________________________________________________________________________
+What's New in Version 2.0
+
+EN (general description)
+– Completely revamped UI.
+– Added Latin version (editio typica altera, Roma 2000).
+
+SK
+– Doplnené: Úvodné formuly na modlitbu Pána.
+– Hlasový výstup: Nepoužiť kňazské požehnanie na záver modlitby.
+– Nové slávenia: Učitelia Cirkvi.
+– Kalendár a propriá pre premonštrátov (OPraem).
+– Úprava koliekt a názvov niektorých slávení podľa 3. typického vydania Rímskeho misála
+– Prekladanie slávností v júni, ak sú v kolízii so slávnosťou Najsv. Srdca Ježišovho.
+– Oprava slávenia sviatkov vo Vianočnej oktáve ako slávnosť.
+– Vylepšenie pre hlasový výstup (čítanie bez prerušovania pri úvodzovkách).
+– Možnosť voľby zobrazenia textu podľa tlačeného vydania (bez úprav).
+
+CZ
+– Doplněno: Úvodní vybídnutí před modlitbou Páně.
+– Hlasový výstup: Nepoužít kněžské požehnání na závěr modlitby.
+– Kalendář a vlastní texty jezuity (SJ).
+– Nové slavení: Učitelé církve.
+– Překládání slavností v červnu, které jsou v kolizi se slavností Nejsv. Srdce Ježíšovho.
+– Kalendář a vlastní texty pro minority (OFMConv).
+– Vylepšení pro hlasový výstup (čtení bez přerušování při úvozovkách).
+– Opravy ve vlastních textech pro františkánskou rodinu.
+– Oprava slavení svátků v oktávu vánočním jako slavnost.
+
+HU
+– Jezsuiták zsolozsmája (SJ).
+– Kiegészítve: A Miatyánk előtt alkalmazható bevezető imák.
+– Hang kimenet: Ne használjon pap (vagy deák) áldást az ima végén.
+– Továbbfejlesztett hangkimenet (az idézőjelek miatti megszakítások nélküli olvasás).
+– Kijavítva: a karácsonyi oktávban az ünnepek megünneplése mint főünnep.
+
+________________________________________________________________________
 What's New in Version 1.6
 
 SK
@@ -91,7 +127,7 @@ CZ
 – Poznámky pod čarou ke druhým čtením (modlitba se čtením).
 – Sobotní památka Panny Marie se nenabízí při střetu s jiným mariánským svátkem.
 – Kalendář a vlastní texty pro františkány (OFM).
-– Opravy v liturgickém kalendáři a textech (všeobecné, OFMCap).
+– Opravy v liturgickém kalendáři a textech (všeobecné, OFMCap.).
 – Noční režim upraví aj barvu lišty.
 – Podpora pro iOS 11.
 – Aktualizace, vylepšení a opravy v textech a generování modliteb.
