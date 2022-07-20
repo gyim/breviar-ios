@@ -1,4 +1,4 @@
-Liturgy of the Hours for iOS
+Breviarium – Liturgy of the Hours for iOS
 ============================
 
 This project contains the iOS app for
