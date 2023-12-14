@@ -65,7 +65,7 @@ struct S {
     // Errors
     static let errNetworkError = LS(sk: "Chyba siete", cz: "Chyba sítě", hu: "Hálózati hiba")
     static let errServerError = LS(sk: "Neplatná odpoveď zo servera", cz: "Neplatná odpověď ze serveru", hu: "Hibás szerver válasz")
-    static let errParseError = LS(sk: "Chyba při analýze odpovědi serveru", cz: "Chyba pri analýze odpovede servera", hu: "Hiba történt a szerver válaszának feldolgozása során")
+    static let errParseError = LS(sk: "Chyba pri analýze odpovede servera", cz: "Chyba při analýze odpovědi serveru", hu: "Hiba történt a szerver válaszának feldolgozása során")
     static let errEmptyResponse = LS(sk: "Prázdna odpoveď servera", cz: "Prázdná odpověď serveru", hu: "Üres szerver válasz")
     static let errInternalError = LS(sk: "Vnútorná chyba", cz: "Interní chyba", hu: "Belső hiba")
 }
