@@ -9,9 +9,9 @@ import Foundation
 
 struct S {
     // Loading screen
-    static let loading = LS(sk: "Načítava", cz: "Načítání", hu: "Betöltés...")
-    static let retryFromServer = LS(sk: "Skúste to znova zo servera", cz: "Opakujte akci ze serveru", hu: "Újrapróbálás szerverről")
-    static let retryLocally = LS(sk: "Skúste to miestne", cz: "Zkuste to znovu místně", hu: "Újrapróbálás helyben")
+    static let loading = LS(sk: "Načítavam...", cz: "Načítávání...", hu: "Betöltés...")
+    static let retryFromServer = LS(sk: "Skúsiť znova načítať zo servera", cz: "Opakovat akci ze serveru", hu: "Újrapróbálás szerverről")
+    static let retryLocally = LS(sk: "Skúsiť offline (lokálne)", cz: "Zkusit offline (lokálně)", hu: "Újrapróbálás helyben")
     
     // Prayers
     static let invitatory = LS(sk: "Invitatórium", cz: "Uvedení do první modlitby dne", hu: "Imádságra hívás")
@@ -39,7 +39,7 @@ struct S {
     static let textOptions = LS(sk: "Možnosti textu", cz: "Možnosti textu", hu: "Szöveg beállításai")
     static let font = LS(sk: "Písmo", cz: "Písmo", hu: "Betűtípus")
     static let automatic = LS(sk: "Automaticky", cz: "Automatický", hu: "Automatikus")
-    static let light = LS(sk: "Svetelný", cz: "Světlý", hu: "Világos")
+    static let light = LS(sk: "Svetlý", cz: "Světlý", hu: "Világos")
     static let dark = LS(sk: "Tmavý", cz: "Tmavý", hu: "Sötét")
     static let startPlayback = LS(sk: "Čítanie textu", cz: "Čtení textu", hu: "Szöveg felolvasása")
     
@@ -49,18 +49,18 @@ struct S {
     static let language = LS(sk: "Jazyk", cz: "Jazyk", hu: "Nyelv")
     
     // About
-    static let aboutBreviary = LS(sk: "O aplikácii Breviára", cz: "O aplikaci Breviáře", hu: "A Zsolozsma alkalmazásról")
+    static let aboutBreviary = LS(sk: "O aplikácii Breviár", cz: "O aplikaci Breviář", hu: "A Zsolozsma alkalmazásról")
     static let webURL = LS(sk: "https://breviar.sk", cz: "https://breviar.cz", hu: "https://zsolozsma.katolikus.hu")
     static let appName = LS(sk: "Breviár", cz: "Breviář", hu: "Zsolozsma")
     
     // Setup Wizard
     static let liturgicalCalendar = LS(sk: "Liturgický kalendár", cz: "Liturgický kalendář", hu: "Liturgikus naptár")
     static let networkSettings = LS(sk: "Nastavenia siete", cz: "Nastavení sítě", hu: "Hálózati beállítások")
-    static let downloadLatestTexts = LS(sk: "Stiahnite si najnovšie texty", cz: "Stáhněte si nejnovější texty", hu: "Friss szövegek letöltése")
+    static let downloadLatestTexts = LS(sk: "Online použitie (texty zo servera)", cz: "Online použití (texty ze serveru)", hu: "Friss szövegek letöltése")
     static let always = LS(sk: "Vždy", cz: "Vždy", hu: "Mindig")
     static let onlyOnWifi = LS(sk: "Iba v sieti Wi-Fi", cz: "Pouze v síti Wi-Fi", hu: "Csak Wi-Fi hálózaton")
     static let never = LS(sk: "Nikdy", cz: "Nikdy", hu: "Soha")
-    static let done = LS(sk: "Hotový", cz: "Hotový", hu: "Kész")
+    static let done = LS(sk: "Hotovo", cz: "Hotovo", hu: "Kész")
     
     // Errors
     static let errNetworkError = LS(sk: "Chyba siete", cz: "Chyba sítě", hu: "Hálózati hiba")
