@@ -8,7 +8,7 @@
 import SwiftUI
 
 let textOptionsWidth = CGFloat(300.0)
-let textOptionsHeight = CGFloat(200.0)
+let textOptionsHeight = CGFloat(250.0)
 
 struct TextOptionsView : View {
     @ObservedObject var textOptions: TextOptions
@@ -38,6 +38,7 @@ struct TextOptionsView : View {
                         FontChooserLabel(fontName: textOptions.fontName)
                     }
                 )
+                TextWeightView(isBold: $textOptions.isBold)
                 Divider()
                 ColorSchemeChooserView(colorScheme: $textOptions.colorScheme)
             }
@@ -125,6 +126,18 @@ struct FontLabel : View {
     
     var body : some View {
         Text(font.name).font(.custom(font.systemName, size: 16.0)).foregroundColor(.primary)
+    }
+}
+
+struct TextWeightView : View {
+    @Binding var isBold: Bool
+    
+    var body: some View {
+        HStack {
+            Toggle(isOn: $isBold) {
+                Text(S.boldFont.S)
+            }
+        }.padding(.horizontal, 15).padding(.vertical, 5)
     }
 }
 

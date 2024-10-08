@@ -38,6 +38,7 @@ struct S {
     // Prayer screen / text options
     static let textOptions = LS(sk: "Možnosti textu", cz: "Možnosti textu", hu: "Szöveg beállításai")
     static let font = LS(sk: "Písmo", cz: "Písmo", hu: "Betűtípus")
+    static let boldFont = LS(sk: "Tučné písmo", cz: "Tučné písmo", hu: "Félkövér betűtípus")
     static let automatic = LS(sk: "Automaticky", cz: "Automatický", hu: "Automatikus")
     static let light = LS(sk: "Svetlý", cz: "Světlý", hu: "Világos")
     static let dark = LS(sk: "Tmavý", cz: "Tmavý", hu: "Sötét")

@@ -81,6 +81,7 @@ struct PrayerView : UIViewRepresentable {
         var prevText: String = ""
         var prevFontName: String = fontNames[0].systemName
         var prevFontSize: Double = 100.0
+        var prevIsBold: Bool = false
         var topPadding: CGFloat = 0
         var bottomPadding: CGFloat = 0
         
@@ -117,18 +118,18 @@ struct PrayerView : UIViewRepresentable {
         
         @objc func onTextOptionsChanged(_ notification: Notification) {
             if let textOptions = notification.object as? TextOptions {
-                setPrayerText(text: prevText, fontName: textOptions.fontName.systemName, fontSize: textOptions.fontSize)
+                setPrayerText(text: prevText, fontName: textOptions.fontName.systemName, fontSize: textOptions.fontSize, isBold: textOptions.isBold)
             }
         }
         
-        func setPrayerText(text: String, fontName: String, fontSize: Double) {
+        func setPrayerText(text: String, fontName: String, fontSize: Double, isBold: Bool) {
             if text != prevText {
-                let modifiedText = getModifiedText(text: text, fontName: fontName, fontSize: fontSize)
+                let modifiedText = getModifiedText(text: text, fontName: fontName, fontSize: fontSize, isBold: isBold)
                 if prevText == "" {
                     let baseURL = URL(fileURLWithPath: Bundle.main.bundlePath)
                     self.webView.loadHTMLString(modifiedText, baseURL: baseURL)
                 } else {
-                    self.webView.evaluateJavaScript("document.documentElement.innerHTML = `\(modifiedText)`; initPrayer(); setFont('\(fontName)', \(fontSize));") { (_, error) in
+                    self.webView.evaluateJavaScript("document.documentElement.innerHTML = `\(modifiedText)`; initPrayer(); setFont('\(fontName)', \(fontSize), \(isBold));") { (_, error) in
                         if error != nil {
                             print("Error reloading document: \(error.debugDescription)")
                         }
@@ -137,12 +138,14 @@ struct PrayerView : UIViewRepresentable {
                 
                 prevText = text
                 prevFontSize = fontSize
+                prevIsBold = isBold
             }
-            if fontName != prevFontName || fontSize != prevFontSize {
+            if fontName != prevFontName || fontSize != prevFontSize || isBold != prevIsBold {
                 prevFontName = fontName
                 prevFontSize = fontSize
+                prevIsBold = isBold
                 
-                self.webView.evaluateJavaScript("setFont('\(fontName)', \(fontSize))") { (_, error) in
+                self.webView.evaluateJavaScript("setFont('\(fontName)', \(fontSize), \(isBold))") { (_, error) in
                     if error != nil {
                         print("Error setting font size: \(error.debugDescription)")
                     }
@@ -150,21 +153,22 @@ struct PrayerView : UIViewRepresentable {
             }
         }
         
-        func getModifiedText(text: String, fontName: String, fontSize: Double) -> String {
+        func getModifiedText(text: String, fontName: String, fontSize: Double, isBold: Bool) -> String {
             return """
                 <head>
                     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
                     <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0" />
                     <link rel="stylesheet" type="text/css" href="html/breviar.css" />
+                    <link rel="stylesheet" type="text/css" href="html/breviar-normal-font.css" />
                     <style type="text/css">
-                        @import url("html/breviar-normal-font.css") screen;
                         @import url("html/breviar-invert-colors.css") screen and (prefers-color-scheme: dark);
                         body { padding: \(topPadding)px 0 \(bottomPadding)px; }
                     </style>
                     <script type="text/javascript">
-                        function setFont(fontName, fontSize) {
+                        function setFont(fontName, fontSize, isBold) {
                             document.body.style.fontFamily = fontName;
                             document.body.style.webkitTextSizeAdjust = fontSize + '%';
+                            document.styleSheets.item(1).disabled = isBold;
                         }
                         function setupTapGesture() {
                             document.body.onclick = function() {
@@ -183,7 +187,7 @@ struct PrayerView : UIViewRepresentable {
                         function initPrayer() {
                             setupTapGesture();
                             setupLinks();
-                            setFont('\(fontName)', \(fontSize));
+                            setFont('\(fontName)', \(fontSize), \(isBold));
                         }
                     </script>
                 </head>
@@ -217,7 +221,7 @@ struct PrayerView : UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: WKWebView, context: Context) {
-        context.coordinator.setPrayerText(text: text, fontName: textOptions.fontName.systemName, fontSize: textOptions.fontSize)
+        context.coordinator.setPrayerText(text: text, fontName: textOptions.fontName.systemName, fontSize: textOptions.fontSize, isBold: textOptions.isBold)
     }
 
     func onTapEvent(_ newHandler: @escaping () -> ()) -> PrayerView {

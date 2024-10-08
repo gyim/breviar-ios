@@ -88,6 +88,13 @@ class TextOptions: ObservableObject {
         }
     }
     
+    @Published var isBold = false {
+        didSet {
+            NotificationCenter.default.post(name: TextOptions.notificationName, object: self)
+            UserDefaults.standard.setValue(isBold, forKey: "textOptions.isBold")
+        }
+    }
+    
     init() {
         let userDefaults = UserDefaults.standard
         
@@ -103,6 +110,8 @@ class TextOptions: ObservableObject {
         if fontSize > 0 {
             self.fontSize = fontSize
         }
+        
+        self.isBold = userDefaults.bool(forKey: "textOptions.isBold")
         
         if let colorSchemeName = userDefaults.string(forKey: "colorScheme"),
            let colorScheme = ColorScheme(rawValue: colorSchemeName) {
