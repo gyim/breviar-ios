@@ -154,6 +154,22 @@ class SettingsParser : NSObject, XMLParserDelegate {
     let entryTags = ["Opt0Special", "Opt1PrayerPortions", "Opt2Export", "Opt3Communia", "Opt5Alternatives", "Opt6AlternativesMultivalue"]
     let hiddenEntryTags = ["Opt6AlternativesMultivalue"]
     let skipEntryLabels = ["hu_text", "sk_text", "cz_text", "", "/"]
+    let skipOptions = [
+        "o0": [ // liturgical calendar settings
+            "64":      true, // use normal font instead of bold
+            "128":     true, // show date chooser buttons after prayer selection buttons
+            "256":     true, // only text for TTS
+            "1024":    true, // show navigation lines (on right side)
+            "262144":  true, // navigation arrows on the left
+            "524288":  true, // navigation arrows
+            "1048576": true, // show only navigation arrows pointing down
+        ]
+    ]
+    let removeDefaultOptions = [
+        "o0": 256    | // only text for TTS
+              1024   | // show navigation lines (on right side)
+              524288   // navigation arrows
+    ]
     var entry: SettingsEntry?
     var entries: [SettingsEntry] = []
     
@@ -179,7 +195,14 @@ class SettingsParser : NSObject, XMLParserDelegate {
             // Parse settings entries (options are in this tag, execpt for communia)
             guard let name = attributes["Name"] else { return }
             guard let label = attributes["Text"] else { return }
-            guard let defaultValueS = attributes["Value"], let defaultValue = Int(defaultValueS) else { return }
+            
+            // Get default value
+            guard let defaultValueS = attributes["Value"], var defaultValue = Int(defaultValueS) else { return }
+            if let removeOpts = removeDefaultOptions[name] {
+                defaultValue &= ~removeOpts
+            }
+            
+            // Create settings entry
             let type: SettingsEntryType = name == communiaEntryName ? .stringChoice : .flagSet
             self.entry = SettingsEntry(name: name, label: normalizeLabel(label), type: type, defaultValue: defaultValue, options: [], visible: !hiddenEntryTags.contains(elementName))
         } else if self.entry != nil {
@@ -187,6 +210,7 @@ class SettingsParser : NSObject, XMLParserDelegate {
             guard let label = attributes["Text"] else { return }
             guard let valueS = attributes["Id"], let value = Int(valueS) else { return }
             if skipEntryLabels.contains(label) { return }
+            if skipOptions[self.entry!.name]?[valueS] != nil { return }
             self.entry?.options.append(SettingsEntryOption(label: normalizeLabel(label), value: value))
         } else if elementName == communiaOptionTag {
             guard let valueS = attributes["Id"], let value = Int(valueS) else { return }
