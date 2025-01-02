@@ -17,8 +17,8 @@ struct TextOptionsView : View {
     
     var body: some View {
         let fontChooserTransition : AnyTransition = fontChooserShown ?
-            .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)) :
-            .asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .trailing))
+            .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)) :
+            .asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading))
         
         if fontChooserShown {
             FontChooserList(shown: $fontChooserShown, selectedFont: $textOptions.fontName)
