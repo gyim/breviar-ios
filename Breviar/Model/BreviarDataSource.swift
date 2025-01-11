@@ -165,11 +165,6 @@ class SettingsParser : NSObject, XMLParserDelegate {
             "1048576": true, // show only navigation arrows pointing down
         ]
     ]
-    let removeDefaultOptions = [
-        "o0": 256    | // only text for TTS
-              1024   | // show navigation lines (on right side)
-              524288   // navigation arrows
-    ]
     var entry: SettingsEntry?
     var entries: [SettingsEntry] = []
     
@@ -198,9 +193,6 @@ class SettingsParser : NSObject, XMLParserDelegate {
             
             // Get default value
             guard let defaultValueS = attributes["Value"], var defaultValue = Int(defaultValueS) else { return }
-            if let removeOpts = removeDefaultOptions[name] {
-                defaultValue &= ~removeOpts
-            }
             
             // Create settings entry
             let type: SettingsEntryType = name == communiaEntryName ? .stringChoice : .flagSet
@@ -381,6 +373,19 @@ class CGIDataSource : BreviarDataSource {
         }
     }
     
+    let removeFlags = [
+        "o0": 256    | // only text for TTS
+              1024   | // show navigation lines (on right side)
+              524288   // navigation arrows
+    ]
+    func valueForOption(_ key: String) -> String {
+        var option = UserDefaults.standard.integer(forKey: key);
+        if let flags = removeFlags[key] {
+            option &= ~flags;
+        }
+        return String(option);
+    }
+    
     func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], forceLocal: Bool, handler: @escaping (String?, Error?) -> Void) {
         let d = day.day
         var args = [
@@ -390,13 +395,13 @@ class CGIDataSource : BreviarDataSource {
             "r": d.year.description,
             "p": prayerType.rawValue.description,
             "ds": celebration.id,
-            "o0": String(UserDefaults.standard.integer(forKey: "o0")),
-            "o1": String(UserDefaults.standard.integer(forKey: "o1")),
+            "o0": valueForOption("o0"),
+            "o1": valueForOption("o1"),
             "o2": "16896", // Override display settings
-            "o3": String(UserDefaults.standard.integer(forKey: "o3")),
-            "o4": String(UserDefaults.standard.integer(forKey: "o4")),
-            "o5": String(UserDefaults.standard.integer(forKey: "o5")),
-            "o6": String(UserDefaults.standard.integer(forKey: "o6")),
+            "o3": valueForOption("o3"),
+            "o4": valueForOption("o4"),
+            "o5": valueForOption("o5"),
+            "o6": valueForOption("o6"),
             "j": self.cgiLanguageCode,
             "k": self.options?.calendar ?? "",
         ]
