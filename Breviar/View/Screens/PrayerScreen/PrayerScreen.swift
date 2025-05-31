@@ -16,12 +16,13 @@ struct PrayerScreen: View {
     @Binding var prayerText: LoadingState<String>
     @Binding var textOptions: TextOptions
     @State var navbarHidden = false
+    @State private var needsReload = false
     
     var body: some View {
         InlinePopoverPresenter( popover: { TextOptionsView(textOptions: textOptions, prayer: prayer).environmentObject(model) }, isPresented: $textOptionsShown) {
             LoadingView(value: prayerText, loadedBody: { text in
                 NavigationBarToggler(navigationBarHidden: $navbarHidden) {
-                    PrayerView(text: text, textOptions: textOptions)
+                    PrayerView(text: text, textOptions: textOptions, needsReload: $needsReload)
                         .onTapEvent() {
                             withAnimation {
                                 navbarHidden.toggle()
@@ -60,12 +61,27 @@ struct PrayerScreen: View {
         .onDisappear() {
             model.unloadPrayer()
         }
+        .onChange(of: needsReload) { needsReload in
+            if needsReload {
+                print("PrayerScreen: Reloading prayer due to WebView state loss")
+                model.loadPrayer(prayer)
+                self.needsReload = false
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            // Check if prayer text needs to be reloaded
+            if case .loaded = prayerText {
+                print("PrayerScreen: App entering foreground, checking WebView state")
+                // The WebView will detect if it needs reload
+            }
+        }
     }
 }
 
 struct PrayerView : UIViewRepresentable {
     var text: String
     var textOptions: TextOptions
+    @Binding var needsReload: Bool
     var tapHandler: (() -> ())?
     var linkHandler: ((URL) -> ())?
     
@@ -75,7 +91,7 @@ struct PrayerView : UIViewRepresentable {
         }
     }
     
-    class Coordinator : NSObject, WKScriptMessageHandler {
+    class Coordinator : NSObject, WKScriptMessageHandler, WKNavigationDelegate {
         var parent: PrayerView
         var webView = PrayerWebView()
         var prevText: String = ""
@@ -84,6 +100,7 @@ struct PrayerView : UIViewRepresentable {
         var prevIsBold: Bool = false
         var topPadding: CGFloat = 0
         var bottomPadding: CGFloat = 0
+        var isWebViewReady = false
         
         init(parent: PrayerView) {
             self.parent = parent
@@ -91,6 +108,9 @@ struct PrayerView : UIViewRepresentable {
             
             // This view is not updated if TextOptions is changed in the popover, so we rely on NotificationCenter instead
             NotificationCenter.default.addObserver(self, selector: #selector(onTextOptionsChanged(_:)), name: TextOptions.notificationName, object: nil)
+            
+            // Listen for app lifecycle events
+            NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
             
             // Top padding: safe area inset (notch + statusbar) + navbar height
             topPadding = 50.0 // navbar height
@@ -104,12 +124,14 @@ struct PrayerView : UIViewRepresentable {
             let contentController = WKUserContentController()
             contentController.add(self, name: "onTapEvent")
             contentController.add(self, name: "onLinkEvent")
+            contentController.add(self, name: "checkAlive")
             let webViewConfig = WKWebViewConfiguration()
             webViewConfig.userContentController = contentController
             webView = PrayerWebView(frame: CGRect(), configuration: webViewConfig)
             webView.allowsLinkPreview = false
             webView.isOpaque = false
             webView.configuration.defaultWebpagePreferences.preferredContentMode = .mobile
+            webView.navigationDelegate = self
         }
         
         deinit {
@@ -122,16 +144,58 @@ struct PrayerView : UIViewRepresentable {
             }
         }
         
+        @objc func appWillEnterForeground() {
+            print("PrayerView: App will enter foreground, checking WebView content")
+            checkWebViewContent()
+        }
+        
+        func checkWebViewContent() {
+            // Check if WebView content is still valid
+            webView.evaluateJavaScript("document.body ? document.body.innerHTML.length : 0") { [weak self] (result, error) in
+                guard let self = self else { return }
+                
+                if let error = error {
+                    print("PrayerView: Error checking WebView content: \(error)")
+                    self.handleWebViewContentLoss()
+                    return
+                }
+                
+                if let length = result as? Int {
+                    print("PrayerView: WebView content length: \(length)")
+                    if length == 0 && !self.prevText.isEmpty {
+                        print("PrayerView: WebView content lost, triggering reload")
+                        self.handleWebViewContentLoss()
+                    }
+                } else {
+                    print("PrayerView: Unexpected WebView check result")
+                    self.handleWebViewContentLoss()
+                }
+            }
+        }
+        
+        func handleWebViewContentLoss() {
+            // Reset state and trigger reload
+            isWebViewReady = false
+            prevText = ""
+            DispatchQueue.main.async {
+                self.parent.needsReload = true
+            }
+        }
+        
         func setPrayerText(text: String, fontName: String, fontSize: Double, isBold: Bool) {
             if text != prevText {
                 let modifiedText = getModifiedText(text: text, fontName: fontName, fontSize: fontSize, isBold: isBold)
-                if prevText == "" {
+                if prevText == "" || !isWebViewReady {
                     let baseURL = URL(fileURLWithPath: Bundle.main.bundlePath)
                     self.webView.loadHTMLString(modifiedText, baseURL: baseURL)
                 } else {
-                    self.webView.evaluateJavaScript("document.documentElement.innerHTML = `\(modifiedText)`; initPrayer(); setFont('\(fontName)', \(fontSize), \(isBold));") { (_, error) in
-                        if error != nil {
-                            print("Error reloading document: \(error.debugDescription)")
+                    self.webView.evaluateJavaScript("document.documentElement.innerHTML = `\(modifiedText)`; initPrayer(); setFont('\(fontName)', \(fontSize), \(isBold));") { [weak self] (_, error) in
+                        if let error = error {
+                            print("Error reloading document: \(error.localizedDescription)")
+                            // If JavaScript evaluation fails, reload the WebView
+                            self?.isWebViewReady = false
+                            let baseURL = URL(fileURLWithPath: Bundle.main.bundlePath)
+                            self?.webView.loadHTMLString(modifiedText, baseURL: baseURL)
                         }
                     }
                 }
@@ -145,9 +209,11 @@ struct PrayerView : UIViewRepresentable {
                 prevFontSize = fontSize
                 prevIsBold = isBold
                 
-                self.webView.evaluateJavaScript("setFont('\(fontName)', \(fontSize), \(isBold))") { (_, error) in
-                    if error != nil {
-                        print("Error setting font size: \(error.debugDescription)")
+                if isWebViewReady {
+                    self.webView.evaluateJavaScript("setFont('\(fontName)', \(fontSize), \(isBold))") { (_, error) in
+                        if error != nil {
+                            print("Error setting font size: \(error.debugDescription)")
+                        }
                     }
                 }
             }
@@ -165,6 +231,7 @@ struct PrayerView : UIViewRepresentable {
                         body { padding: \(topPadding)px 0 \(bottomPadding)px; }
                     </style>
                     <script type="text/javascript">
+                        window.isAlive = true;
                         function setFont(fontName, fontSize, isBold) {
                             document.body.style.fontFamily = fontName;
                             document.body.style.webkitTextSizeAdjust = fontSize + '%';
@@ -188,11 +255,23 @@ struct PrayerView : UIViewRepresentable {
                             setupTapGesture();
                             setupLinks();
                             setFont('\(fontName)', \(fontSize), \(isBold));
+                            window.webkit.messageHandlers.checkAlive.postMessage(true);
                         }
                     </script>
                 </head>
                 <body onload="initPrayer()">\(text)</body>
             """
+        }
+        
+        // WKNavigationDelegate
+        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            print("PrayerView: WebView did finish loading")
+            isWebViewReady = true
+        }
+        
+        func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+            print("PrayerView: WebView navigation failed: \(error)")
+            isWebViewReady = false
         }
         
         // WKScriptMessageHandler
@@ -206,6 +285,8 @@ struct PrayerView : UIViewRepresentable {
                 if let handler = parent.linkHandler, let u = message.body as? String, let url = URL(string:u) {
                     handler(url)
                 }
+            case "checkAlive":
+                print("PrayerView: WebView JavaScript context is alive")
             default:
                 break
             }
@@ -225,11 +306,15 @@ struct PrayerView : UIViewRepresentable {
     }
 
     func onTapEvent(_ newHandler: @escaping () -> ()) -> PrayerView {
-        return PrayerView(text: text, textOptions: textOptions, tapHandler: newHandler, linkHandler: linkHandler)
+        var view = self
+        view.tapHandler = newHandler
+        return view
     }
 
     func onLinkEvent(_ newHandler: @escaping (_ url: URL) -> ()) -> PrayerView {
-        return PrayerView(text: text, textOptions: textOptions, tapHandler: tapHandler, linkHandler: newHandler)
+        var view = self
+        view.linkHandler = newHandler
+        return view
     }
 }
 
@@ -238,7 +323,7 @@ struct AboutScreen: View {
     
     var body: some View {
         LoadingView(value: model.aboutPage) { text in
-            PrayerView(text: text, textOptions: model.textOptions)
+            PrayerView(text: text, textOptions: model.textOptions, needsReload: .constant(false))
                 .onLinkEvent() { url in
                     UIApplication.shared.open(url)
                 }
