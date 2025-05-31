@@ -58,6 +58,7 @@ struct LanguageChooserScreen: View {
             List {
                 LanguageLink(name: "🇨🇿 Breviář", code: "cz", wizardContext: wizardContext)
                 LanguageLink(name: "🇭🇺 Zsolozsma", code: "hu", wizardContext: wizardContext)
+                LanguageLink(name: "🇮🇸 Tíðabænabók", code: "is", wizardContext: wizardContext)
                 LanguageLink(name: "🇸🇰 Breviár", code: "sk", wizardContext: wizardContext)
             }
         }
@@ -121,6 +122,10 @@ struct CalendarChooserScreen: View {
                     CalendarLink(language: "sk", calendar: "skopraem", wizardContext: wizardContext),
                 ]) { e in e}
             }.navigationTitle(S.liturgicalCalendar.forLanguage(.slovak))
+        case "is":
+            List {
+                CalendarLink(language: "is", calendar: "is", wizardContext: wizardContext)
+            }.navigationTitle(S.liturgicalCalendar.forLanguage(.icelandic))
         default:
             Text("Nothing here")
         }

@@ -384,7 +384,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Copy HTML sources\nrm -rf \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nmkdir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\n\nfor dir in include include_cz include_czop include_hu; do\ncp -r breviar-cgi/$dir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\ndone\n\n# Copy other files\ncp breviar-cgi/breviar.css breviar-cgi/breviar-normal-font.css breviar-cgi/breviar-invert-colors.css breviar-cgi/breviar-voice-output.css breviar-cgi/about.htm \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\n";
+			shellScript = "# Copy HTML sources\nrm -rf \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\nmkdir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html\"\n\nfor dir in include include_cz include_czop include_hu include_is; do\ncp -r breviar-cgi/$dir \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\ndone\n\n# Copy other files\ncp breviar-cgi/breviar.css breviar-cgi/breviar-normal-font.css breviar-cgi/breviar-invert-colors.css breviar-cgi/breviar-voice-output.css breviar-cgi/about.htm \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/html/\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
