@@ -74,6 +74,12 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
                 }
                 if playbackState != .playing {
                     startPlayback()
+                    
+                    // Update now playing info for play state
+                    if var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo {
+                        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = NSNumber(value: playbackSpeed)
+                        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+                    }
                 }
             case .paused:
                 if playbackState == .stopped {
@@ -81,6 +87,12 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
                 }
                 if playbackState == .playing {
                     pausePlayback()
+                    
+                    // Update now playing info for paused state
+                    if var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo {
+                        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = 0.0
+                        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+                    }
                 }
             }
         }
@@ -89,6 +101,12 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
     @Published var playbackSpeed: Float = 1.0 {
         didSet {
             UserDefaults.standard.setValue(playbackSpeed, forKey: "speechRate")
+            
+            // Update now playing info with new playback speed
+            if playbackState == .playing, var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo {
+                nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = NSNumber(value: playbackSpeed)
+                MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+            }
         }
     }
     
@@ -101,36 +119,64 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
         
         let session = AVAudioSession.sharedInstance()
         do {
-            try session.setCategory(.playback)
-            try session.setActive(true, options: AVAudioSession.SetActiveOptions())
+            try session.setCategory(.playback, mode: .spokenAudio, options: [.allowAirPlay, .allowBluetooth, .allowBluetoothA2DP])
+            try session.setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
-            print("Cannot start audio session")
+            print("Cannot start audio session: \(error)")
         }
         UIApplication.shared.beginReceivingRemoteControlEvents()
         
         let commandCenter = MPRemoteCommandCenter.shared()
-        playCommandHandler = commandCenter.playCommand.addTarget() { event in
-            self.playbackState = .playing
-            return .success
-        }
-        pauseCommandHandler = commandCenter.pauseCommand.addTarget() { event in
-            self.playbackState = .paused
-            return .success
-        }
-        togglePlayPauseCommandHandler = commandCenter.togglePlayPauseCommand.addTarget() { event in
-            if self.playbackState == .playing {
-                self.playbackState = .paused
-            } else {
+        
+        // Enable all relevant commands for external devices
+        commandCenter.playCommand.isEnabled = true
+        commandCenter.pauseCommand.isEnabled = true
+        commandCenter.togglePlayPauseCommand.isEnabled = true
+        commandCenter.previousTrackCommand.isEnabled = true
+        commandCenter.nextTrackCommand.isEnabled = true
+        
+        // Set up command handlers with strong reference to self to ensure handlers stay alive
+        playCommandHandler = commandCenter.playCommand.addTarget() { [weak self] event in
+            guard let self = self else { return .commandFailed }
+            DispatchQueue.main.async {
                 self.playbackState = .playing
             }
             return .success
         }
-        previousTrackCommandHandler = commandCenter.previousTrackCommand.addTarget() { event in
-            self.prevSection()
+        
+        pauseCommandHandler = commandCenter.pauseCommand.addTarget() { [weak self] event in
+            guard let self = self else { return .commandFailed }
+            DispatchQueue.main.async {
+                self.playbackState = .paused
+            }
             return .success
         }
-        nextTrackCommandHandler = commandCenter.nextTrackCommand.addTarget() { event in
-            self.nextSection()
+        
+        togglePlayPauseCommandHandler = commandCenter.togglePlayPauseCommand.addTarget() { [weak self] event in
+            guard let self = self else { return .commandFailed }
+            DispatchQueue.main.async {
+                if self.playbackState == .playing {
+                    self.playbackState = .paused
+                } else {
+                    self.playbackState = .playing
+                }
+            }
+            return .success
+        }
+        
+        previousTrackCommandHandler = commandCenter.previousTrackCommand.addTarget() { [weak self] event in
+            guard let self = self else { return .commandFailed }
+            DispatchQueue.main.async {
+                self.prevSection()
+            }
+            return .success
+        }
+        
+        nextTrackCommandHandler = commandCenter.nextTrackCommand.addTarget() { [weak self] event in
+            guard let self = self else { return .commandFailed }
+            DispatchQueue.main.async {
+                self.nextSection()
+            }
             return .success
         }
         progressForUtterance = [:]
@@ -150,33 +196,49 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
         }
         speechSynthesizer = nil
         
-        // Stop audio session
-        do {
-            let session = AVAudioSession.sharedInstance()
-            try session.setActive(false, options: AVAudioSession.SetActiveOptions())
-        } catch {
-            print("Cannot stop audio session")
-        }
+        // Clean up now playing info first
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
         
+        // Remove command handlers
         let commandCenter = MPRemoteCommandCenter.shared()
         if let target = playCommandHandler {
             commandCenter.playCommand.removeTarget(target)
+            commandCenter.playCommand.isEnabled = false
         }
         if let target = pauseCommandHandler {
             commandCenter.pauseCommand.removeTarget(target)
+            commandCenter.pauseCommand.isEnabled = false
         }
         if let target = togglePlayPauseCommandHandler {
             commandCenter.togglePlayPauseCommand.removeTarget(target)
+            commandCenter.togglePlayPauseCommand.isEnabled = false
         }
         if let target = previousTrackCommandHandler {
             commandCenter.previousTrackCommand.removeTarget(target)
+            commandCenter.previousTrackCommand.isEnabled = false
         }
         if let target = nextTrackCommandHandler {
             commandCenter.nextTrackCommand.removeTarget(target)
+            commandCenter.nextTrackCommand.isEnabled = false
         }
         
+        // Clear handler references
+        playCommandHandler = nil
+        pauseCommandHandler = nil
+        togglePlayPauseCommandHandler = nil
+        previousTrackCommandHandler = nil
+        nextTrackCommandHandler = nil
+        
+        // Stop receiving remote control events
         UIApplication.shared.endReceivingRemoteControlEvents()
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
+        
+        // Stop audio session last
+        do {
+            let session = AVAudioSession.sharedInstance()
+            try session.setActive(false, options: .notifyOthersOnDeactivation)
+        } catch {
+            print("Cannot stop audio session: \(error)")
+        }
     }
     
     private func startPlayback() {
@@ -205,11 +267,29 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
     
     private func startSpeech() {
         self.speechSynthesizer = AVSpeechSynthesizer()
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+        self.speechSynthesizer?.delegate = self
+        
+        // Set up now playing info with more details for CarPlay/AirPlay
+        var nowPlayingInfo: [String: Any] = [
             MPMediaItemPropertyTitle: title,
             MPMediaItemPropertyArtist: subtitle,
+            MPNowPlayingInfoPropertyPlaybackRate: 1.0,
+            MPNowPlayingInfoPropertyIsLiveStream: false,
+            MPNowPlayingInfoPropertyMediaType: MPNowPlayingInfoMediaType.audio.rawValue,
+            MPNowPlayingInfoPropertyPlaybackQueueCount: self.doc.sections.count,
+            MPNowPlayingInfoPropertyPlaybackQueueIndex: 0
         ]
-        self.speechSynthesizer?.delegate = self
+        
+        // Try to add album artwork if available
+        if let image = UIImage(named: "PlaybackIcon") {
+            let artwork = MPMediaItemArtwork(boundsSize: image.size) { size in
+                return image
+            }
+            nowPlayingInfo[MPMediaItemPropertyArtwork] = artwork
+        }
+        
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+        
         if self.doc.sections.count > 0 {
             self.startSection(0)
         }
@@ -221,12 +301,32 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
             break
         case .playing:
             speechSynthesizer?.pauseSpeaking(at: .immediate)
+            
+            // Update now playing info to reflect paused state
+            if var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo {
+                nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = 0.0
+                MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+            }
         }
     }
     
     private func startSection(_ sectionIndex: Int) {
         let voice = AVSpeechSynthesisVoice(language: self.language)
         self.speechSynthesizer?.stopSpeaking(at: AVSpeechBoundary.immediate)
+        
+        // Update now playing info to show current section
+        if var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo {
+            nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = NSNumber(value: playbackSpeed)
+            nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackQueueIndex] = sectionIndex
+            
+            if sectionIndex < self.doc.sections.count {
+                // If we have section content, display it in the now playing info
+                let sectionTitle = self.doc.sections[sectionIndex].lines.first?.text ?? "Section \(sectionIndex + 1)"
+                nowPlayingInfo[MPMediaItemPropertyTitle] = "\(self.title) - \(sectionTitle)"
+            }
+            
+            MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+        }
         
         var sectionOffset = 0
         var lineNum = 0
