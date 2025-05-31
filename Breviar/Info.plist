@@ -50,5 +50,16 @@
 	<array>
 		<string>audio</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>sk.breviar.breviar</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>breviar</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

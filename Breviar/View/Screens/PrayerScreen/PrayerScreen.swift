@@ -10,6 +10,7 @@ import WebKit
 
 struct PrayerScreen: View {
     @EnvironmentObject var model: BreviarModel
+    @Environment(\.presentationMode) var presentationMode
     @State var textOptionsShown = false
     @State var playbackSheetShown = false
     var prayer: Prayer
@@ -73,6 +74,14 @@ struct PrayerScreen: View {
             if case .loaded = prayerText {
                 print("PrayerScreen: App entering foreground, checking WebView state")
                 // The WebView will detect if it needs reload
+            }
+        }
+        .onReceive(model.$pendingNavigation) { pending in
+            if let pending = pending, case .prayer(let targetPrayer) = pending {
+                // If we're navigating to a different prayer, dismiss this screen
+                if targetPrayer.type != prayer.type || targetPrayer.day != prayer.day {
+                    presentationMode.wrappedValue.dismiss()
+                }
             }
         }
     }

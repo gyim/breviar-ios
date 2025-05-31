@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breviar App URL Scheme Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #555;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .url-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .url-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .url-button:active {
+            transform: translateY(0);
+        }
+        .prayer-button {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .date-button {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        .description {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+        }
+        .url-display {
+            font-family: monospace;
+            background: #f1f1f1;
+            padding: 5px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            color: #666;
+            margin-top: 30px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📱 Breviar App URL Scheme Demo</h1>
+        
+        <div class="description">
+            <strong>Instructions:</strong> Click any button below to test opening the Breviar app with different URL schemes. 
+            Make sure the Breviar app is installed on your device for the links to work.
+        </div>
+
+        <h2>🏠 Basic Navigation</h2>
+        <div class="button-grid">
+            <a href="breviar://" class="url-button">
+                Open Breviar App
+                <div class="url-display">breviar://</div>
+            </a>
+            <a href="breviar://today" class="url-button">
+                Today's Main Screen
+                <div class="url-display">breviar://today</div>
+            </a>
+        </div>
+
+        <h2>📅 Date-Specific Navigation</h2>
+        <div class="button-grid">
+            <a href="breviar://2025-01-01" class="url-button date-button">
+                New Year's Day 2025
+                <div class="url-display">breviar://2025-01-01</div>
+            </a>
+            <a href="breviar://2025-12-25" class="url-button date-button">
+                Christmas Day 2025
+                <div class="url-display">breviar://2025-12-25</div>
+            </a>
+            <a href="breviar://2025-04-20" class="url-button date-button">
+                Easter Sunday 2025
+                <div class="url-display">breviar://2025-04-20</div>
+            </a>
+        </div>
+
+        <h2>🙏 Prayer-Specific Links (Today)</h2>
+        <div class="button-grid">
+            <a href="breviar://today/invitatory" class="url-button prayer-button">
+                Invitatory
+                <div class="url-display">breviar://today/invitatory</div>
+            </a>
+            <a href="breviar://today/officeofreadings" class="url-button prayer-button">
+                Office of Readings
+                <div class="url-display">breviar://today/officeofreadings</div>
+            </a>
+            <a href="breviar://today/morningprayer" class="url-button prayer-button">
+                Morning Prayer
+                <div class="url-display">breviar://today/morningprayer</div>
+            </a>
+            <a href="breviar://today/midmorningprayer" class="url-button prayer-button">
+                Mid-Morning Prayer
+                <div class="url-display">breviar://today/midmorningprayer</div>
+            </a>
+            <a href="breviar://today/middayprayer" class="url-button prayer-button">
+                Mid-Day Prayer
+                <div class="url-display">breviar://today/middayprayer</div>
+            </a>
+            <a href="breviar://today/midafternoonprayer" class="url-button prayer-button">
+                Mid-Afternoon Prayer
+                <div class="url-display">breviar://today/midafternoonprayer</div>
+            </a>
+            <a href="breviar://today/eveningprayer" class="url-button prayer-button">
+                Evening Prayer
+                <div class="url-display">breviar://today/eveningprayer</div>
+            </a>
+            <a href="breviar://today/compline" class="url-button prayer-button">
+                Compline
+                <div class="url-display">breviar://today/compline</div>
+            </a>
+        </div>
+
+        <h2>📅🙏 Date + Prayer Combinations</h2>
+        <div class="button-grid">
+            <a href="breviar://2025-12-25/morningprayer" class="url-button prayer-button">
+                Christmas Morning Prayer
+                <div class="url-display">breviar://2025-12-25/morningprayer</div>
+            </a>
+            <a href="breviar://2025-12-24/eveningprayer" class="url-button prayer-button">
+                Christmas Eve Evening Prayer
+                <div class="url-display">breviar://2025-12-24/eveningprayer</div>
+            </a>
+            <a href="breviar://2025-01-01/officeofreadings" class="url-button prayer-button">
+                New Year Office of Readings
+                <div class="url-display">breviar://2025-01-01/officeofreadings</div>
+            </a>
+            <a href="breviar://2025-04-20/compline" class="url-button prayer-button">
+                Easter Sunday Compline
+                <div class="url-display">breviar://2025-04-20/compline</div>
+            </a>
+        </div>
+
+        <div class="note">
+            <strong>Note:</strong> These links will only work on devices with the Breviar app installed. 
+            If the app is not installed, the links may not respond or may redirect to the App Store.
+        </div>
+
+        <div class="description">
+            <strong>Developer Information:</strong>
+            <br>• URL Scheme: <code>breviar://</code>
+            <br>• Date Format: <code>YYYY-MM-DD</code>
+            <br>• Prayer Names: Case insensitive, no spaces
+            <br>• Valid Prayer Types: invitatory, officeofreadings, morningprayer, midmorningprayer, middayprayer, midafternoonprayer, eveningprayer, compline
+        </div>
+
+        <div class="footer">
+            <p>Breviar - Liturgy of the Hours</p>
+            <p>URL Scheme Integration Demo</p>
+        </div>
+    </div>
+
+    <script>
+        // Add click tracking for demonstration
+        document.querySelectorAll('.url-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const url = this.getAttribute('href');
+                console.log('Attempting to open:', url);
+                
+                // Optional: Show a brief visual feedback
+                this.style.opacity = '0.7';
+                setTimeout(() => {
+                    this.style.opacity = '1';
+                }, 200);
+            });
+        });
+
+        // Generate today's date for dynamic examples
+        const today = new Date();
+        const todayString = today.toISOString().split('T')[0];
+        
+        // Update any "today" examples with actual date
+        document.addEventListener('DOMContentLoaded', function() {
+            const dynamicExample = document.createElement('div');
+            dynamicExample.className = 'description';
+            dynamicExample.innerHTML = `<strong>Today's Date:</strong> ${todayString} - Use this in custom URLs like <code>breviar://${todayString}/morningprayer</code>`;
+            document.querySelector('.container').appendChild(dynamicExample);
+        });
+    </script>
+</body>
+</html>

@@ -10,6 +10,7 @@ import SwiftUI
 struct MainScreen: View {
     @EnvironmentObject var model: BreviarModel
     @State var datePickerShown = false
+    @State var activePrayerType: PrayerType? = nil
     
     func getTitle(day: Day) -> String {
         let today = Day(fromDate: Date())
@@ -35,7 +36,7 @@ struct MainScreen: View {
     var body: some View {
         let today = Day(fromDate: Date())
         NavigationView{
-            MainScreenContent()
+            MainScreenContent(activePrayerType: $activePrayerType)
                 .navigationTitle(getTitle(day: model.day))
                 .navigationBarItems(
                     leading: Button(
@@ -88,11 +89,27 @@ struct MainScreen: View {
                 }
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .onReceive(model.$navigationTrigger) { trigger in
+            if case .prayer(let targetPrayer) = trigger {
+                // Reset any active navigation first
+                activePrayerType = nil
+                
+                // Then set the new navigation after a brief delay
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    activePrayerType = targetPrayer.type
+                    // Clear the trigger after navigation is set
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        model.navigationTrigger = nil
+                    }
+                }
+            }
+        }
     }
 }
 
 struct MainScreenContent: View {
     @EnvironmentObject var model: BreviarModel
+    @Binding var activePrayerType: PrayerType?
     
     var body: some View {
         LoadingView(value: model.dayState) { day in
@@ -110,7 +127,7 @@ struct MainScreenContent: View {
 
                 Section(header: Text(S.prayers.S)) {
                     ForEach(model.getPrayersForSelectedCelebration()) { prayer in
-                        PrayerLink(prayer: prayer)
+                        PrayerLink(prayer: prayer, activePrayerType: $activePrayerType)
                     }
                 }
                 
@@ -195,6 +212,7 @@ struct CelebrationRow : View {
 struct PrayerLink: View {
     @EnvironmentObject var model: BreviarModel
     var prayer: Prayer
+    @Binding var activePrayerType: PrayerType?
     
     let prayerIcons: [PrayerType: String] = [
         .invitatory: "sparkles",
@@ -210,6 +228,16 @@ struct PrayerLink: View {
     var body: some View {
         NavigationLink(
             destination: PrayerScreen(prayer: prayer, prayerText: $model.prayerText, textOptions: $model.textOptions),
+            isActive: Binding(
+                get: { activePrayerType == prayer.type },
+                set: { newValue in
+                    if newValue {
+                        activePrayerType = prayer.type
+                    } else if activePrayerType == prayer.type {
+                        activePrayerType = nil
+                    }
+                }
+            ),
             label: { Label(prayer.name, systemImage: prayerIcons[prayer.type]!) })
     }
 }

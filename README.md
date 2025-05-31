@@ -35,3 +35,58 @@ team). To obtain the public sources you have to do the following:
     wget -r http://breviar.sk/include_cz -nd -P include_cz
     wget -r http://breviar.sk/include_hu -nd -P include_hu
 
+URL Scheme Support
+==================
+
+The Breviar app supports custom URL schemes that allow other applications to open specific content within the app.
+
+## Supported URL Formats
+
+### Basic Navigation
+- `breviar://` - Opens the app to today's main screen
+- `breviar://today` - Opens the app to today's main screen
+- `breviar://YYYY-MM-DD` - Opens the app to a specific date (e.g., `breviar://2025-01-01`)
+
+### Prayer-Specific Navigation
+- `breviar://today/PRAYER_NAME` - Opens a specific prayer for today
+- `breviar://YYYY-MM-DD/PRAYER_NAME` - Opens a specific prayer for a specific date
+
+## Valid Prayer Names
+
+The following prayer names are supported:
+- `invitatory` - Invitatory
+- `officeofreadings` - Office of Readings
+- `morningprayer` - Morning Prayer
+- `midmorningprayer` - Mid-Morning Prayer
+- `middayprayer` - Mid-Day Prayer
+- `midafternoonprayer` - Mid-Afternoon Prayer
+- `eveningprayer` - Evening Prayer
+- `compline` - Compline
+
+## Examples
+
+```
+breviar://                          → Today's main screen
+breviar://today                     → Today's main screen
+breviar://2025-01-01               → January 1, 2025 main screen
+breviar://today/morningprayer       → Today's Morning Prayer
+breviar://2025-01-01/compline      → Compline for January 1, 2025
+breviar://2025-12-25/officeofreadings → Office of Readings for Christmas
+```
+
+## Integration
+
+Other applications can open Breviar content using:
+
+**iOS (Swift/Objective-C):**
+```swift
+if let url = URL(string: "breviar://today/morningprayer") {
+    UIApplication.shared.open(url)
+}
+```
+
+**Web/JavaScript:**
+```javascript
+window.location.href = "breviar://today/morningprayer";
+```
+

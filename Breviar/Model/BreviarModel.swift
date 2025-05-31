@@ -46,6 +46,9 @@ class BreviarModel : ObservableObject {
     @Published var settingsEntries: LoadingState<[SettingsEntry]> = .idle
     @Published var textOptions: TextOptions
     
+    @Published var navigationTrigger: NavigationTarget? = nil
+    @Published var pendingNavigation: NavigationTarget? = nil
+    
     init(dataSource: BreviarDataSource) {
         let now = Date()
         self.dataSource = dataSource
@@ -310,6 +313,44 @@ class BreviarModel : ObservableObject {
             return nil
         }
     }
+    
+    func navigateToDay(_ day: Day) {
+        self.loadDay(day)
+    }
+    
+    func navigateToPrayer(day: Day, prayerType: PrayerType) {
+        // Clear any existing prayer text
+        self.unloadPrayer()
+        
+        // Create the pending navigation
+        let createNavigation = {
+            if let (liturgicalDay, celebration) = self.getCurrentCelebration() {
+                let prayer = Prayer(day: liturgicalDay.day, celebration: celebration, type: prayerType)
+                self.pendingNavigation = .prayer(prayer)
+                
+                // Trigger navigation dismissal first
+                self.navigationTrigger = nil
+                
+                // Then trigger actual navigation after a delay
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.navigationTrigger = self.pendingNavigation
+                    self.pendingNavigation = nil
+                }
+            }
+        }
+        
+        // If we're already on the correct day, create navigation directly
+        if self.day == day {
+            createNavigation()
+        } else {
+            // Load the new day and then navigate
+            self.loadDay(day)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                createNavigation()
+            }
+        }
+    }
 }
 
 enum LoadingState<Value> {
@@ -317,4 +358,15 @@ enum LoadingState<Value> {
     case loading
     case failed(Error, (_ forceLocal: Bool) -> Void)
     case loaded(Value)
+}
+
+enum NavigationTarget: Equatable {
+    case prayer(Prayer)
+    
+    static func == (lhs: NavigationTarget, rhs: NavigationTarget) -> Bool {
+        switch (lhs, rhs) {
+        case (.prayer(let p1), .prayer(let p2)):
+            return p1.type == p2.type && p1.day == p2.day
+        }
+    }
 }
