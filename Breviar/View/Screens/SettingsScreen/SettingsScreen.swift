@@ -14,6 +14,7 @@ struct SettingsScreen : View {
         LoadingView(value: model.settingsEntries) { entries in
             List {
                 GeneralSettingsView()
+                PrayerScreenSettingsView(prayerScreenSettings: model.prayerScreenSettings)
                 LiturgicalTextSettingsView(entries: entries)
             }
             .listStyle(GroupedListStyle())
@@ -60,6 +61,53 @@ struct GeneralSettingsView : View {
                     }
             }
         }
+    }
+}
+
+// MARK: - Prayer screen settings
+
+struct PrayerScreenSettingsView : View {
+    @EnvironmentObject var model: BreviarModel
+    @ObservedObject var prayerScreenSettings: PrayerScreenSettings
+    
+    init(prayerScreenSettings: PrayerScreenSettings) {
+        self.prayerScreenSettings = prayerScreenSettings
+    }
+    
+    var body: some View {
+        Section(header: Text(S.prayerScreenSettings.S)) {
+            NavigationLink(
+                destination: FullscreenModeSettingsView(prayerScreenSettings: prayerScreenSettings),
+                label: {
+                    SettingsStringLabel(name: S.fullscreenMode.S, value: prayerScreenSettings.fullscreenMode.localizedDescription)
+                })
+        }
+    }
+}
+
+struct FullscreenModeSettingsView : View {
+    @ObservedObject var prayerScreenSettings: PrayerScreenSettings
+    
+    var body: some View {
+        List {
+            ForEach(FullscreenMode.allCases, id: \.rawValue) { mode in
+                let checked = (mode == prayerScreenSettings.fullscreenMode)
+                Button(action: {
+                    prayerScreenSettings.fullscreenMode = mode
+                }) {
+                    HStack {
+                        Text(mode.localizedDescription)
+                            .foregroundColor(.primary)
+                        Spacer()
+                        if checked {
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.accentColor)
+                        }
+                    }
+                }
+            }
+        }
+        .navigationTitle(S.fullscreenMode.S)
     }
 }
 
@@ -149,17 +197,17 @@ struct SettingsStringChoiceView : View {
         List {
             ForEach(entry.options) { option in
                 let checked = (option.value == self.value)
-                HStack {
-                    Text(option.label)
-                    Spacer()
-                    Image(systemName: "checkmark")
-                        .foregroundColor(.accentColor)
-                        .padding(5)
-                        .opacity(checked ? 1 : 0)
-                }
-                .onTapGesture {
-                    withAnimation {
-                        self.value = option.value
+                Button(action: {
+                    self.value = option.value
+                }) {
+                    HStack {
+                        Text(option.label)
+                            .foregroundColor(.primary)
+                        Spacer()
+                        if checked {
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.accentColor)
+                        }
                     }
                 }
             }

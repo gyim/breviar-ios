@@ -25,8 +25,17 @@ struct PrayerScreen: View {
                 NavigationBarToggler(navigationBarHidden: $navbarHidden) {
                     PrayerView(text: text, textOptions: textOptions, needsReload: $needsReload)
                         .onTapEvent() {
-                            withAnimation {
-                                navbarHidden.toggle()
+                            if model.prayerScreenSettings.fullscreenMode == .singleTap {
+                                withAnimation {
+                                    navbarHidden.toggle()
+                                }
+                            }
+                        }
+                        .onDoubleTapEvent() {
+                            if model.prayerScreenSettings.fullscreenMode == .doubleTap {
+                                withAnimation {
+                                    navbarHidden.toggle()
+                                }
                             }
                         }
                         .onLinkEvent() { url in
@@ -92,6 +101,7 @@ struct PrayerView : UIViewRepresentable {
     var textOptions: TextOptions
     @Binding var needsReload: Bool
     var tapHandler: (() -> ())?
+    var doubleTapHandler: (() -> ())?
     var linkHandler: ((URL) -> ())?
     
     class PrayerWebView : WKWebView {
@@ -132,6 +142,7 @@ struct PrayerView : UIViewRepresentable {
             // Setup web view
             let contentController = WKUserContentController()
             contentController.add(self, name: "onTapEvent")
+            contentController.add(self, name: "onDoubleTapEvent")
             contentController.add(self, name: "onLinkEvent")
             contentController.add(self, name: "checkAlive")
             let webViewConfig = WKWebViewConfiguration()
@@ -247,8 +258,21 @@ struct PrayerView : UIViewRepresentable {
                             document.styleSheets.item(1).disabled = isBold;
                         }
                         function setupTapGesture() {
+                            let tapCount = 0;
+                            let tapTimeout;
+                            
                             document.body.onclick = function() {
-                                window.webkit.messageHandlers.onTapEvent.postMessage({});
+                                tapCount++;
+                                
+                                clearTimeout(tapTimeout);
+                                tapTimeout = setTimeout(function() {
+                                    if (tapCount === 1) {
+                                        window.webkit.messageHandlers.onTapEvent.postMessage({});
+                                    } else if (tapCount === 2) {
+                                        window.webkit.messageHandlers.onDoubleTapEvent.postMessage({});
+                                    }
+                                    tapCount = 0;
+                                }, 300);
                             }
                         }
                         function setupLinks() {
@@ -290,6 +314,10 @@ struct PrayerView : UIViewRepresentable {
                 if let handler = parent.tapHandler {
                     handler()
                 }
+            case "onDoubleTapEvent":
+                if let handler = parent.doubleTapHandler {
+                    handler()
+                }
             case "onLinkEvent":
                 if let handler = parent.linkHandler, let u = message.body as? String, let url = URL(string:u) {
                     handler(url)
@@ -317,6 +345,12 @@ struct PrayerView : UIViewRepresentable {
     func onTapEvent(_ newHandler: @escaping () -> ()) -> PrayerView {
         var view = self
         view.tapHandler = newHandler
+        return view
+    }
+
+    func onDoubleTapEvent(_ newHandler: @escaping () -> ()) -> PrayerView {
+        var view = self
+        view.doubleTapHandler = newHandler
         return view
     }
 

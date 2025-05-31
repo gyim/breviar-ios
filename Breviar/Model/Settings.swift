@@ -65,6 +65,40 @@ struct DataSourceOptions {
     }
 }
 
+// MARK: - Fullscreen mode options
+
+enum FullscreenMode: String, CaseIterable {
+    case singleTap = "singleTap"
+    case doubleTap = "doubleTap"
+    case disabled = "disabled"
+    
+    var localizedDescription: String {
+        switch self {
+        case .singleTap:
+            return S.oneTap.S
+        case .doubleTap:
+            return S.doubleTap.S
+        case .disabled:
+            return S.disabled.S
+        }
+    }
+}
+
+class PrayerScreenSettings: ObservableObject {
+    @Published var fullscreenMode = FullscreenMode.singleTap {
+        didSet {
+            UserDefaults.standard.setValue(fullscreenMode.rawValue, forKey: "prayerScreenSettings.fullscreenMode")
+        }
+    }
+    
+    init() {
+        if let fullscreenModeString = UserDefaults.standard.string(forKey: "prayerScreenSettings.fullscreenMode"),
+           let fullscreenMode = FullscreenMode(rawValue: fullscreenModeString) {
+            self.fullscreenMode = fullscreenMode
+        }
+    }
+}
+
 // MARK: - Text options
 
 class TextOptions: ObservableObject {

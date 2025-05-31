@@ -46,6 +46,7 @@ class BreviarModel : ObservableObject {
     
     @Published var settingsEntries: LoadingState<[SettingsEntry]> = .idle
     @Published var textOptions: TextOptions
+    @Published var prayerScreenSettings: PrayerScreenSettings
     
     @Published var navigationTrigger: NavigationTarget? = nil
     @Published var pendingNavigation: NavigationTarget? = nil
@@ -56,6 +57,7 @@ class BreviarModel : ObservableObject {
         self.day = Day(fromDate: now)
         self.month = Month(fromDate: now)
         self.textOptions = TextOptions()
+        self.prayerScreenSettings = PrayerScreenSettings()
         
         let dataSourceOptions = DataSourceOptions.savedOptions
         self.dataSourceOptions = dataSourceOptions

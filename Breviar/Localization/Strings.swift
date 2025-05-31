@@ -63,6 +63,13 @@ struct S {
     static let never = LS(sk: "Nikdy", cz: "Nikdy", hu: "Soha")
     static let done = LS(sk: "Hotovo", cz: "Hotovo", hu: "Kész")
     
+    // Prayer Screen Settings
+    static let prayerScreenSettings = LS(sk: "Nastavenia obrazovky modlitby", cz: "Nastavení obrazovky modlitby", hu: "Ima képernyő beállításai")
+    static let fullscreenMode = LS(sk: "Režim celej obrazovky", cz: "Režim celé obrazovky", hu: "Teljes képernyő")
+    static let oneTap = LS(sk: "1 klik", cz: "1 klik", hu: "1 klikk")
+    static let doubleTap = LS(sk: "Dvojklik", cz: "Dvojklik", hu: "Dupla klikk")
+    static let disabled = LS(sk: "Vypnuté", cz: "Vypnuto", hu: "Kikapcsolva")
+    
     // Errors
     static let errNetworkError = LS(sk: "Chyba siete", cz: "Chyba sítě", hu: "Hálózati hiba")
     static let errServerError = LS(sk: "Neplatná odpoveď zo servera", cz: "Neplatná odpověď ze serveru", hu: "Hibás szerver válasz")
