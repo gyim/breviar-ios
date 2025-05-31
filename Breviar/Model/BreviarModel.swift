@@ -30,6 +30,7 @@ class BreviarModel : ObservableObject {
     @Published var dataSourceOptions: DataSourceOptions?
     @Published var dataSourceOptionsNeeded: Bool
     @Published var dataSourceOptionsWizardStage: DataSourceWizardState = .chooseLanguage
+    @Published var dataSourceOptionsWizardContext: DataSourceWizardContext = .initialSetup
     
     @Published var day: Day
     @Published var dayState: LoadingState<LiturgicalDay> = .idle

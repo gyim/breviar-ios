@@ -9,6 +9,11 @@ import SwiftUI
 
 // MARK: - Data source options
 
+enum DataSourceWizardContext {
+    case initialSetup
+    case settingsModification
+}
+
 enum DataSourceWizardState {
     case chooseLanguage
     case chooseCalendar

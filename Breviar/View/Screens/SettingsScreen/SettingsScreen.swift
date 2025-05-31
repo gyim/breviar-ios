@@ -35,6 +35,7 @@ struct GeneralSettingsView : View {
                 if let languageName = LanguageNames[dataSourceOptions.language] {
                     SettingsStringLabel(name: S.language.S, value: languageName)
                         .onTapGesture {
+                            model.dataSourceOptionsWizardContext = .settingsModification
                             model.dataSourceOptionsWizardStage = .chooseLanguage
                             model.dataSourceOptionsNeeded = true
                         }
@@ -44,6 +45,7 @@ struct GeneralSettingsView : View {
                 if let calendarName = CalendarNames[dataSourceOptions.calendar] {
                     SettingsStringLabel(name: S.liturgicalCalendar.S, value: calendarName)
                         .onTapGesture {
+                            model.dataSourceOptionsWizardContext = .settingsModification
                             model.dataSourceOptionsWizardStage = .chooseCalendar
                             model.dataSourceOptionsNeeded = true
                         }
@@ -52,6 +54,7 @@ struct GeneralSettingsView : View {
                 // Download latest texts
                 SettingsStringLabel(name: S.downloadLatestTexts.S, value: dataSourceOptions.dataSourceType.localizedDescription)
                     .onTapGesture {
+                        model.dataSourceOptionsWizardContext = .settingsModification
                         model.dataSourceOptionsWizardStage = .chooseDataSourceType
                         model.dataSourceOptionsNeeded = true
                     }

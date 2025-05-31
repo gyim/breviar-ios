@@ -12,19 +12,43 @@ struct DataSourceOptionsWizard: View {
     
     var body: some View {
         NavigationView {
-            switch model.dataSourceOptionsWizardStage {
-            case .chooseLanguage:
-                LanguageChooserScreen()
-            case .chooseCalendar:
-                CalendarChooserScreen(language: model.dataSourceOptions!.language.rawValue)
-            case .chooseDataSourceType:
-                NetworkSettingsScreen(language: model.dataSourceOptions!.language.rawValue, calendar: model.dataSourceOptions!.calendar)
+            switch model.dataSourceOptionsWizardContext {
+            case .initialSetup:
+                initialSetupView
+            case .settingsModification:
+                settingsModificationView
             }
         }.navigationViewStyle(StackNavigationViewStyle())
+    }
+    
+    @ViewBuilder
+    private var initialSetupView: some View {
+        switch model.dataSourceOptionsWizardStage {
+        case .chooseLanguage:
+            LanguageChooserScreen(wizardContext: .initialSetup)
+        case .chooseCalendar:
+            CalendarChooserScreen(language: model.dataSourceOptions!.language.rawValue, wizardContext: .initialSetup)
+        case .chooseDataSourceType:
+            NetworkSettingsScreen(language: model.dataSourceOptions!.language.rawValue, calendar: model.dataSourceOptions!.calendar, wizardContext: .initialSetup)
+        }
+    }
+    
+    @ViewBuilder
+    private var settingsModificationView: some View {
+        switch model.dataSourceOptionsWizardStage {
+        case .chooseLanguage:
+            LanguageChooserScreen(wizardContext: .settingsModification)
+        case .chooseCalendar:
+            CalendarChooserScreen(language: model.dataSourceOptions!.language.rawValue, wizardContext: .settingsModification)
+        case .chooseDataSourceType:
+            NetworkSettingsScreen(language: model.dataSourceOptions!.language.rawValue, calendar: model.dataSourceOptions!.calendar, wizardContext: .settingsModification)
+        }
     }
 }
 
 struct LanguageChooserScreen: View {
+    var wizardContext: DataSourceWizardContext
+    
     var body: some View {
         VStack {
             Image("PlaybackIcon")
@@ -32,9 +56,9 @@ struct LanguageChooserScreen: View {
                 .aspectRatio(contentMode: .fit)
 
             List {
-                LanguageLink(name: "🇨🇿 Breviář", code: "cz")
-                LanguageLink(name: "🇭🇺 Zsolozsma", code: "hu")
-                LanguageLink(name: "🇸🇰 Breviár", code: "sk")
+                LanguageLink(name: "🇨🇿 Breviář", code: "cz", wizardContext: wizardContext)
+                LanguageLink(name: "🇭🇺 Zsolozsma", code: "hu", wizardContext: wizardContext)
+                LanguageLink(name: "🇸🇰 Breviár", code: "sk", wizardContext: wizardContext)
             }
         }
     }
@@ -43,9 +67,10 @@ struct LanguageChooserScreen: View {
 struct LanguageLink: View {
     var name: String
     var code: String
+    var wizardContext: DataSourceWizardContext
     
     var body: some View {
-        NavigationLink(destination: CalendarChooserScreen(language: code)) {
+        NavigationLink(destination: CalendarChooserScreen(language: code, wizardContext: wizardContext)) {
             HStack {
                 Text(name)
                     .padding(.vertical)
@@ -56,43 +81,44 @@ struct LanguageLink: View {
 
 struct CalendarChooserScreen: View {
     var language: String
+    var wizardContext: DataSourceWizardContext
     
     var body: some View {
         switch language {
         case "cz":
             List {
-                CalendarLink(language: "cz", calendar: "cz")
-                CalendarLink(language: "cz", calendar: "czop")
-                CalendarLink(language: "cz", calendar: "opraem")
-                CalendarLink(language: "cz", calendar: "ofmcap")
-                CalendarLink(language: "cz", calendar: "czsdb")
-                CalendarLink(language: "cz", calendar: "czofm")
-                CalendarLink(language: "cz", calendar: "czsj")
-                CalendarLink(language: "cz", calendar: "czocd")
-                CalendarLink(language: "cz", calendar: "czofmconv")
+                CalendarLink(language: "cz", calendar: "cz", wizardContext: wizardContext)
+                CalendarLink(language: "cz", calendar: "czop", wizardContext: wizardContext)
+                CalendarLink(language: "cz", calendar: "opraem", wizardContext: wizardContext)
+                CalendarLink(language: "cz", calendar: "ofmcap", wizardContext: wizardContext)
+                CalendarLink(language: "cz", calendar: "czsdb", wizardContext: wizardContext)
+                CalendarLink(language: "cz", calendar: "czofm", wizardContext: wizardContext)
+                CalendarLink(language: "cz", calendar: "czsj", wizardContext: wizardContext)
+                CalendarLink(language: "cz", calendar: "czocd", wizardContext: wizardContext)
+                CalendarLink(language: "cz", calendar: "czofmconv", wizardContext: wizardContext)
             }.navigationTitle(S.liturgicalCalendar.forLanguage(.czech))
         case "hu":
             List {
-                CalendarLink(language: "hu", calendar: "hu")
-                CalendarLink(language: "hu", calendar: "huofm")
-                CalendarLink(language: "hu", calendar: "husvd")
-                CalendarLink(language: "hu", calendar: "husj")
+                CalendarLink(language: "hu", calendar: "hu", wizardContext: wizardContext)
+                CalendarLink(language: "hu", calendar: "huofm", wizardContext: wizardContext)
+                CalendarLink(language: "hu", calendar: "husvd", wizardContext: wizardContext)
+                CalendarLink(language: "hu", calendar: "husj", wizardContext: wizardContext)
             }.navigationTitle(S.liturgicalCalendar.forLanguage(.hungarian))
         case "sk":
             List {
                 ForEach([
-                    CalendarLink(language: "sk", calendar: "sk"),
-                    CalendarLink(language: "sk", calendar: "cssr"),
-                    CalendarLink(language: "sk", calendar: "svd"),
-                    CalendarLink(language: "sk", calendar: "ofm"),
-                    CalendarLink(language: "sk", calendar: "sdb"),
-                    CalendarLink(language: "sk", calendar: "op"),
-                    CalendarLink(language: "sk", calendar: "sj"),
-                    CalendarLink(language: "sk", calendar: "cm"),
-                    CalendarLink(language: "sk", calendar: "ocd"),
-                    CalendarLink(language: "sk", calendar: "csa"),
-                    CalendarLink(language: "sk", calendar: "osu"),
-                    CalendarLink(language: "sk", calendar: "skopraem"),
+                    CalendarLink(language: "sk", calendar: "sk", wizardContext: wizardContext),
+                    CalendarLink(language: "sk", calendar: "cssr", wizardContext: wizardContext),
+                    CalendarLink(language: "sk", calendar: "svd", wizardContext: wizardContext),
+                    CalendarLink(language: "sk", calendar: "ofm", wizardContext: wizardContext),
+                    CalendarLink(language: "sk", calendar: "sdb", wizardContext: wizardContext),
+                    CalendarLink(language: "sk", calendar: "op", wizardContext: wizardContext),
+                    CalendarLink(language: "sk", calendar: "sj", wizardContext: wizardContext),
+                    CalendarLink(language: "sk", calendar: "cm", wizardContext: wizardContext),
+                    CalendarLink(language: "sk", calendar: "ocd", wizardContext: wizardContext),
+                    CalendarLink(language: "sk", calendar: "csa", wizardContext: wizardContext),
+                    CalendarLink(language: "sk", calendar: "osu", wizardContext: wizardContext),
+                    CalendarLink(language: "sk", calendar: "skopraem", wizardContext: wizardContext),
                 ]) { e in e}
             }.navigationTitle(S.liturgicalCalendar.forLanguage(.slovak))
         default:
@@ -104,14 +130,27 @@ struct CalendarChooserScreen: View {
 struct CalendarLink: View, Identifiable {
     var language: String
     var calendar: String
+    var wizardContext: DataSourceWizardContext
+    @EnvironmentObject var model: BreviarModel
     
     var body: some View {
         let label = CalendarNames[calendar]!
-        NavigationLink(
-            destination: NetworkSettingsScreen(language: language, calendar: calendar),
-            label: {
-                Text(label)
-            })
+        
+        if wizardContext == .settingsModification {
+            Text(label)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    let dataSourceType = model.dataSourceOptions?.dataSourceType ?? .alwaysNetwork
+                    let options = DataSourceOptions(dataSourceType: dataSourceType, language: Language(rawValue: language)!, calendar: calendar)
+                    model.setDataSourceOptions(options)
+                }
+        } else {
+            NavigationLink(
+                destination: NetworkSettingsScreen(language: language, calendar: calendar, wizardContext: wizardContext),
+                label: {
+                    Text(label)
+                })
+        }
     }
     
     var id: String {
@@ -122,6 +161,7 @@ struct CalendarLink: View, Identifiable {
 struct NetworkSettingsScreen: View {
     var language: String
     var calendar: String
+    var wizardContext: DataSourceWizardContext
     @State var dataSourceType: DataSourceType = .alwaysNetwork
     @EnvironmentObject var model: BreviarModel
     
@@ -143,6 +183,9 @@ struct NetworkSettingsScreen: View {
                 model.setDataSourceOptions(options)
             }
         })
+        .onAppear {
+            dataSourceType = model.dataSourceOptions?.dataSourceType ?? .alwaysNetwork
+        }
     }
 }
 
@@ -168,7 +211,7 @@ struct SetupWizardScreen_Previews: PreviewProvider {
 struct CalendarChooserScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CalendarChooserScreen(language: "hu")
+            CalendarChooserScreen(language: "hu", wizardContext: .initialSetup)
         }
     }
 }
@@ -176,7 +219,7 @@ struct CalendarChooserScreen_Previews: PreviewProvider {
 struct NetworkSettingsScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            NetworkSettingsScreen(language: "hu", calendar: "hu")
+            NetworkSettingsScreen(language: "hu", calendar: "hu", wizardContext: .initialSetup)
                 .environmentObject(BreviarModel.testModel())
         }
     }
