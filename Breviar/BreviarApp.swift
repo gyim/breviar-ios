@@ -16,9 +16,10 @@ struct BreviarApp: App {
         WindowGroup {
             MainScreen().environmentObject(model)
                 .onAppear() {
-                    // Set UI language
+                    // Set UI and liturgical languages
                     if let options = model.dataSourceOptions {
-                        currentLanguage = options.language
+                        currentLiturgicalLanguage = options.language
+                        currentUILanguage = options.uiLanguage
                     }
                     
                     // Set color scheme

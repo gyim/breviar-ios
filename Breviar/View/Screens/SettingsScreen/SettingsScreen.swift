@@ -29,18 +29,27 @@ struct SettingsScreen : View {
 struct GeneralSettingsView : View {
     @EnvironmentObject var model: BreviarModel
     
+    private func languageDisplayValue(for options: DataSourceOptions) -> String {
+        if options.language == .latin {
+            // Show "Latina / UI Language" for Latin
+            let latinName = LatinLanguageName.forLanguage(options.uiLanguage)
+            let uiLangName = LanguageNames[options.uiLanguage] ?? ""
+            return "\(latinName) / \(uiLangName)"
+        } else {
+            return LanguageNames[options.language] ?? ""
+        }
+    }
+    
     var body: some View {
         Section(header: Text(S.generalSettings.S)) {
             if let dataSourceOptions = model.dataSourceOptions {
                 // Language
-                if let languageName = LanguageNames[dataSourceOptions.language] {
-                    SettingsStringLabel(name: S.language.S, value: languageName)
-                        .onTapGesture {
-                            model.dataSourceOptionsWizardContext = .settingsModification
-                            model.dataSourceOptionsWizardStage = .chooseLanguage
-                            model.dataSourceOptionsNeeded = true
-                        }
-                }
+                SettingsStringLabel(name: S.language.S, value: languageDisplayValue(for: dataSourceOptions))
+                    .onTapGesture {
+                        model.dataSourceOptionsWizardContext = .settingsModification
+                        model.dataSourceOptionsWizardStage = .chooseLanguage
+                        model.dataSourceOptionsNeeded = true
+                    }
                 
                 // Liturgical calendar
                 if let calendarName = CalendarNames[dataSourceOptions.calendar] {

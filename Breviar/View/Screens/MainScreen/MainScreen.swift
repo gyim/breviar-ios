@@ -17,7 +17,7 @@ struct MainScreen: View {
         let dayDiff = abs(today.daysSinceEpoch - day.daysSinceEpoch)
         
         if dayDiff < 3 {
-            let fmt = currentLanguage.dateFormatter(format: "EEEE")
+            let fmt = currentLiturgicalLanguage.dateFormatter(format: "EEEE")
             let dayName = fmt.string(from: day.date).capitalized
             
             if dayDiff == 0 {
@@ -26,10 +26,16 @@ struct MainScreen: View {
                 return dayName
             }
         } else {
-            let fmt = DateFormatter()
-            fmt.locale = currentLanguage.locale
-            fmt.dateStyle = .long
-            return fmt.string(from: day.date)
+            if currentLiturgicalLanguage == .latin {
+                // Use custom Latin date formatter
+                let fmt = currentLiturgicalLanguage.dateFormatter(format: "d MMMM yyyy")
+                return fmt.string(from: day.date)
+            } else {
+                let fmt = DateFormatter()
+                fmt.locale = currentLiturgicalLanguage.locale
+                fmt.dateStyle = .long
+                return fmt.string(from: day.date)
+            }
         }
     }
     

@@ -153,7 +153,7 @@ class SettingsParser : NSObject, XMLParserDelegate {
     // Settings entries
     let entryTags = ["Opt0Special", "Opt1PrayerPortions", "Opt2Export", "Opt3Communia", "Opt5Alternatives", "Opt6AlternativesMultivalue"]
     let hiddenEntryTags = ["Opt6AlternativesMultivalue"]
-    let skipEntryLabels = ["hu_text", "sk_text", "cz_text", "", "/"]
+    let skipEntryLabels = ["hu_text", "sk_text", "cz_text", "is_text", "la_text", "", "/"]
     let skipOptions = [
         "o0": [ // liturgical calendar settings
             "64":      true, // use normal font instead of bold
@@ -192,7 +192,7 @@ class SettingsParser : NSObject, XMLParserDelegate {
             guard let label = attributes["Text"] else { return }
             
             // Get default value
-            guard let defaultValueS = attributes["Value"], var defaultValue = Int(defaultValueS) else { return }
+            guard let defaultValueS = attributes["Value"], let defaultValue = Int(defaultValueS) else { return }
             
             // Create settings entry
             let type: SettingsEntryType = name == communiaEntryName ? .stringChoice : .flagSet

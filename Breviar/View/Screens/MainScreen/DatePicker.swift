@@ -12,7 +12,7 @@ struct DatePicker: View {
     var onDaySelected: () -> Void
 
     func getTitle(month: Date) -> String {
-        let fmt = currentLanguage.dateFormatter(format: "yyyy MMMM")
+        let fmt = currentLiturgicalLanguage.dateFormatter(format: "yyyy MMMM")
         return fmt.string(from: month)
     }
     
@@ -80,7 +80,7 @@ struct DatePickerList: View {
     var onDaySelected: () -> Void
     
     var body: some View {
-        let fmt = currentLanguage.dateFormatter(format: "MMMM dd (EE)")
+        let fmt = currentLiturgicalLanguage.dateFormatter(format: "MMMM dd (EE)")
         let today = Day.init(fromDate: Date())
         
         List {

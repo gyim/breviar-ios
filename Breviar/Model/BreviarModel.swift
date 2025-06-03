@@ -69,7 +69,11 @@ class BreviarModel : ObservableObject {
         self.dataSourceOptions = options
         self.dataSourceOptionsNeeded = false
         self.dataSource.setOptions(options)
-        currentLanguage = options.language
+        
+        // Set both liturgical and UI languages
+        currentLiturgicalLanguage = options.language
+        currentUILanguage = options.uiLanguage
+        
         self.clearCalendarSettings()
         self.reload()
     }

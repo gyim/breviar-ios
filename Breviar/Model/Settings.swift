@@ -40,6 +40,7 @@ enum DataSourceType: String {
 struct DataSourceOptions {
     var dataSourceType: DataSourceType
     var language: Language
+    var uiLanguage: Language
     var calendar: String
     
     static var savedOptions: DataSourceOptions? {
@@ -47,10 +48,13 @@ struct DataSourceOptions {
         
         if let languageS = userDefaults.string(forKey: "j"),
            let language = Language(rawValue: languageS),
+           let uiLanguageS = userDefaults.string(forKey: "ui_lang"),
+           let uiLanguage = Language(rawValue: uiLanguageS),
            let calendar = userDefaults.string(forKey: "k"),
            let dataSourceTypeS = userDefaults.string(forKey: "ds"),
            let dataSourceType = DataSourceType(rawValue: dataSourceTypeS) {
-            return DataSourceOptions(dataSourceType: dataSourceType, language: language, calendar: calendar)
+            
+            return DataSourceOptions(dataSourceType: dataSourceType, language: language, uiLanguage: uiLanguage, calendar: calendar)
         } else {
             return nil
         }
@@ -62,6 +66,7 @@ struct DataSourceOptions {
         userDefaults.setValue(language.rawValue, forKey: "j")
         userDefaults.setValue(calendar, forKey: "k")
         userDefaults.setValue(dataSourceType.rawValue, forKey: "ds")
+        userDefaults.setValue(uiLanguage.rawValue, forKey: "ui_lang")
     }
 }
 

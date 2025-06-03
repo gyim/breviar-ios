@@ -14,21 +14,21 @@ struct S {
     static let retryLocally = LS(sk: "Skúsiť offline (lokálne)", cz: "Zkusit offline (lokálně)", hu: "Újrapróbálás helyben", isl: "Reyna án nettengingar")
     
     // Prayers
-    static let invitatory = LS(sk: "Invitatórium", cz: "Uvedení do první modlitby dne", hu: "Imádságra hívás", isl: "Inngöngusöngur")
-    static let officeOfReadings = LS(sk: "Posvätné čítanie", cz: "Modlitba se čtením", hu: "Olvasmányos imaóra", isl: "Óttusöngur hinn fyrri")
-    static let morningPrayer = LS(sk: "Ranné chvály", cz: "Ranní chvály", hu: "Reggeli dicséret", isl: "Efri óttusöngur")
-    static let midMorningPrayer = LS(sk: "Modlitba predpoludním", cz: "Modlitba dopoledne", hu: "Délelőtt", isl: "Miðdegisbæn fyrir hádegi")
-    static let midDayPrayer = LS(sk: "Modlitba napoludnie", cz: "Modlitba v poledne", hu: "Délben", isl: "Miðdegisbæn")
-    static let midAfternoonPrayer = LS(sk: "Modlitba popoludní", cz: "Modlitba odpoledne", hu: "Délután", isl: "Miðdegisbæn eftir hádegi")
-    static let eveningPrayer = LS(sk: "Vešpery", cz: "Nešpory", hu: "Esti dicséret", isl: "Aftansöngur")
-    static let compline = LS(sk: "Kompletórium", cz: "Kompletář", hu: "Befejező imaóra", isl: "Náttsöngur")
+    static let invitatory = LSLiturgical(sk: "Invitatórium", cz: "Uvedení do první modlitby dne", hu: "Imádságra hívás", isl: "Inngöngusöngur", lat: "Invitatorium")
+    static let officeOfReadings = LSLiturgical(sk: "Posvätné čítanie", cz: "Modlitba se čtením", hu: "Olvasmányos imaóra", isl: "Óttusöngur hinn fyrri", lat: "Officium lectionis")
+    static let morningPrayer = LSLiturgical(sk: "Ranné chvály", cz: "Ranní chvály", hu: "Reggeli dicséret", isl: "Efri óttusöngur", lat: "Laudes matutinæ")
+    static let midMorningPrayer = LSLiturgical(sk: "Modlitba predpoludním", cz: "Modlitba dopoledne", hu: "Délelőtt", isl: "Miðdegisbæn fyrir hádegi", lat: "Tertia")
+    static let midDayPrayer = LSLiturgical(sk: "Modlitba napoludnie", cz: "Modlitba v poledne", hu: "Délben", isl: "Miðdegisbæn", lat: "Sexta")
+    static let midAfternoonPrayer = LSLiturgical(sk: "Modlitba popoludní", cz: "Modlitba odpoledne", hu: "Délután", isl: "Miðdegisbæn eftir hádegi", lat: "Nona")
+    static let eveningPrayer = LSLiturgical(sk: "Vešpery", cz: "Nešpory", hu: "Esti dicséret", isl: "Aftansöngur", lat: "Vesperæ")
+    static let compline = LSLiturgical(sk: "Kompletórium", cz: "Kompletář", hu: "Befejező imaóra", isl: "Náttsöngur", lat: "Completorium")
     
     // Main screen
     static let prayers = LS(sk: "Modlitby", cz: "Modlitby", hu: "Imák", isl: "Bænir")
     static let settings = LS(sk: "Nastavenia", cz: "Nastavení", hu: "Beállítások", isl: "Stillingar")
     static let previousDay = LS(sk: "Predchádzajúci deň", cz: "Předchozí den", hu: "Előző nap", isl: "Fyrri dagur")
     static let nextDay = LS(sk: "Ďalší deň", cz: "Další den", hu: "Következő nap", isl: "Næsti dagur")
-    static let today = LS(sk: "Dnes", cz: "Dnes", hu: "Ma", isl: "Í dag")
+    static let today = LSLiturgical(sk: "Dnes", cz: "Dnes", hu: "Ma", isl: "Í dag", lat: "Hodie")
     
     // Date picker
     static let back = LS(sk: "Späť", cz: "Zpátky", hu: "Vissza", isl: "Til baka")
@@ -52,7 +52,7 @@ struct S {
     // About
     static let aboutBreviary = LS(sk: "O aplikácii Breviár", cz: "O aplikaci Breviář", hu: "A Zsolozsma alkalmazásról", isl: "Um Tíðabænabók")
     static let webURL = LS(sk: "https://breviar.sk", cz: "https://breviar.cz", hu: "https://zsolozsma.katolikus.hu", isl: "https://breviar.sk")
-    static let appName = LS(sk: "Breviár", cz: "Breviář", hu: "Zsolozsma", isl: "Tíðabænabók")
+    static let appName = LSLiturgical(sk: "Breviár", cz: "Breviář", hu: "Zsolozsma", isl: "Tíðabænabók", lat: "Breviarium")
     
     // Setup Wizard
     static let liturgicalCalendar = LS(sk: "Liturgický kalendár", cz: "Liturgický kalendář", hu: "Liturgikus naptár", isl: "Helgisiðadagatal")
@@ -82,8 +82,12 @@ let LanguageNames: [Language: String] = [
     .czech: "Čeština",
     .hungarian: "Magyar",
     .icelandic: "Íslenska",
+    .latin: "Latina",
     .slovak: "Slovenčina",
 ]
+
+// Language name "Latin" in each UI language
+let LatinLanguageName = LS(sk: "Latinčina", cz: "Latina", hu: "Latin", isl: "Latína")
 
 let CalendarNames: [String: String] = [
     // Czech
@@ -119,4 +123,7 @@ let CalendarNames: [String: String] = [
     
     // Icelandic
     "is": "almennur",
+    
+    // Latin
+    "la": "universalis",
 ]
