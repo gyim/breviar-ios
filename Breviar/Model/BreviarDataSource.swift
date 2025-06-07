@@ -315,6 +315,14 @@ class CGIDataSource : BreviarDataSource {
         }
     }
     
+    var cgiUILanguageCode: String {
+        if self.options?.calendar == "czop" {
+            return "c2"
+        } else {
+            return self.options?.uiLanguage.rawValue ?? ""
+        }
+    }
+    
     func getLiturgicalDay(day: Day, forceLocal: Bool, handler: @escaping (LiturgicalDay?, Error?) -> Void) {
         let args = [
             "qt": "pxml",
@@ -504,7 +512,7 @@ class CGIDataSource : BreviarDataSource {
             "qt": "pst",
             "st": "i",
             "p": "0",
-            "j": self.cgiLanguageCode,
+            "j": self.cgiUILanguageCode,
         ]
         self.cgiClient(forceLocal: true).makeRequest(args) { data, error in
             let response = String(data: data!, encoding: .utf8)
