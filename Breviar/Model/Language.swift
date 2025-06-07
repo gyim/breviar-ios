@@ -60,6 +60,29 @@ enum Language : String {
         fmt.locale = self.locale
         return fmt
     }
+    
+    var availableCalendars: [String] {
+        switch self {
+        case .czech:
+            return ["cz", "czop", "opraem", "ofmcap", "czsdb", "czofm", "czsj", "czocd", "czofmconv"]
+        case .hungarian:
+            return ["hu", "huofm", "husvd", "husj"]
+        case .slovak:
+            return ["sk", "cssr", "svd", "ofm", "sdb", "op", "sj", "cm", "ocd", "csa", "osu", "skopraem"]
+        case .icelandic:
+            return ["is"]
+        case .latin:
+            return ["la"]
+        }
+    }
+    
+    var hasMultipleCalendars: Bool {
+        return availableCalendars.count > 1
+    }
+    
+    var defaultCalendar: String {
+        return availableCalendars.first!
+    }
 }
 
 struct LS {

@@ -110,18 +110,63 @@ struct LanguageLink: View {
     var name: String
     var code: String
     var wizardContext: DataSourceWizardContext
+    @EnvironmentObject var model: BreviarModel
     
     var body: some View {
-        NavigationLink(destination: CalendarChooserScreen(language: code, uiLanguage: code, wizardContext: wizardContext)) {
+        if let language = Language(rawValue: code), language.hasMultipleCalendars {
+            // Languages with multiple calendars: navigate to calendar chooser
+            NavigationLink(destination: CalendarChooserScreen(language: code, uiLanguage: code, wizardContext: wizardContext)) {
+                HStack {
+                    Text(name)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(.gray)
+                        .font(.caption)
+                }
+            }
+            .buttonStyle(PlainButtonStyle())
+        } else if let language = Language(rawValue: code) {
+            // Languages with single calendar: skip calendar chooser
+            let defaultCalendar = language.defaultCalendar
+            
+            if wizardContext == .settingsModification {
+                // Settings modification: apply changes directly
+                HStack {
+                    Text(name)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(.gray)
+                        .font(.caption)
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    let dataSourceType = model.dataSourceOptions?.dataSourceType ?? .alwaysNetwork
+                    let uiLanguage = language.isUILanguage ? language : (model.dataSourceOptions?.uiLanguage ?? .hungarian)
+                    let options = DataSourceOptions(dataSourceType: dataSourceType, language: language, uiLanguage: uiLanguage, calendar: defaultCalendar)
+                    model.setDataSourceOptions(options)
+                }
+            } else {
+                // Initial setup: navigate to network settings
+                NavigationLink(destination: NetworkSettingsScreen(language: code, uiLanguage: code, calendar: defaultCalendar, wizardContext: wizardContext)) {
+                    HStack {
+                        Text(name)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.gray)
+                            .font(.caption)
+                    }
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
+        } else {
+            // Fallback for invalid language codes
             HStack {
                 Text(name)
                 Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundColor(.gray)
-                    .font(.caption)
+                Text("Invalid")
+                    .foregroundColor(.red)
             }
         }
-        .buttonStyle(PlainButtonStyle())
     }
 }
 
@@ -131,53 +176,16 @@ struct CalendarChooserScreen: View {
     var wizardContext: DataSourceWizardContext
     
     var body: some View {
-        switch language {
-        case "cz":
+        if let currentLanguage = Language(rawValue: language) {
+            let availableCalendars = currentLanguage.availableCalendars
+            
             List {
-                CalendarLink(language: "cz", uiLanguage: uiLanguage, calendar: "cz", wizardContext: wizardContext)
-                CalendarLink(language: "cz", uiLanguage: uiLanguage, calendar: "czop", wizardContext: wizardContext)
-                CalendarLink(language: "cz", uiLanguage: uiLanguage, calendar: "opraem", wizardContext: wizardContext)
-                CalendarLink(language: "cz", uiLanguage: uiLanguage, calendar: "ofmcap", wizardContext: wizardContext)
-                CalendarLink(language: "cz", uiLanguage: uiLanguage, calendar: "czsdb", wizardContext: wizardContext)
-                CalendarLink(language: "cz", uiLanguage: uiLanguage, calendar: "czofm", wizardContext: wizardContext)
-                CalendarLink(language: "cz", uiLanguage: uiLanguage, calendar: "czsj", wizardContext: wizardContext)
-                CalendarLink(language: "cz", uiLanguage: uiLanguage, calendar: "czocd", wizardContext: wizardContext)
-                CalendarLink(language: "cz", uiLanguage: uiLanguage, calendar: "czofmconv", wizardContext: wizardContext)
-            }.navigationTitle(S.liturgicalCalendar.forLanguage(.czech))
-        case "hu":
-            List {
-                CalendarLink(language: "hu", uiLanguage: uiLanguage, calendar: "hu", wizardContext: wizardContext)
-                CalendarLink(language: "hu", uiLanguage: uiLanguage, calendar: "huofm", wizardContext: wizardContext)
-                CalendarLink(language: "hu", uiLanguage: uiLanguage, calendar: "husvd", wizardContext: wizardContext)
-                CalendarLink(language: "hu", uiLanguage: uiLanguage, calendar: "husj", wizardContext: wizardContext)
-            }.navigationTitle(S.liturgicalCalendar.forLanguage(.hungarian))
-        case "sk":
-            List {
-                ForEach([
-                    CalendarLink(language: "sk", uiLanguage: uiLanguage, calendar: "sk", wizardContext: wizardContext),
-                    CalendarLink(language: "sk", uiLanguage: uiLanguage, calendar: "cssr", wizardContext: wizardContext),
-                    CalendarLink(language: "sk", uiLanguage: uiLanguage, calendar: "svd", wizardContext: wizardContext),
-                    CalendarLink(language: "sk", uiLanguage: uiLanguage, calendar: "ofm", wizardContext: wizardContext),
-                    CalendarLink(language: "sk", uiLanguage: uiLanguage, calendar: "sdb", wizardContext: wizardContext),
-                    CalendarLink(language: "sk", uiLanguage: uiLanguage, calendar: "op", wizardContext: wizardContext),
-                    CalendarLink(language: "sk", uiLanguage: uiLanguage, calendar: "sj", wizardContext: wizardContext),
-                    CalendarLink(language: "sk", uiLanguage: uiLanguage, calendar: "cm", wizardContext: wizardContext),
-                    CalendarLink(language: "sk", uiLanguage: uiLanguage, calendar: "ocd", wizardContext: wizardContext),
-                    CalendarLink(language: "sk", uiLanguage: uiLanguage, calendar: "csa", wizardContext: wizardContext),
-                    CalendarLink(language: "sk", uiLanguage: uiLanguage, calendar: "osu", wizardContext: wizardContext),
-                    CalendarLink(language: "sk", uiLanguage: uiLanguage, calendar: "skopraem", wizardContext: wizardContext),
-                ]) { e in e}
-            }.navigationTitle(S.liturgicalCalendar.forLanguage(.slovak))
-        case "is":
-            List {
-                CalendarLink(language: "is", uiLanguage: uiLanguage, calendar: "is", wizardContext: wizardContext)
-            }.navigationTitle(S.liturgicalCalendar.forLanguage(.icelandic))
-        case "la":
-            List {
-                CalendarLink(language: "la", uiLanguage: uiLanguage, calendar: "la", wizardContext: wizardContext)
-            }.navigationTitle(S.liturgicalCalendar.forLanguage(.latin))
-        default:
-            Text("Nothing here")
+                ForEach(availableCalendars, id: \.self) { calendarCode in
+                    CalendarLink(language: language, uiLanguage: uiLanguage, calendar: calendarCode, wizardContext: wizardContext)
+                }
+            }.navigationTitle(S.liturgicalCalendar.forLanguage(currentLanguage))
+        } else {
+            Text("Invalid language")
         }
     }
 }
@@ -347,14 +355,14 @@ struct UILanguageRow: View {
                     )
                     model.setDataSourceOptions(options)
                 } else {
-                    // For initial setup, navigate to calendar chooser
+                    // For initial setup, skip calendar chooser since Latin has only one calendar
                     model.dataSourceOptions = DataSourceOptions(
                         dataSourceType: .alwaysNetwork,
                         language: .latin,
                         uiLanguage: language,
                         calendar: "la"
                     )
-                    model.dataSourceOptionsWizardStage = .chooseCalendar
+                    model.dataSourceOptionsWizardStage = .chooseDataSourceType
                 }
             }
         }

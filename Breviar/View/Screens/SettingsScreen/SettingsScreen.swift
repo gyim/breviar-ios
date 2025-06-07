@@ -52,7 +52,9 @@ struct GeneralSettingsView : View {
                     }
                 
                 // Liturgical calendar
-                if let calendarName = CalendarNames[dataSourceOptions.calendar] {
+                // Only show calendar cell if current language has multiple calendars
+                if dataSourceOptions.language.hasMultipleCalendars,
+                   let calendarName = CalendarNames[dataSourceOptions.calendar] {
                     SettingsStringLabel(name: S.liturgicalCalendar.S, value: calendarName)
                         .onTapGesture {
                             model.dataSourceOptionsWizardContext = .settingsModification

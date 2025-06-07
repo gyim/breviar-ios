@@ -54,7 +54,19 @@ struct DataSourceOptions {
            let dataSourceTypeS = userDefaults.string(forKey: "ds"),
            let dataSourceType = DataSourceType(rawValue: dataSourceTypeS) {
             
-            return DataSourceOptions(dataSourceType: dataSourceType, language: language, uiLanguage: uiLanguage, calendar: calendar)
+            var validatedCalendar = calendar
+            
+            // Verify the saved calendar is valid for the current language
+            if !language.availableCalendars.contains(calendar) {
+                // Invalid calendar for this language, use default
+                validatedCalendar = language.defaultCalendar
+                
+                // Save the corrected settings
+                var correctedOptions = DataSourceOptions(dataSourceType: dataSourceType, language: language, uiLanguage: uiLanguage, calendar: validatedCalendar)
+                correctedOptions.save()
+            }
+            
+            return DataSourceOptions(dataSourceType: dataSourceType, language: language, uiLanguage: uiLanguage, calendar: validatedCalendar)
         } else {
             return nil
         }
