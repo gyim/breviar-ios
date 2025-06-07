@@ -45,6 +45,7 @@ struct GeneralSettingsView : View {
             if let dataSourceOptions = model.dataSourceOptions {
                 // Language
                 SettingsStringLabel(name: S.language.S, value: languageDisplayValue(for: dataSourceOptions))
+                    .contentShape(Rectangle())
                     .onTapGesture {
                         model.dataSourceOptionsWizardContext = .settingsModification
                         model.dataSourceOptionsWizardStage = .chooseLanguage
@@ -56,6 +57,7 @@ struct GeneralSettingsView : View {
                 if dataSourceOptions.language.hasMultipleCalendars,
                    let calendarName = CalendarNames[dataSourceOptions.calendar] {
                     SettingsStringLabel(name: S.liturgicalCalendar.S, value: calendarName)
+                        .contentShape(Rectangle())
                         .onTapGesture {
                             model.dataSourceOptionsWizardContext = .settingsModification
                             model.dataSourceOptionsWizardStage = .chooseCalendar
@@ -65,6 +67,7 @@ struct GeneralSettingsView : View {
                 
                 // Download latest texts
                 SettingsStringLabel(name: S.downloadLatestTexts.S, value: dataSourceOptions.dataSourceType.localizedDescription)
+                    .contentShape(Rectangle())
                     .onTapGesture {
                         model.dataSourceOptionsWizardContext = .settingsModification
                         model.dataSourceOptionsWizardStage = .chooseDataSourceType
