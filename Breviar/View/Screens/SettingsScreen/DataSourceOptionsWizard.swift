@@ -17,6 +17,13 @@ struct DataSourceOptionsWizard: View {
                 initialSetupView
             case .settingsModification:
                 settingsModificationView
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(S.close.forLanguage(currentUILanguage)) {
+                                model.dataSourceOptionsNeeded = false
+                            }
+                        }
+                    }
             }
         }.navigationViewStyle(StackNavigationViewStyle())
     }
@@ -123,6 +130,7 @@ struct LanguageLink: View {
                         .foregroundColor(.gray)
                         .font(.caption)
                 }
+                .contentShape(Rectangle())
             }
             .buttonStyle(PlainButtonStyle())
         } else if let language = Language(rawValue: code) {
@@ -155,6 +163,7 @@ struct LanguageLink: View {
                             .foregroundColor(.gray)
                             .font(.caption)
                     }
+                    .contentShape(Rectangle())
                 }
                 .buttonStyle(PlainButtonStyle())
             }
@@ -201,13 +210,16 @@ struct CalendarLink: View, Identifiable {
         let label = CalendarNames[calendar]!
         
         if wizardContext == .settingsModification {
-            Text(label)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    let dataSourceType = model.dataSourceOptions?.dataSourceType ?? .alwaysNetwork
-                    let options = DataSourceOptions(dataSourceType: dataSourceType, language: Language(rawValue: language)!, uiLanguage: Language(rawValue: uiLanguage)!, calendar: calendar)
-                    model.setDataSourceOptions(options)
-                }
+            HStack {
+                Text(label)
+                Spacer()
+            }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                let dataSourceType = model.dataSourceOptions?.dataSourceType ?? .alwaysNetwork
+                let options = DataSourceOptions(dataSourceType: dataSourceType, language: Language(rawValue: language)!, uiLanguage: Language(rawValue: uiLanguage)!, calendar: calendar)
+                model.setDataSourceOptions(options)
+            }
         } else {
             NavigationLink(
                 destination: NetworkSettingsScreen(language: language, uiLanguage: uiLanguage, calendar: calendar, wizardContext: wizardContext),
@@ -234,23 +246,44 @@ struct NetworkSettingsScreen: View {
         List {
             Section(header: Text(S.downloadLatestTexts.forLanguageCode(uiLanguage))) {
                 NetworkSettingsChoice(label: S.always.forLanguageCode(uiLanguage), checked: dataSourceType == .alwaysNetwork)
-                    .onTapGesture { withAnimation { dataSourceType = .alwaysNetwork } }
+                    .onTapGesture { 
+                        withAnimation { dataSourceType = .alwaysNetwork }
+                        if wizardContext == .settingsModification {
+                            applySettings()
+                        }
+                    }
                 NetworkSettingsChoice(label: S.onlyOnWifi.forLanguageCode(uiLanguage), checked: dataSourceType == .networkOnWifi)
-                    .onTapGesture { withAnimation { dataSourceType = .networkOnWifi } }
+                    .onTapGesture { 
+                        withAnimation { dataSourceType = .networkOnWifi }
+                        if wizardContext == .settingsModification {
+                            applySettings()
+                        }
+                    }
                 NetworkSettingsChoice(label: S.never.forLanguageCode(uiLanguage), checked: dataSourceType == .alwaysCGI)
-                    .onTapGesture { withAnimation { dataSourceType = .alwaysCGI } }
+                    .onTapGesture { 
+                        withAnimation { dataSourceType = .alwaysCGI }
+                        if wizardContext == .settingsModification {
+                            applySettings()
+                        }
+                    }
             }
         }
         .navigationTitle(S.networkSettings.forLanguageCode(uiLanguage))
         .toolbar(content: {
-            Button(S.done.forLanguageCode(uiLanguage)) {
-                let options = DataSourceOptions(dataSourceType: dataSourceType, language: Language(rawValue: language)!, uiLanguage: Language(rawValue: uiLanguage)!, calendar: calendar)
-                model.setDataSourceOptions(options)
+            if wizardContext == .initialSetup {
+                Button(S.done.forLanguageCode(uiLanguage)) {
+                    applySettings()
+                }
             }
         })
         .onAppear {
             dataSourceType = model.dataSourceOptions?.dataSourceType ?? .alwaysNetwork
         }
+    }
+    
+    private func applySettings() {
+        let options = DataSourceOptions(dataSourceType: dataSourceType, language: Language(rawValue: language)!, uiLanguage: Language(rawValue: uiLanguage)!, calendar: calendar)
+        model.setDataSourceOptions(options)
     }
 }
 

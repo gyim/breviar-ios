@@ -62,6 +62,7 @@ struct S {
     static let onlyOnWifi = LS(sk: "Iba v sieti Wi-Fi", cz: "Pouze v síti Wi-Fi", hu: "Csak Wi-Fi hálózaton", isl: "Aðeins á Wi-Fi")
     static let never = LS(sk: "Nikdy", cz: "Nikdy", hu: "Soha", isl: "Aldrei")
     static let done = LS(sk: "Hotovo", cz: "Hotovo", hu: "Kész", isl: "Lokið")
+    static let close = LS(sk: "Zavrieť", cz: "Zavřít", hu: "Bezár", isl: "Loka")
     
     // Prayer Screen Settings
     static let prayerScreenSettings = LS(sk: "Nastavenia obrazovky modlitby", cz: "Nastavení obrazovky modlitby", hu: "Ima képernyő beállításai", isl: "Stillingar bænaskjás")
