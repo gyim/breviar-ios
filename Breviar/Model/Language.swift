@@ -23,6 +23,7 @@ var currentLanguage: Language {
 
 enum Language : String {
     case czech = "cz"
+    case english = "en"
     case hungarian = "hu"
     case icelandic = "is"
     case latin = "la"
@@ -32,6 +33,8 @@ enum Language : String {
         switch self {
         case .czech:
             return Locale(identifier: "cs_CS")
+        case .english:
+            return Locale(identifier: "en_US")
         case .hungarian:
             return Locale(identifier: "hu_HU")
         case .icelandic:
@@ -73,6 +76,8 @@ enum Language : String {
             return ["is"]
         case .latin:
             return ["la"]
+        case .english:
+            return []
         }
     }
     
@@ -86,6 +91,7 @@ enum Language : String {
 }
 
 struct LS {
+    var en: String
     var sk: String
     var cz: String
     var hu: String
@@ -97,6 +103,8 @@ struct LS {
     
     func forLanguage(_ l: Language) -> String {
         switch l {
+        case .english:
+            return self.en
         case .slovak:
             return self.sk
         case .czech:
@@ -140,6 +148,8 @@ struct LSLiturgical {
             return self.isl
         case .latin:
             return self.lat
+        case .english:
+            return "" // English cannot be chosen as a liturgical calendar
         }
     }
     

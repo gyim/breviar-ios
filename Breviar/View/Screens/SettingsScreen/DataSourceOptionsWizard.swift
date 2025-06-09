@@ -333,7 +333,7 @@ struct LatinLanguageSection: View {
                         .foregroundColor(.secondary)
                         .padding(.horizontal)
                     
-                    ForEach([Language.czech, Language.hungarian, Language.icelandic, Language.slovak], id: \.self) { lang in
+                    ForEach([Language.english, Language.czech, Language.hungarian, Language.icelandic, Language.slovak], id: \.self) { lang in
                         UILanguageRow(
                             language: lang,
                             selectedUILanguage: $selectedUILanguage,
@@ -357,6 +357,7 @@ struct UILanguageRow: View {
     private var languageEmoji: String {
         switch language {
         case .czech: return "🇨🇿"
+        case .english: return "🇺🇸"
         case .hungarian: return "🇭🇺"
         case .icelandic: return "🇮🇸"
         case .slovak: return "🇸🇰"
