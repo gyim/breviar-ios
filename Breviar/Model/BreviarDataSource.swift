@@ -323,6 +323,9 @@ class CGIDataSource : BreviarDataSource {
             "r": day.year.description,
             "j": self.cgiLanguageCode,
             "k": self.options?.calendar ?? "",
+            "o0": valueForOption("o0"),
+            "o1": valueForOption("o1"),
+            "o3": valueForOption("o3"),
         ]
         
         self.cgiClient(forceLocal: forceLocal).makeRequest(args) { data, error in
@@ -352,6 +355,9 @@ class CGIDataSource : BreviarDataSource {
             "r": month.year.description,
             "j": self.cgiLanguageCode,
             "k": self.options?.calendar ?? "",
+            "o0": valueForOption("o0"),
+            "o1": valueForOption("o1"),
+            "o3": valueForOption("o3"),
         ]
 
         self.cgiClient(forceLocal: forceLocal).makeRequest(args) { data, error in
