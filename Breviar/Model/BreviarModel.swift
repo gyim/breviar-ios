@@ -25,8 +25,9 @@ func dateFrom(year: Int, month: Int, day: Int) -> Date {
     return calendar.date(from: comps)!
 }
 
-class BreviarModel : ObservableObject {
+class BreviarModel : NSObject, ObservableObject {
     private var dataSource: BreviarDataSource
+    private var liturgicalDataNeedsReload = false
     @Published var dataSourceOptions: DataSourceOptions?
     @Published var dataSourceOptionsNeeded: Bool
     @Published var dataSourceOptionsWizardStage: DataSourceWizardState = .chooseLanguage
@@ -62,6 +63,13 @@ class BreviarModel : ObservableObject {
         let dataSourceOptions = DataSourceOptions.savedOptions
         self.dataSourceOptions = dataSourceOptions
         self.dataSourceOptionsNeeded = dataSourceOptions == nil
+        
+        super.init()
+        
+        // Observe liturgical option changes in UserDefaults
+        ["o0", "o1", "o3"].forEach { key in
+            UserDefaults.standard.addObserver(self, forKeyPath: key, options: .new, context: nil)
+        }
     }
     
     func setDataSourceOptions(_ options: DataSourceOptions) {
@@ -84,6 +92,21 @@ class BreviarModel : ObservableObject {
         self.settingsEntries = .idle
         self.aboutPage = .idle
         _ = self.load()
+    }
+    
+    func reloadLiturgicalData() {
+        self.dayState = .idle
+        self.monthState = .idle
+        self.prayerText = .idle
+        self.ttsPrayerText = .idle
+        _ = self.load()
+    }
+    
+    func checkForLiturgicalDataReload() {
+        if liturgicalDataNeedsReload {
+            liturgicalDataNeedsReload = false
+            reloadLiturgicalData()
+        }
     }
     
     func load() -> BreviarModel {
@@ -356,6 +379,18 @@ class BreviarModel : ObservableObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 createNavigation()
             }
+        }
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if let keyPath = keyPath, ["o0", "o1", "o3"].contains(keyPath) {
+            liturgicalDataNeedsReload = true
+        }
+    }
+    
+    deinit {
+        ["o0", "o1", "o3"].forEach { key in
+            UserDefaults.standard.removeObserver(self, forKeyPath: key)
         }
     }
 }

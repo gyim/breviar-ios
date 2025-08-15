@@ -151,6 +151,9 @@ struct MainScreenContent: View {
             }
         }
         .id(model.day.id)
+        .onAppear {
+            model.checkForLiturgicalDataReload()
+        }
     }
 }
 
