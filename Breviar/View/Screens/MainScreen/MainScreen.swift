@@ -152,6 +152,7 @@ struct MainScreenContent: View {
         }
         .id(model.day.id)
         .onAppear {
+            // NOTE: due to a SwiftUI bug, this might be triggered even if we are on a different screen
             model.checkForLiturgicalDataReload()
         }
     }

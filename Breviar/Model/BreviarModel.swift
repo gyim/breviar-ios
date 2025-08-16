@@ -28,6 +28,7 @@ func dateFrom(year: Int, month: Int, day: Int) -> Date {
 class BreviarModel : NSObject, ObservableObject {
     private var dataSource: BreviarDataSource
     private var liturgicalDataNeedsReload = false
+    private var isUpdatingFromPrayerLink = false
     @Published var dataSourceOptions: DataSourceOptions?
     @Published var dataSourceOptionsNeeded: Bool
     @Published var dataSourceOptionsWizardStage: DataSourceWizardState = .chooseLanguage
@@ -274,6 +275,11 @@ class BreviarModel : NSObject, ObservableObject {
     }
     
     func handlePrayerLink(prayer: Prayer, url: URL) {
+        // Set flag to prevent KVO observers from triggering deferred reload
+        // while prayer link is handling its own immediate reload
+        isUpdatingFromPrayerLink = true
+        defer { isUpdatingFromPrayerLink = false }
+        
         let parsedLink = self.dataSource.parsePrayerLink(url: url)
         switch parsedLink {
         case .prayerTextLink(let opts):
@@ -384,7 +390,13 @@ class BreviarModel : NSObject, ObservableObject {
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if let keyPath = keyPath, ["o0", "o1", "o3"].contains(keyPath) {
-            liturgicalDataNeedsReload = true
+            print("observed settings change: \(keyPath)")
+            // Only set the deferred reload flag if we're not in a prayer link context.
+            // This prevents the MainScreen.onAppear handler to be triggered incorrectly,
+            // which would bring the user back to the main screen.
+            if !isUpdatingFromPrayerLink {
+                liturgicalDataNeedsReload = true
+            }
         }
     }
     
