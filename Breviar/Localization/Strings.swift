@@ -77,6 +77,11 @@ struct S {
     static let errParseError = LS(en: "Error parsing server response", sk: "Chyba pri analýze odpovede servera", cz: "Chyba při analýze odpovědi serveru", hu: "Hiba történt a szerver válaszának feldolgozása során", isl: "Villa við að greina svar þjóns")
     static let errEmptyResponse = LS(en: "Empty server response", sk: "Prázdna odpoveď servera", cz: "Prázdná odpověď serveru", hu: "Üres szerver válasz", isl: "Tómt svar frá þjóni")
     static let errInternalError = LS(en: "Internal error", sk: "Vnútorná chyba", cz: "Interní chyba", hu: "Belső hiba", isl: "Innri villa")
+    
+    // Migration banner
+    static let migrationTitle = LS(en: "Final Update", sk: "Posledná aktualizácia", cz: "Poslední aktualizace", hu: "Utolsó frissítés", isl: "Síðasta uppfærsla")
+    static let migrationMessage = LS(en: "This is the final update for this application. Please switch to the new, multi-language app.", sk: "Toto je posledná aktualizácia tejto aplikácie. Prosím, prejdite na novú, viacjazyčnú aplikáciu.", cz: "Toto je poslední aktualizace této aplikace. Prosím, přejděte na novou, vícejazyčnou aplikaci.", hu: "Ez az alkalmazás utolsó frissítése. Kérjük, váltson át az új, többnyelvű alkalmazásra.", isl: "Þetta er síðasta uppfærsla fyrir þetta forrit. Vinsamlegast skiptu yfir í nýja, fjöltyngda appið.")
+    static let migrationDownloadButton = LS(en: "Download New App", sk: "Stiahnuť novú aplikáciu", cz: "Stáhnout novou aplikaci", hu: "Új alkalmazás letöltése", isl: "Sækja nýja appið")
 }
 
 let LanguageNames: [Language: String] = [

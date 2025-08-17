@@ -44,6 +44,18 @@ struct DataSourceOptions {
     var calendar: String
     
     static var savedOptions: DataSourceOptions? {
+        // In single-language mode, always return fixed options
+        if AppConfig.SINGLE_LANGUAGE_MODE {
+            let dataSourceType = UserDefaults.standard.string(forKey: "ds")
+                .flatMap { DataSourceType(rawValue: $0) } ?? .networkOnWifi
+            return DataSourceOptions(
+                dataSourceType: dataSourceType,
+                language: AppConfig.FIXED_LANGUAGE,
+                uiLanguage: AppConfig.FIXED_UI_LANGUAGE,
+                calendar: AppConfig.FIXED_CALENDAR
+            )
+        }
+        
         let userDefaults = UserDefaults.standard
         
         if let languageS = userDefaults.string(forKey: "j"),
@@ -75,10 +87,15 @@ struct DataSourceOptions {
     func save() {
         let userDefaults = UserDefaults.standard
         
-        userDefaults.setValue(language.rawValue, forKey: "j")
-        userDefaults.setValue(calendar, forKey: "k")
-        userDefaults.setValue(dataSourceType.rawValue, forKey: "ds")
-        userDefaults.setValue(uiLanguage.rawValue, forKey: "ui_lang")
+        // In single-language mode, only save data source type
+        if AppConfig.SINGLE_LANGUAGE_MODE {
+            userDefaults.setValue(dataSourceType.rawValue, forKey: "ds")
+        } else {
+            userDefaults.setValue(language.rawValue, forKey: "j")
+            userDefaults.setValue(calendar, forKey: "k")
+            userDefaults.setValue(dataSourceType.rawValue, forKey: "ds")
+            userDefaults.setValue(uiLanguage.rawValue, forKey: "ui_lang")
+        }
     }
 }
 

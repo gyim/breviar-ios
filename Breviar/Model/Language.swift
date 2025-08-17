@@ -7,8 +7,8 @@
 
 import Foundation
 
-var currentLiturgicalLanguage = Language.hungarian
-var currentUILanguage = Language.hungarian
+var currentLiturgicalLanguage = AppConfig.SINGLE_LANGUAGE_MODE ? AppConfig.FIXED_LANGUAGE : Language.hungarian
+var currentUILanguage = AppConfig.SINGLE_LANGUAGE_MODE ? AppConfig.FIXED_UI_LANGUAGE : Language.hungarian
 
 // For backwards compatibility
 var currentLanguage: Language {

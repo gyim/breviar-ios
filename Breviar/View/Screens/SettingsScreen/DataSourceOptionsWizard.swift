@@ -14,7 +14,12 @@ struct DataSourceOptionsWizard: View {
         NavigationView {
             switch model.dataSourceOptionsWizardContext {
             case .initialSetup:
-                initialSetupView
+                // In single-language mode, don't show initial setup wizard
+                if AppConfig.SINGLE_LANGUAGE_MODE {
+                    EmptyView()
+                } else {
+                    initialSetupView
+                }
             case .settingsModification:
                 settingsModificationView
                     .toolbar {
@@ -44,7 +49,12 @@ struct DataSourceOptionsWizard: View {
     private var settingsModificationView: some View {
         switch model.dataSourceOptionsWizardStage {
         case .chooseLanguage:
-            LanguageChooserScreen(wizardContext: .settingsModification)
+            // In single-language mode, don't show language chooser
+            if AppConfig.SINGLE_LANGUAGE_MODE {
+                EmptyView()
+            } else {
+                LanguageChooserScreen(wizardContext: .settingsModification)
+            }
         case .chooseCalendar:
             CalendarChooserScreen(language: model.dataSourceOptions!.language.rawValue, uiLanguage: model.dataSourceOptions!.uiLanguage.rawValue, wizardContext: .settingsModification)
         case .chooseDataSourceType:

@@ -43,17 +43,19 @@ struct GeneralSettingsView : View {
     var body: some View {
         Section(header: Text(S.generalSettings.S)) {
             if let dataSourceOptions = model.dataSourceOptions {
-                // Language
-                SettingsStringLabel(name: S.language.S, value: languageDisplayValue(for: dataSourceOptions))
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        model.dataSourceOptionsWizardContext = .settingsModification
-                        model.dataSourceOptionsWizardStage = .chooseLanguage
-                        model.dataSourceOptionsNeeded = true
-                    }
+                // Language (only show in multi-language mode)
+                if !AppConfig.SINGLE_LANGUAGE_MODE {
+                    SettingsStringLabel(name: S.language.S, value: languageDisplayValue(for: dataSourceOptions))
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            model.dataSourceOptionsWizardContext = .settingsModification
+                            model.dataSourceOptionsWizardStage = .chooseLanguage
+                            model.dataSourceOptionsNeeded = true
+                        }
+                }
                 
                 // Liturgical calendar
-                // Only show calendar cell if current language has multiple calendars
+                // Show calendar cell if current language has multiple calendars
                 if dataSourceOptions.language.hasMultipleCalendars,
                    let calendarName = CalendarNames[dataSourceOptions.calendar] {
                     SettingsStringLabel(name: S.liturgicalCalendar.S, value: calendarName)

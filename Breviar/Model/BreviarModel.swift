@@ -63,7 +63,24 @@ class BreviarModel : NSObject, ObservableObject {
         
         let dataSourceOptions = DataSourceOptions.savedOptions
         self.dataSourceOptions = dataSourceOptions
-        self.dataSourceOptionsNeeded = dataSourceOptions == nil
+        
+        // In single-language mode, never show the wizard
+        if AppConfig.SINGLE_LANGUAGE_MODE {
+            self.dataSourceOptionsNeeded = false
+            // Ensure we have default options if none exist
+            if dataSourceOptions == nil {
+                let defaultOptions = DataSourceOptions(
+                    dataSourceType: .networkOnWifi,
+                    language: AppConfig.FIXED_LANGUAGE,
+                    uiLanguage: AppConfig.FIXED_UI_LANGUAGE,
+                    calendar: AppConfig.FIXED_CALENDAR
+                )
+                self.dataSourceOptions = defaultOptions
+                defaultOptions.save()
+            }
+        } else {
+            self.dataSourceOptionsNeeded = dataSourceOptions == nil
+        }
         
         super.init()
         

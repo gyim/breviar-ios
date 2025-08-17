@@ -27,6 +27,8 @@
 		7074060E261B7BBC00F71D59 /* NavigationBarToggler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7074060D261B7BBC00F71D59 /* NavigationBarToggler.swift */; };
 		7079D1BB25FAD1AB00EFF6B2 /* PrayerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7079D1BA25FAD1AB00EFF6B2 /* PrayerScreen.swift */; };
 		7079D1BE25FAD8DD00EFF6B2 /* CGIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7079D1BD25FAD8DD00EFF6B2 /* CGIClient.swift */; };
+		7089E2812E51529600EBA5FA /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7089E2802E51529600EBA5FA /* AppConfig.swift */; };
+		7089E2852E5152D600EBA5FA /* MigrationBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7089E2832E5152D600EBA5FA /* MigrationBanner.swift */; };
 		709A26AD25F8287A0040AE84 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A26AC25F8287A0040AE84 /* Constants.swift */; };
 		709A26B125F82C250040AE84 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A26B025F82C250040AE84 /* DatePicker.swift */; };
 		709A26B925F8DA8A0040AE84 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A26B825F8DA8A0040AE84 /* Calendar.swift */; };
@@ -91,6 +93,8 @@
 		7074060D261B7BBC00F71D59 /* NavigationBarToggler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarToggler.swift; sourceTree = "<group>"; };
 		7079D1BA25FAD1AB00EFF6B2 /* PrayerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerScreen.swift; sourceTree = "<group>"; };
 		7079D1BD25FAD8DD00EFF6B2 /* CGIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGIClient.swift; sourceTree = "<group>"; };
+		7089E2802E51529600EBA5FA /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		7089E2832E5152D600EBA5FA /* MigrationBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationBanner.swift; sourceTree = "<group>"; };
 		709A26AC25F8287A0040AE84 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		709A26B025F82C250040AE84 /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
 		709A26B825F8DA8A0040AE84 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
@@ -174,6 +178,14 @@
 			name = cgi;
 			sourceTree = "<group>";
 		};
+		7089E2842E5152D600EBA5FA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				7089E2832E5152D600EBA5FA /* MigrationBanner.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		70A99DAD25B3965200B558CE = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +209,7 @@
 				70B109A325F387EE0044F613 /* View */,
 				70EEB62B26A8D193007115BC /* Localization */,
 				70A99DB925B3965300B558CE /* BreviarApp.swift */,
+				7089E2802E51529600EBA5FA /* AppConfig.swift */,
 				70A99DBD25B3965500B558CE /* Assets.xcassets */,
 				70A99DC225B3965600B558CE /* Info.plist */,
 				70A99DBF25B3965600B558CE /* Preview Content */,
@@ -236,6 +249,7 @@
 			children = (
 				70BD424526106CE900BB386E /* Screens */,
 				70BD424626106CF200BB386E /* Util */,
+				7089E2842E5152D600EBA5FA /* Components */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -416,11 +430,13 @@
 				7013283C2683D76200A991FE /* liturgia.cpp in Sources */,
 				70BD424E26107E1800BB386E /* Playback.swift in Sources */,
 				709A26B925F8DA8A0040AE84 /* Calendar.swift in Sources */,
+				7089E2852E5152D600EBA5FA /* MigrationBanner.swift in Sources */,
 				70A39C7126488BA8008E0AE1 /* Strings.swift in Sources */,
 				70BD024F262A3900007FB5C0 /* Settings.swift in Sources */,
 				70BD0254262CDC48007FB5C0 /* SettingsScreen.swift in Sources */,
 				70B109A125F3853B0044F613 /* BreviarDataSource.swift in Sources */,
 				701328392683D76200A991FE /* myexpt.cpp in Sources */,
+				7089E2812E51529600EBA5FA /* AppConfig.swift in Sources */,
 				701328492683D89D00A991FE /* BRCGIQuery.mm in Sources */,
 				7013283E2683D76200A991FE /* mystring.cpp in Sources */,
 				7013283A2683D76200A991FE /* mydefs.cpp in Sources */,

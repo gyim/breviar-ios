@@ -118,18 +118,22 @@ struct MainScreenContent: View {
     @Binding var activePrayerType: PrayerType?
     
     var body: some View {
-        LoadingView(value: model.dayState) { day in
-            List{
-                Section() {
-                    ForEach(day.celebrations) { celebration in
-                        CelebrationRow(celebration: celebration, checked: (model.selectedCelebration == celebration.id))
-                            .onTapGesture {
-                                withAnimation {
-                                    model.selectedCelebration = celebration.id
+        VStack(spacing: 0) {
+            // Migration banner at the top
+            MigrationBanner()
+            
+            LoadingView(value: model.dayState) { day in
+                List{
+                    Section() {
+                        ForEach(day.celebrations) { celebration in
+                            CelebrationRow(celebration: celebration, checked: (model.selectedCelebration == celebration.id))
+                                .onTapGesture {
+                                    withAnimation {
+                                        model.selectedCelebration = celebration.id
+                                    }
                                 }
-                            }
+                        }
                     }
-                }
 
                 Section(header: Text(S.prayers.S)) {
                     ForEach(model.getPrayersForSelectedCelebration()) { prayer in
@@ -148,6 +152,7 @@ struct MainScreenContent: View {
                 ) {
                     NavigationLink(destination: SettingsScreen(), label: { Label(S.settings.S, systemImage: "gearshape.fill") })
                 }
+            }
             }
         }
         .id(model.day.id)
