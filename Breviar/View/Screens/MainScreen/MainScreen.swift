@@ -120,7 +120,7 @@ struct MainScreenContent: View {
     var body: some View {
         VStack(spacing: 0) {
             // Migration banner at the top
-            MigrationBanner()
+            MigrationBanner(isDismissed: $model.migrationBannerDismissed)
             
             LoadingView(value: model.dayState) { day in
                 List{

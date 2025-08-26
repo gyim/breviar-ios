@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct MigrationBanner: View {
-    @State private var isVisible = true
+    @Binding var isDismissed: Bool
     
     var body: some View {
-        if AppConfig.SHOW_MIGRATION_NOTICE && isVisible {
+        if AppConfig.SHOW_MIGRATION_NOTICE && !isDismissed {
             VStack(spacing: 0) {
                 HStack(spacing: 12) {
                     // Warning icon
@@ -35,7 +35,7 @@ struct MigrationBanner: View {
                     // Dismiss button
                     Button(action: {
                         withAnimation(.easeInOut(duration: 0.3)) {
-                            isVisible = false
+                            isDismissed = true
                         }
                     }) {
                         Image(systemName: "xmark")
@@ -82,7 +82,7 @@ struct MigrationBanner: View {
 struct MigrationBanner_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            MigrationBanner()
+            MigrationBanner(isDismissed: .constant(false))
             Spacer()
         }
     }

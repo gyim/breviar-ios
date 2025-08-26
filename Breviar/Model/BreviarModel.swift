@@ -53,6 +53,8 @@ class BreviarModel : NSObject, ObservableObject {
     @Published var navigationTrigger: NavigationTarget? = nil
     @Published var pendingNavigation: NavigationTarget? = nil
     
+    @Published var migrationBannerDismissed: Bool = false
+    
     init(dataSource: BreviarDataSource) {
         let now = Date()
         self.dataSource = dataSource
