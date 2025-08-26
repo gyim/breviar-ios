@@ -34,8 +34,15 @@ class CGIClient {
     
     func getRequestString(_ request: [String: String]) -> String {
         var req = ""
+        var allParameters = request
         
-        for item in request {
+        allParameters["platform"] = "ios"
+        
+        if let bundleVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String {
+            allParameters["appVersion"] = bundleVersion
+        }
+        
+        for item in allParameters {
             if req == "" {
                 req += "\(item.key)=\(item.value)"
             } else {
