@@ -74,43 +74,104 @@ struct DatePickerContent: View {
     }
 }
 
+enum DatePickerCellType: Identifiable {
+    case weekSeparator(id: String)
+    case dateHeader(day: LiturgicalDay, isToday: Bool)
+    case celebration(day: LiturgicalDay, celebration: Celebration)
+    
+    var id: String {
+        switch self {
+        case .weekSeparator(let id):
+            return "separator_\(id)"
+        case .dateHeader(let day, _):
+            return "header_\(day.id)"
+        case .celebration(let day, let celebration):
+            return "celebration_\(day.id)_\(celebration.id)"
+        }
+    }
+}
+
 struct DatePickerList: View {
     @EnvironmentObject var model: BreviarModel
     var days: [LiturgicalDay]
     var onDaySelected: () -> Void
     
     var body: some View {
-        let fmt = currentLiturgicalLanguage.dateFormatter(format: "MMMM dd (EE)")
         let today = Day.init(fromDate: Date())
+        let cells = buildCells(days: days, today: today)
         
         List {
-            ForEach(days) { day in
-                if day.day.weekday == .sunday && day != days[0] {
-                    Divider()
-                }
-                Section(
-                    header: HStack {
-                        Text(fmt.string(from: day.day.date))
-                            .font(.caption)
-                            .fontWeight(.light)
-                        if day.day == today {
-                            Spacer()
-                            Text(S.today.S)
-                                .font(.caption)
-                                .fontWeight(.bold)
+            ForEach(cells) { cell in
+                switch cell {
+                case .weekSeparator:
+                    WeekSeparatorCell()
+                case .dateHeader(let day, let isToday):
+                    DateHeaderCell(day: day, isToday: isToday)
+                case .celebration(let day, let celebration):
+                    CelebrationRow(celebration: celebration, checked: false)
+                        .onTapGesture {
+                            model.jumpTo(day: day, celebration: celebration)
+                            onDaySelected()
                         }
-                    }
-                ) {
-                    ForEach(day.celebrations) { celebration in
-                        CelebrationRow(celebration: celebration, checked: false)
-                            .onTapGesture {
-                                model.jumpTo(day: day, celebration: celebration)
-                                onDaySelected()
-                            }
-                    }
                 }
             }
         }
+    }
+    
+    private func buildCells(days: [LiturgicalDay], today: Day) -> [DatePickerCellType] {
+        var cells: [DatePickerCellType] = []
+        
+        for (index, day) in days.enumerated() {
+            // Add week separator before Sunday (except for first day)
+            if day.day.weekday == .sunday && index > 0 {
+                cells.append(.weekSeparator(id: day.id))
+            }
+            
+            // Add date header
+            let isToday = day.day == today
+            cells.append(.dateHeader(day: day, isToday: isToday))
+            
+            // Add celebrations
+            for celebration in day.celebrations {
+                cells.append(.celebration(day: day, celebration: celebration))
+            }
+        }
+        
+        return cells
+    }
+}
+
+struct DateHeaderCell: View {
+    var day: LiturgicalDay
+    var isToday: Bool
+    
+    var body: some View {
+        let fmt = currentLiturgicalLanguage.dateFormatter(format: "MMMM dd (EE)")
+        
+        HStack {
+            Text(fmt.string(from: day.day.date).capitalized)
+                .font(.subheadline)
+                .fontWeight(.medium)
+                .foregroundColor(.primary)
+            if isToday {
+                Spacer()
+                Text(S.today.S)
+                    .font(.subheadline)
+                    .fontWeight(.bold)
+                    .foregroundColor(.accentColor)
+            }
+        }
+        .padding(.top, 16)
+        .padding(.bottom, 2)
+        .listRowBackground(Color.clear)
+    }
+}
+
+struct WeekSeparatorCell: View {
+    var body: some View {
+        Color.clear
+            .frame(height: 8)
+            .listRowBackground(Color.clear)
     }
 }
 
