@@ -36,7 +36,7 @@ class CGIClient {
         var req = ""
         var allParameters = request
         
-        allParameters["platform"] = "ios"
+        allParameters["appPlatform"] = "ios"
         
         if let bundleVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String {
             allParameters["appVersion"] = bundleVersion
