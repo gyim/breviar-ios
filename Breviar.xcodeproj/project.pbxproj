@@ -22,6 +22,7 @@
 		701328422683D76200A991FE /* mygetopt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 701328322683D76200A991FE /* mygetopt.cpp */; };
 		701328432683D76200A991FE /* dbzaltar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 701328342683D76200A991FE /* dbzaltar.cpp */; };
 		701328492683D89D00A991FE /* BRCGIQuery.mm in Sources */ = {isa = PBXBuildFile; fileRef = 701328482683D89D00A991FE /* BRCGIQuery.mm */; };
+		7027A8AB2E7D3C9D00226448 /* AutoLockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027A8AA2E7D3C9D00226448 /* AutoLockManager.swift */; };
 		702E14F5260B239000E9D3AC /* TestDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702E14F4260B239000E9D3AC /* TestDataSource.swift */; };
 		70651592260FA36D0030DC73 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70651591260FA36C0030DC73 /* LoadingView.swift */; };
 		7074060E261B7BBC00F71D59 /* NavigationBarToggler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7074060D261B7BBC00F71D59 /* NavigationBarToggler.swift */; };
@@ -86,6 +87,7 @@
 		701328352683D76200A991FE /* hodin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hodin.h; path = "breviar-cgi/source/hodin.h"; sourceTree = SOURCE_ROOT; };
 		701328472683D89D00A991FE /* BRCGIQuery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BRCGIQuery.h; sourceTree = "<group>"; };
 		701328482683D89D00A991FE /* BRCGIQuery.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BRCGIQuery.mm; sourceTree = "<group>"; };
+		7027A8AA2E7D3C9D00226448 /* AutoLockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLockManager.swift; sourceTree = "<group>"; };
 		702E14F4260B239000E9D3AC /* TestDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataSource.swift; sourceTree = "<group>"; };
 		70651591260FA36C0030DC73 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7074060D261B7BBC00F71D59 /* NavigationBarToggler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarToggler.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 		70BD424626106CF200BB386E /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				7027A8AA2E7D3C9D00226448 /* AutoLockManager.swift */,
 				709A26AC25F8287A0040AE84 /* Constants.swift */,
 				70651591260FA36C0030DC73 /* LoadingView.swift */,
 				70BD424126106A8A00BB386E /* InlinePopoverPresenter.swift */,
@@ -423,6 +426,7 @@
 				701328392683D76200A991FE /* myexpt.cpp in Sources */,
 				701328492683D89D00A991FE /* BRCGIQuery.mm in Sources */,
 				7013283E2683D76200A991FE /* mystring.cpp in Sources */,
+				7027A8AB2E7D3C9D00226448 /* AutoLockManager.swift in Sources */,
 				7013283A2683D76200A991FE /* mydefs.cpp in Sources */,
 				7013283D2683D76200A991FE /* mylog.cpp in Sources */,
 				702E14F5260B239000E9D3AC /* TestDataSource.swift in Sources */,

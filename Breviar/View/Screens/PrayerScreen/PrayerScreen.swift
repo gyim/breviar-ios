@@ -18,6 +18,7 @@ struct PrayerScreen: View {
     @Binding var textOptions: TextOptions
     @State var navbarHidden = false
     @State private var needsReload = false
+    @StateObject private var autoLockManager = AutoLockManager()
     
     var body: some View {
         InlinePopoverPresenter( popover: { TextOptionsView(textOptions: textOptions, prayer: prayer).environmentObject(model) }, isPresented: $textOptionsShown) {
@@ -67,9 +68,11 @@ struct PrayerScreen: View {
         })
         .onAppear() {
             model.loadPrayer(prayer)
+            autoLockManager.disableAutoLock()
         }
         .onDisappear() {
             model.unloadPrayer()
+            autoLockManager.enableAutoLock()
         }
         .onChange(of: needsReload) { needsReload in
             if needsReload {
