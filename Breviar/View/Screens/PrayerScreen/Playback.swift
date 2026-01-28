@@ -45,6 +45,9 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
     var togglePlayPauseCommandHandler: Any?
     var previousTrackCommandHandler: Any?
     var nextTrackCommandHandler: Any?
+
+    var interruptionObserver: NSObjectProtocol?
+    var routeChangeObserver: NSObjectProtocol?
     
     @Published var language: String = "en-US"
     @Published var title: String = ""
@@ -179,6 +182,23 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
             }
             return .success
         }
+
+        interruptionObserver = NotificationCenter.default.addObserver(
+            forName: AVAudioSession.interruptionNotification,
+            object: AVAudioSession.sharedInstance(),
+            queue: .main
+        ) { [weak self] notification in
+            self?.handleInterruption(notification)
+        }
+
+        routeChangeObserver = NotificationCenter.default.addObserver(
+            forName: AVAudioSession.routeChangeNotification,
+            object: AVAudioSession.sharedInstance(),
+            queue: .main
+        ) { [weak self] notification in
+            self?.handleRouteChange(notification)
+        }
+
         progressForUtterance = [:]
     }
     
@@ -228,7 +248,17 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
         togglePlayPauseCommandHandler = nil
         previousTrackCommandHandler = nil
         nextTrackCommandHandler = nil
-        
+
+        // Remove notification observers
+        if let observer = interruptionObserver {
+            NotificationCenter.default.removeObserver(observer)
+            interruptionObserver = nil
+        }
+        if let observer = routeChangeObserver {
+            NotificationCenter.default.removeObserver(observer)
+            routeChangeObserver = nil
+        }
+
         // Stop receiving remote control events
         UIApplication.shared.endReceivingRemoteControlEvents()
         
@@ -267,6 +297,7 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
     
     private func startSpeech() {
         self.speechSynthesizer = AVSpeechSynthesizer()
+        self.speechSynthesizer?.usesApplicationAudioSession = true
         self.speechSynthesizer?.delegate = self
         
         // Set up now playing info with more details for CarPlay/AirPlay
@@ -382,7 +413,49 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
             }
         }
     }
-    
+
+    private func handleInterruption(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+              let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
+            return
+        }
+
+        switch type {
+        case .began:
+            if playbackState == .playing {
+                playbackState = .paused
+            }
+        case .ended:
+            guard let optionsValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else {
+                return
+            }
+            let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
+            if options.contains(.shouldResume) && playbackState == .paused {
+                playbackState = .playing
+            }
+        @unknown default:
+            break
+        }
+    }
+
+    private func handleRouteChange(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
+              let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue) else {
+            return
+        }
+
+        switch reason {
+        case .oldDeviceUnavailable:
+            if playbackState == .playing {
+                playbackState = .paused
+            }
+        default:
+            break
+        }
+    }
+
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
         if let playbackProgress = self.playbackProgress, let newProgress = self.progressForUtterance[utterance] {
             self.playbackProgress = PlaybackProgress(
