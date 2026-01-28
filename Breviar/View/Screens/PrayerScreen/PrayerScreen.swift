@@ -109,7 +109,7 @@ struct PrayerView : UIViewRepresentable {
     
     class PrayerWebView : WKWebView {
         override var safeAreaInsets: UIEdgeInsets {
-            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            return UIEdgeInsets(top: 0, left: super.safeAreaInsets.left, bottom: 0, right: super.safeAreaInsets.right)
         }
     }
     
