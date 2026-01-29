@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 func getMonthForDay(_ day: Date) -> Date {
     let calendar = Calendar.current
@@ -115,17 +116,18 @@ class BreviarModel : NSObject, ObservableObject {
         case .idle:
             self.loadDay(self.day)
             self.loadMonth(self.month)
+            self.loadNextMonthForWidgetCache()
         default:
             break
         }
-        
+
         switch self.settingsEntries {
         case .idle:
             self.loadSettingsEntries()
         default:
             break
         }
-        
+
         return self
     }
     
@@ -179,6 +181,8 @@ class BreviarModel : NSObject, ObservableObject {
             if error == nil {
                 if let liturgicalMonth = liturgicalMonth {
                     self.monthState = .loaded(liturgicalMonth)
+                    WidgetDataWriter.shared.writeLiturgicalMonth(liturgicalMonth)
+                    WidgetDataWriter.shared.reloadWidgets()
                 }
             } else {
                 self.monthState = .failed(error!, retry)
@@ -186,6 +190,15 @@ class BreviarModel : NSObject, ObservableObject {
         }
     }
     
+    private func loadNextMonthForWidgetCache() {
+        let nextMonth = self.month.monthByAdding(months: 1)
+        self.dataSource.getLiturgicalMonth(month: nextMonth, forceLocal: true) { (liturgicalMonth, _) in
+            if let liturgicalMonth = liturgicalMonth {
+                WidgetDataWriter.shared.writeLiturgicalMonth(liturgicalMonth)
+            }
+        }
+    }
+
     func jumpTo(day: LiturgicalDay, celebration: Celebration) {
         self.day = day.day
         self.dayState = .loaded(day)

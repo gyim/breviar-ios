@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,6 +28,18 @@
 		7074060E261B7BBC00F71D59 /* NavigationBarToggler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7074060D261B7BBC00F71D59 /* NavigationBarToggler.swift */; };
 		7079D1BB25FAD1AB00EFF6B2 /* PrayerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7079D1BA25FAD1AB00EFF6B2 /* PrayerScreen.swift */; };
 		7079D1BE25FAD8DD00EFF6B2 /* CGIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7079D1BD25FAD8DD00EFF6B2 /* CGIClient.swift */; };
+		70927DB12F2B556300FA9E8C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70927DB02F2B556300FA9E8C /* WidgetKit.framework */; };
+		70927DB32F2B556300FA9E8C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70927DB22F2B556300FA9E8C /* SwiftUI.framework */; };
+		70927DC22F2B556500FA9E8C /* BreviarWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 70927DAE2F2B556300FA9E8C /* BreviarWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		70927DD02F2B563700FA9E8C /* WidgetDataWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70927DCF2F2B563700FA9E8C /* WidgetDataWriter.swift */; };
+		70927DD32F2B570200FA9E8C /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70927DD12F2B570000FA9E8C /* SharedConstants.swift */; };
+		70927DD42F2B570300FA9E8C /* WidgetDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70927DD22F2B570100FA9E8C /* WidgetDataModels.swift */; };
+		70927DD52F2B570400FA9E8C /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A26B825F8DA8A0040AE84 /* Calendar.swift */; };
+		70927DD62F2B570500FA9E8C /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A39C7226489344008E0AE1 /* Language.swift */; };
+		70927DD72F2B570600FA9E8C /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A39C7026488BA8008E0AE1 /* Strings.swift */; };
+		70927DD82F2B570700FA9E8C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A26AC25F8287A0040AE84 /* Constants.swift */; };
+		70927DD92F2B570800FA9E8C /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70927DD12F2B570000FA9E8C /* SharedConstants.swift */; };
+		70927DDA2F2B570900FA9E8C /* WidgetDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70927DD22F2B570100FA9E8C /* WidgetDataModels.swift */; };
 		709A26AD25F8287A0040AE84 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A26AC25F8287A0040AE84 /* Constants.swift */; };
 		709A26B125F82C250040AE84 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A26B025F82C250040AE84 /* DatePicker.swift */; };
 		709A26B925F8DA8A0040AE84 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A26B825F8DA8A0040AE84 /* Calendar.swift */; };
@@ -49,6 +61,30 @@
 		70EEB62E26A8D1DF007115BC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70EEB63026A8D1DF007115BC /* Localizable.strings */; };
 		70EEB63626A8D386007115BC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70EEB63826A8D386007115BC /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		70927DC02F2B556500FA9E8C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 70A99DAE25B3965200B558CE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 70927DAD2F2B556300FA9E8C;
+			remoteInfo = BreviarWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		70927DC72F2B556500FA9E8C /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				70927DC22F2B556500FA9E8C /* BreviarWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		701328142683D76100A991FE /* Breviar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Breviar-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -93,6 +129,13 @@
 		7074060D261B7BBC00F71D59 /* NavigationBarToggler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarToggler.swift; sourceTree = "<group>"; };
 		7079D1BA25FAD1AB00EFF6B2 /* PrayerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerScreen.swift; sourceTree = "<group>"; };
 		7079D1BD25FAD8DD00EFF6B2 /* CGIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGIClient.swift; sourceTree = "<group>"; };
+		70927DA92F2B550900FA9E8C /* Breviar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Breviar.entitlements; sourceTree = "<group>"; };
+		70927DAE2F2B556300FA9E8C /* BreviarWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BreviarWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		70927DB02F2B556300FA9E8C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		70927DB22F2B556300FA9E8C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		70927DCF2F2B563700FA9E8C /* WidgetDataWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataWriter.swift; sourceTree = "<group>"; };
+		70927DD12F2B570000FA9E8C /* SharedConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedConstants.swift; sourceTree = "<group>"; };
+		70927DD22F2B570100FA9E8C /* WidgetDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataModels.swift; sourceTree = "<group>"; };
 		709A26AC25F8287A0040AE84 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		709A26B025F82C250040AE84 /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
 		709A26B825F8DA8A0040AE84 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
@@ -125,7 +168,31 @@
 		70EEB63C26A8D38B007115BC /* is */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = is; path = is.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		70927DC32F2B556500FA9E8C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				BreviarWidgetExtension.entitlements,
+				Info.plist,
+			);
+			target = 70927DAD2F2B556300FA9E8C /* BreviarWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		70927DB42F2B556300FA9E8C /* BreviarWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (70927DC32F2B556500FA9E8C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BreviarWidget; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		70927DAB2F2B556300FA9E8C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70927DB32F2B556300FA9E8C /* SwiftUI.framework in Frameworks */,
+				70927DB12F2B556300FA9E8C /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		70A99DB325B3965200B558CE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -176,10 +243,21 @@
 			name = cgi;
 			sourceTree = "<group>";
 		};
+		70927DAF2F2B556300FA9E8C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				70927DB02F2B556300FA9E8C /* WidgetKit.framework */,
+				70927DB22F2B556300FA9E8C /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		70A99DAD25B3965200B558CE = {
 			isa = PBXGroup;
 			children = (
 				70A99DB825B3965300B558CE /* Breviar */,
+				70927DB42F2B556300FA9E8C /* BreviarWidget */,
+				70927DAF2F2B556300FA9E8C /* Frameworks */,
 				70A99DB725B3965300B558CE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -188,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				70A99DB625B3965300B558CE /* Breviar.app */,
+				70927DAE2F2B556300FA9E8C /* BreviarWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -195,6 +274,7 @@
 		70A99DB825B3965300B558CE /* Breviar */ = {
 			isa = PBXGroup;
 			children = (
+				70927DA92F2B550900FA9E8C /* Breviar.entitlements */,
 				70B1099F25F385180044F613 /* Model */,
 				70B109A325F387EE0044F613 /* View */,
 				70EEB62B26A8D193007115BC /* Localization */,
@@ -226,9 +306,12 @@
 				709A26B825F8DA8A0040AE84 /* Calendar.swift */,
 				7079D1BD25FAD8DD00EFF6B2 /* CGIClient.swift */,
 				70A39C7226489344008E0AE1 /* Language.swift */,
-				70BD024E262A3900007FB5C0 /* Settings.swift */,
 				701328142683D76100A991FE /* Breviar-Bridging-Header.h */,
+				70927DD12F2B570000FA9E8C /* SharedConstants.swift */,
+				70BD024E262A3900007FB5C0 /* Settings.swift */,
 				709E3FAD28398BB800296AE0 /* TTSParser.swift */,
+				70927DD22F2B570100FA9E8C /* WidgetDataModels.swift */,
+				70927DCF2F2B563700FA9E8C /* WidgetDataWriter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -305,6 +388,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		70927DAD2F2B556300FA9E8C /* BreviarWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 70927DC42F2B556500FA9E8C /* Build configuration list for PBXNativeTarget "BreviarWidgetExtension" */;
+			buildPhases = (
+				70927DAA2F2B556300FA9E8C /* Sources */,
+				70927DAB2F2B556300FA9E8C /* Frameworks */,
+				70927DAC2F2B556300FA9E8C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				70927DB42F2B556300FA9E8C /* BreviarWidget */,
+			);
+			name = BreviarWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = BreviarWidgetExtension;
+			productReference = 70927DAE2F2B556300FA9E8C /* BreviarWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		70A99DB525B3965200B558CE /* Breviar */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 70A99DC525B3965600B558CE /* Build configuration list for PBXNativeTarget "Breviar" */;
@@ -313,10 +418,12 @@
 				70A99DB325B3965200B558CE /* Frameworks */,
 				70A99DB425B3965200B558CE /* Resources */,
 				7013284B2683DBB900A991FE /* ShellScript */,
+				70927DC72F2B556500FA9E8C /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				70927DC12F2B556500FA9E8C /* PBXTargetDependency */,
 			);
 			name = Breviar;
 			productName = Breviar;
@@ -329,9 +436,12 @@
 		70A99DAE25B3965200B558CE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1230;
+				LastSwiftUpdateCheck = 2620;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
+					70927DAD2F2B556300FA9E8C = {
+						CreatedOnToolsVersion = 26.2;
+					};
 					70A99DB525B3965200B558CE = {
 						CreatedOnToolsVersion = 12.3;
 						LastSwiftMigration = 1250;
@@ -356,11 +466,19 @@
 			projectRoot = "";
 			targets = (
 				70A99DB525B3965200B558CE /* Breviar */,
+				70927DAD2F2B556300FA9E8C /* BreviarWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		70927DAC2F2B556300FA9E8C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		70A99DB425B3965200B558CE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -395,6 +513,19 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		70927DAA2F2B556300FA9E8C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70927DD52F2B570400FA9E8C /* Calendar.swift in Sources */,
+				70927DD62F2B570500FA9E8C /* Language.swift in Sources */,
+				70927DD72F2B570600FA9E8C /* Strings.swift in Sources */,
+				70927DD82F2B570700FA9E8C /* Constants.swift in Sources */,
+				70927DD92F2B570800FA9E8C /* SharedConstants.swift in Sources */,
+				70927DDA2F2B570900FA9E8C /* WidgetDataModels.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		70A99DB225B3965200B558CE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -427,6 +558,9 @@
 				701328492683D89D00A991FE /* BRCGIQuery.mm in Sources */,
 				7013283E2683D76200A991FE /* mystring.cpp in Sources */,
 				7027A8AB2E7D3C9D00226448 /* AutoLockManager.swift in Sources */,
+				70927DD02F2B563700FA9E8C /* WidgetDataWriter.swift in Sources */,
+				70927DD32F2B570200FA9E8C /* SharedConstants.swift in Sources */,
+				70927DD42F2B570300FA9E8C /* WidgetDataModels.swift in Sources */,
 				7013283A2683D76200A991FE /* mydefs.cpp in Sources */,
 				7013283D2683D76200A991FE /* mylog.cpp in Sources */,
 				702E14F5260B239000E9D3AC /* TestDataSource.swift in Sources */,
@@ -440,6 +574,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		70927DC12F2B556500FA9E8C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 70927DAD2F2B556300FA9E8C /* BreviarWidgetExtension */;
+			targetProxy = 70927DC02F2B556500FA9E8C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		70EEB63026A8D1DF007115BC /* Localizable.strings */ = {
@@ -469,6 +611,85 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		70927DC52F2B556500FA9E8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = BreviarWidget/BreviarWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3K775ZSA59;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BreviarWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BreviarWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "sk.breviar.breviar-sk.BreviarWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		70927DC62F2B556500FA9E8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = BreviarWidget/BreviarWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3K775ZSA59;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BreviarWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BreviarWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "sk.breviar.breviar-sk.BreviarWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		70A99DC325B3965600B558CE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -603,6 +824,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Breviar/Breviar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Breviar/Preview Content\"";
 				DEVELOPMENT_TEAM = 3K775ZSA59;
@@ -628,6 +850,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Breviar/Breviar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Breviar/Preview Content\"";
 				DEVELOPMENT_TEAM = 3K775ZSA59;
@@ -649,6 +872,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		70927DC42F2B556500FA9E8C /* Build configuration list for PBXNativeTarget "BreviarWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70927DC52F2B556500FA9E8C /* Debug */,
+				70927DC62F2B556500FA9E8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		70A99DB125B3965200B558CE /* Build configuration list for PBXProject "Breviar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

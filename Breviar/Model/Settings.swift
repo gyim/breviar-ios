@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 // MARK: - Data source options
 
@@ -74,11 +75,18 @@ struct DataSourceOptions {
     
     func save() {
         let userDefaults = UserDefaults.standard
-        
+
         userDefaults.setValue(language.rawValue, forKey: "j")
         userDefaults.setValue(calendar, forKey: "k")
         userDefaults.setValue(dataSourceType.rawValue, forKey: "ds")
         userDefaults.setValue(uiLanguage.rawValue, forKey: "ui_lang")
+
+        WidgetDataWriter.shared.writeLanguageSettings(
+            language: language,
+            uiLanguage: uiLanguage,
+            calendar: calendar
+        )
+        WidgetCenter.shared.reloadAllTimelines()
     }
 }
 
