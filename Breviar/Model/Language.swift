@@ -63,6 +63,20 @@ enum Language : String {
         fmt.locale = self.locale
         return fmt
     }
+
+    func narrowWeekdayName(for date: Date) -> String {
+        let weekday = Calendar(identifier: .gregorian).component(.weekday, from: date)
+        return Self.narrowWeekdayNames[self]![weekday - 1]
+    }
+
+    private static let narrowWeekdayNames: [Language: [String]] = [
+        .hungarian:  ["V",  "H",  "K",   "Sze", "Cs",  "P",   "Szo"],
+        .czech:      ["Ne", "Po", "Út",  "St",  "Čt",  "Pá",  "So"],
+        .slovak:     ["Ne", "Po", "Ut",  "St",  "Št",  "Pi",  "So"],
+        .icelandic:  ["Su", "Má", "Þr",  "Mi",  "Fi",  "Fö",  "La"],
+        .latin:      ["D",  "II", "III", "IV",  "V",   "VI",  "S"],
+        .english:    ["Su", "M",  "Tu",  "W",   "Th",  "F",   "Sa"],
+    ]
     
     var availableCalendars: [String] {
         switch self {

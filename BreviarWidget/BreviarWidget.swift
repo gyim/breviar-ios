@@ -5,28 +5,33 @@
 
 import WidgetKit
 import SwiftUI
+import UIKit
 
 // MARK: - Timeline Entry
 
 struct BreviarWidgetEntry: TimelineEntry {
     let date: Date
-    let liturgicalDay: LiturgicalDay?
+    let upcomingDays: [LiturgicalDay]
+
+    var liturgicalDay: LiturgicalDay? { upcomingDays.first }
 }
 
 // MARK: - Timeline Provider
 
+private let maxUpcomingDaysPerEntry = 14
+
 struct BreviarWidgetProvider: TimelineProvider {
     func placeholder(in context: Context) -> BreviarWidgetEntry {
-        BreviarWidgetEntry(date: Date(), liturgicalDay: nil)
+        BreviarWidgetEntry(date: Date(), upcomingDays: [])
     }
 
     func getSnapshot(in context: Context, completion: @escaping (BreviarWidgetEntry) -> Void) {
         configureLanguage()
-        let entry = BreviarWidgetEntry(
-            date: Date(),
-            liturgicalDay: WidgetDataReader.liturgicalDay(for: Date())
-        )
-        completion(entry)
+        let today = Day(fromDate: Date())
+        let upcoming = WidgetDataReader.readCalendarData()
+            .drop(while: { $0.day.daysSinceEpoch < today.daysSinceEpoch })
+            .prefix(maxUpcomingDaysPerEntry)
+        completion(BreviarWidgetEntry(date: Date(), upcomingDays: Array(upcoming)))
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<BreviarWidgetEntry>) -> Void) {
@@ -36,8 +41,8 @@ struct BreviarWidgetProvider: TimelineProvider {
         var entries: [BreviarWidgetEntry] = []
         let cal = Calendar.current
 
-        for liturgicalDay in allDays {
-            let day = liturgicalDay.day
+        for i in allDays.indices {
+            let day = allDays[i].day
             var comps = DateComponents()
             comps.year = day.year
             comps.month = day.month
@@ -46,12 +51,13 @@ struct BreviarWidgetProvider: TimelineProvider {
             comps.minute = 0
             comps.second = 0
             if let entryDate = cal.date(from: comps) {
-                entries.append(BreviarWidgetEntry(date: entryDate, liturgicalDay: liturgicalDay))
+                let slice = Array(allDays[i...].prefix(maxUpcomingDaysPerEntry))
+                entries.append(BreviarWidgetEntry(date: entryDate, upcomingDays: slice))
             }
         }
 
         if entries.isEmpty {
-            entries.append(BreviarWidgetEntry(date: Date(), liturgicalDay: nil))
+            entries.append(BreviarWidgetEntry(date: Date(), upcomingDays: []))
         }
 
         let timeline = Timeline(entries: entries, policy: .atEnd)
@@ -84,115 +90,134 @@ struct WidgetCelebrationColorBar: View {
     }
 }
 
-// MARK: - System Small Widget View
+// MARK: - Multi-Day System Widget View
 
-struct BreviarWidgetSmallView: View {
-    let entry: BreviarWidgetEntry
+struct BreviarWidgetMultiDayView: View {
+    @Environment(\.widgetFamily) var family
+    let days: [LiturgicalDay]
+
+    private static let maxDaysToConsider = 8
+    private let weekdayColumnWidth: CGFloat = 30
+
+    private var isSmall: Bool { family == .systemSmall }
 
     var body: some View {
-        if let day = entry.liturgicalDay, let celebration = day.celebrations.first {
-            HStack(spacing: 6) {
-                WidgetCelebrationColorBar(color: celebration.liturgicalColor, width: 5)
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(celebration.title)
-                        .font(.footnote)
-                        .fontWeight(.bold)
-                        .lineLimit(3)
-                    if !celebration.subtitle.isEmpty {
-                        Text(celebration.subtitle)
-                            .font(.caption2)
-                            .foregroundColor(.secondary)
-                            .lineLimit(2)
-                    }
-                }
-                Spacer(minLength: 0)
-            }
-            .padding(4)
-        } else {
+        if days.isEmpty {
             Text(S.appName.S)
                 .font(.headline)
+        } else {
+            ViewThatFits(in: .vertical) {
+                ForEach(
+                    Array(stride(from: min(days.count, Self.maxDaysToConsider), through: 1, by: -1)),
+                    id: \.self
+                ) { n in
+                    listView(Array(days.prefix(n)), truncateFirst: false)
+                }
+                listView(Array(days.prefix(1)), truncateFirst: true)
+            }
+            .padding(.vertical, 4)
+            .padding(.leading, -16)
+        }
+    }
+
+    @ViewBuilder
+    private func listView(_ slice: [LiturgicalDay], truncateFirst: Bool) -> some View {
+        VStack(spacing: 0) {
+            ForEach(Array(slice.enumerated()), id: \.offset) { dIdx, lDay in
+                ForEach(Array(lDay.celebrations.enumerated()), id: \.offset) { cIdx, cel in
+                    let isCurrentDay = dIdx == 0
+                    let isFirstOfDay = cIdx == 0
+                    let titleLines: Int? = {
+                        if truncateFirst { return nil }
+                        if isSmall && isCurrentDay && isFirstOfDay { return 3 }
+                        return 1
+                    }()
+                    let subtitleLines: Int? = truncateFirst ? nil : 1
+                    WidgetDayRow(
+                        weekday: isFirstOfDay && !isCurrentDay
+                            ? currentLiturgicalLanguage.narrowWeekdayName(for: lDay.day.date)
+                            : "",
+                        dayNumber: isCurrentDay && isFirstOfDay ? lDay.day.day : nil,
+                        isCurrentDay: isCurrentDay,
+                        celebration: cel,
+                        columnWidth: weekdayColumnWidth,
+                        titleLineLimit: titleLines,
+                        subtitleLineLimit: subtitleLines
+                    )
+                }
+            }
         }
     }
 }
 
-// MARK: - System Medium Widget View
-
-struct BreviarWidgetMediumView: View {
-    let entry: BreviarWidgetEntry
+struct WidgetDayRow: View {
+    let weekday: String
+    let dayNumber: Int?
+    let isCurrentDay: Bool
+    let celebration: Celebration
+    let columnWidth: CGFloat
+    let titleLineLimit: Int?
+    let subtitleLineLimit: Int?
 
     var body: some View {
-        if let day = entry.liturgicalDay, !day.celebrations.isEmpty {
-            VStack(alignment: .leading, spacing: 4) {
-                ForEach(day.celebrations.prefix(3)) { celebration in
-                    HStack(spacing: 6) {
-                        WidgetCelebrationColorBar(color: celebration.liturgicalColor, width: 5)
-                        VStack(alignment: .leading, spacing: 1) {
-                            Text(celebration.title)
-                                .font(.footnote)
-                                .fontWeight(.bold)
-                                .lineLimit(1)
-                            if !celebration.subtitle.isEmpty {
-                                Text(celebration.subtitle)
-                                    .font(.caption2)
-                                    .foregroundColor(.secondary)
-                                    .lineLimit(1)
-                            }
-                        }
-                        Spacer(minLength: 0)
-                    }
+        HStack(alignment: dayNumber != nil ? .center : .top, spacing: 4) {
+            leadingLabel
+                .frame(width: columnWidth, alignment: .trailing)
+            WidgetCellColorBar(color: celebration.liturgicalColor, width: 5)
+            VStack(alignment: .leading, spacing: 1) {
+                Text(hyphenatedAttributedString(celebration.title))
+                    .font(.footnote)
+                    .fontWeight(.bold)
+                    .foregroundColor(isCurrentDay ? .primary : .secondary)
+                    .lineLimit(titleLineLimit)
+                if !celebration.subtitle.isEmpty {
+                    Text(celebration.subtitle)
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                        .lineLimit(subtitleLineLimit)
                 }
             }
-            .padding(4)
+            .padding(.leading, 2)
+            Spacer(minLength: 0)
+        }
+    }
+
+    @ViewBuilder
+    private var leadingLabel: some View {
+        if let n = dayNumber {
+            Text("\(n)")
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(.primary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
         } else {
-            Text(S.appName.S)
-                .font(.headline)
+            Text(weekday)
+                .font(.footnote)
+                .fontWeight(.bold)
+                .foregroundColor(isCurrentDay ? .primary : .secondary)
+                .lineLimit(1)
         }
     }
 }
 
-// MARK: - System Large Widget View
+private func hyphenatedAttributedString(_ s: String) -> AttributedString {
+    let style = NSMutableParagraphStyle()
+    style.hyphenationFactor = 1.0
+    let ns = NSAttributedString(string: s, attributes: [.paragraphStyle: style])
+    return AttributedString(ns)
+}
 
-struct BreviarWidgetLargeView: View {
-    let entry: BreviarWidgetEntry
-
-    private var dateString: String {
-        guard let day = entry.liturgicalDay else { return "" }
-        let date = day.day.date
-        let fmt = currentLiturgicalLanguage.dateFormatter(format: "EEEE, d MMMM")
-        return fmt.string(from: date).capitalized
-    }
+struct WidgetCellColorBar: View {
+    let color: LiturgicalColor
+    let width: CGFloat
 
     var body: some View {
-        if let day = entry.liturgicalDay, !day.celebrations.isEmpty {
-            VStack(alignment: .leading, spacing: 8) {
-                Text(dateString)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                ForEach(day.celebrations) { celebration in
-                    HStack(spacing: 8) {
-                        WidgetCelebrationColorBar(color: celebration.liturgicalColor, width: 5)
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(celebration.title)
-                                .font(.subheadline)
-                                .fontWeight(.bold)
-                                .lineLimit(2)
-                            if !celebration.subtitle.isEmpty {
-                                Text(celebration.subtitle)
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                                    .lineLimit(2)
-                            }
-                        }
-                        Spacer(minLength: 0)
-                    }
-                }
-                Spacer(minLength: 0)
-            }
-            .padding(4)
-        } else {
-            Text(S.appName.S)
-                .font(.headline)
+        VStack(spacing: 0) {
+            Rectangle().fill(uiLiturgicalColors[color.firstColor()] ?? .gray)
+            Rectangle().fill(uiLiturgicalColors[color.secondColor()] ?? .gray)
         }
+        .frame(width: width)
     }
 }
 
@@ -265,12 +290,8 @@ struct BreviarWidgetEntryView: View {
 
     var body: some View {
         switch family {
-        case .systemSmall:
-            BreviarWidgetSmallView(entry: entry)
-        case .systemMedium:
-            BreviarWidgetMediumView(entry: entry)
-        case .systemLarge:
-            BreviarWidgetLargeView(entry: entry)
+        case .systemSmall, .systemMedium, .systemLarge:
+            BreviarWidgetMultiDayView(days: entry.upcomingDays)
         case .accessoryCircular:
             BreviarWidgetCircularView(entry: entry)
         case .accessoryRectangular:
@@ -278,7 +299,7 @@ struct BreviarWidgetEntryView: View {
         case .accessoryInline:
             BreviarWidgetInlineView(entry: entry)
         default:
-            BreviarWidgetSmallView(entry: entry)
+            BreviarWidgetMultiDayView(days: entry.upcomingDays)
         }
     }
 }
