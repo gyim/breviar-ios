@@ -1,0 +1,1328 @@
+[
+ {
+  "key": "hu-sunday",
+  "label": "HU Sun 13 Sep, single celebration",
+  "lang": "hu",
+  "days": [
+   {
+    "year": 2026,
+    "month": 9,
+    "day": 13,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Évközi 24. vasárnap",
+      "subtitle": "4. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 9,
+    "day": 14,
+    "celebrations": [
+     {
+      "id": "1",
+      "title": "A Szent Kereszt felmagasztalása",
+      "subtitle": "ünnep",
+      "liturgicalColorRawValue": 1
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 9,
+    "day": 15,
+    "celebrations": [
+     {
+      "id": "1",
+      "title": "A Fájdalmas Szűzanya",
+      "subtitle": "emléknap",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 9,
+    "day": 16,
+    "celebrations": [
+     {
+      "id": "1",
+      "title": "Szent Kornél pápa és Szent Ciprián püspök vértanúk",
+      "subtitle": "emléknap",
+      "liturgicalColorRawValue": 1
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 9,
+    "day": 17,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Csütörtök, évközi idő, 24. hét",
+      "subtitle": "4. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "1",
+      "title": "Bellarmin Szent Róbert püspök és egyháztanító",
+      "subtitle": "tetszés szerinti emléknap",
+      "liturgicalColorRawValue": 2
+     },
+     {
+      "id": "2",
+      "title": "Bingeni Szent Hildegárd szűz és egyháztanító",
+      "subtitle": "tetszés szerinti emléknap",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 9,
+    "day": 18,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Péntek, évközi idő, 24. hét",
+      "subtitle": "4. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 9,
+    "day": 19,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Szombat, évközi idő, 24. hét",
+      "subtitle": "4. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "1",
+      "title": "Szent Januáriusz püspök és vértanú",
+      "subtitle": "tetszés szerinti emléknap",
+      "liturgicalColorRawValue": 1
+     },
+     {
+      "id": "6",
+      "title": "Szűz Mária szombati emléknapja",
+      "subtitle": "tetszés szerinti emléknap",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 9,
+    "day": 20,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Évközi 25. vasárnap",
+      "subtitle": "1. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "hu-long3",
+  "label": "HU 19 Oct, 3 celebrations, very long name",
+  "lang": "hu",
+  "days": [
+   {
+    "year": 2026,
+    "month": 10,
+    "day": 19,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Hétfő, évközi idő, 29. hét",
+      "subtitle": "1. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "1",
+      "title": "De Brébeuf Szent János és Jogues Szent Izsák áldozópapok \nés társaik, észak-amerikai vértanúk",
+      "subtitle": "tetszés szerinti emléknap",
+      "liturgicalColorRawValue": 1
+     },
+     {
+      "id": "2",
+      "title": "Keresztes Szent Pál áldozópap",
+      "subtitle": "tetszés szerinti emléknap",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 10,
+    "day": 20,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Kedd, évközi idő, 29. hét",
+      "subtitle": "1. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 10,
+    "day": 21,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Szerda, évközi idő, 29. hét",
+      "subtitle": "1. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "1",
+      "title": "Boldog IV. Károly király",
+      "subtitle": "tetszés szerinti emléknap",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 10,
+    "day": 22,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Csütörtök, évközi idő, 29. hét",
+      "subtitle": "1. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "1",
+      "title": "Szent II. János Pál pápa",
+      "subtitle": "tetszés szerinti emléknap",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 10,
+    "day": 23,
+    "celebrations": [
+     {
+      "id": "1",
+      "title": "Kapisztrán Szent János áldozópap",
+      "subtitle": "emléknap",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 10,
+    "day": 24,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Szombat, évközi idő, 29. hét",
+      "subtitle": "1. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "1",
+      "title": "Claret Szent Antal Mária püspök",
+      "subtitle": "tetszés szerinti emléknap",
+      "liturgicalColorRawValue": 2
+     },
+     {
+      "id": "2",
+      "title": "Szeged-Csanád: A székesegyház felszentelése",
+      "subtitle": "ünnep",
+      "liturgicalColorRawValue": 2
+     },
+     {
+      "id": "6",
+      "title": "Szűz Mária szombati emléknapja",
+      "subtitle": "tetszés szerinti emléknap",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 10,
+    "day": 25,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Évközi 30. vasárnap",
+      "subtitle": "2. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 10,
+    "day": 26,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Hétfő, évközi idő, 30. hét",
+      "subtitle": "2. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "1",
+      "title": "A SAJÁT TEMPLOM FELSZENTELÉSE \n(HA ANNAK NAPJA NEM ISMERETES)",
+      "subtitle": "főünnep",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "cz-christmas",
+  "label": "CZ 25 Dec, solemnity",
+  "lang": "cz",
+  "days": [
+   {
+    "year": 2026,
+    "month": 12,
+    "day": 25,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "NAROZENÍ PÁNĚ",
+      "subtitle": "slavnost",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 12,
+    "day": 26,
+    "celebrations": [
+     {
+      "id": "1",
+      "title": "Sv. Štěpána, prvomučedníka",
+      "subtitle": "svátek",
+      "liturgicalColorRawValue": 1
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 12,
+    "day": 27,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "SVATÉ RODINY JEŽÍŠE, MARIE A JOSEFA",
+      "subtitle": "svátek",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 12,
+    "day": 28,
+    "celebrations": [
+     {
+      "id": "1",
+      "title": "Svatých Mláďátek, mučedníků",
+      "subtitle": "svátek",
+      "liturgicalColorRawValue": 1
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 12,
+    "day": 29,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Úterý v oktávu Narození Páně",
+      "subtitle": "1. týden žaltáře",
+      "liturgicalColorRawValue": 2
+     },
+     {
+      "id": "1",
+      "title": "Sv. Tomáše Becketa, biskupa a mučedníka",
+      "subtitle": "pro připomínku",
+      "liturgicalColorRawValue": 1
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 12,
+    "day": 30,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Středa v oktávu Narození Páně",
+      "subtitle": "1. týden žaltáře",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 12,
+    "day": 31,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Čtvrtek v oktávu Narození Páně",
+      "subtitle": "1. týden žaltáře",
+      "liturgicalColorRawValue": 2
+     },
+     {
+      "id": "1",
+      "title": "Sv. Silvestra I., papeže",
+      "subtitle": "pro připomínku",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2027,
+    "month": 1,
+    "day": 1,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "MATKY BOŽÍ, PANNY MARIE",
+      "subtitle": "slavnost",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "sk-jan2",
+  "label": "SK 2 Jan, long saint names",
+  "lang": "sk",
+  "days": [
+   {
+    "year": 2027,
+    "month": 1,
+    "day": 2,
+    "celebrations": [
+     {
+      "id": "1",
+      "title": "Sv. Bazila Veľkého a Gregora Nazianzského, \nbiskupov a učiteľov Cirkvi",
+      "subtitle": "spomienka",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2027,
+    "month": 1,
+    "day": 3,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "2. NEDEĽA PO NARODENÍ PÁNA",
+      "subtitle": "",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2027,
+    "month": 1,
+    "day": 4,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Pondelok, Vianočné obdobie, 2. týždeň",
+      "subtitle": "2. týždeň žaltára",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2027,
+    "month": 1,
+    "day": 5,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Utorok, Vianočné obdobie, 2. týždeň",
+      "subtitle": "2. týždeň žaltára",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2027,
+    "month": 1,
+    "day": 6,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "ZJAVENIE PÁNA",
+      "subtitle": "slávnosť",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2027,
+    "month": 1,
+    "day": 7,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Štvrtok, Vianočné obdobie, 2. týždeň",
+      "subtitle": "2. týždeň žaltára",
+      "liturgicalColorRawValue": 2
+     },
+     {
+      "id": "1",
+      "title": "Sv. Rajmunda z Peňafortu, kňaza",
+      "subtitle": "ľubovoľná spomienka",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2027,
+    "month": 1,
+    "day": 8,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Piatok, Vianočné obdobie, 2. týždeň",
+      "subtitle": "2. týždeň žaltára",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2027,
+    "month": 1,
+    "day": 9,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Sobota, Vianočné obdobie, 2. týždeň",
+      "subtitle": "2. týždeň žaltára",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "hu-4cel",
+  "label": "HU 22 Jun, 4 celebrations, 3 colors",
+  "lang": "hu",
+  "days": [
+   {
+    "year": 2026,
+    "month": 6,
+    "day": 22,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Hétfő, évközi idő, 12. hét",
+      "subtitle": "4. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "1",
+      "title": "Fisher Szent János püspök \nés Morus Szent Tamás vértanúk",
+      "subtitle": "tetszés szerinti emléknap",
+      "liturgicalColorRawValue": 1
+     },
+     {
+      "id": "2",
+      "title": "Nolai Szent Paulínusz püspök",
+      "subtitle": "tetszés szerinti emléknap",
+      "liturgicalColorRawValue": 2
+     },
+     {
+      "id": "3",
+      "title": "Pécs: A bazilika-székesegyház felszentelése",
+      "subtitle": "ünnep",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 6,
+    "day": 23,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Kedd, évközi idő, 12. hét",
+      "subtitle": "4. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 6,
+    "day": 24,
+    "celebrations": [
+     {
+      "id": "1",
+      "title": "KERESZTELŐ SZENT JÁNOS SZÜLETÉSE",
+      "subtitle": "főünnep",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 6,
+    "day": 25,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Csütörtök, évközi idő, 12. hét",
+      "subtitle": "4. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 6,
+    "day": 26,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Péntek, évközi idő, 12. hét",
+      "subtitle": "4. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "1",
+      "title": "Alexandriai Szent Cirill püspök és egyháztanító",
+      "subtitle": "tetszés szerinti emléknap",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 6,
+    "day": 27,
+    "celebrations": [
+     {
+      "id": "1",
+      "title": "Szent László király",
+      "subtitle": "ünnep",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 6,
+    "day": 28,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Évközi 13. vasárnap",
+      "subtitle": "1. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 6,
+    "day": 29,
+    "celebrations": [
+     {
+      "id": "1",
+      "title": "SZENT PÉTER ÉS SZENT PÁL APOSTOLOK",
+      "subtitle": "főünnep",
+      "liturgicalColorRawValue": 1
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "cz-gaudete",
+  "label": "CZ 13 Dec, rose|violet",
+  "lang": "cz",
+  "days": [
+   {
+    "year": 2026,
+    "month": 12,
+    "day": 13,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Třetí Neděle adventní",
+      "subtitle": "3. týden žaltáře",
+      "liturgicalColorRawValue": 9
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 12,
+    "day": 14,
+    "celebrations": [
+     {
+      "id": "1",
+      "title": "Sv. Jana od Kříže, kněze a učitele církve",
+      "subtitle": "památka",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 12,
+    "day": 15,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Úterý, doba adventní, 3. týden",
+      "subtitle": "3. týden žaltáře",
+      "liturgicalColorRawValue": 4
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 12,
+    "day": 16,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Středa, doba adventní, 3. týden",
+      "subtitle": "3. týden žaltáře",
+      "liturgicalColorRawValue": 4
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 12,
+    "day": 17,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Čtvrtek, doba adventní,",
+      "subtitle": "3. týden žaltáře",
+      "liturgicalColorRawValue": 4
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 12,
+    "day": 18,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Pátek, doba adventní,",
+      "subtitle": "3. týden žaltáře",
+      "liturgicalColorRawValue": 4
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 12,
+    "day": 19,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Sobota, doba adventní,",
+      "subtitle": "3. týden žaltáře",
+      "liturgicalColorRawValue": 4
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 12,
+    "day": 20,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Čtvrtá Neděle adventní",
+      "subtitle": "4. týden žaltáře",
+      "liturgicalColorRawValue": 4
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "hu-holythu",
+  "label": "HU 2 Apr, violet|white",
+  "lang": "hu",
+  "days": [
+   {
+    "year": 2026,
+    "month": 4,
+    "day": 2,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "NAGYCSÜTÖRTÖK",
+      "subtitle": "",
+      "liturgicalColorRawValue": 8
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 4,
+    "day": 3,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "NAGYPÉNTEK",
+      "subtitle": "",
+      "liturgicalColorRawValue": 1
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 4,
+    "day": 4,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "NAGYSZOMBAT",
+      "subtitle": "",
+      "liturgicalColorRawValue": 4
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 4,
+    "day": 5,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "HÚSVÉTVASÁRNAP, \nKRISZTUS FELTÁMADÁSA",
+      "subtitle": "főünnep",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 4,
+    "day": 6,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "HÚSVÉTHÉTFŐ",
+      "subtitle": "",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 4,
+    "day": 7,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "KEDD HÚSVÉT NYOLCADÁBAN",
+      "subtitle": "",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 4,
+    "day": 8,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "SZERDA HÚSVÉT NYOLCADÁBAN",
+      "subtitle": "",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 4,
+    "day": 9,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "CSÜTÖRTÖK HÚSVÉT NYOLCADÁBAN",
+      "subtitle": "",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "sk-3cel",
+  "label": "SK 17 Sep, 3 celebrations",
+  "lang": "sk",
+  "days": [
+   {
+    "year": 2026,
+    "month": 9,
+    "day": 17,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Štvrtok, Cezročné obdobie, 24. týždeň",
+      "subtitle": "4. týždeň žaltára",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "1",
+      "title": "Sv. Róberta Bellarmína, biskupa a učiteľa Cirkvi",
+      "subtitle": "ľubovoľná spomienka",
+      "liturgicalColorRawValue": 2
+     },
+     {
+      "id": "2",
+      "title": "Sv. Hildegardy z Bingenu, panny a učiteľky Cirkvi",
+      "subtitle": "ľubovoľná spomienka",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 9,
+    "day": 18,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Piatok, Cezročné obdobie, 24. týždeň",
+      "subtitle": "4. týždeň žaltára",
+      "liturgicalColorRawValue": 3
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 9,
+    "day": 19,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Sobota, Cezročné obdobie, 24. týždeň",
+      "subtitle": "4. týždeň žaltára",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "1",
+      "title": "Sv. Januára, biskupa a mučeníka",
+      "subtitle": "ľubovoľná spomienka",
+      "liturgicalColorRawValue": 1
+     },
+     {
+      "id": "6",
+      "title": "Spomienka Panny Márie v sobotu",
+      "subtitle": "ľubovoľná spomienka",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 9,
+    "day": 20,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "25. Nedeľa v Cezročnom období",
+      "subtitle": "1. týždeň žaltára",
+      "liturgicalColorRawValue": 3
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 9,
+    "day": 21,
+    "celebrations": [
+     {
+      "id": "1",
+      "title": "Sv. Matúša, apoštola a evanjelistu",
+      "subtitle": "sviatok",
+      "liturgicalColorRawValue": 1
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 9,
+    "day": 22,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Utorok, Cezročné obdobie, 25. týždeň",
+      "subtitle": "1. týždeň žaltára",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "1",
+      "title": "Sv. Emeráma, biskupa a mučeníka",
+      "subtitle": "spomienka",
+      "liturgicalColorRawValue": 1
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 9,
+    "day": 23,
+    "celebrations": [
+     {
+      "id": "1",
+      "title": "Sv. Pia z Pietrelčiny, kňaza",
+      "subtitle": "spomienka",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 9,
+    "day": 24,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Štvrtok, Cezročné obdobie, 25. týždeň",
+      "subtitle": "1. týždeň žaltára",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "1",
+      "title": "Výročie posviacky katedrálneho chrámu \nsv. Františka Xaverského",
+      "subtitle": "sviatok",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "hu-longsingle",
+  "label": "HU 1 Oct, single long name",
+  "lang": "hu",
+  "days": [
+   {
+    "year": 2026,
+    "month": 10,
+    "day": 1,
+    "celebrations": [
+     {
+      "id": "1",
+      "title": "A Gyermek Jézusról nevezett (Lisieux-i) Szent Teréz szűz és egyháztanító",
+      "subtitle": "emléknap",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 10,
+    "day": 2,
+    "celebrations": [
+     {
+      "id": "1",
+      "title": "Szent Őrzőangyalok",
+      "subtitle": "emléknap",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 10,
+    "day": 3,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Szombat, évközi idő, 26. hét",
+      "subtitle": "2. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "1",
+      "title": "Boldog Bogdánffy Szilárd püspök és vértanú",
+      "subtitle": "tetszés szerinti emléknap",
+      "liturgicalColorRawValue": 1
+     },
+     {
+      "id": "6",
+      "title": "Szűz Mária szombati emléknapja",
+      "subtitle": "tetszés szerinti emléknap",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 10,
+    "day": 4,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Évközi 27. vasárnap",
+      "subtitle": "3. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 10,
+    "day": 5,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Hétfő, évközi idő, 27. hét",
+      "subtitle": "3. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "1",
+      "title": "Szent Faustina Kowalska szűz",
+      "subtitle": "tetszés szerinti emléknap",
+      "liturgicalColorRawValue": 2
+     },
+     {
+      "id": "2",
+      "title": "Veszprém: A bazilika-székesegyház felszentelése",
+      "subtitle": "ünnep",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 10,
+    "day": 6,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Kedd, évközi idő, 27. hét",
+      "subtitle": "3. zsoltáros hét",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "1",
+      "title": "Szent Brúnó áldozópap",
+      "subtitle": "tetszés szerinti emléknap",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 10,
+    "day": 7,
+    "celebrations": [
+     {
+      "id": "1",
+      "title": "Boldogságos Szűz Mária, a szentolvasó Királynője (Rózsafüzér Királynője)",
+      "subtitle": "emléknap",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 10,
+    "day": 8,
+    "celebrations": [
+     {
+      "id": "1",
+      "title": "SZŰZ MÁRIA, MAGYAROK NAGYASSZONYA, \nMAGYARORSZÁG FŐPÁTRONÁJA",
+      "subtitle": "főünnep",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "cz-2short",
+  "label": "CZ 15 Jun, green + red",
+  "lang": "cz",
+  "days": [
+   {
+    "year": 2026,
+    "month": 6,
+    "day": 15,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Pondělí, mezidobí, 11. týden",
+      "subtitle": "3. týden žaltáře",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "1",
+      "title": "Sv. Víta, mučedníka",
+      "subtitle": "nezávazná památka",
+      "liturgicalColorRawValue": 1
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 6,
+    "day": 16,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Úterý, mezidobí, 11. týden",
+      "subtitle": "3. týden žaltáře",
+      "liturgicalColorRawValue": 3
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 6,
+    "day": 17,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Středa, mezidobí, 11. týden",
+      "subtitle": "3. týden žaltáře",
+      "liturgicalColorRawValue": 3
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 6,
+    "day": 18,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Čtvrtek, mezidobí, 11. týden",
+      "subtitle": "3. týden žaltáře",
+      "liturgicalColorRawValue": 3
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 6,
+    "day": 19,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Pátek, mezidobí, 11. týden",
+      "subtitle": "3. týden žaltáře",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "1",
+      "title": "Sv. Jana Nepomuckého Neumanna, biskupa",
+      "subtitle": "nezávazná památka",
+      "liturgicalColorRawValue": 2
+     },
+     {
+      "id": "2",
+      "title": "Sv. Romualda, opata",
+      "subtitle": "nezávazná památka",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 6,
+    "day": 20,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Sobota, mezidobí, 11. týden",
+      "subtitle": "3. týden žaltáře",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "6",
+      "title": "Sobotní památka Panny Marie",
+      "subtitle": "nezávazná památka",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 6,
+    "day": 21,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "12. Neděle v mezidobí",
+      "subtitle": "4. týden žaltáře",
+      "liturgicalColorRawValue": 3
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "month": 6,
+    "day": 22,
+    "celebrations": [
+     {
+      "id": "0",
+      "title": "Pondělí, mezidobí, 12. týden",
+      "subtitle": "4. týden žaltáře",
+      "liturgicalColorRawValue": 3
+     },
+     {
+      "id": "1",
+      "title": "Sv. Jana Fishera, biskupa, \na Tomáše Mora, mučedníků",
+      "subtitle": "nezávazná památka",
+      "liturgicalColorRawValue": 1
+     },
+     {
+      "id": "2",
+      "title": "Sv. Paulina Nolánského, biskupa",
+      "subtitle": "nezávazná památka",
+      "liturgicalColorRawValue": 2
+     }
+    ]
+   }
+  ]
+ }
+]
