@@ -54,19 +54,10 @@ struct MainScreen: View {
                         label: {Label("", systemImage: "calendar")})
                 )
                 .toolbar {
-                    HStack{
+                    HStack(spacing: 0){
                         // Today button
-                        Button(
-                            action: {
-                                withAnimation {
-                                    model.loadDay(today)
-                                }
-                            },
-                            label: {Text(S.today.S)})
-                            .disabled(model.day == today)
-                            .opacity(model.day == today ? 0 : 1)
-                            .padding()
-                        
+                        TodayButton(today: today)
+
                         // Left button
                         Button(
                             action: {
@@ -76,8 +67,8 @@ struct MainScreen: View {
                             },
                             label: {Label(S.previousDay.S,systemImage: "chevron.left")})
                         
-                        Spacer(minLength: 20).fixedSize()
-                        
+                        Spacer(minLength: 28).fixedSize()
+
                         // Right button
                         Button(
                             action: {
@@ -110,6 +101,52 @@ struct MainScreen: View {
                 }
             }
         }
+    }
+}
+
+/// "Today" button for the main screen toolbar.
+///
+/// The button always stays in the view hierarchy and collapses its width to zero when the
+/// current day is shown. Adding and removing it instead would change the identity of the
+/// navigation bar items, which makes UIKit cross-fade the whole bar item group.
+struct TodayButton: View {
+    @EnvironmentObject var model: BreviarModel
+    var today: Day
+    @State private var expandedWidth: CGFloat? = nil
+
+    private struct WidthKey: PreferenceKey {
+        static var defaultValue: CGFloat = 0
+        static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+            value = max(value, nextValue())
+        }
+    }
+
+    var body: some View {
+        let expanded = (model.day != today)
+
+        Button(
+            action: {
+                withAnimation {
+                    model.loadDay(today)
+                }
+            },
+            label: {Text(S.today.S)})
+            .padding(.trailing)
+            .fixedSize()
+            .background(
+                GeometryReader { geometry in
+                    Color.clear.preference(key: WidthKey.self, value: geometry.size.width)
+                }
+            )
+            .onPreferenceChange(WidthKey.self) { width in
+                if width > 0 {
+                    expandedWidth = width
+                }
+            }
+            .frame(width: expanded ? expandedWidth : 0, alignment: .leading)
+            .clipped()
+            .disabled(!expanded)
+            .accessibilityHidden(!expanded)
     }
 }
 
