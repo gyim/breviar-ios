@@ -55,6 +55,11 @@ struct MainScreen: View {
                 )
                 .toolbar {
                     HStack(spacing: 0){
+                        // Network status
+                        NetworkStatusIndicator(status: model.networkStatus, onRetryOnline: {
+                            model.retryOnline()
+                        })
+
                         // Today button
                         TodayButton(today: today)
 

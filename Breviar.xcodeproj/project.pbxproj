@@ -24,6 +24,8 @@
 		701328492683D89D00A991FE /* BRCGIQuery.mm in Sources */ = {isa = PBXBuildFile; fileRef = 701328482683D89D00A991FE /* BRCGIQuery.mm */; };
 		7027A8AB2E7D3C9D00226448 /* AutoLockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027A8AA2E7D3C9D00226448 /* AutoLockManager.swift */; };
 		7027A8B12E7E000100226448 /* ScreenshotMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027A8B02E7E000100226448 /* ScreenshotMode.swift */; };
+		70A4C1022F5A100000B1E002 /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A4C1012F5A100000B1E001 /* NetworkStatus.swift */; };
+		70A4C1042F5A100000B1E004 /* NetworkStatusIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A4C1032F5A100000B1E003 /* NetworkStatusIndicator.swift */; };
 		702E14F5260B239000E9D3AC /* TestDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702E14F4260B239000E9D3AC /* TestDataSource.swift */; };
 		70651592260FA36D0030DC73 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70651591260FA36C0030DC73 /* LoadingView.swift */; };
 		7074060E261B7BBC00F71D59 /* NavigationBarToggler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7074060D261B7BBC00F71D59 /* NavigationBarToggler.swift */; };
@@ -127,6 +129,8 @@
 		701328482683D89D00A991FE /* BRCGIQuery.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BRCGIQuery.mm; sourceTree = "<group>"; };
 		7027A8AA2E7D3C9D00226448 /* AutoLockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLockManager.swift; sourceTree = "<group>"; };
 		7027A8B02E7E000100226448 /* ScreenshotMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotMode.swift; sourceTree = "<group>"; };
+		70A4C1012F5A100000B1E001 /* NetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
+		70A4C1032F5A100000B1E003 /* NetworkStatusIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusIndicator.swift; sourceTree = "<group>"; };
 		702E14F4260B239000E9D3AC /* TestDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataSource.swift; sourceTree = "<group>"; };
 		70651591260FA36C0030DC73 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7074060D261B7BBC00F71D59 /* NavigationBarToggler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarToggler.swift; sourceTree = "<group>"; };
@@ -311,6 +315,7 @@
 				709A26B825F8DA8A0040AE84 /* Calendar.swift */,
 				7079D1BD25FAD8DD00EFF6B2 /* CGIClient.swift */,
 				70A39C7226489344008E0AE1 /* Language.swift */,
+				70A4C1012F5A100000B1E001 /* NetworkStatus.swift */,
 				701328142683D76100A991FE /* Breviar-Bridging-Header.h */,
 				70927DD12F2B570000FA9E8C /* SharedConstants.swift */,
 				70BD024E262A3900007FB5C0 /* Settings.swift */,
@@ -367,6 +372,7 @@
 			children = (
 				70C6A53425F412360043056D /* MainScreen.swift */,
 				709A26B025F82C250040AE84 /* DatePicker.swift */,
+				70A4C1032F5A100000B1E003 /* NetworkStatusIndicator.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -566,6 +572,8 @@
 				7013283E2683D76200A991FE /* mystring.cpp in Sources */,
 				7027A8AB2E7D3C9D00226448 /* AutoLockManager.swift in Sources */,
 				7027A8B12E7E000100226448 /* ScreenshotMode.swift in Sources */,
+				70A4C1022F5A100000B1E002 /* NetworkStatus.swift in Sources */,
+				70A4C1042F5A100000B1E004 /* NetworkStatusIndicator.swift in Sources */,
 				70927DD02F2B563700FA9E8C /* WidgetDataWriter.swift in Sources */,
 				70927DD32F2B570200FA9E8C /* SharedConstants.swift in Sources */,
 				70927DD42F2B570300FA9E8C /* WidgetDataModels.swift in Sources */,

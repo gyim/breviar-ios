@@ -28,8 +28,8 @@ struct LoadingView<T, Content: View> : View {
                         .multilineTextAlignment(.center)
                         .padding()
                     HStack {
-                        RetryButton(label: S.retryFromServer.S, action: retry, forceLocal: false)
-                        RetryButton(label: S.retryLocally.S, action: retry, forceLocal: true)
+                        RetryButton(label: S.retryFromServer.S, action: retry, policy: .forceRemote)
+                        RetryButton(label: S.retryLocally.S, action: retry, policy: .forceLocal)
                     }
                 }.padding()
             case .loaded(let body):
@@ -41,12 +41,12 @@ struct LoadingView<T, Content: View> : View {
 
 struct RetryButton: View {
     var label: String
-    var action: (_ forceLocal: Bool) -> Void
-    var forceLocal: Bool
+    var action: (_ policy: DataSourcePolicy) -> Void
+    var policy: DataSourcePolicy
 
     var body: some View {
         Button(action: {
-            action(forceLocal)
+            action(policy)
         }, label: {
             Text(label)
                 .multilineTextAlignment(.center)
@@ -65,7 +65,7 @@ struct LoadingView_Previews: PreviewProvider {
             LoadingView(value: .loading) {(s: String) in Text(s) }
                 .previewLayout(.fixed(width: 300.0, height: 200.0))
 
-            LoadingView(value: .failed(DataSourceError.emptyResponse, {forceLocal in print("Retry: \(forceLocal)")})) {(s: String) in Text(s) }
+            LoadingView(value: .failed(DataSourceError.emptyResponse, {policy in print("Retry: \(policy)")})) {(s: String) in Text(s) }
                 .previewLayout(.fixed(width: 300.0, height: 400.0))
                 .preferredColorScheme(.dark)
 

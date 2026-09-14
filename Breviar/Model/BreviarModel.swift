@@ -56,6 +56,18 @@ class BreviarModel : NSObject, ObservableObject {
 
     @Published var externalLink: IdentifiableURL? = nil
     
+    // Generation counters: a load started later always wins, even if an earlier one
+    // (e.g. a slow remote attempt) delivers its result afterwards.
+    private var dayLoadID = 0
+    private var monthLoadID = 0
+    private var prayerLoadID = 0
+    private var ttsLoadID = 0
+    private var settingsLoadID = 0
+
+    var networkStatus: NetworkStatus {
+        return self.dataSource.networkStatus
+    }
+
     init(dataSource: BreviarDataSource) {
         let now = Date()
         self.dataSource = dataSource
@@ -93,12 +105,12 @@ class BreviarModel : NSObject, ObservableObject {
         self.reload()
     }
     
-    func reload() {
+    func reload(policy: DataSourcePolicy = .automatic) {
         self.dayState = .idle
         self.monthState = .idle
         self.settingsEntries = .idle
         self.aboutPage = .idle
-        _ = self.load()
+        _ = self.load(policy: policy)
     }
     
     func reloadLiturgicalData() {
@@ -116,11 +128,11 @@ class BreviarModel : NSObject, ObservableObject {
         }
     }
     
-    func load() -> BreviarModel {
+    func load(policy: DataSourcePolicy = .automatic) -> BreviarModel {
         switch self.dayState {
         case .idle:
-            self.loadDay(self.day)
-            self.loadMonth(self.month)
+            self.loadDay(self.day, policy: policy)
+            self.loadMonth(self.month, policy: policy)
             self.loadNextMonthForWidgetCache()
         default:
             break
@@ -128,7 +140,7 @@ class BreviarModel : NSObject, ObservableObject {
 
         switch self.settingsEntries {
         case .idle:
-            self.loadSettingsEntries()
+            self.loadSettingsEntries(policy: policy)
         default:
             break
         }
@@ -148,18 +160,22 @@ class BreviarModel : NSObject, ObservableObject {
         #endif
     }
     
-    func loadDay(_ day: Day, forceLocal: Bool = false) {
+    func loadDay(_ day: Day, policy: DataSourcePolicy = .automatic) {
         self.day = day
         self.dayState = .loading
         self.selectedCelebration = ""
         self.prayerText = .idle
         
-        let retry: (Bool) -> Void = { forceLocal in
+        self.dayLoadID += 1
+        let loadID = self.dayLoadID
+
+        let retry: (DataSourcePolicy) -> Void = { policy in
             self.dayState = .loading
-            self.loadDay(day, forceLocal: forceLocal)
+            self.loadDay(day, policy: policy)
         }
         
-        self.dataSource.getLiturgicalDay(day: day, forceLocal: forceLocal) { (liturgicalDay, error) in
+        self.dataSource.getLiturgicalDay(day: day, policy: policy) { (liturgicalDay, error) in
+            guard loadID == self.dayLoadID else { return }
             if error == nil {
                 if let liturgicalDay = liturgicalDay {
                     self.dayState = .loaded(liturgicalDay)
@@ -173,16 +189,20 @@ class BreviarModel : NSObject, ObservableObject {
         }
     }
     
-    func loadMonth(_ month: Month, forceLocal: Bool = false) {
+    func loadMonth(_ month: Month, policy: DataSourcePolicy = .automatic) {
         self.month = month
         self.monthState = .loading
 
-        let retry: (Bool) -> Void = { forceLocal in
+        self.monthLoadID += 1
+        let loadID = self.monthLoadID
+
+        let retry: (DataSourcePolicy) -> Void = { policy in
             self.monthState = .loading
-            self.loadMonth(month, forceLocal: forceLocal)
+            self.loadMonth(month, policy: policy)
         }
 
-        self.dataSource.getLiturgicalMonth(month: month, forceLocal: forceLocal) { (liturgicalMonth, error) in
+        self.dataSource.getLiturgicalMonth(month: month, policy: policy) { (liturgicalMonth, error) in
+            guard loadID == self.monthLoadID else { return }
             if error == nil {
                 if let liturgicalMonth = liturgicalMonth {
                     self.monthState = .loaded(liturgicalMonth)
@@ -197,7 +217,7 @@ class BreviarModel : NSObject, ObservableObject {
     
     private func loadNextMonthForWidgetCache() {
         let nextMonth = self.month.monthByAdding(months: 1)
-        self.dataSource.getLiturgicalMonth(month: nextMonth, forceLocal: true) { (liturgicalMonth, _) in
+        self.dataSource.getLiturgicalMonth(month: nextMonth, policy: .forceLocal) { (liturgicalMonth, _) in
             if let liturgicalMonth = liturgicalMonth {
                 WidgetDataWriter.shared.writeLiturgicalMonth(liturgicalMonth)
             }
@@ -242,14 +262,18 @@ class BreviarModel : NSObject, ObservableObject {
         }
     }
     
-    func loadPrayer(_ prayer: Prayer, opts: [String: String] = [:], forceLocal: Bool = false) {
-        let retry: (Bool) -> Void = { forceLocal in
+    func loadPrayer(_ prayer: Prayer, opts: [String: String] = [:], policy: DataSourcePolicy = .automatic) {
+        self.prayerLoadID += 1
+        let loadID = self.prayerLoadID
+
+        let retry: (DataSourcePolicy) -> Void = { policy in
             self.prayerText = .loading
-            self.loadPrayer(prayer, opts: opts, forceLocal: forceLocal)
+            self.loadPrayer(prayer, opts: opts, policy: policy)
         }
 
         if let (day, celebration) = self.getCurrentCelebration() {
-            self.dataSource.getPrayerText(day: day, celebration: celebration, prayerType: prayer.type, opts: opts, forceLocal: forceLocal) { (text, error) in
+            self.dataSource.getPrayerText(day: day, celebration: celebration, prayerType: prayer.type, opts: opts, policy: policy) { (text, error) in
+                guard loadID == self.prayerLoadID else { return }
                 if error == nil {
                     self.prayerText = .loaded(text!)
                 } else {
@@ -259,14 +283,18 @@ class BreviarModel : NSObject, ObservableObject {
         }
     }
     
-    func loadTTSPrayer(_ prayer: Prayer, opts: [String: String] = [:], forceLocal: Bool = false) {
-        let retry: (Bool) -> Void = { forceLocal in
+    func loadTTSPrayer(_ prayer: Prayer, opts: [String: String] = [:], policy: DataSourcePolicy = .automatic) {
+        self.ttsLoadID += 1
+        let loadID = self.ttsLoadID
+
+        let retry: (DataSourcePolicy) -> Void = { policy in
             self.ttsPrayerText = .loading
-            self.loadTTSPrayer(prayer, opts: opts, forceLocal: forceLocal)
+            self.loadTTSPrayer(prayer, opts: opts, policy: policy)
         }
 
         if let (day, celebration) = self.getCurrentCelebration() {
-            self.dataSource.getTTSPrayerText(day: day, celebration: celebration, prayerType: prayer.type, opts: opts, forceLocal: forceLocal) { (text, error) in
+            self.dataSource.getTTSPrayerText(day: day, celebration: celebration, prayerType: prayer.type, opts: opts, policy: policy) { (text, error) in
+                guard loadID == self.ttsLoadID else { return }
                 if error == nil {
                     self.ttsPrayerText = .loaded(text!)
                 } else {
@@ -338,13 +366,17 @@ class BreviarModel : NSObject, ObservableObject {
         self.ttsPrayerText = .idle
     }
     
-    func loadSettingsEntries(forceLocal: Bool = false) {
-        let retry: (Bool) -> Void = { forceLocal in
+    func loadSettingsEntries(policy: DataSourcePolicy = .automatic) {
+        self.settingsLoadID += 1
+        let loadID = self.settingsLoadID
+
+        let retry: (DataSourcePolicy) -> Void = { policy in
             self.settingsEntries = .loading
-            self.loadSettingsEntries(forceLocal: forceLocal)
+            self.loadSettingsEntries(policy: policy)
         }
 
-        self.dataSource.getSettingsEntries(forceLocal: forceLocal) { (entries, error) in
+        self.dataSource.getSettingsEntries(policy: policy) { (entries, error) in
+            guard loadID == self.settingsLoadID else { return }
             if error == nil {
                 // Save entries to UserDefaults
                 for entry in entries! {
@@ -372,6 +404,14 @@ class BreviarModel : NSObject, ObservableObject {
         }
     }
     
+    /// Reloads the currently shown data from the server, bypassing the Wi-Fi gate and
+    /// the server cooldown.
+    func retryOnline() {
+        self.loadDay(self.day, policy: .forceRemote)
+        self.loadMonth(self.month, policy: .forceRemote)
+        self.loadSettingsEntries(policy: .forceRemote)
+    }
+
     func navigateToDay(_ day: Day) {
         self.loadDay(day)
     }
@@ -432,7 +472,7 @@ class BreviarModel : NSObject, ObservableObject {
 enum LoadingState<Value> {
     case idle
     case loading
-    case failed(Error, (_ forceLocal: Bool) -> Void)
+    case failed(Error, (_ policy: DataSourcePolicy) -> Void)
     case loaded(Value)
 }
 

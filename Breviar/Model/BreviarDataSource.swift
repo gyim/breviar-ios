@@ -9,13 +9,14 @@ import Foundation
 import Network
 
 protocol BreviarDataSource {
+    var networkStatus: NetworkStatus { get }
     func setOptions(_ options: DataSourceOptions)
-    func getLiturgicalDay(day: Day, forceLocal: Bool, handler: @escaping (LiturgicalDay?, Error?) -> Void)
-    func getLiturgicalMonth(month: Month, forceLocal: Bool, handler: @escaping (LiturgicalMonth?, Error?) -> Void)
-    func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], forceLocal: Bool, handler: @escaping (String?, Error?) -> Void)
-    func getTTSPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], forceLocal: Bool, handler: @escaping (String?, Error?) -> Void)
+    func getLiturgicalDay(day: Day, policy: DataSourcePolicy, handler: @escaping (LiturgicalDay?, Error?) -> Void)
+    func getLiturgicalMonth(month: Month, policy: DataSourcePolicy, handler: @escaping (LiturgicalMonth?, Error?) -> Void)
+    func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], policy: DataSourcePolicy, handler: @escaping (String?, Error?) -> Void)
+    func getTTSPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], policy: DataSourcePolicy, handler: @escaping (String?, Error?) -> Void)
     func parsePrayerLink(url: URL) -> BreviarLink
-    func getSettingsEntries(forceLocal: Bool, handler: @escaping ([SettingsEntry]?, Error?) -> Void)
+    func getSettingsEntries(policy: DataSourcePolicy, handler: @escaping ([SettingsEntry]?, Error?) -> Void)
     func getAboutPage(handler: @escaping (String?, Error?) -> Void)
 }
 
@@ -268,47 +269,202 @@ class SettingsParser : NSObject, XMLParserDelegate {
 }
 
 class CGIDataSource : BreviarDataSource {
+    let networkStatus = NetworkStatus()
     var remoteCGIClient: RemoteCGIClient = RemoteCGIClient()
     var localCGIClient: CGIClient = LocalCGIClient()
     var options: DataSourceOptions? = nil
     var pathMonitor: NWPathMonitor
-    var onWifi: Bool = false
+    private var pathSignature: String? = nil
     
     init() {
         self.options = DataSourceOptions.savedOptions
-        self.remoteCGIClient.allowsCellularAccess = (options?.dataSourceType == .alwaysNetwork)
+        self.networkStatus.setDataSourceType(self.options?.dataSourceType)
 
         self.pathMonitor = NWPathMonitor()
-        self.pathMonitor.start(queue: .global(qos: .background))
-        self.pathMonitor.pathUpdateHandler = { path in
-            self.onWifi = (path.status == .satisfied && !path.usesInterfaceType(.cellular));
+        self.pathMonitor.pathUpdateHandler = { [weak self] path in
+            guard let self = self else { return }
+            let connected = (path.status == .satisfied || path.status == .requiresConnection)
+            let onWifi = connected && !path.usesInterfaceType(.cellular)
+            let signature = CGIDataSource.signature(of: path)
+
+            DispatchQueue.main.async {
+                if self.pathSignature != signature {
+                    // A different network may well reach the server again
+                    self.pathSignature = signature
+                    self.networkStatus.clearCooldown()
+                }
+                self.networkStatus.updatePath(isConnected: connected, isOnWifi: onWifi)
+            }
         }
+        self.pathMonitor.start(queue: DispatchQueue(label: "breviar-network-monitor", qos: .utility))
     }
     
     deinit {
         self.pathMonitor.cancel()
     }
     
-    func cgiClient(forceLocal: Bool) -> CGIClient {
-        if forceLocal {
-            return self.localCGIClient
-        }
-        
-        switch self.options?.dataSourceType {
-        case .alwaysCGI:
-            return self.localCGIClient
-        case .alwaysNetwork:
-            return self.remoteCGIClient
-        case .networkOnWifi:
-            return self.onWifi ? self.remoteCGIClient : self.localCGIClient
-        default:
-            return self.localCGIClient
-        }
+    /// Describes the network the device is on, so that flapping updates of the same path
+    /// do not clear the server cooldown.
+    private static func signature(of path: NWPath) -> String {
+        let interfaceTypes: [NWInterface.InterfaceType] = [.wifi, .cellular, .wiredEthernet, .other]
+        let used = interfaceTypes.filter { path.usesInterfaceType($0) }.map { "\($0)" }
+        return "\(path.status)|\(used.joined(separator: ","))"
     }
     
     func setOptions(_ options: DataSourceOptions) {
         self.options = options
-        self.remoteCGIClient.allowsCellularAccess = (options.dataSourceType == .alwaysNetwork)
+        self.networkStatus.setDataSourceType(options.dataSourceType)
+        self.networkStatus.clearCooldown()
+    }
+
+    private func shouldTryRemote(policy: DataSourcePolicy, mode: DataSourceType?) -> Bool {
+        switch policy {
+        case .forceLocal:
+            return false
+        case .forceRemote:
+            return true
+        case .automatic:
+            guard mode == .alwaysNetwork || mode == .networkOnWifi else { return false }
+            guard self.networkStatus.isConnected else { return false }
+            guard mode == .alwaysNetwork || self.networkStatus.isOnWifi else { return false }
+            return !self.networkStatus.isCooldownActive
+        }
+    }
+
+    /// Runs one CGI query according to the policy, falling back to the local CGI whenever
+    /// the server cannot deliver a usable response. Must be called on the main queue.
+    private func load<T>(args: [String: String], policy: DataSourcePolicy, parse: @escaping (Data) -> Result<T, Error>, handler: @escaping (T?, Error?) -> Void) {
+        let mode = self.options?.dataSourceType
+        let tracksProvenance = (policy != .forceLocal && mode != .alwaysCGI)
+
+        let deliverLocal = {
+            self.loadLocal(args: args, parse: parse) { result in
+                if tracksProvenance {
+                    self.networkStatus.didFinishLoad(local: true)
+                }
+                switch result {
+                case .success(let value):
+                    handler(value, nil)
+                case .failure(let error):
+                    handler(nil, error)
+                }
+            }
+        }
+
+        guard self.shouldTryRemote(policy: policy, mode: mode) else {
+            deliverLocal()
+            return
+        }
+
+        let allowsCellular = (mode == .alwaysNetwork || policy == .forceRemote)
+        self.loadRemote(args: args, allowsCellular: allowsCellular, parse: parse) { result in
+            switch result {
+            case .success(let value):
+                self.networkStatus.clearCooldown()
+                self.networkStatus.didFinishLoad(local: false)
+                handler(value, nil)
+            case .failure(let failure):
+                if failure.startsCooldown && self.networkStatus.isConnected {
+                    self.networkStatus.startCooldown()
+                }
+                print("Falling back to local CGI")
+                deliverLocal()
+            }
+        }
+    }
+
+    /// First remote attempt plus retries with exponential backoff, all within
+    /// `NetworkConstants.onlineAttemptBudget`. Must be called on the main queue.
+    private func loadRemote<T>(args: [String: String], allowsCellular: Bool, parse: @escaping (Data) -> Result<T, Error>, completion: @escaping (Result<T, RemoteFailure>) -> Void) {
+        self.networkStatus.beginRemoteRequest()
+        let deadline = Date().addingTimeInterval(NetworkConstants.onlineAttemptBudget)
+
+        // The only exit of this function: it balances the request counter exactly once
+        let finish: (Result<T, RemoteFailure>) -> Void = { result in
+            self.networkStatus.endRemoteRequest()
+            completion(result)
+        }
+
+        func attempt(_ attemptNumber: Int, retryDelay: TimeInterval) {
+            let timeout = max(deadline.timeIntervalSinceNow, NetworkConstants.minimumAttemptTime)
+            self.remoteCGIClient.fetch(args, allowsCellularAccess: allowsCellular, timeout: timeout) { result in
+                // Parsing runs on the session's queue, everything below on the main queue
+                let parsed: Result<T, RemoteFailure> = result.flatMap { data in
+                    // A response that cannot be parsed did not come from the breviary server
+                    // (captive portals answer with their own HTML and HTTP 200)
+                    switch parse(data) {
+                    case .success(let value):
+                        return .success(value)
+                    case .failure:
+                        return .failure(.invalidContent)
+                    }
+                }
+
+                DispatchQueue.main.async {
+                    guard case .failure(let failure) = parsed else {
+                        finish(parsed)
+                        return
+                    }
+
+                    let hasTimeLeft = Date().addingTimeInterval(retryDelay + NetworkConstants.minimumAttemptTime) < deadline
+                    if failure.isRetryable && self.networkStatus.isConnected && hasTimeLeft {
+                        print("Remote attempt \(attemptNumber) failed: \(failure), retrying in \(retryDelay) s")
+                        DispatchQueue.main.asyncAfter(deadline: .now() + retryDelay) {
+                            attempt(attemptNumber + 1, retryDelay: retryDelay * 2)
+                        }
+                    } else {
+                        print("Remote attempt \(attemptNumber) failed: \(failure)")
+                        finish(parsed)
+                    }
+                }
+            }
+        }
+
+        attempt(1, retryDelay: NetworkConstants.initialRetryDelay)
+    }
+
+    /// Runs the CGI built into the app. Reports the result on the main queue.
+    private func loadLocal<T>(args: [String: String], parse: @escaping (Data) -> Result<T, Error>, completion: @escaping (Result<T, Error>) -> Void) {
+        self.localCGIClient.makeRequest(args) { data, error in
+            let result: Result<T, Error>
+            if let data = data {
+                result = parse(data)
+            } else {
+                result = .failure(error ?? CGIError.emptyResponse)
+            }
+            DispatchQueue.main.async {
+                completion(result)
+            }
+        }
+    }
+
+    private static func parseLiturgicalDays(_ data: Data) -> Result<[LiturgicalDay], Error> {
+        let parser = LiturgicalDayParser(data: data)
+        let (days, error) = parser.parse()
+        if let error = error {
+            return .failure(error)
+        }
+        return .success(days)
+    }
+
+    private static func parseSettings(_ data: Data) -> Result<[SettingsEntry], Error> {
+        let parser = SettingsParser(data: data)
+        let (entries, error) = parser.parse()
+        if let error = error {
+            return .failure(error)
+        }
+        guard let entries = entries else {
+            return .failure(DataSourceError.parseError)
+        }
+        return .success(entries)
+    }
+
+    private static func parsePrayerHTML(_ data: Data) -> Result<String, Error> {
+        guard let response = String(data: data, encoding: .utf8) else {
+            print("Cannot parse UTF-8 string from server")
+            return .failure(DataSourceError.parseError)
+        }
+        return .success(getHTMLBody(response))
     }
     
     var cgiLanguageCode: String {
@@ -319,7 +475,7 @@ class CGIDataSource : BreviarDataSource {
         }
     }
     
-    func getLiturgicalDay(day: Day, forceLocal: Bool, handler: @escaping (LiturgicalDay?, Error?) -> Void) {
+    func getLiturgicalDay(day: Day, policy: DataSourcePolicy, handler: @escaping (LiturgicalDay?, Error?) -> Void) {
         let args = [
             "qt": "pxml",
             "d": day.day.description,
@@ -332,26 +488,20 @@ class CGIDataSource : BreviarDataSource {
             "o3": valueForOption("o3"),
         ]
         
-        self.cgiClient(forceLocal: forceLocal).makeRequest(args) { data, error in
-            if let data = data {
-                let parser = LiturgicalDayParser(data: data)
-                let (days, error) = parser.parse()
-                DispatchQueue.main.async {
-                    if error == nil {
-                        handler(days[0], nil )
-                    } else {
-                        handler(nil, error)
-                    }
+        self.load(args: args, policy: policy, parse: { data -> Result<LiturgicalDay, Error> in
+            switch CGIDataSource.parseLiturgicalDays(data) {
+            case .success(let days):
+                guard let day = days.first else {
+                    return .failure(DataSourceError.emptyResponse)
                 }
-            } else {
-                DispatchQueue.main.async {
-                    handler(nil, error)
-                }
+                return .success(day)
+            case .failure(let error):
+                return .failure(error)
             }
-        }
+        }, handler: handler)
     }
     
-    func getLiturgicalMonth(month: Month, forceLocal: Bool, handler: @escaping (LiturgicalMonth?, Error?) -> Void) {
+    func getLiturgicalMonth(month: Month, policy: DataSourcePolicy, handler: @escaping (LiturgicalMonth?, Error?) -> Void) {
         let args = [
             "qt": "pxml",
             "d": "*",
@@ -364,23 +514,11 @@ class CGIDataSource : BreviarDataSource {
             "o3": valueForOption("o3"),
         ]
 
-        self.cgiClient(forceLocal: forceLocal).makeRequest(args) { data, error in
-            if let data = data {
-                let parser = LiturgicalDayParser(data: data)
-                let (days, error) = parser.parse()
-                DispatchQueue.main.async {
-                    if error == nil {
-                        handler(LiturgicalMonth(month: month, days: days), nil )
-                    } else {
-                        handler(nil, error)
-                    }
-                }
-            } else {
-                DispatchQueue.main.async {
-                    handler(nil, error)
-                }
+        self.load(args: args, policy: policy, parse: { data -> Result<LiturgicalMonth, Error> in
+            return CGIDataSource.parseLiturgicalDays(data).map { days in
+                LiturgicalMonth(month: month, days: days)
             }
-        }
+        }, handler: handler)
     }
     
     let removeFlags = [
@@ -398,7 +536,7 @@ class CGIDataSource : BreviarDataSource {
         return String(option);
     }
     
-    func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], forceLocal: Bool, handler: @escaping (String?, Error?) -> Void) {
+    func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], policy: DataSourcePolicy, handler: @escaping (String?, Error?) -> Void) {
         let d = day.day
         var args = [
             "qt": "pdt",
@@ -424,35 +562,18 @@ class CGIDataSource : BreviarDataSource {
             args[k] = v
         }
         
-        self.cgiClient(forceLocal: forceLocal).makeRequest(args) { data, error in
-            if let data = data {
-                if let response = String(data: data, encoding: .utf8) {
-                    DispatchQueue.main.async {
-                        handler(self.getHTMLBody(response), nil)
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        print("Cannot parse UTF-8 string from server")
-                        handler(nil, DataSourceError.parseError)
-                    }
-                }
-            } else {
-                DispatchQueue.main.async {
-                    handler(nil, error)
-                }
-            }
-        }
+        self.load(args: args, policy: policy, parse: CGIDataSource.parsePrayerHTML, handler: handler)
     }
     
-    func getTTSPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], forceLocal: Bool, handler: @escaping (String?, Error?) -> Void) {
+    func getTTSPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], policy: DataSourcePolicy, handler: @escaping (String?, Error?) -> Void) {
         var ttsOpts = opts
         ttsOpts["of0bf"] = "1"
         ttsOpts["of2rm"] = "0"
         ttsOpts["of0r"] = "0"
-        getPrayerText(day: day, celebration: celebration, prayerType: prayerType, opts: ttsOpts, forceLocal: forceLocal, handler: handler)
+        getPrayerText(day: day, celebration: celebration, prayerType: prayerType, opts: ttsOpts, policy: policy, handler: handler)
     }
     
-    private func getHTMLBody(_ html: String) -> String {
+    private static func getHTMLBody(_ html: String) -> String {
         // Find body start
         var body: String.SubSequence = html[html.startIndex...]
         if let r = html.range(of: "<body") {
@@ -504,30 +625,14 @@ class CGIDataSource : BreviarDataSource {
         return .webLink(url)
     }
     
-    func getSettingsEntries(forceLocal: Bool, handler: @escaping ([SettingsEntry]?, Error?) -> Void) {
+    func getSettingsEntries(policy: DataSourcePolicy, handler: @escaping ([SettingsEntry]?, Error?) -> Void) {
         let args = [
             "qt": "pxml",
             "j": self.cgiLanguageCode,
             "k": self.options?.calendar ?? "",
         ]
         
-        self.cgiClient(forceLocal: forceLocal).makeRequest(args) { data, error in
-            if let data = data {
-                let parser = SettingsParser(data: data)
-                let (entries, error) = parser.parse()
-                DispatchQueue.main.async {
-                    if error == nil {
-                        handler(entries, nil )
-                    } else {
-                        handler(nil, error)
-                    }
-                }
-            } else {
-                DispatchQueue.main.async {
-                    handler(nil, error)
-                }
-            }
-        }
+        self.load(args: args, policy: policy, parse: CGIDataSource.parseSettings, handler: handler)
     }
     
     func getAboutPage(handler: @escaping (String?, Error?) -> Void) {
@@ -537,10 +642,13 @@ class CGIDataSource : BreviarDataSource {
             "p": "0",
             "j": self.cgiLanguageCode,
         ]
-        self.cgiClient(forceLocal: true).makeRequest(args) { data, error in
-            let response = String(data: data!, encoding: .utf8)
-            DispatchQueue.main.async {
-                handler(self.getHTMLBody(response!), nil)
+
+        self.loadLocal(args: args, parse: CGIDataSource.parsePrayerHTML) { result in
+            switch result {
+            case .success(let text):
+                handler(text, nil)
+            case .failure(let error):
+                handler(nil, error)
             }
         }
     }

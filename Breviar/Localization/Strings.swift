@@ -12,6 +12,15 @@ struct S {
     static let loading = LS(en: "Loading...", sk: "Načítavam...", cz: "Načítávání...", hu: "Betöltés...", isl: "Hleð...")
     static let retryFromServer = LS(en: "Retry from server", sk: "Skúsiť znova načítať zo servera", cz: "Opakovat akci ze serveru", hu: "Újrapróbálás szerverről", isl: "Reyna aftur frá netþjóni")
     static let retryLocally = LS(en: "Try offline (locally)", sk: "Skúsiť offline (lokálne)", cz: "Zkusit offline (lokálně)", hu: "Újrapróbálás helyben", isl: "Reyna án nettengingar")
+
+    // Offline mode
+    static let offlineMode = LS(en: "Offline mode", sk: "Režim offline", cz: "Režim offline", hu: "Offline mód", isl: "Ónettengdur hamur")
+    static let offlineExplanation = LS(en: "The texts are shown from the copy built into the app, so they may slightly differ from the texts on the breviary website.", sk: "Texty sa zobrazujú z kópie zabudovanej v aplikácii, preto sa môžu mierne líšiť od textov na stránke breviára.", cz: "Texty se zobrazují z kopie vestavěné v aplikaci, proto se mohou mírně lišit od textů na stránkách breviáře.", hu: "A szövegek az alkalmazásba beépített másolatból jelennek meg, ezért kissé eltérhetnek a zsolozsma honlapján olvasható szövegektől.", isl: "Textarnir eru sýndir úr afritinu sem fylgir forritinu og geta því verið lítillega frábrugðnir textunum á vef tíðabænanna.")
+    static let offlineNoConnection = LS(en: "No internet connection.", sk: "Žiadne internetové pripojenie.", cz: "Není k dispozici připojení k internetu.", hu: "Nincs internetkapcsolat.", isl: "Engin nettenging.")
+    static let offlineWifiRequired = LS(en: "Not connected to Wi-Fi.", sk: "Zariadenie nie je pripojené k sieti Wi-Fi.", cz: "Zařízení není připojeno k síti Wi-Fi.", hu: "Nincs Wi-Fi kapcsolat.", isl: "Ekki tengt við Wi-Fi.")
+    static let offlineServerUnreachable = LS(en: "The server could not be reached.", sk: "Server je nedostupný.", cz: "Server je nedostupný.", hu: "A kiszolgáló nem érhető el.", isl: "Ekki náðist samband við netþjóninn.")
+    static let loadFromInternet = LS(en: "Load from the internet", sk: "Načítať z internetu", cz: "Načíst z internetu", hu: "Betöltés az internetről", isl: "Sækja af netinu")
+    static let downloadOverCellular = LS(en: "Download over cellular", sk: "Stiahnuť cez mobilné dáta", cz: "Stáhnout přes mobilní data", hu: "Letöltés mobilhálózaton", isl: "Sækja um farsímagögn")
     
     // Prayers
     static let invitatory = LSLiturgical(sk: "Invitatórium", cz: "Uvedení do první modlitby dne", hu: "Imádságra hívás", isl: "Inngöngusöngur", lat: "Invitatorium")
