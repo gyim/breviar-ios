@@ -90,6 +90,125 @@ struct DataSourceOptions {
     }
 }
 
+// MARK: - Bible reference links
+
+enum BibleLinkMode: String, CaseIterable {
+    case off = "off"
+    case website = "website"
+    case bibleCom = "bibleCom"
+
+    static let userDefaultsKey = "bibleLinkMode"
+
+    // Bits of the CGI option "o0" that control Bible references
+    static let referencesFlag = 2
+    static let bibleComFlag = 4096
+
+    var localizedDescription: String {
+        switch self {
+        case .off:
+            return S.disabled.S
+        case .website:
+            return currentLiturgicalLanguage.bibleWebsiteHost ?? S.disabled.S
+        case .bibleCom:
+            return "bible.com"
+        }
+    }
+
+    // Force parameters that make the CGI generate the matching links
+    var cgiOptions: [String: String] {
+        switch self {
+        case .off:
+            return ["of0r": "0"]
+        case .website:
+            return ["of0r": "1", "of0bc": "0"]
+        case .bibleCom:
+            return ["of0r": "1", "of0bc": "1"]
+        }
+    }
+
+    // What the user chose, regardless of whether the current language supports it. Installations
+    // that predate this setting are migrated from the CGI option bits they used before.
+    static var preference: BibleLinkMode {
+        return storedMode() ?? migratedMode(for: currentLanguage())
+    }
+
+    // The mode in effect for the selected breviary language
+    static var current: BibleLinkMode {
+        let language = currentLanguage()
+        let mode = preference
+        return language.availableBibleLinkModes.contains(mode) ? mode : language.defaultBibleLinkMode
+    }
+
+    static func save(_ mode: BibleLinkMode) {
+        UserDefaults.standard.setValue(mode.rawValue, forKey: userDefaultsKey)
+    }
+
+    // Freezes the migrated value, so that it cannot drift once "o0" is rewritten
+    static func savePreferenceIfMissing() {
+        if storedMode() == nil {
+            save(preference)
+        }
+    }
+
+    private static func currentLanguage() -> Language {
+        return DataSourceOptions.savedOptions?.language ?? currentLiturgicalLanguage
+    }
+
+    private static func storedMode() -> BibleLinkMode? {
+        guard let s = UserDefaults.standard.string(forKey: userDefaultsKey) else { return nil }
+        return BibleLinkMode(rawValue: s)
+    }
+
+    private static func migratedMode(for language: Language) -> BibleLinkMode {
+        guard let o0 = UserDefaults.standard.object(forKey: "o0") as? Int else {
+            return language.defaultBibleLinkMode
+        }
+        if o0 & referencesFlag == 0 {
+            return .off
+        }
+        return o0 & bibleComFlag != 0 ? .bibleCom : .website
+    }
+}
+
+extension Language {
+    // Host of the national Bible website the CGI links to, or nil if it has none for this
+    // language. Mirrors bible_references_default[] in breviar-cgi/source/bible.h: Czech has no
+    // URL configured there, and the Latin one (vatican.va) no longer resolves.
+    var bibleWebsiteHost: String? {
+        switch self {
+        case .slovak:
+            return "dkc.kbs.sk"
+        case .hungarian:
+            return "szentiras.eu"
+        default:
+            return nil
+        }
+    }
+
+    // Icelandic has no book abbreviations in the CGI, so bible.com references cannot be built
+    var supportsBibleCom: Bool {
+        return self != .icelandic
+    }
+
+    var availableBibleLinkModes: [BibleLinkMode] {
+        var modes: [BibleLinkMode] = [.off]
+        if bibleWebsiteHost != nil {
+            modes.append(.website)
+        }
+        if supportsBibleCom {
+            modes.append(.bibleCom)
+        }
+        return modes
+    }
+
+    var defaultBibleLinkMode: BibleLinkMode {
+        if bibleWebsiteHost != nil {
+            return .website
+        }
+        return supportsBibleCom ? .bibleCom : .off
+    }
+}
+
 // MARK: - Fullscreen mode options
 
 enum FullscreenMode: String, CaseIterable {
@@ -116,11 +235,26 @@ class PrayerScreenSettings: ObservableObject {
         }
     }
     
+    // Only explicit user choices are stored: a language that does not support the chosen mode
+    // falls back to its default without overwriting the preference
+    @Published private(set) var bibleLinkMode = BibleLinkMode.current
+
+    func setBibleLinkMode(_ mode: BibleLinkMode) {
+        BibleLinkMode.save(mode)
+        self.bibleLinkMode = mode
+    }
+
+    func refreshBibleLinkMode() {
+        self.bibleLinkMode = BibleLinkMode.current
+    }
+
     init() {
         if let fullscreenModeString = UserDefaults.standard.string(forKey: "prayerScreenSettings.fullscreenMode"),
            let fullscreenMode = FullscreenMode(rawValue: fullscreenModeString) {
             self.fullscreenMode = fullscreenMode
         }
+
+        BibleLinkMode.savePreferenceIfMissing()
     }
 }
 

@@ -70,6 +70,7 @@ struct S {
     static let oneTap = LS(en: "1 tap", sk: "1 klik", cz: "1 klik", hu: "1 klikk", isl: "1 snerting")
     static let doubleTap = LS(en: "Double tap", sk: "Dvojklik", cz: "Dvojklik", hu: "Dupla klikk", isl: "Tvísnerting")
     static let disabled = LS(en: "Disabled", sk: "Vypnuté", cz: "Vypnuto", hu: "Kikapcsolva", isl: "Slökkt")
+    static let bibleReferences = LS(en: "Bible references", sk: "Biblické odkazy", cz: "Biblické odkazy", hu: "Bibliai hivatkozások", isl: "Biblíutenglar")
     
     // Errors
     static let errNetworkError = LS(en: "Network error", sk: "Chyba siete", cz: "Chyba sítě", hu: "Hálózati hiba", isl: "Netvilla")

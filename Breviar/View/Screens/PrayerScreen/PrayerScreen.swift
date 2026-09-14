@@ -7,6 +7,26 @@
 
 import SwiftUI
 import WebKit
+import SafariServices
+
+struct IdentifiableURL: Identifiable {
+    var url: URL
+
+    var id: String {
+        return url.absoluteString
+    }
+}
+
+struct SafariView: UIViewControllerRepresentable {
+    var url: URL
+
+    func makeUIViewController(context: Context) -> SFSafariViewController {
+        return SFSafariViewController(url: url)
+    }
+
+    func updateUIViewController(_ controller: SFSafariViewController, context: Context) {
+    }
+}
 
 struct PrayerScreen: View {
     @EnvironmentObject var model: BreviarModel
@@ -65,6 +85,10 @@ struct PrayerScreen: View {
         .sheet(isPresented: $playbackSheetShown, content: {
             PlaybackScreen(playbackSheetShown: $playbackSheetShown, prayer: prayer)
                 .environmentObject(model)
+        })
+        .sheet(item: $model.externalLink, content: { link in
+            SafariView(url: link.url)
+                .ignoresSafeArea()
         })
         .onScreenshotAction { action in
             switch action {

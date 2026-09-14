@@ -53,6 +53,8 @@ class BreviarModel : NSObject, ObservableObject {
     
     @Published var navigationTrigger: NavigationTarget? = nil
     @Published var pendingNavigation: NavigationTarget? = nil
+
+    @Published var externalLink: IdentifiableURL? = nil
     
     init(dataSource: BreviarDataSource) {
         let now = Date()
@@ -69,7 +71,7 @@ class BreviarModel : NSObject, ObservableObject {
         super.init()
         
         // Observe liturgical option changes in UserDefaults
-        ["o0", "o1", "o3"].forEach { key in
+        ["o0", "o1", "o3", BibleLinkMode.userDefaultsKey].forEach { key in
             UserDefaults.standard.addObserver(self, forKeyPath: key, options: .new, context: nil)
         }
     }
@@ -83,6 +85,9 @@ class BreviarModel : NSObject, ObservableObject {
         // Set both liturgical and UI languages
         currentLiturgicalLanguage = options.language
         currentUILanguage = options.uiLanguage
+
+        // The available modes depend on the language, so re-validate the stored one
+        self.prayerScreenSettings.refreshBibleLinkMode()
         
         self.clearCalendarSettings()
         self.reload()
@@ -298,7 +303,11 @@ class BreviarModel : NSObject, ObservableObject {
         case .prayerTextLink(let opts):
             self.savePrayerOptions(opts)
             self.loadPrayer(prayer)
-        default:
+        case .externalAppLink(let url):
+            UIApplication.shared.open(url)
+        case .webLink(let url):
+            self.externalLink = IdentifiableURL(url: url)
+        case .unknownLink:
             break
         }
     }
@@ -402,7 +411,7 @@ class BreviarModel : NSObject, ObservableObject {
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if let keyPath = keyPath, ["o0", "o1", "o3"].contains(keyPath) {
+        if let keyPath = keyPath, ["o0", "o1", "o3", BibleLinkMode.userDefaultsKey].contains(keyPath) {
             print("observed settings change: \(keyPath)")
             // Only set the deferred reload flag if we're not in a prayer link context.
             // This prevents the MainScreen.onAppear handler to be triggered incorrectly,
@@ -414,7 +423,7 @@ class BreviarModel : NSObject, ObservableObject {
     }
     
     deinit {
-        ["o0", "o1", "o3"].forEach { key in
+        ["o0", "o1", "o3", BibleLinkMode.userDefaultsKey].forEach { key in
             UserDefaults.standard.removeObserver(self, forKeyPath: key)
         }
     }

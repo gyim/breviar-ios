@@ -95,7 +95,41 @@ struct PrayerScreenSettingsView : View {
                 label: {
                     SettingsStringLabel(name: S.fullscreenMode.S, value: prayerScreenSettings.fullscreenMode.localizedDescription)
                 })
+
+            if currentLiturgicalLanguage.availableBibleLinkModes.count > 1 {
+                NavigationLink(
+                    destination: BibleLinkModeSettingsView(prayerScreenSettings: prayerScreenSettings),
+                    label: {
+                        SettingsStringLabel(name: S.bibleReferences.S, value: prayerScreenSettings.bibleLinkMode.localizedDescription)
+                    })
+            }
         }
+    }
+}
+
+struct BibleLinkModeSettingsView : View {
+    @ObservedObject var prayerScreenSettings: PrayerScreenSettings
+
+    var body: some View {
+        List {
+            ForEach(currentLiturgicalLanguage.availableBibleLinkModes, id: \.rawValue) { mode in
+                let checked = (mode == prayerScreenSettings.bibleLinkMode)
+                Button(action: {
+                    prayerScreenSettings.setBibleLinkMode(mode)
+                }) {
+                    HStack {
+                        Text(mode.localizedDescription)
+                            .foregroundColor(.primary)
+                        Spacer()
+                        if checked {
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.accentColor)
+                        }
+                    }
+                }
+            }
+        }
+        .navigationTitle(S.bibleReferences.S)
     }
 }
 

@@ -36,6 +36,8 @@ enum DataSourceError: LocalizedError {
 enum BreviarLink {
     case unknownLink
     case prayerTextLink([String: String])
+    case webLink(URL)
+    case externalAppLink(URL)
 }
 
 class LiturgicalDayParser : NSObject, XMLParserDelegate {
@@ -163,6 +165,8 @@ class SettingsParser : NSObject, XMLParserDelegate {
             "262144":  true, // navigation arrows on the left
             "524288":  true, // navigation arrows
             "1048576": true, // show only navigation arrows pointing down
+            "2":       true, // Bible references (handled by BibleLinkMode)
+            "4096":    true, // Bible references on bible.com (handled by BibleLinkMode)
         ]
     ]
     var entry: SettingsEntry?
@@ -382,7 +386,9 @@ class CGIDataSource : BreviarDataSource {
     let removeFlags = [
         "o0": 256    | // only text for TTS
               1024   | // show navigation lines (on right side)
-              524288   // navigation arrows
+              524288 | // navigation arrows
+              BibleLinkMode.referencesFlag |
+              BibleLinkMode.bibleComFlag
     ]
     func valueForOption(_ key: String) -> String {
         var option = UserDefaults.standard.integer(forKey: key);
@@ -411,6 +417,9 @@ class CGIDataSource : BreviarDataSource {
             "j": self.cgiLanguageCode,
             "k": self.options?.calendar ?? "",
         ]
+        for (k, v) in BibleLinkMode.current.cgiOptions {
+            args[k] = v
+        }
         for (k, v) in opts {
             args[k] = v
         }
@@ -439,6 +448,7 @@ class CGIDataSource : BreviarDataSource {
         var ttsOpts = opts
         ttsOpts["of0bf"] = "1"
         ttsOpts["of2rm"] = "0"
+        ttsOpts["of0r"] = "0"
         getPrayerText(day: day, celebration: celebration, prayerType: prayerType, opts: ttsOpts, forceLocal: forceLocal, handler: handler)
     }
     
@@ -464,7 +474,7 @@ class CGIDataSource : BreviarDataSource {
     func parsePrayerLink(url: URL) -> BreviarLink {
         let s = url.absoluteString
         if !s.contains("l.cgi?") {
-            return .unknownLink
+            return parseExternalLink(url: url)
         }
         guard let query = url.query else { return .unknownLink }
         
@@ -477,6 +487,21 @@ class CGIDataSource : BreviarDataSource {
         }
         
         return .prayerTextLink(opts)
+    }
+
+    private func parseExternalLink(url: URL) -> BreviarLink {
+        // Relative hrefs (such as Bible references for languages where the CGI has no website
+        // configured) resolve against the bundle, so only absolute web links can be opened
+        guard let scheme = url.scheme?.lowercased(), scheme == "http" || scheme == "https" else {
+            return .unknownLink
+        }
+
+        // bible.com links have to leave the app so that iOS can hand them to the Bible app
+        if let host = url.host?.lowercased(), host == "bible.com" || host.hasSuffix(".bible.com") {
+            return .externalAppLink(url)
+        }
+
+        return .webLink(url)
     }
     
     func getSettingsEntries(forceLocal: Bool, handler: @escaping ([SettingsEntry]?, Error?) -> Void) {
