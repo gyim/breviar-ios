@@ -81,11 +81,11 @@ enum Language : String {
     var availableCalendars: [String] {
         switch self {
         case .czech:
-            return ["cz", "czop", "opraem", "ofmcap", "czsdb", "czofm", "czsj", "czocd", "czofmconv"]
+            return ["cz", "czop", "opraem", "ofmcap", "czsdb", "czofm", "czsj", "czocd", "czofmconv", "czocarm"]
         case .hungarian:
-            return ["hu", "huofm", "husvd", "husj"]
+            return ["hu", "huofm", "husvd", "husj", "husdb", "huschp"]
         case .slovak:
-            return ["sk", "cssr", "svd", "ofm", "sdb", "op", "sj", "cm", "ocd", "csa", "osu", "skopraem"]
+            return ["sk", "cssr", "svd", "ofm", "sdb", "op", "sj", "cm", "ocd", "csa", "osu", "skopraem", "schp"]
         case .icelandic:
             return ["is"]
         case .latin:
