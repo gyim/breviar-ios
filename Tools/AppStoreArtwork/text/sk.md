@@ -32,6 +32,7 @@ Všetky texty vznikajú priamo vo vašom zariadení, na modlitbu teda nepotrebuj
 POHODLNÉ ČÍTANIE
 • Svetlý a tmavý režim, nastaviteľná veľkosť textu, výber písma a tučné písmo
 • Čítanie na celej obrazovke jedným klepnutím
+• Biblické odkazy otvoria úryvok jedným klepnutím, na stránke dkc.kbs.sk alebo na bible.com
 • Hlasové čítanie: nechajte si liturgiu hodín prečítať vlastným tempom, s ovládaním na uzamknutej obrazovke a v aute
 
 PRE KAŽDODENNÉ POUŽÍVANIE
@@ -58,6 +59,7 @@ breviarium,modlitba,katolícky,žalmy,vešpery,ranné,chvály,kompletórium,lati
 ## Novinky (4000)
 
 • Widgety: slávenia a liturgické farby dnešného dňa a nasledujúcich dní na ploche a na uzamknutej obrazovke
+• Biblické odkazy v textoch otvoria úryvok priamo v aplikácii, na stránke dkc.kbs.sk alebo na bible.com; vyberte v Nastavenia › Biblické odkazy
 • Nová ikona aplikácie a navigačný panel pre iOS 26
 • Hlasové čítanie hrá aj so zamknutou obrazovkou a funguje s autorádiom
 • Obrazovka s modlitbou sa už počas čítania neuzamkne

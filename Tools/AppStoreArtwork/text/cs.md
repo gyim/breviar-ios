@@ -32,6 +32,7 @@ Všechny texty vznikají přímo ve vašem zařízení, k modlitbě tedy nepotř
 POHODLNÉ ČTENÍ
 • Světlý a tmavý režim, nastavitelná velikost textu, výběr písma a tučné písmo
 • Čtení na celé obrazovce jedním klepnutím
+• Biblické odkazy otevřou úryvek jedním klepnutím na bible.com
 • Hlasové čtení: nechte si liturgii hodin předčítat vlastním tempem, s ovládáním na zamčené obrazovce a v autě
 
 PRO KAŽDODENNÍ POUŽÍVÁNÍ
@@ -58,6 +59,7 @@ liturgie,hodin,breviarium,katolický,žalmy,nešpory,ranní,chvály,kompletář,
 ## Novinky (4000)
 
 • Widgety: slavení a liturgické barvy dnešního dne a následujících dnů na ploše a na zamčené obrazovce
+• Biblické odkazy v textech otevřou úryvek přímo v aplikaci na bible.com; zapnout lze v Nastavení › Biblické odkazy
 • Nová ikona aplikace a navigační panel pro iOS 26
 • Hlasové čtení hraje i se zamčenou obrazovkou a funguje s autorádiem
 • Obrazovka s modlitbou se už během čtení nezamkne

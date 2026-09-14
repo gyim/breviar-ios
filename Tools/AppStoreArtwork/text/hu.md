@@ -32,6 +32,7 @@ Minden szöveg a készüléken készül, így az imádkozáshoz nincs szükség 
 KÉNYELMES OLVASÁS
 • Világos és sötét mód, állítható betűméret, választható betűtípusok és félkövér szöveg
 • Teljes képernyős olvasás egy érintéssel
+• A bibliai hivatkozások egy érintéssel megnyitják a szentírási részt, a szentiras.eu oldalon vagy a bible.com-on
 • Felolvasás: hallgassa a zsolozsmát saját tempójában, vezérléssel a lezárt képernyőn és az autóban
 
 MINDENNAPI HASZNÁLATRA
@@ -58,6 +59,7 @@ breviárium,zsolozsmáskönyv,imádság,katolikus,zsoltárok,reggeli,dicséret,v
 ## Újdonságok (4000)
 
 • Widgetek: a mai és a következő napok ünnepei és liturgikus színei a kezdőképernyőn és a lezárt képernyőn
+• A bibliai hivatkozások megnyitják a szentírási részt az alkalmazásban, a szentiras.eu oldalon vagy a bible.com-on; a Beállítások › Bibliai hivatkozások alatt választható
 • Új alkalmazásikon és navigációs sáv iOS 26-ra
 • A felolvasás lezárt képernyővel is folytatódik, és működik az autós hangrendszerekkel
 • Az imaóra képernyője olvasás közben már nem zárolja a kijelzőt

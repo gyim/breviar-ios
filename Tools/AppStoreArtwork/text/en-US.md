@@ -35,6 +35,7 @@ All texts are generated on your device, so no internet connection is needed to p
 COMFORTABLE READING
 • Light and dark mode, adjustable text size, a choice of fonts and bold text
 • Full-screen reading with a single tap
+• Bible references open the passage with one tap, on bible.com or on the Bible website of your language where available
 • Text-to-speech: have the Hours read aloud at your own pace, with the controls on the Lock Screen and in your car
 
 MADE FOR DAILY USE
@@ -61,6 +62,7 @@ breviár,breviář,zsolozsma,tíðabænabók,breviarium,slovak,czech,hungarian,i
 ## What's New (4000)
 
 • Widgets: see the celebrations and liturgical colours of today and the coming days on your Home Screen and Lock Screen
+• Bible references in the texts open the passage right in the app, on the Bible website of your language or on bible.com; choose under Settings › Bible references
 • New app icon and navigation bar for iOS 26
 • Text-to-speech keeps playing with the screen locked and works with car audio systems
 • The prayer screen no longer locks the screen while you read
