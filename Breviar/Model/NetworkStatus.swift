@@ -33,8 +33,10 @@ enum NetworkIndicatorState: Equatable {
 enum NetworkConstants {
     static let serverHost = "lh.kbs.sk"
     /// Wall clock budget for one load: first attempt plus all retries.
-    static let onlineAttemptBudget: TimeInterval = 2.0
-    /// Delay before the first retry, doubled after each failed attempt.
+    static let onlineAttemptBudget: TimeInterval = 5.0
+    /// Delay before the first retry, doubled after each failed attempt. With the budget
+    /// above, an instantly failing request is attempted 5 times, waiting 0.25, 0.5, 1 and
+    /// 2 seconds in between; a hanging request gets a single attempt and the whole budget.
     static let initialRetryDelay: TimeInterval = 0.25
     /// No new attempt is started with less time than this left from the budget.
     static let minimumAttemptTime: TimeInterval = 0.3
