@@ -1,0 +1,521 @@
+{
+  "version": "2.2",
+  "style": {
+    "background": [
+      "#F6F3EC",
+      "#ECE7DD"
+    ],
+    "title": "#1C1C1E",
+    "subtitle": "#6E6A63",
+    "accent": "#833F40",
+    "chipFill": "#FFFFFF",
+    "chipBorder": "#D9D3C7",
+    "wallpaper": [
+      "#5B6B7C",
+      "#2F3A47"
+    ]
+  },
+  "devices": {
+    "iphone-6.9": {
+      "canvas": [
+        1320,
+        2868
+      ],
+      "capture": [
+        1320,
+        2868
+      ],
+      "margin": 120,
+      "bottomMargin": 100,
+      "captionHeight": 520,
+      "titleSize": 104,
+      "subtitleSize": 54,
+      "screenCornerRadius": 186,
+      "bezelThickness": 24,
+      "bezel": "iphone-17-pro-max.png",
+      "widgetWidths": {
+        "small": 0.386,
+        "medium": 0.827,
+        "large": 0.827
+      },
+      "simDeviceType": "iPhone 17 Pro Max",
+      "simName": "Breviar-ShotsPhone"
+    },
+    "ipad-13": {
+      "canvas": [
+        2064,
+        2752
+      ],
+      "capture": [
+        2064,
+        2752
+      ],
+      "margin": 140,
+      "bottomMargin": 110,
+      "captionHeight": 520,
+      "titleSize": 112,
+      "subtitleSize": 58,
+      "screenCornerRadius": 64,
+      "bezelThickness": 56,
+      "bezel": "ipad-pro-13.png",
+      "widgetWidths": {
+        "small": 0.19,
+        "medium": 0.4,
+        "large": 0.4
+      },
+      "simDeviceType": "iPad Pro 13-inch (M4)",
+      "simName": "Breviar-ShotsPad"
+    }
+  },
+  "locales": {
+    "en-US": {
+      "launchArgs": {
+        "j": "la",
+        "ui_lang": "en",
+        "k": "la"
+      },
+      "widgetScenario": "la-jun22"
+    },
+    "sk": {
+      "launchArgs": {
+        "j": "sk",
+        "ui_lang": "sk",
+        "k": "sk"
+      },
+      "widgetScenario": "sk-sep17"
+    },
+    "cs": {
+      "launchArgs": {
+        "j": "cz",
+        "ui_lang": "cz",
+        "k": "cz"
+      },
+      "widgetScenario": "cz-sep17"
+    },
+    "hu": {
+      "launchArgs": {
+        "j": "hu",
+        "ui_lang": "hu",
+        "k": "hu"
+      },
+      "widgetScenario": "hu-jun22"
+    }
+  },
+  "defaults": {
+    "launchArgs": {
+      "screenshotMode": "1",
+      "ds": "alwaysCGI",
+      "colorScheme": "light",
+      "textOptions.fontName": "Georgia",
+      "textOptions.fontSize": "100",
+      "textOptions.isBold": "NO",
+      "prayerScreenSettings.fullscreenMode": "singleTap"
+    },
+    "settleSeconds": 1.0
+  },
+  "shots": [
+    {
+      "id": "01-hero",
+      "layout": {
+        "type": "hero",
+        "device": "main",
+        "cards": [
+          "card-sk",
+          "card-cs",
+          "card-hu",
+          "card-is",
+          "card-la"
+        ],
+        "cardLabels": [
+          "🇸🇰",
+          "🇨🇿",
+          "🇭🇺",
+          "🇮🇸",
+          "✝︎"
+        ],
+        "deviceWidthFraction": 0.84
+      },
+      "caption": {
+        "en-US": {
+          "title": "Liturgy of the Hours\nin five languages",
+          "subtitle": "Latin · Slovak · Czech · Hungarian · Icelandic"
+        },
+        "sk": {
+          "title": "Liturgia hodín\nv piatich jazykoch",
+          "subtitle": "slovensky · česky · maďarsky · islandsky · latinsky"
+        },
+        "cs": {
+          "title": "Denní modlitba církve\nv pěti jazycích",
+          "subtitle": "česky · slovensky · maďarsky · islandsky · latinsky"
+        },
+        "hu": {
+          "title": "Az imaórák liturgiája\nöt nyelven",
+          "subtitle": "magyar · szlovák · cseh · izlandi · latin"
+        }
+      },
+      "captures": {
+        "main": {
+          "url": "breviar://2026-09-14"
+        },
+        "card-sk": {
+          "url": "breviar://2026-09-14",
+          "launchArgs": {
+            "j": "sk",
+            "ui_lang": "sk",
+            "k": "sk"
+          },
+          "cropMode": "celebrationCard"
+        },
+        "card-cs": {
+          "url": "breviar://2026-09-14",
+          "launchArgs": {
+            "j": "cz",
+            "ui_lang": "cz",
+            "k": "cz"
+          },
+          "cropMode": "celebrationCard"
+        },
+        "card-hu": {
+          "url": "breviar://2026-09-14",
+          "launchArgs": {
+            "j": "hu",
+            "ui_lang": "hu",
+            "k": "hu"
+          },
+          "cropMode": "celebrationCard"
+        },
+        "card-is": {
+          "url": "breviar://2026-09-14",
+          "launchArgs": {
+            "j": "is",
+            "ui_lang": "is",
+            "k": "is"
+          },
+          "cropMode": "celebrationCard"
+        },
+        "card-la": {
+          "url": "breviar://2026-09-14",
+          "launchArgs": {
+            "j": "la",
+            "ui_lang": "en",
+            "k": "la"
+          },
+          "cropMode": "celebrationCard"
+        }
+      }
+    },
+    {
+      "id": "01b-hero-chips",
+      "layout": {
+        "type": "singleChips",
+        "device": "main",
+        "chips": [
+          {
+            "emoji": "🇸🇰",
+            "text": "Breviár"
+          },
+          {
+            "emoji": "🇨🇿",
+            "text": "Breviář"
+          },
+          {
+            "emoji": "🇭🇺",
+            "text": "Zsolozsma"
+          },
+          {
+            "emoji": "🇮🇸",
+            "text": "Tíðabænabók"
+          },
+          {
+            "emoji": "✝︎",
+            "text": "Breviarium"
+          }
+        ]
+      },
+      "caption": {
+        "en-US": {
+          "title": "Liturgy of the Hours\nin five languages",
+          "subtitle": "Latin · Slovak · Czech · Hungarian · Icelandic"
+        },
+        "sk": {
+          "title": "Liturgia hodín\nv piatich jazykoch",
+          "subtitle": "slovensky · česky · maďarsky · islandsky · latinsky"
+        },
+        "cs": {
+          "title": "Denní modlitba církve\nv pěti jazycích",
+          "subtitle": "česky · slovensky · maďarsky · islandsky · latinsky"
+        },
+        "hu": {
+          "title": "Az imaórák liturgiája\nöt nyelven",
+          "subtitle": "magyar · szlovák · cseh · izlandi · latin"
+        }
+      },
+      "captures": {
+        "main": {
+          "url": "breviar://2026-09-14"
+        }
+      }
+    },
+    {
+      "id": "02-prayer",
+      "layout": {
+        "type": "splitLightDark",
+        "left": "light",
+        "right": "dark",
+        "seam": 4
+      },
+      "caption": {
+        "en-US": {
+          "title": "Clear text,\nday and night",
+          "subtitle": "Light or dark mode, full screen with one tap"
+        },
+        "sk": {
+          "title": "Čitateľný text\nvo dne i v noci",
+          "subtitle": "Svetlý alebo tmavý režim, celá obrazovka jedným klepnutím"
+        },
+        "cs": {
+          "title": "Čitelný text\nve dne i v noci",
+          "subtitle": "Světlý nebo tmavý režim, celá obrazovka jedním klepnutím"
+        },
+        "hu": {
+          "title": "Jól olvasható szöveg\nnappal és éjjel",
+          "subtitle": "Világos vagy sötét mód, teljes képernyő egy érintéssel"
+        }
+      },
+      "captures": {
+        "light": {
+          "url": "breviar://2026-09-20/morningprayer",
+          "appearance": "light",
+          "launchArgs": {
+            "colorScheme": "light"
+          },
+          "actions": [
+            "scroll:0.26"
+          ]
+        },
+        "dark": {
+          "url": "breviar://2026-09-20/morningprayer",
+          "appearance": "dark",
+          "launchArgs": {
+            "colorScheme": "dark"
+          },
+          "actions": [
+            "scroll:0.26"
+          ]
+        }
+      }
+    },
+    {
+      "id": "03-textoptions",
+      "layout": {
+        "type": "single",
+        "device": "main"
+      },
+      "caption": {
+        "en-US": {
+          "title": "Your font,\nyour text size",
+          "subtitle": "Georgia, Palatino, Helvetica and more"
+        },
+        "sk": {
+          "title": "Vaše písmo,\nvaša veľkosť textu",
+          "subtitle": "Georgia, Palatino, Helvetica a ďalšie"
+        },
+        "cs": {
+          "title": "Vaše písmo,\nvaše velikost textu",
+          "subtitle": "Georgia, Palatino, Helvetica a další"
+        },
+        "hu": {
+          "title": "Saját betűtípus,\nsaját betűméret",
+          "subtitle": "Georgia, Palatino, Helvetica és mások"
+        }
+      },
+      "captures": {
+        "main": {
+          "url": "breviar://2026-09-20/morningprayer",
+          "launchArgs": {
+            "textOptions.fontName": "Palatino-Roman",
+            "textOptions.fontSize": "130"
+          },
+          "actions": [
+            "textOptions"
+          ]
+        }
+      }
+    },
+    {
+      "id": "04-playback",
+      "layout": {
+        "type": "single",
+        "device": "main"
+      },
+      "caption": {
+        "en-US": {
+          "title": "Listen.\nThe Hours read aloud.",
+          "subtitle": "Adjustable speed, keeps playing with the screen locked"
+        },
+        "sk": {
+          "title": "Počúvajte.\nLiturgia hodín nahlas.",
+          "subtitle": "Nastaviteľná rýchlosť, hrá aj so zamknutou obrazovkou"
+        },
+        "cs": {
+          "title": "Poslouchejte.\nModlitba nahlas.",
+          "subtitle": "Nastavitelná rychlost, hraje i se zamčenou obrazovkou"
+        },
+        "hu": {
+          "title": "Hallgassa.\nA zsolozsma felolvasva.",
+          "subtitle": "Állítható sebesség, lezárt képernyővel is szól"
+        }
+      },
+      "captures": {
+        "main": {
+          "url": "breviar://2026-11-01/eveningprayer",
+          "actions": [
+            "playback"
+          ]
+        }
+      }
+    },
+    {
+      "id": "05-celebrations",
+      "layout": {
+        "type": "single",
+        "device": "main"
+      },
+      "caption": {
+        "en-US": {
+          "title": "Every celebration\nof the day",
+          "subtitle": "National and diocesan calendars included"
+        },
+        "sk": {
+          "title": "Všetky slávenia\ndňa",
+          "subtitle": "Vrátane národného a diecéznych kalendárov"
+        },
+        "cs": {
+          "title": "Všechny slavnosti\na památky dne",
+          "subtitle": "Včetně národního a diecézních kalendářů"
+        },
+        "hu": {
+          "title": "A nap minden\nünnepe és emléknapja",
+          "subtitle": "Nemzeti és egyházmegyei naptárakkal"
+        }
+      },
+      "captures": {
+        "main": {
+          "url": "breviar://2026-06-22"
+        }
+      }
+    },
+    {
+      "id": "06-widgets",
+      "layout": {
+        "type": "widgetHome",
+        "widgets": [
+          "medium",
+          "small"
+        ]
+      },
+      "caption": {
+        "en-US": {
+          "title": "The week's celebrations\non your Home Screen",
+          "subtitle": "New: widgets with liturgical colours"
+        },
+        "sk": {
+          "title": "Slávenia týždňa\nna ploche",
+          "subtitle": "Novinka: widgety s liturgickými farbami"
+        },
+        "cs": {
+          "title": "Slavení týdne\nna ploše",
+          "subtitle": "Novinka: widgety s liturgickými barvami"
+        },
+        "hu": {
+          "title": "A hét ünnepei\na kezdőképernyőn",
+          "subtitle": "Új: widgetek liturgikus színekkel"
+        }
+      },
+      "widgets": {
+        "medium": "medium-{widgetScenario}-light",
+        "small": "small-{widgetScenario}-light"
+      }
+    },
+    {
+      "id": "07-settings",
+      "layout": {
+        "type": "twoOffset",
+        "front": "front",
+        "back": "back",
+        "scale": 0.72
+      },
+      "caption": {
+        "en-US": {
+          "title": "Options for those\nwho pray it every day",
+          "subtitle": "Psalter variants, commons, rubrics, proper calendars"
+        },
+        "sk": {
+          "title": "Možnosti pre tých,\nktorí sa modlia denne",
+          "subtitle": "Varianty psalmov, spoločné časti, rubriky, vlastné kalendáre"
+        },
+        "cs": {
+          "title": "Možnosti pro ty,\nkdo se modlí denně",
+          "subtitle": "Varianty žaltáře, společné texty, rubriky, vlastní kalendáře"
+        },
+        "hu": {
+          "title": "Beállítások azoknak,\nakik naponta imádkozzák",
+          "subtitle": "Zsoltárváltozatok, közös részek, rubrikák, saját naptárak"
+        }
+      },
+      "captures": {
+        "back": {
+          "url": "breviar://2026-09-14",
+          "actions": [
+            "settings"
+          ]
+        },
+        "front": {
+          "url": "breviar://2026-09-14",
+          "actions": [
+            "settings",
+            "settingsFlagSet"
+          ]
+        }
+      }
+    },
+    {
+      "id": "08-offline",
+      "layout": {
+        "type": "single",
+        "device": "main",
+        "badgeSymbol": "airplane"
+      },
+      "caption": {
+        "en-US": {
+          "title": "Works offline.\nAny day of the year.",
+          "subtitle": "All texts are generated on your device",
+          "badge": "Offline"
+        },
+        "sk": {
+          "title": "Funguje offline.\nKtorýkoľvek deň v roku.",
+          "subtitle": "Všetky texty vznikajú priamo v zariadení",
+          "badge": "Offline"
+        },
+        "cs": {
+          "title": "Funguje offline.\nKterýkoli den v roce.",
+          "subtitle": "Všechny texty vznikají přímo v zařízení",
+          "badge": "Offline"
+        },
+        "hu": {
+          "title": "Internet nélkül is.\nAz év bármely napján.",
+          "subtitle": "Minden szöveg a készüléken készül",
+          "badge": "Offline"
+        }
+      },
+      "captures": {
+        "main": {
+          "url": "breviar://2026-09-14",
+          "actions": [
+            "datePicker"
+          ]
+        }
+      }
+    }
+  ]
+}

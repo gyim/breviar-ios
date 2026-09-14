@@ -130,6 +130,7 @@ struct FullscreenModeSettingsView : View {
 struct LiturgicalTextSettingsView : View {
     @EnvironmentObject var model: BreviarModel
     var entries: [SettingsEntry]
+    @State private var activeFlagSet: String? = nil
     
     var body: some View {
         Section(header: Text(S.liturgicalTexts.S)) {
@@ -137,10 +138,19 @@ struct LiturgicalTextSettingsView : View {
                 if entry.visible {
                     switch entry.type {
                     case .flagSet:
-                        NavigationLink(entry.label, destination: SettingsFlagSetView(entry: entry))
+                        NavigationLink(entry.label, destination: SettingsFlagSetView(entry: entry), tag: entry.id, selection: $activeFlagSet)
                     case .stringChoice:
                         SettingsStringChoiceListEntry(entry: entry)
                     }
+                }
+            }
+        }
+        .onScreenshotAction { action in
+            if case .settingsFlagSet(let index) = action {
+                let flagSets = entries.filter { $0.visible && $0.type == .flagSet }
+                if index < flagSets.count {
+                    activeFlagSet = flagSets[index].id
+                    ScreenshotMode.signalReadyAfterAnimation()
                 }
             }
         }

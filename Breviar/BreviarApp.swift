@@ -28,12 +28,21 @@ struct BreviarApp: App {
                     
                     // Load an empty WKWebView so that it is faster to load on prayer screen
                     _ = WKWebView()
+
+                    if ScreenshotMode.isActive {
+                        ScreenshotMode.openURL = handleIncomingURL
+                    }
                 }
                 .fullScreenCover(isPresented: $model.dataSourceOptionsNeeded, content: {
                     DataSourceOptionsWizard().environmentObject(model)
                 })
                 .onOpenURL { url in
                     handleIncomingURL(url)
+                }
+                .onReceive(model.$dayState) { state in
+                    if case .loaded = state {
+                        ScreenshotMode.signalReady("day")
+                    }
                 }
         }
     }

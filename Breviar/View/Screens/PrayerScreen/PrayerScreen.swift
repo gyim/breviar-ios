@@ -66,6 +66,21 @@ struct PrayerScreen: View {
             PlaybackScreen(playbackSheetShown: $playbackSheetShown, prayer: prayer)
                 .environmentObject(model)
         })
+        .onScreenshotAction { action in
+            switch action {
+            case .textOptions:
+                textOptionsShown = true
+                ScreenshotMode.signalReadyAfterAnimation()
+            case .playback:
+                playbackSheetShown = true
+                ScreenshotMode.signalReadyAfterAnimation(delay: 2.0)
+            case .fullscreen:
+                navbarHidden = true
+                ScreenshotMode.signalReadyAfterAnimation()
+            default:
+                break
+            }
+        }
         .onAppear() {
             model.loadPrayer(prayer)
             autoLockManager.disableAutoLock()
@@ -130,6 +145,7 @@ struct PrayerView : UIViewRepresentable {
             
             // This view is not updated if TextOptions is changed in the popover, so we rely on NotificationCenter instead
             NotificationCenter.default.addObserver(self, selector: #selector(onTextOptionsChanged(_:)), name: TextOptions.notificationName, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(onScreenshotAction(_:)), name: ScreenshotMode.actionNotification, object: nil)
             
             // Listen for app lifecycle events
             NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
@@ -299,10 +315,19 @@ struct PrayerView : UIViewRepresentable {
             """
         }
         
+        @objc func onScreenshotAction(_ notification: Notification) {
+            guard case .scroll(let fraction)? = notification.userInfo?["action"] as? ScreenshotMode.Action else { return }
+            let script = "window.scrollTo(0, Math.round((document.documentElement.scrollHeight - window.innerHeight) * \(fraction)))"
+            webView.evaluateJavaScript(script) { _, _ in
+                ScreenshotMode.signalReadyAfterAnimation()
+            }
+        }
+
         // WKNavigationDelegate
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             print("PrayerView: WebView did finish loading")
             isWebViewReady = true
+            ScreenshotMode.signalReady("prayer")
         }
         
         func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {

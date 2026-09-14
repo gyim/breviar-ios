@@ -4,7 +4,7 @@ import WidgetKit
 // Renders the home screen widgets for a set of scenarios, see README.md.
 //
 //   render <scenarios.json> <outdir> [--families small,medium,large]
-//          [--schemes light,dark] [--only key1,key2]
+//          [--schemes light,dark] [--only key1,key2] [--sizes small=170x170,medium=364x170,large=364x382]
 //
 // Writes one PNG per scenario x family x scheme into <outdir>/individual and
 // one contact sheet per family into <outdir>.
@@ -23,7 +23,9 @@ struct Scenario: Decodable {
 }
 
 /// Widget sizes on the iPhone 16 Pro simulator, measured from screenshots.
-let widgetSizes: [WidgetFamily: CGSize] = [
+/// Other devices can be rendered with --sizes (the 6.9" iPhones use
+/// small=170x170,medium=364x170,large=364x382).
+var widgetSizes: [WidgetFamily: CGSize] = [
     .systemSmall: CGSize(width: 164, height: 164),
     .systemMedium: CGSize(width: 350, height: 164),
     .systemLarge: CGSize(width: 350, height: 365),
@@ -61,13 +63,22 @@ struct Options {
             case "--only":
                 options.only = (value ?? "").split(separator: ",").map(String.init)
                 i += 1
+            case "--sizes":
+                for entry in (value ?? "").split(separator: ",") {
+                    let parts = entry.split(separator: "=")
+                    let dims = parts.count == 2 ? parts[1].split(separator: "x").compactMap { Double($0) } : []
+                    if let family = familiesByName[String(parts[0])], dims.count == 2 {
+                        widgetSizes[family] = CGSize(width: dims[0], height: dims[1])
+                    }
+                }
+                i += 1
             default:
                 positional.append(arg)
             }
             i += 1
         }
         guard positional.count == 2 else {
-            print("usage: render <scenarios.json> <outdir> [--families small,medium,large] [--schemes light,dark] [--only key1,key2]")
+            print("usage: render <scenarios.json> <outdir> [--families small,medium,large] [--schemes light,dark] [--only key1,key2] [--sizes small=170x170,...]")
             exit(1)
         }
         options.scenariosPath = positional[0]

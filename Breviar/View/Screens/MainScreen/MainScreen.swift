@@ -16,7 +16,7 @@ struct MainScreen: View {
         let today = Day(fromDate: Date())
         let dayDiff = abs(today.daysSinceEpoch - day.daysSinceEpoch)
         
-        if dayDiff < 3 {
+        if dayDiff < 3 && !ScreenshotMode.isActive {
             let fmt = currentLiturgicalLanguage.dateFormatter(format: "EEEE")
             let dayName = fmt.string(from: day.date).capitalized
             
@@ -83,6 +83,12 @@ struct MainScreen: View {
                     DatePicker() {
                         datePickerShown = false
                     }.environmentObject(model)
+                }
+                .onScreenshotAction { action in
+                    if case .datePicker = action {
+                        datePickerShown = true
+                        ScreenshotMode.signalReadyAfterAnimation()
+                    }
                 }
         }
         .navigationViewStyle(StackNavigationViewStyle())
@@ -153,6 +159,7 @@ struct TodayButton: View {
 struct MainScreenContent: View {
     @EnvironmentObject var model: BreviarModel
     @Binding var activePrayerType: PrayerType?
+    @State private var settingsActive = false
     
     var body: some View {
         LoadingView(value: model.dayState) { day in
@@ -183,11 +190,17 @@ struct MainScreenContent: View {
                         Spacer()
                     }
                 ) {
-                    NavigationLink(destination: SettingsScreen(), label: { Label(S.settings.S, systemImage: "gearshape.fill") })
+                    NavigationLink(destination: SettingsScreen(), isActive: $settingsActive, label: { Label(S.settings.S, systemImage: "gearshape.fill") })
                 }
             }
         }
         .id(model.day.id)
+        .onScreenshotAction { action in
+            if case .settings = action {
+                settingsActive = true
+                ScreenshotMode.signalReadyAfterAnimation()
+            }
+        }
         .onAppear {
             // NOTE: due to a SwiftUI bug, this might be triggered even if we are on a different screen
             model.checkForLiturgicalDataReload()

@@ -274,6 +274,11 @@ class PlaybackController: NSObject, ObservableObject, AVSpeechSynthesizerDelegat
     private func startPlayback() {
         switch playbackState {
         case .stopped:
+            if ScreenshotMode.isActive {
+                // Show a prayer in progress without speaking
+                playbackProgress = PlaybackProgress(section: 3, sectionOffset: 0, sectionChars: 0, docOffset: 35, docChars: 100)
+                return
+            }
             if self.doc.sections.count > 0 {
                 startSpeech()
             } else {
