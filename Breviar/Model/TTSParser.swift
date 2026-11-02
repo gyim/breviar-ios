@@ -63,7 +63,7 @@ class TTSParser : NSObject, WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         let getSpeechTextJS = """
             (function() {
-                let tts_sections = document.getElementsByClassName('tts_section');
+                let tts_sections = document.getElementsByClassName('tts-section');
                 for (let section of tts_sections) {
                     section.parentNode.insertBefore(document.createTextNode("\\n####\\n"), section);
                 }
