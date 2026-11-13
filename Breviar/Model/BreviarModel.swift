@@ -31,7 +31,22 @@ class BreviarModel : NSObject, ObservableObject {
     private var liturgicalDataNeedsReload = false
     private var isUpdatingFromPrayerLink = false
     @Published var dataSourceOptions: DataSourceOptions?
-    @Published var dataSourceOptionsNeeded: Bool
+    @Published var dataSourceOptionsNeeded: Bool {
+        didSet {
+            if presentedSheet == .sharedPrayer { return }
+            presentedSheet = dataSourceOptionsNeeded ? .setup : nil
+        }
+    }
+    @Published var presentedSheet: AppSheet? = nil
+    @Published var sharedPrayerLink: SharedPrayerLink? = nil
+    @Published var sharedPrayerText: LoadingState<String> = .idle
+    @Published var sharedTTSPrayerText: LoadingState<String> = .idle
+    @Published var sharedResolvedLink: SharedPrayerLink? = nil
+    @Published var sharedSessionActive = false
+    @Published var sharingError: String? = nil
+    private let sharedSession = SharedPrayerSession()
+    private var sharedLoadID = 0
+    private var keepSharedChanges = false
     @Published var dataSourceOptionsWizardStage: DataSourceWizardState = .chooseLanguage
     @Published var dataSourceOptionsWizardContext: DataSourceWizardContext = .initialSetup
     
@@ -55,6 +70,7 @@ class BreviarModel : NSObject, ObservableObject {
     @Published var pendingNavigation: NavigationTarget? = nil
 
     @Published var externalLink: IdentifiableURL? = nil
+    @Published var sharedExternalLink: IdentifiableURL? = nil
     
     // Generation counters: a load started later always wins, even if an earlier one
     // (e.g. a slow remote attempt) delivers its result afterwards.
@@ -81,6 +97,13 @@ class BreviarModel : NSObject, ObservableObject {
         self.dataSourceOptionsNeeded = dataSourceOptions == nil
         
         super.init()
+        if let link = sharedSession.link {
+            sharedPrayerLink = link
+            sharedSessionActive = true
+            presentedSheet = .sharedPrayer
+        } else if dataSourceOptionsNeeded {
+            presentedSheet = .setup
+        }
         
         // Observe liturgical option changes in UserDefaults
         ["o0", "o1", "o3", BibleLinkMode.userDefaultsKey].forEach { key in
@@ -88,6 +111,138 @@ class BreviarModel : NSObject, ObservableObject {
         }
     }
     
+    // Shared pages use their own reader state; receiving a link never overwrites personal settings.
+    func openSharedPrayer(_ link: SharedPrayerLink) {
+        sharingError = nil
+        NotificationCenter.default.post(name: SharedPrayerSession.willOpen, object: nil)
+        ttsLoadID += 1
+        sharedTTSPrayerText = .idle
+        sharedLoadID += 1
+        sharedPrayerLink = link
+        sharedResolvedLink = nil
+        sharedPrayerText = .idle
+        keepSharedChanges = false
+        sharedSession.open(link)
+        sharedSessionActive = true
+        presentedSheet = .sharedPrayer
+        // A second URL can arrive while the same cover is already visible; onAppear
+        // will not run again. Start the new request here, independently of presentation.
+        loadSharedPrayer()
+    }
+
+    func loadSharedPrayer(policy: DataSourcePolicy = .forceLocal) {
+        guard let link = sharedPrayerLink else { return }
+        sharedLoadID += 1
+        let loadID = sharedLoadID
+        sharedPrayerText = .loading
+        sharedResolvedLink = nil
+        dataSource.getSharedPrayerText(link, tts: false, policy: policy) { [weak self] text, error in
+            guard let self = self, loadID == self.sharedLoadID else { return }
+            if let text = text, error == nil {
+                self.sharedPrayerText = .loaded(text)
+                self.sharedResolvedLink = SharedPrayerLink.rendered(in: text)
+                if let resolved = self.sharedResolvedLink {
+                    self.sharedPrayerLink = resolved
+                    if self.keepSharedChanges && !self.applySharedSettings(resolved) {
+                        // A later inline choice may be unsupported by the native model.
+                        // Fall back to another temporary session without losing saved settings.
+                        self.keepSharedChanges = false
+                        self.sharedSessionActive = true
+                    }
+                    if self.sharedSessionActive { self.sharedSession.open(resolved) }
+                }
+            } else {
+                self.sharedPrayerText = .failed(error ?? DataSourceError.emptyResponse, { [weak self] policy in self?.loadSharedPrayer(policy: policy) })
+            }
+        }
+    }
+
+    func handleSharedPrayerLink(_ url: URL) {
+        if let link = SharedPrayerLink.following(url, relativeTo: sharedPrayerLink, rendererHost: NetworkConstants.serverHost) {
+            sharedPrayerLink = link
+            if sharedSessionActive { sharedSession.open(link) }
+            sharedResolvedLink = nil
+            loadSharedPrayer()
+        } else if ["https", "http"].contains(url.scheme?.lowercased() ?? "") {
+            if url.host == "bible.com" || url.host?.hasSuffix(".bible.com") == true { UIApplication.shared.open(url) }
+            else { sharedExternalLink = IdentifiableURL(url: url) }
+        }
+    }
+
+    func restorePersonalSettings() {
+        ttsLoadID += 1
+        sharedTTSPrayerText = .idle
+        sharedLoadID += 1
+        sharedSession.finish()
+        sharedSessionActive = false
+        keepSharedChanges = false
+        sharedExternalLink = nil
+        sharedPrayerLink = nil
+        sharedResolvedLink = nil
+        sharedPrayerText = .idle
+        presentedSheet = nil
+    }
+
+    func keepSharedSettings() {
+        guard let link = sharedResolvedLink, applySharedSettings(link) else { return }
+        sharedSession.finish()
+        sharedSessionActive = false
+        keepSharedChanges = true
+    }
+
+    private func applySharedSettings(_ link: SharedPrayerLink) -> Bool {
+        // A resolved backend response supplies effective words, not guesses about force flags/defaults.
+        guard let language = Language(rawValue: link.parameters["j"] == "c2" ? "cz" : link.parameters["j"] ?? "") else {
+            sharingError = S.sharedSettingsUnsupported.S
+            return false
+        }
+        let calendar = link.parameters["k"].flatMap { $0.isEmpty ? nil : $0 }
+            ?? (link.parameters["j"] == "c2" ? "czop" : language.availableCalendars.first ?? "")
+        var personal: [String: String] = [:]
+        for index in 0...6 {
+            let key = "o\(index)"
+            personal[key] = String((UserDefaults.standard.object(forKey: key) as? NSNumber)?.uint64Value ?? (key == "o2" ? 16896 : 0))
+        }
+        guard language.availableCalendars.contains(calendar), let settings = link.settingsToKeep(local: personal) else {
+            sharingError = S.sharedSettingsUnsupported.S
+            return false
+        }
+        isUpdatingFromPrayerLink = true
+        defer { isUpdatingFromPrayerLink = false }
+        let options = DataSourceOptions(dataSourceType: dataSourceOptions?.dataSourceType ?? .alwaysCGI,
+            language: language, uiLanguage: dataSourceOptions?.uiLanguage ?? (language.isUILanguage ? language : currentUILanguage), calendar: calendar)
+        options.save()
+        dataSourceOptions = options
+        dataSourceOptionsNeeded = false
+        dataSource.setOptions(options)
+        currentLiturgicalLanguage = language
+        currentUILanguage = options.uiLanguage
+        for (key, rawValue) in settings where SharedPrayerLink.isWord(key) {
+            if let value = UInt64(rawValue) { UserDefaults.standard.set(NSNumber(value: value), forKey: key) }
+        }
+        let references = UInt64(settings["o0"] ?? "") ?? 0
+        let bibleMode: BibleLinkMode = references & 2 == 0 ? .off : references & 4096 == 0 ? .website : .bibleCom
+        UserDefaults.standard.set(bibleMode.rawValue, forKey: BibleLinkMode.userDefaultsKey)
+        prayerScreenSettings.refreshBibleLinkMode()
+        reload()
+        return true
+    }
+
+    func didDismissSheet() {
+        if presentedSheet == nil && dataSourceOptionsNeeded { presentedSheet = .setup }
+    }
+
+    var sharedPrayer: Prayer {
+        let type = PrayerType(rawValue: sharedPrayerLink?.parameters["p"] ?? "") ?? .morningPrayer
+        let celebration = Celebration(id: "", title: S.sharedPrayer.S, subtitle: "", liturgicalColor: .green)
+        return Prayer(day: day, celebration: celebration, type: type, customName: S.sharedPrayer.S)
+    }
+
+    var sharedLanguage: Language? {
+        let code = sharedPrayerLink?.parameters["j"]
+        return Language(rawValue: code == "c2" ? "cz" : code ?? "")
+    }
+
     func setDataSourceOptions(_ options: DataSourceOptions) {
         options.save()
         self.dataSourceOptions = options
@@ -283,15 +438,23 @@ class BreviarModel : NSObject, ObservableObject {
         }
     }
     
-    func loadTTSPrayer(_ prayer: Prayer, opts: [String: String] = [:], policy: DataSourcePolicy = .automatic) {
+    func loadTTSPrayer(_ prayer: Prayer, opts: [String: String] = [:], policy: DataSourcePolicy = .automatic, shared: Bool = false) {
+        if shared { sharedTTSPrayerText = .loading } else { ttsPrayerText = .loading }
         self.ttsLoadID += 1
         let loadID = self.ttsLoadID
 
         let retry: (DataSourcePolicy) -> Void = { policy in
-            self.ttsPrayerText = .loading
-            self.loadTTSPrayer(prayer, opts: opts, policy: policy)
+            self.loadTTSPrayer(prayer, opts: opts, policy: policy, shared: shared)
         }
 
+        if shared, let link = sharedPrayerLink {
+            self.dataSource.getSharedPrayerText(link, tts: true, policy: policy == .automatic ? .forceLocal : policy) { text, error in
+                guard loadID == self.ttsLoadID else { return }
+                if let text = text, error == nil { self.sharedTTSPrayerText = .loaded(text) }
+                else { self.sharedTTSPrayerText = .failed(error ?? DataSourceError.emptyResponse, retry) }
+            }
+            return
+        }
         if let (day, celebration) = self.getCurrentCelebration() {
             self.dataSource.getTTSPrayerText(day: day, celebration: celebration, prayerType: prayer.type, opts: opts, policy: policy) { (text, error) in
                 guard loadID == self.ttsLoadID else { return }
@@ -304,6 +467,11 @@ class BreviarModel : NSObject, ObservableObject {
         }
     }
     
+    func unloadTTSPrayer(shared: Bool) {
+        ttsLoadID += 1
+        if shared { sharedTTSPrayerText = .idle } else { ttsPrayerText = .idle }
+    }
+
     func loadAboutPage() {
         self.dataSource.getAboutPage { text, error in
             let txt = text!
@@ -485,4 +653,9 @@ enum NavigationTarget: Equatable {
             return p1.type == p2.type && p1.day == p2.day
         }
     }
+}
+
+enum AppSheet: String, Identifiable {
+    case setup, sharedPrayer
+    var id: String { rawValue }
 }

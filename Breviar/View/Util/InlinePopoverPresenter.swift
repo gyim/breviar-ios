@@ -18,12 +18,19 @@ struct InlinePopoverPresenter<Popover:View, Content:View>: UIViewControllerRepre
     class Coordinator: NSObject, UIPopoverPresentationControllerDelegate {
         var parent: InlinePopoverPresenter
         var popoverShown = false
+        weak var presentedPopover: UIViewController?
         
         init(_ parent: InlinePopoverPresenter) {
             self.parent = parent
         }
         
         func showPopover(controller: UIViewController, show: Bool) {
+            // Incoming prayer links can close the text-options popover programmatically.
+            if !show && popoverShown {
+                popoverShown = false
+                presentedPopover?.dismiss(animated: false)
+                presentedPopover = nil
+            }
             if show && !popoverShown {
                 popoverShown = true
                 
@@ -45,6 +52,7 @@ struct InlinePopoverPresenter<Popover:View, Content:View>: UIViewControllerRepre
                 popover.popoverPresentationController?.sourceView = sourceView
                 popover.popoverPresentationController?.sourceRect = sourceRect
                 popover.popoverPresentationController?.delegate = self
+                presentedPopover = popover
                 controller.present(popover, animated: true)
             }
         }
@@ -57,6 +65,7 @@ struct InlinePopoverPresenter<Popover:View, Content:View>: UIViewControllerRepre
         
         @objc func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
             self.popoverShown = false
+            self.presentedPopover = nil
             self.parent.isPresented = false
         }
     }
@@ -71,6 +80,7 @@ struct InlinePopoverPresenter<Popover:View, Content:View>: UIViewControllerRepre
     
     func updateUIViewController(_ c: UIViewControllerType, context: Context) {
         guard let controller = c as? UIHostingController<Content> else { return }
+        context.coordinator.parent = self
         context.coordinator.showPopover(controller: controller, show: isPresented)
         controller.rootView = content()
     }

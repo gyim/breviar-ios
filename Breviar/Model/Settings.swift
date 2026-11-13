@@ -361,8 +361,8 @@ struct SettingsEntry: Identifiable {
     }
     
     func getUserSettings() -> Int {
-        if let v = UserDefaults.standard.object(forKey: self.name), let vi = v as? Int {
-            return vi
+        if let value = UserDefaults.standard.object(forKey: self.name) as? NSNumber {
+            return value.intValue
         } else {
             return self.normalizedDefaultValue()
         }

@@ -33,9 +33,20 @@ struct BreviarApp: App {
                         ScreenshotMode.openURL = handleIncomingURL
                     }
                 }
-                .fullScreenCover(isPresented: $model.dataSourceOptionsNeeded, content: {
-                    DataSourceOptionsWizard().environmentObject(model)
-                })
+                .modifier(SharingAlert(model: model, presenter: nil))
+                .fullScreenCover(item: $model.presentedSheet, onDismiss: model.didDismissSheet) { sheet in
+                    switch sheet {
+                    case .setup:
+                        DataSourceOptionsWizard().environmentObject(model)
+                            .modifier(SharingAlert(model: model, presenter: .setup))
+                    case .sharedPrayer:
+                        SharedPrayerScreen().environmentObject(model)
+                            .modifier(SharingAlert(model: model, presenter: .sharedPrayer))
+                    }
+                }
+                .onContinueUserActivity(NSUserActivityTypeBrowsingWeb) { activity in
+                    if let url = activity.webpageURL { handleIncomingURL(url) }
+                }
                 .onOpenURL { url in
                     handleIncomingURL(url)
                 }
@@ -50,7 +61,13 @@ struct BreviarApp: App {
     private func handleIncomingURL(_ url: URL) {
         print("Breviar app opened with URL: \(url)")
         
+        if ["https", "http"].contains(url.scheme?.lowercased() ?? "") {
+            if let link = SharedPrayerLink(url: url) { model.openSharedPrayer(link) }
+            else { model.sharingError = S.sharedLinkInvalid.S }
+            return
+        }
         guard url.scheme == "breviar" else { return }
+        if model.presentedSheet == .sharedPrayer { model.presentedSheet = nil }
         
         let host = url.host ?? ""
         let pathComponents = url.pathComponents.filter { $0 != "/" }

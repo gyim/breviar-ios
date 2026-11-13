@@ -187,12 +187,13 @@ struct Prayer: Identifiable {
     let day: Day
     let celebration: Celebration
     let type: PrayerType
+    var customName: String? = nil
     
     var id : String {
         return "\(type)"
     }
     
     var name: String {
-        return self.type.name
+        return customName ?? self.type.name
     }
 }

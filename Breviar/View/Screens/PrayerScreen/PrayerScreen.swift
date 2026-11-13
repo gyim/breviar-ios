@@ -38,6 +38,8 @@ struct PrayerScreen: View {
     @Binding var textOptions: TextOptions
     @State var navbarHidden = false
     @State private var needsReload = false
+    var shared = false
+    @State private var sharingLink: IdentifiableURL? = nil
     @StateObject private var autoLockManager = AutoLockManager()
     
     var body: some View {
@@ -60,7 +62,8 @@ struct PrayerScreen: View {
                             }
                         }
                         .onLinkEvent() { url in
-                            model.handlePrayerLink(prayer: prayer, url: url)
+                            if shared { model.handleSharedPrayerLink(url) }
+                            else { model.handlePrayerLink(prayer: prayer, url: url) }
                         }
                         .ignoresSafeArea()
                 }.ignoresSafeArea()
@@ -74,6 +77,11 @@ struct PrayerScreen: View {
         .toolbar(content: {
             HStack {
                 Button(action: {
+                    if case .loaded(let html) = prayerText, let link = SharedPrayerLink.rendered(in: html) {
+                        sharingLink = IdentifiableURL(url: link.url)
+                    } else { model.sharingError = S.sharePrayerUnavailable.S }
+                }, label: { Label(S.sharePrayer.S, systemImage: "qrcode") })
+                Button(action: {
                     playbackSheetShown = true
                 }, label: {Label("", systemImage:"play.fill")})
                 
@@ -83,10 +91,11 @@ struct PrayerScreen: View {
             }
         })
         .sheet(isPresented: $playbackSheetShown, content: {
-            PlaybackScreen(playbackSheetShown: $playbackSheetShown, prayer: prayer)
+            PlaybackScreen(playbackSheetShown: $playbackSheetShown, prayer: prayer, shared: shared)
                 .environmentObject(model)
         })
-        .sheet(item: $model.externalLink, content: { link in
+        .sheet(item: $sharingLink) { link in PrayerShareSheet(url: link.url) }
+        .sheet(item: shared ? $model.sharedExternalLink : $model.externalLink, content: { link in
             SafariView(url: link.url)
                 .ignoresSafeArea()
         })
@@ -106,17 +115,20 @@ struct PrayerScreen: View {
             }
         }
         .onAppear() {
-            model.loadPrayer(prayer)
+            if shared {
+                if case .idle = prayerText { model.loadSharedPrayer() }
+            } else { model.loadPrayer(prayer) }
             autoLockManager.disableAutoLock()
         }
         .onDisappear() {
-            model.unloadPrayer()
+            // Keep the covered reader and its scroll position while the shared page is open.
+            if !shared && model.presentedSheet != .sharedPrayer { model.unloadPrayer() }
             autoLockManager.enableAutoLock()
         }
         .onChange(of: needsReload) { needsReload in
             if needsReload {
                 print("PrayerScreen: Reloading prayer due to WebView state loss")
-                model.loadPrayer(prayer)
+                if shared { model.loadSharedPrayer() } else { model.loadPrayer(prayer) }
                 self.needsReload = false
             }
         }
@@ -127,8 +139,15 @@ struct PrayerScreen: View {
                 // The WebView will detect if it needs reload
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: SharedPrayerSession.willOpen)) { _ in
+            playbackSheetShown = false
+            textOptionsShown = false
+            sharingLink = nil
+            model.externalLink = nil
+            model.sharedExternalLink = nil
+        }
         .onReceive(model.$pendingNavigation) { pending in
-            if let pending = pending, case .prayer(let targetPrayer) = pending {
+            if !shared, let pending = pending, case .prayer(let targetPrayer) = pending {
                 // If we're navigating to a different prayer, dismiss this screen
                 if targetPrayer.type != prayer.type || targetPrayer.day != prayer.day {
                     presentationMode.wrappedValue.dismiss()

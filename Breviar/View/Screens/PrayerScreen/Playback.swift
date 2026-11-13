@@ -490,12 +490,13 @@ struct PlaybackScreen: View {
     @Binding var playbackSheetShown: Bool
     @EnvironmentObject var model: BreviarModel
     var prayer: Prayer?
+    var shared = false
     
     @StateObject var playbackController: PlaybackController = PlaybackController()
 
     var body: some View {
         NavigationView {
-            LoadingView(value: model.ttsPrayerText) { htmlBody in
+            LoadingView(value: shared ? model.sharedTTSPrayerText : model.ttsPrayerText) { htmlBody in
                 PlaybackView(playbackController: playbackController, prayer: prayer)
                     .navigationBarItems(
                         leading: Button(
@@ -504,7 +505,7 @@ struct PlaybackScreen: View {
                         )
                     )
                     .onAppear() {
-                        playbackController.language = model.dataSourceOptions?.language.locale.identifier ?? "en-US"
+                        playbackController.language = shared ? (model.sharedLanguage?.locale.identifier ?? model.sharedPrayerLink?.parameters["j"] ?? "en-US") : (model.dataSourceOptions?.language.locale.identifier ?? "en-US")
                         playbackController.title = prayer?.name ?? "Prayer Name"
                         playbackController.subtitle = prayer?.celebration.title ?? "Celebration Title"
                         playbackController.htmlBody = htmlBody
@@ -513,10 +514,11 @@ struct PlaybackScreen: View {
             }
         }
         .onAppear() {
-            model.loadTTSPrayer(prayer!)
+            model.loadTTSPrayer(prayer!, shared: shared)
         }
         .onDisappear() {
             playbackController.playbackState = .stopped
+            model.unloadTTSPrayer(shared: shared)
         }
     }
 }

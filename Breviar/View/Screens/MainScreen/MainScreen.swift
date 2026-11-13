@@ -96,7 +96,11 @@ struct MainScreen: View {
                     }
                 }
         }
+        .safeAreaInset(edge: .bottom) { SharedPrayerControls().environmentObject(model) }
         .navigationViewStyle(StackNavigationViewStyle())
+        .onReceive(NotificationCenter.default.publisher(for: SharedPrayerSession.willOpen)) { _ in
+            datePickerShown = false
+        }
         .onReceive(model.$navigationTrigger) { trigger in
             if case .prayer(let targetPrayer) = trigger {
                 // Reset any active navigation first

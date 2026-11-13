@@ -16,8 +16,16 @@ protocol BreviarDataSource {
     func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], policy: DataSourcePolicy, handler: @escaping (String?, Error?) -> Void)
     func getTTSPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], policy: DataSourcePolicy, handler: @escaping (String?, Error?) -> Void)
     func parsePrayerLink(url: URL) -> BreviarLink
+    func getSharedPrayerText(_ link: SharedPrayerLink, tts: Bool, policy: DataSourcePolicy, handler: @escaping (String?, Error?) -> Void)
     func getSettingsEntries(policy: DataSourcePolicy, handler: @escaping ([SettingsEntry]?, Error?) -> Void)
     func getAboutPage(handler: @escaping (String?, Error?) -> Void)
+}
+
+// Preview/test data sources need not implement the local CGI sharing endpoint.
+extension BreviarDataSource {
+    func getSharedPrayerText(_ link: SharedPrayerLink, tts: Bool, policy: DataSourcePolicy, handler: @escaping (String?, Error?) -> Void) {
+        handler(nil, DataSourceError.emptyResponse)
+    }
 }
 
 enum DataSourceError: LocalizedError {
@@ -529,13 +537,17 @@ class CGIDataSource : BreviarDataSource {
               BibleLinkMode.bibleComFlag
     ]
     func valueForOption(_ key: String) -> String {
-        var option = UserDefaults.standard.integer(forKey: key);
-        if let flags = removeFlags[key] {
-            option &= ~flags;
-        }
+        let value = UserDefaults.standard.object(forKey: key)
+        var option = (value as? NSNumber)?.uint64Value ?? UInt64(value as? String ?? "") ?? 0
+        if let flags = removeFlags[key] { option &= ~UInt64(flags) }
         return String(option);
     }
     
+    private func storedDisplayOptions() -> String {
+        guard let number = UserDefaults.standard.object(forKey: "o2") as? NSNumber else { return "16896" }
+        return String((UInt64(16896) & ~SharedPrayerLink.content2) | (number.uint64Value & SharedPrayerLink.content2))
+    }
+
     func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], policy: DataSourcePolicy, handler: @escaping (String?, Error?) -> Void) {
         let d = day.day
         var args = [
@@ -547,7 +559,7 @@ class CGIDataSource : BreviarDataSource {
             "ds": celebration.id,
             "o0": valueForOption("o0"),
             "o1": valueForOption("o1"),
-            "o2": "16896", // Override display settings
+            "o2": storedDisplayOptions(), // Preserve local layout and adopted content choices
             "o3": valueForOption("o3"),
             "o4": valueForOption("o4"),
             "o5": valueForOption("o5"),
@@ -573,6 +585,19 @@ class CGIDataSource : BreviarDataSource {
         getPrayerText(day: day, celebration: celebration, prayerType: prayerType, opts: ttsOpts, policy: policy, handler: handler)
     }
     
+    func getSharedPrayerText(_ link: SharedPrayerLink, tts: Bool, policy: DataSourcePolicy, handler: @escaping (String?, Error?) -> Void) {
+        // Sharing always opens locally; it must not require cellular data or a server.
+        var local = ["o2": storedDisplayOptions()]
+        for word in ["o0", "o1", "o3", "o4", "o5", "o6"] { local[word] = valueForOption(word) }
+        var args = link.request(local: local)
+        if tts {
+            args["of0bf"] = "1"
+            args["of2rm"] = "0"
+            args["of0r"] = "0"
+        }
+        load(args: args, policy: policy, parse: CGIDataSource.parsePrayerHTML, handler: handler)
+    }
+
     private static func getHTMLBody(_ html: String) -> String {
         // Find body start
         var body: String.SubSequence = html[html.startIndex...]
