@@ -67,6 +67,7 @@
 		BDDEFB0711244665BD63AF8E /* SharedPrayerLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF021E9804F9446FBAEF2A09 /* SharedPrayerLink.swift */; };
 		9AABD8A0F78D4E608D0BAD5B /* SharedPrayerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249237FFFF2E44209CF75E0C /* SharedPrayerSession.swift */; };
 		EE07D89A42004776B7A17CA5 /* PrayerSharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C111AA8FD8482FAE145C33 /* PrayerSharing.swift */; };
+		6207E37B09194A37991C0501 /* ReaderAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6207E37B09194A37991C0502 /* ReaderAppearance.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +181,7 @@
 		AF021E9804F9446FBAEF2A09 /* SharedPrayerLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sharing/SharedPrayerLink.swift; sourceTree = "<group>"; };
 		249237FFFF2E44209CF75E0C /* SharedPrayerSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sharing/SharedPrayerSession.swift; sourceTree = "<group>"; };
 		44C111AA8FD8482FAE145C33 /* PrayerSharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerSharing.swift; sourceTree = "<group>"; };
+		6207E37B09194A37991C0502 /* ReaderAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sharing/ReaderAppearance.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -318,6 +320,7 @@
 				701328482683D89D00A991FE /* BRCGIQuery.mm */,
 				70B109A025F3853B0044F613 /* BreviarDataSource.swift */,
 				70A99DCA25B477CB00B558CE /* BreviarModel.swift */,
+				6207E37B09194A37991C0502 /* ReaderAppearance.swift */,
 				249237FFFF2E44209CF75E0C /* SharedPrayerSession.swift */,
 				AF021E9804F9446FBAEF2A09 /* SharedPrayerLink.swift */,
 				709A26B825F8DA8A0040AE84 /* Calendar.swift */,
@@ -564,6 +567,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE07D89A42004776B7A17CA5 /* PrayerSharing.swift in Sources */,
+				6207E37B09194A37991C0501 /* ReaderAppearance.swift in Sources */,
 				9AABD8A0F78D4E608D0BAD5B /* SharedPrayerSession.swift in Sources */,
 				BDDEFB0711244665BD63AF8E /* SharedPrayerLink.swift in Sources */,
 				70C561CA2659ADA2001AF7D3 /* DataSourceOptionsWizard.swift in Sources */,

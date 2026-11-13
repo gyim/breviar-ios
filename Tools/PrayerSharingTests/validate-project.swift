@@ -15,7 +15,7 @@ func walk(_ id: String, parent: URL) {
     } else if object["isa"] as? String == "PBXFileReference" { paths[id] = path.standardizedFileURL }
 }
 walk(rootObject["mainGroup"] as! String, parent: root)
-let wanted: Set<String> = ["SharedPrayerLink.swift", "SharedPrayerSession.swift", "PrayerSharing.swift"]
+let wanted: Set<String> = ["SharedPrayerLink.swift", "SharedPrayerSession.swift", "ReaderAppearance.swift", "PrayerSharing.swift"]
 let app = objects.values.first { $0["isa"] as? String == "PBXNativeTarget" && $0["name"] as? String == "Breviar" }!
 let appSources = (app["buildPhases"] as! [String]).compactMap { objects[$0] }
     .filter { $0["isa"] as? String == "PBXSourcesBuildPhase" }

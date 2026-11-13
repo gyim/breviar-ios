@@ -11,6 +11,9 @@ struct SharedPrayerLink: Equatable, Identifiable {
         "of0v", "of0r", "of0cit", "of0zjvne", "of0nanne", "of0tkne", "of0ff", "of0zft", "of0bc",
         "of0ic", "of0pe", "of0u2rc", "of02rcinv", "of0uac", "of2pv", "of2tw", "of2rm", "of2a"
     ]
+    static let appearanceKeys: Set<String> = [
+        "c", "ct0", "cr0", "c0", "ct1", "cr1", "c1", "f", "s", "ff", "mm", "lh", "v"
+    ]
     let parameters: [String: String]
     var id: String { url.absoluteString }
 
@@ -23,40 +26,41 @@ struct SharedPrayerLink: Equatable, Identifiable {
         return components.url!
     }
 
-    init?(url: URL) {
+    init?(url: URL, appearance: Bool = false) {
         guard let c = URLComponents(url: url, resolvingAgainstBaseURL: false),
               ["https", "http"].contains(c.scheme?.lowercased() ?? ""), c.host?.lowercased() == Self.host,
               c.path == Self.path, c.user == nil, c.password == nil, c.port == nil,
               let query = c.percentEncodedQuery else { return nil }
-        self.init(query: query)
+        self.init(query: query, appearance: appearance)
     }
 
-    init?(query: String) {
+    init?(query: String, appearance: Bool = false) {
         guard !query.isEmpty, query.utf8.count < 2000,
               let items = URLComponents(string: "https://\(Self.host)\(Self.path)?\(query)")?.queryItems else { return nil }
         var values: [String: String] = [:]
         var seen = Set<String>()
         for item in items {
+            // Ignore unused values before checking duplicates or validating them.
+            guard Self.selection.contains(item.name)
+                    || (appearance ? Self.isSetting(item.name) : Self.isContentSetting(item.name)) else { continue }
             guard seen.insert(item.name).inserted else { return nil }
-            guard Self.selection.contains(item.name) || Self.isSetting(item.name) else { continue }
             let value = item.value ?? ""
-            guard value.range(of: #"\A[a-zA-Z0-9_-]{0,64}\z"#, options: .regularExpression) != nil else { return nil }
-            if Self.isWord(item.name) || item.name.hasPrefix("of") {
-                guard value.isEmpty || (value.range(of: #"\A[0-9]{1,20}\z"#, options: .regularExpression) != nil && UInt64(value) != nil) else { return nil }
-            }
+            guard Self.validValue(value, for: item.name) else { return nil }
             values[item.name] = value
         }
         guard ["pdnes", "pdt", "plo", "pcr", "psv", "pmr"].contains(values["qt"] ?? "")
                 || (values["qt"] == "pst" && values["st"] == "2") else { return nil }
         values["j"] = values["j"] ?? "sk"
         values["k"] = values["k"] ?? ""
-        for (key, mask) in [("o0", Self.content0), ("o2", Self.content2)] {
-            if let value = values[key] { values[key] = String((UInt64(value) ?? 0) & mask) }
+        if !appearance {
+            for (key, mask) in [("o0", Self.content0), ("o2", Self.content2)] {
+                if let value = values[key] { values[key] = String((UInt64(value) ?? 0) & mask) }
+            }
         }
         parameters = values
     }
 
-    private init(validated parameters: [String: String]) { self.parameters = parameters }
+    init(validated parameters: [String: String]) { self.parameters = parameters }
 
     /// Never infer a prayer's date in the client. Older backends simply cannot share it yet.
     static func rendered(in html: String) -> SharedPrayerLink? {
@@ -70,7 +74,7 @@ struct SharedPrayerLink: Equatable, Identifiable {
             .replacingOccurrences(of: "&#39;", with: "'").replacingOccurrences(of: "&apos;", with: "'")
             .replacingOccurrences(of: "&lt;", with: "<").replacingOccurrences(of: "&gt;", with: ">")
             .replacingOccurrences(of: "&amp;", with: "&")
-        guard let link = SharedPrayerLink(query: query) else { return nil }
+        guard let link = SharedPrayerLink(query: query, appearance: true) else { return nil }
         if link.parameters["qt"] == "pdnes", !(link.parameters["p"] ?? "").isEmpty { return nil }
         if link.parameters["qt"] == "pdt", ["d", "m", "r"].contains(where: { link.parameters[$0]?.isEmpty != false }) { return nil }
         if link.parameters["qt"] == "plo", link.parameters["r"]?.isEmpty != false { return nil }
@@ -88,16 +92,46 @@ struct SharedPrayerLink: Equatable, Identifiable {
         key.range(of: #"\Ao[0-6]\z"#, options: .regularExpression) != nil
     }
 
-    static func isSetting(_ key: String) -> Bool {
+    static func isContentSetting(_ key: String) -> Bool {
         key == "j" || key == "k" || isWord(key) || forces.contains(key)
             || key.range(of: #"\Aof[13456][a-z0-9]*\z"#, options: .regularExpression) != nil
     }
 
-    /// Retain local presentation bits while importing only the sender's content choices.
-    func request(local: [String: String]) -> [String: String] {
-        var result = local.filter { !Self.selection.contains($0.key) && !$0.key.hasPrefix("of") }
+    static func isSetting(_ key: String) -> Bool {
+        isContentSetting(key) || appearanceKeys.contains(key)
+            || key.range(of: #"\Aof[0-6][a-z0-9]*\z"#, options: .regularExpression) != nil
+    }
+
+    private static func validValue(_ value: String, for key: String) -> Bool {
+        func matches(_ pattern: String) -> Bool {
+            value.range(of: pattern, options: .regularExpression) != nil
+        }
+        if isWord(key) || key.hasPrefix("of") {
+            return value.isEmpty || (matches(#"\A[0-9]{1,20}\z"#) && UInt64(value) != nil)
+        }
+        if key == "f" { return matches(#"\A[\p{L}\p{N} _.-]{0,128}\z"#) }
+        if ["ct0", "cr0", "c0", "ct1", "cr1", "c1"].contains(key) {
+            return value.isEmpty || matches(#"\A(?:[a-fA-F0-9]{3}|[a-fA-F0-9]{6})\z"#)
+        }
+        if key == "c" || key == "v" { return value.isEmpty || value == "0" || value == "1" }
+        if ["ff", "mm", "lh"].contains(key) {
+            return value.isEmpty || (matches(#"\A[0-9]{1,5}\z"#) && (Int(value) ?? 32768) <= 32767)
+        }
+        return matches(#"\A[a-zA-Z0-9_-]{0,64}\z"#)
+    }
+
+    /// Merge only accepted settings; absent values retain the recipient's choices.
+    func request(local: [String: String], appearance: Bool = false) -> [String: String] {
+        var result = local.filter { !Self.selection.contains($0.key) }
+        for key in result.keys where key.hasPrefix("of") && key.count >= 3 {
+            let word = "o" + String(key.dropFirst(2).prefix(1))
+            if parameters[word] != nil && (appearance ? Self.isSetting(key) : Self.isContentSetting(key)) {
+                result.removeValue(forKey: key)
+            }
+        }
         for (key, value) in parameters {
-            if key == "o0" || key == "o2" {
+            guard Self.selection.contains(key) || (appearance ? Self.isSetting(key) : Self.isContentSetting(key)) else { continue }
+            if !appearance && (key == "o0" || key == "o2") {
                 let mask = key == "o0" ? Self.content0 : Self.content2
                 result[key] = String(((UInt64(local[key] ?? "") ?? 0) & ~mask) | ((UInt64(value) ?? 0) & mask))
             } else { result[key] = value }
@@ -105,10 +139,23 @@ struct SharedPrayerLink: Equatable, Identifiable {
         return result
     }
 
+    /// A session stores an already filtered, complete request, independently of later preference changes.
+    func resolving(local: [String: String], appearance: Bool) -> SharedPrayerLink {
+        SharedPrayerLink(validated: request(local: local, appearance: appearance)
+            .filter { Self.selection.contains($0.key) || Self.isSetting($0.key) })
+    }
+
+    /// Font resolution may only substitute local families; font files/CSS are never imported.
+    func resolvingFont(_ resolve: (String) -> String?) -> SharedPrayerLink {
+        var values = parameters
+        if let font = values["f"] { values["f"] = resolve(font) }
+        return SharedPrayerLink(validated: values)
+    }
+
     /// Native settings cannot persist an unresolved future force flag safely.
-    func settingsToKeep(local: [String: String]) -> [String: String]? {
+    func settingsToKeep(local: [String: String], appearance: Bool = false) -> [String: String]? {
         guard !parameters.keys.contains(where: { $0.hasPrefix("of") }) else { return nil }
-        return request(local: local).filter { Self.isSetting($0.key) }
+        return request(local: local, appearance: appearance).filter { Self.isSetting($0.key) }
     }
 
     /// Generated links may be partial and resolve against the app bundle or its CGI server.
@@ -137,6 +184,6 @@ struct SharedPrayerLink: Equatable, Identifiable {
         }
         var merged = URLComponents()
         merged.queryItems = values.keys.sorted().map { URLQueryItem(name: $0, value: values[$0]) }
-        return merged.percentEncodedQuery.flatMap { SharedPrayerLink(query: $0) }
+        return merged.percentEncodedQuery.flatMap { SharedPrayerLink(query: $0, appearance: true) }
     }
 }
