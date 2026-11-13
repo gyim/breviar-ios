@@ -83,13 +83,15 @@ struct GeneralSettingsView : View {
 struct PrayerScreenSettingsView : View {
     @EnvironmentObject var model: BreviarModel
     @ObservedObject var prayerScreenSettings: PrayerScreenSettings
-    
+    @AppStorage(SharedPrayerSession.appearancePreference) private var acceptSharedAppearance = false
+
     init(prayerScreenSettings: PrayerScreenSettings) {
         self.prayerScreenSettings = prayerScreenSettings
     }
     
     var body: some View {
         Section(header: Text(S.prayerScreenSettings.S)) {
+            Toggle(S.applySharedAppearance.S, isOn: $acceptSharedAppearance)
             NavigationLink(
                 destination: FullscreenModeSettingsView(prayerScreenSettings: prayerScreenSettings),
                 label: {

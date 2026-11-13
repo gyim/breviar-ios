@@ -33,7 +33,6 @@ class CGIClient {
     }
     
     static func getRequestString(_ request: [String: String]) -> String {
-        var req = ""
         var allParameters = request
         
         allParameters["appPlatform"] = "ios"
@@ -42,15 +41,10 @@ class CGIClient {
             allParameters["appVersion"] = bundleVersion
         }
         
-        for item in allParameters {
-            if req == "" {
-                req += "\(item.key)=\(item.value)"
-            } else {
-                req += "&\(item.key)=\(item.value)"
-            }
-        }
-        
-        return req
+        // Fonts may contain spaces or non-ASCII letters. Encode values for local and remote CGI alike.
+        var query = URLComponents()
+        query.queryItems = allParameters.keys.sorted().map { URLQueryItem(name: $0, value: allParameters[$0]) }
+        return query.percentEncodedQuery ?? ""
     }
 }
 

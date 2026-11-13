@@ -77,8 +77,8 @@ struct PrayerScreen: View {
         .toolbar(content: {
             HStack {
                 Button(action: {
-                    if case .loaded(let html) = prayerText, let link = SharedPrayerLink.rendered(in: html) {
-                        sharingLink = IdentifiableURL(url: link.url)
+                    if case .loaded(let html) = prayerText, let url = model.linkToShare(in: html) {
+                        sharingLink = IdentifiableURL(url: url)
                     } else { model.sharingError = S.sharePrayerUnavailable.S }
                 }, label: { Label(S.sharePrayer.S, systemImage: "qrcode") })
                 Button(action: {
@@ -178,6 +178,7 @@ struct PrayerView : UIViewRepresentable {
         var prevFontName: String = fontNames[0].systemName
         var prevFontSize: Double = 100.0
         var prevIsBold: Bool = false
+        var prevAppearanceCSS = ""
         var topPadding: CGFloat = 0
         var bottomPadding: CGFloat = 0
         var isWebViewReady = false
@@ -221,8 +222,9 @@ struct PrayerView : UIViewRepresentable {
         }
         
         @objc func onTextOptionsChanged(_ notification: Notification) {
-            if let textOptions = notification.object as? TextOptions {
-                setPrayerText(text: prevText, fontName: textOptions.fontName.systemName, fontSize: textOptions.fontSize, isBold: textOptions.isBold)
+            if let textOptions = notification.object as? TextOptions, textOptions === parent.textOptions {
+                setPrayerText(text: prevText, fontName: textOptions.fontName.systemName, fontSize: textOptions.fontSize,
+                              isBold: textOptions.isBold, appearanceCSS: ReaderAppearance.css(textOptions.extraParameters))
             }
         }
         
@@ -264,14 +266,19 @@ struct PrayerView : UIViewRepresentable {
             }
         }
         
-        func setPrayerText(text: String, fontName: String, fontSize: Double, isBold: Bool) {
+        private func javaScriptString(_ value: String) -> String {
+            let data = try! JSONSerialization.data(withJSONObject: value, options: [.fragmentsAllowed])
+            return String(data: data, encoding: .utf8)!
+        }
+
+        func setPrayerText(text: String, fontName: String, fontSize: Double, isBold: Bool, appearanceCSS: String) {
             if text != prevText {
-                let modifiedText = getModifiedText(text: text, fontName: fontName, fontSize: fontSize, isBold: isBold)
+                let modifiedText = getModifiedText(text: text, fontName: fontName, fontSize: fontSize, isBold: isBold, appearanceCSS: appearanceCSS)
                 if prevText == "" || !isWebViewReady {
                     let baseURL = URL(fileURLWithPath: Bundle.main.bundlePath)
                     self.webView.loadHTMLString(modifiedText, baseURL: baseURL)
                 } else {
-                    self.webView.evaluateJavaScript("document.documentElement.innerHTML = `\(modifiedText)`; initPrayer(); setFont('\(fontName)', \(fontSize), \(isBold));") { [weak self] (_, error) in
+                    self.webView.evaluateJavaScript("document.documentElement.innerHTML = \(javaScriptString(modifiedText)); initPrayer(); setFont(\(javaScriptString(fontName)), \(fontSize), \(isBold));") { [weak self] (_, error) in
                         if let error = error {
                             print("Error reloading document: \(error.localizedDescription)")
                             // If JavaScript evaluation fails, reload the WebView
@@ -283,35 +290,42 @@ struct PrayerView : UIViewRepresentable {
                 }
                 
                 prevText = text
-                prevFontSize = fontSize
-                prevIsBold = isBold
             }
-            if fontName != prevFontName || fontSize != prevFontSize || isBold != prevIsBold {
-                prevFontName = fontName
-                prevFontSize = fontSize
-                prevIsBold = isBold
-                
-                if isWebViewReady {
-                    self.webView.evaluateJavaScript("setFont('\(fontName)', \(fontSize), \(isBold))") { (_, error) in
-                        if error != nil {
-                            print("Error setting font size: \(error.debugDescription)")
-                        }
-                    }
-                }
+            if fontName != prevFontName || fontSize != prevFontSize || isBold != prevIsBold || appearanceCSS != prevAppearanceCSS {
+                updatePresentation(fontName: fontName, fontSize: fontSize, isBold: isBold, appearanceCSS: appearanceCSS)
             }
         }
-        
-        func getModifiedText(text: String, fontName: String, fontSize: Double, isBold: Bool) -> String {
+
+        private func updatePresentation(fontName: String, fontSize: Double, isBold: Bool, appearanceCSS: String) {
+            prevFontName = fontName
+            prevFontSize = fontSize
+            prevIsBold = isBold
+            prevAppearanceCSS = appearanceCSS
+            guard isWebViewReady else { return }
+            webView.evaluateJavaScript("""
+                setFont(\(javaScriptString(fontName)), \(fontSize), \(isBold));
+                document.getElementById('reader-appearance').textContent = \(javaScriptString(appearanceCSS));
+                """) { _, error in
+                if let error = error { print("Error setting reader appearance: \(error)") }
+            }
+        }
+
+        func getModifiedText(text: String, fontName: String, fontSize: Double, isBold: Bool, appearanceCSS: String) -> String {
+            let settings = SharedPrayerLink.rendered(in: text)?.parameters ?? [:]
+            let word = UInt64(settings["o2"] ?? "") ?? 0
+            let rounded = word & 65536 != 0
             return """
                 <head>
                     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
                     <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0" />
                     <link rel="stylesheet" type="text/css" href="html/breviar.css" />
                     <link rel="stylesheet" type="text/css" href="html/breviar-normal-font.css" />
+                    <link rel="stylesheet" type="text/css" href="html/breviar-rounded-corners.css" \(rounded ? "" : "disabled") />
                     <style type="text/css">
                         @import url("html/breviar-invert-colors.css") screen and (prefers-color-scheme: dark);
                         body { padding: \(topPadding)px 0 \(bottomPadding)px; }
                     </style>
+                    <style id="reader-appearance">\(appearanceCSS)</style>
                     <script type="text/javascript">
                         window.isAlive = true;
                         function setFont(fontName, fontSize, isBold) {
@@ -349,7 +363,7 @@ struct PrayerView : UIViewRepresentable {
                         function initPrayer() {
                             setupTapGesture();
                             setupLinks();
-                            setFont('\(fontName)', \(fontSize), \(isBold));
+                            setFont(\(javaScriptString(fontName)), \(fontSize), \(isBold));
                             window.webkit.messageHandlers.checkAlive.postMessage(true);
                         }
                     </script>
@@ -370,6 +384,10 @@ struct PrayerView : UIViewRepresentable {
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             print("PrayerView: WebView did finish loading")
             isWebViewReady = true
+            // An import or native edit may have arrived while the document was loading.
+            let options = parent.textOptions
+            updatePresentation(fontName: options.fontName.systemName, fontSize: options.fontSize,
+                               isBold: options.isBold, appearanceCSS: ReaderAppearance.css(options.extraParameters))
             ScreenshotMode.signalReady("prayer")
         }
         
@@ -410,7 +428,9 @@ struct PrayerView : UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: WKWebView, context: Context) {
-        context.coordinator.setPrayerText(text: text, fontName: textOptions.fontName.systemName, fontSize: textOptions.fontSize, isBold: textOptions.isBold)
+        context.coordinator.parent = self
+        context.coordinator.setPrayerText(text: text, fontName: textOptions.fontName.systemName, fontSize: textOptions.fontSize,
+                                          isBold: textOptions.isBold, appearanceCSS: ReaderAppearance.css(textOptions.extraParameters))
     }
 
     func onTapEvent(_ newHandler: @escaping () -> ()) -> PrayerView {

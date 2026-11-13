@@ -39,13 +39,13 @@ enum ReaderAppearance {
     }
 
     static func normalFont(in parameters: [String: String]) -> Bool? {
-        if let value = parameters["of0fn"] { return value != "0" && !value.isEmpty }
+        if let value = parameters["of0fn"] { return (UInt64(value) ?? 0) != 0 }
         return parameters["o0"].map { (UInt64($0) ?? 0) & 64 != 0 }
     }
 
     static func nightMode(in parameters: [String: String]) -> Bool? {
         if let value = parameters["c"], !value.isEmpty { return value == "1" }
-        if let value = parameters["of2nr"] { return value != "0" && !value.isEmpty }
+        if let value = parameters["of2nr"] { return (UInt64(value) ?? 0) != 0 }
         return parameters["o2"].map { (UInt64($0) ?? 0) & 256 != 0 }
     }
 

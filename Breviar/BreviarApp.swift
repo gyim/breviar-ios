@@ -62,7 +62,10 @@ struct BreviarApp: App {
         print("Breviar app opened with URL: \(url)")
         
         if ["https", "http"].contains(url.scheme?.lowercased() ?? "") {
-            if let link = SharedPrayerLink(url: url) { model.openSharedPrayer(link) }
+            let appearance = UserDefaults.standard.bool(forKey: SharedPrayerSession.appearancePreference)
+            if let link = SharedPrayerLink(url: url, appearance: appearance) {
+                model.openSharedPrayer(link, appearance: appearance)
+            }
             else { model.sharingError = S.sharedLinkInvalid.S }
             return
         }

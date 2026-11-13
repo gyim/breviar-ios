@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 import WidgetKit
 
 // MARK: - Data source options
@@ -265,15 +266,18 @@ class TextOptions: ObservableObject {
     
     @Published var fontName = fontNames[0] {
         didSet {
-            NotificationCenter.default.post(name: TextOptions.notificationName, object: self)
             UserDefaults.standard.setValue(fontName.systemName, forKey: "textOptions.fontName")
+            notifyChanged()
         }
     }
     
     @Published var fontSize = 100.0 {
         didSet {
-            NotificationCenter.default.post(name: TextOptions.notificationName, object: self)
+            // A native slider edit supersedes a size received in a QR link.
+            extraParameters.removeValue(forKey: "ff")
+            extraParameters.removeValue(forKey: "s")
             UserDefaults.standard.setValue(fontSize, forKey: "textOptions.fontSize")
+            notifyChanged()
         }
     }
     
@@ -283,25 +287,64 @@ class TextOptions: ObservableObject {
             let window = UIApplication.shared.windows.first
             window?.overrideUserInterfaceStyle = colorScheme.uikitColorScheme
             UserDefaults.standard.setValue(colorScheme.rawValue, forKey: "colorScheme")
+            notifyChanged()
         }
     }
     
     @Published var isBold = false {
         didSet {
-            NotificationCenter.default.post(name: TextOptions.notificationName, object: self)
             UserDefaults.standard.setValue(isBold, forKey: "textOptions.isBold")
+            notifyChanged()
         }
     }
     
+    // Palettes and spacing have no native controls yet, but must survive Keep and later sharing.
+    @Published var extraParameters: [String: String] = [:] {
+        didSet {
+            UserDefaults.standard.set(extraParameters, forKey: ReaderAppearance.storageKey)
+            notifyChanged()
+        }
+    }
+
+    private func notifyChanged() {
+        NotificationCenter.default.post(name: TextOptions.notificationName, object: self)
+    }
+
+    var isDark: Bool {
+        switch colorScheme {
+        case .light: return false
+        case .dark: return true
+        case .automatic: return (UIApplication.shared.windows.first?.traitCollection.userInterfaceStyle
+                ?? UITraitCollection.current.userInterfaceStyle) == .dark
+        }
+    }
+
+    func rendererOptions(_ local: [String: String]) -> [String: String] {
+        ReaderAppearance.options(local: local, extra: extraParameters, font: fontName.systemName,
+                                 scale: fontSize, bold: isBold, dark: isDark)
+    }
+
+    func applyAppearance(from source: [String: String], resolved: [String: String]) {
+        var extra = extraParameters.merging(source.filter { SharedPrayerLink.appearanceKeys.contains($0.key) }) { _, new in new }
+        if let family = source["f"], let font = FontName.resolve(family) { fontName = font }
+        if source["ff"] != nil || source["s"] != nil {
+            if let scale = ReaderAppearance.scale(in: resolved) { fontSize = scale }
+            // Point size has priority over named size, including when one was retained locally.
+            for key in ["ff", "s"] { extra[key] = resolved[key] }
+        }
+        if source["o0"] != nil || source["of0fn"] != nil,
+           let normal = ReaderAppearance.normalFont(in: resolved) { isBold = !normal }
+        if source["c"] != nil || source["o2"] != nil || source["of2nr"] != nil,
+           let dark = ReaderAppearance.nightMode(in: resolved) { colorScheme = dark ? .dark : .light }
+        extraParameters = extra
+    }
+
     init() {
         let userDefaults = UserDefaults.standard
+        extraParameters = userDefaults.dictionary(forKey: ReaderAppearance.storageKey) as? [String: String] ?? [:]
         
         if let fontSystemName = userDefaults.string(forKey: "textOptions.fontName") {
-            for fontName in fontNames {
-                if fontName.systemName == fontSystemName {
-                    self.fontName = fontName
-                }
-            }
+            self.fontName = FontName.resolve(fontSystemName) ?? fontNames[0]
         }
         
         let fontSize = userDefaults.double(forKey: "textOptions.fontSize")
@@ -324,6 +367,25 @@ struct FontName : Identifiable {
     
     var id : String {
         return name
+    }
+
+    static func resolve(_ family: String) -> FontName? {
+        if family.isEmpty { return fontNames[0] }
+        let generic: Set<String> = ["serif", "sans-serif", "monospace", "cursive", "fantasy", "system-ui"]
+        if generic.contains(family.lowercased()) {
+            return FontName(name: family, systemName: family.lowercased())
+        }
+        if let known = fontNames.first(where: {
+            $0.systemName.caseInsensitiveCompare(family) == .orderedSame || $0.name.caseInsensitiveCompare(family) == .orderedSame
+        }) { return known }
+        if let font = UIFont(name: family, size: 16) {
+            return FontName(name: font.familyName, systemName: font.fontName)
+        }
+        if let installed = UIFont.familyNames.first(where: { $0.caseInsensitiveCompare(family) == .orderedSame }),
+           let name = UIFont.fontNames(forFamilyName: installed).first {
+            return FontName(name: installed, systemName: name)
+        }
+        return nil
     }
 }
 

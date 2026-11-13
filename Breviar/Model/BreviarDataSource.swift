@@ -11,6 +11,7 @@ import Network
 protocol BreviarDataSource {
     var networkStatus: NetworkStatus { get }
     func setOptions(_ options: DataSourceOptions)
+    func readerSettings() -> [String: String]
     func getLiturgicalDay(day: Day, policy: DataSourcePolicy, handler: @escaping (LiturgicalDay?, Error?) -> Void)
     func getLiturgicalMonth(month: Month, policy: DataSourcePolicy, handler: @escaping (LiturgicalMonth?, Error?) -> Void)
     func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], policy: DataSourcePolicy, handler: @escaping (String?, Error?) -> Void)
@@ -23,6 +24,7 @@ protocol BreviarDataSource {
 
 // Preview/test data sources need not implement the local CGI sharing endpoint.
 extension BreviarDataSource {
+    func readerSettings() -> [String: String] { [:] }
     func getSharedPrayerText(_ link: SharedPrayerLink, tts: Bool, policy: DataSourcePolicy, handler: @escaping (String?, Error?) -> Void) {
         handler(nil, DataSourceError.emptyResponse)
     }
@@ -545,31 +547,22 @@ class CGIDataSource : BreviarDataSource {
     
     private func storedDisplayOptions() -> String {
         guard let number = UserDefaults.standard.object(forKey: "o2") as? NSNumber else { return "16896" }
-        return String((UInt64(16896) & ~SharedPrayerLink.content2) | (number.uint64Value & SharedPrayerLink.content2))
+        return String(number.uint64Value)
+    }
+
+    func readerSettings() -> [String: String] {
+        var args = ["o2": storedDisplayOptions(), "j": cgiLanguageCode, "k": options?.calendar ?? ""]
+        for word in ["o0", "o1", "o3", "o4", "o5", "o6"] { args[word] = valueForOption(word) }
+        args.merge(BibleLinkMode.current.cgiOptions) { _, new in new }
+        return args
     }
 
     func getPrayerText(day: LiturgicalDay, celebration: Celebration, prayerType: PrayerType, opts: [String: String], policy: DataSourcePolicy, handler: @escaping (String?, Error?) -> Void) {
         let d = day.day
-        var args = [
-            "qt": "pdt",
-            "d": d.day.description,
-            "m": d.month.description,
-            "r": d.year.description,
-            "p": prayerType.rawValue.description,
-            "ds": celebration.id,
-            "o0": valueForOption("o0"),
-            "o1": valueForOption("o1"),
-            "o2": storedDisplayOptions(), // Preserve local layout and adopted content choices
-            "o3": valueForOption("o3"),
-            "o4": valueForOption("o4"),
-            "o5": valueForOption("o5"),
-            "o6": valueForOption("o6"),
-            "j": self.cgiLanguageCode,
-            "k": self.options?.calendar ?? "",
-        ]
-        for (k, v) in BibleLinkMode.current.cgiOptions {
-            args[k] = v
-        }
+        var args = readerSettings().merging([
+            "qt": "pdt", "d": d.day.description, "m": d.month.description, "r": d.year.description,
+            "p": prayerType.rawValue.description, "ds": celebration.id
+        ]) { _, new in new }
         for (k, v) in opts {
             args[k] = v
         }
@@ -587,9 +580,8 @@ class CGIDataSource : BreviarDataSource {
     
     func getSharedPrayerText(_ link: SharedPrayerLink, tts: Bool, policy: DataSourcePolicy, handler: @escaping (String?, Error?) -> Void) {
         // Sharing always opens locally; it must not require cellular data or a server.
-        var local = ["o2": storedDisplayOptions()]
-        for word in ["o0", "o1", "o3", "o4", "o5", "o6"] { local[word] = valueForOption(word) }
-        var args = link.request(local: local)
+        // The session has already applied the recipient's policy. Never re-filter on reload or TTS.
+        var args = link.request(local: readerSettings(), appearance: true)
         if tts {
             args["of0bf"] = "1"
             args["of2rm"] = "0"
@@ -622,15 +614,9 @@ class CGIDataSource : BreviarDataSource {
         if !s.contains("l.cgi?") {
             return parseExternalLink(url: url)
         }
-        guard let query = url.query else { return .unknownLink }
-        
+        guard let items = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems else { return .unknownLink }
         var opts: [String: String] = [:]
-        for kv in query.split(separator: "&") {
-            let arg = kv.split(separator: "=", maxSplits: 2, omittingEmptySubsequences: false)
-            if arg.count == 2 {
-                opts[String(arg[0])] = String(arg[1])
-            }
-        }
+        for item in items { opts[item.name] = item.value ?? "" }
         
         return .prayerTextLink(opts)
     }

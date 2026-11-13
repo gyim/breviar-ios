@@ -10,12 +10,33 @@ is done by the system Camera (or another scanner), which opens the HTTPS link.
 
 The public format is `https://breviar.sk/cgi-bin/l.cgi?...`, compatible with
 Android and browsers. Only that exact host/path is accepted for incoming public
-links. Duplicate parameters, credentials, ports, unsupported query types,
-invalid option words and queries of 2000 bytes or more are rejected. Prayers,
-language, calendar, Commons and content options are shared; fonts, night mode,
-palettes, device preferences and app identification parameters are excluded.
-The content masks for words 0 and 2 match Android's `PrayerLink`; update both
-clients together when those words gain content flags.
+links. Credentials, ports, unsupported query types, invalid accepted values and
+queries of 2000 bytes or more are rejected. Only parameters the recipient uses
+are checked for duplicate/invalid values. Generated links always include prayer
+selection, language, calendar, Commons and all reader options, including fonts,
+font size/weight, day/night mode, both palettes, margins and line spacing. There
+is no format marker yet. Native device preferences, UI language, network policy
+and pinch zoom are never shared.
+
+**Settings → Prayer screen settings → Apply appearance from shared prayers** is
+off by default. With it off, incoming links import only content options. With it
+on, visual options are accepted as well. Unused visual values are discarded
+before value validation and before the CGI request is built. Missing settings
+retain current values. The content masks for words 0 and 2 match Android's
+`PrayerLink`; update both clients together when those words gain content flags.
+The preference is captured when opening each link; changing it does not alter
+the current reader, its reloads/TTS, or the scope of Restore.
+
+The native font, scale, bold setting and actual light/dark appearance are
+included when sharing, even if changed since the last render. iOS font scale
+maps to CGI point size using the 16 pt body size from `breviar.css`; outgoing
+point sizes round to whole points, as required by the CGI format. Local font
+resolution accepts the existing native choices, installed fonts/families and
+CSS generic families. Unavailable fonts leave the current font unchanged; font
+files and sender CSS are never downloaded. This uses UIKit font metadata, not
+font-file enumeration/parsing. Palettes/spacing without native controls are
+stored and rendered, so Keep and subsequent sharing retain them. Native
+fullscreen, playback and network controls continue to use local preferences.
 
 Sharing requires the core renderer's hidden metadata element:
 
@@ -32,7 +53,10 @@ An old backend without metadata cannot create a QR code. Incoming links can
 still be read; Keep remains disabled until a resolved response is available.
 
 The marker lives in the HTML body and survives the existing `getHTMLBody`
-extraction. No new C++/Objective-C bridge API is needed. This patch deliberately
+extraction. No new C++/Objective-C bridge API is needed. Bundle the current
+`breviar.css`, `breviar-invert-colors.css`, `breviar-normal-font.css` and
+`breviar-rounded-corners.css` from the
+updated core; custom palettes require their `--prayer-*` CSS variables. This patch deliberately
 does **not** change the `breviar-cgi` submodule pin or any shared C++ files: the
 backend date/metadata fixes are being integrated separately. When updating that
 submodule, also register all translation units required by its current iOS
@@ -43,20 +67,24 @@ this frontend patch.
 
 Incoming links open a separate, offline-by-default reader which reuses the
 existing prayer WebView, text controls and TTS. Explicit Retry from server still
-uses the existing network retry path. A dedicated `sharedPrayer.query` defaults
-key persists the temporary query, including subsequent inline prayer choices,
-across app restarts. The user's personal prayer settings are untouched until
-**Keep these settings** is chosen, so there is no backup that a second link
-could accidentally overwrite. The CGI celebration field `ds` never overwrites
-iOS's unrelated `ds` data-source preference.
+uses the existing network retry path. A dedicated `sharedPrayer.session`
+defaults dictionary persists the accepted temporary query, including subsequent
+inline prayer choices, across app restarts. Personal content settings are
+untouched until **Keep these settings** is chosen. Appearance imports use the
+native text options, backed up once at the start of the session. Subsequent
+links never replace that original snapshot. The CGI celebration field `ds`
+never overwrites iOS's unrelated `ds` data-source preference.
 
 The ellipsis menu offers Restore, Keep and Back. Back hides the shared reader
 without ending the temporary session; its controls remain on the main screen.
 Restore closes the session and returns to the underlying reader in a running
-app, or to the user's own main screen after a cold start. Font/size/color-scheme
-changes made while reading are local and survive Restore. Keep adopts resolved
-prayer settings while retaining native presentation bits, UI language and
-network policy. Subsequent inline content choices in the kept reader are also
+app, or to the user's own main screen after a cold start. In content-only
+sessions, local appearance edits survive Restore. If any link imported
+appearance, Restore instead restores the original font, size, weight, scheme
+(including Automatic) and palettes/spacing, even after a restart or after the
+import preference was turned off. Keep adopts resolved accepted content and
+appearance and clears the backup. Both actions leave native device settings
+and pinch zoom alone. Subsequent inline content choices in the kept reader are also
 saved; if a later choice is unsupported it becomes temporary again. A language
 or calendar that the native settings model does not support can still be read
 if available in the bundled CGI (or through Retry from server), but cannot be
@@ -100,9 +128,11 @@ References:
 
 `Tools/PrayerSharingTests/run.sh` compiles/runs the Foundation-only URL and
 session checks with `swiftc` (Linux or macOS; set `SWIFTC` if needed). It covers
-canonical metadata, fixed/relative dates, masks and UInt64 values, duplicate or
-malicious links, local appearance, partial inline navigation, session recreation,
-and keeping content without overwriting the `ds` preference. The Xcode project
+canonical metadata, full outgoing appearance, both import policies, fixed/relative
+dates, masks and UInt64 values, ignored/invalid visual parameters, local font
+fallback, native scale/weight/theme mapping, palette CSS, partial inline
+navigation, session recreation, repeated links, restoration after preference
+changes, and keeping content without overwriting the `ds` preference. The Xcode project
 registers all new Swift sources in the app target, not the widget target.
 
 From the repository root:
@@ -125,8 +155,19 @@ build is still required. Check on iPhone and iPad:
    quit and on first launch with no configured data source. Also receive a link
    with text options, TTS, the date picker or the share sheet open. Existing custom URL
    schemes must still navigate normally.
-4. Follow prayer links/options, use TTS, change the font, hide with Back and
-   resume. Restore must retain personal settings and local appearance; Keep must
-   affect content only. Unsupported Keep must make no preference changes.
-5. Rapidly receive two different links while a local/remote load is pending;
+4. With appearance import off, receive a link with a different font, bold flag,
+   night mode and palettes. Personal appearance must remain unchanged, including
+   local text-option edits after Restore. Repeat with import on: the sender's
+   appearance must display, and Keep must retain it in ordinary prayers and QR
+   links. Test an unavailable font and a family containing spaces.
+5. Import full appearance, hide with Back, change the import preference and
+   receive another content-only link. Restart before Restore: it must restore the
+   first appearance snapshot, including Automatic mode. Repeat with Keep. UI
+   language, network policy, fullscreen gesture, TTS preferences and zoom stay
+   local. Test palette colors on text, rubrics and generated R/V markers.
+6. Follow prayer links/options, use TTS, change font/size/theme while reading,
+   hide with Back and resume. Switching theme must select the matching palette
+   immediately, without requiring a CGI reload. Unsupported Keep must not change
+   personal content settings.
+7. Rapidly receive two different links while a local/remote load is pending;
    only the last shared request may update the reader.
